@@ -107,6 +107,18 @@ export async function setTeacherStatus(
   if (error) throw new Error(error.message);
 }
 
+export async function setTeacherCalendlyUrl(
+  teacherId: string,
+  url: string
+): Promise<void> {
+  const { supabase } = await requireAdmin();
+  const { error } = await supabase
+    .from("teachers")
+    .update({ calendly_scheduling_url: url.trim() || null })
+    .eq("id", teacherId);
+  if (error) throw new Error(error.message);
+}
+
 export async function adjustStudentCredit(params: {
   studentId: string;
   amount: number;

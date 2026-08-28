@@ -11,6 +11,7 @@ vi.mock("./users-actions", () => ({
   setStudentStatus: vi.fn(),
   setTeacherStatus: vi.fn(),
   adjustStudentCredit: vi.fn(),
+  setTeacherCalendlyUrl: vi.fn(),
 }));
 
 const parents: ParentListItem[] = [
@@ -45,6 +46,7 @@ const teachers: TeacherListItem[] = [
     status: "active",
     qcWarningCount: 2,
     subjectNames: ["SAT Math"],
+    calendlySchedulingUrl: null,
   },
 ];
 

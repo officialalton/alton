@@ -39,7 +39,13 @@ export async function POST(request: Request) {
       email?: string;
       name?: string;
       questions_and_answers?: { question: string; answer: string }[];
-      scheduled_event?: { uri: string; start_time: string };
+      scheduled_event?: {
+        uri: string;
+        start_time: string;
+        end_time?: string;
+        location?: { join_url?: string };
+      };
+      tracking?: { utm_content?: string | null };
     };
   };
 
@@ -47,7 +53,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true, skipped: body.event });
   }
 
-  const { email, name, questions_and_answers, scheduled_event } = body.payload;
+  const { email, name, questions_and_answers, scheduled_event, tracking } = body.payload;
+
+  // 개별 회차 예약(학생 포털에서 담당 선생님과 예약, LessonsTab의 CalendlyWidget)은
+  // embed URL에 ?utm_content=<enrollmentId>를 실어 보내고, Calendly가 이 값을
+  // tracking.utm_content로 그대로 웹훅에 되돌려준다 — 이 값이 있으면 상담 신청이
+  // 아니라 세션 예약으로 처리한다.
+  if (tracking?.utm_content) {
+    return handleSessionBooking(tracking.utm_content, scheduled_event);
+  }
+
   if (!email || !name) {
     return NextResponse.json({ error: "missing invitee info" }, { status: 400 });
   }
@@ -78,6 +93,67 @@ export async function POST(request: Request) {
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
+
+  return NextResponse.json({ ok: true });
+}
+
+async function handleSessionBooking(
+  enrollmentId: string,
+  scheduledEvent?: {
+    uri: string;
+    start_time: string;
+    end_time?: string;
+    location?: { join_url?: string };
+  }
+): Promise<NextResponse> {
+  if (!scheduledEvent) {
+    return NextResponse.json({ error: "missing scheduled_event" }, { status: 400 });
+  }
+
+  const admin = createAdminClient();
+  const { data: enrollment } = await admin
+    .from("enrollments")
+    .select("id, current_session")
+    .eq("id", enrollmentId)
+    .maybeSingle();
+  if (!enrollment) {
+    // 잘못된/오래된 utm_content — 재시도해도 고쳐지지 않으므로 200으로 확인 응답
+    return NextResponse.json({ ok: true, skipped: "unknown enrollment" });
+  }
+
+  const { data: existingSessions } = await admin
+    .from("sessions")
+    .select("session_number")
+    .eq("enrollment_id", enrollmentId)
+    .order("session_number", { ascending: false })
+    .limit(1);
+  const nextSessionNumber = (existingSessions?.[0]?.session_number ?? 0) + 1;
+
+  const durationMinutes = scheduledEvent.end_time
+    ? Math.round(
+        (new Date(scheduledEvent.end_time).getTime() -
+          new Date(scheduledEvent.start_time).getTime()) /
+          60000
+      )
+    : 30;
+
+  const { error: insertError } = await admin.from("sessions").insert({
+    enrollment_id: enrollmentId,
+    session_number: nextSessionNumber,
+    status: "upcoming",
+    scheduled_at: scheduledEvent.start_time,
+    duration_minutes: durationMinutes,
+    meeting_link: scheduledEvent.location?.join_url ?? null,
+    calendly_event_uri: scheduledEvent.uri,
+  });
+  if (insertError) {
+    return NextResponse.json({ error: insertError.message }, { status: 500 });
+  }
+
+  await admin
+    .from("enrollments")
+    .update({ current_session: nextSessionNumber })
+    .eq("id", enrollmentId);
 
   return NextResponse.json({ ok: true });
 }

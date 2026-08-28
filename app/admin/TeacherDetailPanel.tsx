@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { setTeacherStatus } from "./users-actions";
+import { setTeacherStatus, setTeacherCalendlyUrl } from "./users-actions";
 import type { QcWarning, TeacherListItem } from "./users-data";
 
 const STATUS_LABEL: Record<string, string> = {
@@ -21,11 +21,26 @@ export default function TeacherDetailPanel({
   onUpdated: (patch: Partial<TeacherListItem>) => void;
 }) {
   const [status, setStatus] = useState(teacher.status);
+  const [calendlyUrl, setCalendlyUrl] = useState(teacher.calendlySchedulingUrl ?? "");
+  const [savingUrl, setSavingUrl] = useState(false);
+  const [savedUrl, setSavedUrl] = useState(false);
 
   async function handleStatusChange(next: string) {
     setStatus(next);
     await setTeacherStatus(teacher.id, next as "active" | "pending");
     onUpdated({ status: next });
+  }
+
+  async function handleSaveCalendlyUrl() {
+    setSavingUrl(true);
+    setSavedUrl(false);
+    try {
+      await setTeacherCalendlyUrl(teacher.id, calendlyUrl);
+      onUpdated({ calendlySchedulingUrl: calendlyUrl.trim() || null });
+      setSavedUrl(true);
+    } finally {
+      setSavingUrl(false);
+    }
   }
 
   return (
@@ -62,6 +77,33 @@ export default function TeacherDetailPanel({
         <p className="text-[13px] text-ink">
           {teacher.subjectNames.length ? teacher.subjectNames.join(", ") : "매칭된 학생 없음"}
         </p>
+      </div>
+
+      <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">
+        <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2">
+          개인 예약 링크 (Calendly)
+        </div>
+        <p className="text-[12px] text-grey-500 mb-2">
+          Calendly에서 이 선생님을 팀원으로 초대하고 개인 이벤트 타입을 만든 뒤,
+          그 예약 페이지 URL을 여기에 넣으면 학생 포털에서 이 선생님과 직접
+          회차를 예약할 수 있습니다.
+        </p>
+        <div className="flex gap-2">
+          <input
+            value={calendlyUrl}
+            onChange={(e) => setCalendlyUrl(e.target.value)}
+            placeholder="https://calendly.com/xxx-teacher/session"
+            className="flex-1 px-3 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12.5px]"
+          />
+          <button
+            disabled={savingUrl}
+            onClick={handleSaveCalendlyUrl}
+            className="text-[12px] font-bold px-3.5 py-2 rounded-lg bg-ink text-white disabled:opacity-50 shrink-0"
+          >
+            {savingUrl ? "저장 중..." : "저장"}
+          </button>
+        </div>
+        {savedUrl && <p className="text-[12px] text-green mt-1.5">✓ 저장되었습니다</p>}
       </div>
 
       <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4">

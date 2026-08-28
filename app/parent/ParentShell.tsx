@@ -10,6 +10,7 @@ import type { LessonItem } from "@/app/student/lessons-data";
 import type { CurriculumData } from "@/app/student/curriculum-data";
 import type { Memo } from "@/app/student/memo-data";
 import type { ReviewData, StudentFeedback } from "@/app/student/review-data";
+import type { BookableEnrollment } from "@/app/student/booking-data";
 import type { Child } from "./children-data";
 import CreditsTab from "./CreditsTab";
 import type { ParentCreditsData } from "./credits-data";
@@ -35,6 +36,7 @@ export default function ParentShell({
   memosByEnrollment,
   reviews,
   myFeedback,
+  bookableEnrollments,
   credits,
 }: {
   parentName: string;
@@ -44,6 +46,7 @@ export default function ParentShell({
   dashboard: DashboardData;
   upcoming: LessonItem[];
   past: LessonItem[];
+  bookableEnrollments: BookableEnrollment[];
   curricula: CurriculumData[];
   memosByEnrollment: Record<string, Memo[]>;
   reviews: Record<string, ReviewData>;
@@ -143,6 +146,7 @@ export default function ParentShell({
               past={past}
               curricula={curricula}
               memosByEnrollment={memosByEnrollment}
+              bookableEnrollments={bookableEnrollments}
               reviews={reviews}
               myFeedback={myFeedback}
               readOnly

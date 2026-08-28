@@ -42,6 +42,7 @@ const lessonsProps = {
   memosByEnrollment: {},
   reviews: {},
   myFeedback: {},
+  bookableEnrollments: [],
   credits: { balance: 0, referralCode: null, packages: [] },
 };
 

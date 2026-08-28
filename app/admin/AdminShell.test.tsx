@@ -31,6 +31,7 @@ vi.mock("./users-actions", () => ({
   setStudentStatus: vi.fn(),
   setTeacherStatus: vi.fn(),
   adjustStudentCredit: vi.fn(),
+  setTeacherCalendlyUrl: vi.fn(),
 }));
 
 const dashboard: AdminDashboardData = {

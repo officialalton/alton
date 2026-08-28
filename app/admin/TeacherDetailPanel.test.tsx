@@ -6,6 +6,7 @@ import type { TeacherListItem } from "./users-data";
 
 vi.mock("./users-actions", () => ({
   setTeacherStatus: vi.fn(),
+  setTeacherCalendlyUrl: vi.fn(),
 }));
 
 const teacher: TeacherListItem = {
@@ -16,6 +17,7 @@ const teacher: TeacherListItem = {
   status: "active",
   qcWarningCount: 1,
   subjectNames: ["SAT Math"],
+  calendlySchedulingUrl: null,
 };
 
 describe("TeacherDetailPanel", () => {
@@ -46,5 +48,26 @@ describe("TeacherDetailPanel", () => {
     fireEvent.change(screen.getByDisplayValue("활성"), { target: { value: "pending" } });
     await waitFor(() => expect(actions.setTeacherStatus).toHaveBeenCalledWith("t1", "pending"));
     expect(onUpdated).toHaveBeenCalledWith({ status: "pending" });
+  });
+
+  it("Calendly 예약 링크를 입력하고 저장하면 setTeacherCalendlyUrl이 호출된다", async () => {
+    vi.mocked(actions.setTeacherCalendlyUrl).mockResolvedValue(undefined);
+    const onUpdated = vi.fn();
+    render(
+      <TeacherDetailPanel teacher={teacher} warnings={[]} onBack={vi.fn()} onUpdated={onUpdated} />
+    );
+    fireEvent.change(screen.getByPlaceholderText("https://calendly.com/xxx-teacher/session"), {
+      target: { value: "https://calendly.com/seoyeon-teacher/session" },
+    });
+    fireEvent.click(screen.getByText("저장"));
+    await waitFor(() =>
+      expect(actions.setTeacherCalendlyUrl).toHaveBeenCalledWith(
+        "t1",
+        "https://calendly.com/seoyeon-teacher/session"
+      )
+    );
+    expect(onUpdated).toHaveBeenCalledWith({
+      calendlySchedulingUrl: "https://calendly.com/seoyeon-teacher/session",
+    });
   });
 });

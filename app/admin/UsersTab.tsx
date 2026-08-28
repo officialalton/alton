@@ -227,6 +227,7 @@ export default function UsersTab({
                   status: "pending",
                   qcWarningCount: 0,
                   subjectNames: [],
+                  calendlySchedulingUrl: null,
                 },
                 ...prev,
               ]);

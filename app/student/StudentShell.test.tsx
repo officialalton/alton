@@ -74,6 +74,7 @@ const lessonsProps = {
   memosByEnrollment: {},
   reviews: {},
   myFeedback: {},
+  bookableEnrollments: [],
   homeworkTodo: [],
   homeworkDone: [],
   materialsLibrary: [],

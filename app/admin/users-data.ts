@@ -28,6 +28,7 @@ export type TeacherListItem = {
   status: string;
   qcWarningCount: number;
   subjectNames: string[];
+  calendlySchedulingUrl: string | null;
 };
 
 export type CreditTransaction = {
@@ -140,7 +141,7 @@ export async function loadStudents(supabase: SupabaseClient): Promise<StudentLis
 export async function loadTeachers(supabase: SupabaseClient): Promise<TeacherListItem[]> {
   const { data: teachers } = await supabase
     .from("teachers")
-    .select("id, school, status, profile:profiles(name)")
+    .select("id, school, status, calendly_scheduling_url, profile:profiles(name)")
     .order("joined_at", { ascending: false });
   if (!teachers || teachers.length === 0) return [];
 
@@ -177,6 +178,7 @@ export async function loadTeachers(supabase: SupabaseClient): Promise<TeacherLis
     status: t.status,
     qcWarningCount: warningCountByTeacher.get(t.id) ?? 0,
     subjectNames: subjectsByTeacher.get(t.id) ?? [],
+    calendlySchedulingUrl: t.calendly_scheduling_url,
   }));
 }
 

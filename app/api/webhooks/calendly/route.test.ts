@@ -1,7 +1,25 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const insertMock = vi.fn().mockResolvedValue({ error: null });
-const fromMock = vi.fn(() => ({ insert: insertMock }));
+const enrollmentMaybeSingle = vi.fn().mockResolvedValue({ data: null });
+const sessionsLimitMock = vi.fn().mockResolvedValue({ data: [] });
+const enrollmentUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
+
+const fromMock = vi.fn((table: string) => {
+  if (table === "enrollments") {
+    return {
+      select: () => ({ eq: () => ({ maybeSingle: enrollmentMaybeSingle }) }),
+      update: () => ({ eq: enrollmentUpdateEqMock }),
+    };
+  }
+  if (table === "sessions") {
+    return {
+      select: () => ({ eq: () => ({ order: () => ({ limit: sessionsLimitMock }) }) }),
+      insert: insertMock,
+    };
+  }
+  return { insert: insertMock };
+});
 
 vi.mock("@/lib/supabase-admin", () => ({
   createAdminClient: () => ({ from: fromMock }),
@@ -14,6 +32,9 @@ describe("POST /api/webhooks/calendly", () => {
     vi.resetModules();
     insertMock.mockClear();
     fromMock.mockClear();
+    enrollmentMaybeSingle.mockClear().mockResolvedValue({ data: null });
+    sessionsLimitMock.mockClear().mockResolvedValue({ data: [] });
+    enrollmentUpdateEqMock.mockClear();
     process.env = { ...originalEnv };
     delete process.env.CALENDLY_WEBHOOK_SIGNING_KEY;
   });
@@ -136,5 +157,70 @@ describe("POST /api/webhooks/calendly", () => {
     const res = await POST(request);
     expect(res.status).toBe(200);
     expect(insertMock).toHaveBeenCalled();
+  });
+
+  it("tracking.utm_content이 있으면 상담 신청 대신 세션을 예약한다", async () => {
+    enrollmentMaybeSingle.mockResolvedValue({ data: { id: "e1", current_session: 1 } });
+    sessionsLimitMock.mockResolvedValue({ data: [{ session_number: 7 }] });
+
+    const { POST } = await import("./route");
+    const request = new Request("http://localhost/api/webhooks/calendly", {
+      method: "POST",
+      body: JSON.stringify({
+        event: "invitee.created",
+        payload: {
+          email: "jihoon@example.com",
+          name: "지훈",
+          tracking: { utm_content: "e1" },
+          scheduled_event: {
+            uri: "https://api.calendly.com/scheduled_events/session1",
+            start_time: "2026-09-10T10:00:00.000Z",
+            end_time: "2026-09-10T10:30:00.000Z",
+            location: { join_url: "https://zoom.us/j/123456" },
+          },
+        },
+      }),
+    });
+
+    const res = await POST(request);
+    expect(res.status).toBe(200);
+    expect(fromMock).toHaveBeenCalledWith("sessions");
+    expect(insertMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        enrollment_id: "e1",
+        session_number: 8,
+        status: "upcoming",
+        scheduled_at: "2026-09-10T10:00:00.000Z",
+        duration_minutes: 30,
+        meeting_link: "https://zoom.us/j/123456",
+        calendly_event_uri: "https://api.calendly.com/scheduled_events/session1",
+      })
+    );
+    expect(enrollmentUpdateEqMock).toHaveBeenCalledWith("id", "e1");
+  });
+
+  it("존재하지 않는 enrollment의 utm_content면 세션을 생성하지 않고 200을 반환한다", async () => {
+    enrollmentMaybeSingle.mockResolvedValue({ data: null });
+
+    const { POST } = await import("./route");
+    const request = new Request("http://localhost/api/webhooks/calendly", {
+      method: "POST",
+      body: JSON.stringify({
+        event: "invitee.created",
+        payload: {
+          email: "x@example.com",
+          name: "x",
+          tracking: { utm_content: "nonexistent" },
+          scheduled_event: {
+            uri: "https://api.calendly.com/scheduled_events/x",
+            start_time: "2026-09-10T10:00:00.000Z",
+          },
+        },
+      }),
+    });
+
+    const res = await POST(request);
+    expect(res.status).toBe(200);
+    expect(insertMock).not.toHaveBeenCalled();
   });
 });
