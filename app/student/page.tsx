@@ -9,6 +9,7 @@ import { loadMemos } from "./memo-data";
 import { loadReviews, loadStudentFeedback } from "./review-data";
 import { loadStudentHomework } from "./homework-data";
 import { loadMaterialsLibrary } from "./materials-data";
+import { loadCreditsData } from "./credits-data";
 
 export default async function StudentHomePage({
   searchParams,
@@ -33,6 +34,7 @@ export default async function StudentHomePage({
   const myFeedback = await loadStudentFeedback(supabase, user.id, pastSessionIds);
   const homework = await loadStudentHomework(supabase, user.id);
   const materialsLibrary = await loadMaterialsLibrary(supabase, user.id);
+  const credits = await loadCreditsData(supabase, user.id);
 
   return (
     <StudentShell
@@ -50,6 +52,7 @@ export default async function StudentHomePage({
       homeworkTodo={homework.todo}
       homeworkDone={homework.done}
       materialsLibrary={materialsLibrary}
+      credits={credits}
     />
   );
 }

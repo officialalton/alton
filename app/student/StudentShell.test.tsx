@@ -36,6 +36,10 @@ vi.mock("@/app/session/[id]/homework-actions", () => ({
   saveHomeworkAnswer: vi.fn(),
 }));
 
+vi.mock("./credits-actions", () => ({
+  requestParentPayment: vi.fn(),
+}));
+
 const dashboard: DashboardData = {
   studentName: "지훈",
   upcoming: [],
@@ -55,6 +59,7 @@ const lessonsProps = {
   homeworkTodo: [],
   homeworkDone: [],
   materialsLibrary: [],
+  credits: { balance: 0, guardianName: null },
 };
 
 describe("StudentShell", () => {
@@ -84,8 +89,22 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
+    fireEvent.click(screen.getByText("선생님"));
+    expect(screen.getByText("선생님 탭은 준비 중입니다.")).toBeInTheDocument();
+  });
+
+  it("수업권 탭을 누르면 CreditsTab이 렌더링된다", () => {
+    render(
+      <StudentShell
+        studentName="지훈"
+        dashboard={dashboard}
+        vocabWords={[]}
+        problemLog={[]}
+        {...lessonsProps}
+      />
+    );
     fireEvent.click(screen.getByText("수업권"));
-    expect(screen.getByText("수업권 탭은 준비 중입니다.")).toBeInTheDocument();
+    expect(screen.getByText("장 보유")).toBeInTheDocument();
   });
 
   it("단어장 탭을 누르면 VocabTab이 렌더링된다", () => {
