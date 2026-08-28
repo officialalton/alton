@@ -4,7 +4,7 @@
 
 목업 HTML 7개의 `<script>`에 하드코딩된 데이터 구조를 전부 찾아 분석한 뒤 설계했다. 원본 하드코딩 변수명(`CURRICULUM_DOCS_T`, `MY_SUBJECTS_T` 등)은 각 테이블 설명에 "목업 근거"로 남겨서 대조하기 쉽게 했다.
 
-목업 데이터는 실제로 여러 곳에서 (1) FK 대신 이름 문자열/합성 문자열 키를 쓰고, (2) 같은 개념(과제/문제)이 파일마다 다른 모양으로 존재하고, (3) "세션"과 "커리큘럼"이 완전히 분리되지 않은 채 섞여 있었다. 이 초안은 그런 부분들을 정규화했고, 판단이 갈리는 지점은 문서 맨 아래 **"검토가 필요한 설계 결정"**에 모아뒀다 — 여기부터 먼저 읽는 걸 추천한다.
+목업 데이터는 실제로 여러 곳에서 (1) FK 대신 이름 문자열/합성 문자열 키를 쓰고, (2) 같은 개념(과제/문제)이 파일마다 다른 모양으로 존재하고, (3) "세션"과 "커리큘럼"이 완전히 분리되지 않은 채 섞여 있었다. 이 초안은 그런 부분들을 정규화했고, 판단이 갈렸던 지점은 문서 맨 아래 **"검토 결과"**에서 확인한 대로 전부 반영했다.
 
 타입 표기는 Postgres 기준(`uuid`/`text`/`int`/`numeric`/`boolean`/`timestamptz`/`jsonb`), enum은 `enum(a/b/c)`로 표기.
 
@@ -24,7 +24,7 @@
 ### `students`
 - `id`: uuid, PK, FK → `profiles.id`
 - `grade`: text (예: "10학년")
-- `intake_type`: enum(A/B/C/D/E), nullable — functional-spec §4의 5가지 상담 분류. **주의: 어떤 목업에도 이 필드의 실제 데이터 예시가 없었음(landing 목업 폼에도 없음) — spec 문서 문장만 보고 추가한 필드**, 실제 상담 스크립트에서 이 값을 언제/어떻게 저장하는지 확인 필요
+- `intake_type`: enum(A/B/C/D/E), nullable — functional-spec §4의 5가지 상담 분류. 상담 중 `consult_requests.intake_type`(§2)에 먼저 기록되고, 계약 체결로 계정이 생기면 여기로 복사됨
 - `status`: enum(active/pending/inactive)
 - `credit_balance`: int, default 0 — `credit_transactions`에서 파생 가능하지만 조회 성능 위해 캐시 컬럼으로 유지 (조정 시마다 트랜잭션과 함께 갱신)
 - `joined_at`: timestamptz
@@ -66,6 +66,7 @@
 - `category`: enum(family/teacher_applicant)
 - `person_name`, `email`, `phone`: text
 - `student_grade`: text, nullable
+- `intake_type`: enum(A/B/C/D/E), nullable — 상담 중 Chrisy가 수동으로 선택해 저장. 계약 체결로 계정이 생기면 `students.intake_type`(§1)으로 복사됨 (**확인 필요 — "상담 중 수동 선택"이 맞는지만 확정, 그 외엔 목업에 근거가 없던 필드라 계속 주시할 것**)
 - `concerns`: text
 - `submitted_at`: timestamptz
 - `status`: enum(requested/confirmed/completed)
@@ -73,8 +74,10 @@
 - `meeting_link`: text, nullable
 - `meeting_notes`: text, nullable
 - `completed_at`: timestamptz, nullable
+- `converted_student_id`: FK → `students.id`, nullable
+- `converted_parent_id`: FK → `parents.id`, nullable
 
-목업 근거: `CONSULTS_DB_T` — "신청부터 완료까지 하나의 레코드에 누적"되는 설계를 그대로 유지. 단, 목업은 `personName`/`email` 문자열만으로 사람을 식별했는데(FK 없음), 실 스키마에서는 상담 신청이 아직 계정이 없는 사람일 수도 있어 FK를 강제하지 않고 이 테이블 자체가 1차 기록으로 남되, 상담 확정 후 계정 생성 시 `students.id`/`parents.id`로 연결하는 컬럼(`converted_student_id`, `converted_parent_id`, 둘 다 nullable)을 추가하는 게 맞아 보임 — **검토 필요**.
+목업 근거: `CONSULTS_DB_T` — "신청부터 완료까지 하나의 레코드에 누적"되는 설계를 그대로 유지. 목업은 `personName`/`email` 문자열만으로 사람을 식별했는데(FK 없음), 실 스키마에서는 상담 신청 시점엔 아직 계정이 없을 수 있어 이 테이블은 계정과 무관한 1차 기록으로 남겨두고, **계약 체결 시점에 실제 `students`/`parents` 계정이 생성되면서 `converted_student_id`/`converted_parent_id`로 연결**한다 — 트라이얼 수업이 계약 체결과 맞물려 진행되므로, 트라이얼 수업을 실제 세션 데이터로 남기려면 그 시점엔 이미 계정이 있어야 하기 때문. (§6 `sessions.is_trial` 참고)
 
 ### `consult_attachments`
 - `id`: uuid, PK
@@ -96,19 +99,16 @@
 
 ## 3. 계약
 
-### `contracts` (가족/학부모 계약)
+### `contracts` (자녀별 개별 계약)
 - `id`: uuid, PK
-- `parent_id`: FK → `parents.id`
+- `parent_id`: FK → `parents.id` (법적 서명자)
+- `student_id`: FK → `students.id` (계약 대상 자녀 — **자녀별로 계약 1건**)
 - `docusign_envelope_id`: text, nullable
 - `status`: enum(sent/signed)
 - `signed_at`: timestamptz, nullable
 - `document_url`: text (서명된 문서 저장 위치)
 
-### `contract_students` (계약 ↔ 학생, N:M)
-- `contract_id`: FK → `contracts.id`
-- `student_id`: FK → `students.id`
-
-목업 근거: `CONTRACTS_T`는 `studentNames`를 콤마로 join한 문자열이었음(`'지훈, 이서아'`) — 실 스키마는 join 테이블로 정규화. **검토 필요: 계약이 정말 "가족 단위 1건 = 자녀 여러 명 포함"이 맞는지, 아니면 자녀별로 별도 계약이 필요한지는 법적/사업적 판단이라 코드에서 추측하면 안 됨.**
+목업 근거: `CONTRACTS_T`는 `studentNames`를 콤마로 join한 문자열이었음(`'지훈, 이서아'`) — 확인 결과 계약은 자녀별 개별 계약이 맞다고 해서, 처음 설계했던 join 테이블(가족 단위 1건) 대신 `student_id`를 계약에 직접 FK로 뒀다. 참고: `student_id`가 가리키는 학생 계정은 이 계약 체결 시점에 생성됨 — 아래 §4a "계정 생성 시점" 참고.
 
 ### `teacher_contracts`
 - `id`: uuid, PK
@@ -193,6 +193,8 @@
 - `duration_minutes`: int, default 30 — 운영정책 §7 "30분 단위 슬롯"
 - `meeting_link`: text, nullable (Google Meet 링크, 임베드 아님 — 외부연동 표 참고)
 - `curriculum_doc_id`: FK → `curriculum_docs.id`, nullable — 이 세션에 배정된 교재
+- `is_trial`: boolean, default false — 계약 체결 직후 진행되는 트라이얼 수업 표시
+- `whiteboard_strokes`: jsonb, nullable — 연습장 화이트보드 최종 스냅샷 (§7 참고)
 - `created_at`: timestamptz
 
 unique(enrollment_id, session_number)
@@ -272,7 +274,7 @@ unique(enrollment_id, session_number)
 - `created_by`: FK → `profiles.id` (관리자 또는 선생님)
 - `created_at`: timestamptz
 
-**설계 노트 — 가장 큰 통합 결정**: 관리자 포털 분석에서 지적된 대로, 목업에는 "문제/과제"가 최소 3가지 다른 모양으로 따로 존재했다 (`LESSON_HISTORY_T.assignments`: `{title,studentAnswer,graded,score}` / `CATALOG_SUBJECTS_T[..].assignments`: `{id,title,content}` / `CURRICULUM_DOCS_T`의 `problems`: `{id,format,passage,options,correctIndex,explanation}`). 이 초안은 이 셋을 `problems` 테이블 하나로 통합하고, "교재 문제"든 "세션 과제"든 "AI 생성 문제"든 전부 여기서 시작해서 `draft→confirmed` 절차를 거치게 했다. **이건 검토가 꼭 필요한 부분이다** — 통합이 맞다는 전제(functional-spec §6 "교재 안의 문제를 만들 때도... 문제 생성과 동일한 패턴을 따라야 한다"는 문장 근거)로 진행했지만, 실제로 세 화면의 요구사항이 이후 갈라질 수도 있음.
+**설계 노트 — 통합 결정 (확정)**: 관리자 포털 분석에서 지적된 대로, 목업에는 "문제/과제"가 최소 3가지 다른 모양으로 따로 존재했다 (`LESSON_HISTORY_T.assignments`: `{title,studentAnswer,graded,score}` / `CATALOG_SUBJECTS_T[..].assignments`: `{id,title,content}` / `CURRICULUM_DOCS_T`의 `problems`: `{id,format,passage,options,correctIndex,explanation}`). 이 초안은 이 셋을 `problems` 테이블 하나로 통합하고, "교재 문제"든 "세션 과제"든 "AI 생성 문제"든 전부 여기서 시작해서 `draft→confirmed` 절차를 거치게 했다 — **통합 방식으로 확정**.
 
 ### `homework_items`
 - `id`: uuid, PK
@@ -325,7 +327,7 @@ unique(enrollment_id, session_number)
 - `created_at`: timestamptz
 
 ### `sessions.whiteboard_room_id` (연습장 — 화이트보드 서브탭)
-별도 테이블 대신 `sessions`에 컬럼 하나(`whiteboard_room_id text nullable`)로 충분해 보임 — 화이트보드 자체는 실시간 협업 화이트보드 외부 서비스(임베드)이고 우리 DB는 방 식별자만 들고 있으면 됨. **어떤 서비스를 쓸지는 미정 — 검토 필요.**
+별도 테이블 대신 `sessions`에 컬럼 하나(`whiteboard_room_id text nullable`, 실질적으로는 세션 id를 그대로 채널 이름으로 써도 됨)로 충분하다. **실시간 동기화는 Supabase Realtime(Broadcast 채널)로 확정** — 이미 DB로 Supabase를 쓰고 있어서 새 벤더/월 구독료 없이 그대로 실시간 채널을 쓸 수 있고, tldraw sync나 Liveblocks 같은 전용 협업 화이트보드 SaaS보다 단순하다(대신 스트로크 브로드캐스트 로직은 프론트엔드에서 직접 구현). 그린 결과물의 영속 저장은 캔버스와 동일하게 `strokes` jsonb 스냅샷으로 (아래 `canvas_annotations`와 같은 패턴, 화이트보드 전용 테이블은 "무한 스크롤"이라 세션당 1개면 충분해 별도 테이블 없이 `sessions.whiteboard_strokes jsonb`로 둔다).
 
 ### `session_files` (보충 자료)
 - `id`: uuid, PK
@@ -345,7 +347,9 @@ unique(enrollment_id, session_number)
 - `strokes`: jsonb (벡터 스트로크 데이터 — 좌표/색상/굵기 배열)
 - `updated_at`: timestamptz
 
-unique(session_id, curriculum_doc_id) — functional-spec §5 "콘텐츠 전체 높이에 걸친 단일 캔버스" + 목업 자체 주석("같은 교재를 다른 세션에서 열면 빈 캔버스로 시작, 이 세션을 복기할 때만 다시 보임")과 정확히 일치하도록 세션×교재 조합당 하나. **목업은 이걸 전혀 저장하지 않았음(순수 클라이언트 렌더링)** — 벡터 저장 vs PNG 스냅샷 저장은 검토 필요.
+unique(session_id, curriculum_doc_id) — functional-spec §5 "콘텐츠 전체 높이에 걸친 단일 캔버스" + 목업 자체 주석("같은 교재를 다른 세션에서 열면 빈 캔버스로 시작, 이 세션을 복기할 때만 다시 보임")과 정확히 일치하도록 세션×교재 조합당 하나. **목업은 이걸 전혀 저장하지 않았음(순수 클라이언트 렌더링)**.
+
+**실시간 동기화 확정**: 라이브 수업 중 선생님/학생이 같은 캔버스를 동시에 보며 필기하는 게 핵심 요구사항이라, **Supabase Realtime(Broadcast 채널)**로 스트로크 이벤트를 실시간 전송하고, `strokes` jsonb는 그 최종 결과를 세션 종료 시(또는 주기적으로) 영속 저장하는 용도로 쓴다. 화이트보드(`sessions.whiteboard_strokes`)도 동일한 방식. 새 화이트보드 SaaS(tldraw/Liveblocks 등) 없이 이미 쓰는 Supabase 인프라 하나로 처리 — 단순함과 실시간 공유 둘 다 만족.
 
 ---
 
@@ -411,6 +415,15 @@ unique(session_id, curriculum_doc_id) — functional-spec §5 "콘텐츠 전체 
 - `reviewed_at`: timestamptz, nullable
 
 목업 근거: `REVIEWS_T` — 교사 포털 분석에서 지적된 대로, 원본은 `text`(초안/최종 겸용) + `checked`뿐이라 AI 원본과 최종본을 구분 못 했음. 실 스키마는 `ai_draft_text`/`final_text`를 분리해서 "AI가 작성한 부분 명시적으로 disclaim"(functional-spec §8) 요구와도 맞춘다.
+
+### `session_review_revisions` (이력)
+- `id`: uuid, PK
+- `session_id`: FK → `sessions.id`
+- `revision_number`: int
+- `snapshot`: jsonb (제출 당시 `session_reviews`+`session_review_categories` 전체 스냅샷)
+- `submitted_at`: timestamptz
+
+관리자 반려 등으로 리뷰가 재작성될 때마다, 덮어쓰기 전에 기존 내용을 여기 스냅샷으로 남긴다. `session_reviews`/`session_review_categories`는 항상 "현재(최신)" 버전만 들고 있고, 과거 버전이 필요하면 이 테이블에서 조회.
 
 ### `session_student_feedback`
 - `id`: uuid, PK, unique(session_id)
@@ -534,12 +547,14 @@ unique(session_id, curriculum_doc_id) — functional-spec §5 "콘텐츠 전체 
 
 ---
 
-## 검토가 필요한 설계 결정 (다음 단계로 넘어가기 전에 확인해줘)
+## 검토 결과 (2026-08-27 확정)
 
-1. **`problems` 테이블 통합**: "교재 문제" / "세션 과제로 즉석 생성된 문제" / "AI 초안"을 한 테이블로 합쳤다. functional-spec §6 문장 근거는 있지만, 실제로 화면별 요구사항이 갈리기 시작하면 다시 쪼개야 할 수도 있다.
-2. **`intake_type`(A-E 분류) 필드**: 어떤 목업에도 실제 데이터/폼이 없어서 spec 문서 문장만 보고 추가했다. 상담 프로세스 중 정확히 어느 시점/화면에서 이 값이 저장되는지 확인 필요.
-3. **`contracts` — 가족 단위 1건 vs 자녀별 개별 계약**: 목업은 콤마로 join된 문자열이라 원래 의도가 불분명하다. 법적으로 어느 쪽이 맞는지는 코드로 추측할 수 없는 부분.
-4. **`consult_requests`와 실제 계정(students/parents) 연결 시점**: 상담 신청 시점엔 아직 계정이 없을 수 있어 `converted_student_id`/`converted_parent_id` 같은 nullable 연결 컬럼을 제안했는데, 실제 온보딩 순서(인테이크폼→Calendly→상담→제안서→...)상 언제 계정이 생성되는지에 따라 이 설계가 달라진다.
-5. **캔버스 필기 저장 방식**: 벡터 스트로크(jsonb, `canvas_annotations.strokes`)로 제안했는데, PNG 스냅샷 저장이 더 간단할 수도 있다 (수학 문제 화이트보드 답안은 이미 PNG로 저장하기로 했음 — `session_problem_attempts.response`).
-6. **화이트보드(연습장) 실서비스**: 어떤 실시간 협업 화이트보드 서비스를 쓸지 미정 (`sessions.whiteboard_room_id`만 자리를 잡아둠).
-7. **`session_reviews`/`session_review_categories`를 세션당 1개로 강제(`unique(session_id)`)한 것**: 목업과 일치하지만, 재작성/재검토 이력을 남기고 싶다면(예: 관리자가 반려 후 재작성) 이력 테이블이 별도로 필요할 수 있다.
+1. **`problems` 테이블 통합** → **확정.** "교재 문제"/"세션 과제"/"AI 초안"을 `problems` 하나로 통합.
+2. **`intake_type`(A-E 분류) 필드** → 상담 중 Chrisy가 수동 선택, 계약 시 `students.intake_type`으로 복사. **입력 UI 자체는 지금 안 만들어도 됨** — nullable 필드라 다른 테이블에 영향 없고, 실제 입력 화면은 Phase 5(관리자 포털, 원래도 후순위)에서 만들면 됨.
+3. **`contracts`** → **자녀별 개별 계약으로 확정** (`contracts.student_id` 직접 FK, join 테이블 제거).
+4. **계정 생성 시점** → **확정.** 상담 신청 단계(`consult_requests`)엔 계정이 없고, **계약 체결 시점에 `students`/`parents` 계정 생성** — 계약과 맞물려 진행되는 트라이얼 수업을 실제 세션(`sessions.is_trial=true`)으로 남기기 위함.
+5. **캔버스 필기 저장 방식** → 벡터 스트로크(jsonb) 유지, **실시간 동기화는 Supabase Realtime(Broadcast)로 확정**(새 벤더 없이 기존 Supabase 인프라 재사용).
+6. **화이트보드 실서비스** → 캔버스와 동일하게 **Supabase Realtime**으로 확정, 저장은 `sessions.whiteboard_strokes` jsonb.
+7. **리뷰 재작성 이력** → `session_review_revisions` 테이블 추가로 확정.
+
+**남은 오픈 아이템**: 없음. 다음 단계(002 마이그레이션 + 인증)로 진행 가능.
