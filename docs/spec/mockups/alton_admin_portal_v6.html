@@ -1,0 +1,2704 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alton Education — 관리자 포털</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#C8102E; --ink:#1A1A1A; --grey-700:#333333; --grey-500:#6E6E6E;
+    --grey-300:#C9C6BD; --grey-200:#E4E1DA; --grey-100:#F5F3EF; --blue:#1B6FB0; --blue-bg:#E6F1FB;
+    --yellow:#F2B90C; --yellow-bg:#FFF6DC; --green:#3B6D11; --green-bg:#EAF3DE; --white:#FFFFFF;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Inter','Noto Sans KR',sans-serif; color:var(--grey-700); background:var(--grey-100);}
+  a{color:inherit; text-decoration:none;}
+  button, select{font-family:inherit;}
+
+  .app{display:flex; min-height:100vh;}
+  .icon-sidebar{width:88px; background:#fff; border-right:1px solid var(--grey-200); flex-shrink:0; display:flex; flex-direction:column; align-items:center; padding:22px 0;}
+  .is-logo{width:34px; height:34px; border-radius:8px; background:var(--ink); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; margin-bottom:30px;}
+  .is-nav{display:flex; flex-direction:column; gap:6px; width:100%;}
+  .is-item{display:flex; flex-direction:column; align-items:center; gap:6px; padding:12px 4px; cursor:pointer; color:var(--grey-500); font-size:11.5px; font-weight:700; border-left:3px solid transparent;}
+  .is-item.active{color:var(--red); border-left-color:var(--red); background:#FCEBEB;}
+  .is-item svg{width:20px; height:20px;}
+
+  .topbar{background:#fff; border-bottom:1px solid var(--grey-200); padding:14px 32px; display:flex; justify-content:space-between; align-items:center; position:relative; z-index:20;}
+  .tz{display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--grey-500);}
+  .tz select{border:1px solid var(--grey-200); border-radius:6px; padding:6px 10px; font-size:12.5px; color:var(--ink);}
+  .child-switch{display:flex; gap:8px;}
+  .child-pill{padding:7px 14px; border-radius:20px; border:1.5px solid var(--grey-200); background:#fff; font-size:12.5px; font-weight:700; color:var(--grey-500); cursor:pointer;}
+  .child-pill.active{background:var(--ink); color:#fff; border-color:var(--ink);}
+
+  .account-wrap{position:relative;}
+  .account-trigger{display:flex; align-items:center; gap:6px; font-size:12.5px; font-weight:700; color:var(--ink); cursor:pointer; padding:8px 12px; border-radius:8px;}
+  .account-trigger:hover{background:var(--grey-100);}
+  .account-menu{display:none; position:absolute; right:0; top:44px; background:#fff; border:1px solid var(--grey-200); border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.09); width:210px; padding:8px;}
+  .account-menu.open{display:block;}
+  .account-menu a{display:block; padding:10px 12px; border-radius:7px; font-size:13px; color:var(--grey-700); font-weight:600;}
+  .account-menu a:hover{background:var(--grey-100);}
+  .account-menu .div{height:1px; background:var(--grey-200); margin:6px 4px;}
+  .account-menu a.danger{color:var(--red);}
+
+  .content-wrap{flex:1; display:flex; flex-direction:column;}
+  .main{padding:30px 36px; flex:1;}
+  h1{font-size:21px; color:var(--ink); font-weight:800; margin-bottom:4px;}
+  .page-sub{font-size:13px; color:var(--grey-500); margin-bottom:22px;}
+
+  .subtabs{display:flex; gap:28px; border-bottom:1px solid var(--grey-200); margin-bottom:24px;}
+  .subtab{padding:10px 2px 14px; font-size:14.5px; font-weight:700; color:var(--grey-300); cursor:pointer; border-bottom:2px solid transparent;}
+  .subtab.active{color:var(--ink); border-bottom-color:var(--ink);}
+
+  .view{display:none;} .view.active{display:block;}
+  .subview{display:none;} .subview.active{display:block;}
+
+  .home-grid{display:grid; grid-template-columns:1.4fr 1fr; gap:20px;}
+  .cal-card{background:#fff; border:1px solid var(--grey-200); border-radius:12px; padding:22px; margin-bottom:20px;}
+  .cal-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; font-weight:800; color:var(--ink); font-size:15px;}
+  .cal-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:4px; text-align:center;}
+  .cal-dow{font-size:11.5px; color:var(--grey-500); font-weight:700; padding-bottom:8px;}
+  .cal-day{position:relative; padding:12px 0 8px; border-radius:8px; font-size:13.5px; color:var(--grey-700);}
+  .cal-day.has{cursor:pointer; font-weight:700; color:var(--ink);}
+  .cal-day.has:hover{background:var(--grey-100);}
+  .cal-day.selected{background:var(--ink); color:#fff;}
+  .cal-day .pt{width:5px; height:5px; border-radius:50%; background:var(--red); margin:3px auto 0;}
+  .cal-day.selected .pt{background:#fff;}
+  .cal-day.empty{visibility:hidden;}
+
+  .day-panel{background:#fff; border:1px solid var(--grey-200); border-radius:12px; padding:22px; margin-bottom:20px;}
+  .day-panel h3{font-size:14.5px; color:var(--ink); margin-bottom:16px;}
+  .lesson-card{border:1px solid var(--grey-200); border-radius:10px; padding:14px; margin-bottom:10px;}
+  .lesson-card:last-child{margin-bottom:0;}
+  .lesson-time{font-size:12px; font-weight:700; color:var(--red); margin-bottom:8px;}
+  .lc-row{display:flex; gap:8px; flex-wrap:wrap;}
+  .empty-note{font-size:13px; color:var(--grey-500); text-align:center; padding:30px 0;}
+
+  .list-row{display:flex; justify-content:space-between; align-items:center; background:#fff; border:1px solid var(--grey-200); border-radius:10px; padding:16px 20px; margin-bottom:10px;}
+  .list-left{display:flex; align-items:center; gap:16px;}
+  .list-date{font-size:12.5px; color:var(--grey-500); min-width:130px;}
+  .list-date b{color:var(--ink); display:block; font-size:13.5px;}
+  .chip-btn{display:inline-flex; align-items:center; gap:6px; background:var(--grey-100); border:1px solid var(--grey-200); border-radius:8px; padding:8px 14px; font-size:13px; font-weight:700; color:var(--ink); cursor:pointer;}
+  .chip-btn.subject{background:var(--blue-bg); border-color:var(--blue-bg); color:var(--blue);}
+  .action-links{display:flex; gap:10px;}
+  .action-link{font-size:12.5px; font-weight:700; color:var(--grey-500); border:1px solid var(--grey-200); border-radius:8px; padding:7px 12px; cursor:pointer;}
+  .action-link:hover{border-color:var(--ink); color:var(--ink);}
+
+  .teacher-card{background:#fff; border:1px solid var(--grey-200); border-radius:12px; padding:22px; margin-bottom:18px; display:flex; gap:16px; align-items:flex-start;}
+  .t-avatar{width:52px; height:52px; border-radius:50%; background:var(--blue-bg); color:var(--blue); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:16px; flex-shrink:0;}
+  .t-name{font-size:16px; font-weight:800; color:var(--ink); margin-bottom:2px;}
+  .t-school{font-size:12.5px; color:var(--grey-500); margin-bottom:10px;}
+  .t-subjects span{font-size:11.5px; font-weight:700; background:var(--grey-100); padding:5px 10px; border-radius:14px; color:var(--grey-700); margin-right:6px;}
+
+  .curr-head{background:#fff; border:1px solid var(--grey-200); border-radius:12px; padding:22px; margin-bottom:20px; display:flex; justify-content:space-between; align-items:center;}
+  .curr-head h2{font-size:18px; color:var(--ink);}
+  .progress-badge{font-size:12.5px; font-weight:700; color:var(--green); background:var(--green-bg); padding:7px 14px; border-radius:20px;}
+  .week-row{display:grid; grid-template-columns:80px 1fr 110px; gap:14px; align-items:center; background:#fff; border:1px solid var(--grey-200); border-radius:10px; padding:16px 20px; margin-bottom:8px;}
+  .week-row.done{cursor:pointer;}
+  .week-status{text-align:center; font-size:11.5px; font-weight:700; padding:6px 0; border-radius:14px;}
+  .st-done{background:var(--green-bg); color:var(--green);}
+  .st-progress{background:var(--yellow-bg); color:#8A6D00;}
+  .st-upcoming{background:var(--grey-100); color:var(--grey-500);}
+  .week-extra{display:flex; justify-content:space-between; align-items:center; background:#fff; border:1px solid var(--grey-200); border-top:none; border-radius:0 0 10px 10px; padding:10px 20px; font-size:12px; color:var(--grey-500);}
+
+  .ref-block{border-top:1px solid var(--grey-200); margin-top:16px; padding-top:16px;}
+  .ref-code-row{display:flex; justify-content:space-between; align-items:center; background:var(--grey-100); border-radius:8px; padding:10px 14px;}
+  .ref-code-text{font-weight:800; font-family:monospace; font-size:14px; color:var(--ink); letter-spacing:0.02em;}
+  .ref-copy{font-size:12px; font-weight:700; color:var(--red); cursor:pointer;}
+  .ref-box{padding:10px 12px 12px;}
+  .ref-box .ref-label{font-size:11px; color:var(--grey-500); margin-bottom:6px; font-weight:700;}
+  .ref-box .ref-code-row{padding:8px 10px;}
+  .ref-box .ref-code-text{font-size:12.5px;}
+  .memo{display:flex; gap:12px; padding:14px 0; border-bottom:1px solid var(--grey-100);}
+  .memo-tag{font-size:11px; font-weight:800; padding:4px 9px; border-radius:6px; white-space:nowrap;}
+  .tag-student{background:var(--green-bg); color:var(--green);}
+  .tag-teacher{background:var(--blue-bg); color:var(--blue);}
+  .tag-admin{background:#F1E8FB; color:#6E3FA0;}
+
+  .stat-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:20px;}
+  .stat-card{background:#fff; border:1px solid var(--grey-200); border-radius:12px; padding:20px;}
+  .stat-num{font-size:26px; font-weight:800; color:var(--ink); margin-bottom:4px;}
+  .stat-label{font-size:12px; color:var(--grey-500);}
+  .bar-row{display:flex; align-items:center; gap:12px; margin-bottom:12px;}
+  .bar-label{width:90px; font-size:12.5px; color:var(--grey-500);}
+  .bar-track{flex:1; height:10px; background:var(--grey-100); border-radius:6px; overflow:hidden;}
+  .bar-fill{height:100%; background:var(--blue);}
+  .bar-val{width:40px; text-align:right; font-size:12.5px; font-weight:700; color:var(--ink);}
+
+  .card{background:#fff; border:1px solid var(--grey-200); border-radius:12px; padding:22px;}
+  .card h3{font-size:14.5px; color:var(--ink); margin-bottom:16px; display:flex; justify-content:space-between;}
+  .card h3 a{font-size:12px; color:var(--grey-500); font-weight:600;}
+
+  /* CREDIT PURCHASE PANEL */
+  .credit-balance-row{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px;}
+  .credit-num{font-size:28px; font-weight:800; color:var(--ink);}
+  .credit-expiry{font-size:11.5px; color:var(--grey-500);}
+  .credit-bar{height:8px; background:var(--grey-100); border-radius:4px; overflow:hidden; margin:10px 0 18px;}
+  .credit-bar-fill{height:100%; background:var(--red);}
+  .pkg-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:14px;}
+  .pkg{border:1.5px solid var(--grey-200); border-radius:10px; padding:14px 10px; text-align:center; cursor:pointer;}
+  .pkg.selected{border-color:var(--red); background:#FCEBEB;}
+  .pkg .h{font-weight:800; font-size:15px; color:var(--ink);}
+  .pkg .p{font-size:12px; color:var(--grey-500); margin-top:2px;}
+  .pay-btn{display:block; width:100%; text-align:center; background:var(--red); color:#fff; font-weight:700; font-size:14px; padding:12px; border-radius:8px; border:none; cursor:pointer;}
+
+  /* FORMS */
+  .form-row{margin-bottom:16px; max-width:420px;}
+  .form-row label{display:block; font-size:13px; font-weight:700; color:var(--ink); margin-bottom:6px;}
+  .form-row input, .form-row select{width:100%; padding:10px 12px; border:1.5px solid var(--grey-200); border-radius:8px; font-size:14px; color:var(--ink);}
+  .btn-primary{background:var(--ink); color:#fff; font-weight:700; font-size:13.5px; padding:10px 18px; border-radius:8px; border:none; cursor:pointer;}
+  .btn-danger-outline{background:#fff; color:var(--red); border:1.5px solid var(--red); font-weight:700; font-size:13px; padding:9px 16px; border-radius:8px; cursor:pointer;}
+
+  .notice-item{padding:16px 0; border-bottom:1px solid var(--grey-200);}
+  .notice-item .t{font-weight:700; color:var(--ink); font-size:14px; margin-bottom:4px;}
+  .notice-item .d{font-size:12px; color:var(--grey-500);}
+
+  .faq-item{border-bottom:1px solid var(--grey-200); padding:16px 0;}
+  .faq-item summary{cursor:pointer; font-weight:700; font-size:14px; color:var(--ink); list-style:none;}
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item p{margin-top:10px; color:var(--grey-500); font-size:13px; max-width:600px;}
+
+  .back-link{display:inline-flex; gap:6px; font-size:12.5px; font-weight:700; color:var(--grey-500); margin-bottom:14px; cursor:pointer;}
+
+  .enter-banner{background:var(--ink); border-radius:12px; padding:20px 24px; margin-bottom:20px; display:flex; justify-content:space-between; align-items:center; color:#fff;}
+  .enter-banner .eb-label{font-size:11.5px; color:#9B9B9B; font-weight:700; letter-spacing:0.04em; margin-bottom:4px;}
+  .enter-banner .eb-title{font-size:16px; font-weight:800;}
+  .enter-banner .eb-btn{background:var(--red); color:#fff; font-weight:800; font-size:13.5px; padding:11px 20px; border-radius:8px; flex-shrink:0;}
+  .enter-banner.none{background:var(--grey-100); color:var(--grey-500);}
+  .enter-banner.none .eb-title{color:var(--grey-700); font-size:13.5px; font-weight:600;}
+
+  .hw-item{display:flex; justify-content:space-between; align-items:center; background:#fff; border:1px solid var(--grey-200); border-radius:10px; padding:16px 20px; margin-bottom:10px;}
+  .hw-left{display:flex; align-items:center; gap:14px;}
+  .hw-check{width:22px; height:22px; border-radius:6px; border:2px solid var(--grey-300); flex-shrink:0; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:13px; color:#fff;}
+  .hw-check.done{background:var(--green); border-color:var(--green);}
+  .hw-title{font-weight:700; color:var(--ink); font-size:14px;}
+  .hw-meta{font-size:12px; color:var(--grey-500); margin-top:2px;}
+  .hw-due{font-size:12px; font-weight:700; padding:5px 10px; border-radius:12px;}
+  .hw-due.soon{background:var(--yellow-bg); color:#8A6D00;}
+  .hw-due.ok{background:var(--green-bg); color:var(--green);}
+
+  .cr-policy{background:var(--grey-100); border-radius:10px; padding:16px 18px; font-size:12.5px; color:var(--grey-500); line-height:1.7; margin-bottom:20px;}
+  .cr-policy b{color:var(--ink);}
+  .cr-options{display:flex; gap:10px; margin-bottom:18px;}
+  .cr-opt{flex:1; border:1.5px solid var(--grey-200); border-radius:10px; padding:14px; text-align:center; cursor:pointer; font-weight:700; font-size:13.5px; color:var(--ink);}
+  .cr-opt.selected{border-color:var(--red); background:#FCEBEB; color:var(--red);}
+  .cr-opt.disabled{opacity:0.35; cursor:not-allowed;}
+
+  .memo-input-row{display:flex; gap:10px; margin-top:16px;}
+  .memo-input-row textarea{flex:1; padding:10px 12px; border:1.5px solid var(--grey-200); border-radius:8px; font-family:inherit; font-size:13px; resize:vertical;}
+
+  .lesson-widget-item{display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid var(--grey-100);}
+  .lesson-widget-item:last-child{border-bottom:none; padding-bottom:0;}
+  .lw-btns{display:flex; gap:8px;}
+  .btn-sm{font-size:11.5px; font-weight:700; padding:7px 11px; border-radius:7px; cursor:pointer; border:1px solid var(--grey-200); color:var(--ink); background:#fff;}
+  .btn-sm.live{background:var(--red); color:#fff; border-color:var(--red);}
+  .btn-sm.disabled{color:var(--grey-300); background:var(--grey-100); border-color:var(--grey-100); cursor:not-allowed;}
+
+  .live-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px;}
+  .live-pane{background:#fff; border:1px solid var(--grey-200); border-radius:12px; overflow:hidden;}
+  .live-pane-head{display:flex; justify-content:space-between; align-items:center; padding:12px 16px; border-bottom:1px solid var(--grey-200); font-size:13px; font-weight:800; color:var(--ink);}
+  .live-pane-body{height:360px; display:flex; align-items:center; justify-content:center; color:var(--grey-500); font-size:13px; background:var(--grey-100);}
+  .live-toggle{display:flex; gap:4px; background:var(--grey-100); border-radius:8px; padding:3px;}
+  .lt-opt{font-size:11.5px; font-weight:700; padding:5px 10px; border-radius:6px; cursor:pointer; color:var(--grey-500);}
+  .lt-opt.active{background:#fff; color:var(--ink);}
+
+  .stars{font-size:24px; margin-bottom:12px;}
+  .stars span{color:var(--grey-300); cursor:pointer;}
+  .stars span.on{color:var(--yellow);}
+  .stars.readonly span{cursor:default;}
+  .ro-text{font-size:13.5px; color:var(--grey-700); line-height:1.7; background:var(--grey-100); border-radius:8px; padding:12px 14px; margin-bottom:10px;}
+  .ro-label{font-size:11.5px; font-weight:800; color:var(--grey-500); margin-bottom:4px; text-transform:uppercase; letter-spacing:0.03em;}
+  .mc-options{display:flex; flex-direction:column; gap:8px; margin-bottom:6px;}
+  .mc-opt{border:1.5px solid var(--grey-200); border-radius:8px; padding:10px 14px; font-size:13px; font-weight:600; color:var(--ink); cursor:pointer;}
+  .mc-opt:hover{border-color:var(--grey-500);}
+  .mc-opt.selected{border-color:var(--red); background:#FCEBEB; color:var(--red); font-weight:800;}
+
+  .material-page{position:relative; height:420px; border:1px solid var(--grey-200); border-radius:10px; overflow:hidden; background:#fff;}
+  .material-page-text{position:absolute; top:0; left:0; right:0; bottom:0; overflow-y:auto; padding:20px; font-size:13.5px; line-height:1.9; color:var(--ink);}
+  .material-page-canvas{position:absolute; top:0; left:0; width:100%; height:100%; touch-action:none; cursor:crosshair;}
+
+  .mat-toolbar{display:flex; align-items:center; gap:14px; margin-bottom:10px; flex-wrap:wrap;}
+  .pen-colors{display:flex; gap:7px; align-items:center;}
+  .pen-color{width:20px; height:20px; border-radius:50%; cursor:pointer; border:2px solid transparent; box-shadow:0 0 0 1px var(--grey-200);}
+  .pen-color.active{border-color:var(--ink);}
+  .tool-toggle{display:flex; gap:4px; background:var(--grey-100); border-radius:8px; padding:3px;}
+  .tool-opt{font-size:11.5px; font-weight:700; padding:5px 10px; border-radius:6px; cursor:pointer; color:var(--grey-500);}
+  .tool-opt.active{background:#fff; color:var(--ink);}
+  .page-nav{display:flex; align-items:center; justify-content:center; gap:16px; margin-top:8px; font-size:12.5px; color:var(--grey-500); font-weight:700;}
+  .page-arrow{cursor:pointer; padding:4px 12px; border-radius:6px; color:var(--ink); font-weight:800;}
+  .page-arrow:hover{background:var(--grey-100);}
+
+  .live-tabs{display:flex; gap:4px; padding:0 24px; border-bottom:1px solid var(--grey-200); background:#fff; overflow-x:auto;}
+  .live-tab{padding:14px 16px; font-size:13.5px; font-weight:700; color:var(--grey-500); cursor:pointer; border-bottom:2px solid transparent; white-space:nowrap;}
+  .live-tab.active{color:var(--ink); border-bottom-color:var(--red);}
+  .live-tab-content{padding:20px 24px; height:calc(100vh - 128px); overflow-y:auto;}
+
+  .acc-section{background:#fff; border:1px solid var(--grey-200); border-radius:10px; overflow:hidden; margin-bottom:10px;}
+  .acc-head{display:flex; justify-content:space-between; align-items:center; padding:14px 18px; font-weight:700; font-size:13.5px; color:var(--ink); cursor:pointer;}
+  .acc-head:hover{background:var(--grey-100);}
+  .acc-arrow{color:var(--grey-500); font-size:12px;}
+  .acc-body{padding:0 18px 16px;}
+
+  .bell-wrap{position:relative;}
+  .bell-trigger{cursor:pointer; font-size:17px; position:relative; padding:8px 10px; border-radius:8px;}
+  .bell-trigger:hover{background:var(--grey-100);}
+  .bell-badge{position:absolute; top:2px; right:2px; background:var(--red); color:#fff; font-size:10px; font-weight:800; border-radius:8px; padding:1px 5px; display:none;}
+  .notif-menu{display:none; position:absolute; right:0; top:44px; background:#fff; border:1px solid var(--grey-200); border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.09); width:290px; padding:8px; max-height:340px; overflow-y:auto; z-index:30;}
+  .notif-menu.open{display:block;}
+  .notif-item{padding:10px 12px; border-radius:7px; font-size:12.5px; color:var(--grey-700); line-height:1.5; cursor:pointer;}
+  .notif-item:hover{background:var(--grey-100);}
+  .notif-item.unread{background:#FCEBEB;}
+  .notif-time{font-size:11px; color:var(--grey-500); margin-top:3px;}
+
+  body.focus-mode .icon-sidebar, body.focus-mode .topbar{display:none;}
+  body.focus-mode .main{padding:0;}
+  .live-header{display:flex; justify-content:space-between; align-items:center; padding:14px 24px; border-bottom:1px solid var(--grey-200); background:#fff; gap:12px; flex-wrap:wrap;}
+  .live-back{font-size:13px; font-weight:700; color:var(--grey-500); cursor:pointer; display:flex; align-items:center; gap:6px; flex-shrink:0;}
+  .live-focus-grid{display:grid; grid-template-columns:1fr 1fr; height:calc(100vh - 65px);}
+  .live-focus-pane{overflow-y:auto; padding:20px;}
+  .live-focus-pane.right{border-left:1px solid var(--grey-200); display:flex; flex-direction:column;}
+
+  /* TEACHER PORTAL ADDITIONS */
+  .req-card{display:flex; justify-content:space-between; align-items:center; background:#fff; border:1.5px solid var(--yellow); border-radius:10px; padding:16px 20px; margin-bottom:10px;}
+  .req-info b{color:var(--ink);}
+  .req-btns{display:flex; gap:8px;}
+  .btn-accept{background:var(--green); color:#fff; font-weight:700; font-size:12.5px; padding:8px 14px; border-radius:7px; border:none; cursor:pointer;}
+  .btn-decline{background:#fff; color:var(--red); border:1.5px solid var(--red); font-weight:700; font-size:12.5px; padding:8px 14px; border-radius:7px; cursor:pointer;}
+  .slot-toggle-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:10px;}
+  .slot-toggle{border:1.5px solid var(--grey-200); border-radius:8px; padding:10px; text-align:center; font-size:12.5px; font-weight:700; color:var(--grey-500); cursor:pointer;}
+  .slot-toggle.on{background:var(--green-bg); border-color:var(--green); color:var(--green);}
+  .audience-row{display:flex; gap:6px; margin:8px 0;}
+  .aud-btn{font-size:11px; font-weight:700; padding:5px 10px; border-radius:14px; border:1.5px solid var(--grey-200); color:var(--grey-500); cursor:pointer;}
+  .aud-btn.on{border-color:var(--blue); background:var(--blue-bg); color:var(--blue);}
+  .review-block{background:#fff; border:1px solid var(--grey-200); border-radius:10px; padding:16px; margin-bottom:12px;}
+  .tip-overlay{position:absolute; top:10px; right:10px; max-width:260px; background:#FFF8E6; border:1px solid #F2D98A; border-radius:8px; padding:12px 14px; font-size:12px; color:#7A5C05; line-height:1.6; z-index:5; box-shadow:0 4px 12px rgba(0,0,0,0.1); pointer-events:none;}
+  .settle-stat{background:#fff; border:1px solid var(--grey-200); border-radius:12px; padding:20px;}
+
+  .cal-day{cursor:pointer;}
+  .cal-day.empty{cursor:default;}
+  .dot-pending{background:var(--yellow) !important;}
+  .cal-day.open-marked{position:relative;}
+  .open-day-circle{display:inline-flex; align-items:center; justify-content:center; width:23px; height:23px; border-radius:50%; background:var(--green); color:#fff; font-weight:700;}
+  .reorder-btns{display:flex; flex-direction:column; gap:2px;}
+  .reorder-btn{font-size:11px; color:var(--grey-500); cursor:pointer; padding:1px 5px; border-radius:4px; line-height:1;}
+  .reorder-btn:hover{background:var(--grey-100); color:var(--ink);}
+  .reorder-btn.disabled{opacity:0.25; cursor:default;}
+  .reorder-btn.disabled:hover{background:none;}
+  .top-tabs{display:flex; gap:10px; margin-bottom:20px;}
+  .top-tab{padding:9px 18px; border-radius:20px; border:1.5px solid var(--grey-200); font-size:13px; font-weight:700; color:var(--grey-500); cursor:pointer;}
+  .top-tab.active{background:var(--ink); color:#fff; border-color:var(--ink);}
+  .subj-chip-row{display:flex; gap:8px; flex-wrap:wrap; margin:8px 0 4px;}
+  .decline-box{margin-top:10px; display:none;}
+  .decline-box.open{display:block;}
+  .range-row{display:flex; align-items:center; gap:8px; margin:10px 0;}
+  .range-row select{padding:8px 10px; border:1.5px solid var(--grey-200); border-radius:8px; font-size:13px;}
+  .history-item{display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--grey-100); font-size:12.5px; color:var(--grey-500);}
+  .unit-list-item{display:flex; justify-content:space-between; align-items:center; padding:12px 16px; background:#fff; border:1px solid var(--grey-200); border-radius:10px; margin-bottom:8px; cursor:pointer;}
+  .unit-list-item:hover{border-color:var(--ink);}
+
+  /* ADMIN PORTAL ADDITIONS */
+  .data-table{width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--grey-200); border-radius:12px; overflow:hidden;}
+  .data-table th{text-align:left; font-size:11.5px; font-weight:800; color:var(--grey-500); text-transform:uppercase; letter-spacing:0.03em; padding:12px 16px; background:var(--grey-100); border-bottom:1px solid var(--grey-200);}
+  .data-table td{padding:14px 16px; font-size:13px; color:var(--grey-700); border-bottom:1px solid var(--grey-100);}
+  .data-table tr:last-child td{border-bottom:none;}
+  .data-table tr.clickable{cursor:pointer;}
+  .data-table tr.clickable:hover td{background:var(--grey-100);}
+  .status-pill{font-size:11px; font-weight:800; padding:4px 10px; border-radius:12px; white-space:nowrap; display:inline-block;}
+  .status-active{background:var(--green-bg); color:var(--green);}
+  .status-pending{background:var(--yellow-bg); color:#8A6D00;}
+  .status-inactive{background:var(--grey-100); color:var(--grey-500);}
+  .status-danger{background:#FCEBEB; color:var(--red);}
+  .status-info{background:var(--blue-bg); color:var(--blue);}
+  .dash-alert-row{display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid var(--grey-100);}
+  .dash-alert-row:last-child{border-bottom:none;}
+  .dash-count{font-size:24px; font-weight:800; color:var(--ink);}
+  .dash-card{background:#fff; border:1px solid var(--grey-200); border-radius:12px; padding:20px;}
+  .log-entry{padding:12px 0; border-bottom:1px solid var(--grey-100); font-size:12.5px; color:var(--grey-500);}
+  .log-entry:last-child{border-bottom:none;}
+  .log-entry b{color:var(--ink);}
+  .chat-bubble{max-width:70%; padding:10px 14px; border-radius:14px; font-size:13px; margin-bottom:8px; line-height:1.5;}
+  .chat-bubble.teacher{background:var(--blue-bg); color:var(--ink); margin-right:auto;}
+  .chat-bubble.student{background:var(--grey-100); color:var(--ink); margin-left:auto;}
+  .chat-meta{font-size:10.5px; color:var(--grey-500); margin-bottom:2px;}
+  .filter-row{display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap; align-items:center;}
+  .filter-row select{padding:8px 12px; border:1.5px solid var(--grey-200); border-radius:8px; font-size:12.5px;}
+  .detail-header{background:#fff; border:1px solid var(--grey-200); border-radius:12px; padding:22px; margin-bottom:20px; display:flex; justify-content:space-between; align-items:flex-start;}
+  .kv-row{display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--grey-100); font-size:13px;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-row span:first-child{color:var(--grey-500);}
+  .kv-row span:last-child{color:var(--ink); font-weight:700;}
+  .category-select-row{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;}
+  .rte-toolbar{display:flex; gap:4px; align-items:center; flex-wrap:wrap; border:1.5px solid var(--grey-200); border-bottom:none; border-radius:8px 8px 0 0; padding:6px 8px; background:var(--grey-100);}
+  .rte-toolbar button{padding:5px 9px; border:1px solid var(--grey-200); border-radius:6px; background:#fff; font-size:12px; cursor:pointer; color:var(--ink);}
+  .rte-toolbar button:hover{background:var(--grey-200);}
+  .rte-sep{width:1px; height:18px; background:var(--grey-200); margin:0 2px;}
+  .rte-color-input{width:30px; height:28px; padding:2px; border:1px solid var(--grey-200); border-radius:6px; cursor:pointer; background:#fff;}
+  .rte-editable{width:100%; min-height:110px; padding:12px; border:1.5px solid var(--grey-200); border-top:none; border-radius:0 0 8px 8px; font-family:inherit; font-size:13px; line-height:1.6; color:var(--ink); background:#fff;}
+  .rte-editable:focus{outline:none; border-color:var(--ink);}
+  .rte-editable h2{font-size:17px; font-weight:800; margin:6px 0;}
+  .rte-editable h3{font-size:14px; font-weight:800; margin:6px 0;}
+  .rte-editable table{border-collapse:collapse; width:100%; margin:8px 0; font-size:12.5px;}
+  .rte-editable table th, .rte-editable table td{border:1px solid var(--grey-200); padding:6px 8px; text-align:left;}
+  .rte-editable table th{background:var(--grey-100); font-weight:700;}
+  .callout{background:var(--yellow-bg); border-left:3px solid #E8B923; padding:10px 14px; border-radius:6px; margin:10px 0;}
+  #doc-preview-body table{border-collapse:collapse; width:100%; margin:10px 0; font-size:13px;}
+  #doc-preview-body table th, #doc-preview-body table td{border:1px solid var(--grey-200); padding:8px 10px; text-align:left;}
+  #doc-preview-body table th{background:var(--grey-100); font-weight:700;}
+  .cat-chip{padding:8px 14px; border:1.5px solid var(--grey-200); border-radius:20px; font-size:12.5px; font-weight:700; color:var(--grey-500); cursor:pointer;}
+  .cat-chip.on{background:var(--ink); color:#fff; border-color:var(--ink);}
+
+  .drag-row{display:flex; align-items:center; gap:10px; background:#fff; border:1px solid var(--grey-200); border-radius:10px; padding:12px 14px; margin-bottom:8px; cursor:grab;}
+  .drag-row.dragging{opacity:0.4;}
+  .drag-row.locked{background:var(--grey-100); cursor:default;}
+  .drag-handle{color:var(--grey-300); font-size:14px; flex-shrink:0;}
+  .drag-row input{border:1px solid transparent; background:transparent; font-weight:700; color:var(--ink); font-size:14px; padding:4px; flex:1;}
+  .drag-row input:focus{border-color:var(--grey-200);}
+  .subj-search-box{position:relative; max-width:360px; margin-bottom:14px;}
+  .subj-search-results{border:1px solid var(--grey-200); border-radius:8px; margin-top:6px; overflow:hidden;}
+  .subj-search-item{padding:10px 14px; font-size:13px; cursor:pointer; border-bottom:1px solid var(--grey-100);}
+  .subj-search-item:last-child{border-bottom:none;}
+  .subj-search-item:hover{background:var(--grey-100);}
+  .subj-chip-x{margin-left:5px; color:var(--grey-500); cursor:pointer; font-weight:800;}
+  .subj-chip-x:hover{color:var(--red);}
+  .locked-tag{font-size:11px; font-weight:700; color:var(--grey-500); background:var(--grey-100); padding:3px 8px; border-radius:10px;}
+  .tip-toggle-mini{font-size:11px; color:var(--grey-500); cursor:pointer; text-decoration:underline; display:inline-block; margin-bottom:8px;}
+</style>
+
+<body>
+<div class="app">
+  <aside class="icon-sidebar">
+    <div class="is-logo">A</div>
+    <nav class="is-nav">
+      <div class="is-item active" data-nav="home" onclick="showView('home')">
+        <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7M5 10v9a1 1 0 001 1h4v-6h4v6h4a1 1 0 001-1v-9"/></svg>홈
+      </div>
+      <div class="is-item" data-nav="users" onclick="showView('users')">
+        <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2"/><path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6"/></svg>사용자
+      </div>
+      <div class="is-item" data-nav="matching" onclick="showView('matching')">
+        <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="7" cy="12" r="3"/><circle cx="17" cy="12" r="3"/><path d="M10 12h4"/></svg>매칭
+      </div>
+      <div class="is-item" data-nav="consult" onclick="showView('consult')">
+        <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/></svg>상담
+      </div>
+      <div class="is-item" data-nav="catalog" onclick="showView('catalog')">
+        <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M5 4h9a2 2 0 012 2v14l-6.5-3L5 20V4z"/></svg>커리큘럼
+      </div>
+      <div class="is-item" data-nav="billing" onclick="showView('billing')">
+        <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 10h20"/></svg>수업권
+      </div>
+      <div class="is-item" data-nav="contracts" onclick="showView('contracts')">
+        <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7z"/><path d="M9 9h6M9 13h6M9 17h4"/></svg>계약
+      </div>
+      <div class="is-item" data-nav="qc" onclick="showView('qc')">
+        <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z"/></svg>QC
+      </div>
+      <div class="is-item" data-nav="payouts" onclick="showView('payouts')">
+        <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>정산
+      </div>
+      <div class="is-item" data-nav="documents" onclick="showView('documents')">
+        <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>문서
+      </div>
+    </nav>
+  </aside>
+
+  <div class="content-wrap">
+    <div class="topbar">
+      <div style="font-weight:800; color:var(--ink); font-size:15px;">Alton Education 관리자</div>
+      <div style="display:flex; align-items:center; gap:18px;">
+        <div class="bell-wrap">
+          <div class="bell-trigger" onclick="toggleNotif()">🔔<span class="bell-badge" id="bell-badge"></span></div>
+          <div class="notif-menu" id="notif-menu"></div>
+        </div>
+        <div class="account-wrap">
+          <div class="account-trigger" onclick="toggleAccountMenu()">관리자 ▾</div>
+          <div class="account-menu" id="account-menu">
+            <a onclick="showView('home')">홈으로</a>
+            <div class="div"></div>
+            <a class="danger">로그아웃</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main">
+
+      <!-- HOME (대시보드) -->
+      <div class="view active" id="home">
+        <h1>대시보드</h1>
+        <div class="page-sub">오늘 처리해야 할 것들을 한 곳에서 확인하세요.</div>
+
+        <div class="card" style="margin-bottom:20px;">
+          <h3>상담 요청 내역 (일정 미확정) <a onclick="showView('consult'); showConsultSubtab('consult-status')">전체 보기 →</a></h3>
+          <div id="dash-consult-requests"></div>
+        </div>
+
+        <div class="card" style="margin-bottom:20px;">
+          <h3>확정된 상담 일정</h3>
+          <div class="home-grid">
+            <div>
+              <div class="cal-card">
+                <div class="cal-head"><span>‹</span> 2026년 9월 <span>›</span></div>
+                <div class="cal-grid" id="home-consult-cal-grid"></div>
+              </div>
+            </div>
+            <div>
+              <div class="day-panel" style="margin-top:0;">
+                <h3 id="home-consult-day-title">일정</h3>
+                <div id="home-consult-day-panel"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="home-grid">
+          <div>
+            <div class="dash-card" style="margin-bottom:16px;">
+              <h3 style="margin-bottom:12px;">초대 대기</h3>
+              <div id="dash-pending-invites"></div>
+            </div>
+            <div class="dash-card" style="margin-bottom:16px;">
+              <h3 style="margin-bottom:12px;">결제 실패</h3>
+              <div id="dash-payment-failures"></div>
+            </div>
+            <div class="dash-card">
+              <h3 style="margin-bottom:12px;">매칭 요청</h3>
+              <div id="dash-matching-requests"></div>
+            </div>
+          </div>
+          <div>
+            <div class="dash-card">
+              <h3 style="margin-bottom:12px;">QC 경고 현황</h3>
+              <div id="dash-qc-summary"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- USERS (사용자 관리: 학부모/학생/선생님) -->
+      <div class="view" id="users">
+        <h1>사용자 관리</h1>
+        <div class="top-tabs">
+          <div class="top-tab active" data-utop="u-parents" onclick="showUserTopTab('u-parents')">학부모</div>
+          <div class="top-tab" data-utop="u-students" onclick="showUserTopTab('u-students')">학생</div>
+          <div class="top-tab" data-utop="u-teachers" onclick="showUserTopTab('u-teachers')">선생님</div>
+        </div>
+        <div id="u-parents"></div>
+        <div id="u-students" style="display:none;"></div>
+        <div id="u-teachers" style="display:none;"></div>
+      </div>
+
+      <!-- USER DETAIL -->
+      <div class="view" id="user-detail">
+        <div class="back-link" onclick="showView('users')">← 사용자 관리로 돌아가기</div>
+        <div id="user-detail-body"></div>
+      </div>
+
+      <!-- CURRICULUM VIEWER (읽기전용, 매칭현황에서 진입) -->
+      <div class="view" id="admin-curriculum-view">
+        <div class="back-link" onclick="showView('users')">← 사용자 관리로 돌아가기</div>
+        <div id="admin-curriculum-view-body"></div>
+      </div>
+
+      <!-- LESSON DETAIL (읽기전용: 수업준비/VOD/수업자료/과제) -->
+      <div class="view" id="lesson-detail-admin">
+        <div class="back-link" onclick="showView('user-detail')">← 돌아가기</div>
+        <div id="lesson-detail-admin-body"></div>
+      </div>
+      <div class="view" id="student-problemlog-admin">
+        <div class="back-link" onclick="showView('user-detail')">← 돌아가기</div>
+        <div id="student-problemlog-admin-body"></div>
+      </div>
+      <div class="view" id="student-vocab-admin">
+        <div class="back-link" onclick="showView('user-detail')">← 돌아가기</div>
+        <div id="student-vocab-admin-body"></div>
+      </div>
+
+      <!-- MATCHING -->
+      <div class="view" id="matching">
+        <h1>매칭</h1>
+        <div class="page-sub">학생×과목×선생님을 매칭하고, 매칭 상태를 관리합니다.</div>
+        <button class="btn-primary" style="margin-bottom:16px;" onclick="openMatchForm()">+ 새 매칭</button>
+        <div id="match-form-area" style="margin-bottom:20px;"></div>
+        <div id="matching-list"></div>
+      </div>
+
+      <!-- CONSULT (상담: 상담현황 / 슬롯오픈 / 상담아카이브 / 회신자료) -->
+      <div class="view" id="consult">
+        <h1>상담</h1>
+        <div class="subtabs">
+          <div class="subtab active" data-sub="consult-status" onclick="showConsultSubtab('consult-status')">상담 현황</div>
+          <div class="subtab" data-sub="consult-slots" onclick="showConsultSubtab('consult-slots')">슬롯 오픈</div>
+          <div class="subtab" data-sub="consult-archive" onclick="showConsultSubtab('consult-archive')">상담 아카이브</div>
+          <div class="subtab" data-sub="consult-reply-materials" onclick="showConsultSubtab('consult-reply-materials')">상담 회신 자료</div>
+        </div>
+        <div class="subview" id="consult-slots">
+          <div class="page-sub">날짜를 클릭해 상담 가능 시간을 1시간 단위로 오픈하세요. (튜터 수업 가용시간과는 별개입니다)</div>
+          <div class="home-grid">
+            <div>
+              <div class="cal-card">
+                <div class="cal-head"><span>‹</span> 2026년 9월 <span>›</span></div>
+                <div class="cal-grid" id="consult-cal-grid"></div>
+              </div>
+            </div>
+            <div>
+              <div class="card" id="consult-day-panel"><h3>상담 시간 설정</h3><div id="consult-day-editor"><div class="empty-note">날짜를 선택하세요.</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subview active" id="consult-status">
+          <div class="page-sub">랜딩 페이지에서 접수된 상담 신청 현황입니다. 신청 접수 시 안내 이메일이 자동 발송됩니다.</div>
+          <div class="card" style="margin-bottom:20px;">
+            <h3>확정된 상담 일정</h3>
+            <div class="home-grid">
+              <div>
+                <div class="cal-card">
+                  <div class="cal-head"><span>‹</span> 2026년 9월 <span>›</span></div>
+                  <div class="cal-grid" id="status-consult-cal-grid"></div>
+                </div>
+              </div>
+              <div>
+                <div class="day-panel" style="margin-top:0;">
+                  <h3 id="status-consult-day-title">일정</h3>
+                  <div id="status-consult-day-panel"></div>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top:16px; padding-top:16px; border-top:1px solid var(--grey-200);">
+              <div style="font-size:13px; font-weight:800; color:var(--ink); margin-bottom:10px;">예정된 상담 (전체)</div>
+              <div id="upcoming-consults-list"></div>
+            </div>
+          </div>
+          <div style="font-size:15px; font-weight:800; color:var(--ink); margin:20px 0 10px;">일정 미확정 신청 건</div>
+          <div id="consult-status-list"></div>
+        </div>
+
+        <div class="subview" id="consult-archive">
+          <div class="page-sub">최초 상담 및 이후 학부모/선생님/학생과의 상담 내용이 자동으로 아카이빙됩니다.</div>
+          <div class="top-tabs">
+            <div class="top-tab active" data-atop="arc-all" onclick="showArchiveTopTab('arc-all')">전체</div>
+            <div class="top-tab" data-atop="arc-family" onclick="showArchiveTopTab('arc-family')">학생/학부모</div>
+            <div class="top-tab" data-atop="arc-teacher" onclick="showArchiveTopTab('arc-teacher')">선생님</div>
+          </div>
+          <div id="arc-all"></div>
+          <div id="arc-family" style="display:none;"></div>
+          <div id="arc-teacher" style="display:none;"></div>
+        </div>
+
+        <div class="subview" id="consult-reply-materials">
+          <div class="page-sub">여기에 등록해둔 자료와 이메일 템플릿이, 상담 신청이 접수되었을 때 자동으로 첨부되어 발송됩니다.</div>
+          <div class="card" style="max-width:600px; margin-bottom:16px;">
+            <h3>이메일 회신 템플릿</h3>
+            <textarea id="reply-email-template" rows="6" style="width:100%; padding:10px 12px; border:1.5px solid var(--grey-200); border-radius:8px; font-family:inherit; font-size:13px;"></textarea>
+            <button class="btn-sm" style="margin-top:10px;" onclick="saveReplyTemplate()">템플릿 저장</button>
+            <div id="reply-template-confirm"></div>
+          </div>
+          <div class="card" style="max-width:600px;">
+            <h3>첨부 자료</h3>
+            <div id="reply-materials-list"></div>
+            <label class="btn-sm" style="display:inline-block; margin-top:10px; cursor:pointer;">+ 자료 업로드<input type="file" style="display:none;" onchange="uploadReplyMaterial(this)"></label>
+          </div>
+        </div>
+      </div>
+      <div class="view" id="consult-detail">
+        <div class="back-link" onclick="showConsultSubtab('consult-archive')">← 상담 아카이브로 돌아가기</div>
+        <div id="consult-detail-body"></div>
+      </div>
+
+      <!-- CONSULT PREP -->
+      <div class="view" id="consult-prep">
+        <div class="back-link" onclick="showView('consult')">← 상담으로 돌아가기</div>
+        <div id="consult-prep-body"></div>
+      </div>
+
+      <!-- CONSULT LIVE (Zoom) -->
+      <div class="view" id="consult-live">
+        <div id="consult-live-body"></div>
+      </div>
+
+      <!-- CATALOG (커리큘럼 카탈로그: 과목템플릿 / 교재라이브러리 / 티칭포인트) -->
+      <div class="view" id="catalog">
+        <h1>커리큘럼</h1>
+        <div class="subtabs">
+          <div class="subtab active" data-sub="cat-subjects" onclick="showCatalogSubtab('cat-subjects')">과목 템플릿</div>
+          <div class="subtab" data-sub="cat-materials" onclick="showCatalogSubtab('cat-materials')">교재 라이브러리</div>
+          <div class="subtab" data-sub="cat-docs" onclick="showCatalogSubtab('cat-docs')">교재 문서</div>
+          <div class="subtab" data-sub="cat-approval" onclick="showCatalogSubtab('cat-approval')">승인 대기</div>
+        </div>
+        <div class="subview active" id="cat-subjects">
+          <button class="btn-sm" style="margin-bottom:14px;" onclick="addCatalogSubject()">+ 과목 추가</button>
+          <div id="cat-subjects-list"></div>
+        </div>
+        <div class="subview" id="cat-materials">
+          <div class="page-sub">과목 → 단원 → 교재 순서로 폴더처럼 탐색합니다. 교재를 클릭하면 실제 교재 화면으로 진입합니다. 새 교재는 "교재 문서" 탭에서 만들어 배포하세요.</div>
+          <div id="cat-materials-list"></div>
+        </div>
+        <div class="subview" id="cat-docs">
+          <div class="page-sub">칸아카데미 스타일의 목차+아티클 교재 문서를 만들고 편집합니다. 선생님이 만든 교재는 승인 후 배포됩니다.</div>
+          <div class="filter-row">
+            <select id="docs-filter" onchange="renderCurriculumDocsList()">
+              <option value="all">전체</option>
+              <option value="mine">관리자 작성</option>
+              <option value="teacher">선생님 작성</option>
+            </select>
+            <button class="btn-primary" onclick="openNewDocForm()">+ 새 교재 만들기</button>
+          </div>
+          <div id="curriculum-docs-list"></div>
+        </div>
+        <div class="subview" id="cat-approval">
+          <div class="page-sub">선생님이 배포 요청한 교재를 검토하고 승인/반려합니다.</div>
+          <div id="approval-queue-list"></div>
+        </div>
+      </div>
+      <div class="view" id="catalog-subject-detail">
+        <div class="back-link" onclick="showView('catalog')">← 카탈로그로 돌아가기</div>
+        <div id="catalog-subject-detail-body"></div>
+      </div>
+      <div class="view" id="catalog-material-detail">
+        <div class="back-link" onclick="showView('catalog')">← 카탈로그로 돌아가기</div>
+        <div id="catalog-material-detail-body"></div>
+      </div>
+      <!-- CURRICULUM DOC EDITOR (TOC+아티클 교재 에디터) -->
+      <div class="view" id="new-doc-form">
+        <div class="back-link" onclick="showView('catalog'); showCatalogSubtab('cat-docs')">← 교재 문서로 돌아가기</div>
+        <h1>새 교재 만들기</h1>
+        <div class="page-sub">제목, 과목, 단원을 먼저 정하고 시작하세요. 이후 편집 화면에서 섹션과 문제를 추가할 수 있습니다.</div>
+        <div class="card" style="max-width:560px;">
+          <div class="ro-label">제목</div>
+          <input type="text" id="newdoc-title" style="width:100%; padding:10px 12px; border:1.5px solid var(--grey-200); border-radius:8px; font-size:14px;" placeholder="예: Words in Context — 문맥 속 단어 완성">
+          <div class="ro-label" style="margin-top:14px;">과목</div>
+          <div class="category-select-row" id="newdoc-subject-btns"></div>
+          <div class="ro-label" style="margin-top:14px;">단원</div>
+          <div style="font-size:11.5px; color:var(--grey-500); margin-bottom:6px;">"과목 템플릿"에 등록된 회차 목록에서 선택합니다. 목록에 없다면 "과목 템플릿" 탭에서 먼저 추가하세요.</div>
+          <div class="category-select-row" id="newdoc-unit-btns"></div>
+          <div id="newdoc-warn" style="color:var(--red); font-size:12px; margin-top:8px;"></div>
+          <button class="btn-primary" style="margin-top:16px;" onclick="confirmCreateDoc()">만들기</button>
+        </div>
+      </div>
+      <div class="view" id="curriculum-doc-editor">
+        <div class="back-link" onclick="showView('catalog'); showCatalogSubtab('cat-docs')">← 교재 문서로 돌아가기</div>
+        <div id="curriculum-doc-editor-body"></div>
+      </div>
+      <div class="view" id="doc-preview">
+        <div class="back-link" onclick="showView('curriculum-doc-editor')">← 편집으로 돌아가기</div>
+        <div id="doc-preview-body"></div>
+      </div>
+
+      <!-- BILLING (수업권 & 결제) -->
+      <div class="view" id="billing">
+        <h1>수업권 & 결제</h1>
+        <div class="page-sub">가격 정책은 구매 단위와 무관하게 장당 $120로 고정되어 있습니다.</div>
+        <div class="card" style="max-width:520px; margin-bottom:20px;">
+          <h3>가격 정책</h3>
+          <div class="kv-row"><span>10장</span><span>$1,200</span></div>
+          <div class="kv-row"><span>20장</span><span>$2,400</span></div>
+          <div class="kv-row"><span>40장</span><span>$4,800</span></div>
+        </div>
+        <div style="font-size:15px; font-weight:800; color:var(--ink); margin:20px 0 10px;">학생별 수업권 현황 (클릭하면 학생 페이지에서 조정)</div>
+        <div id="billing-parents-list"></div>
+        <div style="font-size:15px; font-weight:800; color:var(--ink); margin:24px 0 10px;">조정 로그 (전체)</div>
+        <div id="credit-adjustment-log"></div>
+      </div>
+
+      <!-- CONTRACTS -->
+      <div class="view" id="contracts">
+        <h1>계약</h1>
+        <div class="page-sub">DocuSign 서명 상태를 총괄합니다.</div>
+        <div class="subtabs">
+          <div class="subtab active" data-sub="contracts-family" onclick="showContractsSubtab('contracts-family')">학부모/학생</div>
+          <div class="subtab" data-sub="contracts-teacher" onclick="showContractsSubtab('contracts-teacher')">선생님</div>
+        </div>
+        <div class="subview active" id="contracts-family"></div>
+        <div class="subview" id="contracts-teacher"></div>
+      </div>
+      <div class="view" id="contract-doc">
+        <div class="back-link" onclick="showView('contracts')">← 계약으로 돌아가기</div>
+        <div id="contract-doc-body"></div>
+      </div>
+
+      <!-- QC (QC경고 / 보충수업 / 학부모요청 / 메신저조회) -->
+      <div class="view" id="qc">
+        <h1>QC & 감사로그</h1>
+        <div class="subtabs">
+          <div class="subtab active" data-sub="qc-warnings" onclick="showQcSubtab('qc-warnings')">QC 경고</div>
+          <div class="subtab" data-sub="qc-makeup" onclick="showQcSubtab('qc-makeup')">보충수업 현황</div>
+          <div class="subtab" data-sub="qc-requests" onclick="showQcSubtab('qc-requests')">학부모 요청 아카이브</div>
+          <div class="subtab" data-sub="qc-messages" onclick="showQcSubtab('qc-messages')">메신저 조회</div>
+        </div>
+        <div class="subview active" id="qc-warnings"></div>
+        <div class="subview" id="qc-makeup">
+          <div class="filter-row">
+            <select id="makeup-filter-type" onchange="renderMakeupView()"><option value="student">학생별</option><option value="teacher">선생님별</option></select>
+          </div>
+          <div id="qc-makeup-list"></div>
+        </div>
+        <div class="subview" id="qc-requests">
+          <div class="filter-row">
+            <select id="reqfilter-type" onchange="renderQcRequests()"><option value="student">학생/학부모별</option><option value="teacher">선생님별</option></select>
+          </div>
+          <div id="qc-requests-list"></div>
+        </div>
+        <div class="subview" id="qc-messages">
+          <div class="filter-row">
+            <select id="msg-filter-teacher" onchange="renderMessagesView()"></select>
+          </div>
+          <div id="qc-messages-list"></div>
+        </div>
+      </div>
+      <div class="view" id="chat-detail">
+        <div class="back-link" onclick="showQcSubtab('qc-messages')">← 메신저 조회로 돌아가기</div>
+        <div id="chat-detail-body"></div>
+      </div>
+
+      <!-- PAYOUTS -->
+      <div class="view" id="payouts">
+        <h1>정산</h1>
+        <div class="page-sub">선생님별 KRW 페이아웃 현황과 기간별 수업 진행 내역입니다.</div>
+        <div class="filter-row">
+          <label style="font-size:12.5px; color:var(--grey-500);">기간</label>
+          <input type="date" id="payout-range-start" style="padding:8px 10px; border:1.5px solid var(--grey-200); border-radius:8px; font-size:12.5px;">
+          <span style="color:var(--grey-500);">~</span>
+          <input type="date" id="payout-range-end" style="padding:8px 10px; border:1.5px solid var(--grey-200); border-radius:8px; font-size:12.5px;">
+          <button class="btn-sm" onclick="applyPayoutRange()">적용</button>
+          <button class="btn-sm" onclick="setPayoutRangeLastMonth()">지난달로 재설정</button>
+        </div>
+        <div style="font-size:15px; font-weight:800; color:var(--ink); margin:16px 0 10px;">기간 내 수업 진행 내역</div>
+        <div id="payouts-sessions-summary" style="margin-bottom:24px;"></div>
+        <div style="font-size:15px; font-weight:800; color:var(--ink); margin:20px 0 10px;">페이아웃 현황</div>
+        <div id="payouts-list"></div>
+      </div>
+
+      <!-- DOCUMENTS (회사 문서 아카이브) -->
+      <div class="view" id="documents">
+        <h1>문서</h1>
+        <div class="page-sub">법인 설립 서류부터 계좌 정보까지, 회사의 모든 공식 문서를 이곳에 보관합니다.</div>
+        <div class="filter-row">
+          <select id="doc-category-filter" onchange="renderDocuments()"><option value="">전체 카테고리</option></select>
+        </div>
+        <div id="documents-list"></div>
+        <div class="card" style="max-width:480px; margin-top:20px;">
+          <h3>+ 문서 업로드</h3>
+          <div class="form-row"><label>카테고리</label><select id="doc-upload-category"></select></div>
+          <label class="btn-sm" style="display:inline-block; cursor:pointer;">파일 선택<input type="file" style="display:none;" onchange="uploadCompanyDoc(this)"></label>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+/* ================= DATA ================= */
+const TODAY = 7;
+const DOW_NAMES = ['일','월','화','수','목','금','토'];
+function dow(d){ return (2 + (d-1)) % 7; }
+function toClock(h){
+  h = ((h % 24) + 24) % 24;
+  const hh = Math.floor(h);
+  const mm = Math.round((h-hh)*60);
+  const ampm = hh < 12 ? '오전' : '오후';
+  let disp = hh % 12; if(disp===0) disp = 12;
+  return ampm+' '+disp+':'+(mm===0?'00':mm);
+}
+
+let PARENTS_T = [
+  {id:'p1', name:'김민지', email:'minji.kim@email.com', phone:'+1-650-555-0110', status:'active', children:['jihoon','seoah'], joinedAt:'2026-06-01',
+    paymentMethods:{primary:{brand:'Visa', last4:'4242', expiry:'08/28'}, backup:{brand:'Mastercard', last4:'1881', expiry:'11/27'}}},
+  {id:'p2', name:'최유진', email:'yujin.choi@email.com', phone:'+82-10-1234-5678', status:'pending', children:['haeun'], joinedAt:'2026-08-24',
+    paymentMethods:{primary:null, backup:null}}
+];
+let STUDENTS_ADMIN_T = [
+  {id:'jihoon', name:'지훈', grade:'10학년', parentId:'p1', status:'active', subjects:['SAT Math'], creditBalance:14, joinedAt:'2026-06-01'},
+  {id:'seoah', name:'이서아', grade:'11학년', parentId:'p1', status:'active', subjects:['SAT Math','SAT Verbal'], creditBalance:8, joinedAt:'2026-06-10'},
+  {id:'haeun', name:'최하은', grade:'9학년', parentId:'p2', status:'pending', subjects:[], creditBalance:0, joinedAt:'2026-08-24'}
+];
+let TEACHERS_ADMIN_T = [
+  {id:'t1', name:'박서연 선생님', email:'seoyeon.park@example.com', school:'서울대학교 수리과학부', status:'active', subjects:['SAT Math','SAT Verbal'], qcWarnings:1, joinedAt:'2026-05-20'},
+  {id:'t2', name:'이도현 선생님', email:'dohyun.lee@example.com', school:'연세대학교 화학과', status:'active', subjects:['AP Chemistry'], qcWarnings:0, joinedAt:'2026-06-15'}
+];
+
+let INVITES_T = [
+  {id:1, role:'parent', name:'박지수', email:'jisoo.park@email.com', status:'pending', sentAt:'2026-08-24'},
+  {id:2, role:'teacher', name:'정민수', email:'minsu.jung@example.com', status:'pending', sentAt:'2026-08-25'}
+];
+let nextInviteId = 3;
+
+let MATCHES_T = [
+  {id:1, studentId:'jihoon', subj:'SAT Math', teacherId:'t1', status:'active', createdAt:'2026-06-05'},
+  {id:2, studentId:'seoah', subj:'SAT Math', teacherId:'t1', status:'active', createdAt:'2026-06-10'},
+  {id:3, studentId:'seoah', subj:'SAT Verbal', teacherId:'t1', status:'active', createdAt:'2026-07-01'}
+];
+let nextMatchId = 4;
+
+/* 선생님이 실제로 구성한 커리큘럼의 읽기전용 미러 — 매칭현황에서 진입해 확인 */
+const CURRICULA_ADMIN_T = {
+  'jihoon_SAT Math': {total:12, current:8, sessions:[
+    {n:1, unit:'함수의 기초와 그래프 해석', status:'done'},
+    {n:2, unit:'이차방정식과 이차함수', status:'done'},
+    {n:3, unit:'다항식과 인수분해', status:'done'},
+    {n:4, unit:'지수함수와 로그함수', status:'done'},
+    {n:5, unit:'데이터 분석과 통계 기초', status:'done'},
+    {n:6, unit:'기하와 좌표평면', status:'done'},
+    {n:7, unit:'이차방정식 응용 문제 (1)', status:'done'},
+    {n:8, unit:'이차방정식 응용 문제 심화', status:'progress'},
+    {n:9, unit:'함수의 합성과 역함수', status:'upcoming'},
+    {n:10, unit:'문제풀이 전략과 시간관리', status:'upcoming'},
+    {n:11, unit:'실전 모의고사 분석 (1)', status:'upcoming'},
+    {n:12, unit:'실전 모의고사 분석 (2) 및 마무리', status:'upcoming'}
+  ]},
+  'seoah_SAT Math': {total:12, current:4, sessions:[
+    {n:1, unit:'함수의 기초와 그래프 해석', status:'done'},
+    {n:2, unit:'이차방정식과 이차함수', status:'done'},
+    {n:3, unit:'다항식과 인수분해', status:'done'},
+    {n:4, unit:'지수함수와 로그함수', status:'progress'},
+    {n:5, unit:'데이터 분석과 통계 기초', status:'upcoming'},
+    {n:6, unit:'기하와 좌표평면', status:'upcoming'}
+  ]},
+  'seoah_SAT Verbal': {total:10, current:1, sessions:[
+    {n:1, unit:'독해 지문 유형 파악', status:'progress'}
+  ]}
+};
+
+/* 학생/선생님 포털에서 보이는 것과 동일한 수업 단위 자료 — 관리자가 읽기전용으로 조회 */
+const LESSON_HISTORY_T = [
+  {id:1, studentId:'jihoon', teacherId:'t1', subj:'SAT Math', session:7, day:3, done:true,
+    unit:'이차방정식 응용 문제 (1)', teacherComment:'실수 유형 확인 회차', materials:['이차방정식'],
+    assignments:[{title:'이차방정식 응용 문제 10선', studentAnswer:'2번, 5번 문제가 헷갈렸어요. 판별식 계산에서 실수했습니다.', graded:true, score:'8/10'}],
+    vod:true},
+  {id:2, studentId:'jihoon', teacherId:'t1', subj:'SAT Math', session:8, day:8, done:false,
+    unit:'이차방정식 응용 문제 심화', teacherComment:'보강 세션 · 실수 유형 집중 교정', materials:['이차방정식 심화'],
+    assignments:[{title:'이차방정식 실전 문제 5선', studentAnswer:'', graded:false, score:null}],
+    vod:false},
+  {id:3, studentId:'jihoon', teacherId:'t1', subj:'SAT Math', session:9, day:12, done:false,
+    unit:'함수의 합성과 역함수', teacherComment:'', materials:[], assignments:[], vod:false},
+  {id:4, studentId:'seoah', teacherId:'t1', subj:'SAT Math', session:4, day:15, done:false,
+    unit:'지수함수와 로그함수', teacherComment:'', materials:['지수·로그'],
+    assignments:[{title:'지수함수 기초 문제 5선', studentAnswer:'', graded:false, score:null}],
+    vod:false},
+  {id:5, studentId:'seoah', teacherId:'t1', subj:'SAT Math', session:1, day:1, done:true,
+    unit:'함수의 기초와 그래프 해석', teacherComment:'진단 결과 기반 시작 단원', materials:['함수 기초'],
+    assignments:[{title:'함수 기초 개념 확인', studentAnswer:'전체 다 풀었습니다.', graded:true, score:'5/5'}],
+    vod:true},
+  {id:6, studentId:'seoah', teacherId:'t1', subj:'SAT Verbal', session:1, day:6, done:false,
+    unit:'독해 지문 유형 파악', teacherComment:'', materials:['독해 기초'], assignments:[], vod:false}
+];
+function computeStudentStats(studentId){
+  const lessons = LESSON_HISTORY_T.filter(l=>l.studentId===studentId);
+  const done = lessons.filter(l=>l.done);
+  const totalAssign = lessons.reduce((sum,l)=>sum+l.assignments.length,0);
+  const gradedAssign = lessons.reduce((sum,l)=>sum+l.assignments.filter(a=>a.graded).length,0);
+  return {
+    totalLessons: lessons.length, completedLessons: done.length,
+    completionRate: lessons.length ? Math.round(done.length/lessons.length*100) : 0,
+    assignmentSubmitRate: totalAssign ? Math.round(gradedAssign/totalAssign*100) : 0
+  };
+}
+function renderLessonRowAdmin(l){
+  return '<div class="list-row" style="cursor:pointer;" onclick="openLessonDetailAdmin('+l.id+')">'+
+    '<span>9월 '+l.day+'일 · '+studentName(l.studentId)+' · '+l.subj+' · '+l.session+'회차 · '+l.unit+'</span>'+
+    '<span class="status-pill '+(l.done?'status-active':'status-pending')+'">'+(l.done?'완료':'예정')+'</span></div>';
+}
+
+let CONSULT_RANGES_T = { 9:{start:14,end:17}, 14:{start:10,end:13}, 21:{start:14,end:16} };
+function deriveConsultSlots(range){
+  if(!range) return [];
+  const slots = [];
+  for(let h=range.start; h<range.end; h+=1) slots.push(h);
+  return slots;
+}
+let consultSelectedDay = null;
+
+/* 상담 통합 데이터베이스 — 신청부터 완료까지 하나의 레코드에 계속 누적됨 */
+let CONSULTS_DB_T = [
+  {id:1, category:'family', personName:'박지수', type:'최초 상담', email:'jisoo.park@email.com', phone:'+1-408-555-0199', studentGrade:'9학년',
+    concerns:'SAT Math 점수가 잘 안 오르고 있어요. 기초부터 다시 잡아야 할지 고민입니다.',
+    submittedAt:'2026-08-24', status:'confirmed', emailSent:true,
+    replySummary:'박지수님이 회신을 주셨습니다 — 제안된 9월 9일 오후 2시에 참석 가능하다고 확인하셨습니다.',
+    scheduledDay:9, scheduledHour:14, zoomLink:'https://zoom.us/j/1234567890',
+    attachments:['박지수_학생_성적표.pdf','SAT_진단테스트_결과.pdf'],
+    prepMaterial:null, meetingNotes:null, completedAt:null},
+  {id:2, category:'family', personName:'최유진', type:'최초 상담', email:'yujin.choi@email.com', phone:'+82-10-1234-5678', studentGrade:'9학년',
+    concerns:'AP Chemistry 선행이 필요한지 궁금합니다.',
+    submittedAt:'2026-08-15', status:'completed', emailSent:true,
+    replySummary:'AP Chemistry 선행보다는 학교 진도에 맞춰 기초를 다지는 것을 권장. 겨울방학부터 선행 고려하기로 확인.',
+    scheduledDay:20, scheduledHour:11, zoomLink:'https://zoom.us/j/1234567891',
+    attachments:['최유진_학부모_문의메일_첨부.pdf'],
+    prepMaterial:{title:'최유진 상담 준비자료.pdf', generatedAt:'2026-08-19'},
+    meetingNotes:'AP Chemistry 선행보다는 학교 진도에 맞춰 기초를 다지는 것을 권장. 겨울방학부터 선행 고려. 최하은 학생 SAT Math/Verbal 동시 진행 제안.',
+    completedAt:'2026-08-20'},
+  {id:6, category:'family', personName:'최유진', type:'학부모 상담', email:'yujin.choi@email.com', phone:'+82-10-1234-5678', studentGrade:'9학년',
+    concerns:'최초 상담 이후 진행 상황 점검 — 겨울방학 선행 계획 재논의.',
+    submittedAt:'2026-08-28', status:'completed', emailSent:false, replySummary:null,
+    scheduledDay:28, scheduledHour:15, zoomLink:'https://zoom.us/j/1234567899',
+    attachments:[], prepMaterial:null,
+    meetingNotes:'겨울방학 AP Chemistry 선행 계획을 구체화. 12월 첫째 주부터 시작하기로 확정.',
+    completedAt:'2026-08-28'},
+  {id:3, category:'family', personName:'김민지 학부모님', type:'학부모 상담', email:'minji.kim@email.com', phone:'+1-650-555-0110', studentGrade:'-',
+    concerns:'진도 관련 문의 — 8회차부터 과제량 조정 요청.',
+    submittedAt:'2026-08-25', status:'completed', emailSent:false, replySummary:null,
+    scheduledDay:25, scheduledHour:15, zoomLink:'https://zoom.us/j/1234567892',
+    attachments:[], prepMaterial:null,
+    meetingNotes:'진도 관련 문의 — 8회차부터 과제량 조정 요청. 선생님에게 전달 완료.',
+    completedAt:'2026-08-25'},
+  {id:4, category:'teacher', personName:'박서연 선생님', type:'선생님 상담', email:'seoyeon.park@example.com', phone:'-', studentGrade:'-',
+    concerns:'신규 학생 배정 관련 온보딩 안내.',
+    submittedAt:'2026-08-22', status:'completed', emailSent:false, replySummary:null,
+    scheduledDay:22, scheduledHour:10, zoomLink:'https://zoom.us/j/1234567893',
+    attachments:[], prepMaterial:null,
+    meetingNotes:'신규 학생 배정 관련 온보딩 안내.',
+    completedAt:'2026-08-22'},
+  {id:5, category:'family', personName:'정하윤', type:'최초 상담', email:'hayoon.jung@email.com', phone:'+1-408-555-0250', studentGrade:'10학년',
+    concerns:'SAT 첫 응시를 앞두고 전반적인 학습 로드맵이 궁금합니다.',
+    submittedAt:'2026-09-05', status:'requested', emailSent:true, replySummary:null,
+    scheduledDay:null, scheduledHour:null, zoomLink:null,
+    attachments:[], prepMaterial:null, meetingNotes:null, completedAt:null}
+];
+let nextConsultDbId = 7;
+let currentConsultId = null;
+
+let REPLY_MATERIALS_T = [
+  {id:1, name:'Alton Education 소개자료.pdf'},
+  {id:2, name:'SAT 커리큘럼 안내.pdf'}
+];
+let nextReplyMatId = 3;
+let REPLY_EMAIL_TEMPLATE = '안녕하세요, {학부모명}님\n\nAlton Education에 상담을 신청해주셔서 감사합니다. 첨부된 자료를 참고해주시고, 회신 주시면 상담 일정을 확정하겠습니다.\n\n감사합니다.';
+
+/* 회사 문서 아카이브 (법인 설립, 계좌 정보, 세무, 계약 템플릿 등) */
+const DOC_CATEGORIES = ['법인 설립','계좌 정보','세무','계약 템플릿','기타'];
+let COMPANY_DOCS_T = [
+  {id:1, category:'법인 설립', name:'Alton Education Inc. 정관.pdf', uploadedAt:'2026-06-01'},
+  {id:2, category:'법인 설립', name:'Delaware C-Corp 설립 확인서.pdf', uploadedAt:'2026-06-01'},
+  {id:3, category:'계좌 정보', name:'Chase Business 계좌 개설 확인서.pdf', uploadedAt:'2026-06-05'},
+  {id:4, category:'세무', name:'EIN 확인서.pdf', uploadedAt:'2026-06-01'}
+];
+let nextDocId = 5;
+
+let CATALOG_SUBJECTS_T = {
+  'SAT Math': [
+    {unit:'함수의 기초와 그래프 해석', note:'함수의 정의역과 치역, 그래프 해석의 기초를 다룹니다.'},
+    {unit:'이차방정식과 이차함수', note:'이차방정식의 판별식과 이차함수 그래프의 관계를 학습합니다.'},
+    {unit:'다항식과 인수분해', note:'다항식의 전개와 인수분해 공식을 정리합니다.'},
+    {unit:'지수함수와 로그함수', note:'지수법칙과 로그의 성질을 SAT 문제에 적용합니다.'},
+    {unit:'데이터 분석과 통계 기초', note:'평균, 표준편차 등 기초 통계 개념을 다룹니다.'},
+    {unit:'기하와 좌표평면', note:'좌표평면 위 도형의 성질과 거리·중점 공식을 다룹니다.'},
+    {unit:'이차방정식 응용 문제 (1)', note:'실전 SAT 스타일 문장제 문제를 다룹니다.'},
+    {unit:'이차방정식 응용 문제 심화', note:'검산 습관을 집중적으로 훈련하는 심화 회차입니다.'},
+    {unit:'함수의 합성과 역함수', note:'합성함수와 역함수의 정의 및 그래프 관계를 다룹니다.'},
+    {unit:'문제풀이 전략과 시간관리', note:'실전 시험에서의 시간 배분과 문제풀이 순서를 연습합니다.'},
+    {unit:'실전 모의고사 분석 (1)', note:'최근 모의고사 결과를 바탕으로 취약 단원을 분석합니다.'},
+    {unit:'실전 모의고사 분석 (2) 및 마무리', note:'전체 과정을 마무리하며 최종 점검을 진행합니다.'}
+  ],
+  'SAT Verbal': [
+    {unit:'독해 지문 유형 파악', note:'설명문/논증문/서사문 등 지문 유형별 접근법을 다룹니다.'},
+    {unit:'어휘 전략 기초', note:'문맥을 통한 어휘 추론 전략을 학습합니다.'},
+    {unit:'독해 지문 구조 분석', note:'지문의 서론-본론-결론 구조와 주제문 찾기를 연습합니다.'},
+    {unit:'근거 기반 독해', note:'질문에 대한 근거를 지문에서 정확히 찾는 연습을 합니다.'},
+    {unit:'문법 규칙 정리', note:'SAT Writing에서 자주 나오는 문법 규칙을 정리합니다.'}
+  ],
+  'AP Calculus BC': [
+    {unit:'극한과 연속성', note:'극한의 정의와 연속함수의 성질을 다룹니다.'},
+    {unit:'도함수의 정의', note:'도함수의 정의와 기본 미분법을 학습합니다.'},
+    {unit:'미분법 기초', note:'곱의 법칙, 연쇄법칙 등 기초 미분법을 연습합니다.'},
+    {unit:'미분 응용', note:'극값, 변곡점 등 미분의 응용 문제를 다룹니다.'},
+    {unit:'적분의 기초', note:'부정적분과 정적분의 기본 개념을 학습합니다.'},
+    {unit:'적분의 활용', note:'넓이, 부피 계산 등 적분의 활용을 다룹니다.'}
+  ],
+  'AP Chemistry': [
+    {unit:'원자구조와 주기율', note:'원자 모형과 주기율표의 경향성을 학습합니다.'},
+    {unit:'화학결합', note:'이온결합, 공유결합의 특성과 분자 구조를 다룹니다.'},
+    {unit:'몰과 화학반응식', note:'몰 개념과 화학반응식의 균형을 연습합니다.'},
+    {unit:'기체의 법칙', note:'이상기체 방정식과 기체 법칙들을 학습합니다.'}
+  ]
+};
+Object.keys(CATALOG_SUBJECTS_T).forEach(subj=>{
+  CATALOG_SUBJECTS_T[subj].forEach(w=>{
+    if(!w.materials) w.materials = [];
+    if(!w.files) w.files = [];
+    if(!w.assignments) w.assignments = [];
+  });
+});
+CATALOG_SUBJECTS_T['SAT Math'][6].materials = ['이차방정식'];
+CATALOG_SUBJECTS_T['SAT Math'][6].assignments = [{id:'catA1', title:'이차방정식 응용 문제 10선', content:'SAT 스타일 이차방정식 응용 문제 10개를 풀어보세요.'}];
+CATALOG_SUBJECTS_T['SAT Math'][7].materials = ['이차방정식 심화'];
+CATALOG_SUBJECTS_T['SAT Math'][7].assignments = [{id:'catA2', title:'이차방정식 심화 문제', content:'검산 과정을 함께 적으며 문제 5개를 풀어보세요.'}];
+
+let MATERIALS_CATALOG_T = {
+  'SAT Math': {
+    '함수 기초': [{title:'함수의 기초와 그래프 해석 (PDF)', pages:['<b>함수의 정의</b><br>정의역과 치역을 명확히 구분합니다.']}],
+    '이차방정식': [{title:'이차방정식 응용 — 핵심 개념 (PDF)', pages:['<b>판별식</b><br>D = b² − 4ac','<b>응용 접근법</b><br>문장제를 방정식으로 변환합니다.']}],
+    '이차방정식 심화': [{title:'이차방정식 심화 — 검산법 (PDF)', pages:['<b>검산 3단계</b><br>대입 → 비교 → 재확인']}],
+    '지수·로그': [{title:'지수함수와 로그함수 기초 (PDF)', pages:['<b>지수법칙</b><br>a^m × a^n = a^(m+n)']}]
+  },
+  'SAT Verbal': {
+    '독해 기초': [{title:'독해 지문 유형 정리 (PDF)', pages:['<b>지문 유형</b><br>설명문/논증문/서사문으로 구분해 접근합니다.']}]
+  }
+};
+
+/* 교재 문서 (TOC+아티클 형식). owner='admin' 이면 관리자 소유(직접 배포 가능), 그 외에는 선생님ID(배포 시 승인 필요) */
+let CURRICULUM_DOCS_T = [
+  {id:'doc1', title:'Words in Context — Logical and Precise Word Completion', subject:'SAT Reading & Writing', unit:'Words in Context',
+    owner:'admin', ownerName:'관리자', status:'published', updatedAt:'2026-09-01', adoptedBy:['t1'],
+    sections:[
+      {id:'s1', title:'Lesson Overview', body:'Learn to complete a blank with the most logical and precise word or phrase.', tip:'학생에게 첫 문장을 소리내어 읽게 하세요.', problems:[]},
+      {id:'s2', title:'The Alton 5-Step Strategy', body:'Do not begin with the answer choices. Begin with the passage\'s logic. 1) Read for logic 2) Define the blank\'s job 3) Predict before choices 4) Test every option 5) Choose the most precise fit.', tip:'5단계를 학생이 직접 소리내어 말하게 하세요.', problems:[]},
+      {id:'s3', title:'Teacher Modeling', body:'Listen for the decision process, not just the definition of each word.', tip:'선생님이 먼저 풀이 과정을 시연하는 회차입니다.',
+        problems:[{id:'p1', format:'mc', passage:"Biologists have often assumed that traffic noise disrupts the breeding calls of tree frogs. However, a study found no consistent difference. Rather than confirming the prevailing assumption, the study's findings ______ it.",
+          options:['reinforce','complicate','publicize','imitate'], correctIndex:1, explanation:'"Rather than confirming"이 대조를 신호합니다. complicate가 정답입니다.'}]}
+    ]},
+  {id:'doc2', title:'이차방정식 나만의 정리', subject:'SAT Math', unit:'이차방정식',
+    owner:'t1', ownerName:'박서연 선생님', status:'pending_approval', updatedAt:'2026-09-05', adoptedBy:[],
+    sections:[
+      {id:'s1', title:'판별식 복습', body:'D = b² − 4ac 공식을 다양한 예제로 복습합니다.', tip:'', problems:[]}
+    ]},
+  {id:'doc3', title:'AP Chemistry 몰 개념 정리', subject:'AP Chemistry', unit:'화학양론',
+    owner:'t2', ownerName:'이도현 선생님', status:'published', updatedAt:'2026-08-20', adoptedBy:['t1'],
+    sections:[
+      {id:'s1', title:'몰의 정의', body:'몰(mol)은 아보가드로 수만큼의 입자를 나타내는 단위입니다.', tip:'실생활 비유(더즌 개념)로 설명하면 좋습니다.', problems:[]}
+    ]}
+];
+let nextCurriculumDocId = 4;
+let nextDocSectionId = 1;
+let currentCurriculumDocId = null;
+let docDraftSections = [];
+
+const ADJUSTMENT_CATEGORIES = ['환불','굿윌','오류정정','기타'];
+let CREDIT_ADJUSTMENTS_T = [
+  {id:1, studentId:'jihoon', delta:2, category:'굿윌', reason:'선생님 지각으로 인한 보상 크레딧', admin:'관리자', time:'8월 20일'}
+];
+let nextAdjId = 2;
+
+const CONTRACTS_T = [
+  {id:1, type:'family', parentName:'김민지', studentNames:'지훈, 이서아', status:'signed', signedAt:'2026-06-02',
+    docContent:'서비스 이용 계약서\n\n계약 당사자: Alton Education Inc. (이하 "회사")와 김민지 (이하 "학부모")\n학생: 지훈, 이서아\n\n제1조 (목적)\n본 계약은 회사가 제공하는 온라인 SAT/AP 개인 교습 서비스의 이용 조건을 정함을 목적으로 한다.\n\n제2조 (수업권)\n학부모는 수업권을 구매하여 자녀의 수업에 사용하며, 수업권은 구매일로부터 12개월간 유효하다.\n\n제3조 (취소 정책)\n수업 24시간 전 취소 시 수업권이 전액 보존되며, 그 외 취소는 회사 정책에 따른다.\n\n서명: 김민지 (전자서명 완료 2026-06-02)'},
+  {id:2, type:'family', parentName:'최유진', studentNames:'최하은', status:'pending', signedAt:null,
+    docContent:'서비스 이용 계약서 (서명 대기)\n\n계약 당사자: Alton Education Inc. (이하 "회사")와 최유진 (이하 "학부모")\n학생: 최하은\n\n계약서가 DocuSign을 통해 발송되었으며, 학부모의 서명을 기다리고 있습니다.'}
+];
+const TEACHER_CONTRACTS_T = [
+  {id:1, teacherId:'t1', docType:'튜터 계약서 + W-8BEN', status:'signed', signedAt:'2026-05-22',
+    docContent:'튜터 계약서\n\n계약 당사자: Alton Education Inc. (이하 "회사")와 박서연 (이하 "튜터")\n\n제1조 (용역 내용)\n튜터는 대한민국 내에서 원격으로 SAT Math, SAT Verbal 과목의 개인 교습 서비스를 제공한다.\n\n제2조 (보수)\n보수는 진행된 수업 시간에 기반하여 산정되며, 매월 정산 후 Wise를 통해 KRW로 지급된다.\n\n제3조 (지적재산권)\n튜터가 작성한 모든 교재 및 강의 자료의 저작권은 회사에 귀속되며, 튜터는 이에 대한 접근 통제 의무를 진다.\n\n첨부: W-8BEN (해외 인적용역 원천징수 면제 신고서)\n\n서명: 박서연 (전자서명 완료 2026-05-22)'},
+  {id:2, teacherId:'t2', docType:'튜터 계약서 + W-8BEN', status:'pending', signedAt:null,
+    docContent:'튜터 계약서 (서명 대기)\n\n계약 당사자: Alton Education Inc. (이하 "회사")와 이도현 (이하 "튜터")\n\n계약서가 발송되었으며, 튜터의 서명을 기다리고 있습니다.'}
+];
+
+const QC_WARNINGS_T = [
+  {id:1, teacherId:'t1', studentId:'jihoon', type:'갑작스런 취소', detail:'수업 3시간 전 취소', date:'2026-08-15', time:'오후 4:00', subj:'SAT Math'},
+  {id:2, teacherId:'t1', studentId:'seoah', type:'지각', detail:'12분 지각', date:'2026-08-22', time:'오전 10:00', subj:'SAT Math'}
+];
+
+let MAKEUP_STATUS_T = [
+  {studentId:'jihoon', teacherId:'t1', count:0}
+];
+
+let PARENT_REQUESTS_ADMIN_T = [
+  {id:1, studentName:'지훈', parentName:'김민지 학부모님', teacherName:'박서연 선생님', text:'요즘 숙제량이 많아서 조금 부담스러워하는 것 같아요. 조절 가능할까요?', time:'2일 전'},
+  {id:2, studentName:'이서아', parentName:'김민지 학부모님', teacherName:'박서연 선생님', text:'다음 주에 학교 시험이 있어서 이번 주는 숙제를 조금만 내주시면 감사하겠습니다.', time:'5일 전'}
+];
+
+const CHATS_T = {
+  't1_jihoon': [
+    {from:'teacher', text:'지훈아 오늘 8회차 숙제 꼭 제출해줘!', time:'9/5 14:20'},
+    {from:'student', text:'네 선생님 지금 하고 있어요!', time:'9/5 14:25'},
+    {from:'teacher', text:'좋아, 모르는 부분 있으면 수업 준비 페이지에 요청 남겨줘', time:'9/5 14:26'}
+  ],
+  't1_seoah': [
+    {from:'teacher', text:'서아야 다음 수업 전에 지수법칙 한번 복습해오면 좋을 것 같아', time:'9/3 10:00'},
+    {from:'student', text:'네 알겠습니다 선생님!', time:'9/3 10:05'}
+  ]
+};
+
+const PAYOUTS_T = [
+  {teacherId:'t1', amount:452000, status:'완료', date:'2026-09-05'},
+  {teacherId:'t1', amount:398000, status:'대기', date:'2026-10-05'},
+  {teacherId:'t2', amount:210000, status:'대기', date:'2026-10-05'}
+];
+
+const SESSIONS_LOG_T = [
+  {teacherId:'t1', studentId:'jihoon', subj:'SAT Math', date:'2026-08-03', session:5},
+  {teacherId:'t1', studentId:'jihoon', subj:'SAT Math', date:'2026-08-10', session:6},
+  {teacherId:'t1', studentId:'jihoon', subj:'SAT Math', date:'2026-08-17', session:7},
+  {teacherId:'t1', studentId:'seoah', subj:'SAT Math', date:'2026-08-05', session:2},
+  {teacherId:'t1', studentId:'seoah', subj:'SAT Math', date:'2026-08-19', session:3},
+  {teacherId:'t1', studentId:'jihoon', subj:'SAT Math', date:'2026-09-03', session:8},
+  {teacherId:'t2', studentId:'haeun', subj:'AP Chemistry', date:'2026-08-12', session:1}
+];
+let payoutRangeStart = '2026-08-01';
+let payoutRangeEnd = '2026-08-31';
+
+let NOTIFICATIONS = [
+  {id:1, text:'새로운 상담 요청이 접수되었습니다.', time:'1시간 전', read:false},
+  {id:2, text:'박서연 선생님에게 QC 경고가 1회 누적되었습니다.', time:'3일 전', read:true}
+];
+
+/* ================= HELPERS ================= */
+function studentName(id){ const s = STUDENTS_ADMIN_T.find(x=>x.id===id); return s ? s.name : id; }
+function parentName(id){ const p = PARENTS_T.find(x=>x.id===id); return p ? p.name : id; }
+function teacherName(id){ const t = TEACHERS_ADMIN_T.find(x=>x.id===id); return t ? t.name : id; }
+
+/* ================= NOTIFICATIONS / ACCOUNT ================= */
+function renderBell(){
+  const badge = document.getElementById('bell-badge');
+  const unread = NOTIFICATIONS.filter(n=>!n.read).length;
+  if(unread){ badge.style.display='inline-block'; badge.textContent=unread; } else { badge.style.display='none'; }
+  document.getElementById('notif-menu').innerHTML = NOTIFICATIONS.length ? NOTIFICATIONS.map(n=>
+    '<div class="notif-item'+(n.read?'':' unread')+'">'+n.text+'<div class="notif-time">'+n.time+'</div></div>'
+  ).join('') : '<div class="empty-note" style="padding:16px 0;">알림이 없습니다.</div>';
+}
+function toggleNotif(){
+  const menu = document.getElementById('notif-menu');
+  const opening = !menu.classList.contains('open');
+  menu.classList.toggle('open');
+  document.getElementById('account-menu').classList.remove('open');
+  if(opening){ NOTIFICATIONS.forEach(n=>n.read=true); renderBell(); }
+}
+function toggleAccountMenu(){
+  document.getElementById('account-menu').classList.toggle('open');
+  document.getElementById('notif-menu').classList.remove('open');
+}
+
+/* ================= VIEW SWITCH ================= */
+function showView(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.is-item').forEach(i=>i.classList.remove('active'));
+  const navMap = {
+    'user-detail':'users', 'admin-curriculum-view':'users', 'lesson-detail-admin':'users', 'matching':'matching',
+    'student-problemlog-admin':'users', 'student-vocab-admin':'users',
+    'consult-detail':'consult', 'consult-prep':'consult', 'consult-live':'consult',
+    'catalog-subject-detail':'catalog', 'catalog-material-detail':'catalog', 'curriculum-doc-editor':'catalog',
+    'new-doc-form':'catalog', 'doc-preview':'catalog',
+    'chat-detail':'qc', 'contract-doc':'contracts'
+  };
+  const navKey = navMap[id] || id;
+  const nav = document.querySelector('.is-item[data-nav="'+navKey+'"]');
+  if(nav) nav.classList.add('active');
+  document.getElementById('account-menu').classList.remove('open');
+  document.getElementById('notif-menu').classList.remove('open');
+}
+function showUserTopTab(id){
+  document.querySelectorAll('#users .top-tab').forEach(t=>t.classList.toggle('active', t.dataset.utop===id));
+  ['u-parents','u-students','u-teachers'].forEach(v=>{
+    document.getElementById(v).style.display = (v===id) ? 'block' : 'none';
+  });
+}
+function showConsultSubtab(id){
+  document.querySelectorAll('#consult .subview').forEach(v=>v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('#consult .subtab').forEach(t=>t.classList.remove('active'));
+  document.querySelector('#consult .subtab[data-sub="'+id+'"]').classList.add('active');
+  if(id==='consult-status') renderConsultStatus();
+  if(id==='consult-archive') renderConsultArchive();
+  if(id==='consult-reply-materials') renderReplyMaterials();
+}
+function showArchiveTopTab(id){
+  document.querySelectorAll('#consult-archive .top-tab').forEach(t=>t.classList.toggle('active', t.dataset.atop===id));
+  ['arc-all','arc-family','arc-teacher'].forEach(v=>{
+    document.getElementById(v).style.display = (v===id) ? 'block' : 'none';
+  });
+}
+function showCatalogSubtab(id){
+  document.querySelectorAll('#catalog .subview').forEach(v=>v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('#catalog .subtab').forEach(t=>t.classList.remove('active'));
+  document.querySelector('#catalog .subtab[data-sub="'+id+'"]').classList.add('active');
+  if(id==='cat-docs') renderCurriculumDocsList();
+  if(id==='cat-approval') renderApprovalQueue();
+  if(id==='cat-materials') renderCatalogMaterials();
+}
+function showQcSubtab(id){
+  document.querySelectorAll('#qc .subview').forEach(v=>v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('#qc .subtab').forEach(t=>t.classList.remove('active'));
+  document.querySelector('#qc .subtab[data-sub="'+id+'"]').classList.add('active');
+  if(id==='qc-makeup') renderMakeupView();
+  if(id==='qc-requests') renderQcRequests();
+  if(id==='qc-messages') renderMessagesView();
+}
+
+/* ================= HOME DASHBOARD ================= */
+function renderDashboard(){
+  const pendingReqs = CONSULTS_DB_T.filter(r=>r.status==='requested');
+  document.getElementById('dash-consult-requests').innerHTML = pendingReqs.length ? pendingReqs.map(r=>
+    '<div class="dash-alert-row"><span>'+r.personName+' · '+r.submittedAt+' 신청</span><span class="chip-btn" onclick="showView(\'consult\'); showConsultSubtab(\'consult-status\')">보기</span></div>'
+  ).join('') : '<div class="empty-note">대기 중인 상담 요청이 없습니다.</div>';
+  renderHomeConsultCalendar();
+  const nextDay = CONSULTS_DB_T.filter(c=>c.scheduledDay).sort((a,b)=>a.scheduledDay-b.scheduledDay)[0];
+  if(nextDay) pickHomeConsultDay(nextDay.scheduledDay);
+
+  const pendingInv = INVITES_T.filter(i=>i.status==='pending');
+  document.getElementById('dash-pending-invites').innerHTML = '<div class="dash-count">'+pendingInv.length+'</div><div style="font-size:12px; color:var(--grey-500);">건 대기 중</div>';
+
+  const failedParents = PARENTS_T.filter(p=>!p.paymentMethods.primary);
+  document.getElementById('dash-payment-failures').innerHTML = '<div class="dash-count">'+failedParents.length+'</div><div style="font-size:12px; color:var(--grey-500);">건 결제수단 미등록</div>';
+
+  const pendingMatches = STUDENTS_ADMIN_T.filter(s=>s.status==='pending').length;
+  document.getElementById('dash-matching-requests').innerHTML = '<div class="dash-count">'+pendingMatches+'</div><div style="font-size:12px; color:var(--grey-500);">건 매칭 대기</div>';
+
+  document.getElementById('dash-qc-summary').innerHTML = TEACHERS_ADMIN_T.map(t=>
+    '<div class="kv-row"><span>'+t.name+'</span><span>'+(t.qcWarnings>0?'<span class="status-pill status-danger">경고 '+t.qcWarnings+'회</span>':'<span class="status-pill status-active">정상</span>')+'</span></div>'
+  ).join('');
+}
+
+/* ================= USERS: 학부모/학생/선생님 ================= */
+function renderUsers(){
+  document.getElementById('u-parents').innerHTML =
+    '<table class="data-table"><thead><tr><th>이름</th><th>이메일</th><th>자녀</th><th>상태</th><th></th></tr></thead><tbody>'+
+    PARENTS_T.map(p=>
+      '<tr class="clickable" onclick="openUserDetail(\'parent\',\''+p.id+'\')"><td><b>'+p.name+'</b></td><td>'+p.email+'</td>'+
+      '<td>'+p.children.map(c=>studentName(c)).join(', ')+'</td>'+
+      '<td>'+statusPill(p.status)+'</td><td class="action-link" onclick="event.stopPropagation()">상세 →</td></tr>'
+    ).join('')+'</tbody></table>'+
+    '<button class="btn-sm" style="margin-top:14px;" onclick="openInviteForm(\'parent\')">+ 학부모 초대</button>';
+
+  document.getElementById('u-students').innerHTML =
+    '<table class="data-table"><thead><tr><th>이름</th><th>학년</th><th>학부모</th><th>과목</th><th>수업권</th><th>상태</th></tr></thead><tbody>'+
+    STUDENTS_ADMIN_T.map(s=>
+      '<tr class="clickable" onclick="openUserDetail(\'student\',\''+s.id+'\')"><td><b>'+s.name+'</b></td><td>'+s.grade+'</td>'+
+      '<td>'+parentName(s.parentId)+'</td><td>'+(s.subjects.join(', ')||'-')+'</td><td>'+s.creditBalance+'장</td>'+
+      '<td>'+statusPill(s.status)+'</td></tr>'
+    ).join('')+'</tbody></table>'+
+    '<button class="btn-sm" style="margin-top:14px;" onclick="openInviteForm(\'student\')">+ 학생 초대</button>';
+
+  document.getElementById('u-teachers').innerHTML =
+    '<table class="data-table"><thead><tr><th>이름</th><th>이메일</th><th>학교</th><th>담당 과목</th><th>QC</th><th>상태</th></tr></thead><tbody>'+
+    TEACHERS_ADMIN_T.map(t=>
+      '<tr class="clickable" onclick="openUserDetail(\'teacher\',\''+t.id+'\')"><td><b>'+t.name+'</b></td><td>'+t.email+'</td>'+
+      '<td>'+t.school+'</td><td>'+t.subjects.join(', ')+'</td>'+
+      '<td>'+(t.qcWarnings>0?'<span class="status-pill status-danger">'+t.qcWarnings+'회</span>':'<span class="status-pill status-active">정상</span>')+'</td>'+
+      '<td>'+statusPill(t.status)+'</td></tr>'
+    ).join('')+'</tbody></table>'+
+    '<button class="btn-sm" style="margin-top:14px;" onclick="openInviteForm(\'teacher\')">+ 선생님 초대</button>';
+}
+function statusPill(status){
+  const map = {active:['활성','status-active'], pending:['대기','status-pending'], inactive:['비활성','status-inactive']};
+  const m = map[status] || [status,'status-inactive'];
+  return '<span class="status-pill '+m[1]+'">'+m[0]+'</span>';
+}
+
+/* ---- 초대 (학부모 먼저, 학생은 활성화된 학부모 연결 필수, 선생님은 단순 초대) ---- */
+function openInviteForm(role){
+  const activeParents = PARENTS_T.filter(p=>p.status==='active');
+  let html = '<div class="card" style="max-width:480px;"><h3>'+(role==='parent'?'학부모':(role==='student'?'학생':'선생님'))+' 초대</h3>'+
+    '<div class="form-row"><label>이름</label><input type="text" id="inv-name"></div>'+
+    '<div class="form-row"><label>이메일</label><input type="text" id="inv-email"></div>';
+  if(role==='student'){
+    html += '<div class="form-row"><label>연결할 학부모 (활성화된 계정만 선택 가능)</label><select id="inv-parent">'+
+      (activeParents.length ? activeParents.map(p=>'<option value="'+p.id+'">'+p.name+'</option>').join('') : '<option value="">활성화된 학부모 계정이 없습니다</option>')+
+      '</select></div>';
+  }
+  html += '<button class="btn-primary" onclick="sendInvite(\''+role+'\')">초대 보내기</button> <span class="action-link" onclick="closeInviteForm()">취소</span>'+
+    '<div id="invite-confirm"></div></div>';
+  document.getElementById('user-detail-body').innerHTML = html;
+  showView('user-detail');
+}
+function closeInviteForm(){ showView('users'); }
+function sendInvite(role){
+  const name = document.getElementById('inv-name').value.trim();
+  const email = document.getElementById('inv-email').value.trim();
+  if(!name || !email) return;
+  if(role==='student'){
+    const parentId = document.getElementById('inv-parent').value;
+    if(!parentId){ document.getElementById('invite-confirm').innerHTML = '<div style="color:var(--red); font-size:12.5px; margin-top:10px;">연결할 학부모 계정이 필요합니다.</div>'; return; }
+    INVITES_T.push({id:nextInviteId++, role, name, email, parentId, status:'pending', sentAt:'2026-09-07'});
+  } else {
+    INVITES_T.push({id:nextInviteId++, role, name, email, status:'pending', sentAt:'2026-09-07'});
+  }
+  document.getElementById('invite-confirm').innerHTML = '<div style="color:var(--green); font-weight:700; font-size:12.5px; margin-top:10px;">초대 이메일이 발송되었습니다 (임시 비밀번호 포함, 72시간 유효).</div>';
+  renderDashboard();
+}
+
+/* ---- 사용자 상세 (조회+조정) ---- */
+function openUserDetail(type, id){
+  let html = '';
+  if(type==='parent'){
+    const p = PARENTS_T.find(x=>x.id===id);
+    html = '<div class="detail-header"><div><h2 style="font-size:19px; color:var(--ink);">'+p.name+'</h2>'+
+      '<div style="font-size:13px; color:var(--grey-500); margin-top:4px;">'+p.email+' · '+p.phone+'</div></div>'+statusPill(p.status)+'</div>'+
+      '<div class="card" style="margin-bottom:16px;"><h3>자녀</h3>'+p.children.map(c=>'<div class="kv-row"><span>'+studentName(c)+'</span><span class="action-link" onclick="openUserDetail(\'student\',\''+c+'\')">보기 →</span></div>').join('')+'</div>'+
+      '<div class="card" style="margin-bottom:16px;"><h3>결제 수단</h3>'+
+      '<div class="kv-row"><span>현재</span><span>'+(p.paymentMethods.primary ? p.paymentMethods.primary.brand+' •••• '+p.paymentMethods.primary.last4 : '미등록')+'</span></div>'+
+      '<div class="kv-row"><span>백업</span><span>'+(p.paymentMethods.backup ? p.paymentMethods.backup.brand+' •••• '+p.paymentMethods.backup.last4 : '미등록')+'</span></div></div>'+
+      '<div class="card" style="margin-bottom:16px;"><h3>가입일</h3><div class="ro-text" style="margin-bottom:0;">'+p.joinedAt+'</div></div>'+
+      '<div class="card"><h3>자녀별 수업 내역</h3>'+
+      p.children.map(c=>{
+        const lessons = LESSON_HISTORY_T.filter(l=>l.studentId===c);
+        return '<div style="margin-bottom:10px;"><div style="font-weight:700; font-size:13px; color:var(--ink); margin-bottom:6px;">'+studentName(c)+'</div>'+
+          (lessons.length ? lessons.map(renderLessonRowAdmin).join('') : '<div class="empty-note" style="padding:6px 0;">수업 내역이 없습니다.</div>')+'</div>';
+      }).join('')+'</div>';
+  } else if(type==='student'){
+    const s = STUDENTS_ADMIN_T.find(x=>x.id===id);
+    const matches = MATCHES_T.filter(m=>m.studentId===id && m.status==='active');
+    const lessons = LESSON_HISTORY_T.filter(l=>l.studentId===id);
+    const stats = computeStudentStats(id);
+    const ownAdjustments = CREDIT_ADJUSTMENTS_T.filter(a=>a.studentId===id).slice().reverse();
+    html = '<div class="detail-header"><div><h2 style="font-size:19px; color:var(--ink);">'+s.name+'</h2>'+
+      '<div style="font-size:13px; color:var(--grey-500); margin-top:4px;">'+s.grade+' · 학부모: '+parentName(s.parentId)+'</div></div>'+statusPill(s.status)+'</div>'+
+      '<div class="card" style="margin-bottom:16px;"><h3>바로가기</h3>'+
+      '<div style="display:flex; gap:8px; flex-wrap:wrap;">'+
+      '<span class="chip-btn" onclick="openStudentProblemLogAdmin(\''+id+'\')">📋 문제 기록</span>'+
+      '<span class="chip-btn" onclick="openStudentVocabAdmin(\''+id+'\')">📖 단어장</span>'+
+      '</div></div>'+
+      '<div class="card" style="margin-bottom:16px;"><h3>매칭 선생님 현황</h3>'+
+      (matches.length ? matches.map(m=>'<div class="kv-row"><span>'+m.subj+' — '+teacherName(m.teacherId)+'</span><span class="action-link" onclick="openAdminCurriculumView(\''+id+'\',\''+m.subj+'\')">커리큘럼 보기 →</span></div>').join('') : '<div class="empty-note">매칭된 선생님이 없습니다.</div>')+
+      '</div>'+
+      '<div class="card" style="margin-bottom:16px;"><h3>수업권</h3><div class="kv-row"><span>현재 보유</span><span>'+s.creditBalance+'장</span></div>'+
+      '<div class="ro-label" style="margin-top:12px;">수동 조정</div>'+
+      '<div class="category-select-row" id="adjcat-'+id+'">'+ADJUSTMENT_CATEGORIES.map((c,i)=>'<span class="cat-chip'+(i===0?' on':'')+'" onclick="selectAdjCategory(\''+id+'\',this,\''+c+'\')">'+c+'</span>').join('')+'</div>'+
+      '<div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:8px;">'+
+      '<input type="number" id="adjamount-'+id+'" placeholder="+2 또는 -2" style="width:100px; padding:8px 10px; border:1.5px solid var(--grey-200); border-radius:8px;">'+
+      '<input type="text" id="adjreason-'+id+'" placeholder="조정 사유 (필수)" style="flex:1; min-width:200px; padding:8px 10px; border:1.5px solid var(--grey-200); border-radius:8px;">'+
+      '<button class="btn-sm" onclick="adjustCredit(\''+id+'\')">조정 적용</button></div>'+
+      '<div id="adjconfirm-'+id+'"></div>'+
+      (ownAdjustments.length ? '<div class="ro-label" style="margin-top:14px;">이 학생의 조정 내역</div>'+ownAdjustments.map(a=>
+        '<div class="log-entry"><b>'+(a.delta>0?'+':'')+a.delta+'장</b> · <span class="status-pill status-info">'+a.category+'</span><br>'+a.reason+' — '+a.admin+' · '+a.time+'</div>'
+      ).join('') : '')+
+      '</div>'+
+      '<div class="card" style="margin-bottom:16px;"><h3>통계</h3>'+
+      '<div class="kv-row"><span>진행률</span><span>'+stats.completedLessons+' / '+stats.totalLessons+'회 ('+stats.completionRate+'%)</span></div>'+
+      '<div class="kv-row"><span>과제 제출/채점률</span><span>'+stats.assignmentSubmitRate+'%</span></div></div>'+
+      '<div class="card" style="margin-bottom:16px;"><h3>수업 내역 (수업준비·VOD·수업자료·과제 조회 가능)</h3>'+
+      (lessons.length ? lessons.map(renderLessonRowAdmin).join('') : '<div class="empty-note">수업 내역이 없습니다.</div>')+'</div>'+
+      '<div class="card"><h3>상태 변경</h3><select id="ud-status-select" onchange="changeUserStatus(\'student\',\''+id+'\',this.value)">'+
+      ['active','pending','inactive'].map(st=>'<option value="'+st+'"'+(s.status===st?' selected':'')+'>'+({active:'활성',pending:'대기',inactive:'비활성'}[st])+'</option>').join('')+
+      '</select></div>';
+  } else {
+    const t = TEACHERS_ADMIN_T.find(x=>x.id===id);
+    const matches = MATCHES_T.filter(m=>m.teacherId===id && m.status==='active');
+    const lessons = LESSON_HISTORY_T.filter(l=>l.teacherId===id);
+    html = '<div class="detail-header"><div><h2 style="font-size:19px; color:var(--ink);">'+t.name+'</h2>'+
+      '<div style="font-size:13px; color:var(--grey-500); margin-top:4px;">'+t.email+' · '+t.school+'</div></div>'+statusPill(t.status)+'</div>'+
+      '<div class="card" style="margin-bottom:16px;"><h3>매칭 학생 현황</h3>'+
+      (matches.length ? matches.map(m=>'<div class="kv-row"><span>'+studentName(m.studentId)+' — '+m.subj+'</span><span class="action-link" onclick="openAdminCurriculumView(\''+m.studentId+'\',\''+m.subj+'\')">커리큘럼 보기 →</span></div>').join('') : '<div class="empty-note">매칭된 학생이 없습니다.</div>')+
+      '</div>'+
+      '<div class="card" style="margin-bottom:16px;"><h3>QC 현황</h3><div class="kv-row"><span>누적 경고</span><span>'+(t.qcWarnings>0?'<span class="status-pill status-danger">'+t.qcWarnings+'회</span>':'<span class="status-pill status-active">없음</span>')+'</span></div>'+
+      '<button class="btn-sm" style="margin-top:10px;" onclick="showView(\'qc\')">QC 로그 보기 →</button></div>'+
+      '<div class="card" style="margin-bottom:16px;"><h3>진행한 수업 내역 (수업준비·VOD·수업자료·과제 조회 가능)</h3>'+
+      (lessons.length ? lessons.map(renderLessonRowAdmin).join('') : '<div class="empty-note">수업 내역이 없습니다.</div>')+'</div>'+
+      '<div class="card"><h3>상태 변경</h3><select onchange="changeUserStatus(\'teacher\',\''+id+'\',this.value)">'+
+      ['active','pending','inactive'].map(st=>'<option value="'+st+'"'+(t.status===st?' selected':'')+'>'+({active:'활성',pending:'대기',inactive:'비활성'}[st])+'</option>').join('')+
+      '</select></div>';
+  }
+  document.getElementById('user-detail-body').innerHTML = html;
+  showView('user-detail');
+}
+function openLessonDetailAdmin(lessonId){
+  const l = LESSON_HISTORY_T.find(x=>x.id===lessonId);
+  let html = '<h2 style="font-size:18px; color:var(--ink); margin-bottom:4px;">'+studentName(l.studentId)+' · '+l.subj+' · '+l.session+'회차</h2>'+
+    '<div class="page-sub">9월 '+l.day+'일 · 담당: '+teacherName(l.teacherId)+' · '+(l.done?'완료됨':'예정')+'</div>'+
+    '<div class="card" style="margin-bottom:14px;"><h3>수업 준비 (커리큘럼)</h3><div class="ro-label">단원</div><h3 style="margin-bottom:8px;">'+l.unit+'</h3>'+
+    '<div class="ro-label">선생님 코멘트</div><div class="ro-text" style="margin-bottom:0;">'+(l.teacherComment||'코멘트가 없습니다.')+'</div></div>'+
+    '<div class="card" style="margin-bottom:14px;"><h3>수업 자료 (교재)</h3>'+
+    (l.materials.length ? l.materials.map(m=>materialEntryLinkHtml(l.subj, m)).join('') : '<div class="empty-note">배정된 교재가 없습니다.</div>')+'</div>'+
+    '<div class="card" style="margin-bottom:14px;"><h3>VOD</h3><div class="ro-text" style="margin-bottom:0;">'+(l.vod?'VOD 녹화본이 있습니다.':'아직 VOD가 없습니다.')+'</div></div>'+
+    '<div class="card"><h3>과제</h3>'+
+    (l.assignments.length ? l.assignments.map(a=>
+      '<div class="review-block"><b style="font-size:13px;">'+a.title+'</b>'+
+      '<div class="ro-label" style="margin-top:8px;">학생 제출 답안</div><div class="ro-text" style="margin-bottom:0;">'+(a.studentAnswer||'아직 제출하지 않았습니다.')+'</div>'+
+      (a.graded ? '<div class="ro-label" style="color:var(--green); margin-top:8px;">채점 완료 — '+a.score+'</div>' : '<div class="ro-label" style="color:var(--grey-500); margin-top:8px;">채점 대기 중</div>')+
+      '</div>'
+    ).join('') : '<div class="empty-note">배정된 과제가 없습니다.</div>')+'</div>';
+  document.getElementById('lesson-detail-admin-body').innerHTML = html;
+  showView('lesson-detail-admin');
+}
+
+/* ================= 관리자용: 학생 문제기록 / 단어장 (읽기전용) ================= */
+let STUDENT_PROBLEM_LOGS_ADMIN_T = {
+  'jihoon': [
+    {id:'log1', format:'mc', subject:'SAT Math', unit:'이차방정식 응용 문제 (1)', difficulty:'medium',
+      passage:"실전 SAT 스타일 이차방정식 응용 문제: 어떤 물체를 위로 던졌을 때 높이 h = -5t² + 20t + 1. 물체가 최고 높이에 도달하는 시간은?",
+      options:['1초','2초','3초','4초'], correctIndex:1, correct:true, response:1, attemptedAt:'9월 3일 오후 4:12'},
+    {id:'log2', format:'mc', subject:'SAT Math', unit:'이차방정식 응용 문제 심화', difficulty:'hard',
+      passage:"x² - 7x + 12 = 0 의 두 근의 합은?", options:['5','7','12','-7'], correctIndex:1, correct:false, response:0, attemptedAt:'9월 5일 오후 3:40'}
+  ],
+  'seoah': [
+    {id:'log3', format:'essay', subject:'SAT Verbal', unit:'독해 지문 유형 파악', difficulty:'medium',
+      passage:"주어진 지문에서 저자의 논조가 어떻게 변화하는지 2~3문장으로 설명하세요.", correct:null,
+      response:'저자는 처음에 부정적이다가 나중에 긍정적으로 바뀝니다.', attemptedAt:'9월 4일 오전 11:20'}
+  ]
+};
+let STUDENT_VOCAB_ADMIN_T = {
+  'jihoon': [
+    {id:'v1', word:'complicate', definition:'복잡하게 만들다. 문맥상 어떤 결론을 명확히 지지하지 않고 불확실하게 만든다는 뜻으로 쓰입니다.', example:'The new evidence complicates our understanding of the event.', similar:['confuse','muddle','entangle']}
+  ],
+  'seoah': [
+    {id:'v3', word:'interweave', definition:'서로 엮다, 얽어 짜다.', example:'The author interweaves two storylines throughout the novel.', similar:['intertwine','blend','combine']}
+  ]
+};
+function openStudentProblemLogAdmin(studentId){
+  const logs = STUDENT_PROBLEM_LOGS_ADMIN_T[studentId] || [];
+  document.getElementById('student-problemlog-admin-body').innerHTML =
+    '<h2 style="font-size:18px; color:var(--ink); margin-bottom:4px;">'+studentName(studentId)+'의 문제 기록</h2>'+
+    '<div class="page-sub">학생이 지금까지 풀었던 모든 문제입니다.</div>'+
+    (logs.length ? logs.map(l=>
+      '<div class="card" style="margin-bottom:12px;"><div style="display:flex; gap:8px; margin-bottom:6px;">'+
+      '<span class="ptag">'+({mc:'객관식',essay:'서술형',math:'풀이형'}[l.format])+'</span>'+
+      (l.format==='mc' ? '<span class="status-pill '+(l.correct?'status-active':'status-danger')+'">'+(l.correct?'정답':'오답')+'</span>' : '')+
+      '<span class="ptag">'+l.subject+'</span><span class="ptag">'+l.unit+'</span></div>'+
+      '<div style="font-size:13px; color:var(--ink);">'+l.passage+'</div>'+
+      '<div style="font-size:11.5px; color:var(--grey-500); margin-top:6px;">'+l.attemptedAt+'</div>'+
+      '</div>'
+    ).join('') : '<div class="empty-note">기록이 없습니다.</div>');
+  showView('student-problemlog-admin');
+}
+function openStudentVocabAdmin(studentId){
+  const vocab = STUDENT_VOCAB_ADMIN_T[studentId] || [];
+  document.getElementById('student-vocab-admin-body').innerHTML =
+    '<h2 style="font-size:18px; color:var(--ink); margin-bottom:4px;">'+studentName(studentId)+'의 단어장</h2>'+
+    '<div class="page-sub">학생이 교재에서 저장한 단어들입니다.</div>'+
+    (vocab.length ? vocab.map(v=>
+      '<div class="card" style="margin-bottom:12px;"><h3>'+v.word+'</h3>'+
+      '<div class="ro-label" style="margin-top:8px;">뜻</div><div class="ro-text">'+v.definition+'</div>'+
+      '<div class="ro-label">예문</div><div class="ro-text">'+v.example+'</div>'+
+      '<div class="ro-label">비슷한 단어</div><div style="display:flex; gap:6px; flex-wrap:wrap;">'+v.similar.map(s=>'<span class="ptag">'+s+'</span>').join('')+'</div>'+
+      '</div>'
+    ).join('') : '<div class="empty-note">저장한 단어가 없습니다.</div>');
+  showView('student-vocab-admin');
+}
+function openAdminCurriculumView(studentId, subj){
+  const cKey = studentId+'_'+subj;
+  const c = CURRICULA_ADMIN_T[cKey];
+  const match = MATCHES_T.find(m=>m.studentId===studentId && m.subj===subj && m.status==='active');
+  let html = '<h2 style="font-size:18px; color:var(--ink); margin-bottom:4px;">'+studentName(studentId)+' · '+subj+' 커리큘럼 (읽기전용)</h2>'+
+    '<div class="page-sub">담당: '+(match?teacherName(match.teacherId):'-')+(c?' · '+c.current+' / '+c.total+'회차 진행 중':'')+'</div>';
+  if(!c){
+    html += '<div class="empty-note">아직 구성된 커리큘럼이 없습니다.</div>';
+  } else {
+    html += c.sessions.map((w,idx)=>{
+      const stMap = {done:['완료','st-done'], progress:['진행중','st-progress'], upcoming:['예정','st-upcoming']};
+      const st = stMap[w.status] || stMap.upcoming;
+      return '<div class="list-row"><span>'+(idx+1)+'회차 · '+w.unit+'</span><span class="week-status '+st[1]+'">'+st[0]+'</span></div>';
+    }).join('');
+  }
+  document.getElementById('admin-curriculum-view-body').innerHTML = html;
+  showView('admin-curriculum-view');
+}
+function changeUserStatus(type, id, status){
+  const list = type==='student' ? STUDENTS_ADMIN_T : TEACHERS_ADMIN_T;
+  const item = list.find(x=>x.id===id);
+  if(item) item.status = status;
+  openUserDetail(type, id);
+  renderUsers();
+}
+
+/* ================= MATCHING ================= */
+function renderMatching(){
+  document.getElementById('matching-list').innerHTML =
+    '<table class="data-table"><thead><tr><th>학생</th><th>과목</th><th>선생님</th><th>상태</th><th>생성일</th><th></th></tr></thead><tbody>'+
+    MATCHES_T.map(m=>
+      '<tr><td>'+studentName(m.studentId)+'</td><td>'+m.subj+'</td><td>'+teacherName(m.teacherId)+'</td>'+
+      '<td>'+(m.status==='active'?'<span class="status-pill status-active">활성</span>':'<span class="status-pill status-inactive">취소됨</span>')+'</td>'+
+      '<td>'+m.createdAt+'</td>'+
+      '<td>'+(m.status==='active' ? '<span class="action-link" onclick="cancelMatch('+m.id+')">매칭 취소</span>' : '')+'</td></tr>'
+    ).join('')+'</tbody></table>';
+}
+function openMatchForm(){
+  const subjects = Object.keys(CATALOG_SUBJECTS_T);
+  document.getElementById('match-form-area').innerHTML =
+    '<div class="card" style="max-width:480px;">'+
+    '<div class="form-row"><label>학생</label><select id="mf-student">'+STUDENTS_ADMIN_T.map(s=>'<option value="'+s.id+'">'+s.name+'</option>').join('')+'</select></div>'+
+    '<div class="form-row"><label>과목 (복수 선택 가능)</label>'+
+    subjects.map(s=>'<label style="display:flex; align-items:center; gap:8px; padding:8px 0; font-size:13px; color:var(--ink); cursor:pointer;"><input type="checkbox" class="mf-subj-check" value="'+s+'"> '+s+'</label>').join('')+
+    '</div>'+
+    '<div class="form-row"><label>선생님</label><select id="mf-teacher">'+TEACHERS_ADMIN_T.map(t=>'<option value="'+t.id+'">'+t.name+'</option>').join('')+'</select></div>'+
+    '<button class="btn-primary" onclick="createMatch()">매칭 생성</button> <span class="action-link" onclick="document.getElementById(\'match-form-area\').innerHTML=\'\'">취소</span>'+
+    '<div id="match-confirm"></div>'+
+    '</div>';
+}
+function createMatch(){
+  const studentId = document.getElementById('mf-student').value;
+  const teacherId = document.getElementById('mf-teacher').value;
+  const checked = [...document.querySelectorAll('.mf-subj-check:checked')].map(c=>c.value);
+  if(!checked.length){
+    document.getElementById('match-confirm').innerHTML = '<div style="color:var(--red); font-size:12.5px; margin-top:8px;">과목을 최소 1개 이상 선택해야 합니다.</div>';
+    return;
+  }
+  checked.forEach(subj=>{
+    MATCHES_T.push({id:nextMatchId++, studentId, subj, teacherId, status:'active', createdAt:'2026-09-07'});
+  });
+  document.getElementById('match-form-area').innerHTML = '';
+  renderMatching();
+}
+function cancelMatch(id){
+  if(!confirm('이 매칭을 취소하시겠습니까? 취소해도 내역은 보존되며 비활성화 처리됩니다.')) return;
+  const m = MATCHES_T.find(x=>x.id===id);
+  if(m) m.status = 'cancelled';
+  renderMatching();
+}
+
+/* ================= CONSULT (상담 슬롯 오픈 + 아카이브) ================= */
+function renderConsultCalendar(){
+  let html = DOW_NAMES.map(d=>'<div class="cal-dow">'+d+'</div>').join('');
+  html += '<div class="cal-day empty"></div><div class="cal-day empty"></div>';
+  for(let d=1; d<=30; d++){
+    const isOpen = !!CONSULT_RANGES_T[d];
+    const sel = d===consultSelectedDay ? ' selected' : '';
+    html += '<div class="cal-day'+sel+'" onclick="pickConsultDay('+d+')">'+(isOpen?'<span class="open-day-circle">'+d+'</span>':d)+'</div>';
+  }
+  document.getElementById('consult-cal-grid').innerHTML = html;
+}
+function pickConsultDay(day){
+  consultSelectedDay = day;
+  renderConsultCalendar();
+  renderConsultDayEditor(day);
+}
+function hourOptionsFull(sel){
+  let html='';
+  for(let h=8; h<=21; h++) html += '<option value="'+h+'"'+(h===sel?' selected':'')+'>'+toClock(h)+'</option>';
+  return html;
+}
+function renderConsultDayEditor(day){
+  const range = CONSULT_RANGES_T[day];
+  const slots = deriveConsultSlots(range);
+  let html = '<div class="ro-label">현재 오픈 상태 · 9월 '+day+'일 ('+DOW_NAMES[dow(day)]+')</div>';
+  html += range
+    ? '<div class="ro-text"><b>'+toClock(range.start)+' ~ '+toClock(range.end)+'</b> 오픈됨<br><span style="font-size:11.5px;">상담 가능 시작 시간(1시간 단위): '+slots.map(t=>toClock(t)).join(', ')+'</span></div>'
+    : '<div class="empty-note" style="padding:10px 0;">오픈된 상담 시간이 없습니다.</div>';
+  html += '<div style="margin-top:16px; padding-top:16px; border-top:1px solid var(--grey-200);">'+
+    '<div style="font-size:12.5px; font-weight:700; color:var(--ink); margin-bottom:8px;">시간 범위 설정 (1시간 단위)</div>'+
+    '<div class="range-row">시작 <select id="consult-range-start">'+hourOptionsFull(range?range.start:14)+'</select> ~ 종료 <select id="consult-range-end">'+hourOptionsFull(range?range.end:17)+'</select></div>'+
+    '<button class="btn-sm" onclick="saveConsultRange('+day+')">이 날짜에 저장</button>'+
+    '<div style="margin-top:14px; padding-top:14px; border-top:1px solid var(--grey-200);">'+
+    '<div style="font-size:12px; color:var(--grey-500); margin-bottom:8px;">이 날짜 및 이후의 같은 요일('+DOW_NAMES[dow(day)]+')에 동일하게 일괄 적용</div>'+
+    '<button class="btn-sm" onclick="applyConsultRangeToWeekday('+day+')">이 날짜부터 '+DOW_NAMES[dow(day)]+'요일 전체 적용</button></div>'+
+    '</div>';
+  document.getElementById('consult-day-editor').innerHTML = html;
+}
+function saveConsultRange(day){
+  const start = parseInt(document.getElementById('consult-range-start').value);
+  const end = parseInt(document.getElementById('consult-range-end').value);
+  if(end <= start){
+    document.getElementById('consult-day-editor').insertAdjacentHTML('beforeend','<div style="color:var(--red); font-size:12.5px; margin-top:8px;">종료 시간은 시작 시간보다 늦어야 합니다.</div>');
+    return;
+  }
+  CONSULT_RANGES_T[day] = {start,end};
+  renderConsultDayEditor(day);
+  renderConsultCalendar();
+}
+function applyConsultRangeToWeekday(day){
+  const start = parseInt(document.getElementById('consult-range-start').value);
+  const end = parseInt(document.getElementById('consult-range-end').value);
+  if(end <= start){
+    document.getElementById('consult-day-editor').insertAdjacentHTML('beforeend','<div style="color:var(--red); font-size:12.5px; margin-top:8px;">종료 시간은 시작 시간보다 늦어야 합니다.</div>');
+    return;
+  }
+  const targetDow = dow(day);
+  for(let d=day; d<=30; d++){ if(dow(d)===targetDow) CONSULT_RANGES_T[d] = {start,end}; }
+  renderConsultDayEditor(day);
+  renderConsultCalendar();
+}
+function archiveRowHtml(c){
+  return '<div class="list-row" style="cursor:pointer;" onclick="openConsultDetail('+c.id+')"><div class="list-left"><div class="list-date">'+(c.completedAt||c.submittedAt)+'<b>'+c.type+'</b></div>'+
+    '<span class="chip-btn">'+c.personName+'</span></div><span class="action-link">보기 →</span></div>';
+}
+function renderConsultArchive(){
+  const completed = CONSULTS_DB_T.filter(c=>c.status==='completed');
+  const sorted = completed.slice().sort((a,b)=>(b.completedAt||'').localeCompare(a.completedAt||''));
+  document.getElementById('arc-all').innerHTML = sorted.map(archiveRowHtml).join('') || '<div class="empty-note">아카이빙된 상담이 없습니다.</div>';
+
+  const familyItems = sorted.filter(c=>c.category==='family');
+  const familyGroups = {};
+  familyItems.forEach(c=>{ (familyGroups[c.personName]=familyGroups[c.personName]||[]).push(c); });
+  document.getElementById('arc-family').innerHTML = Object.keys(familyGroups).length ? Object.keys(familyGroups).map(name=>
+    '<div class="card" style="margin-bottom:12px;"><h3>'+name+'</h3>'+familyGroups[name].map(archiveRowHtml).join('')+'</div>'
+  ).join('') : '<div class="empty-note">학생/학부모 상담 기록이 없습니다.</div>';
+
+  const teacherItems = sorted.filter(c=>c.category==='teacher');
+  const teacherGroups = {};
+  teacherItems.forEach(c=>{ (teacherGroups[c.personName]=teacherGroups[c.personName]||[]).push(c); });
+  document.getElementById('arc-teacher').innerHTML = Object.keys(teacherGroups).length ? Object.keys(teacherGroups).map(name=>
+    '<div class="card" style="margin-bottom:12px;"><h3>'+name+'</h3>'+teacherGroups[name].map(archiveRowHtml).join('')+'</div>'
+  ).join('') : '<div class="empty-note">선생님 상담 기록이 없습니다.</div>';
+}
+function openConsultDetail(id){
+  const c = CONSULTS_DB_T.find(x=>x.id===id);
+  document.getElementById('consult-detail-body').innerHTML =
+    '<h2 style="font-size:18px; color:var(--ink); margin-bottom:4px;">'+c.type+' — '+c.personName+'</h2>'+
+    '<div class="page-sub">신청일 '+c.submittedAt+(c.completedAt?' · 완료일 '+c.completedAt:'')+'</div>'+
+    '<div class="card" style="margin-bottom:14px;"><h3>연락처</h3><div class="kv-row"><span>이메일 · 전화</span><span>'+c.email+' · '+c.phone+'</span></div>'+
+    (c.studentGrade!=='-' ? '<div class="kv-row"><span>학생 학년</span><span>'+c.studentGrade+'</span></div>' : '')+'</div>'+
+    '<div class="card" style="margin-bottom:14px;"><h3>초기 신청 내용</h3><div class="ro-text" style="margin-bottom:0;">'+c.concerns+'</div></div>'+
+    (c.replySummary ? '<div class="card" style="margin-bottom:14px;"><h3>이메일 회신 요약</h3><div class="ro-text" style="margin-bottom:0;">'+c.replySummary+'</div></div>' : '')+
+    (c.prepMaterial ? '<div class="card" style="margin-bottom:14px;"><h3>AI 상담 준비 자료</h3><div class="ro-text" style="margin-bottom:0;">'+c.prepMaterial.title+' ('+c.prepMaterial.generatedAt+' 생성)</div></div>' : '')+
+    '<div class="card"><h3>상담 미팅록</h3><div class="ro-text" style="margin-bottom:0;">'+(c.meetingNotes||'미팅록이 없습니다.')+'</div></div>';
+  showView('consult-detail');
+}
+
+/* ---- 확정된 상담 캘린더 (Home + 상담현황 공용) ---- */
+function buildConsultDbCalendarHTML(selectedDay, onclickName){
+  let html = DOW_NAMES.map(d=>'<div class="cal-dow">'+d+'</div>').join('');
+  html += '<div class="cal-day empty"></div><div class="cal-day empty"></div>';
+  for(let d=1; d<=30; d++){
+    const hasConsult = CONSULTS_DB_T.some(c=>c.scheduledDay===d && (c.status==='confirmed'||c.status==='completed'));
+    const sel = d===selectedDay ? ' selected' : '';
+    html += '<div class="cal-day'+(hasConsult?' has':'')+sel+'" onclick="'+onclickName+'('+d+')">'+d+(hasConsult?'<div class="pt"></div>':'')+'</div>';
+  }
+  return html;
+}
+function renderConsultDbDayPanel(day, titleId, panelId){
+  document.getElementById(titleId).textContent = '9월 '+day+'일';
+  const items = CONSULTS_DB_T.filter(c=>c.scheduledDay===day);
+  document.getElementById(panelId).innerHTML = items.length ? items.map(c=>
+    '<div class="lesson-card"><div class="lesson-time">'+toClock(c.scheduledHour)+'</div>'+
+    '<div class="lesson-subj">'+c.personName+' · '+c.type+'</div>'+
+    '<div style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap;">'+
+    '<div class="btn-sm" onclick="openConsultPage('+c.id+')">상담 페이지</div>'+
+    (c.status!=='completed' ? '<div class="btn-sm live" onclick="startConsultZoom('+c.id+')">상담 시작</div>' : '<span class="status-pill status-active" style="align-self:center;">완료됨</span>')+
+    '</div></div>'
+  ).join('') : '<div class="empty-note">이 날은 예정된 상담이 없습니다.</div>';
+}
+let homeConsultSelectedDay = null;
+function renderHomeConsultCalendar(){
+  document.getElementById('home-consult-cal-grid').innerHTML = buildConsultDbCalendarHTML(homeConsultSelectedDay, 'pickHomeConsultDay');
+}
+function pickHomeConsultDay(day){
+  homeConsultSelectedDay = day;
+  renderHomeConsultCalendar();
+  renderConsultDbDayPanel(day, 'home-consult-day-title', 'home-consult-day-panel');
+}
+let statusConsultSelectedDay = null;
+function renderStatusConsultCalendar(){
+  document.getElementById('status-consult-cal-grid').innerHTML = buildConsultDbCalendarHTML(statusConsultSelectedDay, 'pickStatusConsultDay');
+}
+function pickStatusConsultDay(day){
+  statusConsultSelectedDay = day;
+  renderStatusConsultCalendar();
+  renderConsultDbDayPanel(day, 'status-consult-day-title', 'status-consult-day-panel');
+}
+
+/* ---- 상담 현황 (일정 미확정 신청 목록 + 일정 확정) ---- */
+function renderUpcomingConsultsList(){
+  const upcoming = CONSULTS_DB_T.filter(c=>c.status==='confirmed').sort((a,b)=>a.scheduledDay-b.scheduledDay);
+  document.getElementById('upcoming-consults-list').innerHTML = upcoming.length ? upcoming.map(c=>
+    '<div class="list-row"><span>9월 '+c.scheduledDay+'일 '+toClock(c.scheduledHour)+' · <b>'+c.personName+'</b> · '+c.type+'</span>'+
+    '<span style="display:flex; gap:8px;"><span class="action-link" onclick="openConsultPage('+c.id+')">상담 페이지</span><span class="action-link" onclick="startConsultZoom('+c.id+')">상담 시작</span></span></div>'
+  ).join('') : '<div class="empty-note" style="padding:10px 0;">예정된 상담이 없습니다.</div>';
+}
+function renderConsultStatus(){
+  renderStatusConsultCalendar();
+  const nextDay = CONSULTS_DB_T.filter(c=>c.scheduledDay).sort((a,b)=>a.scheduledDay-b.scheduledDay)[0];
+  if(nextDay) pickStatusConsultDay(nextDay.scheduledDay);
+  renderUpcomingConsultsList();
+  const requested = CONSULTS_DB_T.filter(c=>c.status==='requested');
+  document.getElementById('consult-status-list').innerHTML = requested.length ? requested.slice().reverse().map(r=>
+    '<div class="card" style="margin-bottom:14px;">'+
+    '<div style="display:flex; justify-content:space-between; align-items:flex-start;"><h3 style="margin-bottom:6px;">'+r.personName+' <span style="font-size:11.5px; color:var(--grey-500); font-weight:600;">('+r.studentGrade+' 학부모 추정)</span></h3>'+
+    '<span class="status-pill status-pending">일정 미확정</span></div>'+
+    '<div class="kv-row"><span>연락처</span><span>'+r.email+' · '+r.phone+'</span></div>'+
+    '<div class="ro-label" style="margin-top:10px;">문의 내용</div><div class="ro-text">'+r.concerns+'</div>'+
+    (r.emailSent ? '<div style="font-size:11.5px; color:var(--green); margin-bottom:8px;">✓ 안내 이메일 자동 발송됨 (회신자료 첨부)</div>' : '')+
+    (r.replySummary ? '<div class="ro-label">회신 내용 요약 (AI 정리)</div><div class="ro-text" style="margin-bottom:8px;">'+r.replySummary+'</div>' : '<div class="empty-note" style="padding:8px 0;">아직 회신이 도착하지 않았습니다.</div>')+
+    '<div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;">'+
+    (!r.replySummary ? '<button class="btn-sm" onclick="simulateAiReplyParse('+r.id+')">회신 확인 (AI 정리)</button>' : '')+
+    '<button class="btn-sm" onclick="toggleScheduleForm('+r.id+')">일정 확정하기</button>'+
+    '</div>'+
+    '<div id="schedule-form-'+r.id+'" style="display:none; margin-top:10px; padding-top:10px; border-top:1px solid var(--grey-100);">'+
+    '<div class="range-row">날짜 (9월) <input type="number" id="sched-day-'+r.id+'" min="'+(TODAY+1)+'" max="30" value="'+(TODAY+3)+'" style="width:70px; padding:6px 8px; border:1.5px solid var(--grey-200); border-radius:6px;"> 시작 시간 <select id="sched-hour-'+r.id+'">'+hourOptionsFull(14)+'</select></div>'+
+    '<button class="btn-sm" onclick="confirmConsultSchedule('+r.id+')">확정</button>'+
+    '</div>'+
+    '</div>'
+  ).join('') : '<div class="empty-note">일정 미확정 신청 건이 없습니다.</div>';
+}
+function simulateAiReplyParse(id){
+  const c = CONSULTS_DB_T.find(x=>x.id===id);
+  if(!c) return;
+  c.replySummary = '(AI 자동 정리) '+c.personName+'님이 회신을 주셨습니다 — 제안된 상담 시간에 참석 가능하다고 확인하셨습니다.';
+  renderConsultStatus();
+}
+function toggleScheduleForm(id){
+  const el = document.getElementById('schedule-form-'+id);
+  el.style.display = el.style.display==='none' ? 'block' : 'none';
+}
+function confirmConsultSchedule(id){
+  const c = CONSULTS_DB_T.find(x=>x.id===id);
+  const day = parseInt(document.getElementById('sched-day-'+id).value);
+  const hour = parseInt(document.getElementById('sched-hour-'+id).value);
+  c.scheduledDay = day;
+  c.scheduledHour = hour;
+  c.status = 'confirmed';
+  c.zoomLink = c.zoomLink || 'https://zoom.us/j/'+Math.floor(1000000000+Math.random()*9000000000);
+  renderConsultStatus();
+  renderHomeConsultCalendar();
+}
+
+/* ---- 상담 준비 (선생님 수업준비와 유사) ---- */
+function openConsultPage(id){
+  currentConsultId = id;
+  const c = CONSULTS_DB_T.find(x=>x.id===id);
+  const history = CONSULTS_DB_T.filter(x=>x.email===c.email && x.id!==c.id).sort((a,b)=>a.submittedAt.localeCompare(b.submittedAt));
+
+  let html = '<h2 style="font-size:18px; color:var(--ink); margin-bottom:4px;">상담 페이지 — '+c.personName+'</h2>'+
+    '<div class="page-sub">'+(c.scheduledDay ? ('9월 '+c.scheduledDay+'일 '+toClock(c.scheduledHour)) : '일정 미확정')+' · 이 대상자와의 모든 상담 기록이 이 페이지에 계속 누적됩니다.</div>'+
+
+    '<div class="card" style="margin-bottom:14px;"><h3>학부모/학생 정보</h3>'+
+    '<div class="kv-row"><span>이름</span><span>'+c.personName+'</span></div>'+
+    '<div class="kv-row"><span>연락처</span><span>'+c.email+' · '+c.phone+'</span></div>'+
+    (c.studentGrade!=='-' ? '<div class="kv-row"><span>학생 학년</span><span>'+c.studentGrade+'</span></div>' : '')+'</div>'+
+
+    '<div class="card" style="margin-bottom:14px;"><h3>이번 상담 — 초기 신청 내용</h3><div class="ro-text" style="margin-bottom:0;">'+c.concerns+'</div></div>'+
+    '<div class="card" style="margin-bottom:14px;"><h3>이메일 회신 요약</h3><div class="ro-text" style="margin-bottom:0;">'+(c.replySummary||'아직 회신이 없습니다.')+'</div></div>'+
+
+    '<div class="card" style="margin-bottom:14px;"><h3>공유 첨부파일 (이메일 왕복분)</h3><div id="consult-attach-list">'+
+    ((c.attachments&&c.attachments.length) ? c.attachments.map((f,i)=>'<div class="list-row"><span>'+f+'</span><span class="action-link" onclick="removeConsultAttachment('+id+','+i+')">삭제</span></div>').join('') : '<div class="empty-note">공유된 첨부파일이 없습니다.</div>')+
+    '</div><label class="btn-sm" style="display:inline-block; margin-top:8px; cursor:pointer;">+ 첨부파일 추가<input type="file" style="display:none;" onchange="addConsultAttachment('+id+',this)"></label></div>'+
+
+    '<div class="card" style="margin-bottom:14px;"><h3>AI 상담 준비 자료</h3>'+
+    (c.prepMaterial ? '<div class="list-row"><span>'+c.prepMaterial.title+'</span><span style="color:var(--grey-500); font-size:11px;">'+c.prepMaterial.generatedAt+' 생성</span></div>' : '<div class="empty-note">아직 생성된 자료가 없습니다.</div>')+
+    '<button class="btn-sm" style="margin-top:10px;" onclick="generateConsultPrepMaterial()">AI에게 상담자료 요청하기</button>'+
+    '<div id="consult-prep-confirm"></div></div>'+
+
+    '<div class="card" style="margin-bottom:14px;"><h3>미팅록 <span style="font-size:11px; color:var(--grey-500); font-weight:600;">(상담 진행 중 언제든 직접 추가·수정 가능, 상담종료 시 자동으로도 업데이트됨)</span></h3>'+
+    '<textarea id="meeting-notes-'+id+'" rows="4" style="width:100%; padding:10px 12px; border:1.5px solid var(--grey-200); border-radius:8px; font-family:inherit; font-size:13px;">'+(c.meetingNotes||'')+'</textarea>'+
+    '<button class="btn-sm" style="margin-top:8px;" onclick="saveMeetingNotes('+id+')">저장</button><div id="notes-confirm-'+id+'"></div></div>'+
+
+    '<div class="card"><h3>이 대상자의 과거 상담 히스토리 ('+history.length+'건)</h3>'+
+    (history.length ? history.map(h=>'<div class="list-row"><span>'+h.submittedAt+' · '+h.type+(h.status==='completed'?' · 완료':'')+'</span><span class="action-link" onclick="openConsultPage(\''+h.id+'\')">이 페이지로 이동 →</span></div>').join('') : '<div class="empty-note">이전 상담 기록이 없습니다. 이번이 첫 상담입니다.</div>')+
+    '</div>';
+
+  document.getElementById('consult-prep-body').innerHTML = html;
+  showView('consult-prep');
+}
+function addConsultAttachment(id, input){
+  if(!input.files || !input.files[0]) return;
+  const c = CONSULTS_DB_T.find(x=>x.id===id);
+  c.attachments = c.attachments || [];
+  c.attachments.push(input.files[0].name);
+  openConsultPage(id);
+}
+function removeConsultAttachment(id, idx){
+  const c = CONSULTS_DB_T.find(x=>x.id===id);
+  c.attachments.splice(idx,1);
+  openConsultPage(id);
+}
+function saveMeetingNotes(id){
+  const c = CONSULTS_DB_T.find(x=>x.id===id);
+  c.meetingNotes = document.getElementById('meeting-notes-'+id).value;
+  document.getElementById('notes-confirm-'+id).innerHTML = '<div style="color:var(--green); font-weight:700; font-size:12px; margin-top:6px;">저장되었습니다.</div>';
+  renderConsultArchive();
+}
+function generateConsultPrepMaterial(){
+  document.getElementById('consult-prep-confirm').innerHTML = '<div class="cr-policy" style="margin-top:10px;">AI가 상담 자료를 생성하는 중...</div>';
+  setTimeout(()=>{
+    const c = CONSULTS_DB_T.find(x=>x.id===currentConsultId);
+    c.prepMaterial = {title:c.personName+' 상담 준비자료.pdf', generatedAt:'2026-09-07'};
+    openConsultPage(currentConsultId);
+  }, 700);
+}
+
+/* ---- 상담 시작 (Zoom) → 종료 시 미팅록 자동 아카이빙 ---- */
+function startConsultZoom(id){
+  currentConsultId = id;
+  const c = CONSULTS_DB_T.find(x=>x.id===id);
+  document.getElementById('consult-live-body').innerHTML =
+    '<div class="live-header"><div class="live-back" onclick="showView(\'consult\')">← 나가기</div>'+
+    '<div style="text-align:center;"><div style="font-weight:800; color:var(--ink); font-size:14px;">'+c.personName+' 상담 진행 중</div>'+
+    '<div style="font-size:11.5px; color:var(--grey-500);">Zoom 연결됨</div></div>'+
+    '<button class="btn-primary" style="background:var(--red);" onclick="endConsultZoom()">상담 종료</button></div>'+
+    '<div style="padding:24px;"><a href="'+c.zoomLink+'" target="_blank" class="btn-sm">Zoom 링크 열기 ↗</a></div>';
+  showView('consult-live');
+}
+function endConsultZoom(){
+  const c = CONSULTS_DB_T.find(x=>x.id===currentConsultId);
+  c.status = 'completed';
+  c.completedAt = '2026-09-07';
+  c.meetingNotes = '(자동 생성된 미팅록) '+c.personName+'님과 상담 진행. 문의: '+c.concerns+(c.replySummary?' / 사전 회신: '+c.replySummary:'')+(c.prepMaterial?' / 준비자료: '+c.prepMaterial.title:'');
+  showView('consult');
+  showConsultSubtab('consult-archive');
+}
+
+/* ---- 상담 회신 자료 (템플릿 + 첨부자료) ---- */
+function renderReplyMaterials(){
+  document.getElementById('reply-email-template').value = REPLY_EMAIL_TEMPLATE;
+  document.getElementById('reply-materials-list').innerHTML = REPLY_MATERIALS_T.length ? REPLY_MATERIALS_T.map(m=>
+    '<div class="list-row"><span>'+m.name+'</span><span class="action-link" onclick="removeReplyMaterial('+m.id+')">삭제</span></div>'
+  ).join('') : '<div class="empty-note">등록된 첨부 자료가 없습니다.</div>';
+}
+function saveReplyTemplate(){
+  REPLY_EMAIL_TEMPLATE = document.getElementById('reply-email-template').value;
+  document.getElementById('reply-template-confirm').innerHTML = '<div style="color:var(--green); font-weight:700; font-size:12px; margin-top:8px;">템플릿이 저장되었습니다. 다음 상담 신청부터 자동 적용됩니다.</div>';
+}
+function uploadReplyMaterial(input){
+  if(!input.files || !input.files[0]) return;
+  REPLY_MATERIALS_T.push({id:nextReplyMatId++, name:input.files[0].name});
+  renderReplyMaterials();
+}
+function removeReplyMaterial(id){
+  REPLY_MATERIALS_T = REPLY_MATERIALS_T.filter(m=>m.id!==id);
+  renderReplyMaterials();
+}
+
+/* ================= CURRICULUM (과목 템플릿 / 교재 라이브러리) ================= */
+const ADMIN_SIMPLE_PAGE_STATE = {};
+function materialEntryLinkHtml(subj, unit){
+  const sub = unit ? '<div style="font-size:12px; color:var(--grey-500); margin-top:6px;">'+unit+'</div>' : '';
+  return '<a href="alton_material_viewer_prototype.html" target="_blank" style="text-decoration:none;">'+
+    '<div class="card" style="display:flex; justify-content:space-between; align-items:center; cursor:pointer; margin-bottom:10px;">'+
+    '<div><b style="color:var(--ink);">📖 교재 열기</b>'+sub+'</div><span style="color:var(--grey-500); font-size:13px;">새 탭에서 열림 →</span>'+
+    '</div></a>';
+}
+function renderAdminMaterialPreview(subj, materials, keyPrefix){
+  if(!materials.length) return '<div class="empty-note" style="padding:10px 0;">배정된 교재가 없습니다.</div>';
+  return materials.map(u=>materialEntryLinkHtml(subj, u)).join('');
+}
+function changeAdminMatPage(id, dir){
+  const st = ADMIN_SIMPLE_PAGE_STATE[id];
+  const next = st.cur+dir;
+  if(next<0 || next>=st.pages.length) return;
+  st.cur = next;
+  document.getElementById('admtext-'+id).innerHTML = st.pages[next];
+  document.getElementById('admlabel-'+id).textContent = (next+1)+' / '+st.pages.length;
+}
+function renderAdminMaterialManager(subj, materials, ctxKey){
+  const available = Object.keys(MATERIALS_CATALOG_T[subj]||{}).filter(u=>!materials.includes(u));
+  let html = materials.length ? materials.map(u=>
+    '<div class="list-row" style="padding:6px 0;"><span style="font-size:12px; color:var(--grey-500);">'+u+'</span><span class="action-link" onclick="removeCatUnitMaterial(\''+ctxKey+'\',\''+u+'\')">제거</span></div>'
+  ).join('') : '';
+  html += '<div style="display:flex; gap:8px; margin-top:10px;"><select id="catmatpick-'+ctxKey.replace(/[^a-zA-Z0-9]/g,'-')+'">'+
+    (available.length ? available.map(u=>'<option>'+u+'</option>').join('') : '<option value="">(추가할 단원 없음)</option>')+
+    '</select><button class="btn-sm" onclick="addCatUnitMaterial(\''+ctxKey+'\')">+ 교재 연결</button></div>';
+  return html;
+}
+function refreshCatMaterialSection(ctxKey){
+  const [subj, idxStr] = ctxKey.split('|'); const idx = parseInt(idxStr);
+  const w = CATALOG_SUBJECTS_T[subj][idx];
+  const subjSafe = subj.replace(/\s/g,'-');
+  const el = document.getElementById('catmatsec-'+subjSafe+'-'+idx);
+  if(el) el.innerHTML = renderAdminMaterialPreview(subj, w.materials, 'catprev-'+subjSafe+'-'+idx) + renderAdminMaterialManager(subj, w.materials, ctxKey);
+}
+function addCatUnitMaterial(ctxKey){
+  const [subj, idxStr] = ctxKey.split('|'); const idx = parseInt(idxStr);
+  const selId = 'catmatpick-'+ctxKey.replace(/[^a-zA-Z0-9]/g,'-');
+  const unit = document.getElementById(selId).value;
+  if(!unit) return;
+  const w = CATALOG_SUBJECTS_T[subj][idx];
+  if(!w.materials.includes(unit)) w.materials.push(unit);
+  refreshCatMaterialSection(ctxKey);
+}
+function removeCatUnitMaterial(ctxKey, unit){
+  const [subj, idxStr] = ctxKey.split('|'); const idx = parseInt(idxStr);
+  const w = CATALOG_SUBJECTS_T[subj][idx];
+  w.materials = w.materials.filter(u=>u!==unit);
+  refreshCatMaterialSection(ctxKey);
+}
+
+function renderCatalogSubjects(){
+  document.getElementById('cat-subjects-list').innerHTML = Object.keys(CATALOG_SUBJECTS_T).map(subj=>
+    '<div class="list-row"><span><b>'+subj+'</b> · '+CATALOG_SUBJECTS_T[subj].length+'개 회차</span>'+
+    '<span class="chip-btn" onclick="openCatalogSubjectDetail(\''+subj+'\')">편집</span></div>'
+  ).join('');
+}
+function addCatalogSubject(){
+  const name = prompt('새 과목 이름을 입력하세요:');
+  if(!name || !name.trim()) return;
+  if(CATALOG_SUBJECTS_T[name]){ alert('이미 존재하는 과목입니다.'); return; }
+  CATALOG_SUBJECTS_T[name] = [];
+  renderCatalogSubjects();
+}
+function openCatalogSubjectDetail(subj){
+  const units = CATALOG_SUBJECTS_T[subj];
+  const subjSafe = subj.replace(/\s/g,'-');
+  let html = '<h2 style="font-size:18px; color:var(--ink); margin-bottom:4px;">'+subj+' — 기초 템플릿 편집</h2>'+
+    '<div class="page-sub">선생님이 "내 과목"에 이 과목을 추가하면 여기 있는 내용이 복제됩니다. 회차를 펼쳐서 교재·코멘트·보충자료·과제를 구성하세요.</div>';
+  units.forEach((w,idx)=>{
+    const ctxKey = subj+'|'+idx;
+    const bodyId = 'catbody-'+subjSafe+'-'+idx;
+    html += '<div class="list-row" style="flex-direction:column; align-items:stretch; gap:8px;">'+
+      '<div style="display:flex; align-items:center; gap:10px;">'+
+      '<div style="width:52px; font-size:12px; color:var(--grey-500); font-weight:800; cursor:pointer;" onclick="toggleCatDetail(\''+bodyId+'\')">'+(idx+1)+'회차</div>'+
+      '<input type="text" value="'+w.unit+'" onchange="editCatalogUnit(\''+subj+'\','+idx+',\'unit\',this.value)" style="flex:1; border:1px solid transparent; background:transparent; font-weight:700; color:var(--ink); font-size:14px;">'+
+      '<span class="action-link" onclick="removeCatalogUnit(\''+subj+'\','+idx+')">삭제</span>'+
+      '<span class="acc-arrow" id="arrow-'+bodyId+'" style="cursor:pointer; padding:4px 8px;" onclick="toggleCatDetail(\''+bodyId+'\')">▸</span>'+
+      '</div>'+
+      '<div id="'+bodyId+'" style="display:none;">'+
+      '<div class="ro-label">설명 / 코멘트</div>'+
+      '<textarea rows="2" style="width:100%; padding:10px 12px; border:1.5px solid var(--grey-200); border-radius:8px; font-family:inherit; font-size:13px; margin-bottom:10px;" onchange="editCatalogUnit(\''+subj+'\','+idx+',\'note\',this.value)" placeholder="설명/코멘트">'+(w.note||'')+'</textarea>'+
+      '<div class="ro-label">교재</div><div id="catmatsec-'+subjSafe+'-'+idx+'">'+renderAdminMaterialPreview(subj, w.materials, 'catprev-'+subjSafe+'-'+idx)+renderAdminMaterialManager(subj, w.materials, ctxKey)+'</div>'+
+      '<div class="ro-label" style="margin-top:10px;">보충 자료</div><div id="catfiles-'+subjSafe+'-'+idx+'">'+((w.files&&w.files.length)?w.files.map(f=>'<div class="list-row"><span>'+f+'</span><span class="action-link">다운로드</span></div>').join(''):'<div class="empty-note" style="padding:6px 0;">없음</div>')+'</div>'+
+      '<label class="btn-sm" style="display:inline-block; margin:8px 0 14px; cursor:pointer;">+ 자료 추가<input type="file" style="display:none;" onchange="addCatalogFile(\''+subj+'\','+idx+',this)"></label>'+
+      '<div class="ro-label">과제</div><div id="catassign-'+subjSafe+'-'+idx+'">'+renderCatalogAssignments(subj, idx)+'</div>'+
+      '</div></div>';
+  });
+  html += '<button class="btn-sm" onclick="addCatalogUnit(\''+subj+'\')">+ 회차 추가</button>'+
+    '<div style="margin-top:20px;"><span class="action-link" style="color:var(--red);" onclick="deleteCatalogSubject(\''+subj+'\')">이 과목 전체 삭제</span></div>';
+  document.getElementById('catalog-subject-detail-body').innerHTML = html;
+  showView('catalog-subject-detail');
+}
+function toggleCatDetail(bodyId){
+  const body = document.getElementById(bodyId);
+  const open = body.style.display !== 'none';
+  body.style.display = open ? 'none' : 'block';
+  const arrow = document.getElementById('arrow-'+bodyId);
+  if(arrow) arrow.textContent = open ? '▸' : '▾';
+}
+function editCatalogUnit(subj, idx, field, val){ CATALOG_SUBJECTS_T[subj][idx][field] = val; }
+function addCatalogUnit(subj){ CATALOG_SUBJECTS_T[subj].push({unit:'새 회차', note:'', materials:[], files:[], assignments:[]}); openCatalogSubjectDetail(subj); }
+function removeCatalogUnit(subj, idx){ CATALOG_SUBJECTS_T[subj].splice(idx,1); openCatalogSubjectDetail(subj); }
+function addCatalogFile(subj, idx, input){
+  if(!input.files||!input.files[0]) return;
+  CATALOG_SUBJECTS_T[subj][idx].files.push(input.files[0].name);
+  const subjSafe = subj.replace(/\s/g,'-');
+  const w = CATALOG_SUBJECTS_T[subj][idx];
+  const el = document.getElementById('catfiles-'+subjSafe+'-'+idx);
+  if(el) el.innerHTML = (w.files&&w.files.length) ? w.files.map(f=>'<div class="list-row"><span>'+f+'</span><span class="action-link">다운로드</span></div>').join('') : '<div class="empty-note" style="padding:6px 0;">없음</div>';
+}
+function renderCatalogAssignments(subj, idx){
+  const list = CATALOG_SUBJECTS_T[subj][idx].assignments;
+  let html = list.map((a,ai)=>
+    '<div class="review-block"><div style="display:flex; justify-content:space-between;"><b style="font-size:13px;">'+a.title+'</b>'+
+    '<span class="action-link" onclick="removeCatalogAssignment(\''+subj+'\','+idx+','+ai+')">삭제</span></div>'+
+    '<div class="ro-text" style="margin-top:6px;">'+a.content+'</div></div>'
+  ).join('') || '<div class="empty-note" style="padding:8px 0;">등록된 과제가 없습니다.</div>';
+  html += '<button class="btn-sm" onclick="addCatalogAssignment(\''+subj+'\','+idx+')">+ 과제 추가</button>';
+  return html;
+}
+function addCatalogAssignment(subj, idx){
+  CATALOG_SUBJECTS_T[subj][idx].assignments.push({id:'cat'+Date.now(), title:'새 과제', content:'과제 내용을 입력하세요.'});
+  const subjSafe = subj.replace(/\s/g,'-');
+  const el = document.getElementById('catassign-'+subjSafe+'-'+idx);
+  if(el) el.innerHTML = renderCatalogAssignments(subj, idx);
+}
+function removeCatalogAssignment(subj, idx, ai){
+  CATALOG_SUBJECTS_T[subj][idx].assignments.splice(ai,1);
+  const subjSafe = subj.replace(/\s/g,'-');
+  const el = document.getElementById('catassign-'+subjSafe+'-'+idx);
+  if(el) el.innerHTML = renderCatalogAssignments(subj, idx);
+}
+function deleteCatalogSubject(subj){
+  if(!confirm(subj+' 과목 템플릿을 전체 삭제하시겠습니까?')) return;
+  delete CATALOG_SUBJECTS_T[subj];
+  showView('catalog');
+  renderCatalogSubjects();
+}
+
+function renderCatalogMaterials(){
+  const published = CURRICULUM_DOCS_T.filter(d=>d.status==='published');
+  const subjects = [...new Set(published.map(d=>d.subject))];
+  document.getElementById('cat-materials-list').innerHTML = subjects.length ? subjects.map(subj=>
+    '<div class="unit-list-item" onclick="openMatLibSubject(\''+subj+'\')"><span><b>📁 '+subj+'</b></span><span style="color:var(--grey-500); font-size:12px;">'+published.filter(d=>d.subject===subj).length+'개 교재 ›</span></div>'
+  ).join('') : '<div class="empty-note">배포된 교재가 없습니다. "교재 문서" 탭에서 교재를 만들고 배포해보세요.</div>';
+}
+function openMatLibSubject(subj){
+  const docs = CURRICULUM_DOCS_T.filter(d=>d.status==='published' && d.subject===subj);
+  const units = [...new Set(docs.map(d=>d.unit || '(단원 미지정)'))];
+  document.getElementById('catalog-material-detail-body').innerHTML =
+    '<div class="back-link" onclick="showView(\'catalog\'); showCatalogSubtab(\'cat-materials\')">← 교재 라이브러리로 돌아가기</div>'+
+    '<h2 style="font-size:18px; color:var(--ink); margin-bottom:4px;">'+subj+' — 단원 목록</h2>'+
+    '<div class="page-sub">단원을 선택하면 해당 단원에 태깅된 교재 목록이 나옵니다.</div>'+
+    units.map(u=>'<div class="unit-list-item" onclick="openMatLibUnit(\''+subj+'\',\''+u+'\')"><span>📁 '+u+'</span><span style="color:var(--grey-500); font-size:12px;">'+docs.filter(d=>(d.unit||'(단원 미지정)')===u).length+'개 교재 ›</span></div>').join('');
+  showView('catalog-material-detail');
+}
+function openMatLibUnit(subj, unit){
+  const docs = CURRICULUM_DOCS_T.filter(d=>d.status==='published' && d.subject===subj && (d.unit||'(단원 미지정)')===unit);
+  document.getElementById('catalog-material-detail-body').innerHTML =
+    '<div class="back-link" onclick="openMatLibSubject(\''+subj+'\')">← '+subj+'로 돌아가기</div>'+
+    '<h2 style="font-size:18px; color:var(--ink); margin-bottom:4px;">'+subj+' · '+unit+' — 교재 목록</h2>'+
+    '<div class="page-sub">교재를 클릭하면 실제 교재 화면(관리자는 선생님 모드로 진입)으로 이동합니다.</div>'+
+    docs.map(d=>'<div class="unit-list-item" onclick="window.open(\'alton_material_viewer_prototype.html?mode=library\',\'_blank\')"><span>📖 '+d.title+'</span><span style="color:var(--grey-500); font-size:12px;">새 탭에서 열림 ›</span></div>').join('');
+}
+function openCatalogMaterialDetail(subj){
+  const units = MATERIALS_CATALOG_T[subj];
+  const subjSafe = subj.replace(/\s/g,'-');
+  let html = '<h2 style="font-size:18px; color:var(--ink); margin-bottom:4px;">'+subj+' — 교재 라이브러리</h2>'+
+    '<div class="page-sub">단원별로 교재를 등록하면 선생님·학생 화면에서 참조됩니다. 업로드한 교재는 바로 아래에서 미리보기할 수 있습니다.</div>';
+  Object.keys(units).forEach(unit=>{
+    const unitSafe = unit.replace(/\s/g,'-');
+    html += '<div class="card" style="margin-bottom:14px;"><h3>'+unit+' <span class="action-link" style="font-size:11px;" onclick="removeCatalogMaterialUnit(\''+subj+'\',\''+unit+'\')">단원 삭제</span></h3>';
+    if(!units[unit].length){
+      html += '<div class="empty-note" style="padding:8px 0;">업로드된 교재가 없습니다.</div>';
+    } else {
+      units[unit].forEach((m,mi)=>{
+        const id = ('matlib-'+subjSafe+'-'+unitSafe+'-'+mi).replace(/[^a-zA-Z0-9-]/g,'-');
+        const pages = m.pages && m.pages.length ? m.pages : ['(콘텐츠 없음)'];
+        ADMIN_SIMPLE_PAGE_STATE[id] = {pages, cur:0};
+        html += '<div style="margin-bottom:10px;"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">'+
+          '<b style="font-size:13px;">'+m.title+'</b><span class="action-link" onclick="removeMaterialFile(\''+subj+'\',\''+unit+'\','+mi+')">삭제</span></div>'+
+          '<div class="material-page" style="height:auto; min-height:100px;"><div class="material-page-text" style="position:static; height:auto;" id="admtext-'+id+'">'+pages[0]+'</div></div>'+
+          (pages.length>1 ? '<div class="page-nav"><span class="page-arrow" onclick="changeAdminMatPage(\''+id+'\',-1)">‹</span><span id="admlabel-'+id+'">1 / '+pages.length+'</span><span class="page-arrow" onclick="changeAdminMatPage(\''+id+'\',1)">›</span></div>' : '')+
+          '</div>';
+      });
+    }
+    html += '<label class="btn-sm" style="display:inline-block; margin-top:6px; cursor:pointer;">+ 교재 업로드<input type="file" style="display:none;" onchange="uploadMaterialFile(\''+subj+'\',\''+unit+'\',this)"></label>'+
+    '</div>';
+  });
+  html += '<div class="card" style="max-width:480px;"><h3>+ 새 단원 추가</h3>'+
+    '<div class="form-row"><label>단원명</label><input type="text" id="cm-unit"></div>'+
+    '<button class="btn-sm" onclick="addCatalogMaterialUnitEmpty(\''+subj+'\')">단원 추가</button></div>';
+  document.getElementById('catalog-material-detail-body').innerHTML = html;
+  showView('catalog-material-detail');
+}
+function addCatalogMaterialUnitEmpty(subj){
+  const unit = document.getElementById('cm-unit').value.trim();
+  if(!unit) return;
+  MATERIALS_CATALOG_T[subj][unit] = [];
+  openCatalogMaterialDetail(subj);
+}
+function uploadMaterialFile(subj, unit, input){
+  if(!input.files || !input.files[0]) return;
+  const name = input.files[0].name;
+  MATERIALS_CATALOG_T[subj][unit].push({title:name, pages:['<i>업로드된 파일: '+name+'</i><br>(실제 서비스에서는 PDF 내용이 여기에 렌더링됩니다)']});
+  openCatalogMaterialDetail(subj);
+}
+function removeMaterialFile(subj, unit, mi){
+  MATERIALS_CATALOG_T[subj][unit].splice(mi,1);
+  openCatalogMaterialDetail(subj);
+}
+function removeCatalogMaterialUnit(subj, unit){
+  delete MATERIALS_CATALOG_T[subj][unit];
+  openCatalogMaterialDetail(subj);
+}
+
+/* ================= 교재 문서 (TOC+아티클 에디터) ================= */
+function statusPillDoc(status){
+  const map = {draft:['초안','status-inactive'], pending_approval:['승인대기','status-pending'], published:['배포됨','status-active'], rejected:['반려됨','status-danger']};
+  const m = map[status] || [status,'status-inactive'];
+  return '<span class="status-pill '+m[1]+'">'+m[0]+'</span>';
+}
+function renderCurriculumDocsList(){
+  const filterEl = document.getElementById('docs-filter');
+  const filter = filterEl ? filterEl.value : 'all';
+  let docs = CURRICULUM_DOCS_T;
+  if(filter==='mine') docs = docs.filter(d=>d.owner==='admin');
+  if(filter==='teacher') docs = docs.filter(d=>d.owner!=='admin');
+  document.getElementById('curriculum-docs-list').innerHTML = docs.length ? docs.map(d=>
+    '<div class="list-row"><span><b>'+d.title+'</b> · '+d.subject+' · 작성자: '+d.ownerName+
+    (d.adoptedBy&&d.adoptedBy.length?' · '+d.adoptedBy.length+'명이 가져다 씀':'')+'</span>'+
+    '<span style="display:flex; gap:8px; align-items:center;">'+statusPillDoc(d.status)+
+    '<span class="chip-btn" onclick="openDocEditor(\''+d.id+'\')">편집</span></span></div>'
+  ).join('') : '<div class="empty-note">교재 문서가 없습니다.</div>';
+}
+let newDocSubjectSelected = null;
+let newDocUnitSelected = null;
+function openNewDocForm(){
+  document.getElementById('newdoc-title').value = '';
+  const subjects = Object.keys(CATALOG_SUBJECTS_T);
+  newDocSubjectSelected = subjects[0] || null;
+  newDocUnitSelected = newDocSubjectSelected ? (CATALOG_SUBJECTS_T[newDocSubjectSelected][0] || {}).unit || null : null;
+  renderNewDocSubjectBtns();
+  renderNewDocUnitBtns();
+  document.getElementById('newdoc-warn').textContent = '';
+  showView('new-doc-form');
+}
+function renderNewDocSubjectBtns(){
+  const subjects = Object.keys(CATALOG_SUBJECTS_T);
+  document.getElementById('newdoc-subject-btns').innerHTML = subjects.length ? subjects.map(s=>
+    '<span class="cat-chip'+(s===newDocSubjectSelected?' on':'')+'" onclick="setNewDocSubject(\''+s+'\')">'+s+'</span>'
+  ).join('') : '<div class="empty-note">"과목 템플릿" 탭에서 과목을 먼저 추가하세요.</div>';
+}
+function renderNewDocUnitBtns(){
+  const units = newDocSubjectSelected ? CATALOG_SUBJECTS_T[newDocSubjectSelected].map(w=>w.unit) : [];
+  document.getElementById('newdoc-unit-btns').innerHTML = units.length ? units.map(u=>
+    '<span class="cat-chip'+(u===newDocUnitSelected?' on':'')+'" onclick="setNewDocUnit(\''+u.replace(/'/g,"\\'")+'\')">'+u+'</span>'
+  ).join('') : '<div class="empty-note">이 과목에 등록된 단원이 없습니다. "과목 템플릿" 탭에서 회차를 추가하세요.</div>';
+}
+function setNewDocSubject(s){
+  newDocSubjectSelected = s;
+  newDocUnitSelected = (CATALOG_SUBJECTS_T[s][0] || {}).unit || null;
+  renderNewDocSubjectBtns();
+  renderNewDocUnitBtns();
+}
+function setNewDocUnit(u){ newDocUnitSelected = u; renderNewDocUnitBtns(); }
+function confirmCreateDoc(){
+  const title = document.getElementById('newdoc-title').value.trim();
+  if(!title){
+    document.getElementById('newdoc-warn').textContent = '제목을 입력하세요.';
+    return;
+  }
+  if(!newDocSubjectSelected || !newDocUnitSelected){
+    document.getElementById('newdoc-warn').textContent = '과목과 단원을 선택하세요.';
+    return;
+  }
+  const newDoc = {id:'doc'+(nextCurriculumDocId++), title, subject:newDocSubjectSelected, unit:newDocUnitSelected, owner:'admin', ownerName:'관리자', status:'draft', updatedAt:'2026-09-08', adoptedBy:[], sections:[]};
+  CURRICULUM_DOCS_T.push(newDoc);
+  renderCurriculumDocsList();
+  openDocEditor(newDoc.id);
+}
+function openDocEditor(docId){
+  currentCurriculumDocId = docId;
+  const doc = CURRICULUM_DOCS_T.find(d=>d.id===docId);
+  docDraftSections = doc.sections.map(s=>({...s, problems:s.problems.map(p=>({...p}))}));
+  renderDocEditor(doc);
+  showView('curriculum-doc-editor');
+}
+function renderDocEditor(doc){
+  let html = '<div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px;"><div>'+
+    '<h2 style="font-size:18px; color:var(--ink); margin-bottom:4px;">'+doc.title+'</h2>'+
+    '<div class="page-sub">'+doc.subject+(doc.unit?' · '+doc.unit:'')+' · 작성자: '+doc.ownerName+' · '+statusPillDoc(doc.status)+'</div></div>'+
+    '<div><button class="btn-sm" onclick="previewDoc()">미리보기</button> '+
+    '<button class="btn-sm" onclick="saveDocDraft()">임시 저장</button> '+
+    '<button class="btn-primary" onclick="publishDoc()">'+(doc.owner==='admin'?'배포하기':'검토 요청')+'</button></div></div>'+
+    '<div id="doc-save-confirm"></div>'+
+    '<div class="home-grid" style="margin-top:16px; align-items:start;"><div>'+
+    '<div id="doc-sections-editor"></div>'+
+    '<button class="btn-sm" onclick="toggleSectionTemplatePicker()">+ 섹션 추가</button>'+
+    '<div id="section-template-picker" style="display:none; margin-top:10px; padding:12px; background:var(--grey-100); border-radius:8px;">'+
+    '<div style="font-size:11.5px; color:var(--grey-500); margin-bottom:8px;">템플릿을 선택하세요</div>'+
+    '<div class="category-select-row">'+
+    '<span class="cat-chip" onclick="addSectionFromTemplate(\'concept\')">📝 개념 설명</span>'+
+    '<span class="cat-chip" onclick="addSectionFromTemplate(\'mc\')">🔘 객관식 문제</span>'+
+    '<span class="cat-chip" onclick="addSectionFromTemplate(\'essay\')">✏️ 서술형 문제</span>'+
+    '</div></div>'+
+    '</div><div>'+
+    '<div class="card"><h3>참고용 다른 교재 열기</h3>'+
+    '<div style="font-size:11.5px; color:var(--grey-500); margin-bottom:8px;">편집 중에도 다른 교재를 옆에서 참고할 수 있습니다.</div>'+
+    '<select id="doc-reference-select" onchange="loadDocReference()"><option value="">선택하세요</option>'+
+    CURRICULUM_DOCS_T.filter(d=>d.id!==doc.id).map(d=>'<option value="'+d.id+'">'+d.title+'</option>').join('')+
+    '</select><div id="doc-reference-preview" style="margin-top:14px; max-height:640px; overflow-y:auto;"></div></div>'+
+    '</div></div>';
+  document.getElementById('curriculum-doc-editor-body').innerHTML = html;
+  renderDocSectionsEditor();
+}
+const DOC_DIFF_LABELS = {easy:'쉬움', medium:'보통', hard:'어려움'};
+const DOC_FORMAT_LABELS = {mc:'객관식', essay:'서술형', math:'풀이형(화이트보드)'};
+/* ===== 서식 툴바 (본문에 굵게/기울임/소제목/목록/표/강조박스 삽입) ===== */
+function rteToolbarHtml(targetId){
+  return '<div class="rte-toolbar">'+
+    '<button type="button" onmousedown="event.preventDefault()" onclick="rteExec(\''+targetId+'\',\'bold\')" title="굵게"><b>B</b></button>'+
+    '<button type="button" onmousedown="event.preventDefault()" onclick="rteExec(\''+targetId+'\',\'italic\')" title="기울임"><i>I</i></button>'+
+    '<span class="rte-sep"></span>'+
+    '<button type="button" onmousedown="event.preventDefault()" onclick="rteExec(\''+targetId+'\',\'formatBlock\',\'H2\')" title="대제목">대제목</button>'+
+    '<button type="button" onmousedown="event.preventDefault()" onclick="rteExec(\''+targetId+'\',\'formatBlock\',\'H3\')" title="소제목">소제목</button>'+
+    '<button type="button" onmousedown="event.preventDefault()" onclick="rteExec(\''+targetId+'\',\'formatBlock\',\'P\')" title="본문 텍스트">본문</button>'+
+    '<span class="rte-sep"></span>'+
+    '<button type="button" onmousedown="event.preventDefault()" onclick="rteExec(\''+targetId+'\',\'justifyLeft\')" title="왼쪽 정렬">◀</button>'+
+    '<button type="button" onmousedown="event.preventDefault()" onclick="rteExec(\''+targetId+'\',\'justifyCenter\')" title="가운데 정렬">■</button>'+
+    '<button type="button" onmousedown="event.preventDefault()" onclick="rteExec(\''+targetId+'\',\'justifyRight\')" title="오른쪽 정렬">▶</button>'+
+    '<span class="rte-sep"></span>'+
+    '<button type="button" onmousedown="event.preventDefault()" onclick="rteExec(\''+targetId+'\',\'insertUnorderedList\')" title="목록">목록</button>'+
+    '<input type="color" title="글자 색" value="#1A1A1A" onmousedown="event.stopPropagation()" onchange="rteExec(\''+targetId+'\',\'foreColor\',this.value)" class="rte-color-input">'+
+    '<button type="button" onmousedown="event.preventDefault()" onclick="rteInsertTable(\''+targetId+'\')" title="표 삽입">표 삽입</button>'+
+    '<button type="button" onmousedown="event.preventDefault()" onclick="rteInsertCallout(\''+targetId+'\')" title="강조 박스">강조 박스</button>'+
+    '</div>';
+}
+function rteExec(targetId, cmd, val){
+  const el = document.getElementById(targetId);
+  if(!el) return;
+  el.focus();
+  if(typeof document.execCommand === 'function') document.execCommand(cmd, false, val);
+  el.dispatchEvent(new Event('input'));
+}
+function rteInsertTable(targetId){
+  const el = document.getElementById(targetId);
+  if(!el) return;
+  el.focus();
+  if(typeof document.execCommand === 'function') document.execCommand('insertHTML', false, '<table><tr><th>항목</th><th>내용</th></tr><tr><td>예시1</td><td>내용1</td></tr><tr><td>예시2</td><td>내용2</td></tr></table><p><br></p>');
+  el.dispatchEvent(new Event('input'));
+}
+function rteInsertCallout(targetId){
+  const el = document.getElementById(targetId);
+  if(!el) return;
+  el.focus();
+  if(typeof document.execCommand === 'function') document.execCommand('insertHTML', false, '<div class="callout">강조하고 싶은 내용을 여기에 적으세요.</div><p><br></p>');
+  el.dispatchEvent(new Event('input'));
+}
+function renderDocSectionsEditor(){
+  document.getElementById('doc-sections-editor').innerHTML = docDraftSections.length ? docDraftSections.map((s,i)=>{
+    const bodyId = 'docbody-'+i;
+    return '<div class="card" style="margin-bottom:14px;">'+
+    '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; gap:8px;">'+
+    '<input type="text" value="'+s.title+'" onchange="docDraftSections['+i+'].title=this.value" style="font-weight:700; font-size:14px; border:1px solid transparent; background:transparent; flex:1; padding:4px;">'+
+    '<span style="display:flex; gap:8px; flex-shrink:0;">'+
+    (i>0?'<span class="action-link" onclick="moveDocSection('+i+',-1)">↑</span>':'')+
+    (i<docDraftSections.length-1?'<span class="action-link" onclick="moveDocSection('+i+',1)">↓</span>':'')+
+    '<span class="action-link" style="color:var(--red);" onclick="removeDocSection('+i+')">삭제</span>'+
+    '</span></div>'+
+    '<div class="ro-label">본문</div>'+rteToolbarHtml(bodyId)+
+    '<div id="'+bodyId+'" class="rte-editable" contenteditable="true" oninput="docDraftSections['+i+'].body=this.innerHTML">'+s.body+'</div>'+
+    '<div class="ro-label" style="margin-top:12px;">티칭 팁 (선생님 전용)</div>'+rteToolbarHtml('doctip-'+i)+
+    '<div id="doctip-'+i+'" class="rte-editable" contenteditable="true" oninput="docDraftSections['+i+'].tip=this.innerHTML">'+(s.tip||'')+'</div>'+
+    '<div class="ro-label" style="margin-top:8px;">문제</div>'+
+    (s.problems.length ? s.problems.map((p,pi)=>renderDocProblemCard(i,pi,p)).join('') : '<div class="empty-note" style="padding:6px 0;">등록된 문제가 없습니다.</div>')+
+    '<button class="btn-sm" style="margin-top:6px;" onclick="toggleDocProblemForm('+i+')">+ 문제 추가</button>'+
+    '<div id="docprobform-'+i+'" style="display:none; margin-top:10px; padding:14px; background:var(--grey-100); border-radius:8px;"></div>'+
+    '</div>';
+  }).join('') : '<div class="empty-note">섹션이 없습니다. "+ 섹션 추가"로 시작하세요.</div>';
+}
+function renderDocProblemCard(secIdx, probIdx, p){
+  return '<div class="prob-card" style="border:1.5px solid var(--grey-200); border-radius:10px; padding:12px 14px; margin-bottom:8px; background:#fff;">'+
+    '<div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:6px;">'+
+    '<span class="ptag">'+DOC_FORMAT_LABELS[p.format]+'</span>'+
+    (p.skillType?'<span class="ptag">'+p.skillType+'</span>':'')+
+    (p.difficulty?'<span class="ptag">'+DOC_DIFF_LABELS[p.difficulty]+'</span>':'')+
+    '</div>'+
+    '<div style="font-size:13px; color:var(--ink); margin-bottom:6px;">'+p.passage+'</div>'+
+    (p.format==='mc' ? '<div style="font-size:12px; color:var(--green); font-weight:700;">정답: '+String.fromCharCode(65+p.correctIndex)+') '+p.options[p.correctIndex]+'</div>' : '')+
+    (p.format==='math' ? '<div style="font-size:11.5px; color:var(--grey-500);">학생이 화이트보드에 풀이를 작성해 제출하는 형식입니다.</div>' : '')+
+    '<span class="action-link" onclick="removeDocProblem('+secIdx+','+probIdx+')">삭제</span>'+
+    '</div>';
+}
+let docProbFormState = {};
+let docAigenDraft = {};
+function toggleDocProblemForm(secIdx){
+  const el = document.getElementById('docprobform-'+secIdx);
+  const opening = el.style.display === 'none' || !el.style.display;
+  if(opening){
+    docProbFormState[secIdx] = {format:'mc', difficulty:'medium'};
+    docAigenDraft[secIdx] = [];
+    el.style.display = 'block';
+    el.innerHTML = renderDocAigenFormHtml(secIdx);
+  } else {
+    el.style.display = 'none';
+  }
+}
+function renderDocAigenFormHtml(secIdx){
+  return '<div class="ro-label">답안 형식</div><div class="category-select-row" id="docaigen-format-'+secIdx+'">'+
+    ['mc','essay','math'].map(f=>'<span class="cat-chip'+(f==='mc'?' on':'')+'" onclick="setDocAigenFormat('+secIdx+',\''+f+'\',this)">'+DOC_FORMAT_LABELS[f]+'</span>').join('')+
+    '</div>'+
+    '<div class="ro-label" style="margin-top:8px;">난이도</div><div class="category-select-row" id="docaigen-diff-'+secIdx+'">'+
+    ['easy','medium','hard'].map(d=>'<span class="cat-chip'+(d==='medium'?' on':'')+'" onclick="setDocAigenDiff('+secIdx+',\''+d+'\',this)">'+DOC_DIFF_LABELS[d]+'</span>').join('')+
+    '</div>'+
+    '<div class="ro-label" style="margin-top:8px;">문제 유형 (단원과 별개, 예: Words in Context)</div><input type="text" id="docaigen-skilltype-'+secIdx+'" placeholder="예: Words in Context" style="width:100%; padding:8px 10px; border:1.5px solid var(--grey-200); border-radius:8px; font-size:13px;">'+
+    '<div style="display:flex; align-items:center; gap:10px; margin-top:10px;">'+
+    '<span style="font-size:12.5px; color:var(--grey-500);">개수</span>'+
+    '<input type="number" id="docaigen-count-'+secIdx+'" value="1" min="1" max="5" style="width:56px; padding:8px 10px; border:1.5px solid var(--grey-200); border-radius:8px;">'+
+    '<button class="btn-primary" onclick="generateDocAigenProblems('+secIdx+')">AI로 생성하기</button>'+
+    '</div>'+
+    '<div id="docaigen-loading-'+secIdx+'"></div>'+
+    '<div id="docaigen-draft-'+secIdx+'"></div>'+
+    '<div style="margin-top:10px; display:flex; gap:8px;">'+
+    '<button class="btn-primary" style="background:var(--green);" onclick="confirmDocAigenAdd('+secIdx+')">문제로 추가</button>'+
+    '<span class="action-link" onclick="toggleDocProblemForm('+secIdx+')">취소</span>'+
+    '</div>';
+}
+function setDocAigenFormat(secIdx, format, el){
+  docProbFormState[secIdx] = docProbFormState[secIdx] || {difficulty:'medium'};
+  docProbFormState[secIdx].format = format;
+  el.parentElement.querySelectorAll('.cat-chip').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');
+}
+function setDocAigenDiff(secIdx, diff, el){
+  docProbFormState[secIdx] = docProbFormState[secIdx] || {format:'mc'};
+  docProbFormState[secIdx].difficulty = diff;
+  el.parentElement.querySelectorAll('.cat-chip').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');
+}
+function buildDocAiProblem(format, skillType, difficulty){
+  const prob = {id:'p'+Date.now()+Math.random().toString(36).slice(2,6), format, difficulty:difficulty||'medium', skillType:skillType||''};
+  const doc = CURRICULUM_DOCS_T.find(d=>d.id===currentCurriculumDocId);
+  const unit = doc ? doc.unit : '';
+  if(format==='mc'){
+    prob.passage = '(AI 생성) '+(unit||'이 교재')+' · '+(skillType||'문제')+' 유형의 새 지문입니다. 실제 서비스에서는 조건에 맞는 실제 문제가 생성됩니다.';
+    prob.options = ['선택지 1','선택지 2','선택지 3','선택지 4']; prob.correctIndex = 1;
+    prob.explanation = 'AI가 생성한 해설입니다.';
+  } else if(format==='essay'){
+    prob.passage = '(AI 생성) '+(unit||'이 교재')+' · '+(skillType||'문제')+' 유형의 서술형 문제입니다.';
+    prob.explanation = 'AI가 생성한 모범 답안입니다.';
+  } else {
+    prob.passage = '(AI 생성) '+(unit||'이 교재')+' · '+(skillType||'문제')+' 유형의 풀이형(화이트보드) 문제입니다.';
+    prob.explanation = 'AI가 생성한 풀이 과정입니다.';
+  }
+  return prob;
+}
+function generateDocAigenProblems(secIdx){
+  const state = docProbFormState[secIdx] || {format:'mc', difficulty:'medium'};
+  const skillTypeEl = document.getElementById('docaigen-skilltype-'+secIdx);
+  const countEl = document.getElementById('docaigen-count-'+secIdx);
+  const skillType = skillTypeEl ? skillTypeEl.value : '';
+  const count = Math.max(1, Math.min(5, parseInt(countEl ? countEl.value : 1) || 1));
+  document.getElementById('docaigen-loading-'+secIdx).innerHTML = '<div class="cr-policy" style="margin-top:10px;">AI가 조건에 맞는 문제 '+count+'개를 생성하는 중...</div>';
+  setTimeout(()=>{
+    docAigenDraft[secIdx] = [];
+    for(let i=0;i<count;i++) docAigenDraft[secIdx].push(buildDocAiProblem(state.format, skillType, state.difficulty));
+    document.getElementById('docaigen-loading-'+secIdx).innerHTML = '';
+    renderDocAigenDraft(secIdx);
+  }, 900);
+}
+function renderDocAigenDraft(secIdx){
+  const el = document.getElementById('docaigen-draft-'+secIdx);
+  if(!el) return;
+  const draft = docAigenDraft[secIdx] || [];
+  el.innerHTML = draft.length ? '<div class="ro-label" style="margin-top:10px;">생성된 문제 — 검토·수정 후 추가하세요</div>'+draft.map((p,pi)=>renderDocAigenDraftCard(secIdx,pi,p)).join('') : '';
+}
+function renderDocAigenDraftCard(secIdx, pi, p){
+  let html = '<div class="card" style="margin-top:10px;">'+
+    '<div class="ro-label">지문 / 문제</div>'+
+    '<textarea rows="2" style="width:100%; padding:8px 10px; border:1.5px solid var(--grey-200); border-radius:8px; font-family:inherit; font-size:13px;" onchange="docAigenDraft['+secIdx+']['+pi+'].passage=this.value">'+p.passage+'</textarea>';
+  if(p.format==='mc'){
+    html += '<div class="ro-label" style="margin-top:8px;">선택지 (정답에 라디오 체크)</div>'+
+      p.options.map((o,oi)=>'<div style="display:flex; gap:8px; align-items:center; margin-top:6px;">'+
+        '<input type="radio" name="docaigen-correct-'+secIdx+'-'+pi+'" '+(oi===p.correctIndex?'checked':'')+' onchange="docAigenDraft['+secIdx+']['+pi+'].correctIndex='+oi+'">'+
+        '<input type="text" value="'+o+'" style="flex:1; padding:6px 8px; border:1.5px solid var(--grey-200); border-radius:6px; font-size:13px;" onchange="docAigenDraft['+secIdx+']['+pi+'].options['+oi+']=this.value">'+
+        '</div>').join('');
+  } else if(p.format==='math'){
+    html += '<div style="font-size:11.5px; color:var(--grey-500); margin-top:6px;">학생이 화이트보드에 풀이를 작성해 제출하는 형식입니다.</div>';
+  }
+  html += '<div class="ro-label" style="margin-top:8px;">해설 / 모범답안</div>'+
+    '<textarea rows="2" style="width:100%; padding:8px 10px; border:1.5px solid var(--grey-200); border-radius:8px; font-family:inherit; font-size:13px;" onchange="docAigenDraft['+secIdx+']['+pi+'].explanation=this.value">'+p.explanation+'</textarea>'+
+    '<div style="display:flex; gap:12px; margin-top:8px;">'+
+    '<span class="action-link" onclick="regenerateDocAigenItem('+secIdx+','+pi+')">🔄 이 문제만 다시 생성</span>'+
+    '<span class="action-link" style="color:var(--red);" onclick="removeDocAigenDraftItem('+secIdx+','+pi+')">삭제</span>'+
+    '</div></div>';
+  return html;
+}
+function regenerateDocAigenItem(secIdx, pi){
+  const p = docAigenDraft[secIdx][pi];
+  docAigenDraft[secIdx][pi] = buildDocAiProblem(p.format, p.skillType, p.difficulty);
+  renderDocAigenDraft(secIdx);
+}
+function removeDocAigenDraftItem(secIdx, pi){
+  docAigenDraft[secIdx].splice(pi,1);
+  renderDocAigenDraft(secIdx);
+}
+function confirmDocAigenAdd(secIdx){
+  const draft = docAigenDraft[secIdx] || [];
+  if(!draft.length){ alert('먼저 AI로 문제를 생성하세요.'); return; }
+  draft.forEach(p=>docDraftSections[secIdx].problems.push(p));
+  docAigenDraft[secIdx] = [];
+  renderDocSectionsEditor();
+}
+function toggleSectionTemplatePicker(){
+  const el = document.getElementById('section-template-picker');
+  el.style.display = el.style.display==='none' ? 'block' : 'none';
+}
+function addSectionFromTemplate(type){
+  const templates = {
+    concept: {title:'새 개념 섹션', body:'여기에 개념 설명을 작성하세요.', tip:'', problems:[]},
+    mc: {title:'개념 확인 문제', body:'', tip:'', problems:[{id:'p'+Date.now(), format:'mc', passage:'문제 지문을 입력하세요 (빈칸은 ______ 로 표시)', options:['선택지1','선택지2','선택지3','선택지4'], correctIndex:0, explanation:'해설을 입력하세요', difficulty:'medium', skillType:''}]},
+    essay: {title:'서술형 확인 문제', body:'', tip:'', problems:[{id:'p'+Date.now(), format:'essay', passage:'서술형 문제 지문을 입력하세요', explanation:'모범 답안을 입력하세요', difficulty:'medium', skillType:''}]}
+  };
+  const t = templates[type];
+  if(!t) return;
+  docDraftSections.push({id:'s'+(nextDocSectionId++), title:t.title, body:t.body, tip:t.tip, problems:t.problems.map(p=>({...p}))});
+  document.getElementById('section-template-picker').style.display = 'none';
+  renderDocSectionsEditor();
+}
+function removeDocSection(i){ docDraftSections.splice(i,1); renderDocSectionsEditor(); }
+function moveDocSection(i, dir){
+  const j = i+dir;
+  if(j<0 || j>=docDraftSections.length) return;
+  const tmp = docDraftSections[i]; docDraftSections[i] = docDraftSections[j]; docDraftSections[j] = tmp;
+  renderDocSectionsEditor();
+}
+function removeDocProblem(secIdx, probIdx){ docDraftSections[secIdx].problems.splice(probIdx,1); renderDocSectionsEditor(); }
+function loadDocReference(){
+  const refId = document.getElementById('doc-reference-select').value;
+  const previewEl = document.getElementById('doc-reference-preview');
+  if(!refId){ previewEl.innerHTML=''; return; }
+  const ref = CURRICULUM_DOCS_T.find(d=>d.id===refId);
+  previewEl.innerHTML = '<h3 style="font-size:13px; margin-bottom:8px;">'+ref.title+'</h3>'+
+    ref.sections.map(s=>'<div style="margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid var(--grey-100);"><b style="font-size:12.5px; color:var(--ink);">'+s.title+'</b><div class="ro-text" style="font-size:12px; margin-top:4px;">'+s.body+'</div></div>').join('');
+}
+function previewDoc(){
+  const doc = CURRICULUM_DOCS_T.find(d=>d.id===currentCurriculumDocId);
+  let html = '<h1 style="font-size:22px; font-weight:800; color:var(--ink); margin-bottom:6px;">'+doc.title+'</h1>'+
+    '<div class="page-sub">'+doc.subject+(doc.unit?' · '+doc.unit:'')+' — 학생·선생님에게 실제로 보이는 화면과 유사한 미리보기입니다.</div>';
+  if(!docDraftSections.length){
+    html += '<div class="empty-note">섹션이 없습니다. 편집 화면에서 섹션을 추가해보세요.</div>';
+  }
+  docDraftSections.forEach(s=>{
+    html += '<div class="card" style="margin-bottom:16px;">'+
+      '<h2 style="font-size:17px; color:var(--ink); margin-bottom:10px;">'+s.title+'</h2>'+
+      '<div style="font-size:13.5px; line-height:1.7; color:var(--ink);">'+(s.body || '<span style="color:var(--grey-500);">(본문 없음)</span>')+'</div>'+
+      (s.tip ? '<div style="margin-top:12px; padding:10px 12px; background:var(--yellow-bg); border-radius:8px; font-size:12.5px; color:#4A3900;"><b>💡 티칭 팁 (선생님 전용)</b><br>'+s.tip+'</div>' : '')+
+      (s.problems && s.problems.length ? s.problems.map(p=>
+        '<div class="prob-card" style="margin-top:14px;">'+
+        '<div class="prob-tags" style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px;">'+
+        '<span class="ptag">'+DOC_FORMAT_LABELS[p.format]+'</span>'+
+        (p.skillType?'<span class="ptag">'+p.skillType+'</span>':'')+
+        (p.difficulty?'<span class="ptag">'+DOC_DIFF_LABELS[p.difficulty]+'</span>':'')+
+        '</div>'+
+        '<div style="font-size:13px; margin-bottom:8px;">'+p.passage+'</div>'+
+        (p.format==='mc' ? p.options.map((o,i)=>'<div class="list-row"><span>'+String.fromCharCode(65+i)+') '+o+'</span>'+(i===p.correctIndex?'<span style="color:var(--green); font-weight:700; font-size:12px;">정답</span>':'')+'</div>').join('') : '')+
+        '<div style="font-size:12px; color:var(--grey-500); margin-top:10px;"><b>해설:</b> '+p.explanation+'</div>'+
+        '</div>'
+      ).join('') : '')+
+      '</div>';
+  });
+  document.getElementById('doc-preview-body').innerHTML = html;
+  showView('doc-preview');
+}
+function saveDocDraft(){
+  const doc = CURRICULUM_DOCS_T.find(d=>d.id===currentCurriculumDocId);
+  doc.sections = docDraftSections.map(s=>({...s}));
+  doc.updatedAt = '2026-09-07';
+  if(doc.status==='rejected') doc.status = 'draft';
+  document.getElementById('doc-save-confirm').innerHTML = '<div style="color:var(--green); font-weight:700; font-size:12.5px; margin-top:8px;">임시 저장되었습니다.</div>';
+  renderCurriculumDocsList();
+}
+function publishDoc(){
+  const doc = CURRICULUM_DOCS_T.find(d=>d.id===currentCurriculumDocId);
+  doc.sections = docDraftSections.map(s=>({...s}));
+  doc.updatedAt = '2026-09-07';
+  if(doc.owner==='admin'){
+    doc.status = 'published';
+    document.getElementById('doc-save-confirm').innerHTML = '<div style="color:var(--green); font-weight:700; font-size:12.5px; margin-top:8px;">배포되었습니다. 교재 리스트에 추가되었습니다.</div>';
+  } else {
+    doc.status = 'pending_approval';
+    document.getElementById('doc-save-confirm').innerHTML = '<div style="color:#8A6D00; font-weight:700; font-size:12.5px; margin-top:8px;">관리자 승인 요청이 전송되었습니다.</div>';
+  }
+  renderCurriculumDocsList();
+}
+function renderApprovalQueue(){
+  const pending = CURRICULUM_DOCS_T.filter(d=>d.status==='pending_approval');
+  document.getElementById('approval-queue-list').innerHTML = pending.length ? pending.map(d=>
+    '<div class="card" style="margin-bottom:14px;"><h3>'+d.title+' <span style="font-size:11.5px; color:var(--grey-500); font-weight:600;">('+d.subject+' · '+d.ownerName+')</span></h3>'+
+    '<div style="display:flex; gap:8px; margin-top:8px;">'+
+    '<button class="btn-sm" onclick="openDocEditor(\''+d.id+'\')">내용 검토</button>'+
+    '<button class="btn-accept" onclick="approveDoc(\''+d.id+'\')">승인</button>'+
+    '<button class="btn-sm" style="color:var(--red);" onclick="rejectDoc(\''+d.id+'\')">반려</button>'+
+    '</div></div>'
+  ).join('') : '<div class="empty-note">승인 대기 중인 교재가 없습니다.</div>';
+}
+function approveDoc(id){
+  const doc = CURRICULUM_DOCS_T.find(d=>d.id===id);
+  doc.status = 'published';
+  renderApprovalQueue();
+  renderCurriculumDocsList();
+}
+function rejectDoc(id){
+  const reason = prompt('반려 사유를 입력하세요:');
+  const doc = CURRICULUM_DOCS_T.find(d=>d.id===id);
+  doc.status = 'rejected';
+  doc.rejectReason = reason || '';
+  renderApprovalQueue();
+  renderCurriculumDocsList();
+}
+
+/* ================= BILLING (수업권 조정 + 로그) ================= */
+function renderBilling(){
+  document.getElementById('billing-parents-list').innerHTML = STUDENTS_ADMIN_T.map(s=>
+    '<div class="list-row" style="cursor:pointer;" onclick="openUserDetail(\'student\',\''+s.id+'\')">'+
+    '<span><b>'+s.name+'</b> ('+parentName(s.parentId)+')</span>'+
+    '<span style="display:flex; align-items:center; gap:10px;"><span>'+s.creditBalance+'장 보유</span><span class="action-link">조정하러 가기 →</span></span>'+
+    '</div>'
+  ).join('') || '<div class="empty-note">학생이 없습니다.</div>';
+  renderAdjustmentLog();
+}
+let adjSelectedCategory = {};
+function selectAdjCategory(studentId, el, cat){
+  document.querySelectorAll('#adjcat-'+studentId+' .cat-chip').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');
+  adjSelectedCategory[studentId] = cat;
+}
+function adjustCredit(studentId){
+  const amount = parseInt(document.getElementById('adjamount-'+studentId).value);
+  const reason = document.getElementById('adjreason-'+studentId).value.trim();
+  const category = adjSelectedCategory[studentId] || ADJUSTMENT_CATEGORIES[0];
+  if(!amount || !reason){
+    document.getElementById('adjconfirm-'+studentId).innerHTML = '<div style="color:var(--red); font-size:12px; margin-top:4px;">조정 수량과 사유를 모두 입력해야 합니다.</div>';
+    return;
+  }
+  const s = STUDENTS_ADMIN_T.find(x=>x.id===studentId);
+  s.creditBalance = Math.max(0, s.creditBalance + amount);
+  CREDIT_ADJUSTMENTS_T.push({id:nextAdjId++, studentId, delta:amount, category, reason, admin:'관리자', time:'방금'});
+  renderAdjustmentLog();
+  openUserDetail('student', studentId);
+}
+function renderAdjustmentLog(){
+  const el = document.getElementById('credit-adjustment-log');
+  if(!el) return;
+  el.innerHTML = CREDIT_ADJUSTMENTS_T.slice().reverse().map(a=>
+    '<div class="log-entry"><b>'+studentName(a.studentId)+'</b> · '+(a.delta>0?'+':'')+a.delta+'장 · <span class="status-pill status-info">'+a.category+'</span><br>'+a.reason+' — '+a.admin+' · '+a.time+'</div>'
+  ).join('') || '<div class="empty-note">조정 내역이 없습니다.</div>';
+}
+
+/* ================= CONTRACTS ================= */
+function showContractsSubtab(id){
+  document.querySelectorAll('#contracts .subview').forEach(v=>v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('#contracts .subtab').forEach(t=>t.classList.remove('active'));
+  document.querySelector('#contracts .subtab[data-sub="'+id+'"]').classList.add('active');
+}
+function renderContracts(){
+  document.getElementById('contracts-family').innerHTML =
+    '<table class="data-table"><thead><tr><th>학부모</th><th>학생</th><th>상태</th><th>서명일</th><th></th></tr></thead><tbody>'+
+    CONTRACTS_T.map(c=>
+      '<tr><td>'+c.parentName+'</td><td>'+c.studentNames+'</td>'+
+      '<td>'+(c.status==='signed'?'<span class="status-pill status-active">서명완료</span>':'<span class="status-pill status-pending">서명대기</span>')+'</td>'+
+      '<td>'+(c.signedAt||'-')+'</td>'+
+      '<td><span class="action-link" onclick="openContractDoc(\'family\','+c.id+')">계약서 보기</span></td></tr>'
+    ).join('')+'</tbody></table>';
+  document.getElementById('contracts-teacher').innerHTML =
+    '<table class="data-table"><thead><tr><th>선생님</th><th>서류</th><th>상태</th><th>서명일</th><th></th></tr></thead><tbody>'+
+    TEACHER_CONTRACTS_T.map(c=>
+      '<tr><td>'+teacherName(c.teacherId)+'</td><td>'+c.docType+'</td>'+
+      '<td>'+(c.status==='signed'?'<span class="status-pill status-active">서명완료</span>':'<span class="status-pill status-pending">서명대기</span>')+'</td>'+
+      '<td>'+(c.signedAt||'-')+'</td>'+
+      '<td><span class="action-link" onclick="openContractDoc(\'teacher\','+c.id+')">계약서 보기</span></td></tr>'
+    ).join('')+'</tbody></table>';
+}
+function openContractDoc(type, id){
+  const c = (type==='family' ? CONTRACTS_T : TEACHER_CONTRACTS_T).find(x=>x.id===id);
+  const title = type==='family' ? c.parentName+' · '+c.studentNames : teacherName(c.teacherId)+' · '+c.docType;
+  document.getElementById('contract-doc-body').innerHTML =
+    '<h2 style="font-size:18px; color:var(--ink); margin-bottom:4px;">계약서 — '+title+'</h2>'+
+    '<div class="page-sub">'+(c.status==='signed'?'서명완료 · '+c.signedAt:'서명대기')+'</div>'+
+    '<div class="card"><pre style="white-space:pre-wrap; font-family:inherit; font-size:13px; line-height:1.8; color:var(--ink); margin:0;">'+c.docContent+'</pre></div>';
+  showView('contract-doc');
+}
+
+/* ================= QC & 감사로그 ================= */
+function renderQcWarnings(){
+  document.getElementById('qc-warnings').innerHTML =
+    '<table class="data-table"><thead><tr><th>선생님</th><th>학생</th><th>과목</th><th>수업 시간</th><th>사유</th><th>상세</th></tr></thead><tbody>'+
+    (QC_WARNINGS_T.map(w=>
+      '<tr><td>'+teacherName(w.teacherId)+'</td><td>'+studentName(w.studentId)+'</td><td>'+w.subj+'</td>'+
+      '<td>'+w.date+' '+w.time+'</td><td><span class="status-pill status-danger">'+w.type+'</span></td><td>'+w.detail+'</td></tr>'
+    ).join('') || '<tr><td colspan="6" class="empty-note">경고 기록이 없습니다.</td></tr>')+'</tbody></table>';
+}
+function renderMakeupView(){
+  const filterType = document.getElementById('makeup-filter-type').value;
+  const withCount = MAKEUP_STATUS_T.filter(m=>m.count>0);
+  let html;
+  if(!withCount.length){
+    html = '<div class="empty-note">현재 보충 수업이 필요한 건이 없습니다.</div>';
+  } else if(filterType==='student'){
+    html = '<table class="data-table"><thead><tr><th>학생</th><th>선생님</th><th>필요 횟수</th></tr></thead><tbody>'+
+      withCount.map(m=>'<tr><td>'+studentName(m.studentId)+'</td><td>'+teacherName(m.teacherId)+'</td><td>'+m.count+'회</td></tr>').join('')+'</tbody></table>';
+  } else {
+    html = '<table class="data-table"><thead><tr><th>선생님</th><th>학생</th><th>필요 횟수</th></tr></thead><tbody>'+
+      withCount.map(m=>'<tr><td>'+teacherName(m.teacherId)+'</td><td>'+studentName(m.studentId)+'</td><td>'+m.count+'회</td></tr>').join('')+'</tbody></table>';
+  }
+  document.getElementById('qc-makeup-list').innerHTML = html;
+}
+function renderQcRequests(){
+  const filterEl = document.getElementById('reqfilter-type');
+  const filterType = filterEl ? filterEl.value : 'student';
+  const groups = {};
+  PARENT_REQUESTS_ADMIN_T.forEach(r=>{
+    const key = filterType==='student' ? r.studentName+' ('+r.parentName+')' : r.teacherName;
+    groups[key] = groups[key] || [];
+    groups[key].push(r);
+  });
+  const keys = Object.keys(groups);
+  document.getElementById('qc-requests-list').innerHTML = keys.length ? keys.map(k=>
+    '<div class="card" style="margin-bottom:12px;"><h3>'+k+'</h3>'+
+    groups[k].slice().reverse().map(r=>
+      '<div class="log-entry">'+(filterType==='student' ? '→ '+r.teacherName : '학생: '+r.studentName+' ('+r.parentName+')')+'<br>'+r.text+' — '+r.time+'</div>'
+    ).join('')+'</div>'
+  ).join('') : '<div class="empty-note">요청 아카이브가 없습니다.</div>';
+}
+function renderMessagesView(){
+  const sel = document.getElementById('msg-filter-teacher');
+  if(!sel.options.length){
+    sel.innerHTML = TEACHERS_ADMIN_T.map(t=>'<option value="'+t.id+'">'+t.name+'</option>').join('');
+  }
+  const teacherId = sel.value;
+  const chatKeys = Object.keys(CHATS_T).filter(k=>k.startsWith(teacherId+'_'));
+  document.getElementById('qc-messages-list').innerHTML = chatKeys.length ? chatKeys.map(k=>{
+    const studentId = k.split('_')[1];
+    const msgs = CHATS_T[k];
+    return '<div class="list-row" style="cursor:pointer;" onclick="openChatDetail(\''+k+'\')"><span><b>'+teacherName(teacherId)+'</b> ↔ <b>'+studentName(studentId)+'</b></span>'+
+      '<span style="color:var(--grey-500); font-size:12px;">'+msgs.length+'개 메시지 · 최근: '+msgs[msgs.length-1].time+'</span></div>';
+  }).join('') : '<div class="empty-note">이 선생님의 대화 기록이 없습니다.</div>';
+}
+function openChatDetail(chatKey){
+  const [teacherId, studentId] = chatKey.split('_');
+  const msgs = CHATS_T[chatKey] || [];
+  document.getElementById('chat-detail-body').innerHTML =
+    '<h2 style="font-size:18px; color:var(--ink); margin-bottom:14px;">'+teacherName(teacherId)+' ↔ '+studentName(studentId)+'</h2>'+
+    '<div class="card">'+msgs.map(m=>
+      '<div class="chat-meta">'+(m.from==='teacher'?teacherName(teacherId):studentName(studentId))+' · '+m.time+'</div>'+
+      '<div class="chat-bubble '+m.from+'">'+m.text+'</div>'
+    ).join('')+'</div>';
+  showView('chat-detail');
+}
+
+/* ================= PAYOUTS ================= */
+function renderPayouts(){
+  const startEl = document.getElementById('payout-range-start');
+  const endEl = document.getElementById('payout-range-end');
+  if(startEl && !startEl.value) startEl.value = payoutRangeStart;
+  if(endEl && !endEl.value) endEl.value = payoutRangeEnd;
+  renderPayoutSessionsSummary();
+  document.getElementById('payouts-list').innerHTML =
+    '<table class="data-table"><thead><tr><th>선생님</th><th>금액</th><th>예정일</th><th>상태</th><th></th></tr></thead><tbody>'+
+    PAYOUTS_T.map((p,idx)=>
+      '<tr><td>'+teacherName(p.teacherId)+'</td><td>₩'+p.amount.toLocaleString()+'</td><td>'+p.date+'</td>'+
+      '<td>'+(p.status==='완료'?'<span class="status-pill status-active">완료</span>':'<span class="status-pill status-pending">대기</span>')+'</td>'+
+      '<td>'+(p.status==='대기' ? '<span class="action-link" onclick="approvePayout('+idx+')">승인 처리</span>' : '')+'</td></tr>'
+    ).join('')+'</tbody></table>';
+}
+function applyPayoutRange(){
+  payoutRangeStart = document.getElementById('payout-range-start').value;
+  payoutRangeEnd = document.getElementById('payout-range-end').value;
+  renderPayoutSessionsSummary();
+}
+function setPayoutRangeLastMonth(){
+  payoutRangeStart = '2026-08-01';
+  payoutRangeEnd = '2026-08-31';
+  document.getElementById('payout-range-start').value = payoutRangeStart;
+  document.getElementById('payout-range-end').value = payoutRangeEnd;
+  renderPayoutSessionsSummary();
+}
+function renderPayoutSessionsSummary(){
+  const inRange = SESSIONS_LOG_T.filter(s=>s.date>=payoutRangeStart && s.date<=payoutRangeEnd);
+  const byTeacher = {};
+  inRange.forEach(s=>{ (byTeacher[s.teacherId] = byTeacher[s.teacherId]||[]).push(s); });
+  const teacherIds = Object.keys(byTeacher);
+  document.getElementById('payouts-sessions-summary').innerHTML = teacherIds.length ? teacherIds.map(tid=>{
+    const list = byTeacher[tid].slice().sort((a,b)=>a.date.localeCompare(b.date));
+    return '<div class="card" style="margin-bottom:12px;"><h3>'+teacherName(tid)+' <span style="font-size:12.5px; color:var(--grey-500); font-weight:600;">총 '+list.length+'회 진행</span></h3>'+
+      list.map(s=>'<div class="kv-row"><span>'+s.date+' · '+studentName(s.studentId)+' · '+s.subj+'</span><span>'+s.session+'회차</span></div>').join('')+
+      '</div>';
+  }).join('') : '<div class="empty-note">해당 기간에 진행된 수업이 없습니다.</div>';
+}
+function approvePayout(idx){
+  PAYOUTS_T[idx].status = '완료';
+  renderPayouts();
+}
+
+/* ================= INIT ================= */
+/* ================= DOCUMENTS (회사 문서 아카이브) ================= */
+function renderDocuments(){
+  const filterSel = document.getElementById('doc-category-filter');
+  if(filterSel && !filterSel.dataset.populated){
+    filterSel.innerHTML = '<option value="">전체 카테고리</option>'+DOC_CATEGORIES.map(c=>'<option value="'+c+'">'+c+'</option>').join('');
+    filterSel.dataset.populated = '1';
+  }
+  const uploadSel = document.getElementById('doc-upload-category');
+  if(uploadSel && !uploadSel.dataset.populated){
+    uploadSel.innerHTML = DOC_CATEGORIES.map(c=>'<option value="'+c+'">'+c+'</option>').join('');
+    uploadSel.dataset.populated = '1';
+  }
+  const filter = filterSel ? filterSel.value : '';
+  const filtered = filter ? COMPANY_DOCS_T.filter(d=>d.category===filter) : COMPANY_DOCS_T;
+  const groups = {};
+  filtered.forEach(d=>{ (groups[d.category]=groups[d.category]||[]).push(d); });
+  const cats = Object.keys(groups);
+  document.getElementById('documents-list').innerHTML = cats.length ? cats.map(cat=>
+    '<div class="card" style="margin-bottom:14px;"><h3>'+cat+'</h3>'+
+    groups[cat].map(d=>'<div class="list-row"><span>'+d.name+'</span><span style="display:flex; gap:10px; align-items:center;"><span style="font-size:11px; color:var(--grey-500);">'+d.uploadedAt+'</span><span class="action-link" onclick="removeCompanyDoc('+d.id+')">삭제</span></span></div>').join('')+
+    '</div>'
+  ).join('') : '<div class="empty-note">등록된 문서가 없습니다.</div>';
+}
+function uploadCompanyDoc(input){
+  if(!input.files || !input.files[0]) return;
+  const category = document.getElementById('doc-upload-category').value;
+  COMPANY_DOCS_T.push({id:nextDocId++, category, name:input.files[0].name, uploadedAt:'2026-09-07'});
+  renderDocuments();
+}
+function removeCompanyDoc(id){
+  if(!confirm('이 문서를 삭제하시겠습니까?')) return;
+  COMPANY_DOCS_T = COMPANY_DOCS_T.filter(d=>d.id!==id);
+  renderDocuments();
+}
+
+function refreshAll(){
+  renderDashboard();
+  renderUsers();
+  renderMatching();
+  renderConsultCalendar();
+  renderConsultStatus();
+  renderConsultArchive();
+  renderCatalogSubjects();
+  renderCatalogMaterials();
+  renderCurriculumDocsList();
+  renderApprovalQueue();
+  renderBilling();
+  renderContracts();
+  renderQcWarnings();
+  renderQcRequests();
+  renderPayouts();
+  renderDocuments();
+  renderBell();
+}
+
+document.addEventListener('click', (e)=>{
+  if(!e.target.closest('.account-wrap')) document.getElementById('account-menu').classList.remove('open');
+  if(!e.target.closest('.bell-wrap')) document.getElementById('notif-menu').classList.remove('open');
+});
+
+refreshAll();
+</script>
+</body>
+</html>

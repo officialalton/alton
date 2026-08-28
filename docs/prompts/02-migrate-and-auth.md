@@ -1,0 +1,35 @@
+# 프롬프트 02 — 마이그레이션 + 인증 (스키마 승인 후에만 진행)
+
+## 사전 준비
+- Supabase 프로젝트를 직접 만들고 (supabase.com), 프로젝트 URL/anon key/service role key를 `.env.local`에 넣는다
+- `docs/spec/schema-draft.md`가 이미 승인된 상태여야 함
+
+## Claude Code에 붙여넣을 프롬프트 (마이그레이션)
+
+```
+docs/spec/schema-draft.md에 있는 스키마를 기반으로 Supabase 마이그레이션 파일을 작성해줘.
+
+1. supabase/migrations/ 아래에 테이블 생성 SQL 작성
+2. 각 테이블에 적절한 RLS(Row Level Security) 정책 초안도 같이 작성해줘 — 예를 들어 학생은 자기 데이터만, 선생님은 자기가 담당하는 학생 데이터만 볼 수 있어야 해
+3. docs/spec/mockups/의 시드 데이터(예: 지훈, 박서연 선생님 등 목업에 나온 예시 인물들)를 참고해서 개발용 시드 데이터도 만들어줘 (supabase/seed.sql)
+
+마이그레이션 실행은 아직 하지 말고, 파일만 만들고 나서 내용을 보여줘.
+```
+
+## Claude Code에 붙여넣을 프롬프트 (인증)
+
+```
+Supabase Auth로 로그인/역할 기반 라우팅을 구현해줘.
+
+1. 이메일/비밀번호 로그인 (docs/spec/mockups/alton_auth_v3.html 참고해서 화면 그대로)
+2. 로그인 후 역할(student/parent/teacher/admin)에 따라 다른 대시보드로 리다이렉트
+3. 목업에서는 ?role=student 같은 URL 파라미터로 역할을 흉내냈는데, 이제 실제로는 로그인한 사용자의 세션에서 역할을 가져와야 해. 세션뷰(나중에 만들 부분)에 넘길 role/state 값도 여기서 나오는 구조를 미리 설계해줘.
+4. 역할별로 접근 가능한 라우트를 제한하는 미들웨어 작성
+
+작업 끝나면 실제로 로그인이 되는지 테스트해보고 결과를 알려줘.
+```
+
+## 완료 후 체크리스트
+- [ ] Supabase 대시보드에서 테이블이 실제로 생성됐는지 확인
+- [ ] 시드 데이터로 로그인 테스트 (학생/선생님/관리자 계정 각각)
+- [ ] RLS 정책이 실제로 남의 데이터를 못 보게 막는지 간단히 테스트

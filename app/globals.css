@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+/*
+ * 목업(alton_material_viewer_prototype.html — 수업 세션뷰) 기준으로 통일한 팔레트.
+ * 포털 목업들(admin/auth/landing/parent/student/teacher)은 같은 변수명에 다른 값을 쓰고 있었는데,
+ * 세션뷰가 가장 중요한 화면이라 세션뷰 값을 단일 진실 소스로 채택했다.
+ * 포털 화면을 만들 때 색이 달라 보이면 여기 값을 임의로 바꾸지 말고 먼저 확인할 것.
+ */
+:root {
+  --background: #ffffff;
+  --foreground: #333333;
+
+  --ink: #333333;
+  --grey-700: #4a4a4a;
+  --grey-500: #767676;
+  --grey-300: #b0b0b0;
+  --grey-200: #e3e3e3;
+  --grey-100: #f3f3f3;
+
+  --red: #c8102e;
+  --red-bg: #fcebeb;
+  --red-d: #8f0b20;
+  --yellow: #f2b90c;
+  --yellow-bg: #fff8e6;
+  --blue: #1b6fb0;
+  --blue-bg: #eaf3fb;
+  --green: #1e8e5a;
+  --green-bg: #e9f7ef;
+  --white: #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --color-ink: var(--ink);
+  --color-grey-700: var(--grey-700);
+  --color-grey-500: var(--grey-500);
+  --color-grey-300: var(--grey-300);
+  --color-grey-200: var(--grey-200);
+  --color-grey-100: var(--grey-100);
+
+  --color-red: var(--red);
+  --color-red-bg: var(--red-bg);
+  --color-red-d: var(--red-d);
+  --color-yellow: var(--yellow);
+  --color-yellow-bg: var(--yellow-bg);
+  --color-blue: var(--blue);
+  --color-blue-bg: var(--blue-bg);
+  --color-green: var(--green);
+  --color-green-bg: var(--green-bg);
+  --color-white: var(--white);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}

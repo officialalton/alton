@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alton Education — 프리미엄 SAT·AP 비대면 코칭</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#C8102E; --red-d:#8f0b20;
+    --ink:#1A1A1A; --grey-700:#333333; --grey-500:#6E6E6E; --grey-200:#E4E1DA; --grey-100:#F5F3EF;
+    --blue:#1B6FB0; --yellow:#F2B90C;
+    --white:#FFFFFF;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter','Noto Sans KR',sans-serif;
+    color:var(--grey-700); background:var(--white); line-height:1.6; font-size:16px;
+  }
+  h1,h2,h3{font-family:'Inter','Noto Sans KR',sans-serif; color:var(--ink); font-weight:800; letter-spacing:-0.01em;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 28px;}
+  a{color:inherit; text-decoration:none;}
+
+  /* NAV */
+  header{position:sticky; top:0; background:rgba(255,255,255,0.96); backdrop-filter:blur(6px); border-bottom:1px solid var(--grey-200); z-index:50;}
+  nav{display:flex; align-items:center; justify-content:space-between; padding:18px 0;}
+  .logo{font-weight:800; font-size:19px; letter-spacing:0.02em; color:var(--ink);}
+  .logo span{color:var(--red);}
+  .nav-right{display:flex; align-items:center; gap:22px; font-size:14.5px; font-weight:600;}
+  .nav-right a.login{color:var(--grey-500);}
+  .nav-links{display:flex; align-items:center; gap:28px; font-size:13.5px; font-weight:700; color:var(--grey-700);}
+  .nav-links a:hover{color:var(--red);}
+  .btn{display:inline-block; border-radius:6px; font-weight:700; font-size:14.5px; padding:11px 20px; transition:transform .12s ease;}
+  .btn:hover{transform:translateY(-1px);}
+  .btn-red{background:var(--red); color:#fff;}
+  .btn-outline{border:1.5px solid var(--ink); color:var(--ink);}
+  .btn-lg{padding:15px 28px; font-size:15.5px;}
+
+  /* HERO */
+  .hero{padding:96px 0 72px; border-bottom:1px solid var(--grey-200);}
+  .eyebrow{display:inline-flex; align-items:center; gap:8px; font-size:12.5px; font-weight:700; letter-spacing:0.08em; color:var(--red); background:#FCEBEB; padding:7px 14px; border-radius:20px; margin-bottom:24px;}
+  h1.headline{font-size:44px; line-height:1.28; max-width:680px; margin-bottom:20px;}
+  .hero p.desc{font-size:17px; color:var(--grey-500); max-width:540px; margin-bottom:34px;}
+  .cta-row{display:flex; flex-wrap:wrap; gap:14px;}
+
+  section{padding:76px 0;}
+  .section-eyebrow{font-size:12.5px; font-weight:700; letter-spacing:0.1em; color:var(--red); text-transform:uppercase; margin-bottom:10px;}
+  .section-title{font-size:28px; margin-bottom:14px;}
+  .section-sub{color:var(--grey-500); font-size:15px; max-width:560px; margin-bottom:44px;}
+
+  /* PILLARS */
+  .pillars{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  .pillar{background:var(--grey-100); border-radius:10px; padding:28px 24px; border-top:3px solid var(--ink);}
+  .pillar.accent{border-top-color:var(--red);}
+  .pillar .num{font-size:12.5px; font-weight:800; color:var(--grey-500); letter-spacing:0.06em; margin-bottom:14px;}
+  .pillar h3{font-size:17px; margin-bottom:10px;}
+  .pillar p{font-size:14px; color:var(--grey-500); line-height:1.65;}
+
+  /* PROCESS */
+  .process-bg{background:var(--ink);}
+  .process-bg .section-title, .process-bg h2{color:#fff;}
+  .process-bg .section-sub{color:#AFAFAF;}
+  .steps{display:flex; gap:0; overflow-x:auto;}
+  .step{flex:1; min-width:140px; position:relative; padding-right:20px;}
+  .step .dot{width:36px; height:36px; border-radius:50%; background:var(--red); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; margin-bottom:14px;}
+  .step.highlight .dot{background:var(--yellow); color:var(--ink);}
+  .step .t{color:#fff; font-weight:700; font-size:14.5px; margin-bottom:5px;}
+  .step .d{color:#9B9B9B; font-size:12.5px; line-height:1.5;}
+  .step::after{content:''; position:absolute; top:17px; right:0; width:20px; height:1px; background:#4A4A4A;}
+  .step:last-child::after{display:none;}
+
+  /* OT CALLOUT */
+  .ot{display:flex; align-items:center; gap:36px; background:var(--grey-100); border-radius:14px; padding:40px;}
+  .ot .badge{flex-shrink:0; width:96px; height:96px; border-radius:50%; background:var(--yellow); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px; color:var(--ink); text-align:center; line-height:1.3;}
+  .ot h3{font-size:21px; margin-bottom:8px;}
+  .ot p{font-size:14.5px; color:var(--grey-500); max-width:520px;}
+
+  /* FAQ */
+  .faq-item{border-bottom:1px solid var(--grey-200); padding:22px 0;}
+  .faq-item summary{cursor:pointer; font-weight:700; font-size:15.5px; color:var(--ink); list-style:none; display:flex; justify-content:space-between; align-items:center;}
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{content:'+'; font-size:22px; color:var(--red); font-weight:400;}
+  .faq-item[open] summary::after{content:'–';}
+  .faq-item p{margin-top:12px; color:var(--grey-500); font-size:14.5px; max-width:680px;}
+
+  /* COHORT CTA */
+  .cohort{background:var(--red); border-radius:16px; padding:48px; color:#fff; display:flex; justify-content:space-between; align-items:center; gap:28px;}
+  .cohort h2{color:#fff; font-size:25px; margin-bottom:8px;}
+  .cohort p{color:#F6C9CF; font-size:14.5px; max-width:440px;}
+  .cohort .btn{background:#fff; color:var(--red); flex-shrink:0;}
+
+  /* CONSULT FORM */
+  .consult-form{background:#fff; border-radius:14px; padding:36px; border:1px solid var(--grey-200);}
+  .f-row.two{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .f-field{margin-bottom:18px;}
+  .f-field label{display:block; font-size:13px; font-weight:700; color:var(--ink); margin-bottom:7px;}
+  .f-field input, .f-field select, .f-field textarea{
+    width:100%; padding:12px 14px; border:1.5px solid var(--grey-200); border-radius:8px; font-size:14.5px; font-family:inherit; color:var(--ink);
+  }
+  .f-field textarea{resize:vertical;}
+  .f-field input:focus, .f-field select:focus, .f-field textarea:focus{outline:none; border-color:var(--ink);}
+  .phone-row{display:flex; gap:8px;}
+  .phone-row select{flex:0 0 76px;}
+  .consent-row{display:flex; align-items:flex-start; gap:9px; font-size:12.5px; color:var(--grey-500); margin-bottom:12px; line-height:1.6; cursor:pointer;}
+  .consent-row input{margin-top:2px; flex-shrink:0;}
+
+  .slot-picker{display:grid; grid-template-columns:1fr 1fr; gap:16px; border:1.5px solid var(--grey-200); border-radius:10px; padding:16px;}
+  .slot-cal-head{display:flex; justify-content:space-between; align-items:center; font-size:13px; font-weight:800; color:var(--ink); margin-bottom:8px;}
+  .cal-arrow{cursor:pointer; padding:2px 8px; border-radius:6px; color:var(--grey-500); font-weight:800;}
+  .cal-arrow:hover{background:var(--grey-100); color:var(--ink);}
+  .cal-arrow.disabled{opacity:0.25; cursor:default;}
+  .cal-arrow.disabled:hover{background:none; color:var(--grey-500);}
+  .slot-tz{font-size:11.5px; color:var(--grey-500); margin-bottom:10px; display:flex; align-items:center; gap:6px;}
+  .slot-tz select{border:1px solid var(--grey-200); border-radius:6px; padding:4px 8px; font-size:11.5px; color:var(--ink);}
+  .slot-cal-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:4px; text-align:center; font-size:12px;}
+  .slot-dow{color:var(--grey-500); font-weight:700; padding-bottom:4px;}
+  .slot-day{padding:8px 0; border-radius:6px; color:var(--grey-300);}
+  .slot-day.avail{cursor:pointer; font-weight:700; color:var(--ink); background:#fff; border:1px solid var(--grey-200);}
+  .slot-day.avail:hover{border-color:var(--ink);}
+  .slot-day.selected{background:var(--ink); color:#fff; border-color:var(--ink);}
+  .slot-times{display:flex; flex-direction:column; gap:8px; max-height:190px; overflow-y:auto;}
+  .slot-empty{font-size:12.5px; color:var(--grey-500); align-self:center; margin:auto;}
+  .slot-time-btn{display:block; width:100%; text-align:left; padding:10px 12px; border:1.5px solid var(--grey-200); border-radius:8px; font-size:13px; font-weight:600; cursor:pointer; background:#fff; color:var(--ink);}
+  .slot-time-btn.selected{border-color:var(--red); background:#FCEBEB; color:var(--red); font-weight:800;}
+  .slot-confirm{font-size:12px; color:var(--grey-500); margin-top:8px;}
+  .slot-confirm b{color:var(--ink);}
+
+  footer{border-top:1px solid var(--grey-200); padding:44px 0 36px;}
+  .foot-top{display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; margin-bottom:28px;}
+  .foot-links{display:flex; gap:20px; font-size:13.5px; color:var(--grey-500); flex-wrap:wrap;}
+  .foot-bottom{font-size:12.5px; color:#9B9B9B; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;}
+
+  @media (max-width:900px){
+    .nav-links{display:none;}
+  }
+  @media (max-width:760px){
+    h1.headline{font-size:32px;}
+    .pillars{grid-template-columns:1fr;}
+    .cohort{flex-direction:column; text-align:center;}
+    .ot{flex-direction:column; text-align:center;}
+    .nav-right{gap:12px;}
+    .f-row.two{grid-template-columns:1fr;}
+    .consult-form{padding:24px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <div class="logo">ALTON <span>EDUCATION</span></div>
+      <div class="nav-links">
+        <a href="#why-alton">WHY ALTON</a>
+        <a href="#how-it-works">HOW IT WORKS</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="nav-right">
+        <a class="login" href="#">로그인</a>
+        <a class="btn btn-red" href="#consult">상담 신청</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">PREMIUM · ONLINE-ONLY · SAT / AP</span>
+    <h1 class="headline">골든타임을 놓치기 전,<br>정확한 진단과 확실한 결과.</h1>
+    <p class="desc">한국 최상위권 대학원생 튜터와 체계적인 학습 관리 시스템으로, 미국 명문대 진학을 목표로 하는 학생들의 SAT·AP 점수를 확실하게 끌어올립니다.</p>
+    <div class="cta-row">
+      <a class="btn btn-red btn-lg" href="#consult">무료 진단 상담 신청</a>
+      <a class="btn btn-outline btn-lg" href="#ot">무료 체험 수업 알아보기</a>
+    </div>
+  </div>
+</section>
+
+<section id="why-alton">
+  <div class="wrap">
+    <div class="section-eyebrow">Why Alton</div>
+    <h2 class="section-title">자체 보유 튜터진과, 학생 한 명을 위한 커리큘럼</h2>
+    <p class="section-sub">튜터를 소개해드리는 것이 아닙니다. Alton이 직접 선발하고 육성한 최상위권 튜터진이, Alton의 자체 교재와 커리큘럼으로 가르칩니다.</p>
+    <div class="pillars">
+      <div class="pillar"><div class="num">01</div><h3>자체 보유 최상위권 튜터진</h3><p>외주 중개가 아닌, 서류·인터뷰·모의 세션 검증을 통과한 최상위권 한국인 대학원생 튜터를 Alton이 직접 선발하고 관리합니다.</p></div>
+      <div class="pillar"><div class="num">02</div><h3>자체 교재·커리큘럼</h3><p>Alton이 개발한 교재와 커리큘럼을 기준으로 모든 수업이 진행되어, 튜터가 바뀌어도 품질은 균일하게 유지됩니다.</p></div>
+      <div class="pillar accent"><div class="num">03</div><h3>취약점 공략 맞춤 전략</h3><p>학생 개개인의 취약점을 정확히 진단하고 집중 공략하는 개인별 커리큘럼으로, 단기간 내 최대 성장을 설계합니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="process-bg" id="how-it-works">
+  <div class="wrap">
+    <div class="section-eyebrow">How it works</div>
+    <h2 class="section-title">시작까지 다섯 단계</h2>
+    <p class="section-sub">계약 전에 실제 튜터와 먼저 만나보는 단계가 포함되어 있습니다.</p>
+    <div class="steps">
+      <div class="step"><div class="dot">1</div><div class="t">상담 신청</div><div class="d">인테이크폼 작성</div></div>
+      <div class="step"><div class="dot">2</div><div class="t">진단 상담</div><div class="d">현재 상황·목표 점검</div></div>
+      <div class="step"><div class="dot">3</div><div class="t">튜터 추천</div><div class="d">추천 이유와 함께 제안</div></div>
+      <div class="step highlight"><div class="dot">4</div><div class="t">무료 체험 수업</div><div class="d">30분, 비용 없음</div></div>
+      <div class="step"><div class="dot">5</div><div class="t">정식 시작</div><div class="d">계약 후 세션 순환</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="ot">
+  <div class="wrap">
+    <div class="ot">
+      <div class="badge">FREE<br>30 MIN</div>
+      <div>
+        <h3>계약 전에, 먼저 수업해보세요.</h3>
+        <p>추천받은 튜터와 무료 체험 수업을 진행한 뒤 결정하실 수 있습니다. 맞지 않으면 비용 없이 다른 튜터와 다시 진행할 수 있습니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-eyebrow">FAQ</div>
+    <h2 class="section-title">자주 묻는 질문</h2>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>어떤 과목을 지원하나요?</summary>
+        <p>SAT, AP 전 과목(수학·과학·영어·컴퓨터공학·경제 등)과 에세이 준비를 지원합니다. 목록에 없는 과목도 상담 시 확인해 드립니다.</p>
+      </details>
+      <details class="faq-item">
+        <summary>한국-미국 시차는 어떻게 조율하나요?</summary>
+        <p>한국 거주 튜터와 미국 거주 학생의 시차를 고려해, 상담 단계에서 지속 가능한 시간대를 함께 정합니다.</p>
+      </details>
+      <details class="faq-item">
+        <summary>계약 전에 튜터를 미리 만나볼 수 있나요?</summary>
+        <p>네. 추천 튜터와 무료 체험 수업(30분)을 먼저 진행한 뒤 정식 계약 여부를 결정하실 수 있습니다.</p>
+      </details>
+      <details class="faq-item">
+        <summary>크레딧은 어떻게 사용되고, 환불이 되나요?</summary>
+        <p>구매일로부터 12개월간 유효합니다. 세션 변경·취소는 24시간 전 요청 시에만 환불되며, 자녀가 여러 명이면 크레딧을 자녀 간에 이동할 수 있습니다.</p>
+      </details>
+      <details class="faq-item">
+        <summary>몇 회 정도 수업을 진행하나요?</summary>
+        <p>진단 상담에서 목표 점수와 남은 기간을 함께 살펴 추천드리며, 일반적으로 주 2~3회를 권장합니다.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section id="consult" style="background:var(--grey-100);">
+  <div class="wrap" style="max-width:720px;">
+    <div class="section-eyebrow">Consultation</div>
+    <h2 class="section-title">1:1 수업 상담 신청</h2>
+    <p class="section-sub">학년과 과목, 거주 지역과 고민을 남겨주시면 상담 가능한 일정을 확인해 연락드립니다.</p>
+
+    <form class="consult-form" onsubmit="event.preventDefault();">
+      <div class="f-row two">
+        <div class="f-field">
+          <label>학부모 이름 *</label>
+          <input type="text" required placeholder="홍길동">
+        </div>
+        <div class="f-field">
+          <label>연락처 *</label>
+          <div class="phone-row">
+            <select><option>+1</option><option>+82</option></select>
+            <input type="tel" required placeholder="408-555-0192">
+          </div>
+        </div>
+      </div>
+
+      <div class="f-field">
+        <label>이메일 *</label>
+        <input type="email" required placeholder="you@example.com">
+      </div>
+
+      <div class="f-row two">
+        <div class="f-field">
+          <label>학생 이름 *</label>
+          <input type="text" required placeholder="자녀분 이름">
+        </div>
+        <div class="f-field">
+          <label>학생 학년 *</label>
+          <select required>
+            <option value="">선택</option>
+            <option>9학년</option><option>10학년</option><option>11학년</option><option>12학년</option><option>기타</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="f-field">
+        <label>거주 지역</label>
+        <input type="text" placeholder="예: 캘리포니아 쿠퍼티노">
+      </div>
+
+      <div class="f-field">
+        <label>가장 큰 고민 *</label>
+        <textarea required rows="4" placeholder="예: SAT Math 점수가 정체되어 있어요"></textarea>
+      </div>
+
+      <div class="f-field">
+        <label>상담 가능 일정 *</label>
+        <div class="slot-picker">
+          <div class="slot-cal">
+            <div class="slot-cal-head">
+              <span class="cal-arrow" onclick="changeMonth(-1)">‹</span>
+              <span id="slot-cal-month"></span>
+              <span class="cal-arrow" onclick="changeMonth(1)">›</span>
+            </div>
+            <div class="slot-tz">시간대 <select id="slot-tz" onchange="setSlotTZ(this.value)">
+              <option value="PT">태평양시간 (PT)</option>
+              <option value="KST">한국시간 (KST)</option>
+              <option value="ET">동부시간 (ET)</option>
+            </select></div>
+            <div class="slot-cal-grid" id="slot-cal-grid"></div>
+          </div>
+          <div class="slot-times" id="slot-times">
+            <div class="slot-empty">먼저 날짜를 선택해주세요.</div>
+          </div>
+        </div>
+        <input type="hidden" id="chosen-slot" required>
+      </div>
+
+      <label class="consent-row">
+        <input type="checkbox" required>
+        <span>[필수] 개인정보 수집·이용 동의 (<a href="#" style="color:var(--red); font-weight:700;">개인정보 처리방침 보기</a>)</span>
+      </label>
+      <label class="consent-row">
+        <input type="checkbox">
+        <span>[선택] 마케팅 목적 개인정보 이용 및 광고성 정보 수신 동의</span>
+      </label>
+
+      <button type="submit" class="btn btn-red btn-lg" style="width:100%; margin-top:8px; border:none; cursor:pointer;">상담 신청하기</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="logo">ALTON <span>EDUCATION</span></div>
+      <div class="foot-links">
+        <a href="#">카카오채널</a>
+        <a href="#">인스타그램</a>
+        <a href="#">로그인</a>
+        <a href="#">이용약관</a>
+        <a href="#">개인정보처리방침</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>Alton Education Inc · 온라인 전용 · 한국/미국 거주 학생 대상 SAT·AP 프리미엄 1:1 코칭</span>
+      <span>&copy; 2026 Alton Education Inc.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Mock "today" = Sept 2, 2026. Only allow browsing Sept (current) and Oct (1 month ahead). */
+const MONTHS = [
+  { label:'2026년 9월', firstDow:2, days:30, /* Sep 1 2026 = Tuesday(2) */
+    slots:{2:['오전 10:00','오후 2:00'],3:['오후 4:00'],4:['오전 11:00','오후 3:00'],5:['오전 10:00','오후 1:00','오후 5:00'],
+      9:['오후 2:00'],10:['오전 10:00','오후 4:00'],11:['오전 11:00','오후 3:00'],
+      15:['오전 10:00'],16:['오후 2:00','오후 4:00'],17:['오전 11:00'],
+      22:['오전 10:00','오후 3:00'],23:['오후 4:00'],24:['오전 11:00']} },
+  { label:'2026년 10월', firstDow:4, days:31, /* Oct 1 2026 = Thursday(4) */
+    slots:{1:['오전 10:00'],2:['오후 2:00'],5:['오전 11:00','오후 3:00'],6:['오전 10:00']} }
+];
+let monthIdx = 0;
+const TZ_OFF_LP = { PT:0, KST:16, ET:3 }; /* slots authored in PT; offset hours to display */
+let slotTZ = 'PT';
+
+function toClockLP(h){
+  h = ((h % 24) + 24) % 24;
+  const hh = Math.floor(h);
+  const ampm = hh < 12 ? '오전' : '오후';
+  let disp = hh % 12; if(disp===0) disp = 12;
+  return ampm+' '+disp+':00';
+}
+function parseHour(label){
+  const isPM = label.indexOf('오후') !== -1;
+  const m = label.match(/(\d+):/);
+  let h = m ? parseInt(m[1]) : 0;
+  if(isPM && h!==12) h += 12;
+  if(!isPM && h===12) h = 0;
+  return h;
+}
+function fmtSlot(label){
+  const h = parseHour(label);
+  return toClockLP(h + TZ_OFF_LP[slotTZ]);
+}
+function setSlotTZ(tz){
+  slotTZ = tz;
+  document.getElementById('slot-times').innerHTML = '<div class="slot-empty">먼저 날짜를 선택해주세요.</div>';
+  document.getElementById('chosen-slot').value = '';
+}
+function buildSlotCal(){
+  const m = MONTHS[monthIdx];
+  document.getElementById('slot-cal-month').textContent = m.label;
+  document.querySelector('.slot-cal-head .cal-arrow:first-child').classList.toggle('disabled', monthIdx===0);
+  document.querySelector('.slot-cal-head .cal-arrow:last-child').classList.toggle('disabled', monthIdx===MONTHS.length-1);
+  const grid = document.getElementById('slot-cal-grid');
+  let html = ['일','월','화','수','목','금','토'].map(d=>'<div class="slot-dow">'+d+'</div>').join('');
+  for(let i=0;i<m.firstDow;i++) html += '<div></div>';
+  for(let d=1; d<=m.days; d++){
+    const has = m.slots[d];
+    html += '<div class="slot-day'+(has?' avail':'')+'"'+(has?' onclick="pickDay('+d+',this)"':'')+'>'+d+'</div>';
+  }
+  grid.innerHTML = html;
+  document.getElementById('slot-times').innerHTML = '<div class="slot-empty">먼저 날짜를 선택해주세요.</div>';
+  document.getElementById('chosen-slot').value = '';
+}
+function changeMonth(dir){
+  const next = monthIdx + dir;
+  if(next < 0 || next > MONTHS.length-1) return;
+  monthIdx = next;
+  buildSlotCal();
+}
+function pickDay(d, el){
+  document.querySelectorAll('.slot-day').forEach(x=>x.classList.remove('selected'));
+  el.classList.add('selected');
+  const times = MONTHS[monthIdx].slots[d] || [];
+  const monthLabel = MONTHS[monthIdx].label.slice(5);
+  document.getElementById('slot-times').innerHTML = times.map(t=>
+    '<div class="slot-time-btn" onclick="pickTime(this,'+d+',\''+t+'\')">'+monthLabel+' '+d+'일 · '+fmtSlot(t)+'</div>'
+  ).join('') + '<div class="slot-confirm" id="slot-confirm"></div>';
+}
+function pickTime(el, d, t){
+  document.querySelectorAll('.slot-time-btn').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+  const monthLabel = MONTHS[monthIdx].label.slice(5);
+  const val = monthLabel+' '+d+'일 '+fmtSlot(t)+' ('+slotTZ+')';
+  document.getElementById('chosen-slot').value = val;
+  const conf = document.getElementById('slot-confirm');
+  if(conf) conf.innerHTML = '선택됨: <b>'+val+'</b>';
+}
+buildSlotCal();
+</script>
+</body>
+</html>

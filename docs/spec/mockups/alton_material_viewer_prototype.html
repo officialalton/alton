@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alton Education — 교재 뷰어 프로토타입</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  @font-face{font-family:'Pretendard'; src:local('Pretendard'); font-weight:400 800;}
+  :root{
+    --red:#C8102E; --red-bg:#FCEBEB; --yellow:#F2B90C; --yellow-bg:#FFF8E6;
+    --ink:#333333; --grey-700:#4A4A4A; --grey-500:#767676; --grey-300:#B0B0B0;
+    --grey-200:#E3E3E3; --grey-100:#F3F3F3; --blue:#1B6FB0; --blue-bg:#EAF3FB;
+    --green:#1E8E5A; --green-bg:#E9F7EF;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Pretendard','Inter',-apple-system,sans-serif; background:#fff; color:var(--ink); -webkit-font-smoothing:antialiased;}
+  ::selection{background:var(--yellow-bg);}
+
+  /* ===== TOP BAR ===== */
+  .topbar{height:56px; border-bottom:1px solid var(--grey-200); display:flex; align-items:center; justify-content:space-between; padding:0 20px; position:sticky; top:0; background:#fff; z-index:50;}
+  .tb-left{display:flex; align-items:center; gap:14px;}
+  .tb-back{font-size:13px; font-weight:700; color:var(--grey-500); cursor:pointer;}
+  .tb-title{font-size:14px; font-weight:800; color:var(--ink);}
+  .tb-sub{font-size:11.5px; color:var(--grey-500);}
+  .mode-toggle{display:flex; border:1.5px solid var(--grey-200); border-radius:20px; overflow:hidden;}
+  .session-status-bar{display:flex; justify-content:space-between; align-items:center; padding:9px 24px; background:var(--grey-100); border-bottom:1px solid var(--grey-200); font-size:12.5px; color:var(--grey-500);}
+  .session-status-bar b{color:var(--ink);}
+  .mode-opt{padding:7px 16px; font-size:12.5px; font-weight:700; cursor:pointer; color:var(--grey-500);}
+  .mode-opt.active{background:var(--ink); color:#fff;}
+  .nav-link{font-size:12.5px; font-weight:700; color:var(--grey-500); cursor:pointer; padding:7px 12px; border-radius:8px;}
+  .nav-link:hover{background:var(--grey-100);}
+  .nav-link.active{background:var(--grey-100); color:var(--ink);}
+
+  /* ===== LAYOUT ===== */
+  .shell{display:grid; grid-template-columns:250px 1fr; min-height:calc(100vh - 56px);}
+  .toc-panel{border-right:1px solid var(--grey-200); padding:20px 12px; position:sticky; top:56px; height:calc(100vh - 56px); overflow-y:auto;}
+  .toc-label{font-size:10.5px; font-weight:800; color:var(--grey-300); text-transform:uppercase; letter-spacing:0.06em; padding:6px 10px; margin-top:10px;}
+  .material-selector-label{font-size:10.5px; font-weight:800; color:var(--grey-300); text-transform:uppercase; letter-spacing:0.06em; padding:0 10px 6px;}
+  .material-select-item{padding:9px 10px; border-radius:8px; font-size:12.5px; font-weight:600; color:var(--grey-500); cursor:pointer; line-height:1.4; margin-bottom:2px;}
+  .material-select-item:hover{background:var(--grey-100);}
+  .material-select-item.active{background:var(--ink); color:#fff; font-weight:700;}
+  .toc-item{padding:9px 10px; border-radius:8px; font-size:13px; color:var(--grey-500); cursor:pointer; line-height:1.4; margin-bottom:1px; display:flex; align-items:center; gap:8px;}
+  .toc-item:hover{background:var(--grey-100);}
+  .toc-item.active{background:var(--red-bg); color:var(--red); font-weight:700;}
+  .toc-dot{width:5px; height:5px; border-radius:50%; background:var(--grey-300); flex-shrink:0;}
+  .toc-item.active .toc-dot{background:var(--red);}
+  .toc-has-problem{margin-left:auto; font-size:10px; opacity:0.7;}
+
+  .main-col{max-width:100%;}
+  .article-wrap{max-width:1180px; margin:0 auto; padding:40px 24px 90vh; position:relative;}
+  .anno-canvas-global{position:absolute; top:0; left:0; z-index:5; pointer-events:none; touch-action:none;}
+  body.draw-mode .anno-canvas-global{pointer-events:auto;}
+  body.draw-mode .article-wrap{cursor:crosshair;}
+  .art-header-row{display:grid; grid-template-columns:200px minmax(0,1fr) 200px; column-gap:24px; margin-bottom:12px;}
+
+  /* ===== ARTICLE CONTENT ===== */
+  .art-eyebrow{font-size:11px; font-weight:800; color:var(--red); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px;}
+  .art-h1{font-size:26px; font-weight:800; color:var(--ink); margin-bottom:6px; letter-spacing:-0.01em;}
+  .art-lede{font-size:14.5px; color:var(--grey-500); margin-bottom:20px; line-height:1.6;}
+  .art-section{display:grid; grid-template-columns:200px minmax(0,1fr) 200px; column-gap:24px; align-items:start; margin-bottom:44px; scroll-margin-top:72px;}
+  .art-section-inner{position:relative; min-width:0;}
+  .art-h2{font-size:18px; font-weight:800; color:var(--ink); margin-bottom:12px; padding-top:4px;}
+  .art-p{font-size:14.5px; line-height:1.75; color:var(--grey-700); margin-bottom:12px;}
+  .art-ul{margin:0 0 12px 20px;}
+  .art-ul li{font-size:14.5px; line-height:1.75; color:var(--grey-700); margin-bottom:4px;}
+  .art-ol{margin:0 0 14px 20px;}
+  .art-ol li{font-size:14.5px; line-height:1.8; color:var(--grey-700); margin-bottom:8px;}
+  .art-ol li b{color:var(--ink);}
+  .art-table{width:100%; border-collapse:collapse; margin:16px 0; font-size:13px;}
+  .art-table th{background:var(--grey-100); text-align:left; padding:9px 12px; font-weight:800; color:var(--grey-700); border:1px solid var(--grey-200);}
+  .art-table td{padding:9px 12px; border:1px solid var(--grey-200); color:var(--grey-700); line-height:1.5;}
+  .callout{background:var(--grey-100); border-left:3px solid var(--ink); border-radius:0 8px 8px 0; padding:14px 16px; font-size:13.5px; color:var(--grey-700); margin:14px 0; line-height:1.6;}
+  .callout b{color:var(--ink);}
+  .worksheet-box{border:1.5px dashed var(--grey-300); border-radius:10px; padding:14px 16px; margin:14px 0; font-size:13px; color:var(--grey-500); line-height:2;}
+
+  /* ===== TEACHER TIP (margin notes, teacher-mode only) ===== */
+  .tip-margin{font-size:12px; color:#6B5300; background:var(--yellow-bg); border:1px solid #F2D98A; border-radius:10px; padding:12px 13px; line-height:1.6; display:none; position:sticky; top:80px;}
+  .tip-margin.show{display:block;}
+  .tip-margin b{color:#4A3900; font-size:11px; text-transform:uppercase; letter-spacing:0.03em; display:block; margin-bottom:4px;}
+
+  /* ===== ANNOTATION CANVAS (single global canvas, see .anno-canvas-global) ===== */
+  .art-section-inner{position:relative;}
+
+  .pen-toolbar{position:sticky; top:56px; z-index:40; background:#fff; border-bottom:1px solid var(--grey-200); padding:10px 24px; display:flex; align-items:center; gap:14px; margin:0 0 30px; box-shadow:0 2px 6px rgba(0,0,0,0.02);}
+  .pen-toolbar.hide{display:none;}
+  .draw-toggle-btn{padding:8px 16px; border-radius:20px; border:1.5px solid var(--grey-200); font-size:12.5px; font-weight:700; cursor:pointer; color:var(--ink); background:#fff; display:flex; align-items:center; gap:6px;}
+  .draw-toggle-btn.on{background:var(--ink); color:#fff; border-color:var(--ink);}
+  .pen-colors{display:flex; gap:6px;}
+  .pen-color{width:22px; height:22px; border-radius:50%; cursor:pointer; border:2px solid transparent;}
+  .pen-color.active{border-color:var(--ink); box-shadow:0 0 0 2px #fff inset;}
+  .tool-toggle{display:flex; border:1.5px solid var(--grey-200); border-radius:16px; overflow:hidden;}
+  .tool-opt{padding:6px 12px; font-size:12px; font-weight:700; cursor:pointer; color:var(--grey-500);}
+  .tool-opt.active{background:var(--grey-100); color:var(--ink);}
+  .pen-toolbar .btn-sm{margin-left:auto;}
+  .save-indicator{font-size:11px; color:var(--green); font-weight:700; display:none; align-items:center; gap:4px;}
+  .save-indicator.show{display:flex;}
+
+  /* ===== EMBEDDED PROBLEM (article-inline) ===== */
+  .prob-card{border:1.5px solid var(--grey-200); border-radius:12px; padding:18px 20px; margin:16px 0 20px; background:#fff; position:relative; z-index:6;}
+  .prob-num{display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:50%; background:var(--ink); color:#fff; font-size:12px; font-weight:800; margin-right:8px;}
+  .prob-passage{font-size:14px; line-height:1.75; color:var(--ink); margin:10px 0 14px;}
+  .prob-passage .blank{border-bottom:2px solid var(--ink); padding:0 4px;}
+  .prob-choices{display:flex; flex-direction:column; gap:8px; margin-bottom:6px;}
+  .prob-choice{display:flex; align-items:center; gap:10px; padding:11px 14px; border:1.5px solid var(--grey-200); border-radius:10px; cursor:pointer; font-size:13.5px; color:var(--ink); transition:border-color .1s;}
+  .prob-choice:hover{border-color:var(--grey-300);}
+  .prob-choice.selected{border-color:var(--ink); background:var(--grey-100);}
+  .prob-choice.correct{border-color:var(--green); background:var(--green-bg); color:var(--green);}
+  .prob-choice.wrong{border-color:var(--red); background:var(--red-bg); color:var(--red);}
+  .prob-choice.disabled{cursor:default; opacity:0.6;}
+  .choice-letter{width:22px; height:22px; border-radius:50%; border:1.5px solid var(--grey-300); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; flex-shrink:0;}
+  .prob-choice.selected .choice-letter{border-color:var(--ink); background:var(--ink); color:#fff;}
+  .prob-choice.correct .choice-letter{border-color:var(--green); background:var(--green); color:#fff;}
+  .prob-choice.wrong .choice-letter{border-color:var(--red); background:var(--red); color:#fff;}
+  .prob-actions{display:flex; align-items:center; gap:10px; margin-top:12px;}
+  .prob-attempts{font-size:11.5px; color:var(--grey-500);}
+  .prob-explain{background:var(--grey-100); border-radius:8px; padding:12px 14px; font-size:13px; color:var(--grey-700); line-height:1.6; margin-top:12px; display:none;}
+  .prob-explain.show{display:block;}
+  .prob-explain b{color:var(--ink);}
+  .teacher-answer-badge{position:absolute; top:16px; right:18px; font-size:11px; font-weight:800; color:var(--green); background:var(--green-bg); padding:4px 10px; border-radius:10px;}
+
+  /* ===== BUTTONS (shared) ===== */
+  .btn-sm{font-size:12px; font-weight:700; padding:8px 14px; border-radius:8px; cursor:pointer; border:1px solid var(--grey-200); color:var(--ink); background:#fff;}
+  .btn-sm:hover{border-color:var(--grey-300);}
+  .btn-primary{font-size:13px; font-weight:700; padding:10px 18px; border-radius:9px; cursor:pointer; border:none; color:#fff; background:var(--ink);}
+  .btn-primary:disabled{opacity:0.4; cursor:default;}
+  .btn-accept{font-size:12px; font-weight:700; padding:8px 16px; border-radius:8px; cursor:pointer; border:none; color:#fff; background:var(--green);}
+
+  /* ===== PROBLEM PRACTICE TAB (bottom of material) ===== */
+  .practice-divider{border-top:6px solid var(--grey-100); margin:0 -24px 40px; padding-top:40px;}
+  .practice-header{max-width:720px; margin:0 auto 24px;}
+  .practice-header h2{font-size:20px; font-weight:800; color:var(--ink); margin-bottom:6px;}
+  .practice-set{max-width:720px; margin:0 auto 36px;}
+  .practice-set-title{font-size:13px; font-weight:800; color:var(--grey-500); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid var(--grey-200);}
+
+  /* essay / math answer types */
+  .essay-input{width:100%; min-height:90px; padding:12px 14px; border:1.5px solid var(--grey-200); border-radius:10px; font-family:inherit; font-size:13.5px; line-height:1.6; resize:vertical;}
+  .math-canvas-wrap{border:1.5px solid var(--grey-200); border-radius:10px; overflow:hidden; margin:10px 0;}
+  .math-canvas{width:100%; height:220px; display:block; background:#fdfdfd; touch-action:none; cursor:crosshair;}
+  .math-toolbar{display:flex; align-items:center; gap:10px; padding:8px 12px; background:var(--grey-100); border-bottom:1px solid var(--grey-200);}
+
+  /* ===== PROBLEM LOG (내 문제 기록) ===== */
+  /* ===== PROBLEM METADATA TAGS + SAVE + TEACHER PICK ===== */
+  .prob-top-row{display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:8px;}
+  .prob-tags{display:flex; flex-wrap:wrap; gap:5px;}
+  .ptag{font-size:10.5px; font-weight:700; padding:3px 9px; border-radius:8px; background:var(--grey-100); color:var(--grey-500); white-space:nowrap;}
+  .ptag.diff-easy{background:var(--green-bg); color:var(--green);}
+  .ptag.diff-medium{background:var(--yellow-bg); color:#8A6D00;}
+  .ptag.diff-hard{background:var(--red-bg); color:var(--red);}
+  .save-btn{font-size:11.5px; font-weight:700; padding:5px 10px; border-radius:8px; border:1.5px solid var(--grey-200); background:#fff; color:var(--grey-500); cursor:pointer; white-space:nowrap; flex-shrink:0;}
+  .save-btn.saved{background:var(--yellow-bg); color:#8A6D00; border-color:#F2D98A;}
+  .pick-btn{font-size:11px; font-weight:700; padding:5px 10px; border-radius:8px; border:1.5px solid var(--grey-200); background:#fff; color:var(--grey-500); cursor:pointer; margin-left:8px;}
+  .pick-btn.tagged{background:var(--red-bg); color:var(--red); border-color:#F3B9BE;}
+  .teacher-pick-panel{display:none; margin-top:10px; padding:12px; background:var(--grey-100); border-radius:8px;}
+  .teacher-pick-panel.open{display:block;}
+  .category-select-row{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px;}
+  .cat-chip{padding:6px 12px; border:1.5px solid var(--grey-200); border-radius:16px; font-size:11.5px; font-weight:700; color:var(--grey-500); cursor:pointer; background:#fff;}
+  .cat-chip.on{background:var(--ink); color:#fff; border-color:var(--ink);}
+  .pick-other-input{width:100%; margin-top:6px; padding:8px 10px; border:1.5px solid var(--grey-200); border-radius:8px; font-family:inherit; font-size:12.5px; display:none;}
+  .pick-other-input.show{display:block;}
+
+  .log-wrap{max-width:860px; margin:0 auto; padding:32px 40px 80px;}
+  .log-filters{display:flex; gap:8px; margin-bottom:20px;}
+  .subtabs{display:flex; gap:4px; border-bottom:1.5px solid var(--grey-200);}
+  .subtab{padding:9px 16px; font-size:13px; font-weight:700; color:var(--grey-500); cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1.5px;}
+  .subtab.active{color:var(--ink); border-bottom-color:var(--ink);}
+  .subview{display:none;}
+  .subview.active{display:block;}
+  .log-filter-chip{padding:7px 14px; border:1.5px solid var(--grey-200); border-radius:16px; font-size:12.5px; font-weight:700; color:var(--grey-500); cursor:pointer;}
+  .log-filter-chip.active{background:var(--ink); color:#fff; border-color:var(--ink);}
+  .log-item{border:1px solid var(--grey-200); border-radius:12px; padding:16px 18px; margin-bottom:10px; cursor:pointer;}
+  .log-item:hover{border-color:var(--grey-300);}
+  .log-item-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; gap:10px;}
+  .log-tags-left{display:flex; align-items:center; gap:6px; flex-wrap:wrap;}
+  .log-badge{font-size:10.5px; font-weight:800; padding:3px 9px; border-radius:8px; white-space:nowrap;}
+  .log-badge.mc{background:var(--blue-bg); color:var(--blue);}
+  .log-badge.essay{background:var(--yellow-bg); color:#8A6D00;}
+  .log-badge.math{background:var(--red-bg); color:var(--red);}
+  .log-badge.correct{background:var(--green-bg); color:var(--green);}
+  .log-badge.incorrect{background:var(--red-bg); color:var(--red);}
+  .log-meta{font-size:11.5px; color:var(--grey-500);}
+  .log-prompt{font-size:13.5px; color:var(--ink); line-height:1.5;}
+  .empty-note{font-size:13px; color:var(--grey-500); padding:20px 0; text-align:center;}
+  .vocab-popup{position:fixed; z-index:200; background:var(--ink); color:#fff; font-size:12.5px; font-weight:700; padding:8px 14px; border-radius:8px; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,0.25);}
+  .vocab-popup:after{content:''; position:absolute; bottom:-5px; left:16px; width:10px; height:10px; background:var(--ink); transform:rotate(45deg);}
+
+  .view{display:none;}
+  .view.active{display:block;}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+  <div class="tb-left">
+    <span class="tb-back" id="tb-back" onclick="alert('실제 서비스에서는 수업 목록으로 돌아갑니다')">← 나가기</span>
+    <div><div class="tb-title">Words in Context — Logical and Precise Word Completion</div><div class="tb-sub" id="tb-sub">SAT Reading &amp; Writing · 지훈 · 8회차</div></div>
+  </div>
+  <div style="display:flex; align-items:center; gap:16px;">
+    <span class="nav-link" id="nav-material" onclick="switchView('material')">교재</span>
+    <span class="nav-link active" id="nav-homework" onclick="switchView('homework')">과제</span>
+    <span class="nav-link" id="nav-aigen" onclick="switchView('aigen')">문제 생성</span>
+    <span class="nav-link" id="nav-log" onclick="switchView('log')">문제 기록</span>
+    <span class="nav-link" id="nav-vocab" onclick="switchView('vocab')">단어장</span>
+    <span class="nav-link" id="nav-docs" onclick="switchView('docs')">연습장</span>
+    <span class="nav-link" id="nav-files" onclick="switchView('files')">보충 자료</span>
+    <button class="btn-sm" id="tips-toggle-btn" style="display:none;" onclick="toggleAllTips()">💡 티칭 팁 숨기기</button>
+    <div class="mode-toggle" id="mode-toggle-wrap">
+      <div class="mode-opt active" id="mode-student" onclick="setMode('student')">학생 모드</div>
+      <div class="mode-opt" id="mode-teacher" onclick="setMode('teacher')">선생님 모드</div>
+    </div>
+    <div id="mode-badge" style="display:none; font-size:12px; font-weight:700; padding:6px 14px; border-radius:20px; background:var(--ink); color:#fff;"></div>
+  </div>
+</div>
+<div class="session-status-bar" id="session-status-bar"></div>
+
+<!-- ============ MATERIAL VIEW ============ -->
+<div class="view" id="view-material">
+<div class="shell">
+  <div class="toc-panel">
+    <div id="material-selector" style="margin-bottom:16px; padding-bottom:16px; border-bottom:1px solid var(--grey-200);"></div>
+    <div id="toc-panel"></div>
+  </div>
+
+  <div class="main-col">
+    <div class="pen-toolbar" id="pen-toolbar">
+      <div class="draw-toggle-btn" id="draw-toggle-btn" onclick="toggleDrawMode()">✏️ 필기 모드</div>
+      <div class="pen-colors" id="pen-colors">
+        <div class="pen-color active" style="background:#1A1A1A;" onclick="setPenColor('#1A1A1A',this)"></div>
+        <div class="pen-color" style="background:#C8102E;" onclick="setPenColor('#C8102E',this)"></div>
+        <div class="pen-color" style="background:#1B6FB0;" onclick="setPenColor('#1B6FB0',this)"></div>
+      </div>
+      <div class="tool-toggle">
+        <div class="tool-opt active" onclick="setTool('pen',this)">펜</div>
+        <div class="tool-opt" onclick="setTool('eraser',this)">지우개</div>
+      </div>
+      <button class="btn-sm" onclick="clearAllAnnotations()">전체 지우기</button>
+      <span class="save-indicator" id="save-indicator">✓ 이번 수업 필기 저장됨</span>
+    </div>
+
+    <div class="article-wrap" id="article-wrap">
+      <div class="art-header-row"><div></div><div>
+        <div class="art-eyebrow">Part 1 · Core Worksheet</div>
+        <div class="art-h1">Words in Context</div>
+        <div class="art-lede">Logical and Precise Word Completion — 문맥 속에서 가장 논리적이고 정확한 단어를 완성하는 방법을 학습합니다.</div>
+      </div><div></div></div>
+
+      <div id="article-sections"></div>
+
+      <div class="practice-divider"></div>
+      <div class="practice-header">
+        <h2>문제 풀이</h2>
+        <div style="font-size:13px; color:var(--grey-500);">이 교재의 연습 문제 세트입니다. 제출한 답안은 모두 "내 문제 기록"에 저장됩니다.</div>
+      </div>
+      <div id="practice-sets"></div>
+      <canvas class="anno-canvas-global" id="canvas-global"></canvas>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ============ 내 문제 기록 (LOG) VIEW ============ -->
+<div class="view" id="view-log">
+  <div class="log-wrap">
+    <h1 style="font-size:20px; font-weight:800; margin-bottom:6px;" id="log-view-title">내 문제 기록</h1>
+    <div style="font-size:13px; color:var(--grey-500); margin-bottom:20px;" id="log-view-sub">지금까지 풀었던 모든 문제가 여기에 아카이빙됩니다. 다시 풀어보거나 저장한 문제만 모아볼 수 있습니다.</div>
+    <div class="log-filters">
+      <div class="log-filter-chip active" data-f="all" onclick="setLogFilter('all')">전체</div>
+      <div class="log-filter-chip" data-f="mc" onclick="setLogFilter('mc')">객관식</div>
+      <div class="log-filter-chip" data-f="essay" onclick="setLogFilter('essay')">서술형</div>
+      <div class="log-filter-chip" data-f="math" onclick="setLogFilter('math')">수학(화이트보드)</div>
+      <div class="log-filter-chip" data-f="incorrect" onclick="setLogFilter('incorrect')">오답</div>
+      <div class="log-filter-chip" data-f="teacherpick" onclick="setLogFilter('teacherpick')">선생님 픽</div>
+      <div class="log-filter-chip" data-f="saved" onclick="setLogFilter('saved')">★ 저장한 문제</div>
+    </div>
+    <div id="log-list"></div>
+  </div>
+</div>
+
+<!-- AI 문제 생성 (별도 탭) -->
+<div class="view" id="view-aigen">
+  <div class="log-wrap">
+    <h1 style="font-size:20px; font-weight:800; margin-bottom:6px;">문제 생성</h1>
+    <div style="font-size:13px; color:var(--grey-500); margin-bottom:20px;">조건을 선택해 AI로 문제를 생성한 뒤, 검토·수정하고 "과제로 확정"하면 학생의 과제 탭에 들어갑니다.</div>
+    <div class="card" style="margin-bottom:20px;">
+      <div class="ro-label">과목</div>
+      <div class="category-select-row" id="aigen-subject-btns"></div>
+      <div class="ro-label" style="margin-top:14px;">단원</div>
+      <div class="category-select-row" id="aigen-unit-btns"></div>
+      <div class="ro-label" style="margin-top:14px;">문제 유형</div>
+      <div class="category-select-row" id="aigen-skilltype-btns"></div>
+      <div class="ro-label" style="margin-top:14px;">난이도</div>
+      <div class="category-select-row" id="aigen-diff-btns"></div>
+      <div class="ro-label" style="margin-top:14px;">답안 형식</div>
+      <div class="category-select-row" id="aigen-format-btns"></div>
+      <div style="display:flex; align-items:center; gap:10px; margin-top:14px;">
+        <span style="font-size:12.5px; color:var(--grey-500);">개수</span>
+        <input type="number" id="aigen-count" value="1" min="1" max="10" style="width:56px; padding:8px 10px; border:1.5px solid var(--grey-200); border-radius:8px;">
+        <button class="btn-primary" onclick="generateAiProblems()">생성하기</button>
+      </div>
+      <div id="aigen-loading"></div>
+    </div>
+    <div id="aigen-draft-results"></div>
+    <div id="aigen-finalize-row" style="display:none; margin-top:10px;">
+      <button class="btn-primary" style="background:var(--green);" onclick="finalizeAigenToHomework()">✓ 과제로 확정</button>
+      <span class="action-link" style="margin-left:12px;" onclick="discardAigenDraft()">전체 취소</span>
+    </div>
+  </div>
+</div>
+
+<!-- 단어장 -->
+<div class="view" id="view-vocab">
+  <div class="log-wrap">
+    <h1 style="font-size:20px; font-weight:800; margin-bottom:6px;" id="vocab-view-title">단어장</h1>
+    <div style="font-size:13px; color:var(--grey-500); margin-bottom:20px;" id="vocab-view-sub">교재를 읽다가 모르는 단어를 클릭하면 단어장에 추가할 수 있습니다. AI가 자동으로 뜻·예문·비슷한 단어를 정리해줍니다.</div>
+    <div id="vocab-list"></div>
+  </div>
+</div>
+
+<!-- 과제 -->
+<div class="view active" id="view-homework">
+  <div class="log-wrap">
+    <h1 style="font-size:20px; font-weight:800; margin-bottom:6px;">과제</h1>
+    <div style="font-size:13px; color:var(--grey-500); margin-bottom:20px;" id="homework-sub"></div>
+    <div id="homework-list"></div>
+    <div id="homework-teacher-add" style="margin-top:14px;"></div>
+  </div>
+</div>
+
+<!-- Docs / 화이트보드 임베드 -->
+<div class="view" id="view-docs">
+  <div class="log-wrap">
+    <h1 style="font-size:20px; font-weight:800; margin-bottom:6px;">연습장</h1>
+    <div style="font-size:13px; color:var(--grey-500); margin-bottom:16px;">수업 중 함께 기록하는 공간입니다.</div>
+    <div class="subtabs" style="margin-bottom:14px;">
+      <div class="subtab active" data-sub="scratch-docs" onclick="showScratchSubtab('scratch-docs')">Docs</div>
+      <div class="subtab" data-sub="scratch-whiteboard" onclick="showScratchSubtab('scratch-whiteboard')">화이트보드</div>
+    </div>
+    <div class="subview active" id="scratch-docs">
+      <div style="font-size:14px; font-weight:800; color:var(--ink); margin-bottom:8px;">📄 Google Docs</div>
+      <div id="gdocs-list"></div>
+    </div>
+    <div class="subview" id="scratch-whiteboard">
+      <div style="font-size:14px; font-weight:800; color:var(--ink); margin-bottom:8px;">🖊 협업 화이트보드</div>
+      <div style="font-size:12px; color:var(--grey-500); margin-bottom:8px;">아래로 계속 스크롤하며 필기할 수 있습니다.</div>
+      <div class="live-pane-body" style="min-height:1400px; height:auto; border:1.5px solid var(--grey-200); border-radius:10px; display:flex; align-items:flex-start; justify-content:center; padding-top:60px; color:var(--grey-500); font-size:13px;">화이트보드 임베드 영역 (실시간 공동 작업, 무한 스크롤)</div>
+    </div>
+  </div>
+</div>
+
+<!-- 보충 자료 (선생님/학생 업로드 구분) -->
+<div class="view" id="view-files">
+  <div class="log-wrap">
+    <h1 style="font-size:20px; font-weight:800; margin-bottom:6px;">보충 자료</h1>
+    <div style="font-size:13px; color:var(--grey-500); margin-bottom:16px;">이 수업에서 공유된 파일입니다. 업로드한 사람만 삭제할 수 있습니다.</div>
+    <div class="log-filters">
+      <div class="log-filter-chip active" data-f="teacher" onclick="setFilesSubtab('teacher')">선생님 업로드</div>
+      <div class="log-filter-chip" data-f="student" onclick="setFilesSubtab('student')">학생 업로드</div>
+    </div>
+    <div id="shared-files-list"></div>
+    <label class="btn-sm" style="display:inline-block; margin-top:12px; cursor:pointer;" id="files-upload-label">+ 파일 업로드<input type="file" id="files-upload-input" style="display:none;" onchange="uploadSharedFile(this)"></label>
+  </div>
+</div>
+<div class="vocab-popup" id="vocab-popup" onclick="confirmAddVocab()" style="display:none;"></div>
+
+</body>
+</html>
+<script>
+/* ================= DATA (실제 Alton SAT Words in Context 학생 패킷 내용 기반) ================= */
+const ARTICLE_SECTIONS_WORDS = [
+  {id:'overview', title:'Lesson Overview',
+    body:`<p class="art-p">Learn to complete a blank with the most logical and precise word or phrase.</p>
+    <div class="callout"><b>학습 목표</b><br>By the end of this lesson, you will be able to identify the logical relationship around a blank, predict the kind of word needed, and choose the only option that precisely completes the text.</div>`,
+    tip:'학생에게 첫 문장을 소리내어 읽게 하고, 이 단원에서 무엇을 배우게 될지 스스로 예측해보라고 하세요.'},
+  {id:'what-tests', title:'What this question tests',
+    body:`<ul class="art-ul">
+      <li>Understanding the meaning and direction of a short passage</li>
+      <li>Using context clues rather than relying only on memorized definitions</li>
+      <li>Distinguishing between words with similar or related meanings</li>
+      <li>Selecting a word that fits the passage's exact logic, tone, and degree</li>
+    </ul>
+    <div class="callout"><b>Recognize it</b><br>Which choice completes the text with the most logical and precise word or phrase?</div>`,
+    tip:null},
+  {id:'strategy', title:'The Alton 5-Step Strategy',
+    body:`<p class="art-p">Do not begin with the answer choices. Begin with the passage's logic.</p>
+    <ol class="art-ol">
+      <li><b>Read for logic:</b> Read the entire text. Identify contrast, cause, continuation, or qualification.</li>
+      <li><b>Define the blank's job:</b> Decide the needed part of speech, tone, and relationship to nearby ideas.</li>
+      <li><b>Predict before choices:</b> State a simple word or phrase that would complete the logic.</li>
+      <li><b>Test every option:</b> Substitute each choice and check meaning, grammar, tone, and precision.</li>
+      <li><b>Choose the most precise fit:</b> Select the only choice fully supported by the text — not merely a word related to the topic.</li>
+    </ol>`,
+    tip:'이 5단계를 학생이 직접 소리내어 말하게 하면 암기 효과가 훨씬 좋습니다. 매 회차마다 반복하세요.'},
+  {id:'signals', title:'High-value logic signals',
+    body:`<table class="art-table"><thead><tr><th>Relationship</th><th>Common signals</th><th>What the blank often needs</th></tr></thead><tbody>
+      <tr><td>Contrast</td><td>however, although, yet, rather than</td><td>An opposite or qualified idea</td></tr>
+      <tr><td>Cause / result</td><td>because, therefore, thus, consequently</td><td>A result consistent with the cause</td></tr>
+      <tr><td>Continuation</td><td>also, moreover, similarly, indeed</td><td>An idea in the same direction</td></tr>
+      <tr><td>Qualification</td><td>may, appears, partly, not entirely</td><td>A cautious or limited word</td></tr>
+    </tbody></table>`,
+    tip:'이 표를 인쇄해서 벽에 붙여두거나, 매 수업 시작 전에 학생에게 빈칸으로 다시 채워보게 하는 것도 좋은 연습입니다.'},
+  {id:'traps', title:'Common traps',
+    body:`<ul class="art-ul">
+      <li><b>Logic reversal:</b> the word means the opposite of what the passage requires.</li>
+      <li><b>Topic match:</b> the word relates to the topic but does not complete the sentence's logic.</li>
+      <li><b>Wrong degree:</b> the word is too strong, too weak, or too certain.</li>
+      <li><b>Familiar-word trap:</b> the most familiar option sounds comfortable but is imprecise.</li>
+    </ul>`,
+    tip:null},
+  {id:'modeling', title:'Teacher Modeling', body:`<p class="art-p">Listen for the decision process, not just the definition of each word.</p>`,
+    tip:'이 문제는 선생님이 먼저 풀이 과정을 소리내어 시연(think-aloud)하는 회차입니다. 학생에게 정답만 알려주지 말고, 판단 과정을 보여주세요.',
+    problem:{id:'p1', format:'mc',
+      passage:"Biologists have often assumed that traffic noise disrupts the breeding calls of tree frogs. However, a three-year study comparing populations near busy roads with those in quiet forests found no consistent difference in mating success. Rather than confirming the prevailing assumption, the study's findings ______ it.",
+      options:['reinforce','complicate','publicize','imitate'], correctIndex:1,
+      explanation:'"Rather than confirming" signals a contrast — the findings do the OPPOSITE of confirming. "Complicate" fits: the results make the original assumption less clear-cut, without disproving it entirely.'}},
+  {id:'guided', title:'Guided Practice', body:`<p class="art-p">Explain the passage's logic before selecting an answer.</p>`,
+    tip:'학생이 답을 고르기 전에, 반드시 "logic signal"이 무엇인지 먼저 말로 설명하게 하세요. 답만 맞히는 습관을 방지합니다.',
+    problems:[
+      {id:'p2', format:'mc', passage:"After native grasses were replanted along the riverbank, soil loss declined slightly during the first year and more substantially during the next two years. The improvement was therefore not immediate but ______.",
+        options:['accidental','gradual','invisible','temporary'], correctIndex:1,
+        explanation:'"Not immediate but ______" sets up a contrast with "immediate." The soil loss declined progressively over time — "gradual" is the precise opposite of "immediate."'},
+      {id:'p3', format:'mc', passage:"The historian does not present the two reform movements as unrelated. Instead, she repeatedly shows how leaders in each movement borrowed language and strategies from the other. Her account therefore ______ the histories of the two movements.",
+        options:['separates','invents','interweaves','shortens'], correctIndex:2,
+        explanation:'"Not... unrelated. Instead..." signals the opposite of separation. "Interweaves" captures how the two histories are shown as connected and overlapping.'}
+    ]},
+  {id:'guided-reduced', title:'Guided Practice — Reduced Support', body:`<p class="art-p">Use the same process with fewer prompts.</p>`,
+    tip:'이 단계부터는 학생이 스스로 근거 문장에 밑줄을 긋게 하고, 선생님은 질문만 던지세요 (예: "이 단어가 왜 정답이라고 생각해?").',
+    problem:{id:'p4', format:'mc', passage:"Although the pilot study found a possible link between evening screen use and delayed sleep, the researchers examined only twenty participants. In the published report, they were appropriately ______ about drawing broad conclusions from the result.",
+      options:['cautious','indifferent','certain','celebratory'], correctIndex:0,
+      explanation:'A small sample (only twenty participants) means researchers should NOT be overly confident. "Cautious" matches the qualification signaled by "appropriately... about drawing broad conclusions."'}},
+  {id:'quickcheck', title:'Quick Check', body:'',
+    tip:'이 문제는 회차 종료 전 5분 이내로 빠르게 체크하는 용도입니다. 오래 끌지 마세요.',
+    problem:{id:'p5', format:'mc', passage:"Early maps of the island showed a single mountain range running from north to south. New satellite images, however, reveal several separate ridges. The updated data ______ the earlier depiction.",
+      options:['simplifies','repeats','revises','conceals'], correctIndex:2,
+      explanation:'"However" signals contrast with the early maps. New data showing a more complex reality "revises" (corrects/updates) the earlier, simpler depiction.'}}
+];
+
+const PRACTICE_SETS_WORDS = [
+  {title:'Practice Drill — Easy', sub:'Build accuracy with direct context clues and clearly different choices.', problems:[
+    {id:'d1', format:'mc', passage:"Because rain is rare in the coastal desert, fresh water is ______. Communities must therefore store water carefully and limit unnecessary use.", options:['abundant','scarce','polluted','flowing'], correctIndex:1, explanation:'Rare rain + careful storage + limited use all point to water being scarce, not abundant.'},
+    {id:'d2', format:'mc', passage:"To protect the fragile manuscripts from light damage, the museum displays them for only a few weeks at a time. This limited schedule helps ______ the manuscripts.", options:['preserve','translate','advertise','classify'], correctIndex:0, explanation:'Protecting from damage is about preservation — limiting light exposure helps preserve fragile items.'},
+    {id:'d3', format:'mc', passage:"The first prototype could lift only two kilograms, but later versions lifted five, eight, and finally twelve. The device's capacity increased ______ with each version.", options:['randomly','steadily','secretly','rarely'], correctIndex:1, explanation:'2 → 5 → 8 → 12 is a steady, consistent increase — not random.'},
+    {id:'d4', format:'mc', passage:"Most residents predicted that the new bike lanes would worsen downtown traffic. Six months after installation, however, average travel times had fallen. The outcome ______ the initial predictions.", options:['recorded','contradicted','explained','repeated'], correctIndex:1, explanation:'"However" + traffic getting BETTER instead of worse means the outcome contradicted what people expected.'}
+  ]},
+  {title:'서술형 (에세이형)', sub:'짧은 문장으로 답안을 작성하는 형식입니다.', problems:[
+    {id:'e1', format:'essay', passage:"위 Practice Drill 문제 중 하나를 골라, 정답이 왜 정답인지 그리고 가장 헷갈리는 오답이 왜 오답인지 2~3문장으로 설명하세요.",
+      explanation:'모범답안 예시: "d1번에서 정답은 scarce입니다. 지문에 비가 드물다(rain is rare)고 나와있고, 물을 아껴 써야 한다는 결과가 이어지므로 물이 부족하다는 뜻이 되어야 합니다. abundant는 정반대의 의미라 오답입니다."'}
+  ]},
+  {title:'수학 문제 (화이트보드 제출)', sub:'풀이 과정을 화이트보드에 직접 작성해서 제출하는 형식입니다. (다른 과목 예시)', problems:[
+    {id:'m1', format:'math', passage:"이차방정식 x² − 5x + 6 = 0 의 두 근을 구하고, 풀이 과정을 아래 화이트보드에 작성하세요.",
+      explanation:'인수분해: (x−2)(x−3)=0 → x=2 또는 x=3'}
+  ]}
+];
+
+/* 문제별 메타데이터 부여 (과목/유형/단원/난이도) */
+const DIFF_MAP = {p1:'medium', p2:'medium', p3:'medium', p4:'medium', p5:'easy', d1:'easy', d2:'easy', d3:'easy', d4:'easy', e1:'medium', m1:'medium'};
+ARTICLE_SECTIONS_WORDS.forEach(s=>{
+  const probs = s.problem ? [s.problem] : (s.problems||[]);
+  probs.forEach(p=>{
+    p.subject = 'SAT Reading & Writing';
+    p.skillType = 'Words in Context';
+    p.unit = s.title;
+    p.difficulty = DIFF_MAP[p.id] || 'medium';
+  });
+});
+PRACTICE_SETS_WORDS.forEach(set=>{
+  set.problems.forEach(p=>{
+    if(p.format==='math'){ p.subject='SAT Math'; p.skillType='이차방정식'; p.unit='수학 연습 (화이트보드)'; }
+    else { p.subject='SAT Reading & Writing'; p.skillType='Words in Context'; p.unit = p.format==='essay' ? '서술형 연습' : 'Practice Drill — Easy'; }
+    p.difficulty = DIFF_MAP[p.id] || 'medium';
+  });
+});
+
+/* ===== 두번째 예시 교재: 한 수업에서 여러 교재를 다룰 수 있음을 보여주는 데모 ===== */
+const ARTICLE_SECTIONS_QUAD = [
+  {id:'q-intro', title:'이차방정식이란', body:'<p class="art-p">이차방정식은 ax² + bx + c = 0 (a≠0) 형태의 방정식입니다. SAT Math에서 매우 자주 출제됩니다.</p>', tip:'학생에게 일차방정식과의 차이를 먼저 질문해보세요.', problems:[]},
+  {id:'q-discriminant', title:'판별식', body:'<p class="art-p">판별식 D = b² − 4ac 로 근의 개수를 판단합니다. D>0이면 서로 다른 두 실근, D=0이면 중근, D<0이면 실근이 없습니다.</p>', tip:'판별식 부호별로 그래프 개형을 함께 그려서 설명하면 이해가 빠릅니다.',
+    problems:[{id:'q1', format:'mc', passage:'x² − 6x + 9 = 0 의 판별식 값과 근의 개수는?', options:['D=0, 중근 1개','D=36, 서로 다른 두 근','D=-36, 실근 없음','D=9, 중근 1개'], correctIndex:0, explanation:'D = (-6)² - 4(1)(9) = 36-36 = 0, 따라서 중근을 가집니다.'}]},
+  {id:'q-application', title:'응용 문제', body:'<p class="art-p">실전 SAT 문제는 종종 문장제로 출제되어 이차방정식으로 변환해야 합니다.</p>', tip:'', problems:[]}
+];
+const PRACTICE_SETS_QUAD = [
+  {title:'이차방정식 연습 문제', sub:'개념을 적용해 직접 풀어보세요.', problems:[
+    {id:'qd1', format:'mc', passage:'x² − 5x + 6 = 0 의 두 근의 곱은?', options:['5','6','-6','11'], correctIndex:1, explanation:'근과 계수의 관계에서 두 근의 곱 = c/a = 6입니다.'}
+  ]}
+];
+ARTICLE_SECTIONS_QUAD.forEach(s=>{ s.problems.forEach(p=>{ p.subject='SAT Math'; p.skillType='이차방정식'; p.unit=s.title; p.difficulty='medium'; }); });
+PRACTICE_SETS_QUAD.forEach(set=>{ set.problems.forEach(p=>{ p.subject='SAT Math'; p.skillType='이차방정식'; p.unit='이차방정식 연습 문제'; p.difficulty='medium'; }); });
+
+const MATERIALS_LIBRARY = {
+  'words-in-context': {title:'Words in Context — Logical and Precise Word Completion', subject:'SAT Reading & Writing', sections:ARTICLE_SECTIONS_WORDS, practiceSets:PRACTICE_SETS_WORDS},
+  'quadratics': {title:'이차방정식 개념 정리', subject:'SAT Math', sections:ARTICLE_SECTIONS_QUAD, practiceSets:PRACTICE_SETS_QUAD}
+};
+let currentMaterialId = 'words-in-context';
+let ARTICLE_SECTIONS = MATERIALS_LIBRARY[currentMaterialId].sections;
+let PRACTICE_SETS = MATERIALS_LIBRARY[currentMaterialId].practiceSets;
+
+let MODE = 'student';
+let drawMode = false;
+let currentPen = {color:'#1A1A1A', tool:'pen'};
+const PROB_STATE = {};
+const MATH_PEN = {};
+let RETRY_CLONES = {};
+let logFilter = 'all';
+let SAVED_PROBLEMS = {};
+let TEACHER_PICKS = {};
+let AI_GENERATED_PROBLEMS = [];
+let nextAiId = 1;
+
+let STUDENT_PROBLEM_LOG = [
+  {id:'seed1', problemId:'p1', format:'mc', passage:"Biologists have often assumed that traffic noise disrupts the breeding calls of tree frogs. However, a three-year study comparing populations near busy roads with those in quiet forests found no consistent difference in mating success. Rather than confirming the prevailing assumption, the study's findings ______ it.",
+    options:['reinforce','complicate','publicize','imitate'], correctIndex:1, explanation:'"Rather than confirming" signals a contrast — the findings complicate, not reinforce, the assumption.', correct:true, response:1, attemptedAt:'9월 3일 오후 4:12'},
+  {id:'seed2', problemId:'p2', format:'mc', passage:"After native grasses were replanted along the riverbank, soil loss declined slightly during the first year and more substantially during the next two years. The improvement was therefore not immediate but ______.",
+    options:['accidental','gradual','invisible','temporary'], correctIndex:1, explanation:'"Not immediate but ______" — gradual is the precise opposite of immediate.', correct:false, response:0, attemptedAt:'9월 3일 오후 4:15'}
+];
+
+/* ================= HELPERS ================= */
+function findProblem(id){
+  if(RETRY_CLONES[id]) return RETRY_CLONES[id];
+  const aiProb = AI_GENERATED_PROBLEMS.find(p=>p.id===id);
+  if(aiProb) return aiProb;
+  for(const s of ARTICLE_SECTIONS){
+    if(s.problem && s.problem.id===id) return s.problem;
+    if(s.problems) for(const p of s.problems) if(p.id===id) return p;
+  }
+  for(const set of PRACTICE_SETS) for(const p of set.problems) if(p.id===id) return p;
+  return null;
+}
+
+/* ================= TOC ================= */
+function renderMaterialSelector(){
+  const el = document.getElementById('material-selector');
+  if(!el) return;
+  el.innerHTML = '<div class="material-selector-label">교재 선택</div>'+
+    Object.keys(MATERIALS_LIBRARY).map(id=>
+      '<div class="material-select-item'+(id===currentMaterialId?' active':'')+'" onclick="switchMaterial(\''+id+'\')">'+MATERIALS_LIBRARY[id].title+'</div>'
+    ).join('');
+}
+function switchMaterial(matId){
+  if(matId===currentMaterialId) return;
+  currentMaterialId = matId;
+  const mat = MATERIALS_LIBRARY[matId];
+  ARTICLE_SECTIONS = mat.sections;
+  PRACTICE_SETS = mat.practiceSets;
+  const titleEl = document.querySelector('.tb-title');
+  if(titleEl) titleEl.textContent = mat.title;
+  updateSessionContextLabel();
+  renderMaterialSelector();
+  buildTOC();
+  renderArticle();
+  renderPracticeSets();
+  clearGlobalCanvas();
+  window.scrollTo({top:0});
+  setTimeout(()=>{ initAllCanvases(); setupScrollSpy(); }, 30);
+}
+function buildTOC(){
+  let html = '<div class="toc-label">교재 목차</div>';
+  ARTICLE_SECTIONS.forEach(s=>{
+    const hasProblem = !!(s.problem || (s.problems && s.problems.length));
+    html += '<div class="toc-item" data-sec="'+s.id+'" onclick="scrollToSection(\''+s.id+'\')"><span class="toc-dot"></span>'+s.title+
+      (hasProblem ? '<span class="toc-has-problem" title="이 섹션에 확인 문제가 포함되어 있습니다">✏️</span>' : '')+'</div>';
+  });
+  html += '<div class="toc-label">문제 풀이</div>';
+  PRACTICE_SETS.forEach((set,i)=>{
+    html += '<div class="toc-item" data-sec="practice-'+i+'" onclick="scrollToSection(\'practice-'+i+'\')"><span class="toc-dot"></span>'+set.title+'</div>';
+  });
+  document.getElementById('toc-panel').innerHTML = html;
+}
+function scrollToSection(id){
+  const el = document.getElementById('sec-'+id);
+  if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+let scrollSpyObserver = null;
+function setupScrollSpy(){
+  if(typeof IntersectionObserver === 'undefined') return;
+  if(scrollSpyObserver) scrollSpyObserver.disconnect();
+  const sections = document.querySelectorAll('.art-section, .practice-set');
+  scrollSpyObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const id = entry.target.id.replace('sec-','');
+        document.querySelectorAll('.toc-item').forEach(t=>t.classList.toggle('active', t.dataset.sec===id));
+      }
+    });
+  }, {rootMargin:'-15% 0px -70% 0px'});
+  sections.forEach(s=>scrollSpyObserver.observe(s));
+}
+
+/* ================= ARTICLE + PROBLEM RENDERING ================= */
+let allTipsVisible = true;
+function renderArticle(){
+  let tipIndex = 0;
+  document.getElementById('article-sections').innerHTML = ARTICLE_SECTIONS.map(s=>{
+    let inner = '<h2 class="art-h2">'+s.title+'</h2>'+s.body;
+    const probs = s.problem ? [s.problem] : (s.problems || []);
+    probs.forEach(p=>{ inner += renderMCProblem(p); });
+    let leftTip = '<div></div>', rightTip = '<div></div>';
+    if(s.tip && MODE==='teacher'){
+      const tipHtml = '<div class="tip-margin'+(allTipsVisible?' show':'')+'"><b>티칭 팁</b>'+s.tip+'</div>';
+      if(tipIndex % 2 === 0) rightTip = tipHtml; else leftTip = tipHtml;
+      tipIndex++;
+    }
+    return '<div class="art-section" id="sec-'+s.id+'">'+leftTip+
+      '<div class="art-section-inner">'+inner+'</div>'+
+      rightTip+'</div>';
+  }).join('');
+  resizeGlobalCanvas();
+}
+function toggleAllTips(){
+  allTipsVisible = !allTipsVisible;
+  document.querySelectorAll('.tip-margin').forEach(el=>el.classList.toggle('show', allTipsVisible));
+  document.getElementById('tips-toggle-btn').textContent = allTipsVisible ? '💡 티칭 팁 숨기기' : '💡 티칭 팁 보기';
+}
+function renderPracticeSets(){
+  document.getElementById('practice-sets').innerHTML = PRACTICE_SETS.map((set,i)=>{
+    let inner = '<div class="practice-set-title">'+set.title+'</div>'+
+      '<div style="font-size:12.5px; color:var(--grey-500); margin-bottom:14px;">'+set.sub+'</div>';
+    set.problems.forEach(p=>{
+      if(p.format==='mc') inner += renderMCProblem(p);
+      else if(p.format==='essay') inner += renderEssayProblem(p);
+      else if(p.format==='math') inner += renderMathProblem(p);
+    });
+    return '<div class="practice-set" id="sec-practice-'+i+'"><div class="art-section-inner">'+inner+'</div></div>';
+  }).join('');
+  PRACTICE_SETS.forEach(set=>{ set.problems.forEach(p=>{ if(p.format==='math') initMathCanvas(p.id); }); });
+  resizeGlobalCanvas();
+}
+const DIFF_LABELS_KR = {easy:'쉬움', medium:'보통', hard:'어려움'};
+const FORMAT_LABELS_KR = {mc:'객관식', essay:'서술형', math:'풀이형(화이트보드)'};
+function renderProblemTopRow(p){
+  const saved = !!SAVED_PROBLEMS[p.id];
+  let tagsHtml = '<div class="prob-tags">'+
+    '<span class="ptag">'+FORMAT_LABELS_KR[p.format]+'</span>'+
+    (p.skillType?'<span class="ptag">'+p.skillType+'</span>':'')+
+    (p.subject?'<span class="ptag">'+p.subject+'</span>':'')+
+    (p.unit?'<span class="ptag">'+p.unit+'</span>':'')+
+    (p.difficulty?'<span class="ptag diff-'+p.difficulty+'">'+DIFF_LABELS_KR[p.difficulty]+'</span>':'')+
+    '</div>';
+  let rightHtml = '<button class="save-btn'+(saved?' saved':'')+'" onclick="toggleSaveProblem(\''+p.id+'\',this)">'+(saved?'★ 저장됨':'☆ 저장')+'</button>';
+  if(MODE==='teacher'){
+    const tag = TEACHER_PICKS[p.id];
+    rightHtml += '<button class="pick-btn'+(tag?' tagged':'')+'" onclick="toggleTeacherPickPanel(\''+p.id+'\')">'+(tag?'🏷 선생님 픽: '+tag.reasons.join(', '):'🏷 선생님 픽')+'</button>';
+  }
+  let html = '<div class="prob-top-row">'+tagsHtml+'<div style="display:flex; gap:6px; flex-shrink:0;">'+rightHtml+'</div></div>';
+  if(MODE==='teacher'){
+    const existing = TEACHER_PICKS[p.id];
+    const existingReasons = existing ? existing.reasons : [];
+    html += '<div class="teacher-pick-panel" id="teacherpick-panel-'+p.id+'">'+
+      '<div style="font-size:11px; color:var(--grey-500); margin-bottom:6px;">여러 개 선택 가능</div>'+
+      '<div class="category-select-row">'+
+      ['단어','로직','해석','기타'].map(r=>'<span class="cat-chip'+(existingReasons.includes(r)?' on':'')+'" onclick="toggleTeacherPickReason(\''+p.id+'\',\''+r+'\',this)">'+r+'</span>').join('')+
+      '</div>'+
+      '<textarea class="pick-other-input'+(existingReasons.includes('기타')?' show':'')+'" id="teacherpick-othertext-'+p.id+'" placeholder="구체적인 사유를 입력하세요">'+(existing?existing.reasonText:'')+'</textarea>'+
+      '<button class="btn-sm" style="margin-top:8px;" onclick="confirmTeacherPick(\''+p.id+'\')">태깅 저장</button>'+
+      '</div>';
+  }
+  return html;
+}
+function toggleSaveProblem(id, el){
+  SAVED_PROBLEMS[id] = !SAVED_PROBLEMS[id];
+  el.classList.toggle('saved', SAVED_PROBLEMS[id]);
+  el.textContent = SAVED_PROBLEMS[id] ? '★ 저장됨' : '☆ 저장';
+}
+function refreshProblemCard(id){
+  const p = findProblem(id);
+  const cardEl = document.getElementById('prob-'+id);
+  if(!cardEl || !p) return;
+  const newHtml = p.format==='mc' ? renderMCProblem(p) : (p.format==='essay' ? renderEssayProblem(p) : renderMathProblem(p));
+  const temp = document.createElement('div');
+  temp.innerHTML = newHtml;
+  cardEl.replaceWith(temp.firstElementChild);
+  if(p.format==='math') initMathCanvas(id);
+}
+let teacherPickDraft = {};
+function toggleTeacherPickPanel(id){
+  const panel = document.getElementById('teacherpick-panel-'+id);
+  const opening = !panel.classList.contains('open');
+  panel.classList.toggle('open');
+  if(opening){
+    const existing = TEACHER_PICKS[id];
+    teacherPickDraft[id] = new Set(existing ? existing.reasons : []);
+  }
+}
+function toggleTeacherPickReason(id, reason, el){
+  if(!teacherPickDraft[id]) teacherPickDraft[id] = new Set();
+  if(teacherPickDraft[id].has(reason)){ teacherPickDraft[id].delete(reason); el.classList.remove('on'); }
+  else { teacherPickDraft[id].add(reason); el.classList.add('on'); }
+  const panel = document.getElementById('teacherpick-panel-'+id);
+  panel.querySelector('.pick-other-input').classList.toggle('show', teacherPickDraft[id].has('기타'));
+}
+function confirmTeacherPick(id){
+  const panel = document.getElementById('teacherpick-panel-'+id);
+  const reasons = teacherPickDraft[id] ? [...teacherPickDraft[id]] : [];
+  let warnEl = panel.querySelector('.pick-warn');
+  if(!reasons.length){
+    if(!warnEl){
+      warnEl = document.createElement('div');
+      warnEl.className = 'pick-warn';
+      warnEl.style.cssText = 'color:var(--red); font-size:11.5px; margin-top:6px;';
+      panel.appendChild(warnEl);
+    }
+    warnEl.textContent = '사유를 최소 1개 선택한 후 저장하세요.';
+    return;
+  }
+  const reasonText = reasons.includes('기타') ? document.getElementById('teacherpick-othertext-'+id).value : '';
+  TEACHER_PICKS[id] = {reasons, reasonText, taggedAt:'방금'};
+  delete teacherPickDraft[id];
+  refreshProblemCard(id);
+}
+
+function renderMCProblem(p){
+  const st = PROB_STATE[p.id];
+  const teacherExplain = MODE==='teacher' ? '<div class="prob-explain show" style="margin-top:8px; background:var(--yellow-bg);"><b>선생님용 — 학생이 풀기 전에 미리 보는 해설</b><br>'+p.explanation+'</div>' : '';
+  return '<div class="prob-card" id="prob-'+p.id+'">'+renderProblemTopRow(p)+
+    (MODE==='teacher' ? '<div class="teacher-answer-badge" style="position:static; display:inline-block; margin-bottom:8px;">정답: '+String.fromCharCode(65+p.correctIndex)+'</div>' : '')+
+    '<div class="prob-passage">'+p.passage.replace('______','<span class="blank">______</span>')+'</div>'+
+    '<div class="prob-choices" id="choices-'+p.id+'">'+
+    p.options.map((opt,i)=>'<div class="prob-choice'+(st&&st.done?' disabled':'')+(st&&st.done&&i===p.correctIndex?' correct':'')+(st&&st.done&&i===st.selected&&i!==p.correctIndex?' wrong':'')+'" onclick="selectChoice(\''+p.id+'\','+i+')"><span class="choice-letter">'+String.fromCharCode(65+i)+'</span>'+opt+'</div>').join('')+
+    '</div>'+
+    '<div class="prob-actions"><button class="btn-accept" id="grade-btn-'+p.id+'" onclick="gradeMC(\''+p.id+'\')" '+(st&&st.done?'style="display:none;"':'disabled')+'>채점하기</button>'+
+    '<span class="prob-attempts" id="attempts-'+p.id+'"></span></div>'+
+    '<div class="prob-explain" id="explain-'+p.id+'"'+(st&&st.done?' style="display:block;" class="prob-explain show"':'')+'><b>해설</b><br>'+p.explanation+'</div>'+
+    teacherExplain+
+    '</div>';
+}
+function renderEssayProblem(p){
+  const teacherExplain = MODE==='teacher' ? '<div class="prob-explain show" style="margin-top:8px; background:var(--yellow-bg);"><b>선생님용 — 모범 답안 (학생 제출 전 확인 가능)</b><br>'+p.explanation+'</div>' : '';
+  return '<div class="prob-card" id="prob-'+p.id+'">'+renderProblemTopRow(p)+
+    '<div class="prob-passage">'+p.passage+'</div>'+
+    '<textarea class="essay-input" id="essay-'+p.id+'" placeholder="답안을 입력하세요"></textarea>'+
+    '<div class="prob-actions"><button class="btn-accept" id="essay-submit-'+p.id+'" onclick="submitEssay(\''+p.id+'\')">제출하기</button></div>'+
+    '<div class="prob-explain" id="explain-'+p.id+'"><b>모범 답안</b><br>'+p.explanation+'</div>'+
+    teacherExplain+'</div>';
+}
+function renderMathProblem(p){
+  const teacherExplain = MODE==='teacher' ? '<div class="prob-explain show" style="margin-top:8px; background:var(--yellow-bg);"><b>선생님용 — 풀이 (학생 제출 전 확인 가능)</b><br>'+p.explanation+'</div>' : '';
+  return '<div class="prob-card" id="prob-'+p.id+'">'+renderProblemTopRow(p)+
+    '<div class="prob-passage">'+p.passage+'</div>'+
+    '<div class="math-toolbar"><div class="pen-colors">'+
+      '<div class="pen-color active" style="background:#1A1A1A;" onclick="setMathPenColor(\''+p.id+'\',\'#1A1A1A\',this)"></div>'+
+      '<div class="pen-color" style="background:#C8102E;" onclick="setMathPenColor(\''+p.id+'\',\'#C8102E\',this)"></div>'+
+    '</div><button class="btn-sm" onclick="clearMathCanvas(\''+p.id+'\')">지우기</button></div>'+
+    '<div class="math-canvas-wrap"><canvas class="math-canvas" id="mathcanvas-'+p.id+'"></canvas></div>'+
+    '<div class="prob-actions"><button class="btn-accept" id="math-submit-'+p.id+'" onclick="submitMath(\''+p.id+'\')">제출하기</button></div>'+
+    '<div class="prob-explain" id="explain-'+p.id+'"><b>풀이</b><br>'+p.explanation+'</div>'+
+    teacherExplain+'</div>';
+}
+
+/* ================= MC GRADING (최대 3번 시도) ================= */
+function ensureProbState(id){ if(!PROB_STATE[id]) PROB_STATE[id] = {selected:null, attempts:0, done:false}; return PROB_STATE[id]; }
+function selectChoice(id, idx){
+  const st = ensureProbState(id);
+  if(st.done) return;
+  st.selected = idx;
+  document.querySelectorAll('#choices-'+id+' .prob-choice').forEach((el,i)=>el.classList.toggle('selected', i===idx));
+  document.getElementById('grade-btn-'+id).disabled = false;
+}
+function gradeMC(id){
+  const st = ensureProbState(id);
+  const p = findProblem(id);
+  st.attempts++;
+  const correct = st.selected === p.correctIndex;
+  const choices = document.querySelectorAll('#choices-'+id+' .prob-choice');
+  if(!correct){
+    logProblemAttempt(id, 'mc', p, false, st.selected);
+  }
+  if(correct || st.attempts>=3){
+    st.done = true;
+    choices.forEach((el,i)=>{
+      el.classList.add('disabled');
+      if(i===p.correctIndex) el.classList.add('correct');
+      else if(i===st.selected) el.classList.add('wrong');
+    });
+    document.getElementById('explain-'+id).classList.add('show');
+    document.getElementById('grade-btn-'+id).style.display = 'none';
+    document.getElementById('attempts-'+id).textContent = correct ? '정답입니다! ('+st.attempts+'번째 시도)' : '정답은 '+String.fromCharCode(65+p.correctIndex)+'번입니다. ('+st.attempts+'번 시도)';
+    if(correct) logProblemAttempt(id, 'mc', p, true, st.selected);
+  } else {
+    choices[st.selected].classList.add('wrong');
+    document.getElementById('attempts-'+id).textContent = '오답입니다. 다시 선택해보세요. ('+(3-st.attempts)+'번 남음)';
+    const selIdx = st.selected;
+    setTimeout(()=>{ choices[selIdx].classList.remove('wrong','selected'); document.getElementById('grade-btn-'+id).disabled = true; st.selected=null; }, 1200);
+  }
+}
+function submitEssay(id){
+  const ta = document.getElementById('essay-'+id);
+  const text = ta.value.trim();
+  if(!text) return;
+  document.getElementById('explain-'+id).classList.add('show');
+  logProblemAttempt(id, 'essay', findProblem(id), null, text);
+  const btn = document.getElementById('essay-submit-'+id);
+  btn.disabled = true; btn.textContent = '제출 완료';
+  ta.disabled = true;
+}
+function submitMath(id){
+  const canvas = document.getElementById('mathcanvas-'+id);
+  const dataUrl = canvas.toDataURL();
+  document.getElementById('explain-'+id).classList.add('show');
+  logProblemAttempt(id, 'math', findProblem(id), null, dataUrl);
+  const btn = document.getElementById('math-submit-'+id);
+  btn.disabled = true; btn.textContent = '제출 완료';
+}
+function logProblemAttempt(problemId, format, p, correct, response){
+  STUDENT_PROBLEM_LOG.push({
+    id:'log'+Date.now(), problemId, format, passage:p.passage, options:p.options, correctIndex:p.correctIndex,
+    explanation:p.explanation, correct, response, attemptedAt:'방금 (9월 7일)',
+    subject:p.subject, skillType:p.skillType, unit:p.unit, difficulty:p.difficulty
+  });
+}
+
+/* ================= 필기 (아이패드+펜슬 고려: 필기모드 토글) ================= */
+function toggleDrawMode(){
+  drawMode = !drawMode;
+  document.body.classList.toggle('draw-mode', drawMode);
+  document.getElementById('draw-toggle-btn').classList.toggle('on', drawMode);
+}
+function setPenColor(color, el){
+  currentPen.color = color;
+  el.parentElement.querySelectorAll('.pen-color').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+}
+function setTool(tool, el){
+  currentPen.tool = tool;
+  el.parentElement.querySelectorAll('.tool-opt').forEach(o=>o.classList.remove('active'));
+  el.classList.add('active');
+}
+function clearAllAnnotations(){
+  clearGlobalCanvas();
+  saveAnnotations();
+}
+function saveAnnotations(){
+  const ind = document.getElementById('save-indicator');
+  ind.classList.add('show');
+  setTimeout(()=>ind.classList.remove('show'), 1500);
+  /* 실제 서비스에서는 여기서 캔버스 스트로크 데이터를 이번 세션 ID로 서버에 저장합니다.
+     같은 교재를 다른 세션에서 열면 빈 캔버스로 시작하고, 이 세션을 복기할 때만 이 필기가 다시 보입니다. */
+}
+let globalCanvasReady = false;
+function resizeGlobalCanvas(){
+  const canvas = document.getElementById('canvas-global');
+  const wrap = document.getElementById('article-wrap');
+  if(!canvas || !wrap) return;
+  const width = wrap.clientWidth;
+  const height = wrap.scrollHeight;
+  if(width>0 && height>0 && (canvas.width!==width || canvas.height!==height)){
+    const ctx = canvas.getContext('2d');
+    const prev = ctx && canvas.width>0 && canvas.height>0 ? ctx.getImageData(0,0,canvas.width,canvas.height) : null;
+    canvas.width = width; canvas.height = height;
+    canvas.style.width = width+'px';
+    canvas.style.height = height+'px';
+    if(prev && ctx){ ctx.putImageData(prev,0,0); }
+  }
+}
+function clearGlobalCanvas(){
+  const canvas = document.getElementById('canvas-global');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if(ctx) ctx.clearRect(0,0,canvas.width,canvas.height);
+}
+function initAllCanvases(){
+  resizeGlobalCanvas();
+  if(globalCanvasReady) return;
+  globalCanvasReady = true;
+  const canvas = document.getElementById('canvas-global');
+  const wrap = document.getElementById('article-wrap');
+  if(!canvas || !wrap) return;
+  if(typeof ResizeObserver !== 'undefined'){
+    new ResizeObserver(resizeGlobalCanvas).observe(wrap);
+  }
+  const ctx = canvas.getContext('2d');
+  if(!ctx) return;
+  ctx.lineCap = 'round';
+  let drawing=false, last=null;
+  function pos(e){ const r=canvas.getBoundingClientRect(); const cx=(e.touches?e.touches[0].clientX:e.clientX)-r.left; const cy=(e.touches?e.touches[0].clientY:e.clientY)-r.top; return {x:cx,y:cy}; }
+  canvas.addEventListener('pointerdown', e=>{ if(!drawMode) return; drawing=true; last=pos(e); });
+  canvas.addEventListener('pointermove', e=>{
+    if(!drawing || !drawMode) return;
+    const p = pos(e);
+    if(currentPen.tool==='eraser'){ ctx.globalCompositeOperation='destination-out'; ctx.lineWidth=22; }
+    else { ctx.globalCompositeOperation='source-over'; ctx.strokeStyle=currentPen.color; ctx.lineWidth=2.5; }
+    ctx.beginPath(); ctx.moveTo(last.x,last.y); ctx.lineTo(p.x,p.y); ctx.stroke();
+    last = p;
+  });
+  window.addEventListener('pointerup', ()=>{ if(drawing){ drawing=false; saveAnnotations(); } });
+}
+function initMathCanvas(id){
+  const canvas = document.getElementById('mathcanvas-'+id);
+  if(!canvas || canvas.dataset.inited) return;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width; canvas.height = rect.height;
+  canvas.dataset.inited = '1';
+  const ctx = canvas.getContext('2d');
+  if(!ctx) return;
+  ctx.lineCap = 'round';
+  MATH_PEN[id] = MATH_PEN[id] || {color:'#1A1A1A'};
+  let drawing=false, last=null;
+  function pos(e){ const r=canvas.getBoundingClientRect(); const cx=(e.touches?e.touches[0].clientX:e.clientX)-r.left; const cy=(e.touches?e.touches[0].clientY:e.clientY)-r.top; return {x:cx,y:cy}; }
+  canvas.addEventListener('pointerdown', e=>{ drawing=true; last=pos(e); });
+  canvas.addEventListener('pointermove', e=>{
+    if(!drawing) return;
+    const p = pos(e);
+    ctx.strokeStyle = MATH_PEN[id].color; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.moveTo(last.x,last.y); ctx.lineTo(p.x,p.y); ctx.stroke();
+    last = p;
+  });
+  window.addEventListener('pointerup', ()=>{ drawing=false; });
+}
+function setMathPenColor(id, color, el){
+  MATH_PEN[id].color = color;
+  el.parentElement.querySelectorAll('.pen-color').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+}
+function clearMathCanvas(id){
+  const canvas = document.getElementById('mathcanvas-'+id);
+  canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);
+}
+
+/* ================= 내 문제 기록 (아카이빙 + 다시풀기 + AI 유사문제) ================= */
+function setLogFilter(f){
+  logFilter = f;
+  document.querySelectorAll('.log-filter-chip').forEach(c=>c.classList.toggle('active', c.dataset.f===f));
+  renderLog();
+}
+function renderLog(){
+  if(logFilter==='saved'){ renderSavedProblemsView(); return; }
+  let list = STUDENT_PROBLEM_LOG;
+  if(logFilter==='mc'||logFilter==='essay'||logFilter==='math') list = list.filter(l=>l.format===logFilter);
+  else if(logFilter==='incorrect') list = list.filter(l=>l.format==='mc' && l.correct===false);
+  else if(logFilter==='teacherpick') list = list.filter(l=>TEACHER_PICKS[l.problemId]);
+  document.getElementById('log-list').innerHTML = list.length ? list.slice().reverse().map(l=>{
+    const tag = TEACHER_PICKS[l.problemId];
+    return '<div class="log-item" onclick="openLogDetail(\''+l.id+'\')">'+
+    '<div class="log-item-top"><div class="log-tags-left">'+
+    '<span class="log-badge '+l.format+'">'+({mc:'객관식',essay:'서술형',math:'수학(화이트보드)'}[l.format])+'</span>'+
+    (l.format==='mc' ? '<span class="log-badge '+(l.correct?'correct':'incorrect')+'">'+(l.correct?'정답':'오답')+'</span>' : '')+
+    (tag ? '<span class="log-badge incorrect">🏷 선생님 픽</span>' : '')+
+    '</div><div class="log-tags-left"><span class="log-meta">'+l.attemptedAt+'</span></div></div>'+
+    '<div class="log-prompt">'+l.passage.slice(0,110)+(l.passage.length>110?'...':'')+'</div>'+
+    '</div>';
+  }).join('') : '<div class="empty-note">아직 기록이 없습니다. 문제를 풀어보세요!</div>';
+}
+function renderSavedProblemsView(){
+  const savedIds = Object.keys(SAVED_PROBLEMS).filter(id=>SAVED_PROBLEMS[id]);
+  const probs = savedIds.map(id=>findProblem(id)).filter(Boolean);
+  document.getElementById('log-list').innerHTML = probs.length ? probs.map(p=>
+    p.format==='mc' ? renderMCProblem(p) : (p.format==='essay' ? renderEssayProblem(p) : renderMathProblem(p))
+  ).join('') : '<div class="empty-note">저장한 문제가 없습니다. 문제 카드의 ☆ 저장 버튼을 눌러보세요.</div>';
+  probs.forEach(p=>{ if(p.format==='math') initMathCanvas(p.id); });
+}
+function openLogDetail(logId){
+  const l = STUDENT_PROBLEM_LOG.find(x=>x.id===logId);
+  let body = '<div class="prob-passage">'+l.passage.replace('______','<span class="blank">______</span>')+'</div>';
+  if(l.format==='mc'){
+    body += '<div class="prob-choices">'+l.options.map((o,i)=>'<div class="prob-choice disabled'+(i===l.correctIndex?' correct':'')+(i===l.response&&i!==l.correctIndex?' wrong':'')+'"><span class="choice-letter">'+String.fromCharCode(65+i)+'</span>'+o+'</div>').join('')+'</div>';
+  } else if(l.format==='essay'){
+    body += '<div style="background:var(--grey-100); padding:12px 14px; border-radius:8px; margin:10px 0; font-size:13px; line-height:1.6;">'+l.response+'</div>';
+  } else if(l.format==='math'){
+    body += '<img src="'+l.response+'" style="max-width:100%; border:1px solid var(--grey-200); border-radius:8px; margin:10px 0; background:#fff;">';
+  }
+  body += '<div class="prob-explain show"><b>해설</b><br>'+l.explanation+'</div>'+
+    '<div class="prob-actions" style="margin-top:14px;">'+
+    '<button class="btn-sm" onclick="retryFromLog(\''+logId+'\')">다시 풀기</button>'+
+    (MODE==='teacher' ? '<button class="btn-sm" style="background:var(--yellow-bg); color:#8A6D00;" onclick="generateSimilarProblem(\''+logId+'\')">✦ AI로 비슷한 문제 만들기</button>' : '')+
+    '</div><div id="similar-gen-result"></div>';
+  document.getElementById('log-list').insertAdjacentHTML('afterbegin', '<div class="prob-card" style="margin-bottom:20px; border-color:var(--ink);"><div style="font-size:11px; font-weight:800; color:var(--grey-500); margin-bottom:8px;">복습 중 — '+l.attemptedAt+'</div>'+body+'</div>');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function retryFromLog(logId){
+  const l = STUDENT_PROBLEM_LOG.find(x=>x.id===logId);
+  const p = findProblem(l.problemId);
+  if(!p) return;
+  const tempId = l.problemId+'-retry'+Date.now();
+  const clone = Object.assign({}, p, {id:tempId});
+  RETRY_CLONES[tempId] = clone;
+  const html = clone.format==='mc' ? renderMCProblem(clone) : (clone.format==='essay' ? renderEssayProblem(clone) : renderMathProblem(clone));
+  document.getElementById('log-list').insertAdjacentHTML('afterbegin', '<div style="margin-bottom:20px;"><div style="font-size:11px; font-weight:800; color:var(--grey-500); margin-bottom:8px;">다시 풀기</div>'+html+'</div>');
+  if(clone.format==='math') setTimeout(()=>initMathCanvas(tempId), 50);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function generateSimilarProblem(logId){
+  document.getElementById('similar-gen-result').innerHTML = '<div style="font-size:12.5px; color:var(--grey-500); margin-top:10px;">AI가 비슷한 문제를 만드는 중...</div>';
+  setTimeout(()=>{
+    const l = STUDENT_PROBLEM_LOG.find(x=>x.id===logId);
+    const newProb = buildAiProblem('mc', l.subject||'SAT Reading & Writing', l.unit||'Words in Context', l.skillType||'Words in Context', l.difficulty||'medium');
+    AIGEN_DRAFT.push(newProb);
+    document.getElementById('similar-gen-result').innerHTML = '<div style="color:var(--green); font-weight:700; font-size:12.5px; margin-top:10px;">✓ "문제 생성" 탭에 추가되었습니다. 검토 후 과제로 확정하세요.</div>';
+  }, 900);
+}
+const SUBJECT_UNITS_MAP = {
+  'SAT Reading & Writing': ['Words in Context 섹션', '독해 지문 구조 섹션'],
+  'SAT Math': ['이차방정식 단원', '지수함수와 로그함수 단원']
+};
+const SKILL_TYPES_MAP = {
+  'SAT Reading & Writing': ['Words in Context', 'Text Structure and Purpose', 'Cross-Text Connections'],
+  'SAT Math': ['개념 문제', '응용 문제', '실전 문제']
+};
+let aigenState = {subject:'SAT Reading & Writing', unit:'Words in Context 섹션', skillType:'Words in Context', difficulty:'medium', format:'mc'};
+function renderAigenForm(){
+  const subjEl = document.getElementById('aigen-subject-btns');
+  if(!subjEl) return;
+  subjEl.innerHTML = Object.keys(SUBJECT_UNITS_MAP).map(s=>
+    '<span class="cat-chip'+(aigenState.subject===s?' on':'')+'" onclick="setAigenSubject(\''+s+'\')">'+s+'</span>'
+  ).join('');
+  document.getElementById('aigen-unit-btns').innerHTML = SUBJECT_UNITS_MAP[aigenState.subject].map(u=>
+    '<span class="cat-chip'+(aigenState.unit===u?' on':'')+'" onclick="setAigenField(\'unit\',\''+u+'\')">'+u+'</span>'
+  ).join('');
+  document.getElementById('aigen-skilltype-btns').innerHTML = SKILL_TYPES_MAP[aigenState.subject].map(t=>
+    '<span class="cat-chip'+(aigenState.skillType===t?' on':'')+'" onclick="setAigenField(\'skillType\',\''+t+'\')">'+t+'</span>'
+  ).join('');
+  document.getElementById('aigen-diff-btns').innerHTML = [['easy','쉬움'],['medium','보통'],['hard','어려움']].map(pair=>
+    '<span class="cat-chip'+(aigenState.difficulty===pair[0]?' on':'')+'" onclick="setAigenField(\'difficulty\',\''+pair[0]+'\')">'+pair[1]+'</span>'
+  ).join('');
+  document.getElementById('aigen-format-btns').innerHTML = [['mc','객관식'],['essay','서술형'],['math','풀이형(화이트보드)']].map(pair=>
+    '<span class="cat-chip'+(aigenState.format===pair[0]?' on':'')+'" onclick="setAigenField(\'format\',\''+pair[0]+'\')">'+pair[1]+'</span>'
+  ).join('');
+}
+function setAigenSubject(subj){
+  aigenState.subject = subj;
+  aigenState.unit = SUBJECT_UNITS_MAP[subj][0];
+  aigenState.skillType = SKILL_TYPES_MAP[subj][0];
+  renderAigenForm();
+}
+function setAigenField(field, val){
+  aigenState[field] = val;
+  renderAigenForm();
+}
+let AIGEN_DRAFT = [];
+function buildAiProblem(format, subject, unit, skillType, difficulty){
+  const prob = {id:'aigen'+(nextAiId++), format, subject, unit, skillType, difficulty};
+  if(format==='mc'){
+    prob.passage = '(AI 생성) '+unit+' · '+skillType+' 유형의 새 지문입니다. 실제 서비스에서는 조건에 맞는 실제 SAT 스타일 문제가 생성됩니다.';
+    prob.options = ['선택지 1','선택지 2','선택지 3','선택지 4']; prob.correctIndex = 1;
+    prob.explanation = 'AI가 생성한 해설입니다.';
+  } else if(format==='essay'){
+    prob.passage = '(AI 생성) '+unit+' · '+skillType+' 유형의 서술형 문제입니다.';
+    prob.explanation = 'AI가 생성한 모범 답안입니다.';
+  } else {
+    prob.passage = '(AI 생성) '+unit+' · '+skillType+' 유형의 풀이형(화이트보드) 문제입니다.';
+    prob.explanation = 'AI가 생성한 풀이 과정입니다.';
+  }
+  return prob;
+}
+function generateAiProblems(){
+  const {subject, unit, skillType, difficulty, format} = aigenState;
+  const count = Math.max(1, Math.min(10, parseInt(document.getElementById('aigen-count').value) || 1));
+  document.getElementById('aigen-loading').innerHTML = '<div class="cr-policy" style="margin-top:10px;">AI가 조건에 맞는 문제 '+count+'개를 생성하는 중...</div>';
+  setTimeout(()=>{
+    AIGEN_DRAFT = [];
+    for(let i=0; i<count; i++) AIGEN_DRAFT.push(buildAiProblem(format, subject, unit, skillType, difficulty));
+    document.getElementById('aigen-loading').innerHTML = '';
+    renderAigenDraft();
+  }, 900);
+}
+function renderAigenDraft(){
+  const el = document.getElementById('aigen-draft-results');
+  const finalizeRow = document.getElementById('aigen-finalize-row');
+  if(!el) return;
+  if(!AIGEN_DRAFT.length){ el.innerHTML=''; if(finalizeRow) finalizeRow.style.display='none'; return; }
+  el.innerHTML = '<div class="ro-label" style="margin-top:6px;">생성된 문제 — 검토·수정 후 확정하세요</div>'+
+    AIGEN_DRAFT.map((p,idx)=>renderAigenDraftCard(p,idx)).join('');
+  if(finalizeRow) finalizeRow.style.display = 'block';
+}
+function renderAigenDraftCard(p, idx){
+  let html = '<div class="card" style="margin-bottom:12px;">'+
+    '<div class="prob-tags" style="margin-bottom:8px;"><span class="ptag">'+FORMAT_LABELS_KR[p.format]+'</span>'+
+    (p.skillType?'<span class="ptag">'+p.skillType+'</span>':'')+(p.unit?'<span class="ptag">'+p.unit+'</span>':'')+
+    (p.difficulty?'<span class="ptag diff-'+p.difficulty+'">'+DIFF_LABELS_KR[p.difficulty]+'</span>':'')+'</div>'+
+    '<div class="ro-label">지문 / 문제</div>'+
+    '<textarea rows="2" style="width:100%; padding:8px 10px; border:1.5px solid var(--grey-200); border-radius:8px; font-family:inherit; font-size:13px;" onchange="AIGEN_DRAFT['+idx+'].passage=this.value">'+p.passage+'</textarea>';
+  if(p.format==='mc'){
+    html += '<div class="ro-label" style="margin-top:8px;">선택지 (정답에 라디오 체크)</div>'+
+      p.options.map((o,oi)=>'<div style="display:flex; gap:8px; align-items:center; margin-top:6px;">'+
+        '<input type="radio" name="aigen-correct-'+idx+'" '+(oi===p.correctIndex?'checked':'')+' onchange="AIGEN_DRAFT['+idx+'].correctIndex='+oi+'">'+
+        '<input type="text" value="'+o+'" style="flex:1; padding:6px 8px; border:1.5px solid var(--grey-200); border-radius:6px; font-size:13px;" onchange="AIGEN_DRAFT['+idx+'].options['+oi+']=this.value">'+
+        '</div>').join('');
+  }
+  html += '<div class="ro-label" style="margin-top:8px;">해설 / 모범답안</div>'+
+    '<textarea rows="2" style="width:100%; padding:8px 10px; border:1.5px solid var(--grey-200); border-radius:8px; font-family:inherit; font-size:13px;" onchange="AIGEN_DRAFT['+idx+'].explanation=this.value">'+p.explanation+'</textarea>'+
+    '<div style="display:flex; gap:12px; margin-top:8px;">'+
+    '<span class="action-link" onclick="regenerateAigenDraftItem('+idx+')">🔄 이 문제만 다시 생성</span>'+
+    '<span class="action-link" style="color:var(--red);" onclick="removeAigenDraftItem('+idx+')">삭제</span>'+
+    '</div></div>';
+  return html;
+}
+function regenerateAigenDraftItem(idx){
+  const p = AIGEN_DRAFT[idx];
+  AIGEN_DRAFT[idx] = buildAiProblem(p.format, p.subject, p.unit, p.skillType, p.difficulty);
+  renderAigenDraft();
+}
+function removeAigenDraftItem(idx){
+  AIGEN_DRAFT.splice(idx,1);
+  renderAigenDraft();
+}
+function discardAigenDraft(){
+  if(AIGEN_DRAFT.length && !confirm('생성된 문제를 모두 취소하시겠습니까?')) return;
+  AIGEN_DRAFT = [];
+  renderAigenDraft();
+}
+function finalizeAigenToHomework(){
+  if(!AIGEN_DRAFT.length) return;
+  AIGEN_DRAFT.forEach(p=>{
+    HOMEWORK_ITEMS.push({
+      id:'hw'+Date.now()+Math.random().toString(36).slice(2,6),
+      title:(p.unit||'AI 생성 문제')+' ('+FORMAT_LABELS_KR[p.format]+')',
+      desc:p.passage, studentAnswer:'', graded:false, aiGenProblem:p
+    });
+  });
+  const count = AIGEN_DRAFT.length;
+  AIGEN_DRAFT = [];
+  renderAigenDraft();
+  renderHomework();
+  alert(count+'개 문제가 과제로 확정되었습니다. "과제" 탭에서 확인할 수 있습니다.');
+}
+
+/* ================= 단어장 (텍스트 선택 -> AI 자동 정리) ================= */
+let VOCAB_LIST = [];
+let nextVocabId = 1;
+let pendingVocabWord = null;
+function setupVocabSelection(){
+  document.getElementById('article-sections').addEventListener('click', handleWordClick);
+  document.addEventListener('mousedown', (e)=>{ if(!e.target.closest('#vocab-popup') && !e.target.closest('#article-sections')) hideVocabPopup(); });
+}
+function handleWordClick(e){
+  if(drawMode) return; // prioritize drawing when draw mode is active
+  if(e.target.closest('.prob-choice, button, textarea, input, canvas, .tip-margin, .save-btn, .pick-btn, .teacher-pick-panel, .math-toolbar, .pen-colors')) return; // avoid interfering with interactive controls, but still allow word-click on passage text
+  let range = null;
+  if(document.caretRangeFromPoint){
+    range = document.caretRangeFromPoint(e.clientX, e.clientY);
+  } else if(document.caretPositionFromPoint){
+    const pos = document.caretPositionFromPoint(e.clientX, e.clientY);
+    if(pos){ range = document.createRange(); range.setStart(pos.offsetNode, pos.offset); }
+  }
+  if(!range || !range.startContainer || range.startContainer.nodeType !== 3){ hideVocabPopup(); return; }
+  const textNode = range.startContainer;
+  const text = textNode.textContent;
+  const offset = range.startOffset;
+  const isWordChar = c => c && /[A-Za-z0-9'\-\uAC00-\uD7A3\u3131-\u318E]/.test(c);
+  let start = offset, end = offset;
+  while(start>0 && isWordChar(text[start-1])) start--;
+  while(end<text.length && isWordChar(text[end])) end++;
+  const word = text.slice(start, end).trim();
+  if(!word || word.length<2){ hideVocabPopup(); return; }
+  const wordRange = document.createRange();
+  wordRange.setStart(textNode, start);
+  wordRange.setEnd(textNode, end);
+  const rect = wordRange.getBoundingClientRect();
+  const sel = window.getSelection();
+  sel.removeAllRanges();
+  sel.addRange(wordRange);
+  showVocabPopup(word, rect);
+}
+function showVocabPopup(word, rect){
+  pendingVocabWord = word;
+  const popup = document.getElementById('vocab-popup');
+  popup.style.display = 'block';
+  popup.style.top = Math.max(8, rect.top - 42) + 'px';
+  popup.style.left = rect.left + 'px';
+  popup.textContent = '+ "'+word+'" 단어장에 추가';
+}
+function hideVocabPopup(){
+  const popup = document.getElementById('vocab-popup');
+  if(popup) popup.style.display = 'none';
+  const sel = window.getSelection();
+  if(sel) sel.removeAllRanges();
+}
+function confirmAddVocab(){
+  if(!pendingVocabWord) return;
+  addVocabWord(pendingVocabWord);
+  hideVocabPopup();
+}
+function addVocabWord(word){
+  if(VOCAB_LIST.some(v=>v.word.toLowerCase()===word.toLowerCase())) return;
+  const entry = {id:'vocab'+(nextVocabId++), word, addedAt:'방금', loading:true, definition:null, example:null, similar:null};
+  VOCAB_LIST.push(entry);
+  renderVocabTab();
+  setTimeout(()=>{
+    entry.loading = false;
+    entry.definition = '(AI 생성) "'+word+'"의 사전적 의미와 이 문맥에서의 쓰임을 정리한 설명입니다.';
+    entry.example = '(AI 생성 예문) "'+word+'"를 사용한 새로운 예문입니다.';
+    entry.similar = ['비슷한 단어 1','비슷한 단어 2','비슷한 단어 3'];
+    renderVocabTab();
+  }, 900);
+}
+function removeVocabWord(id){ VOCAB_LIST = VOCAB_LIST.filter(v=>v.id!==id); renderVocabTab(); }
+function renderVocabTab(){
+  const el = document.getElementById('vocab-list');
+  if(!el) return;
+  el.innerHTML = VOCAB_LIST.length ? VOCAB_LIST.slice().reverse().map(v=>
+    '<div class="card" style="margin-bottom:12px;"><div style="display:flex; justify-content:space-between; align-items:center;">'+
+    '<h3 style="margin-bottom:0;">'+v.word+'</h3><span class="action-link" onclick="removeVocabWord(\''+v.id+'\')">삭제</span></div>'+
+    (v.loading ? '<div style="font-size:12.5px; color:var(--grey-500); margin-top:8px;">AI가 뜻과 예문을 정리하는 중...</div>' :
+      '<div class="ro-label" style="margin-top:10px;">뜻</div><div class="ro-text">'+v.definition+'</div>'+
+      '<div class="ro-label">예문</div><div class="ro-text">'+v.example+'</div>'+
+      '<div class="ro-label">비슷한 단어</div><div style="display:flex; gap:6px; flex-wrap:wrap;">'+v.similar.map(s=>'<span class="ptag">'+s+'</span>').join('')+'</div>')+
+    '</div>'
+  ).join('') : '<div class="empty-note">아직 저장한 단어가 없습니다. 교재에서 모르는 단어를 드래그해 선택해보세요.</div>';
+}
+
+/* ================= MODE / VIEW SWITCH ================= */
+const CURRENT_STUDENT_NAME = '지훈';
+function updateOwnershipLabels(){
+  const isTeacher = MODE==='teacher';
+  document.getElementById('nav-log').textContent = isTeacher ? CURRENT_STUDENT_NAME+' 학생의 문제 기록' : '내 문제 기록';
+  document.getElementById('nav-vocab').textContent = isTeacher ? CURRENT_STUDENT_NAME+' 학생의 단어장' : '단어장';
+  document.getElementById('log-view-title').textContent = isTeacher ? CURRENT_STUDENT_NAME+' 학생의 문제 기록' : '내 문제 기록';
+  document.getElementById('log-view-sub').textContent = isTeacher
+    ? CURRENT_STUDENT_NAME+' 학생이 지금까지 풀었던 모든 문제입니다. 선생님·학생 모두 같은 기록을 봅니다.'
+    : '지금까지 풀었던 모든 문제가 여기에 아카이빙됩니다. 다시 풀어보거나 저장한 문제만 모아볼 수 있습니다.';
+  document.getElementById('vocab-view-title').textContent = isTeacher ? CURRENT_STUDENT_NAME+' 학생의 단어장' : '단어장';
+  document.getElementById('vocab-view-sub').textContent = isTeacher
+    ? '학생이 교재에서 저장한 단어들입니다. 선생님도 여기서 함께 확인할 수 있습니다.'
+    : '교재를 읽다가 모르는 단어를 마우스로 드래그해 선택하면 단어장에 추가할 수 있습니다. AI가 자동으로 뜻·예문·비슷한 단어를 정리해줍니다.';
+}
+function setMode(mode){
+  MODE = mode;
+  document.getElementById('mode-student').classList.toggle('active', mode==='student');
+  document.getElementById('mode-teacher').classList.toggle('active', mode==='teacher');
+  document.body.classList.toggle('teacher-mode', mode==='teacher');
+  document.getElementById('tips-toggle-btn').style.display = mode==='teacher' ? 'inline-block' : 'none';
+  const aigenNav = document.getElementById('nav-aigen');
+  if(aigenNav) aigenNav.style.display = mode==='teacher' ? 'inline-block' : 'none';
+  if(mode==='student' && document.getElementById('view-aigen').classList.contains('active')) switchView('homework');
+  updateOwnershipLabels();
+  renderSessionStatusBar();
+  renderHomework();
+  renderFilesTab();
+  renderArticle();
+  renderPracticeSets();
+  renderAigenDraft();
+  setTimeout(()=>{ initAllCanvases(); setupScrollSpy(); }, 30);
+}
+function switchView(view){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('view-'+view).classList.add('active');
+  ['material','log','vocab','aigen','homework','files','docs'].forEach(v=>{
+    const el = document.getElementById('nav-'+v);
+    if(el) el.classList.toggle('active', v===view);
+  });
+  if(view==='log') renderLog();
+  if(view==='vocab') renderVocabTab();
+  if(view==='aigen'){ renderAigenForm(); renderAigenDraft(); }
+  if(view==='homework') renderHomework();
+  if(view==='files') renderFilesTab();
+  if(view==='docs') renderDocsTab();
+}
+
+/* ================= 역할 자동 고정 (포털에서 진입 시 ?role=student|teacher) ================= */
+const urlParams = new URLSearchParams(window.location.search);
+const ROLE_LOCKED = urlParams.get('role');
+const SESSION_STATE = urlParams.get('state') || 'prep'; // 'prep' | 'live' | 'completed'
+const VIEW_MODE = urlParams.get('mode') || 'session'; // 'session' | 'library'
+const STUDENT_NAMES = {jihoon:'지훈', seoah:'이서아'};
+function updateSessionContextLabel(){
+  const subEl = document.getElementById('tb-sub');
+  const backEl = document.getElementById('tb-back');
+  if(!subEl) return;
+  if(VIEW_MODE==='library'){
+    subEl.textContent = MATERIALS_LIBRARY[currentMaterialId].subject;
+    if(backEl) backEl.textContent = '← 교재 라이브러리로 돌아가기';
+    return;
+  }
+  const student = urlParams.get('student');
+  const subj = urlParams.get('subj');
+  const session = urlParams.get('session');
+  if(subj || session || student){
+    subEl.textContent = (subj||'SAT Reading & Writing')+' · '+(student ? (STUDENT_NAMES[student]||student) : '지훈')+' · '+(session||'8')+'회차';
+  }
+}
+function applyViewModeLayer(){
+  if(VIEW_MODE!=='library') return;
+  document.body.classList.add('library-mode');
+  // 교재 라이브러리 모드: 세션에 귀속된 요소(상태바, 과제/문제생성/연습장/단어장 탭)를 전부 숨기고 순수 교재만 노출
+  const bar = document.getElementById('session-status-bar');
+  if(bar) bar.style.display = 'none';
+  ['nav-homework','nav-aigen','nav-log','nav-vocab','nav-docs','nav-files'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.style.display = 'none';
+  });
+  const modeToggle = document.getElementById('mode-toggle-wrap');
+  if(modeToggle) modeToggle.style.display = 'none';
+  const modeBadge = document.getElementById('mode-badge');
+  if(modeBadge) modeBadge.style.display = 'none';
+  switchView('material');
+}
+function initRoleLock(){
+  if(ROLE_LOCKED==='student' || ROLE_LOCKED==='teacher'){
+    MODE = ROLE_LOCKED;
+    document.getElementById('mode-toggle-wrap').style.display = 'none';
+    const badge = document.getElementById('mode-badge');
+    badge.style.display = 'inline-block';
+    badge.textContent = ROLE_LOCKED==='teacher' ? '선생님' : '학생';
+    document.body.classList.toggle('teacher-mode', ROLE_LOCKED==='teacher');
+    document.getElementById('tips-toggle-btn').style.display = ROLE_LOCKED==='teacher' ? 'inline-block' : 'none';
+  }
+  const aigenNav = document.getElementById('nav-aigen');
+  if(aigenNav) aigenNav.style.display = MODE==='teacher' ? 'inline-block' : 'none';
+}
+function renderSessionStatusBar(){
+  const bar = document.getElementById('session-status-bar');
+  if(SESSION_STATE==='live'){
+    bar.innerHTML = '<span>🟢 <b>Zoom 연결됨</b> · 종료 예정 오전 1:00</span>'+
+      '<span style="display:flex; gap:16px; align-items:center;">'+
+      (MODE==='student' ? '<span class="action-link" onclick="reportNoShowInline()">선생님이 안 보이시나요? (노쇼 알림)</span>' : '')+
+      '<button class="btn-primary" style="background:var(--red); padding:6px 16px;" onclick="endSessionInline()">수업 종료</button>'+
+      '</span>';
+  } else if(SESSION_STATE==='completed'){
+    bar.innerHTML = '<span>✅ <b>완료된 수업</b>입니다</span><span></span>';
+  } else {
+    bar.innerHTML = '<span>🗓 <b>수업 준비 중</b> · 9월 3일 오후 2:00 예정</span><span></span>';
+  }
+}
+function reportNoShowInline(){ alert('노쇼가 접수되었습니다. 관리자에게 알림이 전송됩니다.'); }
+function endSessionInline(){ if(confirm('수업을 종료하시겠습니까?')) alert('수업이 종료되었습니다. 리뷰 작성 화면으로 이동합니다.'); }
+
+/* ================= 과제 ================= */
+let HOMEWORK_ITEMS = [
+  {id:'hw1', title:'이차방정식 응용 문제 10선', desc:'다음 10개의 SAT 스타일 이차방정식 응용 문제를 풀어보세요. 문제지는 교재를 참고하세요.', studentAnswer:'', graded:false}
+];
+function renderHomework(){
+  document.getElementById('homework-sub').textContent = MODE==='teacher' ? '학생에게 배정된 과제입니다. 새 과제를 추가하거나 제출 답안을 확인할 수 있습니다.' : '이번 회차에 배정된 과제입니다.';
+  document.getElementById('homework-list').innerHTML = HOMEWORK_ITEMS.length ? HOMEWORK_ITEMS.map(h=>
+    '<div class="card" style="margin-bottom:12px;"><h3>'+h.title+'</h3><div class="ro-text">'+h.desc+'</div>'+
+    (MODE==='student'
+      ? '<textarea rows="2" placeholder="답안을 작성하세요" style="width:100%; margin-top:8px; padding:8px 10px; border:1.5px solid var(--grey-200); border-radius:8px; font-family:inherit; font-size:13px;" onchange="saveHomeworkAnswer(\''+h.id+'\',this.value)">'+(h.studentAnswer||'')+'</textarea>'
+      : '<div class="ro-label" style="margin-top:8px;">학생 제출 답안</div><div class="ro-text" style="margin-bottom:0;">'+(h.studentAnswer||'아직 제출하지 않았습니다.')+'</div>')+
+    '</div>'
+  ).join('') : '<div class="empty-note">배정된 과제가 없습니다.</div>';
+  document.getElementById('homework-teacher-add').innerHTML = MODE==='teacher' ? '<button class="btn-sm" onclick="addHomeworkItem()">+ 과제 추가</button>' : '';
+}
+function saveHomeworkAnswer(id, val){ const h = HOMEWORK_ITEMS.find(x=>x.id===id); if(h) h.studentAnswer = val; }
+function addHomeworkItem(){
+  const title = prompt('과제 제목을 입력하세요:');
+  if(!title) return;
+  const desc = prompt('과제 설명을 입력하세요:') || '';
+  HOMEWORK_ITEMS.push({id:'hw'+Date.now(), title, desc, studentAnswer:'', graded:false});
+  renderHomework();
+}
+
+/* ================= 기타 자료 (파일 공유 + Google Docs) ================= */
+let SHARED_FILES = [
+  {id:'f1', name:'9월 3일 세션 노트.pdf', owner:'teacher'}
+];
+let nextFileId = 2;
+let filesSubtab = 'teacher';
+const GDOCS_LINKS = [{title:'8회차 수업 기록', url:'#'}];
+function setFilesSubtab(tab){
+  filesSubtab = tab;
+  document.querySelectorAll('#view-files .log-filter-chip').forEach(c=>c.classList.toggle('active', c.dataset.f===tab));
+  renderFilesTab();
+}
+function renderFilesTab(){
+  const list = SHARED_FILES.filter(f=>f.owner===filesSubtab);
+  document.getElementById('shared-files-list').innerHTML = list.length ? list.map(f=>
+    '<div class="list-row"><span>'+f.name+'</span><span style="display:flex; gap:12px; align-items:center;">'+
+    '<span class="action-link" onclick="alert(\'다운로드합니다: '+f.name+'\')">다운로드</span>'+
+    (f.owner===MODE ? '<span class="action-link" style="color:var(--red);" onclick="deleteSharedFile(\''+f.id+'\')">삭제</span>' : '')+
+    '</span></div>'
+  ).join('') : '<div class="empty-note">'+(filesSubtab==='teacher'?'선생님이':'학생이')+' 업로드한 파일이 없습니다.</div>';
+  document.getElementById('files-upload-label').style.display = (filesSubtab===MODE) ? 'inline-block' : 'none';
+}
+function uploadSharedFile(input){
+  if(!input.files || !input.files[0]) return;
+  SHARED_FILES.push({id:'f'+(nextFileId++), name:input.files[0].name, owner:MODE});
+  input.value = '';
+  renderFilesTab();
+}
+function deleteSharedFile(id){
+  const f = SHARED_FILES.find(x=>x.id===id);
+  if(!f) return;
+  if(!confirm('"'+f.name+'" 파일을 삭제하시겠습니까? 삭제하면 복구할 수 없습니다.')) return;
+  SHARED_FILES = SHARED_FILES.filter(x=>x.id!==id);
+  renderFilesTab();
+}
+function renderDocsTab(){
+  document.getElementById('gdocs-list').innerHTML = GDOCS_LINKS.length ? GDOCS_LINKS.map(g=>'<div class="list-row"><span>'+g.title+'</span><a class="action-link" href="'+g.url+'" target="_blank">열기 →</a></div>').join('') : '<div class="empty-note">연결된 문서가 없습니다.</div>';
+}
+function showScratchSubtab(id){
+  document.querySelectorAll('#view-docs .subview').forEach(v=>v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('#view-docs .subtab').forEach(t=>t.classList.remove('active'));
+  document.querySelector('#view-docs .subtab[data-sub="'+id+'"]').classList.add('active');
+}
+
+/* ================= INIT ================= */
+initRoleLock();
+renderSessionStatusBar();
+renderHomework();
+renderMaterialSelector();
+buildTOC();
+updateOwnershipLabels();
+updateSessionContextLabel();
+applyViewModeLayer();
+renderArticle();
+renderPracticeSets();
+setupVocabSelection();
+initAllCanvases();
+setupScrollSpy();
+if(document.readyState==='complete'){ initAllCanvases(); setupScrollSpy(); }
+else window.addEventListener('load', ()=>{ initAllCanvases(); setupScrollSpy(); });
+</script>
