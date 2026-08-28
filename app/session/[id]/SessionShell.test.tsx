@@ -26,6 +26,11 @@ vi.mock("./homework-actions", () => ({
   addHomeworkItem: vi.fn(),
 }));
 
+vi.mock("./aigen-actions", () => ({
+  generateProblems: vi.fn(),
+  finalizeProblemsToHomework: vi.fn(),
+}));
+
 vi.mock("@/utils/supabase/client", () => ({
   createClient: () => ({
     channel: () => ({
@@ -52,6 +57,8 @@ const baseProps = {
   studentName: "지훈",
   sessionNumber: 7,
   backHref: "/student",
+  subjectId: "subject-1",
+  unitOptions: ["이차방정식 단원"],
 };
 
 describe("SessionShell — 세션 상태바", () => {

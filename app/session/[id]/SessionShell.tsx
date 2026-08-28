@@ -13,6 +13,7 @@ import VocabTab from "./VocabTab";
 import type { VocabEntry } from "./vocab-data";
 import HomeworkTab from "./HomeworkTab";
 import type { HomeworkItem } from "./homework-data";
+import AigenTab from "./AigenTab";
 
 const TABS = [
   { id: "material", label: "교재", teacherOnly: false },
@@ -52,6 +53,8 @@ export default function SessionShell({
   material,
   vocabWords,
   homeworkItems,
+  subjectId,
+  unitOptions,
 }: {
   sessionId: string;
   studentId: string;
@@ -69,6 +72,8 @@ export default function SessionShell({
   material: MaterialData;
   vocabWords: VocabEntry[];
   homeworkItems: HomeworkItem[];
+  subjectId: string;
+  unitOptions: string[];
 }) {
   const router = useRouter();
   const isTeacher = viewerRole === "teacher";
@@ -83,6 +88,7 @@ export default function SessionShell({
 
   const [state, setState] = useState(initialState);
   const [tipsVisible, setTipsVisible] = useState(true);
+  const [homeworkList, setHomeworkList] = useState(homeworkItems);
 
   // 상태(prep/live/completed)를 주기적으로 재계산 — 시작/종료 시각이 지나면
   // 새로고침 없이도 상태바가 자동으로 전환되게 한다.
@@ -183,8 +189,18 @@ export default function SessionShell({
       ) : activeTab === "homework" ? (
         <HomeworkTab
           sessionId={sessionId}
-          initialItems={homeworkItems}
+          initialItems={homeworkList}
           viewerRole={viewerRole}
+        />
+      ) : activeTab === "aigen" && isTeacher ? (
+        <AigenTab
+          sessionId={sessionId}
+          subjectId={subjectId}
+          subjectName={subjectName}
+          unitOptions={unitOptions}
+          onFinalized={(items) =>
+            setHomeworkList((prev) => [...prev, ...items])
+          }
         />
       ) : (
         <div className="p-8 text-[14px] text-grey-500">

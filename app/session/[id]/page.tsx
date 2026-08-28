@@ -9,6 +9,7 @@ import SessionShell from "./SessionShell";
 import { loadMaterialData } from "./material-data";
 import { loadVocabWords } from "./vocab-data";
 import { loadHomeworkItems } from "./homework-data";
+import { loadUnitOptions } from "./aigen-data";
 
 function extractSubjectName(subject: unknown): string {
   const row = Array.isArray(subject) ? subject[0] : subject;
@@ -38,7 +39,7 @@ export default async function SessionPage({
 
   const { data: enrollment } = await supabase
     .from("enrollments")
-    .select("student_id, teacher_id, subject:subjects(name)")
+    .select("student_id, teacher_id, subject_id, subject:subjects(name)")
     .eq("id", session.enrollment_id)
     .single();
 
@@ -81,6 +82,7 @@ export default async function SessionPage({
 
   const vocabWords = await loadVocabWords(supabase, enrollment.student_id);
   const homeworkItems = await loadHomeworkItems(supabase, session.id);
+  const unitOptions = await loadUnitOptions(supabase, enrollment.subject_id);
 
   return (
     <SessionShell
@@ -100,6 +102,8 @@ export default async function SessionPage({
       material={material}
       vocabWords={vocabWords}
       homeworkItems={homeworkItems}
+      subjectId={enrollment.subject_id}
+      unitOptions={unitOptions}
     />
   );
 }
