@@ -7,6 +7,8 @@ import {
   type SessionViewState,
   type SessionViewViewer,
 } from "@/lib/session-view";
+import MaterialTab from "./MaterialTab";
+import type { MaterialData } from "./material-data";
 
 const TABS = [
   { id: "material", label: "교재", teacherOnly: false },
@@ -30,6 +32,7 @@ const VIEWER_LABEL: Record<SessionViewViewer, string> = {
 };
 
 export default function SessionShell({
+  sessionId,
   unitTitle,
   subjectName,
   studentName,
@@ -41,7 +44,9 @@ export default function SessionShell({
   scheduledAt,
   durationMinutes,
   backHref,
+  material,
 }: {
+  sessionId: string;
   unitTitle: string;
   subjectName: string;
   studentName: string;
@@ -53,6 +58,7 @@ export default function SessionShell({
   scheduledAt: string | null;
   durationMinutes: number;
   backHref: string;
+  material: MaterialData;
 }) {
   const router = useRouter();
   const isTeacher = viewerRole === "teacher";
@@ -66,6 +72,7 @@ export default function SessionShell({
   );
 
   const [state, setState] = useState(initialState);
+  const [tipsVisible, setTipsVisible] = useState(true);
 
   // 상태(prep/live/completed)를 주기적으로 재계산 — 시작/종료 시각이 지나면
   // 새로고침 없이도 상태바가 자동으로 전환되게 한다.
@@ -125,6 +132,14 @@ export default function SessionShell({
               {tab.label}
             </button>
           ))}
+          {isTeacher && activeTab === "material" && (
+            <button
+              onClick={() => setTipsVisible((v) => !v)}
+              className="text-[12px] font-semibold px-3 py-1.5 rounded-lg border border-grey-200"
+            >
+              💡 티칭 팁 {tipsVisible ? "숨기기" : "보기"}
+            </button>
+          )}
           <span className="text-[12px] font-bold px-3.5 py-1.5 rounded-full bg-ink text-white whitespace-nowrap">
             {VIEWER_LABEL[viewerRole]}
           </span>
@@ -138,9 +153,18 @@ export default function SessionShell({
         endLabel={endLabel}
       />
 
-      <div className="p-8 text-[14px] text-grey-500">
-        {validTabs.find((t) => t.id === activeTab)?.label} 탭은 준비 중입니다.
-      </div>
+      {activeTab === "material" ? (
+        <MaterialTab
+          sessionId={sessionId}
+          material={material}
+          viewerRole={viewerRole}
+          tipsVisible={tipsVisible}
+        />
+      ) : (
+        <div className="p-8 text-[14px] text-grey-500">
+          {validTabs.find((t) => t.id === activeTab)?.label} 탭은 준비 중입니다.
+        </div>
+      )}
     </div>
   );
 }

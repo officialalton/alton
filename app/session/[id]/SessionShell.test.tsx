@@ -7,6 +7,8 @@ vi.mock("next/navigation", () => ({
 }));
 
 const baseProps = {
+  sessionId: "session-1",
+  material: null,
   unitTitle: "이차방정식 응용 문제 (1)",
   subjectName: "SAT Math",
   studentName: "지훈",

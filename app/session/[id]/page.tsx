@@ -6,6 +6,7 @@ import {
   type SessionViewViewer,
 } from "@/lib/auth";
 import SessionShell from "./SessionShell";
+import { loadMaterialData } from "./material-data";
 
 function extractSubjectName(subject: unknown): string {
   const row = Array.isArray(subject) ? subject[0] : subject;
@@ -26,7 +27,7 @@ export default async function SessionPage({
   const { data: session } = await supabase
     .from("sessions")
     .select(
-      "id, session_number, unit_title, status, scheduled_at, duration_minutes, enrollment_id"
+      "id, session_number, unit_title, status, scheduled_at, duration_minutes, enrollment_id, curriculum_doc_id"
     )
     .eq("id", id)
     .single();
@@ -69,8 +70,16 @@ export default async function SessionPage({
     session.duration_minutes
   );
 
+  const material = await loadMaterialData(
+    supabase,
+    session.curriculum_doc_id,
+    session.id,
+    enrollment.student_id
+  );
+
   return (
     <SessionShell
+      sessionId={session.id}
       unitTitle={session.unit_title ?? `${session.session_number}회차`}
       subjectName={extractSubjectName(enrollment.subject)}
       studentName={studentName}
@@ -82,6 +91,7 @@ export default async function SessionPage({
       scheduledAt={session.scheduled_at}
       durationMinutes={session.duration_minutes}
       backHref={getRoleHomePath(profile?.role)}
+      material={material}
     />
   );
 }

@@ -112,11 +112,11 @@ insert into enrollments (id, student_id, teacher_id, subject_id, status, total_s
     'eeeeeeee-0000-0000-0000-000000000001', 'active', 12, 8);
 
 insert into sessions (
-  enrollment_id, session_number, unit_title, source_template_unit_id, teacher_comment, status, scheduled_at
+  id, enrollment_id, session_number, unit_title, source_template_unit_id, teacher_comment, status, scheduled_at
 ) values
-  ('22222222-0000-0000-0000-000000000001', 1, '함수의 기초와 그래프 해석', '11111111-0000-0000-0000-000000000001', null, 'completed', now() - interval '5 weeks'),
-  ('22222222-0000-0000-0000-000000000001', 7, '이차방정식 응용 문제 (1)', '11111111-0000-0000-0000-000000000007', '실수 유형 확인 회차', 'completed', now() - interval '1 week'),
-  ('22222222-0000-0000-0000-000000000001', 8, '이차방정식 응용 문제 심화', '11111111-0000-0000-0000-000000000008', '보강 세션 · 실수 유형 집중 교정', 'upcoming', now() + interval '3 days');
+  ('44444444-0000-0000-0000-000000000001', '22222222-0000-0000-0000-000000000001', 1, '함수의 기초와 그래프 해석', '11111111-0000-0000-0000-000000000001', null, 'completed', now() - interval '5 weeks'),
+  ('44444444-0000-0000-0000-000000000007', '22222222-0000-0000-0000-000000000001', 7, '이차방정식 응용 문제 (1)', '11111111-0000-0000-0000-000000000007', '실수 유형 확인 회차', 'completed', now() - interval '1 week'),
+  ('44444444-0000-0000-0000-000000000008', '22222222-0000-0000-0000-000000000001', 8, '이차방정식 응용 문제 심화', '11111111-0000-0000-0000-000000000008', '보강 세션 · 실수 유형 집중 교정', 'upcoming', now() + interval '3 days');
 
 -- =========================================================================
 -- 8. 교재 (세션과 무관한 콘텐츠)
@@ -125,9 +125,26 @@ insert into sessions (
 insert into curriculum_docs (id, title, subject_id, owner_type, status) values
   ('33333333-0000-0000-0000-000000000001', '이차방정식 개념 정리', 'eeeeeeee-0000-0000-0000-000000000001', 'admin', 'published');
 
-insert into curriculum_doc_sections (curriculum_doc_id, position, title, body, teaching_tip) values
-  ('33333333-0000-0000-0000-000000000001', 1, 'Lesson Overview', '<p>이차방정식의 기본 개념을 정리합니다.</p>', null),
-  ('33333333-0000-0000-0000-000000000001', 2, 'Teacher Modeling', '<p>판별식을 이용한 근의 개수 판정 예시.</p>', '학생이 판별식 부호를 헷갈려하면 그래프로 다시 설명');
+insert into curriculum_doc_sections (id, curriculum_doc_id, position, title, body, teaching_tip) values
+  ('55555555-0000-0000-0000-000000000001', '33333333-0000-0000-0000-000000000001', 1, 'Lesson Overview',
+    '<p>이차방정식 <b>ax² + bx + c = 0</b>의 판별식 D = b² - 4ac를 이용하면 실근의 개수를 계산 없이 바로 알 수 있습니다.</p>',
+    null),
+  ('55555555-0000-0000-0000-000000000002', '33333333-0000-0000-0000-000000000001', 2, 'Teacher Modeling',
+    '<p>판별식 D의 부호에 따라 서로 다른 개수의 실근을 가집니다: D&gt;0이면 서로 다른 두 실근, D=0이면 중근, D&lt;0이면 실근이 없습니다.</p>',
+    '학생이 판별식 부호를 헷갈려하면 그래프(포물선과 x축의 교점 개수)로 다시 설명');
+
+insert into problems (id, format, passage, options, correct_index, explanation, difficulty, subject_id, section_id, status, created_by) values
+  ('66666666-0000-0000-0000-000000000001', 'mc',
+    'x² - 4x + 4 = 0의 판별식 D의 값과 이 방정식의 실근 개수로 옳은 것은?',
+    '["D = 0, 서로 다른 두 실근", "D = 0, 중근 1개", "D = -16, 실근 없음", "D = 16, 서로 다른 두 실근"]'::jsonb,
+    1,
+    '판별식 D = b² - 4ac = (-4)² - 4·1·4 = 16 - 16 = 0 이므로 중근을 가집니다.',
+    'easy', 'eeeeeeee-0000-0000-0000-000000000001', '55555555-0000-0000-0000-000000000002',
+    'confirmed', 'dddddddd-0000-0000-0000-000000000001');
+
+-- 8회차 세션에 이 교재를 배정
+update sessions set curriculum_doc_id = '33333333-0000-0000-0000-000000000001'
+  where id = '44444444-0000-0000-0000-000000000008';
 
 -- =========================================================================
 -- 11. 결제 / 크레딧
