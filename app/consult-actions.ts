@@ -1,6 +1,7 @@
 "use server";
 
 import { createAdminClient } from "@/lib/supabase-admin";
+import { sendEmail } from "@/lib/email";
 
 export async function submitConsultRequest(params: {
   parentName: string;
@@ -33,4 +34,15 @@ export async function submitConsultRequest(params: {
     concerns: concernsWithContext || null,
   });
   if (error) throw new Error(error.message);
+
+  await sendEmail({
+    to: params.email.trim(),
+    subject: "[Alton Education] 상담 신청이 접수되었습니다",
+    html: `
+      <p>${params.parentName.trim()}님, 안녕하세요.</p>
+      <p>Alton Education 1:1 수업 상담 신청이 정상적으로 접수되었습니다.</p>
+      <p>영업일 기준 1~2일 내에 담당자가 입력하신 연락처로 연락드리겠습니다.</p>
+      <p>감사합니다.<br/>Alton Education</p>
+    `,
+  });
 }

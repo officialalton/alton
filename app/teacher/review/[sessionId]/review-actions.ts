@@ -2,6 +2,8 @@
 
 import Anthropic from "@anthropic-ai/sdk";
 import { createClient } from "@/utils/supabase/server";
+import { createAdminClient } from "@/lib/supabase-admin";
+import { sendEmail } from "@/lib/email";
 import type { ReviewCategoryId } from "./review-data";
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
@@ -197,4 +199,65 @@ export async function submitReview(
     .from("session_review_categories")
     .upsert(rows, { onConflict: "review_id,category" });
   if (categoryError) throw new Error(categoryError.message);
+
+  await notifyGuardiansOfReview(supabase, sessionId);
+}
+
+async function notifyGuardiansOfReview(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  sessionId: string
+): Promise<void> {
+  const { data: session } = await supabase
+    .from("sessions")
+    .select(
+      "session_number, enrollment:enrollments(student_id, subject:subjects(name))"
+    )
+    .eq("id", sessionId)
+    .maybeSingle();
+  if (!session) return;
+
+  const enrollment = Array.isArray(session.enrollment)
+    ? session.enrollment[0]
+    : session.enrollment;
+  const studentId = (enrollment as { student_id?: string } | null)?.student_id;
+  if (!studentId) return;
+
+  const subjectName = extractName(
+    (enrollment as { subject?: unknown } | null)?.subject
+  );
+
+  const { data: studentProfile } = await supabase
+    .from("profiles")
+    .select("name")
+    .eq("id", studentId)
+    .maybeSingle();
+
+  const admin = createAdminClient();
+  const { data: guardianLinks } = await admin
+    .from("guardian_students")
+    .select("parent_id")
+    .eq("student_id", studentId);
+  if (!guardianLinks || guardianLinks.length === 0) return;
+
+  for (const link of guardianLinks) {
+    const { data } = await admin.auth.admin.getUserById(link.parent_id);
+    const email = data.user?.email;
+    if (!email) continue;
+
+    await sendEmail({
+      to: email,
+      subject: `[Alton Education] ${studentProfile?.name ?? "자녀"} 학생의 수업 리뷰가 도착했습니다`,
+      html: `
+        <p>안녕하세요.</p>
+        <p>${studentProfile?.name ?? "자녀"} 학생의 ${subjectName} ${session.session_number}회차 수업 리뷰가 작성되었습니다.</p>
+        <p>포털에 로그인하여 확인해주세요.</p>
+        <p>감사합니다.<br/>Alton Education</p>
+      `,
+    });
+  }
+}
+
+function extractName(rel: unknown): string {
+  const row = Array.isArray(rel) ? rel[0] : rel;
+  return (row as { name?: string } | null)?.name ?? "";
 }
