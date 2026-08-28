@@ -17,7 +17,7 @@
 
 - [x] **010-session-shell**: 세션뷰 레이아웃, 상단바(세션 상태바: 준비중/진행중/완료), 역할별 권한 분기 — `alton_material_viewer_prototype.html` 참조 (목업 대비 개선: 탭을 `?tab=` URL로 관리해 새로고침/공유 가능하게 함, 상태를 30초마다 재계산해 자동 전환, 뷰어를 student/teacher/parent/admin 4종으로 확장, 로컬 DB 실데이터로 prep/live/completed 전부 검증)
 - [x] **011-session-material-tab**: 교재 탭 — TOC 네비게이션(IntersectionObserver 스크롤스파이) + 본문/티칭팁(선생님 전용, 토글) 렌더링 + 문제 풀이(객관식 3회 채점/서술형/화이트보드) 실제 DB 연동. mock 대신 실제 `curriculum_docs`/`problems`/`session_problem_attempts` 사용 — "선생님 픽"·⭐저장은 017로 넘김. 학생 실제 풀이→새로고침 후 상태 유지, 선생님 뷰(정답 배지+티칭팁) 전부 브라우저로 검증
-- [ ] **012-session-canvas**: 캔버스 필기 (펜/색상/지우기, 스크롤 콘텐츠 위 오버레이)
+- [x] **012-session-canvas**: 캔버스 필기 (펜/색상/지우기, 스크롤 콘텐츠 위 오버레이) — Supabase Realtime Broadcast로 실시간 동기화, `canvas_annotations`에 영속 저장. 서로 다른 브라우저 연결 2개로 실시간 전파(그리기/전체지우기) + 새로고침 후 DB에서 복원 전부 실제 검증
 - [ ] **013-session-vocab**: 단어장 — 단어 클릭 선택 + AI 뜻풀이 생성, 학생 포털의 "단어장" 탭과 데이터 공유
 - [ ] **014-session-homework**: 과제 탭 — 학생 인라인 답안 작성, 선생님 과제 추가
 - [ ] **015-session-aigen**: 문제 생성 (선생님 전용) — 조건 선택 → AI 생성 → 편집 가능한 초안 → 재생성 → "과제로 확정"

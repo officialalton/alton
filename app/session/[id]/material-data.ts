@@ -24,10 +24,20 @@ export type MaterialSection = {
   problems: MaterialProblem[];
 };
 
+export type CanvasStroke = {
+  x0: number;
+  y0: number;
+  x1: number;
+  y1: number;
+  color: string;
+  tool: "pen" | "eraser";
+};
+
 export type MaterialData = {
   docId: string;
   title: string;
   sections: MaterialSection[];
+  canvasStrokes: CanvasStroke[];
 } | null;
 
 export async function loadMaterialData(
@@ -113,6 +123,13 @@ export async function loadMaterialData(
     problemsBySection.set(p.section_id, list);
   });
 
+  const { data: annotation } = await supabase
+    .from("canvas_annotations")
+    .select("strokes")
+    .eq("session_id", sessionId)
+    .eq("curriculum_doc_id", curriculumDocId)
+    .maybeSingle();
+
   return {
     docId: doc.id,
     title: doc.title,
@@ -123,5 +140,6 @@ export async function loadMaterialData(
       teachingTip: s.teaching_tip,
       problems: problemsBySection.get(s.id) ?? [],
     })),
+    canvasStrokes: (annotation?.strokes as CanvasStroke[] | null) ?? [],
   };
 }

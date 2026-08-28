@@ -9,6 +9,7 @@ import {
   submitMcAttempt,
 } from "./actions";
 import MathCanvas from "./MathCanvas";
+import CanvasOverlay from "./CanvasOverlay";
 
 const DIFF_LABEL: Record<string, string> = {
   easy: "쉬움",
@@ -103,33 +104,40 @@ export default function MaterialTab({
       </nav>
 
       <div className="max-w-[720px] px-8 py-8">
-        {material.sections.map((s) => (
-          <div key={s.id} id={`sec-${s.id}`} className="mb-11 scroll-mt-[72px]">
-            <h2 className="text-[18px] font-extrabold text-ink mb-3">
-              {s.title}
-            </h2>
-            <div
-              className="text-[14px] leading-[1.75] text-ink [&_b]:font-bold"
-              dangerouslySetInnerHTML={{ __html: s.body }}
-            />
-            {s.teachingTip && tipsVisible && viewerRole === "teacher" && (
-              <div className="mt-3 text-[12px] leading-[1.6] bg-yellow-bg border border-[#F2D98A] rounded-[10px] px-3.5 py-3 text-[#6B5300]">
-                <b className="block text-[11px] uppercase tracking-wide text-[#4A3900] mb-1">
-                  티칭 팁
-                </b>
-                {s.teachingTip}
-              </div>
-            )}
-            {s.problems.map((p) => (
-              <ProblemCard
-                key={p.id}
-                sessionId={sessionId}
-                problem={p}
-                viewerRole={viewerRole}
+        <CanvasOverlay
+          sessionId={sessionId}
+          curriculumDocId={material.docId}
+          initialStrokes={material.canvasStrokes}
+          canDraw={viewerRole === "student" || viewerRole === "teacher"}
+        >
+          {material.sections.map((s) => (
+            <div key={s.id} id={`sec-${s.id}`} className="mb-11 scroll-mt-[72px]">
+              <h2 className="text-[18px] font-extrabold text-ink mb-3">
+                {s.title}
+              </h2>
+              <div
+                className="text-[14px] leading-[1.75] text-ink [&_b]:font-bold"
+                dangerouslySetInnerHTML={{ __html: s.body }}
               />
-            ))}
-          </div>
-        ))}
+              {s.teachingTip && tipsVisible && viewerRole === "teacher" && (
+                <div className="mt-3 text-[12px] leading-[1.6] bg-yellow-bg border border-[#F2D98A] rounded-[10px] px-3.5 py-3 text-[#6B5300]">
+                  <b className="block text-[11px] uppercase tracking-wide text-[#4A3900] mb-1">
+                    티칭 팁
+                  </b>
+                  {s.teachingTip}
+                </div>
+              )}
+              {s.problems.map((p) => (
+                <ProblemCard
+                  key={p.id}
+                  sessionId={sessionId}
+                  problem={p}
+                  viewerRole={viewerRole}
+                />
+              ))}
+            </div>
+          ))}
+        </CanvasOverlay>
       </div>
     </div>
   );

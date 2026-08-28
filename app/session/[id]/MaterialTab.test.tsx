@@ -10,9 +10,29 @@ vi.mock("./actions", () => ({
   submitMathAttempt: vi.fn(),
 }));
 
+vi.mock("./canvas-actions", () => ({
+  saveCanvasStrokes: vi.fn(),
+}));
+
+vi.mock("@/utils/supabase/client", () => ({
+  createClient: () => ({
+    channel: () => ({
+      on: function on() {
+        return this;
+      },
+      subscribe: function subscribe() {
+        return this;
+      },
+      send: vi.fn(),
+    }),
+    removeChannel: vi.fn(),
+  }),
+}));
+
 const material: MaterialData = {
   docId: "doc-1",
   title: "이차방정식 개념 정리",
+  canvasStrokes: [],
   sections: [
     {
       id: "sec-1",
