@@ -9,6 +9,11 @@ import VocabTab from "@/app/session/[id]/VocabTab";
 import type { VocabEntry } from "@/app/session/[id]/vocab-data";
 import ProblemLogTab from "@/app/session/[id]/ProblemLogTab";
 import type { ProblemLogEntry } from "@/app/session/[id]/problemlog-data";
+import LessonsTab from "./LessonsTab";
+import type { LessonItem } from "./lessons-data";
+import type { CurriculumData } from "./curriculum-data";
+import type { Memo } from "./memo-data";
+import type { ReviewData, StudentFeedback } from "./review-data";
 
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
@@ -30,12 +35,24 @@ export default function StudentShell({
   dashboard,
   vocabWords,
   problemLog,
+  upcoming,
+  past,
+  curricula,
+  memosByEnrollment,
+  reviews,
+  myFeedback,
 }: {
   studentName: string;
   initialTab?: string;
   dashboard: DashboardData;
   vocabWords: VocabEntry[];
   problemLog: ProblemLogEntry[];
+  upcoming: LessonItem[];
+  past: LessonItem[];
+  curricula: CurriculumData[];
+  memosByEnrollment: Record<string, Memo[]>;
+  reviews: Record<string, ReviewData>;
+  myFeedback: Record<string, StudentFeedback>;
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -108,6 +125,15 @@ export default function StudentShell({
             />
           ) : activeTab === "problemlog" ? (
             <ProblemLogTab initialEntries={problemLog} viewerRole="student" />
+          ) : activeTab === "lessons" ? (
+            <LessonsTab
+              upcoming={upcoming}
+              past={past}
+              curricula={curricula}
+              memosByEnrollment={memosByEnrollment}
+              reviews={reviews}
+              myFeedback={myFeedback}
+            />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.

@@ -24,6 +24,14 @@ vi.mock("@/app/session/[id]/problemlog-actions", () => ({
   removeTeacherPick: vi.fn(),
 }));
 
+vi.mock("./memo-actions", () => ({
+  addMemo: vi.fn(),
+}));
+
+vi.mock("./review-actions", () => ({
+  submitStudentFeedback: vi.fn(),
+}));
+
 const dashboard: DashboardData = {
   studentName: "지훈",
   upcoming: [],
@@ -31,6 +39,15 @@ const dashboard: DashboardData = {
   calendarYear: 2026,
   calendarMonth: 7,
   attendanceRate: null,
+};
+
+const lessonsProps = {
+  upcoming: [],
+  past: [],
+  curricula: [],
+  memosByEnrollment: {},
+  reviews: {},
+  myFeedback: {},
 };
 
 describe("StudentShell", () => {
@@ -41,6 +58,7 @@ describe("StudentShell", () => {
         dashboard={dashboard}
         vocabWords={[]}
         problemLog={[]}
+        {...lessonsProps}
       />
     );
     ["홈", "레슨", "선생님", "과제", "문제", "단어장", "교재", "수업권", "통계"].forEach(
@@ -56,6 +74,7 @@ describe("StudentShell", () => {
         dashboard={dashboard}
         vocabWords={[]}
         problemLog={[]}
+        {...lessonsProps}
       />
     );
     fireEvent.click(screen.getByText("수업권"));
@@ -69,6 +88,7 @@ describe("StudentShell", () => {
         dashboard={dashboard}
         vocabWords={[]}
         problemLog={[]}
+        {...lessonsProps}
       />
     );
     fireEvent.click(screen.getByText("단어장"));
@@ -84,10 +104,25 @@ describe("StudentShell", () => {
         dashboard={dashboard}
         vocabWords={[]}
         problemLog={[]}
+        {...lessonsProps}
       />
     );
     fireEvent.click(screen.getByText("문제"));
     expect(screen.getByText("조건에 맞는 문제 기록이 없습니다.")).toBeInTheDocument();
+  });
+
+  it("레슨 탭을 누르면 LessonsTab이 렌더링된다", () => {
+    render(
+      <StudentShell
+        studentName="지훈"
+        dashboard={dashboard}
+        vocabWords={[]}
+        problemLog={[]}
+        {...lessonsProps}
+      />
+    );
+    fireEvent.click(screen.getByText("레슨"));
+    expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
   });
 
   it("계정 메뉴를 열면 로그아웃 버튼이 보인다", () => {
@@ -97,6 +132,7 @@ describe("StudentShell", () => {
         dashboard={dashboard}
         vocabWords={[]}
         problemLog={[]}
+        {...lessonsProps}
       />
     );
     fireEvent.click(screen.getByText("지훈 학생님 ▾"));
