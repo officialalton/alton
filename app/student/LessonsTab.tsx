@@ -22,6 +22,7 @@ export default function LessonsTab({
   memosByEnrollment,
   reviews,
   myFeedback,
+  readOnly = false,
 }: {
   upcoming: LessonItem[];
   past: LessonItem[];
@@ -29,6 +30,7 @@ export default function LessonsTab({
   memosByEnrollment: Record<string, Memo[]>;
   reviews: Record<string, ReviewData>;
   myFeedback: Record<string, StudentFeedback>;
+  readOnly?: boolean;
 }) {
   const [subtab, setSubtab] = useState<"upcoming" | "past">("upcoming");
   const [subView, setSubView] = useState<SubView>({ type: "list" });
@@ -42,6 +44,7 @@ export default function LessonsTab({
         initialMemos={memosByEnrollment[data.enrollmentId] ?? []}
         onBack={() => setSubView({ type: "list" })}
         onReview={(sessionId) => setSubView({ type: "review", sessionId })}
+        readOnly={readOnly}
       />
     );
   }
@@ -53,6 +56,7 @@ export default function LessonsTab({
         review={reviews[subView.sessionId] ?? null}
         myFeedback={myFeedback[subView.sessionId] ?? null}
         onBack={() => setSubView({ type: "list" })}
+        readOnly={readOnly}
       />
     );
   }

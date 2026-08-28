@@ -16,11 +16,13 @@ export default function ReviewPanel({
   review,
   myFeedback,
   onBack,
+  readOnly = false,
 }: {
   sessionId: string;
   review: ReviewData | null;
   myFeedback: StudentFeedback | null;
   onBack: () => void;
+  readOnly?: boolean;
 }) {
   return (
     <div className="max-w-[640px] px-8 py-8">
@@ -64,7 +66,38 @@ export default function ReviewPanel({
         </div>
       )}
 
-      <FeedbackForm sessionId={sessionId} initial={myFeedback} />
+      {readOnly ? (
+        <FeedbackReadOnly feedback={myFeedback} />
+      ) : (
+        <FeedbackForm sessionId={sessionId} initial={myFeedback} />
+      )}
+    </div>
+  );
+}
+
+function FeedbackReadOnly({ feedback }: { feedback: StudentFeedback | null }) {
+  return (
+    <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4.5">
+      <h2 className="text-[14px] font-bold text-ink mb-3">학생 만족도</h2>
+      {!feedback || feedback.rating === null ? (
+        <p className="text-[13px] text-grey-500">
+          학생이 아직 평가를 남기지 않았습니다.
+        </p>
+      ) : (
+        <>
+          <div className="text-[18px] mb-2">
+            {"⭐".repeat(feedback.rating)}
+            <span className="opacity-25">
+              {"⭐".repeat(5 - feedback.rating)}
+            </span>
+          </div>
+          {feedback.comment && (
+            <p className="text-[13px] text-ink leading-[1.6]">
+              {feedback.comment}
+            </p>
+          )}
+        </>
+      )}
     </div>
   );
 }

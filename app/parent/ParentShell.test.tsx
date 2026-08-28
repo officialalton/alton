@@ -13,6 +13,14 @@ vi.mock("@/app/login/actions", () => ({
   logout: vi.fn(),
 }));
 
+vi.mock("@/app/student/memo-actions", () => ({
+  addMemo: vi.fn(),
+}));
+
+vi.mock("@/app/student/review-actions", () => ({
+  submitStudentFeedback: vi.fn(),
+}));
+
 const childrenList: Child[] = [
   { studentId: "s1", name: "지훈", isPrimary: true },
   { studentId: "s2", name: "이서아", isPrimary: false },
@@ -27,6 +35,15 @@ const dashboard: DashboardData = {
   attendanceRate: null,
 };
 
+const lessonsProps = {
+  upcoming: [],
+  past: [],
+  curricula: [],
+  memosByEnrollment: {},
+  reviews: {},
+  myFeedback: {},
+};
+
 describe("ParentShell", () => {
   it("사이드바 4개 항목과 자녀 전환 pill을 보여주고, 기본 탭은 홈이다", () => {
     render(
@@ -35,6 +52,7 @@ describe("ParentShell", () => {
         childrenList={childrenList}
         currentChildId="s1"
         dashboard={dashboard}
+        {...lessonsProps}
       />
     );
     ["홈", "레슨", "수업권", "통계"].forEach((label) =>
@@ -52,10 +70,25 @@ describe("ParentShell", () => {
         childrenList={childrenList}
         currentChildId="s1"
         dashboard={dashboard}
+        {...lessonsProps}
       />
     );
     fireEvent.click(screen.getByText("이서아"));
     expect(replaceMock).toHaveBeenCalledWith("?child=s2&tab=home", { scroll: false });
+  });
+
+  it("레슨 탭을 누르면 읽기전용 LessonsTab이 렌더링된다(메모 입력창 없음)", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+      />
+    );
+    fireEvent.click(screen.getByText("레슨"));
+    expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
   });
 
   it("다른 탭을 누르면 준비 중 문구를 보여준다", () => {
@@ -65,6 +98,7 @@ describe("ParentShell", () => {
         childrenList={childrenList}
         currentChildId="s1"
         dashboard={dashboard}
+        {...lessonsProps}
       />
     );
     fireEvent.click(screen.getByText("수업권"));
@@ -78,6 +112,7 @@ describe("ParentShell", () => {
         childrenList={childrenList}
         currentChildId="s1"
         dashboard={dashboard}
+        {...lessonsProps}
       />
     );
     fireEvent.click(screen.getByText("김민지 학부모님 ▾"));

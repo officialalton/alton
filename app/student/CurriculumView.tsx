@@ -23,11 +23,13 @@ export default function CurriculumView({
   initialMemos,
   onBack,
   onReview,
+  readOnly = false,
 }: {
   data: CurriculumData;
   initialMemos: Memo[];
   onBack: () => void;
   onReview: (sessionId: string) => void;
+  readOnly?: boolean;
 }) {
   const router = useRouter();
 
@@ -99,7 +101,11 @@ export default function CurriculumView({
         </div>
       )}
 
-      <MemoCard enrollmentId={data.enrollmentId} initialMemos={initialMemos} />
+      <MemoCard
+        enrollmentId={data.enrollmentId}
+        initialMemos={initialMemos}
+        readOnly={readOnly}
+      />
     </div>
   );
 }
@@ -121,9 +127,11 @@ function StatusBadge({ status }: { status: CurriculumUnitStatus }) {
 function MemoCard({
   enrollmentId,
   initialMemos,
+  readOnly,
 }: {
   enrollmentId: string;
   initialMemos: Memo[];
+  readOnly: boolean;
 }) {
   const [memos, setMemos] = useState(initialMemos);
   const [text, setText] = useState("");
@@ -158,21 +166,23 @@ function MemoCard({
           </div>
         ))
       )}
-      <div className="flex gap-2 mt-3">
-        <input
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder="메모를 남겨보세요"
-          className="flex-1 px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px]"
-        />
-        <button
-          disabled={!text.trim() || submitting}
-          onClick={handleAdd}
-          className="text-[12px] font-bold px-4 py-2 rounded-lg bg-ink text-white disabled:opacity-50"
-        >
-          추가
-        </button>
-      </div>
+      {!readOnly && (
+        <div className="flex gap-2 mt-3">
+          <input
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            placeholder="메모를 남겨보세요"
+            className="flex-1 px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px]"
+          />
+          <button
+            disabled={!text.trim() || submitting}
+            onClick={handleAdd}
+            className="text-[12px] font-bold px-4 py-2 rounded-lg bg-ink text-white disabled:opacity-50"
+          >
+            추가
+          </button>
+        </div>
+      )}
     </div>
   );
 }

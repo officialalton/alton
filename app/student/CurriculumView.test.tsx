@@ -102,4 +102,19 @@ describe("CurriculumView", () => {
     );
     await waitFor(() => expect(screen.getByText("이해했어요")).toBeInTheDocument());
   });
+
+  it("readOnly면 메모 입력창이 안 보인다", () => {
+    render(
+      <CurriculumView
+        data={data}
+        initialMemos={[{ id: "m1", authorRole: "teacher", text: "잘하고 있어요", createdAt: "2026-08-01T00:00:00.000Z" }]}
+        onBack={vi.fn()}
+        onReview={vi.fn()}
+        readOnly
+      />
+    );
+    expect(screen.getByText("잘하고 있어요")).toBeInTheDocument();
+    expect(screen.queryByPlaceholderText("메모를 남겨보세요")).not.toBeInTheDocument();
+    expect(screen.queryByText("추가")).not.toBeInTheDocument();
+  });
 });

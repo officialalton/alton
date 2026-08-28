@@ -5,6 +5,11 @@ import { useRouter } from "next/navigation";
 import { logout } from "@/app/login/actions";
 import HomeDashboard from "@/app/student/HomeDashboard";
 import type { DashboardData } from "@/app/student/dashboard-data";
+import LessonsTab from "@/app/student/LessonsTab";
+import type { LessonItem } from "@/app/student/lessons-data";
+import type { CurriculumData } from "@/app/student/curriculum-data";
+import type { Memo } from "@/app/student/memo-data";
+import type { ReviewData, StudentFeedback } from "@/app/student/review-data";
 import type { Child } from "./children-data";
 
 const NAV_ITEMS = [
@@ -22,12 +27,24 @@ export default function ParentShell({
   currentChildId,
   initialTab,
   dashboard,
+  upcoming,
+  past,
+  curricula,
+  memosByEnrollment,
+  reviews,
+  myFeedback,
 }: {
   parentName: string;
   childrenList: Child[];
   currentChildId: string;
   initialTab?: string;
   dashboard: DashboardData;
+  upcoming: LessonItem[];
+  past: LessonItem[];
+  curricula: CurriculumData[];
+  memosByEnrollment: Record<string, Memo[]>;
+  reviews: Record<string, ReviewData>;
+  myFeedback: Record<string, StudentFeedback>;
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -114,6 +131,17 @@ export default function ParentShell({
               data={dashboard}
               onShowLessons={() => selectTab("lessons")}
               onShowStats={() => selectTab("stats")}
+            />
+          ) : activeTab === "lessons" ? (
+            <LessonsTab
+              key={currentChildId}
+              upcoming={upcoming}
+              past={past}
+              curricula={curricula}
+              memosByEnrollment={memosByEnrollment}
+              reviews={reviews}
+              myFeedback={myFeedback}
+              readOnly
             />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">

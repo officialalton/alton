@@ -48,4 +48,28 @@ describe("ReviewPanel", () => {
       expect(reviewActions.submitStudentFeedback).toHaveBeenCalledWith("s1", 4, "")
     );
   });
+
+  it("readOnly면 제출 폼 대신 학생 만족도를 읽기전용으로 보여준다", () => {
+    render(
+      <ReviewPanel
+        sessionId="s1"
+        review={review}
+        myFeedback={{ rating: 4, comment: "좋았어요" }}
+        onBack={vi.fn()}
+        readOnly
+      />
+    );
+    expect(screen.getByText("좋았어요")).toBeInTheDocument();
+    expect(screen.queryByText("제출하기")).not.toBeInTheDocument();
+    expect(screen.queryByPlaceholderText("수업에 대한 의견을 남겨주세요 (선택)")).not.toBeInTheDocument();
+  });
+
+  it("readOnly인데 학생 평가가 없으면 안내 문구를 보여준다", () => {
+    render(
+      <ReviewPanel sessionId="s1" review={review} myFeedback={null} onBack={vi.fn()} readOnly />
+    );
+    expect(
+      screen.getByText("학생이 아직 평가를 남기지 않았습니다.")
+    ).toBeInTheDocument();
+  });
 });

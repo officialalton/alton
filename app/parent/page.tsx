@@ -1,6 +1,10 @@
 import { requireUser } from "@/lib/auth";
 import { loadChildren } from "./children-data";
 import { loadDashboardData } from "@/app/student/dashboard-data";
+import { loadLessons } from "@/app/student/lessons-data";
+import { loadCurricula } from "@/app/student/curriculum-data";
+import { loadMemos } from "@/app/student/memo-data";
+import { loadReviews, loadStudentFeedback } from "@/app/student/review-data";
 import ParentShell from "./ParentShell";
 
 export default async function ParentHomePage({
@@ -28,6 +32,17 @@ export default async function ParentHomePage({
     children[0].studentId;
 
   const dashboard = await loadDashboardData(supabase, currentChildId);
+  const { upcoming, past } = await loadLessons(supabase, currentChildId);
+  const curricula = await loadCurricula(supabase, currentChildId);
+
+  const memosByEnrollment: Record<string, Awaited<ReturnType<typeof loadMemos>>> = {};
+  for (const c of curricula) {
+    memosByEnrollment[c.enrollmentId] = await loadMemos(supabase, c.enrollmentId);
+  }
+
+  const pastSessionIds = past.map((l) => l.sessionId);
+  const reviews = await loadReviews(supabase, pastSessionIds);
+  const myFeedback = await loadStudentFeedback(supabase, currentChildId, pastSessionIds);
 
   return (
     <ParentShell
@@ -36,6 +51,12 @@ export default async function ParentHomePage({
       currentChildId={currentChildId}
       initialTab={tab}
       dashboard={dashboard}
+      upcoming={upcoming}
+      past={past}
+      curricula={curricula}
+      memosByEnrollment={memosByEnrollment}
+      reviews={reviews}
+      myFeedback={myFeedback}
     />
   );
 }
