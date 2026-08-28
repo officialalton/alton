@@ -54,6 +54,7 @@ const lessonsProps = {
   myFeedback: {},
   homeworkTodo: [],
   homeworkDone: [],
+  materialsLibrary: [],
 };
 
 describe("StudentShell", () => {
@@ -143,6 +144,20 @@ describe("StudentShell", () => {
     );
     fireEvent.click(screen.getByText("과제"));
     expect(screen.getByText("작성이 필요한 과제가 없습니다.")).toBeInTheDocument();
+  });
+
+  it("교재 탭을 누르면 MaterialsLibraryTab이 렌더링된다", () => {
+    render(
+      <StudentShell
+        studentName="지훈"
+        dashboard={dashboard}
+        vocabWords={[]}
+        problemLog={[]}
+        {...lessonsProps}
+      />
+    );
+    fireEvent.click(screen.getByText("교재"));
+    expect(screen.getByText("열람할 수 있는 교재가 없습니다.")).toBeInTheDocument();
   });
 
   it("계정 메뉴를 열면 로그아웃 버튼이 보인다", () => {

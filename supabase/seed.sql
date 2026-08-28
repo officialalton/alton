@@ -146,6 +146,19 @@ insert into problems (id, format, passage, options, correct_index, explanation, 
 update sessions set curriculum_doc_id = '33333333-0000-0000-0000-000000000001'
   where id = '44444444-0000-0000-0000-000000000008';
 
+-- 세션에 배정되지 않은 교재도 하나 더 시드 — 023(교재 라이브러리)에서
+-- "세션과 무관하게 과목 전체 교재를 훑어보는" 화면을 검증할 데이터가 필요.
+insert into curriculum_docs (id, title, subject_id, unit_id, owner_type, status)
+select '33333333-0000-0000-0000-000000000002', '이차함수의 그래프와 성질',
+  'eeeeeeee-0000-0000-0000-000000000001', id, 'admin', 'published'
+from subject_template_units
+where subject_id = 'eeeeeeee-0000-0000-0000-000000000001' and position = 2;
+
+insert into curriculum_doc_sections (id, curriculum_doc_id, position, title, body, teaching_tip) values
+  ('55555555-0000-0000-0000-000000000003', '33333333-0000-0000-0000-000000000002', 1, 'Graph Basics',
+    '<p>이차함수 y = a(x-p)² + q의 그래프는 꼭짓점 (p, q)를 갖는 포물선입니다.</p>',
+    null);
+
 -- =========================================================================
 -- 11. 결제 / 크레딧
 -- =========================================================================
