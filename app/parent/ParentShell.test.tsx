@@ -1,0 +1,86 @@
+import { render, screen, fireEvent } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
+import ParentShell from "./ParentShell";
+import type { DashboardData } from "@/app/student/dashboard-data";
+import type { Child } from "./children-data";
+
+const replaceMock = vi.fn();
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ push: vi.fn(), replace: replaceMock }),
+}));
+
+vi.mock("@/app/login/actions", () => ({
+  logout: vi.fn(),
+}));
+
+const childrenList: Child[] = [
+  { studentId: "s1", name: "지훈", isPrimary: true },
+  { studentId: "s2", name: "이서아", isPrimary: false },
+];
+
+const dashboard: DashboardData = {
+  studentName: "지훈",
+  upcoming: [],
+  calendarByDay: {},
+  calendarYear: 2026,
+  calendarMonth: 7,
+  attendanceRate: null,
+};
+
+describe("ParentShell", () => {
+  it("사이드바 4개 항목과 자녀 전환 pill을 보여주고, 기본 탭은 홈이다", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+      />
+    );
+    ["홈", "레슨", "수업권", "통계"].forEach((label) =>
+      expect(screen.getByText(label)).toBeInTheDocument()
+    );
+    expect(screen.getByText("지훈")).toBeInTheDocument();
+    expect(screen.getByText("이서아")).toBeInTheDocument();
+    expect(screen.getByText(/지훈의 학습 현황/)).toBeInTheDocument();
+  });
+
+  it("다른 자녀 pill을 누르면 ?child= 쿼리로 이동한다", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+      />
+    );
+    fireEvent.click(screen.getByText("이서아"));
+    expect(replaceMock).toHaveBeenCalledWith("?child=s2&tab=home", { scroll: false });
+  });
+
+  it("다른 탭을 누르면 준비 중 문구를 보여준다", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+      />
+    );
+    fireEvent.click(screen.getByText("수업권"));
+    expect(screen.getByText("수업권 탭은 준비 중입니다.")).toBeInTheDocument();
+  });
+
+  it("계정 메뉴를 열면 로그아웃 버튼이 보인다", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+      />
+    );
+    fireEvent.click(screen.getByText("김민지 학부모님 ▾"));
+    expect(screen.getByText("로그아웃")).toBeInTheDocument();
+  });
+});
