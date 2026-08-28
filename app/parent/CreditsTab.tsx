@@ -2,11 +2,46 @@
 
 import { useState } from "react";
 import type { ParentCreditsData } from "./credits-data";
+import { createCreditCheckoutSession } from "./credits-actions";
 
-export default function CreditsTab({ data }: { data: ParentCreditsData }) {
+export default function CreditsTab({
+  data,
+  studentId,
+  purchaseStatus,
+}: {
+  data: ParentCreditsData;
+  studentId: string;
+  purchaseStatus?: "success" | "cancelled";
+}) {
+  const [loadingPackageId, setLoadingPackageId] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handlePurchase(packageId: string) {
+    setError(null);
+    setLoadingPackageId(packageId);
+    try {
+      const url = await createCreditCheckoutSession(packageId, studentId);
+      window.location.href = url;
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "결제를 시작할 수 없습니다.");
+      setLoadingPackageId(null);
+    }
+  }
+
   return (
     <div className="max-w-[560px] px-8 py-8">
       <h1 className="text-[20px] font-extrabold text-ink mb-5">수업권</h1>
+
+      {purchaseStatus === "success" && (
+        <div className="bg-green/10 text-green text-[13px] font-semibold rounded-lg px-4 py-3 mb-4">
+          결제가 완료되었습니다. 잠시 후 수업권 잔여 장수에 반영됩니다.
+        </div>
+      )}
+      {purchaseStatus === "cancelled" && (
+        <div className="bg-grey-100 text-grey-500 text-[13px] font-semibold rounded-lg px-4 py-3 mb-4">
+          결제가 취소되었습니다.
+        </div>
+      )}
 
       <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4.5 mb-4">
         <h2 className="text-[14px] font-bold text-ink mb-3">수업권 현황</h2>
@@ -25,16 +60,23 @@ export default function CreditsTab({ data }: { data: ParentCreditsData }) {
                 className="border-[1.5px] border-grey-200 rounded-xl px-3 py-3 text-center"
               >
                 <div className="text-[14px] font-bold text-ink">{pkg.name}</div>
-                <div className="text-[12px] text-grey-500 mt-0.5">
+                <div className="text-[12px] text-grey-500 mt-0.5 mb-2">
                   ${pkg.priceUsd.toLocaleString()}
                 </div>
+                <button
+                  onClick={() => handlePurchase(pkg.id)}
+                  disabled={loadingPackageId !== null}
+                  className="text-[12px] font-bold text-white bg-ink rounded-lg px-2 py-1.5 w-full disabled:opacity-50"
+                >
+                  {loadingPackageId === pkg.id ? "이동 중…" : "충전하기"}
+                </button>
               </div>
             ))}
           </div>
         )}
+        {error && <p className="text-[12px] text-red mb-1">{error}</p>}
         <p className="text-[12px] text-grey-500">
-          수업권 충전 결제는 아직 지원되지 않습니다. 준비되는 대로 이 화면에서
-          바로 충전할 수 있게 됩니다.
+          충전 버튼을 누르면 Stripe 결제 페이지로 이동합니다.
         </p>
       </div>
 

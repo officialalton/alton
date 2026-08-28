@@ -38,6 +38,7 @@ export default function ParentShell({
   myFeedback,
   bookableEnrollments,
   credits,
+  purchaseStatus,
 }: {
   parentName: string;
   childrenList: Child[];
@@ -52,6 +53,7 @@ export default function ParentShell({
   reviews: Record<string, ReviewData>;
   myFeedback: Record<string, StudentFeedback>;
   credits: ParentCreditsData;
+  purchaseStatus?: "success" | "cancelled";
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -152,7 +154,11 @@ export default function ParentShell({
               readOnly
             />
           ) : activeTab === "credits" ? (
-            <CreditsTab data={credits} />
+            <CreditsTab
+              data={credits}
+              studentId={currentChildId}
+              purchaseStatus={purchaseStatus}
+            />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.

@@ -12,10 +12,10 @@ import ParentShell from "./ParentShell";
 export default async function ParentHomePage({
   searchParams,
 }: {
-  searchParams: Promise<{ child?: string; tab?: string }>;
+  searchParams: Promise<{ child?: string; tab?: string; purchase?: string }>;
 }) {
   const { user, profile, supabase } = await requireUser();
-  const { child, tab } = await searchParams;
+  const { child, tab, purchase } = await searchParams;
 
   const children = await loadChildren(supabase, user.id);
 
@@ -63,6 +63,7 @@ export default async function ParentHomePage({
       reviews={reviews}
       myFeedback={myFeedback}
       credits={credits}
+      purchaseStatus={purchase === "success" || purchase === "cancelled" ? purchase : undefined}
     />
   );
 }

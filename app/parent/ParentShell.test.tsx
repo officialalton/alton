@@ -21,6 +21,10 @@ vi.mock("@/app/student/review-actions", () => ({
   submitStudentFeedback: vi.fn(),
 }));
 
+vi.mock("./credits-actions", () => ({
+  createCreditCheckoutSession: vi.fn(),
+}));
+
 const childrenList: Child[] = [
   { studentId: "s1", name: "지훈", isPrimary: true },
   { studentId: "s2", name: "이서아", isPrimary: false },
