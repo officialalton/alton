@@ -22,7 +22,7 @@ const FORMAT_OPTIONS: { id: ProblemFormat; label: string }[] = [
   { id: "math", label: "풀이형(화이트보드)" },
 ];
 
-type Draft = DraftProblem & { key: string; unitTitle: string };
+type Draft = DraftProblem & { key: string };
 
 export default function AigenTab({
   sessionId,
@@ -67,11 +67,7 @@ export default function AigenTab({
       });
       setDrafts((prev) => [
         ...prev,
-        ...results.map((r) => ({
-          ...r,
-          key: crypto.randomUUID(),
-          unitTitle: unit,
-        })),
+        ...results.map((r) => ({ ...r, key: crypto.randomUUID() })),
       ]);
     } catch (e) {
       setError(e instanceof Error ? e.message : "생성에 실패했습니다.");
@@ -94,11 +90,7 @@ export default function AigenTab({
         count: 1,
       });
       setDrafts((prev) =>
-        prev.map((d) =>
-          d.key === draft.key
-            ? { ...result, key: draft.key, unitTitle: draft.unitTitle }
-            : d
-        )
+        prev.map((d) => (d.key === draft.key ? { ...result, key: draft.key } : d))
       );
     } catch (e) {
       setError(e instanceof Error ? e.message : "재생성에 실패했습니다.");
@@ -131,7 +123,7 @@ export default function AigenTab({
       const created = await finalizeProblemsToHomework(
         sessionId,
         subjectId,
-        drafts.map(({ key, unitTitle, ...d }) => d)
+        drafts.map(({ key, ...d }) => d)
       );
       onFinalized(
         created.map((c) => ({

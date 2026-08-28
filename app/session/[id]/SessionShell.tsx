@@ -17,6 +17,8 @@ import AigenTab from "./AigenTab";
 import ScratchpadTab from "./ScratchpadTab";
 import type { DocLink } from "./scratchpad-data";
 import type { CanvasStroke } from "./material-data";
+import ProblemLogTab from "./ProblemLogTab";
+import type { ProblemLogEntry } from "./problemlog-data";
 
 const TABS = [
   { id: "material", label: "교재", teacherOnly: false },
@@ -60,6 +62,7 @@ export default function SessionShell({
   unitOptions,
   docLinks,
   whiteboardStrokes,
+  problemLog,
 }: {
   sessionId: string;
   studentId: string;
@@ -81,6 +84,7 @@ export default function SessionShell({
   unitOptions: string[];
   docLinks: DocLink[];
   whiteboardStrokes: CanvasStroke[];
+  problemLog: ProblemLogEntry[];
 }) {
   const router = useRouter();
   const isTeacher = viewerRole === "teacher";
@@ -216,6 +220,8 @@ export default function SessionShell({
           initialDocLinks={docLinks}
           initialWhiteboardStrokes={whiteboardStrokes}
         />
+      ) : activeTab === "log" ? (
+        <ProblemLogTab initialEntries={problemLog} viewerRole={viewerRole} />
       ) : (
         <div className="p-8 text-[14px] text-grey-500">
           {validTabs.find((t) => t.id === activeTab)?.label} 탭은 준비 중입니다.

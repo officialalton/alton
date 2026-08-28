@@ -37,6 +37,15 @@ vi.mock("./scratchpad-actions", () => ({
   saveWhiteboardStrokes: vi.fn(),
 }));
 
+vi.mock("./problemlog-actions", () => ({
+  toggleSaveAttempt: vi.fn(),
+  retryMcAttempt: vi.fn(),
+  retryEssayAttempt: vi.fn(),
+  retryMathAttempt: vi.fn(),
+  saveTeacherPick: vi.fn(),
+  removeTeacherPick: vi.fn(),
+}));
+
 vi.mock("@/utils/supabase/client", () => ({
   createClient: () => ({
     channel: () => ({
@@ -67,6 +76,7 @@ const baseProps = {
   unitOptions: ["이차방정식 단원"],
   docLinks: [],
   whiteboardStrokes: [],
+  problemLog: [],
 };
 
 describe("SessionShell — 세션 상태바", () => {

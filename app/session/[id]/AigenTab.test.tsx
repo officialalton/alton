@@ -16,6 +16,7 @@ const draft = {
   explanation: "정답은 3입니다.",
   skillType: "개념 문제",
   difficulty: "medium" as const,
+  unitTitle: "이차방정식 단원",
 };
 
 describe("AigenTab", () => {

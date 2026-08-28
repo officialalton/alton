@@ -16,6 +16,7 @@ export type DraftProblem = {
   explanation: string;
   skillType: string;
   difficulty: ProblemDifficulty;
+  unitTitle: string;
 };
 
 const FORMAT_LABEL: Record<ProblemFormat, string> = {
@@ -159,6 +160,7 @@ ${format === "mc" ? "객관식은 반드시 선택지 4개와 정답 인덱스�
     explanation: p.explanation,
     skillType,
     difficulty,
+    unitTitle,
   }));
 }
 
@@ -183,6 +185,7 @@ export async function finalizeProblemsToHomework(
         explanation: draft.explanation,
         difficulty: draft.difficulty,
         skill_type: draft.skillType,
+        unit_title: draft.unitTitle,
         subject_id: subjectId,
         origin_session_id: sessionId,
         status: "confirmed",

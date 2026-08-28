@@ -11,6 +11,7 @@ import { loadVocabWords } from "./vocab-data";
 import { loadHomeworkItems } from "./homework-data";
 import { loadUnitOptions } from "./aigen-data";
 import { loadDocLinks, parseWhiteboardStrokes } from "./scratchpad-data";
+import { loadProblemLog } from "./problemlog-data";
 
 function extractSubjectName(subject: unknown): string {
   const row = Array.isArray(subject) ? subject[0] : subject;
@@ -86,6 +87,7 @@ export default async function SessionPage({
   const unitOptions = await loadUnitOptions(supabase, enrollment.subject_id);
   const docLinks = await loadDocLinks(supabase, session.id);
   const whiteboardStrokes = parseWhiteboardStrokes(session.whiteboard_strokes);
+  const problemLog = await loadProblemLog(supabase, enrollment.student_id);
 
   return (
     <SessionShell
@@ -109,6 +111,7 @@ export default async function SessionPage({
       unitOptions={unitOptions}
       docLinks={docLinks}
       whiteboardStrokes={whiteboardStrokes}
+      problemLog={problemLog}
     />
   );
 }
