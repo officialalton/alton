@@ -8,6 +8,7 @@ import {
 import SessionShell from "./SessionShell";
 import { loadMaterialData } from "./material-data";
 import { loadVocabWords } from "./vocab-data";
+import { loadHomeworkItems } from "./homework-data";
 
 function extractSubjectName(subject: unknown): string {
   const row = Array.isArray(subject) ? subject[0] : subject;
@@ -79,6 +80,7 @@ export default async function SessionPage({
   );
 
   const vocabWords = await loadVocabWords(supabase, enrollment.student_id);
+  const homeworkItems = await loadHomeworkItems(supabase, session.id);
 
   return (
     <SessionShell
@@ -97,6 +99,7 @@ export default async function SessionPage({
       backHref={getRoleHomePath(profile?.role)}
       material={material}
       vocabWords={vocabWords}
+      homeworkItems={homeworkItems}
     />
   );
 }

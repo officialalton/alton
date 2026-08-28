@@ -11,6 +11,8 @@ import MaterialTab from "./MaterialTab";
 import type { MaterialData } from "./material-data";
 import VocabTab from "./VocabTab";
 import type { VocabEntry } from "./vocab-data";
+import HomeworkTab from "./HomeworkTab";
+import type { HomeworkItem } from "./homework-data";
 
 const TABS = [
   { id: "material", label: "교재", teacherOnly: false },
@@ -49,6 +51,7 @@ export default function SessionShell({
   backHref,
   material,
   vocabWords,
+  homeworkItems,
 }: {
   sessionId: string;
   studentId: string;
@@ -65,6 +68,7 @@ export default function SessionShell({
   backHref: string;
   material: MaterialData;
   vocabWords: VocabEntry[];
+  homeworkItems: HomeworkItem[];
 }) {
   const router = useRouter();
   const isTeacher = viewerRole === "teacher";
@@ -175,6 +179,12 @@ export default function SessionShell({
           isTeacher={isTeacher}
           canManage={viewerRole === "student"}
           studentName={studentName}
+        />
+      ) : activeTab === "homework" ? (
+        <HomeworkTab
+          sessionId={sessionId}
+          initialItems={homeworkItems}
+          viewerRole={viewerRole}
         />
       ) : (
         <div className="p-8 text-[14px] text-grey-500">

@@ -21,6 +21,11 @@ vi.mock("./vocab-actions", () => ({
   removeVocabWord: vi.fn(),
 }));
 
+vi.mock("./homework-actions", () => ({
+  saveHomeworkAnswer: vi.fn(),
+  addHomeworkItem: vi.fn(),
+}));
+
 vi.mock("@/utils/supabase/client", () => ({
   createClient: () => ({
     channel: () => ({
@@ -41,6 +46,7 @@ const baseProps = {
   studentId: "student-1",
   material: null,
   vocabWords: [],
+  homeworkItems: [],
   unitTitle: "이차방정식 응용 문제 (1)",
   subjectName: "SAT Math",
   studentName: "지훈",
@@ -151,6 +157,8 @@ describe("SessionShell — 탭 노출", () => {
         durationMinutes={30}
       />
     );
-    expect(screen.getByText("과제 탭은 준비 중입니다.")).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "과제" })
+    ).toBeInTheDocument();
   });
 });
