@@ -3,6 +3,7 @@ import { loadTeacherDashboard } from "./dashboard-data";
 import { loadRoster } from "./roster-data";
 import { loadMySubjects } from "./mysubjects-data";
 import { loadAllStudentCurricula } from "./curriculum-data";
+import { loadReviewedSessionIds } from "./review-status-data";
 import { loadMemos } from "@/app/student/memo-data";
 import { loadReviews, loadStudentFeedback } from "@/app/student/review-data";
 import TeacherShell from "./TeacherShell";
@@ -44,6 +45,11 @@ export default async function TeacherHomePage({
     Object.assign(studentFeedback, feedback);
   }
 
+  const reviewedSessionIds = await loadReviewedSessionIds(
+    supabase,
+    dashboard.past.map((l) => l.sessionId)
+  );
+
   return (
     <TeacherShell
       initialTab={tab}
@@ -54,6 +60,7 @@ export default async function TeacherHomePage({
       memosByEnrollment={memosByEnrollment}
       reviews={reviews}
       studentFeedback={studentFeedback}
+      reviewedSessionIds={reviewedSessionIds}
     />
   );
 }

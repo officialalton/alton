@@ -50,4 +50,22 @@ describe("ScheduleTab", () => {
     render(<ScheduleTab upcoming={[]} past={[]} />);
     expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
   });
+
+  it("지난 수업에는 리뷰 미작성 시 리뷰 작성 버튼이 보인다", () => {
+    render(<ScheduleTab upcoming={[]} past={[pastLesson]} reviewedSessionIds={[]} />);
+    fireEvent.click(screen.getByText("지난 수업"));
+    fireEvent.click(screen.getByText("리뷰 작성"));
+    expect(pushMock).toHaveBeenCalledWith("/teacher/review/s2");
+  });
+
+  it("이미 리뷰를 제출한 세션은 리뷰 수정 버튼을 보여준다", () => {
+    render(<ScheduleTab upcoming={[]} past={[pastLesson]} reviewedSessionIds={["s2"]} />);
+    fireEvent.click(screen.getByText("지난 수업"));
+    expect(screen.getByText("리뷰 수정")).toBeInTheDocument();
+  });
+
+  it("예정된 수업에는 리뷰 버튼이 없다", () => {
+    render(<ScheduleTab upcoming={[upcomingLesson]} past={[]} />);
+    expect(screen.queryByText("리뷰 작성")).not.toBeInTheDocument();
+  });
 });

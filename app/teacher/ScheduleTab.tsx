@@ -7,9 +7,11 @@ import type { TeacherLesson } from "./dashboard-data";
 export default function ScheduleTab({
   upcoming,
   past,
+  reviewedSessionIds = [],
 }: {
   upcoming: TeacherLesson[];
   past: TeacherLesson[];
+  reviewedSessionIds?: string[];
 }) {
   const [subtab, setSubtab] = useState<"upcoming" | "past">("upcoming");
 
@@ -37,7 +39,12 @@ export default function ScheduleTab({
       {subtab === "upcoming" ? (
         <LessonList lessons={upcoming} emptyText="예정된 수업이 없습니다." actionLabel="수업 준비" />
       ) : (
-        <LessonList lessons={past} emptyText="지난 수업이 없습니다." actionLabel="수업 기록" />
+        <LessonList
+          lessons={past}
+          emptyText="지난 수업이 없습니다."
+          actionLabel="수업 기록"
+          reviewedSessionIds={reviewedSessionIds}
+        />
       )}
     </div>
   );
@@ -47,12 +54,15 @@ function LessonList({
   lessons,
   emptyText,
   actionLabel,
+  reviewedSessionIds,
 }: {
   lessons: TeacherLesson[];
   emptyText: string;
   actionLabel: string;
+  reviewedSessionIds?: string[];
 }) {
   const router = useRouter();
+  const reviewedSet = new Set(reviewedSessionIds ?? []);
 
   if (lessons.length === 0) {
     return (
@@ -76,12 +86,22 @@ function LessonList({
             {lesson.studentName} · {lesson.subjectName} · {lesson.sessionNumber}회차
             {lesson.unitTitle ? ` · ${lesson.unitTitle}` : ""}
           </div>
-          <button
-            onClick={() => router.push(`/session/${lesson.sessionId}`)}
-            className="text-[12px] font-semibold text-blue"
-          >
-            {actionLabel}
-          </button>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => router.push(`/session/${lesson.sessionId}`)}
+              className="text-[12px] font-semibold text-blue"
+            >
+              {actionLabel}
+            </button>
+            {reviewedSessionIds !== undefined && (
+              <button
+                onClick={() => router.push(`/teacher/review/${lesson.sessionId}`)}
+                className="text-[12px] font-semibold text-blue"
+              >
+                {reviewedSet.has(lesson.sessionId) ? "리뷰 수정" : "리뷰 작성"}
+              </button>
+            )}
+          </div>
         </div>
       ))}
     </>

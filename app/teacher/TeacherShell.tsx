@@ -35,6 +35,7 @@ export default function TeacherShell({
   memosByEnrollment,
   reviews,
   studentFeedback,
+  reviewedSessionIds,
 }: {
   initialTab?: string;
   dashboard: TeacherDashboardData;
@@ -44,6 +45,7 @@ export default function TeacherShell({
   memosByEnrollment: Record<string, Memo[]>;
   reviews: Record<string, ReviewData>;
   studentFeedback: Record<string, StudentFeedback>;
+  reviewedSessionIds: string[];
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -115,7 +117,11 @@ export default function TeacherShell({
               onShowSchedule={() => selectTab("schedule")}
             />
           ) : activeTab === "schedule" ? (
-            <ScheduleTab upcoming={dashboard.upcoming} past={dashboard.past} />
+            <ScheduleTab
+              upcoming={dashboard.upcoming}
+              past={dashboard.past}
+              reviewedSessionIds={reviewedSessionIds}
+            />
           ) : activeTab === "roster" ? (
             <RosterTab students={roster} onOpenCurriculum={openCurriculumFromRoster} />
           ) : activeTab === "curriculum" ? (

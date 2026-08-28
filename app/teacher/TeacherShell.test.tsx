@@ -46,6 +46,7 @@ const baseProps = {
   memosByEnrollment: {},
   reviews: {},
   studentFeedback: {},
+  reviewedSessionIds: [],
 };
 
 describe("TeacherShell", () => {
