@@ -40,6 +40,24 @@ vi.mock("./credits-actions", () => ({
   requestParentPayment: vi.fn(),
 }));
 
+vi.mock("./chat-actions", () => ({
+  sendChatMessage: vi.fn(),
+}));
+
+vi.mock("@/utils/supabase/client", () => ({
+  createClient: () => ({
+    channel: () => ({
+      on: function on() {
+        return this;
+      },
+      subscribe: function subscribe() {
+        return this;
+      },
+    }),
+    removeChannel: vi.fn(),
+  }),
+}));
+
 const dashboard: DashboardData = {
   studentName: "지훈",
   upcoming: [],
@@ -61,6 +79,10 @@ const lessonsProps = {
   materialsLibrary: [],
   credits: { balance: 0, guardianName: null },
   stats: { attendanceRate: null, satisfactionAvg: null, bySubject: [] },
+  teacherList: [],
+  teacherProfiles: {},
+  teacherSessionHistory: {},
+  chatThreads: {},
 };
 
 describe("StudentShell", () => {
@@ -80,7 +102,7 @@ describe("StudentShell", () => {
     expect(screen.getByText(/지훈의 학습 현황/)).toBeInTheDocument();
   });
 
-  it("다른 탭을 누르면 준비 중 문구를 보여준다", () => {
+  it("선생님 탭을 누르면 TeacherTab이 렌더링된다", () => {
     render(
       <StudentShell
         studentName="지훈"
@@ -91,7 +113,7 @@ describe("StudentShell", () => {
       />
     );
     fireEvent.click(screen.getByText("선생님"));
-    expect(screen.getByText("선생님 탭은 준비 중입니다.")).toBeInTheDocument();
+    expect(screen.getByText("매칭된 선생님이 없습니다.")).toBeInTheDocument();
   });
 
   it("수업권 탭을 누르면 CreditsTab이 렌더링된다", () => {

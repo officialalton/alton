@@ -22,6 +22,13 @@ import CreditsTab from "./CreditsTab";
 import type { CreditsData } from "./credits-data";
 import StatsTab from "./StatsTab";
 import type { StatsData } from "./stats-data";
+import TeacherTab from "./TeacherTab";
+import type {
+  TeacherListItem,
+  TeacherProfileData,
+  TeacherSessionHistoryItem,
+} from "./teacher-data";
+import type { ChatMessage } from "./chat-data";
 
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
@@ -54,6 +61,10 @@ export default function StudentShell({
   materialsLibrary,
   credits,
   stats,
+  teacherList,
+  teacherProfiles,
+  teacherSessionHistory,
+  chatThreads,
 }: {
   studentName: string;
   initialTab?: string;
@@ -71,6 +82,10 @@ export default function StudentShell({
   materialsLibrary: LibrarySubject[];
   credits: CreditsData;
   stats: StatsData;
+  teacherList: TeacherListItem[];
+  teacherProfiles: Record<string, TeacherProfileData | null>;
+  teacherSessionHistory: Record<string, TeacherSessionHistoryItem[]>;
+  chatThreads: Record<string, { threadId: string; messages: ChatMessage[] }>;
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -163,6 +178,13 @@ export default function StudentShell({
             <CreditsTab data={credits} />
           ) : activeTab === "stats" ? (
             <StatsTab data={stats} />
+          ) : activeTab === "teacher" ? (
+            <TeacherTab
+              teachers={teacherList}
+              profiles={teacherProfiles}
+              sessionHistory={teacherSessionHistory}
+              chatThreads={chatThreads}
+            />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.

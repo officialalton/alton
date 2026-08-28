@@ -64,9 +64,16 @@ insert into students (id, grade, status, credit_balance) values
   ('cccccccc-0000-0000-0000-000000000001', '10학년', 'active', 14),
   ('cccccccc-0000-0000-0000-000000000002', '11학년', 'active', 8);
 
-insert into teachers (id, school, status) values
-  ('dddddddd-0000-0000-0000-000000000001', '서울대학교 수리과학부', 'active'),
-  ('dddddddd-0000-0000-0000-000000000002', '연세대학교 화학과', 'active');
+-- school/bio는 목업(alton_student_portal_v16.html TEACHERS 딕셔너리) 텍스트 그대로.
+-- 기존 시드에 이도현 school이 최지우(목업엔 없는 시드 미등록 선생님) 것과
+-- 뒤바뀌어 있던 걸 바로잡음.
+insert into teachers (id, school, bio, status) values
+  ('dddddddd-0000-0000-0000-000000000001', '서울대학교 수리과학부 재학 · SAT Math 전담',
+    'SAT Math 800점 만점 지도 경험 다수. 함수·이차방정식 단원에 특히 강점이 있으며, 실수 패턴 분석을 통한 오답 교정 방식으로 지도합니다.',
+    'active'),
+  ('dddddddd-0000-0000-0000-000000000002', 'KAIST 수학과 · AP Calculus 전담',
+    '미국 서부 시간대 저녁 시간 지도 다수, AP 5점 지도 경험 다수.',
+    'active');
 
 insert into guardian_students (parent_id, student_id, relation_type, is_primary) values
   ('bbbbbbbb-0000-0000-0000-000000000001', 'cccccccc-0000-0000-0000-000000000001', '모', true);
