@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { logout } from "@/app/login/actions";
 import AdminHomeDashboard from "./AdminHomeDashboard";
 import type { AdminDashboardData } from "./dashboard-data";
+import CatalogTab from "./CatalogTab";
+import type { AdminSubject } from "./subject-data";
 
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
@@ -24,9 +26,11 @@ type TabId = (typeof NAV_ITEMS)[number]["id"];
 export default function AdminShell({
   initialTab,
   dashboard,
+  subjects,
 }: {
   initialTab?: string;
   dashboard: AdminDashboardData;
+  subjects: AdminSubject[];
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -93,6 +97,8 @@ export default function AdminShell({
         <div className="flex-1">
           {activeTab === "home" ? (
             <AdminHomeDashboard data={dashboard} />
+          ) : activeTab === "catalog" ? (
+            <CatalogTab subjects={subjects} />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.

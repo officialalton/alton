@@ -1,5 +1,6 @@
 import { requireUser } from "@/lib/auth";
 import { loadAdminDashboard } from "./dashboard-data";
+import { loadSubjectCatalog } from "./subject-data";
 import AdminShell from "./AdminShell";
 
 export default async function AdminHomePage({
@@ -11,6 +12,7 @@ export default async function AdminHomePage({
   const { tab } = await searchParams;
 
   const dashboard = await loadAdminDashboard(supabase, user.id);
+  const subjects = await loadSubjectCatalog(supabase);
 
-  return <AdminShell initialTab={tab} dashboard={dashboard} />;
+  return <AdminShell initialTab={tab} dashboard={dashboard} subjects={subjects} />;
 }
