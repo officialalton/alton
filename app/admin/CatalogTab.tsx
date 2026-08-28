@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import SubjectTemplateTab from "./SubjectTemplateTab";
+import CurriculumDocsTab from "./CurriculumDocsTab";
 import type { AdminSubject } from "./subject-data";
+import type { DocEditorData } from "./curriculum-doc-data";
 
 const SUBTABS = [
   { id: "subjects", label: "과목 템플릿" },
@@ -13,7 +15,13 @@ const SUBTABS = [
 
 type SubtabId = (typeof SUBTABS)[number]["id"];
 
-export default function CatalogTab({ subjects }: { subjects: AdminSubject[] }) {
+export default function CatalogTab({
+  subjects,
+  docs,
+}: {
+  subjects: AdminSubject[];
+  docs: DocEditorData[];
+}) {
   const [subtab, setSubtab] = useState<SubtabId>("subjects");
 
   return (
@@ -37,6 +45,8 @@ export default function CatalogTab({ subjects }: { subjects: AdminSubject[] }) {
 
       {subtab === "subjects" ? (
         <SubjectTemplateTab initialSubjects={subjects} />
+      ) : subtab === "docs" ? (
+        <CurriculumDocsTab initialDocs={docs} subjects={subjects} />
       ) : (
         <div className="p-8 text-[14px] text-grey-500">
           {SUBTABS.find((t) => t.id === subtab)?.label} 탭은 준비 중입니다.
