@@ -14,6 +14,10 @@ vi.mock("./canvas-actions", () => ({
   saveCanvasStrokes: vi.fn(),
 }));
 
+vi.mock("./vocab-actions", () => ({
+  addVocabWord: vi.fn(),
+}));
+
 vi.mock("@/utils/supabase/client", () => ({
   createClient: () => ({
     channel: () => ({
@@ -64,6 +68,7 @@ describe("MaterialTab", () => {
     render(
       <MaterialTab
         sessionId="s1"
+        studentId="student-1"
         material={material}
         viewerRole="student"
         tipsVisible={true}
@@ -91,6 +96,7 @@ describe("MaterialTab", () => {
     render(
       <MaterialTab
         sessionId="s1"
+        studentId="student-1"
         material={material}
         viewerRole="student"
         tipsVisible={true}
@@ -115,6 +121,7 @@ describe("MaterialTab", () => {
     render(
       <MaterialTab
         sessionId="s1"
+        studentId="student-1"
         material={material}
         viewerRole="teacher"
         tipsVisible={true}
@@ -128,6 +135,7 @@ describe("MaterialTab", () => {
     render(
       <MaterialTab
         sessionId="s1"
+        studentId="student-1"
         material={null}
         viewerRole="student"
         tipsVisible={true}

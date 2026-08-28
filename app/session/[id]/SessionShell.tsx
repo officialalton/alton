@@ -9,6 +9,8 @@ import {
 } from "@/lib/session-view";
 import MaterialTab from "./MaterialTab";
 import type { MaterialData } from "./material-data";
+import VocabTab from "./VocabTab";
+import type { VocabEntry } from "./vocab-data";
 
 const TABS = [
   { id: "material", label: "교재", teacherOnly: false },
@@ -33,6 +35,7 @@ const VIEWER_LABEL: Record<SessionViewViewer, string> = {
 
 export default function SessionShell({
   sessionId,
+  studentId,
   unitTitle,
   subjectName,
   studentName,
@@ -45,8 +48,10 @@ export default function SessionShell({
   durationMinutes,
   backHref,
   material,
+  vocabWords,
 }: {
   sessionId: string;
+  studentId: string;
   unitTitle: string;
   subjectName: string;
   studentName: string;
@@ -59,6 +64,7 @@ export default function SessionShell({
   durationMinutes: number;
   backHref: string;
   material: MaterialData;
+  vocabWords: VocabEntry[];
 }) {
   const router = useRouter();
   const isTeacher = viewerRole === "teacher";
@@ -129,7 +135,9 @@ export default function SessionShell({
                 (activeTab === tab.id ? "text-ink" : "text-grey-500")
               }
             >
-              {tab.label}
+              {tab.id === "vocab" && isTeacher
+                ? `${studentName} 학생의 단어장`
+                : tab.label}
             </button>
           ))}
           {isTeacher && activeTab === "material" && (
@@ -156,9 +164,17 @@ export default function SessionShell({
       {activeTab === "material" ? (
         <MaterialTab
           sessionId={sessionId}
+          studentId={studentId}
           material={material}
           viewerRole={viewerRole}
           tipsVisible={tipsVisible}
+        />
+      ) : activeTab === "vocab" ? (
+        <VocabTab
+          initialWords={vocabWords}
+          isTeacher={isTeacher}
+          canManage={viewerRole === "student"}
+          studentName={studentName}
         />
       ) : (
         <div className="p-8 text-[14px] text-grey-500">

@@ -6,9 +6,41 @@ vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: vi.fn(), replace: vi.fn() }),
 }));
 
+vi.mock("./actions", () => ({
+  submitMcAttempt: vi.fn(),
+  submitEssayAttempt: vi.fn(),
+  submitMathAttempt: vi.fn(),
+}));
+
+vi.mock("./canvas-actions", () => ({
+  saveCanvasStrokes: vi.fn(),
+}));
+
+vi.mock("./vocab-actions", () => ({
+  addVocabWord: vi.fn(),
+  removeVocabWord: vi.fn(),
+}));
+
+vi.mock("@/utils/supabase/client", () => ({
+  createClient: () => ({
+    channel: () => ({
+      on: function on() {
+        return this;
+      },
+      subscribe: function subscribe() {
+        return this;
+      },
+      send: vi.fn(),
+    }),
+    removeChannel: vi.fn(),
+  }),
+}));
+
 const baseProps = {
   sessionId: "session-1",
+  studentId: "student-1",
   material: null,
+  vocabWords: [],
   unitTitle: "이차방정식 응용 문제 (1)",
   subjectName: "SAT Math",
   studentName: "지훈",

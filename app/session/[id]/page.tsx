@@ -7,6 +7,7 @@ import {
 } from "@/lib/auth";
 import SessionShell from "./SessionShell";
 import { loadMaterialData } from "./material-data";
+import { loadVocabWords } from "./vocab-data";
 
 function extractSubjectName(subject: unknown): string {
   const row = Array.isArray(subject) ? subject[0] : subject;
@@ -77,9 +78,12 @@ export default async function SessionPage({
     enrollment.student_id
   );
 
+  const vocabWords = await loadVocabWords(supabase, enrollment.student_id);
+
   return (
     <SessionShell
       sessionId={session.id}
+      studentId={enrollment.student_id}
       unitTitle={session.unit_title ?? `${session.session_number}회차`}
       subjectName={extractSubjectName(enrollment.subject)}
       studentName={studentName}
@@ -92,6 +96,7 @@ export default async function SessionPage({
       durationMinutes={session.duration_minutes}
       backHref={getRoleHomePath(profile?.role)}
       material={material}
+      vocabWords={vocabWords}
     />
   );
 }
