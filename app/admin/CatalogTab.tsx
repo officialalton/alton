@@ -3,6 +3,7 @@
 import { useState } from "react";
 import SubjectTemplateTab from "./SubjectTemplateTab";
 import CurriculumDocsTab from "./CurriculumDocsTab";
+import MaterialsLibraryTab from "./MaterialsLibraryTab";
 import type { AdminSubject } from "./subject-data";
 import type { DocEditorData } from "./curriculum-doc-data";
 
@@ -47,6 +48,8 @@ export default function CatalogTab({
         <SubjectTemplateTab initialSubjects={subjects} />
       ) : subtab === "docs" ? (
         <CurriculumDocsTab initialDocs={docs} subjects={subjects} />
+      ) : subtab === "materials" ? (
+        <MaterialsLibraryTab docs={docs} />
       ) : (
         <div className="p-8 text-[14px] text-grey-500">
           {SUBTABS.find((t) => t.id === subtab)?.label} 탭은 준비 중입니다.
