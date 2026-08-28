@@ -76,6 +76,7 @@
 - `completed_at`: timestamptz, nullable
 - `converted_student_id`: FK → `students.id`, nullable
 - `converted_parent_id`: FK → `parents.id`, nullable
+- `calendly_event_uri`: text, nullable — Calendly가 예약의 유일한 소스 (아래 참고)
 
 목업 근거: `CONSULTS_DB_T` — "신청부터 완료까지 하나의 레코드에 누적"되는 설계를 그대로 유지. 목업은 `personName`/`email` 문자열만으로 사람을 식별했는데(FK 없음), 실 스키마에서는 상담 신청 시점엔 아직 계정이 없을 수 있어 이 테이블은 계정과 무관한 1차 기록으로 남겨두고, **계약 체결 시점에 실제 `students`/`parents` 계정이 생성되면서 `converted_student_id`/`converted_parent_id`로 연결**한다 — 트라이얼 수업이 계약 체결과 맞물려 진행되므로, 트라이얼 수업을 실제 세션 데이터로 남기려면 그 시점엔 이미 계정이 있어야 하기 때문. (§6 `sessions.is_trial` 참고)
 
@@ -88,12 +89,8 @@
 
 목업 근거: `CONSULTS_DB_T.attachments` (파일명 배열만 있던 것을 정규화)
 
-### `consult_availability_slots`
-- `id`: uuid, PK
-- `date`: date
-- `start_time`, `end_time`: time
-
-목업 근거: `CONSULT_RANGES_T` — 관리자가 여는 **상담용** 슬롯. 아래 `teacher_availability`(수업용 슬롯)와 별개 개념이므로 테이블도 분리.
+### ~~`consult_availability_slots`~~ → Calendly로 대체 (테이블 제거)
+목업 근거: `CONSULT_RANGES_T` — 관리자가 여는 상담용 슬롯. **원래 자체 테이블로 설계했었는데, 확인 결과 Calendly가 상담/개별 회차 예약을 전담**(functional-spec §2, §9)하는 걸로 확정돼서 제거함. 가용시간 설정 자체를 Calendly 쪽 UI에서 관리하고, 우리 DB는 예약 "결과"만 웹훅으로 받아 반영한다.
 
 ---
 
@@ -195,13 +192,16 @@
 - `curriculum_doc_id`: FK → `curriculum_docs.id`, nullable — 이 세션에 배정된 교재
 - `is_trial`: boolean, default false — 계약 체결 직후 진행되는 트라이얼 수업 표시
 - `whiteboard_strokes`: jsonb, nullable — 연습장 화이트보드 최종 스냅샷 (§7 참고)
+- `calendly_event_uri`: text, nullable — 이 회차의 실제 예약을 담당하는 Calendly 이벤트 참조 (아래 참고)
 - `created_at`: timestamptz
 
 unique(enrollment_id, session_number)
 
 **설계 노트**: 세션뷰 상단바의 "준비중/진행중/완료" 3단계는 `status`+`scheduled_at`+`duration_minutes`로 클라이언트에서 계산해서 보여주고, DB에는 저장하지 않는 걸 권장한다 (진행중인지 여부는 "지금 시각이 예약시간~예약시간+길이 사이인지"로 매 순간 바뀌는 값이라 별도 컬럼으로 저장하면 곧 stale해짐). 다만 `completed`/`cancelled`/`no_show`는 실제 이벤트(수업 종료 버튼, 노쇼 신고)로 확정되는 영속 상태라 컬럼으로 둔다.
 
-목업 근거: 목업에는 세션 자체를 나타내는 단일 엔티티가 없었고, `CURRICULA_T[key].sessions[]`(커리큘럼 진행 슬롯)와 `SCHEDULE_T`(실제 예약된 날짜/시간)가 분리되어 있었다 — 실 스키마에서는 이 둘을 하나로 합쳤다: 세션은 등록(enrollment) 생성 시 `teacher_curriculum_template_units`를 복사해 미리 N개 행으로 만들어두고(`scheduled_at=null`), 예약이 확정되면 그 행의 `scheduled_at`을 채우는 방식.
+목업 근거: 목업에는 세션 자체를 나타내는 단일 엔티티가 없었고, `CURRICULA_T[key].sessions[]`(커리큘럼 진행 슬롯)와 `SCHEDULE_T`(실제 예약된 날짜/시간)가 분리되어 있었다 — 실 스키마에서는 이 둘을 하나로 합쳤다: 세션은 등록(enrollment) 생성 시 `teacher_curriculum_template_units`를 복사해 미리 N개 행으로 만들어두고(`scheduled_at=null`), **Calendly에서 실제로 예약되면 웹훅을 받아 그 행의 `scheduled_at`/`calendly_event_uri`를 채우는 방식**(아래 "Calendly가 예약의 유일한 소스" 참고).
+
+**Calendly가 예약의 유일한 소스**: 목업의 선생님 포털엔 예약 요청 수락/거절 UI와 가용시간 설정 화면이 있었지만(`REQUESTS_T`, `OPEN_RANGES_T`, `TEACHER_AVAILABILITY`), functional-spec은 상담과 개별 회차 예약 모두 Calendly가 담당한다고 명시한다(§2, §9). 이미 해결된 문제(타임존 변환, 중복예약 방지, 재예약, 알림메일)를 다시 만들 이유가 없어서, 자체 예약 시스템(`booking_requests`, `teacher_availability`)은 만들지 않기로 확정 — 선생님 가용시간 설정도 Calendly 쪽에서 관리하고, 우리 DB는 Calendly 웹훅으로 넘어오는 예약 결과만 `sessions.scheduled_at`/`calendly_event_uri`에 반영한다.
 
 ### `session_memos`
 - `id`: uuid, PK
@@ -212,26 +212,8 @@ unique(enrollment_id, session_number)
 
 목업 근거: `CURRICULUM[subj].memos` — 목업에서 메모는 세션별이 아니라 "이 학생의 이 과목 커리큘럼 전체"에 달려 있었다. 세션 단위로 오해하기 쉬운 부분이라 명시.
 
-### `booking_requests`
-- `id`: uuid, PK
-- `student_id`: FK → `students.id`
-- `teacher_id`: FK → `teachers.id`
-- `subject_id`: FK → `subjects.id`
-- `requested_date`: date
-- `requested_time`: time
-- `status`: enum(pending/accepted/declined)
-- `decline_reason`: text, nullable
-- `created_at`: timestamptz
-
-목업 근거: `REQUESTS_T` — 원본은 `studentName` 문자열만 갖고 있어서 이름이 겹치면 오배정되는 버그 소지가 있었음(교사 포털 분석에서 지적됨). FK로 대체.
-
-### `teacher_availability`
-- `id`: uuid, PK
-- `teacher_id`: FK → `teachers.id`
-- `date`: date
-- `start_time`, `end_time`: time
-
-목업 근거: `TEACHER_AVAILABILITY`, `OPEN_RANGES_T` — **수업용** 슬롯. §2의 `consult_availability_slots`(상담용)와 반드시 구분.
+### ~~`booking_requests`~~ / ~~`teacher_availability`~~ → Calendly로 대체 (테이블 제거)
+목업 근거: `REQUESTS_T`, `TEACHER_AVAILABILITY`/`OPEN_RANGES_T` — 원래 자체 예약/가용시간 테이블로 설계했으나, 위 "Calendly가 예약의 유일한 소스" 결정에 따라 제거. 참고로 `REQUESTS_T` 원본은 `studentName` 문자열만 갖고 있어 이름이 겹치면 오배정되는 버그 소지가 있었는데(교사 포털 분석에서 지적됨), Calendly로 넘기면서 이 문제 자체가 사라진다.
 
 ### `makeup_credits`
 - `id`: uuid, PK
@@ -327,7 +309,7 @@ unique(enrollment_id, session_number)
 - `created_at`: timestamptz
 
 ### `sessions.whiteboard_room_id` (연습장 — 화이트보드 서브탭)
-별도 테이블 대신 `sessions`에 컬럼 하나(`whiteboard_room_id text nullable`, 실질적으로는 세션 id를 그대로 채널 이름으로 써도 됨)로 충분하다. **실시간 동기화는 Supabase Realtime(Broadcast 채널)로 확정** — 이미 DB로 Supabase를 쓰고 있어서 새 벤더/월 구독료 없이 그대로 실시간 채널을 쓸 수 있고, tldraw sync나 Liveblocks 같은 전용 협업 화이트보드 SaaS보다 단순하다(대신 스트로크 브로드캐스트 로직은 프론트엔드에서 직접 구현). 그린 결과물의 영속 저장은 캔버스와 동일하게 `strokes` jsonb 스냅샷으로 (아래 `canvas_annotations`와 같은 패턴, 화이트보드 전용 테이블은 "무한 스크롤"이라 세션당 1개면 충분해 별도 테이블 없이 `sessions.whiteboard_strokes jsonb`로 둔다).
+별도 테이블 대신 `sessions`에 컬럼 하나(`whiteboard_room_id text nullable`, 실질적으로는 세션 id를 그대로 room id로 써도 됨)로 충분하다. **실시간 동기화는 tldraw + tldraw sync(공식 호스팅 백엔드)로 확정** — 독립된 자유 캔버스라 범용 화이트보드 라이브러리가 잘 맞고, 자체 웹소켓 서버를 운영하지 않아도 됨(사용량 기반 비용 발생, 최신 가격은 확인 필요). 영속 저장은 tldraw 문서 스냅샷을 `sessions.whiteboard_strokes` jsonb에 보관.
 
 ### `session_files` (보충 자료)
 - `id`: uuid, PK
