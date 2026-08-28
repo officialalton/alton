@@ -6,6 +6,13 @@ import { logout } from "@/app/login/actions";
 import TeacherHomeDashboard from "./TeacherHomeDashboard";
 import type { TeacherDashboardData } from "./dashboard-data";
 import ScheduleTab from "./ScheduleTab";
+import RosterTab from "./RosterTab";
+import CurriculumTab from "./CurriculumTab";
+import type { RosterStudent } from "./roster-data";
+import type { MySubject } from "./mysubjects-data";
+import type { TeacherCurriculumData } from "./curriculum-data";
+import type { Memo } from "@/app/student/memo-data";
+import type { ReviewData, StudentFeedback } from "@/app/student/review-data";
 
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
@@ -22,9 +29,21 @@ type TabId = (typeof NAV_ITEMS)[number]["id"];
 export default function TeacherShell({
   initialTab,
   dashboard,
+  roster,
+  mySubjects,
+  curricula,
+  memosByEnrollment,
+  reviews,
+  studentFeedback,
 }: {
   initialTab?: string;
   dashboard: TeacherDashboardData;
+  roster: RosterStudent[];
+  mySubjects: MySubject[];
+  curricula: TeacherCurriculumData[];
+  memosByEnrollment: Record<string, Memo[]>;
+  reviews: Record<string, ReviewData>;
+  studentFeedback: Record<string, StudentFeedback>;
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -32,10 +51,19 @@ export default function TeacherShell({
     validTabIds.includes(initialTab as TabId) ? (initialTab as TabId) : "home"
   );
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
+  const [curriculumJump, setCurriculumJump] = useState<{
+    studentId: string;
+    subjectId: string;
+  } | null>(null);
 
   function selectTab(id: TabId) {
     setActiveTab(id);
     router.replace(`?tab=${id}`, { scroll: false });
+  }
+
+  function openCurriculumFromRoster(studentId: string, subjectId: string) {
+    setCurriculumJump({ studentId, subjectId });
+    selectTab("curriculum");
   }
 
   const activeLabel = NAV_ITEMS.find((n) => n.id === activeTab)?.label ?? "";
@@ -88,6 +116,19 @@ export default function TeacherShell({
             />
           ) : activeTab === "schedule" ? (
             <ScheduleTab upcoming={dashboard.upcoming} past={dashboard.past} />
+          ) : activeTab === "roster" ? (
+            <RosterTab students={roster} onOpenCurriculum={openCurriculumFromRoster} />
+          ) : activeTab === "curriculum" ? (
+            <CurriculumTab
+              mySubjects={mySubjects}
+              students={roster}
+              curricula={curricula}
+              memosByEnrollment={memosByEnrollment}
+              reviews={reviews}
+              studentFeedback={studentFeedback}
+              jumpTo={curriculumJump}
+              onJumpConsumed={() => setCurriculumJump(null)}
+            />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.
