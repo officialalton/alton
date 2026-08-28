@@ -10,6 +10,7 @@ import { loadReviews, loadStudentFeedback } from "./review-data";
 import { loadStudentHomework } from "./homework-data";
 import { loadMaterialsLibrary } from "./materials-data";
 import { loadCreditsData } from "./credits-data";
+import { loadStats } from "./stats-data";
 
 export default async function StudentHomePage({
   searchParams,
@@ -35,6 +36,7 @@ export default async function StudentHomePage({
   const homework = await loadStudentHomework(supabase, user.id);
   const materialsLibrary = await loadMaterialsLibrary(supabase, user.id);
   const credits = await loadCreditsData(supabase, user.id);
+  const stats = await loadStats(supabase, user.id);
 
   return (
     <StudentShell
@@ -53,6 +55,7 @@ export default async function StudentHomePage({
       homeworkDone={homework.done}
       materialsLibrary={materialsLibrary}
       credits={credits}
+      stats={stats}
     />
   );
 }

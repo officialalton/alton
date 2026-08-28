@@ -60,6 +60,7 @@ const lessonsProps = {
   homeworkDone: [],
   materialsLibrary: [],
   credits: { balance: 0, guardianName: null },
+  stats: { attendanceRate: null, satisfactionAvg: null, bySubject: [] },
 };
 
 describe("StudentShell", () => {
@@ -177,6 +178,20 @@ describe("StudentShell", () => {
     );
     fireEvent.click(screen.getByText("교재"));
     expect(screen.getByText("열람할 수 있는 교재가 없습니다.")).toBeInTheDocument();
+  });
+
+  it("통계 탭을 누르면 StatsTab이 렌더링된다", () => {
+    render(
+      <StudentShell
+        studentName="지훈"
+        dashboard={dashboard}
+        vocabWords={[]}
+        problemLog={[]}
+        {...lessonsProps}
+      />
+    );
+    fireEvent.click(screen.getByText("통계"));
+    expect(screen.getByText("과목별 참여율")).toBeInTheDocument();
   });
 
   it("계정 메뉴를 열면 로그아웃 버튼이 보인다", () => {

@@ -20,6 +20,8 @@ import MaterialsLibraryTab from "./MaterialsLibraryTab";
 import type { LibrarySubject } from "./materials-data";
 import CreditsTab from "./CreditsTab";
 import type { CreditsData } from "./credits-data";
+import StatsTab from "./StatsTab";
+import type { StatsData } from "./stats-data";
 
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
@@ -51,6 +53,7 @@ export default function StudentShell({
   homeworkDone,
   materialsLibrary,
   credits,
+  stats,
 }: {
   studentName: string;
   initialTab?: string;
@@ -67,6 +70,7 @@ export default function StudentShell({
   homeworkDone: StudentHomeworkItem[];
   materialsLibrary: LibrarySubject[];
   credits: CreditsData;
+  stats: StatsData;
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -157,6 +161,8 @@ export default function StudentShell({
             <MaterialsLibraryTab subjects={materialsLibrary} />
           ) : activeTab === "credits" ? (
             <CreditsTab data={credits} />
+          ) : activeTab === "stats" ? (
+            <StatsTab data={stats} />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.
