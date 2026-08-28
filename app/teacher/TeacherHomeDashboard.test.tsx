@@ -10,6 +10,7 @@ vi.mock("next/navigation", () => ({
 const baseData: TeacherDashboardData = {
   teacherName: "박서연 선생님",
   upcoming: [],
+  past: [],
   calendarByDay: {},
   calendarYear: 2026,
   calendarMonth: 7,

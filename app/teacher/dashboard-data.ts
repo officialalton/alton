@@ -22,6 +22,7 @@ export type CalendarDaySession = {
 export type TeacherDashboardData = {
   teacherName: string;
   upcoming: TeacherLesson[];
+  past: TeacherLesson[];
   calendarByDay: Record<number, CalendarDaySession[]>;
   calendarYear: number;
   calendarMonth: number;
@@ -82,6 +83,7 @@ export async function loadTeacherDashboard(
 
   const calendarByDay: Record<number, CalendarDaySession[]> = {};
   const upcoming: TeacherLesson[] = [];
+  const past: TeacherLesson[] = [];
 
   for (const s of sessions ?? []) {
     const info = enrollmentInfo.get(s.enrollment_id);
@@ -102,29 +104,34 @@ export async function loadTeacherDashboard(
       }
     }
 
-    if (s.status === "upcoming") {
-      upcoming.push({
-        sessionId: s.id,
-        enrollmentId: s.enrollment_id,
-        studentId: info.studentId,
-        studentName: info.studentName,
-        subjectName: info.subjectName,
-        sessionNumber: s.session_number,
-        unitTitle: s.unit_title,
-        scheduledAt: s.scheduled_at,
-        durationMinutes: s.duration_minutes,
-      });
-    }
+    const lesson: TeacherLesson = {
+      sessionId: s.id,
+      enrollmentId: s.enrollment_id,
+      studentId: info.studentId,
+      studentName: info.studentName,
+      subjectName: info.subjectName,
+      sessionNumber: s.session_number,
+      unitTitle: s.unit_title,
+      scheduledAt: s.scheduled_at,
+      durationMinutes: s.duration_minutes,
+    };
+    if (s.status === "upcoming") upcoming.push(lesson);
+    else if (s.status === "completed" || s.status === "no_show") past.push(lesson);
   }
 
   upcoming.sort(
     (a, b) =>
       new Date(a.scheduledAt ?? 0).getTime() - new Date(b.scheduledAt ?? 0).getTime()
   );
+  past.sort(
+    (a, b) =>
+      new Date(b.scheduledAt ?? 0).getTime() - new Date(a.scheduledAt ?? 0).getTime()
+  );
 
   return {
     teacherName: profile?.name ?? "선생님",
     upcoming,
+    past,
     calendarByDay,
     calendarYear: now.getFullYear(),
     calendarMonth: now.getMonth(),

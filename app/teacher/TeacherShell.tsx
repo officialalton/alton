@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { logout } from "@/app/login/actions";
 import TeacherHomeDashboard from "./TeacherHomeDashboard";
 import type { TeacherDashboardData } from "./dashboard-data";
+import ScheduleTab from "./ScheduleTab";
 
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
@@ -85,6 +86,8 @@ export default function TeacherShell({
               data={dashboard}
               onShowSchedule={() => selectTab("schedule")}
             />
+          ) : activeTab === "schedule" ? (
+            <ScheduleTab upcoming={dashboard.upcoming} past={dashboard.past} />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.

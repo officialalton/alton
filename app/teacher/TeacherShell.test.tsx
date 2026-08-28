@@ -14,6 +14,7 @@ vi.mock("@/app/login/actions", () => ({
 const dashboard: TeacherDashboardData = {
   teacherName: "박서연 선생님",
   upcoming: [],
+  past: [],
   calendarByDay: {},
   calendarYear: 2026,
   calendarMonth: 7,
@@ -28,10 +29,16 @@ describe("TeacherShell", () => {
     expect(screen.getByText("박서연 선생님, 안녕하세요")).toBeInTheDocument();
   });
 
-  it("다른 탭을 누르면 준비 중 문구를 보여준다", () => {
+  it("수업 탭을 누르면 ScheduleTab이 렌더링된다", () => {
     render(<TeacherShell dashboard={dashboard} />);
     fireEvent.click(screen.getByText("수업"));
-    expect(screen.getByText("수업 탭은 준비 중입니다.")).toBeInTheDocument();
+    expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
+  });
+
+  it("다른 탭을 누르면 준비 중 문구를 보여준다", () => {
+    render(<TeacherShell dashboard={dashboard} />);
+    fireEvent.click(screen.getByText("학생"));
+    expect(screen.getByText("학생 탭은 준비 중입니다.")).toBeInTheDocument();
   });
 
   it("계정 메뉴를 열면 로그아웃 버튼이 보인다", () => {
