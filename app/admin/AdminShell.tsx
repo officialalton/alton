@@ -6,8 +6,17 @@ import { logout } from "@/app/login/actions";
 import AdminHomeDashboard from "./AdminHomeDashboard";
 import type { AdminDashboardData } from "./dashboard-data";
 import CatalogTab from "./CatalogTab";
+import UsersTab from "./UsersTab";
+import BillingTab from "./BillingTab";
 import type { AdminSubject } from "./subject-data";
 import type { DocEditorData } from "./curriculum-doc-data";
+import type {
+  CreditTransaction,
+  ParentListItem,
+  QcWarning,
+  StudentListItem,
+  TeacherListItem,
+} from "./users-data";
 
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
@@ -29,11 +38,21 @@ export default function AdminShell({
   dashboard,
   subjects,
   docs,
+  parents,
+  students,
+  teachers,
+  creditHistoryByStudent,
+  qcWarningsByTeacher,
 }: {
   initialTab?: string;
   dashboard: AdminDashboardData;
   subjects: AdminSubject[];
   docs: DocEditorData[];
+  parents: ParentListItem[];
+  students: StudentListItem[];
+  teachers: TeacherListItem[];
+  creditHistoryByStudent: Record<string, CreditTransaction[]>;
+  qcWarningsByTeacher: Record<string, QcWarning[]>;
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -102,6 +121,19 @@ export default function AdminShell({
             <AdminHomeDashboard data={dashboard} />
           ) : activeTab === "catalog" ? (
             <CatalogTab subjects={subjects} docs={docs} />
+          ) : activeTab === "users" ? (
+            <UsersTab
+              initialParents={parents}
+              initialStudents={students}
+              initialTeachers={teachers}
+              creditHistoryByStudent={creditHistoryByStudent}
+              qcWarningsByTeacher={qcWarningsByTeacher}
+            />
+          ) : activeTab === "billing" ? (
+            <BillingTab
+              initialStudents={students}
+              creditHistoryByStudent={creditHistoryByStudent}
+            />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.
