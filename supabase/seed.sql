@@ -32,6 +32,12 @@ insert into auth.users (
     '{"provider":"email","providers":["email"]}', '{}', now(), now(), '', '', '', '', '', '', '', ''),
   ('00000000-0000-0000-0000-000000000000', 'dddddddd-0000-0000-0000-000000000002', 'authenticated', 'authenticated',
     'dohyun@example.com', crypt('alton-dev-1234', gen_salt('bf')), now(),
+    '{"provider":"email","providers":["email"]}', '{}', now(), now(), '', '', '', '', '', '', '', ''),
+  ('00000000-0000-0000-0000-000000000000', '77777777-0000-0000-0000-000000000001', 'authenticated', 'authenticated',
+    'hana.jung@example.com', crypt('alton-dev-1234', gen_salt('bf')), now(),
+    '{"provider":"email","providers":["email"]}', '{}', now(), now(), '', '', '', '', '', '', '', ''),
+  ('00000000-0000-0000-0000-000000000000', '88888888-0000-0000-0000-000000000001', 'authenticated', 'authenticated',
+    'junseo.park@example.com', crypt('alton-dev-1234', gen_salt('bf')), now(),
     '{"provider":"email","providers":["email"]}', '{}', now(), now(), '', '', '', '', '', '', '', '');
 
 insert into auth.identities (
@@ -42,7 +48,8 @@ from auth.users u
 where u.id in (
   'aaaaaaaa-0000-0000-0000-000000000001', 'bbbbbbbb-0000-0000-0000-000000000001',
   'cccccccc-0000-0000-0000-000000000001', 'cccccccc-0000-0000-0000-000000000002',
-  'dddddddd-0000-0000-0000-000000000001', 'dddddddd-0000-0000-0000-000000000002'
+  'dddddddd-0000-0000-0000-000000000001', 'dddddddd-0000-0000-0000-000000000002',
+  '77777777-0000-0000-0000-000000000001', '88888888-0000-0000-0000-000000000001'
 );
 
 -- =========================================================================
@@ -55,14 +62,17 @@ insert into profiles (id, role, name, phone) values
   ('cccccccc-0000-0000-0000-000000000001', 'student', '지훈', null),
   ('cccccccc-0000-0000-0000-000000000002', 'student', '이서아', null),
   ('dddddddd-0000-0000-0000-000000000001', 'teacher', '박서연 선생님', null),
-  ('dddddddd-0000-0000-0000-000000000002', 'teacher', '이도현 선생님', null);
+  ('dddddddd-0000-0000-0000-000000000002', 'teacher', '이도현 선생님', null),
+  ('77777777-0000-0000-0000-000000000001', 'teacher', '정하나 선생님', null),
+  ('88888888-0000-0000-0000-000000000001', 'student', '박준서', null);
 
 insert into parents (id, referral_code, location) values
   ('bbbbbbbb-0000-0000-0000-000000000001', 'ALTON-MINJI82', '캘리포니아 서니베일');
 
 insert into students (id, grade, status, credit_balance) values
   ('cccccccc-0000-0000-0000-000000000001', '10학년', 'active', 14),
-  ('cccccccc-0000-0000-0000-000000000002', '11학년', 'active', 8);
+  ('cccccccc-0000-0000-0000-000000000002', '11학년', 'active', 8),
+  ('88888888-0000-0000-0000-000000000001', '9학년', 'pending', 0);
 
 -- school/bio는 목업(alton_student_portal_v16.html TEACHERS 딕셔너리) 텍스트 그대로.
 -- 기존 시드에 이도현 school이 최지우(목업엔 없는 시드 미등록 선생님) 것과
@@ -73,7 +83,9 @@ insert into teachers (id, school, bio, status) values
     'active'),
   ('dddddddd-0000-0000-0000-000000000002', 'KAIST 수학과 · AP Calculus 전담',
     '미국 서부 시간대 저녁 시간 지도 다수, AP 5점 지도 경험 다수.',
-    'active');
+    'active'),
+  ('77777777-0000-0000-0000-000000000001', '연세대학교 화학과 재학 · AP Chemistry 지원',
+    null, 'pending');
 
 -- 김민지 학부모는 자녀가 지훈 하나뿐이면 030(학부모 셸)의 "자녀 전환" UI를
 -- 실제로 검증할 데이터가 없어서, 둘째 자녀(이서아, AP Calculus BC · 이도현)도
@@ -187,3 +199,21 @@ insert into credit_packages (name, credit_count, price_usd, active) values
   ('10장', 10, 1200.00, true),
   ('20장', 20, 2400.00, true),
   ('40장', 40, 4800.00, true);
+
+-- =========================================================================
+-- 12. 관리자 대시보드(050) 검증용 — 상담 요청/QC 경고
+-- =========================================================================
+
+insert into consult_requests (id, category, person_name, email, phone, student_grade, intake_type, concerns, submitted_at, status) values
+  ('99999999-0000-0000-0000-000000000001', 'family', '오하윤', 'hayoon.oh@example.com', null, '11학년', 'A',
+    'SAT Math 점수를 단기간에 올리고 싶습니다.', now() - interval '2 days', 'requested');
+
+insert into consult_requests (id, category, person_name, email, phone, student_grade, intake_type, concerns, submitted_at, status, scheduled_at) values
+  ('99999999-0000-0000-0000-000000000002', 'family', '최유진', 'yujin.choi@example.com', null, '10학년', 'B',
+    'AP Chemistry 선생님 매칭 상담 요청', now() - interval '5 days', 'confirmed', now() + interval '2 days');
+
+insert into teacher_qc_warnings (teacher_id, student_id, type, detail, occurred_at) values
+  ('dddddddd-0000-0000-0000-000000000001', 'cccccccc-0000-0000-0000-000000000001', 'late_start',
+    '수업 10분 지각', now() - interval '10 days'),
+  ('dddddddd-0000-0000-0000-000000000001', 'cccccccc-0000-0000-0000-000000000001', 'no_homework_review',
+    '전 회차 과제 피드백 누락', now() - interval '3 days');
