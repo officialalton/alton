@@ -42,6 +42,7 @@ const lessonsProps = {
   memosByEnrollment: {},
   reviews: {},
   myFeedback: {},
+  credits: { balance: 0, referralCode: null, packages: [] },
 };
 
 describe("ParentShell", () => {
@@ -91,7 +92,7 @@ describe("ParentShell", () => {
     expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
   });
 
-  it("다른 탭을 누르면 준비 중 문구를 보여준다", () => {
+  it("수업권 탭을 누르면 CreditsTab이 렌더링되고 결제수단 입력은 없다", () => {
     render(
       <ParentShell
         parentName="김민지"
@@ -102,7 +103,22 @@ describe("ParentShell", () => {
       />
     );
     fireEvent.click(screen.getByText("수업권"));
-    expect(screen.getByText("수업권 탭은 준비 중입니다.")).toBeInTheDocument();
+    expect(screen.getByText("장 보유")).toBeInTheDocument();
+    expect(screen.queryByPlaceholderText("0000 0000 0000 0000")).not.toBeInTheDocument();
+  });
+
+  it("다른 탭을 누르면 준비 중 문구를 보여준다", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+      />
+    );
+    fireEvent.click(screen.getByText("통계"));
+    expect(screen.getByText("통계 탭은 준비 중입니다.")).toBeInTheDocument();
   });
 
   it("계정 메뉴를 열면 로그아웃 버튼이 보인다", () => {

@@ -11,6 +11,8 @@ import type { CurriculumData } from "@/app/student/curriculum-data";
 import type { Memo } from "@/app/student/memo-data";
 import type { ReviewData, StudentFeedback } from "@/app/student/review-data";
 import type { Child } from "./children-data";
+import CreditsTab from "./CreditsTab";
+import type { ParentCreditsData } from "./credits-data";
 
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
@@ -33,6 +35,7 @@ export default function ParentShell({
   memosByEnrollment,
   reviews,
   myFeedback,
+  credits,
 }: {
   parentName: string;
   childrenList: Child[];
@@ -45,6 +48,7 @@ export default function ParentShell({
   memosByEnrollment: Record<string, Memo[]>;
   reviews: Record<string, ReviewData>;
   myFeedback: Record<string, StudentFeedback>;
+  credits: ParentCreditsData;
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -143,6 +147,8 @@ export default function ParentShell({
               myFeedback={myFeedback}
               readOnly
             />
+          ) : activeTab === "credits" ? (
+            <CreditsTab data={credits} />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.

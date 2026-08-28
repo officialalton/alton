@@ -5,6 +5,7 @@ import { loadLessons } from "@/app/student/lessons-data";
 import { loadCurricula } from "@/app/student/curriculum-data";
 import { loadMemos } from "@/app/student/memo-data";
 import { loadReviews, loadStudentFeedback } from "@/app/student/review-data";
+import { loadParentCreditsData } from "./credits-data";
 import ParentShell from "./ParentShell";
 
 export default async function ParentHomePage({
@@ -43,6 +44,7 @@ export default async function ParentHomePage({
   const pastSessionIds = past.map((l) => l.sessionId);
   const reviews = await loadReviews(supabase, pastSessionIds);
   const myFeedback = await loadStudentFeedback(supabase, currentChildId, pastSessionIds);
+  const credits = await loadParentCreditsData(supabase, user.id, currentChildId);
 
   return (
     <ParentShell
@@ -57,6 +59,7 @@ export default async function ParentHomePage({
       memosByEnrollment={memosByEnrollment}
       reviews={reviews}
       myFeedback={myFeedback}
+      credits={credits}
     />
   );
 }
