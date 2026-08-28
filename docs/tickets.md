@@ -8,7 +8,7 @@
 
 ## Phase 0 — 기반 (건너뛸 수 없음)
 
-- [ ] **000-project-init**: Next.js + TypeScript + Tailwind + Supabase 프로젝트 초기화, Vercel 연결, 목업 CSS 변수 → Tailwind 테마 이식
+- [ ] **000-project-init**: Next.js + TypeScript + Tailwind + Supabase 프로젝트 초기화, Vercel 연결, 목업 CSS 변수 → Tailwind 테마 이식 (Vercel 연결만 남음 — 로그인이 필요해 사람이 직접 해야 함)
 - [ ] **001-schema-design**: 목업 파일 전체를 검토해 DB 스키마 초안 작성 (사람 검토 필수 — 코딩 전에 스키마 문서를 먼저 승인받을 것)
 - [ ] **002-schema-migrate**: 001에서 승인된 스키마로 Supabase 마이그레이션 작성 + 시드 데이터
 - [ ] **003-auth-roles**: 로그인(학생/학부모/선생님/관리자), 역할 기반 라우팅. 목업의 `?role=` URL 파라미터 흉내를 실제 세션 기반으로 대체
