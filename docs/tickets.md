@@ -64,6 +64,7 @@
 - [ ] **072-docusign**: 계약서 서명
 - [ ] **073-kakao-email-notify**: 학부모 알림 (Kakao Alimtalk 우선, 이메일 폴백)
 - [ ] **074-wise-payout**: 선생님 KRW 정산 (자동계산 + 사람 승인)
+- [ ] **075-landing-page**: 랜딩페이지(`alton_landing_v5.html` 목업 기반) 실제 구현 + Vercel 프로덕션 배포 — 지금은 `app/page.tsx`가 create-next-app 기본 템플릿 그대로임. 고객이 랜딩→로그인→포털로 들어오는 실제 진입 경로를 여기서 완성한다.
 
 ## Phase 8 — 통합 테스트 및 파일럿 준비
 
