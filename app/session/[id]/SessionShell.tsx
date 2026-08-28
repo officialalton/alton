@@ -14,6 +14,9 @@ import type { VocabEntry } from "./vocab-data";
 import HomeworkTab from "./HomeworkTab";
 import type { HomeworkItem } from "./homework-data";
 import AigenTab from "./AigenTab";
+import ScratchpadTab from "./ScratchpadTab";
+import type { DocLink } from "./scratchpad-data";
+import type { CanvasStroke } from "./material-data";
 
 const TABS = [
   { id: "material", label: "교재", teacherOnly: false },
@@ -55,6 +58,8 @@ export default function SessionShell({
   homeworkItems,
   subjectId,
   unitOptions,
+  docLinks,
+  whiteboardStrokes,
 }: {
   sessionId: string;
   studentId: string;
@@ -74,6 +79,8 @@ export default function SessionShell({
   homeworkItems: HomeworkItem[];
   subjectId: string;
   unitOptions: string[];
+  docLinks: DocLink[];
+  whiteboardStrokes: CanvasStroke[];
 }) {
   const router = useRouter();
   const isTeacher = viewerRole === "teacher";
@@ -201,6 +208,13 @@ export default function SessionShell({
           onFinalized={(items) =>
             setHomeworkList((prev) => [...prev, ...items])
           }
+        />
+      ) : activeTab === "docs" ? (
+        <ScratchpadTab
+          sessionId={sessionId}
+          viewerRole={viewerRole}
+          initialDocLinks={docLinks}
+          initialWhiteboardStrokes={whiteboardStrokes}
         />
       ) : (
         <div className="p-8 text-[14px] text-grey-500">

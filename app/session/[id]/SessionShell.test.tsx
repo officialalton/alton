@@ -31,6 +31,12 @@ vi.mock("./aigen-actions", () => ({
   finalizeProblemsToHomework: vi.fn(),
 }));
 
+vi.mock("./scratchpad-actions", () => ({
+  addDocLink: vi.fn(),
+  removeDocLink: vi.fn(),
+  saveWhiteboardStrokes: vi.fn(),
+}));
+
 vi.mock("@/utils/supabase/client", () => ({
   createClient: () => ({
     channel: () => ({
@@ -59,6 +65,8 @@ const baseProps = {
   backHref: "/student",
   subjectId: "subject-1",
   unitOptions: ["이차방정식 단원"],
+  docLinks: [],
+  whiteboardStrokes: [],
 };
 
 describe("SessionShell — 세션 상태바", () => {

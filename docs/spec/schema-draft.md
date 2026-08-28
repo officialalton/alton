@@ -309,7 +309,7 @@ unique(enrollment_id, session_number)
 - `created_at`: timestamptz
 
 ### `sessions.whiteboard_room_id` (연습장 — 화이트보드 서브탭)
-별도 테이블 대신 `sessions`에 컬럼 하나(`whiteboard_room_id text nullable`, 실질적으로는 세션 id를 그대로 room id로 써도 됨)로 충분하다. **실시간 동기화는 tldraw + tldraw sync(공식 호스팅 백엔드)로 확정** — 독립된 자유 캔버스라 범용 화이트보드 라이브러리가 잘 맞고, 자체 웹소켓 서버를 운영하지 않아도 됨(사용량 기반 비용 발생, 최신 가격은 확인 필요). 영속 저장은 tldraw 문서 스냅샷을 `sessions.whiteboard_strokes` jsonb에 보관.
+별도 테이블 대신 `sessions`에 컬럼 하나(`whiteboard_room_id text nullable`, 실질적으로는 세션 id를 그대로 room id로 써도 됨)로 충분하다. 실시간 동기화/영속 저장 방식은 아래 "검토 결과" 섹션에서 **Supabase Realtime Broadcast로 확정**(캔버스 필기와 동일한 방식, tldraw 등 신규 SaaS 도입 안 함) — 016 티켓에서 실제로 이 방식으로 구현·검증 완료. 영속 저장은 `sessions.whiteboard_strokes` jsonb에 최종 스트로크 배열을 보관.
 
 ### `session_files` (보충 자료)
 - `id`: uuid, PK
