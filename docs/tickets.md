@@ -15,7 +15,7 @@
 
 ## Phase 1 — 수업 세션뷰 (가장 중요, 고객이 매번 보는 화면)
 
-- [ ] **010-session-shell**: 세션뷰 레이아웃, 상단바(세션 상태바: 준비중/진행중/완료), 역할별 권한 분기 — `alton_material_viewer_prototype.html` 참조
+- [x] **010-session-shell**: 세션뷰 레이아웃, 상단바(세션 상태바: 준비중/진행중/완료), 역할별 권한 분기 — `alton_material_viewer_prototype.html` 참조 (목업 대비 개선: 탭을 `?tab=` URL로 관리해 새로고침/공유 가능하게 함, 상태를 30초마다 재계산해 자동 전환, 뷰어를 student/teacher/parent/admin 4종으로 확장, 로컬 DB 실데이터로 prep/live/completed 전부 검증)
 - [ ] **011-session-material-tab**: 교재 탭 — TOC 네비게이션 + 아티클 렌더링 + 스크롤스파이
 - [ ] **012-session-canvas**: 캔버스 필기 (펜/색상/지우기, 스크롤 콘텐츠 위 오버레이)
 - [ ] **013-session-vocab**: 단어장 — 단어 클릭 선택 + AI 뜻풀이 생성, 학생 포털의 "단어장" 탭과 데이터 공유

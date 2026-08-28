@@ -1,0 +1,122 @@
+import { render, screen } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
+import SessionShell from "./SessionShell";
+
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ push: vi.fn(), replace: vi.fn() }),
+}));
+
+const baseProps = {
+  unitTitle: "이차방정식 응용 문제 (1)",
+  subjectName: "SAT Math",
+  studentName: "지훈",
+  sessionNumber: 7,
+  backHref: "/student",
+};
+
+describe("SessionShell — 세션 상태바", () => {
+  it("prep 상태에서는 준비중 배지와 예정 일시를 보여준다", () => {
+    render(
+      <SessionShell
+        {...baseProps}
+        viewerRole="student"
+        initialState="prep"
+        status="upcoming"
+        scheduledAt="2026-09-03T05:00:00.000Z"
+        durationMinutes={30}
+      />
+    );
+    expect(screen.getByText(/수업 준비 중/)).toBeInTheDocument();
+  });
+
+  it("live 상태에서 학생에게는 노쇼 알림 버튼만 보인다", () => {
+    render(
+      <SessionShell
+        {...baseProps}
+        viewerRole="student"
+        initialState="live"
+        status="upcoming"
+        scheduledAt={new Date().toISOString()}
+        durationMinutes={30}
+      />
+    );
+    expect(screen.getByText(/Zoom 연결됨/)).toBeInTheDocument();
+    expect(
+      screen.getByText("선생님이 안 보이시나요? (노쇼 알림)")
+    ).toBeInTheDocument();
+    expect(screen.queryByText("수업 종료")).not.toBeInTheDocument();
+  });
+
+  it("live 상태에서 선생님에게는 수업 종료 버튼만 보인다", () => {
+    render(
+      <SessionShell
+        {...baseProps}
+        viewerRole="teacher"
+        initialState="live"
+        status="upcoming"
+        scheduledAt={new Date().toISOString()}
+        durationMinutes={30}
+      />
+    );
+    expect(screen.getByText("수업 종료")).toBeInTheDocument();
+    expect(
+      screen.queryByText("선생님이 안 보이시나요? (노쇼 알림)")
+    ).not.toBeInTheDocument();
+  });
+
+  it("completed 상태에서는 완료 배지를 보여준다", () => {
+    render(
+      <SessionShell
+        {...baseProps}
+        viewerRole="parent"
+        initialState="completed"
+        status="completed"
+        scheduledAt="2026-08-01T05:00:00.000Z"
+        durationMinutes={30}
+      />
+    );
+    expect(screen.getByText(/완료된 수업/)).toBeInTheDocument();
+  });
+});
+
+describe("SessionShell — 탭 노출", () => {
+  it("문제 생성 탭은 선생님에게만 보인다", () => {
+    const { rerender } = render(
+      <SessionShell
+        {...baseProps}
+        viewerRole="student"
+        initialState="prep"
+        status="upcoming"
+        scheduledAt={null}
+        durationMinutes={30}
+      />
+    );
+    expect(screen.queryByText("문제 생성")).not.toBeInTheDocument();
+
+    rerender(
+      <SessionShell
+        {...baseProps}
+        viewerRole="teacher"
+        initialState="prep"
+        status="upcoming"
+        scheduledAt={null}
+        durationMinutes={30}
+      />
+    );
+    expect(screen.getByText("문제 생성")).toBeInTheDocument();
+  });
+
+  it("기본 활성 탭은 과제다", () => {
+    render(
+      <SessionShell
+        {...baseProps}
+        viewerRole="student"
+        initialState="prep"
+        status="upcoming"
+        scheduledAt={null}
+        durationMinutes={30}
+      />
+    );
+    expect(screen.getByText("과제 탭은 준비 중입니다.")).toBeInTheDocument();
+  });
+});

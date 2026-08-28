@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { updateSession } from "@/utils/supabase/middleware";
-import { getRoleHomePath } from "@/lib/auth";
+import { getRoleHomePath } from "@/lib/session-view";
 
 const ROLE_PREFIXES: Record<string, string> = {
   student: "/student",
