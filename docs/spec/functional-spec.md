@@ -134,7 +134,7 @@ Alton Education Inc.는 한국 및 미국에 거주 중이며, 국제학교 또�
 | Calendly | 상담 및 개별 회차 예약 (포털에 임베드) |
 | DocuSign | 계약서 서명 |
 | Stripe | 수업권 크레딧 패키지 결제 |
-| Kakao Alimtalk + Email | 학부모 알림 (선호 채널에 따라 분기) |
+| Email | 학부모 알림 (2026-08-28 결정: Kakao Alimtalk은 채널 심사·템플릿 승인 대기가 길어 스펙에서 제외 — 실시간 소통은 서비스 내 채팅(chat_threads)으로 대체) |
 | Wise | 선생님 KRW 정산 (자동 계산, 사람 승인 후 집행) |
 | Google Meet | 수업 진행 링크 (임베드 없이 링크만 제공) |
 | Google Workspace | 관리자용 캘린더 가시성 |

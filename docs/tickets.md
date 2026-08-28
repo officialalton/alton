@@ -66,7 +66,7 @@
 - [ ] **070-calendly**: 상담/수업 예약 임베드
 - [ ] **071-stripe**: 수업권 결제
 - [ ] **072-docusign**: 계약서 서명
-- [ ] **073-kakao-email-notify**: 학부모 알림 (Kakao Alimtalk 우선, 이메일 폴백)
+- [ ] **073-email-notify**: 학부모 알림 (이메일 전용 — Kakao Alimtalk 스펙 제외. 2026-08-28 결정: 카카오 비즈니스 채널 심사·템플릿 승인 등 대기 시간이 긴 외부 의존을 없애기 위해 알림은 이메일로만 발송하고, 실시간 소통은 022에서 이미 만든 서비스 내 채팅(chat_threads/chat_messages)으로 충분히 대체 가능하다고 판단)
 - [ ] **074-wise-payout**: 선생님 KRW 정산 (자동계산 + 사람 승인)
 - [ ] **075-landing-page**: 랜딩페이지(`alton_landing_v5.html` 목업 기반) 실제 구현 + Vercel 프로덕션 배포 — 지금은 `app/page.tsx`가 create-next-app 기본 템플릿 그대로임. 고객이 랜딩→로그인→포털로 들어오는 실제 진입 경로를 여기서 완성한다.
 
