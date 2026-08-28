@@ -5,6 +5,10 @@ import { useRouter } from "next/navigation";
 import { logout } from "@/app/login/actions";
 import HomeDashboard from "./HomeDashboard";
 import type { DashboardData } from "./dashboard-data";
+import VocabTab from "@/app/session/[id]/VocabTab";
+import type { VocabEntry } from "@/app/session/[id]/vocab-data";
+import ProblemLogTab from "@/app/session/[id]/ProblemLogTab";
+import type { ProblemLogEntry } from "@/app/session/[id]/problemlog-data";
 
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
@@ -24,10 +28,14 @@ export default function StudentShell({
   studentName,
   initialTab,
   dashboard,
+  vocabWords,
+  problemLog,
 }: {
   studentName: string;
   initialTab?: string;
   dashboard: DashboardData;
+  vocabWords: VocabEntry[];
+  problemLog: ProblemLogEntry[];
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -91,6 +99,15 @@ export default function StudentShell({
               onShowLessons={() => selectTab("lessons")}
               onShowStats={() => selectTab("stats")}
             />
+          ) : activeTab === "vocab" ? (
+            <VocabTab
+              initialWords={vocabWords}
+              isTeacher={false}
+              canManage={true}
+              studentName={studentName}
+            />
+          ) : activeTab === "problemlog" ? (
+            <ProblemLogTab initialEntries={problemLog} viewerRole="student" />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.
