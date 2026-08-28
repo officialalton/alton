@@ -8,7 +8,7 @@
 
 ## Phase 0 — 기반 (건너뛸 수 없음)
 
-- [ ] **000-project-init**: Next.js + TypeScript + Tailwind + Supabase 프로젝트 초기화, Vercel 연결, 목업 CSS 변수 → Tailwind 테마 이식 (Vercel 연결만 남음 — 로그인이 필요해 사람이 직접 해야 함)
+- [x] **000-project-init**: Next.js + TypeScript + Tailwind + Supabase 프로젝트 초기화, Vercel 연결, 목업 CSS 변수 → Tailwind 테마 이식 (2026-08-28: 남아 있던 "Vercel 연결"까지 완료. 새 Supabase 프로젝트(`worpsqwqgnspddnrtnvq`)로 이관 + 전체 마이그레이션 push, GitHub `officialalton/alton`으로 히스토리 이관(리베이스), Vercel 프로젝트(`alton7/alton`)를 그 GitHub 저장소에 연결해 `main` 푸시 시 자동 배포되도록 구성 — 프로덕션 [alton-ecru.vercel.app](https://alton-ecru.vercel.app) 라이브)
 - [x] **001-schema-design**: 목업 파일 전체를 검토해 DB 스키마 초안 작성 (사람 검토 완료, `docs/spec/schema-draft.md` 참고)
 - [x] **002-schema-migrate**: 001에서 승인된 스키마로 Supabase 마이그레이션 작성 + 시드 데이터 (Docker 로컬 검증 완료, 호스팅된 프로젝트에도 push 완료. 개발용 시드 데이터는 로컬 전용이라 실제 프로젝트엔 안 넣음)
 - [x] **003-auth-roles**: 로그인(학생/학부모/선생님/관리자), 역할 기반 라우팅. 목업의 `?role=` URL 파라미터 흉내를 실제 세션 기반으로 대체 (로컬 Supabase로 로그인/역할 리다이렉트/미들웨어 차단/실제 이메일 비밀번호 재설정까지 전부 브라우저로 실제 테스트함)
