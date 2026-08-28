@@ -14,6 +14,8 @@ import type { LessonItem } from "./lessons-data";
 import type { CurriculumData } from "./curriculum-data";
 import type { Memo } from "./memo-data";
 import type { ReviewData, StudentFeedback } from "./review-data";
+import StudentHomeworkTab from "./StudentHomeworkTab";
+import type { StudentHomeworkItem } from "./homework-data";
 
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
@@ -41,6 +43,8 @@ export default function StudentShell({
   memosByEnrollment,
   reviews,
   myFeedback,
+  homeworkTodo,
+  homeworkDone,
 }: {
   studentName: string;
   initialTab?: string;
@@ -53,6 +57,8 @@ export default function StudentShell({
   memosByEnrollment: Record<string, Memo[]>;
   reviews: Record<string, ReviewData>;
   myFeedback: Record<string, StudentFeedback>;
+  homeworkTodo: StudentHomeworkItem[];
+  homeworkDone: StudentHomeworkItem[];
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -133,6 +139,11 @@ export default function StudentShell({
               memosByEnrollment={memosByEnrollment}
               reviews={reviews}
               myFeedback={myFeedback}
+            />
+          ) : activeTab === "homework" ? (
+            <StudentHomeworkTab
+              initialTodo={homeworkTodo}
+              initialDone={homeworkDone}
             />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">

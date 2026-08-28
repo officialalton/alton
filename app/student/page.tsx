@@ -7,6 +7,7 @@ import { loadLessons } from "./lessons-data";
 import { loadCurricula } from "./curriculum-data";
 import { loadMemos } from "./memo-data";
 import { loadReviews, loadStudentFeedback } from "./review-data";
+import { loadStudentHomework } from "./homework-data";
 
 export default async function StudentHomePage({
   searchParams,
@@ -29,6 +30,7 @@ export default async function StudentHomePage({
   const pastSessionIds = past.map((l) => l.sessionId);
   const reviews = await loadReviews(supabase, pastSessionIds);
   const myFeedback = await loadStudentFeedback(supabase, user.id, pastSessionIds);
+  const homework = await loadStudentHomework(supabase, user.id);
 
   return (
     <StudentShell
@@ -43,6 +45,8 @@ export default async function StudentHomePage({
       memosByEnrollment={memosByEnrollment}
       reviews={reviews}
       myFeedback={myFeedback}
+      homeworkTodo={homework.todo}
+      homeworkDone={homework.done}
     />
   );
 }
