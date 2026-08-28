@@ -188,7 +188,7 @@
 - `status`: enum(upcoming/completed/cancelled/no_show)
 - `scheduled_at`: timestamptz, nullable (예약 전에는 null)
 - `duration_minutes`: int, default 30 — 운영정책 §7 "30분 단위 슬롯"
-- `meeting_link`: text, nullable (Google Meet 링크, 임베드 아님 — 외부연동 표 참고)
+- `meeting_link`: text, nullable (Zoom 링크, 임베드 아님 — 외부연동 표 참고. 2026-08-28: Google Meet에서 Zoom으로 변경)
 - `curriculum_doc_id`: FK → `curriculum_docs.id`, nullable — 이 세션에 배정된 교재
 - `is_trial`: boolean, default false — 계약 체결 직후 진행되는 트라이얼 수업 표시
 - `whiteboard_strokes`: jsonb, nullable — 연습장 화이트보드 최종 스냅샷 (§7 참고)

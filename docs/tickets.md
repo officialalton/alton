@@ -63,7 +63,8 @@
 
 ## Phase 7 — 외부 서비스 연동
 
-- [ ] **070-calendly**: 상담/수업 예약 임베드
+- [ ] **070-calendly**: 상담/수업 예약 임베드 (2026-08-28 확정: 랜딩페이지 상담 신청 쪽 일정 예약은 자체 슬롯 시스템이 아니라 실제 Calendly 연동이 필수 — 관리자(회사) 쪽 Calendly 계정 기준으로 붙인다. 사용자가 계정 생성 진행 중, 실제 embed URL/API 키를 받으면 착수)
+- [ ] **076-zoom-recording-summary**: Zoom 클라우드 레코딩 자동 요약 → 수업 리뷰 첨부 (2026-08-28 신규 추가 — 원래 스펙엔 없었음. 화상 수업 플랫폼을 Google Meet에서 Zoom으로 변경한 이유이기도 함: Google 계정이 없는 학생·학부모도 있을 수 있어 Zoom으로 통일. 수업 종료 후 Zoom 클라우드 레코딩(또는 자동 생성 자막/트랜스크립트)을 API로 가져와 Claude로 요약, 043(수업 리뷰) 화면의 적절한 위치(하단 등)에 자동 첨부하는 기능. Zoom 계정(Pro 이상, 클라우드 레코딩 활성화) + Zoom API/webhook 연동이 선행되어야 함 — 녹화에 대한 학생/학부모 동의 고지 문구도 함께 챙겨야 함)
 - [ ] **071-stripe**: 수업권 결제
 - [ ] **072-docusign**: 계약서 서명
 - [x] **073-email-notify**: 학부모 알림 (이메일 전용 — Kakao Alimtalk 스펙 제외. 2026-08-28 결정: 카카오 비즈니스 채널 심사·템플릿 승인 등 대기 시간이 긴 외부 의존을 없애기 위해 알림은 이메일로만 발송하고, 실시간 소통은 022에서 이미 만든 서비스 내 채팅(chat_threads/chat_messages)으로 충분히 대체 가능하다고 판단. 특정 이메일 벤더에 종속되지 않도록 표준 SMTP(`nodemailer`, `lib/email.ts`)로 구현 — 운영에서는 `SMTP_HOST` 등 환경변수만 실제 제공자(Postmark/SendGrid SMTP 릴레이/Gmail Workspace 등) 것으로 바꾸면 되고, 로컬 개발은 `supabase/config.toml`의 `local_smtp.smtp_port`를 열어 Mailpit으로 실제 발송·수신을 확인할 수 있게 함. 이번 티켓에서 실제로 연결한 알림 트리거 2곳: (1) 랜딩페이지 상담 신청 접수 즉시 확인 메일(`app/consult-actions.ts`), (2) 선생님이 수업 리뷰를 제출하면(043) 학생의 보호자 전원에게 리뷰 도착 안내 메일(`app/teacher/review/[sessionId]/review-actions.ts`의 `notifyGuardiansOfReview`) — `guardian_students` 조회는 선생님 세션의 RLS로는 조회가 막혀 있어(당사자/관리자만 select 가능) service_role 클라이언트로 처리해야 했던 실제 버그를 브라우저 테스트 중 발견/수정(처음엔 이메일이 전송되지 않고 조용히 실패). 그 외 학생/과제/결제 관련 추가 알림 트리거는 이번 스코프에서는 확장하지 않음(필요 시 별도 확인). 새 마이그레이션 없음. 유닛 테스트 2개 신규(`lib/email.ts`), 전체 183개 통과, tsc 클린. 실제 브라우저로 상담 폼 제출 → Mailpit에서 실제 확인 메일 수신 확인, 선생님이 지훈의 SAT Math 7회차 리뷰 제출 → 학부모 김민지 실제 주소로 리뷰 도착 메일 수신까지 확인)
