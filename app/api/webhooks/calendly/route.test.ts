@@ -54,6 +54,38 @@ describe("POST /api/webhooks/calendly", () => {
     );
   });
 
+  it("학년/연락처 질문은 각 컬럼에, 나머지는 concerns에 담는다", async () => {
+    const { POST } = await import("./route");
+    const request = new Request("http://localhost/api/webhooks/calendly", {
+      method: "POST",
+      body: JSON.stringify({
+        event: "invitee.created",
+        payload: {
+          email: "parent3@example.com",
+          name: "최유진",
+          questions_and_answers: [
+            { question: "학생 학년이 어떻게 되나요?", answer: "10학년" },
+            { question: "연락처를 남겨주세요", answer: "010-1234-5678" },
+            { question: "고민이 있다면 알려주세요", answer: "AP Chemistry 튜터링" },
+          ],
+          scheduled_event: {
+            uri: "https://api.calendly.com/scheduled_events/xyz",
+            start_time: "2026-09-03T10:00:00.000Z",
+          },
+        },
+      }),
+    });
+
+    await POST(request);
+    expect(insertMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        student_grade: "10학년",
+        phone: "010-1234-5678",
+        concerns: "고민이 있다면 알려주세요: AP Chemistry 튜터링",
+      })
+    );
+  });
+
   it("invitee.created가 아닌 이벤트는 무시한다", async () => {
     const { POST } = await import("./route");
     const request = new Request("http://localhost/api/webhooks/calendly", {

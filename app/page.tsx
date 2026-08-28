@@ -222,24 +222,15 @@ export default function LandingPage() {
                 아래에서 편한 시간을 바로 선택해 예약하세요. 상담은 Zoom으로 진행됩니다.
               </p>
               <CalendlyWidget url={process.env.NEXT_PUBLIC_CALENDLY_URL} />
-
-              <div className="flex items-center gap-4 my-10">
-                <div className="flex-1 h-px bg-grey-200" />
-                <span className="text-[12.5px] text-grey-300 font-semibold">또는</span>
-                <div className="flex-1 h-px bg-grey-200" />
-              </div>
-
-              <h3 className="text-[16px] font-extrabold text-center mb-5">
-                시간을 정하기 전에 먼저 문의만 남기고 싶다면
-              </h3>
             </>
           ) : (
-            <p className="text-[14.5px] text-grey-500 text-center mb-8">
-              아래 양식을 남겨주시면 담당자가 연락드립니다.
-            </p>
+            <>
+              <p className="text-[14.5px] text-grey-500 text-center mb-8">
+                아래 양식을 남겨주시면 담당자가 연락드립니다.
+              </p>
+              <ConsultForm />
+            </>
           )}
-
-          <ConsultForm />
         </section>
       </main>
 

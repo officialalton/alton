@@ -52,16 +52,25 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "missing invitee info" }, { status: 400 });
   }
 
-  const concerns = (questions_and_answers ?? [])
-    .map((qa) => `${qa.question}: ${qa.answer}`)
-    .join("\n");
+  // Calendly 이벤트 타입의 커스텀 질문(학년/연락처 등)으로 받은 답변을 해당 컬럼에 매핑하고,
+  // 나머지 질문(학생 이름, 거주 지역, 고민 등)은 concerns에 그대로 모아 기록한다.
+  let studentGrade: string | null = null;
+  let phone: string | null = null;
+  const remaining: string[] = [];
+  for (const qa of questions_and_answers ?? []) {
+    if (qa.question.includes("학년")) studentGrade = qa.answer;
+    else if (qa.question.includes("연락처") || qa.question.includes("전화")) phone = qa.answer;
+    else remaining.push(`${qa.question}: ${qa.answer}`);
+  }
 
   const admin = createAdminClient();
   const { error } = await admin.from("consult_requests").insert({
     category: "family",
     person_name: name,
     email,
-    concerns: concerns || null,
+    phone,
+    student_grade: studentGrade,
+    concerns: remaining.length ? remaining.join("\n") : null,
     status: "confirmed",
     scheduled_at: scheduled_event?.start_time ?? null,
     calendly_event_uri: scheduled_event?.uri ?? null,
