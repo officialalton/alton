@@ -10,7 +10,7 @@ async function inviteAndCreateProfile(params: {
 }): Promise<string> {
   const admin = createAdminClient();
   const { data, error } = await admin.auth.admin.inviteUserByEmail(params.email, {
-    redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/login`,
+    redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/set-password`,
   });
   if (error) throw new Error(error.message);
 

@@ -33,6 +33,28 @@ export default function SetPasswordPage() {
 
     setSubmitting(true);
     const supabase = createClient();
+
+    // 초대/재설정 링크의 URL 해시(#access_token=...)에 담긴 세션을 명시적으로 적용한다.
+    // 이걸 안 하면 이 브라우저에 이미 로그인된 다른 계정(예: 방금 초대를 보낸 관리자
+    // 본인)의 세션이 그대로 남아있어, 엉뚱하게 그 계정의 비밀번호가 바뀌는 사고가 난다.
+    const hash = window.location.hash.startsWith("#")
+      ? window.location.hash.slice(1)
+      : window.location.hash;
+    const params = new URLSearchParams(hash);
+    const access_token = params.get("access_token");
+    const refresh_token = params.get("refresh_token");
+    if (access_token && refresh_token) {
+      const { error: sessionError } = await supabase.auth.setSession({
+        access_token,
+        refresh_token,
+      });
+      if (sessionError) {
+        setSubmitting(false);
+        setError(sessionError.message);
+        return;
+      }
+    }
+
     const { error: updateError } = await supabase.auth.updateUser({
       password,
     });
