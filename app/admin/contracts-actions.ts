@@ -1,7 +1,8 @@
 "use server";
 
 import { createAdminClient } from "@/lib/supabase-admin";
-import { requireAdmin, inviteParent, inviteStudent } from "./users-actions";
+import { requireAdmin } from "@/lib/admin-auth";
+import { inviteParent, inviteStudent } from "./users-actions";
 import { createEnvelope } from "@/lib/docusign";
 import { renderFamilyContractHtml } from "@/lib/contracts/family-contract-template";
 
@@ -29,7 +30,8 @@ export async function sendFamilyContract(params: {
     grade: consult.student_grade ?? "",
   });
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3010";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  if (!siteUrl) throw new Error("NEXT_PUBLIC_SITE_URL 환경변수가 설정되지 않았습니다.");
   const webhookToken = process.env.DOCUSIGN_WEBHOOK_TOKEN ?? "";
   const { envelopeId } = await createEnvelope({
     recipientEmail: consult.email,

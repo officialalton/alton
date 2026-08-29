@@ -1,4 +1,5 @@
 import { createSign } from "crypto";
+import { SIGNATURE_ANCHOR } from "@/lib/contracts/family-contract-template";
 
 const JWT_LIFETIME_SECONDS = 3600;
 const JWT_SCOPE = "signature impersonation";
@@ -90,7 +91,7 @@ export async function createEnvelope(params: {
               tabs: {
                 signHereTabs: [
                   {
-                    anchorString: "/sig1/",
+                    anchorString: SIGNATURE_ANCHOR,
                     anchorUnits: "pixels",
                     anchorXOffset: "0",
                     anchorYOffset: "-10",

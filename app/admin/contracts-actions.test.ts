@@ -1,9 +1,12 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("./users-actions", () => ({
-  requireAdmin: vi.fn().mockResolvedValue({ supabase: {}, adminUserId: "admin1" }),
   inviteParent: vi.fn().mockResolvedValue("parent1"),
   inviteStudent: vi.fn().mockResolvedValue("student1"),
+}));
+
+vi.mock("@/lib/admin-auth", () => ({
+  requireAdmin: vi.fn().mockResolvedValue({ supabase: {}, adminUserId: "admin1" }),
 }));
 
 const createEnvelopeMock = vi.fn().mockResolvedValue({ envelopeId: "env-1" });
@@ -35,6 +38,7 @@ vi.mock("@/lib/supabase-admin", () => ({
 describe("sendFamilyContract", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    process.env.NEXT_PUBLIC_SITE_URL = "https://alton-ecru.vercel.app";
     consultSingleMock.mockResolvedValue({
       data: { person_name: "김민지", email: "minji@example.com", student_grade: "10학년" },
       error: null,
@@ -90,6 +94,16 @@ describe("sendFamilyContract", () => {
     await expect(
       sendFamilyContract({ consultRequestId: "c1", studentName: "지훈", studentEmail: "jihoon@example.com" })
     ).rejects.toThrow("DocuSign 봉투 생성 실패");
+    expect(contractsInsertMock).not.toHaveBeenCalled();
+  });
+
+  it("NEXT_PUBLIC_SITE_URL이 설정되지 않으면 에러를 던진다", async () => {
+    delete process.env.NEXT_PUBLIC_SITE_URL;
+    const { sendFamilyContract } = await import("./contracts-actions");
+
+    await expect(
+      sendFamilyContract({ consultRequestId: "c1", studentName: "지훈", studentEmail: "jihoon@example.com" })
+    ).rejects.toThrow("NEXT_PUBLIC_SITE_URL 환경변수가 설정되지 않았습니다.");
     expect(contractsInsertMock).not.toHaveBeenCalled();
   });
 });

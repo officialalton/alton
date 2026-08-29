@@ -35,8 +35,8 @@ export async function loadPendingConsults(supabase: SupabaseClient): Promise<Pen
 export async function loadFamilyContracts(supabase: SupabaseClient): Promise<FamilyContract[]> {
   const { data: contracts } = await supabase
     .from("contracts")
-    .select("id, parent_id, student_id, status, signed_at")
-    .order("id", { ascending: false });
+    .select("id, parent_id, student_id, status, signed_at, created_at")
+    .order("created_at", { ascending: false });
   if (!contracts || contracts.length === 0) return [];
 
   const ids = Array.from(new Set(contracts.flatMap((c) => [c.parent_id, c.student_id])));

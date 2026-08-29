@@ -2,6 +2,8 @@
 // 이 파일만 수정하면 된다(DocuSign 콘솔에는 템플릿을 따로 만들지 않았음).
 // 이 초안은 법적 검토를 거치지 않은 플레이스홀더 문구다 — 실제 고객 발송 전
 // 반드시 변호사 검토가 필요하다.
+export const SIGNATURE_ANCHOR = "/sig1/";
+
 export function renderFamilyContractHtml(params: {
   parentName: string;
   studentName: string;
@@ -23,7 +25,7 @@ export function renderFamilyContractHtml(params: {
   <h3>제3조 (취소 정책)</h3>
   <p>수업 24시간 전 취소 시 수업권이 전액 보존되며, 그 외 취소는 회사 정책에 따른다.</p>
 
-  <p style="margin-top: 48px;">학부모 서명: /sig1/</p>
+  <p style="margin-top: 48px;">학부모 서명: ${SIGNATURE_ANCHOR}</p>
 </body>
 </html>`;
 }

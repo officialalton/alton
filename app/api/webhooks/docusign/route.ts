@@ -4,7 +4,7 @@ import { createAdminClient } from "@/lib/supabase-admin";
 export async function POST(request: Request) {
   const url = new URL(request.url);
   const expectedToken = process.env.DOCUSIGN_WEBHOOK_TOKEN;
-  if (expectedToken && url.searchParams.get("token") !== expectedToken) {
+  if (url.searchParams.get("token") !== expectedToken) {
     return NextResponse.json({ error: "invalid token" }, { status: 401 });
   }
 
