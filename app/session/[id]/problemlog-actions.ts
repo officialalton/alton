@@ -42,7 +42,7 @@ export async function retryMcAttempt(
 
   const { data: problem } = await supabase
     .from("problems")
-    .select("correct_index")
+    .select("correct_index, explanation")
     .eq("id", problemId)
     .single();
   if (!problem) throw new Error("문제를 찾을 수 없습니다.");
@@ -72,11 +72,20 @@ export async function retryMcAttempt(
     attemptNumber,
     done,
     correctIndex: done ? problem.correct_index : null,
+    explanation: done ? problem.explanation : null,
   };
 }
 
 async function retryOnceGraded(problemId: string, response: string) {
   const { supabase, userId } = await requireUser();
+
+  const { data: problem } = await supabase
+    .from("problems")
+    .select("explanation")
+    .eq("id", problemId)
+    .single();
+  if (!problem) throw new Error("문제를 찾을 수 없습니다.");
+
   const { error } = await supabase.from("session_problem_attempts").insert({
     session_id: null,
     student_id: userId,
@@ -85,15 +94,17 @@ async function retryOnceGraded(problemId: string, response: string) {
     correct: null,
   });
   if (error) throw new Error(error.message);
+
+  return { explanation: problem.explanation as string };
 }
 
 export async function retryEssayAttempt(problemId: string, text: string) {
   if (!text.trim()) throw new Error("답안을 입력해주세요.");
-  await retryOnceGraded(problemId, text.trim());
+  return retryOnceGraded(problemId, text.trim());
 }
 
 export async function retryMathAttempt(problemId: string, dataUrl: string) {
-  await retryOnceGraded(problemId, dataUrl);
+  return retryOnceGraded(problemId, dataUrl);
 }
 
 export async function saveTeacherPick(

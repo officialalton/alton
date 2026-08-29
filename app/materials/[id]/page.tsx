@@ -41,7 +41,5 @@ export default async function MaterialsLibraryPage({
     })),
   };
 
-  return (
-    <LibraryDocView doc={redactedDoc} viewerRole={role} studentId={studentId} />
-  );
+  return <LibraryDocView doc={redactedDoc} viewerRole={role} />;
 }

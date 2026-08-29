@@ -40,7 +40,7 @@ const doc: LibraryDocDetail = {
 
 describe("LibraryDocView", () => {
   it("제목, 목차, 본문을 보여준다", () => {
-    render(<LibraryDocView doc={doc} viewerRole="student" studentId="student1" />);
+    render(<LibraryDocView doc={doc} viewerRole="student" />);
     expect(screen.getByText("이차방정식 개념 정리")).toBeInTheDocument();
     expect(screen.getByText("목차")).toBeInTheDocument();
     expect(
@@ -49,7 +49,7 @@ describe("LibraryDocView", () => {
   });
 
   it("학생에게는 정답과 해설이 풀기 전까지 보이지 않는다", () => {
-    render(<LibraryDocView doc={doc} viewerRole="student" studentId="student1" />);
+    render(<LibraryDocView doc={doc} viewerRole="student" />);
     expect(screen.getByText("판별식이 0이면?")).toBeInTheDocument();
     expect(screen.queryByText("D=0이면 중근을 가집니다.")).not.toBeInTheDocument();
     expect(
@@ -63,8 +63,9 @@ describe("LibraryDocView", () => {
       attemptNumber: 1,
       done: true,
       correctIndex: 1,
+      explanation: "D=0이면 중근을 가집니다.",
     });
-    render(<LibraryDocView doc={doc} viewerRole="student" studentId="student1" />);
+    render(<LibraryDocView doc={doc} viewerRole="student" />);
     fireEvent.click(screen.getByText("중근"));
     fireEvent.click(screen.getByText("채점하기"));
     await waitFor(() =>
@@ -75,14 +76,51 @@ describe("LibraryDocView", () => {
     );
   });
 
+  it("회귀: 로드 시 redact된(correctIndex/explanation 비어있는) 문제도 채점 응답에서 실제 정답/해설을 반영한다", async () => {
+    const redactedDoc: LibraryDocDetail = {
+      ...doc,
+      sections: [
+        {
+          ...doc.sections[0],
+          problems: [
+            {
+              ...doc.sections[0].problems[0],
+              correctIndex: null,
+              explanation: "",
+            },
+          ],
+        },
+      ],
+    };
+    vi.mocked(problemlogActions.retryMcAttempt).mockResolvedValue({
+      correct: true,
+      attemptNumber: 1,
+      done: true,
+      correctIndex: 1,
+      explanation: "실제 해설",
+    });
+    render(<LibraryDocView doc={redactedDoc} viewerRole="student" />);
+    fireEvent.click(screen.getByText("중근"));
+    fireEvent.click(screen.getByText("채점하기"));
+    await waitFor(() =>
+      expect(problemlogActions.retryMcAttempt).toHaveBeenCalledWith("p1", 1)
+    );
+    await waitFor(() =>
+      expect(screen.getByText("실제 해설")).toBeInTheDocument()
+    );
+    expect(
+      screen.getByText("중근").closest("button")?.className ?? ""
+    ).toMatch(/bg-green-bg|border-green/);
+  });
+
   it("선생님/관리자에게는 정답과 해설이 항상 보이고 입력은 불가능하다", () => {
-    render(<LibraryDocView doc={doc} viewerRole="teacher" studentId={null} />);
+    render(<LibraryDocView doc={doc} viewerRole="teacher" />);
     expect(screen.getByText("D=0이면 중근을 가집니다.")).toBeInTheDocument();
     expect(screen.queryByText("채점하기")).not.toBeInTheDocument();
   });
 
   it("학부모에게는 정답/해설/선택지가 전부 숨겨지고 안내 문구만 보인다", () => {
-    render(<LibraryDocView doc={doc} viewerRole="parent" studentId={null} />);
+    render(<LibraryDocView doc={doc} viewerRole="parent" />);
     expect(screen.getByText("판별식이 0이면?")).toBeInTheDocument();
     expect(screen.queryByText("중근")).not.toBeInTheDocument();
     expect(screen.queryByText("D=0이면 중근을 가집니다.")).not.toBeInTheDocument();

@@ -20,11 +20,9 @@ const DIFF_LABEL: Record<string, string> = {
 export default function LibraryDocView({
   doc,
   viewerRole,
-  studentId,
 }: {
   doc: LibraryDocDetail;
   viewerRole: SessionViewViewer;
-  studentId: string | null;
 }) {
   const [activeSectionId, setActiveSectionId] = useState<string | null>(
     doc.sections[0]?.id ?? null
@@ -138,6 +136,12 @@ function LibraryProblemCard({
   const [submittedResponse, setSubmittedResponse] = useState(
     problem.submittedResponse
   );
+  const [revealedCorrectIndex, setRevealedCorrectIndex] = useState<
+    number | null
+  >(problem.correctIndex);
+  const [revealedExplanation, setRevealedExplanation] = useState(
+    problem.explanation
+  );
 
   const tags = [
     problem.skillType,
@@ -157,6 +161,8 @@ function LibraryProblemCard({
         }, 1200);
       } else {
         setDone(true);
+        setRevealedCorrectIndex(result.correctIndex ?? null);
+        setRevealedExplanation(result.explanation ?? "");
         setMessage(result.correct ? "정답입니다!" : "정답을 확인하세요.");
       }
     } catch (e) {
@@ -170,8 +176,9 @@ function LibraryProblemCard({
     if (submitting) return;
     setSubmitting(true);
     try {
-      await retryEssayAttempt(problem.id, essayText);
+      const result = await retryEssayAttempt(problem.id, essayText);
       setSubmittedResponse(essayText.trim());
+      setRevealedExplanation(result.explanation ?? "");
     } catch (e) {
       setMessage(e instanceof Error ? e.message : "제출 중 오류가 발생했어요.");
     } finally {
@@ -183,8 +190,9 @@ function LibraryProblemCard({
     if (submitting) return;
     setSubmitting(true);
     try {
-      await retryMathAttempt(problem.id, dataUrl);
+      const result = await retryMathAttempt(problem.id, dataUrl);
       setSubmittedResponse(dataUrl);
+      setRevealedExplanation(result.explanation ?? "");
     } catch (e) {
       setMessage(e instanceof Error ? e.message : "제출 중 오류가 발생했어요.");
     } finally {
@@ -228,7 +236,7 @@ function LibraryProblemCard({
           <div className="flex flex-col gap-2 mb-1.5">
             {problem.options.map((opt, i) => {
               const isSelected = selected === i;
-              const isCorrectChoice = done && i === problem.correctIndex;
+              const isCorrectChoice = done && i === revealedCorrectIndex;
               const isWrongChoice = done && isSelected && !isCorrectChoice;
               return (
                 <button
@@ -341,7 +349,7 @@ function LibraryProblemCard({
         <div className="bg-grey-100 rounded-lg px-3.5 py-3 text-[13px] text-grey-700 leading-[1.6] mt-3">
           <b className="text-ink">해설</b>
           <br />
-          {problem.explanation}
+          {isTeacherLike ? problem.explanation : revealedExplanation}
         </div>
       )}
     </div>
