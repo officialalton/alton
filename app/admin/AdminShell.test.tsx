@@ -52,6 +52,8 @@ const baseProps = {
   teachers: [],
   creditHistoryByStudent: {},
   qcWarningsByTeacher: {},
+  pendingConsults: [],
+  familyContracts: [],
 };
 
 describe("AdminShell", () => {
@@ -109,5 +111,11 @@ describe("AdminShell", () => {
     render(<AdminShell {...baseProps} />);
     fireEvent.click(screen.getByText("수업권"));
     expect(screen.getByText("학생별 수업권 현황")).toBeInTheDocument();
+  });
+
+  it("계약 탭을 누르면 ContractsTab이 렌더링된다", () => {
+    render(<AdminShell {...baseProps} />);
+    fireEvent.click(screen.getByText("계약"));
+    expect(screen.getByText("발송 대기")).toBeInTheDocument();
   });
 });

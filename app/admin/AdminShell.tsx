@@ -8,6 +8,8 @@ import type { AdminDashboardData } from "./dashboard-data";
 import CatalogTab from "./CatalogTab";
 import UsersTab from "./UsersTab";
 import BillingTab from "./BillingTab";
+import ContractsTab from "./ContractsTab";
+import type { FamilyContract, PendingConsult } from "./contracts-data";
 import type { AdminSubject } from "./subject-data";
 import type { DocEditorData } from "./curriculum-doc-data";
 import type {
@@ -43,6 +45,8 @@ export default function AdminShell({
   teachers,
   creditHistoryByStudent,
   qcWarningsByTeacher,
+  pendingConsults,
+  familyContracts,
 }: {
   initialTab?: string;
   dashboard: AdminDashboardData;
@@ -53,6 +57,8 @@ export default function AdminShell({
   teachers: TeacherListItem[];
   creditHistoryByStudent: Record<string, CreditTransaction[]>;
   qcWarningsByTeacher: Record<string, QcWarning[]>;
+  pendingConsults: PendingConsult[];
+  familyContracts: FamilyContract[];
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -134,6 +140,8 @@ export default function AdminShell({
               initialStudents={students}
               creditHistoryByStudent={creditHistoryByStudent}
             />
+          ) : activeTab === "contracts" ? (
+            <ContractsTab pendingConsults={pendingConsults} contracts={familyContracts} />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.

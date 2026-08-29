@@ -9,6 +9,7 @@ import {
   loadStudentCreditHistory,
   loadTeacherQcWarnings,
 } from "./users-data";
+import { loadPendingConsults, loadFamilyContracts } from "./contracts-data";
 import AdminShell from "./AdminShell";
 
 export default async function AdminHomePage({
@@ -26,6 +27,8 @@ export default async function AdminHomePage({
   const parents = await loadParents(supabase);
   const students = await loadStudents(supabase);
   const teachers = await loadTeachers(supabase);
+  const pendingConsults = await loadPendingConsults(supabase);
+  const familyContracts = await loadFamilyContracts(supabase);
 
   const creditHistoryByStudent: Record<string, Awaited<ReturnType<typeof loadStudentCreditHistory>>> = {};
   for (const s of students) {
@@ -48,6 +51,8 @@ export default async function AdminHomePage({
       teachers={teachers}
       creditHistoryByStudent={creditHistoryByStudent}
       qcWarningsByTeacher={qcWarningsByTeacher}
+      pendingConsults={pendingConsults}
+      familyContracts={familyContracts}
     />
   );
 }
