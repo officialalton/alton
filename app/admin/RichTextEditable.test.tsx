@@ -27,4 +27,16 @@ describe("RichTextEditable", () => {
     fireEvent.blur(editable);
     expect(onChange).toHaveBeenCalledWith("<p>수정됨</p>");
   });
+
+  it("표 삽입 버튼을 누르면 execCommand로 표 HTML을 삽입한다", () => {
+    const execCommandSpy = vi.fn();
+    document.execCommand = execCommandSpy;
+    render(<RichTextEditable initialHtml="" onChange={vi.fn()} />);
+    fireEvent.mouseDown(screen.getByText("표"));
+    expect(execCommandSpy).toHaveBeenCalledWith(
+      "insertHTML",
+      false,
+      expect.stringContaining("<table")
+    );
+  });
 });

@@ -22,6 +22,12 @@ export function sanitizeDocHtml(html: string): string {
       "br",
       "div",
       "span",
+      "table",
+      "thead",
+      "tbody",
+      "tr",
+      "th",
+      "td",
     ],
     allowedAttributes: {},
   });

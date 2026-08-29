@@ -58,3 +58,16 @@ body {
   color: var(--foreground);
   font-family: var(--font-inter), var(--font-noto-sans-kr), Arial, Helvetica, sans-serif;
 }
+
+.rte-editable table {
+  border-collapse: collapse;
+  margin: 8px 0;
+  width: 100%;
+}
+
+.rte-editable table td,
+.rte-editable table th {
+  border: 1px solid var(--grey-200, #e5e5e5);
+  padding: 6px 10px;
+  min-width: 60px;
+}

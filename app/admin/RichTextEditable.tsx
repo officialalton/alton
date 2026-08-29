@@ -13,6 +13,13 @@ const TOOLBAR_BUTTONS: { label: string; command: string; value?: string }[] = [
   { label: "1.목록", command: "insertOrderedList" },
 ];
 
+const TABLE_HTML =
+  "<table><tbody>" +
+  "<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>" +
+  "<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>" +
+  "<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>" +
+  "</tbody></table>";
+
 export default function RichTextEditable({
   initialHtml,
   onChange,
@@ -38,6 +45,11 @@ export default function RichTextEditable({
     document.execCommand(command, false, value);
   }
 
+  function insertTable() {
+    ref.current?.focus();
+    document.execCommand("insertHTML", false, TABLE_HTML);
+  }
+
   function handleBlur() {
     if (ref.current) onChange(ref.current.innerHTML);
   }
@@ -58,6 +70,16 @@ export default function RichTextEditable({
             {b.label}
           </button>
         ))}
+        <button
+          type="button"
+          onMouseDown={(e) => {
+            e.preventDefault();
+            insertTable();
+          }}
+          className="text-[11.5px] font-bold px-2 py-1 rounded hover:bg-white text-ink"
+        >
+          표
+        </button>
       </div>
       <div
         ref={setInitialContent}
