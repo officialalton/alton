@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const generatePayoutsAsCronMock = vi.fn();
-vi.mock("@/app/admin/payouts-actions", () => ({
+vi.mock("@/app/admin/payouts-cron", () => ({
   generatePayoutsAsCron: generatePayoutsAsCronMock,
 }));
 

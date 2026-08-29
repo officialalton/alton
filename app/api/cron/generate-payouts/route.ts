@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { generatePayoutsAsCron } from "@/app/admin/payouts-actions";
+import { generatePayoutsAsCron } from "@/app/admin/payouts-cron";
 import { previousMonthRange } from "@/app/admin/payouts-data";
 
 export async function GET(request: Request) {
