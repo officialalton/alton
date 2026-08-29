@@ -9,8 +9,12 @@ async function inviteAndCreateProfile(params: {
   role: "parent" | "student" | "teacher";
 }): Promise<string> {
   const admin = createAdminClient();
+  const redirectTo =
+    params.role === "parent"
+      ? `${process.env.NEXT_PUBLIC_SITE_URL}/set-password?role=parent`
+      : `${process.env.NEXT_PUBLIC_SITE_URL}/set-password`;
   const { data, error } = await admin.auth.admin.inviteUserByEmail(params.email, {
-    redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/set-password`,
+    redirectTo,
   });
   if (error) throw new Error(error.message);
 

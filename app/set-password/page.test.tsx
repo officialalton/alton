@@ -5,6 +5,7 @@ import SetPasswordPage from "./page";
 const pushMock = vi.fn();
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: pushMock }),
+  useSearchParams: () => new URLSearchParams(window.location.search),
 }));
 
 const setSessionMock = vi.fn();
@@ -35,6 +36,24 @@ describe("SetPasswordPage", () => {
     verifyOtpMock.mockResolvedValue({ error: null });
     window.location.hash = "";
     window.location.search = "";
+  });
+
+  it("URL에 role=parent가 있으면 추천인 코드 입력을 보여준다", () => {
+    Object.defineProperty(window, "location", {
+      value: { hash: "", search: "?role=parent" },
+      writable: true,
+    });
+    render(<SetPasswordPage />);
+    expect(screen.getByLabelText(/추천인 코드/)).toBeInTheDocument();
+  });
+
+  it("role 파라미터가 없으면(예: 비밀번호 재설정 링크) 추천인 코드 입력을 숨긴다", () => {
+    Object.defineProperty(window, "location", {
+      value: { hash: "", search: "" },
+      writable: true,
+    });
+    render(<SetPasswordPage />);
+    expect(screen.queryByLabelText(/추천인 코드/)).not.toBeInTheDocument();
   });
 
   it("URL 해시에 토큰이 있으면 updateUser 전에 그 세션을 명시적으로 적용한다", async () => {

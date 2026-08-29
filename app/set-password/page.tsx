@@ -1,11 +1,13 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 
 export default function SetPasswordPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const showReferralField = searchParams.get("role") === "parent";
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -142,18 +144,20 @@ export default function SetPasswordPage() {
               className="w-full px-3.5 py-3 border-[1.5px] border-grey-200 rounded-lg text-[14.5px] text-ink focus:outline-none focus:border-ink"
             />
           </div>
-          <div className="mb-4">
-            <label htmlFor="referral" className="block text-[13px] font-bold text-ink mb-1.5">
-              추천인 코드 (선택)
-            </label>
-            <input
-              id="referral"
-              name="referral"
-              type="text"
-              placeholder="예: ALTON-MINJI82"
-              className="w-full px-3.5 py-3 border-[1.5px] border-grey-200 rounded-lg text-[14.5px] text-ink focus:outline-none focus:border-ink"
-            />
-          </div>
+          {showReferralField && (
+            <div className="mb-4">
+              <label htmlFor="referral" className="block text-[13px] font-bold text-ink mb-1.5">
+                추천인 코드 (선택)
+              </label>
+              <input
+                id="referral"
+                name="referral"
+                type="text"
+                placeholder="예: ALTON-MINJI82"
+                className="w-full px-3.5 py-3 border-[1.5px] border-grey-200 rounded-lg text-[14.5px] text-ink focus:outline-none focus:border-ink"
+              />
+            </div>
+          )}
 
           <label className="flex items-start gap-2 text-[12.5px] text-grey-500 leading-[1.5] mb-[22px]">
             <input name="consent" type="checkbox" className="mt-0.5" />
