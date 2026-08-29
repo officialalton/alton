@@ -1,4 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
+import { within } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import ProblemDraftFields from "./ProblemDraftFields";
 import type { DocProblem } from "./curriculum-doc-data";
@@ -62,5 +63,22 @@ describe("ProblemDraftFields", () => {
     expect(
       screen.getByText("학생은 세션뷰의 화이트보드에서 직접 풀이를 작성합니다.")
     ).toBeInTheDocument();
+  });
+
+  it("groupId가 다르면 라디오 그룹 name이 서로 달라 카드 간 충돌이 없다", () => {
+    const { container } = render(
+      <div>
+        <div data-testid="card-0">
+          <ProblemDraftFields draft={mcDraft} onChange={vi.fn()} groupId={0} />
+        </div>
+        <div data-testid="card-1">
+          <ProblemDraftFields draft={mcDraft} onChange={vi.fn()} groupId={1} />
+        </div>
+      </div>
+    );
+    const radios0 = within(screen.getByTestId("card-0")).getAllByRole("radio") as HTMLInputElement[];
+    const radios1 = within(screen.getByTestId("card-1")).getAllByRole("radio") as HTMLInputElement[];
+    expect(radios0[0].name).not.toBe(radios1[0].name);
+    void container;
   });
 });

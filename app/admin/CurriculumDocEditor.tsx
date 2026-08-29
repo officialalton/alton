@@ -326,61 +326,59 @@ function SectionEditor({
         </>
       )}
 
-      <div
-        className={
-          section.sectionType === "concept" ? "border-t border-grey-200 pt-3" : ""
-        }
-      >
-        <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2">
-          문제 ({problems.length})
-        </div>
-        {problems.map((p) => (
-          <div
-            key={p.id}
-            className="flex items-start justify-between gap-3 bg-grey-100 rounded-lg px-3 py-2.5 mb-2"
-          >
-            <div className="text-[12.5px] text-ink">
-              <span className="font-bold">[{FORMAT_LABEL[p.format]}]</span> {p.passage}
-              {p.format !== "mc" && (
-                <p className="text-grey-500 mt-1">
-                  {p.format === "essay" ? "모범답안: " : "모범풀이: "}
-                  {p.explanation}
-                </p>
-              )}
-            </div>
-            <button
-              onClick={async () => {
-                await removeSectionProblem(p.id);
-                commitProblems(problems.filter((x) => x.id !== p.id));
-              }}
-              className="text-[11.5px] font-semibold text-red shrink-0"
-            >
-              삭제
-            </button>
+      {section.sectionType === "problem" && (
+        <div>
+          <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2">
+            문제 ({problems.length})
           </div>
-        ))}
+          {problems.map((p) => (
+            <div
+              key={p.id}
+              className="flex items-start justify-between gap-3 bg-grey-100 rounded-lg px-3 py-2.5 mb-2"
+            >
+              <div className="text-[12.5px] text-ink">
+                <span className="font-bold">[{FORMAT_LABEL[p.format]}]</span> {p.passage}
+                {p.format !== "mc" && (
+                  <p className="text-grey-500 mt-1">
+                    {p.format === "essay" ? "모범답안: " : "모범풀이: "}
+                    {p.explanation}
+                  </p>
+                )}
+              </div>
+              <button
+                onClick={async () => {
+                  await removeSectionProblem(p.id);
+                  commitProblems(problems.filter((x) => x.id !== p.id));
+                }}
+                className="text-[11.5px] font-semibold text-red shrink-0"
+              >
+                삭제
+              </button>
+            </div>
+          ))}
 
-        {showProblemForm ? (
-          <ProblemGenPanel
-            sectionId={section.id}
-            sectionTitle={section.title}
-            subjectId={subjectId}
-            subjectName={subjectName}
-            onConfirmed={(created) => {
-              commitProblems([...problems, ...created]);
-              setShowProblemForm(false);
-            }}
-            onCancel={() => setShowProblemForm(false)}
-          />
-        ) : (
-          <button
-            onClick={() => setShowProblemForm(true)}
-            className="text-[12px] font-bold px-3.5 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink"
-          >
-            + 문제 추가
-          </button>
-        )}
-      </div>
+          {showProblemForm ? (
+            <ProblemGenPanel
+              sectionId={section.id}
+              sectionTitle={section.title}
+              subjectId={subjectId}
+              subjectName={subjectName}
+              onConfirmed={(created) => {
+                commitProblems([...problems, ...created]);
+                setShowProblemForm(false);
+              }}
+              onCancel={() => setShowProblemForm(false)}
+            />
+          ) : (
+            <button
+              onClick={() => setShowProblemForm(true)}
+              className="text-[12px] font-bold px-3.5 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink"
+            >
+              + 문제 추가
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -409,6 +407,7 @@ function ProblemGenPanel({
   const [drafts, setDrafts] = useState<Omit<DocProblem, "id">[] | null>(null);
   const [feedbacks, setFeedbacks] = useState<string[]>([]);
   const [regeneratingIndex, setRegeneratingIndex] = useState<number | null>(null);
+  const [confirmError, setConfirmError] = useState<string | null>(null);
 
   async function handleGenerate() {
     if (!skillType.trim() || generating) return;
@@ -424,12 +423,14 @@ function ProblemGenPanel({
       });
       setDrafts(result);
       setFeedbacks(result.map(() => ""));
+      setConfirmError(null);
     } finally {
       setGenerating(false);
     }
   }
 
   function patchDraft(index: number, patch: Partial<Omit<DocProblem, "id">>) {
+    setConfirmError(null);
     setDrafts((prev) =>
       prev ? prev.map((d, i) => (i === index ? { ...d, ...patch } : d)) : prev
     );
@@ -459,6 +460,16 @@ function ProblemGenPanel({
 
   async function handleConfirm() {
     if (!drafts || confirming) return;
+    setConfirmError(null);
+    const invalidMc = drafts.find(
+      (d) =>
+        d.format === "mc" &&
+        (!d.options || d.options.length !== 5 || d.options.some((o) => !o.trim()))
+    );
+    if (invalidMc) {
+      setConfirmError("객관식 문제는 선택지 5개를 모두 입력해야 합니다.");
+      return;
+    }
     setConfirming(true);
     try {
       const created = await confirmSectionProblems(sectionId, subjectId, drafts);
@@ -477,7 +488,11 @@ function ProblemGenPanel({
             <span className="text-[11px] font-bold text-grey-500">
               [{FORMAT_LABEL[d.format]}]
             </span>
-            <ProblemDraftFields draft={d} onChange={(patch) => patchDraft(i, patch)} />
+            <ProblemDraftFields
+              draft={d}
+              onChange={(patch) => patchDraft(i, patch)}
+              groupId={i}
+            />
             <div className="flex gap-2 mt-2">
               <input
                 value={feedbacks[i] ?? ""}
@@ -498,7 +513,7 @@ function ProblemGenPanel({
             </div>
           </div>
         ))}
-        <div className="flex gap-3 mt-2">
+        <div className="flex gap-3 mt-2 items-center">
           <button
             disabled={confirming}
             onClick={handleConfirm}
@@ -507,12 +522,16 @@ function ProblemGenPanel({
             {confirming ? "추가 중..." : "문제로 추가"}
           </button>
           <button
-            onClick={() => setDrafts(null)}
+            onClick={() => {
+              setConfirmError(null);
+              setDrafts(null);
+            }}
             className="text-[12px] font-semibold text-grey-500"
           >
             다시 조건 입력
           </button>
         </div>
+        {confirmError && <p className="text-[12px] text-red mt-2">{confirmError}</p>}
       </div>
     );
   }

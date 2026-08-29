@@ -34,7 +34,7 @@ const doc: DocEditorData = {
       title: "Lesson Overview",
       body: "<p>본문</p>",
       teachingTip: null,
-      sectionType: "concept",
+      sectionType: "problem",
       problems: [],
     },
   ],
@@ -134,7 +134,6 @@ describe("CurriculumDocEditor", () => {
     ]);
     render(<CurriculumDocEditor doc={doc} onBack={vi.fn()} onDeleted={vi.fn()} />);
 
-    fireEvent.click(screen.getByText("+ 문제 추가"));
     fireEvent.change(screen.getByPlaceholderText("문제 유형 (예: 판별식 응용)"), {
       target: { value: "판별식" },
     });
@@ -159,6 +158,40 @@ describe("CurriculumDocEditor", () => {
     await waitFor(() => expect(screen.getByText("문제 (1)")).toBeInTheDocument());
   });
 
+  it("객관식 선택지가 5개 모두 채워지지 않으면 확정을 막고 에러를 보여준다", async () => {
+    vi.mocked(docActions.confirmSectionProblems).mockClear();
+    vi.mocked(docActions.generateSectionProblems).mockResolvedValue([
+      {
+        format: "mc",
+        passage: "판별식 문제",
+        options: ["A", "B", "C", "D", "E"],
+        correctIndex: 1,
+        explanation: "해설",
+        difficulty: "medium",
+      },
+    ]);
+    render(<CurriculumDocEditor doc={doc} onBack={vi.fn()} onDeleted={vi.fn()} />);
+
+    fireEvent.change(screen.getByPlaceholderText("문제 유형 (예: 판별식 응용)"), {
+      target: { value: "판별식" },
+    });
+    fireEvent.click(screen.getByText("✨ AI로 생성하기"));
+    await waitFor(() => expect(screen.getByText("AI 초안 (1개)")).toBeInTheDocument());
+
+    fireEvent.change(screen.getAllByPlaceholderText(/선택지/)[2], {
+      target: { value: "" },
+    });
+
+    fireEvent.click(screen.getByText("문제로 추가"));
+
+    await waitFor(() =>
+      expect(
+        screen.getByText("객관식 문제는 선택지 5개를 모두 입력해야 합니다.")
+      ).toBeInTheDocument()
+    );
+    expect(docActions.confirmSectionProblems).not.toHaveBeenCalled();
+  });
+
   it("AI 초안에 피드백을 남기고 그 문제만 재생성할 수 있다", async () => {
     vi.mocked(docActions.generateSectionProblems).mockResolvedValue([
       {
@@ -180,7 +213,6 @@ describe("CurriculumDocEditor", () => {
     });
     render(<CurriculumDocEditor doc={doc} onBack={vi.fn()} onDeleted={vi.fn()} />);
 
-    fireEvent.click(screen.getByText("+ 문제 추가"));
     fireEvent.change(screen.getByPlaceholderText("문제 유형 (예: 판별식 응용)"), {
       target: { value: "판별식" },
     });

@@ -14,9 +14,11 @@ const LATEX_SNIPPETS: { label: string; snippet: string }[] = [
 export default function ProblemDraftFields({
   draft,
   onChange,
+  groupId = "default",
 }: {
   draft: Draft;
   onChange: (patch: Partial<Draft>) => void;
+  groupId?: string | number;
 }) {
   const passageRef = useRef<HTMLTextAreaElement | null>(null);
   const explanationRef = useRef<HTMLTextAreaElement | null>(null);
@@ -70,7 +72,7 @@ export default function ProblemDraftFields({
             <div key={i} className="flex items-center gap-2 mb-1.5">
               <input
                 type="radio"
-                name="correctIndex"
+                name={`correctIndex-${groupId}`}
                 checked={draft.correctIndex === i}
                 onChange={() => onChange({ correctIndex: i })}
               />
