@@ -16,6 +16,10 @@ vi.mock("./teacher-subjects-actions", () => ({
   unassignTeacherSubject: vi.fn(),
 }));
 
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ refresh: vi.fn() }),
+}));
+
 const teacher: TeacherListItem = {
   id: "t1",
   name: "박서연 선생님",

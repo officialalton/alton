@@ -17,6 +17,16 @@ const DIFF_LABEL: Record<string, string> = {
   hard: "어려움",
 };
 
+const DIFF_COLOR: Record<string, string> = {
+  easy: "bg-green-bg text-green",
+  medium: "bg-yellow-bg text-[#7A5C05]",
+  hard: "bg-red-bg text-red",
+};
+
+function isTeacherLikeRole(role: SessionViewViewer) {
+  return role === "teacher" || role === "admin";
+}
+
 export default function LibraryDocView({
   doc,
   viewerRole,
@@ -102,6 +112,17 @@ export default function LibraryDocView({
                 className="text-[14px] leading-[1.75] text-ink [&_b]:font-bold"
                 dangerouslySetInnerHTML={{ __html: s.body }}
               />
+              {isTeacherLikeRole(viewerRole) && s.teachingTip && (
+                <div className="mt-3 text-[12.5px] leading-[1.65] bg-yellow-bg border border-[#F2D98A] rounded-[10px] px-4 py-3.5 text-[#6B5300]">
+                  <b className="block text-[11px] uppercase tracking-wide text-[#4A3900] mb-1.5">
+                    💡 티칭 팁 (선생님 전용)
+                  </b>
+                  <div
+                    className="[&_b]:font-bold"
+                    dangerouslySetInnerHTML={{ __html: s.teachingTip }}
+                  />
+                </div>
+              )}
               {s.problems.map((p) => (
                 <LibraryProblemCard
                   key={p.id}
@@ -203,25 +224,36 @@ function LibraryProblemCard({
   const showAnswer = isTeacherLike || done || !!submittedResponse;
 
   return (
-    <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4.5 my-4">
-      <div className="flex flex-wrap gap-1.5 mb-2">
-        {tags.map((t) => (
+    <div className="border-[1.5px] border-grey-200 rounded-2xl px-5 py-4.5 my-4 shadow-[0_1px_2px_rgba(0,0,0,0.04)]">
+      <div className="flex flex-wrap items-center gap-1.5 mb-2.5">
+        {problem.difficulty && (
           <span
-            key={t}
-            className="text-[10.5px] font-bold px-2.5 py-1 rounded-lg bg-grey-100 text-grey-500"
+            className={
+              "text-[10.5px] font-bold px-2.5 py-1 rounded-full " +
+              (DIFF_COLOR[problem.difficulty] ?? "bg-grey-100 text-grey-500")
+            }
           >
-            {t}
+            {DIFF_LABEL[problem.difficulty] ?? problem.difficulty}
           </span>
-        ))}
+        )}
+        {tags
+          .filter((t) => t !== (problem.difficulty ? DIFF_LABEL[problem.difficulty] : null))
+          .map((t) => (
+            <span
+              key={t}
+              className="text-[10.5px] font-bold px-2.5 py-1 rounded-full bg-grey-100 text-grey-500"
+            >
+              {t}
+            </span>
+          ))}
+        {isTeacherLike && problem.format === "mc" && problem.correctIndex !== null && (
+          <span className="ml-auto text-[11px] font-extrabold px-2.5 py-1 rounded-full bg-[#0b2545] text-white">
+            정답: {String.fromCharCode(65 + problem.correctIndex)}
+          </span>
+        )}
       </div>
 
-      {isTeacherLike && problem.format === "mc" && problem.correctIndex !== null && (
-        <div className="inline-block mb-2 text-[11px] font-bold px-2.5 py-1 rounded-md bg-ink text-white">
-          정답: {String.fromCharCode(65 + problem.correctIndex)}
-        </div>
-      )}
-
-      <p className="text-[14px] leading-[1.75] text-ink mb-3.5 whitespace-pre-wrap">
+      <p className="text-[14.5px] leading-[1.75] text-ink mb-3.5 whitespace-pre-wrap">
         {problem.passage}
       </p>
 
@@ -346,9 +378,10 @@ function LibraryProblemCard({
       )}
 
       {showAnswer && (
-        <div className="bg-grey-100 rounded-lg px-3.5 py-3 text-[13px] text-grey-700 leading-[1.6] mt-3">
-          <b className="text-ink">해설</b>
-          <br />
+        <div className="bg-[#EDF2FB] rounded-[10px] px-4 py-3.5 text-[13px] text-[#1c2f4d] leading-[1.65] mt-3.5">
+          <b className="block text-[11px] uppercase tracking-wide text-[#0b2545] mb-1">
+            해설
+          </b>
           {isTeacherLike ? problem.explanation : revealedExplanation}
         </div>
       )}

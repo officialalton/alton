@@ -23,28 +23,48 @@ export default async function AdminHomePage({
   const { user, supabase } = await requireUser();
   const { tab } = await searchParams;
 
-  const dashboard = await loadAdminDashboard(supabase, user.id);
-  const subjects = await loadSubjectCatalog(supabase);
-  const docs = await loadAllCurriculumDocs(supabase);
-
-  const parents = await loadParents(supabase);
-  const students = await loadStudents(supabase);
-  const teachers = await loadTeachers(supabase);
-  const pendingConsults = await loadPendingConsults(supabase);
-  const familyContracts = await loadFamilyContracts(supabase);
   const devLogContent = loadDevLog();
-  const payouts = await loadPayouts(supabase);
-  const teacherCandidatesBySubject = await loadTeacherCandidatesBySubject(supabase);
 
-  const creditHistoryByStudent: Record<string, Awaited<ReturnType<typeof loadStudentCreditHistory>>> = {};
-  for (const s of students) {
-    creditHistoryByStudent[s.id] = await loadStudentCreditHistory(supabase, s.id);
-  }
+  const [
+    dashboard,
+    subjects,
+    docs,
+    parents,
+    students,
+    teachers,
+    pendingConsults,
+    familyContracts,
+    payouts,
+    teacherCandidatesBySubject,
+  ] = await Promise.all([
+    loadAdminDashboard(supabase, user.id),
+    loadSubjectCatalog(supabase),
+    loadAllCurriculumDocs(supabase),
+    loadParents(supabase),
+    loadStudents(supabase),
+    loadTeachers(supabase),
+    loadPendingConsults(supabase),
+    loadFamilyContracts(supabase),
+    loadPayouts(supabase),
+    loadTeacherCandidatesBySubject(supabase),
+  ]);
 
-  const qcWarningsByTeacher: Record<string, Awaited<ReturnType<typeof loadTeacherQcWarnings>>> = {};
-  for (const t of teachers) {
-    qcWarningsByTeacher[t.id] = await loadTeacherQcWarnings(supabase, t.id);
-  }
+  const [creditHistoryEntries, qcWarningsEntries] = await Promise.all([
+    Promise.all(
+      students.map(async (s) => [s.id, await loadStudentCreditHistory(supabase, s.id)] as const)
+    ),
+    Promise.all(
+      teachers.map(async (t) => [t.id, await loadTeacherQcWarnings(supabase, t.id)] as const)
+    ),
+  ]);
+  const creditHistoryByStudent = Object.fromEntries(creditHistoryEntries) as Record<
+    string,
+    Awaited<ReturnType<typeof loadStudentCreditHistory>>
+  >;
+  const qcWarningsByTeacher = Object.fromEntries(qcWarningsEntries) as Record<
+    string,
+    Awaited<ReturnType<typeof loadTeacherQcWarnings>>
+  >;
 
   return (
     <AdminShell

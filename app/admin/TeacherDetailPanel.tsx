@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { setTeacherStatus, setTeacherCalendlyUrl, setTeacherHourlyRate } from "./users-actions";
 import { assignTeacherSubject, unassignTeacherSubject } from "./teacher-subjects-actions";
 import type { AdminSubject } from "./subject-data";
@@ -24,10 +25,13 @@ export default function TeacherDetailPanel({
   onBack: () => void;
   onUpdated: (patch: Partial<TeacherListItem>) => void;
 }) {
+  const router = useRouter();
   const [status, setStatus] = useState(teacher.status);
+  const [savedStatus, setSavedStatus] = useState(false);
   const [assignedSubjectIds, setAssignedSubjectIds] = useState(teacher.assignedSubjectIds);
   const [subjectError, setSubjectError] = useState<string | null>(null);
   const [togglingSubjectId, setTogglingSubjectId] = useState<string | null>(null);
+  const [savedSubjectId, setSavedSubjectId] = useState<string | null>(null);
   const [calendlyUrl, setCalendlyUrl] = useState(teacher.calendlySchedulingUrl ?? "");
   const [savingUrl, setSavingUrl] = useState(false);
   const [savedUrl, setSavedUrl] = useState(false);
@@ -40,6 +44,7 @@ export default function TeacherDetailPanel({
   async function handleToggleSubject(subjectId: string) {
     if (togglingSubjectId) return;
     setSubjectError(null);
+    setSavedSubjectId(null);
     setTogglingSubjectId(subjectId);
     try {
       if (assignedSubjectIds.includes(subjectId)) {
@@ -53,6 +58,10 @@ export default function TeacherDetailPanel({
         setAssignedSubjectIds(next);
         onUpdated({ assignedSubjectIds: next });
       }
+      setSavedSubjectId(subjectId);
+      // 매칭 탭의 과목별 선생님 후보 목록은 admin/page.tsx 로드 시점에 고정된
+      // props라서, 여기서 서버 데이터를 갱신해줘야 다른 탭에도 반영된다.
+      router.refresh();
     } catch (e) {
       setSubjectError(e instanceof Error ? e.message : "과목 배정 처리에 실패했습니다.");
     } finally {
@@ -62,8 +71,10 @@ export default function TeacherDetailPanel({
 
   async function handleStatusChange(next: string) {
     setStatus(next);
+    setSavedStatus(false);
     await setTeacherStatus(teacher.id, next as "active" | "pending");
     onUpdated({ status: next });
+    setSavedStatus(true);
   }
 
   async function handleSaveCalendlyUrl() {
@@ -117,6 +128,7 @@ export default function TeacherDetailPanel({
             </option>
           ))}
         </select>
+        {savedStatus && <p className="text-[12px] text-green mt-1.5">✓ 저장되었습니다</p>}
       </div>
 
       <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">
@@ -142,6 +154,9 @@ export default function TeacherDetailPanel({
           })}
         </div>
         {subjectError && <p className="text-[12px] text-red">{subjectError}</p>}
+        {!subjectError && savedSubjectId && (
+          <p className="text-[12px] text-green mt-1">✓ 저장되었습니다</p>
+        )}
       </div>
 
       <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">
@@ -160,7 +175,8 @@ export default function TeacherDetailPanel({
         <p className="text-[12px] text-grey-500 mb-2">
           Calendly에서 이 선생님을 팀원으로 초대하고 개인 이벤트 타입을 만든 뒤,
           그 예약 페이지 URL을 여기에 넣으면 학생 포털에서 이 선생님과 직접
-          회차를 예약할 수 있습니다.
+          회차를 예약할 수 있습니다. 이벤트 타입 만들 때 화상 회의 연동을
+          <b> Zoom으로 반드시 설정</b>해주세요(Calendly 기본값은 Google Meet).
         </p>
         <div className="flex gap-2">
           <input

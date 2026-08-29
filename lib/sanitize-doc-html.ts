@@ -78,6 +78,7 @@ export function sanitizeDocHtml(html: string): string {
         padding: [LENGTH_PATTERN],
         margin: [LENGTH_PATTERN],
         width: [LENGTH_PATTERN],
+        "border-radius": [LENGTH_PATTERN],
       },
     },
   });

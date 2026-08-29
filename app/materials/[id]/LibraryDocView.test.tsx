@@ -18,6 +18,7 @@ const doc: LibraryDocDetail = {
       id: "sec1",
       title: "Lesson Overview",
       body: "<p>판별식을 이용하면 실근의 개수를 알 수 있습니다.</p>",
+      teachingTip: null,
       problems: [
         {
           id: "p1",

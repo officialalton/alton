@@ -31,6 +31,7 @@ export type LibrarySection = {
   id: string;
   title: string;
   body: string;
+  teachingTip: string | null;
   problems: LibraryProblem[];
 };
 
@@ -112,7 +113,7 @@ export async function loadLibraryDoc(
 
   const { data: sections } = await supabase
     .from("curriculum_doc_sections")
-    .select("id, position, title, body")
+    .select("id, position, title, body, teaching_tip")
     .eq("curriculum_doc_id", docId)
     .order("position", { ascending: true });
 
@@ -179,6 +180,7 @@ export async function loadLibraryDoc(
       id: s.id,
       title: s.title,
       body: s.body ?? "",
+      teachingTip: s.teaching_tip,
       problems: problemsBySection.get(s.id) ?? [],
     })),
   };
