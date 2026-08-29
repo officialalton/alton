@@ -21,6 +21,10 @@ export type LibraryProblem = {
   explanation: string;
   difficulty: string | null;
   skillType: string | null;
+  priorWrongCount: number;
+  correct: boolean | null;
+  done: boolean;
+  submittedResponse: string | null;
 };
 
 export type LibrarySection = {
@@ -95,7 +99,8 @@ export async function loadMaterialsLibrary(
 
 export async function loadLibraryDoc(
   supabase: SupabaseClient,
-  docId: string
+  docId: string,
+  studentId: string | null
 ): Promise<LibraryDocDetail | null> {
   const { data: doc } = await supabase
     .from("curriculum_docs")
@@ -122,10 +127,28 @@ export async function loadLibraryDoc(
         .eq("status", "confirmed")
     : { data: [] as never[] };
 
-  const problemsBySection = new Map<string, LibraryProblem[]>();
-  for (const p of problems ?? []) {
-    const list = problemsBySection.get(p.section_id) ?? [];
-    list.push({
+  const problemIds = (problems ?? []).map((p) => p.id);
+
+  const { data: attempts } = studentId && problemIds.length
+    ? await supabase
+        .from("session_problem_attempts")
+        .select("problem_id, correct, response")
+        .is("session_id", null)
+        .eq("student_id", studentId)
+        .in("problem_id", problemIds)
+    : { data: [] as { problem_id: string; correct: boolean | null; response: unknown }[] };
+
+  function buildProblem(p: NonNullable<typeof problems>[number]): LibraryProblem {
+    const attemptsForProblem = (attempts ?? []).filter(
+      (a) => a.problem_id === p.id
+    );
+    const wrongCount = attemptsForProblem.filter((a) => a.correct === false).length;
+    const correctAttempt = attemptsForProblem.find((a) => a.correct === true);
+    const correct = correctAttempt ? true : wrongCount >= 3 ? false : null;
+    const done = correct !== null;
+    const lastResponse = attemptsForProblem.at(-1)?.response ?? null;
+
+    return {
       id: p.id,
       format: p.format,
       passage: p.passage,
@@ -134,9 +157,20 @@ export async function loadLibraryDoc(
       explanation: p.explanation,
       difficulty: p.difficulty,
       skillType: p.skill_type,
-    });
-    problemsBySection.set(p.section_id, list);
+      priorWrongCount: wrongCount,
+      correct,
+      done,
+      submittedResponse:
+        p.format !== "mc" && typeof lastResponse === "string" ? lastResponse : null,
+    };
   }
+
+  const problemsBySection = new Map<string, LibraryProblem[]>();
+  (problems ?? []).forEach((p) => {
+    const list = problemsBySection.get(p.section_id) ?? [];
+    list.push(buildProblem(p));
+    problemsBySection.set(p.section_id, list);
+  });
 
   return {
     id: doc.id,
