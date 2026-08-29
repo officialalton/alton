@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type Dispatch, type SetStateAction } from "react";
 import { createCurriculumDoc } from "./curriculum-doc-actions";
 import CurriculumDocEditor from "./CurriculumDocEditor";
 import type { DocEditorData } from "./curriculum-doc-data";
@@ -14,20 +14,25 @@ const STATUS_LABEL: Record<string, string> = {
 };
 
 export default function CurriculumDocsTab({
-  initialDocs,
+  docs,
+  setDocs,
   subjects,
 }: {
-  initialDocs: DocEditorData[];
+  docs: DocEditorData[];
+  setDocs: Dispatch<SetStateAction<DocEditorData[]>>;
   subjects: AdminSubject[];
 }) {
-  const [docs, setDocs] = useState(initialDocs);
   const [openDocId, setOpenDocId] = useState<string | null>(null);
   const [creating, setCreating] = useState(false);
 
   const open = docs.find((d) => d.id === openDocId);
 
-  function handleBackFromEditor(updated: DocEditorData) {
+  function handleDocChanged(updated: DocEditorData) {
     setDocs((prev) => prev.map((d) => (d.id === updated.id ? updated : d)));
+  }
+
+  function handleBackFromEditor(updated: DocEditorData) {
+    handleDocChanged(updated);
     setOpenDocId(null);
   }
 
@@ -44,7 +49,12 @@ export default function CurriculumDocsTab({
 
   if (open) {
     return (
-      <CurriculumDocEditor doc={open} onBack={handleBackFromEditor} onDeleted={handleDocDeleted} />
+      <CurriculumDocEditor
+        doc={open}
+        onBack={handleBackFromEditor}
+        onDeleted={handleDocDeleted}
+        onDocChange={handleDocChanged}
+      />
     );
   }
 

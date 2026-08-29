@@ -18,13 +18,14 @@ type SubtabId = (typeof SUBTABS)[number]["id"];
 
 export default function CatalogTab({
   subjects: initialSubjects,
-  docs,
+  docs: initialDocs,
 }: {
   subjects: AdminSubject[];
   docs: DocEditorData[];
 }) {
   const [subtab, setSubtab] = useState<SubtabId>("subjects");
   const [subjects, setSubjects] = useState(initialSubjects);
+  const [docs, setDocs] = useState(initialDocs);
 
   return (
     <div>
@@ -48,7 +49,7 @@ export default function CatalogTab({
       {subtab === "subjects" ? (
         <SubjectTemplateTab subjects={subjects} setSubjects={setSubjects} />
       ) : subtab === "docs" ? (
-        <CurriculumDocsTab initialDocs={docs} subjects={subjects} />
+        <CurriculumDocsTab docs={docs} setDocs={setDocs} subjects={subjects} />
       ) : subtab === "materials" ? (
         <MaterialsLibraryTab docs={docs} />
       ) : (

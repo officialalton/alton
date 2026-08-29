@@ -30,10 +30,17 @@ export default function CurriculumDocEditor({
   doc,
   onBack,
   onDeleted,
+  onDocChange,
 }: {
   doc: DocEditorData;
   onBack: (updated: DocEditorData) => void;
   onDeleted: (docId: string) => void;
+  // 목록/라이브러리 화면이 별도의 lifted state로 doc 목록을 들고 있는데,
+  // "뒤로"를 누르기 전에 다른 서브탭으로 이동하면(예: 배포 취소 직후 바로
+  // 교재 라이브러리 탭 클릭) 그 목록이 갱신될 기회가 없어 방금 바꾼 상태가
+  // 반영 안 된 것처럼 보였다 — 의미 있는 변경이 생길 때마다 즉시 알려서
+  // "뒤로"를 누르지 않아도 부모 상태가 최신으로 유지되게 한다.
+  onDocChange?: (updated: DocEditorData) => void;
 }) {
   const [title, setTitle] = useState(doc.title);
   const [status, setStatus] = useState(doc.status);
@@ -52,6 +59,7 @@ export default function CurriculumDocEditor({
     if (!value.trim() || value === title) return;
     setTitle(value);
     await updateDocTitle(doc.id, value);
+    onDocChange?.({ ...doc, title: value, status, sections });
   }
 
   async function handleTogglePublish() {
@@ -60,6 +68,7 @@ export default function CurriculumDocEditor({
       const next = status === "published" ? "draft" : "published";
       await setDocPublished(doc.id, next === "published");
       setStatus(next);
+      onDocChange?.({ ...doc, title, status: next, sections });
     } finally {
       setPublishing(false);
     }
@@ -69,8 +78,10 @@ export default function CurriculumDocEditor({
     const nextPosition =
       sections.length === 0 ? 1 : Math.max(...sections.map((s) => s.position)) + 1;
     const section = await addSection(doc.id, nextPosition, sectionType);
-    setSections((prev) => [...prev, section]);
+    const nextSections = [...sections, section];
+    setSections(nextSections);
     setPickingSectionType(false);
+    onDocChange?.({ ...doc, title, status, sections: nextSections });
   }
 
   async function handleDelete() {
@@ -95,7 +106,9 @@ export default function CurriculumDocEditor({
 
   async function handleRemoveSection(sectionId: string) {
     await removeSection(sectionId);
-    setSections((prev) => prev.filter((s) => s.id !== sectionId));
+    const nextSections = sections.filter((s) => s.id !== sectionId);
+    setSections(nextSections);
+    onDocChange?.({ ...doc, title, status, sections: nextSections });
   }
 
   async function handleMoveSection(index: number, direction: -1 | 1) {

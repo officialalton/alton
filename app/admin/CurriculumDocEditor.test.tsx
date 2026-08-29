@@ -58,6 +58,18 @@ describe("CurriculumDocEditor", () => {
     await waitFor(() => expect(screen.getByText("배포 취소(초안으로)")).toBeInTheDocument());
   });
 
+  it("배포 상태를 바꾸면 '뒤로'를 누르지 않아도 즉시 onDocChange로 부모에 알린다", async () => {
+    vi.mocked(docActions.setDocPublished).mockResolvedValue(undefined);
+    const onDocChange = vi.fn();
+    render(
+      <CurriculumDocEditor doc={doc} onBack={vi.fn()} onDeleted={vi.fn()} onDocChange={onDocChange} />
+    );
+    fireEvent.click(screen.getByText("배포하기"));
+    await waitFor(() =>
+      expect(onDocChange).toHaveBeenCalledWith(expect.objectContaining({ status: "published" }))
+    );
+  });
+
   it("섹션 추가 시 타입을 먼저 선택해야 한다", async () => {
     vi.mocked(docActions.addSection).mockResolvedValue({
       id: "sec2",
