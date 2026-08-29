@@ -34,6 +34,7 @@ export default function CurriculumDocEditor({
   const [status, setStatus] = useState(doc.status);
   const [sections, setSections] = useState(doc.sections);
   const [publishing, setPublishing] = useState(false);
+  const [pickingSectionType, setPickingSectionType] = useState(false);
 
   function handleBack() {
     onBack({ ...doc, title, status, sections });
@@ -56,11 +57,12 @@ export default function CurriculumDocEditor({
     }
   }
 
-  async function handleAddSection() {
+  async function handleAddSection(sectionType: "concept" | "problem") {
     const nextPosition =
       sections.length === 0 ? 1 : Math.max(...sections.map((s) => s.position)) + 1;
-    const section = await addSection(doc.id, nextPosition);
+    const section = await addSection(doc.id, nextPosition, sectionType);
     setSections((prev) => [...prev, section]);
+    setPickingSectionType(false);
   }
 
   function patchSection(sectionId: string, patch: Partial<DocSection>) {
@@ -131,12 +133,35 @@ export default function CurriculumDocEditor({
         />
       ))}
 
-      <button
-        onClick={handleAddSection}
-        className="text-[12.5px] font-bold px-4 py-2.5 rounded-lg border-[1.5px] border-grey-200 text-ink w-full"
-      >
-        + 섹션 추가
-      </button>
+      {pickingSectionType ? (
+        <div className="flex gap-3">
+          <button
+            onClick={() => handleAddSection("concept")}
+            className="flex-1 text-[12.5px] font-bold px-4 py-2.5 rounded-lg border-[1.5px] border-grey-200 text-ink"
+          >
+            개념 설명 섹션
+          </button>
+          <button
+            onClick={() => handleAddSection("problem")}
+            className="flex-1 text-[12.5px] font-bold px-4 py-2.5 rounded-lg border-[1.5px] border-grey-200 text-ink"
+          >
+            문제 생성 섹션
+          </button>
+          <button
+            onClick={() => setPickingSectionType(false)}
+            className="text-[12.5px] font-semibold text-grey-500 px-2"
+          >
+            취소
+          </button>
+        </div>
+      ) : (
+        <button
+          onClick={() => setPickingSectionType(true)}
+          className="text-[12.5px] font-bold px-4 py-2.5 rounded-lg border-[1.5px] border-grey-200 text-ink w-full"
+        >
+          + 섹션 추가
+        </button>
+      )}
     </div>
   );
 }
@@ -163,7 +188,9 @@ function SectionEditor({
   onMove: (direction: -1 | 1) => void;
 }) {
   const [problems, setProblems] = useState(section.problems);
-  const [showProblemForm, setShowProblemForm] = useState(false);
+  const [showProblemForm, setShowProblemForm] = useState(
+    section.sectionType === "problem" && section.problems.length === 0
+  );
 
   function commitProblems(next: DocProblem[]) {
     setProblems(next);
@@ -205,36 +232,44 @@ function SectionEditor({
         </button>
       </div>
 
-      <div className="mb-3">
-        <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-1">
-          본문
-        </div>
-        <RichTextEditable
-          initialHtml={section.body}
-          placeholder="섹션 본문을 작성하세요"
-          onChange={(html) => {
-            onPatch({ body: html });
-            updateSection(section.id, { body: html });
-          }}
-        />
-      </div>
+      {section.sectionType === "concept" && (
+        <>
+          <div className="mb-3">
+            <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-1">
+              본문
+            </div>
+            <RichTextEditable
+              initialHtml={section.body}
+              placeholder="섹션 본문을 작성하세요"
+              onChange={(html) => {
+                onPatch({ body: html });
+                updateSection(section.id, { body: html });
+              }}
+            />
+          </div>
 
-      <div className="mb-4">
-        <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-1">
-          티칭 팁 (선생님 전용)
-        </div>
-        <RichTextEditable
-          initialHtml={section.teachingTip ?? ""}
-          placeholder="이 섹션을 가르칠 때 선생님에게 도움이 될 팁"
-          minHeight="60px"
-          onChange={(html) => {
-            onPatch({ teachingTip: html });
-            updateSection(section.id, { teachingTip: html });
-          }}
-        />
-      </div>
+          <div className="mb-4">
+            <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-1">
+              티칭 팁 (선생님 전용)
+            </div>
+            <RichTextEditable
+              initialHtml={section.teachingTip ?? ""}
+              placeholder="이 섹션을 가르칠 때 선생님에게 도움이 될 팁"
+              minHeight="60px"
+              onChange={(html) => {
+                onPatch({ teachingTip: html });
+                updateSection(section.id, { teachingTip: html });
+              }}
+            />
+          </div>
+        </>
+      )}
 
-      <div className="border-t border-grey-200 pt-3">
+      <div
+        className={
+          section.sectionType === "concept" ? "border-t border-grey-200 pt-3" : ""
+        }
+      >
         <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2">
           문제 ({problems.length})
         </div>

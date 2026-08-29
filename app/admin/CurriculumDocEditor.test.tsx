@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor, within } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import CurriculumDocEditor from "./CurriculumDocEditor";
 import * as docActions from "./curriculum-doc-actions";
@@ -32,6 +32,7 @@ const doc: DocEditorData = {
       title: "Lesson Overview",
       body: "<p>본문</p>",
       teachingTip: null,
+      sectionType: "concept",
       problems: [],
     },
   ],
@@ -55,19 +56,49 @@ describe("CurriculumDocEditor", () => {
     await waitFor(() => expect(screen.getByText("배포 취소(초안으로)")).toBeInTheDocument());
   });
 
-  it("섹션을 추가할 수 있다", async () => {
+  it("섹션 추가 시 타입을 먼저 선택해야 한다", async () => {
     vi.mocked(docActions.addSection).mockResolvedValue({
       id: "sec2",
       position: 2,
       title: "새 섹션",
       body: "",
       teachingTip: null,
+      sectionType: "concept",
       problems: [],
     });
     render(<CurriculumDocEditor doc={doc} onBack={vi.fn()} />);
     fireEvent.click(screen.getByText("+ 섹션 추가"));
-    await waitFor(() => expect(docActions.addSection).toHaveBeenCalledWith("doc1", 2));
+    expect(screen.getByText("개념 설명 섹션")).toBeInTheDocument();
+    expect(screen.getByText("문제 생성 섹션")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText("개념 설명 섹션"));
+    await waitFor(() =>
+      expect(docActions.addSection).toHaveBeenCalledWith("doc1", 2, "concept")
+    );
     await waitFor(() => expect(screen.getByDisplayValue("새 섹션")).toBeInTheDocument());
+  });
+
+  it("문제 생성 섹션은 본문/티칭팁 없이 문제 목록만 보여준다", async () => {
+    vi.mocked(docActions.addSection).mockResolvedValue({
+      id: "sec3",
+      position: 2,
+      title: "새 섹션",
+      body: "",
+      teachingTip: null,
+      sectionType: "problem",
+      problems: [],
+    });
+    render(<CurriculumDocEditor doc={doc} onBack={vi.fn()} />);
+    fireEvent.click(screen.getByText("+ 섹션 추가"));
+    fireEvent.click(screen.getByText("문제 생성 섹션"));
+    await waitFor(() =>
+      expect(docActions.addSection).toHaveBeenCalledWith("doc1", 2, "problem")
+    );
+    await waitFor(() => expect(screen.getByDisplayValue("새 섹션")).toBeInTheDocument());
+    const newSectionTitleInput = screen.getByDisplayValue("새 섹션");
+    const newSectionEl = newSectionTitleInput.parentElement!.parentElement!;
+    expect(within(newSectionEl).queryByText("본문")).not.toBeInTheDocument();
+    expect(within(newSectionEl).queryByText("티칭 팁 (선생님 전용)")).not.toBeInTheDocument();
   });
 
   it("뒤로가기 시 현재 상태를 그대로 부모에 전달한다", () => {
