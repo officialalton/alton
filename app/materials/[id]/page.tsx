@@ -1,6 +1,7 @@
 import { requireUser } from "@/lib/auth";
 import { loadLibraryDoc } from "@/app/student/materials-data";
 import LibraryDocView from "./LibraryDocView";
+import type { SessionViewViewer } from "@/lib/session-view";
 
 export default async function MaterialsLibraryPage({
   params,
@@ -8,8 +9,12 @@ export default async function MaterialsLibraryPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const { supabase } = await requireUser();
-  const doc = await loadLibraryDoc(supabase, id);
+  const { user, profile, supabase } = await requireUser();
+
+  const role = (profile?.role ?? "parent") as SessionViewViewer;
+  const studentId = role === "student" ? user.id : null;
+
+  const doc = await loadLibraryDoc(supabase, id, studentId);
 
   if (!doc) {
     return (
@@ -21,5 +26,5 @@ export default async function MaterialsLibraryPage({
     );
   }
 
-  return <LibraryDocView doc={doc} />;
+  return <LibraryDocView doc={doc} viewerRole={role} studentId={studentId} />;
 }
