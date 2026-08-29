@@ -1,15 +1,15 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-const generatePayoutsMock = vi.fn();
+const generatePayoutsAsCronMock = vi.fn();
 vi.mock("@/app/admin/payouts-actions", () => ({
-  generatePayouts: generatePayoutsMock,
+  generatePayoutsAsCron: generatePayoutsAsCronMock,
 }));
 
 describe("GET /api/cron/generate-payouts", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     process.env.CRON_SECRET = "test-secret";
-    generatePayoutsMock.mockResolvedValue({ created: 3, skippedNoRate: [] });
+    generatePayoutsAsCronMock.mockResolvedValue({ created: 3, skippedNoRate: [] });
   });
 
   afterEach(() => {
@@ -24,7 +24,7 @@ describe("GET /api/cron/generate-payouts", () => {
 
     const res = await GET(request);
     expect(res.status).toBe(200);
-    expect(generatePayoutsMock).toHaveBeenCalled();
+    expect(generatePayoutsAsCronMock).toHaveBeenCalled();
   });
 
   it("CRON_SECRET이 틀리면 401을 반환하고 실행하지 않는다", async () => {
@@ -35,6 +35,6 @@ describe("GET /api/cron/generate-payouts", () => {
 
     const res = await GET(request);
     expect(res.status).toBe(401);
-    expect(generatePayoutsMock).not.toHaveBeenCalled();
+    expect(generatePayoutsAsCronMock).not.toHaveBeenCalled();
   });
 });

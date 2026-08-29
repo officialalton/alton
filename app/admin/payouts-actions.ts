@@ -17,12 +17,10 @@ async function loadEmailById(admin: ReturnType<typeof createAdminClient>, userId
   return data.user?.email ?? null;
 }
 
-export async function generatePayouts(
+async function runGeneratePayouts(
+  admin: ReturnType<typeof createAdminClient>,
   period: PayoutPeriod
 ): Promise<{ created: number; skippedNoRate: MissingRatePayoutSkip[] }> {
-  await requireAdmin();
-  const admin = createAdminClient();
-
   const { amounts, skipped } = await computePayoutAmounts(admin, period);
 
   let created = 0;
@@ -47,6 +45,26 @@ export async function generatePayouts(
   }
 
   return { created, skippedNoRate: skipped };
+}
+
+// UI(관리자 화면)에서 호출: 로그인 세션 기반으로 관리자 권한을 확인한다.
+export async function generatePayouts(
+  period: PayoutPeriod
+): Promise<{ created: number; skippedNoRate: MissingRatePayoutSkip[] }> {
+  await requireAdmin();
+  const admin = createAdminClient();
+  return runGeneratePayouts(admin, period);
+}
+
+// Vercel Cron에서만 호출: 요청 자체가 CRON_SECRET 헤더로 이미 인증되어 있으므로
+// (app/api/cron/generate-payouts/route.ts 참고) 로그인 세션이 없어도 동작해야 한다.
+// requireAdmin()은 브라우저 세션 쿠키에 의존하므로 여기서는 쓸 수 없고, 대신
+// service_role 권한의 admin 클라이언트로 직접 실행한다.
+export async function generatePayoutsAsCron(
+  period: PayoutPeriod
+): Promise<{ created: number; skippedNoRate: MissingRatePayoutSkip[] }> {
+  const admin = createAdminClient();
+  return runGeneratePayouts(admin, period);
 }
 
 export async function markPayoutPaid(id: string): Promise<void> {

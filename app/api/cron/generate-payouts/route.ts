@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { generatePayouts } from "@/app/admin/payouts-actions";
+import { generatePayoutsAsCron } from "@/app/admin/payouts-actions";
 import { previousMonthRange } from "@/app/admin/payouts-data";
 
 export async function GET(request: Request) {
@@ -9,6 +9,6 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
 
-  const result = await generatePayouts(previousMonthRange(new Date()));
+  const result = await generatePayoutsAsCron(previousMonthRange(new Date()));
   return NextResponse.json({ ok: true, ...result });
 }
