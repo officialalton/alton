@@ -80,7 +80,7 @@
 ## Phase 9 — 관리자 미착수 탭 + 확장 (2026-08-29 추가)
 
 - [ ] **082-realtime-scratchpad**: 연습장 실시간 공동 문서 (진행 중 — 계획서 `docs/superpowers/plans/2026-08-29-realtime-scratchpad.md` 참고, 기존 "Docs" 서브탭의 외부 Google Docs 링크 붙여넣기를 자체 구현 실시간 텍스트 공동 편집으로 완전히 교체)
-- [ ] **083-admin-matching**: 관리자 "매칭" 탭 정책 결정 + 구현. Airtable을 계속 쓸지, 우리 앱으로 가져올지부터 결정 필요(functional-spec.md엔 원래 Airtable로 명시돼 있었음)
+- [x] **083-admin-matching**: 관리자 "매칭" 탭 (Airtable 대신 인앱 구현 결정. `students.status='pending'` 학생을 과목별로 `teacher_curriculum_templates`에 그 과목을 등록한 active 선생님과 매칭 — `enrollments` 생성 + 학생 상태를 `active`로 전환. 총 회차 수는 관리자가 직접 입력(계약 데이터에 회차 정보가 없음). 새 마이그레이션 불필요(기존 RLS로 충분). 2026-08-29)
 - [ ] **084-admin-qc-tab**: 관리자 "QC" 탭 화면 기획 + 구현. `teacher_qc_warnings` 데이터는 이미 있고(대시보드 카드로만 노출 중), 전용 탭 화면이 없음
 - [ ] **085-admin-consult-tab**: 관리자 "상담" 탭 화면 기획 + 구현. `consult_requests`는 이미 있고(대시보드 카드로만 노출 중), 상담 신청 건을 개별로 열어보는 상세 화면이 없음
 - [x] **086-admin-payouts-tab**: 관리자 "정산" 탭 (2026-08-29: Wise 자동 송금은 제외, 시급×완료 수업시간 계산 + 관리자 수기 완료/완료취소 처리로 구현. `teachers.hourly_rate_krw` 신설, 선생님 초대 시 필수 입력으로 변경(`inviteTeacher`), 기존 선생님은 `TeacherDetailPanel`에서 백필. 정산 금액은 `sessions.status='completed'`인 세션들의 `duration_minutes`(Calendly 예약 당시 고정된 값 — 실제 진행 시간과 무관) 합계 × 시급으로 계산(`computePayoutAmounts`). 매달 1일 0시 Vercel Cron(`/api/cron/generate-payouts`, `CRON_SECRET`으로 인증)이 전월분을 전체 선생님에 대해 자동 생성, 관리자가 정산 탭에서 날짜 범위를 지정해 수동 생성도 가능(선생님·기간 조합 중복 시 스킵). `teacher_payouts.status`는 스키마상 3단계(pending/approved/paid)지만 이번 스코프는 pending↔paid 2단계만 사용(수기 송금은 승인 누르는 시점에 이미 끝나 있으므로 approved 불필요). 개별/전체 승인 시 `paid` 전환 + 선생님에게 완료 이메일 발송(기존 073 SMTP 재사용), 완료 취소 시 알림 없이 pending 복귀. 유닛 테스트 다수 신규(계산 함수, 생성/승인/취소 액션, cron 인증, `PayoutsTab` UI), 전체 테스트 통과, tsc 클린.)

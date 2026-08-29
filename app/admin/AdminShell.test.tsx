@@ -56,6 +56,7 @@ const baseProps = {
   familyContracts: [],
   devLogContent: "## Phase 1\n- [x] 완료된 항목\n- [ ] 남은 항목\n",
   payouts: [],
+  teacherCandidatesBySubject: {},
 };
 
 describe("AdminShell", () => {
@@ -83,10 +84,10 @@ describe("AdminShell", () => {
     expect(screen.getByText("학부모")).toBeInTheDocument();
   });
 
-  it("아직 구현 안 된 탭을 누르면 준비 중 문구를 보여준다", () => {
+  it("매칭 탭을 누르면 MatchingTab이 렌더링된다", () => {
     render(<AdminShell {...baseProps} />);
     fireEvent.click(screen.getByText("매칭"));
-    expect(screen.getByText("매칭 탭은 준비 중입니다.")).toBeInTheDocument();
+    expect(screen.getByText("매칭 대기 중인 학생이 없습니다.")).toBeInTheDocument();
   });
 
   it("계정 메뉴를 열면 홈으로/로그아웃 버튼이 보인다", () => {

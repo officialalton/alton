@@ -12,6 +12,7 @@ import {
 import { loadPendingConsults, loadFamilyContracts } from "./contracts-data";
 import { loadDevLog } from "./dev-log-data";
 import { loadPayouts } from "./payouts-data";
+import { loadTeacherCandidatesBySubject } from "./matching-data";
 import AdminShell from "./AdminShell";
 
 export default async function AdminHomePage({
@@ -33,6 +34,7 @@ export default async function AdminHomePage({
   const familyContracts = await loadFamilyContracts(supabase);
   const devLogContent = loadDevLog();
   const payouts = await loadPayouts(supabase);
+  const teacherCandidatesBySubject = await loadTeacherCandidatesBySubject(supabase);
 
   const creditHistoryByStudent: Record<string, Awaited<ReturnType<typeof loadStudentCreditHistory>>> = {};
   for (const s of students) {
@@ -59,6 +61,7 @@ export default async function AdminHomePage({
       familyContracts={familyContracts}
       devLogContent={devLogContent}
       payouts={payouts}
+      teacherCandidatesBySubject={teacherCandidatesBySubject}
     />
   );
 }

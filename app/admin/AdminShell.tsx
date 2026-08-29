@@ -13,6 +13,8 @@ import type { FamilyContract, PendingConsult } from "./contracts-data";
 import DevLogTab from "./DevLogTab";
 import PayoutsTab from "./PayoutsTab";
 import type { PayoutListItem } from "./payouts-data";
+import MatchingTab from "./MatchingTab";
+import type { MatchingTeacherCandidate } from "./matching-data";
 import type { AdminSubject } from "./subject-data";
 import type { DocEditorData } from "./curriculum-doc-data";
 import type {
@@ -53,6 +55,7 @@ export default function AdminShell({
   familyContracts,
   devLogContent,
   payouts,
+  teacherCandidatesBySubject,
 }: {
   initialTab?: string;
   dashboard: AdminDashboardData;
@@ -67,6 +70,7 @@ export default function AdminShell({
   familyContracts: FamilyContract[];
   devLogContent: string;
   payouts: PayoutListItem[];
+  teacherCandidatesBySubject: Record<string, MatchingTeacherCandidate[]>;
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -154,6 +158,12 @@ export default function AdminShell({
             <DevLogTab content={devLogContent} />
           ) : activeTab === "payouts" ? (
             <PayoutsTab initialPayouts={payouts} />
+          ) : activeTab === "matching" ? (
+            <MatchingTab
+              students={students}
+              subjects={subjects}
+              teacherCandidatesBySubject={teacherCandidatesBySubject}
+            />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.
