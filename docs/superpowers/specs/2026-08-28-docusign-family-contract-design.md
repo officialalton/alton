@@ -64,7 +64,7 @@ DocuSign 콘솔에 별도 템플릿을 만들지 않는다. 계약서 전문을 
 
 - DocuSign 발송(`createEnvelope`) 실패 시: 이미 만든 초대 계정은 롤백하지 않는다(계정 자체는 무해하고, 관리자가 나중에 재시도하면 됨). 대신 `contracts` 행을 아직 만들지 않은 시점에 실패하게 해서 재시도 가능한 상태로 남긴다.
 - 웹훅이 모르는 `envelope_id`를 받으면 조용히 200 응답 + 로그만 남기고 무시(재시도 폭주 방지).
-- 웹훅 서명 검증(HMAC, DocuSign Connect의 `X-DocuSign-Signature-1`)은 환경변수(`DOCUSIGN_WEBHOOK_HMAC_KEY`) 설정 시에만 활성화 — 070(Calendly) 웹훅과 동일한 패턴.
+- **구현 중 변경**: 원래 계획한 HMAC(`X-DocuSign-Signature-1`) 방식 대신, 봉투를 만들 때 우리가 직접 발급한 비밀 토큰을 웹훅 URL 쿼리스트링(`?token=...`)에 실어 보내고 수신 시 그 값을 비교하는 방식으로 구현했다. per-envelope `eventNotification`(Task 4)만으로 웹훅을 등록할 수 있어 계정 레벨 DocuSign Connect 설정이 필요 없다는 장점 때문에 선택했는데, 대신 진짜 HMAC보다 보안 강도가 약하다(쿼리스트링은 프록시/액세스 로그에 남을 수 있음). `DOCUSIGN_WEBHOOK_TOKEN` 환경변수가 설정된 경우에만 검증하는 것도 실수로 안 걸어도 최초 배포는 되게 하려던 의도였는데, 리뷰에서 지적된 대로 이러면 배포 설정 실수 시 인증이 통째로 열려버리는 위험이 있어 **미설정 시 요청을 거부하도록 수정**했다(fail-closed).
 
 ## 테스트
 
