@@ -65,13 +65,20 @@ export async function setDocPublished(docId: string, published: boolean): Promis
 
 export async function addSection(
   docId: string,
-  nextPosition: number
+  nextPosition: number,
+  sectionType: "concept" | "problem"
 ): Promise<DocSection> {
   const { supabase } = await requireAdmin();
   const { data, error } = await supabase
     .from("curriculum_doc_sections")
-    .insert({ curriculum_doc_id: docId, position: nextPosition, title: "새 섹션", body: "" })
-    .select("id, position, title, body, teaching_tip")
+    .insert({
+      curriculum_doc_id: docId,
+      position: nextPosition,
+      title: "새 섹션",
+      body: "",
+      section_type: sectionType,
+    })
+    .select("id, position, title, body, teaching_tip, section_type")
     .single();
   if (error) throw new Error(error.message);
   return {
@@ -80,6 +87,7 @@ export async function addSection(
     title: data.title,
     body: data.body ?? "",
     teachingTip: data.teaching_tip,
+    sectionType: data.section_type,
     problems: [],
   };
 }
@@ -173,7 +181,7 @@ export async function generateSectionProblems(params: {
                   options: {
                     type: "array",
                     items: { type: "string" },
-                    description: "객관식일 때만 4개의 선택지",
+                    description: "객관식일 때만 정확히 5개의 선택지",
                   },
                   correct_index: {
                     type: "number",
@@ -202,7 +210,7 @@ export async function generateSectionProblems(params: {
 - 문제 유형(스킬): ${skillType}
 - 난이도: ${difficulty === "easy" ? "쉬움" : difficulty === "medium" ? "보통" : "어려움"}
 - 답안 형식: ${FORMAT_LABEL[format]}
-${format === "mc" ? "객관식은 반드시 선택지 4개와 정답 인덱스를 포함해주세요." : ""}
+${format === "mc" ? "객관식은 반드시 선택지 5개와 정답 인덱스를 포함해주세요." : ""}
 이 문제들은 특정 학생이 아니라 이 교재를 배정받는 어떤 학생에게도 재사용될 문제
 은행에 들어갑니다. 실전 SAT/AP 시험에 나올 법한 퀄리티로 만들어주세요.`,
       },
@@ -232,6 +240,94 @@ ${format === "mc" ? "객관식은 반드시 선택지 4개와 정답 인덱스�
     explanation: p.explanation,
     difficulty,
   }));
+}
+
+export async function regenerateProblem(params: {
+  sectionTitle: string;
+  subjectName: string;
+  skillType: string;
+  difficulty: ProblemDifficulty;
+  format: ProblemFormat;
+  current: Omit<DocProblem, "id">;
+  feedback: string;
+}): Promise<Omit<DocProblem, "id">> {
+  await requireAdmin();
+  const { sectionTitle, subjectName, skillType, difficulty, format, current, feedback } = params;
+
+  const message = await anthropic.messages.create({
+    model: "claude-sonnet-5",
+    max_tokens: 2000,
+    tools: [
+      {
+        name: "regenerate_problem",
+        description: "기존 문제 초안을 선생님 피드백에 맞춰 수정한 새 버전을 생성한다.",
+        input_schema: {
+          type: "object",
+          properties: {
+            passage: { type: "string", description: "문제 지문" },
+            options: {
+              type: "array",
+              items: { type: "string" },
+              description: "객관식일 때만 정확히 5개의 선택지",
+            },
+            correct_index: {
+              type: "number",
+              description: "객관식일 때만, 정답 선택지의 0-based 인덱스",
+            },
+            explanation: {
+              type: "string",
+              description: format === "mc" ? "정답 해설" : "모범 답안 또는 풀이 과정",
+            },
+          },
+          required: ["passage", "explanation"],
+        },
+      },
+    ],
+    tool_choice: { type: "tool", name: "regenerate_problem" },
+    messages: [
+      {
+        role: "user",
+        content: `아래 문제 초안을 선생님 피드백에 맞춰 수정해주세요.
+- 과목: ${subjectName}
+- 교재 섹션: ${sectionTitle}
+- 문제 유형(스킬): ${skillType}
+- 난이도: ${difficulty === "easy" ? "쉬움" : difficulty === "medium" ? "보통" : "어려움"}
+- 답안 형식: ${FORMAT_LABEL[format]}
+
+현재 초안:
+지문: ${current.passage}
+${current.options ? `선택지: ${current.options.join(" / ")}` : ""}
+${current.correctIndex !== null ? `정답 인덱스: ${current.correctIndex}` : ""}
+해설/모범답안: ${current.explanation}
+
+선생님 피드백: ${feedback}
+
+이 피드백을 반영해 문제를 다시 작성해주세요.${
+          format === "mc" ? " 객관식은 반드시 선택지 5개와 정답 인덱스를 포함해주세요." : ""
+        }`,
+      },
+    ],
+  });
+
+  const toolUse = message.content.find((c) => c.type === "tool_use");
+  if (!toolUse || toolUse.type !== "tool_use") {
+    throw new Error("AI 응답을 처리할 수 없습니다.");
+  }
+  const raw = toolUse.input as {
+    passage: string;
+    options?: string[];
+    correct_index?: number;
+    explanation: string;
+  };
+
+  return {
+    format,
+    passage: raw.passage,
+    options: format === "mc" ? raw.options ?? null : null,
+    correctIndex: format === "mc" ? raw.correct_index ?? null : null,
+    explanation: raw.explanation,
+    difficulty,
+  };
 }
 
 export async function confirmSectionProblems(
@@ -276,5 +372,21 @@ export async function confirmSectionProblems(
 export async function removeSectionProblem(problemId: string): Promise<void> {
   const { supabase } = await requireAdmin();
   const { error } = await supabase.from("problems").delete().eq("id", problemId);
+  if (error) throw new Error(error.message);
+}
+
+export async function deleteCurriculumDoc(docId: string): Promise<void> {
+  const { supabase } = await requireAdmin();
+  const { data: doc, error: fetchError } = await supabase
+    .from("curriculum_docs")
+    .select("status")
+    .eq("id", docId)
+    .single();
+  if (fetchError) throw new Error(fetchError.message);
+  if (doc.status === "published") {
+    throw new Error("배포된 교재는 삭제할 수 없습니다. 먼저 배포를 취소하세요.");
+  }
+
+  const { error } = await supabase.from("curriculum_docs").delete().eq("id", docId);
   if (error) throw new Error(error.message);
 }
