@@ -217,6 +217,7 @@ git commit -m "feat(admin): DocSection에 sectionType 필드 추가"
 - Produces: `addSection(docId: string, nextPosition: number, sectionType: "concept" | "problem"): Promise<DocSection>` — Task 4가 사용.
 - Produces: `deleteCurriculumDoc(docId: string): Promise<void>` — 이미 `published`면 `Error("배포된 교재는 삭제할 수 없습니다. 먼저 배포를 취소하세요.")`를 throw. Task 7이 사용.
 - Produces: `generateSectionProblems`가 `format: "mc"`일 때 정확히 5개 선택지를 요청하도록 프롬프트 수정(반환 타입/시그니처는 변경 없음).
+- Produces: `regenerateProblem(params: { sectionTitle: string; subjectName: string; skillType: string; difficulty: ProblemDifficulty; format: ProblemFormat; current: Omit<DocProblem, "id">; feedback: string }): Promise<Omit<DocProblem, "id">>` — 문제 하나를 현재 초안(`current`)과 선생님 피드백(`feedback`)을 반영해 다시 생성한다(배치 전체가 아니라 이 문제 하나만). Task 5가 사용.
 
 여태 이 파일을 직접 단위 테스트하는 파일이 없었다(전부 `CurriculumDocEditor.test.tsx`를 통한 간접 테스트). `requireAdmin`이 실제 Supabase 클라이언트를 만들기 때문에 이 파일을 직접 유닛테스트하려면 `@/utils/supabase/server`를 모킹해야 한다. `deleteCurriculumDoc`의 published 가드 로직만 직접 테스트하고, 나머지는 계속 `CurriculumDocEditor.test.tsx`(Task 4/5/7)로 간접 커버한다.
 
@@ -348,21 +349,116 @@ export async function deleteCurriculumDoc(docId: string): Promise<void> {
 ${format === "mc" ? "객관식은 반드시 선택지 5개와 정답 인덱스를 포함해주세요." : ""}
 ```
 
-- [ ] **Step 6: 테스트 통과 확인**
+- [ ] **Step 6: `regenerateProblem` 추가**
+
+선생님이 AI 초안 문제 하나에 피드백을 남기고 그 문제만 다시 생성할 수 있어야 한다(배치 전체가 아니라 문제 단위). `app/admin/curriculum-doc-actions.ts` 파일에서 `generateSectionProblems` 함수(현재 `:139-235`) 바로 뒤, `confirmSectionProblems` 함수 앞에 추가:
+
+```ts
+
+export async function regenerateProblem(params: {
+  sectionTitle: string;
+  subjectName: string;
+  skillType: string;
+  difficulty: ProblemDifficulty;
+  format: ProblemFormat;
+  current: Omit<DocProblem, "id">;
+  feedback: string;
+}): Promise<Omit<DocProblem, "id">> {
+  await requireAdmin();
+  const { sectionTitle, subjectName, skillType, difficulty, format, current, feedback } = params;
+
+  const message = await anthropic.messages.create({
+    model: "claude-sonnet-5",
+    max_tokens: 2000,
+    tools: [
+      {
+        name: "regenerate_problem",
+        description: "기존 문제 초안을 선생님 피드백에 맞춰 수정한 새 버전을 생성한다.",
+        input_schema: {
+          type: "object",
+          properties: {
+            passage: { type: "string", description: "문제 지문" },
+            options: {
+              type: "array",
+              items: { type: "string" },
+              description: "객관식일 때만 정확히 5개의 선택지",
+            },
+            correct_index: {
+              type: "number",
+              description: "객관식일 때만, 정답 선택지의 0-based 인덱스",
+            },
+            explanation: {
+              type: "string",
+              description: format === "mc" ? "정답 해설" : "모범 답안 또는 풀이 과정",
+            },
+          },
+          required: ["passage", "explanation"],
+        },
+      },
+    ],
+    tool_choice: { type: "tool", name: "regenerate_problem" },
+    messages: [
+      {
+        role: "user",
+        content: `아래 문제 초안을 선생님 피드백에 맞춰 수정해주세요.
+- 과목: ${subjectName}
+- 교재 섹션: ${sectionTitle}
+- 문제 유형(스킬): ${skillType}
+- 난이도: ${difficulty === "easy" ? "쉬움" : difficulty === "medium" ? "보통" : "어려움"}
+- 답안 형식: ${FORMAT_LABEL[format]}
+
+현재 초안:
+지문: ${current.passage}
+${current.options ? `선택지: ${current.options.join(" / ")}` : ""}
+${current.correctIndex !== null ? `정답 인덱스: ${current.correctIndex}` : ""}
+해설/모범답안: ${current.explanation}
+
+선생님 피드백: ${feedback}
+
+이 피드백을 반영해 문제를 다시 작성해주세요.${
+          format === "mc" ? " 객관식은 반드시 선택지 5개와 정답 인덱스를 포함해주세요." : ""
+        }`,
+      },
+    ],
+  });
+
+  const toolUse = message.content.find((c) => c.type === "tool_use");
+  if (!toolUse || toolUse.type !== "tool_use") {
+    throw new Error("AI 응답을 처리할 수 없습니다.");
+  }
+  const raw = toolUse.input as {
+    passage: string;
+    options?: string[];
+    correct_index?: number;
+    explanation: string;
+  };
+
+  return {
+    format,
+    passage: raw.passage,
+    options: format === "mc" ? raw.options ?? null : null,
+    correctIndex: format === "mc" ? raw.correct_index ?? null : null,
+    explanation: raw.explanation,
+    difficulty,
+  };
+}
+```
+
+- [ ] **Step 7: 테스트 통과 확인**
 
 Run: `npx vitest run app/admin/curriculum-doc-actions.test.ts`
-Expected: PASS
+Expected: PASS (Step 6은 별도 유닛 테스트를 추가하지 않는다 — `requireAdmin`과 Anthropic API 호출까지 모킹하는 비용 대비, Task 5에서 `CurriculumDocEditor.test.tsx`가 `regenerateProblem`을 모킹해 UI 통합 테스트로 커버한다. 이 Step은 기존 `curriculum-doc-actions.test.ts`가 여전히 통과하는지 회귀 확인용이다.)
 
-- [ ] **Step 7: 타입체크**
+- [ ] **Step 8: 타입체크**
 
 Run: `npx tsc --noEmit`
 Expected: `CurriculumDocEditor.tsx`/`CurriculumDocEditor.test.tsx`에서 `addSection` 호출 인자 개수 불일치 에러(Task 4에서 고침) 외에 이 파일 자체의 에러는 없어야 한다.
 
-- [ ] **Step 8: 커밋**
+- [ ] **Step 9: 커밋**
 
 ```bash
 git add app/admin/curriculum-doc-actions.ts app/admin/curriculum-doc-actions.test.ts
-git commit -m "feat(admin): addSection에 섹션 타입 파라미터 추가, deleteCurriculumDoc 추가, 객관식 5지선다로 변경"
+git commit -m "feat(admin): addSection에 섹션 타입 파라미터 추가, deleteCurriculumDoc/regenerateProblem 추가, 객관식 5지선다로 변경"
 ```
 
 ---
@@ -625,9 +721,10 @@ git commit -m "feat(admin): 섹션 추가 시 개념 설명/문제 생성 타입
 
 **Interfaces:**
 - Consumes: `ProblemFormat`("mc"|"essay"|"math") — `app/admin/curriculum-doc-actions.ts`에서 export.
+- Consumes: Task 3의 `regenerateProblem(params): Promise<Omit<DocProblem, "id">>`.
 - Produces: `ProblemDraftFields` 컴포넌트 — `{ draft: Omit<DocProblem, "id">; onChange: (patch: Partial<Omit<DocProblem, "id">>) => void }` props를 받아 포맷에 맞는 입력 필드를 렌더링. `CurriculumDocEditor.tsx`의 `ProblemGenPanel`(AI 초안 편집 단계)이 사용.
 
-지금 AI 초안(`drafts`)은 읽기 전용 미리보기라 확정 전에 고칠 수가 없다. 이 태스크에서 초안 카드를 포맷별 편집 가능한 입력으로 바꾼다.
+지금 AI 초안(`drafts`)은 읽기 전용 미리보기라 확정 전에 고칠 수가 없다. 이 태스크에서 초안 카드를 포맷별 편집 가능한 입력으로 바꾸고, 문제별로 피드백을 남겨 그 문제만 재생성할 수 있게 한다(`functional-spec.md:86`의 "문제별로 다시 생성" 패턴 — 배치 전체가 아니라 문제 단위 재생성).
 
 - [ ] **Step 1: `ProblemDraftFields` 실패하는 테스트 작성**
 
@@ -891,17 +988,104 @@ Expected: PASS
   });
 ```
 
+- [ ] **Step 6.5: 문제별 피드백 재생성 테스트 추가**
+
+`app/admin/CurriculumDocEditor.test.tsx` 상단 `vi.mock("./curriculum-doc-actions", ...)` 블록(`:7-18`)에 `regenerateProblem: vi.fn(),`을 추가:
+
+```tsx
+vi.mock("./curriculum-doc-actions", () => ({
+  createCurriculumDoc: vi.fn(),
+  updateDocTitle: vi.fn(),
+  setDocPublished: vi.fn(),
+  addSection: vi.fn(),
+  updateSection: vi.fn(),
+  removeSection: vi.fn(),
+  moveSection: vi.fn(),
+  generateSectionProblems: vi.fn(),
+  regenerateProblem: vi.fn(),
+  confirmSectionProblems: vi.fn(),
+  removeSectionProblem: vi.fn(),
+}));
+```
+
+"문제 추가 폼에서 AI 생성 후 문제로 추가할 수 있다" 테스트 바로 뒤(같은 `describe` 블록 안)에 추가:
+
+```tsx
+
+  it("AI 초안에 피드백을 남기고 그 문제만 재생성할 수 있다", async () => {
+    vi.mocked(docActions.generateSectionProblems).mockResolvedValue([
+      {
+        format: "mc",
+        passage: "판별식 문제",
+        options: ["A", "B", "C", "D", "E"],
+        correctIndex: 1,
+        explanation: "해설",
+        difficulty: "medium",
+      },
+    ]);
+    vi.mocked(docActions.regenerateProblem).mockResolvedValue({
+      format: "mc",
+      passage: "판별식 문제(수정됨)",
+      options: ["A2", "B2", "C2", "D2", "E2"],
+      correctIndex: 2,
+      explanation: "수정된 해설",
+      difficulty: "medium",
+    });
+    render(<CurriculumDocEditor doc={doc} onBack={vi.fn()} />);
+
+    fireEvent.click(screen.getByText("+ 문제 추가"));
+    fireEvent.change(screen.getByPlaceholderText("문제 유형 (예: 판별식 응용)"), {
+      target: { value: "판별식" },
+    });
+    fireEvent.click(screen.getByText("✨ AI로 생성하기"));
+    await waitFor(() => expect(screen.getByText("AI 초안 (1개)")).toBeInTheDocument());
+
+    fireEvent.change(screen.getByPlaceholderText("이 문제에 대한 피드백을 입력하세요"), {
+      target: { value: "더 어렵게 만들어주세요" },
+    });
+    fireEvent.click(screen.getByText("피드백 반영 재생성"));
+
+    await waitFor(() =>
+      expect(docActions.regenerateProblem).toHaveBeenCalledWith(
+        expect.objectContaining({ feedback: "더 어렵게 만들어주세요" })
+      )
+    );
+    await waitFor(() =>
+      expect(screen.getByDisplayValue("판별식 문제(수정됨)")).toBeInTheDocument()
+    );
+  });
+```
+
 - [ ] **Step 7: 테스트가 실패하는지 확인**
 
 Run: `npx vitest run app/admin/CurriculumDocEditor.test.tsx`
-Expected: FAIL — 5개 선택지 관련 assertion 실패, 서술형 모범답안 텍스트를 찾을 수 없음(현재 UI는 해설만 보여줌)
+Expected: FAIL — 5개 선택지 관련 assertion 실패, 서술형 모범답안 텍스트를 찾을 수 없음, "피드백 반영 재생성" 텍스트를 찾을 수 없음(현재 UI는 해설만 보여주고 재생성 UI가 없음)
 
-- [ ] **Step 8: `ProblemGenPanel`을 `ProblemDraftFields` 기반으로 재작성**
+- [ ] **Step 8: `ProblemGenPanel`을 `ProblemDraftFields` 기반으로 재작성 + 문제별 피드백 재생성 추가**
 
 `app/admin/CurriculumDocEditor.tsx` 파일 상단 import에 추가:
 
 ```tsx
 import ProblemDraftFields from "./ProblemDraftFields";
+```
+
+`app/admin/CurriculumDocEditor.tsx`의 `updateSection`/`addSection` 등을 가져오는 기존 import 목록에 `regenerateProblem`을 추가한다(정확한 위치는 Task 7에서 `deleteCurriculumDoc`도 같이 추가되지만, 이 태스크에서는 `regenerateProblem`만 추가):
+
+```tsx
+import {
+  updateDocTitle,
+  setDocPublished,
+  addSection,
+  updateSection,
+  removeSection,
+  moveSection,
+  generateSectionProblems,
+  regenerateProblem,
+  confirmSectionProblems,
+  removeSectionProblem,
+  type ProblemFormat,
+  type ProblemDifficulty,
+} from "./curriculum-doc-actions";
 ```
 
 `app/admin/CurriculumDocEditor.tsx:286-426`(`ProblemGenPanel` 함수 전체)를 교체:
@@ -929,6 +1113,8 @@ function ProblemGenPanel({
   const [generating, setGenerating] = useState(false);
   const [confirming, setConfirming] = useState(false);
   const [drafts, setDrafts] = useState<Omit<DocProblem, "id">[] | null>(null);
+  const [feedbacks, setFeedbacks] = useState<string[]>([]);
+  const [regeneratingIndex, setRegeneratingIndex] = useState<number | null>(null);
 
   async function handleGenerate() {
     if (!skillType.trim() || generating) return;
@@ -943,6 +1129,7 @@ function ProblemGenPanel({
         count,
       });
       setDrafts(result);
+      setFeedbacks(result.map(() => ""));
     } finally {
       setGenerating(false);
     }
@@ -952,6 +1139,28 @@ function ProblemGenPanel({
     setDrafts((prev) =>
       prev ? prev.map((d, i) => (i === index ? { ...d, ...patch } : d)) : prev
     );
+  }
+
+  async function handleRegenerate(index: number) {
+    if (!drafts || regeneratingIndex !== null) return;
+    const feedback = feedbacks[index]?.trim();
+    if (!feedback) return;
+    setRegeneratingIndex(index);
+    try {
+      const revised = await regenerateProblem({
+        sectionTitle,
+        subjectName,
+        skillType: skillType.trim(),
+        difficulty,
+        format: drafts[index].format,
+        current: drafts[index],
+        feedback,
+      });
+      setDrafts((prev) => (prev ? prev.map((d, i) => (i === index ? revised : d)) : prev));
+      setFeedbacks((prev) => prev.map((f, i) => (i === index ? "" : f)));
+    } finally {
+      setRegeneratingIndex(null);
+    }
   }
 
   async function handleConfirm() {
@@ -975,6 +1184,24 @@ function ProblemGenPanel({
               [{FORMAT_LABEL[d.format]}]
             </span>
             <ProblemDraftFields draft={d} onChange={(patch) => patchDraft(i, patch)} />
+            <div className="flex gap-2 mt-2">
+              <input
+                value={feedbacks[i] ?? ""}
+                onChange={(e) =>
+                  setFeedbacks((prev) => prev.map((f, fi) => (fi === i ? e.target.value : f)))
+                }
+                placeholder="이 문제에 대한 피드백을 입력하세요"
+                className="flex-1 px-3 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12px]"
+              />
+              <button
+                type="button"
+                disabled={!feedbacks[i]?.trim() || regeneratingIndex !== null}
+                onClick={() => handleRegenerate(i)}
+                className="text-[11.5px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50 shrink-0"
+              >
+                {regeneratingIndex === i ? "재생성 중..." : "피드백 반영 재생성"}
+              </button>
+            </div>
           </div>
         ))}
         <div className="flex gap-3 mt-2">
@@ -1382,6 +1609,7 @@ vi.mock("./curriculum-doc-actions", () => ({
   removeSection: vi.fn(),
   moveSection: vi.fn(),
   generateSectionProblems: vi.fn(),
+  regenerateProblem: vi.fn(),
   confirmSectionProblems: vi.fn(),
   removeSectionProblem: vi.fn(),
   deleteCurriculumDoc: vi.fn(),
@@ -1421,7 +1649,7 @@ describe("CurriculumDocsTab", () => {
 
 - [ ] **Step 2: `CurriculumDocEditor.test.tsx`에 삭제 UI 테스트 추가**
 
-`app/admin/CurriculumDocEditor.test.tsx` 상단 `vi.mock("./curriculum-doc-actions", ...)` 블록(`:7-18`)에 `deleteCurriculumDoc: vi.fn(),`을 추가:
+`app/admin/CurriculumDocEditor.test.tsx` 상단 `vi.mock("./curriculum-doc-actions", ...)` 블록(Task 5에서 `regenerateProblem`이 이미 추가됨)에 `deleteCurriculumDoc: vi.fn(),`을 추가:
 
 ```tsx
 vi.mock("./curriculum-doc-actions", () => ({
@@ -1433,6 +1661,7 @@ vi.mock("./curriculum-doc-actions", () => ({
   removeSection: vi.fn(),
   moveSection: vi.fn(),
   generateSectionProblems: vi.fn(),
+  regenerateProblem: vi.fn(),
   confirmSectionProblems: vi.fn(),
   removeSectionProblem: vi.fn(),
   deleteCurriculumDoc: vi.fn(),
