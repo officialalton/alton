@@ -49,6 +49,21 @@ export default function ProblemDraftFields({
         rows={3}
       />
 
+      {draft.format === "math" && (
+        <div className="flex gap-2 mb-2">
+          {LATEX_SNIPPETS.map((s) => (
+            <button
+              key={s.label}
+              type="button"
+              onClick={() => insertSnippet(passageRef, "passage", s.snippet)}
+              className="text-[11.5px] font-semibold px-2.5 py-1 rounded border-[1.5px] border-grey-200 text-ink"
+            >
+              {s.label}
+            </button>
+          ))}
+        </div>
+      )}
+
       {draft.format === "mc" && (
         <div className="mb-2">
           {[0, 1, 2, 3, 4].map((i) => (

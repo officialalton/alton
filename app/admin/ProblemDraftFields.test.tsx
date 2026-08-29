@@ -56,9 +56,9 @@ describe("ProblemDraftFields", () => {
 
   it("수학 화이트보드형은 LaTeX 삽입 버튼과 안내 문구를 보여준다", () => {
     render(<ProblemDraftFields draft={mathDraft} onChange={vi.fn()} />);
-    expect(screen.getByText("위첨자")).toBeInTheDocument();
-    expect(screen.getByText("분수")).toBeInTheDocument();
-    expect(screen.getByText("근호")).toBeInTheDocument();
+    expect(screen.getAllByText("위첨자")).toHaveLength(2);
+    expect(screen.getAllByText("분수")).toHaveLength(2);
+    expect(screen.getAllByText("근호")).toHaveLength(2);
     expect(
       screen.getByText("학생은 세션뷰의 화이트보드에서 직접 풀이를 작성합니다.")
     ).toBeInTheDocument();
