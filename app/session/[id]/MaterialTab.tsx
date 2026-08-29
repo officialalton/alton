@@ -11,6 +11,7 @@ import {
 import MathCanvas from "./MathCanvas";
 import CanvasOverlay from "./CanvasOverlay";
 import VocabClickLayer from "./VocabClickLayer";
+import AutoGrowTextarea from "./AutoGrowTextarea";
 
 const DIFF_LABEL: Record<string, string> = {
   easy: "쉬움",
@@ -120,7 +121,7 @@ export default function MaterialTab({
           >
             {material.sections.map((s) => (
               <div key={s.id} id={`sec-${s.id}`} className="mb-11 scroll-mt-[72px]">
-                <h2 className="text-[18px] font-extrabold text-ink mb-3">
+                <h2 className="text-[22px] font-extrabold text-[#0b2545] mb-3">
                   {s.title}
                 </h2>
                 <div
@@ -145,6 +146,7 @@ export default function MaterialTab({
                 ))}
               </div>
             ))}
+            <div className="h-[60vh]" aria-hidden />
           </VocabClickLayer>
         </CanvasOverlay>
       </div>
@@ -317,11 +319,10 @@ function ProblemCard({
         <>
           {isStudent && !submittedResponse && (
             <>
-              <textarea
+              <AutoGrowTextarea
                 value={essayText}
-                onChange={(e) => setEssayText(e.target.value)}
+                onChange={setEssayText}
                 placeholder="답안을 입력하세요"
-                className="w-full min-h-[90px] px-3 py-2.5 border-[1.5px] border-grey-200 rounded-lg text-[13px]"
               />
               <div className="mt-3">
                 <button

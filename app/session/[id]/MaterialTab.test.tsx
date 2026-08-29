@@ -145,4 +145,44 @@ describe("MaterialTab", () => {
       screen.getByText("이 세션에는 아직 배정된 교재가 없습니다.")
     ).toBeInTheDocument();
   });
+
+  it("서술형 입력창은 내용이 늘어나면 높이가 자동으로 커진다", () => {
+    const essayMaterial: MaterialData = {
+      ...material,
+      sections: [
+        {
+          ...material!.sections[0],
+          problems: [
+            {
+              id: "prob-essay",
+              format: "essay",
+              passage: "이 문장을 서술하세요.",
+              options: null,
+              correctIndex: null,
+              explanation: "모범답안",
+              difficulty: "medium",
+              skillType: null,
+              priorWrongCount: 0,
+              correct: null,
+              done: false,
+              submittedResponse: null,
+            },
+          ],
+        },
+      ],
+    };
+    render(
+      <MaterialTab
+        sessionId="session-1"
+        studentId="student-1"
+        material={essayMaterial}
+        viewerRole="student"
+        tipsVisible={false}
+      />
+    );
+    const textarea = screen.getByPlaceholderText("답안을 입력하세요") as HTMLTextAreaElement;
+    Object.defineProperty(textarea, "scrollHeight", { value: 200, configurable: true });
+    fireEvent.change(textarea, { target: { value: "긴 답안입니다" } });
+    expect(textarea.style.height).toBe("200px");
+  });
 });
