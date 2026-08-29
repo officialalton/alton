@@ -55,6 +55,7 @@ const baseProps = {
   pendingConsults: [],
   familyContracts: [],
   devLogContent: "## Phase 1\n- [x] 완료된 항목\n- [ ] 남은 항목\n",
+  payouts: [],
 };
 
 describe("AdminShell", () => {
@@ -126,5 +127,11 @@ describe("AdminShell", () => {
     render(<AdminShell {...baseProps} />);
     fireEvent.click(screen.getByText("계약"));
     expect(screen.getByText("발송 대기")).toBeInTheDocument();
+  });
+
+  it("정산 탭을 누르면 PayoutsTab이 렌더링된다", () => {
+    render(<AdminShell {...baseProps} />);
+    fireEvent.click(screen.getByText("정산"));
+    expect(screen.getByText("정산 생성")).toBeInTheDocument();
   });
 });
