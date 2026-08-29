@@ -43,7 +43,18 @@ export async function loadProblemLog(
     .eq("student_id", studentId)
     .order("attempted_at", { ascending: false });
 
-  return (data ?? []).flatMap((row) => {
+  const rows = data ?? [];
+  const wrongCountByProblem = new Map<string, number>();
+  for (const row of rows) {
+    if (row.correct === false) {
+      wrongCountByProblem.set(
+        row.problem_id,
+        (wrongCountByProblem.get(row.problem_id) ?? 0) + 1
+      );
+    }
+  }
+
+  return rows.flatMap((row) => {
     const problem = one(row.problems as unknown);
     if (!problem) return [];
     const subject = one(
@@ -65,6 +76,14 @@ export async function loadProblemLog(
       skill_type: string | null;
     };
 
+    // mc problems leak the answer to a student mid-attempt (wrong guesses
+    // before the 3-strike/correct conclusion) unless gated on whether the
+    // attempt sequence actually concluded (correct, or 3 wrong attempts).
+    // essay/math have no such concept — the explanation is always safe.
+    const done =
+      row.correct === true || (wrongCountByProblem.get(row.problem_id) ?? 0) >= 3;
+    const revealAnswer = p.format !== "mc" || done;
+
     return [
       {
         attemptId: row.id,
@@ -72,8 +91,8 @@ export async function loadProblemLog(
         format: p.format,
         passage: p.passage,
         options: p.options,
-        correctIndex: p.correct_index,
-        explanation: p.explanation,
+        correctIndex: revealAnswer ? p.correct_index : null,
+        explanation: revealAnswer ? p.explanation : "",
         subjectName: subject?.name ?? "",
         unitTitle: p.unit_title,
         skillType: p.skill_type,
