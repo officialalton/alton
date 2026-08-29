@@ -15,7 +15,7 @@
 - **스케줄링**: Calendly → **Google Calendar**(freebusy 조회 + 이벤트 생성) 기반 자체 예약 UI로 교체.
 - **화상회의**: Zoom → **Google Meet**로 교체(Calendar 이벤트 생성 시 `conferenceData`로 Meet 링크 자동 생성).
 - **계약/전자서명**: DocuSign → Google eSignature 전환 가능성 조사 완료(아래 참조) — **이번 로드맵에서는 결정 보류**, 계약 단계 스펙 때 다시 판단.
-- **교육용 툴(구글 클래스룸 등)**: 조사 완료 — **사용 불가**(아래 참조).
+- **교육용 툴(구글 클래스룸 등)**: 조사 완료 — **지금 정한 계정 구조와 호환이 안 돼서 사실상 사용 불가**(아래 참조, 최초 조사에서 "영리 업체라 못 쓴다"고 잘못 정리했던 부분 정정함).
 - **메시지/드라이브**: 이번 전환 스코프에 포함하지 않는다. 기존 인앱 메시지(`chat_threads`)와 연습장(082 티켓, 진행 중)을 그대로 유지한다 — "구글 안에서 다 되니까" 라는 이유만으로 이미 잘 동작하는 자체 기능을 갈아엎지 않는다.
 
 ### 조사 결과 1 — Google eSignature (계약)
@@ -28,11 +28,13 @@ Sources: [Google Docs eSignature 안내](https://support.google.com/docs/answer/
 
 ### 조사 결과 2 — 교육용 툴(Google Classroom 등)
 
-- Google Workspace for Education(Classroom 포함)은 **"정부 인증을 받은 K-12/고등교육 인가 기관으로서 국가/국제 공인 자격을 학생에게 수여하는 기관"**만 자격이 된다.
-- 튜터링 센터/방과후 교육/기업 교육 기관은 **영리·비영리 여부와 무관하게 명시적으로 자격 제외 대상**이다.
-- 즉 Alton은 Google Workspace for Education 자체를 신청할 수 없고, 따라서 **Google Classroom을 포함한 어떤 Education 전용 기능도 사용 불가**다. 쓸 수 있는 건 오직 일반 **Business 플랜**(Calendar/Meet/Drive/Docs/eSignature 등) 뿐이며, 이건 기존 계획(Calendar+Meet)과 이미 일치한다.
+- Google Workspace **for Education**(할인/무료 에디션) 자체는 "정부 인증을 받은 K-12/고등교육 인가 기관"만 신청 자격이 되고, 자격 제외 목록에 "Tutoring programs"가 명시적으로 이름을 올리고 있다 — 이건 사실이다.
+- **하지만 이게 "Classroom을 아예 못 쓴다"는 뜻은 아니다** (최초 조사에서 이 둘을 혼동해서 잘못 정리했던 부분). Google 공식 문서에 "Personal Google Accounts are typically used with Classroom outside of a school setting, **such as a tutoring center or homeschool**"이라고 직접 나와 있다 — 튜터링 센터가 **개인 Google 계정**으로 Classroom을 쓰는 건 정상적인 사용 사례로 인정된다.
+- **진짜 문제는 계정 호환성이다**: Classroom의 공식 호환성 표에 따르면 **Business 계열 Workspace(Starter/Standard/Plus/Enterprise) 계정과 개인(personal) Google 계정은 서로 클래스를 주고받을 수 없다** — Business 계정으로 만든 클래스에 개인 계정 사용자가 못 들어가고, 반대도 마찬가지다.
+- 이 문서 위쪽에서 이미 "관리자·선생님=회사 도메인 Business Workspace 계정, 학생·학부모=개인 Google 계정"으로 정했기 때문에, 정확히 이 비호환 조합에 걸린다 — **선생님이 Business 계정으로 만든 클래스에 학생(개인 계정)이 들어갈 수 없다.** Classroom을 쓰려면 선생님도 개인 계정을 써야 하는데, 그건 이미 정한 계정 구조와 충돌한다.
+- **결론**: Classroom은 "자격 미달"이 아니라 "우리가 정한 계정 구조와 안 맞아서" 사용 불가. 만약 나중에 Classroom을 정말 쓰고 싶으면, 선생님 계정 구조 자체를 재검토(예: 선생님도 개인 계정 유지)해야 하고, 이건 별도 트레이드오프 논의가 필요하다 — 지금 로드맵에서는 제외.
 
-Sources: [Google Workspace for Education 자격 요건](https://knowledge.workspace.google.com/admin/getting-started/editions/qualifications-for-google-workspace-for-education), [Google Workspace 관리자 커뮤니티 — 개인 과외 교사 사례](https://support.google.com/a/thread/83618626)
+Sources: [Google Workspace for Education 자격 요건](https://knowledge.workspace.google.com/admin/getting-started/editions/qualifications-for-google-workspace-for-education), [Classroom 계정 안내(개인 계정·튜터링 센터 사용 사례, Business-개인 계정 비호환 표)](https://support.google.com/edu/classroom/answer/7582372)
 
 ## 전체 갭 인벤토리 (목업 vs 현재 구현)
 
