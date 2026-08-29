@@ -491,7 +491,7 @@ function ProblemGenPanel({
             <ProblemDraftFields
               draft={d}
               onChange={(patch) => patchDraft(i, patch)}
-              groupId={i}
+              groupId={`${sectionId}-${i}`}
             />
             <div className="flex gap-2 mt-2">
               <input
