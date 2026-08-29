@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type Dispatch, type SetStateAction } from "react";
 import {
   createSubject,
   renameSubject,
@@ -13,11 +13,12 @@ import {
 import type { AdminSubject, SubjectUnit } from "./subject-data";
 
 export default function SubjectTemplateTab({
-  initialSubjects,
+  subjects,
+  setSubjects,
 }: {
-  initialSubjects: AdminSubject[];
+  subjects: AdminSubject[];
+  setSubjects: Dispatch<SetStateAction<AdminSubject[]>>;
 }) {
-  const [subjects, setSubjects] = useState(initialSubjects);
   const [openSubjectId, setOpenSubjectId] = useState<string | null>(null);
   const [adding, setAdding] = useState(false);
   const [newName, setNewName] = useState("");

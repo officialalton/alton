@@ -18,7 +18,7 @@ export default function TeacherHomeDashboard({
   return (
     <div className="px-8 py-8">
       <h1 className="text-[20px] font-extrabold text-ink mb-6">
-        {data.teacherName}, 안녕하세요
+        {data.teacherName} 선생님, 안녕하세요
       </h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-6">

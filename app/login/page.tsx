@@ -71,7 +71,12 @@ export default async function LoginPage({
           학부모·학생 계정은 상담·계약 절차 이후 초대를 통해 생성됩니다.
           <br />
           선생님으로 지원하고 싶으신가요?{" "}
-          <a href="#" className="text-red font-bold">
+          <a
+            href="https://forms.gle/LU8dPY5tkwBMNX6S9"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-red font-bold"
+          >
             지원하기 →
           </a>
         </p>

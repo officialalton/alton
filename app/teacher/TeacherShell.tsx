@@ -97,7 +97,7 @@ export default function TeacherShell({
             onClick={() => setAccountMenuOpen((v) => !v)}
             className="text-[13px] font-semibold text-ink"
           >
-            {dashboard.teacherName} ▾
+            {dashboard.teacherName} 선생님 ▾
           </button>
           {accountMenuOpen && (
             <div className="absolute top-full right-6 mt-1 w-40 bg-white border-[1.5px] border-grey-200 rounded-lg shadow-sm py-1.5 z-30">

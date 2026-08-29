@@ -1,8 +1,17 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { useState } from "react";
 import { describe, expect, it, vi } from "vitest";
 import SubjectTemplateTab from "./SubjectTemplateTab";
 import * as actions from "./subject-actions";
 import type { AdminSubject } from "./subject-data";
+
+// SubjectTemplateTab은 이제 subjects를 부모(CatalogTab)에서 controlled로 받는다 —
+// 부모가 CurriculumDocsTab과 같은 목록을 공유하기 위함(과목 생성 직후 다른 서브탭에서도
+// 바로 보여야 하는 버그 수정). 테스트에서도 실제 부모처럼 상태를 들고 있는 래퍼가 필요하다.
+function Wrapper({ initialSubjects }: { initialSubjects: AdminSubject[] }) {
+  const [subjects, setSubjects] = useState(initialSubjects);
+  return <SubjectTemplateTab subjects={subjects} setSubjects={setSubjects} />;
+}
 
 vi.mock("./subject-actions", () => ({
   createSubject: vi.fn(),
@@ -25,14 +34,14 @@ const satMath: AdminSubject = {
 
 describe("SubjectTemplateTab", () => {
   it("과목 목록과 회차 수를 보여준다", () => {
-    render(<SubjectTemplateTab initialSubjects={[satMath]} />);
+    render(<Wrapper initialSubjects={[satMath]} />);
     expect(screen.getByText("SAT Math")).toBeInTheDocument();
     expect(screen.getByText("2개 회차")).toBeInTheDocument();
   });
 
   it("새 과목을 추가할 수 있다", async () => {
     vi.mocked(actions.createSubject).mockResolvedValue({ id: "sub2", name: "AP Physics" });
-    render(<SubjectTemplateTab initialSubjects={[satMath]} />);
+    render(<Wrapper initialSubjects={[satMath]} />);
     fireEvent.click(screen.getByText("+ 과목 추가"));
     fireEvent.change(screen.getByPlaceholderText("새 과목명"), {
       target: { value: "AP Physics" },
@@ -44,7 +53,7 @@ describe("SubjectTemplateTab", () => {
 
   it("과목 추가 실패 시 에러 메시지를 보여준다", async () => {
     vi.mocked(actions.createSubject).mockRejectedValue(new Error("이미 존재하는 과목명입니다."));
-    render(<SubjectTemplateTab initialSubjects={[satMath]} />);
+    render(<Wrapper initialSubjects={[satMath]} />);
     fireEvent.click(screen.getByText("+ 과목 추가"));
     fireEvent.change(screen.getByPlaceholderText("새 과목명"), {
       target: { value: "SAT Math" },
@@ -64,7 +73,7 @@ describe("SubjectTemplateTab", () => {
     });
     vi.mocked(actions.removeSubjectUnit).mockResolvedValue(undefined);
     vi.mocked(actions.renameSubject).mockResolvedValue(undefined);
-    render(<SubjectTemplateTab initialSubjects={[satMath]} />);
+    render(<Wrapper initialSubjects={[satMath]} />);
     fireEvent.click(screen.getByText("편집"));
 
     expect(screen.getByDisplayValue("SAT Math")).toBeInTheDocument();
@@ -81,7 +90,7 @@ describe("SubjectTemplateTab", () => {
     vi.mocked(actions.deleteSubject).mockRejectedValue(
       new Error("이 과목은 이미 선생님 커리큘럼/매칭/교재 등에서 사용 중이라 삭제할 수 없습니다.")
     );
-    render(<SubjectTemplateTab initialSubjects={[satMath]} />);
+    render(<Wrapper initialSubjects={[satMath]} />);
     fireEvent.click(screen.getByText("편집"));
     fireEvent.click(screen.getByText("이 과목 삭제"));
     expect(screen.getByText(/정말 "SAT Math" 과목을 삭제하시겠습니까/)).toBeInTheDocument();
