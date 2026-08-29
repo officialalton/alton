@@ -15,6 +15,11 @@ vi.mock("./users-actions", () => ({
   setTeacherHourlyRate: vi.fn(),
 }));
 
+vi.mock("./teacher-subjects-actions", () => ({
+  assignTeacherSubject: vi.fn(),
+  unassignTeacherSubject: vi.fn(),
+}));
+
 const parents: ParentListItem[] = [
   {
     id: "p1",
@@ -47,6 +52,7 @@ const teachers: TeacherListItem[] = [
     status: "active",
     qcWarningCount: 2,
     subjectNames: ["SAT Math"],
+    assignedSubjectIds: [],
     calendlySchedulingUrl: null,
     hourlyRateKrw: null,
   },
@@ -56,6 +62,7 @@ const baseProps = {
   initialParents: parents,
   initialStudents: students,
   initialTeachers: teachers,
+  subjects: [],
   creditHistoryByStudent: {},
   qcWarningsByTeacher: {},
 };

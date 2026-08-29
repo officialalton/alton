@@ -34,6 +34,11 @@ vi.mock("./users-actions", () => ({
   setTeacherCalendlyUrl: vi.fn(),
 }));
 
+vi.mock("./teacher-subjects-actions", () => ({
+  assignTeacherSubject: vi.fn(),
+  unassignTeacherSubject: vi.fn(),
+}));
+
 const dashboard: AdminDashboardData = {
   adminName: "관리자",
   pendingConsults: [],

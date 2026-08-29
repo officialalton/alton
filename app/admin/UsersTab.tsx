@@ -4,6 +4,7 @@ import { useState } from "react";
 import { inviteParent, inviteStudent, inviteTeacher } from "./users-actions";
 import StudentDetailPanel from "./StudentDetailPanel";
 import TeacherDetailPanel from "./TeacherDetailPanel";
+import type { AdminSubject } from "./subject-data";
 import type {
   CreditTransaction,
   ParentListItem,
@@ -33,12 +34,14 @@ export default function UsersTab({
   initialParents,
   initialStudents,
   initialTeachers,
+  subjects,
   creditHistoryByStudent,
   qcWarningsByTeacher,
 }: {
   initialParents: ParentListItem[];
   initialStudents: StudentListItem[];
   initialTeachers: TeacherListItem[];
+  subjects: AdminSubject[];
   creditHistoryByStudent: Record<string, CreditTransaction[]>;
   qcWarningsByTeacher: Record<string, QcWarning[]>;
 }) {
@@ -80,6 +83,7 @@ export default function UsersTab({
       <TeacherDetailPanel
         teacher={openTeacher}
         warnings={qcWarningsByTeacher[openTeacher.id] ?? []}
+        subjects={subjects}
         onBack={() => setOpenTeacherId(null)}
         onUpdated={(patch) => patchTeacher(openTeacher.id, patch)}
       />
@@ -232,6 +236,7 @@ export default function UsersTab({
                   status: "pending",
                   qcWarningCount: 0,
                   subjectNames: [],
+                  assignedSubjectIds: [],
                   calendlySchedulingUrl: null,
                   hourlyRateKrw,
                 },

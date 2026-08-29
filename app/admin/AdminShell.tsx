@@ -144,6 +144,7 @@ export default function AdminShell({
               initialParents={parents}
               initialStudents={students}
               initialTeachers={teachers}
+              subjects={subjects}
               creditHistoryByStudent={creditHistoryByStudent}
               qcWarningsByTeacher={qcWarningsByTeacher}
             />

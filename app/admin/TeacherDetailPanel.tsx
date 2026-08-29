@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { setTeacherStatus, setTeacherCalendlyUrl, setTeacherHourlyRate } from "./users-actions";
+import { assignTeacherSubject, unassignTeacherSubject } from "./teacher-subjects-actions";
+import type { AdminSubject } from "./subject-data";
 import type { QcWarning, TeacherListItem } from "./users-data";
 
 const STATUS_LABEL: Record<string, string> = {
@@ -12,15 +14,20 @@ const STATUS_LABEL: Record<string, string> = {
 export default function TeacherDetailPanel({
   teacher,
   warnings,
+  subjects,
   onBack,
   onUpdated,
 }: {
   teacher: TeacherListItem;
   warnings: QcWarning[];
+  subjects: AdminSubject[];
   onBack: () => void;
   onUpdated: (patch: Partial<TeacherListItem>) => void;
 }) {
   const [status, setStatus] = useState(teacher.status);
+  const [assignedSubjectIds, setAssignedSubjectIds] = useState(teacher.assignedSubjectIds);
+  const [subjectError, setSubjectError] = useState<string | null>(null);
+  const [togglingSubjectId, setTogglingSubjectId] = useState<string | null>(null);
   const [calendlyUrl, setCalendlyUrl] = useState(teacher.calendlySchedulingUrl ?? "");
   const [savingUrl, setSavingUrl] = useState(false);
   const [savedUrl, setSavedUrl] = useState(false);
@@ -29,6 +36,29 @@ export default function TeacherDetailPanel({
   );
   const [savingRate, setSavingRate] = useState(false);
   const [savedRate, setSavedRate] = useState(false);
+
+  async function handleToggleSubject(subjectId: string) {
+    if (togglingSubjectId) return;
+    setSubjectError(null);
+    setTogglingSubjectId(subjectId);
+    try {
+      if (assignedSubjectIds.includes(subjectId)) {
+        await unassignTeacherSubject(teacher.id, subjectId);
+        const next = assignedSubjectIds.filter((id) => id !== subjectId);
+        setAssignedSubjectIds(next);
+        onUpdated({ assignedSubjectIds: next });
+      } else {
+        await assignTeacherSubject(teacher.id, subjectId);
+        const next = [...assignedSubjectIds, subjectId];
+        setAssignedSubjectIds(next);
+        onUpdated({ assignedSubjectIds: next });
+      }
+    } catch (e) {
+      setSubjectError(e instanceof Error ? e.message : "과목 배정 처리에 실패했습니다.");
+    } finally {
+      setTogglingSubjectId(null);
+    }
+  }
 
   async function handleStatusChange(next: string) {
     setStatus(next);
@@ -92,6 +122,31 @@ export default function TeacherDetailPanel({
       <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">
         <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2">
           담당 과목
+        </div>
+        <div className="flex flex-wrap gap-2 mb-2">
+          {subjects.map((s) => {
+            const assigned = assignedSubjectIds.includes(s.subjectId);
+            return (
+              <button
+                key={s.subjectId}
+                disabled={togglingSubjectId === s.subjectId}
+                onClick={() => handleToggleSubject(s.subjectId)}
+                className={
+                  "text-[12.5px] font-semibold px-3 py-1.5 rounded-full border-[1.5px] disabled:opacity-50 " +
+                  (assigned ? "bg-ink text-white border-ink" : "border-grey-200 text-ink")
+                }
+              >
+                {s.subjectName}
+              </button>
+            );
+          })}
+        </div>
+        {subjectError && <p className="text-[12px] text-red">{subjectError}</p>}
+      </div>
+
+      <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">
+        <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2">
+          매칭된 학생 (수강 중)
         </div>
         <p className="text-[13px] text-ink">
           {teacher.subjectNames.length ? teacher.subjectNames.join(", ") : "매칭된 학생 없음"}
