@@ -28,6 +28,7 @@ export type TeacherListItem = {
   status: string;
   qcWarningCount: number;
   subjectNames: string[];
+  assignedSubjectIds: string[];
   calendlySchedulingUrl: string | null;
   hourlyRateKrw: number | null;
 };
@@ -169,6 +170,17 @@ export async function loadTeachers(supabase: SupabaseClient): Promise<TeacherLis
     warningCountByTeacher.set(w.teacher_id, (warningCountByTeacher.get(w.teacher_id) ?? 0) + 1);
   }
 
+  const { data: templates } = await supabase
+    .from("teacher_curriculum_templates")
+    .select("teacher_id, subject_id")
+    .in("teacher_id", teacherIds);
+  const assignedSubjectIdsByTeacher = new Map<string, string[]>();
+  for (const t of templates ?? []) {
+    const list = assignedSubjectIdsByTeacher.get(t.teacher_id) ?? [];
+    list.push(t.subject_id);
+    assignedSubjectIdsByTeacher.set(t.teacher_id, list);
+  }
+
   const emailById = await loadEmailById(teacherIds);
 
   return teachers.map((t) => ({
@@ -179,6 +191,7 @@ export async function loadTeachers(supabase: SupabaseClient): Promise<TeacherLis
     status: t.status,
     qcWarningCount: warningCountByTeacher.get(t.id) ?? 0,
     subjectNames: subjectsByTeacher.get(t.id) ?? [],
+    assignedSubjectIds: assignedSubjectIdsByTeacher.get(t.id) ?? [],
     calendlySchedulingUrl: t.calendly_scheduling_url,
     hourlyRateKrw: t.hourly_rate_krw,
   }));
