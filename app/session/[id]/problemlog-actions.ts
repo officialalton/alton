@@ -76,12 +76,16 @@ export async function retryMcAttempt(
   };
 }
 
-async function retryOnceGraded(problemId: string, response: string) {
+async function retryOnceGraded(
+  problemId: string,
+  response: string,
+  expectedFormat: "essay" | "math"
+) {
   const { supabase, userId } = await requireUser();
 
   const { data: problem } = await supabase
     .from("problems")
-    .select("explanation")
+    .select("explanation, format")
     .eq("id", problemId)
     .single();
   if (!problem) throw new Error("문제를 찾을 수 없습니다.");
@@ -95,16 +99,19 @@ async function retryOnceGraded(problemId: string, response: string) {
   });
   if (error) throw new Error(error.message);
 
-  return { explanation: problem.explanation as string };
+  return {
+    explanation:
+      problem.format === expectedFormat ? (problem.explanation as string) : null,
+  };
 }
 
 export async function retryEssayAttempt(problemId: string, text: string) {
   if (!text.trim()) throw new Error("답안을 입력해주세요.");
-  return retryOnceGraded(problemId, text.trim());
+  return retryOnceGraded(problemId, text.trim(), "essay");
 }
 
 export async function retryMathAttempt(problemId: string, dataUrl: string) {
-  return retryOnceGraded(problemId, dataUrl);
+  return retryOnceGraded(problemId, dataUrl, "math");
 }
 
 export async function saveTeacherPick(
