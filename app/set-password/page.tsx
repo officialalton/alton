@@ -34,16 +34,37 @@ export default function SetPasswordPage() {
     setSubmitting(true);
     const supabase = createClient();
 
-    // 초대/재설정 링크의 URL 해시(#access_token=...)에 담긴 세션을 명시적으로 적용한다.
-    // 이걸 안 하면 이 브라우저에 이미 로그인된 다른 계정(예: 방금 초대를 보낸 관리자
-    // 본인)의 세션이 그대로 남아있어, 엉뚱하게 그 계정의 비밀번호가 바뀌는 사고가 난다.
+    // 이 브라우저에 이미 로그인된 다른 계정(예: 같은 컴퓨터를 쓰는 부모/학생, 혹은
+    // 방금 초대를 보낸 관리자 본인)의 세션이 남아있을 수 있다. 반드시 초대/재설정
+    // 링크의 토큰으로 세션을 명시적으로 새로 만든 뒤에만 비밀번호를 바꾼다 — 토큰이
+    // 없거나 유효하지 않으면 절대로 그 자리에 남아있던 세션에 대고 진행하지 않는다.
+    //
+    // token_hash(+type) 쿼리 파라미터가 우선이다: 이메일의 확인 링크가 Supabase 자체
+    // 확인 URL(GET만으로 토큰이 소진됨) 대신 이 페이지로 직접 오도록 이메일 템플릿을
+    // 구성하면, 메일 스캐너가 링크를 미리 방문해도(GET만 하고 JS는 실행 안 함) 토큰이
+    // 소진되지 않는다 — verifyOtp는 사용자가 폼을 제출하는 이 시점에만 호출된다.
+    const search = new URLSearchParams(window.location.search);
+    const tokenHash = search.get("token_hash");
+    const otpType = search.get("type");
+
     const hash = window.location.hash.startsWith("#")
       ? window.location.hash.slice(1)
       : window.location.hash;
-    const params = new URLSearchParams(hash);
-    const access_token = params.get("access_token");
-    const refresh_token = params.get("refresh_token");
-    if (access_token && refresh_token) {
+    const hashParams = new URLSearchParams(hash);
+    const access_token = hashParams.get("access_token");
+    const refresh_token = hashParams.get("refresh_token");
+
+    if (tokenHash && otpType) {
+      const { error: verifyError } = await supabase.auth.verifyOtp({
+        type: otpType as "invite" | "recovery" | "email_change" | "signup" | "magiclink",
+        token_hash: tokenHash,
+      });
+      if (verifyError) {
+        setSubmitting(false);
+        setError("링크가 만료되었거나 이미 사용됐어요. 다시 요청해주세요.");
+        return;
+      }
+    } else if (access_token && refresh_token) {
       const { error: sessionError } = await supabase.auth.setSession({
         access_token,
         refresh_token,
@@ -53,6 +74,10 @@ export default function SetPasswordPage() {
         setError(sessionError.message);
         return;
       }
+    } else {
+      setSubmitting(false);
+      setError("링크가 만료되었거나 유효하지 않아요. 다시 요청해주세요.");
+      return;
     }
 
     const { error: updateError } = await supabase.auth.updateUser({

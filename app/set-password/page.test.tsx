@@ -9,11 +9,13 @@ vi.mock("next/navigation", () => ({
 
 const setSessionMock = vi.fn();
 const updateUserMock = vi.fn();
+const verifyOtpMock = vi.fn();
 vi.mock("@/utils/supabase/client", () => ({
   createClient: () => ({
     auth: {
       setSession: setSessionMock,
       updateUser: updateUserMock,
+      verifyOtp: verifyOtpMock,
     },
   }),
 }));
@@ -30,7 +32,9 @@ describe("SetPasswordPage", () => {
     vi.clearAllMocks();
     setSessionMock.mockResolvedValue({ error: null });
     updateUserMock.mockResolvedValue({ error: null });
+    verifyOtpMock.mockResolvedValue({ error: null });
     window.location.hash = "";
+    window.location.search = "";
   });
 
   it("URL 해시에 토큰이 있으면 updateUser 전에 그 세션을 명시적으로 적용한다", async () => {
@@ -66,15 +70,54 @@ describe("SetPasswordPage", () => {
     expect(updateUserMock).not.toHaveBeenCalled();
   });
 
-  it("해시에 토큰이 없으면 setSession 없이 바로 updateUser를 호출한다", async () => {
+  it("해시에도 쿼리에도 토큰이 없으면 updateUser를 호출하지 않고 에러를 보여준다", async () => {
+    // 다른 계정(예: 같은 컴퓨터를 쓰는 부모/학생)이 이미 로그인된 브라우저에서
+    // 토큰 없이 이 페이지에 도달했을 때, 그 계정의 비밀번호를 엉뚱하게 바꿔버리면
+    // 안 된다 — 반드시 명시적으로 실패해야 한다.
     render(<SetPasswordPage />);
 
     fillAndSubmit();
 
     await waitFor(() => {
-      expect(updateUserMock).toHaveBeenCalledWith({ password: "password123" });
+      expect(screen.getByText(/링크가 만료되었거나 유효하지 않아요/)).toBeInTheDocument();
     });
     expect(setSessionMock).not.toHaveBeenCalled();
+    expect(verifyOtpMock).not.toHaveBeenCalled();
+    expect(updateUserMock).not.toHaveBeenCalled();
+  });
+
+  it("쿼리에 token_hash와 type이 있으면 updateUser 전에 verifyOtp로 세션을 생성한다", async () => {
+    Object.defineProperty(window, "location", {
+      value: { hash: "", search: "?token_hash=hash-a&type=invite" },
+      writable: true,
+    });
+    render(<SetPasswordPage />);
+
+    fillAndSubmit();
+
+    await waitFor(() => {
+      expect(verifyOtpMock).toHaveBeenCalledWith({ type: "invite", token_hash: "hash-a" });
+    });
+    expect(updateUserMock).toHaveBeenCalledWith({ password: "password123" });
+    const verifyOtpOrder = verifyOtpMock.mock.invocationCallOrder[0];
+    const updateUserOrder = updateUserMock.mock.invocationCallOrder[0];
+    expect(verifyOtpOrder).toBeLessThan(updateUserOrder);
+  });
+
+  it("verifyOtp가 실패하면 updateUser를 호출하지 않고 에러를 보여준다", async () => {
+    Object.defineProperty(window, "location", {
+      value: { hash: "", search: "?token_hash=hash-a&type=invite" },
+      writable: true,
+    });
+    verifyOtpMock.mockResolvedValue({ error: { message: "OTP 오류" } });
+    render(<SetPasswordPage />);
+
+    fillAndSubmit();
+
+    await waitFor(() => {
+      expect(screen.getByText(/링크가 만료되었거나 이미 사용됐어요/)).toBeInTheDocument();
+    });
+    expect(updateUserMock).not.toHaveBeenCalled();
   });
 
   it("비밀번호 설정에 성공하면 /post-auth로 이동한다", async () => {

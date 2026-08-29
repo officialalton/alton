@@ -242,10 +242,19 @@ otp_expiry = 3600
 # admin_email = "admin@email.com"
 # sender_name = "Admin"
 
-# Uncomment to customize email template
-# [auth.email.template.invite]
-# subject = "You have been invited"
-# content_path = "./supabase/templates/invite.html"
+# Gmail 등 메일 스캐너가 확인 링크를 미리 방문(prefetch)해도 1회용 토큰이 소진되지
+# 않도록, Supabase 자체 확인 URL(GET만으로 토큰 소진) 대신 token_hash를 쿼리로 담아
+# 우리 앱(/set-password)으로 직접 보낸다. verifyOtp는 사용자가 폼을 제출할 때만 호출됨
+# (app/set-password/page.tsx 참고). 프로덕션 Supabase 대시보드(Authentication > Email
+# Templates)에도 이 두 템플릿과 동일한 내용을 반영해야 한다 — 로컬 config.toml은
+# `supabase start`로 로컬 개발할 때만 적용되고 원격 프로젝트에는 자동 반영되지 않는다.
+[auth.email.template.invite]
+subject = "ALTON EDUCATION에 초대되었습니다"
+content_path = "./supabase/templates/invite.html"
+
+[auth.email.template.recovery]
+subject = "비밀번호 재설정"
+content_path = "./supabase/templates/recovery.html"
 
 # Uncomment to customize notification email template
 # [auth.email.notification.password_changed]
