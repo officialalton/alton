@@ -30,13 +30,7 @@ Sources: [Google Docs eSignature 안내](https://support.google.com/docs/answer/
 
 ### 조사 결과 2 — 교육용 툴(Google Classroom 등)
 
-- Google Workspace **for Education**(할인/무료 에디션) 자체는 "정부 인증을 받은 K-12/고등교육 인가 기관"만 신청 자격이 되고, 자격 제외 목록에 "Tutoring programs"가 명시적으로 이름을 올리고 있다 — 이건 사실이다.
-- **하지만 이게 "Classroom을 아예 못 쓴다"는 뜻은 아니다** (최초 조사에서 이 둘을 혼동해서 잘못 정리했던 부분). Google 공식 문서에 "Personal Google Accounts are typically used with Classroom outside of a school setting, **such as a tutoring center or homeschool**"이라고 직접 나와 있다 — 튜터링 센터가 **개인 Google 계정**으로 Classroom을 쓰는 건 정상적인 사용 사례로 인정된다.
-- **진짜 문제는 계정 호환성이다**: Classroom의 공식 호환성 표에 따르면 **Business 계열 Workspace(Starter/Standard/Plus/Enterprise) 계정과 개인(personal) Google 계정은 서로 클래스를 주고받을 수 없다** — Business 계정으로 만든 클래스에 개인 계정 사용자가 못 들어가고, 반대도 마찬가지다.
-- 이 문서 위쪽에서 이미 "관리자·선생님=회사 도메인 Business Workspace 계정, 학생·학부모=개인 Google 계정"으로 정했기 때문에, 정확히 이 비호환 조합에 걸린다 — **선생님이 Business 계정으로 만든 클래스에 학생(개인 계정)이 들어갈 수 없다.** Classroom을 쓰려면 선생님도 개인 계정을 써야 하는데, 그건 이미 정한 계정 구조와 충돌한다.
-- **결론**: Classroom은 "자격 미달"이 아니라 "우리가 정한 계정 구조와 안 맞아서" 사용 불가. 만약 나중에 Classroom을 정말 쓰고 싶으면, 선생님 계정 구조 자체를 재검토(예: 선생님도 개인 계정 유지)해야 하고, 이건 별도 트레이드오프 논의가 필요하다 — 지금 로드맵에서는 제외.
-
-Sources: [Google Workspace for Education 자격 요건](https://knowledge.workspace.google.com/admin/getting-started/editions/qualifications-for-google-workspace-for-education), [Classroom 계정 안내(개인 계정·튜터링 센터 사용 사례, Business-개인 계정 비호환 표)](https://support.google.com/edu/classroom/answer/7582372)
+수업 세션뷰를 자체 개발로 유지하기로 확정했으므로(위 참조) 어차피 안 쓸 옵션이라 자세한 내용은 생략. 결론만: Classroom 자체는 튜터링 센터도 쓸 수 있지만(Google 공식 문서가 개인 계정 기준 튜터링 센터 사용을 정상 사례로 인정), Business Workspace 계정과 개인 계정은 서로 클래스를 주고받을 수 없어 지금 정한 계정 구조(선생님=Business, 학생=개인)와 호환이 안 된다 — 이번 로드맵과 무관하게 검토 종료.
 
 ## 전체 갭 인벤토리 (목업 vs 현재 구현)
 
