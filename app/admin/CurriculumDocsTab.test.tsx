@@ -16,6 +16,7 @@ vi.mock("./curriculum-doc-actions", () => ({
   generateSectionProblems: vi.fn(),
   confirmSectionProblems: vi.fn(),
   removeSectionProblem: vi.fn(),
+  deleteCurriculumDoc: vi.fn(),
 }));
 
 const subjects: AdminSubject[] = [
@@ -77,5 +78,19 @@ describe("CurriculumDocsTab", () => {
     expect(screen.getByText("배포하기")).toBeInTheDocument();
     fireEvent.click(screen.getByText("← 뒤로"));
     expect(screen.getByText("이차방정식 개념 정리")).toBeInTheDocument();
+  });
+
+  it("교재를 삭제하면 목록에서 사라진다", async () => {
+    vi.mocked(docActions.deleteCurriculumDoc).mockResolvedValue(undefined);
+    render(<CurriculumDocsTab initialDocs={[existingDoc]} subjects={subjects} />);
+    fireEvent.click(screen.getByText("편집"));
+    fireEvent.click(screen.getByText("이 교재 삭제"));
+    fireEvent.click(screen.getByText("삭제"));
+    await waitFor(() =>
+      expect(docActions.deleteCurriculumDoc).toHaveBeenCalledWith("doc1")
+    );
+    await waitFor(() =>
+      expect(screen.queryByText("이차방정식 개념 정리")).not.toBeInTheDocument()
+    );
   });
 });

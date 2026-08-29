@@ -16,6 +16,7 @@ vi.mock("./curriculum-doc-actions", () => ({
   regenerateProblem: vi.fn(),
   confirmSectionProblems: vi.fn(),
   removeSectionProblem: vi.fn(),
+  deleteCurriculumDoc: vi.fn(),
 }));
 
 const doc: DocEditorData = {
@@ -41,7 +42,7 @@ const doc: DocEditorData = {
 
 describe("CurriculumDocEditor", () => {
   it("제목/과목/섹션을 보여준다", () => {
-    render(<CurriculumDocEditor doc={doc} onBack={vi.fn()} />);
+    render(<CurriculumDocEditor doc={doc} onBack={vi.fn()} onDeleted={vi.fn()} />);
     expect(screen.getByDisplayValue("이차방정식 개념 정리")).toBeInTheDocument();
     expect(screen.getByDisplayValue("Lesson Overview")).toBeInTheDocument();
     expect(screen.getByText("배포하기")).toBeInTheDocument();
@@ -49,7 +50,7 @@ describe("CurriculumDocEditor", () => {
 
   it("배포하기를 누르면 배포됨 상태로 바뀐다", async () => {
     vi.mocked(docActions.setDocPublished).mockResolvedValue(undefined);
-    render(<CurriculumDocEditor doc={doc} onBack={vi.fn()} />);
+    render(<CurriculumDocEditor doc={doc} onBack={vi.fn()} onDeleted={vi.fn()} />);
     fireEvent.click(screen.getByText("배포하기"));
     await waitFor(() =>
       expect(docActions.setDocPublished).toHaveBeenCalledWith("doc1", true)
@@ -67,7 +68,7 @@ describe("CurriculumDocEditor", () => {
       sectionType: "concept",
       problems: [],
     });
-    render(<CurriculumDocEditor doc={doc} onBack={vi.fn()} />);
+    render(<CurriculumDocEditor doc={doc} onBack={vi.fn()} onDeleted={vi.fn()} />);
     fireEvent.click(screen.getByText("+ 섹션 추가"));
     expect(screen.getByText("개념 설명 섹션")).toBeInTheDocument();
     expect(screen.getByText("문제 생성 섹션")).toBeInTheDocument();
@@ -89,7 +90,7 @@ describe("CurriculumDocEditor", () => {
       sectionType: "problem",
       problems: [],
     });
-    render(<CurriculumDocEditor doc={doc} onBack={vi.fn()} />);
+    render(<CurriculumDocEditor doc={doc} onBack={vi.fn()} onDeleted={vi.fn()} />);
     fireEvent.click(screen.getByText("+ 섹션 추가"));
     fireEvent.click(screen.getByText("문제 생성 섹션"));
     await waitFor(() =>
@@ -104,7 +105,7 @@ describe("CurriculumDocEditor", () => {
 
   it("뒤로가기 시 현재 상태를 그대로 부모에 전달한다", () => {
     const onBack = vi.fn();
-    render(<CurriculumDocEditor doc={doc} onBack={onBack} />);
+    render(<CurriculumDocEditor doc={doc} onBack={onBack} onDeleted={vi.fn()} />);
     fireEvent.click(screen.getByText("← 뒤로"));
     expect(onBack).toHaveBeenCalledWith(doc);
   });
@@ -131,7 +132,7 @@ describe("CurriculumDocEditor", () => {
         difficulty: "medium",
       },
     ]);
-    render(<CurriculumDocEditor doc={doc} onBack={vi.fn()} />);
+    render(<CurriculumDocEditor doc={doc} onBack={vi.fn()} onDeleted={vi.fn()} />);
 
     fireEvent.click(screen.getByText("+ 문제 추가"));
     fireEvent.change(screen.getByPlaceholderText("문제 유형 (예: 판별식 응용)"), {
@@ -177,7 +178,7 @@ describe("CurriculumDocEditor", () => {
       explanation: "수정된 해설",
       difficulty: "medium",
     });
-    render(<CurriculumDocEditor doc={doc} onBack={vi.fn()} />);
+    render(<CurriculumDocEditor doc={doc} onBack={vi.fn()} onDeleted={vi.fn()} />);
 
     fireEvent.click(screen.getByText("+ 문제 추가"));
     fireEvent.change(screen.getByPlaceholderText("문제 유형 (예: 판별식 응용)"), {
@@ -222,8 +223,28 @@ describe("CurriculumDocEditor", () => {
         },
       ],
     };
-    render(<CurriculumDocEditor doc={essayDoc} onBack={vi.fn()} />);
+    render(<CurriculumDocEditor doc={essayDoc} onBack={vi.fn()} onDeleted={vi.fn()} />);
     expect(screen.getByText(/서술형 문제/)).toBeInTheDocument();
     expect(screen.getByText(/모범답안 내용/)).toBeInTheDocument();
+  });
+
+  it("초안 상태에서는 삭제 확인 후 onDeleted가 호출된다", async () => {
+    vi.mocked(docActions.deleteCurriculumDoc).mockResolvedValue(undefined);
+    const onDeleted = vi.fn();
+    render(<CurriculumDocEditor doc={doc} onBack={vi.fn()} onDeleted={onDeleted} />);
+    fireEvent.click(screen.getByText("이 교재 삭제"));
+    expect(screen.getByText(/정말 "이차방정식 개념 정리" 교재를 삭제하시겠습니까/)).toBeInTheDocument();
+    const deleteButtons = screen.getAllByText("삭제");
+    fireEvent.click(deleteButtons[deleteButtons.length - 1]);
+    await waitFor(() => expect(docActions.deleteCurriculumDoc).toHaveBeenCalledWith("doc1"));
+    await waitFor(() => expect(onDeleted).toHaveBeenCalledWith("doc1"));
+  });
+
+  it("배포된 문서는 삭제 버튼이 비활성화된다", () => {
+    render(
+      <CurriculumDocEditor doc={{ ...doc, status: "published" }} onBack={vi.fn()} onDeleted={vi.fn()} />
+    );
+    expect(screen.getByText("이 교재 삭제")).toBeDisabled();
+    expect(screen.getByText("배포 취소 후 삭제할 수 있습니다.")).toBeInTheDocument();
   });
 });

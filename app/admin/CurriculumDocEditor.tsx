@@ -12,6 +12,7 @@ import {
   regenerateProblem,
   confirmSectionProblems,
   removeSectionProblem,
+  deleteCurriculumDoc,
   type ProblemFormat,
   type ProblemDifficulty,
 } from "./curriculum-doc-actions";
@@ -28,15 +29,20 @@ const FORMAT_LABEL: Record<ProblemFormat, string> = {
 export default function CurriculumDocEditor({
   doc,
   onBack,
+  onDeleted,
 }: {
   doc: DocEditorData;
   onBack: (updated: DocEditorData) => void;
+  onDeleted: (docId: string) => void;
 }) {
   const [title, setTitle] = useState(doc.title);
   const [status, setStatus] = useState(doc.status);
   const [sections, setSections] = useState(doc.sections);
   const [publishing, setPublishing] = useState(false);
   const [pickingSectionType, setPickingSectionType] = useState(false);
+  const [confirmingDelete, setConfirmingDelete] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
+  const [deleting, setDeleting] = useState(false);
 
   function handleBack() {
     onBack({ ...doc, title, status, sections });
@@ -65,6 +71,20 @@ export default function CurriculumDocEditor({
     const section = await addSection(doc.id, nextPosition, sectionType);
     setSections((prev) => [...prev, section]);
     setPickingSectionType(false);
+  }
+
+  async function handleDelete() {
+    setDeleteError(null);
+    setDeleting(true);
+    try {
+      await deleteCurriculumDoc(doc.id);
+      onDeleted(doc.id);
+    } catch (e) {
+      setDeleteError(e instanceof Error ? e.message : "삭제에 실패했습니다.");
+      setConfirmingDelete(false);
+    } finally {
+      setDeleting(false);
+    }
   }
 
   function patchSection(sectionId: string, patch: Partial<DocSection>) {
@@ -164,6 +184,45 @@ export default function CurriculumDocEditor({
           + 섹션 추가
         </button>
       )}
+
+      <div className="border-t border-grey-200 pt-5 mt-8">
+        {confirmingDelete ? (
+          <div className="flex items-center gap-3">
+            <span className="text-[12.5px] text-ink">
+              정말 &quot;{title}&quot; 교재를 삭제하시겠습니까?
+            </span>
+            <button
+              disabled={deleting}
+              onClick={handleDelete}
+              className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-red text-white disabled:opacity-50"
+            >
+              삭제
+            </button>
+            <button
+              onClick={() => setConfirmingDelete(false)}
+              className="text-[12px] font-semibold text-grey-500"
+            >
+              취소
+            </button>
+          </div>
+        ) : (
+          <>
+            <button
+              disabled={status === "published"}
+              onClick={() => setConfirmingDelete(true)}
+              className="text-[12.5px] font-semibold text-red disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              이 교재 삭제
+            </button>
+            {status === "published" && (
+              <p className="text-[12px] text-grey-500 mt-1.5">
+                배포 취소 후 삭제할 수 있습니다.
+              </p>
+            )}
+          </>
+        )}
+        {deleteError && <p className="text-[12px] text-red mt-2">{deleteError}</p>}
+      </div>
     </div>
   );
 }

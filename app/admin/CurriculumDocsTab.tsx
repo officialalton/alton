@@ -31,6 +31,11 @@ export default function CurriculumDocsTab({
     setOpenDocId(null);
   }
 
+  function handleDocDeleted(docId: string) {
+    setDocs((prev) => prev.filter((d) => d.id !== docId));
+    setOpenDocId(null);
+  }
+
   function handleCreated(doc: DocEditorData) {
     setDocs((prev) => [...prev, doc].sort((a, b) => a.title.localeCompare(b.title)));
     setCreating(false);
@@ -38,7 +43,9 @@ export default function CurriculumDocsTab({
   }
 
   if (open) {
-    return <CurriculumDocEditor doc={open} onBack={handleBackFromEditor} />;
+    return (
+      <CurriculumDocEditor doc={open} onBack={handleBackFromEditor} onDeleted={handleDocDeleted} />
+    );
   }
 
   if (creating) {
