@@ -54,10 +54,11 @@ const baseProps = {
   qcWarningsByTeacher: {},
   pendingConsults: [],
   familyContracts: [],
+  devLogContent: "## Phase 1\n- [x] 완료된 항목\n- [ ] 남은 항목\n",
 };
 
 describe("AdminShell", () => {
-  it("사이드바 10개 항목을 보여주고, 기본 탭은 홈이다", () => {
+  it("사이드바 11개 항목을 보여주고, 기본 탭은 홈이다", () => {
     render(<AdminShell {...baseProps} />);
     [
       "홈",
@@ -70,6 +71,7 @@ describe("AdminShell", () => {
       "QC",
       "정산",
       "문서",
+      "개발 로그",
     ].forEach((label) => expect(screen.getByText(label)).toBeInTheDocument());
     expect(screen.getByText("관리자, 안녕하세요")).toBeInTheDocument();
   });
@@ -111,6 +113,13 @@ describe("AdminShell", () => {
     render(<AdminShell {...baseProps} />);
     fireEvent.click(screen.getByText("수업권"));
     expect(screen.getByText("학생별 수업권 현황")).toBeInTheDocument();
+  });
+
+  it("개발 로그 탭을 누르면 DevLogTab이 tickets.md 내용을 렌더링한다", () => {
+    render(<AdminShell {...baseProps} />);
+    fireEvent.click(screen.getByText("개발 로그"));
+    expect(screen.getByText("완료된 항목")).toBeInTheDocument();
+    expect(screen.getByText("남은 항목")).toBeInTheDocument();
   });
 
   it("계약 탭을 누르면 ContractsTab이 렌더링된다", () => {

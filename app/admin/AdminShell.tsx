@@ -10,6 +10,7 @@ import UsersTab from "./UsersTab";
 import BillingTab from "./BillingTab";
 import ContractsTab from "./ContractsTab";
 import type { FamilyContract, PendingConsult } from "./contracts-data";
+import DevLogTab from "./DevLogTab";
 import type { AdminSubject } from "./subject-data";
 import type { DocEditorData } from "./curriculum-doc-data";
 import type {
@@ -31,6 +32,7 @@ const NAV_ITEMS = [
   { id: "qc", label: "QC", icon: "🛡" },
   { id: "payouts", label: "정산", icon: "💸" },
   { id: "documents", label: "문서", icon: "📁" },
+  { id: "devlog", label: "개발 로그", icon: "🧾" },
 ] as const;
 
 type TabId = (typeof NAV_ITEMS)[number]["id"];
@@ -47,6 +49,7 @@ export default function AdminShell({
   qcWarningsByTeacher,
   pendingConsults,
   familyContracts,
+  devLogContent,
 }: {
   initialTab?: string;
   dashboard: AdminDashboardData;
@@ -59,6 +62,7 @@ export default function AdminShell({
   qcWarningsByTeacher: Record<string, QcWarning[]>;
   pendingConsults: PendingConsult[];
   familyContracts: FamilyContract[];
+  devLogContent: string;
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -142,6 +146,8 @@ export default function AdminShell({
             />
           ) : activeTab === "contracts" ? (
             <ContractsTab pendingConsults={pendingConsults} contracts={familyContracts} />
+          ) : activeTab === "devlog" ? (
+            <DevLogTab content={devLogContent} />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.
