@@ -16,6 +16,7 @@ export type DocSection = {
   title: string;
   body: string;
   teachingTip: string | null;
+  sectionType: "concept" | "problem";
   problems: DocProblem[];
 };
 
@@ -54,7 +55,7 @@ export async function loadAllCurriculumDocs(
   const docIds = docs.map((d) => d.id);
   const { data: sections } = await supabase
     .from("curriculum_doc_sections")
-    .select("id, curriculum_doc_id, position, title, body, teaching_tip")
+    .select("id, curriculum_doc_id, position, title, body, teaching_tip, section_type")
     .in("curriculum_doc_id", docIds)
     .order("position", { ascending: true });
 
@@ -92,6 +93,7 @@ export async function loadAllCurriculumDocs(
       title: s.title,
       body: s.body ?? "",
       teachingTip: s.teaching_tip,
+      sectionType: s.section_type,
       problems: problemsBySection.get(s.id) ?? [],
     });
     sectionsByDoc.set(s.curriculum_doc_id, list);
