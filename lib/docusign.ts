@@ -53,3 +53,67 @@ export async function getAccessToken(): Promise<string> {
   cachedToken = { accessToken: data.access_token, expiresAt: now + data.expires_in };
   return data.access_token;
 }
+
+export async function createEnvelope(params: {
+  recipientEmail: string;
+  recipientName: string;
+  documentHtml: string;
+  emailSubject: string;
+  webhookUrl: string;
+}): Promise<{ envelopeId: string }> {
+  const accessToken = await getAccessToken();
+  const res = await fetch(
+    `${process.env.DOCUSIGN_BASE_URI}/restapi/v2.1/accounts/${process.env.DOCUSIGN_ACCOUNT_ID}/envelopes`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        emailSubject: params.emailSubject,
+        documents: [
+          {
+            documentBase64: Buffer.from(params.documentHtml).toString("base64"),
+            name: "Alton Education 계약서",
+            fileExtension: "html",
+            documentId: "1",
+          },
+        ],
+        recipients: {
+          signers: [
+            {
+              email: params.recipientEmail,
+              name: params.recipientName,
+              recipientId: "1",
+              routingOrder: "1",
+              tabs: {
+                signHereTabs: [
+                  {
+                    anchorString: "/sig1/",
+                    anchorUnits: "pixels",
+                    anchorXOffset: "0",
+                    anchorYOffset: "-10",
+                  },
+                ],
+              },
+            },
+          ],
+        },
+        status: "sent",
+        eventNotification: {
+          url: params.webhookUrl,
+          loggingEnabled: "true",
+          requireAcknowledgment: "true",
+          envelopeEvents: [{ envelopeEventStatusCode: "completed" }],
+          eventData: { version: "restv2.1", format: "json" },
+        },
+      }),
+    }
+  );
+  if (!res.ok) {
+    throw new Error(`DocuSign 봉투 생성 실패: ${await res.text()}`);
+  }
+  const data = (await res.json()) as { envelopeId: string };
+  return { envelopeId: data.envelopeId };
+}
