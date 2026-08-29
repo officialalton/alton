@@ -19,10 +19,9 @@ export type PayoutListItem = {
   periodStart: string;
   periodEnd: string;
   // DB의 payout_status enum은 'pending' | 'approved' | 'paid' 세 값을 갖지만
-  // (supabase/migrations/20260827120000_initial_schema.sql), 정산 탭 UI는 승인 없이
-  // pending -> paid만 다룬다는 브리프 의도를 그대로 따르되, 실제로 'approved' 값이
-  // 들어와도 타입 에러 없이 취급되도록 폭넓게 잡아둔다.
-  status: "pending" | "approved" | "paid";
+  // (supabase/migrations/20260827120000_initial_schema.sql), 이번 스코프에서는
+  // 승인(approved) 단계를 쓰지 않고 pending -> paid 2단계만 다룬다.
+  status: "pending" | "paid";
   paidAt: string | null;
 };
 
@@ -49,10 +48,8 @@ function extractName(rel: unknown): string {
 
 // sessions 테이블에는 teacher_id 컬럼이 없다 (선생님은 enrollments.teacher_id를 통해서만
 // 연결된다 — supabase/migrations/20260827120000_initial_schema.sql 참고). 실제 쿼리는
-// enrollment:enrollments(teacher_id) 조인으로 중첩된 값을 받아오므로, 중첩/평면 두 형태를
-// 모두 지원해 브리프의 평면 테스트 목(teacher_id 직접 포함)과 실제 조인 응답 모두 처리한다.
-function extractTeacherId(row: { teacher_id?: string; enrollment?: unknown }): string {
-  if (row.teacher_id) return row.teacher_id;
+// enrollment:enrollments(teacher_id) 조인으로 중첩된 값만 받아온다.
+function extractTeacherId(row: { enrollment?: unknown }): string {
   const rel = Array.isArray(row.enrollment) ? row.enrollment[0] : row.enrollment;
   return (rel as { teacher_id?: string } | null)?.teacher_id ?? "";
 }
@@ -67,14 +64,13 @@ export async function computePayoutAmounts(
 
   const { data: sessions } = await supabase
     .from("sessions")
-    .select("teacher_id, duration_minutes, enrollment:enrollments(teacher_id)")
+    .select("duration_minutes, enrollment:enrollments(teacher_id)")
     .eq("status", "completed")
     .gte("scheduled_at", period.periodStart)
     .lte("scheduled_at", `${period.periodEnd}T23:59:59`);
 
   const minutesByTeacher = new Map<string, number>();
   for (const s of (sessions ?? []) as {
-    teacher_id?: string;
     duration_minutes: number;
     enrollment?: unknown;
   }[]) {

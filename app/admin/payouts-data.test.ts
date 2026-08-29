@@ -24,9 +24,9 @@ describe("computePayoutAmounts", () => {
       { id: "t2", hourly_rate_krw: null, profile: { name: "이도현" } },
     ];
     const sessions = [
-      { teacher_id: "t1", duration_minutes: 60 },
-      { teacher_id: "t1", duration_minutes: 90 },
-      { teacher_id: "t2", duration_minutes: 60 },
+      { duration_minutes: 60, enrollment: { teacher_id: "t1" } },
+      { duration_minutes: 90, enrollment: { teacher_id: "t1" } },
+      { duration_minutes: 60, enrollment: { teacher_id: "t2" } },
     ];
     const supabase = {
       from: vi.fn((table: string) => {
