@@ -21,6 +21,8 @@ export type CalendarDaySession = {
 
 export type TeacherDashboardData = {
   teacherName: string;
+  status: string;
+  calendlySchedulingUrl: string | null;
   upcoming: TeacherLesson[];
   past: TeacherLesson[];
   calendarByDay: Record<number, CalendarDaySession[]>;
@@ -40,6 +42,12 @@ export async function loadTeacherDashboard(
   const { data: profile } = await supabase
     .from("profiles")
     .select("name")
+    .eq("id", teacherId)
+    .single();
+
+  const { data: teacherRow } = await supabase
+    .from("teachers")
+    .select("status, calendly_scheduling_url")
     .eq("id", teacherId)
     .single();
 
@@ -130,6 +138,8 @@ export async function loadTeacherDashboard(
 
   return {
     teacherName: profile?.name ?? "선생님",
+    status: teacherRow?.status ?? "pending",
+    calendlySchedulingUrl: teacherRow?.calendly_scheduling_url ?? null,
     upcoming,
     past,
     calendarByDay,

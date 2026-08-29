@@ -14,6 +14,8 @@ vi.mock("@/app/login/actions", () => ({
 
 const dashboard: TeacherDashboardData = {
   teacherName: "박서연",
+  status: "active",
+  calendlySchedulingUrl: "https://calendly.com/seoyeon",
   upcoming: [],
   past: [],
   calendarByDay: {},
