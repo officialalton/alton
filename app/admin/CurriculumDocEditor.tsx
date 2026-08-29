@@ -9,12 +9,14 @@ import {
   removeSection,
   moveSection,
   generateSectionProblems,
+  regenerateProblem,
   confirmSectionProblems,
   removeSectionProblem,
   type ProblemFormat,
   type ProblemDifficulty,
 } from "./curriculum-doc-actions";
 import RichTextEditable from "./RichTextEditable";
+import ProblemDraftFields from "./ProblemDraftFields";
 import type { DocEditorData, DocProblem, DocSection } from "./curriculum-doc-data";
 
 const FORMAT_LABEL: Record<ProblemFormat, string> = {
@@ -280,6 +282,12 @@ function SectionEditor({
           >
             <div className="text-[12.5px] text-ink">
               <span className="font-bold">[{FORMAT_LABEL[p.format]}]</span> {p.passage}
+              {p.format !== "mc" && (
+                <p className="text-grey-500 mt-1">
+                  {p.format === "essay" ? "모범답안: " : "모범풀이: "}
+                  {p.explanation}
+                </p>
+              )}
             </div>
             <button
               onClick={async () => {
@@ -340,6 +348,8 @@ function ProblemGenPanel({
   const [generating, setGenerating] = useState(false);
   const [confirming, setConfirming] = useState(false);
   const [drafts, setDrafts] = useState<Omit<DocProblem, "id">[] | null>(null);
+  const [feedbacks, setFeedbacks] = useState<string[]>([]);
+  const [regeneratingIndex, setRegeneratingIndex] = useState<number | null>(null);
 
   async function handleGenerate() {
     if (!skillType.trim() || generating) return;
@@ -354,8 +364,37 @@ function ProblemGenPanel({
         count,
       });
       setDrafts(result);
+      setFeedbacks(result.map(() => ""));
     } finally {
       setGenerating(false);
+    }
+  }
+
+  function patchDraft(index: number, patch: Partial<Omit<DocProblem, "id">>) {
+    setDrafts((prev) =>
+      prev ? prev.map((d, i) => (i === index ? { ...d, ...patch } : d)) : prev
+    );
+  }
+
+  async function handleRegenerate(index: number) {
+    if (!drafts || regeneratingIndex !== null) return;
+    const feedback = feedbacks[index]?.trim();
+    if (!feedback) return;
+    setRegeneratingIndex(index);
+    try {
+      const revised = await regenerateProblem({
+        sectionTitle,
+        subjectName,
+        skillType: skillType.trim(),
+        difficulty,
+        format: drafts[index].format,
+        current: drafts[index],
+        feedback,
+      });
+      setDrafts((prev) => (prev ? prev.map((d, i) => (i === index ? revised : d)) : prev));
+      setFeedbacks((prev) => prev.map((f, i) => (i === index ? "" : f)));
+    } finally {
+      setRegeneratingIndex(null);
     }
   }
 
@@ -375,18 +414,29 @@ function ProblemGenPanel({
       <div className="border-[1.5px] border-grey-200 rounded-lg px-4 py-3.5">
         <div className="text-[12.5px] font-bold text-ink mb-2">AI 초안 ({drafts.length}개)</div>
         {drafts.map((d, i) => (
-          <div key={i} className="bg-grey-100 rounded-lg px-3 py-2.5 mb-2 text-[12.5px]">
-            <span className="font-bold">[{FORMAT_LABEL[d.format]}]</span> {d.passage}
-            {d.options && (
-              <ul className="mt-1.5 ml-4 list-disc">
-                {d.options.map((o, oi) => (
-                  <li key={oi} className={oi === d.correctIndex ? "font-bold text-green" : ""}>
-                    {o}
-                  </li>
-                ))}
-              </ul>
-            )}
-            <p className="text-grey-500 mt-1.5">{d.explanation}</p>
+          <div key={i} className="bg-grey-100 rounded-lg px-3 py-2.5 mb-2">
+            <span className="text-[11px] font-bold text-grey-500">
+              [{FORMAT_LABEL[d.format]}]
+            </span>
+            <ProblemDraftFields draft={d} onChange={(patch) => patchDraft(i, patch)} />
+            <div className="flex gap-2 mt-2">
+              <input
+                value={feedbacks[i] ?? ""}
+                onChange={(e) =>
+                  setFeedbacks((prev) => prev.map((f, fi) => (fi === i ? e.target.value : f)))
+                }
+                placeholder="이 문제에 대한 피드백을 입력하세요"
+                className="flex-1 px-3 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12px]"
+              />
+              <button
+                type="button"
+                disabled={!feedbacks[i]?.trim() || regeneratingIndex !== null}
+                onClick={() => handleRegenerate(i)}
+                className="text-[11.5px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50 shrink-0"
+              >
+                {regeneratingIndex === i ? "재생성 중..." : "피드백 반영 재생성"}
+              </button>
+            </div>
           </div>
         ))}
         <div className="flex gap-3 mt-2">

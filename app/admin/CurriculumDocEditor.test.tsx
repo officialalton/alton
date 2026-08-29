@@ -13,6 +13,7 @@ vi.mock("./curriculum-doc-actions", () => ({
   removeSection: vi.fn(),
   moveSection: vi.fn(),
   generateSectionProblems: vi.fn(),
+  regenerateProblem: vi.fn(),
   confirmSectionProblems: vi.fn(),
   removeSectionProblem: vi.fn(),
 }));
@@ -113,7 +114,7 @@ describe("CurriculumDocEditor", () => {
       {
         format: "mc",
         passage: "판별식 문제",
-        options: ["A", "B", "C", "D"],
+        options: ["A", "B", "C", "D", "E"],
         correctIndex: 1,
         explanation: "해설",
         difficulty: "medium",
@@ -124,7 +125,7 @@ describe("CurriculumDocEditor", () => {
         id: "prob1",
         format: "mc",
         passage: "판별식 문제",
-        options: ["A", "B", "C", "D"],
+        options: ["A", "B", "C", "D", "E"],
         correctIndex: 1,
         explanation: "해설",
         difficulty: "medium",
@@ -144,6 +145,7 @@ describe("CurriculumDocEditor", () => {
       )
     );
     await waitFor(() => expect(screen.getByText("AI 초안 (1개)")).toBeInTheDocument());
+    expect(screen.getAllByPlaceholderText(/선택지/)).toHaveLength(5);
 
     fireEvent.click(screen.getByText("문제로 추가"));
     await waitFor(() =>
@@ -154,5 +156,74 @@ describe("CurriculumDocEditor", () => {
       )
     );
     await waitFor(() => expect(screen.getByText("문제 (1)")).toBeInTheDocument());
+  });
+
+  it("AI 초안에 피드백을 남기고 그 문제만 재생성할 수 있다", async () => {
+    vi.mocked(docActions.generateSectionProblems).mockResolvedValue([
+      {
+        format: "mc",
+        passage: "판별식 문제",
+        options: ["A", "B", "C", "D", "E"],
+        correctIndex: 1,
+        explanation: "해설",
+        difficulty: "medium",
+      },
+    ]);
+    vi.mocked(docActions.regenerateProblem).mockResolvedValue({
+      format: "mc",
+      passage: "판별식 문제(수정됨)",
+      options: ["A2", "B2", "C2", "D2", "E2"],
+      correctIndex: 2,
+      explanation: "수정된 해설",
+      difficulty: "medium",
+    });
+    render(<CurriculumDocEditor doc={doc} onBack={vi.fn()} />);
+
+    fireEvent.click(screen.getByText("+ 문제 추가"));
+    fireEvent.change(screen.getByPlaceholderText("문제 유형 (예: 판별식 응용)"), {
+      target: { value: "판별식" },
+    });
+    fireEvent.click(screen.getByText("✨ AI로 생성하기"));
+    await waitFor(() => expect(screen.getByText("AI 초안 (1개)")).toBeInTheDocument());
+
+    fireEvent.change(screen.getByPlaceholderText("이 문제에 대한 피드백을 입력하세요"), {
+      target: { value: "더 어렵게 만들어주세요" },
+    });
+    fireEvent.click(screen.getByText("피드백 반영 재생성"));
+
+    await waitFor(() =>
+      expect(docActions.regenerateProblem).toHaveBeenCalledWith(
+        expect.objectContaining({ feedback: "더 어렵게 만들어주세요" })
+      )
+    );
+    await waitFor(() =>
+      expect(screen.getByDisplayValue("판별식 문제(수정됨)")).toBeInTheDocument()
+    );
+  });
+
+  it("서술형 문제는 확정 목록에서 모범답안을 함께 보여준다", () => {
+    const essayDoc = {
+      ...doc,
+      sections: [
+        {
+          ...doc.sections[0],
+          sectionType: "problem" as const,
+          problems: [
+            {
+              id: "prob1",
+              format: "essay" as const,
+              passage: "서술형 문제",
+              options: null,
+              correctIndex: null,
+              explanation: "모범답안 내용",
+              difficulty: "medium" as const,
+            },
+          ],
+        },
+      ],
+    };
+    render(<CurriculumDocEditor doc={essayDoc} onBack={vi.fn()} />);
+    expect(screen.getByText(/서술형 문제/)).toBeInTheDocument();
+    expect(screen.getByText(/모범답안 내용/)).toBeInTheDocument();
   });
 });
