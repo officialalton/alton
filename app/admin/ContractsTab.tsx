@@ -55,7 +55,11 @@ export default function ContractsTab({
               </div>
               {openId !== c.id && (
                 <button
-                  onClick={() => setOpenId(c.id)}
+                  onClick={() => {
+                    setOpenId(c.id);
+                    setStudentName("");
+                    setStudentEmail("");
+                  }}
                   className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5"
                 >
                   계약서 발송
