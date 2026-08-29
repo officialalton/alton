@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { PayoutListItem } from "./payouts-data";
+import { previousMonthRange } from "./payouts-data";
 import {
   generatePayouts,
   markPayoutPaid,
@@ -9,20 +10,11 @@ import {
   revertPayoutToPending,
 } from "./payouts-actions";
 
-function previousMonthDefaults(): { start: string; end: string } {
-  const now = new Date();
-  const firstOfThisMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-  const lastOfPrevMonth = new Date(firstOfThisMonth.getTime() - 1);
-  const firstOfPrevMonth = new Date(lastOfPrevMonth.getFullYear(), lastOfPrevMonth.getMonth(), 1);
-  const fmt = (d: Date) => d.toISOString().slice(0, 10);
-  return { start: fmt(firstOfPrevMonth), end: fmt(lastOfPrevMonth) };
-}
-
 export default function PayoutsTab({ initialPayouts }: { initialPayouts: PayoutListItem[] }) {
   const [payouts, setPayouts] = useState(initialPayouts);
-  const defaults = previousMonthDefaults();
-  const [periodStart, setPeriodStart] = useState(defaults.start);
-  const [periodEnd, setPeriodEnd] = useState(defaults.end);
+  const defaults = previousMonthRange(new Date());
+  const [periodStart, setPeriodStart] = useState(defaults.periodStart);
+  const [periodEnd, setPeriodEnd] = useState(defaults.periodEnd);
   const [generating, setGenerating] = useState(false);
   const [generateMessage, setGenerateMessage] = useState<string | null>(null);
   const [processingId, setProcessingId] = useState<string | null>(null);
