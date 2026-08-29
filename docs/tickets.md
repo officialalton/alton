@@ -83,7 +83,9 @@
 - [ ] **083-admin-matching**: 관리자 "매칭" 탭 정책 결정 + 구현. Airtable을 계속 쓸지, 우리 앱으로 가져올지부터 결정 필요(functional-spec.md엔 원래 Airtable로 명시돼 있었음)
 - [ ] **084-admin-qc-tab**: 관리자 "QC" 탭 화면 기획 + 구현. `teacher_qc_warnings` 데이터는 이미 있고(대시보드 카드로만 노출 중), 전용 탭 화면이 없음
 - [ ] **085-admin-consult-tab**: 관리자 "상담" 탭 화면 기획 + 구현. `consult_requests`는 이미 있고(대시보드 카드로만 노출 중), 상담 신청 건을 개별로 열어보는 상세 화면이 없음
-- [ ] **086-admin-payouts-tab**: 관리자 "정산" 탭 — Wise 자동 송금 API 연동은 제외, 선생님별 시급×시간 기준 정산 필요 내역 계산/표시 + 관리자가 수기로 완료/완료취소 처리하는 UI. `teacher_payouts` 테이블은 이미 있음(설계 진행 중)
+- [x] **086-admin-payouts-tab**: 관리자 "정산" 탭 (2026-08-29: Wise 자동 송금은 제외, 시급×완료 수업시간 계산 + 관리자 수기 완료/완료취소 처리로 구현. `teachers.hourly_rate_krw` 신설, 선생님 초대 시 필수 입력으로 변경(`inviteTeacher`), 기존 선생님은 `TeacherDetailPanel`에서 백필. 정산 금액은 `sessions.status='completed'`인 세션들의 `duration_minutes`(Calendly 예약 당시 고정된 값 — 실제 진행 시간과 무관) 합계 × 시급으로 계산(`computePayoutAmounts`). 매달 1일 0시 Vercel Cron(`/api/cron/generate-payouts`, `CRON_SECRET`으로 인증)이 전월분을 전체 선생님에 대해 자동 생성, 관리자가 정산 탭에서 날짜 범위를 지정해 수동 생성도 가능(선생님·기간 조합 중복 시 스킵). `teacher_payouts.status`는 스키마상 3단계(pending/approved/paid)지만 이번 스코프는 pending↔paid 2단계만 사용(수기 송금은 승인 누르는 시점에 이미 끝나 있으므로 approved 불필요). 개별/전체 승인 시 `paid` 전환 + 선생님에게 완료 이메일 발송(기존 073 SMTP 재사용), 완료 취소 시 알림 없이 pending 복귀. 유닛 테스트 다수 신규(계산 함수, 생성/승인/취소 액션, cron 인증, `PayoutsTab` UI), 전체 테스트 통과, tsc 클린.)
+- [x] **089-referral-code-parent-only**: `/set-password`의 추천인 코드 입력을 학부모 초대일 때만 노출(2026-08-29 — `inviteAndCreateProfile`이 parent 초대에만 `?role=parent` 쿼리를 붙이고, `/set-password`는 그 값이 있을 때만 필드를 렌더링. 비밀번호 재설정 링크에는 role 정보가 없어 항상 숨김)
+- [x] **090-teacher-self-onboarding**: 선생님 셀프 Calendly 온보딩(2026-08-29 — 선생님 홈 대시보드에 `status='pending'`일 때 배너 노출, 본인 Calendly 예약 링크를 직접 제출하면 `submitCalendlyOnboarding`이 `calendly_scheduling_url` 저장과 동시에 `status='active'`로 자동 전환, 관리자 별도 승인 불필요)
 - [ ] **087-admin-documents-tab**: 관리자 "문서" 탭 — 회사 문서(법인설립/계좌정보/세무/계약템플릿 등) 업로드/다운로드 가능한 뷰. 구글 드라이브 연동되면 이상적(안 되면 Supabase Storage 등 대안)
 - [ ] **088-admin-supervisor**: 관리자 하위에 "슈퍼바이저"(중간관리자) 역할 신설. 사용자 탭에 슈퍼바이저 섹션 추가, 초대 + 권한(어떤 관리 기능에 접근 가능한지) 설정 구조 필요
 
