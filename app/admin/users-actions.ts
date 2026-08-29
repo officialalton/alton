@@ -3,7 +3,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { createAdminClient } from "@/lib/supabase-admin";
 
-async function requireAdmin() {
+export async function requireAdmin() {
   const supabase = await createClient();
   const {
     data: { user },
@@ -39,12 +39,13 @@ async function inviteAndCreateProfile(params: {
   return userId;
 }
 
-export async function inviteParent(params: { name: string; email: string }): Promise<void> {
+export async function inviteParent(params: { name: string; email: string }): Promise<string> {
   await requireAdmin();
   const admin = createAdminClient();
   const userId = await inviteAndCreateProfile({ ...params, role: "parent" });
   const { error } = await admin.from("parents").insert({ id: userId });
   if (error) throw new Error(error.message);
+  return userId;
 }
 
 export async function inviteStudent(params: {
@@ -52,7 +53,7 @@ export async function inviteStudent(params: {
   email: string;
   parentId: string;
   grade: string;
-}): Promise<void> {
+}): Promise<string> {
   await requireAdmin();
   const admin = createAdminClient();
   const userId = await inviteAndCreateProfile({
@@ -69,6 +70,8 @@ export async function inviteStudent(params: {
     .from("guardian_students")
     .insert({ parent_id: params.parentId, student_id: userId, relation_type: "보호자", is_primary: true });
   if (linkError) throw new Error(linkError.message);
+
+  return userId;
 }
 
 export async function inviteTeacher(params: {
