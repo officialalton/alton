@@ -1,15 +1,18 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState, type FormEvent } from "react";
+import { useRouter } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 
 export default function SetPasswordPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const showReferralField = searchParams.get("role") === "parent";
+  const [showReferralField, setShowReferralField] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    setShowReferralField(new URLSearchParams(window.location.search).get("role") === "parent");
+  }, []);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
