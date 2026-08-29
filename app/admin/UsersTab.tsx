@@ -210,13 +210,18 @@ export default function UsersTab({
             </button>
           ))}
           <InviteForm
-            fields={["name", "email", "school"]}
+            fields={["name", "email", "school", "hourlyRate"]}
             submitLabel="선생님 초대"
             onSubmit={async (values) => {
+              const hourlyRateKrw = Number(values.hourlyRate);
+              if (!hourlyRateKrw || hourlyRateKrw <= 0) {
+                throw new Error("시급을 입력해주세요.");
+              }
               await inviteTeacher({
                 name: values.name,
                 email: values.email,
                 school: values.school,
+                hourlyRateKrw,
               });
               setTeachers((prev) => [
                 {
@@ -228,6 +233,7 @@ export default function UsersTab({
                   qcWarningCount: 0,
                   subjectNames: [],
                   calendlySchedulingUrl: null,
+                  hourlyRateKrw,
                 },
                 ...prev,
               ]);
@@ -239,7 +245,7 @@ export default function UsersTab({
   );
 }
 
-type FieldKey = "name" | "email" | "grade" | "school" | "parentId";
+type FieldKey = "name" | "email" | "grade" | "school" | "parentId" | "hourlyRate";
 
 function InviteForm({
   fields,
@@ -259,6 +265,7 @@ function InviteForm({
     grade: "",
     school: "",
     parentId: "",
+    hourlyRate: "",
   });
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -274,7 +281,7 @@ function InviteForm({
     try {
       await onSubmit(values);
       setDone(true);
-      setValues({ name: "", email: "", grade: "", school: "", parentId: "" });
+      setValues({ name: "", email: "", grade: "", school: "", parentId: "", hourlyRate: "" });
       setOpen(false);
     } catch (e) {
       setError(e instanceof Error ? e.message : "초대에 실패했습니다.");
@@ -337,6 +344,16 @@ function InviteForm({
           value={values.school}
           onChange={(e) => set("school", e.target.value)}
           placeholder="학교 (선택)"
+          className="w-full px-3 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12.5px] mb-2"
+        />
+      )}
+      {fields.includes("hourlyRate") && (
+        <input
+          value={values.hourlyRate}
+          onChange={(e) => set("hourlyRate", e.target.value)}
+          placeholder="시급 (원, 예: 30000)"
+          type="number"
+          min="1"
           className="w-full px-3 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12.5px] mb-2"
         />
       )}

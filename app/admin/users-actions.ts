@@ -66,8 +66,12 @@ export async function inviteTeacher(params: {
   name: string;
   email: string;
   school: string;
-}): Promise<void> {
+  hourlyRateKrw: number;
+}): Promise<string> {
   await requireAdmin();
+  if (!Number.isFinite(params.hourlyRateKrw) || params.hourlyRateKrw <= 0) {
+    throw new Error("시급은 1원 이상의 숫자로 입력해주세요.");
+  }
   const admin = createAdminClient();
   const userId = await inviteAndCreateProfile({
     name: params.name,
@@ -76,8 +80,14 @@ export async function inviteTeacher(params: {
   });
   const { error } = await admin
     .from("teachers")
-    .insert({ id: userId, school: params.school, status: "pending" });
+    .insert({
+      id: userId,
+      school: params.school,
+      status: "pending",
+      hourly_rate_krw: params.hourlyRateKrw,
+    });
   if (error) throw new Error(error.message);
+  return userId;
 }
 
 export async function setStudentStatus(
@@ -95,6 +105,21 @@ export async function setTeacherStatus(
 ): Promise<void> {
   const { supabase } = await requireAdmin();
   const { error } = await supabase.from("teachers").update({ status }).eq("id", teacherId);
+  if (error) throw new Error(error.message);
+}
+
+export async function setTeacherHourlyRate(
+  teacherId: string,
+  rateKrw: number
+): Promise<void> {
+  const { supabase } = await requireAdmin();
+  if (!Number.isFinite(rateKrw) || rateKrw <= 0) {
+    throw new Error("시급은 1원 이상의 숫자로 입력해주세요.");
+  }
+  const { error } = await supabase
+    .from("teachers")
+    .update({ hourly_rate_krw: rateKrw })
+    .eq("id", teacherId);
   if (error) throw new Error(error.message);
 }
 

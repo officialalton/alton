@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { setTeacherStatus, setTeacherCalendlyUrl } from "./users-actions";
+import { setTeacherStatus, setTeacherCalendlyUrl, setTeacherHourlyRate } from "./users-actions";
 import type { QcWarning, TeacherListItem } from "./users-data";
 
 const STATUS_LABEL: Record<string, string> = {
@@ -24,6 +24,11 @@ export default function TeacherDetailPanel({
   const [calendlyUrl, setCalendlyUrl] = useState(teacher.calendlySchedulingUrl ?? "");
   const [savingUrl, setSavingUrl] = useState(false);
   const [savedUrl, setSavedUrl] = useState(false);
+  const [hourlyRate, setHourlyRate] = useState(
+    teacher.hourlyRateKrw != null ? String(teacher.hourlyRateKrw) : ""
+  );
+  const [savingRate, setSavingRate] = useState(false);
+  const [savedRate, setSavedRate] = useState(false);
 
   async function handleStatusChange(next: string) {
     setStatus(next);
@@ -40,6 +45,20 @@ export default function TeacherDetailPanel({
       setSavedUrl(true);
     } finally {
       setSavingUrl(false);
+    }
+  }
+
+  async function handleSaveHourlyRate() {
+    const rate = Number(hourlyRate);
+    if (!rate || rate <= 0) return;
+    setSavingRate(true);
+    setSavedRate(false);
+    try {
+      await setTeacherHourlyRate(teacher.id, rate);
+      onUpdated({ hourlyRateKrw: rate });
+      setSavedRate(true);
+    } finally {
+      setSavingRate(false);
     }
   }
 
@@ -104,6 +123,30 @@ export default function TeacherDetailPanel({
           </button>
         </div>
         {savedUrl && <p className="text-[12px] text-green mt-1.5">✓ 저장되었습니다</p>}
+      </div>
+
+      <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">
+        <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2">
+          시급 (정산 기준)
+        </div>
+        <div className="flex gap-2">
+          <input
+            value={hourlyRate}
+            onChange={(e) => setHourlyRate(e.target.value)}
+            type="number"
+            min="1"
+            placeholder="예: 30000"
+            className="flex-1 px-3 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12.5px]"
+          />
+          <button
+            disabled={savingRate}
+            onClick={handleSaveHourlyRate}
+            className="text-[12px] font-bold px-3.5 py-2 rounded-lg bg-ink text-white disabled:opacity-50 shrink-0"
+          >
+            {savingRate ? "저장 중..." : "저장"}
+          </button>
+        </div>
+        {savedRate && <p className="text-[12px] text-green mt-1.5">✓ 저장되었습니다</p>}
       </div>
 
       <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4">

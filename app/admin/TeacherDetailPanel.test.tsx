@@ -7,6 +7,7 @@ import type { TeacherListItem } from "./users-data";
 vi.mock("./users-actions", () => ({
   setTeacherStatus: vi.fn(),
   setTeacherCalendlyUrl: vi.fn(),
+  setTeacherHourlyRate: vi.fn(),
 }));
 
 const teacher: TeacherListItem = {
@@ -18,6 +19,7 @@ const teacher: TeacherListItem = {
   qcWarningCount: 1,
   subjectNames: ["SAT Math"],
   calendlySchedulingUrl: null,
+  hourlyRateKrw: 30000,
 };
 
 describe("TeacherDetailPanel", () => {
@@ -59,7 +61,7 @@ describe("TeacherDetailPanel", () => {
     fireEvent.change(screen.getByPlaceholderText("https://calendly.com/xxx-teacher/session"), {
       target: { value: "https://calendly.com/seoyeon-teacher/session" },
     });
-    fireEvent.click(screen.getByText("저장"));
+    fireEvent.click(screen.getAllByText("저장")[0]);
     await waitFor(() =>
       expect(actions.setTeacherCalendlyUrl).toHaveBeenCalledWith(
         "t1",
@@ -69,5 +71,24 @@ describe("TeacherDetailPanel", () => {
     expect(onUpdated).toHaveBeenCalledWith({
       calendlySchedulingUrl: "https://calendly.com/seoyeon-teacher/session",
     });
+  });
+
+  it("시급을 수정하고 저장할 수 있다", async () => {
+    render(
+      <TeacherDetailPanel
+        teacher={teacher}
+        warnings={[]}
+        onBack={vi.fn()}
+        onUpdated={vi.fn()}
+      />
+    );
+
+    const input = screen.getByPlaceholderText("예: 30000");
+    fireEvent.change(input, { target: { value: "35000" } });
+    fireEvent.click(screen.getAllByText("저장")[1]);
+
+    await waitFor(() =>
+      expect(actions.setTeacherHourlyRate).toHaveBeenCalledWith(teacher.id, 35000)
+    );
   });
 });
