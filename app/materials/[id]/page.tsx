@@ -1,6 +1,7 @@
 import { requireUser } from "@/lib/auth";
 import { loadLibraryDoc } from "@/app/student/materials-data";
 import LibraryDocView from "./LibraryDocView";
+import { redactProblem } from "./redact";
 import type { SessionViewViewer } from "@/lib/session-view";
 
 export default async function MaterialsLibraryPage({
@@ -26,5 +27,21 @@ export default async function MaterialsLibraryPage({
     );
   }
 
-  return <LibraryDocView doc={doc} viewerRole={role} studentId={studentId} />;
+  const isTeacherLike = role === "teacher" || role === "admin";
+  const redactedDoc = {
+    ...doc,
+    sections: doc.sections.map((s) => ({
+      ...s,
+      problems: s.problems.map((p) =>
+        redactProblem(
+          p,
+          isTeacherLike || p.done || !!p.submittedResponse
+        )
+      ),
+    })),
+  };
+
+  return (
+    <LibraryDocView doc={redactedDoc} viewerRole={role} studentId={studentId} />
+  );
 }

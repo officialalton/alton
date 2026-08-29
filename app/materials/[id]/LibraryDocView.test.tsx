@@ -52,7 +52,9 @@ describe("LibraryDocView", () => {
     render(<LibraryDocView doc={doc} viewerRole="student" studentId="student1" />);
     expect(screen.getByText("판별식이 0이면?")).toBeInTheDocument();
     expect(screen.queryByText("D=0이면 중근을 가집니다.")).not.toBeInTheDocument();
-    expect(screen.queryByText(/border-green|bg-green-bg/)).not.toBeInTheDocument();
+    expect(
+      screen.getByText("중근").closest("button")?.className ?? ""
+    ).not.toMatch(/bg-green-bg|border-green/);
   });
 
   it("학생이 객관식을 클릭하고 채점하면 정답을 맞혔을 때만 해설이 보인다", async () => {

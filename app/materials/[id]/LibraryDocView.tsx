@@ -109,7 +109,6 @@ export default function LibraryDocView({
                   key={p.id}
                   problem={p}
                   viewerRole={viewerRole}
-                  studentId={studentId}
                 />
               ))}
             </div>
@@ -127,7 +126,6 @@ function LibraryProblemCard({
 }: {
   problem: LibraryProblem;
   viewerRole: SessionViewViewer;
-  studentId: string | null;
 }) {
   const isStudent = viewerRole === "student";
   const isTeacherLike = viewerRole === "teacher" || viewerRole === "admin";
