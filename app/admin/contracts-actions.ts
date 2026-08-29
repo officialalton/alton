@@ -50,7 +50,7 @@ export async function sendFamilyContract(params: {
   });
   if (contractError) throw new Error(contractError.message);
 
-  await admin
+  const { error: updateError } = await admin
     .from("consult_requests")
     .update({
       converted_student_id: studentId,
@@ -58,4 +58,5 @@ export async function sendFamilyContract(params: {
       status: "completed",
     })
     .eq("id", params.consultRequestId);
+  if (updateError) throw new Error(updateError.message);
 }
