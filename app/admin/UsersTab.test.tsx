@@ -80,7 +80,7 @@ describe("UsersTab", () => {
   });
 
   it("학부모 초대 폼을 제출하면 inviteParent가 호출되고 목록에 추가된다", async () => {
-    vi.mocked(actions.inviteParent).mockResolvedValue(undefined);
+    vi.mocked(actions.inviteParent).mockResolvedValue("parent-id");
     render(<UsersTab {...baseProps} />);
     fireEvent.click(screen.getByText("+ 초대"));
     fireEvent.change(screen.getByPlaceholderText("이름"), { target: { value: "최유진" } });
