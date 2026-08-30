@@ -33,9 +33,9 @@ describe("StudentDetailPanel", () => {
     render(
       <StudentDetailPanel student={student} history={[]} onBack={vi.fn()} onUpdated={onUpdated} />
     );
-    fireEvent.change(screen.getByDisplayValue("활성"), { target: { value: "inactive" } });
-    await waitFor(() => expect(actions.setStudentStatus).toHaveBeenCalledWith("s1", "inactive"));
-    expect(onUpdated).toHaveBeenCalledWith({ status: "inactive" });
+    fireEvent.change(screen.getByDisplayValue("활성"), { target: { value: "suspended" } });
+    await waitFor(() => expect(actions.setStudentStatus).toHaveBeenCalledWith("s1", "suspended"));
+    expect(onUpdated).toHaveBeenCalledWith({ status: "suspended" });
   });
 
   it("사유 없이는 조정 적용 버튼이 비활성화된다", () => {

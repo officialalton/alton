@@ -1,17 +1,13 @@
 "use server";
 
-import { createClient } from "@/utils/supabase/server";
+import { requireUser } from "@/lib/auth";
 import type { TemplateUnit } from "./mysubjects-data";
 
 export async function createMyTemplate(subjectId: string): Promise<{
   templateId: string;
   units: TemplateUnit[];
 }> {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) throw new Error("로그인이 필요합니다.");
+  const { supabase, user } = await requireUser();
 
   const { data: template, error } = await supabase
     .from("teacher_curriculum_templates")
@@ -60,7 +56,7 @@ export async function addTemplateUnit(
   templateId: string,
   nextPosition: number
 ): Promise<TemplateUnit> {
-  const supabase = await createClient();
+  const { supabase } = await requireUser();
   const { data, error } = await supabase
     .from("teacher_curriculum_template_units")
     .insert({
@@ -85,7 +81,7 @@ export async function updateTemplateUnit(
   unitId: string,
   fields: { unitTitle?: string; note?: string; teacherComment?: string }
 ): Promise<void> {
-  const supabase = await createClient();
+  const { supabase } = await requireUser();
   const patch: Record<string, string | null> = {};
   if (fields.unitTitle !== undefined) patch.unit_title = fields.unitTitle;
   if (fields.note !== undefined) patch.note = fields.note || null;
@@ -100,7 +96,7 @@ export async function updateTemplateUnit(
 }
 
 export async function removeTemplateUnit(unitId: string): Promise<void> {
-  const supabase = await createClient();
+  const { supabase } = await requireUser();
   const { error } = await supabase
     .from("teacher_curriculum_template_units")
     .delete()
@@ -112,7 +108,7 @@ export async function moveTemplateUnit(
   unitId: string,
   otherUnitId: string
 ): Promise<void> {
-  const supabase = await createClient();
+  const { supabase } = await requireUser();
   const { data: rows, error } = await supabase
     .from("teacher_curriculum_template_units")
     .select("id, position")

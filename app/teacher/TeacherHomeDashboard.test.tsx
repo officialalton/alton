@@ -80,7 +80,7 @@ describe("TeacherHomeDashboard", () => {
     expect(screen.getByText("지훈 · SAT Math · 8회차")).toBeInTheDocument();
   });
 
-  it("status가 pending이면 온보딩 배너가 보이고, 제출하면 사라진다", async () => {
+  it("status가 pending이면 온보딩 배너가 보이고, 제출하면 접수 완료 문구로 바뀐다(status 자체는 admin 승인 전까지 pending 유지)", async () => {
     const { submitCalendlyOnboarding } = await import("./onboarding-actions");
     vi.mocked(submitCalendlyOnboarding).mockResolvedValue(undefined);
 
@@ -97,7 +97,7 @@ describe("TeacherHomeDashboard", () => {
       screen.getByPlaceholderText("https://calendly.com/xxx-teacher/session"),
       { target: { value: "https://calendly.com/seoyeon-teacher/session" } }
     );
-    fireEvent.click(screen.getByText("등록하고 시작하기"));
+    fireEvent.click(screen.getByText("등록하기"));
 
     await waitFor(() =>
       expect(submitCalendlyOnboarding).toHaveBeenCalledWith(
@@ -105,8 +105,9 @@ describe("TeacherHomeDashboard", () => {
       )
     );
     await waitFor(() =>
-      expect(screen.queryByText(/Calendly 연동이 필요해요/)).not.toBeInTheDocument()
+      expect(screen.getByText(/등록이 접수됐어요/)).toBeInTheDocument()
     );
+    expect(screen.queryByText(/Calendly 연동이 필요해요/)).not.toBeInTheDocument();
   });
 
   it("status가 active면 온보딩 배너가 안 보인다", () => {

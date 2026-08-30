@@ -74,6 +74,16 @@ insert into students (id, grade, status, credit_balance) values
   ('cccccccc-0000-0000-0000-000000000002', '11학년', 'active', 8),
   ('88888888-0000-0000-0000-000000000001', '9학년', 'pending', 0);
 
+-- (2026-08-30 R2 추가) teachers.status='active'로 바로 INSERT하면 R1의
+-- teachers_enforce_active_requires_rate 트리거가 유효한 현재 시급 이력
+-- (teacher_rate_history)을 요구한다 — teacher_rate_history.teacher_id는
+-- profiles(id)를 참조하므로, teachers보다 먼저 생성된 profiles 행을 대상으로
+-- 여기서 미리 시급 이력을 만들어둔다(실제 앱에서는 관리자가 초대 시
+-- set_teacher_rate()로 만드는 것과 동일한 선행 조건).
+insert into teacher_rate_history (teacher_id, amount_minor, currency, effective_from) values
+  ('dddddddd-0000-0000-0000-000000000001', 50000, 'KRW', now()),
+  ('dddddddd-0000-0000-0000-000000000002', 45000, 'KRW', now());
+
 -- school/bio는 목업(alton_student_portal_v16.html TEACHERS 딕셔너리) 텍스트 그대로.
 -- 기존 시드에 이도현 school이 최지우(목업엔 없는 시드 미등록 선생님) 것과
 -- 뒤바뀌어 있던 걸 바로잡음.

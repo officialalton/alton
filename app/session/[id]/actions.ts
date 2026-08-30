@@ -1,13 +1,9 @@
 "use server";
 
-import { createClient } from "@/utils/supabase/server";
+import { requireUser } from "@/lib/auth";
 
 async function requireStudent() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) throw new Error("로그인이 필요합니다.");
+  const { supabase, user } = await requireUser();
   return { supabase, userId: user.id };
 }
 

@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
-import { getRoleHomePath } from "@/lib/auth";
+import { resolveAccountDestination } from "@/lib/auth";
 
 /**
  * 로그인 화면을 거치지 않고 세션만 새로 생겼을 때(예: 비밀번호 설정 직후)
@@ -22,5 +22,5 @@ export default async function PostAuthPage() {
     .eq("id", user.id)
     .single();
 
-  redirect(getRoleHomePath(profile?.role));
+  redirect(await resolveAccountDestination(supabase, profile?.role));
 }

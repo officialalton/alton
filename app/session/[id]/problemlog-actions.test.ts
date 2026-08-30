@@ -14,8 +14,14 @@ vi.mock("@/utils/supabase/server", () => ({
       if (table === "session_problem_attempts") {
         return { insert: insertMock };
       }
+      if (table === "profiles") {
+        return {
+          select: () => ({ eq: () => ({ single: async () => ({ data: { role: "student" } }) }) }),
+        };
+      }
       throw new Error(`unexpected table ${table}`);
     },
+    rpc: async () => ({ data: "active", error: null }),
   }),
 }));
 

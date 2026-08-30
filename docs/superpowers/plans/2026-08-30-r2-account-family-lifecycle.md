@@ -54,22 +54,35 @@
 
 ---
 
-## Task 2: 계정 상태 모델 확장 (스키마)
+## Task 2: 계정 상태 모델 확장 (스키마 + 강제 로직, 로컬 검증 완료 — 원격 적용 승인 대기)
+
+> **범위 확장(사용자 요청)**: 원래 초안은 스키마만 만들고 강제 로직은 후속 태스크로 미루는 안이었으나, 로그인 게이트·자기 상태 변경 차단·메시지 차단까지 이번 태스크에서 실제로 구현하도록 범위가 넓어졌다. 아래 Step은 실제로 한 일 기준으로 갱신했다. 상세는 `docs/2026-08-29-r2-migration-execution-log.md`의 "Task 2" 항목 참고.
 
 **Files:**
 - Create: `supabase/migrations/20260831010000_r2_account_status_enums.sql`
-- Create: `supabase/migrations/20260831011000_r2_account_status_migrate.sql`
+- Create: `supabase/migrations/20260831011000_r2_account_status_apply.sql`
+- Create: `lib/auth.test.ts`
+- Create: `app/account-suspended/page.tsx`
+- Modify: `lib/auth.ts`, `app/login/actions.ts`, `app/post-auth/page.tsx`, `app/admin/users-actions.ts`, `app/admin/users-actions.test.ts`, `app/admin/StudentDetailPanel.tsx`, `app/admin/StudentDetailPanel.test.tsx`, `app/admin/TeacherDetailPanel.tsx`, `app/admin/UsersTab.tsx`
 
 **배경**: `teachers.status`는 `{pending, active}` 2값뿐이고 `parents`에는 status 컬럼 자체가 없다. §5.7 확정 모델(`pending→active→suspended→closure_pending→closed`)로 통일한다.
 
-- [ ] **Step 1**: `teacher_status` enum에 `suspended`, `closure_pending`, `closed` 추가(`ALTER TYPE ... ADD VALUE`, 별도 파일로 분리 — Postgres 제약 때문에 같은 트랜잭션에서 바로 못 씀).
-- [ ] **Step 2**: `student_status`도 동일하게 확장(기존 `active|pending|inactive`의 `inactive`를 어떻게 매핑할지 결정 — 기존 `inactive` 의미가 지금의 `suspended`에 가까운지 `closed`에 가까운지 코드 사용처 재확인 후 결정. 현재 조사로는 `inactive`를 실제로 쓰는 코드가 없었으므로 데이터 마이그레이션 걱정 없이 신규 값으로 대체 가능).
-- [ ] **Step 3**: `parents`에 `status parent_status not null default 'active'` 컬럼 추가(신규 enum `parent_status`도 5단계와 동일하게).
-- [ ] **Step 4**: `profiles`에 `timezone text`, `date_of_birth date`(nullable, 학생만 실질적으로 씀) 컬럼 추가.
-- [ ] **Step 5**: `households`에 `default_timezone text not null default 'America/Los_Angeles'` 컬럼 추가(§4.21).
-- [ ] **Step 6**: `suspended`/`closure_pending`/`closed`로의 상태 전이를 강제하는 트리거는 이번 태스크에서 만들지 않는다 — 상태 전이 자체가 어떤 액션에서 일어나는지(Task 4/5와 연결)가 먼저 정해져야 하므로, 스키마만 이번에 준비하고 전이 강제 로직은 해당 기능 태스크에서 같이 만든다.
+- [x] **Step 1**: `teacher_status` enum에 `suspended`, `closure_pending`, `closed` 추가(별도 파일로 분리).
+- [x] **Step 2**: `student_status`도 동일하게 확장. `inactive`는 실사용 코드가 없어(조사 확인) 데이터 마이그레이션 없이 폐기 예정 값으로만 남기고 사용 중단(앱 타입에서 제거).
+- [x] **Step 3**: `parents`에 `status parent_status not null default 'active'` 컬럼 추가.
+- [x] **Step 4**: `profiles`에 `timezone text`, `date_of_birth date` 컬럼 추가.
+- [x] **Step 5**: `households`에 `default_timezone text not null default 'America/Los_Angeles'` 컬럼 추가.
+- [x] **Step 6(확장)**: 상태 전이 강제를 이번 태스크에서 구현했다 — `prevent_self_status_change()` 트리거(관리자 제외 자기 status 직접 변경 차단), `get_account_status()`/`is_account_active()` 공통 판정 함수, `lib/auth.ts`의 `requireUser()`/`resolveAccountDestination()`(로그인·모든 포털 페이지 게이트 — suspended는 `/account-suspended`, closure_pending/closed는 강제 로그아웃), `chat_messages` INSERT RLS에 상태 검사 추가(메시지 차단 실증).
+- [x] **Step 7(신규)**: `setStudentStatus`/`setTeacherStatus`를 `suspended`까지 지원하도록 확장, `setParentStatus` 신규 추가. `closure_pending`/`closed`는 의도적으로 이 함수들에 노출하지 않음(§5.7 "closed는 일반 UI에서 복구 불가"와 대칭 — 전용 흐름은 후속 태스크).
 
-**DoD 체크**: 로컬 빈 DB + 백업 복원 DB 양쪽 적용, 기존 데이터 무결성 재확인(5명 데이터 그대로), 원격 변경 대상 요약 보고 후 `supabase db push --linked`, 원격 재검증.
+**DoD 체크**:
+- [x] `npx tsc --noEmit` 클린
+- [x] `npx vitest run`(전체 77개 파일 329개) 통과
+- [x] 로컬 빈 DB + 백업 복원 DB 양쪽 적용, 기존 데이터 무결성 재확인(5명 데이터 그대로)
+- [x] 자기 상태 변경 차단, 재활성화, closed 불가역성, 메시지 차단 각각 실제 실행 검증
+- [x] 6개 역할 RLS 회귀 확인(households 재검증, 완전 동일)
+- [ ] **E2E(Playwright) 실행 — 환경 제약으로 실행 불가**: 로컬 Supabase(Docker) 스택이 이 세션에서 응답 없음(R1과 동일한 Docker 무응답 문제로 추정). 대신 `lib/auth.test.ts` 단위 테스트로 게이트 로직 자체를 검증했고, 기존 E2E 고정 테스트 계정 4개가 전부 이번 변경으로 상태가 바뀌지 않는 active 계정임을 확인해 회귀 가능성이 낮다고 판단했다 — 그러나 실제 브라우저 재실행으로 확인하지는 못했다.
+- [x] 원격 변경 대상·영향 범위·롤백 절차 요약 보고(실행 로그 Task 2 "원격 적용 전 요약" 참고) — **원격 push는 사용자 승인 대기 중, 아직 미실행**
 
 ---
 

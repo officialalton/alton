@@ -7,7 +7,7 @@ import type { CreditTransaction, StudentListItem } from "./users-data";
 const STATUS_LABEL: Record<string, string> = {
   active: "활성",
   pending: "매칭 대기",
-  inactive: "비활성",
+  suspended: "일시정지",
 };
 
 const TX_TYPE_LABEL: Record<string, string> = {
@@ -38,7 +38,7 @@ export default function StudentDetailPanel({
 
   async function handleStatusChange(next: string) {
     setStatus(next);
-    await setStudentStatus(student.id, next as "active" | "pending" | "inactive");
+    await setStudentStatus(student.id, next as "active" | "pending" | "suspended");
     onUpdated({ status: next });
   }
 

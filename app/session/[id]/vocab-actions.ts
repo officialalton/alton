@@ -1,7 +1,7 @@
 "use server";
 
 import Anthropic from "@anthropic-ai/sdk";
-import { createClient } from "@/utils/supabase/server";
+import { requireUser } from "@/lib/auth";
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
@@ -59,11 +59,7 @@ export async function addVocabWord(
   sourceSessionId: string,
   word: string
 ) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) throw new Error("로그인이 필요합니다.");
+  const { supabase } = await requireUser();
 
   const { data: existing } = await supabase
     .from("vocab_words")
@@ -112,7 +108,7 @@ export async function addVocabWord(
 }
 
 export async function removeVocabWord(vocabId: string) {
-  const supabase = await createClient();
+  const { supabase } = await requireUser();
   const { error } = await supabase
     .from("vocab_words")
     .delete()

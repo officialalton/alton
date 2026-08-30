@@ -23,11 +23,13 @@ type SubtabId = (typeof SUBTABS)[number]["id"];
 const STUDENT_STATUS_LABEL: Record<string, string> = {
   active: "활성",
   pending: "매칭 대기",
-  inactive: "비활성",
+  suspended: "일시정지",
+  inactive: "비활성(레거시)",
 };
 const TEACHER_STATUS_LABEL: Record<string, string> = {
   active: "활성",
   pending: "승인 대기",
+  suspended: "일시정지",
 };
 
 export default function UsersTab({

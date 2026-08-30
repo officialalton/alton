@@ -1,13 +1,9 @@
 "use server";
 
-import { createClient } from "@/utils/supabase/server";
+import { requireUser } from "@/lib/auth";
 
 export async function requestParentPayment(): Promise<{ guardianName: string }> {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) throw new Error("로그인이 필요합니다.");
+  const { supabase, user } = await requireUser();
 
   const { data: guardian } = await supabase
     .from("guardian_students")

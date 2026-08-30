@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
-import { getRoleHomePath } from "@/lib/auth";
+import { resolveAccountDestination } from "@/lib/auth";
 
 export async function login(formData: FormData) {
   const email = formData.get("email") as string;
@@ -27,7 +27,7 @@ export async function login(formData: FormData) {
     .eq("id", data.user.id)
     .single();
 
-  redirect(getRoleHomePath(profile?.role));
+  redirect(await resolveAccountDestination(supabase, profile?.role));
 }
 
 export async function logout() {

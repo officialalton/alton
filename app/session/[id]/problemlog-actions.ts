@@ -1,13 +1,13 @@
 "use server";
 
-import { createClient } from "@/utils/supabase/server";
+import { requireUser as requireAuthenticatedUser } from "@/lib/auth";
 
+// (2026-08-30 R2 정정) 이 로컬 requireUser()는 이름만 같을 뿐 @/lib/auth의
+// 실제 requireUser()와 무관하게 auth.getUser()만 확인해왔다 — 계정 상태
+// 게이트(R2 §5.7)를 거치지 않는 구멍이었다. 이제 실제 requireUser()에
+// 위임하고, 이 파일 전체가 쓰는 {supabase, userId} 인터페이스만 유지한다.
 async function requireUser() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) throw new Error("로그인이 필요합니다.");
+  const { supabase, user } = await requireAuthenticatedUser();
   return { supabase, userId: user.id };
 }
 

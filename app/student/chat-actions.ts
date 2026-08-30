@@ -1,6 +1,6 @@
 "use server";
 
-import { createClient } from "@/utils/supabase/server";
+import { requireUser } from "@/lib/auth";
 import type { ChatMessage } from "./chat-data";
 
 export async function sendChatMessage(
@@ -8,7 +8,7 @@ export async function sendChatMessage(
   text: string
 ): Promise<ChatMessage> {
   if (!text.trim()) throw new Error("메시지를 입력해주세요.");
-  const supabase = await createClient();
+  const { supabase } = await requireUser();
   const { data, error } = await supabase
     .from("chat_messages")
     .insert({ thread_id: threadId, sender_role: "student", text: text.trim() })

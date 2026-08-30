@@ -105,18 +105,42 @@ export async function inviteTeacher(params: {
   return userId;
 }
 
+// transition_account_status()가 유일한 정상 경로다(R2 §5.7) — 허용된 전이만
+// 통과시키고(예: pending→active, active↔suspended) 감사 이력을 남긴다.
+// students/teachers/parents.status 직접 UPDATE는 DB 트리거가 전부 차단한다.
+async function transitionAccountStatus(
+  supabase: Awaited<ReturnType<typeof requireAdmin>>["supabase"],
+  profileId: string,
+  status: "active" | "pending" | "suspended",
+  reason?: string
+): Promise<void> {
+  const { error } = await supabase.rpc("transition_account_status", {
+    p_profile_id: profileId,
+    p_new_status: status,
+    p_reason: reason ?? null,
+  });
+  if (error) throw new Error(error.message);
+}
+
 export async function setStudentStatus(
   studentId: string,
-  status: "active" | "pending" | "inactive"
+  status: "active" | "pending" | "suspended"
 ): Promise<void> {
   const { supabase } = await requireAdmin();
-  const { error } = await supabase.from("students").update({ status }).eq("id", studentId);
-  if (error) throw new Error(error.message);
+  await transitionAccountStatus(supabase, studentId, status);
+}
+
+export async function setParentStatus(
+  parentId: string,
+  status: "active" | "pending" | "suspended"
+): Promise<void> {
+  const { supabase } = await requireAdmin();
+  await transitionAccountStatus(supabase, parentId, status);
 }
 
 export async function setTeacherStatus(
   teacherId: string,
-  status: "active" | "pending"
+  status: "active" | "pending" | "suspended"
 ): Promise<void> {
   const { supabase } = await requireAdmin();
   if (status === "active") {
@@ -134,8 +158,7 @@ export async function setTeacherStatus(
       );
     }
   }
-  const { error } = await supabase.from("teachers").update({ status }).eq("id", teacherId);
-  if (error) throw new Error(error.message);
+  await transitionAccountStatus(supabase, teacherId, status);
 }
 
 export async function setTeacherHourlyRate(

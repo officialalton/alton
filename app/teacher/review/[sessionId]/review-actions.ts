@@ -2,6 +2,7 @@
 
 import Anthropic from "@anthropic-ai/sdk";
 import { createClient } from "@/utils/supabase/server";
+import { requireUser } from "@/lib/auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { sendEmail } from "@/lib/email";
 import type { ReviewCategoryId } from "./review-data";
@@ -24,17 +25,7 @@ export type ReviewDraft = {
 };
 
 async function requireSessionTeacher(sessionId: string) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) throw new Error("로그인이 필요합니다.");
-
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("role")
-    .eq("id", user.id)
-    .single();
+  const { supabase, user, profile } = await requireUser();
   if (profile?.role === "admin") return { supabase, user };
 
   const { data: session } = await supabase

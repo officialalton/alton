@@ -1,9 +1,9 @@
 "use server";
 
-import { createClient } from "@/utils/supabase/server";
+import { requireUser } from "@/lib/auth";
 
 export async function saveHomeworkAnswer(itemId: string, answer: string) {
-  const supabase = await createClient();
+  const { supabase } = await requireUser();
   const { error } = await supabase
     .from("homework_items")
     .update({ student_answer: answer })
@@ -16,7 +16,7 @@ export async function addHomeworkItem(
   title: string,
   description: string
 ) {
-  const supabase = await createClient();
+  const { supabase } = await requireUser();
   const { data, error } = await supabase
     .from("homework_items")
     .insert({ session_id: sessionId, title, description: description || null })

@@ -1,6 +1,6 @@
 "use server";
 
-import { createClient } from "@/utils/supabase/server";
+import { requireUser } from "@/lib/auth";
 import type { CanvasStroke } from "./material-data";
 import type { DocLink } from "./scratchpad-data";
 
@@ -9,7 +9,7 @@ export async function addDocLink(
   title: string,
   externalUrl: string
 ): Promise<DocLink> {
-  const supabase = await createClient();
+  const { supabase } = await requireUser();
   const { data, error } = await supabase
     .from("session_doc_links")
     .insert({ session_id: sessionId, title, external_url: externalUrl })
@@ -20,7 +20,7 @@ export async function addDocLink(
 }
 
 export async function removeDocLink(id: string) {
-  const supabase = await createClient();
+  const { supabase } = await requireUser();
   const { error } = await supabase
     .from("session_doc_links")
     .delete()
@@ -32,7 +32,7 @@ export async function saveWhiteboardStrokes(
   sessionId: string,
   strokes: CanvasStroke[]
 ) {
-  const supabase = await createClient();
+  const { supabase } = await requireUser();
   const { error } = await supabase
     .from("sessions")
     .update({ whiteboard_strokes: strokes })

@@ -1,23 +1,13 @@
 "use server";
 
-import { createClient } from "@/utils/supabase/server";
+import { requireUser } from "@/lib/auth";
 import type { Memo } from "./memo-data";
 
 export async function addMemo(
   enrollmentId: string,
   text: string
 ): Promise<Memo> {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) throw new Error("로그인이 필요합니다.");
-
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("role")
-    .eq("id", user.id)
-    .single();
+  const { supabase, profile } = await requireUser();
 
   const { data, error } = await supabase
     .from("session_memos")

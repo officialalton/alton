@@ -10,6 +10,7 @@ import type { QcWarning, TeacherListItem } from "./users-data";
 const STATUS_LABEL: Record<string, string> = {
   active: "활성",
   pending: "승인 대기",
+  suspended: "일시정지",
 };
 
 export default function TeacherDetailPanel({
@@ -72,7 +73,7 @@ export default function TeacherDetailPanel({
   async function handleStatusChange(next: string) {
     setStatus(next);
     setSavedStatus(false);
-    await setTeacherStatus(teacher.id, next as "active" | "pending");
+    await setTeacherStatus(teacher.id, next as "active" | "pending" | "suspended");
     onUpdated({ status: next });
     setSavedStatus(true);
   }

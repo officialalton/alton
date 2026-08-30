@@ -1,6 +1,6 @@
 "use server";
 
-import { createClient } from "@/utils/supabase/server";
+import { requireUser } from "@/lib/auth";
 import type { CanvasStroke } from "./material-data";
 
 export async function saveCanvasStrokes(
@@ -8,11 +8,7 @@ export async function saveCanvasStrokes(
   curriculumDocId: string,
   strokes: CanvasStroke[]
 ) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) throw new Error("로그인이 필요합니다.");
+  const { supabase } = await requireUser();
 
   const { error } = await supabase.from("canvas_annotations").upsert(
     {

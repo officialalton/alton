@@ -15,17 +15,22 @@ export default function TeacherHomeDashboard({
   onShowSchedule: () => void;
 }) {
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
-  const [status, setStatus] = useState(data.status);
+  const status = data.status;
   const [calendlyUrl, setCalendlyUrl] = useState(data.calendlySchedulingUrl ?? "");
   const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // (2026-08-30 R2 정정) Calendly 등록만으로 바로 active가 되지 않는다 —
+  // 시급 설정 여부를 관리자가 확인한 뒤 별도로 승인한다(§R2 계정 상태 전환
+  // 정책). 여기서는 제출 완료 여부만 표시하고, 실제 active 전환은 관리자
+  // 승인 후 다음 로그인/새로고침에서 반영된다.
   async function handleOnboardingSubmit() {
     setError(null);
     setSubmitting(true);
     try {
       await submitCalendlyOnboarding(calendlyUrl);
-      setStatus("active");
+      setSubmitted(true);
     } catch (e) {
       setError(e instanceof Error ? e.message : "저장에 실패했습니다.");
     } finally {
@@ -41,28 +46,44 @@ export default function TeacherHomeDashboard({
 
       {status === "pending" && (
         <div className="border-[1.5px] border-ink rounded-xl px-5 py-4.5 mb-6">
-          <h2 className="text-[14px] font-bold text-ink mb-1.5">
-            👋 시작하기 전에 — Calendly 연동이 필요해요
-          </h2>
-          <p className="text-[12.5px] text-grey-500 mb-3 leading-[1.6]">
-            학생들이 선생님과 직접 회차를 예약할 수 있도록, 본인의 Calendly 개인
-            예약 링크를 등록해주세요. 등록하시면 바로 활동을 시작하실 수 있습니다.
-          </p>
-          <div className="flex gap-2">
-            <input
-              value={calendlyUrl}
-              onChange={(e) => setCalendlyUrl(e.target.value)}
-              placeholder="https://calendly.com/xxx-teacher/session"
-              className="flex-1 px-3 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12.5px]"
-            />
-            <button
-              disabled={submitting}
-              onClick={handleOnboardingSubmit}
-              className="text-[12px] font-bold px-3.5 py-2 rounded-lg bg-ink text-white disabled:opacity-50 shrink-0"
-            >
-              {submitting ? "저장 중..." : "등록하고 시작하기"}
-            </button>
-          </div>
+          {submitted ? (
+            <>
+              <h2 className="text-[14px] font-bold text-ink mb-1.5">
+                ✅ 등록이 접수됐어요
+              </h2>
+              <p className="text-[12.5px] text-grey-500 leading-[1.6]">
+                관리자 확인 후 활동을 시작하실 수 있습니다.
+              </p>
+            </>
+          ) : (
+            <>
+              <h2 className="text-[14px] font-bold text-ink mb-1.5">
+                👋 시작하기 전에 — Calendly 연동이 필요해요
+              </h2>
+              <p className="text-[12.5px] text-grey-500 mb-3 leading-[1.6]">
+                학생들이 선생님과 직접 회차를 예약할 수 있도록, 본인의 Calendly
+                개인 예약 링크를 등록해주세요. 등록 후 관리자 확인을 거쳐
+                활동을 시작하실 수 있습니다.
+              </p>
+            </>
+          )}
+          {!submitted && (
+            <div className="flex gap-2">
+              <input
+                value={calendlyUrl}
+                onChange={(e) => setCalendlyUrl(e.target.value)}
+                placeholder="https://calendly.com/xxx-teacher/session"
+                className="flex-1 px-3 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12.5px]"
+              />
+              <button
+                disabled={submitting}
+                onClick={handleOnboardingSubmit}
+                className="text-[12px] font-bold px-3.5 py-2 rounded-lg bg-ink text-white disabled:opacity-50 shrink-0"
+              >
+                {submitting ? "저장 중..." : "등록하기"}
+              </button>
+            </div>
+          )}
           {error && <p className="text-[12px] text-red mt-1.5">{error}</p>}
         </div>
       )}

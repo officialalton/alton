@@ -166,6 +166,40 @@ describe("setTeacherHourlyRate", () => {
   });
 });
 
+describe("setParentStatus", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    getUserMock.mockResolvedValue({ data: { user: { id: "admin1" } } });
+    profileSingleMock.mockResolvedValue({ data: { role: "admin" } });
+  });
+
+  it("transition_account_status RPC로 상태를 전환한다", async () => {
+    const rpcMock = vi.fn().mockResolvedValue({ error: null });
+    vi.doMock("@/utils/supabase/server", () => ({
+      createClient: async () => ({
+        auth: { getUser: getUserMock },
+        from: (table: string) => {
+          if (table === "profiles") {
+            return { select: () => ({ eq: () => ({ single: profileSingleMock }) }) };
+          }
+          throw new Error(`unexpected table ${table}`);
+        },
+        rpc: rpcMock,
+      }),
+    }));
+    vi.resetModules();
+    const { setParentStatus } = await import("./users-actions");
+
+    await setParentStatus("parent1", "suspended");
+
+    expect(rpcMock).toHaveBeenCalledWith("transition_account_status", {
+      p_profile_id: "parent1",
+      p_new_status: "suspended",
+      p_reason: null,
+    });
+  });
+});
+
 describe("setTeacherStatus", () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -174,8 +208,8 @@ describe("setTeacherStatus", () => {
   });
 
   it("active 전환 시 유효한 시급 이력이 있으면 정상 진행한다", async () => {
-    const teachersUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
-    const rpcMock = vi.fn().mockResolvedValue({ data: true, error: null });
+    const serverRpcMock = vi.fn().mockResolvedValue({ error: null });
+    const adminRpcMock = vi.fn().mockResolvedValue({ data: true, error: null });
     vi.doMock("@/utils/supabase/server", () => ({
       createClient: async () => ({
         auth: { getUser: getUserMock },
@@ -183,25 +217,27 @@ describe("setTeacherStatus", () => {
           if (table === "profiles") {
             return { select: () => ({ eq: () => ({ single: profileSingleMock }) }) };
           }
-          if (table === "teachers") {
-            return { update: () => ({ eq: teachersUpdateEqMock }) };
-          }
           throw new Error(`unexpected table ${table}`);
         },
+        rpc: serverRpcMock,
       }),
     }));
     vi.doMock("@/lib/supabase-admin", () => ({
-      createAdminClient: () => ({ rpc: rpcMock }),
+      createAdminClient: () => ({ rpc: adminRpcMock }),
     }));
     vi.resetModules();
     const { setTeacherStatus } = await import("./users-actions");
 
     await setTeacherStatus("teacher1", "active");
 
-    expect(rpcMock).toHaveBeenCalledWith("has_valid_current_teacher_rate", {
+    expect(adminRpcMock).toHaveBeenCalledWith("has_valid_current_teacher_rate", {
       p_teacher_id: "teacher1",
     });
-    expect(teachersUpdateEqMock).toHaveBeenCalledWith("id", "teacher1");
+    expect(serverRpcMock).toHaveBeenCalledWith("transition_account_status", {
+      p_profile_id: "teacher1",
+      p_new_status: "active",
+      p_reason: null,
+    });
   });
 
   it("active 전환 시 유효한 시급 이력이 없으면 친화적 오류를 던지고 update하지 않는다", async () => {
@@ -232,8 +268,8 @@ describe("setTeacherStatus", () => {
   });
 
   it("pending 전환 시에는 시급 이력을 확인하지 않는다", async () => {
-    const teachersUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
-    const rpcMock = vi.fn();
+    const serverRpcMock = vi.fn().mockResolvedValue({ error: null });
+    const adminRpcMock = vi.fn();
     vi.doMock("@/utils/supabase/server", () => ({
       createClient: async () => ({
         auth: { getUser: getUserMock },
@@ -241,22 +277,24 @@ describe("setTeacherStatus", () => {
           if (table === "profiles") {
             return { select: () => ({ eq: () => ({ single: profileSingleMock }) }) };
           }
-          if (table === "teachers") {
-            return { update: () => ({ eq: teachersUpdateEqMock }) };
-          }
           throw new Error(`unexpected table ${table}`);
         },
+        rpc: serverRpcMock,
       }),
     }));
     vi.doMock("@/lib/supabase-admin", () => ({
-      createAdminClient: () => ({ rpc: rpcMock }),
+      createAdminClient: () => ({ rpc: adminRpcMock }),
     }));
     vi.resetModules();
     const { setTeacherStatus } = await import("./users-actions");
 
     await setTeacherStatus("teacher1", "pending");
 
-    expect(rpcMock).not.toHaveBeenCalled();
-    expect(teachersUpdateEqMock).toHaveBeenCalledWith("id", "teacher1");
+    expect(adminRpcMock).not.toHaveBeenCalled();
+    expect(serverRpcMock).toHaveBeenCalledWith("transition_account_status", {
+      p_profile_id: "teacher1",
+      p_new_status: "pending",
+      p_reason: null,
+    });
   });
 });
