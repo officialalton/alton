@@ -36,6 +36,42 @@ export async function inviteParent(params: { name: string; email: string }): Pro
   return userId;
 }
 
+// (2026-08-30 R2 Task 3) 가족 관계 원본은 households/household_members다 —
+// guardian_students는 동결됐고 DB 트리거가 쓰기를 거부한다. 부모가 이미 속한
+// household가 있으면 재사용하고, 없으면 그 부모를 주 보호자로 하는 새 household를
+// 만든다(다중 보호자 초대 UX는 Task 4에서 별도로 설계 — 이번엔 기존 시그니처를
+// 유지한 최소 수정).
+async function findOrCreateHouseholdForGuardian(
+  admin: ReturnType<typeof createAdminClient>,
+  parentId: string
+): Promise<string> {
+  const { data: existing } = await admin
+    .from("household_members")
+    .select("household_id")
+    .eq("profile_id", parentId)
+    .eq("role", "guardian")
+    .limit(1)
+    .maybeSingle();
+  if (existing) return existing.household_id;
+
+  const { data: household, error } = await admin
+    .from("households")
+    .insert({ primary_guardian_id: parentId })
+    .select("id")
+    .single();
+  if (error) throw new Error(error.message);
+
+  const { error: memberError } = await admin.from("household_members").insert({
+    household_id: household.id,
+    profile_id: parentId,
+    role: "guardian",
+    is_primary: true,
+  });
+  if (memberError) throw new Error(memberError.message);
+
+  return household.id;
+}
+
 export async function inviteStudent(params: {
   name: string;
   email: string;
@@ -54,9 +90,10 @@ export async function inviteStudent(params: {
     .insert({ id: userId, grade: params.grade, status: "pending" });
   if (error) throw new Error(error.message);
 
+  const householdId = await findOrCreateHouseholdForGuardian(admin, params.parentId);
   const { error: linkError } = await admin
-    .from("guardian_students")
-    .insert({ parent_id: params.parentId, student_id: userId, relation_type: "보호자", is_primary: true });
+    .from("household_members")
+    .insert({ household_id: householdId, profile_id: userId, role: "child", is_primary: true });
   if (linkError) throw new Error(linkError.message);
 
   return userId;

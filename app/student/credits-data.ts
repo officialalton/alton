@@ -5,6 +5,11 @@ export type CreditsData = {
   guardianName: string | null;
 };
 
+function extractName(rel: unknown): string {
+  const row = Array.isArray(rel) ? rel[0] : rel;
+  return (row as { name?: string } | null)?.name ?? "";
+}
+
 export async function loadCreditsData(
   supabase: SupabaseClient,
   studentId: string
@@ -15,22 +20,26 @@ export async function loadCreditsData(
     .eq("id", studentId)
     .single();
 
+  // (2026-08-30 R2 Task 3) 가족 관계 원본은 households/household_members다
+  // (guardian_students는 동결).
   const { data: guardian } = await supabase
-    .from("guardian_students")
-    .select("parent_id")
-    .eq("student_id", studentId)
-    .order("is_primary", { ascending: false })
-    .limit(1)
+    .from("household_members")
+    .select("household_id")
+    .eq("profile_id", studentId)
+    .eq("role", "child")
     .maybeSingle();
 
   let guardianName: string | null = null;
   if (guardian) {
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("name")
-      .eq("id", guardian.parent_id)
-      .single();
-    guardianName = profile?.name ?? null;
+    const { data: primaryGuardian } = await supabase
+      .from("household_members")
+      .select("profile:profiles(name)")
+      .eq("household_id", guardian.household_id)
+      .eq("role", "guardian")
+      .order("is_primary", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+    guardianName = extractName(primaryGuardian?.profile) || null;
   }
 
   return {

@@ -38,6 +38,9 @@ insert into auth.users (
     '{"provider":"email","providers":["email"]}', '{}', now(), now(), '', '', '', '', '', '', '', ''),
   ('00000000-0000-0000-0000-000000000000', '88888888-0000-0000-0000-000000000001', 'authenticated', 'authenticated',
     'junseo.park@example.com', crypt('alton-dev-1234', gen_salt('bf')), now(),
+    '{"provider":"email","providers":["email"]}', '{}', now(), now(), '', '', '', '', '', '', '', ''),
+  ('00000000-0000-0000-0000-000000000000', 'bbbbbbbb-0000-0000-0000-000000000002', 'authenticated', 'authenticated',
+    'hyunwoo.lee@example.com', crypt('alton-dev-1234', gen_salt('bf')), now(),
     '{"provider":"email","providers":["email"]}', '{}', now(), now(), '', '', '', '', '', '', '', '');
 
 insert into auth.identities (
@@ -49,7 +52,8 @@ where u.id in (
   'aaaaaaaa-0000-0000-0000-000000000001', 'bbbbbbbb-0000-0000-0000-000000000001',
   'cccccccc-0000-0000-0000-000000000001', 'cccccccc-0000-0000-0000-000000000002',
   'dddddddd-0000-0000-0000-000000000001', 'dddddddd-0000-0000-0000-000000000002',
-  '77777777-0000-0000-0000-000000000001', '88888888-0000-0000-0000-000000000001'
+  '77777777-0000-0000-0000-000000000001', '88888888-0000-0000-0000-000000000001',
+  'bbbbbbbb-0000-0000-0000-000000000002'
 );
 
 -- =========================================================================
@@ -59,6 +63,7 @@ where u.id in (
 insert into profiles (id, role, name, phone) values
   ('aaaaaaaa-0000-0000-0000-000000000001', 'admin', '관리자', null),
   ('bbbbbbbb-0000-0000-0000-000000000001', 'parent', '김민지', '+1-650-555-0110'),
+  ('bbbbbbbb-0000-0000-0000-000000000002', 'parent', '이현우', '+1-650-555-0112'),
   ('cccccccc-0000-0000-0000-000000000001', 'student', '지훈', null),
   ('cccccccc-0000-0000-0000-000000000002', 'student', '이서아', null),
   ('dddddddd-0000-0000-0000-000000000001', 'teacher', '박서연 선생님', null),
@@ -67,7 +72,8 @@ insert into profiles (id, role, name, phone) values
   ('88888888-0000-0000-0000-000000000001', 'student', '박준서', null);
 
 insert into parents (id, referral_code, location) values
-  ('bbbbbbbb-0000-0000-0000-000000000001', 'ALTON-MINJI82', '캘리포니아 서니베일');
+  ('bbbbbbbb-0000-0000-0000-000000000001', 'ALTON-MINJI82', '캘리포니아 서니베일'),
+  ('bbbbbbbb-0000-0000-0000-000000000002', 'ALTON-HYUNWOO17', '캘리포니아 서니베일');
 
 insert into students (id, grade, status, credit_balance) values
   ('cccccccc-0000-0000-0000-000000000001', '10학년', 'active', 14),
@@ -97,12 +103,25 @@ insert into teachers (id, school, bio, status) values
   ('77777777-0000-0000-0000-000000000001', '연세대학교 화학과 재학 · AP Chemistry 지원',
     null, 'pending');
 
+-- (2026-08-30 R2 Task 3) 가족 관계 원본은 households/household_members다
+-- (guardian_students는 동결돼 INSERT 자체가 트리거로 거부된다) — 이 파일은
+-- 새로 만드는 시드라 백필을 거치지 않고 처음부터 최종 구조로 직접 심는다.
+--
 -- 김민지 학부모는 자녀가 지훈 하나뿐이면 030(학부모 셸)의 "자녀 전환" UI를
 -- 실제로 검증할 데이터가 없어서, 둘째 자녀(이서아, AP Calculus BC · 이도현)도
--- 연결해둔다.
-insert into guardian_students (parent_id, student_id, relation_type, is_primary) values
-  ('bbbbbbbb-0000-0000-0000-000000000001', 'cccccccc-0000-0000-0000-000000000001', '모', true),
-  ('bbbbbbbb-0000-0000-0000-000000000001', 'cccccccc-0000-0000-0000-000000000002', '모', false);
+-- 연결해둔다. 지훈에게는 공동 보호자(이현우)도 추가해 "한 자녀가 복수 보호자를
+-- 갖는" 케이스를, 김민지에게는 두 자녀를 둬서 "한 보호자가 복수 자녀를 갖는"
+-- 케이스를 로컬 환경에서 함께 검증할 수 있게 한다.
+insert into households (id, primary_guardian_id, billing_currency) values
+  ('aabbccdd-0000-0000-0000-000000000001', 'bbbbbbbb-0000-0000-0000-000000000001', 'USD');
+
+insert into household_members (household_id, profile_id, role, relation, is_primary) values
+  ('aabbccdd-0000-0000-0000-000000000001', 'bbbbbbbb-0000-0000-0000-000000000001', 'guardian', '모', true),
+  ('aabbccdd-0000-0000-0000-000000000001', 'bbbbbbbb-0000-0000-0000-000000000002', 'guardian', '기타', false);
+
+insert into household_members (household_id, profile_id, role, is_primary) values
+  ('aabbccdd-0000-0000-0000-000000000001', 'cccccccc-0000-0000-0000-000000000001', 'child', true),
+  ('aabbccdd-0000-0000-0000-000000000001', 'cccccccc-0000-0000-0000-000000000002', 'child', false);
 
 -- =========================================================================
 -- 5. 커리큘럼 — 과목 템플릿 (functional-spec §1 우선순위 과목)
@@ -219,7 +238,7 @@ insert into consult_requests (id, category, person_name, email, phone, student_g
     'SAT Math 점수를 단기간에 올리고 싶습니다.', now() - interval '2 days', 'requested');
 
 insert into consult_requests (id, category, person_name, email, phone, student_grade, intake_type, concerns, submitted_at, status, scheduled_at) values
-  ('99999999-0000-0000-0000-000000000002', 'family', '최유진', 'yujin.choi@example.com', null, '10학년', 'B',
+  ('99999999-0000-0000-0000-000000000002', 'family', '이현우', 'hyunwoo.lee@example.com', null, '10학년', 'B',
     'AP Chemistry 선생님 매칭 상담 요청', now() - interval '5 days', 'confirmed', now() + interval '2 days');
 
 insert into teacher_qc_warnings (teacher_id, student_id, type, detail, occurred_at) values

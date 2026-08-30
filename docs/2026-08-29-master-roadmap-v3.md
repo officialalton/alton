@@ -124,7 +124,7 @@ G1: 같은 데이터로 잔여 수업권·현재 선생님·과거 정산을 언
 
 - [ ] **(즉시 수정, R2 Task 1)** R1이 만든 회귀: `inviteTeacher()`/`setTeacherHourlyRate()`가 `teachers.hourly_rate_krw`만 직접 쓰고 `set_teacher_rate()`(R1)를 호출하지 않아, R1 트리거 때문에 이 경로로 처리된 선생님이 `active` 전환에서 막힌다. 두 경로 모두 `set_teacher_rate()`를 쓰도록 수정하고 active 전환 전 사용자 친화적 사전 안내를 추가한다.
 - [ ] 보호자 우선 초대, 자녀 초대, 만료·재발송 — **확정**: 자기가입 없음, 관리자가 보호자 초대 + 가입한 보호자가 자녀 추가 초대(관리자 대리 생성은 예외, 감사 이력). 초대 유효기간 7일, 재발송 시 기존 링크 무효화, 24시간 내 최대 3회, 철회 가능, 전부 감사 이력.
-- [ ] 복수 보호자와 주 보호자 설정 — `households`/`household_members`(R1) 기반으로 구현, 레거시 `guardian_students`/`parents`는 cutover 후 읽기 전용 동결(삭제는 R12로 이관).
+- [ ] 복수 보호자와 주 보호자 설정 — `households`/`household_members`(R1) 기반으로 구현, 관계 원본인 레거시 `guardian_students`는 cutover 후 읽기 전용 동결(DB 트리거로 쓰기 차단, 삭제는 R12로 이관). **(2026-08-30 정정) `parents`는 동결 대상이 아니다** — 보호자 역할별 계정 정보·계정 상태(`pending/active/suspended/closure_pending/closed`, `transition_account_status()`)는 당분간 계속 `parents`가 원본이다.
 - [ ] 잘못된 이메일 수정과 중복 계정 병합 절차 — **확정**: 병합 계정 즉시 로그인 차단, 데이터는 생존 계정으로 단일 트랜잭션 재배정, 병합된 인증 계정 30일 후 삭제·익명화, 병합 매핑·감사 기록 7년 보관, 관리자 전용·되돌리기 없음.
 - [ ] 역할별 시간대·Google 이메일·연락처 — **확정**: IANA 타임존, household 기본값 상속(학생), 선생님 개인 타임존, fallback `America/Los_Angeles`, 예약은 UTC+원본 타임존 보존. 선생님은 `@alton.education` Workspace 계정 필수, 보호자/학생은 개인 이메일.
 - [ ] 계정 비활성화·재활성화 — **확정**: `pending→active→suspended(재활성화 가능)→closure_pending→closed(복원 없음)` 5단계.

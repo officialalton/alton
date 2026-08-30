@@ -15,7 +15,7 @@
 
 **Global Constraints:**
 - 신규 테이블·enum은 기존 이름과 충돌하지 않으므로 shadow 이름이 필요 없다.
-- `households`/`household_members` cutover(Task 3)만 예외적으로 "레거시 테이블은 읽기 전용 동결, 삭제 안 함" 원칙을 따른다(§4.19 결정 3).
+- `households`/`household_members` cutover(Task 3)에서 관계 원본 `guardian_students`는 "레거시 테이블은 읽기 전용 동결(DB 트리거로 쓰기 차단), 삭제 안 함" 원칙을 따른다(§4.19 결정 3). **(2026-08-30 정정) `parents`는 이 동결 대상이 아니다** — Task 2가 `parents.status`를 계정 상태 원본으로 계속 사용하므로, Task 3은 `parents` 테이블에 손대지 않는다.
 - `teachers.status`/`students.status`/`parents` 상태 확장(Task 2)은 Postgres의 `ALTER TYPE ... ADD VALUE`가 같은 트랜잭션 내에서 바로 못 쓰이는 제약이 있어, enum 확장 마이그레이션과 그 값을 실제로 쓰는 마이그레이션을 분리한다.
 - Google Workspace 실제 API 연동(Task 7)은 Gate C 수준의 실제 자격 증명 작업이 필요하다 — 이 태스크는 다른 태스크들과 별도로, 실행 전 다시 한번 "실제 계정에 대고 실행한다"는 사실을 명시적으로 알리고 진행한다(정책은 이미 확정됐지만 실제 GCP 리소스를 건드리는 첫 실행이므로).
 
@@ -87,21 +87,38 @@
 
 ---
 
-## Task 3: `households`/`household_members` cutover + 백필
+## Task 3: `households`/`household_members` cutover + 백필 (로컬 검증 완료, 원격 적용 승인 대기)
+
+> **원본 구분 정정(2026-08-30, 사용자 확정)**: 가족 구성·보호자–자녀 **관계** 원본은 `households`/`household_members`로 cutover하되, 보호자 **역할별 계정 정보와 계정 상태**(Task 2의 `pending/active/suspended/closure_pending/closed`, `transition_account_status()`, 감사 이력)는 당분간 `parents`가 계속 원본이다. `parents` 테이블 자체를 동결 대상에 넣지 않는다 — **동결 대상은 `guardian_students`뿐**(관계 원본으로서 완전히 사용 중단, 앱 읽기·쓰기 모두 제거, DB에서도 쓰기 차단). `parents`는 이 태스크에서 스키마·RLS를 건드리지 않는다.
 
 **Files:**
-- Create: `supabase/migrations/20260831020000_r2_household_backfill.sql`
-- Modify: `app/admin/users-actions.ts`, `app/admin/users-data.ts`
-- Modify: 관련 RLS 정책 파일(신규 마이그레이션)
+- Create: `supabase/migrations/20260901000000_r2_household_backfill_and_guardian_freeze.sql`
+- Modify: `app/admin/users-actions.ts`, `app/admin/users-data.ts`, `app/student/credits-data.ts`, `app/student/credits-actions.ts`, `app/parent/children-data.ts`, `app/teacher/review/[sessionId]/review-actions.ts`
+- `app/parent/credits-data.ts`는 **변경 없음** — `parents.referral_code`(계정 정보) 조회만 하고 `guardian_students`는 쓰지 않는다(사전 조사에서 확인).
 
-**배경**: §4.19 결정 3 — 장기 dual-write 금지, 앱 읽기·쓰기·RLS를 신규 구조로 함께 cutover.
+**배경**: §4.19 결정 3 — 장기 dual-write 금지, 앱 읽기·쓰기·RLS를 신규 구조로 함께 cutover. 단, "레거시 테이블 동결"의 대상은 관계 테이블(`guardian_students`)뿐이며 계정 정보 테이블(`parents`)은 Task 2가 현재 사용 중이므로 예외.
 
-- [ ] **Step 1**: 백필 마이그레이션 — 기존 `parents`(1행) + `guardian_students`(1행)를 `households`+`household_members`로 변환(Gate B §6.1-6.2 매핑 그대로, R1 실행 로그 §6 백필 계획과 동일 원칙). `contracts_v3`/`subject_enrollments`/`teacher_assignments` 백필은 **이 태스크 범위 밖**(R3 계약 cutover와 묶임, 조사 문서 §6 참고).
-- [ ] **Step 2**: `inviteParent`/`inviteStudent`를 `households`/`household_members`에 쓰도록 재작성. `inviteStudent`는 더 이상 `parentId`만 받지 않고, "이미 존재하는 household에 자녀 추가" 경로와 "관리자가 새 household를 만들며 부모+자녀를 함께 초대" 경로 둘 다 지원해야 한다(Task 4의 보호자-주도 초대와 인터페이스를 맞춰야 함 — Task 4와 함께 설계).
-- [ ] **Step 3**: `users-data.ts`의 `loadParents`/`loadStudents`를 `households`/`household_members` 기준으로 재작성(복수 보호자 표시 가능해짐).
-- [ ] **Step 4**: 레거시 `parents`/`guardian_students` 테이블은 앱에서 더 이상 쓰지 않되 DROP하지 않는다. 이 두 테이블에 남아있는 레거시 RLS 정책도 그대로 둔다(R12에서 정리).
+- [x] **Step 1**: 백필 마이그레이션(`20260901000000_r2_household_backfill_and_guardian_freeze.sql`) — 기존 `guardian_students` 전체를 connected-components(레이블 전파)로 그룹핑해 `households`/`household_members`로 변환. 재실행 멱등성·중복 방지·복수 자녀/복수 보호자 그룹핑·주 보호자 정확히 1명(unique 인덱스 + 다수결 자동 선정)을 전부 합성 픽스처로 실제 실행 검증(완료 기준 1~4). `contracts_v3`/`subject_enrollments`/`teacher_assignments` 백필은 범위 밖 유지.
+- [x] **Step 2**: **레거시 RLS 함수 fan-out 수정** — `is_guardian_of()`를 `guardian_students` 확인 OR `is_household_guardian_of()`로 재정의. **로컬 E2E 실행 중 추가로 발견**: `profiles` 테이블 SELECT 정책이 `is_guardian_of()`를 거치지 않고 `guardian_students`를 직접 양방향 인라인 조회하고 있어 별도 사각지대였다 — 신규 함수 `shares_household_as_guardian_or_child()`로 같은 마이그레이션에서 함께 수정(정적 리뷰로는 못 잡고 실제 브라우저 E2E로만 발견됨).
+- [x] **Step 3**: `guardian_students` 쓰기 차단 — `BEFORE INSERT OR UPDATE OR DELETE` 트리거로 무조건 차단(관리자 포함, 우회 플래그 없음), 기존 "관리자만 생성/삭제" RLS 정책 제거. `parents`의 `transition_account_status()`는 실제 실행으로 영향 없음을 재확인(완료 기준 7).
+- [x] **Step 4**: `inviteParent`/`inviteStudent`(`app/admin/users-actions.ts`) — `inviteParent`는 `parents` insert 그대로 유지, `inviteStudent`는 `findOrCreateHouseholdForGuardian()`(기존 household 재사용 또는 신규 생성+주 보호자 지정)로 교체. 시그니처는 확장하지 않음(다중 보호자 초대 UX는 Task 4).
+- [x] **Step 5**: `users-data.ts`의 `loadParents`/`loadStudents` — 관계 조인만 `household_members` 기반으로 교체, 계정 정보 조회는 그대로.
+- [x] **Step 6**: `app/student/credits-data.ts`/`credits-actions.ts`, `app/parent/children-data.ts` — `household_members` 기반으로 재작성. `children-data.ts`의 `isPrimary`는 자녀 자신의 `household_members.is_primary` 값을 그대로 써서 기존 "자녀 전환" UI 의미(주 보호자 여부가 아니라 기본 표시 자녀)를 보존.
+- [x] **Step 7**: `notifyGuardiansOfReview()` — household 내 보호자 전체 조회(자연히 중복 없음) 후 `parents.status='closed'`인 보호자 제외.
+- [x] **Step 8**: `guardian_students` 활성 코드 참조 0건 확인(`grep`으로 재확인). `parents`는 계속 사용.
 
-**DoD 체크**: 6개 역할 RLS 실측 재확인(households/household_members는 R1에서 이미 검증된 정책 재사용), E2E `auth-roles.spec.ts` 통과, 관련 화면(`app/admin/UsersTab.tsx` 등) 실제 로컬 dev 서버로 smoke test, 원격 적용은 **앱 코드 배포와 같은 시점에** 수행(feature flag 없이 한 번에 — Gate B 11번 원칙).
+**DoD 체크(완료 기준 반영, 전부 로컬에서 실제 실행으로 검증)**:
+- [x] 백필 재실행 멱등성 — 합성 픽스처로 2회 연속 실행, `household_members` 행 수(9행) 불변 확인
+- [x] 기존 관계와 대조 후에만 신규 생성(재실행 시 중복 없음, 위와 동일 테스트로 함께 확인)
+- [x] 복수 자녀·복수 보호자 픽스처(P1-S1, P1-S2, P2-S2, P2-S3 사슬)로 connected-components 정확성 검증 — 5명 전부 한 household로 병합
+- [x] 주 보호자 정확히 1명 — unique 인덱스 + 다수결 자동 선정 로직 확인
+- [x] `guardian_students` 활성 코드 참조 0건
+- [x] `parents.status` 기반 보호자 정지→재활성화 **실제 브라우저 E2E** 통과(`account-lifecycle.spec.ts`에 추가)
+- [x] `guardian_students` 직접 쓰기가 관리자 권한으로도 차단되고 동시에 `parents`의 `transition_account_status()`는 정상 동작함을 함께 확인
+- [x] 리뷰 알림 — 중복 없음 + `closed` 제외를 vitest 3건으로 검증(`submitReview -> notifyGuardiansOfReview`)
+- [x] 6개 역할 RLS 회귀 — `is_guardian_of()`/`profiles` 정책 수정 반영, household-only 공동보호자가 실제로 인식됨을 확인. 무관한 선생님/anon은 여전히 0행(회귀 없음)
+- [x] `npx tsc --noEmit` 클린, `npx vitest run`(79개 파일 339개) 전부 통과, `npx playwright test --workers=1`(18개) 전부 통과
+- [ ] 원격 적용 전 변경 대상·영향 범위 요약 보고, 필수 테스트 통과 여부 확인 후 승인받고 push — **로컬 검증 완료, 원격 적용은 사용자 승인 대기 중**
 
 ---
 

@@ -72,16 +72,34 @@ export async function loadParents(supabase: SupabaseClient): Promise<ParentListI
   if (!parents || parents.length === 0) return [];
 
   const parentIds = parents.map((p) => p.id);
-  const { data: links } = await supabase
-    .from("guardian_students")
-    .select("parent_id, student:students(id, profile:profiles(name))")
-    .in("parent_id", parentIds);
 
-  const childrenByParent = new Map<string, string[]>();
-  for (const l of links ?? []) {
-    const list = childrenByParent.get(l.parent_id) ?? [];
-    list.push(extractName((Array.isArray(l.student) ? l.student[0] : l.student)?.profile));
-    childrenByParent.set(l.parent_id, list);
+  // (2026-08-30 R2 Task 3) 가족 관계는 households/household_members가 원본이다
+  // (guardian_students는 동결). 계정 정보(parents)는 그대로 두고 관계 조인만 교체.
+  const { data: guardianLinks } = await supabase
+    .from("household_members")
+    .select("profile_id, household_id")
+    .eq("role", "guardian")
+    .in("profile_id", parentIds);
+
+  const householdIdsByParent = new Map<string, string[]>();
+  for (const l of guardianLinks ?? []) {
+    const list = householdIdsByParent.get(l.profile_id) ?? [];
+    list.push(l.household_id);
+    householdIdsByParent.set(l.profile_id, list);
+  }
+
+  const householdIds = Array.from(new Set((guardianLinks ?? []).map((l) => l.household_id)));
+  const { data: childLinks } = await supabase
+    .from("household_members")
+    .select("household_id, child:profiles(name)")
+    .eq("role", "child")
+    .in("household_id", householdIds.length > 0 ? householdIds : [""]);
+
+  const childrenByHousehold = new Map<string, string[]>();
+  for (const l of childLinks ?? []) {
+    const list = childrenByHousehold.get(l.household_id) ?? [];
+    list.push(extractName(l.child));
+    childrenByHousehold.set(l.household_id, list);
   }
 
   const emailById = await loadEmailById(parentIds);
@@ -91,7 +109,9 @@ export async function loadParents(supabase: SupabaseClient): Promise<ParentListI
     name: extractName(p.profile),
     email: emailById.get(p.id) ?? "",
     joinedAt: p.joined_at,
-    childrenNames: childrenByParent.get(p.id) ?? [],
+    childrenNames: (householdIdsByParent.get(p.id) ?? []).flatMap(
+      (householdId) => childrenByHousehold.get(householdId) ?? []
+    ),
   }));
 }
 
@@ -103,15 +123,40 @@ export async function loadStudents(supabase: SupabaseClient): Promise<StudentLis
   if (!students || students.length === 0) return [];
 
   const studentIds = students.map((s) => s.id);
-  const { data: links } = await supabase
-    .from("guardian_students")
-    .select("student_id, parent:parents(profile:profiles(name))")
-    .in("student_id", studentIds);
+
+  // (2026-08-30 R2 Task 3) household_members가 관계 원본이다(guardian_students는 동결).
+  const { data: childLinks } = await supabase
+    .from("household_members")
+    .select("profile_id, household_id")
+    .eq("role", "child")
+    .in("profile_id", studentIds);
+
+  const householdIdByStudent = new Map<string, string>();
+  for (const l of childLinks ?? []) {
+    householdIdByStudent.set(l.profile_id, l.household_id);
+  }
+
+  const householdIds = Array.from(new Set(Array.from(householdIdByStudent.values())));
+  const { data: guardianLinks } = await supabase
+    .from("household_members")
+    .select("household_id, guardian:profiles(name)")
+    .eq("role", "guardian")
+    .in("household_id", householdIds.length > 0 ? householdIds : [""]);
+
+  const guardianNamesByHousehold = new Map<string, string[]>();
+  for (const l of guardianLinks ?? []) {
+    const list = guardianNamesByHousehold.get(l.household_id) ?? [];
+    list.push(extractName(l.guardian));
+    guardianNamesByHousehold.set(l.household_id, list);
+  }
+
   const parentsByStudent = new Map<string, string[]>();
-  for (const l of links ?? []) {
-    const list = parentsByStudent.get(l.student_id) ?? [];
-    list.push(extractName((Array.isArray(l.parent) ? l.parent[0] : l.parent)?.profile));
-    parentsByStudent.set(l.student_id, list);
+  for (const s of students) {
+    const householdId = householdIdByStudent.get(s.id);
+    parentsByStudent.set(
+      s.id,
+      householdId ? guardianNamesByHousehold.get(householdId) ?? [] : []
+    );
   }
 
   const { data: enrollments } = await supabase

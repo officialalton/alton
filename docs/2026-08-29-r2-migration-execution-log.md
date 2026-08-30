@@ -155,6 +155,58 @@ product-architecture-v3.md §5.7 확정 모델(`pending→active→suspended(재
 
 **결론**: 7가지 재검증 항목 전부 통과. 실사용자 데이터 손상·의도치 않은 상태 변경 없음. Task 2 완료 처리.
 
+## Task 3 — households/household_members cutover + guardian_students 동결 (로컬 검증 완료, 원격 적용 승인 대기)
+
+### 배경 — 원본 구분 정정
+
+1차 영향 범위 보고 후 사용자가 원본 구분을 확정했다: 가족 구성·보호자-자녀 **관계** 원본은 `households`/`household_members`로 cutover하되, 보호자 **역할별 계정 정보·계정 상태**(Task 2의 `pending/active/suspended/closure_pending/closed`, `transition_account_status()`, 감사 이력)는 당분간 계속 `parents`가 원본이다. **동결 대상은 `guardian_students`뿐**이며 `parents`는 이 태스크에서 스키마·데이터 어느 쪽도 건드리지 않는다.
+
+### 마이그레이션: `20260901000000_r2_household_backfill_and_guardian_freeze.sql`
+
+1. **`is_guardian_of()` fan-out 수정**: 이 함수는 R1 이전부터 있었고 `is_session_related()`/`is_enrollment_related()`를 포함해 `teachers`/`chat`/`curriculum_docs`/`curriculum_templates`/`session_memos`/`vocab_words` 등 다수의 레거시 RLS 정책이 경유한다. R1은 신규 테이블(`contracts_v3`, `entitlement_*` 등)에서만 `is_guardian_of() OR is_household_guardian_of()`로 수동 OR를 걸었고, 그 이전부터 있던 레거시 정책들은 여전히 `guardian_students`만 봤다 — `guardian_students`를 동결하면 이후 새로 생기는 가족 관계를 이 정책들이 영원히 인식하지 못하는 회귀가 생긴다. 개별 정책 수십 개를 고치는 대신 `is_guardian_of()` 함수 자체를 `guardian_students` 확인 OR `is_household_guardian_of()`로 재정의해 모든 호출부에 한 번에 전파했다.
+2. **`profiles` SELECT 정책의 별도 사각지대(로컬 E2E로 발견)**: `is_guardian_of()`를 고친 뒤 실제 브라우저 E2E(학부모가 자녀 이름을 보는지)를 돌려보니 실패했다 — `profiles` 테이블의 "본인/관계자/관리자 조회" 정책은 `is_guardian_of()`를 거치지 않고 `guardian_students`를 양방향(보호자→학생, 학생→보호자)으로 직접 인라인 조회하고 있었다. 이건 정적 리뷰로는 못 잡고 실제 실행으로만 발견됐다(R1/R2에서 반복된 패턴). `shares_household_as_guardian_or_child(p_other_id)` 신규 함수(같은 household에서 역할이 다른 두 멤버인지 대칭적으로 확인)를 만들어 이 정책에도 추가했다.
+3. **백필**: `guardian_students`(다대다 관계)를 connected-components로 그룹핑해 `households`/`household_members`로 이관하는 PL/pgSQL 블록 — 레이블 전파로 연결된 보호자·자녀를 하나의 household로 묶고, 이미 반영된 관계는 건드리지 않는 방식으로 재실행해도 안전하게 작성했다. 주 보호자는 `guardian_students.is_primary` 지정 횟수가 가장 많은 사람(동률이면 최초 가입자)으로 자동 선정한다.
+4. **주 보호자 유일성 보장**: `household_members (household_id) where (role='guardian' and is_primary)` 부분 unique 인덱스로 "최대 1명"을 DB에서 강제.
+5. **`guardian_students` 쓰기 차단**: 기존 "관리자만 생성/삭제" RLS 정책은 `service_role`이 우회 가능해 실질적 차단이 아니었다 — `BEFORE INSERT OR UPDATE OR DELETE` 트리거로 예외 없이(관리자 포함, 우회 플래그도 없음 — 이 테이블엔 정상적으로 써야 할 경로가 이제 전혀 없으므로) 차단.
+
+### 로컬 검증(완료 기준 1~7 반영)
+
+| 항목 | 결과 |
+|---|---|
+| 백필 connected-components 정확성 | 합성 픽스처(P1-S1, P1-S2, P2-S2, P2-S3, 즉 S2가 P1/P2를 잇고 P2가 S2/S3을 잇는 사슬)로 재현 — 5명 전부 하나의 household로 정확히 병합됨 확인 |
+| 주 보호자 자동 선정 | 위 픽스처에서 P1은 `is_primary=true` 1회, P2는 2회 → P2가 주 보호자로 선정됨(다수결 로직 확인) |
+| 백필 멱등성 | 같은 백필 로직을 두 번 연속 실행해도 `household_members` 행 수(9행) 불변 확인 |
+| `guardian_students` 쓰기 차단 | 직접 INSERT/UPDATE/DELETE 시도 전부 트리거 오류로 거부 확인(관리자 권한으로도 동일) |
+| `parents.status` 전환 무관 확인 | 같은 세션에서 관리자가 `transition_account_status()`로 실제 보호자 계정을 `active→suspended→active` 왕복 — Task 3 변경과 완전히 독립적으로 정상 동작, `account_status_events` 감사 이력도 정상 기록 |
+| household-only 보호자 인식(fan-out 수정 검증) | `guardian_students`에 전혀 없는 순수 household 전용 공동보호자로 `is_guardian_of()` 호출 → `true` 반환 확인(수정 전이었다면 `false`) |
+| 활성 코드 참조 0건 | `grep`으로 `app/`·`lib/` 전체에서 `.from("guardian_students")` 호출 0건 확인(주석의 역사적 언급만 남음) |
+| `npx tsc --noEmit` | 클린 |
+| `npx vitest run` | **79개 파일 339개 테스트 전부 통과**(신규: `inviteStudent` household 재사용/신규생성 2건, `notifyGuardiansOfReview` 중복없음/closed 제외/무관계 3건, `loadChildren` 정렬/빈결과/복수household 3건) |
+| **실제 브라우저 E2E** | 로컬 Supabase 스택으로 `--workers=1` 실행, **18개 전부 통과**(기존 17 + 신규 학부모 정지→재활성화 1건). 이 라운드에서 학부모 자녀 이름 표시 검증 케이스를 추가하는 과정에서 위 `profiles` 정책 사각지대를 실제로 발견·수정함(정적 리뷰로는 못 잡았을 버그) |
+
+### 앱 코드 변경(guardian_students → household_members)
+
+`app/admin/users-actions.ts`(`inviteStudent`가 `household_members` 재사용/신규생성 로직으로 교체, `parents` insert는 그대로), `app/admin/users-data.ts`(`loadParents`/`loadStudents`의 관계 조인만 교체, 계정 정보 조회는 그대로), `app/student/credits-data.ts`/`credits-actions.ts`(주 보호자 조회), `app/parent/children-data.ts`(자녀 목록 — `is_primary`는 자녀 자신의 값으로 유지해 기존 "자녀 전환" UI 의미 보존), `app/teacher/review/[sessionId]/review-actions.ts`(`notifyGuardiansOfReview`가 household 내 보호자 전체에게 중복 없이 알리되 `parents.status='closed'`인 보호자는 제외). `app/parent/credits-data.ts`는 `parents.referral_code`만 조회해 변경 없음.
+
+`supabase/seed.sql`도 함께 수정 — 로컬 개발 시드가 `guardian_students`에 직접 INSERT하던 걸 `households`/`household_members` 직접 삽입으로 교체(동결 트리거 때문에 기존 방식은 이제 실패한다). 김민지(주 보호자)-지훈·이서아(두 자녀), 지훈에게 공동 보호자 이현우를 추가해 "한 보호자가 복수 자녀", "한 자녀가 복수 보호자"를 로컬에서 상시 검증 가능하게 했다.
+
+### 원격 적용 대상 및 영향 범위 (승인 대기)
+
+**신규 마이그레이션 1개**: `20260901000000_r2_household_backfill_and_guardian_freeze.sql`.
+
+**앱 코드**: 위 6개 파일 + `supabase/seed.sql`(로컬 전용, 원격 미적용).
+
+**영향 범위**:
+- 원격 실사용 데이터: `guardian_students` 1행(김민지-지훈)이 `households`/`household_members`로 백필된다. `parents`/`students`/`guardian_students` 원본 행은 삭제되지 않는다(`guardian_students`는 이후 읽기 전용, 쓰기만 차단).
+- **원격 적용 즉시 효력 발생하는 행동 변화**: (1) `guardian_students` 직접 UPDATE/INSERT/DELETE는 관리자 포함 전면 차단. (2) 신규 학생 초대는 이제 `household_members`에 관계를 쓴다(기존 실사용 관계는 백필로 이미 이관돼 있어 조회 결과는 동일). (3) `profiles` 조회 정책이 household 기반 관계를 추가로 인정하도록 넓어짐(기존 `guardian_students` 기반 접근은 그대로 유지, 순수 추가).
+- 원격에는 현재 다중 자녀/다중 보호자 데이터가 없어(1가족 1자녀) connected-components 로직이 실제로는 자명한 케이스만 처리하지만, 로컬에서 복잡한 그래프로 이미 검증했다.
+
+**롤백 절차**: 이 마이그레이션은 `CREATE OR REPLACE FUNCTION`/`CREATE POLICY`(DROP 후 재생성)/`INSERT`(백필)/`CREATE INDEX`/`CREATE TRIGGER`뿐이다. 실패 시 `guardian_students_freeze` 트리거와 `household_members_one_primary_guardian` 인덱스만 개별 DROP하면 되고, `is_guardian_of()`/`profiles` 정책은 이 로그에 원래 조건이 남아 있어 복원 가능하다. 백필된 `household_members` 행은 원본 `guardian_students` 데이터를 그대로 옮긴 것이라 삭제해도 정보 손실이 없다(원본이 남아있으므로).
+
+### 확인 요청 (원격 적용 전)
+
+원격 재검증 계획: (1) `guardian_students`→`households`/`household_members` 백필 결과가 기존 관계와 정확히 일치하는지, (2) `guardian_students` 직접 쓰기 차단, (3) `parents.status` 전환이 여전히 정상 동작하는지, (4) 학부모 실계정으로 자녀 이름이 정상 조회되는지(profiles 정책 수정 반영 확인), (5) 6개 역할 RLS 회귀. 승인 시 진행한다.
+
 ## Task 7 예고 — Google Workspace 선생님 프로비저닝 (정책 확정, 미구현)
 
 Task 2 승인 시 사용자가 함께 확정한 후속 Task의 요구사항이다. **지금 구현하지 않는다** — 여기서는 R2 계획 문서(`docs/superpowers/plans/2026-08-30-r2-account-family-lifecycle.md` Task 7)에 옮기기 전 원본 정책을 실행 로그에도 남겨둔다.

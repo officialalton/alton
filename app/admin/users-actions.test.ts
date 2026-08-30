@@ -121,6 +121,123 @@ describe("inviteTeacher", () => {
   });
 });
 
+describe("inviteStudent", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    getUserMock.mockResolvedValue({ data: { user: { id: "admin1" } } });
+    profileSingleMock.mockResolvedValue({ data: { role: "admin" } });
+    inviteUserByEmailMock.mockResolvedValue({ data: { user: { id: "student1" } }, error: null });
+    profilesInsertMock.mockResolvedValue({ error: null });
+  });
+
+  it("부모가 이미 속한 household가 있으면 재사용하고 guardian_students에는 쓰지 않는다", async () => {
+    const studentsInsertMock = vi.fn().mockResolvedValue({ error: null });
+    const householdMembersSelectMaybeSingleMock = vi
+      .fn()
+      .mockResolvedValue({ data: { household_id: "household1" } });
+    const householdsInsertMock = vi.fn();
+    const householdMembersInsertMock = vi.fn().mockResolvedValue({ error: null });
+
+    vi.doMock("@/lib/supabase-admin", () => ({
+      createAdminClient: () => ({
+        auth: { admin: { inviteUserByEmail: inviteUserByEmailMock } },
+        from: (table: string) => {
+          if (table === "profiles") return { insert: profilesInsertMock };
+          if (table === "students") return { insert: studentsInsertMock };
+          if (table === "households") return { insert: householdsInsertMock };
+          if (table === "household_members") {
+            return {
+              select: () => ({
+                eq: () => ({
+                  eq: () => ({ limit: () => ({ maybeSingle: householdMembersSelectMaybeSingleMock }) }),
+                }),
+              }),
+              insert: householdMembersInsertMock,
+            };
+          }
+          if (table === "guardian_students") {
+            throw new Error("guardian_students는 동결됐습니다 — 이 경로에서 쓰면 안 됨");
+          }
+          throw new Error(`unexpected table ${table}`);
+        },
+      }),
+    }));
+    vi.resetModules();
+    const { inviteStudent } = await import("./users-actions");
+
+    const studentId = await inviteStudent({
+      name: "지훈",
+      email: "jihoon@example.com",
+      parentId: "parent1",
+      grade: "10학년",
+    });
+
+    expect(studentId).toBe("student1");
+    expect(householdsInsertMock).not.toHaveBeenCalled();
+    expect(householdMembersInsertMock).toHaveBeenCalledWith({
+      household_id: "household1",
+      profile_id: "student1",
+      role: "child",
+      is_primary: true,
+    });
+  });
+
+  it("부모에게 household가 없으면 새로 만들고 그 부모를 주 보호자로 지정한다", async () => {
+    const studentsInsertMock = vi.fn().mockResolvedValue({ error: null });
+    const householdMembersSelectMaybeSingleMock = vi.fn().mockResolvedValue({ data: null });
+    const householdsInsertSingleMock = vi.fn().mockResolvedValue({ data: { id: "household2" }, error: null });
+    const householdsInsertMock = vi.fn(() => ({ select: () => ({ single: householdsInsertSingleMock }) }));
+    const householdMembersInsertMock = vi.fn().mockResolvedValue({ error: null });
+
+    vi.doMock("@/lib/supabase-admin", () => ({
+      createAdminClient: () => ({
+        auth: { admin: { inviteUserByEmail: inviteUserByEmailMock } },
+        from: (table: string) => {
+          if (table === "profiles") return { insert: profilesInsertMock };
+          if (table === "students") return { insert: studentsInsertMock };
+          if (table === "households") {
+            return { insert: householdsInsertMock };
+          }
+          if (table === "household_members") {
+            return {
+              select: () => ({
+                eq: () => ({
+                  eq: () => ({ limit: () => ({ maybeSingle: householdMembersSelectMaybeSingleMock }) }),
+                }),
+              }),
+              insert: householdMembersInsertMock,
+            };
+          }
+          throw new Error(`unexpected table ${table}`);
+        },
+      }),
+    }));
+    vi.resetModules();
+    const { inviteStudent } = await import("./users-actions");
+
+    await inviteStudent({
+      name: "이서아",
+      email: "seoah@example.com",
+      parentId: "parent2",
+      grade: "11학년",
+    });
+
+    expect(householdsInsertMock).toHaveBeenCalledWith({ primary_guardian_id: "parent2" });
+    expect(householdMembersInsertMock).toHaveBeenCalledWith({
+      household_id: "household2",
+      profile_id: "parent2",
+      role: "guardian",
+      is_primary: true,
+    });
+    expect(householdMembersInsertMock).toHaveBeenCalledWith({
+      household_id: "household2",
+      profile_id: "student1",
+      role: "child",
+      is_primary: true,
+    });
+  });
+});
+
 describe("setTeacherHourlyRate", () => {
   beforeEach(() => {
     vi.clearAllMocks();

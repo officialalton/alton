@@ -16,6 +16,7 @@ import { ACCOUNTS, DEV_PASSWORD, loginAs } from "./helpers";
 // 세팅한다(이전 테스트가 실패해도 다음 테스트가 영향받지 않는다).
 
 const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001"; // 박서연 선생님(ACCOUNTS.teacher)
+const PARENT_ID = "bbbbbbbb-0000-0000-0000-000000000001"; // 김민지 학부모(ACCOUNTS.parent)
 const ADMIN_ID = "aaaaaaaa-0000-0000-0000-000000000001";
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
 
@@ -28,6 +29,24 @@ function forceSetTeacherStatus(status: string) {
   const sql = `
     select set_config('app.bypass_status_protect', 'true', true);
     update teachers set status = '${status}' where id = '${TEACHER_ID}';
+  `;
+  execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-c", sql]);
+}
+
+function forceSetParentStatus(status: string) {
+  const sql = `
+    select set_config('app.bypass_status_protect', 'true', true);
+    update parents set status = '${status}' where id = '${PARENT_ID}';
+  `;
+  execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-c", sql]);
+}
+
+function transitionParentStatus(newStatus: string, reason: string) {
+  const sql = `
+    set role authenticated;
+    select set_config('request.jwt.claim.sub', '${ADMIN_ID}', false);
+    select transition_account_status('${PARENT_ID}'::uuid, '${newStatus}', '${reason}');
+    reset role;
   `;
   execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-c", sql]);
 }
@@ -46,9 +65,10 @@ function transitionTeacherStatus(newStatus: string, reason: string) {
 
 test.describe("R2 계정 상태 전환 — 실제 브라우저 로그인 흐름", () => {
   test.afterAll(() => {
-    // 다른 e2e 스펙(auth-roles.spec.ts)이 이 선생님 계정이 active라고
+    // 다른 e2e 스펙(auth-roles.spec.ts)이 이 선생님/학부모 계정이 active라고
     // 가정하므로, 이 스펙이 끝나면 반드시 원상복구한다.
     forceSetTeacherStatus("active");
+    forceSetParentStatus("active");
   });
 
   test("suspended 계정은 로그인해도 /teacher가 아니라 /account-suspended로 간다", async ({
@@ -116,6 +136,25 @@ test.describe("R2 계정 상태 전환 — 실제 브라우저 로그인 흐름"
     // 등으로 갔을 것이다).
     await page.goto("/teacher");
     await expect(page).toHaveURL(/\/login/);
+  });
+
+  // (2026-08-30 R2 Task 3) 완료 기준 6 — parents.status는 households/household_members
+  // cutover와 무관하게 계속 transition_account_status()의 정상 대상이어야 한다.
+  test("학부모(parents.status) 정지→관리자 재활성화도 선생님과 동일하게 동작한다", async ({
+    page,
+  }) => {
+    forceSetParentStatus("suspended");
+
+    await page.goto("/login");
+    await page.getByLabel("이메일").fill(ACCOUNTS.parent);
+    await page.getByLabel("비밀번호").fill(DEV_PASSWORD);
+    await page.getByRole("button", { name: "로그인" }).click();
+    await expect(page).toHaveURL(/\/account-suspended/);
+
+    transitionParentStatus("active", "e2e: 학부모 재활성화 테스트");
+
+    await loginAs(page, ACCOUNTS.parent);
+    await expect(page).toHaveURL(/\/parent/);
   });
 
   test("정상 상태 전이(pending→active, active↔suspended, active→closure_pending→closed)는 허용되고 그 외는 거부된다", async () => {

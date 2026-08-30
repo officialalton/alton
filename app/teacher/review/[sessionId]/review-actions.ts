@@ -224,14 +224,36 @@ async function notifyGuardiansOfReview(
     .maybeSingle();
 
   const admin = createAdminClient();
+
+  // (2026-08-30 R2 Task 3) 가족 관계 원본은 households/household_members다
+  // (guardian_students는 동결). 같은 household의 보호자 전체에게 알림을
+  // 보내되(household_members는 (household_id, profile_id) unique라 자연히
+  // 중복 없음), 계정이 완전히 닫힌(closed) 보호자는 "유효한 보호자"에서 제외한다.
+  const { data: childMembership } = await admin
+    .from("household_members")
+    .select("household_id")
+    .eq("profile_id", studentId)
+    .eq("role", "child")
+    .maybeSingle();
+  if (!childMembership) return;
+
   const { data: guardianLinks } = await admin
-    .from("guardian_students")
-    .select("parent_id")
-    .eq("student_id", studentId);
+    .from("household_members")
+    .select("profile_id")
+    .eq("household_id", childMembership.household_id)
+    .eq("role", "guardian");
   if (!guardianLinks || guardianLinks.length === 0) return;
 
-  for (const link of guardianLinks) {
-    const { data } = await admin.auth.admin.getUserById(link.parent_id);
+  const guardianIds = guardianLinks.map((l) => l.profile_id);
+  const { data: activeParents } = await admin
+    .from("parents")
+    .select("id")
+    .in("id", guardianIds)
+    .neq("status", "closed");
+  const validGuardianIds = new Set((activeParents ?? []).map((p) => p.id));
+
+  for (const guardianId of guardianIds.filter((id) => validGuardianIds.has(id))) {
+    const { data } = await admin.auth.admin.getUserById(guardianId);
     const email = data.user?.email;
     if (!email) continue;
 
