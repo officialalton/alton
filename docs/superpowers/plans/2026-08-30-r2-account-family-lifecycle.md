@@ -54,9 +54,9 @@
 
 ---
 
-## Task 2: 계정 상태 모델 확장 (스키마 + 강제 로직, 로컬 검증 완료 — 원격 적용 승인 대기)
+## Task 2: 계정 상태 모델 확장 (완료, 원격 적용 2026-08-30)
 
-> **범위 확장(사용자 요청)**: 원래 초안은 스키마만 만들고 강제 로직은 후속 태스크로 미루는 안이었으나, 로그인 게이트·자기 상태 변경 차단·메시지 차단까지 이번 태스크에서 실제로 구현하도록 범위가 넓어졌다. 아래 Step은 실제로 한 일 기준으로 갱신했다. 상세는 `docs/2026-08-29-r2-migration-execution-log.md`의 "Task 2" 항목 참고.
+> **범위 확장(사용자 요청)**: 원래 초안은 스키마만 만들고 강제 로직은 후속 태스크로 미루는 안이었으나, 로그인 게이트·자기 상태 변경 차단·메시지 차단까지 이번 태스크에서 실제로 구현하도록 범위가 넓어졌다. 1차 구현 보고 후 사용자가 7가지 보완(fail-closed, 임의조회 차단, 서버 액션 전수 감사, DB 레벨 전이 강제+감사 이력, 실제 브라우저 E2E, baseline 커밋)을 요구해 전부 반영했다. 아래 Step은 최종본 기준으로 갱신했다. 상세는 `docs/2026-08-29-r2-migration-execution-log.md`의 "Task 2" 항목 참고.
 
 **Files:**
 - Create: `supabase/migrations/20260831010000_r2_account_status_enums.sql`
@@ -72,17 +72,18 @@
 - [x] **Step 3**: `parents`에 `status parent_status not null default 'active'` 컬럼 추가.
 - [x] **Step 4**: `profiles`에 `timezone text`, `date_of_birth date` 컬럼 추가.
 - [x] **Step 5**: `households`에 `default_timezone text not null default 'America/Los_Angeles'` 컬럼 추가.
-- [x] **Step 6(확장)**: 상태 전이 강제를 이번 태스크에서 구현했다 — `prevent_self_status_change()` 트리거(관리자 제외 자기 status 직접 변경 차단), `get_account_status()`/`is_account_active()` 공통 판정 함수, `lib/auth.ts`의 `requireUser()`/`resolveAccountDestination()`(로그인·모든 포털 페이지 게이트 — suspended는 `/account-suspended`, closure_pending/closed는 강제 로그아웃), `chat_messages` INSERT RLS에 상태 검사 추가(메시지 차단 실증).
-- [x] **Step 7(신규)**: `setStudentStatus`/`setTeacherStatus`를 `suspended`까지 지원하도록 확장, `setParentStatus` 신규 추가. `closure_pending`/`closed`는 의도적으로 이 함수들에 노출하지 않음(§5.7 "closed는 일반 UI에서 복구 불가"와 대칭 — 전용 흐름은 후속 태스크).
+- [x] **Step 6(확장)**: 상태 전이 강제를 이번 태스크에서 구현했다 — `protect_account_status()` 트리거(관리자 포함 전원 자기 status 직접 변경 차단), `transition_account_status()`(유일한 정상 경로, 관리자 전용, 허용된 전이만 검증, `account_status_events` 감사 이력 자동 기록), `get_account_status()`/`is_account_active()`(fail-closed, `service_role` 전용)·`current_account_status()`/`current_account_active()`(self-only, anon/authenticated 허용) 공통 판정 함수, `lib/auth.ts`의 `requireUser()`/`resolveAccountDestination()`(로그인·모든 포털 페이지 게이트 — suspended는 `/account-suspended`, closure_pending/closed/unknown은 강제 로그아웃), 세션 콘텐츠 자기서비스 쓰기 정책 26개에 상태 검사 추가(메시지 포함 전부 실증).
+- [x] **Step 7(신규)**: `setStudentStatus`/`setTeacherStatus`/`setParentStatus`가 전부 `transition_account_status()` RPC 경유로 통일(직접 UPDATE는 트리거가 차단). `closure_pending`/`closed`는 의도적으로 관리자 UI에서 일반 노출하지 않음(§5.7 "closed는 일반 UI에서 복구 불가"와 대칭 — 전용 흐름은 후속 태스크).
+- [x] **Step 8(신규, 서버 액션 전수 감사)**: 포크 에이전트로 `app/`·`lib/` 전체를 스캔해 `requireUser()`를 우회하던 13개 서버 액션 파일을 발견·수정(상세는 실행 로그 참고). 부수적으로 `submitCalendlyOnboarding()`의 선생님 자기 활성화 경로를 발견·제거(관리자 승인 전용으로 통일) — 사용자 승인 완료, Task 7 정책에 반영.
 
 **DoD 체크**:
 - [x] `npx tsc --noEmit` 클린
-- [x] `npx vitest run`(전체 77개 파일 329개) 통과
+- [x] `npx vitest run`(전체 77개 파일 331개) 통과
 - [x] 로컬 빈 DB + 백업 복원 DB 양쪽 적용, 기존 데이터 무결성 재확인(5명 데이터 그대로)
-- [x] 자기 상태 변경 차단, 재활성화, closed 불가역성, 메시지 차단 각각 실제 실행 검증
+- [x] fail-closed, 임의조회 차단, 관리자 직접 UPDATE 차단, 허용/거부 전이 + 감사 이력, 콘텐츠 RLS 차단 각각 실제 실행 검증(로컬)
 - [x] 6개 역할 RLS 회귀 확인(households 재검증, 완전 동일)
-- [ ] **E2E(Playwright) 실행 — 환경 제약으로 실행 불가**: 로컬 Supabase(Docker) 스택이 이 세션에서 응답 없음(R1과 동일한 Docker 무응답 문제로 추정). 대신 `lib/auth.test.ts` 단위 테스트로 게이트 로직 자체를 검증했고, 기존 E2E 고정 테스트 계정 4개가 전부 이번 변경으로 상태가 바뀌지 않는 active 계정임을 확인해 회귀 가능성이 낮다고 판단했다 — 그러나 실제 브라우저 재실행으로 확인하지는 못했다.
-- [x] 원격 변경 대상·영향 범위·롤백 절차 요약 보고(실행 로그 Task 2 "원격 적용 전 요약" 참고) — **원격 push는 사용자 승인 대기 중, 아직 미실행**
+- [x] **E2E(Playwright) 실행** — Docker Desktop 무응답 문제를 해결(재시작)하고 로컬 Supabase 실 스택으로 `e2e/account-lifecycle.spec.ts`(신규 5개 시나리오) + 기존 `e2e/auth-roles.spec.ts`(6개) 전체 17개 통과.
+- [x] 원격 변경 대상·영향 범위·롤백 절차 요약 보고 → 사용자 승인 완료 → `supabase db push --linked`로 원격 개발 DB 적용 완료(커밋 `8216f5d`) → 원격 재검증 7항목(migration 목록 일치, 데이터 보존, 상태별 로그인/서버 작업 차단, 관리자 전환+감사 이력, 콘텐츠 RLS, smoke test) 전부 통과. 상세는 실행 로그 "원격 적용 (2026-08-30 완료)" 참고.
 
 ---
 
@@ -161,6 +162,10 @@
 
 ## Task 7: 선생님 Google Workspace 계정 자동 프로비저닝
 
+> **정책 확정(2026-08-30, Task 2 승인 시 함께 확정)**: 아래 요구사항은 사용자가 명시적으로 확정한 것이며, Task 7 착수 전까지는 구현하지 않는다. Task 2에서는 선생님 자기 활성화 경로 제거(관리자 승인 전용 전환)까지만 반영했다.
+
+**핵심 정책**: 선생님은 본인이 계정을 생성·활성화하지 않는다. 관리자가 `@alton.education` Google Workspace 계정을 발급하고, 관리자가 최종적으로 `pending→active` 전환(`transition_account_status()`)을 수행한다.
+
 **Files:**
 - Create: `app/admin/workspace-actions.ts`
 - Create: `lib/google-workspace.ts`(Admin SDK Directory API 클라이언트)
@@ -168,13 +173,55 @@
 
 **배경**: §4.20. **이 태스크는 실제 Google Cloud/Workspace 리소스에 대고 실행된다** — 착수 전 별도로 알린다(Gate C와 동일한 수준의 실제 작업이므로).
 
-- [ ] **Step 1**: `teachers`에 `workspace_email text`, `workspace_provisioning_status(none|pending|created|linked|failed)` 컬럼 추가 — 부분 실패 재처리를 위한 상태 컬럼.
-- [ ] **Step 2**: Directory API로 계정 생성/충돌 확인 로직(Gate C의 domain-wide-delegation 패턴 재사용 가능 여부 확인 — 그때 스크립트는 세션 스크래치패드에 있었고 앱에 병합되지 않았으므로 처음부터 앱 코드로 다시 만든다).
-- [ ] **Step 3**: `inviteTeacher()` 플로우에 Workspace 생성 단계 삽입 — 생성 성공 후 `workspace_email`을 `teachers`에 저장하고 Supabase 계정과 연결(어떤 형태의 "연결"인지 — `profiles`에 필드 추가인지, 별도 테이블인지 — 조사 결과 마땅한 기존 필드가 없으므로 `teachers.workspace_email`이 곧 연결 정보).
-- [ ] **Step 4**: 부분 실패 재처리 — `workspace_provisioning_status='failed'`인 선생님을 관리자 화면에서 재시도할 수 있는 버튼 제공.
-- [ ] **Step 5**: 시급 설정 후 active 전환 순서를 강제(Task 1에서 이미 만든 사전 확인에 Workspace 상태 확인도 추가할지 결정).
+### 선생님 활성화(`pending→active`) 선행조건 (확정)
 
-**DoD 체크**: 실제 Sandbox(또는 운영 도메인의 테스트 계정)로 생성 성공/충돌/실패 각 케이스 실제 실행 검증, 재처리 흐름 실제 실행 검증.
+관리자가 아래를 전부 확인해야 `active` 전환을 수행할 수 있다:
+1. 관리자가 선생님 기본 정보와 개인 이메일을 등록
+2. `@alton.education` Google Workspace 계정 발급 완료
+3. 선생님이 발급된 Workspace 계정으로 최초 로그인
+4. ALTON 인증 사용자와 사전 생성된 선생님 레코드 연결 완료
+5. 시급 설정 완료(R1 `has_valid_current_teacher_rate`)
+6. 필수 프로필·온보딩 정보 입력 완료
+7. 선생님 계약 확인 완료(계약 자동화 전에는 관리자가 수동 확인)
+
+과목·학생 배정은 활성화 이후 절차이므로 선행조건에 포함하지 않는다.
+
+### 신규 데이터 필드 (확정)
+
+- `personal_contact_email`(필수) — Workspace 계정 발급 전에 수집. 목적 2가지: (a) Google Workspace 복구 이메일, (b) ALTON 계정 발급/보안/운영 연락 알림.
+- `workspace_recovery_email`(필수, 기본값 `personal_contact_email`).
+- `personal_phone`(선택).
+
+### 프로비저닝 흐름 (확정, 9단계)
+
+1. 관리자가 ALTON에서 선생님 기본 정보를 등록
+2. ALTON에 `provisioning` 상태의 선생님 레코드 생성
+3. Google Admin SDK로 `@alton.education` 계정 생성
+4. Google 고유 사용자 ID·Workspace 이메일·ALTON 선생님 ID 연결
+5. 개인 이메일로 최초 설정 안내 발송
+6. 선생님이 발급된 Workspace 계정으로 Google 로그인
+7. 로그인 콜백에서 사전 등록된 계정인지 검증
+8. Supabase Auth 사용자와 기존 선생님 레코드 연결
+9. 관리자가 위 7가지 선행조건 확인 후 `pending→active` 전환
+
+### 보안·정합성 제약 (확정, 반드시 준수)
+
+- **이메일 주소만 일치한다고 선생님 레코드를 자동 생성·연결하면 안 된다** — 사전 생성된 provisioning 레코드와 Google 고유 사용자 ID를 함께 검증(이메일 일치만으로는 스푸핑 방지 불가, R1/R2의 "임의 조회·자동 연결 금지" 원칙과 동일 계열).
+- 부분 실패·중복 생성 방지·재시도·취소/회수 지원 필요, 전 과정 감사 이력 필요.
+- 임시 비밀번호는 ALTON DB에 평문 저장 금지, 이메일로 평문 발송 금지.
+
+### 기존 Calendly 온보딩 처리 (확정)
+
+기존 Calendly 온보딩 UI/코드(`app/teacher/onboarding-actions.ts`, `TeacherHomeDashboard.tsx`)는 Task 2에서 자기 활성화만 제거했고 URL 저장 기능은 유지된 상태다. **이 태스크에서 완전히 제거한다** — 9단계 프로비저닝 흐름으로 대체.
+
+- [ ] **Step 1**: `teachers`에 `workspace_email text`, `workspace_google_user_id text`(스푸핑 방지용 고유 ID), `workspace_provisioning_status(provisioning|created|linked|active_pending|failed|revoked)` 컬럼 + `personal_contact_email`(필수)/`workspace_recovery_email`(필수, 기본값 `personal_contact_email`)/`personal_phone`(선택) 컬럼 추가. 감사 이력 테이블(`workspace_provisioning_events` 또는 기존 `account_status_events`와 유사한 패턴) 추가 — 생성/연결/실패/재시도/취소 각 이벤트 기록.
+- [ ] **Step 2**: Directory API로 계정 생성/충돌 확인 로직(Gate C의 domain-wide-delegation 패턴 재사용 가능 여부 확인 — 그때 스크립트는 세션 스크래치패드에 있었고 앱에 병합되지 않았으므로 처음부터 앱 코드로 다시 만든다). 임시 비밀번호는 생성 즉시 안내 메일 발송 후 평문을 어디에도 남기지 않는 방식으로 처리(예: 발송 직후 폐기, DB에는 저장하지 않음).
+- [ ] **Step 3**: 관리자 등록 → provisioning 레코드 생성 → Workspace 계정 생성 → Google 고유 사용자 ID 연결까지의 9단계 흐름을 `app/admin/workspace-actions.ts`로 구현. 로그인 콜백(단계 7)에서 이메일이 아니라 **사전 생성된 provisioning 레코드 + Google 고유 사용자 ID**로 검증 후 Supabase Auth 사용자와 연결.
+- [ ] **Step 4**: 부분 실패 재처리·중복 생성 방지·취소/회수 — `workspace_provisioning_status='failed'`인 선생님을 관리자 화면에서 재시도할 수 있는 버튼 제공, 이미 생성된 계정에 재시도 시 중복 생성 대신 기존 계정 상태 확인 후 이어서 진행.
+- [ ] **Step 5**: 관리자 활성화 화면에 위 7가지 선행조건 체크리스트 표시, 전부 충족 확인 후에만 `transition_account_status(..., 'active')` 호출 가능하도록 UI 가드(DB 트리거는 이미 R2에서 관리자 권한만 확인하므로, 7가지 선행조건 확인은 앱 레벨 — 최종 방어선이 필요하면 이 스텝에서 판단).
+- [ ] **Step 6**: 기존 Calendly 온보딩 UI/코드 제거(`app/teacher/onboarding-actions.ts`의 `submitCalendlyOnboarding()`, `TeacherHomeDashboard.tsx`의 관련 UI).
+
+**DoD 체크**: 실제 Sandbox(또는 운영 도메인의 테스트 계정)로 생성 성공/충돌/실패 각 케이스 실제 실행 검증, 재처리·취소/회수 흐름 실제 실행 검증, 이메일 일치만으로는 연결이 안 되는지(스푸핑 방지) 실제 실행 검증, 임시 비밀번호가 DB/로그에 평문으로 남지 않는지 코드 검토+실행 검증.
 
 ---
 

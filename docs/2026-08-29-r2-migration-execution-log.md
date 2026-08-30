@@ -37,7 +37,7 @@
 
 `supabase db push --linked`로 `20260831000000_r2_sync_teachers_hourly_rate.sql` 1개 파일 적용 성공. `supabase db query --linked`로 확인: 기존 두 선생님(장세준·김도경) `hourly_rate_krw=50000` 그대로 보존(함수 본문 교체만이라 기존 데이터 영향 없음), `set_teacher_rate()` 함수 본문에 신규 동기화 라인이 실제로 배포됐음을 `pg_proc.prosrc` 조회로 확인.
 
-## Task 2 — 계정 상태 모델 확장 (로컬 검증 완료, 원격 적용 승인 대기)
+## Task 2 — 계정 상태 모델 확장 (완료, 원격 적용 2026-08-30)
 
 ### 배경
 
@@ -128,7 +128,74 @@ product-architecture-v3.md §5.7 확정 모델(`pending→active→suspended(재
 2. **앱**: 이번 변경 이전 커밋으로 되돌리면 게이트·트리거 의존 코드가 사라져 즉시 기존 동작으로 복귀(DB 트리거 자체는 남아있지만 앱이 `transition_account_status()`를 호출하지 않게 되므로 기존 `setXStatus` 직접 UPDATE 경로는 다시 트리거에 막힌다 — 완전 롤백하려면 DB도 §1 절차로 되돌려야 함).
 3. 데이터 삭제는 이 라운드의 어떤 파일에도 없다.
 
-### 확인 요청 (원격 적용 승인 전)
+### 확인 요청 (원격 적용 전, 승인 완료)
 
-1. **선생님 자기 활성화 흐름 제거**: 기존에는 선생님이 Calendly 링크만 등록하면 즉시 active가 됐다. 이제는 관리자가 `setTeacherStatus()`로 별도 승인해야 한다 — 원격에 이미 이 흐름으로 pending 상태로 대기 중인 선생님이 있다면(현재 원격 데이터 기준으로는 없음, 로컬 확인 필요 시 재확인 가능), 운영팀에 프로세스 변경을 안내해야 한다.
+1. **선생님 자기 활성화 흐름 제거**: 기존에는 선생님이 Calendly 링크만 등록하면 즉시 active가 됐다. 이제는 관리자가 `setTeacherStatus()`로 별도 승인해야 한다 — 원격에 이미 이 흐름으로 pending 상태로 대기 중인 선생님이 있다면(현재 원격 데이터 기준으로는 없음, 로컬 확인 필요 시 재확인 가능), 운영팀에 프로세스 변경을 안내해야 한다. → 사용자 승인 완료. 선생님은 본인이 계정을 생성·활성화하지 않고, 관리자가 Google Workspace 계정을 발급한 뒤 관리자가 최종적으로 `pending→active`를 수행하는 정책으로 확정됨(§Task 7 참고).
 2. 이전에 보고했던 레거시 R0 SECURITY DEFINER anon 노출(§Task 1 이전 R1 로그) 항목은 이번 라운드와 무관하게 그대로 master-roadmap-v3.md R12로 이관돼 있다 — 재확인 불필요.
+
+### 원격 적용 (2026-08-30 완료)
+
+커밋 `8216f5d`의 3개 마이그레이션을 `supabase db push --linked`로 원격 개발 DB에 적용. 적용 직후 `supabase migration list --linked`로 로컬·원격 마이그레이션 목록 일치 확인(총 36개, 불일치 없음).
+
+**재검증 결과**:
+
+| 항목 | 결과 |
+|---|---|
+| 로컬·원격 migration 목록 일치 | `supabase migration list --linked` — local/remote 36개 전부 동일, 불일치 없음 |
+| 기존 사용자 상태·데이터 보존 | `profiles=5, enrollments=1, sessions=0, students=1, teachers=2, parents=1, credit_transactions=1` — 적용 전후 행 수 동일. 실사용자 5명 상태: 학생(장세온) `active`, 선생님(장세준) `active`(시급 50000 보존), 선생님(김도경) `pending`(시급 50000 보존), 학부모(장지만) `active` — 전부 기존 값 그대로 백필됨 |
+| 함수 권한 분리(fail-closed·임의조회 차단) | `get_account_status`/`is_account_active`는 `anon`/`authenticated`에서 `has_function_privilege = false`, `service_role`만 `true`. `current_account_status`/`current_account_active`는 `anon`/`authenticated`/`service_role` 전부 `true`(self-only라 안전). `transition_account_status`는 `authenticated`만 `true`(`anon`/`service_role`은 `false`, R1 `reopen_session()`과 동일 설계) — 실제 grant 상태가 설계와 정확히 일치 |
+| 감사 테이블·트리거 존재 확인 | `account_status_events`: RLS 활성화, SELECT 정책만 존재(INSERT 정책 없음 — SECURITY DEFINER 함수 경유만 가능, 설계대로). `students_protect_status`/`teachers_protect_status`/`parents_protect_status` 트리거 3개 전부 존재 확인 |
+| 관리자 상태 전환 + 감사 이력(실제 원격 RPC 호출) | 실사용 선생님(장세준, `29430e24-...`)에게 실제 관리자 계정(`b2a34464-...`, 원격 실제 admin id)으로 `transition_account_status()`를 호출해 `active→suspended→active`를 왕복 실행 — 최종 상태는 원래대로 `active` 복원(가역적 검증, 실사용자 상태에 영구 변경 없음). `account_status_events`에 두 건 모두 정확히 기록(`changed_by`=관리자 id, `previous_status`/`new_status`/`reason` 정확) |
+| 잘못된 전이 거부(원격 실제 호출) | 같은 계정에 `active→pending`(허용 목록 밖) 시도 → `허용되지 않는 상태 전이입니다: active → pending` 오류로 즉시 거부, 상태 변경 없음 |
+| 관리자 직접 UPDATE 차단(원격 실제 호출) | 관리자 세션으로 `transition_account_status()` 없이 `teachers.status`를 직접 UPDATE 시도 → `계정 상태(status)는 transition_account_status()를 통해서만 변경할 수 있습니다` 트리거 오류로 차단 |
+| 본인 상태 조회(self-only) | 선생님 본인 세션에서 `current_account_status()`/`current_account_active()` 호출 → `active`/`true` 정상 반환 |
+| 임의 사용자 조회 차단(원격 실제 호출) | 선생님 세션으로 다른 사람의 `get_account_status(uuid)` 호출 시도 → `permission denied for function get_account_status`로 함수 호출 자체가 거부됨(행 단위가 아니라 함수 단위 차단, 설계대로) |
+| 콘텐츠 RLS `current_account_active()` 반영 확인 | `pg_policy` 직접 조회로 `profiles`/`students`/`teachers`/`parents`/`sessions`/`session_problem_attempts`/`session_reviews`/`session_student_feedback`/`session_files`/`session_doc_links`/`canvas_annotations`/`homework_items`/`problems`/`vocab_words`/`teacher_curriculum_templates`(+units/materials)/`teacher_problem_tags` 총 26개 정책에 `current_account_active()`가 실제로 배포됐음을 확인 |
+| 핵심 smoke test | `students` × `profiles` 조인, `enrollments` 조회 등 기본 쿼리 정상 동작 확인 — 스키마 변경으로 인한 조회 경로 손상 없음 |
+
+**결론**: 7가지 재검증 항목 전부 통과. 실사용자 데이터 손상·의도치 않은 상태 변경 없음. Task 2 완료 처리.
+
+## Task 7 예고 — Google Workspace 선생님 프로비저닝 (정책 확정, 미구현)
+
+Task 2 승인 시 사용자가 함께 확정한 후속 Task의 요구사항이다. **지금 구현하지 않는다** — 여기서는 R2 계획 문서(`docs/superpowers/plans/2026-08-30-r2-account-family-lifecycle.md` Task 7)에 옮기기 전 원본 정책을 실행 로그에도 남겨둔다.
+
+### 선생님 활성화(`pending→active`) 선행조건 (확정)
+
+관리자가 아래를 전부 확인해야 `transition_account_status(..., 'active')`를 호출할 수 있다:
+1. 관리자가 선생님 기본 정보와 개인 이메일을 등록
+2. `@alton.education` Google Workspace 계정 발급 완료
+3. 선생님이 발급된 Workspace 계정으로 최초 로그인
+4. ALTON 인증 사용자와 사전 생성된 선생님 레코드 연결 완료
+5. 시급 설정 완료(R1 `has_valid_current_teacher_rate`)
+6. 필수 프로필·온보딩 정보 입력 완료
+7. 선생님 계약 확인 완료(계약 자동화 전에는 관리자가 수동 확인)
+
+과목·학생 배정은 활성화 이후 절차이므로 선행조건에 포함하지 않는다.
+
+### 신규 데이터 필드 (확정)
+
+- `personal_contact_email`(필수) — Workspace 계정 발급 전에 수집. 목적 2가지: Workspace 복구 이메일, ALTON 계정 발급/보안/운영 연락 알림.
+- `workspace_recovery_email`(필수, 기본값 `personal_contact_email`).
+- `personal_phone`(선택).
+
+### 프로비저닝 흐름 (확정, 9단계)
+
+1. 관리자가 ALTON에서 선생님 기본 정보를 등록
+2. ALTON에 `provisioning` 상태의 선생님 레코드 생성
+3. Google Admin SDK로 `@alton.education` 계정 생성
+4. Google 고유 사용자 ID·Workspace 이메일·ALTON 선생님 ID 연결
+5. 개인 이메일로 최초 설정 안내 발송
+6. 선생님이 발급된 Workspace 계정으로 Google 로그인
+7. 로그인 콜백에서 사전 등록된 계정인지 검증
+8. Supabase Auth 사용자와 기존 선생님 레코드 연결
+9. 관리자가 위 7가지 선행조건 확인 후 `pending→active` 전환
+
+### 보안·정합성 제약 (확정, 반드시 준수)
+
+- **이메일 주소만 일치한다고 선생님 레코드를 자동 생성·연결하면 안 된다** — 사전 생성된 provisioning 레코드와 Google 고유 사용자 ID를 함께 검증(이메일 일치만으로는 스푸핑 방지 불가).
+- 부분 실패·중복 생성 방지·재시도·취소/회수·감사 이력 지원 필요.
+- 임시 비밀번호는 ALTON DB에 평문 저장 금지, 이메일로 평문 발송 금지.
+
+### 기존 Calendly 온보딩 처리 (확정)
+
+기존 Calendly 온보딩 UI/코드는 계정 활성화에 영향을 주지 않도록 현재 상태(Task 2에서 자기 활성화만 제거, URL 저장 기능은 유지)로 둔다. Google Workspace 프로비저닝 구현 단계에서 제거할 후속 작업으로 명시한다 — Task 2 범위에서 지금 제거하지 않는다.
