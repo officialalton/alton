@@ -84,9 +84,24 @@ export async function inviteTeacher(params: {
       id: userId,
       school: params.school,
       status: "pending",
-      hourly_rate_krw: params.hourlyRateKrw,
     });
   if (error) throw new Error(error.message);
+
+  // teacher_rate_history의 최초 이력 생성(정상 경로는 set_teacher_rate()뿐 —
+  // teachers.hourly_rate_krw만 채우면 R1의 active 전환 트리거가 이 선생님을
+  // 영구히 막는다). 계정 자체는 이미 만들어졌으므로 실패해도 롤백하지 않고,
+  // 관리자가 시급 화면에서 재시도할 수 있도록 원인을 명확히 알린다.
+  const { error: rateError } = await admin.rpc("set_teacher_rate", {
+    p_teacher_id: userId,
+    p_amount_minor: params.hourlyRateKrw,
+    p_currency: "KRW",
+  });
+  if (rateError) {
+    throw new Error(
+      `선생님 계정은 생성됐지만 시급 이력 생성에 실패했습니다(${rateError.message}). 시급 설정 화면에서 다시 시도해주세요.`
+    );
+  }
+
   return userId;
 }
 
@@ -104,6 +119,21 @@ export async function setTeacherStatus(
   status: "active" | "pending"
 ): Promise<void> {
   const { supabase } = await requireAdmin();
+  if (status === "active") {
+    // DB 트리거(teachers_enforce_active_requires_rate)가 최종 방어선이지만,
+    // 그 원시 오류를 그대로 보여주지 않고 미리 확인해 사용자 친화적으로 안내한다.
+    const admin = createAdminClient();
+    const { data: hasRate, error: checkError } = await admin.rpc(
+      "has_valid_current_teacher_rate",
+      { p_teacher_id: teacherId }
+    );
+    if (checkError) throw new Error(checkError.message);
+    if (!hasRate) {
+      throw new Error(
+        "이 선생님은 아직 시급이 설정되지 않아 active로 전환할 수 없습니다. 먼저 시급을 설정해주세요."
+      );
+    }
+  }
   const { error } = await supabase.from("teachers").update({ status }).eq("id", teacherId);
   if (error) throw new Error(error.message);
 }
@@ -112,14 +142,19 @@ export async function setTeacherHourlyRate(
   teacherId: string,
   rateKrw: number
 ): Promise<void> {
-  const { supabase } = await requireAdmin();
+  await requireAdmin();
   if (!Number.isFinite(rateKrw) || rateKrw <= 0) {
     throw new Error("시급은 1원 이상의 숫자로 입력해주세요.");
   }
-  const { error } = await supabase
-    .from("teachers")
-    .update({ hourly_rate_krw: rateKrw })
-    .eq("id", teacherId);
+  // set_teacher_rate()만이 시급 변경의 정상 경로다(기존 이력 종료 + 새 이력
+  // 생성을 원자적으로 수행) — teachers.hourly_rate_krw 직접 UPDATE는 이 함수가
+  // teacher_rate_history와 함께 동기화해주므로 더 이상 직접 하지 않는다.
+  const admin = createAdminClient();
+  const { error } = await admin.rpc("set_teacher_rate", {
+    p_teacher_id: teacherId,
+    p_amount_minor: rateKrw,
+    p_currency: "KRW",
+  });
   if (error) throw new Error(error.message);
 }
 
