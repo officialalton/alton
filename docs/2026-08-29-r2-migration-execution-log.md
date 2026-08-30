@@ -197,9 +197,33 @@ product-architecture-v3.md §5.7 확정 모델(`pending→active→suspended(재
 **앱 코드**: 위 6개 파일 + `supabase/seed.sql`(로컬 전용, 원격 미적용).
 
 **영향 범위**:
-- 원격 실사용 데이터: `guardian_students` 1행(김민지-지훈)이 `households`/`household_members`로 백필된다. `parents`/`students`/`guardian_students` 원본 행은 삭제되지 않는다(`guardian_students`는 이후 읽기 전용, 쓰기만 차단).
+- 원격 실사용 데이터: `guardian_students` 1행(학부모 `b91d45f5-...`-학생 `84557af2-...`)이 `households`/`household_members`로 백필된다. `parents`/`students`/`guardian_students` 원본 행은 삭제되지 않는다(`guardian_students`는 이후 읽기 전용, 쓰기만 차단).
 - **원격 적용 즉시 효력 발생하는 행동 변화**: (1) `guardian_students` 직접 UPDATE/INSERT/DELETE는 관리자 포함 전면 차단. (2) 신규 학생 초대는 이제 `household_members`에 관계를 쓴다(기존 실사용 관계는 백필로 이미 이관돼 있어 조회 결과는 동일). (3) `profiles` 조회 정책이 household 기반 관계를 추가로 인정하도록 넓어짐(기존 `guardian_students` 기반 접근은 그대로 유지, 순수 추가).
 - 원격에는 현재 다중 자녀/다중 보호자 데이터가 없어(1가족 1자녀) connected-components 로직이 실제로는 자명한 케이스만 처리하지만, 로컬에서 복잡한 그래프로 이미 검증했다.
+
+### 원격 적용 (2026-08-30 완료, 커밋 `fe653c6`)
+
+`supabase db push --linked`로 `20260901000000_r2_household_backfill_and_guardian_freeze.sql` 1개 파일 적용 성공. `supabase migration list --linked`로 로컬·원격 37개 마이그레이션 전부 일치 확인(불일치 없음).
+
+**재검증 결과**:
+
+| 항목 | 결과 |
+|---|---|
+| 로컬·원격 migration 목록 일치 | 37개 전부 동일 |
+| 기존 로그인 계정·프로필 보존 | `profiles=5, students=1, teachers=2, parents=1` 적용 전후 동일. `guardian_students`는 원본 1행 그대로 보존(삭제 안 함, 읽기 전용) |
+| 백필 전후 보호자-자녀 관계 일치 | `guardian_students`의 유일한 행(부모 `b91d45f5-...`, 학생 `84557af2-...`, `is_primary=true`)이 `household_members`에 정확히 guardian+child(모두 같은 household, 자녀의 `is_primary=false`는 관계 원본과 무관한 "기본 자녀" 표시용 필드라 관계 일치 여부와는 별개)로 반영됨 확인 |
+| **불변조건 1: 연결된 가족 그룹이 여러 household로 쪼개지지 않음** | `guardian_students`의 부모-자녀 쌍이 실제로 같은 `household_id`에 속하는지 조인 검사 — 위반 0건 |
+| **불변조건 2: 보호자가 있는 household마다 `is_primary=true`가 정확히 1명** | `group by household_id having count(*) filter (where is_primary) <> 1` — 위반 0건(전체 household 대상) |
+| **불변조건 3: `households.primary_guardian_id`와 `is_primary=true` 보호자 일치** | 불일치 0건 |
+| **불변조건 4: 자녀는 정확히 1개 household에만 소속** | `role='child' group by profile_id having count(*) > 1` — 위반 0건 |
+| **불변조건 5: 같은 household에 동일 profile 중복 등록 없음** | `group by household_id, profile_id having count(*) > 1` — 위반 0건 |
+| `guardian_students` 관리자 권한 직접 쓰기 차단 | 관리자 인증 세션(`authenticated` + 실제 admin id)으로 INSERT 시도 → `guardian_students는 동결됐습니다` 트리거 오류로 거부 |
+| `guardian_students` service_role 쓰기 차단 | `db query`(service_role/superuser 경로)로 DELETE 시도 → 동일 트리거 오류로 거부 |
+| `parents.status` 정지·재활성화 정상 동작 | 실제 관리자 세션으로 `transition_account_status()`를 실제 원격 보호자 계정에 `active→suspended→active` 왕복 실행 — 정상 동작, 최종 상태 `active`로 원상복구(가역적 검증), `account_status_events`에 두 건 모두 정확히 기록 |
+| 실제 보호자 계정의 자녀 이름 조회 | 실제 원격 보호자 세션(`b91d45f5-...`)으로 `household_members`+`profiles` 조인 조회 → 자녀 이름("장세온") 정상 반환 — `shares_household_as_guardian_or_child()` 수정이 원격에서도 정상 작동 확인 |
+| 6개 역할 RLS 회귀 | 같은 household의 `household_members` 조회 결과: 익명 0행, 학생 본인 1행(자기 행만), 보호자 본인 2행(전체), 무관 선생님 2명 각 0행, 관리자 2행(전체) — 설계대로 정확히 분리됨, 회귀 없음 |
+
+**결론**: 계획된 재검증 항목과 사용자가 추가 요청한 5가지 데이터 불변조건 전부 통과. 실사용자 데이터 손상·의도치 않은 상태 변경 없음. Task 3 완료 처리.
 
 **롤백 절차**: 이 마이그레이션은 `CREATE OR REPLACE FUNCTION`/`CREATE POLICY`(DROP 후 재생성)/`INSERT`(백필)/`CREATE INDEX`/`CREATE TRIGGER`뿐이다. 실패 시 `guardian_students_freeze` 트리거와 `household_members_one_primary_guardian` 인덱스만 개별 DROP하면 되고, `is_guardian_of()`/`profiles` 정책은 이 로그에 원래 조건이 남아 있어 복원 가능하다. 백필된 `household_members` 행은 원본 `guardian_students` 데이터를 그대로 옮긴 것이라 삭제해도 정보 손실이 없다(원본이 남아있으므로).
 

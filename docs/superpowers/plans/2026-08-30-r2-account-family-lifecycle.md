@@ -87,7 +87,7 @@
 
 ---
 
-## Task 3: `households`/`household_members` cutover + 백필 (로컬 검증 완료, 원격 적용 승인 대기)
+## Task 3: `households`/`household_members` cutover + 백필 (완료, 원격 적용 2026-08-30)
 
 > **원본 구분 정정(2026-08-30, 사용자 확정)**: 가족 구성·보호자–자녀 **관계** 원본은 `households`/`household_members`로 cutover하되, 보호자 **역할별 계정 정보와 계정 상태**(Task 2의 `pending/active/suspended/closure_pending/closed`, `transition_account_status()`, 감사 이력)는 당분간 `parents`가 계속 원본이다. `parents` 테이블 자체를 동결 대상에 넣지 않는다 — **동결 대상은 `guardian_students`뿐**(관계 원본으로서 완전히 사용 중단, 앱 읽기·쓰기 모두 제거, DB에서도 쓰기 차단). `parents`는 이 태스크에서 스키마·RLS를 건드리지 않는다.
 
@@ -118,7 +118,7 @@
 - [x] 리뷰 알림 — 중복 없음 + `closed` 제외를 vitest 3건으로 검증(`submitReview -> notifyGuardiansOfReview`)
 - [x] 6개 역할 RLS 회귀 — `is_guardian_of()`/`profiles` 정책 수정 반영, household-only 공동보호자가 실제로 인식됨을 확인. 무관한 선생님/anon은 여전히 0행(회귀 없음)
 - [x] `npx tsc --noEmit` 클린, `npx vitest run`(79개 파일 339개) 전부 통과, `npx playwright test --workers=1`(18개) 전부 통과
-- [ ] 원격 적용 전 변경 대상·영향 범위 요약 보고, 필수 테스트 통과 여부 확인 후 승인받고 push — **로컬 검증 완료, 원격 적용은 사용자 승인 대기 중**
+- [x] 원격 적용 전 변경 대상·영향 범위 요약 보고 → 사용자 승인 완료 → `supabase db push --linked`로 원격 개발 DB 적용 완료(커밋 `fe653c6`) → 로컬·원격 migration 목록 일치, 데이터 보존, 백필 관계 일치, 신규 5가지 데이터 불변조건(가족그룹 미분할/주보호자 정확히 1명/`primary_guardian_id` 일치/자녀 단일소속/중복등록 없음), `guardian_students` 관리자·service_role 쓰기 차단, `parents.status` 정지·재활성화, 실제 보호자 계정 자녀 이름 조회, 6개 역할 RLS 회귀 — 전부 원격에서 실제 실행으로 재검증 통과. 상세는 실행 로그 "원격 적용 (2026-08-30 완료, 커밋 `fe653c6`)" 참고.
 
 ---
 
