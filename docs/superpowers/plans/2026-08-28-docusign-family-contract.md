@@ -1,5 +1,7 @@
 # 072-docusign (학부모/학생 계약서 서명) Implementation Plan
 
+> **문서 상태: 과거 구현 이력·이 계획 그대로 실행 금지.** **(2026-08-30 정정)** DocuSign 서비스 자체는 제거 대상이 아니다 — R3에서 계약 전자서명 서비스로 계속 사용한다(`product-architecture-v3.md` §5.5, `master-roadmap-v3.md` R3 참고). 다만 이 문서의 구체적 구현(레거시 `contracts` 테이블, 템플릿 없이 anchor 태그로 직접 문서 전송, 자녀별 계약 버전·Drive 장기보관·`drive_artifacts`·`external_event_receipts` 멱등 처리 없음)은 v3 확정 구조 이전 설계라 그대로 재사용하지 않는다. R3 착수 시 이 문서의 DocuSign JWT 인증/envelope 생성 기법(Task 1~4)은 참고하되, 스키마·흐름은 `master-roadmap-v3.md` R3를 기준으로 새 task 단위 계획을 작성한다.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** 관리자가 상담 완료 건에서 "계약서 발송"을 누르면 학부모/학생 계정이 생성되고 DocuSign으로 표준 계약서가 발송되며, 서명 완료 시 웹훅으로 계약 상태와 학생 상태가 자동 갱신된다.

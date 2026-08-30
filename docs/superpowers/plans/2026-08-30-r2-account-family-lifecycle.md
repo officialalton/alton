@@ -219,7 +219,7 @@
 - [ ] **Step 3**: 관리자 등록 → provisioning 레코드 생성 → Workspace 계정 생성 → Google 고유 사용자 ID 연결까지의 9단계 흐름을 `app/admin/workspace-actions.ts`로 구현. 로그인 콜백(단계 7)에서 이메일이 아니라 **사전 생성된 provisioning 레코드 + Google 고유 사용자 ID**로 검증 후 Supabase Auth 사용자와 연결.
 - [ ] **Step 4**: 부분 실패 재처리·중복 생성 방지·취소/회수 — `workspace_provisioning_status='failed'`인 선생님을 관리자 화면에서 재시도할 수 있는 버튼 제공, 이미 생성된 계정에 재시도 시 중복 생성 대신 기존 계정 상태 확인 후 이어서 진행.
 - [ ] **Step 5**: 관리자 활성화 화면에 위 7가지 선행조건 체크리스트 표시, 전부 충족 확인 후에만 `transition_account_status(..., 'active')` 호출 가능하도록 UI 가드(DB 트리거는 이미 R2에서 관리자 권한만 확인하므로, 7가지 선행조건 확인은 앱 레벨 — 최종 방어선이 필요하면 이 스텝에서 판단).
-- [ ] **Step 6**: 기존 Calendly 온보딩 UI/코드 제거(`app/teacher/onboarding-actions.ts`의 `submitCalendlyOnboarding()`, `TeacherHomeDashboard.tsx`의 관련 UI).
+- [ ] **Step 6**: 기존 Calendly 온보딩 UI/코드 제거(`app/teacher/onboarding-actions.ts`의 `submitCalendlyOnboarding()`, `TeacherHomeDashboard.tsx`의 관련 UI). `teachers.calendly_scheduling_url` **컬럼 자체는 이 태스크에서 삭제하지 않는다** — 데이터를 보존할 가치가 있어서가 아니라(개발·테스트 데이터, `product-architecture-v3.md` §4.13 정정 참고), 학생·보호자용 Calendly 예약 코드가 R6 전까지 이 컬럼을 계속 참조하기 때문이다. 실제 컬럼 삭제는 `master-roadmap-v3.md` R6 "레거시 제거 — Calendly·Zoom 완전 삭제"에서 수행한다.
 
 **DoD 체크**: 실제 Sandbox(또는 운영 도메인의 테스트 계정)로 생성 성공/충돌/실패 각 케이스 실제 실행 검증, 재처리·취소/회수 흐름 실제 실행 검증, 이메일 일치만으로는 연결이 안 되는지(스푸핑 방지) 실제 실행 검증, 임시 비밀번호가 DB/로그에 평문으로 남지 않는지 코드 검토+실행 검증.
 

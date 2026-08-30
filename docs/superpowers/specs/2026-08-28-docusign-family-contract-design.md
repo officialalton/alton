@@ -1,5 +1,7 @@
 # 072-docusign: 학부모/학생 계약서 서명 (Family Contract) — 설계
 
+> **문서 상태: 과거 설계 이력·이 설계 그대로 신규 구현 금지.** **(2026-08-30 정정)** DocuSign 서비스 자체는 제거 대상이 아니다 — R3에서 계약 전자서명 서비스로 계속 사용한다. 다만 이 문서가 전제하는 레거시 스키마(`contracts.parent_id`/`student_id` NOT NULL, 자녀별 계약 버전 없음, Drive 장기보관 없음)는 v3 확정 구조 이전 설계라 재사용하지 않는다 — 신규 설계는 `product-architecture-v3.md` §5.5와 `master-roadmap-v3.md` R3를 따른다.
+
 ## 배경
 
 `docs/tickets.md`의 072번 티켓. 기능 명세(`docs/spec/functional-spec.md` §2)상 고객 여정은 "상담 → 제안서 발송 → **DocuSign 계약 서명** → Stripe 결제 → 튜터 매칭"이고, 스키마(`docs/spec/schema-draft.md` §3, §4a)에는 이미 다음이 확정돼 있다:

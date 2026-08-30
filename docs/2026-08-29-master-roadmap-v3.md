@@ -150,6 +150,29 @@ G1: 같은 데이터로 잔여 수업권·현재 선생님·과거 정산을 언
 - [ ] 보호자 해지·회사 종료·과목별 종료 흐름
 - [ ] 12개월 무활동 계약의 30일 고지 후 휴면 종료
 
+### R3 전자서명 — DocuSign 확정 구조 (2026-08-30 확정, `product-architecture-v3.md` §5.5 참고)
+
+**DocuSign은 제거 대상이 아니다.** 계약 데이터·상태의 기준 원본은 ALTON DB, 서명 발송·절차는 DocuSign, 서명 완료본·감사증명서 장기 보관은 회사 Google Shared Drive — 3단 분리 구조로 R3에서 구현·검증한다. 기존 `docs/superpowers/plans/2026-08-28-docusign-family-contract.md`는 v3 이전(자녀별 계약 버전·Drive 보관 구조가 없던 시절) 구현 이력이라 스키마·흐름이 아래와 다르다 — 그대로 재사용하지 말고 R3 착수 시 이 목록을 기준으로 새 task 단위 계획을 작성한다(R2와 동일한 절차: 영향 범위·핵심 테스트 계획 공유 후 승인받고 구현).
+
+- [ ] 자녀별 계약 및 계약 버전 생성(수정 계약은 기존 계약을 덮어쓰지 않고 새 버전 생성)
+- [ ] DocuSign envelope 생성·발송
+- [ ] envelope ID와 계약 버전 연결
+- [ ] `sent/delivered/completed/declined/voided` 상태 자동 반영(웹훅)
+- [ ] 중복·재전송·순서 역전 웹훅 멱등 처리 — `external_event_receipts(provider, event_id)` 기반
+- [ ] 서명 완료본과 감사증명서(certificate of completion) 다운로드
+- [ ] 회사 Shared Drive의 해당 자녀 계약 폴더에 저장
+- [ ] Drive file ID를 계약과 `drive_artifacts`에 연결
+- [ ] 완료 후 결제 단계 활성화
+- [ ] 웹훅 누락·다운로드 실패·Drive 저장 실패 재처리 및 정기 대조
+
+**보안 요구사항(구현·검증 필수)**:
+- DocuSign 웹훅 서명 검증 필수 — signing secret 미설정 시 개발 환경을 포함해 어떤 환경에서도 웹훅 요청을 통과시키지 않는다.
+- `external_event_receipts(provider, event_id)` 기반 중복 방지.
+- 비밀키와 access token은 서버에서만 사용(클라이언트 노출 금지).
+- 계약 발송·무효·재발송·완료·파일 보관 전 과정 감사 이력.
+
+기존 `contracts`/`contract_versions`(레거시)나 개발 중 만들어진 계약·세션 테스트 데이터는 실사용 이력이 아니므로 신규 구조로 이관할 필요가 없다(오픈 전 개발 데이터, `product-architecture-v3.md` §4.13 정정 참고) — 백업 후 폐기 가능. 로그인 테스트 계정은 유지한다.
+
 ## R4 — 수업권·결제 원장
 
 - [ ] 사용자 용어와 코드의 신규 표기를 수업권으로 통일
@@ -205,6 +228,29 @@ G1: 같은 데이터로 잔여 수업권·현재 선생님·과거 정산을 언
 - [ ] Google 실패 보상·재처리·정기 대조
 - [ ] 주간 고정 시간 최대 8회와 회차별 수업권 hold
 - [ ] 수업 24시간·2시간 전 리마인드
+
+### R6 레거시 제거 — Calendly·Zoom 완전 삭제 (2026-08-30 확정)
+
+신규 자체 예약(Calendar/Meet) 경로의 E2E 통과 후 아래를 완전히 제거한다. 제거 전 안전한 DB 백업과 롤백 지점만 남기면 충분하다 — ALTON은 아직 운영을 시작하지 않았고 현재 예약·Zoom 링크 데이터는 개발·테스트 데이터이므로 장기 보존이나 신규 구조로의 이관은 필요 없다(`product-architecture-v3.md` §4.13 정정 참고). 로그인 테스트 계정·프로필은 예외로 유지한다.
+
+**Calendly 제거(학생·보호자 예약, R2 Task 7에서 이미 제거한 선생님 온보딩 경로와 별개)**:
+- [ ] 학생·보호자용 Calendly 예약 UI와 링크
+- [ ] `CalendlyWidget.tsx`
+- [ ] Calendly 기반 `booking-data.ts`
+- [ ] Calendly 예약 생성·취소·재예약 처리
+- [ ] `app/api/webhooks/calendly/*`
+- [ ] Calendly 환경변수와 signing secret
+- [ ] Calendly 예약 시 `current_session`을 변경하는 레거시 코드
+- [ ] 신규 코드에서 `teachers.calendly_scheduling_url`을 참조하는 모든 경로
+- [ ] 전환 완료 후 `teachers.calendly_scheduling_url` 컬럼 삭제(R2 Task 7에서는 다른 레거시 예약 코드가 아직 이 컬럼을 쓸 수 있어 컬럼 자체는 보존, 실제 삭제는 여기서 수행)
+
+**Zoom 제거(Google Meet로 완전 대체)**:
+- [ ] 기존 Zoom 링크 생성·저장·노출 코드 제거
+- [ ] Zoom 관련 환경변수와 외부 계정 의존성 제거
+- [ ] 신규 수업은 Google Calendar 이벤트별 고유 Meet 링크만 사용
+- [ ] 기존 과거 수업의 Zoom 링크는 이력으로 보존할 필요 없음(개발·테스트 데이터, 위 원칙과 동일)
+
+**검증**: 코드·DB·환경변수·운영 문서 전체에서 Calendly/Zoom 잔여 참조를 검사하고, 과거 실행 로그와 마이그레이션 문서의 역사적 언급을 제외하고 활성 코드 참조 0건을 확인한다.
 
 ## R7 — 수업 상태·출석·정산 근거
 

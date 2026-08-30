@@ -35,7 +35,7 @@
 - `spec/schema-draft.md`
 - `prompts/00-init-project.md`부터 `04-portals-recurring-pattern.md`까지
 
-이 문서들의 Calendly, Zoom, DocuSign, 크레딧, 파일럿 우선순위, 기존 결합 스키마를 신규 설계에 복사하지 않는다.
+이 문서들의 Calendly, Zoom, 크레딧, 파일럿 우선순위, 기존 결합 스키마를 신규 설계에 복사하지 않는다. **(2026-08-30 정정)** DocuSign은 예외다 — 전자서명 서비스로 계속 사용하며 R3에서 신규 계약 구조(자녀별 계약·버전·Drive 장기보관)에 재연결한다(`product-architecture-v3.md` §5.5 참고). 다만 이 문서들 속 옛 DocuSign 구현(레거시 `contracts` 스키마, 템플릿 미사용 anchor 방식, Drive 연동 없음)은 그대로 재사용하지 않는다 — R3는 새 스키마·흐름을 기준으로 다시 설계한다.
 
 ## 4. 현재 실행 게이트
 

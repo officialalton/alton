@@ -18,7 +18,7 @@ Google Workspace 전환만 별도로 구현하지 않는다. Calendar/Meet/Drive
 2. R1 스키마 리뷰 전 후속 UI의 데이터 계약 확정 금지
 3. 미오픈 개발 서비스이므로 현재 DB를 백업한 뒤 v3 기준선을 만들고 필요한 테스트 계정만 검증 이전
 4. 장기간 dual-write·무중단 운영 마이그레이션은 만들지 않되 검증 전 기존 테이블을 삭제하지 않음
-5. 새 쓰기 경로와 E2E가 통과한 뒤 기존 Calendly·Zoom·DocuSign·credit 경로 제거
+5. **(2026-08-30 정정)** 새 쓰기 경로와 E2E가 통과한 뒤 기존 Calendly·Zoom·credit 경로를 완전히 제거한다. **DocuSign은 제거 대상이 아니다** — 계약 전자서명 서비스로 계속 사용하며 R3에서 신규 계약 구조(자녀별 계약·버전·Drive 장기보관)에 재연결한다. Calendly는 R2 Task 7(선생님 온보딩)과 R6(학생·보호자 예약)로 나눠 단계적으로 제거하고, Zoom은 R6에서 Google Meet로 완전히 대체한다. 현재 DB의 예약·계약·수업·credit 데이터는 실사용 이력이 아닌 개발·테스트 데이터이므로 레거시 제거 시 장기 보존·이관 없이 백업 후 폐기할 수 있다(`product-architecture-v3.md` §4.13 정정 참고, 로그인 테스트 계정·프로필은 예외로 유지).
 6. 각 단계는 서버 권한·RLS·동시성·E2E·운영 재처리까지 포함
 
 ## 3. 최우선 스키마 교정
@@ -47,7 +47,7 @@ Google Workspace 전환만 별도로 구현하지 않는다. Calendar/Meet/Drive
 
 ### 3.3 수업권
 
-신규 코드의 canonical term은 `lesson entitlement`다. 기존 credit 테이블과 UI는 마이그레이션 대상이다.
+신규 코드의 canonical term은 `lesson entitlement`다. 기존 credit 테이블과 UI는 코드·화면 전환 대상이다 — 기존 credit 잔액·거래는 개발·테스트 데이터이므로 신규 entitlement 원장으로 데이터를 이관할 필요는 없다(§3.11 정정 참고).
 
 - `lesson_types`: 수업 시간·형태 규격
 - `entitlement_types`: 이용 가능한 lesson type과 소진 규칙의 버전
@@ -163,6 +163,8 @@ Google Workspace 전환만 별도로 구현하지 않는다. Calendar/Meet/Drive
 - 자동 갱신·자동 결제는 향후 별도 subscription product와 consent version으로 추가 가능하게만 설계
 
 ### 3.11 데이터 보존과 삭제
+
+**(2026-08-30 정정)** 아래 retention 기준은 정식 오픈 이후 실제 고객이 만드는 데이터에 적용한다. 오픈 전 개발·테스트로 생성된 예약·계약·수업·수업권(credit) 데이터는 실사용 업무 이력이 아니므로 이 정책의 적용 대상이 아니다 — 레거시 코드·테이블·컬럼 제거 시 안전한 백업과 롤백 지점만 남기면 이관 없이 폐기할 수 있다. 로그인 테스트 계정과 프로필은 업무 테스트 데이터와 구분해 유지한다.
 
 - retention policy는 data category와 policy version으로 관리하고 코드 곳곳에 기간을 하드코딩하지 않음
 - 7년: 계약·동의·결제·환불·수업권 원장·payout 회계 기록
