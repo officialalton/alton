@@ -231,7 +231,7 @@ product-architecture-v3.md §5.7 확정 모델(`pending→active→suspended(재
 
 원격 재검증 계획: (1) `guardian_students`→`households`/`household_members` 백필 결과가 기존 관계와 정확히 일치하는지, (2) `guardian_students` 직접 쓰기 차단, (3) `parents.status` 전환이 여전히 정상 동작하는지, (4) 학부모 실계정으로 자녀 이름이 정상 조회되는지(profiles 정책 수정 반영 확인), (5) 6개 역할 RLS 회귀. 승인 시 진행한다.
 
-## Task 4 — 계정 초대 상태 모델 + 보호자 주도 초대 (로컬 검증 완료, 원격 적용 승인 대기)
+## Task 4 — 계정 초대 상태 모델 + 보호자 주도 초대 (완료, 원격 적용 2026-08-31)
 
 ### 배경 — 범위와 확정 설계
 
@@ -307,10 +307,37 @@ DB 함수를 실제로 psql에서 반복 실행하며 검증하는 과정에서 
 
 **롤백 절차**: 이 마이그레이션은 신규 테이블 2개 + 신규 함수 7개뿐이며 기존 객체를 변경하지 않는다. 실패 시 신규 테이블·함수·트리거만 개별 DROP하면 기존 시스템에 영향이 없다. 앱 코드는 이번 커밋 이전으로 되돌리면 `inviteParent`/`inviteStudent`/`inviteTeacher`가 즉시 기존 동작(Task 3 시점 기준)으로 복귀한다.
 
-### 확인 요청 (원격 적용 전)
+### 원격 적용 전 확인 사항 (해결 완료)
 
-1. **선생님 초대 비활성화**: 원격에 현재 이 경로로 진행 중인(초대 발송했지만 아직 미확인) 선생님이 있는지 확인 필요 — 있다면 비활성화 후에도 기존 진행 건 자체는 영향받지 않지만(inviteTeacher는 신규 호출만 막음), 신규 선생님은 Task 7 완료 전까지 이 경로로 초대할 수 없다는 점을 운영팀에 안내해야 한다.
-2. 이번 라운드는 신규 테이블·함수만 추가하므로 기존 항목 재확인은 불필요.
+1. **`legacyInviteTeacherByEmail` 외부 노출 여부**: `app/admin/users-actions.ts`에서 `export` 없이 선언된 일반 함수다 — Next.js는 `"use server"` 파일에서 `export`된 async 함수만 호출 가능한 서버 액션으로 컴파일하므로, 이 함수는 클라이언트·외부 요청 어디서도 호출할 방법이 없다. 코드베이스 전체에서 `grep`한 결과 이 함수를 참조하는 곳은 자기 자신의 선언부뿐임을 확인했다(호출부 0건). Task 7에서 Workspace 프로비저닝으로 대체·정리한다.
+2. **`mark_expired_invites()` 실행 주체·주기**: 현재 관리자 권한으로 호출 가능한 배치 함수로만 존재하고, 이를 주기적으로 실행하는 스케줄러(cron)는 아직 연결돼 있지 않다. 수락 API(`claim_account_invite`)의 실시간 만료 차단은 저장된 status와 무관하게 `expires_at`을 직접 비교하므로 스케줄러 부재와 무관하게 항상 정상 동작한다(로컬·원격 양쪽에서 이미 검증). 스케줄러 연결은 Task 4 완료를 막는 blocker가 아니라 **정식 오픈 전 필수 후속 작업**으로 `master-roadmap-v3.md` R2/R13에 등록했다.
+
+이 두 가지를 반영해 커밋 `5c3bbd9`(독립 체크포인트)를 남긴 뒤 원격 적용을 진행했다.
+
+### 원격 적용 (2026-08-31 완료, 커밋 `5121cbd` + `5c3bbd9`)
+
+`supabase db push --linked`로 `20260902000000_r2_account_invites.sql` 1개 파일 적용 성공. `supabase migration list --linked`로 로컬·원격 39개 마이그레이션 전부 일치 확인.
+
+**재검증 결과**:
+
+| 항목 | 결과 |
+|---|---|
+| 로컬·원격 migration 목록 일치 | 39개 전부 동일 |
+| 기존 사용자·가족 관계·계정 상태 보존 | `profiles=5, students=1, teachers=2, parents=1, households=1, household_members=2` 적용 전후 동일. 학생/선생님/보호자 상태값(`active`/`active`/`pending`/`active`) 전부 그대로 |
+| pending 중복 초대 차단 | 같은 이메일·역할·household(NULL 포함)로 두 번째 생성 시도 → `account_invites_pending_unique` 위반으로 거부 |
+| 만료 토큰 수락 거부 | `expires_at`을 과거로 설정한 뒤 수락 시도 → `expired`로 거부(status는 여전히 `pending`이었지만 시간 비교로 즉시 차단) |
+| 철회 토큰 수락 거부 | 철회 후 수락 시도 → `revoked`로 거부 |
+| superseded(구) 토큰 수락 거부 | 재발송 후 구 토큰으로 수락 시도 → `superseded`로 거부, 새 토큰은 정상 유효 |
+| 기존 가입 이메일 `manual_review` 처리 | 실제 원격 보호자 이메일로 초대 생성 후 수락 시도 → `manual_review`로 전이(에러 아님), 기존 `auth_user_id` 정확히 반환 |
+| 보호자의 타 household 초대 차단 | 무관한 선생님 계정으로 다른 household에 자녀 초대 시도 → "본인 household에만 자녀를 초대할 수 있습니다"로 거부 |
+| 선생님 이메일 초대 호출 차단 | 이 항목은 DB가 아니라 앱 코드(`inviteTeacher()`)의 가드라 원격 DB와 무관 — 로컬 vitest 2건(관리자 권한 확인 후 비활성화 오류, 비관리자는 권한 오류가 먼저)으로 이미 검증 완료, 재확인 불필요 |
+| 초대·재발송·수락·철회·manual_review 감사 이벤트 | 전체 시나리오(생성→재발송→수락, 생성→철회, 생성→manual_review→철회, 생성→수락→finalize)에서 `account_invite_events`에 `sent`/`resent`/`superseded`/`accepted`/`revoked`/`manual_review` 전부 정확히 기록됨을 확인 |
+| 실제 테스트 이메일 1건의 초대→계정 생성→로그인 파이프라인 | `create_account_invite`→`claim_account_invite`(accepted, target_profile_id 아직 null)→(Admin API로 생성된 것과 동일한 형태의) `auth.users` 행 생성→`finalize_account_invite` 전체 파이프라인을 원격에서 실제 실행, `profiles`+`parents` 행이 정확히 생성됨을 확인. `admin.auth.admin.createUser()`/`generateLink()`/`/set-password` 앱 레이어 자체는 로컬 E2E(`e2e/account-invites.spec.ts`, 실제 Mailpit 메일함에서 링크 추출 후 완주)에서 이미 동일 코드 경로로 검증했으므로 원격에서 별도 재검증하지 않음(환경별 코드 분기 없음) |
+| 핵심 smoke test | 위 모든 쿼리가 스키마·RLS 오류 없이 정상 동작 — 조회 경로 손상 없음 |
+
+**테스트 데이터 정리**: 위 검증 과정에서 만든 테스트 초대(`r2t4remote*@example.com`, 실제 보호자 이메일 대상 1건)와 시뮬레이션으로 생성된 테스트 계정(`profiles`/`parents`/`auth.users`)을 전부 삭제해 원격 DB를 검증 전 상태로 복원했다(최종 확인: `profiles=5, account_invites=0`, 적용 전과 동일).
+
+**결론**: 재검증 항목 9개 전부 통과. 실사용자 데이터 손상·의도치 않은 상태 변경 없음. Task 4 완료 처리.
 
 ## Task 7 예고 — Google Workspace 선생님 프로비저닝 (정책 확정, 미구현)
 
