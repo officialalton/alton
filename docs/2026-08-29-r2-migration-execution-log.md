@@ -339,6 +339,58 @@ DB 함수를 실제로 psql에서 반복 실행하며 검증하는 과정에서 
 
 **결론**: 재검증 항목 9개 전부 통과. 실사용자 데이터 손상·의도치 않은 상태 변경 없음. Task 4 완료 처리.
 
+## Task 5 — 계정 병합 (로컬 검증 완료, 원격 적용 승인 대기)
+
+### 배경 — 정책 확정과 범위 정정
+
+1차 설계 확인 과정에서 사용자가 두 가지를 확정했다: (1) 병합되는 계정의 `profiles` 행은 실제 DELETE하지 않고 유지 + PII만 비가역 익명화(스키마 조사 결과 `profiles(id)` 참조 FK가 45개·32개 테이블에 달해 DELETE 시 감사 이력까지 연쇄 삭제될 위험이 큼), (2) "소유권" 필드만 생존 계정으로 재배정하고 "감사·행위자"(`created_by`/`changed_by`/`actor_id`류) 필드는 원본 UUID 유지.
+
+이어서 사용자가 계정 상태 정책 전체를 대폭 확장 확정했다 — 일반적인 서비스 중단(학생 수업 중단·계약 종료, 선생님 퇴사, 장기 미접속)은 `closed`가 아니라 신규 **`inactive`** 상태로 처리하고 자동 삭제·익명화 대상이 아니다(학생 최소 3년·선생님 최소 7년 복귀 지원기간, `reactivate_account()` 정상 경로). `closed`는 **사용자가 명시적으로 요청한 폐쇄·삭제**에만 쓴다. 이 확장된 정책은 `product-architecture-v3.md` §4.13/§4.19에 전면 반영했고, `inactive` 상태 도입·장기 복귀·보관 자동화·제한 보관 접근통제·정기 스케줄러의 **구현**은 `master-roadmap-v3.md` R12 인수 조건으로 이관했다(Task 5 자체는 병합 기능만 구현).
+
+### 마이그레이션
+
+1. **`20260903000000_r2_inactive_enum.sql`** — `teacher_status`/`parent_status`에 `'inactive'` 추가(`student_status`는 R0 스키마에 이미 있음). 상태 머신 연결 없이 값만 추가 — `merge_accounts()`/`anonymize_merged_account()`가 "이 계정은 inactive라 대상이 아니다"를 판정할 수 있게 하는 목적뿐이다.
+2. **`20260903010000_r2_account_merge.sql`**:
+   - `account_merges`(survivor_id/merged_id/merged_by/merged_at/reason/affected_tables_summary/anonymized_at/anonymized_by, `unique(merged_id)`로 재병합 방지 최종 방어선).
+   - `merge_accounts(survivor_id, merged_id, reason)` — 관리자 전용. 두 profile을 id 순서로 정렬해 `FOR UPDATE`로 잠근 뒤(동시 병합 방지), 같은 역할인지·이미 병합/이미 closed/inactive인지 확인하고, **소유권 필드 약 40개 컬럼**(`household_members.profile_id`, `sessions_v3.teacher_id`, `entitlement_grants.child_id`, `payout_items.teacher_id`, 레거시 `contracts`/`enrollments`/`chat_threads`/`vocab_words` 등 현재 실사용 중인 v1 테이블 포함)을 재배정한다. 병합 원본은 일반 `closure_pending` 경유 없이 즉시 `closed`로 전환(우회 플래그, 사유 `merged`).
+   - `anonymize_merged_account(profile_id)` — 관리자 전용, `account_merges`에 있는 병합 원본에만(병합 후 30일 경과 확인, inactive 계정은 거부) 적용. 이름·전화·생년월일(profiles), 학교/약력/Calendly(teachers), 추천코드/지역(parents) 등 PII를 비가역 스크럽, 멱등(재실행 시 조용히 반환), 실행 로그는 실행자·시각·대상 ID만.
+
+### 로컬 검증 — 실제 실행으로 발견·수정한 버그 1건
+
+**`teacher_rate_history.teacher_id` 재배정 시도가 R1의 `protect_teacher_rate_history()` 트리거에 막힘**: 이 트리거는 자체 우회 플래그(`app.bypass_teacher_rate_protect`)를 켜도 `teacher_id`/금액/통화/`effective_from` 변경만큼은 무조건 차단하도록 R1에서 이미 설계돼 있었다(실행 중 실제로 발견). 재검토 결과 이건 실제로 옳은 제약이다 — "이 시급 이력이 누구 것이었는가"는 감사·행위자 필드(`created_by`)와 같은 성격의 역사적 사실이고, 생존 계정은 이미 자기 자신의 유효한 현재 시급 이력을 갖고 있어 병합 대상의 이력을 이전할 필요가 없다. `teacher_rate_history` 재배정을 마이그레이션에서 제거하고 코드 주석으로 사유를 남겼다.
+
+| 항목 | 결과 |
+|---|---|
+| 일반 관리자 아닌 세션에서 `merge_accounts`/`anonymize_merged_account` 호출 | 둘 다 "관리자만 계정을 병합/실행할 수 있습니다"로 거부 |
+| 소유권 필드 재배정(`notifications.recipient_id`로 실측) | 병합 후 생존 계정 기준으로 정상 재배정, 조회 가능 |
+| 감사·행위자 필드 불변 확인 | `teacher_rate_history.teacher_id`/`created_by` 둘 다 병합 원본 UUID 그대로, `account_status_events`도 원본 profile_id 유지 |
+| 병합 원본 즉시 `closed` 전환 + 감사 이력 | `account_status_events`에 `previous_status=active, new_status=closed, reason='merged: ...'` 정확히 기록 |
+| 이미 병합된 계정 재병합 시도 | "이미 병합된 계정입니다"로 거부(멱등성은 "안전하게 재시도 가능"의 의미로, `merge_accounts()`는 재시도 시 명확히 거부해 중복 재배정을 막고 `anonymize_merged_account()`는 반대로 조용히 재성공하도록 구분 설계 — 각각의 위험 성격이 다르기 때문) |
+| inactive 계정 병합 시도 | "inactive 계정은 병합할 수 없습니다"로 거부 |
+| 동시 병합(psql 프로세스 2개, 같은 병합 대상) | 정확히 하나만 성공, 다른 하나는 "이미 병합된 계정입니다"로 거부 |
+| `anonymize_merged_account` 30일 미경과 | 거부 |
+| `anonymize_merged_account` 병합 원본 아닌 계정 | 거부 |
+| `anonymize_merged_account` 실제 실행(강제로 `merged_at`을 31일 전으로 설정) | PII 스크럽 확인(`profiles.name='Deleted User'`, `phone`/`date_of_birth`/`teachers.school`/`bio`/`calendly_scheduling_url` 전부 null), 감사 기록엔 실행자·시각·ID만(PII 없음) |
+| `anonymize_merged_account` 재실행 | 에러 없이 조용히 반환(멱등) |
+| 익명화 후 생존 계정 데이터·PII 영향 없음 | 생존 계정 이름·학교·약력 전부 그대로, 이전받은 `notifications` 데이터도 정상 조회 |
+| 익명화된 원본 UUID를 참조하는 감사 이력 정상 조회 | `account_status_events`에서 익명화된 profile_id로 정상 조회됨 |
+| 병합 원본 실제 로그인 차단(실제 브라우저) | `e2e/account-merge.spec.ts` — 실제 이메일/비밀번호로 로그인 시도 → `/login`으로 강제 리다이렉트, "계정이 폐쇄되어 로그인할 수 없습니다" 표시, 이후 `/teacher` 직접 접근도 재차단 |
+| `npx tsc --noEmit` | 클린 |
+| `npx vitest run` | **82개 파일 351개 테스트 전부 통과**(신규: `app/admin/merge-actions.test.ts` 5건) |
+| **Playwright 전체** | **22개 전부 통과**(기존 21 + 신규 병합 로그인 차단 1건) |
+
+### 앱 코드
+
+`app/admin/merge-actions.ts`(신규) — `mergeAccounts`(RPC 래퍼, 사유 필수 검증), `anonymizeMergedAccount`(PII 스크럽 RPC 성공 후에만 `admin.auth.admin.deleteUser()`로 실제 Auth 계정·세션·복구정보 제거, "not found"는 이미 삭제된 것으로 간주해 에러 취급 안 함), `listMergeCandidates`(병합 후보 목록, 이미 병합된 계정 제외). **관리자 UI(병합 화면)는 이번 라운드에서 만들지 않았다** — Task 4와 동일하게 백엔드 정합성을 우선했다.
+
+### 원격 적용 대상 및 영향 범위 (승인 대기)
+
+**신규 마이그레이션 2개**: `20260903000000_r2_inactive_enum.sql`(enum 값 추가만), `20260903010000_r2_account_merge.sql`(신규 테이블 1개 + 함수 2개).
+
+**영향 범위**: 순수 추가 — 기존 데이터·함수·트리거를 변경하지 않는다. `inactive` enum 값 추가는 기존 어떤 전이 로직에도 연결돼 있지 않아 즉시 효력이 없다(아직 아무도 `inactive`로 전환될 수 없음 — R12에서 상태 머신에 연결하기 전까지는 스키마에만 존재). 원격 실사용 데이터에는 영향 없음.
+
+**롤백 절차**: 신규 테이블·함수만 개별 DROP하면 된다. enum 추가값은 되돌릴 수 없지만(Postgres 제약) 사용되지 않으므로 무해하다.
+
 ## Task 7 예고 — Google Workspace 선생님 프로비저닝 (정책 확정, 미구현)
 
 Task 2 승인 시 사용자가 함께 확정한 후속 Task의 요구사항이다. **지금 구현하지 않는다** — 여기서는 R2 계획 문서(`docs/superpowers/plans/2026-08-30-r2-account-family-lifecycle.md` Task 7)에 옮기기 전 원본 정책을 실행 로그에도 남겨둔다.
