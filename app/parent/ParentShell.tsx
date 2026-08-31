@@ -14,12 +14,15 @@ import type { BookableEnrollment } from "@/app/student/booking-data";
 import type { Child } from "./children-data";
 import CreditsTab from "./CreditsTab";
 import type { ParentCreditsData } from "./credits-data";
+import ConsentTab from "./ConsentTab";
+import type { ChildConsentStatus, ConsentPolicyOption } from "./consent-data";
 
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
   { id: "lessons", label: "레슨", icon: "📅" },
   { id: "credits", label: "수업권", icon: "💳" },
   { id: "stats", label: "통계", icon: "📊" },
+  { id: "consent", label: "동의", icon: "✅" },
 ] as const;
 
 type TabId = (typeof NAV_ITEMS)[number]["id"];
@@ -39,6 +42,8 @@ export default function ParentShell({
   bookableEnrollments,
   credits,
   purchaseStatus,
+  consentChildren,
+  activeConsentPolicy,
 }: {
   parentName: string;
   childrenList: Child[];
@@ -54,6 +59,8 @@ export default function ParentShell({
   myFeedback: Record<string, StudentFeedback>;
   credits: ParentCreditsData;
   purchaseStatus?: "success" | "cancelled";
+  consentChildren: ChildConsentStatus[];
+  activeConsentPolicy: ConsentPolicyOption | null;
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -159,6 +166,8 @@ export default function ParentShell({
               studentId={currentChildId}
               purchaseStatus={purchaseStatus}
             />
+          ) : activeTab === "consent" ? (
+            <ConsentTab children={consentChildren} activePolicy={activeConsentPolicy} />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.

@@ -60,16 +60,23 @@ where u.id in (
 -- 1. 인증 / 사용자
 -- =========================================================================
 
+-- R2 Task 6: date_of_birth가 없으면 fail-closed로 13세 미만 취급되어 보호자
+-- 동의 게이트에 걸린다(§4) — 학생 시드 계정은 학년에 맞는 현실적인
+-- 생년월일을 INSERT 시점에 채운다(protect_date_of_birth 트리거는 UPDATE만
+-- 막고 INSERT는 막지 않는다). 실제 13세 미만 동의 흐름은 테스트에서
+-- set_student_date_of_birth()로 별도 설정한다.
+insert into profiles (id, role, name, phone, date_of_birth) values
+  ('cccccccc-0000-0000-0000-000000000001', 'student', '지훈', null, (now() - interval '16 years')::date),
+  ('cccccccc-0000-0000-0000-000000000002', 'student', '이서아', null, (now() - interval '17 years')::date),
+  ('88888888-0000-0000-0000-000000000001', 'student', '박준서', null, (now() - interval '15 years')::date);
+
 insert into profiles (id, role, name, phone) values
   ('aaaaaaaa-0000-0000-0000-000000000001', 'admin', '관리자', null),
   ('bbbbbbbb-0000-0000-0000-000000000001', 'parent', '김민지', '+1-650-555-0110'),
   ('bbbbbbbb-0000-0000-0000-000000000002', 'parent', '이현우', '+1-650-555-0112'),
-  ('cccccccc-0000-0000-0000-000000000001', 'student', '지훈', null),
-  ('cccccccc-0000-0000-0000-000000000002', 'student', '이서아', null),
   ('dddddddd-0000-0000-0000-000000000001', 'teacher', '박서연 선생님', null),
   ('dddddddd-0000-0000-0000-000000000002', 'teacher', '이도현 선생님', null),
-  ('77777777-0000-0000-0000-000000000001', 'teacher', '정하나 선생님', null),
-  ('88888888-0000-0000-0000-000000000001', 'student', '박준서', null);
+  ('77777777-0000-0000-0000-000000000001', 'teacher', '정하나 선생님', null);
 
 insert into parents (id, referral_code, location) values
   ('bbbbbbbb-0000-0000-0000-000000000001', 'ALTON-MINJI82', '캘리포니아 서니베일'),

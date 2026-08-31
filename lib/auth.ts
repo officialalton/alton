@@ -20,8 +20,13 @@ type SupabaseServerClient = Awaited<ReturnType<typeof createClient>>;
  *   들어올 수 있어야 하므로) /account-suspended로 보낸다.
  * - pending: 아직 관리자 승인 전 온보딩 상태 — 정상 포털 대신
  *   /account-pending으로 보낸다(§R2 정책 확인 1).
- * - active: 정상 role 홈으로 보낸다. 이 함수가 다루는 상태 중 실제 서비스
- *   기능 이용이 허용되는 유일한 값이다.
+ * - active: 계정 lifecycle은 정상이다. 다만 R2 Task 6(13세 미만 보호자
+ *   동의)에 의해 실제 이용 자격이 추가로 걸릴 수 있다 —
+ *   current_account_access_allowed()가 false면(13세 미만 학생인데 유효한
+ *   보호자 동의가 없음) /consent-pending으로 보낸다. 동의가 유효해지면
+ *   (또는 13세가 지나면) 다음 페이지 이동에서 자동으로 정상 role 홈으로
+ *   돌아온다 — lifecycle 상태 자체는 건드리지 않는 별개의 게이트라서
+ *   여기 추가 분기 하나로 충분하다.
  */
 export async function resolveAccountDestination(
   supabase: SupabaseServerClient,
@@ -45,6 +50,11 @@ export async function resolveAccountDestination(
   }
   if (status === "pending") {
     return "/account-pending";
+  }
+
+  const { data: accessAllowed } = await supabase.rpc("current_account_access_allowed");
+  if (accessAllowed === false) {
+    return "/consent-pending";
   }
   return getRoleHomePath(role);
 }

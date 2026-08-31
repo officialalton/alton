@@ -48,10 +48,12 @@ const lessonsProps = {
   myFeedback: {},
   bookableEnrollments: [],
   credits: { balance: 0, referralCode: null, packages: [] },
+  consentChildren: [],
+  activeConsentPolicy: null,
 };
 
 describe("ParentShell", () => {
-  it("사이드바 4개 항목과 자녀 전환 pill을 보여주고, 기본 탭은 홈이다", () => {
+  it("사이드바 5개 항목과 자녀 전환 pill을 보여주고, 기본 탭은 홈이다", () => {
     render(
       <ParentShell
         parentName="김민지"

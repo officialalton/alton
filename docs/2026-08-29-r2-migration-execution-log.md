@@ -429,6 +429,79 @@ DB 함수를 실제로 psql에서 반복 실행하며 검증하는 과정에서 
 
 **결론**: 재검증 항목 전부 통과. 실사용자 데이터 손상·의도치 않은 상태 변경 없음. Task 5 완료 처리.
 
+## Task 6 — 13세 미만 보호자 동의 (로컬 검증 완료, 원격 적용 승인 대기)
+
+### 배경 — 8개 항목 설계 정정
+
+최초 설계 제안을 승인한 뒤 사용자가 구현 착수 전 8개 항목을 상세히 정정했다: (1) 계정 lifecycle(`current_account_active()`, 불변)과 이용 자격(동의 포함)을 분리해 신규 `current_account_access_allowed()`로 26개 자기서비스 쓰기 정책을 교체(관리자/보호자 동의처리 경로는 차단하지 않음), (2) 동의 정책 버전(`consent_policy_versions`)과 동의 원장(`guardian_consents`)을 분리한 정규화 스키마, 동의 레코드는 철회 전용 함수 외 불변, (3) 검증된 보호자(활성 household guardian)만 동의 가능(본인·타 household·임의 관리자 생성 차단) + 관리자 수동 검증 경로는 증빙 필수로 분리, (4) `is_minor()`→`is_under_13()`, UTC 기준 날짜 비교, `date_of_birth` NULL이면 fail-closed(13세 미만 취급), 학생 본인은 `date_of_birth` 자가수정 불가, (5) 미동의 로그인은 하드 실패가 아니라 `/consent-pending`(동의 상태 안내·보호자 통지 여부·로그아웃·최소 문의만 허용)으로 라우팅, (6) 동의는 계정을 active로 만들지 않는다 — 13세 미만 active 전환의 "선행조건"일 뿐이며 반대 방향 결합은 없음, (7) 철회는 즉시 이용 차단(다음 요청부터, 강제 로그아웃 아님) + 전체 감사 + `privacy_review_tasks` 후속 태스크 생성(데이터 즉시 삭제는 아님), (8) 확장된 필수 테스트 목록. "인증된 보호자 + 검증된 household 관계"가 COPPA verifiable parental consent 요건을 충분히 충족하는지는 **정식 오픈 전 법률 검토 대상**으로 명시(이 구현이 그 확정을 전제하지 않음).
+
+### 마이그레이션
+
+1. **`20260904000000_r2_minor_consent.sql`**:
+   - `consent_policy_versions`(version/title/document_url/content_hash/effective_from/retired_at/requires_reconsent), `guardian_consents`(student_id/policy_version_id/consented_by/consented_at/verification_method/verification_reference/notice_delivered_at/revoked_at/revoked_by/revocation_reason) + `protect_guardian_consent()` 트리거(DELETE 무조건 차단, UPDATE는 철회 3필드 외 전부 불변, 그마저도 `app.bypass_consent_protect` 우회 플래그 통해서만).
+   - `privacy_review_tasks`(student_id/reason/created_by/resolved_at/resolved_by/resolution_note) — 철회 시 자동 생성.
+   - `is_under_13(p_student_id)` — 학생 외 역할은 항상 false, `date_of_birth is null`이면 fail-closed(true), UTC 날짜 기준 정확히 13년 비교. `has_valid_guardian_consent(p_student_id)` — 철회 안 된 동의가 있고, 그 동의 이후 `requires_reconsent=true`인 더 최신 정책 버전이 없어야 유효.
+   - `current_account_access_allowed()` — `current_account_active() AND (NOT is_under_13(auth.uid()) OR has_valid_guardian_consent(auth.uid()))`. self-only(`auth.uid()` 고정)라 `anon`/`authenticated`에 안전하게 공개.
+   - `consent_as_guardian(student_id, policy_version_id, notice_delivered_at)` — 로그인 필수, 자기-동의·타 household 보호자 차단, 폐지된 정책 버전 차단. `record_manual_guardian_consent(...)` — 관리자 전용, `verification_reference` 필수. `revoke_guardian_consent(consent_id, reason)` — 동의를 기록한 본인(여전히 활성 guardian)이거나 관리자만, 이미 철회된 건 멱등 반환, 철회 시 `privacy_review_tasks` 자동 생성.
+   - `protect_date_of_birth()` 트리거 — `date_of_birth` 변경은 관리자 또는 그 학생의 활성 guardian만 가능, 학생 본인은 차단.
+   - **`set_student_date_of_birth(student_id, date_of_birth)`**(로컬 검증 중 추가, 아래 "발견한 버그" 참고) — 보호자/관리자가 자녀 생년월일을 좁게 설정하는 전용 함수.
+   - `transition_account_status()`를 `CREATE OR REPLACE`로 확장 — 기존 로직(6개 허용 전이·감사 기록) 100% 유지, `student` 역할의 `→active` 전이 직전에 "13세 미만이면서 유효한 동의가 없으면 거부" 검사 1줄만 추가.
+2. **`20260904010000_r2_minor_consent_content_rls.sql`** — 26개 자기서비스 쓰기 정책(`canvas_annotations`/`chat_messages`/`homework_items`/`parents`/`problems`/`profiles`/`session_doc_links`/`session_files`/`session_memos`/`session_problem_attempts`/`session_reviews`/`session_student_feedback`/`sessions`/`students`/`teacher_curriculum_template*`/`teacher_problem_tags`/`teachers`/`vocab_words`)의 `current_account_active()`를 `current_account_access_allowed()`로 교체. 각 정책의 `OR is_admin()` 분기는 그대로 둬 관리자 경로는 영향받지 않는다. 마이그레이션 작성 전 `pg_policy`/`pg_get_expr`로 26개 정책의 정확한 현재 조건을 직접 조회해 확인했다(R2 반복 교훈: 파일만 보고 가정하지 않는다).
+
+### 로컬 검증 — 실제 실행으로 발견·수정한 버그 1건
+
+**`protect_date_of_birth()`의 보호자 분기가 죽은 코드였다**: 이 트리거는 "관리자 또는 그 학생의 활성 guardian"이면 `date_of_birth` 변경을 허용하도록 짰지만, `profiles`의 "본인 프로필 수정" UPDATE RLS 정책은 `id = auth.uid() OR is_admin()`만 허용한다 — 보호자는 그 행의 소유자가 아니므로 RLS가 트리거에 도달하기 전에 이미 0행으로 걸러버린다. 실제로 보호자 세션에서 직접 `UPDATE profiles SET date_of_birth=...`를 실행해보고 나서야("UPDATE 0", 값 변경 안 됨) 발견했다. 다른 프로필 컬럼(이름·전화 등)까지 열어주지 않기 위해 RLS를 완화하는 대신, `set_student_date_of_birth()` 전용 함수를 신설해 그 경로로만 보호자가 자녀 생년월일을 설정하도록 좁혔다(트리거는 이중 방어선으로 그대로 유지).
+
+| 항목 | 결과 |
+|---|---|
+| `date_of_birth IS NULL` 학생 → fail-closed | `is_under_13()` = true, `current_account_access_allowed()` = false(계정 lifecycle은 active인데도) |
+| `protect_date_of_birth` 트리거 자체(RLS 간섭 없는 성인 상태에서 확인) | 학생 본인 자가수정 시도 → 트리거가 직접 차단(RLS의 0행 무동작이 아니라 실제 트리거 예외 확인) |
+| `set_student_date_of_birth` 무관한 선생님 호출 | 거부 |
+| `set_student_date_of_birth` 실제 보호자 호출 | 성공 |
+| `is_under_13` 경계값 | 정확히 13년 전=false, 13년-1일=true, 13년+1일=false |
+| 자기-동의 차단 | "학생 본인은 동의할 수 없습니다"로 거부 |
+| 무관한 선생님의 동의 시도 | "해당 학생의 보호자만 동의할 수 있습니다"로 거부 |
+| 타 household 보호자의 동의 시도(실제로는 다른 household에서 진짜 guardian인 계정으로 재현, 트랜잭션 롤백으로 정리) | 동일하게 거부 |
+| 실제 보호자의 정상 동의 | 성공, `has_valid_guardian_consent`/`current_account_access_allowed` 즉시 true로 전환 |
+| `guardian_consents` 직접 UPDATE/DELETE | 둘 다 트리거가 차단(`...revoke_guardian_consent()를 통해서만...`, `...행은 삭제할 수 없습니다`) |
+| 재동의 필요 로직 | `requires_reconsent=true`인 더 최신 정책 버전 추가 시 기존 동의 즉시 무효화, 재동의하면 다시 유효, `requires_reconsent=false`인 사소한 갱신은 무효화하지 않음 |
+| 관리자 수동 동의 등록 | 증빙 없으면 거부, 있으면 성공. 비관리자 호출은 거부 |
+| 동의 철회 — 무관한 선생님 | 거부 |
+| 동의 철회 — 실제 보호자 | 성공, `has_valid_guardian_consent` 즉시 false, `current_account_active()`(lifecycle)는 그대로 true 유지(분리 원칙 확인), `privacy_review_tasks` 자동 생성 확인 |
+| 철회 재호출 | 에러 없이 멱등 |
+| 철회 후에도 보호자의 자녀 데이터·동의 이력 조회 권한 | 그대로 유지(SELECT 정책은 이번 변경 대상이 아님) |
+| `transition_account_status(..., 'active')` 동의 게이트 | `suspended→active` 전이를 미동의 상태에서 시도 → "13세 미만 학생은 유효한 보호자 동의 없이 active로 전환할 수 없습니다"로 거부, 상태는 `suspended` 그대로 → 보호자 동의 부여 후 재시도 → 성공, `active`로 전환 확인 |
+| 비학생 역할(부모/선생님/관리자) | `is_under_13()` 항상 false, 회귀 없음 |
+| 26개 정책 전수 확인 | `pg_policy`/`pg_get_expr`로 `current_account_active(` 잔존 참조 0건, `current_account_access_allowed(` 참조 정확히 26건 |
+| `npx tsc --noEmit` | 클린 |
+| `npx vitest run` | **85개 파일 364개 테스트 전부 통과**(신규: `app/parent/consent-actions.test.ts`, `app/admin/consent-actions.test.ts`, `app/parent/ConsentTab.test.tsx`, `app/parent/ParentShell.test.tsx` 갱신) |
+| **Playwright 전체** | **25개 전부 통과**(기존 22 + 신규 `e2e/minor-consent.spec.ts` 3건: 미동의→`/consent-pending`, 보호자 실제 동의→학생 정상 이용, 보호자 철회→학생 재차단) |
+
+### 시드 데이터 수정(부수 발견)
+
+`is_under_13()`의 NULL fail-closed 설계 때문에, `date_of_birth`가 비어 있던 기존 학생 시드 계정(지훈/이서아/박준서)이 전부 "13세 미만·미동의"로 취급되어 `auth-roles.spec.ts` 등 기존 E2E가 깨지는 것을 전체 스위트 재실행 중 발견했다. 학년에 맞는 현실적인 생년월일(지훈 16세·이서아 17세·박준서 15세)을 `profiles` INSERT 시점에 채우도록 `supabase/seed.sql`을 수정해 해결(트리거는 UPDATE만 막고 INSERT는 막지 않으므로 시드 자체는 영향받지 않는다). 실제 13세 미만 동의 흐름은 각 테스트가 `set_student_date_of_birth()`로 그때그때 재설정한다.
+
+### 앱 코드
+
+- `lib/auth.ts` — `resolveAccountDestination()`에 `current_account_access_allowed() === false`면 `/consent-pending`으로 보내는 분기 추가(lifecycle 상태 분기 로직은 손대지 않음).
+- `app/consent-pending/page.tsx`(신규) — 동의 상태 안내, 등록된 보호자 이름, 보호자 통지 여부(과거 `notice_delivered_at` 존재 여부 기준), 로그아웃, 문의 링크만 노출.
+- `app/parent/consent-actions.ts`(신규) — `consentForChild`/`revokeChildConsent`/`setChildDateOfBirth` — 전부 대응 DB 함수의 얇은 래퍼, 자격 검증은 전부 DB 함수 쪽에서 수행.
+- `app/parent/consent-data.ts`(신규) — `loadChildrenConsentStatus`/`loadActiveConsentPolicy`.
+- `app/parent/ConsentTab.tsx`(신규) + `ParentShell.tsx`에 "동의" 탭 추가(`/parent?tab=consent`) — 13세 미만 자녀별 동의 상태·동의/철회 버튼.
+- `app/admin/consent-actions.ts`(신규) — `recordManualGuardianConsent` 래퍼. **관리자 수동 동의 등록 UI는 아직 없다**(Task 4/5와 동일하게 백엔드·서버 액션을 먼저 준비 — R12 후속 UI 항목으로 별도 명시 필요).
+- 자녀 생년월일을 보호자가 처음 입력하는 전용 온보딩 화면도 아직 없다(`setChildDateOfBirth` 액션만 준비) — 온보딩 플로우 정비 시 함께 배치 예정.
+
+### 원격 적용 대상 및 영향 범위 (승인 대기)
+
+**신규 마이그레이션 2개**: `20260904000000_r2_minor_consent.sql`(신규 테이블 3개 + 함수 8개 + 트리거 2개 + `transition_account_status()` 확장), `20260904010000_r2_minor_consent_content_rls.sql`(기존 26개 정책 DROP+CREATE, 조건 치환만).
+
+**영향 범위**:
+- 신규 테이블 3개(`consent_policy_versions`/`guardian_consents`/`privacy_review_tasks`)는 순수 추가 — 기존 데이터 없음.
+- `current_account_access_allowed()`가 신설되며 26개 정책의 게이트 함수가 교체된다. **원격에 실제 13세 미만 학생 계정이 없다면(현재 원격 사용자 5명 확인 필요) 이 변경은 즉시 아무에게도 영향이 없다** — `is_under_13()`이 false인 계정(성인 학생·부모·선생님·관리자)은 게이트 조건이 기존과 논리적으로 동일(`current_account_active()`)하기 때문이다. 원격에 `date_of_birth IS NULL`인 학생이 있다면 그 계정만 배포 즉시 쓰기 차단(로그인 자체는 유지, `/consent-pending`으로 라우팅)될 수 있으므로 **푸시 전 원격 `students` 테이블의 `date_of_birth` 현황을 먼저 확인해야 한다**.
+- `transition_account_status()` 확장은 `student` 역할의 `→active` 전이에만 조건을 추가하며, 그 외 전이·역할은 기존과 동일하게 동작한다.
+
+**롤백 절차**: 신규 테이블·함수·트리거만 개별 DROP, 26개 정책은 이전 마이그레이션의 `current_account_active()` 버전으로 재적용하면 된다(두 마이그레이션 모두 순수 코드 변경이라 데이터 백업 없이도 안전하게 되돌릴 수 있으나, R2 관례에 따라 푸시 전 백업은 별도로 받는다).
+
 ## Task 7 예고 — Google Workspace 선생님 프로비저닝 (정책 확정, 미구현)
 
 Task 2 승인 시 사용자가 함께 확정한 후속 Task의 요구사항이다. **지금 구현하지 않는다** — 여기서는 R2 계획 문서(`docs/superpowers/plans/2026-08-30-r2-account-family-lifecycle.md` Task 7)에 옮기기 전 원본 정책을 실행 로그에도 남겨둔다.
