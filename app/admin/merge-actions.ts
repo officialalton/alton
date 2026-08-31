@@ -43,6 +43,52 @@ export async function anonymizeMergedAccount(profileId: string): Promise<void> {
   }
 }
 
+export type TeacherRateHistoryEntry = {
+  sourceTeacherId: string;
+  amountMinor: number;
+  currency: string;
+  effectiveFrom: string;
+  effectiveUntil: string | null;
+  createdBy: string | null;
+  createdAt: string;
+};
+
+// (2026-08-31, 사용자 확정) teacher_rate_history.teacher_id는 병합 시
+// 재배정하지 않는다(과거 사실 보존) — 그래서 생존 계정 기준으로 정산·감사
+// 화면이 전체 이력을 보려면 account_merges를 따라간 결합 조회가 필요하다.
+// DB 함수(teacher_rate_history_with_merged)가 관리자/본인만 조회 가능하도록
+// 이미 내부에서 검사한다. 합치거나 덮어쓰지 않고 각 행의 원래 teacher_id를
+// source_teacher_id로 그대로 보존해 반환한다.
+export async function getTeacherRateHistoryWithMerged(
+  teacherId: string
+): Promise<TeacherRateHistoryEntry[]> {
+  const { supabase } = await requireAdmin();
+  const { data, error } = await supabase.rpc("teacher_rate_history_with_merged", {
+    p_teacher_id: teacherId,
+  });
+  if (error) throw new Error(error.message);
+
+  type RateHistoryRow = {
+    source_teacher_id: string;
+    amount_minor: number;
+    currency: string;
+    effective_from: string;
+    effective_until: string | null;
+    created_by: string | null;
+    created_at: string;
+  };
+
+  return ((data ?? []) as RateHistoryRow[]).map((row) => ({
+    sourceTeacherId: row.source_teacher_id,
+    amountMinor: row.amount_minor,
+    currency: row.currency,
+    effectiveFrom: row.effective_from,
+    effectiveUntil: row.effective_until,
+    createdBy: row.created_by,
+    createdAt: row.created_at,
+  }));
+}
+
 export type MergeCandidate = {
   id: string;
   name: string;

@@ -53,6 +53,67 @@ describe("mergeAccounts", () => {
   });
 });
 
+describe("getTeacherRateHistoryWithMerged", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    getUserMock.mockResolvedValue({ data: { user: { id: "admin1" } } });
+    profileSingleMock.mockResolvedValue({ data: { role: "admin" } });
+  });
+
+  it("병합 원본과 생존 계정의 시급 이력을 원래 teacher_id를 보존한 채 함께 반환한다", async () => {
+    rpcMock.mockResolvedValue({
+      data: [
+        {
+          source_teacher_id: "merged1",
+          amount_minor: 38000,
+          currency: "KRW",
+          effective_from: "2026-08-01T00:00:00Z",
+          effective_until: null,
+          created_by: "admin1",
+          created_at: "2026-08-01T00:00:00Z",
+        },
+        {
+          source_teacher_id: "survivor1",
+          amount_minor: 50000,
+          currency: "KRW",
+          effective_from: "2026-08-20T00:00:00Z",
+          effective_until: null,
+          created_by: null,
+          created_at: "2026-08-20T00:00:00Z",
+        },
+      ],
+      error: null,
+    });
+
+    const { getTeacherRateHistoryWithMerged } = await import("./merge-actions");
+    const result = await getTeacherRateHistoryWithMerged("survivor1");
+
+    expect(rpcMock).toHaveBeenCalledWith("teacher_rate_history_with_merged", {
+      p_teacher_id: "survivor1",
+    });
+    expect(result).toEqual([
+      {
+        sourceTeacherId: "merged1",
+        amountMinor: 38000,
+        currency: "KRW",
+        effectiveFrom: "2026-08-01T00:00:00Z",
+        effectiveUntil: null,
+        createdBy: "admin1",
+        createdAt: "2026-08-01T00:00:00Z",
+      },
+      {
+        sourceTeacherId: "survivor1",
+        amountMinor: 50000,
+        currency: "KRW",
+        effectiveFrom: "2026-08-20T00:00:00Z",
+        effectiveUntil: null,
+        createdBy: null,
+        createdAt: "2026-08-20T00:00:00Z",
+      },
+    ]);
+  });
+});
+
 describe("anonymizeMergedAccount", () => {
   beforeEach(() => {
     vi.clearAllMocks();
