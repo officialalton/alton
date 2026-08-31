@@ -130,7 +130,10 @@ G1: 같은 데이터로 잔여 수업권·현재 선생님·과거 정산을 언
 - [ ] 역할별 시간대·Google 이메일·연락처 — **확정**: IANA 타임존, household 기본값 상속(학생), 선생님 개인 타임존, fallback `America/Los_Angeles`, 예약은 UTC+원본 타임존 보존. 선생님은 `@alton.education` Workspace 계정 필수, 보호자/학생은 개인 이메일.
 - [ ] 계정 비활성화·재활성화 — **확정(2026-08-31, `inactive` 추가)**: `pending→active↔suspended`(가역적 일시정지), `active/suspended↔inactive`(일반적인 서비스 중단, 자료별 보관기간 내 `reactivate_account()`로 복귀 가능, 자동 삭제·익명화 안 함), `active/suspended→closure_pending`(명시적 폐쇄·삭제 요청, 30일 철회 유예)`→closed`(폐쇄 확정, 복원 없음). `inactive`/`reactivate_account()`/보관기간별 자동화/제한 보관 접근통제/스케줄러의 실제 구현은 R12로 이관(위 R12 항목 참고) — R2 Task 5는 계정 병합(중복 계정 정리)만 다룬다.
 - [ ] 선생님 퇴사 시 Workspace·Docs·채팅·향후 세션 권한 회수 — **확정 확장**: R2에서 선생님 Workspace 계정 자동 프로비저닝(생성)까지 구현(대칭적으로 회수도 R2). 관리자 초대 시 생성/충돌 확인 → Supabase 연결 → 시급 설정 후 active. 부분 실패는 재처리 가능한 상태로 저장.
-- [ ] 개인정보/약관 동의 버전 이력 — **확정 확장**: 13세 미만 동의를 R2에서 구현(생년월일/연령대, 동의 상태·시각·정책 버전, 동의 전 로그인/수업참여/메시지 차단, 철회 처리, 문구 버전화).
+- [x] 개인정보/약관 동의 버전 이력 — **R2 Task 6 완료(2026-08-31)**: `consent_policy_versions`/`guardian_consents`(불변, 철회 전용 함수) + `is_under_13()`(UTC 기준, `date_of_birth` NULL이면 fail-closed) + `current_account_access_allowed()`(계정 lifecycle과 분리된 별도 게이트, 26개 자기서비스 쓰기 정책 전수 교체) + `transition_account_status()`의 13세 미만 active 전환 선행조건 결합 + 철회 시 `privacy_review_tasks` 자동 생성. 미동의 학생은 로그인은 되지만 `/consent-pending`(동의 상태·보호자 통지 여부·로그아웃·최소 문의만)으로 제한. 상세는 `2026-08-29-r2-migration-execution-log.md` Task 6 참고.
+  - **(운영 전 필수 후속 작업, blocker)** 원격 적용 시점에 실제 학생 1명(장세온)의 `date_of_birth`가 없어 즉시 fail-closed(`/consent-pending`)됐다 — 의도된 동작이며 Task 6 완료를 막지 않지만, 실제 생년월일을 확인해 `set_student_date_of_birth()` 정상 관리자 경로로 설정해야 한다(학년 기반 추정·DB 직접 UPDATE 금지). 또한 향후 학생 온보딩/초대 플로우가 **생년월일이 확인되지 않은 학생은 일반 서비스 활성화(`pending→active`)를 막도록** 관리자 체크리스트/가드를 갖춰야 한다(R3 상담·체험·제안·계약 또는 온보딩 관련 작업에서 반영).
+  - **(정식 오픈 전 법률 검토 필요)** "인증된 보호자 계정 + 검증된 household 관계"가 COPPA verifiable parental consent 요건을 충분히 충족하는지는 이 구현이 전제하지 않는다 — 법률 검토로 확정 필요.
+  - **(R12로 이관)** 관리자 수동 동의 등록(`record_manual_guardian_consent`) UI, 보호자의 자녀 생년월일 최초 입력 UI(`set_student_date_of_birth` 온보딩 화면)는 아직 없다(서버 액션만 존재).
 - [ ] 슈퍼바이저 capability 기반 권한 — **확정**: R2 신규 민감 액션은 `is_admin() OR required capability`로 강제(서버+DB 양쪽). 기존 `is_admin()` 전면 교체는 R12로 이관.
 
 ## R3 — 상담·체험·제안·계약
@@ -363,7 +366,7 @@ G1: 같은 데이터로 잔여 수업권·현재 선생님·과거 정산을 언
 - [ ] 개인정보 보존·삭제·내보내기 절차
 - [ ] **(2026-08-31 정정)** 데이터 종류별 retention policy — 계약·결제·환불·정산·시급 지급 기록 7년, 출결·예약·수업권 원장·학습 이력 3년, Gemini 회의록·전사·수업자료 1년, 채팅·상담 기록 2년, 보안·접근 감사 로그 1년, 법적 분쟁 자료는 legal hold 해제 시까지(전부 초기 운영정책, 정식 오픈 전 법률 검토로 조정 가능하게 정책 버전 관리). 상세는 `product-architecture-v3.md` §4.13 참고.
 - [ ] **(Gate C GW-14 인수 기준, blocker)** 미검토 Smart Notes 원본(1년)과 확정 리뷰(3년)가 서로 다른 만료일로 추적·자동 삭제되는지 인수 테스트로 확인 — Google Drive는 파일 만료를 네이티브로 지원하지 않으므로 Gate C 범위 밖으로 분류했고, 이 저장·삭제 자동화 구현이 끝나야 검증 가능하다
-- [ ] 13세 미만 보호자 검증 동의와 동의 버전 이력
+- [ ] **(2026-08-31 정정, 메커니즘은 R2 Task 6에서 구현 완료)** 13세 미만 보호자 검증 동의와 동의 버전 이력 — 위 R2 Task 6 항목 참고. 여기 남는 것: COPPA verifiable parental consent 충족 여부 법률 검토, 학생 온보딩 시 생년월일 확인 필수화, 관리자 수동 동의 등록 UI, 보호자의 자녀 생년월일 최초 입력 UI.
 - [ ] DB·Google Drive·Supabase Storage 통합 삭제 작업
 - [ ] **(2026-08-31 정정, R2 Task 5에서 정책 확정·이관)** 일반적인 서비스 중단(학생 수업 중단·계약 종료, 선생님 퇴사, 장기 미접속)은 `closed`나 자동 삭제·익명화 대상이 아니다 — `inactive`로 처리하고 학생 최소 3년·선생님 최소 7년의 복귀 지원기간을 둔다. `closed`로의 전환과 그 이후 제한 보관·순차 삭제·비식별화는 **사용자가 명시적으로 요청한 계정 폐쇄**에만 적용한다(30일 철회 유예 포함). 상세는 `product-architecture-v3.md` §4.13/§4.19 참고.
 - [ ] **(R2 Task 5에서 이관, 정식 오픈 전 필수 인수 조건)** `inactive` 상태 도입과 상태 머신 반영, 학생·선생님 장기 복귀 정책 구현, 관리자 전용 `reactivate_account()` 정상 경로(신규 profile 미생성, 과거 계약/수업권/배정 자동 복원 금지, 복귀 시점 기준 신규 계약/수업권/시급 생성, 감사 이력), **`inactive`↔`active` 상태 전환·복귀 신청·복귀 승인을 다루는 관리자·사용자 UI**, 자료 유형별 보관기간 실제 자동 적용, `closed` 계정 제한 보관에 대한 접근통제(사유 입력 필수 + 조회/내보내기/변경 감사), 보관기간 종료 후 삭제·비식별화 자동화, 이 모든 배치를 실행할 정기 스케줄러 연결. R2 Task 5(계정 병합)는 이 중 병합 전용 백엔드(원본 계정 즉시 폐쇄, `account_merges`, `merge_accounts()`, `anonymize_merged_account()`, `teacher_rate_history_with_merged()`)만 구현했다 — **관리자가 실제로 병합을 실행하는 화면(후보 검색·확인·사유 입력·실행)도 아직 없다**(서버 액션 `app/admin/merge-actions.ts`만 존재). 병합 UI와 inactive 상태 머신·복귀 UI 둘 다 이 항목의 후속 작업이다.

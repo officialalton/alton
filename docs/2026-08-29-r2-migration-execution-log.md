@@ -502,6 +502,37 @@ DB 함수를 실제로 psql에서 반복 실행하며 검증하는 과정에서 
 
 **롤백 절차**: 신규 테이블·함수·트리거만 개별 DROP, 26개 정책은 이전 마이그레이션의 `current_account_active()` 버전으로 재적용하면 된다(두 마이그레이션 모두 순수 코드 변경이라 데이터 백업 없이도 안전하게 되돌릴 수 있으나, R2 관례에 따라 푸시 전 백업은 별도로 받는다).
 
+### 원격 적용 전 발견 — 실제 학생 1명의 `date_of_birth` 없음 (2026-08-31)
+
+푸시 전 원격 `profiles`(role='student')를 조회한 결과, 실제 학생 계정 1명(**장세온**, 10학년, `students.status='active'`, `date_of_birth=NULL`)이 있었다. 이 마이그레이션을 그대로 적용하면 `is_under_13()`의 fail-closed 설계상 이 계정이 즉시 "13세 미만·미동의"로 판정되어 `/consent-pending`으로 막힌다(로그인 자체는 유지, 쓰기만 차단). 이 사실과 두 가지 선택지(추정값으로 즉시 해소 vs 실제 생년월일 확인 후 정상 경로로 해소)를 사용자에게 보고했다.
+
+**사용자 결정(확정)**: 학년 기반 추정이나 DB 직접 UPDATE로 생년월일을 임의 설정하지 않는다 — 실제 생년월일을 확인한 뒤 `set_student_date_of_birth()` 정상 관리자 경로로만 설정한다. 확인 전까지는 fail-closed 상태(= `/consent-pending`)를 **의도된 결과로 유지**한다. 이 사실 때문에 원격 적용 자체를 보류하지 않는다. 향후 신규 학생 생성·초대 과정에서 생년월일이 확인되지 않으면 일반 서비스 활성화가 불가능하도록 유지해야 한다는 요구사항도 함께 확정했다(→ `master-roadmap-v3.md`에 온보딩/초대 플로우 인수 조건으로 반영 필요, 아래 "후속 조치" 참고). 장세온 계정이 순수 테스트 픽스처로 확정되는 경우에만 별도로 정한 테스트 DOB를 쓸 수 있으며, 그 경우 실제 개인정보가 아니라 테스트 값임을 seed와 실행 로그에 명시해야 한다.
+
+### 원격 적용 (2026-08-31 완료, 커밋 `7fd973e`)
+
+**백업**: `supabase db dump --linked`(스키마) + `--data-only`(데이터)를 합쳐 `~/alton-db-backups/pre-r2-task6-full-2026-08-31.sql`(345,806 bytes, 8,714줄)로 저장, SHA-256 체크섬(`pre-r2-task6-full-2026-08-31.sql.sha256`) 함께 기록. 디렉터리 `chmod 700`, 파일 `chmod 600`, git에는 커밋하지 않음.
+
+**적용 전 원격 migration 목록**: 41개 적용됨, 2개(`20260904000000`/`20260904010000`) 미적용 확인 후 `supabase db push --linked` 실행 → 2개 파일 전부 적용 성공 → `supabase migration list --linked`로 로컬·원격 43개 전부 일치 확인.
+
+**재검증 결과**:
+
+| 항목 | 결과 |
+|---|---|
+| 로컬·원격 migration 목록 일치 | 43개 전부 동일 |
+| 기존 사용자·가족관계·수업 데이터 보존 | `profiles=6`(Task 5에서 남긴 익명화 테스트 프로필 1개 포함, 실사용자 5명), `students=1, teachers=3, parents=1, households=1, household_members=2, enrollments=1` — 적용 전후 완전 동일 |
+| 신규 테이블 생성 및 빈 상태 | `guardian_consents=0, consent_policy_versions=0, privacy_review_tasks=0` — 순수 추가, 기존 데이터 영향 없음 |
+| 26개 정책 전수 교체 확인 | `current_account_active(` 잔존 참조 0건, `current_account_access_allowed(` 참조 정확히 26건 |
+| 실제 학생(장세온) 게이트 상태 확인 | `is_under_13()=true, has_valid_guardian_consent()=false, get_account_status()='active'` — lifecycle은 그대로 active, 이용 자격만 차단된 **의도된 상태**임을 확인 |
+| 핵심 smoke test | `students`×`profiles`×`enrollments` 조인 등 기본 쿼리 정상 동작, RLS·스키마 오류 없음 |
+
+**결론**: 재검증 항목 전부 통과. 장세온 계정 1건이 정책대로 즉시 `/consent-pending` 상태가 되는 것은 버그가 아니라 fail-closed 설계와 사용자 승인에 따른 의도된 결과다. 그 외 실사용자 데이터 손상·의도치 않은 상태 변경 없음. **Task 6 완료 처리**(아래 "후속 조치" 항목은 별도 추적).
+
+### 후속 조치 (미완료, 별도 추적)
+
+1. **장세온 실제 생년월일 확인 후 `set_student_date_of_birth()`로 설정** — 확인 전까지 `/consent-pending` 상태 유지. 확인·설정 후 반드시 설정 전후 접근 상태(`is_under_13`/`has_valid_guardian_consent`/`current_account_access_allowed`)를 각각 재검증하고 이 로그에 추가 기록한다.
+2. **향후 학생 온보딩/초대 플로우 요구사항**: 생년월일이 확인되지 않은 학생은 일반 서비스 활성화(`pending→active`)가 불가능해야 한다 — 이미 `transition_account_status()`가 13세 미만·미동의 학생에는 이 조건을 강제하지만, "생년월일 자체가 확인됐는지"를 관리자 온보딩 절차에서 명시적으로 확인하도록 하는 체크리스트/가드는 아직 없다(온보딩 UI 자체가 미구현). `master-roadmap-v3.md`의 학생 온보딩/계약 관련 R 단계 인수 조건에 반영해야 한다.
+3. 관리자 수동 동의 등록 UI, 보호자 생년월일 최초 입력 UI(온보딩) — R12 또는 관련 온보딩 작업에서 구현.
+
 ## Task 7 예고 — Google Workspace 선생님 프로비저닝 (정책 확정, 미구현)
 
 Task 2 승인 시 사용자가 함께 확정한 후속 Task의 요구사항이다. **지금 구현하지 않는다** — 여기서는 R2 계획 문서(`docs/superpowers/plans/2026-08-30-r2-account-family-lifecycle.md` Task 7)에 옮기기 전 원본 정책을 실행 로그에도 남겨둔다.

@@ -186,20 +186,37 @@
 
 ---
 
-## Task 6: 13세 미만 보호자 동의
+## Task 6: 13세 미만 보호자 동의 (완료, 원격 적용 2026-08-31)
+
+**배경(2026-08-31 설계 정정)**: 초기 계획(아래 원안)을 승인받은 뒤, 구현 착수 전 사용자가 8개 항목을 상세히 정정했다 — (1) 계정 lifecycle(`current_account_active()`, 불변)과 이용 자격(동의 포함, 신규 `current_account_access_allowed()`) 분리, (2) `consent_policy_versions`/`guardian_consents` 정규화 분리 + 동의 불변(철회 전용 함수 외 수정 불가), (3) 검증된 보호자(활성 household guardian)만 동의 가능 + 관리자 수동 검증은 증빙 필수로 별도 경로, (4) `is_under_13()`(UTC 기준, `date_of_birth` NULL이면 fail-closed), `date_of_birth` 학생 본인 자가수정 불가, (5) 미동의 로그인은 하드 실패가 아니라 `/consent-pending` 제한 화면, (6) 동의는 계정을 active로 만들지 않는다(13세 미만 active 전환의 선행조건일 뿐), (7) 철회 시 즉시 이용 차단(강제 로그아웃 아님) + 감사 + `privacy_review_tasks` 후속 태스크, (8) COPPA verifiable parental consent 충족 여부는 법률 검토 대상으로 명시. 상세 배경·정책 문구는 `2026-08-29-r2-migration-execution-log.md` Task 6 참고. 아래는 이 정정을 반영한 최종 구현 내용이다.
 
 **Files:**
+- `supabase/migrations/20260904000000_r2_minor_consent.sql`, `20260904010000_r2_minor_consent_content_rls.sql`
+- `lib/auth.ts`(`/consent-pending` 라우팅), `app/consent-pending/page.tsx`
+- `app/parent/consent-actions.ts`, `consent-data.ts`, `ConsentTab.tsx`(+ `ParentShell.tsx`에 "동의" 탭)
+- `app/admin/consent-actions.ts`(관리자 수동 동의 등록 서버 액션, UI는 아직 없음)
+- `e2e/minor-consent.spec.ts`
+
+- [x] **테이블·불변성**: `consent_policy_versions`(정책 버전), `guardian_consents`(동의 원장, `protect_guardian_consent()`로 철회 3필드 외 불변), `privacy_review_tasks`(철회 시 자동 생성).
+- [x] **판정 함수**: `is_under_13()`(fail-closed), `has_valid_guardian_consent()`(재동의 필요 정책 버전 반영), `current_account_access_allowed()`(lifecycle과 분리된 게이트, 26개 자기서비스 쓰기 정책 전수 교체).
+- [x] **동의 기록·철회**: `consent_as_guardian()`(자기-동의·타 household 차단), `record_manual_guardian_consent()`(관리자 전용, 증빙 필수), `revoke_guardian_consent()`(멱등, `privacy_review_tasks` 자동 생성).
+- [x] **생년월일 보호**: `protect_date_of_birth()` 트리거 + `set_student_date_of_birth()` 전용 함수(로컬 검증 중 발견한 버그로 추가 — RLS가 보호자의 직접 UPDATE 자체를 막고 있어서 트리거의 보호자 분기가 죽은 코드였음).
+- [x] **활성화 결합**: `transition_account_status()`에 13세 미만 active 전환 선행조건 결합.
+- [x] **UI**: `/consent-pending` 제한 화면, 보호자 포털 "동의" 탭(동의/철회).
+
+**DoD 체크(전부 실제 실행으로 확인)**: `date_of_birth` NULL fail-closed, `is_under_13` 정확한 13년 경계값, 학생 본인 DOB 자가수정 차단, 보호자 자격 검증(자기/무관/타 household 전부 차단), 동의 불변성(직접 UPDATE/DELETE 차단), 재동의 로직(`requires_reconsent`), 관리자 수동 동의(증빙 필수), 철회(권한·멱등·`privacy_review_tasks`·lifecycle 불변), `transition_account_status` 게이트 결합, 비학생 역할 회귀 없음, 26개 정책 전수 확인(`pg_policy` 조회), 실제 브라우저 전체 흐름(`e2e/minor-consent.spec.ts`: 미동의→`/consent-pending`, 보호자 동의→학생 정상 이용, 철회→재차단). 원격 재검증·백업·후속 조치(장세온 계정 실제 생년월일 확인 대기, 온보딩 DOB 확인 가드, 관리자 UI)는 `2026-08-29-r2-migration-execution-log.md` Task 6 참고.
+
+<details>
+<summary>원안(정정 전, 참고용)</summary>
+
 - Create: `supabase/migrations/20260831050000_r2_minor_consent.sql`
 - Modify: 학생 관련 RLS(로그인 후 게이트), `app/student/*`(수업 참여/메시지 작성 차단 지점)
+- Step 1: `students`에 `date_of_birth date` + `guardian_consents` 테이블(`student_id`, `policy_version`, `consented_by`, `consented_at`, `revoked_at`, `method`).
+- Step 2: 13세 미만 판별 함수 + 동의 없이는 로그인/수업 참여/메시지 작성을 막는 서버 가드.
+- Step 3: 동의 철회 처리.
+- Step 4: 동의 UI(보호자 포털).
 
-**배경**: §4.13 확장.
-
-- [ ] **Step 1**: `students`에 `date_of_birth date`(Task 2에서 profiles로 뒀다면 위치 재확인 — 학생 전용이면 `students` 테이블이 더 적합, 결정 필요) + `guardian_consents` 테이블(`student_id`, `policy_version`, `consented_by`, `consented_at`, `revoked_at`, `method`).
-- [ ] **Step 2**: 13세 미만 판별 함수 + 동의 없이는 로그인/수업 참여/메시지 작성을 막는 서버 가드(DB 트리거로 원천 차단할지, 서버 액션 가드로만 할지는 R1 스타일대로 **DB 트리거를 최종 방어선으로** 두는 것을 기본으로 한다).
-- [ ] **Step 3**: 동의 철회 처리 — 철회 시 해당 학생을 다시 동의 대기 상태로.
-- [ ] **Step 4**: 동의 UI(보호자 포털) — 문구 버전 표시, 동의/철회 버튼.
-
-**DoD 체크**: 13세 미만 미동의 학생의 로그인 후 게이트 실제 확인, 동의 후 정상 이용 확인, 철회 후 재차단 확인, 역할별 RLS.
+</details>
 
 ---
 
