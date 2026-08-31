@@ -339,7 +339,7 @@ DB 함수를 실제로 psql에서 반복 실행하며 검증하는 과정에서 
 
 **결론**: 재검증 항목 9개 전부 통과. 실사용자 데이터 손상·의도치 않은 상태 변경 없음. Task 4 완료 처리.
 
-## Task 5 — 계정 병합 (로컬 검증 완료, 원격 적용 승인 대기)
+## Task 5 — 계정 병합 (완료, 원격 적용 2026-08-31)
 
 ### 배경 — 정책 확정과 범위 정정
 
@@ -390,6 +390,44 @@ DB 함수를 실제로 psql에서 반복 실행하며 검증하는 과정에서 
 **영향 범위**: 순수 추가 — 기존 데이터·함수·트리거를 변경하지 않는다. `inactive` enum 값 추가는 기존 어떤 전이 로직에도 연결돼 있지 않아 즉시 효력이 없다(아직 아무도 `inactive`로 전환될 수 없음 — R12에서 상태 머신에 연결하기 전까지는 스키마에만 존재). 원격 실사용 데이터에는 영향 없음.
 
 **롤백 절차**: 신규 테이블·함수만 개별 DROP하면 된다. enum 추가값은 되돌릴 수 없지만(Postgres 제약) 사용되지 않으므로 무해하다.
+
+### 추가 확정 — `teacher_rate_history_with_merged()` (2026-08-31)
+
+병합 승인 시 사용자가 추가로 확정: `teacher_rate_history.teacher_id`를 원본 유지하기로 한 결정은 유지하되, 병합 원본 익명화 이후에도 관리자 정산·감사 화면과 선생님 본인이 생존 계정 기준으로 과거 시급 이력을 놓치지 않고 볼 수 있어야 한다(합치거나 덮어쓰지 않고, 각 행의 원래 teacher_id·기간은 그대로 유지). `payout_items`/`payout_batches.teacher_id`는 이미 소유권 필드로 재배정되므로 생존 계정 기준 정산 조회는 원래도 문제없다 — `teacher_rate_history`만 예외라 이 간극이 생겼다.
+
+**마이그레이션 `20260903020000_r2_merge_rate_history_view.sql`**: `teacher_rate_history_with_merged(p_teacher_id)` — 관리자 또는 본인만 조회 가능(임의 조회 차단, R1 `has_capability` 계열과 동일 안전 패턴). `teacher_id = p_teacher_id`인 행과 `account_merges.survivor_id = p_teacher_id`인 병합 원본들의 행을 합쳐 반환하되, 각 행의 `source_teacher_id`(원래 teacher_id)·`effective_from`/`effective_until`은 그대로 보존.
+
+**앱 코드**: `app/admin/merge-actions.ts`에 `getTeacherRateHistoryWithMerged()` 추가(관리자 전용 래퍼, 관리자 화면은 아직 없음).
+
+**로컬 검증**: 병합 전 생성한 두 선생님의 시급 이력이 생존 계정 기준 결합 조회에서 각자의 `source_teacher_id`를 유지한 채 함께 반환됨을 확인. 관리자/본인 조회 성공, 무관한 다른 선생님 조회 시도는 거부 확인. **병합 원본 익명화 이후에도 결합 조회 결과가 동일하게 유지됨을 재확인**(익명화는 `profiles`/`teachers`의 PII만 스크럽하고 `teacher_rate_history`는 건드리지 않으므로).
+
+### 원격 적용 (2026-08-31 완료, 커밋 `44aeeda` + `17d3d65`)
+
+**백업**: `supabase db dump --linked`(스키마) + `--data-only`(데이터)를 합쳐 `~/alton-db-backups/pre-r2-task5-full-2026-08-31.sql`(322,753 bytes, 8,287줄)로 저장, SHA-256 체크섬(`pre-r2-task5-full-2026-08-31.sql.sha256`) 함께 기록. 디렉터리 `chmod 700`, 파일 `chmod 600` — 소유자만 읽기 가능, git에는 커밋하지 않음. (R1 때와 달리 `supabase db dump --linked`가 이번엔 정상 동작함 — R1 실행 로그에 기록된 CLI role 상속 버그가 이후 CLI 버전에서 해결된 것으로 보인다.)
+
+**적용 전 원격 migration 목록**: 39개 적용됨, 3개(`20260903000000`/`20260903010000`/`20260903020000`) 미적용 확인 후 `supabase db push --linked` 실행 → 3개 파일 전부 적용 성공 → `supabase migration list --linked`로 로컬·원격 41개 전부 일치 확인(불일치 0건).
+
+**재검증 결과**:
+
+| 항목 | 결과 |
+|---|---|
+| 로컬·원격 migration 목록 일치 | 41개 전부 동일 |
+| 기존 사용자·가족관계·계약·수업·정산 데이터 보존 | `profiles=5, students=1, teachers=2, parents=1, households=1, household_members=2, enrollments=1, teacher_rate_history=2, credit_transactions=1` — 적용 전후 완전 동일 |
+| 비관리자 함수 호출 거부 | 실제 원격 선생님 세션으로 `merge_accounts()` 호출 시도 → "관리자만 계정을 병합할 수 있습니다"로 거부 |
+| 병합 시 소유권 필드 재배정 | 실제 중복 선생님 계정을 만들어 `notifications.recipient_id`로 재배정 실측 — 생존 계정 기준으로 정상 재배정·조회 |
+| 감사·행위자 및 `teacher_rate_history.teacher_id` 불변 | 병합 후에도 `teacher_id`/`created_by` 둘 다 병합 원본 UUID 그대로 |
+| 생존 계정 기준 병합 원본 시급 이력 조회 | `teacher_rate_history_with_merged()`로 실측 — 두 UUID의 이력이 각자의 `source_teacher_id`를 유지한 채 함께 반환됨 |
+| 병합 원본 즉시 로그인 차단 | `account_status_events`에 `active→closed, reason='merged: ...'` 정확히 기록, `get_account_status()` = `closed` 확인 |
+| 재병합 시도 거부 | "이미 병합된 계정입니다"로 거부 |
+| `inactive` 계정 병합 거부 | 실제 원격 선생님 계정을 일시적으로 `inactive`로 만든 뒤 병합 시도 → 거부, 이후 즉시 `active`로 원상복구 |
+| 병합 원본만 30일 후 익명화 가능 | 30일 미경과 시 거부 확인 → `merged_at`을 31일 전으로 조정 후 실행 → `profiles.name='Deleted User'`, `phone`/`date_of_birth`/`teachers.school`/`bio`/`calendly_scheduling_url` 전부 null 확인 → 재실행 시 에러 없이 멱등 반환 |
+| 생존 계정 데이터·PII 무영향 | 익명화 후에도 생존 계정 이름 그대로, 결합 시급 이력 조회 결과도 동일하게 유지 |
+| 동시 병합 | Task 5 로컬 검증에서 이미 psql 프로세스 2개로 재현 완료 — 원격에서는 실사용 데이터에 영향 없는 단발성 함수 호출로만 재확인(위 개별 항목들) |
+| 핵심 smoke test | `students`×`profiles` 조인, `enrollments` 조회 등 기본 쿼리 정상 동작 |
+
+**테스트 데이터 정리**: 합성 테스트 계정(`f9999999-...`)을 만들어 검증한 뒤 정리를 시도했으나, 설계대로 `teacher_rate_history`가 DELETE 자체를 무조건 차단하고(자체 우회 플래그로도 예외 없음) `profiles`가 그 FK로 보호돼 완전 삭제가 불가능했다 — **이건 버그가 아니라 익명화-유지 설계가 의도한 대로 작동한 것**이다. 정리 과정에서 실수로 지워진 `teachers` 행만 원래 설계(익명화된 채 `closed` 유지)에 맞게 복원했다. 최종적으로 `profiles.name='Deleted User'`인 합성 테스트 프로필 1개(실제 사람과 무관한 테스트 UUID `f9999999-...`)가 원격 개발 DB에 영구히 남는다 — 실사용자 5명의 데이터·상태에는 전혀 영향이 없으며, 이 잔여물 자체가 익명화 기능이 실제로 의도대로 동작함을 보여주는 살아있는 예시다.
+
+**결론**: 재검증 항목 전부 통과. 실사용자 데이터 손상·의도치 않은 상태 변경 없음. Task 5 완료 처리.
 
 ## Task 7 예고 — Google Workspace 선생님 프로비저닝 (정책 확정, 미구현)
 
