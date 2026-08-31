@@ -159,18 +159,28 @@
 
 ## Task 5: 계정 병합
 
+> **범위 확정(2026-08-31)**: 이 태스크는 **중복 계정 병합에만** 집중한다. 일반적인 서비스 중단(학생 수업 중단·계약 종료, 선생님 퇴사, 장기 미접속)에 대한 `inactive` 상태 도입, 장기 복귀 정책, `reactivate_account()`, 자료 유형별 보관·삭제 자동화, 제한 보관 접근통제, 정기 스케줄러는 이 태스크에서 구현하지 않는다 — 정책은 `product-architecture-v3.md` §4.13/§4.19에 확정 반영했고, 구현은 `master-roadmap-v3.md` R12의 인수 조건으로 이관했다.
+
 **Files:**
-- Create: `supabase/migrations/20260831040000_r2_account_merge.sql`
+- Create: `supabase/migrations/20260903000000_r2_account_merge.sql`
 - Create: `app/admin/merge-actions.ts`
 
-**배경**: §4.19 결정 5.
+**배경**: §4.19 계정 병합.
 
-- [ ] **Step 1**: `account_merge_log` 테이블(`survivor_id`, `merged_id`, `merged_by`, `merged_at`, `affected_tables_summary jsonb`).
-- [ ] **Step 2**: 병합 서버 액션 — 병합 대상 계정의 로그인 즉시 차단(status를 `closed` 또는 별도 플래그로), FK 재배정을 명시적 트랜잭션으로 순서대로 수행(어떤 테이블들을 재배정해야 하는지는 그 시점까지 존재하는 전체 스키마를 다시 훑어야 함 — R3~R7 스키마가 늘어날수록 이 목록도 늘어난다는 점을 코드 주석에 남긴다), 실패 시 전체 롤백.
-- [ ] **Step 3**: 병합된 인증 계정 30일 후 삭제 — cron/scheduled job 필요(기존 프로젝트에 유사 스케줄러가 있는지 확인, 없으면 이 부분은 R2에서 "삭제 대상 표시까지만" 하고 실제 자동 삭제 실행은 R12(보존·삭제 자동화, 이미 GW-14 blocker로 이관돼 있음)와 합칠지 검토 — **정책 재확인까지는 아니지만 설계 판단이 필요하므로 이 서브태스크 착수 전 보고**.
-- [ ] **Step 4**: 동시 병합 방지 — 같은 계정을 동시에 병합 대상으로 두 번 지정하는 경쟁 상태를 락으로 방지(R1의 `set_teacher_rate()` 패턴 재사용).
+- [ ] **Step 1**: `account_merges` 테이블(`survivor_id`, `merged_id`, `merged_by`, `merged_at`, `reason`, `affected_tables_summary jsonb`) — 병합 매핑 전용 감사 테이블, 개인정보는 기록하지 않는다.
+- [ ] **Step 2**: `merge_accounts(survivor_id, merged_id, reason)` — 관리자 전용 SECURITY DEFINER 함수. 두 profile 행을 id 순서로 정렬해 `FOR UPDATE`로 잠근 뒤(동시 병합 방지, R1 `set_teacher_rate()` 패턴 재사용) **소유권·관계 필드만** 생존 계정으로 재배정한다(예: `sessions_v3.teacher_id`, `entitlement_grants.child_id`, `household_members.profile_id`, `payout_items.teacher_id` 등 — 현재 스키마의 전체 목록은 구현 시 코드 주석에 남기고, R3~R10에서 테이블이 늘어날 때마다 갱신 필요함을 명시). `created_by`/`changed_by`/`actor_id` 등 "당시 누가 이 작업을 했는가"를 기록하는 감사·행위자 필드는 그대로 둔다. 병합 대상 원본은 일반 `closure_pending→closed` 절차를 거치지 않고 이 함수가 직접 `closed`로 전환하며 `account_status_events`에 사유 `merged`로 남긴다. 실패 시 전체 롤백.
+- [ ] **Step 3**: `anonymize_merged_account(profile_id)` — 관리자 전용, 병합 후 30일이 지난 병합 원본에만 적용 가능(함수 내부에서 `account_merges.merged_at` 기준으로 검증, `inactive` 계정에는 절대 적용 불가하도록 role-status 확인). 이름·이메일·전화·주소·생년월일·프로필 이미지·인증정보 등 중복 PII를 비가역적으로 스크럽하고 원본 UUID와 비식별 감사 이력은 유지한다. 멱등하게 구현(재실행해도 안전). 실행 로그에는 실행자·시각·원본 ID만 남기고 삭제된 PII는 기록하지 않는다. **정기 실행 스케줄러는 이 태스크 범위 밖**(R12 인수 조건으로 이관, `mark_expired_invites()`와 동일하게 Task 완료를 막는 blocker 아님) — 관리자가 수동 호출 가능한 함수로만 존재해도 Task 5는 완료로 본다.
+- [ ] **Step 4**: 관리자 전용 RLS — `merge_accounts`/`anonymize_merged_account` 모두 `is_admin()` 내부 검사, 일반 관리자가 아닌 세션에서 호출 시 거부.
 
-**DoD 체크**: 동시 병합 시도 실제 재현(백그라운드 세션 2개), 재배정 후 데이터 무결성(수업 이력·정산 이력 유지) 확인, 관리자 전용 RLS 확인.
+**DoD 체크**:
+- [ ] 동시 병합 시도 실제 재현(psql 프로세스 2개) — 정확히 하나만 성공
+- [ ] 병합 후 생존 계정에서 이전된 수업·가족관계·수업권·정산 이력 조회 가능
+- [ ] 감사·행위자 필드(예: `account_status_events.changed_by`, `teacher_rate_history.created_by`)가 생존 계정으로 바뀌지 않고 원본 UUID 그대로인지 확인
+- [ ] 병합 원본으로 로그인 불가(실제 실행)
+- [ ] 병합 재실행의 멱등성(이미 병합된 대상 재병합 시도 시 명확한 거부), `anonymize_merged_account()` 재실행 멱등성
+- [ ] 병합 원본 익명화 후에도 생존 계정 데이터·PII에 영향 없음, 익명화된 원본 UUID를 참조하는 감사 이력 정상 조회
+- [ ] `inactive` 계정은 `merge_accounts`/`anonymize_merged_account` 대상이 아님을 DB 제약(또는 함수 내부 검사)과 테스트로 확인
+- [ ] 일반 관리자가 아닌 세션에서 두 함수 호출 시 거부(RLS/권한 확인)
 
 ---
 
