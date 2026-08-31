@@ -122,24 +122,38 @@
 
 ---
 
-## Task 4: 초대 상태 모델 + 보호자 주도 초대
+## Task 4: 계정 초대 상태 모델 + 보호자 주도 초대 (로컬 검증 완료, 원격 적용 승인 대기)
+
+> **설계 확정(2026-08-30, 2차 정정)**: Supabase 기본 초대 링크에 의존하지 않고 ALTON 자체 토큰(해시만 저장, 원문 미보관)을 쓴다. 선생님 초대는 이 태스크 범위 밖(Task 7로 완전 이관, 이번엔 비활성화만). 상세 설계·버그 발견 내역·검증 결과는 `docs/2026-08-29-r2-migration-execution-log.md`의 "Task 4" 항목 참고 — 이 절은 최종 구현 기준으로 갱신했다.
 
 **Files:**
-- Create: `supabase/migrations/20260831030000_r2_account_invites.sql`
-- Create: `app/admin/invite-actions.ts` 또는 기존 `users-actions.ts` 확장
-- Create: `app/parent/invite-actions.ts`(신규 — 보호자가 자녀 초대)
-- Create 관련 UI 컴포넌트(보호자 포털에 "자녀 초대" 화면 추가)
+- Create: `supabase/migrations/20260902000000_r2_account_invites.sql`
+- Create: `app/admin/invite-actions.ts`, `app/parent/invite-actions.ts`, `app/api/invite/accept/route.ts`, `app/invite/manual-review/page.tsx`, `lib/invite-email.ts`, `e2e/mailbox.ts`, `e2e/account-invites.spec.ts`
+- Modify: `app/admin/users-actions.ts`(`inviteParent`/`inviteStudent` 재작성, `inviteTeacher` 비활성화), `app/admin/UsersTab.tsx`(선생님 초대 폼 제거)
 
 **배경**: §4.19 결정 1, 4.
 
-- [ ] **Step 1**: `account_invites` 테이블(제안 스키마는 조사 문서 §4 참고) — `email`, `role`, `household_id`(nullable, 학생 초대 시 어느 household에 연결할지), `invited_by`, `status(pending|accepted|expired|revoked)`, `expires_at`, `resend_count`, `created_at`, `accepted_at`.
-- [ ] **Step 2**: 재발송 로직 — 같은 이메일 pending 초대가 있으면 새 행 대신 `resend_count` 증가 + `expires_at` 갱신 + Supabase `inviteUserByEmail` 재호출(기존 링크 무효화는 Supabase의 재초대가 처리하는지, 앱에서 별도 처리가 필요한지 확인 필요 — Supabase Auth의 재초대 시 이전 토큰이 실제로 무효화되는지 로컬/Sandbox에서 검증한다).
-- [ ] **Step 3**: 24시간 내 3회 재발송 제한 — `resend_count`와 최근 재발송 타임스탬프로 서버에서 강제.
-- [ ] **Step 4**: 철회 — `admin.auth.admin.deleteUser()`(아직 비밀번호 미설정 상태의 `auth.users` 행 삭제) + `account_invites.status='revoked'`.
-- [ ] **Step 5**: 보호자 주도 자녀 초대 — 보호자 포털에 신규 화면/액션 추가, `requireGuardian()`류 가드(신규, `requireAdmin()`과 대칭) + 자기 household에만 자녀를 추가할 수 있도록 RLS/서버 검증.
-- [ ] **Step 6**: 관리자 대리 생성 — 기존 admin 흐름 유지하되, `account_invites.invited_by`가 admin이고 대상 household가 그 admin 소유가 아닐 때 감사 이력(별도 테이블 또는 기존 감사 로그 패턴 재사용)에 남긴다.
+- [x] **Step 1**: `account_invites`(email_normalized/email_original, invitee_name, invitee_grade, role[parent|student], household_id, invited_by, status[pending/accepted/expired/revoked/superseded/failed/manual_review], token_hash, token_generation, expires_at, last_sent_at, accepted_at, revoked_at, superseded_by_id, auth_user_id, target_profile_id) + `account_invite_events`(감사 전용). 중복 방지는 `(email_normalized, role, household_id)` 부분 unique 인덱스에 `NULLS NOT DISTINCT`를 적용(household_id가 NULL인 보호자 초대도 실제로 막힘).
+- [x] **Step 2**: 재발송 로직 — Supabase `inviteUserByEmail` 재호출 방식을 쓰지 않는다(자체 토큰이므로 무관). `resend_account_invite()`가 대상 행을 `FOR UPDATE`로 잠그고, 이전 행을 먼저 `superseded`로 전이한 뒤 새 `token_generation+1` 행을 생성 — 구 토큰은 `claim_account_invite()`에서 `superseded`로 명시 거부된다.
+- [x] **Step 3**: 24시간 내 3회 재발송 제한 — `resend_count` 누적 컬럼이 아니라 `account_invite_events`의 `resent` 이벤트를 시각 기준으로 카운트(최초 발송 제외, 같은 이메일+역할+household lineage로 스코프). 실제 4연속 재발송 시도로 정확한 경계(3회 성공, 4번째 거부) 검증.
+- [x] **Step 4**: 철회 — 기본은 `status='revoked'`만 변경, `admin.auth.admin.deleteUser()`는 호출하지 않는다. `resolve_manual_review_invite()`의 `revoke` action도 동일. 기존/이미 수락된 사용자는 애초에 `pending`/`manual_review`가 아니므로 철회 대상 자체가 될 수 없다(상태 머신으로 원천 차단).
+- [x] **Step 5**: 보호자 주도 자녀 초대 — `app/parent/invite-actions.ts`의 `inviteChild()`. `requireGuardian()`을 별도로 만들지 않고 `requireUser()` + `profile.role === "parent"` 확인으로 처리(기존 `requireAdmin()`과 나란한 패턴이 굳이 필요하지 않을 만큼 로직이 짧음). household_id는 클라이언트 입력을 받지 않고 서버가 호출자 본인의 guardian 멤버십에서 조회 — 잘못된 household_id를 넘길 방법 자체가 없고, DB 함수도 다시 검증(이중 방어).
+- [x] **Step 6**: 관리자 대리 생성 — 별도 감사 테이블을 새로 만들지 않고 `account_invite_events`의 `sent` 이벤트(actor_id=관리자)가 이미 모든 관리자 발송을 기록한다(대상 household 소유 여부와 무관하게 관리자는 애초에 임의 household에 자녀를 초대할 권한이 있으므로 별도 분기 불필요).
+- [x] **Step 7(신규)**: 선생님 초대 비활성화 — `inviteTeacher()`는 `requireAdmin()` 통과 후 항상 명확한 오류를 던진다(기존 구현은 `legacyInviteTeacherByEmail`로 이름만 바꿔 보존, 삭제/Workspace 대체 구현은 Task 7). `UsersTab.tsx`의 선생님 초대 폼은 비활성화 안내 문구로 교체.
 
-**DoD 체크**: 만료/재발송/철회/중복 각 케이스 실제 실행 검증(로컬), Supabase 자체 만료와 7일 정책의 정합성 실측(Sandbox 또는 로컬 Supabase 인증 설정으로), 역할별 RLS(보호자가 남의 household에 초대 시도 시 차단) 실측.
+**DoD 체크(전부 로컬에서 실제 실행으로 검증)**:
+- [x] 만료/재발송/철회/중복 각 케이스 실제 실행 검증
+- [x] `household_id`가 NULL인 보호자 초대 중복 방지(`NULLS NOT DISTINCT`) 실제 검증
+- [x] 구세대 토큰 거부(최신 generation만 허용), 동일 링크 중복 수락 멱등성
+- [x] **수락↔재발송 동시 실행 경쟁 상태** — 두 psql 프로세스로 양방향(accept가 먼저/resend가 먼저) 모두 재현, `FOR UPDATE` 잠금으로 정확히 하나만 성공
+- [x] 기존 가입 이메일 처리(`manual_review` 분기, `failed`와 구분) + 관리자의 `link`/`revoke` 처리
+- [x] 철회 후 수락 불가 + 기존 Auth 사용자 미삭제
+- [x] 만료시간 서버·DB 양쪽 검증(status 갱신이 배치로 지연돼도 시간 비교로 항상 차단)
+- [x] 보호자가 남의 household에 초대 시도 시 서버+DB 양쪽에서 차단(무관한 선생님으로 재현) — 실제 공동 보호자는 정상 허용
+- [x] 6개 역할 RLS(`account_invites`: 관리자 전체, 발송자 본인, 그 외 0행)
+- [x] **실제 이메일 E2E**: 로컬 Mailpit(local_smtp)에서 실제 발송된 메일의 본문을 검색해 초대 링크를 추출하고, 그 링크로 계정 생성→`/set-password`→로그인까지 실제 브라우저로 완주(`e2e/account-invites.spec.ts`, 3건). 철회된 링크 방문 시 `/login` 안내도 실제 브라우저로 확인
+- [x] `npx tsc --noEmit` 클린, `npx vitest run`(81개 파일 346개) 전부 통과, `npx playwright test --workers=1`(21개) 전부 통과
+- [ ] 원격 적용 전 변경 대상·영향 범위 요약 보고, 필수 테스트 통과 여부 확인 후 승인받고 push — **로컬 검증 완료, 원격 적용은 사용자 승인 대기 중**
 
 ---
 

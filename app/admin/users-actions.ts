@@ -2,6 +2,7 @@
 
 import { createAdminClient } from "@/lib/supabase-admin";
 import { requireAdmin } from "@/lib/admin-auth";
+import { sendInviteEmail } from "@/lib/invite-email";
 
 async function inviteAndCreateProfile(params: {
   email: string;
@@ -27,13 +28,23 @@ async function inviteAndCreateProfile(params: {
   return userId;
 }
 
+// (2026-08-30 R2 Task 4) 계정 초대는 더 이상 즉시 Supabase Auth 계정을 만들지
+// 않는다 — account_invites에 ALTON 자체 토큰(해시만 저장)으로 초대를 기록하고,
+// 실제 계정·역할·household 연결은 초대 수락 시(app/api/invite/accept)
+// 하나의 트랜잭션에서 처리한다(만료/재발송/철회/중복 방지를 DB 상태 머신으로
+// 관리하기 위함 — 상세는 supabase/migrations/20260902000000_r2_account_invites.sql).
 export async function inviteParent(params: { name: string; email: string }): Promise<string> {
-  await requireAdmin();
-  const admin = createAdminClient();
-  const userId = await inviteAndCreateProfile({ ...params, role: "parent" });
-  const { error } = await admin.from("parents").insert({ id: userId });
+  const { supabase } = await requireAdmin();
+  const { data, error } = await supabase.rpc("create_account_invite", {
+    p_email: params.email,
+    p_name: params.name,
+    p_role: "parent",
+    p_household_id: null,
+  });
   if (error) throw new Error(error.message);
-  return userId;
+  const row = data![0];
+  await sendInviteEmail({ to: params.email, name: params.name, token: row.raw_token, role: "parent" });
+  return row.invite_id;
 }
 
 // (2026-08-30 R2 Task 3) 가족 관계 원본은 households/household_members다 —
@@ -78,27 +89,29 @@ export async function inviteStudent(params: {
   parentId: string;
   grade: string;
 }): Promise<string> {
-  await requireAdmin();
+  const { supabase } = await requireAdmin();
   const admin = createAdminClient();
-  const userId = await inviteAndCreateProfile({
-    name: params.name,
-    email: params.email,
-    role: "student",
-  });
-  const { error } = await admin
-    .from("students")
-    .insert({ id: userId, grade: params.grade, status: "pending" });
-  if (error) throw new Error(error.message);
-
   const householdId = await findOrCreateHouseholdForGuardian(admin, params.parentId);
-  const { error: linkError } = await admin
-    .from("household_members")
-    .insert({ household_id: householdId, profile_id: userId, role: "child", is_primary: true });
-  if (linkError) throw new Error(linkError.message);
 
-  return userId;
+  const { data, error } = await supabase.rpc("create_account_invite", {
+    p_email: params.email,
+    p_name: params.name,
+    p_role: "student",
+    p_household_id: householdId,
+    p_grade: params.grade,
+  });
+  if (error) throw new Error(error.message);
+  const row = data![0];
+  await sendInviteEmail({ to: params.email, name: params.name, token: row.raw_token, role: "student" });
+  return row.invite_id;
 }
 
+// (2026-08-30 R2 Task 4) 개인 이메일 기반 선생님 초대는 비활성화한다 — 선생님은
+// 관리자가 @alton.education Google Workspace 계정을 발급한 뒤 최초 Google
+// 로그인으로 사전 등록된 레코드와 연결하는 방식으로 확정됐다(R2 Task 7). 실제
+// 대체 구현과 이 함수 제거는 Task 7에서 진행하고, 지금은 명확한 오류로 막기만
+// 한다 — 관리자 권한 확인은 그대로 거쳐서 익명/비관리자에게는 그보다 먼저
+// "로그인이 필요합니다"/"관리자만 사용할 수 있습니다"가 나가도록 한다.
 export async function inviteTeacher(params: {
   name: string;
   email: string;
@@ -106,6 +119,20 @@ export async function inviteTeacher(params: {
   hourlyRateKrw: number;
 }): Promise<string> {
   await requireAdmin();
+  throw new Error(
+    "개인 이메일 기반 선생님 초대는 현재 비활성화되어 있습니다. 선생님 계정은 Google Workspace 프로비저닝(R2 Task 7) 완료 후 그 절차로만 생성할 수 있습니다."
+  );
+}
+
+// (2026-08-30 R2 Task 4) 위 inviteTeacher()가 호출을 막기 전까지 실제로 쓰이던
+// 구현 — Task 7에서 Workspace 프로비저닝으로 교체·제거될 때까지 참고용으로
+// 남겨둔다(호출부 없음, 삭제하지 않음).
+async function legacyInviteTeacherByEmail(params: {
+  name: string;
+  email: string;
+  school: string;
+  hourlyRateKrw: number;
+}): Promise<string> {
   if (!Number.isFinite(params.hourlyRateKrw) || params.hourlyRateKrw <= 0) {
     throw new Error("시급은 1원 이상의 숫자로 입력해주세요.");
   }

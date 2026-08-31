@@ -5,6 +5,8 @@ const profileSingleMock = vi.fn().mockResolvedValue({ data: { role: "admin" } })
 const inviteUserByEmailMock = vi.fn();
 const parentsInsertMock = vi.fn().mockResolvedValue({ error: null });
 const profilesInsertMock = vi.fn().mockResolvedValue({ error: null });
+const serverRpcMock = vi.fn();
+const sendInviteEmailMock = vi.fn().mockResolvedValue(undefined);
 
 vi.mock("@/utils/supabase/server", () => ({
   createClient: async () => ({
@@ -15,7 +17,12 @@ vi.mock("@/utils/supabase/server", () => ({
       }
       throw new Error(`unexpected table ${table}`);
     },
+    rpc: serverRpcMock,
   }),
+}));
+
+vi.mock("@/lib/invite-email", () => ({
+  sendInviteEmail: sendInviteEmailMock,
 }));
 
 vi.mock("@/lib/supabase-admin", () => ({
@@ -34,16 +41,32 @@ describe("inviteParent", () => {
     vi.clearAllMocks();
     getUserMock.mockResolvedValue({ data: { user: { id: "admin1" } } });
     profileSingleMock.mockResolvedValue({ data: { role: "admin" } });
-    inviteUserByEmailMock.mockResolvedValue({ data: { user: { id: "parent1" } }, error: null });
-    parentsInsertMock.mockResolvedValue({ error: null });
-    profilesInsertMock.mockResolvedValue({ error: null });
+    serverRpcMock.mockResolvedValue({
+      data: [{ invite_id: "invite1", raw_token: "rawtoken123" }],
+      error: null,
+    });
+    sendInviteEmailMock.mockResolvedValue(undefined);
   });
 
-  it("생성된 parentId를 반환한다", async () => {
+  it("account_invites에 초대를 생성하고 메일을 보낸 뒤 invite_id를 반환한다(계정은 아직 만들지 않음)", async () => {
     const { inviteParent } = await import("./users-actions");
-    const parentId = await inviteParent({ name: "김민지", email: "minji@example.com" });
-    expect(parentId).toBe("parent1");
-    expect(parentsInsertMock).toHaveBeenCalledWith({ id: "parent1" });
+    const inviteId = await inviteParent({ name: "김민지", email: "minji@example.com" });
+
+    expect(inviteId).toBe("invite1");
+    expect(serverRpcMock).toHaveBeenCalledWith("create_account_invite", {
+      p_email: "minji@example.com",
+      p_name: "김민지",
+      p_role: "parent",
+      p_household_id: null,
+    });
+    expect(sendInviteEmailMock).toHaveBeenCalledWith({
+      to: "minji@example.com",
+      name: "김민지",
+      token: "rawtoken123",
+      role: "parent",
+    });
+    expect(inviteUserByEmailMock).not.toHaveBeenCalled();
+    expect(parentsInsertMock).not.toHaveBeenCalled();
   });
 });
 
@@ -52,62 +75,12 @@ describe("inviteTeacher", () => {
     vi.clearAllMocks();
     getUserMock.mockResolvedValue({ data: { user: { id: "admin1" } } });
     profileSingleMock.mockResolvedValue({ data: { role: "admin" } });
-    inviteUserByEmailMock.mockResolvedValue({ data: { user: { id: "teacher1" } }, error: null });
-    profilesInsertMock.mockResolvedValue({ error: null });
   });
 
-  it("teachers를 status=pending으로 만들고 set_teacher_rate RPC로 최초 시급 이력을 생성한다", async () => {
-    const teachersInsertMock = vi.fn().mockResolvedValue({ error: null });
-    const rpcMock = vi.fn().mockResolvedValue({ error: null });
-    vi.doMock("@/lib/supabase-admin", () => ({
-      createAdminClient: () => ({
-        auth: { admin: { inviteUserByEmail: inviteUserByEmailMock } },
-        from: (table: string) => {
-          if (table === "profiles") return { insert: profilesInsertMock };
-          if (table === "teachers") return { insert: teachersInsertMock };
-          throw new Error(`unexpected table ${table}`);
-        },
-        rpc: rpcMock,
-      }),
-    }));
-    vi.resetModules();
-    const { inviteTeacher } = await import("./users-actions");
-
-    const teacherId = await inviteTeacher({
-      name: "박서연",
-      email: "seoyeon@example.com",
-      school: "서울대학교",
-      hourlyRateKrw: 30000,
-    });
-
-    expect(teacherId).toBe("teacher1");
-    expect(teachersInsertMock).toHaveBeenCalledWith({
-      id: "teacher1",
-      school: "서울대학교",
-      status: "pending",
-    });
-    expect(rpcMock).toHaveBeenCalledWith("set_teacher_rate", {
-      p_teacher_id: "teacher1",
-      p_amount_minor: 30000,
-      p_currency: "KRW",
-    });
-  });
-
-  it("set_teacher_rate RPC가 실패하면 원인을 알리는 오류를 던진다", async () => {
-    const teachersInsertMock = vi.fn().mockResolvedValue({ error: null });
-    const rpcMock = vi.fn().mockResolvedValue({ error: { message: "권한 없음" } });
-    vi.doMock("@/lib/supabase-admin", () => ({
-      createAdminClient: () => ({
-        auth: { admin: { inviteUserByEmail: inviteUserByEmailMock } },
-        from: (table: string) => {
-          if (table === "profiles") return { insert: profilesInsertMock };
-          if (table === "teachers") return { insert: teachersInsertMock };
-          throw new Error(`unexpected table ${table}`);
-        },
-        rpc: rpcMock,
-      }),
-    }));
-    vi.resetModules();
+  // (2026-08-30 R2 Task 4) 개인 이메일 기반 선생님 초대는 Task 7(Workspace
+  // 프로비저닝) 전까지 비활성화됐다 — 관리자 권한 확인은 통과시키되 항상
+  // 명확한 오류로 막는다.
+  it("관리자 권한을 확인한 뒤 항상 비활성화 오류를 던진다", async () => {
     const { inviteTeacher } = await import("./users-actions");
 
     await expect(
@@ -117,7 +90,22 @@ describe("inviteTeacher", () => {
         school: "서울대학교",
         hourlyRateKrw: 30000,
       })
-    ).rejects.toThrow(/시급 이력 생성에 실패/);
+    ).rejects.toThrow(/비활성화되어 있습니다/);
+    expect(getUserMock).toHaveBeenCalled();
+  });
+
+  it("관리자가 아니면 비활성화 오류보다 먼저 권한 오류를 던진다", async () => {
+    profileSingleMock.mockResolvedValue({ data: { role: "teacher" } });
+    const { inviteTeacher } = await import("./users-actions");
+
+    await expect(
+      inviteTeacher({
+        name: "박서연",
+        email: "seoyeon@example.com",
+        school: "서울대학교",
+        hourlyRateKrw: 30000,
+      })
+    ).rejects.toThrow(/관리자만 사용할 수 있습니다/);
   });
 });
 
@@ -126,24 +114,28 @@ describe("inviteStudent", () => {
     vi.clearAllMocks();
     getUserMock.mockResolvedValue({ data: { user: { id: "admin1" } } });
     profileSingleMock.mockResolvedValue({ data: { role: "admin" } });
-    inviteUserByEmailMock.mockResolvedValue({ data: { user: { id: "student1" } }, error: null });
     profilesInsertMock.mockResolvedValue({ error: null });
+    serverRpcMock.mockResolvedValue({
+      data: [{ invite_id: "invite2", raw_token: "rawtoken456" }],
+      error: null,
+    });
+    sendInviteEmailMock.mockResolvedValue(undefined);
   });
 
-  it("부모가 이미 속한 household가 있으면 재사용하고 guardian_students에는 쓰지 않는다", async () => {
-    const studentsInsertMock = vi.fn().mockResolvedValue({ error: null });
+  // (2026-08-30 R2 Task 4) 계정·역할·household 연결은 초대 수락 시로 미뤄졌다 —
+  // inviteStudent()는 이제 (1) 부모의 household를 찾거나 만들고 (2) 그
+  // household_id로 account_invites를 만들어 메일을 보낼 뿐, students/
+  // household_members(child) 행을 직접 만들지 않는다(finalize_account_invite가
+  // 수락 시점에 만든다).
+  it("부모가 이미 속한 household가 있으면 재사용하고 그 household_id로 초대를 생성한다", async () => {
     const householdMembersSelectMaybeSingleMock = vi
       .fn()
       .mockResolvedValue({ data: { household_id: "household1" } });
     const householdsInsertMock = vi.fn();
-    const householdMembersInsertMock = vi.fn().mockResolvedValue({ error: null });
 
     vi.doMock("@/lib/supabase-admin", () => ({
       createAdminClient: () => ({
-        auth: { admin: { inviteUserByEmail: inviteUserByEmailMock } },
         from: (table: string) => {
-          if (table === "profiles") return { insert: profilesInsertMock };
-          if (table === "students") return { insert: studentsInsertMock };
           if (table === "households") return { insert: householdsInsertMock };
           if (table === "household_members") {
             return {
@@ -152,7 +144,6 @@ describe("inviteStudent", () => {
                   eq: () => ({ limit: () => ({ maybeSingle: householdMembersSelectMaybeSingleMock }) }),
                 }),
               }),
-              insert: householdMembersInsertMock,
             };
           }
           if (table === "guardian_students") {
@@ -165,25 +156,31 @@ describe("inviteStudent", () => {
     vi.resetModules();
     const { inviteStudent } = await import("./users-actions");
 
-    const studentId = await inviteStudent({
+    const inviteId = await inviteStudent({
       name: "지훈",
       email: "jihoon@example.com",
       parentId: "parent1",
       grade: "10학년",
     });
 
-    expect(studentId).toBe("student1");
+    expect(inviteId).toBe("invite2");
     expect(householdsInsertMock).not.toHaveBeenCalled();
-    expect(householdMembersInsertMock).toHaveBeenCalledWith({
-      household_id: "household1",
-      profile_id: "student1",
-      role: "child",
-      is_primary: true,
+    expect(serverRpcMock).toHaveBeenCalledWith("create_account_invite", {
+      p_email: "jihoon@example.com",
+      p_name: "지훈",
+      p_role: "student",
+      p_household_id: "household1",
+      p_grade: "10학년",
+    });
+    expect(sendInviteEmailMock).toHaveBeenCalledWith({
+      to: "jihoon@example.com",
+      name: "지훈",
+      token: "rawtoken456",
+      role: "student",
     });
   });
 
-  it("부모에게 household가 없으면 새로 만들고 그 부모를 주 보호자로 지정한다", async () => {
-    const studentsInsertMock = vi.fn().mockResolvedValue({ error: null });
+  it("부모에게 household가 없으면 새로 만들고 그 부모를 주 보호자로 지정한 뒤 그 household_id로 초대를 생성한다", async () => {
     const householdMembersSelectMaybeSingleMock = vi.fn().mockResolvedValue({ data: null });
     const householdsInsertSingleMock = vi.fn().mockResolvedValue({ data: { id: "household2" }, error: null });
     const householdsInsertMock = vi.fn(() => ({ select: () => ({ single: householdsInsertSingleMock }) }));
@@ -191,13 +188,8 @@ describe("inviteStudent", () => {
 
     vi.doMock("@/lib/supabase-admin", () => ({
       createAdminClient: () => ({
-        auth: { admin: { inviteUserByEmail: inviteUserByEmailMock } },
         from: (table: string) => {
-          if (table === "profiles") return { insert: profilesInsertMock };
-          if (table === "students") return { insert: studentsInsertMock };
-          if (table === "households") {
-            return { insert: householdsInsertMock };
-          }
+          if (table === "households") return { insert: householdsInsertMock };
           if (table === "household_members") {
             return {
               select: () => ({
@@ -229,11 +221,12 @@ describe("inviteStudent", () => {
       role: "guardian",
       is_primary: true,
     });
-    expect(householdMembersInsertMock).toHaveBeenCalledWith({
-      household_id: "household2",
-      profile_id: "student1",
-      role: "child",
-      is_primary: true,
+    expect(serverRpcMock).toHaveBeenCalledWith("create_account_invite", {
+      p_email: "seoah@example.com",
+      p_name: "이서아",
+      p_role: "student",
+      p_household_id: "household2",
+      p_grade: "11학년",
     });
   });
 });

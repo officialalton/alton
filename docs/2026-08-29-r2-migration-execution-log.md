@@ -155,7 +155,7 @@ product-architecture-v3.md §5.7 확정 모델(`pending→active→suspended(재
 
 **결론**: 7가지 재검증 항목 전부 통과. 실사용자 데이터 손상·의도치 않은 상태 변경 없음. Task 2 완료 처리.
 
-## Task 3 — households/household_members cutover + guardian_students 동결 (로컬 검증 완료, 원격 적용 승인 대기)
+## Task 3 — households/household_members cutover + guardian_students 동결 (완료, 원격 적용 2026-08-30)
 
 ### 배경 — 원본 구분 정정
 
@@ -230,6 +230,87 @@ product-architecture-v3.md §5.7 확정 모델(`pending→active→suspended(재
 ### 확인 요청 (원격 적용 전)
 
 원격 재검증 계획: (1) `guardian_students`→`households`/`household_members` 백필 결과가 기존 관계와 정확히 일치하는지, (2) `guardian_students` 직접 쓰기 차단, (3) `parents.status` 전환이 여전히 정상 동작하는지, (4) 학부모 실계정으로 자녀 이름이 정상 조회되는지(profiles 정책 수정 반영 확인), (5) 6개 역할 RLS 회귀. 승인 시 진행한다.
+
+## Task 4 — 계정 초대 상태 모델 + 보호자 주도 초대 (로컬 검증 완료, 원격 적용 승인 대기)
+
+### 배경 — 범위와 확정 설계
+
+1차 설계 보고 후 사용자가 5가지를 최종 반영해 확정했다: (1) `household_id`가 NULL인 보호자 초대에도 실제로 작동하는 중복 방지, (2) 기존 가입 이메일은 오류(`failed`)가 아니라 `manual_review`로 분리하고 관리자가 명시적으로 확인한 계정에만 연결, (3) 만료는 수락 API가 시간으로 직접 검사(저장된 status와 무관)하고 status 컬럼 갱신은 별도 배치, (4) 재발송·수락은 각각 하나의 트랜잭션에서 대상 행을 `FOR UPDATE`로 잠가 경쟁 상태를 해소, (5) 선생님 초대는 이 태스크에서 다루지 않고 관리자 UI·서버 액션 둘 다 명확히 비활성화(Task 7에서 대체).
+
+**범위**: 관리자→보호자 초대, 관리자/보호자→자녀 초대만. 선생님 초대(`inviteTeacher`)는 Task 7(Google Workspace 프로비저닝)로 완전히 이관 — 이번 라운드에서는 관리자 권한 확인 후 항상 명확한 오류를 던지도록 막기만 하고, 기존 구현은 `legacyInviteTeacherByEmail`로 이름만 바꿔 삭제하지 않고 보존했다(호출부 없음).
+
+### 마이그레이션: `20260902000000_r2_account_invites.sql`
+
+**테이블**: `account_invites`(email_normalized/email_original, invitee_name, invitee_grade, role[parent|student], household_id, invited_by, status[pending/accepted/expired/revoked/superseded/failed/manual_review], token_hash, token_generation, expires_at, last_sent_at, accepted_at, revoked_at, superseded_by_id, auth_user_id, target_profile_id), `account_invite_events`(감사 전용, invite_id/event_type/actor_id/detail/created_at).
+
+**중복 방지**: `(email_normalized, role, household_id)` 부분 unique 인덱스에 `NULLS NOT DISTINCT`(PG15+)를 적용해 `household_id`가 NULL인 보호자 초대도 실제로 중복이 막히는지 확인.
+
+**상태 전이(트리거로 강제)**: `(신규)→pending → {accepted | superseded | revoked | expired | failed | manual_review}`, `manual_review → {accepted | revoked}`. 그 외 전이는 `protect_account_invite_status()` 트리거가 무조건 거부(우회 플래그는 지정된 함수 내부에서만).
+
+**함수(전부 SECURITY DEFINER)**:
+- `create_account_invite(email, name, role, household_id, grade?)` — 관리자는 보호자/자녀 둘 다, 보호자는 본인 household에 자녀만(서버+DB 이중 검증). 토큰은 `gen_random_bytes(32)`를 hex로 인코딩(URL-safe), 해시(`digest(..., 'sha256')`)만 저장.
+- `resend_account_invite(invite_id)` — 대상 행을 `FOR UPDATE`로 잠그고 24시간 내 3회 제한(최초 발송 제외, 같은 이메일+역할+household lineage의 `resent` 이벤트만 카운트) 확인 후, 이전 행을 먼저 `superseded`로 바꾼 뒤(그래야 부분 unique 인덱스와 충돌 없이) 새 pending 행을 생성.
+- `claim_account_invite(token)` — anon도 호출 가능(로그인 전 방문자). 대상 행을 `FOR UPDATE`로 잠그고: 만료는 시간으로 직접 검사(status와 무관, 항상 우선) → 이미 `accepted`면 멱등 반환 → `pending`이 아니면 그 상태 그대로 예외 → 이메일이 이미 가입돼 있으면(`auth.users` 직접 조회) `manual_review`로 전이 후 반환 → 아니면 `accepted`로 전이 후 반환.
+- `finalize_account_invite(invite_id, auth_user_id)` — service_role 전용. Node 서버가 Auth 사용자를 만든 뒤 호출, `profiles`/`parents` 또는 `students`+`household_members`(child)를 생성. `target_profile_id`가 이미 있으면 그대로 반환(멱등, 부분 실패 재시도에도 중복 생성 없음).
+- `revoke_account_invite(invite_id)` — `pending`/`manual_review`만 철회 가능, 상태만 변경(Auth 계정 삭제는 하지 않음).
+- `resolve_manual_review_invite(invite_id, action, target_profile_id?, auth_user_id?)` — 관리자 전용. `link`는 관리자가 명시적으로 확인한 기존 프로필에만 연결(이메일 일치만으로 자동 연결 안 함), `revoke`는 그냥 철회.
+- `mark_expired_invites()` — 관리자 전용 배치. 만료된 pending 행을 일괄 `expired`로 전환 + 감사 이력 기록(수락 차단 자체는 이 배치와 무관하게 `claim_account_invite`의 시간 검사가 항상 보장).
+
+### 로컬 검증 — 실제 실행으로 발견/수정한 버그 3건
+
+DB 함수를 실제로 psql에서 반복 실행하며 검증하는 과정에서 설계 초안의 실제 버그를 3건 발견·수정했다(전부 정적 리뷰로는 못 잡았을 종류):
+
+1. **재발송 순서 버그**: 새 pending 행을 먼저 INSERT하고 이전 행을 나중에 `superseded`로 바꾸려다 부분 unique 인덱스 위반(둘 다 잠깐 `pending`이 됨) — 순서를 뒤집어 이전 행을 먼저 `superseded`로 바꾼 뒤 새 행을 만들도록 수정.
+2. **FK 순환 문제**: `superseded_by_id`를 새 행 INSERT 전에 미리 채우려다 참조 무결성 위반 — 새 행 INSERT 후 별도 UPDATE로 `superseded_by_id`를 채우는 2단계로 수정.
+3. **롤백으로 무의미해지는 "만료 시 상태 갱신 후 예외" 패턴**: `claim_account_invite`/`resend_account_invite` 둘 다 "만료면 status를 'expired'로 갱신하고 예외를 던진다"로 초안을 짰는데, 단일 함수 호출 = 단일 트랜잭션이라 뒤이은 `RAISE EXCEPTION`이 그 UPDATE까지 롤백시켜 무의미했다 — 상태 갱신은 `mark_expired_invites()` 배치의 역할로 완전히 분리하고, 수락/재발송 시점의 만료 차단은 순수 시간 비교로만 하도록 단순화(완료 기준 3의 "서버·DB 양쪽 검증"을 시간 비교 하나로 통일).
+
+| 항목 | 결과 |
+|---|---|
+| `household_id`가 NULL인 초대 중복 방지 | 같은 이메일로 보호자 초대 2회 생성 시도 → 2번째가 unique 제약 위반으로 거부 확인(`NULLS NOT DISTINCT` 실제 작동) |
+| 보호자 타 household 초대 차단 | 무관한 선생님이 남의 household에 자녀 초대 시도 → 거부. 실제 공동 보호자(같은 household 멤버)는 정상 허용 — 최초 테스트에서 "무관한 사람"으로 잘못 고른 프로필이 실제로는 공동 보호자였던 걸 재확인하며 바로잡음 |
+| 구세대 토큰 거부, 최신만 허용 | 재발송 후 구 토큰으로 수락 시도 → `superseded`로 거부. 최신 토큰은 정상 수락 |
+| 동일 링크 중복 수락 멱등성 | 같은 토큰으로 `claim_account_invite` 2회 호출 → 동일 결과 반환(에러 없음) |
+| **수락↔재발송 경쟁 상태** | 두 개의 동시 psql 프로세스로 재현: (a) accept가 `pg_sleep`으로 지연되며 커밋 → 그 사이 시도한 resend가 잠금 해제 후 "이미 accepted"로 거부. (b) resend가 먼저 커밋 → 뒤이은 accept(구 토큰)가 "superseded"로 거부. 양방향 모두 `FOR UPDATE` 잠금으로 정확히 하나만 성공 |
+| 기존 가입 이메일 처리 | 이미 가입된 이메일(김민지)로 초대 생성 후 수락 시도 → `manual_review`로 전이(에러 아님), 기존 `auth_user_id` 반환 확인 |
+| manual_review → link | 관리자가 기존 프로필/auth_user_id를 명시적으로 지정해 연결 → `accepted`로 전이, 기존 계정 그대로 재사용(신규 생성 없음) |
+| manual_review → revoke | 정상 철회, 상태만 변경 |
+| 철회 후 수락 불가 + 기존 사용자 미삭제 | 철회된 토큰 수락 시도 → 거부. `auth.users`에서 대상 계정 여전히 존재 확인 |
+| 만료 서버·DB 양쪽 검증 | `expires_at`을 과거로 강제한 뒤 status가 여전히 `pending`인 상태에서 수락/재발송 시도 → 둘 다 즉시 거부(배치가 안 돌아도 시간 비교만으로 차단) |
+| `mark_expired_invites()` 배치 | 만료된 pending 행을 일괄 `expired`로 전환 + 감사 이력 기록 확인 |
+| grade 필드 보존 | 관리자가 학생 초대 시 입력한 학년이 수락 시 `students.grade`에 정확히 반영됨 확인(초안엔 없던 컬럼 — 기존 admin 폼이 입력받는 값을 조용히 버리지 않도록 `invitee_grade` 추가) |
+| 6개 역할 RLS(`account_invites`) | 관리자 전체 조회, 발송자 본인 조회, 무관한 다른 보호자·anon은 0행 |
+| `npx tsc --noEmit` | 클린 |
+| `npx vitest run` | **81개 파일 346개 테스트 전부 통과**(신규: `inviteParent`/`inviteStudent`/`inviteTeacher` 재작성 반영, `app/parent/invite-actions.test.ts`, `app/admin/invite-actions.test.ts`) |
+| **실제 브라우저 E2E(로컬 Mailpit 메일함 연동)** | `e2e/account-invites.spec.ts` 신규 3건 — (1) 관리자 초대 → 실제 발송된 메일에서 토큰 링크 추출 → 수락 → `/set-password` → 로그인까지 전 과정 실제 브라우저로 완주, (2) 같은 링크 중복 방문 멱등성, (3) 철회된 초대 링크 방문 시 `/login`으로 안내. 전체 스위트 **21개 전부 통과**(기존 18 + 신규 3) |
+
+### 앱 코드 변경
+
+- `app/admin/users-actions.ts` — `inviteParent`/`inviteStudent`가 즉시 계정 생성 대신 `create_account_invite` RPC + `sendInviteEmail`로 교체(계정·역할·household 연결은 수락 시로 이연). `inviteTeacher`는 `requireAdmin()` 통과 후 항상 비활성화 오류. 기존 구현은 `legacyInviteTeacherByEmail`로 보존(호출 없음, Task 7에서 대체).
+- `app/admin/invite-actions.ts`(신규) — `listInvites`(관리자 전체 조회), `resendInvite`, `revokeInvite`, `resolveManualReviewInvite`.
+- `app/parent/invite-actions.ts`(신규) — `inviteChild`. household_id는 클라이언트 입력을 받지 않고 항상 호출자 본인의 guardian 멤버십에서 조회(서버가 잘못된 household_id를 만들 방법 자체를 없앰).
+- `app/api/invite/accept/route.ts`(신규) — 토큰 검증(`claim_account_invite`) → 필요 시 `admin.auth.admin.createUser()` → `finalize_account_invite` → Supabase `generateLink(type: 'recovery')`의 `hashed_token`으로 기존 `/set-password` 화면과 동일한 방식(`token_hash`+`type` 쿼리, `action_link` GET 소진 문제 회피)으로 연결.
+- `app/invite/manual-review/page.tsx`(신규) — manual_review 도착 시 보여줄 정적 안내 화면(세션 없음).
+- `lib/invite-email.ts`(신규) — 초대 메일 발송 공통 함수.
+- `app/admin/UsersTab.tsx` — 선생님 초대 폼을 비활성화 안내 문구로 교체.
+- `e2e/mailbox.ts`(신규) — 로컬 Mailpit API(`/api/v1/search`, `/api/v1/message/:id`)로 실제 발송 메일을 찾아 초대 링크를 추출하는 E2E 헬퍼.
+
+### 원격 적용 대상 및 영향 범위 (승인 대기)
+
+**신규 마이그레이션 1개**: `20260902000000_r2_account_invites.sql`(신규 테이블 2개 + 함수 7개, 기존 테이블/함수 변경 없음).
+
+**앱 코드**: 위 신규 파일 8개 + `app/admin/users-actions.ts`(수정) + `app/admin/UsersTab.tsx`(수정).
+
+**영향 범위**:
+- 순수 추가(신규 테이블·함수) — 기존 데이터나 기존 함수를 변경하지 않는다. 원격 실사용 데이터에 영향 없음.
+- **원격 적용 즉시 효력 발생하는 행동 변화**: (1) 관리자가 "학부모 초대"/"학생 초대"를 누르면 더 이상 즉시 계정이 생기지 않고 이메일 발송 후 수락 시 생성된다(관리자 UI 문구는 이미 "초대 이메일이 발송되었습니다"로, 사용자 인지 변경 없음). (2) 관리자 UI에서 "선생님 초대" 폼이 사라지고 비활성화 안내로 대체 — 서버 액션도 호출 시 오류. 현재 원격에 이 경로로 진행 중인 선생님 초대가 있다면 완료 처리가 안 되니 사전 확인 필요(§확인 요청).
+- 새 이메일 발송 경로(`lib/invite-email.ts`)가 `SMTP_HOST` 등 기존 환경변수를 그대로 재사용 — 신규 환경변수 없음.
+
+**롤백 절차**: 이 마이그레이션은 신규 테이블 2개 + 신규 함수 7개뿐이며 기존 객체를 변경하지 않는다. 실패 시 신규 테이블·함수·트리거만 개별 DROP하면 기존 시스템에 영향이 없다. 앱 코드는 이번 커밋 이전으로 되돌리면 `inviteParent`/`inviteStudent`/`inviteTeacher`가 즉시 기존 동작(Task 3 시점 기준)으로 복귀한다.
+
+### 확인 요청 (원격 적용 전)
+
+1. **선생님 초대 비활성화**: 원격에 현재 이 경로로 진행 중인(초대 발송했지만 아직 미확인) 선생님이 있는지 확인 필요 — 있다면 비활성화 후에도 기존 진행 건 자체는 영향받지 않지만(inviteTeacher는 신규 호출만 막음), 신규 선생님은 Task 7 완료 전까지 이 경로로 초대할 수 없다는 점을 운영팀에 안내해야 한다.
+2. 이번 라운드는 신규 테이블·함수만 추가하므로 기존 항목 재확인은 불필요.
 
 ## Task 7 예고 — Google Workspace 선생님 프로비저닝 (정책 확정, 미구현)
 

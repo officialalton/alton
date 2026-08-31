@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { inviteParent, inviteStudent, inviteTeacher } from "./users-actions";
+import { inviteParent, inviteStudent } from "./users-actions";
 import StudentDetailPanel from "./StudentDetailPanel";
 import TeacherDetailPanel from "./TeacherDetailPanel";
 import type { AdminSubject } from "./subject-data";
@@ -215,37 +215,14 @@ export default function UsersTab({
               </div>
             </button>
           ))}
-          <InviteForm
-            fields={["name", "email", "school", "hourlyRate"]}
-            submitLabel="선생님 초대"
-            onSubmit={async (values) => {
-              const hourlyRateKrw = Number(values.hourlyRate);
-              if (!hourlyRateKrw || hourlyRateKrw <= 0) {
-                throw new Error("시급을 입력해주세요.");
-              }
-              await inviteTeacher({
-                name: values.name,
-                email: values.email,
-                school: values.school,
-                hourlyRateKrw,
-              });
-              setTeachers((prev) => [
-                {
-                  id: `pending-${Date.now()}`,
-                  name: values.name,
-                  email: values.email,
-                  school: values.school || null,
-                  status: "pending",
-                  qcWarningCount: 0,
-                  subjectNames: [],
-                  assignedSubjectIds: [],
-                  calendlySchedulingUrl: null,
-                  hourlyRateKrw,
-                },
-                ...prev,
-              ]);
-            }}
-          />
+          {/* (2026-08-30 R2 Task 4) 개인 이메일 기반 선생님 초대는 비활성화됐다 —
+              선생님 계정은 Google Workspace 프로비저닝(Task 7) 절차로만 생성된다.
+              서버 액션(inviteTeacher)도 호출 시 오류를 던지지만, 폼 자체를
+              숨겨 관리자가 애초에 시도하지 않도록 한다. */}
+          <div className="border-[1.5px] border-dashed border-grey-200 rounded-xl px-5 py-4 text-[12px] text-grey-500">
+            선생님 초대는 현재 비활성화되어 있습니다. 선생님 계정은 Google Workspace 프로비저닝(관리자가 @alton.education
+            계정을 발급한 뒤 최초 로그인으로 연결) 절차로만 생성할 수 있으며, 해당 기능은 준비 중입니다.
+          </div>
         </>
       )}
     </div>
