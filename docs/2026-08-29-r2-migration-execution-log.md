@@ -587,7 +587,7 @@ Task 2 승인 시 사용자가 함께 확정한 후속 Task의 원본 요구사�
 
 기존 Calendly 온보딩 UI/코드는 계정 활성화에 영향을 주지 않도록 현재 상태(Task 2에서 자기 활성화만 제거, URL 저장 기능은 유지)로 둔다. Google Workspace 프로비저닝 구현 단계에서 제거할 후속 작업으로 명시한다 — Task 2 범위에서 지금 제거하지 않는다.
 
-## Task 7 — Google Workspace 선생님 프로비저닝 (로컬 구현·검증 완료, 실제 인프라 검증 대기)
+## Task 7 — Google Workspace 선생님 프로비저닝 (완료, 실제 인프라 쓰기 검증까지 완료 2026-09-01)
 
 최종 설계는 위 원안을 착수 전 사용자가 3라운드에 걸쳐 정정한 것이다. 상세 설계(테이블·함수·상태 머신·OAuth 보안·운영 인증 체인)는 `docs/superpowers/plans/2026-08-30-r2-account-family-lifecycle.md` Task 7 섹션에 전부 기록했다 — 여기서는 반복하지 않고 구현·검증 결과만 남긴다.
 
@@ -852,3 +852,40 @@ Could not find the function public.begin_workspace_preflight_run without paramet
 **이 시점까지 유지된 것**: `WORKSPACE_PROVISIONING_ALLOW_REAL_CALLS=false`(이번 절 전체에서 변경 없음). Google Workspace 사용자 생성·정지·재활성화 등 쓰기 작업은 이번 절에서 전혀 실행하지 않았다.
 
 **다음 단계**: 이 성공을 근거로 테스트 OU 계정 1개(`teacher-provisioning-test@alton.education`)를 사용하는 쓰기 검증 전체 계획(생성·충돌·재시도·정지·재활성화·최초 Google 로그인·정리·플래그 복원을 하나의 승인 단위로 묶어)을 정리해 사용자에게 승인 요청.
+
+### 2026-09-01 — 실제 쓰기 검증 완료, Task 7 완료 처리
+
+사용자가 마일스톤 단위 승인 방식(R 시작 시 범위 공유 + 외부 쓰기/비가역 작업만 별도 승인, 그 안의 조사·구현·로컬 검증·개발 DB 적용·배포·재검증은 반복 승인 없이 연속 진행)으로 전환한 뒤, 테스트 계정(`teacher-provisioning-test@alton.education`)·테스트 OU(`/Alton Integration Sandbox/Teachers`) 한정으로 실제 Workspace 쓰기 검증 전체를 일괄 승인. `WORKSPACE_PROVISIONING_ALLOW_REAL_CALLS=true` 전환 → Production 재배포로 시작해 아래 전 과정을 진행했다.
+
+**핵심 정보(테스트 계정)**:
+- ALTON profile/teacher id: `2d7d2bbf-d25c-4565-b0b1-ef1080100cea` (실행 로그·로드맵 문서에만 기록, 실제 문서 외 노출 없음)
+- Workspace 이메일: `teacher-provisioning-test@alton.education`
+- 실제 Google user id: `118341258957451133241`
+- 최종 ALTON 계정 상태: **`suspended`**(영구 보존 — 사유는 아래 "정리" 절 참고)
+
+**1) 계정 생성 (`/admin` Workspace 탭)**: `startTeacherWorkspaceProvisioning` 실제 호출 → Directory API로 실제 Google Workspace 계정 생성 성공(`googleUserId=118341258957451133241`, 테스트 OU에 생성) → `personal_contact_email=matchbox512@gmail.com`(사용자가 지정한 실제 수신 이메일)로 안내 메일 실제 발송 확인(사용자가 수신 스크린샷으로 확인) → 상태 `first_login_pending` 전이.
+
+**2) 재시도(멱등성) 검증**: 동일 이메일로 "프로비저닝 시작"을 다시 클릭 → `begin_teacher_workspace_provisioning()`이 `이미 진행 중이거나 완료된 프로비저닝입니다(상태: first_login_pending)`로 정확히 거부, 중복 계정·중복 메일 없음을 Vercel 런타임 로그(서버 측 원본 오류 메시지)로 직접 확인.
+
+**2-1) 발견·수정 — Server Action 오류 마스킹 (`app/admin/workspace-actions.ts`, `WorkspaceTab.tsx`)**: 위 재시도 검증 중 관리자 화면에는 이 친절한 메시지 대신 "Minified React error #441"만 표시됨을 발견 — Next.js가 production에서 Server Action이 던진 에러를 digest만 남기고 마스킹하기 때문(Vercel 런타임 로그로 실제 원본 메시지가 서버에서는 정확히 던져졌음을 확인, 클라이언트에만 도달하지 못함). 추가로 Directory API 409 conflict 경로가 기존에는 조용히 성공한 것처럼(`void` 반환) 처리되던 것도 함께 발견. `startTeacherWorkspaceProvisioning`/`suspendTeacher`/`reactivateTeacher`/`getTeacherActivationChecklist` 전부 예외를 던지지 않고 `{ok, error}`/`{ok, data}` 반환값으로 모델링하도록 재작성(Next.js 공식 권장 패턴), `WorkspaceTab.tsx`는 반환값을 확인하도록 수정. 전체 테스트 스위트 408건(92개 파일) 통과 확인 후 커밋·푸시(`66481a3`)·재배포.
+
+**3) 실제 Google 최초 로그인**: Google Admin Console에서 관리자가 테스트 계정 비밀번호를 직접 재설정(초기 임시 비밀번호는 코드에서 절대 반환·로그하지 않으므로 아무도 모름) → 시크릿창에서 `app.alton.education/login` → "선생님 — Google로 로그인" → 실제 OAuth 완료 → `/account-pending` 진입 확인. DB 확인: `teacher_workspace_provisioning.status='linked'`, `linked_teacher_id` 연결, **`teachers.status='pending'`(자동 활성화 안 됨, 설계대로)**, `workspace_google_user_id`가 생성 시점 값과 정확히 일치(불변 Google ID 기준 연결 확인). `get_teacher_activation_checklist()` 확인: `workspace_issued`/`first_login`/`identity_linked`/`admin_base_info` 4개 충족(실제 근거 시각 포함), `valid_rate`/`onboarding_complete`/`contract_signed` 3개 미충족 — 설계대로 정확히 동작.
+
+**4) 정지(inactive)/재활성화(active) 검증과 정책 오류 발견·수정**:
+- 사용자가 진행 순서(1번이 정답: Workspace 계정 suspended/provisioning 상태만 바꾸고 `teachers.status`는 계속 pending 유지)를 먼저 질문 → 코드 직접 확인 결과 **실제로는 2번에 가까웠다**: `transition_account_status()`의 7조건 게이트가 `pending→active` 전이에만 걸려 있고 `inactive→active`(Workspace 탭의 "복귀")는 게이트 없이 곧바로 `active`로 전환됨. 추가로 `pending→inactive`가 유효 전이 목록에 아예 없어, `pending` 상태 선생님을 중단하면 실제 Google 계정은 suspended, provisioning은 `suspended`로 바뀌는데 `teachers.status`만 `pending`에 갇혀 세 시스템이 어긋나는 문제도 발견.
+- 사용자 확정(질문으로 확인): (a) 게이트는 `active`로 가는 모든 전이에 적용, (b) `pending→inactive`를 유효 전이로 추가. `supabase/migrations/20260908000000_r2_teacher_reactivation_gate_fix.sql`로 원격 개발 DB에 즉시 적용(pure `create or replace function`, 스키마 변경 없음 — Vercel 재배포 불필요, 즉시 반영), 커밋·푸시(`59c437e`).
+- 실제 검증: `중단(inactive)` 첫 클릭 성공(`pending→inactive`) → 두 번째 클릭은 실수로 다시 `중단`을 눌렀는데 `inactive→inactive`가 유효하지 않아 안전하게 거부(다만 `suspend_teacher_workspace()`에 선행조건이 없어 provisioning `suspended` 이벤트가 중복 기록됨 — 아래 "잔여 발견 사항" 참고) → `복귀(active)` 클릭 시 7조건 중 `onboarding_complete`/`contract_signed` 미충족으로 **정확히 거부**(신규 안전 오류 메시지로 표시 확인) — 실제 Google 계정 재활성화·새 시급 이력(`teacher_rate_history` 1건, 50000 KRW) 생성까지는 진행되지만 `teachers.status`는 `inactive` 유지 확인. 재시도(같은 상태에서 "복귀" 재클릭) → `reactivate_teacher_workspace()`의 `status='suspended'` 선행조건이 재시도를 즉시 차단해 시급 이력·이벤트 중복 생성 없음을 실측 확인(반면 `suspend_teacher_workspace()`는 동일한 선행조건이 없어 비대칭 — 아래 참고).
+- 테스트용으로 남은 2개 조건을 SQL로 직접 충족(이 프로필 한정: `teachers.school`/`bio`, `profiles.phone` 설정 → 트리거로 `onboarding_completed_at` 자동 파생, `teacher_contracts`에 `status='signed'` 행 1건 삽입) → `중단`→`복귀` 재실행 → **`teachers.status`가 정확히 `pending`→`inactive`→`active`로 전이, 7조건 전부 충족 확인, `account_status_events`에 `inactive→active` 전이 정상 기록.** Task 7의 최종 목표(실제 Google Workspace 계정 생성·정지·재활성화·최초 로그인·활성화 게이트가 전부 실제로 동작)를 실제 인프라로 확인 완료.
+
+**5) 정리(cleanup) — 계획대로 물리 삭제 불가, 사용자 확정으로 최종 상태 결정**:
+- `teacher_workspace_provisioning`, 그 `workspace_provisioning_events`, 테스트용 `teacher_contracts` 행은 정상 삭제.
+- `teacher_rate_history`(하드 immutable 트리거, DELETE/UPDATE 전면 차단, bypass flag 없음, `service_role`까지 EXECUTE revoke)와 `account_status_events`(INSERT-only 트리거, 동일하게 bypass 없음) 둘 다 이 테스트 profile을 참조하는 행이 있어 **`profiles`/`teachers`/`auth.users`(FK `NO ACTION`, `auth.users` 삭제 시 `profiles`로 CASCADE되다가 `teacher_rate_history` FK에서 차단되는 것을 실제 삭제 시도로 확인) 전부 물리 삭제 불가**. 사용자가 트리거 우회·예외를 만들지 않기로 명시적으로 확정 — 대신 `transition_account_status(..., 'suspended', '[TEST FIXTURE] ...')`로 정상적인 상태 전이 경로를 통해 `suspended`로 영구 보존.
+- 코드 확인으로 실제 운영 영향 없음을 검증: `app/admin/users-data.ts:200`(관리자 사용자 목록)과 `app/admin/matching-data.ts:30`(매칭 후보)이 이미 `teachers.status='active'`로 필터링해 `suspended`인 이 테스트 계정을 자동 제외. `app/admin/payouts-data.ts`의 `computePayoutAmounts()`는 상태와 무관하게 전체 teachers를 조회하지만 실제 완료된 세션이 있어야만 금액이 계산되므로(이 테스트 계정은 세션이 전혀 없음) 정산 대상에도 실질적으로 포함될 수 없다 — 다만 이는 각 쿼리의 기존 필터가 우연히 막아준 것이지 "테스트 데이터는 절대 섞이지 않는다"를 보장하는 명시적 장치는 아님(로드맵에 후속 작업으로 등록, 아래 참고).
+- 실제 Google Workspace 계정(`teacher-provisioning-test@alton.education`)은 관리자가 Google Admin Console에서 직접 삭제(우리 코드에는 delete 함수가 없음 — `lib/google-workspace.ts`는 create/suspend/reactivate만 존재, 의도적으로 계정 삭제 기능을 만들지 않음). 삭제 후 read flag를 다시 `true`로 켜고 preflight 재실행으로 **테스트 OU 사용자 수 0명, `teacher-provisioning-test@alton.education` 존재 여부 `false`** 실제 확인.
+- **잔여 발견 사항(수정하지 않고 기록만)**: `suspend_teacher_workspace()`는 `reactivate_teacher_workspace()`(`status='suspended'` 선행조건 있음)와 달리 아무 선행조건 없이 항상 provisioning을 `suspended`로 바꾸고 이벤트를 기록한다 — 이번 검증 중 실수로 "중단"을 연속 클릭해 `suspended` 감사 이벤트가 중복 기록되는 것을 실측했다(실제 상태 자체는 틀리지 않음, 감사 로그만 중복). 비대칭이므로 향후 정리 대상으로 남겨둔다(이번 Task 7 범위에서 수정하지 않음, 사용자 지시대로 대규모 변경 보류).
+
+**6) 플래그 최종 상태**: `WORKSPACE_PREFLIGHT_ALLOW_REAL_READS="false"`, `WORKSPACE_PROVISIONING_ALLOW_REAL_CALLS="false"` 둘 다 Production 재배포 후 `vercel env pull`로 재확인.
+
+**7) 로드맵 등록(`docs/2026-08-29-master-roadmap-v3.md` R12)**: 이번에 발견한 "테스트 데이터 정리 불가" 문제를 별도 항목으로 등록 — (1) 운영 전 검증 계정·종속 이력을 안전하게 일괄 정리하는 관리자 전용 절차(일반 이력의 immutability는 유지, "테스트 데이터"로 명시된 행만 엄격한 조건·자체 감사 하에 정리), (2) 이를 위한 `is_test_data` 같은 구분 구조 또는 별도 스테이징 프로젝트로 실제 쓰기 검증 자체를 이관하는 근본 방안 검토, (3) 테스트 데이터가 정산·매칭·통계에 절대 섞이지 않는 공통 필터 + 회귀 테스트(이번엔 우연히 안전했을 뿐 명시적 보장 장치가 아님).
+
+**Task 7 완료 조건 충족**: 실제 Google Workspace 계정 생성·정지·재활성화·최초 OAuth 로그인·immutable Google ID 기준 연결·7조건 활성화 게이트가 전부 실제 인프라로 검증됨(사용자 확정: "Task 7은 mock 구현만으로 완료 처리하지 않는다" 요건 충족). **R2 Task 7 — 완료.**
