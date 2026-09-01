@@ -226,62 +226,111 @@
 
 **핵심 정책**: 선생님은 본인이 계정을 생성·활성화하지 않는다. 관리자가 `@alton.education` Google Workspace 계정을 발급하고, 관리자가 최종적으로 `pending→active` 전환(`transition_account_status()`)을 수행한다.
 
+> **최종 설계 확정(2026-08-31)**: 아래는 원안(§4.20, Task 2 승인 시 확정) 승인 후 착수 전 사용자가 3라운드에 걸쳐 상세 정정한 최종 버전이다. 원안과의 핵심 차이 3가지: (1) `profiles.id`가 `auth.users.id`를 FK로 참조하므로 실제 Google OAuth 연결 전에는 `teachers`/`profiles` 행 자체가 존재할 수 없다 — `account_invites`와 동일하게 별도 staging 테이블(`teacher_workspace_provisioning`)에서 대기, (2) 운영 인증은 서비스 계정 키·장기 refresh token 없이 **Vercel OIDC → GCP Workload Identity Federation → 서비스 계정 impersonation → IAM Credentials `signJwt` → Domain-wide Delegation → Directory API**로 확정, (3) 7개 활성화 선행조건은 `linked` 하나로 뭉개지 않고 각각 별도 증거·시각을 남긴다. Task 7은 mock 기반 로컬 구현만으로 완료 처리하지 않는다 — 실제 WIF 연결·테스트 OU 계정 생성·재시도/정지/재활성화·OAuth 최초 로그인까지 실제 검증해야 완료다.
+
 **Files:**
+- Create: `supabase/migrations/20260905000000_r2_workspace_provisioning.sql`
+- Create: `lib/google-workspace.ts`(Directory API 클라이언트, 토큰 획득은 injectable — mock/실제 분리)
 - Create: `app/admin/workspace-actions.ts`
-- Create: `lib/google-workspace.ts`(Admin SDK Directory API 클라이언트)
-- Create: `supabase/migrations/20260831060000_r2_workspace_provisioning_state.sql`
+- Create: `app/auth/google/teacher-callback/route.ts`(또는 동등 경로) — OAuth 콜백 + 신원 연결
+- Modify: `app/login/page.tsx`(선생님 전용 "Google로 로그인" 진입점), `app/teacher/onboarding-actions.ts`/`TeacherHomeDashboard.tsx`(Calendly 자기 온보딩 제거)
 
-**배경**: §4.20. **이 태스크는 실제 Google Cloud/Workspace 리소스에 대고 실행된다** — 착수 전 별도로 알린다(Gate C와 동일한 수준의 실제 작업이므로).
+### 데이터 모델 (확정)
 
-### 선생님 활성화(`pending→active`) 선행조건 (확정)
+**`teacher_workspace_provisioning`**(신규 staging 테이블 — `teachers`/`profiles` 존재 이전 단계를 전담, `account_invites`와 동일 계열 패턴):
+- `id uuid pk`
+- `workspace_email text not null`(정규화 후 unique — 소문자·trim)
+- `personal_contact_email text not null`, `workspace_recovery_email text not null`, `personal_phone text`
+- `workspace_google_user_id text`(Directory API 생성 응답의 불변 고유 ID, **값이 있을 때만 unique** — partial unique index)
+- `status`(enum: `not_started|creating|created|first_login_pending|linked|suspended|retryable_failed|manual_review`)
+- `idempotency_key uuid not null unique`(최초 시도 시 고정, 재시도 시 재사용 — 새로 생성하지 않음)
+- `linked_teacher_id uuid references teachers(id)`(**값이 있을 때만 unique** — 한 provisioning 레코드는 teacher 하나에만 연결)
+- `created_by uuid references profiles(id) not null`(등록한 관리자)
+- `created_at timestamptz default now()`(= "관리자 기본정보 입력 완료" 증거 시각)
+- `workspace_created_at timestamptz`(= "Workspace 계정 발급" 증거 시각)
+- `first_login_at timestamptz`(= "선생님 최초 Google 로그인" 증거 시각)
+- `linked_at timestamptz`(= "ALTON 계정과 Google identity 연결" 증거 시각)
 
-관리자가 아래를 전부 확인해야 `active` 전환을 수행할 수 있다:
-1. 관리자가 선생님 기본 정보와 개인 이메일을 등록
-2. `@alton.education` Google Workspace 계정 발급 완료
-3. 선생님이 발급된 Workspace 계정으로 최초 로그인
-4. ALTON 인증 사용자와 사전 생성된 선생님 레코드 연결 완료
-5. 시급 설정 완료(R1 `has_valid_current_teacher_rate`)
-6. 필수 프로필·온보딩 정보 입력 완료
-7. 선생님 계약 확인 완료(계약 자동화 전에는 관리자가 수동 확인)
+**`teachers`에 추가**(전부 연결 성공 시점에만 채워짐): `workspace_email`, `workspace_google_user_id`, `personal_contact_email`, `workspace_recovery_email`, `personal_phone`, `onboarding_completed_at timestamptz`(= "필수 프로필·온보딩 정보 완료" 증거 시각, `school`/`bio`/`profiles.phone`이 모두 채워지는 순간 트리거로 자동 기록 — 수동 확인 없이 원본 데이터에서 파생).
 
-과목·학생 배정은 활성화 이후 절차이므로 선행조건에 포함하지 않는다.
+**`workspace_provisioning_events`**(감사 이력, INSERT-only): `id`, `teacher_workspace_provisioning_id`, `event_type`(`created|linked|creation_failed|retry_scheduled|suspended|reactivated|link_rejected|manual_review_required`), `detail text`(비밀·토큰·임시 비밀번호 절대 포함 금지 — 에러 메시지·상태값만), `created_at`, `created_by`(관리자 발생 이벤트만, 콜백發 이벤트는 null 허용).
 
-### 신규 데이터 필드 (확정)
+**7개 선행조건의 증거 매핑** (하나로 뭉개지 않는다):
+1. Workspace 계정 발급 → `teacher_workspace_provisioning.workspace_created_at`
+2. 최초 Google 로그인 → `teacher_workspace_provisioning.first_login_at`
+3. ALTON-Google identity 연결 → `teacher_workspace_provisioning.linked_at` (+ `teachers.workspace_google_user_id` 존재)
+4. 시급 설정 → 기존 `has_valid_current_teacher_rate()`(R1) — 신규 컬럼 불필요, `teacher_rate_history`가 이미 원본
+5. 필수 프로필·온보딩 완료 → `teachers.onboarding_completed_at`
+6. 계약 확인 → `teacher_contracts`에 `status='signed'` 행 존재(`signed_at`이 원본 증거)
+7. 관리자 기본정보 입력 완료 → `teacher_workspace_provisioning.created_at`
 
-- `personal_contact_email`(필수) — Workspace 계정 발급 전에 수집. 목적 2가지: (a) Google Workspace 복구 이메일, (b) ALTON 계정 발급/보안/운영 연락 알림.
-- `workspace_recovery_email`(필수, 기본값 `personal_contact_email`).
-- `personal_phone`(선택).
+`get_teacher_activation_checklist(p_teacher_id)` 함수가 위 7개를 각각의 boolean+증거 시각으로 반환 — 관리자 화면과 `transition_account_status()`가 **같은 함수를 공유**(조건 로직 이중 관리 금지). `transition_account_status()`는 이 7개가 전부 true일 때만 `teacher`의 `pending→active`를 허용(다른 전이는 이 검사와 무관 — 기존 `active↔suspended` 재활성화는 영향받지 않음).
 
-### 프로비저닝 흐름 (확정, 9단계)
+### 프로비저닝 흐름 + 상태 머신 (확정)
 
-1. 관리자가 ALTON에서 선생님 기본 정보를 등록
-2. ALTON에 `provisioning` 상태의 선생님 레코드 생성
-3. Google Admin SDK로 `@alton.education` 계정 생성
-4. Google 고유 사용자 ID·Workspace 이메일·ALTON 선생님 ID 연결
-5. 개인 이메일로 최초 설정 안내 발송
-6. 선생님이 발급된 Workspace 계정으로 Google 로그인
-7. 로그인 콜백에서 사전 등록된 계정인지 검증
-8. Supabase Auth 사용자와 기존 선생님 레코드 연결
-9. 관리자가 위 7가지 선행조건 확인 후 `pending→active` 전환
+1. 관리자가 `teacher_workspace_provisioning` 레코드 생성(`personal_contact_email`/`workspace_recovery_email`/의도한 `workspace_email` 입력) → `idempotency_key` 고정, `status='not_started'`→`'creating'`.
+2. Directory API `users.insert` 호출(WIF 경유). 성공 → `workspace_google_user_id` 기록, `status='created'`, `workspace_created_at=now()`, `created` 이벤트.
+3. 개인 이메일로 최초 설정 안내 발송 → `status='first_login_pending'`.
+4. 선생님이 **선생님 전용 로그인 화면의 "Google로 로그인"**으로 OAuth 진행 → 콜백에서 신원 검증(아래 §OAuth 보안) 통과 시: `auth.users`(Supabase가 생성)→`profiles(role='teacher')`→`teachers(status='pending')` 순으로 생성, `linked_teacher_id`/`linked_at`/`first_login_at` 기록, `status='linked'`, `linked` 이벤트. **이 시점에도 `teachers.status`는 반드시 `pending`** — OAuth 연결 자체는 활성화를 의미하지 않는다.
+5. 관리자가 `get_teacher_activation_checklist()`로 7개 전부 확인 후 `transition_account_status(..., 'active')`.
 
-### 보안·정합성 제약 (확정, 반드시 준수)
+**멱등성**: 재시도는 같은 `idempotency_key`를 재사용하고, Directory API 호출 전 반드시 기존 사용자 조회(이메일이 아니라 이 provisioning 레코드에 이미 기록된 `workspace_google_user_id`로 대조)로 이미 생성됐는지 확인 — 타임아웃 후 재시도가 이메일 검색만으로 "이미 있음"을 판단하지 않는다. unmanaged/충돌(409) 계정은 자동 병합하지 않고 `manual_review`. 생성 직후 전파 지연은 `retryable_failed` + backoff 재시도(영구 실패 아님).
 
-- **이메일 주소만 일치한다고 선생님 레코드를 자동 생성·연결하면 안 된다** — 사전 생성된 provisioning 레코드와 Google 고유 사용자 ID를 함께 검증(이메일 일치만으로는 스푸핑 방지 불가, R1/R2의 "임의 조회·자동 연결 금지" 원칙과 동일 계열).
-- 부분 실패·중복 생성 방지·재시도·취소/회수 지원 필요, 전 과정 감사 이력 필요.
-- 임시 비밀번호는 ALTON DB에 평문 저장 금지, 이메일로 평문 발송 금지.
+### OAuth 로그인 추가 (확정)
+
+- Supabase Auth Google 프로바이더 신규 추가, 선생님 전용 로그인 경로에서만 노출("Google로 로그인"), 학생·보호자·관리자 로그인 방식은 이 태스크로 영향받지 않는다.
+- **콜백에서 반드시 확인**(Google의 `hd` 도메인 클레임이나 이메일만으로 신뢰하지 않는다):
+  1. Google OAuth로 받은 이메일과 immutable Google user ID를 모두 추출.
+  2. `teacher_workspace_provisioning`에서 `workspace_google_user_id`와 `workspace_email`이 **둘 다** 일치하고 `status`가 연결 가능한 상태(`created`/`first_login_pending`)인 레코드를 조회.
+  3. 못 찾으면 **거부**: 방금 Supabase가 생성한 `auth.users` 행을 `admin.auth.admin.deleteUser()`로 즉시 삭제(고아 계정·고아 세션을 남기지 않는다), `link_rejected` 이벤트 기록, 로그인 실패로 안내.
+  4. 이미 다른 `linked_teacher_id`가 있는 레코드에 다른 auth id가 연결을 시도하면 거부(재로그인은 기존 연결과 auth id가 같을 때만 정상 통과).
+  5. 전부 통과해야 `profiles`/`teachers` 생성 + 연결 진행.
+- **오탐 방지 테스트 대상**(모두 실제 실행으로 확인): provisioning 레코드가 아예 없는 Google 계정 로그인 거부, 이메일만 같고 Google user ID가 다른 경우 거부, `@alton.education` 도메인이지만 발급 기록이 없는 계정 거부, 거부된 시도 후 `profiles`/`teachers`/orphan `auth.users` 전부 남지 않음, 기존 이메일·비밀번호 계정과 신규 OAuth 계정이 별개로 중복 생성되지 않음(레거시 선생님은애초에 provisioning 레코드가 없어 위 §3 규칙으로 자연히 거부됨).
+
+### 운영 인증 방식 — Vercel OIDC → GCP WIF (확정, 서비스 계정 키·장기 refresh token 금지)
+
+체인: **Vercel OIDC 토큰 → GCP Workload Identity Federation → 서비스 계정 impersonation → IAM Credentials `signJwt`(DWD `sub` claim) → OAuth 토큰 교환 → Directory API**.
+
+- 기존 DWD 대상 서비스 계정(Gate C `gate-c-automation@alton-integration-sandbox.iam.gserviceaccount.com`)의 Client ID에 `https://www.googleapis.com/auth/admin.directory.user` scope를 **추가** 등록해야 한다(Super Admin 작업, 아래 실행 전 체크리스트 참고).
+- 환경변수에는 **비밀이 아닌 식별자만**(GCP 프로젝트 ID, WIF provider 리소스명, 서비스 계정 이메일, 위임 관리자 이메일, 테스트 OU 경로) — 비밀키·토큰은 저장하지 않는다(WIF 자체가 키리스이므로 저장할 장기 비밀이 없는 것이 설계 목표).
+- **Preview 환경에서는 실제 Workspace 계정 생성을 차단**한다 — `lib/google-workspace.ts`의 실제 클라이언트 팩토리가 실행 환경을 확인해 Preview에서는 항상 mock/에러로 폴백. 실제 provisioning은 Production과 승인된 테스트 환경에서만 허용.
+- 초기 Sandbox 검증에서 위임 대상은 기존 `official@alton.education`을 그대로 쓸 수 있으나, **정식 오픈 전에는 사용자 관리 권한만 가진 전용 자동화 관리자 계정으로 분리**해야 한다 — `master-roadmap-v3.md` R12 보안 인수 조건으로 등록.
+- `lib/google-workspace.ts`는 토큰 획득 로직을 인터페이스로 분리해 로컬/CI 테스트는 전부 mock으로 수행하고, 위 체인은 실제 인프라 준비 완료 후 딱 한 번(그리고 주요 인프라 변경 시) 실제로 연결 검증한다.
+
+### 계정 생성·비밀번호 (확정)
+
+- 초기 비밀번호는 암호학적으로 안전한 무작위 값으로 생성, **메모리에서만 사용**하고 DB·이벤트 원장·서버 로그·오류 로그 어디에도 저장하지 않는다.
+- `changePasswordAtNextLogin=true`로 생성.
+- 초기 비밀번호를 평문 이메일로 발송하지 않고, 관리자에게도 반복 조회 기능을 제공하지 않는다 — 전달이 필요하면 생성 직후 1회만 표시 후 즉시 폐기.
+- 가능하면 등록된 recovery email 기반 Google 계정 복구·비밀번호 설정 흐름을 우선한다 — 최종 방식은 실제 Sandbox 계정으로 검증 후 확정.
+- `personal_contact_email`/`workspace_recovery_email`/`personal_phone`은 동일한 실제 이메일을 재사용할 수 있다. recovery 정보는 선생님 동의·확인 후 Workspace에 설정한다.
+
+### 선생님 중단·복귀 (확정 — `revoke`는 삭제가 아니라 `suspend`)
+
+- 중단 시: Workspace 사용자 `suspended=true` + Google 세션 sign-out, ALTON `teachers.status='inactive'`, 신규 수업·배정·자료 접근 차단, 과거 이력(수업·정산·시급·감사) 보존, `workspace_google_user_id`/ALTON 연결관계는 유지. 이벤트명 `suspended`.
+- 복귀 시: 기존 Workspace 계정·기존 teacher/profile UUID 재사용(신규 생성 금지), 본인 확인+계약/프로필/시급 등 활성화 조건 재검증, Workspace suspend 해제, 새 시급 이력·새 배정 생성, 과거 이력은 변경하지 않음. 이벤트명 `reactivated`.
+- Workspace 사용자 **실제 삭제는 이 태스크 범위 밖** — 별도 개인정보 삭제 정책·검토 없이는 수행하지 않는다.
+
+### 활성화 선행조건 재확인
+
+관리자가 아래 7개를 각각 증거 시각과 함께 확인해야 `active` 전환이 가능하다(§데이터 모델의 "7개 선행조건의 증거 매핑" 참고): (1) Workspace 계정 발급, (2) 최초 Google 로그인, (3) ALTON-Google identity 연결, (4) 유효한 현재 시급 이력, (5) 필수 프로필·온보딩 완료, (6) 계약 확인, (7) 관리자 기본정보 입력 완료. 과목·학생 배정은 활성화 이후 절차이므로 선행조건에 포함하지 않는다. 관리자 UI 체크 여부만으로 우회할 수 없다 — 최종 방어선은 DB(`transition_account_status()`)에 있다.
 
 ### 기존 Calendly 온보딩 처리 (확정)
 
-기존 Calendly 온보딩 UI/코드(`app/teacher/onboarding-actions.ts`, `TeacherHomeDashboard.tsx`)는 Task 2에서 자기 활성화만 제거했고 URL 저장 기능은 유지된 상태다. **이 태스크에서 완전히 제거한다** — 9단계 프로비저닝 흐름으로 대체.
+기존 Calendly 자기 온보딩(`app/teacher/onboarding-actions.ts`의 `submitCalendlyOnboarding()`, `TeacherHomeDashboard.tsx`의 관련 UI)을 이 태스크에서 완전히 제거한다. `teachers.calendly_scheduling_url` **컬럼 자체는 삭제하지 않는다** — 학생·보호자용 Calendly 예약 코드가 R6 전까지 이 컬럼을 계속 참조하기 때문이다. 실제 컬럼 삭제는 `master-roadmap-v3.md` R6에서 수행한다.
 
-- [ ] **Step 1**: `teachers`에 `workspace_email text`, `workspace_google_user_id text`(스푸핑 방지용 고유 ID), `workspace_provisioning_status(provisioning|created|linked|active_pending|failed|revoked)` 컬럼 + `personal_contact_email`(필수)/`workspace_recovery_email`(필수, 기본값 `personal_contact_email`)/`personal_phone`(선택) 컬럼 추가. 감사 이력 테이블(`workspace_provisioning_events` 또는 기존 `account_status_events`와 유사한 패턴) 추가 — 생성/연결/실패/재시도/취소 각 이벤트 기록.
-- [ ] **Step 2**: Directory API로 계정 생성/충돌 확인 로직(Gate C의 domain-wide-delegation 패턴 재사용 가능 여부 확인 — 그때 스크립트는 세션 스크래치패드에 있었고 앱에 병합되지 않았으므로 처음부터 앱 코드로 다시 만든다). 임시 비밀번호는 생성 즉시 안내 메일 발송 후 평문을 어디에도 남기지 않는 방식으로 처리(예: 발송 직후 폐기, DB에는 저장하지 않음).
-- [ ] **Step 3**: 관리자 등록 → provisioning 레코드 생성 → Workspace 계정 생성 → Google 고유 사용자 ID 연결까지의 9단계 흐름을 `app/admin/workspace-actions.ts`로 구현. 로그인 콜백(단계 7)에서 이메일이 아니라 **사전 생성된 provisioning 레코드 + Google 고유 사용자 ID**로 검증 후 Supabase Auth 사용자와 연결.
-- [ ] **Step 4**: 부분 실패 재처리·중복 생성 방지·취소/회수 — `workspace_provisioning_status='failed'`인 선생님을 관리자 화면에서 재시도할 수 있는 버튼 제공, 이미 생성된 계정에 재시도 시 중복 생성 대신 기존 계정 상태 확인 후 이어서 진행.
-- [ ] **Step 5**: 관리자 활성화 화면에 위 7가지 선행조건 체크리스트 표시, 전부 충족 확인 후에만 `transition_account_status(..., 'active')` 호출 가능하도록 UI 가드(DB 트리거는 이미 R2에서 관리자 권한만 확인하므로, 7가지 선행조건 확인은 앱 레벨 — 최종 방어선이 필요하면 이 스텝에서 판단).
-- [ ] **Step 6**: 기존 Calendly 온보딩 UI/코드 제거(`app/teacher/onboarding-actions.ts`의 `submitCalendlyOnboarding()`, `TeacherHomeDashboard.tsx`의 관련 UI). `teachers.calendly_scheduling_url` **컬럼 자체는 이 태스크에서 삭제하지 않는다** — 데이터를 보존할 가치가 있어서가 아니라(개발·테스트 데이터, `product-architecture-v3.md` §4.13 정정 참고), 학생·보호자용 Calendly 예약 코드가 R6 전까지 이 컬럼을 계속 참조하기 때문이다. 실제 컬럼 삭제는 `master-roadmap-v3.md` R6 "레거시 제거 — Calendly·Zoom 완전 삭제"에서 수행한다.
+### 구현 순서
 
-**DoD 체크**: 실제 Sandbox(또는 운영 도메인의 테스트 계정)로 생성 성공/충돌/실패 각 케이스 실제 실행 검증, 재처리·취소/회수 흐름 실제 실행 검증, 이메일 일치만으로는 연결이 안 되는지(스푸핑 방지) 실제 실행 검증, 임시 비밀번호가 DB/로그에 평문으로 남지 않는지 코드 검토+실행 검증.
+- [ ] **Step 1**: 마이그레이션(`teacher_workspace_provisioning`, `workspace_provisioning_events`, `teachers` 컬럼 추가, `onboarding_completed_at` 자동 트리거, `get_teacher_activation_checklist()`, `transition_account_status()` teacher 7조건 결합 — `pending→active` 전이에만 적용해 기존 active/suspended 선생님은 영향받지 않는다).
+- [ ] **Step 2**: `lib/google-workspace.ts` — 토큰 획득 인터페이스(mock/실제 분리), Directory API 클라이언트(create/get/suspend/reactivate), Preview 환경 실제 호출 차단 가드.
+- [ ] **Step 3**: `app/admin/workspace-actions.ts` — provisioning 레코드 생성(멱등키 고정), 생성 호출·이벤트 기록, 재시도(같은 idempotency key로 기존 상태 우선 확인), 충돌/전파지연 분기, suspend/reactivate.
+- [ ] **Step 4**: OAuth 콜백 라우트 — 신원 검증 5단계, 거부 시 orphan auth.users 삭제, 통과 시 `profiles`→`teachers`(반드시 `pending`) 생성+연결. 선생님 전용 로그인 진입점 UI.
+- [ ] **Step 5**: 관리자 화면에 7개 선행조건 개별 체크리스트 표시(`get_teacher_activation_checklist()` 사용).
+- [ ] **Step 6**: 기존 Calendly 자기 온보딩 제거.
+
+**DoD 체크 — Task 7은 mock만으로 완료 처리하지 않는다**:
+- 로컬(mock): 멱등성(재시도 시 중복 생성 없음), 충돌/전파지연/manual_review 분기, OAuth 오탐 방지 5종 전부, orphan auth.users 미잔존, `teachers.status`가 연결 직후 반드시 `pending`, 7개 선행조건 중 하나라도 결여 시 `active` 전환 차단(개별 조건별로 각각 테스트), suspend/reactivate 상태 전이, 비밀번호가 DB/로그/감사이벤트 어디에도 없음, Calendly 자기 활성화 경로 0건, 기존 학생·보호자 Calendly 예약 회귀 없음.
+- 실제 인프라(순서대로, 각 단계 전 정확한 사전조건 체크리스트를 먼저 제출): (a) DWD Client ID에 `admin.directory.user` scope 추가 확인, (b) Vercel OIDC ↔ GCP WIF 실제 연결 검증, (c) 테스트 OU에서 실제 Workspace 계정 1건 생성(고정된 전용 계정만 사용, 반복 생성 금지), (d) 실제 중복 생성 충돌·실패 후 재시도·정지·재활성화 검증, (e) 실제 Google OAuth 최초 로그인 + immutable Google user ID 연결 검증(`teacher1@alton.education`/`teacher2@alton.education` 기존 계정으로 조회·중복·연결·anti-spoofing, 신규 계정 생성 성공은 전용 테스트 계정 1개로).
 
 ---
 
