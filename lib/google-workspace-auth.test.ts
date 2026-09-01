@@ -2,7 +2,9 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const ORIGINAL_ENV = { ...process.env };
 
-type FromJsonConfig = { subject_token_supplier: { getSubjectToken: () => Promise<string> } };
+type FromJsonConfig = {
+  subject_token_supplier: { getSubjectToken: (context?: unknown) => Promise<string> };
+};
 
 const getVercelOidcTokenMock = vi.fn((_opts?: unknown) => Promise.resolve("fake-oidc-token"));
 vi.mock("@vercel/oidc", () => ({
@@ -75,13 +77,23 @@ describe("google-workspace-auth", () => {
         })
       );
 
-      // subject_token_supplier가 실제로 getVercelOidcToken을 호출하는지 확인 —
-      // 인자 없이 그대로 호출해야 한다(Allowed audiences 모드는 Vercel의
-      // 기본 aud를 그대로 쓴다 — GOOGLE_WORKLOAD_IDENTITY_AUDIENCE를 커스텀
-      // audience로 억지로 넘기면 Default audience 모드용 aud가 되어 GCP
-      // Provider의 Allowed audiences 설정과 불일치하게 된다).
+      // 실측 회귀 테스트(2026-09-01): google-auth-library는
+      // getSubjectToken(context)를 context 인자와 함께 호출한다 — 이
+      // context에는 GCP WIF provider 리소스명이 담긴 자체 audience 필드가
+      // 있다(이 필드는 getVercelOidcToken()의 커스텀 Vercel 토큰 aud
+      // 재발급 옵션과 이름만 같을 뿐 무관하다). 이 context를
+      // getVercelOidcToken에 그대로 전달하면 Vercel 토큰의 aud가 GCP
+      // 리소스명으로 재발급되어 Allowed audiences 모드의 GCP Provider가
+      // 거부한다(운영에서 실제로 발생: "The audience in ID Token [...]
+      // does not match the expected audience"). 반드시 context를 무시하고
+      // 인자 없이 호출해야 한다 — 이전 테스트는 인자 없이 직접 호출해서
+      // 이 문제를 잡지 못했다.
       const config = fromJSONMock.mock.calls[0][0];
-      await config.subject_token_supplier.getSubjectToken();
+      await config.subject_token_supplier.getSubjectToken({
+        audience: process.env.GOOGLE_WORKLOAD_IDENTITY_AUDIENCE,
+        subjectTokenType: "urn:ietf:params:oauth:token-type:jwt",
+        transporter: {},
+      });
       expect(getVercelOidcTokenMock).toHaveBeenCalledWith(undefined);
     });
 

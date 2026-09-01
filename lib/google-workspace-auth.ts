@@ -74,8 +74,17 @@ function getExternalAccountClient(): BaseExternalAccountClient {
     subject_token_type: "urn:ietf:params:oauth:token-type:jwt",
     token_url: "https://sts.googleapis.com/v1/token",
     service_account_impersonation_url: `https://iamcredentials.googleapis.com/v1/projects/-/serviceAccounts/${serviceAccountEmail}:generateAccessToken`,
+    // google-auth-library는 getSubjectToken(context)를 context 인자와 함께
+    // 호출한다 — 이 context.audience는 GCP WIF provider 리소스명(위 audience
+    // 필드와 같은 값)으로, getVercelOidcToken()의 자체 옵션(options.audience,
+    // 커스텀 Vercel 토큰 aud 재발급용)과 이름만 같은 별개 개념이다.
+    // getVercelOidcToken을 그대로 넘기면 이 context가 그대로 전달돼
+    // options.audience로 오인되어 Vercel 토큰의 aud가 GCP 리소스명으로
+    // 재발급되고, Allowed audiences 모드의 GCP Provider가 이를 거부한다
+    // (실측: "The audience in ID Token [...] does not match the expected
+    // audience"). 반드시 인자 없이 호출해 Vercel 기본 aud를 그대로 쓴다.
     subject_token_supplier: {
-      getSubjectToken: getVercelOidcToken,
+      getSubjectToken: () => getVercelOidcToken(),
     },
   });
   if (!client) {
