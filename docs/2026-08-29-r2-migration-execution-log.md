@@ -726,6 +726,18 @@ Task 2 승인 시 사용자가 함께 확정한 후속 Task의 원본 요구사�
 
 **정리**: `teacher_workspace_provisioning` 2건(teacher1/teacher2), 연결 이벤트 6건, Round A에서 생성된 `profiles`/`teachers`/`auth.users`(teacher1 fixture) 1세트 전부 FK 순서(`workspace_provisioning_events`→`teacher_workspace_provisioning`→`teachers`→`profiles`→`auth.users`)대로 삭제, 최종 `profiles=9, auth.users=9, teacher_workspace_provisioning=0, workspace_provisioning_events=0`으로 시나리오 시작 전 baseline과 정확히 일치 확인. `app/auth/teacher-callback/route.ts`는 git diff 결과 커밋된 상태와 완전히 동일(임시 진단 로그 완전 제거 확인). `npx tsc --noEmit` 클린, 관련 vitest 전체 통과.
 
+### Task 7 — 첫 R2 앱 코드 배포 발견·실행 (2026-09-01)
+
+콘솔 Step 9 완료 후 read-only preflight를 실제 호출했더니 `404 Not Found`가 나왔다. 원인 조사 결과 **`origin/main`(GitHub `officialalton/alton`, Vercel `alton` 프로젝트가 추적하는 저장소)이 R2 전체 착수 이전 커밋(`8918594`)에 머물러 있었다** — Task 2~7(계정 상태 전환, 초대, 병합, 13세 미만 동의, Workspace 프로비저닝) 전부가 로컬 git에는 커밋됐지만 한 번도 GitHub에 push된 적이 없었다. 원격 Supabase DB는 태스크마다 재검증하며 반영해왔지만, **앱 코드 자체는 이번이 R2의 첫 배포**다. "Production 재배포"는 기존 빌드를 재배포할 뿐 새 커밋을 가져오지 않으므로 그동안 관측되지 않았다.
+
+**push 전 상태 기록**:
+- 로컬 HEAD: `31c1fb60ae757cf94bb5c0e2a660da9b44268a61`
+- 기존 origin/main: `8918594135e008bb23a56ac98733ad87a95ee8be`
+- push 대상 범위: `origin/main..HEAD`, 37개 커밋(가장 오래된 `5590be5`~가장 최근 `31c1fb6`, R2 Task 2~7 전체 + 그 이전 목업 갭 분석 문서 커밋들)
+- `git log HEAD..origin/main` 결과 없음 + `git merge-base HEAD origin/main` = `origin/main`과 정확히 일치 → 순수 fast-forward, 충돌·분기 없음 확인
+- push 직전 최종 확인: `supabase/`, `app/`, `lib/`, `e2e/`, `package.json`, `package-lock.json`, `.env.example` 전부 `git status` 변경 없음(누락된 필수 코드·마이그레이션 없음). 미추적/미커밋 항목은 이 세션 이전부터 있던 PM 문서 초안뿐(범위 밖, 원래부터 건드리지 않음).
+- 사용자 승인: "R2 Tasks 2~7 전체 37개 커밋을 main에 한 번에 올리는 것으로 승인합니다", force push 금지·일반 fast-forward만 명시.
+
 ### 남은 작업 (사용자 5단계 계획 기준, 2026-09-01 갱신)
 
 1. ~~DB 마이그레이션 적용 및 재검증~~ — 완료(위 절).
