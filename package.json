@@ -2,6 +2,9 @@
   "name": "alton",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -16,6 +19,8 @@
     "@anthropic-ai/sdk": "^0.122.0",
     "@supabase/ssr": "^0.12.5",
     "@supabase/supabase-js": "^2.112.4",
+    "@vercel/oidc": "^3.8.5",
+    "google-auth-library": "^11.0.2",
     "next": "16.3.3",
     "nodemailer": "^9.0.6",
     "react": "19.2.8",

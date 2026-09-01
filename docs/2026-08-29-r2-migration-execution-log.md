@@ -670,6 +670,30 @@ Task 2 승인 시 사용자가 함께 확정한 후속 Task의 원본 요구사�
 
 **결론**: 재검증 항목 전부 통과. 실사용자 데이터 손상·의도치 않은 상태 변경 없음, 기존 로그인·관리자 상태 전환 회귀 없음. **DB 마이그레이션 단계만 완료** — Task 7 자체는 계속 "로컬 구현 완료, 실제 인프라 검증 대기" 상태로 유지한다.
 
+### Task 7 — 인증 구현 교체 (2026-09-05, 콘솔 설정 착수 전 코드 선행 교체)
+
+사용자가 인프라 체크리스트 검토 중 인증 구현 자체의 정확성을 재점검하도록 요청했다. Vercel 공식 GCP OIDC 문서(`https://vercel.com/docs/oidc/gcp`)를 실제로 확인한 결과, OIDC→WIF→서비스 계정 impersonation 구간은 `@vercel/oidc`의 `getVercelOidcToken()` + `google-auth-library`의 `ExternalAccountClient`(`subject_token_supplier`/`service_account_impersonation_url`)를 쓰도록 공식 권장하고 있었다 — 이전에 raw fetch로 손수 구현한 STS 토큰 교환 코드는 이 공식 경로로 완전히 교체했다(fallback으로 남기지 않음, 같은 보안 경로 두 개를 유지하는 비용이 더 크다는 판단).
+
+**signJwt 호출 주체 분석(교체 전 확인)**: 현재 코드 흐름은 (1) WIF 원리금이 `generateAccessToken`으로 `gate-c-automation@...`를 impersonation → (2) 그 impersonated 토큰으로 **`gate-c-automation@...`가 자기 자신을 대상으로** `signJwt`를 호출. 즉 signJwt의 호출 주체와 대상이 동일한 서비스 계정이다(self-referential). 이에 따라 IAM 권한도 2단계로 분리 확정: (a) Vercel Production principal(정확한 team/project/environment로 제한, Preview는 아예 바인딩하지 않음) → `gate-c-automation@...`에 `roles/iam.workloadIdentityUser`, (b) `gate-c-automation@...` → 자기 자신에 `iam.serviceAccounts.signJwt`만 포함한 최소 custom role(전체 Token Creator 번들 아님).
+
+**변경 파일**:
+- `lib/google-workspace-auth.ts`(신규) — 인증 체인 전담. `getImpersonatedAccessToken()`(ExternalAccountClient 기반, google-auth-library가 내부적으로 만료 임박 갱신), `getDirectoryApiAccessToken()`(signJwt+DWD 토큰 교환, `lib/docusign.ts`와 동일한 모듈 스코프 만료-체크 캐싱 패턴 — 같은 실행 환경에서만 유효, 외부 저장소 없음). Preview 환경 차단 가드 포함. 에러 메시지에 Google 응답 본문을 절대 포함하지 않는다(토큰 원문 유출 경로 원천 차단).
+- `lib/google-workspace-directory-readonly.ts`(신규) — Directory API **읽기 전용**(GET만): `getWorkspaceUserByEmail`, `getWorkspaceUserByGoogleId`, `listWorkspaceUsersInOrgUnit`. 별도 게이트 `WORKSPACE_PREFLIGHT_ALLOW_REAL_READS`(쓰기 플래그와 독립) + Preview 차단. 쓰기 함수를 아예 import하지 않아 구조적으로 쓰기가 불가능하다(같은 함수에서 boolean 하나로 read/write를 가르지 않는다는 요구사항 반영).
+- `lib/google-workspace.ts`(재작성, 쓰기 전용) — `createWorkspaceUser`/`suspendWorkspaceUser`/`reactivateWorkspaceUser`만 남기고 옛 인증 체인 코드는 전부 제거, `lib/google-workspace-auth.ts`의 `getDirectoryApiAccessToken()`을 가져다 쓴다. 게이트는 `WORKSPACE_PROVISIONING_ALLOW_REAL_CALLS`(읽기 플래그로는 절대 열리지 않음).
+- `app/api/admin/workspace-preflight/route.ts`(신규) — 읽기 전용 preflight. 관리자 UI 버튼 없음, 배포 시 자동 실행 없음 — 관리자 세션으로 직접 호출하는 운영 점검 전용 경로. `lib/google-workspace-directory-readonly.ts`만 import(쓰기 모듈은 import 자체가 불가능한 구조). 응답에는 토큰 원문을 전혀 포함하지 않고 단계별 성공/실패, Vercel 환경, 대상 GCP 프로젝트/서비스 계정/delegated admin 이메일, 테스트 OU의 현재 계정 baseline 스냅샷(사후 비교용), 타겟 이메일(`teacher1@alton.education` 등) 사전 존재 여부, 실행 시각, 오류 메시지(응답 본문 제외)만 담는다.
+- `package.json`/`package-lock.json` — `@vercel/oidc@3.8.5`, `google-auth-library@11.0.2` 추가(둘 다 Apache-2.0, 라이선스 충돌 없음). `google-auth-library`가 Node `>=22`를 요구해 `engines.node` 필드를 명시적으로 추가.
+- `.env.example` — 신규 비밀 아님 식별자 6개 문서화(`GOOGLE_WORKLOAD_IDENTITY_AUDIENCE`, `GOOGLE_WORKSPACE_SERVICE_ACCOUNT_EMAIL`, `GOOGLE_WORKSPACE_DELEGATED_ADMIN_EMAIL`, `WORKSPACE_PROVISIONING_ALLOW_REAL_CALLS`, `WORKSPACE_PREFLIGHT_ALLOW_REAL_READS`).
+
+**최종 인증 호출 흐름**: `getVercelOidcToken()`(Vercel OIDC 토큰) → `ExternalAccountClient`가 내부적으로 STS 교환+`generateAccessToken` 수행(impersonation, cloud-platform 범위) → `signDelegatedAdminJwt()`(`gate-c-automation@...`가 자기 자신 대상 `signJwt` 호출, DWD `sub`=delegated admin claim) → OAuth 토큰 교환(`grant_type=jwt-bearer`) → Directory API 범위 최종 토큰.
+
+**read/write 경계**: 파일 단위 — `google-workspace-directory-readonly.ts`(GET만, `WORKSPACE_PREFLIGHT_ALLOW_REAL_READS` OR `WORKSPACE_PROVISIONING_ALLOW_REAL_CALLS`) vs `google-workspace.ts`(POST/PATCH만, `WORKSPACE_PROVISIONING_ALLOW_REAL_CALLS`만). 각 파일에 "반대쪽 함수를 export하지 않는다"는 unit test로 구조적 분리를 실제로 확인했다(같은 함수·같은 파일에서 플래그 하나로 read/write를 가르는 패턴이 아님).
+
+**필요한 환경변수 최종 목록**: `GOOGLE_WORKLOAD_IDENTITY_AUDIENCE`(WIF provider 리소스명, project number 사용), `GOOGLE_WORKSPACE_SERVICE_ACCOUNT_EMAIL`(`gate-c-automation@alton-integration-sandbox.iam.gserviceaccount.com`), `GOOGLE_WORKSPACE_DELEGATED_ADMIN_EMAIL`(`official@alton.education`, 1회 테스트용), `WORKSPACE_PROVISIONING_ALLOW_REAL_CALLS`(기본 `false`, Production 승인 후에만 `true`), `WORKSPACE_PREFLIGHT_ALLOW_REAL_READS`(기본 `false`, preflight 단계에서만 `true`) — 전부 비밀 아님, Vercel Production 환경변수로 설정. Google OAuth Client Secret은 Supabase Auth 프로바이더 설정에만 저장하며 이 목록에 포함하지 않는다.
+
+**로컬 검증**: `npx tsc --noEmit` 클린, `npx vitest run` **92개 파일 403개 테스트 전부 통과**(신규: `lib/google-workspace-auth.test.ts` 9건, `lib/google-workspace-directory-readonly.test.ts` 5건, `lib/google-workspace.test.ts` 갱신 6건, `app/api/admin/workspace-preflight/route.test.ts` 4건 — Preview 차단, 옛 STS fetch 코드가 실제로 사라졌는지(fetch 미호출로 확인), 토큰 원문이 에러/응답 어디에도 없는지, read/write export 경계 전부 실제 실행으로 확인). `npm run build` 정상 완료(신규 라우트 `/api/admin/workspace-preflight`, `/auth/teacher-callback` 정상 컴파일, Node 런타임 — Edge 아님).
+
+**아직 하지 않은 것**: 콘솔 설정(WIF 풀·프로바이더·IAM 바인딩·OAuth Client 등)과 실제 GCP/Workspace 호출은 전혀 시작하지 않았다 — 사용자가 이 보고를 확인한 뒤 진행 승인.
+
 ### 남은 작업 (사용자 5단계 계획 기준)
 
 1. ~~DB 마이그레이션 적용 및 재검증~~ — 완료(위 절).
