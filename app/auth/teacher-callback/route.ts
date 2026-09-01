@@ -1,3 +1,4 @@
+import { createHash } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
 import { createAdminClient } from "@/lib/supabase-admin";
@@ -38,13 +39,13 @@ export async function GET(request: NextRequest) {
   const match = matches?.[0];
 
   if (findError || !match) {
-    // google_user_id를 사유에 포함한다 — 이메일만으로는 "어떤 요청이
-    // 거부됐는지" 사후에 구분할 수 없고, 이 필드는 비밀이 아닌 불투명
-    // 식별자라 감사 기록에 남겨도 안전하다.
+    // 이메일·google_user_id 원문은 감사 기록에 남기지 않는다 — 비가역
+    // 해시만 남겨 "같은 시도가 반복되는지" 사후 구분은 가능하되 원문은
+    // 복원할 수 없게 한다.
     await rejectAndCleanup(
       supabase,
       authUserId,
-      `사전 등록되지 않은 Google 계정: ${email} (google_user_id=${googleUserId})`
+      `사전 등록되지 않은 Google 계정 (email_hash=${hashIdentifier(email)}, google_id_hash=${hashIdentifier(googleUserId)})`
     );
     return NextResponse.redirect(loginError(siteUrl, "등록되지 않은 계정입니다. 관리자에게 문의해주세요."));
   }
@@ -80,6 +81,10 @@ function extractGoogleUserId(user: {
 
 function loginError(siteUrl: string, message: string): string {
   return `${siteUrl}/login?error=${encodeURIComponent(message)}`;
+}
+
+function hashIdentifier(value: string): string {
+  return createHash("sha256").update(value).digest("hex");
 }
 
 async function rejectAndCleanup(

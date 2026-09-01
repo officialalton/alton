@@ -70,8 +70,12 @@ describe("GET /auth/teacher-callback", () => {
 
     expect(rpcMock).toHaveBeenCalledWith(
       "log_workspace_link_rejected",
-      expect.objectContaining({ p_reason: expect.stringContaining("newteacher@alton.education") })
+      expect.objectContaining({ p_reason: expect.stringMatching(/email_hash=[0-9a-f]{64}/) })
     );
+    // 이메일·google_user_id 원문은 감사 사유 어디에도 없어야 한다.
+    const rejectCall = rpcMock.mock.calls.find(([fn]) => fn === "log_workspace_link_rejected");
+    expect(rejectCall?.[1].p_reason).not.toContain("newteacher@alton.education");
+    expect(rejectCall?.[1].p_reason).not.toContain("google-uid-123");
     expect(deleteUserMock).toHaveBeenCalledWith("auth-user-1");
     expect(res.headers.get("location")).toContain("/login?error=");
     expect(res.headers.get("location")).not.toContain("/teacher");
