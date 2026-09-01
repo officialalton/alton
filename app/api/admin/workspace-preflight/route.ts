@@ -67,14 +67,37 @@ export async function POST() {
     );
   }
 
+  // begin_workspace_preflight_run()의 쿨다운 위반은 전용 SQLSTATE(ALT01,
+  // supabase/migrations/20260907000000_r2_workspace_preflight_permissions_fix.sql)로
+  // 표시된다 — 이 코드일 때만 429(반복 호출)로 응답하고, RPC 자체가
+  // 없거나(스키마 캐시 문제) DB 오류인 경우는 인프라 오류이므로 500으로
+  // 구분한다. 두 경우 모두 이 시점까지는 실제 Google API를 전혀 호출하지
+  // 않았다. 원문 오류 메시지(Postgres 오류 텍스트)는 토큰·PII를 담지
+  // 않지만 내부 스키마 정보를 노출할 수 있으므로 서버 로그에만 남기고
+  // 관리자 응답에는 안전한 고정 문구와 단계 이름만 내려준다.
   let runId: string;
   try {
     const { data, error } = await supabase.rpc("begin_workspace_preflight_run");
-    if (error) throw new Error(error.message);
+    if (error) {
+      if (error.code === "ALT01") {
+        return NextResponse.json(
+          { error: "preflight는 300초에 한 번만 실행할 수 있습니다.", stage: "begin_cooldown" },
+          { status: 429 }
+        );
+      }
+      console.error("[workspace-preflight] begin_workspace_preflight_run failed", error.code, error.message);
+      return NextResponse.json(
+        { error: "preflight 시작에 실패했습니다.", stage: "begin" },
+        { status: 500 }
+      );
+    }
     runId = data as string;
   } catch (e) {
-    // 쿨다운 위반 등 — 이 시점까지는 실제 Google API를 전혀 호출하지 않았다.
-    return NextResponse.json({ error: errorMessage(e) }, { status: 429 });
+    console.error("[workspace-preflight] begin_workspace_preflight_run threw", e);
+    return NextResponse.json(
+      { error: "preflight 시작에 실패했습니다.", stage: "begin" },
+      { status: 500 }
+    );
   }
 
   const startedAt = new Date().toISOString();

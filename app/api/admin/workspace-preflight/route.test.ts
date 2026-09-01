@@ -72,17 +72,47 @@ describe("POST /api/admin/workspace-preflight", () => {
     expect(rpcMock).not.toHaveBeenCalled();
   });
 
-  it("쿨다운 위반(begin RPC 실패) 시 429를 반환하고 실제 Google 호출을 전혀 하지 않는다", async () => {
+  it("쿨다운 위반(ALT01 SQLSTATE) 시에만 429를 반환하고 실제 Google 호출을 전혀 하지 않는다", async () => {
     setProductionAndReadsAllowed();
     rpcMock.mockImplementation((fn: string) => {
       if (fn === "begin_workspace_preflight_run") {
-        return Promise.resolve({ data: null, error: { message: "preflight는 300초에 한 번만 실행할 수 있습니다." } });
+        return Promise.resolve({
+          data: null,
+          error: { code: "ALT01", message: "preflight는 300초에 한 번만 실행할 수 있습니다(마지막 실행: ...)." },
+        });
       }
       throw new Error(`unexpected rpc ${fn}`);
     });
     const { POST } = await import("./route");
     const res = await POST();
+    const body = await res.json();
     expect(res.status).toBe(429);
+    expect(body.stage).toBe("begin_cooldown");
+    expect(getImpersonatedAccessTokenMock).not.toHaveBeenCalled();
+  });
+
+  it("RPC 누락·스키마 캐시 등 인프라 오류는 429가 아니라 500을 반환하고 원문 DB 오류를 노출하지 않는다", async () => {
+    setProductionAndReadsAllowed();
+    rpcMock.mockImplementation((fn: string) => {
+      if (fn === "begin_workspace_preflight_run") {
+        return Promise.resolve({
+          data: null,
+          error: {
+            code: "PGRST202",
+            message:
+              "Could not find the function public.begin_workspace_preflight_run without parameters in the schema cache",
+          },
+        });
+      }
+      throw new Error(`unexpected rpc ${fn}`);
+    });
+    const { POST } = await import("./route");
+    const res = await POST();
+    const body = await res.json();
+    expect(res.status).toBe(500);
+    expect(body.stage).toBe("begin");
+    expect(body.error).not.toContain("schema cache");
+    expect(body.error).not.toContain("PGRST202");
     expect(getImpersonatedAccessTokenMock).not.toHaveBeenCalled();
   });
 

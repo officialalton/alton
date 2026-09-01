@@ -772,3 +772,62 @@ Task 2 승인 시 사용자가 함께 확정한 후속 Task의 원본 요구사�
 4. 테스트 OU에서 실제 Workspace 계정 1건 생성 + 전체 E2E 검증(WIF 연결, 충돌·재시도·정지·재활성화, 실제 OAuth 최초 로그인 + immutable Google user ID 연결 — `teacher1@alton.education`/`teacher2@alton.education` 기존 계정으로 조회·anti-spoofing 확인은 로컬에서 이미 실증했으므로 운영에서는 반복 없이 최소 확인만, 신규 생성은 `teacher-provisioning-test@alton.education` 전용 계정 1개로).
 5. 4번 검증 성공 후에만 Task 7 완료 처리(사용자 확정: "Task 7은 mock 구현만으로 완료 처리하지 않는다").
 6. 정식 오픈 전: 위임 대상을 `official@alton.education`에서 사용자 관리 권한만 가진 전용 자동화 관리자 계정으로 분리(보안 인수 조건, `master-roadmap-v3.md` R12에 등록 완료).
+
+### 2026-09-01 — 1차 read-only preflight 실패 원인 확인 + 누락 마이그레이션 적용
+
+Production 도메인·OAuth·환경변수 설정(Step 8 운영 절반) 완료 후 승인받은 첫 read-only preflight(`WORKSPACE_PREFLIGHT_ALLOW_REAL_READS=true` 1회 한정) 실행 결과, `POST /api/admin/workspace-preflight`가 `429`와 함께 다음 오류를 반환:
+
+```
+Could not find the function public.begin_workspace_preflight_run without parameters in the schema cache
+```
+
+**원인**: `20260906000000_r2_workspace_preflight_audit.sql`(`workspace_preflight_runs` 테이블 + `begin_workspace_preflight_run()`/`finish_workspace_preflight_run()`)이 원격 개발 DB(Production이 연결하는 프로젝트, `worpsqwqgnspddnrtnvq.supabase.co`)에 적용되지 않은 상태였다. 이 마이그레이션은 세션 초반 사용자 지시("아직 push하지 마세요")로 보류된 뒤 재검토 없이 넘어갔던 것 — `20260905000000_r2_workspace_provisioning.sql`(Task 7의 나머지 전부)은 이미 원격에 적용되어 있었다.
+
+**로그 기반 확인**: `app/api/admin/workspace-preflight/route.ts`에서 `begin_workspace_preflight_run()` RPC 호출(70~78행)은 관리자·Production·read flag 확인 직후, `preview_check` 스테이지를 기록하기도 전에 실행된다. 이 호출 자체가 예외를 던졌으므로 **WIF(impersonation)·signJwt/DWD 교환·Directory API 호출 중 어느 것도 시작되지 않았다** — 실제 Google 인프라는 이번 실패에 전혀 관여하지 않았다. (참고: 응답 상태 `429`는 이 라우트가 "begin 실패=쿨다운 위반"으로 가정하고 일괄 매핑한 코드상의 부정확함이며, 실제 원인은 스키마 캐시에 함수가 없는 인프라 문제였다 — 추후 별도로 상태 코드 구분 개선 필요, 이번 작업 범위 밖으로 남겨둠.)
+
+**사용자 승인 후 처리(원격 개발 DB, 이 마이그레이션 1건만)**:
+
+1. `npx supabase migration list --linked`로 로컬·원격 비교 — `20260906000000` 하나만 원격에 없음을 확인, 이 외 전부 일치.
+2. 적용 전 기존 테이블 스냅샷: `profiles=6`, `teachers=3`, `teacher_workspace_provisioning=0`, `workspace_provisioning_events=1`.
+3. `npx supabase db push --linked` — 응답에 `migrations: ["20260906000000_r2_workspace_preflight_audit.sql"]` 1건만 포함, 정상 적용.
+4. 재실행한 `migration list`에서 로컬·원격 전부 일치 확인.
+5. `to_regclass`/`pg_proc` 조회로 `workspace_preflight_runs` 테이블과 두 함수가 스키마에 실존함을 확인(PostgREST 스키마 캐시 문제였던 만큼, 다음 실제 preflight 재시도에서 이번엔 이 RPC를 찾을 것으로 예상).
+6. 실제 관리자 프로필 1건(`role='admin'`)과 비관리자 프로필 1건으로 함수 동작을 직접 SQL 레벨에서 검증(Google API·앱 라우트는 전혀 호출하지 않음):
+   - 비관리자로 `begin_workspace_preflight_run()` 호출 → 예상대로 `관리자만 preflight를 실행할 수 있습니다.` 예외, insert 없음.
+   - 관리자로 첫 호출 → 성공, run id 발급.
+   - 같은 관리자가 즉시 재호출 → 예상대로 `preflight는 300초에 한 번만 실행할 수 있습니다` 쿨다운 예외.
+   - 같은 관리자가 발급받은 run id로 `finish_workspace_preflight_run(...)` 호출 → 성공, `stages`/`environment` 등 정상 기록 확인.
+   - 검증용으로 생성된 이 1건의 `workspace_preflight_runs` 행은 검증 직후 삭제(쿨다운 시계에 잔여 영향 없음).
+7. `information_schema.role_routine_grants`로 EXECUTE 권한 확인 — `authenticated` 외에 `anon`도 EXECUTE 권한을 갖고 있음을 발견. 원인 확인 결과 이는 이 마이그레이션만의 문제가 아니라 **프로젝트 전체에 적용된 Supabase 기본 권한 규칙**(`pg_default_acl`에 `postgres`/`supabase_admin`이 `public` 스키마의 새 함수에 대해 `anon`/`authenticated`/`service_role` 모두에게 기본 `EXECUTE`를 부여하도록 설정되어 있음)이며, 같은 R2 Task 7의 기존 함수들(`link_teacher_workspace_identity`, `record_workspace_created`, `suspend_teacher_workspace` 등)도 전부 동일하게 `anon` EXECUTE 권한을 갖고 있다 — 즉 이 프로젝트는 GRANT 자체가 아니라 각 함수 본문의 `is_admin()`/`auth.uid()` 검사로 접근을 통제하는 기존 컨벤션을 따르고 있고, 위 6번에서 이 런타임 검사가 실제로 작동함을 직접 확인했다. 새로 도입된 취약점이 아니므로 이번 작업 범위에서 별도 수정하지 않음.
+8. 적용 후 기존 테이블 재확인: `profiles=6`, `teachers=3`, `teacher_workspace_provisioning=0`, `workspace_provisioning_events=1` — 3번 스냅샷과 완전히 동일, 기존 사용자·데이터 변경 없음. `workspace_preflight_runs`는 검증용 1행 삭제 후 0행.
+
+**이 시점까지 유지된 것**: `WORKSPACE_PROVISIONING_ALLOW_REAL_CALLS=false`(변경 없음), `WORKSPACE_PREFLIGHT_ALLOW_REAL_READS`는 사용자가 재승인 전까지 `false`로 복구(사용자 조치). 이번 절 전체에서 실제 Google/Directory API 호출은 한 번도 실행되지 않았다.
+
+**다음 단계**: 위 DB 적용·검증 완료를 사용자에게 보고, read flag를 다시 `true`로 전환하는 read-only preflight 재실행은 사용자가 별도로 승인.
+
+### 2026-09-01 — 권한 정리 + 오류 매핑 보완 (사용자 요청, read-only preflight 재승인 전 선행 작업)
+
+위 보고에서 발견한 `anon` EXECUTE 잔존 권한과 429/500 오류 매핑 부정확함에 대해, 사용자가 재실행 승인 전에 두 가지 보완을 명시적으로 요청함. Google API는 이번 절에서도 전혀 호출하지 않음.
+
+**1) 실행 권한 정리** — `supabase/migrations/20260907000000_r2_workspace_preflight_permissions_fix.sql` 추가, 원격 개발 DB에 적용:
+- `begin_workspace_preflight_run()`/`finish_workspace_preflight_run(...)` 둘 다 `revoke ... from public`에 이어 `revoke ... from anon` 명시적 추가, `grant ... to authenticated`만 유지.
+- 함수 본문의 `is_admin()` 검사는 그대로 유지(이중 방어 유지, 로직 변경 없음).
+- 쿨다운 위반만 앱 레이어에서 안전하게 구분할 수 있도록 해당 `raise exception`에 전용 SQLSTATE `ALT01`을 부여(`using errcode = 'ALT01'`).
+- 적용 후 `information_schema.role_routine_grants` 재조회 — 두 함수 모두 `anon` 행이 사라지고 `authenticated`/`postgres`/`service_role`만 남음을 확인.
+- 실제 SQL 레벨 재검증(Google API 미호출, 검증용 행은 즉시 삭제):
+  - `set local role anon`으로 호출 → `42501: permission denied for function begin_workspace_preflight_run` — **함수 진입 전 GRANT 층에서 거부**(이전에는 함수 안까지 들어가 `is_admin()`에서 막혔음).
+  - 로그인했지만 관리자가 아닌 프로필로 호출 → 기존과 동일하게 `P0001: 관리자만 preflight를 실행할 수 있습니다.`(함수 내부 검사로 거부, 정상 유지).
+  - 관리자 첫 호출 → 성공.
+  - 같은 관리자가 즉시 재호출 → `ALT01: preflight는 300초에 한 번만 실행할 수 있습니다(마지막 실행: ...)` — 신규 전용 코드로 정확히 표시됨.
+  - 적용 전/후 기존 테이블 스냅샷(`profiles=6`, `teachers=3`, `teacher_workspace_provisioning=0`, `workspace_provisioning_events=1`) 동일, `workspace_preflight_runs`는 검증 행 삭제 후 0행.
+- **범위 밖으로 명시적으로 분리**: 이 프로젝트의 기존 SECURITY DEFINER 함수 전체(R1의 legacy 9개 + R2 Task 7의 `link_teacher_workspace_identity` 등)에 동일한 `anon` EXECUTE 기본 권한이 걸려 있음을 확인했으나, 사용자 지시대로 "기존 함수가 같은 방식이라는 사실은 이번 신규 함수의 anon 권한을 유지할 근거로 삼지 않는다" — 전체 감사·일괄 정리는 별도 보안 작업으로 `master-roadmap-v3.md` R12에 통합 등록(원인: 이 프로젝트의 `pg_default_acl` 기본 권한 규칙이 신규 함수에 자동으로 anon EXECUTE를 부여함).
+
+**2) preflight 라우트 오류 매핑 수정** — `app/api/admin/workspace-preflight/route.ts`:
+- `begin_workspace_preflight_run` RPC 오류를 `error.code === 'ALT01'`일 때만 `429`(응답: 고정 문구 + `stage: "begin_cooldown"`)로 매핑.
+- 그 외 모든 오류(RPC 누락·스키마 캐시·DB 연결 등 인프라 오류)는 `500`(응답: 고정 문구 + `stage: "begin"`)으로 매핑 — 원본 Postgres 오류 텍스트(스키마 캐시 메시지 등)는 관리자 응답에 노출하지 않고 서버 로그(`console.error`)에만 기록(토큰·PII·Google 응답 본문 포함 안 됨 — 이 오류들은 애초에 Google API 호출 전 단계라 그런 정보 자체가 존재하지 않음).
+- `lib/google-workspace-auth.ts`/`lib/google-workspace-directory-readonly.ts`의 기존 오류 메시지(상태 코드만 포함, 응답 본문·토큰 없음)는 재검토 결과 이미 안전하게 설계되어 있어 변경 없음.
+- `route.test.ts`에 테스트 2건 추가/수정: ① `code: 'ALT01'`일 때만 `429`+`stage: 'begin_cooldown'`, ② 스키마 캐시 오류(`code: 'PGRST202'`, 원문에 "schema cache" 포함)일 때 `500`+`stage: 'begin'`이며 응답 본문에 원문 오류 텍스트가 전혀 없음을 assert. `route.test.ts`(6건)와 `teacher-callback/route.test.ts`(5건) 전부 통과(총 13건).
+
+**환경변수 재확인**: `npx vercel env pull`로 Production 환경변수 실값 확인(비밀 아님, `.env.example`에 문서화된 값) — `WORKSPACE_PROVISIONING_ALLOW_REAL_CALLS="false"`, `WORKSPACE_PREFLIGHT_ALLOW_REAL_READS="false"` 둘 다 유지 확인, 로컬 임시 파일은 확인 직후 삭제.
+
+**다음 단계**: 위 두 보완과 검증 결과를 사용자에게 보고. `WORKSPACE_PREFLIGHT_ALLOW_REAL_READS=true` 전환 + read-only preflight 1회 재실행은 사용자가 별도로 승인.
