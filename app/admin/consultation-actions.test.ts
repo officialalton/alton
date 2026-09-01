@@ -15,8 +15,11 @@ vi.mock("@/lib/docusign", () => ({
 }));
 
 const uploadArtifactToDriveMock = vi.fn();
+const processOneDriveArtifactMock = vi.fn();
 vi.mock("@/lib/drive-artifacts", () => ({
   uploadArtifactToDrive: uploadArtifactToDriveMock,
+  processOneDriveArtifact: processOneDriveArtifactMock,
+  MAX_RETRY_COUNT: 5,
 }));
 
 const trialSessionsMaybeSingleMock = vi.fn();
@@ -43,6 +46,7 @@ const contractVersionsSupersedeMock = vi.fn().mockResolvedValue({ error: null })
 const contractVersionsLatestMaybeSingleMock = vi.fn();
 
 const driveArtifactsSelectInMock = vi.fn();
+const driveArtifactsSelectEqMock = vi.fn().mockResolvedValue({ data: [], error: null });
 const driveArtifactsUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
 
 const rpcMock = vi.fn();
@@ -115,7 +119,7 @@ const fromMock = vi.fn((table: string) => {
   }
   if (table === "drive_artifacts") {
     return {
-      select: () => ({ in: driveArtifactsSelectInMock }),
+      select: () => ({ in: driveArtifactsSelectInMock, eq: driveArtifactsSelectEqMock }),
       update: () => ({ eq: driveArtifactsUpdateEqMock }),
     };
   }
@@ -379,28 +383,40 @@ describe("retryFailedDriveArtifacts", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     driveArtifactsSelectInMock.mockResolvedValue({
-      data: [{ id: "da1", contract_id: "ct1", artifact_type: "signed_document" }],
+      data: [{ id: "da1", contract_id: "ct1", artifact_type: "signed_document", drive_file_id: null, retry_count: 0 }],
       error: null,
     });
-    uploadArtifactToDriveMock.mockRejectedValue(new Error("not implemented: Google Drive 업로드는 이번 태스크 범위 밖(TODO R4+)"));
+    processOneDriveArtifactMock.mockRejectedValue(new Error("DocuSign 다운로드 실패"));
   });
 
-  it("업로드 스텁이 throw해도 크래시하지 않고 sync_status를 retryable_failed로 유지한다", async () => {
+  it("실패하면 크래시하지 않고 retry_count를 증가시키며 sync_status를 retryable_failed로 유지한다", async () => {
     const { retryFailedDriveArtifacts } = await import("./consultation-actions");
 
     const result = await retryFailedDriveArtifacts();
 
-    expect(result).toEqual({ attempted: 1, stillFailing: 1 });
+    expect(result).toEqual({ attempted: 1, stillFailing: 1, manualReview: 0 });
     expect(driveArtifactsUpdateEqMock).toHaveBeenCalledWith("id", "da1");
   });
 
-  it("업로드가 성공하면 succeeded로 갱신한다", async () => {
-    uploadArtifactToDriveMock.mockResolvedValue({ driveFileId: "drive1" });
+  it("retry_count가 한도(5)를 넘으면 manual_review로 전이한다", async () => {
+    driveArtifactsSelectInMock.mockResolvedValue({
+      data: [{ id: "da1", contract_id: "ct1", artifact_type: "signed_document", drive_file_id: null, retry_count: 5 }],
+      error: null,
+    });
     const { retryFailedDriveArtifacts } = await import("./consultation-actions");
 
     const result = await retryFailedDriveArtifacts();
 
-    expect(result).toEqual({ attempted: 1, stillFailing: 0 });
+    expect(result).toEqual({ attempted: 1, stillFailing: 0, manualReview: 1 });
+  });
+
+  it("실제 DocuSign 다운로드 후 업로드가 성공하면 succeeded로 갱신한다(Buffer.alloc(0) 아닌 실 버퍼 사용은 processOneDriveArtifact 내부에서 보장)", async () => {
+    processOneDriveArtifactMock.mockResolvedValue({ driveFileId: "drive1" });
+    const { retryFailedDriveArtifacts } = await import("./consultation-actions");
+
+    const result = await retryFailedDriveArtifacts();
+
+    expect(result).toEqual({ attempted: 1, stillFailing: 0, manualReview: 0 });
   });
 });
 
@@ -408,7 +424,7 @@ describe("reconcileDocusignStatus", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     contractVersionsSingleMock.mockResolvedValue({
-      data: { id: "cv1", docusign_envelope_id: "env-1" },
+      data: { id: "cv1", contract_id: "ct1", docusign_envelope_id: "env-1", docusign_envelope_status: "sent" },
       error: null,
     });
     getEnvelopeStatusMock.mockResolvedValue({ status: "completed" });
@@ -433,6 +449,83 @@ describe("reconcileDocusignStatus", () => {
     const { reconcileDocusignStatus } = await import("./consultation-actions");
 
     await expect(reconcileDocusignStatus("cv1")).rejects.toThrow("발송되지 않았습니다");
+  });
+
+  it("DB에 이미 최종 상태(completed)가 기록돼 있는데 DocuSign이 비최종 상태(sent)를 돌려주면 되돌리지 않는다(순서 역전 방어, 웹훅 라우트와 동일 규칙)", async () => {
+    contractVersionsSingleMock.mockResolvedValue({
+      data: { id: "cv1", contract_id: "ct1", docusign_envelope_id: "env-1", docusign_envelope_status: "completed" },
+      error: null,
+    });
+    getEnvelopeStatusMock.mockResolvedValue({ status: "sent" });
+    const { reconcileDocusignStatus } = await import("./consultation-actions");
+
+    const result = await reconcileDocusignStatus("cv1");
+
+    expect(result.status).toBe("completed");
+    expect(contractVersionsUpdateEqMock).not.toHaveBeenCalled();
+  });
+
+  it("DB가 sent인데 DocuSign이 completed면 드리프트를 교정한다", async () => {
+    const { reconcileDocusignStatus } = await import("./consultation-actions");
+
+    const result = await reconcileDocusignStatus("cv1");
+
+    expect(result.status).toBe("completed");
+    expect(contractVersionsUpdateEqMock).toHaveBeenCalledWith("id", "cv1");
+  });
+});
+
+describe("reconcileContractVersionFully", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    contractVersionsSingleMock.mockResolvedValue({
+      data: { id: "cv1", contract_id: "ct1", docusign_envelope_id: "env-1", docusign_envelope_status: "sent" },
+      error: null,
+    });
+    getEnvelopeStatusMock.mockResolvedValue({ status: "completed" });
+    contractVersionsUpdateEqMock.mockResolvedValue({ error: null });
+    driveArtifactsSelectEqMock.mockResolvedValue({ data: [], error: null });
+  });
+
+  it("DocuSign이 completed인데 drive_artifacts 행이 없으면 missing_drive_artifacts_row로 보고한다", async () => {
+    const { reconcileContractVersionFully } = await import("./consultation-actions");
+
+    const result = await reconcileContractVersionFully("cv1");
+
+    expect(result.status).toBe("completed");
+    expect(result.driveMismatches).toContainEqual({
+      type: "missing_drive_artifacts_row",
+      contractId: "ct1",
+    });
+  });
+
+  it("processing 상태가 10분 넘게 정체돼 있으면 retryable_failed로 리셋하고 보고한다", async () => {
+    driveArtifactsSelectEqMock.mockResolvedValue({
+      data: [{ id: "da1", sync_status: "processing", updated_at: new Date(Date.now() - 20 * 60 * 1000).toISOString() }],
+      error: null,
+    });
+    const { reconcileContractVersionFully } = await import("./consultation-actions");
+
+    const result = await reconcileContractVersionFully("cv1");
+
+    expect(result.driveMismatches).toContainEqual({
+      type: "stale_processing_reset",
+      driveArtifactId: "da1",
+      contractId: "ct1",
+    });
+    expect(driveArtifactsUpdateEqMock).toHaveBeenCalledWith("id", "da1");
+  });
+
+  it("정상적으로 최근 processing이거나 succeeded면 mismatch를 보고하지 않는다", async () => {
+    driveArtifactsSelectEqMock.mockResolvedValue({
+      data: [{ id: "da1", sync_status: "succeeded", updated_at: new Date().toISOString() }],
+      error: null,
+    });
+    const { reconcileContractVersionFully } = await import("./consultation-actions");
+
+    const result = await reconcileContractVersionFully("cv1");
+
+    expect(result.driveMismatches).toEqual([]);
   });
 });
 

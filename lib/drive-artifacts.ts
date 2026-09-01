@@ -1,5 +1,8 @@
 import { createAdminClient } from "@/lib/supabase-admin";
 import { getDriveApiAccessToken } from "@/lib/google-workspace-auth";
+import { downloadCompletedDocument, downloadCertificateOfCompletion } from "@/lib/docusign";
+
+const MAX_RETRY_COUNT = 5;
 
 const DRIVE_API = "https://www.googleapis.com/drive/v3";
 const DRIVE_UPLOAD_API = "https://www.googleapis.com/upload/drive/v3";
@@ -112,18 +115,48 @@ export async function queueDriveArtifactSync(params: {
  * drive_artifacts 행에 이미 drive_file_id가 있으면 중복 업로드하지 않는다(호출부에서
  * 그 값을 그대로 반환).
  */
+async function findExistingFileInFolder(
+  token: string,
+  fileName: string,
+  folderId: string
+): Promise<string | null> {
+  const q = encodeURIComponent(`name='${fileName}' and trashed=false and '${folderId}' in parents`);
+  const listUrl =
+    `${DRIVE_API}/files?q=${q}&includeItemsFromAllDrives=true&supportsAllDrives=true&fields=files(id,name)`;
+  const listRes = await driveFetch(listUrl, token);
+  const listData = (await listRes.json()) as { files: Array<{ id: string; name: string }> };
+  return listData.files.length > 0 ? listData.files[0].id : null;
+}
+
+/**
+ * 멱등성: (a) DB에 이미 drive_file_id가 기록돼 있으면 그 값을 그대로 반환하고
+ * Drive를 다시 호출하지 않는다(호출부에서 처리). (b) DB 기록이 없더라도 — 업로드는
+ * 성공했으나 그 직후 DB write가 실패한 부분 실패(partial failure) 케이스를 대비해
+ * — 대상 폴더에 같은 파일명이 이미 있는지 findOrCreateFolder와 동일한 "list 먼저,
+ * 없을 때만 create" 패턴으로 확인한다.
+ */
 export async function uploadArtifactToDrive(params: {
   contractId: string;
   artifactType: "signed_document" | "certificate_of_completion";
   fileBuffer: Buffer;
   fileName: string;
+  existingDriveFileId?: string | null;
 }): Promise<{ driveFileId: string }> {
+  if (params.existingDriveFileId) {
+    return { driveFileId: params.existingDriveFileId };
+  }
+
   if (process.env.DRIVE_ARTIFACTS_ALLOW_REAL_WRITES !== "true") {
     throw new Error("not implemented: DRIVE_ARTIFACTS_ALLOW_REAL_WRITES=true가 아니면 실제 Drive 업로드를 하지 않습니다.");
   }
 
   const token = await getDriveApiAccessToken();
   const folderId = await getTestFolderId(token);
+
+  const existingFileId = await findExistingFileInFolder(token, params.fileName, folderId);
+  if (existingFileId) {
+    return { driveFileId: existingFileId };
+  }
 
   const metadata = { name: params.fileName, parents: [folderId] };
   const boundary = "r3driveupload";
@@ -145,3 +178,160 @@ export async function uploadArtifactToDrive(params: {
   const data = (await uploadRes.json()) as { id: string };
   return { driveFileId: data.id };
 }
+
+// =========================================================================
+// 실제 다운로드+업로드 배선 (task 2) + queued 상태 워커 (task 1)
+// =========================================================================
+
+/**
+ * artifact_type에 맞는 DocuSign 다운로드 함수를 골라 호출한다. 발송된 계약
+ * 버전 중 실제로 이 artifact와 연결된 envelope을 (contract_id로 join해)
+ * 찾는다 — 한 계약(contract)에 여러 버전이 있을 수 있으므로, envelope이 실제로
+ * completed된 버전을 우선하고 없으면 docusign_envelope_id가 있는 가장 최근
+ * 버전을 쓴다.
+ */
+async function resolveEnvelopeIdForContract(
+  admin: ReturnType<typeof createAdminClient>,
+  contractId: string
+): Promise<string> {
+  const { data: versions, error } = await admin
+    .from("contract_versions")
+    .select("docusign_envelope_id, docusign_envelope_status, version_number")
+    .eq("contract_id", contractId)
+    .not("docusign_envelope_id", "is", null)
+    .order("version_number", { ascending: false });
+  if (error) throw new Error(error.message);
+  if (!versions || versions.length === 0) {
+    throw new Error(`계약 ${contractId}에 연결된 DocuSign envelope을 찾을 수 없습니다.`);
+  }
+  const completed = versions.find((v) => v.docusign_envelope_status === "completed");
+  return (completed ?? versions[0]).docusign_envelope_id as string;
+}
+
+async function downloadArtifactBuffer(
+  artifactType: "signed_document" | "certificate_of_completion",
+  envelopeId: string
+): Promise<Buffer> {
+  return artifactType === "signed_document"
+    ? downloadCompletedDocument(envelopeId)
+    : downloadCertificateOfCompletion(envelopeId);
+}
+
+type DriveArtifactRow = {
+  id: string;
+  contract_id: string;
+  artifact_type: "signed_document" | "certificate_of_completion";
+  drive_file_id: string | null;
+  retry_count: number;
+};
+
+/**
+ * 한 drive_artifacts 행을 실제로 처리한다: DocuSign에서 실 문서를 다운로드하고
+ * (스텁 Buffer.alloc(0) 대신), uploadArtifactToDrive로 업로드한다. 이미
+ * drive_file_id가 있으면(성공했던 행의 재실행) Drive를 다시 부르지 않고 그 값을
+ * 그대로 재확인 성공 처리한다(멱등성 보장 지점).
+ */
+async function processOneDriveArtifact(
+  admin: ReturnType<typeof createAdminClient>,
+  row: DriveArtifactRow
+): Promise<{ driveFileId: string }> {
+  if (row.drive_file_id) {
+    return { driveFileId: row.drive_file_id };
+  }
+  const envelopeId = await resolveEnvelopeIdForContract(admin, row.contract_id);
+  const fileBuffer = await downloadArtifactBuffer(row.artifact_type, envelopeId);
+  return uploadArtifactToDrive({
+    contractId: row.contract_id,
+    artifactType: row.artifact_type,
+    fileBuffer,
+    fileName: `${row.artifact_type}.pdf`,
+  });
+}
+
+/**
+ * queued 상태 drive_artifacts를 처리하는 워커. 동시 워커가 같은 행을 중복
+ * 처리하지 않도록, 새 lock 테이블 없이 sync_status 컬럼 자체를 낙관적 잠금으로
+ * 쓴다: `UPDATE ... SET sync_status='processing' WHERE id=? AND
+ * sync_status='queued'`를 실행하고, 그 update가 실제로 행에 영향을 줬는지
+ * (data가 non-null인지) 확인해야만 그 행을 처리한다 — 영향받은 행이 없으면(이미
+ * 다른 워커가 먼저 claim) 조용히 스킵한다. 이 저장소에 SKIP LOCKED/advisory lock
+ * 선례가 없어(grep 결과 없음) 더 단순한 조건부 UPDATE 방식을 택했다.
+ */
+export async function processQueuedDriveArtifacts(): Promise<{
+  attempted: number;
+  succeeded: number;
+  failed: number;
+  manualReview: number;
+  skippedRace: number;
+}> {
+  const admin = createAdminClient();
+
+  const { data: candidates, error } = await admin
+    .from("drive_artifacts")
+    .select("id, contract_id, artifact_type, drive_file_id, retry_count")
+    .eq("sync_status", "queued");
+  if (error) throw new Error(error.message);
+
+  let succeeded = 0;
+  let failed = 0;
+  let manualReview = 0;
+  let skippedRace = 0;
+
+  for (const row of (candidates ?? []) as DriveArtifactRow[]) {
+    // 조건부 UPDATE로 claim 시도. .select()를 붙여 실제로 update된 행을 돌려받고,
+    // 그 결과가 비어 있으면(이미 다른 워커가 채감) 스킵한다.
+    const { data: claimed, error: claimError } = await admin
+      .from("drive_artifacts")
+      .update({ sync_status: "processing" })
+      .eq("id", row.id)
+      .eq("sync_status", "queued")
+      .select("id");
+    if (claimError) throw new Error(claimError.message);
+    if (!claimed || claimed.length === 0) {
+      skippedRace += 1;
+      continue;
+    }
+
+    try {
+      const { driveFileId } = await processOneDriveArtifact(admin, row);
+      await admin
+        .from("drive_artifacts")
+        .update({ sync_status: "succeeded", drive_file_id: driveFileId, uploaded_at: new Date().toISOString() })
+        .eq("id", row.id);
+      succeeded += 1;
+    } catch (uploadError) {
+      const nextRetryCount = (row.retry_count ?? 0) + 1;
+      const exceededLimit = nextRetryCount > MAX_RETRY_COUNT;
+      await admin
+        .from("drive_artifacts")
+        .update({
+          sync_status: exceededLimit ? "manual_review" : "retryable_failed",
+          retry_count: nextRetryCount,
+        })
+        .eq("id", row.id);
+      if (exceededLimit) manualReview += 1;
+      else failed += 1;
+      console.error(
+        JSON.stringify({
+          type: "drive_artifact_queue_process_failed",
+          driveArtifactId: row.id,
+          contractId: row.contract_id,
+          retryCount: nextRetryCount,
+          manualReview: exceededLimit,
+          error: uploadError instanceof Error ? uploadError.message : String(uploadError),
+        })
+      );
+    }
+  }
+
+  return {
+    attempted: (candidates ?? []).length,
+    succeeded,
+    failed,
+    manualReview,
+    skippedRace,
+  };
+}
+
+export { processOneDriveArtifact, MAX_RETRY_COUNT };
+export type { DriveArtifactRow };

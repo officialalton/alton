@@ -4,7 +4,7 @@ import { requireAdmin, requireAdminOrCapability } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { createEnvelope, assertDocusignSandboxBaseUri, getEnvelopeStatus } from "@/lib/docusign";
 import { renderFamilyContractHtml } from "@/lib/contracts/family-contract-template";
-import { uploadArtifactToDrive } from "@/lib/drive-artifacts";
+import { processOneDriveArtifact, MAX_RETRY_COUNT, type DriveArtifactRow } from "@/lib/drive-artifacts";
 
 // R3: 상담(consultation) → 체험(trial) → 제안서(proposal) → 계약(contract) 최소
 // 동작 흐름. 스키마 소스 오브 트루스는 supabase/migrations/20260912000000_r3_...sql.
@@ -693,64 +693,75 @@ export async function voidContractVersion(contractVersionId: string, reason: str
 
 /**
  * drive_artifacts 중 재시도 대상(retryable_failed/manual_review) 행을 다시
- * 업로드 시도한다. uploadArtifactToDrive는 이번 태스크 범위에서 스텁(항상 throw)
- * 이므로, 여기서는 그 실패를 잡아 sync_status를 되돌리되 앱/웹훅을 크래시시키지
- * 않는 재처리 파이프라인의 뼈대만 구현한다 — 실제 파일 바이트를 구하는 로직
- * (DocuSign에서 재다운로드 등)은 uploadArtifactToDrive 실 구현(R4+)과 함께 온다.
+ * 업로드 시도한다. R4 교정: uploadArtifactToDrive를 빈 버퍼(Buffer.alloc(0))로
+ * 부르던 플레이스홀더를 걷어내고, lib/drive-artifacts.ts의 processOneDriveArtifact를
+ * 공유해 실제 DocuSign 문서/Certificate of Completion을 먼저 다운로드한 뒤
+ * 업로드한다(processQueuedDriveArtifacts와 동일한 처리 로직 재사용 — 중복 구현
+ * 방지). retry_count가 한도(MAX_RETRY_COUNT)를 넘으면 retryable_failed 대신
+ * manual_review로 보낸다(정책: "재시도 한도 초과·복구 불가 시 manual_review").
  */
 export async function retryFailedDriveArtifacts(): Promise<{
   attempted: number;
   stillFailing: number;
+  manualReview: number;
 }> {
   await requireAdmin();
   const admin = createAdminClient();
 
   const { data: rows, error } = await admin
     .from("drive_artifacts")
-    .select("id, contract_id, artifact_type")
+    .select("id, contract_id, artifact_type, drive_file_id, retry_count")
     .in("sync_status", ["retryable_failed", "manual_review"]);
   if (error) throw new Error(error.message);
 
   let stillFailing = 0;
-  for (const row of rows ?? []) {
+  let manualReview = 0;
+  for (const row of (rows ?? []) as DriveArtifactRow[]) {
     try {
-      await uploadArtifactToDrive({
-        contractId: row.contract_id,
-        artifactType: row.artifact_type as "signed_document" | "certificate_of_completion",
-        fileBuffer: Buffer.alloc(0),
-        fileName: `${row.artifact_type}.pdf`,
-      });
+      const { driveFileId } = await processOneDriveArtifact(admin, row);
       await admin
         .from("drive_artifacts")
-        .update({ sync_status: "succeeded", uploaded_at: new Date().toISOString() })
+        .update({ sync_status: "succeeded", drive_file_id: driveFileId, uploaded_at: new Date().toISOString() })
         .eq("id", row.id);
     } catch (uploadError) {
       // 정책: Drive 저장 실패는 서명/계약 상태를 되돌리지 않고 sync_status만
-      // 재처리 대상으로 남긴다. uploadArtifactToDrive는 스텁이라 항상 여기로
-      // 떨어지는 것이 현재로선 정상 동작이다.
-      stillFailing += 1;
+      // 재처리 대상으로 남긴다.
+      const nextRetryCount = (row.retry_count ?? 0) + 1;
+      const exceededLimit = nextRetryCount > MAX_RETRY_COUNT;
       await admin
         .from("drive_artifacts")
-        .update({ sync_status: "retryable_failed" })
+        .update({
+          sync_status: exceededLimit ? "manual_review" : "retryable_failed",
+          retry_count: nextRetryCount,
+        })
         .eq("id", row.id);
+      if (exceededLimit) manualReview += 1;
+      else stillFailing += 1;
       console.error(
         JSON.stringify({
           type: "drive_artifact_retry_failed",
           driveArtifactId: row.id,
           contractId: row.contract_id,
+          retryCount: nextRetryCount,
           error: uploadError instanceof Error ? uploadError.message : String(uploadError),
         })
       );
     }
   }
 
-  return { attempted: rows?.length ?? 0, stillFailing };
+  return { attempted: rows?.length ?? 0, stillFailing, manualReview };
 }
+
+const TERMINAL_ENVELOPE_STATUSES_RECONCILE = new Set(["completed", "declined", "voided"]);
+const DRIVE_PROCESSING_STALE_MS = 10 * 60 * 1000; // 10분
 
 /**
  * 관리자 수동 트리거 DocuSign 상태 대조. 웹훅이 누락됐을 수 있는 계약 버전에
  * 대해 DocuSign 쪽 실제 봉투 상태를 조회해 contract_versions에 반영한다. 테스트에서는
  * getEnvelopeStatus를 모킹해 실제 외부 호출 없이 검증한다(정책: 실 API 호출 금지).
+ *
+ * app/api/webhooks/docusign/route.ts와 동일한 순서 역전 방어(out-of-order guard —
+ * 이미 최종 상태가 기록돼 있으면 비최종 상태로 덮어쓰지 않음)를 재사용한다.
  */
 export async function reconcileDocusignStatus(contractVersionId: string): Promise<{ status: string }> {
   await requireAdmin();
@@ -758,7 +769,7 @@ export async function reconcileDocusignStatus(contractVersionId: string): Promis
 
   const { data: version, error: versionError } = await admin
     .from("contract_versions")
-    .select("id, docusign_envelope_id")
+    .select("id, docusign_envelope_id, docusign_envelope_status")
     .eq("id", contractVersionId)
     .single();
   if (versionError) throw new Error(versionError.message);
@@ -769,13 +780,84 @@ export async function reconcileDocusignStatus(contractVersionId: string): Promis
 
   const { status } = await getEnvelopeStatus(version.docusign_envelope_id);
 
-  const { error } = await admin
-    .from("contract_versions")
-    .update({ docusign_envelope_status: status, docusign_status_updated_at: new Date().toISOString() })
-    .eq("id", contractVersionId);
-  if (error) throw new Error(error.message);
+  const currentStatus = version.docusign_envelope_status as string | null;
+  const isRegression =
+    currentStatus !== null &&
+    TERMINAL_ENVELOPE_STATUSES_RECONCILE.has(currentStatus) &&
+    !TERMINAL_ENVELOPE_STATUSES_RECONCILE.has(status);
 
-  return { status };
+  if (!isRegression && status !== currentStatus) {
+    const { error } = await admin
+      .from("contract_versions")
+      .update({ docusign_envelope_status: status, docusign_status_updated_at: new Date().toISOString() })
+      .eq("id", contractVersionId);
+    if (error) throw new Error(error.message);
+  }
+
+  return { status: isRegression ? (currentStatus as string) : status };
+}
+
+export type DriveArtifactMismatch =
+  | { type: "missing_drive_artifacts_row"; contractId: string }
+  | { type: "stale_processing_reset"; driveArtifactId: string; contractId: string };
+
+/**
+ * 3자 대조: (a) DocuSign 실제 상태, (b) ALTON DB의 마지막 알려진 상태
+ * (contract_versions.docusign_envelope_status), (c) drive_artifacts 동기화
+ * 상태까지 함께 확인해 드리프트를 교정하고 관리자 대시보드가 보여줄 mismatch
+ * 목록을 반환한다. reconcileDocusignStatus의 DocuSign↔DB 교정 로직을 그대로
+ * 재사용하고, 여기에 drive_artifacts 쪽 검사를 추가한다:
+ *  - DocuSign이 completed인데 drive_artifacts 행 자체가 없으면(웹훅 큐잉 누락)
+ *    missing_drive_artifacts_row로 보고한다(생성은 여기서 하지 않는다 — 관리자가
+ *    별도 재큐잉 액션으로 처리하도록 보고만 한다, 이 함수는 부작용을 최소화한다).
+ *  - drive_artifacts 행이 processing 상태로 너무 오래(10분+) 머물러 있으면
+ *    워커가 크래시한 것으로 보고 retryable_failed로 되돌려 다음 워커 실행에서
+ *    다시 집히게 한다.
+ */
+export async function reconcileContractVersionFully(contractVersionId: string): Promise<{
+  status: string;
+  driveMismatches: DriveArtifactMismatch[];
+}> {
+  await requireAdmin();
+  const admin = createAdminClient();
+
+  const { status } = await reconcileDocusignStatus(contractVersionId);
+
+  const { data: version, error: versionError } = await admin
+    .from("contract_versions")
+    .select("id, contract_id")
+    .eq("id", contractVersionId)
+    .single();
+  if (versionError) throw new Error(versionError.message);
+  if (!version) throw new Error("존재하지 않는 계약 버전입니다.");
+
+  const driveMismatches: DriveArtifactMismatch[] = [];
+
+  const { data: driveRows, error: driveError } = await admin
+    .from("drive_artifacts")
+    .select("id, sync_status, updated_at")
+    .eq("contract_id", version.contract_id);
+  if (driveError) throw new Error(driveError.message);
+
+  if (status === "completed" && (!driveRows || driveRows.length === 0)) {
+    driveMismatches.push({ type: "missing_drive_artifacts_row", contractId: version.contract_id });
+  }
+
+  const now = Date.now();
+  for (const row of driveRows ?? []) {
+    if (row.sync_status !== "processing") continue;
+    const updatedAt = row.updated_at ? new Date(row.updated_at as string).getTime() : 0;
+    if (now - updatedAt > DRIVE_PROCESSING_STALE_MS) {
+      await admin.from("drive_artifacts").update({ sync_status: "retryable_failed" }).eq("id", row.id);
+      driveMismatches.push({
+        type: "stale_processing_reset",
+        driveArtifactId: row.id as string,
+        contractId: version.contract_id,
+      });
+    }
+  }
+
+  return { status, driveMismatches };
 }
 
 // =========================================================================

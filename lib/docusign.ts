@@ -81,6 +81,25 @@ export function assertDocusignSandboxBaseUri(): void {
   }
 }
 
+/**
+ * 발송 전 앵커 문자열 존재 검증. DocuSign은 anchorIgnoreIfNotPresent가 기본값
+ * "true"라서, 문서(HTML→PDF 변환 후)에 앵커 문자열이 없으면 signHereTabs를
+ * "조용히" 생략한다 — 에러 없이 서명 불가능한 봉투가 그대로 발송된다. 실 sandbox
+ * 테스트에서 관측된 "앵커가 평문으로 보이고 서명 필드가 안 뜨는" 증상이 바로 이
+ * 실패 모드로 추정된다(HTML→PDF 변환 과정에서 앵커 텍스트가 예상과 다르게
+ * 렌더링됐을 가능성). 재발을 막기 위해 (a) 발송 전 이 함수로 최소한 원본 HTML에
+ * 앵커 문자열이 실제로 있는지 미리 확인하고, (b) createEnvelope에서
+ * anchorIgnoreIfNotPresent를 명시적으로 "false"로 설정해 앵커가 PDF 변환 후에도
+ * 매칭되지 않으면 DocuSign이 에러로 실패시키게 한다(침묵 실패 대신 즉시 실패).
+ */
+export function assertAnchorPresentInDocumentHtml(documentHtml: string, anchorString: string): void {
+  if (!documentHtml.includes(anchorString)) {
+    throw new Error(
+      `계약서 HTML에 서명 앵커 문자열("${anchorString}")이 없습니다 — 이 상태로 발송하면 서명 필드 없는 봉투가 생성됩니다. 문서 템플릿을 확인하세요.`
+    );
+  }
+}
+
 export async function createEnvelope(params: {
   recipientEmail: string;
   recipientName: string;
@@ -88,6 +107,7 @@ export async function createEnvelope(params: {
   emailSubject: string;
   webhookUrl: string;
 }): Promise<{ envelopeId: string }> {
+  assertAnchorPresentInDocumentHtml(params.documentHtml, SIGNATURE_ANCHOR);
   const accessToken = await getAccessToken();
   const res = await fetch(envelopesBaseUrl(), {
     method: "POST",
@@ -119,6 +139,11 @@ export async function createEnvelope(params: {
                   anchorUnits: "pixels",
                   anchorXOffset: "0",
                   anchorYOffset: "-10",
+                  // 기본값(true)이면 앵커 매칭 실패 시 signHereTabs를 조용히
+                  // 생략한다 — 서명 불가능한 봉투가 에러 없이 발송되는 실패 모드를
+                  // 막기 위해 명시적으로 false로 설정해 실패 시 DocuSign이 에러를
+                  // 던지게 한다.
+                  anchorIgnoreIfNotPresent: "false",
                 },
               ],
             },

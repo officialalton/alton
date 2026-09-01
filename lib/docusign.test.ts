@@ -108,11 +108,33 @@ describe("createEnvelope", () => {
     const body = JSON.parse(envelopeCall[1].body as string);
     expect(body.recipients.signers[0].email).toBe("parent@example.com");
     expect(body.recipients.signers[0].tabs.signHereTabs[0].anchorString).toBe("/sig1/");
+    // R4: DocuSign은 anchorIgnoreIfNotPresent 기본값이 true라서, 앵커가 PDF 변환
+    // 후 매칭되지 않으면 signHereTabs를 조용히 생략해 서명 불가능한 봉투를
+    // 만든다 — 실 sandbox 테스트에서 관측된 실패 모드로 추정되는 지점. 명시적으로
+    // "false"를 보내 실패 시 에러로 드러나게 한다.
+    expect(body.recipients.signers[0].tabs.signHereTabs[0].anchorIgnoreIfNotPresent).toBe("false");
     expect(body.documents[0].fileExtension).toBe("html");
     expect(body.status).toBe("sent");
     expect(body.eventNotification.url).toBe(
       "https://alton-ecru.vercel.app/api/webhooks/docusign?token=secret"
     );
+  });
+
+  it("발송 전 문서 HTML에 앵커 문자열이 없으면 DocuSign을 호출하지 않고 명확한 에러를 던진다(pre-send validation)", async () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal("fetch", fetchMock);
+
+    const { createEnvelope } = await import("./docusign");
+    await expect(
+      createEnvelope({
+        recipientEmail: "parent@example.com",
+        recipientName: "김민지",
+        documentHtml: "<p>앵커가 없는 계약서</p>",
+        emailSubject: "제목",
+        webhookUrl: "https://example.com/webhook",
+      })
+    ).rejects.toThrow(/서명 앵커/);
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 
   it("봉투 생성이 실패하면 에러를 던진다", async () => {
