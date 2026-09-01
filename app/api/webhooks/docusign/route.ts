@@ -17,19 +17,22 @@ import { queueDriveArtifactSync } from "@/lib/drive-artifacts";
 //   행만 남기고 웹훅 응답은 즉시 반환한다(비동기 재시도 요구사항).
 
 type DocusignConnectPayload = {
-  event?: string; // 예: "envelope-completed", "envelope-sent", "envelope-declined", "envelope-voided"
+  event?: string; // 계정 레벨 Connect(aggregate) 형식일 때만 존재: "envelope-completed" 등
   data?: {
     envelopeId?: string;
     envelopeSummary?: {
-      // DocuSign 공식 Connect JSON(aggregate, restv2.1) 스키마에서
-      // envelopeId는 data.envelopeId가 1차 경로다. 일부 이벤트/구성에서는
-      // envelopeSummary 아래에도 envelopeId가 중복 표기될 수 있어(실측 미확인,
-      // 문서상 호환 경로로만 대비) 폴백으로 함께 읽는다.
       envelopeId?: string;
       status?: string;
       recipients?: { signers?: Array<{ declineReason?: string }> };
     };
   };
+  // 2026-09-01 실측 확인: envelope 레벨 eventNotification(계정 레벨 Connect가 아님)은
+  // event/data 래퍼 없이 envelope summary 필드를 최상위에 그대로 평탄하게 보낸다
+  // (예: 최상위 envelopeId/status/emailSubject/... — GET /envelopes/{id} 응답과 유사한
+  // 모양). 이 경로가 우리가 실제로 받는 형태다 — 아래에서 폴백으로 읽는다.
+  envelopeId?: string;
+  status?: string;
+  recipients?: { signers?: Array<{ declineReason?: string }> };
 };
 
 const EVENT_TO_ENVELOPE_STATUS: Record<string, string> = {
@@ -86,10 +89,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "invalid json" }, { status: 400 });
   }
 
-  // DocuSign 공식 Connect JSON(aggregate) 스키마: envelopeId는 data.envelopeId가
-  // 1차 경로. envelopeSummary.envelopeId는 문서상 호환 경로로만 대비한 폴백이다.
-  const envelopeId = body.data?.envelopeId ?? body.data?.envelopeSummary?.envelopeId;
-  const event = body.event;
+  // 1) 계정 레벨 Connect(aggregate) 형식: event/data.envelopeId
+  // 2) envelope 레벨 eventNotification(실제로 우리가 받는 형식, 2026-09-01 실측):
+  //    래퍼 없이 최상위 envelopeId/status — event 필드 자체가 없으므로 status로부터
+  //    "envelope-<status>"를 합성해 기존 EVENT_TO_ENVELOPE_STATUS 매핑을 그대로 쓴다.
+  const envelopeId = body.data?.envelopeId ?? body.data?.envelopeSummary?.envelopeId ?? body.envelopeId;
+  const rawStatus = body.data?.envelopeSummary?.status ?? body.status;
+  const event = body.event ?? (rawStatus ? `envelope-${rawStatus}` : undefined);
   if (!envelopeId || !event) {
     logDiagnostic("missing_event_or_envelope_id", {
       contentType,
@@ -231,9 +237,9 @@ export async function POST(request: Request) {
     // 기록(위에서 이미 처리)하고, ALTON 계약 자체는 새 상태를 추가하지 않고 기존
     // v3_contract_status의 void로 종료한다. 거부 사유는 payload에 있으면 함께 저장한다
     // (20260915000000 추가 컬럼).
-    const declineReason = body.data?.envelopeSummary?.recipients?.signers?.find(
-      (s) => s.declineReason
-    )?.declineReason;
+    const declineReason = (
+      body.data?.envelopeSummary?.recipients?.signers ?? body.recipients?.signers
+    )?.find((s) => s.declineReason)?.declineReason;
     await admin
       .from("contracts")
       .update({

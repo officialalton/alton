@@ -368,4 +368,87 @@ describe("POST /api/webhooks/docusign", () => {
       expect(res.status).toBe(400);
     });
   });
+
+  describe("실제 envelope 레벨 eventNotification 페이로드 형식(2026-09-01 sandbox 실측)", () => {
+    // R3 진단(2026-09-01): sandbox에서 실제로 받은 페이로드는 event/data 래퍼 없이
+    // envelope summary 필드를 최상위에 그대로 평탄하게 보낸다(예: 최상위 envelopeId/
+    // status/emailSubject/... — Vercel 함수 로그로 topLevelKeys를 직접 확인). 계정
+    // 레벨 Connect의 aggregate 형식(위 describe 블록)과는 다른 실제 형식이다.
+    function flatEnvelopeSummaryFixture(overrides: Partial<{ status: string; envelopeId: string }> = {}) {
+      return {
+        status: overrides.status ?? "sent",
+        envelopeId: overrides.envelopeId ?? "env-flat-1",
+        emailSubject: "테스트 계약서",
+        signingLocation: "online",
+        enableWetSign: "true",
+        allowMarkup: "false",
+        allowReassign: "true",
+        createdDateTime: "2026-09-01T21:19:52.3900000Z",
+        sentDateTime: "2026-09-01T21:19:52.3900000Z",
+        purgeState: "unpurged",
+        envelopeIdStamping: "true",
+      };
+    }
+
+    it("event/data 래퍼 없는 실제 형식도 정상 파싱해 상태를 반영한다(sent)", async () => {
+      const { POST } = await import("./route");
+      const request = makeRequest(flatEnvelopeSummaryFixture({ status: "sent" }), "secret123");
+
+      const res = await POST(request);
+      expect(res.status).toBe(200);
+      expect(contractVersionUpdateEqMock).toHaveBeenCalledWith("id", "cv1");
+    });
+
+    it("실제 형식의 completed 상태를 정상 처리해 계약을 active로 전환하고 drive_artifacts를 큐잉한다", async () => {
+      const { POST } = await import("./route");
+      const request = makeRequest(flatEnvelopeSummaryFixture({ status: "completed" }), "secret123");
+
+      const res = await POST(request);
+      expect(res.status).toBe(200);
+      expect(contractUpdateEqMock).toHaveBeenCalledWith("id", "ct1");
+      expect(driveArtifactsInsertMock).toHaveBeenCalled();
+    });
+
+    it("실제 형식으로 동일 상태가 중복 도착하면 두 번째는 재처리하지 않는다", async () => {
+      const { POST } = await import("./route");
+      const fixture = flatEnvelopeSummaryFixture({ status: "sent" });
+
+      receiptMaybeSingleMock.mockResolvedValueOnce({ data: null });
+      const first = await POST(makeRequest(fixture, "secret123"));
+      expect(first.status).toBe(200);
+
+      receiptMaybeSingleMock.mockResolvedValueOnce({
+        data: { id: "receipt-1", processed_at: "2026-09-01T23:18:00.000Z" },
+      });
+      const second = await POST(makeRequest(fixture, "secret123"));
+      const secondBody = (await second.json()) as { skipped?: string };
+      expect(second.status).toBe(200);
+      expect(secondBody.skipped).toBe("already processed");
+    });
+
+    it("실제 형식에서도 순서 역전(늦게 도착한 sent가 이미 completed된 상태를 되돌리지 않음)을 방어한다", async () => {
+      contractVersionMaybeSingleMock.mockResolvedValue({
+        data: { id: "cv1", contract_id: "ct1", docusign_envelope_status: "completed" },
+      });
+      const { POST } = await import("./route");
+      const request = makeRequest(flatEnvelopeSummaryFixture({ status: "sent" }), "secret123");
+
+      const res = await POST(request);
+      expect(res.status).toBe(200);
+      expect(contractVersionUpdateEqMock).not.toHaveBeenCalled();
+    });
+
+    it("실제 형식의 declined + 최상위 recipients.signers에서 거부 사유를 추출한다", async () => {
+      const { POST } = await import("./route");
+      const fixture = {
+        ...flatEnvelopeSummaryFixture({ status: "declined" }),
+        recipients: { signers: [{ declineReason: "학부모가 조건 재협상을 원함" }] },
+      };
+      const request = makeRequest(fixture, "secret123");
+
+      const res = await POST(request);
+      expect(res.status).toBe(200);
+      expect(contractUpdateEqMock).toHaveBeenCalledWith("id", "ct1");
+    });
+  });
 });
