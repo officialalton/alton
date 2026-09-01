@@ -350,14 +350,19 @@ skip_nonce_check = false
 # 완전히 별개로 만든다(운영 도메인·운영 콜백만 등록된 Client를 로컬에서
 # 재사용하지 않는다). Client Secret은 반드시 로컬 .env(.local)의
 # SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET로만 넣고, 이 파일이나 git에는
-# 절대 값 자체를 쓰지 않는다. redirect_uri는 로컬 콜백
-# (http://localhost:3010/auth/teacher-callback)만 가리켜야 한다 — Preview
-# URL은 여기에도 등록하지 않는다.
+# 절대 값 자체를 쓰지 않는다.
+#
+# redirect_uri는 이 로컬 Supabase Auth 서버 자신의 콜백이다(Google이
+# 실제로 리다이렉트하는 대상 — [api] 블록의 port=54421을 따른다) — 앱의
+# /auth/teacher-callback(로그인 완료 후 Supabase가 다시 보내주는 곳)과는
+# 다른 값이다. 앱 콜백은 auth.additional_redirect_urls의 allowlist에만
+# 등록하고, Google Cloud Console의 OAuth Client "Authorized redirect
+# URI"에는 절대 등록하지 않는다 — Google에는 이 Supabase 콜백만 등록한다.
 [auth.external.google]
 enabled = false
 client_id = ""
 secret = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET)"
-redirect_uri = "http://localhost:3010/auth/teacher-callback"
+redirect_uri = "http://127.0.0.1:54421/auth/v1/callback"
 # If enabled, it will allow the user to successfully authenticate when the provider does not return an email address.
 email_optional = false
 
