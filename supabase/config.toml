@@ -359,8 +359,8 @@ skip_nonce_check = false
 # 등록하고, Google Cloud Console의 OAuth Client "Authorized redirect
 # URI"에는 절대 등록하지 않는다 — Google에는 이 Supabase 콜백만 등록한다.
 [auth.external.google]
-enabled = false
-client_id = ""
+enabled = true
+client_id = "590621873979-ti3kebb04rkgks7lmonkl57sg66gro73.apps.googleusercontent.com"
 secret = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET)"
 redirect_uri = "http://127.0.0.1:54421/auth/v1/callback"
 # If enabled, it will allow the user to successfully authenticate when the provider does not return an email address.
