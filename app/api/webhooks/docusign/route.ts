@@ -21,6 +21,11 @@ type DocusignConnectPayload = {
   data?: {
     envelopeId?: string;
     envelopeSummary?: {
+      // DocuSign 공식 Connect JSON(aggregate, restv2.1) 스키마에서
+      // envelopeId는 data.envelopeId가 1차 경로다. 일부 이벤트/구성에서는
+      // envelopeSummary 아래에도 envelopeId가 중복 표기될 수 있어(실측 미확인,
+      // 문서상 호환 경로로만 대비) 폴백으로 함께 읽는다.
+      envelopeId?: string;
       status?: string;
       recipients?: { signers?: Array<{ declineReason?: string }> };
     };
@@ -41,11 +46,30 @@ const EVENT_TO_ENVELOPE_STATUS: Record<string, string> = {
 // 상태를 되돌리지 않는다. completed/declined/voided는 최종 상태로 취급한다.
 const TERMINAL_ENVELOPE_STATUSES = new Set(["completed", "declined", "voided"]);
 
+// 진단 로그 필드만 남긴다 — 원문 바이트·서명 헤더값·계약/개인정보는 절대 포함하지
+// 않는다. request.text()는 이 함수 안에서 정확히 한 번만 호출해, HMAC 검증과
+// JSON.parse가 동일한 원문 바이트를 대상으로 하도록 보장한다(둘이 다른 바이트를
+// 보면 서명은 통과했는데 파싱만 깨지는 것처럼 보이는 혼선이 생길 수 있다).
+function logDiagnostic(stage: string, extra: Record<string, unknown>) {
+  console.info(JSON.stringify({ type: "docusign_webhook_diagnostic", stage, ...extra }));
+}
+
 export async function POST(request: Request) {
+  const contentType = request.headers.get("content-type");
   const rawBody = await request.text();
   const signatureHeader = request.headers.get("X-DocuSign-Signature-1");
 
+  const looksLikeJson = rawBody.trimStart().startsWith("{") || rawBody.trimStart().startsWith("[");
+  const looksLikeXml = rawBody.trimStart().startsWith("<");
+
   if (!verifyDocusignWebhookSignature(rawBody, signatureHeader)) {
+    logDiagnostic("signature_verification_failed", {
+      contentType,
+      bodyLength: rawBody.length,
+      looksLikeJson,
+      looksLikeXml,
+      hasSignatureHeader: signatureHeader !== null,
+    });
     return NextResponse.json({ error: "invalid signature" }, { status: 401 });
   }
 
@@ -53,12 +77,28 @@ export async function POST(request: Request) {
   try {
     body = JSON.parse(rawBody) as DocusignConnectPayload;
   } catch {
+    logDiagnostic("json_parse_failed", {
+      contentType,
+      bodyLength: rawBody.length,
+      looksLikeJson,
+      looksLikeXml,
+    });
     return NextResponse.json({ error: "invalid json" }, { status: 400 });
   }
 
-  const envelopeId = body.data?.envelopeId;
+  // DocuSign 공식 Connect JSON(aggregate) 스키마: envelopeId는 data.envelopeId가
+  // 1차 경로. envelopeSummary.envelopeId는 문서상 호환 경로로만 대비한 폴백이다.
+  const envelopeId = body.data?.envelopeId ?? body.data?.envelopeSummary?.envelopeId;
   const event = body.event;
   if (!envelopeId || !event) {
+    logDiagnostic("missing_event_or_envelope_id", {
+      contentType,
+      bodyLength: rawBody.length,
+      topLevelKeys: Object.keys(body ?? {}),
+      dataKeys: body?.data ? Object.keys(body.data) : null,
+      hasEvent: event !== undefined,
+      hasEnvelopeId: envelopeId !== undefined,
+    });
     return NextResponse.json({ error: "missing event/envelopeId" }, { status: 400 });
   }
 
