@@ -32,6 +32,14 @@ R3 스키마 작업 중 일부 마이그레이션(`20260914000000`, `20260915000
 - Vercel Deployment Protection(SSO)은 검증 중 재차 일시 해제 → 검증 직후 원복 완료(302 리다이렉트로 재확인).
 - DocuSign Connect 설정 2건(connectId 22299996, 22300003) 모두 생성 후 삭제 완료 — sandbox 앱(`alton-r3-dev`) 자체는 유지.
 
+## 외부 검증 3차 시도 (2026-09-01) — includeHMAC 수정, 근본원인 미해결로 확정
+
+- **실제 근본원인 발견**: `createEnvelope`의 `eventNotification`에 `includeHMAC` 필드 자체가 없었다(계정에 HMAC 키가 등록돼 있어도 이 envelope 레벨 플래그 없이는 서명이 안 됨) — `includeHMAC: "true"` 추가, 발송 요청 payload 검증하는 유닛 테스트 추가(통과), `integratorManaged`는 타 계정 대리관리 전용 필드라 사용하지 않음(코드베이스 전체에 미사용 확인).
+- 계정에 활성 HMAC 키가 없는 것도 확인(이전 시도의 Connect 설정이 삭제되며 키도 함께 삭제됨) → 재등록.
+- **수정 후 승인된 2번째 envelope 1건 발송**(`a45828f2-a6f5-8eb5-81c0-6fc32f9601ca`) — `includeHMAC: "true"`가 실제 요청에 포함된 상태로 발송했음에도 **최초 배달·retry_queue 재시도(1회) 모두 401(서명 없음) 유지**. 헤더 존재 여부를 직접 캡처하기 위해 임시 디버그 로깅을 추가한 새 Preview 배포로 envelope의 알림 URL을 PUT으로 갱신 시도했으나, DocuSign의 retry_queue는 갱신된 URL이 아니라 **envelope 생성 시점의 원래 URL로만 재전달**함을 확인(PUT 응답이 eventNotification 필드를 반영하지 않음) — 이 때문에 실제 요청 헤더 목록을 직접 확인하지 못함.
+- 지시에 따라 **3번째 envelope은 발송하지 않고 여기서 중단**. 임시 디버그 로그는 커밋 전 원복, 사용한 2번째 envelope은 void 처리(삭제 아님), Connect/HMAC 등록 삭제, SSO 보호 복원 — 전부 확인됨.
+- **결론**: `includeHMAC`가 코드상 정확히 포함돼 있고 계정에 활성 키가 등록돼 있음에도 실제 서명이 수신되지 않음 — Developer Sandbox 계정 자체의 한계 또는 별도 계정 설정(예: HMAC 키의 별도 "활성화" 절차)이 필요할 가능성. **DocuSign 지원 문의가 필요한 지점으로 확정.** 우리 쪽 코드는 (a) 요청 payload에 필요한 필드를 정확히 보내고 있음이 유닛 테스트로 검증됨 (b) 서명 미수신 시 fail-closed로 정확히 거부함이 실제 트래픽으로 반복 확인됨 — 이 두 가지는 R3 범위에서 확정 가능한 최대치.
+
 ## 남은 blocker
 
 `docs/CURRENT.md` "남은 blocker·후속 작업" 절 참고 — 중복 기록하지 않음.
