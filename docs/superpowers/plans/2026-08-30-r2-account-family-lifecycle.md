@@ -336,19 +336,19 @@
 
 ---
 
-## Task 8: 권한 모델 — `is_admin() OR capability`
+## Task 8: 권한 모델 — `is_admin() OR capability` (완료, 원격 적용 2026-09-01)
 
 **Files:**
-- Modify: Task 4/5/6/7에서 새로 만든 서버 액션들
-- Modify 또는 신규: 해당 RLS 정책
+- Modify: `lib/admin-auth.ts`(신규 `requireAdminOrCapability()`), `app/admin/invite-actions.ts`/`merge-actions.ts`/`consent-actions.ts`/`workspace-actions.ts`
+- Create: `supabase/migrations/20260909000000_r2_task8_capability_gates.sql`, `lib/admin-auth.test.ts`
 
 **배경**: §4.19 결정 10.
 
-- [ ] Task 4(초대)/Task 5(병합)/Task 6(동의 처리)의 신규 서버 액션에 `requireAdmin()` 대신 `requireAdmin() 또는 requireCapability('필요권한')` 패턴의 신규 가드를 만들어 적용.
-- [ ] 대응하는 신규 테이블의 RLS 정책도 `is_admin() OR current_user_has_capability('...')`로 작성(R1 패턴 그대로).
-- [ ] 기존 `is_admin()`만 쓰는 레거시 서버 액션(`inviteParent` 등)은 **이번에 건드리지 않는다** — R12로 이관.
+- [x] Task 4(초대)/Task 5(병합)/Task 6(동의 처리)/Task 7(Workspace)의 신규 서버 액션 13개에 `requireAdmin()` 대신 `requireAdminOrCapability('capability명')` 신규 가드 적용. capability는 `manage_invites`/`manage_account_merges`/`manage_guardian_consent`/`manage_teacher_workspace` 4종(자유 텍스트, R1 `supervisor_capabilities` 그대로 사용).
+- [x] 대응하는 SECURITY DEFINER 함수 13개(`resend_account_invite`/`revoke_account_invite`/`resolve_manual_review_invite`/`merge_accounts`/`anonymize_merged_account`/`teacher_rate_history_with_merged`/`record_manual_guardian_consent`/`begin_teacher_workspace_provisioning`/`record_workspace_created`/`record_workspace_creation_failed`/`mark_workspace_invite_sent`/`suspend_teacher_workspace`/`reactivate_teacher_workspace`)와 신규 테이블 RLS SELECT 정책(`account_invites`/`account_invite_events`/`account_merges`/`guardian_consents`/`privacy_review_tasks`/`teacher_workspace_provisioning`/`workspace_provisioning_events`) 전부 `is_admin() OR current_user_has_capability('...')`로 확장(기존 self-service 조건은 그대로 보존).
+- [x] 기존 `is_admin()`만 쓰는 레거시(`transition_account_status()`/`set_teacher_rate()`, Task 2/R1 소유)와 `workspace_preflight_runs`류(실제 Google 인프라를 직접 두드리는 운영 점검 도구, 의도적으로 관리자 전용 유지)는 **건드리지 않음** — 마이그레이션 헤더에 명시.
 
-**DoD 체크**: 특정 capability만 가진 운영자 역할로 실제 RLS 테스트(6개 역할 매트릭스에 "capability 보유 운영자" 케이스 추가).
+**DoD 체크**: 로컬·원격 개발 DB 양쪽에서 롤백 트랜잭션으로 실제 검증 — capability 없는 일반 사용자는 그대로 거부(`관리자만 처리할 수 있습니다.`), 정확히 일치하는 capability를 부여받은 비관리자는 통과(`suspend_teacher_workspace` 등 실제 성공), capability 이름이 다르면(예: `manage_teacher_workspace` 보유자가 `manage_invites` 요구 액션 시도) 거부, RLS도 동일하게 capability 보유자만 행이 보임(`account_invites` 실측: 일반 사용자 0건, `manage_invites` 보유자 1건). 전체 vitest 스위트(93개 파일, 414건) 통과, `tsc --noEmit` 클린. 검증 후 테스트로 부여한 capability는 전부 롤백/삭제해 잔여 없음 확인.
 
 ---
 

@@ -889,3 +889,27 @@ Could not find the function public.begin_workspace_preflight_run without paramet
 **7) 로드맵 등록(`docs/2026-08-29-master-roadmap-v3.md` R12)**: 이번에 발견한 "테스트 데이터 정리 불가" 문제를 별도 항목으로 등록 — (1) 운영 전 검증 계정·종속 이력을 안전하게 일괄 정리하는 관리자 전용 절차(일반 이력의 immutability는 유지, "테스트 데이터"로 명시된 행만 엄격한 조건·자체 감사 하에 정리), (2) 이를 위한 `is_test_data` 같은 구분 구조 또는 별도 스테이징 프로젝트로 실제 쓰기 검증 자체를 이관하는 근본 방안 검토, (3) 테스트 데이터가 정산·매칭·통계에 절대 섞이지 않는 공통 필터 + 회귀 테스트(이번엔 우연히 안전했을 뿐 명시적 보장 장치가 아님).
 
 **Task 7 완료 조건 충족**: 실제 Google Workspace 계정 생성·정지·재활성화·최초 OAuth 로그인·immutable Google ID 기준 연결·7조건 활성화 게이트가 전부 실제 인프라로 검증됨(사용자 확정: "Task 7은 mock 구현만으로 완료 처리하지 않는다" 요건 충족). **R2 Task 7 — 완료.**
+
+## Task 8 — 권한 모델: `is_admin() OR capability` (완료, 원격 적용 2026-09-01)
+
+R2 Task 1-7 전부 완료 확인(Task 1은 로드맵 문서 체크박스만 갱신 안 돼 있었을 뿐 실제 구현·검증은 2026-08-30에 이미 끝나 있었음, 이번에 체크박스만 정정) 후 마일스톤 단위 승인 방식으로 이어서 진행.
+
+**범위 확정 과정**: R1이 만든 `supervisor_capabilities`/`current_user_has_capability()`(자유 텍스트 capability, 고정 enum 없음)를 그대로 활용. Task 4(초대)/5(병합)/6(동의)/7(Workspace)의 서버 액션 4개 파일(`invite-actions.ts`/`merge-actions.ts`/`consent-actions.ts`/`workspace-actions.ts`, 총 13개 함수)이 실제로 무엇을 호출하는지 하나씩 확인해 정확한 범위를 정했다 — 계획 문서의 "신규 서버 액션"이라는 표현만으로는 어떤 DB 함수·RLS까지 손대야 하는지 알 수 없어서 직접 코드를 추적했다:
+- 앱 레이어: `lib/admin-auth.ts`에 `requireAdminOrCapability(capability)` 신규 추가(`role='admin'`이면 capability 확인 없이 통과, 아니면 `current_user_has_capability()` RPC로 확인) — 4개 파일의 13개 함수 전부 `requireAdmin()` → `requireAdminOrCapability(CAPABILITY)`로 교체.
+- capability 이름 4종(파일당 1개, 세분화하지 않음): `manage_invites`(Task 4), `manage_account_merges`(Task 5), `manage_guardian_consent`(Task 6), `manage_teacher_workspace`(Task 7).
+- DB 함수 13개(`resend_account_invite`/`revoke_account_invite`/`resolve_manual_review_invite`/`merge_accounts`/`anonymize_merged_account`/`teacher_rate_history_with_merged`/`record_manual_guardian_consent`/`begin_teacher_workspace_provisioning`/`record_workspace_created`/`record_workspace_creation_failed`/`mark_workspace_invite_sent`/`suspend_teacher_workspace`/`reactivate_teacher_workspace`)의 `is_admin()`만 검사하던 조건을 `is_admin() OR current_user_has_capability('...')`로 확장 — 기존 self-service 조건(`v_row.invited_by = auth.uid()`, `auth.uid() = p_teacher_id`)은 그대로 보존. 원본 함수 본문은 직접 재입력하지 않고 `pg_get_functiondef()`로 실제 배포된 정의를 그대로 가져와 정확히 그 한 줄만 치환하는 스크립트로 생성해 오탈자·누락 위험을 없앴다.
+- RLS SELECT 정책 7개(`account_invites`/`account_invite_events`/`account_merges`/`guardian_consents`/`privacy_review_tasks`/`teacher_workspace_provisioning`/`workspace_provisioning_events`)도 동일하게 `is_admin() OR current_user_has_capability('...')`로 확장(`drop policy` + `create policy`).
+- **의도적으로 제외**(마이그레이션 헤더에 명시): `transition_account_status()`/`set_teacher_rate()`(R1/Task 2 소유 — Task 7 액션이 간접 호출하지만 이 함수 자체의 게이트 확장은 R12로 이관, 계획 문서의 "레거시 서버 액션은 건드리지 않는다" 원칙과 동일하게 취급), `get_teacher_activation_checklist()`(원래도 `is_admin()` 자체 검사가 없는 순수 조회 함수라 앱 레이어 교체만으로 충분), `workspace_preflight_runs`/`begin_workspace_preflight_run()`/`finish_workspace_preflight_run()`(실제 Google 인프라를 직접 두드리는 운영 점검 도구라 의도적으로 관리자 전용 유지).
+
+**구현**: `supabase/migrations/20260909000000_r2_task8_capability_gates.sql`(13개 함수 재정의 + 7개 RLS 정책 교체, additive) + `lib/admin-auth.ts` 신규 함수 + 4개 액션 파일 가드 교체 + `lib/admin-auth.test.ts` 신규(5건) + `consent-actions.test.ts`/`workspace-actions.test.ts` mock 갱신.
+
+**검증**:
+1. `npx supabase db reset`으로 로컬 DB에 전체 마이그레이션(신규 포함) 클린 적용 확인.
+2. 로컬 DB에서 실제 SQL로 3가지 확인(전부 트랜잭션 롤백 또는 즉시 삭제로 잔여 없음): (a) capability 없는 일반 사용자가 `suspend_teacher_workspace()` 호출 → 기존과 동일하게 `관리자만 처리할 수 있습니다.` 거부, (b) `manage_teacher_workspace` capability를 부여받은 비관리자(role='parent') 계정이 같은 함수 호출 → 정상 통과(예외 없음), (c) `account_invites`에 테스트 행 1건을 넣고 RLS 확인 — 일반 사용자는 0건, `manage_invites` capability 보유자는 1건 조회.
+3. `npx tsc --noEmit` 클린, `npx vitest run` 전체 스위트 93개 파일 414건 전부 통과(기존 workspace-actions.test.ts/consent-actions.test.ts의 `@/lib/admin-auth` mock을 `requireAdminOrCapability`로 갱신, 신규 `lib/admin-auth.test.ts` 5건 추가).
+4. `npx supabase db push --linked`로 원격 개발 DB에 동일 마이그레이션 적용 후 같은 3가지 검증을 원격에서도 재확인(a/b 항목, 실제 프로필 `d8fe6918-...`로 트랜잭션 롤백 검증) — 적용 전/후 `profiles`/`teachers`/`account_invites`/`account_merges`/`guardian_consents`/`supervisor_capabilities` 행 수 전부 동일, 잔여 없음 확인.
+5. 커밋(`f49375b`)·푸시·Production 배포, `app.alton.education/admin`·`/login` HTTP 상태 정상 확인(스모크 테스트).
+
+**Task 8 완료 조건 충족**: 로컬·원격 개발 DB 양쪽에서 capability 기반 접근이 실제로 동작하고(서버+DB 양쪽 게이트), 기존 관리자 경로·self-service 경로 회귀 없음을 확인. **R2 Task 8 — 완료.**
+
+**R2 남은 것**: 계획 문서(`docs/superpowers/plans/2026-08-30-r2-account-family-lifecycle.md`)의 Task 9(E2E/통합 테스트 보강)만 남음. `master-roadmap-v3.md`의 R2 항목 중에도 아직 미완료로 남아있는 것들(복수 보호자/주 보호자 설정, 이메일 오기 수정 절차, 시간대/연락처 세부 확정, `inactive`/`reactivate_account()` 구현은 R12로 별도 이관됨)이 있다 — Task 9와 별개로 R2 전체 완료 여부는 이 항목들까지 확인이 필요하다.
