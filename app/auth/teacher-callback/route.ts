@@ -38,7 +38,14 @@ export async function GET(request: NextRequest) {
   const match = matches?.[0];
 
   if (findError || !match) {
-    await rejectAndCleanup(supabase, authUserId, `사전 등록되지 않은 Google 계정: ${email}`);
+    // google_user_id를 사유에 포함한다 — 이메일만으로는 "어떤 요청이
+    // 거부됐는지" 사후에 구분할 수 없고, 이 필드는 비밀이 아닌 불투명
+    // 식별자라 감사 기록에 남겨도 안전하다.
+    await rejectAndCleanup(
+      supabase,
+      authUserId,
+      `사전 등록되지 않은 Google 계정: ${email} (google_user_id=${googleUserId})`
+    );
     return NextResponse.redirect(loginError(siteUrl, "등록되지 않은 계정입니다. 관리자에게 문의해주세요."));
   }
 
