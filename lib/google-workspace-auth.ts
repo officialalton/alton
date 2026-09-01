@@ -24,6 +24,17 @@ import { ExternalAccountClient, type BaseExternalAccountClient } from "google-au
 // google-auth-library(impersonation 토큰)와 이 파일의 모듈 스코프 변수
 // (DWD 토큰, lib/docusign.ts와 동일한 만료 임박 재발급 패턴)가 각각
 // 같은 실행 환경 안에서만 담당한다 — 인스턴스가 재시작되면 사라진다.
+//
+// GCP Workload Identity Pool Provider의 audience 설정은 "Allowed
+// audiences = https://vercel.com/[team-slug]"(Vercel이 발급하는 OIDC
+// 토큰의 기본 aud, 실측 확인됨)로 구성했다 — "Default audience"(리소스
+// 이름 자체를 aud로 강제하는 모드)가 아니다. 그래서 getVercelOidcToken()은
+// 커스텀 audience 없이 그대로 호출한다(Vercel 공식 예제의 기본 경로와
+// 동일) — GOOGLE_WORKLOAD_IDENTITY_AUDIENCE는 ExternalAccountClient
+// 자신의 audience 필드(STS 교환에서 "어느 WIF provider로 검증할지"
+// 식별자, GCP 리소스 이름 형식)에만 쓰이고 Vercel 토큰의 aud 클레임과는
+// 무관하다 — 이 둘을 같은 값으로 착각해 커스텀 audience를 다시 넘기면
+// GCP Provider의 Allowed audiences 설정과 불일치해 인증이 실패한다.
 
 const DIRECTORY_SCOPE = "https://www.googleapis.com/auth/admin.directory.user";
 const OAUTH_TOKEN_URL = "https://oauth2.googleapis.com/token";
@@ -50,12 +61,21 @@ function getExternalAccountClient(): BaseExternalAccountClient {
 
   const client = ExternalAccountClient.fromJSON({
     type: "external_account",
+    // 이 audience는 GCP WIF Provider의 리소스 이름(STS 교환에서 "어느
+    // provider로 검증할지" 식별자)이다 — Vercel OIDC 토큰 자체의 aud
+    // 클레임과는 다른 값이다. 우리는 GCP Provider를 "Allowed audiences =
+    // https://vercel.com/[team]"(Vercel 기본값) 모드로 설정했으므로,
+    // 아래 subject_token_supplier는 getVercelOidcToken()을 인자 없이
+    // 그대로 호출해 Vercel의 기본 aud를 그대로 쓴다(Default audience
+    // 모드였다면 여기도 이 audience를 넘겨 aud를 강제해야 했겠지만,
+    // Allowed audiences 모드는 "추가 코드 설정 없이" 동작하도록 설계된
+    // 경로다 — Vercel 공식 문서 예제와 동일).
     audience,
     subject_token_type: "urn:ietf:params:oauth:token-type:jwt",
     token_url: "https://sts.googleapis.com/v1/token",
     service_account_impersonation_url: `https://iamcredentials.googleapis.com/v1/projects/-/serviceAccounts/${serviceAccountEmail}:generateAccessToken`,
     subject_token_supplier: {
-      getSubjectToken: () => getVercelOidcToken({ audience }),
+      getSubjectToken: getVercelOidcToken,
     },
   });
   if (!client) {

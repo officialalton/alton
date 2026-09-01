@@ -75,10 +75,14 @@ describe("google-workspace-auth", () => {
         })
       );
 
-      // subject_token_supplier가 실제로 getVercelOidcToken을 호출하는지 확인
+      // subject_token_supplier가 실제로 getVercelOidcToken을 호출하는지 확인 —
+      // 인자 없이 그대로 호출해야 한다(Allowed audiences 모드는 Vercel의
+      // 기본 aud를 그대로 쓴다 — GOOGLE_WORKLOAD_IDENTITY_AUDIENCE를 커스텀
+      // audience로 억지로 넘기면 Default audience 모드용 aud가 되어 GCP
+      // Provider의 Allowed audiences 설정과 불일치하게 된다).
       const config = fromJSONMock.mock.calls[0][0];
       await config.subject_token_supplier.getSubjectToken();
-      expect(getVercelOidcTokenMock).toHaveBeenCalled();
+      expect(getVercelOidcTokenMock).toHaveBeenCalledWith(undefined);
     });
 
     it("직접 구현했던 STS 교환 코드(fetch 기반)는 더 이상 존재하지 않는다 — fetch를 전혀 호출하지 않는다", async () => {
