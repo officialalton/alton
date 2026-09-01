@@ -705,6 +705,27 @@ Task 2 승인 시 사용자가 함께 확정한 후속 Task의 원본 요구사�
 - **플래그 운용 순서 확정**: 두 플래그 기본값 `false` 유지. 콘솔 1~8단계 완료 후 read flag만 `true`로 켜 preflight 실행 → 검토 후 read flag는 다시 `false`로 복귀(기본 원칙) → 실제 쓰기 테스트 직전에만 write flag를 별도 승인으로 `true` → 쓰기 검증 종료 후 다시 `false`. 장기 운영에서 계속 켜둘지는 테스트 종료 후 별도 운영 통제 정책으로 결정(지금 결정하지 않음).
 - **Node 런타임 확인(사용자 조치 필요)**: `engines.node>=22`는 코드 선언일 뿐, Vercel 프로젝트의 실제 배포 Node 버전은 Vercel 대시보드(Project Settings → General → Node.js Version)에서 직접 확인해야 한다 — 이 세션에는 Vercel API/CLI 인증이 없어 원격으로 조회할 수 없다. 대신 로컬에서 확인 가능한 것들은 확인 완료: (a) 어떤 기존 라우트도 Edge 런타임을 선언하지 않음, (b) `middleware.ts`(Next.js 특성상 항상 Edge 런타임)는 신규 Workspace 모듈을 전혀 import하지 않음, (c) 신규 의존성(`google-auth-library`)을 쓰는 파일은 신규 3개 라우트/서버 액션으로만 국한되어 기존 기능에는 번들링·런타임 영향이 없음, (d) `npm run build` 정상 완료(신규 라우트 전부 Node 런타임으로 컴파일).
 
+### Task 7 — 로컬 Google OAuth 로그인 E2E 실제 검증 (2026-09-01, GCP 콘솔 Step 1~8과 별개로 코드·로컬 인프라만으로 진행)
+
+콘솔 Step 1~8(Vercel OIDC, GCP WIF Pool/Provider/IAM, Workspace DWD scope·테스트 OU, 로컬 OAuth Client) 진행 중 로컬 Google 로그인 전체 체인을 실제로 검증했다. Directory API 읽기·쓰기 전혀 없음, 원격 개발 DB·Vercel Production 환경 전혀 변경하지 않음 — 로컬 DB·로컬 OAuth Client·실제 브라우저 로그인만 사용.
+
+**사전 이슈 발견·수정 2건**:
+1. `npx supabase db reset`만으로는 GoTrue 컨테이너의 Auth 프로바이더 설정이 갱신되지 않는다(`GOTRUE_EXTERNAL_GOOGLE_ENABLED` 등이 반영 안 됨) — `supabase stop` + `supabase start`로 전체 재시작해야 하며, `.env.local`의 `SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET`이 `env()` 치환되려면 그 값이 CLI를 실행하는 셸의 실제 프로세스 환경에 export돼 있어야 한다(이 프로젝트의 `.env.local`은 여러 줄짜리 값이 섞여 있어 통째로 `source`하면 파싱 에러가 나므로, 필요한 한 줄만 추출해 export).
+2. 이 진단 과정에서 `docker exec ... env`로 GoTrue 컨테이너 환경변수를 확인하다 **Client Secret 원문을 대화에 실수로 노출**했다(사용자가 앞서 스크린샷으로 공유한 것과 같은 값) — 사용자가 즉시 재발급하고 `.env.local`을 교체했고, 이후 모든 확인은 `grep -v SECRET`으로 비밀값을 제외하고 재검증했다. **교훈**: 비밀값이 들어있을 수 있는 명령 출력은 항상 필터링한 뒤에만 표시한다.
+
+**실제 브라우저 3-라운드 검증**:
+
+| 항목 | 결과 |
+|---|---|
+| Round A-1: `teacher1@alton.education`, provisioning은 있으나 `workspace_google_user_id` 미설정(NULL) 상태로 로그인 | 거부(`/login?error=등록되지 않은 계정입니다`) — NULL은 어떤 실제 ID와도 매치되지 않음을 실제 확인 |
+| 실제 Google user ID 확보 방법 | Directory API 조회·추측 없이 확보 — GoTrue 감사 로그는 내부 actor_id(Supabase 자체 UUID)만 남기고 원문 sub를 남기지 않음을 실측 확인했고, 대신 콜백 라우트 코드에 **임시** 진단 로그(로컬 dev 서버 stdout에만, DB에는 전혀 기록 안 함)를 추가해 실제 sub(`111507678677650332821`)를 확보한 뒤 즉시 코드에서 제거(git diff 확인으로 원상 복구 검증) |
+| Round A-2: 실제 ID로 provisioning 갱신 후 `teacher1@alton.education` 재로그인 | **성공** — `profiles`/`teachers` 생성, `role=teacher`, **`status=pending`**(OAuth 연결 자체가 활성화를 의미하지 않는다는 설계 그대로), `/account-pending`으로 정상 라우팅(관리자 승인 대기 안내) |
+| Round B: `teacher2@alton.education`, provisioning은 있으나 **의도적으로 틀린** placeholder google_user_id로 로그인 | 거부 — 이메일이 일치하는 provisioning 레코드가 존재해도 Google 고유 ID가 다르면 연결되지 않음을 실제 브라우저로 확인(이메일만으로는 연결되지 않는다는 anti-spoofing 요구사항의 핵심 증거) |
+| 거부 시 고아 계정 미잔존 | `profiles`/`auth.users` 카운트가 시나리오 전후 정확히 9/9로 일치(성공 케이스에서만 정확히 +1) — Round B의 orphan auth.users는 자동 삭제 확인 |
+| 거부 감사 로그의 비식별화 | `workspace_provisioning_events`에 남은 3건의 `link_rejected` 사유가 전부 `email_hash=.../google_id_hash=...`(SHA-256) 형태이고 이메일·Google ID 원문은 어디에도 없음을 확인 |
+
+**정리**: `teacher_workspace_provisioning` 2건(teacher1/teacher2), 연결 이벤트 6건, Round A에서 생성된 `profiles`/`teachers`/`auth.users`(teacher1 fixture) 1세트 전부 FK 순서(`workspace_provisioning_events`→`teacher_workspace_provisioning`→`teachers`→`profiles`→`auth.users`)대로 삭제, 최종 `profiles=9, auth.users=9, teacher_workspace_provisioning=0, workspace_provisioning_events=0`으로 시나리오 시작 전 baseline과 정확히 일치 확인. `app/auth/teacher-callback/route.ts`는 git diff 결과 커밋된 상태와 완전히 동일(임시 진단 로그 완전 제거 확인). `npx tsc --noEmit` 클린, 관련 vitest 전체 통과.
+
 ### 남은 작업 (사용자 5단계 계획 기준)
 
 1. ~~DB 마이그레이션 적용 및 재검증~~ — 완료(위 절).
