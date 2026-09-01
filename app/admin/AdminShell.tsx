@@ -9,7 +9,17 @@ import CatalogTab from "./CatalogTab";
 import UsersTab from "./UsersTab";
 import BillingTab from "./BillingTab";
 import ContractsTab from "./ContractsTab";
-import type { FamilyContract, PendingConsult } from "./contracts-data";
+import type { AcceptedProposalForContract, FamilyContract, PendingConsult } from "./contracts-data";
+import ConsultationTab from "./ConsultationTab";
+import type {
+  ConsultationListItem,
+  TrialSessionListItem,
+  ProposalListItem,
+  ConsentGapItem,
+  AiNotesConsentEventItem,
+  DriveArtifactIssue,
+  StaleEnvelopeContract,
+} from "./consultation-data";
 import DevLogTab from "./DevLogTab";
 import PayoutsTab from "./PayoutsTab";
 import type { PayoutListItem } from "./payouts-data";
@@ -56,6 +66,14 @@ export default function AdminShell({
   qcWarningsByTeacher,
   pendingConsults,
   familyContracts,
+  acceptedProposalsForContract,
+  consultations,
+  trials,
+  proposals,
+  consentGaps,
+  aiNotesEvents,
+  driveIssues,
+  staleEnvelopes,
   devLogContent,
   payouts,
   teacherCandidatesBySubject,
@@ -72,6 +90,14 @@ export default function AdminShell({
   qcWarningsByTeacher: Record<string, QcWarning[]>;
   pendingConsults: PendingConsult[];
   familyContracts: FamilyContract[];
+  acceptedProposalsForContract: AcceptedProposalForContract[];
+  consultations: ConsultationListItem[];
+  trials: TrialSessionListItem[];
+  proposals: ProposalListItem[];
+  consentGaps: ConsentGapItem[];
+  aiNotesEvents: AiNotesConsentEventItem[];
+  driveIssues: DriveArtifactIssue[];
+  staleEnvelopes: StaleEnvelopeContract[];
   devLogContent: string;
   payouts: PayoutListItem[];
   teacherCandidatesBySubject: Record<string, MatchingTeacherCandidate[]>;
@@ -159,7 +185,17 @@ export default function AdminShell({
               creditHistoryByStudent={creditHistoryByStudent}
             />
           ) : activeTab === "contracts" ? (
-            <ContractsTab pendingConsults={pendingConsults} contracts={familyContracts} />
+            <ContractsTab contracts={familyContracts} acceptedProposals={acceptedProposalsForContract} />
+          ) : activeTab === "consult" ? (
+            <ConsultationTab
+              consultations={consultations}
+              trials={trials}
+              proposals={proposals}
+              consentGaps={consentGaps}
+              aiNotesEvents={aiNotesEvents}
+              driveIssues={driveIssues}
+              staleEnvelopes={staleEnvelopes}
+            />
           ) : activeTab === "devlog" ? (
             <DevLogTab content={devLogContent} />
           ) : activeTab === "payouts" ? (

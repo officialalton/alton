@@ -1,130 +1,338 @@
 "use client";
 
 import { useState } from "react";
-import { sendFamilyContract } from "./contracts-actions";
-import type { FamilyContract, PendingConsult } from "./contracts-data";
+import {
+  createContractFromProposal,
+  companySignOffContractVersion,
+  sendContractForSignature,
+  createNewContractVersionForResend,
+  voidContractVersion,
+  reconcileDocusignStatus,
+} from "./consultation-actions";
+import type { AcceptedProposalForContract, FamilyContract } from "./contracts-data";
+
+const btnPrimary =
+  "text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50";
+const btnSecondary =
+  "text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50";
+const card = "border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3";
+
+const STATUS_LABEL: Record<string, string> = {
+  draft: "초안",
+  ready: "준비됨",
+  sent: "발송됨",
+  awaiting_signature: "서명 대기",
+  signed: "서명완료",
+  active: "활성",
+  termination_pending: "해지 대기",
+  terminated: "해지됨",
+  void: "무효",
+  superseded: "대체됨",
+  expired: "만료",
+};
 
 export default function ContractsTab({
-  pendingConsults,
   contracts,
+  acceptedProposals,
 }: {
-  pendingConsults: PendingConsult[];
   contracts: FamilyContract[];
+  acceptedProposals: AcceptedProposalForContract[];
 }) {
-  const [openId, setOpenId] = useState<string | null>(null);
-  const [studentName, setStudentName] = useState("");
-  const [studentEmail, setStudentEmail] = useState("");
-  const [sentIds, setSentIds] = useState<string[]>([]);
-  const [loadingId, setLoadingId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [creating, setCreating] = useState(false);
+  const [openId, setOpenId] = useState<string | null>(null);
 
-  const visiblePending = pendingConsults.filter((c) => !sentIds.includes(c.id));
+  return (
+    <div className="max-w-[880px] px-8 py-8">
+      <h1 className="text-[20px] font-extrabold text-ink mb-1">계약</h1>
+      <p className="text-[13px] text-grey-500 mb-5">
+        수락된 제안서로부터 계약을 생성하고, 회사 선서명 → 발송 → 서명 상태를 관리합니다.
+      </p>
 
-  async function handleSend(consultRequestId: string) {
-    setError(null);
-    setLoadingId(consultRequestId);
+      {error && <p className="text-[12px] text-red mb-3">{error}</p>}
+
+      <h2 className="text-[14px] font-bold text-ink mb-3">계약 생성 대기 (수락된 제안서)</h2>
+      <div className="mb-8">
+        {acceptedProposals.length === 0 ? (
+          <p className="text-[13px] text-grey-500">계약을 생성할 수 있는 수락된 제안서가 없습니다.</p>
+        ) : (
+          acceptedProposals.map((p) => (
+            <NewContractRow
+              key={p.proposalId}
+              proposal={p}
+              onError={setError}
+              open={creating === true}
+            />
+          ))
+        )}
+      </div>
+
+      <h2 className="text-[14px] font-bold text-ink mb-3">계약 목록</h2>
+      {contracts.length === 0 ? (
+        <p className="text-[13px] text-grey-500">등록된 계약이 없습니다.</p>
+      ) : (
+        contracts.map((c) => {
+          const open = openId === c.id;
+          const latest = c.versions[c.versions.length - 1];
+          return (
+            <div key={c.id} className={card} data-testid={`contract-card-${c.id}`}>
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="text-[14px] font-bold text-ink">
+                    {c.parentName} · {c.studentName}{" "}
+                    <span className="text-[11px] font-semibold text-grey-500">
+                      ({STATUS_LABEL[c.status] ?? c.status})
+                    </span>
+                  </div>
+                  <div className="text-[12px] text-grey-500">
+                    버전 {c.versions.length}개
+                    {c.voidedAt ? ` · 무효화: ${c.voidReason}` : ""}
+                  </div>
+                </div>
+                <button className={btnSecondary} onClick={() => setOpenId(open ? null : c.id)}>
+                  {open ? "닫기" : "관리"}
+                </button>
+              </div>
+
+              {open && latest && (
+                <ContractDetail contract={c} latestVersion={latest} onError={setError} />
+              )}
+            </div>
+          );
+        })
+      )}
+    </div>
+  );
+}
+
+function NewContractRow({
+  proposal,
+  onError,
+}: {
+  proposal: AcceptedProposalForContract;
+  onError: (e: string | null) => void;
+  open: boolean;
+}) {
+  const [busy, setBusy] = useState(false);
+  const [done, setDone] = useState(false);
+
+  if (done) return null;
+
+  const missingIds = !proposal.householdId || !proposal.childId;
+
+  return (
+    <div
+      className={card + " flex items-center justify-between"}
+      data-testid={`new-contract-row-${proposal.proposalId}`}
+    >
+      <div>
+        <div className="text-[14px] font-bold text-ink">{proposal.contactName}</div>
+        <div className="text-[12px] text-grey-500">
+          {missingIds
+            ? "이 상담에는 household/child가 아직 연결되지 않아 계약을 생성할 수 없습니다."
+            : "수락된 제안서 — 계약 생성 가능"}
+        </div>
+      </div>
+      <button
+        disabled={busy || missingIds}
+        className={btnPrimary}
+        onClick={async () => {
+          setBusy(true);
+          onError(null);
+          try {
+            await createContractFromProposal({
+              householdId: proposal.householdId!,
+              childId: proposal.childId!,
+              proposalId: proposal.proposalId,
+            });
+            setDone(true);
+          } catch (e) {
+            onError(e instanceof Error ? e.message : "계약 생성에 실패했습니다.");
+          } finally {
+            setBusy(false);
+          }
+        }}
+      >
+        {busy ? "생성 중…" : "계약 생성"}
+      </button>
+    </div>
+  );
+}
+
+function ContractDetail({
+  contract,
+  latestVersion,
+  onError,
+}: {
+  contract: FamilyContract;
+  latestVersion: FamilyContract["versions"][number];
+  onError: (e: string | null) => void;
+}) {
+  const [busy, setBusy] = useState(false);
+  const [voidReason, setVoidReason] = useState("");
+  const [recipientEmail, setRecipientEmail] = useState("");
+  const [recipientName, setRecipientName] = useState(contract.parentName);
+
+  const signedOff = !!latestVersion.companySignedAt;
+  const canSend = signedOff && !latestVersion.docusignEnvelopeId;
+
+  async function run(fn: () => Promise<void>) {
+    setBusy(true);
+    onError(null);
     try {
-      await sendFamilyContract({ consultRequestId, studentName, studentEmail });
-      setSentIds((prev) => [...prev, consultRequestId]);
-      setOpenId(null);
-      setStudentName("");
-      setStudentEmail("");
+      await fn();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "계약서 발송에 실패했습니다.");
+      onError(e instanceof Error ? e.message : "처리에 실패했습니다.");
     } finally {
-      setLoadingId(null);
+      setBusy(false);
     }
   }
 
   return (
-    <div className="max-w-[720px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-1">계약</h1>
-      <p className="text-[13px] text-grey-500 mb-5">DocuSign 서명 상태를 총괄합니다.</p>
+    <div className="mt-3 pt-3 border-t border-grey-200 space-y-4">
+      <div>
+        <div className="text-[12px] font-bold text-ink mb-1">
+          최신 버전 (v{latestVersion.versionNumber})
+        </div>
+        <div className="text-[12px] text-grey-500 mb-2">
+          회사 선서명: {signedOff ? `완료 (${new Date(latestVersion.companySignedAt!).toLocaleString("ko-KR")})` : "대기"}
+          {" · "}
+          Envelope: {latestVersion.docusignEnvelopeStatus ?? "미발송"}
+        </div>
 
-      <h2 className="text-[14px] font-bold text-ink mb-3">발송 대기</h2>
-      <div className="mb-8">
-        {visiblePending.length === 0 && (
-          <p className="text-[13px] text-grey-500">발송 대기 중인 상담 신청이 없습니다.</p>
+        {!signedOff && (
+          <button
+            disabled={busy}
+            className={btnSecondary}
+            onClick={() => run(() => companySignOffContractVersion(latestVersion.id))}
+          >
+            회사 선서명 승인
+          </button>
         )}
-        {visiblePending.map((c) => (
-          <div key={c.id} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3">
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="text-[14px] font-bold text-ink">{c.personName}</div>
-                <div className="text-[12px] text-grey-500">{c.email}</div>
-              </div>
-              {openId !== c.id && (
-                <button
-                  onClick={() => {
-                    setOpenId(c.id);
-                    setStudentName("");
-                    setStudentEmail("");
-                  }}
-                  className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5"
-                >
-                  계약서 발송
-                </button>
-              )}
+
+        <div className="mt-2">
+          {!signedOff ? (
+            <p className="text-[11.5px] text-grey-500">
+              발송 버튼은 회사 선서명이 완료되어야 활성화됩니다.
+            </p>
+          ) : latestVersion.docusignEnvelopeId ? (
+            <p className="text-[11.5px] text-grey-500">이미 발송된 버전입니다. 상태를 새로고침하거나 재발송(새 버전 생성)하세요.</p>
+          ) : (
+            <div className="flex items-center gap-2 flex-wrap mt-1">
+              <input
+                value={recipientName}
+                onChange={(e) => setRecipientName(e.target.value)}
+                placeholder="수신자 이름"
+                className="border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[12px]"
+              />
+              <input
+                value={recipientEmail}
+                onChange={(e) => setRecipientEmail(e.target.value)}
+                placeholder="수신자 이메일"
+                className="border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[12px]"
+              />
+              <button
+                disabled={busy || !canSend || !recipientEmail}
+                className={btnPrimary}
+                title={!signedOff ? "회사 선서명이 완료되어야 발송할 수 있습니다." : undefined}
+                onClick={() =>
+                  run(async () => {
+                    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "";
+                    await sendContractForSignature({
+                      contractVersionId: latestVersion.id,
+                      recipientEmail,
+                      recipientName,
+                      childName: contract.studentName,
+                      webhookUrl: `${siteUrl}/api/webhooks/docusign`,
+                    });
+                  })
+                }
+              >
+                발송
+              </button>
             </div>
-            {openId === c.id && (
-              <div className="mt-3 pt-3 border-t border-grey-200">
-                <label htmlFor={`student-name-${c.id}`} className="block text-[12px] font-semibold text-grey-500 mb-1">
-                  학생 이름
-                </label>
-                <input
-                  id={`student-name-${c.id}`}
-                  value={studentName}
-                  onChange={(e) => setStudentName(e.target.value)}
-                  className="w-full border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px] mb-2"
-                />
-                <label htmlFor={`student-email-${c.id}`} className="block text-[12px] font-semibold text-grey-500 mb-1">
-                  학생 이메일
-                </label>
-                <input
-                  id={`student-email-${c.id}`}
-                  value={studentEmail}
-                  onChange={(e) => setStudentEmail(e.target.value)}
-                  className="w-full border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px] mb-3"
-                />
-                {error && <p className="text-[12px] text-red mb-2">{error}</p>}
-                <button
-                  onClick={() => handleSend(c.id)}
-                  disabled={loadingId === c.id}
-                  className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
-                >
-                  {loadingId === c.id ? "발송 중…" : "발송 확정"}
-                </button>
-              </div>
-            )}
-          </div>
-        ))}
+          )}
+        </div>
+
+        {latestVersion.docusignEnvelopeId && (
+          <button
+            disabled={busy}
+            className={btnSecondary + " mt-2"}
+            onClick={() =>
+              run(async () => {
+                await reconcileDocusignStatus(latestVersion.id);
+              })
+            }
+          >
+            상태 새로고침
+          </button>
+        )}
       </div>
 
-      <h2 className="text-[14px] font-bold text-ink mb-3">발송된 계약</h2>
-      {contracts.length === 0 ? (
-        <p className="text-[13px] text-grey-500">발송된 계약이 없습니다.</p>
-      ) : (
-        <table className="w-full text-[13px]">
-          <thead>
-            <tr className="text-left text-grey-500 border-b border-grey-200">
-              <th className="py-2">학부모</th>
-              <th className="py-2">학생</th>
-              <th className="py-2">상태</th>
-              <th className="py-2">서명일</th>
-            </tr>
-          </thead>
-          <tbody>
-            {contracts.map((c) => (
-              <tr key={c.id} className="border-b border-grey-100">
-                <td className="py-2">{c.parentName}</td>
-                <td className="py-2">{c.studentName}</td>
-                <td className="py-2">{c.status === "signed" ? "서명완료" : "발송됨"}</td>
-                <td className="py-2">{c.signedAt ?? "-"}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+      <div>
+        <div className="text-[12px] font-bold text-ink mb-1">재발송(새 버전)</div>
+        <p className="text-[11.5px] text-grey-500 mb-1.5">
+          재발송은 기존 서명 상태를 덮어쓰지 않고 새 계약 버전을 만듭니다. 새 버전도 회사 선서명을 다시 거쳐야 발송할 수 있습니다.
+        </p>
+        <button
+          disabled={busy}
+          className={btnSecondary}
+          onClick={() =>
+            run(async () => {
+              await createNewContractVersionForResend({
+                contractId: contract.id,
+                proposalId: latestVersion.proposalId ?? undefined,
+              });
+            })
+          }
+        >
+          새 버전으로 재발송 준비
+        </button>
+      </div>
+
+      <div>
+        <div className="text-[12px] font-bold text-ink mb-1">무효화</div>
+        <div className="flex items-center gap-2">
+          <input
+            value={voidReason}
+            onChange={(e) => setVoidReason(e.target.value)}
+            placeholder="무효화 사유(필수)"
+            className="border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[12px] flex-1"
+          />
+          <button
+            disabled={busy || !voidReason}
+            className={btnSecondary}
+            onClick={() => run(() => voidContractVersion(latestVersion.id, voidReason))}
+          >
+            계약 무효화
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <div className="text-[12px] font-bold text-ink mb-1.5">문서 보관 (Google Drive)</div>
+        {contract.driveArtifacts.length === 0 ? (
+          <p className="text-[11.5px] text-grey-500">보관된 문서가 없습니다.</p>
+        ) : (
+          contract.driveArtifacts.map((a) => (
+            <div key={a.id} className="text-[12px] text-ink flex items-center justify-between py-1">
+              <span>{a.artifactType}</span>
+              {a.driveFileId ? (
+                <a
+                  href={`https://drive.google.com/file/d/${a.driveFileId}/view`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-ink underline"
+                >
+                  보기
+                </a>
+              ) : (
+                <span className="text-grey-500">보관 대기 중 ({a.syncStatus})</span>
+              )}
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 }

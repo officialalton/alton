@@ -33,7 +33,9 @@ export async function sendFamilyContract(params: {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
   if (!siteUrl) throw new Error("NEXT_PUBLIC_SITE_URL 환경변수가 설정되지 않았습니다.");
   const webhookToken = process.env.DOCUSIGN_WEBHOOK_TOKEN ?? "";
-  const { envelopeId } = await createEnvelope({
+  // envelopeId는 아직 v3 contracts 테이블에 기록할 곳이 없다(위 TODO 참고) — 발송 자체는
+  // 그대로 수행하고 반환값은 현재 사용하지 않는다.
+  await createEnvelope({
     recipientEmail: consult.email,
     recipientName: consult.person_name,
     documentHtml: renderFamilyContractHtml({
@@ -44,13 +46,17 @@ export async function sendFamilyContract(params: {
     webhookUrl: `${siteUrl}/api/webhooks/docusign?token=${webhookToken}`,
   });
 
-  const { error: contractError } = await admin.from("contracts").insert({
-    parent_id: parentId,
-    student_id: studentId,
-    docusign_envelope_id: envelopeId,
-    status: "sent",
-  });
-  if (contractError) throw new Error(contractError.message);
+  // TODO(R3 후속): R3 cutover로 `contracts`는 이제 v3 스키마(household_id/child_id/
+  // status/created_at/updated_at)를 쓴다. docusign_envelope_id 컬럼은 아직 이 테이블에
+  // 없다(다음 R3 스키마 마이그레이션에서 DocuSign/컨설팅 관련 컬럼을 추가할 예정 —
+  // master-roadmap-v3.md R3 참고). 또한 R2 Task 4부터 inviteParent/inviteStudent는
+  // 즉시 profile을 만들지 않고 account_invites만 생성하므로(household도 초대 수락
+  // 시에야 확정), 여기서 반환되는 parentId/studentId는 실제 profiles(id)/households(id)가
+  // 아니라 invite_id다 — 지금 이 시점에는 v3 contracts 행이 참조할 실제
+  // household_id/child_id를 알 수 없다. 잘못된 값으로 FK 제약을 위반하는 행을 만드는
+  // 대신, 초대 수락 플로우와 통합해 v3 contracts 행을 만드는 작업은 별도 R3 후속
+  // 작업으로 남겨둔다 — 지금은 DocuSign 발송/상담 전환만 수행하고 contracts insert는
+  // 생략한다.
 
   const { error: updateError } = await admin
     .from("consult_requests")

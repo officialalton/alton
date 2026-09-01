@@ -137,3 +137,142 @@ describe("createEnvelope", () => {
     ).rejects.toThrow("DocuSign 봉투 생성 실패");
   });
 });
+
+describe("assertDocusignSandboxBaseUri", () => {
+  beforeEach(() => {
+    vi.resetModules();
+    delete process.env.DOCUSIGN_BASE_URI;
+    delete process.env.DOCUSIGN_AUTH_SERVER;
+  });
+
+  it("demo.docusign.net이면 통과한다", async () => {
+    process.env.DOCUSIGN_BASE_URI = "https://demo.docusign.net";
+    process.env.DOCUSIGN_AUTH_SERVER = "account-d.docusign.com";
+    const { assertDocusignSandboxBaseUri } = await import("./docusign");
+    expect(() => assertDocusignSandboxBaseUri()).not.toThrow();
+  });
+
+  it("production으로 보이는 base URI면 throw한다", async () => {
+    process.env.DOCUSIGN_BASE_URI = "https://na4.docusign.net";
+    process.env.DOCUSIGN_AUTH_SERVER = "account.docusign.com";
+    const { assertDocusignSandboxBaseUri } = await import("./docusign");
+    expect(() => assertDocusignSandboxBaseUri()).toThrow(/sandbox/);
+  });
+
+  it("환경변수가 비어있으면 throw한다", async () => {
+    const { assertDocusignSandboxBaseUri } = await import("./docusign");
+    expect(() => assertDocusignSandboxBaseUri()).toThrow(/sandbox/);
+  });
+});
+
+describe("verifyDocusignWebhookSignature", () => {
+  beforeEach(() => {
+    vi.resetModules();
+    delete process.env.DOCUSIGN_WEBHOOK_TOKEN;
+  });
+
+  it("올바른 HMAC-SHA256(secret, body) 서명이면 true를 반환한다", async () => {
+    const { createHmac } = await import("crypto");
+    process.env.DOCUSIGN_WEBHOOK_TOKEN = "secret123";
+    const body = JSON.stringify({ event: "envelope-completed" });
+    const signature = createHmac("sha256", "secret123").update(body, "utf8").digest("base64");
+
+    const { verifyDocusignWebhookSignature } = await import("./docusign");
+    expect(verifyDocusignWebhookSignature(body, signature)).toBe(true);
+  });
+
+  it("서명이 틀리면 false를 반환한다", async () => {
+    process.env.DOCUSIGN_WEBHOOK_TOKEN = "secret123";
+    const { verifyDocusignWebhookSignature } = await import("./docusign");
+    expect(verifyDocusignWebhookSignature("{}", "wrong-signature")).toBe(false);
+  });
+
+  it("헤더가 없으면 false를 반환한다", async () => {
+    process.env.DOCUSIGN_WEBHOOK_TOKEN = "secret123";
+    const { verifyDocusignWebhookSignature } = await import("./docusign");
+    expect(verifyDocusignWebhookSignature("{}", null)).toBe(false);
+  });
+
+  it("DOCUSIGN_WEBHOOK_TOKEN이 설정되지 않았으면 어떤 서명값이 와도 fail-closed로 false다", async () => {
+    delete process.env.DOCUSIGN_WEBHOOK_TOKEN;
+    const { createHmac } = await import("crypto");
+    const body = "{}";
+    // 공격자가 임의의 secret으로 만든 서명을 보내도 통과해서는 안 된다.
+    const forgedSignature = createHmac("sha256", "").update(body, "utf8").digest("base64");
+
+    const { verifyDocusignWebhookSignature } = await import("./docusign");
+    expect(verifyDocusignWebhookSignature(body, forgedSignature)).toBe(false);
+  });
+});
+
+describe("getEnvelopeStatus / downloadCompletedDocument / downloadCertificateOfCompletion", () => {
+  beforeEach(() => {
+    vi.resetModules();
+    vi.unstubAllGlobals();
+    process.env.DOCUSIGN_INTEGRATION_KEY = "int-key";
+    process.env.DOCUSIGN_USER_ID = "user-id";
+    process.env.DOCUSIGN_AUTH_SERVER = "account-d.docusign.com";
+    process.env.DOCUSIGN_PRIVATE_KEY = testPrivateKeyPem;
+    process.env.DOCUSIGN_BASE_URI = "https://demo.docusign.net";
+    process.env.DOCUSIGN_ACCOUNT_ID = "acct-1";
+  });
+
+  it("getEnvelopeStatus는 봉투 상태를 조회한다", async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce({ ok: true, json: async () => ({ access_token: "tok", expires_in: 3600 }) })
+      .mockResolvedValueOnce({ ok: true, json: async () => ({ status: "completed" }) });
+    vi.stubGlobal("fetch", fetchMock);
+
+    const { getEnvelopeStatus } = await import("./docusign");
+    const result = await getEnvelopeStatus("env-1");
+
+    expect(result.status).toBe("completed");
+    expect(fetchMock.mock.calls[1][0]).toBe(
+      "https://demo.docusign.net/restapi/v2.1/accounts/acct-1/envelopes/env-1"
+    );
+  });
+
+  it("downloadCompletedDocument는 combined 문서 바이트를 반환한다", async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce({ ok: true, json: async () => ({ access_token: "tok", expires_in: 3600 }) })
+      .mockResolvedValueOnce({ ok: true, arrayBuffer: async () => new TextEncoder().encode("pdf-bytes").buffer });
+    vi.stubGlobal("fetch", fetchMock);
+
+    const { downloadCompletedDocument } = await import("./docusign");
+    const buffer = await downloadCompletedDocument("env-1");
+
+    expect(buffer.toString()).toBe("pdf-bytes");
+    expect(fetchMock.mock.calls[1][0]).toBe(
+      "https://demo.docusign.net/restapi/v2.1/accounts/acct-1/envelopes/env-1/documents/combined"
+    );
+  });
+
+  it("downloadCertificateOfCompletion은 certificate 문서 바이트를 반환한다", async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce({ ok: true, json: async () => ({ access_token: "tok", expires_in: 3600 }) })
+      .mockResolvedValueOnce({ ok: true, arrayBuffer: async () => new TextEncoder().encode("cert-bytes").buffer });
+    vi.stubGlobal("fetch", fetchMock);
+
+    const { downloadCertificateOfCompletion } = await import("./docusign");
+    const buffer = await downloadCertificateOfCompletion("env-1");
+
+    expect(buffer.toString()).toBe("cert-bytes");
+    expect(fetchMock.mock.calls[1][0]).toBe(
+      "https://demo.docusign.net/restapi/v2.1/accounts/acct-1/envelopes/env-1/documents/certificate"
+    );
+  });
+
+  it("문서 다운로드 실패 시 에러를 던진다", async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce({ ok: true, json: async () => ({ access_token: "tok", expires_in: 3600 }) })
+      .mockResolvedValueOnce({ ok: false, text: async () => "not found" });
+    vi.stubGlobal("fetch", fetchMock);
+
+    const { downloadCompletedDocument } = await import("./docusign");
+    await expect(downloadCompletedDocument("env-1")).rejects.toThrow("DocuSign 문서 다운로드 실패");
+  });
+});

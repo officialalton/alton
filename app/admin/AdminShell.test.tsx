@@ -39,6 +39,34 @@ vi.mock("./teacher-subjects-actions", () => ({
   unassignTeacherSubject: vi.fn(),
 }));
 
+vi.mock("./consultation-actions", () => ({
+  createConsultation: vi.fn(),
+  scheduleConsultation: vi.fn(),
+  rescheduleConsultation: vi.fn(),
+  cancelConsultation: vi.fn(),
+  markConsultationNoShow: vi.fn(),
+  findDuplicateConsultationCandidates: vi.fn(),
+  createClassificationTag: vi.fn(),
+  listClassificationTags: vi.fn(),
+  tagConsultation: vi.fn(),
+  untagConsultation: vi.fn(),
+  createTrialSessionFromConsultation: vi.fn(),
+  completeTrialSession: vi.fn(),
+  approveTrialException: vi.fn(),
+  cancelTrialSession: vi.fn(),
+  markTrialNoShow: vi.fn(),
+  createProposal: vi.fn(),
+  sendProposal: vi.fn(),
+  respondToProposal: vi.fn(),
+  retryFailedDriveArtifacts: vi.fn(),
+  reconcileDocusignStatus: vi.fn(),
+  createContractFromProposal: vi.fn(),
+  companySignOffContractVersion: vi.fn(),
+  sendContractForSignature: vi.fn(),
+  createNewContractVersionForResend: vi.fn(),
+  voidContractVersion: vi.fn(),
+}));
+
 const dashboard: AdminDashboardData = {
   adminName: "관리자",
   pendingConsults: [],
@@ -59,6 +87,14 @@ const baseProps = {
   qcWarningsByTeacher: {},
   pendingConsults: [],
   familyContracts: [],
+  acceptedProposalsForContract: [],
+  consultations: [],
+  trials: [],
+  proposals: [],
+  consentGaps: [],
+  aiNotesEvents: [],
+  driveIssues: [],
+  staleEnvelopes: [],
   devLogContent: "## Phase 1\n- [x] 완료된 항목\n- [ ] 남은 항목\n",
   payouts: [],
   teacherCandidatesBySubject: {},
@@ -133,7 +169,7 @@ describe("AdminShell", () => {
   it("계약 탭을 누르면 ContractsTab이 렌더링된다", () => {
     render(<AdminShell {...baseProps} />);
     fireEvent.click(screen.getByText("계약"));
-    expect(screen.getByText("발송 대기")).toBeInTheDocument();
+    expect(screen.getByText("계약 목록")).toBeInTheDocument();
   });
 
   it("정산 탭을 누르면 PayoutsTab이 렌더링된다", () => {

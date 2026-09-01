@@ -9,7 +9,16 @@ import {
   loadStudentCreditHistory,
   loadTeacherQcWarnings,
 } from "./users-data";
-import { loadPendingConsults, loadFamilyContracts } from "./contracts-data";
+import { loadPendingConsults, loadFamilyContracts, loadAcceptedProposalsForContract } from "./contracts-data";
+import {
+  loadConsultations,
+  loadTrialSessions,
+  loadProposals,
+  loadConsentGaps,
+  loadAiNotesConsentEvents,
+  loadDriveArtifactIssues,
+  loadStaleEnvelopeVersions,
+} from "./consultation-data";
 import { loadDevLog } from "./dev-log-data";
 import { loadPayouts } from "./payouts-data";
 import { loadTeacherCandidatesBySubject } from "./matching-data";
@@ -35,6 +44,14 @@ export default async function AdminHomePage({
     teachers,
     pendingConsults,
     familyContracts,
+    acceptedProposalsForContract,
+    consultations,
+    trials,
+    proposals,
+    consentGaps,
+    aiNotesEvents,
+    driveIssues,
+    staleEnvelopes,
     payouts,
     teacherCandidatesBySubject,
     workspaceProvisionings,
@@ -47,6 +64,14 @@ export default async function AdminHomePage({
     loadTeachers(supabase),
     loadPendingConsults(supabase),
     loadFamilyContracts(supabase),
+    loadAcceptedProposalsForContract(supabase),
+    loadConsultations(supabase),
+    loadTrialSessions(supabase),
+    loadProposals(supabase),
+    loadConsentGaps(supabase),
+    loadAiNotesConsentEvents(supabase),
+    loadDriveArtifactIssues(supabase),
+    loadStaleEnvelopeVersions(supabase),
     loadPayouts(supabase),
     loadTeacherCandidatesBySubject(supabase),
     loadWorkspaceProvisionings(supabase),
@@ -82,6 +107,14 @@ export default async function AdminHomePage({
       qcWarningsByTeacher={qcWarningsByTeacher}
       pendingConsults={pendingConsults}
       familyContracts={familyContracts}
+      acceptedProposalsForContract={acceptedProposalsForContract}
+      consultations={consultations}
+      trials={trials}
+      proposals={proposals}
+      consentGaps={consentGaps}
+      aiNotesEvents={aiNotesEvents}
+      driveIssues={driveIssues}
+      staleEnvelopes={staleEnvelopes}
       devLogContent={devLogContent}
       payouts={payouts}
       teacherCandidatesBySubject={teacherCandidatesBySubject}
