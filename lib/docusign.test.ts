@@ -118,6 +118,13 @@ describe("createEnvelope", () => {
     expect(body.eventNotification.url).toBe(
       "https://alton-ecru.vercel.app/api/webhooks/docusign?token=secret"
     );
+    // 2026-09-01 실측 근본원인: eventNotification에 includeHMAC이 없으면 계정에
+    // HMAC 키가 등록돼 있어도 X-DocuSign-Signature-1 헤더 없이 발송된다(우리 웹훅이
+    // 정당하게 401로 거부). envelope 레벨에서 명시적으로 요청해야 한다.
+    expect(body.eventNotification.includeHMAC).toBe("true");
+    // integratorManaged는 이 통합키로 다른 계정을 대신 관리하는 시나리오 전용
+    // 필드이며 우리는 자체 계정만 쓰므로 명시적으로 설정하지 않는다.
+    expect(body.eventNotification.integratorManaged).toBeUndefined();
   });
 
   it("발송 전 문서 HTML에 앵커 문자열이 없으면 DocuSign을 호출하지 않고 명확한 에러를 던진다(pre-send validation)", async () => {

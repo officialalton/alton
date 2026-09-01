@@ -155,6 +155,10 @@ export async function createEnvelope(params: {
         url: params.webhookUrl,
         loggingEnabled: "true",
         requireAcknowledgment: "true",
+        // includeHMAC 없이는 DocuSign이 요청 본문에 X-DocuSign-Signature-1 헤더를
+        // 붙이지 않는다(계정에 HMAC 키가 등록돼 있어도 이 envelope 레벨 플래그가
+        // 없으면 서명 없이 발송됨 — 2026-09-01 실측으로 확인된 근본원인).
+        includeHMAC: "true",
         envelopeEvents: [
           { envelopeEventStatusCode: "sent" },
           { envelopeEventStatusCode: "delivered" },
