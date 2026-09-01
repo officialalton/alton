@@ -640,13 +640,41 @@ Task 2 승인 시 사용자가 함께 확정한 후속 Task의 원본 요구사�
 | `npx vitest run` | **89개 파일 382개 테스트 전부 통과**(신규: `app/admin/workspace-actions.test.ts`, `lib/google-workspace.test.ts`, `app/auth/teacher-callback/route.test.ts`, `app/login/teacher-google-actions.test.ts`, `app/admin/WorkspaceTab.test.tsx`, `TeacherHomeDashboard.test.tsx` 갱신) |
 | **Playwright 전체** | **25개 전부 통과**(리그레션 수정 반영, Task 7 자체의 실제 Directory API 경로는 별도 E2E로 만들지 않음 — mock 반복 테스트는 vitest로 충분히 커버, 실제 호출은 실제 인프라 준비 후 1회 검증 대상) |
 
-### 원격 적용 — 보류 중 (사용자 확인 대기)
+### 원격 적용 (2026-09-05 완료, 커밋 `6cbbaea`) — DB 마이그레이션만, 앱 코드·실제 인프라는 별도 단계
 
-마이그레이션 자체는 순수 추가+`transition_account_status()`의 scoped 확장(teacher `pending→active`에만 영향, 다른 전이·역할 무관)이라 Task 5/6와 같은 방식으로 지금 푸시해도 안전하다. 다만 이 기능은 앱 코드(OAuth 콜백·관리자 화면)까지 함께 배포돼야 실제로 쓸 수 있고, 실제 Google 리소스 호출은 별도로 요청한 GCP/Vercel 사전조건(WIF 연결, Directory API scope 추가, 테스트 OU 생성, OAuth Client 등록)이 끝나야 유효하다 — 마이그레이션만 먼저 원격에 올릴지, 앱 배포·인프라 준비와 함께 묶어서 진행할지 사용자에게 확인 후 진행한다.
+사용자가 5단계 진행 순서를 확정했다: (1) DB 마이그레이션 적용·재검증, (2) GCP/Vercel WIF 인프라 설정(사용자 조치), (3) 앱 코드 배포, (4) 테스트 OU에서 실제 Workspace 계정 1건 생성 및 전체 E2E 검증, (5) 검증 성공 후 Task 7 완료 처리. 이 절은 1단계만 다룬다 — **실제 Google Workspace 호출은 사용자가 인프라 체크리스트를 확인·승인하기 전까지 실행하지 않는다.**
 
-### 남은 작업
+**백업**: `supabase db dump --linked`(스키마+데이터)를 합쳐 `~/alton-db-backups/pre-r2-task7-full-2026-09-05.sql`(345,806+ bytes 규모, 9,214줄)로 저장, SHA-256 체크섬 기록. `chmod 700`/`600`, git 미포함.
 
-1. **(사용자 조치 필요)** GCP/Vercel 사전조건 체크리스트 완료 — Directory API scope 추가, 테스트 OU 생성, WIF 풀·프로바이더 생성 및 위임 대상 서비스 계정에 `roles/iam.serviceAccountTokenCreator` 부여, Google OAuth Client 생성 및 Supabase Auth Google 프로바이더 등록.
-2. 위 완료 후 실제 1회 검증: WIF 체인 연결, 테스트 OU에 전용 계정(`teacher-provisioning-test@alton.education`) 1건 실제 생성, 중복 생성 충돌·실패 후 재시도·정지·재활성화 실제 실행, 실제 Google OAuth 최초 로그인 + immutable Google user ID 연결 검증(`teacher1@alton.education`/`teacher2@alton.education` 기존 계정으로 조회·anti-spoofing 확인).
-3. 실제 검증 통과 후에만 Task 7을 완료 처리한다(사용자 확정: "Task 7은 mock 구현만으로 완료 처리하지 않는다").
-4. 정식 오픈 전: 위임 대상을 `official@alton.education`에서 사용자 관리 권한만 가진 전용 자동화 관리자 계정으로 분리(보안 인수 조건, `master-roadmap-v3.md` R12에 등록 필요).
+**적용 전 원격 migration 목록**: 43개 적용됨, 1개(`20260905000000`) 미적용 확인 → 사전 상태 스냅샷(`profiles=6, teachers=3, students=1, parents=1`) 기록 → `supabase db push --linked` 실행 → 적용 성공 → `supabase migration list --linked`로 로컬·원격 44개 전부 일치 확인.
+
+**재검증 결과**:
+
+| 항목 | 결과 |
+|---|---|
+| 로컬·원격 migration 목록 일치 | 44개 전부 동일(불일치 0건) |
+| 기존 사용자·선생님 상태·데이터 보존 | `profiles=6, teachers=3, students=1, parents=1` — 적용 전후 완전 동일. 기존 선생님 3명의 `workspace_email`/`workspace_google_user_id`/`onboarding_completed_at` 전부 null(신규 컬럼, 기존 데이터 무영향) 확인 |
+| 신규 staging 테이블 빈 상태 | `teacher_workspace_provisioning=0, workspace_provisioning_events=0` |
+| 26개 정책 `current_account_active(` 잔존 참조 | 0건(Task 6 RLS 무변경 확인) |
+| 신규 테이블 RLS 배포 확인 | `teacher_workspace_provisioning`="관리자/본인 조회", `workspace_provisioning_events`="관리자만 조회" 정확히 배포됨 |
+| **기존 로그인·관리자 상태 전환 회귀** | 실제 원격 선생님(`d8fe6918-...`, active) 계정으로 `suspended→active` 실제 실행 → 정상 동작, 최종 `active` 확인(Task 7의 7조건 게이트는 `pending→active`에만 적용되므로 무관) |
+| **기존 선생님의 활성화 체크리스트(신규 provisioning 없이)** | `valid_rate=true`(실제 `teacher_rate_history` 기준), 나머지 6개는 false — 실제 데이터에서 정확히 파생됨을 확인 |
+| **신규 staging/state machine 전체 흐름(합성 테스트 데이터)** | provisioning 시작(`creating`) → 실패 기록(`retryable_failed`, `creation_failed`+`retry_scheduled` 이벤트) → 재시도(같은 `idempotency_key` 재사용 확인) → 생성 성공 기록(`created`) → 초대 발송(`first_login_pending`) 전부 실제 실행 확인 |
+| **OAuth anti-spoofing(합성 테스트 데이터)** | 잘못된 google_user_id로 조회 → 못 찾음, self-only 강제(본인 아닌 auth_user_id로 연결 시도) → 거부, 정상 연결 → 성공하며 **`teachers.status`가 정확히 `pending`으로 생성됨** 확인 |
+| **연결 직후 활성화 체크리스트** | `workspace_issued`/`first_login`/`identity_linked`/`admin_base_info` 4개가 각각 다른 정확한 증거 시각과 함께 true, `valid_rate`/`onboarding_complete`/`contract_signed`는 false — 하나로 뭉개지지 않음을 원격에서도 확인 |
+| **선행조건 미충족 상태의 `active` 전환 시도** | 거부, 메시지에 정확히 `valid_rate, onboarding_complete, contract_signed` 나열 |
+| 핵심 smoke test | `students`×`profiles`×`enrollments` 조인 등 기본 쿼리 정상 동작 |
+| 앱 코드 미배포 상태에서 기존 서비스 영향 | 이 절 전체가 DB 함수·테이블 직접 호출만으로 검증됐고, 신규 라우트(`/auth/teacher-callback`)·서버 액션·UI는 전혀 배포되지 않아 기존 로그인·포털 어디에서도 새 코드 경로에 진입할 방법이 없다 — 스키마 변경도 순수 추가라 기존 쿼리·RLS 무영향 |
+
+**테스트 데이터 정리**: 합성 provisioning 레코드(`b64e66cc-...`)와 합성 auth.users/profiles/teachers 행(`c1111111-...`)을 FK 순서(`workspace_provisioning_events`→`teacher_workspace_provisioning`→`teachers`→`profiles`→`auth.users`)대로 전부 삭제, 사전 스냅샷과 동일한 상태(`profiles=6, teachers=3, teacher_workspace_provisioning=0, workspace_provisioning_events=0`)로 원격 DB를 복원 확인.
+
+**결론**: 재검증 항목 전부 통과. 실사용자 데이터 손상·의도치 않은 상태 변경 없음, 기존 로그인·관리자 상태 전환 회귀 없음. **DB 마이그레이션 단계만 완료** — Task 7 자체는 계속 "로컬 구현 완료, 실제 인프라 검증 대기" 상태로 유지한다.
+
+### 남은 작업 (사용자 5단계 계획 기준)
+
+1. ~~DB 마이그레이션 적용 및 재검증~~ — 완료(위 절).
+2. **(사용자 조치 필요)** GCP/Vercel WIF 인프라 설정 — 콘솔별 순서·입력값·필요 권한·완료 확인 방법·민감정보 저장 여부를 정리해 별도로 제출한다(이 대화의 다음 메시지 참고). 실제 Google Workspace 호출은 사용자 승인 전까지 실행하지 않는다.
+3. 앱 코드 배포(2번 완료 후).
+4. 테스트 OU에서 실제 Workspace 계정 1건 생성 + 전체 E2E 검증(WIF 연결, 충돌·재시도·정지·재활성화, 실제 OAuth 최초 로그인 + immutable Google user ID 연결 — `teacher1@alton.education`/`teacher2@alton.education` 기존 계정으로 조회·anti-spoofing 확인, 신규 생성은 `teacher-provisioning-test@alton.education` 전용 계정 1개로).
+5. 4번 검증 성공 후에만 Task 7 완료 처리(사용자 확정: "Task 7은 mock 구현만으로 완료 처리하지 않는다").
+6. 정식 오픈 전: 위임 대상을 `official@alton.education`에서 사용자 관리 권한만 가진 전용 자동화 관리자 계정으로 분리(보안 인수 조건, `master-roadmap-v3.md` R12에 등록 완료).
