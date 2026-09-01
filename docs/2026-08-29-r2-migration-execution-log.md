@@ -738,6 +738,23 @@ Task 2 승인 시 사용자가 함께 확정한 후속 Task의 원본 요구사�
 - push 직전 최종 확인: `supabase/`, `app/`, `lib/`, `e2e/`, `package.json`, `package-lock.json`, `.env.example` 전부 `git status` 변경 없음(누락된 필수 코드·마이그레이션 없음). 미추적/미커밋 항목은 이 세션 이전부터 있던 PM 문서 초안뿐(범위 밖, 원래부터 건드리지 않음).
 - 사용자 승인: "R2 Tasks 2~7 전체 37개 커밋을 main에 한 번에 올리는 것으로 승인합니다", force push 금지·일반 fast-forward만 명시.
 
+**push 실행**: 이 대화 세션의 auto-mode 분류기가 `git push origin main`을 차단해(공유 저장소 main에 대한 push라 세션 정책상 차단), 사용자가 자신의 Mac 터미널에서 직접 `git push origin main` 실행 → `8918594..b7d495b main -> main`으로 성공(문서 기록용 커밋 1개 추가로 최종 38개 push). `git fetch` 후 `origin/main` = 로컬 HEAD = `b7d495b1c573a78da569b6e8e5395ae10b9df93f` 일치 확인, `git status -sb`에 분기 없음.
+
+**배포 확인(외부에서 확인 가능한 범위, Vercel 대시보드 접근 없이 HTTP로 검증)**:
+
+| 항목 | 결과 |
+|---|---|
+| `app.alton.education` 응답 | `200`, `server: Vercel`, 정상 서빙 |
+| `/api/admin/workspace-preflight` (미인증 POST) | **404 아님** — `403` + `x-matched-path: /api/admin/workspace-preflight` + 본문 `{"error":"로그인이 필요합니다."}`(정확히 `requireAdmin()`의 거부 메시지) — 실제 Google/Directory 로직에는 전혀 도달하지 않고 인증 게이트에서 막힘을 확인(요청대로 실제 preflight 미실행) |
+| 핵심 smoke test — 역할별 포털(세션 없음) | `/student`, `/parent`, `/teacher`, `/admin` 전부 `307`(→`/login`), 500 없음 |
+| 핵심 smoke test — 상태 제한 화면 | `/consent-pending`, `/account-pending`, `/account-suspended` 전부 `307`(→`/login`), 500 없음 |
+| `/auth/teacher-callback`(코드 없이 GET) | `307` → `https://app.alton.education/login?error=Google 로그인에 실패했습니다.` — **redirect 대상이 정확히 `app.alton.education`으로 해석됨**(Vercel Production의 `NEXT_PUBLIC_SITE_URL`이 올바르게 설정돼 있음을 확인) |
+| 로그인 페이지 UI | HTML에 "선생님 — Google로 로그인" 버튼 실제 존재 확인(신규 코드가 실제로 서빙되고 있음을 최종 확인) |
+
+**미확인(사용자 조치 필요)**: Vercel 대시보드에서 Production Branch가 실제로 `main`인지(Deploy Hook 설정이 아니라 Settings → Git → Production Branch 화면 기준), 그리고 이 배포가 정확히 커밋 `b7d495b`를 빌드했는지는 이 세션에 Vercel API/대시보드 접근이 없어 직접 확인 불가 — 위 HTTP 검증 결과(신규 라우트·신규 UI가 실제로 서빙됨)로 강하게 뒷받침되지만, 최종 확인은 사용자가 Vercel 대시보드에서 직접 해야 한다.
+
+**이 시점까지 유지된 것**: `WORKSPACE_PROVISIONING_ALLOW_REAL_CALLS=false`, `WORKSPACE_PREFLIGHT_ALLOW_REAL_READS=false`(둘 다 변경 없음) — 실제 Directory API 호출은 이번 절 전체에서 한 번도 실행되지 않았다.
+
 ### 남은 작업 (사용자 5단계 계획 기준, 2026-09-01 갱신)
 
 1. ~~DB 마이그레이션 적용 및 재검증~~ — 완료(위 절).
