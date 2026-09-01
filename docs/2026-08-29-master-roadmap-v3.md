@@ -166,13 +166,13 @@ G1: 같은 데이터로 잔여 수업권·현재 선생님·과거 정산을 언
 - [x] 자녀별 계약 및 계약 버전 생성(수정 계약은 기존 계약을 덮어쓰지 않고 새 버전 생성)
 - [x] DocuSign envelope 생성·발송(sandbox 실측: JWT 인증·발송·실서명 완료·API 상태조회 확인)
 - [x] envelope ID와 계약 버전 연결(`contract_versions.docusign_envelope_id`, 계약이 아닌 버전 레벨로 정정 완료)
-- [ ] `sent/delivered/completed/declined/voided` 상태 자동 반영(웹훅) — **처리 로직은 실측 검증(서명·멱등·순서역전·void사유), DocuSign→앱 실제 배달 경로 미해결(sandbox Connect 계정 레벨 라우팅 미작동, 원인 미확정)**
+- [ ] **(R3 유일 blocker, 2026-09-01)** `sent/delivered/completed/declined/voided` 상태 자동 반영(웹훅) — 처리 로직은 실측 검증(서명·멱등·순서역전·void사유·동의게이트 전부 Preview+원격 dev DB 대상 실제 요청으로 확인), 그러나 **DocuSign→앱 실제 HMAC 서명 배달이 계속 실패**(`eventNotification.includeHMAC="true"` 정확히 포함·계정 HMAC 키 활성 상태에서도 401). DocuSign 지원 문의 진행 중, 답변 전까지 우회·완화 금지.
 - [x] 중복·재전송·순서 역전 웹훅 멱등 처리 — `external_event_receipts(provider, event_id)` 기반(Preview+원격 dev DB 대상 직접 검증 완료, 실제 DocuSign 배달 경로와는 별개로 로직 자체는 확인됨)
-- [ ] 서명 완료본과 감사증명서(certificate of completion) 다운로드 — 함수는 구현됐으나(`downloadCompletedDocument`/`downloadCertificateOfCompletion`) 실호출 배선 미완료
-- [ ] 회사 Shared Drive의 해당 자녀 계약 폴더에 저장 — 미구현(Drive 전용 최소권한 인프라 승인 대기)
-- [ ] Drive file ID를 계약과 `drive_artifacts`에 연결 — 코드는 구현, 실측 미완료
+- [x] **(2026-09-01 완료)** 서명 완료본과 감사증명서(certificate of completion) 다운로드 — `downloadCompletedDocument`/`downloadCertificateOfCompletion` 실호출 배선 완료, 실측 검증됨
+- [x] **(2026-09-01 완료)** 회사 Shared Drive의 해당 자녀 계약 폴더에 저장 — Preview 전용 최소권한 인프라로 실제 업로드 검증 완료(`Alton Integration Sandbox` Shared Drive)
+- [x] **(2026-09-01 완료)** Drive file ID를 계약과 `drive_artifacts`에 연결 — 실측 확인(`drive_file_id` 실제 값 부여, 멱등 재실행 시 중복 없음)
 - [x] 완료 후 결제 단계 활성화(웹훅 로직상 상태 전이 자체는 실측 확인)
-- [ ] 웹훅 누락·다운로드 실패·Drive 저장 실패 재처리 및 정기 대조 — `queued` 최초 처리 워커·claim/lock·reconciliation 경로 미구현
+- [x] **(2026-09-01 완료)** 웹훅 누락·다운로드 실패·Drive 저장 실패 재처리 및 정기 대조 — `processQueuedDriveArtifacts()`(claim/lock, `queued→processing→succeeded/retryable_failed→manual_review`), `reconcileDocusignStatus` 확장, 전부 실측+mock 테스트 검증
 
 **보안 요구사항(구현·검증 필수)**:
 - DocuSign 웹훅 서명 검증 필수 — signing secret 미설정 시 개발 환경을 포함해 어떤 환경에서도 웹훅 요청을 통과시키지 않는다.
