@@ -141,7 +141,7 @@ G1: 같은 데이터로 잔여 수업권·현재 선생님·과거 정산을 언
 
 ## R3 — 상담·체험·제안·계약
 
-**(2026-09-01) 상태: 부분 완료 / 외부 통합 blocker.** 로컬 스키마·상태 전이·관리자 UI·유닛/통합/로컬 E2E는 완료. DocuSign 실제 웹훅 전달, Drive 실제 저장, drive worker·reconciliation은 미완료 — 상세는 `docs/CURRENT.md` "남은 blocker" 절, 경과는 `2026-08-29-r3-migration-execution-log.md` 참고. 아래 체크는 "로컬 검증 완료" 기준이며 외부 통합 완료를 의미하지 않는다.
+**(2026-09-01) 상태: 완료.** 로컬 스키마·상태 전이·관리자 UI·유닛/통합/로컬 E2E, Drive 실제 저장(업로드·file ID·멱등·재시도), DocuSign 실제 웹훅 전달(HMAC 검증·payload 파싱·DB 반영·idempotency)까지 전부 실측 검증 완료 — 상세는 `docs/CURRENT.md`, 경과는 `2026-08-29-r3-migration-execution-log.md` 참고.
 
 - [x] **(R1 cutover 선행 조건, blocker)** `contracts_v3`→`contracts` rename과 기존 `contracts`→`legacy_contracts` rename을 앱 코드·서버 액션 전환과 함께 같은 배포에서 원자적으로 수행한다(R1에서 shadow 이름으로 미룬 부분, `2026-08-29-r1-migration-execution-log.md` §4 cutover 전략 참고). 이 항목을 완료하기 전까지 아래 계약 관련 항목은 `contracts_v3` 위에서만 개발·검증한다.
 - [x] 구조화된 인테이크와 중복 상담 식별
@@ -166,7 +166,7 @@ G1: 같은 데이터로 잔여 수업권·현재 선생님·과거 정산을 언
 - [x] 자녀별 계약 및 계약 버전 생성(수정 계약은 기존 계약을 덮어쓰지 않고 새 버전 생성)
 - [x] DocuSign envelope 생성·발송(sandbox 실측: JWT 인증·발송·실서명 완료·API 상태조회 확인)
 - [x] envelope ID와 계약 버전 연결(`contract_versions.docusign_envelope_id`, 계약이 아닌 버전 레벨로 정정 완료)
-- [ ] **(R3 유일 blocker, 2026-09-01)** `sent/delivered/completed/declined/voided` 상태 자동 반영(웹훅) — 처리 로직은 실측 검증(서명·멱등·순서역전·void사유·동의게이트 전부 Preview+원격 dev DB 대상 실제 요청으로 확인), 그러나 **DocuSign→앱 실제 HMAC 서명 배달이 계속 실패**(`eventNotification.includeHMAC="true"` 정확히 포함·계정 HMAC 키 활성 상태에서도 401). DocuSign 지원 문의 진행 중, 답변 전까지 우회·완화 금지.
+- [x] **(2026-09-01 완료)** `sent/delivered/completed/declined/voided` 상태 자동 반영(웹훅) — 근본원인 2건 해결(계정 Connect Key로 HMAC 서명 정상화, envelope-level eventNotification의 실제 평탄 payload 구조에 맞춘 파서 수정) 후 새 envelope로 sent·completed 두 이벤트 모두 HMAC 통과·2xx·payload 파싱·DB 반영·`external_event_receipts` 기록까지 라이브로 실측 확인.
 - [x] 중복·재전송·순서 역전 웹훅 멱등 처리 — `external_event_receipts(provider, event_id)` 기반(Preview+원격 dev DB 대상 직접 검증 완료, 실제 DocuSign 배달 경로와는 별개로 로직 자체는 확인됨)
 - [x] **(2026-09-01 완료)** 서명 완료본과 감사증명서(certificate of completion) 다운로드 — `downloadCompletedDocument`/`downloadCertificateOfCompletion` 실호출 배선 완료, 실측 검증됨
 - [x] **(2026-09-01 완료)** 회사 Shared Drive의 해당 자녀 계약 폴더에 저장 — Preview 전용 최소권한 인프라로 실제 업로드 검증 완료(`Alton Integration Sandbox` Shared Drive)

@@ -1,7 +1,7 @@
 # R3 — 마이그레이션·구현 실행 로그
 
 - 목적: R1/R2 실행 로그와 동일한 형식. 장문 조사 내역은 복사하지 않고 핵심 결정·변경·검증·blocker만 기록한다.
-- 상태: **부분 완료 — 외부 통합(DocuSign 실배달, Drive 실저장) blocker로 R3 정식 완료 처리 보류(2026-09-01).** 최신 상태는 `docs/CURRENT.md` 참고.
+- 상태: **완료(2026-09-01).** 로컬 스키마·상태전이·UI·E2E, Drive 실측, DocuSign 웹훅 실배달까지 전부 검증 완료. 최신 상태는 `docs/CURRENT.md` 참고.
 
 ## 완료된 것 (로컬 검증 완료)
 
@@ -49,6 +49,15 @@ R3 스키마 작업 중 일부 마이그레이션(`20260914000000`, `20260915000
 - 실측 결과: 원격 dev DB의 테스트 계약(`6fd1874e-...`, 완료된 실제 envelope `25fc22d0-...` 참조)에 대해 서명문서·감사증명서 2건 모두 실제 업로드 성공(`drive_file_id` 부여), 재실행 시 동일 file id 유지·중복 파일 미생성(멱등 확인). Cloud Audit Logs에 impersonation 이력(`GenerateAccessToken`) 정상 기록 확인.
 - 정리: `DRIVE_ARTIFACTS_ALLOW_REAL_WRITES`(Preview) 제거, WIF impersonation IAM binding 제거, 서비스 계정 비활성화(disable, 삭제 아님) — 전부 완료. 서비스 계정·provider 자체 삭제와 Shared Drive 멤버십 제거는 사용자 확인 후 별도 진행.
 
+## DocuSign HMAC 최종 해결 (2026-09-01)
+
+- DocuSign 지원팀 답변으로 근본원인 1(잘못된 키 소스) 확정: 임시 Connect configuration의 `hmacKeyItems`는 envelope-level `eventNotification`이 실제로 쓰는 계정 HMAC 키가 아니었다. Admin UI(Developer Sandbox → Admin → Connect → Connect Keys)에서 발급한 계정 키로 `DOCUSIGN_WEBHOOK_TOKEN`(Preview)을 교체.
+- 근본원인 2(payload 구조)는 안전한 진단 로그(필드명만, 원문·비밀값 없음)로 실측 확인: envelope-level `eventNotification`은 계정 레벨 Connect의 `event`/`data` aggregate 구조가 아니라 envelope summary 필드를 최상위에 그대로 평탄하게 보낸다(최상위 `envelopeId`/`status`/... , `event`/`data` 필드 자체가 없음). 파서를 이 실제 구조에 맞게 수정(최상위 경로를 1차로, 기존 aggregate 구조는 호환 폴백으로 유지), 실제 구조를 재현한 fixture로 정상파싱·HMAC 성공/실패·envelopeId 추출·중복처리·순서역전·declined 사유·비정상 본문 400을 로컬에서 전부 검증(515/515).
+- **최종 라이브 검증**: 수정된 파서가 배포된 고정 Preview URL을 사전 확인 → 그 URL을 `eventNotification`에 지정해 새 envelope(`fc68257a-c0a9-82ad-8019-fff5d09b01c1`) 1건 발송(기존 Connect Key·`includeHMAC:"true"` 그대로 유지) → `sent` 이벤트: HMAC 통과·2xx·payload 정상 파싱·`external_event_receipts` 기록·`contract_versions.docusign_envelope_status` 반영 전부 확인 → 실제 서명 완료 → `completed` 이벤트도 동일하게 확인. `contracts.status='active'` 전환만 이 테스트 학생(DOB 미등록)의 R2 동의 게이트에 정당하게 막힘(파싱/HMAC과 무관한 별개의 기존 알려진 제약, `docs/CURRENT.md` R2 절 "장세온" 사례와 동일 유형).
+- 진단 과정에서 발견한 부가 사실(더 이상 조사 불필요, 참고용): (1) DocuSign envelope의 `eventNotification` URL은 생성 시점에 영구 고정되며 `PUT .../notification`으로 이후 변경해도 재시도·신규 이벤트 배달 모두에 반영되지 않음이 실측으로 확정됨 — 앞으로 진단이 필요하면 반드시 새 envelope을 올바른 URL로 처음부터 생성해야 한다. (2) 계정 레벨 Connect 라우팅(`allowEnvelopePublish`+`allUsers`)은 여전히 원인 미상으로 미작동 상태이나, envelope별 `eventNotification`을 실제 운영 경로로 채택했으므로 더 이상 blocker 아님.
+- 사용된 진단/최종 envelope: `cdcf24a8-168c-835b-80a4-6714a29801d6`(진단용, completed 상태로 보존 지시대로 유지), `fc68257a-c0a9-82ad-8019-fff5d09b01c1`(최종 라이브 검증용, completed). 이전 회차의 불필요한 테스트 envelope은 모두 이미 completed 또는 voided 상태로 정리됨. 계정 Connect Key는 삭제·비활성화하지 않고 유지.
+- 검증 후 SSO 보호 복원, `DRIVE_ARTIFACTS_ALLOW_REAL_WRITES`(Preview) 미설정 재확인, Production `WORKSPACE_PROVISIONING_ALLOW_REAL_CALLS`/`WORKSPACE_PREFLIGHT_ALLOW_REAL_READS` 불변 재확인 — 전부 완료.
+
 ## 남은 blocker
 
-`docs/CURRENT.md` "남은 blocker·후속 작업" 절 참고 — 중복 기록하지 않음.
+없음. R3 완료(2026-09-01).
