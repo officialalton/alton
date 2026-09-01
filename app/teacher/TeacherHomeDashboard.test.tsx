@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import TeacherHomeDashboard from "./TeacherHomeDashboard";
 import type { TeacherDashboardData } from "./dashboard-data";
@@ -7,14 +7,9 @@ vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: vi.fn(), replace: vi.fn() }),
 }));
 
-vi.mock("./onboarding-actions", () => ({
-  submitCalendlyOnboarding: vi.fn(),
-}));
-
 const baseData: TeacherDashboardData = {
   teacherName: "박서연",
   status: "active",
-  calendlySchedulingUrl: "https://calendly.com/seoyeon",
   upcoming: [],
   past: [],
   calendarByDay: {},
@@ -80,40 +75,19 @@ describe("TeacherHomeDashboard", () => {
     expect(screen.getByText("지훈 · SAT Math · 8회차")).toBeInTheDocument();
   });
 
-  it("status가 pending이면 온보딩 배너가 보이고, 제출하면 접수 완료 문구로 바뀐다(status 자체는 admin 승인 전까지 pending 유지)", async () => {
-    const { submitCalendlyOnboarding } = await import("./onboarding-actions");
-    vi.mocked(submitCalendlyOnboarding).mockResolvedValue(undefined);
-
+  it("status가 pending이면 활성화 대기 배너를 보여주고, Calendly 자기 온보딩 UI는 노출하지 않는다(R2 Task 7)", () => {
     render(
-      <TeacherHomeDashboard
-        data={{ ...baseData, status: "pending", calendlySchedulingUrl: null }}
-        onShowSchedule={vi.fn()}
-      />
+      <TeacherHomeDashboard data={{ ...baseData, status: "pending" }} onShowSchedule={vi.fn()} />
     );
-
-    expect(screen.getByText(/Calendly 연동이 필요해요/)).toBeInTheDocument();
-
-    fireEvent.change(
-      screen.getByPlaceholderText("https://calendly.com/xxx-teacher/session"),
-      { target: { value: "https://calendly.com/seoyeon-teacher/session" } }
-    );
-    fireEvent.click(screen.getByText("등록하기"));
-
-    await waitFor(() =>
-      expect(submitCalendlyOnboarding).toHaveBeenCalledWith(
-        "https://calendly.com/seoyeon-teacher/session"
-      )
-    );
-    await waitFor(() =>
-      expect(screen.getByText(/등록이 접수됐어요/)).toBeInTheDocument()
-    );
-    expect(screen.queryByText(/Calendly 연동이 필요해요/)).not.toBeInTheDocument();
+    expect(screen.getByText("계정이 아직 활성화되지 않았습니다")).toBeInTheDocument();
+    expect(screen.queryByText(/Calendly/)).not.toBeInTheDocument();
+    expect(screen.queryByPlaceholderText(/calendly/i)).not.toBeInTheDocument();
   });
 
-  it("status가 active면 온보딩 배너가 안 보인다", () => {
+  it("status가 active면 활성화 대기 배너가 안 보인다", () => {
     render(
       <TeacherHomeDashboard data={{ ...baseData, status: "active" }} onShowSchedule={vi.fn()} />
     );
-    expect(screen.queryByText(/Calendly 연동이 필요해요/)).not.toBeInTheDocument();
+    expect(screen.queryByText("계정이 아직 활성화되지 않았습니다")).not.toBeInTheDocument();
   });
 });

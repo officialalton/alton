@@ -13,6 +13,7 @@ import { loadPendingConsults, loadFamilyContracts } from "./contracts-data";
 import { loadDevLog } from "./dev-log-data";
 import { loadPayouts } from "./payouts-data";
 import { loadTeacherCandidatesBySubject } from "./matching-data";
+import { loadWorkspaceProvisionings } from "./workspace-data";
 import AdminShell from "./AdminShell";
 
 export default async function AdminHomePage({
@@ -36,6 +37,7 @@ export default async function AdminHomePage({
     familyContracts,
     payouts,
     teacherCandidatesBySubject,
+    workspaceProvisionings,
   ] = await Promise.all([
     loadAdminDashboard(supabase, user.id),
     loadSubjectCatalog(supabase),
@@ -47,6 +49,7 @@ export default async function AdminHomePage({
     loadFamilyContracts(supabase),
     loadPayouts(supabase),
     loadTeacherCandidatesBySubject(supabase),
+    loadWorkspaceProvisionings(supabase),
   ]);
 
   const [creditHistoryEntries, qcWarningsEntries] = await Promise.all([
@@ -82,6 +85,7 @@ export default async function AdminHomePage({
       devLogContent={devLogContent}
       payouts={payouts}
       teacherCandidatesBySubject={teacherCandidatesBySubject}
+      workspaceProvisionings={workspaceProvisionings}
     />
   );
 }

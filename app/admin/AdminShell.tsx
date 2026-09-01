@@ -15,6 +15,8 @@ import PayoutsTab from "./PayoutsTab";
 import type { PayoutListItem } from "./payouts-data";
 import MatchingTab from "./MatchingTab";
 import type { MatchingTeacherCandidate } from "./matching-data";
+import WorkspaceTab from "./WorkspaceTab";
+import type { WorkspaceProvisioningItem } from "./workspace-data";
 import type { AdminSubject } from "./subject-data";
 import type { DocEditorData } from "./curriculum-doc-data";
 import type {
@@ -35,6 +37,7 @@ const NAV_ITEMS = [
   { id: "contracts", label: "계약", icon: "📄" },
   { id: "qc", label: "QC", icon: "🛡" },
   { id: "payouts", label: "정산", icon: "💸" },
+  { id: "workspace", label: "Workspace", icon: "🔑" },
   { id: "documents", label: "문서", icon: "📁" },
   { id: "devlog", label: "개발 로그", icon: "🧾" },
 ] as const;
@@ -56,6 +59,7 @@ export default function AdminShell({
   devLogContent,
   payouts,
   teacherCandidatesBySubject,
+  workspaceProvisionings,
 }: {
   initialTab?: string;
   dashboard: AdminDashboardData;
@@ -71,6 +75,7 @@ export default function AdminShell({
   devLogContent: string;
   payouts: PayoutListItem[];
   teacherCandidatesBySubject: Record<string, MatchingTeacherCandidate[]>;
+  workspaceProvisionings: WorkspaceProvisioningItem[];
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -165,6 +170,8 @@ export default function AdminShell({
               subjects={subjects}
               teacherCandidatesBySubject={teacherCandidatesBySubject}
             />
+          ) : activeTab === "workspace" ? (
+            <WorkspaceTab provisionings={workspaceProvisionings} />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.

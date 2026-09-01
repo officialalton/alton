@@ -1,4 +1,5 @@
 import { login } from "./actions";
+import { signInWithGoogleForTeacher } from "./teacher-google-actions";
 
 export default async function LoginPage({
   searchParams,
@@ -66,6 +67,20 @@ export default async function LoginPage({
             로그인
           </button>
         </form>
+
+        <div className="mt-6 pt-5 border-t border-grey-200">
+          <p className="text-center text-[12.5px] text-grey-400 mb-3">
+            Alton Education Google Workspace 계정을 발급받은 선생님이신가요?
+          </p>
+          <form action={signInWithGoogleForTeacher}>
+            <button
+              type="submit"
+              className="block w-full text-center border-[1.5px] border-grey-200 text-ink font-bold text-[14px] py-3 rounded-lg hover:bg-grey-100"
+            >
+              선생님 — Google로 로그인
+            </button>
+          </form>
+        </div>
 
         <p className="text-center text-[13px] text-grey-500 mt-[22px] leading-[1.7]">
           학부모·학생 계정은 상담·계약 절차 이후 초대를 통해 생성됩니다.

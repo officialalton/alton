@@ -13,6 +13,6 @@ export async function loginAs(page: Page, email: string): Promise<void> {
   await page.goto("/login");
   await page.getByLabel("이메일").fill(email);
   await page.getByLabel("비밀번호").fill(DEV_PASSWORD);
-  await page.getByRole("button", { name: "로그인" }).click();
+  await page.getByRole("button", { name: "로그인", exact: true }).click();
   await page.waitForURL((url) => !url.pathname.startsWith("/login"));
 }

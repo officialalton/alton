@@ -542,9 +542,9 @@ Task 6 범위를 재확장하지 않고, 아래 항목은 전부 `2026-08-29-mas
 7. **오프라인/별도 방식으로 보호자 자격과 동의를 검증한 증빙이 있을 때만 예외적으로 기록 가능**: 현재 `verification_reference`는 "비어있지 않은 텍스트"이기만 하면 통과한다 — 실제로 그 증빙이 유효한지(예: 첨부파일·통화 녹취 ID가 실재하는지)는 앱/운영 레벨에서 별도로 강제해야 한다는 요구사항. DB 함수 자체가 증빙의 실체를 검증할 수는 없으므로, 관리자 UI 구현 시 증빙 첨부·검토 절차를 필수 단계로 설계해야 한다.
 8. **수동 동의 필수 필드 5종 재확인**: 검증방법(`verification_method`✓)·시각(`consented_at`✓)·정책버전(`policy_version_id`✓)·증빙참조(`verification_reference`✓)는 이미 스키마에 있다. 다만 **"실행자"(이 수동 동의를 실제로 입력한 관리자)는 현재 별도로 기록되지 않는다** — `consented_by`는 보호자 본인의 id이지 실행한 관리자의 id가 아니다. 관리자 UI/함수 하드닝 시 실행 관리자를 별도 컬럼(예: `recorded_by`) 또는 감사 이벤트로 반드시 남겨야 한다.
 
-## Task 7 예고 — Google Workspace 선생님 프로비저닝 (정책 확정, 미구현)
+## Task 7 원안 (2026-08-30, Task 2 승인 시 확정 — 아래 "Task 7 최종 구현"에서 3라운드 정정됨)
 
-Task 2 승인 시 사용자가 함께 확정한 후속 Task의 요구사항이다. **지금 구현하지 않는다** — 여기서는 R2 계획 문서(`docs/superpowers/plans/2026-08-30-r2-account-family-lifecycle.md` Task 7)에 옮기기 전 원본 정책을 실행 로그에도 남겨둔다.
+Task 2 승인 시 사용자가 함께 확정한 후속 Task의 원본 요구사항이다. 착수 전 사용자가 3라운드에 걸쳐 상세히 정정했다(핵심 차이: `teacher_workspace_provisioning` staging 테이블 도입, Vercel OIDC→WIF 인증 체인 확정, 7개 선행조건 개별 증거·시각 추적) — 최종 설계·구현은 아래 "Task 7 — Google Workspace 선생님 프로비저닝 (로컬 구현·검증 완료, 실제 인프라 검증 대기)" 참고. 이 하위 섹션은 원안을 그대로 보존한 역사적 기록이다.
 
 ### 선생님 활성화(`pending→active`) 선행조건 (확정)
 
@@ -586,3 +586,67 @@ Task 2 승인 시 사용자가 함께 확정한 후속 Task의 요구사항이�
 ### 기존 Calendly 온보딩 처리 (확정)
 
 기존 Calendly 온보딩 UI/코드는 계정 활성화에 영향을 주지 않도록 현재 상태(Task 2에서 자기 활성화만 제거, URL 저장 기능은 유지)로 둔다. Google Workspace 프로비저닝 구현 단계에서 제거할 후속 작업으로 명시한다 — Task 2 범위에서 지금 제거하지 않는다.
+
+## Task 7 — Google Workspace 선생님 프로비저닝 (로컬 구현·검증 완료, 실제 인프라 검증 대기)
+
+최종 설계는 위 원안을 착수 전 사용자가 3라운드에 걸쳐 정정한 것이다. 상세 설계(테이블·함수·상태 머신·OAuth 보안·운영 인증 체인)는 `docs/superpowers/plans/2026-08-30-r2-account-family-lifecycle.md` Task 7 섹션에 전부 기록했다 — 여기서는 반복하지 않고 구현·검증 결과만 남긴다.
+
+### 마이그레이션
+
+**`20260905000000_r2_workspace_provisioning.sql`**: `teacher_workspace_provisioning`(staging, `workspace_email`/`workspace_google_user_id`/`linked_teacher_id` 각각 값이 있을 때만 unique) + `workspace_provisioning_events`(8종 이벤트 감사) + `teachers` 확장(workspace_email/google_user_id/personal_contact_email/workspace_recovery_email/personal_phone/onboarding_completed_at, 후자는 school/bio/phone 완료 시 트리거로 자동 파생) + `get_teacher_activation_checklist()`(7개 조건을 각각 별도 증거·시각으로 반환, 관리자 화면과 `transition_account_status()`가 공유) + provisioning 시작/생성기록/실패분류/초대발송/정지/재활성화 함수 6개 + OAuth 신원 검증·연결 함수 3개(`find_teacher_provisioning_for_identity` self-only 조회, `log_workspace_link_rejected` 거부 감사, `link_teacher_workspace_identity` self-only 강제 + profiles/teachers 최초 생성) + `transition_account_status()` 확장(teacher의 `pending→active`에만 7조건 결합, `active/suspended↔inactive` 전이를 valid-transition 표에 추가 — Task 7이 필요로 하는 최소 범위이며 R12의 전체 inactive 보관·복귀 자동화와는 별개).
+
+### 로컬 검증 — 실제 psql 실행으로 전체 흐름 확인(발견된 버그 없음, 설계 단계에서 이미 정정 반영)
+
+| 항목 | 결과 |
+|---|---|
+| 관리자 아닌 세션의 provisioning 시작 | 거부 |
+| 진행 중(creating) 이메일 중복 시작 | 거부 |
+| 재시도 가능 실패 기록 → `retryable_failed` + `creation_failed`/`retry_scheduled` 이벤트 | 확인 |
+| 재시도 시 같은 `idempotency_key` 재사용(새 행 아님) | 확인 |
+| Directory API 생성 성공 기록 → `created` + google_user_id 저장 | 확인 |
+| 초대 발송 처리 → `first_login_pending` | 확인 |
+| 잘못된 identity(이메일만 일치)로 `find_teacher_provisioning_for_identity` 조회 | 못 찾음(정상) |
+| 사전 등록 없는 임의 Google 계정의 연결 시도 | 거부, profiles 생성 안 됨 |
+| self-only 강제(본인 아닌 auth_user_id로 연결 시도) | 거부 |
+| 정상 연결(본인 세션 + 정확한 identity) | 성공, `teachers.status`가 반드시 `pending`으로 생성됨 확인 |
+| 같은 사람 재로그인 | 예외 없이 멱등 |
+| 이미 연결된 레코드에 다른 auth_user_id로 연결 시도 | 거부 |
+| 활성화 체크리스트: 7개 조건이 `linked` 하나로 뭉개지지 않고 개별 확인됨 | `valid_rate`/`onboarding_complete`/`contract_signed`만 false로 정확히 열거 |
+| 선행조건 미충족 상태로 `active` 전환 시도 | 거부, 메시지에 부족한 조건명 나열 |
+| 시급·온보딩·계약 채운 뒤 `active` 전환 | 성공 |
+| 기존 active 선생님(박서연)의 `suspended↔active` 전이 | 워크스페이스 조건과 무관하게 정상 동작(회귀 없음) |
+| 신규 `inactive`/`active` 상태 전이 + `suspend_teacher_workspace`/`reactivate_teacher_workspace` 기록 | 정상 |
+| `onboarding_completed_at` 자동 파생(school 지우면 다시 null) | 확인 |
+
+### 앱 코드
+
+- `lib/google-workspace.ts`(신규) — Directory API 클라이언트. 인증 체인은 Vercel OIDC→GCP WIF→서비스 계정 impersonation→`signJwt`(DWD)→OAuth 토큰 교환을 raw fetch로 구현(기존 `lib/docusign.ts`와 동일한 무의존성 스타일, `googleapis` 패키지 추가하지 않음). Preview 환경과 `WORKSPACE_PROVISIONING_ALLOW_REAL_CALLS` 미설정 시 실제 호출을 원천 차단하는 가드 포함 — 로컬/CI에서는 항상 이 가드에 걸리거나(unit test로 확인) `vi.mock()`으로 대체한다.
+- `app/admin/workspace-actions.ts`(신규) — 프로비저닝 시작(재시도 시 이미 생성된 google_user_id가 있으면 Directory API를 다시 호출하지 않고 이어서 진행), 정지/재활성화(재활성화는 `set_teacher_rate`가 service_role 전용이라 `createAdminClient()`로 별도 호출 — `app/admin/users-actions.ts`와 동일 패턴, 코드 리뷰 중 이 실수를 미리 잡음), 체크리스트 조회.
+- `app/login/teacher-google-actions.ts` + `app/auth/teacher-callback/route.ts`(신규) — 선생님 전용 Google OAuth 로그인·콜백. 콜백은 provisioning 레코드 불일치·identity 정보 누락·DB 최종 검증 실패 각각의 경우 `admin.auth.admin.deleteUser()`로 방금 생성된 auth.users 행을 즉시 삭제해 고아 계정을 남기지 않는다.
+- `app/login/page.tsx` — 선생님 전용 "Google로 로그인" 버튼 추가(학생·보호자·관리자 로그인 방식 불변).
+- `app/admin/WorkspaceTab.tsx` + `workspace-data.ts`(신규, AdminShell에 "Workspace" 탭 추가) — 프로비저닝 시작 폼, 현황 목록, 7개 선행조건 체크리스트 표시(조건별 라벨+증거 시각), 정지/재활성화 버튼.
+- `app/admin/TeacherDetailPanel.tsx` — 상태 변경 실패 시(신규 7조건 게이트 포함) 에러 메시지를 화면에 표시하도록 수정(기존에는 실패가 조용히 무시됨).
+- 기존 Calendly 자기 온보딩 완전 제거: `app/teacher/onboarding-actions.ts`/`.test.ts` 삭제, `TeacherHomeDashboard.tsx`에서 관련 UI·상태·import 제거(대기 배너만 남김), `TeacherDashboardData`/`loadTeacherDashboard`에서 미사용 `calendlySchedulingUrl` 제거. 관리자용 `TeacherDetailPanel`의 Calendly URL 편집(선생님 자기 온보딩과 무관, 관리자가 대신 입력)과 `teachers.calendly_scheduling_url` 컬럼 자체는 R6까지 그대로 유지(학생·보호자 예약이 계속 참조).
+
+### 발견·수정한 리그레션 1건 — 기존 E2E의 "제네릭 상태 전이" 테스트
+
+`e2e/account-lifecycle.spec.ts`의 "정상 상태 전이(pending→active, ...)는 허용되고 그 외는 거부된다" 테스트가 teacher 역할로 `pending→active`를 직접 exercise하고 있었는데, 이 테스트의 의도는 **역할과 무관한 전이표 자체**를 검증하는 것이었다 — teacher를 쓰면 Task 7의 7개 선행조건 게이트에 걸려 의도와 다른 이유로 실패한다. parent로 바꿔 실행하도록 수정(parent는 추가 게이트가 없어 전이표만 순수하게 검증됨). 로그인 페이지에 "선생님 — Google로 로그인" 버튼을 추가하면서 `getByRole("button", { name: "로그인" })`가 부분 문자열 매칭으로 2개 요소에 걸리는 strict-mode 위반도 함께 발견해 `e2e/helpers.ts`의 `loginAs()`와 `account-lifecycle.spec.ts`/`account-merge.spec.ts`의 인라인 호출 전부에 `exact: true`를 추가했다.
+
+### 전체 로컬 검증
+
+| 항목 | 결과 |
+|---|---|
+| `npx tsc --noEmit` | 클린 |
+| `npx vitest run` | **89개 파일 382개 테스트 전부 통과**(신규: `app/admin/workspace-actions.test.ts`, `lib/google-workspace.test.ts`, `app/auth/teacher-callback/route.test.ts`, `app/login/teacher-google-actions.test.ts`, `app/admin/WorkspaceTab.test.tsx`, `TeacherHomeDashboard.test.tsx` 갱신) |
+| **Playwright 전체** | **25개 전부 통과**(리그레션 수정 반영, Task 7 자체의 실제 Directory API 경로는 별도 E2E로 만들지 않음 — mock 반복 테스트는 vitest로 충분히 커버, 실제 호출은 실제 인프라 준비 후 1회 검증 대상) |
+
+### 원격 적용 — 보류 중 (사용자 확인 대기)
+
+마이그레이션 자체는 순수 추가+`transition_account_status()`의 scoped 확장(teacher `pending→active`에만 영향, 다른 전이·역할 무관)이라 Task 5/6와 같은 방식으로 지금 푸시해도 안전하다. 다만 이 기능은 앱 코드(OAuth 콜백·관리자 화면)까지 함께 배포돼야 실제로 쓸 수 있고, 실제 Google 리소스 호출은 별도로 요청한 GCP/Vercel 사전조건(WIF 연결, Directory API scope 추가, 테스트 OU 생성, OAuth Client 등록)이 끝나야 유효하다 — 마이그레이션만 먼저 원격에 올릴지, 앱 배포·인프라 준비와 함께 묶어서 진행할지 사용자에게 확인 후 진행한다.
+
+### 남은 작업
+
+1. **(사용자 조치 필요)** GCP/Vercel 사전조건 체크리스트 완료 — Directory API scope 추가, 테스트 OU 생성, WIF 풀·프로바이더 생성 및 위임 대상 서비스 계정에 `roles/iam.serviceAccountTokenCreator` 부여, Google OAuth Client 생성 및 Supabase Auth Google 프로바이더 등록.
+2. 위 완료 후 실제 1회 검증: WIF 체인 연결, 테스트 OU에 전용 계정(`teacher-provisioning-test@alton.education`) 1건 실제 생성, 중복 생성 충돌·실패 후 재시도·정지·재활성화 실제 실행, 실제 Google OAuth 최초 로그인 + immutable Google user ID 연결 검증(`teacher1@alton.education`/`teacher2@alton.education` 기존 계정으로 조회·anti-spoofing 확인).
+3. 실제 검증 통과 후에만 Task 7을 완료 처리한다(사용자 확정: "Task 7은 mock 구현만으로 완료 처리하지 않는다").
+4. 정식 오픈 전: 위임 대상을 `official@alton.education`에서 사용자 관리 권한만 가진 전용 자동화 관리자 계정으로 분리(보안 인수 조건, `master-roadmap-v3.md` R12에 등록 필요).

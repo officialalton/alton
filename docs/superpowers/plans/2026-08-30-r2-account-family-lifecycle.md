@@ -319,18 +319,18 @@
 
 기존 Calendly 자기 온보딩(`app/teacher/onboarding-actions.ts`의 `submitCalendlyOnboarding()`, `TeacherHomeDashboard.tsx`의 관련 UI)을 이 태스크에서 완전히 제거한다. `teachers.calendly_scheduling_url` **컬럼 자체는 삭제하지 않는다** — 학생·보호자용 Calendly 예약 코드가 R6 전까지 이 컬럼을 계속 참조하기 때문이다. 실제 컬럼 삭제는 `master-roadmap-v3.md` R6에서 수행한다.
 
-### 구현 순서
+### 구현 순서 (로컬 구현·검증 완료 2026-09-05, 실제 인프라 검증 대기)
 
-- [ ] **Step 1**: 마이그레이션(`teacher_workspace_provisioning`, `workspace_provisioning_events`, `teachers` 컬럼 추가, `onboarding_completed_at` 자동 트리거, `get_teacher_activation_checklist()`, `transition_account_status()` teacher 7조건 결합 — `pending→active` 전이에만 적용해 기존 active/suspended 선생님은 영향받지 않는다).
-- [ ] **Step 2**: `lib/google-workspace.ts` — 토큰 획득 인터페이스(mock/실제 분리), Directory API 클라이언트(create/get/suspend/reactivate), Preview 환경 실제 호출 차단 가드.
-- [ ] **Step 3**: `app/admin/workspace-actions.ts` — provisioning 레코드 생성(멱등키 고정), 생성 호출·이벤트 기록, 재시도(같은 idempotency key로 기존 상태 우선 확인), 충돌/전파지연 분기, suspend/reactivate.
-- [ ] **Step 4**: OAuth 콜백 라우트 — 신원 검증 5단계, 거부 시 orphan auth.users 삭제, 통과 시 `profiles`→`teachers`(반드시 `pending`) 생성+연결. 선생님 전용 로그인 진입점 UI.
-- [ ] **Step 5**: 관리자 화면에 7개 선행조건 개별 체크리스트 표시(`get_teacher_activation_checklist()` 사용).
-- [ ] **Step 6**: 기존 Calendly 자기 온보딩 제거.
+- [x] **Step 1**: 마이그레이션(`20260905000000_r2_workspace_provisioning.sql` — `teacher_workspace_provisioning`, `workspace_provisioning_events`, `teachers` 컬럼 추가, `onboarding_completed_at` 자동 트리거, `get_teacher_activation_checklist()`, `transition_account_status()` teacher 7조건 결합 — `pending→active` 전이에만 적용해 기존 active/suspended 선생님은 영향받지 않음을 실제 실행으로 확인).
+- [x] **Step 2**: `lib/google-workspace.ts` — Vercel OIDC→GCP WIF→impersonation→signJwt→DWD 체인을 raw fetch로 구현, Preview 환경·`WORKSPACE_PROVISIONING_ALLOW_REAL_CALLS` 미설정 시 실제 호출 차단 가드(vitest로 확인). 실제 체인 자체는 인프라 없이 검증 불가 — 아래 "실제 인프라" 항목에서 1회 검증.
+- [x] **Step 3**: `app/admin/workspace-actions.ts` — provisioning 레코드 생성(멱등키 고정), 생성 호출·이벤트 기록, 재시도(이미 생성된 google_user_id가 있으면 재호출 없이 이어서 진행), 충돌/전파지연 분기, suspend/reactivate.
+- [x] **Step 4**: OAuth 콜백 라우트(`app/auth/teacher-callback/route.ts`) — 신원 검증, 거부 시 orphan auth.users 삭제, 통과 시 `profiles`→`teachers`(반드시 `pending`) 생성+연결. 선생님 전용 로그인 진입점(`app/login/page.tsx`, `teacher-google-actions.ts`).
+- [x] **Step 5**: 관리자 화면(`app/admin/WorkspaceTab.tsx`, AdminShell "Workspace" 탭)에 7개 선행조건 개별 체크리스트 표시.
+- [x] **Step 6**: 기존 Calendly 자기 온보딩 완전 제거(`onboarding-actions.ts` 삭제, `TeacherHomeDashboard.tsx` UI 제거).
 
 **DoD 체크 — Task 7은 mock만으로 완료 처리하지 않는다**:
-- 로컬(mock): 멱등성(재시도 시 중복 생성 없음), 충돌/전파지연/manual_review 분기, OAuth 오탐 방지 5종 전부, orphan auth.users 미잔존, `teachers.status`가 연결 직후 반드시 `pending`, 7개 선행조건 중 하나라도 결여 시 `active` 전환 차단(개별 조건별로 각각 테스트), suspend/reactivate 상태 전이, 비밀번호가 DB/로그/감사이벤트 어디에도 없음, Calendly 자기 활성화 경로 0건, 기존 학생·보호자 Calendly 예약 회귀 없음.
-- 실제 인프라(순서대로, 각 단계 전 정확한 사전조건 체크리스트를 먼저 제출): (a) DWD Client ID에 `admin.directory.user` scope 추가 확인, (b) Vercel OIDC ↔ GCP WIF 실제 연결 검증, (c) 테스트 OU에서 실제 Workspace 계정 1건 생성(고정된 전용 계정만 사용, 반복 생성 금지), (d) 실제 중복 생성 충돌·실패 후 재시도·정지·재활성화 검증, (e) 실제 Google OAuth 최초 로그인 + immutable Google user ID 연결 검증(`teacher1@alton.education`/`teacher2@alton.education` 기존 계정으로 조회·중복·연결·anti-spoofing, 신규 계정 생성 성공은 전용 테스트 계정 1개로).
+- [x] 로컬(mock, 전부 실제 실행으로 확인): 멱등성(재시도 시 중복 생성 없음), 충돌/전파지연/manual_review 분기, OAuth 오탐 방지(provisioning 없음/identity 정보 누락/DB 최종검증 실패 각각 orphan auth.users 삭제 확인), `teachers.status`가 연결 직후 반드시 `pending`, 7개 선행조건 중 하나라도 결여 시 `active` 전환 차단(개별 조건별로 각각 확인), suspend/reactivate 상태 전이, 비밀번호가 코드 어디에도 저장·반환되지 않음(설계·코드 검토), Calendly 자기 활성화 경로 0건, 기존 학생·보호자 Calendly 예약 회귀 없음(Playwright 25개 전부 통과, 로그인 페이지 변경으로 인한 리그레션 1건 발견·수정 — 상세는 실행 로그 참고).
+- [ ] 실제 인프라(순서대로, 각 단계 전 정확한 사전조건 체크리스트를 먼저 제출 — 이미 사용자에게 제출함): (a) DWD Client ID에 `admin.directory.user` scope 추가 확인, (b) Vercel OIDC ↔ GCP WIF 실제 연결 검증, (c) 테스트 OU에서 실제 Workspace 계정 1건 생성(고정된 전용 계정만 사용, 반복 생성 금지), (d) 실제 중복 생성 충돌·실패 후 재시도·정지·재활성화 검증, (e) 실제 Google OAuth 최초 로그인 + immutable Google user ID 연결 검증(`teacher1@alton.education`/`teacher2@alton.education` 기존 계정으로 조회·중복·연결·anti-spoofing, 신규 계정 생성 성공은 전용 테스트 계정 1개로). **이 항목이 전부 끝나야 Task 7을 완료 처리한다.**
 
 ---
 

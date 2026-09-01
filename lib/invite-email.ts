@@ -5,6 +5,26 @@ const ROLE_LABEL: Record<"parent" | "student", string> = {
   student: "학생(자녀)",
 };
 
+export async function sendWorkspaceProvisioningEmail(params: {
+  to: string;
+  workspaceEmail: string;
+}): Promise<void> {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3010";
+  const loginUrl = `${siteUrl}/login?role=teacher`;
+
+  await sendEmail({
+    to: params.to,
+    subject: "[Alton Education] Google Workspace 계정이 발급되었습니다",
+    html: `
+      <p>안녕하세요.</p>
+      <p>Alton Education Google Workspace 계정이 발급되었습니다: <strong>${params.workspaceEmail}</strong></p>
+      <p>먼저 <a href="https://accounts.google.com">accounts.google.com</a>에서 위 계정으로 로그인해 초기 비밀번호를 변경해주세요.</p>
+      <p>비밀번호 변경 후 <a href="${loginUrl}">여기</a>에서 "Google로 로그인"을 눌러 Alton Education 계정을 연결해주세요.</p>
+      <p>감사합니다.<br/>Alton Education</p>
+    `,
+  });
+}
+
 export async function sendInviteEmail(params: {
   to: string;
   name: string;

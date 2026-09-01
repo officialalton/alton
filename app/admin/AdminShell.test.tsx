@@ -62,10 +62,11 @@ const baseProps = {
   devLogContent: "## Phase 1\n- [x] 완료된 항목\n- [ ] 남은 항목\n",
   payouts: [],
   teacherCandidatesBySubject: {},
+  workspaceProvisionings: [],
 };
 
 describe("AdminShell", () => {
-  it("사이드바 11개 항목을 보여주고, 기본 탭은 홈이다", () => {
+  it("사이드바 12개 항목을 보여주고, 기본 탭은 홈이다", () => {
     render(<AdminShell {...baseProps} />);
     [
       "홈",

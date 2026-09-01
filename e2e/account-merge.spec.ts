@@ -58,7 +58,7 @@ test("병합된 원본 계정은 실제 로그인 시도 시 강제 로그아웃
   await page.goto("/login");
   await page.getByLabel("이메일").fill(DUP_EMAIL);
   await page.getByLabel("비밀번호").fill(DEV_PASSWORD);
-  await page.getByRole("button", { name: "로그인" }).click();
+  await page.getByRole("button", { name: "로그인", exact: true }).click();
 
   // resolveAccountDestination()이 closed 상태를 감지해 signOut() 후
   // /login?error=...로 보낸다(R2 Task 2에서 이미 검증된 경로 — 병합이

@@ -29,6 +29,7 @@ export default function TeacherDetailPanel({
   const router = useRouter();
   const [status, setStatus] = useState(teacher.status);
   const [savedStatus, setSavedStatus] = useState(false);
+  const [statusError, setStatusError] = useState<string | null>(null);
   const [assignedSubjectIds, setAssignedSubjectIds] = useState(teacher.assignedSubjectIds);
   const [subjectError, setSubjectError] = useState<string | null>(null);
   const [togglingSubjectId, setTogglingSubjectId] = useState<string | null>(null);
@@ -71,11 +72,20 @@ export default function TeacherDetailPanel({
   }
 
   async function handleStatusChange(next: string) {
+    const previous = status;
     setStatus(next);
     setSavedStatus(false);
-    await setTeacherStatus(teacher.id, next as "active" | "pending" | "suspended");
-    onUpdated({ status: next });
-    setSavedStatus(true);
+    setStatusError(null);
+    try {
+      await setTeacherStatus(teacher.id, next as "active" | "pending" | "suspended");
+      onUpdated({ status: next });
+      setSavedStatus(true);
+    } catch (e) {
+      setStatus(previous);
+      setStatusError(
+        e instanceof Error ? e.message : "상태 전환에 실패했습니다."
+      );
+    }
   }
 
   async function handleSaveCalendlyUrl() {
@@ -130,6 +140,7 @@ export default function TeacherDetailPanel({
           ))}
         </select>
         {savedStatus && <p className="text-[12px] text-green mt-1.5">✓ 저장되었습니다</p>}
+        {statusError && <p className="text-[12px] text-red mt-1.5">{statusError}</p>}
       </div>
 
       <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">

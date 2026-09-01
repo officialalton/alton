@@ -79,7 +79,7 @@ test.describe("R2 계정 상태 전환 — 실제 브라우저 로그인 흐름"
     await page.goto("/login");
     await page.getByLabel("이메일").fill(ACCOUNTS.teacher);
     await page.getByLabel("비밀번호").fill(DEV_PASSWORD);
-    await page.getByRole("button", { name: "로그인" }).click();
+    await page.getByRole("button", { name: "로그인", exact: true }).click();
 
     await expect(page).toHaveURL(/\/account-suspended/);
     await expect(
@@ -95,7 +95,7 @@ test.describe("R2 계정 상태 전환 — 실제 브라우저 로그인 흐름"
     await page.goto("/login");
     await page.getByLabel("이메일").fill(ACCOUNTS.teacher);
     await page.getByLabel("비밀번호").fill(DEV_PASSWORD);
-    await page.getByRole("button", { name: "로그인" }).click();
+    await page.getByRole("button", { name: "로그인", exact: true }).click();
     await expect(page).toHaveURL(/\/account-suspended/);
 
     // 세션은 유지된 채(suspended는 로그아웃시키지 않는다) 다른 포털 경로로
@@ -123,7 +123,7 @@ test.describe("R2 계정 상태 전환 — 실제 브라우저 로그인 흐름"
     await page.goto("/login");
     await page.getByLabel("이메일").fill(ACCOUNTS.teacher);
     await page.getByLabel("비밀번호").fill(DEV_PASSWORD);
-    await page.getByRole("button", { name: "로그인" }).click();
+    await page.getByRole("button", { name: "로그인", exact: true }).click();
 
     // resolveAccountDestination()이 supabase.auth.signOut()을 호출한 뒤
     // /login?error=...로 보낸다 — /teacher나 /account-suspended가 아니라
@@ -148,7 +148,7 @@ test.describe("R2 계정 상태 전환 — 실제 브라우저 로그인 흐름"
     await page.goto("/login");
     await page.getByLabel("이메일").fill(ACCOUNTS.parent);
     await page.getByLabel("비밀번호").fill(DEV_PASSWORD);
-    await page.getByRole("button", { name: "로그인" }).click();
+    await page.getByRole("button", { name: "로그인", exact: true }).click();
     await expect(page).toHaveURL(/\/account-suspended/);
 
     transitionParentStatus("active", "e2e: 학부모 재활성화 테스트");
@@ -157,17 +157,22 @@ test.describe("R2 계정 상태 전환 — 실제 브라우저 로그인 흐름"
     await expect(page).toHaveURL(/\/parent/);
   });
 
+  // (2026-09-05 R2 Task 7) 이 테스트는 역할과 무관한 "허용된 전이 표"
+  // 자체를 검증하는 것이 목적이라 parent로 실행한다 — teacher의
+  // pending→active는 R2 Task 7부터 Workspace 프로비저닝 7개 선행조건이
+  // 추가로 걸려서(get_teacher_activation_checklist()), 그 조건과 무관한
+  // 이 제네릭 테스트에서 teacher를 쓰면 의도와 다른 이유로 막힌다.
   test("정상 상태 전이(pending→active, active↔suspended, active→closure_pending→closed)는 허용되고 그 외는 거부된다", async () => {
-    forceSetTeacherStatus("pending");
-    transitionTeacherStatus("active", "온보딩 승인");
-    transitionTeacherStatus("suspended", "일시정지");
-    transitionTeacherStatus("active", "재활성화");
-    transitionTeacherStatus("closure_pending", "탈퇴 시작");
-    transitionTeacherStatus("closed", "탈퇴 완료");
+    forceSetParentStatus("pending");
+    transitionParentStatus("active", "온보딩 승인");
+    transitionParentStatus("suspended", "일시정지");
+    transitionParentStatus("active", "재활성화");
+    transitionParentStatus("closure_pending", "탈퇴 시작");
+    transitionParentStatus("closed", "탈퇴 완료");
 
     let rejected = false;
     try {
-      transitionTeacherStatus("active", "closed에서는 되돌릴 수 없어야 함");
+      transitionParentStatus("active", "closed에서는 되돌릴 수 없어야 함");
     } catch {
       rejected = true;
     }
