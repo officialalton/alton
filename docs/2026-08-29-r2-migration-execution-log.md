@@ -726,11 +726,20 @@ Task 2 승인 시 사용자가 함께 확정한 후속 Task의 원본 요구사�
 
 **정리**: `teacher_workspace_provisioning` 2건(teacher1/teacher2), 연결 이벤트 6건, Round A에서 생성된 `profiles`/`teachers`/`auth.users`(teacher1 fixture) 1세트 전부 FK 순서(`workspace_provisioning_events`→`teacher_workspace_provisioning`→`teachers`→`profiles`→`auth.users`)대로 삭제, 최종 `profiles=9, auth.users=9, teacher_workspace_provisioning=0, workspace_provisioning_events=0`으로 시나리오 시작 전 baseline과 정확히 일치 확인. `app/auth/teacher-callback/route.ts`는 git diff 결과 커밋된 상태와 완전히 동일(임시 진단 로그 완전 제거 확인). `npx tsc --noEmit` 클린, 관련 vitest 전체 통과.
 
-### 남은 작업 (사용자 5단계 계획 기준)
+### 남은 작업 (사용자 5단계 계획 기준, 2026-09-01 갱신)
 
 1. ~~DB 마이그레이션 적용 및 재검증~~ — 완료(위 절).
-2. **(사용자 조치 필요)** GCP/Vercel WIF 인프라 설정 — 콘솔별 순서·입력값·필요 권한·완료 확인 방법·민감정보 저장 여부를 정리해 별도로 제출한다(이 대화의 다음 메시지 참고). 실제 Google Workspace 호출은 사용자 승인 전까지 실행하지 않는다.
-3. 앱 코드 배포(2번 완료 후).
-4. 테스트 OU에서 실제 Workspace 계정 1건 생성 + 전체 E2E 검증(WIF 연결, 충돌·재시도·정지·재활성화, 실제 OAuth 최초 로그인 + immutable Google user ID 연결 — `teacher1@alton.education`/`teacher2@alton.education` 기존 계정으로 조회·anti-spoofing 확인, 신규 생성은 `teacher-provisioning-test@alton.education` 전용 계정 1개로).
+2. GCP/Vercel WIF 인프라 설정 — **콘솔 Step 1~7 완료, Step 8 절반 완료, 8 나머지는 도메인 확정 대기로 일시 중단**:
+   - [x] Step 1 Vercel OIDC 활성화(Team 모드, issuer `https://oidc.vercel.com/alton7`, 실제 토큰 audience `https://vercel.com/alton7` 확인)
+   - [x] Step 2 GCP API 3종(Admin SDK, IAM Service Account Credentials, Security Token Service) 활성화 확인
+   - [x] Step 3 WIF Pool/Provider 생성(`vercel`/`vercel`, Allowed audiences = `https://vercel.com/alton7`, provider resource `//iam.googleapis.com/projects/590621873979/locations/global/workloadIdentityPools/vercel/providers/vercel`)
+   - [x] Step 4 WIF principal(Production subject `owner:alton7:project:alton:environment:production`) → `gate-c-automation@...`에 `roles/iam.workloadIdentityUser` 바인딩(Preview 바인딩 없음 확인)
+   - [x] Step 5 self-referential `iam.serviceAccounts.signJwt`만 포함한 커스텀 역할(`workspaceSignJwtOnly`) 생성 + `gate-c-automation@...`가 자기 자신에 바인딩(gcloud로 생성·바인딩, 읽기 전용 명령으로 재검증 완료)
+   - [x] Step 6 기존 DWD Client(`112226937341201546024`) 7개 scope 유지 + `admin.directory.user` 추가(총 8개, 재확인 완료)
+   - [x] Step 7 테스트 OU `/Alton Integration Sandbox/Teachers` 생성(사용자 0명 확인)
+   - [x] Step 8 로컬 절반: 로컬 전용 OAuth Client 생성, `supabase/config.toml` 반영, **로컬 Google OAuth 로그인 E2E 실제 검증 완료(위 절, 사용자 최종 확인 2026-09-01 — 반복 불필요)**
+   - [ ] Step 8 운영 절반(보류 중, 사용자 결정 대기): `alton.education`의 Vercel Production Domain 연결을 먼저 확정한 뒤 진행 — 운영 Google OAuth Client, Hosted Supabase Google Provider + Site URL/Additional Redirect URLs, Vercel Production 환경변수(비쓰기: `GOOGLE_WORKLOAD_IDENTITY_AUDIENCE`/`GOOGLE_WORKSPACE_SERVICE_ACCOUNT_EMAIL`/`GOOGLE_WORKSPACE_DELEGATED_ADMIN_EMAIL`), 읽기 전용 preflight(`WORKSPACE_PREFLIGHT_ALLOW_REAL_READS`), 테스트 OU 실제 Workspace 계정 검증 순서로 진행 예정. **그 전까지 운영 OAuth 설정·실제 Directory API 호출·원격 개발 DB 반영 전부 보류**(사용자 명시 지시, 2026-09-01).
+3. 앱 코드 배포(2번 전체 완료 후).
+4. 테스트 OU에서 실제 Workspace 계정 1건 생성 + 전체 E2E 검증(WIF 연결, 충돌·재시도·정지·재활성화, 실제 OAuth 최초 로그인 + immutable Google user ID 연결 — `teacher1@alton.education`/`teacher2@alton.education` 기존 계정으로 조회·anti-spoofing 확인은 로컬에서 이미 실증했으므로 운영에서는 반복 없이 최소 확인만, 신규 생성은 `teacher-provisioning-test@alton.education` 전용 계정 1개로).
 5. 4번 검증 성공 후에만 Task 7 완료 처리(사용자 확정: "Task 7은 mock 구현만으로 완료 처리하지 않는다").
 6. 정식 오픈 전: 위임 대상을 `official@alton.education`에서 사용자 관리 권한만 가진 전용 자동화 관리자 계정으로 분리(보안 인수 조건, `master-roadmap-v3.md` R12에 등록 완료).
