@@ -1,7 +1,9 @@
 "use server";
 
-import { requireAdmin } from "@/lib/admin-auth";
+import { requireAdminOrCapability } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
+
+const CAPABILITY = "manage_account_merges";
 
 // (2026-08-31 R2 Task 5) 계정 병합 — 중복 계정 정리 전용. 일반적인 서비스
 // 중단(inactive)·장기 복귀와는 무관하다. 실제 소유권 재배정·감사 이력 보존·
@@ -13,7 +15,7 @@ export async function mergeAccounts(params: {
   mergedId: string;
   reason: string;
 }): Promise<void> {
-  const { supabase } = await requireAdmin();
+  const { supabase } = await requireAdminOrCapability(CAPABILITY);
   if (!params.reason.trim()) {
     throw new Error("병합 사유를 입력해주세요.");
   }
@@ -30,7 +32,7 @@ export async function mergeAccounts(params: {
 // 쪽 PII 스크럽이 끝난 뒤에만 실제 Auth 계정(세션·복구정보 포함)을 삭제한다
 // — auth.users는 GoTrue가 관리하므로 admin API를 거쳐야 한다.
 export async function anonymizeMergedAccount(profileId: string): Promise<void> {
-  const { supabase } = await requireAdmin();
+  const { supabase } = await requireAdminOrCapability(CAPABILITY);
   const { error } = await supabase.rpc("anonymize_merged_account", { p_profile_id: profileId });
   if (error) throw new Error(error.message);
 
@@ -62,7 +64,7 @@ export type TeacherRateHistoryEntry = {
 export async function getTeacherRateHistoryWithMerged(
   teacherId: string
 ): Promise<TeacherRateHistoryEntry[]> {
-  const { supabase } = await requireAdmin();
+  const { supabase } = await requireAdminOrCapability(CAPABILITY);
   const { data, error } = await supabase.rpc("teacher_rate_history_with_merged", {
     p_teacher_id: teacherId,
   });
@@ -99,7 +101,7 @@ export type MergeCandidate = {
 // 병합 후보 목록 화면용 — 이미 병합된(closed, account_merges에 있는) 계정은
 // 제외하고 보여준다.
 export async function listMergeCandidates(role: "student" | "teacher" | "parent"): Promise<MergeCandidate[]> {
-  const { supabase } = await requireAdmin();
+  const { supabase } = await requireAdminOrCapability(CAPABILITY);
   const { data, error } = await supabase
     .from("profiles")
     .select("id, name, role")

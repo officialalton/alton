@@ -1,6 +1,8 @@
 "use server";
 
-import { requireAdmin } from "@/lib/admin-auth";
+import { requireAdminOrCapability } from "@/lib/admin-auth";
+
+const CAPABILITY = "manage_guardian_consent";
 
 // R2 Task 6 — 관리자의 수동 보호자 동의 등록(예: 서면/전화로 확인된 동의를
 // 사후 입력). 일반 보호자 셀프서비스 동의(app/parent/consent-actions.ts)와는
@@ -14,7 +16,7 @@ export async function recordManualGuardianConsent(params: {
   consentedBy: string;
   verificationReference: string;
 }): Promise<void> {
-  const { supabase } = await requireAdmin();
+  const { supabase } = await requireAdminOrCapability(CAPABILITY);
   if (!params.verificationReference.trim()) {
     throw new Error("수동 확인 증빙을 입력해주세요.");
   }

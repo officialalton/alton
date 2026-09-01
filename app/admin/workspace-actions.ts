@@ -1,6 +1,6 @@
 "use server";
 
-import { requireAdmin } from "@/lib/admin-auth";
+import { requireAdminOrCapability } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import {
   createWorkspaceUser,
@@ -10,6 +10,7 @@ import {
 import { sendWorkspaceProvisioningEmail } from "@/lib/invite-email";
 
 const TEST_OU_PATH = "/Alton Integration Sandbox/Teachers";
+const CAPABILITY = "manage_teacher_workspace";
 
 export type ActionResult = { ok: true } | { ok: false; error: string };
 
@@ -34,7 +35,7 @@ export async function startTeacherWorkspaceProvisioning(params: {
   familyName: string;
 }): Promise<ActionResult> {
   try {
-    const { supabase } = await requireAdmin();
+    const { supabase } = await requireAdminOrCapability(CAPABILITY);
 
     const { data: provisioning, error: beginError } = await supabase.rpc(
       "begin_teacher_workspace_provisioning",
@@ -123,7 +124,7 @@ type ProvisioningRow = {
 };
 
 async function resumeAfterCreation(
-  supabase: Awaited<ReturnType<typeof requireAdmin>>["supabase"],
+  supabase: Awaited<ReturnType<typeof requireAdminOrCapability>>["supabase"],
   provisioning: ProvisioningRow
 ): Promise<void> {
   if (provisioning.status === "creating") {
@@ -148,7 +149,7 @@ async function resumeAfterCreation(
 // 선생님 활동 중단 — 계정 삭제가 아니라 Workspace suspend + ALTON inactive.
 export async function suspendTeacher(teacherId: string, reason: string): Promise<ActionResult> {
   try {
-    const { supabase } = await requireAdmin();
+    const { supabase } = await requireAdminOrCapability(CAPABILITY);
     if (!reason.trim()) throw new Error("중단 사유를 입력해주세요.");
 
     const { data: teacher, error: fetchError } = await supabase
@@ -190,7 +191,7 @@ export async function reactivateTeacher(params: {
   newRateCurrency: string;
 }): Promise<ActionResult> {
   try {
-    const { supabase } = await requireAdmin();
+    const { supabase } = await requireAdminOrCapability(CAPABILITY);
     if (!params.reason.trim()) throw new Error("복귀 사유를 입력해주세요.");
 
     const { data: teacher, error: fetchError } = await supabase
@@ -239,7 +240,7 @@ export type ChecklistResult =
 
 export async function getTeacherActivationChecklist(teacherId: string): Promise<ChecklistResult> {
   try {
-    const { supabase } = await requireAdmin();
+    const { supabase } = await requireAdminOrCapability(CAPABILITY);
     const { data, error } = await supabase.rpc("get_teacher_activation_checklist", {
       p_teacher_id: teacherId,
     });

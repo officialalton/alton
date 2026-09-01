@@ -58,8 +58,12 @@ describe("recordManualGuardianConsent", () => {
     expect(rpcMock).not.toHaveBeenCalled();
   });
 
-  it("관리자가 아니면 requireAdmin에서 차단된다", async () => {
+  it("관리자가 아니고 manage_guardian_consent capability도 없으면 차단된다", async () => {
     profileSingleMock.mockResolvedValue({ data: { role: "parent" } });
+    rpcMock.mockImplementation((fn: string) => {
+      if (fn === "current_user_has_capability") return Promise.resolve({ data: false });
+      throw new Error(`unexpected rpc ${fn}`);
+    });
     const { recordManualGuardianConsent } = await import("./consent-actions");
     await expect(
       recordManualGuardianConsent({
@@ -68,6 +72,25 @@ describe("recordManualGuardianConsent", () => {
         consentedBy: "guardian1",
         verificationReference: "증빙",
       })
-    ).rejects.toThrow("관리자만 사용할 수 있습니다.");
+    ).rejects.toThrow("이 작업을 수행할 권한이 없습니다.");
+  });
+
+  it("관리자가 아니어도 manage_guardian_consent capability가 있으면 통과한다", async () => {
+    profileSingleMock.mockResolvedValue({ data: { role: "parent" } });
+    rpcMock.mockImplementation((fn: string) => {
+      if (fn === "current_user_has_capability") return Promise.resolve({ data: true });
+      if (fn === "record_manual_guardian_consent") return Promise.resolve({ error: null });
+      throw new Error(`unexpected rpc ${fn}`);
+    });
+    const { recordManualGuardianConsent } = await import("./consent-actions");
+    await recordManualGuardianConsent({
+      studentId: "student1",
+      policyVersionId: "policy1",
+      consentedBy: "guardian1",
+      verificationReference: "증빙",
+    });
+    expect(rpcMock).toHaveBeenCalledWith("current_user_has_capability", {
+      p_capability: "manage_guardian_consent",
+    });
   });
 });

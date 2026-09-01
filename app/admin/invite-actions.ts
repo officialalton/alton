@@ -1,6 +1,8 @@
 "use server";
 
-import { requireAdmin } from "@/lib/admin-auth";
+import { requireAdminOrCapability } from "@/lib/admin-auth";
+
+const CAPABILITY = "manage_invites";
 import { sendInviteEmail } from "@/lib/invite-email";
 
 export type AccountInviteListItem = {
@@ -19,7 +21,7 @@ export type AccountInviteListItem = {
 // 별도로 둔다(본인이 보낸 것만 — RLS "관리자/발송자 조회" 정책이 이미 이 구분을
 // 강제하므로, 여기서는 그냥 전체를 select하면 관리자 세션 기준으로 전체가 온다).
 export async function listInvites(): Promise<AccountInviteListItem[]> {
-  const { supabase } = await requireAdmin();
+  const { supabase } = await requireAdminOrCapability(CAPABILITY);
   const { data, error } = await supabase
     .from("account_invites")
     .select(
@@ -42,7 +44,7 @@ export async function listInvites(): Promise<AccountInviteListItem[]> {
 }
 
 export async function resendInvite(inviteId: string): Promise<void> {
-  const { supabase } = await requireAdmin();
+  const { supabase } = await requireAdminOrCapability(CAPABILITY);
   const { data: invite, error: fetchError } = await supabase
     .from("account_invites")
     .select("email_original, invitee_name, role")
@@ -63,7 +65,7 @@ export async function resendInvite(inviteId: string): Promise<void> {
 }
 
 export async function revokeInvite(inviteId: string): Promise<void> {
-  const { supabase } = await requireAdmin();
+  const { supabase } = await requireAdminOrCapability(CAPABILITY);
   const { error } = await supabase.rpc("revoke_account_invite", { p_invite_id: inviteId });
   if (error) throw new Error(error.message);
 }
@@ -77,7 +79,7 @@ export async function resolveManualReviewInvite(params: {
   targetProfileId?: string;
   authUserId?: string;
 }): Promise<void> {
-  const { supabase } = await requireAdmin();
+  const { supabase } = await requireAdminOrCapability(CAPABILITY);
   const { error } = await supabase.rpc("resolve_manual_review_invite", {
     p_invite_id: params.inviteId,
     p_action: params.action,

@@ -13,7 +13,7 @@ const supabaseMock = {
 };
 
 vi.mock("@/lib/admin-auth", () => ({
-  requireAdmin: vi.fn().mockResolvedValue({ supabase: supabaseMock, adminUserId: "admin1" }),
+  requireAdminOrCapability: vi.fn().mockResolvedValue({ supabase: supabaseMock, actorUserId: "admin1" }),
 }));
 
 const adminRpcMock = vi.fn();
