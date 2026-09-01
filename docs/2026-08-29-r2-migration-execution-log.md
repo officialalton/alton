@@ -913,3 +913,35 @@ R2 Task 1-7 전부 완료 확인(Task 1은 로드맵 문서 체크박스만 갱�
 **Task 8 완료 조건 충족**: 로컬·원격 개발 DB 양쪽에서 capability 기반 접근이 실제로 동작하고(서버+DB 양쪽 게이트), 기존 관리자 경로·self-service 경로 회귀 없음을 확인. **R2 Task 8 — 완료.**
 
 **R2 남은 것**: 계획 문서(`docs/superpowers/plans/2026-08-30-r2-account-family-lifecycle.md`)의 Task 9(E2E/통합 테스트 보강)만 남음. `master-roadmap-v3.md`의 R2 항목 중에도 아직 미완료로 남아있는 것들(복수 보호자/주 보호자 설정, 이메일 오기 수정 절차, 시간대/연락처 세부 확정, `inactive`/`reactivate_account()` 구현은 R12로 별도 이관됨)이 있다 — Task 9와 별개로 R2 전체 완료 여부는 이 항목들까지 확인이 필요하다.
+
+## R2 잔여 항목 마무리 (2026-09-01)
+
+Task 8 완료 후 사용자가 마일스톤 단위 자율 진행 방식(구현·테스트·버그 수정·개발 DB 반영까지 재승인 없이 연속 진행, 실제 외부 변경·정책 변경·비가역 삭제만 정지)으로 전환. `master-roadmap-v3.md` R2 섹션에 남아있던 4개 항목(복수 보호자, 이메일 수정, 시간대, 비활성화/재활성화)과 계획 문서 Task 9(E2E)를 실제 코드부터 역추적해 정확한 범위를 확정한 뒤 처리했다.
+
+**1) 범위 확정(구현 전 조사)**: `product-architecture-v3.md` §4.19/4.20/4.21과 실제 코드(`app/parent/invite-actions.ts`, `app/admin/users-actions.ts`의 `findOrCreateHouseholdForGuardian` 주석, `create_account_invite()`)를 대조해 확인:
+- **복수 보호자**: 스키마(Task 3)는 이미 복수 보호자·주 보호자 1명을 지원하지만, `create_account_invite()`가 `p_role='parent'`일 때 `household_id`를 절대 받지 않아(테이블 체크 제약까지 이중으로 막음) "기존 가족에 공동 보호자 추가"가 전혀 불가능했다 — Task 4 구현 당시 "다중 보호자 초대 UX는 별도 설계"라고 메모만 남기고 미구현된 것을 실측으로 확인. 진짜 구현 공백.
+- **이메일 수정**: `product-architecture-v3.md`에 "이메일 수정" 정책이 문자 그대로 존재하지 않는다(§4.19는 병합 정책만 다룸) — 조사 문서(`2026-08-30-r2-account-family-lifecycle-investigation-and-plan.md:36`)가 이 gap을 이미 지적했었다. PENDING 초대 오타는 기존 revoke+재초대로 충분해 추가 구현 불필요, ACTIVE 계정의 로그인 이메일 정정만 정책 미확정 — **사용자 판단이 필요한 지점으로 그대로 남김(구현하지 않음)**.
+- **시간대**: 스키마(`profiles.timezone`/`households.default_timezone`)는 Task 2가 이미 만들었으나 이를 읽는 코드가 어디에도 없었다(예약·세션 화면 자체가 R6 이전이라 아직 없음) — 순수 해석 로직만 구현하고 UI는 소비자가 생길 때(R6)로 미룸(불필요한 선제 UI 방지).
+- **비활성화/재활성화**: 로드맵 문구 자체가 이미 "`inactive`/`reactivate_account()`/자동화는 R12로 이관, R2는 병합만"이라고 명시하고 있어 실제로는 R2에 남은 일이 없음 — 확인만 하고 체크박스 정정.
+
+**2) 복수 보호자 구현** — `supabase/migrations/20260910000000_r2_multi_guardian.sql`:
+- `account_invites` 테이블 체크 제약 `account_invites_parent_has_no_household` 제거(실측: 제약 그대로 두면 함수 안의 검사만으로는 INSERT가 여전히 막힘).
+- `create_account_invite()`: `p_role='parent'`일 때 `household_id`(기존 household여야 함, 존재 확인)를 받을 수 있도록 확장. 가드는 기존 household_members 쓰기 정책과 같은 capability(`학생관리`, R1)를 재사용(신규 capability 이름 안 만듦) — §4.19가 "보호자가 다른 보호자를 초대"하는 자기서비스 경로를 확정한 적이 없어 관리자 전용으로 좁게 유지.
+- `finalize_account_invite()`: parent role이면서 household_id가 있으면 `household_members(role='guardian', is_primary=false)`로 합류시킴(household_id가 없으면 기존과 동일하게 새 household를 만들지 않음 — 첫 자녀 초대 시점에 지연 생성).
+- 신규 `set_primary_guardian(household_id, profile_id)`: 관리자 전용, 기존 주 보호자 해제→신규 지정 순서로 partial unique index를 위반하지 않게 처리, `households.primary_guardian_id`(지금까지 백필 INSERT 시점에만 채워지고 갱신 경로가 없던 비정규화 컬럼)도 같은 트랜잭션에서 동기화.
+- 앱 레이어: `app/admin/invite-actions.ts`에 `inviteGuardianToHousehold`/`setPrimaryGuardian` 추가(같은 `학생관리` capability로 게이트). 관리자 UI는 아직 없음(Task 6 `record_manual_guardian_consent`와 동일한 선례로 서버 액션·DB만 완료 처리).
+- **부수 발견·수정**: 같은 함수를 고치면서 "같은 이메일로 두 번째 초대 시도" 시나리오를 살펴보니 `account_invites_pending_unique` 유니크 인덱스 위반이라는 원본 Postgres 오류가 관리자 화면에 그대로 노출되고 있었다(친절한 사전 확인이 아예 없었음) — `create_account_invite()`에 명시적 중복 확인(`이미 처리 대기 중인 초대가 있습니다...`)을 추가.
+- 검증: 로컬(psql, 트랜잭션 롤백)로 co-guardian 초대→finalize→household_members 합류(is_primary=false 확인)→`set_primary_guardian`으로 재지정(기존 주 보호자 false, 신규 true, `households.primary_guardian_id` 동기화 확인) 전체 흐름 실측. `npx supabase db reset`으로 로컬 전체 마이그레이션 재적용 확인 후 `db push --linked`로 원격 적용, 원격에서도 co-guardian 초대+중복 차단을 트랜잭션 롤백으로 재확인, 적용 전/후 `profiles`/`households`/`household_members`/`account_invites` 행 수 동일.
+- `app/admin/invite-actions.test.ts`에 5건 추가(성공 케이스, capability 없는 사용자 거부 케이스, `set_primary_guardian` 호출 검증 등).
+
+**3) 시간대** — `lib/timezone.ts`(`resolveUserTimezone()`, `DEFAULT_TIMEZONE`) + `lib/timezone.test.ts`(4건): §4.21 해석 순서(개인 설정 → household 기본값 → `America/Los_Angeles`)를 순수 함수로 구현. 브라우저 감지 제안 UI는 R6까지 의도적으로 미룸(위 사유).
+
+**4) Task 9(E2E/통합 테스트 보강)** — 계획 문서의 5개 DoD 항목을 기존 스펙과 대조한 결과 3개는 이미 커버돼 있었다(초대→비밀번호→로그인: `account-invites.spec.ts`, suspended 로그인 차단: `account-lifecycle.spec.ts`, 13세 미만 미동의 게이트: `minor-consent.spec.ts`) — 나머지 2개만 실제로 비어 있었다:
+- **"보호자가 자녀를 추가 초대하는 흐름"**: 서버 액션(`inviteChild`)은 있었지만 이를 호출하는 화면이 전혀 없어(어느 `.tsx`에서도 import되지 않음) E2E 자체가 불가능했다 — `app/parent/FamilyTab.tsx`(신규, "가족" 탭)를 만들어 `ParentShell.tsx`에 연결하고, `inviteChild()`를 Task 7/8과 동일한 `{ok,error}` 반환 패턴으로 전환(Next.js가 production에서 Server Action의 throw를 마스킹하는 문제를 새 코드에서 재도입하지 않기 위함). `app/parent/invite-actions.test.ts` 갱신 + 신규 케이스 1건 추가.
+- **"중복 이메일 초대 시 안내 메시지 확인"**: 위 2번 항목에서 이미 고친 `create_account_invite()`의 사전 확인 덕분에 이제 테스트 가능.
+- `e2e/account-invites.spec.ts`에 신규 테스트 2건 추가(둘 다 통과 확인).
+- **부수 발견·수정(테스트 인프라)**: 새 E2E를 포함해 관련 스펙을 실제로 실행하는 과정에서 `e2e/account-lifecycle.spec.ts`가 실제로 2가지 문제를 드러냈다: (a) 이전 세션(Task 7 cleanup)에서 승인받아 넓힌 7조건 게이트("active로 가는 모든 전이에 적용")가 이 스펙의 오래된 R1 시드 선생님(Workspace/계약 데이터가 아예 없음)의 `suspended→active` 재활성화 테스트를 막았다 — 실제 정책과 일치하는 정상 동작이므로 테스트 쪽에 7조건을 충족하는 픽스처(`satisfyTeacherActivationConditions()`)를 추가해 우회 없이 통과시켰다. (b) `playwright.config.ts`의 `fullyParallel:true` 아래서 이 스펙의 여러 테스트가 같은 시드 계정 상태를 동시에 건드려 레이스가 났다(기본 병렬 실행 시 5~6개 실패, `--workers=1`에서는 전부 통과) — `test.describe.serial`로 파일 내부 레이스는 막았고, 파일 간 레이스(다른 스펙과 같은 시드 계정 공유)는 근본 해결(전용 픽스처로 리팩터링)이 필요해 `master-roadmap-v3.md` R13에 CI 안정화 항목으로 등록했다.
+
+**5) 최종 검증**: `npx tsc --noEmit` 클린. `npx vitest run` 전체 94개 파일 422건 통과. `npx supabase db reset`으로 로컬 DB를 완전히 새로 세운 뒤 `npx playwright test --workers=1`로 전체 E2E 27건 전부 통과(순차 실행 기준 — 위 4)의 파일 간 레이스 발견 사항 참고, 이건 기능 정확성과는 별개의 CI 설정 이슈).
+
+**R2 종료**: 위 4개 항목 + Task 9까지 전부 처리 완료. 남은 것은 (a) 이메일 수정 정책 확정(사용자 판단 필요), (b) E2E 파일 간 레이스 리팩터링(R13, 정식 오픈 전), (c) 이전부터 등록된 R12/R13 이관 항목들(SECURITY DEFINER 권한 감사, Workspace 위임 계정 분리, 보관기간 자동화 등) — 전부 R2 자체의 blocker는 아니다.

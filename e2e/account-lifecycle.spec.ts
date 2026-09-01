@@ -51,6 +51,31 @@ function transitionParentStatus(newStatus: string, reason: string) {
   execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-c", sql]);
 }
 
+// (2026-09-01 R2 잔여 항목 작업 중 발견/수정) transition_account_status()의
+// 7개 선행조건 게이트가 원래 pending→active에만 걸려 있다가 active로 가는
+// 모든 전이(suspended→active 포함)에 적용되도록 넓어졌다(사용자 확정,
+// supabase/migrations/20260908000000_r2_teacher_reactivation_gate_fix.sql).
+// 이 시드 선생님은 R1 시절 데이터라 Workspace 프로비저닝·계약 데이터가
+// 아예 없어 이제는 suspended→active 전이 자체가 게이트에 막힌다 — 실제
+// 정책(7조건 게이트가 모든 active 전이에 적용됨)과 일치하는 정상 동작이니
+// 테스트를 우회하지 않고 7조건을 실제로 충족시키는 픽스처를 만든다.
+function satisfyTeacherActivationConditions() {
+  const sql = `
+    update profiles set phone = '+82-10-0000-0000' where id = '${TEACHER_ID}';
+    insert into teacher_workspace_provisioning (
+      workspace_email, workspace_email_normalized, personal_contact_email, workspace_recovery_email,
+      linked_teacher_id, created_by, status, workspace_created_at, first_login_at, linked_at
+    ) values (
+      'seoyeon-e2e@alton.education', 'seoyeon-e2e@alton.education', 'seoyeon@example.com', 'seoyeon@example.com',
+      '${TEACHER_ID}', '${ADMIN_ID}', 'linked', now(), now(), now()
+    )
+    on conflict (workspace_email_normalized) do nothing;
+    insert into teacher_contracts (teacher_id, doc_type, status, signed_at)
+    values ('${TEACHER_ID}', 'e2e_fixture', 'signed', now());
+  `;
+  execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-c", sql]);
+}
+
 // 정상 경로 자체(허용된 전이 검증 + 감사 이력)를 실제로 exercise하고 싶을
 // 때만 이걸 쓴다 — 테스트 사전 세팅에는 forceSetTeacherStatus를 쓴다.
 function transitionTeacherStatus(newStatus: string, reason: string) {
@@ -63,7 +88,13 @@ function transitionTeacherStatus(newStatus: string, reason: string) {
   execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-c", sql]);
 }
 
-test.describe("R2 계정 상태 전환 — 실제 브라우저 로그인 흐름", () => {
+// (2026-09-01 발견·수정) 이 안의 테스트들은 같은 시드 선생님/학부모 행
+// (TEACHER_ID/PARENT_ID)의 상태를 직접 세팅·전이시킨다 — playwright.config의
+// fullyParallel:true 아래서 일반 describe로 두면 서로 다른 워커가 동시에
+// 같은 행을 건드려 레이스(다른 테스트가 세팅한 상태를 덮어씀)가 난다(실측:
+// 기본 병렬 실행에서 5개 실패, --workers=1에서는 전부 통과). serial로
+// 이 파일 안에서만 순차 실행을 강제한다.
+test.describe.serial("R2 계정 상태 전환 — 실제 브라우저 로그인 흐름", () => {
   test.afterAll(() => {
     // 다른 e2e 스펙(auth-roles.spec.ts)이 이 선생님/학부모 계정이 active라고
     // 가정하므로, 이 스펙이 끝나면 반드시 원상복구한다.
@@ -106,6 +137,9 @@ test.describe("R2 계정 상태 전환 — 실제 브라우저 로그인 흐름"
 
   test("관리자가 재활성화하면 같은 계정으로 다시 정상 로그인된다", async ({ page }) => {
     forceSetTeacherStatus("suspended");
+    // 7개 활성화 선행조건 게이트가 active로 가는 모든 전이(suspended→active
+    // 포함)에 적용되므로, 이 시드 선생님도 실제로 조건을 충족시켜야 한다.
+    satisfyTeacherActivationConditions();
     // 여기서는 정상 경로(transition_account_status())로 재활성화해
     // "suspended → active" 전이 자체가 실제로 허용되는지도 함께 확인한다.
     transitionTeacherStatus("active", "e2e: 재활성화 테스트");

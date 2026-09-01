@@ -76,6 +76,64 @@ test("같은 초대 링크를 두 번 방문해도(중복 클릭) 에러 없이 
   await expect(page).toHaveURL(/\/set-password/);
 });
 
+// R2 Task 9 — 보호자가 자기 화면에서 자녀를 추가로 초대하는 흐름(§4.19).
+// 서버 액션(inviteChild)만 있고 화면이 없던 부분에 /parent?tab=family를
+// 새로 만들었다 — 실제 로그인한 보호자로 폼을 채워 실제 메일까지 확인한다.
+// 새로 finalize된 계정은 role과 무관하게 항상 status='pending'이라
+// /account-pending으로 간다(선생님 프로비저닝과 동일한 패턴).
+test("보호자가 자녀를 추가로 초대하면 실제 메일 링크로 계정을 만들고 로그인까지 완료된다", async ({
+  page,
+}) => {
+  const email = `e2e-child-${Date.now()}@example.com`;
+  const name = "E2E 추가자녀";
+
+  await loginAs(page, ACCOUNTS.parent);
+  await page.goto("/parent?tab=family");
+  await page.getByLabel("이름").fill(name);
+  await page.getByLabel("이메일").fill(email);
+  await page.getByRole("button", { name: "초대 보내기" }).click();
+  await expect(page.getByText("초대 이메일이 발송되었습니다")).toBeVisible();
+
+  const mail = await findLatestEmailTo(email, "계정 초대");
+  const acceptUrl = extractInviteAcceptUrl(mail.html);
+
+  await page.goto(acceptUrl);
+  await expect(page).toHaveURL(/\/set-password/);
+
+  await page.getByLabel("새 비밀번호", { exact: true }).fill(DEV_PASSWORD);
+  await page.getByLabel("새 비밀번호 확인").fill(DEV_PASSWORD);
+  await page.getByRole("checkbox").check();
+  await page.getByRole("button", { name: "비밀번호 설정하고 계속하기" }).click();
+
+  await expect(page).toHaveURL(/\/account-pending/);
+});
+
+// R2 Task 9 — 같은 이메일로 pending 초대가 있는 상태에서 다시 초대를 시도하면
+// account_invites_pending_unique 유니크 인덱스 위반 같은 내부 구현 오류가
+// 아니라 안내 메시지가 화면에 보여야 한다(2026-09-01 create_account_invite()에
+// 사전 확인 추가).
+test("같은 이메일로 두 번째 초대를 시도하면 원본 DB 오류가 아니라 안내 메시지가 보인다", async ({
+  page,
+}) => {
+  const email = `e2e-dup-${Date.now()}@example.com`;
+
+  await loginAs(page, ACCOUNTS.admin);
+  await page.goto("/admin?tab=users");
+  await page.getByRole("button", { name: "+ 초대" }).first().click();
+  await page.getByPlaceholder("이름").fill("E2E 중복테스트");
+  await page.getByPlaceholder("이메일").fill(email);
+  await page.getByRole("button", { name: "초대 보내기" }).click();
+  await expect(page.getByText("초대 이메일이 발송되었습니다")).toBeVisible();
+
+  await page.getByRole("button", { name: "+ 초대" }).first().click();
+  await page.getByPlaceholder("이름").fill("E2E 중복테스트 2차");
+  await page.getByPlaceholder("이메일").fill(email);
+  await page.getByRole("button", { name: "초대 보내기" }).click();
+
+  await expect(page.getByText("이미 처리 대기 중인 초대가 있습니다")).toBeVisible();
+  await expect(page.getByText(/duplicate key value|constraint/i)).toHaveCount(0);
+});
+
 test("철회된 초대는 실제 브라우저에서 수락 링크를 방문해도 계정을 만들지 않고 로그인 화면으로 돌려보낸다", async ({
   page,
 }) => {

@@ -16,6 +16,7 @@ import CreditsTab from "./CreditsTab";
 import type { ParentCreditsData } from "./credits-data";
 import ConsentTab from "./ConsentTab";
 import type { ChildConsentStatus, ConsentPolicyOption } from "./consent-data";
+import FamilyTab from "./FamilyTab";
 
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
@@ -23,6 +24,7 @@ const NAV_ITEMS = [
   { id: "credits", label: "수업권", icon: "💳" },
   { id: "stats", label: "통계", icon: "📊" },
   { id: "consent", label: "동의", icon: "✅" },
+  { id: "family", label: "가족", icon: "👨‍👩‍👧" },
 ] as const;
 
 type TabId = (typeof NAV_ITEMS)[number]["id"];
@@ -168,6 +170,8 @@ export default function ParentShell({
             />
           ) : activeTab === "consent" ? (
             <ConsentTab children={consentChildren} activePolicy={activeConsentPolicy} />
+          ) : activeTab === "family" ? (
+            <FamilyTab />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.

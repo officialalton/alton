@@ -88,3 +88,37 @@ export async function resolveManualReviewInvite(params: {
   });
   if (error) throw new Error(error.message);
 }
+
+// R2 잔여 항목 — 복수 보호자. 기존 household에 공동 보호자(is_primary=false)를
+// 초대한다 — §4.19는 "관리자가 보호자를 초대한다"만 확정했고 보호자가 다른
+// 보호자를 초대하는 자기서비스 경로는 확정한 적이 없어 관리자 전용으로
+// 좁힌다. household_members 쓰기 권한과 동일한 capability(`학생관리`, R1
+// RLS)를 그대로 쓴다 — 이 파일의 다른 초대 액션(manage_invites)과는 다른
+// capability라 공용 CAPABILITY 상수를 쓰지 않는다.
+const HOUSEHOLD_CAPABILITY = "학생관리";
+
+export async function inviteGuardianToHousehold(params: {
+  householdId: string;
+  name: string;
+  email: string;
+}): Promise<void> {
+  const { supabase } = await requireAdminOrCapability(HOUSEHOLD_CAPABILITY);
+  const { data, error } = await supabase.rpc("create_account_invite", {
+    p_email: params.email,
+    p_name: params.name,
+    p_role: "parent",
+    p_household_id: params.householdId,
+  });
+  if (error) throw new Error(error.message);
+  const row = data![0];
+  await sendInviteEmail({ to: params.email, name: params.name, token: row.raw_token, role: "parent" });
+}
+
+export async function setPrimaryGuardian(householdId: string, profileId: string): Promise<void> {
+  const { supabase } = await requireAdminOrCapability(HOUSEHOLD_CAPABILITY);
+  const { error } = await supabase.rpc("set_primary_guardian", {
+    p_household_id: householdId,
+    p_profile_id: profileId,
+  });
+  if (error) throw new Error(error.message);
+}
