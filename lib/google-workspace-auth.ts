@@ -37,6 +37,7 @@ import { ExternalAccountClient, type BaseExternalAccountClient } from "google-au
 // GCP Provider의 Allowed audiences 설정과 불일치해 인증이 실패한다.
 
 const DIRECTORY_SCOPE = "https://www.googleapis.com/auth/admin.directory.user";
+const DRIVE_SCOPE = "https://www.googleapis.com/auth/drive";
 const OAUTH_TOKEN_URL = "https://oauth2.googleapis.com/token";
 
 function assertNotPreview(): void {
@@ -109,7 +110,7 @@ export async function getImpersonatedAccessToken(): Promise<string> {
   return token;
 }
 
-async function signDelegatedAdminJwt(impersonatedAccessToken: string): Promise<string> {
+async function signDelegatedAdminJwt(impersonatedAccessToken: string, scope: string): Promise<string> {
   const serviceAccountEmail = process.env.GOOGLE_WORKSPACE_SERVICE_ACCOUNT_EMAIL!;
   const delegatedAdminEmail = process.env.GOOGLE_WORKSPACE_DELEGATED_ADMIN_EMAIL;
   if (!delegatedAdminEmail) {
@@ -120,7 +121,7 @@ async function signDelegatedAdminJwt(impersonatedAccessToken: string): Promise<s
   const payload = {
     iss: serviceAccountEmail,
     sub: delegatedAdminEmail,
-    scope: DIRECTORY_SCOPE,
+    scope,
     aud: OAUTH_TOKEN_URL,
     iat: nowSeconds,
     exp: nowSeconds + 3600,
@@ -159,7 +160,7 @@ export async function getDirectoryApiAccessToken(): Promise<string> {
   }
 
   const impersonatedToken = await getImpersonatedAccessToken();
-  const signedJwt = await signDelegatedAdminJwt(impersonatedToken);
+  const signedJwt = await signDelegatedAdminJwt(impersonatedToken, DIRECTORY_SCOPE);
 
   const res = await fetch(OAUTH_TOKEN_URL, {
     method: "POST",
@@ -175,4 +176,40 @@ export async function getDirectoryApiAccessToken(): Promise<string> {
   const data = (await res.json()) as { access_token: string; expires_in: number };
   cachedDirectoryToken = { accessToken: data.access_token, expiresAt: now + data.expires_in };
   return cachedDirectoryToken.accessToken;
+}
+
+let cachedDriveToken: { accessToken: string; expiresAt: number } | null = null;
+
+/**
+ * Drive API(v3) 범위 액세스 토큰. R3: 완료된 계약서·감사증명서를 회사 Shared
+ * Drive에 올리기 위해 getDirectoryApiAccessToken()과 동일한 DWD 패턴을
+ * Drive 스코프로 재사용한다. 새 서비스 계정·WIF 설정을 만들지 않고 기존
+ * R2 체인을 그대로 재사용한다 — Google Cloud Console에서 이 서비스 계정에
+ * Drive API 스코프가 이미 허용돼 있어야 한다(도메인 전체 위임 설정의
+ * OAuth 범위 목록에 포함 필요).
+ */
+export async function getDriveApiAccessToken(): Promise<string> {
+  assertNotPreview();
+  const now = Math.floor(Date.now() / 1000);
+  if (cachedDriveToken && cachedDriveToken.expiresAt > now + 60) {
+    return cachedDriveToken.accessToken;
+  }
+
+  const impersonatedToken = await getImpersonatedAccessToken();
+  const signedJwt = await signDelegatedAdminJwt(impersonatedToken, DRIVE_SCOPE);
+
+  const res = await fetch(OAUTH_TOKEN_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
+      assertion: signedJwt,
+    }),
+  });
+  if (!res.ok) {
+    throw new Error(`Drive API 토큰 교환 실패 (status ${res.status})`);
+  }
+  const data = (await res.json()) as { access_token: string; expires_in: number };
+  cachedDriveToken = { accessToken: data.access_token, expiresAt: now + data.expires_in };
+  return cachedDriveToken.accessToken;
 }
