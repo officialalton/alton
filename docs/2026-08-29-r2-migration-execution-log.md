@@ -694,6 +694,17 @@ Task 2 승인 시 사용자가 함께 확정한 후속 Task의 원본 요구사�
 
 **아직 하지 않은 것**: 콘솔 설정(WIF 풀·프로바이더·IAM 바인딩·OAuth Client 등)과 실제 GCP/Workspace 호출은 전혀 시작하지 않았다 — 사용자가 이 보고를 확인한 뒤 진행 승인.
 
+### Task 7 — Preflight 하드닝 (2026-09-05, 콘솔 설정 착수 직전 추가 보완, 커밋 `4567702`)
+
+사용자가 콘솔 설정 승인 전 preflight 응답·감사·플래그 운용을 추가로 보완하도록 요청했다.
+
+- **응답·감사 최소화**: `workspace_preflight_runs` 감사 테이블 신설(관리자만 조회). 저장·응답 항목을 단계별 성공/실패, 오류 status(응답 본문 아님), OU 사용자 수, Google user ID의 SHA-256 해시(원문 아님), 타겟 테스트 이메일 존재 여부(boolean), 실행자·시각·환경으로 제한 — 이름·개인 이메일·전화번호·토큰 원문·임시 비밀번호·전체 Directory 응답은 어디에도 남기지 않는다. unit test로 응답 JSON에 실제 이메일/원본 google_user_id/토큰 문자열이 전혀 없음을 확인.
+- **라우트 레벨 3중 확인**: 관리자 권한(`requireAdmin()`) + `VERCEL_ENV==='production'` 명시 확인(Preview/미설정 전부 차단) + `WORKSPACE_PREFLIGHT_ALLOW_REAL_READS==='true'` 명시 확인 — 셋 다 만족해야 실제 Google 호출 이전 단계까지 진행한다.
+- **반복 호출 제한**: `begin_workspace_preflight_run()`이 실제 Google API 호출 **이전에** 300초 쿨다운을 DB 레벨에서 검사·예약하고(위반 시 429), `finish_workspace_preflight_run()`이 결과를 채운다 — 쿨다운 위반은 어떤 실제 API 호출도 일어나기 전에 걸림을 실제 실행으로 확인(psql 직접 테스트: 관리자 아닌 세션 차단, 정상 기록, 즉시 재실행 시 쿨다운 거부 전부 확인).
+- **Hosted/로컬 Supabase OAuth 완전 분리**: `supabase/config.toml`에 로컬 전용 `[auth.external.google]` 블록 추가(로컬 콜백 `http://localhost:3010/auth/teacher-callback`만 등록, Client Secret은 `env(SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET)`로 로컬 `.env`에서만). Hosted Supabase 프로젝트의 Site URL·Additional Redirect URLs·Google Provider 설정은 이 파일과 무관하며(콘솔에서 사용자가 직접 등록), 운영 도메인·운영 OAuth Client만 등록하고 로컬 콜백은 절대 등록하지 않는다는 원칙을 콘솔 체크리스트에 반영.
+- **플래그 운용 순서 확정**: 두 플래그 기본값 `false` 유지. 콘솔 1~8단계 완료 후 read flag만 `true`로 켜 preflight 실행 → 검토 후 read flag는 다시 `false`로 복귀(기본 원칙) → 실제 쓰기 테스트 직전에만 write flag를 별도 승인으로 `true` → 쓰기 검증 종료 후 다시 `false`. 장기 운영에서 계속 켜둘지는 테스트 종료 후 별도 운영 통제 정책으로 결정(지금 결정하지 않음).
+- **Node 런타임 확인(사용자 조치 필요)**: `engines.node>=22`는 코드 선언일 뿐, Vercel 프로젝트의 실제 배포 Node 버전은 Vercel 대시보드(Project Settings → General → Node.js Version)에서 직접 확인해야 한다 — 이 세션에는 Vercel API/CLI 인증이 없어 원격으로 조회할 수 없다. 대신 로컬에서 확인 가능한 것들은 확인 완료: (a) 어떤 기존 라우트도 Edge 런타임을 선언하지 않음, (b) `middleware.ts`(Next.js 특성상 항상 Edge 런타임)는 신규 Workspace 모듈을 전혀 import하지 않음, (c) 신규 의존성(`google-auth-library`)을 쓰는 파일은 신규 3개 라우트/서버 액션으로만 국한되어 기존 기능에는 번들링·런타임 영향이 없음, (d) `npm run build` 정상 완료(신규 라우트 전부 Node 런타임으로 컴파일).
+
 ### 남은 작업 (사용자 5단계 계획 기준)
 
 1. ~~DB 마이그레이션 적용 및 재검증~~ — 완료(위 절).
