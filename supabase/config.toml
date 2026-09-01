@@ -159,7 +159,11 @@ site_url = "http://localhost:3010"
 # The public URL that Auth serves on. Defaults to the API external URL with `/auth/v1` appended.
 # external_url = ""
 # A list of *exact* URLs that auth providers are permitted to redirect to post authentication.
-additional_redirect_urls = ["http://localhost:3010", "http://localhost:3010/set-password"]
+# /auth/teacher-callback(R2 Task 7 선생님 Google OAuth 콜백)은 로컬 전용
+# OAuth Client로만 테스트한다 — Hosted Supabase 프로젝트의 Site
+# URL/Additional Redirect URLs에는 이 로컬 경로를 등록하지 않는다(운영
+# 도메인·운영 OAuth Client와 완전히 분리).
+additional_redirect_urls = ["http://localhost:3010", "http://localhost:3010/set-password", "http://localhost:3010/auth/teacher-callback"]
 # How long tokens are valid for, in seconds. Defaults to 3600 (1 hour), maximum 604,800 (1 week).
 jwt_expiry = 3600
 # JWT issuer URL. If not set, defaults to auth.external_url.
@@ -339,6 +343,21 @@ redirect_uri = ""
 url = ""
 # If enabled, the nonce check will be skipped. Required for local sign in with Google auth.
 skip_nonce_check = false
+
+# R2 Task 7 — 선생님 전용 "Google로 로그인"의 로컬 개발용 설정이다.
+# 여기 client_id/secret은 로컬 테스트 전용 OAuth Client여야 한다 —
+# 운영(Hosted Supabase) Google Provider에 등록하는 OAuth Client와는
+# 완전히 별개로 만든다(운영 도메인·운영 콜백만 등록된 Client를 로컬에서
+# 재사용하지 않는다). Client Secret은 반드시 로컬 .env(.local)의
+# SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET로만 넣고, 이 파일이나 git에는
+# 절대 값 자체를 쓰지 않는다. redirect_uri는 로컬 콜백
+# (http://localhost:3010/auth/teacher-callback)만 가리켜야 한다 — Preview
+# URL은 여기에도 등록하지 않는다.
+[auth.external.google]
+enabled = false
+client_id = ""
+secret = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET)"
+redirect_uri = "http://localhost:3010/auth/teacher-callback"
 # If enabled, it will allow the user to successfully authenticate when the provider does not return an email address.
 email_optional = false
 
