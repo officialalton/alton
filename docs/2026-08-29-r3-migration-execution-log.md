@@ -23,6 +23,15 @@
 
 R3 스키마 작업 중 일부 마이그레이션(`20260914000000`, `20260915000000`)이 로컬 DB에는 정상 적용됐으나 Supabase CLI의 `supabase_migrations.schema_migrations` 추적 테이블에는 기록되지 않은 상태가 발견됨(원인: 일부 작업이 `supabase migration up` 대신 직접 psql로 적용됨). 실제 컬럼/enum 존재를 확인한 뒤 **추적 테이블에 두 버전 row를 수동 INSERT하여 동기화**(로컬 DB, 2026-09-01) — 이후 `db reset`으로 처음부터 전체 마이그레이션이 순서대로 재현되는 것을 확인함. 이 수동 동기화는 로컬 개발 DB에 대한 외부 변경으로 기록한다. 이후 모든 R3 마이그레이션은 `supabase migration up`/`db push` CLI 경로로만 적용해 재발 방지.
 
+## 외부 검증 2차 시도 (2026-09-01) — 근본원인 수정 후 재검증, 신규 발견
+
+- 로컬 P0(2단계 지시)를 먼저 완료: `drive_artifacts` `queued` 상태 처리 워커(claim/lock, `queued→processing→succeeded/retryable_failed→manual_review`), 실제 DocuSign 문서 다운로드 배선, Drive 파일명 기준 멱등 확인, `reconcileDocusignStatus` 확장 — 전부 mock 기반 테스트로 먼저 통과(502/502). 신규 마이그레이션 `20260917000000`(`drive_artifacts.retry_count`) 로컬·원격 모두 적용.
+- **서명 필드 미렌더링 원인 확정**: `anchorIgnoreIfNotPresent`가 기본값(true)이라 앵커 매칭 실패 시 조용히 tab을 생략하는 것이 원인. `false`로 명시 + 발송 전 앵커 존재 검증(`assertAnchorPresentInDocumentHtml`) 추가. **API로 실측 확인**: 수정 후 재발송한 envelope(`0e4a2838-...`)의 recipient tab을 조회하니 `signHereTabs`에 실제 좌표(`xPosition/yPosition`)를 가진 tab이 정상 생성됨(`source: AutoPlace`) — 근본원인 수정 확인됨. 임베디드 서명 뷰(recipient-view) 자체는 브라우저 자동화 환경에서 별개의 렌더링 이슈로 계속 멈춰 사람 서명은 완료 못함(원인 미상, 코드 문제 아님 — API로 tab 존재 자체는 확인됐으므로).
+- **신규 발견(중요)**: envelope별 `eventNotification`(계정 레벨 Connect 대신 사용)은 **실제로 Preview까지 배달됨**(Vercel 로그로 실측: `POST /api/webhooks/docusign` 수신 확인) — 계정 레벨 Connect 라우팅 미작동 문제와는 별개의 경로로 실배달 성공. 다만 **HMAC 서명이 적용되지 않아** 우리 웹훅이 정당하게 401(서명검증 실패)로 거부함 — DocuSign Connect 설정(HMAC 키 등록)을 추가하고 DocuSign 자체 retry_queue로 재시도해도 동일하게 미서명 상태로 도착(`connect/failures`로 실측 확인, retryCount 1). Sandbox 계정에서 envelope-level eventNotification에 HMAC 서명이 적용되지 않는 것으로 보이는 실제 한계 — 원인 미확정(DocuSign 지원 문의 필요할 수 있음). 우리 쪽 fail-closed 로직은 의도대로 정확히 작동(위조/미서명 요청을 실제로 차단).
+- 이 시도로 추가 발송한 envelope 1건(`0e4a2838-091f-8303-8136-6f26319b01d9`, 로드맵 승인 범위 내 1건)은 검증 목적 종료 후 **void 처리**(삭제 아님, ID·이력 보존) — 첫 번째 sandbox envelope(`cc6f2a43-...`)도 그대로 보존.
+- Vercel Deployment Protection(SSO)은 검증 중 재차 일시 해제 → 검증 직후 원복 완료(302 리다이렉트로 재확인).
+- DocuSign Connect 설정 2건(connectId 22299996, 22300003) 모두 생성 후 삭제 완료 — sandbox 앱(`alton-r3-dev`) 자체는 유지.
+
 ## 남은 blocker
 
 `docs/CURRENT.md` "남은 blocker·후속 작업" 절 참고 — 중복 기록하지 않음.

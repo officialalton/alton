@@ -33,13 +33,13 @@
 - DocuSign envelope는 `contracts`가 아니라 `contract_versions`와 1:1(`docusign_envelope_id`/`status`/`company_signed_at` 등 버전 레벨). 회사 선서명 완료 버전만 발송 가능.
 - 웹훅(`app/api/webhooks/docusign/route.ts`)은 서명 검증 fail-closed, `external_event_receipts(provider,event_id)` 멱등, 완료 시 `contracts.status='active'`(결제 진입 경계)로 전환하되 Drive 저장은 `drive_artifacts.sync_status`로 분리 추적(서명 상태를 되돌리지 않음).
 - 13세 미만 학생 동의 게이트(`assert_guardian_consent_ok()`)가 체험 생성·계약 활성화 모두에서 fail-closed로 강제됨 — R2 `consent_policy_versions`/`guardian_consents` 그대로 재사용.
-- Sandbox DocuSign 인증(JWT)·envelope 발송·실서명 완료는 실측 검증됨. **Drive 실제 업로드는 코드는 구현됐으나 로컬 실행 시 GCP IAM이 impersonation을 거부해(WIF 토큰은 로컬 pull 토큰, Production 런타임 전용으로 신뢰 설정된 것으로 보임) 미검증** — 아래 blocker 참고.
+- Sandbox DocuSign 인증(JWT)·envelope 발송·실서명 완료(1차 envelope)는 실측 검증됨. 서명 필드 미렌더링 근본원인(`anchorIgnoreIfNotPresent` 기본값) 수정·확인 완료(2026-09-01, 아래 참고). Drive 실제 업로드는 코드 구현 완료(worker·다운로드 연결·멱등 포함), 실제 쓰기 자체는 최소권한 전용 인프라 설계·승인 대기 중.
 
 ## 남은 blocker·후속 작업
 
-- **(R3, 2026-09-01 신규)** DocuSign Connect 계정 레벨 웹훅 라우팅이 sandbox에서 전달 시도 자체를 하지 않음(`connect/logs`·`connect/failures` 모두 0건, 90초+ 대기 확인) — 원인 미확정(계정 기능 활성화 필요 가능성). 웹훅 처리 로직 자체는 실제 서명된 HTTP POST로 Preview+원격 dev DB 대상 직접 검증 완료(서명검증·멱등·순서역전·동의게이트·void 사유저장 전부 확인)했으나, DocuSign→앱 실배달 경로는 미해결.
-- **(R3, 2026-09-01 신규)** `uploadArtifactToDrive` 로컬 실행 시 `iam.serviceAccounts.getAccessToken` IAM 권한 거부 — R2 WIF 신뢰 정책이 로컬에서 pull한 OIDC 토큰의 impersonation을 허용하지 않는 것으로 보임(Vercel Production 런타임 전용 설계 가능성). Vercel Production에서 직접 실행하는 검증이 필요(Preview는 `assertNotPreview()`로 원천 차단).
-- **(R3)** `queueDriveArtifactSync`가 큐에 넣은 `queued` 상태 행을 최초로 처리하는 워커가 없음 — 현재 `retryFailedDriveArtifacts()`는 `retryable_failed`/`manual_review`만 대상으로 함. `uploadArtifactToDrive` 실사용 시 실제 DocuSign 문서 다운로드(`downloadCompletedDocument`/`downloadCertificateOfCompletion`) 연결도 아직 안 됨(현재 빈 버퍼로 호출).
+- **(R3, 2026-09-01)** DocuSign Connect **계정 레벨** 웹훅 라우팅은 sandbox에서 여전히 미작동(원인 미확정). 반면 **envelope별 `eventNotification`은 실제 Preview까지 배달됨**(실측: Vercel 로그에서 실제 POST 수신 확인) — 다만 이 경로엔 **HMAC 서명이 적용되지 않아** 우리 웹훅이 정당하게 401로 거부(fail-closed 정상 동작). Connect HMAC 키 등록 후 DocuSign 자체 retry_queue로 재시도해도 동일 — sandbox 계정의 실제 한계로 보이며 원인 미확정(DocuSign 지원 문의 검토). 웹훅 처리 로직 자체(서명검증·멱등·순서역전·동의게이트·void 사유저장)는 실제 서명된 요청으로 Preview+원격 dev DB 대상 반복 검증 완료.
+- **(R3, 2026-09-01 해결)** ~~`queued` 상태 최초 처리 워커 부재~~ → `processQueuedDriveArtifacts()` 구현 완료(claim/lock, `queued→processing→succeeded/retryable_failed→manual_review`, `drive_artifacts.retry_count` 컬럼 추가). ~~`uploadArtifactToDrive`에 실제 문서 다운로드 미연결~~ → `retryFailedDriveArtifacts()`가 이제 실제 `downloadCompletedDocument`/`downloadCertificateOfCompletion`을 호출. Drive 파일명 기준 멱등 확인도 추가. 전부 mock 테스트로 검증(502/502) — **실제 Drive 쓰기 자체는 아직 미실행**(아래 항목).
+- **(R3, 2026-09-01 신규, 진행 중)** Drive 실측 검증용 최소권한 전용 인프라(Preview 전용 서비스 계정, ALTON 프로젝트·Preview 환경만 허용하는 WIF 조건, Directory API/DWD 권한 없음, `ALTON Integration Sandbox` 또는 `R3 Test` 폴더로 접근 제한) 설계·승인 요청 진행 중 — 기존 Production WIF/서비스 계정은 건드리지 않기로 확정(`assertNotPreview()` 완화 금지, Production 런타임 시험 금지).
 - **(R12로 이관, 2026-09-01 확정)** 이미 active인 계정의 로그인 이메일 정정 절차 — 본인확인·Workspace/Auth identity 재연결·중복 계정 충돌·감사 이력을 함께 다뤄야 하는 별도 계정관리 정책이라 R2 범위에 포함하지 않음. `master-roadmap-v3.md` R12에 등록됨. PENDING 초대 오타는 기존 revoke+재초대로 충분(이 항목과 무관).
 - **(R13, 정식 오픈 전)** `e2e/account-lifecycle.spec.ts`/`account-merge.spec.ts`가 전역 시드 계정을 공유해 `fullyParallel:true` 기본 설정에서 다른 스펙과 레이스 가능 — 전용 픽스처로 리팩터링 필요.
 - **(R12)** SECURITY DEFINER 함수 전체 anon EXECUTE 권한 감사(레거시 9개 + 이번 세션에서 확인된 다른 함수들), Workspace 위임 관리자를 `official@alton.education`에서 전용 자동화 계정으로 분리, 테스트 데이터 안전 정리 절차 설계.
