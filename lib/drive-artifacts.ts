@@ -1,5 +1,6 @@
 import { createAdminClient } from "@/lib/supabase-admin";
 import { getDriveApiAccessToken } from "@/lib/google-workspace-auth";
+import { getR3PreviewDriveAccessToken } from "@/lib/drive-preview-verify-auth";
 import { downloadCompletedDocument, downloadCertificateOfCompletion } from "@/lib/docusign";
 
 const MAX_RETRY_COUNT = 5;
@@ -52,12 +53,14 @@ async function findOrCreateFolder(
 }
 
 async function getTestFolderId(token: string): Promise<string> {
-  const drivesRes = await driveFetch(
-    `${DRIVE_API}/drives?q=${encodeURIComponent(`name='${SHARED_DRIVE_NAME}'`)}`,
-    token
-  );
+  // 이름 정확 일치(대소문자 포함) 대신 대소문자 무시 비교를 쓴다 — 실측 확인 결과
+  // 실제 Shared Drive 이름은 "Alton Integration Sandbox"로, 문서·코드 전반에서
+  // 관례적으로 쓰던 "ALTON..." 표기와 대소문자가 달랐다(2026-09-01).
+  const drivesRes = await driveFetch(`${DRIVE_API}/drives`, token);
   const drivesData = (await drivesRes.json()) as { drives: Array<{ id: string; name: string }> };
-  const sharedDrive = drivesData.drives.find((d) => d.name === SHARED_DRIVE_NAME);
+  const sharedDrive = drivesData.drives.find(
+    (d) => d.name.toLowerCase() === SHARED_DRIVE_NAME.toLowerCase()
+  );
   if (!sharedDrive) {
     throw new Error(`Shared Drive "${SHARED_DRIVE_NAME}"를 찾을 수 없습니다.`);
   }
@@ -150,7 +153,14 @@ export async function uploadArtifactToDrive(params: {
     throw new Error("not implemented: DRIVE_ARTIFACTS_ALLOW_REAL_WRITES=true가 아니면 실제 Drive 업로드를 하지 않습니다.");
   }
 
-  const token = await getDriveApiAccessToken();
+  // R3 임시 조치(2026-09-01): Preview에서는 Production WIF 체인(assertNotPreview()로
+  // 원천 차단됨, DWD 포함)을 절대 쓰지 않고, 별도 최소권한 서비스 계정(Directory API
+  // 없음, Shared Drive Content Manager로만 접근)을 쓴다. Production/로컬은 기존 경로
+  // 그대로 유지 — 이 분기는 검증 완료 후 별도 승인으로 제거 예정.
+  const token =
+    process.env.VERCEL_ENV === "preview"
+      ? await getR3PreviewDriveAccessToken()
+      : await getDriveApiAccessToken();
   const folderId = await getTestFolderId(token);
 
   const existingFileId = await findExistingFileInFolder(token, params.fileName, folderId);
