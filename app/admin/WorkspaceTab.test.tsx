@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import WorkspaceTab from "./WorkspaceTab";
 import type { WorkspaceProvisioningItem } from "./workspace-data";
 
@@ -35,6 +35,10 @@ const items: WorkspaceProvisioningItem[] = [
 ];
 
 describe("WorkspaceTab", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
   it("프로비저닝이 없으면 안내 문구를 보여준다", () => {
     render(<WorkspaceTab provisionings={[]} />);
     expect(screen.getByText("진행 중인 프로비저닝이 없습니다.")).toBeInTheDocument();
@@ -50,10 +54,13 @@ describe("WorkspaceTab", () => {
   });
 
   it("체크리스트 확인 버튼을 누르면 조건별 상태를 보여준다", async () => {
-    checklistMock.mockResolvedValue([
-      { condition: "workspace_issued", satisfied: true, evidence_at: "2026-08-01T00:00:00Z" },
-      { condition: "valid_rate", satisfied: false, evidence_at: null },
-    ]);
+    checklistMock.mockResolvedValue({
+      ok: true,
+      data: [
+        { condition: "workspace_issued", satisfied: true, evidence_at: "2026-08-01T00:00:00Z" },
+        { condition: "valid_rate", satisfied: false, evidence_at: null },
+      ],
+    });
     render(<WorkspaceTab provisionings={items} />);
     fireEvent.click(screen.getByText("활성화 선행조건 확인"));
 
@@ -65,7 +72,7 @@ describe("WorkspaceTab", () => {
   });
 
   it("프로비저닝 시작 폼 제출 시 필수 필드로 startTeacherWorkspaceProvisioning을 호출한다", async () => {
-    startMock.mockResolvedValue(undefined);
+    startMock.mockResolvedValue({ ok: true });
     render(<WorkspaceTab provisionings={[]} />);
 
     fireEvent.change(screen.getByPlaceholderText("workspace_email (xxx@alton.education)"), {
@@ -86,5 +93,28 @@ describe("WorkspaceTab", () => {
       );
       expect(refreshMock).toHaveBeenCalled();
     });
+  });
+
+  it("startTeacherWorkspaceProvisioning이 실패를 반환하면 화면에 실제 오류 메시지를 보여주고 새로고침하지 않는다", async () => {
+    startMock.mockResolvedValue({
+      ok: false,
+      error: "이미 진행 중이거나 완료된 프로비저닝입니다(상태: first_login_pending).",
+    });
+    render(<WorkspaceTab provisionings={[]} />);
+
+    fireEvent.change(screen.getByPlaceholderText("workspace_email (xxx@alton.education)"), {
+      target: { value: "teacher-provisioning-test@alton.education" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("personal_contact_email"), {
+      target: { value: "matchbox512@gmail.com" },
+    });
+    fireEvent.click(screen.getByText("프로비저닝 시작"));
+
+    await waitFor(() => {
+      expect(
+        screen.getByText("이미 진행 중이거나 완료된 프로비저닝입니다(상태: first_login_pending).")
+      ).toBeInTheDocument();
+    });
+    expect(refreshMock).not.toHaveBeenCalled();
   });
 });

@@ -65,8 +65,9 @@ describe("startTeacherWorkspaceProvisioning", () => {
     createWorkspaceUserMock.mockResolvedValue({ conflict: false, googleUserId: "google-uid-1" });
 
     const { startTeacherWorkspaceProvisioning } = await import("./workspace-actions");
-    await startTeacherWorkspaceProvisioning(baseParams);
+    const result = await startTeacherWorkspaceProvisioning(baseParams);
 
+    expect(result).toEqual({ ok: true });
     expect(createWorkspaceUserMock).toHaveBeenCalledWith(
       expect.objectContaining({ workspaceEmail: baseParams.workspaceEmail })
     );
@@ -81,7 +82,7 @@ describe("startTeacherWorkspaceProvisioning", () => {
     expect(rpcMock).toHaveBeenCalledWith("mark_workspace_invite_sent", { p_provisioning_id: "prov1" });
   });
 
-  it("Directory API 409 충돌: 재시도 불가로 분류(manual_review)하고 메일은 보내지 않는다", async () => {
+  it("Directory API 409 충돌: 재시도 불가로 분류(manual_review)하고 메일은 보내지 않으며, 관리자에게 실패를 알린다", async () => {
     rpcMock.mockImplementation((fn: string) => {
       if (fn === "begin_teacher_workspace_provisioning") {
         return Promise.resolve({
@@ -95,8 +96,11 @@ describe("startTeacherWorkspaceProvisioning", () => {
     createWorkspaceUserMock.mockResolvedValue({ conflict: true });
 
     const { startTeacherWorkspaceProvisioning } = await import("./workspace-actions");
-    await startTeacherWorkspaceProvisioning(baseParams);
+    const result = await startTeacherWorkspaceProvisioning(baseParams);
 
+    // 이전에는 이 경로가 { ok: true }처럼 조용히 성공 취급됐다(2026-09-01
+    // 실측으로 발견) — 이제는 반드시 실패로 보고해야 한다.
+    expect(result.ok).toBe(false);
     expect(rpcMock).toHaveBeenCalledWith(
       "record_workspace_creation_failed",
       expect.objectContaining({ p_provisioning_id: "prov1", p_retryable: false })
@@ -104,7 +108,7 @@ describe("startTeacherWorkspaceProvisioning", () => {
     expect(sendWorkspaceProvisioningEmailMock).not.toHaveBeenCalled();
   });
 
-  it("Directory API 호출 자체가 실패(전파 지연 등): 재시도 가능으로 분류하고 에러를 다시 던진다", async () => {
+  it("Directory API 호출 자체가 실패(전파 지연 등): 재시도 가능으로 분류하고 실패를 반환한다(던지지 않음)", async () => {
     rpcMock.mockImplementation((fn: string) => {
       if (fn === "begin_teacher_workspace_provisioning") {
         return Promise.resolve({
@@ -118,8 +122,12 @@ describe("startTeacherWorkspaceProvisioning", () => {
     createWorkspaceUserMock.mockRejectedValue(new Error("network timeout"));
 
     const { startTeacherWorkspaceProvisioning } = await import("./workspace-actions");
-    await expect(startTeacherWorkspaceProvisioning(baseParams)).rejects.toThrow("network timeout");
+    const result = await startTeacherWorkspaceProvisioning(baseParams);
 
+    // Next.js는 production에서 Server Action이 던진 에러를 마스킹해
+    // 관리자에게 실제 메시지를 보여줄 수 없다(2026-09-01 실측) — 던지지
+    // 않고 { ok: false, error } 반환값으로 모델링해야 한다.
+    expect(result).toEqual({ ok: false, error: "network timeout" });
     expect(rpcMock).toHaveBeenCalledWith(
       "record_workspace_creation_failed",
       expect.objectContaining({ p_provisioning_id: "prov1", p_retryable: true })
@@ -146,13 +154,35 @@ describe("startTeacherWorkspaceProvisioning", () => {
     });
 
     const { startTeacherWorkspaceProvisioning } = await import("./workspace-actions");
-    await startTeacherWorkspaceProvisioning(baseParams);
+    const result = await startTeacherWorkspaceProvisioning(baseParams);
 
+    expect(result).toEqual({ ok: true });
     expect(createWorkspaceUserMock).not.toHaveBeenCalled();
     expect(rpcMock).toHaveBeenCalledWith("record_workspace_created", {
       p_provisioning_id: "prov1",
       p_google_user_id: "google-uid-already-created",
     });
+  });
+
+  it("이미 진행 중이거나 완료된 프로비저닝을 같은 이메일로 재시작하면 던지지 않고 실패를 반환한다(중복 생성 방지)", async () => {
+    rpcMock.mockImplementation((fn: string) => {
+      if (fn === "begin_teacher_workspace_provisioning") {
+        return Promise.resolve({
+          data: null,
+          error: { message: "이미 진행 중이거나 완료된 프로비저닝입니다(상태: first_login_pending)." },
+        });
+      }
+      throw new Error(`unexpected rpc ${fn}`);
+    });
+
+    const { startTeacherWorkspaceProvisioning } = await import("./workspace-actions");
+    const result = await startTeacherWorkspaceProvisioning(baseParams);
+
+    expect(result).toEqual({
+      ok: false,
+      error: "이미 진행 중이거나 완료된 프로비저닝입니다(상태: first_login_pending).",
+    });
+    expect(createWorkspaceUserMock).not.toHaveBeenCalled();
   });
 });
 
@@ -170,8 +200,9 @@ describe("suspendTeacher / reactivateTeacher", () => {
     });
 
     const { suspendTeacher } = await import("./workspace-actions");
-    await suspendTeacher("teacher1", "테스트 중단");
+    const result = await suspendTeacher("teacher1", "테스트 중단");
 
+    expect(result).toEqual({ ok: true });
     expect(suspendWorkspaceUserMock).toHaveBeenCalledWith("google-uid-1");
     expect(rpcMock).toHaveBeenCalledWith("suspend_teacher_workspace", {
       p_teacher_id: "teacher1",
@@ -186,7 +217,8 @@ describe("suspendTeacher / reactivateTeacher", () => {
 
   it("suspendTeacher: 사유가 비어있으면 거부한다", async () => {
     const { suspendTeacher } = await import("./workspace-actions");
-    await expect(suspendTeacher("teacher1", "  ")).rejects.toThrow("중단 사유를 입력해주세요.");
+    const result = await suspendTeacher("teacher1", "  ");
+    expect(result).toEqual({ ok: false, error: "중단 사유를 입력해주세요." });
     expect(suspendWorkspaceUserMock).not.toHaveBeenCalled();
   });
 
@@ -200,13 +232,14 @@ describe("suspendTeacher / reactivateTeacher", () => {
     adminRpcMock.mockResolvedValue({ error: null });
 
     const { reactivateTeacher } = await import("./workspace-actions");
-    await reactivateTeacher({
+    const result = await reactivateTeacher({
       teacherId: "teacher1",
       reason: "복귀 승인",
       newRateAmountMinor: 50000,
       newRateCurrency: "KRW",
     });
 
+    expect(result).toEqual({ ok: true });
     expect(reactivateWorkspaceUserMock).toHaveBeenCalledWith("google-uid-1");
     expect(adminRpcMock).toHaveBeenCalledWith("set_teacher_rate", {
       p_teacher_id: "teacher1",

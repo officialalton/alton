@@ -56,39 +56,38 @@ export default function WorkspaceTab({
   async function handleStart() {
     setError(null);
     setSubmitting(true);
-    try {
-      await startTeacherWorkspaceProvisioning({
-        workspaceEmail: form.workspaceEmail,
-        personalContactEmail: form.personalContactEmail,
-        workspaceRecoveryEmail: form.workspaceRecoveryEmail || form.personalContactEmail,
-        personalPhone: form.personalPhone || null,
-        givenName: form.givenName,
-        familyName: form.familyName,
-      });
-      setForm({
-        workspaceEmail: "",
-        personalContactEmail: "",
-        workspaceRecoveryEmail: "",
-        personalPhone: "",
-        givenName: "",
-        familyName: "",
-      });
-      router.refresh();
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "프로비저닝 시작에 실패했습니다.");
-    } finally {
-      setSubmitting(false);
+    const result = await startTeacherWorkspaceProvisioning({
+      workspaceEmail: form.workspaceEmail,
+      personalContactEmail: form.personalContactEmail,
+      workspaceRecoveryEmail: form.workspaceRecoveryEmail || form.personalContactEmail,
+      personalPhone: form.personalPhone || null,
+      givenName: form.givenName,
+      familyName: form.familyName,
+    });
+    setSubmitting(false);
+    if (!result.ok) {
+      setError(result.error);
+      return;
     }
+    setForm({
+      workspaceEmail: "",
+      personalContactEmail: "",
+      workspaceRecoveryEmail: "",
+      personalPhone: "",
+      givenName: "",
+      familyName: "",
+    });
+    router.refresh();
   }
 
   async function handleShowChecklist(teacherId: string) {
     setError(null);
-    try {
-      const checklist = await getTeacherActivationChecklist(teacherId);
-      setChecklistByTeacher((prev) => ({ ...prev, [teacherId]: checklist }));
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "체크리스트 조회에 실패했습니다.");
+    const result = await getTeacherActivationChecklist(teacherId);
+    if (!result.ok) {
+      setError(result.error);
+      return;
     }
+    setChecklistByTeacher((prev) => ({ ...prev, [teacherId]: result.data }));
   }
 
   async function handleSuspend(teacherId: string) {
@@ -96,14 +95,13 @@ export default function WorkspaceTab({
     if (!reason) return;
     setError(null);
     setBusyId(teacherId);
-    try {
-      await suspendTeacher(teacherId, reason);
-      router.refresh();
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "중단 처리에 실패했습니다.");
-    } finally {
-      setBusyId(null);
+    const result = await suspendTeacher(teacherId, reason);
+    setBusyId(null);
+    if (!result.ok) {
+      setError(result.error);
+      return;
     }
+    router.refresh();
   }
 
   async function handleReactivate(teacherId: string) {
@@ -114,19 +112,18 @@ export default function WorkspaceTab({
     if (!amountStr || !Number.isFinite(amount) || amount <= 0) return;
     setError(null);
     setBusyId(teacherId);
-    try {
-      await reactivateTeacher({
-        teacherId,
-        reason,
-        newRateAmountMinor: amount,
-        newRateCurrency: "KRW",
-      });
-      router.refresh();
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "복귀 처리에 실패했습니다.");
-    } finally {
-      setBusyId(null);
+    const result = await reactivateTeacher({
+      teacherId,
+      reason,
+      newRateAmountMinor: amount,
+      newRateCurrency: "KRW",
+    });
+    setBusyId(null);
+    if (!result.ok) {
+      setError(result.error);
+      return;
     }
+    router.refresh();
   }
 
   return (
