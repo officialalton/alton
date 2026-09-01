@@ -40,6 +40,15 @@ R3 스키마 작업 중 일부 마이그레이션(`20260914000000`, `20260915000
 - 지시에 따라 **3번째 envelope은 발송하지 않고 여기서 중단**. 임시 디버그 로그는 커밋 전 원복, 사용한 2번째 envelope은 void 처리(삭제 아님), Connect/HMAC 등록 삭제, SSO 보호 복원 — 전부 확인됨.
 - **결론**: `includeHMAC`가 코드상 정확히 포함돼 있고 계정에 활성 키가 등록돼 있음에도 실제 서명이 수신되지 않음 — Developer Sandbox 계정 자체의 한계 또는 별도 계정 설정(예: HMAC 키의 별도 "활성화" 절차)이 필요할 가능성. **DocuSign 지원 문의가 필요한 지점으로 확정.** 우리 쪽 코드는 (a) 요청 payload에 필요한 필드를 정확히 보내고 있음이 유닛 테스트로 검증됨 (b) 서명 미수신 시 fail-closed로 정확히 거부함이 실제 트래픽으로 반복 확인됨 — 이 두 가지는 R3 범위에서 확정 가능한 최대치.
 
+## Drive 최소권한 인프라 구축·실측 검증 (2026-09-01)
+
+- 신규 GCP 리소스(외부 변경): WIF provider `projects/590621873979/locations/global/workloadIdentityPools/vercel/providers/vercel-r3-preview`(owner_id/project_id/environment=="preview" attribute-condition), 서비스 계정 `r3-drive-preview-verify@alton-integration-sandbox.iam.gserviceaccount.com`(Directory API·DWD 없음). Production `vercel` provider·`gate-c-automation@...` 서비스 계정·`assertNotPreview()`는 전혀 변경하지 않음.
+- 사용자가 `Alton Integration Sandbox`(실제 이름, 대문자 ALTON 아님) Shared Drive에 이 서비스 계정을 Content Manager로 직접 추가(도메인 전체 위임 아님).
+- 관리자 UI 로그인이 Vercel Preview 동적 URL에서 Google OAuth/Supabase 매직링크 redirect 허용목록 문제로 막혀(운영 Auth 설정을 건드리지 않기 위해 우회하지 않음), 브라우저 세션 위조도 harness가 정당하게 차단 — 대신 `DOCUSIGN_WEBHOOK_TOKEN` 재사용 헤더로 보호한 임시 API 라우트(`app/api/internal-r3-drive-verify`, 커밋되지 않음, 검증 직후 삭제)로 `processQueuedDriveArtifacts()`를 직접 호출해 검증.
+- 실측 중 발견·수정한 실제 버그 2건: (1) impersonation 토큰에 Drive 스코프 미명시로 403 — `ExternalAccountClient`에 `scopes: [".../auth/drive"]` 추가. (2) Shared Drive 이름 대소문자 불일치("Alton" vs 코드의 "ALTON") — 대소문자 무시 비교로 수정.
+- 실측 결과: 원격 dev DB의 테스트 계약(`6fd1874e-...`, 완료된 실제 envelope `25fc22d0-...` 참조)에 대해 서명문서·감사증명서 2건 모두 실제 업로드 성공(`drive_file_id` 부여), 재실행 시 동일 file id 유지·중복 파일 미생성(멱등 확인). Cloud Audit Logs에 impersonation 이력(`GenerateAccessToken`) 정상 기록 확인.
+- 정리: `DRIVE_ARTIFACTS_ALLOW_REAL_WRITES`(Preview) 제거, WIF impersonation IAM binding 제거, 서비스 계정 비활성화(disable, 삭제 아님) — 전부 완료. 서비스 계정·provider 자체 삭제와 Shared Drive 멤버십 제거는 사용자 확인 후 별도 진행.
+
 ## 남은 blocker
 
 `docs/CURRENT.md` "남은 blocker·후속 작업" 절 참고 — 중복 기록하지 않음.
