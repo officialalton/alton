@@ -222,12 +222,32 @@ export async function POST(request: Request) {
     // 전환하되, Drive 업로드는 스텁이며 이 요청 응답을 블로킹하지 않는다(queued 행만
     // 남긴다). Drive 저장 실패는 drive_artifacts.sync_status로만 남고 이 상태 전이를
     // 되돌리지 않는다.
+    //
+    // R3 후속(2026-09-01): activateError(생년월일·보호자 동의 등 활성화 선행조건
+    // 미충족)는 웹훅 자체의 실패가 아니다 — 이벤트 수신·파싱은 이미 성공했으므로
+    // 500으로 DocuSign의 재전송에 기대지 않는다. 대신 contract_activation_retries에
+    // 재처리 가능한 상태로 남기고 200을 반환한다. 서명 문서 자체는 활성화 성패와
+    // 무관하게 항상 Drive에 큐잉한다(서명은 실제로 끝났으므로 보관은 별개 관심사).
     const { error: activateError } = await admin
       .from("contracts")
       .update({ status: "active" })
       .eq("id", contract.id);
     if (activateError) {
-      return NextResponse.json({ error: activateError.message }, { status: 500 });
+      await admin.from("contract_activation_retries").insert({
+        contract_id: contract.id,
+        contract_version_id: contractVersion.id,
+        envelope_id: envelopeId,
+        failure_reason: activateError.message,
+      });
+      console.info(
+        JSON.stringify({
+          type: "docusign_contract_activation_deferred",
+          contractId: contract.id,
+          envelopeId,
+          reason: activateError.message,
+          at: nowIso,
+        })
+      );
     }
     await queueDriveArtifactSync({ contractId: contract.id, envelopeId });
   }

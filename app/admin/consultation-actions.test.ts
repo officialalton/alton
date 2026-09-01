@@ -40,7 +40,12 @@ const proposalsUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
 const proposalSubjectsInsertMock = vi.fn().mockResolvedValue({ error: null });
 
 const contractsInsertSingleMock = vi.fn();
+const contractsSelectSingleMock = vi.fn();
 const contractVersionsInsertSingleMock = vi.fn();
+
+const activationRetriesSingleMock = vi.fn();
+const activationRetriesUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
+const activationRetriesOrderMock = vi.fn();
 
 const contractVersionsSupersedeMock = vi.fn().mockResolvedValue({ error: null });
 const contractVersionsLatestMaybeSingleMock = vi.fn();
@@ -98,6 +103,16 @@ const fromMock = vi.fn((table: string) => {
     return {
       update: () => ({ eq: contractsUpdateEqMock }),
       insert: () => ({ select: () => ({ single: contractsInsertSingleMock }) }),
+      select: () => ({ eq: () => ({ single: contractsSelectSingleMock }) }),
+    };
+  }
+  if (table === "contract_activation_retries") {
+    return {
+      select: () => ({
+        eq: () => ({ single: activationRetriesSingleMock }),
+        is: () => ({ order: activationRetriesOrderMock }),
+      }),
+      update: () => ({ eq: activationRetriesUpdateEqMock }),
     };
   }
   if (table === "contract_versions") {
@@ -696,5 +711,101 @@ describe("classification tags — 고정 enum 대신 관리자 관리형 태그"
     await untagConsultation({ consultationId: "c1", tagId: "tag1" });
 
     expect(consultationTagsDeleteEqEqMock).toHaveBeenCalledWith("tag_id", "tag1");
+  });
+});
+
+describe("retryContractActivation / listOpenContractActivationRetries — R3 후속(2026-09-01)", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    activationRetriesSingleMock.mockResolvedValue({
+      data: { id: "retry1", contract_id: "ct1", resolved_at: null },
+      error: null,
+    });
+    contractsSelectSingleMock.mockResolvedValue({ data: { id: "ct1", status: "sent" }, error: null });
+    contractsUpdateEqMock.mockResolvedValue({ error: null });
+    activationRetriesUpdateEqMock.mockResolvedValue({ error: null });
+    activationRetriesOrderMock.mockResolvedValue({ data: [], error: null });
+  });
+
+  it("이미 resolved된 재처리 항목은 already_active로 아무 것도 바꾸지 않는다(멱등)", async () => {
+    activationRetriesSingleMock.mockResolvedValue({
+      data: { id: "retry1", contract_id: "ct1", resolved_at: "2026-09-01T00:00:00Z" },
+      error: null,
+    });
+    const { retryContractActivation } = await import("./consultation-actions");
+
+    const result = await retryContractActivation("retry1");
+
+    expect(result).toEqual({ status: "already_active" });
+    expect(contractsUpdateEqMock).not.toHaveBeenCalled();
+  });
+
+  it("계약이 이미 active면 activation을 다시 실행하지 않고 재처리 항목만 해결 처리한다(정확히 한 번 전환 보장)", async () => {
+    contractsSelectSingleMock.mockResolvedValue({ data: { id: "ct1", status: "active" }, error: null });
+    const { retryContractActivation } = await import("./consultation-actions");
+
+    const result = await retryContractActivation("retry1");
+
+    expect(result).toEqual({ status: "already_active" });
+    expect(contractsUpdateEqMock).not.toHaveBeenCalled();
+    expect(activationRetriesUpdateEqMock).toHaveBeenCalledWith("id", "retry1");
+  });
+
+  it("DOB·동의 보완 후 재실행하면 새 envelope·재서명 없이 active로 전환하고 재처리 항목을 해결 처리한다", async () => {
+    const { retryContractActivation } = await import("./consultation-actions");
+
+    const result = await retryContractActivation("retry1");
+
+    expect(result).toEqual({ status: "activated" });
+    expect(contractsUpdateEqMock).toHaveBeenCalledWith("id", "ct1");
+    expect(activationRetriesUpdateEqMock).toHaveBeenCalledWith("id", "retry1");
+  });
+
+  it("여전히 실패하면 실패 사유를 갱신하고 재처리 대기 상태로 남긴다", async () => {
+    contractsUpdateEqMock.mockResolvedValue({ error: { message: "여전히 동의 없음" } });
+    const { retryContractActivation } = await import("./consultation-actions");
+
+    const result = await retryContractActivation("retry1");
+
+    expect(result).toEqual({ status: "still_failing", failureReason: "여전히 동의 없음" });
+    // 실패 시에는 resolved_at을 세팅하는 update가 아니라 failure_reason만 갱신해야 한다.
+    expect(activationRetriesUpdateEqMock).toHaveBeenCalledWith("id", "retry1");
+  });
+
+  it("존재하지 않는 재처리 항목이면 에러를 던진다", async () => {
+    activationRetriesSingleMock.mockResolvedValue({ data: null, error: null });
+    const { retryContractActivation } = await import("./consultation-actions");
+
+    await expect(retryContractActivation("nope")).rejects.toThrow("존재하지 않는");
+  });
+
+  it("listOpenContractActivationRetries는 resolved되지 않은 항목만 조회한다", async () => {
+    activationRetriesOrderMock.mockResolvedValue({
+      data: [
+        {
+          id: "retry1",
+          contract_id: "ct1",
+          contract_version_id: "cv1",
+          envelope_id: "env-1",
+          failure_reason: "보호자 동의 없음",
+          created_at: "2026-09-01T00:00:00Z",
+        },
+      ],
+      error: null,
+    });
+    const { listOpenContractActivationRetries } = await import("./consultation-actions");
+
+    const result = await listOpenContractActivationRetries();
+
+    expect(result).toEqual([
+      {
+        id: "retry1",
+        contractId: "ct1",
+        contractVersionId: "cv1",
+        envelopeId: "env-1",
+        failureReason: "보호자 동의 없음",
+        createdAt: "2026-09-01T00:00:00Z",
+      },
+    ]);
   });
 });

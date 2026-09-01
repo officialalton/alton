@@ -10,6 +10,7 @@ const contractVersionUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
 const contractUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
 
 const driveArtifactsInsertMock = vi.fn().mockResolvedValue({ error: null });
+const activationRetryInsertMock = vi.fn().mockResolvedValue({ error: null });
 
 const fromMock = vi.fn((table: string) => {
   if (table === "external_event_receipts") {
@@ -34,6 +35,9 @@ const fromMock = vi.fn((table: string) => {
   }
   if (table === "drive_artifacts") {
     return { insert: driveArtifactsInsertMock };
+  }
+  if (table === "contract_activation_retries") {
+    return { insert: activationRetryInsertMock };
   }
   throw new Error(`unexpected table ${table}`);
 });
@@ -70,6 +74,7 @@ describe("POST /api/webhooks/docusign", () => {
     contractVersionUpdateEqMock.mockResolvedValue({ error: null });
     contractUpdateEqMock.mockResolvedValue({ error: null });
     driveArtifactsInsertMock.mockResolvedValue({ error: null });
+    activationRetryInsertMock.mockResolvedValue({ error: null });
   });
 
   afterEach(() => {
@@ -449,6 +454,54 @@ describe("POST /api/webhooks/docusign", () => {
       const res = await POST(request);
       expect(res.status).toBe(200);
       expect(contractUpdateEqMock).toHaveBeenCalledWith("id", "ct1");
+    });
+  });
+
+  describe("completed 웹훅에서 활성화 선행조건 미충족(activateError) 처리 — R3 후속(2026-09-01)", () => {
+    it("contracts.status=active 전환이 실패해도 웹훅 자체는 200을 반환한다(500으로 DocuSign 재전송에 기대지 않음)", async () => {
+      contractUpdateEqMock.mockResolvedValueOnce({
+        error: { message: "만 13세 미만 학생은 유효한 보호자 동의가 있어야 진행할 수 있습니다" },
+      });
+      const { POST } = await import("./route");
+      const request = makeRequest({ event: "envelope-completed", data: { envelopeId: "env-1" } }, "secret123");
+
+      const res = await POST(request);
+      expect(res.status).toBe(200);
+    });
+
+    it("실패 사유를 contract_activation_retries에 재처리 가능한 상태로 남긴다", async () => {
+      contractUpdateEqMock.mockResolvedValueOnce({
+        error: { message: "만 13세 미만 학생은 유효한 보호자 동의가 있어야 진행할 수 있습니다" },
+      });
+      const { POST } = await import("./route");
+      const request = makeRequest({ event: "envelope-completed", data: { envelopeId: "env-1" } }, "secret123");
+
+      await POST(request);
+      expect(activationRetryInsertMock).toHaveBeenCalledWith(
+        expect.objectContaining({
+          contract_id: "ct1",
+          contract_version_id: "cv1",
+          envelope_id: "env-1",
+          failure_reason: "만 13세 미만 학생은 유효한 보호자 동의가 있어야 진행할 수 있습니다",
+        })
+      );
+    });
+
+    it("활성화가 실패해도 서명 문서는 Drive 큐잉을 계속한다(서명 완료 자체는 별개 사실)", async () => {
+      contractUpdateEqMock.mockResolvedValueOnce({ error: { message: "활성화 선행조건 미충족" } });
+      const { POST } = await import("./route");
+      const request = makeRequest({ event: "envelope-completed", data: { envelopeId: "env-1" } }, "secret123");
+
+      await POST(request);
+      expect(driveArtifactsInsertMock).toHaveBeenCalled();
+    });
+
+    it("활성화가 성공하면 재처리 큐에 아무 것도 남기지 않는다", async () => {
+      const { POST } = await import("./route");
+      const request = makeRequest({ event: "envelope-completed", data: { envelopeId: "env-1" } }, "secret123");
+
+      await POST(request);
+      expect(activationRetryInsertMock).not.toHaveBeenCalled();
     });
   });
 });

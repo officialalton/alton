@@ -937,3 +937,97 @@ export async function untagConsultation(params: { consultationId: string; tagId:
     .eq("tag_id", params.tagId);
   if (error) throw new Error(error.message);
 }
+
+// =========================================================================
+// 6. 계약 활성화 재처리 (completed 웹훅 수신 후 선행조건 미충족으로 보류된 건)
+// =========================================================================
+
+export type ContractActivationRetryItem = {
+  id: string;
+  contractId: string;
+  contractVersionId: string;
+  envelopeId: string;
+  failureReason: string;
+  createdAt: string;
+};
+
+/**
+ * completed 웹훅은 정상 수신됐으나 contracts.status='active' 전환이 활성화
+ * 선행조건(생년월일·보호자 동의 등) 미충족으로 실패해 재처리 대기 중인 건 목록.
+ * 관리자가 이 목록을 보고 원인을 보완(예: 생년월일 등록)한 뒤
+ * retryContractActivation()으로 재실행한다.
+ */
+export async function listOpenContractActivationRetries(): Promise<ContractActivationRetryItem[]> {
+  await requireAdminOrCapability(CONSULTATIONS_CAPABILITY);
+  const admin = createAdminClient();
+
+  const { data, error } = await admin
+    .from("contract_activation_retries")
+    .select("id, contract_id, contract_version_id, envelope_id, failure_reason, created_at")
+    .is("resolved_at", null)
+    .order("created_at", { ascending: true });
+  if (error) throw new Error(error.message);
+
+  return (data ?? []).map((row) => ({
+    id: row.id,
+    contractId: row.contract_id,
+    contractVersionId: row.contract_version_id,
+    envelopeId: row.envelope_id,
+    failureReason: row.failure_reason,
+    createdAt: row.created_at,
+  }));
+}
+
+/**
+ * 새 envelope·재서명 없이, 이미 completed된 계약 버전 그대로 contracts.status='active'
+ * 전환만 다시 시도한다(DOB·보호자 동의 보완 후 사용). 이미 active면 아무 것도 하지
+ * 않고 성공으로 취급한다(멱등 — 중복 클릭·재실행에도 정확히 한 번만 전환됨을 보장).
+ * 여전히 실패하면 실패 사유를 갱신하고 재처리 대기 상태로 남긴다.
+ */
+export async function retryContractActivation(
+  retryId: string
+): Promise<{ status: "already_active" | "activated" | "still_failing"; failureReason?: string }> {
+  const { actorUserId } = await requireAdminOrCapability(CONSULTATIONS_CAPABILITY);
+  const admin = createAdminClient();
+
+  const { data: retryRow, error: retryError } = await admin
+    .from("contract_activation_retries")
+    .select("id, contract_id, resolved_at")
+    .eq("id", retryId)
+    .single();
+  if (retryError) throw new Error(retryError.message);
+  if (!retryRow) throw new Error("존재하지 않는 재처리 항목입니다.");
+  if (retryRow.resolved_at) {
+    return { status: "already_active" };
+  }
+
+  const { data: contract, error: contractError } = await admin
+    .from("contracts")
+    .select("id, status")
+    .eq("id", retryRow.contract_id)
+    .single();
+  if (contractError) throw new Error(contractError.message);
+
+  if (contract.status === "active") {
+    await admin
+      .from("contract_activation_retries")
+      .update({ resolved_at: new Date().toISOString(), resolved_by: actorUserId })
+      .eq("id", retryId);
+    return { status: "already_active" };
+  }
+
+  const { error: activateError } = await admin.from("contracts").update({ status: "active" }).eq("id", contract.id);
+  if (activateError) {
+    await admin
+      .from("contract_activation_retries")
+      .update({ failure_reason: activateError.message })
+      .eq("id", retryId);
+    return { status: "still_failing", failureReason: activateError.message };
+  }
+
+  await admin
+    .from("contract_activation_retries")
+    .update({ resolved_at: new Date().toISOString(), resolved_by: actorUserId })
+    .eq("id", retryId);
+  return { status: "activated" };
+}
