@@ -831,3 +831,24 @@ Could not find the function public.begin_workspace_preflight_run without paramet
 **환경변수 재확인**: `npx vercel env pull`로 Production 환경변수 실값 확인(비밀 아님, `.env.example`에 문서화된 값) — `WORKSPACE_PROVISIONING_ALLOW_REAL_CALLS="false"`, `WORKSPACE_PREFLIGHT_ALLOW_REAL_READS="false"` 둘 다 유지 확인, 로컬 임시 파일은 확인 직후 삭제.
 
 **다음 단계**: 위 두 보완과 검증 결과를 사용자에게 보고. `WORKSPACE_PREFLIGHT_ALLOW_REAL_READS=true` 전환 + read-only preflight 1회 재실행은 사용자가 별도로 승인.
+
+### 2026-09-01 — read-only preflight 최초 성공 (WIF→signJwt→DWD→Directory API 실제 검증 완료)
+
+사용자가 마일스톤 단위 승인 방식으로 전환(Task 세부 단계별 재승인 요청 중단, R 시작 시 목표·범위 공유 + 외부 쓰기/비가역 작업만 별도 승인)을 확정. 이 승인에 따라 아래 전체를 하나의 배치로 연속 진행:
+
+1. **read flag on + 배포**: Vercel Production에서 `WORKSPACE_PREFLIGHT_ALLOW_REAL_READS`를 `false`→`true`로 교체(제거 후 `--type config`로 재생성, 기존 4개 워크스페이스 변수와 같은 타입 유지) 후 `vercel deploy --prod`로 재배포, alias(`app.alton.education`)가 새 배포를 가리킴을 확인.
+2. **1차 실행 — WIF 단계에서 실패**: 관리자(`official@alton.education`)가 브라우저에서 preflight 실행 → `stages`가 `preview_check`(ok) → `impersonation`(실패)에서 멈춤. 원본 오류(DB의 `workspace_preflight_runs.stages`에서 직접 조회, 재실행이나 대기 없이 확인 가능): `Error code invalid_grant: The audience in ID Token [//iam.googleapis.com/.../providers/vercel] does not match the expected audience.`
+3. **원인 진단 및 실제 버그 발견**: `google-auth-library`의 `ExternalAccountClient`는 `getSubjectToken(context)`를 **context 인자와 함께** 호출하며, 이 `context.audience`는 GCP WIF provider 리소스명(GCP 내부 개념)이다. `lib/google-workspace-auth.ts`가 `subject_token_supplier: { getSubjectToken: getVercelOidcToken }`으로 함수 참조를 그대로 넘기고 있었기 때문에, 이 `context`가 그대로 `getVercelOidcToken(context)`로 전달됐고, `@vercel/oidc`는 `options.audience`가 있으면 "이 값으로 Vercel 토큰을 커스텀 aud로 재발급"하는 것으로 해석한다(`node_modules/@vercel/oidc`의 `get-vercel-oidc-token-with-refresh.js` 실제 소스로 확인) — 결과적으로 Vercel 토큰의 `aud`가 GCP 리소스명으로 뒤바뀌어 Allowed audiences 모드의 GCP Provider가 거부했다. 두 라이브러리가 우연히 같은 필드명(`audience`)을 다른 의미로 쓰면서 충돌한 것 — 코드 주석의 의도("커스텀 audience 없이 그대로 호출")와 실제 동작이 어긋나 있던 실제 버그였다. 기존 `lib/google-workspace-auth.test.ts`는 `getSubjectToken()`을 인자 없이 직접 호출해서 이 문제를 애초에 잡을 수 없는 테스트였다.
+4. **수정**: `getSubjectToken: () => getVercelOidcToken()`으로 래핑해 context를 무시하도록 변경(`lib/google-workspace-auth.ts`). 회귀 테스트를 실제 호출 관례에 맞게 수정 — `getSubjectToken`을 `{ audience, subjectTokenType, transporter }` 형태의 실제 context로 호출하고 `getVercelOidcTokenMock`이 `undefined` 인자로만 불렸는지 assert(`lib/google-workspace-auth.test.ts`). 관련 스위트(`google-workspace-auth.test.ts` 9건 + `workspace-preflight/route.test.ts` 6건 + `teacher-callback/route.test.ts` 5건, 총 22건) 및 `tsc --noEmit` 전부 통과.
+5. **커밋·푸시·재배포**: `cc73ff1`(2개 파일만: `lib/google-workspace-auth.ts`, `lib/google-workspace-auth.test.ts`) → `git push origin main` 성공 → `vercel deploy --prod` 재배포.
+6. **2차 실행 — 전체 체인 최초 성공**: 300초 쿨다운 경과 확인 후 관리자가 재실행. 결과:
+   - `stages`: `preview_check`/`impersonation`/`signjwt_and_dwd_exchange`/`list_test_ou_users` **전부 `ok: true`** — Vercel OIDC → GCP WIF → 서비스 계정 impersonation → self-referential signJwt(DWD) → OAuth 토큰 교환 → Directory API 읽기까지 실제 체인이 최초로 끝까지 성공.
+   - `ouUserCount: 0`, `ouUserIdHashes: []` — 테스트 OU(`/Alton Integration Sandbox/Teachers`)에 사용자 없음(Step 7에서 만든 그대로).
+   - `targetEmailBaseline`: `teacher1@alton.education: true`, `teacher2@alton.education: true`(둘 다 로컬 OAuth E2E 검증에 쓴 기존 실제 Workspace 계정), `teacher-provisioning-test@alton.education: false`(쓰기 검증용으로 예약된 계정, 아직 미생성 — 예상대로).
+   - 응답·로그 전부에 토큰·비밀번호·원본 이메일 목록·원본 Google user ID 없음(설계대로 해시·boolean·카운트만).
+7. **정리**: `WORKSPACE_PREFLIGHT_ALLOW_REAL_READS`를 다시 `false`로 교체 후 재배포, `WORKSPACE_PREFLIGHT_ALLOW_REAL_READS="false"`/`WORKSPACE_PROVISIONING_ALLOW_REAL_CALLS="false"` 둘 다 `vercel env pull`로 재확인. 비인증 요청 재확인(`POST /api/admin/workspace-preflight` → `403 로그인이 필요합니다`).
+8. **기존 데이터 확인**: `profiles=6`, `teachers=3`, `teacher_workspace_provisioning=0` 전부 이전과 동일. `workspace_preflight_runs`는 이번 절의 실제 실행 2건(1차 실패, 2차 성공)만 반영되어 2행(둘 다 실제 감사 기록으로 유지, 삭제하지 않음 — 이전 절의 "검증용 합성 행"과 달리 이번엔 실제 preflight 실행이라 감사 기록으로서 보존). `workspace_provisioning_events`는 1건→5건으로 증가했으나 전부 `link_rejected`이며 상세는 해시만 포함(원문 이메일/Google ID 없음) — Production에 이미 배포돼 있던 "선생님 — Google로 로그인" 버튼으로 사전 미등록 Google 계정 로그인 시도가 실제로 있었고, 설계대로 정확히 거부·orphan auth 계정 삭제·해시만 기록됐음을 재확인한 것으로, 데이터 이상이나 버그가 아니다.
+
+**이 시점까지 유지된 것**: `WORKSPACE_PROVISIONING_ALLOW_REAL_CALLS=false`(이번 절 전체에서 변경 없음). Google Workspace 사용자 생성·정지·재활성화 등 쓰기 작업은 이번 절에서 전혀 실행하지 않았다.
+
+**다음 단계**: 이 성공을 근거로 테스트 OU 계정 1개(`teacher-provisioning-test@alton.education`)를 사용하는 쓰기 검증 전체 계획(생성·충돌·재시도·정지·재활성화·최초 Google 로그인·정리·플래그 복원을 하나의 승인 단위로 묶어)을 정리해 사용자에게 승인 요청.
