@@ -10,8 +10,10 @@ vi.mock("next/navigation", () => ({
 
 const consentForChildMock = vi.fn();
 const revokeChildConsentMock = vi.fn();
+const setAiNotesConsentForChildMock = vi.fn();
 vi.mock("./consent-actions", () => ({
   consentForChild: (...args: unknown[]) => consentForChildMock(...args),
+  setAiNotesConsentForChild: (...args: unknown[]) => setAiNotesConsentForChildMock(...args),
   revokeChildConsent: (...args: unknown[]) => revokeChildConsentMock(...args),
 }));
 
@@ -38,6 +40,7 @@ describe("ConsentTab", () => {
         isUnder13: true,
         hasValidConsent: false,
         latestConsent: null,
+        aiNotesOptedIn: true,
       },
     ];
     render(<ConsentTab children={children} activePolicy={activePolicy} />);
@@ -64,10 +67,35 @@ describe("ConsentTab", () => {
           consentedAt: "2026-08-01T00:00:00Z",
           revokedAt: null,
         },
+        aiNotesOptedIn: true,
       },
     ];
     render(<ConsentTab children={children} activePolicy={activePolicy} />);
     expect(screen.getByText("동의 완료")).toBeInTheDocument();
     expect(screen.getByText("동의 철회")).toBeInTheDocument();
+  });
+
+  it("만 13세 미만이 아니어도 AI 회의록 토글은 모든 자녀에게 보여준다", () => {
+    const children: ChildConsentStatus[] = [
+      { studentId: "student2", name: "이서아", isUnder13: false, hasValidConsent: true, latestConsent: null, aiNotesOptedIn: true },
+    ];
+    render(<ConsentTab children={children} activePolicy={activePolicy} />);
+    expect(screen.getByTestId("ai-notes-card-student2")).toBeInTheDocument();
+    expect(screen.getByText("사용 중 · 끄기")).toBeInTheDocument();
+  });
+
+  it("AI 회의록 토글 클릭 시 setAiNotesConsentForChild를 opted_in 반전값으로 호출한다", async () => {
+    setAiNotesConsentForChildMock.mockResolvedValue(undefined);
+    const children: ChildConsentStatus[] = [
+      { studentId: "student2", name: "이서아", isUnder13: false, hasValidConsent: true, latestConsent: null, aiNotesOptedIn: true },
+    ];
+    render(<ConsentTab children={children} activePolicy={activePolicy} />);
+
+    fireEvent.click(screen.getByText("사용 중 · 끄기"));
+
+    await waitFor(() => {
+      expect(setAiNotesConsentForChildMock).toHaveBeenCalledWith("student2", false, "보호자 거부");
+      expect(refreshMock).toHaveBeenCalled();
+    });
   });
 });

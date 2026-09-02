@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { ChildConsentStatus, ConsentPolicyOption } from "./consent-data";
-import { consentForChild, revokeChildConsent } from "./consent-actions";
+import { consentForChild, revokeChildConsent, setAiNotesConsentForChild } from "./consent-actions";
 
 export default function ConsentTab({
   children,
@@ -46,6 +46,20 @@ export default function ConsentTab({
   }
 
   const minors = children.filter((c) => c.isUnder13);
+
+  async function handleToggleAiNotes(studentId: string, nextOptedIn: boolean) {
+    setError(null);
+    setBusyStudentId(studentId);
+    try {
+      const reason = nextOptedIn ? undefined : "보호자 거부";
+      await setAiNotesConsentForChild(studentId, nextOptedIn, reason);
+      router.refresh();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "AI 회의록 설정 변경에 실패했습니다.");
+    } finally {
+      setBusyStudentId(null);
+    }
+  }
 
   return (
     <div className="max-w-[560px] px-8 py-8">
@@ -117,6 +131,35 @@ export default function ConsentTab({
           ))}
         </div>
       )}
+
+      <h2 className="text-[16px] font-bold text-ink mt-9 mb-2">AI 회의록(Smart Notes)</h2>
+      <p className="text-[13px] text-grey-500 mb-5 leading-[1.6]">
+        기본적으로 모든 수업에 AI 회의록이 사용됩니다(영상·원본 음성 녹화는 하지 않습니다). 자녀별로
+        끄면 이후 새로 생성되는 수업부터 AI 회의록을 사용하지 않습니다 — 이미 진행된 수업에는
+        영향이 없습니다.
+      </p>
+      <div className="space-y-3">
+        {children.map((child) => (
+          <div
+            key={child.studentId}
+            data-testid={`ai-notes-card-${child.studentId}`}
+            className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 flex items-center justify-between"
+          >
+            <span className="text-[14px] font-bold text-ink">{child.name}</span>
+            <button
+              type="button"
+              disabled={busyStudentId === child.studentId}
+              onClick={() => handleToggleAiNotes(child.studentId, !child.aiNotesOptedIn)}
+              className={
+                "text-[12px] font-bold rounded-full px-3 py-1.5 disabled:opacity-50 " +
+                (child.aiNotesOptedIn ? "bg-green/10 text-green" : "bg-grey-100 text-grey-500")
+              }
+            >
+              {child.aiNotesOptedIn ? "사용 중 · 끄기" : "사용 안 함 · 켜기"}
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
