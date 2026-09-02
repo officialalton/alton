@@ -84,10 +84,11 @@ const lessonsProps = {
   teacherProfiles: {},
   teacherSessionHistory: {},
   chatThreads: {},
+  subjectEnrollments: [],
 };
 
 describe("StudentShell", () => {
-  it("사이드바 9개 항목을 보여주고, 기본 탭은 홈이다", () => {
+  it("사이드바 10개 항목을 보여주고, 기본 탭은 홈이다", () => {
     render(
       <StudentShell
         studentName="지훈"
@@ -97,7 +98,7 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    ["홈", "레슨", "선생님", "과제", "문제", "단어장", "교재", "수업권", "통계"].forEach(
+    ["홈", "수강 과목", "레슨", "선생님", "과제", "문제", "단어장", "교재", "수업권", "통계"].forEach(
       (label) => expect(screen.getByText(label)).toBeInTheDocument()
     );
     expect(screen.getByText(/지훈의 학습 현황/)).toBeInTheDocument();

@@ -9,6 +9,7 @@ import { loadReviews, loadStudentFeedback } from "@/app/student/review-data";
 import { loadParentCreditsData } from "./credits-data";
 import { loadParentEntitlementsData } from "./entitlements-data";
 import { loadChildrenConsentStatus, loadActiveConsentPolicy } from "./consent-data";
+import { loadChildrenSubjectEnrollments } from "./enrollment-data";
 import ParentShell from "./ParentShell";
 
 export default async function ParentHomePage({
@@ -52,6 +53,10 @@ export default async function ParentHomePage({
   const entitlements = await loadParentEntitlementsData(supabase, user.id, children);
   const consentChildren = await loadChildrenConsentStatus(supabase, user.id);
   const activeConsentPolicy = await loadActiveConsentPolicy(supabase);
+  const childrenSubjectEnrollments = await loadChildrenSubjectEnrollments(
+    supabase,
+    children
+  );
 
   return (
     <ParentShell
@@ -72,6 +77,7 @@ export default async function ParentHomePage({
       purchaseStatus={purchase === "success" || purchase === "cancelled" ? purchase : undefined}
       consentChildren={consentChildren}
       activeConsentPolicy={activeConsentPolicy}
+      childrenSubjectEnrollments={childrenSubjectEnrollments}
     />
   );
 }

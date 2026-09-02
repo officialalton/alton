@@ -13,9 +13,12 @@ import type { MySubject } from "./mysubjects-data";
 import type { TeacherCurriculumData } from "./curriculum-data";
 import type { Memo } from "@/app/student/memo-data";
 import type { ReviewData, StudentFeedback } from "@/app/student/review-data";
+import AssignmentsTab from "./AssignmentsTab";
+import type { TeacherAssignedSubject } from "./assignments-data";
 
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
+  { id: "assignments", label: "배정", icon: "🎯" },
   { id: "availability", label: "일정", icon: "🗓" },
   { id: "schedule", label: "수업", icon: "📅" },
   { id: "roster", label: "학생", icon: "👥" },
@@ -36,6 +39,8 @@ export default function TeacherShell({
   reviews,
   studentFeedback,
   reviewedSessionIds,
+  currentAssignments,
+  pastAssignments,
 }: {
   initialTab?: string;
   dashboard: TeacherDashboardData;
@@ -46,6 +51,8 @@ export default function TeacherShell({
   reviews: Record<string, ReviewData>;
   studentFeedback: Record<string, StudentFeedback>;
   reviewedSessionIds: string[];
+  currentAssignments: TeacherAssignedSubject[];
+  pastAssignments: TeacherAssignedSubject[];
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -116,6 +123,8 @@ export default function TeacherShell({
               data={dashboard}
               onShowSchedule={() => selectTab("schedule")}
             />
+          ) : activeTab === "assignments" ? (
+            <AssignmentsTab current={currentAssignments} past={pastAssignments} />
           ) : activeTab === "schedule" ? (
             <ScheduleTab
               upcoming={dashboard.upcoming}

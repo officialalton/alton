@@ -18,6 +18,7 @@ import {
   loadTeacherSessionHistory,
 } from "./teacher-data";
 import { ensureThreadAndLoadMessages } from "./chat-data";
+import { loadStudentSubjectEnrollments } from "./enrollment-data";
 
 export default async function StudentHomePage({
   searchParams,
@@ -45,6 +46,7 @@ export default async function StudentHomePage({
   const materialsLibrary = await loadMaterialsLibrary(supabase, user.id);
   const credits = await loadCreditsData(supabase, user.id);
   const stats = await loadStats(supabase, user.id);
+  const subjectEnrollments = await loadStudentSubjectEnrollments(supabase, user.id);
 
   const teacherList = await loadTeacherList(supabase, user.id);
   const teacherProfiles: Record<string, Awaited<ReturnType<typeof loadTeacherProfile>>> = {};
@@ -90,6 +92,7 @@ export default async function StudentHomePage({
       teacherProfiles={teacherProfiles}
       teacherSessionHistory={teacherSessionHistory}
       chatThreads={chatThreads}
+      subjectEnrollments={subjectEnrollments}
     />
   );
 }

@@ -30,9 +30,12 @@ import type {
   TeacherSessionHistoryItem,
 } from "./teacher-data";
 import type { ChatMessage } from "./chat-data";
+import EnrollmentTab from "./EnrollmentTab";
+import type { SubjectEnrollmentView } from "./enrollment-data";
 
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
+  { id: "enrollment", label: "수강 과목", icon: "🎓" },
   { id: "lessons", label: "레슨", icon: "📅" },
   { id: "teacher", label: "선생님", icon: "👤" },
   { id: "homework", label: "과제", icon: "📝" },
@@ -67,6 +70,7 @@ export default function StudentShell({
   teacherProfiles,
   teacherSessionHistory,
   chatThreads,
+  subjectEnrollments,
 }: {
   studentName: string;
   initialTab?: string;
@@ -89,6 +93,7 @@ export default function StudentShell({
   teacherProfiles: Record<string, TeacherProfileData | null>;
   teacherSessionHistory: Record<string, TeacherSessionHistoryItem[]>;
   chatThreads: Record<string, { threadId: string; messages: ChatMessage[] }>;
+  subjectEnrollments: SubjectEnrollmentView[];
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -152,6 +157,8 @@ export default function StudentShell({
               onShowLessons={() => selectTab("lessons")}
               onShowStats={() => selectTab("stats")}
             />
+          ) : activeTab === "enrollment" ? (
+            <EnrollmentTab enrollments={subjectEnrollments} />
           ) : activeTab === "vocab" ? (
             <VocabTab
               initialWords={vocabWords}

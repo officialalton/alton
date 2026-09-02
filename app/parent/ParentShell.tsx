@@ -19,9 +19,12 @@ import type { ParentEntitlementsData } from "./entitlements-data";
 import ConsentTab from "./ConsentTab";
 import type { ChildConsentStatus, ConsentPolicyOption } from "./consent-data";
 import FamilyTab from "./FamilyTab";
+import ParentEnrollmentTab from "./EnrollmentTab";
+import type { ChildSubjectEnrollments } from "./enrollment-data";
 
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
+  { id: "enrollment", label: "수강 과목", icon: "🎓" },
   { id: "lessons", label: "레슨", icon: "📅" },
   { id: "credits", label: "수업권", icon: "💳" },
   { id: "entitlements", label: "수업권 구매", icon: "🎟️" },
@@ -50,6 +53,7 @@ export default function ParentShell({
   purchaseStatus,
   consentChildren,
   activeConsentPolicy,
+  childrenSubjectEnrollments,
 }: {
   parentName: string;
   childrenList: Child[];
@@ -68,6 +72,7 @@ export default function ParentShell({
   purchaseStatus?: "success" | "cancelled";
   consentChildren: ChildConsentStatus[];
   activeConsentPolicy: ConsentPolicyOption | null;
+  childrenSubjectEnrollments: ChildSubjectEnrollments[];
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -155,6 +160,8 @@ export default function ParentShell({
               onShowLessons={() => selectTab("lessons")}
               onShowStats={() => selectTab("stats")}
             />
+          ) : activeTab === "enrollment" ? (
+            <ParentEnrollmentTab childrenEnrollments={childrenSubjectEnrollments} />
           ) : activeTab === "lessons" ? (
             <LessonsTab
               key={currentChildId}

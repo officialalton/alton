@@ -4,6 +4,7 @@ import { loadRoster } from "./roster-data";
 import { loadMySubjects } from "./mysubjects-data";
 import { loadAllStudentCurricula } from "./curriculum-data";
 import { loadReviewedSessionIds } from "./review-status-data";
+import { loadTeacherAssignments } from "./assignments-data";
 import { loadMemos } from "@/app/student/memo-data";
 import { loadReviews, loadStudentFeedback } from "@/app/student/review-data";
 import TeacherShell from "./TeacherShell";
@@ -49,6 +50,8 @@ export default async function TeacherHomePage({
     supabase,
     dashboard.past.map((l) => l.sessionId)
   );
+  const { current: currentAssignments, past: pastAssignments } =
+    await loadTeacherAssignments(supabase, user.id);
 
   return (
     <TeacherShell
@@ -61,6 +64,8 @@ export default async function TeacherHomePage({
       reviews={reviews}
       studentFeedback={studentFeedback}
       reviewedSessionIds={reviewedSessionIds}
+      currentAssignments={currentAssignments}
+      pastAssignments={pastAssignments}
     />
   );
 }
