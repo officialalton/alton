@@ -10,6 +10,7 @@ import CatalogTab from "./CatalogTab";
 import UsersTab from "./UsersTab";
 import BillingTab from "./BillingTab";
 import ContractsTab from "./ContractsTab";
+import BookingReconciliationPanel from "./BookingReconciliationPanel";
 import type { AcceptedProposalForContract, FamilyContract, PendingConsult } from "./contracts-data";
 import ConsultationTab from "./ConsultationTab";
 import type {
@@ -56,6 +57,7 @@ const NAV_ITEMS = [
   { id: "billing", label: "구 크레딧(레거시)", icon: "💳" },
   { id: "entitlements", label: "수업권", icon: "🎫" },
   { id: "contracts", label: "계약", icon: "📄" },
+  { id: "booking", label: "예약", icon: "🗓️" },
   { id: "qc", label: "QC", icon: "🛡" },
   { id: "payouts", label: "정산", icon: "💸" },
   { id: "workspace", label: "Workspace", icon: "🔑" },
@@ -243,6 +245,8 @@ export default function AdminShell({
             />
           ) : activeTab === "contracts" ? (
             <ContractsTab contracts={familyContracts} acceptedProposals={acceptedProposalsForContract} />
+          ) : activeTab === "booking" ? (
+            <BookingReconciliationPanel />
           ) : activeTab === "consult" ? (
             <ConsultationTab
               consultations={consultations}
