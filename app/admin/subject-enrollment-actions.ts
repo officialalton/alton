@@ -18,6 +18,7 @@ import {
   type SubjectEnrollmentActivationResult,
   type TrialSuccessionProposal,
 } from "@/lib/enrollment/subject-enrollment-decision";
+import { assertTeacherHasValidRate } from "@/lib/enrollment/teacher-rate-check";
 
 const MATCHING_CAPABILITY = "매칭권한";
 
@@ -261,16 +262,9 @@ export async function assignTeacherToSubjectEnrollment(params: {
   const { actorUserId } = await requireAdminOrCapability(MATCHING_CAPABILITY);
   const admin = createAdminClient();
 
-  const { data: hasRate, error: rateError } = await admin.rpc("has_valid_current_teacher_rate", {
-    p_teacher_id: params.teacherId,
-  });
-  if (rateError) {
-    // service_role만 실행 가능한 함수라 admin 클라이언트로 문제 없이 호출된다.
-    throw new Error(rateError.message);
-  }
-  if (!hasRate) {
-    throw new Error(TRIAL_SUCCESSION_BLOCK_MESSAGES.no_valid_rate);
-  }
+  // R2 선생님 active 전환(app/admin/users-actions.ts)과 같은 공유 함수
+  // (lib/enrollment/teacher-rate-check.ts)로 확인한다.
+  await assertTeacherHasValidRate(admin, params.teacherId, TRIAL_SUCCESSION_BLOCK_MESSAGES.no_valid_rate);
 
   const { data, error } = await admin
     .from("teacher_assignments")

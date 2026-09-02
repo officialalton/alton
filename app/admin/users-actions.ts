@@ -3,6 +3,7 @@
 import { createAdminClient } from "@/lib/supabase-admin";
 import { requireAdmin } from "@/lib/admin-auth";
 import { sendInviteEmail } from "@/lib/invite-email";
+import { assertTeacherHasValidRate } from "@/lib/enrollment/teacher-rate-check";
 
 async function inviteAndCreateProfile(params: {
   email: string;
@@ -210,17 +211,14 @@ export async function setTeacherStatus(
   if (status === "active") {
     // DB 트리거(teachers_enforce_active_requires_rate)가 최종 방어선이지만,
     // 그 원시 오류를 그대로 보여주지 않고 미리 확인해 사용자 친화적으로 안내한다.
+    // R5 선생님 배정(app/admin/subject-enrollment-actions.ts)과 같은 공유
+    // 함수(lib/enrollment/teacher-rate-check.ts)를 사용한다.
     const admin = createAdminClient();
-    const { data: hasRate, error: checkError } = await admin.rpc(
-      "has_valid_current_teacher_rate",
-      { p_teacher_id: teacherId }
+    await assertTeacherHasValidRate(
+      admin,
+      teacherId,
+      "이 선생님은 아직 시급이 설정되지 않아 active로 전환할 수 없습니다. 먼저 시급을 설정해주세요."
     );
-    if (checkError) throw new Error(checkError.message);
-    if (!hasRate) {
-      throw new Error(
-        "이 선생님은 아직 시급이 설정되지 않아 active로 전환할 수 없습니다. 먼저 시급을 설정해주세요."
-      );
-    }
   }
   await transitionAccountStatus(supabase, teacherId, status);
 }
