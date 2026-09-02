@@ -5,6 +5,7 @@ import { confirmMatch } from "./matching-actions";
 import type { MatchingTeacherCandidate } from "./matching-data";
 import type { StudentListItem } from "./users-data";
 import type { AdminSubject } from "./subject-data";
+import SubjectEnrollmentPanel from "./SubjectEnrollmentPanel";
 
 export default function MatchingTab({
   students,
@@ -71,6 +72,12 @@ export default function MatchingTab({
           </div>
         ))
       )}
+
+      <SubjectEnrollmentPanel
+        students={students}
+        subjects={subjects}
+        teacherCandidatesBySubject={teacherCandidatesBySubject}
+      />
     </div>
   );
 }

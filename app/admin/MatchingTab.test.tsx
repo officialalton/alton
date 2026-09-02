@@ -8,6 +8,13 @@ import type { AdminSubject } from "./subject-data";
 vi.mock("./matching-actions", () => ({
   confirmMatch: vi.fn(),
 }));
+// R5: SubjectEnrollmentPanel은 이 컴포넌트와 별개 관심사(과목 수강/선생님 배정)이고
+// students 전체(활성 학생 포함)를 보여주는 게 의도된 동작이라, 이 파일의
+// "매칭 대기 학생만 보인다" 단언과 충돌한다 — 자체 테스트(SubjectEnrollmentPanel용
+// 별도 테스트에서 다룸)가 있으므로 여기서는 mock으로 대체한다.
+vi.mock("./SubjectEnrollmentPanel", () => ({
+  default: () => null,
+}));
 
 const pendingStudent: StudentListItem = {
   id: "st1",

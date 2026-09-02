@@ -84,6 +84,21 @@ export async function listSubjectEnrollmentsForChild(
   });
 }
 
+/** 이 아이의 기본계약 id — 신규 과목 수강 계획 생성 시 contract_id로 사용. */
+export async function getContractIdForChild(childId: string): Promise<string | null> {
+  await requireAdminOrCapability(MATCHING_CAPABILITY);
+  const admin = createAdminClient();
+  const { data, error } = await admin
+    .from("contracts")
+    .select("id")
+    .eq("child_id", childId)
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  if (error) throw new Error(error.message);
+  return data?.id ?? null;
+}
+
 function extractOne<T>(rel: unknown): T | null {
   const row = Array.isArray(rel) ? rel[0] : rel;
   return (row as T | undefined) ?? null;
