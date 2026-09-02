@@ -1,5 +1,6 @@
 import { login } from "./actions";
 import { signInWithGoogleForTeacher } from "./teacher-google-actions";
+import { signInWithGoogleForAdmin } from "@/app/admin/google-link-actions";
 
 export default async function LoginPage({
   searchParams,
@@ -78,6 +79,15 @@ export default async function LoginPage({
               className="block w-full text-center border-[1.5px] border-grey-200 text-ink font-bold text-[14px] py-3 rounded-lg hover:bg-grey-100"
             >
               선생님 — Google로 로그인
+            </button>
+          </form>
+
+          <form action={signInWithGoogleForAdmin} className="mt-2.5">
+            <button
+              type="submit"
+              className="block w-full text-center border-[1.5px] border-grey-200 text-ink font-bold text-[14px] py-3 rounded-lg hover:bg-grey-100"
+            >
+              관리자 — Google로 로그인
             </button>
           </form>
         </div>
