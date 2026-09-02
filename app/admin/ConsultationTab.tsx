@@ -24,7 +24,9 @@ import {
   respondToProposal,
   retryFailedDriveArtifacts,
   reconcileDocusignStatus,
+  retryContractActivation,
 } from "./consultation-actions";
+import type { ContractActivationRetryItem } from "./consultation-actions";
 import type {
   ConsultationListItem,
   TrialSessionListItem,
@@ -61,6 +63,7 @@ export default function ConsultationTab({
   aiNotesEvents,
   driveIssues,
   staleEnvelopes,
+  contractActivationRetries,
 }: {
   consultations: ConsultationListItem[];
   trials: TrialSessionListItem[];
@@ -69,6 +72,7 @@ export default function ConsultationTab({
   aiNotesEvents: AiNotesConsentEventItem[];
   driveIssues: DriveArtifactIssue[];
   staleEnvelopes: StaleEnvelopeContract[];
+  contractActivationRetries: ContractActivationRetryItem[];
 }) {
   const [sub, setSub] = useState<SubTab>("consult");
 
@@ -105,6 +109,7 @@ export default function ConsultationTab({
           staleEnvelopes={staleEnvelopes}
           consentGaps={consentGaps}
           duplicateCandidates={consultations.filter((c) => c.duplicateOfConsultationId)}
+          contractActivationRetries={contractActivationRetries}
         />
       )}
     </div>
@@ -1105,17 +1110,20 @@ function ErrorDashboardSection({
   staleEnvelopes,
   consentGaps,
   duplicateCandidates,
+  contractActivationRetries,
 }: {
   driveIssues: DriveArtifactIssue[];
   staleEnvelopes: StaleEnvelopeContract[];
   consentGaps: ConsentGapItem[];
   duplicateCandidates: ConsultationListItem[];
+  contractActivationRetries: ContractActivationRetryItem[];
 }) {
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState<string | null>(null);
   const [retrySummary, setRetrySummary] = useState<{ attempted: number; stillFailing: number } | null>(
     null
   );
+  const [activationRetries, setActivationRetries] = useState(contractActivationRetries);
 
   return (
     <div>
@@ -1186,6 +1194,49 @@ function ErrorDashboardSection({
                 }}
               >
                 상태 새로고침
+              </button>
+            </div>
+          ))
+        )}
+      </div>
+
+      <div className="mb-6">
+        <h2 className="text-[14px] font-bold text-ink mb-2">계약 활성화 재처리 대기 (재시도 가능)</h2>
+        {activationRetries.length === 0 ? (
+          <p className="text-[13px] text-grey-500">활성화 재처리 대기 중인 계약이 없습니다.</p>
+        ) : (
+          activationRetries.map((r) => (
+            <div key={r.id} className={card + " flex items-center justify-between"}>
+              <span className="text-[12.5px] text-ink">
+                {r.childName ?? r.childId ?? "학생 미확인"} · 계약 {r.contractId} ·{" "}
+                {new Date(r.createdAt).toLocaleString("ko-KR")}
+                <span className="text-[11px] text-grey-500 ml-2">{r.failureReason}</span>
+              </span>
+              <button
+                disabled={busy === r.id}
+                className={btnSecondary}
+                onClick={async () => {
+                  setBusy(r.id);
+                  setError(null);
+                  try {
+                    const result = await retryContractActivation(r.id);
+                    if (result.status === "activated" || result.status === "already_active") {
+                      setActivationRetries((prev) => prev.filter((x) => x.id !== r.id));
+                    } else if (result.status === "still_failing") {
+                      setActivationRetries((prev) =>
+                        prev.map((x) =>
+                          x.id === r.id ? { ...x, failureReason: result.failureReason ?? x.failureReason } : x
+                        )
+                      );
+                    }
+                  } catch (e) {
+                    setError(e instanceof Error ? e.message : "활성화 재시도에 실패했습니다.");
+                  } finally {
+                    setBusy(null);
+                  }
+                }}
+              >
+                활성화 재시도
               </button>
             </div>
           ))

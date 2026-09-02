@@ -949,13 +949,17 @@ export type ContractActivationRetryItem = {
   envelopeId: string;
   failureReason: string;
   createdAt: string;
+  childId: string | null;
+  childName: string | null;
 };
 
 /**
  * completed 웹훅은 정상 수신됐으나 contracts.status='active' 전환이 활성화
  * 선행조건(생년월일·보호자 동의 등) 미충족으로 실패해 재처리 대기 중인 건 목록.
  * 관리자가 이 목록을 보고 원인을 보완(예: 생년월일 등록)한 뒤
- * retryContractActivation()으로 재실행한다.
+ * retryContractActivation()으로 재실행한다. 다른 오류 대시보드 섹션(예:
+ * loadConsentGaps)과 동일하게 contracts.child_id → profiles.name을 조회해
+ * 관리자가 어떤 학생 건인지 바로 식별할 수 있게 한다.
  */
 export async function listOpenContractActivationRetries(): Promise<ContractActivationRetryItem[]> {
   await requireAdminOrCapability(CONSULTATIONS_CAPABILITY);
@@ -967,15 +971,35 @@ export async function listOpenContractActivationRetries(): Promise<ContractActiv
     .is("resolved_at", null)
     .order("created_at", { ascending: true });
   if (error) throw new Error(error.message);
+  if (!data || data.length === 0) return [];
 
-  return (data ?? []).map((row) => ({
-    id: row.id,
-    contractId: row.contract_id,
-    contractVersionId: row.contract_version_id,
-    envelopeId: row.envelope_id,
-    failureReason: row.failure_reason,
-    createdAt: row.created_at,
-  }));
+  const { data: contracts } = await admin
+    .from("contracts")
+    .select("id, child_id")
+    .in(
+      "id",
+      data.map((row) => row.contract_id)
+    );
+  const childIdByContract = new Map((contracts ?? []).map((c) => [c.id, c.child_id as string | null]));
+  const childIds = Array.from(new Set(Array.from(childIdByContract.values()).filter((id): id is string => !!id)));
+
+  const { data: profiles } =
+    childIds.length > 0 ? await admin.from("profiles").select("id, name").in("id", childIds) : { data: [] };
+  const nameByChildId = new Map((profiles ?? []).map((p) => [p.id, p.name as string | null]));
+
+  return data.map((row) => {
+    const childId = childIdByContract.get(row.contract_id) ?? null;
+    return {
+      id: row.id,
+      contractId: row.contract_id,
+      contractVersionId: row.contract_version_id,
+      envelopeId: row.envelope_id,
+      failureReason: row.failure_reason,
+      createdAt: row.created_at,
+      childId,
+      childName: childId ? nameByChildId.get(childId) ?? null : null,
+    };
+  });
 }
 
 /**

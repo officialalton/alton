@@ -11,6 +11,9 @@ const contractUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
 
 const driveArtifactsInsertMock = vi.fn().mockResolvedValue({ error: null });
 const activationRetryInsertMock = vi.fn().mockResolvedValue({ error: null });
+const activationRetryUpdateIsMock = vi.fn().mockResolvedValue({ error: null });
+const activationRetryUpdateEqMock = vi.fn(() => ({ is: activationRetryUpdateIsMock }));
+const activationRetryUpdateMock = vi.fn(() => ({ eq: activationRetryUpdateEqMock }));
 
 const fromMock = vi.fn((table: string) => {
   if (table === "external_event_receipts") {
@@ -37,7 +40,7 @@ const fromMock = vi.fn((table: string) => {
     return { insert: driveArtifactsInsertMock };
   }
   if (table === "contract_activation_retries") {
-    return { insert: activationRetryInsertMock };
+    return { insert: activationRetryInsertMock, update: activationRetryUpdateMock };
   }
   throw new Error(`unexpected table ${table}`);
 });
@@ -75,6 +78,7 @@ describe("POST /api/webhooks/docusign", () => {
     contractUpdateEqMock.mockResolvedValue({ error: null });
     driveArtifactsInsertMock.mockResolvedValue({ error: null });
     activationRetryInsertMock.mockResolvedValue({ error: null });
+    activationRetryUpdateIsMock.mockResolvedValue({ error: null });
   });
 
   afterEach(() => {
@@ -502,6 +506,39 @@ describe("POST /api/webhooks/docusign", () => {
 
       await POST(request);
       expect(activationRetryInsertMock).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("contract_activation_retries 중복 미해결 행 방지 — 20260920000000 마이그레이션", () => {
+    it("같은 envelope/contract_version_id로 활성화가 두 번 연속 실패하면 새 행 대신 기존 행을 갱신한다(최신 사유가 이김)", async () => {
+      contractUpdateEqMock.mockResolvedValueOnce({
+        error: { message: "만 13세 미만 학생은 유효한 보호자 동의가 있어야 진행할 수 있습니다" },
+      });
+      activationRetryInsertMock.mockResolvedValueOnce({
+        error: { code: "23505", message: "duplicate key value violates unique constraint" },
+      });
+
+      const { POST } = await import("./route");
+      const request = makeRequest({ event: "envelope-completed", data: { envelopeId: "env-1" } }, "secret123");
+
+      const res = await POST(request);
+
+      expect(res.status).toBe(200);
+      expect(activationRetryInsertMock).toHaveBeenCalledWith(
+        expect.objectContaining({
+          contract_id: "ct1",
+          contract_version_id: "cv1",
+          envelope_id: "env-1",
+          failure_reason: "만 13세 미만 학생은 유효한 보호자 동의가 있어야 진행할 수 있습니다",
+        })
+      );
+      expect(activationRetryUpdateMock).toHaveBeenCalledWith(
+        expect.objectContaining({
+          failure_reason: "만 13세 미만 학생은 유효한 보호자 동의가 있어야 진행할 수 있습니다",
+        })
+      );
+      expect(activationRetryUpdateEqMock).toHaveBeenCalledWith("contract_version_id", "cv1");
+      expect(activationRetryUpdateIsMock).toHaveBeenCalledWith("resolved_at", null);
     });
   });
 });

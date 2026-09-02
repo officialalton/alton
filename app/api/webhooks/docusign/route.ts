@@ -233,12 +233,38 @@ export async function POST(request: Request) {
       .update({ status: "active" })
       .eq("id", contract.id);
     if (activateError) {
-      await admin.from("contract_activation_retries").insert({
+      // 2026-09-20 마이그레이션(contract_activation_retries_open_version_idx)이
+      // contract_version_id당 미해결(resolved_at is null) 행을 최대 1개로 제한한다.
+      // 정상 흐름이라면 이 insert는 항상 새 행을 만들지만, 같은 completed 이벤트가
+      // 어떤 경로로든 다시 처리되거나 웹훅 재시도가 idempotency 방어를 우회하는
+      // 경우엔 unique 위반(23505)이 날 수 있다 — 그 경우 새 행을 만드는 대신
+      // 기존 미해결 행의 failure_reason/created_at을 최신 실패로 갱신한다(최신
+      // 실패 사유가 이긴다).
+      const { error: insertRetryError } = await admin.from("contract_activation_retries").insert({
         contract_id: contract.id,
         contract_version_id: contractVersion.id,
         envelope_id: envelopeId,
         failure_reason: activateError.message,
       });
+      if (insertRetryError) {
+        if (insertRetryError.code === "23505") {
+          await admin
+            .from("contract_activation_retries")
+            .update({ failure_reason: activateError.message, created_at: nowIso })
+            .eq("contract_version_id", contractVersion.id)
+            .is("resolved_at", null);
+        } else {
+          console.info(
+            JSON.stringify({
+              type: "docusign_contract_activation_retry_insert_failed",
+              contractId: contract.id,
+              envelopeId,
+              error: insertRetryError.message,
+              at: nowIso,
+            })
+          );
+        }
+      }
       console.info(
         JSON.stringify({
           type: "docusign_contract_activation_deferred",

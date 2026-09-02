@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { logout } from "@/app/login/actions";
+import { linkAdminGoogleAccount } from "./google-link-actions";
 import AdminHomeDashboard from "./AdminHomeDashboard";
 import type { AdminDashboardData } from "./dashboard-data";
 import CatalogTab from "./CatalogTab";
@@ -20,6 +21,7 @@ import type {
   DriveArtifactIssue,
   StaleEnvelopeContract,
 } from "./consultation-data";
+import type { ContractActivationRetryItem } from "./consultation-actions";
 import DevLogTab from "./DevLogTab";
 import PayoutsTab from "./PayoutsTab";
 import type { PayoutListItem } from "./payouts-data";
@@ -74,12 +76,17 @@ export default function AdminShell({
   aiNotesEvents,
   driveIssues,
   staleEnvelopes,
+  contractActivationRetries,
   devLogContent,
   payouts,
   teacherCandidatesBySubject,
   workspaceProvisionings,
+  googleLinkError,
+  googleLinkSuccess,
 }: {
   initialTab?: string;
+  googleLinkError?: string;
+  googleLinkSuccess?: boolean;
   dashboard: AdminDashboardData;
   subjects: AdminSubject[];
   docs: DocEditorData[];
@@ -98,6 +105,7 @@ export default function AdminShell({
   aiNotesEvents: AiNotesConsentEventItem[];
   driveIssues: DriveArtifactIssue[];
   staleEnvelopes: StaleEnvelopeContract[];
+  contractActivationRetries: ContractActivationRetryItem[];
   devLogContent: string;
   payouts: PayoutListItem[];
   teacherCandidatesBySubject: Record<string, MatchingTeacherCandidate[]>;
@@ -156,6 +164,12 @@ export default function AdminShell({
                 홈으로
               </button>
               <div className="h-px bg-grey-200 my-1" />
+              <form action={linkAdminGoogleAccount}>
+                <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink">
+                  Google 계정 연결
+                </button>
+              </form>
+              <div className="h-px bg-grey-200 my-1" />
               <form action={logout}>
                 <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-red">
                   로그아웃
@@ -164,6 +178,19 @@ export default function AdminShell({
             </div>
           )}
         </div>
+
+        {(googleLinkError || googleLinkSuccess) && (
+          <div
+            className={
+              "px-6 py-2.5 text-[13px] font-semibold border-b " +
+              (googleLinkError
+                ? "bg-red/5 text-red border-grey-200"
+                : "bg-green/5 text-green border-grey-200")
+            }
+          >
+            {googleLinkError ?? "Google 계정이 연결되었습니다."}
+          </div>
+        )}
 
         <div className="flex-1">
           {activeTab === "home" ? (
@@ -195,6 +222,7 @@ export default function AdminShell({
               aiNotesEvents={aiNotesEvents}
               driveIssues={driveIssues}
               staleEnvelopes={staleEnvelopes}
+              contractActivationRetries={contractActivationRetries}
             />
           ) : activeTab === "devlog" ? (
             <DevLogTab content={devLogContent} />

@@ -95,6 +95,7 @@ const baseProps = {
   aiNotesEvents: [],
   driveIssues: [],
   staleEnvelopes: [],
+  contractActivationRetries: [],
   devLogContent: "## Phase 1\n- [x] 완료된 항목\n- [ ] 남은 항목\n",
   payouts: [],
   teacherCandidatesBySubject: {},

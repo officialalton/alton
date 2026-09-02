@@ -29,6 +29,7 @@ vi.mock("./consultation-actions", () => ({
   respondToProposal: vi.fn(),
   retryFailedDriveArtifacts: vi.fn(),
   reconcileDocusignStatus: vi.fn(),
+  retryContractActivation: vi.fn(),
 }));
 
 const baseProps = {
@@ -64,6 +65,7 @@ const baseProps = {
     { id: "d1", contractId: "ct1", artifactType: "signed_document", syncStatus: "retryable_failed" as const },
   ],
   staleEnvelopes: [],
+  contractActivationRetries: [],
 };
 
 describe("ConsultationTab", () => {
@@ -83,5 +85,59 @@ describe("ConsultationTab", () => {
     fireEvent.click(screen.getByText("오류/재처리 현황판"));
     expect(screen.getByText("Drive 저장 실패 (재시도 가능)")).toBeInTheDocument();
     expect(screen.getByText("보호자 동의 차단 (재시도 불가 — 가족 조치 필요)")).toBeInTheDocument();
+  });
+
+  describe("계약 활성화 재처리 대기 — R3 후속(2026-09-01)", () => {
+    const activationRetryProps = {
+      ...baseProps,
+      contractActivationRetries: [
+        {
+          id: "retry1",
+          contractId: "ct1",
+          contractVersionId: "cv1",
+          envelopeId: "env-1",
+          failureReason: "보호자 동의 없음",
+          createdAt: "2026-09-01T00:00:00Z",
+          childId: "child1",
+          childName: "이서준",
+        },
+      ],
+    };
+
+    it("활성화 재처리 대기 항목을 학생 이름·사유와 함께 보여준다", async () => {
+      render(<ConsultationTab {...activationRetryProps} />);
+      fireEvent.click(screen.getByText("오류/재처리 현황판"));
+
+      expect(screen.getByText("계약 활성화 재처리 대기 (재시도 가능)")).toBeInTheDocument();
+      expect(screen.getByText("이서준", { exact: false })).toBeInTheDocument();
+      expect(screen.getByText("보호자 동의 없음", { exact: false })).toBeInTheDocument();
+    });
+
+    it("활성화 재시도가 성공하면 목록에서 항목이 사라진다", async () => {
+      const { retryContractActivation } = await import("./consultation-actions");
+      vi.mocked(retryContractActivation).mockResolvedValue({ status: "activated" });
+
+      render(<ConsultationTab {...activationRetryProps} />);
+      fireEvent.click(screen.getByText("오류/재처리 현황판"));
+      fireEvent.click(screen.getByText("활성화 재시도"));
+
+      await screen.findByText("활성화 재처리 대기 중인 계약이 없습니다.");
+      expect(retryContractActivation).toHaveBeenCalledWith("retry1");
+    });
+
+    it("여전히 실패하면 갱신된 사유를 보여주고 항목을 목록에 유지한다", async () => {
+      const { retryContractActivation } = await import("./consultation-actions");
+      vi.mocked(retryContractActivation).mockResolvedValue({
+        status: "still_failing",
+        failureReason: "여전히 동의 없음",
+      });
+
+      render(<ConsultationTab {...activationRetryProps} />);
+      fireEvent.click(screen.getByText("오류/재처리 현황판"));
+      fireEvent.click(screen.getByText("활성화 재시도"));
+
+      await screen.findByText("여전히 동의 없음", { exact: false });
+      expect(screen.getByText("이서준", { exact: false })).toBeInTheDocument();
+    });
   });
 });

@@ -42,6 +42,8 @@ const proposalSubjectsInsertMock = vi.fn().mockResolvedValue({ error: null });
 const contractsInsertSingleMock = vi.fn();
 const contractsSelectSingleMock = vi.fn();
 const contractVersionsInsertSingleMock = vi.fn();
+const contractsSelectInMock = vi.fn().mockResolvedValue({ data: [], error: null });
+const profilesSelectInMock = vi.fn().mockResolvedValue({ data: [], error: null });
 
 const activationRetriesSingleMock = vi.fn();
 const activationRetriesUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
@@ -103,7 +105,12 @@ const fromMock = vi.fn((table: string) => {
     return {
       update: () => ({ eq: contractsUpdateEqMock }),
       insert: () => ({ select: () => ({ single: contractsInsertSingleMock }) }),
-      select: () => ({ eq: () => ({ single: contractsSelectSingleMock }) }),
+      select: () => ({ eq: () => ({ single: contractsSelectSingleMock }), in: contractsSelectInMock }),
+    };
+  }
+  if (table === "profiles") {
+    return {
+      select: () => ({ in: profilesSelectInMock }),
     };
   }
   if (table === "contract_activation_retries") {
@@ -725,6 +732,8 @@ describe("retryContractActivation / listOpenContractActivationRetries — R3 후
     contractsUpdateEqMock.mockResolvedValue({ error: null });
     activationRetriesUpdateEqMock.mockResolvedValue({ error: null });
     activationRetriesOrderMock.mockResolvedValue({ data: [], error: null });
+    contractsSelectInMock.mockResolvedValue({ data: [], error: null });
+    profilesSelectInMock.mockResolvedValue({ data: [], error: null });
   });
 
   it("이미 resolved된 재처리 항목은 already_active로 아무 것도 바꾸지 않는다(멱등)", async () => {
@@ -779,7 +788,7 @@ describe("retryContractActivation / listOpenContractActivationRetries — R3 후
     await expect(retryContractActivation("nope")).rejects.toThrow("존재하지 않는");
   });
 
-  it("listOpenContractActivationRetries는 resolved되지 않은 항목만 조회한다", async () => {
+  it("listOpenContractActivationRetries는 resolved되지 않은 항목만 조회하고 child 이름을 조인한다", async () => {
     activationRetriesOrderMock.mockResolvedValue({
       data: [
         {
@@ -793,6 +802,8 @@ describe("retryContractActivation / listOpenContractActivationRetries — R3 후
       ],
       error: null,
     });
+    contractsSelectInMock.mockResolvedValue({ data: [{ id: "ct1", child_id: "child1" }], error: null });
+    profilesSelectInMock.mockResolvedValue({ data: [{ id: "child1", name: "김학생" }], error: null });
     const { listOpenContractActivationRetries } = await import("./consultation-actions");
 
     const result = await listOpenContractActivationRetries();
@@ -805,6 +816,8 @@ describe("retryContractActivation / listOpenContractActivationRetries — R3 후
         envelopeId: "env-1",
         failureReason: "보호자 동의 없음",
         createdAt: "2026-09-01T00:00:00Z",
+        childId: "child1",
+        childName: "김학생",
       },
     ]);
   });

@@ -19,6 +19,7 @@ import {
   loadDriveArtifactIssues,
   loadStaleEnvelopeVersions,
 } from "./consultation-data";
+import { listOpenContractActivationRetries } from "./consultation-actions";
 import { loadDevLog } from "./dev-log-data";
 import { loadPayouts } from "./payouts-data";
 import { loadTeacherCandidatesBySubject } from "./matching-data";
@@ -28,10 +29,10 @@ import AdminShell from "./AdminShell";
 export default async function AdminHomePage({
   searchParams,
 }: {
-  searchParams: Promise<{ tab?: string }>;
+  searchParams: Promise<{ tab?: string; googleLinkError?: string; googleLinkSuccess?: string }>;
 }) {
   const { user, supabase } = await requireUser();
-  const { tab } = await searchParams;
+  const { tab, googleLinkError, googleLinkSuccess } = await searchParams;
 
   const devLogContent = loadDevLog();
 
@@ -52,6 +53,7 @@ export default async function AdminHomePage({
     aiNotesEvents,
     driveIssues,
     staleEnvelopes,
+    contractActivationRetries,
     payouts,
     teacherCandidatesBySubject,
     workspaceProvisionings,
@@ -72,6 +74,7 @@ export default async function AdminHomePage({
     loadAiNotesConsentEvents(supabase),
     loadDriveArtifactIssues(supabase),
     loadStaleEnvelopeVersions(supabase),
+    listOpenContractActivationRetries(),
     loadPayouts(supabase),
     loadTeacherCandidatesBySubject(supabase),
     loadWorkspaceProvisionings(supabase),
@@ -97,6 +100,8 @@ export default async function AdminHomePage({
   return (
     <AdminShell
       initialTab={tab}
+      googleLinkError={googleLinkError}
+      googleLinkSuccess={!!googleLinkSuccess}
       dashboard={dashboard}
       subjects={subjects}
       docs={docs}
@@ -115,6 +120,7 @@ export default async function AdminHomePage({
       aiNotesEvents={aiNotesEvents}
       driveIssues={driveIssues}
       staleEnvelopes={staleEnvelopes}
+      contractActivationRetries={contractActivationRetries}
       devLogContent={devLogContent}
       payouts={payouts}
       teacherCandidatesBySubject={teacherCandidatesBySubject}
