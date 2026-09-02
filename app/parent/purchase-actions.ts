@@ -3,6 +3,7 @@
 import { requireUser } from "@/lib/auth";
 import { getStripe } from "@/lib/stripe";
 import { createAdminClient } from "@/lib/supabase-admin";
+import { currentRequestOrigin } from "@/lib/request-origin";
 
 // R4 — 수업권 구매(단건/20회 패키지) Checkout 세션 생성.
 //
@@ -143,7 +144,10 @@ export async function createEntitlementCheckoutSession(
   }
 
   // 5) Stripe Checkout Session 생성(1회성 payment 모드, 구독 아님).
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3010";
+  // 고정 env 대신 실제 요청 origin을 쓴다 — 안 그러면 Preview에서 결제 완료 후
+  // Stripe가 로컬/다른 origin의 success_url로 돌려보내 연결 실패가 난다
+  // (app/auth/admin-google-callback/route.ts에서 이미 한 번 발견·수정된 것과 동일한 근본 원인).
+  const siteUrl = await currentRequestOrigin();
   const stripe = getStripe();
   const session = await stripe.checkout.sessions.create(
     {

@@ -77,6 +77,14 @@ vi.mock("@/lib/stripe", () => ({
   getStripe: () => ({ checkout: { sessions: { create: createSessionMock } } }),
 }));
 
+vi.mock("next/headers", () => ({
+  headers: async () =>
+    new Map([
+      ["x-forwarded-proto", "https"],
+      ["x-forwarded-host", "alton-preview-test.vercel.app"],
+    ]),
+}));
+
 const validProductVersion = {
   id: "version1",
   version_number: 1,
