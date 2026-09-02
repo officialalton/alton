@@ -173,4 +173,32 @@ test.describe("R5 — subject_enrollments/teacher_assignments DB 레벨 검증",
     );
     expect(activeCount).toBe("1");
   });
+
+  test("change_teacher_assignment called twice in immediate succession leaves exactly one active row with the last teacher", () => {
+    // 현재 active 배정은 TEACHER_2(위 테스트에서 변경됨). 곧바로 두 번 더
+    // 연속 호출해도(다른 target teacher로) 최종 상태는 "정확히 하나의 active
+    // 행, teacher는 마지막 호출 대상"이어야 한다 — 이전 배정이 active로 남거나
+    // 중복 active 행이 생기면 안 된다.
+    const effectiveFrom1 = psql(`select (now() + interval '2 days')::text;`);
+    const midAssignmentId = psql(
+      `select change_teacher_assignment('${enrollmentId}', '${TEACHER_1}', '${effectiveFrom1}', 'teacher_long_leave', '${CHILD}');`
+    );
+    const effectiveFrom2 = psql(`select (now() + interval '3 days')::text;`);
+    const finalAssignmentId = psql(
+      `select change_teacher_assignment('${enrollmentId}', '${TEACHER_2}', '${effectiveFrom2}', 'teacher_long_leave', '${CHILD}');`
+    );
+
+    const activeRows = psql(
+      `select count(*) from teacher_assignments where subject_enrollment_id = '${enrollmentId}' and status = 'active';`
+    );
+    expect(activeRows).toBe("1");
+
+    const activeRow = psql(
+      `select id, teacher_id from teacher_assignments where subject_enrollment_id = '${enrollmentId}' and status = 'active';`
+    );
+    expect(activeRow).toBe(`${finalAssignmentId}|${TEACHER_2}`);
+
+    const midStatus = psql(`select status from teacher_assignments where id = '${midAssignmentId}';`);
+    expect(midStatus).toBe("ended");
+  });
 });
