@@ -44,7 +44,7 @@ describe("BookingReconciliationPanel", () => {
     expect(actions.retryCalendarSyncNow).toHaveBeenCalled();
   });
 
-  it("취소 버튼 클릭 시 prompt 입력값으로 adminCancelLessonBooking을 호출한다", async () => {
+  it("취소 버튼 클릭 시 인라인 입력값으로 adminCancelLessonBooking을 호출한다", async () => {
     vi.mocked(actions.listReconciliationNeededBookings).mockResolvedValue([
       {
         reservationId: "r1", teacherId: "t1", teacherName: "김선생", startsAt: "2026-10-10T19:00:00Z",
@@ -52,12 +52,16 @@ describe("BookingReconciliationPanel", () => {
       },
     ]);
     vi.mocked(actions.adminCancelLessonBooking).mockResolvedValue(undefined);
-    vi.spyOn(window, "prompt").mockReturnValue("Google 계정 문제로 취소");
 
     render(<BookingReconciliationPanel />);
     await waitFor(() => expect(screen.getByText("김선생 선생님")).toBeInTheDocument());
 
     fireEvent.click(screen.getByText("이 예약 취소(회사 귀책)"));
+    fireEvent.change(screen.getByPlaceholderText("예: Google Workspace 계정 미발급"), {
+      target: { value: "Google 계정 문제로 취소" },
+    });
+    fireEvent.click(screen.getByText("취소 확정"));
+
     await waitFor(() =>
       expect(actions.adminCancelLessonBooking).toHaveBeenCalledWith({
         reservationId: "r1", cancelledByRole: "company", reason: "Google 계정 문제로 취소",

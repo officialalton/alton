@@ -27,6 +27,8 @@ export default function BookingReconciliationPanel() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [cancellingReservationId, setCancellingReservationId] = useState<string | null>(null);
+  const [cancelReasonDraft, setCancelReasonDraft] = useState("");
 
   async function refresh() {
     setLoading(true);
@@ -62,13 +64,14 @@ export default function BookingReconciliationPanel() {
   }
 
   async function handleCancel(reservationId: string) {
-    const reason = window.prompt("취소 사유(회사 귀책)를 입력해주세요.");
-    if (reason === null) return;
+    const reason = cancelReasonDraft.trim() || "관리자 취소";
     setLoading(true);
     setError(null);
     try {
-      await adminCancelLessonBooking({ reservationId, cancelledByRole: "company", reason: reason || "관리자 취소" });
+      await adminCancelLessonBooking({ reservationId, cancelledByRole: "company", reason });
       setMessage("취소 처리됐습니다(수업권 release + 필요 시 만료일 30일 연장).");
+      setCancellingReservationId(null);
+      setCancelReasonDraft("");
       await refresh();
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
@@ -120,15 +123,47 @@ export default function BookingReconciliationPanel() {
                 최근 오류: {r.googleSyncError} (재시도 {r.googleSyncRetryCount}회)
               </div>
             )}
-            <div className="mt-3 flex justify-end">
-              <button
-                disabled={loading}
-                onClick={() => handleCancel(r.reservationId)}
-                className="text-[12px] font-bold text-red disabled:opacity-50"
-              >
-                이 예약 취소(회사 귀책)
-              </button>
-            </div>
+            {cancellingReservationId !== r.reservationId ? (
+              <div className="mt-3 flex justify-end">
+                <button
+                  disabled={loading}
+                  onClick={() => {
+                    setCancellingReservationId(r.reservationId);
+                    setCancelReasonDraft("");
+                  }}
+                  className="text-[12px] font-bold text-red disabled:opacity-50"
+                >
+                  이 예약 취소(회사 귀책)
+                </button>
+              </div>
+            ) : (
+              <div className="mt-3 border-t border-grey-200 pt-3">
+                <label className="block text-[11px] font-bold text-grey-500 mb-1">취소 사유(회사 귀책)</label>
+                <input
+                  autoFocus
+                  className="w-full border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px] mb-2"
+                  value={cancelReasonDraft}
+                  onChange={(e) => setCancelReasonDraft(e.target.value)}
+                  placeholder="예: Google Workspace 계정 미발급"
+                />
+                <div className="flex gap-2 justify-end">
+                  <button
+                    disabled={loading}
+                    onClick={() => setCancellingReservationId(null)}
+                    className="text-[12px] font-semibold text-grey-500 disabled:opacity-50"
+                  >
+                    닫기
+                  </button>
+                  <button
+                    disabled={loading}
+                    onClick={() => handleCancel(r.reservationId)}
+                    className="text-[12px] font-bold text-white bg-red rounded-lg px-3 py-1.5 disabled:opacity-50"
+                  >
+                    취소 확정
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         ))
       )}

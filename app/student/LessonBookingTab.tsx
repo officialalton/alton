@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import type { BookableSubjectEnrollment, UpcomingBooking } from "./lesson-booking-data";
 import type { WeeklySeriesOccurrenceResult } from "@/lib/booking/create-booking";
 
@@ -83,6 +84,7 @@ export default function LessonBookingTab({
   onCancelBooking,
   onUpdateTimezone,
 }: LessonBookingTabProps) {
+  const router = useRouter();
   const [selectedEnrollmentId, setSelectedEnrollmentId] = useState<string>(bookableEnrollments[0]?.subjectEnrollmentId ?? "");
   const [mode, setMode] = useState<"single" | "weekly">("single");
   const [slots, setSlots] = useState<Date[] | null>(null);
@@ -92,6 +94,8 @@ export default function LessonBookingTab({
   const [error, setError] = useState<string | null>(null);
   const [browserTimezone, setBrowserTimezone] = useState<string | null>(null);
   const [timezoneBannerDismissed, setTimezoneBannerDismissed] = useState(false);
+  const [cancellingReservationId, setCancellingReservationId] = useState<string | null>(null);
+  const [cancelReasonDraft, setCancelReasonDraft] = useState("");
 
   const selectedEnrollment = bookableEnrollments.find((e) => e.subjectEnrollmentId === selectedEnrollmentId) ?? null;
 
@@ -117,6 +121,15 @@ export default function LessonBookingTab({
 
   const slotGroups = useMemo(() => groupSlotsByDate(slots ?? [], timezone), [slots, timezone]);
 
+  async function refetchSlots() {
+    if (!selectedEnrollment) return;
+    try {
+      setSlots(await onListSlots(selectedEnrollment.teacherId, lessonDurationMinutes));
+    } catch {
+      // 슬롯 재조회 실패는 조용히 무시 — 다음 선택 변경 시 useEffect가 다시 시도한다.
+    }
+  }
+
   async function handlePickSlot(slot: Date) {
     if (!selectedEnrollment || !regularLessonTypeId) return;
     setSubmitting(true);
@@ -132,6 +145,8 @@ export default function LessonBookingTab({
           durationMinutes: lessonDurationMinutes,
         });
         setMessage("예약이 확정됐습니다.");
+        router.refresh();
+        await refetchSlots();
       } else {
         const results = await onCreateWeeklySeries({
           subjectEnrollmentId: selectedEnrollment.subjectEnrollmentId,
@@ -149,6 +164,8 @@ export default function LessonBookingTab({
             ? `${succeeded}회 예약 완료 — ${succeeded + 1}회차부터는 "${firstFailure.failureReason}"로 생성되지 않았습니다.`
             : `${succeeded}회 전부 예약 완료됐습니다.`
         );
+        router.refresh();
+        await refetchSlots();
       }
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
@@ -158,13 +175,16 @@ export default function LessonBookingTab({
   }
 
   async function handleCancel(reservationId: string) {
-    const reason = window.prompt("취소 사유를 입력해주세요.");
-    if (reason === null) return;
+    const reason = cancelReasonDraft.trim() || "사용자 취소";
     setSubmitting(true);
     setError(null);
     try {
-      await onCancelBooking(reservationId, reason || "사용자 취소");
+      await onCancelBooking(reservationId, reason);
       setMessage("예약이 취소됐습니다.");
+      setCancellingReservationId(null);
+      setCancelReasonDraft("");
+      router.refresh();
+      await refetchSlots();
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
@@ -278,13 +298,18 @@ export default function LessonBookingTab({
                 </div>
                 <div className="text-[13px] text-grey-500 mt-0.5">{formatDateTime(b.startsAt, timezone)}</div>
               </div>
-              <button
-                disabled={submitting}
-                onClick={() => handleCancel(b.reservationId)}
-                className="text-[12px] font-bold text-red disabled:opacity-50"
-              >
-                취소
-              </button>
+              {cancellingReservationId !== b.reservationId && (
+                <button
+                  disabled={submitting}
+                  onClick={() => {
+                    setCancellingReservationId(b.reservationId);
+                    setCancelReasonDraft("");
+                  }}
+                  className="text-[12px] font-bold text-red disabled:opacity-50"
+                >
+                  취소
+                </button>
+              )}
             </div>
             <div className="mt-2 flex items-center gap-2">
               <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-grey-100 text-grey-500">
@@ -296,6 +321,34 @@ export default function LessonBookingTab({
                 </a>
               )}
             </div>
+            {cancellingReservationId === b.reservationId && (
+              <div className="mt-3 border-t border-grey-200 pt-3">
+                <label className="block text-[11px] font-bold text-grey-500 mb-1">취소 사유</label>
+                <input
+                  autoFocus
+                  className="w-full border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px] mb-2"
+                  value={cancelReasonDraft}
+                  onChange={(e) => setCancelReasonDraft(e.target.value)}
+                  placeholder="예: 일정이 바뀌었어요"
+                />
+                <div className="flex gap-2 justify-end">
+                  <button
+                    disabled={submitting}
+                    onClick={() => setCancellingReservationId(null)}
+                    className="text-[12px] font-semibold text-grey-500 disabled:opacity-50"
+                  >
+                    닫기
+                  </button>
+                  <button
+                    disabled={submitting}
+                    onClick={() => handleCancel(b.reservationId)}
+                    className="text-[12px] font-bold text-white bg-red rounded-lg px-3 py-1.5 disabled:opacity-50"
+                  >
+                    취소 확정
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         ))
       )}
