@@ -128,8 +128,99 @@ raw DB 에러 노출 안 함) → 최초 배정(승계 자격 사전확인 후 �
   뒤 함께 검증하는 편이 낫다고 판단(현재는 관리자 화면만 있고 학생/보호자/선생님 화면이 없어
   Preview에서 볼 수 있는 것이 관리자 매칭 탭뿐).
 
-## 7. 남은 작업
+## 7. 남은 작업 (2026-09-02 후속 세션 이전 기준 — 아래 8절에서 대부분 완료)
 
 `docs/2026-08-29-master-roadmap-v3.md`의 R5 섹션 "R5 미완료(다음 세션)" 참고 — 요약하면
 역할별(학생/보호자/선생님) 화면, R2 선생님 온보딩 화면의 시급 사전확인 로직 재사용,
 전용 role E2E, 동시성 전용 테스트, Vercel Preview 검증이 남았다.
+
+## 8. 후속 세션 — 마무리 5개 항목 (2026-09-02)
+
+이전 세션에서 관리자 UI와 학생/보호자/선생님 role 화면(`app/student/EnrollmentTab.tsx`,
+`app/parent/EnrollmentTab.tsx`, `app/teacher/AssignmentsTab.tsx`)까지는 이미 구현·커밋
+완료된 상태(`1d9fc7d`)에서 시작. 아래 1~5는 이번 후속 세션에서 실제로 수행·검증한 내용이다.
+
+### 8.1 R2/R5 시급 확인 로직 통합
+
+- `app/admin/users-actions.ts`의 `setTeacherStatus`(R2, active 전환)와
+  `app/admin/subject-enrollment-actions.ts`의 `assignTeacherToSubjectEnrollment`(R5, 최초
+  배정)가 각자 `has_valid_current_teacher_rate()` RPC를 직접 호출하고 각자 우호적 에러
+  메시지를 만들던 걸 `lib/enrollment/teacher-rate-check.ts`(신규) 하나로 합쳤다.
+  `hasValidCurrentTeacherRate()`/`assertTeacherHasValidRate()` 두 함수를 두 호출부가
+  공유한다 — RPC 이름·시그니처는 그대로라 기존 `setTeacherStatus` 테스트
+  (`app/admin/users-actions.test.ts`)가 수정 없이 그대로 통과한다.
+- 검증: `npx vitest run app/admin/users-actions.test.ts`(11건 통과) +
+  `npx vitest run` 전체(113파일/655건 통과) + `npx tsc --noEmit`(clean).
+- 커밋: `ca426db`.
+
+### 8.2 동시성/exclusion 안전성 테스트
+
+- `e2e/r5-subject-enrollment-teacher-assignment.spec.ts`에 이미 겹침 방지 exclusion
+  constraint 테스트(120번 줄, `teacher_assignments_no_overlap` 직접 검증)와
+  `change_teacher_assignment()` 원자성 단일 호출 테스트(144번 줄)가 있음을 확인.
+  추가로 "같은 enrollment에 대해 `change_teacher_assignment()`를 곧바로 두 번 연속
+  호출(다른 target teacher)"하는 신규 케이스를 추가해, 최종 상태에 active 배정이
+  정확히 1건만 남고(마지막 호출의 teacher), 중간 배정은 `ended`로 올바르게 종료됐는지
+  확인했다(effective_from은 각각 미래로 어긋나게 줘서 DB의 순서 강제 제약을 우회하지
+  않음).
+- 검증: `npx playwright test e2e/r5-subject-enrollment-teacher-assignment.spec.ts --workers=1` —
+  9건 전부 통과.
+- 커밋: `ac12a2e`.
+
+### 8.3 실브라우저 R5 E2E + 실제 버그 발견·수정
+
+- `e2e/r5-subject-enrollment-flow.spec.ts`(신규) — admin 로그인 → 과목 수강 계획 생성 →
+  활성화 → 최초 선생님 배정(박서연) → 선생님 변경(이도현, 사유 입력) 전부 실제 관리자
+  UI(`SubjectEnrollmentPanel.tsx`)를 거쳐 검증. 이어서 보호자(`minji.kim@example.com`)로
+  로그인해 `EnrollmentTab.tsx`에 새 담당 선생님·이전 이력이 보이는지, 마지막으로 새로
+  배정된 선생님(`dohyun@example.com`)으로 로그인해 `AssignmentsTab.tsx`에 배정이 보이는지
+  확인. 대상 학생은 지훈이 아니라 이서아(다른 스펙들이 항상 계약 없는 상태로 남겨두는
+  대상이라 병렬 실행 충돌 위험이 낮음)로 골라 기존 스펙과 격리.
+- **실제 버그 발견**: 보호자 단계에서 `EnrollmentTab.tsx`가 새로 배정된 선생님 이름을
+  빈칸으로 렌더링했다. 원인 추적 결과 `app/student/enrollment-data.ts`가
+  `teacher:profiles!teacher_assignments_teacher_id_fkey(name)` PostgREST 임베드로
+  선생님 이름을 읽는데, `profiles` 테이블의 SELECT RLS 정책("본인/관계자/관리자 조회")이
+  R5의 `teacher_assignments`/`subject_enrollments` 관계를 전혀 몰라(레거시 `enrollments`
+  테이블과 `guardian_students`/household만 인식) RLS가 해당 프로필 행을 조용히 숨기고
+  있었다 — 관리자 화면(다른 데이터 경로)에서는 이름이 정상적으로 보였기 때문에 이 세션
+  전까지 발견되지 않았던 회귀였다.
+- **수정**: `supabase/migrations/20260925020000_r5_profile_visibility_teacher_assignments.sql`
+  (신규, additive) — `teacher_assignments`/`subject_enrollments`를 거쳐 연결된
+  학생<->선생님, 보호자<->선생님(`is_guardian_of()` 재사용) EXISTS 절 2개를 profiles RLS
+  정책에 추가. 처음 `20260902000000`로 타임스탬프를 잡았다가 기존
+  `20260902000000_r2_account_invites.sql`과 충돌(`npx supabase db reset --local` 실패)해
+  `20260925020000`(R5 마이그레이션들 뒤)로 재명명했다.
+- 검증: `npx playwright test e2e/r5-subject-enrollment-flow.spec.ts --workers=1` 3건 전부
+  통과(2회 재실행으로 안정성 확인) + `npx tsc --noEmit`(clean) + `npx vitest run`
+  전체(655건 통과, RLS 변경으로 인한 회귀 없음).
+- 커밋: `57e2ae8`(스펙+마이그레이션), `b3731b2`(마이그레이션 리네임).
+
+### 8.4 전체 회귀
+
+- `npx supabase db reset --local` — 마이그레이션 전체(리네임 후 R5 3건 포함) 재적용 성공.
+- `npx tsc --noEmit` — 에러 0.
+- `npx vitest run` — 113개 파일 / 655건 전부 통과.
+- `npx playwright test --workers=1 --reporter=list` — **50건 전부 통과**(2.6분).
+  `account-merge.spec.ts` flake도 이번 실행에서는 발생하지 않았음. R5 신규 스펙
+  (`r5-subject-enrollment-flow.spec.ts` 3건, `r5-subject-enrollment-teacher-assignment.spec.ts`
+  9건) 포함 전체 그린.
+
+### 8.5 Vercel Preview 배포 + HTTP 검증
+
+- `npx vercel deploy --yes`(Production 아님, `--prod` 사용 안 함) — 성공,
+  `https://alton-2kvo3ktw3-alton7.vercel.app`. 빌드 로그상 `/admin`/`/parent`/`/student`/
+  `/teacher` 라우트 전부 정상 컴파일·배포됨을 확인.
+- `npx vercel curl <url>/admin|/parent|/student|/teacher` — 전부 `307 → /login`으로
+  리다이렉트(비로그인 상태에서 앱 레벨 인증 가드가 정상 동작함을 확인, 배포 자체가
+  살아있고 미들웨어가 실제로 도는 것을 증명). `npx vercel curl <url>/login`으로 로그인
+  폼 HTML도 정상 렌더링 확인.
+- **한계**: `vercel curl`은 Vercel의 자체 Deployment Protection 우회 자격증명을 써서 요청하지만,
+  일반 브라우저(Playwright로 Preview URL에 직접 접속)는 Vercel Deployment Protection
+  SSO 로그인 화면에서 막힌다 — `docs/CURRENT.md`에 이미 기록된 R4 blocker와 동일 현상
+  (당시 제품 오너가 직접 브라우저로 로그인해 우회했음). 이번 세션에서는 그 SSO를
+  우회하려 시도하지 않았다(제품 오너 개입 없이 임의로 우회하지 않는다는 기존 원칙 유지)
+  — 그 결과 로그인 이후 화면에 렌더된 R5 UI 텍스트("과목 수강 · 선생님 배정 (R5)" 등)를
+  Preview에서 직접 grep으로 확인하지는 못했다. 대신 (a) 배포가 살아있고 (b) 인증
+  가드·로그인 폼이 정상 동작하며 (c) 로컬에서 동일 코드로 3단계 실브라우저 E2E가
+  통과한 것으로 대체 검증했다. **Preview 배포 로그인 이후 화면의 육안/HTTP 확인은
+  제품 오너의 실제 SSO 로그인이 필요 — 다음 결정 필요 항목 참고.**
