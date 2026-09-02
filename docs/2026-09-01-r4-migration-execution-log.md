@@ -73,3 +73,9 @@
 ### 후속(분쟁 버그 수정) 외부 변경
 
 - `.env.local` 수정하지 않음. Stripe 실제 API 호출 없음(HMAC 서명은 로컬에서 `STRIPE_WEBHOOK_SECRET`으로 직접 계산 — Stripe 서버로 나가는 요청 없음). Vercel/Google Workspace/DocuSign 전혀 건드리지 않음. 로컬 `supabase db reset --local`만 여러 번 실행(로컬 개발 DB, 운영 데이터 아님) — 세션 종료 시 실행 상태로 둠(이전 섹션과 동일 정책).
+
+## 후속(2026-09-02) — 관리자 Google 로그인 실사람 검증 완료
+
+- 근본 원인 2가지: (1) `NEXT_PUBLIC_SITE_URL`을 리디렉션 기준으로 쓰던 코드가 실제 요청 origin과 달라 콜백이 어긋남 — `039068b`(`fix(admin-google-login): use request origin instead of NEXT_PUBLIC_SITE_URL`), `a0645ce`(`fix(reset-password): use request origin for reset-link redirect`)로 수정, `app/admin/admin-google-callback`, `admin-google-link-callback`, `google-link-actions.ts`, `reset-password/actions.ts` 전부 origin 기준으로 통일. (2) Supabase 원격 프로젝트(`worpsqwqgnspddnrtnvq.supabase.co`) 인증 설정의 "manual linking"이 꺼져 있던 것 — 제품 오너가 Supabase 대시보드에서 직접 켬(영구 설정 변경, 되돌리지 않음).
+- 2026-09-02 제품 오너가 실제 Vercel Preview 배포에서 브라우저로 관리자 Google 로그인 버튼 클릭 → Google OAuth → 콜백 → 관리자 세션까지 전체 흐름을 완주해 검증. 기존 Google identity(`google_sub=111086046953656987120`)가 관리자 프로필(`profiles.id=b2a34464-f8b1-4605-89cd-e3e56de44c67`, `official@alton.education`)의 `admin_google_identities`에 정상 연결됨을 재확인(중복 없음, `profiles`/`auth.users`/`admin_google_identities` 각 count=1 — 이전 세션에서 이미 실측 확인된 값과 일치).
+- **관리자 Google 로그인은 이제 완전히 완료** — 더 이상 blocker 아님.
