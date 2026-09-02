@@ -32,7 +32,7 @@ export async function loadSessionReviewContext(
   sessionId: string
 ): Promise<SessionReviewContext | null> {
   const { data: session } = await supabase
-    .from("sessions")
+    .from("legacy_sessions")
     .select(
       "id, session_number, unit_title, note, teacher_comment, enrollment:enrollments(student_id, subject:subjects(name))"
     )

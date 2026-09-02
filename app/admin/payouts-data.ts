@@ -63,7 +63,7 @@ export async function computePayoutAmounts(
     .select("id, hourly_rate_krw, profile:profiles(name)");
 
   const { data: sessions } = await supabase
-    .from("sessions")
+    .from("legacy_sessions")
     .select("duration_minutes, enrollment:enrollments(teacher_id)")
     .eq("status", "completed")
     .gte("scheduled_at", period.periodStart)

@@ -71,7 +71,7 @@ export async function loadDashboardData(
 
   const { data: sessions } = enrollmentIds.length
     ? await supabase
-        .from("sessions")
+        .from("legacy_sessions")
         .select(
           "id, enrollment_id, session_number, unit_title, status, scheduled_at, duration_minutes"
         )

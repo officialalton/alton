@@ -30,7 +30,7 @@ export default async function SessionPage({
   const { user, profile, supabase } = await requireUser();
 
   const { data: session } = await supabase
-    .from("sessions")
+    .from("legacy_sessions")
     .select(
       "id, session_number, unit_title, status, scheduled_at, duration_minutes, enrollment_id, curriculum_doc_id, whiteboard_strokes"
     )

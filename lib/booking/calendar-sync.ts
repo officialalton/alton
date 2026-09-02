@@ -6,7 +6,7 @@ import { DEFAULT_TIMEZONE } from "@/lib/timezone";
 // 재처리 워커. drive-artifacts.ts(R3)의 큐 처리 패턴(조건부 UPDATE로 낙관적 잠금,
 // retry_count 초과 시 reconciliation_needed로 전환)을 그대로 재사용한다.
 //
-// 중요: 이 워커가 실패해도 reservations/sessions_v3/entitlement hold는 절대 건드리지
+// 중요: 이 워커가 실패해도 reservations/sessions/entitlement hold는 절대 건드리지
 // 않는다 — Google 쪽 산출물(google_event_id/google_meet_link)만 재시도 대상이다(DB가
 // 원본, Calendar는 실행용 사본이라는 스펙 원칙).
 

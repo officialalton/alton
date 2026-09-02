@@ -71,7 +71,7 @@ export async function loadCurricula(
     const unitIds = (units ?? []).map((u) => u.id);
     const { data: sessions } = unitIds.length
       ? await supabase
-          .from("sessions")
+          .from("legacy_sessions")
           .select("id, status, scheduled_at, source_template_unit_id")
           .eq("enrollment_id", e.id)
           .in("source_template_unit_id", unitIds)

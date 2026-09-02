@@ -30,7 +30,7 @@ async function requireSessionTeacher(sessionId: string) {
   if (profile?.role === "admin") return { supabase, user };
 
   const { data: session } = await supabase
-    .from("sessions")
+    .from("legacy_sessions")
     .select("enrollment:enrollments(teacher_id)")
     .eq("id", sessionId)
     .single();

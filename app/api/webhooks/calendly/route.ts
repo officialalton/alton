@@ -122,7 +122,7 @@ async function handleSessionBooking(
   }
 
   const { data: existingSessions } = await admin
-    .from("sessions")
+    .from("legacy_sessions")
     .select("session_number")
     .eq("enrollment_id", enrollmentId)
     .order("session_number", { ascending: false })
@@ -137,7 +137,7 @@ async function handleSessionBooking(
       )
     : 30;
 
-  const { error: insertError } = await admin.from("sessions").insert({
+  const { error: insertError } = await admin.from("legacy_sessions").insert({
     enrollment_id: enrollmentId,
     session_number: nextSessionNumber,
     status: "upcoming",

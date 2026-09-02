@@ -260,25 +260,25 @@ R5는 위 항목 전부 완료로 종료한다. 남은 항목(관리자 학생 �
 
 ## R6 — 자체 예약·Google Calendar·Meet
 
-- [ ] **(R1 cutover 선행 조건, blocker)** `sessions_v3`→`sessions` rename과 기존 `sessions`→`legacy_sessions` rename을 앱 코드·서버 액션 전환과 함께 같은 배포에서 원자적으로 수행한다(R1에서 shadow 이름으로 미룬 부분). 이 시점에 세션 생성 서버 액션에서 `material_version_id`(교재 버전 스냅샷) 채우기도 함께 구현한다(R1에서는 컬럼·FK만 준비하고 실제 채우기 로직은 만들지 않았다).
-- [ ] 선생님 반복 가능 시간·날짜별 예외·버퍼
-- [ ] 120분 슬롯·15분 버퍼·24시간~8주 예약 가능 기간
-- [ ] Google FreeBusy 충돌 제거
-- [ ] DB 슬롯 잠금과 중복예약 방지
-- [ ] 예약 시 수업권 hold
-- [ ] Calendar 이벤트와 고유 Meet 생성
-- [ ] Smart Notes 자동 활성화, 영상·원본 음성 녹화 및 별도 Meet 전사 비활성화, Smart Notes 수반 텍스트 전사의 제한 보관
-- [ ] 녹화 OFF 상태에서 Smart Notes 화면 스크린샷 미생성 실측 검증
-- [ ] 보호자 AI 회의록 거부 시 세션별 Smart Notes 비활성화
-- [ ] SmartNote 생성 이벤트·Meet API 대조·세션 연결
-- [ ] 취소·새 예약·지각·노쇼 신고
-- [ ] 선생님 취소 시 예약·수업권 hold 해제 후 학생의 일반 새 예약 흐름
-- [ ] Google Meet 참가자 기록의 제공 범위·권한·수집 지연 기술 검증
-- [ ] Meet 참가자 기록과 알톤 입장 클릭·화면 체류 기록의 source 분리
-- [ ] 양쪽 timezone과 DST
-- [ ] Google 실패 보상·재처리·정기 대조
-- [ ] 주간 고정 시간 최대 8회와 회차별 수업권 hold
-- [ ] 수업 24시간·2시간 전 리마인드
+- [x] **(R1 cutover 선행 조건, blocker)** `sessions_v3`→`sessions` rename과 기존 `sessions`→`legacy_sessions` rename을 앱 코드·서버 액션 전환과 함께 같은 배포에서 원자적으로 수행한다(R1에서 shadow 이름으로 미룬 부분). **(2026-09-02 완료, R6 3/N)** `20260928000000_r6_sessions_cutover.sql` + 앱 코드 14개 파일 동시 전환, 전체 테스트/E2E로 검증. `material_version_id`(교재 버전 스냅샷) 채우기는 **의도적으로 보류** — "이 subject_enrollment가 지금 어떤 교재 버전을 쓰는지" 개념 자체가 R9(과목 템플릿과 학생별 진도 스냅샷) 이전엔 존재하지 않아, R1이 만들어둔 nullable FK 인터페이스만 유지하고 실제 채우기는 R9 완료 후로 이관(R6 스펙의 "R9 인수인계는 이번에 구현하지 말고 인터페이스만 유지" 원칙과 일치, 상세는 R6 실행 로그 3/N 참고).
+- [x] 선생님 반복 가능 시간·날짜별 예외·버퍼 **(2026-09-02, R6 1/N)** `teacher_availability_rules`/`teacher_availability_exceptions`.
+- [x] 120분 슬롯·15분 버퍼·24시간~8주 예약 가능 기간 **(2026-09-02, R6 1/N·4/N)** 학생은 24h~8주, 관리자는 24h 하한 예외(8주 상한은 동일).
+- [ ] Google FreeBusy 충돌 제거 — `lib/google-calendar.ts`의 `queryFreeBusy()` 구현·단위테스트 완료(R6 2/N), 예약 생성 흐름(서버 액션)에서 실제로 호출·이중검사로 배선하는 것은 6/N(예약 서버 액션·UI)에서.
+- [x] DB 슬롯 잠금과 중복예약 방지 **(2026-09-02, R6 1/N·4/N)** `reservations_no_overlap` exclusion(R1) + 15분 버퍼 재검증 + `idempotency_key` 멱등성(동일 슬롯 동시 예약·재요청이 중복 세션·hold를 만들지 않음, 스모크 테스트로 실측 확인).
+- [x] 예약 시 수업권 hold **(2026-09-02, R6 1/N)** `confirm_lesson_booking()`이 reservation+session+hold를 단일 트랜잭션으로 처리.
+- [ ] Calendar 이벤트와 고유 Meet 생성 — `createCalendarEventWithMeet()`·재처리 워커 구현·단위테스트 완료(R6 2/N, `CALENDAR_SYNC_ALLOW_REAL_CALLS` 기본 false), 예약 서버 액션에서 실제 호출 배선은 6/N에서. 실제 Google API 호출(Sandbox 검증)은 별도 승인 요청 후.
+- [ ] Smart Notes 자동 활성화, 영상·원본 음성 녹화 및 별도 Meet 전사 비활성화, Smart Notes 수반 텍스트 전사의 제한 보관 — 7/N에서 진행 예정.
+- [ ] 녹화 OFF 상태에서 Smart Notes 화면 스크린샷 미생성 실측 검증 — Gate C에서 이미 검증된 기존 증거 인용 예정(7/N), 재실험하지 않음.
+- [ ] 보호자 AI 회의록 거부 시 세션별 Smart Notes 비활성화 — 7/N에서 진행 예정.
+- [ ] SmartNote 생성 이벤트·Meet API 대조·세션 연결 — `session_access_events`/`session_incident_reports` 스키마는 R6 5/N에서 준비 완료(google_meet_api/alton_client source 분리), 실제 Smart Notes 대조 배선은 7/N.
+- [x] 취소 이력 보존(기존 예약을 덮어쓰지 않고 취소 이력 남긴 뒤 별도 새 예약) **(2026-09-02, R6 5/N)** `cancel_lesson_booking()` + `reservation_cancellations`. 지각·노쇼는 **R6에서는 "신고"와 원본 접속기록 수집까지만**(수업권 최종 소진·출석 확정·정산 판정은 R7 범위로 명시 이관, 2026-09-02 사용자 지시) — `session_incident_reports`(신고 로그) 스키마 완료, 신고 제출 UI는 6/N.
+- [x] 선생님 취소 시 예약·수업권 hold 해제 후 학생의 일반 새 예약 흐름 **(2026-09-02, R6 5/N)** `cancel_lesson_booking()`이 선생님/회사 취소 시 항상 release + 만료 30일 미만이면 30일로 연장(스모크 테스트로 실측 확인). 대체 선생님·우선 재예약 기능은 의도적으로 만들지 않음(스펙 원문). 재예약 UI는 6/N.
+- [ ] Google Meet 참가자 기록의 제공 범위·권한·수집 지연 기술 검증 — 미착수, Google Sandbox 승인 요청과 함께 진행 예정.
+- [x] Meet 참가자 기록과 알톤 입장 클릭·화면 체류 기록의 source 분리 **(2026-09-02, R6 5/N)** `session_access_events.source`(`google_meet_api`/`alton_client`)로 테이블 레벨에서 분리, 한쪽을 다른 쪽으로 보정하지 않는 원칙을 스키마 주석에 명시. 실제 Meet API 수집 파이프라인은 미착수.
+- [x] 양쪽 timezone과 DST **(2026-09-02, R6 1/N)** `is_teacher_slot_open()`이 Postgres `AT TIME ZONE`(내장 tzdata, DST 자동 반영)에 위임 — 별도 수동 오프셋 계산 없음. 브라우저 최초 timezone 제안 UI는 6/N.
+- [x] Google 실패 보상·재처리·정기 대조 **(2026-09-02, R6 2/N)** `lib/booking/calendar-sync.ts`(R3 drive-artifacts와 동일한 낙관적 잠금 재처리 패턴, 실패해도 예약·세션·hold는 절대 건드리지 않음, 5회 초과 시 `reconciliation_needed`).
+- [x] 주간 고정 시간 최대 8회와 회차별 수업권 hold **(2026-09-02, R6 4/N)** `create_weekly_lesson_series()` — 각 회차 독립 hold, 수업권 부족 시 가능한 회차까지만 생성.
+- [ ] 수업 24시간·2시간 전 리마인드 — 8/N(알림 outbox)에서 진행 예정.
 
 ### R6 레거시 제거 — Calendly·Zoom 완전 삭제 (2026-08-30 확정)
 
@@ -443,6 +443,7 @@ R5는 위 항목 전부 완료로 종료한다. 남은 항목(관리자 학생 �
 - [ ] 운영 매뉴얼·고객지원·장애 대응 훈련
 - [ ] 실제 도메인·이메일·정책·법적 문서 점검
 - [ ] **(R2 Task 4에서 이관, 정식 오픈 전 필수)** `mark_expired_invites()`를 주기적으로 실행하는 스케줄러(cron) 연결 — 실시간 만료 차단 자체는 이미 정상 동작하므로 기능 결함은 아니지만, 관리자 초대 목록 화면의 상태 정확도를 위해 오픈 전 반드시 연결한다.
+- [ ] **(R4, 2026-09-02, 정식 오픈 전 필수)** Production Stripe 웹훅 엔드포인트 `https://app.alton.education/api/webhooks/stripe` 등록. 법인 설립·Stripe Live 계정 활성화 전에는 (1) 이 엔드포인트 등록, (2) Stripe Live secret key 발급·환경변수 입력, (3) 실제(Live) 결제 API 호출을 하지 않는다 — 상세는 `docs/CURRENT.md` 참고.
 - [ ] **(R2 Task 9 E2E 작성 중 발견, 2026-09-01, CI 안정화 필요)** `e2e/account-lifecycle.spec.ts`와 `e2e/account-merge.spec.ts`가 시드 데이터의 같은 전역 계정(선생님 박서연 `dddddddd-...0001`, 학부모 김민지 `bbbbbbbb-...0001`)의 상태를 직접 변경·병합한다 — `playwright.config.ts`의 `fullyParallel:true`(worker 수 미지정) 아래서 다른 스펙 파일이 같은 워커 구간에 동시 실행되면 그 계정을 공유하는 다른 테스트(`auth-roles.spec.ts`, `minor-consent.spec.ts`, `session-review-flow.spec.ts` 등)가 레이스로 실패할 수 있다(실측 확인: 기본 병렬 실행 시 6개 실패, `--workers=1`로는 전부 통과). `account-lifecycle.spec.ts`는 `test.describe.serial`로 최소한 파일 내부 레이스는 막아뒀지만 파일 간 레이스는 남아있다 — 근본 해결은 이 두 스펙이 전역 시드 계정 대신 테스트마다 새로 만드는 전용 픽스처를 쓰도록 리팩터링하는 것이다. 정식 오픈 전 CI에서 기본 병렬 설정으로 안정적으로 통과하는지 확인 필요.
 
 G6: 모든 필수 여정과 예외 여정이 통과하고, 미결정 정책·수동 DB 작업·출시 차단 결함이 0개일 때만 오픈한다.

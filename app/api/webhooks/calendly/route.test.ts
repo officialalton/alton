@@ -12,7 +12,7 @@ const fromMock = vi.fn((table: string) => {
       update: () => ({ eq: enrollmentUpdateEqMock }),
     };
   }
-  if (table === "sessions") {
+  if (table === "legacy_sessions") {
     return {
       select: () => ({ eq: () => ({ order: () => ({ limit: sessionsLimitMock }) }) }),
       insert: insertMock,
@@ -184,7 +184,7 @@ describe("POST /api/webhooks/calendly", () => {
 
     const res = await POST(request);
     expect(res.status).toBe(200);
-    expect(fromMock).toHaveBeenCalledWith("sessions");
+    expect(fromMock).toHaveBeenCalledWith("legacy_sessions");
     expect(insertMock).toHaveBeenCalledWith(
       expect.objectContaining({
         enrollment_id: "e1",

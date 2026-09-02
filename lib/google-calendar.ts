@@ -6,7 +6,7 @@ import { getCalendarApiAccessToken } from "@/lib/google-workspace-auth";
 // 동일한 패턴 — CALENDAR_SYNC_ALLOW_REAL_CALLS가 정확히 "true"가 아니면 실제 Calendar API를
 // 절대 호출하지 않고 명시적으로 실패한다(스텁이 성공한 것처럼 보이지 않게).
 //
-// 설계: Supabase(reservations/sessions_v3)가 원본이고 Google Calendar 이벤트는 "실행용
+// 설계: Supabase(reservations/sessions)가 원본이고 Google Calendar 이벤트는 "실행용
 // 사본"이다(스펙 원문). 이 파일의 함수들은 순수 API 클라이언트 — 실패 시 예외를 던질 뿐
 // DB 상태를 직접 갱신하지 않는다. 호출부(lib/booking/*)가 성공/실패에 따라
 // reservations.google_sync_status를 갱신하고, 실패해도 예약·세션·수업권 hold 자체는

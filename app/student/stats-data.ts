@@ -33,7 +33,7 @@ export async function loadStats(
 
   const { data: sessions } = enrollmentIds.length
     ? await supabase
-        .from("sessions")
+        .from("legacy_sessions")
         .select("enrollment_id, status")
         .in("enrollment_id", enrollmentIds)
     : { data: [] as never[] };
@@ -74,7 +74,7 @@ export async function loadStats(
 
   const sessionIds = enrollmentIds.length
     ? (
-        await supabase.from("sessions").select("id").in("enrollment_id", enrollmentIds)
+        await supabase.from("legacy_sessions").select("id").in("enrollment_id", enrollmentIds)
       ).data?.map((s) => s.id) ?? []
     : [];
 
