@@ -38,6 +38,12 @@ import { ExternalAccountClient, type BaseExternalAccountClient } from "google-au
 
 const DIRECTORY_SCOPE = "https://www.googleapis.com/auth/admin.directory.user";
 const DRIVE_SCOPE = "https://www.googleapis.com/auth/drive";
+// R6: Calendar/Meet 생성·FreeBusy 조회용. Directory/Drive와 달리 고정된
+// GOOGLE_WORKSPACE_DELEGATED_ADMIN_EMAIL이 아니라 "그 수업을 맡은 선생님 본인"의
+// Workspace 계정(@alton.education, R2/R5에서 이미 발급)을 DWD subject로 삼는다 —
+// 이벤트가 실제로 그 선생님의 캘린더에 생기고, FreeBusy도 그 선생님 캘린더 기준으로
+// 조회되어야 하기 때문이다. signDelegatedAdminJwt에 subjectEmail을 넘겨 오버라이드한다.
+const CALENDAR_SCOPE = "https://www.googleapis.com/auth/calendar";
 const OAUTH_TOKEN_URL = "https://oauth2.googleapis.com/token";
 
 function assertNotPreview(): void {
@@ -110,9 +116,13 @@ export async function getImpersonatedAccessToken(): Promise<string> {
   return token;
 }
 
-async function signDelegatedAdminJwt(impersonatedAccessToken: string, scope: string): Promise<string> {
+async function signDelegatedAdminJwt(
+  impersonatedAccessToken: string,
+  scope: string,
+  subjectEmailOverride?: string
+): Promise<string> {
   const serviceAccountEmail = process.env.GOOGLE_WORKSPACE_SERVICE_ACCOUNT_EMAIL!;
-  const delegatedAdminEmail = process.env.GOOGLE_WORKSPACE_DELEGATED_ADMIN_EMAIL;
+  const delegatedAdminEmail = subjectEmailOverride ?? process.env.GOOGLE_WORKSPACE_DELEGATED_ADMIN_EMAIL;
   if (!delegatedAdminEmail) {
     throw new Error("GOOGLE_WORKSPACE_DELEGATED_ADMIN_EMAIL 환경변수가 설정되지 않았습니다.");
   }
@@ -212,4 +222,38 @@ export async function getDriveApiAccessToken(): Promise<string> {
   const data = (await res.json()) as { access_token: string; expires_in: number };
   cachedDriveToken = { accessToken: data.access_token, expiresAt: now + data.expires_in };
   return cachedDriveToken.accessToken;
+}
+
+const cachedCalendarTokensBySubject = new Map<string, { accessToken: string; expiresAt: number }>();
+
+/**
+ * Calendar API 범위 액세스 토큰 — subjectEmail(선생님 본인의 @alton.education 계정)로
+ * DWD subject를 오버라이드한다(위 CALENDAR_SCOPE 주석 참고). Directory/Drive와 달리
+ * 여러 선생님을 대상으로 하므로 subject별로 별도 캐시한다.
+ */
+export async function getCalendarApiAccessToken(subjectEmail: string): Promise<string> {
+  assertNotPreview();
+  const now = Math.floor(Date.now() / 1000);
+  const cached = cachedCalendarTokensBySubject.get(subjectEmail);
+  if (cached && cached.expiresAt > now + 60) {
+    return cached.accessToken;
+  }
+
+  const impersonatedToken = await getImpersonatedAccessToken();
+  const signedJwt = await signDelegatedAdminJwt(impersonatedToken, CALENDAR_SCOPE, subjectEmail);
+
+  const res = await fetch(OAUTH_TOKEN_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
+      assertion: signedJwt,
+    }),
+  });
+  if (!res.ok) {
+    throw new Error(`Calendar API 토큰 교환 실패 (status ${res.status})`);
+  }
+  const data = (await res.json()) as { access_token: string; expires_in: number };
+  cachedCalendarTokensBySubject.set(subjectEmail, { accessToken: data.access_token, expiresAt: now + data.expires_in });
+  return data.access_token;
 }

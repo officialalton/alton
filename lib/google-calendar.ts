@@ -1,0 +1,158 @@
+import { getCalendarApiAccessToken } from "@/lib/google-workspace-auth";
+
+// R6 2/N — Google Calendar 이벤트 + 고유 Meet 링크 생성, FreeBusy 조회.
+//
+// 안전 게이트: DRIVE_ARTIFACTS_ALLOW_REAL_WRITES/WORKSPACE_PROVISIONING_ALLOW_REAL_CALLS와
+// 동일한 패턴 — CALENDAR_SYNC_ALLOW_REAL_CALLS가 정확히 "true"가 아니면 실제 Calendar API를
+// 절대 호출하지 않고 명시적으로 실패한다(스텁이 성공한 것처럼 보이지 않게).
+//
+// 설계: Supabase(reservations/sessions_v3)가 원본이고 Google Calendar 이벤트는 "실행용
+// 사본"이다(스펙 원문). 이 파일의 함수들은 순수 API 클라이언트 — 실패 시 예외를 던질 뿐
+// DB 상태를 직접 갱신하지 않는다. 호출부(lib/booking/*)가 성공/실패에 따라
+// reservations.google_sync_status를 갱신하고, 실패해도 예약·세션·수업권 hold 자체는
+// 되돌리지 않는다(어중간한 상태 방지 — DB가 원본이므로 Calendar 쪽만 재시도 대상).
+
+const CALENDAR_API = "https://www.googleapis.com/calendar/v3";
+
+function assertRealCallsAllowed(): void {
+  if (process.env.CALENDAR_SYNC_ALLOW_REAL_CALLS !== "true") {
+    throw new Error(
+      "not implemented: CALENDAR_SYNC_ALLOW_REAL_CALLS=true가 아니면 실제 Calendar API를 호출하지 않습니다."
+    );
+  }
+}
+
+async function calendarFetch(url: string, token: string, init?: RequestInit): Promise<Response> {
+  const res = await fetch(url, {
+    ...init,
+    headers: { ...(init?.headers ?? {}), Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`Calendar API 요청 실패 (status ${res.status}): ${text.slice(0, 300)}`);
+  }
+  return res;
+}
+
+type CalendarEventResult = {
+  googleEventId: string;
+  meetLink: string;
+};
+
+/**
+ * 확정된 예약 하나에 대해 선생님 캘린더에 이벤트 + 고유 Meet 링크를 생성한다.
+ * `conferenceData.createRequest.requestId`에 reservationId를 그대로 써서, 같은
+ * 예약으로 재시도해도 Google 쪽에서 새 Meet 링크가 중복 발급되지 않게 한다(Google
+ * API가 requestId 기준으로 자체 멱등 처리 — 공식 문서 명시 동작).
+ * `sendUpdates: "none"` — 이 R6 구현은 실제 알림 발송을 하지 않는다(스펙: "실제
+ * 이메일이나 메시지는 발송하지 말고 발송 대기 상태까지만 검증"). 참석자는 추가하지
+ * 않는다(ALTON 화면 접속이 원본, 학생/보호자에게 Google 초대 메일이 나가지 않도록).
+ */
+export async function createCalendarEventWithMeet(params: {
+  teacherWorkspaceEmail: string;
+  reservationId: string;
+  startsAt: Date;
+  endsAt: Date;
+  summary: string;
+  timezone: string;
+}): Promise<CalendarEventResult> {
+  assertRealCallsAllowed();
+  const token = await getCalendarApiAccessToken(params.teacherWorkspaceEmail);
+
+  const res = await calendarFetch(
+    `${CALENDAR_API}/calendars/primary/events?conferenceDataVersion=1&sendUpdates=none`,
+    token,
+    {
+      method: "POST",
+      body: JSON.stringify({
+        summary: params.summary,
+        start: { dateTime: params.startsAt.toISOString(), timeZone: params.timezone },
+        end: { dateTime: params.endsAt.toISOString(), timeZone: params.timezone },
+        conferenceData: {
+          createRequest: {
+            requestId: params.reservationId,
+            conferenceSolutionKey: { type: "hangoutsMeet" },
+          },
+        },
+      }),
+    }
+  );
+  const data = (await res.json()) as {
+    id: string;
+    conferenceData?: { entryPoints?: Array<{ entryPointType: string; uri: string }> };
+  };
+  const meetEntry = data.conferenceData?.entryPoints?.find((e) => e.entryPointType === "video");
+  if (!meetEntry) {
+    throw new Error("Calendar 이벤트는 생성됐지만 Meet 링크를 받지 못했습니다.");
+  }
+  return { googleEventId: data.id, meetLink: meetEntry.uri };
+}
+
+/** 재예약·선생님 변경 시 기존 이벤트 시간을 갱신한다(같은 googleEventId 유지). */
+export async function patchCalendarEventTime(params: {
+  teacherWorkspaceEmail: string;
+  googleEventId: string;
+  startsAt: Date;
+  endsAt: Date;
+  timezone: string;
+}): Promise<void> {
+  assertRealCallsAllowed();
+  const token = await getCalendarApiAccessToken(params.teacherWorkspaceEmail);
+  await calendarFetch(
+    `${CALENDAR_API}/calendars/primary/events/${params.googleEventId}?sendUpdates=none`,
+    token,
+    {
+      method: "PATCH",
+      body: JSON.stringify({
+        start: { dateTime: params.startsAt.toISOString(), timeZone: params.timezone },
+        end: { dateTime: params.endsAt.toISOString(), timeZone: params.timezone },
+      }),
+    }
+  );
+}
+
+/** 취소 시 기존 이벤트를 삭제한다. 이미 삭제된 이벤트(404/410)는 성공으로 취급한다(멱등). */
+export async function deleteCalendarEvent(params: {
+  teacherWorkspaceEmail: string;
+  googleEventId: string;
+}): Promise<void> {
+  assertRealCallsAllowed();
+  const token = await getCalendarApiAccessToken(params.teacherWorkspaceEmail);
+  const res = await fetch(
+    `${CALENDAR_API}/calendars/primary/events/${params.googleEventId}?sendUpdates=none`,
+    { method: "DELETE", headers: { Authorization: `Bearer ${token}` } }
+  );
+  if (!res.ok && res.status !== 404 && res.status !== 410) {
+    const text = await res.text();
+    throw new Error(`Calendar 이벤트 삭제 실패 (status ${res.status}): ${text.slice(0, 300)}`);
+  }
+}
+
+export type FreeBusyInterval = { start: string; end: string };
+
+/**
+ * 선생님 캘린더 기준 FreeBusy 조회 — 내부 DB 잠금(reservations_no_overlap exclusion +
+ * confirm_lesson_booking의 버퍼/가용성 재검증)과 "함께" 쓰는 이중 방어다(스펙 원문).
+ * 여기서 busy로 나와도 DB 잠금이 이미 주된 방어선이므로, 호출부는 이 결과를 예약을
+ * 하드 차단하는 용도(Google 쪽 일정과의 명백한 충돌 사전 경고)로만 쓴다.
+ */
+export async function queryFreeBusy(params: {
+  teacherWorkspaceEmail: string;
+  timeMin: Date;
+  timeMax: Date;
+}): Promise<FreeBusyInterval[]> {
+  assertRealCallsAllowed();
+  const token = await getCalendarApiAccessToken(params.teacherWorkspaceEmail);
+  const res = await calendarFetch(`${CALENDAR_API}/freeBusy`, token, {
+    method: "POST",
+    body: JSON.stringify({
+      timeMin: params.timeMin.toISOString(),
+      timeMax: params.timeMax.toISOString(),
+      items: [{ id: "primary" }],
+    }),
+  });
+  const data = (await res.json()) as {
+    calendars: Record<string, { busy: FreeBusyInterval[] }>;
+  };
+  return data.calendars.primary?.busy ?? [];
+}
