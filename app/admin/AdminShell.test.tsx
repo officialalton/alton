@@ -67,6 +67,16 @@ vi.mock("./consultation-actions", () => ({
   voidContractVersion: vi.fn(),
 }));
 
+vi.mock("./entitlement-actions", () => ({
+  createEntitlementProductVersion: vi.fn(),
+  discontinueEntitlementProductVersion: vi.fn(),
+  approveRefund: vi.fn(),
+  rejectRefund: vi.fn(),
+  extendEntitlementForCompanyOrTeacherCancellation: vi.fn(),
+  transferEntitlementBetweenChildren: vi.fn(),
+  adminLookupPurchaseDetail: vi.fn(),
+}));
+
 const dashboard: AdminDashboardData = {
   adminName: "관리자",
   pendingConsults: [],
@@ -100,10 +110,15 @@ const baseProps = {
   payouts: [],
   teacherCandidatesBySubject: {},
   workspaceProvisionings: [],
+  entitlementProducts: [],
+  entitlementProductVersions: [],
+  openPriceChangeNotices: [],
+  pendingRefundRequests: [],
+  purchasesNeedingReconciliation: [],
 };
 
 describe("AdminShell", () => {
-  it("사이드바 12개 항목을 보여주고, 기본 탭은 홈이다", () => {
+  it("사이드바 13개 항목을 보여주고, 기본 탭은 홈이다", () => {
     render(<AdminShell {...baseProps} />);
     [
       "홈",
@@ -111,6 +126,7 @@ describe("AdminShell", () => {
       "매칭",
       "상담",
       "커리큘럼",
+      "구 크레딧(레거시)",
       "수업권",
       "계약",
       "QC",
@@ -154,10 +170,16 @@ describe("AdminShell", () => {
     expect(screen.getByText("+ 과목 추가")).toBeInTheDocument();
   });
 
-  it("수업권 탭을 누르면 BillingTab이 렌더링된다", () => {
+  it("구 크레딧(레거시) 탭을 누르면 BillingTab이 렌더링된다", () => {
+    render(<AdminShell {...baseProps} />);
+    fireEvent.click(screen.getByText("구 크레딧(레거시)"));
+    expect(screen.getByText("학생별 수업권 현황")).toBeInTheDocument();
+  });
+
+  it("수업권 탭을 누르면 EntitlementLedgerTab이 렌더링된다", () => {
     render(<AdminShell {...baseProps} />);
     fireEvent.click(screen.getByText("수업권"));
-    expect(screen.getByText("학생별 수업권 현황")).toBeInTheDocument();
+    expect(screen.getByText("수업권 원장")).toBeInTheDocument();
   });
 
   it("개발 로그 탭을 누르면 DevLogTab이 tickets.md 내용을 렌더링한다", () => {

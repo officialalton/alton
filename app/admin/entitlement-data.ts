@@ -77,6 +77,28 @@ export async function loadPurchaseDetail(
   };
 }
 
+export type EntitlementProductListItem = {
+  id: string;
+  code: string;
+  quantity: number;
+};
+
+/** 상품 마스터(entitlement_products) 목록 — 가격 버전 생성 폼의 상품 선택지용. */
+export async function loadEntitlementProducts(
+  supabase: SupabaseClient
+): Promise<EntitlementProductListItem[]> {
+  const { data, error } = await supabase
+    .from("entitlement_products")
+    .select("id, code, quantity")
+    .order("code", { ascending: true });
+  if (error) throw new Error(error.message);
+  return (data ?? []).map((row) => ({
+    id: row.id,
+    code: row.code,
+    quantity: row.quantity,
+  }));
+}
+
 export type ProductVersionListItem = {
   id: string;
   entitlementProductId: string;

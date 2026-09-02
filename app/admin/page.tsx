@@ -24,6 +24,12 @@ import { loadDevLog } from "./dev-log-data";
 import { loadPayouts } from "./payouts-data";
 import { loadTeacherCandidatesBySubject } from "./matching-data";
 import { loadWorkspaceProvisionings } from "./workspace-data";
+import { loadEntitlementProducts, loadEntitlementProductVersions } from "./entitlement-data";
+import {
+  listOpenPriceChangeNotices,
+  listPendingRefundRequests,
+  listPurchasesNeedingReconciliation,
+} from "./entitlement-actions";
 import AdminShell from "./AdminShell";
 
 export default async function AdminHomePage({
@@ -57,6 +63,11 @@ export default async function AdminHomePage({
     payouts,
     teacherCandidatesBySubject,
     workspaceProvisionings,
+    entitlementProducts,
+    entitlementProductVersions,
+    openPriceChangeNotices,
+    pendingRefundRequests,
+    purchasesNeedingReconciliation,
   ] = await Promise.all([
     loadAdminDashboard(supabase, user.id),
     loadSubjectCatalog(supabase),
@@ -78,6 +89,11 @@ export default async function AdminHomePage({
     loadPayouts(supabase),
     loadTeacherCandidatesBySubject(supabase),
     loadWorkspaceProvisionings(supabase),
+    loadEntitlementProducts(supabase),
+    loadEntitlementProductVersions(supabase),
+    listOpenPriceChangeNotices(),
+    listPendingRefundRequests(),
+    listPurchasesNeedingReconciliation(),
   ]);
 
   const [creditHistoryEntries, qcWarningsEntries] = await Promise.all([
@@ -125,6 +141,11 @@ export default async function AdminHomePage({
       payouts={payouts}
       teacherCandidatesBySubject={teacherCandidatesBySubject}
       workspaceProvisionings={workspaceProvisionings}
+      entitlementProducts={entitlementProducts}
+      entitlementProductVersions={entitlementProductVersions}
+      openPriceChangeNotices={openPriceChangeNotices}
+      pendingRefundRequests={pendingRefundRequests}
+      purchasesNeedingReconciliation={purchasesNeedingReconciliation}
     />
   );
 }

@@ -2,6 +2,7 @@
 
 import { requireAdmin, requireAdminOrCapability } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
+import { loadPurchaseDetail, type PurchaseDetailItem } from "./entitlement-data";
 
 // R4 — entitlement_ledger(R1: hold/consume/release) + entitlement_ledger(R4:
 // refund/expire/extend/transfer/adjust) SQL 함수 위의 앱 레이어 서버 액션
@@ -449,7 +450,18 @@ export async function listOpenPriceChangeNotices(): Promise<
 }
 
 // =========================================================================
-// 8. 목록: 대기 중인 환불 요청 / 대사 필요 구매
+// 8. 관리자 구매 상세 조회 — entitlement-data.ts의 읽기 전용 로더를
+//    admin 클라이언트로 감싼 서버 액션(클라이언트 컴포넌트에서 직접 호출용).
+// =========================================================================
+
+export async function adminLookupPurchaseDetail(purchaseId: string): Promise<PurchaseDetailItem | null> {
+  await requireAdminOrCapability(PAYMENTS_CAPABILITY);
+  const admin = createAdminClient();
+  return loadPurchaseDetail(admin, purchaseId);
+}
+
+// =========================================================================
+// 9. 목록: 대기 중인 환불 요청 / 대사 필요 구매
 // =========================================================================
 
 export async function listPendingRefundRequests(): Promise<

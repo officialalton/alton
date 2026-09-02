@@ -29,6 +29,13 @@ import MatchingTab from "./MatchingTab";
 import type { MatchingTeacherCandidate } from "./matching-data";
 import WorkspaceTab from "./WorkspaceTab";
 import type { WorkspaceProvisioningItem } from "./workspace-data";
+import EntitlementLedgerTab from "./EntitlementLedgerTab";
+import type { EntitlementProductListItem, ProductVersionListItem } from "./entitlement-data";
+import type {
+  listOpenPriceChangeNotices,
+  listPendingRefundRequests,
+  listPurchasesNeedingReconciliation,
+} from "./entitlement-actions";
 import type { AdminSubject } from "./subject-data";
 import type { DocEditorData } from "./curriculum-doc-data";
 import type {
@@ -45,7 +52,8 @@ const NAV_ITEMS = [
   { id: "matching", label: "매칭", icon: "🔗" },
   { id: "consult", label: "상담", icon: "🗓" },
   { id: "catalog", label: "커리큘럼", icon: "📘" },
-  { id: "billing", label: "수업권", icon: "💳" },
+  { id: "billing", label: "구 크레딧(레거시)", icon: "💳" },
+  { id: "entitlements", label: "수업권", icon: "🎫" },
   { id: "contracts", label: "계약", icon: "📄" },
   { id: "qc", label: "QC", icon: "🛡" },
   { id: "payouts", label: "정산", icon: "💸" },
@@ -81,6 +89,11 @@ export default function AdminShell({
   payouts,
   teacherCandidatesBySubject,
   workspaceProvisionings,
+  entitlementProducts,
+  entitlementProductVersions,
+  openPriceChangeNotices,
+  pendingRefundRequests,
+  purchasesNeedingReconciliation,
   googleLinkError,
   googleLinkSuccess,
 }: {
@@ -110,6 +123,11 @@ export default function AdminShell({
   payouts: PayoutListItem[];
   teacherCandidatesBySubject: Record<string, MatchingTeacherCandidate[]>;
   workspaceProvisionings: WorkspaceProvisioningItem[];
+  entitlementProducts: EntitlementProductListItem[];
+  entitlementProductVersions: ProductVersionListItem[];
+  openPriceChangeNotices: Awaited<ReturnType<typeof listOpenPriceChangeNotices>>;
+  pendingRefundRequests: Awaited<ReturnType<typeof listPendingRefundRequests>>;
+  purchasesNeedingReconciliation: Awaited<ReturnType<typeof listPurchasesNeedingReconciliation>>;
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -210,6 +228,14 @@ export default function AdminShell({
             <BillingTab
               initialStudents={students}
               creditHistoryByStudent={creditHistoryByStudent}
+            />
+          ) : activeTab === "entitlements" ? (
+            <EntitlementLedgerTab
+              products={entitlementProducts}
+              productVersions={entitlementProductVersions}
+              openPriceChangeNotices={openPriceChangeNotices}
+              pendingRefundRequests={pendingRefundRequests}
+              purchasesNeedingReconciliation={purchasesNeedingReconciliation}
             />
           ) : activeTab === "contracts" ? (
             <ContractsTab contracts={familyContracts} acceptedProposals={acceptedProposalsForContract} />
