@@ -7,10 +7,12 @@ vi.mock("./booking-actions", () => ({
   listReconciliationNeededBookings: vi.fn(),
   retryCalendarSyncNow: vi.fn(),
   adminCancelLessonBooking: vi.fn(),
+  listNotificationOutboxSummary: vi.fn(),
 }));
 
 beforeEach(() => {
   vi.clearAllMocks();
+  vi.mocked(actions.listNotificationOutboxSummary).mockResolvedValue([]);
 });
 
 describe("BookingReconciliationPanel", () => {
@@ -67,5 +69,16 @@ describe("BookingReconciliationPanel", () => {
         reservationId: "r1", cancelledByRole: "company", reason: "Google 계정 문제로 취소",
       })
     );
+  });
+
+  it("알림 outbox 요약을 보여준다", async () => {
+    vi.mocked(actions.listReconciliationNeededBookings).mockResolvedValue([]);
+    vi.mocked(actions.listNotificationOutboxSummary).mockResolvedValue([
+      { notificationType: "reminder_24h", status: "pending", count: 5 },
+      { notificationType: "booking_cancelled", status: "cancelled", count: 2 },
+    ]);
+    render(<BookingReconciliationPanel />);
+    await waitFor(() => expect(screen.getByText(/24시간 전 리마인드/)).toBeInTheDocument());
+    expect(screen.getByText(/24시간 전 리마인드 · pending 5건/)).toBeInTheDocument();
   });
 });

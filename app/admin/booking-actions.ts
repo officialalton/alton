@@ -86,3 +86,33 @@ export async function retryCalendarSyncNow(): Promise<{
     reconciliationNeeded: result.reconciliationNeeded,
   };
 }
+
+export type NotificationOutboxSummary = {
+  notificationType: string;
+  status: string;
+  count: number;
+};
+
+/**
+ * R6 8/N — 알림 outbox 발송 대기 현황 요약(type × status 건수). 실제 발송 인프라가 없으므로
+ * "발송 대기 상태까지만 검증"하는 이 R6 범위에서는 sent가 항상 0이다 — 그 자체가 정상이다
+ * (R4에서 이미 등록된 정식 오픈 전 blocker, 실제 이메일 발송 미구현).
+ */
+export async function listNotificationOutboxSummary(): Promise<NotificationOutboxSummary[]> {
+  await requireAdminOrCapability(BOOKING_CAPABILITY);
+  const admin = createAdminClient();
+  const { data, error } = await admin
+    .from("booking_notification_outbox")
+    .select("notification_type, status");
+  if (error) throw new Error(error.message);
+
+  const counts = new Map<string, number>();
+  for (const row of data ?? []) {
+    const key = `${row.notification_type}::${row.status}`;
+    counts.set(key, (counts.get(key) ?? 0) + 1);
+  }
+  return Array.from(counts.entries()).map(([key, count]) => {
+    const [notificationType, status] = key.split("::");
+    return { notificationType, status, count };
+  });
+}

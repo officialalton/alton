@@ -8,7 +8,9 @@ import {
   listReconciliationNeededBookings,
   retryCalendarSyncNow,
   adminCancelLessonBooking,
+  listNotificationOutboxSummary,
   type ReconciliationRow,
+  type NotificationOutboxSummary,
 } from "./booking-actions";
 
 function formatDateTime(iso: string): string {
@@ -22,8 +24,16 @@ const STATUS_LABEL: Record<string, string> = {
   reconciliation_needed: "수동 확인 필요(재시도 한도 초과)",
 };
 
+const NOTIFICATION_TYPE_LABEL: Record<string, string> = {
+  booking_confirmed: "예약 확정 알림",
+  booking_cancelled: "예약 취소 알림",
+  reminder_24h: "24시간 전 리마인드",
+  reminder_2h: "2시간 전 리마인드",
+};
+
 export default function BookingReconciliationPanel() {
   const [rows, setRows] = useState<ReconciliationRow[] | null>(null);
+  const [outboxSummary, setOutboxSummary] = useState<NotificationOutboxSummary[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -34,7 +44,12 @@ export default function BookingReconciliationPanel() {
     setLoading(true);
     setError(null);
     try {
-      setRows(await listReconciliationNeededBookings());
+      const [reconciliation, outbox] = await Promise.all([
+        listReconciliationNeededBookings(),
+        listNotificationOutboxSummary(),
+      ]);
+      setRows(reconciliation);
+      setOutboxSummary(outbox);
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
@@ -99,6 +114,26 @@ export default function BookingReconciliationPanel() {
 
       {message && <div className="mb-4 text-[13px] font-semibold text-ink bg-green/10 rounded-lg px-4 py-3">{message}</div>}
       {error && <div className="mb-4 text-[13px] font-semibold text-red bg-red/5 rounded-lg px-4 py-3">{error}</div>}
+
+      {outboxSummary && outboxSummary.length > 0 && (
+        <div className="mb-6">
+          <h2 className="text-[14px] font-bold text-ink mb-2">알림 발송 대기 현황</h2>
+          <p className="text-[12px] text-grey-500 mb-2">
+            실제 이메일·메시지 발송 인프라는 아직 없습니다(정식 오픈 전 필수 작업으로 별도 등록됨) — 아래는
+            "발송 대기(pending)" 상태까지만 표시합니다.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {outboxSummary.map((s) => (
+              <span
+                key={`${s.notificationType}-${s.status}`}
+                className="text-[12px] font-semibold px-2.5 py-1 rounded-full bg-grey-100 text-grey-500"
+              >
+                {NOTIFICATION_TYPE_LABEL[s.notificationType] ?? s.notificationType} · {s.status} {s.count}건
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
 
       {loading && !rows ? (
         <div className="text-[13px] text-grey-500">불러오는 중…</div>
