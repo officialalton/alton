@@ -201,20 +201,61 @@ G1: 같은 데이터로 잔여 수업권·현재 선생님·과거 정산을 언
 - [x] 결제 실패·중복 웹훅·차지백 재처리 — 결제 실패·중복 웹훅(멱등성)은 실측 검증 통과. **차지백(`charge.dispute.created`/`.updated`/`.closed`) 처리 버그 수정(2026-09-01 후속)**: `purchases.status`를 무효 enum 값(`'disputed'`)으로 갱신하려던 코드를 제거하고, 신규 `payment_disputes` 테이블(`20260924000000_r4_payment_disputes.sql`)을 분쟁 전용 소스오브트루스로 upsert(`stripe_dispute_id` 유니크, idempotent). 분쟁 생성은 `entitlement_ledger`를 건드리지 않음(자동 회수 없음, 정책 확정). 관리자 대사 화면·보호자 영수증에 분쟁 상태 노출 추가. Vitest 8건 + Playwright(`e2e/r4-webhook-dispute.spec.ts`) 4건으로 검증.
 - [x] 부모 결제 영수증과 자녀별 사용 내역
 
-## R5 — 과목 수강·선생님 배정
+## R5 — 과목 수강·선생님 배정 (진행 중, 2026-09-02)
 
-- [ ] 계약·결제 완료 후 자녀별 과목 수강 활성화
-- [ ] 한 자녀의 복수 과목 추가
-- [ ] 과목별 planned/active/paused/completed/terminated
-- [ ] 선생님 과목 자격과 커리큘럼 보유 여부 분리
-- [ ] 체험 선생님 정규 승계
-- [ ] 자녀·과목별 선생님 변경과 이력
-- [ ] 적용일 지정, 변경 사유, 관리자 기록
-- [ ] 완료 수업·정산·리뷰·채팅 아카이브 보존
-- [ ] 확정 미래 예약 취소 대상 표시와 새 예약 안내
-- [ ] 커리큘럼 진도와 문서 권한 인계
-- [ ] 선생님 휴가·장기 부재 시 과목 단위 배정 변경(단일 수업 취소의 즉시 대체 아님)
-- [ ] **(R1에서 DB 레벨 강제 완료, 이 단계 서버 액션·화면에서 재확인)** 선생님 배정 서버 액션은 `teacher_assignments` INSERT 전에 유효한 현재 시급 이력이 있는지 사전 확인해 사용자에게 명확한 안내 메시지를 보여준다 — 시급 미설정 상태로 배정을 시도하면 DB 트리거(`teacher_assignments_enforce_rate`)가 최종적으로 막지만, 그 원시 오류를 그대로 노출하지 않고 "이 선생님은 아직 시급이 설정되지 않아 배정할 수 없습니다. 시급을 먼저 설정하세요" 같은 안내로 감싼다. R2 선생님 온보딩 화면에서도 active 전환 버튼을 누르기 전에 같은 사전 확인을 적용한다.
+`subject_enrollments`/`teacher_assignments` 테이블·겹침방지 exclusion·시급강제 트리거·RLS는
+R1(`20260830020000`, `20260830100000`, `20260830080000`)에서 이미 구현돼 있었다. 이번 세션은
+그 위의 앱 레이어(활성화 선행조건, 승계 판정, 원자적 변경, 스레드, 문서권한 큐, 관리자
+서버액션/UI, DB 레벨 테스트)를 추가했다 — 상세는 `docs/2026-09-02-r5-migration-execution-log.md`.
+
+- [x] 계약·결제 완료 후 자녀별 과목 수강 활성화 — `subject_enrollment_activation_ready()` +
+      `subject_enrollments_enforce_activation` 트리거(fail closed), 관리자 UI에서 사전 확인 후 안내.
+- [x] 한 자녀의 복수 과목 추가 — 과목별 독립 `subject_enrollments` 행(R1 unique index가 과목당
+      동시 active/paused 1개만 보장, 서로 다른 과목은 무제한).
+- [x] 과목별 planned/active/paused/completed/terminated — `v3_subject_enrollment_status`(R1).
+- [x] 선생님 과목 자격과 커리큘럼 보유 여부 분리 — `trial_teacher_succession_eligibility()`가
+      `has_subject_qualification`/`has_curriculum`을 독립 컬럼으로 반환, 커리큘럼 미보유가 자격을
+      막지 않음을 DB 테스트로 검증.
+- [x] 체험 선생님 정규 승계(자격 판정) — `decideTrialTeacherSuccessionProposal()`(순수 로직) +
+      관리자 UI 사전 확인. 다만 "체험→정규 자동 승계 제안" UI 흐름 자체(체험 세션과의 연결)는
+      미완료 — 아래 미완료 참고.
+- [x] 자녀·과목별 선생님 변경과 이력 — `change_teacher_assignment()`(단일 트랜잭션), 관리자 UI
+      이력 조회.
+- [x] 적용일 지정, 변경 사유, 관리자 기록 — `change_teacher_assignment(p_effective_from, p_reason,
+      p_changed_by)`.
+- [x] 완료 수업·정산·리뷰·채팅 아카이브 보존 — teacher_assignments/sessions_v3/payout 등은 UPDATE
+      대상이 아니라 새 행만 추가(불변 확인), `subject_threads`는 archive만 하고 과거 메시지는 그대로.
+- [x] 확정 미래 예약 취소 대상 표시와 새 예약 안내 — `listFutureBookingImpact()`(읽기 전용, 실제
+      취소/이전은 하지 않음), 관리자 UI에 안내 문구.
+- [ ] 커리큘럼 진도와 문서 권한 인계 — `teacher_assignments.curriculum_handoff_status` placeholder
+      컬럼(not_applicable/pending)만 마련, 실제 인계 화면·절차는 R9. `document_permission_retries`
+      큐 + `lib/documents/permission-retry-worker.ts` stub(claim/재시도/manual_review 전이 로직은
+      구현, 실제 Drive ACL 호출은 R8에서 stub 본문만 교체).
+- [x] 선생님 휴가·장기 부재 시 과목 단위 배정 변경(단일 수업 취소의 즉시 대체 아님) —
+      `change_teacher_assignment()`를 그대로 재사용(별도 대체 기능 없음, DB 테스트로 검증).
+- [x] **(R1에서 DB 레벨 강제 완료, 이 단계 서버 액션·화면에서 재확인)** 선생님 배정 서버 액션
+      사전 확인 — `assignTeacherToSubjectEnrollment()`/`changeTeacherAssignment()` 모두
+      `has_valid_current_teacher_rate()`를 먼저 확인해 원시 DB 에러 대신 안내 메시지 표시.
+      **R2 기존 "선생님 active 전환" 흐름 재사용은 미완료** — 아래 미완료 참고.
+
+### R5 미완료(다음 세션)
+
+- 관리자 UI는 기존 "매칭" 탭에 `SubjectEnrollmentPanel`로 통합했으나 학생 검색이 버튼 나열
+  방식으로 단순함(학생 다수 시 UX 개선 필요), 체험→정규 "제안" 자체를 트리거하는 전용 버튼
+  UI는 없음(수동으로 배정 폼 사용).
+- 학생/보호자/선생님 role 화면(현재 과목별 수강 상태·현재 선생님·예정 변경일, 선생님의
+  현재 배정 학생/과목 목록)은 아직 구현하지 않음 — RLS는 이미 열려 있음(R1), 화면만 없음.
+- R2 선생님 온보딩 화면(active 전환 버튼)이 이 세션에서 만든 사전 확인 로직
+  (`lib/enrollment/subject-enrollment-decision.ts`의 시급 메시지)을 재사용하도록 리팩터링하지
+  않음 — 현재도 DB 트리거가 최종 방어선 역할은 하고 있어 안전하지만, spec의 "중복 구현 금지"
+  요구를 완전히 충족하지 못함.
+- Playwright E2E는 DB 레벨 검증(`e2e/r5-subject-enrollment-teacher-assignment.spec.ts`, 8건)만
+  있고, spec이 요구한 "관리자 UI 클릭으로 전체 흐름(생성→활성화→배정→변경)을 완주하고 학생/
+  보호자/선생님 화면에서 결과를 확인하는" 브라우저 기반 role E2E는 아직 작성하지 못함(role
+  화면 자체가 없어 작성 불가 — 위 항목과 연결).
+- 동시-변경/재시도 멱등성(concurrent-change idempotency) 전용 테스트는 없음 — `change_teacher_assignment()`의
+  행 잠금(`for update`)으로 설계상 직렬화되지만 별도 동시성 테스트로 실측 검증하지 않음.
+- Vercel Preview 배포+검증은 이번 세션에서 수행하지 않음(R5는 로컬+원격 개발 DB 검증까지만).
 
 ## R6 — 자체 예약·Google Calendar·Meet
 
