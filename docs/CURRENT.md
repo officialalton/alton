@@ -8,7 +8,8 @@
 - **R1** — 데이터 기반 재설계, 완료.
 - **R2** — 계정·가족·권한 수명주기, **완료(2026-09-01)**. Task 1~9 전부 완료. 상세는 실행 로그 참고.
 - **R3** — 상담·체험·제안·계약, **완료(2026-09-01)**. 백엔드·계약모델·관리자 UI·로컬 E2E·Drive 실측(업로드·file ID·멱등·재시도)·DocuSign 웹훅 실배달(HMAC 검증·payload 파싱·DB 반영·idempotency) 전부 실측 검증 완료. 상세는 실행 로그 참고.
-- **R4** — 수업권·결제 원장(entitlement ledger + payments), **완료(2026-09-01)**. 스키마(`purchases`/`payment_attempts`/`entitlement_products`/`entitlement_product_versions`/`entitlement_grants`/`entitlement_ledger`/`payment_disputes`), Stripe checkout+웹훅, 관리자 수업권 원장 UI(상품·공지·환불·정산·이전·분쟁 대사), 보호자 구매 UI(체크아웃·영수증·잔액·분쟁 상태), 관리자 Google 로그인(선생님 흐름과 완전 분리), 계약 활성화 재시도 UI 전부 구현·단위/E2E 테스트 통과. 실제 Stripe TEST 모드 API로 성공/거절/환불/웹훅 중복배달 검증 완료. **(2026-09-01 후속) `charge.dispute.created` 처리가 `purchases.status`를 무효 enum 값(`'disputed'`)으로 조용히 no-op시키던 버그를 수정** — `payment_disputes` 신규 테이블(`20260924000000_r4_payment_disputes.sql`)을 분쟁 전용 소스오브트루스로 두고, `purchases.status`는 절대 건드리지 않도록 변경. 상세는 실행 로그 참고.
+- **R4** — 수업권·결제 원장(entitlement ledger + payments), **완료(2026-09-01)**. 스키마(`purchases`/`payment_attempts`/`entitlement_products`/`entitlement_product_versions`/`entitlement_grants`/`entitlement_ledger`/`payment_disputes`), Stripe checkout+웹훅, 관리자 수업권 원장 UI(상품·공지·환불·정산·이전·분쟁 대사), 보호자 구매 UI(체크아웃·영수증·잔액·분쟁 상태), 관리자 Google 로그인(선생님 흐름과 완전 분리, 2026-09-02 실사람 검증 완료), 계약 활성화 재시도 UI 전부 구현·단위/E2E 테스트 통과. 실제 Stripe TEST 모드 API로 성공/거절/환불/웹훅 중복배달 검증 완료. `charge.dispute.created`이 `purchases.status`를 무효 enum 값으로 no-op시키던 버그는 `payment_disputes` 신규 테이블(`20260924000000_r4_payment_disputes.sql`)을 분쟁 전용 소스오브트루스로 둬 해결. 상세는 R4 실행 로그 참고.
+- **R5** — 과목 수강·선생님 배정, **진행 중(2026-09-02)**. `subject_enrollments`/`teacher_assignments`(테이블·겹침방지 exclusion·시급강제 트리거·RLS)는 R1(`20260830020000`, `20260830100000`, `20260830080000`)에서 이미 구현돼 있었음을 확인. 이번 세션에서 그 위에 앱 레이어를 추가: 활성화 선행조건(계약 active + 결제완료 entitlement) DB 함수+트리거, 체험→정규 승계 자격 판정 함수(자격/커리큘럼/시급 독립 판정), `change_teacher_assignment()` 원자적 선생님 변경(종료+생성+스레드 archive/생성+문서권한 재처리 큐 등록 단일 트랜잭션), `subject_threads`/`subject_thread_messages`(과목별 채팅), `document_permission_retries`(R8 전 Drive 호출 stub 큐), 관리자 서버 액션(`app/admin/subject-enrollment-actions.ts`), 순수 판단 로직(`lib/enrollment/subject-enrollment-decision.ts`). 관리자/역할별 UI, 전체 E2E 흐름은 미완료 — 상세는 R5 실행 로그(`docs/2026-09-02-r5-migration-execution-log.md`) 참고.
 
 ## 스키마·외부 서비스 현재 구조
 
@@ -27,7 +28,7 @@
 
 ## 최신 마이그레이션
 
-`supabase/migrations/20260924000000_r4_payment_disputes.sql` (로컬 개발 DB `supabase db reset --local`로 적용 완료). R4 마이그레이션(`20260921000000_r2_admin_google_link.sql` 관리자 Google 연결, `20260922000000_r4_purchase_and_payment.sql` 구매/결제 스키마, `20260923000000_r4_purchase_receipts_lesson_type.sql`, `20260924000000_r4_payment_disputes.sql` 분쟁 테이블+`purchase_receipts` 뷰 보강) 포함. R3까지는 `supabase/migrations/20260916000000_r3_trial_goal_and_classification_tags.sql`(원격 = `worpsqwqgnspddnrtnvq.supabase.co`)까지 적용됨 — R4 마이그레이션의 원격 반영 여부는 별도 확인 필요(이번 세션은 로컬 DB에서만 검증).
+`supabase/migrations/20260925010000_r5_subject_thread_auto_create.sql`(로컬 개발 DB `supabase db reset --local`로 적용 완료). R5 마이그레이션: `20260925000000_r5_subject_enrollment_teacher_assignment.sql`(활성화 선행조건 함수+트리거, 승계 자격 함수, `change_teacher_assignment()` 원자적 처리, `subject_threads`/`subject_thread_messages`, `document_permission_retries`, `teacher_assignments.curriculum_handoff_status` placeholder), `20260925010000_r5_subject_thread_auto_create.sql`(스레드 자동생성을 트리거로 옮기고 archive 순서 버그 수정). R4까지(`20260924000000_r4_payment_disputes.sql`까지)는 `npx supabase migration list --linked`로 원격(`worpsqwqgnspddnrtnvq.supabase.co`) 반영 확인됨(2026-09-01) — R5 두 마이그레이션의 원격 반영 여부는 이 세션 마지막 단계 참고.
 
 ## R3 계약/DocuSign 구조 (2026-09-01 확정)
 
@@ -52,8 +53,8 @@
 - Gate C 이관 3건(GW-10/12/14, R8/R9/R12 인수 기준) — 여전히 해당 R에서 반드시 통과.
 - **(R4, 정식 오픈 전 blocker)** 실제 세금 계산 서비스 미구현 — `purchases.tax_minor`는 현재 0/수동값으로만 채워짐, 실제 tax 서비스 연동 필요.
 - **(R4, 정식 오픈 전 blocker)** 실제 이메일 발송 미구현 — 가격 변경 공지 등은 `outbox` 테이블에 쌓이기만 하고 실제 발송(SMTP/이메일 서비스 연동)까지는 안 감.
-- **(R4, 2026-09-01)** Vercel Preview 배포는 1회 실행해 리치(login 페이지 200, 관리자 Google 로그인 버튼 HTML에 존재)까지 확인했으나, Preview가 Vercel Deployment Protection(SSO)으로 막혀 있어 Playwright/브라우저로 실제 로그인·구매 플로우까지는 실행하지 못함(우회 토큰을 `vercel curl`에만 사용, 이를 Playwright 설정에 심어 인증 플로우를 자동화하지는 않음). 상세는 실행 로그 참고.
-- **(R4, 2026-09-01)** 관리자 Google 로그인 버튼의 실제 클릭→Google 리디렉션까지는 이번 세션 브라우저 자동화로 완주하지 못함(로컬 dev 서버에서 버튼 클릭이 등록되지 않음 — 도구/네트워크 제약으로 추정, 재현 원인 미확정). 소스 코드(`app/admin/google-link-actions.ts`의 `signInWithGoogleForAdmin`)와 기존 콜백 테스트 커버리지로 로직은 확인함 — 실제 사람이 브라우저로 완주하는 검증은 별도 필요.
+- **(R4, 2026-09-01, 해결)** Vercel Preview Deployment Protection(SSO)으로 자동화 도구가 막혀 있던 문제는 제품 오너가 직접 브라우저로 로그인해 우회 — 2026-09-02 관리자 Google 로그인 실사람 검증(위 항목)에 사용.
+- **(R4, 2026-09-01, 해결 — 2026-09-02 실사람 검증 완료)** 관리자 Google 로그인: 원인은 `NEXT_PUBLIC_SITE_URL`을 리디렉션 기준으로 쓰던 것이 실제 요청 origin과 달라 콜백이 어긋나던 버그(`039068b`/`a0645ce`로 수정, request origin 기준으로 전환) + Supabase 원격 프로젝트의 "manual linking" 인증 설정이 꺼져 있었던 것(대시보드에서 제품 오너가 직접 켜 영구 반영 완료, 되돌리지 않음) 두 가지였다. 2026-09-02 제품 오너가 실제 Vercel Preview 배포에서 브라우저로 관리자 Google 로그인 전체 흐름을 완주해 검증 완료 — 기존 Google identity(`google_sub=111086046953656987120`)가 관리자 프로필(`b2a34464-f8b1-4605-89cd-e3e56de44c67`)의 `admin_google_identities`에 정상 연결됨을 확인. **관리자 Google 로그인 항목 완전히 완료.**
 
 ## 다음 R 착수 시 읽을 문서
 
