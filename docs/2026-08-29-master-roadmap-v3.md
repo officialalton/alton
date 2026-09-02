@@ -278,7 +278,7 @@ R5는 위 항목 전부 완료로 종료한다. 남은 항목(관리자 학생 �
 - [x] 양쪽 timezone과 DST **(2026-09-02, R6 1/N·6/N)** `is_teacher_slot_open()`/`lib/booking/slot-search.ts`가 Postgres `AT TIME ZONE`/`Intl.DateTimeFormat`(둘 다 내장 tzdata, DST 자동 반영)에 위임 — 별도 수동 오프셋 계산 없음, 실제 2026년 미국 DST 전환일 전후로 오프셋이 정확히 바뀌는지 테스트로 확인. 브라우저 최초 timezone 제안 UI(R6 6/N, `LessonBookingTab.tsx` 배너) 완료 — 실제 브라우저로 클릭 검증까지 마침.
 - [x] Google 실패 보상·재처리·정기 대조 **(2026-09-02, R6 2/N)** `lib/booking/calendar-sync.ts`(R3 drive-artifacts와 동일한 낙관적 잠금 재처리 패턴, 실패해도 예약·세션·hold는 절대 건드리지 않음, 5회 초과 시 `reconciliation_needed`).
 - [x] 주간 고정 시간 최대 8회와 회차별 수업권 hold **(2026-09-02, R6 4/N)** `create_weekly_lesson_series()` — 각 회차 독립 hold, 수업권 부족 시 가능한 회차까지만 생성.
-- [ ] 수업 24시간·2시간 전 리마인드 — 8/N(알림 outbox)에서 진행 예정.
+- [x] 수업 24시간·2시간 전 리마인드 **(2026-09-02, R6 8/N)** `booking_notification_outbox`(그린필드) + `schedule_reservation_notifications()`/`cancel_reservation_notifications()`. 자녀 본인+household guardian 전원에게 스케줄, 실제 발송 인프라는 없음(status는 pending/cancelled까지만) — R4에 이미 등록된 정식 오픈 전 blocker와 일관.
 
 ### R6 레거시 제거 — Calendly·Zoom 완전 삭제 (2026-08-30 확정)
 

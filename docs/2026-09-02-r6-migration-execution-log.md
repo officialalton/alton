@@ -282,9 +282,39 @@ Google Workspace Events API 구독이 필요해 Sandbox 승인 이후로 남긴�
 
 전체 Vitest 706건·tsc 클린. 원격 dev DB 반영 완료.
 
+## 8/N — 알림 outbox: 24h/2h 리마인드 + 예약확정/취소 알림 (완료, 2026-09-02)
+
+마이그레이션: `supabase/migrations/20261002000000_r6_notification_outbox.sql`. 그린필드 —
+기존 `notifications`(R0)는 in-app 표시 전용이라 스케줄 개념이 없어 재사용 불가, 새 테이블
+`booking_notification_outbox`를 만들었다.
+
+구현:
+- `schedule_reservation_notifications(p_reservation_id)` — 예약 확정 시 수신자(자녀 본인 +
+  그 household의 guardian 전원)마다 `booking_confirmed`(즉시)·`reminder_24h`·`reminder_2h`
+  3종을 스케줄. 이미 지난 시각(예: 관리자 24시간 이내 override 예약의 24시간 전 리마인드)은
+  애초에 만들지 않음. 동시에 기존 R0 `notifications` 테이블에도 즉시 인앱 표시용 행을 삽입
+  (스펙의 "인앱 표시" 요구).
+- `cancel_reservation_notifications(p_reservation_id)` — 아직 미발송(pending) 리마인드를
+  `cancelled`로 전환하고 `booking_cancelled` 알림을 새로 스케줄.
+- `confirm_lesson_booking()`/`cancel_lesson_booking()`을 각각 한 줄(`perform schedule_...`/
+  `perform cancel_...`)만 추가해 재정의 — 나머지 로직은 7/N과 동일.
+- 실제 이메일·메시지 발송 인프라는 만들지 않는다(스펙 원문 "실제 이메일이나 메시지는
+  발송하지 말고 발송 대기 상태까지만 검증" — R4에서 이미 등록된 정식 오픈 전 blocker와
+  일관). `status`는 이번 R에서 `pending`/`cancelled`까지만 실제로 쓰임.
+- 관리자 화면(`BookingReconciliationPanel.tsx`)에 알림 유형×상태별 건수 요약 섹션 추가.
+
+**검증 중 발견·수정한 실제 버그**: 알림 삽입 서브쿼리가 수신자 컬럼을 `v_recipient`로
+alias했는데, 이 이름이 바깥 PL/pgSQL 반복문 변수 `v_recipient`와 겹쳐 "column reference
+v_recipient is ambiguous" 에러가 실제로 발생 — 서브쿼리 alias를 `notify_id`로 변경해 해결.
+
+스모크 테스트(자녀 1명 + 보호자 2명 세대)로 실측: 예약 확정 시 outbox 9행(수신자3×유형3)·
+인앱 알림 2행(질의한 2명 기준) 생성 확인, 취소 시 미발송 리마인드 6행(수신자3×리마인드2종)이
+정확히 `cancelled`로 전환되고 `booking_cancelled` pending 3행(수신자3)이 새로 생성됨을 확인.
+
+전체 Vitest 707건·tsc 클린. 원격 dev DB 반영 완료.
+
 ## 다음 (미완료)
 
-- 8/N: 알림 outbox(24h/2h 리마인드 + 예약/취소 직후 알림, 그린필드) + 관리자 불일치 재처리 화면.
 - 9/N: Calendly/Zoom 제거(신규 흐름 로컬 E2E 통과 후에만).
 - Google Sandbox 외부 호출 승인 요청(FreeBusy/Calendar/Meet 실제 생성·Workspace Events 구독 등)은
   로컬·mock 검증이 전부 끝난 뒤 한 번에 묶어 별도로 제출 예정 — 아직 제출 전.
