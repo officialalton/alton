@@ -193,11 +193,59 @@ release + 만료일이 취소 시점+30일로 정확히 연장됨(연장 전 10�
 거부. `reservation_cancellations` 3행 생성 확인. Security advisor 재확인 — 신규 테이블 2개 모두
 RLS 활성화·정책 존재, 경고 없음. 전체 Vitest 668건·tsc 클린 재확인. 원격 dev DB 반영 완료.
 
+## 6/N — 예약 서버 액션·UI(보호자·학생·선생님·관리자) (완료, 2026-09-02)
+
+신규 파일: `lib/booking/slot-search.ts`(+test), `lib/booking/authorization.ts`,
+`lib/booking/query-slots.ts`, `lib/booking/create-booking.ts`(+test),
+`app/parent/booking-actions.ts`(+test, 리팩터링), `app/student/booking-actions.ts`(+test),
+`app/student/lesson-booking-data.ts`, `app/student/LessonBookingTab.tsx`,
+`app/teacher/availability-actions.ts`(+test, 5/N 서버 액션 — 실제로는 4/N 직후 작성),
+`app/teacher/TeacherAvailabilityTab.tsx`, `app/admin/booking-actions.ts`(+test),
+`app/admin/BookingReconciliationPanel.tsx`(+test).
+
+구현:
+- `lib/booking/slot-search.ts`: 순수 함수 슬롯 후보 계산기 — DB 접근 없이 규칙·예외·기존
+  예약·버퍼·24h~8주 window(관리자 override 포함)를 전부 반영. 최종 권위는 항상
+  `confirm_lesson_booking()`에 있음을 주석에 명시(경쟁 상태로 후보가 서버 판정과 어긋나도
+  이중예약은 발생하지 않음). 시간대/DST는 Postgres `AT TIME ZONE`과 동일하게
+  `Intl.DateTimeFormat` 2-pass 기법으로 처리(별도 라이브러리 없음) — 2026년 실제 미국
+  DST 전환일(3/8) 전후로 PST/PDT 오프셋이 실제로 다르게 변환되는지 테스트로 검증.
+- `lib/booking/authorization.ts`: `assertGuardianOfChild`/`assertActiveTeacherAssignment`를
+  공유 모듈로 추출(원래 parent/booking-actions.ts에 있던 걸 student도 재사용하도록 분리)하는
+  과정에서 **실제 권한 우회 취약점을 발견**했다 — 취소 액션들이 "이 childId가 내 가족인지"만
+  확인하고 "그 reservationId가 정말 그 childId 것인지"는 검증하지 않아, reservationId를
+  다른 가족 것으로 바꿔치기하면 childId 소유권 검사만 통과해 남의 예약을 취소할 수 있는
+  구조였다. `assertReservationBelongsToChild()`를 추가해 parent/student 양쪽 취소 경로에
+  배선하고 회귀 테스트 추가.
+- 학생/보호자 예약 UI(`LessonBookingTab.tsx`, 두 포털이 공유): 과목·선생님 선택 → 슬롯 후보
+  날짜별 그룹 표시 → 1회/주1회반복(최대8회) 토글 → 예약 → 예정된 수업 목록(취소·Meet 링크·
+  Calendar 동기화 상태 배지). 브라우저 감지 timezone과 계정 timezone이 다르면 배너로 제안,
+  적용 시 `updateMyTimezone`/`updateChildTimezone`이 `profiles.timezone` 갱신(R2 §4.21에서
+  "R6까지 의도적 보류"로 남겨뒀던 항목).
+- 선생님 반복가능시간 관리(`TeacherAvailabilityTab.tsx`): TeacherShell에 원래 선언만 되고
+  렌더 분기가 없던 빈 "일정" 탭 슬롯을 채움. 규칙 추가/삭제, 날짜별 예외(휴무/임시오픈) 등록.
+- 관리자(`BookingReconciliationPanel.tsx`): `reconciliation_needed`/`failed` 예약 목록,
+  수동 "지금 재처리" 트리거(`processPendingCalendarSyncs()` 재호출), 회사 귀책 취소.
+
+**실제 로컬 브라우저 검증(Playwright 아님, 개발 서버+MCP 브라우저로 직접 클릭)**: 로컬
+dev DB에 실제 fixture(계약·subject_enrollment·active teacher_assignment·수업권 10장·선생님
+가용시간)를 만들고 보호자 계정으로 로그인해 슬롯 목록 렌더 확인 → 1회 예약 확정(수업권
+10→9, 슬롯에서 사라짐, "예정된 수업"에 표시) → 주1회 반복 8회 예약(9/3~10/22 매주 목요일
+전부 생성 확인) → 취소(수업권 원복, 슬롯 재오픈 확인) 전부 실측 성공. 선생님 계정으로
+로그인해 가용시간 규칙 표시 확인 + 새 날짜별 예외 등록 → psql로 실제 DB row 생성 확인.
+관리자 계정으로 로그인해 예약 운영 화면 진입 → "지금 재처리" 클릭 → 8건이 실제로
+`workspace_email이 아직 없습니다` 에러로 실패 처리되고 재시도 카운트가 올라가는 것을
+화면에서 확인(테스트 선생님 fixture에 workspace_email이 없어 실제 실패 케이스 자연 재현).
+
+**검증 중 발견·수정한 실제 버그 2건**: (1) 예약 확정/취소 후 "예정된 수업" 목록이 자동
+갱신되지 않던 문제 — `router.refresh()`+슬롯 재조회 추가. (2) `window.prompt()`가 이
+브라우저 자동화 환경(및 일부 실제 브라우저 정책)에서 안정적으로 동작하지 않아 취소
+플로우가 막히는 문제 — 학생/보호자·관리자 양쪽 취소 폼을 인라인 입력+확인 버튼으로 교체.
+
+전체 Vitest 704건·tsc 클린. 로컬 fixture는 검증 후 `supabase db reset --local`로 정리.
+
 ## 다음 (미완료)
 
-- 6/N: 예약 서버 액션 계층(`app/booking/*-actions.ts` — 위 SQL 함수들을 실제로 호출, 슬롯 조회
-  알고리즘, 취소 액션), 보호자·학생 예약 UI, 선생님 반복가능시간 관리 UI, 관리자 일정·불일치
-  재처리 화면. 브라우저 최초 timezone 제안 UI(`lib/timezone.ts` 재사용).
 - 7/N: AI 회의록/Smart Notes 동의 게이트(신규 정책 테이블, `guardian_consents` 패턴 재사용,
   Gate C 기존 증거 인용 — 재검증하지 않음) + Meet 대조 배선(스키마는 5/N에서 이미 준비).
 - 8/N: 알림 outbox(24h/2h 리마인드 + 예약/취소 직후 알림, 그린필드) + 관리자 불일치 재처리 화면.

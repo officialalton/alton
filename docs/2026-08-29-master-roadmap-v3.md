@@ -271,11 +271,11 @@ R5는 위 항목 전부 완료로 종료한다. 남은 항목(관리자 학생 �
 - [ ] 녹화 OFF 상태에서 Smart Notes 화면 스크린샷 미생성 실측 검증 — Gate C에서 이미 검증된 기존 증거 인용 예정(7/N), 재실험하지 않음.
 - [ ] 보호자 AI 회의록 거부 시 세션별 Smart Notes 비활성화 — 7/N에서 진행 예정.
 - [ ] SmartNote 생성 이벤트·Meet API 대조·세션 연결 — `session_access_events`/`session_incident_reports` 스키마는 R6 5/N에서 준비 완료(google_meet_api/alton_client source 분리), 실제 Smart Notes 대조 배선은 7/N.
-- [x] 취소 이력 보존(기존 예약을 덮어쓰지 않고 취소 이력 남긴 뒤 별도 새 예약) **(2026-09-02, R6 5/N)** `cancel_lesson_booking()` + `reservation_cancellations`. 지각·노쇼는 **R6에서는 "신고"와 원본 접속기록 수집까지만**(수업권 최종 소진·출석 확정·정산 판정은 R7 범위로 명시 이관, 2026-09-02 사용자 지시) — `session_incident_reports`(신고 로그) 스키마 완료, 신고 제출 UI는 6/N.
-- [x] 선생님 취소 시 예약·수업권 hold 해제 후 학생의 일반 새 예약 흐름 **(2026-09-02, R6 5/N)** `cancel_lesson_booking()`이 선생님/회사 취소 시 항상 release + 만료 30일 미만이면 30일로 연장(스모크 테스트로 실측 확인). 대체 선생님·우선 재예약 기능은 의도적으로 만들지 않음(스펙 원문). 재예약 UI는 6/N.
+- [x] 취소 이력 보존(기존 예약을 덮어쓰지 않고 취소 이력 남긴 뒤 별도 새 예약) **(2026-09-02, R6 5/N·6/N)** `cancel_lesson_booking()` + `reservation_cancellations`, 실제 취소 UI(`LessonBookingTab.tsx`/`BookingReconciliationPanel.tsx`)까지 실브라우저 검증 완료. 지각·노쇼는 **R6에서는 "신고"와 원본 접속기록 수집까지만**(수업권 최종 소진·출석 확정·정산 판정은 R7 범위로 명시 이관, 2026-09-02 사용자 지시) — `session_incident_reports`(신고 로그) 스키마는 5/N에서 완료, **신고 제출 UI는 아직 없음**(6/N 범위에서 booking/availability/reconciliation UI만 만들었고 지각·노쇼 신고 화면은 후속 단계로 남음 — R7 착수 전 필요시 별도 처리).
+- [x] 선생님 취소 시 예약·수업권 hold 해제 후 학생의 일반 새 예약 흐름 **(2026-09-02, R6 5/N·6/N)** `cancel_lesson_booking()`이 선생님/회사 취소 시 항상 release + 만료 30일 미만이면 30일로 연장(스모크 테스트로 실측 확인). 대체 선생님·우선 재예약 기능은 의도적으로 만들지 않음(스펙 원문) — 재예약은 일반 예약 UI(`LessonBookingTab.tsx`, 6/N)를 그대로 사용, 별도 화면 불필요.
 - [ ] Google Meet 참가자 기록의 제공 범위·권한·수집 지연 기술 검증 — 미착수, Google Sandbox 승인 요청과 함께 진행 예정.
 - [x] Meet 참가자 기록과 알톤 입장 클릭·화면 체류 기록의 source 분리 **(2026-09-02, R6 5/N)** `session_access_events.source`(`google_meet_api`/`alton_client`)로 테이블 레벨에서 분리, 한쪽을 다른 쪽으로 보정하지 않는 원칙을 스키마 주석에 명시. 실제 Meet API 수집 파이프라인은 미착수.
-- [x] 양쪽 timezone과 DST **(2026-09-02, R6 1/N)** `is_teacher_slot_open()`이 Postgres `AT TIME ZONE`(내장 tzdata, DST 자동 반영)에 위임 — 별도 수동 오프셋 계산 없음. 브라우저 최초 timezone 제안 UI는 6/N.
+- [x] 양쪽 timezone과 DST **(2026-09-02, R6 1/N·6/N)** `is_teacher_slot_open()`/`lib/booking/slot-search.ts`가 Postgres `AT TIME ZONE`/`Intl.DateTimeFormat`(둘 다 내장 tzdata, DST 자동 반영)에 위임 — 별도 수동 오프셋 계산 없음, 실제 2026년 미국 DST 전환일 전후로 오프셋이 정확히 바뀌는지 테스트로 확인. 브라우저 최초 timezone 제안 UI(R6 6/N, `LessonBookingTab.tsx` 배너) 완료 — 실제 브라우저로 클릭 검증까지 마침.
 - [x] Google 실패 보상·재처리·정기 대조 **(2026-09-02, R6 2/N)** `lib/booking/calendar-sync.ts`(R3 drive-artifacts와 동일한 낙관적 잠금 재처리 패턴, 실패해도 예약·세션·hold는 절대 건드리지 않음, 5회 초과 시 `reconciliation_needed`).
 - [x] 주간 고정 시간 최대 8회와 회차별 수업권 hold **(2026-09-02, R6 4/N)** `create_weekly_lesson_series()` — 각 회차 독립 hold, 수업권 부족 시 가능한 회차까지만 생성.
 - [ ] 수업 24시간·2시간 전 리마인드 — 8/N(알림 outbox)에서 진행 예정.

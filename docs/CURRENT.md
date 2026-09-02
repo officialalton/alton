@@ -64,8 +64,9 @@
   - **3/N 완료**: 구조적 cutover — `sessions`→`legacy_sessions`(레거시 세션뷰 8파일 14곳 계속 사용), `sessions_v3`→`sessions`(신규 예약이 쓰는 테이블). FK·RLS·인덱스는 rename에 자동 추종, 함수 본문 7개(텍스트 참조라 자동추종 안 됨)는 전부 CREATE OR REPLACE로 갱신 확인. `material_version_id`는 R9 선행조건(학생별 진도 스냅샷) 부재로 의도적으로 비워둠(인터페이스만 유지).
   - **4/N 완료**: 예약 멱등성(동일 idempotency_key 재요청 시 중복 생성 안 함 — `RETURN QUERY`가 함수를 종료시키지 않는 실제 PL/pgSQL 버그를 스모크 테스트로 발견·수정), 관리자 24시간 이내 예외, 주1회 최대8회 반복예약(수업권 부족 시 가능한 회차까지만 생성 후 명확한 사유로 중단).
   - **5/N 완료**: 취소(`cancel_lesson_booking()` — 학생 24h+ release/24h미만 consume, 선생님·회사 취소는 release+30일 미만 만료 시 30일로 연장), 취소 이력 테이블(예약 덮어쓰지 않음). 지각·노쇼는 사용자 최신 지시에 따라 **"신고"+"원본 접속기록 수집"까지만**(수업권 소진·출석확정·정산은 R7로 명시 이관) — `session_incident_reports`/`session_access_events`(Meet vs ALTON 접속을 source로 분리, 서로 보정하지 않음).
-  - 전 단계 로컬 dev DB 적용·전체 Vitest 668건·tsc 클린·전체 Playwright(--workers=1) 재확인(1건 실패는 R6 변경 제거한 베이스라인에서도 재현되는 기존 결함으로 실측 확인, 회귀 아님) 후 원격 dev DB 반영·커밋 완료.
-  - **미완료**: 예약 서버 액션+슬롯조회+UI(6/N), AI 회의록 동의게이트(7/N), 알림 outbox(8/N), Calendly/Zoom 제거(9/N, E2E 통과 후). Google Sandbox 외부 호출 승인 요청은 로컬·mock 검증 전부 끝난 뒤 한 번에 제출 예정(아직 미제출, 모든 외부 호출 플래그 기본 false 유지 중).
+  - **6/N 완료**: 예약 서버 액션(`lib/booking/*`, `app/{parent,student,teacher,admin}/*booking*-actions.ts`) + 슬롯조회 알고리즘(순수함수, `AT TIME ZONE`과 동일한 DST 처리를 `Intl`로 구현) + UI 4종(보호자·학생 예약 탭, 선생님 가용시간 관리 탭 — 원래 빈 슬롯이었음, 관리자 예약 운영 화면). 리팩터링 중 **실제 권한 우회 취약점 발견·수정**(취소 액션이 reservationId가 실제로 그 childId 소유인지 검증하지 않던 문제 — `assertReservationBelongsToChild()` 추가). 실제 로컬 브라우저로 보호자 1회예약·주간반복8회·취소, 선생님 가용시간 등록, 관리자 재처리·회사취소까지 전부 클릭해서 검증(단순 tsc/vitest 아님) — 이 과정에서 "예정된 수업" 미갱신 버그와 `window.prompt()` 불안정성(인라인 폼으로 교체) 2건 추가 발견·수정.
+  - 전 단계 로컬 dev DB 적용·전체 Vitest 704건·tsc 클린·전체 Playwright(--workers=1) 재확인(1건 실패는 R6 변경 제거한 베이스라인에서도 재현되는 기존 결함으로 실측 확인, 회귀 아님) 후 원격 dev DB 반영·커밋 완료.
+  - **미완료**: AI 회의록 동의게이트(7/N), 알림 outbox(8/N), Calendly/Zoom 제거(9/N, E2E 통과 후). Google Sandbox 외부 호출 승인 요청은 로컬·mock 검증 전부 끝난 뒤 한 번에 제출 예정(아직 미제출, 모든 외부 호출 플래그 기본 false 유지 중).
 
 ## 다음 R 착수 시 읽을 문서
 
