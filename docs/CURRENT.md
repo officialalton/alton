@@ -58,7 +58,7 @@
 
 - **(R4·R5, 2026-09-02, 완전히 해결 — 실사람 UAT 완료)** 제품 오너가 R4·R5 통합 UAT를 Vercel Preview에서 직접 수행해 전체 흐름(보호자 20회 패키지 구매→Stripe TEST 결제→영수증/수업권 확인→관리자 확인→과목 수강 활성화→체험 선생님 승계 제안→선생님 배정→적용일·사유 지정 변경→보호자/학생/선생님 역할별 화면 확인)을 승인 완료. UAT 중 발견되어 수정된 실버그: 관리자 Google 로그인/비밀번호 재설정/Stripe 결제 성공 리다이렉트가 전부 고정 `NEXT_PUBLIC_SITE_URL` 대신 실제 요청 origin을 쓰도록 수정(`039068b`/`a0645ce`/`97b04f2`, `lib/request-origin.ts` 공용 헬퍼), 관리자 "구매 상세 조회"가 UUID 아닌 입력(이메일 등)에 원시 DB 에러를 던져 페이지 전체가 깨지던 500 버그 수정(`7992fb3`), 선생님 변경 화면에 적용일 입력란이 아예 없어 항상 "지금"으로만 처리되던 버그 수정(DB 함수는 이미 `p_effective_from`을 지원했음, UI만 연결, `7992fb3`). **R4·R5 두 단계 모두 완료 확정 — 같은 범위 재작업 금지.**
 - **(R4, 2026-09-02, 정식 오픈 전 blocker, 2026-09-02 재확인)** Production Stripe 웹훅 엔드포인트 `https://app.alton.education/api/webhooks/stripe`가 아직 등록되어 있지 않음(현재 Stripe 계정에 있는 웹훅 2개는 전부 이번 세션 UAT용 임시 Preview 주소). Preview에서 있었던 웹훅 전달 지연은 Preview 전용 Deployment Protection + 배포마다 바뀌는 URL 때문이며 Production 구조 문제가 아님(Production 도메인 `app.alton.education`은 Deployment Protection 없음, 확인됨). **법인 설립·Stripe Live 계정 활성화 전에는 다음을 하지 않는다**: (1) 이 Production 웹훅 엔드포인트 등록, (2) Stripe Live secret key 발급·환경변수 입력, (3) 실제(Live) 결제 API 호출. 법인 설립·Stripe Live 계정 활성화 후 오픈 전 필수 작업으로 남겨둔다. `docs/2026-08-29-master-roadmap-v3.md` R13(종단 QA·정식 오픈) 체크리스트에도 동일 항목 등록.
-- **(R6, 2026-09-02, 진행 중)** 정규수업 예약/수업권 연동/Calendar·Meet/취소·재예약·지각·노쇼/AI 회의록·Smart Notes/알림·운영 전체 범위가 승인됨. 전체 스펙은 `docs/2026-09-02-r6-scope-and-approval.md`에 원문 그대로 보존. 진행 상세는 `docs/2026-09-02-r6-migration-execution-log.md` 참고.
+- **(R6, 2026-09-02, 완료 — Calendly/Zoom 제거만 R7 이후로 이관)** 정규수업 예약/수업권 연동/Calendar·Meet/취소·재예약·지각·노쇼/AI 회의록·Smart Notes/알림·운영 전체 범위가 승인됨. 전체 스펙은 `docs/2026-09-02-r6-scope-and-approval.md`에 원문 그대로 보존. 진행 상세는 `docs/2026-09-02-r6-migration-execution-log.md` 참고.
   - **1/N 완료**: 선생님 반복가능시간·날짜별예외·15분버퍼·24h~8주 window, `confirm_lesson_booking()`(예약+세션+entitlement hold 단일 트랜잭션).
   - **2/N 완료**: Calendar/Meet 이벤트+Meet 생성·FreeBusy·취소, 실패해도 예약/hold는 건드리지 않는 재처리 워커(`reconciliation_needed` 포함).
   - **3/N 완료**: 구조적 cutover — `sessions`→`legacy_sessions`(레거시 세션뷰 8파일 14곳 계속 사용), `sessions_v3`→`sessions`(신규 예약이 쓰는 테이블). FK·RLS·인덱스는 rename에 자동 추종, 함수 본문 7개(텍스트 참조라 자동추종 안 됨)는 전부 CREATE OR REPLACE로 갱신 확인. `material_version_id`는 R9 선행조건(학생별 진도 스냅샷) 부재로 의도적으로 비워둠(인터페이스만 유지).
@@ -68,7 +68,9 @@
   - 전 단계 로컬 dev DB 적용·전체 Vitest 704건·tsc 클린·전체 Playwright(--workers=1) 재확인(1건 실패는 R6 변경 제거한 베이스라인에서도 재현되는 기존 결함으로 실측 확인, 회귀 아님) 후 원격 dev DB 반영·커밋 완료.
   - **7/N 완료**: AI 회의록(Smart Notes) 동의 게이트 — 신규 정책 테이블 대신 R3가 이미 만들어둔 `ai_notes_consent_events` 재사용(그 마이그레이션 주석이 정확히 이 용도로 예약해둠). opt-out 모델(기본 ON), `confirm_lesson_booking()`이 세션 생성 시 판정을 스냅샷. 스모크 테스트로 같은 트랜잭션 내 연속 이벤트가 `effective_at` 동률로 판정이 모호해지는 버그 발견·수정(identity 컬럼 추가). 보호자 토글 UI 포함.
   - **8/N 완료**: 알림 outbox(그린필드 `booking_notification_outbox`) — 24h/2h 리마인드 + 예약확정/취소 즉시알림, 수신자는 자녀+household guardian 전원, 인앱 표시(R0 `notifications` 재사용)도 함께 삽입. 실제 발송 인프라 없음(status는 pending/cancelled까지만, 기존 R4 blocker와 일관). 관리자 화면에 유형×상태 요약 추가. 스모크 테스트 중 서브쿼리 컬럼명이 PL/pgSQL 변수와 겹쳐 나던 "ambiguous" 에러 발견·수정.
-  - **미완료**: Calendly/Zoom 제거(9/N, E2E 통과 후). Meet 실제 대조·Google Sandbox 외부 호출 승인 요청은 로컬·mock 검증 전부 끝난 뒤 한 번에 제출 예정(아직 미제출, 모든 외부 호출 플래그 기본 false 유지 중).
+  - **9/N 완료**: 신규 예약 흐름 로컬 E2E(`e2e/r6-lesson-booking-flow.spec.ts`, 보호자 로그인→슬롯 클릭→예약 확정(원장 hold 확인)→outbox 확인→취소→원장 release 확인) 실브라우저 2회 연속 통과 + 전체 스위트 회귀 없음.
+  - **Calendly/Zoom 제거는 이번 R6에서 하지 않는다** — 제거 조건("새 예약→Meet→출결→수업권 처리 흐름 E2E 통과")의 "출결 확정" 부분이 이번 R6 지시로 R7로 명시 이관돼 R6 범위 안에 존재하지 않는다. 자체 판단으로 조건을 느슨하게 해석해 제거하면 R7 완료 전까지 예약 대체 수단 공백이 생기는 리스크가 있어(사용자 경험을 바꾸는 결정에 준함) 보류 — Calendly/Zoom 코드·환경변수·컬럼은 전부 그대로 유지. R7에서 출결·정산을 마친 뒤 같은 게이트를 재평가.
+  - Meet 실제 대조·Google Sandbox 외부 호출 승인 요청은 로컬·mock 검증 전부 끝난 뒤 한 번에 제출 예정(아직 미제출). 세션 종료 시점 모든 Google 관련 플래그(`CALENDAR_SYNC_ALLOW_REAL_CALLS`/`WORKSPACE_PROVISIONING_ALLOW_REAL_CALLS`/`WORKSPACE_PREFLIGHT_ALLOW_REAL_READS`) 미설정(기본 false) 재확인 완료. 전체 R6 마이그레이션(1/N~9/N) `npx supabase migration list --linked`로 local=remote 일치 재확인 완료.
 
 ## 다음 R 착수 시 읽을 문서
 

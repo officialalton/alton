@@ -280,7 +280,16 @@ R5는 위 항목 전부 완료로 종료한다. 남은 항목(관리자 학생 �
 - [x] 주간 고정 시간 최대 8회와 회차별 수업권 hold **(2026-09-02, R6 4/N)** `create_weekly_lesson_series()` — 각 회차 독립 hold, 수업권 부족 시 가능한 회차까지만 생성.
 - [x] 수업 24시간·2시간 전 리마인드 **(2026-09-02, R6 8/N)** `booking_notification_outbox`(그린필드) + `schedule_reservation_notifications()`/`cancel_reservation_notifications()`. 자녀 본인+household guardian 전원에게 스케줄, 실제 발송 인프라는 없음(status는 pending/cancelled까지만) — R4에 이미 등록된 정식 오픈 전 blocker와 일관.
 
-### R6 레거시 제거 — Calendly·Zoom 완전 삭제 (2026-08-30 확정)
+### R6 레거시 제거 — Calendly·Zoom 완전 삭제 (2026-08-30 확정, 2026-09-02 R7로 이관)
+
+**(2026-09-02 확정) 이 절 전체를 R7 이후로 이관한다 — 아래 체크리스트 미착수 상태 그대로
+보존.** 제거 조건("새 예약→Meet→출결→수업권 처리 흐름 E2E 통과")의 "출결→수업권 처리"
+부분은 2026-09-02 R6 지시가 "지각·노쇼는 신고·원본 접속기록 수집까지만, 수업권 최종
+소진·출석 확정·정산 판정은 R7 범위"라고 명시적으로 좁혀서, R6 구현 범위 안에는 그 조건을
+충족할 대상 자체가 없다. R6는 예약/취소/수업권 hold·release/Calendar·Meet 인터페이스/알림
+outbox 로컬 E2E(`e2e/r6-lesson-booking-flow.spec.ts`)까지만 완료했다 — 이 상태에서 제거
+조건을 느슨하게 해석해 Calendly/Zoom을 지우면 R7이 출결·정산을 구현하기 전까지 실제 예약
+대체 수단 공백이 생긴다. R7에서 출결·정산 구현이 끝난 뒤 이 절의 조건을 다시 평가한다.
 
 신규 자체 예약(Calendar/Meet) 경로의 E2E 통과 후 아래를 완전히 제거한다. 제거 전 안전한 DB 백업과 롤백 지점만 남기면 충분하다 — ALTON은 아직 운영을 시작하지 않았고 현재 예약·Zoom 링크 데이터는 개발·테스트 데이터이므로 장기 보존이나 신규 구조로의 이관은 필요 없다(`product-architecture-v3.md` §4.13 정정 참고). 로그인 테스트 계정·프로필은 예외로 유지한다.
 

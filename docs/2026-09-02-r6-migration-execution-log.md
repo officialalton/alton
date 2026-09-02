@@ -313,8 +313,39 @@ v_recipient is ambiguous" 에러가 실제로 발생 — 서브쿼리 alias를 `
 
 전체 Vitest 707건·tsc 클린. 원격 dev DB 반영 완료.
 
-## 다음 (미완료)
+## 9/N — 신규 예약 흐름 로컬 E2E (완료) + Calendly/Zoom 제거 판단(보류, 2026-09-02)
 
-- 9/N: Calendly/Zoom 제거(신규 흐름 로컬 E2E 통과 후에만).
-- Google Sandbox 외부 호출 승인 요청(FreeBusy/Calendar/Meet 실제 생성·Workspace Events 구독 등)은
-  로컬·mock 검증이 전부 끝난 뒤 한 번에 묶어 별도로 제출 예정 — 아직 제출 전.
+`e2e/r6-lesson-booking-flow.spec.ts` — 보호자 로그인 → 슬롯 클릭 → 예약 확정(원장에서
+`hold` 이벤트 amount=-1 확인) → outbox 스케줄 확인 → 취소 → 원장 `release` 이벤트
+amount=+1 확인, 전부 실브라우저로 2회 연속 통과(재실행 안정성 확인) + 전체 스위트
+48/51 통과(2건 R5 기존 결함으로 skip, 회귀 없음).
+
+**Calendly/Zoom 제거는 이번에 진행하지 않는다.** 스펙 원문의 제거 조건은 "새 예약→Meet→
+출결→수업권 처리 흐름의 E2E 통과"인데, 이번 R6 지시(2026-09-02, "이제부터 이 기준으로
+해줘")가 R6 범위를 "지각·노쇼 신고와 원본 접속 기록 수집까지만"으로 명시적으로 좁히고
+"수업권 최종 소진, 출석 확정, payable_minutes, 정산 판정은 R7 범위이므로 자동 확정하지
+않는다"고 못박았다 — 즉 제거 조건이 요구하는 "출결→수업권 처리"의 "출결 확정" 부분은
+R6 안에 존재하지 않는 개념이다(의도적으로 R7로 이관됨). 이 상태에서 "전체 흐름 E2E
+통과"를 자체 판단으로 느슨하게 해석해 Calendly/Zoom을 제거하면, 정작 R7이 출결·정산을
+구현하기 전까지 학생·보호자에게 실제 예약 대체 수단이 전혀 없어지는(레거시 제거 후 신규
+흐름의 출결 관련 부분은 아직 없음) 사용자 경험 공백이 생긴다 — 이는 스펙의 "예약 가능
+기간, 취소·노쇼... 등 사용자 경험이나 정산 결과를 바꿔야 하는 경우" 중단 조건과 실질적으로
+같은 리스크 범주로 판단해, 자체 판단으로 밀어붙이지 않고 이번 R6에서는 보류한다. 대신
+R6이 실제로 구현한 범위(예약·취소·수업권 hold/release·Calendar/Meet 인터페이스·알림
+outbox)에 대한 로컬 E2E는 위와 같이 완료해뒀으므로, R7이 출결·정산을 마친 직후 같은 게이트
+조건을 다시 평가해 제거를 진행할 수 있다. Calendly/Zoom 코드·환경변수·DB 컬럼은 전부
+그대로 남아 있다(마스터 로드맵 R6 섹션의 "Calendly 제거"/"Zoom 제거" 체크리스트는 미착수
+상태로 유지).
+
+Google Sandbox 외부 호출 승인 요청(FreeBusy/Calendar/Meet 실제 생성·Workspace Events 구독 등)은
+로컬·mock 검증이 전부 끝난 뒤 한 번에 묶어 별도로 제출 예정 — 아직 제출 전. 모든 Google
+관련 플래그(`CALENDAR_SYNC_ALLOW_REAL_CALLS`, `WORKSPACE_PROVISIONING_ALLOW_REAL_CALLS`,
+`WORKSPACE_PREFLIGHT_ALLOW_REAL_READS`)는 세션 종료 시점 기준 전부 미설정(기본 false)임을
+재확인.
+
+## R6 종료 상태 요약 (2026-09-02)
+
+1/N~8/N 전부 완료·검증·원격 dev DB 반영·커밋 완료(`npx supabase migration list --linked`로
+local=remote 일치 재확인). 9/N(로컬 E2E)도 완료. Calendly/Zoom 제거만 위 이유로 R7 이후로
+미룬다 — R6 승인 스펙의 "필수 범위" 항목 중 지각·노쇼의 "확정" 부분과 Calendly/Zoom 제거를
+제외하면 전부 구현·검증됨.
