@@ -53,11 +53,47 @@ R6 승인 스펙: `docs/2026-09-02-r6-scope-and-approval.md`(원문 그대로 �
 - 같은 선생님의 직후(10분 뒤) 슬롯 재예약 시도 → 버퍼 위반으로 정상 거부(`teacher_buffer_violation`).
 - 위 세 실패 케이스 모두 함수가 예외로 롤백되어 부분 상태가 남지 않음을 확인(트랜잭션 전체 관찰).
 
+## 2/N — Google Calendar/Meet 생성·FreeBusy·재처리 워커 (완료, 2026-09-02)
+
+마이그레이션: `supabase/migrations/20260927000000_r6_calendar_sync_retry_count.sql`
+(`reservations.google_sync_retry_count`, 1/N에서 만든 `google_sync_status` 재시도 카운트).
+
+구현:
+- `lib/google-workspace-auth.ts`: `signDelegatedAdminJwt()`에 `subjectEmailOverride` 파라미터
+  추가 — Directory/Drive는 고정 `GOOGLE_WORKSPACE_DELEGATED_ADMIN_EMAIL`을 DWD subject로
+  쓰지만, Calendar는 "그 수업을 맡은 선생님 본인"의 `teachers.workspace_email`(R2/R5에서 이미
+  발급된 `@alton.education` 계정)을 subject로 삼아야 이벤트가 실제 그 선생님 캘린더에 생기고
+  FreeBusy도 그 선생님 기준으로 조회된다. `getCalendarApiAccessToken(subjectEmail)`을 선생님별
+  캐시(Map)로 추가.
+- `lib/google-calendar.ts`(그린필드): `createCalendarEventWithMeet()`(conferenceData.createRequest.
+  requestId=reservationId로 Google 쪽 자체 멱등 보장, `sendUpdates=none`·attendee 미포함 —
+  실제 초대 메일 발송 없음, R6 스펙의 "실제 알림 미발송" 원칙과 일치), `patchCalendarEventTime()`
+  (재예약/선생님변경용), `deleteCalendarEvent()`(404/410을 성공으로 취급해 멱등), `queryFreeBusy()`
+  (DB 잠금과 "함께" 쓰는 이중 방어용 — 하드 차단은 여전히 `reservations_no_overlap`+1/N 버퍼
+  검사가 담당). 전부 `CALENDAR_SYNC_ALLOW_REAL_CALLS=true`가 아니면 실제 API를 호출하지 않고
+  명시 실패(R6 전용 최소권한 게이트, 기존 `WORKSPACE_PROVISIONING_ALLOW_REAL_CALLS`/
+  `DRIVE_ARTIFACTS_ALLOW_REAL_WRITES`와 동일한 안전 패턴 — 스펙이 요구한 "R6 전용 최소권한·
+  기본 false 게이트 분리").
+- `lib/booking/calendar-sync.ts`: `processPendingCalendarSyncs()` — R3 `processQueuedDriveArtifacts()`
+  와 동일한 조건부 UPDATE 낙관적 잠금(claim) 패턴으로 `confirmed`이면서 아직 시작 전인 예약 중
+  `google_sync_status IN (pending, failed)`인 건을 골라 이벤트+Meet 생성 시도. 성공 시 `synced`+
+  `google_event_id`/`google_meet_link` 기록, 실패 시 재시도 카운트 증가(`failed`), 5회 초과 시
+  `reconciliation_needed`로 전환(관리자 수동 개입 대상 — 6/N 운영화면에서 노출 예정). **중요:
+  이 워커가 몇 번을 실패하든 `reservations`/`sessions_v3`/entitlement hold는 절대 건드리지
+  않는다** — DB가 원본이므로 Calendar 쪽 산출물만 재시도 대상(스펙의 "Google 생성 실패 시 DB·
+  수업권 hold가 어중간하게 남지 않도록" 요구를 그대로 구현). `cancelSyncedCalendarEvent()` —
+  취소 흐름(4/N)이 호출할 삭제 헬퍼, `google_event_id`가 아직 없으면(Calendar 쪽에 아무것도
+  안 만들어졌으면) 조용히 스킵.
+
+검증: `lib/google-calendar.test.ts`(안전 게이트, requestId/sendUpdates/attendee 없음 검증, Meet
+entry point 누락 에러, 404/410 멱등, FreeBusy 파싱 — 9건), `lib/booking/calendar-sync.test.ts`
+(빈 후보, 성공 경로, race 스킵, retry_count 5→6 전환 시 reconciliation_needed, workspace_email
+누락 처리, cancel 스킵/호출 — 8건) 신규 작성. 로컬 `supabase db reset` 성공, **전체 스위트
+668건 통과**(회귀 없음), `tsc --noEmit` 클린. 원격 dev DB에 마이그레이션 반영 완료
+(`npx supabase migration list --linked` local=remote 일치 확인).
+
 ## 다음 (미완료)
 
-- 2/N: Google Calendar 인증(`getCalendarApiAccessToken()`, Directory/Drive와 동일 패턴) + 이벤트/
-  Meet 생성 + FreeBusy 조회 + 실패 보상·재처리(`google_sync_status`) + 취소/재예약/선생님 변경 시
-  동기화.
 - 3/N: `sessions_v3`→`sessions`/`sessions`→`legacy_sessions` cutover(앱 코드 8개 파일 동시 전환) +
   `material_version_id` 채우기 로직.
 - 4/N: 취소·지각·노쇼 판정 로직(consume/release/연장 30일 보장 규칙 포함), 보호자·학생 예약 UI,
