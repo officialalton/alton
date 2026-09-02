@@ -25,6 +25,10 @@ vi.mock("./credits-actions", () => ({
   createCreditCheckoutSession: vi.fn(),
 }));
 
+vi.mock("./purchase-actions", () => ({
+  createEntitlementCheckoutSession: vi.fn(),
+}));
+
 const childrenList: Child[] = [
   { studentId: "s1", name: "지훈", isPrimary: true },
   { studentId: "s2", name: "이서아", isPrimary: false },
@@ -48,6 +52,7 @@ const lessonsProps = {
   myFeedback: {},
   bookableEnrollments: [],
   credits: { balance: 0, referralCode: null, packages: [] },
+  entitlements: { prices: [], children: [] },
   consentChildren: [],
   activeConsentPolicy: null,
 };

@@ -14,6 +14,8 @@ import type { BookableEnrollment } from "@/app/student/booking-data";
 import type { Child } from "./children-data";
 import CreditsTab from "./CreditsTab";
 import type { ParentCreditsData } from "./credits-data";
+import EntitlementsTab from "./EntitlementsTab";
+import type { ParentEntitlementsData } from "./entitlements-data";
 import ConsentTab from "./ConsentTab";
 import type { ChildConsentStatus, ConsentPolicyOption } from "./consent-data";
 import FamilyTab from "./FamilyTab";
@@ -22,6 +24,7 @@ const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
   { id: "lessons", label: "레슨", icon: "📅" },
   { id: "credits", label: "수업권", icon: "💳" },
+  { id: "entitlements", label: "수업권 구매", icon: "🎟️" },
   { id: "stats", label: "통계", icon: "📊" },
   { id: "consent", label: "동의", icon: "✅" },
   { id: "family", label: "가족", icon: "👨‍👩‍👧" },
@@ -43,6 +46,7 @@ export default function ParentShell({
   myFeedback,
   bookableEnrollments,
   credits,
+  entitlements,
   purchaseStatus,
   consentChildren,
   activeConsentPolicy,
@@ -60,6 +64,7 @@ export default function ParentShell({
   reviews: Record<string, ReviewData>;
   myFeedback: Record<string, StudentFeedback>;
   credits: ParentCreditsData;
+  entitlements: ParentEntitlementsData;
   purchaseStatus?: "success" | "cancelled";
   consentChildren: ChildConsentStatus[];
   activeConsentPolicy: ConsentPolicyOption | null;
@@ -168,6 +173,8 @@ export default function ParentShell({
               studentId={currentChildId}
               purchaseStatus={purchaseStatus}
             />
+          ) : activeTab === "entitlements" ? (
+            <EntitlementsTab data={entitlements} purchaseStatus={purchaseStatus} />
           ) : activeTab === "consent" ? (
             <ConsentTab children={consentChildren} activePolicy={activeConsentPolicy} />
           ) : activeTab === "family" ? (

@@ -7,6 +7,7 @@ import { loadBookableEnrollments } from "@/app/student/booking-data";
 import { loadMemos } from "@/app/student/memo-data";
 import { loadReviews, loadStudentFeedback } from "@/app/student/review-data";
 import { loadParentCreditsData } from "./credits-data";
+import { loadParentEntitlementsData } from "./entitlements-data";
 import { loadChildrenConsentStatus, loadActiveConsentPolicy } from "./consent-data";
 import ParentShell from "./ParentShell";
 
@@ -48,6 +49,7 @@ export default async function ParentHomePage({
   const reviews = await loadReviews(supabase, pastSessionIds);
   const myFeedback = await loadStudentFeedback(supabase, currentChildId, pastSessionIds);
   const credits = await loadParentCreditsData(supabase, user.id, currentChildId);
+  const entitlements = await loadParentEntitlementsData(supabase, user.id, children);
   const consentChildren = await loadChildrenConsentStatus(supabase, user.id);
   const activeConsentPolicy = await loadActiveConsentPolicy(supabase);
 
@@ -66,6 +68,7 @@ export default async function ParentHomePage({
       reviews={reviews}
       myFeedback={myFeedback}
       credits={credits}
+      entitlements={entitlements}
       purchaseStatus={purchase === "success" || purchase === "cancelled" ? purchase : undefined}
       consentChildren={consentChildren}
       activeConsentPolicy={activeConsentPolicy}

@@ -166,8 +166,8 @@ export async function createEntitlementCheckoutSession(
       payment_intent_data: {
         metadata: { purchase_id: purchase.id },
       },
-      success_url: `${siteUrl}/parent?tab=credits&purchase=success`,
-      cancel_url: `${siteUrl}/parent?tab=credits&purchase=cancelled`,
+      success_url: `${siteUrl}/parent?tab=entitlements&purchase=success`,
+      cancel_url: `${siteUrl}/parent?tab=entitlements&purchase=cancelled`,
     },
     { idempotencyKey: `purchase-checkout:${purchase.id}` }
   );
