@@ -139,21 +139,23 @@ begin
       where id = v_current.id;
   end if;
 
+  -- 채팅 스레드 archive를 새 teacher_assignments 행 생성보다 먼저 실행한다 — 순서를
+  -- 반대로 하면(2026-09-02 발견, 후속 마이그레이션 20260925010000의 AFTER INSERT
+  -- 트리거가 새 스레드를 이미 만든 뒤에 이 UPDATE가 "이 수강의 active 스레드 전부"를
+  -- archive해버려 방금 만든 새 스레드까지 archived로 잘못 바뀌는 버그가 있었다).
+  update subject_threads
+    set status = 'archived', archived_at = now()
+    where subject_enrollment_id = p_subject_enrollment_id and status = 'active';
+
   insert into teacher_assignments (
     subject_enrollment_id, teacher_id, status, effective_from, reason, changed_by, source
   ) values (
     p_subject_enrollment_id, p_new_teacher_id, 'active', p_effective_from, p_reason, p_changed_by, 'app'
   )
   returning id into v_new_id;
-
-  -- 채팅 스레드: 새 배정에 스레드 생성(없으면), 이전 배정 스레드는 과거 메시지 보존한 채 archived.
-  update subject_threads
-    set status = 'archived', archived_at = now()
-    where subject_enrollment_id = p_subject_enrollment_id and status = 'active';
-
-  insert into subject_threads (subject_enrollment_id, teacher_assignment_id, teacher_id, status)
-  values (p_subject_enrollment_id, v_new_id, p_new_teacher_id, 'active')
-  on conflict (teacher_assignment_id) do nothing;
+  -- 새 스레드는 teacher_assignments_ensure_subject_thread 트리거(20260925010000)가
+  -- 위 INSERT 시점에 자동으로 만든다 — 여기서 다시 만들 필요 없음(중복 방지를 위해
+  -- 명시적 insert를 두지 않는다).
 
   -- 문서 권한 재처리 큐: 이전 선생님 회수 + 새 선생님 부여, 둘 다 재시도 가능한 work-item.
   if v_current.id is not null then
