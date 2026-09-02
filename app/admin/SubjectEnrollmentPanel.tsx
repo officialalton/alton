@@ -125,9 +125,18 @@ export default function SubjectEnrollmentPanel({
     }
   }
 
-  async function handleChangeTeacher(enrollmentId: string, newTeacherId: string, reason: string) {
+  async function handleChangeTeacher(
+    enrollmentId: string,
+    newTeacherId: string,
+    reason: string,
+    effectiveFromDate: string
+  ) {
     if (!reason.trim()) {
       setMessage("변경 사유를 입력해주세요.");
+      return;
+    }
+    if (!effectiveFromDate) {
+      setMessage("적용일을 입력해주세요.");
       return;
     }
     setBusy(true);
@@ -136,7 +145,7 @@ export default function SubjectEnrollmentPanel({
       await changeTeacherAssignment({
         subjectEnrollmentId: enrollmentId,
         newTeacherId,
-        effectiveFrom: new Date().toISOString(),
+        effectiveFrom: new Date(effectiveFromDate).toISOString(),
         reason,
       });
       setMessage("선생님이 변경되었습니다. 확정된 미래 예약은 자동 이전되지 않으니 안내가 필요합니다.");
@@ -377,10 +386,13 @@ function TeacherChangeForm({
 }: {
   enrollmentId: string;
   candidates: MatchingTeacherCandidate[];
-  onSubmit: (enrollmentId: string, newTeacherId: string, reason: string) => void;
+  onSubmit: (enrollmentId: string, newTeacherId: string, reason: string, effectiveFromDate: string) => void;
 }) {
   const [teacherId, setTeacherId] = useState("");
   const [reason, setReason] = useState("");
+  const [effectiveFromDate, setEffectiveFromDate] = useState(
+    () => new Date().toISOString().slice(0, 10)
+  );
 
   if (candidates.length === 0) return null;
 
@@ -398,6 +410,15 @@ function TeacherChangeForm({
           </option>
         ))}
       </select>
+      <label className="flex items-center gap-1 text-[11.5px]">
+        적용일
+        <input
+          type="date"
+          value={effectiveFromDate}
+          onChange={(e) => setEffectiveFromDate(e.target.value)}
+          className="border-[1.5px] border-grey-200 rounded-lg px-2 py-1"
+        />
+      </label>
       <input
         value={reason}
         onChange={(e) => setReason(e.target.value)}
@@ -406,7 +427,7 @@ function TeacherChangeForm({
       />
       <button
         disabled={!teacherId}
-        onClick={() => onSubmit(enrollmentId, teacherId, reason)}
+        onClick={() => onSubmit(enrollmentId, teacherId, reason, effectiveFromDate)}
         className="text-[11.5px] font-bold px-2.5 py-1 rounded-full border-[1.5px] border-grey-200 disabled:opacity-50"
       >
         변경 확정

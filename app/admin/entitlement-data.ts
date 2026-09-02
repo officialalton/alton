@@ -34,10 +34,17 @@ export type PurchaseDetailItem = {
   confirmedAt: string | null;
 };
 
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 export async function loadPurchaseDetail(
   supabase: SupabaseClient,
   purchaseId: string
 ): Promise<PurchaseDetailItem | null> {
+  // 관리자가 이메일 등 UUID가 아닌 값을 입력할 수 있다 — 그대로 쿼리에 넘기면
+  // Postgres가 원시 "invalid input syntax for type uuid" 에러를 던져 500이
+  // 난다(2026-09-02 UAT 중 발견). 형식이 맞지 않으면 그냥 "없음"으로 취급한다.
+  if (!UUID_RE.test(purchaseId.trim())) return null;
+
   const { data: row, error } = await supabase
     .from("purchase_receipts")
     .select(
