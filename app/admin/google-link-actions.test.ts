@@ -21,6 +21,14 @@ vi.mock("next/navigation", () => ({
   redirect: redirectMock,
 }));
 
+vi.mock("next/headers", () => ({
+  headers: async () =>
+    new Map([
+      ["x-forwarded-proto", "https"],
+      ["x-forwarded-host", "alton-preview-test.vercel.app"],
+    ]),
+}));
+
 describe("linkAdminGoogleAccount", () => {
   beforeEach(() => {
     vi.clearAllMocks();

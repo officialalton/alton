@@ -10,7 +10,13 @@ import { createAdminClient } from "@/lib/supabase-admin";
 // 실패 경로는 전부 명시적으로 /login?error=...로 보낸다 — 어떤 경우에도
 // "/"(랜딩 페이지)로 조용히 떨어지지 않는다(그게 원래 버그였다).
 export async function GET(request: NextRequest) {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3010";
+  // NEXT_PUBLIC_SITE_URL 대신 실제 요청 origin을 쓴다 — 고정 env 값을 쓰면
+  // Preview 배포에서 로그인 자체는 성공하고도 최종 리다이렉트가 다른
+  // origin(예: production 도메인)으로 나가 그 origin에는 이 세션의 쿠키가
+  // 없어 미인증 상태로 랜딩 페이지("/")에 떨어지는 버그가 생긴다 — 이 방식은
+  // 어떤 환경(local/preview/production)에서 시작했든 항상 같은 origin으로
+  // 돌아오므로 이 문제가 구조적으로 발생하지 않는다.
+  const siteUrl = request.nextUrl.origin;
 
   // Google 동의 화면에서 취소/실패한 경우 — 표준 OAuth error/error_description
   // 쿼리 파라미터로 온다.

@@ -1,8 +1,21 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 import { createClient } from "@/utils/supabase/server";
 import { requireAdmin } from "@/lib/admin-auth";
+
+// 고정된 NEXT_PUBLIC_SITE_URL 대신 실제 요청 origin으로 redirectTo를
+// 만든다 — 안 그러면 Preview 배포에서 로그인은 성공해도 콜백이 다른
+// origin으로 나가 세션 쿠키 없이 랜딩 페이지에 떨어지는 문제가 생긴다
+// (app/auth/admin-google-callback/route.ts와 동일한 근본 원인).
+async function currentOrigin(): Promise<string> {
+  const h = await headers();
+  const proto = h.get("x-forwarded-proto") ?? "https";
+  const host = h.get("x-forwarded-host") ?? h.get("host");
+  if (host) return `${proto}://${host}`;
+  return process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3010";
+}
 
 // 관리자 Google 로그인 버그 수정 — 선생님 흐름(app/login/teacher-google-actions.ts,
 // app/auth/teacher-callback/route.ts)과 완전히 분리된 별도 경로. 관리자는
@@ -21,7 +34,7 @@ export async function linkAdminGoogleAccount(): Promise<void> {
   await requireAdmin();
 
   const supabase = await createClient();
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3010";
+  const siteUrl = await currentOrigin();
 
   const { data, error } = await supabase.auth.linkIdentity({
     provider: "google",
@@ -43,7 +56,7 @@ export async function linkAdminGoogleAccount(): Promise<void> {
  */
 export async function signInWithGoogleForAdmin(): Promise<void> {
   const supabase = await createClient();
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3010";
+  const siteUrl = await currentOrigin();
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",

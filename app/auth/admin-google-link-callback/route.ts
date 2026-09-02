@@ -7,7 +7,10 @@ import { createClient } from "@/utils/supabase/server";
 // role='admin'인지 다시 확인한 뒤 link_admin_google_identity()로 최종
 // 기록한다. 선생님 콜백과 무관한 완전히 별도의 경로.
 export async function GET(request: NextRequest) {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3010";
+  // admin-google-callback/route.ts와 동일한 이유로 고정 env 대신 실제 요청
+  // origin을 쓴다 — Preview에서 다른 origin으로 리다이렉트되어 세션 쿠키가
+  // 없는 상태로 떨어지는 문제를 구조적으로 막는다.
+  const siteUrl = request.nextUrl.origin;
   const oauthError =
     request.nextUrl.searchParams.get("error_description") ??
     request.nextUrl.searchParams.get("error");
