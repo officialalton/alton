@@ -50,6 +50,8 @@ const baseProps = {
   reviewedSessionIds: [],
   currentAssignments: [],
   pastAssignments: [],
+  availabilityRules: [],
+  availabilityTimezone: "America/Los_Angeles",
 };
 
 describe("TeacherShell", () => {

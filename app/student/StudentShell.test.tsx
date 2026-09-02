@@ -85,6 +85,13 @@ const lessonsProps = {
   teacherSessionHistory: {},
   chatThreads: {},
   subjectEnrollments: [],
+  lessonBooking: {
+    bookableEnrollments: [],
+    upcomingBookings: [],
+    regularLessonTypeId: null,
+    lessonDurationMinutes: 120,
+    timezone: "America/Los_Angeles",
+  },
 };
 
 describe("StudentShell", () => {

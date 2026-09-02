@@ -32,10 +32,20 @@ import type {
 import type { ChatMessage } from "./chat-data";
 import EnrollmentTab from "./EnrollmentTab";
 import type { SubjectEnrollmentView } from "./enrollment-data";
+import LessonBookingTab from "./LessonBookingTab";
+import type { LessonBookingData } from "./lesson-booking-data";
+import {
+  listAvailableSlotsForBooking,
+  createMyLessonBooking,
+  createMyWeeklyLessonSeries,
+  cancelMyLessonBooking,
+  updateMyTimezone,
+} from "./booking-actions";
 
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
   { id: "enrollment", label: "수강 과목", icon: "🎓" },
+  { id: "booking", label: "예약", icon: "🗓️" },
   { id: "lessons", label: "레슨", icon: "📅" },
   { id: "teacher", label: "선생님", icon: "👤" },
   { id: "homework", label: "과제", icon: "📝" },
@@ -71,6 +81,7 @@ export default function StudentShell({
   teacherSessionHistory,
   chatThreads,
   subjectEnrollments,
+  lessonBooking,
 }: {
   studentName: string;
   initialTab?: string;
@@ -94,6 +105,7 @@ export default function StudentShell({
   teacherSessionHistory: Record<string, TeacherSessionHistoryItem[]>;
   chatThreads: Record<string, { threadId: string; messages: ChatMessage[] }>;
   subjectEnrollments: SubjectEnrollmentView[];
+  lessonBooking: LessonBookingData;
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -159,6 +171,19 @@ export default function StudentShell({
             />
           ) : activeTab === "enrollment" ? (
             <EnrollmentTab enrollments={subjectEnrollments} />
+          ) : activeTab === "booking" ? (
+            <LessonBookingTab
+              bookableEnrollments={lessonBooking.bookableEnrollments}
+              upcomingBookings={lessonBooking.upcomingBookings}
+              regularLessonTypeId={lessonBooking.regularLessonTypeId}
+              lessonDurationMinutes={lessonBooking.lessonDurationMinutes}
+              timezone={lessonBooking.timezone}
+              onListSlots={(teacherId, durationMinutes) => listAvailableSlotsForBooking({ teacherId, durationMinutes })}
+              onCreateBooking={createMyLessonBooking}
+              onCreateWeeklySeries={createMyWeeklyLessonSeries}
+              onCancelBooking={(reservationId, reason) => cancelMyLessonBooking({ reservationId, reason })}
+              onUpdateTimezone={updateMyTimezone}
+            />
           ) : activeTab === "vocab" ? (
             <VocabTab
               initialWords={vocabWords}

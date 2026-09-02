@@ -15,6 +15,9 @@ import type { Memo } from "@/app/student/memo-data";
 import type { ReviewData, StudentFeedback } from "@/app/student/review-data";
 import AssignmentsTab from "./AssignmentsTab";
 import type { TeacherAssignedSubject } from "./assignments-data";
+import TeacherAvailabilityTab from "./TeacherAvailabilityTab";
+import type { TeacherAvailabilityRuleRow } from "./availability-actions";
+import { addTeacherAvailabilityRule, removeTeacherAvailabilityRule, addTeacherAvailabilityException } from "./availability-actions";
 
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
@@ -41,6 +44,8 @@ export default function TeacherShell({
   reviewedSessionIds,
   currentAssignments,
   pastAssignments,
+  availabilityRules,
+  availabilityTimezone,
 }: {
   initialTab?: string;
   dashboard: TeacherDashboardData;
@@ -53,6 +58,8 @@ export default function TeacherShell({
   reviewedSessionIds: string[];
   currentAssignments: TeacherAssignedSubject[];
   pastAssignments: TeacherAssignedSubject[];
+  availabilityRules: TeacherAvailabilityRuleRow[];
+  availabilityTimezone: string;
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -130,6 +137,14 @@ export default function TeacherShell({
               upcoming={dashboard.upcoming}
               past={dashboard.past}
               reviewedSessionIds={reviewedSessionIds}
+            />
+          ) : activeTab === "availability" ? (
+            <TeacherAvailabilityTab
+              initialRules={availabilityRules}
+              timezone={availabilityTimezone}
+              onAddRule={addTeacherAvailabilityRule}
+              onRemoveRule={removeTeacherAvailabilityRule}
+              onAddException={addTeacherAvailabilityException}
             />
           ) : activeTab === "roster" ? (
             <RosterTab students={roster} onOpenCurriculum={openCurriculumFromRoster} />

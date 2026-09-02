@@ -10,6 +10,7 @@ import { loadParentCreditsData } from "./credits-data";
 import { loadParentEntitlementsData } from "./entitlements-data";
 import { loadChildrenConsentStatus, loadActiveConsentPolicy } from "./consent-data";
 import { loadChildrenSubjectEnrollments } from "./enrollment-data";
+import { loadLessonBookingData } from "@/app/student/lesson-booking-data";
 import ParentShell from "./ParentShell";
 
 export default async function ParentHomePage({
@@ -57,6 +58,7 @@ export default async function ParentHomePage({
     supabase,
     children
   );
+  const lessonBooking = await loadLessonBookingData(supabase, currentChildId);
 
   return (
     <ParentShell
@@ -78,6 +80,7 @@ export default async function ParentHomePage({
       consentChildren={consentChildren}
       activeConsentPolicy={activeConsentPolicy}
       childrenSubjectEnrollments={childrenSubjectEnrollments}
+      lessonBooking={lessonBooking}
     />
   );
 }

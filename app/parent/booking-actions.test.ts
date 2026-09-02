@@ -28,9 +28,16 @@ vi.mock("@/lib/auth", () => ({
 }));
 
 const teacherAssignmentMaybeSingleMock = vi.fn();
+const reservationOwnerMaybeSingleMock = vi.fn();
 const adminFromMock = vi.fn((table: string) => {
   if (table === "teacher_assignments") {
     return { select: () => ({ eq: () => ({ eq: () => ({ eq: () => ({ maybeSingle: teacherAssignmentMaybeSingleMock }) }) }) }) };
+  }
+  if (table === "reservations") {
+    return { select: () => ({ eq: () => ({ maybeSingle: reservationOwnerMaybeSingleMock }) }) };
+  }
+  if (table === "profiles") {
+    return { update: () => ({ eq: () => Promise.resolve({ error: null }) }) };
   }
   throw new Error(`unexpected admin table ${table}`);
 });
@@ -52,6 +59,7 @@ beforeEach(() => {
   guardianLinksMock.mockResolvedValue({ data: [{ household_id: "hh1" }] });
   childLinkMaybeSingleMock.mockResolvedValue({ data: { household_id: "hh1" } });
   teacherAssignmentMaybeSingleMock.mockResolvedValue({ data: { id: "ta1" } });
+  reservationOwnerMaybeSingleMock.mockResolvedValue({ data: { subject_enrollment: { child_id: "child1" } } });
   confirmLessonBookingMock.mockResolvedValue({ reservationId: "r1", sessionId: "s1" });
   createWeeklyLessonSeriesMock.mockResolvedValue([]);
   cancelLessonBookingMock.mockResolvedValue(undefined);
@@ -130,6 +138,15 @@ describe("cancelLessonBookingForChild", () => {
     await expect(
       cancelLessonBookingForChild({ reservationId: "r1", childId: "child1", reason: "x" })
     ).rejects.toThrow("본인 가족 구성원이 아닌 자녀");
+    expect(cancelLessonBookingMock).not.toHaveBeenCalled();
+  });
+
+  it("예약이 실제로 그 자녀 것이 아니면 거부한다(childId 바꿔치기 방지)", async () => {
+    reservationOwnerMaybeSingleMock.mockResolvedValue({ data: { subject_enrollment: { child_id: "someone-elses-child" } } });
+    const { cancelLessonBookingForChild } = await import("./booking-actions");
+    await expect(
+      cancelLessonBookingForChild({ reservationId: "r1", childId: "child1", reason: "x" })
+    ).rejects.toThrow("본인(또는 자녀) 예약만 취소할 수 있습니다.");
     expect(cancelLessonBookingMock).not.toHaveBeenCalled();
   });
 });

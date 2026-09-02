@@ -21,10 +21,20 @@ import type { ChildConsentStatus, ConsentPolicyOption } from "./consent-data";
 import FamilyTab from "./FamilyTab";
 import ParentEnrollmentTab from "./EnrollmentTab";
 import type { ChildSubjectEnrollments } from "./enrollment-data";
+import LessonBookingTab from "@/app/student/LessonBookingTab";
+import type { LessonBookingData } from "@/app/student/lesson-booking-data";
+import {
+  listAvailableSlotsForBooking,
+  createLessonBookingForChild,
+  createWeeklyLessonSeriesForChild,
+  cancelLessonBookingForChild,
+  updateChildTimezone,
+} from "./booking-actions";
 
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
   { id: "enrollment", label: "수강 과목", icon: "🎓" },
+  { id: "booking", label: "예약", icon: "🗓️" },
   { id: "lessons", label: "레슨", icon: "📅" },
   { id: "credits", label: "수업권", icon: "💳" },
   { id: "entitlements", label: "수업권 구매", icon: "🎟️" },
@@ -54,6 +64,7 @@ export default function ParentShell({
   consentChildren,
   activeConsentPolicy,
   childrenSubjectEnrollments,
+  lessonBooking,
 }: {
   parentName: string;
   childrenList: Child[];
@@ -73,6 +84,7 @@ export default function ParentShell({
   consentChildren: ChildConsentStatus[];
   activeConsentPolicy: ConsentPolicyOption | null;
   childrenSubjectEnrollments: ChildSubjectEnrollments[];
+  lessonBooking: LessonBookingData;
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -162,6 +174,20 @@ export default function ParentShell({
             />
           ) : activeTab === "enrollment" ? (
             <ParentEnrollmentTab childrenEnrollments={childrenSubjectEnrollments} />
+          ) : activeTab === "booking" ? (
+            <LessonBookingTab
+              key={currentChildId}
+              bookableEnrollments={lessonBooking.bookableEnrollments}
+              upcomingBookings={lessonBooking.upcomingBookings}
+              regularLessonTypeId={lessonBooking.regularLessonTypeId}
+              lessonDurationMinutes={lessonBooking.lessonDurationMinutes}
+              timezone={lessonBooking.timezone}
+              onListSlots={(teacherId, durationMinutes) => listAvailableSlotsForBooking({ teacherId, durationMinutes })}
+              onCreateBooking={(params) => createLessonBookingForChild({ ...params, childId: currentChildId })}
+              onCreateWeeklySeries={(params) => createWeeklyLessonSeriesForChild({ ...params, childId: currentChildId })}
+              onCancelBooking={(reservationId, reason) => cancelLessonBookingForChild({ reservationId, childId: currentChildId, reason })}
+              onUpdateTimezone={(timezone) => updateChildTimezone(currentChildId, timezone)}
+            />
           ) : activeTab === "lessons" ? (
             <LessonsTab
               key={currentChildId}

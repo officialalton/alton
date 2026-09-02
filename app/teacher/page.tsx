@@ -8,6 +8,8 @@ import { loadTeacherAssignments } from "./assignments-data";
 import { loadMemos } from "@/app/student/memo-data";
 import { loadReviews, loadStudentFeedback } from "@/app/student/review-data";
 import TeacherShell from "./TeacherShell";
+import { listMyAvailabilityRules } from "./availability-actions";
+import { resolveUserTimezone } from "@/lib/timezone";
 
 export default async function TeacherHomePage({
   searchParams,
@@ -53,6 +55,13 @@ export default async function TeacherHomePage({
   const { current: currentAssignments, past: pastAssignments } =
     await loadTeacherAssignments(supabase, user.id);
 
+  const availabilityRules = await listMyAvailabilityRules();
+  const { data: teacherProfile } = await supabase.from("profiles").select("timezone").eq("id", user.id).maybeSingle();
+  const availabilityTimezone = resolveUserTimezone({
+    profileTimezone: (teacherProfile?.timezone as string) ?? null,
+    householdDefaultTimezone: null,
+  });
+
   return (
     <TeacherShell
       initialTab={tab}
@@ -66,6 +75,8 @@ export default async function TeacherHomePage({
       reviewedSessionIds={reviewedSessionIds}
       currentAssignments={currentAssignments}
       pastAssignments={pastAssignments}
+      availabilityRules={availabilityRules}
+      availabilityTimezone={availabilityTimezone}
     />
   );
 }
