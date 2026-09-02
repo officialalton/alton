@@ -2,7 +2,12 @@
 
 import { requireAdmin, requireAdminOrCapability } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
-import { loadPurchaseDetail, type PurchaseDetailItem } from "./entitlement-data";
+import {
+  loadPurchaseDetail,
+  loadOpenOrRecentPaymentDisputes,
+  type PurchaseDetailItem,
+  type PaymentDisputeItem,
+} from "./entitlement-data";
 
 // R4 — entitlement_ledger(R1: hold/consume/release) + entitlement_ledger(R4:
 // refund/expire/extend/transfer/adjust) SQL 함수 위의 앱 레이어 서버 액션
@@ -458,6 +463,13 @@ export async function adminLookupPurchaseDetail(purchaseId: string): Promise<Pur
   await requireAdminOrCapability(PAYMENTS_CAPABILITY);
   const admin = createAdminClient();
   return loadPurchaseDetail(admin, purchaseId);
+}
+
+/** 진행 중이거나 최근 종결된 Stripe 분쟁 목록 — "결제 실패·대사" 화면용. */
+export async function listOpenOrRecentPaymentDisputes(): Promise<PaymentDisputeItem[]> {
+  await requireAdminOrCapability(PAYMENTS_CAPABILITY);
+  const admin = createAdminClient();
+  return loadOpenOrRecentPaymentDisputes(admin);
 }
 
 // =========================================================================

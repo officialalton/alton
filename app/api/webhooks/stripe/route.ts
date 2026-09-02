@@ -24,6 +24,13 @@ import { createEntitlementGrantForPurchase } from "@/lib/entitlements";
 // - 이중 계층 idempotency: Stripe Checkout Session 생성 쪽은 SDK의
 //   idempotencyKey(purchase-actions.ts), 웹훅 수신 쪽은 이 라우트의
 //   external_event_receipts(provider='stripe', event_id=event.id).
+//
+// 분쟁(charge.dispute.*, 2026-09-01 후속): payment_disputes(20260924000000)로
+// 저장 — purchases.status(v3_payment_attempt_status)에는 'disputed' 값이
+// 없으므로 절대 쓰지 않는다. charge→purchase 매칭은 stripe_payment_intent_id로
+// purchases 테이블만 조회한다(레거시 credit_purchases 플로우의 분쟁은 이
+// 조회로 매칭되지 않아 purchase_id=null로 기록된다 — 레거시 전용 분쟁
+// 테이블은 이번 범위에서 만들지 않았다, 최종 보고의 "결정 필요" 참고).
 
 function logAudit(stage: string, extra: Record<string, unknown>) {
   console.info(JSON.stringify({ type: "stripe_webhook_audit", stage, ...extra }));
@@ -49,6 +56,17 @@ type PaymentIntentObject = {
 type ChargeObject = {
   id: string;
   payment_intent: string | null;
+};
+
+type DisputeObject = {
+  id: string;
+  charge: string;
+  payment_intent: string | null;
+  status: string;
+  amount: number;
+  currency: string;
+  reason: string | null;
+  created: number; // Stripe epoch seconds
 };
 
 export async function POST(request: Request) {
@@ -238,23 +256,56 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true });
   }
 
-  if (event.type === "charge.dispute.created") {
-    // 분쟁(chargeback) — 자동 entitlement 회수는 하지 않는다(사람 판단 필요).
-    // purchase를 disputed로 표시하고 감사 로그만 남긴다.
-    const charge = event.data.object as ChargeObject;
-    if (charge.payment_intent) {
+  if (
+    event.type === "charge.dispute.created" ||
+    event.type === "charge.dispute.updated" ||
+    event.type === "charge.dispute.closed"
+  ) {
+    // 분쟁(chargeback) — 자동 entitlement 회수는 절대 하지 않는다(사람 판단
+    // 필요, 정책 확정). purchases.status는 v3_payment_attempt_status를
+    // 재사용하고 'disputed' 값이 없으므로 여기서 절대 건드리지 않는다 —
+    // payment_disputes(20260924000000)가 분쟁의 유일한 소스오브트루스이고,
+    // created/updated/closed 세 이벤트 전부 stripe_dispute_id로 upsert한다
+    // (idempotency는 unique(stripe_dispute_id) 제약이 보장).
+    const dispute = event.data.object as DisputeObject;
+
+    let purchaseId: string | null = null;
+    if (dispute.payment_intent) {
       const { data: purchase } = await admin
         .from("purchases")
         .select("id")
-        .eq("stripe_payment_intent_id", charge.payment_intent)
+        .eq("stripe_payment_intent_id", dispute.payment_intent)
         .maybeSingle();
-      if (purchase) {
-        await admin.from("purchases").update({ status: "disputed" }).eq("id", purchase.id);
-        logAudit("charge_dispute_created", { purchaseId: purchase.id, chargeId: charge.id });
-      } else {
-        logAudit("charge_dispute_created_unmatched_purchase", { chargeId: charge.id });
-      }
+      purchaseId = purchase?.id ?? null;
     }
+
+    const { error: disputeUpsertError } = await admin.from("payment_disputes").upsert(
+      {
+        purchase_id: purchaseId,
+        stripe_dispute_id: dispute.id,
+        stripe_charge_id: dispute.charge,
+        stripe_payment_intent_id: dispute.payment_intent,
+        status: dispute.status,
+        amount_minor: dispute.amount,
+        currency: (dispute.currency ?? "usd").toUpperCase(),
+        reason: dispute.reason ?? null,
+        stripe_created_at: dispute.created ? new Date(dispute.created * 1000).toISOString() : null,
+        stripe_updated_at: new Date().toISOString(),
+        closed_at: event.type === "charge.dispute.closed" ? new Date().toISOString() : null,
+        updated_at: new Date().toISOString(),
+      },
+      { onConflict: "stripe_dispute_id" }
+    );
+    if (disputeUpsertError) {
+      return NextResponse.json({ error: disputeUpsertError.message }, { status: 500 });
+    }
+
+    if (purchaseId) {
+      logAudit(`stripe_${event.type}`, { purchaseId, chargeId: dispute.charge, disputeId: dispute.id });
+    } else {
+      logAudit(`stripe_${event.type}_unmatched_purchase`, { chargeId: dispute.charge, disputeId: dispute.id });
+    }
+
     await markProcessed();
     return NextResponse.json({ ok: true });
   }

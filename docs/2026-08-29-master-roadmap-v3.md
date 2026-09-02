@@ -198,7 +198,7 @@ G1: 같은 데이터로 잔여 수업권·현재 선생님·과거 정산을 언
 - [x] 회사·선생님 취소 시 잔여 30일 미만 수업권 연장
 - [x] 관리자 전용 자녀 간 예외 이전과 호환 계약 검증
 - [x] 부족 수업권 예약 방지와 재구매 흐름
-- [~] 결제 실패·중복 웹훅·차지백 재처리 — 결제 실패·중복 웹훅(멱등성)은 실측 검증 통과. **차지백(`charge.dispute.created`) 처리는 실측 중 버그 발견**: `purchases.status`를 `'disputed'`로 갱신하려는 코드가 enum(`v3_payment_attempt_status`)에 해당 값이 없어 조용히 실패, 분쟁이 와도 `succeeded`로 남는다 — 미수정, 정책 결정 필요(`docs/CURRENT.md` blocker 참고).
+- [x] 결제 실패·중복 웹훅·차지백 재처리 — 결제 실패·중복 웹훅(멱등성)은 실측 검증 통과. **차지백(`charge.dispute.created`/`.updated`/`.closed`) 처리 버그 수정(2026-09-01 후속)**: `purchases.status`를 무효 enum 값(`'disputed'`)으로 갱신하려던 코드를 제거하고, 신규 `payment_disputes` 테이블(`20260924000000_r4_payment_disputes.sql`)을 분쟁 전용 소스오브트루스로 upsert(`stripe_dispute_id` 유니크, idempotent). 분쟁 생성은 `entitlement_ledger`를 건드리지 않음(자동 회수 없음, 정책 확정). 관리자 대사 화면·보호자 영수증에 분쟁 상태 노출 추가. Vitest 8건 + Playwright(`e2e/r4-webhook-dispute.spec.ts`) 4건으로 검증.
 - [x] 부모 결제 영수증과 자녀별 사용 내역
 
 ## R5 — 과목 수강·선생님 배정

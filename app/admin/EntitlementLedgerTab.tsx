@@ -20,6 +20,7 @@ import type {
   listOpenPriceChangeNotices,
   listPendingRefundRequests,
   listPurchasesNeedingReconciliation,
+  listOpenOrRecentPaymentDisputes,
 } from "./entitlement-actions";
 
 type SubTab = "versions" | "notices" | "reconciliation" | "refunds" | "adjust" | "purchase";
@@ -44,6 +45,7 @@ const input = "border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[12.
 type OpenPriceChangeNotice = Awaited<ReturnType<typeof listOpenPriceChangeNotices>>[number];
 type PendingRefundRequest = Awaited<ReturnType<typeof listPendingRefundRequests>>[number];
 type ReconciliationItem = Awaited<ReturnType<typeof listPurchasesNeedingReconciliation>>[number];
+type PaymentDisputeItem = Awaited<ReturnType<typeof listOpenOrRecentPaymentDisputes>>[number];
 
 function formatMinor(minor: number, currency = "USD") {
   return `${(minor / 100).toLocaleString()} ${currency}`;
@@ -55,12 +57,14 @@ export default function EntitlementLedgerTab({
   openPriceChangeNotices,
   pendingRefundRequests,
   purchasesNeedingReconciliation,
+  openOrRecentPaymentDisputes,
 }: {
   products: EntitlementProductListItem[];
   productVersions: ProductVersionListItem[];
   openPriceChangeNotices: OpenPriceChangeNotice[];
   pendingRefundRequests: PendingRefundRequest[];
   purchasesNeedingReconciliation: ReconciliationItem[];
+  openOrRecentPaymentDisputes: PaymentDisputeItem[];
 }) {
   const [sub, setSub] = useState<SubTab>("versions");
 
@@ -92,7 +96,7 @@ export default function EntitlementLedgerTab({
       )}
       {sub === "notices" && <NoticesSection notices={openPriceChangeNotices} />}
       {sub === "reconciliation" && (
-        <ReconciliationSection items={purchasesNeedingReconciliation} />
+        <ReconciliationSection items={purchasesNeedingReconciliation} disputes={openOrRecentPaymentDisputes} />
       )}
       {sub === "refunds" && <RefundsSection requests={pendingRefundRequests} />}
       {sub === "adjust" && <AdjustSection />}
@@ -297,21 +301,58 @@ function NoticesSection({ notices }: { notices: OpenPriceChangeNotice[] }) {
 // 3. 결제 실패·대사 (informational)
 // =========================================================================
 
-function ReconciliationSection({ items }: { items: ReconciliationItem[] }) {
+function ReconciliationSection({
+  items,
+  disputes,
+}: {
+  items: ReconciliationItem[];
+  disputes: PaymentDisputeItem[];
+}) {
   return (
     <div>
       <p className="text-[12px] text-grey-500 mb-3">
         대사가 필요한 결제 시도 목록입니다(정보 확인용 — 자동 해소 기능은 아직 없습니다).
       </p>
       {items.length === 0 ? (
-        <p className="text-[13px] text-grey-500">대사가 필요한 항목이 없습니다.</p>
+        <p className="text-[13px] text-grey-500 mb-5">대사가 필요한 항목이 없습니다.</p>
       ) : (
-        items.map((it) => (
-          <div key={it.paymentAttemptId} className={card}>
-            <div className="text-[13.5px] font-bold text-ink">구매 ID: {it.purchaseId}</div>
-            <div className="text-[12px] text-grey-500 mt-0.5">결제 시도 ID: {it.paymentAttemptId}</div>
+        <div className="mb-5">
+          {items.map((it) => (
+            <div key={it.paymentAttemptId} className={card}>
+              <div className="text-[13.5px] font-bold text-ink">구매 ID: {it.purchaseId}</div>
+              <div className="text-[12px] text-grey-500 mt-0.5">결제 시도 ID: {it.paymentAttemptId}</div>
+              <div className="text-[12px] text-grey-500 mt-0.5">
+                실패 사유: {it.failureReason ?? "미기록"} · 생성: {new Date(it.createdAt).toLocaleString("ko-KR")}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <h3 className="text-[14px] font-extrabold text-ink mb-2">Stripe 분쟁(chargeback)</h3>
+      <p className="text-[12px] text-grey-500 mb-3">
+        진행 중이거나 최근 종결된 분쟁입니다. 분쟁 생성만으로는 수업권이 자동 회수되지
+        않습니다 — 패소로 실제 조정이 필요하면 &quot;조정·연장·이전&quot; 탭에서 수동으로
+        처리하세요.
+      </p>
+      {disputes.length === 0 ? (
+        <p className="text-[13px] text-grey-500">열려 있거나 최근 종결된 분쟁이 없습니다.</p>
+      ) : (
+        disputes.map((d) => (
+          <div key={d.id} className={card}>
+            <div className="text-[13.5px] font-bold text-ink">
+              {d.purchaseId ? `구매 ID: ${d.purchaseId}` : "구매 미매칭(레거시 또는 미확인 결제)"}
+            </div>
             <div className="text-[12px] text-grey-500 mt-0.5">
-              실패 사유: {it.failureReason ?? "미기록"} · 생성: {new Date(it.createdAt).toLocaleString("ko-KR")}
+              분쟁 상태: {d.status} · 금액: {formatMinor(d.amountMinor, d.currency)} · 사유: {d.reason ?? "미기록"}
+            </div>
+            <div className="text-[12px] text-grey-500 mt-0.5">
+              Stripe dispute: {d.stripeDisputeId} · charge: {d.stripeChargeId}
+              {d.stripePaymentIntentId ? ` · payment_intent: ${d.stripePaymentIntentId}` : ""}
+            </div>
+            <div className="text-[12px] text-grey-500 mt-0.5">
+              최근 갱신: {d.stripeUpdatedAt ? new Date(d.stripeUpdatedAt).toLocaleString("ko-KR") : "—"}
+              {d.closedAt ? ` · 종결: ${new Date(d.closedAt).toLocaleString("ko-KR")}` : ""}
             </div>
           </div>
         ))

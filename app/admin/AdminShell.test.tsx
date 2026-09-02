@@ -115,6 +115,7 @@ const baseProps = {
   openPriceChangeNotices: [],
   pendingRefundRequests: [],
   purchasesNeedingReconciliation: [],
+  openOrRecentPaymentDisputes: [],
 };
 
 describe("AdminShell", () => {

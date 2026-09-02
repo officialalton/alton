@@ -67,6 +67,24 @@ const baseProps = {
       createdAt: "2026-08-02T00:00:00Z",
     },
   ],
+  openOrRecentPaymentDisputes: [
+    {
+      id: "dispute1",
+      purchaseId: "purchase3",
+      stripeDisputeId: "dp_test_1",
+      stripeChargeId: "ch_test_1",
+      stripePaymentIntentId: "pi_test_1",
+      status: "needs_response",
+      amountMinor: 21875,
+      currency: "USD",
+      reason: "fraudulent",
+      stripeCreatedAt: "2026-09-01T00:00:00Z",
+      stripeUpdatedAt: "2026-09-01T00:00:00Z",
+      closedAt: null,
+      createdAt: "2026-09-01T00:00:00Z",
+      updatedAt: "2026-09-01T00:00:00Z",
+    },
+  ],
 };
 
 describe("EntitlementLedgerTab", () => {
@@ -136,6 +154,14 @@ describe("EntitlementLedgerTab", () => {
     render(<EntitlementLedgerTab {...baseProps} />);
     fireEvent.click(screen.getByText("결제 실패·대사"));
     expect(screen.getByText("구매 ID: purchase2", { exact: false })).toBeInTheDocument();
+  });
+
+  it("결제 실패·대사 서브탭에서 Stripe 분쟁 정보를 보여준다", () => {
+    render(<EntitlementLedgerTab {...baseProps} />);
+    fireEvent.click(screen.getByText("결제 실패·대사"));
+    expect(screen.getByText("구매 ID: purchase3", { exact: false })).toBeInTheDocument();
+    expect(screen.getByText(/needs_response/, { exact: false })).toBeInTheDocument();
+    expect(screen.getByText(/dp_test_1/, { exact: false })).toBeInTheDocument();
   });
 
   it("환불 요청 서브탭에서 승인 버튼을 누르면 approveRefund를 호출하고 목록에서 제거한다", async () => {

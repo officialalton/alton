@@ -29,6 +29,7 @@ import {
   listOpenPriceChangeNotices,
   listPendingRefundRequests,
   listPurchasesNeedingReconciliation,
+  listOpenOrRecentPaymentDisputes,
 } from "./entitlement-actions";
 import AdminShell from "./AdminShell";
 
@@ -68,6 +69,7 @@ export default async function AdminHomePage({
     openPriceChangeNotices,
     pendingRefundRequests,
     purchasesNeedingReconciliation,
+    openOrRecentPaymentDisputes,
   ] = await Promise.all([
     loadAdminDashboard(supabase, user.id),
     loadSubjectCatalog(supabase),
@@ -94,6 +96,7 @@ export default async function AdminHomePage({
     listOpenPriceChangeNotices(),
     listPendingRefundRequests(),
     listPurchasesNeedingReconciliation(),
+    listOpenOrRecentPaymentDisputes(),
   ]);
 
   const [creditHistoryEntries, qcWarningsEntries] = await Promise.all([
@@ -146,6 +149,7 @@ export default async function AdminHomePage({
       openPriceChangeNotices={openPriceChangeNotices}
       pendingRefundRequests={pendingRefundRequests}
       purchasesNeedingReconciliation={purchasesNeedingReconciliation}
+      openOrRecentPaymentDisputes={openOrRecentPaymentDisputes}
     />
   );
 }

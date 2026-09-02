@@ -35,6 +35,7 @@ import type {
   listOpenPriceChangeNotices,
   listPendingRefundRequests,
   listPurchasesNeedingReconciliation,
+  listOpenOrRecentPaymentDisputes,
 } from "./entitlement-actions";
 import type { AdminSubject } from "./subject-data";
 import type { DocEditorData } from "./curriculum-doc-data";
@@ -94,6 +95,7 @@ export default function AdminShell({
   openPriceChangeNotices,
   pendingRefundRequests,
   purchasesNeedingReconciliation,
+  openOrRecentPaymentDisputes,
   googleLinkError,
   googleLinkSuccess,
 }: {
@@ -128,6 +130,7 @@ export default function AdminShell({
   openPriceChangeNotices: Awaited<ReturnType<typeof listOpenPriceChangeNotices>>;
   pendingRefundRequests: Awaited<ReturnType<typeof listPendingRefundRequests>>;
   purchasesNeedingReconciliation: Awaited<ReturnType<typeof listPurchasesNeedingReconciliation>>;
+  openOrRecentPaymentDisputes: Awaited<ReturnType<typeof listOpenOrRecentPaymentDisputes>>;
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -236,6 +239,7 @@ export default function AdminShell({
               openPriceChangeNotices={openPriceChangeNotices}
               pendingRefundRequests={pendingRefundRequests}
               purchasesNeedingReconciliation={purchasesNeedingReconciliation}
+              openOrRecentPaymentDisputes={openOrRecentPaymentDisputes}
             />
           ) : activeTab === "contracts" ? (
             <ContractsTab contracts={familyContracts} acceptedProposals={acceptedProposalsForContract} />

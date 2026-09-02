@@ -77,6 +77,66 @@ export async function loadPurchaseDetail(
   };
 }
 
+export type PaymentDisputeItem = {
+  id: string;
+  purchaseId: string | null;
+  stripeDisputeId: string;
+  stripeChargeId: string;
+  stripePaymentIntentId: string | null;
+  status: string;
+  amountMinor: number;
+  currency: string;
+  reason: string | null;
+  stripeCreatedAt: string | null;
+  stripeUpdatedAt: string | null;
+  closedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+// Stripe 분쟁 상태 중 "종결"로 보는 값 — closed_at이 채워지는 시점과 별개로
+// 화면에서 "진행 중" 필터링에 쓴다(won/lost/charge_refunded는 Stripe 쪽 최종
+// 상태, warning_closed도 워닝 단계 종결).
+const CLOSED_DISPUTE_STATUSES = new Set(["won", "lost", "charge_refunded", "warning_closed"]);
+
+/**
+ * 열려 있는(진행 중인) 분쟁 + 최근 종결된 분쟁을 함께 반환 — 관리자 대사
+ * 화면(EntitlementLedgerTab "결제 실패·대사")에서 "open or recent"를 모두
+ * 보여줘야 하므로, closed_at 유무가 아니라 최근성으로 좁힌다(최근 30일 종결
+ * 포함, 그 외 open 상태는 기간 제한 없음).
+ */
+export async function loadOpenOrRecentPaymentDisputes(
+  supabase: SupabaseClient
+): Promise<PaymentDisputeItem[]> {
+  const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
+  const { data, error } = await supabase
+    .from("payment_disputes")
+    .select(
+      "id, purchase_id, stripe_dispute_id, stripe_charge_id, stripe_payment_intent_id, status, amount_minor, currency, reason, stripe_created_at, stripe_updated_at, closed_at, created_at, updated_at"
+    )
+    .order("updated_at", { ascending: false });
+  if (error) throw new Error(error.message);
+
+  return (data ?? [])
+    .filter((row) => !CLOSED_DISPUTE_STATUSES.has(row.status) || row.updated_at >= thirtyDaysAgo)
+    .map((row) => ({
+      id: row.id,
+      purchaseId: row.purchase_id,
+      stripeDisputeId: row.stripe_dispute_id,
+      stripeChargeId: row.stripe_charge_id,
+      stripePaymentIntentId: row.stripe_payment_intent_id,
+      status: row.status,
+      amountMinor: row.amount_minor,
+      currency: row.currency,
+      reason: row.reason,
+      stripeCreatedAt: row.stripe_created_at,
+      stripeUpdatedAt: row.stripe_updated_at,
+      closedAt: row.closed_at,
+      createdAt: row.created_at,
+      updatedAt: row.updated_at,
+    }));
+}
+
 export type EntitlementProductListItem = {
   id: string;
   code: string;

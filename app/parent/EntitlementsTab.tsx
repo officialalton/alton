@@ -23,6 +23,21 @@ const STATUS_LABEL: Record<string, string> = {
   cancelled: "결제 취소",
 };
 
+// Stripe dispute.status 표시용 — 원문 값을 그대로 저장하므로(신규 상태 추가돼도
+// 스키마 변경 불필요) 매핑에 없는 값은 원문을 그대로 보여준다.
+const DISPUTE_STATUS_LABEL: Record<string, string> = {
+  warning_needs_response: "분쟁 경고 · 대응 필요",
+  warning_under_review: "분쟁 경고 · 검토 중",
+  warning_closed: "분쟁 경고 · 종결",
+  needs_response: "분쟁 진행 중 · 대응 필요",
+  under_review: "분쟁 검토 중",
+  charge_refunded: "분쟁 · 환불 처리됨",
+  won: "분쟁 · 승소(정상 유지)",
+  lost: "분쟁 · 패소",
+};
+
+const CLOSED_DISPUTE_STATUSES = new Set(["won", "lost", "charge_refunded", "warning_closed"]);
+
 export default function EntitlementsTab({
   data,
   purchaseStatus,
@@ -211,6 +226,9 @@ export default function EntitlementsTab({
                     </span>
                     <span className="text-[12px] text-grey-500">
                       {STATUS_LABEL[r.status] ?? r.status}
+                      {r.disputeStatus && !CLOSED_DISPUTE_STATUSES.has(r.disputeStatus) && (
+                        <span className="ml-1.5 text-red font-semibold">· 분쟁 진행 중</span>
+                      )}
                     </span>
                   </button>
                   {expandedPurchaseId === r.purchaseId && <ReceiptDetail receipt={r} />}
@@ -248,6 +266,7 @@ function ReceiptDetail({ receipt: r }: { receipt: PurchaseReceipt }) {
     ["환불 정책 버전", r.refundPolicyVersion ?? "—"],
     ["약관 버전", r.termsVersion ?? "—"],
     ["결제 상태", STATUS_LABEL[r.status] ?? r.status],
+    ["분쟁 상태", r.disputeStatus ? (DISPUTE_STATUS_LABEL[r.disputeStatus] ?? r.disputeStatus) : "없음"],
     ["결제대행사 거래 ID", r.stripePaymentIntentId ?? r.stripeCheckoutSessionId ?? "—"],
     ["구매 확인 시각", r.confirmedAt ? new Date(r.confirmedAt).toLocaleString("ko-KR") : "미확인"],
   ];

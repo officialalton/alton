@@ -10,6 +10,7 @@ const receiptUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
 const paymentAttemptInsertMock = vi.fn().mockResolvedValue({ error: null });
 const purchaseUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
 const purchaseSelectMaybeSingleMock = vi.fn();
+const disputeUpsertMock = vi.fn().mockResolvedValue({ error: null });
 
 const fromMock = vi.fn((table: string) => {
   if (table === "external_event_receipts") {
@@ -29,6 +30,9 @@ const fromMock = vi.fn((table: string) => {
       update: () => ({ eq: purchaseUpdateEqMock }),
       select: () => ({ eq: () => ({ maybeSingle: purchaseSelectMaybeSingleMock }) }),
     };
+  }
+  if (table === "payment_disputes") {
+    return { upsert: disputeUpsertMock };
   }
   throw new Error(`unexpected table ${table}`);
 });
@@ -198,18 +202,128 @@ describe("POST /api/webhooks/stripe (R4 entitlement 구매 플로우)", () => {
     expect(purchaseUpdateEqMock).not.toHaveBeenCalled();
   });
 
-  it("charge.dispute.created(분쟁)는 purchases를 disputed로 남기되 entitlement를 자동 회수하지 않는다", async () => {
+  it("charge.dispute.created(분쟁)는 payment_disputes에 upsert하고, purchases.status는 절대 건드리지 않으며, entitlement도 자동 회수하지 않는다", async () => {
     purchaseSelectMaybeSingleMock.mockResolvedValue({ data: { id: "purchase1" } });
     const { POST } = await import("./route");
     const request = makeRequest({
       type: "charge.dispute.created",
-      data: { object: { id: "dp_1", payment_intent: "pi_1" } },
+      data: {
+        object: {
+          id: "dp_1",
+          charge: "ch_1",
+          payment_intent: "pi_1",
+          status: "needs_response",
+          amount: 21875,
+          currency: "usd",
+          reason: "fraudulent",
+          created: 1735689600,
+        },
+      },
     });
 
     const res = await POST(request);
     expect(res.status).toBe(200);
-    expect(purchaseUpdateEqMock).toHaveBeenCalledWith("id", "purchase1");
+    // purchases.status는 v3_payment_attempt_status를 재사용하고 'disputed' 값이 없다
+    // — 어떤 경로로도 이 테이블에 쓰지 않는다는 것을 명시적으로 검증한다.
+    expect(purchaseUpdateEqMock).not.toHaveBeenCalled();
     expect(createGrantMock).not.toHaveBeenCalled();
+    expect(disputeUpsertMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        purchase_id: "purchase1",
+        stripe_dispute_id: "dp_1",
+        stripe_charge_id: "ch_1",
+        stripe_payment_intent_id: "pi_1",
+        status: "needs_response",
+        amount_minor: 21875,
+        currency: "USD",
+        reason: "fraudulent",
+        closed_at: null,
+      }),
+      { onConflict: "stripe_dispute_id" }
+    );
+  });
+
+  it("charge.dispute.updated는 같은 stripe_dispute_id로 upsert해 기존 행을 갱신한다(중복 생성 아님)", async () => {
+    purchaseSelectMaybeSingleMock.mockResolvedValue({ data: { id: "purchase1" } });
+    const { POST } = await import("./route");
+    const request = makeRequest({
+      type: "charge.dispute.updated",
+      data: {
+        object: {
+          id: "dp_1",
+          charge: "ch_1",
+          payment_intent: "pi_1",
+          status: "under_review",
+          amount: 21875,
+          currency: "usd",
+          reason: "fraudulent",
+          created: 1735689600,
+        },
+      },
+    });
+
+    const res = await POST(request);
+    expect(res.status).toBe(200);
+    expect(disputeUpsertMock).toHaveBeenCalledWith(
+      expect.objectContaining({ stripe_dispute_id: "dp_1", status: "under_review" }),
+      { onConflict: "stripe_dispute_id" }
+    );
+    expect(purchaseUpdateEqMock).not.toHaveBeenCalled();
+  });
+
+  it("charge.dispute.closed는 closed_at을 채워 upsert하고 purchases.status는 그대로 둔다", async () => {
+    purchaseSelectMaybeSingleMock.mockResolvedValue({ data: { id: "purchase1" } });
+    const { POST } = await import("./route");
+    const request = makeRequest({
+      type: "charge.dispute.closed",
+      data: {
+        object: {
+          id: "dp_1",
+          charge: "ch_1",
+          payment_intent: "pi_1",
+          status: "won",
+          amount: 21875,
+          currency: "usd",
+          reason: "fraudulent",
+          created: 1735689600,
+        },
+      },
+    });
+
+    const res = await POST(request);
+    expect(res.status).toBe(200);
+    expect(disputeUpsertMock).toHaveBeenCalledWith(
+      expect.objectContaining({ stripe_dispute_id: "dp_1", status: "won", closed_at: expect.any(String) }),
+      { onConflict: "stripe_dispute_id" }
+    );
+    expect(purchaseUpdateEqMock).not.toHaveBeenCalled();
+  });
+
+  it("payment_intent로 매칭되는 purchase가 없어도 분쟁을 조용히 버리지 않고 purchase_id=null로 기록한다", async () => {
+    purchaseSelectMaybeSingleMock.mockResolvedValue({ data: null });
+    const { POST } = await import("./route");
+    const request = makeRequest({
+      type: "charge.dispute.created",
+      data: {
+        object: {
+          id: "dp_2",
+          charge: "ch_2",
+          payment_intent: "pi_unmatched",
+          status: "needs_response",
+          amount: 5000,
+          currency: "usd",
+          reason: null,
+          created: 1735689600,
+        },
+      },
+    });
+
+    const res = await POST(request);
+    expect(res.status).toBe(200);
+    expect(disputeUpsertMock).toHaveBeenCalledWith(
+      expect.objectContaining({ purchase_id: null, stripe_dispute_id: "dp_2" }),
+      { onConflict: "stripe_dispute_id" }
+    );
   });
 
   it("서명/secret이 없으면 401(fail-closed) — R4 이벤트도 예외 없음", async () => {

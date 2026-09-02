@@ -57,6 +57,7 @@ export type PurchaseReceipt = {
   stripePaymentIntentId: string | null;
   createdAt: string;
   confirmedAt: string | null;
+  disputeStatus: string | null;
 };
 
 export type ChildEntitlementSummary = {
@@ -188,7 +189,7 @@ export async function loadParentEntitlementsData(
   const { data: receipts } = await admin
     .from("purchase_receipts")
     .select(
-      "purchase_id, child_id, contract_id, contract_version_number, product_code, lesson_type_label, lesson_duration_minutes, quantity, unit_price_minor, package_price_minor, discount_minor, discount_percent, tax_minor, total_minor, currency, validity_months, expires_at, price_policy_version, refund_policy_version, terms_version, status, stripe_checkout_session_id, stripe_payment_intent_id, created_at, confirmed_at"
+      "purchase_id, child_id, contract_id, contract_version_number, product_code, lesson_type_label, lesson_duration_minutes, quantity, unit_price_minor, package_price_minor, discount_minor, discount_percent, tax_minor, total_minor, currency, validity_months, expires_at, price_policy_version, refund_policy_version, terms_version, status, stripe_checkout_session_id, stripe_payment_intent_id, created_at, confirmed_at, dispute_status"
     )
     .in("child_id", childIds)
     .order("created_at", { ascending: false });
@@ -238,6 +239,7 @@ export async function loadParentEntitlementsData(
         stripePaymentIntentId: r.stripe_payment_intent_id,
         createdAt: r.created_at,
         confirmedAt: r.confirmed_at,
+        disputeStatus: (r as { dispute_status?: string | null }).dispute_status ?? null,
       }));
 
     const eligible = activeChildIds.has(child.studentId);

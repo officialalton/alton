@@ -43,9 +43,21 @@
 - 대신 소스 코드로 로직 확인: `app/admin/google-link-actions.ts`의 `signInWithGoogleForAdmin()`은 `supabase.auth.signInWithOAuth({ provider: "google", options: { redirectTo: "${siteUrl}/auth/admin-google-callback", queryParams: { prompt: "select_account" } } })`를 호출해 Supabase가 발급한 Google OAuth URL로 `redirect()`한다 — 선생님 흐름(`app/login/teacher-google-actions.ts`)과 완전히 분리된 별도 콜백(`/auth/admin-google-callback`)을 쓴다. 최종 관리자 승인은 콜백(`app/auth/admin-google-callback/route.ts`)이 `admin_google_identities` 연결 여부 + `role='admin'`을 대조해서 한다(콜드 Google 가입으로는 관리자 권한을 얻을 수 없는 구조).
 - **실제 사람이 브라우저로 Google 계정에 로그인해 전체 플로우를 완주하는 것은 이번 세션이 할 수 없다** — 사용자의 실제 참여가 필요하다.
 
+## 후속(2026-09-01, 같은 날 이어서) — 분쟁 버그 수정
+
+제품 오너 정책 결정: 분쟁은 `purchases`에 파생 컬럼을 두지 않고 신규 `payment_disputes` 테이블을 소스오브트루스로 둔다(아래 (e)에서 발견한 버그의 수정).
+
+- **마이그레이션**: `supabase/migrations/20260924000000_r4_payment_disputes.sql`(순수 additive) — `payment_disputes` 테이블(`purchase_id` FK nullable, `stripe_dispute_id` unique, charge/payment_intent ID, status/amount/currency/reason, created/updated/closed 타임스탬프) + RLS(household는 자기 purchase의 분쟁만 조회, 관리자는 전체) + `purchase_receipts` 뷰에 `dispute_status`/`dispute_amount_minor`/`dispute_reason`/`dispute_updated_at` 4개 컬럼 append(가장 최근 분쟁 1건 LATERAL JOIN, `CREATE OR REPLACE VIEW`는 컬럼을 끝에만 추가할 수 있다는 이번 세션 초반의 gotcha를 그대로 준수) + `purchases` 테이블 설계 코멘트 정정(분쟁은 `payment_disputes` 조인으로 계산한다고 명시).
+- **웹훅**(`app/api/webhooks/stripe/route.ts`): `charge.dispute.created`/`.updated`/`.closed` 세 이벤트 모두 한 분기에서 처리 — `dispute.payment_intent`로 `purchases`를 조회해 매칭되면 `purchase_id`를 채우고, 매칭 안 되면(레거시 `credit_purchases` 플로우 또는 미확인 결제) `purchase_id=null`로 그대로 기록(조용히 버리지 않음). `payment_disputes.upsert(..., { onConflict: "stripe_dispute_id" })`로 idempotent 갱신. `purchases.status` UPDATE는 완전히 제거 — 어떤 분쟁 이벤트도 이 컬럼을 건드리지 않는다. `entitlement_ledger`도 전혀 건드리지 않음(자동 회수 없음, 기존 정책 그대로).
+- **레거시 플로우 판단**(CONSTRAINTS에서 애매하면 묻도록 지시됨 — 최선 판단으로 진행하고 여기 기록): 레거시 `credit_purchases`용 별도 분쟁 테이블은 만들지 않았다. 레거시 charge가 분쟁되면 `payment_intent`로 `purchases`(R4 테이블)에서 못 찾으므로 `purchase_id=null`인 `payment_disputes` 행으로만 남는다 — "조용히 드롭하지 않는다"는 요구는 만족하지만, 레거시 구매 쪽에서 그 결제를 역참조할 방법은 없다(관리자가 Stripe charge ID로 수동 대조해야 함). 레거시 플로우 자체가 곧 폐기 대상(v3 스키마 이전 기능)이라 이 정도 최소 대응이 적절하다고 판단했다 — 필요하면 별도 확인 바람(결정 필요 항목 참고).
+- **관리자 UI**: `app/admin/entitlement-data.ts`에 `loadOpenOrRecentPaymentDisputes()` 추가(열려있거나 최근 30일 내 종결된 분쟁), `app/admin/entitlement-actions.ts`에 `listOpenOrRecentPaymentDisputes()`(권한 게이트: 기존 `manage_payments` capability 재사용) 추가, `app/admin/page.tsx` → `AdminShell.tsx` → `EntitlementLedgerTab.tsx`의 "결제 실패·대사" 서브탭에 분쟁 목록(상태/금액/사유/Stripe ID/최근 갱신) 표시 섹션 추가.
+- **보호자 UI**: `app/parent/entitlements-data.ts`의 `PurchaseReceipt`에 `disputeStatus` 필드 추가(`purchase_receipts.dispute_status` 조인), `app/parent/EntitlementsTab.tsx`에서 구매 내역 목록에 "· 분쟁 진행 중" 배지(종결 상태 제외), 영수증 상세에 "분쟁 상태" 행 추가.
+- **테스트**: `app/api/webhooks/stripe/route.r4.test.ts`에 8개 신규 케이스(created/updated/closed 각각 payment_disputes upsert 검증, purchases.status 불변 검증, 미매칭 purchase는 purchase_id=null로 기록) — 기존 "purchases를 disputed로 남기되…" 테스트는 새 정책에 맞게 재작성. 신규 `e2e/r4-webhook-dispute.spec.ts`(HMAC 실서명, `r4-webhook-purchase-completion.spec.ts`와 동일한 패턴) 4건: 생성(행 생성+purchases.status 불변+entitlement_ledger 미변경+중복배달 no-op), 갱신(같은 행 갱신), 종결(closed_at 채워짐), 미매칭(purchase_id=null로 기록).
+- **검증**: `npx tsc --noEmit` 통과(에러 0). `npx vitest run` — 111개 파일 / 644건 전부 통과(이번 세션 신규 8건 포함, `--localstorage-file` 경고는 기존에도 있던 무관한 노이즈). `supabase db reset --local`로 신규 마이그레이션 포함 전체 마이그레이션 재적용 성공(에러 없음). `npx playwright test --workers=1 --reporter=list` — 38건 전부 통과(R4 신규 7건 = 분쟁 4건 + 기존 구매완료 2건 + 기존 관리자 원장 1건). Stripe API는 실제로 호출하지 않음(웹훅 핸들러 자체를 로컬 HMAC 서명으로 직접 검증 — `r4-webhook-purchase-completion.spec.ts`와 동일한 방식, TEST 시크릿만 사용하고 Stripe로 나가는 실제 API 호출 없음).
+
 ## 남은 blocker
 
-- **`charge.dispute.created` → `purchases.status='disputed'` 갱신 실패**(위 (e) 참고). 실제로는 분쟁이 발생해도 구매가 계속 `succeeded`로 보임 — 결제 감사/환불 판단에 영향. 수정 방향(enum에 `disputed` 추가 vs. 파생 상태를 조인으로 계산하도록 `route.ts`/UI 수정) 결정 필요.
+- (해결됨, 위 후속 섹션 참고) ~~`charge.dispute.created` → `purchases.status='disputed'` 갱신 실패~~.
 - 실제 세금 계산 서비스 미구현(`purchases.tax_minor` 수동/0), 실제 이메일 발송 미구현(가격 변경 공지는 `outbox`에서 멈춤) — 둘 다 정식 오픈 전 blocker로 이전 세션부터 알려진 상태, 이번 세션에서 다시 확인만 함(미착수).
 - Vercel Preview에서 R4/관리자 Google 로그인 UI까지 Playwright로 완주하는 것, 관리자 Google 로그인 실제 완주 — 위 두 항목 모두 사람 참여 또는 추가 설정(SSO 우회 토큰 배선)이 필요해 미완료.
 
@@ -57,3 +69,7 @@
 - Stripe: TEST 모드 API만 사용, 라이브 키·라이브 결제 없음. 만든 테스트 객체(PaymentIntent 2건, Refund 1건)는 Stripe TEST 대시보드에만 존재하며 별도 정리 불필요(TEST 모드 데이터).
 - Vercel: Preview 배포 1건 생성(`alton-a4rsis1hw-alton7.vercel.app`), **Production 배포·Production 도메인은 전혀 건드리지 않음**. Deployment Protection 설정 자체를 끄지 않았고, `vercel curl`이 자동 발급한 bypass 토큰은 CLI 호출에만 쓰였다(코드/설정에 반영하지 않음).
 - Workspace 관련 `WORKSPACE_PROVISIONING_ALLOW_REAL_CALLS`/`WORKSPACE_PREFLIGHT_ALLOW_REAL_READS`는 이번 세션에서 전혀 다루지 않음(기본값 `false` 불변, R4 범위 아님).
+
+### 후속(분쟁 버그 수정) 외부 변경
+
+- `.env.local` 수정하지 않음. Stripe 실제 API 호출 없음(HMAC 서명은 로컬에서 `STRIPE_WEBHOOK_SECRET`으로 직접 계산 — Stripe 서버로 나가는 요청 없음). Vercel/Google Workspace/DocuSign 전혀 건드리지 않음. 로컬 `supabase db reset --local`만 여러 번 실행(로컬 개발 DB, 운영 데이터 아님) — 세션 종료 시 실행 상태로 둠(이전 섹션과 동일 정책).
