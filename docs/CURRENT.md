@@ -66,7 +66,8 @@
   - **5/N 완료**: 취소(`cancel_lesson_booking()` — 학생 24h+ release/24h미만 consume, 선생님·회사 취소는 release+30일 미만 만료 시 30일로 연장), 취소 이력 테이블(예약 덮어쓰지 않음). 지각·노쇼는 사용자 최신 지시에 따라 **"신고"+"원본 접속기록 수집"까지만**(수업권 소진·출석확정·정산은 R7로 명시 이관) — `session_incident_reports`/`session_access_events`(Meet vs ALTON 접속을 source로 분리, 서로 보정하지 않음).
   - **6/N 완료**: 예약 서버 액션(`lib/booking/*`, `app/{parent,student,teacher,admin}/*booking*-actions.ts`) + 슬롯조회 알고리즘(순수함수, `AT TIME ZONE`과 동일한 DST 처리를 `Intl`로 구현) + UI 4종(보호자·학생 예약 탭, 선생님 가용시간 관리 탭 — 원래 빈 슬롯이었음, 관리자 예약 운영 화면). 리팩터링 중 **실제 권한 우회 취약점 발견·수정**(취소 액션이 reservationId가 실제로 그 childId 소유인지 검증하지 않던 문제 — `assertReservationBelongsToChild()` 추가). 실제 로컬 브라우저로 보호자 1회예약·주간반복8회·취소, 선생님 가용시간 등록, 관리자 재처리·회사취소까지 전부 클릭해서 검증(단순 tsc/vitest 아님) — 이 과정에서 "예정된 수업" 미갱신 버그와 `window.prompt()` 불안정성(인라인 폼으로 교체) 2건 추가 발견·수정.
   - 전 단계 로컬 dev DB 적용·전체 Vitest 704건·tsc 클린·전체 Playwright(--workers=1) 재확인(1건 실패는 R6 변경 제거한 베이스라인에서도 재현되는 기존 결함으로 실측 확인, 회귀 아님) 후 원격 dev DB 반영·커밋 완료.
-  - **미완료**: AI 회의록 동의게이트(7/N), 알림 outbox(8/N), Calendly/Zoom 제거(9/N, E2E 통과 후). Google Sandbox 외부 호출 승인 요청은 로컬·mock 검증 전부 끝난 뒤 한 번에 제출 예정(아직 미제출, 모든 외부 호출 플래그 기본 false 유지 중).
+  - **7/N 완료**: AI 회의록(Smart Notes) 동의 게이트 — 신규 정책 테이블 대신 R3가 이미 만들어둔 `ai_notes_consent_events` 재사용(그 마이그레이션 주석이 정확히 이 용도로 예약해둠). opt-out 모델(기본 ON), `confirm_lesson_booking()`이 세션 생성 시 판정을 스냅샷. 스모크 테스트로 같은 트랜잭션 내 연속 이벤트가 `effective_at` 동률로 판정이 모호해지는 버그 발견·수정(identity 컬럼 추가). 보호자 토글 UI 포함.
+  - **미완료**: 알림 outbox(8/N), Calendly/Zoom 제거(9/N, E2E 통과 후). Meet 실제 대조·Google Sandbox 외부 호출 승인 요청은 로컬·mock 검증 전부 끝난 뒤 한 번에 제출 예정(아직 미제출, 모든 외부 호출 플래그 기본 false 유지 중).
 
 ## 다음 R 착수 시 읽을 문서
 

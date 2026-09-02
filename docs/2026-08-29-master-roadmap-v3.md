@@ -269,7 +269,7 @@ R5는 위 항목 전부 완료로 종료한다. 남은 항목(관리자 학생 �
 - [ ] Calendar 이벤트와 고유 Meet 생성 — `createCalendarEventWithMeet()`·재처리 워커 구현·단위테스트 완료(R6 2/N, `CALENDAR_SYNC_ALLOW_REAL_CALLS` 기본 false), 예약 서버 액션에서 실제 호출 배선은 6/N에서. 실제 Google API 호출(Sandbox 검증)은 별도 승인 요청 후.
 - [ ] Smart Notes 자동 활성화, 영상·원본 음성 녹화 및 별도 Meet 전사 비활성화, Smart Notes 수반 텍스트 전사의 제한 보관 — 7/N에서 진행 예정.
 - [ ] 녹화 OFF 상태에서 Smart Notes 화면 스크린샷 미생성 실측 검증 — Gate C에서 이미 검증된 기존 증거 인용 예정(7/N), 재실험하지 않음.
-- [ ] 보호자 AI 회의록 거부 시 세션별 Smart Notes 비활성화 — 7/N에서 진행 예정.
+- [x] 보호자 AI 회의록 거부 시 세션별 Smart Notes 비활성화 **(2026-09-02, R6 7/N)** `has_ai_notes_consent()`/`set_ai_notes_consent_as_guardian()`(R3 `ai_notes_consent_events` 재사용, 신규 정책 테이블 없음) — `confirm_lesson_booking()`이 세션 생성 시점에 판정을 스냅샷해 `sessions.smart_notes_status`에 반영. 보호자 토글 UI(`ConsentTab.tsx`) 포함.
 - [ ] SmartNote 생성 이벤트·Meet API 대조·세션 연결 — `session_access_events`/`session_incident_reports` 스키마는 R6 5/N에서 준비 완료(google_meet_api/alton_client source 분리), 실제 Smart Notes 대조 배선은 7/N.
 - [x] 취소 이력 보존(기존 예약을 덮어쓰지 않고 취소 이력 남긴 뒤 별도 새 예약) **(2026-09-02, R6 5/N·6/N)** `cancel_lesson_booking()` + `reservation_cancellations`, 실제 취소 UI(`LessonBookingTab.tsx`/`BookingReconciliationPanel.tsx`)까지 실브라우저 검증 완료. 지각·노쇼는 **R6에서는 "신고"와 원본 접속기록 수집까지만**(수업권 최종 소진·출석 확정·정산 판정은 R7 범위로 명시 이관, 2026-09-02 사용자 지시) — `session_incident_reports`(신고 로그) 스키마는 5/N에서 완료, **신고 제출 UI는 아직 없음**(6/N 범위에서 booking/availability/reconciliation UI만 만들었고 지각·노쇼 신고 화면은 후속 단계로 남음 — R7 착수 전 필요시 별도 처리).
 - [x] 선생님 취소 시 예약·수업권 hold 해제 후 학생의 일반 새 예약 흐름 **(2026-09-02, R6 5/N·6/N)** `cancel_lesson_booking()`이 선생님/회사 취소 시 항상 release + 만료 30일 미만이면 30일로 연장(스모크 테스트로 실측 확인). 대체 선생님·우선 재예약 기능은 의도적으로 만들지 않음(스펙 원문) — 재예약은 일반 예약 UI(`LessonBookingTab.tsx`, 6/N)를 그대로 사용, 별도 화면 불필요.

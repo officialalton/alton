@@ -244,10 +244,46 @@ dev DB에 실제 fixture(계약·subject_enrollment·active teacher_assignment·
 
 전체 Vitest 704건·tsc 클린. 로컬 fixture는 검증 후 `supabase db reset --local`로 정리.
 
+## 7/N — AI 회의록(Smart Notes) 동의 게이트 (완료, 2026-09-02)
+
+마이그레이션: `supabase/migrations/20261001000000_r6_ai_notes_consent_gate.sql`.
+
+**신규 정책 테이블을 만들지 않았다** — 조사 결과 R3(`20260913000000_r3_contract_model_realignment.sql`
+§8)에서 이미 `ai_notes_consent_events`(student_id/opted_in/policy_version/actor_id/
+effective_at/revoked_at)를 만들어뒀고, 그 마이그레이션 주석에 "실제 Smart Notes on/off
+적용 로직과 수동 리뷰 task는 R6/R9 범위이며 이 마이그레이션에서 만들지 않는다"라고 명시돼
+있었다 — 정확히 이번 R6 지시("필수 개인정보 동의와 분리된 기존 선택 동의 구조 재사용")가
+가리키는 테이블이었다. RLS도 이미 있었음(관리자/본인학생/보호자 조회, 관리자/운영자 쓰기).
+
+구현:
+- `has_ai_notes_consent(p_student_id)` — opt-out 모델(기본 ON). 가장 최근 미철회 이벤트의
+  `opted_in`을 반환, 이력이 전혀 없으면 true.
+- `set_ai_notes_consent_as_guardian(p_student_id, p_opted_in, p_reason)` — R2
+  `consent_as_guardian()`과 동일한 guardian 관계 검증 패턴, `authenticated`에 직접 grant(보호자가
+  세션 클라이언트로 직접 호출).
+- `confirm_lesson_booking()`을 다시 CREATE OR REPLACE해 세션 생성 시점에 `has_ai_notes_consent()`
+  판정을 스냅샷해 `sessions.smart_notes_status`를 `pending`(허용) 또는 `disabled_by_guardian`
+  (거부)으로 채움 — 로직 추가는 이 한 곳뿐, 나머지 4/N 로직은 그대로.
+- 앱: `app/parent/consent-actions.ts`에 `setAiNotesConsentForChild()` 추가,
+  `app/parent/consent-data.ts`의 `ChildConsentStatus`에 `aiNotesOptedIn` 추가,
+  `ConsentTab.tsx`에 만 13세 미만 여부와 무관하게 전체 자녀에게 보이는 별도 토글 섹션 추가
+  (기존 필수 동의 카드와 명확히 분리된 섹션).
+
+**검증 중 발견·수정한 실제 버그**: `has_ai_notes_consent()`가 `effective_at desc`만으로 "가장
+최근" 이벤트를 판정했는데, Postgres `now()`는 트랜잭션 시작 시점에 고정되므로 같은 트랜잭션
+안에서 opt-out 후 바로 opt-in(또는 그 반대)을 연속 기록하면 두 이벤트의 `effective_at`이
+완전히 같아져 판정이 모호해지는 실제 버그를 스모크 테스트로 발견 — `identity` 컬럼(`seq`)을
+추가해 `order by effective_at desc, seq desc`로 결정론적 순서를 보장하도록 수정.
+
+Meet 이벤트-SmartNote 생성 대조(실제 API 폴링)는 이번에 배선하지 않는다 — 그 파이프라인은
+Google Workspace Events API 구독이 필요해 Sandbox 승인 이후로 남긴다(5/N에서 만든
+`session_access_events` 스키마가 그 대조 결과를 받을 자리를 이미 마련해둠). 녹화 OFF 상태
+스크린샷 0개 등 Gate C 기존 검증 결과는 재실험하지 않고 그대로 인용.
+
+전체 Vitest 706건·tsc 클린. 원격 dev DB 반영 완료.
+
 ## 다음 (미완료)
 
-- 7/N: AI 회의록/Smart Notes 동의 게이트(신규 정책 테이블, `guardian_consents` 패턴 재사용,
-  Gate C 기존 증거 인용 — 재검증하지 않음) + Meet 대조 배선(스키마는 5/N에서 이미 준비).
 - 8/N: 알림 outbox(24h/2h 리마인드 + 예약/취소 직후 알림, 그린필드) + 관리자 불일치 재처리 화면.
 - 9/N: Calendly/Zoom 제거(신규 흐름 로컬 E2E 통과 후에만).
 - Google Sandbox 외부 호출 승인 요청(FreeBusy/Calendar/Meet 실제 생성·Workspace Events 구독 등)은
