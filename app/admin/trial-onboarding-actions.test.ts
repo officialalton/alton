@@ -1,10 +1,11 @@
 import { describe, expect, it, vi, beforeEach } from "vitest";
 
-const { adminRpcMock, adminFromMock, companySignOffMock, sendContractMock } = vi.hoisted(() => ({
+const { adminRpcMock, adminFromMock, companySignOffMock, sendContractMock, sendEmailMock } = vi.hoisted(() => ({
   adminRpcMock: vi.fn(),
   adminFromMock: vi.fn(),
   companySignOffMock: vi.fn(),
   sendContractMock: vi.fn(),
+  sendEmailMock: vi.fn(),
 }));
 vi.mock("@/lib/supabase-admin", () => ({
   createAdminClient: () => ({ rpc: adminRpcMock, from: adminFromMock }),
@@ -20,11 +21,14 @@ vi.mock("./consultation-actions", () => ({
   companySignOffContractVersion: companySignOffMock,
   sendContractForSignature: sendContractMock,
 }));
+vi.mock("@/lib/email", () => ({ sendEmail: sendEmailMock }));
+vi.mock("@/lib/request-origin", () => ({ currentRequestOrigin: () => Promise.resolve("http://localhost:3010") }));
 
 import {
   confirmTrialIntentAction,
   createTrialOnboardingLinkAction,
   sendRegularContractOneClickAction,
+  sendTrialOnboardingNoticeAction,
 } from "./trial-onboarding-actions";
 
 describe("confirmTrialIntentAction", () => {
@@ -186,5 +190,93 @@ describe("sendRegularContractOneClickAction — 실패 후 재처리→성공", 
     expect(result).toEqual({ status: "already_sent", contractVersionId: "version1", envelopeId: "env-already-sent" });
     expect(sendContractMock).not.toHaveBeenCalled();
     expect(companySignOffMock).not.toHaveBeenCalled();
+  });
+});
+
+// M4 (6/N) — "체험 온보딩 안내 발송": 중복 클릭으로 같은 내용 이메일이 두 번
+// 나가지 않는지, 발송 실패가 계정 생성과 무관하게(그 자체로만) 남는지 고정.
+describe("sendTrialOnboardingNoticeAction", () => {
+  const baseParams = {
+    consultationId: "c1",
+    guardianEmail: "g@example.com",
+    guardianName: "학부모",
+    studentName: "학생",
+    studentEmail: "s@example.com",
+  };
+
+  beforeEach(() => vi.clearAllMocks());
+
+  function mockNoExistingLink() {
+    adminFromMock.mockImplementation((table: string) => {
+      if (table === "trial_onboarding_links") {
+        return {
+          select: () => ({
+            eq: () => ({
+              eq: () => ({ order: () => ({ limit: () => ({ maybeSingle: () => Promise.resolve({ data: null, error: null }) }) }) }),
+            }),
+          }),
+          update: () => ({ eq: () => Promise.resolve({ data: null, error: null }) }),
+        };
+      }
+      if (table === "trial_onboarding_link_events") {
+        return { insert: () => Promise.resolve({ data: null, error: null }) };
+      }
+      throw new Error(`unexpected table ${table}`);
+    });
+  }
+
+  it("처음 발송하면 이메일을 보내고 발송 완료 상태로 기록한다", async () => {
+    mockNoExistingLink();
+    adminRpcMock.mockResolvedValue({ data: [{ link_id: "l1", raw_token: "tok1" }], error: null });
+    sendEmailMock.mockResolvedValue(undefined);
+
+    const result = await sendTrialOnboardingNoticeAction(baseParams);
+
+    expect(result.status).toBe("sent");
+    expect(sendEmailMock).toHaveBeenCalledTimes(1);
+    expect(sendEmailMock).toHaveBeenCalledWith(
+      expect.objectContaining({ to: "g@example.com", subject: expect.stringContaining("온보딩") })
+    );
+  });
+
+  it("이미 발송 완료된 상담에 다시 요청하면(중복 클릭) 이메일을 다시 보내지 않는다", async () => {
+    adminFromMock.mockImplementation((table: string) => {
+      if (table === "trial_onboarding_links") {
+        return {
+          select: () => ({
+            eq: () => ({
+              eq: () => ({
+                order: () => ({
+                  limit: () => ({
+                    maybeSingle: () =>
+                      Promise.resolve({
+                        data: { id: "l1", notice_delivery_status: "sent", notice_sent_at: "2026-09-03T00:00:00Z" },
+                        error: null,
+                      }),
+                  }),
+                }),
+              }),
+            }),
+          }),
+        };
+      }
+      throw new Error(`unexpected table ${table}`);
+    });
+
+    const result = await sendTrialOnboardingNoticeAction(baseParams);
+
+    expect(result).toEqual({ status: "already_sent", linkId: "l1", sentAt: "2026-09-03T00:00:00Z" });
+    expect(sendEmailMock).not.toHaveBeenCalled();
+    expect(adminRpcMock).not.toHaveBeenCalled(); // 새 링크도 만들지 않음(진짜 멱등).
+  });
+
+  it("발송이 실패하면 계정 생성과 무관하게 실패 상태로만 남는다", async () => {
+    mockNoExistingLink();
+    adminRpcMock.mockResolvedValue({ data: [{ link_id: "l1", raw_token: "tok1" }], error: null });
+    sendEmailMock.mockRejectedValue(new Error("SMTP 연결 실패"));
+
+    const result = await sendTrialOnboardingNoticeAction(baseParams);
+
+    expect(result).toEqual({ status: "failed", linkId: "l1", error: "SMTP 연결 실패" });
   });
 });

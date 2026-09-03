@@ -7,10 +7,13 @@
 // 실제 이메일 발송은 하지 않는다 — raw_token을 관리자 화면에 그대로 노출해
 // 로컬 검증(링크를 수동으로 열어보는 것)만 가능하게 한다.
 
+import { createHash } from "node:crypto";
 import { requireAdminOrCapability } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { planSubjectEnrollment, assignTeacherToSubjectEnrollment } from "./subject-enrollment-actions";
 import { companySignOffContractVersion, sendContractForSignature } from "./consultation-actions";
+import { sendEmail } from "@/lib/email";
+import { currentRequestOrigin } from "@/lib/request-origin";
 
 // 기존 상담 관리 액션(app/admin/consultation-actions.ts)과 동일한 capability를
 // 재사용한다 — 새 권한 이름을 따로 만들지 않는다.
@@ -49,6 +52,133 @@ export async function createTrialOnboardingLinkAction(params: {
   const row = data?.[0];
   if (!row) throw new Error("온보딩 링크 발급에 실패했습니다.");
   return { linkId: row.link_id, rawToken: row.raw_token };
+}
+
+// =========================================================================
+// M4 (6/N) — "체험 온보딩 안내 발송": 관리자가 체험 진행 확정 후 누르는 단일
+// 버튼. 기존 SMTP 경로(lib/email.ts)로 prospect 이메일에 안내 링크를 보낸다.
+// 중복 클릭 방어: 이 상담에 이미 pending 링크가 있으면 새로 만들지 않고
+// 재사용하고, 그 링크가 이미 발송 완료(notice_delivery_status='sent')면
+// 같은 내용을 다시 보내지 않는다(already_sent로 반환) — 링크가 만료돼
+// 재발급된 경우에만(= 새 링크 row) 실제로 새 이메일을 보낸다. 발송 실패는
+// 계정이 생성된 것처럼 절대 취급하지 않는다 — 계정 생성은 이 함수가 아니라
+// 보호자가 링크를 열어야만 시작되는 완전히 별개의 흐름이라 실패해도 그
+// 흐름에 어떤 영향도 주지 않는다.
+// =========================================================================
+export type SendTrialOnboardingNoticeResult =
+  | { status: "sent"; linkId: string; sentAt: string; localRedeemUrl: string | null }
+  | { status: "already_sent"; linkId: string; sentAt: string }
+  | { status: "failed"; linkId: string; error: string };
+
+export async function sendTrialOnboardingNoticeAction(params: {
+  consultationId: string;
+  guardianEmail: string;
+  guardianName: string;
+  studentName: string;
+  studentEmail: string;
+  studentGrade?: string;
+}): Promise<SendTrialOnboardingNoticeResult> {
+  const { actorUserId } = await requireAdminOrCapability(CONSULT_CAPABILITY);
+  const admin = createAdminClient();
+
+  // 재사용 가능한 pending 링크가 이미 있는지 먼저 확인(중복 발급/중복 발송 방지).
+  const { data: existingLink } = await admin
+    .from("trial_onboarding_links")
+    .select("id, notice_delivery_status, notice_sent_at")
+    .eq("consultation_id", params.consultationId)
+    .eq("status", "pending")
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  let linkId: string;
+  let rawToken: string | undefined;
+
+  if (existingLink) {
+    if (existingLink.notice_delivery_status === "sent") {
+      // 이미 발송 완료 — 중복 클릭/재시도로 같은 내용을 다시 보내지 않는다.
+      return { status: "already_sent", linkId: existingLink.id, sentAt: existingLink.notice_sent_at! };
+    }
+    // 아직 한 번도 성공적으로 보내지 못한(pending 또는 failed) 링크는 raw_token을
+    // 다시 알 수 없다(해시만 저장하므로) — 실제로 전달된 적 없는 토큰이므로
+    // 안전하게 폐기(revoked)하고 같은 상담에 새 링크를 발급해 그 토큰으로
+    // 보낸다. 이미 유효한 링크가 보호자에게 전달된 뒤라면 이 분기를 타지
+        // 않는다(성공 전송 시 위에서 이미 반환).
+    await admin.from("trial_onboarding_links").update({ status: "revoked" }).eq("id", existingLink.id);
+    await admin
+      .from("trial_onboarding_link_events")
+      .insert({ link_id: existingLink.id, event_type: "revoked", actor_id: actorUserId, detail: { reason: "미발송 링크 재발급" } });
+
+    const { data, error } = await admin.rpc("create_trial_onboarding_link", {
+      p_consultation_id: params.consultationId,
+      p_guardian_email: params.guardianEmail,
+      p_guardian_name: params.guardianName,
+      p_student_name: params.studentName,
+      p_student_email: params.studentEmail,
+      p_admin_id: actorUserId,
+      p_student_grade: params.studentGrade ?? null,
+    });
+    if (error || !data?.[0]) throw new Error(error?.message ?? "온보딩 링크 재발급에 실패했습니다.");
+    linkId = data[0].link_id;
+    rawToken = data[0].raw_token;
+  } else {
+    const { data, error } = await admin.rpc("create_trial_onboarding_link", {
+      p_consultation_id: params.consultationId,
+      p_guardian_email: params.guardianEmail,
+      p_guardian_name: params.guardianName,
+      p_student_name: params.studentName,
+      p_student_email: params.studentEmail,
+      p_admin_id: actorUserId,
+      p_student_grade: params.studentGrade ?? null,
+    });
+    if (error || !data?.[0]) throw new Error(error?.message ?? "온보딩 링크 발급에 실패했습니다.");
+    linkId = data[0].link_id;
+    rawToken = data[0].raw_token;
+  }
+
+  if (!rawToken) {
+    return { status: "failed", linkId, error: "재발송에 필요한 링크 토큰을 확인할 수 없습니다. 관리자 재발급이 필요합니다." };
+  }
+
+  const origin = await currentRequestOrigin();
+  const redeemUrl = `${origin}/api/trial-onboarding/redeem?token=${encodeURIComponent(rawToken)}`;
+  const html = `
+    <p>안녕하세요, ${params.guardianName}님.</p>
+    <p>${params.studentName} 학생의 체험 수업 준비를 위해 아래 링크에서 계정을 만들어주세요.</p>
+    <p><a href="${redeemUrl}">${redeemUrl}</a></p>
+    <p>이 링크는 72시간 동안 유효합니다.</p>
+  `;
+  const contentHash = createHash("sha256").update(html).digest("hex");
+  const nowIso = new Date().toISOString();
+
+  try {
+    await sendEmail({ to: params.guardianEmail, subject: "[Alton Education] 체험 수업 온보딩 안내", html });
+  } catch (e) {
+    const message = e instanceof Error ? e.message : String(e);
+    await admin
+      .from("trial_onboarding_links")
+      .update({ notice_delivery_status: "failed", notice_send_error: message })
+      .eq("id", linkId);
+    await admin
+      .from("trial_onboarding_link_events")
+      .insert({ link_id: linkId, event_type: "notice_failed", actor_id: actorUserId, detail: { error: message } });
+    return { status: "failed", linkId, error: message };
+  }
+
+  await admin
+    .from("trial_onboarding_links")
+    .update({ notice_delivery_status: "sent", notice_sent_at: nowIso, notice_content_hash: contentHash, notice_send_error: null })
+    .eq("id", linkId);
+  await admin
+    .from("trial_onboarding_link_events")
+    .insert({ link_id: linkId, event_type: "notice_sent", actor_id: actorUserId, detail: { guardian_email: params.guardianEmail } });
+
+  // 개발 환경에서만 링크를 화면에 그대로 노출해 Mailpit 없이도 빠르게 확인할
+  // 수 있게 한다 — 운영/Preview에서는 이 값을 반환하지 않는다(관리자가 전체
+  // 토큰을 복사해 전달하는 방식에 의존하지 않기 위함, 실제 전달 경로는 이메일).
+  const localRedeemUrl = process.env.NODE_ENV !== "production" ? redeemUrl : null;
+
+  return { status: "sent", linkId, sentAt: nowIso, localRedeemUrl };
 }
 
 // =========================================================================

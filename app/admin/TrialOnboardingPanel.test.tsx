@@ -78,11 +78,11 @@ describe("TrialOnboardingPanel", () => {
     render(<TrialOnboardingPanel />);
 
     const confirmButton = await screen.findByRole("button", { name: "체험 진행 확정" });
-    expect(screen.queryByRole("button", { name: "온보딩 링크 발급" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "체험 온보딩 안내 발송" })).toBeNull();
 
     fireEvent.click(confirmButton);
 
-    await waitFor(() => expect(screen.getByRole("button", { name: "온보딩 링크 발급" })).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByRole("button", { name: "체험 온보딩 안내 발송" })).toBeInTheDocument());
     expect(confirmTrialIntentAction).toHaveBeenCalledWith("c1");
   });
 

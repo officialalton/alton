@@ -685,8 +685,46 @@ M4는 2026-09-03 승인으로 착수해 3라운드(커밋 `343e1aa` → `eef362e
   표시한다** — 전 라운드 통틀어 실외부 호출·실제 이메일 발송·Preview 생성을
   전혀 하지 않았다. **M4 로컬 구현·검증 완료, 역할별 UI 폴리싱 및 외부
   Sandbox/Preview 통합 검증 대기.**
-- **결정 필요**: 외부 통합 검증에 쓸 신규 보호자·학생 테스트 이메일 주소 2개
-  (`docs/2026-09-03-m4-external-integration-verification-request.md` §2 참고)
+- **6/N(온보딩 이메일 실제 전달 경로 + 로그인 이메일 분리, 로컬 Mailpit
+  검증만)**: 관리자의 "체험 온보딩 안내 발송"이 이제 기존 SMTP 경로
+  (`lib/email.ts`)로 실제로 이메일을 보낸다(로컬은 Mailpit) — 절대 URL·발송
+  시각·발송 상태(`notice_delivery_status`)·내용 지문(`notice_content_hash`)을
+  `trial_onboarding_links`에 기록. 중복 클릭 방지: 이미 발송 완료된 링크는
+  재요청해도 다시 보내지 않고(`already_sent`), 발송 전 실패한 링크만 안전하게
+  폐기(revoked)하고 재발급해서 다시 보낸다 — 관리자 화면도 발송 즉시 버튼
+  자체가 "보호자 행동 대기 중"으로 바뀌어 재클릭 경로가 없어진다. 발송 실패는
+  계정 생성과 완전히 무관하게 실패 상태로만 남는다(계정 생성은 보호자가
+  링크를 열어야만 시작되는 별개 흐름). 개발 환경에서만 관리자 화면에 확인용
+  링크를 추가로 보여준다(운영에서는 노출 안 함, 전체 토큰 복사 전달 방식에
+  의존하지 않음).
+  prospect 이메일과 보호자 로그인 이메일도 분리했다 — `redeem` 라우트가 이제
+  바로 계정을 만들지 않고 `/consult/trial-onboarding/confirm-email` 화면으로
+  먼저 보낸다. 그 이메일을 그대로 쓰면(=온보딩 링크를 그 주소로 실제 수신·
+  클릭한 사실 자체가 상담 연락처 접근 확인) 즉시 계정 생성, 다른 주소로
+  바꾸면 새 테이블(`trial_login_email_change_requests`)로 별도 소유 확인
+  메일을 보내고 그 확인이 끝나야만 계정을 만든다. 이미 다른 계정이 쓰는
+  이메일이면 토큰을 주지 않고 `conflict_manual_review` 이벤트만 남긴다(자동
+  병합 없음). 원래 prospect 이메일(`trial_onboarding_links.guardian_email`)은
+  상담 당시 스냅샷으로 절대 덮어쓰지 않는다 — `converted_guardian_id`는
+  실제 인증된 계정 id로만 연결(기존 설계 그대로, 이번에 변경 없음).
+- **검증(6/N)**: 신규 DB 마이그레이션(`20261018000000`)의 이메일 변경 함수를
+  DB 통합 테스트로 확인(`app/consult/trial-login-email-change.integration.test.ts`
+  3건 — 정상/중복계정 차단/미검증 토큰 거부). 관리자 발송 액션 단위 테스트
+  3건 추가(처음 발송/중복 클릭 시 재발송 안 함/실패 시 상태만 남음).
+  `ConfirmEmailForm.test.tsx` 3건 추가. 골든 패스 E2E를 실제 Mailpit 발송·
+  수신 경로로 재작성해 11단계 재통과(관리자 화면 노출 링크 대신 실제 수신
+  메일에서 링크를 추출해 검증 — 더 엄격해짐). 전체 Vitest 157개 파일/909건,
+  `tsc --noEmit`, `next build` 클린. 통합 HEAD 기준 클린 `git worktree` 재현
+  완료. 실브라우저로 온보딩 확인 화면의 "유효하지 않은 링크" 오류 상태와
+  모바일 폭(375px) 레이아웃을 추가로 직접 확인(잘림·가로스크롤 없음).
+  외부 통합 검증 요청서를 Preview 브랜치 방식(`preview/m4-integration-
+  verification`, main push 아님)·원격 비운영 Supabase 프로젝트 마이그레이션
+  목록/백업/복구 절차·Google 검증 범위(Calendar 이벤트 최대 2개, Smart Notes
+  1회·최대 20분)·이메일 상한 표(최대 11건)·23단계 UAT·확정 테스트 계정
+  (`matchbox512@snu.ac.kr`, `teacher1@alton.education`)까지 반영해 갱신.
+- **결정 필요**: 외부 통합 검증에 쓸 학생 테스트 이메일 주소 1개(보호자는
+  `matchbox512@snu.ac.kr`로 확정,
+  `docs/2026-09-03-m4-external-integration-verification-request.md` §3 참고)
   — 이 세션이 임의로 만들거나 실제로 메일을 보내지 않았다.
 - **외부 변경**: 0건(Google/Stripe/DocuSign 실호출, 실이메일, Production·원격
   운영 DB, `git push`, Preview 생성 전부 없음).

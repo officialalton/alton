@@ -2,6 +2,7 @@ import { execFileSync } from "node:child_process";
 import { createHmac, randomUUID } from "node:crypto";
 import { test, expect } from "@playwright/test";
 import { ACCOUNTS, DEV_PASSWORD, loginAs } from "./helpers";
+import { findLatestEmailTo, extractTrialOnboardingRedeemUrl } from "./mailbox";
 
 // M4 — 상담→체험→정규 전환 통합 골든 패스(요구사항 13번). 실브라우저로:
 // 비로그인 상담(직접 seed, M1 자체 E2E가 별도로 커버) → 관리자 체험 진행
@@ -121,26 +122,46 @@ test.describe("M4 — 상담→체험→정규 전환 골든 패스 (실브라�
       .first();
     await expect(candidateRow).toBeVisible();
     await candidateRow.getByRole("button", { name: "체험 진행 확정" }).click();
-    // 체험 희망 확정이 끝나면 다음 단계(온보딩 링크 발급) 버튼이 나타난다 —
+    // 체험 희망 확정이 끝나면 다음 단계(온보딩 안내 발송) 버튼이 나타난다 —
     // 파이프라인이 실제로 다음 단계로 넘어갔는지는 이 버튼의 등장 자체로 확인된다.
-    await expect(candidateRow.getByRole("button", { name: "온보딩 링크 발급" })).toBeVisible({ timeout: 15000 });
+    await expect(candidateRow.getByRole("button", { name: "체험 온보딩 안내 발송" })).toBeVisible({ timeout: 15000 });
 
-    await candidateRow.getByRole("button", { name: "온보딩 링크 발급" }).click();
+    await candidateRow.getByRole("button", { name: "체험 온보딩 안내 발송" }).click();
     await candidateRow.getByLabel("보호자 이메일").fill(guardianEmail);
     await candidateRow.getByLabel("보호자 이름").fill("M4 골든패스 보호자");
     await candidateRow.getByLabel("학생 이름").fill("M4 골든패스 학생");
     await candidateRow.getByLabel("학생 이메일").fill(studentEmail);
-    await candidateRow.getByRole("button", { name: "링크 발급" }).click();
+    await candidateRow.getByRole("button", { name: "안내 발송" }).click();
 
-    const linkText = await candidateRow.locator("div").filter({ hasText: "/api/trial-onboarding/redeem" }).last().innerText();
-    const tokenMatch = linkText.match(/token=([0-9a-f]+)/);
-    expect(tokenMatch).toBeTruthy();
-    rawToken = tokenMatch![1];
+    await expect(candidateRow.getByText("안내 이메일을 보냈습니다")).toBeVisible({ timeout: 15000 });
+
+    // 실제로 Mailpit에 발송된 메일에서 redeem 링크를 추출한다(요구사항: 실제
+    // 이메일은 안 보내되 로컬 SMTP/Mailpit 경로로 내용을 검증) — 관리자 화면에
+    // 노출되는 "개발 환경 전용" 링크에 의존하지 않는다(운영에서는 그 링크
+    // 자체가 없다는 것도 이 방식으로 자연히 증명된다).
+    const mail = await findLatestEmailTo(guardianEmail, "체험 수업 온보딩 안내");
+    rawToken = new URL(extractTrialOnboardingRedeemUrl(mail.html)).searchParams.get("token")!;
+    expect(rawToken).toBeTruthy();
+
+    // 중복 클릭/재시도 방지는 발송 완료 즉시 UI가 "안내 발송" 버튼 자체를
+    // "보호자 행동 대기 중" 안내로 바꿔 버려 재클릭 경로가 아예 없어진다(가장
+    // 강한 형태의 중복 방지) — 여기서 그 전환을 확인하고, 실제 액션 레벨의
+    // 멱등성(이미 sent인 링크에 재요청해도 이메일이 다시 안 나가는 것)은
+    // app/admin/trial-onboarding-actions.test.ts의 전용 단위 테스트로 고정했다.
+    await expect(candidateRow.getByRole("button", { name: "체험 온보딩 안내 발송" })).toHaveCount(0, {
+      timeout: 15000,
+    });
+    await expect(candidateRow.getByText(/보호자 행동 대기 중/)).toBeVisible();
   });
 
   test("2. 신규 보호자: 온보딩 링크로 계정 생성", async ({ page, baseURL }) => {
     test.setTimeout(60000);
     await page.goto(`${baseURL}/api/trial-onboarding/redeem?token=${rawToken}`);
+    // 이제 redeem은 바로 계정을 만들지 않고 로그인 이메일 확인 화면으로 먼저
+    // 보낸다(prospect 이메일과 로그인 이메일을 분리 처리하기 위함).
+    await expect(page).toHaveURL(/\/consult\/trial-onboarding\/confirm-email/, { timeout: 15000 });
+    await expect(page.getByLabel("로그인 이메일")).toHaveValue(guardianEmail);
+    await page.getByRole("link", { name: "이 이메일로 계속" }).click();
     await expect(page).toHaveURL(/\/set-password/, { timeout: 15000 });
 
     await page.getByLabel("새 비밀번호", { exact: true }).fill(DEV_PASSWORD);

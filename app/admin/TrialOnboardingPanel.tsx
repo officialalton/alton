@@ -8,7 +8,8 @@
 import { useEffect, useState } from "react";
 import {
   confirmTrialIntentAction,
-  createTrialOnboardingLinkAction,
+  sendTrialOnboardingNoticeAction,
+  type SendTrialOnboardingNoticeResult,
   listTrialOnboardingCandidatesAction,
   listRegularConversionCandidatesAction,
   planTrialSubjectAndAssignTeacherAction,
@@ -92,7 +93,7 @@ function CandidateCard({
 }) {
   const [pipeline, setPipeline] = useState<TrialOnboardingPipeline | null>(null);
   const [linkOpen, setLinkOpen] = useState(false);
-  const [linkResult, setLinkResult] = useState<{ linkId: string; rawToken: string } | null>(null);
+  const [linkResult, setLinkResult] = useState<SendTrialOnboardingNoticeResult | null>(null);
   const [assignOpen, setAssignOpen] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -195,11 +196,24 @@ function CandidateCard({
           넘어갑니다.
         </div>
       )}
-      {linkOpen && linkResult && (
-        <div className="text-[11.5px] text-grey-500 mt-2 break-all bg-grey-50 rounded px-3 py-2">
-          온보딩 링크(로컬 검증용 — 실제 이메일 발송 없음, 보호자에게 직접 전달하세요):
-          <br />
-          {`/api/trial-onboarding/redeem?token=${linkResult.rawToken}`}
+      {linkOpen && linkResult && linkResult.status === "sent" && (
+        <div className="text-[12px] text-ink mt-2 bg-grey-100 rounded-lg px-3 py-2">
+          안내 이메일을 보냈습니다 — 발송 시각 {new Date(linkResult.sentAt).toLocaleString("ko-KR")}
+          {linkResult.localRedeemUrl && (
+            <>
+              <br />
+              <span className="text-[11px] text-grey-500">
+                개발 환경 전용 확인 링크(실제 서비스에서는 노출되지 않음):
+              </span>
+              <br />
+              <span className="text-[11px] text-grey-500 break-all">{linkResult.localRedeemUrl}</span>
+            </>
+          )}
+        </div>
+      )}
+      {linkOpen && linkResult && linkResult.status === "already_sent" && (
+        <div className="text-[12px] text-grey-500 mt-2 bg-grey-100 rounded-lg px-3 py-2">
+          이미 발송된 안내입니다 — 발송 시각 {new Date(linkResult.sentAt).toLocaleString("ko-KR")} (중복 발송 안 함)
         </div>
       )}
 
@@ -276,7 +290,7 @@ function TrialLinkForm({
   open: boolean;
   reissue: boolean;
   onOpen: () => void;
-  onIssued: (r: { linkId: string; rawToken: string }) => void;
+  onIssued: (r: SendTrialOnboardingNoticeResult) => void;
 }) {
   const [guardianEmail, setGuardianEmail] = useState("");
   const [guardianName, setGuardianName] = useState("");
@@ -292,7 +306,7 @@ function TrialLinkForm({
         onClick={onOpen}
         className="text-[12px] font-bold px-3 py-1.5 mt-2.5 rounded-lg border-[1.5px] border-grey-200 text-ink"
       >
-        {reissue ? "온보딩 링크 재발급" : "온보딩 링크 발급"}
+        {reissue ? "체험 온보딩 안내 재발송" : "체험 온보딩 안내 발송"}
       </button>
     );
   }
@@ -347,7 +361,7 @@ function TrialLinkForm({
           setBusy(true);
           setError(null);
           try {
-            const result = await createTrialOnboardingLinkAction({
+            const result = await sendTrialOnboardingNoticeAction({
               consultationId,
               guardianEmail,
               guardianName,
@@ -355,7 +369,11 @@ function TrialLinkForm({
               studentEmail,
               studentGrade: studentGrade || undefined,
             });
-            onIssued(result);
+            if (result.status === "failed") {
+              setError(`발송 실패(관리자 조치 필요) — ${result.error}`);
+            } else {
+              onIssued(result);
+            }
           } catch (e) {
             setError(e instanceof Error ? e.message : String(e));
           }
@@ -363,7 +381,7 @@ function TrialLinkForm({
         }}
         className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
       >
-        {busy ? "발급 중..." : reissue ? "링크 재발급" : "링크 발급"}
+        {busy ? "발송 중..." : reissue ? "안내 재발송" : "안내 발송"}
       </button>
     </div>
   );
