@@ -210,7 +210,10 @@ export async function processTeacherAssignmentTermination(
 
       const { error: endEnrollError } = await admin
         .from("subject_enrollments")
-        .update({ status: "ended" })
+        // subject_enrollments.status는 v3_subject_enrollment_status enum이라
+        // teacher_assignments와 값 이름이 다르다(planned/active/paused/completed/
+        // terminated — "ended"가 아니라 "terminated").
+        .update({ status: "terminated" })
         .eq("id", request.subject_enrollment_id);
       if (endEnrollError) throw new Error(endEnrollError.message);
     }
