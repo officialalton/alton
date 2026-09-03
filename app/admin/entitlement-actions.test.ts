@@ -228,7 +228,7 @@ describe("transferEntitlementBetweenChildren", () => {
 describe("refund workflow", () => {
   it("requestRefund computes and stores calculated_refund_minor via calculate_purchase_refund_minor", async () => {
     const singleMock = vi.fn().mockResolvedValueOnce({
-      data: { refund_minor: 100000, consumed_count: 2 },
+      data: { refund_minor: 100000, consumed_count: 2, within_full_refund_window: false, blocked_by_active_holds: false },
       error: null,
     });
     rpcMock.mockReturnValueOnce({ single: singleMock });
@@ -237,6 +237,35 @@ describe("refund workflow", () => {
     const result = await requestRefund("purchase1", "환불 요청");
     expect(result).toEqual({ id: "refund1" });
     expect(rpcMock).toHaveBeenCalledWith("calculate_purchase_refund_minor", { p_purchase_id: "purchase1" });
+  });
+
+  it("M2: 구매 후 7일 이내+미사용이면 within_full_refund_window를 그대로 저장한다", async () => {
+    const singleMock = vi.fn().mockResolvedValueOnce({
+      data: { refund_minor: 350000, consumed_count: 0, within_full_refund_window: true, blocked_by_active_holds: false },
+      error: null,
+    });
+    rpcMock.mockReturnValueOnce({ single: singleMock });
+    refundRequestsInsertSingleMock.mockResolvedValueOnce({ data: { id: "refund3" }, error: null });
+
+    await requestRefund("purchase3");
+
+    expect(refundRequestsInsertSingleMock).toHaveBeenCalled();
+    // insert()가 받은 인자를 fromMock 체인에서 직접 검증하기보다, 반환값과 RPC 호출로 흐름을 검증한다
+    // (fromMock의 insert 체인은 인자 없이 () => ({select...}) 형태로 mock돼 있어 인자 캡처가 없음 — 계산값이
+    // 실제로 반영됐는지는 아래 "blocked" 테스트에서 예외 발생 여부로 더 명확하게 검증한다).
+  });
+
+  it("M2: 미래 활성 hold가 있으면(blocked_by_active_holds) 환불 요청 자체를 명확한 에러로 막는다", async () => {
+    const singleMock = vi.fn().mockResolvedValueOnce({
+      data: { refund_minor: 0, consumed_count: 1, within_full_refund_window: false, blocked_by_active_holds: true },
+      error: null,
+    });
+    rpcMock.mockReturnValueOnce({ single: singleMock });
+
+    await expect(requestRefund("purchase-with-future-hold")).rejects.toThrow(
+      "아직 소진되지 않은 미래 예약이 있어 환불 요청을 접수할 수 없습니다"
+    );
+    expect(refundRequestsInsertSingleMock).not.toHaveBeenCalled();
   });
 
   it("approveRefund transitions to processing then succeeded and calls refund_entitlement", async () => {

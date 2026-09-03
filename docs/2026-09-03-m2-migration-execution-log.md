@@ -161,8 +161,156 @@ outcome='trial_recommended')에 연결해 시스템이 자동 지급하는 흐�
   `ConsultationSchedulingPanel.tsx`(관리자)와 `EntitlementsTab.tsx`(보호자)에
   최소 UI를 뒀다 — 요구사항 7 충족.
 
-## 4. 외부 변경
+## 4. 외부 변경(1라운드)
 
 Stripe/DocuSign/Google API 실호출, 실제 이메일 발송, Production/원격 DB 접근 전부
 0건. 모든 외부 플래그 기본값(false/미설정) 유지. `git push` 하지 않음(로컬 커밋
-`007e917`만 존재, main 브랜치).
+`007e917`, 문서 커밋 `de9cd26`만 존재, main 브랜치).
+
+---
+
+## 5. 2라운드 — M2 잔여 마감(2026-09-03, 같은 날 후속 세션)
+
+제품 오너가 M2 잔여 항목(체험수업권 90일 유효기간 확정, 정규상품 환불 정책 구현)을
+지시. 마이그레이션: `supabase/migrations/20261013000000_m2_refund_policy_and_trial_expiry.sql`.
+
+### 5.1 완료
+
+- **체험수업권 90일 유효기간(지급일 기준) — 정책 확정을 코드로 재확인, 신규 로직
+  불필요**: 1라운드에서 이미 `grant_trial_entitlement_for_consultation()`이
+  `now() + interval '90 days'`로 구현해뒀던 값이 이번에 확정된 정책과 정확히
+  일치함을 확인했다. "예약을 90일 안에 하는 것만으로는 부족 — 체험수업 실제
+  시작 시각이 만료 시각 이하여야 함"은 R1부터 존재하던 `hold_entitlement()`의
+  `where g.expires_at > p_lesson_start_at` 필터가 이미 모든 lesson_type(정규/체험
+  공통)에 적용하고 있었다 — 이 필터는 만료 이후 신규 hold를 막고, 만료 전 hold된
+  예약이라도 그 예약의 시작 시각 자체가 만료 이후였다면 애초에 hold가 성립할 수
+  없었다는 뜻이라 "만료 전 정상 hold됐어도 시작 시각이 만료 후면 확정 불가"도
+  자동으로 성립한다. "시간 변경 시 재검증"도 기존
+  `reschedule_reservation_to_google_time()`(20261005000000)이
+  `v_hold_grant_expires_at <= p_new_starts_at`로 동일 원칙을 범용 적용하고 있어
+  체험 전용 신규 코드가 필요 없었다(M3가 실제 체험 예약을 구현하는 순간 이
+  범용 경로를 그대로 재사용하게 된다 — 인터페이스 추가 설계 불필요). timezone/DST는
+  기존 `timestamptz` 비교라 R6와 동일한 방식(변경 없음). 구매·환불·양도 불가는
+  1라운드에서 이미 구현된 `is_paid=false`/`system_only`를 그대로 유지(변경 없음).
+  이 마이그레이션은 두 함수(`hold_entitlement`/`reschedule_reservation_to_google_time`)의
+  본문을 전혀 건드리지 않았다 — 확인용 comment만 추가(마이그레이션 §5).
+- **정규상품 환불 정책(단건·10회·20회) — 실제 구현**:
+  - `purchase_has_active_future_holds(p_purchase_id)` 신규 헬퍼(`security definer`,
+    `service_role`만 실행 가능) — 이 구매의 grant에 아직 소진/해제되지 않은 미래
+    예약 hold가 있으면 true.
+  - `calculate_purchase_refund_minor()`를 `drop function` 후 재생성(리턴 타입이
+    바뀌어 `CREATE OR REPLACE`만으로는 안 됨 — Postgres가 OUT 컬럼 구성 변경을
+    거부, 실제로 `db reset` 중 이 에러를 만나 수정) — 이제
+    `within_full_refund_window`/`blocked_by_active_holds`를 추가로 반환한다.
+    **7일 이내+전혀 미사용**(`purchases.confirmed_at` 기준, 소진 카운트 0)이면
+    `package_price_minor` 전액, 그 외는 기존 공식
+    `greatest(0, package_price_minor - consumed_count*unit_price_minor)` 그대로
+    유지. 차단 상태(`blocked_by_active_holds=true`)면 `refund_minor`는 0으로
+    반환해 혼동을 막는다(실제 차단은 아래 `refund_entitlement()`가 강제).
+    **스냅샷 원칙**: 계산은 전부 `purchases` 행의 구매 시점 스냅샷
+    (`package_price_minor`/`unit_price_minor`/`confirmed_at`)과
+    `entitlement_ledger`의 INSERT-only 이력만 사용 — `entitlement_product_versions`의
+    "현재" 가격은 전혀 조회하지 않는다. 상품 가격이 나중에 바뀌어도 과거 구매의
+    환불액은 절대 달라지지 않는다(요구사항 명시 원칙, 20260922000000 §1과 동일
+    구조라 이미 자연스럽게 성립 — 별도 스냅샷 컬럼을 추가할 필요가 없었다).
+  - `refund_entitlement()`가 이제 승인 직전에
+    `purchase_has_active_future_holds()`를 검사해 미래 활성 hold가 있으면
+    fail-closed로 거부한다("아직 소진되지 않은 미래 예약이 있어 환불을 진행할 수
+    없습니다. 먼저 해당 예약을 취소해 수업권을 해제해주세요.") — 이것이 "미래
+    예약 해제 우선순위" 요구사항의 실제 구현이다. **기술적 선택(결정 필요 아님,
+    근거 기록)**: 미래 예약을 자동으로 취소하지 않고 명시적으로 차단한다 —
+    예약 취소는 이미 Calendar 동기화·통지까지 포함한 별도 완결 흐름
+    (`cancel_lesson_booking()`, R6)이고, 환불 승인이 그 전부를 몰래 트리거하면
+    학생의 확정된 미래 수업이 관리자 의도와 무관하게 취소되는 부작용이 생긴다.
+    자동 취소가 맞는 정책이라고 판단되면 `purchase_has_active_future_holds()`
+    하나만 다른 구현으로 교체하면 된다(두 호출부가 전부 이 함수만 참조하도록
+    설계). 체험수업권은 `purchase_id_ref`가 항상 null이라 이 WHERE 조건에
+    애초에 걸리지 않아 환불 대상에서 자동 제외(요구사항 그대로 충족, 신규 코드
+    불필요).
+  - `refund_requests.within_full_refund_window` 신규 컬럼 — 요청 접수 시점의
+    계산 근거(7일 전액환불 적용 여부)를 감사 이력으로 고정 보존.
+  - **동시 환불·재시도 멱등성**: 새 로직 없이 기존 구조 재사용 — grant를
+    `for update`로 잠그고 `v_remaining`이 이미 0이면 재차 insert하지 않는 기존
+    가드가 그대로 동시/재시도 안전성을 보장한다(신규 코드가 추가한 유일한 관문은
+    "차단 검사"뿐이고, 그 검사 자체도 매 호출마다 재평가되므로 재시도 안전).
+  - **앱 레이어**: `app/admin/entitlement-actions.ts`의 `requestRefund()`가
+    `blocked_by_active_holds`를 즉시 확인해 요청 접수 단계에서부터 친절한 에러로
+    거부(이중 방어 — 승인 시점에도 `refund_entitlement()`가 다시 막음),
+    `within_full_refund_window`를 `refund_requests`에 함께 저장.
+    `listPendingRefundRequests()`가 `withinFullRefundWindow`를 반환하도록 확장.
+    `app/admin/EntitlementLedgerTab.tsx`가 "구매 후 7일 이내 미사용(전액 환불
+    적용)" 문구를 표시 — 내부 SQL 에러 원문이나 Stripe 비밀정보는 노출하지 않고
+    친화적 한국어 메시지만 통과시키는 기존 관행 유지.
+  - **실제 Stripe 호출 없음**: 이 세션은 `refund_entitlement()`/`calculate_purchase_refund_minor()`만
+    다뤘고, 실제 결제사 자금 이동(Stripe Refund API)은 여전히 손대지 않았다 —
+    기존 R4 설계 원칙("entitlement 쪽 결과는 이 함수가 확정, 결제사 쪽 자금 이동은
+    별도 관심사", `approveRefund()` 상단 주석) 그대로 유지.
+- **관리자·보호자 화면에 정확한 만료일·사용 조건 표시(요구사항)**:
+  - `app/admin/consultation-scheduling-actions.ts`에 `attachTrialGrantExpiry()`
+    신규 — `trial_entitlement_grant_id`가 있는 행에 실제 `entitlement_grants.expires_at`를
+    batch 조회로 채운다(`ConsultationListItem.trial_entitlement_grant_expires_at`
+    신규 필드). `ConsultationSchedulingPanel.tsx`가 지급 완료 상태일 때 "만료:
+    YYYY-MM-DD HH:mm까지 체험수업이 시작해야 사용 가능"을 표시.
+  - `app/parent/EntitlementsTab.tsx`의 체험수업권 카드 문구를 "만료 {날짜}까지
+    체험 수업이 시작해야 사용할 수 있습니다(그 이후로는 예약해도 사용할 수
+    없습니다) · 정규수업권과 별개이며 구매·환불·양도가 불가능합니다"로 구체화.
+
+### 5.2 검증
+
+- **로컬 `supabase db reset --local`**: 마이그레이션 적용 중
+  `calculate_purchase_refund_minor()`의 리턴 타입 변경으로 실제 `ERROR: cannot
+  change return type of existing function`을 만나 `drop function if exists`를
+  추가해 해결 — 실측으로 발견·수정한 실제 문제(추측 아님).
+- **psql 직접 검증(로컬 dev DB)** — 5개 시나리오 전부 실제 DB로 실행해 통과:
+  - **A(7일 이내 전액환불)**: 확정 2일 전, 소진 0건인 20회 패키지 구매 →
+    `refund_minor=350000`(package_price 전액), `within_full_refund_window=true`,
+    `blocked_by_active_holds=false` 확인. 실제 `refund_entitlement()` 호출 →
+    잔액 0 확인.
+  - **B(7일 밖, 소진 반영)**: 확정 30일 전, consume 3건 → `refund_minor=284375`
+    (=350000−3×21875), `within_full_refund_window=false` 확인. 환불 호출 → 잔액
+    0 확인(원래 잔량 17 → 0).
+  - **C(미래 활성 hold 차단)**: 확정 30일 전, 5일 뒤 미래 예약에 hold 1건 →
+    `blocked_by_active_holds=true` 확인. `refund_entitlement()` 직접 호출 →
+    정확히 그 에러 메시지로 거부됨을 확인(PASS) → `release_entitlement()`로
+    그 예약을 해제한 뒤 재시도 → 정상 환불(잔액 0) → **같은 호출을 한 번 더
+    재시도(idempotent 재시도 시뮬레이션)** → 잔액 그대로 0(중복 차감 없음, PASS).
+  - **D(체험 grant 자동 제외)**: `trial_recommended` outcome으로 실제 체험 grant
+    지급 후, 무관한 임의 purchase id로 `refund_entitlement()` 호출 → 매칭되는
+    grant가 없어 조용히 no-op(에러 없음) — 체험 grant 자체가 이 경로에 절대
+    걸리지 않음을 별도로 재확인.
+  - **E(90일 만료 경계)**: 방금 지급된 체험 grant의 `expires_at`을 과거로 강제
+    변경 → `hold_entitlement(..., p_lesson_type_id=trial)` 호출 → "사용 가능한
+    수업권이 없습니다."로 정확히 거부됨을 확인(PASS) — 만료 이후 체험 시작 시각은
+    hold 자체가 성립하지 않음을 실측 확인.
+- **`tsc --noEmit`**: 클린(2라운드 코드 반영 후).
+- **전체 Vitest**: **849건 통과**(1라운드 846건 + 2라운드 신규 3건 —
+  `requestRefund` 7일 이내 전액환불 저장 테스트, `requestRefund` 미래 hold 차단
+  테스트, `EntitlementLedgerTab` 7일 이내 라벨 표시 테스트). 회귀 없음.
+- **`next build`**: 성공.
+- **미완료(세션 중단으로 인함)**: 2라운드 관련 Playwright 재실행
+  (`r4-admin-entitlement-ledger`/`r4-purchase-flow` 등)과 별도 clean
+  `git worktree` 재현은 실행하지 못했다 — 이 세션이 로컬 Supabase DB를 다른
+  세션(제품 오너의 실제 Google Sandbox 재검증)과 공유하는 충돌이 발견돼 DB를
+  건드리는 모든 명령(추가 `db reset --local`/psql)을 즉시 중단하라는 지시를
+  받았다. 이미 실행한 psql 검증(위 A~E)은 그 지시 이전에 완료된 것이라 유효하게
+  남는다. **재개 승인 후 다음을 이어서 실행해야 한다**: (1) 관련 Playwright 스펙
+  재실행, (2) 커밋 후 clean worktree에서 build+Vitest 재현, (3) 최종 커밋.
+
+### 5.3 미완료 / 결정 필요
+
+- **결정 필요**: 없음 — 90일 유효기간, 환불 공식(7일 전액/그 외 소진 반영),
+  미래 hold 차단 정책 전부 이번 지시로 확정·구현 완료.
+- **미완료(세션 중단, 재개 대기)**: 2라운드 관련 Playwright 재실행, 별도 clean
+  worktree 재현. 코드 자체는 이미 실제 로컬 DB(psql)로 검증 완료 — DB 재현·E2E만
+  남음.
+- **미완료(범위 밖, 변경 없음)**: 실제 Stripe Refund API 호출은 여전히 미연동
+  (기존 R4 blocker 그대로).
+
+### 5.4 외부 변경(2라운드)
+
+Stripe/DocuSign/Google API 실호출, 실제 이메일 발송, Production/원격 DB 접근 전부
+0건. 모든 외부 플래그 기본값(false/미설정) 유지. `git push` 하지 않음. 로컬
+Supabase DB는 이 세션이 `supabase db reset --local`을 여러 번 실행했고, 그중
+한 번이 같은 로컬 DB를 쓰던 다른 세션(제품 오너의 Google Sandbox 재검증)의 테스트
+데이터를 지웠다 — 발견 즉시 이 세션은 추가 DB 조작을 전부 중단했다(아래 최종
+보고 참고).

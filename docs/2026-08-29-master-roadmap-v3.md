@@ -459,33 +459,47 @@ M3 R5 후속(체험/정규 배정) → M4 상담→체험→정규 전환 통합
   구분만 M1 1차 구현 범위에서 의도적으로 제외(M3로 자연 이관) — 상세는 실행 로그 참고.
 
 ### M2 — R4 후속 증분 *(체험/정규 수업권·환불 — R4 섹션의 기존 미착수 항목을 이 순서로 실행, 항목 자체는 R4 섹션 참고·중복 작성 안 함)*
-- [x] 60분 체험 전용 수업권 — **지급(요구사항: "학생당 기본 1회 지급")만 2026-09-03
+- [x] 60분 체험 전용 수업권 — **지급(요구사항: "학생당 기본 1회 지급") 2026-09-03
       구현·검증 완료**(커밋 `007e917`, 실행 로그 `docs/2026-09-03-m2-migration-execution-log.md`).
       판매·양도 불가는 기존 `is_paid`/신규 `system_only` 불변식 재사용으로 강제, 정규
       120분 수업권과의 혼용 방지는 `hold_entitlement()`/`confirm_lesson_booking()`에
-      `lesson_type_id` 필터를 추가해 DB 레벨로 강제(실측 검증 완료). **미완료로 남은
-      하위 항목**: "관리자 예외 지급"(상담 결과 기록 경로 외의 별도 관리자 수동 지급
-      UI/함수 — 이번엔 만들지 않음, `grant_trial_entitlement_for_consultation()`은
+      `lesson_type_id` 필터를 추가해 DB 레벨로 강제(실측 검증 완료). **2026-09-03
+      잔여 마감 세션에서 90일 유효기간(지급일 기준) 정책 확정 반영** — "체험 실제
+      시작 시각이 만료 이하여야 함"은 기존 `hold_entitlement()`의
+      `expires_at > p_lesson_start_at` 필터가 이미 모든 lesson_type에 공통 적용,
+      시간 변경 재검증도 기존 `reschedule_reservation_to_google_time()`이 동일
+      필터로 범용 처리 — 체험 전용 신규 코드 불필요, psql로 만료된 grant의 hold
+      거부까지 실측 확인(`supabase/migrations/20261013000000_m2_refund_policy_and_trial_expiry.sql`).
+      **미완료로 남은 하위 항목**: "관리자 예외 지급"(상담 결과 기록 경로 외의
+      별도 관리자 수동 지급 UI/함수 — 만들지 않음, `grant_trial_entitlement_for_consultation()`은
       상담 1건에 귀속되는 지급만 지원), 체험 예약 자체(hold/completed consume/정상
       취소 release)는 M3(체험 선생님 배정·예약) 선행 필요라 착수하지 않음 — 이번엔
       "지급까지만"이 승인 범위였다.
 - [x] 정규 단건·10회·20회 상품, 구매 단위 불변 스냅샷 — R4에서 이미 구현·검증 완료된
       항목 그대로 유지(변경 없음, 2026-09-03 회귀 재확인 — Vitest/Playwright 관련
       스펙 전부 통과).
-- [ ] **7일 이내 미사용 전액환불과 미래 예약 해제 우선순위 — 미구현.** 이번 세션은
-      체험수업권 "지급" 범위로 진행됐고, 이 항목은 정규 상품 환불 정책의 별도 증분
-      (기존 `calculate_purchase_refund_minor()` 공식과 별개의 "7일 이내면 소진 여부와
-      무관하게 전액", "미래 예약을 먼저 해제하는 우선순위" 로직)이라 실제 코드
-      착수를 하지 못했다 — 다음 M2 후속 세션에서 별도로 처리 필요(결정 필요 사항은
-      아니다, 이 문서의 문구 자체가 이미 확정 정책이라 기술 구현만 남음). 기존
-      `max(0, package_price − consumed × unit_price_minor)` 공식은 이번에 손대지
-      않고 그대로 유지.
+- [x] **7일 이내 미사용 전액환불과 미래 예약 해제 우선순위 — 2026-09-03 잔여 마감
+      세션에서 구현·psql 실측 검증 완료**
+      (`supabase/migrations/20261013000000_m2_refund_policy_and_trial_expiry.sql`).
+      `calculate_purchase_refund_minor()`가 `within_full_refund_window`(구매확정
+      후 7일 이내+전혀 미사용이면 전액)/`blocked_by_active_holds`를 추가 반환,
+      "미래 예약 해제 우선순위"는 신규 `purchase_has_active_future_holds()`로
+      명시적 차단+안내(자동 취소 아님 — 기술적 선택, 근거는 마이그레이션 §1
+      주석·실행 로그 참고)로 구현해 `refund_entitlement()`가 fail-closed로
+      강제한다. 전부 `purchases` 스냅샷(package_price_minor/unit_price_minor/
+      confirmed_at)과 `entitlement_ledger` INSERT-only 이력만 사용 — 상품 가격이
+      나중에 바뀌어도 과거 구매 환불액은 절대 달라지지 않음(요구사항 명시 원칙
+      그대로 준수). 기존 `max(0, package_price − consumed × unit_price_minor)`
+      공식(7일 밖 케이스)은 그대로 유지, 새로 만들지 않음.
 - 종료 기준: 체험 수업권이 정규 상품·Stripe 매출·환불 대상에 섞이지 않음(2026-09-03
   psql 실측 확인 — `refund_entitlement`/`transfer_entitlement`가 체험 grant를 자동
-  제외) + 단건·10회·20회 구매·영수증·원장·환불 회귀검증(Vitest 846/846, 관련
-  Playwright 10건 통과) + 외부 Stripe TEST 검증은 이번 세션에서 실행하지 않음(승인
-  대기, 실호출 0건). **7일 환불·해제 우선순위가 미구현이라 M2를 "완전 종료"로는
-  아직 표시하지 않는다.**
+  제외) + 단건·10회·20회 구매·영수증·원장·환불 회귀검증(Vitest 849/849) + 7일 전액
+  환불/소진 반영 환불/미래 hold 차단→해제 후 환불/idempotent 재시도/체험 grant
+  자동 제외/체험 만료 hold 거부까지 psql 실측 전부 통과 + 외부 Stripe TEST 검증은
+  이번 세션에서 실행하지 않음(승인 대기, 실호출 0건). **환불 정책·90일 유효기간
+  검증까지 통과해 M2를 완료로 표시한다.** 2라운드 관련 Playwright 재실행·별도
+  clean worktree 재현은 세션 간 로컬 DB 공유 충돌로 이 세션에서 중단됨 — 재개
+  승인 후 이어서 실행 필요(코드 자체는 이미 실제 DB로 검증 완료).
 
 ### M3 — R5 후속 증분 *(체험/정규 배정 — R5 섹션의 기존 미착수 항목을 이 순서로 실행)*
 - [ ] 체험 선생님 후보 지정, 확인 대기/수락/거절/만료/관리자 확정 상태 — 초기에는 관리자가

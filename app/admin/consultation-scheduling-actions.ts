@@ -44,6 +44,11 @@ export type ConsultationListItem = {
   trial_entitlement_grant_id: string | null;
   trial_entitlement_grant_status: "not_applicable" | "pending" | "granted" | "failed";
   trial_entitlement_grant_error: string | null;
+  /** M2(잔여 마감) — 지급된 체험수업권의 실제 만료일(지급일+90일). 관리자에게
+   * "정확한 만료일" 표시를 위해 별도 batch 조회로 채운다(entitlement_grants가
+   * consultations의 직접 FK 대상이라 join select도 가능하지만, 두 리스트 함수의
+   * select 문자열을 더 늘리지 않기 위해 아래 attachTrialGrantExpiry()로 분리). */
+  trial_entitlement_grant_expires_at: string | null;
   /** M1 요구사항 3(2026-09-03, 2026-09-03 조건부 승인 보완으로 두 단계로 분리) —
    * "상담 진행 가능"(동의 확인 + Smart Notes ON)과 "상담 완료 가능"(그 위에 Smart Notes
    * 원본 자동 연결 + 비어있지 않은 관리자 검토 요약)은 서로 다른 시점의 서로 다른 기준이다
@@ -79,6 +84,18 @@ function computeCompletionReadiness(row: {
   return "ready";
 }
 
+/** M2(잔여 마감) — trial_entitlement_grant_id가 있는 행들에 실제 만료일(entitlement_grants.expires_at)을
+ * batch로 채운다. 두 리스트 함수의 select 문자열에 join을 더 넣는 대신 별도 조회로 분리해 가독성을 유지한다. */
+async function attachTrialGrantExpiry(
+  admin: ReturnType<typeof createAdminClient>,
+  rows: Array<Omit<ConsultationListItem, "consultReadiness" | "completionReadiness" | "trial_entitlement_grant_expires_at">>
+): Promise<Map<string, string | null>> {
+  const grantIds = rows.map((r) => r.trial_entitlement_grant_id).filter((id): id is string => Boolean(id));
+  if (grantIds.length === 0) return new Map();
+  const { data } = await admin.from("entitlement_grants").select("id, expires_at").in("id", grantIds);
+  return new Map((data ?? []).map((g) => [g.id as string, g.expires_at as string | null]));
+}
+
 /** 관리자 "상담 운영" 화면 — 예정 상담 리스트 + 오늘/주간/월간 캘린더 조회(요구사항 3). */
 export async function listConsultationsForAdmin(params: { from: string; to: string }): Promise<ConsultationListItem[]> {
   await requireAdmin();
@@ -92,7 +109,14 @@ export async function listConsultationsForAdmin(params: { from: string; to: stri
     .lt("starts_at", params.to)
     .order("starts_at", { ascending: true });
   if (error) throw new Error(error.message);
-  return ((data ?? []) as ConsultationListItem[]).map((row) => ({ ...row, consultReadiness: computeConsultReadiness(row), completionReadiness: computeCompletionReadiness(row) }));
+  const rows = (data ?? []) as Array<Omit<ConsultationListItem, "consultReadiness" | "completionReadiness" | "trial_entitlement_grant_expires_at">>;
+  const expiryByGrantId = await attachTrialGrantExpiry(admin, rows);
+  return rows.map((row) => ({
+    ...row,
+    trial_entitlement_grant_expires_at: row.trial_entitlement_grant_id ? expiryByGrantId.get(row.trial_entitlement_grant_id) ?? null : null,
+    consultReadiness: computeConsultReadiness(row),
+    completionReadiness: computeCompletionReadiness(row),
+  }));
 }
 
 /** 승인 대기(requested) 목록 — hold 만료 여부와 무관하게 전부 보여준다(관리자가 뒤늦게라도 처리 가능). */
@@ -107,7 +131,14 @@ export async function listPendingConsultationRequests(): Promise<ConsultationLis
     .eq("status", "requested")
     .order("starts_at", { ascending: true });
   if (error) throw new Error(error.message);
-  return ((data ?? []) as ConsultationListItem[]).map((row) => ({ ...row, consultReadiness: computeConsultReadiness(row), completionReadiness: computeCompletionReadiness(row) }));
+  const rows = (data ?? []) as Array<Omit<ConsultationListItem, "consultReadiness" | "completionReadiness" | "trial_entitlement_grant_expires_at">>;
+  const expiryByGrantId = await attachTrialGrantExpiry(admin, rows);
+  return rows.map((row) => ({
+    ...row,
+    trial_entitlement_grant_expires_at: row.trial_entitlement_grant_id ? expiryByGrantId.get(row.trial_entitlement_grant_id) ?? null : null,
+    consultReadiness: computeConsultReadiness(row),
+    completionReadiness: computeCompletionReadiness(row),
+  }));
 }
 
 /** M1 요구사항 3 — Smart Notes 확인·보정을 관리자가 수동으로 재시도(Meet space가 아직 없거나

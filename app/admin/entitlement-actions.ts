@@ -309,8 +309,22 @@ export async function requestRefund(purchaseId: string, reason?: string): Promis
     .rpc("calculate_purchase_refund_minor", { p_purchase_id: purchaseId })
     .single();
   if (calcError) throw new Error(calcError.message);
-  const calculated = calc as { refund_minor: number; consumed_count: number } | null;
+  const calculated = calc as {
+    refund_minor: number;
+    consumed_count: number;
+    within_full_refund_window: boolean;
+    blocked_by_active_holds: boolean;
+  } | null;
   if (!calculated) throw new Error("존재하지 않는 구매입니다.");
+  // M2 — 아직 소진되지 않은 미래 예약이 있으면 요청 접수 단계에서부터 명확히
+  // 안내한다(승인 시점에도 refund_entitlement()가 다시 한번 fail-closed로
+  // 막는다 — 이중 방어. 여기서 미리 막는 이유는 관리자가 계산도 안 나오는
+  // 요청을 만들지 않도록 하기 위함).
+  if (calculated.blocked_by_active_holds) {
+    throw new Error(
+      "아직 소진되지 않은 미래 예약이 있어 환불 요청을 접수할 수 없습니다. 먼저 해당 예약을 취소해 수업권을 해제해주세요."
+    );
+  }
 
   const { data, error } = await admin
     .from("refund_requests")
@@ -319,6 +333,7 @@ export async function requestRefund(purchaseId: string, reason?: string): Promis
       status: "requested",
       calculated_refund_minor: calculated.refund_minor,
       consumed_count_at_calculation: calculated.consumed_count,
+      within_full_refund_window: calculated.within_full_refund_window,
       reason: reason ?? null,
       requested_by: actorUserId,
     })
@@ -483,6 +498,8 @@ export async function listPendingRefundRequests(): Promise<
     status: string;
     calculatedRefundMinor: number;
     consumedCountAtCalculation: number;
+    /** M2 — 요청 접수 시점에 7일 이내+미사용 전액환불 규칙이 적용됐는지 스냅샷. */
+    withinFullRefundWindow: boolean;
     reason: string | null;
     createdAt: string;
   }>
@@ -491,7 +508,9 @@ export async function listPendingRefundRequests(): Promise<
   const admin = createAdminClient();
   const { data, error } = await admin
     .from("refund_requests")
-    .select("id, purchase_id, status, calculated_refund_minor, consumed_count_at_calculation, reason, created_at")
+    .select(
+      "id, purchase_id, status, calculated_refund_minor, consumed_count_at_calculation, within_full_refund_window, reason, created_at"
+    )
     .in("status", ["requested", "reviewing", "processing"])
     .order("created_at", { ascending: true });
   if (error) throw new Error(error.message);
@@ -501,6 +520,7 @@ export async function listPendingRefundRequests(): Promise<
     status: row.status,
     calculatedRefundMinor: row.calculated_refund_minor,
     consumedCountAtCalculation: row.consumed_count_at_calculation,
+    withinFullRefundWindow: Boolean(row.within_full_refund_window),
     reason: row.reason,
     createdAt: row.created_at,
   }));

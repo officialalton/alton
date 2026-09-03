@@ -55,6 +55,7 @@ const baseProps = {
       status: "requested",
       calculatedRefundMinor: 12000,
       consumedCountAtCalculation: 2,
+      withinFullRefundWindow: false,
       reason: "일정 변경",
       createdAt: "2026-08-01T00:00:00Z",
     },
@@ -194,6 +195,18 @@ describe("EntitlementLedgerTab", () => {
     await waitFor(() =>
       expect(screen.getByText("이미 처리된 환불 요청입니다(현재 상태: succeeded).")).toBeInTheDocument()
     );
+  });
+
+  it("M2: 7일 이내 전액환불 요청은 그 사실을 명시적으로 보여준다", async () => {
+    const propsWithFullWindow = {
+      ...baseProps,
+      pendingRefundRequests: [
+        { ...baseProps.pendingRefundRequests[0], id: "r2", withinFullRefundWindow: true },
+      ],
+    };
+    render(<EntitlementLedgerTab {...propsWithFullWindow} />);
+    fireEvent.click(screen.getByText("환불 요청"));
+    expect(screen.getByText(/구매 후 7일 이내 미사용\(전액 환불 적용\)/)).toBeInTheDocument();
   });
 
   it("조정·연장·이전 서브탭에서 연장 실행 시 올바른 인자로 호출한다", async () => {

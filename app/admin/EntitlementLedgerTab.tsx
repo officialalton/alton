@@ -410,6 +410,7 @@ function RefundsSection({ requests: initialRequests }: { requests: PendingRefund
             <div className="text-[12px] text-grey-500 mt-0.5">
               계산된 환불액: {formatMinor(r.calculatedRefundMinor)} · 소진 수량: {r.consumedCountAtCalculation} ·
               상태: {r.status}
+              {r.withinFullRefundWindow && " · 구매 후 7일 이내 미사용(전액 환불 적용)"}
             </div>
             {r.reason && <div className="text-[12px] text-grey-500 mt-0.5">사유: {r.reason}</div>}
             <div className="flex items-center gap-2 mt-2">

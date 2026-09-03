@@ -59,7 +59,7 @@
 - **(R4·R5, 2026-09-02, 완전히 해결 — 실사람 UAT 완료)** 제품 오너가 R4·R5 통합 UAT를 Vercel Preview에서 직접 수행해 전체 흐름(보호자 20회 패키지 구매→Stripe TEST 결제→영수증/수업권 확인→관리자 확인→과목 수강 활성화→체험 선생님 승계 제안→선생님 배정→적용일·사유 지정 변경→보호자/학생/선생님 역할별 화면 확인)을 승인 완료. UAT 중 발견되어 수정된 실버그: 관리자 Google 로그인/비밀번호 재설정/Stripe 결제 성공 리다이렉트가 전부 고정 `NEXT_PUBLIC_SITE_URL` 대신 실제 요청 origin을 쓰도록 수정(`039068b`/`a0645ce`/`97b04f2`, `lib/request-origin.ts` 공용 헬퍼), 관리자 "구매 상세 조회"가 UUID 아닌 입력(이메일 등)에 원시 DB 에러를 던져 페이지 전체가 깨지던 500 버그 수정(`7992fb3`), 선생님 변경 화면에 적용일 입력란이 아예 없어 항상 "지금"으로만 처리되던 버그 수정(DB 함수는 이미 `p_effective_from`을 지원했음, UI만 연결, `7992fb3`). **R4·R5 두 단계 모두 완료 확정 — 같은 범위 재작업 금지.**
 - **(R4, 2026-09-02, 정식 오픈 전 blocker, 2026-09-02 재확인)** Production Stripe 웹훅 엔드포인트 `https://app.alton.education/api/webhooks/stripe`가 아직 등록되어 있지 않음(현재 Stripe 계정에 있는 웹훅 2개는 전부 이번 세션 UAT용 임시 Preview 주소). Preview에서 있었던 웹훅 전달 지연은 Preview 전용 Deployment Protection + 배포마다 바뀌는 URL 때문이며 Production 구조 문제가 아님(Production 도메인 `app.alton.education`은 Deployment Protection 없음, 확인됨). **법인 설립·Stripe Live 계정 활성화 전에는 다음을 하지 않는다**: (1) 이 Production 웹훅 엔드포인트 등록, (2) Stripe Live secret key 발급·환경변수 입력, (3) 실제(Live) 결제 API 호출. 법인 설립·Stripe Live 계정 활성화 후 오픈 전 필수 작업으로 남겨둔다. `docs/2026-08-29-master-roadmap-v3.md` R13(종단 QA·정식 오픈) 체크리스트에도 동일 항목 등록.
 - **(R6, 2026-09-03) 상태: 완료.** Smart Notes canonical PATCH 실제 Sandbox 최종 검증까지 통과(M0 종료).** 정규수업 예약/수업권 연동/Calendar·Meet/취소·재예약/역할별 캘린더 UI(학생·보호자/선생님/관리자)/선생님 외부 일정 표시/Google 직접 변경(시간 변경 양방향·삭제 양자택일)/지각·노쇼/AI 회의록·Smart Notes/알림/운영 전체 범위가 구현·mock 테스트 완료에 이어 **실제 Google Sandbox 통합 검증까지 통과**했다(15/N, 아래 참고 — 실제 버그 3건 발견·수정). 그 통과를 조건으로 **Calendly/Zoom(개별 회차 예약용)을 완전히 제거**했다 — 상담(consult_requests) 예약 Calendly는 범위 밖(`ConsultForm`으로 독립 동작, 영향 없음). 전체 스펙은 `docs/2026-09-02-r6-scope-and-approval.md`에 원문 그대로 보존. 진행 상세는 `docs/2026-09-02-r6-migration-execution-log.md` 참고. **(2026-09-03, 16/N)** 제품 오너 지시로 Smart Notes 동의 모델을 보호자 opt-out 선택 기능에서 가족 서비스 이용계약의 필수 조항으로 단순화(아래 참고) — 이때 재작성한 `enableMeetSpaceSmartNotes()`(canonical space name 기반 PATCH)를 **(2026-09-03, M0) 사용자 승인 후 실제 Google Sandbox로 재검증** — 임시 `environment:development` IAM binding 추가 → 실제 Calendar 이벤트+Meet space 생성 → canonical name으로 PATCH → 재확인 GET·독립 재조회 모두 `autoSmartNotesGeneration: "ON"` 확인 → 검증 직후 임시 Calendar 이벤트 삭제, IAM binding 제거(재조회로 Production만 남았음 확인), 임시 파일·자격 증명 삭제. **canonical name PATCH가 기존 403을 실제로 우회함을 확인 — 더 이상 외부 gap 아님.** 이로써 R6은 정식 종료됐다.
-- **다음 실행 순서(2026-09-03 확정, 상세는 마스터 로드맵 "근접 실행계획" 절)**: `M0 R6 마감(완료) → M1 상담·체험 기반 재설계 → M2 R4 후속(체험/정규 수업권·환불) → M3 R5 후속(체험/정규 배정) → M4 상담→체험→정규 전환 통합 마감 → M5 기존 R7 착수`. **M1/R6 Workspace Events 공통 blocker는 2026-09-03 코드 정정+mock/로컬 검증까지 완료**했다 — 실제 Google Sandbox 실측 재검증(구독 생성 응답 확인 등)만 사람 복귀 후 실행 대기 상태다(실행 절차는 `scripts/m1-sandbox-verification.sh` v2, 요청서는 `docs/2026-09-03-m1-google-sandbox-verification-request-v2.md`). 이 실측 재검증이 끝나기 전까지 M1/R6은 "코드+mock 완료"로만 표시하고 "완전 마감"으로 표시하지 않는다. **M2/M3/M4는 착수하지 않았다** — 각 마일스톤은 이 프로젝트의 R-단계와 동일하게 별도 승인 단위이며, 이번 세션은 M1/R6 blocker 해결 범위로 스스로 제한했다. 상세는 아래 "M1 — 상담 기반 재설계" 절과 `docs/2026-09-03-m1-migration-execution-log.md`. R9(과목 마일스톤 보드)·R11(보호자–관리자 운영 메신저)은 이 실행 순서에 포함되지 않고 각자의 R 섹션에 별도 미착수 항목으로 남아있다.
+- **다음 실행 순서(2026-09-03 확정, 상세는 마스터 로드맵 "근접 실행계획" 절)**: `M0 R6 마감(완료) → M1 상담·체험 기반 재설계 → M2 R4 후속(체험/정규 수업권·환불) → M3 R5 후속(체험/정규 배정) → M4 상담→체험→정규 전환 통합 마감 → M5 기존 R7 착수`. **M1/R6 Workspace Events 공통 blocker는 2026-09-03 코드 정정+mock/로컬 검증까지 완료**했다 — 실제 Google Sandbox 실측 재검증(구독 생성 응답 확인 등)만 사람 복귀 후 실행 대기 상태다(실행 절차는 `scripts/m1-sandbox-verification.sh` v2, 요청서는 `docs/2026-09-03-m1-google-sandbox-verification-request-v2.md`). 이 실측 재검증이 끝나기 전까지 M1/R6은 "코드+mock 완료"로만 표시하고 "완전 마감"으로 표시하지 않는다. **M2는 착수해 아래 별도 절 기준으로 완료됐다(2026-09-03) — M3/M4는 여전히 착수하지 않았다.** 상세는 아래 "M1 — 상담 기반 재설계" 절, "M2 — R4 후속(체험수업권)" 절과 `docs/2026-09-03-m1-migration-execution-log.md`/`docs/2026-09-03-m2-migration-execution-log.md`. R9(과목 마일스톤 보드)·R11(보호자–관리자 운영 메신저)은 이 실행 순서에 포함되지 않고 각자의 R 섹션에 별도 미착수 항목으로 남아있다.
   - **1/N 완료**: 선생님 반복가능시간·날짜별예외·15분버퍼·24h~8주 window, `confirm_lesson_booking()`(예약+세션+entitlement hold 단일 트랜잭션).
   - **2/N 완료**: Calendar/Meet 이벤트+Meet 생성·FreeBusy·취소, 실패해도 예약/hold는 건드리지 않는 재처리 워커(`reconciliation_needed` 포함).
   - **3/N 완료**: 구조적 cutover — `sessions`→`legacy_sessions`(레거시 세션뷰 8파일 14곳 계속 사용), `sessions_v3`→`sessions`(신규 예약이 쓰는 테이블). FK·RLS·인덱스는 rename에 자동 추종, 함수 본문 7개(텍스트 참조라 자동추종 안 됨)는 전부 CREATE OR REPLACE로 갱신 확인. `material_version_id`는 R9 선행조건(학생별 진도 스냅샷) 부재로 의도적으로 비워둠(인터페이스만 유지).
@@ -365,10 +365,12 @@ endpoint 형식이다. 즉 R6 15/N의 "구독·Pub/Sub 실제 수신 성공" 기
 push는 제품 오너가 최종 확인 후 별도로 지시할 때만 한다(이 세션은 지시받지 않아
 push하지 않았다).
 
-### M2 — R4 후속(체험수업권), 코드 구현·로컬 검증 완료(2026-09-03)
+### M2 — R4 후속(체험수업권 + 정규상품 환불), 완료(2026-09-03)
 
-커밋 `007e917`(main 브랜치, `git push` 없음). 상세는
-`docs/2026-09-03-m2-migration-execution-log.md`.
+커밋 `007e917`(1라운드: 지급) → `de9cd26`(문서) → `<잔여 마감 커밋, 아래 §2 참고>`
+(2라운드: 90일 유효기간 만료 강제 확인 + 정규상품 환불 정책, 모두 main 브랜치,
+`git push` 없음). 상세는 `docs/2026-09-03-m2-migration-execution-log.md`.
+**환불 정책·90일 유효기간까지 통과해 M2를 완료로 표시한다.**
 
 - **DB**(`supabase/migrations/20261012000000_m2_trial_entitlement.sql`): 구매·환불·
   양도 불가능한 60분 전용 체험수업권 — `entitlement_types.trial_lesson_use` +
@@ -391,17 +393,54 @@ push하지 않았다).
   않음 — `app/parent/entitlements-data.ts`를 `entitlement_grant_details`(신규 뷰,
   lesson_type_code로 정규/체험 구분) 조회로 교체해 실제로 합산될 뻔한 버그를 사전
   차단). `purchase-actions.ts`가 `system_only` 상품의 체크아웃을 명시적으로 차단.
-- **검증**: 로컬 `supabase db reset --local`, psql 직접 검증(멱등성/오사용 방지/
-  양도·환불 차단/회수 전부 실측 통과), `tsc --noEmit` 클린, 전체 Vitest 846건 통과
-  (기존 841건 + 신규 5건, 회귀 없음), `next build` 성공, 관련 Playwright 10건
+- **1라운드 검증**: 로컬 `supabase db reset --local`, psql 직접 검증(멱등성/오사용
+  방지/양도·환불 차단/회수 전부 실측 통과), `tsc --noEmit` 클린, 전체 Vitest 846건
+  통과(기존 841건 + 신규 5건, 회귀 없음), `next build` 성공, 관련 Playwright 10건
   (`m1-consultation-flow`/`r4-*`/`r6-lesson-booking-flow`) 통과, 커밋만 있는 별도
   clean `git worktree`에서 build+전체 Vitest(846/846) 재현 확인.
-- **결정 필요**: 체험수업권 유효기간(현재 기술 기본값 90일, 제품 정책 미확정) —
-  상세는 실행 로그 §3.
+- **2라운드(잔여 마감, 2026-09-03) — 정책 확정 반영**: 제품 오너가 체험수업권
+  유효기간(지급일로부터 90일, 실제 체험 시작 시각이 만료 이하여야 함)과 정규상품
+  환불 공식(7일 이내+미사용 전액환불, 그 외 실제 결제액−소진회차×구매당시
+  할인전 단건 정상가, 체험 제외)을 확정 지시해 실제로 구현했다
+  (`supabase/migrations/20261013000000_m2_refund_policy_and_trial_expiry.sql`).
+  **90일 유효기간**: 지급 로직(1라운드 `now()+90 days`)은 이미 정책과 일치 —
+  "체험 실제 시작 시각이 만료 이하"는 R1부터 있던 `hold_entitlement()`의
+  `expires_at > p_lesson_start_at` 필터가 모든 lesson_type에 이미 공통 적용하고
+  있었고, 시간 변경 재검증도 기존 `reschedule_reservation_to_google_time()`이
+  동일 필터로 범용 처리해 별도 체험 전용 코드가 필요 없었다(psql로 만료된 grant의
+  hold 거부까지 실측 확인). **환불**: 신규 `purchase_has_active_future_holds()`
+  헬퍼로 "미래 예약 해제 우선순위"를 자동 취소가 아니라 명시적 차단+안내로
+  구현(근거는 마이그레이션 §1 주석, 기술적 선택 — 자동 취소가 맞다고 판단되면 이
+  헬퍼 하나만 교체하면 됨). `calculate_purchase_refund_minor()`가
+  `within_full_refund_window`/`blocked_by_active_holds`를 추가로 반환, 전부
+  `purchases` 스냅샷(package_price_minor/unit_price_minor/confirmed_at)과
+  `entitlement_ledger` 이력만 사용(가격표 재조회 없음 — 상품 가격이 나중에
+  바뀌어도 과거 구매 환불액 불변). `refund_requests.within_full_refund_window`
+  컬럼으로 계산 근거를 감사 이력에 고정. 체험수업권은 `purchase_id_ref`가 항상
+  null이라 이 전체 경로에서 자동 제외(신규 코드 불필요, psql로 no-op 확인).
+  앱 레이어: `requestRefund()`가 차단 시 즉시 친절한 에러, `approveRefund()`는
+  `refund_entitlement()`의 fail-closed 재확인에 그대로 의존(이중 방어).
+  관리자 화면(`EntitlementLedgerTab.tsx`)에 "구매 후 7일 이내 미사용(전액 환불
+  적용)" 표시, 관리자 상담 패널·보호자 화면에 체험수업권 정확한 만료일+사용 조건
+  문구 추가.
+  **검증**: psql 직접 검증 5개 시나리오(7일 이내 전액환불/7일 밖 소진 반영/
+  미래 hold 차단→해제 후 환불→idempotent 재시도/체험 grant 환불 대상 자동 제외/
+  만료된 체험 grant hold 거부) **전부 실제 로컬 DB로 통과**, `tsc --noEmit` 클린,
+  전체 Vitest 849건 통과(2라운드 신규 3건 포함, 회귀 없음), `next build` 성공.
+  **미완료**: 2라운드 관련 Playwright 재실행과 별도 clean worktree 재현은 이
+  세션이 로컬 Supabase DB를 다른 세션과 공유하는 충돌이 발견돼 중단 지시를 받아
+  실행하지 못했다 — 재개 승인 후 이어서 실행 필요(DB 자체 변경 없이 코드는 이미
+  실제 DB로 검증됨).
+- **결정 필요**: 없음 — 90일 유효기간·환불 공식 모두 2026-09-03 확정.
 - **범위 밖(M3/M4, 착수하지 않음)**: 체험 선생님 배정·예약, 잠재고객→정식 학생
   계정 연결. 연결 지점만 남겨둠(`grant_trial_entitlement_for_consultation()`이
   child_id 없으면 명확한 예외를 던지고, M4가 계정 연결 후
   `admin_retry_trial_entitlement_grant()`를 호출하면 자연스럽게 이어짐).
+- **기술적 선택(결정 필요 아님, 근거 문서화)**: "미래 예약 해제 우선순위"를 자동
+  취소가 아니라 명시적 차단으로 구현 — 예약 취소는 이미 Calendar 동기화·통지까지
+  포함한 별도 완결 흐름(`cancel_lesson_booking()`)이라 환불 승인이 그걸 몰래
+  트리거하면 부작용이 크다고 판단. 자동 취소가 맞다고 판단되면
+  `purchase_has_active_future_holds()`만 교체하면 됨.
 - **외부 변경**: 0건(Stripe/Google/이메일/원격 DB 전부 미접근). `git push` 없음.
 
 ## `material_version_id` 정책(R9 이관, 2026-09-02 명문화)

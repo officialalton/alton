@@ -214,7 +214,8 @@ export default function EntitlementsTab({
             <div className="mb-4 border-[1.5px] border-grey-200 rounded-lg px-3 py-2.5 bg-grey-50">
               <p className="text-[12px] font-bold text-ink">체험수업권(60분) 1회 보유 중</p>
               <p className="text-[11.5px] text-grey-500 mt-0.5">
-                만료 {formatDate(c.trialEntitlement.expiresAt)} · 정규수업권과 별개이며 구매·환불·양도가 불가능합니다.
+                만료 {formatDate(c.trialEntitlement.expiresAt)}까지 체험 수업이 시작해야 사용할 수 있습니다(그 이후로는
+                예약해도 사용할 수 없습니다) · 정규수업권과 별개이며 구매·환불·양도가 불가능합니다.
               </p>
             </div>
           )}

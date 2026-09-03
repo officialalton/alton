@@ -278,6 +278,8 @@ export default function ConsultationSchedulingPanel() {
                 <p className="text-[12px] mt-0.5" style={{ color: c.trial_entitlement_grant_status === "granted" ? "#16a34a" : "#b91c1c" }}>
                   {TRIAL_GRANT_STATUS_LABEL[c.trial_entitlement_grant_status]}
                   {c.trial_entitlement_grant_status === "failed" && c.trial_entitlement_grant_error && ` (${c.trial_entitlement_grant_error})`}
+                  {c.trial_entitlement_grant_status === "granted" && c.trial_entitlement_grant_expires_at &&
+                    ` · 만료: ${formatDateTime(c.trial_entitlement_grant_expires_at)}까지 체험수업이 시작해야 사용 가능`}
                 </p>
               )}
               <div className="flex flex-wrap gap-2 mt-3">
