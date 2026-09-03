@@ -365,6 +365,45 @@ endpoint 형식이다. 즉 R6 15/N의 "구독·Pub/Sub 실제 수신 성공" 기
 push는 제품 오너가 최종 확인 후 별도로 지시할 때만 한다(이 세션은 지시받지 않아
 push하지 않았다).
 
+### M2 — R4 후속(체험수업권), 코드 구현·로컬 검증 완료(2026-09-03)
+
+커밋 `007e917`(main 브랜치, `git push` 없음). 상세는
+`docs/2026-09-03-m2-migration-execution-log.md`.
+
+- **DB**(`supabase/migrations/20261012000000_m2_trial_entitlement.sql`): 구매·환불·
+  양도 불가능한 60분 전용 체험수업권 — `entitlement_types.trial_lesson_use` +
+  `entitlement_products.trial_lesson_grant`(신규 `system_only` 컬럼=true, 가격
+  버전 없음 → 구매 체크아웃 자체 불가). `entitlement_grants.source_consultation_id`
+  + 부분 unique index로 상담당 지급 1건만 허용(idempotent). **실제로 발견한 DB
+  갭**: `hold_entitlement()`가 지금까지 수업 유형(정규 120분/체험 60분)을 전혀
+  구분하지 않고 child의 아무 grant나 hold했다 — `p_lesson_type_id`(기본 null,
+  하위호환) 파라미터를 추가하고 `confirm_lesson_booking()`이 항상 넘기도록 해
+  정규/체험 오사용을 DB 레벨에서 막았다. `admin_record_consultation_outcome()`이
+  outcome='trial_recommended' 기록 시점에 같은 트랜잭션에서 지급을 시도(실패해도
+  outcome 기록 자체는 막지 않음, `consultations.trial_entitlement_grant_status/_error`로
+  추적) — `admin_retry_trial_entitlement_grant()`로 관리자 수동 재처리 가능. 환불은
+  `refund_entitlement()`가 `purchase_id_ref`(체험은 항상 null) 기준이라 애초에
+  대상이 아니고, 양도는 `is_paid=false`(체험은 항상 false)를 기존 `transfer_entitlement()`
+  가드가 이미 차단 — 새 환불/양도 로직을 만들지 않았다. 취소(회수)는 기존
+  `expire_entitlement()` 재사용.
+- **앱 레이어**: 관리자 `ConsultationSchedulingPanel.tsx`에 지급 상태+재처리 버튼,
+  보호자 `EntitlementsTab.tsx`에 체험수업권 별도 카드(정규 수업권과 절대 합산하지
+  않음 — `app/parent/entitlements-data.ts`를 `entitlement_grant_details`(신규 뷰,
+  lesson_type_code로 정규/체험 구분) 조회로 교체해 실제로 합산될 뻔한 버그를 사전
+  차단). `purchase-actions.ts`가 `system_only` 상품의 체크아웃을 명시적으로 차단.
+- **검증**: 로컬 `supabase db reset --local`, psql 직접 검증(멱등성/오사용 방지/
+  양도·환불 차단/회수 전부 실측 통과), `tsc --noEmit` 클린, 전체 Vitest 846건 통과
+  (기존 841건 + 신규 5건, 회귀 없음), `next build` 성공, 관련 Playwright 10건
+  (`m1-consultation-flow`/`r4-*`/`r6-lesson-booking-flow`) 통과, 커밋만 있는 별도
+  clean `git worktree`에서 build+전체 Vitest(846/846) 재현 확인.
+- **결정 필요**: 체험수업권 유효기간(현재 기술 기본값 90일, 제품 정책 미확정) —
+  상세는 실행 로그 §3.
+- **범위 밖(M3/M4, 착수하지 않음)**: 체험 선생님 배정·예약, 잠재고객→정식 학생
+  계정 연결. 연결 지점만 남겨둠(`grant_trial_entitlement_for_consultation()`이
+  child_id 없으면 명확한 예외를 던지고, M4가 계정 연결 후
+  `admin_retry_trial_entitlement_grant()`를 호출하면 자연스럽게 이어짐).
+- **외부 변경**: 0건(Stripe/Google/이메일/원격 DB 전부 미접근). `git push` 없음.
+
 ## `material_version_id` 정책(R9 이관, 2026-09-02 명문화)
 
 `sessions.material_version_id`(교재 버전 스냅샷 FK)는 R1부터 nullable 컬럼으로만 존재하고 실제로 채워진 적이 없다 — "이 subject_enrollment가 지금 어떤 교재 버전을 쓰는지"를 판정하는 개념 자체가 R9(과목 템플릿과 학생별 진도 스냅샷) 전에는 없기 때문이다. 이번 세션에서 제품 오너 요구에 따라 정책을 다음과 같이 명문화했다(구현은 R9에서):
