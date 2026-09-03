@@ -4,11 +4,21 @@ import {
   renewWorkspaceEventsSubscription,
   deleteWorkspaceEventsSubscription,
 } from "@/lib/google-workspace-events-subscriptions";
+import { getWorkspaceUserByEmail } from "@/lib/google-workspace-directory-readonly";
 import { findRecentSmartNoteForMeetingCode } from "@/lib/google-meet";
 
-// M1/R6 공통 blocker(2026-09-03) — Workspace Events 구독 생성·조회·갱신·정지·만료·재생성·
-// 삭제의 실제 오케스트레이션. lib/google-workspace-events-subscriptions.ts(순수 API
-// 클라이언트)와 supabase workspace_events_subscriptions(상태 저장소)를 잇는다.
+// M1/R6 공통 blocker(2026-09-03, 같은 날 네 번째 후속에서 모델 정정) — Workspace Events
+// 구독 생성·조회·갱신·정지·만료·재생성·삭제의 실제 오케스트레이션.
+// lib/google-workspace-events-subscriptions.ts(순수 API 클라이언트)와 supabase
+// workspace_events_subscriptions(상태 저장소)를 잇는다.
+//
+// **정정 이력**: 최초 구현은 (1) organizer 이메일을 그대로 target resource에 쓰고,
+// (2) 웹훅 HTTP URL을 그대로 pubsubTopic에 넣는 임시 fallback(WORKSPACE_EVENTS_
+// PUBSUB_TOPIC 없으면 NEXT_PUBLIC_SITE_URL 기반 URL 사용)이 있었다 — 둘 다 실제
+// Google API 요구사항과 맞지 않아 제거했다. 이제 (1) organizer의 Directory API 불변
+// 사용자 ID를 조회·캐시해서만 구독을 만들고, (2) WORKSPACE_EVENTS_PUBSUB_TOPIC이
+// 없거나 형식이 틀리면 실제 API를 호출하기 전에 fail-closed로 즉시 실패한다(웹훅 HTTP
+// URL로 대체하지 않음).
 //
 // 원칙(기존 Calendar/Meet 동기화와 동일): 이 흐름의 어떤 실패도 상담·예약 확정 자체를
 // 막거나 되돌리지 않는다. 구독이 끊겼다고 Smart Notes 원본·이벤트를 유실 처리하거나
@@ -18,13 +28,46 @@ import { findRecentSmartNoteForMeetingCode } from "@/lib/google-meet";
 const RENEWAL_THRESHOLD_MS = 24 * 60 * 60 * 1000; // 만료 24시간 전부터 갱신 대상
 const DEFAULT_TTL_SECONDS = 7 * 24 * 60 * 60; // Workspace Events 구독 최대 ttl은 7일(공개 문서 기준)
 
-function webhookUrl(): string {
-  // Pub/Sub push 엔드포인트 — 이미 존재하는 웹훅(app/api/webhooks/workspace-events)을
-  // 그대로 가리킨다. 로컬 개발 환경은 공인 URL이 없어 실제 구독 생성 자체가 무의미하므로
-  // (실제 호출은 어차피 CALENDAR_SYNC_ALLOW_REAL_CALLS 게이트로 막힘) 이 값은 배포
-  // 환경 기준으로만 의미가 있다.
-  const base = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3010";
-  return `${base}/api/webhooks/workspace-events`;
+/**
+ * organizer의 Directory API 불변 사용자 ID를 resolve한다 — DB에 캐시된 값이 있으면
+ * 그대로 재사용하고(Directory API를 매번 다시 호출하지 않음), 없으면 조회 후 그
+ * 자리에서 캐시해 반환한다. 이메일을 리소스 이름에 직접 쓰지 않기 위한 유일한 경로.
+ */
+async function resolveOrganizerWorkspaceUserId(
+  admin: ReturnType<typeof createAdminClient>,
+  organizerEmail: string,
+  cachedUserId: string | null,
+  rowId: string | null
+): Promise<string> {
+  if (cachedUserId) return cachedUserId;
+
+  const user = await getWorkspaceUserByEmail(organizerEmail);
+  if (!user) {
+    throw new Error(`Directory API에서 ${organizerEmail} 사용자를 찾을 수 없습니다.`);
+  }
+  if (rowId) {
+    await admin.from("workspace_events_subscriptions").update({ organizer_workspace_user_id: user.googleUserId }).eq("id", rowId);
+  }
+  return user.googleUserId;
+}
+
+/**
+ * WORKSPACE_EVENTS_PUBSUB_TOPIC을 읽고 형식을 검증한다 — 웹훅 HTTP URL로 대체하지
+ * 않는다. 값이 없거나 형식이 틀리면 실제 API를 호출하기 전에 여기서 즉시 실패한다
+ * (fail-closed). 웹훅 URL(app/api/webhooks/workspace-events)은 이 토픽에 대한 별도
+ * Pub/Sub push subscription의 엔드포인트로 GCP 콘솔에서 직접 연결하는 것이지, 이
+ * 코드가 만드는 값이 아니다(개념 분리 — 문서 참고).
+ */
+const PUBSUB_TOPIC_PATTERN = /^projects\/[a-z][a-z0-9-]{4,28}[a-z0-9]\/topics\/[A-Za-z0-9_.~+%-]{3,255}$/;
+
+function resolvePubsubTopic(): string {
+  const topic = process.env.WORKSPACE_EVENTS_PUBSUB_TOPIC;
+  if (!topic || !PUBSUB_TOPIC_PATTERN.test(topic)) {
+    throw new Error(
+      "WORKSPACE_EVENTS_PUBSUB_TOPIC이 없거나 형식이 올바르지 않습니다 — 'projects/{project}/topics/{topic}' 형식의 실제 Pub/Sub 토픽이 필요합니다(웹훅 URL 아님)."
+    );
+  }
+  return topic;
 }
 
 type SubscriptionRow = {
@@ -35,6 +78,7 @@ type SubscriptionRow = {
   status: string;
   expires_at: string | null;
   last_error: string | null;
+  organizer_workspace_user_id: string | null;
 };
 
 export type EnsureSubscriptionResult = {
@@ -59,7 +103,7 @@ export async function ensureSubscriptionForOrganizer(
 
   const { data: existing } = await admin
     .from("workspace_events_subscriptions")
-    .select("id, organizer_email, organizer_role, subscription_name, status, expires_at, last_error")
+    .select("id, organizer_email, organizer_role, subscription_name, status, expires_at, last_error, organizer_workspace_user_id")
     .eq("organizer_email", organizerEmail)
     .maybeSingle();
   const row = existing as SubscriptionRow | null;
@@ -105,14 +149,25 @@ export async function ensureSubscriptionForOrganizer(
   }
 
   // 없거나(row null) expired/error 상태 — 새로 만든다(기존 행이 있으면 갱신, 없으면 삽입).
+  // resolveOrganizerWorkspaceUserId()에 캐시할 rowId가 아직 없으면(row null) 이번 조회
+  // 결과는 아래 upsert가 행을 만든 뒤에야 캐시된다 — 최초 1회는 캐시 없이 조회하고,
+  // 성공하면 이번 upsert의 organizer_workspace_user_id 필드로 함께 저장한다.
   try {
-    const created = await createWorkspaceEventsSubscription({ organizerEmail, webhookUrl: webhookUrl(), ttlSeconds: DEFAULT_TTL_SECONDS });
+    const organizerWorkspaceUserId = await resolveOrganizerWorkspaceUserId(admin, organizerEmail, row?.organizer_workspace_user_id ?? null, row?.id ?? null);
+    const pubsubTopic = resolvePubsubTopic();
+    const created = await createWorkspaceEventsSubscription({
+      organizerEmail,
+      organizerWorkspaceUserId,
+      pubsubTopic,
+      ttlSeconds: DEFAULT_TTL_SECONDS,
+    });
     const payload = {
       organizer_email: organizerEmail,
       organizer_role: organizerRole,
       subscription_name: created.name,
       status: "active" as const,
       expires_at: created.expireTime ?? new Date(now + DEFAULT_TTL_SECONDS * 1000).toISOString(),
+      organizer_workspace_user_id: organizerWorkspaceUserId,
       last_renewed_at: new Date().toISOString(),
       last_verified_at: new Date().toISOString(),
       last_error: null,

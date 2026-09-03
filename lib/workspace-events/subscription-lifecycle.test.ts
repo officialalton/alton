@@ -18,6 +18,13 @@ vi.mock("@/lib/google-meet", () => ({
   findRecentSmartNoteForMeetingCode: (p: unknown) => findSmartNoteMock(p),
 }));
 
+const getWorkspaceUserByEmailMock = vi.fn();
+vi.mock("@/lib/google-workspace-directory-readonly", () => ({
+  getWorkspaceUserByEmail: (email: string) => getWorkspaceUserByEmailMock(email),
+}));
+
+const VALID_TOPIC = "projects/alton-integration-sandbox/topics/workspace-events";
+
 let subscriptionRow: Record<string, unknown> | null = null;
 const updatePayloads: Array<Record<string, unknown>> = [];
 const insertPayloads: Array<Record<string, unknown>> = [];
@@ -66,6 +73,8 @@ beforeEach(() => {
   insertPayloads.length = 0;
   consultCandidates = [];
   renewCandidates = [];
+  process.env.WORKSPACE_EVENTS_PUBSUB_TOPIC = VALID_TOPIC;
+  getWorkspaceUserByEmailMock.mockResolvedValue({ googleUserId: "108123456789012345678", primaryEmail: "official@alton.education", suspended: false, orgUnitPath: "/" });
 });
 
 describe("ensureSubscriptionForOrganizer", () => {
@@ -75,7 +84,70 @@ describe("ensureSubscriptionForOrganizer", () => {
     const result = await ensureSubscriptionForOrganizer("official@alton.education", "consult_organizer");
 
     expect(result).toEqual({ organizerEmail: "official@alton.education", status: "active", action: "created" });
-    expect(insertPayloads[0]).toMatchObject({ status: "active", subscription_name: "subscriptions/sub-1" });
+    expect(insertPayloads[0]).toMatchObject({ status: "active", subscription_name: "subscriptions/sub-1", organizer_workspace_user_id: "108123456789012345678" });
+  });
+
+  // 요구사항 4(2026-09-03, 같은 날 네 번째 후속) — 회귀 차단 테스트
+  it("[회귀 차단] organizer 이메일을 그대로 사용자 ID로 넣지 않는다 — Directory API로 resolve한 불변 ID만 쓴다", async () => {
+    createSubMock.mockResolvedValue({ name: "subscriptions/sub-1", expireTime: "2026-10-08T00:00:00Z" });
+    const { ensureSubscriptionForOrganizer } = await import("./subscription-lifecycle");
+    await ensureSubscriptionForOrganizer("official@alton.education", "consult_organizer");
+
+    expect(getWorkspaceUserByEmailMock).toHaveBeenCalledWith("official@alton.education");
+    expect(createSubMock).toHaveBeenCalledWith(
+      expect.objectContaining({ organizerWorkspaceUserId: "108123456789012345678" })
+    );
+    const call = createSubMock.mock.calls[0][0];
+    expect(call.organizerWorkspaceUserId).not.toBe("official@alton.education");
+  });
+
+  it("[회귀 차단] 웹훅 URL을 pubsubTopic으로 쓰지 않는다 — 실제 Pub/Sub 토픽 리소스 이름만 전달한다", async () => {
+    createSubMock.mockResolvedValue({ name: "subscriptions/sub-1", expireTime: "2026-10-08T00:00:00Z" });
+    const { ensureSubscriptionForOrganizer } = await import("./subscription-lifecycle");
+    await ensureSubscriptionForOrganizer("official@alton.education", "consult_organizer");
+
+    const call = createSubMock.mock.calls[0][0];
+    expect(call.pubsubTopic).toBe(VALID_TOPIC);
+    expect(call.pubsubTopic).not.toMatch(/^https?:\/\//);
+    expect(call).not.toHaveProperty("webhookUrl");
+  });
+
+  it("[fail-closed] WORKSPACE_EVENTS_PUBSUB_TOPIC이 없으면 실제 API를 호출하지 않고 즉시 error로 기록한다", async () => {
+    delete process.env.WORKSPACE_EVENTS_PUBSUB_TOPIC;
+    const { ensureSubscriptionForOrganizer } = await import("./subscription-lifecycle");
+    const result = await ensureSubscriptionForOrganizer("official@alton.education", "consult_organizer");
+
+    expect(result.status).toBe("error");
+    expect(createSubMock).not.toHaveBeenCalled();
+    expect(insertPayloads[0].last_error).toContain("WORKSPACE_EVENTS_PUBSUB_TOPIC");
+  });
+
+  it("[fail-closed] WORKSPACE_EVENTS_PUBSUB_TOPIC 형식이 웹훅 URL이면 즉시 error로 기록한다", async () => {
+    process.env.WORKSPACE_EVENTS_PUBSUB_TOPIC = "http://localhost:3010/api/webhooks/workspace-events";
+    const { ensureSubscriptionForOrganizer } = await import("./subscription-lifecycle");
+    const result = await ensureSubscriptionForOrganizer("official@alton.education", "consult_organizer");
+
+    expect(result.status).toBe("error");
+    expect(createSubMock).not.toHaveBeenCalled();
+  });
+
+  it("캐시된 organizer_workspace_user_id가 있으면 Directory API를 다시 호출하지 않는다", async () => {
+    subscriptionRow = {
+      id: "row-1",
+      organizer_email: "teacher1@alton.education",
+      organizer_role: "teacher",
+      subscription_name: null,
+      status: "error",
+      expires_at: null,
+      last_error: "이전 실패",
+      organizer_workspace_user_id: "999888777666555",
+    };
+    createSubMock.mockResolvedValue({ name: "subscriptions/sub-3", expireTime: "2026-10-08T00:00:00Z" });
+    const { ensureSubscriptionForOrganizer } = await import("./subscription-lifecycle");
+    await ensureSubscriptionForOrganizer("teacher1@alton.education", "teacher");
+
+    expect(getWorkspaceUserByEmailMock).not.toHaveBeenCalled();
+    expect(createSubMock).toHaveBeenCalledWith(expect.objectContaining({ organizerWorkspaceUserId: "999888777666555" }));
   });
 
   it("이미 충분히 유효한(만료 임박 아닌) 구독은 재사용하고 API를 다시 호출하지 않는다", async () => {

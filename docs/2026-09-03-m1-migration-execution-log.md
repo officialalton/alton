@@ -246,3 +246,29 @@ M1은 커밋했지만 **아직 승인되지 않은 상태**에서, 제품 오너
 - **외부 변경**: 이번 세션 Claude 실행분은 0건. 제품 오너가 세션 흐름 중 직접 실행한
   실제 Google 객체 생성·삭제·이메일 2통·임시 SMTP 자격증명 사용은 위 5번 항목에서 사후
   확인만 수행. `git push` 없음(로컬 커밋만).
+
+## 11. 2026-09-03 Workspace Events 구독 모델 정정(같은 날 네 번째 후속) — blocker 코드 정정 마감
+
+10절까지의 구독 수명주기 구현이 실제 Google API 요구사항과 맞지 않는 근본 오류(잘못된
+target resource 형식, 웹훅 URL을 Pub/Sub 토픽으로 오용)를 안고 있었음이 드러나 이번
+라운드에서 정정했다. 상세는 `docs/CURRENT.md`의 "M1/R6 — Workspace Events 구독 모델
+정정" 절에 전부 옮겨뒀다(중복 작성하지 않음). 요약:
+
+1. target resource를 `//cloudidentity.googleapis.com/users/{Directory API 불변 사용자 ID}`
+   로 정정, organizer 이메일→ID resolve+캐시(`organizer_workspace_user_id` 컬럼,
+   `20261011000000_m1_workspace_events_subscription_user_id.sql`).
+2. `notificationEndpoint.pubsubTopic`을 실제 Pub/Sub 토픽 리소스 이름만 받도록 fail-closed
+   검증 추가, 웹훅 URL fallback 완전 제거.
+3. Pub/Sub 토픽·Publisher 권한·push subscription 전달 경로를
+   `scripts/m1-sandbox-verification.sh` STEP 0.5로 문서화(실제 실행은 사람이 직접).
+4. 신규 회귀 차단 테스트(이메일→사용자ID 오용 금지, 웹훅URL→topic 오용 금지, topic
+   누락/오형식 fail-closed, 캐시 재사용) — `lib/workspace-events/subscription-
+   lifecycle.test.ts`(14건), `lib/google-workspace-events-subscriptions.test.ts`(4건, 신규).
+- **검증**: 로컬 `supabase db reset --local` 재적용, 전체 Vitest 841건, `tsc --noEmit`·
+  `next build` 클린.
+- **decision_required**: 사용자 단위 구독이 실제로 거부되면 canonical Meet space 단위로
+  전환 필요 — 실측 재검증에서만 확정 가능, 그 외 정정 사항은 이미 완료.
+- **미완료**: 실제 Sandbox 재검증(구독 생성·Pub/Sub 전달 경로 포함) — 스크립트/문서
+  준비까지만, 실행은 사람 복귀 후 대기.
+- **외부 변경**: 0건, `git push` 없음. M2/M3/M4는 이번 라운드에서도 착수하지 않음(스스로
+  범위 제한).

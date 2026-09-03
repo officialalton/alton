@@ -422,15 +422,21 @@ M3 R5 후속(체험/정규 배정) → M4 상담→체험→정규 전환 통합
 - [x] 인증 계정(Auth)과 분리된 잠재고객/상담 연락처 레코드 **(2026-09-03)** `prospect_contacts`
       — Auth 계정을 전혀 만들지 않음, `converted_guardian_id`는 이번 범위에서 컬럼만 준비
       (M4에서 실제 연결 로직 구현).
-- [x] 상담 Smart Notes 생성, 관리자 검토 요약, 잠재고객 기록 연결 **(2026-09-03, 실제 자동
-      연결 완료 — 최초 버전에서 컬럼만 준비하고 미룬 것을 이번에 실제 구현)**
-      `consultations.smart_notes_config_status`/`admin_review_summary`에 더해, 기존 R6
-      Workspace Events 웹훅(`app/api/webhooks/workspace-events/route.ts`)이 세션 매칭
-      실패 시 `consultations.google_meeting_code`로도 매칭을 시도해 `smart_notes_drive_file_id`
-      를 자동 갱신한다(새 웹훅 없음, 재사용). Pub/Sub messageId 멱등, 매칭 실패는 유실 없이
-      `linked=false`로 보존. **또한 이번에 서버 readiness 게이트도 추가**: 동의 확인+Smart
-      Notes 활성화 확인 둘 다 없으면 `admin_record_consultation_outcome()`이 완료 처리 자체를
-      막는다.
+- [x] 상담 Smart Notes 생성, 관리자 검토 요약, 잠재고객 기록 연결(웹훅 수신·매칭 로직은
+      코드+mock 완료, **구독을 실제로 만드는 경로는 이번에 모델 정정까지 완료·실측
+      재검증은 대기** — 아래 참고) `consultations.smart_notes_config_status`/
+      `admin_review_summary`에 더해, 기존 R6 Workspace Events 웹훅(`app/api/webhooks/
+      workspace-events/route.ts`)이 세션 매칭 실패 시 `consultations.google_meeting_code`
+      로도 매칭을 시도해 `smart_notes_drive_file_id`를 자동 갱신한다(새 웹훅 없음, 재사용).
+      Pub/Sub messageId 멱등, 매칭 실패는 유실 없이 `linked=false`로 보존. **또한 서버
+      readiness 게이트 추가**: 동의 확인+Smart Notes 활성화 확인 둘 다 없으면
+      `admin_record_consultation_outcome()`이 완료 처리 자체를 막는다. **(2026-09-03,
+      같은 날 네 번째 후속)** 이 자동 연결이 실제로 작동하려면 Workspace Events 구독이
+      실제로 생성돼 있어야 하는데, 최초 구현은 잘못된 target resource/Pub/Sub 연결
+      형식을 썼다 — 이번 라운드에서 `//cloudidentity.googleapis.com/users/{Directory
+      API 불변 사용자 ID}` + 실제 Pub/Sub 토픽 fail-closed 검증으로 정정(상세는
+      `docs/CURRENT.md` M1/R6 절). **코드·mock 검증까지만 완료, 실제 구독 생성 응답은
+      아직 실측하지 못함(다음 Sandbox 재검증 대상).**
 - [x] 상담 결과를 체험 진행/보류/종료로 기록 **(2026-09-03)** `admin_record_consultation_outcome()`
       — `trial_recommended`/`regular_recommended`/`on_hold`/`closed`, M2/M3 연결 지점만
       준비(실제 체험 전환·수업권 지급·배정은 하지 않음).

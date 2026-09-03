@@ -72,10 +72,50 @@ echo "${SERVICE_ACCOUNT}의 클라이언트 ID에 다음 scope가 전부 등록�
 echo "  - https://www.googleapis.com/auth/calendar.events"
 echo "  - https://www.googleapis.com/auth/meetings.space.settings"
 echo "  - https://www.googleapis.com/auth/meetings.space.readonly"
-echo "  - Workspace Events 구독 생성에 필요한 scope(문서상 미확정 — 실측 자체가 이번 목적 중 하나,"
+echo "  - https://www.googleapis.com/auth/admin.directory.user.readonly (Directory API —"
+echo "    organizer 이메일→불변 사용자 ID resolve에 필요, lib/google-workspace-directory-readonly.ts)"
+echo "  - Workspace Events 구독 생성 자체에 필요한 scope(문서상 미확정 — 실측 자체가 이번 목적 중 하나,"
 echo "    최초 호출이 403이면 그 응답을 그대로 기록하고 여기서 중단)"
 echo "하나라도 이미 없는 게 확실하면 여기서 중단 — 추가 등록을 스스로 하지 말고 보고."
 read -r -p "위 확인이 끝났으면 Enter, 아니면 Ctrl+C: " _confirm_scope
+
+################################################################################
+# STEP 0.5 — Pub/Sub 토픽·push subscription·Publisher 권한 준비(쓰기 있음, 신규 GCP 리소스)
+################################################################################
+#
+# 2026-09-03 모델 정정: Workspace Events 구독의 notificationEndpoint.pubsubTopic은
+# 실제 Pub/Sub 토픽 리소스(projects/{project}/topics/{topic})여야 하고, 이 토픽과
+# 웹훅 HTTP 엔드포인트(app/api/webhooks/workspace-events)는 서로 다른 GCP 리소스다 —
+# 토픽에 별도의 Pub/Sub push subscription을 만들어 그 push endpoint로 웹훅 URL을
+# 지정해야 실제로 알림이 그 URL까지 전달된다. 이 STEP은 그 전달 경로 전체를 준비한다.
+
+echo "--- 0.5-1. 전용 Pub/Sub 토픽 생성(신규 GCP 리소스 — 상한: 이 검증 전용 1개) ---"
+WORKSPACE_EVENTS_TOPIC="projects/${PROJECT_ID}/topics/m1-sandbox-workspace-events-v2"
+echo "gcloud pubsub topics create m1-sandbox-workspace-events-v2 --project ${PROJECT_ID}"
+echo "(이미 있으면 재사용 — 매번 새로 만들지 않는다)"
+
+echo "--- 0.5-2. Workspace Events 발행 서비스 계정에 이 토픽의 Publisher 권한 부여 ---"
+echo "Google Workspace Events가 이 토픽에 발행할 때 쓰는 서비스 계정 이름은 GCP 콘솔"
+echo "(Pub/Sub > 토픽 > 권한, 또는 Workspace Events API 활성화 페이지)에서 직접 확인하세요 —"
+echo "이 스크립트가 그 이름을 추정해 넣지 않습니다(잘못된 이름으로 권한을 부여하는 실수를"
+echo "피하기 위함). 확인한 이름으로 아래 형태의 명령을 실행:"
+echo "  gcloud pubsub topics add-iam-policy-binding m1-sandbox-workspace-events-v2 \\"
+echo "    --project ${PROJECT_ID} --member=\"serviceAccount:<확인한 발행 서비스 계정>\" \\"
+echo "    --role=\"roles/pubsub.publisher\""
+
+echo "--- 0.5-3. 이 토픽에 push subscription 생성 — push endpoint가 실제 웹훅 URL ---"
+echo "웹훅 URL은 공인 접근 가능해야 한다(로컬 3010은 불가 — Preview 배포 URL 등 사용):"
+echo "  gcloud pubsub subscriptions create m1-sandbox-workspace-events-push-v2 \\"
+echo "    --project ${PROJECT_ID} --topic m1-sandbox-workspace-events-v2 \\"
+echo "    --push-endpoint=\"<공인 웹훅 URL>/api/webhooks/workspace-events\" \\"
+echo "    --push-auth-service-account=\"<OIDC 서명용 서비스 계정>\""
+echo "(WORKSPACE_EVENTS_PUSH_AUDIENCE/WORKSPACE_EVENTS_PUSH_SERVICE_ACCOUNT_EMAIL 환경변수를"
+echo "이 서비스 계정·오디언스에 맞춰 설정 — app/api/webhooks/workspace-events/route.ts가 이 값으로"
+echo "OIDC 토큰을 검증한다.)"
+
+echo "이 토픽 리소스 이름을 STEP 2에서 WORKSPACE_EVENTS_PUBSUB_TOPIC으로 export:"
+echo "  export WORKSPACE_EVENTS_PUBSUB_TOPIC=\"${WORKSPACE_EVENTS_TOPIC}\""
+read -r -p "0.5-1~0.5-3을 전부 완료했으면 Enter: " _confirm_pubsub
 
 ################################################################################
 # STEP 1 — 임시 IAM binding 추가(좁은 조건, R6 패턴 재사용)
@@ -103,7 +143,13 @@ export CALENDAR_SYNC_ALLOW_REAL_CALLS=true
 export GOOGLE_WORKLOAD_IDENTITY_AUDIENCE="<실제 WIF provider full resource name>"
 export GOOGLE_WORKSPACE_DELEGATED_ADMIN_EMAIL="official@alton.education"
 export NEXT_PUBLIC_SITE_URL="http://localhost:3010"
+export WORKSPACE_EVENTS_PUBSUB_TOPIC="projects/alton-integration-sandbox/topics/m1-sandbox-workspace-events-v2"
+# 위 WORKSPACE_EVENTS_PUBSUB_TOPIC은 STEP 0.5-1에서 실제로 만든 토픽의 정확한 리소스
+# 이름이어야 한다 — 없거나 형식이 틀리면(예: 웹훅 URL을 넣는 실수) 코드가 실제 API를
+# 호출하기 전에 fail-closed로 즉시 거부한다(lib/google-workspace-events-subscriptions.ts).
 # CONSULT_ORGANIZER_EMAIL은 기본값이 이미 official@alton.education이라 생략 가능.
+# WORKSPACE_PREFLIGHT_ALLOW_REAL_READS=true도 필요(organizer 이메일→Directory API 불변
+# 사용자 ID resolve, lib/google-workspace-directory-readonly.ts의 게이트).
 # WORKSPACE_EVENTS_PUSH_AUDIENCE / WORKSPACE_EVENTS_PUSH_SERVICE_ACCOUNT_EMAIL은
 # 6-2(Workspace Events 수신)에서만 필요 — 로컬은 공인 URL이 없어 pull 재현 방식을 쓴다.
 ENVVARS
@@ -196,10 +242,15 @@ echo "guest 제한 3종이 꺼져 있는지, 보호자 계정은 attendee에 없
 
 echo "--- 6-3. Workspace Events 구독 생성(상담 organizer 1개 + 선생님 organizer 1개, 총 최대 2개) ---"
 echo "3-4/6-2에서 Calendar 동기화가 성공하면 ensureSubscriptionForOrganizer()가 각 organizer에"
-echo "대해 best-effort로 구독 생성을 시도한다. 결과 확인:"
-echo "psql \"${DB_URL}\" -X -q -c \"select organizer_email, organizer_role, status, subscription_name, expires_at, last_error from workspace_events_subscriptions;\""
-echo "status가 'error'면 last_error를 그대로 기록하고, §STEP 0에서 확인한 scope 문제인지 응답"
-echo "구조(코드의 최선 추정과 실제 API 응답 차이) 문제인지 구분해서 보고 — 임의로 코드를 여기서 고치지 않는다."
+echo "대해 best-effort로 구독 생성을 시도한다. 이 과정에서 실제로 (a) Directory API로"
+echo "organizer 이메일→불변 사용자 ID를 resolve하고(organizer_workspace_user_id에 캐시),"
+echo "(b) targetResource=//cloudidentity.googleapis.com/users/{그 ID}로 구독을 생성한다."
+echo "결과 확인:"
+echo "psql \"${DB_URL}\" -X -q -c \"select organizer_email, organizer_role, organizer_workspace_user_id, status, subscription_name, expires_at, last_error from workspace_events_subscriptions;\""
+echo "status가 'error'면 last_error를 그대로 기록하고, (1) Directory API resolve 단계 실패인지"
+echo "(2) cloudidentity targetResource 형식 자체가 실제 API에서 거부되는지(이 경우 §1의 안내대로"
+echo "canonical Meet space 단위로 전환이 필요할 수 있음 — 코드를 여기서 즉석 수정하지 말고 그 응답을"
+echo "그대로 기록해 보고) 구분해서 보고."
 
 echo "--- 6-4. 구독 갱신·삭제 실측(선택 — 구독 생성이 성공했을 때만) ---"
 echo "관리자 화면 \"Workspace Events 구독 상태\" 섹션에서 \"만료 임박 구독 갱신 실행\" 클릭 후 결과 확인."
@@ -243,8 +294,20 @@ echo "ALTON DB와 Google 양쪽 모두에서 사라졌는지 확인."
 
 echo "--- 7-2. Workspace Events 구독 삭제(최대 2개 — 상담 organizer 1 + 선생님 organizer 1) ---"
 echo "psql \"${DB_URL}\" -X -q -c \"select organizer_email, subscription_name from workspace_events_subscriptions;\""
-echo "관리자 화면에 구독 삭제 버튼이 없다면 gcloud/API로 직접 삭제 후 DB도 status='disabled'로 정리:"
-echo "  gcloud ... (Workspace Events subscriptions.delete 상당 명령 — 실제 API 응답 스키마에 맞춰 실행)"
+echo "관리자 화면 \"Workspace Events 구독 상태\" 섹션에 구독 삭제 UI가 없다면(현재 없음 —"
+echo "disableSubscriptionForOrganizer()가 백엔드에는 있으나 admin 액션으로 아직 노출 안 됐을 수"
+echo "있음, 코드 확인) Workspace Events API subscriptions.delete를 직접 호출해 삭제 후 DB도"
+echo "정리한다."
+
+echo "--- 7-2-1. STEP 0.5에서 만든 Pub/Sub push subscription 삭제 ---"
+echo "  gcloud pubsub subscriptions delete m1-sandbox-workspace-events-push-v2 --project ${PROJECT_ID}"
+
+echo "--- 7-2-2. STEP 0.5에서 만든 Pub/Sub 토픽 삭제 ---"
+echo "  gcloud pubsub topics delete m1-sandbox-workspace-events-v2 --project ${PROJECT_ID}"
+
+echo "--- 7-2-3. STEP 0.5-2에서 부여한 Publisher IAM binding 제거 ---"
+echo "  (토픽 자체를 삭제하면 그 토픽에 걸린 IAM binding도 함께 사라진다 — 별도 제거 불필요,"
+echo "  단 gcloud pubsub topics delete 실행 결과로 실제로 사라졌는지 재확인할 것.)"
 
 echo "--- 7-3. 합성 Smart Notes Google Doc 삭제 ---"
 echo "${CONSULT_ORGANIZER_EMAIL}/${TEACHER_ORGANIZER_EMAIL} 또는 회의 참가자 Drive에서 생성된 합성 문서를 직접 삭제."
