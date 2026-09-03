@@ -84,11 +84,18 @@ export async function createEntitlementCheckoutSession(
 
   const { data: product } = await admin
     .from("entitlement_products")
-    .select("id, code, quantity")
+    .select("id, code, quantity, system_only")
     .eq("code", entitlementProductCode)
     .maybeSingle();
   if (!product) {
     throw new Error("존재하지 않는 상품 코드입니다.");
+  }
+  // M2 — 체험수업권(trial_lesson_grant)처럼 시스템만 지급 가능한 상품은 구매
+  // 화면에 노출되지 않아야 한다(요구사항 2: 구매 불가). 가격 버전을 만들지
+  // 않은 것이 1차 방어선(아래에서 "가격 정보 없음"으로 fail-closed)이지만,
+  // 이 명시적 검사가 더 정확한 에러 메시지를 준다.
+  if (product.system_only) {
+    throw new Error("구매할 수 없는 상품입니다.");
   }
 
   // 3) 현재 유효한 가격 버전 조회(effective_from <= now < effective_until, 미할인 아님).

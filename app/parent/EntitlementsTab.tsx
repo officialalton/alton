@@ -208,6 +208,17 @@ export default function EntitlementsTab({
             </div>
           )}
 
+          {/* M2 — 60분 전용 체험수업권(구매·환불·양도 불가). 정규 수업권과 절대
+              합산하지 않고 별도 카드로 보여준다 — 수업 시간이 달라 오해를 줄 수 있다. */}
+          {c.trialEntitlement && (
+            <div className="mb-4 border-[1.5px] border-grey-200 rounded-lg px-3 py-2.5 bg-grey-50">
+              <p className="text-[12px] font-bold text-ink">체험수업권(60분) 1회 보유 중</p>
+              <p className="text-[11.5px] text-grey-500 mt-0.5">
+                만료 {formatDate(c.trialEntitlement.expiresAt)} · 정규수업권과 별개이며 구매·환불·양도가 불가능합니다.
+              </p>
+            </div>
+          )}
+
           <h3 className="text-[12px] font-bold text-grey-500 mb-1.5">구매/영수증 내역</h3>
           {c.purchases.length === 0 ? (
             <p className="text-[12px] text-grey-500">구매 내역이 없습니다.</p>

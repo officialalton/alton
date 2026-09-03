@@ -38,6 +38,12 @@ export type ConsultationListItem = {
   prospect_contact_id: string | null;
   consent_version_id: string | null;
   consent_confirmed_at: string | null;
+  child_id: string | null;
+  /** M2 — 체험수업권 지급 상태(admin_record_consultation_outcome이 outcome='trial_recommended'
+   * 기록 시점에 시도, 실패해도 결과 기록 자체는 막지 않는다). 관리자 화면의 재처리 버튼용. */
+  trial_entitlement_grant_id: string | null;
+  trial_entitlement_grant_status: "not_applicable" | "pending" | "granted" | "failed";
+  trial_entitlement_grant_error: string | null;
   /** M1 요구사항 3(2026-09-03, 2026-09-03 조건부 승인 보완으로 두 단계로 분리) —
    * "상담 진행 가능"(동의 확인 + Smart Notes ON)과 "상담 완료 가능"(그 위에 Smart Notes
    * 원본 자동 연결 + 비어있지 않은 관리자 검토 요약)은 서로 다른 시점의 서로 다른 기준이다
@@ -80,7 +86,7 @@ export async function listConsultationsForAdmin(params: { from: string; to: stri
   const { data, error } = await admin
     .from("consultations")
     .select(
-      "id, contact_name, contact_email, contact_phone, student_grade, concerns, status, source, starts_at, ends_at, scheduled_at, hold_expires_at, google_event_id, google_meet_link, google_sync_status, google_sync_retry_count, google_sync_last_error, smart_notes_config_status, smart_notes_config_error, smart_notes_drive_file_id, admin_review_summary, outcome, outcome_notes, prospect_contact_id, consent_version_id, consent_confirmed_at"
+      "id, contact_name, contact_email, contact_phone, student_grade, concerns, status, source, starts_at, ends_at, scheduled_at, hold_expires_at, google_event_id, google_meet_link, google_sync_status, google_sync_retry_count, google_sync_last_error, smart_notes_config_status, smart_notes_config_error, smart_notes_drive_file_id, admin_review_summary, outcome, outcome_notes, prospect_contact_id, consent_version_id, consent_confirmed_at, child_id, trial_entitlement_grant_id, trial_entitlement_grant_status, trial_entitlement_grant_error"
     )
     .gte("starts_at", params.from)
     .lt("starts_at", params.to)
@@ -96,7 +102,7 @@ export async function listPendingConsultationRequests(): Promise<ConsultationLis
   const { data, error } = await admin
     .from("consultations")
     .select(
-      "id, contact_name, contact_email, contact_phone, student_grade, concerns, status, source, starts_at, ends_at, scheduled_at, hold_expires_at, google_event_id, google_meet_link, google_sync_status, google_sync_retry_count, google_sync_last_error, smart_notes_config_status, smart_notes_config_error, smart_notes_drive_file_id, admin_review_summary, outcome, outcome_notes, prospect_contact_id, consent_version_id, consent_confirmed_at"
+      "id, contact_name, contact_email, contact_phone, student_grade, concerns, status, source, starts_at, ends_at, scheduled_at, hold_expires_at, google_event_id, google_meet_link, google_sync_status, google_sync_retry_count, google_sync_last_error, smart_notes_config_status, smart_notes_config_error, smart_notes_drive_file_id, admin_review_summary, outcome, outcome_notes, prospect_contact_id, consent_version_id, consent_confirmed_at, child_id, trial_entitlement_grant_id, trial_entitlement_grant_status, trial_entitlement_grant_error"
     )
     .eq("status", "requested")
     .order("starts_at", { ascending: true });
@@ -192,6 +198,18 @@ export async function recordConsultationOutcome(params: {
     p_outcome: params.outcome,
     p_notes: params.notes || null,
     p_admin_review_summary: params.adminReviewSummary || null,
+  });
+  if (error) throw new Error(error.message);
+}
+
+/** M2 — 체험수업권 지급 관리자 복구 동선(요구사항 7). outcome이 이미 'trial_recommended'로
+ * 기록된 뒤 지급이 실패했을 때(대개 child_id 없는 잠재고객 단계) 관리자가 수동 재처리.
+ * grant_trial_entitlement_for_consultation()의 idempotency 덕분에 이미 지급된 상담을
+ * 다시 눌러도 중복 지급되지 않는다(그대로 granted 반환). */
+export async function retryTrialEntitlementGrant(consultationId: string): Promise<void> {
+  const { supabase } = await requireAdmin();
+  const { error } = await supabase.rpc("admin_retry_trial_entitlement_grant", {
+    p_consultation_id: consultationId,
   });
   if (error) throw new Error(error.message);
 }

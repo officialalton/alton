@@ -60,6 +60,9 @@ export type PurchaseReceipt = {
   disputeStatus: string | null;
 };
 
+/** M2 — 60분 전용 체험수업권(구매·환불·양도 불가, 자녀당 최대 1개). 정규
+ * 수업권(totalRemaining/balances)과 절대 합산하지 않는다 — 수업 시간이
+ * 다르기 때문에 "정규 수업권이 1개 남았다"는 오해를 주면 안 된다. */
 export type ChildEntitlementSummary = {
   childId: string;
   childName: string;
@@ -68,6 +71,7 @@ export type ChildEntitlementSummary = {
   totalRemaining: number;
   nearestExpiry: string | null;
   balances: ChildEntitlementBalance[];
+  trialEntitlement: { grantId: string; remaining: number; expiresAt: string | null } | null;
   purchases: PurchaseReceipt[];
 };
 
@@ -165,25 +169,16 @@ export async function loadParentEntitlementsData(
     .eq("status", "active");
   const activeChildIds = new Set((contracts ?? []).map((c) => c.child_id as string));
 
-  // 4) 자녀별 수업권 잔액(entitlement_grants + entitlement_ledger 합산).
-  const { data: grants } = await admin
-    .from("entitlement_grants")
-    .select("id, child_id, expires_at")
+  // 4) 자녀별 수업권 잔액. M2부터 정규(120분)/체험(60분) grant가 공존할 수 있어
+  // entitlement_grant_details 뷰(grant + 상품 + 수업유형 + 잔액 합산, 20261012000000
+  // §2)로 lesson_type_code별로 갈라 조회한다 — 예전처럼 entitlement_grants를 통째로
+  // 합산하면 체험 1회가 "정규 수업권 잔여"에 섞여 보이는 실제 버그가 생긴다.
+  const { data: grantDetails } = await admin
+    .from("entitlement_grant_details")
+    .select("grant_id, child_id, expires_at, remaining, lesson_type_code, source_consultation_id")
     .in("child_id", childIds);
-  const grantIds = (grants ?? []).map((g) => g.id as string);
-
-  let ledgerByGrant = new Map<string, number>();
-  if (grantIds.length > 0) {
-    const { data: ledgerRows } = await admin
-      .from("entitlement_ledger")
-      .select("grant_id, amount")
-      .in("grant_id", grantIds);
-    ledgerByGrant = new Map();
-    for (const row of ledgerRows ?? []) {
-      const key = row.grant_id as string;
-      ledgerByGrant.set(key, (ledgerByGrant.get(key) ?? 0) + (row.amount as number));
-    }
-  }
+  const regularGrants = (grantDetails ?? []).filter((g) => g.lesson_type_code === "regular");
+  const trialGrants = (grantDetails ?? []).filter((g) => g.lesson_type_code === "trial");
 
   // 5) 자녀별 구매 내역(purchase_receipts).
   const { data: receipts } = await admin
@@ -195,11 +190,11 @@ export async function loadParentEntitlementsData(
     .order("created_at", { ascending: false });
 
   const summaries: ChildEntitlementSummary[] = scopedChildren.map((child) => {
-    const childGrants = (grants ?? []).filter((g) => g.child_id === child.studentId);
-    const balances: ChildEntitlementBalance[] = childGrants
+    const childRegularGrants = regularGrants.filter((g) => g.child_id === child.studentId);
+    const balances: ChildEntitlementBalance[] = childRegularGrants
       .map((g) => ({
-        grantId: g.id as string,
-        remaining: ledgerByGrant.get(g.id as string) ?? 0,
+        grantId: g.grant_id as string,
+        remaining: (g.remaining as number) ?? 0,
         expiresAt: (g.expires_at as string) ?? null,
       }))
       .filter((b) => b.remaining > 0);
@@ -209,6 +204,18 @@ export async function loadParentEntitlementsData(
       .map((b) => b.expiresAt)
       .filter((d): d is string => Boolean(d))
       .sort()[0] ?? null;
+
+    // M2 — 체험수업권(60분, 정규와 절대 합산하지 않음)은 자녀당 최대 1개다
+    // (grant_trial_entitlement_for_consultation의 상담당 unique index). 잔량이
+    // 남아있는(아직 소진하지 않은) 것만 "사용 가능"으로 노출한다.
+    const childTrialGrant = trialGrants.find((g) => g.child_id === child.studentId && (g.remaining as number) > 0);
+    const trialEntitlement: ChildEntitlementSummary["trialEntitlement"] = childTrialGrant
+      ? {
+          grantId: childTrialGrant.grant_id as string,
+          remaining: childTrialGrant.remaining as number,
+          expiresAt: (childTrialGrant.expires_at as string) ?? null,
+        }
+      : null;
 
     const childReceipts: PurchaseReceipt[] = (receipts ?? [])
       .filter((r) => r.child_id === child.studentId)
@@ -252,6 +259,7 @@ export async function loadParentEntitlementsData(
       totalRemaining,
       nearestExpiry,
       balances,
+      trialEntitlement,
       purchases: childReceipts,
     };
   });

@@ -44,6 +44,7 @@ const baseData: ParentEntitlementsData = {
       totalRemaining: 5,
       nearestExpiry: "2027-01-01T00:00:00.000Z",
       balances: [{ grantId: "g1", remaining: 5, expiresAt: "2027-01-01T00:00:00.000Z" }],
+      trialEntitlement: { grantId: "g-trial", remaining: 1, expiresAt: "2027-02-01T00:00:00.000Z" },
       purchases: [
         {
           purchaseId: "pu1",
@@ -84,6 +85,7 @@ const baseData: ParentEntitlementsData = {
       totalRemaining: 0,
       nearestExpiry: null,
       balances: [],
+      trialEntitlement: null,
       purchases: [],
     },
   ],
@@ -149,6 +151,12 @@ describe("EntitlementsTab", () => {
     expect(screen.getByText("5")).toBeInTheDocument();
     expect(screen.getAllByText(/가장 빠른 만료일:/).length).toBeGreaterThan(0);
     expect(screen.getByText("잔여 5회")).toBeInTheDocument();
+  });
+
+  it("M2: 체험수업권 보유 시 정규 수업권과 별도 카드로 보여준다", () => {
+    render(<EntitlementsTab data={baseData} />);
+    expect(screen.getByText("체험수업권(60분) 1회 보유 중")).toBeInTheDocument();
+    expect(screen.getByText(/구매·환불·양도가 불가능합니다/)).toBeInTheDocument();
   });
 
   it("구매 내역을 펼치면 영수증 필드를 보여준다", () => {

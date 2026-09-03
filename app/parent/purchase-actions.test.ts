@@ -169,6 +169,19 @@ describe("createEntitlementCheckoutSession", () => {
     expect(createSessionMock).not.toHaveBeenCalled();
   });
 
+  it("M2: system_only 상품(체험수업권 등)은 구매를 막는다", async () => {
+    productMaybeSingleMock.mockResolvedValue({
+      data: { id: "prod-trial", code: "trial_lesson_grant", quantity: 1, system_only: true },
+    });
+    const { createEntitlementCheckoutSession } = await import("./purchase-actions");
+
+    await expect(
+      createEntitlementCheckoutSession({ childId: "child1", entitlementProductCode: "trial_lesson_grant" })
+    ).rejects.toThrow("구매할 수 없는 상품입니다.");
+    expect(purchaseInsertSingleMock).not.toHaveBeenCalled();
+    expect(createSessionMock).not.toHaveBeenCalled();
+  });
+
   it("현재 유효한 가격 버전이 없으면 fail closed로 '가격 정보 없음' 에러를 던진다", async () => {
     versionsMock.mockResolvedValue({ data: [] });
     const { createEntitlementCheckoutSession } = await import("./purchase-actions");

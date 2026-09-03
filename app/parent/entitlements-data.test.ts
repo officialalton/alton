@@ -143,13 +143,27 @@ describe("loadParentEntitlementsData", () => {
         if (table === "contracts") {
           return makeQuery({ data: [{ child_id: "s1", status: "active" }] });
         }
-        if (table === "entitlement_grants") {
+        if (table === "entitlement_grant_details") {
           return makeQuery({
-            data: [{ id: "g1", child_id: "s1", expires_at: "2027-01-01T00:00:00.000Z" }],
+            data: [
+              {
+                grant_id: "g1",
+                child_id: "s1",
+                expires_at: "2027-01-01T00:00:00.000Z",
+                remaining: 5,
+                lesson_type_code: "regular",
+                source_consultation_id: null,
+              },
+              {
+                grant_id: "g-trial",
+                child_id: "s1",
+                expires_at: "2027-02-01T00:00:00.000Z",
+                remaining: 1,
+                lesson_type_code: "trial",
+                source_consultation_id: "consult-1",
+              },
+            ],
           });
-        }
-        if (table === "entitlement_ledger") {
-          return makeQuery({ data: [{ grant_id: "g1", amount: 5 }] });
         }
         if (table === "purchase_receipts") {
           return makeQuery({
@@ -197,10 +211,19 @@ describe("loadParentEntitlementsData", () => {
     expect(s1.nearestExpiry).toBe("2027-01-01T00:00:00.000Z");
     expect(s1.purchases).toHaveLength(1);
     expect(s1.purchases[0].purchaseId).toBe("pu1");
+    // M2: 체험(trial) grant는 정규 totalRemaining/balances에 절대 섞이지 않는다.
+    expect(s1.balances).toHaveLength(1);
+    expect(s1.balances[0].grantId).toBe("g1");
+    expect(s1.trialEntitlement).toEqual({
+      grantId: "g-trial",
+      remaining: 1,
+      expiresAt: "2027-02-01T00:00:00.000Z",
+    });
 
     const s2 = result.children.find((c) => c.childId === "s2")!;
     expect(s2.eligibleForPurchase).toBe(false);
     expect(s2.ineligibleReason).toMatch(/active/);
     expect(s2.totalRemaining).toBe(0);
+    expect(s2.trialEntitlement).toBeNull();
   });
 });

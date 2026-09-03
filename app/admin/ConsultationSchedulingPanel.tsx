@@ -15,6 +15,7 @@ import {
   rescheduleConsultationRequest,
   cancelConsultationRequest,
   recordConsultationOutcome,
+  retryTrialEntitlementGrant,
   retryFailedConsultationCalendarSyncs,
   retryConsultationSmartNotesConfig,
   reprocessUnlinkedConsultationSmartNotesEvents,
@@ -69,6 +70,15 @@ const CONSULT_READINESS_LABEL: Record<string, string> = {
   smart_notes_pending: "상담 진행 불가 — Smart Notes 활성화 확인 필요",
   not_applicable: "-",
 };
+// M2 — 체험수업권 지급 상태(요구사항 7). "체험 진행 권장"으로 결과가 기록된 순간
+// 시스템이 자동 지급을 시도하고, 여기 나오는 상태는 그 결과를 보여준다.
+const TRIAL_GRANT_STATUS_LABEL: Record<string, string> = {
+  not_applicable: "-",
+  pending: "체험수업권 지급 처리 중",
+  granted: "체험수업권 지급 완료",
+  failed: "체험수업권 지급 실패 — 재처리 필요",
+};
+
 const COMPLETION_READINESS_LABEL: Record<string, string> = {
   ready: "상담 완료 처리 가능",
   consult_not_ready: "완료 불가 — 상담 진행 조건(동의+Smart Notes) 미충족",
@@ -264,6 +274,12 @@ export default function ConsultationSchedulingPanel() {
               <p className="text-[12px] mt-0.5" style={{ color: c.completionReadiness === "ready" ? "#16a34a" : "#b91c1c" }}>
                 {COMPLETION_READINESS_LABEL[c.completionReadiness]}
               </p>
+              {c.outcome === "trial_recommended" && (
+                <p className="text-[12px] mt-0.5" style={{ color: c.trial_entitlement_grant_status === "granted" ? "#16a34a" : "#b91c1c" }}>
+                  {TRIAL_GRANT_STATUS_LABEL[c.trial_entitlement_grant_status]}
+                  {c.trial_entitlement_grant_status === "failed" && c.trial_entitlement_grant_error && ` (${c.trial_entitlement_grant_error})`}
+                </p>
+              )}
               <div className="flex flex-wrap gap-2 mt-3">
                 <button
                   disabled={busyId === c.id}
@@ -290,6 +306,15 @@ export default function ConsultationSchedulingPanel() {
                     onClick={() => withBusy(c.id, () => retryConsultationSmartNotesConfig(c.id))}
                   >
                     Smart Notes 재처리
+                  </button>
+                )}
+                {c.outcome === "trial_recommended" && c.trial_entitlement_grant_status === "failed" && (
+                  <button
+                    disabled={busyId === c.id}
+                    className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50"
+                    onClick={() => withBusy(c.id, () => retryTrialEntitlementGrant(c.id))}
+                  >
+                    체험수업권 지급 재처리
                   </button>
                 )}
                 <button
