@@ -478,10 +478,14 @@ push하지 않았다).
   별도 clean `git worktree`에서 build+Vitest(849/849) 재현까지 완료했다.
   **미완료 없음.**
 - **결정 필요**: 없음 — 90일 유효기간·환불 공식 모두 2026-09-03 확정.
-- **범위 밖(M3/M4, 착수하지 않음)**: 체험 선생님 배정·예약, 잠재고객→정식 학생
-  계정 연결. 연결 지점만 남겨둠(`grant_trial_entitlement_for_consultation()`이
-  child_id 없으면 명확한 예외를 던지고, M4가 계정 연결 후
-  `admin_retry_trial_entitlement_grant()`를 호출하면 자연스럽게 이어짐).
+- **범위 밖(당시 M3/M4, 착수 전)**: 잠재고객→정식 학생 계정 연결과 체험 예약은
+  이 M2 라운드에는 없었다(M4 범위). 연결 지점만 남겨둠(`grant_trial_entitlement_
+  for_consultation()`이 child_id 없으면 명확한 예외를 던지고, M4가 계정 연결 후
+  `admin_retry_trial_entitlement_grant()`를 호출하면 자연스럽게 이어짐). **정정
+  (2026-09-03)**: 이후 실제로 완료된 M3는 "체험 선생님 배정·예약"의 선행 단계가
+  아니라 이미 배정된 선생님과의 관계를 정식으로 종료하는 흐름(termination)이었다
+  — 선생님 배정 자체는 trial/regular 구분 없는 단일 관계이고 M3에서 새로 만든
+  것이 아니다. 체험 예약·선생님 배정 흐름은 여전히 M4 범위.
 - **기술적 선택(결정 필요 아님, 근거 문서화)**: "미래 예약 해제 우선순위"를 자동
   취소가 아니라 명시적 차단으로 구현 — 예약 취소는 이미 Calendar 동기화·통지까지
   포함한 별도 완결 흐름(`cancel_lesson_booking()`)이라 환불 승인이 그걸 몰래
@@ -491,8 +495,9 @@ push하지 않았다).
 
 ### M3 — 선생님 배정 종료(termination) 플로우, 완료(2026-09-03)
 
-커밋 `3bf4cce`(서버 레이어) → `<UI/테스트/문서 마감 커밋, 이 세션>`(전부 main 브랜치,
-`git push` 없음). **이전에 전달됐던 "별도 체험 배정 모델" M3 지시는 전량 폐기됐다** —
+커밋 `3bf4cce`(서버 레이어) → `659bd0f`(UI·테스트·문서 마감) → `431246e`(E2E·enum
+버그 수정)(전부 main 브랜치, `git push` 없음). **이전에 전달됐던 "별도 체험 배정
+모델" M3 지시는 전량 폐기됐다** —
 2026-09-03 확정 정책: trial/regular는 `teacher_assignments` 레벨에서 분리된 개념이
 아니라 **단일 배정 관계**다(trial 60분/regular 120분 구분은 세션의 수업유형·수업권
 레벨에서만 존재). 체험 때 배정된 선생님은 계약 이후에도 그대로 유지되고, 시스템은
@@ -540,6 +545,12 @@ push하지 않았다).
   보호자·학생 — 기존 R5 `EnrollmentTab`이 이미 `currentTeacher`/`upcomingTeacherChange`
   를 실시간 DB 조회로 보여주고 있어(변경 없음) 확정된 현재 선생님과 예정된 변경
   결과가 그대로 반영됨.
+- **"과거 조회" 기능의 정확한 범위(2026-09-03 명문화)**: 지금 제공하는 것은
+  `수업 일시·수업유형·최종상태`만 보여주는 "과거 수업 이력"이지, 단원·교재·
+  과제·검토 리뷰 같은 실제 교육 진행 내용이 아니다. 새 선생님은 안전한 읽기
+  권한과 이 최소 이력만 받는다 — 단원·교재·마일스톤·과제·검토 완료 리뷰까지
+  같은 학생·과목 범위로 확장하는 것은 R9. Smart Notes 원본·내부 메모·정산
+  정보·과거 대화는 M3·R9 모두 계속 제외.
 - **검증**: DB 레벨 smoke test(비배정 호출자 거부, 스키마·함수 존재 확인, psql
   직접 실행) + Vitest 신규 4개 파일(`lib/enrollment/teacher-assignment-termination.test.ts`
   5건, `app/admin/TeacherAssignmentTerminationPanel.test.tsx` 2건, `app/admin/
@@ -547,10 +558,19 @@ push하지 않았다).
   `app/teacher/AssignmentsTab.test.tsx` 3건 — 선생님 본인 확정 불가/중복 요청 방지/
   이력 화면에 민감 정보 없음) 전부 통과. 전체 Vitest 143개 파일/863건, `tsc --noEmit`,
   `next build` 클린. 로컬 개발 DB에 마이그레이션 적용 확인(`npx supabase db reset
-  --local`).
-- **미완료**: Playwright E2E(역할별 화면 통합 흐름)와 클린 `git worktree` 재현은
-  이번 라운드에서 실행하지 못함 — Vitest/tsc/build로 회귀는 확인했으나 실브라우저
-  흐름 검증은 다음 라운드로 남김.
+  --local`). **Playwright E2E**: `e2e/m3-teacher-assignment-termination-flow.spec.ts`
+  신규 작성 — 관리자가 종료 요청을 접수·처리(수강 종료)하는 흐름을 실브라우저로
+  검증, 기존 `e2e/r5-subject-enrollment-flow.spec.ts`와 함께 실행해도 데이터
+  충돌 없이 병행 통과함을 확인(4 passed). 이 E2E를 처음 돌리며 실제 버그를
+  발견·수정했다 — `end_enrollment` 처리 시 `subject_enrollments.status`를
+  `teacher_assignments`와 같은 값(`"ended"`)으로 쓰려다 실제 enum
+  (`v3_subject_enrollment_status`: planned/active/paused/completed/terminated)에
+  없는 값이라 매번 실패하던 것을 `"terminated"`로 수정(`431246e`). **클린 `git
+  worktree` 재현**: `659bd0f`(UI·테스트·문서 마감) 기준 별도 worktree에서
+  `node_modules` 하드카피 후 `next build`+전체 Vitest(143/863) 재현 완료 —
+  이후 `431246e`의 1줄 enum 값 수정은 같은 파일 기준 전체 Vitest/`tsc --noEmit`
+  재실행으로 회귀 없음을 확인(별도 worktree 재실행은 생략, 변경 폭이 매우 작아
+  동등하다고 판단).
 - **범위 밖(명시적으로 만들지 않음)**: 별도 trial-teacher-assignment 테이블,
   candidate/pending/rejected/expired 상태 머신, trial→regular 승계 제안·전환
   로직, 보호자/학생용 선생님 선택 화면, 커리큘럼 핸드오프 요청/수락/완료 워크플로우,
