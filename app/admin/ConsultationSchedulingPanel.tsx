@@ -33,6 +33,7 @@ import {
   listWorkspaceEventsSubscriptions,
   retryExpiringWorkspaceEventsSubscriptions,
   runSmartNotesReconciliation,
+  disableWorkspaceEventsSubscriptionForOrganizer,
   type WorkspaceEventsSubscriptionRow,
 } from "./workspace-events-actions";
 
@@ -123,6 +124,8 @@ export default function ConsultationSchedulingPanel() {
   const [error, setError] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
   const [subscriptions, setSubscriptions] = useState<WorkspaceEventsSubscriptionRow[]>([]);
+  const [disableOpenOrganizer, setDisableOpenOrganizer] = useState<string | null>(null);
+  const [disableReason, setDisableReason] = useState("");
 
   // 요구사항 5 — window.prompt 대신 검증 가능한 인라인 폼.
   const [rescheduleOpenId, setRescheduleOpenId] = useState<string | null>(null);
@@ -320,8 +323,14 @@ export default function ConsultationSchedulingPanel() {
                   </button>
                 )}
                 <button
-                  disabled={busyId === c.id || c.completionReadiness !== "ready"}
-                  title={c.completionReadiness !== "ready" ? COMPLETION_READINESS_LABEL[c.completionReadiness] : undefined}
+                  disabled={
+                    busyId === c.id || (c.completionReadiness !== "ready" && c.completionReadiness !== "summary_missing")
+                  }
+                  title={
+                    c.completionReadiness !== "ready" && c.completionReadiness !== "summary_missing"
+                      ? COMPLETION_READINESS_LABEL[c.completionReadiness]
+                      : undefined
+                  }
                   className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50"
                   onClick={() => {
                     setRescheduleOpenId(null);
@@ -435,12 +444,53 @@ export default function ConsultationSchedulingPanel() {
           <p className="text-[13px] text-grey-500">등록된 구독이 없습니다(상담·수업이 아직 확정되지 않았거나 전부 신규).</p>
         ) : (
           subscriptions.map((s) => (
-            <p key={s.id} className="text-[12.5px] text-grey-700 mb-1">
-              {s.organizer_email}({s.organizer_role === "consult_organizer" ? "상담 관리자" : "선생님"}) —{" "}
-              <span style={{ color: s.status === "active" ? "#16a34a" : "#b91c1c" }}>{SUBSCRIPTION_STATUS_LABEL[s.status] ?? s.status}</span>
-              {s.expires_at && ` · 만료: ${formatDateTime(s.expires_at)}`}
-              {s.last_error && ` · 최근 오류: ${s.last_error}`}
-            </p>
+            <div key={s.id} className="mb-2">
+              <p className="text-[12.5px] text-grey-700">
+                {s.organizer_email}({s.organizer_role === "consult_organizer" ? "상담 관리자" : "선생님"}) —{" "}
+                <span style={{ color: s.status === "active" ? "#16a34a" : "#b91c1c" }}>{SUBSCRIPTION_STATUS_LABEL[s.status] ?? s.status}</span>
+                {s.expires_at && ` · 만료: ${formatDateTime(s.expires_at)}`}
+                {s.last_error && ` · 최근 오류: ${s.last_error}`}
+              </p>
+              {s.status !== "disabled" && (
+                disableOpenOrganizer === s.organizer_email ? (
+                  <form
+                    className="flex items-center gap-2 mt-1"
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      if (!disableReason.trim()) return;
+                      withBusy(s.id, () => disableWorkspaceEventsSubscriptionForOrganizer(s.organizer_email, disableReason)).then(
+                        () => setDisableOpenOrganizer(null)
+                      );
+                    }}
+                  >
+                    <input
+                      required
+                      placeholder="정지·삭제 사유"
+                      value={disableReason}
+                      onChange={(e) => setDisableReason(e.target.value)}
+                      className="px-2 py-1 border-[1.5px] border-grey-200 rounded-lg text-[12px]"
+                    />
+                    <button type="submit" disabled={busyId === s.id} className="text-[12px] font-bold text-white bg-red rounded-lg px-3 py-1 disabled:opacity-50">
+                      정지·삭제 확정
+                    </button>
+                    <button type="button" className="text-[12px] text-grey-500" onClick={() => setDisableOpenOrganizer(null)}>
+                      취소
+                    </button>
+                  </form>
+                ) : (
+                  <button
+                    disabled={busyId === s.id}
+                    className="text-[12px] text-red underline mt-0.5 disabled:opacity-50"
+                    onClick={() => {
+                      setDisableOpenOrganizer(s.organizer_email);
+                      setDisableReason("");
+                    }}
+                  >
+                    구독 정지·삭제
+                  </button>
+                )
+              )}
+            </div>
           ))
         )}
       </section>

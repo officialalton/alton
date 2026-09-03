@@ -59,7 +59,11 @@
 - **(R4·R5, 2026-09-02, 완전히 해결 — 실사람 UAT 완료)** 제품 오너가 R4·R5 통합 UAT를 Vercel Preview에서 직접 수행해 전체 흐름(보호자 20회 패키지 구매→Stripe TEST 결제→영수증/수업권 확인→관리자 확인→과목 수강 활성화→체험 선생님 승계 제안→선생님 배정→적용일·사유 지정 변경→보호자/학생/선생님 역할별 화면 확인)을 승인 완료. UAT 중 발견되어 수정된 실버그: 관리자 Google 로그인/비밀번호 재설정/Stripe 결제 성공 리다이렉트가 전부 고정 `NEXT_PUBLIC_SITE_URL` 대신 실제 요청 origin을 쓰도록 수정(`039068b`/`a0645ce`/`97b04f2`, `lib/request-origin.ts` 공용 헬퍼), 관리자 "구매 상세 조회"가 UUID 아닌 입력(이메일 등)에 원시 DB 에러를 던져 페이지 전체가 깨지던 500 버그 수정(`7992fb3`), 선생님 변경 화면에 적용일 입력란이 아예 없어 항상 "지금"으로만 처리되던 버그 수정(DB 함수는 이미 `p_effective_from`을 지원했음, UI만 연결, `7992fb3`). **R4·R5 두 단계 모두 완료 확정 — 같은 범위 재작업 금지.**
 - **(R4, 2026-09-02, 정식 오픈 전 blocker, 2026-09-02 재확인)** Production Stripe 웹훅 엔드포인트 `https://app.alton.education/api/webhooks/stripe`가 아직 등록되어 있지 않음(현재 Stripe 계정에 있는 웹훅 2개는 전부 이번 세션 UAT용 임시 Preview 주소). Preview에서 있었던 웹훅 전달 지연은 Preview 전용 Deployment Protection + 배포마다 바뀌는 URL 때문이며 Production 구조 문제가 아님(Production 도메인 `app.alton.education`은 Deployment Protection 없음, 확인됨). **법인 설립·Stripe Live 계정 활성화 전에는 다음을 하지 않는다**: (1) 이 Production 웹훅 엔드포인트 등록, (2) Stripe Live secret key 발급·환경변수 입력, (3) 실제(Live) 결제 API 호출. 법인 설립·Stripe Live 계정 활성화 후 오픈 전 필수 작업으로 남겨둔다. `docs/2026-08-29-master-roadmap-v3.md` R13(종단 QA·정식 오픈) 체크리스트에도 동일 항목 등록.
 - **(R6, 2026-09-03) 상태: 완료.** Smart Notes canonical PATCH 실제 Sandbox 최종 검증까지 통과(M0 종료).** 정규수업 예약/수업권 연동/Calendar·Meet/취소·재예약/역할별 캘린더 UI(학생·보호자/선생님/관리자)/선생님 외부 일정 표시/Google 직접 변경(시간 변경 양방향·삭제 양자택일)/지각·노쇼/AI 회의록·Smart Notes/알림/운영 전체 범위가 구현·mock 테스트 완료에 이어 **실제 Google Sandbox 통합 검증까지 통과**했다(15/N, 아래 참고 — 실제 버그 3건 발견·수정). 그 통과를 조건으로 **Calendly/Zoom(개별 회차 예약용)을 완전히 제거**했다 — 상담(consult_requests) 예약 Calendly는 범위 밖(`ConsultForm`으로 독립 동작, 영향 없음). 전체 스펙은 `docs/2026-09-02-r6-scope-and-approval.md`에 원문 그대로 보존. 진행 상세는 `docs/2026-09-02-r6-migration-execution-log.md` 참고. **(2026-09-03, 16/N)** 제품 오너 지시로 Smart Notes 동의 모델을 보호자 opt-out 선택 기능에서 가족 서비스 이용계약의 필수 조항으로 단순화(아래 참고) — 이때 재작성한 `enableMeetSpaceSmartNotes()`(canonical space name 기반 PATCH)를 **(2026-09-03, M0) 사용자 승인 후 실제 Google Sandbox로 재검증** — 임시 `environment:development` IAM binding 추가 → 실제 Calendar 이벤트+Meet space 생성 → canonical name으로 PATCH → 재확인 GET·독립 재조회 모두 `autoSmartNotesGeneration: "ON"` 확인 → 검증 직후 임시 Calendar 이벤트 삭제, IAM binding 제거(재조회로 Production만 남았음 확인), 임시 파일·자격 증명 삭제. **canonical name PATCH가 기존 403을 실제로 우회함을 확인 — 더 이상 외부 gap 아님.** 이로써 R6은 정식 종료됐다.
-- **다음 실행 순서(2026-09-03 확정, 상세는 마스터 로드맵 "근접 실행계획" 절)**: `M0 R6 마감(완료) → M1 상담·체험 기반 재설계 → M2 R4 후속(체험/정규 수업권·환불) → M3 R5 후속(체험/정규 배정) → M4 상담→체험→정규 전환 통합 마감 → M5 기존 R7 착수`. **M1/R6 Workspace Events 공통 blocker는 2026-09-03 코드 정정+mock/로컬 검증까지 완료**했다 — 실제 Google Sandbox 실측 재검증(구독 생성 응답 확인 등)만 사람 복귀 후 실행 대기 상태다(실행 절차는 `scripts/m1-sandbox-verification.sh` v2, 요청서는 `docs/2026-09-03-m1-google-sandbox-verification-request-v2.md`). 이 실측 재검증이 끝나기 전까지 M1/R6은 "코드+mock 완료"로만 표시하고 "완전 마감"으로 표시하지 않는다. **M2는 착수해 아래 별도 절 기준으로 완료됐다(2026-09-03) — M3/M4는 여전히 착수하지 않았다.** 상세는 아래 "M1 — 상담 기반 재설계" 절, "M2 — R4 후속(체험수업권)" 절과 `docs/2026-09-03-m1-migration-execution-log.md`/`docs/2026-09-03-m2-migration-execution-log.md`. R9(과목 마일스톤 보드)·R11(보호자–관리자 운영 메신저)은 이 실행 순서에 포함되지 않고 각자의 R 섹션에 별도 미착수 항목으로 남아있다.
+- **다음 실행 순서(2026-09-03 확정, 상세는 마스터 로드맵 "근접 실행계획" 절)**: `M0 R6 마감(완료) → M1 상담·체험 기반 재설계 → M2 R4 후속(체험/정규 수업권·환불) → M3 R5 후속(체험/정규 배정) → M4 상담→체험→정규 전환 통합 마감 → M5 기존 R7 착수`. **M1/R6 Workspace Events 공통 blocker는 2026-09-03 코드 정정 후 실제 Google Sandbox
+v3 재검증까지 통과해 완전 마감됐다**(제품 오너가 직접 실행·보고, 상세는 위 "M1/R6 —
+Workspace Events 구독 모델 정정 및 실제 Sandbox 재검증 통과" 절) — 사용자 단위 구독
+모델이 실제로 성립함을 확인, 실측 중 발견된 UI 버그 2건은 이 세션에서 정식 수정·커밋
+완료. **M2는 착수해 아래 별도 절 기준으로 완료됐다(2026-09-03) — M3/M4는 여전히 착수하지 않았다.** 상세는 아래 "M1 — 상담 기반 재설계" 절, "M2 — R4 후속(체험수업권)" 절과 `docs/2026-09-03-m1-migration-execution-log.md`/`docs/2026-09-03-m2-migration-execution-log.md`. R9(과목 마일스톤 보드)·R11(보호자–관리자 운영 메신저)은 이 실행 순서에 포함되지 않고 각자의 R 섹션에 별도 미착수 항목으로 남아있다.
   - **1/N 완료**: 선생님 반복가능시간·날짜별예외·15분버퍼·24h~8주 window, `confirm_lesson_booking()`(예약+세션+entitlement hold 단일 트랜잭션).
   - **2/N 완료**: Calendar/Meet 이벤트+Meet 생성·FreeBusy·취소, 실패해도 예약/hold는 건드리지 않는 재처리 워커(`reconciliation_needed` 포함).
   - **3/N 완료**: 구조적 cutover — `sessions`→`legacy_sessions`(레거시 세션뷰 8파일 14곳 계속 사용), `sessions_v3`→`sessions`(신규 예약이 쓰는 테이블). FK·RLS·인덱스는 rename에 자동 추종, 함수 본문 7개(텍스트 참조라 자동추종 안 됨)는 전부 CREATE OR REPLACE로 갱신 확인. `material_version_id`는 R9 선행조건(학생별 진도 스냅샷) 부재로 의도적으로 비워둠(인터페이스만 유지).
@@ -304,7 +308,7 @@ alton.education` 소유 Calendar 이벤트+Meet 생성, 확인 이메일(`matchb
   `CALENDAR_SYNC_ALLOW_REAL_CALLS` 등 모든 플래그 기본값(false/미설정) 유지. `git push`
   하지 않음 — 로컬 커밋만 존재.
 
-### M1/R6 — Workspace Events 구독 모델 정정(2026-09-03, 같은 날 네 번째 후속) — **코드+mock 완료, 실측 재검증 대기**
+### M1/R6 — Workspace Events 구독 모델 정정 및 실제 Sandbox 재검증 통과, **완전 마감**(2026-09-03, 같은 날 네·다섯 번째 후속)
 
 앞선 구독 수명주기 구현(위 절)의 target resource·Pub/Sub 연결 구성이 **실제 Google API
 요구사항과 맞지 않는 근본 오류**였음이 드러나 이번 세션에서 정정했다. R6가 과거(15/N)
@@ -350,17 +354,58 @@ endpoint 형식이다. 즉 R6 15/N의 "구독·Pub/Sub 실제 수신 성공" 기
   사용자 ID 재사용(Directory API 재호출 안 함) 등(`lib/workspace-events/subscription-
   lifecycle.test.ts`, `lib/google-workspace-events-subscriptions.test.ts` 신규). 전체
   Vitest 841건, `tsc --noEmit`·`next build` 클린.
-- **미완료**: 실제 Sandbox 재검증(구독 생성 응답 실측, 사용자 단위 vs canonical space
-  단위 최종 판단 포함) — 실행 절차만 준비, 사람 복귀 후 실행 대기. Pub/Sub 발행 서비스
-  계정 이름 확인·Publisher 권한 부여·push subscription 생성도 실측 재검증과 함께 실행.
-- **decision_required**: 사용자 단위(`cloudidentity.googleapis.com/users/{id}`) Workspace
-  Events 구독이 실제로 거부될 경우 canonical Meet space 단위 구독으로 전환할지 — mock으로는
-  판단 불가, 실측 재검증 결과로만 확정 가능. 이 결정과 무관한 나머지 작업(위 정정 1~3,
-  수명주기 유지)은 이미 완료했으므로 이 결정이 늦어져도 막히지 않는다.
-- **외부 변경**: 이번 라운드도 실제 Google API 호출, IAM 변경, 이메일 발송 전부 0건.
-  `git push` 없음.
-- **M2/M3/M4 착수 여부**: 이번 세션은 M1/R6 blocker 해결 범위로 스스로 제한했다 —
-  M2/M3/M4 코드는 작성하지 않았다(각 마일스톤은 별도 승인 단위로 취급).
+**추가 후속 — 제품 오너가 직접 실행한 실제 Google Sandbox v3 재검증(2026-09-03)**:
+아래는 **Claude 세션이 직접 관측·검증한 것이 아니라, 제품 오너가 실제 Sandbox에서
+직접 실행하고 이 세션에 보고한 결과**를 그대로 기록한다(Claude는 여전히 실제 Google
+API를 한 번도 호출하지 않았다 — 이 절 전체가 "보고받은 결과의 기록"이라는 성격을
+명확히 유지한다).
+
+- **decision_required였던 사용자 단위 vs canonical space 판단이 실측으로 해소됨**:
+  `official@alton.education`·`teacher1@alton.education` 둘 다 `//cloudidentity.
+  googleapis.com/users/{Directory API 불변 ID}` + 기존 `gate-c-meet-events` Pub/Sub
+  토픽(이미 `meet-api-event-push@system.gserviceaccount.com` Publisher 권한 보유,
+  신규 토픽 생성 불필요했음)으로 구독 생성 **성공** — `status=active`, 실제
+  `subscription_name`(`operations/...` 형식), 실제 만료 시각(7일 후) 저장 확인. **사용자
+  단위 구독 모델이 그대로 맞았다** — canonical Meet space 단위로 전환할 필요 없음.
+- 상담·정규수업 Calendar/Meet 생성(attendee `matchbox512@snu.ac.kr`), 상담 시간변경 →
+  같은 `google_event_id` 유지 + Google 네이티브 변경 알림 실수신, 합성 회의 → 실제
+  Pub/Sub `google.workspace.meet.smartNote.v2.fileGenerated` 이벤트 도착 → 로컬
+  웹훅에 실제 OIDC 서명 토큰으로 replay → `smart_notes_generation_events` 실제 매칭·
+  연결(`linked=true`, `drive_file_id` resolve) → `consultations.smart_notes_drive_file_id`
+  반영 → 동일 메시지 재전송 시 `skipped:duplicate_message` 멱등 확인 — 전부 성공 보고.
+  외부 attendee가 Smart Notes 원본 문서를 열려고 하면 "액세스 권한 필요" 화면만 뜨고
+  실제 접근 불가 재확인. 관리자 검토 요약 입력 후 4조건 게이트 통과, `outcome=
+  trial_recommended`로 상담 완료 처리 성공. M2 체험수업권 자동 지급도 함께 트리거돼
+  정식 학생 계정 미연결로 인한 "지급 실패 — 재처리 필요" 상태가 의도대로 정확히
+  표시됨(에러 처리 정상 동작 확인).
+- 정리(제품 오너 보고): Calendar 이벤트 2개 삭제, Smart Notes 문서 삭제, Workspace
+  Events 구독 2개 실제 삭제(`disableSubscriptionForOrganizer()`를 임시 debug 라우트로
+  호출 — 그 라우트는 사용 직후 제거, 커밋되지 않음), IAM binding 원복(diff 확인),
+  `.env.local` 원복(diff 확인).
+- **검증 중 발견된 실제 버그 2건 — 이 세션에서 정식으로 수정·커밋**:
+  1. `ConsultationSchedulingPanel.tsx`의 "상담 결과 기록" 버튼이
+     `completionReadiness !== "ready"`일 때 비활성화였는데, `completionReadiness`가
+     `"ready"`가 되려면 `admin_review_summary`가 이미 채워져 있어야 한다
+     (`computeCompletionReadiness()` 참고) — 즉 요약을 입력할 폼을 여는 버튼 자체가
+     "요약이 이미 있어야만" 열리는 순환 참조라 실제로는 영원히 열 수 없는 버그였다.
+     `completionReadiness !== "ready" && completionReadiness !== "summary_missing"`
+     조건으로 수정 — 요약이 아직 없는 상태(정상적인 최초 진입 상태)에서도 폼이 열리고,
+     그 외 미충족 사유(동의 미확인, Smart Notes 미설정, 원본 미연결)에서는 여전히
+     비활성화된다. 회귀 테스트 추가(`ConsultationSchedulingPanel.test.tsx` 신규).
+  2. `disableSubscriptionForOrganizer()`(구독 실제 정지·삭제)는 서버 액션까지 있었지만
+     관리자 화면에 연결된 버튼이 없어 실제로 쓸 방법이 없었다 — "Workspace Events 구독
+     상태" 섹션에 구독별 "구독 정지·삭제" 버튼(사유 입력 인라인 폼)을 추가해 정식
+     UI 동선을 만들었다. 회귀 테스트 추가.
+- **검증(이 세션 자체)**: 전체 Vitest 852건(849 + 신규 3건), `tsc --noEmit`·`next build`
+  클린.
+- **외부 변경**: 이번 라운드도 Claude 세션이 실행한 실제 Google API 호출, IAM 변경,
+  이메일 발송 전부 0건 — 위에 기록된 실제 Sandbox 실행은 전부 제품 오너가 직접
+  수행했다고 보고받았고, Claude는 그 결과를 문서화·코드 정정만 했다. `git push` 없음.
+- **M2/M3/M4 착수 여부**: 이 세션(Claude)은 M2/M3/M4 코드를 스스로 작성하지 않았다 —
+  이번 라운드에서 문서에 반영된 M2(체험수업권+정규 환불) 구현은 같은 저장소를 공유하는
+  별도 세션이 독립적으로 완료해 커밋한 것이며(`007e917`/`de9cd26`/`6624c06`, 위 M2
+  절 참고), 이 세션은 그 커밋을 검토·수정하지 않고 그대로 존중했다. M3/M4는 어느
+  세션에서도 착수되지 않았다.
 
 push는 제품 오너가 최종 확인 후 별도로 지시할 때만 한다(이 세션은 지시받지 않아
 push하지 않았다).

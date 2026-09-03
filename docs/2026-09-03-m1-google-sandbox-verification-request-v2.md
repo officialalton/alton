@@ -1,7 +1,19 @@
 # M1 Google Sandbox 외부 검증 요청 (v2, 2026-09-03) — 통합 재검증
 
-- 상태: **승인 대기 — 아직 실제 Google API를 호출하지 않았다.** 이 문서에 적힌 어떤 실제
-  외부 호출도 승인 전까지 실행하지 않는다.
+- **상태: 제품 오너가 이 문서 절차로 실제 Sandbox 검증을 직접 실행 — 전부 통과 보고됨
+  (2026-09-03).** 이 문서 자체는 Claude가 실제 API를 호출하지 않고 작성했고, 실제
+  실행·정리는 제품 오너가 직접 수행했다. 실측 결과 요약(제품 오너 보고 그대로 기록,
+  상세는 `docs/CURRENT.md`의 "M1/R6 — Workspace Events 구독 모델 정정 및 실제
+  Sandbox 재검증 통과" 절 참고):
+  - §1의 1~6번 검증 항목 전부 통과. 사용자 단위 구독(`//cloudidentity.googleapis.com/
+    users/{Directory API 불변 ID}`)이 실제로 성립함을 확인 — canonical Meet space
+    단위로 전환할 필요 없음(§1-3의 미확정 판단 해소).
+  - 기존 `gate-c-meet-events` Pub/Sub 토픽에 이미 필요한 Publisher 권한이 있어 §2의
+    신규 토픽 생성 없이도 검증 가능했다(사전 준비 STEP 0.5 중 토픽 생성 단계는
+    불필요했던 것으로 확인).
+  - §7 정리 전부 완료: Calendar 이벤트 2개·Smart Notes 문서 삭제, 구독 2개 실제 삭제,
+    IAM binding·`.env.local` 원복.
+  - 검증 중 발견된 앱 버그 2건은 별도로 정식 수정·커밋됨(문서 참고).
 - 배경: v1 요청서(`docs/2026-09-03-m1-google-sandbox-verification-request.md`) 범위로 이미
   한 차례 실제 Sandbox 검증이 실행됐다 — `official@alton.education` Calendar/Meet 생성,
   확인 이메일(`matchbox512@snu.ac.kr`), 동의 토큰 확인까지는 실제로 통과했으나, **Workspace

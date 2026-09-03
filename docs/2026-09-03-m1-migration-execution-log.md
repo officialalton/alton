@@ -272,3 +272,33 @@ target resource 형식, 웹훅 URL을 Pub/Sub 토픽으로 오용)를 안고 있
   준비까지만, 실행은 사람 복귀 후 대기.
 - **외부 변경**: 0건, `git push` 없음. M2/M3/M4는 이번 라운드에서도 착수하지 않음(스스로
   범위 제한).
+
+## 12. 2026-09-03 실제 Sandbox v3 재검증 통과(제품 오너 직접 실행) — M1/R6 완전 마감 + 버그 2건 정식 수정
+
+제품 오너가 §11까지의 코드 정정 이후 위 v2 요청서 절차로 **실제 Google Sandbox 검증을
+직접 실행해 전부 통과**했다고 보고했다. 이 세션(Claude)은 그 실행을 대행하지 않았고
+실제 API를 호출하지 않았다 — 아래는 보고받은 결과를 그대로 기록한 것이다. 상세는
+`docs/CURRENT.md`의 "M1/R6 — Workspace Events 구독 모델 정정 및 실제 Sandbox 재검증
+통과" 절, 요청서는 `docs/2026-09-03-m1-google-sandbox-verification-request-v2.md`
+갱신본 참고(중복 작성하지 않음).
+
+- **decision_required 해소**: 사용자 단위 구독이 실제로 성립함을 확인 — canonical Meet
+  space 단위 전환 불필요.
+- **이 세션에서 정식으로 수정·커밋한 실제 버그 2건**(검증 중 제품 오너가 워킹 디렉토리에
+  임시 패치로 발견·표시, 이 세션이 검토 후 정식 반영):
+  1. `app/admin/ConsultationSchedulingPanel.tsx` — "상담 결과 기록" 버튼이
+     `completionReadiness==='ready'`일 때만 활성화였는데 그 상태 자체가 요약이 이미
+     입력된 경우에만 도달 가능해 순환 참조로 폼을 영원히 열 수 없던 버그.
+     `completionReadiness !== 'ready' && completionReadiness !== 'summary_missing'`로
+     교체해 요약 미작성 상태(정상 최초 진입)에서도 폼이 열리도록 수정.
+  2. Workspace Events 구독 정지·삭제(`disableSubscriptionForOrganizer()`)를 실제로
+     실행할 관리자 UI 동선이 없었던 문제 — "Workspace Events 구독 상태" 섹션에 구독별
+     정지·삭제 버튼(사유 입력 인라인 폼)을 신규 추가.
+- **신규 테스트**: `app/admin/ConsultationSchedulingPanel.test.tsx`(신규 3건 — 요약
+  미작성 상태에서 폼이 열리는지, 다른 미충족 사유에서는 여전히 비활성화되는지, 구독
+  정지·삭제 버튼이 실제 액션을 호출하는지).
+- **검증**: 전체 Vitest 852건(849 + 신규 3), `tsc --noEmit`·`next build` 클린.
+- **외부 변경(이 세션 자체)**: 0건 — 실제 Sandbox 실행은 전부 제품 오너가 직접 수행,
+  이 세션은 보고 문서화와 버그 정식 수정만 담당. `git push` 없음.
+- **M1/R6 최종 상태**: 완전 마감. M2는 별도 세션이 독립 완료(위 M2 실행 로그 참고,
+  이 세션은 그 코드를 건드리지 않음). M3/M4는 여전히 미착수.
