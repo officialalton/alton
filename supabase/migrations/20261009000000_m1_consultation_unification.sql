@@ -587,15 +587,23 @@ begin
     raise exception '상담 신청을 찾을 수 없습니다: %', p_consultation_id;
   end if;
 
-  -- M1 요구사항 3(2026-09-03 추가) — readiness 게이트: "동의 확인 완료 + Smart Notes 활성화
-  -- 확인 완료" 두 조건을 서버에서 강제한다. 관리자 화면이 안내를 빠뜨리거나 우회해도 이
-  -- 함수 자체가 막는다 — 아직 한 번도 확정(scheduled)되지 않은 상담은 애초에 이 두 조건을
-  -- 채울 기회가 없었으므로 함께 막는다(상담 자체를 하지 않고 결과만 기록하는 경로 없음).
+  -- M1 요구사항 3(2026-09-03 추가, 2026-09-03 조건부 승인 보완으로 4개 조건 전부로 확장)
+  -- — "상담 진행 가능"(동의 확인 + Smart Notes ON)과 "상담 완료 가능"(그 위에 원본
+  -- 자동 연결 + 비어있지 않은 관리자 검토 요약)을 구분한다. 이 함수는 상담을
+  -- completed로 전이시키거나 outcome을 기록하는 함수이므로 "완료 가능" 기준
+  -- 4개 전부를 서버에서 강제한다 — 관리자 화면이 안내를 빠뜨리거나 우회해도 이
+  -- 함수 자체가 막는다. 4개 중 하나라도 미충족이면 전체를 거부한다(부분 허용 없음).
   if v_row.consent_version_id is null or v_row.consent_confirmed_at is null then
     raise exception '동의 확인이 완료되지 않아 상담 결과를 기록할 수 없습니다(consent_confirmed_at 없음).';
   end if;
   if v_row.smart_notes_config_status is distinct from 'applied' then
     raise exception 'Smart Notes 활성화가 확인되지 않아 상담 결과를 기록할 수 없습니다(smart_notes_config_status: %).', v_row.smart_notes_config_status;
+  end if;
+  if v_row.smart_notes_drive_file_id is null then
+    raise exception 'Smart Notes 원본이 아직 이 상담에 자동 연결되지 않아 상담 결과를 기록할 수 없습니다(smart_notes_drive_file_id 없음 — 관리자 재처리 대상).';
+  end if;
+  if p_admin_review_summary is null or btrim(p_admin_review_summary) = '' then
+    raise exception '관리자 검토 요약을 작성해야 상담 결과를 기록할 수 있습니다(공백 불가).';
   end if;
 
   update consultations set
@@ -603,7 +611,7 @@ begin
     completed_at = coalesce(completed_at, now()),
     outcome = p_outcome,
     outcome_notes = coalesce(p_notes, outcome_notes),
-    admin_review_summary = coalesce(p_admin_review_summary, admin_review_summary),
+    admin_review_summary = p_admin_review_summary,
     updated_at = now()
   where id = p_consultation_id
   returning * into v_row;

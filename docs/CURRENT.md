@@ -109,12 +109,14 @@
   - **14/N 완료(2026-09-02, 이번 세션, 문서만 정정 — 코드 변경 없음)** — 제품 오너가 승인 전 Sandbox 요청서 v4의 객체 범위·Smart Notes 정리 방식만 정정 지시. v5로 개정: (1) §3을 "동시 존재 최대 4개(E1~E4) / 누적 생성 최대 5개(재생성분 E3′ 포함) / Meet space 누적 최대 4개"로 정정하고, 어느 예약을 어떤 순서로 재사용해 시간 변경·삭제 후 재생성·삭제 후 정식 취소를 모두 검증할지 명시(추가 테스트 예약 없음). (2) Smart Notes 증적을 Shared Drive로 이동·보존하는 선택지 삭제(R8 범위) — 식별정보만 기록하고 합성 파일은 선생님 Sandbox Drive에서 정리(삭제)하는 것으로 고정, 외부 변경 목록에도 명시.
   - **15/N 완료(2026-09-03, 이번 세션) — 실제 Google Sandbox 통합 검증 및 Calendly/Zoom 제거 완료.** 제품 오너 승인(v5 범위 전체, DWD scope 실제 확인 후 일괄 실행)에 따라 `gate-c-automation@...`에 임시 `environment:development` WIF IAM binding을 좁게 추가(Production 바인딩 불변)하고, `teacher1@alton.education` 실제 계정으로 로컬 dev 환경에서 실제 Google API를 호출해 검증했다. **실제 결과**: Calendar/Meet 생성·수정·삭제(E1~E4), FreeBusy 충돌·외부 바쁨 블록, Google 시간 변경 양방향(반영/유지), Google 삭제 후 재생성/정식 취소, Smart Notes 실회의(약 19분) 생성·연결, Workspace Events 구독·Pub/Sub 실제 수신, Meet 참가자 기록 조회까지 전부 실측 통과. **실제 버그 3건 발견·수정**: (1) 멱등 재요청이 자기 자신이 만든 Calendar 이벤트와 FreeBusy 충돌 오탐(`lib/booking/create-booking.ts`), (2) `privateExtendedProperty` 와일드카드 미지원으로 외부 변경 감지가 항상 무동작(`lib/google-calendar.ts`, `lib/booking/external-change-detection.ts`), (3) Workspace Events 실제 페이로드는 이벤트 타입이 본문이 아니라 Pub/Sub 메시지의 `ce-type` 속성에 있고 Smart Notes 본문엔 `smartNote.name`만 있어 Drive 파일 ID·meetingCode를 추가 API 호출로 채워야 함(`lib/google-workspace-events.ts`, `app/api/webhooks/workspace-events/route.ts`, `lib/google-meet.ts`) — meetingCode/driveFileId 해석은 도메인 위임 관리자(official@alton.education) subject로 조직 내 임의 회의를 조회할 수 있음을 실측 확인해 해결. **미해결 외부 gap(코드로 해결 불가, 비차단)**: Meet Space `smartNotesConfig` PATCH가 `meetings.space.settings` scope로도 일관되게 403 — Google Admin Console DWD 등록 확인이 추가로 필요(보호자 Smart Notes 거부 옵트아웃이 API로는 실제로 적용되지 않음, 신고 대상). 검증 후 정해진 순서대로 정리 완료: 생성했던 Calendar 이벤트 전부 삭제, Workspace Events 구독 삭제, 합성 Smart Notes Google Doc 삭제, 테스트 fixture DB row 전부 삭제(`teachers.workspace_email` 원복 포함), `/tmp` 임시 스크립트·자격증명 삭제, 마지막으로 임시 IAM binding 제거 후 `get-iam-policy` 재조회로 Production 바인딩만 남았음을 확인. 이 통합 검증이 실제로 전부 통과해 **Calendly/Zoom 완전 제거**를 진행: `CalendlyWidget.tsx`/`app/api/webhooks/calendly/*`/`scripts/register-calendly-webhook.mjs`/`app/student/booking-data.ts` 삭제, `teachers.calendly_scheduling_url`/`legacy_sessions.calendly_event_uri` 컬럼 삭제(`20261007000000_r6_remove_calendly_zoom_lesson_booking.sql`), 관련 env var(`CALENDLY_*`) 제거, 세션뷰 "Zoom 연결됨" 배지를 "Google Meet 연결됨"으로 변경. **상담(consult_requests) 예약 Calendly는 이번 제거 범위가 아니다** — 애초에 R6 스펙 밖이고 `ConsultForm`/`submitConsultRequest`로 Calendly 없이 독립적으로 동작해왔으므로 랜딩페이지는 이제 항상 `ConsultForm`을 쓰고, `consult_requests.calendly_event_uri` 컬럼은 보존(이관하지 않음, 그냥 미사용 컬럼으로 남음). 전체 회귀(Vitest 809건, tsc, `npm run build`) 전부 통과. Production/원격 dev DB/Stripe Production 접근 없음, 모든 Google 관련 플래그 세션 종료 시 기본값(false/미설정) 유지.
 
-### M1 — 상담 기반 재설계, 코드 구현 완료·**제품 오너 승인 대기**(2026-09-03)
+### M1 — 상담 기반 재설계, 코드 구현 완료·**조건부 승인, push 대기**(2026-09-03)
 
 **다음 실행 순서**가 `M0 R6 마감(완료) → M1 상담·체험 기반 재설계 → M2 → M3 → M4 → M5 기존 R7 착수`이던 것 중
-**M1의 코드·DB·로컬 검증을 완료**했다 — 단, **아직 제품 오너 승인 전**이며 push도 하지 않았다(로컬
-커밋 3개: `6f978db`→`d8862bb`→`1feb800`). 상세는 `docs/2026-09-03-m1-migration-execution-log.md`,
-인수 기준 체크박스는 `master-roadmap-v3.md` "근접 실행계획" M1 절 참고.
+**M1의 코드·DB·로컬 검증을 완료**했다 — 제품 오너가 **조건부 승인**했고(2026-09-03, 4개 항목
+보완 지시 후 승인), 그 보완도 같은 세션에서 완료했다. **push는 여전히 하지 않았다**(로컬
+커밋 5개: `6f978db`→`d8862bb`→`1feb800`→`ca7b187`→최신, 실제 커밋 해시는 `git log` 참고).
+상세는 `docs/2026-09-03-m1-migration-execution-log.md`, 인수 기준 체크박스는
+`master-roadmap-v3.md` "근접 실행계획" M1 절 참고.
 
 - **DB**: `supabase/migrations/20261009000000_m1_consultation_unification.sql` — 신규
   `prospect_contacts`(비로그인 잠재고객, Auth 계정 미생성), `consult_consent_versions`(동의
@@ -137,19 +139,28 @@
   배타 제약이 `requested`/`scheduled` 둘 다 직접 하드 차단(앱 레벨 `SELECT ... FOR UPDATE`는
   더 친절한 에러 메시지용 이중 방어일 뿐). 비로그인 신청 남용 방지는 "동일 이메일당 처리
   대기 중인 신청 1건 제한"으로 대체(UX 변경 없음).
-- **Smart Notes readiness 게이트(2026-09-03 추가)**: `official@alton.education` 조직 차원 Smart
+- **Smart Notes readiness 게이트 — 진행/완료 2단계 분리(2026-09-03 추가, 조건부 승인
+  보완으로 재정의)**: "상담 진행 가능"(동의 확인 + Smart Notes ON)과 "상담 완료 가능"(그
+  위에 Smart Notes 원본 자동 연결 + 비어있지 않은 관리자 검토 요약)은 서로 다른 시점의
+  서로 다른 기준이라 더 이상 하나로 묶지 않는다. `official@alton.education` 조직 차원 Smart
   Notes 정책이 이미 켜져 있으면 그것으로 충분(`ensureMeetSpaceSmartNotesOn()`이 GET으로 먼저
-  확인, ON이 아닐 때만 기존 canonical PATCH로 보정). 확인·보정이 실패해도 확정 이메일 발송은
-  막지 않되, `admin_record_consultation_outcome()`이 **서버에서** "동의 확인 완료(`consent_confirmed_at`)
-  + Smart Notes 활성화 확인 완료(`smart_notes_config_status='applied'`)" 둘 다 없으면 예외를
-  던져 완료 처리를 강제로 막는다. 관리자 화면(`ConsultationSchedulingPanel.tsx`)에 readiness
-  파생 상태(`ready`/`consent_pending`/`smart_notes_pending`)와 수동 재처리 버튼을 제공.
+  확인, ON이 아닐 때만 기존 canonical PATCH로 보정) — 확인·보정 실패는 확정 이메일 발송을
+  막지 않는다. `admin_record_consultation_outcome()`이 **서버에서 4개 조건 전부**(①
+  `consent_confirmed_at` 존재, ② `smart_notes_config_status='applied'`, ③
+  `smart_notes_drive_file_id` 존재, ④ `admin_review_summary`가 공백 아닌 값)를 강제하고
+  하나라도 미충족이면 `completed` 전이·outcome 기록을 전부 거부한다(부분 허용 없음).
+  관리자 화면(`ConsultationSchedulingPanel.tsx`)에 `consultReadiness`(진행 가능 여부)와
+  `completionReadiness`(완료 가능 여부)를 별도로 표시하고, 완료 불가 사유별(동의/Smart
+  Notes ON/원본 미연결/요약 누락) 안내와 수동 재처리 버튼을 제공.
 - **Smart Notes 원본 자동 연결(2026-09-03 추가, 실제 구현)**: 새 웹훅을 만들지 않고 기존 R6
   Workspace Events 웹훅(`app/api/webhooks/workspace-events/route.ts`)의 매칭 대상만 넓혔다 —
   세션 매칭 실패 시 `consultations.google_meeting_code`로 상담도 시도, 매칭되면
   `consultations.smart_notes_drive_file_id` 갱신(잠재고객에게는 노출 경로 없음, 관리자 전용).
   Pub/Sub `messageId` 기반 멱등(재전송 시 중복 행 생성 안 함), 매칭 실패는 유실시키지 않고
-  `linked=false`로 보존(관리자 재처리 대상).
+  `linked=false`로 보존. **재처리 경로 신규 추가**: `reprocessUnlinkedSmartNotesEvents()`
+  (`lib/consultation/calendar-sync.ts`)가 매칭 실패로 남은 이벤트를(대개 웹훅이 상담의
+  `google_meeting_code` 저장 전에 먼저 도착하는 레이스) 다시 매칭 시도 — 관리자 화면 "Smart
+  Notes 미매칭 재처리" 버튼으로 실행.
 - **동의 확인 토큰화(2026-09-03 정정)**: 상담 UUID를 URL에 노출하지 않는다 — 확인 이메일마다
   새 만료형 토큰(SHA-256 해시만 DB 저장, 원문은 발송 시점에만 메모리에 존재)을 발급하고,
   `/consult/[id]/consent` → `/consult/consent?token=...`로 라우트 변경. 위조/재사용/다른 상담
@@ -184,13 +195,17 @@
   쓰던 불일치(기존 관례로 통일).
 - **미완료(스펙상 의도적으로 M2~M4로 이관, 이번 범위 아님)**: 기존 로그인 보호자·학생·선생님이
   보내는 상담 요청 유형 UI/구분 로직("신규 보호자 홈페이지 흐름 우선 완성" 원칙),
-  `prospect_contacts.converted_guardian_id` 실제 연결 로직(M4), 실제 Google Sandbox 검증(요청서만
-  작성 예정 — 아래 참고, 이번 세션은 코드/mock/로컬 검증까지만).
+  `prospect_contacts.converted_guardian_id` 실제 연결 로직(M4). **실제 Google Sandbox 검증
+  요청서는 작성 완료·승인 대기**(`docs/2026-09-03-m1-google-sandbox-verification-request.md`,
+  official 계정 Calendar/Meet/Smart Notes 통합 검증, 합성 회의 상한 "최대 20분, Smart Notes
+  생성 확인 시 즉시 종료"로 조정) — 이번 세션은 여전히 코드/mock/로컬 검증까지만이고 실제
+  Google API 호출은 0건.
 - **외부 변경**: Google/Stripe/DocuSign 실제 API 호출, Production/원격 dev DB 접근, 실제
   이메일 발송 전부 0건. `CALENDAR_SYNC_ALLOW_REAL_CALLS` 등 모든 외부 플래그 기본값(false/
   미설정) 그대로 유지 — 이번 세션에서 한 번도 true로 전환하지 않았다. 로컬 커밋만 생성,
-  `git push` 없음. **M1은 아직 제품 오너 승인 전 — 승인 후 이 절 제목에서 "승인 대기" 문구를
-  제거하고 push한다.**
+  `git push` 없음. **M1은 조건부 승인을 받았고(2026-09-03) 그 보완 조건도 이번 세션에서
+  전부 완료했다 — 남은 것은 push뿐이다.** push는 제품 오너가 최종 확인 후 별도로 지시할
+  때만 한다(이 세션은 지시받지 않아 push하지 않았다).
 
 ## `material_version_id` 정책(R9 이관, 2026-09-02 명문화)
 

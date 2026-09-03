@@ -164,8 +164,48 @@ M1은 커밋했지만 **아직 승인되지 않은 상태**에서, 제품 오너
    추가. 전체 Vitest 817건, `tsc --noEmit`, `next build` 클린, 전체 Playwright 52건
    (`--workers=1`, 기존 R2~R6 스펙 전부 포함) 통과 — 로컬 작업트리와 별도 clean worktree
    양쪽에서 재확인.
-9. **외부 검증 요청서**: 이번 보완에서는 작성하지 않았다 — Smart Notes readiness/자동 연결
-   로직 자체가 이번에 새로 바뀌어서, 기존 R6 Sandbox 요청서 패턴을 그대로 재사용하되 상담
-   전용 시나리오(official 계정 Calendar+Meet+Smart Notes 통합, 객체 상한, 통제된 수신자,
-   정리 순서)를 반영한 별도 요청서 작성이 다음 세션 필요 항목으로 남아있다(아래 6번 항목).
-   실제 Google API 호출은 이번에도 0건, 모든 플래그 false 유지.
+9. **외부 검증 요청서**: `docs/2026-09-03-m1-google-sandbox-verification-request.md`(v1) 작성
+   완료 — official 계정 Calendar+Meet+Smart Notes 통합 검증, 객체·호출 상한, DWD scope,
+   통제된 이메일 수신자, 테스트 데이터 정리 순서, 임시 권한·플래그 복원 방법 포함. 실제
+   Google API 호출은 0건, 모든 플래그 false 유지 — **승인 대기 상태**(아래 §9 최종 보완에서
+   합성 회의 시간 상한을 "최대 20분, Smart Notes 생성 확인 시 즉시 종료"로 재조정).
+
+## 9. 2026-09-03 조건부 승인 최종 보완(4개 항목)
+
+제품 오너가 8절의 보완을 확인하고 **M1을 조건부 승인**하면서 마지막 4가지를 추가 지시했다.
+같은 세션에서 전부 반영·검증했다(push/실제 Sandbox 호출은 계속 금지, M2 미착수).
+
+1. **상담 진행 readiness와 상담 완료 readiness 분리**: 기존 단일 `readiness` 필드를
+   `consultReadiness`(동의 확인 + Smart Notes ON)와 `completionReadiness`(그 위에 원본
+   자동 연결 + 비어있지 않은 검토 요약)로 분리(`app/admin/consultation-scheduling-actions.ts`
+   의 `computeConsultReadiness()`/`computeCompletionReadiness()`).
+2. **`admin_record_consultation_outcome()` 4개 조건 전부 강제**: `consent_confirmed_at` 존재,
+   `smart_notes_config_status='applied'`, `smart_notes_drive_file_id` 존재,
+   `admin_review_summary`가 공백이 아닌 값 — 넷 중 하나라도 없으면 `completed` 전이·outcome
+   기록을 전부 거부(부분 허용 없음). 로컬 psql로 4가지 실패 케이스(동의 없음/Smart Notes
+   미활성/원본 미연결/요약 공백)와 성공 케이스를 각각 실측 확인.
+3. **관리자 화면 구분 표시**: `ConsultationSchedulingPanel.tsx`에 "상담 진행 준비"/"상담 완료
+   준비" 문구를 별도 라인으로 표시, 완료 불가 사유별 안내. Smart Notes 원본 매칭 실패
+   ("완료 불가 — Smart Notes 원본이 아직 자동 연결되지 않음")일 때는 "상담 결과 기록" 버튼을
+   비활성화하고 "Smart Notes 재처리" 버튼만 노출 — 고객에게 원본을 노출하는 경로는 여전히
+   없음(관리자 전용 컬럼 select만 존재).
+4. **재처리 경로 신규 구현**: `reprocessUnlinkedSmartNotesEvents()`(`lib/consultation/
+   calendar-sync.ts`) — 매칭 실패로 `linked=false`로 남은 이벤트를 다시 매칭 시도(대개
+   웹훅이 상담의 `google_meeting_code` 저장 전에 먼저 도착하는 레이스가 원인). 관리자 화면
+   "Smart Notes 미매칭 재처리" 버튼으로 실행. 신규 테스트 2건(재매칭 성공/여전히 미매칭)
+   추가.
+5. **테스트**: 성공(psql 실측, DB 레벨 4조건 전부 충족), 원본 미연결(psql 실측 + 재처리
+   테스트), 요약 누락(psql 실측, 공백 문자열 포함), 중복 Workspace Event(기존 dedup 테스트
+   재확인), 매칭 실패 후 재처리(신규 vitest 2건) — 각각 별도로 검증.
+6. **문서 정리**: 마스터 로드맵 M1 절의 "Smart Notes 원본 연결은 이번 범위에서 만들지 않음"
+   문구 제거, `CURRENT.md`의 "요청서 작성 예정"을 "작성 완료·승인 대기"로 정정, 이 실행
+   로그(8절)의 "요청서 미작성" 문구 정정, `docs/CURRENT.md` M1 절 제목을 "조건부 승인, push
+   대기"로 갱신.
+7. **Sandbox 요청서 합성 회의 상한**: R6 15/N 실측(Smart Notes 생성 확인까지 약 19분)을
+   근거로 "최대 5분"이 비현실적이었음을 인정하고 "최대 20분, Smart Notes 생성 확인 시 즉시
+   종료"로 수정. 실제 실행은 여전히 별도 승인 대상, 이번에도 호출 없음.
+- **검증**: 로컬 `supabase db reset --local` 재적용, `tsc --noEmit`·`next build` 클린, 신규
+  vitest 2건 포함 전체 Vitest 통과, 별도 clean `git worktree`에서 재검증(§8과 동일 방식).
+  로컬 psql로 4조건 게이트의 성공/실패 4가지 케이스 전부 실측 확인.
+- **외부 변경**: 이번에도 0건. `git push` 하지 않음 — M1은 조건부 승인됐지만 push는 별도
+  지시가 있을 때까지 보류.

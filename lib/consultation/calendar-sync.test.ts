@@ -33,7 +33,8 @@ const consultationsUpdatePayloads: Array<Record<string, unknown>> = [];
 const consultationsUpdateFinal = vi.fn().mockResolvedValue({ error: null });
 const issueTokenMock = vi.fn().mockResolvedValue({ error: null });
 
-const fromMock = vi.fn((table: string) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const fromMock = vi.fn((table: string): any => {
   if (table === "consultations") return buildConsultationsTable();
   if (table === "consult_consent_versions") {
     return { select: () => ({ eq: () => ({ maybeSingle: async () => ({ data: { id: "consent-1", title: "v0" }, error: null }) }) }) };
@@ -151,5 +152,65 @@ describe("확인 이메일 중복 발송 방지(요구사항 6)", () => {
     await syncOneConsultationCalendarEvent("consult-1");
 
     expect(sendEmailMock).toHaveBeenCalledTimes(1);
+  });
+});
+
+// M1 요구사항 4(2026-09-03 조건부 승인 보완) — Smart Notes 원본 매칭 실패 후 관리자
+// "재처리" 경로(reprocessUnlinkedSmartNotesEvents). 실제 원인은 대개 웹훅이 상담의
+// google_meeting_code가 저장되기 전에 먼저 도착하는 레이스 — Calendar 동기화가 끝난
+// 뒤 재처리하면 성공적으로 연결될 수 있다는 것을 검증한다.
+describe("Smart Notes 원본 매칭 실패 후 재처리(요구사항 4)", () => {
+  it("이제는 매칭되는 상담이 생겼으면 이벤트를 연결하고 drive_file_id를 반영한다", async () => {
+    const unlinkedEvents = [{ id: "evt-1", google_meeting_code: "abc-defg-hij", drive_file_id: "drive-1" }];
+    const eventUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
+    const consultationUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
+
+    fromMock.mockImplementation((table: string) => {
+      if (table === "smart_notes_generation_events") {
+        return {
+          select: () => ({
+            eq: () => ({ is: () => ({ is: () => ({ not: () => Promise.resolve({ data: unlinkedEvents }) }) }) }),
+          }),
+          update: () => ({ eq: eventUpdateEqMock }),
+        };
+      }
+      if (table === "consultations") {
+        return {
+          select: () => ({ eq: () => ({ maybeSingle: async () => ({ data: { id: "consult-2" }, error: null }) }) }),
+          update: () => ({ eq: consultationUpdateEqMock }),
+        };
+      }
+      throw new Error(`unexpected table ${table}`);
+    });
+
+    const { reprocessUnlinkedSmartNotesEvents } = await import("./calendar-sync");
+    const result = await reprocessUnlinkedSmartNotesEvents();
+
+    expect(result).toEqual({ relinked: 1, stillUnlinked: 0 });
+    expect(eventUpdateEqMock).toHaveBeenCalled();
+    expect(consultationUpdateEqMock).toHaveBeenCalled();
+  });
+
+  it("여전히 매칭되는 상담이 없으면 유실 없이 stillUnlinked로 남긴다", async () => {
+    const unlinkedEvents = [{ id: "evt-2", google_meeting_code: "zzz-zzzz-zzz", drive_file_id: null }];
+
+    fromMock.mockImplementation((table: string) => {
+      if (table === "smart_notes_generation_events") {
+        return {
+          select: () => ({
+            eq: () => ({ is: () => ({ is: () => ({ not: () => Promise.resolve({ data: unlinkedEvents }) }) }) }),
+          }),
+        };
+      }
+      if (table === "consultations") {
+        return { select: () => ({ eq: () => ({ maybeSingle: async () => ({ data: null, error: null }) }) }) };
+      }
+      throw new Error(`unexpected table ${table}`);
+    });
+
+    const { reprocessUnlinkedSmartNotesEvents } = await import("./calendar-sync");
+    const result = await reprocessUnlinkedSmartNotesEvents();
+
+    expect(result).toEqual({ relinked: 0, stillUnlinked: 1 });
   });
 });

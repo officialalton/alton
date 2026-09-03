@@ -2,7 +2,7 @@
 
 import { requireAdmin } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
-import { syncOneConsultationCalendarEvent, cancelSyncedConsultationCalendarEvent, processPendingConsultationCalendarSyncs, retrySmartNotesConfigForConsultation } from "@/lib/consultation/calendar-sync";
+import { syncOneConsultationCalendarEvent, cancelSyncedConsultationCalendarEvent, processPendingConsultationCalendarSyncs, retrySmartNotesConfigForConsultation, reprocessUnlinkedSmartNotesEvents } from "@/lib/consultation/calendar-sync";
 
 // M1 — 관리자 상담 운영(요구사항 1·3·6). 홈페이지 신청은 app/consult-actions.ts,
 // 슬롯/hold/상태전이의 소스오브트루스는 20261009000000_m1_consultation_unification.sql의
@@ -30,26 +30,45 @@ export type ConsultationListItem = {
   google_sync_last_error: string | null;
   smart_notes_config_status: string;
   smart_notes_config_error: string | null;
+  smart_notes_drive_file_id: string | null;
   admin_review_summary: string | null;
   outcome: string | null;
   outcome_notes: string | null;
   prospect_contact_id: string | null;
   consent_version_id: string | null;
   consent_confirmed_at: string | null;
-  /** M1 요구사항 3(2026-09-03) — "동의 확인 + Smart Notes 활성화" 두 조건을 관리자가 한눈에
-   * 볼 수 있는 파생 상태. 서버(admin_record_consultation_outcome)도 이 두 조건을 독립적으로
-   * 다시 검사하므로, 이 필드는 어디까지나 UI 안내용이다. */
-  readiness: "ready" | "consent_pending" | "smart_notes_pending" | "not_applicable";
+  /** M1 요구사항 3(2026-09-03, 2026-09-03 조건부 승인 보완으로 두 단계로 분리) —
+   * "상담 진행 가능"(동의 확인 + Smart Notes ON)과 "상담 완료 가능"(그 위에 Smart Notes
+   * 원본 자동 연결 + 비어있지 않은 관리자 검토 요약)은 서로 다른 시점의 서로 다른 기준이다
+   * — 상담 시작 전에는 원본 연결·검토 요약이 존재할 수 없으므로 같은 게이트로 묶을 수 없다.
+   * 서버(admin_record_consultation_outcome)가 "완료 가능" 4개 조건을 전부 다시 검사하므로,
+   * 이 필드는 어디까지나 UI 안내용이다. */
+  consultReadiness: "ready" | "consent_pending" | "smart_notes_pending" | "not_applicable";
+  completionReadiness: "ready" | "consult_not_ready" | "smart_notes_not_linked" | "summary_missing" | "not_applicable";
 };
 
-function computeReadiness(row: {
+function computeConsultReadiness(row: {
   status: string;
   consent_confirmed_at: string | null;
   smart_notes_config_status: string;
-}): ConsultationListItem["readiness"] {
+}): ConsultationListItem["consultReadiness"] {
   if (row.status !== "scheduled" && row.status !== "completed") return "not_applicable";
   if (!row.consent_confirmed_at) return "consent_pending";
   if (row.smart_notes_config_status !== "applied") return "smart_notes_pending";
+  return "ready";
+}
+
+function computeCompletionReadiness(row: {
+  status: string;
+  consent_confirmed_at: string | null;
+  smart_notes_config_status: string;
+  smart_notes_drive_file_id: string | null;
+  admin_review_summary: string | null;
+}): ConsultationListItem["completionReadiness"] {
+  if (row.status !== "scheduled" && row.status !== "completed") return "not_applicable";
+  if (!row.consent_confirmed_at || row.smart_notes_config_status !== "applied") return "consult_not_ready";
+  if (!row.smart_notes_drive_file_id) return "smart_notes_not_linked";
+  if (!row.admin_review_summary || row.admin_review_summary.trim() === "") return "summary_missing";
   return "ready";
 }
 
@@ -60,13 +79,13 @@ export async function listConsultationsForAdmin(params: { from: string; to: stri
   const { data, error } = await admin
     .from("consultations")
     .select(
-      "id, contact_name, contact_email, contact_phone, student_grade, concerns, status, source, starts_at, ends_at, scheduled_at, hold_expires_at, google_event_id, google_meet_link, google_sync_status, google_sync_retry_count, google_sync_last_error, smart_notes_config_status, smart_notes_config_error, admin_review_summary, outcome, outcome_notes, prospect_contact_id, consent_version_id, consent_confirmed_at"
+      "id, contact_name, contact_email, contact_phone, student_grade, concerns, status, source, starts_at, ends_at, scheduled_at, hold_expires_at, google_event_id, google_meet_link, google_sync_status, google_sync_retry_count, google_sync_last_error, smart_notes_config_status, smart_notes_config_error, smart_notes_drive_file_id, admin_review_summary, outcome, outcome_notes, prospect_contact_id, consent_version_id, consent_confirmed_at"
     )
     .gte("starts_at", params.from)
     .lt("starts_at", params.to)
     .order("starts_at", { ascending: true });
   if (error) throw new Error(error.message);
-  return ((data ?? []) as ConsultationListItem[]).map((row) => ({ ...row, readiness: computeReadiness(row) }));
+  return ((data ?? []) as ConsultationListItem[]).map((row) => ({ ...row, consultReadiness: computeConsultReadiness(row), completionReadiness: computeCompletionReadiness(row) }));
 }
 
 /** 승인 대기(requested) 목록 — hold 만료 여부와 무관하게 전부 보여준다(관리자가 뒤늦게라도 처리 가능). */
@@ -76,12 +95,12 @@ export async function listPendingConsultationRequests(): Promise<ConsultationLis
   const { data, error } = await admin
     .from("consultations")
     .select(
-      "id, contact_name, contact_email, contact_phone, student_grade, concerns, status, source, starts_at, ends_at, scheduled_at, hold_expires_at, google_event_id, google_meet_link, google_sync_status, google_sync_retry_count, google_sync_last_error, smart_notes_config_status, smart_notes_config_error, admin_review_summary, outcome, outcome_notes, prospect_contact_id, consent_version_id, consent_confirmed_at"
+      "id, contact_name, contact_email, contact_phone, student_grade, concerns, status, source, starts_at, ends_at, scheduled_at, hold_expires_at, google_event_id, google_meet_link, google_sync_status, google_sync_retry_count, google_sync_last_error, smart_notes_config_status, smart_notes_config_error, smart_notes_drive_file_id, admin_review_summary, outcome, outcome_notes, prospect_contact_id, consent_version_id, consent_confirmed_at"
     )
     .eq("status", "requested")
     .order("starts_at", { ascending: true });
   if (error) throw new Error(error.message);
-  return ((data ?? []) as ConsultationListItem[]).map((row) => ({ ...row, readiness: computeReadiness(row) }));
+  return ((data ?? []) as ConsultationListItem[]).map((row) => ({ ...row, consultReadiness: computeConsultReadiness(row), completionReadiness: computeCompletionReadiness(row) }));
 }
 
 /** M1 요구사항 3 — Smart Notes 확인·보정을 관리자가 수동으로 재시도(Meet space가 아직 없거나
@@ -167,6 +186,12 @@ export async function recordConsultationOutcome(params: {
 export async function retryFailedConsultationCalendarSyncs(): Promise<{ processed: number }> {
   await requireAdmin();
   return processPendingConsultationCalendarSyncs();
+}
+
+/** M1 요구사항 4 — Smart Notes 원본 매칭 실패 이벤트를 재처리(대개 레이스로 인한 일시적 실패). */
+export async function reprocessUnlinkedConsultationSmartNotesEvents(): Promise<{ relinked: number; stillUnlinked: number }> {
+  await requireAdmin();
+  return reprocessUnlinkedSmartNotesEvents();
 }
 
 // =========================================================================

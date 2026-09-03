@@ -16,6 +16,8 @@ import {
   cancelConsultationRequest,
   recordConsultationOutcome,
   retryFailedConsultationCalendarSyncs,
+  retryConsultationSmartNotesConfig,
+  reprocessUnlinkedConsultationSmartNotesEvents,
   listConsultAvailabilityRules,
   addConsultAvailabilityRule,
   deactivateConsultAvailabilityRule,
@@ -41,6 +43,22 @@ const OUTCOME_LABEL: Record<string, string> = {
   regular_recommended: "정규 진행 권장",
   on_hold: "보류",
   closed: "종료",
+};
+
+// M1 요구사항 3(2026-09-03 조건부 승인 보완) — "상담 진행 가능"과 "상담 완료 가능"은
+// 서로 다른 시점의 서로 다른 기준이라 별도로 표시한다.
+const CONSULT_READINESS_LABEL: Record<string, string> = {
+  ready: "상담 진행 준비 완료(동의 확인 + Smart Notes ON)",
+  consent_pending: "상담 진행 불가 — 동의 확인 대기",
+  smart_notes_pending: "상담 진행 불가 — Smart Notes 활성화 확인 필요",
+  not_applicable: "-",
+};
+const COMPLETION_READINESS_LABEL: Record<string, string> = {
+  ready: "상담 완료 처리 가능",
+  consult_not_ready: "완료 불가 — 상담 진행 조건(동의+Smart Notes) 미충족",
+  smart_notes_not_linked: "완료 불가 — Smart Notes 원본이 아직 자동 연결되지 않음(재처리 대상)",
+  summary_missing: "완료 불가 — 관리자 검토 요약 미작성",
+  not_applicable: "-",
 };
 
 function formatDateTime(iso: string | null): string {
@@ -125,12 +143,20 @@ export default function ConsultationSchedulingPanel() {
       <section className="mb-8">
         <div className="flex items-center justify-between mb-2">
           <h2 className="text-[14px] font-extrabold text-ink">승인 대기 상담 신청 ({pending.length})</h2>
-          <button
-            className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5"
-            onClick={() => withBusy("__retry", async () => { await retryFailedConsultationCalendarSyncs(); })}
-          >
-            Calendar 재처리 실행
-          </button>
+          <div className="flex gap-2">
+            <button
+              className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5"
+              onClick={() => withBusy("__retry", async () => { await retryFailedConsultationCalendarSyncs(); })}
+            >
+              Calendar 재처리 실행
+            </button>
+            <button
+              className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5"
+              onClick={() => withBusy("__retry_smart_notes", async () => { await reprocessUnlinkedConsultationSmartNotesEvents(); })}
+            >
+              Smart Notes 미매칭 재처리
+            </button>
+          </div>
         </div>
         {loading ? (
           <p className="text-[13px] text-grey-500">불러오는 중...</p>
@@ -206,6 +232,12 @@ export default function ConsultationSchedulingPanel() {
                 )}
                 {c.outcome && ` · 결과: ${OUTCOME_LABEL[c.outcome] ?? c.outcome}`}
               </p>
+              <p className="text-[12px] mt-1.5" style={{ color: c.consultReadiness === "ready" ? "#16a34a" : "#b91c1c" }}>
+                {CONSULT_READINESS_LABEL[c.consultReadiness]}
+              </p>
+              <p className="text-[12px] mt-0.5" style={{ color: c.completionReadiness === "ready" ? "#16a34a" : "#b91c1c" }}>
+                {COMPLETION_READINESS_LABEL[c.completionReadiness]}
+              </p>
               <div className="flex flex-wrap gap-2 mt-3">
                 <button
                   disabled={busyId === c.id}
@@ -225,11 +257,22 @@ export default function ConsultationSchedulingPanel() {
                 >
                   취소
                 </button>
+                {c.completionReadiness === "smart_notes_not_linked" && (
+                  <button
+                    disabled={busyId === c.id}
+                    className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50"
+                    onClick={() => withBusy(c.id, () => retryConsultationSmartNotesConfig(c.id))}
+                  >
+                    Smart Notes 재처리
+                  </button>
+                )}
                 <button
-                  disabled={busyId === c.id}
+                  disabled={busyId === c.id || c.completionReadiness !== "ready"}
+                  title={c.completionReadiness !== "ready" ? COMPLETION_READINESS_LABEL[c.completionReadiness] : undefined}
                   className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50"
                   onClick={() => {
-                    const summary = window.prompt("고객 노출 가능한 관리자 검토 요약을 입력하세요(Smart Notes 원본은 자동 공개되지 않습니다).") ?? "";
+                    const summary = window.prompt("고객 노출 가능한 관리자 검토 요약을 입력하세요(공백 불가, Smart Notes 원본은 자동 공개되지 않습니다).") ?? "";
+                    if (summary.trim() === "") return;
                     const outcome = window.prompt("결과를 입력하세요: trial_recommended / regular_recommended / on_hold / closed") as
                       | "trial_recommended" | "regular_recommended" | "on_hold" | "closed" | null;
                     if (!outcome || !(outcome in OUTCOME_LABEL)) return;

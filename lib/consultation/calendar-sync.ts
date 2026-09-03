@@ -268,3 +268,47 @@ export async function cancelSyncedConsultationCalendarEvent(consultationId: stri
     console.error(JSON.stringify({ type: "m1_consult_calendar_delete_failed", consultationId, error: message }));
   }
 }
+
+type UnlinkedSmartNotesEventRow = {
+  id: string;
+  google_meeting_code: string | null;
+  drive_file_id: string | null;
+};
+
+/**
+ * 관리자 수동 재처리(요구사항 4) — Smart Notes 원본 매칭 실패(`linked=false`, `session_id`/
+ * `consultation_id` 둘 다 null)로 남은 이벤트를 다시 매칭 시도한다. 실제 원인은 대개
+ * 레이스(Smart Notes 이벤트가 상담의 `google_meeting_code`가 아직 저장되기 전에 먼저
+ * 도착)이므로, Calendar 동기화가 나중에 끝난 뒤 이 재처리가 성공적으로 연결할 수 있다.
+ * 이번에도 매칭에 실패하면 그대로 `linked=false`로 남아 다음 재처리 대상이 된다(유실 없음).
+ */
+export async function reprocessUnlinkedSmartNotesEvents(): Promise<{ relinked: number; stillUnlinked: number }> {
+  const admin = createAdminClient();
+  const { data: candidates } = await admin
+    .from("smart_notes_generation_events")
+    .select("id, google_meeting_code, drive_file_id")
+    .eq("linked", false)
+    .is("session_id", null)
+    .is("consultation_id", null)
+    .not("google_meeting_code", "is", null);
+
+  let relinked = 0;
+  let stillUnlinked = 0;
+  for (const row of (candidates ?? []) as UnlinkedSmartNotesEventRow[]) {
+    const { data: consultation } = await admin
+      .from("consultations")
+      .select("id")
+      .eq("google_meeting_code", row.google_meeting_code ?? "")
+      .maybeSingle();
+    if (!consultation) {
+      stillUnlinked += 1;
+      continue;
+    }
+    await admin.from("smart_notes_generation_events").update({ consultation_id: consultation.id, linked: true }).eq("id", row.id);
+    if (row.drive_file_id) {
+      await admin.from("consultations").update({ smart_notes_drive_file_id: row.drive_file_id }).eq("id", consultation.id);
+    }
+    relinked += 1;
+  }
+  return { relinked, stillUnlinked };
+}
