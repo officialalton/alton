@@ -40,8 +40,11 @@
 v1 §1과 동일 — `alton-integration-sandbox` 프로젝트, `official@alton.education`(상담
 organizer), 담당 선생님 테스트 계정(수업 organizer), 신규로 추가되는 것은 아래뿐:
 
-- **attendee 테스트 계정 2개**: 상담용 1개(외부 이메일 역할), 학생용 1개(이미 검증된
-  `@alton.education` 또는 테스트 학생 계정) — 새 실제 개인 이메일을 쓰지 않는다.
+- **attendee 계정은 `matchbox512@snu.ac.kr` 하나뿐이다** — 상담 신청자 이메일과 정규수업
+  테스트 학생 계정 이메일을 **동일하게 이 주소로 맞춘다**(역할별로 별도 계정 2개를 만들지
+  않는다 — 학생 계정이라면 이 이메일로 `email_confirmed_at`이 채워져 있어야 정규수업
+  Calendar 동기화가 attendee를 추가한다, §STEP 6-1 참고). 새 실제 개인 이메일을 추가로
+  쓰지 않는다.
 - **Workspace Events 구독 객체**: organizer당 최대 1개, v1이 이미 만들었다가 정리한
   것과 별개로 새로 만든다(재사용 아님 — v1 종료 시 이미 삭제됐으므로).
 
@@ -51,12 +54,15 @@ organizer), 담당 선생님 테스트 계정(수업 organizer), 신규로 추�
   기준, 시간변경은 같은 이벤트 재사용.
 - Workspace Events 구독: organizer당 최대 1개, 총 **최대 2개**(상담 organizer 1 + 선생님
   organizer 1) — 검증 종료 즉시 삭제.
-- 이메일 수신자: **`matchbox512@snu.ac.kr`만** — 별도 지시가 없으면 다른 주소로 발송하지
-  않는다. 최대 예상 발송 수: 상담 확정 Calendar 초대(Google 네이티브, ALTON 커스텀 메일
-  아님) 1건 + 시간변경 알림 1건 + (Calendar 실패를 의도적으로 재현하지 않는 한) ALTON
-  fallback 이메일은 발송 안 될 것으로 예상.
-- 합성 회의: 상담용 1회, 최대 **20분 — Smart Notes 생성 확인 시 즉시 종료**(R6 15/N
-  실측 근거, v1과 동일 상한).
+- 이메일·Calendar 알림 수신자: **`matchbox512@snu.ac.kr`만** — 별도 지시가 없으면 다른
+  주소로 보내지 않는다(상담 신청·정규수업 학생 attendee 전부 이 한 계정). 예상 발송/알림:
+  Calendar 네이티브 초대(상담) 1건 + 네이티브 초대(정규수업) 1건 + 시간변경 네이티브 알림
+  1건. **커스텀 SMTP fallback 이메일은 이 검증에서 의도적으로 유도하지 않는다** — Calendar
+  초대가 정상 성공하는 경로만 검증하고, 실패를 인위적으로 재현해 fallback 발송을 트리거하지
+  않는다(그런 경우 커스텀 이메일도 항상 같은 `matchbox512@snu.ac.kr`로만 갈 것이므로 별도
+  상한을 두지 않되, 이번 절차 어디에도 fallback을 의도적으로 발생시키는 단계는 없다).
+- 합성 회의: 최대 1회, 최대 **20분 — Smart Notes 생성 확인 시 즉시 종료**(R6 15/N 실측
+  근거, v1과 동일 상한).
 - IAM: v1과 동일한 좁은 조건(`environment:development`)의 임시 WIF binding, 검증 종료
   즉시 제거 후 `get-iam-policy` 재조회로 원복 확인.
 
@@ -74,8 +80,10 @@ organizer), 담당 선생님 테스트 계정(수업 organizer), 신규로 추�
 ## 5. 승인 전 확인 사항
 
 - [ ] §1의 6가지 신규 검증 항목에 동의
-- [ ] §3 상한에 동의(특히 이메일 수신자 `matchbox512@snu.ac.kr` 고정)
-- [ ] attendee 테스트 계정 2개 지정
+- [ ] §3 상한에 동의(이메일·Calendar 알림 수신자 `matchbox512@snu.ac.kr` 하나로 고정,
+      상담 신청자와 정규수업 테스트 학생 계정 전부 이 주소)
+- [ ] 정규수업 검증용 테스트 학생 계정의 `auth.users.email`이 실제로
+      `matchbox512@snu.ac.kr`인지 사전 확인(§STEP 6-1)
 - [ ] 검증 시각(합성 회의 포함이므로 사람이 직접 참여)
 
 실제 외부 호출, Production·원격 DB 접근, 추가 이메일 발송, `git push`는 이번 문서

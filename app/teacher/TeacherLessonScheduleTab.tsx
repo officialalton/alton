@@ -7,11 +7,13 @@ import type { AvailabilityExceptionRow } from "./availability-actions";
 import MonthCalendar, { type DayBadge } from "@/app/components/MonthCalendar";
 import { dateKeyInTimezone, dateKeysCoveredByInterval, buildWeekGrid, todayKeyInTimezone } from "@/lib/calendar-date-utils";
 
+// 2026-09-03 정책 전환(요구사항 1) — 선생님이 organizer로 생성한 Calendar 이벤트의
+// 생성·변경·취소·동기화 상태. 내부 Google 오류 원문은 노출하지 않는다(관리자 화면 전용).
 const SYNC_STATUS_LABEL: Record<string, string> = {
-  pending: "Calendar 연동 준비 중",
-  synced: "Calendar 연동 완료",
-  failed: "Calendar 연동 재시도 중",
-  reconciliation_needed: "Calendar 연동 확인 필요(관리자 처리 중)",
+  pending: "내 Calendar에 일정 생성 준비 중",
+  synced: "내 Calendar에 일정 생성됨(학생 초대 발송)",
+  failed: "Calendar 일정 생성 재시도 중",
+  reconciliation_needed: "Calendar 일정 생성 실패 — 관리자 조치 중",
 };
 
 function formatDateTime(iso: string, timezone: string): string {

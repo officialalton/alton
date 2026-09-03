@@ -27,11 +27,13 @@ function formatDateTime(iso: string, timezone: string): string {
   }).format(new Date(iso));
 }
 
+// 2026-09-03 정책 전환(요구사항 1) — Calendar 네이티브 초대가 학생 본인에게 발송되므로
+// 그 발송 상태를 보여준다. 내부 Google 오류 원문은 절대 노출하지 않는다(관리자 화면에만).
 const SYNC_STATUS_LABEL: Record<string, string> = {
-  pending: "Calendar 연동 준비 중",
-  synced: "Calendar 연동 완료",
-  failed: "Calendar 연동 재시도 중",
-  reconciliation_needed: "Calendar 연동 확인 필요(관리자 처리 중)",
+  pending: "Calendar 초대 발송 준비 중",
+  synced: "Calendar 초대 발송 완료",
+  failed: "Calendar 초대 발송 재시도 중",
+  reconciliation_needed: "Calendar 초대 발송 실패 — 관리자 조치 중",
 };
 
 export type LessonBookingTabProps = {

@@ -258,19 +258,54 @@ alton.education` 소유 Calendar 이벤트+Meet 생성, 확인 이메일(`matchb
   미검증 차단 1건 등) 포함 전체 Vitest 832건, `tsc --noEmit`·`next build` 클린, 전체
   Playwright 52건(`--workers=1`) 중 51건 통과(1건은 이 작업과 무관한 기존 R4 동시성
   테스트의 알려진 플레이키니스 — 단독 재실행 시 즉시 통과, 회귀 아님을 재확인).
-- **미완료**: 학생·보호자·선생님용 기존 예약 화면(`LessonBookingTab.tsx` 등)에 새 Calendar
-  상태 문구를 아직 반영하지 못함(관리자 화면만 갱신) — 다음 세션 항목으로 남김. 실제
-  Google Sandbox 재검증(구독 생성 포함 통합 재검증)은 v2 요청서 작성만 완료, 승인·실행
-  대기.
-- **외부 변경(이번 후속 세션 자체)**: Claude 세션이 실행한 실제 Google API 호출, 실제
-  이메일 발송, Production/원격 DB 접근 전부 0건. `CALENDAR_SYNC_ALLOW_REAL_CALLS` 등 모든
-  플래그 기본값(false/미설정) 유지, 세션 중 한 번도 전환하지 않았다. **제품 오너가 이
-  세션 흐름 중 직접 실행한 것은 위에 기술한 대로**: 실제 Google Calendar/Meet 객체 생성
-  후 정리, 실제 이메일 2통(`matchbox512@snu.ac.kr`만), 임시 Gmail SMTP 앱 비밀번호
-  일시 사용 후 제거 — Claude가 대행하지 않았고, 사후에 저장소·설정 파일에 흔적이 없음을
-  확인만 했다. `git push`는 여전히 하지 않았다 — 로컬 커밋만 존재.
-- push는 제품 오너가 최종 확인 후 별도로 지시할
-  때만 한다(이 세션은 지시받지 않아 push하지 않았다).
+### M1 — 역할별 Calendar 상태 표시 + 검증 스크립트/요청서 v2 정정(2026-09-03, 같은 날 세 번째 후속)
+
+**이 절이 끝난 시점에만 M1 로컬 구현을 완료로 표시한다.** 위 두 절(코드 구현, Sandbox
+실측 결과+구독 수명주기)에 이어 마지막 잔여 항목을 마감했다:
+
+- **역할별 Calendar 상태 표시**: 학생·보호자(같은 `LessonBookingTab.tsx`를 자녀별로
+  재사용)·선생님(`TeacherLessonScheduleTab.tsx`) 예약 화면은 이미 R6부터
+  `google_sync_status` 기반 상태 배지를 갖고 있었다 — 이번엔 그 문구를 Calendar 네이티브
+  초대 정책에 맞게 정정했다: 학생 화면은 "Calendar 초대 발송 준비 중/완료/재시도 중/실패
+  — 관리자 조치 중", 선생님 화면은 "내 Calendar에 일정 생성 준비 중/생성됨(학생 초대
+  발송)/재시도 중/실패 — 관리자 조치 중". 보호자는 학생과 동일 컴포넌트를 자녀별로 읽기
+  전용에 가깝게 재사용하며 attendee라는 표현은 어디에도 쓰지 않는다(자녀 이름과 상태만
+  표시). 내부 Google 오류 원문·개인정보는 이 세 화면 어디에도 노출하지 않는다(원문은
+  관리자 전용 `google_sync_last_error`/`google_sync_error` 컬럼에만 남고, 학생/보호자/
+  선생님 화면은 고정된 한국어 라벨만 매핑해서 보여준다 — 코드 리뷰로 확인).
+- **Sandbox 검증 스크립트 v2 갱신**: `scripts/m1-sandbox-verification.sh`를 v2 절차로
+  다시 썼다 — attendee(상담 신청자=정규수업 테스트 학생=`matchbox512@snu.ac.kr` 계정
+  하나로 통일), `sendUpdates=all`, guest 제한 3종, Workspace Events 구독 생성·갱신·삭제,
+  자동 연결, 외부 attendee의 Smart Notes 원본 접근 차단 확인을 전부 포함. v1 전용 절차
+  (attendee 없는 이벤트 생성, fallback 이메일을 의도적으로 유도하는 절차)는 제거했다.
+  파일에 비밀값은 여전히 없다(이전에도 없었음, 재확인) — 모든 자격증명은 실행자가 그때
+  셸/`.env.local`에 직접 넣고 검증 종료 즉시 빼는 것을 전제로 한다.
+- **Sandbox 요청서 v2 정정**: `docs/2026-09-03-m1-google-sandbox-verification-request-v2.md`
+  §2·§3·§5를 수정 — attendee 테스트 계정을 2개에서 **`matchbox512@snu.ac.kr` 1개로
+  통일**(역할 검증을 위해 계정을 늘리지 않음), 상담·수업 이벤트 각 최대 1개·구독
+  organizer당 최대 1개 상한은 그대로 유지, 커스텀 SMTP fallback은 이 검증에서 의도적으로
+  실패를 유도해 발송시키지 않는다고 명시. 외부 attendee의 Smart Notes 원본 접근 차단
+  확인 절차는 그대로 유지. 실제 외부 호출은 여전히 이 문서만으로는 실행되지 않는다 —
+  별도 승인 후에만.
+- **SMTP 자격증명 회전 절차 문서화(실행 아님)**: 신규
+  `docs/2026-09-03-smtp-credential-rotation-procedure.md` — 새 앱 비밀번호 생성 → Vercel
+  Production 값 교체 → 통제된 테스트(팀 내부 주소로 기존 발송 경로 1건 실행) → 기존
+  비밀번호 폐기 순서의 무중단 절차만 정의했다. 이번 세션은 앱 비밀번호를 새로 만들지도,
+  Vercel Production 값을 바꾸지도, 기존 비밀번호를 폐기하지도 않았다 — 실제 회전은 제품
+  오너의 별도 명시적 승인 후에만 실행한다.
+- **검증**: 라벨 변경 3곳(`app/student/LessonBookingTab.tsx`, `app/teacher/
+  TeacherLessonScheduleTab.tsx` — 보호자는 학생 컴포넌트 재사용이라 별도 변경 없음) 반영 후
+  `tsc --noEmit` 클린 재확인, 관련 테스트에 하드코딩된 구 라벨 문자열 참조 없음을 grep으로
+  확인(테스트 깨짐 없음).
+- **미완료**: 실제 Google Sandbox 재검증(v2, 구독 생성 포함) — 요청서·스크립트 작성만
+  완료, 승인·실행 대기. SMTP 자격증명 실제 회전 — 절차만 문서화, 실행 대기.
+- **외부 변경(이번 세 번째 후속 세션 자체)**: Claude 세션이 실행한 실제 Google API 호출,
+  실제 이메일 발송, Production/원격 DB 접근, IAM·Vercel 설정 변경 전부 0건.
+  `CALENDAR_SYNC_ALLOW_REAL_CALLS` 등 모든 플래그 기본값(false/미설정) 유지. `git push`
+  하지 않음 — 로컬 커밋만 존재.
+
+push는 제품 오너가 최종 확인 후 별도로 지시할 때만 한다(이 세션은 지시받지 않아
+push하지 않았다).
 
 ## `material_version_id` 정책(R9 이관, 2026-09-02 명문화)
 
