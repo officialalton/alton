@@ -109,58 +109,88 @@
   - **14/N 완료(2026-09-02, 이번 세션, 문서만 정정 — 코드 변경 없음)** — 제품 오너가 승인 전 Sandbox 요청서 v4의 객체 범위·Smart Notes 정리 방식만 정정 지시. v5로 개정: (1) §3을 "동시 존재 최대 4개(E1~E4) / 누적 생성 최대 5개(재생성분 E3′ 포함) / Meet space 누적 최대 4개"로 정정하고, 어느 예약을 어떤 순서로 재사용해 시간 변경·삭제 후 재생성·삭제 후 정식 취소를 모두 검증할지 명시(추가 테스트 예약 없음). (2) Smart Notes 증적을 Shared Drive로 이동·보존하는 선택지 삭제(R8 범위) — 식별정보만 기록하고 합성 파일은 선생님 Sandbox Drive에서 정리(삭제)하는 것으로 고정, 외부 변경 목록에도 명시.
   - **15/N 완료(2026-09-03, 이번 세션) — 실제 Google Sandbox 통합 검증 및 Calendly/Zoom 제거 완료.** 제품 오너 승인(v5 범위 전체, DWD scope 실제 확인 후 일괄 실행)에 따라 `gate-c-automation@...`에 임시 `environment:development` WIF IAM binding을 좁게 추가(Production 바인딩 불변)하고, `teacher1@alton.education` 실제 계정으로 로컬 dev 환경에서 실제 Google API를 호출해 검증했다. **실제 결과**: Calendar/Meet 생성·수정·삭제(E1~E4), FreeBusy 충돌·외부 바쁨 블록, Google 시간 변경 양방향(반영/유지), Google 삭제 후 재생성/정식 취소, Smart Notes 실회의(약 19분) 생성·연결, Workspace Events 구독·Pub/Sub 실제 수신, Meet 참가자 기록 조회까지 전부 실측 통과. **실제 버그 3건 발견·수정**: (1) 멱등 재요청이 자기 자신이 만든 Calendar 이벤트와 FreeBusy 충돌 오탐(`lib/booking/create-booking.ts`), (2) `privateExtendedProperty` 와일드카드 미지원으로 외부 변경 감지가 항상 무동작(`lib/google-calendar.ts`, `lib/booking/external-change-detection.ts`), (3) Workspace Events 실제 페이로드는 이벤트 타입이 본문이 아니라 Pub/Sub 메시지의 `ce-type` 속성에 있고 Smart Notes 본문엔 `smartNote.name`만 있어 Drive 파일 ID·meetingCode를 추가 API 호출로 채워야 함(`lib/google-workspace-events.ts`, `app/api/webhooks/workspace-events/route.ts`, `lib/google-meet.ts`) — meetingCode/driveFileId 해석은 도메인 위임 관리자(official@alton.education) subject로 조직 내 임의 회의를 조회할 수 있음을 실측 확인해 해결. **미해결 외부 gap(코드로 해결 불가, 비차단)**: Meet Space `smartNotesConfig` PATCH가 `meetings.space.settings` scope로도 일관되게 403 — Google Admin Console DWD 등록 확인이 추가로 필요(보호자 Smart Notes 거부 옵트아웃이 API로는 실제로 적용되지 않음, 신고 대상). 검증 후 정해진 순서대로 정리 완료: 생성했던 Calendar 이벤트 전부 삭제, Workspace Events 구독 삭제, 합성 Smart Notes Google Doc 삭제, 테스트 fixture DB row 전부 삭제(`teachers.workspace_email` 원복 포함), `/tmp` 임시 스크립트·자격증명 삭제, 마지막으로 임시 IAM binding 제거 후 `get-iam-policy` 재조회로 Production 바인딩만 남았음을 확인. 이 통합 검증이 실제로 전부 통과해 **Calendly/Zoom 완전 제거**를 진행: `CalendlyWidget.tsx`/`app/api/webhooks/calendly/*`/`scripts/register-calendly-webhook.mjs`/`app/student/booking-data.ts` 삭제, `teachers.calendly_scheduling_url`/`legacy_sessions.calendly_event_uri` 컬럼 삭제(`20261007000000_r6_remove_calendly_zoom_lesson_booking.sql`), 관련 env var(`CALENDLY_*`) 제거, 세션뷰 "Zoom 연결됨" 배지를 "Google Meet 연결됨"으로 변경. **상담(consult_requests) 예약 Calendly는 이번 제거 범위가 아니다** — 애초에 R6 스펙 밖이고 `ConsultForm`/`submitConsultRequest`로 Calendly 없이 독립적으로 동작해왔으므로 랜딩페이지는 이제 항상 `ConsultForm`을 쓰고, `consult_requests.calendly_event_uri` 컬럼은 보존(이관하지 않음, 그냥 미사용 컬럼으로 남음). 전체 회귀(Vitest 809건, tsc, `npm run build`) 전부 통과. Production/원격 dev DB/Stripe Production 접근 없음, 모든 Google 관련 플래그 세션 종료 시 기본값(false/미설정) 유지.
 
-### M1 — 상담 기반 재설계, 1차 구현 완료(2026-09-03)
+### M1 — 상담 기반 재설계, 코드 구현 완료·**제품 오너 승인 대기**(2026-09-03)
 
-**다음 실행 순서**가 `M0 R6 마감(완료) → M1 상담·체험 기반 재설계 → M2 → M3 → M4 → M5 R7`이던 것 중
-**M1을 1차로 구현 완료**했다. 상세는 `docs/2026-09-03-m1-migration-execution-log.md`, 인수 기준
-체크박스는 `master-roadmap-v3.md` "근접 실행계획" M1 절 참고.
+**다음 실행 순서**가 `M0 R6 마감(완료) → M1 상담·체험 기반 재설계 → M2 → M3 → M4 → M5 기존 R7 착수`이던 것 중
+**M1의 코드·DB·로컬 검증을 완료**했다 — 단, **아직 제품 오너 승인 전**이며 push도 하지 않았다(로컬
+커밋 3개: `6f978db`→`d8862bb`→`1feb800`). 상세는 `docs/2026-09-03-m1-migration-execution-log.md`,
+인수 기준 체크박스는 `master-roadmap-v3.md` "근접 실행계획" M1 절 참고.
 
 - **DB**: `supabase/migrations/20261009000000_m1_consultation_unification.sql` — 신규
   `prospect_contacts`(비로그인 잠재고객, Auth 계정 미생성), `consult_consent_versions`(동의
   문구 버전형 인터페이스, placeholder 1건 삽입), `consult_availability_rules`/
-  `consult_availability_exceptions`(공용 상담 가능시간, 특정 담당자 비귀속), 기존
-  `consultations`에 `prospect_contact_id`/`source`/`hold_expires_at`/`starts_at`/`ends_at`/
-  `google_*`/`smart_notes_*`/`consent_*`/`outcome*` 컬럼 추가, `consultation_status_events`
-  (INSERT-only 감사 이력), `submit_homepage_consult_request()`/`admin_accept_consultation()`/
-  `admin_reject_consultation()`/`admin_reschedule_consultation()`/`admin_cancel_consultation()`/
-  `admin_record_consultation_outcome()`/`list_open_consult_slots()` SECURITY DEFINER 함수.
-  레거시 `consult_requests`는 동결 보존(rename/삭제 없음, R3와 동일 방침).
-- **중복 방지 이중 방어**: 확정(`status='scheduled'`) 상담끼리는 `tstzrange` 배타 제약(now()
-  의존 없는 IMMUTABLE 조건만 허용되는 Postgres 제약으로 hold 만료 조건은 제약에 못 넣음),
-  아직 hold 중인 `requested` 건끼리·hold-확정 간 겹침은 `submit_homepage_consult_request()`
-  내부의 명시적 `SELECT ... FOR UPDATE`가 트랜잭션 안에서 직렬화한다. hold 만료는 기본
-  30분(운영 데이터로 조정 가능하도록 컬럼값으로 저장, 하드코딩 상수 아님).
-- **앱 레이어**: `app/consult-actions.ts`(홈페이지 신청·슬롯 조회·동의 확인),
-  `app/admin/consultation-scheduling-actions.ts`(수락/거절/시간변경/취소/결과기록/가용성
-  관리), `lib/consultation/calendar-sync.ts`(R6 `lib/google-calendar.ts`/
-  `lib/google-workspace-auth.ts` 재사용, subject를 담당 선생님 대신 `official@alton.education`
-  으로 교체 — `CALENDAR_SYNC_ALLOW_REAL_CALLS` 기본 false 그대로 재사용, 이번 세션에서
-  실제 Google API 호출 0건), `app/admin/ConsultationSchedulingPanel.tsx`(관리자 "상담 운영"
-  탭 — 승인 대기 목록, 오늘/주간/월간 예정 상담, 공용 가능시간 관리), `app/ConsultForm.tsx`
-  (슬롯 선택 추가), `/consult/[id]/consent`(동의 확인 페이지, placeholder 문구 노출).
-- **이메일**: 수락 시 기존 `lib/email.ts`(SMTP, R3부터 존재, 미설정 시 no-op) 그대로 재사용해
-  확정 일시·Meet 링크·일정변경 안내·동의 확인 경로를 한 번에 발송.
+  `consult_availability_exceptions`(공용 상담 가능시간, 특정 담당자 비귀속), `consult_consent_tokens`
+  (동의 확인용 만료형 토큰 — 해시만 저장), 기존 `consultations`에 `prospect_contact_id`/`source`/
+  `hold_expires_at`(더 이상 값이 채워지지 않음, 아래 참고)/`starts_at`/`ends_at`/`google_*`/
+  `google_meeting_code`/`smart_notes_*`/`consent_*`/`outcome*`/`confirmation_email_*` 컬럼 추가,
+  `consultation_status_events`(INSERT-only 감사 이력), `submit_homepage_consult_request()`/
+  `admin_accept_consultation()`/`admin_reject_consultation()`/`admin_reschedule_consultation()`/
+  `admin_cancel_consultation()`/`admin_record_consultation_outcome()`(readiness 게이트 포함, 아래
+  참고)/`list_open_consult_slots()`/`issue_consult_consent_token()`/`resolve_consult_consent_token()`/
+  `confirm_consult_consent_by_token()` SECURITY DEFINER 함수, `smart_notes_generation_events`에
+  `consultation_id`/`pubsub_message_id` 컬럼 추가(R6 웹훅 재사용, 아래 참고). 레거시
+  `consult_requests`는 동결 보존(rename/삭제 없음, R3와 동일 방침).
+- **hold 정책(2026-09-03 정정)**: 최초 구현의 30분 자동 만료는 "고객에게 아무 알림 없이
+  신청이 무효화되는" 별도 설계가 필요한 결정이라는 지적에 따라 **제거**했다 — `requested`
+  상담은 관리자가 수락/거절하기 전까지 슬롯을 계속 점유한다. now() 의존 없는 IMMUTABLE
+  조건만 허용되는 Postgres 배타 제약 제약 덕분에 오히려 더 단순해졌다: `consultations_no_overlap`
+  배타 제약이 `requested`/`scheduled` 둘 다 직접 하드 차단(앱 레벨 `SELECT ... FOR UPDATE`는
+  더 친절한 에러 메시지용 이중 방어일 뿐). 비로그인 신청 남용 방지는 "동일 이메일당 처리
+  대기 중인 신청 1건 제한"으로 대체(UX 변경 없음).
+- **Smart Notes readiness 게이트(2026-09-03 추가)**: `official@alton.education` 조직 차원 Smart
+  Notes 정책이 이미 켜져 있으면 그것으로 충분(`ensureMeetSpaceSmartNotesOn()`이 GET으로 먼저
+  확인, ON이 아닐 때만 기존 canonical PATCH로 보정). 확인·보정이 실패해도 확정 이메일 발송은
+  막지 않되, `admin_record_consultation_outcome()`이 **서버에서** "동의 확인 완료(`consent_confirmed_at`)
+  + Smart Notes 활성화 확인 완료(`smart_notes_config_status='applied'`)" 둘 다 없으면 예외를
+  던져 완료 처리를 강제로 막는다. 관리자 화면(`ConsultationSchedulingPanel.tsx`)에 readiness
+  파생 상태(`ready`/`consent_pending`/`smart_notes_pending`)와 수동 재처리 버튼을 제공.
+- **Smart Notes 원본 자동 연결(2026-09-03 추가, 실제 구현)**: 새 웹훅을 만들지 않고 기존 R6
+  Workspace Events 웹훅(`app/api/webhooks/workspace-events/route.ts`)의 매칭 대상만 넓혔다 —
+  세션 매칭 실패 시 `consultations.google_meeting_code`로 상담도 시도, 매칭되면
+  `consultations.smart_notes_drive_file_id` 갱신(잠재고객에게는 노출 경로 없음, 관리자 전용).
+  Pub/Sub `messageId` 기반 멱등(재전송 시 중복 행 생성 안 함), 매칭 실패는 유실시키지 않고
+  `linked=false`로 보존(관리자 재처리 대상).
+- **동의 확인 토큰화(2026-09-03 정정)**: 상담 UUID를 URL에 노출하지 않는다 — 확인 이메일마다
+  새 만료형 토큰(SHA-256 해시만 DB 저장, 원문은 발송 시점에만 메모리에 존재)을 발급하고,
+  `/consult/[id]/consent` → `/consult/consent?token=...`로 라우트 변경. 위조/재사용/다른 상담
+  확인은 해시 불일치로 차단, 동일 토큰 재확인은 멱등(반복 체크 없음 요구사항과 일치).
+- **이메일 신뢰성(2026-09-03 추가)**: 링크는 `currentRequestOrigin()`(R4 UAT에서 확립된 패턴)
+  기반 절대 URL로 발송(기존 상대경로 버그 수정). `confirmation_email_content_hash`(시간+Meet
+  링크 sha256)로 재처리 시 동일 내용 중복 발송을 막고, 시간 변경 등으로 내용이 실제로 바뀌면
+  새로 발송.
+- **앱 레이어**: `app/consult-actions.ts`(홈페이지 신청·슬롯 조회·토큰 기반 동의 확인),
+  `app/admin/consultation-scheduling-actions.ts`(수락/거절/시간변경/취소/결과기록/readiness/
+  가용성 관리), `lib/consultation/calendar-sync.ts`(R6 `lib/google-calendar.ts`/
+  `lib/google-workspace-auth.ts`/`lib/google-meet.ts` 재사용, subject를 담당 선생님 대신
+  `official@alton.education`으로 교체 — `CALENDAR_SYNC_ALLOW_REAL_CALLS` 기본 false 그대로
+  재사용, 이번 세션에서 실제 Google API 호출 0건), `app/admin/ConsultationSchedulingPanel.tsx`
+  (관리자 "상담 운영" 탭), `app/ConsultForm.tsx`(슬롯 선택), `/consult/consent`(동의 확인
+  페이지, placeholder 문구 노출).
 - **동의 placeholder**: `consult_consent_versions`에 `is_placeholder=true`인 1개 버전만 존재.
   최종 법률 문구는 별도 계약 문서 세션 확정 후 신규 버전을 삽입해야 한다 — 이 문구로 실제
-  법적 동의를 받았다고 취급하지 않는다(문서 의존성으로 명시).
-- **검증**: 로컬 `supabase db reset --local` 반영, 전체 Vitest 811건 통과, `tsc --noEmit` 클린,
-  실브라우저 Playwright E2E(`e2e/m1-consultation-flow.spec.ts`, 홈페이지 신청→관리자 수락→
-  `status='scheduled'` 확인, Google 미설정 상태에서도 확정 자체는 막히지 않음을 실측) 통과.
-  **검증 중 실제 버그 2건 발견·수정**: (1) `list_open_consult_slots()`가 규칙의 `start_time`
-  슬롯 하나만 만들던 것을 `start_time~end_time` 창 전체의 60분 슬롯으로 수정, (2) 겹치는
-  규칙이 있으면 같은 슬롯이 중복 반환되던 것을 `DISTINCT`로 수정(React key 중복 경고로 발견).
-- **미완료(다음 세션 또는 M2~M4로 자연 이관)**: 기존 로그인 보호자·학생·선생님이 보내는
-  상담 요청 유형 UI/구분 로직(스펙상 "신규 보호자 홈페이지 흐름 우선 완성" 원칙에 따라
-  이번 범위에서 의도적으로 제외), Smart Notes 원본 생성 이벤트→`consultations` 자동 연결
-  webhook 배선(컬럼만 준비, R6 `smart_notes_generation_events`와 동일한 패턴으로 후속 구현
-  필요 — 지금은 관리자가 `admin_review_summary`를 수동 기록하는 경로만 있음),
-  `prospect_contacts.converted_guardian_id` 실제 연결 로직(M4), 실제 Google Sandbox 검증
-  (R6 15/N과 동일한 패턴으로 별도 승인 요청 필요 — 이번 세션은 요청서 자체도 아직 작성하지
-  않음, 실제 코드/mock 검증까지만 완료).
+  법적 동의를 받았다고 취급하지 않는다(문서 의존성으로 명시). **placeholder로 수집된 확인은
+  법적 동의가 아니다 — 이 사실은 코드·이메일·확인 화면 어디에도 실제 법적 효력이 있는
+  것처럼 표시하지 않는다.**
+- **검증**: 로컬 `supabase db reset --local` 반영, 전체 Vitest 817건 통과, `tsc --noEmit`·
+  `next build` 클린, 전체 Playwright 52건(`--workers=1`, M1 E2E 포함) 통과. **저장소 무결성**:
+  `6f978db`가 당시 미커밋 R6 파일(`lib/google-meet.ts` 등)에 의존해 단독으로는 빌드되지 않던
+  문제를 발견해 R6 잔여분을 `d8862bb`로 별도 커밋(M1과 R6 변경을 섞지 않음) — 이후 커밋된
+  파일만 있는 별도 임시 `git worktree`에서 `next build`+전체 Vitest를 재실행해 실제로 통과함을
+  확인. hold/readiness/토큰 발급·소비 멱등성은 로컬 psql 직접 호출로도 실측 확인.
+  **검증 중 실제 버그 다수 발견·수정**: `list_open_consult_slots()`가 규칙의 `start_time` 슬롯
+  하나만 만들던 버그(전체 시간창 60분 단위로 수정), 겹치는 규칙의 슬롯 중복 반환(`DISTINCT`
+  추가, React key 중복 경고로 발견), 확인 이메일의 상대경로 URL, `admin_reject_consultation()`/
+  `admin_cancel_consultation()`이 기존 R3 관례(`status='cancelled'`)와 다르게 `status='closed'`를
+  쓰던 불일치(기존 관례로 통일).
+- **미완료(스펙상 의도적으로 M2~M4로 이관, 이번 범위 아님)**: 기존 로그인 보호자·학생·선생님이
+  보내는 상담 요청 유형 UI/구분 로직("신규 보호자 홈페이지 흐름 우선 완성" 원칙),
+  `prospect_contacts.converted_guardian_id` 실제 연결 로직(M4), 실제 Google Sandbox 검증(요청서만
+  작성 예정 — 아래 참고, 이번 세션은 코드/mock/로컬 검증까지만).
 - **외부 변경**: Google/Stripe/DocuSign 실제 API 호출, Production/원격 dev DB 접근, 실제
   이메일 발송 전부 0건. `CALENDAR_SYNC_ALLOW_REAL_CALLS` 등 모든 외부 플래그 기본값(false/
   미설정) 그대로 유지 — 이번 세션에서 한 번도 true로 전환하지 않았다. 로컬 커밋만 생성,
-  `git push` 없음.
+  `git push` 없음. **M1은 아직 제품 오너 승인 전 — 승인 후 이 절 제목에서 "승인 대기" 문구를
+  제거하고 push한다.**
 
 ## `material_version_id` 정책(R9 이관, 2026-09-02 명문화)
 

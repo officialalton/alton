@@ -387,7 +387,7 @@ M3 R5 후속(체험/정규 배정) → M4 상담→체험→정규 전환 통합
   임시 객체·권한·토큰 정리(완료) + 외부 플래그 false/미설정 복원(완료) + `CURRENT.md`와 이
   로드맵 일치(완료).
 
-### M1 — 상담·체험 기반 재설계 *(2026-09-03, 1차 구현 완료 — 아래 참고, 상세는 실행 로그)*
+### M1 — 상담·체험 기반 재설계 *(2026-09-03, 코드 구현 완료·제품 오너 승인 대기 — 아래 참고, 상세는 실행 로그)*
 - [x] 홈페이지 `consult_requests`와 R3 `consultations`를 하나의 정상 상담 흐름으로 통합
       **(2026-09-03)** `app/ConsultForm.tsx`/`app/consult-actions.ts`가 이제 `consultations`
       (+ 신규 `prospect_contacts`)에 직접 쓴다. 레거시 `consult_requests`는 과거 데이터
@@ -399,34 +399,43 @@ M3 R5 후속(체험/정규 배정) → M4 상담→체험→정규 전환 통합
       enum(`homepage`/`admin`/`referral`)만 준비했고, 기존 로그인 사용자가 보내는 상담
       요청 UI·구분 로직은 M1에서 만들지 않았다(신규 보호자 홈페이지 흐름 우선 완성 원칙,
       스펙 원문 그대로).
-- [x] 홈페이지에서 1시간 상담 슬롯 선택, 관리자 수락 대기·슬롯 중복 방지 **(2026-09-03)**
-      `list_open_consult_slots()`/`submit_homepage_consult_request()` — hold 30분 만료,
-      확정(scheduled) 슬롯 배타 제약 + hold 슬롯은 함수 내 `FOR UPDATE` 이중 방어.
+- [x] 홈페이지에서 1시간 상담 슬롯 선택, 관리자 수락 대기·슬롯 중복 방지 **(2026-09-03,
+      정정)** `list_open_consult_slots()`/`submit_homepage_consult_request()` — **30분 자동
+      만료는 제거**(고객 무통보 무효화라 별도 설계 필요, 이번엔 임의로 넣지 않기로 확정),
+      `requested`는 관리자가 처리할 때까지 배타 제약(`consultations_no_overlap`)이 하드
+      점유. 동일 이메일 중복 대기 신청 방지로 남용만 막는다(UX 변경 없음).
 - [x] 관리자 수락 후 공식 관리자 계정(`official@alton.education`) 소유 Calendar·Meet 생성
       **(2026-09-03)** `lib/consultation/calendar-sync.ts` — R6 `lib/google-calendar.ts`/
       `lib/google-workspace-auth.ts` 그대로 재사용, subject만 상담 관리자 계정으로 교체.
       `CALENDAR_SYNC_ALLOW_REAL_CALLS` 기본 false 유지 — 실제 Sandbox 호출은 미실행.
 - [x] 관리자 상담 리스트 및 오늘·주간·월간 캘린더 **(2026-09-03)**
       `app/admin/ConsultationSchedulingPanel.tsx`("상담 운영" 탭).
-- [x] 상담 확정 이메일·Meet 링크·상담 AI 안내·동의 경로 **(2026-09-03)** 수락 시
+- [x] 상담 확정 이메일·Meet 링크·상담 AI 안내·동의 경로 **(2026-09-03, 정정)** 수락 시
       `sendConsultationConfirmationEmail()`(기존 `lib/email.ts` SMTP 재사용, 미설정 시
-      no-op)이 확정 일시·Meet 링크·동의 확인 페이지 링크를 한 번에 발송.
+      no-op)이 확정 일시·Meet 링크·**절대 URL**(`currentRequestOrigin()`)의 동의 확인
+      토큰 링크를 한 번에 발송. 내용 지문(시간+Meet 링크 해시) 기반으로 재처리 시 중복
+      발송하지 않고, 실제로 바뀌면 새로 보낸다.
 - [x] 인증 계정(Auth)과 분리된 잠재고객/상담 연락처 레코드 **(2026-09-03)** `prospect_contacts`
       — Auth 계정을 전혀 만들지 않음, `converted_guardian_id`는 이번 범위에서 컬럼만 준비
       (M4에서 실제 연결 로직 구현).
-- [x] 상담 Smart Notes 생성, 관리자 검토 요약, 잠재고객 기록 연결 **(2026-09-03)**
-      `consultations.smart_notes_config_status`/`admin_review_summary` — Smart Notes 원본
-      Drive 파일 연결(`smart_notes_drive_file_id`)은 컬럼만 준비, 실제 webhook 연결(R6
-      `smart_notes_generation_events`와 동일한 패턴)은 이번 범위에서 만들지 않음(아래
-      "미완료" 참고).
+- [x] 상담 Smart Notes 생성, 관리자 검토 요약, 잠재고객 기록 연결 **(2026-09-03, 실제 자동
+      연결 완료 — 최초 버전에서 컬럼만 준비하고 미룬 것을 이번에 실제 구현)**
+      `consultations.smart_notes_config_status`/`admin_review_summary`에 더해, 기존 R6
+      Workspace Events 웹훅(`app/api/webhooks/workspace-events/route.ts`)이 세션 매칭
+      실패 시 `consultations.google_meeting_code`로도 매칭을 시도해 `smart_notes_drive_file_id`
+      를 자동 갱신한다(새 웹훅 없음, 재사용). Pub/Sub messageId 멱등, 매칭 실패는 유실 없이
+      `linked=false`로 보존. **또한 이번에 서버 readiness 게이트도 추가**: 동의 확인+Smart
+      Notes 활성화 확인 둘 다 없으면 `admin_record_consultation_outcome()`이 완료 처리 자체를
+      막는다.
 - [x] 상담 결과를 체험 진행/보류/종료로 기록 **(2026-09-03)** `admin_record_consultation_outcome()`
       — `trial_recommended`/`regular_recommended`/`on_hold`/`closed`, M2/M3 연결 지점만
       준비(실제 체험 전환·수업권 지급·배정은 하지 않음).
 - [ ] 잠재고객 → 정식 보호자·학생 계정 온보딩 기반 — `converted_guardian_id` 컬럼만 준비,
       실제 온보딩 토큰·전환 로직은 M4에서 구현.
 - [x] 계약·개인정보 문서 세션에서 확정한 상담·체험·정규 동의 경계 적용 **(2026-09-03,
-      placeholder로 적용)** `consult_consent_versions`(버전형 인터페이스) + `/consult/[id]/consent`
-      확인 화면 — **법률 문구는 여전히 미확정**이며 `is_placeholder=true`인 placeholder
+      placeholder로 적용, 정정)** `consult_consent_versions`(버전형 인터페이스) + `/consult/consent?token=...`
+      확인 화면 — 상담 UUID 대신 만료형 해시 토큰으로만 접근(위조·다른 상담 확인 차단).
+      **법률 문구는 여전히 미확정**이며 `is_placeholder=true`인 placeholder
       본문만 들어있다. 최종 문구가 별도 계약 문서 세션에서 확정되면 신규 버전을 삽입해야
       한다(임의 확정 금지 원칙 그대로 유지).
 - **이 단계에서는 R4 수업권·R5 선생님 배정 로직을 임시로 복제하지 않는다** — 준수함(M2/M3

@@ -126,3 +126,46 @@ M0(R6 최종 마감)은 이미 완료 상태였다. 이번 세션은 M1만 진�
 - `CALENDAR_SYNC_ALLOW_REAL_CALLS` 등 모든 외부 플래그: 세션 시작 시 상태(false/미설정) 그대로
   유지, 이번 세션에서 한 번도 변경하지 않음.
 - `git push`: 하지 않음(로컬 커밋만, 사용자 확인 후 별도 push).
+
+## 8. 2026-09-03 보완(제품 오너 M1 미승인, 9개 항목 지시 반영)
+
+M1은 커밋했지만 **아직 승인되지 않은 상태**에서, 제품 오너가 저장소 무결성·정책·보안 문제
+9가지를 지적해 같은 세션에서 보완했다. 커밋은 `6f978db`(1차)를 재작성하지 않고
+`d8862bb`(R6 잔여 반영)·`1feb800`(M1 보완) 신규 커밋으로 이어붙였다.
+
+1. **저장소 무결성**: `6f978db`가 당시 미커밋 R6 파일(`lib/google-meet.ts` 등 90여 개)에
+   의존해 단독 체크아웃으로는 빌드가 안 되던 문제 발견 — R6 잔여 변경을 M1과 분리해
+   `d8862bb`로 별도 커밋(파일 목록은 커밋 메시지 참고). 출처가 불명확한 사용자 소유 변경
+   (`.env.example`/`AGENTS.md`/`CLAUDE.md`/`README.md`/`docs/contracts/*`/`docs/prompts/*`/
+   `docs/superpowers/*`/`docs/tickets.md`/`docs/spec/*`/`docs/README.md`)은 손대지 않고
+   그대로 두었다. 이후 별도 `git worktree`(커밋된 파일만 존재)에서 `next build`+전체
+   Vitest를 재실행해 실제로 통과함을 확인.
+2. **hold 정책**: 30분 자동 만료 제거, `requested`는 관리자 처리 전까지 배타 제약으로
+   하드 점유. 동일 이메일 중복 대기 신청 방지 추가.
+3. **Smart Notes 필수 흐름**: `ensureMeetSpaceSmartNotesOn()`(GET 먼저, org 정책이 이미
+   ON이면 추가 쓰기 없음, 아닐 때만 canonical PATCH) 추가. 확인·보정 실패는 이메일을 막지
+   않되, `admin_record_consultation_outcome()`이 서버에서 "동의 확인+Smart Notes 활성화
+   확인" 둘 다 없으면 완료 처리를 거부(readiness 게이트). 관리자 화면에 readiness 상태와
+   수동 재처리 버튼 추가.
+4. **Smart Notes 원본 자동 연결**: 새 웹훅 없이 기존 R6 Workspace Events 웹훅의 매칭
+   대상을 상담까지 넓힘 — `consultations.google_meeting_code` 추가, `smart_notes_generation_events.
+   consultation_id`/`pubsub_message_id`(멱등) 추가. 매칭 실패는 유실 없이 보존.
+5. **동의 링크·확인 기록**: 상담 UUID 대신 만료형 해시 토큰(`consult_consent_tokens`, 원문
+   미저장)으로만 동의 페이지 접근 — `/consult/[id]/consent` → `/consult/consent?token=...`.
+   `issue_consult_consent_token()`/`resolve_consult_consent_token()`/
+   `confirm_consult_consent_by_token()` 세 함수로 발급·조회·소비(멱등) 분리.
+6. **이메일 신뢰성**: `currentRequestOrigin()` 기반 절대 URL로 수정(기존 상대경로 버그).
+   `confirmation_email_content_hash`로 동일 내용 재발송 방지, 시간 변경 시에는 새로 발송.
+7. **문서 상태 정정**: 이 로그와 `docs/CURRENT.md`/`master-roadmap-v3.md`를 실제 구현 상태에
+   맞게 갱신(위 4번 항목을 "완료 안 됨"에서 "실제 자동 연결 완료"로 정정 등).
+8. **검증**: 로컬 psql 직접 호출로 hold 무기한 점유·동일 이메일 제한·readiness 게이트 차단·
+   토큰 발급/소비 멱등·해시 저장(평문 미저장)을 실측 확인. 신규 유닛 테스트
+   (`lib/consultation/calendar-sync.test.ts` 3건, `workspace-events/route.test.ts` 신규 3건)
+   추가. 전체 Vitest 817건, `tsc --noEmit`, `next build` 클린, 전체 Playwright 52건
+   (`--workers=1`, 기존 R2~R6 스펙 전부 포함) 통과 — 로컬 작업트리와 별도 clean worktree
+   양쪽에서 재확인.
+9. **외부 검증 요청서**: 이번 보완에서는 작성하지 않았다 — Smart Notes readiness/자동 연결
+   로직 자체가 이번에 새로 바뀌어서, 기존 R6 Sandbox 요청서 패턴을 그대로 재사용하되 상담
+   전용 시나리오(official 계정 Calendar+Meet+Smart Notes 통합, 객체 상한, 통제된 수신자,
+   정리 순서)를 반영한 별도 요청서 작성이 다음 세션 필요 항목으로 남아있다(아래 6번 항목).
+   실제 Google API 호출은 이번에도 0건, 모든 플래그 false 유지.
