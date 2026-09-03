@@ -78,11 +78,11 @@ M4(상담→체험→정규 전환 통합)는 로컬 코드·DB·E2E·UI 폴리�
 |---|---|---|
 | 관리자 | `admin@alton.education`(기존 Sandbox 관리자 계정) | 신규 생성 불필요 |
 | 보호자(신규, prospect 겸용) | **`matchbox512@snu.ac.kr`** — 상담 prospect 이메일이자 신규 보호자 로그인 이메일로 그대로 사용 | 서로 다른 신규 이메일을 따로 만들지 않는다. 이 계정으로 로그인 이메일 변경 예외 흐름(§외부 UAT에서는 실행 안 함, 로컬에서만 검증됨)은 시도하지 않는다 |
-| 학생 | **결정 필요** — 보호자와 구분된 별도 이메일 1개 | 제품 오너가 확정하기 전까지 이 세션은 임의로 만들거나 사용하지 않는다. **학생 이메일이 확정되기 전에는 실제 외부 검증을 실행하지 않는다.** |
+| 학생 | **`matchbox512@gmail.com`**(보호자 `matchbox512@snu.ac.kr`와는 별개의 실제 이메일 — 제품 오너 확정) | 보호자 이메일과 절대 혼용하지 않는다(서로 다른 실제 주소) |
 | 선생님 | **`teacher1@alton.education`**(실제 Google Workspace 계정, Calendar/Meet organizer 필요) | `seoyeon@example.com` 같은 로컬 시드 계정은 실제 Google Workspace 계정이 아니므로 이 검증에 쓰지 않는다 — 실제 Calendar 이벤트 organizer가 되려면 진짜 `@alton.education` Workspace 계정이 필요하다. 이 계정에 대해 선생님 배정·가능 시간(teacher_availability_rules)이 원격 DB에 미리 준비돼 있어야 한다(§7 1단계에서 확인). |
 
-**결정 필요(유일하게 남은 항목)**: 학생 테스트 이메일 주소 1개. 확정되면 이
-표를 갱신하고 그 주소로만 진행한다.
+**결정 필요 항목 없음** — 테스트 계정 4개(관리자·보호자·학생·선생님) 전부
+확정됐다.
 
 ## 4. 외부 이메일 상한 재계산(표)
 
@@ -90,14 +90,14 @@ M4(상담→체험→정규 전환 통합)는 로컬 코드·DB·E2E·UI 폴리�
 |---|---|---|---|---|
 | 체험 온보딩 안내 | ALTON 자체 SMTP(`lib/email.ts`) | `matchbox512@snu.ac.kr` | 온보딩 링크 전달 | 1건(멱등 — 재클릭해도 안 늘어남을 로컬에서 이미 확인) |
 | Supabase Auth 계정 확인/recovery(보호자) | Supabase(GoTrue) | `matchbox512@snu.ac.kr` | 계정 생성 확인 + `/set-password` 진입 | 1건(재시도 포함 최대 2건) |
-| 학생 계정 확인 | Supabase(GoTrue) | §3 확정 학생 이메일 | 학생 Auth 계정 생성 확인 | 1건 |
-| 체험 Calendar 초대·정리 알림(60분) | Google Calendar(네이티브 초대, `sendUpdates=all`) | §3 확정 학생 이메일만(보호자 제외 — 기존 정책) | 초대 + 검증 후 이벤트 취소 시 취소 알림 | 초대 1건 + 취소 알림 1건 = 최대 2건 |
+| 학생 계정 확인 | Supabase(GoTrue) | `matchbox512@gmail.com` | 학생 Auth 계정 생성 확인 | 1건 |
+| 체험 Calendar 초대·정리 알림(60분) | Google Calendar(네이티브 초대, `sendUpdates=all`) | `matchbox512@gmail.com`만(보호자 제외 — 기존 정책) | 초대 + 검증 후 이벤트 취소 시 취소 알림 | 초대 1건 + 취소 알림 1건 = 최대 2건 |
 | 정규 Calendar 초대·정리 알림(120분) | Google Calendar(네이티브 초대) | 위와 동일 | 초대 + (검증만 하고 실제 수업 없이 정리할 경우) 취소 알림 | 초대 1건 + 취소 알림 1건 = 최대 2건 |
 | DocuSign 서명 요청·완료 확인 | DocuSign Sandbox | `matchbox512@snu.ac.kr` | 서명 요청 + 서명 완료 확인 | 최대 2건 |
 | Stripe TEST 영수증 | Stripe | `matchbox512@snu.ac.kr` | 결제 확인(TEST 모드는 발송 안 되는 경우도 있음) | 최대 1건 |
 
 **총 예상 발송 수: 최대 11건.** 보호자 관련 메일은 전부 `matchbox512@snu.ac.kr`
-로만, 학생 관련 메일은 §3에서 제품 오너가 확정한 주소로만 간다. **이메일
+로만, 학생 관련 메일은 전부 `matchbox512@gmail.com`으로만 간다. **이메일
 변경 예외 흐름(로그인 이메일을 다른 주소로 바꾸는 것)은 이 외부 UAT에서
 실행하지 않는다** — 이미 로컬 DB 통합 테스트(`app/consult/trial-login-email-change.integration.test.ts`)
 와 컴포넌트 테스트(`ConfirmEmailForm.test.tsx`)로 검증 완료. 지정되지 않은
@@ -196,7 +196,7 @@ M4(상담→체험→정규 전환 통합)는 로컬 코드·DB·E2E·UI 폴리�
 
 - Production 도메인·배포·환경변수에 어떤 형태로든 영향이 발생한 것으로 보이는 경우.
 - 원격 `main`으로의 push가 필요해 보이는 상황(이 검증은 Preview 브랜치로만 진행).
-- §3에서 지정한 주소(`matchbox512@snu.ac.kr`, 확정된 학생 이메일) 외의 실제
+- §3에서 지정한 주소(`matchbox512@snu.ac.kr`, `matchbox512@gmail.com`) 외의 실제
   주소로 메일이 발송된 경우.
 - Stripe가 TEST가 아니라 Live 모드로 동작하는 것으로 보이는 경우.
 - DocuSign이 Sandbox가 아니라 Production 계정으로 발송된 경우.
@@ -240,7 +240,7 @@ M4(상담→체험→정규 전환 통합)는 로컬 코드·DB·E2E·UI 폴리�
 - **제품 오너가 직접 확인해야 하는 화면**:
   1. `matchbox512@snu.ac.kr` 메일함에서 온보딩 링크·DocuSign 서명 요청·서명
      완료·Stripe 영수증 수신 확인.
-  2. §3 확정 학생 이메일 메일함에서 계정 확인 메일·Calendar 초대 수신 확인.
+  2. `matchbox512@gmail.com` 메일함에서 계정 확인 메일·Calendar 초대 수신 확인.
   3. 실제 Google Meet 접속·퇴장(Smart Notes 트리거 확인, 최대 20분).
   4. 실제 DocuSign 서명 완료 페이지.
   5. 실제 Stripe TEST 카드 입력 화면.
@@ -253,7 +253,7 @@ M4(상담→체험→정규 전환 통합)는 로컬 코드·DB·E2E·UI 폴리�
 - Smart Notes 동의 문구, 계약서 템플릿은 **확정 법률 문구가 아닌 placeholder**
   다 — 화면에도 "확정 전 초안" 안내가 이미 붙어있다. 이 검증으로 이 문구가
   실제 고객에게 노출되는 일은 없다 — §3에서 지정한 테스트 계정
-  (`matchbox512@snu.ac.kr`, 확정된 학생 이메일, `teacher1@alton.education`,
+  (`matchbox512@snu.ac.kr`, `matchbox512@gmail.com`, `teacher1@alton.education`,
   기존 관리자 계정) 이외의 누구도 이 흐름에 접근하지 않는다.
 - 계약·법률 문서 자체는 이번 검증에서 수정하지 않는다.
 
