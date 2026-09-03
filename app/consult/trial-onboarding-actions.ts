@@ -57,16 +57,40 @@ export async function linkExistingGuardianToTrialOnboarding(params: {
 
 // 학생별 최초 1회 체험 Smart Notes 동의. 회차마다 다시 묻지 않는다(DB의 유니크
 // 인덱스+멱등 반환이 이를 보장). 비동의 상태로 Smart Notes만 끄는 선택지는 없다
-// — 이 액션 자체가 "동의"만 표현한다.
+// — 이 액션 자체가 "동의"만 표현한다. 동의가 완료되는 즉시(요구사항 5의 "계정
+// 연결과 학생별 체험 동의가 모두 완료된 뒤") 체험수업권 지급까지 한 번에
+// 이어간다 — 지급 실패는 이 액션 실패로 만들지 않고 별도 필드로 알린다(관리자
+// 재처리 대상, consultations.trial_entitlement_grant_status로 이미 추적됨).
 export async function recordTrialSmartNotesConsent(params: {
   childId: string;
   policyVersion: string;
-}): Promise<{ consentId: string }> {
-  const { supabase } = await requireUser();
+}): Promise<{ consentId: string; grantAttempted: boolean; grantError: string | null }> {
+  const { supabase, user } = await requireUser();
   const { data, error } = await supabase.rpc("record_trial_smart_notes_consent", {
     p_child_id: params.childId,
     p_policy_version: params.policyVersion,
   });
   if (error) throw new Error(error.message);
-  return { consentId: data as string };
+
+  const admin = createAdminClient();
+  const { data: consultation } = await admin
+    .from("consultations")
+    .select("id")
+    .eq("child_id", params.childId)
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  let grantAttempted = false;
+  let grantError: string | null = null;
+  if (consultation) {
+    grantAttempted = true;
+    const { error: grantErr } = await admin.rpc("grant_trial_entitlement_for_consultation", {
+      p_consultation_id: consultation.id,
+    });
+    if (grantErr) grantError = grantErr.message;
+  }
+
+  void user; // requireUser()로 로그인·본인 확인만 하고 id 자체는 쓰지 않는다.
+  return { consentId: data as string, grantAttempted, grantError };
 }

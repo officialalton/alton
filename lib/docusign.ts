@@ -100,6 +100,15 @@ export function assertAnchorPresentInDocumentHtml(documentHtml: string, anchorSt
   }
 }
 
+// M4: 다른 외부 연동(Calendar의 CALENDAR_SYNC_ALLOW_REAL_CALLS)과 동일한
+// fail-closed 게이트 — 이 값이 정확히 "true"가 아니면 실제 DocuSign API를
+// 절대 호출하지 않는다. 로컬/Vitest/Playwright 실행에서 실수로 실제 봉투가
+// 발송되는 사고를 막기 위한 최후 방어선(이전까지는 이런 게이트가 없었다 —
+// M4 원클릭 계약 발송을 로컬에서 안전하게 검증하기 위해 이번에 추가).
+export function isDocusignRealCallsAllowed(): boolean {
+  return process.env.DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS === "true";
+}
+
 export async function createEnvelope(params: {
   recipientEmail: string;
   recipientName: string;
@@ -108,6 +117,11 @@ export async function createEnvelope(params: {
   webhookUrl: string;
 }): Promise<{ envelopeId: string }> {
   assertAnchorPresentInDocumentHtml(params.documentHtml, SIGNATURE_ANCHOR);
+  if (!isDocusignRealCallsAllowed()) {
+    throw new Error(
+      "DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS=true가 아니면 실제 DocuSign API를 호출하지 않습니다."
+    );
+  }
   const accessToken = await getAccessToken();
   const res = await fetch(envelopesBaseUrl(), {
     method: "POST",

@@ -7,6 +7,7 @@ import type { StudentListItem } from "./users-data";
 import type { AdminSubject } from "./subject-data";
 import SubjectEnrollmentPanel from "./SubjectEnrollmentPanel";
 import TeacherAssignmentTerminationPanel from "./TeacherAssignmentTerminationPanel";
+import TrialOnboardingPanel from "./TrialOnboardingPanel";
 
 export default function MatchingTab({
   students,
@@ -81,6 +82,7 @@ export default function MatchingTab({
       />
 
       <TeacherAssignmentTerminationPanel />
+      <TrialOnboardingPanel />
     </div>
   );
 }

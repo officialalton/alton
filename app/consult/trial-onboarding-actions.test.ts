@@ -1,11 +1,12 @@
 import { describe, expect, it, vi, beforeEach } from "vitest";
 
-const { adminRpcMock, userRpcMock } = vi.hoisted(() => ({
+const { adminRpcMock, userRpcMock, adminFromMock } = vi.hoisted(() => ({
   adminRpcMock: vi.fn(),
   userRpcMock: vi.fn(),
+  adminFromMock: vi.fn(),
 }));
 vi.mock("@/lib/supabase-admin", () => ({
-  createAdminClient: () => ({ rpc: adminRpcMock }),
+  createAdminClient: () => ({ rpc: adminRpcMock, from: adminFromMock }),
 }));
 vi.mock("@/lib/auth", () => ({
   requireUser: vi.fn().mockResolvedValue({ supabase: { rpc: userRpcMock }, user: { id: "guardian1" } }),
@@ -71,13 +72,49 @@ describe("linkExistingGuardianToTrialOnboarding", () => {
 describe("recordTrialSmartNotesConsent", () => {
   beforeEach(() => vi.clearAllMocks());
 
-  it("동의 기록 RPC를 호출하고 id를 반환한다", async () => {
+  it("동의 기록 후 연결된 상담을 찾아 체험수업권 지급까지 이어간다", async () => {
     userRpcMock.mockResolvedValue({ data: "consent1", error: null });
+    adminFromMock.mockReturnValue({
+      select: () => ({
+        eq: () => ({
+          order: () => ({
+            limit: () => ({
+              maybeSingle: () => Promise.resolve({ data: { id: "consult1" }, error: null }),
+            }),
+          }),
+        }),
+      }),
+    });
+    adminRpcMock.mockResolvedValue({ error: null });
+
     const result = await recordTrialSmartNotesConsent({ childId: "child1", policyVersion: "v0.1" });
-    expect(result).toEqual({ consentId: "consent1" });
+
+    expect(result).toEqual({ consentId: "consent1", grantAttempted: true, grantError: null });
     expect(userRpcMock).toHaveBeenCalledWith("record_trial_smart_notes_consent", {
       p_child_id: "child1",
       p_policy_version: "v0.1",
     });
+    expect(adminRpcMock).toHaveBeenCalledWith("grant_trial_entitlement_for_consultation", {
+      p_consultation_id: "consult1",
+    });
+  });
+
+  it("연결된 상담이 없으면 지급을 시도하지 않는다", async () => {
+    userRpcMock.mockResolvedValue({ data: "consent1", error: null });
+    adminFromMock.mockReturnValue({
+      select: () => ({
+        eq: () => ({
+          order: () => ({
+            limit: () => ({
+              maybeSingle: () => Promise.resolve({ data: null, error: null }),
+            }),
+          }),
+        }),
+      }),
+    });
+
+    const result = await recordTrialSmartNotesConsent({ childId: "child1", policyVersion: "v0.1" });
+    expect(result).toEqual({ consentId: "consent1", grantAttempted: false, grantError: null });
+    expect(adminRpcMock).not.toHaveBeenCalledWith("grant_trial_entitlement_for_consultation", expect.anything());
   });
 });

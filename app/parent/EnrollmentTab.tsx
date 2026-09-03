@@ -1,6 +1,7 @@
 "use client";
 
 import EnrollmentTab from "@/app/student/EnrollmentTab";
+import TrialConversionPanel from "./TrialConversionPanel";
 import type { ChildSubjectEnrollments } from "./enrollment-data";
 
 export default function ParentEnrollmentTab({
@@ -16,6 +17,7 @@ export default function ParentEnrollmentTab({
             {c.childName}
           </div>
           <EnrollmentTab enrollments={c.enrollments} />
+          <TrialConversionPanel enrollments={c.enrollments} />
         </div>
       ))}
     </div>

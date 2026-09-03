@@ -76,6 +76,12 @@ describe("createEnvelope", () => {
     process.env.DOCUSIGN_PRIVATE_KEY = testPrivateKeyPem;
     process.env.DOCUSIGN_BASE_URI = "https://na4.docusign.net";
     process.env.DOCUSIGN_ACCOUNT_ID = "acct-1";
+    // M4: createEnvelope()은 이제 이 플래그가 정확히 "true"가 아니면 항상 즉시
+    // 실패하는 fail-closed 게이트를 통과해야 실제 fetch까지 간다(다른 외부
+    // 연동의 *_ALLOW_REAL_CALLS 관례와 동일) — 이 describe 블록은 fetch 호출
+    // 자체를 검증하는 목적이라 명시적으로 켠다. 게이트 자체의 기본값(false)
+    // 동작은 별도 테스트에서 검증한다.
+    process.env.DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS = "true";
   });
 
   it("문서와 서명자 정보로 봉투를 생성하고 envelopeId를 반환한다", async () => {
@@ -164,6 +170,24 @@ describe("createEnvelope", () => {
         webhookUrl: "https://example.com/webhook",
       })
     ).rejects.toThrow("DocuSign 봉투 생성 실패");
+  });
+
+  it("M4: DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS가 true가 아니면 fetch를 전혀 호출하지 않고 즉시 실패한다", async () => {
+    delete process.env.DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS;
+    const fetchMock = vi.fn();
+    vi.stubGlobal("fetch", fetchMock);
+
+    const { createEnvelope } = await import("./docusign");
+    await expect(
+      createEnvelope({
+        recipientEmail: "parent@example.com",
+        recipientName: "김민지",
+        documentHtml: "<p>/sig1/</p>",
+        emailSubject: "제목",
+        webhookUrl: "https://example.com/webhook",
+      })
+    ).rejects.toThrow("DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS=true가 아니면");
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 });
 

@@ -8,6 +8,7 @@ import {
   listMyTeachingHistoryForSubject,
 } from "./teacher-assignment-termination-actions";
 import type { TeachingHistoryItem } from "@/app/admin/teacher-assignment-termination-actions";
+import TrialReviewPanel from "./TrialReviewPanel";
 
 // 새로 배정된 선생님이 해당 과목의 "과거" 수업 이력을 읽기전용으로 확인하는 위젯.
 // list_subject_teaching_history_for_current_teacher()가 호출자가 실제 현재 활성
@@ -198,6 +199,8 @@ export default function AssignmentsTab({
           </div>
         </details>
       )}
+
+      <TrialReviewPanel />
     </div>
   );
 }
