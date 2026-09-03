@@ -603,6 +603,13 @@ trial-teacher-assignment 모델)은 전량 폐기됐다.** trial/regular는 `tea
       끝까지 통과시키며 실제 버그 여러 건 발견·수정(관리자 함수의 잘못된
       `is_admin()` 재확인, 선생님용 리뷰 목록 조회의 PostgREST 별칭 필터 오류 등
       — 상세는 `docs/CURRENT.md`/실행 로그 참고).
+- [x] 부정/복구 테스트 잔여 5개 — 새 기능 없이 전용 단위/통합 테스트로 명시:
+      90일 이후 체험 예약 차단·24시간 기준 취소(release vs 소진, 학생/선생님·
+      회사 케이스), 미배정·다른 선생님 예약 차단, 계약 발송 실패 후 재처리→
+      성공, 보호자 서명 전 구매 차단(`lib/booking/trial-entitlement-and-
+      cancellation.integration.test.ts`, `lib/booking/authorization.test.ts`,
+      `app/admin/trial-onboarding-actions.test.ts`, `app/parent/purchase-
+      actions.test.ts`).
 - 종료 기준: 하나의 Preview에서 `홈페이지 상담 신청 → 관리자 수락 → 상담 Meet → 상담 요약 →
   체험 결정 → 계정 생성 → 체험 동의 → 체험 수업권 → 체험 예약 → 체험 Meet → 리뷰 → 정규
   진행 선택 → DocuSign → 구매 → 과목 수강 활성화(같은 선생님과 정규수업 계속)` 전체

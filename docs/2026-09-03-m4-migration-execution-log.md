@@ -210,21 +210,58 @@ Playwright 회귀(M1/M3/R3/R5/M4) 5스펙 17건(골든 패스 11건 포함) 전�
 동시 실행해도 데이터 충돌 없음 확인. 통합 HEAD(`7ea992d`) 기준 클린 `git
 worktree`(node_modules 하드카피)에서 `next build`+전체 Vitest 재현 완료.
 
-### 7.4 남은 미완료(요구사항 13번 부정/복구 테스트 목록 중)
+### 7.4 남은 미완료(당시)
 90일 이후 시작 체험 예약 차단, 24시간 기준 취소 처리, 미배정·다른 선생님 예약
 차단, 계약 발송 중복 클릭의 "재처리 후 성공"까지의 실증, 보호자 서명 전 구매
-차단의 직접 테스트는 전용 테스트로 다시 확인하지 않았다 — 대부분 기존
-R6/R3/R4 스펙이 이미 다루는 일반 메커니즘 재사용이라 별도 회귀 위험은 낮다고
-판단했지만, M4 전용 테스트로 명시적으로 박아두지는 못했다. 역할별 화면(11번)은
-골든 패스가 통과할 정도의 최소 UI만 구현했고 폴리싱은 하지 않았다.
+차단의 직접 테스트는 이 시점까지 전용 테스트가 없었다 — 4/N에서 마저 명시했다
+(아래 §9).
 
-## 8. 커밋
+## 8. 4/N — 인수 기준 13번 잔여 5개 항목 전용 테스트 (커밋 `0496985`)
+
+새 기능 구현 없이 기존 R6/M2 메커니즘을 테스트로만 고정했다.
+
+- **90일 이후 시작 체험 예약 차단 + 24시간 기준 취소(release vs 소진)** —
+  `lib/booking/trial-entitlement-and-cancellation.integration.test.ts`(신규,
+  `app/admin/trial-sessions-guardian-consent.integration.test.ts`와 동일한
+  psql shell-out 패턴). 이미 만료된 grant만 있으면 `hold_entitlement()`이
+  거부, 만료 전 grant면 성공함을 확인. `cancel_lesson_booking()`이 학생 취소
+  기준 24시간 이상 전이면 release(+90일 내 재예약 가능), 24시간 미만이면
+  consume, 선생님/회사 취소는 시점과 무관하게 항상 release함을 3케이스로 확인.
+  **테스트 작성 중 실제로 겪은 실수(코드 버그 아님)**: (a) 여러 테스트 케이스가
+  같은 상대 일자 오프셋을 재사용해 선생님 버퍼 제약 위반이 났다 — 케이스마다
+  겹치지 않는 날짜로 분리. (b) "취소 시점에 24시간 미만"을 재현하려고
+  `starts_at`만 UPDATE했는데 `ends_at`을 그대로 둬 tstzrange가 원래 종료
+  시각까지 거대하게 남아 다른 예약과 항상 충돌했다 — `ends_at`도 함께 갱신.
+  (c) `afterAll`에서 `entitlement_ledger`/그걸 참조하는 `entitlement_grants`/
+  `reservations`를 지우려다 INSERT-only 트리거·FK(`ON DELETE NO ACTION`)에
+  막혔다 — 다른 통합 테스트와 동일하게 그 부분은 정리하지 않고 `db reset`에
+  맡기도록 수정.
+- **미배정·다른 선생님 체험 예약 차단** — `lib/booking/authorization.test.ts`
+  신규. `assertActiveTeacherAssignment()`(R6에서 이미 모든 예약 생성 액션이
+  거치는 공통 게이트)가 미배정/다른 선생님을 거부하고 현재 배정된 선생님만
+  통과시킴을 확인.
+- **계약 발송 실패 후 재처리→성공** —
+  `app/admin/trial-onboarding-actions.test.ts`에 추가. 1차 발송 실패(DocuSign
+  게이트 비활성 등)는 draft 상태로 남고 계약 버전·회사 선서명은 1번만 생성/
+  실행됨을 확인 → 2차 재처리가 같은 계약 버전을 재사용해 재선서명 없이 발송
+  성공. 이미 발송 완료(envelope 있음)된 버전에 재클릭하면 발송·선서명 모두
+  다시 호출하지 않고 그대로 반환함도 확인.
+- **보호자 서명 전 구매 차단** — `app/parent/purchase-actions.test.ts`에 M4
+  전용 케이스 추가(계약 `status='sent'`인 상태에서 구매 시도 차단) — 기존 R4
+  "계약이 active가 아니면 구매를 막는다" 테스트와 같은 메커니즘임을 이름으로
+  명시.
+
+### 8.1 검증
+전체 Vitest 147개 파일/883건, `tsc --noEmit`, `next build` 클린.
+
+## 9. 커밋
 
 - `343e1aa` — 1/N: DB 마이그레이션 + 앱 레이어 + 테스트.
 - `eef362e` — 2/N: 배정 배선, 체험 리뷰, 정규 진행 희망, 원클릭 계약 발송,
   DocuSign 게이트 신설.
 - `7ea992d` — 3/N: 골든 패스 E2E + service_role 호출 admin 함수 실버그 수정.
+- `0496985` — 4/N: 인수 기준 13번 잔여 5개 항목 전용 테스트.
 - 이 로그 + `docs/CURRENT.md`/마스터 로드맵 갱신은 별도 문서 커밋.
 
 전부 로컬 `main` 브랜치 커밋, `git push` 없음. 실제 Google/Stripe/DocuSign 호출,
-실제 이메일 발송, Production·원격 운영 DB 접근 전부 없음.
+실제 이메일 발송, Production·원격 운영 DB 접근 전부 없음. **M4는 이것으로 종료.**
