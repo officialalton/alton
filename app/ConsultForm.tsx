@@ -1,20 +1,35 @@
 "use client";
 
-import { useState } from "react";
-import { submitConsultRequest } from "./consult-actions";
+import { useEffect, useState } from "react";
+import { listOpenHomepageConsultSlots, submitHomepageConsultRequest, type OpenConsultSlot } from "./consult-actions";
+
+// M1 — 홈페이지 상담 신청 폼. 관리자가 열어둔 60분 슬롯 중 하나를 선택해야
+// 신청이 가능하다(요구사항 2). 제출은 즉시 확정이 아니라 "승인 대기"이며,
+// 관리자 수락 후 이메일로 Meet 링크·동의 안내가 온다는 것을 명시한다.
 
 export default function ConsultForm() {
   const [parentName, setParentName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [studentName, setStudentName] = useState("");
   const [studentGrade, setStudentGrade] = useState("");
-  const [location, setLocation] = useState("");
   const [concerns, setConcerns] = useState("");
   const [agreed, setAgreed] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
+
+  const [slots, setSlots] = useState<OpenConsultSlot[]>([]);
+  const [slotsLoading, setSlotsLoading] = useState(true);
+  const [selectedSlot, setSelectedSlot] = useState<string>("");
+
+  useEffect(() => {
+    const from = new Date();
+    const to = new Date(from.getTime() + 21 * 24 * 60 * 60 * 1000); // 3주치 슬롯 노출
+    listOpenHomepageConsultSlots(from.toISOString(), to.toISOString())
+      .then(setSlots)
+      .catch(() => setSlots([]))
+      .finally(() => setSlotsLoading(false));
+  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -23,16 +38,20 @@ export default function ConsultForm() {
       setError("개인정보 수집·이용에 동의해주세요.");
       return;
     }
+    if (!selectedSlot) {
+      setError("상담 희망 시간을 선택해주세요.");
+      return;
+    }
     setSubmitting(true);
     try {
-      await submitConsultRequest({
+      await submitHomepageConsultRequest({
         parentName,
         email,
         phone,
-        studentName,
         studentGrade,
-        location,
         concerns,
+        slotStartsAtIso: selectedSlot,
+        idempotencyKey: `${email.trim().toLowerCase()}-${selectedSlot}`,
       });
       setSubmitted(true);
     } catch (err) {
@@ -49,7 +68,8 @@ export default function ConsultForm() {
           상담 신청이 접수되었습니다.
         </p>
         <p className="text-[14px] text-grey-500">
-          영업일 기준 1~2일 내에 입력하신 연락처로 안내드리겠습니다.
+          신청은 아직 확정이 아닌 승인 대기 상태입니다. 관리자가 확인 후 Google Meet
+          링크와 안내를 이메일로 보내드리면 상담이 확정됩니다.
         </p>
       </div>
     );
@@ -86,26 +106,11 @@ export default function ConsultForm() {
             className={INPUT_CLASS}
           />
         </Field>
-        <Field label="학생 이름">
-          <input
-            value={studentName}
-            onChange={(e) => setStudentName(e.target.value)}
-            className={INPUT_CLASS}
-          />
-        </Field>
         <Field label="학년">
           <input
             value={studentGrade}
             onChange={(e) => setStudentGrade(e.target.value)}
             placeholder="예: 10학년"
-            className={INPUT_CLASS}
-          />
-        </Field>
-        <Field label="거주 지역">
-          <input
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            placeholder="예: 캘리포니아 서니베일"
             className={INPUT_CLASS}
           />
         </Field>
@@ -118,6 +123,30 @@ export default function ConsultForm() {
           className={INPUT_CLASS + " min-h-[90px]"}
         />
       </Field>
+
+      <div className="mt-5">
+        <span className="block text-[12.5px] font-bold text-ink mb-1.5">상담 희망 시간(60분)</span>
+        {slotsLoading ? (
+          <p className="text-[13px] text-grey-500">가능한 시간을 불러오는 중...</p>
+        ) : slots.length === 0 ? (
+          <p className="text-[13px] text-grey-500">현재 신청 가능한 시간이 없습니다. 잠시 후 다시 시도해주세요.</p>
+        ) : (
+          <select
+            aria-label="상담 희망 시간"
+            required
+            value={selectedSlot}
+            onChange={(e) => setSelectedSlot(e.target.value)}
+            className={INPUT_CLASS}
+          >
+            <option value="">시간을 선택하세요</option>
+            {slots.map((s) => (
+              <option key={s.startsAt} value={s.startsAt}>
+                {new Date(s.startsAt).toLocaleString("ko-KR", { dateStyle: "medium", timeStyle: "short" })}
+              </option>
+            ))}
+          </select>
+        )}
+      </div>
 
       <label className="flex items-start gap-2.5 mt-5 text-[12.5px] text-grey-500">
         <input

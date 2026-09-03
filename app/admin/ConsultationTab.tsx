@@ -27,24 +27,24 @@ import {
   retryContractActivation,
 } from "./consultation-actions";
 import type { ContractActivationRetryItem } from "./consultation-actions";
+import ConsultationSchedulingPanel from "./ConsultationSchedulingPanel";
 import type {
   ConsultationListItem,
   TrialSessionListItem,
   ProposalListItem,
   ConsentGapItem,
-  AiNotesConsentEventItem,
   DriveArtifactIssue,
   StaleEnvelopeContract,
 } from "./consultation-data";
 
-type SubTab = "consult" | "trial" | "proposal" | "consent" | "ai_notes" | "errors";
+type SubTab = "consult" | "scheduling" | "trial" | "proposal" | "consent" | "errors";
 
 const SUB_NAV: { id: SubTab; label: string }[] = [
   { id: "consult", label: "상담 관리" },
+  { id: "scheduling", label: "상담 운영(신청·수락·캘린더)" },
   { id: "trial", label: "체험 관리" },
   { id: "proposal", label: "제안서 관리" },
   { id: "consent", label: "보호자 동의 대기" },
-  { id: "ai_notes", label: "AI 회의록 선택" },
   { id: "errors", label: "오류/재처리 현황판" },
 ];
 
@@ -60,7 +60,6 @@ export default function ConsultationTab({
   trials,
   proposals,
   consentGaps,
-  aiNotesEvents,
   driveIssues,
   staleEnvelopes,
   contractActivationRetries,
@@ -69,7 +68,6 @@ export default function ConsultationTab({
   trials: TrialSessionListItem[];
   proposals: ProposalListItem[];
   consentGaps: ConsentGapItem[];
-  aiNotesEvents: AiNotesConsentEventItem[];
   driveIssues: DriveArtifactIssue[];
   staleEnvelopes: StaleEnvelopeContract[];
   contractActivationRetries: ContractActivationRetryItem[];
@@ -99,10 +97,10 @@ export default function ConsultationTab({
       </div>
 
       {sub === "consult" && <ConsultSection consultations={consultations} />}
+      {sub === "scheduling" && <ConsultationSchedulingPanel />}
       {sub === "trial" && <TrialSection trials={trials} consultations={consultations} />}
       {sub === "proposal" && <ProposalSection proposals={proposals} trials={trials} />}
       {sub === "consent" && <ConsentGapSection gaps={consentGaps} />}
-      {sub === "ai_notes" && <AiNotesSection events={aiNotesEvents} />}
       {sub === "errors" && (
         <ErrorDashboardSection
           driveIssues={driveIssues}
@@ -1064,42 +1062,6 @@ function ConsentGapSection({ gaps }: { gaps: ConsentGapItem[] }) {
             </div>
           </div>
         ))
-      )}
-    </div>
-  );
-}
-
-function AiNotesSection({ events }: { events: AiNotesConsentEventItem[] }) {
-  return (
-    <div>
-      <p className="text-[13px] text-grey-500 mb-4">
-        학생별 AI 회의록(Smart Notes) 사용 선택 이력입니다. 실제 켜기/끄기 적용 로직은 이후 단계 범위입니다.
-      </p>
-      {events.length === 0 ? (
-        <p className="text-[13px] text-grey-500">기록된 선택이 없습니다.</p>
-      ) : (
-        <table className="w-full text-[13px]">
-          <thead>
-            <tr className="text-left text-grey-500 border-b border-grey-200">
-              <th className="py-2">학생</th>
-              <th className="py-2">선택</th>
-              <th className="py-2">정책 버전</th>
-              <th className="py-2">적용 시각</th>
-              <th className="py-2">철회 시각</th>
-            </tr>
-          </thead>
-          <tbody>
-            {events.map((e) => (
-              <tr key={e.id} className="border-b border-grey-100">
-                <td className="py-2">{e.studentName ?? e.studentId}</td>
-                <td className="py-2">{e.optedIn ? "동의" : "거부"}</td>
-                <td className="py-2">{e.policyVersion}</td>
-                <td className="py-2">{new Date(e.effectiveAt).toLocaleString("ko-KR")}</td>
-                <td className="py-2">{e.revokedAt ? new Date(e.revokedAt).toLocaleString("ko-KR") : "-"}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
       )}
     </div>
   );
