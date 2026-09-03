@@ -18,8 +18,11 @@ vi.mock("@/lib/google-meet", () => ({
 
 const reservationMaybeSingleMock = vi.fn();
 const teacherMaybeSingleMock = vi.fn();
+const consultationMaybeSingleMock = vi.fn();
+const dedupMaybeSingleMock = vi.fn();
 const smartNotesInsertMock = vi.fn();
 const sessionsUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
+const consultationsUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
 const accessEventsInsertMock = vi.fn();
 
 const fromMock = vi.fn((table: string) => {
@@ -29,8 +32,17 @@ const fromMock = vi.fn((table: string) => {
   if (table === "teachers") {
     return { select: () => ({ eq: () => ({ maybeSingle: teacherMaybeSingleMock }) }) };
   }
+  if (table === "consultations") {
+    return {
+      select: () => ({ eq: () => ({ maybeSingle: consultationMaybeSingleMock }) }),
+      update: () => ({ eq: consultationsUpdateEqMock }),
+    };
+  }
   if (table === "smart_notes_generation_events") {
-    return { insert: (payload: unknown) => smartNotesInsertMock(payload) };
+    return {
+      select: () => ({ eq: () => ({ maybeSingle: dedupMaybeSingleMock }) }),
+      insert: (payload: unknown) => smartNotesInsertMock(payload),
+    };
   }
   if (table === "sessions") {
     return { update: () => ({ eq: sessionsUpdateEqMock }) };
@@ -69,6 +81,8 @@ beforeEach(() => {
   });
   reservationMaybeSingleMock.mockResolvedValue({ data: { id: "r1", owner_profile_id: "t1", session: { id: "s1" } } });
   teacherMaybeSingleMock.mockResolvedValue({ data: { workspace_email: "teacher1@alton.education" } });
+  consultationMaybeSingleMock.mockResolvedValue({ data: null });
+  dedupMaybeSingleMock.mockResolvedValue({ data: null });
   resolveMeetingCodeMock.mockResolvedValue("abc-defg-hij");
   fetchDriveFileIdMock.mockResolvedValue("drive-file-1");
   smartNotesInsertMock.mockResolvedValue({ error: null });
@@ -183,5 +197,43 @@ describe("POST /api/webhooks/workspace-events", () => {
     expect(accessEventsInsertMock).not.toHaveBeenCalled();
     expect(errorSpy).toHaveBeenCalledWith(expect.stringContaining("meet_participant_event_unresolved_session"));
     errorSpy.mockRestore();
+  });
+
+  // M1 요구사항 4 — Smart Notes 원본을 상담(consultations)에도 자동 연결.
+  it("세션 매칭이 안 되면 consultation_id로 매칭을 시도하고, 매칭되면 consultations.smart_notes_drive_file_id를 갱신한다", async () => {
+    reservationMaybeSingleMock.mockResolvedValue({ data: null });
+    consultationMaybeSingleMock.mockResolvedValue({ data: { id: "consult-1" } });
+    const { POST } = await import("./route");
+    const res = await POST(
+      makeRequest({ smartNote: { name: "conferenceRecords/abc/smartNotes/note1" } }, SMART_NOTE_TYPE) as never
+    );
+    expect(res.status).toBe(200);
+    expect(smartNotesInsertMock).toHaveBeenCalledWith(
+      expect.objectContaining({ session_id: null, consultation_id: "consult-1", drive_file_id: "drive-file-1", linked: true })
+    );
+    expect(consultationsUpdateEqMock).toHaveBeenCalled();
+  });
+
+  it("세션도 상담도 매칭 안 되면 유실시키지 않고 linked=false로 보존한다(관리자 재처리 대상)", async () => {
+    reservationMaybeSingleMock.mockResolvedValue({ data: null });
+    consultationMaybeSingleMock.mockResolvedValue({ data: null });
+    const { POST } = await import("./route");
+    const res = await POST(
+      makeRequest({ smartNote: { name: "conferenceRecords/abc/smartNotes/note1" } }, SMART_NOTE_TYPE) as never
+    );
+    expect(res.status).toBe(200);
+    expect(smartNotesInsertMock).toHaveBeenCalledWith(
+      expect.objectContaining({ session_id: null, consultation_id: null, linked: false })
+    );
+  });
+
+  it("동일 Pub/Sub messageId 재전송은 중복 삽입하지 않고 200으로 ack한다(멱등)", async () => {
+    dedupMaybeSingleMock.mockResolvedValue({ data: { id: "existing-event" } });
+    const { POST } = await import("./route");
+    const res = await POST(
+      makeRequest({ smartNote: { name: "conferenceRecords/abc/smartNotes/note1" } }, SMART_NOTE_TYPE) as never
+    );
+    expect(res.status).toBe(200);
+    expect(smartNotesInsertMock).not.toHaveBeenCalled();
   });
 });

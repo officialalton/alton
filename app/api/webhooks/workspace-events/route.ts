@@ -39,6 +39,21 @@ async function verifyPubSubPushToken(authHeader: string | null): Promise<void> {
   }
 }
 
+// M1 요구사항 4(2026-09-03 추가) — Smart Notes 생성 이벤트를 상담(consultations)에도 자동
+// 연결한다. 새 웹훅을 만들지 않고 이 기존 R6 라우트의 매칭 대상만 넓힌다.
+async function resolveConsultationByMeetingCode(
+  admin: ReturnType<typeof createAdminClient>,
+  meetingCode: string | null
+): Promise<{ consultationId: string } | null> {
+  if (!meetingCode) return null;
+  const { data } = await admin
+    .from("consultations")
+    .select("id")
+    .eq("google_meeting_code", meetingCode)
+    .maybeSingle();
+  return data ? { consultationId: data.id } : null;
+}
+
 async function resolveReservationByMeetingCode(
   admin: ReturnType<typeof createAdminClient>,
   meetingCode: string | null
@@ -101,8 +116,22 @@ export async function POST(req: NextRequest) {
   }
 
   const admin = createAdminClient();
+  const pubsubMessageId = body.message?.messageId ?? null;
 
   if (parsed.kind === "smart_notes_generation") {
+    // M1 요구사항 4 — 멱등 처리: 같은 Pub/Sub 메시지가 at-least-once 배달로 재전송되면
+    // 이미 적재된 이벤트를 다시 만들지 않는다(unique index가 최종 방어선, 여기서는
+    // 불필요한 API 재호출까지 건너뛰기 위한 사전 확인).
+    if (pubsubMessageId) {
+      const { data: existing } = await admin
+        .from("smart_notes_generation_events")
+        .select("id")
+        .eq("pubsub_message_id", pubsubMessageId)
+        .maybeSingle();
+      if (existing) {
+        return NextResponse.json({ ok: true, skipped: "duplicate_message" });
+      }
+    }
     // 실제 페이로드에는 meetingCode가 없다 — conferenceRecordName으로 Meet API를 추가
     // 조회해야 얻을 수 있는데, meetingCode를 알기 전까지는 어느 선생님 소유 회의인지
     // 몰라 그 선생님 subject로 조회할 수 없다(닭-달걀 문제). **(2026-09-03 Sandbox
@@ -139,23 +168,39 @@ export async function POST(req: NextRequest) {
 
     const resolved = await resolveReservationByMeetingCode(admin, meetingCode);
     const sessionId = resolved?.sessionId ?? null;
+    // 세션(정규수업)으로 매칭되지 않으면 상담(consultation)도 시도한다 — 같은
+    // meetingCode가 세션과 상담 양쪽에 동시에 걸릴 일은 없다(서로 다른 Calendar
+    // 이벤트에서 나온 별개의 Meet space이므로).
+    const resolvedConsultation = sessionId ? null : await resolveConsultationByMeetingCode(admin, meetingCode);
+    const consultationId = resolvedConsultation?.consultationId ?? null;
+
     const { error } = await admin.from("smart_notes_generation_events").insert({
       session_id: sessionId,
+      consultation_id: consultationId,
       google_meeting_code: meetingCode,
       google_conference_record_name: parsed.conferenceRecordName,
       drive_file_id: driveFileId,
       event_type: parsed.eventType,
-      linked: sessionId !== null,
+      linked: sessionId !== null || consultationId !== null,
       raw_payload: payload as object,
+      pubsub_message_id: pubsubMessageId,
     });
     if (error) {
       console.error(JSON.stringify({ type: "smart_notes_event_insert_failed", error: error.message }));
       // 큐잉 실패는 웹훅 자체를 실패시키지 않는다(R3 drive-artifacts 관례와 동일) —
-      // Pub/Sub가 재시도하게 두되, ack는 정상 반환해 무한 재전송을 막는다.
+      // Pub/Sub가 재시도하게 두되, ack는 정상 반환해 무한 재전송을 막는다. 매칭 실패
+      // (session/consultation 둘 다 null)도 이벤트 자체는 linked=false로 그대로
+      // 보존한다 — 유실시키지 않고 관리자 재처리 대상으로 남긴다(요구사항 4).
       return NextResponse.json({ ok: true, warning: "insert_failed" });
     }
     if (sessionId && driveFileId) {
       await admin.from("sessions").update({ smart_notes_drive_file_id: driveFileId }).eq("id", sessionId);
+    }
+    if (consultationId && driveFileId) {
+      // 잠재고객에게 원본을 자동 공개하지 않는다(요구사항 4) — 이 컬럼은 관리자 전용
+      // 경로에서만 노출된다(app/admin/consultation-scheduling-actions.ts, RLS는
+      // consultations 자체가 이미 관리자 전용 select 정책).
+      await admin.from("consultations").update({ smart_notes_drive_file_id: driveFileId }).eq("id", consultationId);
     }
     return NextResponse.json({ ok: true });
   }

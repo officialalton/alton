@@ -90,6 +90,30 @@ export async function enableMeetSpaceSmartNotes(params: {
 }
 
 /**
+ * M1(2026-09-03 추가) — `official@alton.education` 조직에 Smart Notes 자동 생성 org 정책이
+ * 이미 켜져 있으면 그것으로 충분하다(제품 오너 지시) — 이 함수는 PATCH부터 시도하지 않고
+ * 먼저 GET으로 현재 상태를 읽어, 이미 "ON"이면 아무 쓰기도 하지 않고 그대로 true를 반환한다.
+ * "ON"이 아닐 때만 기존 enableMeetSpaceSmartNotes()(canonical name PATCH+재확인)로 보정을
+ * 시도한다. 반환값은 "이 호출이 끝난 시점에 실제로 ON임을 확인했는지"이며, 확인 자체가
+ * 실패(API 오류 등)하면 예외를 던진다(호출부가 상태 컬럼에 기록).
+ */
+export async function ensureMeetSpaceSmartNotesOn(params: {
+  teacherWorkspaceEmail: string;
+  meetingCode: string;
+}): Promise<boolean> {
+  assertRealCallsAllowed();
+  const readonlyToken = await getMeetReadonlyApiAccessToken(params.teacherWorkspaceEmail);
+  const res = await meetFetch(`${MEET_API}/spaces/${params.meetingCode}`, readonlyToken, { method: "GET" });
+  const space = (await res.json()) as SpaceResource;
+  const currentState = space.config?.artifactConfig?.smartNotesConfig?.autoSmartNotesGeneration;
+  if (currentState === "ON") {
+    return true; // org 정책 또는 이전 보정으로 이미 ON — 추가 쓰기 없음.
+  }
+  await enableMeetSpaceSmartNotes(params);
+  return true;
+}
+
+/**
  * **(2026-09-03 추가, R6 Sandbox 실측으로 확정)** Workspace Events가 push로 보내는 Smart
  * Notes 알림 본문에는 `smartNote.name`(리소스 이름)만 있고 실제 Drive 파일 ID는 없다 —
  * `GET /v2/{smartNoteResourceName}`을 추가로 호출해 `docsDestination.document`를 읽어야

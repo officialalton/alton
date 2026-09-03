@@ -4,10 +4,10 @@ import { useState } from "react";
 import { confirmConsultConsent } from "@/app/consult-actions";
 
 export default function ConsentConfirmButton({
-  consultationId,
+  token,
   alreadyConfirmedAt,
 }: {
-  consultationId: string;
+  token: string;
   alreadyConfirmedAt: string | null;
 }) {
   const [confirmedAt, setConfirmedAt] = useState<string | null>(alreadyConfirmedAt);
@@ -32,7 +32,7 @@ export default function ConsentConfirmButton({
           setSubmitting(true);
           setError(null);
           try {
-            await confirmConsultConsent(consultationId);
+            await confirmConsultConsent(token);
             setConfirmedAt(new Date().toISOString());
           } catch (e) {
             setError(e instanceof Error ? e.message : "확인 처리에 실패했습니다.");

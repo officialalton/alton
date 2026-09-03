@@ -177,14 +177,16 @@ create policy "관리자 쓰기" on consult_availability_exceptions for all usin
 
 alter table consultations add column prospect_contact_id uuid references prospect_contacts (id);
 alter table consultations add column source consult_slot_source not null default 'admin';
--- 요구사항 2: 제출 즉시 확정하지 않고 '승인 대기'(status='requested')로 저장하되,
--- 동일 시간 중복 신청 방지용 임시 hold + 만료 정책. 홈페이지 신청은 hold_expires_at을
--- 채운다(관리자가 직접 등록한 상담은 hold 개념이 없으므로 null로 둔다).
--- 만료값 결정 근거: R6 예약 흐름에 이미 있는 "관리자 확인 대기" SLA가 따로
--- 문서화돼 있지 않아, 상담 신청은 관리자가 통상 영업일 내 확인한다는 전제로
--- 30분을 기본 hold 창으로 채택했다(짧은 슬롯 점유로 다른 신청자를 막지 않으면서
--- 관리자가 알림을 확인할 최소 시간을 준다) — 향후 운영 데이터로 조정 가능하도록
--- 하드코딩 상수가 아니라 컬럼 값으로 신청마다 저장한다.
+-- 요구사항 2: 제출 즉시 확정하지 않고 '승인 대기'(status='requested')로 저장한다.
+-- **(2026-09-03 정정)** 최초 구현은 30분 후 슬롯이 조용히 풀리는 자동 만료를 뒀으나,
+-- 고객에게 아무 알림 없이 신청이 무효화되는 것은 별도 정책 설계(만료 상태·알림 방식)
+-- 없이 임의로 넣을 수 있는 결정이 아니라는 지적에 따라 제거했다. 지금은 `requested`
+-- 상담은 관리자가 수락/거절하기 전까지 슬롯을 그대로 유지한다 — hold_expires_at
+-- 컬럼은 향후(자동 만료+고객 알림을 정식으로 설계하는 시점) 재사용할 수 있도록
+-- 스키마만 남겨두되, 이번 구현에서는 어떤 함수도 이 컬럼에 실제 만료 시각을 채우지
+-- 않는다(항상 null). 비로그인 신청의 슬롯 무제한 점유·남용은 자동 만료가 아니라
+-- "동일 이메일당 처리 대기 중인 신청 1건 제한"(아래 submit_homepage_consult_request
+-- 참고)으로 방어한다 — UX는 바꾸지 않는다(에러 메시지만 추가).
 alter table consultations add column hold_expires_at timestamptz;
 alter table consultations add column idempotency_key text;
 alter table consultations add column google_event_id text;
@@ -212,9 +214,9 @@ create index on consultations (google_sync_status);
 create unique index consultations_idempotency_key_uq on consultations (idempotency_key) where idempotency_key is not null;
 
 comment on column consultations.hold_expires_at is
-  'M1 요구사항 2: 홈페이지 신청의 임시 hold 만료 시각(기본 30분, submit_homepage_consult_request에서 설정). '
-  '관리자가 수락하면 null로 정리되고, 만료되면 그 슬롯은 다시 신청 가능해진다(만료된 requested 건은 상태 유지, '
-  '관리자가 뒤늦게 처리할 수 있으나 새 신청과의 슬롯 경합에서는 더 이상 우선권이 없다).';
+  'M1 요구사항 2(2026-09-03 정정): 자동 만료는 구현하지 않는다 — 이 컬럼은 항상 null이고, '
+  '향후 만료+고객 알림을 정식 설계하기 전까지는 어떤 함수도 값을 채우지 않는다. requested 상담은 '
+  '관리자가 수락/거절할 때까지 슬롯을 계속 점유한다.';
 comment on column consultations.admin_review_summary is
   'M1 요구사항 6: 고객에게 노출 가능한 관리자 검토 요약. Smart Notes 원본(smart_notes_drive_file_id)은 '
   '별도로 관리자 전용 경로에서만 접근한다 — 원본 자동 공개 금지.';
@@ -231,21 +233,20 @@ comment on column consultations.starts_at is
   'starts_at/ends_at은 신청 단계(아직 미확정 포함)부터 겹침 방지 제약이 참조하는 슬롯 시각이다. '
   '관리자 수락 시 scheduled_at = starts_at으로 동기화한다.';
 
--- 배타 제약의 where절은 IMMUTABLE 함수만 허용해 now() 기준 hold 만료를 인덱스
--- 조건에 넣을 수 없다(Postgres 제약). 대신 두 겹 방어로 나눈다:
---  1) 이 배타 제약은 "확정된"(scheduled) 상담끼리의 겹침만 하드 차단한다 —
---     확정 상담은 hold 개념이 없으므로 now() 의존 없이 안전하게 IMMUTABLE 조건만 쓴다.
---  2) 아직 hold 상태인 requested 건끼리의 겹침은 submit_homepage_consult_request()
---     함수 내부에서 명시적 SELECT ... FOR UPDATE로 "만료되지 않은 겹치는 hold가
---     있는지" 트랜잭션 안에서 확인한다(R3 find_possible_duplicate_consultations와
---     같은 SQL 계층 검증, R1 배타 제약과 동일한 최종 방어 정신을 함수 레벨로 구현).
+-- **(2026-09-03 정정)** 자동 만료를 제거하면서 hold도 now() 의존 없이 IMMUTABLE 조건만으로
+-- 표현할 수 있게 됐다 — requested(아직 hold 중)와 scheduled(확정) 둘 다 이 배타 제약이
+-- 직접 하드 차단한다(DB가 최종 방어선, R1 배타 제약과 동일한 원칙). closed/cancelled/
+-- no_show/converted/completed는 슬롯을 점유하지 않으므로 where절에서 제외한다.
+-- submit_homepage_consult_request() 내부의 SELECT ... FOR UPDATE는 이 제약보다 먼저
+-- 더 친절한 에러 메시지를 주기 위한 앱 레벨 이중 방어로 유지한다(레이스는 최종적으로
+-- 이 배타 제약이 막는다).
 alter table consultations add constraint consultations_no_overlap
   exclude using gist (
     tstzrange(starts_at, ends_at) with &&
   )
   where (
     starts_at is not null and ends_at is not null
-    and status = 'scheduled'
+    and status in ('requested', 'scheduled')
   );
 
 -- =========================================================================
@@ -324,17 +325,30 @@ begin
     raise exception '상담 슬롯은 정시 단위로만 신청할 수 있습니다.';
   end if;
 
-  -- 아직 만료되지 않은 겹치는 hold(requested) 또는 이미 확정된(scheduled) 상담이
-  -- 있으면 신청을 막는다. FOR UPDATE로 같은 슬롯 동시 신청 레이스를 직렬화한다
-  -- (배타 제약이 scheduled끼리만 커버하는 gap을 여기서 메운다 — 위 3번 섹션 코멘트 참고).
+  -- 겹치는 requested(hold, 이제 만료 없음) 또는 scheduled(확정) 상담이 있으면 신청을
+  -- 막는다. FOR UPDATE로 같은 슬롯 동시 신청 레이스를 직렬화한다 — 최종 방어선은
+  -- consultations_no_overlap 배타 제약(2026-09-03 정정으로 requested도 포함하도록
+  -- 넓혔다), 이건 더 친절한 에러 메시지를 위한 사전 확인.
   perform 1 from consultations c
   where c.starts_at is not null
-    and c.status not in ('closed', 'converted', 'cancelled', 'no_show')
-    and (c.status = 'scheduled' or c.hold_expires_at > now())
+    and c.status in ('requested', 'scheduled')
     and tstzrange(c.starts_at, c.ends_at) && tstzrange(p_starts_at, v_ends_at)
   for update;
   if found then
     raise exception '이미 다른 상담이 신청되었거나 확정된 시간입니다. 다른 시간을 선택해 주세요.';
+  end if;
+
+  -- 요구사항 2(2026-09-03 추가) — 비로그인 신청이 슬롯을 무제한 점유하는 남용을
+  -- 막기 위한 기본 방어: 같은 이메일로 이미 처리 대기 중(requested)인 신청이 있으면
+  -- 새 신청을 막는다(UX는 바꾸지 않음 — 폼 자체는 그대로, 에러 메시지만 추가). 정규화된
+  -- 이메일(대소문자·공백 무시) 기준이며, 관리자가 그 신청을 수락/거절하면 다시 신청할 수
+  -- 있다.
+  if exists (
+    select 1 from consultations c
+    where c.status = 'requested'
+      and lower(trim(c.contact_email)) = lower(trim(p_email))
+  ) then
+    raise exception '이미 처리 대기 중인 상담 신청이 있습니다. 관리자가 확인할 때까지 기다려 주세요.';
   end if;
 
   -- 잠재고객 레코드는 이메일 일치로 재사용하지 않는다(요구사항 5 — 자동 병합 금지).
@@ -348,11 +362,11 @@ begin
   insert into consultations (
     prospect_contact_id, source, contact_name, contact_email, contact_phone,
     student_grade, category, concerns, status, requested_at,
-    starts_at, ends_at, hold_expires_at, idempotency_key
+    starts_at, ends_at, idempotency_key
   ) values (
     v_prospect.id, 'homepage', p_full_name, p_email, p_phone,
     p_student_grade, 'family', p_concerns, 'requested', now(),
-    p_starts_at, v_ends_at, now() + interval '30 minutes', p_idempotency_key
+    p_starts_at, v_ends_at, p_idempotency_key
   )
   returning * into v_consultation;
 
@@ -365,8 +379,9 @@ $$;
 
 comment on function public.submit_homepage_consult_request(text, text, text, timestamptz, text, text, text) is
   'M1 요구사항 2·5: 홈페이지 상담 신청. 로그인 계정을 만들지 않고 prospect_contacts를 생성, '
-  'consultations를 requested+hold_expires_at(기본 30분)으로 저장. 동일 idempotency_key 재요청은 '
-  '기존 행 반환. 겹치는 슬롯은 consultations_no_overlap 배타 제약이 최종 방어선으로 막는다.';
+  'consultations를 requested로 저장 — 관리자가 수락/거절할 때까지 자동 만료 없이 슬롯을 유지한다. '
+  '동일 idempotency_key 재요청은 기존 행 반환, 같은 이메일의 두 번째 대기 신청은 거부(남용 방지). '
+  '겹치는 슬롯은 consultations_no_overlap 배타 제약이 최종 방어선으로 막는다.';
 
 grant execute on function public.submit_homepage_consult_request(text, text, text, timestamptz, text, text, text)
   to anon, authenticated;
@@ -572,6 +587,17 @@ begin
     raise exception '상담 신청을 찾을 수 없습니다: %', p_consultation_id;
   end if;
 
+  -- M1 요구사항 3(2026-09-03 추가) — readiness 게이트: "동의 확인 완료 + Smart Notes 활성화
+  -- 확인 완료" 두 조건을 서버에서 강제한다. 관리자 화면이 안내를 빠뜨리거나 우회해도 이
+  -- 함수 자체가 막는다 — 아직 한 번도 확정(scheduled)되지 않은 상담은 애초에 이 두 조건을
+  -- 채울 기회가 없었으므로 함께 막는다(상담 자체를 하지 않고 결과만 기록하는 경로 없음).
+  if v_row.consent_version_id is null or v_row.consent_confirmed_at is null then
+    raise exception '동의 확인이 완료되지 않아 상담 결과를 기록할 수 없습니다(consent_confirmed_at 없음).';
+  end if;
+  if v_row.smart_notes_config_status is distinct from 'applied' then
+    raise exception 'Smart Notes 활성화가 확인되지 않아 상담 결과를 기록할 수 없습니다(smart_notes_config_status: %).', v_row.smart_notes_config_status;
+  end if;
+
   update consultations set
     status = case when status = 'scheduled' then 'completed' else status end,
     completed_at = coalesce(completed_at, now()),
@@ -650,29 +676,178 @@ as $$
     and not exists (
       select 1 from consultations c
       where c.starts_at is not null
-        and c.status not in ('closed', 'converted', 'cancelled', 'no_show')
-        and (c.hold_expires_at is null or c.hold_expires_at > now())
+        and c.status in ('requested', 'scheduled')
         and tstzrange(c.starts_at, c.ends_at) && tstzrange(cs.slot_start, cs.slot_end)
     )
   order by cs.slot_start;
 $$;
 
 comment on function public.list_open_consult_slots(timestamptz, timestamptz) is
-  'M1 요구사항 1·2: 반복 가능시간에서 휴무 예외를 제거하고, 이미 점유된(hold 유효 또는 확정) 슬롯을 '
-  '뺀 열린 60분 슬롯 후보를 반환. 최종 중복 방지 방어선은 consultations_no_overlap 배타 제약.';
+  'M1 요구사항 1·2: 반복 가능시간에서 휴무 예외를 제거하고, 이미 점유된(requested 또는 scheduled) 슬롯을 '
+  '뺀 열린 60분 슬롯 후보를 반환. 최종 중복 방지 방어선은 consultations_no_overlap 배타 제약. '
+  '(2026-09-03 정정) hold 자동 만료를 제거해 requested도 scheduled와 동일하게 항상 점유로 취급한다.';
 
 grant execute on function public.list_open_consult_slots(timestamptz, timestamptz) to anon, authenticated;
 
 -- =========================================================================
--- 9. 만료된 hold 정리 — 요구사항 2번(임시 hold + 만료 정책)
+-- 9. hold 정책(2026-09-03 정정 — 자동 만료 제거)
 -- =========================================================================
 --
--- 만료된 requested 건은 삭제하지 않는다(관리자가 뒤늦게라도 확인할 수 있어야
--- 함) — 대신 hold_expires_at이 지나면 consultations_no_overlap 배타 제약의
--- where 절 조건에서 자동으로 빠져 그 슬롯이 새 신청에 다시 열린다. 별도
--- cron 함수는 필요 없다(배타 제약이 now() 기준으로 매 신규 insert 시점에
--- 재평가되므로). 이 절은 그 사실을 명시적으로 문서화한다.
+-- requested 상담은 관리자가 수락/거절하기 전까지 슬롯을 계속 점유한다 — 자동 만료를
+-- 제거했으므로 별도 만료 정리 cron도 필요 없다. consultations_no_overlap 배타 제약이
+-- requested/scheduled 둘 다 직접 하드 차단하므로(위 4번 섹션 참고), 이 constraint
+-- comment로 그 사실을 명시적으로 문서화한다.
 comment on constraint consultations_no_overlap on consultations is
-  'M1 요구사항 2: 이 배타 제약은 확정(scheduled) 상담끼리의 겹침만 하드 차단한다(now() 의존 없는 IMMUTABLE 조건만 '
-  '허용되는 Postgres 제약 때문). 아직 hold 상태인 requested 건끼리의 겹침·만료 처리는 submit_homepage_consult_request() '
-  '함수 내부의 명시적 SELECT ... FOR UPDATE 검사가 담당한다 — 만료된 hold는 그 검사 조건에서 자동 제외되어 재신청 가능해진다.';
+  'M1 요구사항 2(2026-09-03 정정): requested(hold, 자동 만료 없음)와 scheduled(확정) 둘 다 이 배타 제약이 '
+  '직접 하드 차단한다 — now() 의존 없는 IMMUTABLE 조건만 허용되는 Postgres 제약과도 맞아, hold 만료 개념을 '
+  '아예 없앤 뒤에는 앱 레벨 이중 검사(SELECT ... FOR UPDATE)가 더 친절한 에러만 앞단에서 줄 뿐 최종 방어선은 이 제약이다.';
+
+-- =========================================================================
+-- 10. Smart Notes 원본 자동 연결 (요구사항 4, 2026-09-03 추가)
+-- =========================================================================
+--
+-- 기존 R6 Workspace Events 웹훅(app/api/webhooks/workspace-events/route.ts)이 이미
+-- reservations.google_meeting_code로 세션을 찾아 smart_notes_generation_events에
+-- 적재하는 구조를 그대로 재사용한다 — 새 웹훅을 만들지 않는다. consultations도 같은
+-- 방식으로 매칭할 수 있도록 google_meeting_code 컬럼과 nullable consultation_id FK,
+-- 중복 이벤트 멱등 처리용 pubsub_message_id를 추가한다.
+alter table consultations add column google_meeting_code text;
+create index on consultations (google_meeting_code);
+comment on column consultations.google_meeting_code is
+  'M1 요구사항 4: google_meet_link에서 추출한 회의 코드(extractMeetingCodeFromLink) — Workspace Events '
+  '웹훅이 이 값으로 상담을 찾아 Smart Notes 원본을 자동 연결한다. Calendar 동기화 성공 시 함께 기록.';
+
+alter table smart_notes_generation_events add column consultation_id uuid references consultations (id);
+create index on smart_notes_generation_events (consultation_id);
+alter table smart_notes_generation_events add column pubsub_message_id text;
+create unique index smart_notes_generation_events_pubsub_message_id_uq
+  on smart_notes_generation_events (pubsub_message_id) where pubsub_message_id is not null;
+comment on column smart_notes_generation_events.consultation_id is
+  'M1 요구사항 4: 세션(session_id)이 아니라 상담에 매칭된 이벤트 — 상담은 sessions 테이블과 무관하므로 '
+  '별도 FK로 둔다. 매칭 실패(둘 다 null)는 유실이 아니라 linked=false로 보존해 관리자가 재처리할 수 있다.';
+comment on column smart_notes_generation_events.pubsub_message_id is
+  'M1 요구사항 4: Pub/Sub 메시지 messageId — 동일 이벤트 재전송(at-least-once 배달) 시 중복 행이 쌓이지 '
+  '않도록 유니크 인덱스로 멱등 처리한다(null이면 과거 이벤트처럼 검사하지 않음, 하위 호환).';
+
+-- =========================================================================
+-- 11. 안전한 동의 확인 토큰 (요구사항 5, 2026-09-03 추가)
+-- =========================================================================
+--
+-- 상담 UUID 자체를 공개 확인 권한으로 쓰지 않는다 — 별도의 만료형 확인 토큰을 발급하고
+-- 원문은 저장하지 않는다(해시만 저장, R2 account_invites의 토큰 해시 패턴과 동일한 원칙).
+create table consult_consent_tokens (
+  id uuid primary key default gen_random_uuid(),
+  consultation_id uuid not null references consultations (id),
+  token_hash text not null,
+  expires_at timestamptz not null,
+  used_at timestamptz,
+  created_at timestamptz not null default now()
+);
+create index on consult_consent_tokens (consultation_id);
+create unique index consult_consent_tokens_hash_uq on consult_consent_tokens (token_hash);
+
+comment on table consult_consent_tokens is
+  'M1 요구사항 5: 동의 확인 이메일 링크에 실리는 토큰의 해시만 저장한다(원문은 DB/로그에 남기지 않음) — '
+  '위조·재사용·다른 상담 확인을 막기 위해 상담 1건당 매번 새로 발급하고 만료·1회성으로 제한한다.';
+
+alter table consult_consent_tokens enable row level security;
+create policy "관리자 조회" on consult_consent_tokens for select using (is_admin());
+-- insert/update는 client에서 하지 않는다 — 확인 이메일 발송 시 서버가 service_role로 발급하고,
+-- confirm_consult_consent_by_token()이 검증·소비를 전담한다(아래).
+
+-- SHA-256 해시로 원문 토큰과 비교한다(pgcrypto digest) — 평문 토큰은 이 함수 호출자(서버
+-- 액션)에서만 잠깐 메모리에 있다가 여기 오면 즉시 해시로만 다뤄진다.
+create extension if not exists pgcrypto;
+
+create or replace function public.issue_consult_consent_token(
+  p_consultation_id uuid,
+  p_token_plain text,
+  p_ttl_hours integer default 168 -- 기본 7일(상담이 그보다 멀리 잡혀도 여유 있게, 짧게 만료시켜 재발급 필요할 땐 관리자 재전송으로 대응)
+)
+returns void
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  insert into consult_consent_tokens (consultation_id, token_hash, expires_at)
+  values (p_consultation_id, encode(extensions.digest(p_token_plain, 'sha256'), 'hex'), now() + make_interval(hours => p_ttl_hours));
+end;
+$$;
+revoke execute on function public.issue_consult_consent_token(uuid, text, integer) from anon, authenticated;
+grant execute on function public.issue_consult_consent_token(uuid, text, integer) to service_role;
+
+-- 조회 전용(읽기 화면용) — 아직 소비하지 않는다. 위조된 토큰이나 만료된 토큰은 조용히
+-- null을 반환한다(에러로 토큰 존재 여부를 흘리지 않음 — enumeration 방지).
+create or replace function public.resolve_consult_consent_token(p_token_plain text)
+returns table (consultation_id uuid, already_used boolean)
+language sql stable
+security definer
+set search_path = public
+as $$
+  select t.consultation_id, (t.used_at is not null) as already_used
+  from consult_consent_tokens t
+  where t.token_hash = encode(extensions.digest(p_token_plain, 'sha256'), 'hex')
+    and t.expires_at > now()
+  limit 1;
+$$;
+grant execute on function public.resolve_consult_consent_token(text) to anon, authenticated;
+
+-- 실제 확인 처리(멱등) — 동일 토큰으로 여러 번 호출돼도 최초 1회만 기록되고, 이후
+-- 호출은 이미 확인됨을 그대로 반환한다(요구사항 5: 동일 요청 멱등 처리).
+create or replace function public.confirm_consult_consent_by_token(p_token_plain text)
+returns table (consultation_id uuid, consent_version_id uuid, confirmed_at timestamptz)
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  v_token consult_consent_tokens;
+  v_consultation consultations;
+begin
+  select * into v_token from consult_consent_tokens
+  where token_hash = encode(extensions.digest(p_token_plain, 'sha256'), 'hex') and expires_at > now()
+  for update;
+  if not found then
+    raise exception '유효하지 않거나 만료된 확인 링크입니다.';
+  end if;
+
+  select * into v_consultation from consultations where id = v_token.consultation_id for update;
+  if not found then
+    raise exception '상담 신청을 찾을 수 없습니다.';
+  end if;
+
+  if v_token.used_at is null then
+    update consult_consent_tokens set used_at = now() where id = v_token.id;
+  end if;
+
+  if v_consultation.consent_confirmed_at is null then
+    update consultations set
+      consent_confirmed_at = now(),
+      consent_confirmed_ip = null -- IP는 앱 레이어(요청 헤더 접근 가능한 서버 액션)에서 별도 UPDATE로 기록한다.
+    where id = v_consultation.id
+    returning * into v_consultation;
+  end if;
+
+  return query select v_consultation.id, v_consultation.consent_version_id, v_consultation.consent_confirmed_at;
+end;
+$$;
+grant execute on function public.confirm_consult_consent_by_token(text) to anon, authenticated;
+
+comment on function public.confirm_consult_consent_by_token(text) is
+  'M1 요구사항 5: 동의 확인 토큰을 소비해 consultations.consent_confirmed_at을 1회 기록한다(멱등 — '
+  '이미 확인된 토큰으로 재호출해도 에러 없이 같은 결과 반환). IP 기록은 호출부(서버 액션)가 별도로 UPDATE한다.';
+
+-- =========================================================================
+-- 12. 확인 이메일 발송 멱등성 (요구사항 6, 2026-09-03 추가)
+-- =========================================================================
+--
+-- 재처리(Calendar 재동기화 재시도 등)가 이미 보낸 것과 똑같은 내용의 확인 이메일을
+-- 중복 발송하지 않도록, 마지막으로 보낸 이메일 내용의 지문(시간+Meet 링크 해시)과
+-- 발송 시각을 남긴다. 시간변경으로 내용이 실제로 달라지면 지문이 달라져 새 이메일을
+-- 보낸다(요구사항 6: "최신 일시/Meet 정보 반영하되 단순 재시도로 중복 발송 금지").
+alter table consultations add column confirmation_email_sent_at timestamptz;
+alter table consultations add column confirmation_email_content_hash text;
+comment on column consultations.confirmation_email_content_hash is
+  'M1 요구사항 6: sha256(starts_at + google_meet_link)의 hex 다이제스트. 다음 동기화 시도에서 '
+  '같은 해시면 이메일을 다시 보내지 않고, 달라지면(시간 변경 등) 새로 보낸다.';

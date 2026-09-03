@@ -1,18 +1,30 @@
 import { getConsultConsentView } from "@/app/consult-actions";
 import ConsentConfirmButton from "./ConsentConfirmButton";
 
-// M1 요구사항 4 — 상담용 AI 회의록·비밀유지·이용 안내 동의 확인 화면. 상담 전 1회만
+// M1 요구사항 4·5 — 상담용 AI 회의록·비밀유지·이용 안내 동의 확인 화면. 상담 전 1회만
 // 확인하면 되고(반복 체크 없음), 법률 문구는 별도 계약 문서 세션 확정 전까지
 // consult_consent_versions의 placeholder를 그대로 노출한다.
+//
+// (2026-09-03 정정) URL은 상담 UUID가 아니라 만료형 확인 토큰(?token=...)만 받는다 —
+// 상담 ID 자체를 공개 확인 권한으로 쓰지 않기 위해서다(위조·다른 상담 확인 방지).
 
-export default async function ConsultConsentPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
-  const view = await getConsultConsentView(id);
+export default async function ConsultConsentPage({ searchParams }: { searchParams: Promise<{ token?: string }> }) {
+  const { token } = await searchParams;
+
+  if (!token) {
+    return (
+      <main className="max-w-xl mx-auto px-6 py-16">
+        <p className="text-[15px] text-ink">유효하지 않은 확인 링크입니다.</p>
+      </main>
+    );
+  }
+
+  const view = await getConsultConsentView(token);
 
   if (!view) {
     return (
       <main className="max-w-xl mx-auto px-6 py-16">
-        <p className="text-[15px] text-ink">상담 신청을 찾을 수 없습니다.</p>
+        <p className="text-[15px] text-ink">유효하지 않거나 만료된 확인 링크입니다. 담당자에게 문의해 주세요.</p>
       </main>
     );
   }
@@ -37,7 +49,7 @@ export default async function ConsultConsentPage({ params }: { params: Promise<{
         <p>{view.consentVersion?.bodyMarkdown}</p>
       </div>
 
-      <ConsentConfirmButton consultationId={view.consultationId} alreadyConfirmedAt={view.alreadyConfirmedAt} />
+      <ConsentConfirmButton token={token} alreadyConfirmedAt={view.alreadyConfirmedAt} />
     </main>
   );
 }
