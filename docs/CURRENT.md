@@ -63,7 +63,7 @@
 v3 재검증까지 통과해 완전 마감됐다**(제품 오너가 직접 실행·보고, 상세는 위 "M1/R6 —
 Workspace Events 구독 모델 정정 및 실제 Sandbox 재검증 통과" 절) — 사용자 단위 구독
 모델이 실제로 성립함을 확인, 실측 중 발견된 UI 버그 2건은 이 세션에서 정식 수정·커밋
-완료. **M2는 착수해 아래 별도 절 기준으로 완료됐다(2026-09-03) — M3/M4는 여전히 착수하지 않았다.** 상세는 아래 "M1 — 상담 기반 재설계" 절, "M2 — R4 후속(체험수업권)" 절과 `docs/2026-09-03-m1-migration-execution-log.md`/`docs/2026-09-03-m2-migration-execution-log.md`. R9(과목 마일스톤 보드)·R11(보호자–관리자 운영 메신저)은 이 실행 순서에 포함되지 않고 각자의 R 섹션에 별도 미착수 항목으로 남아있다.
+완료. **M2·M3는 아래 별도 절 기준으로 완료됐다(2026-09-03) — M4는 계획 문서 정정만 반영했고 코드는 여전히 착수하지 않았다(아래 "M4 계획 흐름" 절 참고).** 상세는 아래 "M1 — 상담 기반 재설계" 절, "M2 — R4 후속(체험수업권)" 절, "M3 — 선생님 배정 종료(termination) 플로우" 절과 `docs/2026-09-03-m1-migration-execution-log.md`/`docs/2026-09-03-m2-migration-execution-log.md`/`docs/2026-09-03-m3-migration-execution-log.md`. R9(과목 마일스톤 보드)·R11(보호자–관리자 운영 메신저)은 이 실행 순서에 포함되지 않고 각자의 R 섹션에 별도 미착수 항목으로 남아있다.
   - **1/N 완료**: 선생님 반복가능시간·날짜별예외·15분버퍼·24h~8주 window, `confirm_lesson_booking()`(예약+세션+entitlement hold 단일 트랜잭션).
   - **2/N 완료**: Calendar/Meet 이벤트+Meet 생성·FreeBusy·취소, 실패해도 예약/hold는 건드리지 않는 재처리 워커(`reconciliation_needed` 포함).
   - **3/N 완료**: 구조적 cutover — `sessions`→`legacy_sessions`(레거시 세션뷰 8파일 14곳 계속 사용), `sessions_v3`→`sessions`(신규 예약이 쓰는 테이블). FK·RLS·인덱스는 rename에 자동 추종, 함수 본문 7개(텍스트 참조라 자동추종 안 됨)는 전부 CREATE OR REPLACE로 갱신 확인. `material_version_id`는 R9 선행조건(학생별 진도 스냅샷) 부재로 의도적으로 비워둠(인터페이스만 유지).
@@ -488,6 +488,99 @@ push하지 않았다).
   트리거하면 부작용이 크다고 판단. 자동 취소가 맞다고 판단되면
   `purchase_has_active_future_holds()`만 교체하면 됨.
 - **외부 변경**: 0건(Stripe/Google/이메일/원격 DB 전부 미접근). `git push` 없음.
+
+### M3 — 선생님 배정 종료(termination) 플로우, 완료(2026-09-03)
+
+커밋 `3bf4cce`(서버 레이어) → `<UI/테스트/문서 마감 커밋, 이 세션>`(전부 main 브랜치,
+`git push` 없음). **이전에 전달됐던 "별도 체험 배정 모델" M3 지시는 전량 폐기됐다** —
+2026-09-03 확정 정책: trial/regular는 `teacher_assignments` 레벨에서 분리된 개념이
+아니라 **단일 배정 관계**다(trial 60분/regular 120분 구분은 세션의 수업유형·수업권
+레벨에서만 존재). 체험 때 배정된 선생님은 계약 이후에도 그대로 유지되고, 시스템은
+절대 자동으로 다른 선생님을 선택하지 않는다. 실제 선생님 교체가 필요할 때만 기존
+`change_teacher_assignment()`(R5)를 재사용하는 **정식 종료(termination) 플로우**만
+이번에 구현했다. 기존 `decideTrialTeacherSuccessionProposal()`/`proposals` 관련
+코드·UI는 삭제하지 않고 "현재 정상 흐름에서 미사용" 상태로 남겨뒀다(R5 회귀 위험
+회피, M4가 연결할 때 안전하게 제거 검토).
+
+- **DB**(`supabase/migrations/20261014000000_m3_teacher_assignment_termination.sql`):
+  `teacher_assignment_termination_requests`(요청자 role guardian/teacher/admin,
+  reason, status requested/processing/completed/failed/cancelled, resolution
+  reassign/end_enrollment, RLS로 관리자·요청 당사자·해당 배정 선생님만 조회),
+  `teacher_assignment_termination_reservation_actions`(예약별 처리 감사, INSERT-only),
+  `preview_teacher_assignment_termination_impact()`(미래 확정 예약 + 보유분 여부),
+  `assert_teacher_assignment_ready_for_closure()`(미해결 미래 예약 남아있으면 종료
+  차단하는 최종 게이트), `list_subject_teaching_history_for_current_teacher()`(호출자가
+  `is_admin()` 이거나 그 과목의 **현재 활성** 배정 보유자일 때만 통과 — SECURITY DEFINER
+  함수 안에서 매번 다시 검증하므로 재배정 취소 시 접근이 자동으로 회수됨, DB 레벨
+  smoke test로 비배정 호출자가 거부되는 것 확인함). 반환 컬럼은 `session_id/starts_at/
+  ends_at/final_status/lesson_type_name`뿐 — 정산 단가(`hourly_rate_snapshot_*`),
+  Smart Notes 원본, 내부 메모, 다른 과목 기록은 애초에 SELECT하지 않는다(테이블
+  RLS가 아니라 컬럼 단위로 걸러내는 전용 함수 방식 채택 — Postgres RLS가 행 단위이기
+  때문). `teacher_assignments.curriculum_handoff_status` 컬럼에는 "이 필드는 더 이상
+  실제 업무 게이트가 아니며 이번 M3 종료 플로우가 대체한다"는 주석을 남기고 값은
+  건드리지 않음(하위 호환 유지, 삭제하지 않음).
+- **처리 로직**(`lib/enrollment/teacher-assignment-termination.ts`): 재배정 시
+  `is_teacher_slot_open()`/`violates_teacher_buffer()`로 새 선생님 가능시간·버퍼·
+  중복예약을 예약별로 재검증해 이관하거나, 이관 불가하면 기존 `cancelLessonBooking()`
+  으로 정식 취소(Calendar 삭제+보유분 해제 동시 처리)로 폴백. `end_enrollment`는
+  미래 예약 전체를 정식 취소 후 배정·수강을 함께 종료. 낙관적 락(claim) +
+  예약별 처리 기록으로 멱등/재처리 가능 — 부분 실패 시 `status='failed'`+`error`로
+  남고, 관리자가 같은 요청을 다시 처리하면 이미 처리된 예약은 건너뛰고 이어서
+  처리한다(중복 처리 안 됨). 과거 수업/Smart Notes 리뷰/배정 이력/정산 기준은
+  전혀 수정·삭제하지 않는다.
+- **권한 경계**: 선생님은 본인 배정에 대해 종료를 "요청"만 할 수 있고(`app/teacher/
+  teacher-assignment-termination-actions.ts`), 확정 처리 함수는 관리자 전용 파일
+  (`app/admin/teacher-assignment-termination-actions.ts`)에만 존재해 구조적으로
+  선생님이 직접 종료를 확정할 수 없다. 보호자 요청은 R11 메신저 없이 관리자가
+  외부 연락을 받아 대신 접수.
+- **UI**: 관리자 — `MatchingTab` 하단 `TeacherAssignmentTerminationPanel`(요청
+  목록/요청자·사유/미래 예약 영향 미리보기/재배정·수강종료 선택/처리·재처리).
+  선생님 — `AssignmentsTab`에 "배정 종료 요청" 인라인 폼(제출 후 상태만 조회 가능)
+  + "과거 수업 이력 보기" 접이식 위젯(현재 활성 배정 건에 한해 날짜/수업유형/상태만).
+  보호자·학생 — 기존 R5 `EnrollmentTab`이 이미 `currentTeacher`/`upcomingTeacherChange`
+  를 실시간 DB 조회로 보여주고 있어(변경 없음) 확정된 현재 선생님과 예정된 변경
+  결과가 그대로 반영됨.
+- **검증**: DB 레벨 smoke test(비배정 호출자 거부, 스키마·함수 존재 확인, psql
+  직접 실행) + Vitest 신규 4개 파일(`lib/enrollment/teacher-assignment-termination.test.ts`
+  5건, `app/admin/TeacherAssignmentTerminationPanel.test.tsx` 2건, `app/admin/
+  teacher-assignment-termination-actions.test.ts` 1건 — 민감 컬럼 비노출 확인,
+  `app/teacher/AssignmentsTab.test.tsx` 3건 — 선생님 본인 확정 불가/중복 요청 방지/
+  이력 화면에 민감 정보 없음) 전부 통과. 전체 Vitest 143개 파일/863건, `tsc --noEmit`,
+  `next build` 클린. 로컬 개발 DB에 마이그레이션 적용 확인(`npx supabase db reset
+  --local`).
+- **미완료**: Playwright E2E(역할별 화면 통합 흐름)와 클린 `git worktree` 재현은
+  이번 라운드에서 실행하지 못함 — Vitest/tsc/build로 회귀는 확인했으나 실브라우저
+  흐름 검증은 다음 라운드로 남김.
+- **범위 밖(명시적으로 만들지 않음)**: 별도 trial-teacher-assignment 테이블,
+  candidate/pending/rejected/expired 상태 머신, trial→regular 승계 제안·전환
+  로직, 보호자/학생용 선생님 선택 화면, 커리큘럼 핸드오프 요청/수락/완료 워크플로우,
+  문서 복사·데이터 마이그레이션·Drive 소유권/ACL 변경, 별도 핸드오프 체크리스트.
+  구조화된 과목 마일스톤 보드/진도 핸드오프 기능은 여전히 R9 범위.
+- **결정 필요**: 없음.
+- **외부 변경**: 0건(Google/Stripe/DocuSign 실호출, 실이메일, 원격 DB, `git push`
+  전부 없음).
+
+### M4 계획 흐름 정정(문서만, 코드 착수 안 함, 2026-09-03)
+
+M4는 여전히 미착수다. 이번 라운드에서는 계획된 흐름 서술만 아래로 정정한다
+(`docs/2026-08-29-master-roadmap-v3.md` M4 절도 동일하게 정정):
+
+`상담 → 체험 희망 확인 → 보호자·학생 ID 생성 및 검증 → 과목 수강 관계 생성 →
+선생님 배정 → 학생별 최초 1회 체험 Smart Notes 안내·동의 → 60분 체험수업권 지급 →
+배정된 선생님의 가능시간으로 체험 예약 → 체험수업·검토 리뷰 → 보호자의 정규 진행
+희망 표시 → 관리자 조건 확인 → 관리자가 '정규 계약 발송' 버튼 1회 클릭 → 회사
+선서명과 DocuSign 발송 즉시 실행 → 보호자 서명 완료 → 정규상품 구매 → 같은
+선생님과 정규수업 계속 진행`
+
+확정된 원칙: 잠재고객은 상담 동안 비로그인 상태 유지, 보호자·학생 ID는 체험
+희망 확인 시점에 검증된 온보딩으로 생성(체험 이후가 아님), 이메일 문자열 자동
+병합 없음, 과목+선생님 배정은 체험 전에 완료, 체험 예약은 이미 배정된 선생님의
+가능시간만 제공, 계약 이후 새로운 배정을 만들지 않음(수업권/계약 상태만 변경),
+계약·구매 완료 자체는 선생님 변경을 트리거하지 않음(M3 종료 플로우를 관리자가
+명시적으로 실행해야만 변경됨), 별도의 고객 대면 제안/승인 단계 없음, 관리자
+확인은 기존 R3 인프라로 회사 선서명+DocuSign 발송을 즉시·멱등하게 한 동작으로
+트리거, 구매 단계는 보호자 서명 전에 열리지 않음, `proposals` 구조는 M4의 새
+흐름에서 남아있더라도 미사용, 계약/법률 문서는 수정하지 않음.
 
 ## `material_version_id` 정책(R9 이관, 2026-09-02 명문화)
 

@@ -6,6 +6,7 @@ import type { MatchingTeacherCandidate } from "./matching-data";
 import type { StudentListItem } from "./users-data";
 import type { AdminSubject } from "./subject-data";
 import SubjectEnrollmentPanel from "./SubjectEnrollmentPanel";
+import TeacherAssignmentTerminationPanel from "./TeacherAssignmentTerminationPanel";
 
 export default function MatchingTab({
   students,
@@ -78,6 +79,8 @@ export default function MatchingTab({
         subjects={subjects}
         teacherCandidatesBySubject={teacherCandidatesBySubject}
       />
+
+      <TeacherAssignmentTerminationPanel />
     </div>
   );
 }
