@@ -90,37 +90,42 @@ beforeEach(() => {
   issueTokenMock.mockResolvedValue({ error: null });
 });
 
-describe("Smart Notes 실패가 확인 이메일을 막지 않는다(요구사항 3 정책)", () => {
-  it("Smart Notes 확인·보정이 실패해도 이메일은 그대로 발송된다", async () => {
+describe("Calendar 네이티브 초대(2026-09-03 정책 전환 — 요구사항 2·6)", () => {
+  it("최초 확정 시 attendeeEmail·sendUpdates=all로 Calendar 이벤트를 만들고, 성공하면 커스텀 이메일은 보내지 않는다", async () => {
+    ensureMeetSpaceSmartNotesOnMock.mockResolvedValue(true);
+    fromMock.mockImplementation((table: string) => {
+      if (table === "consultations") return buildConsultationsTable();
+      throw new Error(`unexpected table ${table}`);
+    });
+
+    const { syncOneConsultationCalendarEvent } = await import("./calendar-sync");
+    await syncOneConsultationCalendarEvent("consult-1");
+
+    expect(createCalendarEventWithMeetMock).toHaveBeenCalledWith(
+      expect.objectContaining({ attendeeEmail: "minji@example.com", sendUpdates: "all", description: expect.stringContaining("consent?token=") })
+    );
+    expect(sendEmailMock).not.toHaveBeenCalled(); // Calendar 네이티브 초대가 성공했으므로 중복 발송 없음
+  });
+
+  it("Smart Notes 확인·보정이 실패해도 Calendar 이벤트 생성 자체는 막히지 않는다(요구사항 3 정책)", async () => {
     ensureMeetSpaceSmartNotesOnMock.mockRejectedValue(new Error("Meet API 403"));
     fromMock.mockImplementation((table: string) => {
       if (table === "consultations") return buildConsultationsTable();
-      if (table === "consult_consent_versions") {
-        return { select: () => ({ eq: () => ({ maybeSingle: async () => ({ data: { id: "consent-1", title: "v0" }, error: null }) }) }) };
-      }
       throw new Error(`unexpected table ${table}`);
     });
 
     const { syncOneConsultationCalendarEvent } = await import("./calendar-sync");
     await syncOneConsultationCalendarEvent("consult-1");
 
-    expect(sendEmailMock).toHaveBeenCalledTimes(1);
+    expect(createCalendarEventWithMeetMock).toHaveBeenCalled();
     const smartNotesFailedUpdate = consultationsUpdatePayloads.find((p) => p.smart_notes_config_status === "failed");
     expect(smartNotesFailedUpdate).toBeTruthy();
   });
-});
 
-describe("확인 이메일 중복 발송 방지(요구사항 6)", () => {
-  it("같은 시간·Meet 링크로 재동기화되면 이메일을 다시 보내지 않는다", async () => {
+  it("시간 변경은 같은 이벤트를 sendUpdates=all로 patch하고, 커스텀 이메일은 추가로 보내지 않는다", async () => {
     ensureMeetSpaceSmartNotesOnMock.mockResolvedValue(true);
-    // 이미 이 시간+링크 조합으로 이메일을 보낸 적이 있다고 가정(사전에 계산된 해시를
-    // 그대로 넣는 대신, 실제 함수가 계산하는 방식과 동일하게 sha256로 미리 만든다).
-    const { createHash } = await import("node:crypto");
     consultationRow!.google_event_id = "evt-existing";
     consultationRow!.google_meet_link = "https://meet.google.com/abc-defg-hij";
-    consultationRow!.confirmation_email_content_hash = createHash("sha256")
-      .update(`${consultationRow!.starts_at}|${consultationRow!.google_meet_link}`)
-      .digest("hex");
 
     fromMock.mockImplementation((table: string) => {
       if (table === "consultations") return buildConsultationsTable();
@@ -130,16 +135,13 @@ describe("확인 이메일 중복 발송 방지(요구사항 6)", () => {
     const { syncOneConsultationCalendarEvent } = await import("./calendar-sync");
     await syncOneConsultationCalendarEvent("consult-1");
 
-    expect(patchCalendarEventTimeMock).toHaveBeenCalled(); // 이미 이벤트가 있으므로 patch 경로
+    expect(patchCalendarEventTimeMock).toHaveBeenCalledWith(expect.objectContaining({ sendUpdates: "all" }));
     expect(sendEmailMock).not.toHaveBeenCalled();
   });
 
-  it("시간이 바뀌면(내용 지문이 달라지면) 새 이메일을 보낸다", async () => {
-    ensureMeetSpaceSmartNotesOnMock.mockResolvedValue(true);
-    consultationRow!.google_event_id = "evt-existing";
-    consultationRow!.google_meet_link = "https://meet.google.com/abc-defg-hij";
-    consultationRow!.confirmation_email_content_hash = "stale-hash-from-before-reschedule";
-
+  it("Calendar 초대가 재시도 한도까지 반복 실패하면 fallback 커스텀 이메일을 정확히 1통 보낸다", async () => {
+    createCalendarEventWithMeetMock.mockRejectedValue(new Error("Calendar API 요청 실패 (status 500)"));
+    consultationRow!.google_sync_retry_count = 4; // 다음 실패로 MAX_RETRY_COUNT(5) 도달
     fromMock.mockImplementation((table: string) => {
       if (table === "consultations") return buildConsultationsTable();
       if (table === "consult_consent_versions") {
@@ -151,7 +153,24 @@ describe("확인 이메일 중복 발송 방지(요구사항 6)", () => {
     const { syncOneConsultationCalendarEvent } = await import("./calendar-sync");
     await syncOneConsultationCalendarEvent("consult-1");
 
+    const reconciliationUpdate = consultationsUpdatePayloads.find((p) => p.google_sync_status === "reconciliation_needed");
+    expect(reconciliationUpdate).toBeTruthy();
     expect(sendEmailMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("같은 실패 fallback 이메일은 재시도해도 중복 발송하지 않는다", async () => {
+    createCalendarEventWithMeetMock.mockRejectedValue(new Error("Calendar API 요청 실패 (status 500)"));
+    consultationRow!.google_sync_retry_count = 4;
+    consultationRow!.confirmation_email_content_hash = "fallback:Calendar API 요청 실패 (status 500)";
+    fromMock.mockImplementation((table: string) => {
+      if (table === "consultations") return buildConsultationsTable();
+      throw new Error(`unexpected table ${table}`);
+    });
+
+    const { syncOneConsultationCalendarEvent } = await import("./calendar-sync");
+    await syncOneConsultationCalendarEvent("consult-1");
+
+    expect(sendEmailMock).not.toHaveBeenCalled();
   });
 });
 

@@ -405,9 +405,13 @@ M3 R5 후속(체험/정규 배정) → M4 상담→체험→정규 전환 통합
       `requested`는 관리자가 처리할 때까지 배타 제약(`consultations_no_overlap`)이 하드
       점유. 동일 이메일 중복 대기 신청 방지로 남용만 막는다(UX 변경 없음).
 - [x] 관리자 수락 후 공식 관리자 계정(`official@alton.education`) 소유 Calendar·Meet 생성
-      **(2026-09-03)** `lib/consultation/calendar-sync.ts` — R6 `lib/google-calendar.ts`/
-      `lib/google-workspace-auth.ts` 그대로 재사용, subject만 상담 관리자 계정으로 교체.
-      `CALENDAR_SYNC_ALLOW_REAL_CALLS` 기본 false 유지 — 실제 Sandbox 호출은 미실행.
+      **(2026-09-03, 정책 전환 반영)** `lib/consultation/calendar-sync.ts` — R6
+      `lib/google-calendar.ts`/`lib/google-workspace-auth.ts` 그대로 재사용, subject만
+      상담 관리자 계정으로 교체. **제품 정책 확정(같은 날 후속)**: 신청 이메일을 유일한
+      attendee로 추가, `sendUpdates="all"`로 Calendar 네이티브 초대를 확정 일정의 기본
+      전달 수단으로 사용(R6의 "attendees 없음" 정책은 정규수업에서도 함께 폐기 —
+      상세는 `docs/CURRENT.md` M1 절 참고). `CALENDAR_SYNC_ALLOW_REAL_CALLS` 기본 false
+      유지 — 이 정책 전환 자체는 mock/로컬 검증까지만.
 - [x] 관리자 상담 리스트 및 오늘·주간·월간 캘린더 **(2026-09-03)**
       `app/admin/ConsultationSchedulingPanel.tsx`("상담 운영" 탭).
 - [x] 상담 확정 이메일·Meet 링크·상담 AI 안내·동의 경로 **(2026-09-03, 정정)** 수락 시

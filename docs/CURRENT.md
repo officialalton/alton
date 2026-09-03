@@ -195,16 +195,81 @@
   쓰던 불일치(기존 관례로 통일).
 - **미완료(스펙상 의도적으로 M2~M4로 이관, 이번 범위 아님)**: 기존 로그인 보호자·학생·선생님이
   보내는 상담 요청 유형 UI/구분 로직("신규 보호자 홈페이지 흐름 우선 완성" 원칙),
-  `prospect_contacts.converted_guardian_id` 실제 연결 로직(M4). **실제 Google Sandbox 검증
-  요청서는 작성 완료·승인 대기**(`docs/2026-09-03-m1-google-sandbox-verification-request.md`,
-  official 계정 Calendar/Meet/Smart Notes 통합 검증, 합성 회의 상한 "최대 20분, Smart Notes
-  생성 확인 시 즉시 종료"로 조정) — 이번 세션은 여전히 코드/mock/로컬 검증까지만이고 실제
-  Google API 호출은 0건.
-- **외부 변경**: Google/Stripe/DocuSign 실제 API 호출, Production/원격 dev DB 접근, 실제
-  이메일 발송 전부 0건. `CALENDAR_SYNC_ALLOW_REAL_CALLS` 등 모든 외부 플래그 기본값(false/
-  미설정) 그대로 유지 — 이번 세션에서 한 번도 true로 전환하지 않았다. 로컬 커밋만 생성,
-  `git push` 없음. **M1은 조건부 승인을 받았고(2026-09-03) 그 보완 조건도 이번 세션에서
-  전부 완료했다 — 남은 것은 push뿐이다.** push는 제품 오너가 최종 확인 후 별도로 지시할
+  `prospect_contacts.converted_guardian_id` 실제 연결 로직(M4).
+
+### M1 — Google Sandbox 실측 결과 + 최종 통합 보완(2026-09-03, 같은 날 후속 세션)
+
+**제품 오너가 이 세션 중 직접** M1 Sandbox 요청서(v1) 범위로 실제 Google Sandbox 통합 검증을
+실행했다(Claude 세션은 실제 외부 호출을 하지 않음 — 원칙적으로 실제 외부 호출은 사용자가
+채팅에서 직접 확인해야만 진행하는 정책, 아래 "안전 경계" 참고). **실측 결과**: `official@
+alton.education` 소유 Calendar 이벤트+Meet 생성, 확인 이메일(`matchbox512@snu.ac.kr`로만
+발송, 실제 2통), 동의 토큰 확인까지는 전부 실제로 확인됐으나, **Workspace Events 구독을
+실제로 만드는 코드가 아예 없어서 Smart Notes 원본 자동 연결이 통과하지 못했다** — 이 공백을
+이번 후속 세션에서 해결했다(아래 신규 항목). 이 실측에 쓰인 실제 Gmail SMTP 앱 비밀번호(
+`official@alton.education` 계정, Vercel Production에 이미 등록된 것과 동일 값)는 검증 직후
+`.env.local`에서 완전히 제거됐다고 보고됐다 — 이 세션에서 저장소 전체(추적 파일, 테스트
+결과물, `scripts/m1-sandbox-verification.sh`)와 `.env.local` 현재 상태를 직접 점검해 평문
+자격증명이 전혀 남아있지 않음을 확인했다(`SMTP_PASS` 현재 길이 0, `.env.local`은
+`.gitignore`로 커밋 대상에서 제외됨 확인). 임의 회전은 하지 않았다 — 노출 범위가 로컬 개발
+환경 한정으로 보이고 즉시 제거됐다는 보고가 있어 강제 회전이 필요하다고 판단하지 않았지만,
+최종 판단은 제품 오너 몫으로 남긴다.
+
+이번 후속 세션에서 실제로 구현·검증(전부 mock/로컬, 실제 Google API 호출 0건)한 것:
+
+- **Workspace Events 구독 수명주기(M1/R6 공통 blocker, 신규 해결)**: `workspace_events_
+  subscriptions` 테이블(`20261010000000_m1_workspace_events_subscriptions.sql`) +
+  `lib/google-workspace-events-subscriptions.ts`(구독 생성·조회·갱신·삭제 API 클라이언트,
+  `CALENDAR_SYNC_ALLOW_REAL_CALLS` 게이트 재사용) + `lib/workspace-events/subscription-
+  lifecycle.ts`(`ensureSubscriptionForOrganizer()` — organizer당 최대 1개 유지, 만료 임박
+  갱신, 만료/오류 시 재생성, `disabled`는 자동 재활성화 안 함; `reconcileMissedSmartNotes
+  Events()` — 구독 장애·이벤트 유실 대비 Meet API 사후 대조, 실패해도 상담·수업을 자동
+  완료 처리하지 않음). 상담 확정(`lib/consultation/calendar-sync.ts`)과 정규수업 확정
+  (`lib/booking/calendar-sync.ts`) 양쪽에서 Calendar 동기화 성공 직후 best-effort로 호출.
+  관리자 화면에 구독 상태·수동 갱신·수동 사후 대조 버튼 추가(`app/admin/workspace-events-
+  actions.ts`, `ConsultationSchedulingPanel.tsx`).
+- **Calendar 네이티브 초대로 정책 전환(제품 정책 확정)**: `lib/google-calendar.ts`의
+  `createCalendarEventWithMeet`/`patchCalendarEventTime`/`deleteCalendarEvent`에
+  `attendeeEmail`/`sendUpdates`/guest 제한 3종(`guestsCanInviteOthers`/`guestsCanModify`/
+  `guestsCanSeeOtherGuests` 항상 false)을 추가 — 호출부가 `sendUpdates`를 명시하도록 강제.
+  **상담**: `official@alton.education`이 organizer, 신청 이메일이 유일한 attendee,
+  `sendUpdates="all"`(생성·시간변경·취소 전부), 이벤트 설명에 AI Smart Notes 안내+동의
+  토큰 링크. **정규수업**: 담당 선생님 회사 계정이 organizer, 학생의 검증된(이메일 존재+
+  `email_confirmed_at` not null) 계정 이메일이 attendee — 보호자는 attendee로 추가하지
+  않음(R6의 "attendees 없음+sendUpdates=none" 정책 폐기). 학생 이메일 미검증은 조용히
+  무시하지 않고 예외를 던져 기존 `failed`/`reconciliation_needed` 재처리 경로로 노출(관리자
+  조치 필요 상태). Calendar 초대가 성공하면 기존 커스텀 SMTP 확인 메일은 중복 발송하지
+  않고, 재시도 한도까지 반복 실패한 경우에만 fallback 이메일 1통을 보낸다(요구사항 6).
+  거절 알림은 여전히 ALTON 커스텀 이메일 경로(`lib/consultation/notifications.ts`).
+- **Smart Notes 외부 공개 통제(정책+기존 구조 재확인, 신규 API 강제 코드 없음)**: Google
+  Meet API가 공유 대상(host/co-host 전용)을 직접 설정하는 기능을 제공하지 않아, 이 통제는
+  Workspace 관리자 기본 설정 + 앱 레벨 접근 통제(원본 `smart_notes_drive_file_id`는 관리자
+  전용 select 경로에서만 노출, 잠재고객에게 노출되는 화면 전무 — 기존 구조 그대로 유지)로만
+  담당한다. 외부 attendee가 Google에서 원본 접근 이메일/Drive 권한을 실제로 받는지는
+  다음 Sandbox 요청서(v2, `docs/2026-09-03-m1-google-sandbox-verification-request-v2.md`)의
+  검증 항목으로만 추가했다 — 이번엔 실제 호출 없음. 만약 다음 검증에서 원본 접근이 실제로
+  확인되면 공유 범위를 확대하지 않고 즉시 중단해 정책 blocker로 보고하기로 문서화해뒀다.
+- **관리자 UX**: "시간 변경"/"상담 결과 기록"의 `window.prompt()`를 인라인 폼으로 교체
+  (`ConsultationSchedulingPanel.tsx`). Calendar 동기화 상태 문구를 "Calendar 초대 발송
+  대기/발송됨/실패(재시도 중)/실패 — 관리자 확인 필요(이메일로 대체 안내됨)"로 세분화해
+  Workspace Events 구독 장애·Smart Notes 설정 실패·원본 미연결과 서로 다른 상태로 구분
+  표시. 기존 4조건 완료 게이트는 그대로 유지.
+- **검증**: 로컬 psql로 hold/readiness 게이트 재확인, 신규 유닛 테스트(`google-workspace-
+  events-subscriptions` 오케스트레이션 9건, Calendar attendee/guest 제한 1건, 학생 이메일
+  미검증 차단 1건 등) 포함 전체 Vitest 832건, `tsc --noEmit`·`next build` 클린, 전체
+  Playwright 52건(`--workers=1`) 중 51건 통과(1건은 이 작업과 무관한 기존 R4 동시성
+  테스트의 알려진 플레이키니스 — 단독 재실행 시 즉시 통과, 회귀 아님을 재확인).
+- **미완료**: 학생·보호자·선생님용 기존 예약 화면(`LessonBookingTab.tsx` 등)에 새 Calendar
+  상태 문구를 아직 반영하지 못함(관리자 화면만 갱신) — 다음 세션 항목으로 남김. 실제
+  Google Sandbox 재검증(구독 생성 포함 통합 재검증)은 v2 요청서 작성만 완료, 승인·실행
+  대기.
+- **외부 변경(이번 후속 세션 자체)**: Claude 세션이 실행한 실제 Google API 호출, 실제
+  이메일 발송, Production/원격 DB 접근 전부 0건. `CALENDAR_SYNC_ALLOW_REAL_CALLS` 등 모든
+  플래그 기본값(false/미설정) 유지, 세션 중 한 번도 전환하지 않았다. **제품 오너가 이
+  세션 흐름 중 직접 실행한 것은 위에 기술한 대로**: 실제 Google Calendar/Meet 객체 생성
+  후 정리, 실제 이메일 2통(`matchbox512@snu.ac.kr`만), 임시 Gmail SMTP 앱 비밀번호
+  일시 사용 후 제거 — Claude가 대행하지 않았고, 사후에 저장소·설정 파일에 흔적이 없음을
+  확인만 했다. `git push`는 여전히 하지 않았다 — 로컬 커밋만 존재.
+- push는 제품 오너가 최종 확인 후 별도로 지시할
   때만 한다(이 세션은 지시받지 않아 push하지 않았다).
 
 ## `material_version_id` 정책(R9 이관, 2026-09-02 명문화)

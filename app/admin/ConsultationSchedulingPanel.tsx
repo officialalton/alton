@@ -28,14 +28,30 @@ import {
   type ConsultAvailabilityRule,
   type ConsultAvailabilityException,
 } from "./consultation-scheduling-actions";
+import {
+  listWorkspaceEventsSubscriptions,
+  retryExpiringWorkspaceEventsSubscriptions,
+  runSmartNotesReconciliation,
+  type WorkspaceEventsSubscriptionRow,
+} from "./workspace-events-actions";
 
 const WEEKDAY_LABEL = ["일", "월", "화", "수", "목", "금", "토"];
 
+// 요구사항 5(2026-09-03 통합 보완) — Calendar 초대 실패는 다른 종류의 문제(단순 재시도
+// 대기 vs 관리자 개입 필요)와 구분되는 상태·문구로 보여준다.
 const SYNC_STATUS_LABEL: Record<string, string> = {
-  pending: "동기화 대기",
-  synced: "Calendar/Meet 연결됨",
-  failed: "동기화 실패(재시도 중)",
-  reconciliation_needed: "수동 확인 필요",
+  pending: "Calendar 초대 발송 대기",
+  synced: "Calendar 네이티브 초대 발송됨",
+  failed: "Calendar 초대 실패(자동 재시도 중)",
+  reconciliation_needed: "Calendar 초대 실패 — 관리자 확인 필요(이메일로 대체 안내됨)",
+};
+
+const SUBSCRIPTION_STATUS_LABEL: Record<string, string> = {
+  active: "정상",
+  expiring: "만료 임박",
+  expired: "만료됨",
+  error: "오류",
+  disabled: "관리자 정지",
 };
 
 const OUTCOME_LABEL: Record<string, string> = {
@@ -96,21 +112,31 @@ export default function ConsultationSchedulingPanel() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
+  const [subscriptions, setSubscriptions] = useState<WorkspaceEventsSubscriptionRow[]>([]);
+
+  // 요구사항 5 — window.prompt 대신 검증 가능한 인라인 폼.
+  const [rescheduleOpenId, setRescheduleOpenId] = useState<string | null>(null);
+  const [rescheduleValue, setRescheduleValue] = useState("");
+  const [outcomeOpenId, setOutcomeOpenId] = useState<string | null>(null);
+  const [outcomeSummary, setOutcomeSummary] = useState("");
+  const [outcomeValue, setOutcomeValue] = useState<"trial_recommended" | "regular_recommended" | "on_hold" | "closed" | "">("");
 
   async function reload() {
     setLoading(true);
     try {
       const { from, to } = rangeFor(view);
-      const [pendingRows, scheduledRows, ruleRows, exceptionRows] = await Promise.all([
+      const [pendingRows, scheduledRows, ruleRows, exceptionRows, subscriptionRows] = await Promise.all([
         listPendingConsultationRequests(),
         listConsultationsForAdmin({ from: from.toISOString(), to: to.toISOString() }),
         listConsultAvailabilityRules(),
         listConsultAvailabilityExceptions(),
+        listWorkspaceEventsSubscriptions(),
       ]);
       setPending(pendingRows);
       setScheduled(scheduledRows.filter((r) => r.status === "scheduled" || r.status === "completed"));
       setRules(ruleRows);
       setExceptions(exceptionRows);
+      setSubscriptions(subscriptionRows);
       setError(null);
     } catch (e) {
       setError(e instanceof Error ? e.message : "불러오기에 실패했습니다.");
@@ -243,9 +269,9 @@ export default function ConsultationSchedulingPanel() {
                   disabled={busyId === c.id}
                   className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50"
                   onClick={() => {
-                    const input = window.prompt("새 상담 시간(ISO, 예: 2026-09-15T10:00:00-07:00)을 입력하세요.");
-                    if (!input) return;
-                    withBusy(c.id, () => rescheduleConsultationRequest(c.id, new Date(input).toISOString(), "관리자 시간 변경"));
+                    setOutcomeOpenId(null);
+                    setRescheduleOpenId(rescheduleOpenId === c.id ? null : c.id);
+                    setRescheduleValue("");
                   }}
                 >
                   시간 변경
@@ -271,18 +297,123 @@ export default function ConsultationSchedulingPanel() {
                   title={c.completionReadiness !== "ready" ? COMPLETION_READINESS_LABEL[c.completionReadiness] : undefined}
                   className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50"
                   onClick={() => {
-                    const summary = window.prompt("고객 노출 가능한 관리자 검토 요약을 입력하세요(공백 불가, Smart Notes 원본은 자동 공개되지 않습니다).") ?? "";
-                    if (summary.trim() === "") return;
-                    const outcome = window.prompt("결과를 입력하세요: trial_recommended / regular_recommended / on_hold / closed") as
-                      | "trial_recommended" | "regular_recommended" | "on_hold" | "closed" | null;
-                    if (!outcome || !(outcome in OUTCOME_LABEL)) return;
-                    withBusy(c.id, () => recordConsultationOutcome({ consultationId: c.id, outcome, notes: "", adminReviewSummary: summary }));
+                    setRescheduleOpenId(null);
+                    setOutcomeOpenId(outcomeOpenId === c.id ? null : c.id);
+                    setOutcomeSummary("");
+                    setOutcomeValue("");
                   }}
                 >
                   상담 결과 기록
                 </button>
               </div>
+
+              {rescheduleOpenId === c.id && (
+                <form
+                  className="mt-3 flex flex-wrap items-end gap-2 border-t border-grey-200 pt-3"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    if (!rescheduleValue) return;
+                    withBusy(c.id, () => rescheduleConsultationRequest(c.id, new Date(rescheduleValue).toISOString(), "관리자 시간 변경")).then(
+                      () => setRescheduleOpenId(null)
+                    );
+                  }}
+                >
+                  <label className="text-[12px] text-ink">
+                    새 상담 시간
+                    <input
+                      type="datetime-local"
+                      required
+                      value={rescheduleValue}
+                      onChange={(e) => setRescheduleValue(e.target.value)}
+                      className="block mt-1 px-2 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12px]"
+                    />
+                  </label>
+                  <button type="submit" disabled={busyId === c.id} className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50">
+                    변경 확정
+                  </button>
+                  <button type="button" className="text-[12px] text-grey-500" onClick={() => setRescheduleOpenId(null)}>
+                    취소
+                  </button>
+                </form>
+              )}
+
+              {outcomeOpenId === c.id && (
+                <form
+                  className="mt-3 flex flex-col gap-2 border-t border-grey-200 pt-3"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    if (!outcomeValue || outcomeSummary.trim() === "") return;
+                    withBusy(c.id, () =>
+                      recordConsultationOutcome({ consultationId: c.id, outcome: outcomeValue, notes: "", adminReviewSummary: outcomeSummary })
+                    ).then(() => setOutcomeOpenId(null));
+                  }}
+                >
+                  <label className="text-[12px] text-ink">
+                    관리자 검토 요약(고객 노출 가능, Smart Notes 원본은 자동 공개되지 않습니다 — 공백 불가)
+                    <textarea
+                      required
+                      value={outcomeSummary}
+                      onChange={(e) => setOutcomeSummary(e.target.value)}
+                      className="block w-full mt-1 px-2 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12px] min-h-[60px]"
+                    />
+                  </label>
+                  <label className="text-[12px] text-ink">
+                    상담 결과
+                    <select
+                      required
+                      value={outcomeValue}
+                      onChange={(e) => setOutcomeValue(e.target.value as typeof outcomeValue)}
+                      className="block mt-1 px-2 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12px]"
+                    >
+                      <option value="">선택하세요</option>
+                      {Object.entries(OUTCOME_LABEL).map(([value, label]) => (
+                        <option key={value} value={value}>{label}</option>
+                      ))}
+                    </select>
+                  </label>
+                  <div className="flex gap-2">
+                    <button type="submit" disabled={busyId === c.id} className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50">
+                      기록 저장
+                    </button>
+                    <button type="button" className="text-[12px] text-grey-500" onClick={() => setOutcomeOpenId(null)}>
+                      취소
+                    </button>
+                  </div>
+                </form>
+              )}
             </div>
+          ))
+        )}
+      </section>
+
+      <section className="mb-8">
+        <div className="flex items-center justify-between mb-2">
+          <h2 className="text-[14px] font-extrabold text-ink">Workspace Events 구독 상태</h2>
+          <div className="flex gap-2">
+            <button
+              className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5"
+              onClick={() => withBusy("__renew_subscriptions", async () => { await retryExpiringWorkspaceEventsSubscriptions(); })}
+            >
+              만료 임박 구독 갱신 실행
+            </button>
+            <button
+              className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5"
+              onClick={() => withBusy("__reconcile_smart_notes", async () => { await runSmartNotesReconciliation(); })}
+            >
+              Smart Notes 사후 대조 실행
+            </button>
+          </div>
+        </div>
+        {subscriptions.length === 0 ? (
+          <p className="text-[13px] text-grey-500">등록된 구독이 없습니다(상담·수업이 아직 확정되지 않았거나 전부 신규).</p>
+        ) : (
+          subscriptions.map((s) => (
+            <p key={s.id} className="text-[12.5px] text-grey-700 mb-1">
+              {s.organizer_email}({s.organizer_role === "consult_organizer" ? "상담 관리자" : "선생님"}) —{" "}
+              <span style={{ color: s.status === "active" ? "#16a34a" : "#b91c1c" }}>{SUBSCRIPTION_STATUS_LABEL[s.status] ?? s.status}</span>
+              {s.expires_at && ` · 만료: ${formatDateTime(s.expires_at)}`}
+              {s.last_error && ` · 최근 오류: ${s.last_error}`}
+            </p>
           ))
         )}
       </section>

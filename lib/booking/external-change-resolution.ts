@@ -54,6 +54,7 @@ export async function restoreGoogleEventToAltonTime(params: {
     startsAt: new Date(params.altonStartsAt),
     endsAt: new Date(params.altonEndsAt),
     timezone: params.timezone,
+    sendUpdates: "all",
   });
 
   const admin = createAdminClient();

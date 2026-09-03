@@ -209,3 +209,40 @@ M1은 커밋했지만 **아직 승인되지 않은 상태**에서, 제품 오너
   로컬 psql로 4조건 게이트의 성공/실패 4가지 케이스 전부 실측 확인.
 - **외부 변경**: 이번에도 0건. `git push` 하지 않음 — M1은 조건부 승인됐지만 push는 별도
   지시가 있을 때까지 보류.
+
+## 10. 2026-09-03 M1 최종 마감 + R6 Calendar 정책 보정(통합 작업)
+
+제품 오너가 §9 조건부 승인 이후 실제 Google Sandbox로 v1 요청서 범위 통합 검증을 직접
+실행했다(Claude 세션은 실제 호출 없음). 실측 결과 Calendar/Meet/이메일/동의 확인까지는
+통과했으나 **Workspace Events 구독을 만드는 코드 자체가 없어 Smart Notes 자동 연결은
+검증되지 못한 gap**이 드러났다. 같은 날 후속 세션에서 이 gap 해결과 제품 정책 확정
+(Calendar 네이티브 초대를 상담·체험·정규수업 확정 일정의 기본 전달 수단으로) 을 하나의
+작업으로 통합해 반영했다 — 상세는 `docs/CURRENT.md`의 "M1 — Google Sandbox 실측 결과 +
+최종 통합 보완" 절에 전부 옮겨뒀다(중복 작성하지 않음). 요약:
+
+1. `workspace_events_subscriptions` 테이블 + `lib/google-workspace-events-subscriptions.ts`
+   + `lib/workspace-events/subscription-lifecycle.ts` — 구독 생성·재사용·갱신·정지·재생성,
+   Meet API 사후 대조(`reconcileMissedSmartNotesEvents`) 신규 구현.
+2. `lib/google-calendar.ts`의 Calendar 함수 3개에 attendee/sendUpdates/guest 제한 파라미터
+   추가 — 상담·정규수업 둘 다 네이티브 초대로 전환(R6 "attendees 없음" 정책 폐기).
+   `lib/booking/calendar-sync.ts`에 학생 이메일 검증 확인(`resolveVerifiedStudentEmail`)
+   추가 — 미검증 학생은 조용히 무시하지 않고 예외로 관리자 조치 필요 상태 노출.
+3. Smart Notes 외부 비공개는 정책·기존 구조 재확인만(신규 API 강제 코드 없음, Google이
+   해당 설정을 API로 지원하지 않음) — 다음 Sandbox 요청서(v2)의 검증 항목으로만 추가.
+4. `ConsultationSchedulingPanel.tsx` — `window.prompt()` 2곳(시간변경/결과기록)을 인라인
+   폼으로 교체, Calendar 동기화 상태 문구 세분화, 구독 상태 섹션 신규.
+5. 보안 점검: 제품 오너가 보고한 실제 SMTP 자격증명 임시 사용·제거를 저장소·`.env.local`
+   현재 상태로 직접 재확인 — 평문 잔존 없음(`.env.local` gitignore 확인, `SMTP_PASS` 길이
+   0, 테스트 결과물·스크립트 어디에도 없음). 강제 회전은 하지 않음(판단은 제품 오너 몫).
+6. `scripts/m1-sandbox-verification.sh`(이전 세션에서 초안 작성, 비밀값 없음 확인) 커밋.
+7. 신규 Sandbox 요청서 v2(`docs/2026-09-03-m1-google-sandbox-verification-request-v2.md`)
+   — 구독 생성 포함 통합 재검증 절차만 작성, 실제 호출 없음.
+- **검증**: 로컬 `supabase db reset --local` 재적용, 신규 유닛 테스트(구독 수명주기 9건,
+  Calendar attendee/guest 제한 1건, 학생 이메일 미검증 차단 1건) 포함 전체 Vitest 832건,
+  `tsc --noEmit`·`next build` 클린, 전체 Playwright 52건(`--workers=1`) 중 51건 통과(1건은
+  무관한 기존 R4 동시성 플레이키 테스트 — 단독 재실행 시 즉시 통과 재확인).
+- **미완료**: 학생·보호자·선생님용 예약 화면의 Calendar 상태 표시 갱신(관리자 화면만
+  갱신), 실제 Sandbox 재검증(v2, 승인·실행 대기).
+- **외부 변경**: 이번 세션 Claude 실행분은 0건. 제품 오너가 세션 흐름 중 직접 실행한
+  실제 Google 객체 생성·삭제·이메일 2통·임시 SMTP 자격증명 사용은 위 5번 항목에서 사후
+  확인만 수행. `git push` 없음(로컬 커밋만).

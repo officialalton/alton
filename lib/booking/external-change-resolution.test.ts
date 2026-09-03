@@ -80,6 +80,7 @@ describe("restoreGoogleEventToAltonTime", () => {
       startsAt: new Date("2026-10-01T19:00:00Z"),
       endsAt: new Date("2026-10-01T21:00:00Z"),
       timezone: "America/Los_Angeles",
+      sendUpdates: "all",
     });
     expect(rpcMock).toHaveBeenCalledWith("record_reservation_restored_to_alton_time", {
       p_reservation_id: "r1",

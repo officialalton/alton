@@ -2,6 +2,7 @@ import { createAdminClient } from "@/lib/supabase-admin";
 import { createCalendarEventWithMeet, deleteCalendarEvent } from "@/lib/google-calendar";
 import { extractMeetingCodeFromLink, enableMeetSpaceSmartNotes } from "@/lib/google-meet";
 import { DEFAULT_TIMEZONE } from "@/lib/timezone";
+import { ensureSubscriptionForOrganizer } from "@/lib/workspace-events/subscription-lifecycle";
 
 // R6 2/N·10/N — 확정된 예약(reservations.status='confirmed')에 Calendar 이벤트+Meet를 붙이는
 // 동기화. drive-artifacts.ts(R3)의 큐 처리 패턴(조건부 UPDATE로 낙관적 잠금, retry_count
@@ -21,6 +22,7 @@ const MAX_RETRY_COUNT = 5;
 type PendingReservationRow = {
   id: string;
   owner_profile_id: string;
+  subject_enrollment_id: string;
   starts_at: string;
   ends_at: string;
   google_sync_retry_count: number;
@@ -40,6 +42,37 @@ async function resolveTeacherWorkspaceEmail(
     throw new Error(`선생님(${teacherId})의 workspace_email이 아직 없습니다 — Directory 프로비저닝 선행 필요.`);
   }
   return data.workspace_email as string;
+}
+
+/**
+ * **(2026-09-03 정책 전환)** 정규수업 Calendar 이벤트에 학생을 유일한 외부 attendee로
+ * 추가한다(보호자는 기본 attendee로 넣지 않음 — 정책 확정). 학생 계정 이메일이 없거나
+ * 아직 검증(email_confirmed_at)되지 않았으면 조용히 attendee 없이 진행하지 않고 예외를
+ * 던진다 — 기존 재시도/`reconciliation_needed` 경로를 그대로 타서 관리자 조치 필요
+ * 상태로 표시된다(새 상태값을 만들지 않고 기존 노출 경로 재사용).
+ */
+async function resolveVerifiedStudentEmail(
+  admin: ReturnType<typeof createAdminClient>,
+  subjectEnrollmentId: string
+): Promise<string> {
+  const { data: enrollment, error: enrollmentError } = await admin
+    .from("subject_enrollments")
+    .select("child_id")
+    .eq("id", subjectEnrollmentId)
+    .single();
+  if (enrollmentError) throw new Error(enrollmentError.message);
+
+  const { data: userResult, error: userError } = await admin.auth.admin.getUserById(enrollment.child_id as string);
+  if (userError || !userResult?.user) {
+    throw new Error(`학생(${enrollment.child_id}) 계정 정보를 찾을 수 없습니다 — 관리자 확인 필요.`);
+  }
+  if (!userResult.user.email) {
+    throw new Error(`학생(${enrollment.child_id}) 계정에 이메일이 없습니다 — Calendar 초대 보류, 관리자 조치 필요.`);
+  }
+  if (!userResult.user.email_confirmed_at) {
+    throw new Error(`학생(${enrollment.child_id}) 계정 이메일이 아직 검증되지 않았습니다 — Calendar 초대 보류, 관리자 조치 필요.`);
+  }
+  return userResult.user.email;
 }
 
 /**
@@ -86,13 +119,20 @@ async function processOnePendingReservation(
   row: PendingReservationRow
 ): Promise<{ googleEventId: string; meetLink: string; teacherWorkspaceEmail: string }> {
   const teacherWorkspaceEmail = await resolveTeacherWorkspaceEmail(admin, row.owner_profile_id);
+  const studentEmail = await resolveVerifiedStudentEmail(admin, row.subject_enrollment_id);
+  // 이벤트 설명에는 수업명·과목·시간·Meet 링크만 담긴다(요구사항 3) — 민감한 상담
+  // 내용·학습평가·Smart Notes 원본은 절대 넣지 않는다. Meet 링크는 Calendar가
+  // conferenceData로 이미 표시하므로 별도 텍스트로 중복 기재하지 않는다.
   const { googleEventId, meetLink } = await createCalendarEventWithMeet({
     teacherWorkspaceEmail,
     reservationId: row.id,
     startsAt: new Date(row.starts_at),
     endsAt: new Date(row.ends_at),
     summary: "ALTON 정규수업",
+    description: "ALTON 정규수업 일정입니다. 자세한 내용은 ALTON 학생 포털에서 확인해 주세요.",
     timezone: DEFAULT_TIMEZONE,
+    attendeeEmail: studentEmail,
+    sendUpdates: "all",
   });
   return { googleEventId, meetLink, teacherWorkspaceEmail };
 }
@@ -112,7 +152,7 @@ export async function syncOneReservationCalendarEvent(reservationId: string): Pr
 
   const { data: row, error: fetchError } = await admin
     .from("reservations")
-    .select("id, owner_profile_id, starts_at, ends_at, google_sync_retry_count, google_sync_status")
+    .select("id, owner_profile_id, subject_enrollment_id, starts_at, ends_at, google_sync_retry_count, google_sync_status")
     .eq("id", reservationId)
     .maybeSingle();
   if (fetchError) throw new Error(fetchError.message);
@@ -148,6 +188,16 @@ export async function syncOneReservationCalendarEvent(reservationId: string): Pr
       .eq("id", reservationId);
 
     await applySmartNotesConfigBestEffort({ admin, reservationId, teacherWorkspaceEmail, meetLink });
+
+    // M1/R6 공통 요구사항 1 — 이 선생님 organizer의 Workspace Events 구독을 best-effort로
+    // 보장한다(없으면 생성, 만료 임박이면 갱신). 실패해도 예약 확정에는 영향 없음.
+    try {
+      await ensureSubscriptionForOrganizer(teacherWorkspaceEmail, "teacher");
+    } catch (e) {
+      console.error(
+        JSON.stringify({ type: "r6_workspace_events_subscription_ensure_failed", reservationId, error: e instanceof Error ? e.message : String(e) })
+      );
+    }
 
     return { outcome: "synced", googleEventId, meetLink };
   } catch (syncError) {
@@ -226,7 +276,7 @@ export async function cancelSyncedCalendarEvent(params: {
   if (!params.googleEventId) return;
   const admin = createAdminClient();
   const teacherWorkspaceEmail = await resolveTeacherWorkspaceEmail(admin, params.teacherId);
-  await deleteCalendarEvent({ teacherWorkspaceEmail, googleEventId: params.googleEventId });
+  await deleteCalendarEvent({ teacherWorkspaceEmail, googleEventId: params.googleEventId, sendUpdates: "all" });
 }
 
 export { MAX_RETRY_COUNT };

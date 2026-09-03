@@ -39,6 +39,7 @@ describe("google-calendar", () => {
           endsAt: new Date(),
           summary: "테스트",
           timezone: "America/Los_Angeles",
+          sendUpdates: "none",
         })
       ).rejects.toThrow("not implemented");
       expect(fetchMock).not.toHaveBeenCalled();
@@ -65,6 +66,7 @@ describe("google-calendar", () => {
         endsAt: new Date("2026-10-01T21:00:00Z"),
         summary: "ALTON 정규수업",
         timezone: "America/Los_Angeles",
+        sendUpdates: "none",
       });
 
       expect(result).toEqual({ googleEventId: "google-event-1", meetLink: "https://meet.google.com/abc-defg-hij" });
@@ -75,6 +77,42 @@ describe("google-calendar", () => {
       const body = JSON.parse(init.body as string);
       expect(body.conferenceData.createRequest.requestId).toBe("reservation-abc");
       expect(body.attendees).toBeUndefined();
+    });
+
+    // 2026-09-03 정책 전환 — 확정된 상담·체험·정규수업은 Calendar 네이티브 초대를
+    // 기본 전달 수단으로 쓴다(R6의 "attendees 없음+sendUpdates=none" 정책 폐기).
+    it("attendeeEmail이 있으면 유일한 외부 참석자로 추가하고 sendUpdates=all·guest 제한 3종을 항상 적용한다", async () => {
+      allowRealCalls();
+      const fetchMock = vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          id: "google-event-3",
+          conferenceData: { entryPoints: [{ entryPointType: "video", uri: "https://meet.google.com/abc-defg-hij" }] },
+        }),
+      });
+      vi.stubGlobal("fetch", fetchMock);
+      const { createCalendarEventWithMeet } = await import("./google-calendar");
+
+      await createCalendarEventWithMeet({
+        teacherWorkspaceEmail: "official@alton.education",
+        reservationId: "consult-abc",
+        startsAt: new Date("2026-10-01T19:00:00Z"),
+        endsAt: new Date("2026-10-01T20:00:00Z"),
+        summary: "[Alton Education 상담] 홍길동",
+        description: "상담 안내",
+        timezone: "America/Los_Angeles",
+        attendeeEmail: "parent@example.com",
+        sendUpdates: "all",
+      });
+
+      const [url, init] = fetchMock.mock.calls[0];
+      expect(url).toContain("sendUpdates=all");
+      const body = JSON.parse(init.body as string);
+      expect(body.attendees).toEqual([{ email: "parent@example.com" }]);
+      expect(body.guestsCanInviteOthers).toBe(false);
+      expect(body.guestsCanModify).toBe(false);
+      expect(body.guestsCanSeeOtherGuests).toBe(false);
+      expect(body.description).toBe("상담 안내");
     });
 
     it("Meet entry point가 없으면 명확한 에러를 던진다", async () => {
@@ -92,6 +130,7 @@ describe("google-calendar", () => {
           endsAt: new Date(),
           summary: "테스트",
           timezone: "America/Los_Angeles",
+          sendUpdates: "none",
         })
       ).rejects.toThrow("Meet 링크를 받지 못했습니다");
     });
@@ -103,7 +142,7 @@ describe("google-calendar", () => {
       vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: false, status: 404 }));
       const { deleteCalendarEvent } = await import("./google-calendar");
       await expect(
-        deleteCalendarEvent({ teacherWorkspaceEmail: "teacher@alton.education", googleEventId: "gone" })
+        deleteCalendarEvent({ teacherWorkspaceEmail: "teacher@alton.education", googleEventId: "gone", sendUpdates: "none" })
       ).resolves.toBeUndefined();
     });
 
@@ -112,7 +151,7 @@ describe("google-calendar", () => {
       vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: false, status: 500, text: async () => "boom" }));
       const { deleteCalendarEvent } = await import("./google-calendar");
       await expect(
-        deleteCalendarEvent({ teacherWorkspaceEmail: "teacher@alton.education", googleEventId: "e1" })
+        deleteCalendarEvent({ teacherWorkspaceEmail: "teacher@alton.education", googleEventId: "e1", sendUpdates: "none" })
       ).rejects.toThrow("Calendar 이벤트 삭제 실패");
     });
   });

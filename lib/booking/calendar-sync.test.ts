@@ -30,8 +30,13 @@ const finalUpdatePayloads: Array<Record<string, unknown>> = [];
 const teacherLookupMock = vi.fn();
 const sessionsUpdateFinalMock = vi.fn().mockResolvedValue({ error: null });
 const sessionsUpdatePayloads: Array<Record<string, unknown>> = [];
+const subjectEnrollmentLookupMock = vi.fn();
+const getUserByIdMock = vi.fn();
 
 const fromMock = vi.fn((table: string) => {
+  if (table === "subject_enrollments") {
+    return { select: () => ({ eq: () => ({ single: subjectEnrollmentLookupMock }) }) };
+  }
   if (table === "reservations") {
     return {
       select: () => ({
@@ -68,12 +73,16 @@ const fromMock = vi.fn((table: string) => {
 });
 
 vi.mock("@/lib/supabase-admin", () => ({
-  createAdminClient: () => ({ from: fromMock }),
+  createAdminClient: () => ({
+    from: fromMock,
+    auth: { admin: { getUserById: (id: string) => getUserByIdMock(id) } },
+  }),
 }));
 
 const BASE_ROW = {
   id: "r1",
   owner_profile_id: "t1",
+  subject_enrollment_id: "se1",
   starts_at: "2026-10-01T19:00:00Z",
   ends_at: "2026-10-01T21:00:00Z",
   google_sync_retry_count: 0,
@@ -88,6 +97,11 @@ beforeEach(() => {
   reservationsUpdateFinalMock.mockResolvedValue({ error: null });
   finalUpdatePayloads.length = 0;
   sessionsUpdatePayloads.length = 0;
+  subjectEnrollmentLookupMock.mockResolvedValue({ data: { child_id: "child1" }, error: null });
+  getUserByIdMock.mockResolvedValue({
+    data: { user: { email: "student@example.com", email_confirmed_at: "2026-01-01T00:00:00Z" } },
+    error: null,
+  });
   teacherLookupMock.mockResolvedValue({ data: { workspace_email: "teacher@alton.education" }, error: null });
   sessionsUpdateFinalMock.mockResolvedValue({ error: null });
   enableMeetSpaceSmartNotesMock.mockResolvedValue(undefined);
@@ -114,6 +128,26 @@ describe("syncOneReservationCalendarEvent", () => {
       google_meet_link: "https://meet.google.com/abc-defg-hij",
       google_meeting_code: "abc-defg-hij",
     });
+    expect(createCalendarEventWithMetMock).toHaveBeenCalledWith(
+      expect.objectContaining({ attendeeEmail: "student@example.com", sendUpdates: "all" })
+    );
+  });
+
+  // 2026-09-03 정책 전환(요구사항 3) — 학생 이메일 미검증은 조용히 무시하지 않고
+  // Calendar 초대를 보류시켜(예외를 던져) 기존 재시도/reconciliation_needed 경로로
+  // 관리자 조치 필요 상태에 노출시킨다.
+  it("학생 계정 이메일이 아직 검증되지 않았으면 Calendar 이벤트를 만들지 않고 failed로 남긴다", async () => {
+    getUserByIdMock.mockResolvedValue({
+      data: { user: { email: "student@example.com", email_confirmed_at: null } },
+      error: null,
+    });
+    const { syncOneReservationCalendarEvent } = await import("./calendar-sync");
+    const result = await syncOneReservationCalendarEvent("r1");
+
+    expect(result.outcome).toBe("failed");
+    expect(createCalendarEventWithMetMock).not.toHaveBeenCalled();
+    expect(finalUpdatePayloads[0].google_sync_status).toBe("failed");
+    expect((finalUpdatePayloads[0].google_sync_error as string)).toContain("검증");
   });
 
   it("정규수업은 가족계약 필수 조항이므로 항상 Smart Notes를 켠다(회차별 선택 없음)", async () => {
@@ -199,6 +233,7 @@ describe("cancelSyncedCalendarEvent", () => {
     expect(deleteCalendarEventMock).toHaveBeenCalledWith({
       teacherWorkspaceEmail: "teacher@alton.education",
       googleEventId: "g1",
+      sendUpdates: "all",
     });
   });
 });

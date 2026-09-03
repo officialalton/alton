@@ -191,3 +191,51 @@ export async function listConferenceParticipantEvents(params: {
   }
   return events;
 }
+
+/**
+ * M1/R6 공통(2026-09-03) — Workspace Events 구독 장애·이벤트 유실 대비 사후 대조.
+ * meetingCode의 최근 conference record를 조회해 그 record에 연결된 Smart Notes
+ * 문서의 Drive file ID를 찾는다. 구독이 끊긴 동안 웹훅으로 못 받은 Smart Notes를
+ * 관리자 재처리(reconcileMissedSmartNotesEvents)가 이 함수로 다시 찾아낼 수 있게
+ * 한다. **최선 추정**: `conferenceRecords.list`가 space 이름으로 필터링 가능하고,
+ * 각 record 아래 `smartNotes` 서브 리소스가 있다고 가정했다(기존
+ * fetchSmartNoteDriveFileId가 이미 전제하는 스키마와 동일 계열) — 실제 Sandbox
+ * 검증 전까지는 정확한 응답 구조가 다를 수 있다.
+ */
+export async function findRecentSmartNoteForMeetingCode(params: {
+  teacherWorkspaceEmail: string;
+  meetingCode: string;
+}): Promise<{ smartNoteResourceName: string; driveFileId: string | null } | null> {
+  assertRealCallsAllowed();
+  const readonlyToken = await getMeetReadonlyApiAccessToken(params.teacherWorkspaceEmail);
+
+  const spaceRes = await meetFetch(`${MEET_API}/spaces/${params.meetingCode}`, readonlyToken, { method: "GET" });
+  const space = (await spaceRes.json()) as SpaceResource;
+  if (!space.name) return null;
+
+  const listRes = await meetFetch(
+    `${MEET_API}/conferenceRecords?filter=${encodeURIComponent(`space.name="${space.name}"`)}`,
+    readonlyToken,
+    { method: "GET" }
+  );
+  const listData = (await listRes.json()) as { conferenceRecords?: Array<{ name: string; startTime?: string }> };
+  const records = (listData.conferenceRecords ?? []).sort((a, b) => (b.startTime ?? "").localeCompare(a.startTime ?? ""));
+  const mostRecent = records[0];
+  if (!mostRecent) return null;
+
+  const smartNotesRes = await meetFetch(`${MEET_API}/${mostRecent.name}/smartNotes`, readonlyToken, { method: "GET" });
+  const smartNotesData = (await smartNotesRes.json()) as { smartNotes?: Array<{ name: string }> };
+  const smartNote = smartNotesData.smartNotes?.[0];
+  if (!smartNote) return null;
+
+  let driveFileId: string | null = null;
+  try {
+    driveFileId = await fetchSmartNoteDriveFileId({
+      teacherWorkspaceEmail: params.teacherWorkspaceEmail,
+      smartNoteResourceName: smartNote.name,
+    });
+  } catch {
+    driveFileId = null; // 원본이 아직 생성 중일 수 있음 — 식별자만이라도 반환해 다음 재처리에서 재시도
+  }
+  return { smartNoteResourceName: smartNote.name, driveFileId };
+}

@@ -3,6 +3,7 @@
 import { requireAdmin } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { syncOneConsultationCalendarEvent, cancelSyncedConsultationCalendarEvent, processPendingConsultationCalendarSyncs, retrySmartNotesConfigForConsultation, reprocessUnlinkedSmartNotesEvents } from "@/lib/consultation/calendar-sync";
+import { sendConsultationRejectionEmail } from "@/lib/consultation/notifications";
 
 // M1 — 관리자 상담 운영(요구사항 1·3·6). 홈페이지 신청은 app/consult-actions.ts,
 // 슬롯/hold/상태전이의 소스오브트루스는 20261009000000_m1_consultation_unification.sql의
@@ -134,11 +135,23 @@ export async function acceptConsultationRequest(consultationId: string): Promise
 
 export async function rejectConsultationRequest(consultationId: string, reason: string): Promise<void> {
   const { supabase } = await requireAdmin();
-  const { error } = await supabase.rpc("admin_reject_consultation", {
+  const { data, error } = await supabase.rpc("admin_reject_consultation", {
     p_consultation_id: consultationId,
     p_reason: reason || null,
   });
   if (error) throw new Error(error.message);
+
+  // 요구사항 2: 거절은 Calendar가 담당하지 않는 알림이므로(수락 전에는 애초에 Calendar
+  // 이벤트가 없다) ALTON 커스텀 이메일 경로로만 안내한다. 이메일 발송 실패가 거절 처리
+  // 자체를 되돌리지 않는다(graceful degradation 원칙 유지).
+  const row = data as { contact_name: string; contact_email: string } | null;
+  if (row) {
+    try {
+      await sendConsultationRejectionEmail(row);
+    } catch (e) {
+      console.error(JSON.stringify({ type: "m1_consult_rejection_email_failed", consultationId, error: e instanceof Error ? e.message : String(e) }));
+    }
+  }
 }
 
 export async function rescheduleConsultationRequest(consultationId: string, newStartsAtIso: string, reason: string): Promise<void> {

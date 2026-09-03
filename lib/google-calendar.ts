@@ -40,13 +40,18 @@ type CalendarEventResult = {
 };
 
 /**
- * 확정된 예약 하나에 대해 선생님 캘린더에 이벤트 + 고유 Meet 링크를 생성한다.
- * `conferenceData.createRequest.requestId`에 reservationId를 그대로 써서, 같은
- * 예약으로 재시도해도 Google 쪽에서 새 Meet 링크가 중복 발급되지 않게 한다(Google
- * API가 requestId 기준으로 자체 멱등 처리 — 공식 문서 명시 동작).
- * `sendUpdates: "none"` — 이 R6 구현은 실제 알림 발송을 하지 않는다(스펙: "실제
- * 이메일이나 메시지는 발송하지 말고 발송 대기 상태까지만 검증"). 참석자는 추가하지
- * 않는다(ALTON 화면 접속이 원본, 학생/보호자에게 Google 초대 메일이 나가지 않도록).
+ * 확정된 예약 하나에 대해 organizer(선생님 또는 상담 관리자) 캘린더에 이벤트 + 고유
+ * Meet 링크를 생성한다. `conferenceData.createRequest.requestId`에 reservationId를
+ * 그대로 써서, 같은 예약으로 재시도해도 Google 쪽에서 새 Meet 링크가 중복 발급되지
+ * 않게 한다(Google API가 requestId 기준으로 자체 멱등 처리 — 공식 문서 명시 동작).
+ *
+ * **(2026-09-03 정책 전환)** 확정된 상담·체험·정규수업은 Google Calendar 네이티브
+ * 초대를 기본 전달 수단으로 쓴다(제품 정책 확정) — 이전 R6의 "attendees 없음 +
+ * sendUpdates=none" 정책은 폐기됐다. `attendeeEmail`이 있으면 유일한 외부 참석자로
+ * 추가하고 `sendUpdates`를 호출부가 명시적으로 지정한다(기본값 없음 — 정책이 달라진
+ * 이유를 호출부가 항상 의식하도록 강제). 참석자는 항상 초대 재전송·수정·다른 참석자
+ * 열람이 불가능하다(`guestsCanInviteOthers`/`guestsCanModify`/`guestsCanSeeOtherGuests`
+ * 전부 false — attendeeEmail이 없어도 무해하므로 항상 적용).
  */
 export async function createCalendarEventWithMeet(params: {
   teacherWorkspaceEmail: string;
@@ -55,19 +60,27 @@ export async function createCalendarEventWithMeet(params: {
   endsAt: Date;
   summary: string;
   timezone: string;
+  attendeeEmail?: string;
+  description?: string;
+  sendUpdates: "all" | "none";
 }): Promise<CalendarEventResult> {
   assertRealCallsAllowed();
   const token = await getCalendarApiAccessToken(params.teacherWorkspaceEmail);
 
   const res = await calendarFetch(
-    `${CALENDAR_API}/calendars/primary/events?conferenceDataVersion=1&sendUpdates=none`,
+    `${CALENDAR_API}/calendars/primary/events?conferenceDataVersion=1&sendUpdates=${params.sendUpdates}`,
     token,
     {
       method: "POST",
       body: JSON.stringify({
         summary: params.summary,
+        description: params.description,
         start: { dateTime: params.startsAt.toISOString(), timeZone: params.timezone },
         end: { dateTime: params.endsAt.toISOString(), timeZone: params.timezone },
+        attendees: params.attendeeEmail ? [{ email: params.attendeeEmail }] : undefined,
+        guestsCanInviteOthers: false,
+        guestsCanModify: false,
+        guestsCanSeeOtherGuests: false,
         conferenceData: {
           createRequest: {
             requestId: params.reservationId,
@@ -91,18 +104,21 @@ export async function createCalendarEventWithMeet(params: {
   return { googleEventId: data.id, meetLink: meetEntry.uri };
 }
 
-/** 재예약·선생님 변경 시 기존 이벤트 시간을 갱신한다(같은 googleEventId 유지). */
+/** 재예약·선생님 변경 시 기존 이벤트 시간을 갱신한다(같은 googleEventId 유지).
+ * `sendUpdates`는 호출부가 명시한다(2026-09-03 정책 전환 — 참석자가 있는 이벤트는
+ * "all"로 Google 네이티브 변경 알림을 보낸다). */
 export async function patchCalendarEventTime(params: {
   teacherWorkspaceEmail: string;
   googleEventId: string;
   startsAt: Date;
   endsAt: Date;
   timezone: string;
+  sendUpdates: "all" | "none";
 }): Promise<void> {
   assertRealCallsAllowed();
   const token = await getCalendarApiAccessToken(params.teacherWorkspaceEmail);
   await calendarFetch(
-    `${CALENDAR_API}/calendars/primary/events/${params.googleEventId}?sendUpdates=none`,
+    `${CALENDAR_API}/calendars/primary/events/${params.googleEventId}?sendUpdates=${params.sendUpdates}`,
     token,
     {
       method: "PATCH",
@@ -114,15 +130,17 @@ export async function patchCalendarEventTime(params: {
   );
 }
 
-/** 취소 시 기존 이벤트를 삭제한다. 이미 삭제된 이벤트(404/410)는 성공으로 취급한다(멱등). */
+/** 취소 시 기존 이벤트를 삭제한다. 이미 삭제된 이벤트(404/410)는 성공으로 취급한다(멱등).
+ * `sendUpdates`는 호출부가 명시한다(2026-09-03 정책 전환). */
 export async function deleteCalendarEvent(params: {
   teacherWorkspaceEmail: string;
   googleEventId: string;
+  sendUpdates: "all" | "none";
 }): Promise<void> {
   assertRealCallsAllowed();
   const token = await getCalendarApiAccessToken(params.teacherWorkspaceEmail);
   const res = await fetch(
-    `${CALENDAR_API}/calendars/primary/events/${params.googleEventId}?sendUpdates=none`,
+    `${CALENDAR_API}/calendars/primary/events/${params.googleEventId}?sendUpdates=${params.sendUpdates}`,
     { method: "DELETE", headers: { Authorization: `Bearer ${token}` } }
   );
   if (!res.ok && res.status !== 404 && res.status !== 410) {
