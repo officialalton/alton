@@ -536,7 +536,7 @@ trial-teacher-assignment 모델)은 전량 폐기됐다.** trial/regular는 `tea
   써야 했던 것)을 발견·수정. 클린 `git worktree` 재현(build+전체 Vitest 143/863)도
   완료. **미완료 없음.**
 
-### M4 — 상담→체험→정규 전환 통합 마감 *(신규 범위 — 착수 전, 계획 흐름만 2026-09-03 정정)*
+### M4 — 상담→체험→정규 전환 통합 마감 *(착수 1/N, 2026-09-03 — 로컬 구현 부분 완료·외부 통합 승인 대기)*
 
 **계획된 흐름(정정됨)**: `상담 → 체험 희망 확인 → 보호자·학생 ID 생성 및 검증 →
 과목 수강 관계 생성 → 선생님 배정 → 학생별 최초 1회 체험 Smart Notes 안내·동의 →
@@ -553,11 +553,28 @@ trial-teacher-assignment 모델)은 전량 폐기됐다.** trial/regular는 `tea
 트리거하지 않음 / 별도의 고객 대면 제안/승인 단계 없음 / 관리자 확인이 기존 R3
 인프라로 회사 선서명+DocuSign 발송을 즉시·멱등하게 한 동작으로 트리거 / 구매 단계는
 보호자 서명 전에 열리지 않음 / `proposals` 구조는 M4 새 흐름에서 남아있더라도 미사용 /
-계약·법률 문서는 수정하지 않음. **이번 라운드는 이 흐름 서술 정정뿐이며 M4 코드는
-여전히 착수하지 않았다.**
+계약·법률 문서는 수정하지 않음. **2026-09-03 착수 1/N 라운드(커밋 `343e1aa`)**:
+아래 첫 두 항목(계정 연결, 체험 Smart Notes 동의)만 구현·DB smoke test로 검증
+완료 — 나머지는 다음 라운드. 상세는 `docs/CURRENT.md` M4 절과
+`docs/2026-09-03-m4-migration-execution-log.md`.
 
-- [ ] 체험 진행 결정 후 보호자 온보딩 링크, 보호자·학생 계정 생성과 잠재고객 기록 연결.
-- [ ] 학생별 최초 1회 체험 AI 안내·동의.
+- [x] **(1/N)** 체험 진행 결정 후 보호자 온보딩 링크, 보호자·학생 계정 생성과
+      잠재고객 기록 연결 — `trial_onboarding_links`(만료형 72h·단일사용·해시),
+      `confirm_trial_intent()`(관리자 추천과 보호자 확정 구분), 신규 보호자
+      경로(`finalize_trial_onboarding_new_guardian()` + R2와 동일 패턴의
+      `/api/trial-onboarding/redeem` 라우트)와 기존 보호자 경로
+      (`link_existing_guardian_to_trial_onboarding()`, 로그인 상태에서 직접
+      호출하는 것 자체가 본인 확인, 이메일 일치 자동 병합 없음) 둘 다 구현.
+      `profiles.id`가 `auth.users` FK라 학생도 실제 Auth 계정이 필요함을
+      DB smoke test로 발견해 앱 레이어가 먼저 계정을 만드는 구조로 수정.
+- [x] **(1/N)** 학생별 최초 1회 체험 Smart Notes 동의 — `trial_smart_notes_
+      consents`(학생당 1건 유니크 인덱스), `record_trial_smart_notes_consent()`
+      (멱등), `grant_trial_entitlement_for_consultation()`(M2)에 동의 게이트
+      추가(동의 없으면 지급 거부, DB smoke test로 확인) + 학생 기준 중복 지급
+      방어.
+- [ ] 체험 수업권 자동 지급(M2 상품) — 지급 함수 자체는 M2에서 이미 있고 이번
+      라운드에서 동의 게이트만 추가했다. 온보딩 흐름(계정 연결→동의) 이후
+      실제로 이어서 호출되는 배선(관리자 화면 트리거 등)은 다음 라운드.
 - [ ] 체험 수업권 자동 지급(M2에서 만든 체험 전용 상품).
 - [ ] 담당 선생님 60분 가능시간 예약, FreeBusy·15분 버퍼·중복 방지, 선생님 소유 Calendar·Meet
       생성(R6 인프라 재사용).
