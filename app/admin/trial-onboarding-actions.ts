@@ -197,6 +197,52 @@ export type TrialOnboardingCandidate = {
   contactEmail: string;
   trialIntentConfirmedAt: string | null;
   childId: string | null;
+  // 온보딩 링크의 최신 상태 — "발급한 적 없음"과 "발급했지만 아직 대기/만료/
+  // 사용완료"를 구분해서 보여주기 위함(요구사항: 온보딩 링크 상태 구분).
+  linkStatus: "none" | "pending" | "redeemed" | "expired" | "revoked";
+};
+
+// UI 폴리싱 — 관리자 화면에 14단계 파이프라인 상태를 한 번에 보여주기 위한
+// 단계별 완료 여부. 새 정책·새 상태값을 만들지 않고 기존 테이블에 이미 있는
+// 값만 조회해서 표시용으로 조합한다(체험/정규 배정은 여전히 단일
+// teacher_assignments라는 정책 그대로 — "배정" 한 단계로만 표시).
+export type TrialPipelineStepKey =
+  | "trial_intent"
+  | "account_linked"
+  | "assignment"
+  | "trial_consent"
+  | "trial_entitlement"
+  | "trial_booking"
+  | "smart_notes"
+  | "review"
+  | "regular_intent"
+  | "contract_sent"
+  | "signed"
+  | "purchase"
+  | "subject_active";
+
+export type TrialPipelineStep = { key: TrialPipelineStepKey; done: boolean; label: string };
+
+export type TrialOnboardingPipeline = {
+  consultationId: string;
+  subjectEnrollmentId: string | null;
+  steps: TrialPipelineStep[];
+};
+
+const PIPELINE_STEP_LABELS: Record<TrialPipelineStepKey, string> = {
+  trial_intent: "체험 희망 확정",
+  account_linked: "보호자·학생 계정 연결",
+  assignment: "과목·선생님 배정",
+  trial_consent: "체험 Smart Notes 동의",
+  trial_entitlement: "체험수업권 지급",
+  trial_booking: "체험 예약",
+  smart_notes: "Smart Notes 연결",
+  review: "선생님 리뷰 확정",
+  regular_intent: "정규 진행 희망",
+  contract_sent: "계약 발송",
+  signed: "보호자 서명",
+  purchase: "정규상품 구매",
+  subject_active: "과목 활성화",
 };
 
 export async function listTrialOnboardingCandidatesAction(): Promise<TrialOnboardingCandidate[]> {
@@ -209,13 +255,160 @@ export async function listTrialOnboardingCandidatesAction(): Promise<TrialOnboar
     .order("created_at", { ascending: false })
     .limit(50);
   if (error) throw new Error(error.message);
+
+  const consultationIds = (data ?? []).map((c) => c.id);
+  const { data: links } = consultationIds.length
+    ? await admin
+        .from("trial_onboarding_links")
+        .select("consultation_id, status, created_at")
+        .in("consultation_id", consultationIds)
+        .order("created_at", { ascending: false })
+    : { data: [] as { consultation_id: string; status: string; created_at: string }[] };
+  const latestLinkStatusByConsultation = new Map<string, string>();
+  for (const l of links ?? []) {
+    if (!latestLinkStatusByConsultation.has(l.consultation_id)) {
+      latestLinkStatusByConsultation.set(l.consultation_id, l.status);
+    }
+  }
+
   return (data ?? []).map((c) => ({
     consultationId: c.id,
     contactName: c.contact_name,
     contactEmail: c.contact_email,
     trialIntentConfirmedAt: c.trial_intent_confirmed_at,
     childId: c.child_id,
+    linkStatus: (latestLinkStatusByConsultation.get(c.id) as TrialOnboardingCandidate["linkStatus"]) ?? "none",
   }));
+}
+
+export async function getTrialOnboardingPipelineAction(
+  consultationId: string,
+  childId: string | null,
+  trialIntentConfirmedAt: string | null
+): Promise<TrialOnboardingPipeline> {
+  await requireAdminOrCapability(CONSULT_CAPABILITY);
+  const admin = createAdminClient();
+
+  const done: Partial<Record<TrialPipelineStepKey, boolean>> = {
+    trial_intent: !!trialIntentConfirmedAt,
+    account_linked: !!childId,
+  };
+  let subjectEnrollmentId: string | null = null;
+
+  if (childId) {
+    const { data: enrollment } = await admin
+      .from("subject_enrollments")
+      .select("id, status")
+      .eq("child_id", childId)
+      .order("created_at", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+    subjectEnrollmentId = enrollment?.id ?? null;
+    done.assignment = false;
+    done.subject_active = enrollment?.status === "active";
+
+    if (subjectEnrollmentId) {
+      const { data: assignment } = await admin
+        .from("teacher_assignments")
+        .select("id")
+        .eq("subject_enrollment_id", subjectEnrollmentId)
+        .eq("status", "active")
+        .maybeSingle();
+      done.assignment = !!assignment;
+    }
+
+    const { data: consent } = await admin
+      .from("trial_smart_notes_consents")
+      .select("id")
+      .eq("child_id", childId)
+      .maybeSingle();
+    done.trial_consent = !!consent;
+
+    const { data: grant } = await admin
+      .from("entitlement_grants")
+      .select("id, entitlement_products!inner(code)")
+      .eq("child_id", childId)
+      .eq("entitlement_products.code", "trial_lesson_grant")
+      .maybeSingle();
+    done.trial_entitlement = !!grant;
+
+    if (subjectEnrollmentId) {
+      const { data: trialSession } = await admin
+        .from("sessions")
+        .select("id, smart_notes_status")
+        .eq("subject_enrollment_id", subjectEnrollmentId)
+        .order("created_at", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+      done.trial_booking = !!trialSession;
+      done.smart_notes = trialSession?.smart_notes_status === "applied";
+
+      const { data: review } = await admin
+        .from("trial_lesson_reviews")
+        .select("id")
+        .eq("subject_enrollment_id", subjectEnrollmentId)
+        .eq("status", "final")
+        .maybeSingle();
+      done.review = !!review;
+
+      const { data: selection } = await admin
+        .from("trial_regular_progress_selections")
+        .select("id")
+        .eq("subject_enrollment_id", subjectEnrollmentId)
+        .maybeSingle();
+      done.regular_intent = !!selection;
+    }
+
+    const { data: contract } = await admin
+      .from("contracts")
+      .select("id, status")
+      .eq("child_id", childId)
+      .order("created_at", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+    if (contract) {
+      const { data: version } = await admin
+        .from("contract_versions")
+        .select("docusign_envelope_id")
+        .eq("contract_id", contract.id)
+        .order("version_number", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+      done.contract_sent = !!version?.docusign_envelope_id;
+      done.signed = contract.status === "active";
+
+      const { data: purchase } = await admin
+        .from("purchases")
+        .select("id")
+        .eq("contract_id", contract.id)
+        .eq("status", "succeeded")
+        .limit(1)
+        .maybeSingle();
+      done.purchase = !!purchase;
+    }
+  }
+
+  const order: TrialPipelineStepKey[] = [
+    "trial_intent",
+    "account_linked",
+    "assignment",
+    "trial_consent",
+    "trial_entitlement",
+    "trial_booking",
+    "smart_notes",
+    "review",
+    "regular_intent",
+    "contract_sent",
+    "signed",
+    "purchase",
+    "subject_active",
+  ];
+
+  return {
+    consultationId,
+    subjectEnrollmentId,
+    steps: order.map((key) => ({ key, done: !!done[key], label: PIPELINE_STEP_LABELS[key] })),
+  };
 }
 
 export type RegularConversionCandidate = {

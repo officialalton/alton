@@ -1,6 +1,31 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import type { SubjectEnrollmentView } from "./enrollment-data";
+import { getTrialLessonReviewForFamily } from "@/app/parent/trial-conversion-actions";
+
+// M4 UI 폴리싱 — 확정된 체험 리뷰만 노출한다(초안·Smart Notes 원본·Drive 링크·
+// 내부 메모는 이 함수 자체가 반환하지 않으므로 화면에서 실수로 보여줄 수도 없다).
+// 학생/보호자 공용 — 학생 화면에는 "정규 진행 희망" 버튼을 붙이지 않는다(그건
+// app/parent/TrialConversionPanel.tsx의 역할).
+function TrialReviewDisplay({ subjectEnrollmentId }: { subjectEnrollmentId: string }) {
+  const [review, setReview] = useState<{ finalText: string; finalizedAt: string } | null | undefined>(undefined);
+
+  useEffect(() => {
+    getTrialLessonReviewForFamily(subjectEnrollmentId)
+      .then(setReview)
+      .catch(() => setReview(null));
+  }, [subjectEnrollmentId]);
+
+  if (!review) return null;
+
+  return (
+    <div className="mt-2.5 bg-grey-50 rounded-lg px-3 py-2.5 border border-grey-200">
+      <div className="text-[11.5px] font-bold text-grey-500 mb-1">체험 수업 리뷰 (선생님 확정)</div>
+      <p className="text-[12.5px] text-ink whitespace-pre-wrap">{review.finalText}</p>
+    </div>
+  );
+}
 
 const STATUS_LABEL: Record<SubjectEnrollmentView["status"], string> = {
   planned: "예정",
@@ -70,6 +95,8 @@ export default function EnrollmentTab({
                 {e.upcomingTeacherChange.teacherName} 선생님으로 변경 예정
               </div>
             )}
+
+            <TrialReviewDisplay subjectEnrollmentId={e.id} />
 
             {e.history.length > 0 && (
               <details className="mt-2.5">

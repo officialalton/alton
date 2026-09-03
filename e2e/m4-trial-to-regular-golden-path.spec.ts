@@ -109,9 +109,9 @@ test.describe("M4 — 상담→체험→정규 전환 골든 패스 (실브라�
     await page.goto("/admin?tab=matching");
 
     const onboardingPanel = page.locator("div").filter({
-      has: page.getByRole("heading", { name: "상담 → 체험 → 정규 전환 (M4)" }),
+      has: page.getByRole("heading", { name: "상담 → 체험 → 정규 전환" }),
     }).first();
-    await expect(onboardingPanel.getByRole("heading", { name: "상담 → 체험 → 정규 전환 (M4)" })).toBeVisible({
+    await expect(onboardingPanel.getByRole("heading", { name: "상담 → 체험 → 정규 전환" })).toBeVisible({
       timeout: 15000,
     });
 
@@ -121,13 +121,15 @@ test.describe("M4 — 상담→체험→정규 전환 골든 패스 (실브라�
       .first();
     await expect(candidateRow).toBeVisible();
     await candidateRow.getByRole("button", { name: "체험 진행 확정" }).click();
-    await expect(candidateRow.getByText("체험 진행 확정: 완료")).toBeVisible({ timeout: 15000 });
+    // 체험 희망 확정이 끝나면 다음 단계(온보딩 링크 발급) 버튼이 나타난다 —
+    // 파이프라인이 실제로 다음 단계로 넘어갔는지는 이 버튼의 등장 자체로 확인된다.
+    await expect(candidateRow.getByRole("button", { name: "온보딩 링크 발급" })).toBeVisible({ timeout: 15000 });
 
     await candidateRow.getByRole("button", { name: "온보딩 링크 발급" }).click();
-    await candidateRow.getByPlaceholder("보호자 이메일").fill(guardianEmail);
-    await candidateRow.getByPlaceholder("보호자 이름").fill("M4 골든패스 보호자");
-    await candidateRow.getByPlaceholder("학생 이름").fill("M4 골든패스 학생");
-    await candidateRow.getByPlaceholder("학생 이메일").fill(studentEmail);
+    await candidateRow.getByLabel("보호자 이메일").fill(guardianEmail);
+    await candidateRow.getByLabel("보호자 이름").fill("M4 골든패스 보호자");
+    await candidateRow.getByLabel("학생 이름").fill("M4 골든패스 학생");
+    await candidateRow.getByLabel("학생 이메일").fill(studentEmail);
     await candidateRow.getByRole("button", { name: "링크 발급" }).click();
 
     const linkText = await candidateRow.locator("div").filter({ hasText: "/api/trial-onboarding/redeem" }).last().innerText();
@@ -173,17 +175,17 @@ test.describe("M4 — 상담→체험→정규 전환 골든 패스 (실브라�
 
     const candidateRow = page
       .locator("div").filter({
-        has: page.getByRole("heading", { name: "상담 → 체험 → 정규 전환 (M4)" }),
+        has: page.getByRole("heading", { name: "상담 → 체험 → 정규 전환" }),
       }).first()
       .locator("div.border-\\[1\\.5px\\].border-grey-200.rounded-xl")
       .filter({ hasText: guardianEmail })
       .first();
-    await expect(candidateRow.getByText("계정 연결: 완료")).toBeVisible({ timeout: 15000 });
+    await expect(candidateRow.getByRole("button", { name: "과목 수강 + 선생님 배정" })).toBeVisible({ timeout: 15000 });
     await candidateRow.getByRole("button", { name: "과목 수강 + 선생님 배정" }).click();
-    await candidateRow.getByPlaceholder("과목 ID").fill(SUBJECT_ID);
-    await candidateRow.getByPlaceholder("선생님 ID").fill(TEACHER_ID);
+    await candidateRow.getByLabel("과목 ID").fill(SUBJECT_ID);
+    await candidateRow.getByLabel("선생님 ID").fill(TEACHER_ID);
     await candidateRow.getByRole("button", { name: "배정 확정" }).click();
-    await expect(candidateRow.getByPlaceholder("과목 ID")).toHaveCount(0, { timeout: 15000 });
+    await expect(candidateRow.getByLabel("과목 ID")).toHaveCount(0, { timeout: 15000 });
 
     subjectEnrollmentId = psql(
       `select id from subject_enrollments where child_id = '${childId}' and subject_id = '${SUBJECT_ID}';`
@@ -254,10 +256,12 @@ test.describe("M4 — 상담→체험→정규 전환 골든 패스 (실브라�
       .first();
     await reviewRow.locator("textarea").fill("M4 골든패스 학생과의 체험 수업 — 기초 개념 이해도 우수, 정규 진행 추천.");
     // finalize_trial_lesson_review()는 먼저 초안이 있어야 확정할 수 있다 —
-    // 초안 저장 → 확정 순서로 클릭한다.
-    await reviewRow.getByRole("button", { name: "초안 저장" }).click();
+    // 초안 저장(비공개) → 공개 확정 → 확인 순서로 클릭한다(공개는 되돌릴 수
+    // 없는 고객 노출 행동이라 UI가 인라인 확인 단계를 한 번 더 거친다).
+    await reviewRow.getByRole("button", { name: "초안 저장(비공개)" }).click();
     await expect(reviewRow.getByText("초안 저장됨")).toBeVisible({ timeout: 15000 });
-    await reviewRow.getByRole("button", { name: "리뷰 확정" }).click();
+    await reviewRow.getByRole("button", { name: "공개 확정" }).click();
+    await reviewRow.getByRole("button", { name: "네, 공개합니다" }).click();
     await expect(reviewPanel).toHaveCount(0, { timeout: 15000 });
   });
 
@@ -267,7 +271,7 @@ test.describe("M4 — 상담→체험→정규 전환 골든 패스 (실브라�
     await page.goto("/parent?tab=enrollment");
     await expect(page.getByText(/기초 개념 이해도 우수/)).toBeVisible({ timeout: 15000 });
     await page.getByRole("button", { name: "정규 진행 희망합니다" }).click();
-    await expect(page.getByText(/정규 진행 희망이 접수됐습니다/)).toBeVisible({ timeout: 15000 });
+    await expect(page.getByText(/접수 완료/)).toBeVisible({ timeout: 15000 });
   });
 
   test("8. 관리자: 원클릭 정규 계약 발송(mock 실패 경로)", async ({ page }) => {
@@ -275,8 +279,12 @@ test.describe("M4 — 상담→체험→정규 전환 골든 패스 (실브라�
     await loginAs(page, ACCOUNTS.admin);
     await page.goto("/admin?tab=matching");
     await expect(page.getByRole("heading", { name: "정규 계약 발송 대기" })).toBeVisible({ timeout: 15000 });
+    // 원클릭 발송은 실수 방지를 위해 인라인 확인 단계를 거친다 — "정규 계약
+    // 발송" → 확인 문구 → "확인 — 선서명 + 발송 실행" 순서로 클릭한다.
     await page.getByRole("button", { name: "정규 계약 발송" }).click();
-    await expect(page.getByText(/발송 실패\(재처리 가능\)/)).toBeVisible({ timeout: 20000 });
+    await expect(page.getByText(/회사 선서명과 DocuSign 발송이 한 번에/)).toBeVisible();
+    await page.getByRole("button", { name: "확인 — 선서명 + 발송 실행" }).click();
+    await expect(page.getByText(/발송 실패 — 관리자 조치 필요/)).toBeVisible({ timeout: 20000 });
 
     contractId = psql(`select id from contracts where child_id = '${childId}';`);
     expect(contractId).toMatch(/^[0-9a-f-]{36}$/);

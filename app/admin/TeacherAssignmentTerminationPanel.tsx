@@ -102,11 +102,11 @@ export default function TeacherAssignmentTerminationPanel() {
                   요청자: {r.requestedByRole} · {STATUS_LABEL[r.status] ?? r.status}
                 </div>
                 <div className="text-[12px] text-grey-500 mt-0.5">사유: {r.reason}</div>
-                {r.error && <div className="text-[12px] text-red-600 mt-0.5">오류: {r.error}</div>}
+                {r.error && <div className="text-[12px] text-red mt-0.5">오류: {r.error}</div>}
               </div>
               {(r.status === "requested" || r.status === "failed") && (
                 <button
-                  className="text-[12.5px] font-semibold text-blue-600"
+                  className="text-[12.5px] font-semibold text-ink underline"
                   onClick={() => openRequest(r)}
                 >
                   {r.status === "failed" ? "재처리" : "처리"}
@@ -167,7 +167,7 @@ export default function TeacherAssignmentTerminationPanel() {
                   </div>
                 )}
 
-                {error && <div className="text-[12.5px] text-red-600 mb-2">{error}</div>}
+                {error && <div className="text-[12.5px] text-red mb-2">{error}</div>}
 
                 <button
                   disabled={busy}

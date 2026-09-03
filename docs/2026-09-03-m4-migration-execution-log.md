@@ -264,4 +264,4 @@ worktree`(node_modules 하드카피)에서 `next build`+전체 Vitest 재현 완
 - 이 로그 + `docs/CURRENT.md`/마스터 로드맵 갱신은 별도 문서 커밋.
 
 전부 로컬 `main` 브랜치 커밋, `git push` 없음. 실제 Google/Stripe/DocuSign 호출,
-실제 이메일 발송, Production·원격 운영 DB 접근 전부 없음. **M4는 이것으로 종료.**
+실제 이메일 발송, Production·원격 운영 DB 접근 전부 없음. **M4 로컬 구현·검증 완료, 역할별 UI 폴리싱 및 외부 Sandbox/Preview 통합 검증 대기.**

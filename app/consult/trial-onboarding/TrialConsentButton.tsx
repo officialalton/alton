@@ -16,7 +16,7 @@ export default function TrialConsentButton({ childId }: { childId: string }) {
 
   if (consented) {
     return (
-      <div className="text-[12.5px] text-green-600">
+      <div className="text-[12.5px] text-green">
         동의 완료 — 체험수업권 지급 완료. 체험 예약을 진행할 수 있습니다.
       </div>
     );
@@ -24,7 +24,7 @@ export default function TrialConsentButton({ childId }: { childId: string }) {
 
   return (
     <div>
-      {error && <div className="text-[12px] text-red-600 mb-1.5">{error}</div>}
+      {error && <div className="text-[12px] text-red mb-1.5">{error}</div>}
       <button
         disabled={busy}
         onClick={async () => {
