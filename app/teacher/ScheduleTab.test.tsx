@@ -68,4 +68,34 @@ describe("ScheduleTab", () => {
     render(<ScheduleTab upcoming={[upcomingLesson]} past={[]} />);
     expect(screen.queryByText("리뷰 작성")).not.toBeInTheDocument();
   });
+
+  it("onReportSessionIssue가 없으면 신고 버튼을 보여주지 않는다", () => {
+    render(<ScheduleTab upcoming={[]} past={[pastLesson]} />);
+    fireEvent.click(screen.getByText("지난 수업"));
+    expect(screen.queryByText("지각·노쇼 신고")).not.toBeInTheDocument();
+  });
+
+  it("지각·노쇼 신고를 제출하면 onReportSessionIssue가 호출되고 접수됨으로 바뀐다", async () => {
+    const onReportSessionIssue = vi.fn().mockResolvedValue(undefined);
+    render(<ScheduleTab upcoming={[]} past={[pastLesson]} onReportSessionIssue={onReportSessionIssue} />);
+    fireEvent.click(screen.getByText("지난 수업"));
+    fireEvent.click(screen.getByText("지각·노쇼 신고"));
+    fireEvent.click(screen.getByText("신고 제출"));
+    await screen.findByText("신고 접수됨");
+    expect(onReportSessionIssue).toHaveBeenCalledWith({
+      sessionId: "s2",
+      reportType: "student_no_show_reported",
+      minutesLate: undefined,
+      notes: undefined,
+    });
+  });
+
+  it("본인 지각 신고는 지각 시간(분) 입력 전에는 제출 버튼이 비활성화된다", () => {
+    const onReportSessionIssue = vi.fn().mockResolvedValue(undefined);
+    render(<ScheduleTab upcoming={[]} past={[pastLesson]} onReportSessionIssue={onReportSessionIssue} />);
+    fireEvent.click(screen.getByText("지난 수업"));
+    fireEvent.click(screen.getByText("지각·노쇼 신고"));
+    fireEvent.change(screen.getByDisplayValue("학생 노쇼"), { target: { value: "teacher_late" } });
+    expect(screen.getByText("신고 제출")).toBeDisabled();
+  });
 });

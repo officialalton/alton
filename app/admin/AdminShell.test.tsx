@@ -31,7 +31,6 @@ vi.mock("./users-actions", () => ({
   setStudentStatus: vi.fn(),
   setTeacherStatus: vi.fn(),
   adjustStudentCredit: vi.fn(),
-  setTeacherCalendlyUrl: vi.fn(),
 }));
 
 vi.mock("./teacher-subjects-actions", () => ({
@@ -102,7 +101,6 @@ const baseProps = {
   trials: [],
   proposals: [],
   consentGaps: [],
-  aiNotesEvents: [],
   driveIssues: [],
   staleEnvelopes: [],
   contractActivationRetries: [],
@@ -119,7 +117,7 @@ const baseProps = {
 };
 
 describe("AdminShell", () => {
-  it("사이드바 13개 항목을 보여주고, 기본 탭은 홈이다", () => {
+  it("사이드바 15개 항목을 보여주고, 기본 탭은 홈이다", () => {
     render(<AdminShell {...baseProps} />);
     [
       "홈",
@@ -130,6 +128,7 @@ describe("AdminShell", () => {
       "구 크레딧(레거시)",
       "수업권",
       "계약",
+      "통합 일정",
       "QC",
       "정산",
       "문서",

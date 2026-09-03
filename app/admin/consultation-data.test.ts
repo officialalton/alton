@@ -4,7 +4,6 @@ import {
   loadTrialSessions,
   loadProposals,
   loadConsentGaps,
-  loadAiNotesConsentEvents,
   loadDriveArtifactIssues,
 } from "./consultation-data";
 
@@ -238,41 +237,6 @@ describe("loadConsentGaps", () => {
 
     const result = await loadConsentGaps(supabase as never);
     expect(result).toEqual([]);
-  });
-});
-
-describe("loadAiNotesConsentEvents", () => {
-  it("학생 이름을 조인해 반환한다", async () => {
-    const supabase = {
-      from: vi.fn((table: string) => {
-        if (table === "ai_notes_consent_events") {
-          return {
-            select: () => ({
-              order: () =>
-                Promise.resolve({
-                  data: [
-                    {
-                      id: "e1",
-                      student_id: "s1",
-                      opted_in: true,
-                      policy_version: "v1",
-                      effective_at: "2026-08-01T00:00:00Z",
-                      revoked_at: null,
-                    },
-                  ],
-                }),
-            }),
-          };
-        }
-        if (table === "profiles") {
-          return { select: () => ({ in: () => Promise.resolve({ data: [{ id: "s1", name: "지훈" }] }) }) };
-        }
-        throw new Error(`unexpected table ${table}`);
-      }),
-    };
-
-    const result = await loadAiNotesConsentEvents(supabase as never);
-    expect(result[0].studentName).toBe("지훈");
   });
 });
 

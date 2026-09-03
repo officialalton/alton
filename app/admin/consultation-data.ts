@@ -226,45 +226,6 @@ export async function loadConsentGaps(supabase: SupabaseClient): Promise<Consent
     .filter((s) => !s.hasDob || !s.hasActiveConsent);
 }
 
-export type AiNotesConsentEventItem = {
-  id: string;
-  studentId: string;
-  studentName: string | null;
-  optedIn: boolean;
-  policyVersion: string;
-  effectiveAt: string;
-  revokedAt: string | null;
-};
-
-export async function loadAiNotesConsentEvents(
-  supabase: SupabaseClient
-): Promise<AiNotesConsentEventItem[]> {
-  const { data: rows } = await supabase
-    .from("ai_notes_consent_events")
-    .select("id, student_id, opted_in, policy_version, effective_at, revoked_at")
-    .order("effective_at", { ascending: false });
-  if (!rows || rows.length === 0) return [];
-
-  const { data: profiles } = await supabase
-    .from("profiles")
-    .select("id, name")
-    .in(
-      "id",
-      rows.map((r) => r.student_id)
-    );
-  const nameById = new Map((profiles ?? []).map((p) => [p.id, p.name]));
-
-  return rows.map((r) => ({
-    id: r.id,
-    studentId: r.student_id,
-    studentName: nameById.get(r.student_id) ?? null,
-    optedIn: r.opted_in,
-    policyVersion: r.policy_version,
-    effectiveAt: r.effective_at,
-    revokedAt: r.revoked_at,
-  }));
-}
-
 export type DriveArtifactIssue = {
   id: string;
   contractId: string;

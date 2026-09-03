@@ -51,13 +51,15 @@ const baseProps = {
   currentAssignments: [],
   pastAssignments: [],
   availabilityRules: [],
+  availabilityExceptions: [],
   availabilityTimezone: "America/Los_Angeles",
+  lessonSchedule: [],
 };
 
 describe("TeacherShell", () => {
-  it("사이드바 8개 항목을 보여주고, 기본 탭은 홈이다", () => {
+  it("사이드바 9개 항목을 보여주고, 기본 탭은 홈이다", () => {
     render(<TeacherShell {...baseProps} />);
-    ["홈", "배정", "일정", "수업", "학생", "커리큘럼", "교재", "정산"].forEach((label) =>
+    ["홈", "배정", "정규수업", "가능시간", "수업", "학생", "커리큘럼", "교재", "정산"].forEach((label) =>
       expect(screen.getByText(label)).toBeInTheDocument()
     );
     expect(screen.getByText("박서연 선생님, 안녕하세요")).toBeInTheDocument();

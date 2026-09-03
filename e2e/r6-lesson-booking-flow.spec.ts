@@ -6,8 +6,10 @@ import { loginAs } from "./helpers";
 // 수업권 release까지의 핵심 흐름을 검증한다. Google Calendar/Meet 실제 생성은
 // CALENDAR_SYNC_ALLOW_REAL_CALLS 기본 false로 이 테스트에서도 검증하지 않는다(별도
 // Google Sandbox 승인 필요 — R6 스펙 5절). 출결·수업권 최종소진·정산 판정은 R7 범위라
-// 이 E2E에도 포함하지 않는다(2026-09-02 사용자 지시로 R6 범위에서 명시 제외됨) —
-// Calendly/Zoom 제거(9/N)는 그 R7 흐름까지 포함하는 완전한 E2E가 나온 뒤 판단한다.
+// 이 E2E에도 포함하지 않는다(2026-09-02 사용자 지시로 R6 범위에서 명시 제외됨).
+// **(2026-09-03 갱신)** 개별 회차 예약용 Calendly/Zoom은 실제 Google Sandbox 통합 검증
+// 통과 후 완전히 제거됐다 — 상담(consult_requests) 예약 Calendly는 애초에 이 스펙의
+// 범위가 아니었고 ConsultForm으로 독립적으로 동작해 영향 없음.
 
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
 const CHILD_ID = "88888888-0000-0000-0000-000000000001"; // 박준서 — 다른 스펙이 쓰지 않는 학생(격리)
@@ -88,6 +90,11 @@ test.describe("R6 — 정규수업 예약 흐름 (실브라우저)", () => {
     const firstSlotButton = page.locator("button").filter({ hasText: /^오전|^오후/ }).first();
     await expect(firstSlotButton).toBeVisible({ timeout: 15000 });
     await firstSlotButton.click();
+
+    // R6 11/N: 슬롯 클릭은 이제 바로 확정하지 않고 요약 확인 카드를 띄운다(정책 #3
+    // "시간 선택 후 요약 확인을 거쳐 최종 확정") — "최종 확정"을 한 번 더 눌러야 한다.
+    await expect(page.getByText("예약 확인")).toBeVisible();
+    await page.getByRole("button", { name: "최종 확정" }).click();
 
     await expect(page.getByText("예약이 확정됐습니다.")).toBeVisible({ timeout: 15000 });
 

@@ -4,7 +4,6 @@ import { loadDashboardData } from "./dashboard-data";
 import { loadVocabWords } from "@/app/session/[id]/vocab-data";
 import { loadProblemLog } from "@/app/session/[id]/problemlog-data";
 import { loadLessons } from "./lessons-data";
-import { loadBookableEnrollments } from "./booking-data";
 import { loadCurricula } from "./curriculum-data";
 import { loadMemos } from "./memo-data";
 import { loadReviews, loadStudentFeedback } from "./review-data";
@@ -33,7 +32,6 @@ export default async function StudentHomePage({
   const problemLog = await loadProblemLog(supabase, user.id);
   const { upcoming, past } = await loadLessons(supabase, user.id);
   const curricula = await loadCurricula(supabase, user.id);
-  const bookableEnrollments = await loadBookableEnrollments(supabase, user.id);
 
   const memosByEnrollment: Record<string, Awaited<ReturnType<typeof loadMemos>>> = {};
   for (const c of curricula) {
@@ -84,7 +82,6 @@ export default async function StudentHomePage({
       memosByEnrollment={memosByEnrollment}
       reviews={reviews}
       myFeedback={myFeedback}
-      bookableEnrollments={bookableEnrollments}
       homeworkTodo={homework.todo}
       homeworkDone={homework.done}
       materialsLibrary={materialsLibrary}

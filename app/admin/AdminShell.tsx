@@ -11,6 +11,7 @@ import UsersTab from "./UsersTab";
 import BillingTab from "./BillingTab";
 import ContractsTab from "./ContractsTab";
 import BookingReconciliationPanel from "./BookingReconciliationPanel";
+import UnifiedScheduleTab from "./UnifiedScheduleTab";
 import type { AcceptedProposalForContract, FamilyContract, PendingConsult } from "./contracts-data";
 import ConsultationTab from "./ConsultationTab";
 import type {
@@ -18,7 +19,6 @@ import type {
   TrialSessionListItem,
   ProposalListItem,
   ConsentGapItem,
-  AiNotesConsentEventItem,
   DriveArtifactIssue,
   StaleEnvelopeContract,
 } from "./consultation-data";
@@ -57,6 +57,7 @@ const NAV_ITEMS = [
   { id: "billing", label: "구 크레딧(레거시)", icon: "💳" },
   { id: "entitlements", label: "수업권", icon: "🎫" },
   { id: "contracts", label: "계약", icon: "📄" },
+  { id: "unified-schedule", label: "통합 일정", icon: "🗺️" },
   { id: "booking", label: "예약", icon: "🗓️" },
   { id: "qc", label: "QC", icon: "🛡" },
   { id: "payouts", label: "정산", icon: "💸" },
@@ -84,7 +85,6 @@ export default function AdminShell({
   trials,
   proposals,
   consentGaps,
-  aiNotesEvents,
   driveIssues,
   staleEnvelopes,
   contractActivationRetries,
@@ -119,7 +119,6 @@ export default function AdminShell({
   trials: TrialSessionListItem[];
   proposals: ProposalListItem[];
   consentGaps: ConsentGapItem[];
-  aiNotesEvents: AiNotesConsentEventItem[];
   driveIssues: DriveArtifactIssue[];
   staleEnvelopes: StaleEnvelopeContract[];
   contractActivationRetries: ContractActivationRetryItem[];
@@ -245,6 +244,8 @@ export default function AdminShell({
             />
           ) : activeTab === "contracts" ? (
             <ContractsTab contracts={familyContracts} acceptedProposals={acceptedProposalsForContract} />
+          ) : activeTab === "unified-schedule" ? (
+            <UnifiedScheduleTab />
           ) : activeTab === "booking" ? (
             <BookingReconciliationPanel />
           ) : activeTab === "consult" ? (
@@ -253,7 +254,6 @@ export default function AdminShell({
               trials={trials}
               proposals={proposals}
               consentGaps={consentGaps}
-              aiNotesEvents={aiNotesEvents}
               driveIssues={driveIssues}
               staleEnvelopes={staleEnvelopes}
               contractActivationRetries={contractActivationRetries}

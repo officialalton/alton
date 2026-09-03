@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { setTeacherStatus, setTeacherCalendlyUrl, setTeacherHourlyRate } from "./users-actions";
+import { setTeacherStatus, setTeacherHourlyRate } from "./users-actions";
 import { assignTeacherSubject, unassignTeacherSubject } from "./teacher-subjects-actions";
 import type { AdminSubject } from "./subject-data";
 import type { QcWarning, TeacherListItem } from "./users-data";
@@ -34,9 +34,6 @@ export default function TeacherDetailPanel({
   const [subjectError, setSubjectError] = useState<string | null>(null);
   const [togglingSubjectId, setTogglingSubjectId] = useState<string | null>(null);
   const [savedSubjectId, setSavedSubjectId] = useState<string | null>(null);
-  const [calendlyUrl, setCalendlyUrl] = useState(teacher.calendlySchedulingUrl ?? "");
-  const [savingUrl, setSavingUrl] = useState(false);
-  const [savedUrl, setSavedUrl] = useState(false);
   const [hourlyRate, setHourlyRate] = useState(
     teacher.hourlyRateKrw != null ? String(teacher.hourlyRateKrw) : ""
   );
@@ -85,18 +82,6 @@ export default function TeacherDetailPanel({
       setStatusError(
         e instanceof Error ? e.message : "상태 전환에 실패했습니다."
       );
-    }
-  }
-
-  async function handleSaveCalendlyUrl() {
-    setSavingUrl(true);
-    setSavedUrl(false);
-    try {
-      await setTeacherCalendlyUrl(teacher.id, calendlyUrl);
-      onUpdated({ calendlySchedulingUrl: calendlyUrl.trim() || null });
-      setSavedUrl(true);
-    } finally {
-      setSavingUrl(false);
     }
   }
 
@@ -178,34 +163,6 @@ export default function TeacherDetailPanel({
         <p className="text-[13px] text-ink">
           {teacher.subjectNames.length ? teacher.subjectNames.join(", ") : "매칭된 학생 없음"}
         </p>
-      </div>
-
-      <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">
-        <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2">
-          개인 예약 링크 (Calendly)
-        </div>
-        <p className="text-[12px] text-grey-500 mb-2">
-          Calendly에서 이 선생님을 팀원으로 초대하고 개인 이벤트 타입을 만든 뒤,
-          그 예약 페이지 URL을 여기에 넣으면 학생 포털에서 이 선생님과 직접
-          회차를 예약할 수 있습니다. 이벤트 타입 만들 때 화상 회의 연동을
-          <b> Zoom으로 반드시 설정</b>해주세요(Calendly 기본값은 Google Meet).
-        </p>
-        <div className="flex gap-2">
-          <input
-            value={calendlyUrl}
-            onChange={(e) => setCalendlyUrl(e.target.value)}
-            placeholder="https://calendly.com/xxx-teacher/session"
-            className="flex-1 px-3 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12.5px]"
-          />
-          <button
-            disabled={savingUrl}
-            onClick={handleSaveCalendlyUrl}
-            className="text-[12px] font-bold px-3.5 py-2 rounded-lg bg-ink text-white disabled:opacity-50 shrink-0"
-          >
-            {savingUrl ? "저장 중..." : "저장"}
-          </button>
-        </div>
-        {savedUrl && <p className="text-[12px] text-green mt-1.5">✓ 저장되었습니다</p>}
       </div>
 
       <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">

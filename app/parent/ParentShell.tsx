@@ -10,7 +10,6 @@ import type { LessonItem } from "@/app/student/lessons-data";
 import type { CurriculumData } from "@/app/student/curriculum-data";
 import type { Memo } from "@/app/student/memo-data";
 import type { ReviewData, StudentFeedback } from "@/app/student/review-data";
-import type { BookableEnrollment } from "@/app/student/booking-data";
 import type { Child } from "./children-data";
 import CreditsTab from "./CreditsTab";
 import type { ParentCreditsData } from "./credits-data";
@@ -29,6 +28,7 @@ import {
   createWeeklyLessonSeriesForChild,
   cancelLessonBookingForChild,
   updateChildTimezone,
+  reportTeacherIssueForChild,
 } from "./booking-actions";
 
 const NAV_ITEMS = [
@@ -57,7 +57,6 @@ export default function ParentShell({
   memosByEnrollment,
   reviews,
   myFeedback,
-  bookableEnrollments,
   credits,
   entitlements,
   purchaseStatus,
@@ -73,7 +72,6 @@ export default function ParentShell({
   dashboard: DashboardData;
   upcoming: LessonItem[];
   past: LessonItem[];
-  bookableEnrollments: BookableEnrollment[];
   curricula: CurriculumData[];
   memosByEnrollment: Record<string, Memo[]>;
   reviews: Record<string, ReviewData>;
@@ -179,6 +177,7 @@ export default function ParentShell({
               key={currentChildId}
               bookableEnrollments={lessonBooking.bookableEnrollments}
               upcomingBookings={lessonBooking.upcomingBookings}
+              pastSessionsForReport={lessonBooking.pastSessionsForReport}
               regularLessonTypeId={lessonBooking.regularLessonTypeId}
               lessonDurationMinutes={lessonBooking.lessonDurationMinutes}
               timezone={lessonBooking.timezone}
@@ -187,6 +186,7 @@ export default function ParentShell({
               onCreateWeeklySeries={(params) => createWeeklyLessonSeriesForChild({ ...params, childId: currentChildId })}
               onCancelBooking={(reservationId, reason) => cancelLessonBookingForChild({ reservationId, childId: currentChildId, reason })}
               onUpdateTimezone={(timezone) => updateChildTimezone(currentChildId, timezone)}
+              onReportTeacherIssue={(params) => reportTeacherIssueForChild({ ...params, childId: currentChildId })}
             />
           ) : activeTab === "lessons" ? (
             <LessonsTab
@@ -195,7 +195,6 @@ export default function ParentShell({
               past={past}
               curricula={curricula}
               memosByEnrollment={memosByEnrollment}
-              bookableEnrollments={bookableEnrollments}
               reviews={reviews}
               myFeedback={myFeedback}
               readOnly

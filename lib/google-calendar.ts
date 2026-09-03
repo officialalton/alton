@@ -1,4 +1,4 @@
-import { getCalendarApiAccessToken } from "@/lib/google-workspace-auth";
+import { getCalendarApiAccessToken, getFreeBusyApiAccessToken } from "@/lib/google-workspace-auth";
 
 // R6 2/N — Google Calendar 이벤트 + 고유 Meet 링크 생성, FreeBusy 조회.
 //
@@ -74,6 +74,9 @@ export async function createCalendarEventWithMeet(params: {
             conferenceSolutionKey: { type: "hangoutsMeet" },
           },
         },
+        extendedProperties: {
+          private: { altonReservationId: params.reservationId },
+        },
       }),
     }
   );
@@ -128,6 +131,96 @@ export async function deleteCalendarEvent(params: {
   }
 }
 
+export type IncrementalCalendarEvent = {
+  googleEventId: string;
+  status: "confirmed" | "cancelled";
+  altonReservationId: string | null;
+  startsAt: string | null;
+  endsAt: string | null;
+  meetLink: string | null;
+};
+
+export type IncrementalCalendarSyncResult = {
+  events: IncrementalCalendarEvent[];
+  nextSyncToken: string;
+  syncTokenExpired: boolean;
+};
+
+/**
+ * R6 11/N — "Google 직접 변경의 사이트 역반영"용 증분 조회. sync token이 있으면 마지막
+ * 조회 이후 바뀐/삭제된 이벤트만 받는다(Google 권장 패턴, 알림 누락에 대비한 정기
+ * 대조 용도 — Calendar push 알림만으로 마지막 편집자를 신뢰하지 않는다는 원칙).
+ * sync token이 만료(410 GONE)되면 `syncTokenExpired: true`로 알리고, 호출부가 전체
+ * 재동기화(syncToken 없이 재호출)로 폴백해야 한다.
+ *
+ * `extendedProperties.private.altonReservationId`(createCalendarEventWithMeet가 쓰는 값)로
+ * ALTON이 만든 이벤트만 골라내 반환한다 — 선생님의 다른 개인 일정은 포함되지 않는다.
+ */
+export async function listCalendarEventsIncremental(params: {
+  teacherWorkspaceEmail: string;
+  syncToken?: string;
+}): Promise<IncrementalCalendarSyncResult> {
+  assertRealCallsAllowed();
+  const token = await getCalendarApiAccessToken(params.teacherWorkspaceEmail);
+
+  // (2026-09-03 정정, Sandbox 실측으로 발견) Google Calendar API의 `privateExtendedProperty`
+  // 쿼리 파라미터는 정확한 key=value만 지원하고 와일드카드(`key=*`)를 지원하지 않는다 —
+  // 이전 구현은 `altonReservationId=*`로 필터링을 시도해 실제로는 항상 0건이 매칭됐다
+  // (서버가 조용히 빈 결과를 반환할 뿐 에러도 나지 않아 mock 테스트로는 드러나지 않았다).
+  // ALTON이 만든 이벤트만 골라내는 필터는 서버 쿼리가 아니라 아래에서 클라이언트 측으로
+  // 옮겼다(선생님 캘린더의 다른 개인 일정도 함께 내려오지만, 이 함수 호출부는 어차피
+  // `altonReservationId`가 있는 것만 사용한다).
+  const query = new URLSearchParams();
+  if (params.syncToken) {
+    query.set("syncToken", params.syncToken);
+  } else {
+    query.set("showDeleted", "true");
+  }
+
+  const res = await fetch(`${CALENDAR_API}/calendars/primary/events?${query.toString()}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (res.status === 410) {
+    return { events: [], nextSyncToken: "", syncTokenExpired: true };
+  }
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`Calendar 증분 조회 실패 (status ${res.status}): ${text.slice(0, 300)}`);
+  }
+  const data = (await res.json()) as {
+    nextSyncToken?: string;
+    items?: Array<{
+      id: string;
+      status: "confirmed" | "cancelled" | "tentative";
+      start?: { dateTime?: string };
+      end?: { dateTime?: string };
+      extendedProperties?: { private?: { altonReservationId?: string } };
+      conferenceData?: { entryPoints?: Array<{ entryPointType: string; uri: string }> };
+    }>;
+  };
+
+  // (2026-09-03 정정) Google이 삭제된(cancelled) 이벤트는 증분 동기화 응답에서 id/status
+  // 외의 필드(extendedProperties 포함)를 거의 항상 비운다 — 그래서 confirmed 이벤트만
+  // `altonReservationId` 존재로 걸러내고, cancelled 이벤트는 `altonReservationId: null`인
+  // 채로 그대로 반환한다(걸러내지 않음). 호출부(external-change-detection.ts)가 cancelled
+  // 이벤트는 googleEventId로 우리 DB의 예약과 직접 대조해 식별한다.
+  const events: IncrementalCalendarEvent[] = (data.items ?? [])
+    .filter((item) => item.status === "cancelled" || !!item.extendedProperties?.private?.altonReservationId)
+    .map((item) => ({
+      googleEventId: item.id,
+      status: item.status === "cancelled" ? "cancelled" : "confirmed",
+      altonReservationId: item.extendedProperties?.private?.altonReservationId ?? null,
+      startsAt: item.start?.dateTime ?? null,
+      endsAt: item.end?.dateTime ?? null,
+      meetLink: item.conferenceData?.entryPoints?.find((e) => e.entryPointType === "video")?.uri ?? null,
+    }));
+
+  if (!data.nextSyncToken) {
+    throw new Error("Calendar 증분 조회 응답에 nextSyncToken이 없습니다(페이지네이션 미구현 — 현재 범위 밖).");
+  }
+  return { events, nextSyncToken: data.nextSyncToken, syncTokenExpired: false };
+}
+
 export type FreeBusyInterval = { start: string; end: string };
 
 /**
@@ -142,7 +235,7 @@ export async function queryFreeBusy(params: {
   timeMax: Date;
 }): Promise<FreeBusyInterval[]> {
   assertRealCallsAllowed();
-  const token = await getCalendarApiAccessToken(params.teacherWorkspaceEmail);
+  const token = await getFreeBusyApiAccessToken(params.teacherWorkspaceEmail);
   const res = await calendarFetch(`${CALENDAR_API}/freeBusy`, token, {
     method: "POST",
     body: JSON.stringify({

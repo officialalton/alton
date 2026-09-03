@@ -59,6 +59,32 @@ export async function assertReservationBelongsToChild(
   }
 }
 
+/**
+ * 지각·노쇼 신고 등 세션 하나를 대상으로 하는 액션에서, 그 세션이 정말 childId 소유(자기
+ * 자신 또는 자기 가족)인지 확인한다 — assertReservationBelongsToChild와 동일한 목적을
+ * sessionId 기준으로 수행한다.
+ */
+export async function assertSessionBelongsToChild(
+  admin: ReturnType<typeof createAdminClient>,
+  sessionId: string,
+  childId: string
+): Promise<void> {
+  const { data } = await admin
+    .from("sessions")
+    .select("subject_enrollment:subject_enrollments!sessions_subject_enrollment_id_fkey(child_id)")
+    .eq("id", sessionId)
+    .maybeSingle();
+  const subjectEnrollment = data
+    ? Array.isArray(data.subject_enrollment)
+      ? data.subject_enrollment[0]
+      : data.subject_enrollment
+    : null;
+  const actualChildId = (subjectEnrollment as { child_id?: string } | null)?.child_id;
+  if (!actualChildId || actualChildId !== childId) {
+    throw new Error("본인(또는 자녀) 수업에 대해서만 신고할 수 있습니다.");
+  }
+}
+
 export async function assertActiveTeacherAssignment(
   admin: ReturnType<typeof createAdminClient>,
   subjectEnrollmentId: string,

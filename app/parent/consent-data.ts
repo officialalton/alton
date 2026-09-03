@@ -11,7 +11,6 @@ export type ChildConsentStatus = {
     consentedAt: string;
     revokedAt: string | null;
   } | null;
-  aiNotesOptedIn: boolean;
 };
 
 export type ConsentPolicyOption = {
@@ -45,7 +44,7 @@ export async function loadChildrenConsentStatus(
 
   const results: ChildConsentStatus[] = [];
   for (const child of children) {
-    const [{ data: isUnder13 }, { data: hasValidConsent }, { data: latest }, { data: aiNotesOptedIn }] = await Promise.all([
+    const [{ data: isUnder13 }, { data: hasValidConsent }, { data: latest }] = await Promise.all([
       supabase.rpc("is_under_13", { p_student_id: child.studentId }),
       supabase.rpc("has_valid_guardian_consent", { p_student_id: child.studentId }),
       supabase
@@ -55,7 +54,6 @@ export async function loadChildrenConsentStatus(
         .order("created_at", { ascending: false })
         .limit(1)
         .maybeSingle(),
-      supabase.rpc("has_ai_notes_consent", { p_student_id: child.studentId }),
     ]);
 
     results.push({
@@ -71,7 +69,6 @@ export async function loadChildrenConsentStatus(
             revokedAt: (latest.revoked_at as string | null) ?? null,
           }
         : null,
-      aiNotesOptedIn: aiNotesOptedIn !== false, // 이력 없거나 RPC 오류 시 기본 ON(opt-out 모델)
     });
   }
   return results;

@@ -29,7 +29,6 @@ export type TeacherListItem = {
   qcWarningCount: number;
   subjectNames: string[];
   assignedSubjectIds: string[];
-  calendlySchedulingUrl: string | null;
   hourlyRateKrw: number | null;
 };
 
@@ -188,7 +187,7 @@ export async function loadStudents(supabase: SupabaseClient): Promise<StudentLis
 export async function loadTeachers(supabase: SupabaseClient): Promise<TeacherListItem[]> {
   const { data: teachers } = await supabase
     .from("teachers")
-    .select("id, school, status, calendly_scheduling_url, hourly_rate_krw, profile:profiles(name)")
+    .select("id, school, status, hourly_rate_krw, profile:profiles(name)")
     .order("joined_at", { ascending: false });
   if (!teachers || teachers.length === 0) return [];
 
@@ -237,7 +236,6 @@ export async function loadTeachers(supabase: SupabaseClient): Promise<TeacherLis
     qcWarningCount: warningCountByTeacher.get(t.id) ?? 0,
     subjectNames: subjectsByTeacher.get(t.id) ?? [],
     assignedSubjectIds: assignedSubjectIdsByTeacher.get(t.id) ?? [],
-    calendlySchedulingUrl: t.calendly_scheduling_url,
     hourlyRateKrw: t.hourly_rate_krw,
   }));
 }

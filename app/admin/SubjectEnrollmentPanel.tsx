@@ -142,10 +142,22 @@ export default function SubjectEnrollmentPanel({
     setBusy(true);
     setMessage(null);
     try {
+      // "적용일" 입력은 날짜만 받는데(<input type="date">), 그대로 new Date(dateOnly)로
+      // 바꾸면 그날 자정(UTC)이 된다 — 오늘 날짜를 고른 "당일 변경"의 흔한 경우, 방금
+      // 만들어진 기존 활성 배정의 effective_from(오늘, 자정 이후 특정 시각)보다 자정이
+      // 항상 앞서서 change_teacher_assignment()의 "새 effective_from은 기존 활성 배정보다
+      // 이후여야 한다" 가드에 100% 걸린다(실제 버그로 발견됨 — 경쟁 상태가 아니라
+      // 결정론적으로 항상 실패). 오늘 날짜를 고르면 "지금"으로 취급하고, 미래 날짜를
+      // 고르면 그날 자정(예약된 변경)으로 취급한다.
+      const todayDateOnly = new Date().toISOString().slice(0, 10);
+      const effectiveFromIso =
+        effectiveFromDate === todayDateOnly
+          ? new Date().toISOString()
+          : new Date(`${effectiveFromDate}T00:00:00.000Z`).toISOString();
       await changeTeacherAssignment({
         subjectEnrollmentId: enrollmentId,
         newTeacherId,
-        effectiveFrom: new Date(effectiveFromDate).toISOString(),
+        effectiveFrom: effectiveFromIso,
         reason,
       });
       setMessage("선생님이 변경되었습니다. 확정된 미래 예약은 자동 이전되지 않으니 안내가 필요합니다.");

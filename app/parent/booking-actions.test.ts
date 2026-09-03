@@ -29,12 +29,16 @@ vi.mock("@/lib/auth", () => ({
 
 const teacherAssignmentMaybeSingleMock = vi.fn();
 const reservationOwnerMaybeSingleMock = vi.fn();
+const sessionOwnerMaybeSingleMock = vi.fn();
 const adminFromMock = vi.fn((table: string) => {
   if (table === "teacher_assignments") {
     return { select: () => ({ eq: () => ({ eq: () => ({ eq: () => ({ maybeSingle: teacherAssignmentMaybeSingleMock }) }) }) }) };
   }
   if (table === "reservations") {
     return { select: () => ({ eq: () => ({ maybeSingle: reservationOwnerMaybeSingleMock }) }) };
+  }
+  if (table === "sessions") {
+    return { select: () => ({ eq: () => ({ maybeSingle: sessionOwnerMaybeSingleMock }) }) };
   }
   if (table === "profiles") {
     return { update: () => ({ eq: () => Promise.resolve({ error: null }) }) };
@@ -54,6 +58,11 @@ vi.mock("@/lib/booking/create-booking", () => ({
   cancelLessonBooking: (p: unknown) => cancelLessonBookingMock(p),
 }));
 
+const submitIncidentReportMock = vi.fn();
+vi.mock("@/lib/booking/incident-reports", () => ({
+  submitIncidentReport: (supabase: unknown, p: unknown) => submitIncidentReportMock(p),
+}));
+
 beforeEach(() => {
   vi.clearAllMocks();
   guardianLinksMock.mockResolvedValue({ data: [{ household_id: "hh1" }] });
@@ -63,6 +72,8 @@ beforeEach(() => {
   confirmLessonBookingMock.mockResolvedValue({ reservationId: "r1", sessionId: "s1" });
   createWeeklyLessonSeriesMock.mockResolvedValue([]);
   cancelLessonBookingMock.mockResolvedValue(undefined);
+  sessionOwnerMaybeSingleMock.mockResolvedValue({ data: { subject_enrollment: { child_id: "child1" } } });
+  submitIncidentReportMock.mockResolvedValue(undefined);
 });
 
 describe("createLessonBookingForChild", () => {
@@ -148,5 +159,35 @@ describe("cancelLessonBookingForChild", () => {
       cancelLessonBookingForChild({ reservationId: "r1", childId: "child1", reason: "x" })
     ).rejects.toThrow("본인(또는 자녀) 예약만 취소할 수 있습니다.");
     expect(cancelLessonBookingMock).not.toHaveBeenCalled();
+  });
+});
+
+describe("reportTeacherIssueForChild", () => {
+  it("가족 구성원이 아닌 자녀는 신고도 거부한다", async () => {
+    childLinkMaybeSingleMock.mockResolvedValue({ data: null });
+    const { reportTeacherIssueForChild } = await import("./booking-actions");
+    await expect(
+      reportTeacherIssueForChild({ childId: "child1", sessionId: "s1", reportType: "teacher_late", minutesLate: 10 })
+    ).rejects.toThrow("본인 가족 구성원이 아닌 자녀");
+    expect(submitIncidentReportMock).not.toHaveBeenCalled();
+  });
+
+  it("세션이 실제로 그 자녀 것이 아니면 거부한다(sessionId 바꿔치기 방지)", async () => {
+    sessionOwnerMaybeSingleMock.mockResolvedValue({ data: { subject_enrollment: { child_id: "someone-elses-child" } } });
+    const { reportTeacherIssueForChild } = await import("./booking-actions");
+    await expect(
+      reportTeacherIssueForChild({ childId: "child1", sessionId: "s1", reportType: "teacher_late", minutesLate: 10 })
+    ).rejects.toThrow("본인(또는 자녀) 수업에 대해서만 신고할 수 있습니다.");
+    expect(submitIncidentReportMock).not.toHaveBeenCalled();
+  });
+
+  it("검증 통과 시 submitIncidentReport를 호출한다", async () => {
+    const { reportTeacherIssueForChild } = await import("./booking-actions");
+    await reportTeacherIssueForChild({
+      childId: "child1", sessionId: "s1", reportType: "teacher_no_show_reported", notes: "안 들어왔어요",
+    });
+    expect(submitIncidentReportMock).toHaveBeenCalledWith(
+      expect.objectContaining({ sessionId: "s1", reportType: "teacher_no_show_reported", notes: "안 들어왔어요" })
+    );
   });
 });

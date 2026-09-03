@@ -1,6 +1,5 @@
 import Link from "next/link";
 import ConsultForm from "./ConsultForm";
-import CalendlyWidget from "./CalendlyWidget";
 
 const PILLARS = [
   {
@@ -216,21 +215,10 @@ export default function LandingPage() {
             1:1 수업 상담 신청
           </h2>
 
-          {process.env.NEXT_PUBLIC_CALENDLY_URL ? (
-            <>
-              <p className="text-[14.5px] text-grey-500 text-center mb-8">
-                아래에서 편한 시간을 바로 선택해 예약하세요. 상담은 Zoom으로 진행됩니다.
-              </p>
-              <CalendlyWidget url={process.env.NEXT_PUBLIC_CALENDLY_URL} />
-            </>
-          ) : (
-            <>
-              <p className="text-[14.5px] text-grey-500 text-center mb-8">
-                아래 양식을 남겨주시면 담당자가 연락드립니다.
-              </p>
-              <ConsultForm />
-            </>
-          )}
+          <p className="text-[14.5px] text-grey-500 text-center mb-8">
+            아래 양식을 남겨주시면 담당자가 연락드립니다.
+          </p>
+          <ConsultForm />
         </section>
       </main>
 

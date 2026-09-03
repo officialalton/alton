@@ -15,7 +15,6 @@ import {
   loadTrialSessions,
   loadProposals,
   loadConsentGaps,
-  loadAiNotesConsentEvents,
   loadDriveArtifactIssues,
   loadStaleEnvelopeVersions,
 } from "./consultation-data";
@@ -57,7 +56,6 @@ export default async function AdminHomePage({
     trials,
     proposals,
     consentGaps,
-    aiNotesEvents,
     driveIssues,
     staleEnvelopes,
     contractActivationRetries,
@@ -84,7 +82,6 @@ export default async function AdminHomePage({
     loadTrialSessions(supabase),
     loadProposals(supabase),
     loadConsentGaps(supabase),
-    loadAiNotesConsentEvents(supabase),
     loadDriveArtifactIssues(supabase),
     loadStaleEnvelopeVersions(supabase),
     listOpenContractActivationRetries(),
@@ -136,7 +133,6 @@ export default async function AdminHomePage({
       trials={trials}
       proposals={proposals}
       consentGaps={consentGaps}
-      aiNotesEvents={aiNotesEvents}
       driveIssues={driveIssues}
       staleEnvelopes={staleEnvelopes}
       contractActivationRetries={contractActivationRetries}

@@ -246,7 +246,7 @@ function StatusBar({
     return (
       <div className="flex items-center justify-between gap-4 px-6 py-2.5 bg-green-bg text-[13.5px] flex-wrap">
         <span>
-          🟢 <b>Zoom 연결됨</b>
+          🟢 <b>Google Meet 연결됨</b>
           {endLabel ? ` · 종료 예정 ${endLabel}` : ""}
         </span>
         <span className="flex items-center gap-4">

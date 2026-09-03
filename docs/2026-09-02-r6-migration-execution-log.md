@@ -343,9 +343,242 @@ Google Sandbox 외부 호출 승인 요청(FreeBusy/Calendar/Meet 실제 생성�
 `WORKSPACE_PREFLIGHT_ALLOW_REAL_READS`)는 세션 종료 시점 기준 전부 미설정(기본 false)임을
 재확인.
 
-## R6 종료 상태 요약 (2026-09-02)
+## 10/N — 완료 승인 보류 후 누락 배선 마감 (완료, 2026-09-02)
 
-1/N~8/N 전부 완료·검증·원격 dev DB 반영·커밋 완료(`npx supabase migration list --linked`로
-local=remote 일치 재확인). 9/N(로컬 E2E)도 완료. Calendly/Zoom 제거만 위 이유로 R7 이후로
-미룬다 — R6 승인 스펙의 "필수 범위" 항목 중 지각·노쇼의 "확정" 부분과 Calendly/Zoom 제거를
-제외하면 전부 구현·검증됨.
+제품 오너가 9/N까지의 "완료" 보고를 승인 보류하고 7개 항목을 지시(전체 지시문은
+`docs/CURRENT.md`의 R6 절 요약 참고, 여기서는 실제로 한 작업만 기록):
+
+- **FreeBusy 사전 확인**(`lib/booking/freebusy-check.ts`)을 `confirmLessonBooking()` 안,
+  DB 확정 RPC 직전에 실제로 호출하도록 배선. 조회 실패/미설정 시 예약을 막지 않고, 확정
+  이후 겹침은 기존 DB 배타 제약(`reservations_no_overlap`)이 최종 방어선 — 레이스 윈도우는
+  이 기존 제약으로 이미 방어됨(신규 방어 로직 추가하지 않음, 요구사항이 "기존 DB 락으로
+  방어됨을 확인"이었으므로).
+- **Calendar 이벤트+Meet 생성**(`syncOneReservationCalendarEvent()`)을 배치 워커
+  (`processPendingCalendarSyncs()`)뿐 아니라 `confirmLessonBooking()`/
+  `createWeeklyLessonSeries()`/`cancelLessonBooking()`의 실제 서버 흐름에서 즉시 호출하도록
+  배선. 실패해도 예약 확정 응답 자체는 막지 않음(await 후 catch로 흡수) — 실패 시
+  `reservations.google_sync_status`만 `failed`/`reconciliation_needed`로 남고 예약·hold는
+  전혀 건드리지 않는다(기존 원칙 그대로). 낙관적 잠금(조건부 UPDATE claim)이 즉시 호출
+  경로와 배치 워커의 동시 호출을 안전하게 처리 — 재시도가 중복 외부 객체를 만들지 않는다는
+  멱등성 요구사항을 이 claim 패턴이 그대로 충족.
+- **보호자 동의 스냅샷 → Smart Notes ON/OFF** 연결: Calendar 동기화 성공 직후
+  `applySmartNotesConfigBestEffort()`가 `sessions.smart_notes_status`를 조회해
+  `setMeetSpaceSmartNotesConfig()`를 호출 — 이 설정이 실패해도 Calendar 동기화 자체는
+  `synced`로 유지(부가 기능 실패로 전체를 재시도 대상으로 되돌리지 않음).
+- **Workspace Events 수신**: `app/api/webhooks/workspace-events/route.ts` 신규 — Pub/Sub
+  push의 OIDC bearer token을 fail-closed로 검증, Smart Notes 생성 이벤트를
+  `reservations.google_meeting_code`로 세션에 연결해 신규 테이블
+  `smart_notes_generation_events`에 적재 + `sessions.smart_notes_drive_file_id` 갱신.
+  **Drive 파일 이동·ACL은 R8, 리뷰 생성·게시는 R9로 스코프 밖 유지 — 이번엔 이벤트 수신·
+  연결까지만 구현.**
+- **Meet 참가 기록 파이프라인**: `lib/google-meet.ts`의 `listConferenceParticipantEvents()` +
+  위 웹훅의 참가자 이벤트 분기가 `session_access_events`에 `source:"google_meet_api"`로
+  삽입 — ALTON 자체 접속 기록(다른 source)과 명확히 분리, **출석 확정·수업권 소진·정산은
+  자동으로 하지 않는다**(R7 범위 그대로).
+- **지각·노쇼 신고 제출 UI**: 학생/보호자(`app/student/LessonBookingTab.tsx`의 "지난 수업
+  지각·노쇼 신고" 섹션, `app/student/incident-report-actions.ts`,
+  `app/parent/booking-actions.ts`의 `reportTeacherIssueForChild` — 세션이 실제로 그 자녀
+  것인지 신규 헬퍼 `assertSessionBelongsToChild()`로 검증), 선생님
+  (`app/teacher/ScheduleTab.tsx` 지난 수업 목록에 신고 폼 추가), 관리자 열람
+  (`app/admin/BookingReconciliationPanel.tsx`에 "지각·노쇼 신고" 섹션 추가,
+  `listRecentIncidentReports()`). 최종 판정·수업권 소진·정산은 여전히 R7 범위 — 이 UI는
+  신고 원문 제출·열람만 한다.
+- **R5 기존 결함 근본 원인 특정**(제품 오너가 "R6 아님으로 넘기지 말라"고 명시 요구):
+  `e2e/r5-subject-enrollment-flow.spec.ts`의 관리자 선생님 변경(같은 날짜 적용) 테스트가
+  결정론적으로 실패하던 원인은 `app/admin/SubjectEnrollmentPanel.tsx`의
+  `TeacherChangeForm` — "적용일" `<input type="date">`가 오늘 날짜일 때
+  `new Date(effectiveFromDate).toISOString()`이 UTC 자정이 되어, 방금 만든 최초 배정의
+  정밀 시각보다 항상 이전이 되면서 `change_teacher_assignment()`의
+  `p_effective_from > 기존 effective_from` 가드에 매번 걸리는 버그(레이스 아님, 매번 100%
+  재현). 오늘 날짜를 고른 경우에만 "지금"으로 취급하도록 수정. **영향 범위**: R5 관리자
+  선생님 변경(같은 날 적용) 한 곳뿐. **사용자 영향**: 관리자가 오늘 날짜로 선생님을
+  변경하면 항상 실패(관리자 전용 운영 기능 — 학생/보호자/선생님 화면에는 영향 없음).
+  **담당 단계**: R5(버그 발생 코드가 R5 범위) — 이번 세션에서 함께 수정·검증.
+- **`material_version_id` 정책 명문화**(구현은 R9로 유지): 예약 자체는 null이어도 막지
+  않되, R9가 학생 진도를 판정하는 즉시 아직 시작 전(`actual_start_at is null`)인 세션에
+  버전을 배정해야 하고 세션 시작 전에는 반드시 non-null이어야 한다는 "수업 시작 전 필수
+  선행 조건"으로 `docs/2026-08-29-master-roadmap-v3.md` R9 체크리스트와 `docs/CURRENT.md`에
+  등록. 기존 스냅샷 불변 원칙과의 충돌 여부를 조사한 결과, `material_version_id`를 보호하는
+  트리거·제약이 현재 전혀 없어(R1 `sessions_prevent_direct_update`는 `final_status` 컬럼
+  UPDATE에만 반응) 충돌 없음 — 제품 결정 필요 사항이 아니라 R9에서 그대로 구현 가능.
+
+검증: 신규 유닛 테스트 다수(`lib/google-meet.test.ts`,
+`lib/google-workspace-events.test.ts`, `app/api/webhooks/workspace-events/route.test.ts`,
+`lib/booking/freebusy-check.test.ts`, `app/student/LessonBookingTab.test.tsx`,
+`app/teacher/ScheduleTab.test.tsx`/`app/parent/booking-actions.test.ts`/
+`app/admin/BookingReconciliationPanel.test.tsx` 추가 케이스) 전부 통과. 전체 Vitest
+759건, `tsc --noEmit` 클린, 전체 Playwright(`--workers=1`) 51건 전부 통과(로컬 E2E 중
+`r6_calendar_sync_failed` 로그가 찍히지만 — 테스트 픽스처 선생님에 workspace_email이 없어
+발생하는 예상된 실패로, 예약 확정 자체는 정상 통과 — 이는 "Google 실패해도 예약은 막지
+않는다"는 원칙이 mock이 아니라 실제 서버 흐름에서도 지켜짐을 보여주는 증거). `npm run build`
+프로덕션 빌드 클린. **실제 Google API 호출은 이번 10/N 전 과정에서 단 한 번도 발생하지
+않았다** — 모든 Google 플래그는 세션 종료 시점 기준 여전히 미설정(false).
+
+Google Sandbox 외부 검증 승인 요청서를 신규 작성해 제출
+(`docs/2026-09-02-r6-google-sandbox-verification-request.md`) — 아직 승인 전, 승인 전까지
+어떤 실제 Google API도 호출하지 않는다.
+
+## 11/N — Calendar·Meet 소유 정책 확정 반영 + Sandbox 요청서 개정 (완료, 2026-09-02)
+
+제품 오너가 10/N 이후 Calendar·Meet 소유·통제 정책을 구체적으로 확정 지시(선생님 계정이
+organizer, `official` 관리자는 통합 일정 화면으로 중앙 통제, Google 직접 변경 감지,
+FreeBusy scope 정정, Sandbox 객체 상한 재조정, Smart Notes 검증 참가자 확정, Workspace
+Events pull 전용 수신). 이미 완료한 FreeBusy·Calendar/Meet·Smart Notes·참가 기록·신고 UI
+배선은 다시 작업하지 않고, 이 정책에 맞춘 코드·문서·mock 검증만 추가했다.
+
+- **Calendar/Meet organizer 정책 재확인**: `createCalendarEventWithMeet()`(2/N에서 이미
+  구현)가 `teacherWorkspaceEmail`을 DWD subject로 써서 담당 선생님 캘린더에 이벤트를
+  생성하고, attendees 없이 `sendUpdates=none`으로 호출하는 것을 재확인 — 코드 변경 불필요,
+  기존 구현이 이미 이번 정책과 일치했다. `docs/2026-08-29-product-architecture-v3.md`의
+  "성인 회사 관리 계정이 모든 Meet을 주최한다" 옛 표현만 정정.
+- **DWD scope 불일치 발견·수정(이번에 새로 발견한 버그)**: `lib/google-workspace-auth.ts`의
+  `CALENDAR_SCOPE`가 광범위한 `.../auth/calendar`를 요청하도록 돼 있었는데, Gate C가 실제
+  DWD에 등록한 목록에는 이 scope가 없다(`calendar.events`/`calendar.events.readonly`만
+  있음) — `CALENDAR_SYNC_ALLOW_REAL_CALLS`가 항상 false여서 지금까지 드러나지 않았을 뿐,
+  실제 호출 시 전부 인가 실패였을 것이다. 이미 등록된 `calendar.events`로 좁혀 수정(외부
+  승인 불필요). 같은 문제가 `lib/google-meet.ts`에도 있어(Calendar용 토큰 재사용) Meet
+  전용 scope(`meetings.space.settings`/`meetings.space.readonly`, Gate C 등록됨)로 분리한
+  전용 토큰 함수(`getMeetSettingsApiAccessToken`/`getMeetReadonlyApiAccessToken`) 추가.
+- **FreeBusy scope 정정**: `calendar.events.readonly` → `calendar.events.freebusy`,
+  이벤트 생성 토큰과 완전히 분리된 `getFreeBusyApiAccessToken()`으로 구현. 이 scope는
+  DWD 미등록 — Sandbox 승인 요청서에 별도 외부 설정 변경으로 명시.
+- **Google 직접 변경 감지("외부 변경 감지", 정책 #4)**: 신규 마이그레이션
+  `20261004000000_r6_external_change_detection.sql`(`reservations.external_change_status`
+  + `teacher_calendar_sync_state` + `resolve_external_calendar_change()` RPC). 증분 조회
+  (`lib/google-calendar.ts`의 `listCalendarEventsIncremental()`, sync token 만료 시 전체
+  재동기화 폴백) + 오케스트레이션(`lib/booking/external-change-detection.ts`의
+  `reconcileTeacherCalendarChanges()`, 8개 유닛 테스트: 시간 변경/삭제/Meet 링크 변경/
+  토큰 만료 폴백/호출 실패). `createCalendarEventWithMeet()`에
+  `extendedProperties.private.altonReservationId` 추가(ALTON 이벤트 식별용). 감지만 하고
+  예약·세션·수업권 hold는 절대 자동으로 바꾸지 않는다는 정책 원칙을 코드로 구현 —
+  `reservations.update(...).eq("external_change_status","none")`로 이미 확인 대기 중인
+  변경을 덮어쓰지 않게 방어. 관리자 UI(`app/admin/BookingReconciliationPanel.tsx`의
+  "Google 외부 변경 감지" 섹션)는 "무시(오탐)" 처리만 실제로 연결 — "ALTON 시간 유지"/
+  "Google 시간 반영"(재검증 후 확정)은 RPC의 `resolution` enum 값만 준비돼 있고 실제
+  재검증·재동기화 로직은 미연결임을 UI에 명시적으로 표시(하지 않는 일을 하는 것처럼
+  보이지 않게).
+- **관리자 통합 일정 화면(정책 #2)**: 데이터 계층(외부 변경 큐, 기존 관리자 예약 액션이
+  이미 전체 재검증 체인을 타는 것)만 준비, 정책이 요구하는 금주/주간/월간 캘린더 전환
+  UI는 만들지 않고 명시적으로 UI 고도화 후속 작업으로 이관(로드맵에 등록).
+- **학생/보호자 예약 UI(정책 #3 일부)**: `LessonBookingTab.tsx`에 빠른 추천 시간(상위 3개
+  슬롯) + 슬롯 선택 후 "예약 확인" 요약 카드(주간 반복은 최대 8개 생성 시도 날짜 미리
+  표시) 추가 — "시간 선택 후 요약 확인을 거쳐 최종 확정" 요구 충족. 월간 날짜 선택기는
+  미구현, 후속 이관. `e2e/r6-lesson-booking-flow.spec.ts`가 슬롯 클릭 후 "최종 확정" 클릭을
+  추가로 요구하도록 갱신하고 실제 브라우저로 재검증(통과).
+- 선생님 계정 정지 전 "미래 예약·미수집 Smart Notes 확인" 운영 게이트는 로드맵 체크리스트
+  항목으로만 등록(미구현).
+- Google Sandbox 외부 검증 승인 요청서를 정책 확정 내용 전체에 맞춰 v2로 전면 개정
+  (`docs/2026-09-02-r6-google-sandbox-verification-request.md`) — 객체·시나리오 상한
+  재조정, organizer를 `teacher1@alton.education`으로 한정, Smart Notes 검증 참가자
+  확정(`teacher1@alton.education`+`official@alton.education`만), Workspace Events는
+  pull 전용(ngrok/push/Production endpoint 사용 안 함)으로 한정, 외부 변경 승인 항목을
+  표로 분리 표시. 아직 승인 전, 실제 Google API 호출 없음.
+
+검증: 신규/변경 테스트 전부 통과. 전체 Vitest 771건(10/N 대비 +12건). `tsc --noEmit` 클린.
+전체 Playwright(`--workers=1`) 재확인 — 결과는 이 세션의 최종 보고서에 기록(위 슬롯 확인
+카드 추가로 갱신된 `e2e/r6-lesson-booking-flow.spec.ts` 단독 실행은 통과 확인 완료).
+`npm run build` 재확인 예정. **실제 Google API 호출은 이번 11/N에서도 단 한 번도 발생하지
+않았다** — 모든 플래그 미설정 유지.
+
+## 12/N — 캘린더 UI 3종 + 외부 변경 양방향 처리 실연결 + Sandbox 요청서 통합 (완료, 2026-09-02)
+
+제품 오너가 11/N 반영 후에도 남아 있던 확정 요구사항을 "R6 마감 작업"으로 한 번에 지시.
+11/N에서 미완료로 이관했던 항목 대부분을 이번에 실제로 구현했다.
+
+- **학생·보호자 예약 UI**: `app/components/MonthCalendar.tsx`(신규 공용 월간 캘린더
+  컴포넌트, `lib/calendar-date-utils.ts`의 timezone 인식 날짜 키/그리드 유틸 기반) +
+  `LessonBookingTab.tsx`에 날짜 선택기+선택일 시간 패널 통합, 빠른 추천 시간 유지. 슬롯
+  클릭 → 요약 확인 카드(반복이면 최대 8개 생성 시도 날짜 미리보기) → 최종 확정 흐름으로
+  변경(이전엔 클릭 즉시 확정). "예정된 수업"에 목록/월간 뷰 전환 추가. 보호자는 같은
+  컴포넌트를 자녀별로 재사용.
+- **선생님 일정/가능시간**: 신규 `app/teacher/lesson-schedule-data.ts`/
+  `lesson-schedule-actions.ts`(R6 v3 `sessions`/`reservations`에서 선생님 본인 확정
+  예약만 조회 — 기존 `dashboard-data.ts`는 `legacy_sessions` 기반 교재/과제 기능 전용이라
+  완전히 별개임을 확인하고 새로 만듦) + 신규 "정규수업" 탭(`TeacherLessonScheduleTab.tsx`,
+  금주 목록/주간/월간 전환). 기존 "일정" 탭을 "가능시간"으로 개명하고
+  `TeacherAvailabilityTab.tsx`를 월간 캘린더 기본으로 재작성(날짜별 예외 추가/삭제를
+  달력 클릭으로, 기간 휴무 일괄 등록, 지난달 예외 복사). `listTeacherAvailabilityExceptions()`
+  신규 추가.
+- **관리자 통합 일정**: 신규 `UnifiedScheduleTab.tsx`("통합 일정" 탭) + `listAllTeacherLessons()`
+  — `official` 계정에 개별 Google Calendar를 공유하지 않고 ALTON DB에서 전체 선생님
+  예약을 오늘/주간/월간 + 선생님·과목·동기화 상태 필터로 중앙 조회. 변경·취소는 기존
+  "예약 운영" 탭으로 안내(검증 로직 중복 방지).
+- **Google 외부 변경 양방향 처리 실연결**: 신규 마이그레이션
+  `20261005000000_r6_external_change_resolution.sql`(`reservation_reschedules` 감사
+  테이블 + `reschedule_reservation_to_google_time()` — 가용성/버퍼/수업권 재검증 후 DB
+  갱신, exclusion 제약이 중복예약 자동 차단 + `record_reservation_restored_to_alton_time()`
+  — 감사만) + 앱 레이어 `lib/booking/external-change-resolution.ts`
+  (`acceptGoogleTimeForReservation()`/`restoreGoogleEventToAltonTime()`, 후자는
+  `patchCalendarEventTime()`으로 Google 이벤트를 ALTON 기준으로 실제 복원) +
+  관리자 UI 버튼 실연결(`app/admin/booking-actions.ts`의
+  `resolveExternalChangeAcceptGoogleTime()`/`resolveExternalChangeKeepAltonTime()`).
+  `deleted` 상태에는 두 버튼을 노출하지 않음.
+- **DWD scope 재확인(문서 기준, 실제 API 호출 없음)**: Gate C 인프라 로그의 등록 목록과
+  현재 코드가 요청하는 scope를 대조 — `calendar.events`/`meetings.space.settings`/
+  `meetings.space.readonly`는 문서상 이미 등록, `calendar.events.freebusy`만 실제
+  Admin Console 등록이 필요함을 확인(이 세션은 Admin Console에 접근할 수단이 없어 문서
+  대조로만 확인했고, 사람이 실제로 재확인해야 함을 승인 요청서에 명시).
+- **Sandbox 요청서 v3 통합 제출(아직 승인 전)**: `docs/2026-09-02-r6-google-sandbox-verification-request.md`
+  — 기존 Pub/Sub pull 구독과 신규 Workspace Events 구독을 별개 객체로 명시, Smart Notes
+  실회의 15분 상한, Google 직접 변경 감지→관리자 확인→양방향 처리 결과가 사이트·Google
+  양쪽에 반영되는 시나리오 포함, 외부 변경 승인 항목 표 분리.
+
+검증: 신규 컴포넌트·로직 전부 mock 유닛 테스트로 커버(`MonthCalendar.test.tsx`,
+`calendar-date-utils.test.ts`, `TeacherLessonScheduleTab.test.tsx`,
+`TeacherAvailabilityTab.test.tsx`, `UnifiedScheduleTab.test.tsx`,
+`external-change-resolution.test.ts`, `BookingReconciliationPanel.test.tsx`/
+`TeacherShell.test.tsx`/`AdminShell.test.tsx` 갱신). `e2e/r6-lesson-booking-flow.spec.ts`가
+요약 확인 카드의 "최종 확정" 클릭 단계를 반영하도록 갱신하고 재검증. 전체 Vitest/tsc/
+Playwright/build 결과는 이 로그를 갱신하는 세션의 최종 보고에 정확한 수치로 기록.
+**실제 Google API 호출은 이번 12/N에서도 단 한 번도 발생하지 않았다.**
+
+## 13/N — 외부 일정 표시·삭제 처리 보정 + Sandbox 요청서 v4 (완료, 2026-09-02)
+
+제품 오너가 12/N 반영 후에도 확정 정책과 Sandbox 요청서가 완전히 일치하지 않는 3건을
+지적 — 새 범위 추가가 아니라 R6 마감 보정으로 지시. 실제로 반영한 것:
+
+- **선생님 Google 외부 일정 표시를 지금 구현**(더 이상 "Sandbox 이후 별도 작업"으로
+  미루지 않음): `lib/booking/external-busy.ts`(`listTeacherExternalBusyBlocks()` — FreeBusy
+  결과를 시작/종료 시각만 있는 블록으로 변환, 실패 시 빈 배열 반환), `lib/calendar-date-utils.ts`에
+  `dateKeysCoveredByInterval()` 추가. `TeacherLessonScheduleTab.tsx`(주간/월간)와
+  `TeacherAvailabilityTab.tsx`(월간)에 실제로 렌더링 — 밑줄 표시(`MonthCalendar.tsx`에
+  `externalBusyDates` prop 추가) + 선택일 "외부 일정(예약 불가)" 칩(시간 범위만, 제목·
+  설명·참석자 없음). 서버 액션(`listMyExternalBusyBlocks()`)이 `requireUser()`로 본인
+  확인 후 본인 `workspace_email`만 조회하도록 해 보호자·학생·다른 선생님에게는 이 경로
+  자체가 노출되지 않는다. mock 테스트 전부 통과.
+- **Google 이벤트 직접 삭제 처리에서 "무시"만 가능한 상태를 제거**: 신규 마이그레이션
+  `20261006000000_r6_external_change_deletion_resolution.sql`(`resolve_external_calendar_change()`가
+  `deleted` 상태의 `dismissed` 요청을 명시적으로 거부하도록 재작성, `reservation_reschedules`
+  source check에 `google_event_deleted_recreated` 추가, 감사 기록 함수
+  `record_reservation_recreated_after_deletion()` 신규). 앱 레이어
+  `lib/booking/external-change-resolution.ts`의 `recreateCalendarEventAfterDeletion()`
+  (google_sync_status를 pending으로 되돌리고 옛 이벤트 정보를 지운 뒤
+  `syncOneReservationCalendarEvent()`로 실제 재생성) + `app/admin/booking-actions.ts`의
+  `resolveExternalChangeRecreateAfterDeletion()`/`resolveExternalChangeCancelDueToDeletion()`
+  (후자는 기존 `cancelLessonBooking()` 정식 절차 재사용). 관리자 UI가 `deleted` 상태에서는
+  "ALTON 일정 유지(재생성)"/"예약 취소" 둘만 보여주고 "무시" 버튼 자체를 렌더링하지 않음.
+  mock 테스트 전부 통과.
+- **Sandbox 요청서 v4로 전면 개정**: (1) "범위를 나누어 부분 실행 가능"으로 읽히던 구
+  §4/§12의 문구를 전부 삭제하고 "scope 확인 → 한 번의 통합 실행" 원칙만 남김, (2) §2를
+  "문서상 등록 예상/문서상 추가 필요/Sandbox 시작 전 사람이 실제로 확인해야 하는 scope(전
+  항목 공통)" 3범주로 재구성하고, 실제 확인이 문서와 다르면 어떤 API도 호출하지 않고
+  문서만 갱신해 한 번만 재보고하도록 명시, (3) 외부 일정 렌더링 검증과 삭제 후 양자택일
+  처리 검증을 통합 시나리오에 포함.
+- **선생님 계정 정지 전 운영 게이트를 R6 blocker에서 완전히 제외**하고 R12(신규 항목)와
+  정식 오픈 전 체크리스트로 이관 — R8의 Smart Notes 이동 구현과의 의존관계를 명시(R8 완료
+  전에는 "미이관 Smart Notes 없음" 검사를 보수적으로 항상 차단하거나 R8과 함께 구현).
+
+검증: 신규/변경 유닛 테스트 전부 통과. 전체 Vitest 812건(12/N 대비 +11건). `tsc --noEmit`
+클린. **실제 Google API 호출은 이번 13/N에서도 단 한 번도 발생하지 않았다** — 모든
+플래그 미설정 유지.
+
+## R6 종료 상태 요약 (2026-09-02, 갱신 v4)
+
+1/N~13/N(Calendly/Zoom 제거 제외) 전부 완료·mock/fixture 검증 완료. 1/N~9/N은 원격 dev
+DB 반영·커밋까지 완료됨(이전 기록 그대로). 10/N~13/N은 이번 세션 작업분 — 로컬 검증까지
+완료했고 원격 dev DB 반영·커밋 여부는 이 로그를 갱신하는 커밋과 함께 진행. 13/N에서
+12/N까지 남아 있던 두 미완료 항목(외부 일정 렌더링, 삭제 후 양자택일 처리)을 실제로
+구현했고, 선생님 계정 정지 게이트는 R6 blocker에서 완전히 제외해 R12/정식 오픈 전
+체크리스트로 이관했다. **R6은 아직 "완료" 상태가 아니다** — Google Sandbox 외부 검증
+(v4 요청서, 승인 대기 중)과 그 검증이 통과한 뒤의 Calendly/Zoom 제거가 남아 있다. 이것들이
+끝나야 R6을 완료로 보고할 수 있다.

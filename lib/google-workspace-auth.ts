@@ -38,12 +38,36 @@ import { ExternalAccountClient, type BaseExternalAccountClient } from "google-au
 
 const DIRECTORY_SCOPE = "https://www.googleapis.com/auth/admin.directory.user";
 const DRIVE_SCOPE = "https://www.googleapis.com/auth/drive";
-// R6: Calendar/Meet 생성·FreeBusy 조회용. Directory/Drive와 달리 고정된
+// R6: Calendar/Meet 이벤트 생성·수정·삭제용. Directory/Drive와 달리 고정된
 // GOOGLE_WORKSPACE_DELEGATED_ADMIN_EMAIL이 아니라 "그 수업을 맡은 선생님 본인"의
 // Workspace 계정(@alton.education, R2/R5에서 이미 발급)을 DWD subject로 삼는다 —
-// 이벤트가 실제로 그 선생님의 캘린더에 생기고, FreeBusy도 그 선생님 캘린더 기준으로
-// 조회되어야 하기 때문이다. signDelegatedAdminJwt에 subjectEmail을 넘겨 오버라이드한다.
-const CALENDAR_SCOPE = "https://www.googleapis.com/auth/calendar";
+// 이벤트가 실제로 그 선생님의 캘린더에 생겨야 하기 때문이다. signDelegatedAdminJwt에
+// subjectEmail을 넘겨 오버라이드한다.
+//
+// (2026-09-02 정정, R6 11/N) 이전에는 여기서 광범위한 `.../auth/calendar` 스코프를
+// 요청했다 — 그런데 Gate C가 실제로 DWD에 등록한 목록(`docs/2026-08-29-gate-c-sandbox-infra-log.md`
+// §"등록할 scope")에는 `calendar.events`/`calendar.events.readonly`만 있고 광범위한
+// `calendar` 스코프는 없다. Google의 도메인 전체 위임은 요청 스코프가 등록 목록에
+// 정확히 포함돼 있어야 통과하므로, 이 불일치 상태로는 실제 호출 시 전부 인가
+// 실패였을 것이다(지금까지 CALENDAR_SYNC_ALLOW_REAL_CALLS가 항상 false여서 발견되지
+// 않았을 뿐). 이미 등록된 `calendar.events`로 좁혀 이 불일치를 제거한다 — 이벤트
+// 생성·수정·삭제는 전부 이 스코프로 충분하고(광범위한 scope보다 최소권한 원칙에도
+// 더 맞음), 새로운 외부 승인이 필요하지 않다.
+const CALENDAR_SCOPE = "https://www.googleapis.com/auth/calendar.events";
+
+// R6 11/N: FreeBusy 조회 전용 최소권한 스코프(제품 오너 정정 지시) — 이벤트 생성용
+// CALENDAR_SCOPE와 분리한다. **이 스코프는 Gate C가 등록한 DWD 목록에 없다** — 실제
+// Sandbox 호출 전에 Admin Console에서 이 스코프를 서비스 계정의 DWD 클라이언트 ID에
+// 추가 등록해야 한다(아직 미승인 — Google Sandbox 승인 요청서 참고, 이 세션에서
+// 임의로 등록하지 않음).
+const FREEBUSY_SCOPE = "https://www.googleapis.com/auth/calendar.events.freebusy";
+
+// R6 11/N: Meet API v2(lib/google-meet.ts)는 이전까지 Calendar용 토큰을 그대로
+// 재사용했다 — Meet API는 Calendar API와 별개 표면이라 `calendar.events` scope로는
+// 인가되지 않을 가능성이 높다(Gate C §1.3이 별도로 등록한 `meetings.space.settings`/
+// `meetings.space.readonly`가 바로 이 용도). 전용 토큰 함수로 분리한다.
+const MEET_SETTINGS_SCOPE = "https://www.googleapis.com/auth/meetings.space.settings";
+const MEET_READONLY_SCOPE = "https://www.googleapis.com/auth/meetings.space.readonly";
 const OAUTH_TOKEN_URL = "https://oauth2.googleapis.com/token";
 
 function assertNotPreview(): void {
@@ -256,4 +280,80 @@ export async function getCalendarApiAccessToken(subjectEmail: string): Promise<s
   const data = (await res.json()) as { access_token: string; expires_in: number };
   cachedCalendarTokensBySubject.set(subjectEmail, { accessToken: data.access_token, expiresAt: now + data.expires_in });
   return data.access_token;
+}
+
+const cachedFreeBusyTokensBySubject = new Map<string, { accessToken: string; expiresAt: number }>();
+
+/**
+ * FreeBusy 조회 전용 액세스 토큰(FREEBUSY_SCOPE, CALENDAR_SCOPE와 별개 — 위 주석 참고).
+ * 이 스코프가 아직 DWD에 등록되지 않았으므로, 실제로 호출하면(CALENDAR_SYNC_ALLOW_REAL_CALLS=true
+ * 상태에서) Google이 인가 실패(invalid_grant 등)를 반환할 것이 예상된다 — 이는 버그가
+ * 아니라 아직 승인되지 않은 외부 설정 변경이 남아있다는 신호다.
+ */
+export async function getFreeBusyApiAccessToken(subjectEmail: string): Promise<string> {
+  assertNotPreview();
+  const now = Math.floor(Date.now() / 1000);
+  const cached = cachedFreeBusyTokensBySubject.get(subjectEmail);
+  if (cached && cached.expiresAt > now + 60) {
+    return cached.accessToken;
+  }
+
+  const impersonatedToken = await getImpersonatedAccessToken();
+  const signedJwt = await signDelegatedAdminJwt(impersonatedToken, FREEBUSY_SCOPE, subjectEmail);
+
+  const res = await fetch(OAUTH_TOKEN_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
+      assertion: signedJwt,
+    }),
+  });
+  if (!res.ok) {
+    throw new Error(`FreeBusy API 토큰 교환 실패 (status ${res.status})`);
+  }
+  const data = (await res.json()) as { access_token: string; expires_in: number };
+  cachedFreeBusyTokensBySubject.set(subjectEmail, { accessToken: data.access_token, expiresAt: now + data.expires_in });
+  return data.access_token;
+}
+
+async function exchangeDelegatedToken(scope: string, subjectEmail: string): Promise<{ accessToken: string; expiresIn: number }> {
+  const impersonatedToken = await getImpersonatedAccessToken();
+  const signedJwt = await signDelegatedAdminJwt(impersonatedToken, scope, subjectEmail);
+  const res = await fetch(OAUTH_TOKEN_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer", assertion: signedJwt }),
+  });
+  if (!res.ok) {
+    throw new Error(`Meet API 토큰 교환 실패 (status ${res.status})`);
+  }
+  const data = (await res.json()) as { access_token: string; expires_in: number };
+  return { accessToken: data.access_token, expiresIn: data.expires_in };
+}
+
+const cachedMeetSettingsTokensBySubject = new Map<string, { accessToken: string; expiresAt: number }>();
+
+/** Meet Space 설정 변경(Smart Notes ON/OFF)용 전용 토큰. */
+export async function getMeetSettingsApiAccessToken(subjectEmail: string): Promise<string> {
+  assertNotPreview();
+  const now = Math.floor(Date.now() / 1000);
+  const cached = cachedMeetSettingsTokensBySubject.get(subjectEmail);
+  if (cached && cached.expiresAt > now + 60) return cached.accessToken;
+  const { accessToken, expiresIn } = await exchangeDelegatedToken(MEET_SETTINGS_SCOPE, subjectEmail);
+  cachedMeetSettingsTokensBySubject.set(subjectEmail, { accessToken, expiresAt: now + expiresIn });
+  return accessToken;
+}
+
+const cachedMeetReadonlyTokensBySubject = new Map<string, { accessToken: string; expiresAt: number }>();
+
+/** Meet 참가 기록 조회용 전용 토큰. */
+export async function getMeetReadonlyApiAccessToken(subjectEmail: string): Promise<string> {
+  assertNotPreview();
+  const now = Math.floor(Date.now() / 1000);
+  const cached = cachedMeetReadonlyTokensBySubject.get(subjectEmail);
+  if (cached && cached.expiresAt > now + 60) return cached.accessToken;
+  const { accessToken, expiresIn } = await exchangeDelegatedToken(MEET_READONLY_SCOPE, subjectEmail);
+  cachedMeetReadonlyTokensBySubject.set(subjectEmail, { accessToken, expiresAt: now + expiresIn });
+  return accessToken;
 }

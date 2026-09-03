@@ -60,7 +60,6 @@ const baseProps = {
   consentGaps: [
     { childId: "s1", childName: "지훈", hasDob: false, hasActiveConsent: false },
   ],
-  aiNotesEvents: [],
   driveIssues: [
     { id: "d1", contractId: "ct1", artifactType: "signed_document", syncStatus: "retryable_failed" as const },
   ],

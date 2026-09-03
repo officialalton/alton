@@ -76,6 +76,30 @@ export async function addTeacherAvailabilityException(input: AvailabilityExcepti
   return data.id as string;
 }
 
+export type AvailabilityExceptionRow = {
+  id: string;
+  exceptionDate: string;
+  kind: "blocked" | "available";
+  reason: string | null;
+};
+
+/** R6 11/N — 선생님 본인 캘린더에 기존 날짜별 예외를 표시하기 위한 조회. */
+export async function listTeacherAvailabilityExceptions(): Promise<AvailabilityExceptionRow[]> {
+  const { user, supabase } = await requireUser();
+  const { data, error } = await supabase
+    .from("teacher_availability_exceptions")
+    .select("id, exception_date, kind, reason")
+    .eq("teacher_id", user.id)
+    .order("exception_date", { ascending: true });
+  if (error) throw new Error(error.message);
+  return (data ?? []).map((r) => ({
+    id: r.id as string,
+    exceptionDate: r.exception_date as string,
+    kind: r.kind as "blocked" | "available",
+    reason: (r.reason as string) ?? null,
+  }));
+}
+
 export async function removeTeacherAvailabilityException(exceptionId: string): Promise<void> {
   const { user, supabase } = await requireUser();
   const { error } = await supabase

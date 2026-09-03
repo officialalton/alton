@@ -49,20 +49,3 @@ export async function setChildDateOfBirth(studentId: string, dateOfBirth: string
   });
   if (error) throw new Error(error.message);
 }
-
-/**
- * R6 7/N: AI 회의록(Smart Notes) 사용 여부 선택 — R2/R3의 필수 개인정보 동의(위 함수들)와
- * 명시적으로 분리된 별도 선택 동의 트랙(`ai_notes_consent_events`, R3에서 스키마만 준비,
- * 실제 판정 로직은 R6에서 배선). 기본은 ON(opt-out 모델) — 이 액션은 거부/재허용 이력만
- * 남긴다. 자격 검증(자녀의 보호자인지)은 set_ai_notes_consent_as_guardian()이 수행한다.
- */
-export async function setAiNotesConsentForChild(studentId: string, optedIn: boolean, reason?: string) {
-  const { supabase } = await requireUser();
-
-  const { error } = await supabase.rpc("set_ai_notes_consent_as_guardian", {
-    p_student_id: studentId,
-    p_opted_in: optedIn,
-    p_reason: reason ?? null,
-  });
-  if (error) throw new Error(error.message);
-}

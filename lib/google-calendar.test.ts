@@ -3,8 +3,10 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 const ORIGINAL_ENV = { ...process.env };
 
 const getCalendarApiAccessTokenMock = vi.fn().mockResolvedValue("calendar-access-token");
+const getFreeBusyApiAccessTokenMock = vi.fn().mockResolvedValue("freebusy-access-token");
 vi.mock("@/lib/google-workspace-auth", () => ({
   getCalendarApiAccessToken: (subjectEmail: string) => getCalendarApiAccessTokenMock(subjectEmail),
+  getFreeBusyApiAccessToken: (subjectEmail: string) => getFreeBusyApiAccessTokenMock(subjectEmail),
 }));
 
 function allowRealCalls() {
@@ -132,6 +134,63 @@ describe("google-calendar", () => {
         timeMax: new Date("2026-10-02T00:00:00Z"),
       });
       expect(busy).toEqual([{ start: "2026-10-01T19:00:00Z", end: "2026-10-01T21:00:00Z" }]);
+    });
+
+    it("이벤트 생성용 토큰이 아니라 FreeBusy 전용 토큰(별도 최소권한 scope)을 사용한다", async () => {
+      allowRealCalls();
+      vi.stubGlobal(
+        "fetch",
+        vi.fn().mockResolvedValue({ ok: true, json: async () => ({ calendars: { primary: { busy: [] } } }) })
+      );
+      const { queryFreeBusy } = await import("./google-calendar");
+      await queryFreeBusy({
+        teacherWorkspaceEmail: "teacher@alton.education",
+        timeMin: new Date("2026-10-01T00:00:00Z"),
+        timeMax: new Date("2026-10-02T00:00:00Z"),
+      });
+      expect(getFreeBusyApiAccessTokenMock).toHaveBeenCalledWith("teacher@alton.education");
+      expect(getCalendarApiAccessTokenMock).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("listCalendarEventsIncremental", () => {
+    it("privateExtendedProperty 쿼리 파라미터를 보내지 않는다(Google이 와일드카드를 지원하지 않음 — R6 Sandbox 실측 2026-09-03 발견)", async () => {
+      allowRealCalls();
+      const fetchMock = vi.fn().mockResolvedValue({
+        ok: true,
+        status: 200,
+        json: async () => ({ nextSyncToken: "tok1", items: [] }),
+      });
+      vi.stubGlobal("fetch", fetchMock);
+      const { listCalendarEventsIncremental } = await import("./google-calendar");
+      await listCalendarEventsIncremental({ teacherWorkspaceEmail: "teacher@alton.education" });
+      const calledUrl = fetchMock.mock.calls[0][0] as string;
+      expect(calledUrl).not.toContain("privateExtendedProperty");
+      expect(calledUrl).toContain("showDeleted=true");
+    });
+
+    it("confirmed 이벤트는 altonReservationId가 있는 것만 남기고, cancelled 이벤트는 없어도 포함한다", async () => {
+      allowRealCalls();
+      vi.stubGlobal(
+        "fetch",
+        vi.fn().mockResolvedValue({
+          ok: true,
+          status: 200,
+          json: async () => ({
+            nextSyncToken: "tok1",
+            items: [
+              { id: "g-alton", status: "confirmed", extendedProperties: { private: { altonReservationId: "r1" } } },
+              { id: "g-personal", status: "confirmed" },
+              { id: "g-deleted-alton", status: "cancelled" },
+            ],
+          }),
+        })
+      );
+      const { listCalendarEventsIncremental } = await import("./google-calendar");
+      const result = await listCalendarEventsIncremental({ teacherWorkspaceEmail: "teacher@alton.education" });
+      const ids = result.events.map((e) => e.googleEventId);
+      expect(ids).toEqual(["g-alton", "g-deleted-alton"]);
+      expect(result.events.find((e) => e.googleEventId === "g-deleted-alton")?.altonReservationId).toBeNull();
     });
   });
 });

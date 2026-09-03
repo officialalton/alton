@@ -88,6 +88,7 @@ const lessonsProps = {
   lessonBooking: {
     bookableEnrollments: [],
     upcomingBookings: [],
+    pastSessionsForReport: [],
     regularLessonTypeId: null,
     lessonDurationMinutes: 120,
     timezone: "America/Los_Angeles",

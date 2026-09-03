@@ -105,7 +105,7 @@ describe("SessionShell — 세션 상태바", () => {
         durationMinutes={30}
       />
     );
-    expect(screen.getByText(/Zoom 연결됨/)).toBeInTheDocument();
+    expect(screen.getByText(/Google Meet 연결됨/)).toBeInTheDocument();
     expect(
       screen.getByText("선생님이 안 보이시나요? (노쇼 알림)")
     ).toBeInTheDocument();

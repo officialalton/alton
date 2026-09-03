@@ -11,7 +11,6 @@ vi.mock("./users-actions", () => ({
   setStudentStatus: vi.fn(),
   setTeacherStatus: vi.fn(),
   adjustStudentCredit: vi.fn(),
-  setTeacherCalendlyUrl: vi.fn(),
   setTeacherHourlyRate: vi.fn(),
 }));
 
@@ -53,7 +52,6 @@ const teachers: TeacherListItem[] = [
     qcWarningCount: 2,
     subjectNames: ["SAT Math"],
     assignedSubjectIds: [],
-    calendlySchedulingUrl: null,
     hourlyRateKrw: null,
   },
 ];

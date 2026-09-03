@@ -16,13 +16,27 @@ import type { ReviewData, StudentFeedback } from "@/app/student/review-data";
 import AssignmentsTab from "./AssignmentsTab";
 import type { TeacherAssignedSubject } from "./assignments-data";
 import TeacherAvailabilityTab from "./TeacherAvailabilityTab";
-import type { TeacherAvailabilityRuleRow } from "./availability-actions";
-import { addTeacherAvailabilityRule, removeTeacherAvailabilityRule, addTeacherAvailabilityException } from "./availability-actions";
+import type { TeacherAvailabilityRuleRow, AvailabilityExceptionRow } from "./availability-actions";
+import {
+  addTeacherAvailabilityRule,
+  removeTeacherAvailabilityRule,
+  addTeacherAvailabilityException,
+  removeTeacherAvailabilityException,
+} from "./availability-actions";
+import { reportSessionIssue } from "./incident-report-actions";
+import TeacherLessonScheduleTab from "./TeacherLessonScheduleTab";
+import {
+  listMyLessonSchedule,
+  cancelMyLessonScheduleBooking,
+  listMyExternalBusyBlocks,
+  type TeacherLessonScheduleItem,
+} from "./lesson-schedule-actions";
 
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
   { id: "assignments", label: "배정", icon: "🎯" },
-  { id: "availability", label: "일정", icon: "🗓" },
+  { id: "lesson-schedule", label: "정규수업", icon: "📆" },
+  { id: "availability", label: "가능시간", icon: "🗓" },
   { id: "schedule", label: "수업", icon: "📅" },
   { id: "roster", label: "학생", icon: "👥" },
   { id: "curriculum", label: "커리큘럼", icon: "📘" },
@@ -45,7 +59,9 @@ export default function TeacherShell({
   currentAssignments,
   pastAssignments,
   availabilityRules,
+  availabilityExceptions,
   availabilityTimezone,
+  lessonSchedule,
 }: {
   initialTab?: string;
   dashboard: TeacherDashboardData;
@@ -59,9 +75,12 @@ export default function TeacherShell({
   currentAssignments: TeacherAssignedSubject[];
   pastAssignments: TeacherAssignedSubject[];
   availabilityRules: TeacherAvailabilityRuleRow[];
+  availabilityExceptions: AvailabilityExceptionRow[];
   availabilityTimezone: string;
+  lessonSchedule: TeacherLessonScheduleItem[];
 }) {
   const router = useRouter();
+  const [lessons, setLessons] = useState<TeacherLessonScheduleItem[]>(lessonSchedule);
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
   const [activeTab, setActiveTab] = useState<TabId>(
     validTabIds.includes(initialTab as TabId) ? (initialTab as TabId) : "home"
@@ -137,14 +156,27 @@ export default function TeacherShell({
               upcoming={dashboard.upcoming}
               past={dashboard.past}
               reviewedSessionIds={reviewedSessionIds}
+              onReportSessionIssue={reportSessionIssue}
+            />
+          ) : activeTab === "lesson-schedule" ? (
+            <TeacherLessonScheduleTab
+              lessons={lessons}
+              exceptions={availabilityExceptions}
+              timezone={availabilityTimezone}
+              onCancel={(reservationId, reason) => cancelMyLessonScheduleBooking({ reservationId, reason })}
+              onLoadExternalBusy={listMyExternalBusyBlocks}
+              onRefresh={() => listMyLessonSchedule().then(setLessons)}
             />
           ) : activeTab === "availability" ? (
             <TeacherAvailabilityTab
               initialRules={availabilityRules}
+              initialExceptions={availabilityExceptions}
               timezone={availabilityTimezone}
               onAddRule={addTeacherAvailabilityRule}
               onRemoveRule={removeTeacherAvailabilityRule}
               onAddException={addTeacherAvailabilityException}
+              onRemoveException={removeTeacherAvailabilityException}
+              onLoadExternalBusy={listMyExternalBusyBlocks}
             />
           ) : activeTab === "roster" ? (
             <RosterTab students={roster} onOpenCurriculum={openCurriculumFromRoster} />

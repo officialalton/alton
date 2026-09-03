@@ -14,7 +14,6 @@ import type { LessonItem } from "./lessons-data";
 import type { CurriculumData } from "./curriculum-data";
 import type { Memo } from "./memo-data";
 import type { ReviewData, StudentFeedback } from "./review-data";
-import type { BookableEnrollment } from "./booking-data";
 import StudentHomeworkTab from "./StudentHomeworkTab";
 import type { StudentHomeworkItem } from "./homework-data";
 import MaterialsLibraryTab from "./MaterialsLibraryTab";
@@ -41,6 +40,7 @@ import {
   cancelMyLessonBooking,
   updateMyTimezone,
 } from "./booking-actions";
+import { reportTeacherIssue } from "./incident-report-actions";
 
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
@@ -70,7 +70,6 @@ export default function StudentShell({
   memosByEnrollment,
   reviews,
   myFeedback,
-  bookableEnrollments,
   homeworkTodo,
   homeworkDone,
   materialsLibrary,
@@ -94,7 +93,6 @@ export default function StudentShell({
   memosByEnrollment: Record<string, Memo[]>;
   reviews: Record<string, ReviewData>;
   myFeedback: Record<string, StudentFeedback>;
-  bookableEnrollments: BookableEnrollment[];
   homeworkTodo: StudentHomeworkItem[];
   homeworkDone: StudentHomeworkItem[];
   materialsLibrary: LibrarySubject[];
@@ -175,6 +173,7 @@ export default function StudentShell({
             <LessonBookingTab
               bookableEnrollments={lessonBooking.bookableEnrollments}
               upcomingBookings={lessonBooking.upcomingBookings}
+              pastSessionsForReport={lessonBooking.pastSessionsForReport}
               regularLessonTypeId={lessonBooking.regularLessonTypeId}
               lessonDurationMinutes={lessonBooking.lessonDurationMinutes}
               timezone={lessonBooking.timezone}
@@ -183,6 +182,7 @@ export default function StudentShell({
               onCreateWeeklySeries={createMyWeeklyLessonSeries}
               onCancelBooking={(reservationId, reason) => cancelMyLessonBooking({ reservationId, reason })}
               onUpdateTimezone={updateMyTimezone}
+              onReportTeacherIssue={reportTeacherIssue}
             />
           ) : activeTab === "vocab" ? (
             <VocabTab
@@ -201,7 +201,6 @@ export default function StudentShell({
               memosByEnrollment={memosByEnrollment}
               reviews={reviews}
               myFeedback={myFeedback}
-              bookableEnrollments={bookableEnrollments}
             />
           ) : activeTab === "homework" ? (
             <StudentHomeworkTab

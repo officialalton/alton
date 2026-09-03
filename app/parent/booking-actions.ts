@@ -14,8 +14,14 @@ import {
   cancelLessonBooking,
   type WeeklySeriesOccurrenceResult,
 } from "@/lib/booking/create-booking";
-import { assertGuardianOfChild, assertActiveTeacherAssignment, assertReservationBelongsToChild } from "@/lib/booking/authorization";
+import {
+  assertGuardianOfChild,
+  assertActiveTeacherAssignment,
+  assertReservationBelongsToChild,
+  assertSessionBelongsToChild,
+} from "@/lib/booking/authorization";
 import { listAvailableSlotsForBooking as queryAvailableSlots, type AvailableSlotsQuery } from "@/lib/booking/query-slots";
+import { submitIncidentReport, type IncidentReportType } from "@/lib/booking/incident-reports";
 
 export type { AvailableSlotsQuery };
 
@@ -93,4 +99,18 @@ export async function cancelLessonBookingForChild(params: {
     cancelledById: user.id,
     reason: params.reason,
   });
+}
+
+export async function reportTeacherIssueForChild(params: {
+  childId: string;
+  sessionId: string;
+  reportType: Extract<IncidentReportType, "teacher_late" | "teacher_no_show_reported">;
+  minutesLate?: number;
+  notes?: string;
+}): Promise<void> {
+  const { user, supabase } = await requireUser();
+  await assertGuardianOfChild(supabase, user.id, params.childId);
+  const admin = createAdminClient();
+  await assertSessionBelongsToChild(admin, params.sessionId, params.childId);
+  await submitIncidentReport(supabase, params);
 }

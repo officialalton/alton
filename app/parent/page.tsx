@@ -3,7 +3,6 @@ import { loadChildren } from "./children-data";
 import { loadDashboardData } from "@/app/student/dashboard-data";
 import { loadLessons } from "@/app/student/lessons-data";
 import { loadCurricula } from "@/app/student/curriculum-data";
-import { loadBookableEnrollments } from "@/app/student/booking-data";
 import { loadMemos } from "@/app/student/memo-data";
 import { loadReviews, loadStudentFeedback } from "@/app/student/review-data";
 import { loadParentCreditsData } from "./credits-data";
@@ -40,7 +39,6 @@ export default async function ParentHomePage({
   const dashboard = await loadDashboardData(supabase, currentChildId);
   const { upcoming, past } = await loadLessons(supabase, currentChildId);
   const curricula = await loadCurricula(supabase, currentChildId);
-  const bookableEnrollments = await loadBookableEnrollments(supabase, currentChildId);
 
   const memosByEnrollment: Record<string, Awaited<ReturnType<typeof loadMemos>>> = {};
   for (const c of curricula) {
@@ -70,7 +68,6 @@ export default async function ParentHomePage({
       upcoming={upcoming}
       past={past}
       curricula={curricula}
-      bookableEnrollments={bookableEnrollments}
       memosByEnrollment={memosByEnrollment}
       reviews={reviews}
       myFeedback={myFeedback}
