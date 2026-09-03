@@ -1,16 +1,15 @@
-# M4 실행 로그 — 상담→체험→정규 전환 통합 (2026-09-03, 착수 1/N)
+# M4 실행 로그 — 상담→체험→정규 전환 통합 (2026-09-03)
 
-## 0. 범위(이번 라운드)
+## 0. 범위
 
-2026-09-03 M4 착수 승인의 목표 흐름 14개 절 중, 이번 라운드는 **2번(상담에서
-체험 온보딩 전환 — 검증된 계정 연결)과 4·5번(체험 Smart Notes 동의 + 체험수업권
-지급 게이트)만** 구현했다. 나머지(과목·선생님 배정 배선, 체험 예약/Calendar/Meet
-배선, Smart Notes 체험 리뷰, 정규 진행 선택, 관리자 원클릭 계약 발송, 서명→구매→
-활성화 연결, 역할별 화면, 골든 패스 E2E)는 이후 라운드로 이어간다 —
-`docs/CURRENT.md`/`docs/2026-08-29-master-roadmap-v3.md` M4 절에 동일하게 반영.
+2026-09-03 M4 착수 승인의 목표 흐름 14개 절을 3라운드에 걸쳐 로컬 구현·검증
+완료했다 — 1/N(커밋 `343e1aa`, §1~5 아래), 2/N(커밋 `eef362e`, §6 이하),
+3/N(커밋 `7ea992d`, §7 골든 패스 E2E). 12번(명시적 비범위)은 실제로 손대지
+않았고, 13번(골든 패스 E2E + 핵심 부정 테스트)까지 통과했다. 14번(문서 동기화)은
+이 로그 + `docs/CURRENT.md`/마스터 로드맵 M4 절 갱신으로 충족.
 
 Production·원격 운영 DB·실제 Google/DocuSign/Stripe 호출·실제 이메일 발송·
-`git push`는 이번 라운드에서 전혀 하지 않았다.
+`git push`는 3라운드 전체에서 전혀 하지 않았다.
 
 ## 1. DB — `supabase/migrations/20261015000000_m4_trial_onboarding_and_consent.sql`
 
@@ -119,9 +118,112 @@ Production·원격 운영 DB·실제 Google/DocuSign/Stripe 호출·실제 이�
   라운드가 더 진행된 시점에 한 번에 재현할 계획) — 대신 위 전체 Vitest/tsc/
   build/Playwright 4스펙을 통합 HEAD에서 그대로 재확인.
 
-## 5. 커밋
+## 6. 2/N — 배정·리뷰·전환·계약 발송 (커밋 `eef362e`)
 
-- `343e1aa` — DB 마이그레이션 + 앱 레이어 + 테스트(이번 라운드 전부).
+### 6.1 범위
+3번(체험 전 과목 수강+선생님 배정), 7번(체험 리뷰), 8번(정규 진행 희망), 9번
+(관리자 원클릭 계약 발송) 구현. 6번(체험 예약/Calendar/Meet)과 10번(서명→구매→
+활성화, `teacher_assignment` 불변)은 새 코드 없이 기존 R6/M2/R4/R5/R3 인프라가
+이미 generic하게 지원함을 코드 확인으로 검증했다.
+
+### 6.2 DB — `supabase/migrations/20261016000000_m4_trial_review_and_regular_conversion.sql`
+- `trial_lesson_reviews`: draft/final 2단계, 확정 전 고객 비공개. `save_trial_
+  lesson_review_draft()`/`finalize_trial_lesson_review()`(선생님 전용)/
+  `admin_edit_trial_lesson_review()`(관리자 운영상 정정, `finalized_at` 보존)/
+  `get_trial_lesson_review_for_family()`(보호자·학생 전용, `final_text`만 반환 —
+  초안·내부메모·Smart Notes 원본·Drive 링크는 애초에 SELECT 안 함).
+- `trial_regular_progress_selections`: `confirm_regular_progress_intent()`는
+  확정된 리뷰가 없으면 예외, `subject_enrollment`당 1건만(멱등 — 중복 선택으로
+  계약이 여러 개 안 생김).
+- `get_or_create_draft_contract_for_child()`: 이미 draft가 아닌(sent 이상 진행된)
+  계약이 있으면 그대로 반환, 없으면 draft로 새로 생성 — proposals를 요구하지
+  않는 요구사항 9번의 "①기존 계약 대조" 헬퍼.
+
+### 6.3 앱 레이어
+- `app/admin/trial-onboarding-actions.ts`에 `planTrialSubjectAndAssignTeacher
+  Action()`(R5의 `planSubjectEnrollment`/`assignTeacherToSubjectEnrollment` 재사용),
+  `sendRegularContractOneClickAction()`(대조→생성→선서명(`companySignOffContract
+  Version`)→발송(`sendContractForSignature`)을 한 액션으로, 이미 발송된 버전이면
+  재발송 없이 그대로 반환, 발송 실패는 draft 상태로 남겨 재처리 가능),
+  `listTrialOnboardingCandidatesAction()`/`listRegularConversionCandidatesAction()`
+  (관리자 화면 조회).
+- `app/teacher/trial-review-actions.ts`, `app/parent/trial-conversion-actions.ts`
+  신규.
+- **실제 안전 문제 발견·수정**: `lib/docusign.ts`의 `createEnvelope()`가 지금까지
+  실제 DocuSign API 호출을 막는 게이트가 전혀 없었다(Calendar의 `CALENDAR_SYNC_
+  ALLOW_REAL_CALLS`와 달리) — `.env.local`에 실제 sandbox 자격증명이 있어
+  로컬/E2E 실행 중 실수로 진짜 발송이 나갈 위험이 있었다. `DOCUSIGN_SANDBOX_
+  ALLOW_REAL_CALLS` 게이트 신설(기본 false, 이 값이 정확히 "true"가 아니면
+  `fetch` 자체를 호출하지 않음). 기존 `lib/docusign.test.ts`가 게이트 없음을
+  전제로 작성돼 있어 테스트도 함께 수정, 게이트 자체의 기본-거부 회귀 테스트 추가.
+
+### 6.4 UI
+관리자 `TrialOnboardingPanel`에 과목·선생님 배정 폼 + 정규 계약 발송 대기 목록·
+버튼 추가. 선생님 `TrialReviewPanel`(초안 저장/확정). 보호자 `TrialConversionPanel`
+(확정 리뷰 확인 + 정규 진행 희망 버튼).
+
+### 6.5 검증
+전체 Vitest 145개 파일/872건, `tsc --noEmit`, `next build` 클린.
+
+## 7. 3/N — 골든 패스 E2E (커밋 `7ea992d`)
+
+### 7.1 `e2e/m4-trial-to-regular-golden-path.spec.ts`
+요구사항 13번의 골든 패스를 실브라우저 11단계로 구현: ①관리자 체험 확정+온보딩
+링크 발급 ②신규 보호자 계정 생성(redeem 라우트) ③관리자 과목·선생님 배정 ④보호자
+Smart Notes 동의+체험수업권 자동 지급(+정규 예약 거부 부정 테스트) ⑤체험 예약(60분)
++완료 처리 ⑥선생님 리뷰 확정 ⑦보호자 정규 진행 희망 ⑧관리자 원클릭 계약 발송
+(mock 실패 경로만 검증) ⑨DocuSign 웹훅 시뮬레이션으로 계약 active 전환 ⑩정규상품
+구매 시뮬레이션+과목 활성화 ⑪`teacher_assignment` 불변 확인+같은 배정으로 120분
+정규 예약. r5-subject-enrollment-flow.spec.ts와 동일하게 역할마다 별도 `test()`로
+나눴다 — 처음엔 한 `test()` 안에서 `context.newPage()`로 admin/guardian/teacher를
+오가다 admin 세션이 guardian 세션으로 덮어써지는 문제를 실제로 겪어(Playwright
+`test()`는 각각 독립 브라우저 컨텍스트를 기본 제공) 이 구조로 재작성해 해결했다.
+
+### 7.2 이 E2E를 처음 통과시키며 발견·수정한 실제 버그
+- `confirm_trial_intent()`/`create_trial_onboarding_link()`/`get_or_create_draft_
+  contract_for_child()`/`admin_edit_trial_lesson_review()`가 SQL 안에서
+  `is_admin()`을 다시 확인 — 이 함수들은 전부 관리자 서버 액션이 `requireAdmin
+  OrCapability()`로 이미 검증한 뒤 `createAdminClient()`(service_role)로 호출한다.
+  service_role 세션에는 `auth.uid()`가 없어 `is_admin()`이 항상 false를 반환,
+  정상 관리자 호출도 매번 "관리자만..." 예외로 실패했다. 신규 마이그레이션
+  `20261017000000_m4_admin_function_auth_fix.sql`로 SQL 쪽 재확인을 제거하고,
+  `auth.uid()`에 의존하던 감사 컬럼(`trial_intent_confirmed_by` 등)도 실제 관리자
+  id를 파라미터로 받도록 시그니처를 바꿨다(M3 `teacher-assignment-termination-
+  actions.ts` 등 기존 관리자 전용 함수와 동일한 설계로 통일).
+- `app/teacher/trial-review-actions.ts`의 PostgREST 임베디드 조인 필터가
+  `.eq("lesson_types.code", "trial")`처럼 실제 테이블명을 썼는데, 별칭
+  (`lesson_type:lesson_types!inner(...)`)을 줬으면 필터도 별칭(`lesson_type.code`)
+  으로 해야 했다 — 선생님이 완료된 체험 수업을 리뷰 대상으로 전혀 못 찾던 버그.
+- E2E 자체의 시행착오(버그는 아니지만 기록): `lesson_types`/`entitlement_products`
+  id가 `gen_random_uuid()` 기본값이라 `db reset`마다 바뀌는데 처음에 하드코딩했다가
+  FK 위반으로 실패 — `beforeAll`에서 code 기준으로 조회하도록 수정. `date_of_birth`
+  없는 신규 학생은 `is_under_13()`이 fail-closed(true)로 판정해 계약 활성화를
+  막는다(기존 R3 정책, 만 13세 미만 동의 게이트는 M4 범위 밖 — r3-consultation-
+  to-contract.spec.ts와 동일하게 17세로 채워 우회). 직접 삽입한 구매의
+  `entitlement_grants`에 짝이 되는 `entitlement_ledger` 'grant' 이벤트를 빠뜨려
+  "사용 가능한 수업권 없음"으로 잘못 실패 — 실제 구매 완료 흐름과 동일하게 두
+  테이블을 함께 채우도록 수정.
+
+### 7.3 검증
+전체 Vitest 145개 파일/872건, `tsc --noEmit`, `next build` 클린. 핵심
+Playwright 회귀(M1/M3/R3/R5/M4) 5스펙 17건(골든 패스 11건 포함) 전부 통과 —
+동시 실행해도 데이터 충돌 없음 확인. 통합 HEAD(`7ea992d`) 기준 클린 `git
+worktree`(node_modules 하드카피)에서 `next build`+전체 Vitest 재현 완료.
+
+### 7.4 남은 미완료(요구사항 13번 부정/복구 테스트 목록 중)
+90일 이후 시작 체험 예약 차단, 24시간 기준 취소 처리, 미배정·다른 선생님 예약
+차단, 계약 발송 중복 클릭의 "재처리 후 성공"까지의 실증, 보호자 서명 전 구매
+차단의 직접 테스트는 전용 테스트로 다시 확인하지 않았다 — 대부분 기존
+R6/R3/R4 스펙이 이미 다루는 일반 메커니즘 재사용이라 별도 회귀 위험은 낮다고
+판단했지만, M4 전용 테스트로 명시적으로 박아두지는 못했다. 역할별 화면(11번)은
+골든 패스가 통과할 정도의 최소 UI만 구현했고 폴리싱은 하지 않았다.
+
+## 8. 커밋
+
+- `343e1aa` — 1/N: DB 마이그레이션 + 앱 레이어 + 테스트.
+- `eef362e` — 2/N: 배정 배선, 체험 리뷰, 정규 진행 희망, 원클릭 계약 발송,
+  DocuSign 게이트 신설.
+- `7ea992d` — 3/N: 골든 패스 E2E + service_role 호출 admin 함수 실버그 수정.
 - 이 로그 + `docs/CURRENT.md`/마스터 로드맵 갱신은 별도 문서 커밋.
 
 전부 로컬 `main` 브랜치 커밋, `git push` 없음. 실제 Google/Stripe/DocuSign 호출,

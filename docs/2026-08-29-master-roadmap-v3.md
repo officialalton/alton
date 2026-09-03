@@ -536,7 +536,7 @@ trial-teacher-assignment 모델)은 전량 폐기됐다.** trial/regular는 `tea
   써야 했던 것)을 발견·수정. 클린 `git worktree` 재현(build+전체 Vitest 143/863)도
   완료. **미완료 없음.**
 
-### M4 — 상담→체험→정규 전환 통합 마감 *(착수 1/N, 2026-09-03 — 로컬 구현 부분 완료·외부 통합 승인 대기)*
+### M4 — 상담→체험→정규 전환 통합 마감 *(2026-09-03 — 로컬 구현 완료·외부 통합(실제 Google/DocuSign/Stripe·Preview) 승인 대기)*
 
 **계획된 흐름(정정됨)**: `상담 → 체험 희망 확인 → 보호자·학생 ID 생성 및 검증 →
 과목 수강 관계 생성 → 선생님 배정 → 학생별 최초 1회 체험 Smart Notes 안내·동의 →
@@ -553,12 +553,11 @@ trial-teacher-assignment 모델)은 전량 폐기됐다.** trial/regular는 `tea
 트리거하지 않음 / 별도의 고객 대면 제안/승인 단계 없음 / 관리자 확인이 기존 R3
 인프라로 회사 선서명+DocuSign 발송을 즉시·멱등하게 한 동작으로 트리거 / 구매 단계는
 보호자 서명 전에 열리지 않음 / `proposals` 구조는 M4 새 흐름에서 남아있더라도 미사용 /
-계약·법률 문서는 수정하지 않음. **2026-09-03 착수 1/N 라운드(커밋 `343e1aa`)**:
-아래 첫 두 항목(계정 연결, 체험 Smart Notes 동의)만 구현·DB smoke test로 검증
-완료 — 나머지는 다음 라운드. 상세는 `docs/CURRENT.md` M4 절과
+계약·법률 문서는 수정하지 않음. **2026-09-03, 3라운드에 걸쳐 로컬 구현·검증
+완료(커밋 `343e1aa` → `eef362e` → `7ea992d`)**. 상세는 `docs/CURRENT.md` M4 절과
 `docs/2026-09-03-m4-migration-execution-log.md`.
 
-- [x] **(1/N)** 체험 진행 결정 후 보호자 온보딩 링크, 보호자·학생 계정 생성과
+- [x] 체험 진행 결정 후 보호자 온보딩 링크, 보호자·학생 계정 생성과
       잠재고객 기록 연결 — `trial_onboarding_links`(만료형 72h·단일사용·해시),
       `confirm_trial_intent()`(관리자 추천과 보호자 확정 구분), 신규 보호자
       경로(`finalize_trial_onboarding_new_guardian()` + R2와 동일 패턴의
@@ -567,27 +566,43 @@ trial-teacher-assignment 모델)은 전량 폐기됐다.** trial/regular는 `tea
       호출하는 것 자체가 본인 확인, 이메일 일치 자동 병합 없음) 둘 다 구현.
       `profiles.id`가 `auth.users` FK라 학생도 실제 Auth 계정이 필요함을
       DB smoke test로 발견해 앱 레이어가 먼저 계정을 만드는 구조로 수정.
-- [x] **(1/N)** 학생별 최초 1회 체험 Smart Notes 동의 — `trial_smart_notes_
+- [x] 학생별 최초 1회 체험 Smart Notes 동의 — `trial_smart_notes_
       consents`(학생당 1건 유니크 인덱스), `record_trial_smart_notes_consent()`
       (멱등), `grant_trial_entitlement_for_consultation()`(M2)에 동의 게이트
       추가(동의 없으면 지급 거부, DB smoke test로 확인) + 학생 기준 중복 지급
       방어.
-- [ ] 체험 수업권 자동 지급(M2 상품) — 지급 함수 자체는 M2에서 이미 있고 이번
-      라운드에서 동의 게이트만 추가했다. 온보딩 흐름(계정 연결→동의) 이후
-      실제로 이어서 호출되는 배선(관리자 화면 트리거 등)은 다음 라운드.
-- [ ] 체험 수업권 자동 지급(M2에서 만든 체험 전용 상품).
-- [ ] 담당 선생님 60분 가능시간 예약, FreeBusy·15분 버퍼·중복 방지, 선생님 소유 Calendar·Meet
-      생성(R6 인프라 재사용).
-- [ ] Smart Notes 체험수업, 선생님 검토·수정 체험 리뷰.
-- [ ] 보호자에게 리뷰와 정규 진행 의사 확인.
-- [ ] 정규 진행 선택 시 관리자 '정규 계약 발송' 단일 액션→회사 선서명·DocuSign 발송
-      (기존 R3 인프라 재사용, 새로 만들지 않음)→보호자 서명→정규상품 구매→과목
-      수강 활성화(기존 R4/R5 인프라 그대로 연결). **정정(2026-09-03)**: 이 단계는
-      계약 후 선생님을 새로 활성화하거나 재배정하는 것이 아니다 — 체험 전에 이미
-      만들어진 동일한 `teacher_assignment`를 그대로 유지하고, 계약 서명·정규상품
-      구매 이후에도 같은 선생님과 정규수업 예약을 계속 진행하는 흐름이다. 선생님
-      변경이 실제로 필요한 경우에만 기존 변경 UX(M3의 배정 종료→재배정, 또는
-      `change_teacher_assignment()`)를 쓴다.
+- [x] 체험 수업권 자동 지급(M2에서 만든 체험 전용 상품) — 동의 완료 즉시
+      `/consult/trial-onboarding` 화면에서 이어서 자동 호출.
+- [x] 체험 전 과목 수강 관계+선생님 배정 — 관리자 패널에서 R5 기존 함수
+      (`planSubjectEnrollment`/`assignTeacherToSubjectEnrollment`) 그대로 재사용,
+      `get_or_create_draft_contract_for_child()`로 draft 계약 자동 준비(section 9
+      "기존 계약 대조"와 공유).
+- [x] 담당 선생님 60분 가능시간 예약, FreeBusy·15분 버퍼·중복 방지, 선생님 소유 Calendar·Meet
+      생성(R6 인프라 재사용) — `confirm_lesson_booking()`이 이미 임의
+      `lesson_type_id`를 받는 범용 함수라 체험(60분)에 그대로 재사용 가능함을
+      코드로 확인, 새 예약 전용 코드 불필요. 체험/정규 수업권 상호 오사용 차단은
+      M2에서 이미 구현된 `hold_entitlement()`의 `p_lesson_type_id` 필터가 담당.
+- [x] Smart Notes 체험수업, 선생님 검토·수정 체험 리뷰 — `trial_lesson_reviews`
+      (draft/final 2단계, 확정 전 고객 비공개, 관리자 운영상 정정 가능).
+- [x] 보호자에게 리뷰와 정규 진행 의사 확인 — `trial_regular_progress_selections`
+      (확정된 리뷰 없으면 표시 자체 차단, 멱등).
+- [x] 정규 진행 선택 시 관리자 '정규 계약 발송' 단일 액션→회사 선서명·DocuSign 발송
+      (기존 R3 인프라 재사용, 새로 만들지 않음, proposals 불필요)→보호자 서명→정규상품
+      구매→과목 수강 활성화(기존 R4/R5 인프라 그대로 연결). 계약 후 선생님을
+      새로 활성화하거나 재배정하지 않는다 — 체험 전에 이미 만들어진 동일한
+      `teacher_assignment`를 그대로 유지하고, 계약 서명·정규상품 구매 이후에도
+      같은 선생님과 정규수업 예약을 계속 진행하는 흐름을 골든 패스 E2E로 실측
+      확인(11단계: teacher_assignment id 불변 + 같은 배정으로 120분 예약 성공).
+      선생님 변경이 실제로 필요한 경우에만 기존 변경 UX(M3의 배정 종료→재배정,
+      또는 `change_teacher_assignment()`)를 쓴다. **실제 안전 문제 발견·수정**:
+      DocuSign `createEnvelope()`에 실제 호출을 막는 게이트가 없었던 것을
+      `DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS`(기본 false)로 수정 — 이번 골든 패스
+      E2E는 이 게이트가 막은 mock 실패 경로만 검증했다(실제 DocuSign 발송 없음).
+- [x] 골든 패스 E2E — `e2e/m4-trial-to-regular-golden-path.spec.ts` 11단계 전부
+      통과(정규/체험 수업권 상호 오사용 차단 부정 테스트 포함). 이 E2E를 처음
+      끝까지 통과시키며 실제 버그 여러 건 발견·수정(관리자 함수의 잘못된
+      `is_admin()` 재확인, 선생님용 리뷰 목록 조회의 PostgREST 별칭 필터 오류 등
+      — 상세는 `docs/CURRENT.md`/실행 로그 참고).
 - 종료 기준: 하나의 Preview에서 `홈페이지 상담 신청 → 관리자 수락 → 상담 Meet → 상담 요약 →
   체험 결정 → 계정 생성 → 체험 동의 → 체험 수업권 → 체험 예약 → 체험 Meet → 리뷰 → 정규
   진행 선택 → DocuSign → 구매 → 과목 수강 활성화(같은 선생님과 정규수업 계속)` 전체

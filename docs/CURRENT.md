@@ -63,7 +63,7 @@
 v3 재검증까지 통과해 완전 마감됐다**(제품 오너가 직접 실행·보고, 상세는 위 "M1/R6 —
 Workspace Events 구독 모델 정정 및 실제 Sandbox 재검증 통과" 절) — 사용자 단위 구독
 모델이 실제로 성립함을 확인, 실측 중 발견된 UI 버그 2건은 이 세션에서 정식 수정·커밋
-완료. **M2·M3는 아래 별도 절 기준으로 완료됐다(2026-09-03). M4는 2026-09-03 승인으로 착수했고, 1/N 라운드(상담→체험 온보딩 계정 연결 + 체험 Smart Notes 동의 게이트)만 로컬 구현·검증 완료 — 나머지 절은 다음 라운드로 이어간다(아래 "M4 — 상담→체험→정규 전환 통합" 절 참고).** 상세는 아래 "M1 — 상담 기반 재설계" 절, "M2 — R4 후속(체험수업권)" 절, "M3 — 선생님 배정 종료(termination) 플로우" 절, "M4 — 상담→체험→정규 전환 통합" 절과 `docs/2026-09-03-m1-migration-execution-log.md`/`docs/2026-09-03-m2-migration-execution-log.md`/`docs/2026-09-03-m3-migration-execution-log.md`/`docs/2026-09-03-m4-migration-execution-log.md`. R9(과목 마일스톤 보드)·R11(보호자–관리자 운영 메신저)은 이 실행 순서에 포함되지 않고 각자의 R 섹션에 별도 미착수 항목으로 남아있다.
+완료. **M2·M3는 아래 별도 절 기준으로 완료됐다(2026-09-03). M4는 2026-09-03 승인으로 착수해 3라운드에 걸쳐 목표 흐름 1~11번·13번(골든 패스 E2E)까지 로컬 구현·검증 완료 — 실제 Google/DocuSign/Stripe·Preview 통합 승인만 남았다(아래 "M4 — 상담→체험→정규 전환 통합" 절 참고).** 상세는 아래 "M1 — 상담 기반 재설계" 절, "M2 — R4 후속(체험수업권)" 절, "M3 — 선생님 배정 종료(termination) 플로우" 절, "M4 — 상담→체험→정규 전환 통합" 절과 `docs/2026-09-03-m1-migration-execution-log.md`/`docs/2026-09-03-m2-migration-execution-log.md`/`docs/2026-09-03-m3-migration-execution-log.md`/`docs/2026-09-03-m4-migration-execution-log.md`. R9(과목 마일스톤 보드)·R11(보호자–관리자 운영 메신저)은 이 실행 순서에 포함되지 않고 각자의 R 섹션에 별도 미착수 항목으로 남아있다.
   - **1/N 완료**: 선생님 반복가능시간·날짜별예외·15분버퍼·24h~8주 window, `confirm_lesson_booking()`(예약+세션+entitlement hold 단일 트랜잭션).
   - **2/N 완료**: Calendar/Meet 이벤트+Meet 생성·FreeBusy·취소, 실패해도 예약/hold는 건드리지 않는 재처리 워커(`reconciliation_needed` 포함).
   - **3/N 완료**: 구조적 cutover — `sessions`→`legacy_sessions`(레거시 세션뷰 8파일 14곳 계속 사용), `sessions_v3`→`sessions`(신규 예약이 쓰는 테이블). FK·RLS·인덱스는 rename에 자동 추종, 함수 본문 7개(텍스트 참조라 자동추종 안 됨)는 전부 CREATE OR REPLACE로 갱신 확인. `material_version_id`는 R9 선행조건(학생별 진도 스냅샷) 부재로 의도적으로 비워둠(인터페이스만 유지).
@@ -580,49 +580,70 @@ push하지 않았다).
 - **외부 변경**: 0건(Google/Stripe/DocuSign 실호출, 실이메일, 원격 DB, `git push`
   전부 없음).
 
-### M4 — 상담→체험→정규 전환 통합, **착수(1/N, 2026-09-03) — 로컬 구현 부분 완료, 외부 통합 승인 대기**
+### M4 — 상담→체험→정규 전환 통합, **로컬 구현 완료 — 외부 통합(실제 Google/DocuSign/Stripe·Preview) 승인 대기**
 
-M4는 2026-09-03 승인으로 착수했다. 이번 라운드(1/N)는 목표 흐름 14개 절 중
-**2번(상담→체험 온보딩 전환: 검증된 계정 연결)과 4·5번(체험 Smart Notes 동의 +
-체험수업권 지급 게이트)만** 구현했다 — 나머지(3/6/7/8/9/10/11번, 골든 패스
-E2E)는 다음 라운드로 이어간다. 커밋 `343e1aa`.
+M4는 2026-09-03 승인으로 착수해 3라운드(커밋 `343e1aa` → `eef362e` → `7ea992d`)
+에 걸쳐 목표 흐름 14개 절 중 **1~11번과 13번(골든 패스 E2E)을 로컬에서 구현·
+검증 완료**했다. 12번(명시적 비범위)은 실제로 손대지 않았음을 확인, 14번(문서
+동기화)은 이 절 자체로 충족.
 
-- **DB**(`supabase/migrations/20261015000000_m4_trial_onboarding_and_consent.sql`):
-  `trial_onboarding_links`(만료형 72h·단일사용·해시 저장, 상담당 pending 1개만),
-  `consultations.trial_intent_confirmed_at/_by`(관리자의 `trial_recommended` 추천과
-  보호자 본인의 확정을 구분), `confirm_trial_intent()`(관리자 전용, 추천 이후에만
-  확정 기록 가능), `create_trial_onboarding_link()`(관리자 전용 발급),
-  `redeem_trial_onboarding_link()`(anon 조회, 계정 생성 없음),
-  `finalize_trial_onboarding_new_guardian()`(신규 보호자 경로 — `profiles.id`가
-  `auth.users` FK라 보호자·학생 둘 다 실제 Auth 계정이 필요함을 DB smoke test로
-  실제 재현·확인, 앱 레이어가 `admin.auth.admin.createUser()`로 먼저 만든 뒤 id를
-  넘기는 구조로 수정), `link_existing_guardian_to_trial_onboarding()`(기존 보호자
-  경로 — 로그인 상태에서 직접 호출하는 것 자체가 본인 확인, 본인 가족의 기존 자녀만
-  연결 가능·이메일 일치 자동 병합 없음, 새 자녀는 기존 R2 자녀초대 셀프서비스
-  재사용), `trial_smart_notes_consents`(학생당 정확히 1건 유니크 인덱스로 "회차마다
-  재확인 없음" 강제, `record_trial_smart_notes_consent()`는 멱등),
-  `grant_trial_entitlement_for_consultation()`(M2)에 동의 게이트 + 학생 기준 중복
-  지급 방어 추가(시그니처 불변, `CREATE OR REPLACE`).
-- **앱 레이어**: `app/admin/trial-onboarding-actions.ts`(확정 기록·링크 발급),
-  `app/consult/trial-onboarding-actions.ts`(링크 미리보기·기존 보호자 연결·동의
-  기록), `app/api/trial-onboarding/redeem/route.ts`(신규 보호자 경로 — R2
-  `invite/accept` 라우트와 동일 패턴: 토큰 검증→Auth 계정 생성→finalize→
-  `/set-password` 리다이렉트).
-- **검증**: DB 레벨 smoke test로 신규 보호자 전체 경로(확정→링크 발급→redeem→
-  finalize→동의→지급, 재시도 멱등 포함)를 psql로 실제 실행해 확인 — 이 과정에서
-  `profiles.id` FK 위반 실버그를 발견·수정(위 참고). 동의 전 지급 거부, 타 가족의
-  동의 시도 거부도 확인. 전체 Vitest 145개 파일/870건, `tsc --noEmit`, `next build`
-  클린. 핵심 M1/M3/R3/R5 Playwright 회귀 6건 전부 통과 — 새 마이그레이션이 기존
-  상담/배정 흐름을 깨지 않음을 확인.
-- **미완료(다음 라운드)**: 3번(체험 전 과목 수강·선생님 배정 실제 연결 확인 —
-  R5 기존 화면 재사용 자체는 되지만 온보딩 흐름과의 실제 배선은 아직), 6번(체험
-  예약·Calendar·Meet을 60분/체험수업권 조건으로 트리거하는 배선), 7번(Smart
-  Notes 체험 리뷰 작성·확정 테이블/화면), 8·9번(정규 진행 희망 + 관리자 원클릭
-  계약 발송 오케스트레이션), 10번(서명 웹훅→구매→과목 활성화 연결, `teacher_
-  assignment` 불변 확인), 11번(역할별 화면 전체), 13번(골든 패스 E2E 1개 +
-  부정/복구 테스트 목록). **코드·DB·로컬 검증이 끝난 부분도 Preview·실제
-  Google/DocuSign/Stripe 검증 전에는 "로컬 구현 완료·외부 통합 승인 대기"로만
-  표시한다** — 이번 라운드는 실외부 호출을 전혀 하지 않았다.
+- **1/N(계정 연결 + 동의, 커밋 `343e1aa`)**: `trial_onboarding_links`(만료형
+  72h·단일사용·해시), `confirm_trial_intent()`(관리자 추천과 보호자 확정 구분),
+  신규 보호자 경로(`finalize_trial_onboarding_new_guardian()` + R2 `invite/accept`
+  패턴 재사용 `/api/trial-onboarding/redeem`), 기존 보호자 경로(`link_existing_
+  guardian_to_trial_onboarding()`, 로그인 자체가 본인확인, 자동 병합 없음),
+  `trial_smart_notes_consents`(학생당 1건, 멱등), `grant_trial_entitlement_for_
+  consultation()`(M2)에 동의 게이트+학생 기준 중복 지급 방어. `profiles.id`가
+  `auth.users` FK라 학생도 실제 Auth 계정이 필요함을 DB smoke test로 실제
+  재현해 발견·수정.
+- **2/N(배정·리뷰·전환·계약 발송, 커밋 `eef362e`)**: 3번(과목 수강+선생님 배정,
+  `get_or_create_draft_contract_for_child()` + 기존 R5 `planSubjectEnrollment`/
+  `assignTeacherToSubjectEnrollment` 재사용), 7번(`trial_lesson_reviews` draft/
+  final 2단계, 확정 전 고객 비공개, `get_trial_lesson_review_for_family()`는
+  `final_text`만 반환), 8번(`trial_regular_progress_selections`, 확정 리뷰 없으면
+  차단·멱등), 9번(`sendRegularContractOneClickAction` — proposals 불필요,
+  대조→생성→선서명→발송을 한 액션으로, 중복 클릭 안전). **실제 안전 문제
+  발견·수정**: `lib/docusign.ts`의 `createEnvelope()`에 지금까지 실제 호출을
+  막는 게이트가 전혀 없었다(Calendar의 `CALENDAR_SYNC_ALLOW_REAL_CALLS`와 달리,
+  `.env.local`에 실제 sandbox 자격증명이 있어 로컬/E2E 실행 중 실수로 진짜
+  발송이 나갈 위험) — `DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS` 게이트 신설(기본
+  false). 6번(체험 예약)과 10번(서명→구매→활성화, `teacher_assignment` 불변)은
+  기존 R6/M2/R4/R5/R3 인프라가 이미 generic하게 지원함을 코드로 확인 — 새 코드
+  불필요(`confirm_lesson_booking()`이 이미 `p_lesson_type_id`로 체험/정규 상호
+  오사용을 막고, DocuSign 웹훅·R4 구매·R5 활성화 전부 계약 상태 기준으로 이미
+  일반적으로 동작).
+- **3/N(골든 패스 E2E, 커밋 `7ea992d`)**: `e2e/m4-trial-to-regular-golden-path.spec.ts`
+  — 11단계 실브라우저 테스트(상담 seed → 체험 확정 → 온보딩 링크 → 신규 보호자
+  계정 생성 → 과목·선생님 배정 → 동의+체험수업권 지급(+정규 예약 거부 부정
+  테스트) → 체험 예약·완료 → 선생님 리뷰 확정 → 보호자 정규 진행 희망 → 관리자
+  원클릭 계약 발송(mock 실패 경로) → DocuSign 웹훅 시뮬레이션으로 계약 active →
+  정규 구매 시뮬레이션+과목 활성화 → `teacher_assignment` 불변 확인+같은
+  배정으로 120분 정규 예약)까지 전부 통과. 이 E2E를 처음부터 통과시키는 과정에서
+  실제 버그 여러 건 발견·수정: `confirm_trial_intent`/`create_trial_onboarding_
+  link`/`get_or_create_draft_contract_for_child`/`admin_edit_trial_lesson_review`
+  가 SQL 안에서 `is_admin()`을 다시 확인해, service_role(admin 서버 액션의
+  정상 호출 경로) 세션에는 `auth.uid()`가 없어 항상 "관리자만..." 예외로
+  실패하던 것(앱 레이어 requireAdminOrCapability와 중복 검사라 SQL 쪽을 제거,
+  감사 컬럼도 실제 관리자 id를 파라미터로 받도록 수정), 선생님이 완료된 체험
+  수업을 리뷰 대상으로 못 찾던 PostgREST 임베디드 조인 필터 오류(실제 테이블명
+  대신 별칭으로 필터해야 했음).
+- **검증**: 전체 Vitest 145개 파일/872건, `tsc --noEmit`, `next build` 클린.
+  핵심 M1/M3/R3/R5/M4 Playwright 5스펙 17건(golden path 11건 포함) 전부 통과.
+  통합 HEAD(`7ea992d`) 기준 클린 `git worktree`에서 build+전체 Vitest 재현 완료.
+  DB 레벨 smoke test(신규 보호자 전체 경로, 동의 전 지급 거부, 타 가족 동의
+  차단, 비배정 호출자 거부 등)도 별도로 psql 직접 실행 확인.
+- **미완료**: 요구사항 13번이 나열한 부정/복구 테스트 목록 중 골든 패스
+  E2E와 이전 라운드 DB smoke test로 다룬 것(정규·체험 수업권 상호 오사용,
+  이메일 자동 병합 없음/타 가족 차단, 동의 전 지급·중복 지급 차단, `teacher_
+  assignment` 불변) 외의 나머지(90일 이후 체험 예약 차단, 24시간 기준 취소
+  처리, 미배정·다른 선생님 예약 차단, 계약 발송 중복 클릭의 재처리-후-성공까지
+  실증, 보호자 서명 전 구매 차단의 직접 테스트)는 이번 라운드에서 전용 테스트로
+  다시 확인하지 않았다 — 대부분 기존 R6/R3/R4 스펙이 이미 다루는 일반 메커니즘
+  재사용이라 별도 회귀 위험은 낮다고 판단했지만, M4 전용 테스트로 명시적으로
+  박아두지는 못했다. 역할별 화면(11번)은 골든 패스가 통과할 정도의 최소 UI만
+  구현했고 폴리싱은 하지 않았다. **코드·DB·로컬 E2E가 전부 완료됐어도 Preview·
+  실제 Google/DocuSign/Stripe 검증 전에는 "로컬 구현 완료·외부 통합 승인
+  대기"로만 표시한다** — 이번 라운드는 실외부 호출을 전혀 하지 않았다.
 - **결정 필요**: 없음.
 - **외부 변경**: 0건(Google/Stripe/DocuSign 실호출, 실이메일, Production·원격
   운영 DB, `git push` 전부 없음).
