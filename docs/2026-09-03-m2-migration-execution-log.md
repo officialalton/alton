@@ -287,22 +287,28 @@ Stripe/DocuSign/Google API 실호출, 실제 이메일 발송, Production/원격
   `requestRefund` 7일 이내 전액환불 저장 테스트, `requestRefund` 미래 hold 차단
   테스트, `EntitlementLedgerTab` 7일 이내 라벨 표시 테스트). 회귀 없음.
 - **`next build`**: 성공.
-- **미완료(세션 중단으로 인함)**: 2라운드 관련 Playwright 재실행
-  (`r4-admin-entitlement-ledger`/`r4-purchase-flow` 등)과 별도 clean
-  `git worktree` 재현은 실행하지 못했다 — 이 세션이 로컬 Supabase DB를 다른
+- **(중간 상태, 이후 재개해 해결됨)** 2라운드 관련 Playwright 재실행과 별도 clean
+  `git worktree` 재현을 처음 시도했을 때, 이 세션이 로컬 Supabase DB를 다른
   세션(제품 오너의 실제 Google Sandbox 재검증)과 공유하는 충돌이 발견돼 DB를
-  건드리는 모든 명령(추가 `db reset --local`/psql)을 즉시 중단하라는 지시를
-  받았다. 이미 실행한 psql 검증(위 A~E)은 그 지시 이전에 완료된 것이라 유효하게
-  남는다. **재개 승인 후 다음을 이어서 실행해야 한다**: (1) 관련 Playwright 스펙
-  재실행, (2) 커밋 후 clean worktree에서 build+Vitest 재현, (3) 최종 커밋.
+  건드리는 모든 명령을 즉시 중단했다 — 이미 실행한 psql 검증(위 A~E)은 그 시점
+  이전에 완료된 것이라 유효하게 남았다. **충돌 정리 확인 후 같은 세션에서 재개해
+  아래를 마저 실행·완료했다**:
+  - `supabase db reset --local`(재개 후 재실행) → 관련 Playwright 6개 스펙
+    (`m1-consultation-flow`/`r4-admin-entitlement-ledger`/`r4-purchase-flow`/
+    `r4-webhook-dispute`/`r4-webhook-purchase-completion`/`r6-lesson-booking-flow`,
+    `--workers=1`) **10건 전부 통과**(26.1초) — 2라운드 변경(`refund_entitlement`/
+    `calculate_purchase_refund_minor`/`hold_entitlement` 관련 필터)이 기존 정규
+    수업권 예약·구매·환불·웹훅 플로우를 깨지 않았음을 실브라우저로 재확인.
+  - 커밋 `6624c06`(2라운드) 기준 별도 clean `git worktree`
+    (`/tmp/alton-m2-worktree-r2`, 커밋된 파일만)에서 `npm ci` → `next build`
+    성공 → `npx vitest run` **849/849 통과** 재현 확인. 검증 후 worktree 제거.
 
 ### 5.3 미완료 / 결정 필요
 
 - **결정 필요**: 없음 — 90일 유효기간, 환불 공식(7일 전액/그 외 소진 반영),
   미래 hold 차단 정책 전부 이번 지시로 확정·구현 완료.
-- **미완료(세션 중단, 재개 대기)**: 2라운드 관련 Playwright 재실행, 별도 clean
-  worktree 재현. 코드 자체는 이미 실제 로컬 DB(psql)로 검증 완료 — DB 재현·E2E만
-  남음.
+- **미완료**: 없음(1·2라운드 모두 DB 실측·Vitest·tsc·build·관련 Playwright·clean
+  worktree 재현까지 전부 완료).
 - **미완료(범위 밖, 변경 없음)**: 실제 Stripe Refund API 호출은 여전히 미연동
   (기존 R4 blocker 그대로).
 
@@ -312,5 +318,5 @@ Stripe/DocuSign/Google API 실호출, 실제 이메일 발송, Production/원격
 0건. 모든 외부 플래그 기본값(false/미설정) 유지. `git push` 하지 않음. 로컬
 Supabase DB는 이 세션이 `supabase db reset --local`을 여러 번 실행했고, 그중
 한 번이 같은 로컬 DB를 쓰던 다른 세션(제품 오너의 Google Sandbox 재검증)의 테스트
-데이터를 지웠다 — 발견 즉시 이 세션은 추가 DB 조작을 전부 중단했다(아래 최종
-보고 참고).
+데이터를 지웠다 — 발견 즉시 이 세션은 추가 DB 조작을 전부 중단했고, 충돌 정리
+확인 후 재개해 §5.2의 재검증(Playwright 10건, clean worktree 재현)까지 마쳤다.

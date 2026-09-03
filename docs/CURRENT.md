@@ -427,10 +427,11 @@ push하지 않았다).
   미래 hold 차단→해제 후 환불→idempotent 재시도/체험 grant 환불 대상 자동 제외/
   만료된 체험 grant hold 거부) **전부 실제 로컬 DB로 통과**, `tsc --noEmit` 클린,
   전체 Vitest 849건 통과(2라운드 신규 3건 포함, 회귀 없음), `next build` 성공.
-  **미완료**: 2라운드 관련 Playwright 재실행과 별도 clean worktree 재현은 이
-  세션이 로컬 Supabase DB를 다른 세션과 공유하는 충돌이 발견돼 중단 지시를 받아
-  실행하지 못했다 — 재개 승인 후 이어서 실행 필요(DB 자체 변경 없이 코드는 이미
-  실제 DB로 검증됨).
+  세션 중 로컬 Supabase DB를 다른 세션(제품 오너의 Google Sandbox 재검증)과
+  공유하는 충돌이 발견돼 잠시 DB 조작을 중단했다가, 충돌 정리 확인 후 재개해
+  관련 Playwright 6개 스펙 10건(`--workers=1`) 전부 통과 + 커밋 `6624c06` 기준
+  별도 clean `git worktree`에서 build+Vitest(849/849) 재현까지 완료했다.
+  **미완료 없음.**
 - **결정 필요**: 없음 — 90일 유효기간·환불 공식 모두 2026-09-03 확정.
 - **범위 밖(M3/M4, 착수하지 않음)**: 체험 선생님 배정·예약, 잠재고객→정식 학생
   계정 연결. 연결 지점만 남겨둠(`grant_trial_entitlement_for_consultation()`이
