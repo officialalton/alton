@@ -169,6 +169,24 @@ describe("createEntitlementCheckoutSession", () => {
     expect(createSessionMock).not.toHaveBeenCalled();
   });
 
+  // M4 인수 기준 13번 — "보호자 서명 전 구매 차단"을 명시적으로 못박는다. 새
+  // 기능이 아니라 위 테스트가 이미 검증하는 것과 같은 메커니즘(계약이 status=
+  // 'active'가 아니면 조회 자체가 걸리지 않음)의 M4 전용 시나리오 — 관리자
+  // 원클릭 계약 발송 직후(회사 선서명·DocuSign 발송까지 끝났지만 보호자가
+  // 아직 서명하지 않아 status='sent'인 상태)에도 정규상품 구매가 열리지
+  // 않아야 함을 확인한다. 쿼리가 `.eq("status", "active")`로 조회하므로
+  // status='sent'인 계약은 이 조회에 애초에 매칭되지 않는다(mock에서는 위
+  // 테스트와 동일하게 maybeSingle이 null을 반환하는 것으로 재현).
+  it("M4: 관리자 원클릭 계약 발송 직후(status='sent', 보호자 서명 전)에는 정규상품 구매를 막는다", async () => {
+    contractMaybeSingleMock.mockResolvedValue({ data: null });
+    const { createEntitlementCheckoutSession } = await import("./purchase-actions");
+
+    await expect(
+      createEntitlementCheckoutSession({ childId: "child1", entitlementProductCode: "lesson_pack_20" })
+    ).rejects.toThrow("결제 가능한(active) 계약이 없어 구매할 수 없습니다.");
+    expect(createSessionMock).not.toHaveBeenCalled();
+  });
+
   it("M2: system_only 상품(체험수업권 등)은 구매를 막는다", async () => {
     productMaybeSingleMock.mockResolvedValue({
       data: { id: "prod-trial", code: "trial_lesson_grant", quantity: 1, system_only: true },
