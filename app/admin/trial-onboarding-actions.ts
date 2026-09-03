@@ -17,9 +17,12 @@ import { companySignOffContractVersion, sendContractForSignature } from "./consu
 const CONSULT_CAPABILITY = "manage_consultations";
 
 export async function confirmTrialIntentAction(consultationId: string): Promise<void> {
-  await requireAdminOrCapability(CONSULT_CAPABILITY);
+  const { actorUserId } = await requireAdminOrCapability(CONSULT_CAPABILITY);
   const admin = createAdminClient();
-  const { error } = await admin.rpc("confirm_trial_intent", { p_consultation_id: consultationId });
+  const { error } = await admin.rpc("confirm_trial_intent", {
+    p_consultation_id: consultationId,
+    p_admin_id: actorUserId,
+  });
   if (error) throw new Error(error.message);
 }
 
@@ -31,7 +34,7 @@ export async function createTrialOnboardingLinkAction(params: {
   studentEmail: string;
   studentGrade?: string;
 }): Promise<{ linkId: string; rawToken: string }> {
-  await requireAdminOrCapability(CONSULT_CAPABILITY);
+  const { actorUserId } = await requireAdminOrCapability(CONSULT_CAPABILITY);
   const admin = createAdminClient();
   const { data, error } = await admin.rpc("create_trial_onboarding_link", {
     p_consultation_id: params.consultationId,
@@ -39,6 +42,7 @@ export async function createTrialOnboardingLinkAction(params: {
     p_guardian_name: params.guardianName,
     p_student_name: params.studentName,
     p_student_email: params.studentEmail,
+    p_admin_id: actorUserId,
     p_student_grade: params.studentGrade ?? null,
   });
   if (error) throw new Error(error.message);

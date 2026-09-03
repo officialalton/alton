@@ -25,7 +25,7 @@ export async function listMyTrialSessionsNeedingReview(): Promise<TrialSessionNe
     .select("id, subject_enrollment_id, reservation_id, final_status, lesson_type:lesson_types!inner(code)")
     .eq("teacher_id", user.id)
     .eq("final_status", "completed")
-    .eq("lesson_types.code", "trial");
+    .eq("lesson_type.code", "trial");
   if (error) throw new Error(error.message);
 
   const sessionIds = (sessions ?? []).map((s) => s.id);

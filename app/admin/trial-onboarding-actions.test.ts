@@ -16,7 +16,10 @@ describe("confirmTrialIntentAction", () => {
   it("confirm_trial_intent RPC를 호출한다", async () => {
     adminRpcMock.mockResolvedValue({ error: null });
     await confirmTrialIntentAction("c1");
-    expect(adminRpcMock).toHaveBeenCalledWith("confirm_trial_intent", { p_consultation_id: "c1" });
+    expect(adminRpcMock).toHaveBeenCalledWith("confirm_trial_intent", {
+      p_consultation_id: "c1",
+      p_admin_id: "admin1",
+    });
   });
 
   it("RPC 에러를 그대로 던진다(예: 관리자 추천 없이 확정 시도)", async () => {
@@ -45,6 +48,7 @@ describe("createTrialOnboardingLinkAction", () => {
       p_guardian_name: "학부모",
       p_student_name: "학생",
       p_student_email: "s@example.com",
+      p_admin_id: "admin1",
       p_student_grade: "9학년",
     });
   });
