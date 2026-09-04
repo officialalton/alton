@@ -259,7 +259,7 @@ export async function assignTeacherToSubjectEnrollment(params: {
   teacherId: string;
   effectiveFrom: string;
 }): Promise<{ id: string }> {
-  const { actorUserId } = await requireAdminOrCapability(MATCHING_CAPABILITY);
+  const { supabase, actorUserId } = await requireAdminOrCapability(MATCHING_CAPABILITY);
   const admin = createAdminClient();
 
   // R2 선생님 active 전환(app/admin/users-actions.ts)과 같은 공유 함수
@@ -279,7 +279,48 @@ export async function assignTeacherToSubjectEnrollment(params: {
     .select("id")
     .single();
   if (error) throw new Error(error.message);
+
+  await activateStudentIfPending(admin, supabase, params.subjectEnrollmentId);
+
   return { id: data.id };
+}
+
+/**
+ * 과목·선생님 배정이 처음 끝나면 "매칭 대기" 상태로 남아있던 학생 계정을
+ * 자동으로 "활성"으로 전환한다 — 관리자가 사용자 화면에서 매번 별도로
+ * 수동 전환해야 했던 단계를 없앤다. status 변경은 항상
+ * transition_account_status()(R2 §5.7의 유일한 정상 경로)를 그대로 거친다.
+ * 이미 active/suspended인 학생은 건드리지 않는다(pending일 때만 전환).
+ * 이 RPC는 내부에서 is_admin()(auth.uid() 기반)을 확인하므로, service-role
+ * admin 클라이언트가 아니라 로그인된 관리자 세션 클라이언트로 호출해야 한다.
+ */
+async function activateStudentIfPending(
+  admin: ReturnType<typeof createAdminClient>,
+  supabase: Awaited<ReturnType<typeof requireAdminOrCapability>>["supabase"],
+  subjectEnrollmentId: string
+): Promise<void> {
+  const { data: enrollment } = await admin
+    .from("subject_enrollments")
+    .select("child_id")
+    .eq("id", subjectEnrollmentId)
+    .single();
+  if (!enrollment?.child_id) return;
+
+  const { data: student } = await admin
+    .from("students")
+    .select("status")
+    .eq("id", enrollment.child_id)
+    .single();
+  if (student?.status !== "pending") return;
+
+  const { error } = await supabase.rpc("transition_account_status", {
+    p_profile_id: enrollment.child_id,
+    p_new_status: "active",
+    p_reason: "과목·선생님 배정 완료(자동 전환)",
+  });
+  if (error) {
+    console.error("과목·선생님 배정 후 학생 상태 자동 전환에 실패했습니다:", enrollment.child_id, error);
+  }
 }
 
 export type FutureBookingImpactItem = {
