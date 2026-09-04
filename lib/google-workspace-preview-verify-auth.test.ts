@@ -8,8 +8,8 @@ const EXPECTED_BRANCH_ENV_VAR = "GOOGLE_WORKSPACE_M4_PREVIEW_EXPECTED_BRANCH";
 const MATCHING_ENV = {
   [ALLOW_ENV_VAR]: "true",
   VERCEL_ENV: "preview",
-  [EXPECTED_ORG_ID_ENV_VAR]: "team_expected",
-  VERCEL_ORG_ID: "team_expected",
+  [EXPECTED_ORG_ID_ENV_VAR]: "officialalton",
+  VERCEL_GIT_REPO_OWNER: "officialalton",
   [EXPECTED_PROJECT_ID_ENV_VAR]: "prj_expected",
   VERCEL_PROJECT_ID: "prj_expected",
   [EXPECTED_BRANCH_ENV_VAR]: "preview/m4-integration-verification",
@@ -22,7 +22,7 @@ const ENV_KEYS = [
   EXPECTED_PROJECT_ID_ENV_VAR,
   EXPECTED_BRANCH_ENV_VAR,
   "VERCEL_ENV",
-  "VERCEL_ORG_ID",
+  "VERCEL_GIT_REPO_OWNER",
   "VERCEL_PROJECT_ID",
   "VERCEL_GIT_COMMIT_REF",
 ];
@@ -98,10 +98,10 @@ describe("google-workspace-preview-verify-auth", () => {
   });
 
   it("Vercel org(team) id가 기대값과 다르면 차단된다", async () => {
-    Object.assign(process.env, MATCHING_ENV, { VERCEL_ORG_ID: "team_other" });
+    Object.assign(process.env, MATCHING_ENV, { VERCEL_GIT_REPO_OWNER: "someone_else" });
     const mod = await import("./google-workspace-preview-verify-auth");
     await expect(mod.getM4PreviewMeetReadonlyAccessToken("teacher1@alton.education")).rejects.toThrow(
-      /team\(org\) id가 기대값과 일치하지 않습니다/,
+      /Git repo owner가 기대값과 일치하지 않습니다/,
     );
     expect(fromJSONMock).not.toHaveBeenCalled();
   });
@@ -131,7 +131,7 @@ describe("google-workspace-preview-verify-auth", () => {
     expect(token).toBe("fake-final-token");
     expect(fromJSONMock).toHaveBeenCalledTimes(1);
     const config = fromJSONMock.mock.calls[0][0];
-    expect(config.audience).toContain("vercel-m4-calendar-preview-verify");
+    expect(config.audience).toContain("vercel-m4-calendar-preview");
     expect(config.service_account_impersonation_url).toContain(
       "m4-calendar-preview-verify@alton-integration-sandbox.iam.gserviceaccount.com",
     );

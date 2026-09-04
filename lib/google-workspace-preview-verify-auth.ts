@@ -21,7 +21,7 @@ import { ExternalAccountClient, type BaseExternalAccountClient } from "google-au
 // r3-drive-preview-verify@alton-integration-sandbox.iam.gserviceaccount.com)과는
 // 완전히 분리된, Calendar/Meet/Workspace Events/Smart Notes 검증 전용 리소스.
 const M4_PREVIEW_WIF_PROVIDER_AUDIENCE =
-  "//iam.googleapis.com/projects/590621873979/locations/global/workloadIdentityPools/vercel/providers/vercel-m4-calendar-preview-verify";
+  "//iam.googleapis.com/projects/590621873979/locations/global/workloadIdentityPools/vercel/providers/vercel-m4-calendar-preview";
 const M4_PREVIEW_SERVICE_ACCOUNT_EMAIL =
   "m4-calendar-preview-verify@alton-integration-sandbox.iam.gserviceaccount.com";
 
@@ -73,12 +73,18 @@ function assertAllowed(): void {
     );
   }
 
-  const actualOrgId = process.env.VERCEL_ORG_ID;
+  // (2026-09-03 정정, 실측으로 발견) VERCEL_ORG_ID는 "Automatically expose System
+  // Environment Variables"를 켜도 런타임에 주입되지 않는다(VERCEL_PROJECT_ID는 됨) —
+  // Vercel 공식 런타임 시스템 환경변수 목록에 VERCEL_ORG_ID 자체가 없기 때문으로 보인다.
+  // 대신 동일하게 이 정확한 GitHub repo(=이 Vercel 프로젝트에 연결된 유일한 repo)를
+  // 식별하는 VERCEL_GIT_REPO_OWNER를 쓴다 — team id보다는 느슨하지만 실측 가능하고,
+  // project id·branch 체크와 함께라면 여전히 "이 정확한 프로젝트+브랜치" 조합만 통과한다.
+  const actualOrgId = process.env.VERCEL_GIT_REPO_OWNER;
   const actualProjectId = process.env.VERCEL_PROJECT_ID;
   const actualBranch = process.env.VERCEL_GIT_COMMIT_REF;
 
   if (actualOrgId !== expectedOrgId) {
-    throw new Error("M4 Preview 검증 경로: Vercel team(org) id가 기대값과 일치하지 않습니다.");
+    throw new Error("M4 Preview 검증 경로: Vercel Git repo owner가 기대값과 일치하지 않습니다.");
   }
   if (actualProjectId !== expectedProjectId) {
     throw new Error("M4 Preview 검증 경로: Vercel project id가 기대값과 일치하지 않습니다.");
