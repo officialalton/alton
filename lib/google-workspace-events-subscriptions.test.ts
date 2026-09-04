@@ -59,7 +59,16 @@ describe("createWorkspaceEventsSubscription — pubsubTopic 검증(fail-closed)"
     allowRealCalls();
     const fetchMock = vi.fn().mockResolvedValue({
       ok: true,
-      json: async () => ({ name: "subscriptions/sub-1", targetResource: "//cloudidentity.googleapis.com/users/108123456789012345678", state: "ACTIVE", expireTime: "2026-10-08T00:00:00Z" }),
+      json: async () => ({
+        name: "operations/op-1",
+        done: true,
+        response: {
+          name: "subscriptions/sub-1",
+          targetResource: "//cloudidentity.googleapis.com/users/108123456789012345678",
+          state: "ACTIVE",
+          expireTime: "2026-10-08T00:00:00Z",
+        },
+      }),
     });
     vi.stubGlobal("fetch", fetchMock);
     const { createWorkspaceEventsSubscription } = await import("./google-workspace-events-subscriptions");
@@ -92,5 +101,40 @@ describe("createWorkspaceEventsSubscription — pubsubTopic 검증(fail-closed)"
       })
     ).rejects.toThrow("not implemented");
     expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it("생성 오퍼레이션이 즉시 완료되지 않으면 폴링해서 실제 구독 리소스 이름을 얻는다", async () => {
+    allowRealCalls();
+    vi.useFakeTimers();
+    const fetchMock = vi
+      .fn()
+      // POST /subscriptions — 아직 진행 중
+      .mockResolvedValueOnce({ ok: true, json: async () => ({ name: "operations/op-1", done: false }) })
+      // GET /operations/op-1 — 아직 진행 중
+      .mockResolvedValueOnce({ ok: true, json: async () => ({ name: "operations/op-1", done: false }) })
+      // GET /operations/op-1 — 완료, 실제 구독 리소스 반환
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({
+          name: "operations/op-1",
+          done: true,
+          response: { name: "subscriptions/sub-2", targetResource: "x", state: "ACTIVE", expireTime: "2026-10-08T00:00:00Z" },
+        }),
+      });
+    vi.stubGlobal("fetch", fetchMock);
+    const { createWorkspaceEventsSubscription } = await import("./google-workspace-events-subscriptions");
+
+    const resultPromise = createWorkspaceEventsSubscription({
+      organizerEmail: "official@alton.education",
+      organizerWorkspaceUserId: "108123456789012345678",
+      pubsubTopic: VALID_TOPIC,
+    });
+    await vi.runAllTimersAsync();
+    const result = await resultPromise;
+
+    expect(result.name).toBe("subscriptions/sub-2");
+    expect(fetchMock).toHaveBeenCalledTimes(3);
+    expect(fetchMock.mock.calls[1][0]).toContain("operations/op-1");
+    vi.useRealTimers();
   });
 });

@@ -121,7 +121,47 @@ export async function createWorkspaceEventsSubscription(params: {
       ttl: params.ttlSeconds ? `${params.ttlSeconds}s` : undefined,
     }),
   });
-  return (await res.json()) as WorkspaceEventsSubscriptionResource;
+  const operation = (await res.json()) as WorkspaceEventsOperation;
+  return awaitOperation(token, operation);
+}
+
+type WorkspaceEventsOperation = {
+  name: string;
+  done?: boolean;
+  error?: { code: number; message: string };
+  response?: WorkspaceEventsSubscriptionResource;
+};
+
+/**
+ * (2026-09-03 정정, M4 Sandbox 실측으로 발견) `subscriptions.create`는 즉시 최종
+ * Subscription을 반환하지 않고 비동기 Operation을 반환한다 — `name`이
+ * `operations/{id}` 형식이고, 실제 구독 리소스 이름(`subscriptions/{id}`)은
+ * `response.name`에만 있다. 이전 구현은 Operation의 `name`을 그대로 구독
+ * 리소스 이름으로 저장해, 이후 조회·갱신·삭제가 전부 존재하지 않는(또는 엉뚱한)
+ * 리소스를 대상으로 했다 — 실제로는 항상 조용히 실패하거나 아무 효과가 없었다.
+ * 최대 10회(약 10초)까지 짧게 폴링한다 — 문서상 이 생성 오퍼레이션은 보통 즉시
+ * 또는 수 초 내 완료된다.
+ */
+async function awaitOperation(
+  token: string,
+  operation: WorkspaceEventsOperation,
+): Promise<WorkspaceEventsSubscriptionResource> {
+  let current = operation;
+  for (let attempt = 0; attempt < 10 && !current.done; attempt++) {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const res = await workspaceEventsFetch(`${WORKSPACE_EVENTS_API}/${current.name}`, token, { method: "GET" });
+    current = (await res.json()) as WorkspaceEventsOperation;
+  }
+  if (!current.done) {
+    throw new Error("Workspace Events 구독 생성 오퍼레이션이 시간 내에 완료되지 않았습니다.");
+  }
+  if (current.error) {
+    throw new Error(`Workspace Events 구독 생성 오퍼레이션이 실패했습니다: ${current.error.message.slice(0, 300)}`);
+  }
+  if (!current.response) {
+    throw new Error("Workspace Events 구독 생성 오퍼레이션에 결과가 없습니다.");
+  }
+  return current.response;
 }
 
 export async function getWorkspaceEventsSubscription(params: {
