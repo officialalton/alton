@@ -1,4 +1,23 @@
 import { getMeetSettingsApiAccessToken, getMeetReadonlyApiAccessToken } from "@/lib/google-workspace-auth";
+import {
+  isM4PreviewVerificationFlagEnabled,
+  getM4PreviewMeetSettingsAccessToken,
+  getM4PreviewMeetReadonlyAccessToken,
+} from "@/lib/google-workspace-preview-verify-auth";
+
+// M4 외부 검증 임시 조치 — google-calendar.ts와 동일한 패턴. 플래그가 없으면 기존 경로
+// 그대로이므로 Production/로컬 동작은 전혀 바뀌지 않는다.
+async function resolveMeetSettingsAccessToken(subjectEmail: string): Promise<string> {
+  return isM4PreviewVerificationFlagEnabled()
+    ? getM4PreviewMeetSettingsAccessToken(subjectEmail)
+    : getMeetSettingsApiAccessToken(subjectEmail);
+}
+
+async function resolveMeetReadonlyAccessToken(subjectEmail: string): Promise<string> {
+  return isM4PreviewVerificationFlagEnabled()
+    ? getM4PreviewMeetReadonlyAccessToken(subjectEmail)
+    : getMeetReadonlyApiAccessToken(subjectEmail);
+}
 
 // R6 10/N·11/N — Google Meet REST API(v2) 클라이언트. Calendar API(이벤트+Meet 링크 생성)와는
 // 별개 API 표면 — Meet Space의 Smart Notes 설정(자동 생성 ON/OFF)은 Calendar API가 아니라
@@ -64,8 +83,8 @@ export async function enableMeetSpaceSmartNotes(params: {
   meetingCode: string;
 }): Promise<void> {
   assertRealCallsAllowed();
-  const settingsToken = await getMeetSettingsApiAccessToken(params.teacherWorkspaceEmail);
-  const readonlyToken = await getMeetReadonlyApiAccessToken(params.teacherWorkspaceEmail);
+  const settingsToken = await resolveMeetSettingsAccessToken(params.teacherWorkspaceEmail);
+  const readonlyToken = await resolveMeetReadonlyAccessToken(params.teacherWorkspaceEmail);
 
   const initialRes = await meetFetch(`${MEET_API}/spaces/${params.meetingCode}`, readonlyToken, { method: "GET" });
   const initialSpace = (await initialRes.json()) as SpaceResource;
@@ -102,7 +121,7 @@ export async function ensureMeetSpaceSmartNotesOn(params: {
   meetingCode: string;
 }): Promise<boolean> {
   assertRealCallsAllowed();
-  const readonlyToken = await getMeetReadonlyApiAccessToken(params.teacherWorkspaceEmail);
+  const readonlyToken = await resolveMeetReadonlyAccessToken(params.teacherWorkspaceEmail);
   const res = await meetFetch(`${MEET_API}/spaces/${params.meetingCode}`, readonlyToken, { method: "GET" });
   const space = (await res.json()) as SpaceResource;
   const currentState = space.config?.artifactConfig?.smartNotesConfig?.autoSmartNotesGeneration;
@@ -124,7 +143,7 @@ export async function fetchSmartNoteDriveFileId(params: {
   smartNoteResourceName: string;
 }): Promise<string | null> {
   assertRealCallsAllowed();
-  const token = await getMeetReadonlyApiAccessToken(params.teacherWorkspaceEmail);
+  const token = await resolveMeetReadonlyAccessToken(params.teacherWorkspaceEmail);
   const res = await meetFetch(`${MEET_API}/${params.smartNoteResourceName}`, token, { method: "GET" });
   const data = (await res.json()) as { state?: string; docsDestination?: { document?: string } };
   if (data.state !== "FILE_GENERATED") return null;
@@ -142,7 +161,7 @@ export async function resolveMeetingCodeFromConferenceRecord(params: {
   conferenceRecordName: string;
 }): Promise<string | null> {
   assertRealCallsAllowed();
-  const token = await getMeetReadonlyApiAccessToken(params.teacherWorkspaceEmail);
+  const token = await resolveMeetReadonlyAccessToken(params.teacherWorkspaceEmail);
   const recordRes = await meetFetch(`${MEET_API}/${params.conferenceRecordName}`, token, { method: "GET" });
   const record = (await recordRes.json()) as { space?: string };
   if (!record.space) return null;
@@ -170,7 +189,7 @@ export async function listConferenceParticipantEvents(params: {
   conferenceRecordName: string;
 }): Promise<MeetParticipantEvent[]> {
   assertRealCallsAllowed();
-  const token = await getMeetReadonlyApiAccessToken(params.teacherWorkspaceEmail);
+  const token = await resolveMeetReadonlyAccessToken(params.teacherWorkspaceEmail);
   const res = await meetFetch(`${MEET_API}/${params.conferenceRecordName}/participants`, token, { method: "GET" });
   const data = (await res.json()) as {
     participants?: Array<{
@@ -207,7 +226,7 @@ export async function findRecentSmartNoteForMeetingCode(params: {
   meetingCode: string;
 }): Promise<{ smartNoteResourceName: string; driveFileId: string | null } | null> {
   assertRealCallsAllowed();
-  const readonlyToken = await getMeetReadonlyApiAccessToken(params.teacherWorkspaceEmail);
+  const readonlyToken = await resolveMeetReadonlyAccessToken(params.teacherWorkspaceEmail);
 
   const spaceRes = await meetFetch(`${MEET_API}/spaces/${params.meetingCode}`, readonlyToken, { method: "GET" });
   const space = (await spaceRes.json()) as SpaceResource;

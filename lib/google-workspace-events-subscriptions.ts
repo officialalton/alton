@@ -1,4 +1,16 @@
 import { getMeetReadonlyApiAccessToken } from "@/lib/google-workspace-auth";
+import {
+  isM4PreviewVerificationFlagEnabled,
+  getM4PreviewMeetReadonlyAccessToken,
+} from "@/lib/google-workspace-preview-verify-auth";
+
+// M4 외부 검증 임시 조치 — google-calendar.ts/google-meet.ts와 동일한 패턴. 플래그가
+// 없으면 기존 경로 그대로이므로 Production/로컬 동작은 전혀 바뀌지 않는다.
+async function resolveMeetReadonlyAccessToken(organizerEmail: string): Promise<string> {
+  return isM4PreviewVerificationFlagEnabled()
+    ? getM4PreviewMeetReadonlyAccessToken(organizerEmail)
+    : getMeetReadonlyApiAccessToken(organizerEmail);
+}
 
 // M1/R6 공통 blocker(2026-09-03, 같은 날 네 번째 후속에서 모델 정정) — Workspace Events
 // API `subscriptions` 리소스 클라이언트. 기존 웹훅 수신 코드(app/api/webhooks/workspace-
@@ -98,7 +110,7 @@ export async function createWorkspaceEventsSubscription(params: {
 }): Promise<WorkspaceEventsSubscriptionResource> {
   assertValidPubsubTopic(params.pubsubTopic);
   assertRealCallsAllowed();
-  const token = await getMeetReadonlyApiAccessToken(params.organizerEmail);
+  const token = await resolveMeetReadonlyAccessToken(params.organizerEmail);
   const res = await workspaceEventsFetch(`${WORKSPACE_EVENTS_API}/subscriptions`, token, {
     method: "POST",
     body: JSON.stringify({
@@ -117,7 +129,7 @@ export async function getWorkspaceEventsSubscription(params: {
   subscriptionName: string;
 }): Promise<WorkspaceEventsSubscriptionResource | null> {
   assertRealCallsAllowed();
-  const token = await getMeetReadonlyApiAccessToken(params.organizerEmail);
+  const token = await resolveMeetReadonlyAccessToken(params.organizerEmail);
   const res = await fetch(`${WORKSPACE_EVENTS_API}/${params.subscriptionName}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -137,7 +149,7 @@ export async function renewWorkspaceEventsSubscription(params: {
   ttlSeconds: number;
 }): Promise<WorkspaceEventsSubscriptionResource> {
   assertRealCallsAllowed();
-  const token = await getMeetReadonlyApiAccessToken(params.organizerEmail);
+  const token = await resolveMeetReadonlyAccessToken(params.organizerEmail);
   const res = await workspaceEventsFetch(
     `${WORKSPACE_EVENTS_API}/${params.subscriptionName}?updateMask=ttl`,
     token,
@@ -152,7 +164,7 @@ export async function deleteWorkspaceEventsSubscription(params: {
   subscriptionName: string;
 }): Promise<void> {
   assertRealCallsAllowed();
-  const token = await getMeetReadonlyApiAccessToken(params.organizerEmail);
+  const token = await resolveMeetReadonlyAccessToken(params.organizerEmail);
   const res = await fetch(`${WORKSPACE_EVENTS_API}/${params.subscriptionName}`, {
     method: "DELETE",
     headers: { Authorization: `Bearer ${token}` },

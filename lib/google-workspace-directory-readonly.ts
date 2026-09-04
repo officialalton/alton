@@ -1,4 +1,8 @@
 import { getDirectoryApiAccessToken } from "./google-workspace-auth";
+import {
+  isM4PreviewVerificationFlagEnabled,
+  getM4PreviewDirectoryReadonlyAccessToken,
+} from "./google-workspace-preview-verify-auth";
 
 // R2 Task 7 — Directory API 읽기 전용 조회. 이 파일에는 GET 요청만
 // 존재한다 — 사용자 생성·수정·정지·비밀번호 변경 같은 쓰기 작업은
@@ -7,6 +11,17 @@ import { getDirectoryApiAccessToken } from "./google-workspace-auth";
 // 같은 함수에서 boolean 하나로 read/write를 가르지 않는다).
 
 const DIRECTORY_API_BASE = "https://admin.googleapis.com/admin/directory/v1";
+
+// M4 외부 검증 임시 조치 — 이 파일의 Preview 전면 차단(아래 assertRealReadsAllowed())은
+// 그대로 둔다. 플래그가 켜져 있을 때만 이 함수를 우회해 최소권한 Preview 검증 경로로
+// 보낸다 — subjectEmail은 Directory API 대상 조회 이메일(organizerEmail)을 그대로 쓴다.
+function resolveDirectoryAccessToken(subjectEmail: string): Promise<string> {
+  if (isM4PreviewVerificationFlagEnabled()) {
+    return getM4PreviewDirectoryReadonlyAccessToken(subjectEmail);
+  }
+  assertRealReadsAllowed();
+  return getDirectoryApiAccessToken();
+}
 
 function assertRealReadsAllowed(): void {
   if (process.env.VERCEL_ENV === "preview") {
@@ -43,8 +58,7 @@ function parseUserSummary(data: {
 }
 
 export async function getWorkspaceUserByEmail(email: string): Promise<WorkspaceUserSummary | null> {
-  assertRealReadsAllowed();
-  const accessToken = await getDirectoryApiAccessToken();
+  const accessToken = await resolveDirectoryAccessToken(email);
   const res = await fetch(`${DIRECTORY_API_BASE}/users/${encodeURIComponent(email)}`, {
     headers: { Authorization: `Bearer ${accessToken}` },
   });

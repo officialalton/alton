@@ -1,4 +1,18 @@
 import { getCalendarApiAccessToken, getFreeBusyApiAccessToken } from "@/lib/google-workspace-auth";
+import {
+  isM4PreviewVerificationFlagEnabled,
+  getM4PreviewCalendarAccessToken,
+} from "@/lib/google-workspace-preview-verify-auth";
+
+// M4 외부 검증 임시 조치 — Preview에서는 Production WIF 체인(assertNotPreview()로 원천
+// 차단됨)을 절대 쓰지 않고, 별도 최소권한 Preview 전용 서비스 계정을 쓴다. 플래그가
+// 없으면 기존 경로 그대로이므로 Production/로컬 동작은 전혀 바뀌지 않는다 — 검증 완료
+// 후 별도 승인으로 제거 예정.
+async function resolveCalendarAccessToken(subjectEmail: string): Promise<string> {
+  return isM4PreviewVerificationFlagEnabled()
+    ? getM4PreviewCalendarAccessToken(subjectEmail)
+    : getCalendarApiAccessToken(subjectEmail);
+}
 
 // R6 2/N — Google Calendar 이벤트 + 고유 Meet 링크 생성, FreeBusy 조회.
 //
@@ -65,7 +79,7 @@ export async function createCalendarEventWithMeet(params: {
   sendUpdates: "all" | "none";
 }): Promise<CalendarEventResult> {
   assertRealCallsAllowed();
-  const token = await getCalendarApiAccessToken(params.teacherWorkspaceEmail);
+  const token = await resolveCalendarAccessToken(params.teacherWorkspaceEmail);
 
   const res = await calendarFetch(
     `${CALENDAR_API}/calendars/primary/events?conferenceDataVersion=1&sendUpdates=${params.sendUpdates}`,
@@ -116,7 +130,7 @@ export async function patchCalendarEventTime(params: {
   sendUpdates: "all" | "none";
 }): Promise<void> {
   assertRealCallsAllowed();
-  const token = await getCalendarApiAccessToken(params.teacherWorkspaceEmail);
+  const token = await resolveCalendarAccessToken(params.teacherWorkspaceEmail);
   await calendarFetch(
     `${CALENDAR_API}/calendars/primary/events/${params.googleEventId}?sendUpdates=${params.sendUpdates}`,
     token,
@@ -138,7 +152,7 @@ export async function deleteCalendarEvent(params: {
   sendUpdates: "all" | "none";
 }): Promise<void> {
   assertRealCallsAllowed();
-  const token = await getCalendarApiAccessToken(params.teacherWorkspaceEmail);
+  const token = await resolveCalendarAccessToken(params.teacherWorkspaceEmail);
   const res = await fetch(
     `${CALENDAR_API}/calendars/primary/events/${params.googleEventId}?sendUpdates=${params.sendUpdates}`,
     { method: "DELETE", headers: { Authorization: `Bearer ${token}` } }
@@ -179,7 +193,7 @@ export async function listCalendarEventsIncremental(params: {
   syncToken?: string;
 }): Promise<IncrementalCalendarSyncResult> {
   assertRealCallsAllowed();
-  const token = await getCalendarApiAccessToken(params.teacherWorkspaceEmail);
+  const token = await resolveCalendarAccessToken(params.teacherWorkspaceEmail);
 
   // (2026-09-03 정정, Sandbox 실측으로 발견) Google Calendar API의 `privateExtendedProperty`
   // 쿼리 파라미터는 정확한 key=value만 지원하고 와일드카드(`key=*`)를 지원하지 않는다 —

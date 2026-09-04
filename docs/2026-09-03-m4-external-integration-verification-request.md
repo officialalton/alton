@@ -257,8 +257,160 @@ M4(상담→체험→정규 전환 통합)는 로컬 코드·DB·E2E·UI 폴리�
   기존 관리자 계정) 이외의 누구도 이 흐름에 접근하지 않는다.
 - 계약·법률 문서 자체는 이번 검증에서 수정하지 않는다.
 
+## 12. Calendar·Meet·Workspace Events·Smart Notes 전용 Preview 인증 경로 — 승인 요청(신규)
+
+§5 검증을 Preview 배포에서 실제로 진행하려면 기존 `assertNotPreview()`
+(`lib/google-workspace-auth.ts`)가 Preview의 모든 Google Workspace 호출을
+막는다. 이번 라운드에서 **코드만** 새로 설계·구현했고(아래 12.1~12.3), 실제
+GCP 리소스 생성·IAM 부여·Vercel 환경변수 설정·실제 호출은 전혀 하지
+않았다 — 전부 제품 오너 승인 후 아래 12.4 순서대로 진행해야 한다.
+
+### 12.1 설계된 이름(실제 생성 안 됨)
+
+- **WIF provider**: `vercel-m4-calendar-preview-verify`
+  (pool `vercel`, 프로젝트 `590621873979`, R3의 `vercel-r3-preview`와
+  이름·용도 모두 별개).
+- **Sandbox 서비스 계정**: `m4-calendar-preview-verify@alton-integration-sandbox.iam.gserviceaccount.com`
+  (R3의 `r3-drive-preview-verify@...`와 별개, Production `gate-c-automation`과도
+  완전히 분리 — 코드 어디에도 `gate-c-automation`을 참조하지 않는다, 단위
+  테스트로 확인함).
+- **이 서비스 계정에 필요한 최소 역할/설정**:
+  1. WIF provider → 이 서비스 계정 impersonation을 허용하는 IAM 바인딩
+     (`roles/iam.workloadIdentityUser`, 아래 12.2 조건부 attribute condition 포함).
+  2. 자기 자신에 대한 `iam.serviceAccounts.signJwt` 권한
+     (`roles/iam.serviceAccountTokenCreator`를 자기 자신에 셀프 바인딩 —
+     기존 Production 서비스 계정과 동일한 패턴).
+  3. Google Workspace Admin Console에서 **Domain-wide delegation** 등록,
+     허용 scope는 정확히 아래 4개만(그 외 어떤 scope도 추가하지 않는다):
+     - `https://www.googleapis.com/auth/calendar.events`
+     - `https://www.googleapis.com/auth/meetings.space.settings`
+     - `https://www.googleapis.com/auth/meetings.space.readonly`
+     - `https://www.googleapis.com/auth/admin.directory.user.readonly`
+     (Directory 프로비저닝 scope, Drive scope는 요구하지 않음 — DWD는 구조상
+     "도메인 전체 사용자 임퍼소네이션"을 허용하므로, 이 서비스 계정이 임퍼소네이션할
+     수 있는 대상은 스코프로만 제한되고 특정 사용자로 한정할 방법은 Google API
+     자체에 없다는 한계가 있음 — 남은 위험은 "이 4개 scope로 도메인 내 아무 사용자나
+     사칭 가능"이며, 완화책은 12.4의 짧은 검증 기간 후 즉시 폐기다).
+
+### 12.2 Preview 전용 플래그와 fail-closed 조건
+
+새 파일 `lib/google-workspace-preview-verify-auth.ts`. 서버 전용 플래그
+`GOOGLE_WORKSPACE_M4_PREVIEW_VERIFY_ALLOW`(기본값 없음 = false 취급, 정확히
+문자열 `"true"`일 때만 활성). 이 플래그가 켜져 있어도 아래 중 하나라도
+불일치·누락이면 즉시 throw하고 Production 체인으로 넘어가지 않는다:
+
+1. `process.env.VERCEL_ENV !== "preview"`
+2. `GOOGLE_WORKSPACE_M4_PREVIEW_EXPECTED_VERCEL_ORG_ID`가 미설정이거나
+   `process.env.VERCEL_ORG_ID`와 불일치 (Vercel team 제한)
+3. `GOOGLE_WORKSPACE_M4_PREVIEW_EXPECTED_VERCEL_PROJECT_ID`가 미설정이거나
+   `process.env.VERCEL_PROJECT_ID`와 불일치 (Vercel project 제한)
+4. `GOOGLE_WORKSPACE_M4_PREVIEW_EXPECTED_BRANCH`가 미설정이거나
+   `process.env.VERCEL_GIT_COMMIT_REF`와 불일치 (검증 브랜치
+   `preview/m4-integration-verification`으로 추가 제한)
+
+플래그가 아예 없으면(Production/local 기본 상태) 위 검사에 도달하기 전에
+이미 차단되고, 각 호출부(`lib/google-calendar.ts`,`lib/google-meet.ts`,
+`lib/google-workspace-events-subscriptions.ts`,
+`lib/google-workspace-directory-readonly.ts`)는 기존 함수
+(`getCalendarApiAccessToken`/`getMeetSettingsApiAccessToken`/
+`getMeetReadonlyApiAccessToken`/`getDirectoryApiAccessToken`, 전부 기존
+`assertNotPreview()` 그대로)로만 간다 — Production/local 동작은 전혀
+바뀌지 않는다.
+
+### 12.3 변경된 코드 파일과 테스트 결과
+
+**신규**:
+- `lib/google-workspace-preview-verify-auth.ts` — Preview 전용 WIF/서비스계정
+  인증 체인(자체 signJwt+토큰 교환, Production 파일과 완전 분리).
+- `lib/google-workspace-preview-verify-auth.test.ts` — 9개 케이스(기본 차단,
+  잘못된 환경, 기대값 미설정, org/project/branch 불일치 3종, 정상 경로에서
+  Production 서비스 계정·R3 provider 미사용 확인, scope 최소성 확인, 에러
+  메시지에 응답 본문 미포함 확인).
+
+**수정(조건부 분기만 추가, 기존 분기·기존 함수 시그니처는 그대로)**:
+- `lib/google-calendar.ts` — `resolveCalendarAccessToken()` 추가, Calendar
+  이벤트 CRUD 4곳에서 사용.
+- `lib/google-meet.ts` — `resolveMeetSettingsAccessToken()`/
+  `resolveMeetReadonlyAccessToken()` 추가, 기존 7개 호출부 교체.
+- `lib/google-workspace-events-subscriptions.ts` — `resolveMeetReadonlyAccessToken()`
+  추가, 구독 생성/조회/갱신/삭제 4개 함수에서 사용.
+- `lib/google-workspace-directory-readonly.ts` — `resolveDirectoryAccessToken()`
+  추가, `getWorkspaceUserByEmail()`에서 사용(§5 Workspace Events 구독 생성 시
+  organizer의 Directory immutable id 조회용). `getWorkspaceUserByGoogleId()`/
+  `listWorkspaceUsersInOrgUnit()`은 이번 검증 범위 밖이라 그대로 뒀다 — 여전히
+  Preview에서 무조건 차단.
+
+**변경하지 않음**: `lib/google-workspace-auth.ts`(Production 체인,
+`assertNotPreview()` 포함) — 이번 라운드에서 한 줄도 수정하지 않았다.
+
+**테스트 결과** (2026-09-03, 로컬):
+- `npx vitest run lib/google-workspace-preview-verify-auth.test.ts lib/google-calendar.test.ts lib/google-meet.test.ts lib/google-workspace-events-subscriptions.test.ts lib/google-workspace-directory-readonly.test.ts lib/google-workspace-auth.test.ts`
+  → 6 files, 45 tests, 전부 통과.
+- `npx vitest run`(전체) → 154 files, 913 tests, 전부 통과(기존 통과
+  스위트 포함, 회귀 없음).
+- `npx tsc --noEmit` → 에러 없음.
+- `npx next build` → 성공(31개 라우트 정상 컴파일, 신규 API 라우트 없음 —
+  이번 변경은 라우트를 추가하지 않았다).
+
+### 12.4 제품 오너 승인 후 진행 순서(요청서 형태)
+
+**아래는 계획 제시일 뿐 — 이 세션은 실행하지 않는다.**
+
+1. **GCP 프로젝트 확인**: `alton-integration-sandbox`(R3와 동일 Sandbox
+   프로젝트, 프로젝트 번호 `590621873979`)에 아래를 생성한다.
+   1. WIF pool `vercel`(R3와 공유, 이미 존재)에 provider
+      `vercel-m4-calendar-preview-verify` 추가 — issuer는 Vercel OIDC
+      (`https://oidc.vercel.com/<team-slug>`), attribute mapping은 R3
+      provider와 동일한 필드(`google.subject`, `attribute.owner`,
+      `attribute.project`, `attribute.environment` 등 R3 provider 실제
+      설정값을 그대로 조회해 복사), **allowed audiences**는
+      `https://vercel.com/<team-slug>` 단일 값(R3와 동일 방식 — Vercel
+      OIDC 토큰을 커스텀 audience 없이 그대로 검증하는 기존 프로젝트 관례
+      유지).
+   2. 서비스 계정 `m4-calendar-preview-verify@alton-integration-sandbox.iam.gserviceaccount.com`
+      생성, 장기 키(JSON key) 발급 금지.
+   3. `roles/iam.workloadIdentityUser`를 이 서비스 계정에
+      `principalSet://iam.googleapis.com/projects/590621873979/locations/global/workloadIdentityPools/vercel/attribute.environment/preview`
+      (가능하면 `attribute.<branch-related-field>/preview/m4-integration-verification`
+      까지 추가 제한 — R3 provider의 실제 attribute mapping 필드명을 먼저
+      확인해야 정확한 조건 문자열을 확정할 수 있다) 조건으로 바인딩.
+   4. 같은 서비스 계정에 `roles/iam.serviceAccountTokenCreator`를 **자기
+      자신**에 바인딩(self signJwt 허용).
+2. **Google Workspace Admin Console**: `official@alton.education`
+   도메인에서 이 서비스 계정의 client ID로 Domain-wide delegation 등록,
+   허용 scope는 12.1의 4개 scope 문자열만 콤마로 이어붙여 등록(그 외 추가
+   금지).
+3. **Vercel 프로젝트 설정**(Preview 환경 변수, Production/Development에는
+   추가하지 않음):
+   - `GOOGLE_WORKSPACE_M4_PREVIEW_VERIFY_ALLOW=true`
+   - `GOOGLE_WORKSPACE_M4_PREVIEW_EXPECTED_VERCEL_ORG_ID=<실제 team id>`
+   - `GOOGLE_WORKSPACE_M4_PREVIEW_EXPECTED_VERCEL_PROJECT_ID=<실제 project id>`
+   - `GOOGLE_WORKSPACE_M4_PREVIEW_EXPECTED_BRANCH=preview/m4-integration-verification`
+   (team id/project id는 Vercel 프로젝트 설정 화면에서 직접 복사 — 이
+   세션은 실제 값을 모른다.)
+4. **검증 브랜치 배포**: `preview/m4-integration-verification` 브랜치를
+   Preview로 배포(§1 계획 그대로, main push 아님).
+5. **짧은 실제 검증**: §5 범위(Calendar 이벤트 최대 2개, Meet/Smart Notes
+   1회 20분 이내, Workspace Events 신규 구독만)를 §7 UAT 순서대로 진행.
+6. **즉시 폐기**: 검증 완료 직후 —
+   - Vercel Preview 환경변수 4개 전부 삭제(또는
+     `GOOGLE_WORKSPACE_M4_PREVIEW_VERIFY_ALLOW`만 삭제해도 코드 경로는
+     즉시 다시 차단되지만, 나머지 3개도 함께 지워 흔적을 남기지 않는다).
+   - Admin Console에서 이 서비스 계정의 Domain-wide delegation 항목 삭제.
+   - IAM에서 이 서비스 계정과 WIF provider 바인딩 삭제, 서비스 계정 자체도
+     삭제(재사용하지 않음 — R3 패턴과 동일하게 "검증 1회용"으로 취급).
+   - §9(정리·원복 절차)의 Calendar/Meet/Smart Notes/Workspace Events 정리
+     항목을 그대로 수행.
+
+이 순서 전체(1~4)는 제품 오너가 직접 실행하거나, 이 계획에 서면 승인 후
+별도 세션에 "12.4의 1~4번을 실행해도 좋다"는 명시적 지시로만 진행한다.
+5~6은 그 이후 제품 오너가 직접 진행하거나 재승인 후 이어간다.
+
 ---
 
 **이 요청서에 대한 승인·실행은 제품 오너의 몫이다.** 이 세션은 위 계획을
 작성·정정만 했으며, Preview 브랜치 push·Preview 생성·원격 DB 반영·실제
 Google/DocuSign/Stripe 호출·실제 이메일 발송 중 어떤 것도 실행하지 않았다.
+§12의 코드(신규 Preview 인증 경로)는 로컬에서 구현·테스트했지만, 실제 GCP
+WIF provider·서비스 계정·IAM 바인딩·Domain-wide delegation·Vercel 환경변수
+중 어떤 것도 실제로 생성·설정하지 않았다.
