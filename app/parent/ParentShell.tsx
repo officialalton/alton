@@ -16,7 +16,7 @@ import type { ParentCreditsData } from "./credits-data";
 import EntitlementsTab from "./EntitlementsTab";
 import type { ParentEntitlementsData } from "./entitlements-data";
 import ConsentTab from "./ConsentTab";
-import type { ChildConsentStatus, ConsentPolicyOption } from "./consent-data";
+import type { ChildConsentStatus, ConsentPolicyOption, TrialSmartNotesConsentStatus } from "./consent-data";
 import FamilyTab from "./FamilyTab";
 import ParentEnrollmentTab from "./EnrollmentTab";
 import type { ChildSubjectEnrollments } from "./enrollment-data";
@@ -62,6 +62,7 @@ export default function ParentShell({
   purchaseStatus,
   consentChildren,
   activeConsentPolicy,
+  trialSmartNotesChildren,
   childrenSubjectEnrollments,
   lessonBooking,
 }: {
@@ -81,6 +82,7 @@ export default function ParentShell({
   purchaseStatus?: "success" | "cancelled";
   consentChildren: ChildConsentStatus[];
   activeConsentPolicy: ConsentPolicyOption | null;
+  trialSmartNotesChildren: TrialSmartNotesConsentStatus[];
   childrenSubjectEnrollments: ChildSubjectEnrollments[];
   lessonBooking: LessonBookingData;
 }) {
@@ -208,7 +210,11 @@ export default function ParentShell({
           ) : activeTab === "entitlements" ? (
             <EntitlementsTab data={entitlements} purchaseStatus={purchaseStatus} />
           ) : activeTab === "consent" ? (
-            <ConsentTab children={consentChildren} activePolicy={activeConsentPolicy} />
+            <ConsentTab
+              children={consentChildren}
+              activePolicy={activeConsentPolicy}
+              trialSmartNotesChildren={trialSmartNotesChildren}
+            />
           ) : activeTab === "family" ? (
             <FamilyTab />
           ) : (

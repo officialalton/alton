@@ -2,19 +2,36 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import type { ChildConsentStatus, ConsentPolicyOption } from "./consent-data";
-import { consentForChild, revokeChildConsent } from "./consent-actions";
+import type { ChildConsentStatus, ConsentPolicyOption, TrialSmartNotesConsentStatus } from "./consent-data";
+import { consentForChild, consentToTrialSmartNotes, revokeChildConsent } from "./consent-actions";
 
 export default function ConsentTab({
   children,
   activePolicy,
+  trialSmartNotesChildren,
 }: {
   children: ChildConsentStatus[];
   activePolicy: ConsentPolicyOption | null;
+  trialSmartNotesChildren: TrialSmartNotesConsentStatus[];
 }) {
   const router = useRouter();
   const [busyStudentId, setBusyStudentId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [trialConsentBusyId, setTrialConsentBusyId] = useState<string | null>(null);
+  const [trialConsentError, setTrialConsentError] = useState<string | null>(null);
+
+  async function handleTrialSmartNotesConsent(studentId: string) {
+    setTrialConsentError(null);
+    setTrialConsentBusyId(studentId);
+    try {
+      await consentToTrialSmartNotes(studentId, activePolicy?.version ?? "v1");
+      router.refresh();
+    } catch (e) {
+      setTrialConsentError(e instanceof Error ? e.message : "동의 처리에 실패했습니다.");
+    } finally {
+      setTrialConsentBusyId(null);
+    }
+  }
 
   async function handleConsent(studentId: string) {
     if (!activePolicy) return;
@@ -132,6 +149,52 @@ export default function ConsentTab({
               )}
             </div>
           ))}
+        </div>
+      )}
+
+      {trialSmartNotesChildren.length > 0 && (
+        <div className="mt-9 border-t border-grey-200 pt-5">
+          <h2 className="text-[14px] font-extrabold text-ink mb-1.5">체험 Smart Notes 동의</h2>
+          <p className="text-[12.5px] text-grey-500 mb-4 leading-[1.6]">
+            체험수업권 지급을 위해 체험 수업의 Smart Notes(AI 수업 회의록) 사용에 최초 1회
+            동의가 필요합니다.
+          </p>
+          {trialConsentError && (
+            <div className="bg-red/10 text-red text-[13px] font-semibold rounded-lg px-4 py-3 mb-4">
+              {trialConsentError}
+            </div>
+          )}
+          <div className="space-y-4">
+            {trialSmartNotesChildren.map((child) => (
+              <div
+                key={child.studentId}
+                data-testid={`trial-smart-notes-consent-card-${child.studentId}`}
+                className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4.5"
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="text-[14px] font-bold text-ink">{child.name}</h3>
+                  <span
+                    className={
+                      "text-[12px] font-semibold rounded-full px-2.5 py-1 " +
+                      (child.hasConsented ? "bg-green/10 text-green" : "bg-red/10 text-red")
+                    }
+                  >
+                    {child.hasConsented ? "동의 완료" : "동의 필요"}
+                  </span>
+                </div>
+                {!child.hasConsented && (
+                  <button
+                    type="button"
+                    disabled={trialConsentBusyId === child.studentId}
+                    onClick={() => handleTrialSmartNotesConsent(child.studentId)}
+                    className="text-[13px] font-bold text-white bg-ink rounded-lg px-4 py-2 disabled:opacity-50"
+                  >
+                    체험 Smart Notes 사용에 동의
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       )}
 

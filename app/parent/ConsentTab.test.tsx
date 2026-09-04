@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import ConsentTab from "./ConsentTab";
-import type { ChildConsentStatus, ConsentPolicyOption } from "./consent-data";
+import type { ChildConsentStatus, ConsentPolicyOption, TrialSmartNotesConsentStatus } from "./consent-data";
 
 const refreshMock = vi.fn();
 vi.mock("next/navigation", () => ({
@@ -10,9 +10,11 @@ vi.mock("next/navigation", () => ({
 
 const consentForChildMock = vi.fn();
 const revokeChildConsentMock = vi.fn();
+const consentToTrialSmartNotesMock = vi.fn();
 vi.mock("./consent-actions", () => ({
   consentForChild: (...args: unknown[]) => consentForChildMock(...args),
   revokeChildConsent: (...args: unknown[]) => revokeChildConsentMock(...args),
+  consentToTrialSmartNotes: (...args: unknown[]) => consentToTrialSmartNotesMock(...args),
 }));
 
 const activePolicy: ConsentPolicyOption = {
@@ -24,7 +26,7 @@ const activePolicy: ConsentPolicyOption = {
 
 describe("ConsentTab", () => {
   it("13세 미만 자녀가 없으면 안내 문구만 보여준다", () => {
-    render(<ConsentTab children={[]} activePolicy={activePolicy} />);
+    render(<ConsentTab children={[]} activePolicy={activePolicy} trialSmartNotesChildren={[]} />);
     expect(
       screen.getByText("동의가 필요한 만 13세 미만 자녀가 없습니다.")
     ).toBeInTheDocument();
@@ -41,7 +43,7 @@ describe("ConsentTab", () => {
         latestConsent: null,
       },
     ];
-    render(<ConsentTab children={children} activePolicy={activePolicy} />);
+    render(<ConsentTab children={children} activePolicy={activePolicy} trialSmartNotesChildren={[]} />);
 
     expect(screen.getByText("동의 필요")).toBeInTheDocument();
     const link = screen.getByText(`${activePolicy.title} 원문 보기`);
@@ -68,6 +70,7 @@ describe("ConsentTab", () => {
       <ConsentTab
         children={children}
         activePolicy={{ ...activePolicy, documentUrl: null }}
+        trialSmartNotesChildren={[]}
       />
     );
 
@@ -89,7 +92,7 @@ describe("ConsentTab", () => {
         },
       },
     ];
-    render(<ConsentTab children={children} activePolicy={activePolicy} />);
+    render(<ConsentTab children={children} activePolicy={activePolicy} trialSmartNotesChildren={[]} />);
     expect(screen.getByText("동의 완료")).toBeInTheDocument();
     expect(screen.getByText("동의 철회")).toBeInTheDocument();
     expect(screen.getByText(`${activePolicy.title} 원문 보기`)).toBeInTheDocument();
@@ -99,10 +102,54 @@ describe("ConsentTab", () => {
     const children: ChildConsentStatus[] = [
       { studentId: "student2", name: "이서아", isUnder13: false, hasValidConsent: true, latestConsent: null },
     ];
-    render(<ConsentTab children={children} activePolicy={activePolicy} />);
+    render(<ConsentTab children={children} activePolicy={activePolicy} trialSmartNotesChildren={[]} />);
     expect(screen.getByTestId("smart-notes-contract-notice")).toBeInTheDocument();
     expect(screen.queryByText(/사용 중 · 끄기/)).not.toBeInTheDocument();
     expect(screen.queryByText(/사용 안 함 · 켜기/)).not.toBeInTheDocument();
     expect(screen.queryByTestId("ai-notes-card-student2")).not.toBeInTheDocument();
+  });
+
+  it("체험 Smart Notes 동의가 필요한 자녀를 보여주고, 클릭하면 consentToTrialSmartNotes를 호출한다", async () => {
+    consentToTrialSmartNotesMock.mockResolvedValue(undefined);
+    const trialSmartNotesChildren: TrialSmartNotesConsentStatus[] = [
+      { studentId: "student3", name: "장유안", hasConsented: false },
+    ];
+    render(
+      <ConsentTab
+        children={[]}
+        activePolicy={activePolicy}
+        trialSmartNotesChildren={trialSmartNotesChildren}
+      />
+    );
+
+    expect(screen.getByTestId("trial-smart-notes-consent-card-student3")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("체험 Smart Notes 사용에 동의"));
+
+    await waitFor(() => {
+      expect(consentToTrialSmartNotesMock).toHaveBeenCalledWith("student3", "v1");
+      expect(refreshMock).toHaveBeenCalled();
+    });
+  });
+
+  it("이미 동의한 자녀는 버튼 없이 완료 상태만 보여준다", () => {
+    const trialSmartNotesChildren: TrialSmartNotesConsentStatus[] = [
+      { studentId: "student3", name: "장유안", hasConsented: true },
+    ];
+    render(
+      <ConsentTab
+        children={[]}
+        activePolicy={activePolicy}
+        trialSmartNotesChildren={trialSmartNotesChildren}
+      />
+    );
+
+    const card = screen.getByTestId("trial-smart-notes-consent-card-student3");
+    expect(card).toHaveTextContent("동의 완료");
+    expect(screen.queryByText("체험 Smart Notes 사용에 동의")).not.toBeInTheDocument();
+  });
+
+  it("체험 Smart Notes 동의가 필요한 자녀가 없으면 섹션 자체를 보여주지 않는다", () => {
+    render(<ConsentTab children={[]} activePolicy={activePolicy} trialSmartNotesChildren={[]} />);
+    expect(screen.queryByText("체험 Smart Notes 동의")).not.toBeInTheDocument();
   });
 });

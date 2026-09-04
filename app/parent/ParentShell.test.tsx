@@ -55,6 +55,7 @@ const lessonsProps = {
   entitlements: { prices: [], children: [] },
   consentChildren: [],
   activeConsentPolicy: null,
+  trialSmartNotesChildren: [],
   childrenSubjectEnrollments: [],
   lessonBooking: {
     bookableEnrollments: [],

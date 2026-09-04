@@ -75,6 +75,63 @@ export async function loadChildrenConsentStatus(
   return results;
 }
 
+export type TrialSmartNotesConsentStatus = {
+  studentId: string;
+  name: string;
+  hasConsented: boolean;
+};
+
+/**
+ * M4 체험 온보딩의 "체험 Smart Notes 동의" 단계 — 13세 미만 개인정보
+ * 동의(guardian_consents)와는 별개 테이블(trial_smart_notes_consents)이다.
+ * 자녀에게 과목 수강(subject_enrollments)이 하나라도 있어야만(= 체험/정규
+ * 파이프라인에 실제로 들어와 있는 자녀만) 목록에 보여준다.
+ */
+export async function loadTrialSmartNotesConsentStatus(
+  supabase: SupabaseClient,
+  guardianId: string
+): Promise<TrialSmartNotesConsentStatus[]> {
+  const { data: guardianLinks } = await supabase
+    .from("household_members")
+    .select("household_id")
+    .eq("profile_id", guardianId)
+    .eq("role", "guardian");
+  const householdIds = (guardianLinks ?? []).map((l) => l.household_id);
+  if (householdIds.length === 0) return [];
+
+  const { data: childLinks } = await supabase
+    .from("household_members")
+    .select("profile_id, profile:profiles(name)")
+    .in("household_id", householdIds)
+    .eq("role", "child");
+  const children = (childLinks ?? []).map((c) => ({
+    studentId: c.profile_id as string,
+    name: extractName(c.profile),
+  }));
+  if (children.length === 0) return [];
+
+  const { data: enrollments } = await supabase
+    .from("subject_enrollments")
+    .select("child_id")
+    .in(
+      "child_id",
+      children.map((c) => c.studentId)
+    );
+  const enrolledChildIds = new Set((enrollments ?? []).map((e) => e.child_id as string));
+
+  const results: TrialSmartNotesConsentStatus[] = [];
+  for (const child of children) {
+    if (!enrolledChildIds.has(child.studentId)) continue;
+    const { data: consent } = await supabase
+      .from("trial_smart_notes_consents")
+      .select("id")
+      .eq("child_id", child.studentId)
+      .maybeSingle();
+    results.push({ studentId: child.studentId, name: child.name, hasConsented: !!consent });
+  }
+  return results;
+}
+
 export async function loadActiveConsentPolicy(
   supabase: SupabaseClient
 ): Promise<ConsentPolicyOption | null> {
