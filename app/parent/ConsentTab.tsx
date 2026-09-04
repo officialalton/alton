@@ -94,6 +94,23 @@ export default function ConsentTab({
                 </p>
               )}
 
+              {!child.hasValidConsent && activePolicy && (
+                <p className="text-[12.5px] mb-3">
+                  {activePolicy.documentUrl ? (
+                    <a
+                      href={activePolicy.documentUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-ink underline font-semibold"
+                    >
+                      {activePolicy.title} 원문 보기
+                    </a>
+                  ) : (
+                    <span className="text-grey-400">{activePolicy.title} 원문 준비 중</span>
+                  )}
+                </p>
+              )}
+
               {child.hasValidConsent && child.latestConsent ? (
                 <button
                   type="button"

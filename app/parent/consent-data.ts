@@ -17,6 +17,7 @@ export type ConsentPolicyOption = {
   id: string;
   version: string;
   title: string;
+  documentUrl: string | null;
 };
 
 export async function loadChildrenConsentStatus(
@@ -79,12 +80,18 @@ export async function loadActiveConsentPolicy(
 ): Promise<ConsentPolicyOption | null> {
   const { data } = await supabase
     .from("consent_policy_versions")
-    .select("id, version, title")
+    .select("id, version, title, document_url")
     .is("retired_at", null)
     .order("effective_from", { ascending: false })
     .limit(1)
     .maybeSingle();
-  return data ?? null;
+  if (!data) return null;
+  return {
+    id: data.id,
+    version: data.version,
+    title: data.title,
+    documentUrl: data.document_url ?? null,
+  };
 }
 
 function extractName(rel: unknown): string {

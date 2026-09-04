@@ -19,6 +19,7 @@ const activePolicy: ConsentPolicyOption = {
   id: "policy1",
   version: "v1",
   title: "ALTON 개인정보 처리방침 v1",
+  documentUrl: "https://example.com/policy-v1",
 };
 
 describe("ConsentTab", () => {
@@ -43,12 +44,34 @@ describe("ConsentTab", () => {
     render(<ConsentTab children={children} activePolicy={activePolicy} />);
 
     expect(screen.getByText("동의 필요")).toBeInTheDocument();
+    const link = screen.getByText(`${activePolicy.title} 원문 보기`);
+    expect(link.closest("a")).toHaveAttribute("href", activePolicy.documentUrl);
     fireEvent.click(screen.getByText(`${activePolicy.title}에 동의`));
 
     await waitFor(() => {
       expect(consentForChildMock).toHaveBeenCalledWith("student1", "policy1");
       expect(refreshMock).toHaveBeenCalled();
     });
+  });
+
+  it("정책 원문 링크가 없으면 '원문 준비 중'을 보여준다", () => {
+    const children: ChildConsentStatus[] = [
+      {
+        studentId: "student1",
+        name: "지훈",
+        isUnder13: true,
+        hasValidConsent: false,
+        latestConsent: null,
+      },
+    ];
+    render(
+      <ConsentTab
+        children={children}
+        activePolicy={{ ...activePolicy, documentUrl: null }}
+      />
+    );
+
+    expect(screen.getByText(`${activePolicy.title} 원문 준비 중`)).toBeInTheDocument();
   });
 
   it("동의가 유효한 자녀는 철회 버튼을 보여준다", () => {
