@@ -138,17 +138,17 @@ describe("google-workspace-preview-verify-auth", () => {
     // Production 서비스 계정(gate-c-automation 등)은 이 경로 어디에도 등장하지 않는다.
     expect(config.service_account_impersonation_url).not.toContain("gate-c-automation");
     expect(config.audience).not.toContain("vercel-r3-preview");
-    expect(config.scopes).toEqual(
-      expect.arrayContaining([
-        "https://www.googleapis.com/auth/calendar.events",
-        "https://www.googleapis.com/auth/meetings.space.settings",
-        "https://www.googleapis.com/auth/meetings.space.readonly",
-        "https://www.googleapis.com/auth/admin.directory.user.readonly",
-      ]),
-    );
-    // 프로비저닝 가능한 전체 Directory scope는 요구하지 않는다(최소 권한).
-    expect(config.scopes).not.toContain("https://www.googleapis.com/auth/admin.directory.user");
-    expect(config.scopes).not.toContain("https://www.googleapis.com/auth/drive");
+    // (2026-09-03 정정) impersonation 클라이언트 자신에는 scopes를 지정하지 않는다
+    // (signJwt 호출용 cloud-platform 토큰이라 Workspace scope를 넣으면 403 — 실측
+    // 확인, Production 클라이언트(lib/google-workspace-auth.ts)와 동일하게 유지).
+    expect(config.scopes).toBeUndefined();
+    // 실제 위임 scope는 signJwt 호출 body(JWT payload.scope)에만 실린다 — fetch mock으로 확인.
+    const signJwtCall = (fetch as unknown as ReturnType<typeof vi.fn>).mock.calls[0];
+    const signJwtBody = JSON.parse(signJwtCall[1].body as string) as { payload: string };
+    const payload = JSON.parse(signJwtBody.payload) as { scope: string };
+    expect(payload.scope).toBe("https://www.googleapis.com/auth/calendar.events");
+    // 프로비저닝 가능한 전체 Directory scope는 어디에도 요청하지 않는다(최소 권한).
+    expect(payload.scope).not.toContain("admin.directory.user\"");
   });
 
   it("signJwt/토큰 교환 실패 시 응답 본문을 에러 메시지에 포함하지 않는다", async () => {

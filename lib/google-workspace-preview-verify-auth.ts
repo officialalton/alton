@@ -104,7 +104,13 @@ function getClient(): BaseExternalAccountClient {
     subject_token_type: "urn:ietf:params:oauth:token-type:jwt",
     token_url: "https://sts.googleapis.com/v1/token",
     service_account_impersonation_url: `https://iamcredentials.googleapis.com/v1/projects/-/serviceAccounts/${M4_PREVIEW_SERVICE_ACCOUNT_EMAIL}:generateAccessToken`,
-    scopes: [CALENDAR_SCOPE, MEET_SETTINGS_SCOPE, MEET_READONLY_SCOPE, DIRECTORY_READONLY_SCOPE],
+    // (2026-09-03 정정, 실측으로 발견) 여기의 scopes는 impersonation 토큰(=이후 IAM
+    // Credentials API signJwt 호출에 쓰는 cloud-platform 토큰) 자신의 scope다 — 최종
+    // 위임 대상(Calendar/Meet 등)의 scope가 아니다. Workspace scope를 여기 넣으면
+    // signJwt 호출 자체가 403으로 실패한다(실측 확인). 기존 lib/google-workspace-auth.ts
+    // 의 Production 클라이언트와 동일하게 scopes를 지정하지 않아 기본(cloud-platform)을
+    // 쓰도록 한다 — 실제 Workspace scope는 signDelegatedSubjectJwt()의 JWT payload.scope
+    // 필드로만 전달된다.
     subject_token_supplier: {
       getSubjectToken: () => getVercelOidcToken(),
     },
