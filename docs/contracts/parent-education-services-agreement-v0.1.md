@@ -1,5 +1,7 @@
 # ALTON 교육서비스 기본계약서 — 학부모·법정대리인용
 
+> **대체됨(SUPERSEDED) — 과거 초안 참고용. 신규 발송·서명·화면의 기준으로 사용 금지.** 현행 정규수업 계약 초안은 `parent-education-services-agreement-v0.2-draft.md`이며, 체험 단계는 `trial-class-ai-review-notice-consent-v0.1-draft.md`를 따른다.
+
 > 문서 상태: 법률 검토 전 제품·운영 정책 초안 v0.1  
 > 적용 대상: 미성년 학생의 학부모 또는 법정대리인  
 > 성년 학생 직접 계약은 현재 범위에서 제외한다.  

@@ -1,5 +1,7 @@
 # ALTON 가족 교육서비스 계약 패키지 v0.1
 
+> **대체됨(SUPERSEDED) — 과거 설계 참고용. 신규 계약·체험 동의·화면 문구의 기준으로 사용 금지.** 현행 기준은 `parent-education-services-agreement-v0.2-draft.md`, `trial-class-ai-review-notice-consent-v0.1-draft.md`, `privacy-policy-v0.1-draft.md`이다. 아래 선택형 AI 동의와 체험 운영 구조는 폐기됐다.
+
 > 상태: 제품·운영정책 반영 초안 / 변호사 검토 전 사용 금지
 >
 > 목적: R3 데이터 모델, DocuSign 템플릿, 관리자 운영 절차를 동일한 계약 구조에 맞추기 위한 기준 문서
@@ -336,4 +338,3 @@ DocuSign 이벤트 수신 실패 또는 데이터 불일치는 계약 상태와 
 - [ ] AI 회의록 동의·거부 문구 및 보관기간
 - [ ] 전자서명·전자통지 동의
 - [ ] 개인정보 처리방침·서비스 이용약관과의 중복·충돌
-

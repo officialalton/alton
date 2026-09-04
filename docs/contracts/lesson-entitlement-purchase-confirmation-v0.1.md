@@ -1,5 +1,7 @@
 # 수업권 구매확인서
 
+> **대체됨(SUPERSEDED) — 과거 거래문서 참고용. 신규 구매에는 사용 금지.** 현행 초안은 `lesson-entitlement-purchase-confirmation-v0.2-draft.md`이다.
+
 > 문서 상태: 제품·운영 정책 초안 v0.1  
 > 이 문서는 매 구매 시 시스템이 자동 생성하는 거래 기록이며, 매번 DocuSign으로 서명하는 계약서가 아니다.
 
