@@ -94,7 +94,7 @@ export default function ConsentTab({
                 </p>
               )}
 
-              {!child.hasValidConsent && activePolicy && (
+              {activePolicy && (
                 <p className="text-[12.5px] mb-3">
                   {activePolicy.documentUrl ? (
                     <a

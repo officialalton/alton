@@ -92,6 +92,7 @@ describe("ConsentTab", () => {
     render(<ConsentTab children={children} activePolicy={activePolicy} />);
     expect(screen.getByText("동의 완료")).toBeInTheDocument();
     expect(screen.getByText("동의 철회")).toBeInTheDocument();
+    expect(screen.getByText(`${activePolicy.title} 원문 보기`)).toBeInTheDocument();
   });
 
   it("Smart Notes는 가족계약 조항이라는 안내 문구를 보여주고, 회차별 ON/OFF 컨트롤은 없다", () => {
