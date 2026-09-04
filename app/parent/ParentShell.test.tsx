@@ -156,4 +156,37 @@ describe("ParentShell", () => {
     fireEvent.click(screen.getByText("김민지 학부모님 ▾"));
     expect(screen.getByText("로그아웃")).toBeInTheDocument();
   });
+
+  it("동의가 필요한 문서가 있으면 홈 화면 상단에 배너를 보여주고, 누르면 동의 탭으로 이동한다", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+        consentChildren={[
+          { studentId: "s1", name: "지훈", isUnder13: true, hasValidConsent: false, latestConsent: null },
+        ]}
+        trialSmartNotesChildren={[{ studentId: "s1", name: "지훈", hasConsented: false }]}
+      />
+    );
+    expect(screen.getByText("동의가 필요한 문서가 2건 있습니다. 눌러서 확인하기 →")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText("동의가 필요한 문서가 2건 있습니다. 눌러서 확인하기 →"));
+    expect(replaceMock).toHaveBeenCalledWith("?child=s1&tab=consent", { scroll: false });
+  });
+
+  it("동의가 전부 완료되면 배너를 보여주지 않는다", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+      />
+    );
+    expect(screen.queryByText(/동의가 필요한 문서가/)).not.toBeInTheDocument();
+  });
 });

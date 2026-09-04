@@ -105,6 +105,10 @@ export default function ParentShell({
 
   const activeLabel = NAV_ITEMS.find((n) => n.id === activeTab)?.label ?? "";
 
+  const pendingConsentCount =
+    consentChildren.filter((c) => c.isUnder13 && !c.hasValidConsent).length +
+    trialSmartNotesChildren.filter((c) => !c.hasConsented).length;
+
   return (
     <div className="min-h-screen bg-white flex">
       <aside className="w-[88px] shrink-0 border-r border-grey-200 flex flex-col items-center py-5 gap-1">
@@ -165,6 +169,14 @@ export default function ParentShell({
         </div>
 
         <div className="flex-1">
+          {activeTab === "home" && pendingConsentCount > 0 && (
+            <button
+              onClick={() => selectTab("consent")}
+              className="w-full text-left bg-red/10 text-red text-[13px] font-semibold px-6 py-3 border-b border-red/20"
+            >
+              동의가 필요한 문서가 {pendingConsentCount}건 있습니다. 눌러서 확인하기 →
+            </button>
+          )}
           {activeTab === "home" ? (
             <HomeDashboard
               studentName={dashboard.studentName}
