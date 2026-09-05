@@ -582,6 +582,11 @@ export type RegularConversionCandidate = {
   guardianEmail: string | null;
   guardianName: string | null;
   contractStatus: string | null;
+  // contracts.status는 계약 전체 상태라 새 버전(재발송)이 아직 미발송이어도
+  // 이전 버전이 완료됐으면 'active'로 남아있다 — "이미 발송됨" 표시는 반드시
+  // 최신 active 버전 자체에 envelope가 있는지로 판단해야 한다(실사용 확인:
+  // v2를 만들었는데도 버튼이 계속 "발송 완료"로 비활성화되던 버그).
+  latestVersionHasEnvelope: boolean;
 };
 
 export async function listRegularConversionCandidatesAction(): Promise<RegularConversionCandidate[]> {
@@ -645,6 +650,23 @@ export async function listRegularConversionCandidatesAction(): Promise<RegularCo
     : { data: [] as { id: string; status: string }[] };
   const contractStatusById = new Map((contracts ?? []).map((c) => [c.id, c.status]));
 
+  // 계약당 최신 active 버전 하나만 필요 — 여러 버전이 있어도 발송 대상은
+  // 항상 이 최신 버전이다(sendRegularContractOneClickAction과 동일 조건).
+  const { data: latestVersions } = contractIds.length
+    ? await admin
+        .from("contract_versions")
+        .select("contract_id, version_number, docusign_envelope_id")
+        .in("contract_id", contractIds)
+        .eq("version_status", "active")
+        .order("version_number", { ascending: false })
+    : { data: [] as { contract_id: string; version_number: number; docusign_envelope_id: string | null }[] };
+  const latestVersionHasEnvelopeByContractId = new Map<string, boolean>();
+  for (const v of latestVersions ?? []) {
+    if (!latestVersionHasEnvelopeByContractId.has(v.contract_id)) {
+      latestVersionHasEnvelopeByContractId.set(v.contract_id, !!v.docusign_envelope_id);
+    }
+  }
+
   return (enrollments ?? []).map((e) => {
     const subjectRel = Array.isArray(e.subject) ? e.subject[0] : e.subject;
     const guardian = guardianByChildId.get(e.child_id);
@@ -656,6 +678,7 @@ export async function listRegularConversionCandidatesAction(): Promise<RegularCo
       guardianEmail: guardian?.guardianEmail ?? null,
       guardianName: guardian?.guardianName ?? null,
       contractStatus: contractStatusById.get(e.contract_id) ?? null,
+      latestVersionHasEnvelope: latestVersionHasEnvelopeByContractId.get(e.contract_id) ?? false,
     };
   });
 }

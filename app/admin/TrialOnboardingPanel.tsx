@@ -508,10 +508,12 @@ function RegularContractRow({
 
   // 로컬 result만 보면 새로고침 후 이미 발송된 계약도 버튼이 "정규 계약 발송"으로
   // 되돌아가 재발송을 유도한다(TrialConversionPanel에서 겪은 것과 같은 종류의
-  // 문제) — item.contractStatus(실제 저장된 contracts.status)가 sent/active면
-  // 로컬 result가 비어 있어도 이미 발송된 것으로 표시한다.
-  const alreadySentFromServer = item.contractStatus === "sent" || item.contractStatus === "active";
-  const isSent = result?.status === "sent" || result?.status === "already_sent" || (!result && alreadySentFromServer);
+  // 문제) — item.latestVersionHasEnvelope(최신 active 버전에 실제 envelope가
+  // 있는지)로 판단한다. contracts.status(계약 전체 상태)는 쓰지 않는다 — 재발송으로
+  // 새 버전을 만들면 이전 버전 완료로 인해 계약 상태 자체는 여전히 'active'로
+  // 남아있어, 새 버전이 미발송인데도 "이미 발송됨"으로 잘못 표시되는 버그가 있었다.
+  const isSent =
+    result?.status === "sent" || result?.status === "already_sent" || (!result && item.latestVersionHasEnvelope);
   const canSend = !!item.guardianEmail && !!item.guardianName;
 
   return (

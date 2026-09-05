@@ -121,6 +121,7 @@ describe("TrialOnboardingPanel", () => {
         guardianEmail: null,
         guardianName: null,
         contractStatus: "draft",
+        latestVersionHasEnvelope: false,
       },
     ]);
 
@@ -129,6 +130,30 @@ describe("TrialOnboardingPanel", () => {
     const sendButton = await screen.findByRole("button", { name: "회사 승인 및 계약 발송" });
     expect(sendButton).toBeDisabled();
     expect(screen.getByText(/발송 차단/)).toBeInTheDocument();
+  });
+
+  it("재발송용 새 버전이 아직 미발송이면, 이전 버전 완료로 계약 전체 상태가 active여도 발송 버튼이 다시 활성화된다", async () => {
+    (listTrialOnboardingCandidatesAction as ReturnType<typeof vi.fn>).mockResolvedValue([]);
+    (listRegularConversionCandidatesAction as ReturnType<typeof vi.fn>).mockResolvedValue([
+      {
+        subjectEnrollmentId: "se1",
+        childId: "child1",
+        childName: "학생",
+        subjectName: "SAT Math",
+        guardianEmail: "g@example.com",
+        guardianName: "학부모",
+        // 이전 버전이 완료돼 계약 전체 상태는 'active'로 남아있지만, 재발송용
+        // 새 버전은 아직 envelope가 없다 — "이미 발송됨"으로 잘못 막히면 안 된다.
+        contractStatus: "active",
+        latestVersionHasEnvelope: false,
+      },
+    ]);
+
+    render(<TrialOnboardingPanel />);
+
+    const sendButton = await screen.findByRole("button", { name: "회사 승인 및 계약 발송" });
+    expect(sendButton).not.toBeDisabled();
+    expect(screen.queryByText(/이미 발송됨/)).not.toBeInTheDocument();
   });
 
   it("계약 발송은 확인 단계를 거치고, 실패 시 재처리 안내를 보여준다(중복 발송 없음)", async () => {
@@ -142,6 +167,7 @@ describe("TrialOnboardingPanel", () => {
         guardianEmail: "g@example.com",
         guardianName: "학부모",
         contractStatus: "draft",
+        latestVersionHasEnvelope: false,
       },
     ]);
     (sendRegularContractOneClickAction as ReturnType<typeof vi.fn>).mockResolvedValue({
