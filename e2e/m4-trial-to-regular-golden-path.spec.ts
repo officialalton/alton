@@ -300,11 +300,13 @@ test.describe("M4 — 상담→체험→정규 전환 골든 패스 (실브라�
     await loginAs(page, ACCOUNTS.admin);
     await page.goto("/admin?tab=matching");
     await expect(page.getByRole("heading", { name: "정규 계약 발송 대기" })).toBeVisible({ timeout: 15000 });
-    // 원클릭 발송은 실수 방지를 위해 인라인 확인 단계를 거친다 — "정규 계약
-    // 발송" → 확인 문구 → "확인 — 선서명 + 발송 실행" 순서로 클릭한다.
-    await page.getByRole("button", { name: "정규 계약 발송" }).click();
-    await expect(page.getByText(/회사 선서명과 DocuSign 발송이 한 번에/)).toBeVisible();
-    await page.getByRole("button", { name: "확인 — 선서명 + 발송 실행" }).click();
+    // 원클릭 발송은 실수 방지를 위해 인라인 확인 단계를 거친다 — "회사 승인 및
+    // 계약 발송" → 확인 문구 → 승인자 직함 입력 → "확인 — 회사 승인 및 발송 실행"
+    // 순서로 클릭한다(DocuSign 전자서명이 아니라 회사 전자승인 기록 방식).
+    await page.getByRole("button", { name: "회사 승인 및 계약 발송" }).click();
+    await expect(page.getByText(/회사가 이 계약 버전을 전자승인한 기록/)).toBeVisible();
+    await page.getByPlaceholder("예: CEO, 운영팀장").fill("CEO");
+    await page.getByRole("button", { name: "확인 — 회사 승인 및 발송 실행" }).click();
     await expect(page.getByText(/발송 실패 — 관리자 조치 필요/)).toBeVisible({ timeout: 20000 });
 
     contractId = psql(`select id from contracts where child_id = '${childId}';`);

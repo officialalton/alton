@@ -20,6 +20,7 @@ import {
   type TrialOnboardingPipeline,
 } from "./trial-onboarding-actions";
 import { retryTrialEntitlementGrant } from "./consultation-scheduling-actions";
+import { createNewContractVersionForResend } from "./consultation-actions";
 
 const LINK_STATUS_LABEL: Record<TrialOnboardingCandidate["linkStatus"], string> = {
   none: "온보딩 링크 미발급",
@@ -502,6 +503,8 @@ function RegularContractRow({
   const [confirming, setConfirming] = useState(false);
   const [approverTitle, setApproverTitle] = useState("");
   const [busy, setBusy] = useState(false);
+  const [resending, setResending] = useState(false);
+  const [resendError, setResendError] = useState<string | null>(null);
   const [result, setResult] = useState<
     { status: "sent" | "already_sent"; envelopeId: string; at: string } | { status: "failed"; error: string } | null
   >(null);
@@ -544,15 +547,40 @@ function RegularContractRow({
             : `이미 발송됨 — 수신자 ${item.guardianEmail} · 상태: 서명 대기`}
         </div>
       )}
+      {resendError && <div className="text-[12px] text-red mt-2">{resendError}</div>}
 
       {!confirming ? (
-        <button
-          disabled={!canSend || isSent}
-          onClick={() => setConfirming(true)}
-          className="text-[12px] font-bold px-3 py-1.5 mt-2.5 rounded-lg bg-ink text-white disabled:opacity-50"
-        >
-          {result?.status === "failed" ? "다시 시도" : isSent ? "발송 완료" : "회사 승인 및 계약 발송"}
-        </button>
+        <div className="flex gap-2 mt-2.5">
+          <button
+            disabled={!canSend || isSent}
+            onClick={() => setConfirming(true)}
+            className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
+          >
+            {result?.status === "failed" ? "다시 시도" : isSent ? "발송 완료" : "회사 승인 및 계약 발송"}
+          </button>
+          {isSent && (
+            <button
+              disabled={resending}
+              aria-busy={resending}
+              onClick={async () => {
+                setResending(true);
+                setResendError(null);
+                try {
+                  await createNewContractVersionForResend({ contractId: item.contractId });
+                  setResult(null);
+                  onSent();
+                } catch (e) {
+                  setResendError(e instanceof Error ? e.message : String(e));
+                } finally {
+                  setResending(false);
+                }
+              }}
+              className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
+            >
+              {resending ? "새 버전 만드는 중..." : "재발송(새 버전)"}
+            </button>
+          )}
+        </div>
       ) : (
         <div className="mt-2.5 bg-grey-50 rounded-lg px-3.5 py-3">
           <p className="text-[12px] text-ink mb-2">

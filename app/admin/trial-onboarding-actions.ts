@@ -577,6 +577,7 @@ export async function getTrialOnboardingPipelineAction(
 export type RegularConversionCandidate = {
   subjectEnrollmentId: string;
   childId: string;
+  contractId: string;
   childName: string;
   subjectName: string | null;
   guardianEmail: string | null;
@@ -673,6 +674,7 @@ export async function listRegularConversionCandidatesAction(): Promise<RegularCo
     return {
       subjectEnrollmentId: e.id,
       childId: e.child_id,
+      contractId: e.contract_id,
       childName: childNameById.get(e.child_id) ?? "",
       subjectName: (subjectRel as { name?: string } | null)?.name ?? null,
       guardianEmail: guardian?.guardianEmail ?? null,

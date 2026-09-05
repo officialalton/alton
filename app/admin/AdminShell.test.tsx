@@ -94,9 +94,6 @@ const baseProps = {
   teachers: [],
   creditHistoryByStudent: {},
   qcWarningsByTeacher: {},
-  pendingConsults: [],
-  familyContracts: [],
-  acceptedProposalsForContract: [],
   consultations: [],
   trials: [],
   proposals: [],
@@ -117,7 +114,7 @@ const baseProps = {
 };
 
 describe("AdminShell", () => {
-  it("사이드바 15개 항목을 보여주고, 기본 탭은 홈이다", () => {
+  it("사이드바 항목을 보여주고, 기본 탭은 홈이다", () => {
     render(<AdminShell {...baseProps} />);
     [
       "홈",
@@ -127,7 +124,6 @@ describe("AdminShell", () => {
       "커리큘럼",
       "구 크레딧(레거시)",
       "수업권",
-      "계약",
       "통합 일정",
       "QC",
       "정산",
@@ -187,12 +183,6 @@ describe("AdminShell", () => {
     fireEvent.click(screen.getByText("개발 로그"));
     expect(screen.getByText("완료된 항목")).toBeInTheDocument();
     expect(screen.getByText("남은 항목")).toBeInTheDocument();
-  });
-
-  it("계약 탭을 누르면 ContractsTab이 렌더링된다", () => {
-    render(<AdminShell {...baseProps} />);
-    fireEvent.click(screen.getByText("계약"));
-    expect(screen.getByText("계약 목록")).toBeInTheDocument();
   });
 
   it("정산 탭을 누르면 PayoutsTab이 렌더링된다", () => {

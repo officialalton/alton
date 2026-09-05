@@ -9,7 +9,6 @@ import {
   loadStudentCreditHistory,
   loadTeacherQcWarnings,
 } from "./users-data";
-import { loadPendingConsults, loadFamilyContracts, loadAcceptedProposalsForContract } from "./contracts-data";
 import {
   loadConsultations,
   loadTrialSessions,
@@ -49,9 +48,6 @@ export default async function AdminHomePage({
     parents,
     students,
     teachers,
-    pendingConsults,
-    familyContracts,
-    acceptedProposalsForContract,
     consultations,
     trials,
     proposals,
@@ -75,9 +71,6 @@ export default async function AdminHomePage({
     loadParents(supabase),
     loadStudents(supabase),
     loadTeachers(supabase),
-    loadPendingConsults(supabase),
-    loadFamilyContracts(supabase),
-    loadAcceptedProposalsForContract(supabase),
     loadConsultations(supabase),
     loadTrialSessions(supabase),
     loadProposals(supabase),
@@ -126,9 +119,6 @@ export default async function AdminHomePage({
       teachers={teachers}
       creditHistoryByStudent={creditHistoryByStudent}
       qcWarningsByTeacher={qcWarningsByTeacher}
-      pendingConsults={pendingConsults}
-      familyContracts={familyContracts}
-      acceptedProposalsForContract={acceptedProposalsForContract}
       consultations={consultations}
       trials={trials}
       proposals={proposals}

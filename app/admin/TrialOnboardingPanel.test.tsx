@@ -9,6 +9,7 @@ import {
   sendRegularContractOneClickAction,
 } from "./trial-onboarding-actions";
 import { retryTrialEntitlementGrant } from "./consultation-scheduling-actions";
+import { createNewContractVersionForResend } from "./consultation-actions";
 
 vi.mock("./trial-onboarding-actions", () => ({
   listTrialOnboardingCandidatesAction: vi.fn(),
@@ -22,6 +23,10 @@ vi.mock("./trial-onboarding-actions", () => ({
 
 vi.mock("./consultation-scheduling-actions", () => ({
   retryTrialEntitlementGrant: vi.fn(),
+}));
+
+vi.mock("./consultation-actions", () => ({
+  createNewContractVersionForResend: vi.fn(),
 }));
 
 const baseCandidate = {
@@ -154,6 +159,35 @@ describe("TrialOnboardingPanel", () => {
     const sendButton = await screen.findByRole("button", { name: "회사 승인 및 계약 발송" });
     expect(sendButton).not.toBeDisabled();
     expect(screen.queryByText(/이미 발송됨/)).not.toBeInTheDocument();
+  });
+
+  it("이미 발송된 계약은 '재발송(새 버전)' 버튼으로 새 버전을 만들고 목록을 다시 불러온다", async () => {
+    (listTrialOnboardingCandidatesAction as ReturnType<typeof vi.fn>).mockResolvedValue([]);
+    (listRegularConversionCandidatesAction as ReturnType<typeof vi.fn>).mockResolvedValue([
+      {
+        subjectEnrollmentId: "se1",
+        childId: "child1",
+        contractId: "contract1",
+        childName: "학생",
+        subjectName: "SAT Math",
+        guardianEmail: "g@example.com",
+        guardianName: "학부모",
+        contractStatus: "active",
+        latestVersionHasEnvelope: true,
+      },
+    ]);
+    (createNewContractVersionForResend as ReturnType<typeof vi.fn>).mockResolvedValue({
+      contractVersionId: "v2",
+    });
+
+    render(<TrialOnboardingPanel />);
+
+    const resendButton = await screen.findByRole("button", { name: "재발송(새 버전)" });
+    fireEvent.click(resendButton);
+
+    await waitFor(() => expect(createNewContractVersionForResend).toHaveBeenCalledWith({ contractId: "contract1" }));
+    // onSent()가 목록을 다시 불러온다 — 최초 1회 + 재발송 후 1회.
+    await waitFor(() => expect(listRegularConversionCandidatesAction).toHaveBeenCalledTimes(2));
   });
 
   it("계약 발송은 확인 단계를 거치고, 실패 시 재처리 안내를 보여준다(중복 발송 없음)", async () => {

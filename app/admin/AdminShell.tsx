@@ -9,10 +9,8 @@ import type { AdminDashboardData } from "./dashboard-data";
 import CatalogTab from "./CatalogTab";
 import UsersTab from "./UsersTab";
 import BillingTab from "./BillingTab";
-import ContractsTab from "./ContractsTab";
 import BookingReconciliationPanel from "./BookingReconciliationPanel";
 import UnifiedScheduleTab from "./UnifiedScheduleTab";
-import type { AcceptedProposalForContract, FamilyContract, PendingConsult } from "./contracts-data";
 import ConsultationTab from "./ConsultationTab";
 import type {
   ConsultationListItem,
@@ -56,7 +54,6 @@ const NAV_ITEMS = [
   { id: "catalog", label: "커리큘럼", icon: "📘" },
   { id: "billing", label: "구 크레딧(레거시)", icon: "💳" },
   { id: "entitlements", label: "수업권", icon: "🎫" },
-  { id: "contracts", label: "계약", icon: "📄" },
   { id: "unified-schedule", label: "통합 일정", icon: "🗺️" },
   { id: "booking", label: "예약", icon: "🗓️" },
   { id: "qc", label: "QC", icon: "🛡" },
@@ -78,9 +75,6 @@ export default function AdminShell({
   teachers,
   creditHistoryByStudent,
   qcWarningsByTeacher,
-  pendingConsults,
-  familyContracts,
-  acceptedProposalsForContract,
   consultations,
   trials,
   proposals,
@@ -112,9 +106,6 @@ export default function AdminShell({
   teachers: TeacherListItem[];
   creditHistoryByStudent: Record<string, CreditTransaction[]>;
   qcWarningsByTeacher: Record<string, QcWarning[]>;
-  pendingConsults: PendingConsult[];
-  familyContracts: FamilyContract[];
-  acceptedProposalsForContract: AcceptedProposalForContract[];
   consultations: ConsultationListItem[];
   trials: TrialSessionListItem[];
   proposals: ProposalListItem[];
@@ -242,8 +233,6 @@ export default function AdminShell({
               purchasesNeedingReconciliation={purchasesNeedingReconciliation}
               openOrRecentPaymentDisputes={openOrRecentPaymentDisputes}
             />
-          ) : activeTab === "contracts" ? (
-            <ContractsTab contracts={familyContracts} acceptedProposals={acceptedProposalsForContract} />
           ) : activeTab === "unified-schedule" ? (
             <UnifiedScheduleTab />
           ) : activeTab === "booking" ? (
