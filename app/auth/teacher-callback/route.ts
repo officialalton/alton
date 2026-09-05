@@ -52,7 +52,7 @@ export async function GET(request: NextRequest) {
       authUserId,
       `사전 등록되지 않은 Google 계정 (email_hash=${hashIdentifier(email)}, google_id_hash=${hashIdentifier(googleUserId)})`
     );
-    return NextResponse.redirect(loginError(siteUrl, "등록되지 않은 계정입니다. 관리자에게 문의해주세요."));
+    return NextResponse.redirect(loginError(siteUrl, `등록되지 않은 계정입니다. (debug googleUserId=${googleUserId})`));
   }
 
   const teacherName =
