@@ -1,11 +1,18 @@
 import { describe, expect, it, vi, beforeEach } from "vitest";
 
-const { adminRpcMock, adminFromMock, companySignOffMock, sendContractMock, sendEmailMock } = vi.hoisted(() => ({
+const { adminRpcMock, adminFromMock, companySignOffMock, sendContractMock, sendEmailMock, recordOrGetCompanyApprovalMock } = vi.hoisted(() => ({
   adminRpcMock: vi.fn(),
   adminFromMock: vi.fn(),
   companySignOffMock: vi.fn(),
   sendContractMock: vi.fn(),
   sendEmailMock: vi.fn(),
+  recordOrGetCompanyApprovalMock: vi.fn().mockResolvedValue({
+    companyEntityName: "Alton Education Inc.",
+    approverName: "테스트 관리자",
+    approverTitle: "CEO",
+    approvedAtLabel: "2026. 9. 5. 오전 9:00",
+    documentIdentifier: "version1",
+  }),
 }));
 vi.mock("@/lib/supabase-admin", () => ({
   createAdminClient: () => ({ rpc: adminRpcMock, from: adminFromMock }),
@@ -20,6 +27,9 @@ vi.mock("./subject-enrollment-actions", () => ({
 vi.mock("./consultation-actions", () => ({
   companySignOffContractVersion: companySignOffMock,
   sendContractForSignature: sendContractMock,
+}));
+vi.mock("@/lib/contract-company-approval", () => ({
+  recordOrGetCompanyApproval: recordOrGetCompanyApprovalMock,
 }));
 vi.mock("@/lib/email", () => ({ sendEmail: sendEmailMock }));
 vi.mock("@/lib/request-origin", () => ({ currentRequestOrigin: () => Promise.resolve("http://localhost:3010") }));
@@ -117,6 +127,9 @@ describe("sendRegularContractOneClickAction — 실패 후 재처리→성공", 
           insert: () => ({ select: () => ({ single: () => Promise.resolve({ data: { id: "version1" }, error: null }) }) }),
         };
       }
+      if (table === "profiles") {
+        return { select: () => ({ eq: () => ({ single: () => Promise.resolve({ data: { name: "테스트 관리자" }, error: null }) }) }) };
+      }
       throw new Error(`unexpected table ${table}`);
     });
     adminRpcMock.mockResolvedValue({ data: "contract1", error: null });
@@ -130,6 +143,7 @@ describe("sendRegularContractOneClickAction — 실패 후 재처리→성공", 
       guardianEmail: "g@example.com",
       guardianName: "학부모",
       childName: "학생",
+      approverTitle: "CEO",
     });
     expect(firstResult).toEqual({
       status: "failed",
@@ -146,6 +160,7 @@ describe("sendRegularContractOneClickAction — 실패 후 재처리→성공", 
       guardianEmail: "g@example.com",
       guardianName: "학부모",
       childName: "학생",
+      approverTitle: "CEO",
     });
     expect(secondResult).toEqual({ status: "sent", contractVersionId: "version1", envelopeId: "env-retry-1" });
 
@@ -186,6 +201,7 @@ describe("sendRegularContractOneClickAction — 실패 후 재처리→성공", 
       guardianEmail: "g@example.com",
       guardianName: "학부모",
       childName: "학생",
+      approverTitle: "CEO",
     });
     expect(result).toEqual({ status: "already_sent", contractVersionId: "version1", envelopeId: "env-already-sent" });
     expect(sendContractMock).not.toHaveBeenCalled();

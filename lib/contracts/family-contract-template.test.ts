@@ -1,9 +1,17 @@
 import { describe, expect, it } from "vitest";
 import { renderFamilyContractHtml } from "./family-contract-template";
 
+const testCompanyApproval = {
+  companyEntityName: "Alton Education Inc.",
+  approverName: "테스트 관리자",
+  approverTitle: "CEO",
+  approvedAtLabel: "2026. 9. 5. 오전 9:00",
+  documentIdentifier: "cv1",
+};
+
 describe("renderFamilyContractHtml", () => {
   it("미성년 학생 계약에 보호자·학생 이름과 단일 서명 anchor를 포함한다", () => {
-    const html = renderFamilyContractHtml({ parentName: "김민지", studentName: "지훈" });
+    const html = renderFamilyContractHtml({ parentName: "김민지", studentName: "지훈", companyApproval: testCompanyApproval });
 
     expect(html).toContain("김민지");
     expect(html).toContain("지훈");
@@ -34,6 +42,7 @@ describe("renderFamilyContractHtml", () => {
       signerType: "adult_student",
       signerName: "이성인",
       studentName: "이성인",
+      companyApproval: testCompanyApproval,
     });
 
     expect(html).toContain("성년 학생 본인");
@@ -42,7 +51,7 @@ describe("renderFamilyContractHtml", () => {
   });
 
   it("계약자·학생 이름을 HTML escape한다", () => {
-    const html = renderFamilyContractHtml({ parentName: '<부모 & "A">', studentName: "<학생>" });
+    const html = renderFamilyContractHtml({ parentName: '<부모 & "A">', studentName: "<학생>", companyApproval: testCompanyApproval });
 
     expect(html).toContain("&lt;부모 &amp; &quot;A&quot;&gt;");
     expect(html).toContain("&lt;학생&gt;");

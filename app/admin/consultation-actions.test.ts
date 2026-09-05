@@ -6,6 +6,13 @@ vi.mock("@/lib/admin-auth", () => ({
 }));
 
 const createEnvelopeMock = vi.fn().mockResolvedValue({ envelopeId: "env-1" });
+const testCompanyApproval = {
+  companyEntityName: "Alton Education Inc.",
+  approverName: "테스트 관리자",
+  approverTitle: "CEO",
+  approvedAtLabel: "2026. 9. 5. 오전 9:00",
+  documentIdentifier: "cv1",
+};
 const assertDocusignSandboxBaseUriMock = vi.fn();
 const getEnvelopeStatusMock = vi.fn();
 vi.mock("@/lib/docusign", () => ({
@@ -291,6 +298,7 @@ describe("sendContractForSignature — production base URI guardrail", () => {
         recipientName: "김민지",
         childName: "지훈",
         webhookUrl: "https://example.com/webhook",
+        companyApproval: testCompanyApproval,
       })
     ).rejects.toThrow("production으로 보이는 base URI");
 
@@ -308,6 +316,7 @@ describe("sendContractForSignature — production base URI guardrail", () => {
       recipientName: "김민지",
       childName: "지훈",
       webhookUrl: "https://example.com/webhook",
+      companyApproval: testCompanyApproval,
     });
 
     expect(result.envelopeId).toBe("env-1");
@@ -331,8 +340,9 @@ describe("sendContractForSignature — production base URI guardrail", () => {
         recipientName: "김민지",
         childName: "지훈",
         webhookUrl: "https://example.com/webhook",
+        companyApproval: testCompanyApproval,
       })
-    ).rejects.toThrow("회사 선서명");
+    ).rejects.toThrow("회사 승인");
 
     expect(createEnvelopeMock).not.toHaveBeenCalled();
   });
@@ -347,6 +357,7 @@ describe("sendContractForSignature — production base URI guardrail", () => {
       recipientName: "김민지",
       childName: "지훈",
       webhookUrl: "https://example.com/webhook",
+      companyApproval: testCompanyApproval,
     });
 
     expect(contractVersionsSupersedeMock).toHaveBeenCalled();

@@ -126,7 +126,7 @@ describe("TrialOnboardingPanel", () => {
 
     render(<TrialOnboardingPanel />);
 
-    const sendButton = await screen.findByRole("button", { name: "정규 계약 발송" });
+    const sendButton = await screen.findByRole("button", { name: "회사 승인 및 계약 발송" });
     expect(sendButton).toBeDisabled();
     expect(screen.getByText(/발송 차단/)).toBeInTheDocument();
   });
@@ -152,10 +152,11 @@ describe("TrialOnboardingPanel", () => {
 
     render(<TrialOnboardingPanel />);
 
-    fireEvent.click(await screen.findByRole("button", { name: "정규 계약 발송" }));
-    expect(await screen.findByText(/회사 선서명과 DocuSign 발송이 한 번에/)).toBeInTheDocument();
+    fireEvent.click(await screen.findByRole("button", { name: "회사 승인 및 계약 발송" }));
+    expect(await screen.findByText(/회사가 이 계약 버전을 전자승인한 기록/)).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole("button", { name: "확인 — 선서명 + 발송 실행" }));
+    fireEvent.change(screen.getByPlaceholderText("예: CEO, 운영팀장"), { target: { value: "CEO" } });
+    fireEvent.click(screen.getByRole("button", { name: "확인 — 회사 승인 및 발송 실행" }));
 
     await screen.findByText(/발송 실패 — 관리자 조치 필요/);
     expect(sendRegularContractOneClickAction).toHaveBeenCalledTimes(1);

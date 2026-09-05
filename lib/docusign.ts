@@ -1,5 +1,5 @@
 import { createHmac, createSign, timingSafeEqual } from "crypto";
-import { SIGNATURE_ANCHOR } from "@/lib/contracts/family-contract-template";
+import { SIGNATURE_ANCHOR, DATE_SIGNED_ANCHOR } from "@/lib/contracts/family-contract-template";
 
 // R3: DocuSign 연동을 레거시 "family 단위 1회성 계약" 흐름에서 자녀별
 // contract_version 기반 흐름으로 일반화한다. JWT 인증(getAccessToken)
@@ -117,6 +117,7 @@ export async function createEnvelope(params: {
   webhookUrl: string;
 }): Promise<{ envelopeId: string }> {
   assertAnchorPresentInDocumentHtml(params.documentHtml, SIGNATURE_ANCHOR);
+  assertAnchorPresentInDocumentHtml(params.documentHtml, DATE_SIGNED_ANCHOR);
   if (!isDocusignRealCallsAllowed()) {
     throw new Error(
       "DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS=true가 아니면 실제 DocuSign API를 호출하지 않습니다."
@@ -157,6 +158,15 @@ export async function createEnvelope(params: {
                   // 생략한다 — 서명 불가능한 봉투가 에러 없이 발송되는 실패 모드를
                   // 막기 위해 명시적으로 false로 설정해 실패 시 DocuSign이 에러를
                   // 던지게 한다.
+                  anchorIgnoreIfNotPresent: "false",
+                },
+              ],
+              dateSignedTabs: [
+                {
+                  anchorString: DATE_SIGNED_ANCHOR,
+                  anchorUnits: "pixels",
+                  anchorXOffset: "0",
+                  anchorYOffset: "-10",
                   anchorIgnoreIfNotPresent: "false",
                 },
               ],

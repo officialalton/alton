@@ -500,6 +500,7 @@ function RegularContractRow({
   onSent: () => void;
 }) {
   const [confirming, setConfirming] = useState(false);
+  const [approverTitle, setApproverTitle] = useState("");
   const [busy, setBusy] = useState(false);
   const [result, setResult] = useState<
     { status: "sent" | "already_sent"; envelopeId: string; at: string } | { status: "failed"; error: string } | null
@@ -548,17 +549,27 @@ function RegularContractRow({
           onClick={() => setConfirming(true)}
           className="text-[12px] font-bold px-3 py-1.5 mt-2.5 rounded-lg bg-ink text-white disabled:opacity-50"
         >
-          {result?.status === "failed" ? "다시 시도" : isSent ? "발송 완료" : "정규 계약 발송"}
+          {result?.status === "failed" ? "다시 시도" : isSent ? "발송 완료" : "회사 승인 및 계약 발송"}
         </button>
       ) : (
         <div className="mt-2.5 bg-grey-50 rounded-lg px-3.5 py-3">
           <p className="text-[12px] text-ink mb-2">
-            확인 버튼을 누르면 <b>회사 선서명과 DocuSign 발송이 한 번에</b> 처리됩니다. 별도의
-            제안서·회사승인 단계는 없습니다. 수신자: <b>{item.guardianEmail}</b>
+            확인 버튼을 누르면 <b>회사가 이 계약 버전을 전자승인한 기록(계약 주체·승인자·직함·승인
+            일시·문서 식별값)이 계약서에 삽입된 뒤 DocuSign으로 발송</b>됩니다. 도장 이미지나
+            DocuSign 전자서명이 아니라 인증된 관리자의 승인 기록입니다. 수신자: <b>{item.guardianEmail}</b>
           </p>
+          <label className="block text-[11px] font-semibold text-grey-500 mb-2">
+            승인자 직함(계약서에 그대로 인쇄됩니다)
+            <input
+              className="w-full mt-0.5 border border-grey-300 rounded px-2 py-1.5 text-[12.5px]"
+              value={approverTitle}
+              onChange={(e) => setApproverTitle(e.target.value)}
+              placeholder="예: CEO, 운영팀장"
+            />
+          </label>
           <div className="flex gap-2">
             <button
-              disabled={busy}
+              disabled={busy || !approverTitle.trim()}
               aria-busy={busy}
               onClick={async () => {
                 setBusy(true);
@@ -569,6 +580,7 @@ function RegularContractRow({
                     guardianEmail: item.guardianEmail!,
                     guardianName: item.guardianName!,
                     childName: item.childName,
+                    approverTitle: approverTitle.trim(),
                   });
                   if (outcome.status === "failed") {
                     setResult({ status: "failed", error: outcome.error });
@@ -583,7 +595,7 @@ function RegularContractRow({
               }}
               className="text-[12px] font-bold px-3.5 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
             >
-              {busy ? "발송 처리 중..." : "확인 — 선서명 + 발송 실행"}
+              {busy ? "발송 처리 중..." : "확인 — 회사 승인 및 발송 실행"}
             </button>
             <button
               disabled={busy}

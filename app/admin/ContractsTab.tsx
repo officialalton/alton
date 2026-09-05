@@ -244,6 +244,15 @@ function ContractDetail({
                       recipientName,
                       childName: contract.studentName,
                       webhookUrl: `${siteUrl}/api/webhooks/docusign`,
+                      // 레거시 경로(M4 TrialOnboardingPanel로 superseded) — 회사 전자승인
+                      // 감사 이력을 이 화면에서는 아직 채우지 않는다.
+                      companyApproval: {
+                        companyEntityName: "Alton Education Inc.",
+                        approverName: "[레거시 경로 — 승인자 미기록]",
+                        approverTitle: null,
+                        approvedAtLabel: "[레거시 경로 — 미기록]",
+                        documentIdentifier: latestVersion.id,
+                      },
                     });
                   })
                 }

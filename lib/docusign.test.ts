@@ -101,7 +101,7 @@ describe("createEnvelope", () => {
     const result = await createEnvelope({
       recipientEmail: "parent@example.com",
       recipientName: "김민지",
-      documentHtml: "<p>계약서 /sig1/</p>",
+      documentHtml: "<p>계약서 /sig1/ /date1/</p>",
       emailSubject: "Alton Education 서비스 이용 계약서",
       webhookUrl: "https://alton-ecru.vercel.app/api/webhooks/docusign?token=secret",
     });
@@ -165,7 +165,7 @@ describe("createEnvelope", () => {
       createEnvelope({
         recipientEmail: "parent@example.com",
         recipientName: "김민지",
-        documentHtml: "<p>/sig1/</p>",
+        documentHtml: "<p>/sig1/ /date1/</p>",
         emailSubject: "제목",
         webhookUrl: "https://example.com/webhook",
       })
@@ -182,7 +182,7 @@ describe("createEnvelope", () => {
       createEnvelope({
         recipientEmail: "parent@example.com",
         recipientName: "김민지",
-        documentHtml: "<p>/sig1/</p>",
+        documentHtml: "<p>/sig1/ /date1/</p>",
         emailSubject: "제목",
         webhookUrl: "https://example.com/webhook",
       })

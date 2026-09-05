@@ -3,7 +3,7 @@
 import { requireAdmin, requireAdminOrCapability } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { createEnvelope, assertDocusignSandboxBaseUri, getEnvelopeStatus } from "@/lib/docusign";
-import { renderFamilyContractHtml } from "@/lib/contracts/family-contract-template";
+import { renderFamilyContractHtml, type CompanyApprovalForTemplate } from "@/lib/contracts/family-contract-template";
 import { processOneDriveArtifact, MAX_RETRY_COUNT, type DriveArtifactRow } from "@/lib/drive-artifacts";
 
 // R3: 상담(consultation) → 체험(trial) → 제안서(proposal) → 계약(contract) 최소
@@ -519,9 +519,14 @@ export async function createContractFromProposal(params: {
 }
 
 /**
- * 회사(ALTON) 측 선서명 승인. 정책: "회사 서명이 완료된 계약 버전만 보호자에게
- * 발송 가능" — sendContractForSignature는 이 함수로 company_signed_at이 채워진
- * 버전이 아니면 발송을 거부한다.
+ * 회사(ALTON) 측 전자승인. 정책: "회사가 승인한 계약 버전만 보호자에게 발송
+ * 가능" — sendContractForSignature는 이 함수로 company_signed_at이 채워진
+ * 버전이 아니면 발송을 거부한다. 이 함수 자체는 게이트(승인 여부 플래그)만
+ * 갱신하고, 승인자·직함·계약 주체·문서 식별값 등 실제 감사 내용은
+ * lib/contract-company-approval.ts의 recordOrGetCompanyApproval이 별도
+ * 변경 불가능한 감사 이력(contract_company_approvals)에 남긴다(사용자 확정,
+ * 2026-09-05: 회사 측은 DocuSign 전자서명이 아니라 인증된 관리자의 전자승인
+ * 기록을 계약서에 삽입하는 방식).
  */
 export async function companySignOffContractVersion(contractVersionId: string): Promise<void> {
   const { adminUserId: actorUserId } = await requireAdmin();
@@ -548,6 +553,7 @@ export async function sendContractForSignature(params: {
   recipientName: string;
   childName: string;
   webhookUrl: string;
+  companyApproval: CompanyApprovalForTemplate;
 }): Promise<{ envelopeId: string }> {
   await requireAdmin();
   assertDocusignSandboxBaseUri();
@@ -562,7 +568,7 @@ export async function sendContractForSignature(params: {
   if (versionError) throw new Error(versionError.message);
   if (!version) throw new Error("존재하지 않는 계약 버전입니다.");
   if (!version.company_signed_at) {
-    throw new Error("회사 선서명이 완료되지 않은 계약 버전은 보호자에게 발송할 수 없습니다. companySignOffContractVersion을 먼저 호출하세요.");
+    throw new Error("회사 승인이 완료되지 않은 계약 버전은 보호자에게 발송할 수 없습니다. companySignOffContractVersion을 먼저 호출하세요.");
   }
 
   const { envelopeId } = await createEnvelope({
@@ -571,6 +577,7 @@ export async function sendContractForSignature(params: {
     documentHtml: renderFamilyContractHtml({
       parentName: params.recipientName,
       studentName: params.childName,
+      companyApproval: params.companyApproval,
     }),
     emailSubject: "Alton Education 서비스 이용 계약서",
     webhookUrl: params.webhookUrl,

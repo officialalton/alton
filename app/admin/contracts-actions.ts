@@ -41,6 +41,15 @@ export async function sendFamilyContract(params: {
     documentHtml: renderFamilyContractHtml({
       parentName: consult.person_name,
       studentName: params.studentName,
+      // 레거시 경로(v2 consult_requests 기반) — 회사 전자승인 감사 이력이 없어
+      // 실제 값을 채울 수 없다. 현재 UI에서 호출되지 않는 superseded 경로.
+      companyApproval: {
+        companyEntityName: "Alton Education Inc.",
+        approverName: "[레거시 경로 — 승인자 미기록]",
+        approverTitle: null,
+        approvedAtLabel: "[레거시 경로 — 미기록]",
+        documentIdentifier: "[레거시 경로 — 미기록]",
+      },
     }),
     emailSubject: "Alton Education 서비스 이용 계약서",
     webhookUrl: `${siteUrl}/api/webhooks/docusign?token=${webhookToken}`,

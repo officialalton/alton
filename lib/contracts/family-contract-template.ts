@@ -2,6 +2,20 @@
 // DocuSign 콘솔에는 별도 템플릿을 만들지 않고 이 HTML 전체를 문서 1개로 발송한다.
 // 법률 검토 전 초안이며 Production 발송에 사용하지 않는다.
 export const SIGNATURE_ANCHOR = "/sig1/";
+export const DATE_SIGNED_ANCHOR = "/date1/";
+
+// 회사 측 처리 방식 확정(사용자 지시, 2026-09-05): DocuSign 전자서명이 아니라
+// "인증된 관리자의 전자승인 기록을 계약서에 삽입 후 발송"이다. 아래 필드는
+// DocuSign 서명 필드가 아니라 문서 본문에 그대로 인쇄되는 텍스트다 — 발송 전
+// contract_company_approvals(변경 불가능한 감사 이력)에서 그대로 가져와야
+// 실제 저장된 값과 문서가 항상 일치한다.
+export type CompanyApprovalForTemplate = {
+  companyEntityName: string;
+  approverName: string;
+  approverTitle: string | null;
+  approvedAtLabel: string;
+  documentIdentifier: string;
+};
 
 export type FamilyContractTemplateParams = {
   studentName: string;
@@ -11,6 +25,7 @@ export type FamilyContractTemplateParams = {
   signerType?: "guardian" | "adult_student";
   contractId?: string;
   contractVersion?: string;
+  companyApproval: CompanyApprovalForTemplate;
 };
 
 function escapeHtml(value: string): string {
@@ -32,6 +47,12 @@ export function renderFamilyContractHtml(params: FamilyContractTemplateParams): 
   const relationshipLabel = signerType === "adult_student" ? "본인" : "부모 또는 법정대리인";
   const contractId = escapeHtml(params.contractId?.trim() || "[자동 입력]");
   const contractVersion = escapeHtml(params.contractVersion?.trim() || "v0.2-draft");
+  const companyApproval = params.companyApproval;
+  const companyEntityName = escapeHtml(companyApproval.companyEntityName);
+  const approverName = escapeHtml(companyApproval.approverName);
+  const approverTitle = companyApproval.approverTitle ? escapeHtml(companyApproval.approverTitle) : null;
+  const companyApprovedAtLabel = escapeHtml(companyApproval.approvedAtLabel);
+  const companyDocumentIdentifier = escapeHtml(companyApproval.documentIdentifier);
 
   if (!studentName || !signerName) {
     throw new Error("계약서 생성에는 학생명과 계약자명이 필요합니다.");
@@ -251,12 +272,21 @@ export function renderFamilyContractHtml(params: FamilyContractTemplateParams): 
   <p>미성년 학생의 보호자는 본 계약에 서명함으로써 학생을 위하여 계약하고 개인정보 처리에 동의할 권한이 있음을 확인합니다. 만 13세 미만 학생의 보호자 확인은 본 계약 DocuSign 서명·이메일 확인과 해당 시 최초 결제 거래기록으로 남깁니다. 정부 신분증은 별도 필요가 확인되지 않는 한 수집하지 않습니다. 이 부속서에는 별도 체크박스나 별도 서명란이 없습니다.</p>
 
   <div class="signature">
+    <h2>회사 전자승인</h2>
+    <p>계약 주체: ${companyEntityName}</p>
+    <p>승인자: ${approverName}${approverTitle ? ` (${approverTitle})` : ""}</p>
+    <p>회사 승인 일시: ${companyApprovedAtLabel}</p>
+    <p>문서 식별값: ${companyDocumentIdentifier}</p>
+    <p class="draft">회사 전자승인의 계약 효력 발생 시점 등 관련 법률 문구는 별도 법률 검토 후 확정 예정입니다(R10 blocker).</p>
+  </div>
+
+  <div class="signature">
     <h2>계약자 전자서명</h2>
     <p>본인은 구매·취소·환불 조건과 제12조의 필수 AI 수업 회의록·개인정보 처리를 포함한 계약 전체를 읽고 이해했습니다.</p>
     <p>계약자 유형: ${signerTypeLabel}</p>
     <p>계약자 성명: ${signerName}</p>
     <p style="margin-top: 42px;">전자서명: ${SIGNATURE_ANCHOR}</p>
-    <p>서명일시 및 시간대: [DocuSign 자동 기록]</p>
+    <p>서명일시 및 시간대: ${DATE_SIGNED_ANCHOR}</p>
   </div>
 </body>
 </html>`;
