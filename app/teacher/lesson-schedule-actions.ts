@@ -56,3 +56,42 @@ export async function cancelMyLessonScheduleBooking(params: { reservationId: str
     reason: params.reason,
   });
 }
+
+/**
+ * M5-a — 수업 시작("진행중") 버튼. 본인 세션인지 admin 클라이언트로 재확인한 뒤
+ * mark_lesson_session_started()(scheduled→live, actual_start_at 기록)를 호출한다.
+ */
+export async function startMyLessonSession(sessionId: string): Promise<void> {
+  const { user } = await requireUser();
+  const admin = createAdminClient();
+  const { data } = await admin.from("sessions").select("teacher_id").eq("id", sessionId).maybeSingle();
+  if (!data || data.teacher_id !== user.id) {
+    throw new Error("본인 수업만 시작할 수 있습니다.");
+  }
+  const { error } = await admin.rpc("mark_lesson_session_started", { p_session_id: sessionId, p_actor_id: user.id });
+  if (error) throw new Error(error.message);
+}
+
+export type TeacherLessonOutcome = "completed" | "student_no_show";
+
+/**
+ * M5-a — 수업 종료 버튼. 정상 완료 또는(15분 미접속 후) 학생 최종 노쇼 확정만 선생님이
+ * 직접 할 수 있다(선생님 본인의 노쇼는 본인이 판정할 수 없으므로 관리자 전용 —
+ * app/admin/booking-actions.ts의 adminFinalizeLessonSession). finalize_lesson_session()이
+ * 1장 소진/release, payable_minutes, 정산 항목 적재를 단일 트랜잭션으로 처리한다.
+ */
+export async function finalizeMyLessonSession(params: { sessionId: string; outcome: TeacherLessonOutcome; reason: string }): Promise<void> {
+  const { user } = await requireUser();
+  const admin = createAdminClient();
+  const { data } = await admin.from("sessions").select("teacher_id").eq("id", params.sessionId).maybeSingle();
+  if (!data || data.teacher_id !== user.id) {
+    throw new Error("본인 수업만 종료할 수 있습니다.");
+  }
+  const { error } = await admin.rpc("finalize_lesson_session", {
+    p_session_id: params.sessionId,
+    p_outcome: params.outcome,
+    p_actor_id: user.id,
+    p_reason: params.reason,
+  });
+  if (error) throw new Error(error.message);
+}

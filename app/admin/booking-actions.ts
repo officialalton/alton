@@ -424,3 +424,160 @@ export async function retryExternalCalendarReconciliationNow(): Promise<{ teache
   }
   return { teachersChecked, changesDetected };
 }
+
+// =========================================================================
+// M5-a(R7) — 세션 최종판정·관리자 보정. 접속기록(session_incident_reports/
+// session_access_events)은 증거일 뿐 이 화면에서 관리자가 명확한 규칙 기반 함수
+// (finalize_lesson_session/reopen_session/recomplete_session)로 확정해야만
+// 최종 판정이 된다(자동 확정 없음 — 요구사항 5).
+// =========================================================================
+
+export type SessionJudgmentRow = {
+  sessionId: string;
+  reservationId: string;
+  teacherName: string | null;
+  studentName: string | null;
+  subjectName: string | null;
+  startsAt: string;
+  endsAt: string;
+  finalStatus: string;
+  isTrial: boolean;
+  incidentReportCount: number;
+};
+
+function toSessionJudgmentRows(
+  data: Array<Record<string, unknown>>,
+  incidentCountBySession: Map<string, number>
+): SessionJudgmentRow[] {
+  function one<T>(rel: T | T[] | null | undefined): T | null {
+    return Array.isArray(rel) ? (rel[0] ?? null) : (rel ?? null);
+  }
+  return (data ?? []).map((row) => {
+    const reservation = one(row.reservation as unknown) as { id?: string; starts_at?: string; ends_at?: string } | null;
+    const subjectEnrollment = one(row.subject_enrollment as unknown) as { subject?: unknown; child?: unknown } | null;
+    const teacher = one(row.teacher as unknown) as { name?: string } | null;
+    const lessonType = one(row.lesson_type as unknown) as { code?: string } | null;
+    return {
+      sessionId: row.id as string,
+      reservationId: reservation?.id ?? "",
+      teacherName: teacher?.name ?? null,
+      studentName: (one(subjectEnrollment?.child as unknown) as { name?: string } | null)?.name ?? null,
+      subjectName: (one(subjectEnrollment?.subject as unknown) as { name?: string } | null)?.name ?? null,
+      startsAt: reservation?.starts_at ?? "",
+      endsAt: reservation?.ends_at ?? "",
+      finalStatus: row.final_status as string,
+      isTrial: lessonType?.code === "trial",
+      incidentReportCount: incidentCountBySession.get(row.id as string) ?? 0,
+    };
+  });
+}
+
+const SESSION_JUDGMENT_SELECT =
+  "id, final_status, lesson_type:lesson_types(code), teacher:profiles!sessions_teacher_id_fkey(name), " +
+  "reservation:reservations!sessions_reservation_id_fkey(id, starts_at, ends_at), " +
+  "subject_enrollment:subject_enrollments!sessions_subject_enrollment_id_fkey(subject:subjects(name), child:profiles!subject_enrollments_child_id_fkey(name))";
+
+async function incidentReportCounts(admin: ReturnType<typeof createAdminClient>, sessionIds: string[]): Promise<Map<string, number>> {
+  if (sessionIds.length === 0) return new Map();
+  const { data } = await admin.from("session_incident_reports").select("session_id").in("session_id", sessionIds);
+  const counts = new Map<string, number>();
+  for (const r of data ?? []) {
+    const id = r.session_id as string;
+    counts.set(id, (counts.get(id) ?? 0) + 1);
+  }
+  return counts;
+}
+
+/**
+ * 예약 시간이 이미 지났는데 아직 최종판정(final_status)이 'scheduled'/'live'로 남아있는
+ * 세션 — 선생님이 "수업 종료"를 누르지 않았거나 판정이 필요한 건들. 관리자가 이 화면에서
+ * finalize_lesson_session()으로 직접 확정한다.
+ */
+export async function listSessionsNeedingFinalJudgment(): Promise<SessionJudgmentRow[]> {
+  await requireAdminOrCapability(BOOKING_CAPABILITY);
+  const admin = createAdminClient();
+  const { data, error } = await admin
+    .from("sessions")
+    .select(SESSION_JUDGMENT_SELECT)
+    .in("final_status", ["scheduled", "live"])
+    .order("id", { ascending: true })
+    .limit(200);
+  if (error) throw new Error(error.message);
+
+  const rows = toSessionJudgmentRows(data as unknown as Array<Record<string, unknown>>, new Map());
+  const ended = rows.filter((r) => r.endsAt && new Date(r.endsAt).getTime() < Date.now());
+  const counts = await incidentReportCounts(admin, ended.map((r) => r.sessionId));
+  return ended.map((r) => ({ ...r, incidentReportCount: counts.get(r.sessionId) ?? 0 }));
+}
+
+/** 최근 확정(완료/노쇼/취소 등)된 세션 — 관리자가 재판정(reopen)이 필요한지 훑어보는 목록. */
+export async function listRecentlyFinalizedSessions(): Promise<SessionJudgmentRow[]> {
+  await requireAdminOrCapability(BOOKING_CAPABILITY);
+  const admin = createAdminClient();
+  const { data, error } = await admin
+    .from("sessions")
+    .select(SESSION_JUDGMENT_SELECT)
+    .not("final_status", "in", "(scheduled,live)")
+    .order("finalized_at", { ascending: false })
+    .limit(50);
+  if (error) throw new Error(error.message);
+  const rows = toSessionJudgmentRows(data as unknown as Array<Record<string, unknown>>, new Map());
+  const counts = await incidentReportCounts(admin, rows.map((r) => r.sessionId));
+  return rows.map((r) => ({ ...r, incidentReportCount: counts.get(r.sessionId) ?? 0 }));
+}
+
+export type SessionOutcome = "completed" | "student_no_show" | "teacher_no_show";
+
+/**
+ * 관리자가 15분 미접속 최종 노쇼를 확정하거나, 선생님이 종료 버튼을 누르지 않은 완료
+ * 수업을 대신 확정하거나, 선생님 노쇼를 확정한다. 4대 규칙(취소는 cancel_lesson_booking,
+ * 이 셋은 finalize_lesson_session)을 그대로 재사용 — 여기서 새 판정 로직을 만들지 않는다.
+ */
+export async function adminFinalizeLessonSession(params: {
+  sessionId: string;
+  outcome: SessionOutcome;
+  reason: string;
+}): Promise<void> {
+  const { actorUserId } = await requireAdminOrCapability(BOOKING_CAPABILITY);
+  const admin = createAdminClient();
+  const { error } = await admin.rpc("finalize_lesson_session", {
+    p_session_id: params.sessionId,
+    p_outcome: params.outcome,
+    p_actor_id: actorUserId,
+    p_reason: params.reason,
+  });
+  if (error) throw new Error(error.message);
+}
+
+/**
+ * 잘못 확정된 세션을 재검토 상태('live')로 되돌린다(append-only 이력 —
+ * session_status_events에 'reopened'로 남는다, 기존 행 UPDATE로 지우지 않음).
+ */
+export async function adminReopenSession(params: { sessionId: string; reason: string }): Promise<void> {
+  // reopen_session()/recomplete_session()은 내부에서 auth.uid() 기반 is_admin()을
+  // 검사하도록 설계됐다(R1 원본 코멘트) — service_role(admin 클라이언트)로 호출하면
+  // auth.uid()가 비어 항상 거부되므로, 반드시 RLS-scoped(로그인 세션) 클라이언트로 호출한다.
+  const { supabase } = await requireAdminOrCapability(BOOKING_CAPABILITY);
+  const { error } = await supabase.rpc("reopen_session", { p_session_id: params.sessionId, p_reason: params.reason });
+  if (error) throw new Error(error.message);
+}
+
+/**
+ * reopen_session() 이후 올바른 최종 상태로 재확정한다 — payable_minutes/정산 항목도
+ * 함께 재계산된다(M5-a 확장). entitlement 원장 자체의 반대 이벤트는 예약당 1건 제약상
+ * 자동 역전이 불가능해, 소진/해제 여부가 바뀌는 재판정은 EntitlementLedgerTab의 기존
+ * 관리자 조정 기능으로 수동 반영해야 한다(안내 문구는 화면에 표시).
+ */
+export async function adminRecompleteSession(params: {
+  sessionId: string;
+  newFinalStatus: SessionOutcome | "student_cancelled" | "teacher_cancelled" | "company_cancelled" | "interrupted";
+  reason: string;
+}): Promise<void> {
+  const { supabase } = await requireAdminOrCapability(BOOKING_CAPABILITY);
+  const { error } = await supabase.rpc("recomplete_session", {
+    p_session_id: params.sessionId,
+    p_new_final_status: params.newFinalStatus,
+    p_reason: params.reason,
+  });
+  if (error) throw new Error(error.message);
+}
