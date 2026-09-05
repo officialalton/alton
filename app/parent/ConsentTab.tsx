@@ -182,6 +182,20 @@ export default function ConsentTab({
                     {child.hasConsented ? "동의 완료" : "동의 필요"}
                   </span>
                 </div>
+                <p className="text-[12.5px] mb-3">
+                  {activePolicy?.documentUrl ? (
+                    <a
+                      href={activePolicy.documentUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-ink underline font-semibold"
+                    >
+                      Smart Notes 이용 원문 보기
+                    </a>
+                  ) : (
+                    <span className="text-grey-400">Smart Notes 이용 원문 준비 중</span>
+                  )}
+                </p>
                 {!child.hasConsented && (
                   <button
                     type="button"

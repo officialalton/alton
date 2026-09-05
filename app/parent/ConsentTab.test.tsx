@@ -123,6 +123,8 @@ describe("ConsentTab", () => {
     );
 
     expect(screen.getByTestId("trial-smart-notes-consent-card-student3")).toBeInTheDocument();
+    const link = screen.getByText("Smart Notes 이용 원문 보기");
+    expect(link.closest("a")).toHaveAttribute("href", activePolicy.documentUrl);
     fireEvent.click(screen.getByText("체험 Smart Notes 사용에 동의"));
 
     await waitFor(() => {
@@ -151,5 +153,19 @@ describe("ConsentTab", () => {
   it("체험 Smart Notes 동의가 필요한 자녀가 없으면 섹션 자체를 보여주지 않는다", () => {
     render(<ConsentTab children={[]} activePolicy={activePolicy} trialSmartNotesChildren={[]} />);
     expect(screen.queryByText("체험 Smart Notes 동의")).not.toBeInTheDocument();
+  });
+
+  it("정책 원문 링크가 없으면 '준비 중'을 보여준다(체험 Smart Notes 카드)", () => {
+    const trialSmartNotesChildren: TrialSmartNotesConsentStatus[] = [
+      { studentId: "student3", name: "장유안", hasConsented: false },
+    ];
+    render(
+      <ConsentTab
+        children={[]}
+        activePolicy={{ ...activePolicy, documentUrl: null }}
+        trialSmartNotesChildren={trialSmartNotesChildren}
+      />
+    );
+    expect(screen.getByText("Smart Notes 이용 원문 준비 중")).toBeInTheDocument();
   });
 });
