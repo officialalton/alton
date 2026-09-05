@@ -8,7 +8,10 @@ import {
   listMyTeachingHistoryForSubject,
 } from "./teacher-assignment-termination-actions";
 import type { TeachingHistoryItem } from "@/app/admin/teacher-assignment-termination-actions";
-import TrialReviewPanel from "./TrialReviewPanel";
+// M4 UAT #5 — 체험 수업 리뷰 작성 UI는 배정 탭에서 제거됐다. 진입 위치는
+// "정규수업" 탭(TeacherLessonScheduleTab)의 "예정된 수업" 목록으로 이동했다 —
+// 진행한 수업 내역이 실제로 보이는 화면에서 바로 리뷰를 작성하고, 확정하면
+// 그 세션이 "지난 수업"으로 넘어가는 흐름이 사용자 피드백이었다.
 
 // 새로 배정된 선생님이 해당 과목의 "과거" 수업 이력을 읽기전용으로 확인하는 위젯.
 // list_subject_teaching_history_for_current_teacher()가 호출자가 실제 현재 활성
@@ -199,8 +202,6 @@ export default function AssignmentsTab({
           </div>
         </details>
       )}
-
-      <TrialReviewPanel />
     </div>
   );
 }
