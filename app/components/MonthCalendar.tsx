@@ -84,10 +84,11 @@ export default function MonthCalendar({
                 "aspect-square rounded-lg text-[12px] flex flex-col items-center justify-center gap-0.5 " +
                 (isSelected
                   ? "bg-ink text-white font-bold"
-                  : cell.inCurrentMonth
-                    ? "text-ink hover:bg-grey-100"
-                    : "text-grey-200") +
-                (isToday && !isSelected ? " border-[1.5px] border-ink" : "") +
+                  : isToday
+                    ? "bg-grey-100 text-ink font-bold"
+                    : cell.inCurrentMonth
+                      ? "text-ink hover:bg-grey-100"
+                      : "text-grey-200") +
                 (hasExternalBusy ? " underline decoration-grey-500 decoration-2 underline-offset-2" : "")
               }
             >

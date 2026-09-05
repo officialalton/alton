@@ -4,6 +4,11 @@ import { useState } from "react";
 import { requestParentPayment } from "./credits-actions";
 import type { CreditsData } from "./credits-data";
 
+function formatDate(iso: string | null): string {
+  if (!iso) return "-";
+  return new Intl.DateTimeFormat("ko-KR", { year: "numeric", month: "long", day: "numeric" }).format(new Date(iso));
+}
+
 export default function CreditsTab({ data }: { data: CreditsData }) {
   const [requesting, setRequesting] = useState(false);
   const [confirmedFor, setConfirmedFor] = useState<string | null>(null);
@@ -29,6 +34,33 @@ export default function CreditsTab({ data }: { data: CreditsData }) {
       <p className="text-[13px] text-grey-500 mb-5">
         보유한 수업권 현황을 확인하세요. 충전은 학부모 계정에서 진행됩니다.
       </p>
+
+      {(data.regularRemaining > 0 || data.trialEntitlement) && (
+        <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4.5 mb-4">
+          <h2 className="text-[14px] font-bold text-ink mb-3">보유 수업권</h2>
+          {data.regularRemaining > 0 && (
+            <div className="mb-3">
+              <div className="text-[13px] font-bold text-ink">
+                정규수업권 잔여 {data.regularRemaining}회
+              </div>
+              <div className="text-[12px] text-grey-500">
+                가장 빠른 만료일: {formatDate(data.regularNearestExpiry)}
+              </div>
+            </div>
+          )}
+          {/* M2 — 60분 전용 체험수업권. 정규 수업권과 절대 합산하지 않고 별도로 보여준다
+              (구매·환불·양도 불가) — app/parent/EntitlementsTab.tsx와 동일한 표기. */}
+          {data.trialEntitlement && (
+            <div className="border-[1.5px] border-grey-200 rounded-lg px-3 py-2.5 bg-grey-50">
+              <p className="text-[12px] font-bold text-ink">체험수업권(60분) 1회 보유 중</p>
+              <p className="text-[11.5px] text-grey-500 mt-0.5">
+                만료 {formatDate(data.trialEntitlement.expiresAt)}까지 체험 수업이 시작해야 사용할 수 있습니다(그 이후로는
+                예약해도 사용할 수 없습니다) · 정규수업권과 별개이며 구매·환불·양도가 불가능합니다.
+              </p>
+            </div>
+          )}
+        </div>
+      )}
 
       <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4.5">
         <h2 className="text-[14px] font-bold text-ink mb-3">수업권 현황</h2>

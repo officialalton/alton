@@ -78,7 +78,7 @@ const lessonsProps = {
   homeworkTodo: [],
   homeworkDone: [],
   materialsLibrary: [],
-  credits: { balance: 0, guardianName: null },
+  credits: { balance: 0, guardianName: null, regularRemaining: 0, regularNearestExpiry: null, trialEntitlement: null },
   stats: { attendanceRate: null, satisfactionAvg: null, bySubject: [] },
   teacherList: [],
   teacherProfiles: {},
