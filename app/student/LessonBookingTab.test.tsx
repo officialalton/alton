@@ -19,8 +19,6 @@ const baseProps = {
   bookableEnrollments: [],
   upcomingBookings: [],
   pastSessionsForReport: [],
-  regularLessonTypeId: null,
-  lessonDurationMinutes: 120,
   timezone: "America/Los_Angeles",
   onListSlots: vi.fn().mockResolvedValue([]),
   onCreateBooking: vi.fn(),
@@ -61,6 +59,9 @@ const enrollment: BookableSubjectEnrollment = {
   subjectName: "SAT Math",
   teacherId: "t1",
   teacherName: "김선생",
+  lessonTypeId: "lt1",
+  lessonDurationMinutes: 120,
+  isTrial: false,
 };
 
 describe("LessonBookingTab — 월간 캘린더 예약", () => {
@@ -71,7 +72,6 @@ describe("LessonBookingTab — 월간 캘린더 예약", () => {
       <LessonBookingTab
         {...baseProps}
         bookableEnrollments={[enrollment]}
-        regularLessonTypeId="lt1"
         onListSlots={onListSlots}
       />
     );
@@ -88,7 +88,6 @@ describe("LessonBookingTab — 월간 캘린더 예약", () => {
       <LessonBookingTab
         {...baseProps}
         bookableEnrollments={[enrollment]}
-        regularLessonTypeId="lt1"
         onListSlots={onListSlots}
       />
     );
@@ -130,5 +129,53 @@ describe("LessonBookingTab — 예정된 수업 월간 보기", () => {
 
     const bookingCards = screen.getAllByText(/SAT Math · 김선생 선생님/);
     expect(bookingCards).toHaveLength(1);
+  });
+});
+
+const trialEnrollment: BookableSubjectEnrollment = {
+  subjectEnrollmentId: "e2",
+  subjectName: "AP Calculus AB",
+  teacherId: "t2",
+  teacherName: "장선생",
+  lessonTypeId: "lt-trial",
+  lessonDurationMinutes: 60,
+  isTrial: true,
+};
+
+describe("LessonBookingTab — 체험 학생도 직접 예약할 수 있어야 한다", () => {
+  it("체험 과목을 고르면 주 1회 반복 토글이 사라지고 1회만 예약할 수 있다는 안내가 보인다", async () => {
+    render(
+      <LessonBookingTab {...baseProps} bookableEnrollments={[trialEnrollment]} onListSlots={vi.fn().mockResolvedValue([])} />
+    );
+    expect(screen.queryByText("주 1회 반복(최대 8회)")).not.toBeInTheDocument();
+    expect(screen.getByText("체험 수업은 1회만 예약할 수 있습니다.")).toBeInTheDocument();
+  });
+
+  it("체험 과목의 예약은 체험 수업권(lessonTypeId)과 60분으로 onCreateBooking을 호출한다", async () => {
+    const slots = [new Date("2026-10-15T18:00:00.000Z")];
+    const onCreateBooking = vi.fn().mockResolvedValue({ reservationId: "r1", sessionId: "s1" });
+    render(
+      <LessonBookingTab
+        {...baseProps}
+        bookableEnrollments={[trialEnrollment]}
+        onListSlots={vi.fn().mockResolvedValue(slots)}
+        onCreateBooking={onCreateBooking}
+      />
+    );
+    await waitFor(() => expect(screen.getByTestId("selected-date-label")).toHaveTextContent(/10월 15일/));
+
+    fireEvent.click(screen.getAllByText(/오후|오전/)[0]);
+    fireEvent.click(screen.getByText("최종 확정"));
+
+    await waitFor(() =>
+      expect(onCreateBooking).toHaveBeenCalledWith(
+        expect.objectContaining({
+          subjectEnrollmentId: "e2",
+          teacherId: "t2",
+          lessonTypeId: "lt-trial",
+          durationMinutes: 60,
+        })
+      )
+    );
   });
 });

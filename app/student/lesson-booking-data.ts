@@ -11,6 +11,9 @@ export type BookableSubjectEnrollment = {
   subjectName: string;
   teacherId: string;
   teacherName: string;
+  lessonTypeId: string;
+  lessonDurationMinutes: number;
+  isTrial: boolean;
 };
 
 export type UpcomingBooking = {
@@ -35,8 +38,6 @@ export type LessonBookingData = {
   bookableEnrollments: BookableSubjectEnrollment[];
   upcomingBookings: UpcomingBooking[];
   pastSessionsForReport: PastSessionForReport[];
-  regularLessonTypeId: string | null;
-  lessonDurationMinutes: number;
   timezone: string;
 };
 
@@ -45,20 +46,50 @@ export async function loadLessonBookingData(
   childId: string
 ): Promise<LessonBookingData> {
   const enrollments = await loadStudentSubjectEnrollments(supabase, childId);
-  const bookableEnrollments: BookableSubjectEnrollment[] = enrollments
-    .filter((e) => e.status === "active" && e.currentTeacher)
-    .map((e) => ({
-      subjectEnrollmentId: e.id,
-      subjectName: e.subjectName,
-      teacherId: e.currentTeacher!.teacherId,
-      teacherName: e.currentTeacher!.teacherName,
-    }));
 
-  const { data: lessonType } = await supabase
+  const { data: lessonTypeRows } = await supabase
     .from("lesson_types")
-    .select("id, duration_minutes")
-    .eq("code", "regular")
-    .maybeSingle();
+    .select("id, code, duration_minutes")
+    .in("code", ["regular", "trial"]);
+  const regularType = (lessonTypeRows ?? []).find((t) => t.code === "regular") as
+    | { id: string; duration_minutes: number }
+    | undefined;
+  const trialType = (lessonTypeRows ?? []).find((t) => t.code === "trial") as
+    | { id: string; duration_minutes: number }
+    | undefined;
+
+  // 선생님이 배정되면(teacher_assignments active) 체험 학생도 정규수업과 동일하게
+  // 본인이 직접 예약할 수 있어야 한다 — 체험 단계에서는 subject_enrollments.status가
+  // 계약 활성화 전까지 'planned'로 남아있으므로, "체험수업권이 실제로 지급돼 있는지"로
+  // 예약 가능 여부를 대신 판단한다(실제 잔여량 검증은 예약 시점 hold_entitlement()가
+  // 최종 강제 — 여기서는 후보 목록만 보여준다).
+  let hasTrialGrant = false;
+  if (trialType) {
+    const { data: trialGrant } = await supabase
+      .from("entitlement_grants")
+      .select("id, entitlement_products!inner(code)")
+      .eq("child_id", childId)
+      .eq("entitlement_products.code", "trial_lesson_grant")
+      .gt("expires_at", new Date().toISOString())
+      .maybeSingle();
+    hasTrialGrant = !!trialGrant;
+  }
+
+  const bookableEnrollments: BookableSubjectEnrollment[] = enrollments
+    .filter((e) => e.currentTeacher && (e.status === "active" ? !!regularType : e.status === "planned" && hasTrialGrant && !!trialType))
+    .map((e) => {
+      const isTrial = e.status !== "active";
+      const type = isTrial ? trialType! : regularType!;
+      return {
+        subjectEnrollmentId: e.id,
+        subjectName: e.subjectName,
+        teacherId: e.currentTeacher!.teacherId,
+        teacherName: e.currentTeacher!.teacherName,
+        lessonTypeId: type.id,
+        lessonDurationMinutes: type.duration_minutes,
+        isTrial,
+      };
+    });
 
   const enrollmentIds = enrollments.map((e) => e.id);
   let upcomingBookings: UpcomingBooking[] = [];
@@ -133,8 +164,6 @@ export async function loadLessonBookingData(
     bookableEnrollments,
     upcomingBookings,
     pastSessionsForReport,
-    regularLessonTypeId: (lessonType?.id as string) ?? null,
-    lessonDurationMinutes: (lessonType?.duration_minutes as number) ?? 120,
     timezone: resolveUserTimezone({
       profileTimezone: (profile?.timezone as string) ?? null,
       householdDefaultTimezone: (household as { default_timezone?: string } | null)?.default_timezone ?? null,

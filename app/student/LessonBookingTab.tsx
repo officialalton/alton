@@ -40,8 +40,6 @@ export type LessonBookingTabProps = {
   bookableEnrollments: BookableSubjectEnrollment[];
   upcomingBookings: UpcomingBooking[];
   pastSessionsForReport: PastSessionForReport[];
-  regularLessonTypeId: string | null;
-  lessonDurationMinutes: number;
   timezone: string;
   onListSlots: (teacherId: string, durationMinutes: number) => Promise<Date[]>;
   onCreateBooking: (params: {
@@ -74,8 +72,6 @@ export default function LessonBookingTab({
   bookableEnrollments,
   upcomingBookings,
   pastSessionsForReport,
-  regularLessonTypeId,
-  lessonDurationMinutes,
   timezone,
   onListSlots,
   onCreateBooking,
@@ -122,13 +118,14 @@ export default function LessonBookingTab({
     setError(null);
     setMessage(null);
     setSelectedDateKey(null);
-    if (!selectedEnrollment || !regularLessonTypeId) return;
+    if (!selectedEnrollment) return;
+    if (selectedEnrollment.isTrial) setMode("single");
     setLoadingSlots(true);
-    onListSlots(selectedEnrollment.teacherId, lessonDurationMinutes)
+    onListSlots(selectedEnrollment.teacherId, selectedEnrollment.lessonDurationMinutes)
       .then(setSlots)
       .catch((e) => setError(e instanceof Error ? e.message : String(e)))
       .finally(() => setLoadingSlots(false));
-  }, [selectedEnrollment, regularLessonTypeId, lessonDurationMinutes, onListSlots]);
+  }, [selectedEnrollment, onListSlots]);
 
   const slotDateBadges = useMemo(() => {
     const badges: Record<string, { count: number; tone?: "ink" | "grey" | "red" }> = {};
@@ -152,7 +149,7 @@ export default function LessonBookingTab({
   async function refetchSlots() {
     if (!selectedEnrollment) return;
     try {
-      setSlots(await onListSlots(selectedEnrollment.teacherId, lessonDurationMinutes));
+      setSlots(await onListSlots(selectedEnrollment.teacherId, selectedEnrollment.lessonDurationMinutes));
     } catch {
       // 슬롯 재조회 실패는 조용히 무시 — 다음 선택 변경 시 useEffect가 다시 시도한다.
     }
@@ -171,18 +168,18 @@ export default function LessonBookingTab({
   }
 
   async function handlePickSlot(slot: Date) {
-    if (!selectedEnrollment || !regularLessonTypeId) return;
+    if (!selectedEnrollment) return;
     setSubmitting(true);
     setError(null);
     setMessage(null);
     try {
-      if (mode === "single") {
+      if (mode === "single" || selectedEnrollment.isTrial) {
         await onCreateBooking({
           subjectEnrollmentId: selectedEnrollment.subjectEnrollmentId,
           teacherId: selectedEnrollment.teacherId,
-          lessonTypeId: regularLessonTypeId,
+          lessonTypeId: selectedEnrollment.lessonTypeId,
           startsAt: slot,
-          durationMinutes: lessonDurationMinutes,
+          durationMinutes: selectedEnrollment.lessonDurationMinutes,
         });
         setMessage("예약이 확정됐습니다.");
         router.refresh();
@@ -191,9 +188,9 @@ export default function LessonBookingTab({
         const results = await onCreateWeeklySeries({
           subjectEnrollmentId: selectedEnrollment.subjectEnrollmentId,
           teacherId: selectedEnrollment.teacherId,
-          lessonTypeId: regularLessonTypeId,
+          lessonTypeId: selectedEnrollment.lessonTypeId,
           firstStartsAt: slot,
-          durationMinutes: lessonDurationMinutes,
+          durationMinutes: selectedEnrollment.lessonDurationMinutes,
           occurrences: 8,
           seriesTimezone: timezone,
         });
@@ -262,9 +259,12 @@ export default function LessonBookingTab({
 
   return (
     <div className="max-w-[640px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-1.5">정규수업 예약</h1>
+      <h1 className="text-[20px] font-extrabold text-ink mb-1.5">수업 예약</h1>
       <p className="text-[13px] text-grey-500 mb-5">
-        최소 24시간 이후부터 최대 8주 이내로 예약할 수 있습니다. 수업은 120분, 앞뒤 15분 버퍼가 자동 적용됩니다.
+        최소 24시간 이후부터 최대 8주 이내로 예약할 수 있습니다.
+        {selectedEnrollment
+          ? ` 수업은 ${selectedEnrollment.lessonDurationMinutes}분, 앞뒤 15분 버퍼가 자동 적용됩니다.`
+          : " 수업은 120분(체험은 60분), 앞뒤 15분 버퍼가 자동 적용됩니다."}
       </p>
 
       {browserTimezone && browserTimezone !== timezone && !timezoneBannerDismissed && (
@@ -311,20 +311,24 @@ export default function LessonBookingTab({
             ))}
           </select>
 
-          <div className="flex gap-2 mt-3">
-            <button
-              className={`text-[12px] font-bold px-3 py-1.5 rounded-full ${mode === "single" ? "bg-ink text-white" : "bg-grey-100 text-grey-500"}`}
-              onClick={() => setMode("single")}
-            >
-              1회 예약
-            </button>
-            <button
-              className={`text-[12px] font-bold px-3 py-1.5 rounded-full ${mode === "weekly" ? "bg-ink text-white" : "bg-grey-100 text-grey-500"}`}
-              onClick={() => setMode("weekly")}
-            >
-              주 1회 반복(최대 8회)
-            </button>
-          </div>
+          {selectedEnrollment?.isTrial ? (
+            <div className="mt-3 text-[12px] text-grey-500">체험 수업은 1회만 예약할 수 있습니다.</div>
+          ) : (
+            <div className="flex gap-2 mt-3">
+              <button
+                className={`text-[12px] font-bold px-3 py-1.5 rounded-full ${mode === "single" ? "bg-ink text-white" : "bg-grey-100 text-grey-500"}`}
+                onClick={() => setMode("single")}
+              >
+                1회 예약
+              </button>
+              <button
+                className={`text-[12px] font-bold px-3 py-1.5 rounded-full ${mode === "weekly" ? "bg-ink text-white" : "bg-grey-100 text-grey-500"}`}
+                onClick={() => setMode("weekly")}
+              >
+                주 1회 반복(최대 8회)
+              </button>
+            </div>
+          )}
 
           <div className="mt-4">
             {loadingSlots && <div className="text-[13px] text-grey-500">예약 가능 시간을 불러오는 중…</div>}
@@ -394,11 +398,11 @@ export default function LessonBookingTab({
                 {selectedEnrollment?.subjectName} · {selectedEnrollment?.teacherName} 선생님
               </div>
               <div className="text-[13px] text-grey-500 mb-3">
-                {mode === "single"
+                {mode === "single" || selectedEnrollment?.isTrial
                   ? formatDateTime(pendingSlot.toISOString(), timezone)
                   : `첫 회차 ${formatDateTime(pendingSlot.toISOString(), timezone)}부터 매주 같은 시간, 최대 8회`}
               </div>
-              {mode === "weekly" && (
+              {mode === "weekly" && !selectedEnrollment?.isTrial && (
                 <div className="mb-3">
                   <div className="text-[11px] font-bold text-grey-500 mb-1">
                     생성 시도할 날짜(최대 8회 — 선생님 가용시간·수업권 잔여량에 따라 일부만 생성될 수 있습니다)

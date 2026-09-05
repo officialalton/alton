@@ -192,8 +192,6 @@ export default function ParentShell({
               bookableEnrollments={lessonBooking.bookableEnrollments}
               upcomingBookings={lessonBooking.upcomingBookings}
               pastSessionsForReport={lessonBooking.pastSessionsForReport}
-              regularLessonTypeId={lessonBooking.regularLessonTypeId}
-              lessonDurationMinutes={lessonBooking.lessonDurationMinutes}
               timezone={lessonBooking.timezone}
               onListSlots={(teacherId, durationMinutes) => listAvailableSlotsForBooking({ teacherId, durationMinutes })}
               onCreateBooking={(params) => createLessonBookingForChild({ ...params, childId: currentChildId })}
