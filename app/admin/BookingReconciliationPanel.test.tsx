@@ -16,6 +16,10 @@ vi.mock("./booking-actions", () => ({
   resolveExternalChangeRecreateAfterDeletion: vi.fn(),
   resolveExternalChangeCancelDueToDeletion: vi.fn(),
   retryExternalCalendarReconciliationNow: vi.fn(),
+  listSessionsNeedingFinalJudgment: vi.fn(),
+  listRecentlyFinalizedSessions: vi.fn(),
+  adminFinalizeLessonSession: vi.fn(),
+  adminReopenSession: vi.fn(),
 }));
 
 beforeEach(() => {
@@ -24,6 +28,8 @@ beforeEach(() => {
   vi.mocked(actions.listRecentIncidentReports).mockResolvedValue([]);
   vi.mocked(actions.listExternalCalendarChanges).mockResolvedValue([]);
   vi.mocked(actions.retryExternalCalendarReconciliationNow).mockResolvedValue({ teachersChecked: 0, changesDetected: 0 });
+  vi.mocked(actions.listSessionsNeedingFinalJudgment).mockResolvedValue([]);
+  vi.mocked(actions.listRecentlyFinalizedSessions).mockResolvedValue([]);
 });
 
 describe("BookingReconciliationPanel", () => {
@@ -251,5 +257,63 @@ describe("BookingReconciliationPanel", () => {
     await waitFor(() => expect(screen.getByText("지금 재처리")).toBeInTheDocument());
     fireEvent.click(screen.getByText("지금 재처리"));
     await waitFor(() => expect(screen.getByText(/외부 변경 대조: 선생님 2명 확인, 신규 감지 1건/)).toBeInTheDocument());
+  });
+
+  it("M5-a: 판정 대기 세션에 완료/노쇼 버튼을 누르면 adminFinalizeLessonSession이 호출된다", async () => {
+    vi.mocked(actions.listSessionsNeedingFinalJudgment).mockResolvedValue([
+      {
+        sessionId: "s1",
+        reservationId: "r1",
+        teacherName: "김선생",
+        studentName: "지훈",
+        subjectName: "SAT Math",
+        startsAt: "2026-10-10T19:00:00Z",
+        endsAt: "2026-10-10T21:00:00Z",
+        finalStatus: "scheduled",
+        isTrial: false,
+        incidentReportCount: 1,
+        wasReopened: false,
+      },
+    ]);
+    vi.mocked(actions.adminFinalizeLessonSession).mockResolvedValue(undefined);
+    render(<BookingReconciliationPanel />);
+    await waitFor(() => expect(screen.getByText(/지훈 · 김선생/)).toBeInTheDocument());
+    expect(screen.getByText("신고 1건")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText("완료로 확정"));
+    await waitFor(() =>
+      expect(actions.adminFinalizeLessonSession).toHaveBeenCalledWith({
+        sessionId: "s1",
+        outcome: "completed",
+        reason: "관리자 확인 — 정상 완료",
+      })
+    );
+  });
+
+  it("M5-a: 확정된 세션의 '재개방'을 누르면 사유 입력 후 adminReopenSession이 호출된다", async () => {
+    vi.mocked(actions.listRecentlyFinalizedSessions).mockResolvedValue([
+      {
+        sessionId: "s2",
+        reservationId: "r2",
+        teacherName: "김선생",
+        studentName: "지훈",
+        subjectName: "SAT Math",
+        startsAt: "2026-10-09T19:00:00Z",
+        endsAt: "2026-10-09T21:00:00Z",
+        finalStatus: "completed",
+        isTrial: false,
+        incidentReportCount: 0,
+        wasReopened: false,
+      },
+    ]);
+    vi.mocked(actions.adminReopenSession).mockResolvedValue(undefined);
+    render(<BookingReconciliationPanel />);
+    await waitFor(() => expect(screen.getByText("재개방(재판정 필요)")).toBeInTheDocument());
+    fireEvent.click(screen.getByText("재개방(재판정 필요)"));
+    fireEvent.change(screen.getByPlaceholderText(/선생님이 완료를 잘못 눌렀음/), { target: { value: "실제로는 선생님 노쇼" } });
+    fireEvent.click(screen.getByText("재개방"));
+    await waitFor(() =>
+      expect(actions.adminReopenSession).toHaveBeenCalledWith({ sessionId: "s2", reason: "실제로는 선생님 노쇼" })
+    );
   });
 });

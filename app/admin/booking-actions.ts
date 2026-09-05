@@ -443,11 +443,16 @@ export type SessionJudgmentRow = {
   finalStatus: string;
   isTrial: boolean;
   incidentReportCount: number;
+  // true면 이 세션은 한 번 확정됐다가 admin_reopen으로 재개방된 상태('live') —
+  // entitlement가 이미 소진/해제됐으므로 첫 판정용 finalize_lesson_session()이 아니라
+  // recomplete_session()으로 재확정해야 한다(중복 소진/해제 방지).
+  wasReopened: boolean;
 };
 
 function toSessionJudgmentRows(
   data: Array<Record<string, unknown>>,
-  incidentCountBySession: Map<string, number>
+  incidentCountBySession: Map<string, number>,
+  reopenedSessionIds?: Set<string>
 ): SessionJudgmentRow[] {
   function one<T>(rel: T | T[] | null | undefined): T | null {
     return Array.isArray(rel) ? (rel[0] ?? null) : (rel ?? null);
@@ -468,8 +473,19 @@ function toSessionJudgmentRows(
       finalStatus: row.final_status as string,
       isTrial: lessonType?.code === "trial",
       incidentReportCount: incidentCountBySession.get(row.id as string) ?? 0,
+      wasReopened: reopenedSessionIds?.has(row.id as string) ?? false,
     };
   });
+}
+
+async function reopenedSessionIdSet(admin: ReturnType<typeof createAdminClient>, sessionIds: string[]): Promise<Set<string>> {
+  if (sessionIds.length === 0) return new Set();
+  const { data } = await admin
+    .from("session_status_events")
+    .select("session_id")
+    .eq("event_type", "reopened")
+    .in("session_id", sessionIds);
+  return new Set((data ?? []).map((r) => r.session_id as string));
 }
 
 const SESSION_JUDGMENT_SELECT =
@@ -504,10 +520,17 @@ export async function listSessionsNeedingFinalJudgment(): Promise<SessionJudgmen
     .limit(200);
   if (error) throw new Error(error.message);
 
-  const rows = toSessionJudgmentRows(data as unknown as Array<Record<string, unknown>>, new Map());
-  const ended = rows.filter((r) => r.endsAt && new Date(r.endsAt).getTime() < Date.now());
-  const counts = await incidentReportCounts(admin, ended.map((r) => r.sessionId));
-  return ended.map((r) => ({ ...r, incidentReportCount: counts.get(r.sessionId) ?? 0 }));
+  const preRows = toSessionJudgmentRows(data as unknown as Array<Record<string, unknown>>, new Map());
+  const ended = preRows.filter((r) => r.endsAt && new Date(r.endsAt).getTime() < Date.now());
+  const [counts, reopened] = await Promise.all([
+    incidentReportCounts(admin, ended.map((r) => r.sessionId)),
+    reopenedSessionIdSet(admin, ended.map((r) => r.sessionId)),
+  ]);
+  return ended.map((r) => ({
+    ...r,
+    incidentReportCount: counts.get(r.sessionId) ?? 0,
+    wasReopened: reopened.has(r.sessionId),
+  }));
 }
 
 /** 최근 확정(완료/노쇼/취소 등)된 세션 — 관리자가 재판정(reopen)이 필요한지 훑어보는 목록. */
@@ -538,8 +561,28 @@ export async function adminFinalizeLessonSession(params: {
   outcome: SessionOutcome;
   reason: string;
 }): Promise<void> {
-  const { actorUserId } = await requireAdminOrCapability(BOOKING_CAPABILITY);
+  const { actorUserId, supabase } = await requireAdminOrCapability(BOOKING_CAPABILITY);
   const admin = createAdminClient();
+
+  // 이 세션이 한 번 확정됐다가 reopen_session()으로 재개방된 상태라면 entitlement가
+  // 이미 소진/해제된 뒤다 — finalize_lesson_session()을 다시 부르면 consume_entitlement/
+  // release_entitlement의 기존 "이미 처리됨" 가드에 걸린다. 그 경우는 recomplete_session()
+  // (RLS-scoped 클라이언트, is_admin() 검사 필요)으로 재확정한다 — payable_minutes/정산
+  // 항목만 재계산하고 entitlement 원장은 건드리지 않는다(수동 조정은 EntitlementLedgerTab).
+  const [{ data: reopened }] = await Promise.all([
+    admin.from("session_status_events").select("id").eq("session_id", params.sessionId).eq("event_type", "reopened").limit(1),
+  ]);
+
+  if (reopened && reopened.length > 0) {
+    const { error } = await supabase.rpc("recomplete_session", {
+      p_session_id: params.sessionId,
+      p_new_final_status: params.outcome,
+      p_reason: params.reason,
+    });
+    if (error) throw new Error(error.message);
+    return;
+  }
+
   const { error } = await admin.rpc("finalize_lesson_session", {
     p_session_id: params.sessionId,
     p_outcome: params.outcome,

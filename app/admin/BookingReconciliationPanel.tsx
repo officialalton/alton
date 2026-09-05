@@ -17,11 +17,17 @@ import {
   resolveExternalChangeRecreateAfterDeletion,
   resolveExternalChangeCancelDueToDeletion,
   retryExternalCalendarReconciliationNow,
+  listSessionsNeedingFinalJudgment,
+  listRecentlyFinalizedSessions,
+  adminFinalizeLessonSession,
+  adminReopenSession,
   type ReconciliationRow,
   type NotificationOutboxSummary,
   type IncidentReportAdminRow,
   type ExternalCalendarChangeRow,
   type ExternalChangeResolution,
+  type SessionJudgmentRow,
+  type SessionOutcome,
 } from "./booking-actions";
 
 const EXTERNAL_CHANGE_STATUS_LABEL: Record<string, string> = {
@@ -66,21 +72,30 @@ export default function BookingReconciliationPanel() {
   const [cancelReasonDraft, setCancelReasonDraft] = useState("");
   const [resolvingReservationId, setResolvingReservationId] = useState<string | null>(null);
   const [resolveReasonDraft, setResolveReasonDraft] = useState("");
+  const [judgmentRows, setJudgmentRows] = useState<SessionJudgmentRow[] | null>(null);
+  const [finalizedRows, setFinalizedRows] = useState<SessionJudgmentRow[] | null>(null);
+  const [judgmentBusyId, setJudgmentBusyId] = useState<string | null>(null);
+  const [reopeningSessionId, setReopeningSessionId] = useState<string | null>(null);
+  const [reopenReasonDraft, setReopenReasonDraft] = useState("");
 
   async function refresh() {
     setLoading(true);
     setError(null);
     try {
-      const [reconciliation, outbox, incidents, changes] = await Promise.all([
+      const [reconciliation, outbox, incidents, changes, judgment, finalized] = await Promise.all([
         listReconciliationNeededBookings(),
         listNotificationOutboxSummary(),
         listRecentIncidentReports(),
         listExternalCalendarChanges(),
+        listSessionsNeedingFinalJudgment(),
+        listRecentlyFinalizedSessions(),
       ]);
       setRows(reconciliation);
       setOutboxSummary(outbox);
       setIncidentReports(incidents);
       setExternalChanges(changes);
+      setJudgmentRows(judgment);
+      setFinalizedRows(finalized);
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
@@ -164,6 +179,44 @@ export default function BookingReconciliationPanel() {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function handleFinalizeJudgment(sessionId: string, outcome: SessionOutcome) {
+    const reasonByOutcome: Record<SessionOutcome, string> = {
+      completed: "관리자 확인 — 정상 완료",
+      student_no_show: "관리자 확인 — 학생 15분 이상 미접속 최종 노쇼",
+      teacher_no_show: "관리자 확인 — 선생님 노쇼",
+    };
+    setJudgmentBusyId(sessionId);
+    setError(null);
+    setMessage(null);
+    try {
+      await adminFinalizeLessonSession({ sessionId, outcome, reason: reasonByOutcome[outcome] });
+      setMessage("세션을 확정했습니다.");
+      await refresh();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setJudgmentBusyId(null);
+    }
+  }
+
+  async function handleReopen(sessionId: string) {
+    const reason = reopenReasonDraft.trim() || "관리자 재검토";
+    setJudgmentBusyId(sessionId);
+    setError(null);
+    setMessage(null);
+    try {
+      await adminReopenSession({ sessionId, reason });
+      setMessage("세션을 재개방했습니다 — 위 '세션 최종판정' 섹션에서 올바른 상태로 다시 확정하세요.");
+      setReopeningSessionId(null);
+      setReopenReasonDraft("");
+      await refresh();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setJudgmentBusyId(null);
     }
   }
 
@@ -399,8 +452,8 @@ export default function BookingReconciliationPanel() {
 
       <h2 className="text-[14px] font-bold text-ink mb-2 mt-8">지각·노쇼 신고 (최근 100건)</h2>
       <p className="text-[12px] text-grey-500 mb-3">
-        학생·보호자·선생님이 제출한 신고 원문입니다. 최종 판정·수업권 소진·정산은 아직 이 화면의 범위가
-        아닙니다(추후 단계에서 이 기록을 입력으로 처리).
+        학생·보호자·선생님이 제출한 신고 원문입니다. 이 신고 자체는 출석을 확정하지 않습니다 —
+        최종 판정은 아래 "세션 최종판정" 섹션에서 관리자가 명확한 규칙 기반 함수로 직접 확정합니다.
       </p>
       {!incidentReports || incidentReports.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
@@ -422,6 +475,114 @@ export default function BookingReconciliationPanel() {
               {r.minutesLate !== null ? ` · 지각 ${r.minutesLate}분` : ""}
             </div>
             {r.notes && <div className="mt-2 text-[12px] text-ink bg-grey-100 rounded-lg px-3 py-2">{r.notes}</div>}
+          </div>
+        ))
+      )}
+
+      <h2 className="text-[14px] font-bold text-ink mb-2 mt-8">세션 최종판정 (예약 시간 경과, 미확정)</h2>
+      <p className="text-[12px] text-grey-500 mb-3">
+        선생님이 "수업 종료"를 누르지 않았거나 관리자가 직접 확정해야 하는 건입니다. 완료/학생 노쇼/선생님
+        노쇼 중 하나로 확정하면 수업권 소진·해제와 정산 항목(payable_minutes)이 같은 트랜잭션으로 반영됩니다.
+      </p>
+      {!judgmentRows || judgmentRows.length === 0 ? (
+        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">판정 대기 중인 세션이 없습니다.</div>
+      ) : (
+        judgmentRows.map((s) => (
+          <div key={s.sessionId} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3">
+            <div className="flex items-center justify-between">
+              <div className="text-[13px] font-bold text-ink">
+                {s.studentName ?? "(학생 미확인)"} · {s.teacherName ?? "(선생님 미확인)"} · {s.subjectName ?? ""}
+                {s.isTrial ? " (체험)" : ""}
+              </div>
+              {s.incidentReportCount > 0 && (
+                <span className="text-[11px] font-bold px-2 py-1 rounded-full bg-red/10 text-red">
+                  신고 {s.incidentReportCount}건
+                </span>
+              )}
+            </div>
+            <div className="text-[12px] text-grey-500 mt-1">
+              {formatDateTime(s.startsAt)} ~ {formatDateTime(s.endsAt)} · 현재 상태: {s.finalStatus}
+            </div>
+            <div className="mt-2 flex gap-2 flex-wrap">
+              <button
+                disabled={judgmentBusyId === s.sessionId}
+                onClick={() => handleFinalizeJudgment(s.sessionId, "completed")}
+                className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-ink text-white disabled:opacity-50"
+              >
+                완료로 확정
+              </button>
+              <button
+                disabled={judgmentBusyId === s.sessionId}
+                onClick={() => handleFinalizeJudgment(s.sessionId, "student_no_show")}
+                className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-red/10 text-red disabled:opacity-50"
+              >
+                학생 노쇼로 확정(소진+지급)
+              </button>
+              <button
+                disabled={judgmentBusyId === s.sessionId}
+                onClick={() => handleFinalizeJudgment(s.sessionId, "teacher_no_show")}
+                className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-grey-100 text-ink disabled:opacity-50"
+              >
+                선생님 노쇼로 확정(해제, 지급 없음)
+              </button>
+            </div>
+          </div>
+        ))
+      )}
+
+      <h2 className="text-[14px] font-bold text-ink mb-2 mt-8">최근 확정된 세션 — 재검토 (최근 50건)</h2>
+      <p className="text-[12px] text-grey-500 mb-3">
+        잘못 확정된 세션은 재개방 후 올바른 상태로 재확정할 수 있습니다(기존 확정 기록은 지우지 않고
+        이력으로 남습니다 — session_status_events에 append-only로 쌓입니다). payable_minutes/정산
+        항목은 새 상태 기준으로 자동 재계산되지만, 수업권 소진/해제 자체가 바뀌어야 하는 경우(예:
+        완료→선생님 노쇼)는 "수업권 원장" 탭의 조정 기능으로 별도 반영해야 합니다.
+      </p>
+      {!finalizedRows || finalizedRows.length === 0 ? (
+        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">확정된 세션이 없습니다.</div>
+      ) : (
+        finalizedRows.map((s) => (
+          <div key={s.sessionId} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3">
+            <div className="flex items-center justify-between">
+              <div className="text-[13px] font-bold text-ink">
+                {s.studentName ?? "(학생 미확인)"} · {s.teacherName ?? "(선생님 미확인)"} · {s.subjectName ?? ""}
+              </div>
+              <span className="text-[11px] font-bold px-2 py-1 rounded-full bg-grey-100 text-grey-500">{s.finalStatus}</span>
+            </div>
+            <div className="text-[12px] text-grey-500 mt-1">{formatDateTime(s.startsAt)} ~ {formatDateTime(s.endsAt)}</div>
+            {reopeningSessionId === s.sessionId ? (
+              <div className="mt-2 border-t border-grey-200 pt-2">
+                <label className="block text-[11px] font-bold text-grey-500 mb-1">재개방 사유</label>
+                <input
+                  autoFocus
+                  className="w-full border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px] mb-2"
+                  value={reopenReasonDraft}
+                  onChange={(e) => setReopenReasonDraft(e.target.value)}
+                  placeholder="예: 선생님이 완료를 잘못 눌렀음, 실제로는 선생님 노쇼"
+                />
+                <div className="flex gap-2 justify-end">
+                  <button onClick={() => setReopeningSessionId(null)} className="text-[12px] font-semibold text-grey-500">
+                    닫기
+                  </button>
+                  <button
+                    disabled={judgmentBusyId === s.sessionId}
+                    onClick={() => handleReopen(s.sessionId)}
+                    className="text-[12px] font-bold text-white bg-red rounded-lg px-3 py-1.5 disabled:opacity-50"
+                  >
+                    재개방
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <button
+                onClick={() => {
+                  setReopeningSessionId(s.sessionId);
+                  setReopenReasonDraft("");
+                }}
+                className="mt-2 text-[11px] font-bold text-red"
+              >
+                재개방(재판정 필요)
+              </button>
+            )}
           </div>
         ))
       )}
