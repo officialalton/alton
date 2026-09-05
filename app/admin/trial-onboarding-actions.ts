@@ -302,7 +302,7 @@ export async function sendRegularContractOneClickAction(params: {
   // DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS가 아니면 항상 실패하는 mock/비활성
   // 경로만 검증한다(lib/docusign.ts) — 실패를 성공으로 표시하지 않고, 계약은
   // 'draft'/버전은 미발송 상태로 남아 재처리 가능하다.
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3010";
+  const siteUrl = await currentRequestOrigin();
   try {
     const { envelopeId } = await sendContractForSignature({
       contractVersionId,
