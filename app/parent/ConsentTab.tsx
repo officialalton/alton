@@ -19,6 +19,7 @@ export default function ConsentTab({
   const [error, setError] = useState<string | null>(null);
   const [trialConsentBusyId, setTrialConsentBusyId] = useState<string | null>(null);
   const [trialConsentError, setTrialConsentError] = useState<string | null>(null);
+  const [docModal, setDocModal] = useState<{ title: string; documentUrl: string | null } | null>(null);
 
   async function handleTrialSmartNotesConsent(studentId: string) {
     setTrialConsentError(null);
@@ -113,18 +114,15 @@ export default function ConsentTab({
 
               {activePolicy && (
                 <p className="text-[12.5px] mb-3">
-                  {activePolicy.documentUrl ? (
-                    <a
-                      href={activePolicy.documentUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-ink underline font-semibold"
-                    >
-                      {activePolicy.title} 원문 보기
-                    </a>
-                  ) : (
-                    <span className="text-grey-400">{activePolicy.title} 원문 준비 중</span>
-                  )}
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setDocModal({ title: activePolicy.title, documentUrl: activePolicy.documentUrl })
+                    }
+                    className="text-ink underline font-semibold"
+                  >
+                    {activePolicy.title} 원문 보기
+                  </button>
                 </p>
               )}
 
@@ -183,18 +181,18 @@ export default function ConsentTab({
                   </span>
                 </div>
                 <p className="text-[12.5px] mb-3">
-                  {activePolicy?.documentUrl ? (
-                    <a
-                      href={activePolicy.documentUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-ink underline font-semibold"
-                    >
-                      Smart Notes 이용 원문 보기
-                    </a>
-                  ) : (
-                    <span className="text-grey-400">Smart Notes 이용 원문 준비 중</span>
-                  )}
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setDocModal({
+                        title: "Smart Notes 이용약관",
+                        documentUrl: activePolicy?.documentUrl ?? null,
+                      })
+                    }
+                    className="text-ink underline font-semibold"
+                  >
+                    Smart Notes 이용 원문 보기
+                  </button>
                 </p>
                 {!child.hasConsented && (
                   <button
@@ -220,6 +218,41 @@ export default function ConsentTab({
         자세한 처리 범위는 가족 서비스 이용계약에서 확인할 수 있습니다. 가족계약은 정기구매나
         일정 기간의 수업 구매를 의무화하지 않으며, 필요할 때 수업권을 구매해 이용할 수 있습니다.
       </p>
+
+      {docModal && (
+        <div
+          className="fixed inset-0 bg-black/40 flex items-center justify-center z-40 px-5"
+          onClick={() => setDocModal(null)}
+        >
+          <div
+            data-testid="consent-document-modal"
+            className="bg-white rounded-xl max-w-[560px] w-full max-h-[80vh] flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between px-5 py-4 border-b border-grey-200">
+              <h2 className="text-[14px] font-extrabold text-ink">{docModal.title}</h2>
+              <button
+                type="button"
+                onClick={() => setDocModal(null)}
+                className="text-[13px] font-bold text-grey-400"
+              >
+                닫기
+              </button>
+            </div>
+            <div className="px-5 py-5 overflow-y-auto text-[13px] text-grey-500 leading-[1.6]">
+              {docModal.documentUrl ? (
+                <iframe
+                  src={docModal.documentUrl}
+                  title={docModal.title}
+                  className="w-full h-[50vh] border-0"
+                />
+              ) : (
+                "원문 준비 중입니다."
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
