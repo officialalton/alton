@@ -2,10 +2,11 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const createUserMock = vi.fn();
 const generateLinkMock = vi.fn();
+const deleteUserMock = vi.fn().mockResolvedValue({ error: null });
 const rpcMock = vi.fn();
 vi.mock("@/lib/supabase-admin", () => ({
   createAdminClient: () => ({
-    auth: { admin: { createUser: createUserMock, generateLink: generateLinkMock } },
+    auth: { admin: { createUser: createUserMock, generateLink: generateLinkMock, deleteUser: deleteUserMock } },
     rpc: rpcMock,
   }),
 }));
@@ -64,5 +65,27 @@ describe("createGuardianAndStudentThenRedirect — 학생 비밀번호 설정 �
     expect(sendEmailMock).not.toHaveBeenCalled();
     expect(consoleErrorSpy).toHaveBeenCalled();
     consoleErrorSpy.mockRestore();
+  });
+});
+
+describe("createGuardianAndStudentThenRedirect — 부분 실패 시 고아 Auth 계정 정리(2026-09-05 코드 점검 발견)", () => {
+  it("학생 계정 생성이 실패하면 이미 만든 보호자 Auth 계정을 정리한다", async () => {
+    createUserMock
+      .mockReset()
+      .mockResolvedValueOnce({ data: { user: { id: "guardian-id" } }, error: null })
+      .mockResolvedValueOnce({ data: null, error: { message: "duplicate email" } });
+
+    await createGuardianAndStudentThenRedirect(BASE_PARAMS);
+
+    expect(deleteUserMock).toHaveBeenCalledWith("guardian-id");
+  });
+
+  it("계정 연결(finalize) RPC가 실패하면 보호자·학생 Auth 계정을 모두 정리한다", async () => {
+    rpcMock.mockResolvedValue({ error: { message: "finalize boom" } });
+
+    await createGuardianAndStudentThenRedirect(BASE_PARAMS);
+
+    expect(deleteUserMock).toHaveBeenCalledWith("guardian-id");
+    expect(deleteUserMock).toHaveBeenCalledWith("student-id");
   });
 });

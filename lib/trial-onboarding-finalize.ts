@@ -32,6 +32,13 @@ export async function createGuardianAndStudentThenRedirect(params: {
     user_metadata: { name: params.studentName },
   });
   if (studentCreateError || !studentCreated?.user) {
+    // 학생 계정 생성이 실패했으면 이미 만든 보호자 계정이 고아로 남는다 —
+    // 정리하지 않으면 이 이메일로는 재시도조차 불가능해진다(2026-09-05 코드
+    // 점검 발견). profiles/household 등 DB 행은 아직 안 만들어졌으므로
+    // Auth 계정만 지우면 된다.
+    await admin.auth.admin.deleteUser(guardianCreated.user.id).catch((e) => {
+      console.error("고아 보호자 Auth 계정 정리 실패:", guardianCreated.user.id, e);
+    });
     return redirectWithError(params.url, "학생 계정 생성에 실패했습니다. 관리자에게 문의해주세요.");
   }
 
@@ -41,6 +48,16 @@ export async function createGuardianAndStudentThenRedirect(params: {
     p_child_auth_user_id: studentCreated.user.id,
   });
   if (finalizeError) {
+    // 두 Auth 계정 모두 만들어졌지만 DB 연결(finalize)이 실패한 경우 — 마찬가지로
+    // 고아 Auth 계정 2개가 관리자 개입 없이는 복구 경로가 없던 문제를 정리한다.
+    await Promise.all([
+      admin.auth.admin.deleteUser(guardianCreated.user.id).catch((e) => {
+        console.error("고아 보호자 Auth 계정 정리 실패:", guardianCreated.user.id, e);
+      }),
+      admin.auth.admin.deleteUser(studentCreated.user.id).catch((e) => {
+        console.error("고아 학생 Auth 계정 정리 실패:", studentCreated.user.id, e);
+      }),
+    ]);
     return redirectWithError(params.url, "계정 연결에 실패했습니다. 관리자에게 문의해주세요.");
   }
 
