@@ -115,6 +115,13 @@ export default function StudentShell({
   function selectTab(id: TabId) {
     setActiveTab(id);
     router.replace(`?tab=${id}`, { scroll: false });
+    // 이 화면(및 부모용 ParentShell)은 모든 탭 데이터를 최초 서버 렌더 시점에
+    // props로 한 번에 받아와 클라이언트에서 탭만 전환한다 — 탭 전환 자체는
+    // 새 서버 요청을 만들지 않으므로, 그 사이(예: Stripe 결제 완료) 바뀐 서버
+    // 상태가 있어도 다른 탭에서 돌아왔을 때 예전 값이 그대로 보인다(실사용
+    // 확인 — 수업권 구매 직후 "수업권" 탭이 0장으로 보이던 문제). router.refresh()로
+    // 탭을 누를 때마다 서버 데이터를 다시 받아온다.
+    router.refresh();
   }
 
   const activeLabel = NAV_ITEMS.find((n) => n.id === activeTab)?.label ?? "";

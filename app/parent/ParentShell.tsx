@@ -99,6 +99,11 @@ export default function ParentShell({
   function selectTab(id: TabId) {
     setActiveTab(id);
     router.replace(`?child=${currentChildId}&tab=${id}`, { scroll: false });
+    // 모든 탭 데이터를 최초 서버 렌더 시점에 props로 한 번에 받아오고 탭 전환
+    // 자체는 새 서버 요청을 만들지 않는다 — 그 사이(예: Stripe 결제 완료) 바뀐
+    // 서버 상태가 있어도 다른 탭에서 돌아왔을 때 예전 값이 그대로 보인다
+    // (실사용 확인 — 수업권 구매 직후 "수업권" 탭이 0장으로 보이던 문제).
+    router.refresh();
   }
 
   function selectChild(studentId: string) {

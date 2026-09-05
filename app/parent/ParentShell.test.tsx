@@ -6,7 +6,7 @@ import type { Child } from "./children-data";
 
 const replaceMock = vi.fn();
 vi.mock("next/navigation", () => ({
-  useRouter: () => ({ push: vi.fn(), replace: replaceMock }),
+  useRouter: () => ({ push: vi.fn(), replace: replaceMock, refresh: vi.fn() }),
 }));
 
 vi.mock("@/app/login/actions", () => ({

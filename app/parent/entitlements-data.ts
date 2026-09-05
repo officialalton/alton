@@ -82,6 +82,7 @@ export type ParentEntitlementsData = {
 
 const PRODUCT_NAMES: Record<string, string> = {
   lesson_pack_1: "단건 수업권",
+  lesson_pack_10: "10회 패키지 수업권",
   lesson_pack_20: "20회 패키지 수업권",
 };
 
@@ -128,7 +129,7 @@ export async function loadParentEntitlementsData(
   const { data: products } = await admin
     .from("entitlement_products")
     .select("id, code, quantity")
-    .in("code", ["lesson_pack_1", "lesson_pack_20"]);
+    .in("code", ["lesson_pack_1", "lesson_pack_10", "lesson_pack_20"]);
 
   const prices: EntitlementProductPrice[] = [];
   for (const product of products ?? []) {
