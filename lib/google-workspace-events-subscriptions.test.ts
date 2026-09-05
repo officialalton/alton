@@ -138,3 +138,30 @@ describe("createWorkspaceEventsSubscription — pubsubTopic 검증(fail-closed)"
     vi.useRealTimers();
   });
 });
+
+describe("listWorkspaceEventsSubscriptionsForTarget — 사용자당 구독 1개 제약 정리용 조회", () => {
+  it("target_resource로 필터링해서 목록을 반환한다", async () => {
+    allowRealCalls();
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({
+        subscriptions: [
+          { name: "subscriptions/sub-1", targetResource: "//cloudidentity.googleapis.com/users/108123456789012345678", state: "ACTIVE" },
+        ],
+      }),
+    });
+    vi.stubGlobal("fetch", fetchMock);
+    const { listWorkspaceEventsSubscriptionsForTarget } = await import("./google-workspace-events-subscriptions");
+
+    const result = await listWorkspaceEventsSubscriptionsForTarget({
+      organizerEmail: "official@alton.education",
+      targetResource: "//cloudidentity.googleapis.com/users/108123456789012345678",
+    });
+
+    expect(result).toHaveLength(1);
+    expect(result[0].name).toBe("subscriptions/sub-1");
+    const [url] = fetchMock.mock.calls[0];
+    expect(url).toContain("filter=");
+    expect(decodeURIComponent(url)).toContain('target_resource="//cloudidentity.googleapis.com/users/108123456789012345678"');
+  });
+});

@@ -164,6 +164,23 @@ async function awaitOperation(
   return current.response;
 }
 
+/** targetResource(예: `//cloudidentity.googleapis.com/users/{id}`) 기준으로 기존
+ * 구독을 찾는다 — Google Workspace Events는 사용자당 구독을 최대 1개만 허용해서,
+ * 생성 전에 이미 있는 구독을 찾아 정리(삭제 후 재생성)해야 할 때 쓴다. */
+export async function listWorkspaceEventsSubscriptionsForTarget(params: {
+  organizerEmail: string;
+  targetResource: string;
+}): Promise<WorkspaceEventsSubscriptionResource[]> {
+  assertRealCallsAllowed();
+  const token = await resolveMeetReadonlyAccessToken(params.organizerEmail);
+  const filter = encodeURIComponent(`target_resource="${params.targetResource}"`);
+  const res = await workspaceEventsFetch(`${WORKSPACE_EVENTS_API}/subscriptions?filter=${filter}`, token, {
+    method: "GET",
+  });
+  const data = (await res.json()) as { subscriptions?: WorkspaceEventsSubscriptionResource[] };
+  return data.subscriptions ?? [];
+}
+
 export async function getWorkspaceEventsSubscription(params: {
   organizerEmail: string;
   subscriptionName: string;
