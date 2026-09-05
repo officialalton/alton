@@ -116,6 +116,68 @@ describe("ConsultationSchedulingPanel — 상담 결과 기록 버튼 회귀(요
   });
 });
 
+describe("ConsultationSchedulingPanel — 공용 상담 가능시간 인라인 폼(window.prompt 대체)", () => {
+  it("반복 가능시간 추가 버튼을 누르면 요일 select + 시작/종료 시간 인라인 폼이 열리고, 제출하면 addConsultAvailabilityRule이 호출된다", async () => {
+    mockBaseData();
+    vi.mocked(consultActions.addConsultAvailabilityRule).mockResolvedValue(undefined);
+    render(<ConsultationSchedulingPanel />);
+
+    fireEvent.click(await screen.findByRole("button", { name: "반복 가능시간 추가" }));
+    // 인라인 폼이 열렸으면 요일 select와 시작/종료 time input이 보여야 한다.
+    expect(screen.getByText("요일")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "추가" }));
+
+    await waitFor(() =>
+      expect(consultActions.addConsultAvailabilityRule).toHaveBeenCalledWith(
+        expect.objectContaining({ weekday: expect.any(Number), startTime: expect.any(String), endTime: expect.any(String) })
+      )
+    );
+  });
+
+  it("겹치는 시간대 등록 시 서버 에러 메시지가 폼에 표시된다", async () => {
+    mockBaseData();
+    vi.mocked(consultActions.addConsultAvailabilityRule).mockRejectedValue(
+      new Error("같은 요일에 겹치는 시간대가 이미 등록되어 있습니다.")
+    );
+    render(<ConsultationSchedulingPanel />);
+
+    fireEvent.click(await screen.findByRole("button", { name: "반복 가능시간 추가" }));
+    fireEvent.click(screen.getByRole("button", { name: "추가" }));
+
+    expect(await screen.findByText("같은 요일에 겹치는 시간대가 이미 등록되어 있습니다.")).toBeInTheDocument();
+  });
+
+  it("휴무일 추가 버튼을 누르면 날짜 인라인 폼이 열리고, 제출하면 addConsultAvailabilityException이 호출된다", async () => {
+    mockBaseData();
+    vi.mocked(consultActions.addConsultAvailabilityException).mockResolvedValue(undefined);
+    render(<ConsultationSchedulingPanel />);
+
+    fireEvent.click(await screen.findByRole("button", { name: "휴무일 추가" }));
+    const dateInput = screen.getByLabelText("휴무 날짜");
+    fireEvent.change(dateInput, { target: { value: "2026-12-25" } });
+    fireEvent.click(screen.getByRole("button", { name: "추가" }));
+
+    await waitFor(() =>
+      expect(consultActions.addConsultAvailabilityException).toHaveBeenCalledWith({
+        date: "2026-12-25",
+        isClosed: true,
+        reason: "관리자 등록 휴무",
+      })
+    );
+  });
+
+  it("등록된 반복 가능시간이 있으면 기본으로 주간 그리드가 렌더링된다", async () => {
+    mockBaseData();
+    vi.mocked(consultActions.listConsultAvailabilityRules).mockResolvedValue([
+      { id: "rule-1", weekday: 1, start_time: "10:00:00", end_time: "17:00:00", active: true },
+    ]);
+    render(<ConsultationSchedulingPanel />);
+
+    expect(await screen.findByTestId("weekly-availability-grid")).toBeInTheDocument();
+  });
+});
+
 describe("ConsultationSchedulingPanel — Workspace Events 구독 정지·삭제 버튼", () => {
   it("활성 구독에 정지·삭제 버튼이 있고, 사유 입력 후 제출하면 실제 액션을 호출한다", async () => {
     mockBaseData();

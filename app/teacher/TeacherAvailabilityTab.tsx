@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import type { TeacherAvailabilityRuleRow, AvailabilityExceptionRow } from "./availability-actions";
 import type { ExternalBusyBlock } from "./lesson-schedule-actions";
 import MonthCalendar, { type DayBadge } from "@/app/components/MonthCalendar";
+import WeeklyAvailabilityGrid from "@/app/components/WeeklyAvailabilityGrid";
 import { todayKeyInTimezone, dateKeysCoveredByInterval } from "@/lib/calendar-date-utils";
 
 const DAY_LABELS = ["일", "월", "화", "수", "목", "금", "토"];
@@ -49,6 +50,7 @@ export default function TeacherAvailabilityTab({
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
+  const [rulesView, setRulesView] = useState<"grid" | "list">("grid");
   const [externalBusyBlocks, setExternalBusyBlocks] = useState<ExternalBusyBlock[]>([]);
 
   const todayKey = todayKeyInTimezone(timezone);
@@ -215,7 +217,23 @@ export default function TeacherAvailabilityTab({
       {error && <div className="mb-4 text-[13px] font-semibold text-red bg-red/5 rounded-lg px-4 py-3">{error}</div>}
       {message && <div className="mb-4 text-[13px] font-semibold text-ink bg-green/10 rounded-lg px-4 py-3">{message}</div>}
 
-      <h2 className="text-[15px] font-bold text-ink mb-2.5">반복 가능 시간(주간 템플릿)</h2>
+      <div className="flex items-center justify-between mb-2.5">
+        <h2 className="text-[15px] font-bold text-ink">반복 가능 시간(주간 템플릿)</h2>
+        <div className="flex gap-1">
+          {(["grid", "list"] as const).map((v) => (
+            <button
+              key={v}
+              onClick={() => setRulesView(v)}
+              className={
+                "text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] " +
+                (rulesView === v ? "bg-ink text-white border-ink" : "border-grey-200 text-ink")
+              }
+            >
+              {v === "grid" ? "주간 그리드" : "목록"}
+            </button>
+          ))}
+        </div>
+      </div>
       <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-6">
         <div className="flex gap-2 items-end flex-wrap">
           <div>
@@ -242,6 +260,14 @@ export default function TeacherAvailabilityTab({
 
       {rules.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center mb-8">등록된 반복 가능 시간이 없습니다.</div>
+      ) : rulesView === "grid" ? (
+        <div className="mb-8">
+          <WeeklyAvailabilityGrid
+            rules={rules.map((r) => ({ id: r.id, weekday: r.dayOfWeek, startTime: r.startTimeLocal, endTime: r.endTimeLocal }))}
+            onDeleteRule={(ruleId) => handleRemoveRule(ruleId)}
+          />
+          <p className="text-[11px] text-grey-500 mt-1">블록을 클릭하면 해당 가능 시간이 삭제됩니다.</p>
+        </div>
       ) : (
         <div className="mb-8">
           {rules.map((r) => (

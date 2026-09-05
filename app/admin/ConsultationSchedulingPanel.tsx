@@ -37,6 +37,7 @@ import {
   type WorkspaceEventsSubscriptionRow,
 } from "./workspace-events-actions";
 import MonthCalendar from "@/app/components/MonthCalendar";
+import WeeklyAvailabilityGrid from "@/app/components/WeeklyAvailabilityGrid";
 import { dateKeyInTimezone } from "@/lib/calendar-date-utils";
 
 const ADMIN_TIMEZONE = "Asia/Seoul";
@@ -138,6 +139,17 @@ export default function ConsultationSchedulingPanel() {
   const [outcomeSummary, setOutcomeSummary] = useState("");
   const [outcomeValue, setOutcomeValue] = useState<"trial_recommended" | "regular_recommended" | "on_hold" | "closed" | "">("");
   const [selectedDateKey, setSelectedDateKey] = useState<string | null>(null);
+
+  // 요구사항 1 — window.prompt 대신 인라인 폼(요일 select + 시작/종료 시간 입력).
+  const [ruleFormOpen, setRuleFormOpen] = useState(false);
+  const [ruleWeekday, setRuleWeekday] = useState(1);
+  const [ruleStart, setRuleStart] = useState("09:00");
+  const [ruleEnd, setRuleEnd] = useState("18:00");
+  const [ruleError, setRuleError] = useState<string | null>(null);
+  const [exceptionFormOpen, setExceptionFormOpen] = useState(false);
+  const [exceptionDate, setExceptionDate] = useState("");
+  // 요구사항 3 — 반복 가능시간을 목록 대신 요일×시간 주간 그리드로 한눈에 보기.
+  const [rulesView, setRulesView] = useState<"grid" | "list">("grid");
 
   async function reload() {
     setLoading(true);
@@ -529,10 +541,41 @@ export default function ConsultationSchedulingPanel() {
       </section>
 
       <section>
-        <h2 className="text-[14px] font-extrabold text-ink mb-2">공용 상담 가능시간</h2>
+        <div className="flex items-center justify-between mb-2">
+          <h2 className="text-[14px] font-extrabold text-ink">공용 상담 가능시간</h2>
+          <div className="flex gap-1">
+            {(["grid", "list"] as const).map((v) => (
+              <button
+                key={v}
+                onClick={() => setRulesView(v)}
+                className={
+                  "text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] " +
+                  (rulesView === v ? "bg-ink text-white border-ink" : "border-grey-200 text-ink")
+                }
+              >
+                {v === "grid" ? "주간 그리드" : "목록"}
+              </button>
+            ))}
+          </div>
+        </div>
         <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">
           <p className="text-[12.5px] font-bold text-ink mb-2">반복 주간 가능시간</p>
-          {rules.length === 0 ? (
+
+          {rulesView === "grid" ? (
+            rules.filter((r) => r.active).length === 0 ? (
+              <p className="text-[12.5px] text-grey-500 mb-2">등록된 반복 가능시간이 없습니다.</p>
+            ) : (
+              <div className="mb-2">
+                <WeeklyAvailabilityGrid
+                  rules={rules
+                    .filter((r) => r.active)
+                    .map((r) => ({ id: r.id, weekday: r.weekday, startTime: r.start_time, endTime: r.end_time }))}
+                  onDeleteRule={(ruleId) => withBusy(ruleId, () => deactivateConsultAvailabilityRule(ruleId))}
+                />
+                <p className="text-[11px] text-grey-500 mt-1">블록을 클릭하면 해당 가능시간이 비활성화됩니다.</p>
+              </div>
+            )
+          ) : rules.length === 0 ? (
             <p className="text-[12.5px] text-grey-500 mb-2">등록된 반복 가능시간이 없습니다.</p>
           ) : (
             rules.map((r) => (
@@ -549,18 +592,76 @@ export default function ConsultationSchedulingPanel() {
               </p>
             ))
           )}
-          <button
-            className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 mt-2"
-            onClick={() => {
-              const weekday = window.prompt("요일(0=일 ... 6=토)");
-              const start = window.prompt("시작 시각(HH:MM)");
-              const end = window.prompt("종료 시각(HH:MM)");
-              if (weekday == null || !start || !end) return;
-              withBusy("__rule", () => addConsultAvailabilityRule({ weekday: Number(weekday), startTime: start, endTime: end }));
-            }}
-          >
-            반복 가능시간 추가
-          </button>
+
+          {ruleFormOpen ? (
+            <form
+              className="mt-3 flex flex-wrap items-end gap-2 border-t border-grey-200 pt-3"
+              onSubmit={async (e) => {
+                e.preventDefault();
+                setRuleError(null);
+                setBusyId("__rule");
+                try {
+                  await addConsultAvailabilityRule({ weekday: ruleWeekday, startTime: ruleStart, endTime: ruleEnd });
+                  await reload();
+                  setRuleFormOpen(false);
+                } catch (err) {
+                  setRuleError(err instanceof Error ? err.message : String(err));
+                } finally {
+                  setBusyId(null);
+                }
+              }}
+            >
+              <label className="text-[12px] text-ink">
+                요일
+                <select
+                  className="block mt-1 border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[13px]"
+                  value={ruleWeekday}
+                  onChange={(e) => setRuleWeekday(Number(e.target.value))}
+                >
+                  {WEEKDAY_LABEL.map((label, idx) => (
+                    <option key={idx} value={idx}>{label}요일</option>
+                  ))}
+                </select>
+              </label>
+              <label className="text-[12px] text-ink">
+                시작
+                <input
+                  type="time"
+                  required
+                  className="block mt-1 border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[13px]"
+                  value={ruleStart}
+                  onChange={(e) => setRuleStart(e.target.value)}
+                />
+              </label>
+              <label className="text-[12px] text-ink">
+                종료
+                <input
+                  type="time"
+                  required
+                  className="block mt-1 border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[13px]"
+                  value={ruleEnd}
+                  onChange={(e) => setRuleEnd(e.target.value)}
+                />
+              </label>
+              <button type="submit" disabled={busyId === "__rule"} className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50">
+                추가
+              </button>
+              <button type="button" className="text-[12px] text-grey-500" onClick={() => setRuleFormOpen(false)}>
+                취소
+              </button>
+              {ruleError && <p className="w-full text-[12px] text-red">{ruleError}</p>}
+            </form>
+          ) : (
+            <button
+              className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 mt-2"
+              onClick={() => {
+                setRuleError(null);
+                setRuleFormOpen(true);
+              }}
+            >
+              반복 가능시간 추가
+            </button>
+          )}
         </div>
 
         <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4">
@@ -578,16 +679,46 @@ export default function ConsultationSchedulingPanel() {
               </p>
             ))
           )}
-          <button
-            className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 mt-2"
-            onClick={() => {
-              const date = window.prompt("휴무 날짜(YYYY-MM-DD)");
-              if (!date) return;
-              withBusy("__exception", () => addConsultAvailabilityException({ date, isClosed: true, reason: "관리자 등록 휴무" }));
-            }}
-          >
-            휴무일 추가
-          </button>
+
+          {exceptionFormOpen ? (
+            <form
+              className="mt-3 flex flex-wrap items-end gap-2 border-t border-grey-200 pt-3"
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (!exceptionDate) return;
+                withBusy("__exception", () =>
+                  addConsultAvailabilityException({ date: exceptionDate, isClosed: true, reason: "관리자 등록 휴무" })
+                ).then(() => setExceptionFormOpen(false));
+              }}
+            >
+              <label className="text-[12px] text-ink">
+                휴무 날짜
+                <input
+                  type="date"
+                  required
+                  className="block mt-1 border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[13px]"
+                  value={exceptionDate}
+                  onChange={(e) => setExceptionDate(e.target.value)}
+                />
+              </label>
+              <button type="submit" disabled={busyId === "__exception"} className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50">
+                추가
+              </button>
+              <button type="button" className="text-[12px] text-grey-500" onClick={() => setExceptionFormOpen(false)}>
+                취소
+              </button>
+            </form>
+          ) : (
+            <button
+              className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 mt-2"
+              onClick={() => {
+                setExceptionDate("");
+                setExceptionFormOpen(true);
+              }}
+            >
+              휴무일 추가
+            </button>
+          )}
         </div>
       </section>
     </div>

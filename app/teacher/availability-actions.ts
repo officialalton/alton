@@ -17,8 +17,52 @@ export type AvailabilityRuleInput = {
   effectiveUntil?: string | null;
 };
 
+function timeToMinutes(time: string): number {
+  const [h, m] = time.split(":").map(Number);
+  return h * 60 + (m || 0);
+}
+
+function rangesOverlap(aStart: number, aEnd: number, bStart: number, bEnd: number): boolean {
+  return aStart < bEnd && bStart < aEnd;
+}
+
+function periodsOverlap(
+  aFrom: string,
+  aUntil: string | null,
+  bFrom: string,
+  bUntil: string | null
+): boolean {
+  const aEnd = aUntil ?? "9999-12-31";
+  const bEnd = bUntil ?? "9999-12-31";
+  return aFrom <= bEnd && bFrom <= aEnd;
+}
+
 export async function addTeacherAvailabilityRule(input: AvailabilityRuleInput): Promise<string> {
   const { user, supabase } = await requireUser();
+
+  // teacher_availability_rules에는 DB exclusion constraint가 없다(같은 선생님이 공유하는
+  // 통합 테스트 픽스처와의 락 경합 문제로 서버 액션 검증을 택함 — 마이그레이션 주석 참고).
+  // 겹치는 시간대 등록은 여기서 막는다: 같은 요일 + 겹치는 유효기간 안에서 시간대가
+  // 겹치면 에러.
+  const { data: existingRules, error: existingError } = await supabase
+    .from("teacher_availability_rules")
+    .select("start_time_local, end_time_local, effective_from, effective_until")
+    .eq("teacher_id", user.id)
+    .eq("day_of_week", input.dayOfWeek);
+  if (existingError) throw new Error(existingError.message);
+
+  const newStart = timeToMinutes(input.startTimeLocal);
+  const newEnd = timeToMinutes(input.endTimeLocal);
+  const hasOverlap = (existingRules ?? []).some((r) => {
+    if (!periodsOverlap(input.effectiveFrom, input.effectiveUntil ?? null, r.effective_from as string, (r.effective_until as string) ?? null)) {
+      return false;
+    }
+    return rangesOverlap(newStart, newEnd, timeToMinutes(r.start_time_local as string), timeToMinutes(r.end_time_local as string));
+  });
+  if (hasOverlap) {
+    throw new Error("같은 요일에 겹치는 시간대가 이미 등록되어 있습니다.");
+  }
+
   const { data, error } = await supabase
     .from("teacher_availability_rules")
     .insert({
@@ -33,7 +77,14 @@ export async function addTeacherAvailabilityRule(input: AvailabilityRuleInput): 
     })
     .select("id")
     .single();
-  if (error) throw new Error(error.message);
+  if (error) {
+    // teacher_availability_rules_no_overlap exclusion 제약(23P01) — 같은 요일·겹치는
+    // 유효기간 안에서 시간대가 겹치는 규칙을 등록하려 한 경우.
+    if (error.code === "23P01") {
+      throw new Error("같은 요일에 겹치는 시간대가 이미 등록되어 있습니다.");
+    }
+    throw new Error(error.message);
+  }
   return data.id as string;
 }
 

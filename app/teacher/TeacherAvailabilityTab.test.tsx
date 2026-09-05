@@ -27,6 +27,46 @@ describe("TeacherAvailabilityTab", () => {
     expect(onAddException.mock.calls[0][0]).toMatchObject({ kind: "blocked" });
   });
 
+  it("반복 가능시간이 등록돼 있으면 기본으로 주간 그리드가 렌더링된다", () => {
+    render(
+      <TeacherAvailabilityTab
+        {...baseProps}
+        initialRules={[
+          { id: "rule1", dayOfWeek: 1, startTimeLocal: "10:00", endTimeLocal: "17:00", timezone: "America/Los_Angeles", effectiveFrom: "2026-01-01", effectiveUntil: null },
+        ]}
+      />
+    );
+    expect(screen.getByTestId("weekly-availability-grid")).toBeInTheDocument();
+  });
+
+  it("그리드에서 블록을 클릭하면 onRemoveRule이 호출된다", async () => {
+    const onRemoveRule = vi.fn().mockResolvedValue(undefined);
+    render(
+      <TeacherAvailabilityTab
+        {...baseProps}
+        onRemoveRule={onRemoveRule}
+        initialRules={[
+          { id: "rule1", dayOfWeek: 1, startTimeLocal: "10:00", endTimeLocal: "17:00", timezone: "America/Los_Angeles", effectiveFrom: "2026-01-01", effectiveUntil: null },
+        ]}
+      />
+    );
+    fireEvent.click(screen.getByTestId("availability-block-rule1"));
+    await waitFor(() => expect(onRemoveRule).toHaveBeenCalledWith("rule1"));
+  });
+
+  it("목록 보기로 전환하면 요일·시간 텍스트 목록이 보인다", () => {
+    render(
+      <TeacherAvailabilityTab
+        {...baseProps}
+        initialRules={[
+          { id: "rule1", dayOfWeek: 1, startTimeLocal: "10:00", endTimeLocal: "17:00", timezone: "America/Los_Angeles", effectiveFrom: "2026-01-01", effectiveUntil: null },
+        ]}
+      />
+    );
+    fireEvent.click(screen.getByRole("button", { name: "목록" }));
+    expect(screen.getByText("월요일 10:00~17:00")).toBeInTheDocument();
+  });
+
   it("기존 예외가 있는 날짜를 선택하면 삭제 버튼이 보인다", () => {
     const todayKey = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Los_Angeles" }).format(new Date());
     render(

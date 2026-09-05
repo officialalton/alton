@@ -290,7 +290,14 @@ export async function addConsultAvailabilityRule(params: { weekday: number; star
     end_time: params.endTime,
     created_by: adminUserId,
   });
-  if (error) throw new Error(error.message);
+  if (error) {
+    // consult_availability_rules_no_overlap exclusion 제약(23P01) — 같은 요일에 겹치는
+    // 시간대를 등록하려 한 경우 사용자에게 이해 가능한 문구로 바꿔준다.
+    if (error.code === "23P01") {
+      throw new Error("같은 요일에 겹치는 시간대가 이미 등록되어 있습니다.");
+    }
+    throw new Error(error.message);
+  }
 }
 
 export async function deactivateConsultAvailabilityRule(ruleId: string): Promise<void> {
