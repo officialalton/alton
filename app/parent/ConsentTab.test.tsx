@@ -9,11 +9,9 @@ vi.mock("next/navigation", () => ({
 }));
 
 const consentForChildMock = vi.fn();
-const revokeChildConsentMock = vi.fn();
 const consentToTrialSmartNotesMock = vi.fn();
 vi.mock("./consent-actions", () => ({
   consentForChild: (...args: unknown[]) => consentForChildMock(...args),
-  revokeChildConsent: (...args: unknown[]) => revokeChildConsentMock(...args),
   consentToTrialSmartNotes: (...args: unknown[]) => consentToTrialSmartNotesMock(...args),
 }));
 
@@ -85,7 +83,7 @@ describe("ConsentTab", () => {
     expect(modal.querySelector("iframe")).not.toBeInTheDocument();
   });
 
-  it("동의가 유효한 자녀는 철회 버튼을 보여준다", () => {
+  it("동의가 유효한 자녀는 철회 버튼 대신 클릭 불가한 '동의 완료' 버튼을 보여준다", () => {
     const children: ChildConsentStatus[] = [
       {
         studentId: "student1",
@@ -101,8 +99,9 @@ describe("ConsentTab", () => {
       },
     ];
     render(<ConsentTab children={children} activePolicy={activePolicy} trialSmartNotesChildren={[]} />);
-    expect(screen.getByText("동의 완료")).toBeInTheDocument();
-    expect(screen.getByText("동의 철회")).toBeInTheDocument();
+    expect(screen.queryByText("동의 철회")).not.toBeInTheDocument();
+    const doneButton = screen.getByRole("button", { name: "동의 완료" });
+    expect(doneButton).toBeDisabled();
     expect(screen.getByText(`${activePolicy.title} 원문 보기`)).toBeInTheDocument();
   });
 
@@ -145,7 +144,7 @@ describe("ConsentTab", () => {
     });
   });
 
-  it("이미 동의한 자녀는 버튼 없이 완료 상태만 보여준다", () => {
+  it("이미 동의한 자녀는 동의 버튼 대신 클릭 불가한 '동의 완료' 버튼만 보여준다", () => {
     const trialSmartNotesChildren: TrialSmartNotesConsentStatus[] = [
       { studentId: "student3", name: "장유안", hasConsented: true },
     ];
@@ -160,6 +159,7 @@ describe("ConsentTab", () => {
     const card = screen.getByTestId("trial-smart-notes-consent-card-student3");
     expect(card).toHaveTextContent("동의 완료");
     expect(screen.queryByText("체험 Smart Notes 사용에 동의")).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "동의 완료" })).toBeDisabled();
   });
 
   it("체험 Smart Notes 동의가 필요한 자녀가 없으면 섹션 자체를 보여주지 않는다", () => {

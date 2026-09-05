@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { ChildConsentStatus, ConsentPolicyOption, TrialSmartNotesConsentStatus } from "./consent-data";
-import { consentForChild, consentToTrialSmartNotes, revokeChildConsent } from "./consent-actions";
+import { consentForChild, consentToTrialSmartNotes } from "./consent-actions";
 
 export default function ConsentTab({
   children,
@@ -43,21 +43,6 @@ export default function ConsentTab({
       router.refresh();
     } catch (e) {
       setError(e instanceof Error ? e.message : "동의 처리에 실패했습니다.");
-    } finally {
-      setBusyStudentId(null);
-    }
-  }
-
-  async function handleRevoke(consentId: string, studentId: string) {
-    const reason = window.prompt("철회 사유를 입력해주세요.");
-    if (reason === null) return;
-    setError(null);
-    setBusyStudentId(studentId);
-    try {
-      await revokeChildConsent(consentId, reason);
-      router.refresh();
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "철회 처리에 실패했습니다.");
     } finally {
       setBusyStudentId(null);
     }
@@ -129,11 +114,10 @@ export default function ConsentTab({
               {child.hasValidConsent && child.latestConsent ? (
                 <button
                   type="button"
-                  disabled={busyStudentId === child.studentId}
-                  onClick={() => handleRevoke(child.latestConsent!.id, child.studentId)}
-                  className="text-[13px] font-bold text-red border border-red rounded-lg px-4 py-2 disabled:opacity-50"
+                  disabled
+                  className="text-[13px] font-bold text-grey-400 border border-grey-200 rounded-lg px-4 py-2 opacity-50"
                 >
-                  동의 철회
+                  동의 완료
                 </button>
               ) : (
                 <button
@@ -194,7 +178,15 @@ export default function ConsentTab({
                     Smart Notes 이용 원문 보기
                   </button>
                 </p>
-                {!child.hasConsented && (
+                {child.hasConsented ? (
+                  <button
+                    type="button"
+                    disabled
+                    className="text-[13px] font-bold text-grey-400 border border-grey-200 rounded-lg px-4 py-2 opacity-50"
+                  >
+                    동의 완료
+                  </button>
+                ) : (
                   <button
                     type="button"
                     disabled={trialConsentBusyId === child.studentId}
