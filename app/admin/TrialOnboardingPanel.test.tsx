@@ -8,6 +8,7 @@ import {
   confirmTrialIntentAction,
   sendRegularContractOneClickAction,
 } from "./trial-onboarding-actions";
+import { retryTrialEntitlementGrant } from "./consultation-scheduling-actions";
 
 vi.mock("./trial-onboarding-actions", () => ({
   listTrialOnboardingCandidatesAction: vi.fn(),
@@ -17,6 +18,10 @@ vi.mock("./trial-onboarding-actions", () => ({
   createTrialOnboardingLinkAction: vi.fn(),
   planTrialSubjectAndAssignTeacherAction: vi.fn(),
   sendRegularContractOneClickAction: vi.fn(),
+}));
+
+vi.mock("./consultation-scheduling-actions", () => ({
+  retryTrialEntitlementGrant: vi.fn(),
 }));
 
 const baseCandidate = {
@@ -155,5 +160,36 @@ describe("TrialOnboardingPanel", () => {
     await screen.findByText(/발송 실패 — 관리자 조치 필요/);
     expect(sendRegularContractOneClickAction).toHaveBeenCalledTimes(1);
     expect(screen.getByRole("button", { name: "다시 시도" })).toBeInTheDocument();
+  });
+
+  it("체험수업권 지급이 실패했으면 사유와 재시도 버튼을 보여주고, 클릭하면 재시도 후 파이프라인을 새로 불러온다", async () => {
+    (listTrialOnboardingCandidatesAction as ReturnType<typeof vi.fn>).mockResolvedValue([
+      { ...baseCandidate, trialIntentConfirmedAt: "2026-09-03T00:00:00Z", childId: "child1", linkStatus: "redeemed" },
+    ]);
+    (listRegularConversionCandidatesAction as ReturnType<typeof vi.fn>).mockResolvedValue([]);
+    (getTrialOnboardingPipelineAction as ReturnType<typeof vi.fn>)
+      .mockResolvedValueOnce({
+        consultationId: "c1",
+        subjectEnrollmentId: "se1",
+        trialEntitlementGrantStatus: "failed",
+        trialEntitlementGrantError: "연결된 학생 계정이 없어 체험수업권을 지급할 수 없습니다.",
+        steps: stepList(["trial_intent", "account_linked", "assignment", "trial_consent"]),
+      })
+      .mockResolvedValueOnce({
+        consultationId: "c1",
+        subjectEnrollmentId: "se1",
+        trialEntitlementGrantStatus: "granted",
+        trialEntitlementGrantError: null,
+        steps: stepList(["trial_intent", "account_linked", "assignment", "trial_consent", "trial_entitlement"]),
+      });
+    (retryTrialEntitlementGrant as ReturnType<typeof vi.fn>).mockResolvedValue(undefined);
+
+    render(<TrialOnboardingPanel />);
+
+    await screen.findByText(/체험수업권 지급에 실패했습니다: 연결된 학생 계정이 없어/);
+    fireEvent.click(screen.getByRole("button", { name: "체험수업권 지급 재시도" }));
+
+    await waitFor(() => expect(retryTrialEntitlementGrant).toHaveBeenCalledWith("c1"));
+    await waitFor(() => expect(getTrialOnboardingPipelineAction).toHaveBeenCalledTimes(2));
   });
 });

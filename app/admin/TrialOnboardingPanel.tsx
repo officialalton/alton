@@ -19,6 +19,7 @@ import {
   type RegularConversionCandidate,
   type TrialOnboardingPipeline,
 } from "./trial-onboarding-actions";
+import { retryTrialEntitlementGrant } from "./consultation-scheduling-actions";
 
 const LINK_STATUS_LABEL: Record<TrialOnboardingCandidate["linkStatus"], string> = {
   none: "온보딩 링크 미발급",
@@ -230,12 +231,43 @@ function CandidateCard({
         />
       )}
 
-      {/* 4~9단계: 전부 보호자·선생님 쪽 행동 대기 — 관리자가 누를 버튼이 없는 상태를
-          명시적으로 보여준다(빈 화면처럼 보이지 않게). */}
-      {currentStep &&
+      {/* trial_entitlement은 자동 지급이 실패했을 수 있다(대개 grant 시점에
+          child_id가 아직 없던 경우) — 실패 시 관리자가 수동 재시도할 수 있어야
+          한다. grant_trial_entitlement_for_consultation()의 idempotency 덕분에
+          이미 지급됐으면 재시도해도 중복 지급되지 않는다. */}
+      {currentStep?.key === "trial_entitlement" && pipeline?.trialEntitlementGrantStatus === "failed" ? (
+        <div className="mt-2.5">
+          <div className="text-[12px] text-red">
+            체험수업권 지급에 실패했습니다{pipeline.trialEntitlementGrantError ? `: ${pipeline.trialEntitlementGrantError}` : ""}
+          </div>
+          <button
+            disabled={busy}
+            aria-busy={busy}
+            onClick={async () => {
+              setBusy(true);
+              setError(null);
+              try {
+                await retryTrialEntitlementGrant(c.consultationId);
+                await loadPipeline();
+                onChanged();
+              } catch (e) {
+                setError(e instanceof Error ? e.message : String(e));
+              }
+              setBusy(false);
+            }}
+            className="text-[12px] font-bold px-3 py-1.5 mt-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
+          >
+            {busy ? "재시도 중..." : "체험수업권 지급 재시도"}
+          </button>
+        </div>
+      ) : (
+        /* 4~9단계: 전부 보호자·선생님 쪽 행동 대기 — 관리자가 누를 버튼이 없는 상태를
+            명시적으로 보여준다(빈 화면처럼 보이지 않게). */
+        currentStep &&
         ["trial_consent", "trial_entitlement", "trial_booking", "smart_notes", "review", "regular_intent"].includes(
           currentStep.key
-        ) && <div className="text-[12px] text-grey-500 mt-2.5">{waitingMessage(currentStep.key)}</div>}
+        ) && <div className="text-[12px] text-grey-500 mt-2.5">{waitingMessage(currentStep.key)}</div>
+      )}
 
       {/* 10단계 이후는 아래 "정규 계약 발송 대기" 목록에서 처리 — 여기서는
           진행 상태만 보여주고 별도 액션 버튼을 중복해서 두지 않는다. */}

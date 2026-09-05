@@ -357,6 +357,8 @@ export type TrialOnboardingPipeline = {
   consultationId: string;
   subjectEnrollmentId: string | null;
   steps: TrialPipelineStep[];
+  trialEntitlementGrantStatus: string | null;
+  trialEntitlementGrantError: string | null;
 };
 
 const PIPELINE_STEP_LABELS: Record<TrialPipelineStepKey, string> = {
@@ -418,6 +420,12 @@ export async function getTrialOnboardingPipelineAction(
 ): Promise<TrialOnboardingPipeline> {
   await requireAdminOrCapability(CONSULT_CAPABILITY);
   const admin = createAdminClient();
+
+  const { data: consultationRow } = await admin
+    .from("consultations")
+    .select("trial_entitlement_grant_status, trial_entitlement_grant_error")
+    .eq("id", consultationId)
+    .maybeSingle();
 
   const done: Partial<Record<TrialPipelineStepKey, boolean>> = {
     trial_intent: !!trialIntentConfirmedAt,
@@ -537,6 +545,8 @@ export async function getTrialOnboardingPipelineAction(
   return {
     consultationId,
     subjectEnrollmentId,
+    trialEntitlementGrantStatus: consultationRow?.trial_entitlement_grant_status ?? null,
+    trialEntitlementGrantError: consultationRow?.trial_entitlement_grant_error ?? null,
     steps: order.map((key) => ({ key, done: !!done[key], label: PIPELINE_STEP_LABELS[key] })),
   };
 }
