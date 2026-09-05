@@ -50,18 +50,13 @@ export default function CreditsTab({ data }: { data: CreditsData }) {
           )}
           {/* M2 — 60분 전용 체험수업권. 정규 수업권과 절대 합산하지 않고 별도로 보여준다
               (구매·환불·양도 불가) — app/parent/EntitlementsTab.tsx와 동일한 표기.
-              잔여가 0이어도(이미 체험 수업을 예약해 소진됨) 계속 보여준다 — 사라지면
-              "체험수업권이 있었는데 왜 안 보이지"라고 혼란스러워한다. */}
+              잔여가 0이 되면(체험 수업 예약에 소진됨) 그냥 사라진다. */}
           {data.trialEntitlement && (
             <div className="border-[1.5px] border-grey-200 rounded-lg px-3 py-2.5 bg-grey-50">
-              <p className="text-[12px] font-bold text-ink">
-                체험수업권(60분) {data.trialEntitlement.consumed ? "사용 완료" : "1회 보유 중"}
-              </p>
+              <p className="text-[12px] font-bold text-ink">체험수업권(60분) 1회 보유 중</p>
               <p className="text-[11.5px] text-grey-500 mt-0.5">
-                {data.trialEntitlement.consumed
-                  ? "이미 체험 수업 예약에 사용됐습니다."
-                  : `만료 ${formatDate(data.trialEntitlement.expiresAt)}까지 체험 수업이 시작해야 사용할 수 있습니다(그 이후로는 예약해도 사용할 수 없습니다).`}{" "}
-                정규수업권과 별개이며 구매·환불·양도가 불가능합니다.
+                만료 {formatDate(data.trialEntitlement.expiresAt)}까지 체험 수업이 시작해야 사용할 수 있습니다(그 이후로는
+                예약해도 사용할 수 없습니다) · 정규수업권과 별개이며 구매·환불·양도가 불가능합니다.
               </p>
             </div>
           )}
