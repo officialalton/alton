@@ -248,6 +248,11 @@ function ConsultationCardDetailPanel({
           detail.contractId && (
             <div className="mb-3">
               <div className="text-[11.5px] font-bold text-grey-500 mb-1">정규 계약</div>
+              {detail.contractStatus === "draft" && !detail.latestContractVersionHasEnvelope && (
+                <div className="text-[12px] text-red mb-1.5">
+                  발송 실패 — 관리자 조치 필요(계약은 draft 상태로 남아있습니다). 아래에서 다시 시도할 수 있습니다.
+                </div>
+              )}
               {!detail.latestContractVersionHasEnvelope ? (
                 <ContractSendForm
                   childId={c.child_id!}
