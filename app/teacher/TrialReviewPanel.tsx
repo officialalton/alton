@@ -148,6 +148,11 @@ function ReviewRow({
                 setBusy(true);
                 setError(null);
                 try {
+                  // finalize_trial_lesson_review()는 trial_lesson_reviews 행이 먼저
+                  // 있어야 한다("먼저 초안을 저장해야 합니다") — "공개 확정"을 누르기
+                  // 전에 반드시 "초안 저장"을 따로 눌러야 했던 게 불필요한 2단계였다.
+                  // 지금 입력된 텍스트를 초안으로 먼저 저장한 뒤 바로 확정한다.
+                  await saveTrialLessonReviewDraft({ sessionId: session.sessionId, draftText: text });
                   await finalizeTrialLessonReview({ sessionId: session.sessionId, finalText: text });
                   onSaved();
                 } catch (e) {

@@ -48,6 +48,7 @@ describe("TrialReviewPanel", () => {
 
   it("공개 확정은 인라인 확인을 거친 뒤에만 finalize를 호출한다(원클릭 즉시 공개 아님)", async () => {
     (listMyTrialSessionsNeedingReview as ReturnType<typeof vi.fn>).mockResolvedValue([session]);
+    (saveTrialLessonReviewDraft as ReturnType<typeof vi.fn>).mockResolvedValue({ reviewId: "r1" });
     (finalizeTrialLessonReview as ReturnType<typeof vi.fn>).mockResolvedValue({ reviewId: "r1" });
 
     render(<TrialReviewPanel />);
@@ -60,6 +61,24 @@ describe("TrialReviewPanel", () => {
 
     fireEvent.click(screen.getByRole("button", { name: "네, 공개합니다" }));
     await waitFor(() => expect(finalizeTrialLessonReview).toHaveBeenCalledWith({ sessionId: "s1", finalText: "리뷰 내용" }));
+  });
+
+  it("초안 저장 없이 바로 '공개 확정'을 눌러도 먼저 초안을 저장한 뒤 확정한다(2단계 강요 안 함)", async () => {
+    (listMyTrialSessionsNeedingReview as ReturnType<typeof vi.fn>).mockResolvedValue([session]);
+    (saveTrialLessonReviewDraft as ReturnType<typeof vi.fn>).mockResolvedValue({ reviewId: "r1" });
+    (finalizeTrialLessonReview as ReturnType<typeof vi.fn>).mockResolvedValue({ reviewId: "r1" });
+
+    render(<TrialReviewPanel />);
+    const textarea = await screen.findByLabelText("고객에게 보여줄 체험 리뷰");
+    fireEvent.change(textarea, { target: { value: "초안 없이 바로 확정" } });
+
+    fireEvent.click(screen.getByRole("button", { name: "공개 확정" }));
+    fireEvent.click(screen.getByRole("button", { name: "네, 공개합니다" }));
+
+    await waitFor(() =>
+      expect(saveTrialLessonReviewDraft).toHaveBeenCalledWith({ sessionId: "s1", draftText: "초안 없이 바로 확정" })
+    );
+    expect(finalizeTrialLessonReview).toHaveBeenCalledWith({ sessionId: "s1", finalText: "초안 없이 바로 확정" });
   });
 
   it("초안 저장 실패 시 에러 메시지를 보여준다", async () => {
