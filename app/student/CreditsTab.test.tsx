@@ -48,7 +48,7 @@ describe("CreditsTab — 실제 수업권(entitlement_grants) 보유 현황", ()
           guardianName: "김민지",
           regularRemaining: 0,
           regularNearestExpiry: null,
-          trialEntitlement: { remaining: 1, expiresAt: "2026-12-01T00:00:00Z" },
+          trialEntitlement: { remaining: 1, expiresAt: "2026-12-01T00:00:00Z", consumed: false },
         }}
       />
     );
@@ -77,5 +77,21 @@ describe("CreditsTab — 실제 수업권(entitlement_grants) 보유 현황", ()
       />
     );
     expect(screen.queryByText("보유 수업권")).not.toBeInTheDocument();
+  });
+
+  it("체험수업권이 이미 소진됐어도(예약에 사용됨) 사라지지 않고 '사용 완료'로 보여준다", () => {
+    render(
+      <CreditsTab
+        data={{
+          balance: 0,
+          guardianName: "김민지",
+          regularRemaining: 0,
+          regularNearestExpiry: null,
+          trialEntitlement: { remaining: 0, expiresAt: "2026-12-01T00:00:00Z", consumed: true },
+        }}
+      />
+    );
+    expect(screen.getByText(/체험수업권\(60분\)\s*사용 완료/)).toBeInTheDocument();
+    expect(screen.getByText(/이미 체험 수업 예약에 사용됐습니다\./)).toBeInTheDocument();
   });
 });

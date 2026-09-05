@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { BookableSubjectEnrollment, UpcomingBooking, PastSessionForReport } from "./lesson-booking-data";
 import type { WeeklySeriesOccurrenceResult } from "@/lib/booking/create-booking";
@@ -105,6 +105,16 @@ export default function LessonBookingTab({
 
   const selectedEnrollment = bookableEnrollments.find((e) => e.subjectEnrollmentId === selectedEnrollmentId) ?? null;
 
+  // onListSlots는 부모(ParentShell/StudentShell)가 매 렌더마다 새로 만드는
+  // 인라인 함수라 참조가 계속 바뀐다 — 이걸 그대로 useEffect 의존성에 넣으면
+  // 이 화면과 무관한 부모 리렌더(다른 탭 상태 변경 등)만으로도 슬롯이 원인
+  // 모르게 재조회되는 것처럼 보였다(실사용 확인). ref로 최신 값만 따라가고,
+  // 실제로 다시 조회해야 하는 조건(선생님·수업시간이 바뀔 때)만 의존성으로 둔다.
+  const onListSlotsRef = useRef(onListSlots);
+  useEffect(() => {
+    onListSlotsRef.current = onListSlots;
+  }, [onListSlots]);
+
   useEffect(() => {
     try {
       setBrowserTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone);
@@ -121,11 +131,12 @@ export default function LessonBookingTab({
     if (!selectedEnrollment) return;
     if (selectedEnrollment.isTrial) setMode("single");
     setLoadingSlots(true);
-    onListSlots(selectedEnrollment.teacherId, selectedEnrollment.lessonDurationMinutes)
+    onListSlotsRef
+      .current(selectedEnrollment.teacherId, selectedEnrollment.lessonDurationMinutes)
       .then(setSlots)
       .catch((e) => setError(e instanceof Error ? e.message : String(e)))
       .finally(() => setLoadingSlots(false));
-  }, [selectedEnrollment, onListSlots]);
+  }, [selectedEnrollment?.teacherId, selectedEnrollment?.lessonDurationMinutes, selectedEnrollment?.isTrial]);
 
   const slotDateBadges = useMemo(() => {
     const badges: Record<string, { count: number; tone?: "ink" | "grey" | "red" }> = {};
@@ -344,7 +355,12 @@ export default function LessonBookingTab({
                       key={`quick-${slot.toISOString()}`}
                       disabled={submitting}
                       onClick={() => setPendingSlot(slot)}
-                      className="text-[12px] font-bold border-[1.5px] border-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
+                      className={
+                        "text-[12px] font-bold border-[1.5px] rounded-lg px-3 py-1.5 disabled:opacity-50 " +
+                        (pendingSlot?.toISOString() === slot.toISOString()
+                          ? "bg-ink text-white border-ink"
+                          : "border-ink")
+                      }
                     >
                       {formatDateTime(slot.toISOString(), timezone)}
                     </button>
@@ -380,7 +396,12 @@ export default function LessonBookingTab({
                         key={slot.toISOString()}
                         disabled={submitting}
                         onClick={() => setPendingSlot(slot)}
-                        className="text-[12px] font-semibold border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:border-ink disabled:opacity-50"
+                        className={
+                          "text-[12px] font-semibold border-[1.5px] rounded-lg px-3 py-1.5 disabled:opacity-50 " +
+                          (pendingSlot?.toISOString() === slot.toISOString()
+                            ? "bg-ink text-white border-ink"
+                            : "border-grey-200 hover:border-ink")
+                        }
                       >
                         {formatTime(slot, timezone)}
                       </button>

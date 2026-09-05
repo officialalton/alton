@@ -5,7 +5,7 @@ export type CreditsData = {
   guardianName: string | null;
   regularRemaining: number;
   regularNearestExpiry: string | null;
-  trialEntitlement: { remaining: number; expiresAt: string | null } | null;
+  trialEntitlement: { remaining: number; expiresAt: string | null; consumed: boolean } | null;
 };
 
 function extractName(rel: unknown): string {
@@ -63,9 +63,9 @@ export async function loadCreditsData(
       .filter(Boolean)
       .sort()[0] ?? null;
 
-  const trialGrant = (grantDetails ?? []).find(
-    (g) => g.lesson_type_code === "trial" && (g.remaining as number) > 0
-  );
+  // 잔여가 0이어도(이미 체험 수업을 예약해 소진됨) 보여준다 — 그래야 학생이
+  // "체험수업권이 있었는데 왜 안 보이지"라고 혼란스러워하지 않는다.
+  const trialGrant = (grantDetails ?? []).find((g) => g.lesson_type_code === "trial");
 
   return {
     balance: student?.credit_balance ?? 0,
@@ -73,7 +73,11 @@ export async function loadCreditsData(
     regularRemaining,
     regularNearestExpiry,
     trialEntitlement: trialGrant
-      ? { remaining: trialGrant.remaining as number, expiresAt: (trialGrant.expires_at as string) ?? null }
+      ? {
+          remaining: trialGrant.remaining as number,
+          expiresAt: (trialGrant.expires_at as string) ?? null,
+          consumed: (trialGrant.remaining as number) <= 0,
+        }
       : null,
   };
 }
