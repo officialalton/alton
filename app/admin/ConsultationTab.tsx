@@ -33,17 +33,17 @@ import type {
   TrialSessionListItem,
   ProposalListItem,
   ConsentGapItem,
+  CompletedConsentItem,
   DriveArtifactIssue,
   StaleEnvelopeContract,
 } from "./consultation-data";
 
-type SubTab = "consult" | "scheduling" | "trial" | "proposal" | "consent" | "errors";
+type SubTab = "consult" | "scheduling" | "trial" | "consent" | "errors";
 
 const SUB_NAV: { id: SubTab; label: string }[] = [
-  { id: "consult", label: "상담 관리" },
+  { id: "consult", label: "상담 현황" },
   { id: "scheduling", label: "상담 운영(신청·수락·캘린더)" },
   { id: "trial", label: "체험 관리" },
-  { id: "proposal", label: "제안서 관리" },
   { id: "consent", label: "보호자 동의 대기" },
   { id: "errors", label: "오류/재처리 현황판" },
 ];
@@ -60,6 +60,7 @@ export default function ConsultationTab({
   trials,
   proposals,
   consentGaps,
+  completedConsents,
   driveIssues,
   staleEnvelopes,
   contractActivationRetries,
@@ -68,6 +69,7 @@ export default function ConsultationTab({
   trials: TrialSessionListItem[];
   proposals: ProposalListItem[];
   consentGaps: ConsentGapItem[];
+  completedConsents: CompletedConsentItem[];
   driveIssues: DriveArtifactIssue[];
   staleEnvelopes: StaleEnvelopeContract[];
   contractActivationRetries: ContractActivationRetryItem[];
@@ -99,8 +101,7 @@ export default function ConsultationTab({
       {sub === "consult" && <ConsultSection consultations={consultations} />}
       {sub === "scheduling" && <ConsultationSchedulingPanel />}
       {sub === "trial" && <TrialSection trials={trials} consultations={consultations} />}
-      {sub === "proposal" && <ProposalSection proposals={proposals} trials={trials} />}
-      {sub === "consent" && <ConsentGapSection gaps={consentGaps} />}
+      {sub === "consent" && <ConsentGapSection gaps={consentGaps} completed={completedConsents} />}
       {sub === "errors" && (
         <ErrorDashboardSection
           driveIssues={driveIssues}
@@ -1043,23 +1044,59 @@ function NewProposalForm({
   );
 }
 
-function ConsentGapSection({ gaps }: { gaps: ConsentGapItem[] }) {
+function ConsentGapSection({ gaps, completed }: { gaps: ConsentGapItem[]; completed: CompletedConsentItem[] }) {
+  const [view, setView] = useState<"pending" | "done">("pending");
+
   return (
     <div>
-      <p className="text-[13px] text-grey-500 mb-4">
-        생년월일 미입력 또는 필수 보호자 동의가 없어 이용이 막혀 있는 학생 목록입니다.
-      </p>
-      {gaps.length === 0 ? (
-        <p className="text-[13px] text-grey-500">막혀 있는 학생이 없습니다.</p>
+      <div className="flex gap-1 mb-4 border-b border-grey-200">
+        <button
+          onClick={() => setView("pending")}
+          className={
+            "text-[12.5px] font-bold px-3 py-2 -mb-px border-b-2 " +
+            (view === "pending" ? "border-ink text-ink" : "border-transparent text-grey-500")
+          }
+        >
+          대기 ({gaps.length})
+        </button>
+        <button
+          onClick={() => setView("done")}
+          className={
+            "text-[12.5px] font-bold px-3 py-2 -mb-px border-b-2 " +
+            (view === "done" ? "border-ink text-ink" : "border-transparent text-grey-500")
+          }
+        >
+          완료 ({completed.length})
+        </button>
+      </div>
+
+      {view === "pending" ? (
+        <>
+          <p className="text-[13px] text-grey-500 mb-4">
+            생년월일 미입력 또는 필수 보호자 동의가 없어 이용이 막혀 있는 학생 목록입니다.
+          </p>
+          {gaps.length === 0 ? (
+            <p className="text-[13px] text-grey-500">막혀 있는 학생이 없습니다.</p>
+          ) : (
+            gaps.map((g) => (
+              <div key={g.childId} className={card}>
+                <div className="text-[14px] font-bold text-ink">{g.childName ?? g.childId}</div>
+                <div className="text-[12px] text-grey-500">
+                  {!g.hasDob && "생년월일 미입력"}
+                  {!g.hasDob && !g.hasActiveConsent && " · "}
+                  {!g.hasActiveConsent && "유효한 보호자 동의 없음"}
+                </div>
+              </div>
+            ))
+          )}
+        </>
+      ) : completed.length === 0 ? (
+        <p className="text-[13px] text-grey-500">완료된 동의가 없습니다.</p>
       ) : (
-        gaps.map((g) => (
-          <div key={g.childId} className={card}>
-            <div className="text-[14px] font-bold text-ink">{g.childName ?? g.childId}</div>
-            <div className="text-[12px] text-grey-500">
-              {!g.hasDob && "생년월일 미입력"}
-              {!g.hasDob && !g.hasActiveConsent && " · "}
-              {!g.hasActiveConsent && "유효한 보호자 동의 없음"}
-            </div>
+        completed.map((c) => (
+          <div key={c.childId} className={card}>
+            <div className="text-[14px] font-bold text-ink">{c.childName ?? c.childId}</div>
+            <div className="text-[12px] text-grey-500">동의 완료</div>
           </div>
         ))
       )}

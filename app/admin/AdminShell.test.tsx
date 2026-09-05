@@ -98,6 +98,7 @@ const baseProps = {
   trials: [],
   proposals: [],
   consentGaps: [],
+  completedConsents: [],
   driveIssues: [],
   staleEnvelopes: [],
   contractActivationRetries: [],

@@ -60,6 +60,7 @@ const baseProps = {
   consentGaps: [
     { childId: "s1", childName: "지훈", hasDob: false, hasActiveConsent: false },
   ],
+  completedConsents: [{ childId: "s2", childName: "이서아" }],
   driveIssues: [
     { id: "d1", contractId: "ct1", artifactType: "signed_document", syncStatus: "retryable_failed" as const },
   ],
@@ -73,10 +74,15 @@ describe("ConsultationTab", () => {
     expect(screen.getByText("김민지", { exact: false })).toBeInTheDocument();
   });
 
-  it("보호자 동의 대기 서브탭으로 전환하면 동의 미비 학생을 보여준다", () => {
+  it("보호자 동의 대기 서브탭으로 전환하면 대기 목록이 기본으로 보이고, 완료 탭을 누르면 완료 목록을 보여준다(대기/완료 분리, 2026-09-05)", () => {
     render(<ConsultationTab {...baseProps} />);
     fireEvent.click(screen.getByText("보호자 동의 대기"));
     expect(screen.getByText("지훈")).toBeInTheDocument();
+    expect(screen.queryByText("이서아")).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByText("완료 (1)"));
+    expect(screen.getByText("이서아")).toBeInTheDocument();
+    expect(screen.queryByText("지훈")).not.toBeInTheDocument();
   });
 
   it("오류/재처리 현황판 서브탭에서 Drive 실패 항목을 원인별로 보여준다", () => {

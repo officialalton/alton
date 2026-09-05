@@ -226,6 +226,49 @@ export async function loadConsentGaps(supabase: SupabaseClient): Promise<Consent
     .filter((s) => !s.hasDob || !s.hasActiveConsent);
 }
 
+export type CompletedConsentItem = {
+  childId: string;
+  childName: string | null;
+};
+
+/**
+ * loadConsentGaps의 짝 — "대기"(막혀 있음) 목록만 있고 "완료" 목록이 없어
+ * 관리자 화면에서 전부 대기 중인 것처럼만 보이던 문제 보완(사용자 지시,
+ * 2026-09-05). 같은 대상 조건(만 13세 미만 또는 생년월일 미입력)에서 생년월일이
+ * 있고 유효한 동의가 있는 쪽만 뽑는다.
+ */
+export async function loadCompletedConsents(supabase: SupabaseClient): Promise<CompletedConsentItem[]> {
+  const { data: students } = await supabase
+    .from("profiles")
+    .select("id, name, date_of_birth, role")
+    .eq("role", "student");
+  if (!students || students.length === 0) return [];
+
+  const under13OrUnknown = students.filter((s) => {
+    if (!s.date_of_birth) return true;
+    const dob = new Date(s.date_of_birth);
+    const cutoff = new Date();
+    cutoff.setUTCFullYear(cutoff.getUTCFullYear() - 13);
+    return dob > cutoff;
+  });
+  if (under13OrUnknown.length === 0) return [];
+
+  const { data: consents } = await supabase
+    .from("guardian_consents")
+    .select("student_id, revoked_at")
+    .in(
+      "student_id",
+      under13OrUnknown.map((s) => s.id)
+    );
+  const activeConsentStudentIds = new Set(
+    (consents ?? []).filter((c) => !c.revoked_at).map((c) => c.student_id)
+  );
+
+  return under13OrUnknown
+    .filter((s) => !!s.date_of_birth && activeConsentStudentIds.has(s.id))
+    .map((s) => ({ childId: s.id, childName: s.name }));
+}
+
 export type DriveArtifactIssue = {
   id: string;
   contractId: string;

@@ -17,6 +17,7 @@ import type {
   TrialSessionListItem,
   ProposalListItem,
   ConsentGapItem,
+  CompletedConsentItem,
   DriveArtifactIssue,
   StaleEnvelopeContract,
 } from "./consultation-data";
@@ -79,6 +80,7 @@ export default function AdminShell({
   trials,
   proposals,
   consentGaps,
+  completedConsents,
   driveIssues,
   staleEnvelopes,
   contractActivationRetries,
@@ -110,6 +112,7 @@ export default function AdminShell({
   trials: TrialSessionListItem[];
   proposals: ProposalListItem[];
   consentGaps: ConsentGapItem[];
+  completedConsents: CompletedConsentItem[];
   driveIssues: DriveArtifactIssue[];
   staleEnvelopes: StaleEnvelopeContract[];
   contractActivationRetries: ContractActivationRetryItem[];
@@ -243,6 +246,7 @@ export default function AdminShell({
               trials={trials}
               proposals={proposals}
               consentGaps={consentGaps}
+              completedConsents={completedConsents}
               driveIssues={driveIssues}
               staleEnvelopes={staleEnvelopes}
               contractActivationRetries={contractActivationRetries}
