@@ -26,7 +26,7 @@ export async function loadTeacherLessonSchedule(
   const { data, error } = await supabase
     .from("sessions")
     .select(
-      "id, teacher_id, smart_notes_drive_file_id, lesson_type:lesson_types(code), reservation:reservations!sessions_reservation_id_fkey(id, starts_at, ends_at, status, google_meet_link, google_sync_status, external_change_status), subject_enrollment:subject_enrollments!sessions_subject_enrollment_id_fkey(subject:subjects(name), child:profiles!subject_enrollments_child_id_fkey(name))"
+      "id, teacher_id, session_smart_notes(drive_file_id), lesson_type:lesson_types(code), reservation:reservations!sessions_reservation_id_fkey(id, starts_at, ends_at, status, google_meet_link, google_sync_status, external_change_status), subject_enrollment:subject_enrollments!sessions_subject_enrollment_id_fkey(subject:subjects(name), child:profiles!subject_enrollments_child_id_fkey(name))"
     )
     .eq("teacher_id", teacherId)
     .order("id", { ascending: true });
@@ -51,6 +51,7 @@ export async function loadTeacherLessonSchedule(
       const subject = one(subjectEnrollment?.subject as unknown) as { name?: string } | null;
       const child = one(subjectEnrollment?.child as unknown) as { name?: string } | null;
       const lessonType = one(row.lesson_type as unknown) as { code?: string } | null;
+      const smartNotes = one(row.session_smart_notes as unknown) as { drive_file_id?: string } | null;
       if (!reservation?.id || reservation.status !== "confirmed") return null;
       return {
         reservationId: reservation.id,
@@ -64,7 +65,7 @@ export async function loadTeacherLessonSchedule(
         googleSyncStatus: reservation.google_sync_status ?? "pending",
         externalChangeStatus: reservation.external_change_status ?? "none",
         isTrial: lessonType?.code === "trial",
-        smartNotesDriveFileId: (row.smart_notes_drive_file_id as string | null) ?? null,
+        smartNotesDriveFileId: smartNotes?.drive_file_id ?? null,
       };
     })
     .filter((item): item is TeacherLessonScheduleItem => item !== null)

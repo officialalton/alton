@@ -226,10 +226,15 @@ export async function POST(req: NextRequest) {
       // 화면이 참조하는 값이 항상 유효하지 않은 문자열이었다 — 2026-09-05 실사용
       // 발견) 원본이 실제로 연결돼도 "Smart Notes 연결" 단계가 영원히 완료로 안 잡혔다.
       // drive_file_id를 확보한 시점이 이 파이프라인의 완료 시점이다.
+      //
+      // 원본 식별자(drive_file_id) 자체는 sessions가 아니라 session_smart_notes에
+      // 저장한다(20261025000000) — sessions는 학생·보호자도 select 가능한 행
+      // 정책이라 원본을 학생·보호자에게 직접 노출하지 않는다는 정책(docs/CURRENT.md)을
+      // 어기고 있었다. sessions에는 상태 문자열만 남긴다.
+      await admin.from("sessions").update({ smart_notes_status: "completed" }).eq("id", sessionId);
       await admin
-        .from("sessions")
-        .update({ smart_notes_drive_file_id: driveFileId, smart_notes_status: "completed" })
-        .eq("id", sessionId);
+        .from("session_smart_notes")
+        .upsert({ session_id: sessionId, drive_file_id: driveFileId }, { onConflict: "session_id" });
     }
     if (consultationId && driveFileId) {
       // 잠재고객에게 원본을 자동 공개하지 않는다(요구사항 4) — 이 컬럼은 관리자 전용

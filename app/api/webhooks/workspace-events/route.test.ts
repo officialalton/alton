@@ -22,6 +22,7 @@ const consultationMaybeSingleMock = vi.fn();
 const dedupMaybeSingleMock = vi.fn();
 const smartNotesInsertMock = vi.fn();
 const sessionsUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
+const sessionSmartNotesUpsertMock = vi.fn().mockResolvedValue({ error: null });
 const consultationsUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
 const accessEventsInsertMock = vi.fn();
 const subscriptionMaybeSingleMock = vi.fn().mockResolvedValue({ data: null });
@@ -47,6 +48,9 @@ const fromMock = vi.fn((table: string) => {
   }
   if (table === "sessions") {
     return { update: (payload: unknown) => ({ eq: (...args: unknown[]) => sessionsUpdateEqMock(payload, ...args) }) };
+  }
+  if (table === "session_smart_notes") {
+    return { upsert: (payload: unknown, opts: unknown) => sessionSmartNotesUpsertMock(payload, opts) };
   }
   if (table === "session_access_events") {
     return { insert: (payload: unknown) => accessEventsInsertMock(payload) };
@@ -135,7 +139,7 @@ describe("POST /api/webhooks/workspace-events", () => {
     expect(accessEventsInsertMock).not.toHaveBeenCalled();
   });
 
-  it("Smart Notes 생성 이벤트: 관리자 subject로 meetingCode/driveFileId를 조회해 세션에 연결하고 sessions.smart_notes_drive_file_id를 갱신한다", async () => {
+  it("Smart Notes 생성 이벤트: 관리자 subject로 meetingCode/driveFileId를 조회해 세션에 연결하고 session_smart_notes에 원본 식별자를 저장한다(sessions에는 상태만)", async () => {
     const { POST } = await import("./route");
     const res = await POST(
       makeRequest(
@@ -155,10 +159,10 @@ describe("POST /api/webhooks/workspace-events", () => {
     expect(smartNotesInsertMock).toHaveBeenCalledWith(
       expect.objectContaining({ session_id: "s1", google_meeting_code: "abc-defg-hij", drive_file_id: "drive-file-1", linked: true })
     );
-    expect(sessionsUpdateEqMock).toHaveBeenCalledWith(
-      { smart_notes_drive_file_id: "drive-file-1", smart_notes_status: "completed" },
-      "id",
-      "s1"
+    expect(sessionsUpdateEqMock).toHaveBeenCalledWith({ smart_notes_status: "completed" }, "id", "s1");
+    expect(sessionSmartNotesUpsertMock).toHaveBeenCalledWith(
+      { session_id: "s1", drive_file_id: "drive-file-1" },
+      { onConflict: "session_id" }
     );
   });
 
