@@ -212,7 +212,15 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: true, warning: "insert_failed" });
     }
     if (sessionId && driveFileId) {
-      await admin.from("sessions").update({ smart_notes_drive_file_id: driveFileId }).eq("id", sessionId);
+      // smart_notes_status(문서 생성·연결 파이프라인 상태, 20261008000000 주석 참고)는
+      // 지금까지 이 컬럼을 실제로 갱신하는 코드가 어디에도 없어서(관리자 파이프라인
+      // 화면이 참조하는 값이 항상 유효하지 않은 문자열이었다 — 2026-09-05 실사용
+      // 발견) 원본이 실제로 연결돼도 "Smart Notes 연결" 단계가 영원히 완료로 안 잡혔다.
+      // drive_file_id를 확보한 시점이 이 파이프라인의 완료 시점이다.
+      await admin
+        .from("sessions")
+        .update({ smart_notes_drive_file_id: driveFileId, smart_notes_status: "completed" })
+        .eq("id", sessionId);
     }
     if (consultationId && driveFileId) {
       // 잠재고객에게 원본을 자동 공개하지 않는다(요구사항 4) — 이 컬럼은 관리자 전용

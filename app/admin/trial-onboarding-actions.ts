@@ -479,7 +479,10 @@ export async function getTrialOnboardingPipelineAction(
         .limit(1)
         .maybeSingle();
       done.trial_booking = !!trialSession;
-      done.smart_notes = trialSession?.smart_notes_status === "applied";
+      // "applied"는 sessions.smart_notes_status의 유효한 값이 아니다(체크 제약:
+      // not_applicable/pending/active/completed/failed) — 원본이 실제로 연결돼도
+      // 이 비교가 항상 false였다(2026-09-05 실사용 발견, 웹훅 쪽도 함께 수정).
+      done.smart_notes = trialSession?.smart_notes_status === "completed";
 
       const { data: review } = await admin
         .from("trial_lesson_reviews")

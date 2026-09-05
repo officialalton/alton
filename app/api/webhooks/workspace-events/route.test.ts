@@ -46,7 +46,7 @@ const fromMock = vi.fn((table: string) => {
     };
   }
   if (table === "sessions") {
-    return { update: () => ({ eq: sessionsUpdateEqMock }) };
+    return { update: (payload: unknown) => ({ eq: (...args: unknown[]) => sessionsUpdateEqMock(payload, ...args) }) };
   }
   if (table === "session_access_events") {
     return { insert: (payload: unknown) => accessEventsInsertMock(payload) };
@@ -155,7 +155,11 @@ describe("POST /api/webhooks/workspace-events", () => {
     expect(smartNotesInsertMock).toHaveBeenCalledWith(
       expect.objectContaining({ session_id: "s1", google_meeting_code: "abc-defg-hij", drive_file_id: "drive-file-1", linked: true })
     );
-    expect(sessionsUpdateEqMock).toHaveBeenCalledWith("id", "s1");
+    expect(sessionsUpdateEqMock).toHaveBeenCalledWith(
+      { smart_notes_drive_file_id: "drive-file-1", smart_notes_status: "completed" },
+      "id",
+      "s1"
+    );
   });
 
   it("ce-subject가 등록된 선생님 구독과 일치하면 admin이 아니라 그 선생님을 subject로 조회한다(실사용 403 버그 수정)", async () => {
