@@ -57,7 +57,7 @@ vi.mock("./consultation-kanban-actions", () => ({
     scheduled: "상담 일정 확정",
     trial_requested: "체험 신청",
     trial_scheduled: "체험 일정 확정",
-    contract_sent: "계약서 전달",
+    contract_sent: "계약",
   },
   CLOSURE_TYPE_LABEL: {
     no_trial: "체험 없이 종료",
@@ -101,6 +101,8 @@ const baseProps = {
   ],
   staleEnvelopes: [],
   contractActivationRetries: [],
+  subjects: [],
+  teacherCandidatesBySubject: {},
 };
 
 describe("ConsultationTab", () => {

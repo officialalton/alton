@@ -32,15 +32,24 @@ import {
   sendTrialOnboardingNoticeAction,
   sendRegularContractOneClickAction,
   confirmTrialIntentAction,
+  planTrialSubjectAndAssignTeacherAction,
 } from "./trial-onboarding-actions";
 import { createNewContractVersionForResend } from "./consultation-actions";
 import LessonReviewAdminEditor from "./LessonReviewAdminEditor";
+import type { AdminSubject } from "./subject-data";
+import type { MatchingTeacherCandidate } from "./matching-data";
 
 const btnPrimary = "text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50";
 const btnSecondary = "text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50";
 const errText = "text-[12px] text-red mb-2";
 
-export default function ConsultationKanbanBoard() {
+export default function ConsultationKanbanBoard({
+  subjects,
+  teacherCandidatesBySubject,
+}: {
+  subjects: AdminSubject[];
+  teacherCandidatesBySubject: Record<string, MatchingTeacherCandidate[]>;
+}) {
   const router = useRouter();
   const [cards, setCards] = useState<KanbanCard[] | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -101,6 +110,8 @@ export default function ConsultationKanbanBoard() {
       {openId && (
         <ConsultationCardDetailPanel
           consultationId={openId}
+          subjects={subjects}
+          teacherCandidatesBySubject={teacherCandidatesBySubject}
           onClose={() => setOpenId(null)}
           onChanged={refresh}
         />
@@ -111,10 +122,14 @@ export default function ConsultationKanbanBoard() {
 
 function ConsultationCardDetailPanel({
   consultationId,
+  subjects,
+  teacherCandidatesBySubject,
   onClose,
   onChanged,
 }: {
   consultationId: string;
+  subjects: AdminSubject[];
+  teacherCandidatesBySubject: Record<string, MatchingTeacherCandidate[]>;
   onClose: () => void;
   onChanged: () => void;
 }) {
@@ -277,11 +292,19 @@ function ConsultationCardDetailPanel({
             </div>
           )}
 
-        {/* 선생님 배정만 이 화면에서 처리하지 않는다(매칭 탭에서 계속). */}
-        {detail.pipeline?.subjectEnrollmentId && !detail.pipeline.steps.find((s) => s.key === "assignment")?.done && (
-          <p className="text-[11.5px] text-grey-500 mb-3">
-            선생님 배정은 &ldquo;매칭&rdquo; 탭 &gt; 과목 수강 관리에서 진행합니다.
-          </p>
+        {/* 2026-09-05 사용자 지시: "선생님 배정만 빼고" 조건 폐기 — 체험 관련
+            과목 수강 계획 + 선생님 최초 배정을 전부 이 카드 안에서 처리한다
+            (매칭 탭의 SubjectEnrollmentPanel은 이후 선생님 변경 등 일반
+            운영에만 계속 쓰인다). 아직 과목 수강 계획 자체가 없으면(파이프라인
+            subjectEnrollmentId가 null) 과목→선생님 2단계 클릭 폼을 보여준다. */}
+        {c.child_id && !detail.pipeline?.subjectEnrollmentId && (
+          <SubjectTeacherAssignForm
+            childId={c.child_id}
+            subjects={subjects}
+            teacherCandidatesBySubject={teacherCandidatesBySubject}
+            busy={busy}
+            onAssign={(fn) => run(fn)}
+          />
         )}
 
         <div className="border-t border-grey-200 pt-3 mt-2">
@@ -445,6 +468,86 @@ function ContractSendForm({
       >
         회사 승인 및 계약 발송
       </button>
+    </div>
+  );
+}
+
+/** 과목 클릭 → 선생님 클릭 2단계 리스트. 개발자 전용 raw UUID 입력 폼을 대체한다
+ * (2026-09-05 사용자 지시 2번). 선생님 후보는 매칭 탭과 동일한
+ * teacher_curriculum_templates 기반 "과목 전담 가능·active" 목록을 그대로
+ * 재사용한다(loadTeacherCandidatesBySubject) — 검색/페이지네이션은 범위 밖. */
+function SubjectTeacherAssignForm({
+  childId,
+  subjects,
+  teacherCandidatesBySubject,
+  busy,
+  onAssign,
+}: {
+  childId: string;
+  subjects: AdminSubject[];
+  teacherCandidatesBySubject: Record<string, MatchingTeacherCandidate[]>;
+  busy: boolean;
+  onAssign: (fn: () => Promise<void>) => void;
+}) {
+  const [subjectId, setSubjectId] = useState<string | null>(null);
+
+  return (
+    <div className="mb-3 border border-grey-200 rounded-lg p-3" data-testid="subject-teacher-assign-form">
+      <div className="text-[11.5px] font-bold text-grey-500 mb-1.5">과목·선생님 배정</div>
+      {!subjectId ? (
+        <div className="flex flex-wrap gap-1.5">
+          {subjects.map((s) => (
+            <button
+              key={s.subjectId}
+              data-testid={`assign-subject-${s.subjectId}`}
+              className={btnSecondary}
+              disabled={busy}
+              onClick={() => setSubjectId(s.subjectId)}
+            >
+              {s.subjectName}
+            </button>
+          ))}
+          {subjects.length === 0 && <p className="text-[11.5px] text-grey-400">등록된 과목이 없습니다.</p>}
+        </div>
+      ) : (
+        <div>
+          <div className="text-[11px] text-grey-500 mb-1.5">
+            {subjects.find((s) => s.subjectId === subjectId)?.subjectName ?? subjectId} — 선생님 선택
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {(teacherCandidatesBySubject[subjectId] ?? []).map((t) => (
+              <button
+                key={t.id}
+                data-testid={`assign-teacher-${t.id}`}
+                className={btnSecondary}
+                disabled={busy}
+                onClick={() =>
+                  onAssign(async () => {
+                    await planTrialSubjectAndAssignTeacherAction({
+                      childId,
+                      subjectId,
+                      teacherId: t.id,
+                      effectiveFrom: new Date().toISOString(),
+                    });
+                  })
+                }
+              >
+                {t.name}
+              </button>
+            ))}
+            {(teacherCandidatesBySubject[subjectId] ?? []).length === 0 && (
+              <p className="text-[11.5px] text-grey-400">이 과목을 가르칠 수 있는 선생님이 없습니다.</p>
+            )}
+          </div>
+          <button
+            className="text-[11px] text-grey-500 underline mt-1.5"
+            disabled={busy}
+            onClick={() => setSubjectId(null)}
+          >
+            다른 과목 선택
+          </button>
+        </div>
+      )}
     </div>
   );
 }

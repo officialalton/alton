@@ -43,7 +43,14 @@ async function classifyStage(
   const pipeline = await getTrialOnboardingPipelineAction(row.id, row.child_id, row.trial_intent_confirmed_at);
   const done = (key: string) => pipeline.steps.find((s) => s.key === key)?.done ?? false;
   if (!done("trial_booking")) return "trial_requested";
-  if (!done("contract_sent")) return "trial_scheduled";
+  // 2026-09-05 사용자 지시: "계약" 단계는 관리자의 실제 발송 여부가 아니라
+  // 보호자의 정규 진행 희망 표시(regular_intent) 시점부터 시작한다 — 관리자가
+  // 아직 발송 버튼을 누르지 않았어도 카드는 이미 "계약" 칸에 있어야 한다.
+  // 서명 완료(contract active) 시점에는 admin_close_consultation()이 자동으로
+  // closure_type='contract_signed'를 채워 이 상담을 "지난 상담"으로 옮기므로
+  // (app/api/webhooks/docusign/route.ts), 여기서는 그 이후 상태를 별도로 분기할
+  // 필요가 없다.
+  if (!done("regular_intent")) return "trial_scheduled";
   return "contract_sent";
 }
 

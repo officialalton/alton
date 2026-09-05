@@ -120,6 +120,23 @@ describe("listKanbanBoardAction — 5단계 stage 분류", () => {
     expect(cards[0].stage).toBe("trial_scheduled");
   });
 
+  it("체험 예약·계약 발송은 안 됐어도 보호자 정규 진행 희망(regular_intent)이 있으면 '계약' 컬럼으로 분류한다(2026-09-05 사용자 지시 3번)", async () => {
+    listConsultationsMock.mockResolvedValue([baseRow({ status: "completed", outcome: "trial_recommended", child_id: "child1" })]);
+    pipelineMock.mockResolvedValue({
+      consultationId: "c1",
+      subjectEnrollmentId: "se1",
+      trialEntitlementGrantStatus: null,
+      trialEntitlementGrantError: null,
+      steps: [
+        { key: "trial_booking", done: true, label: "체험 예약" },
+        { key: "regular_intent", done: true, label: "정규 진행 희망" },
+        { key: "contract_sent", done: false, label: "계약 발송" },
+      ],
+    });
+    const cards = await listKanbanBoardAction();
+    expect(cards[0].stage).toBe("contract_sent");
+  });
+
   it("종료(closure_type not null)된 상담은 칸반 보드에서 제외한다", async () => {
     listConsultationsMock.mockResolvedValue([baseRow({ id: "c1" }), baseRow({ id: "c2" })]);
     adminFromMock.mockReturnValue({

@@ -3,6 +3,7 @@ import { createAdminClient } from "@/lib/supabase-admin";
 import { verifyDocusignWebhookSignature } from "@/lib/docusign";
 import { queueDriveArtifactSync } from "@/lib/drive-artifacts";
 import { autoActivateReadySubjectEnrollments } from "@/lib/enrollment/auto-activate";
+import { autoCloseConsultationOnContractSigned } from "@/lib/enrollment/auto-close-consultation";
 
 // R3: docusign_envelope_id 컬럼이 contracts에 생겼으므로(20260912000000 마이그레이션)
 // 이 라우트를 no-op 스텁에서 실제 처리로 복구한다.
@@ -239,6 +240,11 @@ export async function POST(request: Request) {
       // 제거) — 결제완료 수업권 조건은 뺐다(예약 자체가 이미 결제완료 수업권을
       // 요구하므로 이중 게이트 불필요, subject_enrollment_activation_ready() 참고).
       await autoActivateReadySubjectEnrollments(admin, contract.id);
+      // M4(사용자 지시, 2026-09-05, 4번): 계약 서명 완료 시 해당 자녀의 열려있는
+      // 체험 파이프라인 상담도 자동으로 종료(closure_type='contract_signed')
+      // 처리해 "지난 상담" 탭으로 옮긴다(관리자 수동 "상담 종료" 클릭 불필요).
+      // 실패해도 계약 활성화 자체는 절대 막지 않는다(함수 내부에서 항상 처리).
+      await autoCloseConsultationOnContractSigned(admin, contract.id);
     }
     if (activateError) {
       // 2026-09-20 마이그레이션(contract_activation_retries_open_version_idx)이

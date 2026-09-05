@@ -9,6 +9,12 @@ const contractVersionMaybeSingleMock = vi.fn();
 const contractVersionUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
 const contractUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
 
+// M4(2026-09-05, 4번) — 계약 서명 완료 시 자동 상담 종료(auto-close-consultation.ts) 관련 목.
+const contractChildLookupMock = vi.fn().mockResolvedValue({ data: { id: "ct1", child_id: null } });
+const openConsultationLookupMock = vi.fn().mockResolvedValue({ data: null });
+const finalReviewLookupMock = vi.fn().mockResolvedValue({ data: null });
+let subjectEnrollmentIdsForAutoClose: { id: string }[] = [];
+
 const driveArtifactsInsertMock = vi.fn().mockResolvedValue({ error: null });
 const activationRetryInsertMock = vi.fn().mockResolvedValue({ error: null });
 const activationRetryUpdateIsMock = vi.fn().mockResolvedValue({ error: null });
@@ -34,6 +40,23 @@ const fromMock = vi.fn((table: string) => {
   if (table === "contracts") {
     return {
       update: () => ({ eq: contractUpdateEqMock }),
+      select: () => ({ eq: () => ({ maybeSingle: contractChildLookupMock }) }),
+    };
+  }
+  if (table === "consultations") {
+    return {
+      select: () => ({
+        eq: () => ({
+          eq: () => ({ is: () => ({ order: () => ({ limit: () => ({ maybeSingle: openConsultationLookupMock }) }) }) }),
+        }),
+      }),
+    };
+  }
+  if (table === "lesson_reviews") {
+    return {
+      select: () => ({
+        in: () => ({ eq: () => ({ order: () => ({ limit: () => ({ maybeSingle: finalReviewLookupMock }) }) }) }),
+      }),
     };
   }
   if (table === "drive_artifacts") {
@@ -44,8 +67,17 @@ const fromMock = vi.fn((table: string) => {
   }
   if (table === "subject_enrollments") {
     return {
+      // 두 가지 호출 형태를 모두 지원한다: auto-activate(select().eq("contract_id",
+      // ...).eq("status","planned") — 즉시 resolve되는 Promise)과 auto-close-
+      // consultation(select().eq("contract_id", ...)만 — 단일 eq 결과 자체가
+      // thenable이면서 추가로 .eq를 체이닝할 수도 있어야 함).
       select: () => ({
-        eq: () => ({ eq: () => Promise.resolve({ data: subjectEnrollmentsToActivate, error: null }) }),
+        eq: () => {
+          const singleEqResult = Promise.resolve({ data: subjectEnrollmentIdsForAutoClose, error: null });
+          return Object.assign(singleEqResult, {
+            eq: () => Promise.resolve({ data: subjectEnrollmentsToActivate, error: null }),
+          });
+        },
       }),
       update: () => ({ eq: () => ({ eq: subjectEnrollmentsUpdateEqMock }) }),
     };
@@ -94,6 +126,10 @@ describe("POST /api/webhooks/docusign", () => {
     subjectEnrollmentsToActivate = [];
     subjectEnrollmentsUpdateEqMock.mockClear();
     rpcMock.mockReset();
+    contractChildLookupMock.mockReset().mockResolvedValue({ data: { id: "ct1", child_id: null } });
+    openConsultationLookupMock.mockReset().mockResolvedValue({ data: null });
+    finalReviewLookupMock.mockReset().mockResolvedValue({ data: null });
+    subjectEnrollmentIdsForAutoClose = [];
   });
 
   afterEach(() => {
@@ -166,6 +202,79 @@ describe("POST /api/webhooks/docusign", () => {
       p_subject_enrollment_id: "se1",
     });
     expect(subjectEnrollmentsUpdateEqMock).toHaveBeenCalledWith("status", "planned");
+  });
+
+  describe("M4(2026-09-05, 4번) — 계약 서명 완료 시 상담 자동 종료", () => {
+    it("열려있는 체험 상담이 있으면 admin_close_consultation을 contract_signed로 자동 호출한다", async () => {
+      contractChildLookupMock.mockResolvedValue({ data: { id: "ct1", child_id: "child1" } });
+      openConsultationLookupMock.mockResolvedValue({ data: { id: "consult1" } });
+      subjectEnrollmentIdsForAutoClose = [{ id: "se1" }];
+      finalReviewLookupMock.mockResolvedValue({ data: { final_text: "확정된 체험 리뷰 텍스트" } });
+      rpcMock.mockResolvedValue({ data: null, error: null });
+
+      const { POST } = await import("./route");
+      const request = makeRequest(
+        { event: "envelope-completed", data: { envelopeId: "env-1" } },
+        "secret123"
+      );
+
+      const res = await POST(request);
+      expect(res.status).toBe(200);
+      expect(rpcMock).toHaveBeenCalledWith("admin_close_consultation", {
+        p_consultation_id: "consult1",
+        p_closure_type: "contract_signed",
+        p_review_text: "확정된 체험 리뷰 텍스트",
+      });
+    });
+
+    it("확정 리뷰가 없으면 기본 문구로 종료한다", async () => {
+      contractChildLookupMock.mockResolvedValue({ data: { id: "ct1", child_id: "child1" } });
+      openConsultationLookupMock.mockResolvedValue({ data: { id: "consult1" } });
+      rpcMock.mockResolvedValue({ data: null, error: null });
+
+      const { POST } = await import("./route");
+      const request = makeRequest(
+        { event: "envelope-completed", data: { envelopeId: "env-1" } },
+        "secret123"
+      );
+
+      await POST(request);
+      expect(rpcMock).toHaveBeenCalledWith("admin_close_consultation", {
+        p_consultation_id: "consult1",
+        p_closure_type: "contract_signed",
+        p_review_text: "계약 서명 완료로 자동 종료",
+      });
+    });
+
+    it("매칭되는 열린 상담이 없어도 계약 활성화 응답 자체는 200으로 성공한다(자동 종료 실패가 활성화를 막지 않음)", async () => {
+      contractChildLookupMock.mockResolvedValue({ data: { id: "ct1", child_id: "child1" } });
+      openConsultationLookupMock.mockResolvedValue({ data: null });
+
+      const { POST } = await import("./route");
+      const request = makeRequest(
+        { event: "envelope-completed", data: { envelopeId: "env-1" } },
+        "secret123"
+      );
+
+      const res = await POST(request);
+      expect(res.status).toBe(200);
+      expect(contractUpdateEqMock).toHaveBeenCalledWith("id", "ct1");
+      expect(rpcMock).not.toHaveBeenCalledWith("admin_close_consultation", expect.anything());
+    });
+
+    it("자녀 정보를 찾을 수 없어도(child_id 없음) 계약 활성화는 그대로 성공한다", async () => {
+      contractChildLookupMock.mockResolvedValue({ data: { id: "ct1", child_id: null } });
+
+      const { POST } = await import("./route");
+      const request = makeRequest(
+        { event: "envelope-completed", data: { envelopeId: "env-1" } },
+        "secret123"
+      );
+
+      const res = await POST(request);
+      expect(res.status).toBe(200);
+      expect(contractUpdateEqMock).toHaveBeenCalledWith("id", "ct1");
+    });
   });
 
   it("이미 처리된 이벤트(processed_at 존재)면 재처리하지 않고 200을 반환한다", async () => {

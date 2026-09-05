@@ -28,6 +28,8 @@ import type {
   DriveArtifactIssue,
   StaleEnvelopeContract,
 } from "./consultation-data";
+import type { AdminSubject } from "./subject-data";
+import type { MatchingTeacherCandidate } from "./matching-data";
 
 type SubTab = "consult" | "scheduling" | "trial" | "consent" | "errors" | "past";
 
@@ -56,6 +58,8 @@ export default function ConsultationTab({
   driveIssues,
   staleEnvelopes,
   contractActivationRetries,
+  subjects,
+  teacherCandidatesBySubject,
 }: {
   consultations: ConsultationListItem[];
   trials: TrialSessionListItem[];
@@ -65,6 +69,8 @@ export default function ConsultationTab({
   driveIssues: DriveArtifactIssue[];
   staleEnvelopes: StaleEnvelopeContract[];
   contractActivationRetries: ContractActivationRetryItem[];
+  subjects: AdminSubject[];
+  teacherCandidatesBySubject: Record<string, MatchingTeacherCandidate[]>;
 }) {
   const [sub, setSub] = useState<SubTab>("consult");
 
@@ -90,7 +96,9 @@ export default function ConsultationTab({
         ))}
       </div>
 
-      {sub === "consult" && <ConsultationKanbanBoard />}
+      {sub === "consult" && (
+        <ConsultationKanbanBoard subjects={subjects} teacherCandidatesBySubject={teacherCandidatesBySubject} />
+      )}
       {sub === "scheduling" && <ConsultationSchedulingPanel />}
       {sub === "trial" && <TrialSection trials={trials} consultations={consultations} />}
       {sub === "consent" && <ConsentGapSection gaps={consentGaps} completed={completedConsents} />}

@@ -7,14 +7,14 @@ export type KanbanStage =
   | "scheduled" // 상담 일정 확정
   | "trial_requested" // 체험 신청
   | "trial_scheduled" // 체험 일정 확정
-  | "contract_sent"; // 계약서 전달
+  | "contract_sent"; // 계약(보호자 정규 진행 희망 표시 시점부터 서명 완료 전까지)
 
 export const KANBAN_STAGE_LABEL: Record<KanbanStage, string> = {
   requested: "상담 신청",
   scheduled: "상담 일정 확정",
   trial_requested: "체험 신청",
   trial_scheduled: "체험 일정 확정",
-  contract_sent: "계약서 전달",
+  contract_sent: "계약",
 };
 
 export const KANBAN_STAGE_ORDER: KanbanStage[] = [

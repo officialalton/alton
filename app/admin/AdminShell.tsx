@@ -250,6 +250,8 @@ export default function AdminShell({
               driveIssues={driveIssues}
               staleEnvelopes={staleEnvelopes}
               contractActivationRetries={contractActivationRetries}
+              subjects={subjects}
+              teacherCandidatesBySubject={teacherCandidatesBySubject}
             />
           ) : activeTab === "devlog" ? (
             <DevLogTab content={devLogContent} />
