@@ -20,7 +20,7 @@ const reservationMaybeSingleMock = vi.fn();
 const teacherMaybeSingleMock = vi.fn();
 const consultationMaybeSingleMock = vi.fn();
 const dedupMaybeSingleMock = vi.fn();
-const smartNotesInsertMock = vi.fn();
+const smartNotesUpsertMock = vi.fn();
 const sessionsUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
 const sessionSmartNotesUpsertMock = vi.fn().mockResolvedValue({ error: null });
 const consultationsUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
@@ -43,7 +43,7 @@ const fromMock = vi.fn((table: string) => {
   if (table === "smart_notes_generation_events") {
     return {
       select: () => ({ eq: () => ({ maybeSingle: dedupMaybeSingleMock }) }),
-      insert: (payload: unknown) => smartNotesInsertMock(payload),
+      upsert: (payload: unknown, opts: unknown) => smartNotesUpsertMock(payload, opts),
     };
   }
   if (table === "sessions") {
@@ -98,7 +98,7 @@ beforeEach(() => {
   dedupMaybeSingleMock.mockResolvedValue({ data: null });
   resolveMeetingCodeMock.mockResolvedValue("abc-defg-hij");
   fetchDriveFileIdMock.mockResolvedValue("drive-file-1");
-  smartNotesInsertMock.mockResolvedValue({ error: null });
+  smartNotesUpsertMock.mockResolvedValue({ error: null });
   accessEventsInsertMock.mockResolvedValue({ error: null });
 });
 
@@ -128,14 +128,14 @@ describe("POST /api/webhooks/workspace-events", () => {
     const { POST } = await import("./route");
     const res = await POST(makeRequest({}, undefined) as never);
     expect(res.status).toBe(200);
-    expect(smartNotesInsertMock).not.toHaveBeenCalled();
+    expect(smartNotesUpsertMock).not.toHaveBeenCalled();
   });
 
   it("모르는 ce-type은 200으로 ack하고 아무것도 쓰지 않는다", async () => {
     const { POST } = await import("./route");
     const res = await POST(makeRequest({}, "google.workspace.calendar.event.v3.updated") as never);
     expect(res.status).toBe(200);
-    expect(smartNotesInsertMock).not.toHaveBeenCalled();
+    expect(smartNotesUpsertMock).not.toHaveBeenCalled();
     expect(accessEventsInsertMock).not.toHaveBeenCalled();
   });
 
@@ -156,8 +156,9 @@ describe("POST /api/webhooks/workspace-events", () => {
       teacherWorkspaceEmail: "official@alton.education",
       smartNoteResourceName: "conferenceRecords/abc/smartNotes/note1",
     });
-    expect(smartNotesInsertMock).toHaveBeenCalledWith(
-      expect.objectContaining({ session_id: "s1", google_meeting_code: "abc-defg-hij", drive_file_id: "drive-file-1", linked: true })
+    expect(smartNotesUpsertMock).toHaveBeenCalledWith(
+      expect.objectContaining({ session_id: "s1", google_meeting_code: "abc-defg-hij", drive_file_id: "drive-file-1", linked: true }),
+      { onConflict: "pubsub_message_id" }
     );
     expect(sessionsUpdateEqMock).toHaveBeenCalledWith({ smart_notes_status: "completed" }, "id", "s1");
     expect(sessionSmartNotesUpsertMock).toHaveBeenCalledWith(
@@ -191,7 +192,10 @@ describe("POST /api/webhooks/workspace-events", () => {
     reservationMaybeSingleMock.mockResolvedValue({ data: null });
     const { POST } = await import("./route");
     await POST(makeRequest({ smartNote: { name: "conferenceRecords/abc/smartNotes/note1" } }, SMART_NOTE_TYPE) as never);
-    expect(smartNotesInsertMock).toHaveBeenCalledWith(expect.objectContaining({ session_id: null, linked: false }));
+    expect(smartNotesUpsertMock).toHaveBeenCalledWith(
+      expect.objectContaining({ session_id: null, linked: false }),
+      { onConflict: "pubsub_message_id" }
+    );
     expect(sessionsUpdateEqMock).not.toHaveBeenCalled();
   });
 
@@ -202,8 +206,9 @@ describe("POST /api/webhooks/workspace-events", () => {
     const { POST } = await import("./route");
     const res = await POST(makeRequest({ smartNote: { name: "conferenceRecords/abc/smartNotes/note1" } }, SMART_NOTE_TYPE) as never);
     expect(res.status).toBe(200);
-    expect(smartNotesInsertMock).toHaveBeenCalledWith(
-      expect.objectContaining({ google_meeting_code: null, drive_file_id: null, session_id: null, linked: false })
+    expect(smartNotesUpsertMock).toHaveBeenCalledWith(
+      expect.objectContaining({ google_meeting_code: null, drive_file_id: null, session_id: null, linked: false }),
+      { onConflict: "pubsub_message_id" }
     );
     errorSpy.mockRestore();
   });
@@ -254,6 +259,20 @@ describe("POST /api/webhooks/workspace-events", () => {
     errorSpy.mockRestore();
   });
 
+  it("참가자 이벤트 DB 반영이 실패하면 200이 아니라 500을 반환해 Pub/Sub가 재전송하게 한다(2026-09-05 수정)", async () => {
+    accessEventsInsertMock.mockResolvedValue({ error: { message: "connection reset" } });
+    const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    const { POST } = await import("./route");
+    const res = await POST(
+      makeRequest(
+        { participant: { name: "conferenceRecords/abc/participants/p1", signedinUser: { user: "users/teacher1" } }, eventTime: "2026-10-10T19:05:00Z" },
+        PARTICIPANT_JOINED_TYPE
+      ) as never
+    );
+    expect(res.status).toBe(500);
+    errorSpy.mockRestore();
+  });
+
   // M1 요구사항 4 — Smart Notes 원본을 상담(consultations)에도 자동 연결.
   it("세션 매칭이 안 되면 consultation_id로 매칭을 시도하고, 매칭되면 consultations.smart_notes_drive_file_id를 갱신한다", async () => {
     reservationMaybeSingleMock.mockResolvedValue({ data: null });
@@ -263,8 +282,9 @@ describe("POST /api/webhooks/workspace-events", () => {
       makeRequest({ smartNote: { name: "conferenceRecords/abc/smartNotes/note1" } }, SMART_NOTE_TYPE) as never
     );
     expect(res.status).toBe(200);
-    expect(smartNotesInsertMock).toHaveBeenCalledWith(
-      expect.objectContaining({ session_id: null, consultation_id: "consult-1", drive_file_id: "drive-file-1", linked: true })
+    expect(smartNotesUpsertMock).toHaveBeenCalledWith(
+      expect.objectContaining({ session_id: null, consultation_id: "consult-1", drive_file_id: "drive-file-1", linked: true }),
+      { onConflict: "pubsub_message_id" }
     );
     expect(consultationsUpdateEqMock).toHaveBeenCalled();
   });
@@ -277,18 +297,43 @@ describe("POST /api/webhooks/workspace-events", () => {
       makeRequest({ smartNote: { name: "conferenceRecords/abc/smartNotes/note1" } }, SMART_NOTE_TYPE) as never
     );
     expect(res.status).toBe(200);
-    expect(smartNotesInsertMock).toHaveBeenCalledWith(
-      expect.objectContaining({ session_id: null, consultation_id: null, linked: false })
+    expect(smartNotesUpsertMock).toHaveBeenCalledWith(
+      expect.objectContaining({ session_id: null, consultation_id: null, linked: false }),
+      { onConflict: "pubsub_message_id" }
     );
   });
 
-  it("동일 Pub/Sub messageId 재전송은 중복 삽입하지 않고 200으로 ack한다(멱등)", async () => {
-    dedupMaybeSingleMock.mockResolvedValue({ data: { id: "existing-event" } });
+  it("동일 Pub/Sub messageId 재전송이어도 이미 완전히 처리됐으면(linked+drive_file_id 있음) 재처리하지 않고 200으로 ack한다(멱등)", async () => {
+    dedupMaybeSingleMock.mockResolvedValue({ data: { id: "existing-event", linked: true, drive_file_id: "drive-file-1" } });
     const { POST } = await import("./route");
     const res = await POST(
       makeRequest({ smartNote: { name: "conferenceRecords/abc/smartNotes/note1" } }, SMART_NOTE_TYPE) as never
     );
     expect(res.status).toBe(200);
-    expect(smartNotesInsertMock).not.toHaveBeenCalled();
+    expect(smartNotesUpsertMock).not.toHaveBeenCalled();
+  });
+
+  it("동일 Pub/Sub messageId 재전송인데 이전 시도가 미완료(linked=false)였으면 건너뛰지 않고 다시 해석을 시도한다(재처리 가능한 상태 머신, 2026-09-05 코드 점검 발견·수정)", async () => {
+    dedupMaybeSingleMock.mockResolvedValue({ data: { id: "existing-event", linked: false, drive_file_id: null } });
+    const { POST } = await import("./route");
+    const res = await POST(
+      makeRequest({ smartNote: { name: "conferenceRecords/abc/smartNotes/note1" } }, SMART_NOTE_TYPE) as never
+    );
+    expect(res.status).toBe(200);
+    expect(smartNotesUpsertMock).toHaveBeenCalledWith(
+      expect.objectContaining({ session_id: "s1", drive_file_id: "drive-file-1", linked: true }),
+      { onConflict: "pubsub_message_id" }
+    );
+  });
+
+  it("DB 반영(upsert) 자체가 실패하면 200이 아니라 500을 반환해 Pub/Sub가 실제로 재전송하게 한다(이전엔 200으로 ack해 재시도를 스스로 막던 버그, 2026-09-05 수정)", async () => {
+    smartNotesUpsertMock.mockResolvedValue({ error: { message: "connection reset" } });
+    const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    const { POST } = await import("./route");
+    const res = await POST(
+      makeRequest({ smartNote: { name: "conferenceRecords/abc/smartNotes/note1" } }, SMART_NOTE_TYPE) as never
+    );
+    expect(res.status).toBe(500);
+    errorSpy.mockRestore();
   });
 });

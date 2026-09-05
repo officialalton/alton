@@ -141,17 +141,21 @@ export async function POST(req: NextRequest) {
   const pubsubMessageId = body.message?.messageId ?? null;
 
   if (parsed.kind === "smart_notes_generation") {
-    // M1 요구사항 4 — 멱등 처리: 같은 Pub/Sub 메시지가 at-least-once 배달로 재전송되면
-    // 이미 적재된 이벤트를 다시 만들지 않는다(unique index가 최종 방어선, 여기서는
-    // 불필요한 API 재호출까지 건너뛰기 위한 사전 확인).
+    // 재처리 가능한 상태 머신(2026-09-05 코드 점검 반영) — 이전에는 같은
+    // pubsub_message_id의 행이 "존재하기만 하면" 무조건 재처리를 건너뛰었다.
+    // 그 행이 linked=false(세션/상담을 못 찾음)나 drive_file_id가 없는(원본을
+    // 아직 못 찾음) 미완료 상태로 남아있으면, Pub/Sub의 at-least-once 재전송이
+    // 도착해도 영원히 다시 시도되지 않는 실제 유실 경로였다 — 완료된 행만
+    // 건너뛰고, 미완료 행은 같은 행을 upsert로 갱신하며 아래 해석 로직을 다시
+    // 돈다(멱등 — 몇 번을 다시 돌아도 결과가 같다).
     if (pubsubMessageId) {
       const { data: existing } = await admin
         .from("smart_notes_generation_events")
-        .select("id")
+        .select("id, linked, drive_file_id")
         .eq("pubsub_message_id", pubsubMessageId)
         .maybeSingle();
-      if (existing) {
-        return NextResponse.json({ ok: true, skipped: "duplicate_message" });
+      if (existing?.linked && existing?.drive_file_id) {
+        return NextResponse.json({ ok: true, skipped: "duplicate_message_already_complete" });
       }
     }
     // 실제 페이로드에는 meetingCode가 없다 — conferenceRecordName으로 Meet API를 추가
@@ -201,24 +205,29 @@ export async function POST(req: NextRequest) {
     const resolvedConsultation = sessionId ? null : await resolveConsultationByMeetingCode(admin, meetingCode);
     const consultationId = resolvedConsultation?.consultationId ?? null;
 
-    const { error } = await admin.from("smart_notes_generation_events").insert({
-      session_id: sessionId,
-      consultation_id: consultationId,
-      google_meeting_code: meetingCode,
-      google_conference_record_name: parsed.conferenceRecordName,
-      drive_file_id: driveFileId,
-      event_type: parsed.eventType,
-      linked: sessionId !== null || consultationId !== null,
-      raw_payload: payload as object,
-      pubsub_message_id: pubsubMessageId,
-    });
+    const { error } = await admin.from("smart_notes_generation_events").upsert(
+      {
+        session_id: sessionId,
+        consultation_id: consultationId,
+        google_meeting_code: meetingCode,
+        google_conference_record_name: parsed.conferenceRecordName,
+        drive_file_id: driveFileId,
+        event_type: parsed.eventType,
+        linked: sessionId !== null || consultationId !== null,
+        raw_payload: payload as object,
+        pubsub_message_id: pubsubMessageId,
+      },
+      { onConflict: "pubsub_message_id" }
+    );
     if (error) {
       console.error(JSON.stringify({ type: "smart_notes_event_insert_failed", error: error.message }));
-      // 큐잉 실패는 웹훅 자체를 실패시키지 않는다(R3 drive-artifacts 관례와 동일) —
-      // Pub/Sub가 재시도하게 두되, ack는 정상 반환해 무한 재전송을 막는다. 매칭 실패
-      // (session/consultation 둘 다 null)도 이벤트 자체는 linked=false로 그대로
-      // 보존한다 — 유실시키지 않고 관리자 재처리 대상으로 남긴다(요구사항 4).
-      return NextResponse.json({ ok: true, warning: "insert_failed" });
+      // 이전에는 DB 반영 실패를 200으로 ack해 Pub/Sub 재시도를 스스로 꺼버렸다
+      // (주석은 "재시도하게 둔다"고 했지만 실제 응답은 200이라 모순이었다 —
+      // 2026-09-05 코드 점검 발견). DB에 아예 못 남긴 실패는 진짜 인프라 문제이니
+      // 500으로 되돌려 Pub/Sub가 실제로 재전송하게 한다. 매칭 실패(session/
+      // consultation 둘 다 null)는 이것과 다르다 — 그건 DB에 linked=false로 정상
+      // 기록됐으므로 아래에서 여전히 200으로 ack한다(관리자 재처리 대상으로만 남김).
+      return NextResponse.json({ error: "insert_failed" }, { status: 500 });
     }
     if (sessionId && driveFileId) {
       // smart_notes_status(문서 생성·연결 파이프라인 상태, 20261008000000 주석 참고)는
@@ -289,7 +298,9 @@ export async function POST(req: NextRequest) {
   });
   if (error) {
     console.error(JSON.stringify({ type: "meet_participant_event_insert_failed", error: error.message }));
-    return NextResponse.json({ ok: true, warning: "insert_failed" });
+    // smart_notes_generation과 같은 이유로 500을 반환한다 — DB 반영 실패를 200으로
+    // ack하면 Pub/Sub 재전송이 스스로 막힌다(2026-09-05 코드 점검 발견·수정).
+    return NextResponse.json({ error: "insert_failed" }, { status: 500 });
   }
   return NextResponse.json({ ok: true });
 }
