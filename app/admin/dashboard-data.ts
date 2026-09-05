@@ -44,15 +44,15 @@ export async function loadAdminDashboard(
     .single();
 
   const { data: pendingConsultRows } = await supabase
-    .from("consult_requests")
-    .select("id, person_name, email, submitted_at")
+    .from("consultations")
+    .select("id, contact_name, contact_email, requested_at")
     .eq("status", "requested")
-    .order("submitted_at", { ascending: true });
+    .order("requested_at", { ascending: true });
 
   const { data: upcomingConsultRows } = await supabase
-    .from("consult_requests")
-    .select("id, person_name, scheduled_at")
-    .eq("status", "confirmed")
+    .from("consultations")
+    .select("id, contact_name, scheduled_at")
+    .eq("status", "scheduled")
     .not("scheduled_at", "is", null)
     .order("scheduled_at", { ascending: true });
 
@@ -88,13 +88,13 @@ export async function loadAdminDashboard(
     adminName: profile?.name ?? "관리자",
     pendingConsults: (pendingConsultRows ?? []).map((c) => ({
       id: c.id,
-      personName: c.person_name,
-      email: c.email,
-      submittedAt: c.submitted_at,
+      personName: c.contact_name,
+      email: c.contact_email,
+      submittedAt: c.requested_at,
     })),
     upcomingConsults: (upcomingConsultRows ?? []).map((c) => ({
       id: c.id,
-      personName: c.person_name,
+      personName: c.contact_name,
       scheduledAt: c.scheduled_at,
     })),
     pendingStudents: (pendingStudentRows ?? []).map((s) => ({

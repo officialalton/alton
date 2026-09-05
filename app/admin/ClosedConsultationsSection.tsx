@@ -5,10 +5,9 @@
 import { useEffect, useState } from "react";
 import {
   listClosedConsultationsAction,
-  CLOSURE_TYPE_LABEL,
   type ClosedConsultationItem,
-  type ConsultationClosureType,
 } from "./consultation-kanban-actions";
+import { CLOSURE_TYPE_LABEL, type ConsultationClosureType } from "./consultation-kanban-constants";
 
 const card = "border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3";
 const errText = "text-[12px] text-red mb-2";

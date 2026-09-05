@@ -65,6 +65,7 @@ const BASE_CONSULTATION = {
   consent_version_id: "consent-1",
   consent_confirmed_at: "2026-09-30T00:00:00.000Z",
   child_id: null,
+  trial_intent_confirmed_at: null,
   trial_entitlement_grant_id: null,
   trial_entitlement_grant_status: "not_applicable" as const,
   trial_entitlement_grant_error: null,

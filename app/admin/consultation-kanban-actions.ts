@@ -17,31 +17,11 @@ import {
   type ConsultationListItem,
 } from "./consultation-scheduling-actions";
 import { getTrialOnboardingPipelineAction, type TrialOnboardingPipeline } from "./trial-onboarding-actions";
+import type { KanbanStage, ConsultationClosureType } from "./consultation-kanban-constants";
 
 const CONSULT_CAPABILITY = "manage_consultations";
 
-export type KanbanStage =
-  | "requested" // 상담 신청
-  | "scheduled" // 상담 일정 확정
-  | "trial_requested" // 체험 신청
-  | "trial_scheduled" // 체험 일정 확정
-  | "contract_sent"; // 계약서 전달
-
-export const KANBAN_STAGE_LABEL: Record<KanbanStage, string> = {
-  requested: "상담 신청",
-  scheduled: "상담 일정 확정",
-  trial_requested: "체험 신청",
-  trial_scheduled: "체험 일정 확정",
-  contract_sent: "계약서 전달",
-};
-
-export const KANBAN_STAGE_ORDER: KanbanStage[] = [
-  "requested",
-  "scheduled",
-  "trial_requested",
-  "trial_scheduled",
-  "contract_sent",
-];
+export type { KanbanStage, ConsultationClosureType } from "./consultation-kanban-constants";
 
 export type KanbanCard = ConsultationListItem & { stage: KanbanStage };
 
@@ -60,7 +40,7 @@ async function classifyStage(
   if (row.outcome === "regular_recommended") return "contract_sent";
 
   // outcome === 'trial_recommended' — 파이프라인 단계로 세분화한다.
-  const pipeline = await getTrialOnboardingPipelineAction(row.id, row.child_id, null);
+  const pipeline = await getTrialOnboardingPipelineAction(row.id, row.child_id, row.trial_intent_confirmed_at);
   const done = (key: string) => pipeline.steps.find((s) => s.key === key)?.done ?? false;
   if (!done("trial_booking")) return "trial_requested";
   if (!done("contract_sent")) return "trial_scheduled";
@@ -99,7 +79,7 @@ export async function getConsultationCardDetailAction(consultationId: string): P
   const { data: consultationRow, error } = await admin
     .from("consultations")
     .select(
-      "id, contact_name, contact_email, contact_phone, student_grade, concerns, status, source, starts_at, ends_at, scheduled_at, hold_expires_at, google_event_id, google_meet_link, google_sync_status, google_sync_retry_count, google_sync_last_error, smart_notes_config_status, smart_notes_config_error, smart_notes_drive_file_id, admin_review_summary, outcome, outcome_notes, prospect_contact_id, consent_version_id, consent_confirmed_at, child_id, trial_entitlement_grant_id, trial_entitlement_grant_status, trial_entitlement_grant_error"
+      "id, contact_name, contact_email, contact_phone, student_grade, concerns, status, source, starts_at, ends_at, scheduled_at, hold_expires_at, google_event_id, google_meet_link, google_sync_status, google_sync_retry_count, google_sync_last_error, smart_notes_config_status, smart_notes_config_error, smart_notes_drive_file_id, admin_review_summary, outcome, outcome_notes, prospect_contact_id, consent_version_id, consent_confirmed_at, child_id, trial_intent_confirmed_at, trial_entitlement_grant_id, trial_entitlement_grant_status, trial_entitlement_grant_error"
     )
     .eq("id", consultationId)
     .maybeSingle();
@@ -121,9 +101,12 @@ export async function getConsultationCardDetailAction(consultationId: string): P
   let contractStatus: string | null = null;
   let latestContractVersionHasEnvelope = false;
 
-  if (consultation.child_id) {
-    pipeline = await getTrialOnboardingPipelineAction(consultation.id, consultation.child_id, null);
+  // 잠재고객 단계(child_id 아직 없음)에서도 pipeline은 항상 조회한다 — 그래야
+  // "account_linked" 단계 미완료 상태가 정상적으로 채워져 체험 온보딩 안내 발송
+  // 폼(TrialNoticeForm)이 카드 상세에 노출된다(classifyStage()와 동일한 패턴).
+  pipeline = await getTrialOnboardingPipelineAction(consultation.id, consultation.child_id, consultation.trial_intent_confirmed_at);
 
+  if (consultation.child_id) {
     const { data: childProfile } = await admin.from("profiles").select("name").eq("id", consultation.child_id).maybeSingle();
     childName = childProfile?.name ?? null;
 
@@ -186,15 +169,6 @@ export async function getConsultationCardDetailAction(consultationId: string): P
 // =========================================================================
 // 상담 종료 ("상담 종료" 버튼 → 리뷰 팝업 → 종료 처리 → 지난 상담 탭)
 // =========================================================================
-
-export type ConsultationClosureType = "no_trial" | "trial_no_convert" | "regular_in_progress" | "contract_signed";
-
-export const CLOSURE_TYPE_LABEL: Record<ConsultationClosureType, string> = {
-  no_trial: "체험 없이 종료",
-  trial_no_convert: "체험 후 종료",
-  regular_in_progress: "정규 진행 중 종료",
-  contract_signed: "정규 계약 날인",
-};
 
 /** 팝업 초기값 힌트 — AI 미팅록 재요약본 대신, 현재 확정 정보(admin_review_summary,
  * 체험 리뷰 최종 텍스트)를 이어붙인 초안을 채워준다(실제 AI 재호출은 배선하지

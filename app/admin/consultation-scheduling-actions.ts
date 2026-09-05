@@ -39,6 +39,9 @@ export type ConsultationListItem = {
   consent_version_id: string | null;
   consent_confirmed_at: string | null;
   child_id: string | null;
+  /** M4 — 관리자의 outcome=trial_recommended(추천)와 별개로 보호자 본인이 체험 진행을
+   * 확정한 시각(confirm_trial_intent()). 이 값이 있어야 온보딩 링크 발급이 가능하다. */
+  trial_intent_confirmed_at: string | null;
   /** M2 — 체험수업권 지급 상태(admin_record_consultation_outcome이 outcome='trial_recommended'
    * 기록 시점에 시도, 실패해도 결과 기록 자체는 막지 않는다). 관리자 화면의 재처리 버튼용. */
   trial_entitlement_grant_id: string | null;
@@ -103,7 +106,7 @@ export async function listConsultationsForAdmin(params: { from: string; to: stri
   const { data, error } = await admin
     .from("consultations")
     .select(
-      "id, contact_name, contact_email, contact_phone, student_grade, concerns, status, source, starts_at, ends_at, scheduled_at, hold_expires_at, google_event_id, google_meet_link, google_sync_status, google_sync_retry_count, google_sync_last_error, smart_notes_config_status, smart_notes_config_error, smart_notes_drive_file_id, admin_review_summary, outcome, outcome_notes, prospect_contact_id, consent_version_id, consent_confirmed_at, child_id, trial_entitlement_grant_id, trial_entitlement_grant_status, trial_entitlement_grant_error"
+      "id, contact_name, contact_email, contact_phone, student_grade, concerns, status, source, starts_at, ends_at, scheduled_at, hold_expires_at, google_event_id, google_meet_link, google_sync_status, google_sync_retry_count, google_sync_last_error, smart_notes_config_status, smart_notes_config_error, smart_notes_drive_file_id, admin_review_summary, outcome, outcome_notes, prospect_contact_id, consent_version_id, consent_confirmed_at, child_id, trial_intent_confirmed_at, trial_entitlement_grant_id, trial_entitlement_grant_status, trial_entitlement_grant_error"
     )
     .gte("starts_at", params.from)
     .lt("starts_at", params.to)
@@ -126,7 +129,7 @@ export async function listPendingConsultationRequests(): Promise<ConsultationLis
   const { data, error } = await admin
     .from("consultations")
     .select(
-      "id, contact_name, contact_email, contact_phone, student_grade, concerns, status, source, starts_at, ends_at, scheduled_at, hold_expires_at, google_event_id, google_meet_link, google_sync_status, google_sync_retry_count, google_sync_last_error, smart_notes_config_status, smart_notes_config_error, smart_notes_drive_file_id, admin_review_summary, outcome, outcome_notes, prospect_contact_id, consent_version_id, consent_confirmed_at, child_id, trial_entitlement_grant_id, trial_entitlement_grant_status, trial_entitlement_grant_error"
+      "id, contact_name, contact_email, contact_phone, student_grade, concerns, status, source, starts_at, ends_at, scheduled_at, hold_expires_at, google_event_id, google_meet_link, google_sync_status, google_sync_retry_count, google_sync_last_error, smart_notes_config_status, smart_notes_config_error, smart_notes_drive_file_id, admin_review_summary, outcome, outcome_notes, prospect_contact_id, consent_version_id, consent_confirmed_at, child_id, trial_intent_confirmed_at, trial_entitlement_grant_id, trial_entitlement_grant_status, trial_entitlement_grant_error"
     )
     .eq("status", "requested")
     .order("starts_at", { ascending: true });

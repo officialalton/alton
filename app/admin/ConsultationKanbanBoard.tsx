@@ -13,20 +13,26 @@ import {
   getConsultationCardDetailAction,
   getClosureDraftAction,
   closeConsultationAction,
+  type KanbanCard,
+  type ConsultationCardDetail,
+} from "./consultation-kanban-actions";
+import {
   KANBAN_STAGE_ORDER,
   KANBAN_STAGE_LABEL,
   CLOSURE_TYPE_LABEL,
-  type KanbanCard,
-  type ConsultationCardDetail,
   type ConsultationClosureType,
-} from "./consultation-kanban-actions";
+} from "./consultation-kanban-constants";
 import {
   acceptConsultationRequest,
   rejectConsultationRequest,
   recordConsultationOutcome,
   retryTrialEntitlementGrant,
 } from "./consultation-scheduling-actions";
-import { sendTrialOnboardingNoticeAction, sendRegularContractOneClickAction } from "./trial-onboarding-actions";
+import {
+  sendTrialOnboardingNoticeAction,
+  sendRegularContractOneClickAction,
+  confirmTrialIntentAction,
+} from "./trial-onboarding-actions";
 import { createNewContractVersionForResend } from "./consultation-actions";
 import LessonReviewAdminEditor from "./LessonReviewAdminEditor";
 
@@ -200,7 +206,16 @@ function ConsultationCardDetailPanel({
         {c.outcome === "trial_recommended" && (
           <div className="mb-3 space-y-2">
             <div className="text-[11.5px] font-bold text-grey-500">체험 온보딩</div>
-            {detail.pipeline && !detail.pipeline.steps.find((s) => s.key === "account_linked")?.done && (
+            {!c.trial_intent_confirmed_at && (
+              <button
+                className={btnSecondary}
+                disabled={busy}
+                onClick={() => run(() => confirmTrialIntentAction(c.id))}
+              >
+                체험 진행 확정(보호자 확인)
+              </button>
+            )}
+            {c.trial_intent_confirmed_at && detail.pipeline && !detail.pipeline.steps.find((s) => s.key === "account_linked")?.done && (
               <TrialNoticeForm
                 consultationId={c.id}
                 defaultGuardianEmail={detail.guardianEmail ?? c.contact_email}
