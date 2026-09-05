@@ -9,6 +9,8 @@ import { useEffect, useMemo, useState } from "react";
 import MonthCalendar, { type DayBadge } from "@/app/components/MonthCalendar";
 import { dateKeyInTimezone, buildWeekGrid, todayKeyInTimezone } from "@/lib/calendar-date-utils";
 import { listAllTeacherLessons, type UnifiedScheduleLessonRow } from "./booking-actions";
+import { getMyTimezoneSettings } from "@/lib/timezone-actions";
+import { DEFAULT_TIMEZONE } from "@/lib/timezone";
 
 const SYNC_STATUS_LABEL: Record<string, string> = {
   pending: "동기화 준비 중",
@@ -17,11 +19,9 @@ const SYNC_STATUS_LABEL: Record<string, string> = {
   reconciliation_needed: "수동 확인 필요",
 };
 
-const ADMIN_TIMEZONE = "America/Los_Angeles";
-
-function formatDateTime(iso: string): string {
+function formatDateTime(iso: string, timezone: string): string {
   return new Intl.DateTimeFormat("ko-KR", {
-    timeZone: ADMIN_TIMEZONE,
+    timeZone: timezone,
     month: "long",
     day: "numeric",
     weekday: "short",
@@ -31,6 +31,13 @@ function formatDateTime(iso: string): string {
 }
 
 export default function UnifiedScheduleTab() {
+  // R6 — 관리자 본인의 시간대 설정(계정 드롭다운 "시간대 설정")을 따른다.
+  // resolveUserTimezone() 우선순위상 관리자는 household가 없어 개인 설정 →
+  // 전역 기본값(America/Los_Angeles) 순으로 결정된다.
+  const [timezone, setTimezone] = useState<string>(DEFAULT_TIMEZONE);
+  useEffect(() => {
+    getMyTimezoneSettings().then((s) => setTimezone(s.resolvedTimezone));
+  }, []);
   const [lessons, setLessons] = useState<UnifiedScheduleLessonRow[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -56,7 +63,7 @@ export default function UnifiedScheduleTab() {
     refresh();
   }, []);
 
-  const todayKey = todayKeyInTimezone(ADMIN_TIMEZONE);
+  const todayKey = todayKeyInTimezone(timezone);
   const weekGrid = useMemo(() => buildWeekGrid(todayKey), [todayKey]);
   const weekDateKeys = new Set(weekGrid.map((c) => c.dateKey));
 
@@ -81,7 +88,7 @@ export default function UnifiedScheduleTab() {
   const badgesByDate = useMemo(() => {
     const badges: Record<string, DayBadge> = {};
     for (const l of filteredLessons) {
-      const key = dateKeyInTimezone(l.startsAt, ADMIN_TIMEZONE);
+      const key = dateKeyInTimezone(l.startsAt, timezone);
       const tone: DayBadge["tone"] = l.externalChangeStatus !== "none" ? "red" : "ink";
       badges[key] = { count: (badges[key]?.count ?? 0) + 1, tone };
     }
@@ -89,12 +96,12 @@ export default function UnifiedScheduleTab() {
   }, [filteredLessons]);
 
   const visibleLessons = useMemo(() => {
-    if (view === "today") return filteredLessons.filter((l) => dateKeyInTimezone(l.startsAt, ADMIN_TIMEZONE) === todayKey);
+    if (view === "today") return filteredLessons.filter((l) => dateKeyInTimezone(l.startsAt, timezone) === todayKey);
     if (view === "week") {
-      if (selectedDateKey) return filteredLessons.filter((l) => dateKeyInTimezone(l.startsAt, ADMIN_TIMEZONE) === selectedDateKey);
-      return filteredLessons.filter((l) => weekDateKeys.has(dateKeyInTimezone(l.startsAt, ADMIN_TIMEZONE)));
+      if (selectedDateKey) return filteredLessons.filter((l) => dateKeyInTimezone(l.startsAt, timezone) === selectedDateKey);
+      return filteredLessons.filter((l) => weekDateKeys.has(dateKeyInTimezone(l.startsAt, timezone)));
     }
-    if (selectedDateKey) return filteredLessons.filter((l) => dateKeyInTimezone(l.startsAt, ADMIN_TIMEZONE) === selectedDateKey);
+    if (selectedDateKey) return filteredLessons.filter((l) => dateKeyInTimezone(l.startsAt, timezone) === selectedDateKey);
     return filteredLessons;
   }, [filteredLessons, view, selectedDateKey, todayKey, weekDateKeys]);
 
@@ -152,7 +159,7 @@ export default function UnifiedScheduleTab() {
       {view === "month" && (
         <div className="border-[1.5px] border-grey-200 rounded-xl p-3 mb-4 max-w-[360px]">
           <MonthCalendar
-            timezone={ADMIN_TIMEZONE}
+            timezone={timezone}
             selectedDateKey={selectedDateKey}
             onSelectDate={(k) => setSelectedDateKey(k === selectedDateKey ? null : k)}
             badgesByDate={badgesByDate}
@@ -199,7 +206,7 @@ export default function UnifiedScheduleTab() {
                 <div className="text-[14px] font-bold text-ink">
                   {l.teacherName ?? "(이름 없음)"} 선생님 · {l.studentName ?? "(학생 미확인)"} · {l.subjectName ?? "(과목 없음)"}
                 </div>
-                <div className="text-[13px] text-grey-500 mt-0.5">{formatDateTime(l.startsAt)}</div>
+                <div className="text-[13px] text-grey-500 mt-0.5">{formatDateTime(l.startsAt, timezone)}</div>
               </div>
             </div>
             <div className="mt-2 flex items-center gap-2 flex-wrap">

@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { logout } from "@/app/login/actions";
+import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
 import TeacherHomeDashboard from "./TeacherHomeDashboard";
 import type { TeacherDashboardData } from "./dashboard-data";
 import ScheduleTab from "./ScheduleTab";
@@ -86,6 +87,7 @@ export default function TeacherShell({
     validTabIds.includes(initialTab as TabId) ? (initialTab as TabId) : "home"
   );
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
+  const [timezoneModalOpen, setTimezoneModalOpen] = useState(false);
   const [curriculumJump, setCurriculumJump] = useState<{
     studentId: string;
     subjectId: string;
@@ -134,12 +136,28 @@ export default function TeacherShell({
           </button>
           {accountMenuOpen && (
             <div className="absolute top-full right-6 mt-1 w-40 bg-white border-[1.5px] border-grey-200 rounded-lg shadow-sm py-1.5 z-30">
+              <button
+                onClick={() => {
+                  setTimezoneModalOpen(true);
+                  setAccountMenuOpen(false);
+                }}
+                className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink"
+              >
+                시간대 설정
+              </button>
+              <div className="h-px bg-grey-200 my-1" />
               <form action={logout}>
                 <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-red">
                   로그아웃
                 </button>
               </form>
             </div>
+          )}
+          {timezoneModalOpen && (
+            <TimezoneSettingsModal
+              showHouseholdDefault={false}
+              onClose={() => setTimezoneModalOpen(false)}
+            />
           )}
         </div>
 

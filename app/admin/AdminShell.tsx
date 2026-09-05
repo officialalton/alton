@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { logout } from "@/app/login/actions";
+import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
 import { linkAdminGoogleAccount } from "./google-link-actions";
 import AdminHomeDashboard from "./AdminHomeDashboard";
 import type { AdminDashboardData } from "./dashboard-data";
@@ -133,6 +134,7 @@ export default function AdminShell({
     validTabIds.includes(initialTab as TabId) ? (initialTab as TabId) : "home"
   );
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
+  const [timezoneModalOpen, setTimezoneModalOpen] = useState(false);
 
   function selectTab(id: TabId) {
     setActiveTab(id);
@@ -186,12 +188,28 @@ export default function AdminShell({
                 </button>
               </form>
               <div className="h-px bg-grey-200 my-1" />
+              <button
+                onClick={() => {
+                  setTimezoneModalOpen(true);
+                  setAccountMenuOpen(false);
+                }}
+                className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink"
+              >
+                시간대 설정
+              </button>
+              <div className="h-px bg-grey-200 my-1" />
               <form action={logout}>
                 <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-red">
                   로그아웃
                 </button>
               </form>
             </div>
+          )}
+          {timezoneModalOpen && (
+            <TimezoneSettingsModal
+              showHouseholdDefault={false}
+              onClose={() => setTimezoneModalOpen(false)}
+            />
           )}
         </div>
 

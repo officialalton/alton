@@ -12,3 +12,18 @@ export function resolveUserTimezone(params: {
 }): string {
   return params.profileTimezone || params.householdDefaultTimezone || DEFAULT_TIMEZONE;
 }
+
+// R6 — 시간대 설정 UI에 노출할 선택지. 실제 서비스 대상 지역(한국 학생/학부모,
+// 미국 거주 학생/학부모, 한국 명문대 대학원생 선생님) 기준으로 제한한다. 전체
+// IANA 타임존 목록을 나열하지 않는다(과도한 설계 금지).
+export const TIMEZONE_OPTIONS: { value: string; label: string }[] = [
+  { value: "Asia/Seoul", label: "서울 (Asia/Seoul)" },
+  { value: "America/Los_Angeles", label: "로스앤젤레스 (America/Los_Angeles)" },
+  { value: "America/Denver", label: "덴버 (America/Denver)" },
+  { value: "America/Chicago", label: "시카고 (America/Chicago)" },
+  { value: "America/New_York", label: "뉴욕 (America/New_York)" },
+];
+
+export function timezoneLabel(timezone: string): string {
+  return TIMEZONE_OPTIONS.find((o) => o.value === timezone)?.label ?? timezone;
+}

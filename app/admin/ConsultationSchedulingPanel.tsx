@@ -39,8 +39,8 @@ import {
 import MonthCalendar from "@/app/components/MonthCalendar";
 import WeeklyAvailabilityGrid from "@/app/components/WeeklyAvailabilityGrid";
 import { dateKeyInTimezone } from "@/lib/calendar-date-utils";
-
-const ADMIN_TIMEZONE = "Asia/Seoul";
+import { getMyTimezoneSettings } from "@/lib/timezone-actions";
+import { DEFAULT_TIMEZONE } from "@/lib/timezone";
 
 const WEEKDAY_LABEL = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -120,6 +120,11 @@ function rangeFor(view: CalendarView): { from: Date; to: Date } {
 }
 
 export default function ConsultationSchedulingPanel() {
+  // R6 — 관리자 본인 시간대 설정(계정 드롭다운 "시간대 설정")을 따른다.
+  const [timezone, setTimezone] = useState<string>(DEFAULT_TIMEZONE);
+  useEffect(() => {
+    getMyTimezoneSettings().then((s) => setTimezone(s.resolvedTimezone));
+  }, []);
   const [pending, setPending] = useState<ConsultationListItem[]>([]);
   const [scheduled, setScheduled] = useState<ConsultationListItem[]>([]);
   const [view, setView] = useState<CalendarView>("week");
@@ -271,12 +276,12 @@ export default function ConsultationSchedulingPanel() {
         {view === "month" && (
           <div className="mb-4" data-testid="consultation-month-calendar">
             <MonthCalendar
-              timezone={ADMIN_TIMEZONE}
+              timezone={timezone}
               selectedDateKey={selectedDateKey}
               onSelectDate={(dateKey) => setSelectedDateKey((prev) => (prev === dateKey ? null : dateKey))}
               badgesByDate={scheduled.reduce<Record<string, { count: number }>>((acc, c) => {
                 if (!c.starts_at) return acc;
-                const key = dateKeyInTimezone(c.starts_at, ADMIN_TIMEZONE);
+                const key = dateKeyInTimezone(c.starts_at, timezone);
                 acc[key] = { count: (acc[key]?.count ?? 0) + 1 };
                 return acc;
               }, {})}
@@ -294,7 +299,7 @@ export default function ConsultationSchedulingPanel() {
         {(() => {
           const visibleScheduled =
             view === "month" && selectedDateKey
-              ? scheduled.filter((c) => c.starts_at && dateKeyInTimezone(c.starts_at, ADMIN_TIMEZONE) === selectedDateKey)
+              ? scheduled.filter((c) => c.starts_at && dateKeyInTimezone(c.starts_at, timezone) === selectedDateKey)
               : scheduled;
           if (visibleScheduled.length === 0) {
             return <p className="text-[13px] text-grey-500">해당 기간에 예정된 상담이 없습니다.</p>;

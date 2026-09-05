@@ -882,6 +882,90 @@ Smart Notes 동의(정책 버전 시드 0건이라 로컬에서 막힘)까지 �
   갱신(신규 리뷰/칸반 흐름 반영), `window.prompt()` 잔재 정리(상담 가용시간
   등록 버튼), push·Preview 배포 여부 결정.
 
+## 사용자 피드백 반영 라운드(2026-09-05, 같은 날 세 번째) — 상담 IA 재설계 완료
+
+실사용 후 사용자가 4가지를 다시 지시해 반영(로컬 커밋 3개: `88a81ab`/`2ca99d9`/`7ea5fda`,
+전부 실브라우저로 처음부터 끝까지 재검증 완료):
+
+1. **"선생님 배정만 빼고" 예외 폐기** — 체험 파이프라인의 과목 수강+선생님 최초
+   배정이 이제 상담 탭 칸반 카드 안에서 전부 이뤄진다(매칭 탭 `SubjectEnrollmentPanel`은
+   기존 학생 배정 변경 등 일반 운영 기능으로 그대로 유지, 상담 파이프라인 전용
+   최초 배정만 이동).
+2. **클릭형 배정 UI** — 과목 ID/선생님 ID 텍스트 입력 폼 제거, 과목 클릭 →
+   그 과목 담당 가능 선생님 목록 클릭 → 배정 확정(raw UUID 없음).
+3. **칸반 5단계 재정의** — "계약서 전달"→**"계약"**으로 개명. 보호자가 정규
+   진행 희망을 표시하는 순간(관리자 발송 전이라도) 카드가 "계약" 칸으로
+   이동한다. **계약 서명(날인) 완료 시 자동으로 상담을 종료 처리**(`closure_type=
+   'contract_signed'`, 확정 리뷰 텍스트 재사용)해 "지난 상담"으로 보낸다 —
+   DocuSign 웹훅(`app/api/webhooks/docusign/route.ts`)의 계약 활성화 직후
+   `lib/enrollment/auto-close-consultation.ts`(신규)가 처리, 관리자 수동 종료도
+   그대로 유지. `admin_close_consultation()`을 service_role(웹훅)도 호출 가능하게
+   완화(`20261029000000_m4_auto_close_consultation_on_contract_signed.sql`).
+4. **"정규 진행 중 종료" = 미날인 케이스 확인** — `contractStatus !== 'active'`일 때
+   이 유형을 추천(계약이 `active`=날인 완료여야만 "정규 계약 날인" 유형).
+5. **체험 리뷰 작성 위치 이동** — 선생님 "배정" 탭에서 완전히 제거,
+   **"정규수업" 탭**(실제 v3 세션이 보이는 화면, 사용자가 말한 "수업 탭")의
+   완료된 체험 세션 카드에 "수업 리뷰 작성" 버튼 → 팝업(`LessonReviewForm` 재사용)
+   → 공개 확정 시 그 세션이 "지난 수업"으로 아카이빙(체험만 이 기준 적용, 정규
+   세션의 기존 날짜 기준 분리는 그대로).
+6. **가용시간 UI 전면 개선**(관리자 상담 가용시간 + 선생님 개인 가용시간 양쪽) —
+   `window.prompt()` 전부 인라인 폼으로 교체, 같은 요일 안에 겹치지 않는 여러
+   시간대 등록 가능(예: 월 10-17시 + 월 19-23시), 겹치는 시간대는 DB
+   exclusion constraint(상담)/서버 검증(선생님)으로 차단, Google Calendar
+   스타일 주간 그리드 뷰 신규 추가(`app/components/WeeklyAvailabilityGrid.tsx`
+   공용 컴포넌트).
+
+**실브라우저 재검증(2026-09-05, 세 번째 라운드 마무리)**: 새 상담 신청 →
+관리자 수락 → 결과 기록 → 체험 진행 확정 → 온보딩 이메일(Mailpit) → 계정
+생성 → **관리자 카드 안에서 클릭형 과목·선생님 배정** → 보호자 Smart Notes
+동의 → 체험 예약·완료(psql) → **선생님 "정규수업" 탭에서 리뷰 작성·팝업·공개
+확정** → 보호자 확정 리뷰 열람 → 정규 진행 희망(카드가 즉시 "계약" 컬럼으로
+이동 확인) → 계약 발송(mock 실패, 안내 문구 확인) → **실제 HMAC 서명 웹훅
+POST로 DocuSign 서명 완료 시뮬레이션 → 계약 `active` 전환 + 상담 자동
+`contract_signed` 종료 + "지난 상담" 탭 반영까지 전부 실측 확인**. 가용시간
+인라인 폼·겹침 차단·주간 그리드도 관리자·선생님 화면 양쪈 실클릭 확인.
+전체 Vitest 1001/1002(실패 1건은 기존부터 있던 무관 픽스처 공유 플레이키니스,
+격리 실행 시 통과 재확인), `tsc --noEmit` 클린. **로컬 커밋까지만, push 없음.**
+
+## 시간대(timezone) 설정 UI — 4개 포털 완료(2026-09-05, 같은 날 네 번째)
+
+`profiles.timezone`/`households.default_timezone` 컬럼은 R2부터 있었으나 값을
+실제로 설정할 UI가 없던 것을 이번에 채웠다(관리자·학부모·학생·선생님 4개 포털
+전부, 계정 드롭다운 "시간대 설정" 메뉴 → `TimezoneSettingsModal` 공용 컴포넌트):
+
+- `lib/timezone.ts`에 `TIMEZONE_OPTIONS`(Asia/Seoul, America/Los_Angeles·Denver·
+  Chicago·New_York — 실제 서비스 대상 지역만, 전체 IANA 목록 아님) 추가. 전부
+  **IANA 시간대 이름**만 쓰고 고정 UTC 오프셋 문자열은 쓰지 않으므로 서머타임은
+  `Intl.DateTimeFormat`/`Date`의 timeZone 옵션이 자동 처리한다(별도 DST 로직 불필요,
+  확인 완료).
+- `lib/timezone-actions.ts`(신규) — `getMyTimezoneSettings()`(개인/가족 현재값+
+  우선순위 적용된 최종값 조회), `updateMyTimezone()`(본인 `profiles.timezone`,
+  기존 RLS로 이미 허용), `updateHouseholdDefaultTimezone()`(그 household 주
+  보호자만, 신규 SECURITY DEFINER RPC `update_household_default_timezone`
+  — `20261029020000_r6_household_timezone_rpc.sql`).
+- 학부모 화면은 "가족 기본 시간대"(주 보호자만 변경)와 "내 개인 시간대(선택,
+  가족 기본값보다 우선)"를 구분해서 보여준다. 학생·선생님·관리자는 개인
+  시간대만.
+- **확정 일정 표시 배선**: 학생 홈 대시보드(`HomeDashboard.tsx`, 기존 예약
+  화면 경로로 이미 연결돼 있던 timezone을 재사용), 관리자 통합 일정
+  (`UnifiedScheduleTab.tsx`, 기존 고정 `America/Los_Angeles` 상수 제거하고
+  본인 시간대로 교체), 관리자 상담 운영 캘린더(`ConsultationSchedulingPanel.tsx`,
+  기존 고정 `Asia/Seoul` 상수 제거) — 전부 `getMyTimezoneSettings()`로 실제
+  값을 읽어와 표시만 바뀌게 배선(저장된 timestamptz 자체는 변경 없음). 선생님
+  쪽(`TeacherLessonScheduleTab.tsx`/`TeacherAvailabilityTab.tsx`)과 학생 예약
+  화면(`LessonBookingTab.tsx`)은 이미 이전 라운드부터 `resolveUserTimezone()`
+  기반 prop을 받고 있어 추가 배선 불필요(확인만 함).
+- 첫 구현 시도 2회가 세션 사용량 한도로 코드 절반만 쓰고 중단돼(핵심 상수
+  `ADMIN_TIMEZONE` 삭제 후 참조 미치환 등으로 `tsc` 깨짐) 그 결과물을 이어받아
+  직접 마무리 — `UnifiedScheduleTab.tsx`/`ConsultationSchedulingPanel.tsx`의
+  남은 참조 치환, 두 컴포넌트의 테스트 파일에 `@/lib/timezone-actions` mock
+  누락으로 나던 처리되지 않은 콘솔 에러 수정.
+- **검증**: `supabase db reset --local` 클린, 전체 Vitest 1002/1002 통과(에러
+  0건), `tsc --noEmit` 클린. 로컬 git commit까지만, push 없음.
+
+**다음 세션 남은 것**: Playwright E2E 갱신(신규 리뷰/칸반/시간대 흐름 반영),
+`window.prompt()` 완전 정리 재확인, push/배포 여부 결정.
+
 ## 다음 R 착수 시 읽을 문서
 
 1. `CLAUDE.md`

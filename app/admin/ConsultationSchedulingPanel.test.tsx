@@ -37,6 +37,16 @@ vi.mock("./workspace-events-actions", () => ({
   disableWorkspaceEventsSubscriptionForOrganizer: vi.fn(),
 }));
 
+vi.mock("@/lib/timezone-actions", () => ({
+  getMyTimezoneSettings: vi.fn().mockResolvedValue({
+    profileTimezone: null,
+    householdId: null,
+    householdDefaultTimezone: null,
+    isPrimaryGuardian: false,
+    resolvedTimezone: "Asia/Seoul",
+  }),
+}));
+
 const BASE_CONSULTATION = {
   id: "consult-1",
   contact_name: "김민지",

@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { logout } from "@/app/login/actions";
+import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
 import HomeDashboard from "@/app/student/HomeDashboard";
 import type { DashboardData } from "@/app/student/dashboard-data";
 import LessonsTab from "@/app/student/LessonsTab";
@@ -95,6 +96,7 @@ export default function ParentShell({
     validTabIds.includes(initialTab as TabId) ? (initialTab as TabId) : "home"
   );
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
+  const [timezoneModalOpen, setTimezoneModalOpen] = useState(false);
 
   function selectTab(id: TabId) {
     setActiveTab(id);
@@ -166,12 +168,28 @@ export default function ParentShell({
             </button>
             {accountMenuOpen && (
               <div className="absolute top-full right-0 mt-1 w-40 bg-white border-[1.5px] border-grey-200 rounded-lg shadow-sm py-1.5 z-30">
+                <button
+                  onClick={() => {
+                    setTimezoneModalOpen(true);
+                    setAccountMenuOpen(false);
+                  }}
+                  className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink"
+                >
+                  시간대 설정
+                </button>
+                <div className="h-px bg-grey-200 my-1" />
                 <form action={logout}>
                   <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-red">
                     로그아웃
                   </button>
                 </form>
               </div>
+            )}
+            {timezoneModalOpen && (
+              <TimezoneSettingsModal
+                showHouseholdDefault={true}
+                onClose={() => setTimezoneModalOpen(false)}
+              />
             )}
           </div>
         </div>
@@ -199,6 +217,7 @@ export default function ParentShell({
               data={dashboard}
               onShowLessons={() => selectTab("lessons")}
               onShowStats={() => selectTab("stats")}
+              timezone={lessonBooking.timezone}
             />
           ) : activeTab === "enrollment" ? (
             <ParentEnrollmentTab childrenEnrollments={childrenSubjectEnrollments} />

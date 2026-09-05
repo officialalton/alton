@@ -2,13 +2,25 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import UnifiedScheduleTab from "./UnifiedScheduleTab";
 import * as actions from "./booking-actions";
+import * as timezoneActions from "@/lib/timezone-actions";
 
 vi.mock("./booking-actions", () => ({
   listAllTeacherLessons: vi.fn(),
 }));
 
+vi.mock("@/lib/timezone-actions", () => ({
+  getMyTimezoneSettings: vi.fn(),
+}));
+
 beforeEach(() => {
   vi.clearAllMocks();
+  vi.mocked(timezoneActions.getMyTimezoneSettings).mockResolvedValue({
+    profileTimezone: null,
+    householdId: null,
+    householdDefaultTimezone: null,
+    isPrimaryGuardian: false,
+    resolvedTimezone: "Asia/Seoul",
+  });
 });
 
 describe("UnifiedScheduleTab", () => {
