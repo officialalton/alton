@@ -42,11 +42,23 @@ const fromMock = vi.fn((table: string) => {
   if (table === "contract_activation_retries") {
     return { insert: activationRetryInsertMock, update: activationRetryUpdateMock };
   }
+  if (table === "subject_enrollments") {
+    return {
+      select: () => ({
+        eq: () => ({ eq: () => Promise.resolve({ data: subjectEnrollmentsToActivate, error: null }) }),
+      }),
+      update: () => ({ eq: () => ({ eq: subjectEnrollmentsUpdateEqMock }) }),
+    };
+  }
   throw new Error(`unexpected table ${table}`);
 });
 
+let subjectEnrollmentsToActivate: { id: string }[] = [];
+const subjectEnrollmentsUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
+const rpcMock = vi.fn();
+
 vi.mock("@/lib/supabase-admin", () => ({
-  createAdminClient: () => ({ from: fromMock }),
+  createAdminClient: () => ({ from: fromMock, rpc: rpcMock }),
 }));
 
 function sign(body: string, secret: string): string {
@@ -79,6 +91,9 @@ describe("POST /api/webhooks/docusign", () => {
     driveArtifactsInsertMock.mockResolvedValue({ error: null });
     activationRetryInsertMock.mockResolvedValue({ error: null });
     activationRetryUpdateIsMock.mockResolvedValue({ error: null });
+    subjectEnrollmentsToActivate = [];
+    subjectEnrollmentsUpdateEqMock.mockClear();
+    rpcMock.mockReset();
   });
 
   afterEach(() => {
@@ -133,6 +148,24 @@ describe("POST /api/webhooks/docusign", () => {
     expect(receiptInsertMock).toHaveBeenCalledWith(
       expect.objectContaining({ provider: "docusign", event_id: "env-1:envelope-completed" })
     );
+  });
+
+  it("M4: 서명 완료로 계약이 active가 되면, 그 계약의 planned 과목 수강을 자동으로 active 전환한다", async () => {
+    subjectEnrollmentsToActivate = [{ id: "se1" }];
+    rpcMock.mockResolvedValue({ data: true, error: null });
+
+    const { POST } = await import("./route");
+    const request = makeRequest(
+      { event: "envelope-completed", data: { envelopeId: "env-1" } },
+      "secret123"
+    );
+
+    const res = await POST(request);
+    expect(res.status).toBe(200);
+    expect(rpcMock).toHaveBeenCalledWith("subject_enrollment_activation_ready", {
+      p_subject_enrollment_id: "se1",
+    });
+    expect(subjectEnrollmentsUpdateEqMock).toHaveBeenCalledWith("status", "planned");
   });
 
   it("이미 처리된 이벤트(processed_at 존재)면 재처리하지 않고 200을 반환한다", async () => {
