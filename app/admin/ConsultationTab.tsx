@@ -3,17 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import {
-  createConsultation,
-  scheduleConsultation,
-  rescheduleConsultation,
-  completeConsultation,
-  cancelConsultation,
-  markConsultationNoShow,
-  findDuplicateConsultationCandidates,
-  createClassificationTag,
-  listClassificationTags,
-  tagConsultation,
-  untagConsultation,
   createTrialSessionFromConsultation,
   completeTrialSession,
   approveTrialException,
@@ -28,6 +17,8 @@ import {
 } from "./consultation-actions";
 import type { ContractActivationRetryItem } from "./consultation-actions";
 import ConsultationSchedulingPanel from "./ConsultationSchedulingPanel";
+import ConsultationKanbanBoard from "./ConsultationKanbanBoard";
+import ClosedConsultationsSection from "./ClosedConsultationsSection";
 import type {
   ConsultationListItem,
   TrialSessionListItem,
@@ -38,13 +29,14 @@ import type {
   StaleEnvelopeContract,
 } from "./consultation-data";
 
-type SubTab = "consult" | "scheduling" | "trial" | "consent" | "errors";
+type SubTab = "consult" | "scheduling" | "trial" | "consent" | "errors" | "past";
 
 const SUB_NAV: { id: SubTab; label: string }[] = [
   { id: "consult", label: "상담 현황" },
   { id: "scheduling", label: "상담 운영(신청·수락·캘린더)" },
   { id: "trial", label: "체험 관리" },
   { id: "consent", label: "보호자 동의 대기" },
+  { id: "past", label: "지난 상담" },
   { id: "errors", label: "오류/재처리 현황판" },
 ];
 
@@ -98,10 +90,11 @@ export default function ConsultationTab({
         ))}
       </div>
 
-      {sub === "consult" && <ConsultSection consultations={consultations} />}
+      {sub === "consult" && <ConsultationKanbanBoard />}
       {sub === "scheduling" && <ConsultationSchedulingPanel />}
       {sub === "trial" && <TrialSection trials={trials} consultations={consultations} />}
       {sub === "consent" && <ConsentGapSection gaps={consentGaps} completed={completedConsents} />}
+      {sub === "past" && <ClosedConsultationsSection />}
       {sub === "errors" && (
         <ErrorDashboardSection
           driveIssues={driveIssues}
@@ -115,400 +108,6 @@ export default function ConsultationTab({
   );
 }
 
-const STATUS_LABEL: Record<string, string> = {
-  requested: "신청됨",
-  scheduled: "예약됨",
-  completed: "완료",
-  trial_planned: "체험 예정",
-  trial_completed: "체험 완료",
-  proposed: "제안됨",
-  contracted: "계약됨",
-  cancelled: "취소",
-  no_show: "노쇼",
-};
-
-function ConsultSection({ consultations }: { consultations: ConsultationListItem[] }) {
-  const router = useRouter();
-  const [statusFilter, setStatusFilter] = useState<string>("all");
-  const [openId, setOpenId] = useState<string | null>(null);
-  const [creating, setCreating] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [busyId, setBusyId] = useState<string | null>(null);
-  const [tags, setTags] = useState<Array<{ id: string; label: string }>>([]);
-  const [newTagLabel, setNewTagLabel] = useState("");
-  const [duplicates, setDuplicates] = useState<
-    Record<string, Array<{ id: string; contact_name: string; contact_email: string; status: string }>>
-  >({});
-
-  const visible =
-    statusFilter === "all" ? consultations : consultations.filter((c) => c.status === statusFilter);
-
-  async function loadTags() {
-    try {
-      setTags(await listClassificationTags());
-    } catch {
-      // 태그 로딩 실패는 조용히 무시 — 상담 화면 자체는 계속 사용 가능해야 한다.
-    }
-  }
-
-  async function checkDuplicates(c: ConsultationListItem) {
-    try {
-      const found = await findDuplicateConsultationCandidates({
-        email: c.contactEmail,
-        phone: c.contactPhone ?? undefined,
-        excludeConsultationId: c.id,
-      });
-      setDuplicates((prev) => ({ ...prev, [c.id]: found }));
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "중복 후보 조회에 실패했습니다.");
-    }
-  }
-
-  return (
-    <div>
-      <div className="flex items-center justify-between mb-4">
-        <select
-          value={statusFilter}
-          onChange={(e) => setStatusFilter(e.target.value)}
-          className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[12.5px]"
-        >
-          <option value="all">전체 상태</option>
-          {Object.keys(STATUS_LABEL).map((s) => (
-            <option key={s} value={s}>
-              {STATUS_LABEL[s]}
-            </option>
-          ))}
-        </select>
-        <button className={btnPrimary} onClick={() => setCreating((v) => !v)}>
-          {creating ? "취소" : "상담 등록"}
-        </button>
-      </div>
-
-      {error && <p className={errText}>{error}</p>}
-
-      {creating && (
-        <NewConsultationForm
-          onDone={() => setCreating(false)}
-          onError={setError}
-        />
-      )}
-
-      {visible.length === 0 && <p className="text-[13px] text-grey-500">해당하는 상담이 없습니다.</p>}
-
-      {visible.map((c) => {
-        const open = openId === c.id;
-        return (
-          <div key={c.id} className={card} data-testid={`consultation-card-${c.id}`}>
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="text-[14px] font-bold text-ink">
-                  {c.contactName}{" "}
-                  <span className="text-[11px] font-semibold text-grey-500">
-                    ({STATUS_LABEL[c.status] ?? c.status})
-                  </span>
-                </div>
-                <div className="text-[12px] text-grey-500">
-                  {c.contactEmail} {c.contactPhone ? `· ${c.contactPhone}` : ""}
-                </div>
-                {c.tagLabels.length > 0 && (
-                  <div className="mt-1 flex gap-1 flex-wrap">
-                    {c.tagLabels.map((t) => (
-                      <span
-                        key={t}
-                        className="text-[10.5px] font-semibold bg-grey-100 text-grey-500 rounded-full px-2 py-0.5"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                )}
-                {c.duplicateOfConsultationId && (
-                  <div className="text-[11px] text-red mt-1">중복 상담으로 표시됨</div>
-                )}
-              </div>
-              <button
-                className={btnSecondary}
-                onClick={() => {
-                  setOpenId(open ? null : c.id);
-                  if (!open) loadTags();
-                }}
-              >
-                {open ? "닫기" : "관리"}
-              </button>
-            </div>
-
-            {open && (
-              <div className="mt-3 pt-3 border-t border-grey-200 space-y-3">
-                <ScheduleControls
-                  consultationId={c.id}
-                  currentStatus={c.status}
-                  scheduledAt={c.scheduledAt}
-                  busy={busyId === c.id}
-                  onBusy={(b) => setBusyId(b ? c.id : null)}
-                  onError={setError}
-                />
-
-                <div>
-                  <button
-                    className={btnSecondary}
-                    onClick={() => checkDuplicates(c)}
-                  >
-                    중복 상담 후보 조회
-                  </button>
-                  {duplicates[c.id] && (
-                    <div className="mt-2">
-                      {duplicates[c.id].length === 0 ? (
-                        <p className="text-[12px] text-grey-500">중복 후보가 없습니다.</p>
-                      ) : (
-                        duplicates[c.id].map((d) => (
-                          <div
-                            key={d.id}
-                            className="text-[12px] text-ink flex items-center justify-between py-1"
-                          >
-                            <span>
-                              {d.contact_name} · {d.contact_email} ({STATUS_LABEL[d.status] ?? d.status})
-                            </span>
-                          </div>
-                        ))
-                      )}
-                    </div>
-                  )}
-                </div>
-
-                <div>
-                  <div className="text-[12px] font-semibold text-grey-500 mb-1.5">분류 태그</div>
-                  <div className="flex gap-1.5 flex-wrap mb-2">
-                    {tags.map((t) => {
-                      const applied = c.tagLabels.includes(t.label);
-                      return (
-                        <button
-                          key={t.id}
-                          className={
-                            "text-[11px] font-semibold rounded-full px-2.5 py-1 border-[1.5px] " +
-                            (applied ? "bg-ink text-white border-ink" : "text-grey-500 border-grey-200")
-                          }
-                          onClick={async () => {
-                            try {
-                              if (applied) {
-                                await untagConsultation({ consultationId: c.id, tagId: t.id });
-                              } else {
-                                await tagConsultation({ consultationId: c.id, tagId: t.id });
-                              }
-                              router.refresh();
-                            } catch (e) {
-                              setError(e instanceof Error ? e.message : "태그 변경에 실패했습니다.");
-                            }
-                          }}
-                        >
-                          {t.label}
-                        </button>
-                      );
-                    })}
-                  </div>
-                  <div className="flex gap-1.5">
-                    <input
-                      value={newTagLabel}
-                      onChange={(e) => setNewTagLabel(e.target.value)}
-                      placeholder="새 태그 이름"
-                      className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[12px] flex-1"
-                    />
-                    <button
-                      className={btnSecondary}
-                      onClick={async () => {
-                        if (!newTagLabel.trim()) return;
-                        try {
-                          await createClassificationTag({ label: newTagLabel.trim() });
-                          setNewTagLabel("");
-                          await loadTags();
-                        } catch (e) {
-                          setError(e instanceof Error ? e.message : "태그 생성에 실패했습니다.");
-                        }
-                      }}
-                    >
-                      새 태그 만들기
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
-function NewConsultationForm({
-  onDone,
-  onError,
-}: {
-  onDone: () => void;
-  onError: (e: string | null) => void;
-}) {
-  const [contactName, setContactName] = useState("");
-  const [contactEmail, setContactEmail] = useState("");
-  const [contactPhone, setContactPhone] = useState("");
-  const [studentGrade, setStudentGrade] = useState("");
-  const [concerns, setConcerns] = useState("");
-  const [submitting, setSubmitting] = useState(false);
-  const router = useRouter();
-
-  return (
-    <div className={card}>
-      <div className="grid grid-cols-2 gap-2 mb-2">
-        <input
-          value={contactName}
-          onChange={(e) => setContactName(e.target.value)}
-          placeholder="보호자/학생 이름"
-          className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[12.5px]"
-        />
-        <input
-          value={contactEmail}
-          onChange={(e) => setContactEmail(e.target.value)}
-          placeholder="이메일"
-          className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[12.5px]"
-        />
-        <input
-          value={contactPhone}
-          onChange={(e) => setContactPhone(e.target.value)}
-          placeholder="전화번호"
-          className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[12.5px]"
-        />
-        <input
-          value={studentGrade}
-          onChange={(e) => setStudentGrade(e.target.value)}
-          placeholder="학년"
-          className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[12.5px]"
-        />
-      </div>
-      <textarea
-        value={concerns}
-        onChange={(e) => setConcerns(e.target.value)}
-        placeholder="상담 내용/고민"
-        className="w-full border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[12.5px] mb-2"
-      />
-      <button
-        className={btnPrimary}
-        disabled={submitting}
-        onClick={async () => {
-          if (!contactName || !contactEmail) {
-            onError("이름과 이메일은 필수입니다.");
-            return;
-          }
-          setSubmitting(true);
-          onError(null);
-          try {
-            await createConsultation({
-              contactName,
-              contactEmail,
-              contactPhone: contactPhone || undefined,
-              studentGrade: studentGrade || undefined,
-              concerns: concerns || undefined,
-            });
-            router.refresh();
-            onDone();
-          } catch (e) {
-            onError(e instanceof Error ? e.message : "상담 등록에 실패했습니다.");
-          } finally {
-            setSubmitting(false);
-          }
-        }}
-      >
-        {submitting ? "등록 중…" : "등록"}
-      </button>
-    </div>
-  );
-}
-
-function ScheduleControls({
-  consultationId,
-  currentStatus,
-  scheduledAt,
-  busy,
-  onBusy,
-  onError,
-}: {
-  consultationId: string;
-  currentStatus: string;
-  scheduledAt: string | null;
-  busy: boolean;
-  onBusy: (b: boolean) => void;
-  onError: (e: string | null) => void;
-}) {
-  const [dt, setDt] = useState(scheduledAt ? scheduledAt.slice(0, 16) : "");
-  const [reason, setReason] = useState("");
-
-  const router = useRouter();
-
-  async function run(fn: () => Promise<void>) {
-    onBusy(true);
-    onError(null);
-    try {
-      await fn();
-      router.refresh();
-    } catch (e) {
-      onError(e instanceof Error ? e.message : "처리에 실패했습니다.");
-    } finally {
-      onBusy(false);
-    }
-  }
-
-  return (
-    <div className="flex items-center gap-2 flex-wrap">
-      <input
-        type="datetime-local"
-        value={dt}
-        onChange={(e) => setDt(e.target.value)}
-        className="border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[12px]"
-      />
-      <button
-        disabled={busy || !dt}
-        className={btnSecondary}
-        onClick={() =>
-          run(async () => {
-            const iso = new Date(dt).toISOString();
-            if (currentStatus === "scheduled") {
-              await rescheduleConsultation(consultationId, iso);
-            } else {
-              await scheduleConsultation(consultationId, iso);
-            }
-          })
-        }
-      >
-        {currentStatus === "scheduled" ? "재예약" : "예약"}
-      </button>
-      {currentStatus === "scheduled" && (
-        <button
-          disabled={busy}
-          className={btnSecondary}
-          onClick={() => run(() => completeConsultation(consultationId))}
-        >
-          완료 처리
-        </button>
-      )}
-      <input
-        value={reason}
-        onChange={(e) => setReason(e.target.value)}
-        placeholder="사유(취소/노쇼)"
-        className="border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[12px] w-32"
-      />
-      <button
-        disabled={busy}
-        className={btnSecondary}
-        onClick={() => run(() => cancelConsultation(consultationId, reason || undefined))}
-      >
-        취소
-      </button>
-      <button
-        disabled={busy}
-        className={btnSecondary}
-        onClick={() => run(() => markConsultationNoShow(consultationId, reason || undefined))}
-      >
-        노쇼
-      </button>
-    </div>
-  );
-}
 
 function TrialSection({
   trials,

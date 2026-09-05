@@ -36,6 +36,10 @@ import {
   disableWorkspaceEventsSubscriptionForOrganizer,
   type WorkspaceEventsSubscriptionRow,
 } from "./workspace-events-actions";
+import MonthCalendar from "@/app/components/MonthCalendar";
+import { dateKeyInTimezone } from "@/lib/calendar-date-utils";
+
+const ADMIN_TIMEZONE = "Asia/Seoul";
 
 const WEEKDAY_LABEL = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -133,6 +137,7 @@ export default function ConsultationSchedulingPanel() {
   const [outcomeOpenId, setOutcomeOpenId] = useState<string | null>(null);
   const [outcomeSummary, setOutcomeSummary] = useState("");
   const [outcomeValue, setOutcomeValue] = useState<"trial_recommended" | "regular_recommended" | "on_hold" | "closed" | "">("");
+  const [selectedDateKey, setSelectedDateKey] = useState<string | null>(null);
 
   async function reload() {
     setLoading(true);
@@ -251,10 +256,38 @@ export default function ConsultationSchedulingPanel() {
             ))}
           </div>
         </div>
-        {scheduled.length === 0 ? (
-          <p className="text-[13px] text-grey-500">해당 기간에 예정된 상담이 없습니다.</p>
-        ) : (
-          scheduled.map((c) => (
+        {view === "month" && (
+          <div className="mb-4" data-testid="consultation-month-calendar">
+            <MonthCalendar
+              timezone={ADMIN_TIMEZONE}
+              selectedDateKey={selectedDateKey}
+              onSelectDate={(dateKey) => setSelectedDateKey((prev) => (prev === dateKey ? null : dateKey))}
+              badgesByDate={scheduled.reduce<Record<string, { count: number }>>((acc, c) => {
+                if (!c.starts_at) return acc;
+                const key = dateKeyInTimezone(c.starts_at, ADMIN_TIMEZONE);
+                acc[key] = { count: (acc[key]?.count ?? 0) + 1 };
+                return acc;
+              }, {})}
+            />
+            {selectedDateKey && (
+              <button
+                className="text-[12px] font-semibold text-blue mt-2"
+                onClick={() => setSelectedDateKey(null)}
+              >
+                {selectedDateKey} 필터 해제
+              </button>
+            )}
+          </div>
+        )}
+        {(() => {
+          const visibleScheduled =
+            view === "month" && selectedDateKey
+              ? scheduled.filter((c) => c.starts_at && dateKeyInTimezone(c.starts_at, ADMIN_TIMEZONE) === selectedDateKey)
+              : scheduled;
+          if (visibleScheduled.length === 0) {
+            return <p className="text-[13px] text-grey-500">해당 기간에 예정된 상담이 없습니다.</p>;
+          }
+          return visibleScheduled.map((c) => (
             <div key={c.id} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3">
               <p className="text-[13.5px] font-bold text-ink">
                 {formatDateTime(c.starts_at)} · {c.contact_name}
@@ -418,8 +451,8 @@ export default function ConsultationSchedulingPanel() {
                 </form>
               )}
             </div>
-          ))
-        )}
+          ));
+        })()}
       </section>
 
       <section className="mb-8">

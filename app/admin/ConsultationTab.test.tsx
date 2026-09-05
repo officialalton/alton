@@ -32,6 +32,41 @@ vi.mock("./consultation-actions", () => ({
   retryContractActivation: vi.fn(),
 }));
 
+vi.mock("./consultation-kanban-actions", () => ({
+  listKanbanBoardAction: vi.fn().mockResolvedValue([
+    {
+      id: "c1",
+      contact_name: "김민지",
+      contact_email: "minji@example.com",
+      contact_phone: null,
+      student_grade: "10학년",
+      status: "requested",
+      stage: "requested",
+    },
+  ]),
+  getConsultationCardDetailAction: vi.fn(),
+  getClosureDraftAction: vi.fn(),
+  closeConsultationAction: vi.fn(),
+  listClosedConsultationsAction: vi.fn().mockResolvedValue({
+    items: [],
+    countsByType: { no_trial: 0, trial_no_convert: 0, regular_in_progress: 0, contract_signed: 0 },
+  }),
+  KANBAN_STAGE_ORDER: ["requested", "scheduled", "trial_requested", "trial_scheduled", "contract_sent"],
+  KANBAN_STAGE_LABEL: {
+    requested: "상담 신청",
+    scheduled: "상담 일정 확정",
+    trial_requested: "체험 신청",
+    trial_scheduled: "체험 일정 확정",
+    contract_sent: "계약서 전달",
+  },
+  CLOSURE_TYPE_LABEL: {
+    no_trial: "체험 없이 종료",
+    trial_no_convert: "체험 후 종료",
+    regular_in_progress: "정규 진행 중 종료",
+    contract_signed: "정규 계약 날인",
+  },
+}));
+
 const baseProps = {
   consultations: [
     {
@@ -69,9 +104,11 @@ const baseProps = {
 };
 
 describe("ConsultationTab", () => {
-  it("상담 관리 서브탭을 기본으로 보여준다", () => {
+  it("상담 현황 서브탭을 기본으로 보여준다(5단계 칸반 보드)", async () => {
     render(<ConsultationTab {...baseProps} />);
-    expect(screen.getByText("김민지", { exact: false })).toBeInTheDocument();
+    expect(await screen.findByText("김민지", { exact: false })).toBeInTheDocument();
+    expect(screen.getByTestId("consultation-kanban-board")).toBeInTheDocument();
+    expect(screen.getByTestId("kanban-column-requested")).toBeInTheDocument();
   });
 
   it("보호자 동의 대기 서브탭으로 전환하면 대기 목록이 기본으로 보이고, 완료 탭을 누르면 완료 목록을 보여준다(대기/완료 분리, 2026-09-05)", () => {
