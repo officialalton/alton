@@ -1,16 +1,16 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 
-// M4(사용자 지시, 2026-09-05): "계약 서명 + 결제 완료" 두 선행조건이 갖춰지면
-// 관리자가 매번 "활성화" 버튼을 눌러야 했던 수동 단계를 자동화한다. 이 함수는
-// R5의 실제 게이트(subject_enrollment_activation_ready RPC — 계약 active +
-// 결제완료 수업권 존재)를 그대로 재사용해 판정하므로, 활성화 조건 자체는 전혀
-// 바뀌지 않는다("자동으로 판단"이 아니라 "자동으로 누른다"). 선생님 배정
+// M4(사용자 지시, 2026-09-05): 계약 서명이 완료되면 관리자가 매번 "활성화"
+// 버튼을 눌러야 했던 수동 단계를 자동화한다. 판정은 subject_enrollment_
+// activation_ready() RPC를 그대로 재사용한다("자동으로 판단"이 아니라 "자동으로
+// 누른다") — 다만 그 RPC 자체가 이번에 계약 active 단일 조건으로 단순화됐다
+// (결제완료 수업권 조건 제거, 20261023000000 마이그레이션 참고 — 예약 자체가
+// 이미 결제완료 수업권을 요구하므로 이중 게이트가 불필요했음). 선생님 배정
 // (teacher_assignments)은 이 함수가 손대지 않는다 — planned→active 전이는
 // 항상 기존에 배정된 선생님을 그대로 유지한다.
 //
-// 두 이벤트(DocuSign 서명 완료 웹훅, Stripe 결제완료 웹훅) 중 어느 쪽이 나중에
-// 도착하든 그 시점에 두 조건이 다 갖춰졌는지 이 함수로 재확인하면 되므로, 두
-// 웹훅 모두에서 동일하게 호출한다.
+// 현재는 DocuSign 서명완료 웹훅에서만 호출한다(계약 active 단일 조건이라
+// Stripe 결제완료 시점에는 호출할 필요가 없다 — 사용자 확정).
 export async function autoActivateReadySubjectEnrollments(
   admin: SupabaseClient,
   contractId: string
