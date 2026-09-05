@@ -31,6 +31,15 @@ const pendingStudent: StudentListItem = {
   creditBalance: 0,
   parentNames: ["박부모"],
   subjectNames: [],
+  dateOfBirth: null,
+  schoolName: null,
+  satScore: 0,
+  gpa: null,
+  targetColleges: [],
+  intendedMajors: [],
+  profileCompletedAt: null,
+  apCourseCount: 0,
+  extracurricularCount: 0,
 };
 
 const activeStudent: StudentListItem = {

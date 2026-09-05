@@ -28,6 +28,15 @@ const student: StudentListItem = {
   creditBalance: 0,
   parentNames: [],
   subjectNames: [],
+  dateOfBirth: null,
+  schoolName: null,
+  satScore: 0,
+  gpa: null,
+  targetColleges: [],
+  intendedMajors: [],
+  profileCompletedAt: null,
+  apCourseCount: 0,
+  extracurricularCount: 0,
 };
 
 const subjects: AdminSubject[] = [{ subjectId: "sub1", subjectName: "SAT Math", units: [] }];

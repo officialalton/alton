@@ -18,6 +18,16 @@ export type StudentListItem = {
   creditBalance: number;
   parentNames: string[];
   subjectNames: string[];
+  // M4 UAT #2(2026-09-05): 학생 프로필 완성 단계에서 수집한 정보(관리자 열람용).
+  dateOfBirth: string | null;
+  schoolName: string | null;
+  satScore: number;
+  gpa: number | null;
+  targetColleges: string[];
+  intendedMajors: string[];
+  profileCompletedAt: string | null;
+  apCourseCount: number;
+  extracurricularCount: number;
 };
 
 export type TeacherListItem = {
@@ -117,7 +127,9 @@ export async function loadParents(supabase: SupabaseClient): Promise<ParentListI
 export async function loadStudents(supabase: SupabaseClient): Promise<StudentListItem[]> {
   const { data: students } = await supabase
     .from("students")
-    .select("id, grade, status, credit_balance, profile:profiles(name)")
+    .select(
+      "id, grade, status, credit_balance, school_name, sat_score, gpa, target_colleges, intended_majors, profile_completed_at, profile:profiles(name, date_of_birth)"
+    )
     .order("joined_at", { ascending: false });
   if (!students || students.length === 0) return [];
 
@@ -172,16 +184,51 @@ export async function loadStudents(supabase: SupabaseClient): Promise<StudentLis
 
   const emailById = await loadEmailById(studentIds);
 
-  return students.map((s) => ({
-    id: s.id,
-    name: extractName(s.profile),
-    email: emailById.get(s.id) ?? "",
-    grade: s.grade,
-    status: s.status,
-    creditBalance: s.credit_balance,
-    parentNames: parentsByStudent.get(s.id) ?? [],
-    subjectNames: subjectsByStudent.get(s.id) ?? [],
-  }));
+  const { data: apCourses } = await supabase
+    .from("student_ap_courses")
+    .select("student_id")
+    .in("student_id", studentIds);
+  const apCourseCountByStudent = new Map<string, number>();
+  for (const row of apCourses ?? []) {
+    apCourseCountByStudent.set(row.student_id, (apCourseCountByStudent.get(row.student_id) ?? 0) + 1);
+  }
+
+  const { data: activities } = await supabase
+    .from("student_extracurricular_activities")
+    .select("student_id")
+    .in("student_id", studentIds);
+  const extracurricularCountByStudent = new Map<string, number>();
+  for (const row of activities ?? []) {
+    extracurricularCountByStudent.set(
+      row.student_id,
+      (extracurricularCountByStudent.get(row.student_id) ?? 0) + 1
+    );
+  }
+
+  return students.map((s) => {
+    const profile = (Array.isArray(s.profile) ? s.profile[0] : s.profile) as
+      | { name?: string; date_of_birth?: string | null }
+      | null;
+    return {
+      id: s.id,
+      name: extractName(s.profile),
+      email: emailById.get(s.id) ?? "",
+      grade: s.grade,
+      status: s.status,
+      creditBalance: s.credit_balance,
+      parentNames: parentsByStudent.get(s.id) ?? [],
+      subjectNames: subjectsByStudent.get(s.id) ?? [],
+      dateOfBirth: profile?.date_of_birth ?? null,
+      schoolName: s.school_name,
+      satScore: s.sat_score,
+      gpa: s.gpa,
+      targetColleges: s.target_colleges ?? [],
+      intendedMajors: s.intended_majors ?? [],
+      profileCompletedAt: s.profile_completed_at,
+      apCourseCount: apCourseCountByStudent.get(s.id) ?? 0,
+      extracurricularCount: extracurricularCountByStudent.get(s.id) ?? 0,
+    };
+  });
 }
 
 export async function loadTeachers(supabase: SupabaseClient): Promise<TeacherListItem[]> {

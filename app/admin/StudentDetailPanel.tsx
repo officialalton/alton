@@ -94,6 +94,39 @@ export default function StudentDetailPanel({
       </div>
 
       <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">
+        <div className="flex items-center justify-between mb-2">
+          <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide">
+            프로필 정보
+          </div>
+          <span
+            className={
+              "text-[11px] font-bold px-2 py-0.5 rounded-full " +
+              (student.profileCompletedAt ? "bg-green/10 text-green" : "bg-red/10 text-red")
+            }
+          >
+            {student.profileCompletedAt ? "완료" : "미완료"}
+          </span>
+        </div>
+        <p className="text-[13px] text-ink">
+          생년월일 {student.dateOfBirth ?? "미입력"} · 학교 {student.schoolName ?? "미입력"}
+        </p>
+        <p className="text-[13px] text-ink mt-1">
+          SAT {student.satScore}점 · GPA {student.gpa ?? "미입력"}
+        </p>
+        <p className="text-[13px] text-ink mt-1">
+          목표 대학{" "}
+          {student.targetColleges.length ? student.targetColleges.join(", ") : "미입력"}
+        </p>
+        <p className="text-[13px] text-ink mt-1">
+          관심 전공{" "}
+          {student.intendedMajors.length ? student.intendedMajors.join(", ") : "미입력"}
+        </p>
+        <p className="text-[13px] text-grey-500 mt-1">
+          AP 이수 {student.apCourseCount}건 · 비교과 활동 {student.extracurricularCount}건
+        </p>
+      </div>
+
+      <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">
         <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2">
           학부모 / 담당 과목
         </div>

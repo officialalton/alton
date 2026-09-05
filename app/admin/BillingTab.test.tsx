@@ -18,6 +18,15 @@ const students: StudentListItem[] = [
     creditBalance: 14,
     parentNames: ["김민지"],
     subjectNames: ["SAT Math"],
+    dateOfBirth: null,
+    schoolName: null,
+    satScore: 0,
+    gpa: null,
+    targetColleges: [],
+    intendedMajors: [],
+    profileCompletedAt: null,
+    apCourseCount: 0,
+    extracurricularCount: 0,
   },
 ];
 

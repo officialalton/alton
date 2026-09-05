@@ -50,16 +50,54 @@
 
 ## 의도적으로 보류(이유와 함께) — 다음 세션에서 확정 후 진행
 
-### #2(프로필 필드 추가) — 스키마 설계만 먼저 확인 필요
-요청: 학생 계정 설정 시 생년월일(필수)·학교명(필수)·학년(필수)·기존 SAT 점수(없으면
-0)·GPA·AP 이수 상황·비교과 현황·목표 대학·관심 전공을 추가로 받아야 함.
-**막힌 지점**: 이걸 `/set-password` 화면(학생이 처음 로그인하는 그 화면, 지금은
-비밀번호만 받음)에 통째로 추가할지, 아니면 로그인 후 별도 "프로필 완성" 단계로
-분리할지가 UX 결정 사항. 또한 AP 이수 상황·비교과 현황처럼 자유 텍스트/여러 개
-입력이 필요한 항목은 단일 컬럼이 아니라 별도 테이블(예: `student_ap_courses`)이
-나을 수 있어 스키마 형태를 먼저 정해야 함. **다음 세션 시작 시 질문할 것**: (a) 첫
-로그인 화면에 다 넣을지 별도 단계로 분리할지, (b) AP 과목/비교과를 자유 텍스트 한
-칸으로 받을지 구조화된 리스트로 받을지.
+### #2(프로필 필드 추가) — **완료(2026-09-05 후속 세션)**
+UX 결정(사용자 승인): (a) `/set-password`에 넣지 않고 비밀번호 설정 → `/post-auth` →
+(미완료 시) `/complete-profile` 필수 단계로 분리, 건너뛰기 불가·로그인마다 재확인.
+(b) AP 이수 상황·비교과 활동은 구조화된 리스트(신규 테이블, 학생이 추가/삭제).
+
+구현 내역:
+- **스키마**: `supabase/migrations/20261026000000_m4_student_profile_completion.sql`
+  — `students`에 `school_name`/`sat_score`(기본값 0)/`gpa`/`target_colleges`(text[])/
+  `intended_majors`(text[])/`profile_completed_at` 추가, `student_ap_courses`/
+  `student_extracurricular_activities` 신규 테이블(RLS: 본인/담당 선생님/보호자/
+  관리자 조회, 본인/관리자만 쓰기 — 기존 `teaches_student()`/`is_guardian_of()`/
+  `is_admin()` 패턴 재사용). `complete_student_profile()`(원자적 저장+완료 처리),
+  `current_student_profile_completed()`(게이트 확인, self-only) SECURITY DEFINER
+  함수 추가.
+- **생년월일 정책 조정(결정 필요 → 합리적 기본값으로 진행)**: 기존
+  `protect_date_of_birth()`(R2)는 학생 본인의 생년월일 자가수정을 전면 차단하고
+  보호자/관리자만 허용했다 — 프로필 완성 화면에서 학생이 직접 입력해야 하는 이번
+  요구와 충돌. **완료 게이트에 도달했다는 것 자체가 이미 보호자 동의가 유효하거나
+  13세 미만이 아니라는 뜻**(resolveAccountDestination의 기존 consent 게이트가
+  먼저 걸러줌)이라는 점에 근거해, "값이 아직 없을 때(최초 1회)에 한해 본인 자가
+  입력 허용"으로 트리거를 좁혀 완화했다 — 이미 등록된 생년월일의 변경은 여전히
+  보호자/관리자만 가능(위조 방지 방어 그대로 유지). **이 판단은 실제 확인이
+  필요하다** — 다음 세션에서 재확인 요망.
+- **완료 게이트 판정 기준(결정)**: 원문에 "필수"로 명시된 생년월일·학교명·학년만
+  완료 조건에 포함. SAT는 "없으면 0"이라 기본값으로 항상 충족 취급. GPA/AP/비교과/
+  목표 대학/관심 전공은 수집하되 완료 게이트에는 포함하지 않음(선택 입력, 나중에
+  추가 가능) — 원문에 "필수" 표시가 없어서 내린 판단, 확인 요망.
+- **목표 대학/관심 전공 개수(결정)**: 여러 개 가능하다고 보고 `text[]` 배열로
+  설계(개수 제한 없음) — 실제 정책 확인 필요한 가정.
+- **서버 로직**: `lib/auth.ts`의 `resolveAccountDestination()`에 학생 전용 분기
+  추가(role !== student면 영향 없음) — `account-pending`/`consent-pending`과
+  동일한 중앙 게이트 패턴이라 `requireUser()`를 쓰는 모든 학생 포털 페이지/서버
+  액션에 자동 전파됨.
+- **UI**: `app/complete-profile/page.tsx`(무한 리다이렉트 방지를 위해
+  `requireUser()` 대신 수동 인증 확인, account-pending과 동일 패턴) +
+  `CompleteProfileForm.tsx`(생년월일/학교명/학년/SAT/GPA + AP 과목·비교과 활동
+  반복 입력 리스트 + 목표 대학·관심 전공 태그 입력) + `app/complete-profile/actions.ts`.
+  관리자 열람: `app/admin/UsersTab.tsx`(`StudentDetailPanel`)에 "프로필 정보" 카드
+  추가(완료 여부 배지, 전체 필드 읽기 전용 표시) — `users-data.ts`의
+  `StudentListItem`/`loadStudents()` 확장.
+- **테스트**: `lib/auth.test.ts`(게이트 분기 3건), `app/complete-profile/actions.test.ts`,
+  `app/complete-profile/CompleteProfileForm.test.tsx` 신규. 기존 admin 테스트 fixture
+  (`BillingTab`/`MatchingTab`/`SubjectEnrollmentPanel`/`UsersTab`/`StudentDetailPanel`
+  `.test.tsx`)는 `StudentListItem` 타입 확장에 맞춰 갱신.
+- **검증**: `supabase db reset --local` 반영 확인, 전체 Vitest(964건) 통과, `tsc --noEmit`
+  클린, `next build` 클린(`/complete-profile` 라우트 정상 등록). Playwright E2E는
+  이번 세션에서 추가하지 못함(아래 미완료 참고). Production/원격 DB/실외부 서비스
+  접근 없음, 로컬 커밋만 진행(push 안 함).
 
 ### #3.1(상담 관련 액션을 상담 현황 안으로 통합) — 범위 조사만 하고 미착수
 "선생님 배정만 빼고" 상담 과정의 모든 버튼이 상담 현황 안에서 클릭 가능해야 함.

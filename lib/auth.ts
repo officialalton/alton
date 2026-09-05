@@ -56,6 +56,20 @@ export async function resolveAccountDestination(
   if (accessAllowed === false) {
     return "/consent-pending";
   }
+
+  // M4 UAT #2(2026-09-05): 학생 프로필 완성(생년월일/학교명/학년 등) 강제
+  // 게이트 — 완료 전에는 학생 포털의 다른 어떤 기능도 쓸 수 없어야 하고,
+  // 건너뛰기 불가, 로그인마다 재확인해야 한다는 확정 UX를 이 함수 하나에
+  // 추가해 모든 requireUser() 호출부(= 학생 포털의 모든 페이지/서버 액션)에
+  // 자동 전파한다. current_student_profile_completed()는 학생이 아니면
+  // 항상 true라 다른 role에는 영향이 없다.
+  if (role === "student") {
+    const { data: profileCompleted } = await supabase.rpc("current_student_profile_completed");
+    if (profileCompleted === false) {
+      return "/complete-profile";
+    }
+  }
+
   return getRoleHomePath(role);
 }
 

@@ -87,6 +87,22 @@ insert into students (id, grade, status, credit_balance) values
   ('cccccccc-0000-0000-0000-000000000002', '11학년', 'active', 8),
   ('88888888-0000-0000-0000-000000000001', '9학년', 'pending', 0);
 
+-- M4(2026-09-05) 프로필 완성 게이트 추가 — 기존 e2e/시드 시나리오가 로그인 직후
+-- /complete-profile로 새로 리다이렉트되는 회귀를 막기 위해, 이미 활성 상태인 시드
+-- 학생들은 프로필을 완성된 것으로 미리 채워둔다(9학년 pending 학생은 계정 상태
+-- 게이트가 먼저 걸려 이 화면에 도달하지 않으므로 그대로 둔다).
+update students set
+  school_name = '서울국제학교',
+  sat_score = 1350,
+  gpa = 3.7,
+  target_colleges = array['Stanford University'],
+  intended_majors = array['Computer Science'],
+  profile_completed_at = now()
+where id in (
+  'cccccccc-0000-0000-0000-000000000001',
+  'cccccccc-0000-0000-0000-000000000002'
+);
+
 -- (2026-08-30 R2 추가) teachers.status='active'로 바로 INSERT하면 R1의
 -- teachers_enforce_active_requires_rate 트리거가 유효한 현재 시급 이력
 -- (teacher_rate_history)을 요구한다 — teacher_rate_history.teacher_id는
