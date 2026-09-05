@@ -163,5 +163,6 @@ describe("listWorkspaceEventsSubscriptionsForTarget — 사용자당 구독 1개
     const [url] = fetchMock.mock.calls[0];
     expect(url).toContain("filter=");
     expect(decodeURIComponent(url)).toContain('target_resource="//cloudidentity.googleapis.com/users/108123456789012345678"');
+    expect(decodeURIComponent(url)).toContain('event_types:"google.workspace.meet.conference.v2.started"');
   });
 });

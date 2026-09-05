@@ -173,7 +173,9 @@ export async function listWorkspaceEventsSubscriptionsForTarget(params: {
 }): Promise<WorkspaceEventsSubscriptionResource[]> {
   assertRealCallsAllowed();
   const token = await resolveMeetReadonlyAccessToken(params.organizerEmail);
-  const filter = encodeURIComponent(`target_resource="${params.targetResource}"`);
+  const filter = encodeURIComponent(
+    `target_resource="${params.targetResource}" AND event_types:"google.workspace.meet.conference.v2.started"`
+  );
   const res = await workspaceEventsFetch(`${WORKSPACE_EVENTS_API}/subscriptions?filter=${filter}`, token, {
     method: "GET",
   });
