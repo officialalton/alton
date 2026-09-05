@@ -14,6 +14,7 @@ import { planSubjectEnrollment, assignTeacherToSubjectEnrollment } from "./subje
 import { companySignOffContractVersion, sendContractForSignature } from "./consultation-actions";
 import { sendEmail } from "@/lib/email";
 import { currentRequestOrigin } from "@/lib/request-origin";
+import { appendVercelProtectionBypass } from "@/lib/vercel-protection-bypass";
 
 // 기존 상담 관리 액션(app/admin/consultation-actions.ts)과 동일한 capability를
 // 재사용한다 — 새 권한 이름을 따로 만들지 않는다.
@@ -309,7 +310,7 @@ export async function sendRegularContractOneClickAction(params: {
       recipientEmail: params.guardianEmail,
       recipientName: params.guardianName,
       childName: params.childName,
-      webhookUrl: `${siteUrl}/api/webhooks/docusign`,
+      webhookUrl: appendVercelProtectionBypass(`${siteUrl}/api/webhooks/docusign`),
     });
     return { status: "sent", contractVersionId, envelopeId };
   } catch (e) {

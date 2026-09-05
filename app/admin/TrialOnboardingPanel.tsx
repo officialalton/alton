@@ -505,6 +505,12 @@ function RegularContractRow({
     { status: "sent" | "already_sent"; envelopeId: string; at: string } | { status: "failed"; error: string } | null
   >(null);
 
+  // 로컬 result만 보면 새로고침 후 이미 발송된 계약도 버튼이 "정규 계약 발송"으로
+  // 되돌아가 재발송을 유도한다(TrialConversionPanel에서 겪은 것과 같은 종류의
+  // 문제) — item.contractStatus(실제 저장된 contracts.status)가 sent/active면
+  // 로컬 result가 비어 있어도 이미 발송된 것으로 표시한다.
+  const alreadySentFromServer = item.contractStatus === "sent" || item.contractStatus === "active";
+  const isSent = result?.status === "sent" || result?.status === "already_sent" || (!result && alreadySentFromServer);
   const canSend = !!item.guardianEmail && !!item.guardianName;
 
   return (
@@ -528,20 +534,21 @@ function RegularContractRow({
           <div className="mt-1 font-mono text-[11px] break-all">{result.error}</div>
         </div>
       )}
-      {(result?.status === "sent" || result?.status === "already_sent") && (
+      {isSent && (
         <div className="text-[12px] text-ink mt-2 bg-grey-100 rounded-lg px-3 py-2">
-          {result.status === "sent" ? "발송 완료" : "이미 발송됨"} — 수신자 {item.guardianEmail} · 발송 시각{" "}
-          {new Date(result.at).toLocaleString("ko-KR")} · 상태: 서명 대기
+          {result?.status === "sent"
+            ? `발송 완료 — 수신자 ${item.guardianEmail} · 발송 시각 ${new Date(result.at).toLocaleString("ko-KR")} · 상태: 서명 대기`
+            : `이미 발송됨 — 수신자 ${item.guardianEmail} · 상태: 서명 대기`}
         </div>
       )}
 
       {!confirming ? (
         <button
-          disabled={!canSend}
+          disabled={!canSend || isSent}
           onClick={() => setConfirming(true)}
           className="text-[12px] font-bold px-3 py-1.5 mt-2.5 rounded-lg bg-ink text-white disabled:opacity-50"
         >
-          {result?.status === "failed" ? "다시 시도" : "정규 계약 발송"}
+          {result?.status === "failed" ? "다시 시도" : isSent ? "발송 완료" : "정규 계약 발송"}
         </button>
       ) : (
         <div className="mt-2.5 bg-grey-50 rounded-lg px-3.5 py-3">
