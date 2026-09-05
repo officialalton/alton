@@ -47,9 +47,10 @@ export async function loadPendingRegularIntentChoices(
   const enrollmentIds = enrollments.map((e) => e.id);
 
   const { data: finalReviews } = await supabase
-    .from("trial_lesson_reviews")
+    .from("lesson_reviews")
     .select("subject_enrollment_id")
     .in("subject_enrollment_id", enrollmentIds)
+    .eq("lesson_type", "trial")
     .eq("status", "final");
   const reviewedIds = new Set((finalReviews ?? []).map((r) => r.subject_enrollment_id as string));
   if (reviewedIds.size === 0) return [];

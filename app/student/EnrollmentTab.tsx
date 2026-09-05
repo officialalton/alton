@@ -9,7 +9,10 @@ import { getTrialLessonReviewForFamily } from "@/app/parent/trial-conversion-act
 // 학생/보호자 공용 — 학생 화면에는 "정규 진행 희망" 버튼을 붙이지 않는다(그건
 // app/parent/TrialConversionPanel.tsx의 역할).
 function TrialReviewDisplay({ subjectEnrollmentId }: { subjectEnrollmentId: string }) {
-  const [review, setReview] = useState<{ finalText: string; finalizedAt: string } | null | undefined>(undefined);
+  const [review, setReview] = useState<
+    Awaited<ReturnType<typeof getTrialLessonReviewForFamily>> | undefined
+  >(undefined);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     getTrialLessonReviewForFamily(subjectEnrollmentId)
@@ -20,9 +23,26 @@ function TrialReviewDisplay({ subjectEnrollmentId }: { subjectEnrollmentId: stri
   if (!review) return null;
 
   return (
-    <div className="mt-2.5 bg-grey-50 rounded-lg px-3 py-2.5 border border-grey-200">
-      <div className="text-[11.5px] font-bold text-grey-500 mb-1">체험 수업 리뷰 (선생님 확정)</div>
-      <p className="text-[12.5px] text-ink whitespace-pre-wrap">{review.finalText}</p>
+    <div className="mt-2.5">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="text-[12px] font-semibold text-blue"
+      >
+        {open ? "리뷰 닫기" : "체험 수업 리뷰 보기"}
+      </button>
+      {open && (
+        <div className="mt-2 bg-grey-50 rounded-lg px-3 py-2.5 border border-grey-200">
+          <div className="text-[11.5px] font-bold text-grey-500 mb-1">체험 수업 리뷰 (선생님 확정)</div>
+          {review.categoryNotes.map((c) => (
+            <div key={c.key} className="mb-1.5">
+              <div className="text-[10.5px] font-bold text-grey-400">{c.label}</div>
+              <p className="text-[12.5px] text-ink whitespace-pre-wrap">{c.note}</p>
+            </div>
+          ))}
+          <p className="text-[12.5px] text-ink whitespace-pre-wrap">{review.finalText}</p>
+        </div>
+      )}
     </div>
   );
 }

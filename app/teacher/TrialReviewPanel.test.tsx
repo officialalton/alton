@@ -3,12 +3,14 @@ import { describe, expect, it, vi, beforeEach } from "vitest";
 import TrialReviewPanel from "./TrialReviewPanel";
 import {
   listMyTrialSessionsNeedingReview,
+  listActiveReviewCategories,
   saveTrialLessonReviewDraft,
   finalizeTrialLessonReview,
 } from "./trial-review-actions";
 
 vi.mock("./trial-review-actions", () => ({
   listMyTrialSessionsNeedingReview: vi.fn(),
+  listActiveReviewCategories: vi.fn(),
   saveTrialLessonReviewDraft: vi.fn(),
   finalizeTrialLessonReview: vi.fn(),
 }));
@@ -19,11 +21,24 @@ const session = {
   startsAt: "2026-08-01T00:00:00Z",
   finalStatus: "completed",
   reviewStatus: "none" as const,
+  aiSummary: null,
   draftText: null,
+  categoryNotes: {},
 };
 
+const categories = [
+  { key: "attitude", label: "학업 태도" },
+  { key: "comprehension", label: "이해도" },
+  { key: "participation", label: "참여도" },
+  { key: "homework", label: "과제 이행" },
+  { key: "overall", label: "종합 의견" },
+];
+
 describe("TrialReviewPanel", () => {
-  beforeEach(() => vi.clearAllMocks());
+  beforeEach(() => {
+    vi.clearAllMocks();
+    (listActiveReviewCategories as ReturnType<typeof vi.fn>).mockResolvedValue(categories);
+  });
 
   it("확정하지 않은 리뷰가 없으면 아무것도 렌더링하지 않는다", async () => {
     (listMyTrialSessionsNeedingReview as ReturnType<typeof vi.fn>).mockResolvedValue([]);
@@ -32,11 +47,14 @@ describe("TrialReviewPanel", () => {
     expect(container).toBeEmptyDOMElement();
   });
 
-  it("미리보기는 고객 화면에 보일 문구를 그대로 보여주고, 초안 저장 전에는 확정 버튼이 비활성화된다", async () => {
+  it("카테고리별 의견 입력란이 관리자 지정 카테고리 순서대로 보이고, 미리보기는 고객 화면 문구를 그대로 보여준다", async () => {
     (listMyTrialSessionsNeedingReview as ReturnType<typeof vi.fn>).mockResolvedValue([session]);
     render(<TrialReviewPanel />);
 
-    const textarea = await screen.findByLabelText("고객에게 보여줄 체험 리뷰");
+    for (const c of categories) {
+      await screen.findByLabelText(c.label);
+    }
+    const textarea = await screen.findByLabelText("고객에게 보여줄 종합 의견");
     expect(screen.getByRole("button", { name: "공개 확정" })).toBeDisabled();
 
     fireEvent.change(textarea, { target: { value: "기초 개념 이해도 우수" } });
@@ -52,7 +70,7 @@ describe("TrialReviewPanel", () => {
     (finalizeTrialLessonReview as ReturnType<typeof vi.fn>).mockResolvedValue({ reviewId: "r1" });
 
     render(<TrialReviewPanel />);
-    const textarea = await screen.findByLabelText("고객에게 보여줄 체험 리뷰");
+    const textarea = await screen.findByLabelText("고객에게 보여줄 종합 의견");
     fireEvent.change(textarea, { target: { value: "리뷰 내용" } });
 
     fireEvent.click(screen.getByRole("button", { name: "공개 확정" }));
@@ -69,16 +87,39 @@ describe("TrialReviewPanel", () => {
     (finalizeTrialLessonReview as ReturnType<typeof vi.fn>).mockResolvedValue({ reviewId: "r1" });
 
     render(<TrialReviewPanel />);
-    const textarea = await screen.findByLabelText("고객에게 보여줄 체험 리뷰");
+    const textarea = await screen.findByLabelText("고객에게 보여줄 종합 의견");
     fireEvent.change(textarea, { target: { value: "초안 없이 바로 확정" } });
 
     fireEvent.click(screen.getByRole("button", { name: "공개 확정" }));
     fireEvent.click(screen.getByRole("button", { name: "네, 공개합니다" }));
 
     await waitFor(() =>
-      expect(saveTrialLessonReviewDraft).toHaveBeenCalledWith({ sessionId: "s1", draftText: "초안 없이 바로 확정" })
+      expect(saveTrialLessonReviewDraft).toHaveBeenCalledWith({
+        sessionId: "s1",
+        aiSummary: null,
+        draftText: "초안 없이 바로 확정",
+        categoryNotes: { attitude: "", comprehension: "", participation: "", homework: "", overall: "" },
+      })
     );
     expect(finalizeTrialLessonReview).toHaveBeenCalledWith({ sessionId: "s1", finalText: "초안 없이 바로 확정" });
+  });
+
+  it("AI 미팅록 요약을 붙여넣고 초안을 저장하면 aiSummary가 함께 전달된다", async () => {
+    (listMyTrialSessionsNeedingReview as ReturnType<typeof vi.fn>).mockResolvedValue([session]);
+    (saveTrialLessonReviewDraft as ReturnType<typeof vi.fn>).mockResolvedValue({ reviewId: "r1" });
+
+    render(<TrialReviewPanel />);
+    const aiTextarea = await screen.findByLabelText("AI 미팅록 기반 자동 요약(붙여넣기)");
+    const textarea = await screen.findByLabelText("고객에게 보여줄 종합 의견");
+    fireEvent.change(aiTextarea, { target: { value: "AI가 요약한 미팅록" } });
+    fireEvent.change(textarea, { target: { value: "내용" } });
+    fireEvent.click(screen.getByRole("button", { name: "초안 저장(비공개)" }));
+
+    await waitFor(() =>
+      expect(saveTrialLessonReviewDraft).toHaveBeenCalledWith(
+        expect.objectContaining({ sessionId: "s1", aiSummary: "AI가 요약한 미팅록", draftText: "내용" })
+      )
+    );
   });
 
   it("초안 저장 실패 시 에러 메시지를 보여준다", async () => {
@@ -86,7 +127,7 @@ describe("TrialReviewPanel", () => {
     (saveTrialLessonReviewDraft as ReturnType<typeof vi.fn>).mockRejectedValue(new Error("저장 실패 테스트"));
 
     render(<TrialReviewPanel />);
-    const textarea = await screen.findByLabelText("고객에게 보여줄 체험 리뷰");
+    const textarea = await screen.findByLabelText("고객에게 보여줄 종합 의견");
     fireEvent.change(textarea, { target: { value: "내용" } });
     fireEvent.click(screen.getByRole("button", { name: "초안 저장(비공개)" }));
 

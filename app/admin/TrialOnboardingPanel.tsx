@@ -21,6 +21,7 @@ import {
 } from "./trial-onboarding-actions";
 import { retryTrialEntitlementGrant } from "./consultation-scheduling-actions";
 import { createNewContractVersionForResend } from "./consultation-actions";
+import LessonReviewAdminEditor from "./LessonReviewAdminEditor";
 
 const LINK_STATUS_LABEL: Record<TrialOnboardingCandidate["linkStatus"], string> = {
   none: "온보딩 링크 미발급",
@@ -153,6 +154,11 @@ function CandidateCard({
 
       <div className="text-[11.5px] text-grey-500 mt-2">{LINK_STATUS_LABEL[c.linkStatus]}</div>
       {error && <div className="text-[12px] text-red mt-1.5">{error}</div>}
+
+      {/* "review" 단계가 완료됐으면(선생님이 확정) 관리자가 검수·정정할 수 있게 보여준다. */}
+      {pipeline?.subjectEnrollmentId && pipeline.steps.find((s) => s.key === "review")?.done && (
+        <LessonReviewAdminEditor subjectEnrollmentId={pipeline.subjectEnrollmentId} />
+      )}
 
       {/* 1단계: 체험 진행 확정 */}
       {currentStep?.key === "trial_intent" && (

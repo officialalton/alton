@@ -10,20 +10,46 @@ import { requireUser } from "@/lib/auth";
 export type TrialLessonReviewForFamily = {
   reviewId: string;
   finalText: string;
+  aiSummary: string | null;
   finalizedAt: string;
+  categoryNotes: { key: string; label: string; note: string }[];
 } | null;
 
+// M4(2026-09-05 통합) — 체험/정규 공용 lesson_reviews에서 확정된 리뷰만(초안·
+// Smart Notes 원본은 노출하지 않음) + 카테고리별 의견을 함께 가져온다. 과목
+// 수강당 여러 건(체험 1건 + 이후 정규 여러 건, R9)이 있을 수 있으나 이 화면은
+// 가장 최근 확정 리뷰 1건만 보여준다.
 export async function getTrialLessonReviewForFamily(
   subjectEnrollmentId: string
 ): Promise<TrialLessonReviewForFamily> {
   const { supabase } = await requireUser();
-  const { data, error } = await supabase.rpc("get_trial_lesson_review_for_family", {
+  const { data, error } = await supabase.rpc("get_lesson_reviews_for_family", {
     p_subject_enrollment_id: subjectEnrollmentId,
   });
   if (error) throw new Error(error.message);
-  const row = data?.[0];
-  if (!row) return null;
-  return { reviewId: row.review_id, finalText: row.final_text, finalizedAt: row.finalized_at };
+  const rows = (data ?? []) as {
+    review_id: string;
+    final_text: string;
+    ai_summary: string | null;
+    finalized_at: string;
+    category_key: string | null;
+    category_label: string | null;
+    category_note: string | null;
+  }[];
+  if (rows.length === 0) return null;
+
+  const latestReviewId = rows[rows.length - 1].review_id;
+  const rowsForLatest = rows.filter((r) => r.review_id === latestReviewId);
+  const first = rowsForLatest[0];
+  return {
+    reviewId: first.review_id,
+    finalText: first.final_text,
+    aiSummary: first.ai_summary,
+    finalizedAt: first.finalized_at,
+    categoryNotes: rowsForLatest
+      .filter((r) => r.category_key && r.category_note)
+      .map((r) => ({ key: r.category_key as string, label: r.category_label as string, note: r.category_note as string })),
+  };
 }
 
 /** 이미 "정규 진행 희망"을 표시했는지 — 화면 새로고침(router.refresh() 등) 후에도

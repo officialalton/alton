@@ -505,9 +505,10 @@ export async function getTrialOnboardingPipelineAction(
       done.smart_notes = trialSession?.smart_notes_status === "completed";
 
       const { data: review } = await admin
-        .from("trial_lesson_reviews")
+        .from("lesson_reviews")
         .select("id")
         .eq("subject_enrollment_id", subjectEnrollmentId)
+        .eq("lesson_type", "trial")
         .eq("status", "final")
         .maybeSingle();
       done.review = !!review;
