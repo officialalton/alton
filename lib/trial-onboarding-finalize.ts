@@ -27,8 +27,14 @@ export async function createGuardianAndStudentThenRedirect(params: {
   }
 
   const { data: studentCreated, error: studentCreateError } = await admin.auth.admin.createUser({
+    // 학생 본인이 이 이메일을 실제로 확인했는지는 여기서 알 수 없다 — 온보딩은
+    // 보호자가 대행 입력한 값이다(이 파일 상단 주석 참고). email_confirm을 여기서
+    // true로 찍으면 이후 어떤 검증도 무의미해진다(2026-09-05 코드 점검 발견 — 실제
+    // 이메일 확인 게이트가 항상 통과하는 죽은 코드였음). 이 계정이 처음 비밀번호를
+    // 설정할 때(app/set-password/page.tsx → confirmOwnEmailAfterPasswordSet)만
+    // true로 올린다 — 그게 "본인이 실제로 이 이메일을 열어봤다"는 첫 실증 이벤트다.
     email: params.studentEmail,
-    email_confirm: true,
+    email_confirm: false,
     user_metadata: { name: params.studentName },
   });
   if (studentCreateError || !studentCreated?.user) {
