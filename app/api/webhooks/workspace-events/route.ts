@@ -134,15 +134,33 @@ export async function POST(req: NextRequest) {
     }
     // 실제 페이로드에는 meetingCode가 없다 — conferenceRecordName으로 Meet API를 추가
     // 조회해야 얻을 수 있는데, meetingCode를 알기 전까지는 어느 선생님 소유 회의인지
-    // 몰라 그 선생님 subject로 조회할 수 없다(닭-달걀 문제). **(2026-09-03 Sandbox
-    // 실측으로 확정)** 도메인 위임 관리자(GOOGLE_WORKSPACE_DELEGATED_ADMIN_EMAIL)를
-    // subject로 조회하면 조직 내 임의 회의의 conferenceRecord/smartNote를 문제 없이
-    // 읽을 수 있다(실측: meetingCode·driveFileId 둘 다 정확히 resolve됨) — 이 admin
-    // subject가 그 회의의 실제 참석자가 아니어도 works, 즉 Meet API readonly scope는
-    // 도메인 관리자에게 조직 전체 조회 권한을 준다. 그래도 admin 계정 설정이 바뀌거나
-    // 권한이 회수되면 이 조회는 실패할 수 있으므로 실패 시 unlinked 이벤트로 안전하게
-    // 저장한다(웹훅 자체는 실패시키지 않음).
-    const adminSubject = process.env.GOOGLE_WORKSPACE_DELEGATED_ADMIN_EMAIL;
+    // 몰라 그 선생님 subject로 조회할 수 없다(닭-달걀 문제)... 였는데, CloudEvents
+    // 봉투의 `ce-subject` 속성이 바로 이 구독의 targetResource
+    // (`//cloudidentity.googleapis.com/users/{organizer_workspace_user_id}`)를 그대로
+    // 실어온다 — meetingCode를 몰라도 "이 이벤트가 어느 구독(=어느 조직원)의
+    // Meet space에서 왔는지"는 이미 알 수 있다.
+    //
+    // **정정(2026-09-05 실사용 발견)**: 원래는 도메인 위임 관리자(GOOGLE_WORKSPACE_
+    // DELEGATED_ADMIN_EMAIL)를 고정 subject로 다른 사람이 만든 회의까지 조회했는데,
+    // 관리자 본인이 만든 회의(어제 상담 테스트)에서만 우연히 통과했을 뿐 실제로는
+    // 403(PERMISSION_DENIED)이 난다 — Directory API와 달리 Meet API readonly는
+    // 도메인 관리자에게 조직 전체 열람권을 주지 않는다(실측 확인: 선생님이 직접 만든
+    // 실제 수업에서 403). 그 회의의 실제 organizer(위 ce-subject로 알아낸 사람)를
+    // subject로 써야 한다 — 매핑을 못 찾으면 예전처럼 admin으로 폴백만 시도한다.
+    let organizerSubject = process.env.GOOGLE_WORKSPACE_DELEGATED_ADMIN_EMAIL ?? null;
+    const ceSubject = body.message?.attributes?.["ce-subject"];
+    const organizerUserId = ceSubject?.match(/\/users\/([^/]+)$/)?.[1] ?? null;
+    if (organizerUserId) {
+      const { data: subRow } = await admin
+        .from("workspace_events_subscriptions")
+        .select("organizer_email")
+        .eq("organizer_workspace_user_id", organizerUserId)
+        .maybeSingle();
+      if (subRow?.organizer_email) {
+        organizerSubject = subRow.organizer_email;
+      }
+    }
+    const adminSubject = organizerSubject;
     let meetingCode: string | null = null;
     let driveFileId: string | null = null;
     if (adminSubject && parsed.conferenceRecordName) {

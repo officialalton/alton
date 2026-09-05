@@ -24,6 +24,7 @@ const smartNotesInsertMock = vi.fn();
 const sessionsUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
 const consultationsUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
 const accessEventsInsertMock = vi.fn();
+const subscriptionMaybeSingleMock = vi.fn().mockResolvedValue({ data: null });
 
 const fromMock = vi.fn((table: string) => {
   if (table === "reservations") {
@@ -50,6 +51,9 @@ const fromMock = vi.fn((table: string) => {
   if (table === "session_access_events") {
     return { insert: (payload: unknown) => accessEventsInsertMock(payload) };
   }
+  if (table === "workspace_events_subscriptions") {
+    return { select: () => ({ eq: () => ({ maybeSingle: subscriptionMaybeSingleMock }) }) };
+  }
   throw new Error(`unexpected table ${table}`);
 });
 
@@ -57,9 +61,14 @@ vi.mock("@/lib/supabase-admin", () => ({
   createAdminClient: () => ({ from: fromMock }),
 }));
 
-function makeRequest(payload: unknown, ceType: string | undefined, authHeader = "Bearer valid-token") {
+function makeRequest(
+  payload: unknown,
+  ceType: string | undefined,
+  authHeader = "Bearer valid-token",
+  extraAttributes?: Record<string, string>
+) {
   const data = Buffer.from(JSON.stringify(payload)).toString("base64");
-  const attributes = ceType ? { "ce-type": ceType } : undefined;
+  const attributes = ceType ? { "ce-type": ceType, ...extraAttributes } : undefined;
   return new Request("http://localhost/api/webhooks/workspace-events", {
     method: "POST",
     headers: { authorization: authHeader },
@@ -147,6 +156,27 @@ describe("POST /api/webhooks/workspace-events", () => {
       expect.objectContaining({ session_id: "s1", google_meeting_code: "abc-defg-hij", drive_file_id: "drive-file-1", linked: true })
     );
     expect(sessionsUpdateEqMock).toHaveBeenCalledWith("id", "s1");
+  });
+
+  it("ce-subject가 등록된 선생님 구독과 일치하면 admin이 아니라 그 선생님을 subject로 조회한다(실사용 403 버그 수정)", async () => {
+    subscriptionMaybeSingleMock.mockResolvedValueOnce({ data: { organizer_email: "teacher1@alton.education" } });
+    const { POST } = await import("./route");
+    await POST(
+      makeRequest(
+        { smartNote: { name: "conferenceRecords/abc/smartNotes/note1" } },
+        SMART_NOTE_TYPE,
+        "Bearer valid-token",
+        { "ce-subject": "//cloudidentity.googleapis.com/users/111507678677650332821" }
+      ) as never
+    );
+    expect(resolveMeetingCodeMock).toHaveBeenCalledWith({
+      teacherWorkspaceEmail: "teacher1@alton.education",
+      conferenceRecordName: "conferenceRecords/abc",
+    });
+    expect(fetchDriveFileIdMock).toHaveBeenCalledWith({
+      teacherWorkspaceEmail: "teacher1@alton.education",
+      smartNoteResourceName: "conferenceRecords/abc/smartNotes/note1",
+    });
   });
 
   it("세션을 찾지 못하면 linked=false로 기록하고 sessions는 갱신하지 않는다", async () => {
