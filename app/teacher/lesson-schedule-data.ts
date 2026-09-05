@@ -15,6 +15,8 @@ export type TeacherLessonScheduleItem = {
   googleMeetLink: string | null;
   googleSyncStatus: string;
   externalChangeStatus: string;
+  isTrial: boolean;
+  smartNotesDriveFileId: string | null;
 };
 
 export async function loadTeacherLessonSchedule(
@@ -24,7 +26,7 @@ export async function loadTeacherLessonSchedule(
   const { data, error } = await supabase
     .from("sessions")
     .select(
-      "id, teacher_id, reservation:reservations!sessions_reservation_id_fkey(id, starts_at, ends_at, status, google_meet_link, google_sync_status, external_change_status), subject_enrollment:subject_enrollments!sessions_subject_enrollment_id_fkey(subject:subjects(name), child:profiles!subject_enrollments_child_id_fkey(name))"
+      "id, teacher_id, smart_notes_drive_file_id, lesson_type:lesson_types(code), reservation:reservations!sessions_reservation_id_fkey(id, starts_at, ends_at, status, google_meet_link, google_sync_status, external_change_status), subject_enrollment:subject_enrollments!sessions_subject_enrollment_id_fkey(subject:subjects(name), child:profiles!subject_enrollments_child_id_fkey(name))"
     )
     .eq("teacher_id", teacherId)
     .order("id", { ascending: true });
@@ -48,6 +50,7 @@ export async function loadTeacherLessonSchedule(
       const subjectEnrollment = one(row.subject_enrollment as unknown) as { subject?: unknown; child?: unknown } | null;
       const subject = one(subjectEnrollment?.subject as unknown) as { name?: string } | null;
       const child = one(subjectEnrollment?.child as unknown) as { name?: string } | null;
+      const lessonType = one(row.lesson_type as unknown) as { code?: string } | null;
       if (!reservation?.id || reservation.status !== "confirmed") return null;
       return {
         reservationId: reservation.id,
@@ -60,6 +63,8 @@ export async function loadTeacherLessonSchedule(
         googleMeetLink: reservation.google_meet_link ?? null,
         googleSyncStatus: reservation.google_sync_status ?? "pending",
         externalChangeStatus: reservation.external_change_status ?? "none",
+        isTrial: lessonType?.code === "trial",
+        smartNotesDriveFileId: (row.smart_notes_drive_file_id as string | null) ?? null,
       };
     })
     .filter((item): item is TeacherLessonScheduleItem => item !== null)

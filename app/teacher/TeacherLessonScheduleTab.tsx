@@ -16,6 +16,10 @@ const SYNC_STATUS_LABEL: Record<string, string> = {
   reconciliation_needed: "Calendar 일정 생성 실패 — 관리자 조치 중",
 };
 
+function durationMinutes(startsAt: string, endsAt: string): number {
+  return Math.round((new Date(endsAt).getTime() - new Date(startsAt).getTime()) / 60_000);
+}
+
 function formatDateTime(iso: string, timezone: string): string {
   return new Intl.DateTimeFormat("ko-KR", {
     timeZone: timezone,
@@ -213,10 +217,20 @@ export default function TeacherLessonScheduleTab({
           <div key={lesson.reservationId} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3">
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-[14px] font-bold text-ink">
+                <div className="text-[14px] font-bold text-ink flex items-center gap-1.5">
+                  <span
+                    className={
+                      "text-[10.5px] font-bold px-1.5 py-0.5 rounded " +
+                      (lesson.isTrial ? "bg-red/10 text-red" : "bg-ink/10 text-ink")
+                    }
+                  >
+                    {lesson.isTrial ? "체험" : "정규"}
+                  </span>
                   {lesson.studentName} · {lesson.subjectName}
                 </div>
-                <div className="text-[13px] text-grey-500 mt-0.5">{formatDateTime(lesson.startsAt, timezone)}</div>
+                <div className="text-[13px] text-grey-500 mt-0.5">
+                  {formatDateTime(lesson.startsAt, timezone)} · {durationMinutes(lesson.startsAt, lesson.endsAt)}분
+                </div>
               </div>
               {cancellingReservationId !== lesson.reservationId && (
                 <button
@@ -241,6 +255,16 @@ export default function TeacherLessonScheduleTab({
               {lesson.googleMeetLink && (
                 <a href={lesson.googleMeetLink} target="_blank" rel="noreferrer" className="text-[12px] font-semibold text-ink underline">
                   Meet 입장
+                </a>
+              )}
+              {lesson.smartNotesDriveFileId && (
+                <a
+                  href={`https://drive.google.com/file/d/${lesson.smartNotesDriveFileId}/view`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-[12px] font-semibold text-ink underline"
+                >
+                  Smart Notes 보기
                 </a>
               )}
             </div>

@@ -12,11 +12,13 @@ const lesson: TeacherLessonScheduleItem = {
   studentName: "지훈",
   subjectName: "SAT Math",
   startsAt: new Date().toISOString(),
-  endsAt: new Date().toISOString(),
+  endsAt: new Date(Date.now() + 120 * 60_000).toISOString(),
   status: "confirmed",
   googleMeetLink: "https://meet.google.com/abc-defg-hij",
   googleSyncStatus: "synced",
   externalChangeStatus: "none",
+  isTrial: false,
+  smartNotesDriveFileId: null,
 };
 
 describe("TeacherLessonScheduleTab", () => {
@@ -46,6 +48,45 @@ describe("TeacherLessonScheduleTab", () => {
       />
     );
     expect(screen.getByText(/지훈 · SAT Math/)).toBeInTheDocument();
+    expect(screen.getByText("정규")).toBeInTheDocument();
+    expect(screen.getByText(/120분/)).toBeInTheDocument();
+  });
+
+  it("체험 수업은 '체험' 배지를 보여주고, Smart Notes가 연결됐으면 링크를 보여준다", () => {
+    const trialLesson: TeacherLessonScheduleItem = {
+      ...lesson,
+      isTrial: true,
+      endsAt: new Date(new Date(lesson.startsAt).getTime() + 60 * 60_000).toISOString(),
+      smartNotesDriveFileId: "drive-file-1",
+    };
+    render(
+      <TeacherLessonScheduleTab
+        lessons={[trialLesson]}
+        exceptions={[]}
+        timezone="America/Los_Angeles"
+        onCancel={vi.fn()}
+        onRefresh={vi.fn()}
+        onLoadExternalBusy={vi.fn().mockResolvedValue([])}
+      />
+    );
+    expect(screen.getByText("체험")).toBeInTheDocument();
+    expect(screen.getByText(/60분/)).toBeInTheDocument();
+    const link = screen.getByText("Smart Notes 보기");
+    expect(link.closest("a")).toHaveAttribute("href", "https://drive.google.com/file/d/drive-file-1/view");
+  });
+
+  it("Smart Notes가 아직 연결 안 됐으면 링크를 보여주지 않는다", () => {
+    render(
+      <TeacherLessonScheduleTab
+        lessons={[lesson]}
+        exceptions={[]}
+        timezone="America/Los_Angeles"
+        onCancel={vi.fn()}
+        onRefresh={vi.fn()}
+        onLoadExternalBusy={vi.fn().mockResolvedValue([])}
+      />
+    );
+    expect(screen.queryByText("Smart Notes 보기")).not.toBeInTheDocument();
   });
 
   it("취소하면 onCancel이 호출되고 onRefresh가 실행된다", async () => {
