@@ -525,6 +525,7 @@ function RegularContractRow({
         <div className="text-[12px] text-red mt-2 bg-red/5 rounded-lg px-3 py-2">
           발송 실패 — 관리자 조치 필요. 계약은 그대로 보관돼 있어 아래 버튼으로 안전하게
           다시 시도할 수 있습니다.
+          <div className="mt-1 font-mono text-[11px] break-all">{result.error}</div>
         </div>
       )}
       {(result?.status === "sent" || result?.status === "already_sent") && (
