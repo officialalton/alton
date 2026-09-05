@@ -56,6 +56,7 @@ const lessonsProps = {
   consentChildren: [],
   activeConsentPolicy: null,
   trialSmartNotesChildren: [],
+  pendingRegularIntentChoices: [],
   childrenSubjectEnrollments: [],
   lessonBooking: {
     bookableEnrollments: [],
@@ -188,5 +189,36 @@ describe("ParentShell", () => {
       />
     );
     expect(screen.queryByText(/동의가 필요한 문서가/)).not.toBeInTheDocument();
+  });
+
+  it("정규 진행 희망 선택이 필요한 과목이 있으면 홈 화면 상단에 배너를 보여주고, 누르면 수강 과목 탭으로 이동한다", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+        pendingRegularIntentChoices={[{ subjectEnrollmentId: "se1", childName: "지훈", subjectName: "AP Calculus AB" }]}
+      />
+    );
+    const banner = screen.getByText("정규 진행 희망 선택이 필요한 과목이 1건 있습니다. 눌러서 확인하기 →");
+    expect(banner).toBeInTheDocument();
+
+    fireEvent.click(banner);
+    expect(replaceMock).toHaveBeenCalledWith("?child=s1&tab=enrollment", { scroll: false });
+  });
+
+  it("정규 진행 희망 선택이 필요한 과목이 없으면 그 배너를 보여주지 않는다", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+      />
+    );
+    expect(screen.queryByText(/정규 진행 희망 선택이 필요한/)).not.toBeInTheDocument();
   });
 });

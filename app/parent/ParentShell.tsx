@@ -17,6 +17,7 @@ import EntitlementsTab from "./EntitlementsTab";
 import type { ParentEntitlementsData } from "./entitlements-data";
 import ConsentTab from "./ConsentTab";
 import type { ChildConsentStatus, ConsentPolicyOption, TrialSmartNotesConsentStatus } from "./consent-data";
+import type { PendingRegularIntentChoice } from "./regular-intent-data";
 import FamilyTab from "./FamilyTab";
 import ParentEnrollmentTab from "./EnrollmentTab";
 import type { ChildSubjectEnrollments } from "./enrollment-data";
@@ -63,6 +64,7 @@ export default function ParentShell({
   consentChildren,
   activeConsentPolicy,
   trialSmartNotesChildren,
+  pendingRegularIntentChoices,
   childrenSubjectEnrollments,
   lessonBooking,
 }: {
@@ -83,6 +85,7 @@ export default function ParentShell({
   consentChildren: ChildConsentStatus[];
   activeConsentPolicy: ConsentPolicyOption | null;
   trialSmartNotesChildren: TrialSmartNotesConsentStatus[];
+  pendingRegularIntentChoices: PendingRegularIntentChoice[];
   childrenSubjectEnrollments: ChildSubjectEnrollments[];
   lessonBooking: LessonBookingData;
 }) {
@@ -175,6 +178,14 @@ export default function ParentShell({
               className="w-full text-left bg-red/10 text-red text-[13px] font-semibold px-6 py-3 border-b border-red/20"
             >
               동의가 필요한 문서가 {pendingConsentCount}건 있습니다. 눌러서 확인하기 →
+            </button>
+          )}
+          {activeTab === "home" && pendingRegularIntentChoices.length > 0 && (
+            <button
+              onClick={() => selectTab("enrollment")}
+              className="w-full text-left bg-ink/10 text-ink text-[13px] font-semibold px-6 py-3 border-b border-grey-200"
+            >
+              정규 진행 희망 선택이 필요한 과목이 {pendingRegularIntentChoices.length}건 있습니다. 눌러서 확인하기 →
             </button>
           )}
           {activeTab === "home" ? (

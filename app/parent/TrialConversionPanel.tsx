@@ -7,7 +7,12 @@
 // 정규 진행 선택 단계로 못 넘어감).
 
 import { useEffect, useState } from "react";
-import { getTrialLessonReviewForFamily, confirmRegularProgressIntent } from "./trial-conversion-actions";
+import { useRouter } from "next/navigation";
+import {
+  getTrialLessonReviewForFamily,
+  confirmRegularProgressIntent,
+  hasConfirmedRegularProgressIntent,
+} from "./trial-conversion-actions";
 import type { SubjectEnrollmentView } from "@/app/student/enrollment-data";
 
 export default function TrialConversionPanel({ enrollments }: { enrollments: SubjectEnrollmentView[] }) {
@@ -27,8 +32,13 @@ function TrialConversionRow({
   subjectEnrollmentId: string;
   subjectName: string;
 }) {
+  const router = useRouter();
   const [hasFinalReview, setHasFinalReview] = useState<boolean | undefined>(undefined);
-  const [confirmed, setConfirmed] = useState(false);
+  // 로컬 state만으로 "확정됨"을 표시하면 router.refresh()나 재방문 후 실제로는
+  // 이미 접수됐는데도 버튼이 다시 나타나 보호자가 혼란스러워한다(실사용 확인 —
+  // 예약 슬롯이 원인 모르게 재조회되던 것과 같은 종류의 문제). 실제 저장된 상태를
+  // 마운트 시 조회해 초기값으로 쓴다.
+  const [confirmed, setConfirmed] = useState<boolean | undefined>(undefined);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -36,11 +46,16 @@ function TrialConversionRow({
     getTrialLessonReviewForFamily(subjectEnrollmentId)
       .then((review) => setHasFinalReview(!!review))
       .catch(() => setHasFinalReview(false));
+    hasConfirmedRegularProgressIntent(subjectEnrollmentId)
+      .then(setConfirmed)
+      .catch(() => setConfirmed(false));
   }, [subjectEnrollmentId]);
 
   // 리뷰가 아직 확정되지 않았으면 이 단계 자체를 보여주지 않는다(정규 진행
   // 선택은 확정 리뷰가 있어야만 가능 — 서버에서도 같은 조건을 다시 검증한다).
-  if (!hasFinalReview) return null;
+  // confirmed 조회가 끝나기 전에는 아무것도 그리지 않는다 — 안 그러면 이미
+  // 접수된 경우에도 버튼이 잠깐 보였다 사라지는 깜빡임이 생긴다.
+  if (!hasFinalReview || confirmed === undefined) return null;
 
   return (
     <div className="mx-8 mb-4 border-[1.5px] border-grey-200 rounded-xl px-5 py-4">
@@ -61,6 +76,10 @@ function TrialConversionRow({
             try {
               await confirmRegularProgressIntent(subjectEnrollmentId);
               setConfirmed(true);
+              // 홈 화면 상단 배너(정규 진행 희망 선택 필요)가 서버에서 다시 계산돼
+              // 사라지도록 — 이 화면 자체는 로컬 state로 이미 갱신했으니 지금 다시
+              // 그려도 깜빡임 없다.
+              router.refresh();
             } catch (e) {
               setError(e instanceof Error ? e.message : String(e));
             }

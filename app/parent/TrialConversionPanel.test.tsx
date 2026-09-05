@@ -1,18 +1,31 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi, beforeEach } from "vitest";
 import TrialConversionPanel from "./TrialConversionPanel";
-import { getTrialLessonReviewForFamily, confirmRegularProgressIntent } from "./trial-conversion-actions";
+import {
+  getTrialLessonReviewForFamily,
+  confirmRegularProgressIntent,
+  hasConfirmedRegularProgressIntent,
+} from "./trial-conversion-actions";
 import type { SubjectEnrollmentView } from "@/app/student/enrollment-data";
+
+const refreshMock = vi.fn();
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ refresh: refreshMock }),
+}));
 
 vi.mock("./trial-conversion-actions", () => ({
   getTrialLessonReviewForFamily: vi.fn(),
   confirmRegularProgressIntent: vi.fn(),
+  hasConfirmedRegularProgressIntent: vi.fn(),
 }));
 
 const enrollment = { id: "se1", subjectName: "SAT Math" } as SubjectEnrollmentView;
 
 describe("TrialConversionPanel", () => {
-  beforeEach(() => vi.clearAllMocks());
+  beforeEach(() => {
+    vi.clearAllMocks();
+    (hasConfirmedRegularProgressIntent as ReturnType<typeof vi.fn>).mockResolvedValue(false);
+  });
 
   it("확정된 리뷰가 없으면 정규 진행 희망 단계를 보여주지 않는다(리뷰 미확정 시 진행 차단)", async () => {
     (getTrialLessonReviewForFamily as ReturnType<typeof vi.fn>).mockResolvedValue(null);
@@ -48,5 +61,21 @@ describe("TrialConversionPanel", () => {
     await screen.findByText(/접수 완료/);
     expect(screen.queryByRole("button", { name: "정규 진행 희망합니다" })).toBeNull();
     expect(confirmRegularProgressIntent).toHaveBeenCalledTimes(1);
+    expect(refreshMock).toHaveBeenCalled();
+  });
+
+  it("이미 접수된 상태라면(예: 새로고침 후) 클릭 없이도 바로 '접수 완료'를 보여준다 — 버튼이 다시 나타나 중복 클릭을 유도하지 않는다", async () => {
+    (getTrialLessonReviewForFamily as ReturnType<typeof vi.fn>).mockResolvedValue({
+      reviewId: "r1",
+      finalText: "우수",
+      finalizedAt: "2026-09-03T00:00:00Z",
+    });
+    (hasConfirmedRegularProgressIntent as ReturnType<typeof vi.fn>).mockResolvedValue(true);
+
+    render(<TrialConversionPanel enrollments={[enrollment]} />);
+
+    await screen.findByText(/접수 완료/);
+    expect(screen.queryByRole("button", { name: "정규 진행 희망합니다" })).toBeNull();
+    expect(confirmRegularProgressIntent).not.toHaveBeenCalled();
   });
 });
