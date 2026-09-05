@@ -217,6 +217,23 @@ describe("POST /api/webhooks/workspace-events", () => {
     );
   });
 
+  it("참가자 이벤트도 ce-subject가 등록된 선생님 구독과 일치하면 admin이 아니라 그 선생님을 subject로 조회한다(Smart Notes와 동일 403 버그가 이쪽에도 있었음)", async () => {
+    subscriptionMaybeSingleMock.mockResolvedValueOnce({ data: { organizer_email: "teacher1@alton.education" } });
+    const { POST } = await import("./route");
+    await POST(
+      makeRequest(
+        { participant: { name: "conferenceRecords/abc/participants/p1", signedinUser: { user: "users/teacher1" } }, eventTime: "2026-10-10T19:05:00Z" },
+        PARTICIPANT_JOINED_TYPE,
+        "Bearer valid-token",
+        { "ce-subject": "//cloudidentity.googleapis.com/users/111507678677650332821" }
+      ) as never
+    );
+    expect(resolveMeetingCodeMock).toHaveBeenCalledWith({
+      teacherWorkspaceEmail: "teacher1@alton.education",
+      conferenceRecordName: "conferenceRecords/abc",
+    });
+  });
+
   it("참가자 이벤트가 세션을 못 찾으면 조용히 버리지 않고 로그만 남기고 200으로 ack한다", async () => {
     reservationMaybeSingleMock.mockResolvedValue({ data: null });
     const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});

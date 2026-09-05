@@ -111,12 +111,12 @@ export default function SubjectEnrollmentPanel({
         setMessage(check.blockMessages.join(" "));
         return;
       }
-      await assignTeacherToSubjectEnrollment({
+      const result = await assignTeacherToSubjectEnrollment({
         subjectEnrollmentId: enrollmentId,
         teacherId,
         effectiveFrom: new Date().toISOString(),
       });
-      setMessage("선생님이 배정되었습니다.");
+      setMessage(result.activationWarning ?? "선생님이 배정되었습니다.");
       if (childId) setEnrollments(await listSubjectEnrollmentsForChild(childId));
     } catch (e) {
       setMessage(e instanceof Error ? e.message : "배정 실패");

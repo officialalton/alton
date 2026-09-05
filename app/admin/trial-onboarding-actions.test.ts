@@ -31,7 +31,7 @@ vi.mock("./consultation-actions", () => ({
 vi.mock("@/lib/contract-company-approval", () => ({
   recordOrGetCompanyApproval: recordOrGetCompanyApprovalMock,
 }));
-vi.mock("@/lib/email", () => ({ sendEmail: sendEmailMock }));
+vi.mock("@/lib/email", () => ({ sendEmail: sendEmailMock, escapeHtml: (v: string) => v }));
 vi.mock("@/lib/request-origin", () => ({ currentRequestOrigin: () => Promise.resolve("http://localhost:3010") }));
 
 import {

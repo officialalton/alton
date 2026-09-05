@@ -22,6 +22,28 @@ import { fetchSmartNoteDriveFileId, resolveMeetingCodeFromConferenceRecord } fro
 
 const oauthClient = new OAuth2Client();
 
+// Meet API readonly는 Directory API와 달리 도메인 관리자에게 조직 전체 열람권을
+// 주지 않는다(실측 확인, 2026-09-05) — 그 회의의 실제 organizer를 subject로 써야
+// 403을 피할 수 있다. ce-subject(구독의 targetResource, `.../users/{id}`)를
+// workspace_events_subscriptions.organizer_workspace_user_id로 역매핑해 실제
+// organizer 이메일을 찾는다. 매핑을 못 찾으면 예전처럼 admin으로 폴백만 시도한다.
+// Smart Notes 이벤트뿐 아니라 참가자 join/leave 이벤트도 같은 Meet API를 호출하므로
+// (planner 지적, 2026-09-05) 공통 헬퍼로 뺐다 — 한쪽만 고치고 잊는 사고를 막기 위함.
+async function resolveOrganizerSubjectFromCeSubject(
+  admin: ReturnType<typeof createAdminClient>,
+  ceSubject: string | undefined
+): Promise<string | null> {
+  const fallback = process.env.GOOGLE_WORKSPACE_DELEGATED_ADMIN_EMAIL ?? null;
+  const organizerUserId = ceSubject?.match(/\/users\/([^/]+)$/)?.[1] ?? null;
+  if (!organizerUserId) return fallback;
+  const { data: subRow } = await admin
+    .from("workspace_events_subscriptions")
+    .select("organizer_email")
+    .eq("organizer_workspace_user_id", organizerUserId)
+    .maybeSingle();
+  return subRow?.organizer_email ?? fallback;
+}
+
 async function verifyPubSubPushToken(authHeader: string | null): Promise<void> {
   const audience = process.env.WORKSPACE_EVENTS_PUSH_AUDIENCE;
   const expectedServiceAccount = process.env.WORKSPACE_EVENTS_PUSH_SERVICE_ACCOUNT_EMAIL;
@@ -147,20 +169,7 @@ export async function POST(req: NextRequest) {
     // 도메인 관리자에게 조직 전체 열람권을 주지 않는다(실측 확인: 선생님이 직접 만든
     // 실제 수업에서 403). 그 회의의 실제 organizer(위 ce-subject로 알아낸 사람)를
     // subject로 써야 한다 — 매핑을 못 찾으면 예전처럼 admin으로 폴백만 시도한다.
-    let organizerSubject = process.env.GOOGLE_WORKSPACE_DELEGATED_ADMIN_EMAIL ?? null;
-    const ceSubject = body.message?.attributes?.["ce-subject"];
-    const organizerUserId = ceSubject?.match(/\/users\/([^/]+)$/)?.[1] ?? null;
-    if (organizerUserId) {
-      const { data: subRow } = await admin
-        .from("workspace_events_subscriptions")
-        .select("organizer_email")
-        .eq("organizer_workspace_user_id", organizerUserId)
-        .maybeSingle();
-      if (subRow?.organizer_email) {
-        organizerSubject = subRow.organizer_email;
-      }
-    }
-    const adminSubject = organizerSubject;
+    const adminSubject = await resolveOrganizerSubjectFromCeSubject(admin, body.message?.attributes?.["ce-subject"]);
     let meetingCode: string | null = null;
     let driveFileId: string | null = null;
     if (adminSubject && parsed.conferenceRecordName) {
@@ -233,10 +242,15 @@ export async function POST(req: NextRequest) {
 
   // participant_session — Meet 참가 기록. ALTON 접속 기록과 source로 분리해 저장하고,
   // 출석·수업권·정산을 자동 확정하지 않는다(스펙 원문). 위 smart_notes_generation과 같은
-  // 이유로 meetingCode가 payload에 없어 관리자 subject로 conferenceRecord를 조회해
-  // 채운다(위 실측 확정 사항과 동일한 근거).
+  // 이유로 meetingCode가 payload에 없어 실제 organizer subject로 conferenceRecord를
+  // 조회해 채운다 — 이전에는 고정 관리자 subject를 썼는데, 이는 관리자 본인이 만든
+  // 회의에서만 우연히 통과했을 뿐 실제 선생님이 만든 회의에서는 403이 났다(Smart
+  // Notes 쪽에서 이미 발견·수정한 것과 완전히 같은 버그, 2026-09-05 재확인).
   let participantMeetingCode = parsed.meetingCode;
-  const adminSubjectForParticipant = process.env.GOOGLE_WORKSPACE_DELEGATED_ADMIN_EMAIL;
+  const adminSubjectForParticipant = await resolveOrganizerSubjectFromCeSubject(
+    admin,
+    body.message?.attributes?.["ce-subject"]
+  );
   if (!participantMeetingCode && adminSubjectForParticipant && parsed.conferenceRecordName) {
     try {
       participantMeetingCode = await resolveMeetingCodeFromConferenceRecord({

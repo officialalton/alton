@@ -82,7 +82,7 @@ describe("assignTeacherToSubjectEnrollment — 배정 후 학생 상태 자동 �
     expect(sessionRpcMock).not.toHaveBeenCalled();
   });
 
-  it("상태 전환 RPC가 실패해도 배정 자체는 성공으로 반환한다(로그만 남김)", async () => {
+  it("상태 전환 RPC가 실패하면 배정 자체는 성공하되, 관리자 조치가 필요하다는 경고를 반환한다(로그만 남기고 조용히 성공 처리하던 버그 수정, 2026-09-05)", async () => {
     subjectEnrollmentSingleMock.mockResolvedValue({ data: { child_id: "child-3" } });
     studentSingleMock.mockResolvedValue({ data: { status: "pending" } });
     sessionRpcMock.mockResolvedValue({ error: { message: "boom" } });
@@ -94,8 +94,23 @@ describe("assignTeacherToSubjectEnrollment — 배정 후 학생 상태 자동 �
       effectiveFrom: "2026-09-05",
     });
 
-    expect(result).toEqual({ id: "assignment-1" });
+    expect(result.id).toBe("assignment-1");
+    expect(result.activationWarning).toMatch(/학생 계정을 활성 상태로 전환하지 못했습니다/);
     expect(consoleErrorSpy).toHaveBeenCalled();
     consoleErrorSpy.mockRestore();
+  });
+
+  it("상태 전환이 성공하면 activationWarning은 null이다", async () => {
+    subjectEnrollmentSingleMock.mockResolvedValue({ data: { child_id: "child-4" } });
+    studentSingleMock.mockResolvedValue({ data: { status: "pending" } });
+    sessionRpcMock.mockResolvedValue({ error: null });
+
+    const result = await assignTeacherToSubjectEnrollment({
+      subjectEnrollmentId: "se-4",
+      teacherId: "teacher-1",
+      effectiveFrom: "2026-09-05",
+    });
+
+    expect(result).toEqual({ id: "assignment-1", activationWarning: null });
   });
 });

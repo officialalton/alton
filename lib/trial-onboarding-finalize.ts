@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase-admin";
-import { sendEmail } from "@/lib/email";
+import { sendEmail, escapeHtml } from "@/lib/email";
 
 // M4 (6/N) — 신규 보호자 계정 실제 생성 + finalize + /set-password 리다이렉트를
 // 공통 헬퍼로 뺐다. "prospect 이메일 그대로 유지"와 "다른 이메일로 변경 후 확인
@@ -96,7 +96,7 @@ async function sendStudentSetPasswordEmail(
     to: params.studentEmail,
     subject: "[Alton Education] 학생 계정 비밀번호 설정",
     html: `
-      <p>안녕하세요, ${params.studentName}님.</p>
+      <p>안녕하세요, ${escapeHtml(params.studentName)}님.</p>
       <p>Alton Education 학생 계정이 생성되었습니다.</p>
       <p><a href="${setPasswordUrl.toString()}">여기를 눌러 비밀번호를 설정해주세요</a></p>
       <p>본인이 요청하지 않았다면 이 메일을 무시하세요.</p>

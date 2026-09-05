@@ -258,7 +258,7 @@ export async function assignTeacherToSubjectEnrollment(params: {
   subjectEnrollmentId: string;
   teacherId: string;
   effectiveFrom: string;
-}): Promise<{ id: string }> {
+}): Promise<{ id: string; activationWarning: string | null }> {
   const { supabase, actorUserId } = await requireAdminOrCapability(MATCHING_CAPABILITY);
   const admin = createAdminClient();
 
@@ -280,9 +280,13 @@ export async function assignTeacherToSubjectEnrollment(params: {
     .single();
   if (error) throw new Error(error.message);
 
-  await activateStudentIfPending(admin, supabase, params.subjectEnrollmentId);
+  // 2026-09-05 코드 점검 발견: 이 학생 상태 자동 전환이 실패해도 콘솔 로그만
+  // 남기고 "배정 성공"으로만 보고돼, 관리자가 이 학생이 pending에 갇혀 있다는
+  // 사실을 화면에서 전혀 알 수 없었다 — 배정 자체는 성공했으니 예외로 전체를
+  // 실패시키지 않되, 관리자 조치가 필요한 경고로 반환한다.
+  const activationWarning = await activateStudentIfPending(admin, supabase, params.subjectEnrollmentId);
 
-  return { id: data.id };
+  return { id: data.id, activationWarning };
 }
 
 /**
@@ -298,20 +302,20 @@ async function activateStudentIfPending(
   admin: ReturnType<typeof createAdminClient>,
   supabase: Awaited<ReturnType<typeof requireAdminOrCapability>>["supabase"],
   subjectEnrollmentId: string
-): Promise<void> {
+): Promise<string | null> {
   const { data: enrollment } = await admin
     .from("subject_enrollments")
     .select("child_id")
     .eq("id", subjectEnrollmentId)
     .single();
-  if (!enrollment?.child_id) return;
+  if (!enrollment?.child_id) return null;
 
   const { data: student } = await admin
     .from("students")
     .select("status")
     .eq("id", enrollment.child_id)
     .single();
-  if (student?.status !== "pending") return;
+  if (student?.status !== "pending") return null;
 
   const { error } = await supabase.rpc("transition_account_status", {
     p_profile_id: enrollment.child_id,
@@ -320,7 +324,9 @@ async function activateStudentIfPending(
   });
   if (error) {
     console.error("과목·선생님 배정 후 학생 상태 자동 전환에 실패했습니다:", enrollment.child_id, error);
+    return `선생님 배정은 완료됐지만, 학생 계정을 활성 상태로 전환하지 못했습니다(${error.message}). 관리자가 직접 확인·재처리해야 합니다.`;
   }
+  return null;
 }
 
 export type FutureBookingImpactItem = {

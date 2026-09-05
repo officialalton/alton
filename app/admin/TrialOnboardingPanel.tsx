@@ -225,8 +225,9 @@ function CandidateCard({
           childId={c.childId!}
           open={assignOpen}
           onOpen={() => setAssignOpen(true)}
-          onDone={() => {
+          onDone={(activationWarning) => {
             setAssignOpen(false);
+            setError(activationWarning ?? null);
             onChanged();
           }}
         />
@@ -429,7 +430,7 @@ function TrialAssignmentForm({
   childId: string;
   open: boolean;
   onOpen: () => void;
-  onDone: () => void;
+  onDone: (activationWarning?: string | null) => void;
 }) {
   const [subjectId, setSubjectId] = useState("");
   const [teacherId, setTeacherId] = useState("");
@@ -473,13 +474,13 @@ function TrialAssignmentForm({
           setBusy(true);
           setError(null);
           try {
-            await planTrialSubjectAndAssignTeacherAction({
+            const result = await planTrialSubjectAndAssignTeacherAction({
               childId,
               subjectId,
               teacherId,
               effectiveFrom: new Date().toISOString(),
             });
-            onDone();
+            onDone(result.activationWarning);
           } catch (e) {
             setError(e instanceof Error ? e.message : String(e));
           }

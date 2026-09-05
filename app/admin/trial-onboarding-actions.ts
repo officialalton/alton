@@ -13,7 +13,7 @@ import { createAdminClient } from "@/lib/supabase-admin";
 import { planSubjectEnrollment, assignTeacherToSubjectEnrollment } from "./subject-enrollment-actions";
 import { companySignOffContractVersion, sendContractForSignature } from "./consultation-actions";
 import { recordOrGetCompanyApproval } from "@/lib/contract-company-approval";
-import { sendEmail } from "@/lib/email";
+import { sendEmail, escapeHtml } from "@/lib/email";
 import { currentRequestOrigin } from "@/lib/request-origin";
 import { appendVercelProtectionBypass } from "@/lib/vercel-protection-bypass";
 
@@ -145,8 +145,8 @@ export async function sendTrialOnboardingNoticeAction(params: {
   const origin = await currentRequestOrigin();
   const redeemUrl = `${origin}/api/trial-onboarding/redeem?token=${encodeURIComponent(rawToken)}`;
   const html = `
-    <p>안녕하세요, ${params.guardianName}님.</p>
-    <p>${params.studentName} 학생의 체험 수업 준비를 위해 아래 링크에서 계정을 만들어주세요.</p>
+    <p>안녕하세요, ${escapeHtml(params.guardianName)}님.</p>
+    <p>${escapeHtml(params.studentName)} 학생의 체험 수업 준비를 위해 아래 링크에서 계정을 만들어주세요.</p>
     <p><a href="${redeemUrl}">${redeemUrl}</a></p>
     <p>이 링크는 72시간 동안 유효합니다.</p>
   `;
@@ -197,7 +197,7 @@ export async function planTrialSubjectAndAssignTeacherAction(params: {
   subjectId: string;
   teacherId: string;
   effectiveFrom: string;
-}): Promise<{ subjectEnrollmentId: string; teacherAssignmentId: string }> {
+}): Promise<{ subjectEnrollmentId: string; teacherAssignmentId: string; activationWarning: string | null }> {
   await requireAdminOrCapability(CONSULT_CAPABILITY);
   const admin = createAdminClient();
 
@@ -214,13 +214,13 @@ export async function planTrialSubjectAndAssignTeacherAction(params: {
     contractId: contractId as string,
   });
 
-  const { id: teacherAssignmentId } = await assignTeacherToSubjectEnrollment({
+  const { id: teacherAssignmentId, activationWarning } = await assignTeacherToSubjectEnrollment({
     subjectEnrollmentId,
     teacherId: params.teacherId,
     effectiveFrom: params.effectiveFrom,
   });
 
-  return { subjectEnrollmentId, teacherAssignmentId };
+  return { subjectEnrollmentId, teacherAssignmentId, activationWarning };
 }
 
 // =========================================================================

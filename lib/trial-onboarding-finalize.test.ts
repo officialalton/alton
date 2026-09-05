@@ -13,6 +13,7 @@ vi.mock("@/lib/supabase-admin", () => ({
 const sendEmailMock = vi.fn();
 vi.mock("@/lib/email", () => ({
   sendEmail: (params: unknown) => sendEmailMock(params),
+  escapeHtml: (v: string) => v,
 }));
 
 import { createGuardianAndStudentThenRedirect } from "./trial-onboarding-finalize";
