@@ -59,6 +59,10 @@ export type TeacherLessonScheduleTabProps = {
   onCancel: (reservationId: string, reason: string) => Promise<void>;
   onRefresh: () => Promise<void>;
   onLoadExternalBusy: (params: { rangeStart: string; rangeEnd: string }) => Promise<ExternalBusyBlock[]>;
+  // M5-a(R7) — 수업 시작/종료. finalize의 outcome은 선생님이 직접 판정할 수 있는
+  // completed/student_no_show만(본인 노쇼는 관리자 전용).
+  onStartSession: (sessionId: string) => Promise<void>;
+  onFinalizeSession: (params: { sessionId: string; outcome: "completed" | "student_no_show"; reason: string }) => Promise<void>;
 };
 
 export default function TeacherLessonScheduleTab({
@@ -68,6 +72,8 @@ export default function TeacherLessonScheduleTab({
   onCancel,
   onRefresh,
   onLoadExternalBusy,
+  onStartSession,
+  onFinalizeSession,
 }: TeacherLessonScheduleTabProps) {
   const router = useRouter();
   const [view, setView] = useState<"week-list" | "week" | "month">("week-list");
@@ -82,6 +88,8 @@ export default function TeacherLessonScheduleTab({
   const [reviewModalLoading, setReviewModalLoading] = useState(false);
   const [reviewModalError, setReviewModalError] = useState<string | null>(null);
   const [showPastLessons, setShowPastLessons] = useState(false);
+  const [sessionActionBusyId, setSessionActionBusyId] = useState<string | null>(null);
+  const [noShowConfirmingSessionId, setNoShowConfirmingSessionId] = useState<string | null>(null);
 
   const todayKey = todayKeyInTimezone(timezone);
   const nowMs = Date.now();
@@ -241,6 +249,50 @@ export default function TeacherLessonScheduleTab({
             <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-grey-100 text-grey-500">리뷰 초안 저장됨 · 비공개</span>
           )}
         </div>
+        {(lesson.finalStatus === "scheduled" || lesson.finalStatus === "live") && (
+          <div className="mt-2 flex items-center gap-2 flex-wrap">
+            {lesson.finalStatus === "scheduled" && (
+              <button
+                disabled={sessionActionBusyId === lesson.sessionId}
+                onClick={() => handleStartSession(lesson.sessionId)}
+                className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-ink text-white disabled:opacity-50"
+              >
+                수업 시작
+              </button>
+            )}
+            <button
+              disabled={sessionActionBusyId === lesson.sessionId}
+              onClick={() => handleFinalizeSession(lesson.sessionId, "completed")}
+              className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-grey-100 text-ink disabled:opacity-50"
+            >
+              수업 종료(완료)
+            </button>
+            {noShowConfirmingSessionId === lesson.sessionId ? (
+              <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-red/10 text-red">
+                학생 미접속 확정?{" "}
+                <button
+                  disabled={sessionActionBusyId === lesson.sessionId}
+                  onClick={() => handleFinalizeSession(lesson.sessionId, "student_no_show")}
+                  className="underline font-bold"
+                >
+                  확정
+                </button>{" "}
+                ·{" "}
+                <button onClick={() => setNoShowConfirmingSessionId(null)} className="underline">
+                  취소
+                </button>
+              </span>
+            ) : (
+              <button
+                disabled={sessionActionBusyId === lesson.sessionId}
+                onClick={() => setNoShowConfirmingSessionId(lesson.sessionId)}
+                className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-red/5 text-red disabled:opacity-50"
+              >
+                학생 노쇼 확정(15분 미접속)
+              </button>
+            )}
+          </div>
+        )}
         {cancellingReservationId === lesson.reservationId && (
           <div className="mt-3 border-t border-grey-200 pt-3">
             <label className="block text-[11px] font-bold text-grey-500 mb-1">취소 사유</label>
@@ -287,6 +339,37 @@ export default function TeacherLessonScheduleTab({
       setError(e instanceof Error ? e.message : String(e));
     } finally {
       setSubmitting(false);
+    }
+  }
+
+  async function handleStartSession(sessionId: string) {
+    setSessionActionBusyId(sessionId);
+    setError(null);
+    try {
+      await onStartSession(sessionId);
+      await onRefresh();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setSessionActionBusyId(null);
+    }
+  }
+
+  async function handleFinalizeSession(sessionId: string, outcome: "completed" | "student_no_show") {
+    setSessionActionBusyId(sessionId);
+    setError(null);
+    try {
+      await onFinalizeSession({
+        sessionId,
+        outcome,
+        reason: outcome === "completed" ? "선생님 수업 종료" : "선생님 확인 — 학생 15분 이상 미접속",
+      });
+      setNoShowConfirmingSessionId(null);
+      await onRefresh();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setSessionActionBusyId(null);
     }
   }
 

@@ -30,6 +30,8 @@ import {
   listMyLessonSchedule,
   cancelMyLessonScheduleBooking,
   listMyExternalBusyBlocks,
+  startMyLessonSession,
+  finalizeMyLessonSession,
   type TeacherLessonScheduleItem,
 } from "./lesson-schedule-actions";
 
@@ -184,6 +186,8 @@ export default function TeacherShell({
               onCancel={(reservationId, reason) => cancelMyLessonScheduleBooking({ reservationId, reason })}
               onLoadExternalBusy={listMyExternalBusyBlocks}
               onRefresh={() => listMyLessonSchedule().then(setLessons)}
+              onStartSession={startMyLessonSession}
+              onFinalizeSession={finalizeMyLessonSession}
             />
           ) : activeTab === "availability" ? (
             <TeacherAvailabilityTab

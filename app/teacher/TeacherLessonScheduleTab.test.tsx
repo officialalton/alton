@@ -54,6 +54,8 @@ describe("TeacherLessonScheduleTab", () => {
         onCancel={vi.fn()}
         onRefresh={vi.fn()}
         onLoadExternalBusy={vi.fn().mockResolvedValue([])}
+        onStartSession={vi.fn()}
+        onFinalizeSession={vi.fn()}
       />
     );
     expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
@@ -68,11 +70,68 @@ describe("TeacherLessonScheduleTab", () => {
         onCancel={vi.fn()}
         onRefresh={vi.fn()}
         onLoadExternalBusy={vi.fn().mockResolvedValue([])}
+        onStartSession={vi.fn()}
+        onFinalizeSession={vi.fn()}
       />
     );
     expect(screen.getByText(/지훈 · SAT Math/)).toBeInTheDocument();
     expect(screen.getByText("정규")).toBeInTheDocument();
     expect(screen.getByText(/120분/)).toBeInTheDocument();
+  });
+
+  it("M5-a: scheduled 상태 수업에는 수업 시작/종료/노쇼 확정 버튼이 보이고 클릭 시 각각 호출된다", async () => {
+    const onStartSession = vi.fn().mockResolvedValue(undefined);
+    const onFinalizeSession = vi.fn().mockResolvedValue(undefined);
+    const onRefresh = vi.fn().mockResolvedValue(undefined);
+    render(
+      <TeacherLessonScheduleTab
+        lessons={[lesson]}
+        exceptions={[]}
+        timezone="America/Los_Angeles"
+        onCancel={vi.fn()}
+        onRefresh={onRefresh}
+        onLoadExternalBusy={vi.fn().mockResolvedValue([])}
+        onStartSession={onStartSession}
+        onFinalizeSession={onFinalizeSession}
+      />
+    );
+
+    fireEvent.click(screen.getByText("수업 시작"));
+    await waitFor(() => expect(onStartSession).toHaveBeenCalledWith("s1"));
+    await waitFor(() => expect(onRefresh).toHaveBeenCalled());
+
+    fireEvent.click(screen.getByText("수업 종료(완료)"));
+    await waitFor(() =>
+      expect(onFinalizeSession).toHaveBeenCalledWith({ sessionId: "s1", outcome: "completed", reason: "선생님 수업 종료" })
+    );
+
+    fireEvent.click(screen.getByText("학생 노쇼 확정(15분 미접속)"));
+    fireEvent.click(screen.getByText("확정"));
+    await waitFor(() =>
+      expect(onFinalizeSession).toHaveBeenCalledWith({
+        sessionId: "s1",
+        outcome: "student_no_show",
+        reason: "선생님 확인 — 학생 15분 이상 미접속",
+      })
+    );
+  });
+
+  it("M5-a: 이미 completed된 세션에는 시작/종료 버튼이 보이지 않는다", () => {
+    const completedLesson: TeacherLessonScheduleItem = { ...lesson, finalStatus: "completed" };
+    render(
+      <TeacherLessonScheduleTab
+        lessons={[completedLesson]}
+        exceptions={[]}
+        timezone="America/Los_Angeles"
+        onCancel={vi.fn()}
+        onRefresh={vi.fn()}
+        onLoadExternalBusy={vi.fn().mockResolvedValue([])}
+        onStartSession={vi.fn()}
+        onFinalizeSession={vi.fn()}
+      />
+    );
+    expect(screen.queryByText("수업 시작")).not.toBeInTheDocument();
+    expect(screen.queryByText("수업 종료(완료)")).not.toBeInTheDocument();
   });
 
   it("체험 수업은 '체험' 배지를 보여주고, Smart Notes가 연결됐으면 링크를 보여준다", () => {
@@ -90,6 +149,8 @@ describe("TeacherLessonScheduleTab", () => {
         onCancel={vi.fn()}
         onRefresh={vi.fn()}
         onLoadExternalBusy={vi.fn().mockResolvedValue([])}
+        onStartSession={vi.fn()}
+        onFinalizeSession={vi.fn()}
       />
     );
     expect(screen.getByText("체험")).toBeInTheDocument();
@@ -107,6 +168,8 @@ describe("TeacherLessonScheduleTab", () => {
         onCancel={vi.fn()}
         onRefresh={vi.fn()}
         onLoadExternalBusy={vi.fn().mockResolvedValue([])}
+        onStartSession={vi.fn()}
+        onFinalizeSession={vi.fn()}
       />
     );
     expect(screen.queryByText("Smart Notes 보기")).not.toBeInTheDocument();
@@ -116,7 +179,7 @@ describe("TeacherLessonScheduleTab", () => {
     const onCancel = vi.fn().mockResolvedValue(undefined);
     const onRefresh = vi.fn().mockResolvedValue(undefined);
     render(
-      <TeacherLessonScheduleTab lessons={[lesson]} exceptions={[]} timezone="America/Los_Angeles" onCancel={onCancel} onRefresh={onRefresh} onLoadExternalBusy={vi.fn().mockResolvedValue([])} />
+      <TeacherLessonScheduleTab lessons={[lesson]} exceptions={[]} timezone="America/Los_Angeles" onCancel={onCancel} onRefresh={onRefresh} onLoadExternalBusy={vi.fn().mockResolvedValue([])} onStartSession={vi.fn()} onFinalizeSession={vi.fn()} />
     );
     fireEvent.click(screen.getByText("취소"));
     fireEvent.click(screen.getByText("취소 확정"));
@@ -133,6 +196,8 @@ describe("TeacherLessonScheduleTab", () => {
         onCancel={vi.fn()}
         onRefresh={vi.fn()}
         onLoadExternalBusy={vi.fn().mockResolvedValue([])}
+        onStartSession={vi.fn()}
+        onFinalizeSession={vi.fn()}
       />
     );
     expect(screen.getByText("관리자 확인 필요(외부 변경 감지)")).toBeInTheDocument();
@@ -152,6 +217,8 @@ describe("TeacherLessonScheduleTab", () => {
         onCancel={vi.fn()}
         onRefresh={vi.fn()}
         onLoadExternalBusy={onLoadExternalBusy}
+        onStartSession={vi.fn()}
+        onFinalizeSession={vi.fn()}
       />
     );
     await waitFor(() => expect(onLoadExternalBusy).toHaveBeenCalled());
@@ -175,6 +242,8 @@ describe("TeacherLessonScheduleTab", () => {
         onCancel={vi.fn()}
         onRefresh={vi.fn()}
         onLoadExternalBusy={onLoadExternalBusy}
+        onStartSession={vi.fn()}
+        onFinalizeSession={vi.fn()}
       />
     );
     expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
@@ -207,6 +276,8 @@ describe("TeacherLessonScheduleTab", () => {
         onCancel={vi.fn()}
         onRefresh={vi.fn()}
         onLoadExternalBusy={vi.fn().mockResolvedValue([])}
+        onStartSession={vi.fn()}
+        onFinalizeSession={vi.fn()}
       />
     );
     // 체험(리뷰 미확정)은 예정된 수업 목록에 바로 보인다.
@@ -251,6 +322,8 @@ describe("TeacherLessonScheduleTab", () => {
         onCancel={vi.fn()}
         onRefresh={onRefresh}
         onLoadExternalBusy={vi.fn().mockResolvedValue([])}
+        onStartSession={vi.fn()}
+        onFinalizeSession={vi.fn()}
       />
     );
 
@@ -301,6 +374,8 @@ describe("TeacherLessonScheduleTab", () => {
         onCancel={vi.fn()}
         onRefresh={vi.fn()}
         onLoadExternalBusy={vi.fn().mockResolvedValue([])}
+        onStartSession={vi.fn()}
+        onFinalizeSession={vi.fn()}
       />
     );
 
@@ -326,6 +401,8 @@ describe("TeacherLessonScheduleTab", () => {
         onCancel={vi.fn()}
         onRefresh={vi.fn()}
         onLoadExternalBusy={vi.fn().mockResolvedValue([])}
+        onStartSession={vi.fn()}
+        onFinalizeSession={vi.fn()}
       />
     );
     expect(screen.queryByText("수업 리뷰 작성")).not.toBeInTheDocument();
