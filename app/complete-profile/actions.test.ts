@@ -81,13 +81,96 @@ describe("submitCompleteProfile", () => {
         dateOfBirth: "2010-05-01",
         schoolName: "",
         grade: "10학년",
-        satScore: 0,
+        satScore: null,
         gpa: null,
         gpaScale: null,
         targetColleges: [],
         intendedMajors: [],
       })
     ).rejects.toThrow("학교명은 필수 항목입니다.");
+  });
+
+  it("SAT가 400~1600 범위를 벗어나면 RPC 호출 전에 거부한다", async () => {
+    await expect(
+      submitCompleteProfile({
+        dateOfBirth: "2010-05-01",
+        schoolName: "OO국제학교",
+        grade: "10학년",
+        satScore: 399,
+        gpa: null,
+        gpaScale: null,
+        targetColleges: [],
+        intendedMajors: [],
+      })
+    ).rejects.toThrow("SAT 점수는 400~1600 사이여야 합니다.");
+    expect(rpcMock).not.toHaveBeenCalled();
+  });
+
+  it("GPA만 있고 척도가 없으면 RPC 호출 전에 거부한다", async () => {
+    await expect(
+      submitCompleteProfile({
+        dateOfBirth: "2010-05-01",
+        schoolName: "OO국제학교",
+        grade: "10학년",
+        satScore: null,
+        gpa: 3.5,
+        gpaScale: null,
+        targetColleges: [],
+        intendedMajors: [],
+      })
+    ).rejects.toThrow("GPA를 입력하려면 GPA 척도를 함께 선택해야 합니다.");
+    expect(rpcMock).not.toHaveBeenCalled();
+  });
+
+  it("척도만 있고 GPA가 없으면 RPC 호출 전에 거부한다", async () => {
+    await expect(
+      submitCompleteProfile({
+        dateOfBirth: "2010-05-01",
+        schoolName: "OO국제학교",
+        grade: "10학년",
+        satScore: null,
+        gpa: null,
+        gpaScale: "4.0",
+        targetColleges: [],
+        intendedMajors: [],
+      })
+    ).rejects.toThrow("GPA 척도만 선택하고 GPA 값이 없는 상태는 허용되지 않습니다.");
+    expect(rpcMock).not.toHaveBeenCalled();
+  });
+
+  it.each([
+    ["4.0", 4.3],
+    ["4.3", 4.5],
+    ["4.5", 5.0],
+    ["5.0", 5.1],
+  ])("GPA가 척도(%s)를 초과하면(%s) RPC 호출 전에 거부한다", async (scale, gpa) => {
+    await expect(
+      submitCompleteProfile({
+        dateOfBirth: "2010-05-01",
+        schoolName: "OO국제학교",
+        grade: "10학년",
+        satScore: null,
+        gpa,
+        gpaScale: scale,
+        targetColleges: [],
+        intendedMajors: [],
+      })
+    ).rejects.toThrow(/초과할 수 없습니다/);
+    expect(rpcMock).not.toHaveBeenCalled();
+  });
+
+  it("GPA·척도 둘 다 null이거나 둘 다 유효한 범위 내면 RPC를 호출한다", async () => {
+    await submitCompleteProfile({
+      dateOfBirth: "2010-05-01",
+      schoolName: "OO국제학교",
+      grade: "10학년",
+      satScore: 1200,
+      gpa: 4.0,
+      gpaScale: "4.0",
+      targetColleges: [],
+      intendedMajors: [],
+    });
+    expect(rpcMock).toHaveBeenCalled();
   });
 });
 

@@ -138,13 +138,94 @@ describe("complete_student_profile — SAT null 통과 + gpa_scale 저장", () =
     expect(gpaScale).toBe("4.3");
   });
 
-  it("명시적으로 0을 넘기면 0으로 저장된다(null과 구분)", () => {
-    const zeroStudent = createStudent("sat-zero");
+  it("null이 아닌 값을 넘기면 그대로 저장된다(예: 400, 유효 범위 하한)", () => {
+    const boundaryStudent = createStudent("sat-lower-bound");
     psqlAsStudent(
-      zeroStudent,
-      `select complete_student_profile('2011-01-01', 'OO고등학교', '10학년', 0, null, '{}', '{}', null);`
+      boundaryStudent,
+      `select complete_student_profile('2011-01-01', 'OO고등학교', '10학년', 400, null, '{}', '{}', null);`
     );
-    const satScore = psql(`select sat_score from students where id = '${zeroStudent}';`);
-    expect(satScore).toBe("0");
+    const satScore = psql(`select sat_score from students where id = '${boundaryStudent}';`);
+    expect(satScore).toBe("400");
+  });
+});
+
+describe("complete_student_profile — 2026-09-05 무결성 보강(SAT 범위/GPA↔척도)", () => {
+  it("SAT가 400 미만이면 거부한다", () => {
+    const s = createStudent("sat-too-low");
+    expect(() =>
+      psqlAsStudent(
+        s,
+        `select complete_student_profile('2011-01-01', 'OO고등학교', '10학년', 399, null, '{}', '{}', null);`
+      )
+    ).toThrow(/SAT 점수는 400~1600 사이여야 합니다/);
+  });
+
+  it("SAT가 1600 초과면 거부한다", () => {
+    const s = createStudent("sat-too-high");
+    expect(() =>
+      psqlAsStudent(
+        s,
+        `select complete_student_profile('2011-01-01', 'OO고등학교', '10학년', 1601, null, '{}', '{}', null);`
+      )
+    ).toThrow(/SAT 점수는 400~1600 사이여야 합니다/);
+  });
+
+  it("GPA만 있고 gpa_scale이 없으면 거부한다", () => {
+    const s = createStudent("gpa-no-scale");
+    expect(() =>
+      psqlAsStudent(
+        s,
+        `select complete_student_profile('2011-01-01', 'OO고등학교', '10학년', null, 3.5, '{}', '{}', null);`
+      )
+    ).toThrow(/GPA를 입력하려면 GPA 척도를 함께 선택해야 합니다/);
+  });
+
+  it("gpa_scale만 있고 GPA가 없으면 거부한다", () => {
+    const s = createStudent("scale-no-gpa");
+    expect(() =>
+      psqlAsStudent(
+        s,
+        `select complete_student_profile('2011-01-01', 'OO고등학교', '10학년', null, null, '{}', '{}', '4.0');`
+      )
+    ).toThrow(/GPA 척도만 선택하고 GPA 값이 없는 상태는 허용되지 않습니다/);
+  });
+
+  it("GPA가 선택한 척도를 초과하면 거부한다(예: 4.0 척도에 4.3)", () => {
+    const s = createStudent("gpa-over-scale");
+    expect(() =>
+      psqlAsStudent(
+        s,
+        `select complete_student_profile('2011-01-01', 'OO고등학교', '10학년', null, 4.3, '{}', '{}', '4.0');`
+      )
+    ).toThrow(/GPA 값\(.*\)이 선택한 척도\(.*\)를 초과할 수 없습니다/);
+  });
+
+  it.each([
+    ["4.0", 4.0],
+    ["4.3", 4.3],
+    ["4.5", 4.5],
+    ["5.0", 5.0],
+  ])("척도 %s에서 정확히 만점(%s)은 허용된다(상한 경계값)", (scale, maxGpa) => {
+    const s = createStudent(`gpa-scale-${scale}`);
+    psqlAsStudent(
+      s,
+      `select complete_student_profile('2011-01-01', 'OO고등학교', '10학년', null, ${maxGpa}, '{}', '{}', '${scale}');`
+    );
+    const row = psql(`select gpa, gpa_scale from students where id = '${s}';`);
+    const [gpa, gpaScale] = row.split("|");
+    expect(Number(gpa)).toBeCloseTo(maxGpa);
+    expect(gpaScale).toBe(scale);
+  });
+
+  it("GPA·gpa_scale 둘 다 null인 조합은 허용된다", () => {
+    const s = createStudent("gpa-both-null");
+    psqlAsStudent(
+      s,
+      `select complete_student_profile('2011-01-01', 'OO고등학교', '10학년', null, null, '{}', '{}', null);`
+    );
+    const row = psql(`select gpa, gpa_scale from students where id = '${s}';`);
+    const [gpa, gpaScale] = row.split("|");
+    expect(gpa).toBe("");
+    expect(gpaScale).toBe("");
   });
 });

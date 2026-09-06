@@ -19,8 +19,9 @@ function resetStudentProfile() {
     update students set
       school_name = null,
       grade = null,
-      sat_score = 0,
+      sat_score = null,
       gpa = null,
+      gpa_scale = null,
       target_colleges = '{}',
       intended_majors = '{}',
       profile_completed_at = null
@@ -36,6 +37,7 @@ function restoreStudentProfile() {
       grade = '10학년',
       sat_score = 1350,
       gpa = 3.7,
+      gpa_scale = '4.0',
       target_colleges = array['Stanford University'],
       intended_majors = array['Computer Science'],
       profile_completed_at = now()

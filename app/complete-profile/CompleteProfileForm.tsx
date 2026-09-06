@@ -201,6 +201,20 @@ export default function CompleteProfileForm({
       setError("학년은 필수 항목입니다.");
       return;
     }
+    if (satScore.trim() !== "") {
+      const satValue = Number(satScore);
+      if (!Number.isFinite(satValue) || satValue < 400 || satValue > 1600) {
+        setError("SAT 점수는 400~1600 사이여야 합니다.");
+        return;
+      }
+    }
+    if (gpa.trim() !== "") {
+      const gpaValue = Number(gpa);
+      if (!Number.isFinite(gpaValue) || gpaValue > Number(gpaScale)) {
+        setError(`GPA 값이 선택한 척도(${gpaScale})를 초과할 수 없습니다.`);
+        return;
+      }
+    }
 
     startTransition(async () => {
       try {
@@ -285,7 +299,7 @@ export default function CompleteProfileForm({
             id="satScore"
             name="satScore"
             type="number"
-            min={0}
+            min={400}
             max={1600}
             value={satScore}
             onChange={(e) => setSatScore(e.target.value)}
@@ -293,7 +307,7 @@ export default function CompleteProfileForm({
             className="w-full px-3.5 py-3 border-[1.5px] border-grey-200 rounded-lg text-[14.5px] text-ink focus:outline-none focus:border-ink"
           />
           <p className="text-[11.5px] text-grey-500 mt-1">
-            응시하지 않았다면 빈 칸으로 두세요(0점을 실제로 받았다면 0을 입력).
+            응시하지 않았다면 빈 칸으로 두세요(입력 시 400~1600만 유효).
           </p>
         </div>
         <div>
@@ -307,7 +321,7 @@ export default function CompleteProfileForm({
               type="number"
               step="0.01"
               min={0}
-              max={5}
+              max={Number(gpaScale)}
               value={gpa}
               onChange={(e) => setGpa(e.target.value)}
               placeholder="예: 3.85"

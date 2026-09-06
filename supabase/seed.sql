@@ -95,6 +95,7 @@ update students set
   school_name = '서울국제학교',
   sat_score = 1350,
   gpa = 3.7,
+  gpa_scale = '4.0',
   target_colleges = array['Stanford University'],
   intended_majors = array['Computer Science'],
   profile_completed_at = now()
