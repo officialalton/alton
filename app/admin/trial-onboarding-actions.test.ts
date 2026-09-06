@@ -390,4 +390,31 @@ describe("sendTrialOnboardingNoticeAction", () => {
       p_admin_id: "admin1",
     });
   });
+
+  // 2026-09-06(실제 버그 수정) — 제품 오너가 Preview에서 재현: 관리자가 발송한
+  // 안내 이메일 자체는 나갔는데, 보호자가 링크를 눌러 /login으로 리다이렉트되며
+  // "보호자 계정 생성에 실패했습니다"가 떴다. 원인: assertTrialOnboardingNoticeParamsValid()는
+  // guardianEmail.trim()으로 형식만 검증하고 저장/RPC 전달은 trim되지 않은
+  // 원본 값을 그대로 썼다 — 관리자가 이메일을 복사·붙여넣기하며 앞뒤 공백이
+  // 섞이면 검증은 통과하지만, 보호자가 링크를 연 뒤 lib/trial-onboarding-finalize.ts가
+  // 그 공백 섞인 이메일 그대로 admin.auth.admin.createUser()를 호출해 GoTrue가
+  // "Unable to validate email address: invalid format"로 거부한다(node repro
+  // 스크립트로 로컬 GoTrue에서 직접 재현·확인). RPC에 전달되는 guardianEmail은
+  // trim된 값이어야 한다.
+  it("보호자 이메일 앞뒤에 공백이 섞여도 trim된 값으로 RPC에 전달한다(GoTrue 이메일 형식 거부 방지)", async () => {
+    mockNoExistingLink();
+    adminRpcMock.mockResolvedValue({ data: [{ link_id: "l1", raw_token: "tok1" }], error: null });
+    sendEmailMock.mockResolvedValue(undefined);
+
+    await sendTrialOnboardingNoticeAction({
+      ...baseParams,
+      guardianEmail: "  g@example.com  ",
+    });
+
+    expect(adminRpcMock).toHaveBeenCalledWith(
+      "create_trial_onboarding_link_multi",
+      expect.objectContaining({ p_guardian_email: "g@example.com" })
+    );
+    expect(sendEmailMock).toHaveBeenCalledWith(expect.objectContaining({ to: "g@example.com" }));
+  });
 });

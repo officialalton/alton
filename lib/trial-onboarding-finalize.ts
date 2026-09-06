@@ -26,6 +26,7 @@ export async function createGuardianAndStudentThenRedirect(params: {
   // 경로와 동일한 신뢰 모델) 별도 재인증 없이 기존 계정에 새 자녀를 연결한다.
   const existingGuardianId = await admin.rpc("find_auth_user_id_by_email", { p_email: params.guardianEmail });
   if (existingGuardianId.error) {
+    console.error("기존 보호자 계정 확인 실패:", params.guardianEmail, existingGuardianId.error);
     return redirectWithError(params.url, "계정 확인에 실패했습니다. 관리자에게 문의해주세요.");
   }
 
@@ -41,6 +42,15 @@ export async function createGuardianAndStudentThenRedirect(params: {
       user_metadata: { name: params.guardianName },
     });
     if (guardianCreateError || !guardianCreated?.user) {
+      // 2026-09-06(실제 버그 수정) — 여기서 원래 에러(예: GoTrue의
+      // "Unable to validate email address: invalid format", 이메일 앞뒤
+      // 공백이 섞여 들어온 경우 발생)를 그대로 삼키고 있었다. 이 route.ts는
+      // Server Action이 아니라 Next.js Route Handler라 #441류 마스킹과는
+      // 무관하지만, 서버 콘솔에조차 실제 원인이 남지 않아 재현·진단이
+      // 불가능했다 — 근본 원인(app/admin/trial-onboarding-actions.ts의
+      // guardianEmail trim 누락)은 별도로 고쳤지만, 앞으로 같은 종류의
+      // 실패가 다시 생기더라도 원인을 바로 알 수 있도록 로그를 남긴다.
+      console.error("보호자 Auth 계정 생성 실패:", params.guardianEmail, guardianCreateError);
       return redirectWithError(params.url, "보호자 계정 생성에 실패했습니다. 관리자에게 문의해주세요.");
     }
     guardianAuthUserId = guardianCreated.user.id;
@@ -52,6 +62,7 @@ export async function createGuardianAndStudentThenRedirect(params: {
     p_link_id: params.linkId,
   });
   if (studentsError || !students?.length) {
+    console.error("온보딩 학생 명단 조회 실패:", params.linkId, studentsError);
     return redirectWithError(params.url, "온보딩 학생 명단을 찾을 수 없습니다. 관리자에게 문의해주세요.");
   }
 
@@ -104,6 +115,7 @@ export async function createGuardianAndStudentThenRedirect(params: {
     p_students: finalizeItems,
   });
   if (finalizeError) {
+    console.error("finalize_trial_onboarding_students 실패:", params.linkId, finalizeError);
     if (isNewGuardian) {
       await admin.auth.admin.deleteUser(guardianAuthUserId).catch((e) => {
         console.error("고아 보호자 Auth 계정 정리 실패:", guardianAuthUserId, e);

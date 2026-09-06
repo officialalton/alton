@@ -65,6 +65,14 @@
 - [ ] 관리자 `면담 운영` 화면에서 면담 전용 반복 가능시간/휴무 예외를 등록할 수 있고, 이 값이 보호자 포털 면담 요청 화면의 캘린더에 반영되는가(상담 가용시간과는 별개 값).
 - [ ] 기존 자녀 면담을 신청·확정해도 관리자 "상담 현황" 칸반이나 가입·체험·정규 전환 파이프라인에 새 카드가 생기지 않는가(별도 테이블 `meeting_requests`이므로 자연히 그래야 함).
 
+## 9. (신규, 2026-09-06 2차) 온보딩 링크 redeem 실제 버그 수정 + 관리자 액션 토스트 + 발송 상태 조회
+
+- [ ] 관리자로 "체험 온보딩 안내 발송"에서 보호자 이메일 앞뒤에 공백을 넣어(예: 복사·붙여넣기) 발송해도, 보호자가 링크를 열었을 때 "보호자 계정 생성에 실패했습니다"가 뜨지 않고 정상적으로 계정이 생성되어 `/set-password`로 이동하는가.
+- [ ] 상담 칸반 카드 상세의 "다음 단계 — 체험 온보딩" 영역에서 "발송 내역 보기"를 누르면 보호자 이름/이메일, 발송 시각, 링크 상태(발송됨/보호자 확인 대기/완료), 학생별 이름/이메일/학년/과목/계정생성상태가 보이는가.
+- [ ] 학생 계정 생성이 실패한 항목에 "재시도" 버튼이 보이고, 누르면 성공/실패가 토스트로 표시되며 목록이 새로고침되는가.
+- [ ] `상담` → `상담 운영`에서 "Calendar 재처리 실행"/"Smart Notes 미매칭 재처리"/"만료 임박 구독 갱신 실행"/"Smart Notes 사후 대조 실행"을 눌렀을 때 화면 우하단에 성공/실패 토스트가 몇 초간 명확히 보이는가(실패 시 원인도 함께).
+- [ ] "체험 온보딩 안내 발송" 버튼도 발송 성공/실패가 토스트로 보이는가.
+
 ## 자동 검증 결과(참고, 2026-09-06 세션)
 
 - `supabase db reset --local` 성공(신규 마이그레이션 3건: `20261208000000_m4_multi_onboarding_link_auth_fix.sql`, `20261209000000_r11_inquiry_and_meeting_requests.sql` — 첫 번째는 실제 버그 수정, 두 번째는 R11 신규 테이블/RPC).
@@ -72,3 +80,11 @@
 - `npx vitest run` — 182파일/1203건 중 1개 파일 제외 전부 통과(신규 40여 건 포함). 실패했던 4개 파일(`supabase/lesson-reviews.integration.test.ts`, `app/admin/consultation-outcome-smart-notes-gate.integration.test.ts`, `lib/booking/session-final-judgment.integration.test.ts`, `lib/booking/trial-entitlement-and-cancellation.integration.test.ts`)은 전체 병렬 실행 시에만 실패하고 개별 실행 시 42건 전부 통과 — 기존에 문서화된 테스트 격리 이슈이며 이번 변경과 무관.
 - `npx next build` 성공.
 - **non-prod DB push는 세션 자동 실행 정책으로 차단될 수 있음** — `docs/CURRENT.md` 최신 절 참고.
+
+### 2026-09-06 2차 세션 추가 검증
+
+- 이번 라운드는 DB 스키마 변경 없음(순수 앱 레이어) — `supabase db reset --local` 성공(기존 마이그레이션만 재적용).
+- `npx tsc --noEmit` 클린.
+- `npx vitest run` — 183파일/1209건 전부 통과.
+- `npx next build` 성공.
+- 근본 원인은 node 스크립트로 로컬 GoTrue에 직접 `admin.auth.admin.createUser({ email: " foo@example.com " })`를 호출해 `Unable to validate email address: invalid format`(400) 응답을 실측 재현해 확정했다(`app/admin/trial-onboarding-actions.ts`의 `guardianEmail` trim 누락).

@@ -141,6 +141,19 @@ async function sendTrialOnboardingNoticeInternal(params: {
   assertTrialOnboardingNoticeParamsValid(params);
   const admin = createAdminClient();
 
+  // 2026-09-06(실제 버그 수정) — assertTrialOnboardingNoticeParamsValid()는
+  // params.guardianEmail.trim()으로 형식만 검증하고, 정작 저장/RPC 전달에는
+  // trim되지 않은 원본 params.guardianEmail을 그대로 써왔다. 관리자가 이메일을
+  // 복사·붙여넣기하며 앞뒤 공백이 섞이면(흔한 실수) 검증은 통과하지만, 이후
+  // 보호자가 온보딩 링크를 열었을 때 lib/trial-onboarding-finalize.ts가 그
+  // 공백 섞인 이메일 그대로 admin.auth.admin.createUser()를 호출해 GoTrue가
+  // "Unable to validate email address: invalid format"로 거부한다 — 그 결과가
+  // "보호자 계정 생성에 실패했습니다" 에러로 /login에 표시됐다(제품 오너가
+  // Preview에서 실측 재현, node repro 스크립트로 GoTrue 400 응답 직접 확인).
+  // 검증에 쓴 것과 동일하게 trim된 값을 이후 모든 사용처(RPC 저장, 이메일
+  // 발송, 이벤트 로그)에 일관되게 쓴다.
+  params = { ...params, guardianEmail: params.guardianEmail.trim() };
+
   // 재사용 가능한 pending 링크가 이미 있는지 먼저 확인(중복 발급/중복 발송 방지).
   const { data: existingLink } = await admin
     .from("trial_onboarding_links")
@@ -813,6 +826,50 @@ export type TrialOnboardingLinkStudent = {
   childAuthUserId: string | null;
   error: string | null;
 };
+
+// 2026-09-06(발송 상태 조회 화면) — 제품 오너 지적: "메일을 보낸 상태에서 해당
+// 상담건의 부모님/자녀 이메일 등에 대한 입력을 어떻게 했는지, 부모가 동의하고
+// 계정 만들기 전 상태에 대해 확인하기 어렵다"를 고친다. 링크 자체(보낸 시각,
+// 보호자 이름/이메일, 링크 상태·실패 사유)를 조회하는 액션 — 학생별 정보는
+// 기존 listTrialOnboardingLinkStudentsAction()을 그대로 함께 쓴다.
+export type TrialOnboardingLinkDetail = {
+  linkId: string;
+  guardianEmail: string;
+  guardianName: string;
+  status: "pending" | "redeemed" | "expired" | "revoked";
+  noticeDeliveryStatus: "pending" | "sent" | "failed";
+  noticeSentAt: string | null;
+  noticeSendError: string | null;
+  createdAt: string;
+  expiresAt: string;
+  redeemedAt: string | null;
+};
+
+export async function getTrialOnboardingLinkDetailAction(linkId: string): Promise<TrialOnboardingLinkDetail> {
+  await requireAdminOrCapability(CONSULT_CAPABILITY);
+  const admin = createAdminClient();
+  const { data, error } = await admin
+    .from("trial_onboarding_links")
+    .select(
+      "id, guardian_email, guardian_name, status, notice_delivery_status, notice_sent_at, notice_send_error, created_at, expires_at, redeemed_at"
+    )
+    .eq("id", linkId)
+    .maybeSingle();
+  if (error) throw new Error(error.message);
+  if (!data) throw new Error("존재하지 않는 온보딩 링크입니다.");
+  return {
+    linkId: data.id,
+    guardianEmail: data.guardian_email,
+    guardianName: data.guardian_name,
+    status: data.status as TrialOnboardingLinkDetail["status"],
+    noticeDeliveryStatus: data.notice_delivery_status as TrialOnboardingLinkDetail["noticeDeliveryStatus"],
+    noticeSentAt: data.notice_sent_at,
+    noticeSendError: data.notice_send_error,
+    createdAt: data.created_at,
+    expiresAt: data.expires_at,
+    redeemedAt: data.redeemed_at,
+  };
+}
 
 export async function listTrialOnboardingLinkStudentsAction(linkId: string): Promise<TrialOnboardingLinkStudent[]> {
   await requireAdminOrCapability(CONSULT_CAPABILITY);
