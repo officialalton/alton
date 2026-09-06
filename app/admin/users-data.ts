@@ -20,9 +20,11 @@ export type StudentListItem = {
   subjectNames: string[];
   // M4 UAT #2(2026-09-05): 학생 프로필 완성 단계에서 수집한 정보(관리자 열람용).
   dateOfBirth: string | null;
+  dateOfBirthVerifiedAt: string | null;
   schoolName: string | null;
-  satScore: number;
+  satScore: number | null;
   gpa: number | null;
+  gpaScale: string | null;
   targetColleges: string[];
   intendedMajors: string[];
   profileCompletedAt: string | null;
@@ -128,7 +130,7 @@ export async function loadStudents(supabase: SupabaseClient): Promise<StudentLis
   const { data: students } = await supabase
     .from("students")
     .select(
-      "id, grade, status, credit_balance, school_name, sat_score, gpa, target_colleges, intended_majors, profile_completed_at, profile:profiles(name, date_of_birth)"
+      "id, grade, status, credit_balance, school_name, sat_score, gpa, gpa_scale, target_colleges, intended_majors, profile_completed_at, profile:profiles(name, date_of_birth, date_of_birth_verified_at)"
     )
     .order("joined_at", { ascending: false });
   if (!students || students.length === 0) return [];
@@ -207,7 +209,7 @@ export async function loadStudents(supabase: SupabaseClient): Promise<StudentLis
 
   return students.map((s) => {
     const profile = (Array.isArray(s.profile) ? s.profile[0] : s.profile) as
-      | { name?: string; date_of_birth?: string | null }
+      | { name?: string; date_of_birth?: string | null; date_of_birth_verified_at?: string | null }
       | null;
     return {
       id: s.id,
@@ -219,9 +221,11 @@ export async function loadStudents(supabase: SupabaseClient): Promise<StudentLis
       parentNames: parentsByStudent.get(s.id) ?? [],
       subjectNames: subjectsByStudent.get(s.id) ?? [],
       dateOfBirth: profile?.date_of_birth ?? null,
+      dateOfBirthVerifiedAt: profile?.date_of_birth_verified_at ?? null,
       schoolName: s.school_name,
       satScore: s.sat_score,
       gpa: s.gpa,
+      gpaScale: s.gpa_scale,
       targetColleges: s.target_colleges ?? [],
       intendedMajors: s.intended_majors ?? [],
       profileCompletedAt: s.profile_completed_at,

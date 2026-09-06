@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { setStudentStatus, adjustStudentCredit } from "./users-actions";
+import { setStudentStatus, adjustStudentCredit, verifyStudentDateOfBirth } from "./users-actions";
 import type { CreditTransaction, StudentListItem } from "./users-data";
 
 const STATUS_LABEL: Record<string, string> = {
@@ -35,11 +35,30 @@ export default function StudentDetailPanel({
   const [reason, setReason] = useState("");
   const [adjusting, setAdjusting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [dobVerifiedAt, setDobVerifiedAt] = useState(student.dateOfBirthVerifiedAt);
+  const [verifying, setVerifying] = useState(false);
+  const [verifyError, setVerifyError] = useState<string | null>(null);
 
   async function handleStatusChange(next: string) {
     setStatus(next);
     await setStudentStatus(student.id, next as "active" | "pending" | "suspended");
     onUpdated({ status: next });
+  }
+
+  async function handleVerifyDateOfBirth() {
+    if (verifying || dobVerifiedAt) return;
+    setVerifyError(null);
+    setVerifying(true);
+    try {
+      await verifyStudentDateOfBirth(student.id);
+      const now = new Date().toISOString();
+      setDobVerifiedAt(now);
+      onUpdated({ dateOfBirthVerifiedAt: now });
+    } catch (e) {
+      setVerifyError(e instanceof Error ? e.message : "확인 처리에 실패했습니다.");
+    } finally {
+      setVerifying(false);
+    }
   }
 
   async function handleAdjust() {
@@ -110,8 +129,31 @@ export default function StudentDetailPanel({
         <p className="text-[13px] text-ink">
           생년월일 {student.dateOfBirth ?? "미입력"} · 학교 {student.schoolName ?? "미입력"}
         </p>
+        <div className="flex items-center gap-2 mt-1.5">
+          <span
+            className={
+              "text-[11px] font-bold px-2 py-0.5 rounded-full " +
+              (dobVerifiedAt ? "bg-green/10 text-green" : "bg-grey-200 text-grey-500")
+            }
+          >
+            생년월일 {dobVerifiedAt ? "확인 완료" : "미확인"}
+          </span>
+          {!dobVerifiedAt && (
+            <button
+              onClick={handleVerifyDateOfBirth}
+              disabled={verifying || !student.dateOfBirth}
+              title={!student.dateOfBirth ? "생년월일이 아직 입력되지 않았습니다." : undefined}
+              className="text-[11.5px] font-bold px-2.5 py-1 rounded-lg bg-ink text-white disabled:opacity-50"
+            >
+              {verifying ? "확인 처리 중..." : "생년월일 확인 완료"}
+            </button>
+          )}
+        </div>
+        {verifyError && <p className="text-[12px] text-red mt-1">{verifyError}</p>}
         <p className="text-[13px] text-ink mt-1">
-          SAT {student.satScore}점 · GPA {student.gpa ?? "미입력"}
+          SAT {student.satScore ?? "미입력"}
+          {student.satScore != null ? "점" : ""} · GPA{" "}
+          {student.gpa != null ? `${student.gpa}${student.gpaScale ? ` / ${student.gpaScale}` : ""}` : "미입력"}
         </p>
         <p className="text-[13px] text-ink mt-1">
           목표 대학{" "}

@@ -12,6 +12,7 @@ vi.mock("./users-actions", () => ({
   setTeacherStatus: vi.fn(),
   adjustStudentCredit: vi.fn(),
   setTeacherHourlyRate: vi.fn(),
+  verifyStudentDateOfBirth: vi.fn(),
 }));
 
 vi.mock("./teacher-subjects-actions", () => ({
@@ -40,9 +41,11 @@ const students: StudentListItem[] = [
     parentNames: ["김민지"],
     subjectNames: ["SAT Math"],
     dateOfBirth: null,
+    dateOfBirthVerifiedAt: null,
     schoolName: null,
     satScore: 0,
     gpa: null,
+    gpaScale: null,
     targetColleges: [],
     intendedMajors: [],
     profileCompletedAt: null,

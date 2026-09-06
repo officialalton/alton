@@ -203,6 +203,18 @@ export async function setParentStatus(
   await transitionAccountStatus(supabase, parentId, status);
 }
 
+// M4 UAT #2 후속(2026-09-05): 관리자 "생년월일 확인 완료" 버튼 — 신원확인 서류
+// 등 별도 절차 없이 확인자·확인시각만 기록한다(verify_student_date_of_birth()).
+// 체험수업권 자동 지급 게이트(grant_trial_entitlement_for_consultation())가
+// 이 값을 검사하므로, 체험수업 시작 전 관리자가 이 버튼을 눌러야 한다.
+export async function verifyStudentDateOfBirth(studentId: string): Promise<void> {
+  const { supabase } = await requireAdmin();
+  const { error } = await supabase.rpc("verify_student_date_of_birth", {
+    p_student_id: studentId,
+  });
+  if (error) throw new Error(error.message);
+}
+
 export async function setTeacherStatus(
   teacherId: string,
   status: "active" | "pending" | "suspended"

@@ -7,6 +7,7 @@ import type { StudentListItem } from "./users-data";
 vi.mock("./users-actions", () => ({
   setStudentStatus: vi.fn(),
   adjustStudentCredit: vi.fn(),
+  verifyStudentDateOfBirth: vi.fn(),
 }));
 
 const student: StudentListItem = {
@@ -19,9 +20,11 @@ const student: StudentListItem = {
   parentNames: ["김민지"],
   subjectNames: ["SAT Math"],
   dateOfBirth: null,
+  dateOfBirthVerifiedAt: null,
   schoolName: null,
   satScore: 0,
   gpa: null,
+  gpaScale: null,
   targetColleges: [],
   intendedMajors: [],
   profileCompletedAt: null,
@@ -80,6 +83,27 @@ describe("StudentDetailPanel", () => {
         expect.objectContaining({ id: "tx1", amount: 2 })
       )
     );
+  });
+
+  it("생년월일 확인 완료 버튼을 누르면 verifyStudentDateOfBirth가 호출되고 배지가 바뀐다", async () => {
+    vi.mocked(actions.verifyStudentDateOfBirth).mockResolvedValue(undefined);
+    const onUpdated = vi.fn();
+    const studentWithDob = { ...student, dateOfBirth: "2010-05-01" };
+    render(
+      <StudentDetailPanel student={studentWithDob} history={[]} onBack={vi.fn()} onUpdated={onUpdated} />
+    );
+    expect(screen.getByText("생년월일 미확인")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("생년월일 확인 완료"));
+    await waitFor(() => expect(actions.verifyStudentDateOfBirth).toHaveBeenCalledWith("s1"));
+    await waitFor(() => expect(screen.getByText("생년월일 확인 완료")).toBeInTheDocument());
+    expect(onUpdated).toHaveBeenCalledWith(
+      expect.objectContaining({ dateOfBirthVerifiedAt: expect.any(String) })
+    );
+  });
+
+  it("생년월일이 없으면 확인 완료 버튼이 비활성화된다", () => {
+    render(<StudentDetailPanel student={student} history={[]} onBack={vi.fn()} onUpdated={vi.fn()} />);
+    expect(screen.getByText("생년월일 확인 완료")).toBeDisabled();
   });
 
   it("기존 조정 내역을 보여준다", () => {
