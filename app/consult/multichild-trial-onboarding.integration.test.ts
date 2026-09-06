@@ -271,3 +271,49 @@ describe("finalize_trial_onboarding_students() — 동시 재시도 시 중복 �
     ).toThrow();
   });
 });
+
+// 2026-09-06(실제 버그 회귀 고정) — 제품 오너가 Preview에서 재현: 관리자로
+// 로그인한 상태에서 칸반 카드의 "다음 단계 — 체험 온보딩" 폼으로 발송을
+// 시도하면 "관리자만 온보딩 링크를 발급할 수 있습니다."가 매번 떴다. 근본
+// 원인은 create_trial_onboarding_link_multi()가 SQL 안에서 is_admin()/
+// auth.uid()를 다시 확인했는데, 이 함수는 app 서버 액션이 service_role
+// 클라이언트(createAdminClient())로만 호출한다 — service_role 세션에는
+// auth.uid()가 없어(그 세션의 JWT 클레임 자체가 없으므로) is_admin()이
+// 항상 false였다. 이 테스트는 psql로 직접 이 RPC를 호출해(=현재 세션에
+// auth.uid()를 심을 방법이 전혀 없는, service_role 호출과 동일한 조건)
+// "정상 관리자 세션(앱 레이어에서 이미 requireAdminOrCapability()로 검증된
+// 관리자 id를 p_admin_id로 넘긴 경우)"에서 이 예외가 다시는 발생하지
+// 않음을 고정한다.
+describe("create_trial_onboarding_link_multi() — service_role 호출(auth.uid() 없음)에서도 관리자 발급이 성공한다", () => {
+  it("정상 관리자 id를 p_admin_id로 넘기면 '관리자만 온보딩 링크를 발급할 수 있습니다' 예외 없이 링크가 발급된다", () => {
+    const adminAuthId = createAuthUser("regression-admin");
+    psql(`insert into profiles (id, role, name) values ('${adminAuthId}', 'admin', '회귀테스트관리자');`);
+    const guardianEmail = `regression-guardian-${Date.now()}@example.com`;
+    const { consultationId, prospectContactId } = createConsultationWithProspect("회귀상담", guardianEmail);
+    void prospectContactId;
+
+    const studentsJson = JSON.stringify([
+      { name: "회귀학생1", email: `rg1-${Date.now()}@example.com`, grade: "9학년" },
+      { name: "회귀학생2", email: `rg2-${Date.now()}@example.com` },
+    ]).replace(/'/g, "''");
+
+    // 이 세션에는 auth.uid()를 만들 방법이 없다(psql은 순수 postgres 세션,
+    // service_role 호출과 동일한 조건) — 그럼에도 p_admin_id를 명시적으로
+    // 넘기면 실패하지 않아야 한다.
+    const result = psql(
+      `select link_id, raw_token from create_trial_onboarding_link_multi(
+         '${consultationId}', '${guardianEmail}', '회귀보호자', '${studentsJson}'::jsonb, '${adminAuthId}'
+       );`
+    );
+    const [linkId, rawToken] = result.split("|");
+    expect(linkId.length).toBeGreaterThan(0);
+    expect(rawToken.length).toBeGreaterThan(0);
+
+    const createdBy = psql(`select created_by from trial_onboarding_links where id = '${linkId}';`);
+    expect(createdBy).toBe(adminAuthId);
+    const studentCount = psql(`select count(*) from trial_onboarding_link_students where link_id = '${linkId}';`);
+    expect(studentCount).toBe("2");
+    const eventActor = psql(`select actor_id from trial_onboarding_link_events where link_id = '${linkId}' and event_type = 'created';`);
+    expect(eventActor).toBe(adminAuthId);
+  });
+});

@@ -381,6 +381,13 @@ describe("sendTrialOnboardingNoticeAction", () => {
         { name: "학생1", email: "s1@example.com", grade: "9학년", subject: null },
         { name: "학생2", email: "s2@example.com", grade: null, subject: null },
       ],
+      // 2026-09-06(실제 버그 수정) — 이 RPC는 service_role 호출이라
+      // auth.uid()가 항상 null이라 SQL 안에서 is_admin()/auth.uid()를 다시
+      // 확인하면 정상 관리자 세션에서도 매번 "관리자만 온보딩 링크를 발급할
+      // 수 있습니다."로 실패한다(제품 오너가 Preview에서 실측 재현). 앱
+      // 레이어가 이미 requireAdminOrCapability()로 검증한 실제 관리자 id를
+      // p_admin_id로 명시적으로 넘겨야 한다.
+      p_admin_id: "admin1",
     });
   });
 });

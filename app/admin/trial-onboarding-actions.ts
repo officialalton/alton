@@ -181,6 +181,7 @@ async function sendTrialOnboardingNoticeInternal(params: {
       p_guardian_email: params.guardianEmail,
       p_guardian_name: params.guardianName,
       p_students: studentsPayload,
+      p_admin_id: actorUserId,
     });
     if (error || !data?.[0]) throw new Error(error?.message ?? "온보딩 링크 재발급에 실패했습니다.");
     linkId = data[0].link_id;
@@ -191,6 +192,7 @@ async function sendTrialOnboardingNoticeInternal(params: {
       p_guardian_email: params.guardianEmail,
       p_guardian_name: params.guardianName,
       p_students: studentsPayload,
+      p_admin_id: actorUserId,
     });
     if (error || !data?.[0]) throw new Error(error?.message ?? "온보딩 링크 발급에 실패했습니다.");
     linkId = data[0].link_id;
