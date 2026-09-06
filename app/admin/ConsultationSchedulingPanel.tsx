@@ -38,6 +38,7 @@ import {
 } from "./workspace-events-actions";
 import MonthCalendar from "@/app/components/MonthCalendar";
 import WeeklyAvailabilityGrid from "@/app/components/WeeklyAvailabilityGrid";
+import ConsultAvailabilityMonthView from "./ConsultAvailabilityMonthView";
 import { dateKeyInTimezone } from "@/lib/calendar-date-utils";
 import { getMyTimezoneSettings } from "@/lib/timezone-actions";
 import { DEFAULT_TIMEZONE } from "@/lib/timezone";
@@ -568,6 +569,8 @@ export default function ConsultationSchedulingPanel() {
             ))}
           </div>
         </div>
+        <ConsultAvailabilityMonthView timezone={timezone} />
+
         <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">
           <p className="text-[12.5px] font-bold text-ink mb-2">반복 주간 가능시간</p>
 

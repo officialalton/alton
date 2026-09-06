@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { buildMonthGrid, todayKeyInTimezone } from "@/lib/calendar-date-utils";
 
 const WEEKDAY_LABELS = ["일", "월", "화", "수", "목", "금", "토"];
@@ -17,6 +17,10 @@ export type MonthCalendarProps = {
   externalBusyDates?: Set<string>;
   /** 초기에 보여줄 연/월(YYYY-MM) — 없으면 오늘 기준. */
   initialYearMonth?: string;
+  /** 2026-09-06(관리자 상담 가용시간 월간 뷰) — 화면에 보이는 달이 바뀔 때마다
+   *  호출된다(마운트 시 1회 포함). 호출부가 그 달의 데이터를 다시 불러오는
+   *  용도로만 쓰고, 이 컴포넌트 자체는 데이터를 모른다(기존 설계 유지). */
+  onMonthChange?: (yearMonth: string) => void;
 };
 
 export default function MonthCalendar({
@@ -26,11 +30,17 @@ export default function MonthCalendar({
   badgesByDate,
   externalBusyDates,
   initialYearMonth,
+  onMonthChange,
 }: MonthCalendarProps) {
   const todayKey = todayKeyInTimezone(timezone);
   const [y0, m0] = (initialYearMonth ?? todayKey.slice(0, 7)).split("-").map(Number);
   const [year, setYear] = useState(y0);
   const [month, setMonth] = useState(m0 - 1);
+
+  useEffect(() => {
+    onMonthChange?.(`${year}-${String(month + 1).padStart(2, "0")}`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [year, month]);
 
   const grid = buildMonthGrid(year, month);
 
