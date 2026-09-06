@@ -31,11 +31,12 @@ vi.mock("./consultation-actions", () => ({
 
 vi.mock("./student-invite-actions", () => ({
   getStudentInviteStatusAction: vi.fn().mockResolvedValue({
-    linkId: null,
+    linkStudentId: null,
     studentEmail: null,
     inviteStatus: null,
     sentAt: null,
     error: null,
+    retryCount: 0,
     completed: false,
   }),
   resendStudentInviteAction: vi.fn(),

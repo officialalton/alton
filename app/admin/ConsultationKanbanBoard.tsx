@@ -110,7 +110,17 @@ export default function ConsultationKanbanBoard({
                     onClick={() => setOpenId(c.id)}
                     className="w-full text-left border-[1.5px] border-grey-200 rounded-xl px-3 py-2.5 hover:border-ink"
                   >
-                    <div className="text-[13px] font-bold text-ink truncate">{c.contact_name}</div>
+                    <div className="text-[13px] font-bold text-ink truncate flex items-center gap-1">
+                      {c.is_child_onboarding_card && (
+                        <span
+                          title="다자녀 온보딩으로 생성된 학생별 카드 — 원 상담(가족)은 지난 이력에서 확인"
+                          className="text-[10px] font-semibold text-grey-500 bg-grey-100 rounded px-1 py-0.5 shrink-0"
+                        >
+                          👨‍👩‍👧 형제자매
+                        </span>
+                      )}
+                      <span className="truncate">{c.contact_name}</span>
+                    </div>
                     <div className="text-[11px] text-grey-500 truncate">{c.contact_email}</div>
                     {(c.scheduled_at ?? c.starts_at) && (
                       <div className="text-[10.5px] text-grey-500">

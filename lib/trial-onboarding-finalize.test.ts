@@ -95,8 +95,8 @@ describe("createGuardianAndStudentThenRedirect — 학생 비밀번호 설정 �
   it("발송 성공 시 trial_onboarding_links.student_invite_status를 sent로 기록한다", async () => {
     await createGuardianAndStudentThenRedirect(BASE_PARAMS);
 
-    expect(fromMock).toHaveBeenCalledWith("trial_onboarding_links");
-    expect(updateEqMock).toHaveBeenCalledWith("id", "link-1");
+    expect(fromMock).toHaveBeenCalledWith("trial_onboarding_link_students");
+    expect(updateEqMock).toHaveBeenCalledWith("id", "ls-1");
   });
 
   it("학생 링크 생성이 실패해도 보호자 리다이렉트는 그대로 진행된다(실패 상태를 기록)", async () => {
@@ -111,8 +111,8 @@ describe("createGuardianAndStudentThenRedirect — 학생 비밀번호 설정 �
     expect(res.status).toBe(307);
     expect(sendEmailMock).not.toHaveBeenCalled();
     expect(consoleErrorSpy).toHaveBeenCalled();
-    expect(fromMock).toHaveBeenCalledWith("trial_onboarding_links");
-    expect(updateEqMock).toHaveBeenCalledWith("id", "link-1");
+    expect(fromMock).toHaveBeenCalledWith("trial_onboarding_link_students");
+    expect(updateEqMock).toHaveBeenCalledWith("id", "ls-1");
     consoleErrorSpy.mockRestore();
   });
 
@@ -123,8 +123,8 @@ describe("createGuardianAndStudentThenRedirect — 학생 비밀번호 설정 �
     await createGuardianAndStudentThenRedirect(BASE_PARAMS);
 
     expect(consoleErrorSpy).toHaveBeenCalled();
-    expect(fromMock).toHaveBeenCalledWith("trial_onboarding_links");
-    expect(updateEqMock).toHaveBeenCalledWith("id", "link-1");
+    expect(fromMock).toHaveBeenCalledWith("trial_onboarding_link_students");
+    expect(updateEqMock).toHaveBeenCalledWith("id", "ls-1");
     consoleErrorSpy.mockRestore();
   });
 });

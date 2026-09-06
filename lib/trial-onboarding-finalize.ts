@@ -126,10 +126,10 @@ export async function createGuardianAndStudentThenRedirect(params: {
     p_link_id: params.linkId,
   });
   for (const s of refreshedStudents ?? []) {
-    if (s.status === "created" && s.child_auth_user_id) {
+    if (s.status === "created" && s.child_auth_user_id && s.invite_status !== "sent") {
       await sendStudentSetPasswordEmail(admin, {
         url: params.url,
-        linkId: params.linkId,
+        linkStudentId: s.id,
         studentEmail: s.student_email,
         studentName: s.student_name,
       });
@@ -179,7 +179,7 @@ export function redirectWithError(url: URL, message: string): NextResponse {
 // 재발송할 수 있게 한다 — 이전에는 console.error만 남기고 아무 흔적이 없었다).
 async function sendStudentSetPasswordEmail(
   admin: ReturnType<typeof createAdminClient>,
-  params: { url: URL; linkId: string; studentEmail: string; studentName: string }
+  params: { url: URL; linkStudentId: string; studentEmail: string; studentName: string }
 ): Promise<void> {
   const { data, error } = await admin.auth.admin.generateLink({
     type: "recovery",
@@ -189,9 +189,9 @@ async function sendStudentSetPasswordEmail(
     const message = error?.message ?? "링크 생성에 실패했습니다.";
     console.error("학생 비밀번호 설정 링크 생성에 실패했습니다:", params.studentEmail, error);
     await admin
-      .from("trial_onboarding_links")
-      .update({ student_invite_status: "failed", student_invite_error: message })
-      .eq("id", params.linkId);
+      .from("trial_onboarding_link_students")
+      .update({ invite_status: "failed", invite_error: message })
+      .eq("id", params.linkStudentId);
     return;
   }
 
@@ -216,20 +216,20 @@ async function sendStudentSetPasswordEmail(
     const message = e instanceof Error ? e.message : String(e);
     console.error("학생 비밀번호 설정 이메일 발송에 실패했습니다:", params.studentEmail, e);
     await admin
-      .from("trial_onboarding_links")
-      .update({ student_invite_status: "failed", student_invite_error: message })
-      .eq("id", params.linkId);
+      .from("trial_onboarding_link_students")
+      .update({ invite_status: "failed", invite_error: message })
+      .eq("id", params.linkStudentId);
     return;
   }
 
   await admin
-    .from("trial_onboarding_links")
+    .from("trial_onboarding_link_students")
     .update({
-      student_invite_status: "sent",
-      student_invite_sent_at: new Date().toISOString(),
-      student_invite_error: null,
+      invite_status: "sent",
+      invite_sent_at: new Date().toISOString(),
+      invite_error: null,
     })
-    .eq("id", params.linkId);
+    .eq("id", params.linkStudentId);
 }
 
 // 관리자의 "학생 초대 재발송" 액션(app/admin/student-invite-actions.ts)이
@@ -237,7 +237,7 @@ async function sendStudentSetPasswordEmail(
 // 계정에 대해서만 비밀번호 설정 이메일을 다시 보낸다.
 export async function resendStudentSetPasswordEmail(params: {
   url: URL;
-  linkId: string;
+  linkStudentId: string;
   studentEmail: string;
   studentName: string;
 }): Promise<void> {

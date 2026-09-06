@@ -26,7 +26,7 @@ export default function StudentInviteStatusPanel({ consultationId }: { consultat
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [consultationId]);
 
-  if (!status || !status.linkId) return null;
+  if (!status || !status.linkStudentId) return null;
 
   return (
     <div className="mt-2.5 bg-grey-50 rounded-lg px-3.5 py-3">

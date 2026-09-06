@@ -52,6 +52,13 @@ export type ConsultationListItem = {
    * consultations의 직접 FK 대상이라 join select도 가능하지만, 두 리스트 함수의
    * select 문자열을 더 늘리지 않기 위해 아래 attachTrialGrantExpiry()로 분리). */
   trial_entitlement_grant_expires_at: string | null;
+  /** 2026-09-06 — 학생별 칸반 카드(다자녀 온보딩) 식별 필드. is_child_onboarding_card가
+   * true인 행은 온보딩으로 학생 계정 생성이 성공한 직후 자동 생성된 카드이며,
+   * family_root_consultation_id가 원래의 가족 단위 상담(이력, 더 이상 단계 이동 없음)을
+   * 가리킨다. 형제자매를 가족 단위로 묶어 보여주는 배지에 사용한다. */
+  family_root_consultation_id: string | null;
+  is_child_onboarding_card: boolean;
+  source_link_child_id: string | null;
   /** M1 요구사항 3(2026-09-03, 2026-09-03 조건부 승인 보완으로 두 단계로 분리) —
    * "상담 진행 가능"(동의 확인 + Smart Notes ON)과 "상담 완료 가능"(그 위에 Smart Notes
    * 원본 자동 연결 + 비어있지 않은 관리자 검토 요약)은 서로 다른 시점의 서로 다른 기준이다
@@ -109,7 +116,7 @@ export async function listConsultationsForAdmin(params: { from: string; to: stri
   const { data, error } = await admin
     .from("consultations")
     .select(
-      "id, contact_name, contact_email, contact_phone, student_grade, concerns, status, source, starts_at, ends_at, scheduled_at, hold_expires_at, google_event_id, google_meet_link, google_sync_status, google_sync_retry_count, google_sync_last_error, smart_notes_config_status, smart_notes_config_error, smart_notes_drive_file_id, admin_review_summary, outcome, outcome_notes, prospect_contact_id, consent_version_id, consent_confirmed_at, child_id, trial_intent_confirmed_at, trial_entitlement_grant_id, trial_entitlement_grant_status, trial_entitlement_grant_error"
+      "id, contact_name, contact_email, contact_phone, student_grade, concerns, status, source, starts_at, ends_at, scheduled_at, hold_expires_at, google_event_id, google_meet_link, google_sync_status, google_sync_retry_count, google_sync_last_error, smart_notes_config_status, smart_notes_config_error, smart_notes_drive_file_id, admin_review_summary, outcome, outcome_notes, prospect_contact_id, consent_version_id, consent_confirmed_at, child_id, trial_intent_confirmed_at, trial_entitlement_grant_id, trial_entitlement_grant_status, trial_entitlement_grant_error, family_root_consultation_id, is_child_onboarding_card, source_link_child_id"
     )
     .gte("starts_at", params.from)
     .lt("starts_at", params.to)
@@ -132,7 +139,7 @@ export async function listPendingConsultationRequests(): Promise<ConsultationLis
   const { data, error } = await admin
     .from("consultations")
     .select(
-      "id, contact_name, contact_email, contact_phone, student_grade, concerns, status, source, starts_at, ends_at, scheduled_at, hold_expires_at, google_event_id, google_meet_link, google_sync_status, google_sync_retry_count, google_sync_last_error, smart_notes_config_status, smart_notes_config_error, smart_notes_drive_file_id, admin_review_summary, outcome, outcome_notes, prospect_contact_id, consent_version_id, consent_confirmed_at, child_id, trial_intent_confirmed_at, trial_entitlement_grant_id, trial_entitlement_grant_status, trial_entitlement_grant_error"
+      "id, contact_name, contact_email, contact_phone, student_grade, concerns, status, source, starts_at, ends_at, scheduled_at, hold_expires_at, google_event_id, google_meet_link, google_sync_status, google_sync_retry_count, google_sync_last_error, smart_notes_config_status, smart_notes_config_error, smart_notes_drive_file_id, admin_review_summary, outcome, outcome_notes, prospect_contact_id, consent_version_id, consent_confirmed_at, child_id, trial_intent_confirmed_at, trial_entitlement_grant_id, trial_entitlement_grant_status, trial_entitlement_grant_error, family_root_consultation_id, is_child_onboarding_card, source_link_child_id"
     )
     .eq("status", "requested")
     .order("starts_at", { ascending: true });

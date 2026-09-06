@@ -18,11 +18,12 @@ beforeEach(() => {
 describe("StudentInviteStatusPanel", () => {
   it("링크가 아직 없으면(온보딩 전) 아무것도 보여주지 않는다", async () => {
     mockedGetStatus.mockResolvedValue({
-      linkId: null,
+      linkStudentId: null,
       studentEmail: null,
       inviteStatus: null,
       sentAt: null,
       error: null,
+      retryCount: 0,
       completed: false,
     });
 
@@ -33,11 +34,12 @@ describe("StudentInviteStatusPanel", () => {
 
   it("발송 실패 상태와 오류를 보여주고 재발송 버튼을 제공한다", async () => {
     mockedGetStatus.mockResolvedValue({
-      linkId: "link1",
+      linkStudentId: "ls1",
       studentEmail: "student@example.com",
       inviteStatus: "failed",
       sentAt: null,
       error: "SMTP down",
+      retryCount: 0,
       completed: false,
     });
 
@@ -50,11 +52,12 @@ describe("StudentInviteStatusPanel", () => {
 
   it("이미 완료된 학생은 완료 안내만 보여주고 재발송 버튼을 숨긴다", async () => {
     mockedGetStatus.mockResolvedValue({
-      linkId: "link1",
+      linkStudentId: "ls1",
       studentEmail: "student@example.com",
       inviteStatus: "sent",
       sentAt: "2026-09-05T00:00:00Z",
       error: null,
+      retryCount: 0,
       completed: true,
     });
 
@@ -67,19 +70,21 @@ describe("StudentInviteStatusPanel", () => {
   it("재발송 버튼을 누르면 resendStudentInviteAction을 호출하고 상태를 갱신한다", async () => {
     mockedGetStatus
       .mockResolvedValueOnce({
-        linkId: "link1",
+        linkStudentId: "ls1",
         studentEmail: "student@example.com",
         inviteStatus: "failed",
         sentAt: null,
         error: "SMTP down",
+      retryCount: 0,
         completed: false,
       })
       .mockResolvedValueOnce({
-        linkId: "link1",
+        linkStudentId: "ls1",
         studentEmail: "student@example.com",
         inviteStatus: "sent",
         sentAt: "2026-09-05T00:00:00Z",
         error: null,
+      retryCount: 0,
         completed: false,
       });
     mockedResend.mockResolvedValue(undefined);

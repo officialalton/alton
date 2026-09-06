@@ -1,15 +1,17 @@
 import { describe, expect, it, vi, beforeEach } from "vitest";
 
-const { adminFromMock, getUserByIdMock, resendStudentSetPasswordEmailMock } = vi.hoisted(() => ({
+const { adminFromMock, getUserByIdMock, resendStudentSetPasswordEmailMock, rpcMock } = vi.hoisted(() => ({
   adminFromMock: vi.fn(),
   getUserByIdMock: vi.fn(),
   resendStudentSetPasswordEmailMock: vi.fn(),
+  rpcMock: vi.fn(),
 }));
 
 vi.mock("@/lib/supabase-admin", () => ({
   createAdminClient: () => ({
     from: adminFromMock,
     auth: { admin: { getUserById: getUserByIdMock } },
+    rpc: rpcMock,
   }),
 }));
 vi.mock("@/lib/admin-auth", () => ({
@@ -27,11 +29,6 @@ function mockTable(rows: Record<string, unknown>) {
     select: () => ({
       eq: () => ({
         maybeSingle: () => Promise.resolve({ data: rows, error: null }),
-        order: () => ({
-          limit: () => ({
-            maybeSingle: () => Promise.resolve({ data: rows, error: null }),
-          }),
-        }),
       }),
     }),
   };
@@ -40,16 +37,17 @@ function mockTable(rows: Record<string, unknown>) {
 describe("getStudentInviteStatusAction", () => {
   beforeEach(() => vi.clearAllMocks());
 
-  it("링크 상태와 학생 계정의 email_confirmed_at 기준 완료 여부를 반환한다", async () => {
+  it("학생별 초대 상태와 학생 계정의 email_confirmed_at 기준 완료 여부를 반환한다", async () => {
     adminFromMock.mockImplementation((table: string) => {
-      if (table === "consultations") return mockTable({ child_id: "student1" });
-      if (table === "trial_onboarding_links")
+      if (table === "consultations") return mockTable({ child_id: "student1", source_link_child_id: "ls1" });
+      if (table === "trial_onboarding_link_students")
         return mockTable({
-          id: "link1",
+          id: "ls1",
           student_email: "student@example.com",
-          student_invite_status: "sent",
-          student_invite_sent_at: "2026-09-05T00:00:00Z",
-          student_invite_error: null,
+          invite_status: "sent",
+          invite_sent_at: "2026-09-05T00:00:00Z",
+          invite_error: null,
+          invite_retry_count: 0,
         });
       throw new Error(`unexpected table ${table}`);
     });
@@ -58,25 +56,27 @@ describe("getStudentInviteStatusAction", () => {
     const result = await getStudentInviteStatusAction("c1");
 
     expect(result).toEqual({
-      linkId: "link1",
+      linkStudentId: "ls1",
       studentEmail: "student@example.com",
       inviteStatus: "sent",
       sentAt: "2026-09-05T00:00:00Z",
       error: null,
+      retryCount: 0,
       completed: false,
     });
   });
 
   it("이미 email_confirmed_at이 있으면 completed=true를 반환한다", async () => {
     adminFromMock.mockImplementation((table: string) => {
-      if (table === "consultations") return mockTable({ child_id: "student1" });
-      if (table === "trial_onboarding_links")
+      if (table === "consultations") return mockTable({ child_id: "student1", source_link_child_id: "ls1" });
+      if (table === "trial_onboarding_link_students")
         return mockTable({
-          id: "link1",
+          id: "ls1",
           student_email: "student@example.com",
-          student_invite_status: "sent",
-          student_invite_sent_at: "2026-09-05T00:00:00Z",
-          student_invite_error: null,
+          invite_status: "sent",
+          invite_sent_at: "2026-09-05T00:00:00Z",
+          invite_error: null,
+          invite_retry_count: 0,
         });
       throw new Error(`unexpected table ${table}`);
     });
@@ -85,6 +85,17 @@ describe("getStudentInviteStatusAction", () => {
     const result = await getStudentInviteStatusAction("c1");
     expect(result.completed).toBe(true);
   });
+
+  it("학생별 카드가 아니면(source_link_child_id 없음) 전부 null을 반환한다", async () => {
+    adminFromMock.mockImplementation((table: string) => {
+      if (table === "consultations") return mockTable({ child_id: null, source_link_child_id: null });
+      throw new Error(`unexpected table ${table}`);
+    });
+
+    const result = await getStudentInviteStatusAction("c1");
+    expect(result.linkStudentId).toBeNull();
+    expect(result.inviteStatus).toBeNull();
+  });
 });
 
 describe("resendStudentInviteAction", () => {
@@ -92,7 +103,7 @@ describe("resendStudentInviteAction", () => {
 
   it("이미 완료된 학생 계정은 재발송을 차단한다", async () => {
     adminFromMock.mockImplementation((table: string) => {
-      if (table === "consultations") return mockTable({ child_id: "student1" });
+      if (table === "consultations") return mockTable({ child_id: "student1", source_link_child_id: "ls1" });
       throw new Error(`unexpected table ${table}`);
     });
     getUserByIdMock.mockResolvedValue({
@@ -106,8 +117,8 @@ describe("resendStudentInviteAction", () => {
 
   it("미완료 학생 계정은 같은 계정으로 재발송하고 새 계정을 만들지 않는다", async () => {
     adminFromMock.mockImplementation((table: string) => {
-      if (table === "consultations") return mockTable({ child_id: "student1" });
-      if (table === "trial_onboarding_links") return mockTable({ id: "link1", student_name: "학생" });
+      if (table === "consultations") return mockTable({ child_id: "student1", source_link_child_id: "ls1" });
+      if (table === "trial_onboarding_link_students") return mockTable({ id: "ls1", student_name: "학생", link_id: "link1" });
       throw new Error(`unexpected table ${table}`);
     });
     getUserByIdMock.mockResolvedValue({
@@ -115,12 +126,19 @@ describe("resendStudentInviteAction", () => {
       error: null,
     });
     resendStudentSetPasswordEmailMock.mockResolvedValue(undefined);
+    rpcMock.mockResolvedValue({ data: null, error: null });
 
     await resendStudentInviteAction("c1");
 
+    expect(rpcMock).toHaveBeenCalledWith("retry_trial_onboarding_student", {
+      p_link_id: "link1",
+      p_link_student_id: "ls1",
+      p_child_auth_user_id: "student1",
+      p_stage: "invite",
+    });
     expect(resendStudentSetPasswordEmailMock).toHaveBeenCalledWith({
       url: new URL("http://localhost:3010"),
-      linkId: "link1",
+      linkStudentId: "ls1",
       studentEmail: "student@example.com",
       studentName: "학생",
     });
@@ -128,7 +146,7 @@ describe("resendStudentInviteAction", () => {
 
   it("학생 계정이 아직 없으면(child_id 없음) 재발송을 거부한다", async () => {
     adminFromMock.mockImplementation((table: string) => {
-      if (table === "consultations") return mockTable({ child_id: null });
+      if (table === "consultations") return mockTable({ child_id: null, source_link_child_id: null });
       throw new Error(`unexpected table ${table}`);
     });
 
