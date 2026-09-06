@@ -63,6 +63,9 @@ export type TeacherLessonScheduleTabProps = {
   // completed/student_no_show만(본인 노쇼는 관리자 전용).
   onStartSession: (sessionId: string) => Promise<void>;
   onFinalizeSession: (params: { sessionId: string; outcome: "completed" | "student_no_show"; reason: string }) => Promise<void>;
+  // M5-b(R7) — 진행 중(live)인 수업에서 선생님 지각분을 당일 상호 합의로 연장(가능한
+  // 만큼)하고, 나머지는 자동으로 보충시간(makeup_obligations)으로 이관한다.
+  onResolveLateness: (params: { sessionId: string; lateMinutes: number; agreedExtendMinutes: number; reason: string }) => Promise<void>;
 };
 
 export default function TeacherLessonScheduleTab({
@@ -74,6 +77,7 @@ export default function TeacherLessonScheduleTab({
   onLoadExternalBusy,
   onStartSession,
   onFinalizeSession,
+  onResolveLateness,
 }: TeacherLessonScheduleTabProps) {
   const router = useRouter();
   const [view, setView] = useState<"week-list" | "week" | "month">("week-list");
@@ -90,6 +94,9 @@ export default function TeacherLessonScheduleTab({
   const [showPastLessons, setShowPastLessons] = useState(false);
   const [sessionActionBusyId, setSessionActionBusyId] = useState<string | null>(null);
   const [noShowConfirmingSessionId, setNoShowConfirmingSessionId] = useState<string | null>(null);
+  const [latenessSessionId, setLatenessSessionId] = useState<string | null>(null);
+  const [lateMinutesDraft, setLateMinutesDraft] = useState("10");
+  const [extendMinutesDraft, setExtendMinutesDraft] = useState("10");
 
   const todayKey = todayKeyInTimezone(timezone);
   const nowMs = Date.now();
@@ -267,6 +274,19 @@ export default function TeacherLessonScheduleTab({
             >
               수업 종료(완료)
             </button>
+            {lesson.finalStatus === "live" && (
+              <button
+                disabled={sessionActionBusyId === lesson.sessionId}
+                onClick={() => {
+                  setLatenessSessionId(lesson.sessionId === latenessSessionId ? null : lesson.sessionId);
+                  setLateMinutesDraft("10");
+                  setExtendMinutesDraft("10");
+                }}
+                className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-grey-100 text-ink disabled:opacity-50"
+              >
+                지각 당일 연장
+              </button>
+            )}
             {noShowConfirmingSessionId === lesson.sessionId ? (
               <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-red/10 text-red">
                 학생 미접속 확정?{" "}
@@ -291,6 +311,52 @@ export default function TeacherLessonScheduleTab({
                 학생 노쇼 확정(15분 미접속)
               </button>
             )}
+          </div>
+        )}
+        {latenessSessionId === lesson.sessionId && (
+          <div className="mt-3 border-t border-grey-200 pt-3">
+            <p className="text-[11.5px] text-grey-500 mb-2">
+              지각분 전체를 연장하지 못하면 나머지는 자동으로 학생의 보충시간으로 이관됩니다(선생님 가능시간·기존
+              예약과 겹치는 경우 연장이 거부될 수 있습니다).
+            </p>
+            <div className="flex gap-2 items-end mb-2">
+              <div>
+                <label className="block text-[11px] font-bold text-grey-500 mb-1">지각 분</label>
+                <input
+                  type="number"
+                  min={1}
+                  className="w-20 border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[13px]"
+                  value={lateMinutesDraft}
+                  onChange={(e) => setLateMinutesDraft(e.target.value)}
+                />
+              </div>
+              <div>
+                <label className="block text-[11px] font-bold text-grey-500 mb-1">합의 연장 분</label>
+                <input
+                  type="number"
+                  min={0}
+                  className="w-20 border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[13px]"
+                  value={extendMinutesDraft}
+                  onChange={(e) => setExtendMinutesDraft(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="flex gap-2 justify-end">
+              <button
+                disabled={sessionActionBusyId === lesson.sessionId}
+                onClick={() => setLatenessSessionId(null)}
+                className="text-[12px] font-semibold text-grey-500 disabled:opacity-50"
+              >
+                닫기
+              </button>
+              <button
+                disabled={sessionActionBusyId === lesson.sessionId}
+                onClick={() => handleResolveLateness(lesson.sessionId)}
+                className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
+              >
+                연장 확정
+              </button>
+            </div>
           </div>
         )}
         {cancellingReservationId === lesson.reservationId && (
@@ -347,6 +413,35 @@ export default function TeacherLessonScheduleTab({
     setError(null);
     try {
       await onStartSession(sessionId);
+      await onRefresh();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setSessionActionBusyId(null);
+    }
+  }
+
+  async function handleResolveLateness(sessionId: string) {
+    const lateMinutes = Number(lateMinutesDraft);
+    const agreedExtendMinutes = Number(extendMinutesDraft);
+    if (!Number.isFinite(lateMinutes) || lateMinutes <= 0) {
+      setError("지각 분(late minutes)은 0보다 커야 합니다.");
+      return;
+    }
+    if (!Number.isFinite(agreedExtendMinutes) || agreedExtendMinutes < 0 || agreedExtendMinutes > lateMinutes) {
+      setError("합의 연장분은 0 이상, 지각분 이하여야 합니다.");
+      return;
+    }
+    setSessionActionBusyId(sessionId);
+    setError(null);
+    try {
+      await onResolveLateness({
+        sessionId,
+        lateMinutes,
+        agreedExtendMinutes,
+        reason: "선생님 지각 당일 상호 합의 연장",
+      });
+      setLatenessSessionId(null);
       await onRefresh();
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));

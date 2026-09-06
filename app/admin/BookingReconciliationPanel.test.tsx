@@ -20,6 +20,9 @@ vi.mock("./booking-actions", () => ({
   listRecentlyFinalizedSessions: vi.fn(),
   adminFinalizeLessonSession: vi.fn(),
   adminReopenSession: vi.fn(),
+  adminFinalizeSessionAsInfraIncident: vi.fn(),
+  listOutstandingMakeupObligations: vi.fn(),
+  adminApplyMakeupTimeToBooking: vi.fn(),
 }));
 
 beforeEach(() => {
@@ -30,6 +33,7 @@ beforeEach(() => {
   vi.mocked(actions.retryExternalCalendarReconciliationNow).mockResolvedValue({ teachersChecked: 0, changesDetected: 0 });
   vi.mocked(actions.listSessionsNeedingFinalJudgment).mockResolvedValue([]);
   vi.mocked(actions.listRecentlyFinalizedSessions).mockResolvedValue([]);
+  vi.mocked(actions.listOutstandingMakeupObligations).mockResolvedValue([]);
 });
 
 describe("BookingReconciliationPanel", () => {

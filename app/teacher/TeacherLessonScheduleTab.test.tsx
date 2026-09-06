@@ -56,6 +56,7 @@ describe("TeacherLessonScheduleTab", () => {
         onLoadExternalBusy={vi.fn().mockResolvedValue([])}
         onStartSession={vi.fn()}
         onFinalizeSession={vi.fn()}
+        onResolveLateness={vi.fn()}
       />
     );
     expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
@@ -72,6 +73,7 @@ describe("TeacherLessonScheduleTab", () => {
         onLoadExternalBusy={vi.fn().mockResolvedValue([])}
         onStartSession={vi.fn()}
         onFinalizeSession={vi.fn()}
+        onResolveLateness={vi.fn()}
       />
     );
     expect(screen.getByText(/지훈 · SAT Math/)).toBeInTheDocument();
@@ -93,6 +95,7 @@ describe("TeacherLessonScheduleTab", () => {
         onLoadExternalBusy={vi.fn().mockResolvedValue([])}
         onStartSession={onStartSession}
         onFinalizeSession={onFinalizeSession}
+        onResolveLateness={vi.fn()}
       />
     );
 
@@ -128,6 +131,7 @@ describe("TeacherLessonScheduleTab", () => {
         onLoadExternalBusy={vi.fn().mockResolvedValue([])}
         onStartSession={vi.fn()}
         onFinalizeSession={vi.fn()}
+        onResolveLateness={vi.fn()}
       />
     );
     expect(screen.queryByText("수업 시작")).not.toBeInTheDocument();
@@ -151,6 +155,7 @@ describe("TeacherLessonScheduleTab", () => {
         onLoadExternalBusy={vi.fn().mockResolvedValue([])}
         onStartSession={vi.fn()}
         onFinalizeSession={vi.fn()}
+        onResolveLateness={vi.fn()}
       />
     );
     expect(screen.getByText("체험")).toBeInTheDocument();
@@ -170,6 +175,7 @@ describe("TeacherLessonScheduleTab", () => {
         onLoadExternalBusy={vi.fn().mockResolvedValue([])}
         onStartSession={vi.fn()}
         onFinalizeSession={vi.fn()}
+        onResolveLateness={vi.fn()}
       />
     );
     expect(screen.queryByText("Smart Notes 보기")).not.toBeInTheDocument();
@@ -179,7 +185,7 @@ describe("TeacherLessonScheduleTab", () => {
     const onCancel = vi.fn().mockResolvedValue(undefined);
     const onRefresh = vi.fn().mockResolvedValue(undefined);
     render(
-      <TeacherLessonScheduleTab lessons={[lesson]} exceptions={[]} timezone="America/Los_Angeles" onCancel={onCancel} onRefresh={onRefresh} onLoadExternalBusy={vi.fn().mockResolvedValue([])} onStartSession={vi.fn()} onFinalizeSession={vi.fn()} />
+      <TeacherLessonScheduleTab lessons={[lesson]} exceptions={[]} timezone="America/Los_Angeles" onCancel={onCancel} onRefresh={onRefresh} onLoadExternalBusy={vi.fn().mockResolvedValue([])} onStartSession={vi.fn()} onFinalizeSession={vi.fn()} onResolveLateness={vi.fn()} />
     );
     fireEvent.click(screen.getByText("취소"));
     fireEvent.click(screen.getByText("취소 확정"));
@@ -198,6 +204,7 @@ describe("TeacherLessonScheduleTab", () => {
         onLoadExternalBusy={vi.fn().mockResolvedValue([])}
         onStartSession={vi.fn()}
         onFinalizeSession={vi.fn()}
+        onResolveLateness={vi.fn()}
       />
     );
     expect(screen.getByText("관리자 확인 필요(외부 변경 감지)")).toBeInTheDocument();
@@ -219,6 +226,7 @@ describe("TeacherLessonScheduleTab", () => {
         onLoadExternalBusy={onLoadExternalBusy}
         onStartSession={vi.fn()}
         onFinalizeSession={vi.fn()}
+        onResolveLateness={vi.fn()}
       />
     );
     await waitFor(() => expect(onLoadExternalBusy).toHaveBeenCalled());
@@ -244,6 +252,7 @@ describe("TeacherLessonScheduleTab", () => {
         onLoadExternalBusy={onLoadExternalBusy}
         onStartSession={vi.fn()}
         onFinalizeSession={vi.fn()}
+        onResolveLateness={vi.fn()}
       />
     );
     expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
@@ -278,6 +287,7 @@ describe("TeacherLessonScheduleTab", () => {
         onLoadExternalBusy={vi.fn().mockResolvedValue([])}
         onStartSession={vi.fn()}
         onFinalizeSession={vi.fn()}
+        onResolveLateness={vi.fn()}
       />
     );
     // 체험(리뷰 미확정)은 예정된 수업 목록에 바로 보인다.
@@ -324,6 +334,7 @@ describe("TeacherLessonScheduleTab", () => {
         onLoadExternalBusy={vi.fn().mockResolvedValue([])}
         onStartSession={vi.fn()}
         onFinalizeSession={vi.fn()}
+        onResolveLateness={vi.fn()}
       />
     );
 
@@ -376,6 +387,7 @@ describe("TeacherLessonScheduleTab", () => {
         onLoadExternalBusy={vi.fn().mockResolvedValue([])}
         onStartSession={vi.fn()}
         onFinalizeSession={vi.fn()}
+        onResolveLateness={vi.fn()}
       />
     );
 
@@ -403,6 +415,7 @@ describe("TeacherLessonScheduleTab", () => {
         onLoadExternalBusy={vi.fn().mockResolvedValue([])}
         onStartSession={vi.fn()}
         onFinalizeSession={vi.fn()}
+        onResolveLateness={vi.fn()}
       />
     );
     expect(screen.queryByText("수업 리뷰 작성")).not.toBeInTheDocument();

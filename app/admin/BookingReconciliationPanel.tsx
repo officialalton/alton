@@ -21,6 +21,9 @@ import {
   listRecentlyFinalizedSessions,
   adminFinalizeLessonSession,
   adminReopenSession,
+  adminFinalizeSessionAsInfraIncident,
+  listOutstandingMakeupObligations,
+  adminApplyMakeupTimeToBooking,
   type ReconciliationRow,
   type NotificationOutboxSummary,
   type IncidentReportAdminRow,
@@ -28,6 +31,7 @@ import {
   type ExternalChangeResolution,
   type SessionJudgmentRow,
   type SessionOutcome,
+  type MakeupObligationRow,
 } from "./booking-actions";
 
 const EXTERNAL_CHANGE_STATUS_LABEL: Record<string, string> = {
@@ -77,18 +81,26 @@ export default function BookingReconciliationPanel() {
   const [judgmentBusyId, setJudgmentBusyId] = useState<string | null>(null);
   const [reopeningSessionId, setReopeningSessionId] = useState<string | null>(null);
   const [reopenReasonDraft, setReopenReasonDraft] = useState("");
+  const [infraIncidentSessionId, setInfraIncidentSessionId] = useState<string | null>(null);
+  const [infraIncidentReasonDraft, setInfraIncidentReasonDraft] = useState("");
+  const [infraIncidentMinutesDraft, setInfraIncidentMinutesDraft] = useState("0");
+  const [makeupObligations, setMakeupObligations] = useState<MakeupObligationRow[] | null>(null);
+  const [applyingObligationId, setApplyingObligationId] = useState<string | null>(null);
+  const [applyReservationIdDraft, setApplyReservationIdDraft] = useState("");
+  const [applyMinutesDraft, setApplyMinutesDraft] = useState("");
 
   async function refresh() {
     setLoading(true);
     setError(null);
     try {
-      const [reconciliation, outbox, incidents, changes, judgment, finalized] = await Promise.all([
+      const [reconciliation, outbox, incidents, changes, judgment, finalized, obligations] = await Promise.all([
         listReconciliationNeededBookings(),
         listNotificationOutboxSummary(),
         listRecentIncidentReports(),
         listExternalCalendarChanges(),
         listSessionsNeedingFinalJudgment(),
         listRecentlyFinalizedSessions(),
+        listOutstandingMakeupObligations(),
       ]);
       setRows(reconciliation);
       setOutboxSummary(outbox);
@@ -96,6 +108,7 @@ export default function BookingReconciliationPanel() {
       setExternalChanges(changes);
       setJudgmentRows(judgment);
       setFinalizedRows(finalized);
+      setMakeupObligations(obligations);
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
@@ -199,6 +212,54 @@ export default function BookingReconciliationPanel() {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
       setJudgmentBusyId(null);
+    }
+  }
+
+  async function handleFinalizeInfraIncident(sessionId: string) {
+    const reason = infraIncidentReasonDraft.trim() || "회사·Meet 인프라 장애";
+    const providedMinutes = Number(infraIncidentMinutesDraft) || 0;
+    setJudgmentBusyId(sessionId);
+    setError(null);
+    setMessage(null);
+    try {
+      await adminFinalizeSessionAsInfraIncident({ sessionId, reason, providedMinutes });
+      setMessage(
+        providedMinutes > 0
+          ? "중단으로 확정했습니다(120분 상한 내 정산 + 못 제공한 분은 보충시간으로 이관됨)."
+          : "미시작으로 확정했습니다(수업권 hold 복원, 예약 취소 — 학생이 다시 예약할 수 있습니다)."
+      );
+      setInfraIncidentSessionId(null);
+      await refresh();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setJudgmentBusyId(null);
+    }
+  }
+
+  async function handleApplyMakeupTime(obligationId: string) {
+    const minutes = Number(applyMinutesDraft);
+    if (!applyReservationIdDraft.trim()) {
+      setError("적용할 예약 ID를 입력하세요.");
+      return;
+    }
+    if (!Number.isFinite(minutes) || minutes <= 0) {
+      setError("적용 분은 0보다 커야 합니다.");
+      return;
+    }
+    setApplyingObligationId(obligationId);
+    setError(null);
+    setMessage(null);
+    try {
+      await adminApplyMakeupTimeToBooking({ reservationId: applyReservationIdDraft.trim(), obligationId, minutes });
+      setMessage("보충시간을 해당 예약 뒤에 이어붙였습니다(수업권 추가 소진 없음).");
+      setApplyReservationIdDraft("");
+      setApplyMinutesDraft("");
+      await refresh();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setApplyingObligationId(null);
     }
   }
 
@@ -525,7 +586,60 @@ export default function BookingReconciliationPanel() {
               >
                 선생님 노쇼로 확정(해제, 지급 없음)
               </button>
+              <button
+                disabled={judgmentBusyId === s.sessionId}
+                onClick={() => {
+                  setInfraIncidentSessionId(s.sessionId === infraIncidentSessionId ? null : s.sessionId);
+                  setInfraIncidentReasonDraft("");
+                  setInfraIncidentMinutesDraft("0");
+                }}
+                className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-red/5 text-red disabled:opacity-50"
+              >
+                회사·Meet 장애로 확정
+              </button>
             </div>
+            {infraIncidentSessionId === s.sessionId && (
+              <div className="mt-3 border-t border-grey-200 pt-3">
+                <p className="text-[11.5px] text-grey-500 mb-2">
+                  자동 장애 감지는 없습니다 — 관리자가 직접 판단해 선택합니다. 제공 분을 0(또는 비움)으로
+                  두면 "미시작"(수업권 hold 복원 + 예약 취소로 재예약 가능, 0분 정산)으로, 1분 이상 입력하면
+                  "중단"(120분 상한 내 정산 + 못 제공한 분은 보충시간으로 자동 이관)으로 처리됩니다.
+                </p>
+                <div className="flex gap-2 items-end mb-2">
+                  <div>
+                    <label className="block text-[11px] font-bold text-grey-500 mb-1">실제 제공 분(0=미시작)</label>
+                    <input
+                      type="number"
+                      min={0}
+                      className="w-24 border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[13px]"
+                      value={infraIncidentMinutesDraft}
+                      onChange={(e) => setInfraIncidentMinutesDraft(e.target.value)}
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <label className="block text-[11px] font-bold text-grey-500 mb-1">사유</label>
+                    <input
+                      className="w-full border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[13px]"
+                      value={infraIncidentReasonDraft}
+                      onChange={(e) => setInfraIncidentReasonDraft(e.target.value)}
+                      placeholder="예: Google Meet 장애로 접속 불가"
+                    />
+                  </div>
+                </div>
+                <div className="flex gap-2 justify-end">
+                  <button onClick={() => setInfraIncidentSessionId(null)} className="text-[12px] font-semibold text-grey-500">
+                    닫기
+                  </button>
+                  <button
+                    disabled={judgmentBusyId === s.sessionId}
+                    onClick={() => handleFinalizeInfraIncident(s.sessionId)}
+                    className="text-[12px] font-bold text-white bg-red rounded-lg px-3 py-1.5 disabled:opacity-50"
+                  >
+                    확정
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         ))
       )}
@@ -581,6 +695,81 @@ export default function BookingReconciliationPanel() {
                 className="mt-2 text-[11px] font-bold text-red"
               >
                 재개방(재판정 필요)
+              </button>
+            )}
+          </div>
+        ))
+      )}
+
+      <h2 className="text-[14px] font-bold text-ink mb-2 mt-8">잔여 보충시간 (미이행 지각·장애분)</h2>
+      <p className="text-[12px] text-grey-500 mb-3">
+        선생님 지각 당일 연장으로 다 못 채운 분, 회사·Meet 장애로 중단돼 못 제공한 분이 여기 쌓입니다. 학생의
+        미래 정규 예약 ID를 입력해 그 예약 뒤에 이어붙이면 소비됩니다(새 예약 생성 없음, 수업권 추가 소진 없음).
+      </p>
+      {!makeupObligations || makeupObligations.length === 0 ? (
+        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">잔여 보충시간이 없습니다.</div>
+      ) : (
+        makeupObligations.map((o) => (
+          <div key={o.obligationId} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3">
+            <div className="flex items-center justify-between">
+              <div className="text-[13px] font-bold text-ink">
+                {o.childName ?? "(학생 미확인)"} · {o.teacherName ?? "(선생님 미확인)"} 선생님
+              </div>
+              <span className="text-[11px] font-bold px-2 py-1 rounded-full bg-grey-100 text-grey-500">
+                잔여 {o.remainingMinutes}분 / 발생 {o.owedMinutes}분
+              </span>
+            </div>
+            <div className="text-[12px] text-grey-500 mt-1">
+              사유: {o.reason === "teacher_late" ? "선생님 지각" : o.reason === "company_meet_interruption" ? "회사·Meet 장애 중단" : o.reason}{" "}
+              · {formatDateTime(o.createdAt)}
+            </div>
+            {applyingObligationId === o.obligationId ? (
+              <div className="mt-3 border-t border-grey-200 pt-3">
+                <div className="flex gap-2 items-end mb-2">
+                  <div className="flex-1">
+                    <label className="block text-[11px] font-bold text-grey-500 mb-1">적용할 미래 예약 ID</label>
+                    <input
+                      autoFocus
+                      className="w-full border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[13px]"
+                      value={applyReservationIdDraft}
+                      onChange={(e) => setApplyReservationIdDraft(e.target.value)}
+                      placeholder="reservation UUID"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] font-bold text-grey-500 mb-1">적용 분</label>
+                    <input
+                      type="number"
+                      min={1}
+                      max={o.remainingMinutes}
+                      className="w-20 border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[13px]"
+                      value={applyMinutesDraft}
+                      onChange={(e) => setApplyMinutesDraft(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="flex gap-2 justify-end">
+                  <button onClick={() => setApplyingObligationId(null)} className="text-[12px] font-semibold text-grey-500">
+                    닫기
+                  </button>
+                  <button
+                    onClick={() => handleApplyMakeupTime(o.obligationId)}
+                    className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5"
+                  >
+                    적용
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <button
+                onClick={() => {
+                  setApplyingObligationId(o.obligationId);
+                  setApplyReservationIdDraft("");
+                  setApplyMinutesDraft(String(o.remainingMinutes));
+                }}
+                className="mt-2 text-[11px] font-bold text-ink"
+              >
+                미래 예약에 적용
               </button>
             )}
           </div>

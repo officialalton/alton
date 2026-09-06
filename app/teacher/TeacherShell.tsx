@@ -32,6 +32,7 @@ import {
   listMyExternalBusyBlocks,
   startMyLessonSession,
   finalizeMyLessonSession,
+  resolveMyLessonLateness,
   type TeacherLessonScheduleItem,
 } from "./lesson-schedule-actions";
 
@@ -188,6 +189,7 @@ export default function TeacherShell({
               onRefresh={() => listMyLessonSchedule().then(setLessons)}
               onStartSession={startMyLessonSession}
               onFinalizeSession={finalizeMyLessonSession}
+              onResolveLateness={resolveMyLessonLateness}
             />
           ) : activeTab === "availability" ? (
             <TeacherAvailabilityTab
