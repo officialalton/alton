@@ -342,7 +342,7 @@ describe("BookingReconciliationPanel", () => {
         reason: "실제로는 선생님 노쇼였음",
       },
     ]);
-    vi.mocked(actions.resolveSessionJudgmentReconciliationTask).mockResolvedValue(undefined);
+    vi.mocked(actions.resolveSessionJudgmentReconciliationTask).mockResolvedValue({ result: "resolved" });
     render(<BookingReconciliationPanel />);
     await waitFor(() => expect(screen.getByText("반영 필요")).toBeInTheDocument());
     fireEvent.click(screen.getByText("반영"));

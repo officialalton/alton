@@ -758,7 +758,7 @@ export type ReconciliationTaskRow = {
   currentEntitlementDisposition: string | null;
   expectedEntitlementDisposition: string | null;
   requiredEntitlementAdjustmentAmount: number;
-  status: "pending" | "resolved";
+  status: "pending" | "resolved" | "superseded" | "needs_review";
   createdAt: string;
   resolvedAt: string | null;
   reason: string | null;
@@ -789,7 +789,7 @@ export async function listSessionJudgmentReconciliationTasks(): Promise<Reconcil
     currentEntitlementDisposition: row.current_entitlement_disposition as string | null,
     expectedEntitlementDisposition: row.expected_entitlement_disposition as string | null,
     requiredEntitlementAdjustmentAmount: row.required_entitlement_adjustment_amount as number,
-    status: row.status as "pending" | "resolved",
+    status: row.status as "pending" | "resolved" | "superseded" | "needs_review",
     createdAt: row.created_at as string,
     resolvedAt: row.resolved_at as string | null,
     reason: row.reason as string | null,
@@ -798,14 +798,23 @@ export async function listSessionJudgmentReconciliationTasks(): Promise<Reconcil
 
 /**
  * 2026-09-05 — 대사 작업을 반영한다. required_entitlement_adjustment_amount가 0이 아니면
- * adjust_entitlement()로 실제 entitlement_ledger 조정을 남긴다(멱등 — resolved 작업은 재반영 불가,
- * RLS-scoped 클라이언트로 호출해 auth.uid()가 함수 안의 is_admin() 검사를 통과하게 한다).
+ * adjust_entitlement()로 실제 entitlement_ledger 조정을 남긴다(멱등 — resolved/superseded/
+ * needs_review 작업은 재반영 불가, RLS-scoped 클라이언트로 호출해 auth.uid()가 함수 안의
+ * is_admin() 검사를 통과하게 한다).
+ *
+ * 2026-09-06: 반영 직전 세션의 실제 상태가 작업 생성 시점의 전제와 달라졌으면(오래된 전제가
+ * 깨진 경우) 예외 없이 "needs_review"를 반환한다 — 조정은 적용되지 않고 작업은 needs_review로
+ * 전환된다. 정상 반영되면 "resolved"를 반환한다.
  */
-export async function resolveSessionJudgmentReconciliationTask(params: { taskId: string; reason: string }): Promise<void> {
+export async function resolveSessionJudgmentReconciliationTask(params: {
+  taskId: string;
+  reason: string;
+}): Promise<{ result: "resolved" | "needs_review" }> {
   const { supabase } = await requireAdminOrCapability(BOOKING_CAPABILITY);
-  const { error } = await supabase.rpc("resolve_session_reconciliation_task", {
+  const { data, error } = await supabase.rpc("resolve_session_reconciliation_task", {
     p_task_id: params.taskId,
     p_reason: params.reason,
   });
   if (error) throw new Error(error.message);
+  return { result: (data as "resolved" | "needs_review") ?? "resolved" };
 }

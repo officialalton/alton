@@ -146,8 +146,12 @@ export default function BookingReconciliationPanel() {
     setResolvingTaskId(taskId);
     setError(null);
     try {
-      await resolveSessionJudgmentReconciliationTask({ taskId, reason: "관리자 확인 후 반영" });
-      setMessage("대사 작업을 반영했습니다(entitlement 조정 완료).");
+      const { result } = await resolveSessionJudgmentReconciliationTask({ taskId, reason: "관리자 확인 후 반영" });
+      setMessage(
+        result === "needs_review"
+          ? "세션 상태가 작업 생성 시점과 달라져 반영하지 않았습니다 — needs_review로 전환됐습니다. 다시 확인해주세요."
+          : "대사 작업을 반영했습니다(entitlement 조정 완료)."
+      );
       await refresh();
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
@@ -916,10 +920,16 @@ export default function BookingReconciliationPanel() {
               </div>
               <span
                 className={`text-[11px] font-bold px-2 py-1 rounded-full ${
-                  t.status === "resolved" ? "bg-grey-100 text-grey-500" : "bg-red/10 text-red"
+                  t.status === "resolved" || t.status === "superseded" ? "bg-grey-100 text-grey-500" : "bg-red/10 text-red"
                 }`}
               >
-                {t.status === "resolved" ? "반영 완료" : "반영 필요"}
+                {t.status === "resolved"
+                  ? "반영 완료"
+                  : t.status === "superseded"
+                    ? "대체됨(같은 세션 재판정)"
+                    : t.status === "needs_review"
+                      ? "재검토 필요(전제 변경됨)"
+                      : "반영 필요"}
               </span>
             </div>
             <div className="text-[12px] text-grey-500 mt-1">

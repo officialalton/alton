@@ -361,4 +361,93 @@ describe("2026-09-05 후속 — 재판정 시 entitlement 대사(reconciliation)
     const taskId = psql(`select id from session_judgment_reconciliation_tasks where session_id = '${sessionId}';`);
     expect(supersededTaskId).toBe(taskId);
   });
+
+  it("2026-09-06: 같은 세션에 재판정이 두 번 일어나면 첫 대사 작업은 superseded로 전환되고 반영이 거부된다", () => {
+    grantRegularEntitlement();
+    const { sessionId } = bookSession(regularLessonTypeId, 49, 120);
+    psql(`select finalize_lesson_session('${sessionId}', 'completed', '${TEACHER_ID}', '완료(오판정1)');`);
+
+    psql(`
+      set role authenticated;
+      select set_config('request.jwt.claim.sub', '${ADMIN_ID}', false);
+      select reopen_session('${sessionId}', '재검토1');
+      select recomplete_session('${sessionId}', 'teacher_no_show', '1차 재판정');
+      reset role;
+    `);
+    const firstTaskId = psql(
+      `select id from session_judgment_reconciliation_tasks where session_id = '${sessionId}' order by created_at limit 1;`
+    );
+
+    // 같은 세션이 또 재판정된다(관리자가 실수를 다시 정정) — 첫 작업은 이제 오래된 전제를 담고
+    // 있으므로 superseded로 전환돼야 한다.
+    psql(`
+      set role authenticated;
+      select set_config('request.jwt.claim.sub', '${ADMIN_ID}', false);
+      select reopen_session('${sessionId}', '재검토2');
+      select recomplete_session('${sessionId}', 'student_no_show', '2차 재판정 — 실제로는 학생 노쇼');
+      reset role;
+    `);
+
+    const firstTaskStatus = psql(`select status from session_judgment_reconciliation_tasks where id = '${firstTaskId}';`);
+    expect(firstTaskStatus).toBe("superseded");
+
+    const secondTaskId = psql(
+      `select id from session_judgment_reconciliation_tasks where session_id = '${sessionId}' and status = 'pending';`
+    );
+    expect(secondTaskId).not.toBe(firstTaskId);
+
+    // 오래된(superseded) 첫 작업은 뒤늦게라도 반영할 수 없다.
+    expect(() =>
+      psql(`
+        set role authenticated;
+        select set_config('request.jwt.claim.sub', '${ADMIN_ID}', false);
+        select resolve_session_reconciliation_task('${firstTaskId}', '뒤늦은 반영 시도');
+        reset role;
+      `)
+    ).toThrow(/superseded/);
+  });
+
+  it("2026-09-06: 반영 직전 세션 상태가 작업 생성 시점과 달라졌으면 반영을 거부하고 needs_review로 전환한다", () => {
+    grantRegularEntitlement();
+    const { sessionId } = bookSession(regularLessonTypeId, 50, 120);
+    psql(`select finalize_lesson_session('${sessionId}', 'completed', '${TEACHER_ID}', '완료(오판정)');`);
+
+    psql(`
+      set role authenticated;
+      select set_config('request.jwt.claim.sub', '${ADMIN_ID}', false);
+      select reopen_session('${sessionId}', '재검토 필요');
+      select recomplete_session('${sessionId}', 'teacher_no_show', '실제로는 선생님 노쇼였음');
+      reset role;
+    `);
+    const taskId = psql(`select id from session_judgment_reconciliation_tasks where session_id = '${sessionId}';`);
+
+    // 정상 흐름을 우회해 세션 payable_minutes를 작업 생성 시점의 전제와 다르게 직접 바꿔둔다
+    // (실무에서는 recomplete_session()이 항상 이 작업을 superseded로 전환하지만, 이 테스트는
+    // "전제가 깨졌는데 어떤 이유로든 여전히 pending인" 방어적 상황을 재현한다).
+    psql(`update sessions set payable_minutes = 999 where id = '${sessionId}';`);
+
+    // 예외를 던지지 않는다(예외를 던지면 트랜잭션과 함께 아래 UPDATE도 롤백돼 상태 전환 자체가
+    // 저장되지 않는다) — 대신 반환값으로 결과를 알린다.
+    const resolveOutput = psql(`
+      set role authenticated;
+      select set_config('request.jwt.claim.sub', '${ADMIN_ID}', false);
+      select resolve_session_reconciliation_task('${taskId}', '반영 시도');
+      reset role;
+    `);
+    const resolveResultLines = resolveOutput.split("\n").filter((l) => l.length > 0);
+    expect(resolveResultLines[resolveResultLines.length - 1]).toBe("needs_review");
+
+    const taskStatus = psql(`select status from session_judgment_reconciliation_tasks where id = '${taskId}';`);
+    expect(taskStatus).toBe("needs_review");
+
+    // needs_review 상태가 된 뒤에는 다시 반영을 시도해도 거부된다.
+    expect(() =>
+      psql(`
+        set role authenticated;
+        select set_config('request.jwt.claim.sub', '${ADMIN_ID}', false);
+        select resolve_session_reconciliation_task('${taskId}', '재시도');
+        reset role;
+      `)
+    ).toThrow(/needs_review/);
+  });
 });
