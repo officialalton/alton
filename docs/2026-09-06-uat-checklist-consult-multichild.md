@@ -88,3 +88,13 @@
 - `npx vitest run` — 183파일/1209건 전부 통과.
 - `npx next build` 성공.
 - 근본 원인은 node 스크립트로 로컬 GoTrue에 직접 `admin.auth.admin.createUser({ email: " foo@example.com " })`를 호출해 `Unable to validate email address: invalid format`(400) 응답을 실측 재현해 확정했다(`app/admin/trial-onboarding-actions.ts`의 `guardianEmail` trim 누락).
+
+### 2026-09-06 3차 세션 — matchbox512@snu.ac.kr 상담건(재발급해도 계속 실패) 실측·수정
+
+- [x] non-prod(`worpsqwqgnspddnrtnvq`)에 psql(`supabase db query --linked`)로 직접 조회해 근본 원인 확정: trim 수정 이후에도 저장된 `guardian_email`은 이미 깨끗했다 — 진짜 원인은 계정 병합(`anonymizeMergedAccount()`)이 Auth 계정을 지울 때 `auth.identities`를 정리하지 않아 좀비 이메일이 남고, 그 이메일로는 재발급을 몇 번 해도 `admin.auth.admin.createUser()`가 영원히 실패하는 것이었다.
+- [x] `supabase/migrations/20261210000000_m4_cleanup_orphaned_auth_identities.sql` 추가 — `cleanup_orphaned_auth_identities()`, 계정 생성 직전 항상 호출하도록 `lib/trial-onboarding-finalize.ts`/`app/admin/trial-onboarding-actions.ts` 수정.
+- [x] "중복 발행" 차단은 의도된 방어였으나 관리자가 우회할 수단이 없었던 문제 — `reissueTrialOnboardingLinkAction` + `forceReissue` + `TrialOnboardingLinkProgress.tsx`의 "링크 폐기하고 재발급" 버튼 추가.
+- [x] 재현 테스트 `supabase/cleanup-orphaned-auth-identities.integration.test.ts` 3건 통과(좀비 시뮬레이션 → 정리 전/후 확인 → 정상 계정 불변 확인).
+- [x] `supabase db reset --local` 성공, `npx tsc --noEmit` 클린, `npx vitest run` 184파일/1212건 전부 통과, `npx next build` 성공.
+- [x] non-prod에 마이그레이션 반영(`migration list --linked` local=remote 확인) 후, 실제 좀비 `auth.identities` 2건(`matchbox512@snu.ac.kr`, `matchbox512@gmail.com`)을 `cleanup_orphaned_auth_identities()`로 삭제 완료 — 삭제 전/후 SELECT로 0건 확인. 이 상담건의 미redeem 링크(`9a597dfd-cbbe-493a-a113-918af0147eb1`)는 이제 정상적으로 redeem 가능한 상태.
+- [ ] 브라우저로 실제 이 링크를 열어 계정 생성까지 end-to-end로 확인하는 것은 이번 세션 범위 밖(실제 고객 이메일 발송 없이 실제 브라우저 클릭까지는 확인하지 않음) — 다음 세션에서 필요 시 Preview에서 직접 확인 권장.

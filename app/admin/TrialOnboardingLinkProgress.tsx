@@ -14,6 +14,7 @@ import {
   getTrialOnboardingLinkDetailAction,
   listTrialOnboardingLinkStudentsAction,
   retryFailedTrialOnboardingStudentAction,
+  reissueTrialOnboardingLinkAction,
   type TrialOnboardingLinkDetail,
   type TrialOnboardingLinkStudent,
 } from "./trial-onboarding-actions";
@@ -43,6 +44,7 @@ export default function TrialOnboardingLinkProgress({ linkId }: { linkId: string
   const [students, setStudents] = useState<TrialOnboardingLinkStudent[] | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [retryingId, setRetryingId] = useState<string | null>(null);
+  const [reissuing, setReissuing] = useState(false);
   const { toasts, showToast, dismiss } = useToasts();
 
   async function load() {
@@ -102,6 +104,37 @@ export default function TrialOnboardingLinkProgress({ linkId }: { linkId: string
               <div className="text-[11px] text-grey-400 mt-0.5">
                 발급: {fmt(detail.createdAt)} · 만료: {fmt(detail.expiresAt)}
               </div>
+
+              {detail.status === "pending" && !detail.redeemedAt && (
+                <button
+                  type="button"
+                  disabled={reissuing}
+                  aria-busy={reissuing}
+                  data-testid="trial-onboarding-link-reissue"
+                  onClick={async () => {
+                    if (!window.confirm("기존 링크를 폐기하고 새 링크를 발급·재발송할까요? 보호자가 계속 계정 생성에 실패하는 경우에만 사용하세요.")) return;
+                    setReissuing(true);
+                    try {
+                      const result = await reissueTrialOnboardingLinkAction(linkId);
+                      if (result.status === "sent") {
+                        showToast("success", "새 링크를 발급하고 재발송했습니다.");
+                      } else if (result.status === "already_sent") {
+                        showToast("success", "이미 새 링크가 발송된 상태입니다.");
+                      } else {
+                        showToast("error", `재발급 실패 — ${result.error}`);
+                      }
+                      await load();
+                    } catch (e) {
+                      showToast("error", `재발급 실패 — ${e instanceof Error ? e.message : String(e)}`);
+                    } finally {
+                      setReissuing(false);
+                    }
+                  }}
+                  className="text-[11px] font-bold px-2.5 py-1 mt-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
+                >
+                  {reissuing ? "재발급 중..." : "링크 폐기하고 재발급"}
+                </button>
+              )}
 
               <div className="mt-2.5 space-y-1.5">
                 {students.map((s) => (

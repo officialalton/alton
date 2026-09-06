@@ -114,6 +114,14 @@ export async function sendTrialOnboardingNoticeAction(params: {
   guardianEmail: string;
   guardianName: string;
   students: TrialOnboardingStudentInput[];
+  // 2026-09-06(실제 버그 수정 — matchbox512@snu.ac.kr 상담건) — 이미 발송
+  // 완료(notice_delivery_status='sent')된 링크가 있으면 원래는 무조건
+  // "already_sent"로 막는다(중복 발송 방지). 하지만 그 링크로 보호자가 실제
+  // 계정 생성에 계속 실패하는 경우(예: 좀비 auth.identities 충돌), 관리자가
+  // 원인을 인지하고 명시적으로 "이 링크 폐기하고 새로 발급"을 선택할 수
+  // 있어야 한다 — forceReissue=true면 이미 발송된 링크라도 revoked 처리하고
+  // 새 링크를 발급·발송한다.
+  forceReissue?: boolean;
 }): Promise<SendTrialOnboardingNoticeResult> {
   // 2026-09-06(#441 마스킹 버그 수정) — workspace-actions.ts의 기존 실측
   // 확인 사례(2026-09-01)와 동일한 원인: 이 함수 안에서 던져진 에러(검증
@@ -136,6 +144,7 @@ async function sendTrialOnboardingNoticeInternal(params: {
   guardianEmail: string;
   guardianName: string;
   students: TrialOnboardingStudentInput[];
+  forceReissue?: boolean;
 }): Promise<SendTrialOnboardingNoticeResult> {
   const { actorUserId } = await requireAdminOrCapability(CONSULT_CAPABILITY);
   assertTrialOnboardingNoticeParamsValid(params);
@@ -175,19 +184,23 @@ async function sendTrialOnboardingNoticeInternal(params: {
   }));
 
   if (existingLink) {
-    if (existingLink.notice_delivery_status === "sent") {
+    if (existingLink.notice_delivery_status === "sent" && !params.forceReissue) {
       // 이미 발송 완료 — 중복 클릭/재시도로 같은 내용을 다시 보내지 않는다.
+      // (관리자가 이 링크가 실제로는 계속 실패하고 있다는 걸 확인했다면
+      // forceReissue=true로 명시적 재발급을 요청할 수 있다 — 위 주석 참고.)
       return { status: "already_sent", linkId: existingLink.id, sentAt: existingLink.notice_sent_at! };
     }
-    // 아직 한 번도 성공적으로 보내지 못한(pending 또는 failed) 링크는 raw_token을
-    // 다시 알 수 없다(해시만 저장하므로) — 실제로 전달된 적 없는 토큰이므로
+    // 아직 한 번도 성공적으로 보내지 못한(pending 또는 failed) 링크이거나,
+    // 관리자가 명시적으로 재발급(forceReissue)을 요청한 경우 — 기존 링크를
     // 안전하게 폐기(revoked)하고 같은 상담에 새 링크를 발급해 그 토큰으로
-    // 보낸다. 이미 유효한 링크가 보호자에게 전달된 뒤라면 이 분기를 타지
-        // 않는다(성공 전송 시 위에서 이미 반환).
+    // 보낸다.
     await admin.from("trial_onboarding_links").update({ status: "revoked" }).eq("id", existingLink.id);
-    await admin
-      .from("trial_onboarding_link_events")
-      .insert({ link_id: existingLink.id, event_type: "revoked", actor_id: actorUserId, detail: { reason: "미발송 링크 재발급" } });
+    await admin.from("trial_onboarding_link_events").insert({
+      link_id: existingLink.id,
+      event_type: "revoked",
+      actor_id: actorUserId,
+      detail: { reason: params.forceReissue ? "관리자 강제 재발급" : "미발송 링크 재발급" },
+    });
 
     const { data, error } = await admin.rpc("create_trial_onboarding_link_multi", {
       p_consultation_id: params.consultationId,
@@ -834,6 +847,7 @@ export type TrialOnboardingLinkStudent = {
 // 기존 listTrialOnboardingLinkStudentsAction()을 그대로 함께 쓴다.
 export type TrialOnboardingLinkDetail = {
   linkId: string;
+  consultationId: string;
   guardianEmail: string;
   guardianName: string;
   status: "pending" | "redeemed" | "expired" | "revoked";
@@ -851,7 +865,7 @@ export async function getTrialOnboardingLinkDetailAction(linkId: string): Promis
   const { data, error } = await admin
     .from("trial_onboarding_links")
     .select(
-      "id, guardian_email, guardian_name, status, notice_delivery_status, notice_sent_at, notice_send_error, created_at, expires_at, redeemed_at"
+      "id, consultation_id, guardian_email, guardian_name, status, notice_delivery_status, notice_sent_at, notice_send_error, created_at, expires_at, redeemed_at"
     )
     .eq("id", linkId)
     .maybeSingle();
@@ -859,6 +873,7 @@ export async function getTrialOnboardingLinkDetailAction(linkId: string): Promis
   if (!data) throw new Error("존재하지 않는 온보딩 링크입니다.");
   return {
     linkId: data.id,
+    consultationId: data.consultation_id,
     guardianEmail: data.guardian_email,
     guardianName: data.guardian_name,
     status: data.status as TrialOnboardingLinkDetail["status"],
@@ -869,6 +884,48 @@ export async function getTrialOnboardingLinkDetailAction(linkId: string): Promis
     expiresAt: data.expires_at,
     redeemedAt: data.redeemed_at,
   };
+}
+
+// 2026-09-06(실제 버그 수정 — matchbox512@snu.ac.kr 상담건) — 관리자가 발송
+// 내역 화면에서 "이미 보냈는데 계속 실패한다"고 판단했을 때 누르는 명시적
+// 재발급 액션. 기존 링크를 폐기하고 같은 학생 명단으로 새 링크를 발급·재발송한다
+// (forceReissue=true로 sendTrialOnboardingNoticeInternal의 already_sent
+// 단락을 우회). 아직 한 번도 redeem되지 않은(status='pending', redeemed_at
+// null) 링크에만 허용한다 — 이미 redeem된 링크를 폐기하면 진행 중인 계정
+// 생성/자녀 연결 흐름을 끊어버릴 수 있다.
+export async function reissueTrialOnboardingLinkAction(linkId: string): Promise<SendTrialOnboardingNoticeResult> {
+  await requireAdminOrCapability(CONSULT_CAPABILITY);
+  const admin = createAdminClient();
+  const { data: link, error: linkError } = await admin
+    .from("trial_onboarding_links")
+    .select("id, consultation_id, guardian_email, guardian_name, status, redeemed_at")
+    .eq("id", linkId)
+    .maybeSingle();
+  if (linkError) throw new Error(linkError.message);
+  if (!link) throw new Error("존재하지 않는 온보딩 링크입니다.");
+  if (link.status !== "pending" || link.redeemed_at) {
+    throw new Error("이미 보호자가 확인했거나 취소/만료된 링크는 재발급할 수 없습니다.");
+  }
+  const { data: students, error: studentsError } = await admin
+    .from("trial_onboarding_link_students")
+    .select("student_name, student_email, student_grade, student_subject")
+    .eq("link_id", linkId)
+    .order("created_at", { ascending: true });
+  if (studentsError) throw new Error(studentsError.message);
+  if (!students?.length) throw new Error("학생 명단을 찾을 수 없어 재발급할 수 없습니다.");
+
+  return sendTrialOnboardingNoticeAction({
+    consultationId: link.consultation_id,
+    guardianEmail: link.guardian_email,
+    guardianName: link.guardian_name,
+    students: students.map((s) => ({
+      name: s.student_name,
+      email: s.student_email,
+      grade: s.student_grade ?? undefined,
+      subject: s.student_subject ?? undefined,
+    })),
+    forceReissue: true,
+  });
 }
 
 export async function listTrialOnboardingLinkStudentsAction(linkId: string): Promise<TrialOnboardingLinkStudent[]> {
@@ -925,6 +982,10 @@ export async function retryFailedTrialOnboardingStudentAction(
     if (existing.data) {
       childAuthUserId = existing.data as string;
     } else {
+      // matchbox512@snu.ac.kr 상담건 실측과 동일한 원인(좀비 auth.identities)이
+      // 재시도 경로에도 그대로 적용된다 — 새 계정 생성 전에 먼저 정리한다.
+      const cleanup = await admin.rpc("cleanup_orphaned_auth_identities", { p_email: student.student_email });
+      if (cleanup.error) console.error("좀비 auth.identities 정리 실패(계속 진행):", student.student_email, cleanup.error);
       const { data: created, error: createError } = await admin.auth.admin.createUser({
         email: student.student_email,
         email_confirm: false,

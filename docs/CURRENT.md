@@ -1323,6 +1323,44 @@ M5-a(판정 규칙 코어)에 이어 R7의 나머지(선생님 지각 당일 연
 - 임시 비밀번호는 어떤 파일·커밋·PR·문서에도 남기지 않았다(생성·즉시 무효화만
   DB 내부에서 수행).
 
+## 2026-09-06 추가 실측 수정 — matchbox512@snu.ac.kr 상담건(온보딩 재발급/재발송 실패)
+
+- **(a) redeem 실패 근본 원인(psql 직접 확인, non-prod)**: `guardianEmail.trim()`
+  누락 수정(`d811747`) 이후에도 저장된 `guardian_email`은 이미 깨끗했다(공백
+  없음). 실제 원인은 별개 — 계정 병합(`app/admin/merge-actions.ts`
+  `anonymizeMergedAccount()`)이 `admin.auth.admin.deleteUser()`로 원본 Auth
+  계정을 지우면, `auth.users.email`은 GoTrue가 `deleted+<uuid>@removed.invalid`로
+  스크럽하지만 **`auth.identities`는 정리되지 않고 예전 이메일(`matchbox512@snu.ac.kr`,
+  `user_id=9d31a021-...`)이 좀비로 남는다**. `find_auth_user_id_by_email()`은
+  `auth.users`만 봐서 "신규 보호자"로 오판하지만, 그 다음 `admin.auth.admin.
+  createUser()`가 GoTrue의 (provider, email) 제약에 걸려 항상 실패 —
+  "보호자 계정 생성에 실패했습니다"가 링크를 몇 번 재발급해도 재현됐다.
+  학생 이메일(`matchbox512@gmail.com`, `user_id=aeeeb8fd-...`)도 동일하게
+  좀비 identities로 남아있었다.
+- **(a) 수정**: `supabase/migrations/20261210000000_m4_cleanup_orphaned_auth_identities.sql`
+  — `cleanup_orphaned_auth_identities(p_email)` 함수 추가(`auth.users`와
+  더 이상 이메일이 일치하지 않는 좀비 `auth.identities` 행만 삭제). 신규
+  계정 생성 직전(`lib/trial-onboarding-finalize.ts`의 보호자·학생 각각,
+  `app/admin/trial-onboarding-actions.ts`의 학생 재시도 경로)에 항상 먼저
+  호출해 이 클래스의 실패를 원천 차단.
+- **(b) "중복 발행" 원인**: 버그가 아니라 의도된 방어(이미 발송 완료된 링크는
+  `already_sent`로 재발송 차단) — 하지만 (a) 때문에 계속 실패하는 경우
+  관리자가 이를 우회할 방법이 없었다. `sendTrialOnboardingNoticeAction`에
+  `forceReissue` 옵션 추가 + 신규 액션 `reissueTrialOnboardingLinkAction`
+  (아직 redeem되지 않은 링크만 대상) + `app/admin/TrialOnboardingLinkProgress.tsx`에
+  "링크 폐기하고 재발급" 버튼 연결.
+- **실제 non-prod 데이터 복구**: `auth.identities`의 좀비 행 2건(guardian
+  `matchbox512@snu.ac.kr`, student `matchbox512@gmail.com`)을
+  `cleanup_orphaned_auth_identities()`로 실제 삭제 완료(삭제 전/후 SELECT로
+  확인) — 이 상담건(`consultation_id=510a64a7-01ef-438c-a8fd-1fb4efcf8a29`,
+  링크 `9a597dfd-cbbe-493a-a113-918af0147eb1`, 아직 미redeem 상태로 남아있던
+  발송 완료 링크)은 이제 정상적으로 redeem 가능한 상태.
+- 재현 테스트: `supabase/cleanup-orphaned-auth-identities.integration.test.ts`
+  (좀비 identities 시뮬레이션 → 정리 전 확인 → `cleanup_orphaned_auth_identities()`
+  후 같은 이메일로 재생성 가능 확인 → 정상 계정은 건드리지 않음 확인, 3건 통과).
+- 마이그레이션 `20261210000000`을 non-prod(`worpsqwqgnspddnrtnvq`)에 반영,
+  `migration list --linked`로 local=remote 확인.
+
 ## 잔여 R 실행계획(2026-09-05 확정) — 다음은 R8∥R10부터
 
 M4·R7(M5-a+M5-b) + 위 검수 보완 라운드 전부 완료. **다음 착수는 R8∥R10 병렬**

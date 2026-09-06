@@ -23,6 +23,7 @@ describe("TrialOnboardingLinkProgress", () => {
   it("발송 내역 보기를 누르면 링크·학생별 진행 상태를 정확히 보여준다", async () => {
     vi.mocked(getTrialOnboardingLinkDetailAction).mockResolvedValue({
       linkId: "link1",
+      consultationId: "consult1",
       guardianEmail: "guardian@example.com",
       guardianName: "김보호자",
       status: "pending",
@@ -75,6 +76,7 @@ describe("TrialOnboardingLinkProgress", () => {
   it("실패한 학생을 재시도해 성공하면 목록을 새로고침하고 재시도 버튼이 사라진다", async () => {
     vi.mocked(getTrialOnboardingLinkDetailAction).mockResolvedValue({
       linkId: "link1",
+      consultationId: "consult1",
       guardianEmail: "guardian@example.com",
       guardianName: "김보호자",
       status: "redeemed",

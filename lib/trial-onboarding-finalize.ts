@@ -36,6 +36,19 @@ export async function createGuardianAndStudentThenRedirect(params: {
   if (!isNewGuardian) {
     guardianAuthUserId = existingGuardianId.data as string;
   } else {
+    // 2026-09-06(실제 버그 수정 — matchbox512@snu.ac.kr 상담건 non-prod
+    // 실측 재현) — 예전에 이 이메일로 계정이 있었다가 병합(merge-actions.ts
+    // anonymizeMergedAccount())으로 삭제된 경우, auth.users의 이메일은
+    // 스크럽됐지만 auth.identities에는 옛 이메일이 좀비로 남아 있을 수
+    // 있다(GoTrue가 identities는 정리하지 않음). find_auth_user_id_by_email()은
+    // auth.users만 보므로 이 좀비를 못 잡고 "신규 보호자"로 판단하지만, 바로
+    // 아래 createUser()는 auth.identities의 유니크 제약에 걸려 항상 실패한다
+    // — 새 계정 생성 시도 직전에 먼저 정리해 이 경로를 막지 않는다.
+    await admin.rpc("cleanup_orphaned_auth_identities", { p_email: params.guardianEmail }).then(
+      (r) => {
+        if (r.error) console.error("좀비 auth.identities 정리 실패(계속 진행):", params.guardianEmail, r.error);
+      }
+    );
     const { data: guardianCreated, error: guardianCreateError } = await admin.auth.admin.createUser({
       email: params.guardianEmail,
       email_confirm: true,
@@ -73,6 +86,11 @@ export async function createGuardianAndStudentThenRedirect(params: {
       finalizeItems.push({ link_student_id: s.id, child_auth_user_id: s.child_auth_user_id });
       continue;
     }
+    await admin.rpc("cleanup_orphaned_auth_identities", { p_email: s.student_email }).then(
+      (r) => {
+        if (r.error) console.error("좀비 auth.identities 정리 실패(계속 진행):", s.student_email, r.error);
+      }
+    );
     const { data: studentCreated, error: studentCreateError } = await admin.auth.admin.createUser({
       // 학생 본인이 이 이메일을 실제로 확인했는지는 여기서 알 수 없다 — 온보딩은
       // 보호자가 대행 입력한 값이다(이 파일 상단 주석 참고). email_confirm을 여기서
