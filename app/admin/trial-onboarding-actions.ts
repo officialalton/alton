@@ -115,6 +115,28 @@ export async function sendTrialOnboardingNoticeAction(params: {
   guardianName: string;
   students: TrialOnboardingStudentInput[];
 }): Promise<SendTrialOnboardingNoticeResult> {
+  // 2026-09-06(#441 마스킹 버그 수정) — workspace-actions.ts의 기존 실측
+  // 확인 사례(2026-09-01)와 동일한 원인: 이 함수 안에서 던져진 에러(검증
+  // 실패·RPC 에러 등)가 그대로 propagate되면, Next.js가 production에서
+  // Server Action의 미처리 예외를 일반화된 "Minified React error #441"
+  // 메시지로 마스킹해 클라이언트에 전달한다(실제 원인 메시지가 사라짐).
+  // sendEmail() 실패만 개별적으로 잡던 기존 코드는 검증 실패나 RPC 에러
+  // 같은 다른 실패 경로를 놓쳤다 — 함수 전체를 감싸 항상 { status: "failed" }
+  // 형태로 반환한다(Next.js 공식 권장 패턴, 예외를 던지지 않음).
+  try {
+    return await sendTrialOnboardingNoticeInternal(params);
+  } catch (e) {
+    const message = e instanceof Error ? e.message : String(e);
+    return { status: "failed", linkId: "", error: message };
+  }
+}
+
+async function sendTrialOnboardingNoticeInternal(params: {
+  consultationId: string;
+  guardianEmail: string;
+  guardianName: string;
+  students: TrialOnboardingStudentInput[];
+}): Promise<SendTrialOnboardingNoticeResult> {
   const { actorUserId } = await requireAdminOrCapability(CONSULT_CAPABILITY);
   assertTrialOnboardingNoticeParamsValid(params);
   const admin = createAdminClient();

@@ -298,47 +298,63 @@ describe("sendTrialOnboardingNoticeAction", () => {
   // 2026-09-05 보완 — 클라이언트 검증(빈 값이면 버튼 비활성화)을 우회해 서버
   // 액션을 직접 호출해도 빈 문자열·잘못된 이메일 형식은 거부돼야 한다. 이
   // 검증은 링크 조회/발급 이전에 일어나야 하므로 DB 모킹 없이도 통과해야 한다.
+  // 2026-09-06(#441 마스킹 버그 수정) — 검증 실패는 더 이상 throw하지 않고
+  // { status: "failed", error } 결과로 반환한다. Server Action이 예외를
+  // 던지면 Next.js가 production에서 이를 "Minified React error #441"라는
+  // 일반화된 메시지로 마스킹해 실제 원인(관리자가 입력한 값 중 무엇이
+  // 잘못됐는지)이 화면에서 사라지는 실사용 버그가 있었다(Preview 재현
+  // 확인). workspace-actions.ts의 기존 규칙(예외를 던지지 않고 결과값으로
+  // 모델링)과 동일하게 맞춘다.
   it("보호자 이메일이 빈 문자열이면 거부하고 어떤 DB/이메일 호출도 하지 않는다", async () => {
-    await expect(sendTrialOnboardingNoticeAction({ ...baseParams, guardianEmail: "" })).rejects.toThrow();
+    const result = await sendTrialOnboardingNoticeAction({ ...baseParams, guardianEmail: "" });
+    expect(result.status).toBe("failed");
     expect(adminFromMock).not.toHaveBeenCalled();
     expect(adminRpcMock).not.toHaveBeenCalled();
     expect(sendEmailMock).not.toHaveBeenCalled();
   });
 
   it("학생 이메일 형식이 올바르지 않으면(@ 없음) 거부한다", async () => {
-    await expect(
-      sendTrialOnboardingNoticeAction({ ...baseParams, students: [{ name: "학생", email: "not-an-email" }] })
-    ).rejects.toThrow();
+    const result = await sendTrialOnboardingNoticeAction({
+      ...baseParams,
+      students: [{ name: "학생", email: "not-an-email" }],
+    });
+    expect(result.status).toBe("failed");
     expect(sendEmailMock).not.toHaveBeenCalled();
   });
 
   it("보호자 이름이 빈 문자열(공백만)이면 거부한다", async () => {
-    await expect(sendTrialOnboardingNoticeAction({ ...baseParams, guardianName: "   " })).rejects.toThrow();
+    const result = await sendTrialOnboardingNoticeAction({ ...baseParams, guardianName: "   " });
+    expect(result.status).toBe("failed");
     expect(sendEmailMock).not.toHaveBeenCalled();
   });
 
   it("학생 이름이 빈 문자열이면 거부한다", async () => {
-    await expect(
-      sendTrialOnboardingNoticeAction({ ...baseParams, students: [{ name: "", email: "s@example.com" }] })
-    ).rejects.toThrow();
+    const result = await sendTrialOnboardingNoticeAction({
+      ...baseParams,
+      students: [{ name: "", email: "s@example.com" }],
+    });
+    expect(result.status).toBe("failed");
     expect(sendEmailMock).not.toHaveBeenCalled();
   });
 
   it("학생을 1명도 입력하지 않으면 거부한다", async () => {
-    await expect(sendTrialOnboardingNoticeAction({ ...baseParams, students: [] })).rejects.toThrow();
+    const result = await sendTrialOnboardingNoticeAction({ ...baseParams, students: [] });
+    expect(result.status).toBe("failed");
     expect(sendEmailMock).not.toHaveBeenCalled();
   });
 
   it("같은 이메일을 두 학생에게 중복 입력하면 거부한다", async () => {
-    await expect(
-      sendTrialOnboardingNoticeAction({
-        ...baseParams,
-        students: [
-          { name: "학생1", email: "dup@example.com" },
-          { name: "학생2", email: "dup@example.com" },
-        ],
-      })
-    ).rejects.toThrow();
+    const result = await sendTrialOnboardingNoticeAction({
+      ...baseParams,
+      students: [
+        { name: "학생1", email: "dup@example.com" },
+        { name: "학생2", email: "dup@example.com" },
+      ],
+    });
+    expect(result.status).toBe("failed");
+    if (result.status === "failed") {
+      expect(result.error).toContain("dup@example.com");
+    }
     expect(sendEmailMock).not.toHaveBeenCalled();
   });
 
