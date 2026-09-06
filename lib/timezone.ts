@@ -13,15 +13,20 @@ export function resolveUserTimezone(params: {
   return params.profileTimezone || params.householdDefaultTimezone || DEFAULT_TIMEZONE;
 }
 
-// R6 — 시간대 설정 UI에 노출할 선택지. 실제 서비스 대상 지역(한국 학생/학부모,
-// 미국 거주 학생/학부모, 한국 명문대 대학원생 선생님) 기준으로 제한한다. 전체
-// IANA 타임존 목록을 나열하지 않는다(과도한 설계 금지).
+// R6/M4 — 시간대 설정 UI에 노출할 선택지. 실제 서비스 대상 지역(한국 학생/학부모,
+// 미국 거주 학생/학부모, 한국 명문대 대학원생 선생님) 기준으로 미국 전역 표준
+// 시간대(동부/중부/산악/산악-서머타임 없음(애리조나)/태평양/알래스카/하와이)를
+// 모두 포함하고, 한국 시간대를 더한다. 전체 IANA 타임존 목록을 그대로 나열하지는
+// 않는다(과도한 설계 금지) — 미국 내 실제로 쓰이는 지역 표준시만 명시적으로 나열.
 export const TIMEZONE_OPTIONS: { value: string; label: string }[] = [
   { value: "Asia/Seoul", label: "서울 (Asia/Seoul)" },
-  { value: "America/Los_Angeles", label: "로스앤젤레스 (America/Los_Angeles)" },
-  { value: "America/Denver", label: "덴버 (America/Denver)" },
-  { value: "America/Chicago", label: "시카고 (America/Chicago)" },
-  { value: "America/New_York", label: "뉴욕 (America/New_York)" },
+  { value: "America/New_York", label: "뉴욕 — 동부(ET) (America/New_York)" },
+  { value: "America/Chicago", label: "시카고 — 중부(CT) (America/Chicago)" },
+  { value: "America/Denver", label: "덴버 — 산악(MT) (America/Denver)" },
+  { value: "America/Phoenix", label: "피닉스 — 산악, 서머타임 없음(MST) (America/Phoenix)" },
+  { value: "America/Los_Angeles", label: "로스앤젤레스 — 태평양(PT) (America/Los_Angeles)" },
+  { value: "America/Anchorage", label: "앵커리지 — 알래스카(AKT) (America/Anchorage)" },
+  { value: "Pacific/Honolulu", label: "호놀룰루 — 하와이(HST) (Pacific/Honolulu)" },
 ];
 
 export function timezoneLabel(timezone: string): string {

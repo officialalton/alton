@@ -111,3 +111,11 @@
 - [x] `supabase db reset --local` 성공 / `npx tsc --noEmit` 0 에러 / `npx vitest run` 184파일·1214건 통과 / `npx next build` 성공.
 - [x] non-prod에 `20261211000000` push(`migration list --linked` local=remote 확인) 후, 세온장/세장온 두 학생 모두 관리자 DOB 확인·Smart Notes 동의(관리자/보호자 액션과 동등한 SQL)를 거쳐 재처리 버튼과 동일한 `grant_trial_entitlement_for_consultation()` 호출로 `entitlement_grants` 각 1건 지급 완료·`trial_entitlement_grant_status='granted'` 확인.
 - [ ] 브라우저로 실제 학생 포털에 로그인해 "수업권" 탭·예약 화면을 눈으로 확인하는 것은 이번 세션 범위 밖(DB 조회로 조건 충족만 검증) — 다음 세션에서 Preview로 직접 확인 권장.
+
+### 2026-09-06 5차 세션 — 시간대 설정 UI 지적사항(미국 전역 시간대 목록 확장)
+
+- [x] 조사: `app/components/TimezoneSettingsModal.tsx` + `lib/timezone-actions.ts`가 이미 4개 포털(학생/학부모/관리자/선생님) 공용으로 존재하고, 실제 선택된 IANA 값을 `<select value>`로 표시하며(라벨만 표시 아님), `profiles.timezone`/`households.default_timezone`에 영구 저장(세션 아님)됨을 확인 — 지적사항 1/2/4는 이미 구현돼 있었음(`8b3bf26` R6 커밋).
+- [x] 지적사항 3(미국 전역 시간대)만 실제로 빠져 있었음 — `lib/timezone.ts`의 `TIMEZONE_OPTIONS`에 `America/Phoenix`(산악, DST 없음)·`America/Anchorage`(알래스카)·`Pacific/Honolulu`(하와이) 추가, 기존 라벨에 동부/중부/산악/태평양 구분 병기.
+- [x] 회귀 테스트: `lib/timezone.test.ts`에 미국 시간대 전체 포함 여부 + IANA 값 유효성 검증 추가. `lib/timezone-persistence.integration.test.ts`(신규, psql 직접 접속) 5건 — 개인 시간대 저장 후 재조회(=다음 로그인) 유지, 확장된 시간대(알래스카/하와이/피닉스) 저장·유지, 타인 프로필 RLS 차단, 주 보호자 RPC로 가족 기본값 영구 저장, 비주보호자 거부(fail-closed).
+- [x] `supabase db reset --local` 성공(추가 마이그레이션 없음, 기존 컬럼 재사용) / `npx tsc --noEmit` 0 에러 / `npx vitest run` 185파일·1228건 통과 / `npx next build` 성공.
+- [ ] 브라우저로 실제 각 포털의 "시간대 설정" 모달을 열어 확장된 7개 미국 시간대가 드롭다운에 보이는지, 선택 후 새로고침해도 유지되는지 눈으로 확인하는 것은 이번 세션 범위 밖 — Preview에서 직접 확인 권장(계정 드롭다운 → "시간대 설정").
