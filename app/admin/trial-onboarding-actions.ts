@@ -72,6 +72,27 @@ export type SendTrialOnboardingNoticeResult =
   | { status: "already_sent"; linkId: string; sentAt: string }
   | { status: "failed"; linkId: string; error: string };
 
+// 과도한 이메일 검증 라이브러리 없이 형식 오류만 걸러내는 최소 정규식 —
+// RFC 완전 준수가 목적이 아니라 "빈 문자열"·"@ 없음" 같은 명백한 오입력을
+// 클라이언트 검증 우회(직접 서버 액션 호출)로부터도 막는 것이 목적이다.
+const SIMPLE_EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function assertTrialOnboardingNoticeParamsValid(params: {
+  guardianEmail: string;
+  guardianName: string;
+  studentName: string;
+  studentEmail: string;
+}): void {
+  if (!params.guardianName.trim()) throw new Error("보호자 이름을 입력해주세요.");
+  if (!params.studentName.trim()) throw new Error("학생 이름을 입력해주세요.");
+  if (!params.guardianEmail.trim() || !SIMPLE_EMAIL_RE.test(params.guardianEmail.trim())) {
+    throw new Error("보호자 이메일 형식이 올바르지 않습니다.");
+  }
+  if (!params.studentEmail.trim() || !SIMPLE_EMAIL_RE.test(params.studentEmail.trim())) {
+    throw new Error("학생 이메일 형식이 올바르지 않습니다.");
+  }
+}
+
 export async function sendTrialOnboardingNoticeAction(params: {
   consultationId: string;
   guardianEmail: string;
@@ -81,6 +102,7 @@ export async function sendTrialOnboardingNoticeAction(params: {
   studentGrade?: string;
 }): Promise<SendTrialOnboardingNoticeResult> {
   const { actorUserId } = await requireAdminOrCapability(CONSULT_CAPABILITY);
+  assertTrialOnboardingNoticeParamsValid(params);
   const admin = createAdminClient();
 
   // 재사용 가능한 pending 링크가 이미 있는지 먼저 확인(중복 발급/중복 발송 방지).

@@ -236,6 +236,8 @@ function ConsultationCardDetailPanel({
                 defaultGuardianEmail={detail.guardianEmail ?? c.contact_email}
                 defaultGuardianName={detail.guardianName ?? c.contact_name}
                 defaultStudentGrade={c.student_grade ?? ""}
+                noticeDeliveryStatus={detail.noticeDeliveryStatus}
+                noticeSendError={detail.noticeSendError}
                 busy={busy}
                 onSend={(fn) => run(fn)}
               />
@@ -373,11 +375,19 @@ function OutcomeForm({ consultationId, onDone }: { consultationId: string; onDon
   );
 }
 
+// 학생 이름·이메일 등 필수값이 비어 있으면 발송 버튼 자체를 비활성화한다
+// (2026-09-05 보완 — 이전에는 빈 값으로도 서버 액션 호출이 가능했다). 형식
+// 검증은 서버(sendTrialOnboardingNoticeAction)가 우회 대비로 다시 한번 하므로
+// 여기서는 "비어 있지 않은지"와 아주 단순한 "@ 포함" 정도만 확인한다.
+const SIMPLE_EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 function TrialNoticeForm({
   consultationId,
   defaultGuardianEmail,
   defaultGuardianName,
   defaultStudentGrade,
+  noticeDeliveryStatus,
+  noticeSendError,
   busy,
   onSend,
 }: {
@@ -385,6 +395,8 @@ function TrialNoticeForm({
   defaultGuardianEmail: string;
   defaultGuardianName: string;
   defaultStudentGrade: string;
+  noticeDeliveryStatus?: "pending" | "sent" | "failed" | null;
+  noticeSendError?: string | null;
   busy: boolean;
   onSend: (fn: () => Promise<void>) => void;
 }) {
@@ -394,8 +406,19 @@ function TrialNoticeForm({
   const [studentEmail, setStudentEmail] = useState("");
   const [studentGrade, setStudentGrade] = useState(defaultStudentGrade);
 
+  const isValid =
+    guardianName.trim().length > 0 &&
+    studentName.trim().length > 0 &&
+    SIMPLE_EMAIL_RE.test(guardianEmail.trim()) &&
+    SIMPLE_EMAIL_RE.test(studentEmail.trim());
+
   return (
     <div className="border border-grey-200 rounded-lg p-2.5 space-y-1.5">
+      {noticeDeliveryStatus === "failed" && (
+        <p className={errText} data-testid="trial-notice-failed">
+          이전 발송 실패{noticeSendError ? `: ${noticeSendError}` : ""} — 아래에서 다시 시도할 수 있습니다.
+        </p>
+      )}
       <input value={guardianName} onChange={(e) => setGuardianName(e.target.value)} placeholder="보호자 이름" className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]" />
       <input value={guardianEmail} onChange={(e) => setGuardianEmail(e.target.value)} placeholder="보호자 이메일" className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]" />
       <input value={studentName} onChange={(e) => setStudentName(e.target.value)} placeholder="학생 이름" className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]" />
@@ -403,10 +426,10 @@ function TrialNoticeForm({
       <input value={studentGrade} onChange={(e) => setStudentGrade(e.target.value)} placeholder="학년" className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]" />
       <button
         className={btnSecondary}
-        disabled={busy}
+        disabled={busy || !isValid}
         onClick={() =>
           onSend(async () => {
-            await sendTrialOnboardingNoticeAction({
+            const result = await sendTrialOnboardingNoticeAction({
               consultationId,
               guardianEmail,
               guardianName,
@@ -414,6 +437,9 @@ function TrialNoticeForm({
               studentEmail,
               studentGrade,
             });
+            if (result.status === "failed") {
+              throw new Error(result.error);
+            }
           })
         }
       >

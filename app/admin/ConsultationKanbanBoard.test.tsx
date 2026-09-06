@@ -109,6 +109,9 @@ function cardDetail() {
     contractId: null,
     contractStatus: null,
     latestContractVersionHasEnvelope: false,
+    noticeDeliveryStatus: null as "pending" | "sent" | "failed" | null,
+    noticeSendError: null as string | null,
+    noticeSentAt: null as string | null,
   };
 }
 
@@ -183,5 +186,59 @@ describe("ConsultationKanbanBoard — 과목·선생님 배정 클릭 UI(2026-09
     await screen.findByTestId("consultation-card-detail");
 
     expect(screen.queryByTestId("subject-teacher-assign-form")).not.toBeInTheDocument();
+  });
+});
+
+describe("ConsultationKanbanBoard — 체험 온보딩 안내 발송 폼(2026-09-05 보완)", () => {
+  function detailWithoutAccountLinked(overrides: Partial<ReturnType<typeof cardDetail>> = {}) {
+    return {
+      ...cardDetail(),
+      pipeline: {
+        ...cardDetail().pipeline,
+        steps: [
+          { key: "account_linked", done: false, label: "보호자·학생 계정 연결" },
+          { key: "assignment", done: false, label: "과목·선생님 배정" },
+        ],
+      },
+      noticeDeliveryStatus: null,
+      noticeSendError: null,
+      ...overrides,
+    };
+  }
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    listKanbanBoardActionMock.mockResolvedValue([cardRow()]);
+  });
+
+  it("학생 이름·이메일 등 필수값이 비어 있으면 발송 버튼이 비활성화된다", async () => {
+    getConsultationCardDetailActionMock.mockResolvedValue(detailWithoutAccountLinked());
+
+    render(<ConsultationKanbanBoard subjects={subjects} teacherCandidatesBySubject={teacherCandidatesBySubject} />);
+
+    fireEvent.click(await screen.findByText("김민지"));
+    await screen.findByTestId("consultation-card-detail");
+
+    const sendButton = screen.getByText("체험 온보딩 안내 발송");
+    // 보호자 이름·이메일은 기본값이 채워지지만 학생 이름·이메일은 비어있다.
+    expect(sendButton).toBeDisabled();
+
+    fireEvent.change(screen.getByPlaceholderText("학생 이름"), { target: { value: "김학생" } });
+    fireEvent.change(screen.getByPlaceholderText("학생 이메일"), { target: { value: "student@example.com" } });
+
+    expect(sendButton).not.toBeDisabled();
+  });
+
+  it("이전 발송이 실패 상태로 남아있으면 카드 상세에 실패 배너를 노출한다", async () => {
+    getConsultationCardDetailActionMock.mockResolvedValue(
+      detailWithoutAccountLinked({ noticeDeliveryStatus: "failed", noticeSendError: "SMTP 연결 실패" })
+    );
+
+    render(<ConsultationKanbanBoard subjects={subjects} teacherCandidatesBySubject={teacherCandidatesBySubject} />);
+
+    fireEvent.click(await screen.findByText("김민지"));
+    await screen.findByTestId("consultation-card-detail");
+
+    expect(screen.getByTestId("trial-notice-failed")).toHaveTextContent("SMTP 연결 실패");
   });
 });

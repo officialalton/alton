@@ -295,4 +295,29 @@ describe("sendTrialOnboardingNoticeAction", () => {
 
     expect(result).toEqual({ status: "failed", linkId: "l1", error: "SMTP 연결 실패" });
   });
+
+  // 2026-09-05 보완 — 클라이언트 검증(빈 값이면 버튼 비활성화)을 우회해 서버
+  // 액션을 직접 호출해도 빈 문자열·잘못된 이메일 형식은 거부돼야 한다. 이
+  // 검증은 링크 조회/발급 이전에 일어나야 하므로 DB 모킹 없이도 통과해야 한다.
+  it("보호자 이메일이 빈 문자열이면 거부하고 어떤 DB/이메일 호출도 하지 않는다", async () => {
+    await expect(sendTrialOnboardingNoticeAction({ ...baseParams, guardianEmail: "" })).rejects.toThrow();
+    expect(adminFromMock).not.toHaveBeenCalled();
+    expect(adminRpcMock).not.toHaveBeenCalled();
+    expect(sendEmailMock).not.toHaveBeenCalled();
+  });
+
+  it("학생 이메일 형식이 올바르지 않으면(@ 없음) 거부한다", async () => {
+    await expect(sendTrialOnboardingNoticeAction({ ...baseParams, studentEmail: "not-an-email" })).rejects.toThrow();
+    expect(sendEmailMock).not.toHaveBeenCalled();
+  });
+
+  it("보호자 이름이 빈 문자열(공백만)이면 거부한다", async () => {
+    await expect(sendTrialOnboardingNoticeAction({ ...baseParams, guardianName: "   " })).rejects.toThrow();
+    expect(sendEmailMock).not.toHaveBeenCalled();
+  });
+
+  it("학생 이름이 빈 문자열이면 거부한다", async () => {
+    await expect(sendTrialOnboardingNoticeAction({ ...baseParams, studentName: "" })).rejects.toThrow();
+    expect(sendEmailMock).not.toHaveBeenCalled();
+  });
 });

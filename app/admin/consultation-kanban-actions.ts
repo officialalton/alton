@@ -76,6 +76,12 @@ export type ConsultationCardDetail = {
   contractId: string | null;
   contractStatus: string | null;
   latestContractVersionHasEnvelope: boolean;
+  // 체험 온보딩 안내 이메일의 최신 발송 상태 — 발송 실패가 로그로만 남고
+  // 관리자 화면에서는 안 보이던 문제를 보완(2026-09-05)하기 위해 노출한다.
+  // 이 상담에 발급된 적 없으면(링크 없음) 전부 null.
+  noticeDeliveryStatus: "pending" | "sent" | "failed" | null;
+  noticeSendError: string | null;
+  noticeSentAt: string | null;
 };
 
 /** 카드 상세 패널 — 교사 배정을 제외한 모든 후속 액션에 필요한 정보를 한 번에 모은다. */
@@ -112,6 +118,17 @@ export async function getConsultationCardDetailAction(consultationId: string): P
   // "account_linked" 단계 미완료 상태가 정상적으로 채워져 체험 온보딩 안내 발송
   // 폼(TrialNoticeForm)이 카드 상세에 노출된다(classifyStage()와 동일한 패턴).
   pipeline = await getTrialOnboardingPipelineAction(consultation.id, consultation.child_id, consultation.trial_intent_confirmed_at);
+
+  const { data: latestLink } = await admin
+    .from("trial_onboarding_links")
+    .select("notice_delivery_status, notice_send_error, notice_sent_at")
+    .eq("consultation_id", consultation.id)
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  const noticeDeliveryStatus = (latestLink?.notice_delivery_status as ConsultationCardDetail["noticeDeliveryStatus"]) ?? null;
+  const noticeSendError = latestLink?.notice_send_error ?? null;
+  const noticeSentAt = latestLink?.notice_sent_at ?? null;
 
   if (consultation.child_id) {
     const { data: childProfile } = await admin.from("profiles").select("name").eq("id", consultation.child_id).maybeSingle();
@@ -170,6 +187,9 @@ export async function getConsultationCardDetailAction(consultationId: string): P
     contractId,
     contractStatus,
     latestContractVersionHasEnvelope,
+    noticeDeliveryStatus,
+    noticeSendError,
+    noticeSentAt,
   };
 }
 
