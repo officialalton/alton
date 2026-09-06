@@ -62,7 +62,7 @@ describe("TeacherLessonScheduleTab", () => {
     expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
   });
 
-  it("금주 목록에 이번주 수업이 표시된다", () => {
+  it("예정 수업 목록에 수업이 표시된다", () => {
     render(
       <TeacherLessonScheduleTab
         lessons={[lesson]}
@@ -278,11 +278,41 @@ describe("TeacherLessonScheduleTab", () => {
     expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
   });
 
+  it("M4 골든패스 실사용 버그 #3/#4 — '예정 수업 목록'은 이번 주로 제한하지 않고 다음 주 이후 예정 수업도 그대로 보여준다", () => {
+    // 실사용 버그 리포트: 선생님 포털 "수업 일정" 탭의 "금주 목록"(이번 주로 필터링)에
+    // 표시된 날짜 범위(예: 9/6~9/12) 밖의 9/16 수업이 목록에 나타난다는 지적이 있었다.
+    // 제품 오너 결정: "금주" 제한 자체를 없애고 "예정 수업 목록"으로 개명해 오늘 이후
+    // 예정된 모든 수업을 보여주기로 했다 — 그러면 이 시나리오는 애초에 "버그"가 아니라
+    // 기대 동작이 된다. 이 테스트는 이번 주 범위를 벗어난 다음 주 수업도 목록에 그대로
+    // 나타나는지 고정 검증한다.
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-09-08T12:00:00Z"));
+    const nextWeekLesson: TeacherLessonScheduleItem = {
+      ...lesson,
+      reservationId: "r-next-week",
+      sessionId: "s-next-week",
+      startsAt: "2026-09-16T10:00:00Z",
+      endsAt: "2026-09-16T11:00:00Z",
+    };
+    render(
+      <TeacherLessonScheduleTab
+        lessons={[nextWeekLesson]}
+        exceptions={[]}
+        timezone="America/Los_Angeles"
+        onCancel={vi.fn()}
+        onRefresh={vi.fn()}
+        onLoadExternalBusy={vi.fn().mockResolvedValue([])}
+        onStartSession={vi.fn()}
+        onFinalizeSession={vi.fn()}
+        onResolveLateness={vi.fn()}
+      />
+    );
+    expect(screen.getByText("예정 수업 목록")).toBeInTheDocument();
+    expect(screen.getByText(/지훈 · SAT Math/)).toBeInTheDocument();
+    vi.useRealTimers();
+  });
+
   it("M4 UAT #5 — 시간이 지난 정규 수업은 지난 수업으로, 리뷰 미확정 체험 수업은 예정된 수업에 남는다", () => {
-    // 2026-09-06: 기본 뷰("금주 목록")는 실제 현재 시각 기준 "이번 주"로만 걸러낸다 —
-    // 실행 시점이 주 경계(예: 일요일 자정 근처)에 가까우면 "3시간 전" 픽스처가 지난주로
-    // 밀려나 아예 렌더링되지 않는 시각 의존 결함이 있었다(실측 확인). 이 테스트는
-    // 주 경계와 무관하게 항상 같은 주 안에 들어오도록 현재 시각을 화요일 정오로 고정한다.
     vi.useFakeTimers();
     vi.setSystemTime(new Date("2026-09-08T12:00:00Z"));
     const pastRegular: TeacherLessonScheduleItem = {

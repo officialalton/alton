@@ -171,9 +171,15 @@ export default function TeacherLessonScheduleTab({
   const weekGrid = useMemo(() => buildWeekGrid(todayKey), [todayKey]);
   const weekDateKeys = new Set(weekGrid.map((c) => c.dateKey));
 
+  // M4 골든패스 실사용 버그 #3/#4 — "금주 목록"이 실제 이번 주 날짜 범위(weekDateKeys)로
+  // 필터링돼 있었는데도 다음 주 수업이 목록에 나타난다는 지적이 있었고, 제품 오너가
+  // 그 자리에서 아예 "이번 주"라는 제한 자체를 없애고 "오늘 이후 예정된 모든 수업"을
+  // 보여주는 "예정 수업 목록"으로 바꾸기로 했다. 그래서 이번 주 날짜 범위로 거르지
+  // 않고 전체 lessons를 넘긴다 — 과거/미래 분리는 아래 upcomingLessons/pastLessons가
+  // (isPastLesson 기준으로) 그대로 담당한다.
   const visibleLessons = useMemo(() => {
     if (view === "week-list") {
-      return lessons.filter((l) => weekDateKeys.has(dateKeyInTimezone(l.startsAt, timezone)));
+      return lessons;
     }
     if (selectedDateKey) {
       return lessons.filter((l) => dateKeyInTimezone(l.startsAt, timezone) === selectedDateKey);
@@ -511,7 +517,7 @@ export default function TeacherLessonScheduleTab({
               onClick={() => setView(v)}
               className={`text-[11px] font-bold px-2.5 py-1 rounded-full ${view === v ? "bg-ink text-white" : "bg-grey-100 text-grey-500"}`}
             >
-              {v === "week-list" ? "금주 목록" : v === "week" ? "주간" : "월간"}
+              {v === "week-list" ? "예정 수업 목록" : v === "week" ? "주간" : "월간"}
             </button>
           ))}
         </div>
