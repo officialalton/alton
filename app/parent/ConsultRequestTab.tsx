@@ -109,7 +109,7 @@ export default function ConsultRequestTab() {
       <p className="text-[12.5px] text-grey-500 mb-5">
         신규 자녀에 대한 상담을 신청합니다. 자녀 계정 초대는 상담 후 관리자가
         안내해드립니다. 기존 자녀의 고민상담·현황면담 문의는 이 화면 범위 밖입니다
-        (R11에서 지원 예정).
+        `문의` 탭에서 남겨주세요.
       </p>
 
       {submitted && (
