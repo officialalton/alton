@@ -251,7 +251,12 @@ export default function SubjectEnrollmentPanel({
               {(teacherCandidatesBySubject[en.subjectId] ?? []).map((c) => (
                 <button
                   key={c.id}
-                  onClick={() => handleAssignInitial(en.id, c.id, en.subjectId)}
+                  onClick={() => {
+                    // 2026-09-06(UAT 지적): 이름을 누르는 즉시 배정이 확정돼 실수
+                    // 클릭 방지 절차가 없었다 — 확정 전 확인 한 단계를 추가한다.
+                    if (!window.confirm(`${c.name} 선생님을 이 과목에 배정할까요?`)) return;
+                    handleAssignInitial(en.id, c.id, en.subjectId);
+                  }}
                   className="text-[11.5px] font-semibold px-2.5 py-1 rounded-full border-[1.5px] border-grey-200"
                 >
                   {c.name} 배정
