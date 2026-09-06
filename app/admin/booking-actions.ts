@@ -616,6 +616,29 @@ export async function adminFinalizeSessionAsInfraIncident(params: {
   if (error) throw new Error(error.message);
 }
 
+/**
+ * M5-c(2026-09-06) — 선생님 사유로 일부만 제공된 세션(teacher_partial_interruption)을
+ * 관리자가 수동 최종판정한다. 수업권 1장 소진 + 실제 제공 분만 지급 + 미제공분은
+ * makeup_obligations(reason='teacher_partial_interruption')로 이관 + 90분 미만이면 QC 경고.
+ * resolve_teacher_lateness()가 이미 적용된 세션(late_start_minutes 채워짐)에는 DB 함수가
+ * 중복 적용을 거부한다(지각과 부분중단은 서로 다른 사유).
+ */
+export async function adminResolveTeacherPartialInterruption(params: {
+  sessionId: string;
+  actualProvidedMinutes: number;
+  reason: string;
+}): Promise<void> {
+  const { actorUserId } = await requireAdminOrCapability(BOOKING_CAPABILITY);
+  const admin = createAdminClient();
+  const { error } = await admin.rpc("resolve_teacher_partial_interruption", {
+    p_session_id: params.sessionId,
+    p_actual_provided_minutes: params.actualProvidedMinutes,
+    p_actor_id: actorUserId,
+    p_reason: params.reason,
+  });
+  if (error) throw new Error(error.message);
+}
+
 export type MakeupObligationRow = {
   obligationId: string;
   childId: string;

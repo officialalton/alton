@@ -22,6 +22,7 @@ import {
   adminFinalizeLessonSession,
   adminReopenSession,
   adminFinalizeSessionAsInfraIncident,
+  adminResolveTeacherPartialInterruption,
   listOutstandingMakeupObligations,
   adminApplyMakeupTimeToBooking,
   listSessionJudgmentReconciliationTasks,
@@ -102,6 +103,9 @@ export default function BookingReconciliationPanel() {
   const [infraIncidentSessionId, setInfraIncidentSessionId] = useState<string | null>(null);
   const [infraIncidentReasonDraft, setInfraIncidentReasonDraft] = useState("");
   const [infraIncidentMinutesDraft, setInfraIncidentMinutesDraft] = useState("0");
+  const [partialInterruptionSessionId, setPartialInterruptionSessionId] = useState<string | null>(null);
+  const [partialInterruptionReasonDraft, setPartialInterruptionReasonDraft] = useState("");
+  const [partialInterruptionMinutesDraft, setPartialInterruptionMinutesDraft] = useState("");
   const [makeupObligations, setMakeupObligations] = useState<MakeupObligationRow[] | null>(null);
   const [applyingObligationId, setApplyingObligationId] = useState<string | null>(null);
   const [applyReservationIdDraft, setApplyReservationIdDraft] = useState("");
@@ -265,6 +269,28 @@ export default function BookingReconciliationPanel() {
           : "미시작으로 확정했습니다(수업권 hold 복원, 예약 취소 — 학생이 다시 예약할 수 있습니다)."
       );
       setInfraIncidentSessionId(null);
+      await refresh();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setJudgmentBusyId(null);
+    }
+  }
+
+  async function handleResolveTeacherPartialInterruption(sessionId: string) {
+    const minutes = Number(partialInterruptionMinutesDraft);
+    if (!Number.isFinite(minutes) || minutes < 0) {
+      setError("실제 제공 분은 0 이상이어야 합니다.");
+      return;
+    }
+    const reason = partialInterruptionReasonDraft.trim() || "선생님 사유로 일부만 제공";
+    setJudgmentBusyId(sessionId);
+    setError(null);
+    setMessage(null);
+    try {
+      await adminResolveTeacherPartialInterruption({ sessionId, actualProvidedMinutes: minutes, reason });
+      setMessage("선생님 사유 부분중단으로 확정했습니다(실제 제공 분만 지급, 미제공분은 보충시간으로 이관).");
+      setPartialInterruptionSessionId(null);
       await refresh();
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
@@ -633,7 +659,61 @@ export default function BookingReconciliationPanel() {
               >
                 회사·Meet 장애로 확정
               </button>
+              <button
+                disabled={judgmentBusyId === s.sessionId}
+                onClick={() => {
+                  setPartialInterruptionSessionId(s.sessionId === partialInterruptionSessionId ? null : s.sessionId);
+                  setPartialInterruptionReasonDraft("");
+                  setPartialInterruptionMinutesDraft("");
+                }}
+                className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-red/5 text-red disabled:opacity-50"
+              >
+                선생님 사유 부분중단으로 확정
+              </button>
             </div>
+            {partialInterruptionSessionId === s.sessionId && (
+              <div className="mt-3 border-t border-grey-200 pt-3">
+                <p className="text-[11.5px] text-grey-500 mb-2">
+                  선생님 사유로 일부만 제공된 경우(예: 예정 120분 중 80분만 제공) — 수업권은 1장 소진되고,
+                  실제 제공한 분만 지급됩니다. 미제공분은 보충시간(makeup_obligations)으로 자동 이관되고,
+                  실제 제공 시간이 90분 미만이면 QC 경고도 함께 생성됩니다. 이미 지각 처리(당일 연장)가
+                  적용된 세션에는 사용할 수 없습니다(중복 차감 방지).
+                </p>
+                <div className="flex gap-2 items-end mb-2">
+                  <div>
+                    <label className="block text-[11px] font-bold text-grey-500 mb-1">실제 제공 분</label>
+                    <input
+                      type="number"
+                      min={0}
+                      className="w-24 border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[13px]"
+                      value={partialInterruptionMinutesDraft}
+                      onChange={(e) => setPartialInterruptionMinutesDraft(e.target.value)}
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <label className="block text-[11px] font-bold text-grey-500 mb-1">사유</label>
+                    <input
+                      className="w-full border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[13px]"
+                      value={partialInterruptionReasonDraft}
+                      onChange={(e) => setPartialInterruptionReasonDraft(e.target.value)}
+                      placeholder="예: 선생님 사정으로 80분만 진행 후 종료"
+                    />
+                  </div>
+                </div>
+                <div className="flex gap-2 justify-end">
+                  <button onClick={() => setPartialInterruptionSessionId(null)} className="text-[12px] font-semibold text-grey-500">
+                    닫기
+                  </button>
+                  <button
+                    disabled={judgmentBusyId === s.sessionId}
+                    onClick={() => handleResolveTeacherPartialInterruption(s.sessionId)}
+                    className="text-[12px] font-bold text-white bg-red rounded-lg px-3 py-1.5 disabled:opacity-50"
+                  >
+                    확정
+                  </button>
+                </div>
+              </div>
+            )}
             {infraIncidentSessionId === s.sessionId && (
               <div className="mt-3 border-t border-grey-200 pt-3">
                 <p className="text-[11.5px] text-grey-500 mb-2">
