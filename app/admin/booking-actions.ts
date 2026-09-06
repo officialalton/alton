@@ -724,3 +724,65 @@ export async function adminRecompleteSession(params: {
   });
   if (error) throw new Error(error.message);
 }
+
+export type ReconciliationTaskRow = {
+  taskId: string;
+  sessionId: string;
+  priorFinalStatus: string;
+  newFinalStatus: string;
+  priorPayableMinutes: number | null;
+  newPayableMinutes: number | null;
+  currentEntitlementDisposition: string | null;
+  expectedEntitlementDisposition: string | null;
+  requiredEntitlementAdjustmentAmount: number;
+  status: "pending" | "resolved";
+  createdAt: string;
+  resolvedAt: string | null;
+  reason: string | null;
+};
+
+/**
+ * 2026-09-05 — 재판정(reopen_session()→recomplete_session())이 자동 생성한 entitlement 대사
+ * 작업 목록. pending 상태만 관리자 화면에서 바로 반영 대상으로 노출한다(resolved는 이력 확인용).
+ */
+export async function listSessionJudgmentReconciliationTasks(): Promise<ReconciliationTaskRow[]> {
+  await requireAdminOrCapability(BOOKING_CAPABILITY);
+  const admin = createAdminClient();
+  const { data, error } = await admin
+    .from("session_judgment_reconciliation_tasks")
+    .select(
+      "id, session_id, prior_final_status, new_final_status, prior_payable_minutes, new_payable_minutes, current_entitlement_disposition, expected_entitlement_disposition, required_entitlement_adjustment_amount, status, created_at, resolved_at, reason"
+    )
+    .order("created_at", { ascending: false })
+    .limit(200);
+  if (error) throw new Error(error.message);
+  return (data ?? []).map((row) => ({
+    taskId: row.id as string,
+    sessionId: row.session_id as string,
+    priorFinalStatus: row.prior_final_status as string,
+    newFinalStatus: row.new_final_status as string,
+    priorPayableMinutes: row.prior_payable_minutes as number | null,
+    newPayableMinutes: row.new_payable_minutes as number | null,
+    currentEntitlementDisposition: row.current_entitlement_disposition as string | null,
+    expectedEntitlementDisposition: row.expected_entitlement_disposition as string | null,
+    requiredEntitlementAdjustmentAmount: row.required_entitlement_adjustment_amount as number,
+    status: row.status as "pending" | "resolved",
+    createdAt: row.created_at as string,
+    resolvedAt: row.resolved_at as string | null,
+    reason: row.reason as string | null,
+  }));
+}
+
+/**
+ * 2026-09-05 — 대사 작업을 반영한다. required_entitlement_adjustment_amount가 0이 아니면
+ * adjust_entitlement()로 실제 entitlement_ledger 조정을 남긴다(멱등 — resolved 작업은 재반영 불가,
+ * RLS-scoped 클라이언트로 호출해 auth.uid()가 함수 안의 is_admin() 검사를 통과하게 한다).
+ */
+export async function resolveSessionJudgmentReconciliationTask(params: { taskId: string; reason: string }): Promise<void> {
+  const { supabase } = await requireAdminOrCapability(BOOKING_CAPABILITY);
+  const { error } = await supabase.rpc("resolve_session_reconciliation_task", {
+    p_task_id: params.taskId,
+    p_reason: params.reason,
+  });
+  if (error) throw new Error(error.message);
+}

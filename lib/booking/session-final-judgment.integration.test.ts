@@ -276,3 +276,89 @@ describe("recomplete_session() 확장 — 재판정 시 payable_minutes/정산 �
     expect(events).toBe("completed,reopened,recompleted");
   });
 });
+
+describe("2026-09-05 후속 — 재판정 시 entitlement 대사(reconciliation) 작업 자동 생성", () => {
+  it("completed→teacher_no_show 재판정: consume→release 필요분(+1)을 대사 작업으로 적재하고, 반영하면 실제 조정된다", () => {
+    grantRegularEntitlement();
+    const { sessionId, reservationId } = bookSession(regularLessonTypeId, 55, 120);
+    psql(`select finalize_lesson_session('${sessionId}', 'completed', '${TEACHER_ID}', '완료(오판정)');`);
+
+    const grantId = psql(`select grant_id from entitlement_ledger where reservation_id = '${reservationId}' and event_type = 'hold';`);
+    const balanceBefore = psql(`select coalesce(sum(amount),0) from entitlement_ledger where grant_id = '${grantId}';`);
+
+    psql(`
+      set role authenticated;
+      select set_config('request.jwt.claim.sub', '${ADMIN_ID}', false);
+      select reopen_session('${sessionId}', '재검토 필요');
+      select recomplete_session('${sessionId}', 'teacher_no_show', '실제로는 선생님 노쇼였음');
+      reset role;
+    `);
+
+    const taskRow = psql(
+      `select prior_final_status, new_final_status, current_entitlement_disposition, expected_entitlement_disposition,
+              required_entitlement_adjustment_amount, status
+       from session_judgment_reconciliation_tasks where session_id = '${sessionId}';`
+    );
+    const [priorStatus, newStatus, currentDisposition, expectedDisposition, requiredAmount, status] = taskRow.split("|");
+    expect(priorStatus).toBe("completed");
+    expect(newStatus).toBe("teacher_no_show");
+    expect(currentDisposition).toBe("consume");
+    expect(expectedDisposition).toBe("release");
+    expect(requiredAmount).toBe("1");
+    expect(status).toBe("pending");
+
+    const taskId = psql(`select id from session_judgment_reconciliation_tasks where session_id = '${sessionId}';`);
+    psql(`
+      set role authenticated;
+      select set_config('request.jwt.claim.sub', '${ADMIN_ID}', false);
+      select resolve_session_reconciliation_task('${taskId}', '수동 확인 후 반영');
+      reset role;
+    `);
+
+    const balanceAfter = psql(`select coalesce(sum(amount),0) from entitlement_ledger where grant_id = '${grantId}';`);
+    expect(Number(balanceAfter)).toBe(Number(balanceBefore) + 1);
+
+    const resolvedStatus = psql(`select status from session_judgment_reconciliation_tasks where id = '${taskId}';`);
+    expect(resolvedStatus).toBe("resolved");
+
+    // 같은 작업을 다시 반영하려 하면 멱등 가드가 막는다(중복 반영 방지).
+    expect(() =>
+      psql(`
+        set role authenticated;
+        select set_config('request.jwt.claim.sub', '${ADMIN_ID}', false);
+        select resolve_session_reconciliation_task('${taskId}', '다시 반영 시도');
+        reset role;
+      `)
+    ).toThrow(/이미 반영된 대사 작업입니다/);
+
+    // adjust_entitlement()가 한 번만 적용됐는지(멱등성) 잔액으로 다시 확인.
+    const balanceStillSame = psql(`select coalesce(sum(amount),0) from entitlement_ledger where grant_id = '${grantId}';`);
+    expect(balanceStillSame).toBe(balanceAfter);
+  });
+
+  it("payout_items가 이미 paid였으면 금액은 바뀌지 않고 superseded_by_reconciliation_task_id로만 표시된다", () => {
+    grantRegularEntitlement();
+    const { sessionId } = bookSession(regularLessonTypeId, 56, 120);
+    psql(`select finalize_lesson_session('${sessionId}', 'completed', '${TEACHER_ID}', '완료(오판정)');`);
+    const payoutItemId = psql(`select id from payout_items where session_id = '${sessionId}';`);
+    psql(`update payout_items set status = 'paid' where id = '${payoutItemId}';`);
+    const amountBefore = psql(`select amount_minor from payout_items where id = '${payoutItemId}';`);
+
+    psql(`
+      set role authenticated;
+      select set_config('request.jwt.claim.sub', '${ADMIN_ID}', false);
+      select reopen_session('${sessionId}', '재검토 필요');
+      select recomplete_session('${sessionId}', 'teacher_no_show', '실제로는 선생님 노쇼였음');
+      reset role;
+    `);
+
+    const [amountAfter, supersededTaskId] = psql(
+      `select amount_minor, coalesce(superseded_by_reconciliation_task_id::text, '') from payout_items where id = '${payoutItemId}';`
+    ).split("|");
+    expect(amountAfter).toBe(amountBefore); // paid 항목 금액은 그대로 — 즉시 덮어쓰지 않는다.
+    expect(supersededTaskId).not.toBe(""); // 대신 역분개 대상으로 표시만 남는다.
+
+    const taskId = psql(`select id from session_judgment_reconciliation_tasks where session_id = '${sessionId}';`);
+    expect(supersededTaskId).toBe(taskId);
+  });
+});

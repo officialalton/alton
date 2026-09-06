@@ -23,6 +23,8 @@ vi.mock("./booking-actions", () => ({
   adminFinalizeSessionAsInfraIncident: vi.fn(),
   listOutstandingMakeupObligations: vi.fn(),
   adminApplyMakeupTimeToBooking: vi.fn(),
+  listSessionJudgmentReconciliationTasks: vi.fn(),
+  resolveSessionJudgmentReconciliationTask: vi.fn(),
 }));
 
 beforeEach(() => {
@@ -34,6 +36,7 @@ beforeEach(() => {
   vi.mocked(actions.listSessionsNeedingFinalJudgment).mockResolvedValue([]);
   vi.mocked(actions.listRecentlyFinalizedSessions).mockResolvedValue([]);
   vi.mocked(actions.listOutstandingMakeupObligations).mockResolvedValue([]);
+  vi.mocked(actions.listSessionJudgmentReconciliationTasks).mockResolvedValue([]);
 });
 
 describe("BookingReconciliationPanel", () => {
@@ -319,5 +322,41 @@ describe("BookingReconciliationPanel", () => {
     await waitFor(() =>
       expect(actions.adminReopenSession).toHaveBeenCalledWith({ sessionId: "s2", reason: "실제로는 선생님 노쇼" })
     );
+  });
+
+  it("2026-09-05: 대기 중인 대사 작업이 보이고 '반영'을 누르면 resolveSessionJudgmentReconciliationTask가 호출된다", async () => {
+    vi.mocked(actions.listSessionJudgmentReconciliationTasks).mockResolvedValue([
+      {
+        taskId: "task1",
+        sessionId: "s2",
+        priorFinalStatus: "completed",
+        newFinalStatus: "teacher_no_show",
+        priorPayableMinutes: 120,
+        newPayableMinutes: 0,
+        currentEntitlementDisposition: "consume",
+        expectedEntitlementDisposition: "release",
+        requiredEntitlementAdjustmentAmount: 1,
+        status: "pending",
+        createdAt: "2026-09-05T00:00:00Z",
+        resolvedAt: null,
+        reason: "실제로는 선생님 노쇼였음",
+      },
+    ]);
+    vi.mocked(actions.resolveSessionJudgmentReconciliationTask).mockResolvedValue(undefined);
+    render(<BookingReconciliationPanel />);
+    await waitFor(() => expect(screen.getByText("반영 필요")).toBeInTheDocument());
+    fireEvent.click(screen.getByText("반영"));
+    await waitFor(() =>
+      expect(actions.resolveSessionJudgmentReconciliationTask).toHaveBeenCalledWith({
+        taskId: "task1",
+        reason: "관리자 확인 후 반영",
+      })
+    );
+  });
+
+  it("2026-09-05: 대사 작업이 없으면 빈 상태 메시지를 보여준다", async () => {
+    vi.mocked(actions.listSessionJudgmentReconciliationTasks).mockResolvedValue([]);
+    render(<BookingReconciliationPanel />);
+    await waitFor(() => expect(screen.getByText("대사 작업이 없습니다.")).toBeInTheDocument());
   });
 });

@@ -24,6 +24,8 @@ import {
   adminFinalizeSessionAsInfraIncident,
   listOutstandingMakeupObligations,
   adminApplyMakeupTimeToBooking,
+  listSessionJudgmentReconciliationTasks,
+  resolveSessionJudgmentReconciliationTask,
   type ReconciliationRow,
   type NotificationOutboxSummary,
   type IncidentReportAdminRow,
@@ -32,7 +34,23 @@ import {
   type SessionJudgmentRow,
   type SessionOutcome,
   type MakeupObligationRow,
+  type ReconciliationTaskRow,
 } from "./booking-actions";
+
+const FINAL_STATUS_LABEL: Record<string, string> = {
+  completed: "정상 완료",
+  student_no_show: "학생 노쇼",
+  teacher_no_show: "선생님 노쇼",
+  student_cancelled: "학생 취소",
+  teacher_cancelled: "선생님 취소",
+  company_cancelled: "회사 취소",
+  interrupted: "중단(장애)",
+};
+
+const ENTITLEMENT_DISPOSITION_LABEL: Record<string, string> = {
+  consume: "소진(consume)",
+  release: "해제(release)",
+};
 
 const EXTERNAL_CHANGE_STATUS_LABEL: Record<string, string> = {
   time_changed: "Google에서 시간 변경됨",
@@ -88,12 +106,14 @@ export default function BookingReconciliationPanel() {
   const [applyingObligationId, setApplyingObligationId] = useState<string | null>(null);
   const [applyReservationIdDraft, setApplyReservationIdDraft] = useState("");
   const [applyMinutesDraft, setApplyMinutesDraft] = useState("");
+  const [reconciliationTasks, setReconciliationTasks] = useState<ReconciliationTaskRow[] | null>(null);
+  const [resolvingTaskId, setResolvingTaskId] = useState<string | null>(null);
 
   async function refresh() {
     setLoading(true);
     setError(null);
     try {
-      const [reconciliation, outbox, incidents, changes, judgment, finalized, obligations] = await Promise.all([
+      const [reconciliation, outbox, incidents, changes, judgment, finalized, obligations, tasks] = await Promise.all([
         listReconciliationNeededBookings(),
         listNotificationOutboxSummary(),
         listRecentIncidentReports(),
@@ -101,6 +121,7 @@ export default function BookingReconciliationPanel() {
         listSessionsNeedingFinalJudgment(),
         listRecentlyFinalizedSessions(),
         listOutstandingMakeupObligations(),
+        listSessionJudgmentReconciliationTasks(),
       ]);
       setRows(reconciliation);
       setOutboxSummary(outbox);
@@ -109,10 +130,25 @@ export default function BookingReconciliationPanel() {
       setJudgmentRows(judgment);
       setFinalizedRows(finalized);
       setMakeupObligations(obligations);
+      setReconciliationTasks(tasks);
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function handleResolveReconciliationTask(taskId: string) {
+    setResolvingTaskId(taskId);
+    setError(null);
+    try {
+      await resolveSessionJudgmentReconciliationTask({ taskId, reason: "관리자 확인 후 반영" });
+      setMessage("대사 작업을 반영했습니다(entitlement 조정 완료).");
+      await refresh();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setResolvingTaskId(null);
     }
   }
 
@@ -775,6 +811,58 @@ export default function BookingReconciliationPanel() {
                 className="mt-2 text-[11px] font-bold text-ink"
               >
                 미래 예약에 적용
+              </button>
+            )}
+          </div>
+        ))
+      )}
+
+      <h2 className="text-[14px] font-bold text-ink mb-2 mt-8">재판정 대사(reconciliation) 작업</h2>
+      <p className="text-[12px] text-grey-500 mb-3">
+        세션을 재개방(reopen)→재확정(recomplete)하면 payable_minutes/정산 항목은 자동 재계산되지만
+        수업권 소진·해제(entitlement_ledger)는 예약당 1건 제약상 자동으로 뒤집히지 않습니다. 아래는
+        그 차이를 자동 계산한 필수 대사 작업 목록 — "반영"을 누르면 필요한 수업권 조정이 실제로
+        적용됩니다(같은 작업은 한 번만 반영 가능). 이미 지급 완료(paid)된 정산 항목의 금액 자체는
+        여기서 바뀌지 않고 역분개 대상으로 표시만 됩니다.
+      </p>
+      {!reconciliationTasks || reconciliationTasks.length === 0 ? (
+        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">대사 작업이 없습니다.</div>
+      ) : (
+        reconciliationTasks.map((t) => (
+          <div key={t.taskId} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3">
+            <div className="flex items-center justify-between">
+              <div className="text-[13px] font-bold text-ink">
+                {FINAL_STATUS_LABEL[t.priorFinalStatus] ?? t.priorFinalStatus} → {FINAL_STATUS_LABEL[t.newFinalStatus] ?? t.newFinalStatus}
+              </div>
+              <span
+                className={`text-[11px] font-bold px-2 py-1 rounded-full ${
+                  t.status === "resolved" ? "bg-grey-100 text-grey-500" : "bg-red/10 text-red"
+                }`}
+              >
+                {t.status === "resolved" ? "반영 완료" : "반영 필요"}
+              </span>
+            </div>
+            <div className="text-[12px] text-grey-500 mt-1">
+              정산 분: {t.priorPayableMinutes ?? "-"}분 → {t.newPayableMinutes ?? "-"}분 · {formatDateTime(t.createdAt)}
+            </div>
+            <div className="text-[12px] text-grey-500 mt-0.5">
+              수업권 상태: 현재 {t.currentEntitlementDisposition ? ENTITLEMENT_DISPOSITION_LABEL[t.currentEntitlementDisposition] ?? t.currentEntitlementDisposition : "확인 불가"}
+              {" → "}
+              필요 {t.expectedEntitlementDisposition ? ENTITLEMENT_DISPOSITION_LABEL[t.expectedEntitlementDisposition] ?? t.expectedEntitlementDisposition : "관리자 확인 필요(학생 취소 시점 기준 판정 불가)"}
+            </div>
+            {t.requiredEntitlementAdjustmentAmount !== 0 && (
+              <div className="text-[12px] font-bold text-red mt-0.5">
+                필요 조정: {t.requiredEntitlementAdjustmentAmount > 0 ? "+" : ""}
+                {t.requiredEntitlementAdjustmentAmount}장
+              </div>
+            )}
+            {t.status === "pending" && (
+              <button
+                onClick={() => handleResolveReconciliationTask(t.taskId)}
+                disabled={resolvingTaskId === t.taskId}
+                className="mt-2 text-[11px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
+              >
+                {resolvingTaskId === t.taskId ? "반영 중…" : "반영"}
               </button>
             )}
           </div>
