@@ -139,3 +139,19 @@
 - [x] 수정: `personal`을 항상 실제 IANA 값(`profileTimezone ?? 가족 기본값 ?? America/Los_Angeles`)으로만 채우고, 드롭다운 옵션에서 "가족 기본값 사용" 항목 자체를 제거(`TIMEZONE_OPTIONS`만 렌더링). 개인 시간대를 명시적으로 고정했는지는 별도 `hasOverride` state로 추적 — 드롭다운을 바꾸면 자동으로 override 상태가 되고, 별도의 명시적 "개인 설정 해제 (가족 기본값 따르기)" 버튼(override 상태일 때만 노출)을 눌러야만 다시 가족 기본값을 따르는 상태로 복귀. 저장 로직은 override 여부에 따라 `null`/실제값을 분기 저장하도록 유지.
 - [x] 검증: `supabase db reset --local` 성공 / `npx tsc --noEmit` 0 에러 / `npx next build` 성공 / `npx vitest run` 185/186 파일·1242/1243건 통과 — 유일한 실패(`lib/timezone-persistence.integration.test.ts`)는 단독 실행 시 5/5 통과함을 확인(전체 스위트 병렬 실행 시 로컬 DB 공유로 인한 기존 격리 이슈, 이번 변경과 무관).
 - [ ] 브라우저로 Preview에서 실제로 모달을 열어 드롭다운 초기 선택값이 구체적 시간대명(도시명+IANA)으로 보이는지, "개인 설정 해제" 버튼이 의도대로 동작하는지 눈으로 확인하는 것은 이번 세션 범위 밖 — Preview alias 갱신 후 직접 확인 권장.
+
+### 2026-09-06 8차 세션 — 학생/선생님 포털 심층 UAT 8건(#1~#8)
+
+제품 오너가 학생 포털·선생님 포털을 더 깊이 써보며 발견한 8건. `docs/CURRENT.md`의 "2026-09-06(8차)" 절에 조사 근거·구현 상세가 있다.
+
+- [x] **#1 버그(최우선)** — 학생 포털 "선생님" 탭 "매칭된 선생님이 없습니다". 근본 원인: `app/student/teacher-data.ts`가 legacy `enrollments`/`teachers` 테이블(정규 전환 후에만 채워짐)만 조회했고, 체험 수업만 있는 학생은 `subject_enrollments`+`teacher_assignments`(v3, R1/R5) 행만 있어 항상 빈 배열이었다. v3 스키마 기준으로 재작성.
+- [x] **#2 버그** — 선생님 포털 "학생" 탭 "담당 중인 학생이 없습니다". 동일 근본 원인의 대칭 문제 + RLS 갭: `teaches_student()` DB 함수와 `teachers` 테이블 SELECT 정책이 legacy `enrollments`만 확인하고 있었다(반면 `profiles`/`subject_enrollments`/`teacher_assignments` 정책은 이미 v3 인지). 마이그레이션 `20261212000000_m4_teacher_student_v3_visibility_fix.sql`로 두 곳 모두 v3 배정 경로를 OR 조건으로 추가(additive, 기존 접근 축소 없음). psql로 `set role authenticated` + `request.jwt.claims`를 이용해 실제 RLS 통과를 재현 확인함(#1/#2 양방향).
+- [x] **#3 버그** — 선생님 포털 "수업 일정"의 "금주 목록"에 표시 범위 밖(9/16) 수업이 나타남. #4 요구사항으로 그대로 대체해 해결(아래).
+- [x] **#4 UX** — "금주 목록" → "예정 수업 목록"으로 개명, 이번 주 제한 없이 오늘 이후 예정된 모든 수업을 표시하도록 `TeacherLessonScheduleTab.tsx`의 `visibleLessons` 필터 로직 변경(주간/월간 뷰는 그대로 유지).
+- [x] **#5 UX 통합** — 선생님 포털 "수업"(레거시 `legacy_sessions` 기반)과 "수업 일정"(v3 `sessions`/`reservations`) 탭을 하나의 "수업" 네비게이션 항목으로 통합. v3 예약/캘린더 UI를 기본 서브탭으로, 레거시 뷰 고유 기능(수업 기록, 지각·노쇼 신고, 레거시 리뷰)은 "지난 수업 기록·신고" 서브탭으로 흡수(`TeacherShell.tsx`).
+- [x] **#6 UX 통합** — 선생님 포털 "학생"(RosterTab, legacy `enrollments` 기반) 탭 제거, "배정" 탭(`AssignmentsTab.tsx`/`assignments-data.ts`, 원래 v3 기준)으로 통합 — 학년·연락처 표시 추가.
+- [x] **#7 버그** — "배정" 탭에 학생 프로필 진입 링크가 아예 없었음(막혀있던 게 아니라 미구현). "학생 프로필 보기" 펼침(이름/학년/과목/연락처)과 "커리큘럼 보기" 버튼(커리큘럼 탭의 해당 학생 뷰로 이동) 추가.
+- [ ] **#8 설계 정리(구현 보류)** — 커리큘럼-배정 연동. 조사 결과 `teacher_assignments`에 이미 `curriculum_handoff_status`(`not_applicable`/`pending`/`done`) 컬럼과 승계 시 자동으로 `pending`을 세팅하는 트리거(`mark_curriculum_handoff_pending_if_succession`)가 존재하지만, 실제 커리큘럼 템플릿(`teacher_curriculum_templates`)을 가리키는 컬럼은 없다. 최소 개발 범위 제안: `teacher_assignments`에 nullable `curriculum_template_id` 컬럼 additive로 추가하고, 배정 생성 시(신규 배정) 해당 과목의 선생님 커리큘럼 템플릿을 조회해 채우며, 체험→정규 승계 시(`change_teacher_assignment()` 계열) 이 값을 새 배정 행에도 복사하는 정도로 그친다(진도 상태 이관 로직은 범위 밖). 시간 배분상 이번 세션은 설계만 기록하고 구현은 다음 라운드로 미룸.
+- [x] 검증: `supabase db reset --local` 성공(신규 마이그레이션 1건 포함) / `npx tsc --noEmit` 0 에러 / `npx vitest run` 187파일·1243건 전부 통과(신규 3건 포함: `app/student/teacher-data.test.ts`, `app/teacher/assignments-data.test.ts`, `TeacherLessonScheduleTab.test.tsx`의 다음 주 수업 노출 회귀 테스트) / `npx next build` 성공.
+- [x] psql로 실제 로컬 DB에 "세온장/Teacher test1"과 동일한 구조(legacy `enrollments` 없이 `subject_enrollments`+`teacher_assignments`만 존재하는 체험 수업 배정)를 재현해 RLS 통과 여부를 실측 확인함(위 #2 항목 참고).
+- [ ] 브라우저로 실제 non-prod Preview 환경에서 이 특정 학생(세온장)의 "선생님" 탭과 선생님(Teacher test1)의 "학생 없어진 자리(배정 탭)"을 직접 확인하는 것은 이번 세션 범위 밖 — non-prod DB에 마이그레이션 반영 후 Preview alias 갱신하여 직접 확인 권장.
