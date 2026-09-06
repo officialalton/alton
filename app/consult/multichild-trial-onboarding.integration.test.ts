@@ -90,6 +90,85 @@ describe("finalize_trial_onboarding_students() — 신규 보호자, 학생 1명
   });
 });
 
+describe("finalize_trial_onboarding_students() — 버그#1 회귀: 학생별 칸반 카드가 체험수업권 지급을 실제로 시도한다", () => {
+  it("동의·생년월일 확인이 끝난 학생은 카드 생성 즉시 체험수업권이 지급된다(entitlement_grants 생성, grant_status=granted)", () => {
+    const guardianAuthId = createAuthUser("new-guardian-grant-ok");
+    const guardianEmail = psql(`select email from auth.users where id = '${guardianAuthId}';`);
+    const { consultationId, prospectContactId } = createConsultationWithProspect("지급성공상담", guardianEmail);
+    const childAuthId = createAuthUser("grant-ok-child");
+    const { linkId, studentLinkIds } = createLinkWithStudents(consultationId, prospectContactId, guardianEmail, "지급성공보호자", [
+      { name: "지급성공학생", email: `grant-ok-${Date.now()}@example.com`, grade: "9학년" },
+    ]);
+
+    // 이 학생이 이미 Smart Notes 동의 + 관리자 생년월일 확인을 마쳤다고 가정
+    // (finalize 이전에도 학생 profiles 행은 존재할 수 있다 — on conflict do nothing).
+    psql(`insert into profiles (id, role, name) values ('${guardianAuthId}', 'parent', '지급성공보호자') on conflict (id) do nothing;`);
+    psql(`insert into parents (id) values ('${guardianAuthId}') on conflict (id) do nothing;`);
+    psql(`insert into profiles (id, role, name, date_of_birth) values ('${childAuthId}', 'student', '지급성공학생', '2010-01-01')
+          on conflict (id) do update set date_of_birth = excluded.date_of_birth;`);
+    psql(`insert into students (id, status) values ('${childAuthId}', 'pending') on conflict (id) do nothing;`);
+    psql(`update profiles set date_of_birth_verified_at = now() where id = '${childAuthId}';`);
+    psql(`insert into trial_smart_notes_consents (child_id, guardian_id, policy_version) values ('${childAuthId}', '${guardianAuthId}', 'v0');`);
+
+    psql(
+      `select household_id, guardian_id, created_count, failed_count from finalize_trial_onboarding_students(
+         '${linkId}', true, '${guardianAuthId}', '지급성공보호자',
+         '[{"link_student_id":"${studentLinkIds[0]}","child_auth_user_id":"${childAuthId}"}]'::jsonb
+       );`
+    );
+
+    const grantStatus = psql(
+      `select trial_entitlement_grant_status from consultations where source_link_child_id = '${studentLinkIds[0]}';`
+    );
+    expect(grantStatus).toBe("granted");
+    const grantCount = psql(`select count(*) from entitlement_grants where child_id = '${childAuthId}';`);
+    expect(grantCount).toBe("1");
+  });
+
+  it("동의·생년월일 확인이 안 끝난 학생은 카드가 grant_status=failed로 남아 관리자 재처리 버튼 대상이 된다(과거에는 not_applicable로 영원히 방치됨)", () => {
+    const guardianAuthId = createAuthUser("new-guardian-grant-fail");
+    const guardianEmail = psql(`select email from auth.users where id = '${guardianAuthId}';`);
+    const { consultationId, prospectContactId } = createConsultationWithProspect("지급실패상담", guardianEmail);
+    const childAuthId = createAuthUser("grant-fail-child");
+    const { linkId, studentLinkIds } = createLinkWithStudents(consultationId, prospectContactId, guardianEmail, "지급실패보호자", [
+      { name: "지급실패학생", email: `grant-fail-${Date.now()}@example.com`, grade: "9학년" },
+    ]);
+
+    psql(
+      `select household_id, guardian_id, created_count, failed_count from finalize_trial_onboarding_students(
+         '${linkId}', true, '${guardianAuthId}', '지급실패보호자',
+         '[{"link_student_id":"${studentLinkIds[0]}","child_auth_user_id":"${childAuthId}"}]'::jsonb
+       );`
+    );
+
+    const grantStatus = psql(
+      `select trial_entitlement_grant_status from consultations where source_link_child_id = '${studentLinkIds[0]}';`
+    );
+    expect(grantStatus).toBe("failed");
+    expect(grantStatus).not.toBe("not_applicable");
+    const grantCount = psql(`select count(*) from entitlement_grants where child_id = '${childAuthId}';`);
+    expect(grantCount).toBe("0");
+
+    // 관리자가 동의/생년월일 확인을 마친 뒤 admin_retry_trial_entitlement_grant()로
+    // 재처리하면 정상 지급된다.
+    psql(`insert into profiles (id, role, name, date_of_birth) values ('${childAuthId}', 'student', '지급실패학생', '2010-01-01')
+          on conflict (id) do update set date_of_birth = excluded.date_of_birth;`);
+    psql(`insert into students (id, status) values ('${childAuthId}', 'pending') on conflict (id) do nothing;`);
+    psql(`update profiles set date_of_birth_verified_at = now() where id = '${childAuthId}';`);
+    psql(`insert into trial_smart_notes_consents (child_id, guardian_id, policy_version) values ('${childAuthId}', '${guardianAuthId}', 'v0');`);
+
+    // admin_retry_trial_entitlement_grant()는 is_admin()(auth.uid() 기반)을
+    // 요구해 psql 직접 연결로는 호출할 수 없다 — 같은 내부 로직인
+    // grant_trial_entitlement_for_consultation()을 직접 호출해 재처리를 검증한다
+    // (admin_retry_trial_entitlement_grant는 이 함수를 그대로 감싸는 얇은 래퍼).
+    const cardId = psql(`select id from consultations where source_link_child_id = '${studentLinkIds[0]}';`);
+    const retriedGrantId = psql(`select grant_trial_entitlement_for_consultation('${cardId}');`);
+    expect(retriedGrantId.length).toBeGreaterThan(0);
+    const grantCountAfterRetry = psql(`select count(*) from entitlement_grants where child_id = '${childAuthId}';`);
+    expect(grantCountAfterRetry).toBe("1");
+  });
+});
+
 describe("finalize_trial_onboarding_students() — 신규 보호자, 학생 3명", () => {
   it("household·보호자 profile은 1개만 생성하고 학생 3명 모두 같은 household에 연결한다", () => {
     const guardianAuthId = createAuthUser("new-guardian-triple");
