@@ -23,7 +23,12 @@ const CONSULT_CAPABILITY = "manage_consultations";
 
 export type { KanbanStage, ConsultationClosureType } from "./consultation-kanban-constants";
 
-export type KanbanCard = ConsultationListItem & { stage: KanbanStage };
+// 2026-09-06(UAT 지적): 다자녀 온보딩의 원 상담(가족) 카드는 정책상 이력으로
+// 계속 칸반에 남아있는 게 맞다(별도 보드 분리 금지 — 기존 확정 정책). 다만
+// 학생별 카드와 나란히 있으면 관리자가 "왜 안 없어지냐"고 혼동하므로, 최소한
+// 시각적으로 구분(흐리게 + "완료(이력)" 배지)할 수 있게 이 플래그를 함께
+// 내려준다. 삭제·이동은 하지 않는다(카드 자체는 그대로).
+export type KanbanCard = ConsultationListItem & { stage: KanbanStage; is_family_root_with_children: boolean };
 
 /** 개별 상담을 5단계 중 하나로 분류한다. 기존 상태값은 전혀 바꾸지 않고
  * 표시용으로만 압축한다 — 세부 상태(status/outcome/pipeline)는 카드 상세 패널에서
@@ -64,7 +69,18 @@ export async function listKanbanBoardAction(): Promise<KanbanCard[]> {
   const closedIds = new Set((closedIdsData ?? []).map((r) => r.id as string));
   const active = rows.filter((r) => !closedIds.has(r.id) && r.status !== "cancelled" && r.status !== "no_show");
   const stages = await Promise.all(active.map((r) => classifyStage(admin, r)));
-  return active.map((r, i) => ({ ...r, stage: stages[i] }));
+
+  const { data: rootIdsData } = await admin
+    .from("consultations")
+    .select("family_root_consultation_id")
+    .not("family_root_consultation_id", "is", null);
+  const rootIdsWithChildren = new Set((rootIdsData ?? []).map((r) => r.family_root_consultation_id as string));
+
+  return active.map((r, i) => ({
+    ...r,
+    stage: stages[i],
+    is_family_root_with_children: !r.is_child_onboarding_card && rootIdsWithChildren.has(r.id),
+  }));
 }
 
 export type ConsultationCardDetail = {

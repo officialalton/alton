@@ -109,9 +109,19 @@ export default function ConsultationKanbanBoard({
                     key={c.id}
                     data-testid={`kanban-card-${c.id}`}
                     onClick={() => setOpenId(c.id)}
-                    className="w-full text-left border-[1.5px] border-grey-200 rounded-xl px-3 py-2.5 hover:border-ink"
+                    className={`w-full text-left border-[1.5px] rounded-xl px-3 py-2.5 hover:border-ink ${
+                      c.is_family_root_with_children ? "border-grey-100 opacity-55" : "border-grey-200"
+                    }`}
                   >
                     <div className="text-[13px] font-bold text-ink truncate flex items-center gap-1">
+                      {c.is_family_root_with_children && (
+                        <span
+                          title="학생별 카드가 이미 생성된 원 상담(가족) 카드 — 더 이상 진행되지 않는 이력입니다. 정책상 삭제하지 않고 계속 보관합니다."
+                          className="text-[10px] font-semibold text-grey-500 bg-grey-100 rounded px-1 py-0.5 shrink-0"
+                        >
+                          완료(이력)
+                        </span>
+                      )}
                       {c.is_child_onboarding_card && (
                         <span
                           title="다자녀 온보딩으로 생성된 학생별 카드 — 원 상담(가족)은 지난 이력에서 확인"
