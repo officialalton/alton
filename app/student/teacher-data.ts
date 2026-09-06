@@ -1,5 +1,11 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 
+// M4 골든패스 실사용 버그 #1 — 이 파일은 원래 legacy `enrollments`/`teachers` 테이블
+// (정규 전환 후에만 채워짐)을 조회했다. 체험 수업만 진행 중인 학생은 `subject_enrollments`
+// + `teacher_assignments`(v3, R1/R5)만 있고 `enrollments` 행이 없어 "매칭된 선생님이
+// 없습니다"로 잘못 표시됐다. v3 배정 테이블 기준으로 재작성.
+// (관련 RLS 갭은 20261212000000_m4_teacher_student_v3_visibility_fix.sql에서 함께 수정.)
+
 export type TeacherSubject = {
   subjectName: string;
   currentSession: number;
@@ -33,17 +39,48 @@ function extractName(rel: unknown): string {
   return (row as { name?: string } | null)?.name ?? "";
 }
 
+type ActiveAssignment = {
+  teacherId: string;
+  subjectEnrollmentId: string;
+  subjectName: string;
+};
+
+// 학생의 v3 배정(현재 활성/예정) 목록을 (subject_enrollments + teacher_assignments)로
+// 조회한다. 여러 화면에서 재사용.
+async function loadActiveAssignments(
+  supabase: SupabaseClient,
+  studentId: string
+): Promise<ActiveAssignment[]> {
+  const { data: enrollments } = await supabase
+    .from("subject_enrollments")
+    .select("id, subject:subjects(name)")
+    .eq("child_id", studentId);
+  const enrollmentIds = (enrollments ?? []).map((e) => e.id);
+  if (enrollmentIds.length === 0) return [];
+
+  const subjectNameByEnrollment = new Map(
+    (enrollments ?? []).map((e) => [e.id, extractName(e.subject)])
+  );
+
+  const { data: assignments } = await supabase
+    .from("teacher_assignments")
+    .select("teacher_id, subject_enrollment_id")
+    .in("subject_enrollment_id", enrollmentIds)
+    .in("status", ["planned", "active"]);
+
+  return (assignments ?? []).map((a) => ({
+    teacherId: a.teacher_id,
+    subjectEnrollmentId: a.subject_enrollment_id,
+    subjectName: subjectNameByEnrollment.get(a.subject_enrollment_id) ?? "",
+  }));
+}
+
 export async function loadTeacherList(
   supabase: SupabaseClient,
   studentId: string
 ): Promise<TeacherListItem[]> {
-  const { data: enrollments } = await supabase
-    .from("enrollments")
-    .select("teacher_id, current_session, total_sessions, subject:subjects(name)")
-    .eq("student_id", studentId)
-    .eq("status", "active");
-
-  const teacherIds = Array.from(new Set((enrollments ?? []).map((e) => e.teacher_id)));
+  const assignments = await loadActiveAssignments(supabase, studentId);
+  const teacherIds = Array.from(new Set(assignments.map((a) => a.teacherId)));
   if (teacherIds.length === 0) return [];
 
   const { data: profiles } = await supabase
@@ -58,15 +95,40 @@ export async function loadTeacherList(
   const nameById = new Map((profiles ?? []).map((p) => [p.id, p.name]));
   const schoolById = new Map((teacherRows ?? []).map((t) => [t.id, t.school]));
 
+  const enrollmentIds = Array.from(
+    new Set(assignments.map((a) => a.subjectEnrollmentId))
+  );
+  const { data: sessions } = enrollmentIds.length
+    ? await supabase
+        .from("sessions")
+        .select("subject_enrollment_id, final_status")
+        .in("subject_enrollment_id", enrollmentIds)
+    : { data: [] as { subject_enrollment_id: string; final_status: string }[] };
+
+  const totalByEnrollment = new Map<string, number>();
+  const doneByEnrollment = new Map<string, number>();
+  for (const s of sessions ?? []) {
+    totalByEnrollment.set(
+      s.subject_enrollment_id,
+      (totalByEnrollment.get(s.subject_enrollment_id) ?? 0) + 1
+    );
+    if (s.final_status === "completed") {
+      doneByEnrollment.set(
+        s.subject_enrollment_id,
+        (doneByEnrollment.get(s.subject_enrollment_id) ?? 0) + 1
+      );
+    }
+  }
+
   const bySubjectMap = new Map<string, TeacherSubject[]>();
-  for (const e of enrollments ?? []) {
-    const list = bySubjectMap.get(e.teacher_id) ?? [];
+  for (const a of assignments) {
+    const list = bySubjectMap.get(a.teacherId) ?? [];
     list.push({
-      subjectName: extractName(e.subject),
-      currentSession: e.current_session,
-      totalSessions: e.total_sessions,
+      subjectName: a.subjectName,
+      currentSession: doneByEnrollment.get(a.subjectEnrollmentId) ?? 0,
+      totalSessions: totalByEnrollment.get(a.subjectEnrollmentId) ?? 0,
     });
-    bySubjectMap.set(e.teacher_id, list);
+    bySubjectMap.set(a.teacherId, list);
   }
 
   return teacherIds.map((teacherId) => ({
@@ -95,19 +157,16 @@ export async function loadTeacherProfile(
     .eq("id", teacherId)
     .maybeSingle();
 
-  const { data: enrollments } = await supabase
-    .from("enrollments")
-    .select("subject:subjects(name)")
-    .eq("student_id", studentId)
-    .eq("teacher_id", teacherId)
-    .eq("status", "active");
+  const assignments = await loadActiveAssignments(supabase, studentId);
 
   return {
     teacherId,
     name: profile.name,
     school: teacherRow?.school ?? null,
     bio: teacherRow?.bio ?? null,
-    subjects: (enrollments ?? []).map((e) => extractName(e.subject)),
+    subjects: assignments
+      .filter((a) => a.teacherId === teacherId)
+      .map((a) => a.subjectName),
   };
 }
 
@@ -117,29 +176,45 @@ export async function loadTeacherSessionHistory(
   teacherId: string
 ): Promise<TeacherSessionHistoryItem[]> {
   const { data: enrollments } = await supabase
-    .from("enrollments")
+    .from("subject_enrollments")
     .select("id, subject:subjects(name)")
-    .eq("student_id", studentId)
-    .eq("teacher_id", teacherId);
-
+    .eq("child_id", studentId);
   const enrollmentIds = (enrollments ?? []).map((e) => e.id);
+  if (enrollmentIds.length === 0) return [];
+
   const subjectByEnrollment = new Map(
     (enrollments ?? []).map((e) => [e.id, extractName(e.subject)])
   );
 
-  const { data: sessions } = enrollmentIds.length
-    ? await supabase
-        .from("legacy_sessions")
-        .select("id, enrollment_id, session_number, scheduled_at, status")
-        .in("enrollment_id", enrollmentIds)
-        .in("status", ["completed", "no_show"])
-        .order("scheduled_at", { ascending: false })
-    : { data: [] as never[] };
+  const { data: assignments } = await supabase
+    .from("teacher_assignments")
+    .select("subject_enrollment_id")
+    .eq("teacher_id", teacherId)
+    .in("subject_enrollment_id", enrollmentIds);
+  const relevantEnrollmentIds = new Set(
+    (assignments ?? []).map((a) => a.subject_enrollment_id)
+  );
+  if (relevantEnrollmentIds.size === 0) return [];
 
-  return (sessions ?? []).map((s) => ({
-    sessionId: s.id,
-    subjectName: subjectByEnrollment.get(s.enrollment_id) ?? "",
-    sessionNumber: s.session_number,
-    scheduledAt: s.scheduled_at,
-  }));
+  const { data: sessions } = await supabase
+    .from("sessions")
+    .select("id, subject_enrollment_id, final_status, reservation:reservations!sessions_reservation_id_fkey(starts_at)")
+    .eq("teacher_id", teacherId)
+    .in("subject_enrollment_id", Array.from(relevantEnrollmentIds))
+    .in("final_status", ["completed", "no_show"])
+    .order("id", { ascending: false });
+
+  function one<T>(rel: T | T[] | null | undefined): T | null {
+    return Array.isArray(rel) ? (rel[0] ?? null) : (rel ?? null);
+  }
+
+  return (sessions ?? []).map((s, idx) => {
+    const reservation = one(s.reservation as unknown) as { starts_at?: string } | null;
+    return {
+      sessionId: s.id,
+      subjectName: subjectByEnrollment.get(s.subject_enrollment_id) ?? "",
+      sessionNumber: (sessions?.length ?? 0) - idx,
+      scheduledAt: reservation?.starts_at ?? null,
+    };
+  });
 }
