@@ -22,6 +22,7 @@ import {
 import { retryTrialEntitlementGrant } from "./consultation-scheduling-actions";
 import { createNewContractVersionForResend } from "./consultation-actions";
 import LessonReviewAdminEditor from "./LessonReviewAdminEditor";
+import StudentInviteStatusPanel from "./StudentInviteStatusPanel";
 
 const LINK_STATUS_LABEL: Record<TrialOnboardingCandidate["linkStatus"], string> = {
   none: "온보딩 링크 미발급",
@@ -154,6 +155,11 @@ function CandidateCard({
 
       <div className="text-[11.5px] text-grey-500 mt-2">{LINK_STATUS_LABEL[c.linkStatus]}</div>
       {error && <div className="text-[12px] text-red mt-1.5">{error}</div>}
+
+      {/* 온보딩 링크가 소진(=계정 생성 완료)된 뒤에만 의미가 있다 — 그 전에는
+          학생 Auth 계정 자체가 없다. 보호자 대상 "체험 온보딩 안내"와는 별개로,
+          학생 본인에게 가는 비밀번호 설정 초대의 발송 상태를 보여준다. */}
+      {c.linkStatus === "redeemed" && <StudentInviteStatusPanel consultationId={c.consultationId} />}
 
       {/* "review" 단계가 완료됐으면(선생님이 확정) 관리자가 검수·정정할 수 있게 보여준다. */}
       {pipeline?.subjectEnrollmentId && pipeline.steps.find((s) => s.key === "review")?.done && (

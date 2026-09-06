@@ -29,6 +29,18 @@ vi.mock("./consultation-actions", () => ({
   createNewContractVersionForResend: vi.fn(),
 }));
 
+vi.mock("./student-invite-actions", () => ({
+  getStudentInviteStatusAction: vi.fn().mockResolvedValue({
+    linkId: null,
+    studentEmail: null,
+    inviteStatus: null,
+    sentAt: null,
+    error: null,
+    completed: false,
+  }),
+  resendStudentInviteAction: vi.fn(),
+}));
+
 const baseCandidate = {
   consultationId: "c1",
   contactName: "김학부모",
