@@ -279,6 +279,12 @@ describe("TeacherLessonScheduleTab", () => {
   });
 
   it("M4 UAT #5 — 시간이 지난 정규 수업은 지난 수업으로, 리뷰 미확정 체험 수업은 예정된 수업에 남는다", () => {
+    // 2026-09-06: 기본 뷰("금주 목록")는 실제 현재 시각 기준 "이번 주"로만 걸러낸다 —
+    // 실행 시점이 주 경계(예: 일요일 자정 근처)에 가까우면 "3시간 전" 픽스처가 지난주로
+    // 밀려나 아예 렌더링되지 않는 시각 의존 결함이 있었다(실측 확인). 이 테스트는
+    // 주 경계와 무관하게 항상 같은 주 안에 들어오도록 현재 시각을 화요일 정오로 고정한다.
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-09-08T12:00:00Z"));
     const pastRegular: TeacherLessonScheduleItem = {
       ...lesson,
       reservationId: "r-past-regular",
@@ -319,6 +325,7 @@ describe("TeacherLessonScheduleTab", () => {
     expect(screen.queryByText("정규")).not.toBeInTheDocument();
     fireEvent.click(screen.getByText(/지난 수업 \(1\)/));
     expect(screen.getByText("정규")).toBeInTheDocument();
+    vi.useRealTimers();
   });
 
   it("완료된 체험 수업의 '수업 리뷰 작성'을 누르면 팝업이 뜨고, 공개 확정하면 팝업이 닫히고 목록이 갱신된다", async () => {
