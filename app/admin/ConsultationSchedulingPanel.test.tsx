@@ -209,3 +209,44 @@ describe("ConsultationSchedulingPanel — Workspace Events 구독 정지·삭제
     );
   });
 });
+
+// 2026-09-06 — "Calendar 재처리 실행" 등 버튼을 눌러도 성공/실패가 눈에 띄게
+// 표시되지 않고 그대로 머물러 있는 것처럼 보인다는 지적을 고쳤다. 성공/실패
+// 모두 토스트로 몇 초간 명확히 보여야 한다.
+describe("ConsultationSchedulingPanel — 관리자 액션 버튼의 성공/실패 토스트", () => {
+  it("Calendar 재처리 실행을 누르면 성공 토스트가 뜬다", async () => {
+    mockBaseData();
+    vi.mocked(consultActions.retryFailedConsultationCalendarSyncs).mockResolvedValue({ processed: 1 });
+    render(<ConsultationSchedulingPanel />);
+
+    fireEvent.click(await screen.findByRole("button", { name: "Calendar 재처리 실행" }));
+
+    const toast = await screen.findByTestId("admin-toast");
+    expect(toast).toHaveAttribute("data-kind", "success");
+    expect(toast.textContent).toContain("Calendar 재처리 완료");
+  });
+
+  it("Calendar 재처리 실행이 실패하면 에러 내용이 담긴 실패 토스트가 뜬다", async () => {
+    mockBaseData();
+    vi.mocked(consultActions.retryFailedConsultationCalendarSyncs).mockRejectedValue(new Error("네트워크 오류"));
+    render(<ConsultationSchedulingPanel />);
+
+    fireEvent.click(await screen.findByRole("button", { name: "Calendar 재처리 실행" }));
+
+    const toast = await screen.findByTestId("admin-toast");
+    expect(toast).toHaveAttribute("data-kind", "error");
+    expect(toast.textContent).toContain("네트워크 오류");
+  });
+
+  it("만료 임박 구독 갱신 실행을 누르면 성공 토스트가 뜬다", async () => {
+    mockBaseData();
+    vi.mocked(subscriptionActions.retryExpiringWorkspaceEventsSubscriptions).mockResolvedValue({ processed: 1 });
+    render(<ConsultationSchedulingPanel />);
+
+    fireEvent.click(await screen.findByRole("button", { name: "만료 임박 구독 갱신 실행" }));
+
+    const toast = await screen.findByTestId("admin-toast");
+    expect(toast).toHaveAttribute("data-kind", "success");
+    expect(toast.textContent).toContain("만료 임박 구독 갱신 완료");
+  });
+});

@@ -7,6 +7,7 @@
 // 않는 최소 침습 방식).
 
 import { useEffect, useState } from "react";
+import { useToasts, ToastStack } from "./Toast";
 import {
   listConsultationsForAdmin,
   listPendingConsultationRequests,
@@ -186,13 +187,22 @@ export default function ConsultationSchedulingPanel() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [view]);
 
-  async function withBusy(id: string, fn: () => Promise<void>) {
+  const { toasts, showToast, dismiss } = useToasts();
+
+  // 2026-09-06 — "Calendar 재처리 실행" 등 관리자 액션 버튼을 눌러도 성공/실패가
+  // 눈에 띄게 표시되지 않는다는 지적을 고친다. label을 넘기면 성공/실패 모두
+  // 토스트로 몇 초간 명확히 보여준다(기존처럼 상단 error 배너에도 실패 메시지는
+  // 계속 남긴다 — 토스트가 사라진 뒤에도 원인을 확인할 수 있게).
+  async function withBusy(id: string, fn: () => Promise<void>, label?: string) {
     setBusyId(id);
     try {
       await fn();
       await reload();
+      if (label) showToast("success", `${label} 완료`);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "처리에 실패했습니다.");
+      const message = e instanceof Error ? e.message : "처리에 실패했습니다.";
+      setError(message);
+      showToast("error", label ? `${label} 실패 — ${message}` : `처리 실패 — ${message}`);
     } finally {
       setBusyId(null);
     }
@@ -200,6 +210,7 @@ export default function ConsultationSchedulingPanel() {
 
   return (
     <div>
+      <ToastStack toasts={toasts} dismiss={dismiss} />
       {error && <p className="text-[12px] text-red mb-3">{error}</p>}
 
       <section className="mb-8">
@@ -208,13 +219,13 @@ export default function ConsultationSchedulingPanel() {
           <div className="flex gap-2">
             <button
               className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5"
-              onClick={() => withBusy("__retry", async () => { await retryFailedConsultationCalendarSyncs(); })}
+              onClick={() => withBusy("__retry", async () => { await retryFailedConsultationCalendarSyncs(); }, "Calendar 재처리")}
             >
               Calendar 재처리 실행
             </button>
             <button
               className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5"
-              onClick={() => withBusy("__retry_smart_notes", async () => { await reprocessUnlinkedConsultationSmartNotesEvents(); })}
+              onClick={() => withBusy("__retry_smart_notes", async () => { await reprocessUnlinkedConsultationSmartNotesEvents(); }, "Smart Notes 미매칭 재처리")}
             >
               Smart Notes 미매칭 재처리
             </button>
@@ -239,14 +250,14 @@ export default function ConsultationSchedulingPanel() {
                 <button
                   disabled={busyId === c.id}
                   className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
-                  onClick={() => withBusy(c.id, () => acceptConsultationRequest(c.id))}
+                  onClick={() => withBusy(c.id, () => acceptConsultationRequest(c.id), "상담 수락")}
                 >
                   수락(Calendar·Meet 생성)
                 </button>
                 <button
                   disabled={busyId === c.id}
                   className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50"
-                  onClick={() => withBusy(c.id, () => rejectConsultationRequest(c.id, "관리자 판단"))}
+                  onClick={() => withBusy(c.id, () => rejectConsultationRequest(c.id, "관리자 판단"), "상담 거절")}
                 >
                   거절
                 </button>
@@ -351,7 +362,7 @@ export default function ConsultationSchedulingPanel() {
                 <button
                   disabled={busyId === c.id}
                   className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50"
-                  onClick={() => withBusy(c.id, () => cancelConsultationRequest(c.id, "관리자 취소"))}
+                  onClick={() => withBusy(c.id, () => cancelConsultationRequest(c.id, "관리자 취소"), "상담 취소")}
                 >
                   취소
                 </button>
@@ -364,7 +375,7 @@ export default function ConsultationSchedulingPanel() {
                   <button
                     disabled={busyId === c.id}
                     className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50"
-                    onClick={() => withBusy(c.id, () => retryConsultationSmartNotesConfig(c.id))}
+                    onClick={() => withBusy(c.id, () => retryConsultationSmartNotesConfig(c.id), "Smart Notes 재처리")}
                   >
                     Smart Notes 재처리
                   </button>
@@ -373,7 +384,7 @@ export default function ConsultationSchedulingPanel() {
                   <button
                     disabled={busyId === c.id}
                     className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50"
-                    onClick={() => withBusy(c.id, () => retryTrialEntitlementGrant(c.id))}
+                    onClick={() => withBusy(c.id, () => retryTrialEntitlementGrant(c.id), "체험수업권 지급 재처리")}
                   >
                     체험수업권 지급 재처리
                   </button>
@@ -484,13 +495,13 @@ export default function ConsultationSchedulingPanel() {
           <div className="flex gap-2">
             <button
               className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5"
-              onClick={() => withBusy("__renew_subscriptions", async () => { await retryExpiringWorkspaceEventsSubscriptions(); })}
+              onClick={() => withBusy("__renew_subscriptions", async () => { await retryExpiringWorkspaceEventsSubscriptions(); }, "만료 임박 구독 갱신")}
             >
               만료 임박 구독 갱신 실행
             </button>
             <button
               className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5"
-              onClick={() => withBusy("__reconcile_smart_notes", async () => { await runSmartNotesReconciliation(); })}
+              onClick={() => withBusy("__reconcile_smart_notes", async () => { await runSmartNotesReconciliation(); }, "Smart Notes 사후 대조")}
             >
               Smart Notes 사후 대조 실행
             </button>
@@ -583,7 +594,7 @@ export default function ConsultationSchedulingPanel() {
                   rules={rules
                     .filter((r) => r.active)
                     .map((r) => ({ id: r.id, weekday: r.weekday, startTime: r.start_time, endTime: r.end_time }))}
-                  onDeleteRule={(ruleId) => withBusy(ruleId, () => deactivateConsultAvailabilityRule(ruleId))}
+                  onDeleteRule={(ruleId) => withBusy(ruleId, () => deactivateConsultAvailabilityRule(ruleId), "가능시간 삭제")}
                 />
                 <p className="text-[11px] text-grey-500 mt-1">블록을 클릭하면 해당 가능시간이 비활성화됩니다.</p>
               </div>
@@ -597,7 +608,7 @@ export default function ConsultationSchedulingPanel() {
                 {r.active && (
                   <button
                     className="ml-2 underline text-red"
-                    onClick={() => withBusy(r.id, () => deactivateConsultAvailabilityRule(r.id))}
+                    onClick={() => withBusy(r.id, () => deactivateConsultAvailabilityRule(r.id), "가능시간 삭제")}
                   >
                     비활성화
                   </button>
@@ -686,7 +697,7 @@ export default function ConsultationSchedulingPanel() {
               <p key={ex.id} className="text-[12.5px] text-grey-700 mb-1">
                 {ex.exception_date} — {ex.is_closed ? "휴무" : `${ex.start_time}~${ex.end_time} 임시 오픈`}
                 {ex.reason && ` (${ex.reason})`}
-                <button className="ml-2 underline text-red" onClick={() => withBusy(ex.id, () => removeConsultAvailabilityException(ex.id))}>
+                <button className="ml-2 underline text-red" onClick={() => withBusy(ex.id, () => removeConsultAvailabilityException(ex.id), "예외 삭제")}>
                   삭제
                 </button>
               </p>

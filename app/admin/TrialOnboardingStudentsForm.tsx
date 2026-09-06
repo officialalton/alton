@@ -13,6 +13,7 @@ import {
   sendTrialOnboardingNoticeAction,
   type SendTrialOnboardingNoticeResult,
 } from "./trial-onboarding-actions";
+import { useToasts, ToastStack } from "./Toast";
 
 const SIMPLE_EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -49,6 +50,7 @@ export default function TrialOnboardingStudentsForm({
   const [students, setStudents] = useState<TrialOnboardingStudentRow[]>([emptyRow(defaultStudentGrade)]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { toasts, showToast, dismiss } = useToasts();
 
   function updateStudent(index: number, field: keyof TrialOnboardingStudentRow, value: string) {
     setStudents((prev) => prev.map((s, i) => (i === index ? { ...s, [field]: value } : s)));
@@ -149,10 +151,17 @@ export default function TrialOnboardingStudentsForm({
             });
             if (result.status === "failed") {
               setError(`발송 실패(관리자 조치 필요) — ${result.error}`);
+              showToast("error", `발송 실패 — ${result.error}`);
+            } else if (result.status === "sent") {
+              showToast("success", "체험 온보딩 안내 발송 완료");
+            } else if (result.status === "already_sent") {
+              showToast("success", "이미 발송된 안내입니다(중복 발송 안 함)");
             }
             onResult(result);
           } catch (e) {
-            setError(e instanceof Error ? e.message : String(e));
+            const message = e instanceof Error ? e.message : String(e);
+            setError(message);
+            showToast("error", `발송 실패 — ${message}`);
           } finally {
             setBusy(false);
           }
@@ -160,6 +169,7 @@ export default function TrialOnboardingStudentsForm({
       >
         {busy ? "발송 중..." : submitLabel}
       </button>
+      <ToastStack toasts={toasts} dismiss={dismiss} />
     </div>
   );
 }
