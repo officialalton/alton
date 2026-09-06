@@ -16,7 +16,7 @@
   - **카드 상세 진입점**: `app/admin/ConsultationKanbanBoard.test.tsx`에 신규 테스트 추가 — "학생 추가"로 3명(첫째/둘째/셋째)을 입력해 발송하면 `sendTrialOnboardingNoticeAction`이 학생 3명 배열로 **정확히 1번만** 호출됨을 확인(가족당 링크 1개 근거). 기존 단일 학생 필수값 검증·실패 배너 테스트 2건은 컴포넌트 교체 후에도 무수정으로 통과(회귀 없음 확인).
   - **TrialOnboardingPanel 진입점**: `app/admin/TrialOnboardingPanel.test.tsx`에 신규 테스트 추가 — "체험 온보딩 안내 발송" 버튼 클릭 후 "학생 추가"로 2명(첫째/둘째)을 입력해 발송하면 동일한 `sendTrialOnboardingNoticeAction`이 학생 2명 배열로 1번만 호출됨을 확인. 기존 단일 학생 흐름 테스트(체험 진행 확정→안내 발송 버튼 노출, 파이프라인 단계 표시, 계약 발송 차단 사유)는 무수정으로 통과.
   - 두 진입점이 같은 서버 액션을 탄다는 것은 코드 구조(공용 컴포넌트 `TrialOnboardingStudentsForm.tsx` 하나만 `sendTrialOnboardingNoticeAction`을 import·호출, 두 부모 컴포넌트는 더 이상 이 액션을 직접 import하지 않음)와 위 두 신규 테스트가 함께 근거가 된다.
-- **커밋**: `<이 절 작성 후 채움>`, 브랜치 `preview/m4-integration-verification`. main 병합·Production 배포 없음.
+- **커밋**: `ebda707`, 브랜치 `preview/m4-integration-verification`. main 병합·Production 배포 없음.
 - **Vercel Preview**: push 직후 자동 재배포 트리거 여부는 커밋 시각 기준으로만 기록(아래 "non-prod/Preview" 절 참고 — SSO 보호로 실제 콘텐츠 자동 확인은 기존과 동일하게 불가, 제품 오너의 실제 브라우저 로그인 필요).
 
 ## 2026-09-06 검수 지적 정정(학생별 칸반 카드 + 초대 상태 분리)
