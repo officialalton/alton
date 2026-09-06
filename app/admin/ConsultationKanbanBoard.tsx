@@ -43,6 +43,17 @@ const btnPrimary = "text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1
 const btnSecondary = "text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50";
 const errText = "text-[12px] text-red mb-2";
 
+/**
+ * 2026-09-06 — 상담 카드/상세에 상담 시각이 전혀 노출되지 않던 문제 수정.
+ * consultations.starts_at(신청 시 희망 시각)/scheduled_at(수락 후 확정 시각)은
+ * 이미 조회돼 있었지만 화면에 렌더링되지 않고 있었다. 타임존은 명시하지 않아
+ * ConsultForm과 동일하게 브라우저 로컬 시간대로 자동 표시된다.
+ */
+function formatConsultTime(iso: string | null): string {
+  if (!iso) return "";
+  return new Date(iso).toLocaleString("ko-KR", { dateStyle: "medium", timeStyle: "short" });
+}
+
 export default function ConsultationKanbanBoard({
   subjects,
   teacherCandidatesBySubject,
@@ -97,6 +108,11 @@ export default function ConsultationKanbanBoard({
                   >
                     <div className="text-[13px] font-bold text-ink truncate">{c.contact_name}</div>
                     <div className="text-[11px] text-grey-500 truncate">{c.contact_email}</div>
+                    {(c.scheduled_at ?? c.starts_at) && (
+                      <div className="text-[10.5px] text-grey-500">
+                        🗓 {formatConsultTime(c.scheduled_at ?? c.starts_at)}
+                      </div>
+                    )}
                     {c.student_grade && <div className="text-[10.5px] text-grey-400">{c.student_grade}</div>}
                   </button>
                 ))}
@@ -189,6 +205,12 @@ function ConsultationCardDetailPanel({
         <div className="text-[12px] text-grey-500 mb-3">
           {c.contact_email} {c.contact_phone ? `· ${c.contact_phone}` : ""} · 상태: {c.status}
           {c.outcome ? ` · 결과: ${c.outcome}` : ""}
+          {(c.scheduled_at ?? c.starts_at) && (
+            <>
+              <br />
+              🗓 {c.scheduled_at ? "확정 시각" : "희망 시각"}: {formatConsultTime(c.scheduled_at ?? c.starts_at)}
+            </>
+          )}
         </div>
         {error && <p className={errText}>{error}</p>}
 

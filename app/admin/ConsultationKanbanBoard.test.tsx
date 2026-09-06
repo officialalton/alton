@@ -242,3 +242,47 @@ describe("ConsultationKanbanBoard — 체험 온보딩 안내 발송 폼(2026-09
     expect(screen.getByTestId("trial-notice-failed")).toHaveTextContent("SMTP 연결 실패");
   });
 });
+
+describe("2026-09-06: 상담 카드·상세에 상담 시각 노출", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("확정 시각(scheduled_at)이 있으면 카드와 상세 모두에 노출된다", async () => {
+    listKanbanBoardActionMock.mockResolvedValue([
+      { ...cardRow(), starts_at: "2026-09-10T01:00:00Z", scheduled_at: "2026-09-10T01:00:00Z" },
+    ]);
+    getConsultationCardDetailActionMock.mockResolvedValue({
+      ...cardDetail(),
+      consultation: {
+        ...cardDetail().consultation,
+        starts_at: "2026-09-10T01:00:00Z",
+        scheduled_at: "2026-09-10T01:00:00Z",
+      },
+    });
+
+    render(<ConsultationKanbanBoard subjects={subjects} teacherCandidatesBySubject={teacherCandidatesBySubject} />);
+
+    await waitFor(() => expect(screen.getByText(/🗓/)).toBeInTheDocument());
+
+    fireEvent.click(await screen.findByText("김민지"));
+    await screen.findByTestId("consultation-card-detail");
+    expect(screen.getByText(/확정 시각/)).toBeInTheDocument();
+  });
+
+  it("아직 확정 전(starts_at만 있음)이면 '희망 시각'으로 노출된다", async () => {
+    listKanbanBoardActionMock.mockResolvedValue([
+      { ...cardRow(), starts_at: "2026-09-10T01:00:00Z", scheduled_at: null },
+    ]);
+    getConsultationCardDetailActionMock.mockResolvedValue({
+      ...cardDetail(),
+      consultation: { ...cardDetail().consultation, starts_at: "2026-09-10T01:00:00Z", scheduled_at: null },
+    });
+
+    render(<ConsultationKanbanBoard subjects={subjects} teacherCandidatesBySubject={teacherCandidatesBySubject} />);
+
+    fireEvent.click(await screen.findByText("김민지"));
+    await screen.findByTestId("consultation-card-detail");
+    expect(screen.getByText(/희망 시각/)).toBeInTheDocument();
+  });
+});
