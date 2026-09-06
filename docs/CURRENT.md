@@ -63,7 +63,7 @@
 v3 재검증까지 통과해 완전 마감됐다**(제품 오너가 직접 실행·보고, 상세는 위 "M1/R6 —
 Workspace Events 구독 모델 정정 및 실제 Sandbox 재검증 통과" 절) — 사용자 단위 구독
 모델이 실제로 성립함을 확인, 실측 중 발견된 UI 버그 2건은 이 세션에서 정식 수정·커밋
-완료. **M2·M3는 아래 별도 절 기준으로 완료됐다(2026-09-03). M4는 2026-09-03 승인으로 착수해 로컬 구현·검증 완료 — 역할별 UI 폴리싱 및 외부 Sandbox/Preview 통합 검증 대기(아래 "M4 — 상담→체험→정규 전환 통합" 절 참고). M5-a(R7 판정 규칙 코어)는 2026-09-05 완료됐다** — `finalize_lesson_session()`(정상완료/학생·선생님 노쇼 최종판정 통합), `cancel_lesson_booking()` 확장(취소 시 연결 세션도 함께 최종판정), `mark_lesson_session_started()`(scheduled→live), `recomplete_session()` 확장(재판정 시 payable_minutes·정산 항목 재계산), `upsert_session_payout_item()`(세션 스냅샷 시급×payable_minutes로 payout_items 적재)를 신규 마이그레이션(`20261030000000_m5a_session_final_judgment.sql`)으로 추가 — 새 테이블·enum 없이 R1의 `v3_session_final_status`/`payable_minutes`/`session_access_events`, R6의 `session_incident_reports`를 그대로 재사용했다. 4대 규칙(24h+ 취소 release·미소진, 24h미만 학생취소 consume+예약시간지급, 15분노쇼확정 consume+지급, 학생지각후참석 completed와 동일 회계) 전부 구현·psql 직접 검증(`lib/booking/session-final-judgment.integration.test.ts` 9건). Meet 실접속시간(`session_access_events`)은 payable_minutes 계산에서 절대 참조하지 않음을 테스트로 고정. 선생님 UI(`TeacherLessonScheduleTab.tsx` "수업 시작"/"수업 종료(완료)"/"학생 노쇼 확정") + 관리자 UI(`BookingReconciliationPanel.tsx` "세션 최종판정"/"최근 확정된 세션 — 재검토")까지 연결. 완료 취소·재개방(요구사항 11)은 R1의 `reopen_session()`/`recomplete_session()`(append-only 이력)을 그대로 재사용 — `adminFinalizeLessonSession()`이 재개방 이력이 있는 세션은 자동으로 `recomplete_session()`으로 라우팅해 entitlement 중복 소진/해제를 막는다. **entitlement 원장 자체의 disposition(소진↔해제)이 재판정으로 바뀌어야 하는 경우는 예약당 1건 제약상 자동 역전이 불가능해 기존 R4 관리자 조정 화면(EntitlementLedgerTab)으로 수동 처리하도록 남겨뒀다(결정 필요 항목으로 문서화, 코드 주석에도 명시).** M5-b(선생님 지각 보충시간·90분 미만 자동 QC·회사/Meet 장애 시나리오)도 같은 날 이어서 완료됐다 — 상세는 아래 "M5-b(R7 장애·보충시간) completion" 절 참고. 전체 Vitest 1015건·tsc·`supabase db reset --local` 확인, Production/실제 외부 API 호출 0건. 커밋: `70d82b1`(DB 핵심)→`0001448`(서버 액션)→`6e4974d`(선생님 UI)→`0a5266b`(관리자 UI). 상세는 아래 "M1 — 상담 기반 재설계" 절, "M2 — R4 후속(체험수업권)" 절, "M3 — 선생님 배정 종료(termination) 플로우" 절, "M4 — 상담→체험→정규 전환 통합" 절과 `docs/2026-09-03-m1-migration-execution-log.md`/`docs/2026-09-03-m2-migration-execution-log.md`/`docs/2026-09-03-m3-migration-execution-log.md`/`docs/2026-09-03-m4-migration-execution-log.md`. R9(과목 마일스톤 보드)·R11(보호자–관리자 운영 메신저)은 이 실행 순서에 포함되지 않고 각자의 R 섹션에 별도 미착수 항목으로 남아있다.
+완료. **M2·M3는 아래 별도 절 기준으로 완료됐다(2026-09-03). M4는 2026-09-03 승인으로 착수해 로컬 구현·검증 완료 — 역할별 UI 폴리싱 및 외부 Sandbox/Preview 통합 검증 대기(아래 "M4 — 상담→체험→정규 전환 통합" 절 참고). M5-a(R7 판정 규칙 코어)는 2026-09-05 완료됐다** — `finalize_lesson_session()`(정상완료/학생·선생님 노쇼 최종판정 통합), `cancel_lesson_booking()` 확장(취소 시 연결 세션도 함께 최종판정), `mark_lesson_session_started()`(scheduled→live), `recomplete_session()` 확장(재판정 시 payable_minutes·정산 항목 재계산), `upsert_session_payout_item()`(세션 스냅샷 시급×payable_minutes로 payout_items 적재)를 신규 마이그레이션(`20261030000000_m5a_session_final_judgment.sql`)으로 추가 — 새 테이블·enum 없이 R1의 `v3_session_final_status`/`payable_minutes`/`session_access_events`, R6의 `session_incident_reports`를 그대로 재사용했다. 4대 규칙(24h+ 취소 release·미소진, 24h미만 학생취소 consume+예약시간지급, 15분노쇼확정 consume+지급, 학생지각후참석 completed와 동일 회계) 전부 구현·psql 직접 검증(`lib/booking/session-final-judgment.integration.test.ts` 9건). Meet 실접속시간(`session_access_events`)은 payable_minutes 계산에서 절대 참조하지 않음을 테스트로 고정. 선생님 UI(`TeacherLessonScheduleTab.tsx` "수업 시작"/"수업 종료(완료)"/"학생 노쇼 확정") + 관리자 UI(`BookingReconciliationPanel.tsx` "세션 최종판정"/"최근 확정된 세션 — 재검토")까지 연결. 완료 취소·재개방(요구사항 11)은 R1의 `reopen_session()`/`recomplete_session()`(append-only 이력)을 그대로 재사용 — `adminFinalizeLessonSession()`이 재개방 이력이 있는 세션은 자동으로 `recomplete_session()`으로 라우팅해 entitlement 중복 소진/해제를 막는다. **entitlement 원장 자체의 disposition(소진↔해제)이 재판정으로 바뀌어야 하는 경우는 예약당 1건 제약상 자동 역전이 불가능한데, 이 부분은 2026-09-05 검수 보완 라운드에서 `session_judgment_reconciliation_tasks`(재판정 전/후 차이 자동 계산·적재, 관리자 일괄 반영, 멱등)로 개선 완료됐다 — 더 이상 결정 필요 항목이 아니다. 상세는 아래 "M4·M5 검수 보완 라운드" 절 참고.** M5-b(선생님 지각 보충시간·90분 미만 자동 QC·회사/Meet 장애 시나리오)도 같은 날 이어서 완료됐다 — 상세는 아래 "M5-b(R7 장애·보충시간) completion" 절 참고. 전체 Vitest 1015건·tsc·`supabase db reset --local` 확인, Production/실제 외부 API 호출 0건. 커밋: `70d82b1`(DB 핵심)→`0001448`(서버 액션)→`6e4974d`(선생님 UI)→`0a5266b`(관리자 UI). 상세는 아래 "M1 — 상담 기반 재설계" 절, "M2 — R4 후속(체험수업권)" 절, "M3 — 선생님 배정 종료(termination) 플로우" 절, "M4 — 상담→체험→정규 전환 통합" 절과 `docs/2026-09-03-m1-migration-execution-log.md`/`docs/2026-09-03-m2-migration-execution-log.md`/`docs/2026-09-03-m3-migration-execution-log.md`/`docs/2026-09-03-m4-migration-execution-log.md`. R9(과목 마일스톤 보드)·R11(보호자–관리자 운영 메신저)은 이 실행 순서에 포함되지 않고 각자의 R 섹션에 별도 미착수 항목으로 남아있다.
   - **1/N 완료**: 선생님 반복가능시간·날짜별예외·15분버퍼·24h~8주 window, `confirm_lesson_booking()`(예약+세션+entitlement hold 단일 트랜잭션).
   - **2/N 완료**: Calendar/Meet 이벤트+Meet 생성·FreeBusy·취소, 실패해도 예약/hold는 건드리지 않는 재처리 워커(`reconciliation_needed` 포함).
   - **3/N 완료**: 구조적 cutover — `sessions`→`legacy_sessions`(레거시 세션뷰 8파일 14곳 계속 사용), `sessions_v3`→`sessions`(신규 예약이 쓰는 테이블). FK·RLS·인덱스는 rename에 자동 추종, 함수 본문 7개(텍스트 참조라 자동추종 안 됨)는 전부 CREATE OR REPLACE로 갱신 확인. `material_version_id`는 R9 선행조건(학생별 진도 스냅샷) 부재로 의도적으로 비워둠(인터페이스만 유지).
@@ -1030,13 +1030,81 @@ M5-a(판정 규칙 코어)에 이어 R7의 나머지(선생님 지각 당일 연
 
 **R7(수업 상태·출석·정산 근거)이 이것으로 전부 완료됐다.**
 
+## M4·M5 검수 보완 라운드 — 완료(2026-09-05, 제품 오너 코드 리뷰 후 지시)
+
+제품 오너가 M4·M5 상태 문서와 실제 구현을 검수한 뒤 9개 항목을 하나의 라운드로
+지시(R8/R10 착수 보류 조건부). 파일이 겹치지 않는 4개 그룹으로 병렬 진행, 전부
+로컬에서 `git log`/`tsc`/전체 Vitest/`next build`로 독립 재검증 완료.
+
+1. **정산 과지급 버그 — 실제로 재현되고 있었다, 수정 완료.** 선생님 지각·장애로
+   `scheduled_duration_minutes`가 늘어난 뒤, 그 미이행분이 다른 세션에 보충으로
+   이관되면 원 세션과 보충 세션 양쪽에서 전액이 각각 지급돼 이중 지급이 되고
+   있었다. `payable_minutes = scheduled_duration_minutes - late_start_minutes`로
+   수정(학생 귀책은 영향 없음, `late_start_minutes`가 애초에 null). 귀책별
+   원수업+당일연장+향후보충 합산 테스트 5개 시나리오 추가 — 전부 확정 기준
+   그대로 통과 확인(학생귀책 120분 고정, 선생님귀책 원110+보충10=120, 당일
+   연장으로 120 다 채우면 보충 없이 120, 상한 초과 방지, 보충 연결만 하고
+   완료판정 전이면 미반영). 부수 발견: 보충시간이 체험(trial) 예약에도 적용
+   가능했던 정책 위반도 함께 수정(정규수업 전용으로 제한).
+2. **보충시간 정책(30일 만료/발생 선생님 전용/승계 안 함) 재검증** — 위
+   trial-제한 건 외에는 이미 정확히 일치 확인, 변경 없음.
+3. **재판정 자동 대사(reconciliation) 작업** — `session_judgment_reconciliation_tasks`
+   신규(재판정 전/후 entitlement 차이 자동 계산·적재), 관리자가
+   `BookingReconciliationPanel.tsx`에서 확인 후 한 번에 반영(멱등, 중복 반영
+   차단), 기지급 `payout_items`는 금액을 즉시 덮어쓰지 않고
+   `superseded_by_reconciliation_task_id`로 R10 역분개 대상 표시만. 원래 판정·
+   수정 판정·수정자·사유·시각 감사 이력 보존.
+4. **학생 프로필 정책 확정 반영** — 생년월일 최초 1회 자가입력(기존 유지) +
+   **관리자 "확인 완료" 버튼**(확인자·시각만 기록, 복잡한 신원확인 절차 없음) 신설,
+   **체험수업권 자동 지급 시점에 관리자 확인 게이트 추가**(미확인 학생은 체험수업권
+   자체가 지급 안 됨). SAT 미입력은 **null**로 저장(기존 0인 행은 실제 0점인지
+   미입력인지 구분 불가하므로 오픈 전 상태를 전제로 임의 변환하지 않고 그대로
+   보존, 앞으로의 입력만 null/0 구분). GPA는 척도(`gpa_scale`: 4.0/4.3/4.5/5.0)
+   함께 저장.
+5. **체험 리뷰 카테고리 5개 — 현행 유지 확정.** 변경 없음, 스냅샷·버전관리·
+   데이터 이관 없음(운영 이력이 없어 불필요) — 더 이상 결정 필요 항목 아님.
+6. **학생 이메일/초대 운영 누락 보완** — 기본 흐름(prospect 이메일=보호자 계정,
+   학생 이메일 필수+비밀번호 설정 초대로 검증)은 재설계 없이 그대로, 운영
+   누락만 보완: 상담 칸반 온보딩 폼에서 필수값 비었거나 이메일 형식 틀리면
+   발송 버튼 비활성화 + 서버에서도 재검증, 발송 실패는 이미 `notice_delivery_status`
+   로 기록되고 있었으나 관리자 화면에 노출이 안 돼 있던 것을 카드 상세에 실패
+   배너로 노출, 재발송 멱등성(중복 계정 생성 안 함)은 이미 구현돼 있었음을
+   확인만.
+7. **계정 병합 — `session_late_extensions` 조사 결과: 이미 안전했다.** 이 테이블은
+   `sessions`/`makeup_obligations`를 통한 간접 참조만 갖고 있고 그 상위 테이블의
+   소유권 컬럼은 `merge_accounts()`가 이미 갱신한다 — psql 트랜잭션으로 실제
+   병합 시나리오를 만들어 검증 완료(간접 참조라 자동 반영됨). `actor_profile_id`
+   (그 연장을 실제로 합의한 사람)는 역사적 행위자 정보라 병합해도 원본 유지가
+   맞다는 기존 원칙과 일치 — **코드 변경 없음, 조사만으로 결론.**
+8. **문서 정합성** — 이 절과 마스터 로드맵 R7(체크박스 전체 [x] 전환)·R8(세션뷰
+   cutover 포함 명시)·R10(선생님 지급뿐 아니라 구매·환불·차지백·대사·역분개
+   전부 포함 명시) 섹션, `docs/2026-09-05-m4-m5-status-for-planner.md` 갱신
+   완료 — M4는 로컬 외에 Vercel Preview·Google Sandbox·DocuSign Sandbox·Stripe
+   TEST UAT까지 수행됐다는 사실과 M5(R7)는 로컬 DB·테스트로만 검증됐다는 사실을
+   구분 표기, 결정 완료 항목은 결정 필요에서 제거.
+   **Vercel `VERCEL_AUTOMATION_BYPASS_SECRET`/임시 Stripe Preview 웹훅 잔존 여부는
+   이번 세션에서 확인 불가** — 이 로컬 세션에 Vercel/Stripe CLI나 대시보드
+   접근 권한이 없다(둘 다 `command not found`). 2026-09-02 시점 기록(위 R4 절)
+   상으로는 Stripe 계정에 UAT용 임시 Preview 웹훅 2개가 있었으나, 지금 시점
+   실제 존재 여부는 대시보드 로그인이 가능한 사람이 직접 확인해야 한다.
+- **검증**: `supabase db reset --local`(마이그레이션 11개 클린 적용), 전체
+  Vitest 163개 파일·1052건 통과, `tsc --noEmit` 클린, `next build` 클린(exit 0),
+  작업트리는 문서 파일 1개(`docs/2026-09-05-m4-m5-status-for-planner.md`) 외
+  전부 커밋됨.
+- **남은 blocker**: 없음(이번 라운드 범위 내). 기존 정식 오픈 전 blocker(환불
+  산식 관할별 법률 검토, 회사 전자승인 법률 적합성, Production Stripe 웹훅
+  미등록 등)는 그대로 유지.
+- 로컬 git commit까지만, push 없음. 전체 커밋(순서대로): `9255b37`(보충시간
+  정책 확정 이전 커밋, 참고)→`5beeebc`→`fe87008`→`8806815`→`52b998a`→`c861a48`→
+  `e61f79b`→`c539400`.
+
 ## 잔여 R 실행계획(2026-09-05 확정) — 다음은 R8∥R10부터
 
-M4·R7(M5-a+M5-b) 전부 완료. **다음 착수는 R8∥R10 병렬**(핵심 수업 공간 신뢰성 /
-해당 R10 대상) — 상세 순서·범위·병렬화 근거·개발 효율화 원칙은
-`docs/2026-08-29-master-roadmap-v3.md`의 "근접 실행계획" 절 M5~M10에 확정돼 있다
-(이 문서에 중복 작성하지 않음). 요약: `M5 R7(완료) → M6 R8∥R10(병렬) → M7 R9 →
-M8 R11 → M9 R12 → M10 R13(오픈)`.
+M4·R7(M5-a+M5-b) + 위 검수 보완 라운드 전부 완료. **다음 착수는 R8∥R10 병렬**
+(핵심 수업 공간 신뢰성 / 해당 R10 대상) — 상세 순서·범위·병렬화 근거·개발
+효율화 원칙은 `docs/2026-08-29-master-roadmap-v3.md`의 "근접 실행계획" 절
+M5~M10에 확정돼 있다(이 문서에 중복 작성하지 않음). 요약: `M5 R7(완료) →
+M6 R8∥R10(병렬) → M7 R9 → M8 R11 → M9 R12 → M10 R13(오픈)`.
 
 ## 다음 R 착수 시 읽을 문서
 
