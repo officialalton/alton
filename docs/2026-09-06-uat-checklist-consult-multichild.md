@@ -155,3 +155,12 @@
 - [x] 검증: `supabase db reset --local` 성공(신규 마이그레이션 1건 포함) / `npx tsc --noEmit` 0 에러 / `npx vitest run` 187파일·1243건 전부 통과(신규 3건 포함: `app/student/teacher-data.test.ts`, `app/teacher/assignments-data.test.ts`, `TeacherLessonScheduleTab.test.tsx`의 다음 주 수업 노출 회귀 테스트) / `npx next build` 성공.
 - [x] psql로 실제 로컬 DB에 "세온장/Teacher test1"과 동일한 구조(legacy `enrollments` 없이 `subject_enrollments`+`teacher_assignments`만 존재하는 체험 수업 배정)를 재현해 RLS 통과 여부를 실측 확인함(위 #2 항목 참고).
 - [ ] 브라우저로 실제 non-prod Preview 환경에서 이 특정 학생(세온장)의 "선생님" 탭과 선생님(Teacher test1)의 "학생 없어진 자리(배정 탭)"을 직접 확인하는 것은 이번 세션 범위 밖 — non-prod DB에 마이그레이션 반영 후 Preview alias 갱신하여 직접 확인 권장.
+
+### 2026-09-06 9차 세션 — "수업 종료" #441 마스킹 버그 수정 + "수업 시작" Meet 자동 입장 추가
+
+제품 오너가 선생님 포털 "수업" 탭 카드를 클릭해보며 발견한 2건. `docs/CURRENT.md`의 "2026-09-06 선생님 포털 '수업' 탭 '수업 종료' #441 마스킹 버그 수정" 절에 상세 근거가 있다.
+
+- [x] **#1 버그** — "수업 종료(완료)" 버튼을 누르면 "Minified React error #441"이 그대로 렌더링. 원인: `app/teacher/lesson-schedule-actions.ts`의 `startMyLessonSession`/`finalizeMyLessonSession`/`resolveMyLessonLateness`/`cancelMyLessonScheduleBooking`이 검증 실패·RPC 에러를 전부 throw했고, Next.js가 production에서 Server Action의 미처리 예외를 이 문구로 마스킹함(`app/admin/trial-onboarding-actions.ts`의 앞선 수정, `e1ea9f2`와 동일 패턴). 로컬 psql로 두 시나리오 모두 실제 재현: (a) `mark_lesson_session_started()` 없이 `scheduled` 상태에서 바로 `finalize_lesson_session(..., 'completed', ...)` 호출 → "수업이 아직 시작되지 않았습니다..." SQL 예외, (b) 시작 후 예약 종료 시각 전에 `completed` 호출 → "조기 종료 사유가 필요합니다..." SQL 예외. 특히 `TeacherLessonScheduleTab.tsx`는 (b) 메시지를 문자열로 매칭해 확인 다이얼로그를 띄우는 로직이 있었는데, production에서는 그 메시지 자체가 마스킹되어 이 분기가 전혀 동작할 수 없었다. 네 함수 모두 `ActionResult`(`{ ok: true } | { ok: false; error }`)를 반환하도록 변경(예외 전파 없음), 컴포넌트 핸들러를 result 체크 기반으로 재작성.
+- [x] **#2 기능 누락** — "수업 시작"을 눌러도 Meet로 자동 입장하지 않음(옆의 "Meet 입장" 링크는 별도 존재). `handleStartSession`에서 클릭 즉시 동기적으로 빈 탭을 열어두고(팝업 차단 회피), `startMyLessonSession()` 성공 시 그 탭의 `location.href`를 `lesson.googleMeetLink`로 이동(실패 시 빈 탭은 닫음). 학생 포털(`app/student/LessonsTab.tsx`)의 "수업 입장"은 내부 `/session/[id]` 라우팅 방식이라 이 서버 액션+Meet 링크 조합 패턴과 구조가 달라 변경 대상에서 제외.
+- [x] 검증: `supabase status`로 로컬 DB 포트(54422) 확인 후 `supabase db reset --local` 성공(신규 마이그레이션 없음) / psql로 두 실패 시나리오 실측 재현(수정 전) / `npx tsc --noEmit` 0 에러 / `npx vitest run app/teacher/TeacherLessonScheduleTab.test.tsx` 19건(신규 3건 포함) 통과 / `npx vitest run`(전체) 187파일·1246건 전부 통과 / `npx next build` 성공.
+- [ ] 브라우저로 실제 Preview에서 "수업 시작" 클릭 시 새 탭이 실제로 Meet 화면으로 이동하는지(팝업 차단 설정에 따라 다를 수 있음), "수업 종료" 클릭 시 마스킹 없이 실제 한국어 에러 메시지가 보이는지 눈으로 확인하는 것은 이번 세션 범위 밖 — Preview alias 갱신 후 직접 확인 권장.

@@ -14,6 +14,19 @@ import { listTeacherExternalBusyBlocks, type ExternalBusyBlock } from "@/lib/boo
 
 export type { TeacherLessonScheduleItem, ExternalBusyBlock };
 
+/**
+ * 2026-09-06(#441 마스킹 버그 수정) — 선생님 포털 "수업" 탭에서 "수업 종료(완료)" 버튼을
+ * 누르면 화면에 "Minified React error #441"이 그대로 뜨던 버그의 원인: 이 아래 여러
+ * 서버 액션이 검증 실패·RPC 에러를 throw했고, Next.js가 production에서 Server Action의
+ * 미처리 예외를 이 일반화된 문구로 마스킹한다(app/admin/trial-onboarding-actions.ts의
+ * 2026-09-06 실측 사례, workspace-actions.ts의 2026-09-01 실측 사례와 동일 패턴). 게다가
+ * 이 화면(TeacherLessonScheduleTab)은 조기 종료처럼 "예상된" 에러의 메시지 문자열을
+ * 클라이언트에서 매칭해 확인 다이얼로그를 띄우는데, production에서 그 메시지 자체가
+ * 마스킹되면 이 분기도 절대 동작하지 않는다. 항상 { ok, error } 형태로 반환해 예외를
+ * 전파하지 않는다(Next.js 공식 권장 패턴).
+ */
+export type ActionResult = { ok: true } | { ok: false; error: string };
+
 export async function listMyLessonSchedule(): Promise<TeacherLessonScheduleItem[]> {
   const { user, supabase } = await requireUser();
   return loadTeacherLessonSchedule(supabase, user.id);
@@ -42,34 +55,44 @@ export async function listMyExternalBusyBlocks(params: { rangeStart: string; ran
  * 클라이언트로 재확인한 뒤에만 취소한다(app/parent/booking-actions.ts의
  * assertReservationBelongsToChild와 동일한 목적, teacher_id 기준 변형).
  */
-export async function cancelMyLessonScheduleBooking(params: { reservationId: string; reason: string }): Promise<void> {
-  const { user } = await requireUser();
-  const admin = createAdminClient();
-  const { data } = await admin.from("reservations").select("owner_profile_id").eq("id", params.reservationId).maybeSingle();
-  if (!data || data.owner_profile_id !== user.id) {
-    throw new Error("본인 수업만 취소할 수 있습니다.");
+export async function cancelMyLessonScheduleBooking(params: { reservationId: string; reason: string }): Promise<ActionResult> {
+  try {
+    const { user } = await requireUser();
+    const admin = createAdminClient();
+    const { data } = await admin.from("reservations").select("owner_profile_id").eq("id", params.reservationId).maybeSingle();
+    if (!data || data.owner_profile_id !== user.id) {
+      return { ok: false, error: "본인 수업만 취소할 수 있습니다." };
+    }
+    await cancelLessonBooking({
+      reservationId: params.reservationId,
+      cancelledByRole: "teacher",
+      cancelledById: user.id,
+      reason: params.reason,
+    });
+    return { ok: true };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : String(e) };
   }
-  return cancelLessonBooking({
-    reservationId: params.reservationId,
-    cancelledByRole: "teacher",
-    cancelledById: user.id,
-    reason: params.reason,
-  });
 }
 
 /**
  * M5-a — 수업 시작("진행중") 버튼. 본인 세션인지 admin 클라이언트로 재확인한 뒤
  * mark_lesson_session_started()(scheduled→live, actual_start_at 기록)를 호출한다.
  */
-export async function startMyLessonSession(sessionId: string): Promise<void> {
-  const { user } = await requireUser();
-  const admin = createAdminClient();
-  const { data } = await admin.from("sessions").select("teacher_id").eq("id", sessionId).maybeSingle();
-  if (!data || data.teacher_id !== user.id) {
-    throw new Error("본인 수업만 시작할 수 있습니다.");
+export async function startMyLessonSession(sessionId: string): Promise<ActionResult> {
+  try {
+    const { user } = await requireUser();
+    const admin = createAdminClient();
+    const { data } = await admin.from("sessions").select("teacher_id").eq("id", sessionId).maybeSingle();
+    if (!data || data.teacher_id !== user.id) {
+      return { ok: false, error: "본인 수업만 시작할 수 있습니다." };
+    }
+    const { error } = await admin.rpc("mark_lesson_session_started", { p_session_id: sessionId, p_actor_id: user.id });
+    if (error) return { ok: false, error: error.message };
+    return { ok: true };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : String(e) };
   }
-  const { error } = await admin.rpc("mark_lesson_session_started", { p_session_id: sessionId, p_actor_id: user.id });
-  if (error) throw new Error(error.message);
 }
 
 export type TeacherLessonOutcome = "completed" | "student_no_show";
@@ -92,22 +115,27 @@ export async function finalizeMyLessonSession(params: {
    * 아니라 resolveMyLessonPartialInterruption 등 전용 경로를 써야 하며, DB가 강제한다).
    */
   earlyEndReason?: "student_reason";
-}): Promise<void> {
-  const { user } = await requireUser();
-  const admin = createAdminClient();
-  const { data } = await admin.from("sessions").select("teacher_id").eq("id", params.sessionId).maybeSingle();
-  if (!data || data.teacher_id !== user.id) {
-    throw new Error("본인 수업만 종료할 수 있습니다.");
+}): Promise<ActionResult> {
+  try {
+    const { user } = await requireUser();
+    const admin = createAdminClient();
+    const { data } = await admin.from("sessions").select("teacher_id").eq("id", params.sessionId).maybeSingle();
+    if (!data || data.teacher_id !== user.id) {
+      return { ok: false, error: "본인 수업만 종료할 수 있습니다." };
+    }
+    const { error } = await admin.rpc("finalize_lesson_session", {
+      p_session_id: params.sessionId,
+      p_outcome: params.outcome,
+      p_actor_id: user.id,
+      p_reason: params.reason,
+      p_teacher_fault_provided_minutes: params.teacherFaultProvidedMinutes ?? null,
+      p_early_end_reason: params.earlyEndReason ?? null,
+    });
+    if (error) return { ok: false, error: error.message };
+    return { ok: true };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : String(e) };
   }
-  const { error } = await admin.rpc("finalize_lesson_session", {
-    p_session_id: params.sessionId,
-    p_outcome: params.outcome,
-    p_actor_id: user.id,
-    p_reason: params.reason,
-    p_teacher_fault_provided_minutes: params.teacherFaultProvidedMinutes ?? null,
-    p_early_end_reason: params.earlyEndReason ?? null,
-  });
-  if (error) throw new Error(error.message);
 }
 
 /**
@@ -121,19 +149,24 @@ export async function resolveMyLessonLateness(params: {
   lateMinutes: number;
   agreedExtendMinutes: number;
   reason: string;
-}): Promise<void> {
-  const { user } = await requireUser();
-  const admin = createAdminClient();
-  const { data } = await admin.from("sessions").select("teacher_id").eq("id", params.sessionId).maybeSingle();
-  if (!data || data.teacher_id !== user.id) {
-    throw new Error("본인 수업만 연장할 수 있습니다.");
+}): Promise<ActionResult> {
+  try {
+    const { user } = await requireUser();
+    const admin = createAdminClient();
+    const { data } = await admin.from("sessions").select("teacher_id").eq("id", params.sessionId).maybeSingle();
+    if (!data || data.teacher_id !== user.id) {
+      return { ok: false, error: "본인 수업만 연장할 수 있습니다." };
+    }
+    const { error } = await admin.rpc("resolve_teacher_lateness", {
+      p_session_id: params.sessionId,
+      p_late_minutes: params.lateMinutes,
+      p_agreed_extend_minutes: params.agreedExtendMinutes,
+      p_actor_id: user.id,
+      p_reason: params.reason,
+    });
+    if (error) return { ok: false, error: error.message };
+    return { ok: true };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : String(e) };
   }
-  const { error } = await admin.rpc("resolve_teacher_lateness", {
-    p_session_id: params.sessionId,
-    p_late_minutes: params.lateMinutes,
-    p_agreed_extend_minutes: params.agreedExtendMinutes,
-    p_actor_id: user.id,
-    p_reason: params.reason,
-  });
-  if (error) throw new Error(error.message);
 }

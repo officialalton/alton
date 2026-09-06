@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import type { TeacherLessonScheduleItem, ExternalBusyBlock } from "./lesson-schedule-actions";
+import type { TeacherLessonScheduleItem, ExternalBusyBlock, ActionResult } from "./lesson-schedule-actions";
 import type { AvailabilityExceptionRow } from "./availability-actions";
 import MonthCalendar, { type DayBadge } from "@/app/components/MonthCalendar";
 import { dateKeyInTimezone, dateKeysCoveredByInterval, buildWeekGrid, todayKeyInTimezone } from "@/lib/calendar-date-utils";
@@ -61,16 +61,18 @@ export type TeacherLessonScheduleTabProps = {
   onLoadExternalBusy: (params: { rangeStart: string; rangeEnd: string }) => Promise<ExternalBusyBlock[]>;
   // M5-a(R7) — 수업 시작/종료. finalize의 outcome은 선생님이 직접 판정할 수 있는
   // completed/student_no_show만(본인 노쇼는 관리자 전용).
-  onStartSession: (sessionId: string) => Promise<void>;
+  // 2026-09-06(#441 마스킹 버그 수정) — 예외를 throw하지 않고 항상 ActionResult를
+  // 반환한다(production에서 Server Action 예외가 마스킹되는 문제 회피, 아래 handle* 참고).
+  onStartSession: (sessionId: string) => Promise<ActionResult>;
   onFinalizeSession: (params: {
     sessionId: string;
     outcome: "completed" | "student_no_show";
     reason: string;
     earlyEndReason?: "student_reason";
-  }) => Promise<void>;
+  }) => Promise<ActionResult>;
   // M5-b(R7) — 진행 중(live)인 수업에서 선생님 지각분을 당일 상호 합의로 연장(가능한
   // 만큼)하고, 나머지는 자동으로 보충시간(makeup_obligations)으로 이관한다.
-  onResolveLateness: (params: { sessionId: string; lateMinutes: number; agreedExtendMinutes: number; reason: string }) => Promise<void>;
+  onResolveLateness: (params: { sessionId: string; lateMinutes: number; agreedExtendMinutes: number; reason: string }) => Promise<ActionResult>;
 };
 
 export default function TeacherLessonScheduleTab({
@@ -272,7 +274,7 @@ export default function TeacherLessonScheduleTab({
             {lesson.finalStatus === "scheduled" && (
               <button
                 disabled={sessionActionBusyId === lesson.sessionId}
-                onClick={() => handleStartSession(lesson.sessionId)}
+                onClick={() => handleStartSession(lesson.sessionId, lesson.googleMeetLink)}
                 className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-ink text-white disabled:opacity-50"
               >
                 수업 시작
@@ -422,13 +424,28 @@ export default function TeacherLessonScheduleTab({
     }
   }
 
-  async function handleStartSession(sessionId: string) {
+  async function handleStartSession(sessionId: string, meetLink: string | null) {
+    // 2026-09-06(UAT — "수업 시작" 후 Meet 자동 입장 누락) — 팝업 차단을 피하려면 클릭
+    // 핸들러 안에서 동기적으로 새 탭을 열어야 한다(서버 액션 응답을 기다린 뒤 열면
+    // 대부분의 브라우저가 사용자 제스처와 분리된 window.open으로 간주해 차단한다).
+    // 먼저 빈 탭을 열어두고, 시작이 실제로 성공했을 때만 그 탭의 위치를 Meet 링크로
+    // 바꾼다(실패 시에는 빈 탭을 바로 닫는다).
+    const meetTab = meetLink ? window.open("", "_blank", "noopener,noreferrer") : null;
     setSessionActionBusyId(sessionId);
     setError(null);
     try {
-      await onStartSession(sessionId);
+      const result = await onStartSession(sessionId);
+      if (!result.ok) {
+        meetTab?.close();
+        setError(result.error);
+        return;
+      }
+      if (meetLink && meetTab) {
+        meetTab.location.href = meetLink;
+      }
       await onRefresh();
     } catch (e) {
+      meetTab?.close();
       setError(e instanceof Error ? e.message : String(e));
     } finally {
       setSessionActionBusyId(null);
@@ -449,12 +466,16 @@ export default function TeacherLessonScheduleTab({
     setSessionActionBusyId(sessionId);
     setError(null);
     try {
-      await onResolveLateness({
+      const result = await onResolveLateness({
         sessionId,
         lateMinutes,
         agreedExtendMinutes,
         reason: "선생님 지각 당일 상호 합의 연장",
       });
+      if (!result.ok) {
+        setError(result.error);
+        return;
+      }
       setLatenessSessionId(null);
       await onRefresh();
     } catch (e) {
@@ -468,39 +489,45 @@ export default function TeacherLessonScheduleTab({
     setSessionActionBusyId(sessionId);
     setError(null);
     try {
-      await onFinalizeSession({
+      const result = await onFinalizeSession({
         sessionId,
         outcome,
         reason: outcome === "completed" ? "선생님 수업 종료" : "선생님 확인 — 학생 15분 이상 미접속",
       });
-      setNoShowConfirmingSessionId(null);
-      await onRefresh();
-    } catch (e) {
-      const message = e instanceof Error ? e.message : String(e);
-      // 2026-09-06: 예약 종료시각 전 조기 완료는 사유가 필요하다(서버가 최종 강제).
-      // 학생 사유(조퇴 등)인 경우에만 이 화면에서 바로 확인 후 재시도한다 — 선생님/회사
-      // 귀책 조기종료는 "지각 당일 연장"이나 관리자 장애 판정 경로를 안내한다.
-      if (message.includes("조기 종료 사유가 필요합니다") && outcome === "completed") {
-        const confirmed = window.confirm(
-          "예약 종료 시각이 아직 되지 않았습니다. 학생 사유(조퇴 등)로 지금 완료 처리하시겠습니까?\n\n선생님 귀책으로 일찍 끝난 경우 '지각 당일 연장'을, 회사·Meet 장애인 경우 관리자에게 장애 판정을 요청해주세요."
-        );
-        if (confirmed) {
-          try {
-            await onFinalizeSession({
+      if (!result.ok) {
+        // 2026-09-06(#441 마스킹 버그 수정) — 예약 종료시각 전 조기 완료는 사유가
+        // 필요하다(서버가 최종 강제). 학생 사유(조퇴 등)인 경우에만 이 화면에서
+        // 바로 확인 후 재시도한다 — 선생님/회사 귀책 조기종료는 "지각 당일 연장"이나
+        // 관리자 장애 판정 경로를 안내한다. onFinalizeSession이 이제 예외를 던지지
+        // 않고 { ok: false, error }를 반환하므로, production에서도 이 메시지 매칭이
+        // 마스킹되지 않고 항상 동작한다.
+        if (result.error.includes("조기 종료 사유가 필요합니다") && outcome === "completed") {
+          const confirmed = window.confirm(
+            "예약 종료 시각이 아직 되지 않았습니다. 학생 사유(조퇴 등)로 지금 완료 처리하시겠습니까?\n\n선생님 귀책으로 일찍 끝난 경우 '지각 당일 연장'을, 회사·Meet 장애인 경우 관리자에게 장애 판정을 요청해주세요."
+          );
+          if (confirmed) {
+            const retryResult = await onFinalizeSession({
               sessionId,
               outcome: "completed",
               reason: "학생 사유 조기 종료",
               earlyEndReason: "student_reason",
             });
+            if (!retryResult.ok) {
+              setError(retryResult.error);
+              return;
+            }
             setNoShowConfirmingSessionId(null);
             await onRefresh();
-          } catch (e2) {
-            setError(e2 instanceof Error ? e2.message : String(e2));
           }
+          return;
         }
-      } else {
-        setError(message);
+        setError(result.error);
+        return;
       }
+      setNoShowConfirmingSessionId(null);
+      await onRefresh();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
     } finally {
       setSessionActionBusyId(null);
     }

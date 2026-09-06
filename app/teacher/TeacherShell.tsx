@@ -199,7 +199,10 @@ export default function TeacherShell({
                   lessons={lessons}
                   exceptions={availabilityExceptions}
                   timezone={availabilityTimezone}
-                  onCancel={(reservationId, reason) => cancelMyLessonScheduleBooking({ reservationId, reason })}
+                  onCancel={async (reservationId, reason) => {
+                    const result = await cancelMyLessonScheduleBooking({ reservationId, reason });
+                    if (!result.ok) throw new Error(result.error);
+                  }}
                   onLoadExternalBusy={listMyExternalBusyBlocks}
                   onRefresh={() => listMyLessonSchedule().then(setLessons)}
                   onStartSession={startMyLessonSession}

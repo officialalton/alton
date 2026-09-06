@@ -82,7 +82,7 @@ describe("TeacherLessonScheduleTab", () => {
   });
 
   it("M5-a: scheduled 상태 수업에는 수업 시작 버튼만 보이고 클릭 시 호출된다(2026-09-06: 완료/노쇼는 시작 전에는 노출되지 않음)", async () => {
-    const onStartSession = vi.fn().mockResolvedValue(undefined);
+    const onStartSession = vi.fn().mockResolvedValue({ ok: true });
     const onRefresh = vi.fn().mockResolvedValue(undefined);
     render(
       <TeacherLessonScheduleTab
@@ -106,9 +106,102 @@ describe("TeacherLessonScheduleTab", () => {
     await waitFor(() => expect(onRefresh).toHaveBeenCalled());
   });
 
+  it("2026-09-06(UAT): 수업 시작 성공 시 Meet 링크로 새 탭을 열고 이동한다", async () => {
+    const fakeTab = { closed: false, close: vi.fn(), location: { href: "" } };
+    const openSpy = vi.spyOn(window, "open").mockReturnValue(fakeTab as unknown as Window);
+    const onStartSession = vi.fn().mockResolvedValue({ ok: true });
+    const onRefresh = vi.fn().mockResolvedValue(undefined);
+    render(
+      <TeacherLessonScheduleTab
+        lessons={[lesson]}
+        exceptions={[]}
+        timezone="America/Los_Angeles"
+        onCancel={vi.fn()}
+        onRefresh={onRefresh}
+        onLoadExternalBusy={vi.fn().mockResolvedValue([])}
+        onStartSession={onStartSession}
+        onFinalizeSession={vi.fn()}
+        onResolveLateness={vi.fn()}
+      />
+    );
+
+    fireEvent.click(screen.getByText("수업 시작"));
+
+    // 팝업 차단을 피하려면 클릭 핸들러 안에서 동기적으로 빈 탭을 먼저 열어야 한다.
+    expect(openSpy).toHaveBeenCalledWith("", "_blank", "noopener,noreferrer");
+    await waitFor(() => expect(onStartSession).toHaveBeenCalledWith("s1"));
+    await waitFor(() => expect(fakeTab.location.href).toBe("https://meet.google.com/abc-defg-hij"));
+    openSpy.mockRestore();
+  });
+
+  it("2026-09-06(#441 마스킹 버그): 수업 시작이 실패(ok:false)하면 미리 연 탭을 닫고 에러 메시지를 그대로 보여준다(마스킹 없음)", async () => {
+    const fakeTab = { closed: false, close: vi.fn(), location: { href: "" } };
+    const openSpy = vi.spyOn(window, "open").mockReturnValue(fakeTab as unknown as Window);
+    const onStartSession = vi.fn().mockResolvedValue({
+      ok: false,
+      error: "본인 수업만 시작할 수 있습니다.",
+    });
+    render(
+      <TeacherLessonScheduleTab
+        lessons={[lesson]}
+        exceptions={[]}
+        timezone="America/Los_Angeles"
+        onCancel={vi.fn()}
+        onRefresh={vi.fn()}
+        onLoadExternalBusy={vi.fn().mockResolvedValue([])}
+        onStartSession={onStartSession}
+        onFinalizeSession={vi.fn()}
+        onResolveLateness={vi.fn()}
+      />
+    );
+
+    fireEvent.click(screen.getByText("수업 시작"));
+    await waitFor(() => expect(screen.getByText("본인 수업만 시작할 수 있습니다.")).toBeInTheDocument());
+    expect(screen.queryByText(/Minified React error/)).not.toBeInTheDocument();
+    expect(fakeTab.close).toHaveBeenCalled();
+    openSpy.mockRestore();
+  });
+
+  it("2026-09-06(#441 마스킹 버그): 조기 종료 사유 필요 에러(ok:false)를 받으면 확인 다이얼로그를 띄우고, 확인 시 재시도한다", async () => {
+    const liveLesson: TeacherLessonScheduleItem = { ...lesson, finalStatus: "live" };
+    const onFinalizeSession = vi
+      .fn()
+      .mockResolvedValueOnce({ ok: false, error: "예약 종료 시각 전에 정상 완료를 확정하려면 조기 종료 사유가 필요합니다 — ..." })
+      .mockResolvedValueOnce({ ok: true });
+    const onRefresh = vi.fn().mockResolvedValue(undefined);
+    const confirmSpy = vi.spyOn(window, "confirm").mockReturnValue(true);
+    render(
+      <TeacherLessonScheduleTab
+        lessons={[liveLesson]}
+        exceptions={[]}
+        timezone="America/Los_Angeles"
+        onCancel={vi.fn()}
+        onRefresh={onRefresh}
+        onLoadExternalBusy={vi.fn().mockResolvedValue([])}
+        onStartSession={vi.fn()}
+        onFinalizeSession={onFinalizeSession}
+        onResolveLateness={vi.fn()}
+      />
+    );
+
+    fireEvent.click(screen.getByText("수업 종료(완료)"));
+    await waitFor(() => expect(confirmSpy).toHaveBeenCalled());
+    await waitFor(() =>
+      expect(onFinalizeSession).toHaveBeenLastCalledWith({
+        sessionId: "s1",
+        outcome: "completed",
+        reason: "학생 사유 조기 종료",
+        earlyEndReason: "student_reason",
+      })
+    );
+    await waitFor(() => expect(onRefresh).toHaveBeenCalled());
+    expect(screen.queryByText(/Minified React error/)).not.toBeInTheDocument();
+    confirmSpy.mockRestore();
+  });
+
   it("2026-09-06: live 상태 수업에는 종료/노쇼 확정 버튼이 보이고 클릭 시 각각 호출된다", async () => {
     const liveLesson: TeacherLessonScheduleItem = { ...lesson, finalStatus: "live" };
-    const onFinalizeSession = vi.fn().mockResolvedValue(undefined);
+    const onFinalizeSession = vi.fn().mockResolvedValue({ ok: true });
     render(
       <TeacherLessonScheduleTab
         lessons={[liveLesson]}
