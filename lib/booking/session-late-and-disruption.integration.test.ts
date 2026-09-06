@@ -37,9 +37,21 @@ function grantRegularEntitlement(): string {
   return grantId;
 }
 
+// 2026-09-06: 예약 시각의 "시:분"을 실행 시점의 실제 시계 시각에서 물려받지 않고
+// 17:00 UTC(America/Los_Angeles 기준 PDT 10:00 / PST 09:00, 서머타임 어느 쪽이든
+// 업무시간대)로 고정한다. 지각/보충시간 테스트는 세션을 최대 190분까지 연장하는데,
+// 실행 시점의 실제 시각을 그대로 물려받으면(예: 저녁 늦게 테스트를 돌리는 경우)
+// 연장된 종료 시각이 선생님 가용시간 규칙의 자정 경계를 넘어가 teacher_slot_not_open이
+// 발생할 수 있었다(실측 확인) — 날짜(daysFromNow)만 미래로 이동하고 시각은 항상
+// 같은 값으로 고정해 이 문제를 원천 차단한다.
+const FIXED_BOOKING_HOUR_UTC = 17;
+
 function bookSession(daysFromNow: number, durationMinutes: number): { reservationId: string; sessionId: string } {
-  const startsAt = new Date(Date.now() + daysFromNow * 24 * 60 * 60 * 1000).toISOString();
-  const endsAt = new Date(new Date(startsAt).getTime() + durationMinutes * 60000).toISOString();
+  const startsAtDate = new Date();
+  startsAtDate.setUTCDate(startsAtDate.getUTCDate() + daysFromNow);
+  startsAtDate.setUTCHours(FIXED_BOOKING_HOUR_UTC, 0, 0, 0);
+  const startsAt = startsAtDate.toISOString();
+  const endsAt = new Date(startsAtDate.getTime() + durationMinutes * 60000).toISOString();
   const row = psql(
     `select reservation_id, session_id from confirm_lesson_booking('${childId}', '${subjectEnrollmentId}', '${teacherId}', '${regularLessonTypeId}', '${startsAt}', '${endsAt}', 'm5b-book-${Date.now()}-${Math.random()}');`
   );
