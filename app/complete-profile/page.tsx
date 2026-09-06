@@ -38,7 +38,7 @@ export default async function CompleteProfilePage() {
   const { data: student } = await supabase
     .from("students")
     .select(
-      "school_name, grade, sat_score, gpa, target_colleges, intended_majors, profile_completed_at"
+      "school_name, grade, sat_score, gpa, gpa_scale, target_colleges, intended_majors, profile_completed_at"
     )
     .eq("id", user.id)
     .single();
@@ -79,8 +79,9 @@ export default async function CompleteProfilePage() {
           hasDateOfBirth={Boolean(profile?.date_of_birth)}
           initialSchoolName={student?.school_name ?? ""}
           initialGrade={student?.grade ?? ""}
-          initialSatScore={student?.sat_score ?? 0}
+          initialSatScore={student?.sat_score ?? null}
           initialGpa={student?.gpa ?? null}
+          initialGpaScale={student?.gpa_scale ?? null}
           initialTargetColleges={student?.target_colleges ?? []}
           initialIntendedMajors={student?.intended_majors ?? []}
           initialApCourses={apCourses ?? []}

@@ -13,8 +13,9 @@ export async function submitCompleteProfile(input: {
   dateOfBirth: string | null;
   schoolName: string;
   grade: string;
-  satScore: number;
+  satScore: number | null;
   gpa: number | null;
+  gpaScale: string | null;
   targetColleges: string[];
   intendedMajors: string[];
 }) {
@@ -27,6 +28,7 @@ export async function submitCompleteProfile(input: {
     p_gpa: input.gpa,
     p_target_colleges: input.targetColleges,
     p_intended_majors: input.intendedMajors,
+    p_gpa_scale: input.gpaScale,
   });
   if (error) throw new Error(error.message);
 

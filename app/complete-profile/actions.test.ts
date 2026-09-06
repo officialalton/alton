@@ -39,6 +39,7 @@ describe("submitCompleteProfile", () => {
       grade: "10학년",
       satScore: 1200,
       gpa: 3.8,
+      gpaScale: "4.3",
       targetColleges: ["Stanford"],
       intendedMajors: ["CS"],
     });
@@ -51,7 +52,26 @@ describe("submitCompleteProfile", () => {
       p_gpa: 3.8,
       p_target_colleges: ["Stanford"],
       p_intended_majors: ["CS"],
+      p_gpa_scale: "4.3",
     });
+  });
+
+  it("SAT 미입력은 null로 전달한다(0으로 강제 변환하지 않음)", async () => {
+    await submitCompleteProfile({
+      dateOfBirth: "2010-05-01",
+      schoolName: "OO국제학교",
+      grade: "10학년",
+      satScore: null,
+      gpa: null,
+      gpaScale: null,
+      targetColleges: [],
+      intendedMajors: [],
+    });
+
+    expect(rpcMock).toHaveBeenCalledWith(
+      "complete_student_profile",
+      expect.objectContaining({ p_sat_score: null })
+    );
   });
 
   it("RPC 에러를 그대로 던진다(예: 학교명 누락)", async () => {
@@ -63,6 +83,7 @@ describe("submitCompleteProfile", () => {
         grade: "10학년",
         satScore: 0,
         gpa: null,
+        gpaScale: null,
         targetColleges: [],
         intendedMajors: [],
       })

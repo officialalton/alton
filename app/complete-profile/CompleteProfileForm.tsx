@@ -39,6 +39,7 @@ export default function CompleteProfileForm({
   initialGrade,
   initialSatScore,
   initialGpa,
+  initialGpaScale = null,
   initialTargetColleges,
   initialIntendedMajors,
   initialApCourses,
@@ -47,8 +48,9 @@ export default function CompleteProfileForm({
   hasDateOfBirth: boolean;
   initialSchoolName: string;
   initialGrade: string;
-  initialSatScore: number;
+  initialSatScore: number | null;
   initialGpa: number | null;
+  initialGpaScale?: string | null;
   initialTargetColleges: string[];
   initialIntendedMajors: string[];
   initialApCourses: ApCourse[];
@@ -61,8 +63,9 @@ export default function CompleteProfileForm({
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [schoolName, setSchoolName] = useState(initialSchoolName);
   const [grade, setGrade] = useState(initialGrade);
-  const [satScore, setSatScore] = useState(String(initialSatScore ?? 0));
+  const [satScore, setSatScore] = useState(initialSatScore != null ? String(initialSatScore) : "");
   const [gpa, setGpa] = useState(initialGpa != null ? String(initialGpa) : "");
+  const [gpaScale, setGpaScale] = useState(initialGpaScale ?? "4.0");
   const [targetColleges, setTargetColleges] = useState<string[]>(initialTargetColleges);
   const [intendedMajors, setIntendedMajors] = useState<string[]>(initialIntendedMajors);
   const [targetCollegeInput, setTargetCollegeInput] = useState("");
@@ -205,8 +208,9 @@ export default function CompleteProfileForm({
           dateOfBirth: hasDateOfBirth ? null : dateOfBirth,
           schoolName: schoolName.trim(),
           grade: grade.trim(),
-          satScore: satScore ? Number(satScore) : 0,
+          satScore: satScore.trim() === "" ? null : Number(satScore),
           gpa: gpa ? Number(gpa) : null,
+          gpaScale: gpa ? gpaScale : null,
           targetColleges,
           intendedMajors,
         });
@@ -285,26 +289,43 @@ export default function CompleteProfileForm({
             max={1600}
             value={satScore}
             onChange={(e) => setSatScore(e.target.value)}
-            placeholder="없으면 0"
+            placeholder="빈 칸 = 미입력"
             className="w-full px-3.5 py-3 border-[1.5px] border-grey-200 rounded-lg text-[14.5px] text-ink focus:outline-none focus:border-ink"
           />
+          <p className="text-[11.5px] text-grey-500 mt-1">
+            응시하지 않았다면 빈 칸으로 두세요(0점을 실제로 받았다면 0을 입력).
+          </p>
         </div>
         <div>
           <label htmlFor="gpa" className="block text-[13px] font-bold text-ink mb-1.5">
             GPA (선택)
           </label>
-          <input
-            id="gpa"
-            name="gpa"
-            type="number"
-            step="0.01"
-            min={0}
-            max={5}
-            value={gpa}
-            onChange={(e) => setGpa(e.target.value)}
-            placeholder="예: 3.85"
-            className="w-full px-3.5 py-3 border-[1.5px] border-grey-200 rounded-lg text-[14.5px] text-ink focus:outline-none focus:border-ink"
-          />
+          <div className="flex gap-2">
+            <input
+              id="gpa"
+              name="gpa"
+              type="number"
+              step="0.01"
+              min={0}
+              max={5}
+              value={gpa}
+              onChange={(e) => setGpa(e.target.value)}
+              placeholder="예: 3.85"
+              className="w-full px-3.5 py-3 border-[1.5px] border-grey-200 rounded-lg text-[14.5px] text-ink focus:outline-none focus:border-ink"
+            />
+            <select
+              id="gpaScale"
+              name="gpaScale"
+              value={gpaScale}
+              onChange={(e) => setGpaScale(e.target.value)}
+              className="px-2.5 py-3 border-[1.5px] border-grey-200 rounded-lg text-[13px] text-ink focus:outline-none focus:border-ink"
+            >
+              <option value="4.0">4.0 만점</option>
+              <option value="4.3">4.3 만점</option>
+              <option value="4.5">4.5 만점</option>
+              <option value="5.0">5.0 만점</option>
+            </select>
+          </div>
         </div>
       </div>
 
