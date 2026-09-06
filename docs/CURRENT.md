@@ -1386,6 +1386,29 @@ M5-a(판정 규칙 코어)에 이어 R7의 나머지(선생님 지각 당일 연
 - 마이그레이션 `20261210000000`을 non-prod(`worpsqwqgnspddnrtnvq`)에 반영,
   `migration list --linked`로 local=remote 확인.
 
+## 2026-09-06 추가 실측 수정 — 시간대 설정 모달 드롭다운 초기 선택값 재수정
+
+- 제품 오너가 Preview 스크린샷으로 재지적: `app/components/TimezoneSettingsModal.tsx`의
+  "내 개인 시간대" 드롭다운이 개인 시간대 미설정 상태에서 여전히 추상적인
+  "가족 기본값 사용" 옵션이 선택된 채로 보였다(직전 라운드에서 "이미 실제
+  선택값을 보여주고 있다"고 보고했으나 실제로는 미수정 — `personal` state가
+  `""`(sentinel)로 남아있어 `<option value="">가족 기본값 사용</option>`이
+  그대로 selected 됐음을 코드로 재확인).
+- **수정**: `personal` state를 항상 실제 IANA 시간대 값으로만 채우도록 변경
+  (초기값 `s.profileTimezone ?? resolvedHousehold`). 드롭다운 옵션 목록에서
+  "가족 기본값 사용" 항목 자체를 제거 — `TIMEZONE_OPTIONS`만 렌더링. 별도
+  boolean state `hasOverride`(개인 시간대를 명시적으로 고정했는지)를 도입해
+  저장 로직을 분리: `hasOverride`가 true면 `personal` 값을 저장, false면
+  기존처럼 `null`을 저장해 가족 기본값 변경을 계속 따라가도록 유지. 드롭다운을
+  직접 바꾸면 자동으로 `hasOverride=true`, 별도의 명시적 "개인 설정 해제
+  (가족 기본값 따르기)" 버튼(hasOverride일 때만 노출)을 눌러야만 다시 가족
+  기본값을 따르는 상태로 되돌아간다.
+- 검증: `supabase db reset --local` 성공, `npx tsc --noEmit` 에러 0건,
+  `npx next build` 성공. `npx vitest run` 185/186 파일·1242/1243건 통과 —
+  유일한 실패(`lib/timezone-persistence.integration.test.ts`)는 전체 스위트
+  병렬 실행 시의 로컬 DB 공유 상태 문제로, 해당 파일만 단독 실행하면 5/5
+  통과함을 확인(이번 변경과 무관, 기존에도 존재하던 격리 이슈).
+
 ## 잔여 R 실행계획(2026-09-05 확정) — 다음은 R8∥R10부터
 
 M4·R7(M5-a+M5-b) + 위 검수 보완 라운드 전부 완료. **다음 착수는 R8∥R10 병렬**

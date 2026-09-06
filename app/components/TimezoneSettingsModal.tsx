@@ -27,7 +27,13 @@ export default function TimezoneSettingsModal({
   const [loading, setLoading] = useState(true);
   const [householdId, setHouseholdId] = useState<string | null>(null);
   const [isPrimaryGuardian, setIsPrimaryGuardian] = useState(false);
-  const [personal, setPersonal] = useState<string>("");
+  // personal: 드롭다운에 항상 "실제로 지금 적용 중인 구체적 IANA 시간대"를 보여준다.
+  // 개인 시간대를 명시적으로 설정 안 한 경우에도 가족 기본값(혹은 America/Los_Angeles)으로
+  // 채워진다 — "가족 기본값 사용"이라는 추상적 옵션은 선택 상태로 노출되지 않는다.
+  const [personal, setPersonal] = useState<string>("America/Los_Angeles");
+  // hasOverride: 개인 시간대를 명시적으로 고정했는지 여부. false면 저장 시 개인 시간대
+  // 컬럼을 null로 유지해 가족 기본값 변경을 계속 따라가고, true면 personal 값을 저장한다.
+  const [hasOverride, setHasOverride] = useState(false);
   const [household, setHousehold] = useState<string>("America/Los_Angeles");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -37,8 +43,10 @@ export default function TimezoneSettingsModal({
     let cancelled = false;
     getMyTimezoneSettings().then((s) => {
       if (cancelled) return;
-      setPersonal(s.profileTimezone ?? "");
-      setHousehold(s.householdDefaultTimezone ?? "America/Los_Angeles");
+      const resolvedHousehold = s.householdDefaultTimezone ?? "America/Los_Angeles";
+      setPersonal(s.profileTimezone ?? resolvedHousehold);
+      setHasOverride(s.profileTimezone != null);
+      setHousehold(resolvedHousehold);
       setHouseholdId(s.householdId);
       setIsPrimaryGuardian(s.isPrimaryGuardian);
       setLoading(false);
@@ -52,7 +60,7 @@ export default function TimezoneSettingsModal({
     setSaving(true);
     setError(null);
     try {
-      await updateMyTimezone(personal === "" ? null : personal);
+      await updateMyTimezone(hasOverride ? personal : null);
       if (showHouseholdDefault && isPrimaryGuardian && householdId) {
         await updateHouseholdDefaultTimezone(householdId, household);
       }
@@ -98,20 +106,36 @@ export default function TimezoneSettingsModal({
             )}
 
             <div className="mb-5">
-              <p className="text-[12.5px] font-semibold text-ink mb-1">내 개인 시간대 (선택)</p>
+              <p className="text-[12.5px] font-semibold text-ink mb-1">내 개인 시간대</p>
               <p className="text-[11.5px] text-grey-400 mb-2">
-                설정하면 가족 기본값보다 우선 적용됩니다. 비워두면 가족 기본값을 따릅니다.
+                {hasOverride
+                  ? "개인 시간대를 직접 고정했습니다. 가족 기본값이 바뀌어도 이 값이 유지됩니다."
+                  : "현재 가족 기본값을 따르고 있습니다. 다른 시간대를 선택하면 개인 시간대로 고정됩니다."}
               </p>
               <select
                 value={personal}
-                onChange={(e) => setPersonal(e.target.value)}
+                onChange={(e) => {
+                  setPersonal(e.target.value);
+                  setHasOverride(true);
+                }}
                 className="w-full border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px]"
               >
-                <option value="">가족 기본값 사용</option>
                 {TIMEZONE_OPTIONS.map((o) => (
                   <option key={o.value} value={o.value}>{o.label}</option>
                 ))}
               </select>
+              {hasOverride && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setHasOverride(false);
+                    setPersonal(household);
+                  }}
+                  className="mt-2 text-[12px] font-semibold text-grey-500 underline"
+                >
+                  개인 설정 해제 (가족 기본값 따르기)
+                </button>
+              )}
             </div>
 
             {error && <p className="text-[12.5px] text-red mb-3">{error}</p>}
