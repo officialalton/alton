@@ -170,6 +170,23 @@ describe("complete_student_profile — 2026-09-05 무결성 보강(SAT 범위/GP
     ).toThrow(/SAT 점수는 400~1600 사이여야 합니다/);
   });
 
+  it("2026-09-06: GPA가 음수이면 서버 함수에서 거부한다", () => {
+    const s = createStudent("gpa-negative-fn");
+    expect(() =>
+      psqlAsStudent(
+        s,
+        `select complete_student_profile('2011-01-01', 'OO고등학교', '10학년', null, -0.1, '{}', '{}', '4.0');`
+      )
+    ).toThrow(/GPA는 0 이상이어야 합니다/);
+  });
+
+  it("2026-09-06: GPA 음수는 DB CHECK 제약(students_gpa_non_negative)으로도 차단된다", () => {
+    const s = createStudent("gpa-negative-check");
+    expect(() =>
+      psqlAsAdmin(`update students set gpa = -1, gpa_scale = '4.0' where id = '${s}';`)
+    ).toThrow(/students_gpa_non_negative/);
+  });
+
   it("GPA만 있고 gpa_scale이 없으면 거부한다", () => {
     const s = createStudent("gpa-no-scale");
     expect(() =>

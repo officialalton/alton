@@ -184,6 +184,24 @@ describe("resolve_teacher_lateness() — 당일 상호 합의 연장 + 미이행
       /sessions_payable_minutes_non_negative/
     );
   });
+
+  it("2026-09-06(최종 보완): 같은 세션에 지각 처리를 두 번 호출하면(중복 처리) 거부한다", () => {
+    grantRegularEntitlement();
+    const { sessionId } = bookSession(37, 60);
+    psql(`select mark_lesson_session_started('${sessionId}', '${teacherId}');`);
+    psql(`select resolve_teacher_lateness('${sessionId}', 10, 0, '${teacherId}', '최초 지각 처리');`);
+
+    // 세션은 여전히 live 상태이지만(finalize 이전), 같은 세션에 지각 처리가 이미
+    // 적용됐으므로 재호출은 거부돼야 한다 — 이 가드가 없으면 late_start_minutes가
+    // 누적(coalesce+=)돼 원 수업시간을 초과하는 값이 될 수 있다.
+    expect(() =>
+      psql(`select resolve_teacher_lateness('${sessionId}', 10, 0, '${teacherId}', '같은 세션 재호출 시도');`)
+    ).toThrow(/이미 지각 처리\(resolve_teacher_lateness\)가 적용됐습니다/);
+
+    // late_start_minutes는 최초 1회 호출분(10)만 반영돼야 하고 누적되지 않아야 한다.
+    const lateMinutes = psql(`select late_start_minutes from sessions where id = '${sessionId}';`);
+    expect(lateMinutes).toBe("10");
+  });
 });
 
 describe("finalize_lesson_session() 확장 — 선생님 사유 90분 미만 자동 QC", () => {

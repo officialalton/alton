@@ -166,6 +166,19 @@ describe("CompleteProfileForm", () => {
     expect(submitCompleteProfileMock).not.toHaveBeenCalled();
   });
 
+  it("2026-09-06: GPA에 음수를 입력하면 제출을 막는다", async () => {
+    const { container } = render(<CompleteProfileForm {...baseProps({ hasDateOfBirth: true })} />);
+    fireEvent.change(screen.getByLabelText(/학교명/), { target: { value: "OO국제학교" } });
+    fireEvent.change(screen.getByLabelText(/학년/), { target: { value: "10학년" } });
+    fireEvent.change(screen.getByLabelText(/^GPA/), { target: { value: "-0.1" } });
+    fireEvent.submit(container.querySelector("form")!);
+
+    await waitFor(() => {
+      expect(screen.getByText("GPA는 0 이상이어야 합니다.")).toBeInTheDocument();
+    });
+    expect(submitCompleteProfileMock).not.toHaveBeenCalled();
+  });
+
   it("GPA와 척도를 함께 선택하면 gpaScale과 함께 제출한다", async () => {
     const { container } = render(<CompleteProfileForm {...baseProps({ hasDateOfBirth: true })} />);
     fireEvent.change(screen.getByLabelText(/학교명/), { target: { value: "OO국제학교" } });

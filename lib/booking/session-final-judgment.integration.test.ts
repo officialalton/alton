@@ -450,6 +450,42 @@ describe("2026-09-05 후속 — 재판정 시 entitlement 대사(reconciliation)
       `)
     ).toThrow(/needs_review/);
   });
+
+  it("2026-09-06(최종 보완): 작업 생성 이후 같은 grant에 다른 adjust가 이미 적용됐으면 저장된 조정량을 그대로 적용하지 않고 needs_review로 전환한다", () => {
+    grantRegularEntitlement();
+    const { sessionId } = bookSession(regularLessonTypeId, 54, 120);
+    psql(`select finalize_lesson_session('${sessionId}', 'completed', '${TEACHER_ID}', '완료(오판정)');`);
+
+    psql(`
+      set role authenticated;
+      select set_config('request.jwt.claim.sub', '${ADMIN_ID}', false);
+      select reopen_session('${sessionId}', '재검토 필요');
+      select recomplete_session('${sessionId}', 'teacher_no_show', '실제로는 선생님 노쇼였음');
+      reset role;
+    `);
+    const taskId = psql(`select id from session_judgment_reconciliation_tasks where session_id = '${sessionId}';`);
+    const grantId = psql(`select entitlement_grant_id from session_judgment_reconciliation_tasks where id = '${taskId}';`);
+
+    // 작업 생성 이후 같은 grant에 이미 다른 조정(예: 다른 경로의 수동 조정)이 적용된 상황을
+    // 재현한다 — 저장된 required_entitlement_adjustment_amount를 그대로 적용하면 이 조정과
+    // 중복 보정이 될 수 있으므로 반영을 거부해야 한다.
+    psql(
+      `insert into entitlement_ledger (grant_id, event_type, amount, business_event_id)
+       values ('${grantId}', 'adjust', 1, 'manual-adjust-test-${Date.now()}');`
+    );
+
+    const resolveOutput = psql(`
+      set role authenticated;
+      select set_config('request.jwt.claim.sub', '${ADMIN_ID}', false);
+      select resolve_session_reconciliation_task('${taskId}', '반영 시도');
+      reset role;
+    `);
+    const lines = resolveOutput.split("\n").filter((l) => l.length > 0);
+    expect(lines[lines.length - 1]).toBe("needs_review");
+
+    const taskStatus = psql(`select status from session_judgment_reconciliation_tasks where id = '${taskId}';`);
+    expect(taskStatus).toBe("needs_review");
+  });
 });
 
 describe("2026-09-06 후속 — student_cancelled 재판정의 entitlement disposition 자동 판정", () => {
@@ -587,5 +623,56 @@ describe("2026-09-06 후속 — student_cancelled 재판정의 entitlement dispo
 
     const finalStatus = psql(`select status from session_judgment_reconciliation_tasks where id = '${taskId}';`);
     expect(finalStatus).toBe("resolved");
+  });
+
+  it("2026-09-06(최종 보완): 같은 grant에 예약이 여러 건이어도 hold 금액 조회를 이 세션의 reservation_id로 한정한다", () => {
+    // 같은 grant(수업권 묶음)로 두 건을 예약해, 다른 예약의 hold와 섞이지 않는지 확인한다.
+    const grantId = psql(
+      `insert into entitlement_grants (child_id, entitlement_product_id, purchase_id_ref, original_quantity, expires_at, is_paid)
+       values ('${childId}', '${regularProductId}', null, 2, now() + interval '1 day', true) returning id;`
+    );
+    psql(
+      `insert into entitlement_ledger (grant_id, event_type, amount, business_event_id) values ('${grantId}', 'grant', 2, 'm5c-multi-res-grant-${Date.now()}');`
+    );
+
+    const { sessionId: sessionA } = bookSession(regularLessonTypeId, 20, 120);
+    const { sessionId: sessionB } = bookSession(regularLessonTypeId, 21, 120);
+
+    // sessionA만 취소 기록 없는 student_cancelled로 재판정해 관리자 수동 선택 경로를 태운다.
+    // sessionB는 그대로 hold 상태로 남아 같은 grant 안에 다른 예약이 있는 상태를 만든다.
+    psql(`select finalize_lesson_session('${sessionA}', 'completed', '${TEACHER_ID}', '완료(오판정)');`);
+    psql(`
+      set role authenticated;
+      select set_config('request.jwt.claim.sub', '${ADMIN_ID}', false);
+      select reopen_session('${sessionA}', '재검토 필요');
+      select recomplete_session('${sessionA}', 'student_cancelled', '실제로는 학생 취소(취소 기록 없음)');
+      reset role;
+    `);
+
+    const taskId = psql(`select id from session_judgment_reconciliation_tasks where session_id = '${sessionA}';`);
+    psql(`
+      set role authenticated;
+      select set_config('request.jwt.claim.sub', '${ADMIN_ID}', false);
+      select set_reconciliation_task_student_cancelled_disposition('${taskId}', 'release', '같은 grant 내 다른 예약과 분리 검증');
+      reset role;
+    `);
+
+    // sessionA 자신의 reservation_id에 걸린 hold(1장)만 조회돼야 하므로 조정량은 정확히
+    // 1이어야 한다(grant 전체 hold 합계나 다른 예약의 hold와 섞이면 안 됨).
+    const requiredAmount = psql(
+      `select required_entitlement_adjustment_amount from session_judgment_reconciliation_tasks where id = '${taskId}';`
+    );
+    expect(requiredAmount).toBe("1");
+
+    // sessionB의 hold는 이 작업의 영향을 받지 않고 그대로 남아 있어야 한다(같은 grant지만
+    // 다른 예약).
+    const sessionBHoldRow = psql(
+      `select r.id from reservations r join sessions s on s.reservation_id = r.id
+       where s.id = '${sessionB}';`
+    );
+    const sessionBHoldCount = psql(
+      `select count(*) from entitlement_ledger where reservation_id = '${sessionBHoldRow}' and event_type = 'hold';`
+    );
+    expect(sessionBHoldCount).toBe("1");
   });
 });

@@ -19,6 +19,9 @@ function assertGpaSatIntegrity(input: {
   if (input.satScore !== null && (input.satScore < 400 || input.satScore > 1600)) {
     throw new Error("SAT 점수는 400~1600 사이여야 합니다.");
   }
+  if (input.gpa !== null && input.gpa < 0) {
+    throw new Error("GPA는 0 이상이어야 합니다.");
+  }
   if (input.gpa !== null && input.gpaScale === null) {
     throw new Error("GPA를 입력하려면 GPA 척도를 함께 선택해야 합니다.");
   }

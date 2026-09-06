@@ -210,7 +210,11 @@ export default function CompleteProfileForm({
     }
     if (gpa.trim() !== "") {
       const gpaValue = Number(gpa);
-      if (!Number.isFinite(gpaValue) || gpaValue > Number(gpaScale)) {
+      if (!Number.isFinite(gpaValue) || gpaValue < 0) {
+        setError("GPA는 0 이상이어야 합니다.");
+        return;
+      }
+      if (gpaValue > Number(gpaScale)) {
         setError(`GPA 값이 선택한 척도(${gpaScale})를 초과할 수 없습니다.`);
         return;
       }

@@ -106,6 +106,22 @@ describe("submitCompleteProfile", () => {
     expect(rpcMock).not.toHaveBeenCalled();
   });
 
+  it("2026-09-06: GPA가 음수이면 RPC 호출 전에 거부한다", async () => {
+    await expect(
+      submitCompleteProfile({
+        dateOfBirth: "2010-05-01",
+        schoolName: "OO국제학교",
+        grade: "10학년",
+        satScore: null,
+        gpa: -0.1,
+        gpaScale: "4.0",
+        targetColleges: [],
+        intendedMajors: [],
+      })
+    ).rejects.toThrow("GPA는 0 이상이어야 합니다.");
+    expect(rpcMock).not.toHaveBeenCalled();
+  });
+
   it("GPA만 있고 척도가 없으면 RPC 호출 전에 거부한다", async () => {
     await expect(
       submitCompleteProfile({
