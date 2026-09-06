@@ -1,8 +1,27 @@
 # ALTON — 현재 상태 (2026-09-06 기준)
 
+> **2026-09-06 랜딩 상담 캘린더 UI 교체(이번 라운드, 완료)** — 제품 오너가 Preview UAT 중 지적한 "상담 희망 시간이 아직 드롭다운"을 고쳤다. 랜딩(`app/ConsultForm.tsx`)의 `<select>`를 신규 공용 컴포넌트 `app/components/ConsultSlotPicker.tsx`(월간 캘린더 → 날짜 클릭 → 60분 시간 버튼 목록 → 선택 확인)로 교체했다. 데이터 원본은 그대로 `list_open_consult_slots()`(관리자 화면과 동일 단일 원본, 수업예약/R11 면담과 절대 미혼용), 스키마 변경 없음. 상세는 아래 "2026-09-06 랜딩 상담 캘린더 UI 교체" 절 참고.
+
 > **2026-09-06 복수 자녀 온보딩 라운드 전체 완료(관리자 온보딩 발송 폼 통합 포함) — 남은 것은 제품 오너 Preview UAT뿐.** 최종 확정 정책(**기존 단일 칸반 유지, 별도 보드 분리 폐기**)에 따라 관리자가 온보딩 안내를 발송하는 **두 진입점(`TrialOnboardingPanel.tsx`의 파이프라인 카드, `ConsultationKanbanBoard.tsx`의 칸반 카드 상세) 모두** 학생 1~N명 입력(기본 1행+`학생 추가`)을 지원하며, 실제로는 신규 공용 컴포넌트 `app/admin/TrialOnboardingStudentsForm.tsx` **하나만** 렌더링해 `sendTrialOnboardingNoticeAction()`을 호출한다(중복 폼 없음). 보호자 링크 확인 시 시스템이 학생별 Auth 계정을 생성해 같은 household에 연결하고, 계정 생성에 성공한 학생별로 단일 칸반에 카드를 만든다. 아래 "2026-09-06 관리자 온보딩 발송 폼 통합" 절 참고. **정정**: 직전 라운드(커밋 `d2a342b`)는 "학생별 칸반 카드 생성"과 "학생별 초대 상태 독립 저장"을 완료로 잘못 보고했다 — 실제로는 `consultations`에 학생별 카드를 insert하는 코드가 전혀 없었고(`family_root_consultation_id`/`is_child_onboarding_card`/`source_link_child_id` 컬럼 자체가 존재하지 않았음), 초대 상태도 `trial_onboarding_links`(가족/링크 단위) 컬럼 하나에 형제자매가 덮어쓰는 구조였다. 그 다음 라운드에서 두 가지를 실제로 구현했다 — 아래 "2026-09-06 검수 지적 정정" 절 참고. 이전 인수인계 문서 `docs/2026-09-06-session-handoff-consult-multichild.md`는 그 잘못된 완료 보고를 포함하므로 참고 시 이 정정 절을 우선한다.
 
-## 2026-09-06 관리자 온보딩 발송 폼 통합(이번 라운드, 완료 — 복수 자녀 온보딩 마지막 남은 항목)
+## 2026-09-06 랜딩 상담 캘린더 UI 교체(이번 라운드, 완료)
+
+- **문제**: 제품 오너가 Preview UAT에서 스크린샷으로 확인 — 랜딩 "1:1 수업 상담 신청" 폼의 "상담 희망 시간(60분)" 필드가 여전히 긴 `<select>` 드롭다운(시간이 옵션 목록으로만 나열)이었다. 인수 기준(월간 캘린더 → 날짜 선택 → 그 날짜의 시간 버튼 목록 → 선택 확인)에 미달.
+- **해결**: 신규 공용 컴포넌트 `app/components/ConsultSlotPicker.tsx`를 만들어 `app/ConsultForm.tsx`의 드롭다운을 교체했다.
+  - 기존 `MonthCalendar`(`app/components/MonthCalendar.tsx`, 학생 예약·관리자 상담 운영 화면과 동일 컴포넌트)를 그대로 재사용해 날짜별 배지(그날 가능 슬롯 수)를 표시하고, 날짜 클릭 시 그 날짜의 60분 슬롯을 버튼 목록으로 보여준다(드롭다운 없음).
+  - 데이터 원본은 여전히 `listOpenHomepageConsultSlots()` → `list_open_consult_slots()` RPC 하나뿐 — 관리자 상담 운영 화면(`ConsultationSchedulingPanel.tsx`)이 보는 것과 동일한 단일 원본이며, 수업 예약(`reservations`)/R11 면담 가용시간과는 전혀 섞지 않는다(fetchSlots prop으로 주입받으므로 컴포넌트 자체는 데이터 소스를 모른다).
+  - 제출 권한 구분(비로그인 prospect vs 인증된 guardian)은 컴포넌트 밖 책임 — `fetchSlots`/`onSelect`를 호출부가 주입하는 구조라 향후 보호자 포털 "자녀 추가 상담" 화면(이번 라운드 범위 밖, 아직 미구현)에서도 그대로 재사용 가능하도록 설계했다.
+  - 엣지케이스 전부 구현: 로딩 상태, 조회 실패 시 에러+재시도 버튼, 슬롯 없는 날짜 선택 시 빈 상태 메시지, 제출 직전 슬롯 충돌(배타 제약 `consultations_no_overlap` 위반 — 서버가 이미 친절한 한국어 에러 메시지 반환) 시 선택 해제+슬롯 재조회(`ConsultSlotPickerHandle.refetch()` ref로 노출). 시간대는 브라우저 감지(`Intl.DateTimeFormat().resolvedOptions().timeZone`) 후 화면에 "OO 기준" 라벨로 명시, 실제 슬롯은 서버가 항상 UTC 고정으로 주므로 표시 변환만 한다(중복 생성 없음). 키보드 접근: 날짜 셀·시간 버튼 모두 네이티브 `<button>`이라 Tab/Enter/Space 동작, `aria-selected`(날짜 셀, `MonthCalendar.tsx`에 추가)·`aria-pressed`(시간 버튼)로 선택 상태 식별 가능.
+  - **스키마 변경 없음** — 프론트엔드 컴포넌트 교체만.
+- **검증**:
+  - `supabase db reset --local` 성공(신규 마이그레이션 없음 확인).
+  - `npx tsc --noEmit` 클린.
+  - `npx vitest run` — **173파일/1165건 전부 통과**(`app/components/ConsultSlotPicker.test.tsx` 신규 7건: 로딩/에러+재시도/날짜 미선택 안내/빈 상태/전체 흐름/키보드 접근성/`refetch()`, `app/ConsultForm.test.tsx` 4건 전부 새 캘린더+버튼 흐름으로 갱신해 회귀 없이 통과, `app/components/MonthCalendar.test.tsx` 기존 3건도 `aria-selected`/`aria-label` 추가 후 무수정 통과).
+  - `npx next build` 성공.
+  - `e2e/m1-consultation-flow.spec.ts`의 랜딩 신청 스텝을 드롭다운 `selectOption` 대신 캘린더 날짜 클릭 → 시간 버튼 클릭으로 갱신(코드 리뷰 완료). **미실행** — 이 세션 동안 호스트에 이미 실행 중인 다른 `next dev`(포트 3000, PID 46495 — 라이브 Preview/UAT 세션으로 추정)가 있어 Playwright의 자체 webServer(포트 3010, `next dev`는 프로젝트 디렉터리당 동시 실행을 거부)가 뜨지 못했다. 그 프로세스를 강제 종료하지 않았다(사용자 세션을 방해할 위험).
+- **커밋**: (아래 참고), 브랜치 `preview/m4-integration-verification`. main 병합·Production 배포 없음.
+
+## 2026-09-06 관리자 온보딩 발송 폼 통합(완료 — 복수 자녀 온보딩 마지막 항목)
 
 - **문제**: 관리자가 온보딩 안내를 발송할 수 있는 진입점이 두 곳(`TrialOnboardingPanel.tsx`의 `TrialLinkForm`, `ConsultationKanbanBoard.tsx` 카드 상세의 인라인 `TrialNoticeForm`)으로 나뉘어 있었는데, 전자만 학생 1~N명 입력 UI를 갖췄고 후자는 여전히 단일 학생 입력만 지원했다(서버 액션 호출부만 배열로 맞춰놓은 상태 — 직전 라운드에서 CURRENT.md "범위 밖" 절에 남겨둔 결정 필요 항목).
 - **해결(A안 채택)**: 신규 공용 컴포넌트 `app/admin/TrialOnboardingStudentsForm.tsx`를 만들어 보호자 이름/이메일 + 학생 1~N행(기본 1행+`학생 추가`, 이름·이메일·학년(선택)·과목(선택), 빈 값/이메일 형식 검증) 입력 UI와 `sendTrialOnboardingNoticeAction()` 호출 로직을 전부 이 컴포넌트 하나에 담았다. `TrialOnboardingPanel.tsx`의 `TrialLinkForm`은 "발급/재발급" 토글 버튼만 남기고 내부를 이 컴포넌트로 교체했고, `ConsultationKanbanBoard.tsx`의 인라인 `TrialNoticeForm`(단일 입력용, `SIMPLE_EMAIL_RE` 포함)은 완전히 삭제하고 같은 컴포넌트를 직접 렌더링한다. 두 진입점 모두 `sendTrialOnboardingNoticeAction`을 직접 import하지 않게 됐다(공용 컴포넌트만 import) — 중복 로직이 코드 구조상 존재할 수 없다.

@@ -29,16 +29,24 @@ test.describe("M1 — 홈페이지 상담 신청→관리자 수락 흐름 (실�
     await page.getByLabel("학부모 이름").fill("이서아 보호자(M1 E2E)");
     await page.getByRole("textbox", { name: "이메일" }).fill(`m1-e2e-${Date.now()}@example.com`);
 
-    // 슬롯 목록이 로드될 때까지 대기 후 첫 옵션 선택(관리자 등록 반복 가능시간 기준).
-    const select = page.getByLabel("상담 희망 시간");
-    await expect(select).toBeVisible();
-    await page.waitForFunction(() => {
-      const el = document.querySelector('select[aria-label="상담 희망 시간"]') as HTMLSelectElement | null;
-      return !!el && el.options.length > 1;
-    });
-    const options = await select.locator("option").all();
-    const value = await options[1].getAttribute("value");
-    await select.selectOption(value!);
+    // 2026-09-06 — 드롭다운이 캘린더+시간버튼 공용 컴포넌트(ConsultSlotPicker)로
+    // 교체됨에 따라: 캘린더에서 배지(가능 시간 있음)가 붙은 날짜를 찾아 클릭 →
+    // 그 날짜의 60분 시간 버튼 목록에서 첫 번째를 클릭한다. beforeAll에서 등록한
+    // 반복 가능시간은 "오늘+10일"의 요일 기준이라 최대 2번 "다음 달"로 넘겨가며 찾는다.
+    const calendar = page.locator('[data-testid="consult-slot-calendar"]');
+    await expect(calendar).toBeVisible();
+    let dayWithSlot = calendar.locator("button:has(span.rounded-full)").first();
+    for (let attempt = 0; attempt < 3 && (await dayWithSlot.count()) === 0; attempt++) {
+      await calendar.getByRole("button", { name: "다음 달" }).click();
+      dayWithSlot = calendar.locator("button:has(span.rounded-full)").first();
+    }
+    await expect(dayWithSlot).toBeVisible();
+    await dayWithSlot.click();
+
+    const timeGroup = page.getByRole("group", { name: "상담 희망 시간 선택" });
+    await expect(timeGroup).toBeVisible();
+    await timeGroup.locator("button").first().click();
+    await expect(page.getByTestId("consult-slot-confirmation")).toBeVisible();
 
     await page.getByRole("checkbox").check();
     await page.getByRole("button", { name: "상담 신청하기" }).click();

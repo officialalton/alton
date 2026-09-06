@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { listOpenHomepageConsultSlots, submitHomepageConsultRequest, type OpenConsultSlot } from "./consult-actions";
+import { useRef, useState } from "react";
+import { listOpenHomepageConsultSlots, submitHomepageConsultRequest } from "./consult-actions";
+import ConsultSlotPicker, { type ConsultSlotPickerHandle } from "./components/ConsultSlotPicker";
 
 // M1 — 홈페이지 상담 신청 폼. 관리자가 열어둔 60분 슬롯 중 하나를 선택해야
 // 신청이 가능하다(요구사항 2). 제출은 즉시 확정이 아니라 "승인 대기"이며,
@@ -18,18 +19,8 @@ export default function ConsultForm() {
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
 
-  const [slots, setSlots] = useState<OpenConsultSlot[]>([]);
-  const [slotsLoading, setSlotsLoading] = useState(true);
   const [selectedSlot, setSelectedSlot] = useState<string>("");
-
-  useEffect(() => {
-    const from = new Date();
-    const to = new Date(from.getTime() + 21 * 24 * 60 * 60 * 1000); // 3주치 슬롯 노출
-    listOpenHomepageConsultSlots(from.toISOString(), to.toISOString())
-      .then(setSlots)
-      .catch(() => setSlots([]))
-      .finally(() => setSlotsLoading(false));
-  }, []);
+  const pickerRef = useRef<ConsultSlotPickerHandle>(null);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -56,6 +47,11 @@ export default function ConsultForm() {
       setSubmitted(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "신청에 실패했습니다.");
+      // 제출 직전 다른 사람이 같은 슬롯을 먼저 점유했을 수 있다(DB 배타 제약이 최종
+      // 방어선). 에러 메시지는 이미 서버가 명확한 한국어 문구를 준다 — 여기서는
+      // 선택을 비우고 슬롯 목록만 재조회해 사용자가 바로 다른 시간을 고를 수 있게 한다.
+      setSelectedSlot("");
+      pickerRef.current?.refetch();
     } finally {
       setSubmitting(false);
     }
@@ -126,26 +122,12 @@ export default function ConsultForm() {
 
       <div className="mt-5">
         <span className="block text-[12.5px] font-bold text-ink mb-1.5">상담 희망 시간(60분)</span>
-        {slotsLoading ? (
-          <p className="text-[13px] text-grey-500">가능한 시간을 불러오는 중...</p>
-        ) : slots.length === 0 ? (
-          <p className="text-[13px] text-grey-500">현재 신청 가능한 시간이 없습니다. 잠시 후 다시 시도해주세요.</p>
-        ) : (
-          <select
-            aria-label="상담 희망 시간"
-            required
-            value={selectedSlot}
-            onChange={(e) => setSelectedSlot(e.target.value)}
-            className={INPUT_CLASS}
-          >
-            <option value="">시간을 선택하세요</option>
-            {slots.map((s) => (
-              <option key={s.startsAt} value={s.startsAt}>
-                {new Date(s.startsAt).toLocaleString("ko-KR", { dateStyle: "medium", timeStyle: "short" })}
-              </option>
-            ))}
-          </select>
-        )}
+        <ConsultSlotPicker
+          ref={pickerRef}
+          fetchSlots={listOpenHomepageConsultSlots}
+          selectedStartsAt={selectedSlot || null}
+          onSelect={setSelectedSlot}
+        />
       </div>
 
       <label className="flex items-start gap-2.5 mt-5 text-[12.5px] text-grey-500">
