@@ -1,5 +1,7 @@
 # ALTON — 현재 상태 (2026-09-05 기준)
 
+> **2026-09-06 진행 중인 라운드 인수인계**: 재상담(기존 보호자)/복수자녀 온보딩/상담 카드↔자녀별 진행 카드 분리 작업이 진행 중이며 아직 미완료다. 이 문서를 갱신하기 전에 반드시 `docs/2026-09-06-session-handoff-consult-multichild.md`를 먼저 읽는다 — 완료/미완료 항목, 다음 순서, 스키마 설계 후보안이 정리돼 있다.
+
 이 문서는 매 R 단계 종료 시 갱신되는 "지금 상태" 요약이다. 장문의 조사·실행 내역은 여기 복사하지 않는다 — `docs/2026-08-29-r2-migration-execution-log.md`(R0~R2 실행 로그), `docs/2026-08-29-r3-migration-execution-log.md`(R3 실행 로그), `docs/2026-09-01-r4-migration-execution-log.md`(R4 실행 로그)와 `docs/2026-08-29-master-roadmap-v3.md`(전체 R 계획)에 있다.
 
 ## 완료된 단계
