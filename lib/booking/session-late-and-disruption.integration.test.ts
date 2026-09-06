@@ -314,4 +314,132 @@ describe("apply_makeup_time_to_booking() — 보충시간을 미래 정규 예�
       psql(`update makeup_obligations set expires_at = expires_at + interval '30 days' where id = '${obligationId}';`)
     ).toThrow(/만료일은 연장할 수 없습니다/);
   });
+
+  it("체험수업 예약에는 보충시간을 이어붙일 수 없다(정규수업 전용)", () => {
+    grantRegularEntitlement();
+    const late = bookSession(55, 120);
+    psql(`select mark_lesson_session_started('${late.sessionId}', '${teacherId}');`);
+    psql(`select resolve_teacher_lateness('${late.sessionId}', 15, 0, '${teacherId}', '연장 불가');`);
+    const obligationId = psql(`select id from makeup_obligations where triggering_session_id = '${late.sessionId}';`);
+
+    const trialLessonTypeId = psql(`select id from lesson_types where code = 'trial';`);
+    const startsAt = new Date(Date.now() + 56 * 24 * 60 * 60 * 1000).toISOString();
+    const endsAt = new Date(new Date(startsAt).getTime() + 60 * 60000).toISOString();
+    const trialProductId = psql(`select id from entitlement_products where code = 'trial_lesson_grant';`);
+    const trialGrantId = psql(
+      `insert into entitlement_grants (child_id, entitlement_product_id, purchase_id_ref, original_quantity, expires_at, is_paid)
+       values ('${childId}', '${trialProductId}', null, 1, now() + interval '90 days', false) returning id;`
+    );
+    psql(
+      `insert into entitlement_ledger (grant_id, event_type, amount, business_event_id) values ('${trialGrantId}', 'grant', 1, 'm5b-trial-grant-${Date.now()}');`
+    );
+    const row = psql(
+      `select reservation_id, session_id from confirm_lesson_booking('${childId}', '${subjectEnrollmentId}', '${teacherId}', '${trialLessonTypeId}', '${startsAt}', '${endsAt}', 'm5b-trial-book-${Date.now()}');`
+    );
+    const [trialReservationId] = row.split("|");
+
+    expect(() =>
+      psql(`select apply_makeup_time_to_booking('${trialReservationId}', '${obligationId}', 15, '${teacherId}');`)
+    ).toThrow(/정규 수업 예약에만/);
+  });
+});
+
+describe("2026-09-05 과지급 수정 — 선생님 귀책 지각·보충시간 조합의 지급 상한(120분)", () => {
+  it("(a) 연장 없이 110분 제공 + 나중에 보충 10분 제공 = 총 120분", () => {
+    grantRegularEntitlement();
+    const root = bookSession(5, 120);
+    psql(`select mark_lesson_session_started('${root.sessionId}', '${teacherId}');`);
+    psql(`select resolve_teacher_lateness('${root.sessionId}', 10, 0, '${teacherId}', '전혀 연장 불가');`);
+    psql(`select finalize_lesson_session('${root.sessionId}', 'completed', '${teacherId}', '정상 완료(지각분 제외)');`);
+
+    const rootPayable = psql(`select payable_minutes from sessions where id = '${root.sessionId}';`);
+    expect(rootPayable).toBe("110"); // 예약 120분 - 지각 10분(미이행) = 실제 제공 110분만 지급.
+
+    const obligationId = psql(`select id from makeup_obligations where triggering_session_id = '${root.sessionId}';`);
+    grantRegularEntitlement();
+    const future = bookSession(6, 120);
+    psql(`select apply_makeup_time_to_booking('${future.reservationId}', '${obligationId}', 10, '${teacherId}');`);
+    psql(`select finalize_lesson_session('${future.sessionId}', 'completed', '${teacherId}', '정상 완료(보충분 포함)');`);
+
+    const futurePayable = psql(`select payable_minutes from sessions where id = '${future.sessionId}';`);
+    expect(futurePayable).toBe("130"); // 자기 정규분 120 + 보충 10.
+
+    // 이 지각 건 하나로 발생한 총 지급 기여분(원 세션 실제 제공분 + 보충 실제 제공분)은 120분을 넘지 않는다.
+    const incidentTotal = Number(rootPayable) + (Number(futurePayable) - 120);
+    expect(incidentTotal).toBe(120);
+  });
+
+  it("(b) 당일 연장으로 120분을 다 채우면 보충 채무 없이 120분 지급", () => {
+    grantRegularEntitlement();
+    const { sessionId } = bookSession(7, 120);
+    psql(`select mark_lesson_session_started('${sessionId}', '${teacherId}');`);
+    psql(`select resolve_teacher_lateness('${sessionId}', 10, 10, '${teacherId}', '10분 지각, 10분 전부 연장');`);
+    psql(`select finalize_lesson_session('${sessionId}', 'completed', '${teacherId}', '정상 완료');`);
+
+    const [payable, obligationCount] = [
+      psql(`select payable_minutes from sessions where id = '${sessionId}';`),
+      psql(`select count(*) from makeup_obligations where triggering_session_id = '${sessionId}';`),
+    ];
+    expect(payable).toBe("120");
+    expect(obligationCount).toBe("0");
+  });
+
+  it("(c) 부분 연장(20분 지각, 5분 연장, 15분 보충)도 조합 지급 총합이 120분을 넘지 않는다", () => {
+    grantRegularEntitlement();
+    const root = bookSession(8, 120);
+    psql(`select mark_lesson_session_started('${root.sessionId}', '${teacherId}');`);
+    psql(`select resolve_teacher_lateness('${root.sessionId}', 20, 5, '${teacherId}', '20분 지각, 5분만 연장');`);
+    psql(`select finalize_lesson_session('${root.sessionId}', 'completed', '${teacherId}', '정상 완료');`);
+    const rootPayable = Number(psql(`select payable_minutes from sessions where id = '${root.sessionId}';`));
+    expect(rootPayable).toBe(105); // 125(연장 반영) - 20(총 지각) = 105.
+
+    const obligationId = psql(`select id from makeup_obligations where triggering_session_id = '${root.sessionId}';`);
+    grantRegularEntitlement();
+    const future = bookSession(9, 120);
+    psql(`select apply_makeup_time_to_booking('${future.reservationId}', '${obligationId}', 15, '${teacherId}');`);
+    psql(`select finalize_lesson_session('${future.sessionId}', 'completed', '${teacherId}', '정상 완료');`);
+    const futurePayable = Number(psql(`select payable_minutes from sessions where id = '${future.sessionId}';`));
+    expect(futurePayable).toBe(135); // 120 + 15.
+
+    expect(rootPayable + (futurePayable - 120)).toBe(120);
+  });
+
+  it("(d) 회사·Meet 중단(50분 제공) + 보충 70분 제공도 조합 총합이 120분을 넘지 않는다", () => {
+    grantRegularEntitlement();
+    const root = bookSession(10, 120);
+    psql(`select mark_lesson_session_started('${root.sessionId}', '${teacherId}');`);
+    psql(`select finalize_session_as_infra_incident('${root.sessionId}', '${ADMIN_ID}', '수업 중 Meet 장애로 중단', 50);`);
+    const rootPayable = Number(psql(`select payable_minutes from sessions where id = '${root.sessionId}';`));
+    expect(rootPayable).toBe(50);
+
+    const obligationId = psql(
+      `select id from makeup_obligations where triggering_session_id = '${root.sessionId}' and reason = 'company_meet_interruption';`
+    );
+    grantRegularEntitlement();
+    const future = bookSession(11, 120);
+    psql(`select apply_makeup_time_to_booking('${future.reservationId}', '${obligationId}', 70, '${teacherId}');`);
+    psql(`select finalize_lesson_session('${future.sessionId}', 'completed', '${teacherId}', '정상 완료');`);
+    const futurePayable = Number(psql(`select payable_minutes from sessions where id = '${future.sessionId}';`));
+    expect(futurePayable).toBe(190); // 120 + 70.
+
+    expect(rootPayable + (futurePayable - 120)).toBe(120);
+  });
+
+  it("(e) 보충시간을 연결만 하고 아직 완료판정하지 않으면 정산에 반영되지 않는다", () => {
+    grantRegularEntitlement();
+    const root = bookSession(12, 120);
+    psql(`select mark_lesson_session_started('${root.sessionId}', '${teacherId}');`);
+    psql(`select resolve_teacher_lateness('${root.sessionId}', 10, 0, '${teacherId}', '연장 불가');`);
+    const obligationId = psql(`select id from makeup_obligations where triggering_session_id = '${root.sessionId}';`);
+
+    grantRegularEntitlement();
+    const future = bookSession(13, 120);
+    psql(`select apply_makeup_time_to_booking('${future.reservationId}', '${obligationId}', 10, '${teacherId}');`);
+
+    // 완료판정 전이므로 payable_minutes는 아직 null, 정산 항목도 아직 없다.
+    const payable = psql(`select coalesce(payable_minutes::text, 'null') from sessions where id = '${future.sessionId}';`);
+    expect(payable).toBe("null");
+    const payoutCount = psql(`select count(*) from payout_items where session_id = '${future.sessionId}';`);
+    expect(payoutCount).toBe("0");
+  });
 });
