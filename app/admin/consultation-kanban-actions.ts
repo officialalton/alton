@@ -82,6 +82,10 @@ export type ConsultationCardDetail = {
   noticeDeliveryStatus: "pending" | "sent" | "failed" | null;
   noticeSendError: string | null;
   noticeSentAt: string | null;
+  // 2026-09-06(발송 상태 조회 화면) — 이 상담에 발급된 최신 온보딩 링크의 id.
+  // 관리자가 카드 상세에서 "발송 내역 보기"로 그 링크의 진행 상태(학생별
+  // 입력값·계정 생성 상태 포함)를 조회할 때 쓴다. 발급된 적 없으면 null.
+  latestOnboardingLinkId: string | null;
 };
 
 /** 카드 상세 패널 — 교사 배정을 제외한 모든 후속 액션에 필요한 정보를 한 번에 모은다. */
@@ -121,7 +125,7 @@ export async function getConsultationCardDetailAction(consultationId: string): P
 
   const { data: latestLink } = await admin
     .from("trial_onboarding_links")
-    .select("notice_delivery_status, notice_send_error, notice_sent_at")
+    .select("id, notice_delivery_status, notice_send_error, notice_sent_at")
     .eq("consultation_id", consultation.id)
     .order("created_at", { ascending: false })
     .limit(1)
@@ -129,6 +133,7 @@ export async function getConsultationCardDetailAction(consultationId: string): P
   const noticeDeliveryStatus = (latestLink?.notice_delivery_status as ConsultationCardDetail["noticeDeliveryStatus"]) ?? null;
   const noticeSendError = latestLink?.notice_send_error ?? null;
   const noticeSentAt = latestLink?.notice_sent_at ?? null;
+  const latestOnboardingLinkId = latestLink?.id ?? null;
 
   if (consultation.child_id) {
     const { data: childProfile } = await admin.from("profiles").select("name").eq("id", consultation.child_id).maybeSingle();
@@ -190,6 +195,7 @@ export async function getConsultationCardDetailAction(consultationId: string): P
     noticeDeliveryStatus,
     noticeSendError,
     noticeSentAt,
+    latestOnboardingLinkId,
   };
 }
 

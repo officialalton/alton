@@ -40,6 +40,7 @@ import {
 } from "./consultation-actions";
 import LessonReviewAdminEditor from "./LessonReviewAdminEditor";
 import TrialOnboardingStudentsForm from "./TrialOnboardingStudentsForm";
+import TrialOnboardingLinkProgress from "./TrialOnboardingLinkProgress";
 import type { AdminSubject } from "./subject-data";
 import type { MatchingTeacherCandidate } from "./matching-data";
 
@@ -339,6 +340,10 @@ function ConsultationCardDetailPanel({
                 체험수업권 지급 재처리
               </button>
             )}
+            {/* 2026-09-06 — 안내를 보낸 뒤 보호자가 아직 확인하지 않은 상태(또는
+                확인해 계정을 만든 뒤)의 진행 상태를 조회할 방법이 없었다는 지적을
+                고친다. 링크가 한 번이라도 발급됐으면(발송 대기·발송됨·사용완료 모두) 노출. */}
+            {detail.latestOnboardingLinkId && <TrialOnboardingLinkProgress linkId={detail.latestOnboardingLinkId} />}
           </div>
         )}
 

@@ -23,6 +23,7 @@ import { createNewContractVersionForResend } from "./consultation-actions";
 import LessonReviewAdminEditor from "./LessonReviewAdminEditor";
 import StudentInviteStatusPanel from "./StudentInviteStatusPanel";
 import TrialOnboardingStudentsForm from "./TrialOnboardingStudentsForm";
+import TrialOnboardingLinkProgress from "./TrialOnboardingLinkProgress";
 
 const LINK_STATUS_LABEL: Record<TrialOnboardingCandidate["linkStatus"], string> = {
   none: "온보딩 링크 미발급",
@@ -162,6 +163,11 @@ function CandidateCard({
 
       <div className="text-[11.5px] text-grey-500 mt-2">{LINK_STATUS_LABEL[c.linkStatus]}</div>
       {error && <div className="text-[12px] text-red mt-1.5">{error}</div>}
+
+      {/* 온보딩 링크가 한 번이라도 발급된 상담이면(발송 대기·발송됨·사용완료
+          모두 포함) 그 발송 건의 진행 상태를 조회할 수 있게 한다 — 제품 오너
+          지적: 보낸 뒤 부모가 계정을 만들기 전 상태를 확인할 방법이 없었다. */}
+      {c.familyLinkId && <TrialOnboardingLinkProgress linkId={c.familyLinkId} />}
 
       {/* 온보딩 링크가 소진(=계정 생성 완료)된 뒤에만 의미가 있다 — 그 전에는
           학생 Auth 계정 자체가 없다. 보호자 대상 "체험 온보딩 안내"와는 별개로,
