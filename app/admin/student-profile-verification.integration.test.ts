@@ -170,6 +170,31 @@ describe("complete_student_profile — 2026-09-05 무결성 보강(SAT 범위/GP
     ).toThrow(/SAT 점수는 400~1600 사이여야 합니다/);
   });
 
+  it("2026-09-06 후속: 과거 'sat_score=0(미입력 표식)' 데이터는 정규화 절차로 null이 되고, 그 뒤에도 400~1600 제약이 정상 적용된다", () => {
+    // 20261106000000 마이그레이션에 추가된 정규화(update ... set sat_score = null
+    // where sat_score = 0)를 그 마이그레이션의 정확한 순서(제약 제거 → 레거시 0값
+    // 주입 → 정규화 → 제약 재적용)로 재현해, 실제 마이그레이션 실행과 동일한
+    // 효과를 검증한다. 완전히 마이그레이션된 DB에서는 제약 때문에 sat_score=0을
+    // 직접 넣을 수 없으므로, 이 시나리오 재현을 위해서만 제약을 일시적으로 내린다.
+    const s = createStudent("sat-legacy-zero-normalized");
+    psql(`
+      begin;
+      alter table students drop constraint if exists students_sat_score_range;
+      update students set sat_score = 0 where id = '${s}';
+      update students set sat_score = null where sat_score = 0;
+      alter table students add constraint students_sat_score_range
+        check (sat_score is null or (sat_score >= 400 and sat_score <= 1600));
+      commit;
+    `);
+    const satScore = psql(`select coalesce(sat_score::text, 'null') from students where id = '${s}';`);
+    expect(satScore).toBe("null");
+
+    // 정규화 이후에는 제약이 정상 동작해 0 재입력은 다시 거부된다.
+    expect(() => psql(`update students set sat_score = 0 where id = '${s}';`)).toThrow(
+      /students_sat_score_range/
+    );
+  });
+
   it("2026-09-06: GPA가 음수이면 서버 함수에서 거부한다", () => {
     const s = createStudent("gpa-negative-fn");
     expect(() =>
