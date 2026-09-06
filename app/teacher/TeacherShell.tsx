@@ -7,7 +7,6 @@ import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
 import TeacherHomeDashboard from "./TeacherHomeDashboard";
 import type { TeacherDashboardData } from "./dashboard-data";
 import ScheduleTab from "./ScheduleTab";
-import RosterTab from "./RosterTab";
 import CurriculumTab from "./CurriculumTab";
 import type { RosterStudent } from "./roster-data";
 import type { MySubject } from "./mysubjects-data";
@@ -39,10 +38,8 @@ import {
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
   { id: "assignments", label: "배정", icon: "🎯" },
-  { id: "lesson-schedule", label: "수업 일정", icon: "📆" },
+  { id: "lesson-schedule", label: "수업", icon: "📆" },
   { id: "availability", label: "가능시간", icon: "🗓" },
-  { id: "schedule", label: "수업", icon: "📅" },
-  { id: "roster", label: "학생", icon: "👥" },
   { id: "curriculum", label: "커리큘럼", icon: "📘" },
   { id: "materials", label: "교재", icon: "📚" },
   { id: "settlement", label: "정산", icon: "💰" },
@@ -89,6 +86,12 @@ export default function TeacherShell({
   const [activeTab, setActiveTab] = useState<TabId>(
     validTabIds.includes(initialTab as TabId) ? (initialTab as TabId) : "home"
   );
+  // M4 골든패스 실사용 버그 #5 — 선생님 포털 "수업"(레거시 legacy_sessions 뷰) 탭과
+  // "수업 일정"(v3 sessions/reservations, Calendar/Meet 연동) 탭이 기능 중복이라는
+  // 지적에 따라 하나의 "수업" 네비게이션 항목으로 합쳤다. v3 예약/캘린더 UI를 기본으로
+  // 하고, 레거시 뷰 고유 기능(수업 기록 열람, 지각·노쇼 신고, 레거시 리뷰 작성)은
+  // 서브탭으로 흡수한다.
+  const [lessonSubtab, setLessonSubtab] = useState<"current" | "legacy-record">("current");
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const [timezoneModalOpen, setTimezoneModalOpen] = useState(false);
   const [curriculumJump, setCurriculumJump] = useState<{
@@ -101,7 +104,7 @@ export default function TeacherShell({
     router.replace(`?tab=${id}`, { scroll: false });
   }
 
-  function openCurriculumFromRoster(studentId: string, subjectId: string) {
+  function openCurriculumFromAssignment(studentId: string, subjectId: string) {
     setCurriculumJump({ studentId, subjectId });
     selectTab("curriculum");
   }
@@ -168,29 +171,50 @@ export default function TeacherShell({
           {activeTab === "home" ? (
             <TeacherHomeDashboard
               data={dashboard}
-              onShowSchedule={() => selectTab("schedule")}
+              onShowSchedule={() => selectTab("lesson-schedule")}
             />
           ) : activeTab === "assignments" ? (
-            <AssignmentsTab current={currentAssignments} past={pastAssignments} />
-          ) : activeTab === "schedule" ? (
-            <ScheduleTab
-              upcoming={dashboard.upcoming}
-              past={dashboard.past}
-              reviewedSessionIds={reviewedSessionIds}
-              onReportSessionIssue={reportSessionIssue}
+            <AssignmentsTab
+              current={currentAssignments}
+              past={pastAssignments}
+              onOpenCurriculum={openCurriculumFromAssignment}
             />
           ) : activeTab === "lesson-schedule" ? (
-            <TeacherLessonScheduleTab
-              lessons={lessons}
-              exceptions={availabilityExceptions}
-              timezone={availabilityTimezone}
-              onCancel={(reservationId, reason) => cancelMyLessonScheduleBooking({ reservationId, reason })}
-              onLoadExternalBusy={listMyExternalBusyBlocks}
-              onRefresh={() => listMyLessonSchedule().then(setLessons)}
-              onStartSession={startMyLessonSession}
-              onFinalizeSession={finalizeMyLessonSession}
-              onResolveLateness={resolveMyLessonLateness}
-            />
+            <div>
+              <div className="px-8 pt-8 flex gap-1.5">
+                {(["current", "legacy-record"] as const).map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => setLessonSubtab(s)}
+                    className={`text-[11px] font-bold px-2.5 py-1 rounded-full ${
+                      lessonSubtab === s ? "bg-ink text-white" : "bg-grey-100 text-grey-500"
+                    }`}
+                  >
+                    {s === "current" ? "예정/지난 수업" : "지난 수업 기록·신고"}
+                  </button>
+                ))}
+              </div>
+              {lessonSubtab === "current" ? (
+                <TeacherLessonScheduleTab
+                  lessons={lessons}
+                  exceptions={availabilityExceptions}
+                  timezone={availabilityTimezone}
+                  onCancel={(reservationId, reason) => cancelMyLessonScheduleBooking({ reservationId, reason })}
+                  onLoadExternalBusy={listMyExternalBusyBlocks}
+                  onRefresh={() => listMyLessonSchedule().then(setLessons)}
+                  onStartSession={startMyLessonSession}
+                  onFinalizeSession={finalizeMyLessonSession}
+                  onResolveLateness={resolveMyLessonLateness}
+                />
+              ) : (
+                <ScheduleTab
+                  upcoming={dashboard.upcoming}
+                  past={dashboard.past}
+                  reviewedSessionIds={reviewedSessionIds}
+                  onReportSessionIssue={reportSessionIssue}
+                />
+              )}
+            </div>
           ) : activeTab === "availability" ? (
             <TeacherAvailabilityTab
               initialRules={availabilityRules}
@@ -202,8 +226,6 @@ export default function TeacherShell({
               onRemoveException={removeTeacherAvailabilityException}
               onLoadExternalBusy={listMyExternalBusyBlocks}
             />
-          ) : activeTab === "roster" ? (
-            <RosterTab students={roster} onOpenCurriculum={openCurriculumFromRoster} />
           ) : activeTab === "curriculum" ? (
             <CurriculumTab
               mySubjects={mySubjects}

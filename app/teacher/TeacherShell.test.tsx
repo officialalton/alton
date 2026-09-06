@@ -57,31 +57,45 @@ const baseProps = {
 };
 
 describe("TeacherShell", () => {
-  it("사이드바 9개 항목을 보여주고, 기본 탭은 홈이다", () => {
+  it("사이드바 8개 항목을 보여주고, 기본 탭은 홈이다(M4 골든패스 #5/#6 — '수업 일정'과 '수업' 통합, '학생' 탭 제거)", () => {
     render(<TeacherShell {...baseProps} />);
-    ["홈", "배정", "수업 일정", "가능시간", "수업", "학생", "커리큘럼", "교재", "정산"].forEach((label) =>
+    ["홈", "배정", "수업", "가능시간", "커리큘럼", "교재", "정산"].forEach((label) =>
       expect(screen.getByText(label)).toBeInTheDocument()
     );
+    expect(screen.queryByText("학생")).toBeNull();
+    expect(screen.queryByText("수업 일정")).toBeNull();
     expect(screen.getByText("박서연 선생님, 안녕하세요")).toBeInTheDocument();
   });
 
-  it("수업 탭을 누르면 ScheduleTab이 렌더링된다", () => {
+  it("수업 탭을 누르면 통합된 예정/지난 수업(v3) 뷰가 기본으로 렌더링되고, 서브탭으로 레거시 기록·신고 화면도 볼 수 있다", () => {
     render(<TeacherShell {...baseProps} />);
     fireEvent.click(screen.getByText("수업"));
+    expect(screen.getByText("예정 수업 목록")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText("지난 수업 기록·신고"));
     expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
   });
 
-  it("학생 탭을 누르면 로스터가 렌더링된다", () => {
-    render(<TeacherShell {...baseProps} />);
-    fireEvent.click(screen.getByText("학생"));
-    expect(screen.getByText("지훈")).toBeInTheDocument();
-    expect(screen.getByText(/SAT Math · 8\/12회차/)).toBeInTheDocument();
-  });
-
-  it("로스터의 과목을 클릭하면 커리큘럼 탭의 학생별 뷰로 이동한다", () => {
-    render(<TeacherShell {...baseProps} />);
-    fireEvent.click(screen.getByText("학생"));
-    fireEvent.click(screen.getByText(/SAT Math · 8\/12회차/));
+  it("배정 탭에서 학년/연락처가 보이고, 커리큘럼 진입 버튼을 누르면 커리큘럼 탭의 학생별 뷰로 이동한다(M4 골든패스 #6/#7)", () => {
+    const currentAssignments = [
+      {
+        assignmentId: "ta1",
+        subjectEnrollmentId: "se1",
+        studentId: "st1",
+        studentName: "지훈",
+        studentGrade: "11학년",
+        studentPhone: "010-0000-0000",
+        subjectId: "sub1",
+        subjectName: "SAT Math",
+        status: "active" as const,
+        effectiveFrom: "2026-08-01T00:00:00Z",
+        effectiveUntil: null,
+      },
+    ];
+    render(<TeacherShell {...baseProps} currentAssignments={currentAssignments} />);
+    fireEvent.click(screen.getByText("배정"));
+    expect(screen.getByText("11학년")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("커리큘럼 보기"));
     expect(screen.getByText("학생별")).toBeInTheDocument();
   });
 

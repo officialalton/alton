@@ -14,6 +14,8 @@ export type TeacherAssignedSubject = {
   subjectEnrollmentId: string;
   studentId: string;
   studentName: string;
+  studentGrade: string | null;
+  studentPhone: string | null;
   subjectId: string;
   subjectName: string;
   status: "planned" | "active" | "ended";
@@ -47,17 +49,25 @@ export async function loadTeacherAssignments(
     new Set((enrollments ?? []).map((e) => e.child_id))
   );
   const { data: students } = childIds.length
-    ? await supabase.from("profiles").select("id, name").in("id", childIds)
-    : { data: [] as { id: string; name: string }[] };
+    ? await supabase.from("profiles").select("id, name, phone").in("id", childIds)
+    : { data: [] as { id: string; name: string; phone: string | null }[] };
+  const { data: studentRows } = childIds.length
+    ? await supabase.from("students").select("id, grade").in("id", childIds)
+    : { data: [] as { id: string; grade: string | null }[] };
   const studentNameById = new Map((students ?? []).map((s) => [s.id, s.name]));
+  const studentPhoneById = new Map((students ?? []).map((s) => [s.id, s.phone]));
+  const studentGradeById = new Map((studentRows ?? []).map((s) => [s.id, s.grade]));
 
   const rows: TeacherAssignedSubject[] = assignments.map((a) => {
     const enrollment = enrollmentById.get(a.subject_enrollment_id);
+    const childId = enrollment?.child_id ?? "";
     return {
       assignmentId: a.id,
       subjectEnrollmentId: a.subject_enrollment_id,
-      studentId: enrollment?.child_id ?? "",
-      studentName: studentNameById.get(enrollment?.child_id ?? "") ?? "",
+      studentId: childId,
+      studentName: studentNameById.get(childId) ?? "",
+      studentGrade: studentGradeById.get(childId) ?? null,
+      studentPhone: studentPhoneById.get(childId) ?? null,
       subjectId: enrollment?.subject_id ?? "",
       subjectName: extractName(enrollment?.subject),
       status: a.status,

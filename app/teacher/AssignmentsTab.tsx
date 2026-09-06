@@ -130,6 +130,26 @@ function TerminationRequestControl({ a }: { a: TeacherAssignedSubject }) {
   );
 }
 
+// M4 골든패스 실사용 버그 #6/#7 — 선생님 포털 "학생" 탭(RosterTab, legacy `enrollments`
+// 기반)을 제거하고 이 "배정" 탭으로 통합했다. 배정 탭에서 학생 프로필(이름/학년/연락처)
+// 을 바로 확인할 수 있도록 카드에 학년을 표시하고, 연락처는 펼침으로 노출한다(막혀있던
+// 학생 프로필 진입 문제 #7도 함께 해결).
+function StudentProfileDisclosure({ a }: { a: TeacherAssignedSubject }) {
+  return (
+    <details className="mt-1.5">
+      <summary className="text-[11px] font-semibold text-grey-500 cursor-pointer">
+        학생 프로필 보기
+      </summary>
+      <div className="mt-1 text-[11px] text-grey-500 space-y-0.5">
+        <div>이름: {a.studentName}</div>
+        <div>학년: {a.studentGrade ?? "-"}</div>
+        <div>과목: {a.subjectName}</div>
+        <div>연락처: {a.studentPhone ?? "-"}</div>
+      </div>
+    </details>
+  );
+}
+
 function formatDate(iso: string | null): string {
   if (!iso) return "-";
   return new Date(iso).toLocaleDateString("ko-KR", {
@@ -142,9 +162,11 @@ function formatDate(iso: string | null): string {
 export default function AssignmentsTab({
   current,
   past,
+  onOpenCurriculum,
 }: {
   current: TeacherAssignedSubject[];
   past: TeacherAssignedSubject[];
+  onOpenCurriculum?: (studentId: string, subjectId: string) => void;
 }) {
   return (
     <div className="max-w-[640px] px-8 py-8">
@@ -167,8 +189,14 @@ export default function AssignmentsTab({
           >
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-[13.5px] font-bold text-ink">
-                  {a.studentName} · {a.subjectName}
+                <div className="text-[13.5px] font-bold text-ink flex items-center gap-1.5">
+                  {a.studentName}
+                  {a.studentGrade && (
+                    <span className="text-[11px] font-semibold text-grey-500">
+                      {a.studentGrade}
+                    </span>
+                  )}
+                  · {a.subjectName}
                 </div>
                 <div className="text-[12px] text-grey-500 mt-0.5">
                   {formatDate(a.effectiveFrom)}부터
@@ -178,7 +206,16 @@ export default function AssignmentsTab({
                 {a.status === "active" ? "배정중" : "예정"}
               </span>
             </div>
+            {onOpenCurriculum && (
+              <button
+                onClick={() => onOpenCurriculum(a.studentId, a.subjectId)}
+                className="text-[12px] font-semibold px-3 py-1.5 rounded-full bg-grey-100 text-ink mt-2"
+              >
+                커리큘럼 보기
+              </button>
+            )}
             {a.status === "active" && <TerminationRequestControl a={a} />}
+            <StudentProfileDisclosure a={a} />
             <TeachingHistoryDisclosure a={a} />
           </div>
         ))

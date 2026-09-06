@@ -20,6 +20,8 @@ const current: TeacherAssignedSubject[] = [
     subjectEnrollmentId: "se1",
     studentId: "st1",
     studentName: "김학생",
+    studentGrade: "고2",
+    studentPhone: "010-1234-5678",
     subjectId: "sub1",
     subjectName: "SAT Math",
     status: "active",
@@ -76,5 +78,18 @@ describe("AssignmentsTab — M3 배정 종료 요청/과거 이력", () => {
     await screen.findByText(/completed/);
     // 시급/정산, Smart Notes, 내부 메모 관련 문구가 화면에 전혀 없어야 한다.
     expect(screen.queryByText(/시급|정산|Smart Notes|내부 메모/)).toBeNull();
+  });
+
+  it("골든패스 #6/#7 — '학생' 탭 없이도 배정 탭에서 프로필(학년/연락처)과 커리큘럼 진입을 볼 수 있다", async () => {
+    const onOpenCurriculum = vi.fn();
+    render(<AssignmentsTab current={current} past={[]} onOpenCurriculum={onOpenCurriculum} />);
+
+    expect(screen.getByText("고2")).toBeTruthy();
+
+    fireEvent.click(screen.getByText("학생 프로필 보기"));
+    await screen.findByText(/010-1234-5678/);
+
+    fireEvent.click(screen.getByText("커리큘럼 보기"));
+    expect(onOpenCurriculum).toHaveBeenCalledWith("st1", "sub1");
   });
 });
