@@ -1,8 +1,22 @@
 # ALTON — 현재 상태 (2026-09-05 기준)
 
-> **2026-09-06 진행 중인 라운드 인수인계**: 재상담(기존 보호자)/복수자녀 온보딩/상담 카드→자녀별 진행 카드 전환 작업이 진행 중이며 아직 미완료다. 이 문서를 갱신하기 전에 반드시 `docs/2026-09-06-session-handoff-consult-multichild.md`를 먼저 읽는다 — 완료/미완료 항목과 최신 확정안(**기존 단일 칸반 유지, 기존 관리자 온보딩 폼에서 학생 1~N명 입력, 보호자 링크 확인 후 시스템이 학생별 계정·카드 생성**)이 정리돼 있다. 보호자가 자녀 정보를 직접 입력하는 UX는 후속 백로그이며, 과거의 두 보드 분리안과 A/B 후보안은 폐기됐다.
+> **2026-09-06 복수 자녀 온보딩 — 완료(핵심 범위).** 최종 확정 정책(**기존 단일 칸반 유지, 별도 보드 분리 폐기**)에 따라 관리자 "체험 온보딩 안내 발송" 화면의 학생 입력을 기본 1행+`학생 추가` 반복 입력(1~N명)으로 확장했고, 보호자 링크 확인 시 시스템이 학생별 Auth 계정을 생성해 같은 household에 연결한다. 상세는 `docs/2026-09-06-session-handoff-consult-multichild.md`(이전 인수인계, 완료 기록으로 보존)와 아래 절 참고.
 
 이 문서는 매 R 단계 종료 시 갱신되는 "지금 상태" 요약이다. 장문의 조사·실행 내역은 여기 복사하지 않는다 — `docs/2026-08-29-r2-migration-execution-log.md`(R0~R2 실행 로그), `docs/2026-08-29-r3-migration-execution-log.md`(R3 실행 로그), `docs/2026-09-01-r4-migration-execution-log.md`(R4 실행 로그)와 `docs/2026-08-29-master-roadmap-v3.md`(전체 R 계획)에 있다.
+
+## 2026-09-06 복수 자녀 온보딩(최종 확정안, 완료)
+
+- **정책**: 기존 단일 칸반 유지(별도 "상담 운영"/"체험·정규 전환 운영" 보드 분리는 폐기). 관리자가 기존 "체험 온보딩 안내 발송" 화면에서 학생 1~N명(이름·이메일·학년·과목)을 개별 입력(`app/admin/TrialOnboardingPanel.tsx`의 `TrialNoticeForm` — 기본 1행+`학생 추가`). 별도 "자녀 수 선택"·"체험 대상 자녀 확정" 단계 없음.
+- **발송**: 가족당 온보딩 이메일/링크 1개만 발송(학생 수 무관) — `create_trial_onboarding_link_multi(p_consultation_id, p_guardian_email, p_guardian_name, p_students jsonb)`가 링크 1개 + `trial_onboarding_link_students` N행을 생성.
+- **확인**: 보호자가 링크를 열면(`app/api/trial-onboarding/confirm-email(-change)/route.ts` → `lib/trial-onboarding-finalize.ts`의 `createGuardianAndStudentThenRedirect()`) 신규 보호자는 계정·household 1회 생성, 기존 보호자는 재사용(`find_auth_user_id_by_email` 재사용) — 이후 링크에 딸린 학생 명단(`get_trial_onboarding_link_students`)을 순회해 학생별 Auth 계정을 만들고 `finalize_trial_onboarding_students()`(신규 SQL 함수, 신규/기존 보호자 공용)로 같은 household에 연결한다. 학생별 비밀번호 설정 초대도 개별 발송.
+- **부분 실패 격리**: `finalize_trial_onboarding_students()`가 학생별로 중첩 BEGIN/EXCEPTION(암묵적 savepoint)으로 처리 — 한 학생 실패가 형제자매 롤백을 일으키지 않는다. 실패한 학생만 관리자가 `retryFailedTrialOnboardingStudentAction()`(→ `retry_trial_onboarding_student()` SQL)으로 재시도 가능.
+- **중복 방지**: `trial_onboarding_link_students.child_auth_user_id`에 유니크 인덱스(not null) — 동시 재시도로도 같은 Auth 계정이 두 번 "생성됨"으로 기록될 수 없다. `finalize_trial_onboarding_students()`도 `status='created'`면 재처리하지 않아 이중 방어.
+- **칸반 카드**: `listTrialOnboardingCandidatesAction()`이 계정 생성 완료(status='created') 학생별로 한 행씩 반환하도록 확장(가족ID/링크ID로 형제자매 배지 표시, `TrialOnboardingPanel.tsx`에 👨‍👩‍👧 배지). 학생 계정이 아직 없는 상담은 기존처럼 상담 건 대표 행 1개만 표시.
+- **기존 로직 재사용**: `finalize_trial_onboarding_new_guardian()`/`finalize_trial_onboarding_existing_guardian()`(단일 학생, 2026-09-06 재상담 완료분)는 삭제하지 않고 그대로 보존(`app/consult/existing-guardian-reconsult.integration.test.ts`가 계속 참조) — 새 함수(`finalize_trial_onboarding_students`)는 별도로 추가했다.
+- **범위 밖(유지)**: 보호자 직접 입력 UX(랜딩/보호자 포털), `가족` 탭 초대 폼, 공용 캘린더 컴포넌트는 이번 라운드에서 손대지 않음. `ConsultationKanbanBoard.tsx`에 남아있는 별도 인라인 발송 폼(`TrialNoticeForm`)은 이번 라운드에서 여전히 단일 학생 입력만 지원(서버 액션 시그니처만 배열로 맞춰 호출) — 관리자 실사용 경로인 `TrialOnboardingPanel.tsx` 쪽만 N명 UI로 전환했다. 다음 세션에서 통합하거나 중복 폼 하나를 제거할지 결정 필요.
+- **마이그레이션**: `supabase/migrations/20261206000000_m4_multichild_trial_onboarding.sql` — 신규 테이블 `trial_onboarding_link_students`, 신규 함수 `create_trial_onboarding_link_multi`/`get_trial_onboarding_link_students`/`finalize_trial_onboarding_students`/`retry_trial_onboarding_student`. 기존 테이블/함수는 삭제하지 않음(가산적).
+- **검증**: `app/consult/multichild-trial-onboarding.integration.test.ts`(신규, psql 직접 검증 5개 시나리오 — 신규보호자 1명/3명, 기존보호자 신규 3명, 부분실패 후 해당 자녀만 재시도, 동시 재시도 시 중복 생성 안 됨 — DB 유니크 제약으로 확인). `supabase db reset --local` 클린, `npx tsc --noEmit` 클린, `npx vitest run` 170파일/1144건 전부 통과(신규 12건 포함, 기존 `lib/trial-onboarding-finalize.test.ts` 회귀 수정 포함), `npx next build` 성공.
+- **미검증**: non-prod(`worpsqwqgnspddnrtnvq`) 실제 반영·Preview 스모크는 이 세션에서 아직 진행 전 — 아래 실행 로그/커밋 내역과 별개로 반영 여부는 다음 커밋 로그에서 확인.
 
 ## 완료된 단계
 

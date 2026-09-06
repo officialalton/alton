@@ -68,7 +68,9 @@ export default function TrialOnboardingPanel() {
           체험 추천된 상담이 없습니다.
         </div>
       ) : (
-        candidates.map((c) => <CandidateCard key={c.consultationId} candidate={c} onChanged={refresh} />)
+        candidates.map((c) => (
+          <CandidateCard key={c.childId ?? c.consultationId} candidate={c} onChanged={refresh} />
+        ))
       )}
 
       <h3 className="text-[14px] font-extrabold text-ink mt-6 mb-1.5">정규 계약 발송 대기</h3>
@@ -123,6 +125,11 @@ function CandidateCard({
       <div className="flex items-center justify-between">
         <div className="text-[13.5px] font-bold text-ink">
           {c.contactName} <span className="font-normal text-grey-500">({c.contactEmail})</span>
+          {c.studentName && (
+            <span className="ml-2 text-[11px] font-bold px-1.5 py-0.5 rounded bg-blue-50 text-blue-600">
+              👨‍👩‍👧 {c.studentName}
+            </span>
+          )}
         </div>
         {pipeline && (
           <span className="text-[11px] font-bold px-2 py-1 rounded-full bg-grey-100 text-grey-500 shrink-0">
@@ -340,11 +347,22 @@ function TrialLinkForm({
 }) {
   const [guardianEmail, setGuardianEmail] = useState("");
   const [guardianName, setGuardianName] = useState("");
-  const [studentName, setStudentName] = useState("");
-  const [studentEmail, setStudentEmail] = useState("");
-  const [studentGrade, setStudentGrade] = useState("");
+  // 2026-09-06(복수 자녀 온보딩) — 학생 입력은 기본 1행 + "학생 추가" 반복
+  // 입력으로 1~N명을 받는다. 별도의 "자녀 수 선택"·"체험 대상 확정" 단계는
+  // 만들지 않는다(제품 오너 확정안).
+  const [students, setStudents] = useState([{ name: "", email: "", grade: "", subject: "" }]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  function updateStudent(index: number, field: "name" | "email" | "grade" | "subject", value: string) {
+    setStudents((prev) => prev.map((s, i) => (i === index ? { ...s, [field]: value } : s)));
+  }
+  function addStudentRow() {
+    setStudents((prev) => [...prev, { name: "", email: "", grade: "", subject: "" }]);
+  }
+  function removeStudentRow(index: number) {
+    setStudents((prev) => (prev.length > 1 ? prev.filter((_, i) => i !== index) : prev));
+  }
 
   if (!open) {
     return (
@@ -375,33 +393,65 @@ function TrialLinkForm({
           onChange={(e) => setGuardianName(e.target.value)}
         />
       </label>
-      <label className="block text-[11px] font-semibold text-grey-500">
-        학생 이름
-        <input
-          className="w-full mt-0.5 border border-grey-300 rounded px-2 py-1.5 text-[12.5px]"
-          value={studentName}
-          onChange={(e) => setStudentName(e.target.value)}
-        />
-      </label>
-      <label className="block text-[11px] font-semibold text-grey-500">
-        학생 이메일
-        <input
-          className="w-full mt-0.5 border border-grey-300 rounded px-2 py-1.5 text-[12.5px]"
-          value={studentEmail}
-          onChange={(e) => setStudentEmail(e.target.value)}
-        />
-      </label>
-      <label className="block text-[11px] font-semibold text-grey-500">
-        학년(선택)
-        <input
-          className="w-full mt-0.5 border border-grey-300 rounded px-2 py-1.5 text-[12.5px]"
-          value={studentGrade}
-          onChange={(e) => setStudentGrade(e.target.value)}
-        />
-      </label>
+      <div className="space-y-2 border-t border-grey-200 pt-2 mt-1">
+        {students.map((s, i) => (
+          <div key={i} className="border border-grey-200 rounded-lg p-2 space-y-1 relative">
+            <div className="text-[11px] font-bold text-grey-400">학생 {i + 1}</div>
+            <label className="block text-[11px] font-semibold text-grey-500">
+              학생 이름
+              <input
+                className="w-full mt-0.5 border border-grey-300 rounded px-2 py-1.5 text-[12.5px]"
+                value={s.name}
+                onChange={(e) => updateStudent(i, "name", e.target.value)}
+              />
+            </label>
+            <label className="block text-[11px] font-semibold text-grey-500">
+              학생 이메일
+              <input
+                className="w-full mt-0.5 border border-grey-300 rounded px-2 py-1.5 text-[12.5px]"
+                value={s.email}
+                onChange={(e) => updateStudent(i, "email", e.target.value)}
+              />
+            </label>
+            <label className="block text-[11px] font-semibold text-grey-500">
+              학년(선택)
+              <input
+                className="w-full mt-0.5 border border-grey-300 rounded px-2 py-1.5 text-[12.5px]"
+                value={s.grade}
+                onChange={(e) => updateStudent(i, "grade", e.target.value)}
+              />
+            </label>
+            <label className="block text-[11px] font-semibold text-grey-500">
+              과목(선택)
+              <input
+                className="w-full mt-0.5 border border-grey-300 rounded px-2 py-1.5 text-[12.5px]"
+                value={s.subject}
+                onChange={(e) => updateStudent(i, "subject", e.target.value)}
+              />
+            </label>
+            {students.length > 1 && (
+              <button
+                type="button"
+                onClick={() => removeStudentRow(i)}
+                className="text-[11px] text-red font-bold"
+              >
+                이 학생 삭제
+              </button>
+            )}
+          </div>
+        ))}
+        <button type="button" onClick={addStudentRow} className="text-[11.5px] font-bold text-ink underline">
+          + 학생 추가
+        </button>
+      </div>
       {error && <div className="text-[11.5px] text-red">{error}</div>}
       <button
-        disabled={busy || !guardianEmail || !guardianName || !studentName || !studentEmail}
+        disabled={
+          busy ||
+          !guardianEmail ||
+          !guardianName ||
+          students.some((s) => !s.name || !s.email)
+        }
         aria-busy={busy}
         onClick={async () => {
           setBusy(true);
@@ -411,9 +461,12 @@ function TrialLinkForm({
               consultationId,
               guardianEmail,
               guardianName,
-              studentName,
-              studentEmail,
-              studentGrade: studentGrade || undefined,
+              students: students.map((s) => ({
+                name: s.name,
+                email: s.email,
+                grade: s.grade || undefined,
+                subject: s.subject || undefined,
+              })),
             });
             if (result.status === "failed") {
               setError(`발송 실패(관리자 조치 필요) — ${result.error}`);

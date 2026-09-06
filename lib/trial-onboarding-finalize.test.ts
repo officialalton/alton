@@ -27,21 +27,53 @@ const BASE_PARAMS = {
   linkId: "link-1",
   guardianEmail: "guardian@example.com",
   guardianName: "보호자",
-  studentEmail: "student@example.com",
-  studentName: "학생",
 };
+
+// 2026-09-06(복수 자녀 온보딩) — get_trial_onboarding_link_students는 이제
+// createGuardianAndStudentThenRedirect 안에서 두 번 호출된다: (1) Auth 계정을
+// 만들어야 할 학생 명단 조회, (2) finalize 이후 실제로 created 처리된 학생에게만
+// 비밀번호 설정 초대를 보내기 위한 재조회. 테스트에서는 호출 횟수로 두 상태를
+// 흉내낸다(첫 호출=pending, 이후 호출=created — finalize가 성공했다고 가정).
+let getStudentsCallCount = 0;
 
 beforeEach(() => {
   vi.clearAllMocks();
+  getStudentsCallCount = 0;
   updateEqMock.mockResolvedValue({ error: null });
   createUserMock
     .mockResolvedValueOnce({ data: { user: { id: "guardian-id" } }, error: null })
     .mockResolvedValueOnce({ data: { user: { id: "student-id" } }, error: null });
-  rpcMock.mockImplementation((fnName: string) =>
-    fnName === "find_auth_user_id_by_email"
-      ? Promise.resolve({ data: null, error: null })
-      : Promise.resolve({ error: null })
-  );
+  rpcMock.mockImplementation((fnName: string) => {
+    if (fnName === "find_auth_user_id_by_email") {
+      return Promise.resolve({ data: null, error: null });
+    }
+    if (fnName === "get_trial_onboarding_link_students") {
+      getStudentsCallCount += 1;
+      const created = getStudentsCallCount > 1;
+      return Promise.resolve({
+        data: [
+          {
+            id: "ls-1",
+            student_name: "학생",
+            student_email: "student@example.com",
+            student_grade: null,
+            student_subject: null,
+            status: created ? "created" : "pending",
+            child_auth_user_id: created ? "student-id" : null,
+            error: null,
+          },
+        ],
+        error: null,
+      });
+    }
+    if (fnName === "finalize_trial_onboarding_students") {
+      return Promise.resolve({
+        data: [{ household_id: "household-1", guardian_id: "guardian-id", created_count: 1, failed_count: 0 }],
+        error: null,
+      });
+    }
+    return Promise.resolve({ error: null });
+  });
   generateLinkMock.mockImplementation(async ({ email }: { email: string }) => ({
     data: { properties: { hashed_token: `hash-for-${email}` } },
     error: null,
@@ -98,7 +130,7 @@ describe("createGuardianAndStudentThenRedirect — 학생 비밀번호 설정 �
 });
 
 describe("createGuardianAndStudentThenRedirect — 부분 실패 시 고아 Auth 계정 정리(2026-09-05 코드 점검 발견)", () => {
-  it("학생 계정 생성이 실패하면 이미 만든 보호자 Auth 계정을 정리한다", async () => {
+  it("학생이 단 1명도 생성되지 못하면 이미 만든 보호자 Auth 계정을 정리한다", async () => {
     createUserMock
       .mockReset()
       .mockResolvedValueOnce({ data: { user: { id: "guardian-id" } }, error: null })
@@ -110,15 +142,95 @@ describe("createGuardianAndStudentThenRedirect — 부분 실패 시 고아 Auth
   });
 
   it("계정 연결(finalize) RPC가 실패하면 보호자·학생 Auth 계정을 모두 정리한다", async () => {
-    rpcMock.mockImplementation((fnName: string) =>
-      fnName === "find_auth_user_id_by_email"
-        ? Promise.resolve({ data: null, error: null })
-        : Promise.resolve({ error: { message: "finalize boom" } })
-    );
+    rpcMock.mockImplementation((fnName: string) => {
+      if (fnName === "find_auth_user_id_by_email") return Promise.resolve({ data: null, error: null });
+      if (fnName === "get_trial_onboarding_link_students") {
+        return Promise.resolve({
+          data: [
+            {
+              id: "ls-1",
+              student_name: "학생",
+              student_email: "student@example.com",
+              student_grade: null,
+              student_subject: null,
+              status: "pending",
+              child_auth_user_id: null,
+              error: null,
+            },
+          ],
+          error: null,
+        });
+      }
+      if (fnName === "finalize_trial_onboarding_students") {
+        return Promise.resolve({ error: { message: "finalize boom" } });
+      }
+      return Promise.resolve({ error: null });
+    });
 
     await createGuardianAndStudentThenRedirect(BASE_PARAMS);
 
     expect(deleteUserMock).toHaveBeenCalledWith("guardian-id");
     expect(deleteUserMock).toHaveBeenCalledWith("student-id");
+  });
+});
+
+describe("createGuardianAndStudentThenRedirect — 복수 자녀", () => {
+  it("학생 2명을 처리하고 각각에게 비밀번호 설정 메일을 보낸다", async () => {
+    createUserMock
+      .mockReset()
+      .mockResolvedValueOnce({ data: { user: { id: "student-a-id" } }, error: null })
+      .mockResolvedValueOnce({ data: { user: { id: "student-b-id" } }, error: null });
+
+    let call = 0;
+    rpcMock.mockImplementation((fnName: string) => {
+      if (fnName === "find_auth_user_id_by_email") {
+        // 기존 보호자 경로로 흉내낸다 — guardian createUser 호출이 없어도 되게.
+        return Promise.resolve({ data: "existing-guardian-id", error: null });
+      }
+      if (fnName === "get_trial_onboarding_link_students") {
+        call += 1;
+        const created = call > 1;
+        return Promise.resolve({
+          data: [
+            {
+              id: "ls-a",
+              student_name: "학생A",
+              student_email: "a@example.com",
+              student_grade: null,
+              student_subject: null,
+              status: created ? "created" : "pending",
+              child_auth_user_id: created ? "student-a-id" : null,
+              error: null,
+            },
+            {
+              id: "ls-b",
+              student_name: "학생B",
+              student_email: "b@example.com",
+              student_grade: null,
+              student_subject: null,
+              status: created ? "created" : "pending",
+              child_auth_user_id: created ? "student-b-id" : null,
+              error: null,
+            },
+          ],
+          error: null,
+        });
+      }
+      if (fnName === "finalize_trial_onboarding_students") {
+        return Promise.resolve({
+          data: [{ household_id: "household-1", guardian_id: "existing-guardian-id", created_count: 2, failed_count: 0 }],
+          error: null,
+        });
+      }
+      return Promise.resolve({ error: null });
+    });
+
+    const res = await createGuardianAndStudentThenRedirect(BASE_PARAMS);
+
+    expect(res.status).toBe(307);
+    expect(createUserMock).toHaveBeenCalledTimes(2);
+    expect(sendEmailMock).toHaveBeenCalledTimes(2);
+    const recipients = sendEmailMock.mock.calls.map((c) => c[0].to);
+    expect(recipients).toEqual(expect.arrayContaining(["a@example.com", "b@example.com"]));
   });
 });

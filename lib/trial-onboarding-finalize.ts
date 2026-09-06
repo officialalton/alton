@@ -12,8 +12,9 @@ export async function createGuardianAndStudentThenRedirect(params: {
   linkId: string;
   guardianEmail: string;
   guardianName: string;
-  studentEmail: string;
-  studentName: string;
+  // 2026-09-06(복수 자녀 온보딩) — studentEmail/studentName 단일 필드는 더 이상
+  // 받지 않는다. 링크에 딸린 학생 1~N명은 trial_onboarding_link_students에서
+  // 직접 조회한다(관리자가 발송 시점에 이미 입력해둔 값, 재입력 불필요).
 }): Promise<NextResponse> {
   const admin = createAdminClient();
 
@@ -27,65 +28,119 @@ export async function createGuardianAndStudentThenRedirect(params: {
   if (existingGuardianId.error) {
     return redirectWithError(params.url, "계정 확인에 실패했습니다. 관리자에게 문의해주세요.");
   }
-  if (existingGuardianId.data) {
-    return createStudentAndLinkToExistingGuardianThenRedirect({
-      url: params.url,
-      linkId: params.linkId,
-      existingGuardianId: existingGuardianId.data as string,
-      guardianEmail: params.guardianEmail,
-      studentEmail: params.studentEmail,
-      studentName: params.studentName,
+
+  const isNewGuardian = !existingGuardianId.data;
+  let guardianAuthUserId: string;
+
+  if (!isNewGuardian) {
+    guardianAuthUserId = existingGuardianId.data as string;
+  } else {
+    const { data: guardianCreated, error: guardianCreateError } = await admin.auth.admin.createUser({
+      email: params.guardianEmail,
+      email_confirm: true,
+      user_metadata: { name: params.guardianName },
     });
+    if (guardianCreateError || !guardianCreated?.user) {
+      return redirectWithError(params.url, "보호자 계정 생성에 실패했습니다. 관리자에게 문의해주세요.");
+    }
+    guardianAuthUserId = guardianCreated.user.id;
   }
 
-  const { data: guardianCreated, error: guardianCreateError } = await admin.auth.admin.createUser({
-    email: params.guardianEmail,
-    email_confirm: true,
-    user_metadata: { name: params.guardianName },
+  // 링크에 딸린 학생 1~N명 명단 — 아직 처리 안 된(created가 아닌) 학생만
+  // Auth 계정을 만든다(재시도/재입장 시 이미 성공한 형제자매를 다시 만들지 않음).
+  const { data: students, error: studentsError } = await admin.rpc("get_trial_onboarding_link_students", {
+    p_link_id: params.linkId,
   });
-  if (guardianCreateError || !guardianCreated?.user) {
-    return redirectWithError(params.url, "보호자 계정 생성에 실패했습니다. 관리자에게 문의해주세요.");
+  if (studentsError || !students?.length) {
+    return redirectWithError(params.url, "온보딩 학생 명단을 찾을 수 없습니다. 관리자에게 문의해주세요.");
   }
 
-  const { data: studentCreated, error: studentCreateError } = await admin.auth.admin.createUser({
-    // 학생 본인이 이 이메일을 실제로 확인했는지는 여기서 알 수 없다 — 온보딩은
-    // 보호자가 대행 입력한 값이다(이 파일 상단 주석 참고). email_confirm을 여기서
-    // true로 찍으면 이후 어떤 검증도 무의미해진다(2026-09-05 코드 점검 발견 — 실제
-    // 이메일 확인 게이트가 항상 통과하는 죽은 코드였음). 이 계정이 처음 비밀번호를
-    // 설정할 때(app/set-password/page.tsx → confirmOwnEmailAfterPasswordSet)만
-    // true로 올린다 — 그게 "본인이 실제로 이 이메일을 열어봤다"는 첫 실증 이벤트다.
-    email: params.studentEmail,
-    email_confirm: false,
-    user_metadata: { name: params.studentName },
-  });
-  if (studentCreateError || !studentCreated?.user) {
-    // 학생 계정 생성이 실패했으면 이미 만든 보호자 계정이 고아로 남는다 —
-    // 정리하지 않으면 이 이메일로는 재시도조차 불가능해진다(2026-09-05 코드
-    // 점검 발견). profiles/household 등 DB 행은 아직 안 만들어졌으므로
-    // Auth 계정만 지우면 된다.
-    await admin.auth.admin.deleteUser(guardianCreated.user.id).catch((e) => {
-      console.error("고아 보호자 Auth 계정 정리 실패:", guardianCreated.user.id, e);
+  const finalizeItems: { link_student_id: string; child_auth_user_id: string }[] = [];
+  const createdStudentAuthIdsThisRequest: string[] = [];
+  for (const s of students) {
+    if (s.status === "created" && s.child_auth_user_id) {
+      finalizeItems.push({ link_student_id: s.id, child_auth_user_id: s.child_auth_user_id });
+      continue;
+    }
+    const { data: studentCreated, error: studentCreateError } = await admin.auth.admin.createUser({
+      // 학생 본인이 이 이메일을 실제로 확인했는지는 여기서 알 수 없다 — 온보딩은
+      // 보호자가 대행 입력한 값이다(이 파일 상단 주석 참고). email_confirm을 여기서
+      // true로 찍으면 이후 어떤 검증도 무의미해진다(2026-09-05 코드 점검 발견 — 실제
+      // 이메일 확인 게이트가 항상 통과하는 죽은 코드였음). 이 계정이 처음 비밀번호를
+      // 설정할 때(app/set-password/page.tsx → confirmOwnEmailAfterPasswordSet)만
+      // true로 올린다 — 그게 "본인이 실제로 이 이메일을 열어봤다"는 첫 실증 이벤트다.
+      email: s.student_email,
+      email_confirm: false,
+      user_metadata: { name: s.student_name },
+    });
+    if (studentCreateError || !studentCreated?.user) {
+      // 이 학생 1명만 실패로 남기고(형제자매는 계속 처리, 요구사항 7) 관리자
+      // 재시도 대상이 되도록 finalize 단계에서 자연히 status='failed'로 남는다
+      // (finalizeItems에 넣지 않으면 finalize_trial_onboarding_students가 이
+      // 학생을 건드리지 않아 status는 pending으로 남고, 관리자 화면에서
+      // "재시도"로 다시 시도할 수 있다).
+      console.error("학생 계정 생성 실패(재시도 가능):", s.student_email, studentCreateError);
+      continue;
+    }
+    createdStudentAuthIdsThisRequest.push(studentCreated.user.id);
+    finalizeItems.push({ link_student_id: s.id, child_auth_user_id: studentCreated.user.id });
+  }
+
+  if (isNewGuardian && finalizeItems.length === 0) {
+    // 보호자 계정은 새로 만들었는데 학생이 단 1명도 생성되지 못했다 — 고아
+    // 보호자 Auth 계정을 정리한다(2026-09-05 코드 점검에서 발견된 것과 동일한
+    // 원칙, 복수 자녀에서도 유지).
+    await admin.auth.admin.deleteUser(guardianAuthUserId).catch((e) => {
+      console.error("고아 보호자 Auth 계정 정리 실패:", guardianAuthUserId, e);
     });
     return redirectWithError(params.url, "학생 계정 생성에 실패했습니다. 관리자에게 문의해주세요.");
   }
 
-  const { error: finalizeError } = await admin.rpc("finalize_trial_onboarding_new_guardian", {
+  const { data: finalizeData, error: finalizeError } = await admin.rpc("finalize_trial_onboarding_students", {
     p_link_id: params.linkId,
-    p_auth_user_id: guardianCreated.user.id,
-    p_child_auth_user_id: studentCreated.user.id,
+    p_new_guardian: isNewGuardian,
+    p_guardian_auth_user_id: guardianAuthUserId,
+    p_guardian_name: params.guardianName,
+    p_students: finalizeItems,
   });
   if (finalizeError) {
-    // 두 Auth 계정 모두 만들어졌지만 DB 연결(finalize)이 실패한 경우 — 마찬가지로
-    // 고아 Auth 계정 2개가 관리자 개입 없이는 복구 경로가 없던 문제를 정리한다.
-    await Promise.all([
-      admin.auth.admin.deleteUser(guardianCreated.user.id).catch((e) => {
-        console.error("고아 보호자 Auth 계정 정리 실패:", guardianCreated.user.id, e);
-      }),
-      admin.auth.admin.deleteUser(studentCreated.user.id).catch((e) => {
-        console.error("고아 학생 Auth 계정 정리 실패:", studentCreated.user.id, e);
-      }),
-    ]);
+    if (isNewGuardian) {
+      await admin.auth.admin.deleteUser(guardianAuthUserId).catch((e) => {
+        console.error("고아 보호자 Auth 계정 정리 실패:", guardianAuthUserId, e);
+      });
+    }
+    await Promise.all(
+      createdStudentAuthIdsThisRequest.map((id) =>
+        admin.auth.admin.deleteUser(id).catch((e) => {
+          console.error("고아 학생 Auth 계정 정리 실패:", id, e);
+        })
+      )
+    );
     return redirectWithError(params.url, "계정 연결에 실패했습니다. 관리자에게 문의해주세요.");
+  }
+  const finalizeRow = finalizeData?.[0];
+
+  // 학생별 비밀번호 설정 초대는 실제로 이번에 created 처리된 학생에게만 보낸다
+  // (finalize 단계에서 개별 실패한 학생은 초대 보내지 않음 — 관리자 재시도 대상).
+  const { data: refreshedStudents } = await admin.rpc("get_trial_onboarding_link_students", {
+    p_link_id: params.linkId,
+  });
+  for (const s of refreshedStudents ?? []) {
+    if (s.status === "created" && s.child_auth_user_id) {
+      await sendStudentSetPasswordEmail(admin, {
+        url: params.url,
+        linkId: params.linkId,
+        studentEmail: s.student_email,
+        studentName: s.student_name,
+      });
+    }
+  }
+
+  if (!isNewGuardian) {
+    const label = finalizeRow && finalizeRow.failed_count > 0
+      ? `자녀가 추가로 연결됐습니다(${finalizeRow.failed_count}명은 실패 — 관리자 재시도 필요). 기존 계정으로 로그인해주세요.`
+      : "자녀가 추가로 연결됐습니다. 기존 계정으로 로그인해주세요.";
+    return NextResponse.redirect(new URL("/login?notice=" + encodeURIComponent(label), params.url));
   }
 
   const { data: linkData, error: linkError } = await admin.auth.admin.generateLink({
@@ -95,13 +150,6 @@ export async function createGuardianAndStudentThenRedirect(params: {
   if (linkError || !linkData?.properties?.hashed_token) {
     return redirectWithError(params.url, "로그인 링크 생성에 실패했습니다. 관리자에게 문의해주세요.");
   }
-
-  await sendStudentSetPasswordEmail(admin, {
-    url: params.url,
-    linkId: params.linkId,
-    studentEmail: params.studentEmail,
-    studentName: params.studentName,
-  });
 
   return NextResponse.redirect(
     new URL(
@@ -115,61 +163,13 @@ export function redirectWithError(url: URL, message: string): NextResponse {
   return NextResponse.redirect(new URL("/login?error=" + encodeURIComponent(message), url));
 }
 
-/**
- * 2026-09-06 추가(재상담) — 이미 보호자 Auth 계정이 있을 때의 경로. 새 보호자
- * 계정·household는 만들지 않고 기존 계정에 새 자녀만 연결한다. 보호자는 이미
- * 계정이 있어(대부분 비밀번호도 알고 있어) /set-password로 강제하지 않고
- * 안내 메시지와 함께 /login으로 보낸다 — 학생은 신규 보호자 경로와 동일하게
- * 별도 비밀번호 설정 메일을 받는다.
- */
-async function createStudentAndLinkToExistingGuardianThenRedirect(params: {
-  url: URL;
-  linkId: string;
-  existingGuardianId: string;
-  guardianEmail: string;
-  studentEmail: string;
-  studentName: string;
-}): Promise<NextResponse> {
-  const admin = createAdminClient();
-
-  const { data: studentCreated, error: studentCreateError } = await admin.auth.admin.createUser({
-    email: params.studentEmail,
-    email_confirm: false,
-    user_metadata: { name: params.studentName },
-  });
-  if (studentCreateError || !studentCreated?.user) {
-    return redirectWithError(params.url, "학생 계정 생성에 실패했습니다. 관리자에게 문의해주세요.");
-  }
-
-  const { error: finalizeError } = await admin.rpc("finalize_trial_onboarding_existing_guardian", {
-    p_link_id: params.linkId,
-    p_existing_guardian_id: params.existingGuardianId,
-    p_child_auth_user_id: studentCreated.user.id,
-  });
-  if (finalizeError) {
-    // 기존 보호자 계정은 우리가 만든 게 아니므로 절대 지우지 않는다 — 방금 만든
-    // 학생 계정만 고아로 남지 않도록 정리한다.
-    await admin.auth.admin.deleteUser(studentCreated.user.id).catch((e) => {
-      console.error("고아 학생 Auth 계정 정리 실패:", studentCreated.user.id, e);
-    });
-    return redirectWithError(params.url, "계정 연결에 실패했습니다. 관리자에게 문의해주세요.");
-  }
-
-  await sendStudentSetPasswordEmail(admin, {
-    url: params.url,
-    linkId: params.linkId,
-    studentEmail: params.studentEmail,
-    studentName: params.studentName,
-  });
-
-  return NextResponse.redirect(
-    new URL(
-      "/login?notice=" +
-        encodeURIComponent("자녀가 추가로 연결됐습니다. 기존 계정으로 로그인해주세요."),
-      params.url
-    )
-  );
-}
+// 2026-09-06(복수 자녀 온보딩) — 기존 보호자 계정 재사용 경로는 이제
+// createGuardianAndStudentThenRedirect() 안에 isNewGuardian=false 분기로
+// 통합됐다(학생이 여러 명이면 이 경로도 N명을 함께 처리해야 하므로 별도
+// 함수로 분리해두면 로직이 갈라진다 — 재상담 인수인계 문서의 우려 그대로).
+// finalize_trial_onboarding_existing_guardian()(단일 학생, DB 함수 자체)는
+// app/consult/existing-guardian-reconsult.integration.test.ts가 여전히
+// 참조하므로 마이그레이션에서 지우지 않았다.
 
 // 보호자는 지금 이 요청을 보낸 브라우저에서 바로 /set-password로 이어지지만,
 // 학생은 별도 브라우저/기기라 학생 본인 이메일로 비밀번호 설정 링크를 보내야

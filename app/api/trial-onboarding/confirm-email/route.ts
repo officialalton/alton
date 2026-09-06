@@ -20,12 +20,12 @@ export async function GET(request: Request) {
   }
   const redeemed = data[0];
 
+  // 2026-09-06(복수 자녀 온보딩) — 학생 1~N명은 이제 trial_onboarding_link_students
+  // 테이블에서 링크 id 기준으로 직접 조회한다(단일 studentEmail/studentName 전달 안 함).
   return createGuardianAndStudentThenRedirect({
     url,
     linkId: redeemed.link_id,
     guardianEmail: redeemed.guardian_email,
     guardianName: redeemed.guardian_name,
-    studentEmail: redeemed.student_email,
-    studentName: redeemed.student_name,
   });
 }

@@ -216,8 +216,7 @@ describe("sendTrialOnboardingNoticeAction", () => {
     consultationId: "c1",
     guardianEmail: "g@example.com",
     guardianName: "학부모",
-    studentName: "학생",
-    studentEmail: "s@example.com",
+    students: [{ name: "학생", email: "s@example.com" }],
   };
 
   beforeEach(() => vi.clearAllMocks());
@@ -307,7 +306,9 @@ describe("sendTrialOnboardingNoticeAction", () => {
   });
 
   it("학생 이메일 형식이 올바르지 않으면(@ 없음) 거부한다", async () => {
-    await expect(sendTrialOnboardingNoticeAction({ ...baseParams, studentEmail: "not-an-email" })).rejects.toThrow();
+    await expect(
+      sendTrialOnboardingNoticeAction({ ...baseParams, students: [{ name: "학생", email: "not-an-email" }] })
+    ).rejects.toThrow();
     expect(sendEmailMock).not.toHaveBeenCalled();
   });
 
@@ -317,7 +318,53 @@ describe("sendTrialOnboardingNoticeAction", () => {
   });
 
   it("학생 이름이 빈 문자열이면 거부한다", async () => {
-    await expect(sendTrialOnboardingNoticeAction({ ...baseParams, studentName: "" })).rejects.toThrow();
+    await expect(
+      sendTrialOnboardingNoticeAction({ ...baseParams, students: [{ name: "", email: "s@example.com" }] })
+    ).rejects.toThrow();
     expect(sendEmailMock).not.toHaveBeenCalled();
+  });
+
+  it("학생을 1명도 입력하지 않으면 거부한다", async () => {
+    await expect(sendTrialOnboardingNoticeAction({ ...baseParams, students: [] })).rejects.toThrow();
+    expect(sendEmailMock).not.toHaveBeenCalled();
+  });
+
+  it("같은 이메일을 두 학생에게 중복 입력하면 거부한다", async () => {
+    await expect(
+      sendTrialOnboardingNoticeAction({
+        ...baseParams,
+        students: [
+          { name: "학생1", email: "dup@example.com" },
+          { name: "학생2", email: "dup@example.com" },
+        ],
+      })
+    ).rejects.toThrow();
+    expect(sendEmailMock).not.toHaveBeenCalled();
+  });
+
+  it("학생 N명을 create_trial_onboarding_link_multi에 배열로 전달한다", async () => {
+    mockNoExistingLink();
+    adminRpcMock.mockResolvedValue({ data: [{ link_id: "l1", raw_token: "tok1" }], error: null });
+    sendEmailMock.mockResolvedValue(undefined);
+
+    await sendTrialOnboardingNoticeAction({
+      consultationId: "c1",
+      guardianEmail: "g@example.com",
+      guardianName: "학부모",
+      students: [
+        { name: "학생1", email: "s1@example.com", grade: "9학년" },
+        { name: "학생2", email: "s2@example.com" },
+      ],
+    });
+
+    expect(adminRpcMock).toHaveBeenCalledWith("create_trial_onboarding_link_multi", {
+      p_consultation_id: "c1",
+      p_guardian_email: "g@example.com",
+      p_guardian_name: "학부모",
+      p_students: [
+        { name: "학생1", email: "s1@example.com", grade: "9학년", subject: null },
+        { name: "학생2", email: "s2@example.com", grade: null, subject: null },
+      ],
+    });
   });
 });

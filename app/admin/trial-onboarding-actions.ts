@@ -66,11 +66,21 @@ export async function createTrialOnboardingLinkAction(params: {
 // 계정이 생성된 것처럼 절대 취급하지 않는다 — 계정 생성은 이 함수가 아니라
 // 보호자가 링크를 열어야만 시작되는 완전히 별개의 흐름이라 실패해도 그
 // 흐름에 어떤 영향도 주지 않는다.
+//
+// 2026-09-06(제품 오너 최종 확정) — 학생은 1~N명 배열로 입력받는다. 가족당
+// 온보딩 이메일/링크는 여전히 1개만 발송한다(학생 수와 무관).
 // =========================================================================
 export type SendTrialOnboardingNoticeResult =
   | { status: "sent"; linkId: string; sentAt: string; localRedeemUrl: string | null }
   | { status: "already_sent"; linkId: string; sentAt: string }
   | { status: "failed"; linkId: string; error: string };
+
+export type TrialOnboardingStudentInput = {
+  name: string;
+  email: string;
+  grade?: string;
+  subject?: string;
+};
 
 // 과도한 이메일 검증 라이브러리 없이 형식 오류만 걸러내는 최소 정규식 —
 // RFC 완전 준수가 목적이 아니라 "빈 문자열"·"@ 없음" 같은 명백한 오입력을
@@ -80,16 +90,22 @@ const SIMPLE_EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 function assertTrialOnboardingNoticeParamsValid(params: {
   guardianEmail: string;
   guardianName: string;
-  studentName: string;
-  studentEmail: string;
+  students: TrialOnboardingStudentInput[];
 }): void {
   if (!params.guardianName.trim()) throw new Error("보호자 이름을 입력해주세요.");
-  if (!params.studentName.trim()) throw new Error("학생 이름을 입력해주세요.");
   if (!params.guardianEmail.trim() || !SIMPLE_EMAIL_RE.test(params.guardianEmail.trim())) {
     throw new Error("보호자 이메일 형식이 올바르지 않습니다.");
   }
-  if (!params.studentEmail.trim() || !SIMPLE_EMAIL_RE.test(params.studentEmail.trim())) {
-    throw new Error("학생 이메일 형식이 올바르지 않습니다.");
+  if (!params.students.length) throw new Error("학생을 최소 1명 입력해주세요.");
+  const seen = new Set<string>();
+  for (const s of params.students) {
+    if (!s.name.trim()) throw new Error("학생 이름을 입력해주세요.");
+    if (!s.email.trim() || !SIMPLE_EMAIL_RE.test(s.email.trim())) {
+      throw new Error("학생 이메일 형식이 올바르지 않습니다.");
+    }
+    const norm = s.email.trim().toLowerCase();
+    if (seen.has(norm)) throw new Error(`같은 이메일이 중복 입력됐습니다: ${s.email}`);
+    seen.add(norm);
   }
 }
 
@@ -97,9 +113,7 @@ export async function sendTrialOnboardingNoticeAction(params: {
   consultationId: string;
   guardianEmail: string;
   guardianName: string;
-  studentName: string;
-  studentEmail: string;
-  studentGrade?: string;
+  students: TrialOnboardingStudentInput[];
 }): Promise<SendTrialOnboardingNoticeResult> {
   const { actorUserId } = await requireAdminOrCapability(CONSULT_CAPABILITY);
   assertTrialOnboardingNoticeParamsValid(params);
@@ -118,6 +132,13 @@ export async function sendTrialOnboardingNoticeAction(params: {
   let linkId: string;
   let rawToken: string | undefined;
 
+  const studentsPayload = params.students.map((s) => ({
+    name: s.name.trim(),
+    email: s.email.trim(),
+    grade: s.grade?.trim() || null,
+    subject: s.subject?.trim() || null,
+  }));
+
   if (existingLink) {
     if (existingLink.notice_delivery_status === "sent") {
       // 이미 발송 완료 — 중복 클릭/재시도로 같은 내용을 다시 보내지 않는다.
@@ -133,27 +154,21 @@ export async function sendTrialOnboardingNoticeAction(params: {
       .from("trial_onboarding_link_events")
       .insert({ link_id: existingLink.id, event_type: "revoked", actor_id: actorUserId, detail: { reason: "미발송 링크 재발급" } });
 
-    const { data, error } = await admin.rpc("create_trial_onboarding_link", {
+    const { data, error } = await admin.rpc("create_trial_onboarding_link_multi", {
       p_consultation_id: params.consultationId,
       p_guardian_email: params.guardianEmail,
       p_guardian_name: params.guardianName,
-      p_student_name: params.studentName,
-      p_student_email: params.studentEmail,
-      p_admin_id: actorUserId,
-      p_student_grade: params.studentGrade ?? null,
+      p_students: studentsPayload,
     });
     if (error || !data?.[0]) throw new Error(error?.message ?? "온보딩 링크 재발급에 실패했습니다.");
     linkId = data[0].link_id;
     rawToken = data[0].raw_token;
   } else {
-    const { data, error } = await admin.rpc("create_trial_onboarding_link", {
+    const { data, error } = await admin.rpc("create_trial_onboarding_link_multi", {
       p_consultation_id: params.consultationId,
       p_guardian_email: params.guardianEmail,
       p_guardian_name: params.guardianName,
-      p_student_name: params.studentName,
-      p_student_email: params.studentEmail,
-      p_admin_id: actorUserId,
-      p_student_grade: params.studentGrade ?? null,
+      p_students: studentsPayload,
     });
     if (error || !data?.[0]) throw new Error(error?.message ?? "온보딩 링크 발급에 실패했습니다.");
     linkId = data[0].link_id;
@@ -166,9 +181,10 @@ export async function sendTrialOnboardingNoticeAction(params: {
 
   const origin = await currentRequestOrigin();
   const redeemUrl = `${origin}/api/trial-onboarding/redeem?token=${encodeURIComponent(rawToken)}`;
+  const studentNamesLabel = studentsPayload.map((s) => escapeHtml(s.name)).join(", ");
   const html = `
     <p>안녕하세요, ${escapeHtml(params.guardianName)}님.</p>
-    <p>${escapeHtml(params.studentName)} 학생의 체험 수업 준비를 위해 아래 링크에서 계정을 만들어주세요.</p>
+    <p>${studentNamesLabel} 학생의 체험 수업 준비를 위해 아래 링크에서 계정을 만들어주세요.</p>
     <p><a href="${redeemUrl}">${redeemUrl}</a></p>
     <p>이 링크는 72시간 동안 유효합니다.</p>
   `;
@@ -372,6 +388,12 @@ export type TrialOnboardingCandidate = {
   // 온보딩 링크의 최신 상태 — "발급한 적 없음"과 "발급했지만 아직 대기/만료/
   // 사용완료"를 구분해서 보여주기 위함(요구사항: 온보딩 링크 상태 구분).
   linkStatus: "none" | "pending" | "redeemed" | "expired" | "revoked";
+  // 2026-09-06(복수 자녀 온보딩) — 계정 생성이 완료된 학생별로 한 행씩 생성된다
+  // (단일 칸반 유지, 학생별 진행 카드). familyLinkId/studentName은 형제자매를
+  // 함께 찾기 위한 배지 표시용이다. 학생 계정이 아직 하나도 생성되지 않은
+  // 상담은 기존과 동일하게 상담 건 자체를 대표하는 행 1개만 반환된다.
+  familyLinkId?: string | null;
+  studentName?: string | null;
 };
 
 // UI 폴리싱 — 관리자 화면에 14단계 파이프라인 상태를 한 번에 보여주기 위한
@@ -434,25 +456,69 @@ export async function listTrialOnboardingCandidatesAction(): Promise<TrialOnboar
   const { data: links } = consultationIds.length
     ? await admin
         .from("trial_onboarding_links")
-        .select("consultation_id, status, created_at")
+        .select("id, consultation_id, status, created_at")
         .in("consultation_id", consultationIds)
         .order("created_at", { ascending: false })
-    : { data: [] as { consultation_id: string; status: string; created_at: string }[] };
+    : { data: [] as { id: string; consultation_id: string; status: string; created_at: string }[] };
   const latestLinkStatusByConsultation = new Map<string, string>();
+  const latestLinkIdByConsultation = new Map<string, string>();
   for (const l of links ?? []) {
     if (!latestLinkStatusByConsultation.has(l.consultation_id)) {
       latestLinkStatusByConsultation.set(l.consultation_id, l.status);
+      latestLinkIdByConsultation.set(l.consultation_id, l.id);
     }
   }
 
-  return (data ?? []).map((c) => ({
-    consultationId: c.id,
-    contactName: c.contact_name,
-    contactEmail: c.contact_email,
-    trialIntentConfirmedAt: c.trial_intent_confirmed_at,
-    childId: c.child_id,
-    linkStatus: (latestLinkStatusByConsultation.get(c.id) as TrialOnboardingCandidate["linkStatus"]) ?? "none",
-  }));
+  // 계정 생성이 완료된(status='created') 학생 명단 — 최신 링크 기준으로만
+  // 형제자매 카드를 만든다(이전에 revoked된 링크의 학생은 표시하지 않음).
+  const latestLinkIds = Array.from(latestLinkIdByConsultation.values());
+  const { data: createdStudents } = latestLinkIds.length
+    ? await admin
+        .from("trial_onboarding_link_students")
+        .select("link_id, student_name, child_auth_user_id")
+        .in("link_id", latestLinkIds)
+        .eq("status", "created")
+        .order("created_at", { ascending: true })
+    : { data: [] as { link_id: string; student_name: string; child_auth_user_id: string | null }[] };
+  const linkIdToConsultationId = new Map<string, string>();
+  for (const [cId, lId] of latestLinkIdByConsultation.entries()) linkIdToConsultationId.set(lId, cId);
+  const createdStudentsByConsultation = new Map<string, { studentName: string; childId: string; linkId: string }[]>();
+  for (const s of createdStudents ?? []) {
+    if (!s.child_auth_user_id) continue;
+    const consultationId = linkIdToConsultationId.get(s.link_id);
+    if (!consultationId) continue;
+    const list = createdStudentsByConsultation.get(consultationId) ?? [];
+    list.push({ studentName: s.student_name, childId: s.child_auth_user_id, linkId: s.link_id });
+    createdStudentsByConsultation.set(consultationId, list);
+  }
+
+  return (data ?? []).flatMap((c): TrialOnboardingCandidate[] => {
+    const created = createdStudentsByConsultation.get(c.id);
+    if (created && created.length) {
+      return created.map((s) => ({
+        consultationId: c.id,
+        contactName: c.contact_name,
+        contactEmail: c.contact_email,
+        trialIntentConfirmedAt: c.trial_intent_confirmed_at,
+        childId: s.childId,
+        linkStatus: (latestLinkStatusByConsultation.get(c.id) as TrialOnboardingCandidate["linkStatus"]) ?? "none",
+        familyLinkId: s.linkId,
+        studentName: s.studentName,
+      }));
+    }
+    return [
+      {
+        consultationId: c.id,
+        contactName: c.contact_name,
+        contactEmail: c.contact_email,
+        trialIntentConfirmedAt: c.trial_intent_confirmed_at,
+        childId: c.child_id,
+        linkStatus: (latestLinkStatusByConsultation.get(c.id) as TrialOnboardingCandidate["linkStatus"]) ?? "none",
+        familyLinkId: latestLinkIdByConsultation.get(c.id) ?? null,
+        studentName: null,
+      },
+    ];
+  });
 }
 
 export async function getTrialOnboardingPipelineAction(
@@ -706,4 +772,98 @@ export async function listRegularConversionCandidatesAction(): Promise<RegularCo
       latestVersionHasEnvelope: latestVersionHasEnvelopeByContractId.get(e.contract_id) ?? false,
     };
   });
+}
+
+// =========================================================================
+// 2026-09-06(복수 자녀 온보딩) — 학생 명단 조회 + 실패한 학생 1명만 재시도.
+// 형제자매를 롤백하지 않고 실패한 학생만 개별 재시도할 수 있어야 한다는
+// 요구사항을 관리자 화면에서 실행하기 위한 액션.
+// =========================================================================
+export type TrialOnboardingLinkStudent = {
+  id: string;
+  studentName: string;
+  studentEmail: string;
+  studentGrade: string | null;
+  studentSubject: string | null;
+  status: "pending" | "created" | "failed";
+  childAuthUserId: string | null;
+  error: string | null;
+};
+
+export async function listTrialOnboardingLinkStudentsAction(linkId: string): Promise<TrialOnboardingLinkStudent[]> {
+  await requireAdminOrCapability(CONSULT_CAPABILITY);
+  const admin = createAdminClient();
+  const { data, error } = await admin
+    .from("trial_onboarding_link_students")
+    .select("id, student_name, student_email, student_grade, student_subject, status, child_auth_user_id, error")
+    .eq("link_id", linkId)
+    .order("created_at", { ascending: true });
+  if (error) throw new Error(error.message);
+  return (data ?? []).map((s) => ({
+    id: s.id,
+    studentName: s.student_name,
+    studentEmail: s.student_email,
+    studentGrade: s.student_grade,
+    studentSubject: s.student_subject,
+    status: s.status as TrialOnboardingLinkStudent["status"],
+    childAuthUserId: s.child_auth_user_id,
+    error: s.error,
+  }));
+}
+
+export type RetryTrialOnboardingStudentResult =
+  | { status: "created"; childId: string }
+  | { status: "failed"; error: string };
+
+// 실패한 학생 1명만 재시도 — 이미 만들어진 형제자매/household는 건드리지
+// 않는다. 이전 시도에서 이미 Auth 계정이 생겼다면(예: DB finalize 단계에서만
+// 실패) 그 계정을 재사용하고, 없으면 새로 만든다 — 중복 Auth 계정 생성을
+// 피하기 위해 이메일로 기존 계정 여부를 먼저 확인한다.
+export async function retryFailedTrialOnboardingStudentAction(
+  linkId: string,
+  linkStudentId: string
+): Promise<RetryTrialOnboardingStudentResult> {
+  await requireAdminOrCapability(CONSULT_CAPABILITY);
+  const admin = createAdminClient();
+
+  const { data: student, error: studentError } = await admin
+    .from("trial_onboarding_link_students")
+    .select("student_name, student_email, student_grade, status, child_auth_user_id")
+    .eq("id", linkStudentId)
+    .eq("link_id", linkId)
+    .maybeSingle();
+  if (studentError) throw new Error(studentError.message);
+  if (!student) throw new Error("존재하지 않는 학생 항목입니다.");
+  if (student.status === "created" && student.child_auth_user_id) {
+    return { status: "created", childId: student.child_auth_user_id };
+  }
+
+  let childAuthUserId = student.child_auth_user_id;
+  if (!childAuthUserId) {
+    const existing = await admin.rpc("find_auth_user_id_by_email", { p_email: student.student_email });
+    if (existing.data) {
+      childAuthUserId = existing.data as string;
+    } else {
+      const { data: created, error: createError } = await admin.auth.admin.createUser({
+        email: student.student_email,
+        email_confirm: false,
+        user_metadata: { name: student.student_name },
+      });
+      if (createError || !created?.user) {
+        return { status: "failed", error: createError?.message ?? "학생 계정 생성에 실패했습니다." };
+      }
+      childAuthUserId = created.user.id;
+    }
+  }
+
+  const { error: retryError } = await admin.rpc("retry_trial_onboarding_student", {
+    p_link_id: linkId,
+    p_link_student_id: linkStudentId,
+    p_child_auth_user_id: childAuthUserId,
+  });
+  if (retryError) {
+    return { status: "failed", error: retryError.message };
+  }
+
+  return { status: "created", childId: childAuthUserId };
 }

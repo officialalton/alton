@@ -24,7 +24,7 @@ export async function GET(request: Request) {
 
   const { data: link, error: linkError } = await admin
     .from("trial_onboarding_links")
-    .select("guardian_name, student_email, student_name")
+    .select("guardian_name")
     .eq("id", confirmed.link_id)
     .maybeSingle();
   if (linkError || !link) {
@@ -36,7 +36,5 @@ export async function GET(request: Request) {
     linkId: confirmed.link_id,
     guardianEmail: confirmed.requested_email,
     guardianName: link.guardian_name,
-    studentEmail: link.student_email,
-    studentName: link.student_name,
   });
 }

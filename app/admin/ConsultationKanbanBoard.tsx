@@ -496,9 +496,7 @@ function TrialNoticeForm({
               consultationId,
               guardianEmail,
               guardianName,
-              studentName,
-              studentEmail,
-              studentGrade,
+              students: [{ name: studentName, email: studentEmail, grade: studentGrade || undefined }],
             });
             if (result.status === "failed") {
               throw new Error(result.error);
