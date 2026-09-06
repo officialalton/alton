@@ -893,7 +893,19 @@ export async function getTrialOnboardingLinkDetailAction(linkId: string): Promis
 // 단락을 우회). 아직 한 번도 redeem되지 않은(status='pending', redeemed_at
 // null) 링크에만 허용한다 — 이미 redeem된 링크를 폐기하면 진행 중인 계정
 // 생성/자녀 연결 흐름을 끊어버릴 수 있다.
-export async function reissueTrialOnboardingLinkAction(linkId: string): Promise<SendTrialOnboardingNoticeResult> {
+// 2026-09-06(UAT 지적) — 재발급 시 기존 이메일 그대로만 쓸 수 있어, 관리자가
+// 오타를 고치거나(가장 흔한 재발급 사유가 이메일 오타 자체인데 그걸 못 고침)
+// 실제 다른 이메일을 새로 입력해야 하는 경우 대응이 불가능했다. overrides로
+// 보호자·학생 이메일(및 이름)을 재발급 시점에 새로 입력할 수 있게 한다 —
+// 넘기지 않으면 기존 값을 그대로 쓴다(하위 호환).
+export async function reissueTrialOnboardingLinkAction(
+  linkId: string,
+  overrides?: {
+    guardianEmail?: string;
+    guardianName?: string;
+    students?: { name: string; email: string; grade?: string; subject?: string }[];
+  }
+): Promise<SendTrialOnboardingNoticeResult> {
   await requireAdminOrCapability(CONSULT_CAPABILITY);
   const admin = createAdminClient();
   const { data: link, error: linkError } = await admin
@@ -914,16 +926,28 @@ export async function reissueTrialOnboardingLinkAction(linkId: string): Promise<
   if (studentsError) throw new Error(studentsError.message);
   if (!students?.length) throw new Error("학생 명단을 찾을 수 없어 재발급할 수 없습니다.");
 
+  const guardianEmail = overrides?.guardianEmail?.trim() || link.guardian_email;
+  const guardianName = overrides?.guardianName?.trim() || link.guardian_name;
+  const studentsPayload =
+    overrides?.students && overrides.students.length === students.length
+      ? overrides.students.map((s, i) => ({
+          name: s.name.trim() || students[i].student_name,
+          email: s.email.trim() || students[i].student_email,
+          grade: s.grade ?? students[i].student_grade ?? undefined,
+          subject: s.subject ?? students[i].student_subject ?? undefined,
+        }))
+      : students.map((s) => ({
+          name: s.student_name,
+          email: s.student_email,
+          grade: s.student_grade ?? undefined,
+          subject: s.student_subject ?? undefined,
+        }));
+
   return sendTrialOnboardingNoticeAction({
     consultationId: link.consultation_id,
-    guardianEmail: link.guardian_email,
-    guardianName: link.guardian_name,
-    students: students.map((s) => ({
-      name: s.student_name,
-      email: s.student_email,
-      grade: s.student_grade ?? undefined,
-      subject: s.student_subject ?? undefined,
-    })),
+    guardianEmail,
+    guardianName,
+    students: studentsPayload,
     forceReissue: true,
   });
 }
