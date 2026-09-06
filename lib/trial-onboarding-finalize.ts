@@ -77,6 +77,7 @@ export async function createGuardianAndStudentThenRedirect(params: {
 
   await sendStudentSetPasswordEmail(admin, {
     url: params.url,
+    linkId: params.linkId,
     studentEmail: params.studentEmail,
     studentName: params.studentName,
   });
@@ -96,17 +97,24 @@ export function redirectWithError(url: URL, message: string): NextResponse {
 // 보호자는 지금 이 요청을 보낸 브라우저에서 바로 /set-password로 이어지지만,
 // 학생은 별도 브라우저/기기라 학생 본인 이메일로 비밀번호 설정 링크를 보내야
 // 계정을 실제로 쓸 수 있다 — 계정만 만들고 아무 안내도 없던 공백을 메운다.
-// 이 발송 실패는 보호자 계정 생성 성공 자체를 막지 않는다(로그만 남긴다).
+// 이 발송 실패는 보호자 계정 생성 성공 자체를 막지 않는다(성공/실패 상태를
+// trial_onboarding_links.student_invite_status에 남겨 관리자 화면에서 확인·
+// 재발송할 수 있게 한다 — 이전에는 console.error만 남기고 아무 흔적이 없었다).
 async function sendStudentSetPasswordEmail(
   admin: ReturnType<typeof createAdminClient>,
-  params: { url: URL; studentEmail: string; studentName: string }
+  params: { url: URL; linkId: string; studentEmail: string; studentName: string }
 ): Promise<void> {
   const { data, error } = await admin.auth.admin.generateLink({
     type: "recovery",
     email: params.studentEmail,
   });
   if (error || !data?.properties?.hashed_token) {
+    const message = error?.message ?? "링크 생성에 실패했습니다.";
     console.error("학생 비밀번호 설정 링크 생성에 실패했습니다:", params.studentEmail, error);
+    await admin
+      .from("trial_onboarding_links")
+      .update({ student_invite_status: "failed", student_invite_error: message })
+      .eq("id", params.linkId);
     return;
   }
 
@@ -115,15 +123,47 @@ async function sendStudentSetPasswordEmail(
     params.url
   );
 
-  await sendEmail({
-    to: params.studentEmail,
-    subject: "[Alton Education] 학생 계정 비밀번호 설정",
-    html: `
-      <p>안녕하세요, ${escapeHtml(params.studentName)}님.</p>
-      <p>Alton Education 학생 계정이 생성되었습니다.</p>
-      <p><a href="${setPasswordUrl.toString()}">여기를 눌러 비밀번호를 설정해주세요</a></p>
-      <p>본인이 요청하지 않았다면 이 메일을 무시하세요.</p>
-      <p>감사합니다.<br/>Alton Education</p>
-    `,
-  });
+  try {
+    await sendEmail({
+      to: params.studentEmail,
+      subject: "[Alton Education] 학생 계정 비밀번호 설정",
+      html: `
+        <p>안녕하세요, ${escapeHtml(params.studentName)}님.</p>
+        <p>Alton Education 학생 계정이 생성되었습니다.</p>
+        <p><a href="${setPasswordUrl.toString()}">여기를 눌러 비밀번호를 설정해주세요</a></p>
+        <p>본인이 요청하지 않았다면 이 메일을 무시하세요.</p>
+        <p>감사합니다.<br/>Alton Education</p>
+      `,
+    });
+  } catch (e) {
+    const message = e instanceof Error ? e.message : String(e);
+    console.error("학생 비밀번호 설정 이메일 발송에 실패했습니다:", params.studentEmail, e);
+    await admin
+      .from("trial_onboarding_links")
+      .update({ student_invite_status: "failed", student_invite_error: message })
+      .eq("id", params.linkId);
+    return;
+  }
+
+  await admin
+    .from("trial_onboarding_links")
+    .update({
+      student_invite_status: "sent",
+      student_invite_sent_at: new Date().toISOString(),
+      student_invite_error: null,
+    })
+    .eq("id", params.linkId);
+}
+
+// 관리자의 "학생 초대 재발송" 액션(app/admin/student-invite-actions.ts)이
+// 재사용하는 공용 헬퍼 — 계정을 다시 만들지 않고, 이미 존재하는 학생 Auth
+// 계정에 대해서만 비밀번호 설정 이메일을 다시 보낸다.
+export async function resendStudentSetPasswordEmail(params: {
+  url: URL;
+  linkId: string;
+  studentEmail: string;
+  studentName: string;
+}): Promise<void> {
+  const admin = createAdminClient();
+  await sendStudentSetPasswordEmail(admin, params);
 }

@@ -4,10 +4,13 @@ const createUserMock = vi.fn();
 const generateLinkMock = vi.fn();
 const deleteUserMock = vi.fn().mockResolvedValue({ error: null });
 const rpcMock = vi.fn();
+const updateEqMock = vi.fn().mockResolvedValue({ error: null });
+const fromMock = vi.fn(() => ({ update: () => ({ eq: updateEqMock }) }));
 vi.mock("@/lib/supabase-admin", () => ({
   createAdminClient: () => ({
     auth: { admin: { createUser: createUserMock, generateLink: generateLinkMock, deleteUser: deleteUserMock } },
     rpc: rpcMock,
+    from: fromMock,
   }),
 }));
 
@@ -30,6 +33,7 @@ const BASE_PARAMS = {
 
 beforeEach(() => {
   vi.clearAllMocks();
+  updateEqMock.mockResolvedValue({ error: null });
   createUserMock
     .mockResolvedValueOnce({ data: { user: { id: "guardian-id" } }, error: null })
     .mockResolvedValueOnce({ data: { user: { id: "student-id" } }, error: null });
@@ -52,7 +56,14 @@ describe("createGuardianAndStudentThenRedirect — 학생 비밀번호 설정 �
     expect(emailArgs.html).toContain("hash-for-student%40example.com");
   });
 
-  it("학생 링크 생성이 실패해도 보호자 리다이렉트는 그대로 진행된다(로그만 남김)", async () => {
+  it("발송 성공 시 trial_onboarding_links.student_invite_status를 sent로 기록한다", async () => {
+    await createGuardianAndStudentThenRedirect(BASE_PARAMS);
+
+    expect(fromMock).toHaveBeenCalledWith("trial_onboarding_links");
+    expect(updateEqMock).toHaveBeenCalledWith("id", "link-1");
+  });
+
+  it("학생 링크 생성이 실패해도 보호자 리다이렉트는 그대로 진행된다(실패 상태를 기록)", async () => {
     generateLinkMock.mockImplementation(async ({ email }: { email: string }) => {
       if (email === "student@example.com") return { data: null, error: { message: "boom" } };
       return { data: { properties: { hashed_token: "hash-guardian" } }, error: null };
@@ -64,6 +75,20 @@ describe("createGuardianAndStudentThenRedirect — 학생 비밀번호 설정 �
     expect(res.status).toBe(307);
     expect(sendEmailMock).not.toHaveBeenCalled();
     expect(consoleErrorSpy).toHaveBeenCalled();
+    expect(fromMock).toHaveBeenCalledWith("trial_onboarding_links");
+    expect(updateEqMock).toHaveBeenCalledWith("id", "link-1");
+    consoleErrorSpy.mockRestore();
+  });
+
+  it("이메일 발송 자체가 실패해도(SMTP 등) failed 상태를 기록한다", async () => {
+    sendEmailMock.mockRejectedValueOnce(new Error("SMTP down"));
+    const consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+
+    await createGuardianAndStudentThenRedirect(BASE_PARAMS);
+
+    expect(consoleErrorSpy).toHaveBeenCalled();
+    expect(fromMock).toHaveBeenCalledWith("trial_onboarding_links");
+    expect(updateEqMock).toHaveBeenCalledWith("id", "link-1");
     consoleErrorSpy.mockRestore();
   });
 });
