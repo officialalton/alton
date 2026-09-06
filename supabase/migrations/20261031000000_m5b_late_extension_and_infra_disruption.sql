@@ -251,8 +251,15 @@ comment on function public.finalize_session_as_infra_incident(uuid, uuid, text, 
 
 -- =========================================================================
 -- 3) 선생님 사유 최종 제공 90분 미만 자동 QC(요구사항 3)
---    finalize_lesson_session()에 선택 파라미터를 덧붙여 확장(기존 호출 하위호환 유지).
+--    finalize_lesson_session()에 선택 파라미터를 덧붙여 확장. CREATE OR REPLACE는 매개변수
+--    개수가 다르면 새 오버로드를 만들 뿐 기존 4-인자 함수를 대체하지 않아 4개짜리 인자로
+--    호출할 때 "not unique" 에러가 난다 — 기존 시그니처를 먼저 명시적으로 DROP한다
+--    (M5-a 호출부는 전부 app/teacher/lesson-schedule-actions.ts, app/admin/booking-actions.ts를
+--    통해서만 이뤄지므로 이번 마이그레이션과 같은 배포에서 그 호출부도 5번째 인자를 함께
+--    넘기도록 갱신한다 — 실제로 아래 애플리케이션 코드 수정에서 처리).
 -- =========================================================================
+drop function if exists public.finalize_lesson_session(uuid, v3_session_final_status, uuid, text);
+
 create or replace function public.finalize_lesson_session(
   p_session_id uuid,
   p_outcome v3_session_final_status,
