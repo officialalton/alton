@@ -1142,6 +1142,41 @@ M5-a(판정 규칙 코어)에 이어 R7의 나머지(선생님 지각 당일 연
   `02cdb24`(item 1)→`fe3e442`(item 2)→`da394e5`(item 3)→`b4c9d78`(item 5-a)→
   `35c916f`(item 5-b)→`ca4bc1c`(item 5-c)→`41ec2a2`(item 6)→`d1311b5`(item 4).
 
+## M4·M5 최종 코드 대조 보완(2026-09-06) — 완료, 정식 종료
+
+2차 라운드 이후 최종 코드 대조에서 발견된 정산·수업권 무결성 잔여 4건을 전부
+반영했다(`65b3d3a`, additive migration `20261124000000_m5c_final_reconciliation_integrity_gaps.sql`).
+기존 함수·마이그레이션 재작성 없음.
+
+1. `resolve_session_reconciliation_task()` — 반영 직전 세션 상태(final_status/
+   payable_minutes)뿐 아니라 해당 예약의 실제 현재 entitlement disposition,
+   작업 생성 이후 같은 grant에 적용된 다른 adjust 존재 여부까지 재확인 —
+   전제가 달라졌으면 needs_review로 전환하고 저장된 조정량을 적용하지 않는다.
+2. `set_reconciliation_task_student_cancelled_disposition()` — hold 금액 조회를
+   grant_id 전체가 아니라 이 작업이 속한 세션의 reservation_id로 한정(같은
+   grant에 예약이 여러 건인 경우 다른 예약의 hold와 섞이는 문제 해소).
+3. `resolve_teacher_lateness()` — 같은 세션에 이미 지각 처리가 적용됐으면
+   재호출(중복 처리)을 차단(세션당 1회만 허용 — 누적 지각분이 원 수업시간을
+   초과하는 상황 자체가 생기지 않음).
+4. GPA 음수 차단 — 20261106 마이그레이션이 `students_gpa_range`를
+   `students_gpa_requires_scale`/`students_gpa_within_scale`로 대체하며
+   빠뜨린 `gpa>=0` 검증 회귀를 UI·서버 액션·DB 함수·DB CHECK
+   (`students_gpa_non_negative`) 4곳 전부에 복구.
+- **검증**: `supabase db reset --local`(전체 마이그레이션 클린 적용, 위 4건
+  포함), 전체 Vitest 166개 파일·1112건 통과(재현 확인을 위해 2회 연속 클린
+  전체 실행), `tsc --noEmit` 클린, `next build` 클린, 작업트리 클린(전부
+  커밋). 전체 재실행 중 `trial-entitlement-and-cancellation.integration.test.ts`
+  1건이 한 차례 `teacher_slot_not_open`으로 실패했으나 파일 자체 주석에
+  기록된 기존 알려진 결함(공유 선생님 `dddddddd-...-001`을 다른 파일과 함께
+  쓸 때 vitest 병렬 워커 간 가용시간 규칙 삭제 레이스)이며, 단독 재실행·
+  재현 실행 둘 다 정상 통과해 이번 4건 수정과 무관함을 확인했다 — 별도 조치
+  없음(기존에도 알려져 있던 파일 간 레이스, 회귀 아님).
+- **남은 blocker**: 이번 최종 대조 범위 내 없음. M4·M5(R7) 전체가 이번
+  라운드로 로컬 검증 기준 정식 종료된다. 기존 정식 오픈 전 법률 검토
+  blocker(환불 산식 관할별 검토, 회사 전자승인 법률 적합성 등)는 그대로
+  유지.
+- 로컬 git commit까지만, push 없음. 이번 라운드 실제 커밋: `65b3d3a`.
+
 ## 잔여 R 실행계획(2026-09-05 확정) — 다음은 R8∥R10부터
 
 M4·R7(M5-a+M5-b) + 위 검수 보완 라운드 전부 완료. **다음 착수는 R8∥R10 병렬**
