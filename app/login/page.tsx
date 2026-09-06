@@ -5,9 +5,9 @@ import { signInWithGoogleForAdmin } from "@/app/admin/google-link-actions";
 export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string }>;
+  searchParams: Promise<{ error?: string; notice?: string }>;
 }) {
-  const { error } = await searchParams;
+  const { error, notice } = await searchParams;
 
   return (
     <main className="min-h-screen bg-grey-100 flex items-center justify-center px-5 py-10">
@@ -52,6 +52,9 @@ export default async function LoginPage({
 
           {error && (
             <p className="text-[13px] text-red mb-4">{error}</p>
+          )}
+          {!error && notice && (
+            <p className="text-[13px] text-ink bg-grey-100 rounded-lg px-3 py-2 mb-4">{notice}</p>
           )}
 
           <div className="flex justify-between items-center mb-5 text-[13px]">

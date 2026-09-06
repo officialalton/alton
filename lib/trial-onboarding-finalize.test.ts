@@ -37,7 +37,11 @@ beforeEach(() => {
   createUserMock
     .mockResolvedValueOnce({ data: { user: { id: "guardian-id" } }, error: null })
     .mockResolvedValueOnce({ data: { user: { id: "student-id" } }, error: null });
-  rpcMock.mockResolvedValue({ error: null });
+  rpcMock.mockImplementation((fnName: string) =>
+    fnName === "find_auth_user_id_by_email"
+      ? Promise.resolve({ data: null, error: null })
+      : Promise.resolve({ error: null })
+  );
   generateLinkMock.mockImplementation(async ({ email }: { email: string }) => ({
     data: { properties: { hashed_token: `hash-for-${email}` } },
     error: null,
@@ -106,7 +110,11 @@ describe("createGuardianAndStudentThenRedirect — 부분 실패 시 고아 Auth
   });
 
   it("계정 연결(finalize) RPC가 실패하면 보호자·학생 Auth 계정을 모두 정리한다", async () => {
-    rpcMock.mockResolvedValue({ error: { message: "finalize boom" } });
+    rpcMock.mockImplementation((fnName: string) =>
+      fnName === "find_auth_user_id_by_email"
+        ? Promise.resolve({ data: null, error: null })
+        : Promise.resolve({ error: { message: "finalize boom" } })
+    );
 
     await createGuardianAndStudentThenRedirect(BASE_PARAMS);
 

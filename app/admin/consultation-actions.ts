@@ -135,11 +135,22 @@ export async function rescheduleConsultation(
  * consultations.duplicate_of_consultation_id를 직접 채우는 별도 동작이다(이번
  * 범위에서는 후보 조회만 제공).
  */
+export type DuplicateConsultationCandidate = {
+  id: string;
+  contact_name: string;
+  contact_email: string;
+  status: string;
+  outcome: string | null;
+  admin_review_summary: string | null;
+  scheduled_at: string | null;
+  created_at: string;
+};
+
 export async function findDuplicateConsultationCandidates(params: {
   email?: string;
   phone?: string;
   excludeConsultationId?: string;
-}): Promise<Array<{ id: string; contact_name: string; contact_email: string; status: string; created_at: string }>> {
+}): Promise<DuplicateConsultationCandidate[]> {
   await requireAdmin();
   const admin = createAdminClient();
   const { data, error } = await admin.rpc("find_possible_duplicate_consultations", {
@@ -148,7 +159,7 @@ export async function findDuplicateConsultationCandidates(params: {
     p_exclude_id: params.excludeConsultationId ?? null,
   });
   if (error) throw new Error(error.message);
-  return data ?? [];
+  return (data ?? []) as DuplicateConsultationCandidate[];
 }
 
 // =========================================================================

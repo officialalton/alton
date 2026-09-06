@@ -34,7 +34,11 @@ import {
   confirmTrialIntentAction,
   planTrialSubjectAndAssignTeacherAction,
 } from "./trial-onboarding-actions";
-import { createNewContractVersionForResend } from "./consultation-actions";
+import {
+  createNewContractVersionForResend,
+  findDuplicateConsultationCandidates,
+  type DuplicateConsultationCandidate,
+} from "./consultation-actions";
 import LessonReviewAdminEditor from "./LessonReviewAdminEditor";
 import type { AdminSubject } from "./subject-data";
 import type { MatchingTeacherCandidate } from "./matching-data";
@@ -114,6 +118,9 @@ export default function ConsultationKanbanBoard({
                       </div>
                     )}
                     {c.student_grade && <div className="text-[10.5px] text-grey-400">{c.student_grade}</div>}
+                    {c.admin_review_summary && (
+                      <div className="text-[10.5px] text-grey-500 mt-1 line-clamp-2">📝 {c.admin_review_summary}</div>
+                    )}
                   </button>
                 ))}
                 {inStage.length === 0 && <p className="text-[11px] text-grey-400">해당 상담 없음</p>}
@@ -153,10 +160,21 @@ function ConsultationCardDetailPanel({
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [closing, setClosing] = useState(false);
+  const [duplicateCandidates, setDuplicateCandidates] = useState<DuplicateConsultationCandidate[]>([]);
 
   async function load() {
     try {
-      setDetail(await getConsultationCardDetailAction(consultationId));
+      const d = await getConsultationCardDetailAction(consultationId);
+      setDetail(d);
+      // 2026-09-06 — 재상담 후보(같은 이메일로 과거에 상담한 이력) 조회.
+      // 자동 병합하지 않고 후보 배지 + 참고용 요약만 노출한다(공개 화면에는
+      // 노출하지 않음, 관리자 상세 패널 전용).
+      findDuplicateConsultationCandidates({
+        email: d.consultation.contact_email,
+        excludeConsultationId: consultationId,
+      })
+        .then(setDuplicateCandidates)
+        .catch(() => setDuplicateCandidates([]));
     } catch (e) {
       setError(e instanceof Error ? e.message : "상담 상세 조회에 실패했습니다.");
     }
@@ -212,6 +230,25 @@ function ConsultationCardDetailPanel({
             </>
           )}
         </div>
+        {c.admin_review_summary && (
+          <div className="text-[12px] text-ink bg-grey-100 rounded-lg px-3 py-2 mb-3">
+            📝 <span className="font-bold">상담 리뷰:</span> {c.admin_review_summary}
+          </div>
+        )}
+        {/* 2026-09-06 — 재상담 후보: 같은 이메일로 과거 상담 이력이 있으면 참고용으로만
+            노출한다(자동 병합 없음, 공개 화면에는 노출 안 함). */}
+        {duplicateCandidates.length > 0 && (
+          <div className="text-[12px] text-ink bg-red/5 rounded-lg px-3 py-2 mb-3">
+            <div className="font-bold text-red mb-1">🔁 재상담 후보 — 같은 이메일로 과거 상담 이력이 있습니다</div>
+            {duplicateCandidates.map((d) => (
+              <div key={d.id} className="text-[11.5px] text-grey-500">
+                {formatConsultTime(d.scheduled_at ?? d.created_at)} · 상태: {d.status}
+                {d.outcome ? ` · 결과: ${d.outcome}` : ""}
+                {d.admin_review_summary ? ` · "${d.admin_review_summary}"` : ""}
+              </div>
+            ))}
+          </div>
+        )}
         {error && <p className={errText}>{error}</p>}
 
         {/* 1. 상담 신청 단계 — 수락/거절 */}
@@ -239,13 +276,17 @@ function ConsultationCardDetailPanel({
           <OutcomeForm consultationId={c.id} onDone={() => run(async () => {})} />
         )}
 
-        {/* 3. 체험 신청 단계 — 체험 동의/온보딩 안내, 체험수업권 재처리 */}
+        {/* 3. 체험 신청 단계 — 체험 동의/온보딩 안내, 체험수업권 재처리.
+            2026-09-06: 결과 기록 직후 이 다음 단계를 놓치기 쉽다는 지적(UAT)에 따라
+            강조 박스 + 주요 버튼 스타일로 눈에 띄게 바꿨다(로직은 그대로). */}
         {c.outcome === "trial_recommended" && (
-          <div className="mb-3 space-y-2">
-            <div className="text-[11.5px] font-bold text-grey-500">체험 온보딩</div>
+          <div className="mb-3 space-y-2 border-[1.5px] border-ink rounded-lg px-3 py-2.5 bg-grey-100/50">
+            <div className="text-[11.5px] font-bold text-ink">
+              다음 단계 — 체험 온보딩{!c.trial_intent_confirmed_at ? "(아직 진행 안 됨)" : ""}
+            </div>
             {!c.trial_intent_confirmed_at && (
               <button
-                className={btnSecondary}
+                className={btnPrimary}
                 disabled={busy}
                 onClick={() => run(() => confirmTrialIntentAction(c.id))}
               >

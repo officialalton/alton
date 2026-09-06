@@ -49,8 +49,10 @@ vi.mock("./trial-onboarding-actions", () => ({
   planTrialSubjectAndAssignTeacherAction: (params: unknown) => planTrialSubjectAndAssignTeacherActionMock(params),
 }));
 
+const findDuplicateConsultationCandidatesMock = vi.fn().mockResolvedValue([]);
 vi.mock("./consultation-actions", () => ({
   createNewContractVersionForResend: vi.fn(),
+  findDuplicateConsultationCandidates: (params: unknown) => findDuplicateConsultationCandidatesMock(params),
 }));
 
 vi.mock("./LessonReviewAdminEditor", () => ({
@@ -118,6 +120,7 @@ function cardDetail() {
 describe("ConsultationKanbanBoard — 과목·선생님 배정 클릭 UI(2026-09-05 사용자 지시 1·2번)", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    findDuplicateConsultationCandidatesMock.mockResolvedValue([]);
     listKanbanBoardActionMock.mockResolvedValue([cardRow()]);
     getConsultationCardDetailActionMock.mockResolvedValue(cardDetail());
     planTrialSubjectAndAssignTeacherActionMock.mockResolvedValue({
@@ -208,6 +211,7 @@ describe("ConsultationKanbanBoard — 체험 온보딩 안내 발송 폼(2026-09
 
   beforeEach(() => {
     vi.clearAllMocks();
+    findDuplicateConsultationCandidatesMock.mockResolvedValue([]);
     listKanbanBoardActionMock.mockResolvedValue([cardRow()]);
   });
 
@@ -246,6 +250,7 @@ describe("ConsultationKanbanBoard — 체험 온보딩 안내 발송 폼(2026-09
 describe("2026-09-06: 상담 카드·상세에 상담 시각 노출", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    findDuplicateConsultationCandidatesMock.mockResolvedValue([]);
   });
 
   it("확정 시각(scheduled_at)이 있으면 카드와 상세 모두에 노출된다", async () => {
@@ -284,5 +289,52 @@ describe("2026-09-06: 상담 카드·상세에 상담 시각 노출", () => {
     fireEvent.click(await screen.findByText("김민지"));
     await screen.findByTestId("consultation-card-detail");
     expect(screen.getByText(/희망 시각/)).toBeInTheDocument();
+  });
+
+  it("2026-09-06: 관리자 검토 요약(admin_review_summary)이 있으면 카드와 상세 모두에 노출된다", async () => {
+    listKanbanBoardActionMock.mockResolvedValue([{ ...cardRow(), admin_review_summary: "성실하고 목표 명확함" }]);
+    getConsultationCardDetailActionMock.mockResolvedValue({
+      ...cardDetail(),
+      consultation: { ...cardDetail().consultation, admin_review_summary: "성실하고 목표 명확함" },
+    });
+
+    render(<ConsultationKanbanBoard subjects={subjects} teacherCandidatesBySubject={teacherCandidatesBySubject} />);
+
+    await waitFor(() => expect(screen.getByText(/성실하고 목표 명확함/)).toBeInTheDocument());
+
+    fireEvent.click(await screen.findByText("김민지"));
+    await screen.findByTestId("consultation-card-detail");
+    expect(screen.getByText(/상담 리뷰:/)).toBeInTheDocument();
+  });
+
+  it("2026-09-06: 같은 이메일로 과거 상담 이력(재상담 후보)이 있으면 상세 패널에 참고용으로만 노출된다(자동 병합 없음)", async () => {
+    listKanbanBoardActionMock.mockResolvedValue([cardRow()]);
+    getConsultationCardDetailActionMock.mockResolvedValue(cardDetail());
+    findDuplicateConsultationCandidatesMock.mockResolvedValue([
+      {
+        id: "old-c1",
+        contact_name: "김민지",
+        contact_email: "minji@example.com",
+        status: "completed",
+        outcome: "no_trial",
+        admin_review_summary: "예전 상담 — 예산 문제로 보류",
+        scheduled_at: "2026-01-10T00:00:00Z",
+        created_at: "2026-01-01T00:00:00Z",
+      },
+    ]);
+
+    render(<ConsultationKanbanBoard subjects={subjects} teacherCandidatesBySubject={teacherCandidatesBySubject} />);
+
+    fireEvent.click(await screen.findByText("김민지"));
+    await screen.findByTestId("consultation-card-detail");
+
+    await waitFor(() =>
+      expect(findDuplicateConsultationCandidatesMock).toHaveBeenCalledWith({
+        email: "minji@example.com",
+        excludeConsultationId: "c1",
+      })
+    );
+    await waitFor(() => expect(screen.getByText(/재상담 후보/)).toBeInTheDocument());
+    expect(screen.getByText(/예전 상담 — 예산 문제로 보류/)).toBeInTheDocument();
   });
 });
