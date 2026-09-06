@@ -25,6 +25,7 @@ vi.mock("./booking-actions", () => ({
   adminApplyMakeupTimeToBooking: vi.fn(),
   listSessionJudgmentReconciliationTasks: vi.fn(),
   resolveSessionJudgmentReconciliationTask: vi.fn(),
+  setReconciliationTaskStudentCancelledDisposition: vi.fn(),
 }));
 
 beforeEach(() => {
@@ -340,6 +341,7 @@ describe("BookingReconciliationPanel", () => {
         createdAt: "2026-09-05T00:00:00Z",
         resolvedAt: null,
         reason: "실제로는 선생님 노쇼였음",
+        adminDispositionReason: null,
       },
     ]);
     vi.mocked(actions.resolveSessionJudgmentReconciliationTask).mockResolvedValue({ result: "resolved" });
@@ -358,5 +360,44 @@ describe("BookingReconciliationPanel", () => {
     vi.mocked(actions.listSessionJudgmentReconciliationTasks).mockResolvedValue([]);
     render(<BookingReconciliationPanel />);
     await waitFor(() => expect(screen.getByText("대사 작업이 없습니다.")).toBeInTheDocument());
+  });
+
+  it("2026-09-06: student_cancelled 자동 판정 불가 작업은 '반영' 대신 수업권 처리 방식 선택 폼을 보여주고, 확정 후에만 반영 가능하다", async () => {
+    vi.mocked(actions.listSessionJudgmentReconciliationTasks).mockResolvedValue([
+      {
+        taskId: "task2",
+        sessionId: "s3",
+        priorFinalStatus: "completed",
+        newFinalStatus: "student_cancelled",
+        priorPayableMinutes: 120,
+        newPayableMinutes: 0,
+        currentEntitlementDisposition: "consume",
+        expectedEntitlementDisposition: null,
+        requiredEntitlementAdjustmentAmount: 0,
+        status: "pending",
+        createdAt: "2026-09-06T00:00:00Z",
+        resolvedAt: null,
+        reason: "학생 취소로 재판정",
+        adminDispositionReason: null,
+      },
+    ]);
+    vi.mocked(actions.setReconciliationTaskStudentCancelledDisposition).mockResolvedValue(undefined);
+    render(<BookingReconciliationPanel />);
+
+    await waitFor(() => expect(screen.getByText("수업권 처리 방식 선택")).toBeInTheDocument());
+    expect(screen.queryByText("반영")).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByText("수업권 처리 방식 선택"));
+    fireEvent.click(screen.getByText("해제(release)"));
+    fireEvent.change(screen.getByPlaceholderText("사유(필수)"), { target: { value: "취소 기록 없음 — 수동 확인" } });
+    fireEvent.click(screen.getByText("확정"));
+
+    await waitFor(() =>
+      expect(actions.setReconciliationTaskStudentCancelledDisposition).toHaveBeenCalledWith({
+        taskId: "task2",
+        disposition: "release",
+        reason: "취소 기록 없음 — 수동 확인",
+      })
+    );
   });
 });

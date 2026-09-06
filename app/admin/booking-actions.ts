@@ -762,6 +762,9 @@ export type ReconciliationTaskRow = {
   createdAt: string;
   resolvedAt: string | null;
   reason: string | null;
+  /** 2026-09-06: student_cancelled인데 취소 기록이 없어 관리자가 직접 consume/release를
+   * 선택했을 때만 채워진다(자동 판정된 경우는 null). */
+  adminDispositionReason: string | null;
 };
 
 /**
@@ -774,7 +777,7 @@ export async function listSessionJudgmentReconciliationTasks(): Promise<Reconcil
   const { data, error } = await admin
     .from("session_judgment_reconciliation_tasks")
     .select(
-      "id, session_id, prior_final_status, new_final_status, prior_payable_minutes, new_payable_minutes, current_entitlement_disposition, expected_entitlement_disposition, required_entitlement_adjustment_amount, status, created_at, resolved_at, reason"
+      "id, session_id, prior_final_status, new_final_status, prior_payable_minutes, new_payable_minutes, current_entitlement_disposition, expected_entitlement_disposition, required_entitlement_adjustment_amount, status, created_at, resolved_at, reason, admin_disposition_reason"
     )
     .order("created_at", { ascending: false })
     .limit(200);
@@ -793,7 +796,27 @@ export async function listSessionJudgmentReconciliationTasks(): Promise<Reconcil
     createdAt: row.created_at as string,
     resolvedAt: row.resolved_at as string | null,
     reason: row.reason as string | null,
+    adminDispositionReason: row.admin_disposition_reason as string | null,
   }));
+}
+
+/**
+ * 2026-09-06 — student_cancelled 재판정인데 취소 기록이 없어 자동 판정이 불가능했던
+ * 대사 작업에, 관리자가 consume/release를 직접 선택하고 사유를 남긴다. 이 선택 없이는
+ * resolveSessionJudgmentReconciliationTask()가 반영을 거부한다(DB에서 강제).
+ */
+export async function setReconciliationTaskStudentCancelledDisposition(params: {
+  taskId: string;
+  disposition: "consume" | "release";
+  reason: string;
+}): Promise<void> {
+  const { supabase } = await requireAdminOrCapability(BOOKING_CAPABILITY);
+  const { error } = await supabase.rpc("set_reconciliation_task_student_cancelled_disposition", {
+    p_task_id: params.taskId,
+    p_disposition: params.disposition,
+    p_reason: params.reason,
+  });
+  if (error) throw new Error(error.message);
 }
 
 /**

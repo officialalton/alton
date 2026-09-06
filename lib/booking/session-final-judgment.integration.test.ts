@@ -451,3 +451,141 @@ describe("2026-09-05 후속 — 재판정 시 entitlement 대사(reconciliation)
     ).toThrow(/needs_review/);
   });
 });
+
+describe("2026-09-06 후속 — student_cancelled 재판정의 entitlement disposition 자동 판정", () => {
+  it("취소 기록이 시작 24시간 이상 전이면 release로 자동 판정된다", () => {
+    grantRegularEntitlement();
+    const { sessionId, reservationId } = bookSession(regularLessonTypeId, 51, 120);
+    psql(`select finalize_lesson_session('${sessionId}', 'completed', '${TEACHER_ID}', '완료(오판정)');`);
+    // 시작 3일 전에 취소된 것으로 취소 기록을 남긴다(24시간 이상 전 — release 기대).
+    psql(
+      `insert into reservation_cancellations (reservation_id, cancelled_by_role, cancelled_by_id, reason, entitlement_disposition)
+       values ('${reservationId}', 'student', '${childId}', '테스트용 취소 기록(24h+)', 'consumed');`
+    );
+    psql(
+      `update reservation_cancellations set cancelled_at = (select starts_at from reservations where id = '${reservationId}') - interval '3 days'
+       where reservation_id = '${reservationId}';`
+    );
+
+    psql(`
+      set role authenticated;
+      select set_config('request.jwt.claim.sub', '${ADMIN_ID}', false);
+      select reopen_session('${sessionId}', '재검토 필요');
+      select recomplete_session('${sessionId}', 'student_cancelled', '실제로는 학생이 미리 취소했음');
+      reset role;
+    `);
+
+    const [expectedDisposition, requiredAmount, status] = psql(
+      `select expected_entitlement_disposition, required_entitlement_adjustment_amount, status
+       from session_judgment_reconciliation_tasks where session_id = '${sessionId}';`
+    ).split("|");
+    expect(expectedDisposition).toBe("release");
+    expect(requiredAmount).toBe("1"); // consume→release, 수업권 복원 필요.
+    expect(status).toBe("pending");
+
+    const taskId = psql(`select id from session_judgment_reconciliation_tasks where session_id = '${sessionId}';`);
+    const resolveOutput = psql(`
+      set role authenticated;
+      select set_config('request.jwt.claim.sub', '${ADMIN_ID}', false);
+      select resolve_session_reconciliation_task('${taskId}', '자동 판정 그대로 반영');
+      reset role;
+    `);
+    const lines = resolveOutput.split("\n").filter((l) => l.length > 0);
+    expect(lines[lines.length - 1]).toBe("resolved");
+  });
+
+  it("취소 기록이 시작 24시간 미만 전이면 consume으로 자동 판정된다", () => {
+    grantRegularEntitlement();
+    const { sessionId, reservationId } = bookSession(regularLessonTypeId, 52, 120);
+    psql(`select finalize_lesson_session('${sessionId}', 'teacher_no_show', '${TEACHER_ID}', '오판정(원래 학생 취소)');`);
+    psql(
+      `insert into reservation_cancellations (reservation_id, cancelled_by_role, cancelled_by_id, reason, entitlement_disposition)
+       values ('${reservationId}', 'student', '${childId}', '테스트용 취소 기록(24h 미만)', 'released');`
+    );
+    psql(
+      `update reservation_cancellations set cancelled_at = (select starts_at from reservations where id = '${reservationId}') - interval '3 hours'
+       where reservation_id = '${reservationId}';`
+    );
+
+    psql(`
+      set role authenticated;
+      select set_config('request.jwt.claim.sub', '${ADMIN_ID}', false);
+      select reopen_session('${sessionId}', '재검토 필요');
+      select recomplete_session('${sessionId}', 'student_cancelled', '실제로는 학생이 임박 취소했음');
+      reset role;
+    `);
+
+    const expectedDisposition = psql(
+      `select expected_entitlement_disposition from session_judgment_reconciliation_tasks where session_id = '${sessionId}';`
+    );
+    expect(expectedDisposition).toBe("consume");
+  });
+
+  it("취소 기록이 없으면 자동 판정이 불가능해 반영이 거부되고, 관리자가 직접 선택한 뒤에야 반영된다", () => {
+    grantRegularEntitlement();
+    const { sessionId } = bookSession(regularLessonTypeId, 53, 120);
+    psql(`select finalize_lesson_session('${sessionId}', 'completed', '${TEACHER_ID}', '완료(오판정)');`);
+
+    psql(`
+      set role authenticated;
+      select set_config('request.jwt.claim.sub', '${ADMIN_ID}', false);
+      select reopen_session('${sessionId}', '재검토 필요');
+      select recomplete_session('${sessionId}', 'student_cancelled', '실제로는 학생 취소였음(취소 기록 없음)');
+      reset role;
+    `);
+
+    const expectedDisposition = psql(
+      `select coalesce(expected_entitlement_disposition, 'null') from session_judgment_reconciliation_tasks where session_id = '${sessionId}';`
+    );
+    expect(expectedDisposition).toBe("null");
+
+    const taskId = psql(`select id from session_judgment_reconciliation_tasks where session_id = '${sessionId}';`);
+
+    // 관리자가 선택하기 전에는 반영이 거부된다.
+    expect(() =>
+      psql(`
+        set role authenticated;
+        select set_config('request.jwt.claim.sub', '${ADMIN_ID}', false);
+        select resolve_session_reconciliation_task('${taskId}', '선택 없이 반영 시도');
+        reset role;
+      `)
+    ).toThrow(/관리자가 소진\/해제 여부를 먼저 선택해야 합니다/);
+
+    // 사유 없이 선택하는 것도 거부된다.
+    expect(() =>
+      psql(`
+        set role authenticated;
+        select set_config('request.jwt.claim.sub', '${ADMIN_ID}', false);
+        select set_reconciliation_task_student_cancelled_disposition('${taskId}', 'release', '');
+        reset role;
+      `)
+    ).toThrow(/사유를 반드시 입력해야 합니다/);
+
+    // 관리자가 사유와 함께 명시적으로 선택한다.
+    psql(`
+      set role authenticated;
+      select set_config('request.jwt.claim.sub', '${ADMIN_ID}', false);
+      select set_reconciliation_task_student_cancelled_disposition('${taskId}', 'release', '학부모 요청 이메일로 사전 취소 확인됨');
+      reset role;
+    `);
+
+    const [expectedAfter, adminReason] = psql(
+      `select expected_entitlement_disposition, admin_disposition_reason from session_judgment_reconciliation_tasks where id = '${taskId}';`
+    ).split("|");
+    expect(expectedAfter).toBe("release");
+    expect(adminReason).toBe("학부모 요청 이메일로 사전 취소 확인됨");
+
+    // 이제 반영할 수 있다.
+    const resolveOutput = psql(`
+      set role authenticated;
+      select set_config('request.jwt.claim.sub', '${ADMIN_ID}', false);
+      select resolve_session_reconciliation_task('${taskId}', '관리자 선택 반영');
+      reset role;
+    `);
+    const lines = resolveOutput.split("\n").filter((l) => l.length > 0);
+    expect(lines[lines.length - 1]).toBe("resolved");
+
+    const finalStatus = psql(`select status from session_judgment_reconciliation_tasks where id = '${taskId}';`);
+    expect(finalStatus).toBe("resolved");
+  });
+});

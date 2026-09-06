@@ -27,6 +27,7 @@ import {
   adminApplyMakeupTimeToBooking,
   listSessionJudgmentReconciliationTasks,
   resolveSessionJudgmentReconciliationTask,
+  setReconciliationTaskStudentCancelledDisposition,
   type ReconciliationRow,
   type NotificationOutboxSummary,
   type IncidentReportAdminRow,
@@ -112,6 +113,10 @@ export default function BookingReconciliationPanel() {
   const [applyMinutesDraft, setApplyMinutesDraft] = useState("");
   const [reconciliationTasks, setReconciliationTasks] = useState<ReconciliationTaskRow[] | null>(null);
   const [resolvingTaskId, setResolvingTaskId] = useState<string | null>(null);
+  const [dispositionSelectTaskId, setDispositionSelectTaskId] = useState<string | null>(null);
+  const [dispositionDraft, setDispositionDraft] = useState<"consume" | "release">("consume");
+  const [dispositionReasonDraft, setDispositionReasonDraft] = useState("");
+  const [submittingDispositionTaskId, setSubmittingDispositionTaskId] = useState<string | null>(null);
 
   async function refresh() {
     setLoading(true);
@@ -157,6 +162,30 @@ export default function BookingReconciliationPanel() {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
       setResolvingTaskId(null);
+    }
+  }
+
+  async function handleSubmitStudentCancelledDisposition(taskId: string) {
+    if (!dispositionReasonDraft.trim()) {
+      setError("사유를 입력해야 합니다.");
+      return;
+    }
+    setSubmittingDispositionTaskId(taskId);
+    setError(null);
+    try {
+      await setReconciliationTaskStudentCancelledDisposition({
+        taskId,
+        disposition: dispositionDraft,
+        reason: dispositionReasonDraft.trim(),
+      });
+      setMessage("수업권 처리 방식을 확정했습니다 — 이제 '반영'을 눌러 적용하세요.");
+      setDispositionSelectTaskId(null);
+      setDispositionReasonDraft("");
+      await refresh();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setSubmittingDispositionTaskId(null);
     }
   }
 
@@ -946,14 +975,81 @@ export default function BookingReconciliationPanel() {
                 {t.requiredEntitlementAdjustmentAmount}장
               </div>
             )}
-            {t.status === "pending" && (
-              <button
-                onClick={() => handleResolveReconciliationTask(t.taskId)}
-                disabled={resolvingTaskId === t.taskId}
-                className="mt-2 text-[11px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
-              >
-                {resolvingTaskId === t.taskId ? "반영 중…" : "반영"}
-              </button>
+            {t.adminDispositionReason && (
+              <div className="text-[11px] text-grey-500 mt-0.5">관리자 확인 사유: {t.adminDispositionReason}</div>
+            )}
+            {t.status === "pending" && t.expectedEntitlementDisposition === null ? (
+              dispositionSelectTaskId === t.taskId ? (
+                <div className="mt-2 border border-grey-200 rounded-lg p-3 bg-grey-100/50">
+                  <div className="text-[11px] font-bold text-ink mb-1.5">
+                    취소 기록이 없어 자동 판정이 불가능합니다 — 수업권 처리 방식을 직접 선택하세요.
+                  </div>
+                  <div className="flex gap-3 mb-2">
+                    <label className="flex items-center gap-1 text-[12px]">
+                      <input
+                        type="radio"
+                        checked={dispositionDraft === "consume"}
+                        onChange={() => setDispositionDraft("consume")}
+                      />
+                      소진(consume)
+                    </label>
+                    <label className="flex items-center gap-1 text-[12px]">
+                      <input
+                        type="radio"
+                        checked={dispositionDraft === "release"}
+                        onChange={() => setDispositionDraft("release")}
+                      />
+                      해제(release)
+                    </label>
+                  </div>
+                  <textarea
+                    value={dispositionReasonDraft}
+                    onChange={(e) => setDispositionReasonDraft(e.target.value)}
+                    placeholder="사유(필수)"
+                    className="w-full text-[12px] border border-grey-200 rounded-lg px-2 py-1.5 mb-2"
+                    rows={2}
+                  />
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => handleSubmitStudentCancelledDisposition(t.taskId)}
+                      disabled={submittingDispositionTaskId === t.taskId}
+                      className="text-[11px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
+                    >
+                      {submittingDispositionTaskId === t.taskId ? "저장 중…" : "확정"}
+                    </button>
+                    <button
+                      onClick={() => {
+                        setDispositionSelectTaskId(null);
+                        setDispositionReasonDraft("");
+                      }}
+                      className="text-[11px] font-bold text-grey-500 px-3 py-1.5"
+                    >
+                      취소
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  onClick={() => {
+                    setDispositionSelectTaskId(t.taskId);
+                    setDispositionDraft("consume");
+                    setDispositionReasonDraft("");
+                  }}
+                  className="mt-2 text-[11px] font-bold text-white bg-ink rounded-lg px-3 py-1.5"
+                >
+                  수업권 처리 방식 선택
+                </button>
+              )
+            ) : (
+              t.status === "pending" && (
+                <button
+                  onClick={() => handleResolveReconciliationTask(t.taskId)}
+                  disabled={resolvingTaskId === t.taskId}
+                  className="mt-2 text-[11px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
+                >
+                  {resolvingTaskId === t.taskId ? "반영 중…" : "반영"}
+                </button>
+              )
             )}
           </div>
         ))
