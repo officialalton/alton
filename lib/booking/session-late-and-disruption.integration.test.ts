@@ -149,6 +149,41 @@ describe("resolve_teacher_lateness() — 당일 상호 합의 연장 + 미이행
       /진행 중\(live\)인 세션만/
     );
   });
+
+  it("2026-09-06: 지각분이 원 수업시간을 초과하면 거부한다", () => {
+    grantRegularEntitlement();
+    const { sessionId } = bookSession(33, 60);
+    psql(`select mark_lesson_session_started('${sessionId}', '${teacherId}');`);
+    expect(() => psql(`select resolve_teacher_lateness('${sessionId}', 90, 0, '${teacherId}', '60분 세션에 90분 지각 입력 시도');`)).toThrow(
+      /원 수업시간.*초과할 수 없습니다/
+    );
+  });
+
+  it("2026-09-06: 연장분이 음수면 거부한다", () => {
+    grantRegularEntitlement();
+    const { sessionId } = bookSession(34, 60);
+    psql(`select mark_lesson_session_started('${sessionId}', '${teacherId}');`);
+    expect(() => psql(`select resolve_teacher_lateness('${sessionId}', 10, -1, '${teacherId}', '음수 연장 시도');`)).toThrow(
+      /합의 연장분은 0 이상/
+    );
+  });
+
+  it("2026-09-06: 연장분이 지각분을 초과하면 거부한다", () => {
+    grantRegularEntitlement();
+    const { sessionId } = bookSession(35, 60);
+    psql(`select mark_lesson_session_started('${sessionId}', '${teacherId}');`);
+    expect(() => psql(`select resolve_teacher_lateness('${sessionId}', 10, 20, '${teacherId}', '지각분보다 큰 연장 시도');`)).toThrow(
+      /지각분 이하여야 합니다/
+    );
+  });
+
+  it("2026-09-06: sessions.payable_minutes에는 음수를 직접 넣을 수 없다(CHECK 제약)", () => {
+    grantRegularEntitlement();
+    const { sessionId } = bookSession(36, 60);
+    expect(() => psql(`update sessions set payable_minutes = -1 where id = '${sessionId}';`)).toThrow(
+      /sessions_payable_minutes_non_negative/
+    );
+  });
 });
 
 describe("finalize_lesson_session() 확장 — 선생님 사유 90분 미만 자동 QC", () => {
