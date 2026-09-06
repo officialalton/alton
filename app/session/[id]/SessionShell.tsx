@@ -262,16 +262,11 @@ function StatusBar({
           )}
           {viewerRole === "teacher" && (
             <button
-              onClick={() => {
-                if (confirm("수업을 종료하시겠습니까?")) {
-                  alert(
-                    "수업이 종료되었습니다. 리뷰 작성 화면으로 이동합니다."
-                  );
-                }
-              }}
-              className="bg-red text-white font-bold text-[13px] px-4 py-1.5 rounded-md"
+              disabled
+              title="이 화면은 아직 실제 예약 시스템과 연결되지 않았습니다(R8에서 연결 예정) — 실제 수업 종료는 '수업 일정' 탭에서 처리하세요."
+              className="bg-grey-200 text-grey-500 font-bold text-[13px] px-4 py-1.5 rounded-md cursor-not-allowed"
             >
-              수업 종료
+              수업 종료(R8 연결 예정)
             </button>
           )}
         </span>

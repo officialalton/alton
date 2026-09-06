@@ -53,9 +53,17 @@ function grantTrialEntitlement(): string {
   return grantId;
 }
 
+// 2026-09-06: session-late-and-disruption.integration.test.ts와 동일한 이유로 예약
+// 시각의 "시:분"을 실행 시점 실제 시계 시각에서 분리해 17:00 UTC(America/Los_Angeles
+// 기준 업무시간대, 서머타임 무관)로 고정한다 — 날짜만 미래로 이동.
+const FIXED_BOOKING_HOUR_UTC = 17;
+
 function bookSession(lessonTypeId: string, daysFromNow: number, durationMinutes: number): { reservationId: string; sessionId: string } {
-  const startsAt = new Date(Date.now() + daysFromNow * 24 * 60 * 60 * 1000).toISOString();
-  const endsAt = new Date(new Date(startsAt).getTime() + durationMinutes * 60000).toISOString();
+  const startsAtDate = new Date();
+  startsAtDate.setUTCDate(startsAtDate.getUTCDate() + daysFromNow);
+  startsAtDate.setUTCHours(FIXED_BOOKING_HOUR_UTC, 0, 0, 0);
+  const startsAt = startsAtDate.toISOString();
+  const endsAt = new Date(startsAtDate.getTime() + durationMinutes * 60000).toISOString();
   const row = psql(
     `select reservation_id, session_id from confirm_lesson_booking('${childId}', '${subjectEnrollmentId}', '${TEACHER_ID}', '${lessonTypeId}', '${startsAt}', '${endsAt}', 'm5a-book-${Date.now()}-${Math.random()}');`
   );
@@ -120,6 +128,7 @@ describe("finalize_lesson_session() — 정상 완료/노쇼 최종판정", () =
     grantRegularEntitlement();
     const { reservationId, sessionId } = bookSession(regularLessonTypeId, 40, 120);
     psql(`select mark_lesson_session_started('${sessionId}', '${TEACHER_ID}');`);
+    psql(`update reservations set starts_at = starts_at - interval '365 days', ends_at = ends_at - interval '365 days' where id = (select reservation_id from sessions where id = '${sessionId}');`);
     psql(`select finalize_lesson_session('${sessionId}', 'completed', '${TEACHER_ID}', '정상 완료');`);
 
     const [finalStatus, payableMinutes, actualStart] = psql(
@@ -145,6 +154,8 @@ describe("finalize_lesson_session() — 정상 완료/노쇼 최종판정", () =
   it("student_no_show: 15분 미접속 최종 확정도 1장 소진 + 지급(보충시간 없음)", () => {
     grantRegularEntitlement();
     const { reservationId, sessionId } = bookSession(regularLessonTypeId, 41, 120);
+    psql(`select mark_lesson_session_started('${sessionId}', '${TEACHER_ID}');`);
+    psql(`update reservations set starts_at = starts_at - interval '365 days', ends_at = ends_at - interval '365 days' where id = (select reservation_id from sessions where id = '${sessionId}');`);
     psql(`select finalize_lesson_session('${sessionId}', 'student_no_show', '${TEACHER_ID}', '15분 미접속 최종 확정');`);
 
     const finalStatus = psql(`select final_status from sessions where id = '${sessionId}';`);
@@ -182,6 +193,8 @@ describe("finalize_lesson_session() — 정상 완료/노쇼 최종판정", () =
        ('${sessionId}', 'google_meet_api', 'meet_join', now()),
        ('${sessionId}', 'google_meet_api', 'meet_leave', now() + interval '5 minutes');`
     );
+    psql(`select mark_lesson_session_started('${sessionId}', '${TEACHER_ID}');`);
+    psql(`update reservations set starts_at = starts_at - interval '365 days', ends_at = ends_at - interval '365 days' where id = (select reservation_id from sessions where id = '${sessionId}');`);
     psql(`select finalize_lesson_session('${sessionId}', 'completed', '${TEACHER_ID}', '완료');`);
     const payableMinutes = psql(`select payable_minutes from sessions where id = '${sessionId}';`);
     expect(payableMinutes).toBe("120");
@@ -190,10 +203,84 @@ describe("finalize_lesson_session() — 정상 완료/노쇼 최종판정", () =
   it("이미 확정된 세션은 재판정을 거부한다(reopen_session()/recomplete_session()으로만 가능)", () => {
     grantRegularEntitlement();
     const { sessionId } = bookSession(regularLessonTypeId, 44, 120);
+    psql(`select mark_lesson_session_started('${sessionId}', '${TEACHER_ID}');`);
+    psql(`update reservations set starts_at = starts_at - interval '365 days', ends_at = ends_at - interval '365 days' where id = (select reservation_id from sessions where id = '${sessionId}');`);
     psql(`select finalize_lesson_session('${sessionId}', 'completed', '${TEACHER_ID}', '완료');`);
     expect(() => psql(`select finalize_lesson_session('${sessionId}', 'completed', '${TEACHER_ID}', '재시도');`)).toThrow(
       /이미 확정된 세션입니다/
     );
+  });
+});
+
+describe("2026-09-06 — 수업 종료 기준 보완(체험/정규 동일 로직)", () => {
+  it("시작하지 않은 세션(scheduled)은 정상 완료를 거부한다", () => {
+    grantRegularEntitlement();
+    const { sessionId } = bookSession(regularLessonTypeId, 22, 120);
+    expect(() => psql(`select finalize_lesson_session('${sessionId}', 'completed', '${TEACHER_ID}', '시작 없이 완료 시도');`)).toThrow(
+      /수업이 아직 시작되지 않았습니다/
+    );
+  });
+
+  it("예약 종료시각 전 조기 완료는 사유 없이는 거부된다", () => {
+    grantRegularEntitlement();
+    const { sessionId } = bookSession(regularLessonTypeId, 23, 120);
+    psql(`select mark_lesson_session_started('${sessionId}', '${TEACHER_ID}');`);
+    // 예약 종료시각(미래)이 그대로이므로 지금 완료를 시도하면 "조기 종료"에 해당한다.
+    expect(() => psql(`select finalize_lesson_session('${sessionId}', 'completed', '${TEACHER_ID}', '사유 없이 조기 완료 시도');`)).toThrow(
+      /조기 종료 사유가 필요합니다/
+    );
+  });
+
+  it("학생 사유 조기종료는 p_early_end_reason='student_reason'과 함께면 허용되고 기존 학생 귀책 정책(전액 지급)이 그대로 적용된다", () => {
+    grantRegularEntitlement();
+    const { sessionId } = bookSession(regularLessonTypeId, 24, 120);
+    psql(`select mark_lesson_session_started('${sessionId}', '${TEACHER_ID}');`);
+    psql(
+      `select finalize_lesson_session('${sessionId}', 'completed', '${TEACHER_ID}', '학생이 두통으로 일찍 종료 요청', null, 'student_reason');`
+    );
+    const [finalStatus, payableMinutes, finalReason] = psql(
+      `select final_status, payable_minutes, final_reason from sessions where id = '${sessionId}';`
+    ).split("|");
+    expect(finalStatus).toBe("completed");
+    expect(payableMinutes).toBe("120"); // 조기 종료여도 기존 학생 귀책 정책과 동일하게 예약 시간 전액 지급.
+    expect(finalReason).toContain("학생 사유 조기종료");
+  });
+
+  it("예약 시작 15분 이내에는 학생 노쇼를 확정할 수 없다", () => {
+    grantRegularEntitlement();
+    const { sessionId } = bookSession(regularLessonTypeId, 25, 120);
+    psql(`select mark_lesson_session_started('${sessionId}', '${TEACHER_ID}');`);
+    expect(() =>
+      psql(`select finalize_lesson_session('${sessionId}', 'student_no_show', '${TEACHER_ID}', '15분도 안 지났는데 노쇼 시도');`)
+    ).toThrow(/15분이 지나야 학생 노쇼를 확정할 수 있습니다/);
+  });
+
+  it("학생의 접속 기록이 있으면 선생님이 직접 노쇼를 확정할 수 없고, 세션은 확정되지 않은 채 남는다", () => {
+    grantRegularEntitlement();
+    const { sessionId } = bookSession(regularLessonTypeId, 26, 120);
+    psql(`select mark_lesson_session_started('${sessionId}', '${TEACHER_ID}');`);
+    psql(`update reservations set starts_at = starts_at - interval '365 days', ends_at = ends_at - interval '365 days' where id = (select reservation_id from sessions where id = '${sessionId}');`);
+    const childId2 = psql(`select child_id from subject_enrollments where id = '${subjectEnrollmentId}';`);
+    psql(
+      `insert into session_access_events (session_id, actor_id, source, event_type, occurred_at)
+       values ('${sessionId}', '${childId2}', 'alton_client', 'alton_page_open', now());`
+    );
+    expect(() =>
+      psql(`select finalize_lesson_session('${sessionId}', 'student_no_show', '${TEACHER_ID}', '접속기록 무시 노쇼 시도');`)
+    ).toThrow(/학생의 접속 기록이 있어/);
+
+    // 확정되지 않았으므로 세션은 여전히 live 상태로 남아 관리자 미확정 목록에 노출된다.
+    const finalStatus = psql(`select final_status from sessions where id = '${sessionId}';`);
+    expect(finalStatus).toBe("live");
+  });
+
+  it("이미 시작된 세션(live)에서는 선생님 노쇼를 확정할 수 없다(부분중단/장애 판정 경로를 사용해야 함)", () => {
+    grantRegularEntitlement();
+    const { sessionId } = bookSession(regularLessonTypeId, 27, 120);
+    psql(`select mark_lesson_session_started('${sessionId}', '${TEACHER_ID}');`);
+    expect(() =>
+      psql(`select finalize_lesson_session('${sessionId}', 'teacher_no_show', '${ADMIN_ID}', '이미 시작된 세션에 노쇼 시도');`)
+    ).toThrow(/선생님 노쇼는 수업이 시작되지 않은 경우에만/);
   });
 });
 
@@ -250,6 +337,8 @@ describe("recomplete_session() 확장 — 재판정 시 payable_minutes/정산 �
   it("잘못 completed 처리된 세션을 teacher_no_show로 재판정하면 payable_minutes가 0으로 재계산되고 정산 항목이 사라진다", () => {
     grantRegularEntitlement();
     const { sessionId } = bookSession(regularLessonTypeId, 48, 120);
+    psql(`select mark_lesson_session_started('${sessionId}', '${TEACHER_ID}');`);
+    psql(`update reservations set starts_at = starts_at - interval '365 days', ends_at = ends_at - interval '365 days' where id = (select reservation_id from sessions where id = '${sessionId}');`);
     psql(`select finalize_lesson_session('${sessionId}', 'completed', '${TEACHER_ID}', '완료(오판정)');`);
     let payoutCount = psql(`select count(*) from payout_items where session_id = '${sessionId}';`);
     expect(payoutCount).toBe("1");
@@ -281,6 +370,8 @@ describe("2026-09-05 후속 — 재판정 시 entitlement 대사(reconciliation)
   it("completed→teacher_no_show 재판정: consume→release 필요분(+1)을 대사 작업으로 적재하고, 반영하면 실제 조정된다", () => {
     grantRegularEntitlement();
     const { sessionId, reservationId } = bookSession(regularLessonTypeId, 55, 120);
+    psql(`select mark_lesson_session_started('${sessionId}', '${TEACHER_ID}');`);
+    psql(`update reservations set starts_at = starts_at - interval '365 days', ends_at = ends_at - interval '365 days' where id = (select reservation_id from sessions where id = '${sessionId}');`);
     psql(`select finalize_lesson_session('${sessionId}', 'completed', '${TEACHER_ID}', '완료(오판정)');`);
 
     const grantId = psql(`select grant_id from entitlement_ledger where reservation_id = '${reservationId}' and event_type = 'hold';`);
@@ -338,7 +429,9 @@ describe("2026-09-05 후속 — 재판정 시 entitlement 대사(reconciliation)
 
   it("payout_items가 이미 paid였으면 금액은 바뀌지 않고 superseded_by_reconciliation_task_id로만 표시된다", () => {
     grantRegularEntitlement();
-    const { sessionId } = bookSession(regularLessonTypeId, 56, 120);
+    const { sessionId } = bookSession(regularLessonTypeId, 30, 120);
+    psql(`select mark_lesson_session_started('${sessionId}', '${TEACHER_ID}');`);
+    psql(`update reservations set starts_at = starts_at - interval '365 days', ends_at = ends_at - interval '365 days' where id = (select reservation_id from sessions where id = '${sessionId}');`);
     psql(`select finalize_lesson_session('${sessionId}', 'completed', '${TEACHER_ID}', '완료(오판정)');`);
     const payoutItemId = psql(`select id from payout_items where session_id = '${sessionId}';`);
     psql(`update payout_items set status = 'paid' where id = '${payoutItemId}';`);
@@ -365,6 +458,8 @@ describe("2026-09-05 후속 — 재판정 시 entitlement 대사(reconciliation)
   it("2026-09-06: 같은 세션에 재판정이 두 번 일어나면 첫 대사 작업은 superseded로 전환되고 반영이 거부된다", () => {
     grantRegularEntitlement();
     const { sessionId } = bookSession(regularLessonTypeId, 49, 120);
+    psql(`select mark_lesson_session_started('${sessionId}', '${TEACHER_ID}');`);
+    psql(`update reservations set starts_at = starts_at - interval '365 days', ends_at = ends_at - interval '365 days' where id = (select reservation_id from sessions where id = '${sessionId}');`);
     psql(`select finalize_lesson_session('${sessionId}', 'completed', '${TEACHER_ID}', '완료(오판정1)');`);
 
     psql(`
@@ -410,6 +505,8 @@ describe("2026-09-05 후속 — 재판정 시 entitlement 대사(reconciliation)
   it("2026-09-06: 반영 직전 세션 상태가 작업 생성 시점과 달라졌으면 반영을 거부하고 needs_review로 전환한다", () => {
     grantRegularEntitlement();
     const { sessionId } = bookSession(regularLessonTypeId, 50, 120);
+    psql(`select mark_lesson_session_started('${sessionId}', '${TEACHER_ID}');`);
+    psql(`update reservations set starts_at = starts_at - interval '365 days', ends_at = ends_at - interval '365 days' where id = (select reservation_id from sessions where id = '${sessionId}');`);
     psql(`select finalize_lesson_session('${sessionId}', 'completed', '${TEACHER_ID}', '완료(오판정)');`);
 
     psql(`
@@ -454,6 +551,8 @@ describe("2026-09-05 후속 — 재판정 시 entitlement 대사(reconciliation)
   it("2026-09-06(최종 보완): 작업 생성 이후 같은 grant에 다른 adjust가 이미 적용됐으면 저장된 조정량을 그대로 적용하지 않고 needs_review로 전환한다", () => {
     grantRegularEntitlement();
     const { sessionId } = bookSession(regularLessonTypeId, 54, 120);
+    psql(`select mark_lesson_session_started('${sessionId}', '${TEACHER_ID}');`);
+    psql(`update reservations set starts_at = starts_at - interval '365 days', ends_at = ends_at - interval '365 days' where id = (select reservation_id from sessions where id = '${sessionId}');`);
     psql(`select finalize_lesson_session('${sessionId}', 'completed', '${TEACHER_ID}', '완료(오판정)');`);
 
     psql(`
@@ -492,6 +591,8 @@ describe("2026-09-06 후속 — student_cancelled 재판정의 entitlement dispo
   it("취소 기록이 시작 24시간 이상 전이면 release로 자동 판정된다", () => {
     grantRegularEntitlement();
     const { sessionId, reservationId } = bookSession(regularLessonTypeId, 51, 120);
+    psql(`select mark_lesson_session_started('${sessionId}', '${TEACHER_ID}');`);
+    psql(`update reservations set starts_at = starts_at - interval '365 days', ends_at = ends_at - interval '365 days' where id = (select reservation_id from sessions where id = '${sessionId}');`);
     psql(`select finalize_lesson_session('${sessionId}', 'completed', '${TEACHER_ID}', '완료(오판정)');`);
     // 시작 3일 전에 취소된 것으로 취소 기록을 남긴다(24시간 이상 전 — release 기대).
     psql(
@@ -560,6 +661,8 @@ describe("2026-09-06 후속 — student_cancelled 재판정의 entitlement dispo
   it("취소 기록이 없으면 자동 판정이 불가능해 반영이 거부되고, 관리자가 직접 선택한 뒤에야 반영된다", () => {
     grantRegularEntitlement();
     const { sessionId } = bookSession(regularLessonTypeId, 53, 120);
+    psql(`select mark_lesson_session_started('${sessionId}', '${TEACHER_ID}');`);
+    psql(`update reservations set starts_at = starts_at - interval '365 days', ends_at = ends_at - interval '365 days' where id = (select reservation_id from sessions where id = '${sessionId}');`);
     psql(`select finalize_lesson_session('${sessionId}', 'completed', '${TEACHER_ID}', '완료(오판정)');`);
 
     psql(`
@@ -640,6 +743,8 @@ describe("2026-09-06 후속 — student_cancelled 재판정의 entitlement dispo
 
     // sessionA만 취소 기록 없는 student_cancelled로 재판정해 관리자 수동 선택 경로를 태운다.
     // sessionB는 그대로 hold 상태로 남아 같은 grant 안에 다른 예약이 있는 상태를 만든다.
+    psql(`select mark_lesson_session_started('${sessionA}', '${TEACHER_ID}');`);
+    psql(`update reservations set starts_at = starts_at - interval '365 days', ends_at = ends_at - interval '365 days' where id = (select reservation_id from sessions where id = '${sessionA}');`);
     psql(`select finalize_lesson_session('${sessionA}', 'completed', '${TEACHER_ID}', '완료(오판정)');`);
     psql(`
       set role authenticated;

@@ -62,7 +62,12 @@ export type TeacherLessonScheduleTabProps = {
   // M5-a(R7) — 수업 시작/종료. finalize의 outcome은 선생님이 직접 판정할 수 있는
   // completed/student_no_show만(본인 노쇼는 관리자 전용).
   onStartSession: (sessionId: string) => Promise<void>;
-  onFinalizeSession: (params: { sessionId: string; outcome: "completed" | "student_no_show"; reason: string }) => Promise<void>;
+  onFinalizeSession: (params: {
+    sessionId: string;
+    outcome: "completed" | "student_no_show";
+    reason: string;
+    earlyEndReason?: "student_reason";
+  }) => Promise<void>;
   // M5-b(R7) — 진행 중(live)인 수업에서 선생님 지각분을 당일 상호 합의로 연장(가능한
   // 만큼)하고, 나머지는 자동으로 보충시간(makeup_obligations)으로 이관한다.
   onResolveLateness: (params: { sessionId: string; lateMinutes: number; agreedExtendMinutes: number; reason: string }) => Promise<void>;
@@ -267,13 +272,15 @@ export default function TeacherLessonScheduleTab({
                 수업 시작
               </button>
             )}
-            <button
-              disabled={sessionActionBusyId === lesson.sessionId}
-              onClick={() => handleFinalizeSession(lesson.sessionId, "completed")}
-              className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-grey-100 text-ink disabled:opacity-50"
-            >
-              수업 종료(완료)
-            </button>
+            {lesson.finalStatus === "live" && (
+              <button
+                disabled={sessionActionBusyId === lesson.sessionId}
+                onClick={() => handleFinalizeSession(lesson.sessionId, "completed")}
+                className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-grey-100 text-ink disabled:opacity-50"
+              >
+                수업 종료(완료)
+              </button>
+            )}
             {lesson.finalStatus === "live" && (
               <button
                 disabled={sessionActionBusyId === lesson.sessionId}
@@ -287,30 +294,31 @@ export default function TeacherLessonScheduleTab({
                 지각 당일 연장
               </button>
             )}
-            {noShowConfirmingSessionId === lesson.sessionId ? (
-              <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-red/10 text-red">
-                학생 미접속 확정?{" "}
+            {lesson.finalStatus === "live" &&
+              (noShowConfirmingSessionId === lesson.sessionId ? (
+                <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-red/10 text-red">
+                  학생 미접속 확정?{" "}
+                  <button
+                    disabled={sessionActionBusyId === lesson.sessionId}
+                    onClick={() => handleFinalizeSession(lesson.sessionId, "student_no_show")}
+                    className="underline font-bold"
+                  >
+                    확정
+                  </button>{" "}
+                  ·{" "}
+                  <button onClick={() => setNoShowConfirmingSessionId(null)} className="underline">
+                    취소
+                  </button>
+                </span>
+              ) : (
                 <button
                   disabled={sessionActionBusyId === lesson.sessionId}
-                  onClick={() => handleFinalizeSession(lesson.sessionId, "student_no_show")}
-                  className="underline font-bold"
+                  onClick={() => setNoShowConfirmingSessionId(lesson.sessionId)}
+                  className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-red/5 text-red disabled:opacity-50"
                 >
-                  확정
-                </button>{" "}
-                ·{" "}
-                <button onClick={() => setNoShowConfirmingSessionId(null)} className="underline">
-                  취소
+                  학생 노쇼 확정(수업 시작 15분 후부터, 학생 접속기록 없을 때만)
                 </button>
-              </span>
-            ) : (
-              <button
-                disabled={sessionActionBusyId === lesson.sessionId}
-                onClick={() => setNoShowConfirmingSessionId(lesson.sessionId)}
-                className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-red/5 text-red disabled:opacity-50"
-              >
-                학생 노쇼 확정(15분 미접속)
-              </button>
-            )}
+              ))}
           </div>
         )}
         {latenessSessionId === lesson.sessionId && (
@@ -462,7 +470,31 @@ export default function TeacherLessonScheduleTab({
       setNoShowConfirmingSessionId(null);
       await onRefresh();
     } catch (e) {
-      setError(e instanceof Error ? e.message : String(e));
+      const message = e instanceof Error ? e.message : String(e);
+      // 2026-09-06: 예약 종료시각 전 조기 완료는 사유가 필요하다(서버가 최종 강제).
+      // 학생 사유(조퇴 등)인 경우에만 이 화면에서 바로 확인 후 재시도한다 — 선생님/회사
+      // 귀책 조기종료는 "지각 당일 연장"이나 관리자 장애 판정 경로를 안내한다.
+      if (message.includes("조기 종료 사유가 필요합니다") && outcome === "completed") {
+        const confirmed = window.confirm(
+          "예약 종료 시각이 아직 되지 않았습니다. 학생 사유(조퇴 등)로 지금 완료 처리하시겠습니까?\n\n선생님 귀책으로 일찍 끝난 경우 '지각 당일 연장'을, 회사·Meet 장애인 경우 관리자에게 장애 판정을 요청해주세요."
+        );
+        if (confirmed) {
+          try {
+            await onFinalizeSession({
+              sessionId,
+              outcome: "completed",
+              reason: "학생 사유 조기 종료",
+              earlyEndReason: "student_reason",
+            });
+            setNoShowConfirmingSessionId(null);
+            await onRefresh();
+          } catch (e2) {
+            setError(e2 instanceof Error ? e2.message : String(e2));
+          }
+        }
+      } else {
+        setError(message);
+      }
     } finally {
       setSessionActionBusyId(null);
     }
@@ -471,7 +503,7 @@ export default function TeacherLessonScheduleTab({
   return (
     <div className="max-w-[640px] px-8 py-8">
       <div className="flex items-center justify-between mb-1.5">
-        <h1 className="text-[20px] font-extrabold text-ink">정규수업 일정</h1>
+        <h1 className="text-[20px] font-extrabold text-ink">수업 일정</h1>
         <div className="flex gap-1.5">
           {(["week-list", "week", "month"] as const).map((v) => (
             <button

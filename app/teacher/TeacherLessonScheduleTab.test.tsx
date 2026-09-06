@@ -81,9 +81,8 @@ describe("TeacherLessonScheduleTab", () => {
     expect(screen.getByText(/120분/)).toBeInTheDocument();
   });
 
-  it("M5-a: scheduled 상태 수업에는 수업 시작/종료/노쇼 확정 버튼이 보이고 클릭 시 각각 호출된다", async () => {
+  it("M5-a: scheduled 상태 수업에는 수업 시작 버튼만 보이고 클릭 시 호출된다(2026-09-06: 완료/노쇼는 시작 전에는 노출되지 않음)", async () => {
     const onStartSession = vi.fn().mockResolvedValue(undefined);
-    const onFinalizeSession = vi.fn().mockResolvedValue(undefined);
     const onRefresh = vi.fn().mockResolvedValue(undefined);
     render(
       <TeacherLessonScheduleTab
@@ -94,21 +93,42 @@ describe("TeacherLessonScheduleTab", () => {
         onRefresh={onRefresh}
         onLoadExternalBusy={vi.fn().mockResolvedValue([])}
         onStartSession={onStartSession}
-        onFinalizeSession={onFinalizeSession}
+        onFinalizeSession={vi.fn()}
         onResolveLateness={vi.fn()}
       />
     );
 
+    expect(screen.queryByText("수업 종료(완료)")).not.toBeInTheDocument();
+    expect(screen.queryByText(/학생 노쇼 확정/)).not.toBeInTheDocument();
+
     fireEvent.click(screen.getByText("수업 시작"));
     await waitFor(() => expect(onStartSession).toHaveBeenCalledWith("s1"));
     await waitFor(() => expect(onRefresh).toHaveBeenCalled());
+  });
+
+  it("2026-09-06: live 상태 수업에는 종료/노쇼 확정 버튼이 보이고 클릭 시 각각 호출된다", async () => {
+    const liveLesson: TeacherLessonScheduleItem = { ...lesson, finalStatus: "live" };
+    const onFinalizeSession = vi.fn().mockResolvedValue(undefined);
+    render(
+      <TeacherLessonScheduleTab
+        lessons={[liveLesson]}
+        exceptions={[]}
+        timezone="America/Los_Angeles"
+        onCancel={vi.fn()}
+        onRefresh={vi.fn()}
+        onLoadExternalBusy={vi.fn().mockResolvedValue([])}
+        onStartSession={vi.fn()}
+        onFinalizeSession={onFinalizeSession}
+        onResolveLateness={vi.fn()}
+      />
+    );
 
     fireEvent.click(screen.getByText("수업 종료(완료)"));
     await waitFor(() =>
       expect(onFinalizeSession).toHaveBeenCalledWith({ sessionId: "s1", outcome: "completed", reason: "선생님 수업 종료" })
     );
 
-    fireEvent.click(screen.getByText("학생 노쇼 확정(15분 미접속)"));
+    fireEvent.click(screen.getByText(/학생 노쇼 확정/));
     fireEvent.click(screen.getByText("확정"));
     await waitFor(() =>
       expect(onFinalizeSession).toHaveBeenCalledWith({

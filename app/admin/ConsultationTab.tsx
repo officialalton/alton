@@ -340,21 +340,29 @@ function TrialDetail({
       </div>
 
       <div>
-        <div className="text-[12px] font-bold text-ink mb-1">체험 결과(사후) — 체험 완료 후 입력</div>
+        <div className="text-[12px] font-bold text-ink mb-1">체험 결과(사후) — 실제 수업 완료 후 입력</div>
+        {trial.status !== "completed" && (
+          <p className="text-[11px] text-grey-500 mb-1.5">
+            선생님이 실제 체험 수업을 시작·종료(완료 확정)해야 결과를 기록할 수 있습니다 — 이 화면에서 임의로
+            완료 처리할 수 없습니다.
+          </p>
+        )}
         <textarea
           value={resultNotes}
           onChange={(e) => setResultNotes(e.target.value)}
           placeholder="결과 노트"
-          className="w-full border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[12px] mb-1.5"
+          disabled={trial.status !== "completed"}
+          className="w-full border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[12px] mb-1.5 disabled:opacity-50"
         />
         <textarea
           value={recommendation}
           onChange={(e) => setRecommendation(e.target.value)}
           placeholder="추천 사항"
-          className="w-full border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[12px] mb-1.5"
+          disabled={trial.status !== "completed"}
+          className="w-full border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[12px] mb-1.5 disabled:opacity-50"
         />
         <button
-          disabled={busy}
+          disabled={busy || trial.status !== "completed"}
           className={btnSecondary}
           onClick={() =>
             run(() =>
@@ -366,7 +374,7 @@ function TrialDetail({
             )
           }
         >
-          체험 완료 처리
+          체험 결과 기록
         </button>
       </div>
 

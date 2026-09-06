@@ -221,6 +221,7 @@ describe("finalize_lesson_session() 확장 — 선생님 사유 90분 미만 자
     grantRegularEntitlement();
     const { sessionId } = bookSession(43, 120);
     psql(`select mark_lesson_session_started('${sessionId}', '${teacherId}');`);
+    psql(`update reservations set starts_at = starts_at - interval '365 days', ends_at = ends_at - interval '365 days' where id = (select reservation_id from sessions where id = '${sessionId}');`);
     psql(`select finalize_lesson_session('${sessionId}', 'completed', '${teacherId}', '선생님이 늦게 시작해 80분만 제공', 80);`);
 
     const payableMinutes = psql(`select payable_minutes from sessions where id = '${sessionId}';`);
@@ -237,6 +238,8 @@ describe("finalize_lesson_session() 확장 — 선생님 사유 90분 미만 자
     grantRegularEntitlement();
     const { sessionId } = bookSession(44, 120);
     const beforeCount = psql(`select count(*) from teacher_qc_warnings where teacher_id = '${teacherId}';`);
+    psql(`select mark_lesson_session_started('${sessionId}', '${teacherId}');`);
+    psql(`update reservations set starts_at = starts_at - interval '365 days', ends_at = ends_at - interval '365 days' where id = (select reservation_id from sessions where id = '${sessionId}');`);
     psql(`select finalize_lesson_session('${sessionId}', 'completed', '${teacherId}', '정상 완료', 100);`);
     const afterCount = psql(`select count(*) from teacher_qc_warnings where teacher_id = '${teacherId}';`);
     expect(afterCount).toBe(beforeCount);
@@ -388,8 +391,11 @@ describe("apply_makeup_time_to_booking() — 보충시간을 미래 정규 예�
     const obligationId = psql(`select id from makeup_obligations where triggering_session_id = '${late.sessionId}';`);
 
     const trialLessonTypeId = psql(`select id from lesson_types where code = 'trial';`);
-    const startsAt = new Date(Date.now() + 56 * 24 * 60 * 60 * 1000).toISOString();
-    const endsAt = new Date(new Date(startsAt).getTime() + 60 * 60000).toISOString();
+    const startsAtDate = new Date();
+    startsAtDate.setUTCDate(startsAtDate.getUTCDate() + 20);
+    startsAtDate.setUTCHours(FIXED_BOOKING_HOUR_UTC, 0, 0, 0);
+    const startsAt = startsAtDate.toISOString();
+    const endsAt = new Date(startsAtDate.getTime() + 60 * 60000).toISOString();
     const trialProductId = psql(`select id from entitlement_products where code = 'trial_lesson_grant';`);
     const trialGrantId = psql(
       `insert into entitlement_grants (child_id, entitlement_product_id, purchase_id_ref, original_quantity, expires_at, is_paid)
@@ -415,6 +421,7 @@ describe("2026-09-05 과지급 수정 — 선생님 귀책 지각·보충시간 
     const root = bookSession(5, 120);
     psql(`select mark_lesson_session_started('${root.sessionId}', '${teacherId}');`);
     psql(`select resolve_teacher_lateness('${root.sessionId}', 10, 0, '${teacherId}', '전혀 연장 불가');`);
+    psql(`update reservations set starts_at = starts_at - interval '365 days', ends_at = ends_at - interval '365 days' where id = (select reservation_id from sessions where id = '${root.sessionId}');`);
     psql(`select finalize_lesson_session('${root.sessionId}', 'completed', '${teacherId}', '정상 완료(지각분 제외)');`);
 
     const rootPayable = psql(`select payable_minutes from sessions where id = '${root.sessionId}';`);
@@ -424,6 +431,8 @@ describe("2026-09-05 과지급 수정 — 선생님 귀책 지각·보충시간 
     grantRegularEntitlement();
     const future = bookSession(6, 120);
     psql(`select apply_makeup_time_to_booking('${future.reservationId}', '${obligationId}', 10, '${teacherId}');`);
+    psql(`select mark_lesson_session_started('${future.sessionId}', '${teacherId}');`);
+    psql(`update reservations set starts_at = starts_at - interval '365 days', ends_at = ends_at - interval '365 days' where id = (select reservation_id from sessions where id = '${future.sessionId}');`);
     psql(`select finalize_lesson_session('${future.sessionId}', 'completed', '${teacherId}', '정상 완료(보충분 포함)');`);
 
     const futurePayable = psql(`select payable_minutes from sessions where id = '${future.sessionId}';`);
@@ -439,6 +448,7 @@ describe("2026-09-05 과지급 수정 — 선생님 귀책 지각·보충시간 
     const { sessionId } = bookSession(7, 120);
     psql(`select mark_lesson_session_started('${sessionId}', '${teacherId}');`);
     psql(`select resolve_teacher_lateness('${sessionId}', 10, 10, '${teacherId}', '10분 지각, 10분 전부 연장');`);
+    psql(`update reservations set starts_at = starts_at - interval '365 days', ends_at = ends_at - interval '365 days' where id = (select reservation_id from sessions where id = '${sessionId}');`);
     psql(`select finalize_lesson_session('${sessionId}', 'completed', '${teacherId}', '정상 완료');`);
 
     const [payable, obligationCount] = [
@@ -454,6 +464,7 @@ describe("2026-09-05 과지급 수정 — 선생님 귀책 지각·보충시간 
     const root = bookSession(8, 120);
     psql(`select mark_lesson_session_started('${root.sessionId}', '${teacherId}');`);
     psql(`select resolve_teacher_lateness('${root.sessionId}', 20, 5, '${teacherId}', '20분 지각, 5분만 연장');`);
+    psql(`update reservations set starts_at = starts_at - interval '365 days', ends_at = ends_at - interval '365 days' where id = (select reservation_id from sessions where id = '${root.sessionId}');`);
     psql(`select finalize_lesson_session('${root.sessionId}', 'completed', '${teacherId}', '정상 완료');`);
     const rootPayable = Number(psql(`select payable_minutes from sessions where id = '${root.sessionId}';`));
     expect(rootPayable).toBe(105); // 125(연장 반영) - 20(총 지각) = 105.
@@ -462,6 +473,8 @@ describe("2026-09-05 과지급 수정 — 선생님 귀책 지각·보충시간 
     grantRegularEntitlement();
     const future = bookSession(9, 120);
     psql(`select apply_makeup_time_to_booking('${future.reservationId}', '${obligationId}', 15, '${teacherId}');`);
+    psql(`select mark_lesson_session_started('${future.sessionId}', '${teacherId}');`);
+    psql(`update reservations set starts_at = starts_at - interval '365 days', ends_at = ends_at - interval '365 days' where id = (select reservation_id from sessions where id = '${future.sessionId}');`);
     psql(`select finalize_lesson_session('${future.sessionId}', 'completed', '${teacherId}', '정상 완료');`);
     const futurePayable = Number(psql(`select payable_minutes from sessions where id = '${future.sessionId}';`));
     expect(futurePayable).toBe(135); // 120 + 15.
@@ -483,6 +496,8 @@ describe("2026-09-05 과지급 수정 — 선생님 귀책 지각·보충시간 
     grantRegularEntitlement();
     const future = bookSession(11, 120);
     psql(`select apply_makeup_time_to_booking('${future.reservationId}', '${obligationId}', 70, '${teacherId}');`);
+    psql(`select mark_lesson_session_started('${future.sessionId}', '${teacherId}');`);
+    psql(`update reservations set starts_at = starts_at - interval '365 days', ends_at = ends_at - interval '365 days' where id = (select reservation_id from sessions where id = '${future.sessionId}');`);
     psql(`select finalize_lesson_session('${future.sessionId}', 'completed', '${teacherId}', '정상 완료');`);
     const futurePayable = Number(psql(`select payable_minutes from sessions where id = '${future.sessionId}';`));
     expect(futurePayable).toBe(190); // 120 + 70.

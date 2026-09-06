@@ -562,6 +562,8 @@ export async function adminFinalizeLessonSession(params: {
   reason: string;
   /** M5-b: 선생님 사유로 실제 제공 시간이 90분 미만이면 자동 QC 경고 대상 — 선택 입력. */
   teacherFaultProvidedMinutes?: number;
+  /** 2026-09-06: 예약 종료시각 전 정상 완료는 학생 사유 조기종료('student_reason')만 허용. */
+  earlyEndReason?: "student_reason";
 }): Promise<void> {
   const { actorUserId, supabase } = await requireAdminOrCapability(BOOKING_CAPABILITY);
   const admin = createAdminClient();
@@ -591,6 +593,7 @@ export async function adminFinalizeLessonSession(params: {
     p_actor_id: actorUserId,
     p_reason: params.reason,
     p_teacher_fault_provided_minutes: params.teacherFaultProvidedMinutes ?? null,
+    p_early_end_reason: params.earlyEndReason ?? null,
   });
   if (error) throw new Error(error.message);
 }

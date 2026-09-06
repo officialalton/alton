@@ -39,7 +39,7 @@ import {
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
   { id: "assignments", label: "배정", icon: "🎯" },
-  { id: "lesson-schedule", label: "정규수업", icon: "📆" },
+  { id: "lesson-schedule", label: "수업 일정", icon: "📆" },
   { id: "availability", label: "가능시간", icon: "🗓" },
   { id: "schedule", label: "수업", icon: "📅" },
   { id: "roster", label: "학생", icon: "👥" },

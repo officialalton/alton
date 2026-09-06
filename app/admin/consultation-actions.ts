@@ -241,6 +241,16 @@ export async function createTrialSessionFromConsultation(params: {
   return { id: data.id };
 }
 
+/**
+ * 2026-09-06 — "체험 완료 처리"(체험 세션 자체를 완료로 만드는 버튼)에서
+ * "체험 결과 기록"(실제 수업이 끝난 뒤 결과 노트·추천만 남기는 버튼)으로 성격이
+ * 바뀌었다. status/completed_at은 더 이상 이 함수가 직접 바꾸지 않는다 — 실제 v3
+ * 세션이 finalize_lesson_session()으로 completed 확정되면 DB 트리거
+ * (auto_complete_linked_trial_session)가 trial_sessions.status를 자동으로
+ * completed로 바꾼다(trial_sessions_reject_direct_completion 트리거가 그 외의
+ * 직접 UPDATE를 차단한다). 이 함수는 그 자동 완료가 이미 일어난 경우에만 결과
+ * 기록을 허용한다 — 실제 수업이 아직 끝나지 않았으면 거부한다.
+ */
 export async function completeTrialSession(params: {
   trialSessionId: string;
   resultNotes?: string;
@@ -253,17 +263,20 @@ export async function completeTrialSession(params: {
 
   const { data: trial, error: trialError } = await admin
     .from("trial_sessions")
-    .select("id, consultation_id")
+    .select("id, consultation_id, status, session_id")
     .eq("id", params.trialSessionId)
     .single();
   if (trialError) throw new Error(trialError.message);
   if (!trial) throw new Error("존재하지 않는 체험 세션입니다.");
+  if (trial.status !== "completed") {
+    throw new Error(
+      "실제 체험 수업이 아직 완료되지 않았습니다 — 선생님이 실제 수업을 종료(완료 확정)한 뒤에만 결과를 기록할 수 있습니다."
+    );
+  }
 
   const { error } = await admin
     .from("trial_sessions")
     .update({
-      status: "completed",
-      completed_at: new Date().toISOString(),
       result_notes: params.resultNotes ?? null,
       recommended_teacher_id: params.recommendedTeacherId ?? null,
       recommendation: params.recommendation ?? null,

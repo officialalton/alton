@@ -86,6 +86,12 @@ export async function finalizeMyLessonSession(params: {
   reason: string;
   /** M5-b: 선생님 사유(지각 등)로 실제 제공 시간이 90분 미만이면 자동 QC 경고 대상 — 선택 입력. */
   teacherFaultProvidedMinutes?: number;
+  /**
+   * 2026-09-06: 예약 종료시각 전에 '정상 완료'를 확정하려는 경우에만 필요 — 학생 사유
+   * 조기종료는 'student_reason'을 명시해야 한다(선생님/회사 귀책 조기종료는 이 함수가
+   * 아니라 resolveMyLessonPartialInterruption 등 전용 경로를 써야 하며, DB가 강제한다).
+   */
+  earlyEndReason?: "student_reason";
 }): Promise<void> {
   const { user } = await requireUser();
   const admin = createAdminClient();
@@ -99,6 +105,7 @@ export async function finalizeMyLessonSession(params: {
     p_actor_id: user.id,
     p_reason: params.reason,
     p_teacher_fault_provided_minutes: params.teacherFaultProvidedMinutes ?? null,
+    p_early_end_reason: params.earlyEndReason ?? null,
   });
   if (error) throw new Error(error.message);
 }

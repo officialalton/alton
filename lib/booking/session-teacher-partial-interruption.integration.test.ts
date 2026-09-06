@@ -33,9 +33,17 @@ function grantRegularEntitlement(): string {
   return grantId;
 }
 
+// 2026-09-06: session-late-and-disruption.integration.test.ts와 동일한 이유로 예약
+// 시각의 "시:분"을 실행 시점 실제 시계 시각에서 분리해 17:00 UTC(America/Los_Angeles
+// 기준 업무시간대, 서머타임 무관)로 고정한다 — 날짜만 미래로 이동.
+const FIXED_BOOKING_HOUR_UTC = 17;
+
 function bookSession(daysFromNow: number, durationMinutes: number): { reservationId: string; sessionId: string } {
-  const startsAt = new Date(Date.now() + daysFromNow * 24 * 60 * 60 * 1000).toISOString();
-  const endsAt = new Date(new Date(startsAt).getTime() + durationMinutes * 60000).toISOString();
+  const startsAtDate = new Date();
+  startsAtDate.setUTCDate(startsAtDate.getUTCDate() + daysFromNow);
+  startsAtDate.setUTCHours(FIXED_BOOKING_HOUR_UTC, 0, 0, 0);
+  const startsAt = startsAtDate.toISOString();
+  const endsAt = new Date(startsAtDate.getTime() + durationMinutes * 60000).toISOString();
   const row = psql(
     `select reservation_id, session_id from confirm_lesson_booking('${childId}', '${subjectEnrollmentId}', '${teacherId}', '${regularLessonTypeId}', '${startsAt}', '${endsAt}', 'm5c-book-${Date.now()}-${Math.random()}');`
   );

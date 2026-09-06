@@ -109,10 +109,10 @@ describe("SessionShell — 세션 상태바", () => {
     expect(
       screen.getByText("선생님이 안 보이시나요? (노쇼 알림)")
     ).toBeInTheDocument();
-    expect(screen.queryByText("수업 종료")).not.toBeInTheDocument();
+    expect(screen.queryByText(/수업 종료/)).not.toBeInTheDocument();
   });
 
-  it("live 상태에서 선생님에게는 수업 종료 버튼만 보인다", () => {
+  it("2026-09-06: live 상태에서 선생님에게 보이는 수업 종료 버튼은 R8 연결 전까지 비활성 상태다(실제 처리 버튼처럼 보이지 않아야 함)", () => {
     render(
       <SessionShell
         {...baseProps}
@@ -123,7 +123,9 @@ describe("SessionShell — 세션 상태바", () => {
         durationMinutes={30}
       />
     );
-    expect(screen.getByText("수업 종료")).toBeInTheDocument();
+    const button = screen.getByText("수업 종료(R8 연결 예정)");
+    expect(button).toBeInTheDocument();
+    expect(button).toBeDisabled();
     expect(
       screen.queryByText("선생님이 안 보이시나요? (노쇼 알림)")
     ).not.toBeInTheDocument();
