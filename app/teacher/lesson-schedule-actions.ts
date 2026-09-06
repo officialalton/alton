@@ -80,7 +80,13 @@ export type TeacherLessonOutcome = "completed" | "student_no_show";
  * app/admin/booking-actions.ts의 adminFinalizeLessonSession). finalize_lesson_session()이
  * 1장 소진/release, payable_minutes, 정산 항목 적재를 단일 트랜잭션으로 처리한다.
  */
-export async function finalizeMyLessonSession(params: { sessionId: string; outcome: TeacherLessonOutcome; reason: string }): Promise<void> {
+export async function finalizeMyLessonSession(params: {
+  sessionId: string;
+  outcome: TeacherLessonOutcome;
+  reason: string;
+  /** M5-b: 선생님 사유(지각 등)로 실제 제공 시간이 90분 미만이면 자동 QC 경고 대상 — 선택 입력. */
+  teacherFaultProvidedMinutes?: number;
+}): Promise<void> {
   const { user } = await requireUser();
   const admin = createAdminClient();
   const { data } = await admin.from("sessions").select("teacher_id").eq("id", params.sessionId).maybeSingle();
@@ -90,6 +96,35 @@ export async function finalizeMyLessonSession(params: { sessionId: string; outco
   const { error } = await admin.rpc("finalize_lesson_session", {
     p_session_id: params.sessionId,
     p_outcome: params.outcome,
+    p_actor_id: user.id,
+    p_reason: params.reason,
+    p_teacher_fault_provided_minutes: params.teacherFaultProvidedMinutes ?? null,
+  });
+  if (error) throw new Error(error.message);
+}
+
+/**
+ * M5-b — 선생님 지각의 당일 상호 합의 연장(요구사항 1) + 미이행분 보충시간 이관(요구사항 2).
+ * 본인 세션인지 admin 클라이언트로 재확인한 뒤 resolve_teacher_lateness()를 호출한다.
+ * p_agreed_extend_minutes만큼 예정 종료 시각을 뒤로 밀고(선생님 가능시간·기존 예약 충돌
+ * 검사 통과 시에만), 나머지는 makeup_obligations(teacher_late)로 자동 이관된다.
+ */
+export async function resolveMyLessonLateness(params: {
+  sessionId: string;
+  lateMinutes: number;
+  agreedExtendMinutes: number;
+  reason: string;
+}): Promise<void> {
+  const { user } = await requireUser();
+  const admin = createAdminClient();
+  const { data } = await admin.from("sessions").select("teacher_id").eq("id", params.sessionId).maybeSingle();
+  if (!data || data.teacher_id !== user.id) {
+    throw new Error("본인 수업만 연장할 수 있습니다.");
+  }
+  const { error } = await admin.rpc("resolve_teacher_lateness", {
+    p_session_id: params.sessionId,
+    p_late_minutes: params.lateMinutes,
+    p_agreed_extend_minutes: params.agreedExtendMinutes,
     p_actor_id: user.id,
     p_reason: params.reason,
   });

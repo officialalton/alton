@@ -560,6 +560,8 @@ export async function adminFinalizeLessonSession(params: {
   sessionId: string;
   outcome: SessionOutcome;
   reason: string;
+  /** M5-b: 선생님 사유로 실제 제공 시간이 90분 미만이면 자동 QC 경고 대상 — 선택 입력. */
+  teacherFaultProvidedMinutes?: number;
 }): Promise<void> {
   const { actorUserId, supabase } = await requireAdminOrCapability(BOOKING_CAPABILITY);
   const admin = createAdminClient();
@@ -588,6 +590,101 @@ export async function adminFinalizeLessonSession(params: {
     p_outcome: params.outcome,
     p_actor_id: actorUserId,
     p_reason: params.reason,
+    p_teacher_fault_provided_minutes: params.teacherFaultProvidedMinutes ?? null,
+  });
+  if (error) throw new Error(error.message);
+}
+
+/**
+ * M5-b(요구사항 4/5) — 회사·Meet 장애는 자동 감지하지 않는다. 관리자가 이 액션으로 수동
+ * 최종판정한다. providedMinutes<=0(또는 미입력)이면 "미시작"(수업권 hold 복원·0분 정산·
+ * 예약 취소로 재예약 가능), >0이면 "중단"(120분 정산 상한 + 못 제공한 분 보충시간 이관).
+ */
+export async function adminFinalizeSessionAsInfraIncident(params: {
+  sessionId: string;
+  reason: string;
+  providedMinutes?: number;
+}): Promise<void> {
+  const { actorUserId } = await requireAdminOrCapability(BOOKING_CAPABILITY);
+  const admin = createAdminClient();
+  const { error } = await admin.rpc("finalize_session_as_infra_incident", {
+    p_session_id: params.sessionId,
+    p_actor_id: actorUserId,
+    p_reason: params.reason,
+    p_provided_minutes: params.providedMinutes ?? 0,
+  });
+  if (error) throw new Error(error.message);
+}
+
+export type MakeupObligationRow = {
+  obligationId: string;
+  childId: string;
+  childName: string | null;
+  teacherId: string;
+  teacherName: string | null;
+  reason: string;
+  owedMinutes: number;
+  remainingMinutes: number;
+  createdAt: string;
+};
+
+/**
+ * M5-b(요구사항 9) — 잔여 보충시간(makeup_balances 뷰, owed_minutes+applied 합산 파생값)이
+ * 남은 의무 목록, 관리자 열람·적용용. makeup_balances는 뷰라 PostgREST 임베드 조인 대상이
+ * 아니므로 obligation과 balance를 각각 조회해 애플리케이션에서 합친다.
+ */
+export async function listOutstandingMakeupObligations(): Promise<MakeupObligationRow[]> {
+  await requireAdminOrCapability(BOOKING_CAPABILITY);
+  const admin = createAdminClient();
+  const [{ data, error }, { data: balances, error: balanceError }] = await Promise.all([
+    admin
+      .from("makeup_obligations")
+      .select(
+        "id, child_id, teacher_id, reason, owed_minutes, created_at, " +
+          "child:profiles!makeup_obligations_child_id_fkey(name), teacher:profiles!makeup_obligations_teacher_id_fkey(name)"
+      )
+      .order("created_at", { ascending: false })
+      .limit(200),
+    admin.from("makeup_balances").select("obligation_id, remaining_minutes"),
+  ]);
+  if (error) throw new Error(error.message);
+  if (balanceError) throw new Error(balanceError.message);
+  const remainingByObligation = new Map((balances ?? []).map((b) => [b.obligation_id as string, b.remaining_minutes as number]));
+  function one<T>(rel: T | T[] | null | undefined): T | null {
+    return Array.isArray(rel) ? (rel[0] ?? null) : (rel ?? null);
+  }
+  return (data as unknown as Array<Record<string, unknown>> | null ?? [])
+    .map((row) => ({
+      obligationId: row.id as string,
+      childId: row.child_id as string,
+      childName: (one(row.child as unknown) as { name?: string } | null)?.name ?? null,
+      teacherId: row.teacher_id as string,
+      teacherName: (one(row.teacher as unknown) as { name?: string } | null)?.name ?? null,
+      reason: row.reason as string,
+      owedMinutes: row.owed_minutes as number,
+      remainingMinutes: remainingByObligation.get(row.id as string) ?? 0,
+      createdAt: row.created_at as string,
+    }))
+    .filter((row) => row.remainingMinutes > 0);
+}
+
+/**
+ * M5-b(요구사항 6/7/8) — 보충시간을 새 예약으로 만들지 않고 기존 미래 정규 예약 뒤에
+ * 이어붙인다. apply_makeup_time_to_booking()이 선생님 가능시간·충돌 검사 + 이중적용
+ * 방지를 전부 처리하며, entitlement_ledger에는 아무 이벤트도 새로 만들지 않는다.
+ */
+export async function adminApplyMakeupTimeToBooking(params: {
+  reservationId: string;
+  obligationId: string;
+  minutes: number;
+}): Promise<void> {
+  const { actorUserId } = await requireAdminOrCapability(BOOKING_CAPABILITY);
+  const admin = createAdminClient();
+  const { error } = await admin.rpc("apply_makeup_time_to_booking", {
+    p_reservation_id: params.reservationId,
+    p_obligation_id: params.obligationId,
+    p_minutes: params.minutes,
+    p_actor_id: actorUserId,
   });
   if (error) throw new Error(error.message);
 }
