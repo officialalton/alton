@@ -1177,6 +1177,40 @@ M5-a(판정 규칙 코어)에 이어 R7의 나머지(선생님 지각 당일 연
   유지.
 - 로컬 git commit까지만, push 없음. 이번 라운드 실제 커밋: `65b3d3a`.
 
+## PR #1 최종 병합 전 정리(2026-09-06) — main 병합/Production 배포는 여전히 보류
+
+`preview/m4-integration-verification` → `main` PR(officialalton/alton#1)이 병합
+준비 완료 상태로 승인됐으나, **`main` 병합 시 Production 자동 배포가 발생하므로
+(Production Branch = `main`) 이 세션에서는 병합하지 않고 브랜치·Preview를 그대로
+보존한다.**
+
+- 시각 의존 테스트 수정(`ce88bce`): `session-late-and-disruption.integration.test.ts`의
+  예약 시각을 실행 시점 실제 시계 시각(저녁 늦게 테스트 시 자정을 넘겨
+  `teacher_slot_not_open` 유발)에서 분리, 17:00 UTC 고정. 전체 Vitest
+  1113/1113 연속 2회 통과 확인.
+- 비운영 Supabase(`worpsqwqgnspddnrtnvq`)에 누락돼 있던 마이그레이션
+  **총 19개**(1차 12개 반영 후 SAT 정합성 제약 위반으로 중단·보완, 이후 나머지
+  7개 반영) 전부 적용 완료, `migration list --linked` 115/115 local=remote
+  일치 확인.
+- Preview(`alton-ojvuncpom-alton7.vercel.app`)에서 비운영 DB에만 이메일 발송
+  없는 임시 UAT 계정 4개(관리자·보호자·학생·선생님)를 생성해 역할별 로그인 후
+  첫 화면까지 크래시·데이터 조회 오류 없이 렌더됨을 확인(Google/DocuSign/Stripe
+  실호출, 계약·결제·예약 생성 전혀 없음).
+- **임시 계정 정리**: 관리자·보호자·학생 계정은 완전 삭제 확인(0건 잔존).
+  선생님 계정(`id: a01292a2-75a8-43c9-b49f-1948e2d5222f`, 원래 이메일
+  `uat-smoke-teacher@nonprod.invalid`, 처리 후 `uat-smoke-teacher-decommissioned-8673f5ef@nonprod.invalid`)은
+  `teacher_rate_history`(정산 감사 이력, append-only) 참조 때문에 완전 삭제가
+  불가능해 **Supabase 지원 방식으로 명시적 비활성화** 처리:
+  `auth.users.banned_until = 'infinity'` 설정 + `auth.sessions`/`auth.refresh_tokens`
+  삭제(기존 세션 1건 폐기 확인, 이후 0건)로 재로그인을 완전 차단했다.
+  `teachers` 역할 테이블 행은 삭제했으나 `teacher_rate_history` 행 1건과
+  `profiles` 행 1건은 감사 이력 보존을 위해 의도적으로 남겨뒀다(삭제·트리거
+  우회 시도 없음, `teacher_rate_history`의 금액·통화·teacher_id는 그대로
+  보존됨을 재확인). 실제 잘못된 비밀번호로 재로그인을 시도해 "이메일 또는
+  비밀번호가 올바르지 않습니다"로 거부됨을 확인했다.
+- 임시 비밀번호는 어떤 파일·커밋·PR·문서에도 남기지 않았다(생성·즉시 무효화만
+  DB 내부에서 수행).
+
 ## 잔여 R 실행계획(2026-09-05 확정) — 다음은 R8∥R10부터
 
 M4·R7(M5-a+M5-b) + 위 검수 보완 라운드 전부 완료. **다음 착수는 R8∥R10 병렬**
