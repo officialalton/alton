@@ -5,7 +5,7 @@ import { buildMonthGrid, todayKeyInTimezone } from "@/lib/calendar-date-utils";
 
 const WEEKDAY_LABELS = ["일", "월", "화", "수", "목", "금", "토"];
 
-export type DayBadge = { count: number; tone?: "ink" | "grey" | "red" };
+export type DayBadge = { count: number; tone?: "ink" | "grey" | "red" | "green" };
 
 export type MonthCalendarProps = {
   timezone: string;
@@ -109,7 +109,15 @@ export default function MonthCalendar({
                 <span
                   className={
                     "w-1.5 h-1.5 rounded-full " +
-                    (isSelected ? "bg-white" : badge.tone === "red" ? "bg-red" : badge.tone === "grey" ? "bg-grey-500" : "bg-ink")
+                    (isSelected
+                      ? "bg-white"
+                      : badge.tone === "red"
+                        ? "bg-red"
+                        : badge.tone === "grey"
+                          ? "bg-grey-500"
+                          : badge.tone === "green"
+                            ? "bg-green"
+                            : "bg-ink")
                   }
                 />
               )}

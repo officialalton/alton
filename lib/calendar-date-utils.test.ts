@@ -55,3 +55,12 @@ describe("dateKeysCoveredByInterval", () => {
     expect(keys).toEqual(["2026-10-01"]);
   });
 });
+
+describe("dayOfWeekForDateKey", () => {
+  it("Postgres extract(dow) 관례(0=일요일~6=토요일)로 요일을 계산한다", async () => {
+    const { dayOfWeekForDateKey } = await import("./calendar-date-utils");
+    expect(dayOfWeekForDateKey("2026-10-04")).toBe(0); // 일요일
+    expect(dayOfWeekForDateKey("2026-10-07")).toBe(3); // 수요일
+    expect(dayOfWeekForDateKey("2026-10-10")).toBe(6); // 토요일
+  });
+});

@@ -5,7 +5,8 @@ import type { TeacherAvailabilityRuleRow, AvailabilityExceptionRow } from "./ava
 import type { ExternalBusyBlock } from "./lesson-schedule-actions";
 import MonthCalendar, { type DayBadge } from "@/app/components/MonthCalendar";
 import WeeklyAvailabilityGrid from "@/app/components/WeeklyAvailabilityGrid";
-import { todayKeyInTimezone, dateKeysCoveredByInterval } from "@/lib/calendar-date-utils";
+import { todayKeyInTimezone, dateKeysCoveredByInterval, dayOfWeekForDateKey, buildMonthGrid } from "@/lib/calendar-date-utils";
+import { computeOpenWindowsForDate, type AvailabilityException } from "@/lib/booking/slot-search";
 
 const DAY_LABELS = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -15,7 +16,14 @@ export type TeacherAvailabilityTabProps = {
   timezone: string;
   onAddRule: (input: { dayOfWeek: number; startTimeLocal: string; endTimeLocal: string; timezone: string; effectiveFrom: string }) => Promise<string>;
   onRemoveRule: (ruleId: string) => Promise<void>;
-  onAddException: (input: { exceptionDate: string; kind: "blocked" | "available"; timezone: string; reason?: string }) => Promise<string>;
+  onAddException: (input: {
+    exceptionDate: string;
+    kind: "blocked" | "available";
+    timezone: string;
+    reason?: string;
+    startTimeLocal?: string | null;
+    endTimeLocal?: string | null;
+  }) => Promise<string>;
   onRemoveException: (exceptionId: string) => Promise<void>;
   onLoadExternalBusy: (params: { rangeStart: string; rangeEnd: string }) => Promise<ExternalBusyBlock[]>;
 };
@@ -51,6 +59,8 @@ export default function TeacherAvailabilityTab({
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [rulesView, setRulesView] = useState<"grid" | "list">("grid");
+  const [partialStartTimeLocal, setPartialStartTimeLocal] = useState("13:00");
+  const [partialEndTimeLocal, setPartialEndTimeLocal] = useState("14:00");
   const [externalBusyBlocks, setExternalBusyBlocks] = useState<ExternalBusyBlock[]>([]);
 
   const todayKey = todayKeyInTimezone(timezone);
@@ -76,22 +86,90 @@ export default function TeacherAvailabilityTab({
     return keys;
   }, [externalBusyBlocks, timezone]);
 
+  // 2026-09-06 — 이제 한 날짜에 예외가 여러 개(종일 1개 + 부분 시간 여러 개) 있을 수
+  // 있으므로 date -> 배열로 그룹핑한다.
   const exceptionsByDate = useMemo(() => {
-    const map = new Map<string, AvailabilityExceptionRow>();
-    for (const ex of exceptions) map.set(ex.exceptionDate, ex);
+    const map = new Map<string, AvailabilityExceptionRow[]>();
+    for (const ex of exceptions) {
+      const list = map.get(ex.exceptionDate) ?? [];
+      list.push(ex);
+      map.set(ex.exceptionDate, list);
+    }
     return map;
   }, [exceptions]);
 
+  const exceptionsForSelectedDate = exceptionsByDate.get(selectedDateKey) ?? [];
+  const selectedException = exceptionsForSelectedDate.find((e) => !e.startTimeLocal) ?? null;
+  const partialExceptionsForSelectedDate = exceptionsForSelectedDate.filter((e) => e.startTimeLocal);
+  const hasExternalBusyOnSelectedDate = externalBusyDateKeys.has(selectedDateKey);
+
+  // 반복 규칙 + 예외를 실제로 반영한 "이 날짜의 최종 오픈 시간" — 순수 클라이언트
+  // 계산(computeOpenWindowsForDate, lib/booking/slot-search.ts)이라 서버 재조회가
+  // 필요 없다. 학생 예약 화면이 쓰는 계산(computeAvailableSlots)과 같은 예외 규칙을
+  // 공유하되, 이 화면은 예약 후보 슬롯이 아니라 "몇시~몇시가 열려 있는지" 구간만 본다.
+  const openWindowsForSelectedDate = useMemo(() => {
+    const dow = dayOfWeekForDateKey(selectedDateKey);
+    const exForDate: AvailabilityException[] = exceptionsForSelectedDate.map((e) => ({
+      date: selectedDateKey,
+      kind: e.kind,
+      startTimeLocal: e.startTimeLocal ?? null,
+      endTimeLocal: e.endTimeLocal ?? null,
+      timezone,
+    }));
+    return computeOpenWindowsForDate(
+      selectedDateKey,
+      dow,
+      rules.map((r) => ({
+        dayOfWeek: r.dayOfWeek,
+        startTimeLocal: r.startTimeLocal,
+        endTimeLocal: r.endTimeLocal,
+        timezone: r.timezone,
+        effectiveFrom: r.effectiveFrom,
+        effectiveUntil: r.effectiveUntil,
+      })),
+      exForDate
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedDateKey, exceptionsForSelectedDate, rules, timezone]);
+
+  // 월간 캘린더 배지 — 예외가 있는 날짜는 기존처럼 빨강(휴무)/회색(조정됨) 배지를,
+  // 예외가 없지만 반복 규칙으로 열려 있는 날짜는 초록 배지를 보여준다(제품 오너
+  // 요구사항: "반복으로 오픈된 특정 일자도 캘린더에 표현되어야 한다").
   const badgesByDate = useMemo(() => {
     const badges: Record<string, DayBadge> = {};
-    for (const ex of exceptions) {
-      badges[ex.exceptionDate] = { count: 1, tone: ex.kind === "blocked" ? "red" : "grey" };
+    const [y, m] = calendarMonthKey.split("-").map(Number);
+    const grid = buildMonthGrid(y, m - 1);
+    for (const cell of grid) {
+      const dateExceptions = exceptionsByDate.get(cell.dateKey) ?? [];
+      const dow = dayOfWeekForDateKey(cell.dateKey);
+      const exForDate: AvailabilityException[] = dateExceptions.map((e) => ({
+        date: cell.dateKey,
+        kind: e.kind,
+        startTimeLocal: e.startTimeLocal ?? null,
+        endTimeLocal: e.endTimeLocal ?? null,
+        timezone,
+      }));
+      const windows = computeOpenWindowsForDate(
+        cell.dateKey,
+        dow,
+        rules.map((r) => ({
+          dayOfWeek: r.dayOfWeek,
+          startTimeLocal: r.startTimeLocal,
+          endTimeLocal: r.endTimeLocal,
+          timezone: r.timezone,
+          effectiveFrom: r.effectiveFrom,
+          effectiveUntil: r.effectiveUntil,
+        })),
+        exForDate
+      );
+      if (dateExceptions.length > 0) {
+        badges[cell.dateKey] = { count: dateExceptions.length, tone: windows.length === 0 ? "red" : "grey" };
+      } else if (windows.length > 0) {
+        badges[cell.dateKey] = { count: windows.length, tone: "green" };
+      }
     }
     return badges;
-  }, [exceptions]);
-
-  const selectedException = exceptionsByDate.get(selectedDateKey) ?? null;
-  const hasExternalBusyOnSelectedDate = externalBusyDateKeys.has(selectedDateKey);
+  }, [exceptionsByDate, calendarMonthKey, rules, timezone]);
 
   async function handleAddRule() {
     setSubmitting(true);
@@ -125,9 +203,71 @@ export default function TeacherAvailabilityTab({
     }
   }
 
-  async function addExceptionForDate(dateKey: string, kind: "blocked" | "available"): Promise<void> {
-    const id = await onAddException({ exceptionDate: dateKey, kind, timezone });
-    setExceptions((prev) => [...prev.filter((e) => e.exceptionDate !== dateKey), { id, exceptionDate: dateKey, kind, reason: null }]);
+  // 종일 예외(startTimeLocal 없음)를 등록할 땐 같은 날짜의 기존 종일 예외만 대체하고,
+  // 부분 시간 예외들은 그대로 둔다. 부분 시간 예외는 항상 추가(같은 날짜에 여러 개 가능).
+  async function addExceptionForDate(
+    dateKey: string,
+    kind: "blocked" | "available",
+    partial?: { startTimeLocal: string; endTimeLocal: string }
+  ): Promise<void> {
+    const id = await onAddException({
+      exceptionDate: dateKey,
+      kind,
+      timezone,
+      startTimeLocal: partial?.startTimeLocal ?? null,
+      endTimeLocal: partial?.endTimeLocal ?? null,
+    });
+    setExceptions((prev) => {
+      const filtered = partial ? prev : prev.filter((e) => !(e.exceptionDate === dateKey && !e.startTimeLocal));
+      return [
+        ...filtered,
+        {
+          id,
+          exceptionDate: dateKey,
+          kind,
+          reason: null,
+          startTimeLocal: partial?.startTimeLocal ?? null,
+          endTimeLocal: partial?.endTimeLocal ?? null,
+        },
+      ];
+    });
+  }
+
+  async function handleAddPartialException(kind: "blocked" | "available") {
+    if (partialEndTimeLocal <= partialStartTimeLocal) {
+      setError("종료 시각은 시작 시각 이후여야 합니다.");
+      return;
+    }
+    setSubmitting(true);
+    setError(null);
+    setMessage(null);
+    try {
+      await addExceptionForDate(selectedDateKey, kind, {
+        startTimeLocal: partialStartTimeLocal,
+        endTimeLocal: partialEndTimeLocal,
+      });
+      setMessage(
+        `${selectedDateKey} ${partialStartTimeLocal}~${partialEndTimeLocal} ${kind === "blocked" ? "휴무" : "임시 오픈"}(부분 시간) 등록됐습니다.`
+      );
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  async function handleRemovePartialException(exceptionId: string) {
+    setSubmitting(true);
+    setError(null);
+    try {
+      await onRemoveException(exceptionId);
+      setExceptions((prev) => prev.filter((e) => e.id !== exceptionId));
+      setMessage("부분 시간 예외가 삭제됐습니다.");
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   async function handleAddExceptionForSelectedDate(kind: "blocked" | "available") {
@@ -333,6 +473,80 @@ export default function TeacherAvailabilityTab({
               </button>
             </div>
           )}
+
+          <div className="border-t border-grey-200 pt-3 mb-3" data-testid="teacher-day-timeline">
+            <div className="text-[11px] font-bold text-grey-500 mb-1">
+              이 날짜의 실제 오픈 시간(반복 규칙 + 예외 반영)
+            </div>
+            {openWindowsForSelectedDate.length === 0 ? (
+              <div className="text-[12px] text-grey-500 bg-grey-100 rounded-lg px-3 py-2 mb-2">
+                이 날짜는 열린 시간이 없습니다(휴무 또는 반복 가능시간 없음).
+              </div>
+            ) : (
+              <div className="flex flex-wrap gap-1.5 mb-2">
+                {openWindowsForSelectedDate.map((w) => (
+                  <span key={`${w.startTimeLocal}-${w.endTimeLocal}`} className="text-[11.5px] text-ink border border-grey-200 rounded px-2 py-1">
+                    {w.startTimeLocal}~{w.endTimeLocal}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            {partialExceptionsForSelectedDate.length > 0 && (
+              <div className="mb-2">
+                {partialExceptionsForSelectedDate.map((ex) => (
+                  <div key={ex.id} className="flex items-center justify-between text-[12px] py-1">
+                    <span className="text-grey-500">
+                      {ex.kind === "blocked" ? "부분 휴무" : "부분 임시 오픈"}: {ex.startTimeLocal}~{ex.endTimeLocal}
+                    </span>
+                    <button
+                      disabled={submitting}
+                      onClick={() => handleRemovePartialException(ex.id)}
+                      className="text-[12px] font-bold text-red disabled:opacity-50"
+                    >
+                      삭제
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div className="text-[10px] font-bold text-grey-500 mb-1">부분 시간대만 조정</div>
+            <div className="flex gap-2 items-end flex-wrap">
+              <div>
+                <label className="block text-[10px] text-grey-500 mb-1">시작</label>
+                <input
+                  type="time"
+                  className="border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[12px]"
+                  value={partialStartTimeLocal}
+                  onChange={(e) => setPartialStartTimeLocal(e.target.value)}
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] text-grey-500 mb-1">종료</label>
+                <input
+                  type="time"
+                  className="border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[12px]"
+                  value={partialEndTimeLocal}
+                  onChange={(e) => setPartialEndTimeLocal(e.target.value)}
+                />
+              </div>
+              <button
+                disabled={submitting}
+                onClick={() => handleAddPartialException("blocked")}
+                className="text-[12px] font-bold bg-ink text-white rounded-lg px-3 py-1.5 disabled:opacity-50"
+              >
+                이 시간대만 휴무로
+              </button>
+              <button
+                disabled={submitting}
+                onClick={() => handleAddPartialException("available")}
+                className="text-[12px] font-bold border-[1.5px] border-ink text-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
+              >
+                이 시간대만 임시 오픈으로
+              </button>
+            </div>
+          </div>
 
           <div className="border-t border-grey-200 pt-3 mb-3">
             <div className="text-[11px] font-bold text-grey-500 mb-1">기간 휴무(월 단위 일괄)</div>

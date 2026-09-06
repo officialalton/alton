@@ -30,6 +30,96 @@ export type ExistingReservation = {
   endsAt: Date;
 };
 
+export type DayWindow = { startTimeLocal: string; endTimeLocal: string };
+
+function hmToMinutes(hm: string): number {
+  const [h, m] = hm.split(":").map(Number);
+  return h * 60 + (m || 0);
+}
+
+function minutesToHm(min: number): string {
+  const h = Math.floor(min / 60);
+  const m = min % 60;
+  return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+}
+
+/**
+ * 2026-09-06 — 선생님 본인 화면에서 "이 날짜에 실제로 몇 시~몇 시가 열려 있는지"를
+ * 보여주기 위한 순수 함수. `computeAvailableSlots`(예약 후보 계산, timezone/DST 변환
+ * 포함)와 달리 이 함수는 하루 안의 시각만 다루므로 분(minute) 단위 구간 연산으로
+ * 충분하다 — 반복 규칙·예외가 이미 그 날짜/요일에 해당하는 것만 넘어온다고 가정하지
+ * 않고, 이 함수가 직접 day_of_week/effective_from/effective_until/exception_date
+ * 필터링까지 전부 수행한다(호출부는 규칙 전체·해당 날짜 예외 전체를 그대로 넘기면 됨).
+ *
+ * 순서: (1) 종일 휴무 예외가 있으면 즉시 빈 배열. (2) 종일 임시 오픈 예외 또는 부분
+ * 임시 오픈 예외 또는 반복 규칙에서 열림 구간을 모으고 병합(merge). (3) 부분 휴무
+ * 예외 구간을 뺀다(subtract, 구간이 쪼개질 수 있음). 결과는 시작 시각 오름차순.
+ */
+export function computeOpenWindowsForDate(
+  dateStr: string,
+  dayOfWeek: number,
+  rules: AvailabilityRule[],
+  exceptionsForDate: AvailabilityException[]
+): DayWindow[] {
+  const relevantExceptions = exceptionsForDate; // 호출부가 이미 exception_date로 필터링해 넘긴다고 가정
+
+  const fullDayBlocked = relevantExceptions.some((e) => e.kind === "blocked" && e.startTimeLocal === null);
+  if (fullDayBlocked) return [];
+
+  const rawWindows: Array<{ start: number; end: number }> = [];
+
+  const fullDayAvailable = relevantExceptions.some((e) => e.kind === "available" && e.startTimeLocal === null);
+  if (fullDayAvailable) {
+    rawWindows.push({ start: 0, end: 24 * 60 });
+  }
+  for (const e of relevantExceptions) {
+    if (e.kind === "available" && e.startTimeLocal && e.endTimeLocal) {
+      rawWindows.push({ start: hmToMinutes(e.startTimeLocal), end: hmToMinutes(e.endTimeLocal) });
+    }
+  }
+  for (const rule of rules) {
+    if (rule.dayOfWeek !== dayOfWeek) continue;
+    if (dateStr < rule.effectiveFrom) continue;
+    if (rule.effectiveUntil && dateStr > rule.effectiveUntil) continue;
+    rawWindows.push({ start: hmToMinutes(rule.startTimeLocal), end: hmToMinutes(rule.endTimeLocal) });
+  }
+
+  if (rawWindows.length === 0) return [];
+
+  rawWindows.sort((a, b) => a.start - b.start);
+  const merged: Array<{ start: number; end: number }> = [];
+  for (const w of rawWindows) {
+    const last = merged[merged.length - 1];
+    if (last && w.start <= last.end) {
+      last.end = Math.max(last.end, w.end);
+    } else {
+      merged.push({ ...w });
+    }
+  }
+
+  const partialBlocks = relevantExceptions
+    .filter((e) => e.kind === "blocked" && e.startTimeLocal && e.endTimeLocal)
+    .map((e) => ({ start: hmToMinutes(e.startTimeLocal!), end: hmToMinutes(e.endTimeLocal!) }));
+
+  let result = merged;
+  for (const block of partialBlocks) {
+    const next: Array<{ start: number; end: number }> = [];
+    for (const w of result) {
+      if (block.end <= w.start || block.start >= w.end) {
+        next.push(w);
+        continue;
+      }
+      if (block.start > w.start) next.push({ start: w.start, end: Math.min(block.start, w.end) });
+      if (block.end < w.end) next.push({ start: Math.max(block.end, w.start), end: w.end });
+    }
+    result = next.filter((w) => w.end > w.start);
+  }
+
+  return result
+    .sort((a, b) => a.start - b.start)
+    .map((w) => ({ startTimeLocal: minutesToHm(w.start), endTimeLocal: minutesToHm(w.end) }));
+}
+
 export type SlotSearchParams = {
   rules: AvailabilityRule[];
   exceptions: AvailabilityException[];

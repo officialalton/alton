@@ -77,6 +77,14 @@ export function todayKeyInTimezone(timezone: string): string {
   return dateKeyInTimezone(new Date().toISOString(), timezone);
 }
 
+/** dateKey("YYYY-MM-DD")의 요일(0=일요일~6=토요일, Postgres extract(dow)와 동일 관례)을
+ *  구한다. 반복 가능 시간 규칙(day_of_week)과 특정 날짜를 매칭시킬 때 쓴다(선생님
+ *  월간 가능시간 뷰 — 2026-09-06). */
+export function dayOfWeekForDateKey(dateKey: string): number {
+  const [y, m, d] = dateKey.split("-").map(Number);
+  return new Date(Date.UTC(y, m - 1, d)).getUTCDay();
+}
+
 /** startsAt/endsAt 구간이 걸치는 모든 날짜 키(timezone 기준)를 집합으로 만든다. */
 export function dateKeysCoveredByInterval(startsAt: string, endsAt: string, timezone: string): string[] {
   const keys: string[] = [];

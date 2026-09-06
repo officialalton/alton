@@ -105,7 +105,7 @@
 - [x] **#2 배정됐는데 예약 불가**: `app/student/lesson-booking-data.ts`의 `hasTrialGrant` 조건이 원인 — #1과 동일 근본원인, #1 수정 후 두 학생 모두 `bookableEnrollments` 조건 충족 확인(코드 변경 없음, 데이터 문제).
 - [x] **#3 원 상담 카드 시각 구분**: `is_family_root_with_children` 플래그 추가, 흐림 처리 + "완료(이력)" 배지(`app/admin/ConsultationKanbanBoard.tsx`, `consultation-kanban-actions.ts`). 카드는 그대로 유지(삭제·이동 없음).
 - [x] **#4 선생님 배정 확인 절차**: `SubjectEnrollmentPanel.tsx`의 최초 배정 버튼에 `window.confirm()` 확인 단계 추가.
-- [ ] **#5 선생님 가용시간 부분 시간대 조정**: 시간 부족으로 미착수. 남은 작업은 `docs/CURRENT.md` 참고.
+- [x] **#5 선생님 가용시간 부분 시간대 조정**: `docs/CURRENT.md`의 "2026-09-06(6차)" 절 참고 — DB 스키마·`is_teacher_slot_open()`/`computeAvailableSlots()`는 R6부터 이미 부분 시간 예외를 지원했고(마이그레이션 불필요), 실제로 빠졌던 선생님 포털 UI(월간 캘린더 오픈 배지 + 일간 타임라인 + 부분 휴무/임시오픈 등록 폼)만 `app/teacher/TeacherAvailabilityTab.tsx`에 추가. 신규 통합 테스트로 부분 휴무가 `is_teacher_slot_open()`에서 실제로 그 시간대만 제외함을 확인.
 - [x] **#6 학생 비번 설정 후 승인 게이트**: 코드 확인 결과 이미 자동 진행(승인 버튼 자체가 없음, `activateStudentIfPending()`이 배정 완료 시 자동 전환) — 논프로드 실측으로 두 학생 모두 `status='active'` 확인. `app/account-pending/page.tsx` 오해 소지 있는 문구만 수정.
 - [x] **#7 링크 재발급 시 이메일 수정**: `reissueTrialOnboardingLinkAction()`에 `overrides` 인자 추가, `TrialOnboardingLinkProgress.tsx`에 재발급 전 이메일 수정 폼 추가.
 - [x] `supabase db reset --local` 성공 / `npx tsc --noEmit` 0 에러 / `npx vitest run` 184파일·1214건 통과 / `npx next build` 성공.
@@ -119,3 +119,15 @@
 - [x] 회귀 테스트: `lib/timezone.test.ts`에 미국 시간대 전체 포함 여부 + IANA 값 유효성 검증 추가. `lib/timezone-persistence.integration.test.ts`(신규, psql 직접 접속) 5건 — 개인 시간대 저장 후 재조회(=다음 로그인) 유지, 확장된 시간대(알래스카/하와이/피닉스) 저장·유지, 타인 프로필 RLS 차단, 주 보호자 RPC로 가족 기본값 영구 저장, 비주보호자 거부(fail-closed).
 - [x] `supabase db reset --local` 성공(추가 마이그레이션 없음, 기존 컬럼 재사용) / `npx tsc --noEmit` 0 에러 / `npx vitest run` 185파일·1228건 통과 / `npx next build` 성공.
 - [ ] 브라우저로 실제 각 포털의 "시간대 설정" 모달을 열어 확장된 7개 미국 시간대가 드롭다운에 보이는지, 선택 후 새로고침해도 유지되는지 눈으로 확인하는 것은 이번 세션 범위 밖 — Preview에서 직접 확인 권장(계정 드롭다운 → "시간대 설정").
+
+### 2026-09-06 6차 세션 — 골든패스 #5(선생님 가용시간 부분 시간대 조정) 완료 — 7건 전부 완료
+
+- [x] 조사 결과 DB 스키마(`teacher_availability_exceptions.start_time_local`/`end_time_local`)와 `is_teacher_slot_open()`(DB 함수, 최종 예약 확정 판정) + `computeAvailableSlots()`(`lib/booking/slot-search.ts`, 학생/보호자 예약 슬롯 후보 계산)가 R6(`20260926000000_r6_availability_and_booking.sql`)부터 이미 부분 시간 예외를 완전히 지원하고 있었다 — 마이그레이션 불필요.
+- [x] 실제로 빠졌던 건 선생님 포털 UI뿐 — `app/teacher/TeacherAvailabilityTab.tsx`에 (1) 월간 캘린더 배지를 "예외 있음(회색/빨강)" vs "반복 규칙으로 오픈(초록, 신규)"으로 구분, (2) 날짜 선택 시 "이 날짜의 실제 오픈 시간(반복 규칙+예외 반영)" 타임라인, (3) 시작/종료 시간 입력으로 "이 시간대만 휴무로/임시 오픈으로" 등록하는 폼과 등록된 부분 예외 개별 삭제 추가.
+- [x] 신규 순수 함수 `computeOpenWindowsForDate()`(`lib/booking/slot-search.ts`)·`dayOfWeekForDateKey()`(`lib/calendar-date-utils.ts`) 추가, 단위 테스트 10건.
+- [x] 신규 통합 테스트 `lib/booking/teacher-partial-time-exception.integration.test.ts`(psql 직접 접속, 2건) — 부분 휴무 등록 전 반복 규칙 시간대 전체 오픈 확인 → 특정 날짜 12:00~13:00만 부분 휴무 등록 → 그 시간대만 `is_teacher_slot_open()`이 false, 전후 시간대·다른 주 같은 요일은 여전히 true임을 실제 DB 함수 호출로 확인.
+- [x] `supabase db reset --local` 성공(신규 마이그레이션 없음) / `npx tsc --noEmit` 0 에러 / `npx vitest run` 186파일·1243건 전부 통과(신규 15건 포함) / `npx next build` 성공.
+- [x] non-prod DB push 불필요(스키마 변경 없음, 코드만 배포되면 즉시 반영).
+- [ ] 브라우저로 실제 선생님 포털에서 월간 캘린더 배지·일간 타임라인·부분 휴무 등록 폼을 눈으로 확인하고, 학생 포털에서 그 시간대가 실제로 예약 불가로 보이는지 확인하는 것은 이번 세션 범위 밖 — Preview에서 직접 확인 권장.
+
+**이 항목 완료로 2026-09-06(4차) 세션에서 발견된 골든패스 실사용 7건(#1~#7)이 전부 완료됐다.**

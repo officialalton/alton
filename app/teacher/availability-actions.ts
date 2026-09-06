@@ -132,6 +132,10 @@ export type AvailabilityExceptionRow = {
   exceptionDate: string;
   kind: "blocked" | "available";
   reason: string | null;
+  // 2026-09-06 — 특정 요일 반복 규칙의 일부 시간대만 개별 조정(부분 휴무/부분 임시
+  // 오픈)하기 위한 필드. 둘 다 null이면 기존처럼 해당 날짜 종일 적용.
+  startTimeLocal?: string | null;
+  endTimeLocal?: string | null;
 };
 
 /** R6 11/N — 선생님 본인 캘린더에 기존 날짜별 예외를 표시하기 위한 조회. */
@@ -139,7 +143,7 @@ export async function listTeacherAvailabilityExceptions(): Promise<AvailabilityE
   const { user, supabase } = await requireUser();
   const { data, error } = await supabase
     .from("teacher_availability_exceptions")
-    .select("id, exception_date, kind, reason")
+    .select("id, exception_date, kind, reason, start_time_local, end_time_local")
     .eq("teacher_id", user.id)
     .order("exception_date", { ascending: true });
   if (error) throw new Error(error.message);
@@ -148,6 +152,8 @@ export async function listTeacherAvailabilityExceptions(): Promise<AvailabilityE
     exceptionDate: r.exception_date as string,
     kind: r.kind as "blocked" | "available",
     reason: (r.reason as string) ?? null,
+    startTimeLocal: (r.start_time_local as string) ?? null,
+    endTimeLocal: (r.end_time_local as string) ?? null,
   }));
 }
 
