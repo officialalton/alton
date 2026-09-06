@@ -119,6 +119,14 @@ export default function ConsultationKanbanBoard({
                           👨‍👩‍👧 형제자매
                         </span>
                       )}
+                      {c.source === "guardian_portal" && (
+                        <span
+                          title="이미 가입한 보호자가 포털의 '새 자녀 상담 신청' 화면에서 직접 신청한 건"
+                          className="text-[10px] font-semibold text-white bg-ink rounded px-1 py-0.5 shrink-0"
+                        >
+                          보호자 포털
+                        </span>
+                      )}
                       <span className="truncate">{c.contact_name}</span>
                     </div>
                     <div className="text-[11px] text-grey-500 truncate">{c.contact_email}</div>
@@ -128,6 +136,11 @@ export default function ConsultationKanbanBoard({
                       </div>
                     )}
                     {c.student_grade && <div className="text-[10.5px] text-grey-400">{c.student_grade}</div>}
+                    {c.requested_children && c.requested_children.length > 0 && (
+                      <div className="text-[10.5px] text-grey-400 truncate">
+                        자녀 {c.requested_children.length}명: {c.requested_children.map((ch) => ch.name).join(", ")}
+                      </div>
+                    )}
                     {c.admin_review_summary && (
                       <div className="text-[10.5px] text-grey-500 mt-1 line-clamp-2">📝 {c.admin_review_summary}</div>
                     )}

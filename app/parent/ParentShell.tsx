@@ -20,6 +20,7 @@ import ConsentTab from "./ConsentTab";
 import type { ChildConsentStatus, ConsentPolicyOption, TrialSmartNotesConsentStatus } from "./consent-data";
 import type { PendingRegularIntentChoice } from "./regular-intent-data";
 import FamilyTab from "./FamilyTab";
+import ConsultRequestTab from "./ConsultRequestTab";
 import ParentEnrollmentTab from "./EnrollmentTab";
 import type { ChildSubjectEnrollments } from "./enrollment-data";
 import LessonBookingTab from "@/app/student/LessonBookingTab";
@@ -43,6 +44,7 @@ const NAV_ITEMS = [
   { id: "stats", label: "통계", icon: "📊" },
   { id: "consent", label: "동의", icon: "✅" },
   { id: "family", label: "가족", icon: "👨‍👩‍👧" },
+  { id: "consultRequest", label: "자녀상담", icon: "🗓️" },
 ] as const;
 
 type TabId = (typeof NAV_ITEMS)[number]["id"];
@@ -261,7 +263,9 @@ export default function ParentShell({
               trialSmartNotesChildren={trialSmartNotesChildren}
             />
           ) : activeTab === "family" ? (
-            <FamilyTab />
+            <FamilyTab onGoToConsultRequest={() => selectTab("consultRequest")} />
+          ) : activeTab === "consultRequest" ? (
+            <ConsultRequestTab />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.
