@@ -7,6 +7,7 @@ import {
   getTrialOnboardingPipelineAction,
   confirmTrialIntentAction,
   sendRegularContractOneClickAction,
+  sendTrialOnboardingNoticeAction,
 } from "./trial-onboarding-actions";
 import { retryTrialEntitlementGrant } from "./consultation-scheduling-actions";
 import { createNewContractVersionForResend } from "./consultation-actions";
@@ -19,6 +20,7 @@ vi.mock("./trial-onboarding-actions", () => ({
   createTrialOnboardingLinkAction: vi.fn(),
   planTrialSubjectAndAssignTeacherAction: vi.fn(),
   sendRegularContractOneClickAction: vi.fn(),
+  sendTrialOnboardingNoticeAction: vi.fn(),
 }));
 
 vi.mock("./consultation-scheduling-actions", () => ({
@@ -107,6 +109,58 @@ describe("TrialOnboardingPanel", () => {
 
     await waitFor(() => expect(screen.getByRole("button", { name: "체험 온보딩 안내 발송" })).toBeInTheDocument());
     expect(confirmTrialIntentAction).toHaveBeenCalledWith("c1");
+  });
+
+  // 2026-09-06(관리자 온보딩 발송 폼 통합) — 이 진입점(TrialOnboardingPanel)에서도
+  // ConsultationKanbanBoard 카드 상세와 동일한 TrialOnboardingStudentsForm을 통해
+  // "학생 추가"로 2명을 입력하면 가족당 sendTrialOnboardingNoticeAction 호출이 1번만,
+  // 학생 2명 배열로 나가는지 확인한다(중복 로직 없음의 근거).
+  it("'학생 추가'로 2명을 입력하면 sendTrialOnboardingNoticeAction이 학생 2명 배열로 1번만 호출된다", async () => {
+    (listTrialOnboardingCandidatesAction as ReturnType<typeof vi.fn>).mockResolvedValue([
+      { ...baseCandidate, trialIntentConfirmedAt: "2026-09-03T00:00:00Z" },
+    ]);
+    (listRegularConversionCandidatesAction as ReturnType<typeof vi.fn>).mockResolvedValue([]);
+    (getTrialOnboardingPipelineAction as ReturnType<typeof vi.fn>).mockResolvedValue({
+      consultationId: "c1",
+      subjectEnrollmentId: null,
+      steps: stepList(["trial_intent"]),
+    });
+    (sendTrialOnboardingNoticeAction as ReturnType<typeof vi.fn>).mockResolvedValue({
+      status: "sent",
+      sentAt: "2026-09-06T00:00:00Z",
+    });
+
+    render(<TrialOnboardingPanel />);
+
+    fireEvent.click(await screen.findByRole("button", { name: "체험 온보딩 안내 발송" }));
+
+    fireEvent.change(screen.getByPlaceholderText("보호자 이름"), { target: { value: "김학부모" } });
+    fireEvent.change(screen.getByPlaceholderText("보호자 이메일"), { target: { value: "parent@example.com" } });
+    fireEvent.change(screen.getByPlaceholderText("학생 이름"), { target: { value: "첫째" } });
+    fireEvent.change(screen.getByPlaceholderText("학생 이메일"), { target: { value: "first@example.com" } });
+
+    fireEvent.click(screen.getByText("+ 학생 추가"));
+
+    const names = screen.getAllByPlaceholderText("학생 이름");
+    const emails = screen.getAllByPlaceholderText("학생 이메일");
+    expect(names).toHaveLength(2);
+    fireEvent.change(names[1], { target: { value: "둘째" } });
+    fireEvent.change(emails[1], { target: { value: "second@example.com" } });
+
+    fireEvent.click(screen.getByText("안내 발송"));
+
+    await waitFor(() => expect(sendTrialOnboardingNoticeAction).toHaveBeenCalledTimes(1));
+    expect(sendTrialOnboardingNoticeAction).toHaveBeenCalledWith(
+      expect.objectContaining({
+        consultationId: "c1",
+        guardianEmail: "parent@example.com",
+        guardianName: "김학부모",
+        students: [
+          expect.objectContaining({ name: "첫째", email: "first@example.com" }),
+          expect.objectContaining({ name: "둘째", email: "second@example.com" }),
+        ],
+      })
+    );
   });
 
   it("각 단계의 완료/다음 행동을 순서대로 보여준다(체크 표시 + '다음 관리자 행동' 안내)", async () => {

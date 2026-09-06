@@ -8,7 +8,6 @@
 import { useEffect, useState } from "react";
 import {
   confirmTrialIntentAction,
-  sendTrialOnboardingNoticeAction,
   type SendTrialOnboardingNoticeResult,
   listTrialOnboardingCandidatesAction,
   listRegularConversionCandidatesAction,
@@ -23,6 +22,7 @@ import { retryTrialEntitlementGrant } from "./consultation-scheduling-actions";
 import { createNewContractVersionForResend } from "./consultation-actions";
 import LessonReviewAdminEditor from "./LessonReviewAdminEditor";
 import StudentInviteStatusPanel from "./StudentInviteStatusPanel";
+import TrialOnboardingStudentsForm from "./TrialOnboardingStudentsForm";
 
 const LINK_STATUS_LABEL: Record<TrialOnboardingCandidate["linkStatus"], string> = {
   none: "온보딩 링크 미발급",
@@ -345,25 +345,6 @@ function TrialLinkForm({
   onOpen: () => void;
   onIssued: (r: SendTrialOnboardingNoticeResult) => void;
 }) {
-  const [guardianEmail, setGuardianEmail] = useState("");
-  const [guardianName, setGuardianName] = useState("");
-  // 2026-09-06(복수 자녀 온보딩) — 학생 입력은 기본 1행 + "학생 추가" 반복
-  // 입력으로 1~N명을 받는다. 별도의 "자녀 수 선택"·"체험 대상 확정" 단계는
-  // 만들지 않는다(제품 오너 확정안).
-  const [students, setStudents] = useState([{ name: "", email: "", grade: "", subject: "" }]);
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  function updateStudent(index: number, field: "name" | "email" | "grade" | "subject", value: string) {
-    setStudents((prev) => prev.map((s, i) => (i === index ? { ...s, [field]: value } : s)));
-  }
-  function addStudentRow() {
-    setStudents((prev) => [...prev, { name: "", email: "", grade: "", subject: "" }]);
-  }
-  function removeStudentRow(index: number) {
-    setStudents((prev) => (prev.length > 1 ? prev.filter((_, i) => i !== index) : prev));
-  }
-
   if (!open) {
     return (
       <button
@@ -375,113 +356,19 @@ function TrialLinkForm({
     );
   }
 
+  // 2026-09-06(관리자 온보딩 발송 폼 통합) — 학생 1~N명 입력(기본 1행 + "학생
+  // 추가")은 ConsultationKanbanBoard.tsx의 카드 상세와 완전히 동일한
+  // TrialOnboardingStudentsForm 하나만 사용한다. 별도 "안내 재발송" 문구는
+  // 이 화면 진입점 고유의 톤이라 submitLabel로만 전달한다.
   return (
-    <div className="mt-2.5 space-y-1.5">
-      <label className="block text-[11px] font-semibold text-grey-500">
-        보호자 이메일
-        <input
-          className="w-full mt-0.5 border border-grey-300 rounded px-2 py-1.5 text-[12.5px]"
-          value={guardianEmail}
-          onChange={(e) => setGuardianEmail(e.target.value)}
-        />
-      </label>
-      <label className="block text-[11px] font-semibold text-grey-500">
-        보호자 이름
-        <input
-          className="w-full mt-0.5 border border-grey-300 rounded px-2 py-1.5 text-[12.5px]"
-          value={guardianName}
-          onChange={(e) => setGuardianName(e.target.value)}
-        />
-      </label>
-      <div className="space-y-2 border-t border-grey-200 pt-2 mt-1">
-        {students.map((s, i) => (
-          <div key={i} className="border border-grey-200 rounded-lg p-2 space-y-1 relative">
-            <div className="text-[11px] font-bold text-grey-400">학생 {i + 1}</div>
-            <label className="block text-[11px] font-semibold text-grey-500">
-              학생 이름
-              <input
-                className="w-full mt-0.5 border border-grey-300 rounded px-2 py-1.5 text-[12.5px]"
-                value={s.name}
-                onChange={(e) => updateStudent(i, "name", e.target.value)}
-              />
-            </label>
-            <label className="block text-[11px] font-semibold text-grey-500">
-              학생 이메일
-              <input
-                className="w-full mt-0.5 border border-grey-300 rounded px-2 py-1.5 text-[12.5px]"
-                value={s.email}
-                onChange={(e) => updateStudent(i, "email", e.target.value)}
-              />
-            </label>
-            <label className="block text-[11px] font-semibold text-grey-500">
-              학년(선택)
-              <input
-                className="w-full mt-0.5 border border-grey-300 rounded px-2 py-1.5 text-[12.5px]"
-                value={s.grade}
-                onChange={(e) => updateStudent(i, "grade", e.target.value)}
-              />
-            </label>
-            <label className="block text-[11px] font-semibold text-grey-500">
-              과목(선택)
-              <input
-                className="w-full mt-0.5 border border-grey-300 rounded px-2 py-1.5 text-[12.5px]"
-                value={s.subject}
-                onChange={(e) => updateStudent(i, "subject", e.target.value)}
-              />
-            </label>
-            {students.length > 1 && (
-              <button
-                type="button"
-                onClick={() => removeStudentRow(i)}
-                className="text-[11px] text-red font-bold"
-              >
-                이 학생 삭제
-              </button>
-            )}
-          </div>
-        ))}
-        <button type="button" onClick={addStudentRow} className="text-[11.5px] font-bold text-ink underline">
-          + 학생 추가
-        </button>
-      </div>
-      {error && <div className="text-[11.5px] text-red">{error}</div>}
-      <button
-        disabled={
-          busy ||
-          !guardianEmail ||
-          !guardianName ||
-          students.some((s) => !s.name || !s.email)
-        }
-        aria-busy={busy}
-        onClick={async () => {
-          setBusy(true);
-          setError(null);
-          try {
-            const result = await sendTrialOnboardingNoticeAction({
-              consultationId,
-              guardianEmail,
-              guardianName,
-              students: students.map((s) => ({
-                name: s.name,
-                email: s.email,
-                grade: s.grade || undefined,
-                subject: s.subject || undefined,
-              })),
-            });
-            if (result.status === "failed") {
-              setError(`발송 실패(관리자 조치 필요) — ${result.error}`);
-            } else {
-              onIssued(result);
-            }
-          } catch (e) {
-            setError(e instanceof Error ? e.message : String(e));
-          }
-          setBusy(false);
+    <div className="mt-2.5">
+      <TrialOnboardingStudentsForm
+        consultationId={consultationId}
+        submitLabel={reissue ? "안내 재발송" : "안내 발송"}
+        onResult={(result) => {
+          if (result.status !== "failed") onIssued(result);
         }}
-        className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
-      >
-        {busy ? "발송 중..." : reissue ? "안내 재발송" : "안내 발송"}
-      </button>
+      />
     </div>
   );
 }

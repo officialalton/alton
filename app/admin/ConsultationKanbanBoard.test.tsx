@@ -1,6 +1,7 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi, beforeEach } from "vitest";
 import ConsultationKanbanBoard from "./ConsultationKanbanBoard";
+import { sendTrialOnboardingNoticeAction } from "./trial-onboarding-actions";
 
 const refreshMock = vi.fn();
 vi.mock("next/navigation", () => ({
@@ -244,6 +245,51 @@ describe("ConsultationKanbanBoard — 체험 온보딩 안내 발송 폼(2026-09
     await screen.findByTestId("consultation-card-detail");
 
     expect(screen.getByTestId("trial-notice-failed")).toHaveTextContent("SMTP 연결 실패");
+  });
+
+  // 2026-09-06(관리자 온보딩 발송 폼 통합) — 카드 상세 진입점에서도
+  // TrialOnboardingPanel.tsx와 동일하게 "학생 추가"로 N명(3명)을 입력해 가족당
+  // 온보딩 안내 1건만 발송되는지 확인한다. 두 진입점이 같은
+  // sendTrialOnboardingNoticeAction()을 호출한다는 것도 이 단언으로 함께 고정된다.
+  it("학생 추가로 3명을 입력하면 sendTrialOnboardingNoticeAction이 학생 3명 배열로 1번만 호출된다", async () => {
+    getConsultationCardDetailActionMock.mockResolvedValue(detailWithoutAccountLinked());
+    (sendTrialOnboardingNoticeAction as ReturnType<typeof vi.fn>).mockResolvedValue({
+      status: "sent",
+      sentAt: "2026-09-06T00:00:00Z",
+    });
+
+    render(<ConsultationKanbanBoard subjects={subjects} teacherCandidatesBySubject={teacherCandidatesBySubject} />);
+
+    fireEvent.click(await screen.findByText("김민지"));
+    await screen.findByTestId("consultation-card-detail");
+
+    fireEvent.change(screen.getByPlaceholderText("학생 이름"), { target: { value: "첫째" } });
+    fireEvent.change(screen.getByPlaceholderText("학생 이메일"), { target: { value: "first@example.com" } });
+
+    fireEvent.click(screen.getByText("+ 학생 추가"));
+    fireEvent.click(screen.getByText("+ 학생 추가"));
+
+    const names = screen.getAllByPlaceholderText("학생 이름");
+    const emails = screen.getAllByPlaceholderText("학생 이메일");
+    expect(names).toHaveLength(3);
+    fireEvent.change(names[1], { target: { value: "둘째" } });
+    fireEvent.change(emails[1], { target: { value: "second@example.com" } });
+    fireEvent.change(names[2], { target: { value: "셋째" } });
+    fireEvent.change(emails[2], { target: { value: "third@example.com" } });
+
+    fireEvent.click(screen.getByText("체험 온보딩 안내 발송"));
+
+    await waitFor(() => expect(sendTrialOnboardingNoticeAction).toHaveBeenCalledTimes(1));
+    expect(sendTrialOnboardingNoticeAction).toHaveBeenCalledWith(
+      expect.objectContaining({
+        consultationId: "c1",
+        students: [
+          expect.objectContaining({ name: "첫째", email: "first@example.com" }),
+          expect.objectContaining({ name: "둘째", email: "second@example.com" }),
+          expect.objectContaining({ name: "셋째", email: "third@example.com" }),
+        ],
+      })
+    );
   });
 });
 
