@@ -80,12 +80,12 @@ function computeCompletionReadiness(row: {
   smart_notes_drive_file_id: string | null;
   admin_review_summary: string | null;
 }): ConsultationListItem["completionReadiness"] {
-  // 2026-09-06 완화: Smart Notes 원본 실제 연결(smart_notes_drive_file_id)은 비동기
-  // 도착 산출물이라 결과 기록 가능 여부에서 제외한다(서버 admin_record_consultation_outcome도
-  // 동일하게 완화) — 원본은 나중에 도착하면 그대로 연결되고 상담 상세에서 확인만
-  // 가능하면 된다. 동의·Smart Notes 활성화·검토 요약은 그대로 유지.
+  // 2026-09-06 완화(2차): Smart Notes 원본 실제 연결(smart_notes_drive_file_id)에 이어
+  // Smart Notes 활성화 상태(smart_notes_config_status)도 결과 기록 가능 여부에서
+  // 제외한다(서버 admin_record_consultation_outcome도 동일하게 완화, 제품 오너 확정
+  // — 기록 생성 자체는 항상 일어남). 동의 확인·검토 요약만 남긴다.
   if (row.status !== "scheduled" && row.status !== "completed") return "not_applicable";
-  if (!row.consent_confirmed_at || row.smart_notes_config_status !== "applied") return "consult_not_ready";
+  if (!row.consent_confirmed_at) return "consult_not_ready";
   if (!row.admin_review_summary || row.admin_review_summary.trim() === "") return "summary_missing";
   return "ready";
 }
