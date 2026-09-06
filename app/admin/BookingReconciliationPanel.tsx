@@ -723,6 +723,11 @@ export default function BookingReconciliationPanel() {
               사유: {o.reason === "teacher_late" ? "선생님 지각" : o.reason === "company_meet_interruption" ? "회사·Meet 장애 중단" : o.reason}{" "}
               · {formatDateTime(o.createdAt)}
             </div>
+            <div className={`text-[12px] mt-0.5 ${new Date(o.expiresAt) <= new Date() ? "text-red font-bold" : "text-grey-500"}`}>
+              {new Date(o.expiresAt) <= new Date()
+                ? `만료됨(${formatDateTime(o.expiresAt)}) — 적용 불가, 필요하면 관리자가 새 보충시간을 등록하세요.`
+                : `사용 기한: ${formatDateTime(o.expiresAt)}까지(생성 후 30일)`}
+            </div>
             {applyingObligationId === o.obligationId ? (
               <div className="mt-3 border-t border-grey-200 pt-3">
                 <div className="flex gap-2 items-end mb-2">

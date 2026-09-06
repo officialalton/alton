@@ -281,4 +281,37 @@ describe("apply_makeup_time_to_booking() — 보충시간을 미래 정규 예�
       /미래 예약에만/
     );
   });
+
+  it("2026-09-05 확정: 생성 후 30일이 지난 보충시간은 적용이 거부된다", () => {
+    grantRegularEntitlement();
+    const late = bookSession(52, 120);
+    psql(`select mark_lesson_session_started('${late.sessionId}', '${teacherId}');`);
+    psql(`select resolve_teacher_lateness('${late.sessionId}', 20, 0, '${teacherId}', '연장 불가');`);
+    const obligationId = psql(`select id from makeup_obligations where triggering_session_id = '${late.sessionId}';`);
+    // 트리거가 UPDATE로 expires_at 변경을 항상 막으므로(연장 방지 목적), 테스트에서 과거 만료를
+    // 재현하려면 트리거를 일시적으로 끄고 직접 과거 값으로 되돌린다(트리거 자체의 동작은 아래
+    // 별도 테스트가 검증한다 — 여기서는 만료 판정 로직만 검증).
+    psql(`
+      alter table makeup_obligations disable trigger makeup_obligations_no_expiry_extension;
+      update makeup_obligations set expires_at = now() - interval '1 day' where id = '${obligationId}';
+      alter table makeup_obligations enable trigger makeup_obligations_no_expiry_extension;
+    `);
+
+    grantRegularEntitlement();
+    const future = bookSession(53, 120);
+    expect(() =>
+      psql(`select apply_makeup_time_to_booking('${future.reservationId}', '${obligationId}', 15, '${teacherId}');`)
+    ).toThrow(/makeup_obligation_expired/);
+  });
+
+  it("만료일(expires_at)은 UPDATE로 연장할 수 없다", () => {
+    grantRegularEntitlement();
+    const late = bookSession(54, 120);
+    psql(`select mark_lesson_session_started('${late.sessionId}', '${teacherId}');`);
+    psql(`select resolve_teacher_lateness('${late.sessionId}', 20, 0, '${teacherId}', '연장 불가');`);
+    const obligationId = psql(`select id from makeup_obligations where triggering_session_id = '${late.sessionId}';`);
+    expect(() =>
+      psql(`update makeup_obligations set expires_at = expires_at + interval '30 days' where id = '${obligationId}';`)
+    ).toThrow(/만료일은 연장할 수 없습니다/);
+  });
 });

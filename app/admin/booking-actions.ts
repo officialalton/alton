@@ -626,6 +626,8 @@ export type MakeupObligationRow = {
   owedMinutes: number;
   remainingMinutes: number;
   createdAt: string;
+  /** 2026-09-05 확정: 생성 후 30일. 만료되면 apply_makeup_time_to_booking()이 적용을 거부한다. */
+  expiresAt: string;
 };
 
 /**
@@ -640,7 +642,7 @@ export async function listOutstandingMakeupObligations(): Promise<MakeupObligati
     admin
       .from("makeup_obligations")
       .select(
-        "id, child_id, teacher_id, reason, owed_minutes, created_at, " +
+        "id, child_id, teacher_id, reason, owed_minutes, created_at, expires_at, " +
           "child:profiles!makeup_obligations_child_id_fkey(name), teacher:profiles!makeup_obligations_teacher_id_fkey(name)"
       )
       .order("created_at", { ascending: false })
@@ -664,6 +666,7 @@ export async function listOutstandingMakeupObligations(): Promise<MakeupObligati
       owedMinutes: row.owed_minutes as number,
       remainingMinutes: remainingByObligation.get(row.id as string) ?? 0,
       createdAt: row.created_at as string,
+      expiresAt: row.expires_at as string,
     }))
     .filter((row) => row.remainingMinutes > 0);
 }

@@ -1005,16 +1005,22 @@ M5-a(판정 규칙 코어)에 이어 R7의 나머지(선생님 지각 당일 연
 - 선생님 UI(`TeacherLessonScheduleTab.tsx` "지각 당일 연장") + 관리자 UI
   (`BookingReconciliationPanel.tsx` "회사·Meet 장애로 확정" + 신규 "잔여 보충시간"
   섹션)까지 연결.
-- **결정 필요(정책 미확정, 합리적 기본값으로 구현 후 보류)**:
-  1. `makeup_obligations` 만료 정책 — Gate B §3.7 v4 원문부터 "미합의"로 명시돼
-     있었고 이번에도 만들지 않았다(무기한 유효). 만료 기한을 둘지, 두면 몇 일인지
-     사용자 결정 필요.
-  2. `apply_makeup_time_to_booking()`은 보충시간을 발생시킨 것과 **같은 선생님**의
-     예약에만 적용 가능하도록 강제했다(다른 선생님 예약에 이어붙이는 것은 막음) —
-     의도한 기본값이나 실제 운영 요구와 다를 수 있어 확인 필요.
-  3. `account_merges`(계정 병합) 로직에 `session_late_extensions` 테이블 마이그레이션이
-     아직 연결되지 않았다 — 오픈 전 데이터가 없는 현재는 위험 없음, 계정 병합 기능을
-     실제로 쓰기 전에 반드시 보완할 것.
+- **결정 완료(2026-09-05, 제품 오너 확정)**:
+  1. `makeup_obligations` 만료 정책 — **생성 후 30일**로 확정. `expires_at`
+     컬럼 추가(`20261101000000_m5b_makeup_time_expiration.sql`, 생성 시점 +30일
+     기본값, `makeup_obligations_no_expiry_extension` 트리거로 UPDATE를 통한
+     연장 자체를 차단 — 연장이 필요하면 관리자가 새 의무를 만들어야 함).
+     `apply_makeup_time_to_booking()`이 만료된 의무의 적용을 거부(`makeup_obligation_expired`).
+     관리자 화면(`BookingReconciliationPanel.tsx` "잔여 보충시간")에 사용 기한을
+     표시하고 만료된 건은 빨간 글씨로 별도 안내. 통합 테스트 2건 추가
+     (`lib/booking/session-late-and-disruption.integration.test.ts`).
+  2. `apply_makeup_time_to_booking()`이 **같은 선생님**의 예약에만 적용 가능하도록
+     강제하는 기존 동작 — **그대로 유지 확정**(다른 선생님 예약으로 이전 불가).
+  3. 재판정 시 entitlement 원장 자동 역전 불가(위 M5-a 절 참고) — **관리자 수동
+     조정 방식 그대로 유지 확정**.
+- **미해결(그대로 이월)**: `account_merges`(계정 병합) 로직에 `session_late_extensions`
+  테이블 마이그레이션이 아직 연결되지 않았다 — 오픈 전 데이터가 없는 현재는 위험 없음,
+  계정 병합 기능을 실제로 쓰기 전에 반드시 보완할 것.
 - 전체 Vitest 1025/1025(직렬 실행 확인 — 병렬 실행 시 기존부터 있던 무관 공유 픽스처
   플레이키니스가 재현되나 이번 변경과 무관, `supabase db reset --local` 후 재현 안 됨),
   `tsc --noEmit` 클린, `supabase db reset --local` 확인. 로컬 git commit까지만, push 없음.
