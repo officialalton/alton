@@ -34,6 +34,10 @@ describe("ScratchpadTab", () => {
         viewerRole="student"
         initialDocLinks={[]}
         initialWhiteboardStrokes={[]}
+        sessionSource="legacy"
+        whiteboardViewerRole="student"
+        initialAnnotationStrokes={[]}
+        currentUserId="user-1"
       />
     );
     expect(screen.getByText("등록된 문서가 없습니다.")).toBeInTheDocument();
@@ -46,6 +50,10 @@ describe("ScratchpadTab", () => {
         viewerRole="student"
         initialDocLinks={links}
         initialWhiteboardStrokes={[]}
+        sessionSource="legacy"
+        whiteboardViewerRole="student"
+        initialAnnotationStrokes={[]}
+        currentUserId="user-1"
       />
     );
     expect(screen.getByText("8회차 수업 기록")).toBeInTheDocument();
@@ -67,6 +75,10 @@ describe("ScratchpadTab", () => {
         viewerRole="teacher"
         initialDocLinks={[]}
         initialWhiteboardStrokes={[]}
+        sessionSource="legacy"
+        whiteboardViewerRole="student"
+        initialAnnotationStrokes={[]}
+        currentUserId="user-1"
       />
     );
 
@@ -96,6 +108,10 @@ describe("ScratchpadTab", () => {
         viewerRole="teacher"
         initialDocLinks={links}
         initialWhiteboardStrokes={[]}
+        sessionSource="legacy"
+        whiteboardViewerRole="student"
+        initialAnnotationStrokes={[]}
+        currentUserId="user-1"
       />
     );
 
@@ -108,6 +124,42 @@ describe("ScratchpadTab", () => {
     );
   });
 
+  it("v3 세션에서 whiteboardViewerRole이 student면 전체 지우기 버튼이 안 보인다", () => {
+    render(
+      <ScratchpadTab
+        sessionId="s1"
+        viewerRole="teacher"
+        initialDocLinks={[]}
+        initialWhiteboardStrokes={[]}
+        sessionSource="v3"
+        whiteboardViewerRole="student"
+        initialAnnotationStrokes={[]}
+        currentUserId="user-1"
+      />
+    );
+    fireEvent.click(screen.getByText("화이트보드"));
+    fireEvent.click(screen.getByText("✏️ 필기 모드"));
+    expect(screen.queryByText("전체 지우기")).not.toBeInTheDocument();
+  });
+
+  it("v3 세션에서 whiteboardViewerRole이 teacher면 전체 지우기 버튼이 보인다", () => {
+    render(
+      <ScratchpadTab
+        sessionId="s1"
+        viewerRole="teacher"
+        initialDocLinks={[]}
+        initialWhiteboardStrokes={[]}
+        sessionSource="v3"
+        whiteboardViewerRole="teacher"
+        initialAnnotationStrokes={[]}
+        currentUserId="user-1"
+      />
+    );
+    fireEvent.click(screen.getByText("화이트보드"));
+    fireEvent.click(screen.getByText("✏️ 필기 모드"));
+    expect(screen.getByText("전체 지우기")).toBeInTheDocument();
+  });
+
   it("화이트보드 서브탭으로 전환하면 스크롤 안내 문구가 보인다", () => {
     render(
       <ScratchpadTab
@@ -115,6 +167,10 @@ describe("ScratchpadTab", () => {
         viewerRole="teacher"
         initialDocLinks={[]}
         initialWhiteboardStrokes={[]}
+        sessionSource="legacy"
+        whiteboardViewerRole="student"
+        initialAnnotationStrokes={[]}
+        currentUserId="user-1"
       />
     );
     fireEvent.click(screen.getByText("화이트보드"));

@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { reconstructVisibleStrokes, type AnnotationEvent } from "./annotation-events-actions";
+import { reconstructVisibleStrokes, type AnnotationEvent } from "./annotation-events-types";
 
 const { insertMock, orderMock, eqMock, selectMock, fromMock } = vi.hoisted(() => {
   const insertMock = vi.fn();

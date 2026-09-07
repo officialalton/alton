@@ -1,6 +1,7 @@
 "use server";
 
 import { requireUser } from "@/lib/auth";
+import type { StrokePayload, AnnotationEvent } from "./annotation-events-types";
 
 // R8 follow-up (2026-09-07) — session_annotation_events(append-only 이벤트 로그,
 // supabase/migrations/20261223000000_r8_session_annotation_events.sql)에 대한
@@ -8,27 +9,9 @@ import { requireUser } from "@/lib/auth";
 // legacy_sessions.whiteboard_strokes(scratchpad-actions.ts의 saveWhiteboardStrokes)는
 // 별도 트랙으로 그대로 둔다(docs/CURRENT.md "세션 주석 이벤트 로그 — 2-트랙 상태").
 //
-// WhiteboardCanvas.tsx를 이 액션에 연결하는 프론트엔드 리와이어링은 이번 라운드
-// 범위가 아니다 — RLS/트리거(append-only, clear_all 선생님 전용)는 DB 레이어
-// 통합 테스트(session-annotation-events.integration.test.ts)로 이미 검증됨.
-
-export type StrokePayload = {
-  x0: number;
-  y0: number;
-  x1: number;
-  y1: number;
-  color: string;
-  tool: "pen" | "eraser";
-};
-
-export type AnnotationEvent = {
-  seq: string;
-  id: string;
-  authorId: string;
-  eventType: "stroke" | "clear_all";
-  payload: Record<string, unknown>;
-  createdAt: string;
-};
+// R9 — WhiteboardCanvas.tsx가 이 액션에 연결됨(app/session/[id]/WhiteboardCanvas.tsx).
+// "use server" 파일은 async 함수만 export할 수 있어(Next.js 제약), 타입과 순수 함수
+// reconstructVisibleStrokes()는 ./annotation-events-types.ts로 분리했다.
 
 // 정규화 좌표(0.0~1.0)로 받은 stroke를 이벤트로 append한다. author_id는 항상
 // 현재 로그인 사용자로 고정한다 — RLS도 author_id = auth.uid()를 강제하므로
@@ -78,19 +61,4 @@ export async function replayAnnotationEvents(sessionId: string): Promise<Annotat
     payload: row.payload,
     createdAt: row.created_at,
   }));
-}
-
-// replayAnnotationEvents()가 돌려준 전체 이벤트 로그에서 "현재 그려야 할 stroke만"을
-// 재구성한다 — 마지막 clear_all 이전의 stroke는 버리고, 그 이후 stroke만 순서대로 남긴다.
-// 순수 함수라 프론트엔드(WhiteboardCanvas)와 테스트 양쪽에서 그대로 재사용 가능하다.
-export function reconstructVisibleStrokes(events: AnnotationEvent[]): StrokePayload[] {
-  let visible: AnnotationEvent[] = [];
-  for (const ev of events) {
-    if (ev.eventType === "clear_all") {
-      visible = [];
-    } else {
-      visible.push(ev);
-    }
-  }
-  return visible.map((ev) => ev.payload as StrokePayload);
 }

@@ -2435,3 +2435,54 @@ Mercury/Wise 연동을 켜기 전에는 반드시 다음 중 하나를 결정하
 경로)이 병존하는 채로 실제 연동을 켜면, 두 경로 중 어느 쪽이 "진실"인지
 운영자가 혼동할 여지가 있다 — 법인 설립 후 실제 지급 연동 착수 R 단계의
 필수 선행 점검 항목으로 기록한다.
+
+## 2026-09-07 — R9: WhiteboardCanvas ↔ session_annotation_events 연결
+
+1장 정리: `docs/2026-09-07-r9-whiteboard-eventlog-oneP-pager.md`. R8 Task D
+(`b4fd788`)가 만들어만 두고 프론트엔드 연결은 범위 밖으로 남겨뒀던
+`session_annotation_events`를 `WhiteboardCanvas.tsx`에 실제로 연결했다.
+
+- **v3 세션**: 화이트보드가 이제 `legacy_sessions.whiteboard_strokes`가 아니라
+  `session_annotation_events`(append-only 이벤트 로그)를 source of truth로 쓴다.
+  - 그리기: pointerUp 시 정규화 좌표(0~1, 캔버스 폭/`BOARD_HEIGHT` 기준)로 변환해
+    `appendStrokeEvent()`로 append. 레거시처럼 600ms debounce 스냅샷 저장이 아니라
+    stroke마다 즉시 영구 기록됨.
+  - 로드/재접속: 마운트 시 및 Supabase Realtime 채널이 (재)`SUBSCRIBED` 상태가 될
+    때마다 `replayAnnotationEvents()` + `reconstructVisibleStrokes()`로 캔버스를
+    지우고 서버 로그 기준으로 다시 그린다(`replayAndRedraw()`) — 클라이언트 메모리
+    상태를 신뢰하지 않고, 연결이 끊겼다 재접속해도 항상 서버가 단일 진실 소스.
+  - 실시간: `session_annotation_events` INSERT를 postgres_changes로 구독
+    (`app/student/ChatPanel.tsx`와 동일한 convention). 본인이 방금 append한 이벤트는
+    `author_id`로 걸러 중복 드로잉을 막는다. 이 테이블을 supabase_realtime
+    publication에 추가하는 마이그레이션
+    (`supabase/migrations/20261226000000_r9_annotation_events_realtime.sql`)을
+    새로 추가 — publication이 없는 환경에서도 안전하게 스킵되도록 존재 여부 체크.
+  - clear-all 권한: DB(RLS `is_session_teacher_v3`)가 최종 강제하던 것을 UI에도
+    반영 — `ScratchpadTab`이 `whiteboardViewerRole`(실제 뷰어 role, `writesEnabled`
+    읽기전용 강제를 우회)로 `canClearAll`을 계산해 선생님/관리자가 아니면 버튼
+    자체를 렌더링하지 않는다. 방어적으로 호출돼도 서버가 거부하면 에러 문구를
+    표시하고 `replayAndRedraw()`로 낙관적 로컬 삭제를 되돌린다.
+  - 타입/순수 함수(`StrokePayload`/`AnnotationEvent`/`reconstructVisibleStrokes`)는
+    새 `annotation-events-types.ts`로 분리 — "use server" 파일
+    (`annotation-events-actions.ts`)은 async 함수만 export할 수 있어(Next.js
+    제약), 클라이언트 컴포넌트가 쓰는 타입/순수 함수를 거기 두면 `next build`가
+    깨짐(처음 시도에서 실제로 발견·수정).
+- **레거시 세션**: 기존 동작 그대로 — `legacy_sessions.whiteboard_strokes` 읽기/
+  broadcast-only 실시간 협업/디바운스 저장. 새 이벤트 테이블에는 아무 것도 쓰지
+  않는다(정책: 읽기 호환만 유지, 백필 없음).
+- 배너 문구 수정(`SessionShell.tsx`): "필기·과제·단어장 저장은 다음 라운드"에서
+  화이트보드를 빼고 "과제·단어장 저장은 다음 라운드, 화이트보드는 사용 가능"으로.
+- 검증: `supabase db reset --local` 성공(신규 마이그레이션 2건 포함 — 이벤트
+  테이블은 R8에서 이미 존재, 이번엔 realtime publication 추가만), 신규/갱신
+  테스트(`WhiteboardCanvas.test.tsx` 8개, `ScratchpadTab.test.tsx` 갱신분,
+  `annotation-events-actions.test.ts` 타입 임포트 경로만 갱신) 포함 전체
+  vitest 207 files/1368 tests 통과(fresh reset 직후 1회 실행 기준 — reset 없이
+  스위트를 연속 두 번 돌리면 기존에도 있던 무관한 통합 테스트 fixture 재사용
+  이슈로 flaky해짐, 이번 변경과 무관), `npx tsc --noEmit` 클린, `next build`
+  성공(처음엔 위 "use server" export 제약 위반으로 실패했다가 타입 분리 후 통과).
+- 실시간 postgres_changes가 실제 두 브라우저 세션 간에 눈으로 보이는 형태로 동작하는지는
+  Preview UAT로 확인하지 않았다(로컬 자동 테스트로 구독/재생 로직만 검증) —
+  다음 라운드에서 Preview 두 세션(교사/학생) 열어 실제 확인 권장.
+- UAT 실행 ID: 사용 안 함(신규 UAT 계정 생성 없이 기존 vitest 통합 테스트
+  fixture만 재사용, 위 1장 정리 3번 항목 참고). 별도 정리 대상 없음.
+- 외부 변경: 0건.

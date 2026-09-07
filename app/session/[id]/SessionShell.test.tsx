@@ -77,6 +77,9 @@ const baseProps = {
   docLinks: [],
   whiteboardStrokes: [],
   problemLog: [],
+  sessionSource: "legacy" as const,
+  initialAnnotationStrokes: [],
+  currentUserId: "user-1",
 };
 
 describe("SessionShell — 세션 상태바", () => {

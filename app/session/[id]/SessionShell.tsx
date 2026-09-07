@@ -17,6 +17,7 @@ import AigenTab from "./AigenTab";
 import ScratchpadTab from "./ScratchpadTab";
 import type { DocLink } from "./scratchpad-data";
 import type { CanvasStroke } from "./material-data";
+import type { StrokePayload } from "./annotation-events-types";
 import ProblemLogTab from "./ProblemLogTab";
 import type { ProblemLogEntry } from "./problemlog-data";
 
@@ -64,6 +65,9 @@ export default function SessionShell({
   whiteboardStrokes,
   problemLog,
   writesEnabled = true,
+  sessionSource,
+  initialAnnotationStrokes,
+  currentUserId,
 }: {
   sessionId: string;
   studentId: string;
@@ -93,6 +97,12 @@ export default function SessionShell({
   // writesEnabled=false일 때 편집 컴포넌트에 읽기전용에 해당하는 viewerRole을 넘겨
   // 저장 UI 자체를 숨긴다 — DB 레벨 강제가 아니라 UI 가드임을 명시.
   writesEnabled?: boolean;
+  // R9 — 화이트보드는 v3 세션에서도 session_annotation_events로 실제 쓰기가
+  // 가능해졌으므로(다른 탭과 달리 FK 문제 없음), writesEnabled/contentViewerRole
+  // 읽기전용 강제를 우회해 실제 viewerRole·이벤트 로그 초기 상태를 별도로 넘긴다.
+  sessionSource: "legacy" | "v3";
+  initialAnnotationStrokes: StrokePayload[];
+  currentUserId: string;
 }) {
   const router = useRouter();
   const isTeacher = viewerRole === "teacher";
@@ -193,8 +203,9 @@ export default function SessionShell({
 
       {!writesEnabled && (
         <div className="px-6 py-2 text-[12.5px] text-amber-800 bg-amber-50 border-b border-amber-200">
-          이 수업은 새 예약 시스템(v3) 세션입니다 — 필기·과제·단어장 저장은 다음
-          라운드에서 지원됩니다. 지금은 배정된 교재 열람만 가능합니다.
+          이 수업은 새 예약 시스템(v3) 세션입니다 — 과제·단어장 저장은 다음
+          라운드에서 지원됩니다. 화이트보드는 사용 가능하며, 그 외에는 배정된
+          교재 열람만 가능합니다.
         </div>
       )}
       {activeTab === "material" ? (
@@ -234,6 +245,10 @@ export default function SessionShell({
           viewerRole={contentViewerRole}
           initialDocLinks={docLinks}
           initialWhiteboardStrokes={whiteboardStrokes}
+          sessionSource={sessionSource}
+          whiteboardViewerRole={viewerRole}
+          initialAnnotationStrokes={initialAnnotationStrokes}
+          currentUserId={currentUserId}
         />
       ) : activeTab === "log" ? (
         <ProblemLogTab initialEntries={problemLog} viewerRole={contentViewerRole} />
