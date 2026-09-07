@@ -32,6 +32,24 @@ const STATUS_LABEL: Record<string, string> = {
 
 const ACTIONABLE_DRAFT = new Set(["draft", "calculated"]);
 const ACTIONABLE_REVIEW = new Set(["draft", "calculated", "reviewing", "reviewed"]);
+// R10 corrective(요구사항 4, 2026-09-07 리뷰): mark_payout_batch_failed()가
+// 실제로 허용하는 상태와 정확히 일치시킨다(supabase/migrations/
+// 20261224000000_r10_paid_transition_guard_and_reversal_fix.sql). 이 화면이
+// 실제로 도달시킬 수 있는 상태는 draft/calculated/reviewing/reviewed/approved
+// 뿐이지만(processing/dispatch_requested/provider_pending은 게이트가 닫혀
+// 있어 이 화면에서 만들 수 없음), 버튼 노출 조건은 "DB가 허용하는 상태
+// 전체"와 맞춰 향후 상태가 추가돼도 어긋나지 않게 한다. paid/failed는
+// 절대 포함하지 않는다.
+const ACTIONABLE_FAILED = new Set([
+  "draft",
+  "calculated",
+  "reviewing",
+  "reviewed",
+  "approved",
+  "processing",
+  "dispatch_requested",
+  "provider_pending",
+]);
 
 function money(amountMinor: number, currency: string): string {
   const amount = currency === "KRW" ? amountMinor : amountMinor / 100;
@@ -236,7 +254,7 @@ export default function PayoutBatchesTab({
                     <div className="mt-2 text-[12px] text-red-600">실패 사유: {b.failureReason}</div>
                   )}
 
-                  {(b.status === "approved" || b.status === "reviewing" || b.status === "reviewed") && (
+                  {ACTIONABLE_FAILED.has(b.status) && (
                     <div className="mt-3 flex items-center gap-2">
                       <input
                         placeholder="실패 사유"
