@@ -1,5 +1,11 @@
 # ALTON — 현재 상태 (2026-09-06 기준)
 
+> **2026-09-06(A안 UI 정리, 실사용 지적 2건 후속) "수업" 탭 레이아웃/예정·지난 판정 정리 — 스키마 변경 없음(완료).**
+> 배경: 직전 "레슨"+"예약" 병합(A안) 라운드를 제품 오너가 실제로 써보고 2가지를 지적했다.
+> 1. **레이아웃 버그** — "수업" 탭 "예정 수업" 서브탭에서, 이미 체험 수업이 확정 예약돼 있어도 위쪽에 "과목·선생님 선택" 드롭다운·"체험 수업은 1회만 예약할 수 있습니다" 안내·"예약 가능 시간을 불러오는 중…" 문구가 계속 표시되고 그 아래 빈 여백이 크게 남은 뒤에야 "예정된 수업" 목록이 나왔다. `app/student/LessonBookingTab.tsx`에 `showBookingForm` 토글 상태를 추가(예정 수업이 하나도 없는 신규 학생은 기본 펼침, 이미 예정 수업이 있으면 기본 접힘 — "+ 새 수업 예약하기" 버튼으로 펼침)했고, 선택된 과목이 체험이고 이미 그 과목·선생님으로 예정 수업이 있으면(`hasExistingTrialBooking`) 드롭다운/모드토글/슬롯 로딩 블록 전체를 안내 문구("이미 체험 수업을 예약하셨습니다…")로 대체하고 슬롯 재조회 자체를 생략한다(불필요한 "불러오는 중…" 고착도 함께 해소).
+> 2. **버그/정책 — 선생님 조기 종료가 학생 쪽에 반영 안 됨**: `app/student/lesson-booking-data.ts`의 예정/지난 판정이 순수 `startsAt > now` 시간 비교만 쓰고 `sessions.final_status`(`finalize_lesson_session()` 결과)와 무관해, 선생님이 수업을 조기 종료(완료 처리)해도 예약 시작 시각이 안 지났으면 학생 쪽은 계속 "예정 수업"에 남아있었다. `loadLessonBookingData()`에 `sessions.final_status`/`lesson_type` 조회를 추가하고, 선생님 포털(`app/teacher/TeacherLessonScheduleTab.tsx`의 `isPastLesson()`)과 동일한 규칙으로 통일: **(시작 시각이 지났거나 OR final_status가 이미 최종판정(scheduled/live가 아님))이면 "지난 수업"으로 분류하되, 체험 수업은 `lesson_reviews` 리뷰가 확정(`final`)되기 전까지는 시간·판정과 무관하게 "예정 수업"에 남긴다** — 같은 수업이 선생님 쪽엔 "예정", 학생 쪽엔 "지난"으로 보이는 불일치를 없앴다. 취소된 예약(`reservations.status !== 'confirmed'`)은 기존과 동일하게 양쪽 모두 노출 안 함(변경 없음).
+> **검증**: `supabase db reset --local` 성공(신규 마이그레이션 없음) / `npx tsc --noEmit` 0 에러 / `app/student/LessonBookingTab.test.tsx`에 레이아웃 회귀 테스트 2건(예정 수업 있으면 폼 기본 접힘, 체험 재예약 불가 시 안내로 대체·슬롯 재조회 안 함) 추가 / `app/student/lesson-booking-data.test.ts`에 예정/지난 판정 테스트 4건(미래+completed→지난, scheduled+미래→예정, 체험+completed+리뷰draft→예정, 체험+completed+리뷰final→지난) 추가 / `npx vitest run`(전체) 188파일·1259건 전부 통과 / `npx next build` 성공.
+
 > **2026-09-06(A안 UI 정리) 선생님·학생 포털 "수업" 관련 탭 정리 — 스키마 변경 없음(완료).**
 > 제품 오너 승인 범위는 "A안"(UI 정리만) — **B안(학생 전용 프로필 페이지 신설, 세션뷰·커리큘럼 연동)은 R9 범위로 이번엔 보류, 별도 라운드 승인 필요.**
 > 1) 선생님 포털 "수업" 탭 — 이전 라운드에서 "예정/지난 수업"(v3)과 "지난 수업 기록·신고"(레거시) 두 서브탭으로 나눴던 것이 여전히 기능이 겹친다는 지적에 따라, `app/teacher/TeacherLessonScheduleTab.tsx`에 `mode?: "upcoming" | "past"` prop과 `onReportSessionIssue` prop을 추가해 레거시 `ScheduleTab`의 지각·노쇼 신고 기능을 v3 지난 수업 카드 안으로 완전히 흡수했다. `TeacherShell.tsx`는 이제 딱 두 개의 서브탭("예정 수업"/"지난 수업")만 렌더링하고 `ScheduleTab` import를 제거했다(컴포넌트 자체는 다른 곳에서 참조 없어 남겨둠, 필요시 후속 정리).

@@ -180,6 +180,52 @@ describe("LessonBookingTab — 체험 학생도 직접 예약할 수 있어야 �
   });
 });
 
+describe("LessonBookingTab — 예약 폼 레이아웃 정리(2026-09-06)", () => {
+  it("예정 수업이 이미 있으면 예약 폼이 기본 접히고 '+ 새 수업 예약하기' 토글만 보인다", () => {
+    const upcomingBooking: UpcomingBooking = {
+      reservationId: "r1",
+      sessionId: "sess-1",
+      subjectName: "SAT Math",
+      teacherName: "김선생",
+      startsAt: new Date(Date.now() + 3600_000).toISOString(),
+      endsAt: new Date(Date.now() + 7200_000).toISOString(),
+      googleMeetLink: null,
+      googleSyncStatus: "synced",
+    };
+    render(<LessonBookingTab {...baseProps} bookableEnrollments={[enrollment]} upcomingBookings={[upcomingBooking]} />);
+    expect(screen.getByText("+ 새 수업 예약하기")).toBeInTheDocument();
+    expect(screen.queryByText("과목·선생님 선택")).not.toBeInTheDocument();
+    expect(screen.queryByText("예약 가능 시간을 불러오는 중…")).not.toBeInTheDocument();
+  });
+
+  it("이미 체험 수업을 예약한 학생은 폼 대신 '이미 체험 수업을 예약하셨습니다' 안내를 본다(슬롯 재조회 안 함)", async () => {
+    const trialBooking: UpcomingBooking = {
+      reservationId: "r2",
+      sessionId: "sess-2",
+      subjectName: trialEnrollment.subjectName,
+      teacherName: trialEnrollment.teacherName,
+      startsAt: new Date(Date.now() + 3600_000).toISOString(),
+      endsAt: new Date(Date.now() + 7200_000).toISOString(),
+      googleMeetLink: null,
+      googleSyncStatus: "synced",
+    };
+    const onListSlots = vi.fn().mockResolvedValue([]);
+    render(
+      <LessonBookingTab
+        {...baseProps}
+        bookableEnrollments={[trialEnrollment]}
+        upcomingBookings={[trialBooking]}
+        onListSlots={onListSlots}
+      />
+    );
+    // 예정 수업이 이미 있으므로 폼은 기본 접힘 — 펼쳐서 안내 문구를 확인한다.
+    fireEvent.click(screen.getByText("+ 새 수업 예약하기"));
+    expect(screen.getByText(/이미 체험 수업을 예약하셨습니다/)).toBeInTheDocument();
+    expect(screen.queryByText("예약 가능 시간을 불러오는 중…")).not.toBeInTheDocument();
+    await waitFor(() => expect(onListSlots).not.toHaveBeenCalled());
+  });
+});
+
 describe("LessonBookingTab — mode(A안 '수업' 탭 통합)", () => {
   const upcomingBooking: UpcomingBooking = {
     reservationId: "r1",

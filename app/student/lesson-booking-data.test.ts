@@ -17,6 +17,8 @@ function makeSupabase(params: {
     teacher: { name: string };
   }>;
   hasTrialGrant: boolean;
+  sessions?: unknown[];
+  reviews?: Array<{ trial_session_id: string; status: string }>;
 }) {
   return {
     from: vi.fn((table: string) => {
@@ -56,7 +58,10 @@ function makeSupabase(params: {
         };
       }
       if (table === "sessions") {
-        return { select: () => ({ in: () => ({ order: () => Promise.resolve({ data: [] }) }) }) };
+        return { select: () => ({ in: () => ({ order: () => Promise.resolve({ data: params.sessions ?? [] }) }) }) };
+      }
+      if (table === "lesson_reviews") {
+        return { select: () => ({ in: () => Promise.resolve({ data: params.reviews ?? [] }) }) };
       }
       if (table === "profiles") {
         return { select: () => ({ eq: () => ({ maybeSingle: () => Promise.resolve({ data: null }) }) }) };
@@ -165,5 +170,114 @@ describe("loadLessonBookingData — 체험 학생도 정규수업과 동일하�
 
     const result = await loadLessonBookingData(supabase as never, "child4");
     expect(result.bookableEnrollments).toEqual([]);
+  });
+});
+
+// 2026-09-06 — 선생님이 조기 종료(finalize_lesson_session)로 완료 처리한 세션이
+// 아직 시작 시각이 안 지났어도 학생 쪽 "지난 수업"으로 넘어가야 한다(제품 오너 지적).
+// 체험 수업은 선생님 포털과 동일하게 리뷰 확정 전까지는 "예정 수업"에 남는다.
+function makeSessionRow(params: {
+  id: string;
+  startsAt: string;
+  endsAt: string;
+  finalStatus: string;
+  isTrial?: boolean;
+  reservationStatus?: string;
+}) {
+  return {
+    id: params.id,
+    subject_enrollment_id: "e1",
+    final_status: params.finalStatus,
+    lesson_type: params.isTrial ? { code: "trial" } : { code: "regular" },
+    reservation: {
+      id: `res-${params.id}`,
+      starts_at: params.startsAt,
+      ends_at: params.endsAt,
+      status: params.reservationStatus ?? "confirmed",
+      google_meet_link: null,
+      google_sync_status: "synced",
+    },
+    teacher: { name: "김선생" },
+    subject_enrollment: { subject: { name: "SAT Math" } },
+  };
+}
+
+describe("loadLessonBookingData — 예정/지난 판정(final_status 반영, 2026-09-06)", () => {
+  const enrollments = [{ id: "e1", subject_id: "sub1", status: "active" as const, subject: { name: "SAT Math" } }];
+  const assignments = [
+    {
+      id: "a1",
+      subject_enrollment_id: "e1",
+      teacher_id: "t1",
+      status: "active",
+      effective_from: "2026-01-01",
+      effective_until: null,
+      reason: null,
+      teacher: { name: "김선생" },
+    },
+  ];
+
+  it("시작 시각이 미래여도 final_status가 completed로 최종판정됐으면 '지난 수업'으로 분류한다", async () => {
+    const futureStart = new Date(Date.now() + 3600_000).toISOString();
+    const futureEnd = new Date(Date.now() + 7200_000).toISOString();
+    const supabase = makeSupabase({
+      enrollments,
+      assignments,
+      hasTrialGrant: false,
+      sessions: [makeSessionRow({ id: "s1", startsAt: futureStart, endsAt: futureEnd, finalStatus: "completed" })],
+    });
+
+    const result = await loadLessonBookingData(supabase as never, "child1");
+    expect(result.upcomingBookings).toEqual([]);
+    expect(result.pastSessionsForReport.map((r) => r.sessionId)).toEqual(["s1"]);
+  });
+
+  it("아직 final_status가 scheduled/live이고 시작 시각도 안 지났으면 '예정 수업'에 남는다", async () => {
+    const futureStart = new Date(Date.now() + 3600_000).toISOString();
+    const futureEnd = new Date(Date.now() + 7200_000).toISOString();
+    const supabase = makeSupabase({
+      enrollments,
+      assignments,
+      hasTrialGrant: false,
+      sessions: [makeSessionRow({ id: "s1", startsAt: futureStart, endsAt: futureEnd, finalStatus: "scheduled" })],
+    });
+
+    const result = await loadLessonBookingData(supabase as never, "child1");
+    expect(result.upcomingBookings.map((r) => r.sessionId)).toEqual(["s1"]);
+    expect(result.pastSessionsForReport).toEqual([]);
+  });
+
+  it("체험 수업은 completed로 최종판정돼도 리뷰가 확정(final)되기 전까지는 '예정 수업'에 남는다(선생님 포털과 일관)", async () => {
+    const futureStart = new Date(Date.now() + 3600_000).toISOString();
+    const futureEnd = new Date(Date.now() + 7200_000).toISOString();
+    const trialEnrollments = [{ id: "e1", subject_id: "sub1", status: "planned" as const, subject: { name: "AP Calculus AB" } }];
+    const supabase = makeSupabase({
+      enrollments: trialEnrollments,
+      assignments,
+      hasTrialGrant: true,
+      sessions: [makeSessionRow({ id: "s1", startsAt: futureStart, endsAt: futureEnd, finalStatus: "completed", isTrial: true })],
+      reviews: [{ trial_session_id: "s1", status: "draft" }],
+    });
+
+    const result = await loadLessonBookingData(supabase as never, "child1");
+    expect(result.upcomingBookings.map((r) => r.sessionId)).toEqual(["s1"]);
+    expect(result.pastSessionsForReport).toEqual([]);
+  });
+
+  it("체험 수업이 completed + 리뷰 final이면 '지난 수업'으로 넘어간다", async () => {
+    const futureStart = new Date(Date.now() + 3600_000).toISOString();
+    const futureEnd = new Date(Date.now() + 7200_000).toISOString();
+    const trialEnrollments = [{ id: "e1", subject_id: "sub1", status: "planned" as const, subject: { name: "AP Calculus AB" } }];
+    const supabase = makeSupabase({
+      enrollments: trialEnrollments,
+      assignments,
+      hasTrialGrant: true,
+      sessions: [makeSessionRow({ id: "s1", startsAt: futureStart, endsAt: futureEnd, finalStatus: "completed", isTrial: true })],
+      reviews: [{ trial_session_id: "s1", status: "final" }],
+    });
+
+    const result = await loadLessonBookingData(supabase as never, "child1");
+    expect(result.upcomingBookings).toEqual([]);
+    expect(result.pastSessionsForReport.map((r) => r.sessionId)).toEqual(["s1"]);
   });
 });

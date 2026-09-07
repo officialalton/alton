@@ -98,12 +98,24 @@ export async function loadLessonBookingData(
     const { data: sessions } = await supabase
       .from("sessions")
       .select(
-        "id, subject_enrollment_id, reservation:reservations!sessions_reservation_id_fkey(id, starts_at, ends_at, status, google_meet_link, google_sync_status), teacher:profiles!sessions_teacher_id_fkey(name), subject_enrollment:subject_enrollments!sessions_subject_enrollment_id_fkey(subject:subjects(name))"
+        "id, subject_enrollment_id, final_status, lesson_type:lesson_types(code), reservation:reservations!sessions_reservation_id_fkey(id, starts_at, ends_at, status, google_meet_link, google_sync_status), teacher:profiles!sessions_teacher_id_fkey(name), subject_enrollment:subject_enrollments!sessions_subject_enrollment_id_fkey(subject:subjects(name))"
       )
       .in("subject_enrollment_id", enrollmentIds)
       .order("created_at", { ascending: true });
 
-    type BookingRow = { reservationId: string | null; sessionId: string; subjectName: string; teacherName: string; startsAt: string; endsAt: string; status: string; googleMeetLink: string | null; googleSyncStatus: string };
+    type BookingRow = {
+      reservationId: string | null;
+      sessionId: string;
+      subjectName: string;
+      teacherName: string;
+      startsAt: string;
+      endsAt: string;
+      status: string;
+      googleMeetLink: string | null;
+      googleSyncStatus: string;
+      finalStatus: string;
+      isTrial: boolean;
+    };
 
     const rows = (sessions ?? [])
       .map((s): BookingRow | null => {
@@ -111,6 +123,7 @@ export async function loadLessonBookingData(
         const teacher = Array.isArray(s.teacher) ? s.teacher[0] : s.teacher;
         const subjectEnrollment = Array.isArray(s.subject_enrollment) ? s.subject_enrollment[0] : s.subject_enrollment;
         const subject = subjectEnrollment ? (Array.isArray(subjectEnrollment.subject) ? subjectEnrollment.subject[0] : subjectEnrollment.subject) : null;
+        const lessonType = Array.isArray(s.lesson_type) ? s.lesson_type[0] : s.lesson_type;
         if (!reservation) return null;
         return {
           reservationId: reservation.id as string,
@@ -122,15 +135,41 @@ export async function loadLessonBookingData(
           status: reservation.status as string,
           googleMeetLink: (reservation.google_meet_link as string | null) ?? null,
           googleSyncStatus: reservation.google_sync_status as string,
+          finalStatus: s.final_status as string,
+          isTrial: (lessonType as { code?: string } | null)?.code === "trial",
         };
       })
       .filter((r): r is BookingRow => r !== null);
 
+    // 체험 수업의 확정 리뷰 상태 — 선생님 포털(app/teacher/lesson-schedule-data.ts,
+    // TeacherLessonScheduleTab.isPastLesson)과 동일하게, 체험 수업은 리뷰가 확정되기
+    // 전까지는 "지난 수업"으로 넘기지 않는다. 같은 수업이 선생님 쪽은 "예정"인데 학생
+    // 쪽은 "지난"으로 보이는 혼란을 막기 위함(2026-09-06 제품 오너 지적).
+    const trialSessionIds = rows.filter((r) => r.isTrial).map((r) => r.sessionId);
+    const { data: reviews } = trialSessionIds.length
+      ? await supabase.from("lesson_reviews").select("trial_session_id, status").in("trial_session_id", trialSessionIds)
+      : { data: [] as { trial_session_id: string; status: string }[] };
+    const reviewStatusBySession = new Map((reviews ?? []).map((r) => [r.trial_session_id, r.status]));
+
     const now = new Date();
     const fourteenDaysAgo = new Date(now.getTime() - 14 * 24 * 60 * 60_000);
 
+    // 예정/지난 판정(2026-09-06 정리) — 기존에는 순수 startsAt > now 여부만으로
+    // 판정해 sessions.status/finalize_lesson_session() 결과와 무관했다(선생님이
+    // 조기 종료 처리해도 시작 시각이 안 지났으면 학생 쪽은 계속 "예정 수업"에 남는
+    // 어색함이 있었음). 이제 (1) 시작 시각이 지났거나 (2) 세션이 이미 최종판정됐으면
+    // (final_status가 scheduled/live가 아니면) "지난 수업"으로 분류한다 — 단, 체험
+    // 수업은 선생님 포털과 동일하게 리뷰 확정 전까지는 예정 쪽에 남긴다.
+    function isPastSession(r: BookingRow): boolean {
+      const timeEnded = new Date(r.startsAt) <= now;
+      const finalized = r.finalStatus !== "scheduled" && r.finalStatus !== "live";
+      if (!timeEnded && !finalized) return false;
+      if (r.isTrial && reviewStatusBySession.get(r.sessionId) !== "final") return false;
+      return true;
+    }
+
     upcomingBookings = rows
-      .filter((r) => r.status === "confirmed" && new Date(r.startsAt) > now)
+      .filter((r) => r.status === "confirmed" && !isPastSession(r))
       .map((r) => ({
         reservationId: r.reservationId as string,
         sessionId: r.sessionId,
@@ -143,11 +182,11 @@ export async function loadLessonBookingData(
       }))
       .sort((a, b) => new Date(a.startsAt).getTime() - new Date(b.startsAt).getTime());
 
-    // 지각·노쇼 신고 대상 — 최근 14일 이내 실제로 시작 시각이 지난 세션(취소된 예약 제외,
+    // 지각·노쇼 신고 대상 — 최근 14일 이내 지난 수업으로 넘어간 세션(취소된 예약 제외,
     // 신고할 "일어난 수업"이 아니므로). 최종 판정·수업권 소진은 R7 범위 — 여기서는 신고
     // 대상 목록만 노출한다.
     pastSessionsForReport = rows
-      .filter((r) => r.status === "confirmed" && new Date(r.startsAt) <= now && new Date(r.startsAt) >= fourteenDaysAgo)
+      .filter((r) => r.status === "confirmed" && isPastSession(r) && new Date(r.startsAt) >= fourteenDaysAgo)
       .map((r) => ({ sessionId: r.sessionId, subjectName: r.subjectName, teacherName: r.teacherName, startsAt: r.startsAt }))
       .sort((a, b) => new Date(b.startsAt).getTime() - new Date(a.startsAt).getTime());
   }

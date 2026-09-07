@@ -109,8 +109,21 @@ export default function LessonBookingTab({
   const [selectedDateKey, setSelectedDateKey] = useState<string | null>(null);
   const [upcomingView, setUpcomingView] = useState<"list" | "calendar">("list");
   const [upcomingCalendarDateKey, setUpcomingCalendarDateKey] = useState<string | null>(null);
+  // 레이아웃 정리(2026-09-06) — "예정된 수업"이 이미 있는 학생에게 매번 예약 폼(과목
+  // 선택·슬롯 로딩)부터 크게 보여주면 위쪽에 불필요한 여백/로딩 문구만 계속 남는다는
+  // 지적(제품 오너 실사용 확인)에 따라, 예정 수업이 이미 있으면 폼을 기본 접어두고
+  // 목록을 먼저 보여준다. 예정 수업이 하나도 없는 신규 학생은 바로 예약할 수 있도록
+  // 기본으로 펼쳐둔다.
+  const [showBookingForm, setShowBookingForm] = useState(() => upcomingBookings.length === 0);
 
   const selectedEnrollment = bookableEnrollments.find((e) => e.subjectEnrollmentId === selectedEnrollmentId) ?? null;
+
+  // 체험 수업은 1회만 예약 가능 — 선택된 과목이 체험이고 이미 그 과목·선생님으로 예정된
+  // 수업이 있다면 더 예약할 수 없는 상태이므로, 폼 대신 안내만 보여주고 슬롯 조회도
+  // 생략한다("예약 가능 시간을 불러오는 중…"이 의미 없이 계속 떠 있던 버그의 원인).
+  const hasExistingTrialBooking =
+    !!selectedEnrollment?.isTrial &&
+    upcomingBookings.some((b) => b.subjectName === selectedEnrollment.subjectName && b.teacherName === selectedEnrollment.teacherName);
 
   // onListSlots는 부모(ParentShell/StudentShell)가 매 렌더마다 새로 만드는
   // 인라인 함수라 참조가 계속 바뀐다 — 이걸 그대로 useEffect 의존성에 넣으면
@@ -137,13 +150,14 @@ export default function LessonBookingTab({
     setSelectedDateKey(null);
     if (!selectedEnrollment) return;
     if (selectedEnrollment.isTrial) setMode("single");
+    if (hasExistingTrialBooking) return;
     setLoadingSlots(true);
     onListSlotsRef
       .current(selectedEnrollment.teacherId, selectedEnrollment.lessonDurationMinutes)
       .then(setSlots)
       .catch((e) => setError(e instanceof Error ? e.message : String(e)))
       .finally(() => setLoadingSlots(false));
-  }, [selectedEnrollment?.teacherId, selectedEnrollment?.lessonDurationMinutes, selectedEnrollment?.isTrial]);
+  }, [selectedEnrollment?.teacherId, selectedEnrollment?.lessonDurationMinutes, selectedEnrollment?.isTrial, hasExistingTrialBooking]);
 
   const slotDateBadges = useMemo(() => {
     const badges: Record<string, { count: number; tone?: "ink" | "grey" | "red" }> = {};
@@ -329,9 +343,23 @@ export default function LessonBookingTab({
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center mb-8">
           예약 가능한 과목이 없습니다(선생님 배정이 필요합니다).
         </div>
+      ) : !showBookingForm ? (
+        <div className="mb-6">
+          <button
+            onClick={() => setShowBookingForm(true)}
+            className="text-[12px] font-bold text-ink bg-grey-100 rounded-lg px-3 py-2"
+          >
+            + 새 수업 예약하기
+          </button>
+        </div>
       ) : (
         <div className="mb-6">
-          <label className="block text-[12px] font-bold text-grey-500 mb-1.5">과목·선생님 선택</label>
+          <div className="flex items-center justify-between mb-1.5">
+            <label className="block text-[12px] font-bold text-grey-500">과목·선생님 선택</label>
+            <button onClick={() => setShowBookingForm(false)} className="text-[11px] font-semibold text-grey-500">
+              접기
+            </button>
+          </div>
           <select
             className="w-full border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px]"
             value={selectedEnrollmentId}
@@ -344,7 +372,11 @@ export default function LessonBookingTab({
             ))}
           </select>
 
-          {selectedEnrollment?.isTrial ? (
+          {hasExistingTrialBooking ? (
+            <div className="mt-3 text-[12px] text-grey-500 bg-grey-100 rounded-lg px-3 py-2">
+              이미 체험 수업을 예약하셨습니다. 체험 수업은 1회만 예약할 수 있습니다.
+            </div>
+          ) : selectedEnrollment?.isTrial ? (
             <div className="mt-3 text-[12px] text-grey-500">체험 수업은 1회만 예약할 수 있습니다.</div>
           ) : (
             <div className="flex gap-2 mt-3">
@@ -363,6 +395,7 @@ export default function LessonBookingTab({
             </div>
           )}
 
+          {!hasExistingTrialBooking && (
           <div className="mt-4">
             {loadingSlots && <div className="text-[13px] text-grey-500">예약 가능 시간을 불러오는 중…</div>}
             {!loadingSlots && slots && slots.length === 0 && (
@@ -433,6 +466,7 @@ export default function LessonBookingTab({
               </div>
             )}
           </div>
+          )}
 
           {pendingSlot && (
             <div className="mt-4 border-[1.5px] border-ink rounded-xl px-5 py-4">
