@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import type { SubjectKeyword } from "./subject-data";
 
 export type DocProblem = {
   id: string;
@@ -8,6 +9,9 @@ export type DocProblem = {
   correctIndex: number | null;
   explanation: string;
   difficulty: "easy" | "medium" | "hard";
+  // R9(Task 2): 확정(confirmed)된 문제만 실제로 이 배열에 값이 들어간다(트리거가
+  // draft 문제의 problem_keywords 행 생성을 막는다) — draft 문제는 항상 [].
+  keywords?: SubjectKeyword[];
 };
 
 export type DocSection = {
@@ -18,6 +22,8 @@ export type DocSection = {
   teachingTip: string | null;
   sectionType: "concept" | "problem";
   problems: DocProblem[];
+  // R9(Task 2): 공개(published)된 교재의 섹션만 실제로 값이 들어간다 — draft 교재는 항상 [].
+  keywords?: SubjectKeyword[];
 };
 
 export type DocEditorData = {
@@ -29,6 +35,8 @@ export type DocEditorData = {
   unitTitle: string | null;
   status: string;
   sections: DocSection[];
+  // R9(Task 2): 이 교재가 속한 과목의 공용 키워드 사전 전체(태깅 picker용).
+  subjectKeywords?: SubjectKeyword[];
 };
 
 function extractName(rel: unknown): string {
@@ -69,6 +77,69 @@ export async function loadAllCurriculumDocs(
         .in("section_id", sectionIds)
     : { data: [] as never[] };
 
+  const problemIds = (problems ?? []).map((p) => p.id);
+  const subjectIds = Array.from(new Set(docs.map((d) => d.subject_id)));
+
+  // R9(Task 2) N+1 방지: 문서마다/섹션마다/문제마다 따로 조회하지 않고,
+  // 이번 페이지에 등장하는 과목/섹션/문제 id 전체에 대해 각각 한 번씩만 조회한다.
+  const [{ data: subjectKeywordRows }, { data: sectionKeywordRows }, { data: problemKeywordRows }] =
+    await Promise.all([
+      subjectIds.length
+        ? supabase
+            .from("subject_keywords")
+            .select("id, subject_id, label, status")
+            .in("subject_id", subjectIds)
+            .order("label", { ascending: true })
+        : Promise.resolve({ data: [] as never[] }),
+      sectionIds.length
+        ? supabase
+            .from("curriculum_doc_section_keywords")
+            .select("section_id, keyword:subject_keywords(id, label, status)")
+            .in("section_id", sectionIds)
+        : Promise.resolve({ data: [] as never[] }),
+      problemIds.length
+        ? supabase
+            .from("problem_keywords")
+            .select("problem_id, keyword:subject_keywords(id, label, status)")
+            .in("problem_id", problemIds)
+        : Promise.resolve({ data: [] as never[] }),
+    ]);
+
+  function extractKeyword(rel: unknown): SubjectKeyword | null {
+    const row = Array.isArray(rel) ? rel[0] : rel;
+    const k = row as { id?: string; label?: string; status?: string } | null;
+    if (!k?.id) return null;
+    return { id: k.id, label: k.label ?? "", status: k.status ?? "active" };
+  }
+
+  const keywordsBySection = new Map<string, SubjectKeyword[]>();
+  for (const row of sectionKeywordRows ?? []) {
+    const kw = extractKeyword((row as { keyword: unknown }).keyword);
+    if (!kw) continue;
+    const sectionId = (row as { section_id: string }).section_id;
+    const list = keywordsBySection.get(sectionId) ?? [];
+    list.push(kw);
+    keywordsBySection.set(sectionId, list);
+  }
+
+  const keywordsByProblem = new Map<string, SubjectKeyword[]>();
+  for (const row of problemKeywordRows ?? []) {
+    const kw = extractKeyword((row as { keyword: unknown }).keyword);
+    if (!kw) continue;
+    const problemId = (row as { problem_id: string }).problem_id;
+    const list = keywordsByProblem.get(problemId) ?? [];
+    list.push(kw);
+    keywordsByProblem.set(problemId, list);
+  }
+
+  const keywordsBySubject = new Map<string, SubjectKeyword[]>();
+  for (const k of subjectKeywordRows ?? []) {
+    const row = k as { id: string; subject_id: string; label: string; status: string };
+    const list = keywordsBySubject.get(row.subject_id) ?? [];
+    list.push({ id: row.id, label: row.label, status: row.status });
+    keywordsBySubject.set(row.subject_id, list);
+  }
+
   const problemsBySection = new Map<string, DocProblem[]>();
   for (const p of problems ?? []) {
     const list = problemsBySection.get(p.section_id) ?? [];
@@ -80,6 +151,7 @@ export async function loadAllCurriculumDocs(
       correctIndex: p.correct_index,
       explanation: p.explanation,
       difficulty: p.difficulty,
+      keywords: keywordsByProblem.get(p.id) ?? [],
     });
     problemsBySection.set(p.section_id, list);
   }
@@ -95,6 +167,7 @@ export async function loadAllCurriculumDocs(
       teachingTip: s.teaching_tip,
       sectionType: s.section_type,
       problems: problemsBySection.get(s.id) ?? [],
+      keywords: keywordsBySection.get(s.id) ?? [],
     });
     sectionsByDoc.set(s.curriculum_doc_id, list);
   }
@@ -108,5 +181,6 @@ export async function loadAllCurriculumDocs(
     unitTitle: extractUnitTitle(d.unit),
     status: d.status,
     sections: sectionsByDoc.get(d.id) ?? [],
+    subjectKeywords: keywordsBySubject.get(d.subject_id) ?? [],
   }));
 }

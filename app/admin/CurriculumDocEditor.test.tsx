@@ -17,6 +17,11 @@ vi.mock("./curriculum-doc-actions", () => ({
   confirmSectionProblems: vi.fn(),
   removeSectionProblem: vi.fn(),
   deleteCurriculumDoc: vi.fn(),
+  assignSectionKeyword: vi.fn(),
+  removeSectionKeyword: vi.fn(),
+  assignProblemKeyword: vi.fn(),
+  removeProblemKeyword: vi.fn(),
+  createSubjectKeywordForDoc: vi.fn(),
 }));
 
 const doc: DocEditorData = {
@@ -290,5 +295,73 @@ describe("CurriculumDocEditor", () => {
     );
     expect(screen.getByText("이 교재 삭제")).toBeDisabled();
     expect(screen.getByText("배포 취소 후 삭제할 수 있습니다.")).toBeInTheDocument();
+  });
+
+  describe("R9(Task 2) 키워드 태깅", () => {
+    it("초안(draft) 교재의 섹션에는 키워드 태그를 시도할 수 없다는 안내를 보여준다", () => {
+      render(<CurriculumDocEditor doc={doc} onBack={vi.fn()} onDeleted={vi.fn()} />);
+      expect(
+        screen.getByText("교재를 배포(published)해야 이 섹션에 키워드를 태그할 수 있습니다.")
+      ).toBeInTheDocument();
+      expect(screen.queryByPlaceholderText("키워드 검색 또는 새 키워드 입력")).not.toBeInTheDocument();
+    });
+
+    it("배포된 교재의 섹션에서 카탈로그 키워드를 태그할 수 있다", async () => {
+      vi.mocked(docActions.assignSectionKeyword).mockResolvedValue(undefined);
+      const publishedDoc = {
+        ...doc,
+        status: "published",
+        subjectKeywords: [{ id: "kw1", label: "판별식", status: "active" }],
+      };
+      render(<CurriculumDocEditor doc={publishedDoc} onBack={vi.fn()} onDeleted={vi.fn()} />);
+
+      const input = screen.getByPlaceholderText("키워드 검색 또는 새 키워드 입력");
+      fireEvent.change(input, { target: { value: "판별" } });
+      fireEvent.click(screen.getByText("판별식"));
+
+      await waitFor(() =>
+        expect(docActions.assignSectionKeyword).toHaveBeenCalledWith("sec1", "kw1")
+      );
+      await waitFor(() => expect(screen.getByText("판별식")).toBeInTheDocument());
+    });
+
+    it("이미 태그된 키워드는 다시 태그 요청을 보내지 않는다(중복 방지)", async () => {
+      vi.mocked(docActions.assignSectionKeyword).mockClear();
+      const publishedDoc = {
+        ...doc,
+        status: "published",
+        subjectKeywords: [{ id: "kw1", label: "판별식", status: "active" }],
+        sections: [{ ...doc.sections[0], keywords: [{ id: "kw1", label: "판별식", status: "active" }] }],
+      };
+      render(<CurriculumDocEditor doc={publishedDoc} onBack={vi.fn()} onDeleted={vi.fn()} />);
+
+      // 이미 태그된 키워드는 칩으로만 보이고, 검색 제안 목록에는 다시 나오지 않는다.
+      const input = screen.getByPlaceholderText("키워드 검색 또는 새 키워드 입력");
+      fireEvent.change(input, { target: { value: "판별" } });
+      expect(screen.queryAllByText("판별식")).toHaveLength(1); // 칩 하나만
+      expect(docActions.assignSectionKeyword).not.toHaveBeenCalled();
+    });
+
+    it("카탈로그에 없는 키워드는 새로 만들어 태그한다", async () => {
+      vi.mocked(docActions.createSubjectKeywordForDoc).mockResolvedValue({
+        id: "kw2",
+        label: "새키워드",
+        status: "active",
+      });
+      vi.mocked(docActions.assignSectionKeyword).mockResolvedValue(undefined);
+      const publishedDoc = { ...doc, status: "published" };
+      render(<CurriculumDocEditor doc={publishedDoc} onBack={vi.fn()} onDeleted={vi.fn()} />);
+
+      const input = screen.getByPlaceholderText("키워드 검색 또는 새 키워드 입력");
+      fireEvent.change(input, { target: { value: "새키워드" } });
+      fireEvent.click(screen.getByText("추가"));
+
+      await waitFor(() =>
+        expect(docActions.createSubjectKeywordForDoc).toHaveBeenCalledWith("sub1", "새키워드")
+      );
+      await waitFor(() =>
+        expect(docActions.assignSectionKeyword).toHaveBeenCalledWith("sec1", "kw2")
+      );
+    });
   });
 });
