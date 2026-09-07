@@ -160,6 +160,24 @@ describe("ScratchpadTab", () => {
     expect(screen.getByText("전체 지우기")).toBeInTheDocument();
   });
 
+  it("v3 세션에서 whiteboardViewerRole이 admin이면 전체 지우기 버튼이 보인다(정책: 선생님+관리자)", () => {
+    render(
+      <ScratchpadTab
+        sessionId="s1"
+        viewerRole="teacher"
+        initialDocLinks={[]}
+        initialWhiteboardStrokes={[]}
+        sessionSource="v3"
+        whiteboardViewerRole="admin"
+        initialAnnotationStrokes={[]}
+        currentUserId="user-1"
+      />
+    );
+    fireEvent.click(screen.getByText("화이트보드"));
+    fireEvent.click(screen.getByText("✏️ 필기 모드"));
+    expect(screen.getByText("전체 지우기")).toBeInTheDocument();
+  });
+
   it("화이트보드 서브탭으로 전환하면 스크롤 안내 문구가 보인다", () => {
     render(
       <ScratchpadTab

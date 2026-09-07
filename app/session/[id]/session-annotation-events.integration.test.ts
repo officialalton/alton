@@ -12,6 +12,7 @@ const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
 const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001"; // 박서연 선생님 (seed)
 const OTHER_TEACHER_ID = "dddddddd-0000-0000-0000-000000000002"; // 이도현 선생님 (seed, 무관한 제3자)
 const STUDENT_ID = "cccccccc-0000-0000-0000-000000000001"; // 지훈 (seed)
+const ADMIN_ID = "aaaaaaaa-0000-0000-0000-000000000001"; // 관리자 (seed, role='admin')
 const HOUSEHOLD_ID = "aabbccdd-0000-0000-0000-000000000001"; // 지훈 household (seed)
 const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001"; // SAT Math (seed)
 
@@ -144,6 +145,43 @@ describe("session_annotation_events — append/replay (실제 DB)", () => {
          values ('${sessionId}', '${STUDENT_ID}', 'clear_all', '{}'::jsonb);`
       )
     ).toThrow(/row-level security|policy/i);
+  });
+
+  // R9 corrective(Defect 2) — 정책은 "clear_all은 선생님 또는 관리자"인데 UI(canClearAll)가
+  // teacher만 허용해 admin이 버튼을 볼 수 없었다. DB(RLS)는 b4fd788에서 이미
+  // `is_session_teacher_v3(session_id) or is_admin()`로 admin을 포함하고 있었으므로
+  // 여기서는 그 사실을 role matrix로 명시적으로 고정한다 — {student, teacher, admin} ×
+  // clear_all 시도 결과가 UI 가시성(ScratchpadTab.test.tsx)과 정확히 일치해야 한다.
+  describe("clear_all 권한 role matrix — {student, teacher, admin} (실제 DB, UI 가시성과 일치해야 함)", () => {
+    it("teacher는 clear_all을 기록할 수 있다(UI에서도 버튼 노출)", () => {
+      expect(() =>
+        asUser(
+          TEACHER_ID,
+          `insert into session_annotation_events (session_id, author_id, event_type, payload)
+           values ('${sessionId}', '${TEACHER_ID}', 'clear_all', '{}'::jsonb);`
+        )
+      ).not.toThrow();
+    });
+
+    it("admin은 clear_all을 기록할 수 있다(UI에서도 버튼 노출 — 이번 수정 대상)", () => {
+      expect(() =>
+        asUser(
+          ADMIN_ID,
+          `insert into session_annotation_events (session_id, author_id, event_type, payload)
+           values ('${sessionId}', '${ADMIN_ID}', 'clear_all', '{}'::jsonb);`
+        )
+      ).not.toThrow();
+    });
+
+    it("student는 clear_all을 기록할 수 없다(UI에서도 버튼 비노출)", () => {
+      expect(() =>
+        asUser(
+          STUDENT_ID,
+          `insert into session_annotation_events (session_id, author_id, event_type, payload)
+           values ('${sessionId}', '${STUDENT_ID}', 'clear_all', '{}'::jsonb);`
+        )
+      ).toThrow(/row-level security|policy/i);
+    });
   });
 
   it("세션과 무관한 제3자 선생님은 이 세션에 stroke조차 기록할 수 없다", () => {

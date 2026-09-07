@@ -2486,3 +2486,58 @@ Mercury/Wise 연동을 켜기 전에는 반드시 다음 중 하나를 결정하
 - UAT 실행 ID: 사용 안 함(신규 UAT 계정 생성 없이 기존 vitest 통합 테스트
   fixture만 재사용, 위 1장 정리 3번 항목 참고). 별도 정리 대상 없음.
 - 외부 변경: 0건.
+
+## 2026-09-07 — R9 corrective: 제품 오너 리뷰 2건(스트로크 유실, clear-all admin 누락)
+
+바로 위 R9(`8a46e2b`) 완료 직후 제품 오너 리뷰에서 발견된 결함 2건을 수정했다.
+범위는 `app/session/[id]/` 화이트보드/주석 관련 파일로 한정.
+
+**Defect 1 — stroke 저장 단위가 세그먼트당이 아니라 스트로크당 마지막
+세그먼트만이었음.** `WhiteboardCanvas.tsx`의 `currentSegRef`가 pointer-move마다
+덮어써지는 단일 세그먼트만 들고 있어서, 여러 move tick으로 이뤄진 stroke는
+화면엔 전체가 그려져도 서버엔 마지막 조각만 append됐다(새로고침/재접속/다른
+클라이언트에서는 꼬리만 남음).
+- 수정: `currentSegRef` → `currentStrokeSegsRef`(배열)로 바꿔 pointer-move마다
+  세그먼트를 누적하고, pointerUp에서 누적된 세그먼트 전부를 순서대로
+  `appendStrokeEvent()`로 append(기존 세그먼트당-1행 스키마/`reconstructVisibleStrokes`/
+  다른 클라이언트의 postgres_changes 드로잉 로직은 전혀 바꾸지 않음 — 세그먼트
+  개수만 1개에서 N개로 늘어남).
+- 저장 실패 시 롤백: `handlePointerUp`과 (기존에도 동일한 버그가 있던)
+  `handleClearAll`의 catch 블록 모두, 실패 메시지를 `setErrorMsg`로 먼저 설정한
+  뒤 `replayAndRedraw()`를 호출하던 순서를 뒤집었다 — `replayAndRedraw()`가
+  성공하면 내부에서 `setErrorMsg(null)`을 호출해 방금 설정한 실패 메시지를
+  즉시 지워버리는 기존 버그(R9 원본 코드에 이미 있었음, 이번에 테스트 작성
+  중 발견)가 있었다. 이제 항상 "replay로 서버 기준 재동기화 → 그 다음에
+  실패 메시지 표시" 순서로 고쳐서, 고스트 스트로크도 사라지고 사용자에게
+  실패 사실도 남는다.
+- 테스트(`WhiteboardCanvas.test.tsx`): 3개 세그먼트로 이뤄진 스트로크가
+  `appendStrokeEvent`를 3회, 세그먼트 연결 순서 그대로 호출하는지 검증(SSR/
+  마운트 시 replay·재접속 시 재구독 replay·다른 클라이언트 Realtime 수신은
+  기존 R9 테스트가 이미 동일한 `reconstructVisibleStrokes()`/`toPixel()` 경로를
+  타므로 세그먼트 수가 늘어도 동일 로직으로 재구성됨을 확인), 저장 실패 시
+  `replayAnnotationEvents()`로 재동기화되고 실패 메시지가 화면에 남는지 검증.
+
+**Defect 2 — clear-all UI 조건이 teacher만 허용, admin 누락.** 정책은
+"선생님 또는 관리자"인데 `ScratchpadTab.tsx`의 `canClearAll`이
+`whiteboardViewerRole === "teacher"`만 체크해서 admin이 버튼 자체를 볼 수
+없었다. DB(RLS, R8 Task D `b4fd788`)의
+`session_annotation_events_insert` 정책은 처음부터
+`(event_type <> 'clear_all' or is_session_teacher_v3(session_id) or is_admin())`로
+admin을 이미 포함하고 있었음(마이그레이션 추가 불필요, 확인만).
+- 수정: `canClearAll = teacher || admin`. 또한 clear-all 버튼은 필기 모드
+  툴바(`canDraw`) 안에 중첩돼 있어, admin이 버튼을 보려면 `canDraw`도 admin을
+  포함해야 해서 함께 수정(`student || teacher || admin`) — DB도 stroke insert
+  자체를 `is_session_related_v3(session_id) or is_admin()`으로 admin에게 이미
+  허용하므로 정책 모순 없음.
+- 테스트: `ScratchpadTab.test.tsx`에 admin이면 전체 지우기 버튼이 보이는 케이스
+  추가. `session-annotation-events.integration.test.ts`(실제 로컬 Postgres 대상)에
+  {student, teacher, admin} × clear_all role matrix를 추가 — teacher/admin
+  성공, student는 RLS로 차단됨을 확인해 UI 가시성과 DB 강제가 세 역할 모두
+  일치함을 고정.
+- 검증: `supabase db reset --local`(동시 진행 중이던 다른 라운드의 reset과
+  일시 충돌 2회 후 3번째 재시도에서 성공 — 트랜지언트), 위 신규/갱신 테스트
+  포함 `WhiteboardCanvas.test.tsx`/`ScratchpadTab.test.tsx`/
+  `session-annotation-events.integration.test.ts` 개별 통과, `npx tsc --noEmit`
+  클린, 전체 `vitest run --no-file-parallelism` + `next build` 최종 1회 확인.
+- 외부 변경: 0건. Stripe/Mercury/Wise/Google/이메일 등 실제 외부 API 호출 없음,
+  Vercel 배포/`git push`/main 병합 없음, 로컬 커밋만.

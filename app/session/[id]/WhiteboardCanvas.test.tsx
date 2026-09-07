@@ -50,6 +50,18 @@ function drawOneSegment() {
   fireEvent.pointerUp(canvas);
 }
 
+// 여러 pointer-move tick으로 이뤄진 하나의 스트로크(3개 세그먼트: 10,10→20,20→
+// 30,10→15,25). 수정 전에는 currentSegRef가 마지막 세그먼트(30,10→15,25)만 들고
+// 있어서 이 중 1개만 저장됐다 — 이 테스트는 3개 전부가 append됨을 검증한다.
+function drawMultiSegmentStroke() {
+  const canvas = document.querySelector("canvas")!;
+  fireEvent.pointerDown(canvas, { clientX: 10, clientY: 10 });
+  fireEvent.pointerMove(canvas, { clientX: 20, clientY: 20 });
+  fireEvent.pointerMove(canvas, { clientX: 30, clientY: 10 });
+  fireEvent.pointerMove(canvas, { clientX: 15, clientY: 25 });
+  fireEvent.pointerUp(canvas);
+}
+
 beforeEach(() => {
   vi.clearAllMocks();
   subscribeCallback = undefined;
@@ -77,6 +89,57 @@ describe("WhiteboardCanvas — v3 (session_annotation_events)", () => {
       expect.objectContaining({ tool: "pen" })
     );
     expect(scratchpadActions.saveWhiteboardStrokes).not.toHaveBeenCalled();
+  });
+
+  it("여러 pointer-move tick으로 이뤄진 스트로크는 세그먼트 전부가 appendStrokeEvent로 저장된다(Defect 1)", async () => {
+    render(
+      <WhiteboardCanvas
+        sessionId="s1"
+        initialStrokes={[]}
+        canDraw
+        canClearAll={false}
+        isV3
+        initialAnnotationStrokes={[]}
+        currentUserId="u1"
+      />
+    );
+    fireEvent.click(screen.getByText("✏️ 필기 모드"));
+    drawMultiSegmentStroke();
+
+    await waitFor(() => expect(annotationActions.appendStrokeEvent).toHaveBeenCalledTimes(3));
+    const calledSegs = vi
+      .mocked(annotationActions.appendStrokeEvent)
+      .mock.calls.map(([, seg]) => seg);
+    // 세그먼트 순서 그대로 3개 전부 저장됨 — 마지막 것만 남지 않는다. 각 세그먼트의
+    // 끝점(x1)이 다음 세그먼트의 시작점(x0)과 이어져 원래 경로(10,10→20,20→30,10→
+    // 15,25)가 끊김 없이 복원 가능함을 확인한다(좌표는 정규화되어 저장되므로 절대값이
+    // 아니라 연결 관계로 검증한다).
+    expect(calledSegs[0].x1).toBeCloseTo(calledSegs[1].x0);
+    expect(calledSegs[1].x1).toBeCloseTo(calledSegs[2].x0);
+    expect(calledSegs[0].x0).not.toBeCloseTo(calledSegs[2].x1);
+  });
+
+  it("스트로크 저장 실패 시 로컬에 낙관적으로 그린 스트로크를 서버 replay 기준으로 되돌린다(고스트 스트로크 방지)", async () => {
+    vi.mocked(annotationActions.appendStrokeEvent).mockRejectedValueOnce(new Error("network error"));
+    vi.mocked(annotationActions.replayAnnotationEvents).mockResolvedValue([]); // 서버엔 아무 것도 저장 안 됨
+
+    render(
+      <WhiteboardCanvas
+        sessionId="s1"
+        initialStrokes={[]}
+        canDraw
+        canClearAll={false}
+        isV3
+        initialAnnotationStrokes={[]}
+        currentUserId="u1"
+      />
+    );
+    fireEvent.click(screen.getByText("✏️ 필기 모드"));
+    drawOneSegment();
+
+    // 실패하면 에러 문구가 뜨고, replayAnnotationEvents로 서버 기준(빈 상태)으로 재동기화된다.
+    await waitFor(() => expect(screen.getByText(/network error/)).toBeInTheDocument());
+    await waitFor(() => expect(annotationActions.replayAnnotationEvents).toHaveBeenCalledWith("s1"));
   });
 
   it("마운트 시 replayAnnotationEvents로 현재 상태를 재구성한다(재접속 시 재구독에서도 다시 호출)", async () => {

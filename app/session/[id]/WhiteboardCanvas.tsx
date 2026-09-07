@@ -43,7 +43,12 @@ export default function WhiteboardCanvas({
   const drawingRef = useRef(false);
   const lastPosRef = useRef<{ x: number; y: number } | null>(null);
   const saveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const currentSegRef = useRef<CanvasStroke | null>(null);
+  // R9 corrective(Defect 1) — pointer move마다 생기는 여러 개의 작은 line segment를
+  // "이번 스트로크 전체"로 누적해두고 pointer up에서 전부 append한다. 이전에는
+  // currentSegRef가 마지막 세그먼트 하나만 들고 있어서 stroke가 여러 move tick으로
+  // 이뤄지면 화면엔 전체가 그려졌지만 서버엔 마지막 조각만 저장돼 새로고침/재접속/
+  // 다른 클라이언트에서는 꼬리만 남는 유실이 있었다.
+  const currentStrokeSegsRef = useRef<CanvasStroke[]>([]);
 
   const [drawMode, setDrawMode] = useState(false);
   const [tool, setTool] = useState<"pen" | "eraser">("pen");
@@ -247,7 +252,7 @@ export default function WhiteboardCanvas({
     drawSegment(seg);
     strokesRef.current.push(seg);
     if (isV3) {
-      currentSegRef.current = seg;
+      currentStrokeSegsRef.current.push(seg);
     } else {
       channelRef.current?.send({ type: "broadcast", event: "stroke", payload: seg });
     }
@@ -258,14 +263,24 @@ export default function WhiteboardCanvas({
     if (!drawingRef.current) return;
     drawingRef.current = false;
     if (isV3) {
-      const seg = currentSegRef.current;
-      currentSegRef.current = null;
-      if (!seg) return;
+      const segs = currentStrokeSegsRef.current;
+      currentStrokeSegsRef.current = [];
+      if (segs.length === 0) return;
       try {
-        await appendStrokeEvent(sessionId, toNormalized(seg));
+        // 스트로크를 이루는 모든 세그먼트를 순서대로 append한다(부분 실패 시 서버
+        // 상태와 어긋날 수 있으므로 실패하면 catch에서 replayAndRedraw로 되돌린다).
+        for (const seg of segs) {
+          await appendStrokeEvent(sessionId, toNormalized(seg));
+        }
         setSaved(true);
         setTimeout(() => setSaved(false), 1500);
       } catch (e) {
+        // 로컬에는 이미 전체(또는 일부) 스트로크가 낙관적으로 그려져 있으므로,
+        // 저장 실패 시 서버 이벤트 로그 기준으로 다시 replay해 "고스트 스트로크"가
+        // 화면에 남지 않도록 한다. replayAndRedraw는 성공하면 내부에서
+        // setErrorMsg(null)을 호출하므로, 사용자에게 실패를 알리는 메시지는 반드시
+        // replay가 끝난 "다음"에 설정해야 덮어써지지 않는다.
+        await replayAndRedraw();
         setErrorMsg(e instanceof Error ? e.message : "필기를 저장하지 못했습니다.");
       }
     } else {
@@ -288,8 +303,11 @@ export default function WhiteboardCanvas({
         await appendClearAllEvent(sessionId);
         setErrorMsg(null);
       } catch (e) {
-        setErrorMsg(e instanceof Error ? e.message : "전체 지우기에 실패했습니다.");
+        // replayAndRedraw는 성공하면 내부에서 setErrorMsg(null)을 호출하므로,
+        // 실패 메시지는 반드시 replay 이후에 설정해야 덮어써지지 않는다(위
+        // handlePointerUp과 동일한 이유 — R9 corrective).
         await replayAndRedraw(); // 서버가 거부했으면 로컬 낙관적 삭제를 되돌린다.
+        setErrorMsg(e instanceof Error ? e.message : "전체 지우기에 실패했습니다.");
       }
     } else {
       clearCanvasLocal();

@@ -39,9 +39,17 @@ export default function ScratchpadTab({
 }) {
   const [subtab, setSubtab] = useState<SubtabId>("docs");
   const isTeacher = viewerRole === "teacher";
+  // R9 corrective(Defect 2) — 정책은 "clear-all은 선생님 또는 관리자"인데 admin이
+  // 빠져 있었다. clear-all 버튼은 필기 모드 툴바(canDraw) 안에 중첩돼 있으므로,
+  // admin이 버튼을 보려면 canDraw도 admin을 포함해야 한다 — DB(RLS, b4fd788)도
+  // stroke/clear_all 모두 is_admin()을 이미 허용하므로 admin이 그리기 자체를
+  // 할 수 있게 하는 것과 정책상 모순이 없다.
   const canDraw =
-    whiteboardViewerRole === "student" || whiteboardViewerRole === "teacher";
-  const canClearAll = whiteboardViewerRole === "teacher";
+    whiteboardViewerRole === "student" ||
+    whiteboardViewerRole === "teacher" ||
+    whiteboardViewerRole === "admin";
+  const canClearAll =
+    whiteboardViewerRole === "teacher" || whiteboardViewerRole === "admin";
 
   return (
     <div className="max-w-[720px] px-8 py-8">
