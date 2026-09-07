@@ -40,8 +40,8 @@ const NAV_ITEMS = [
   { id: "enrollment", label: "수강 과목", icon: "🎓" },
   { id: "booking", label: "예약", icon: "🗓️" },
   { id: "lessons", label: "레슨", icon: "📅" },
-  { id: "credits", label: "수업권", icon: "💳" },
-  { id: "entitlements", label: "수업권 구매", icon: "🎟️" },
+  { id: "credits", label: "지인 추천", icon: "💳" },
+  { id: "entitlements", label: "수업권", icon: "🎟️" },
   { id: "stats", label: "통계", icon: "📊" },
   { id: "consent", label: "동의", icon: "✅" },
   { id: "family", label: "가족", icon: "👨‍👩‍👧" },
@@ -256,11 +256,7 @@ export default function ParentShell({
               readOnly
             />
           ) : activeTab === "credits" ? (
-            <CreditsTab
-              data={credits}
-              studentId={currentChildId}
-              purchaseStatus={purchaseStatus}
-            />
+            <CreditsTab data={credits} />
           ) : activeTab === "entitlements" ? (
             <EntitlementsTab data={entitlements} purchaseStatus={purchaseStatus} />
           ) : activeTab === "consent" ? (

@@ -51,7 +51,7 @@ const lessonsProps = {
   reviews: {},
   myFeedback: {},
   bookableEnrollments: [],
-  credits: { balance: 0, referralCode: null, packages: [] },
+  credits: { referralCode: null },
   entitlements: { prices: [], children: [] },
   consentChildren: [],
   activeConsentPolicy: null,
@@ -80,7 +80,7 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    ["홈", "레슨", "수업권", "통계"].forEach((label) =>
+    ["홈", "레슨", "지인 추천", "수업권", "통계"].forEach((label) =>
       expect(screen.getByText(label)).toBeInTheDocument()
     );
     expect(screen.getByText("지훈")).toBeInTheDocument();
@@ -116,7 +116,23 @@ describe("ParentShell", () => {
     expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
   });
 
-  it("수업권 탭을 누르면 CreditsTab이 렌더링되고 결제수단 입력은 없다", () => {
+  it("지인 추천 탭을 누르면 CreditsTab(추천 코드 전용)이 렌더링되고 결제수단 입력은 없다", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+      />
+    );
+    fireEvent.click(screen.getByText("지인 추천"));
+    expect(screen.getByText("추천 코드가 아직 없습니다.")).toBeInTheDocument();
+    expect(screen.queryByText("장 보유")).not.toBeInTheDocument();
+    expect(screen.queryByPlaceholderText("0000 0000 0000 0000")).not.toBeInTheDocument();
+  });
+
+  it("수업권 탭을 누르면 EntitlementsTab(R4)이 렌더링된다", () => {
     render(
       <ParentShell
         parentName="김민지"
@@ -127,8 +143,7 @@ describe("ParentShell", () => {
       />
     );
     fireEvent.click(screen.getByText("수업권"));
-    expect(screen.getByText("장 보유")).toBeInTheDocument();
-    expect(screen.queryByPlaceholderText("0000 0000 0000 0000")).not.toBeInTheDocument();
+    expect(screen.getByText("수업권 구매/현황")).toBeInTheDocument();
   });
 
   it("다른 탭을 누르면 준비 중 문구를 보여준다", () => {

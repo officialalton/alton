@@ -53,7 +53,7 @@ export default async function ParentHomePage({
     loadDashboardData(supabase, currentChildId),
     loadLessons(supabase, currentChildId),
     loadCurricula(supabase, currentChildId),
-    loadParentCreditsData(supabase, user.id, currentChildId),
+    loadParentCreditsData(supabase, user.id),
     loadParentEntitlementsData(supabase, user.id, children),
     loadChildrenConsentStatus(supabase, user.id),
     loadActiveConsentPolicy(supabase),

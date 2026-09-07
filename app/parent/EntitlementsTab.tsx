@@ -77,8 +77,7 @@ export default function EntitlementsTab({
     <div className="max-w-[720px] px-8 py-8">
       <h1 className="text-[20px] font-extrabold text-ink mb-1">수업권 구매/현황</h1>
       <p className="text-[12px] text-grey-500 mb-5">
-        기존 &quot;수업권&quot; 탭과 별개의 R4 신규 화면입니다. 이용약관과 환불 정책은
-        구매 시점 버전으로 각 구매 건에 스냅샷 고정됩니다.
+        이용약관과 환불 정책은 구매 시점 버전으로 각 구매 건에 스냅샷 고정됩니다.
       </p>
 
       {purchaseStatus === "success" && (
