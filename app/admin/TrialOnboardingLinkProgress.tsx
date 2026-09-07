@@ -18,6 +18,7 @@ import {
   type TrialOnboardingLinkDetail,
   type TrialOnboardingLinkStudent,
 } from "./trial-onboarding-actions";
+import { cancelDirectOnboardingLinkStudentAction } from "./direct-account-actions";
 import { useToasts, ToastStack } from "./Toast";
 
 const LINK_STATUS_LABEL: Record<TrialOnboardingLinkDetail["status"], string> = {
@@ -31,6 +32,7 @@ const STUDENT_STATUS_LABEL: Record<TrialOnboardingLinkStudent["status"], string>
   pending: "계정 생성 대기",
   created: "계정 생성 완료",
   failed: "계정 생성 실패",
+  cancelled: "취소됨(관리자가 링크에서 제외)",
 };
 
 function fmt(iso: string | null): string {
@@ -60,7 +62,10 @@ export default function TrialOnboardingLinkProgress({ linkId }: { linkId: string
       setDetail(d);
       setStudents(s);
       setReissueGuardianEmail(d.guardianEmail);
-      setReissueStudentEmails(s.map((row) => row.studentEmail));
+      // 취소된 학생은 재발급 대상이 아니다(direct-account-actions.ts의
+      // reissueDirectOnboardingLinkAction이 취소되지 않은 학생 수와 순서가
+      // 일치해야 하므로 여기서도 동일하게 필터링한다).
+      setReissueStudentEmails(s.filter((row) => row.status !== "cancelled").map((row) => row.studentEmail));
     } catch (e) {
       setLoadError(e instanceof Error ? e.message : String(e));
     }
@@ -136,20 +141,22 @@ export default function TrialOnboardingLinkProgress({ linkId }: { linkId: string
                           className="mt-0.5 w-full border border-grey-200 rounded px-2 py-1 text-[11.5px] text-ink"
                         />
                       </label>
-                      {students.map((s, i) => (
-                        <label key={s.id} className="block text-[10.5px] text-grey-500">
-                          {s.studentName} 이메일
-                          <input
-                            type="email"
-                            value={reissueStudentEmails[i] ?? ""}
-                            onChange={(e) =>
-                              setReissueStudentEmails((prev) => prev.map((v, idx) => (idx === i ? e.target.value : v)))
-                            }
-                            data-testid={`trial-onboarding-link-reissue-student-email-${i}`}
-                            className="mt-0.5 w-full border border-grey-200 rounded px-2 py-1 text-[11.5px] text-ink"
-                          />
-                        </label>
-                      ))}
+                      {students
+                        .filter((s) => s.status !== "cancelled")
+                        .map((s, i) => (
+                          <label key={s.id} className="block text-[10.5px] text-grey-500">
+                            {s.studentName} 이메일
+                            <input
+                              type="email"
+                              value={reissueStudentEmails[i] ?? ""}
+                              onChange={(e) =>
+                                setReissueStudentEmails((prev) => prev.map((v, idx) => (idx === i ? e.target.value : v)))
+                              }
+                              data-testid={`trial-onboarding-link-reissue-student-email-${i}`}
+                              className="mt-0.5 w-full border border-grey-200 rounded px-2 py-1 text-[11.5px] text-ink"
+                            />
+                          </label>
+                        ))}
                       <div className="flex gap-2 pt-1">
                         <button
                           type="button"
@@ -160,9 +167,10 @@ export default function TrialOnboardingLinkProgress({ linkId }: { linkId: string
                             if (!window.confirm("기존 링크를 폐기하고 새 링크를 발급·재발송할까요? 보호자가 계속 계정 생성에 실패하는 경우에만 사용하세요.")) return;
                             setReissuing(true);
                             try {
+                              const activeStudents = students.filter((s) => s.status !== "cancelled");
                               const result = await reissueTrialOnboardingLinkAction(linkId, {
                                 guardianEmail: reissueGuardianEmail,
-                                students: students.map((s, i) => ({
+                                students: activeStudents.map((s, i) => ({
                                   name: s.studentName,
                                   email: reissueStudentEmails[i] ?? s.studentEmail,
                                   grade: s.studentGrade ?? undefined,
@@ -248,6 +256,28 @@ export default function TrialOnboardingLinkProgress({ linkId }: { linkId: string
                         className="text-[11px] font-bold px-2.5 py-1 mt-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
                       >
                         {retryingId === s.id ? "재시도 중..." : "재시도"}
+                      </button>
+                    )}
+                    {(s.status === "pending" || s.status === "failed") && (
+                      <button
+                        data-testid={`trial-onboarding-link-cancel-student-${s.id}`}
+                        disabled={retryingId === s.id}
+                        onClick={async () => {
+                          if (!window.confirm(`${s.studentName} 학생을 이 링크에서 취소할까요? 더 이상 이 링크로 계정이 생성되지 않습니다.`)) return;
+                          setRetryingId(s.id);
+                          try {
+                            await cancelDirectOnboardingLinkStudentAction(s.id, "관리자 취소(잘못된 이메일 등)");
+                            showToast("success", `${s.studentName} 학생을 취소했습니다.`);
+                            await load();
+                          } catch (e) {
+                            showToast("error", `취소 실패 — ${e instanceof Error ? e.message : String(e)}`);
+                          } finally {
+                            setRetryingId(null);
+                          }
+                        }}
+                        className="text-[11px] font-bold px-2.5 py-1 mt-1.5 ml-1.5 rounded-lg border-[1.5px] border-grey-200 text-red disabled:opacity-50"
+                      >
+                        학생 취소
                       </button>
                     )}
                   </div>

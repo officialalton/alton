@@ -798,7 +798,7 @@ export type TrialOnboardingLinkStudent = {
   studentEmail: string;
   studentGrade: string | null;
   studentSubject: string | null;
-  status: "pending" | "created" | "failed";
+  status: "pending" | "created" | "failed" | "cancelled";
   childAuthUserId: string | null;
   error: string | null;
 };
@@ -878,6 +878,15 @@ export async function reissueTrialOnboardingLinkAction(
     .maybeSingle();
   if (linkError) throw new Error(linkError.message);
   if (!link) throw new Error("존재하지 않는 온보딩 링크입니다.");
+  // 2026-09-07(UAT 후속) — 지인/추천 링크(consultation_id가 null)는 이 함수가
+  // 아래에서 쓰는 create_trial_onboarding_link_multi(상담 존재를 요구)로는
+  // 재발급할 수 없다. direct-account-actions.ts의 create_direct_onboarding_link_multi
+  // 기반 별도 구현으로 위임한다(반환 타입은 두 경로 모두
+  // { status; linkId; ... } 형태로 호환된다).
+  if (link.consultation_id === null) {
+    const { reissueDirectOnboardingLinkAction } = await import("./direct-account-actions");
+    return reissueDirectOnboardingLinkAction(linkId, overrides);
+  }
   if (link.status !== "pending" || link.redeemed_at) {
     throw new Error("이미 보호자가 확인했거나 취소/만료된 링크는 재발급할 수 없습니다.");
   }

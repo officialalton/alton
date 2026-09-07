@@ -135,3 +135,120 @@ async function sendDirectOnboardingNoticeInternal(params: {
 
   return { status: "sent", linkId, sentAt: nowIso, localRedeemUrl };
 }
+
+// 2026-09-07(UAT 후속) — 지인/추천 링크(consultation_id가 null)로 잘못된
+// 이메일이 발송된 경우 관리자가 고쳐서 재발송할 수 있어야 한다. 상담 경로의
+// reissueTrialOnboardingLinkAction()은 내부적으로 create_trial_onboarding_link_multi
+// (p_consultation_id가 실제 상담을 가리켜야 함)만 호출하므로 consultation_id가
+// null인 이 경로의 링크에는 쓸 수 없다(호출 시 "상담을 찾을 수 없습니다: null"로
+// 실패) — 그래서 create_direct_onboarding_link_multi를 쓰는 별도 함수가 필요하다.
+// app/admin/trial-onboarding-actions.ts의 reissueTrialOnboardingLinkAction()이
+// link.consultation_id가 null이면 이 함수로 위임한다.
+export async function reissueDirectOnboardingLinkAction(
+  linkId: string,
+  overrides?: {
+    guardianEmail?: string;
+    guardianName?: string;
+    students?: { name: string; email: string; grade?: string; subject?: string }[];
+  }
+): Promise<SendDirectOnboardingNoticeResult> {
+  try {
+    return await reissueDirectOnboardingLinkInternal(linkId, overrides);
+  } catch (e) {
+    const message = e instanceof Error ? e.message : String(e);
+    return { status: "failed", linkId, error: message };
+  }
+}
+
+async function reissueDirectOnboardingLinkInternal(
+  linkId: string,
+  overrides?: {
+    guardianEmail?: string;
+    guardianName?: string;
+    students?: { name: string; email: string; grade?: string; subject?: string }[];
+  }
+): Promise<SendDirectOnboardingNoticeResult> {
+  const { actorUserId } = await requireAdminOrCapability(CONSULT_CAPABILITY);
+  const admin = createAdminClient();
+
+  const { data: link, error: linkError } = await admin
+    .from("trial_onboarding_links")
+    .select("id, consultation_id, guardian_email, guardian_name, status, redeemed_at")
+    .eq("id", linkId)
+    .maybeSingle();
+  if (linkError) throw new Error(linkError.message);
+  if (!link) throw new Error("존재하지 않는 온보딩 링크입니다.");
+  if (link.consultation_id !== null) {
+    throw new Error("상담 연결 링크입니다 — 재발급은 상담 화면의 재발급 기능을 사용해주세요.");
+  }
+  if (link.status !== "pending" || link.redeemed_at) {
+    throw new Error("이미 보호자가 확인했거나 취소/만료된 링크는 재발급할 수 없습니다.");
+  }
+
+  const { data: students, error: studentsError } = await admin
+    .from("trial_onboarding_link_students")
+    .select("id, student_name, student_email, student_grade, student_subject, status")
+    .eq("link_id", linkId)
+    .order("created_at", { ascending: true });
+  if (studentsError) throw new Error(studentsError.message);
+  if (!students?.length) throw new Error("학생 명단을 찾을 수 없어 재발급할 수 없습니다.");
+
+  // 2026-09-07: 관리자가 취소(cancelled)한 학생은 재발급 대상에서 제외한다 —
+  // overrides.students는 남은(취소되지 않은) 학생 수와 순서가 일치해야 한다.
+  const activeStudents = students.filter((s) => s.status !== "cancelled");
+  if (!activeStudents.length) {
+    throw new Error("취소되지 않은 학생이 없어 재발급할 수 없습니다.");
+  }
+
+  const guardianEmail = overrides?.guardianEmail?.trim() || link.guardian_email;
+  const guardianName = overrides?.guardianName?.trim() || link.guardian_name;
+  const studentsPayload =
+    overrides?.students && overrides.students.length === activeStudents.length
+      ? overrides.students.map((s, i) => ({
+          name: s.name.trim() || activeStudents[i].student_name,
+          email: s.email.trim() || activeStudents[i].student_email,
+          grade: s.grade ?? activeStudents[i].student_grade ?? undefined,
+          subject: s.subject ?? activeStudents[i].student_subject ?? undefined,
+        }))
+      : activeStudents.map((s) => ({
+          name: s.student_name,
+          email: s.student_email,
+          grade: s.student_grade ?? undefined,
+          subject: s.student_subject ?? undefined,
+        }));
+
+  assertDirectOnboardingParamsValid({ guardianEmail, guardianName, students: studentsPayload });
+
+  // 기존 링크를 폐기(revoked)하고 새 링크를 발급 — 상담 경로의
+  // reissueTrialOnboardingLinkAction과 동일한 정책(항상 revoke 후 재발급).
+  await admin.from("trial_onboarding_links").update({ status: "revoked" }).eq("id", linkId);
+  await admin.from("trial_onboarding_link_events").insert({
+    link_id: linkId,
+    event_type: "revoked",
+    actor_id: actorUserId,
+    detail: { reason: "관리자 재발급(지인/추천)" },
+  });
+
+  return sendDirectOnboardingNoticeInternal({
+    guardianEmail,
+    guardianName,
+    students: studentsPayload,
+  });
+}
+
+// 2026-09-07(UAT 후속) — 잘못된 이메일 등으로 등록된 학생 1명을 이 온보딩
+// 링크에서 취소한다(더 이상 계정 생성 대상이 아니게 된다 — DB 함수
+// cancel_trial_onboarding_link_student()가 상태 검증·감사 로그를 담당).
+export async function cancelDirectOnboardingLinkStudentAction(
+  linkStudentId: string,
+  reason?: string
+): Promise<void> {
+  const { actorUserId } = await requireAdminOrCapability(CONSULT_CAPABILITY);
+  const admin = createAdminClient();
+  const { error } = await admin.rpc("cancel_trial_onboarding_link_student", {
+    p_link_student_id: linkStudentId,
+    p_admin_id: actorUserId,
+    p_reason: reason ?? null,
+  });
+  if (error) throw new Error(error.message);
+}
