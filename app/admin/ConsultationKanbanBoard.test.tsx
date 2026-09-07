@@ -115,6 +115,7 @@ function cardDetail() {
     noticeDeliveryStatus: null as "pending" | "sent" | "failed" | null,
     noticeSendError: null as string | null,
     noticeSentAt: null as string | null,
+    childCards: [] as { consultationId: string; childName: string | null }[],
   };
 }
 
@@ -245,6 +246,25 @@ describe("ConsultationKanbanBoard — 체험 온보딩 안내 발송 폼(2026-09
     await screen.findByTestId("consultation-card-detail");
 
     expect(screen.getByTestId("trial-notice-failed")).toHaveTextContent("SMTP 연결 실패");
+  });
+
+  // 2026-09-06(제품 오너 지적) — 가족(부모) 카드가 이미 학생별 자녀 카드로
+  // 분기됐으면 빈 온보딩 발송 폼을 다시 보여주지 않는다.
+  it("자녀 카드가 이미 생성돼 있으면 온보딩 발송 폼 대신 안내와 이동 링크만 보여준다", async () => {
+    getConsultationCardDetailActionMock.mockResolvedValue(
+      detailWithoutAccountLinked({
+        childCards: [{ consultationId: "child-c1", childName: "첫째" }],
+      })
+    );
+
+    render(<ConsultationKanbanBoard subjects={subjects} teacherCandidatesBySubject={teacherCandidatesBySubject} />);
+
+    fireEvent.click(await screen.findByText("김민지"));
+    await screen.findByTestId("consultation-card-detail");
+
+    expect(screen.queryByText("체험 온보딩 안내 발송")).not.toBeInTheDocument();
+    expect(screen.getByText("자녀 1명 온보딩 진행 중/완료됨")).toBeInTheDocument();
+    expect(screen.getByText("→ 첫째 카드로 이동")).toBeInTheDocument();
   });
 
   // 2026-09-06(관리자 온보딩 발송 폼 통합) — 카드 상세 진입점에서도
@@ -427,6 +447,7 @@ describe("ConsultationKanbanBoard — 정규 계약 발송 실패 피드백(2026
       noticeDeliveryStatus: null as "pending" | "sent" | "failed" | null,
       noticeSendError: null as string | null,
       noticeSentAt: null as string | null,
+      childCards: [] as { consultationId: string; childName: string | null }[],
     };
   }
 
@@ -446,6 +467,17 @@ describe("ConsultationKanbanBoard — 정규 계약 발송 실패 피드백(2026
       },
     ]);
     getConsultationCardDetailActionMock.mockResolvedValue(contractCardDetail());
+  });
+
+  // 2026-09-06(제품 오너 지적) — 회사 승인자 직함 입력란이 매번 빈 값으로
+  // 시작해 관리자가 매번 다시 입력해야 했다. 기본값을 고정한다(수정 가능은 유지).
+  it("회사 승인자 직함 입력란은 'CEO, Do Kyung Kim'으로 기본값이 채워져 있다", async () => {
+    render(<ConsultationKanbanBoard subjects={subjects} teacherCandidatesBySubject={teacherCandidatesBySubject} />);
+
+    fireEvent.click(await screen.findByText("세온장"));
+    await screen.findByTestId("consultation-card-detail");
+
+    expect(screen.getByPlaceholderText("회사 승인자 직함(필수)")).toHaveValue("CEO, Do Kyung Kim");
   });
 
   it("Preview DocuSign 게이트로 실패하면 재시도 시 '환경 제약' 메시지를 화면에 보여준다(무피드백 버그 수정)", async () => {
@@ -497,13 +529,21 @@ describe("ConsultationKanbanBoard — 정규 계약 발송 실패 피드백(2026
     );
   });
 
-  it("회사 승인자 직함을 입력하면 재시도 버튼이 활성화된다(비활성화 고정 버그 아님)", async () => {
+  // 2026-09-06(제품 오너 지적 — 기본값 고정) 이후: 직함 입력란은 이제
+  // "CEO, Do Kyung Kim" 기본값으로 채워져 있어 버튼이 처음부터 활성화돼
+  // 있다. 비워지면 다시 비활성화되고, 값을 입력하면 활성화됨을 확인한다.
+  it("회사 승인자 직함은 기본값이 있어 버튼이 처음부터 활성화되며, 비우면 비활성화·입력하면 다시 활성화된다", async () => {
     render(<ConsultationKanbanBoard subjects={subjects} teacherCandidatesBySubject={teacherCandidatesBySubject} />);
 
     fireEvent.click(await screen.findByText("세온장"));
     await screen.findByTestId("consultation-card-detail");
 
     const button = screen.getByText("회사 승인 및 계약 발송") as HTMLButtonElement;
+    expect(button.disabled).toBe(false);
+
+    fireEvent.change(screen.getByPlaceholderText("회사 승인자 직함(필수)"), {
+      target: { value: "" },
+    });
     expect(button.disabled).toBe(true);
 
     fireEvent.change(screen.getByPlaceholderText("회사 승인자 직함(필수)"), {

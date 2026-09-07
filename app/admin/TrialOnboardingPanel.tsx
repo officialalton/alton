@@ -460,7 +460,7 @@ function RegularContractRow({
   onSent: () => void;
 }) {
   const [confirming, setConfirming] = useState(false);
-  const [approverTitle, setApproverTitle] = useState("");
+  const [approverTitle, setApproverTitle] = useState("CEO, Do Kyung Kim");
   const [busy, setBusy] = useState(false);
   const [resending, setResending] = useState(false);
   const [resendError, setResendError] = useState<string | null>(null);

@@ -171,6 +171,7 @@ export default function ConsultationKanbanBoard({
           teacherCandidatesBySubject={teacherCandidatesBySubject}
           onClose={() => setOpenId(null)}
           onChanged={refresh}
+          onNavigateToCard={(id) => setOpenId(id)}
         />
       )}
     </div>
@@ -183,12 +184,14 @@ function ConsultationCardDetailPanel({
   teacherCandidatesBySubject,
   onClose,
   onChanged,
+  onNavigateToCard,
 }: {
   consultationId: string;
   subjects: AdminSubject[];
   teacherCandidatesBySubject: Record<string, MatchingTeacherCandidate[]>;
   onClose: () => void;
   onChanged: () => void;
+  onNavigateToCard: (consultationId: string) => void;
 }) {
   const [detail, setDetail] = useState<ConsultationCardDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -327,19 +330,39 @@ function ConsultationCardDetailPanel({
                 체험 진행 확정(보호자 확인)
               </button>
             )}
-            {c.trial_intent_confirmed_at && detail.pipeline && !detail.pipeline.steps.find((s) => s.key === "account_linked")?.done && (
-              <TrialOnboardingStudentsForm
-                consultationId={c.id}
-                defaultGuardianEmail={detail.guardianEmail ?? c.contact_email ?? ""}
-                defaultGuardianName={detail.guardianName ?? c.contact_name ?? ""}
-                defaultStudentGrade={c.student_grade ?? ""}
-                submitLabel="체험 온보딩 안내 발송"
-                noticeDeliveryStatus={detail.noticeDeliveryStatus}
-                noticeSendError={detail.noticeSendError}
-                onResult={(result) => {
-                  if (result.status !== "failed") run(async () => {});
-                }}
-              />
+            {/* 2026-09-06(제품 오너 지적) — 이 가족 카드가 이미 학생별 자녀
+                카드로 분기됐으면(childCards.length > 0) 빈 온보딩 발송 폼을
+                다시 보여주지 않는다. 대신 이미 진행 중/완료된 자녀 카드
+                안내 + 각 카드로 바로 이동하는 링크만 보여준다. */}
+            {(detail.childCards ?? []).length > 0 ? (
+              <div className="text-[12px] text-ink bg-white rounded-lg px-3 py-2 space-y-1">
+                <div className="font-bold">자녀 {detail.childCards.length}명 온보딩 진행 중/완료됨</div>
+                {detail.childCards.map((cc) => (
+                  <button
+                    key={cc.consultationId}
+                    type="button"
+                    className="block text-[11.5px] text-ink underline"
+                    onClick={() => onNavigateToCard(cc.consultationId)}
+                  >
+                    → {cc.childName ?? "이름 미확인"} 카드로 이동
+                  </button>
+                ))}
+              </div>
+            ) : (
+              c.trial_intent_confirmed_at && detail.pipeline && !detail.pipeline.steps.find((s) => s.key === "account_linked")?.done && (
+                <TrialOnboardingStudentsForm
+                  consultationId={c.id}
+                  defaultGuardianEmail={detail.guardianEmail ?? c.contact_email ?? ""}
+                  defaultGuardianName={detail.guardianName ?? c.contact_name ?? ""}
+                  defaultStudentGrade={c.student_grade ?? ""}
+                  submitLabel="체험 온보딩 안내 발송"
+                  noticeDeliveryStatus={detail.noticeDeliveryStatus}
+                  noticeSendError={detail.noticeSendError}
+                  onResult={(result) => {
+                    if (result.status !== "failed") run(async () => {});
+                  }}
+                />
+              )
             )}
             {c.trial_entitlement_grant_status === "failed" && (
               <button
@@ -495,7 +518,7 @@ function ContractSendForm({
   busy: boolean;
   onSend: (fn: () => Promise<void>) => void;
 }) {
-  const [approverTitle, setApproverTitle] = useState("");
+  const [approverTitle, setApproverTitle] = useState("CEO, Do Kyung Kim");
 
   return (
     <div className="border border-grey-200 rounded-lg p-2.5 space-y-1.5">

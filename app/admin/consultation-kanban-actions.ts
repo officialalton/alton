@@ -102,6 +102,12 @@ export type ConsultationCardDetail = {
   // 관리자가 카드 상세에서 "발송 내역 보기"로 그 링크의 진행 상태(학생별
   // 입력값·계정 생성 상태 포함)를 조회할 때 쓴다. 발급된 적 없으면 null.
   latestOnboardingLinkId: string | null;
+  // 2026-09-06(제품 오너 지적 — 자녀 카드 분기된 가족 카드에 빈 온보딩 폼이
+  // 계속 뜨는 문제): 이 카드가 가족(부모) 원 상담이고 학생별 자녀 카드가 이미
+  // 생성돼 있으면(family_root_consultation_id가 이 카드를 가리키는 행) 그
+  // 목록. 비어있으면 아직 자녀 카드가 없다는 뜻 — 기존처럼 온보딩 발송 폼을
+  // 그대로 보여준다.
+  childCards: { consultationId: string; childName: string | null }[];
 };
 
 /** 카드 상세 패널 — 교사 배정을 제외한 모든 후속 액션에 필요한 정보를 한 번에 모은다. */
@@ -199,6 +205,23 @@ export async function getConsultationCardDetailAction(consultationId: string): P
     }
   }
 
+  const { data: childCardRows } = await admin
+    .from("consultations")
+    .select("id, child_id")
+    .eq("family_root_consultation_id", consultation.id);
+  let childCards: ConsultationCardDetail["childCards"] = [];
+  if (childCardRows && childCardRows.length > 0) {
+    const childIds = childCardRows.map((r) => r.child_id).filter((id): id is string => !!id);
+    const { data: childProfiles } = childIds.length
+      ? await admin.from("profiles").select("id, name").in("id", childIds)
+      : { data: [] as { id: string; name: string | null }[] };
+    const nameById = new Map((childProfiles ?? []).map((p) => [p.id, p.name]));
+    childCards = childCardRows.map((r) => ({
+      consultationId: r.id,
+      childName: r.child_id ? nameById.get(r.child_id) ?? null : null,
+    }));
+  }
+
   return {
     consultation,
     pipeline,
@@ -212,6 +235,7 @@ export async function getConsultationCardDetailAction(consultationId: string): P
     noticeSendError,
     noticeSentAt,
     latestOnboardingLinkId,
+    childCards,
   };
 }
 

@@ -217,3 +217,15 @@
 - [x] **#2 관리자 칸반 "정규 계약" 재시도 무피드백(버그, 수정 완료)** — `sendRegularContractOneClickAction`이 DocuSign 발송 실패를 throw가 아니라 `{status:"failed", error}` 반환값으로 돌려주는데, `ContractSendForm.onClick`(`app/admin/ConsultationKanbanBoard.tsx`)이 이 반환값을 확인하지 않고 버려서 재시도해도 아무 피드백이 없었다. 반환값의 `status`를 확인해 실패 시 throw하도록 수정하고, Preview DocuSign 게이트(`DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS`)로 인한 실패는 "Preview 환경에서는 실제 DocuSign 발송이 비활성화되어 있습니다(정상 동작)"로 문구를 구분해 관리자가 실제 버그와 환경 제약을 헷갈리지 않게 함. 재시도 버튼 자체(빈 입력 시 비활성화, 입력 시 활성화)는 정상 동작임을 확인.
 - [x] 검증: `supabase db reset --local` 성공(신규 마이그레이션 없음) / `npx tsc --noEmit` 0 에러 / 신규 통합 테스트 `app/parent/parent-home-lessons-parallel-regression.integration.test.ts`(로컬 Postgres, service-role + 실제 RLS 세션 양쪽) 2건, `app/admin/ConsultationKanbanBoard.test.tsx` 신규 3건 — 전부 통과 / `npx vitest run`(전체) 190파일·1275건 중 1건만 실패(`lib/timezone-persistence.integration.test.ts` — 단독 실행 시 통과하는 기존 병렬 실행 플레이크, 재확인 결과 이번 변경과 무관) / `npx next build` 성공.
 - [ ] 브라우저로 실제 Preview에서 "세온장" 카드의 "정규 계약" 섹션에 회사 승인자 직함을 입력하고 재시도했을 때 새 Preview 게이트 안내 문구가 실제로 뜨는지 눈으로 확인하는 것은 이번 세션 범위 밖 — Preview alias 갱신 후 직접 확인 권장.
+
+### 2026-09-06 15차 세션 — 가족 카드 온보딩 폼 중복 노출 방지 + 회사 승인자 직함 기본값 고정 + 계약 자동 발송 설계 확인(1~3번, 4·5번은 미착수)
+
+제품 오너 지적 5건 중 1~3번(작은 것부터) 완료. 4·5번(체험 생략→정규 등록 플로우 완성, 지인/추천 상담 없이 바로 계정 생성)은 스키마 변경·신규 화면·통합 테스트까지 필요한 큰 규모라 이번 세션에서 착수하지 못했다. 상세 근거는 `docs/CURRENT.md`의 "2026-09-06(제품 오너 지적 3건)" 절 참고.
+
+- [x] **#1 가족(부모) 카드에 자녀 카드가 이미 있으면 온보딩 발송 폼 숨김** — `app/admin/consultation-kanban-actions.ts`의 `ConsultationCardDetail`에 `childCards`(자녀 카드 목록) 추가, `ConsultationKanbanBoard.tsx`가 자녀 카드가 있으면 빈 폼 대신 안내+이동 링크를 보여준다. 발송 내역 조회는 그대로 유지.
+- [x] **#2 회사 승인자 직함 기본값 고정** — `ConsultationKanbanBoard.tsx`/`TrialOnboardingPanel.tsx`의 `approverTitle` 초기값을 `"CEO, Do Kyung Kim"`으로 고정(수정 가능은 유지).
+- [x] **#3 설계 확인(코드 변경 없음)** — "정규 진행 희망" 확인(`confirmRegularProgressIntent`)은 계약 자동 발송을 트리거하지 않는다. 계약 발송은 관리자가 회사 승인자 직함을 입력하고 수동으로 "회사 승인 및 계약 발송"을 눌러야만 실행되는 의도된 설계임을 코드로 확인.
+- [x] 검증: `supabase db reset --local` 성공(스키마 변경 없음) / `npx tsc --noEmit` 0 에러 / `app/admin/ConsultationKanbanBoard.test.tsx` 신규 2건 + 기존 1건 갱신, 전부 통과 / `npx vitest run`(전체) 190파일·1277건 중 5건만 실패(`lib/booking/trial-entitlement-and-cancellation.integration.test.ts` — 변경 전 커밋에서도 동일 실패 확인, 무관) / `npx next build` 성공.
+- [ ] **#4 체험 생략 → 바로 정규 등록 플로우 완성** — 미착수. `outcome='regular_recommended'`일 때 `TrialOnboardingStudentsForm` 렌더 조건 확장, 학생 계정 생성 완료 시 계약 draft 자동 생성, `sendRegularContractOneClickAction`의 `trial_regular_progress_selections` 체크를 이 경로에서 우회하는 작업이 남아있다. 설계 메모는 `docs/CURRENT.md` "다음 라운드 TODO" 참고.
+- [ ] **#5 지인/추천 — 상담 없이 바로 계정 생성** — 미착수. 신규 관리자 화면(상담 칸반과 분리), `consultation_id` nullable 여부 스키마 확인부터 시작 필요.
+- [ ] 브라우저로 실제 Preview에서 자녀 카드가 있는 가족 카드를 열어 폼이 실제로 숨겨지고 이동 링크가 동작하는지, 회사 승인자 직함이 기본값으로 채워져 있는지 눈으로 확인하는 것은 이번 세션 범위 밖 — Preview alias 갱신 후 직접 확인 권장.
