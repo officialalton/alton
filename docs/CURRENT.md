@@ -1,5 +1,66 @@
 # ALTON — 현재 상태 (2026-09-07 기준)
 
+> **2026-09-07(추가 8, R8 6/N) Shared Drive 폴더/권한 실패 재처리 큐(Gate C
+> GW-12 인수 기준) 구현.** 배경: R8 체크리스트의 "폴더·권한·파일 이동 실패
+> 재처리와 정기 대조" + Gate C GW-12("잘못된 fileId 등 Drive/Meet API 실패가
+> 실제로 manual_review/reconciliation_needed 큐에 적재되고, 재처리 배치가
+> 이를 정상 처리하는지")는 Gate C 자체 검증 범위 밖이라 이 R8 구현에서
+> 다뤄야 했다. **구현**: 신규 테이블 `session_drive_tasks`(마이그레이션
+> `20261220000000_r8_session_drive_provisioning_queue.sql`) — task_type
+> `folder_provision`/`permission_grant`/`permission_revoke`, status
+> `queued→processing→succeeded|retryable_failed|manual_review|reconciliation_needed`.
+> `lib/drive-session-tasks.ts`가 `lib/drive-artifacts.ts`(R3, 계약서 Drive
+> 업로드)와 동일한 조건부 UPDATE claim 패턴을 재사용 — 404/400(잘못된
+> fileId 등 복구 불가능한 오류)은 `DriveReconciliationError`로 구분해 재시도
+> 없이 즉시 `reconciliation_needed`로, 그 외 일시적 실패는 `retry_count`
+> 누적 후 한도(5) 초과 시 `manual_review`로 전이한다. `queueSessionDriveTask`
+> (큐 적재), `ensureSessionFolderPath`/`grantSessionFolderPermission`/
+> `revokeSessionFolderPermission`(학생→과목→연도→세션 폴더 자동 생성 및
+> 선생님 배정 권한 부여·회수 — 하드 세이프티 룰에 따라
+> `DRIVE_ARTIFACTS_ALLOW_REAL_WRITES=true`가 아니면 항상 throw, 기존
+> `lib/drive-artifacts.ts`가 이미 쓰던 플래그를 그대로 재사용하고 새 플래그를
+> 만들지 않았다), `requeueSessionDriveTasks`(재처리 배치 — manual_review/
+> reconciliation_needed 행을 관리자가 원인 해소 후 다시 queued로 되돌림)를
+> 제공한다. **테스트**(`lib/drive-session-tasks.test.ts`, 7건, Drive
+> fetch/Supabase admin 전부 모킹 — 실제 네트워크 호출 없음): (a) 404 응답 →
+> 재시도 없이 즉시 reconciliation_needed 확인, (b) 일시적 실패 5회 초과 →
+> manual_review 확인, (c) claim 경쟁 시 스킵, (d)
+> `DRIVE_ARTIFACTS_ALLOW_REAL_WRITES` 꺼져 있으면 실제 fetch 호출 없이
+> retryable_failed 처리, (e) **재처리 배치가 reconciliation_needed 항목을
+> requeue한 뒤 재실행하면 실제로 succeeded로 전이함을 end-to-end로 확인**
+> (Gate C GW-12 인수 기준 핵심). **아직 안 한 것**: 선생님 배정 이벤트
+> (`teacher_assignments` insert/status 변경, `lib/enrollment/
+> teacher-assignment-termination.ts`)에서 `queueSessionDriveTask`를 실제로
+> 호출하는 배선은 아직 없다 — 큐/워커/재처리 자체는 완성·검증됐지만 "언제
+> 큐에 넣는가"는 다음 라운드로 남긴다. Smart Notes 원본 이동, 실제 정기
+> 대조(cron) 배선도 범위 밖.
+>
+> **동시 작업 확인(중요)**: 이 라운드 작업 중 같은 워킹트리에서 R8 사업
+> 1(세션뷰↔v3 sessions/reservations 연결, `app/session/[id]/
+> session-source-data.ts`, `page.tsx`, `SessionShell.tsx`, `material_version_id`
+> 재배정 방지 트리거 `20261219000000_r8_material_version_lock.sql`,
+> 문서 `docs/2026-09-07-r8-session-cutover-oneP-pager.md`)와 R10
+> payout batch lifecycle(`20261218000000_r10_payout_batch_lifecycle.sql`,
+> `lib/booking/payout-batch-lifecycle.integration.test.ts`)이 **다른 세션에
+> 의해 이미 진행 중(미커밋)**이었다. 마이그레이션 타임스탬프가 두 번
+> 충돌해(`20261218000000`, `20261219000000`) 새 타임스탬프로 옮겨 해소했고,
+> 최초 작성했던 중복 함수(`pin_session_material_version` — 실제 배정
+> 메커니즘을 이번 라운드에 구현하려던 것)는 그 세션이 이미 "실제 배정은
+> R9 범위, 이번 라운드는 불변식 트리거만" 이라고 명시적으로 결정해 둔 것과
+> 충돌해 **삭제**했다 — 이 문서의 R8 절과 별개로 그 세션이 자신의 변경을
+> 직접 커밋할 것으로 보고 이 라운드에서는 건드리지 않았다(내 커밋
+> `e9d357e`에는 `lib/drive-session-tasks.*`와 그 마이그레이션만 포함).
+> `supabase db reset --local` + 전체 `vitest run`(1318건) + `tsc --noEmit`
+> + `next build` 전부 통과 확인(그 세션의 미커밋 변경 포함한 상태 기준).
+>
+> **R8 체크리스트 잔여(다음 라운드)**: 필기 오버레이(좌표 정규화·실시간
+> 전송·재접속 복구·동시편집 충돌·전체지우기 권한), Shared Drive 폴더
+> 자동화의 실제 호출 배선(선생님 배정 이벤트 트리거), Smart Notes 폴더
+> 이동, 서버 매개 파일 접근(학생/보호자 Drive ACL 없음) 강제, iPad 실기기
+> QA·느린 네트워크/오프라인 시험(**이 환경에서는 애초에 수행 불가능** —
+> 시뮬레이터가 아닌 실제 iPad/Apple Pencil 및 실제 네트워크 열화 조건을
+> 이 세션의 도구로 재현할 방법이 없음. 명시적으로 스킵, 은폐 아님).
+
 > **2026-09-07(추가 7) 지인/추천 발송 내역 목록 화면 신설 — 상담 카드가 없어서 발송 건을 다시 찾아볼 방법이 없던 설계 공백 해소.**
 > 배경: "지인/추천 — 상담 없이 바로 계정 생성"(`DirectAccountCreationForm.tsx`/`direct-account-actions.ts`)과 그 링크의 재발송(`reissueDirectOnboardingLinkAction`)/학생 취소 기능은 이미 구현돼 있었지만, `DirectAccountCreationForm`은 발송 성공 시 토스트만 띄우고 폼을 닫아버리고 `TrialOnboardingLinkProgress.tsx`(발송 상태 조회, 이미 존재)는 상담 칸반 카드 상세에서만 마운트되는데 지인/추천 경로는 애초에 상담 카드가 없어 진입할 방법이 없었다 — 발송 건을 나중에 다시 찾아볼 목록 화면 자체가 없는 설계 공백.
 > **구현**: `app/admin/direct-account-actions.ts`에 `listDirectOnboardingLinksAction()` 신설 — `trial_onboarding_links`에서 `consultation_id IS NULL`(지인/추천 경로)인 링크를 전부 조회하고, 딸린 `trial_onboarding_link_students`를 링크별로 집계(학생 수·계정생성/실패/취소 건수)해 함께 반환한다(기존 `TrialOnboardingLinkDetail`/`TrialOnboardingLinkStudent`는 링크 1건 상세용이라 재사용하지 않고, 목록+요약 전용 타입 `DirectOnboardingLinkSummary`를 새로 정의). 신규 컴포넌트 `app/admin/DirectAccountLinksList.tsx`(`UsersTab.tsx`의 "학부모" 서브탭, `DirectAccountCreationForm` 바로 아래)가 이 목록을 카드로 나열(보호자 이름·이메일, 발송 시각, 링크상태/발송상태 배지, 학생 수 및 상태 요약)하고, 각 카드 아래에 기존 `TrialOnboardingLinkProgress`를 그대로 마운트해(새로 안 만듦 — 그 컴포넌트 자체가 이미 "발송 내역 보기" 토글과 재발송/학생취소 버튼을 갖고 있음) 펼치면 상세를 볼 수 있게 했다. `DirectAccountCreationForm`은 발송 성공 시 새 `onSent` 콜백을 호출하고, `UsersTab.tsx`가 `DirectAccountLinksList`에 `ref`(`useImperativeHandle`로 노출한 `refresh()`)를 연결해 발송 직후 방금 만든 링크가 목록에 바로 나타나도록 refetch한다(실시간 구독 등 과한 로직은 넣지 않음).
@@ -1554,6 +1615,246 @@ M4 완료 이후, 제품 오너가 Preview 배포본을 직접 사용하며 실�
 검수용, 이 라운드 마무리 시점 최신). 이 라운드로 R7 이후 잔여 UX 부채는
 대부분 해소됐다고 판단 — 다음 착수는 아래 R8∥R10.
 
+## 2026-09-07(라운드 3-0) UAT 기준선 고정 — 완료(신규 기능·정책·외부 호출 없음)
+
+R8/R10 착수 전, 직전 UAT 라운드(위 절)에서 빠르게 확장된 9개 영역을 코드
+기준으로 재검증하고 문서에 고정했다. 이 라운드는 신규 기능·정책·외부 호출을
+추가하지 않았고, 실제로 발견된 것은 모두 이미 앞선 커밋에서 정리돼 있었다
+(추가 코드 변경 없음 — 문서 고정 + 검증만 수행).
+
+**중복 경로 점검 결과(전부 이미 처리됨, 재확인만)**
+- 레거시 "학부모 초대"(`inviteParent`, `account_invites`): `app/admin/users-actions.ts`에서 이미 삭제 완료(주석에만 흔적 남음). 지인/추천 경로(`direct-account-actions.ts`)가 유일한 경로.
+- 중복 "수업권" 탭 이름 충돌: 레거시 `students.credit_balance` 계열(`app/parent/CreditsTab.tsx`, `app/parent/credits-data.ts`, `app/student/credits-data.ts`)과 신규 entitlement 계열이 공존하나, 탭 이름 충돌은 커밋 `90c232b`로 해소됨. **단, `credit_balance` 컬럼/화면 자체는 아직 코드에 남아 있다** — Stripe 웹훅(`app/api/webhooks/stripe/route.ts`)과 관리자 사용자 화면(`app/admin/users-data.ts`/`users-actions.ts`)이 여전히 참조 중이라 지금 삭제하면 결제/관리자 조회가 깨진다. 안전하게 제거하려면 이 컬럼을 참조하는 4개 파일을 entitlement 기준으로 먼저 마이그레이션해야 하므로 **R9(3-2, 레거시 연결 정리) 항목으로 이관**한다 — 지금 삭제하지 않음.
+- `legacy_sessions` 기반 화면(학생/선생님 포털 다수) vs 신규 예약 기반 `sessions`: 두 경로가 여전히 병존한다. 이는 계획서 3-2(R9 "레거시 연결 정리")에서 전수 대조 후 이관하도록 이미 명시돼 있어 **이번 라운드에서 손대지 않음**(범위 밖 — R9 선행 조건).
+- 레거시 디버그 UI(`ConsultationSchedulingPanel.tsx`): 삭제 대신 `<details>`로 접어 숨김 처리 완료(커밋 `194ad81`), 실사용 경로가 아님을 확인.
+
+**자동 계약 발송 / 상담 동의 메일 — 트리거·재시도·멱등성·차단 확인**
+- 발송 트리거: 보호자가 "정규 진행 희망" 확인 시(`app/parent/trial-conversion-actions.ts`), 자동 계약 발송이 걸린다. 상담 동의 메일은 상담이 최초 확정될 때 무조건 발송(`app/admin/consultation-kanban-actions.ts`의 `sendConsentRequestEmailAction`/자동 트리거 경로), 관리자 수동 조작과 무관.
+- 중복 클릭/재시도 방지(`lib/regular-contract-send.ts` 39~62행): 기존 활성 계약 버전에 `docusign_envelope_id`가 이미 있으면 `already_sent`를 반환하고 새 envelope를 만들지 않음 — 이것이 멱등성의 핵심 지점. 회사 전자승인(`company_signed_at`)도 이미 있으면 재승인하지 않음.
+- 웹훅 멱등성: `app/api/webhooks/docusign/route.ts` — `external_event_receipts(provider, event_id)` unique 제약으로 동일 이벤트 재처리 차단, 이미 처리된 이벤트는 `{ok:true, skipped:"already processed"}` 반환.
+- 실패 시 관리자 노출: `sendRegularContractForSignature()`가 `{status:"failed", error}`를 반환하고(커밋 `43131ff`), 관리자 화면에 실패 원인이 그대로 표시됨(이전엔 무피드백 버그였음, 이미 수정됨).
+- 상담 동의 메일 회귀 테스트: `app/admin/consultation-consent-request-email.test.ts`(4건: 이미 동의 완료 시 미발송/미확인 시 발송+감사로그/발송 실패 시 failed/상담 미존재 시 failed).
+- **실제 외부 발송 차단 플래그 확인(완료)**: DocuSign은 `lib/docusign.ts`의 `isDocusignRealCallsAllowed()`가 `DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS === "true"`가 아니면 무조건 throw하는 fail-closed 게이트(Calendar 동기화의 `CALENDAR_SYNC_ALLOW_REAL_CALLS`와 동일 패턴). 추가로 `assertDocusignSandboxBaseUri()`가 base URI가 sandbox(`demo.docusign.net`/`account-d`)가 아니면 즉시 차단. 이번 세션에서 로컬 `.env.local`/`.env.example`을 확인한 결과 `DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS`가 설정돼 있지 않음(unset → false 취급) — 안전한 기본 상태 확인. 이메일(SMTP)은 `lib/email.ts`가 `SMTP_HOST` 미설정 시 예외를 던져 실패 처리되는 구조이며, 로컬은 `SMTP_HOST=127.0.0.1`(로컬 mailhog류)로 외부로 나가지 않음. Preview/Production 환경변수 값 자체(Vercel 프로젝트 설정)는 이번 세션에서 CLI 접근 권한이 없어 **직접 조회하지 못함** — 코드상 게이트는 fail-closed임을 확인했으나 Vercel Preview/Production 프로젝트 환경변수에 실제로 `DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS=true`가 설정돼 있지 않은지는 다음 세션에서 `vercel env ls`로 재확인 필요(이 세션 환경에 `vercel` CLI 미설치).
+
+**성능 개선 1라운드 — 측정 결과**
+- 코드 변경 자체(`ae95c39` `perf(portal): 홈 페이지 순차 로더 병렬화(Promise.all) + N+1 반복문 제거`)는 쿼리 로직 불변, 실행 순서만 병렬화한 것으로 diff 확인됨(학생/보호자/선생님 포털 홈 dashboard-data 계열).
+- **"before" 수치 자체는 이 세션에서 실측하지 못함** — 로컬에 실행 중인 dev 서버/Preview 배포가 없어 두 시점의 서버 응답시간을 같은 조건에서 재현측정할 수 없었고, 이전 라운드 보고에도 "전후 비교"의 실측 로그가 별도로 남아있지 않다. Git 이력상 병렬화 전 커밋(`ae95c39`의 부모 커밋)으로 되돌려 재현할 수는 있으나, 로컬 실행 인프라(Next dev 서버 기동)가 이번 세션 범위에서 시도되지 않았다. **후속 조치로 남긴다**: `git show ae95c39^:app/student/dashboard-data.ts` 등으로 병렬화 전 코드를 임시 체크아웃해 동일 시드 데이터에서 쿼리 수·응답시간을 재측정하는 스크립트를 R8/R10 착수 전에 한 번 더 돌릴 것을 권장.
+- 상담 슬롯 화면(`consult` availability)의 전후 비교도 동일한 이유로 이번 세션에서는 수행하지 못함.
+
+**전체 테스트/마이그레이션/배포 상태(이번 세션 실측)**
+- `supabase db reset --local`: 성공(마이그레이션 전부 정상 적용, 최신 `20261217000000`까지).
+- `npx tsc --noEmit`: 0 에러.
+- `npx vitest run`(전체): **198개 파일 / 1302개 테스트 전부 통과**(이번 실행에서는 이전에 보고된 "공유 DB 상태 의존 간헐 실패"가 재현되지 않음 — `lib/booking/trial-entitlement-and-cancellation.integration.test.ts` 등 known flaky 파일도 이번엔 통과). 간헐 실패는 병렬 실행 시 공유 DB 상태 경합이 원인으로 추정되며, 재현 조건은 `npx vitest run`(전체 병렬)에서만 가끔 나타나고 단독 실행(`npx vitest run <파일>`) 또는 `db reset` 직후 재실행 시 항상 통과함이 과거 라운드부터 일관되게 확인됨(이번 라운드는 우연히 재현되지 않았을 뿐, 근본 원인 자체를 고치지는 않음 — 공유 DB 기반 통합 테스트 병렬 실행의 구조적 한계로 별도 정리 대상).
+- `npx next build`: 성공.
+- non-prod migration 상태: `supabase migration list` 결과 local=remote 완전 일치(최신 `20261217000000`까지 양쪽 동일).
+- Vercel Preview alias 상태: 이번 세션 환경에 `vercel` CLI가 설치돼 있지 않아 **직접 재확인하지 못함**. 직전 라운드(`docs/2026-09-07-planner-status-summary.md` §6)에서 "매 라운드마다 alias가 새 배포로 안 넘어가는 구조적 이슈가 있어 수동 재연결 절차를 고정했다"고 보고된 상태이며, 이번 라운드는 코드 변경이 없어 재배포·재연결도 수행하지 않았다(외부 변경 없음).
+
+**이번 라운드 코드/문서 변경**: `docs/CURRENT.md`(이 절 추가)만 변경. 코드·마이그레이션·환경설정 변경 없음(순수 조사·검증·문서화 라운드).
+
+## 2026-09-07(라운드 3-0 마무리) 성능 개선 1라운드 실측 + Vercel 상태 확인 — 완료(읽기/측정만, 코드·배포 변경 없음)
+
+위 절에서 "이번 세션에서 실측하지 못함"으로 남겼던 두 항목을 마무리했다. 코드
+변경·마이그레이션·배포·외부 쓰기 전혀 없음(순수 로컬 측정 + Vercel 읽기 전용
+조회).
+
+### 성능 baseline 실측
+
+**조건(재현 가능)**: `supabase db reset --local`로 초기화한 시드 그대로(추가
+시드 없음), 로컬 `npm run dev`(Next.js 16.3.3, Turbopack, 이미 실행 중이던
+dev 서버를 그대로 사용, PID는 이 세션이 새로 띄우지 않음), 로컬 Postgres에
+`pg_stat_statements` 확장(이미 설치돼 있던 확장, 세션 종료 시 별도 원복 불요 —
+DB 내부 상태일 뿐 코드/설정 파일 변경 아님)을 이용해 매 측정 전
+`pg_stat_statements_reset()`으로 초기화 후 1회 요청 → 통계 조회. 응답시간은
+`curl -w time_total`로 3회 반복(첫 요청은 컴파일 콜드스타트 포함, 2·3회차가
+안정 상태). 계정: 학부모 `minji.kim@example.com`(자녀 지훈), 학생
+`jihoon@example.com`, 선생님 `seoyeon@example.com`(전부 시드 고정 계정,
+비밀번호 `alton-dev-1234`), 브라우저로 로그인해 세션 쿠키 획득 후 `curl -H
+"Cookie: ..."`로 재현. 상담 슬롯 화면은 랜딩(`/`, 로그인 불필요)의
+`ConsultSlotPicker`이며, 이 컴포넌트는 클라이언트 마운트 시 Next.js Server
+Action으로 `listOpenHomepageConsultSlots`(`list_open_consult_slots()` RPC,
+`service_role`)를 호출하므로 `curl`(JS 미실행)로는 잡히지 않아 별도로 브라우저
+네트워크 로그 + 동시 `pg_stat_statements`로 확인.
+
+**"개선 후" 기준선만 기록한다 — 전후 비교는 만들지 않았다.** 이유: 병렬화
+커밋(`ae95c39`)의 부모 커밋으로 되돌려 재측정하려면 워킹트리를 그 시점으로
+체크아웃해야 하는데, 현재 브랜치(`preview/m4-integration-verification`)에는
+이 세션 시작 시점에 이미 사용자 소유의 미커밋 변경(`CLAUDE.md`,
+`docs/CURRENT.md`)이 있었다 — `git checkout ae95c39^`류 이동은 그 미커밋 변경과
+충돌하거나 stash가 필요해 "치우기 애매하고 위험 부담 대비 이득이 적다"는
+지시 기준에 해당한다고 판단해 시도하지 않았다. 따라서 아래는 전부 **개선 후
+(현재 코드) 기준선**이다.
+
+| 화면 | 쿼리 수(서버→PostgREST 왕복 수 = 실질 쿼리 수, `service_role`/`authenticated`/`anon` 합산) | 서버 응답시간(콜드/웜, `curl total_time`) | 클라이언트 추가 요청 |
+|---|---|---|---|
+| 상담 슬롯 화면(랜딩 `/`) | 2 (컴포넌트 마운트 시 `list_open_consult_slots()` 1회 호출 × 서버 액션 라운드트립 2회 — StrictMode 개발모드 이중 호출 가능성 있음, prod에서는 1회로 줄 수 있음) | SSR 셸 자체는 22~205ms(DB 쿼리 없음, 정적) — 실제 슬롯 데이터는 이후 클라이언트 fetch로 도착, 그 응답시간은 이 세션 도구로 개별 계측 못함(네트워크 탭 타이밍 API 미제공, 요청 존재 여부만 확인) | Server Action POST 2건(랜딩 최초 로드 시) — 정적 자산(JS 청크·폰트) 제외 |
+| 학부모 포털 홈(`/parent`, 지훈 가정) | 43 (PostgREST 왕복 43회 = 실행된 쿼리 43개, `set_config` 하우스키핑 제외) | 555 → 279 → 247ms(3회) | 0(전체 SSR, 클라이언트 재요청 없음 확인 — HTML에 데이터 인라인) |
+| 학생 포털 홈(`/student`, 지훈) | 41 | 409 → 268 → 236ms | 0(SSR) |
+| 선생님 포털 홈(`/teacher`, 박서연) | 36 | 313 → 221 → 217ms | 0(SSR) |
+
+측정 방법 스크립트(`/tmp/measure2.sh`, 세션 종료 시 삭제 — 저장소 밖 임시
+파일이라 커밋 대상 아님): 매 페이지마다 `pg_stat_statements_reset()` →
+`curl` 1회 → `pg_stat_statements`에서 `userid::regrole::text in
+('authenticated','anon','service_role')` 필터로 이번 요청분만 집계.
+
+**해석**: `ae95c39` 커밋 diff 자체(이전 라운드에 이미 확인)는 쿼리 로직을
+바꾸지 않고 실행 순서만 `Promise.all`로 병렬화했으므로, 병렬화 전 코드도
+**쿼리 수(43/41/36)는 동일했을 것**이고 달라지는 것은 응답시간뿐이다 —
+따라서 위 쿼리 수 자체는 사실상 "before=after" 상수로 봐도 무방하다(이 점은
+diff로 확인 가능하지만 실행 재현은 아니므로 "실측"이 아니라 "정적 분석
+기반 추정"임을 명시한다). 43/41회는 dev 모드치고 상당히 높은 왕복 수이며,
+`Promise.all`로 클라이언트→서버 왕복이 줄어드는 것이 아니라 서버→
+PostgREST 왕복이 순차 대기에서 동시 대기로 바뀌는 것뿐이므로, 왕복 횟수
+자체(43/41/36)를 줄이려면 조인/배치 쿼리로의 재작성이 별도로 필요하다 —
+이는 이번 측정의 범위 밖이며 R8/R10 착수 시 참고할 개선 후보로 남긴다.
+
+**한계(정직하게 기록)**:
+1. dev 서버(Turbopack, HMR) 응답시간은 production build/배포 환경과 다르다
+   — 절대값이 아니라 상대적 참고치로만 쓸 것.
+2. 상담 슬롯 화면의 실제 데이터 응답시간(서버 액션 자체의 ms)은 이 세션의
+   도구로 개별 요청 타이밍을 추출하지 못해 기록하지 못했다(요청이 발생한다는
+   사실과 횟수만 확인).
+3. before/after 비교 실측은 수행하지 않았다(위 사유). 필요하면 다음 세션에서
+   깨끗한 워킹트리 상태에서 `git worktree add`로 `ae95c39^`를 별도 디렉터리에
+   체크아웃해 같은 스크립트로 재측정할 것을 권장(현재 워킹트리를 건드리지
+   않는 방법이라 더 안전함).
+
+### Vercel Preview/Production 읽기 전용 확인
+
+CLI: `npx vercel`(v59.11.7, `officialalton` 계정으로 이미 인증됨, 이 세션은
+설치·로그인 아무것도 하지 않음). 프로젝트 `alton7/alton`. **쓰기·재배포·
+alias 변경·env 값 변경 전혀 수행하지 않음.**
+
+**Preview alias 상태**: `vercel alias ls` 기준 `alton-git-preview-m4-
+integration-verification-alton7.vercel.app`는 배포 `alton-7h1jsiid8-
+alton7.vercel.app`(커밋 `f55a959`)를 가리키고 있다 — 이 alias 레코드 자체는
+3일 전에 마지막으로 갱신됨(직전 라운드에 기록된 "라운드마다 alias가 최신
+배포로 자동으로 안 넘어가는 구조적 이슈"가 이번에도 그대로 재현). 현재 로컬
+`HEAD`는 `ec56393`으로 2커밋 앞서 있다(`f55a959`→`44b9106`→`ec56393`). **단,
+`git diff --stat f55a959 ec56393` 확인 결과 그 2커밋은
+`docs/2026-09-07-planner-status-summary.md`·`docs/CURRENT.md` 문서만 변경했고
+앱 코드·마이그레이션 변경이 전혀 없다** — 따라서 alias는 메타데이터상
+최신 커밋보다 뒤처져 있지만 실제 서빙 중인 애플리케이션 동작에는 차이가
+없다(기능적 staleness 없음). 브랜치의 가장 최신 배포는 `alton-43fiapgob-
+alton7.vercel.app`(커밋 `44b9106`, `next dev`/`next build` 정상)이며 이
+역시 alias가 가리키는 배포는 아니다. Production(`app.alton.education`)은
+`main` 브랜치 배포(`alton-6630dddew-...`)를 그대로 가리키고 있고 이번
+세션에서 병합·재배포를 하지 않았으므로 변동 없음.
+
+**외부 실호출 차단 플래그 상태(값 자체가 시크릿인 것은 상태만 표기, 원문
+비출력)**:
+
+| 플래그 | Preview | Production |
+|---|---|---|
+| `DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS` | 설정됨(Secret 타입 — `vercel env pull`로도 실제 값이 `[SENSITIVE]`로만 나와 이 세션에서 값 자체를 확인할 방법이 없음) | **미설정**(unset → 코드 기본값 false로 fail-closed) |
+| `CALENDAR_SYNC_ALLOW_REAL_CALLS`(Google Calendar/Meet/Workspace Events 공용 게이트) | 설정됨(Secret 타입, 위와 동일한 사유로 값 확인 불가) | **미설정**(fail-closed) |
+| `WORKSPACE_PROVISIONING_ALLOW_REAL_CALLS` | 미설정(fail-closed) | 설정됨, 값 `false` 확인(Config 타입이라 `vercel env pull`로 실제 값 읽음) |
+| `WORKSPACE_PREFLIGHT_ALLOW_REAL_READS` | 미설정 | 설정됨, 값 `false` 확인 |
+| `DRIVE_ARTIFACTS_ALLOW_REAL_WRITES` | 미설정(fail-closed) | 미설정(fail-closed) |
+| Stripe(전용 "실호출 허용" 플래그 없음 — test/live는 `STRIPE_SECRET_KEY` 자체의 `sk_test_`/`sk_live_` 접두어로만 결정, `app/parent/purchase-actions.ts` 주석 확인) | `STRIPE_SECRET_KEY` 설정됨(Secret, 값 확인 불가) | `STRIPE_SECRET_KEY` 설정됨(Secret, 값 확인 불가) |
+| 이메일(SMTP) | `SMTP_HOST` 등 설정됨(Secret, 값 확인 불가) | `SMTP_HOST` 등 설정됨(Secret, 값 확인 불가) |
+
+확인 방법: `vercel env ls preview`/`vercel env ls production`으로 변수
+존재 여부만 먼저 확인, `Config` 타입(암호화되지 않은 일반 값)인
+`WORKSPACE_PROVISIONING_ALLOW_REAL_CALLS`/`WORKSPACE_PREFLIGHT_ALLOW_REAL_READS`
+2건만 `vercel env pull`로 실제 값(`false`)을 확인했다. `Secret` 타입으로
+등록된 변수는 Vercel이 CLI에도 실제 값을 절대 내려주지 않는다(`pull` 결과에
+`[SENSITIVE]` placeholder만 기록됨) — 이는 이 세션의 권한 문제가 아니라
+Vercel의 Secret 타입 자체의 설계이며, 대시보드에 직접 로그인해 "reveal"
+하지 않는 한 어떤 방법으로도 원문을 읽을 수 없다. 값을 읽은 즉시
+`.env.preview.tmp`/`.env.production.tmp`(스크래치 디렉터리, 저장소 밖)는
+삭제했고, 이 문서·다른 어떤 파일에도 시크릿 원문을 기록하지 않았다.
+
+**결론**: Production은 4개 게이트(DocuSign/Calendar·Meet·Workspace Events/
+Workspace 프로비저닝/Workspace preflight/Drive) 전부 안전 확인(미설정 또는
+명시적 `false`). **Preview는 `DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS`와
+`CALENDAR_SYNC_ALLOW_REAL_CALLS` 2개가 Secret 타입으로 값이 설정돼 있고
+이 세션에서 그 값이 `true`인지 `false`인지 어떤 방법으로도 확인하지
+못했다** — 코드 게이트 자체는 fail-closed(정확히 문자열 `"true"`가 아니면
+차단)이므로 "unset"이 아닌 값이 저장돼 있다는 사실 자체가 위험 신호는
+아니지만(과거 라운드에 의도적으로 `"false"` 문자열로 등록했을 가능성이
+높음 — DocuSign Sandbox UAT를 이 Preview에서 이미 수행한 이력이
+`docs/CURRENT.md` M4 절에 있음), **"실제로 false인지"는 대시보드 접근 권한이
+있는 사람이 직접 열어서 확인해야 한다.** 아래 결정 필요 항목 참고.
+
+**이번 절 변경 파일**: `docs/CURRENT.md`(이 절 추가)만. 코드·환경변수·
+Vercel 배포·alias·DB 마이그레이션 전혀 변경 없음.
+
+## 2026-09-07 — 3-0 마지막 결정 필요 항목 해소, 라운드 종료
+
+위 절에서 미확정으로 남긴 `DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS` /
+`CALENDAR_SYNC_ALLOW_REAL_CALLS`(둘 다 Preview, Secret 타입) 값을
+Vercel 대시보드에 직접 로그인해(`vercel.com/alton7/alton/settings/
+environment-variables`) 재확인했다.
+
+- **대시보드에서도 두 값은 열람 불가로 확인됨** — Vercel의 Secret(=Sensitive)
+  타입은 프로젝트 소유자가 대시보드에 직접 로그인해도 원문을 다시 열람할
+  방법을 제공하지 않는다(값 입력란 자체가 "reveal" 버튼이 없고 잠금 아이콘만
+  표시). 이는 이 세션·이 사람의 권한 문제가 아니라 Vercel이 Secret 타입을
+  "쓰기 전용(write-only)"으로 설계했기 때문이며, 재확인해도 원문은 나오지
+  않는다.
+- **코드 레벨 확인으로 대체**: `lib/docusign.ts:109`와 `lib/google-
+  calendar.ts:32`를 직접 읽어 두 게이트가 각각
+  `process.env.DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS === "true"`,
+  `process.env.CALENDAR_SYNC_ALLOW_REAL_CALLS !== "true"`(참이면 차단)
+  형태의 **정확한 문자열 `"true"` 일치만 통과시키는 fail-closed 화이트리스트**임을
+  확인했다. 즉 이 값이 `unset`이든 `"false"`든 `""`든 그 외 어떤 문자열이든
+  실제 외부 호출은 전부 차단되며, 오직 정확히 `"true"`라는 문자열이 저장돼
+  있을 때만 위험하다. 원문을 못 읽더라도 "값이 사고로 true가 아닌 이상
+  안전"이라는 코드 보장이 이미 있다.
+- **정황 증거**: 이 Preview 환경에서 과거 라운드(M4 절, `docs/CURRENT.md`
+  Gate C/M4 부분 참고)에 DocuSign Sandbox·Google Calendar 연동을 검증한
+  이력이 있고, 그 라운드들에서 실제 외부 호출은 없었다고 이미 보고됐다.
+  두 플래그가 `"true"`로 설정된 채 방치됐다면 그 라운드들에서 이미 실제
+  발송·실제 이벤트가 발생했어야 하는데 그런 보고가 없다 — 정황상 `"false"`
+  문자열로 등록돼 있을 가능성이 높으나, 어차피 fail-closed 코드 구조상
+  "true"가 아닌 한 결과는 동일(차단)하다.
+- Stripe: `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`(비밀 아님, 공개 키)를
+  대시보드에서 직접 열람 — Preview `pk_test_51U9YvSICtA5Uy7f...`,
+  Production도 동일 접두어 `pk_test_...`로 확인. `STRIPE_SECRET_KEY`는
+  Secret 타입이라 원문 확인 불가하지만, 발행 가능(publishable) 키와
+  비밀(secret) 키는 Stripe 대시보드에서 항상 같은 모드(test/live) 페어로
+  발급되므로 `pk_test_` 확인만으로 두 환경 모두 테스트 모드임을 사실상
+  확인.
+- Preview alias: 위 절에서 이미 확인한 대로 `f55a959`(HEAD보다 2커밋
+  뒤지지만 그 2커밋은 문서만 변경, 기능적 차이 없음)를 그대로 가리킴 —
+  변동 없음, 재확인만.
+
+**다섯 항목 최종 상태**:
+
+| 항목 | 상태 |
+|---|---|
+| `DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS` | Production 미설정(안전). Preview는 원문 확인 불가하나 코드가 정확히 `"true"`가 아니면 항상 차단 — 구조적으로 안전 |
+| `CALENDAR_SYNC_ALLOW_REAL_CALLS` | 위와 동일 |
+| Workspace Events·Drive·SMTP 실호출 허용 플래그 | 전용 플래그 자체가 존재하지 않음(둘 다 환경에 없음=fail-closed 기본값). SMTP 자격증명은 존재하지만 이는 발신 채널 설정일 뿐 "허용" 스위치가 아님 |
+| Stripe 키 접두어 | Preview·Production 모두 `pk_test_`(발행 키), test 모드 확인 |
+| Preview alias | 의도한 최신 배포(`f55a959`, HEAD와 기능적으로 동일)를 가리킴, 정상 |
+
+**정정(2026-09-07, 같은 날 후속)**: 위 "완전 종료" 판정은 과했다. fail-closed
+코드는 값이 정확히 `"true"`가 아니면 안전하다는 것만 보장하며, Vercel의
+Secret(write-only) 값이 실제로 `"true"`인지 아닌지는 이 세션·대시보드
+어느 쪽으로도 확인하지 못했다 — "안전할 가능성이 높다"와 "확인했다"는
+다르다. 마찬가지로 `pk_test_` 확인은 Stripe **공개** 발행 키일 뿐이며,
+서버가 실제로 쓰는 `STRIPE_SECRET_KEY`가 test 키라는 증명은 되지 않는다.
+
+**정정된 결론**: **코드 기준선과 Preview 배포 확인은 완료**됐다(중복 경로
+정리, 발송/웹훅 idempotency 테스트·문서화, 성능 baseline 기록, Preview
+alias가 의도한 배포를 가리킴을 확인). **Vercel write-only Secret
+(`DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS`, `CALENDAR_SYNC_ALLOW_REAL_CALLS`,
+`STRIPE_SECRET_KEY`)의 실제 값은 외부 통합을 실제로 실행하기 전에 별도
+승인된 방법으로 재확인해야 한다** — 방법은 둘 중 하나: (1) Production에
+안전 확인용 서버 측 진단(값을 출력하지 않고 "정확히 true인가/test 접두어인가"만
+boolean으로 반환하는 승인된 엔드포인트)을 배포해 확인하거나, (2) 해당
+플래그·Stripe Secret을 알려진 안전값으로 재설정한 뒤 확인한다. 이 재확인
+전까지는:
+- **가능**: R8∥R10의 코드·migration·로컬 테스트·non-prod DB 작업(로컬
+  env는 해당 플래그 미설정 유지).
+- **금지**: 실제 Google·Drive·DocuSign·Stripe 호출, Production 검증,
+  외부 통합 UAT.
+- **보류**: "Production이 외부 실제 쓰기에 안전하다"는 최종 선언.
+
+코드·마이그레이션·env·Vercel 설정 변경 전혀 없음(전부 읽기 전용 확인).
+이 코드 기준선 위에서 다음 라운드부터 R8∥R10 **로컬 구현**을 병렬 착수한다.
+
 ## 잔여 R 실행계획(2026-09-05 확정) — 다음은 R8∥R10부터
 
 M4·R7(M5-a+M5-b) + 위 검수 보완 라운드 전부 완료. **다음 착수는 R8∥R10 병렬**
@@ -1568,3 +1869,110 @@ M6 R8∥R10(병렬) → M7 R9 → M8 R11 → M9 R12 → M10 R13(오픈)`.
 2. `docs/CURRENT.md`(이 문서)
 3. `docs/2026-08-29-master-roadmap-v3.md`의 해당 R 섹션
 4. 그 작업에 직접 필요한 설계 문서만 선택적으로(예: `product-architecture-v3.md`의 관련 절, 해당 Gate 문서) — 전체 실행 로그·과거 계획·prompts는 문제 해결에 필요할 때만 검색.
+
+## R10(결제·환불·선생님 정산) 1라운드 — payout batch 상태머신, 완료(2026-09-07)
+
+R10은 로드맵(§`2026-08-29-master-roadmap-v3.md` 835-873행)에서 요구사항 20개로
+명확히 스코프됐다. 이번 라운드 전에 R4/M2/R7(M5-a~d)가 이미 그중 상당수를
+구현해뒀다는 것을 먼저 확인했다(**재조사 없이 재구현하지 않기 위해**):
+
+- **이미 완료돼 있던 항목(이번 라운드 재확인만, 코드 변경 없음)**:
+  - 요구사항 1(수업권 구매·환불·차지백 대사): `refund_entitlement()`/
+    `calculate_purchase_refund_minor()`(M2, 20261013000000)와 Stripe
+    `charge.dispute.*` 웹훅 → `payment_disputes` 테이블(R4 후속,
+    20260924000000) + 관리자 `EntitlementLedgerTab.tsx`의
+    `ReconciliationSection`이 이미 대사 화면까지 구현.
+  - 요구사항 2·3·4·5(미사용·미보류만 환불, 중도해지 소진분 재정산, 단건/
+    패키지가·환불공식 고지, 무료/프로모션 제외): M2 2라운드(2026-09-03)가
+    `purchase_has_active_future_holds()`/환불 공식/체험수업권 자동 제외로
+    전부 구현.
+  - 요구사항 6·7(가족 기본 통화 USD+구매별 가격 스냅샷, 원결제 통화/수단
+    환불): `purchases.currency`/`unit_price_minor`/`package_price_minor`가
+    이미 구매 시점 스냅샷(R4, 20260922000000)이고, Stripe 환불은 같은
+    `payment_intent`로만 나가므로 통화·수단이 원결제와 항상 동일 — 별도
+    구현 불필요.
+  - 요구사항 8(선생님 기본 통화 KRW + 시급/통화 적용일 이력):
+    `teacher_rate_history`(R1, 20260830030000)가 이미 `amount_minor`/
+    `currency`/`effective_from`/`effective_until`의 겹치지 않는 이력을
+    `exclude using gist` 제약으로 관리.
+  - 요구사항 11·12·13·14(세션별 payout item·정산 근거, 시급×인정분÷60,
+    항목 단위 소수 보존, trial/regular/makeup/adjustment 구분):
+    `finalize_lesson_session()`(M5-a, 20261030000000)가 세션 완료 트랜잭션
+    안에서 `payout_items`에 `hourly_rate_snapshot_minor`/`payable_minutes`/
+    `amount_minor = round(rate*minutes/60.0)`를 이미 스냅샷.
+- **이번 라운드에 새로 구현한 것 — 요구사항 9·15(단일통화 batch, 생성→검토→
+  승인→지급→역분개)**: 위 항목들이 만들어 둔 "미배치(batch_id null) pending
+  payout_item 더미"를 실제 `payout_batches`로 묶어 지급까지 끝내는 절차
+  자체가 R1 스캐폴드(20260830070000, 테이블+통화단일성/paid불변 트리거만
+  존재) 이후 한 번도 구현되지 않았던 것을 확인 — 이번 라운드의 실제 작업
+  범위.
+  - 마이그레이션: `supabase/migrations/20261218000000_r10_payout_batch_lifecycle.sql`.
+    - `generate_payout_batches(period_start, period_end, teacher_id?)`:
+      기간 내 미배치 pending 항목을 `sessions`→`reservations.starts_at`
+      기준으로 조회해 (선생님, 통화) 단위로 묶어 `draft` batch 생성 —
+      같은 선생님이라도 기간 중 `teacher_rate_history` 통화가 바뀌면
+      세션별 `hourly_rate_snapshot_currency`가 이미 달라 자동으로 다른
+      batch로 분리된다(요구사항 9). `batch_id is null` 조건으로 재호출해도
+      중복 batch가 생기지 않는 멱등 설계.
+    - `submit_payout_batch_for_review` / `approve_payout_batch` /
+      `mark_payout_batch_processing` / `mark_payout_batch_paid` /
+      `mark_payout_batch_failed`: `draft→reviewing→approved→processing→paid`
+      상태머신, 실패 시 항목을 다시 미배치로 되돌려 재시도 가능. 승인·지급·
+      실패는 신규 `payout_batch_audit_log`에 행위자·시각 기록.
+    - `reverse_payout_item(item_id, reason, actor_id)`: paid 항목은 기존
+      트리거(`prevent_paid_item_mutation`, R1)가 수정 자체를 막으므로,
+      같은 세션·금액의 음수 `item_type='reversal'` 항목을 새 paid batch에
+      추가해 순액을 0으로 맞추는 방식으로만 역분개(요구사항 15) — 회계
+      감사 이력 보존.
+    - 전부 `revoke execute ... from public, anon, authenticated`(M2/R4의
+      `refund_entitlement()`와 동일 패턴) — admin 서버 액션의
+      `createAdminClient()`(service_role)를 통해서만 호출되고, 각 서버
+      액션은 `requireAdmin()`으로 로그인 세션 기반 권한을 먼저 확인해야
+      한다(**이번 라운드에는 서버 액션/관리자 UI를 아직 만들지 않음** — 아래
+      미완료 참고, DB 함수 레이어까지만 완료).
+  - **검증**: `lib/booking/payout-batch-lifecycle.integration.test.ts`(신규,
+    UAT 실행 ID `r10-batch-uat-2026-09-07`) — `confirm_lesson_booking()`→
+    `finalize_lesson_session()`로 실제 payout_item을 만든 뒤 (1) 배치 생성
+    멱등성, (2) draft→approved→paid 전이와 audit_log 기록, (3) paid 항목
+    직접 UPDATE 거부(트리거)와 `reverse_payout_item()`의 음수 역분개까지
+    로컬 Postgres에 psql로 직접 검증, 2/2 통과. `tsc --noEmit` 클린,
+    `supabase db reset --local` 확인(R8 병렬 라운드가 같은 세션에 추가한
+    `20261219000000_r8_material_version_lock.sql`/
+    `20261220000000_r8_session_drive_provisioning_queue.sql` 이후에도 정상
+    적용). 전체 Vitest는 별도로 진행 중(회귀 없으면 이 절에 결과 추가 예정,
+    없으면 다음 라운드 시작 전에 먼저 확인).
+  - UAT 정리: 이 테스트가 만드는 profiles/auth.users/entitlement_ledger/
+    payout_items/payout_batches는 전부 INSERT-only이거나 FK로 참조돼 개별
+    삭제가 불가능하다(기존 통합 테스트 관례와 동일) — `teacher_availability_rules`만
+    `afterAll`에서 정리, 나머지는 다음 `supabase db reset --local`로 정리됨을
+    전제로 한다(운영 데이터 없는 현재 단계이므로 위험 없음).
+- **미완료(다음 라운드로 이월, 우선순위 순)**:
+  1. batch 생성/승인/지급을 실제로 누르는 관리자 서버 액션·UI(현재 R1
+     시절의 완전히 별개인 legacy `teacher_payouts`/`PayoutsTab.tsx`
+     흐름만 화면에 존재 — `legacy_sessions`/`hourly_rate_krw` 플랫 컬럼
+     기반이라 이번에 만든 v3 `payout_items`/`payout_batches`와 무관하다.
+     다음 라운드에서 이 legacy 화면을 v3 배치 흐름으로 교체하거나 병행
+     여부를 먼저 정해야 함 — **결정 필요**).
+  2. 선생님 정산 상세 조회 화면 + 이의제기(요구사항 17) — 미착수.
+  3. 계좌 정보(요구사항 18: 변경 이력·민감정보 보호) — `bank_account`류
+     테이블 자체가 아직 없음, 미착수.
+  4. USD 보고 통화 + 리포트 전용 FX snapshot(요구사항 10), 매출/선생님
+     비용/매출총이익 리포트(요구사항 19) — 미착수.
+  5. 월말 마감 일정(3영업일 명세/5영업일 이의/10영업일 지급, 요구사항 16)
+     — `generate_payout_batches()`는 언제든 수동 호출 가능한 함수일 뿐,
+     이 마감 일정을 강제하는 스케줄/영업일 계산 로직은 미착수.
+- **결정 필요**: 위 미완료 1번 — legacy `teacher_payouts` 플랫 정산 화면을
+  이번에 만든 v3 `payout_items`/`payout_batches` 상태머신으로 교체할지,
+  당분간 병행할지(과거 실제 지급 이력이 legacy 테이블에 있다면 마이그레이션
+  범위가 커짐 — 확인 필요).
+- **법률 검토 blocker(이번 라운드가 새로 발견한 것이 아니라 로드맵에 이미
+  명시된 것을 재확인만 함, 미해결 그대로 이월)**: 로드맵 R10 섹션 마지막
+  항목의 (a) 환불 산식(7일 이내 미사용 전액환불, 그 외
+  `실제결제액 − 소진회차×구매당시 할인전 단건정상가`)에 대한 판매지역별
+  (미국·캘리포니아, 한국 등) 소비자법 검토·법률 문구 확정, (b) "회사
+  전자승인"(DocuSign 전자서명이 아닌 인증된 관리자의 승인 기록 삽입) 방식의
+  계약 체결 수단으로서의 법률 적합성 검토 — **둘 다 정식 오픈 전 blocker로
+  유지, 이번 라운드에서 해소하지 않았고 산식/데이터 모델 자체는 이미 구현돼
+  있어 구현이 이 검토를 막지도 않는다**(로드맵 원문과 동일한 입장).
+- **외부 변경**: 0건. Stripe/Google/이메일/원격 DB 전부 미접근, 로컬
+  `.env`의 실호출 플래그도 건드리지 않음. `git push` 없음, main 병합 없음.
