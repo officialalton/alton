@@ -13,7 +13,6 @@ import {
   getConsultationCardDetailAction,
   getClosureDraftAction,
   closeConsultationAction,
-  sendConsentRequestEmailAction,
   type KanbanCard,
   type ConsultationCardDetail,
 } from "./consultation-kanban-actions";
@@ -309,14 +308,18 @@ function ConsultationCardDetailPanel({
           </div>
         )}
 
-        {/* 2026-09-07(제품 오너 실사용 중 발견) — 상담 결과 기록은 보호자 동의
-            확인(consent_confirmed_at)이 선행조건이다. 지금까지 그 동의 확인
+        {/* 2026-09-07(제품 오너 실사용 중 발견 → 정정) — 상담 결과 기록은 보호자
+            동의 확인(consent_confirmed_at)이 선행조건이다. 지금까지 그 동의 확인
             링크는 Calendar 초대 description에만 실려 있어, 보호자가 초대를
-            놓치면 관리자가 결과를 기록할 방법이 없었다. 동의 미확인 상태에서만
-            노출되는 별도 발송 버튼 — Calendar 초대 안의 기존 링크는 그대로
-            둔 채 같은 확인 화면으로 가는 링크를 이메일로 한 번 더 보낸다. */}
+            놓치면 관리자가 결과를 기록할 방법이 없었다. 관리자 수동 재발송
+            버튼 형태는 폐기하고, 상담이 최초로 확정될 때(lib/consultation/
+            calendar-sync.ts) 동의 요청 메일이 Calendar 초대와 별개 채널로
+            무조건 나가도록 정책을 바꿨다 — 이 화면에는 더 이상 별도 UI가
+            없다. 동의 미확인 카드는 상태 뱃지로만 안내한다. */}
         {!c.consent_confirmed_at && (c.status === "scheduled" || c.status === "completed") && (
-          <ConsentRequestButton consultationId={c.id} />
+          <div className="mb-3 text-[11.5px] font-bold text-grey-500 border border-grey-200 rounded-lg p-3">
+            보호자 동의 확인 대기 중 — 상담 결과 기록 전에 필요합니다 (동의 요청 메일은 상담 확정 시 자동 발송됨)
+          </div>
         )}
 
         {/* 2. 상담 일정 확정 단계 — 결과 기록 */}
@@ -480,51 +483,6 @@ function ConsultationCardDetailPanel({
           )}
         </div>
       </div>
-    </div>
-  );
-}
-
-/** 2026-09-07 — 동의 요청 메일 별도 발송 버튼. 이미 동의가 완료된 카드에는
- * 아예 렌더링되지 않는다(호출부에서 !c.consent_confirmed_at으로 이미 가드).
- * 그럼에도 서버가 already_confirmed를 돌려주는 경쟁 상황(다른 탭에서 방금
- * 확인)을 대비해 그 결과도 명확히 안내한다. */
-function ConsentRequestButton({ consultationId }: { consultationId: string }) {
-  const [busy, setBusy] = useState(false);
-  const [message, setMessage] = useState<string | null>(null);
-  const [isError, setIsError] = useState(false);
-
-  return (
-    <div className="mb-3 border border-grey-200 rounded-lg p-3">
-      <div className="text-[11.5px] font-bold text-grey-500 mb-1.5">
-        보호자 동의 확인 대기 중 — 상담 결과 기록 전에 필요합니다
-      </div>
-      <button
-        className={btnSecondary}
-        disabled={busy}
-        onClick={async () => {
-          setBusy(true);
-          setMessage(null);
-          setIsError(false);
-          try {
-            const result = await sendConsentRequestEmailAction(consultationId);
-            if (result.status === "sent") {
-              setMessage("동의 요청 메일을 발송했습니다.");
-            } else if (result.status === "already_confirmed") {
-              setMessage(`이미 동의가 완료됐습니다(${formatConsultTime(result.confirmedAt)}).`);
-            } else {
-              setIsError(true);
-              setMessage(result.error);
-            }
-          } catch (e) {
-            setIsError(true);
-            setMessage(e instanceof Error ? e.message : "발송에 실패했습니다.");
-          }
-          setBusy(false);
-        }}
-      >
-        동의 요청 메일 발송
-      </button>
-      {message && <p className={isError ? errText : "text-[12px] text-grey-500 mt-1.5"}>{message}</p>}
     </div>
   );
 }

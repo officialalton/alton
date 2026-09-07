@@ -89,6 +89,34 @@ async function issueConsentUrl(admin: ReturnType<typeof createAdminClient>, cons
 }
 
 /**
+ * 상담이 최초로 확정될 때 Calendar 초대와 별개 채널(이메일)로 동의 확인
+ * 링크를 무조건 한 번 더 보낸다(2026-09-07). Calendar description에 실린
+ * 기존 링크는 건드리지 않는다 — 같은 토큰 발급 RPC로 만든 별도 링크다.
+ */
+async function sendStandaloneConsentRequestEmail(params: {
+  admin: ReturnType<typeof createAdminClient>;
+  consultationId: string;
+  contactName: string;
+  contactEmail: string;
+  consentUrl: string;
+}): Promise<void> {
+  const html = `
+    <p>${params.contactName}님, 안녕하세요.</p>
+    <p>상담 진행을 위해 아래 안내·동의 확인 페이지에서 1회 확인해 주세요.</p>
+    <p><a href="${params.consentUrl}">${params.consentUrl}</a></p>
+    <p>이미 캘린더 초대 메일로 같은 안내를 받으셨다면 다시 확인하지 않으셔도 됩니다.</p>
+    <p>감사합니다.<br/>Alton Education</p>
+  `;
+  await sendEmail({ to: params.contactEmail, subject: "[Alton Education] 상담 전 동의 확인 안내", html });
+  await params.admin.from("consultation_status_events").insert({
+    consultation_id: params.consultationId,
+    previous_status: "scheduled",
+    new_status: "scheduled",
+    reason: "동의 요청 메일 자동 발송(상담 확정 시, 캘린더 초대와 별개 채널)",
+  });
+}
+
+/**
  * **(2026-09-03 정책 전환, 요구사항 6)** Calendar 네이티브 초대가 확정 일정의 기본
  * 전달 수단이 된 뒤에는, 그 초대가 성공적으로 나갔다면 같은 정보를 담은 커스텀 SMTP
  * 확인 메일을 또 보내지 않는다 — 이 함수는 Calendar 초대 자체가 반복 실패해
@@ -160,6 +188,21 @@ async function processOneConsultation(
     });
     googleEventId = created.googleEventId;
     meetLink = created.meetLink;
+
+    // 2026-09-07(제품 오너 지시 정정) — "재발송 버튼" 형태가 아니라, 상담이
+    // 최초로 확정될 때 동의 확인 안내 메일이 Calendar 초대와 별개로 무조건
+    // 나가도록 한다(Calendar 초대 description의 기존 링크는 그대로 둔다).
+    // Calendar 초대 발송 성패와 무관하게 시도하고, 실패해도 상담 확정 자체를
+    // 막지 않는다(다른 best-effort 후속 처리와 동일한 원칙) — 실패 시
+    // 관리자는 기존 admin/consultation-kanban-actions.ts의 수동 재발송
+    // 액션으로 여전히 대응할 수 있다.
+    try {
+      await sendStandaloneConsentRequestEmail({ admin, consultationId: row.id, contactName: row.contact_name, contactEmail: row.contact_email, consentUrl });
+    } catch (e) {
+      console.error(
+        JSON.stringify({ type: "m1_consult_consent_request_email_failed", consultationId: row.id, error: e instanceof Error ? e.message : String(e) })
+      );
+    }
   } else {
     // 요구사항 2: 시간 변경도 같은 이벤트를 PATCH하고 sendUpdates="all"로 Google
     // 네이티브 변경 알림을 보낸다 — 별도 커스텀 이메일을 추가로 보내지 않는다.

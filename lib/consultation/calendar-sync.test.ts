@@ -91,10 +91,15 @@ beforeEach(() => {
 });
 
 describe("Calendar 네이티브 초대(2026-09-03 정책 전환 — 요구사항 2·6)", () => {
-  it("최초 확정 시 attendeeEmail·sendUpdates=all로 Calendar 이벤트를 만들고, 성공하면 커스텀 이메일은 보내지 않는다", async () => {
+  it("최초 확정 시 attendeeEmail·sendUpdates=all로 Calendar 이벤트를 만들고, 별개 채널로 동의 요청 메일도 무조건 보낸다", async () => {
+    // 2026-09-07(정정) — 관리자 수동 재발송 버튼을 없애고, 상담이 최초로
+    // 확정될 때 동의 요청 메일을 Calendar 초대와 별개로 무조건 보내도록
+    // 정책을 바꿨다(Calendar 초대 description의 기존 링크는 그대로 유지).
     ensureMeetSpaceSmartNotesOnMock.mockResolvedValue(true);
+    const statusEventInsertMock = vi.fn().mockResolvedValue({ error: null });
     fromMock.mockImplementation((table: string) => {
       if (table === "consultations") return buildConsultationsTable();
+      if (table === "consultation_status_events") return { insert: statusEventInsertMock };
       throw new Error(`unexpected table ${table}`);
     });
 
@@ -104,7 +109,13 @@ describe("Calendar 네이티브 초대(2026-09-03 정책 전환 — 요구사항
     expect(createCalendarEventWithMeetMock).toHaveBeenCalledWith(
       expect.objectContaining({ attendeeEmail: "minji@example.com", sendUpdates: "all", description: expect.stringContaining("consent?token=") })
     );
-    expect(sendEmailMock).not.toHaveBeenCalled(); // Calendar 네이티브 초대가 성공했으므로 중복 발송 없음
+    expect(sendEmailMock).toHaveBeenCalledTimes(1);
+    const emailArgs = sendEmailMock.mock.calls[0][0] as { to: string; subject: string; html: string };
+    expect(emailArgs.to).toBe("minji@example.com");
+    expect(emailArgs.html).toContain("/consult/consent?token=");
+    expect(statusEventInsertMock).toHaveBeenCalledWith(
+      expect.objectContaining({ consultation_id: "consult-1" })
+    );
   });
 
   it("Smart Notes 확인·보정이 실패해도 Calendar 이벤트 생성 자체는 막히지 않는다(요구사항 3 정책)", async () => {

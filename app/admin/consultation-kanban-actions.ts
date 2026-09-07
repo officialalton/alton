@@ -10,11 +10,8 @@
 //   조회 전용 계층 + 종료(closure) 액션만 새로 추가한다.
 // - 선생님 배정 액션만 기존 위치(SubjectEnrollmentPanel)에 그대로 둔다.
 
-import { randomBytes } from "node:crypto";
 import { requireAdminOrCapability } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
-import { sendEmail, escapeHtml } from "@/lib/email";
-import { currentRequestOrigin } from "@/lib/request-origin";
 import {
   listConsultationsForAdmin,
   type ConsultationListItem,
@@ -327,89 +324,4 @@ export async function listClosedConsultationsAction(): Promise<{
   for (const item of items) countsByType[item.closureType]++;
 
   return { items, countsByType };
-}
-
-// =========================================================================
-// 2026-09-07 — "동의 요청 메일 발송" (제품 오너 실사용 중 발견): 관리자가 상담
-// 결과를 기록하려면 admin_record_consultation_outcome()이 보호자 동의 확인
-// (consultations.consent_confirmed_at)을 선행조건으로 요구한다(20261127000000
-// 마이그레이션 참고 — Smart Notes 활성화 상태는 더 이상 막지 않지만 동의
-// 확인은 여전히 필수 게이트다). 이 동의 확인 링크는 지금까지 상담 확정
-// Calendar 초대(lib/consultation/calendar-sync.ts issueConsentUrl())의
-// description에만 실려 있었다 — 보호자가 그 초대를 놓치거나 삭제하면 재확인할
-// 방법이 없었다. 이 액션은 같은 토큰 발급 RPC(issue_consult_consent_token)와
-// 같은 보호자 포털 확인 화면(app/consult/consent/page.tsx)을 그대로 재사용해
-// 별도 채널(이메일)로 동의 확인 링크만 다시 보낸다 — Calendar 초대 안의 기존
-// 링크는 건드리지 않는다(그건 그것대로 계속 유효).
-//
-// 실제 발송은 lib/email.ts의 기존 SMTP 경로(sendTrialOnboardingNoticeAction과
-// 동일 패턴)를 그대로 쓴다 — SMTP_HOST 미설정 환경(로컬 등)에서는 sendEmail()이
-// 곧바로 실패를 던지므로 "실패"로 응답한다(새로운 발송 인프라를 만들지 않음).
-// 발송 이력은 별도 테이블 없이 consultation_status_events(기존 INSERT-only
-// 감사 로그)에 상태 변화 없는(new_status=현재 status) 이벤트로 남긴다 —
-// admin_record_consultation_outcome()이 이미 같은 패턴(상태 불변 이벤트)을 쓴다.
-// =========================================================================
-
-export type SendConsentRequestEmailResult =
-  | { status: "sent" }
-  | { status: "already_confirmed"; confirmedAt: string }
-  | { status: "failed"; error: string };
-
-export async function sendConsentRequestEmailAction(consultationId: string): Promise<SendConsentRequestEmailResult> {
-  try {
-    const { actorUserId } = await requireAdminOrCapability(CONSULT_CAPABILITY);
-    const admin = createAdminClient();
-
-    const { data: row, error: rowError } = await admin
-      .from("consultations")
-      .select("id, contact_name, contact_email, consent_confirmed_at, status")
-      .eq("id", consultationId)
-      .maybeSingle();
-    if (rowError) throw new Error(rowError.message);
-    if (!row) throw new Error("상담을 찾을 수 없습니다.");
-
-    if (row.consent_confirmed_at) {
-      return { status: "already_confirmed", confirmedAt: row.consent_confirmed_at };
-    }
-
-    // Calendar 초대 경로(issueConsentUrl)와 동일한 토큰 발급 방식 — 상담 UUID
-    // 자체를 링크에 노출하지 않는다(요구사항 5와 동일 원칙).
-    const tokenPlain = randomBytes(32).toString("hex");
-    const { error: issueError } = await admin.rpc("issue_consult_consent_token", {
-      p_consultation_id: consultationId,
-      p_token_plain: tokenPlain,
-    });
-    if (issueError) throw new Error(`동의 확인 토큰 발급 실패: ${issueError.message}`);
-
-    const origin = await currentRequestOrigin();
-    const consentUrl = `${origin}/consult/consent?token=${tokenPlain}`;
-
-    const html = `
-      <p>${escapeHtml(row.contact_name)}님, 안녕하세요.</p>
-      <p>상담 진행을 위해 아래 안내·동의 확인 페이지에서 1회 확인해 주세요.</p>
-      <p><a href="${consentUrl}">${consentUrl}</a></p>
-      <p>이미 캘린더 초대 메일로 같은 안내를 받으셨다면 다시 확인하지 않으셔도 됩니다.</p>
-      <p>감사합니다.<br/>Alton Education</p>
-    `;
-
-    try {
-      await sendEmail({ to: row.contact_email, subject: "[Alton Education] 상담 전 동의 확인 안내", html });
-    } catch (e) {
-      const message = e instanceof Error ? e.message : String(e);
-      return { status: "failed", error: message };
-    }
-
-    await admin.from("consultation_status_events").insert({
-      consultation_id: consultationId,
-      previous_status: row.status,
-      new_status: row.status,
-      actor_profile_id: actorUserId,
-      reason: "동의 요청 메일 발송(관리자 수동, 캘린더 초대와 별개 채널)",
-    });
-
-    return { status: "sent" };
-  } catch (e) {
-    const message = e instanceof Error ? e.message : String(e);
-    return { status: "failed", error: message };
-  }
 }

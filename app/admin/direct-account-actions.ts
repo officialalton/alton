@@ -193,11 +193,15 @@ async function reissueDirectOnboardingLinkInternal(
   if (studentsError) throw new Error(studentsError.message);
   if (!students?.length) throw new Error("학생 명단을 찾을 수 없어 재발급할 수 없습니다.");
 
-  // 2026-09-07: 관리자가 취소(cancelled)한 학생은 재발급 대상에서 제외한다 —
-  // overrides.students는 남은(취소되지 않은) 학생 수와 순서가 일치해야 한다.
-  const activeStudents = students.filter((s) => s.status !== "cancelled");
+  // 2026-09-07(정정) — 처음에는 취소(cancelled)한 학생을 재발급 대상에서
+  // 영구 제외했으나, 그러면 한 번 취소한 학생은 같은 가족 링크로 다시는
+  // 보낼 수 없게 되는 버그였다(제품 오너 실사용 중 발견). 이미 계정이 생성된
+  // (created) 학생만 재발급 대상에서 뺀다 — pending/failed/cancelled는 모두
+  // 새 링크로 다시 편집·재발송할 수 있어야 한다(트리거된 새 링크에는 상태가
+  // 새로 pending으로 시작하므로 "취소"는 되돌릴 수 있는 선택이어야 한다).
+  const activeStudents = students.filter((s) => s.status !== "created");
   if (!activeStudents.length) {
-    throw new Error("취소되지 않은 학생이 없어 재발급할 수 없습니다.");
+    throw new Error("이미 계정이 생성되지 않은 학생이 없어 재발급할 수 없습니다.");
   }
 
   const guardianEmail = overrides?.guardianEmail?.trim() || link.guardian_email;

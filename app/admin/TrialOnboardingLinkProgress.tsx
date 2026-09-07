@@ -15,6 +15,7 @@ import {
   listTrialOnboardingLinkStudentsAction,
   retryFailedTrialOnboardingStudentAction,
   reissueTrialOnboardingLinkAction,
+  cancelTrialOnboardingLinkAction,
   type TrialOnboardingLinkDetail,
   type TrialOnboardingLinkStudent,
 } from "./trial-onboarding-actions";
@@ -47,6 +48,7 @@ export default function TrialOnboardingLinkProgress({ linkId }: { linkId: string
   const [loadError, setLoadError] = useState<string | null>(null);
   const [retryingId, setRetryingId] = useState<string | null>(null);
   const [reissuing, setReissuing] = useState(false);
+  const [cancelling, setCancelling] = useState(false);
   const [reissueFormOpen, setReissueFormOpen] = useState(false);
   const [reissueGuardianEmail, setReissueGuardianEmail] = useState("");
   const [reissueStudentEmails, setReissueStudentEmails] = useState<string[]>([]);
@@ -62,10 +64,11 @@ export default function TrialOnboardingLinkProgress({ linkId }: { linkId: string
       setDetail(d);
       setStudents(s);
       setReissueGuardianEmail(d.guardianEmail);
-      // 취소된 학생은 재발급 대상이 아니다(direct-account-actions.ts의
-      // reissueDirectOnboardingLinkAction이 취소되지 않은 학생 수와 순서가
-      // 일치해야 하므로 여기서도 동일하게 필터링한다).
-      setReissueStudentEmails(s.filter((row) => row.status !== "cancelled").map((row) => row.studentEmail));
+      // 2026-09-07(정정) — 이미 계정이 생성된(created) 학생만 재발급 대상에서
+      // 뺀다. 취소된(cancelled) 학생도 재발급 폼에 그대로 남겨서 값을 고쳐
+      // 다시 포함시킬 수 있게 한다 — 한 번 취소하면 영영 못 돌아오던 버그
+      // 수정(제품 오너 실사용 중 발견).
+      setReissueStudentEmails(s.filter((row) => row.status !== "created").map((row) => row.studentEmail));
     } catch (e) {
       setLoadError(e instanceof Error ? e.message : String(e));
     }
@@ -118,14 +121,42 @@ export default function TrialOnboardingLinkProgress({ linkId }: { linkId: string
               {detail.status === "pending" && !detail.redeemedAt && (
                 <div className="mt-1.5">
                   {!reissueFormOpen ? (
-                    <button
-                      type="button"
-                      data-testid="trial-onboarding-link-reissue-open"
-                      onClick={() => setReissueFormOpen(true)}
-                      className="text-[11px] font-bold px-2.5 py-1 rounded-lg border-[1.5px] border-grey-200 text-ink"
-                    >
-                      링크 폐기하고 재발급
-                    </button>
+                    <div className="flex gap-1.5">
+                      <button
+                        type="button"
+                        data-testid="trial-onboarding-link-reissue-open"
+                        onClick={() => setReissueFormOpen(true)}
+                        className="text-[11px] font-bold px-2.5 py-1 rounded-lg border-[1.5px] border-grey-200 text-ink"
+                      >
+                        링크 폐기하고 재발급
+                      </button>
+                      <button
+                        type="button"
+                        data-testid="trial-onboarding-link-cancel-all"
+                        disabled={cancelling}
+                        aria-busy={cancelling}
+                        onClick={async () => {
+                          if (!window.confirm("이 링크 전체를 취소할까요? 아직 계정이 생성되지 않은 학생 전원이 취소되고, 이 링크는 더 이상 유효하지 않게 됩니다.")) return;
+                          setCancelling(true);
+                          try {
+                            const result = await cancelTrialOnboardingLinkAction(linkId);
+                            if (result.status === "cancelled") {
+                              showToast("success", "링크 전체를 취소했습니다.");
+                              await load();
+                            } else {
+                              showToast("error", `전체 취소 실패 — ${result.error}`);
+                            }
+                          } catch (e) {
+                            showToast("error", `전체 취소 실패 — ${e instanceof Error ? e.message : String(e)}`);
+                          } finally {
+                            setCancelling(false);
+                          }
+                        }}
+                        className="text-[11px] font-bold px-2.5 py-1 rounded-lg border-[1.5px] border-grey-200 text-red disabled:opacity-50"
+                      >
+                        {cancelling ? "취소 중..." : "전체 취소"}
+                      </button>
+                    </div>
                   ) : (
                     <div className="border border-grey-200 rounded-lg px-2.5 py-2 bg-white space-y-1.5">
                       <div className="text-[11px] font-bold text-ink">
@@ -142,10 +173,13 @@ export default function TrialOnboardingLinkProgress({ linkId }: { linkId: string
                         />
                       </label>
                       {students
-                        .filter((s) => s.status !== "cancelled")
+                        .filter((s) => s.status !== "created")
                         .map((s, i) => (
                           <label key={s.id} className="block text-[10.5px] text-grey-500">
                             {s.studentName} 이메일
+                            {s.status === "cancelled" && (
+                              <span className="text-red font-bold"> (취소됨 — 재발급하면 이 값으로 다시 포함됩니다)</span>
+                            )}
                             <input
                               type="email"
                               value={reissueStudentEmails[i] ?? ""}
@@ -167,7 +201,7 @@ export default function TrialOnboardingLinkProgress({ linkId }: { linkId: string
                             if (!window.confirm("기존 링크를 폐기하고 새 링크를 발급·재발송할까요? 보호자가 계속 계정 생성에 실패하는 경우에만 사용하세요.")) return;
                             setReissuing(true);
                             try {
-                              const activeStudents = students.filter((s) => s.status !== "cancelled");
+                              const activeStudents = students.filter((s) => s.status !== "created");
                               const result = await reissueTrialOnboardingLinkAction(linkId, {
                                 guardianEmail: reissueGuardianEmail,
                                 students: activeStudents.map((s, i) => ({

@@ -849,6 +849,66 @@ export async function getTrialOnboardingLinkDetailAction(linkId: string): Promis
   };
 }
 
+// 2026-09-07(제품 오너 지적 — 학생 개별 취소만 있고 링크 전체를 한 번에
+// 취소하는 수단이 없었다) — 아직 보호자가 확인하지 않은(pending, !redeemed_at)
+// 온보딩 링크 전체를 취소한다. 이미 계정이 생성된(status='created') 학생은
+// cancel_trial_onboarding_link_student()가 거부하므로 건드리지 않고, 나머지
+// (pending/failed) 학생만 각각 취소 처리한 뒤 링크 자체를 revoked로 바꾼다.
+// 상담 연결 링크/지인·추천 링크(consultation_id null) 모두 동일하게 동작한다
+// (재발급과 달리 새 링크를 만들지 않으므로 consultation_id 분기가 필요 없다).
+export type CancelTrialOnboardingLinkResult =
+  | { status: "cancelled" }
+  | { status: "failed"; error: string };
+
+export async function cancelTrialOnboardingLinkAction(linkId: string): Promise<CancelTrialOnboardingLinkResult> {
+  try {
+    const { actorUserId } = await requireAdminOrCapability(CONSULT_CAPABILITY);
+    const admin = createAdminClient();
+
+    const { data: link, error: linkError } = await admin
+      .from("trial_onboarding_links")
+      .select("id, status, redeemed_at")
+      .eq("id", linkId)
+      .maybeSingle();
+    if (linkError) throw new Error(linkError.message);
+    if (!link) throw new Error("존재하지 않는 온보딩 링크입니다.");
+    if (link.status !== "pending" || link.redeemed_at) {
+      throw new Error("이미 보호자가 확인했거나 취소/만료된 링크는 전체 취소할 수 없습니다.");
+    }
+
+    const { data: students, error: studentsError } = await admin
+      .from("trial_onboarding_link_students")
+      .select("id, status")
+      .eq("link_id", linkId);
+    if (studentsError) throw new Error(studentsError.message);
+
+    for (const s of students ?? []) {
+      if (s.status === "pending" || s.status === "failed") {
+        const { error: cancelError } = await admin.rpc("cancel_trial_onboarding_link_student", {
+          p_link_student_id: s.id,
+          p_admin_id: actorUserId,
+          p_reason: "관리자 전체 취소",
+        });
+        if (cancelError) throw new Error(cancelError.message);
+      }
+    }
+
+    const { error: revokeError } = await admin.from("trial_onboarding_links").update({ status: "revoked" }).eq("id", linkId);
+    if (revokeError) throw new Error(revokeError.message);
+    await admin.from("trial_onboarding_link_events").insert({
+      link_id: linkId,
+      event_type: "revoked",
+      actor_id: actorUserId,
+      detail: { reason: "관리자 전체 취소" },
+    });
+
+    return { status: "cancelled" };
+  } catch (e) {
+    const message = e instanceof Error ? e.message : String(e);
+    return { status: "failed", error: message };
+  }
+}
+
 // 2026-09-06(실제 버그 수정 — matchbox512@snu.ac.kr 상담건) — 관리자가 발송
 // 내역 화면에서 "이미 보냈는데 계속 실패한다"고 판단했을 때 누르는 명시적
 // 재발급 액션. 기존 링크를 폐기하고 같은 학생 명단으로 새 링크를 발급·재발송한다
