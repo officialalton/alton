@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, type MouseEvent } from "react";
+import { useRef, useState, type MouseEvent } from "react";
 import { inviteStudent } from "./users-actions";
 import { updateUserBasicInfo } from "./user-edit-actions";
 import StudentDetailPanel from "./StudentDetailPanel";
 import TeacherDetailPanel from "./TeacherDetailPanel";
 import DirectAccountCreationForm from "./DirectAccountCreationForm";
+import DirectAccountLinksList, { type DirectAccountLinksListHandle } from "./DirectAccountLinksList";
 import type { AdminSubject } from "./subject-data";
 import type {
   CreditTransaction,
@@ -56,6 +57,7 @@ export default function UsersTab({
   const [history, setHistory] = useState(creditHistoryByStudent);
   const [openStudentId, setOpenStudentId] = useState<string | null>(null);
   const [openTeacherId, setOpenTeacherId] = useState<string | null>(null);
+  const directLinksListRef = useRef<DirectAccountLinksListHandle>(null);
 
   const openStudent = students.find((s) => s.id === openStudentId);
   const openTeacher = teachers.find((t) => t.id === openTeacherId);
@@ -151,7 +153,8 @@ export default function UsersTab({
               sendTrialOnboardingNoticeAction의 동일 클래스 버그와 같은 원인)로
               막 크래시가 났다. 서버 액션 inviteParent()는 users-actions.ts에서
               완전히 제거했다(다른 호출부 없음 확인됨). */}
-          <DirectAccountCreationForm />
+          <DirectAccountCreationForm onSent={() => directLinksListRef.current?.refresh()} />
+          <DirectAccountLinksList ref={directLinksListRef} />
         </>
       )}
 

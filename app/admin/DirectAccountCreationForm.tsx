@@ -19,7 +19,7 @@ function emptyRow(): StudentRow {
   return { name: "", email: "", grade: "", subject: "" };
 }
 
-export default function DirectAccountCreationForm() {
+export default function DirectAccountCreationForm({ onSent }: { onSent?: () => void } = {}) {
   const [open, setOpen] = useState(false);
   const [guardianEmail, setGuardianEmail] = useState("");
   const [guardianName, setGuardianName] = useState("");
@@ -158,6 +158,7 @@ export default function DirectAccountCreationForm() {
                   showToast("success", "계정 생성 안내 발송 완료");
                   reset();
                   setOpen(false);
+                  onSent?.();
                 }
               } catch (e) {
                 const message = e instanceof Error ? e.message : String(e);

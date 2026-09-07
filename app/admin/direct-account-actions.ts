@@ -239,6 +239,75 @@ async function reissueDirectOnboardingLinkInternal(
 // 2026-09-07(UAT 후속) — 잘못된 이메일 등으로 등록된 학생 1명을 이 온보딩
 // 링크에서 취소한다(더 이상 계정 생성 대상이 아니게 된다 — DB 함수
 // cancel_trial_onboarding_link_student()가 상태 검증·감사 로그를 담당).
+// 2026-09-07(발송 내역 목록 화면) — 실사용 중 발견된 설계 공백: 지인/추천
+// 발송 건은 상담 카드가 애초에 없어서, DirectAccountCreationForm은 발송
+// 성공 시 토스트만 띄우고 폼을 닫아버리면 그 발송 건을 다시 찾아볼 방법이
+// 없었다. TrialOnboardingLinkProgress는 이미 있지만 링크 하나의 상세만
+// 보여준다 — 그걸 펼칠 링크 목록 자체가 없었다. 여기서는
+// consultation_id가 null인(지인/추천 경로로 생성된) 링크를 전부 조회해
+// 목록 화면에 필요한 요약(보호자, 발송 시각/상태, 학생 수·상태 요약)을
+// 반환한다.
+export type DirectOnboardingLinkSummary = {
+  linkId: string;
+  guardianEmail: string;
+  guardianName: string;
+  status: "pending" | "redeemed" | "expired" | "revoked";
+  noticeDeliveryStatus: "pending" | "sent" | "failed";
+  noticeSentAt: string | null;
+  createdAt: string;
+  studentCount: number;
+  studentsCreated: number;
+  studentsFailed: number;
+  studentsCancelled: number;
+};
+
+export async function listDirectOnboardingLinksAction(): Promise<DirectOnboardingLinkSummary[]> {
+  await requireAdminOrCapability(CONSULT_CAPABILITY);
+  const admin = createAdminClient();
+
+  const { data: links, error: linksError } = await admin
+    .from("trial_onboarding_links")
+    .select("id, guardian_email, guardian_name, status, notice_delivery_status, notice_sent_at, created_at")
+    .is("consultation_id", null)
+    .order("created_at", { ascending: false });
+  if (linksError) throw new Error(linksError.message);
+  if (!links?.length) return [];
+
+  const linkIds = links.map((l) => l.id);
+  const { data: students, error: studentsError } = await admin
+    .from("trial_onboarding_link_students")
+    .select("link_id, status")
+    .in("link_id", linkIds);
+  if (studentsError) throw new Error(studentsError.message);
+
+  const summaryByLinkId = new Map<string, { total: number; created: number; failed: number; cancelled: number }>();
+  for (const s of students ?? []) {
+    const entry = summaryByLinkId.get(s.link_id) ?? { total: 0, created: 0, failed: 0, cancelled: 0 };
+    entry.total += 1;
+    if (s.status === "created") entry.created += 1;
+    else if (s.status === "failed") entry.failed += 1;
+    else if (s.status === "cancelled") entry.cancelled += 1;
+    summaryByLinkId.set(s.link_id, entry);
+  }
+
+  return links.map((l) => {
+    const summary = summaryByLinkId.get(l.id) ?? { total: 0, created: 0, failed: 0, cancelled: 0 };
+    return {
+      linkId: l.id,
+      guardianEmail: l.guardian_email,
+      guardianName: l.guardian_name,
+      status: l.status as DirectOnboardingLinkSummary["status"],
+      noticeDeliveryStatus: l.notice_delivery_status as DirectOnboardingLinkSummary["noticeDeliveryStatus"],
+      noticeSentAt: l.notice_sent_at,
+      createdAt: l.created_at,
+      studentCount: summary.total,
+      studentsCreated: summary.created,
+      studentsFailed: summary.failed,
+      studentsCancelled: summary.cancelled,
+    };
+  });
+}
+
 export async function cancelDirectOnboardingLinkStudentAction(
   linkStudentId: string,
   reason?: string

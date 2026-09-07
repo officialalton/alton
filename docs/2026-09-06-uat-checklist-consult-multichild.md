@@ -315,3 +315,13 @@
 - [x] **그래도 고친 것(방어 코드)**: `recordConsultationOutcome()`(`consultation-scheduling-actions.ts`)이 RPC 에러를 그대로 `throw`하던 것을 이 코드베이스 표준 규칙(`{ ok, error }`, 예외 전파 없음)에 맞춰 통일. 호출부 2곳(`ConsultationKanbanBoard.tsx` OutcomeForm, `ConsultationSchedulingPanel.tsx`) 모두 결과를 체크해 에러를 화면에 그대로 노출하도록 수정.
 - [x] 검증: `supabase db reset --local` 성공 / `npx tsc --noEmit` 0 에러 / `consultation-scheduling-actions.test.ts` 신규 3건(RPC 에러/성공/requireAdmin 예외 모두 `{ ok, error }`로 정규화) + `ConsultationKanbanBoard.test.tsx` 신규 2건(OutcomeForm 실패 시 예외 없이 에러 문구 렌더링, "Minified React error" 미노출) 추가 — 전부 통과. `npx vitest run`(전체) 첫 실행은 다른 두 세션과 로컬 DB를 공유하다 30건 실패(booking 도메인, teacher_buffer_violation 등 — 내 변경과 무관한 파일)했으나 `supabase db reset --local`로 DB를 정리한 뒤 재실행하니 196파일·1299건 전부 통과. `npx next build` 성공(32 라우트).
 - [ ] **미해결**: 제품 오너가 실제로 겪은 정확한 SQL 실패 원인은 특정하지 못했다. Preview(production 빌드)에서 동일 절차를 다시 밟아 재현되는지 확인 필요 — 재현되면 이번에 추가한 방어 코드 덕분에 실제 에러 메시지가 화면에 그대로 노출되므로 후속 조사가 훨씬 쉬워진다.
+
+### 2026-09-07 23차 세션 — 지인/추천 발송 내역 목록 화면 신설(설계 공백 해소)
+
+지인/추천으로 계정 생성 안내를 발송한 뒤, 그 발송 건을 나중에 다시 찾아볼 목록 화면 자체가 없던 설계 공백을 해소. 상세 근거는 `docs/CURRENT.md`의 "2026-09-07(추가 7)" 절 참고. 이 세션은 다른 두 세션이 동시 작업 중이던 `ConsultationKanbanBoard.tsx`/`consultation-kanban-actions.ts`를 전혀 건드리지 않았다.
+
+- [x] **목록 조회 서버 액션** — `app/admin/direct-account-actions.ts`에 `listDirectOnboardingLinksAction()` 신설. `trial_onboarding_links`에서 `consultation_id IS NULL`(지인/추천 경로)인 링크를 전부 조회하고, 딸린 `trial_onboarding_link_students`를 링크별로 집계(학생 수·계정생성/실패/취소 건수)해 `DirectOnboardingLinkSummary[]`로 반환.
+- [x] **목록 UI** — 신규 `app/admin/DirectAccountLinksList.tsx`(`UsersTab.tsx` "학부모" 서브탭, `DirectAccountCreationForm` 바로 아래)가 링크를 카드로 나열(보호자 이름·이메일, 발송 시각, 링크상태/발송상태 배지, 학생 수·상태 요약). 각 카드 아래에 기존 `TrialOnboardingLinkProgress`를 그대로 마운트(새로 안 만듦) — 그 컴포넌트의 기존 "발송 내역 보기" 토글로 펼치면 재발송/학생취소 버튼이 그대로 노출된다.
+- [x] **발송 직후 목록 갱신** — `DirectAccountCreationForm`에 `onSent` 콜백 추가, `UsersTab.tsx`가 `DirectAccountLinksList`의 `ref.refresh()`(`useImperativeHandle`)를 연결해 발송 성공 시 목록을 즉시 refetch(실시간 구독 등 과한 로직 없음).
+- [x] 검증: `supabase db reset --local` 성공(스키마 변경 없음) / `npx tsc --noEmit` 0 에러 / 신규 `app/admin/direct-account-links-list.integration.test.ts`(로컬 Postgres psql로 지인/추천 링크 3건 생성 후 목록 쿼리 모양을 재현 — 3건 전부 조회되고 학생 상태별 집계가 정확함을 확인) / `npx vitest run`(전체) — DB reset 직후 클린 1회 실행 기준 199파일 중 198개 통과·1306건 중 1305건 통과(실패 1건은 `lib/timezone-persistence.integration.test.ts`, 무관한 기존 known flaky). 같은 브랜치를 동시 작업 중인 다른 세션이 DB를 재설정하는 시점과 겹쳐 반복 실행하면 광범위한 무관 테스트가 함께 실패하는 것을 실측했으나(`supabase db reset --local` 직후 1회 실행 기준으로만 판단) 코드 문제는 아님. `npx next build` 성공.
+- [ ] 브라우저로 실제 Preview에서 지인/추천 발송 → 목록에 즉시 나타나는지, 목록에서 상세를 펼쳐 재발송/학생취소가 실제로 동작하는지 눈으로 확인하는 것은 이번 세션 범위 밖(실제 이메일 발송 금지 제약과도 맞물림) — Preview alias 갱신 후 직접 확인 권장.
