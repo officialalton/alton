@@ -6,7 +6,7 @@ import { createClient } from "@/utils/supabase/client";
 import { saveWhiteboardStrokes } from "./scratchpad-actions";
 import type { CanvasStroke } from "./material-data";
 import {
-  appendStrokeEvent,
+  appendStrokeEvents,
   appendClearAllEvent,
   replayAnnotationEvents,
 } from "./annotation-events-actions";
@@ -48,6 +48,9 @@ export default function WhiteboardCanvas({
   // currentSegRef가 마지막 세그먼트 하나만 들고 있어서 stroke가 여러 move tick으로
   // 이뤄지면 화면엔 전체가 그려졌지만 서버엔 마지막 조각만 저장돼 새로고침/재접속/
   // 다른 클라이언트에서는 꼬리만 남는 유실이 있었다.
+  // R9 corrective(최종 라운드) — 이 배열은 이제 "N번의 개별 append 호출"이 아니라
+  // pointerUp에서 단 한 번의 appendStrokeEvents(배열 전체) 호출로 보내진다(원자적
+  // 서버 트랜잭션, 아래 handlePointerUp 참고).
   const currentStrokeSegsRef = useRef<CanvasStroke[]>([]);
 
   const [drawMode, setDrawMode] = useState(false);
@@ -267,11 +270,12 @@ export default function WhiteboardCanvas({
       currentStrokeSegsRef.current = [];
       if (segs.length === 0) return;
       try {
-        // 스트로크를 이루는 모든 세그먼트를 순서대로 append한다(부분 실패 시 서버
-        // 상태와 어긋날 수 있으므로 실패하면 catch에서 replayAndRedraw로 되돌린다).
-        for (const seg of segs) {
-          await appendStrokeEvent(sessionId, toNormalized(seg));
-        }
+        // R9 corrective(최종 라운드) — 스트로크를 이루는 모든 세그먼트를 단일 RPC
+        // 호출로 한 번에 보낸다(DB가 하나의 트랜잭션 안에서 전부 append하거나 전부
+        // 실패시킨다 — appendStrokeEvents 구현 참고). 세그먼트마다 순차 호출하던
+        // 이전 방식은 (1) 세그먼트 수만큼 느려지고 (2) 중간 실패 시 반쪽 스트로크가
+        // 영구 남는 원자성 결함이 있었다.
+        await appendStrokeEvents(sessionId, segs.map(toNormalized));
         setSaved(true);
         setTimeout(() => setSaved(false), 1500);
       } catch (e) {

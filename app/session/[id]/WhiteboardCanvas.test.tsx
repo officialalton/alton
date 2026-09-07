@@ -5,9 +5,12 @@ import * as scratchpadActions from "./scratchpad-actions";
 import * as annotationActions from "./annotation-events-actions";
 
 // R9 — WhiteboardCanvas ↔ session_annotation_events 연결 테스트.
-// v3 세션: 그리기 → appendStrokeEvent 호출, replay가 저장된 이벤트로 상태를
-// 재구성, clear-all은 canClearAll(교사)만 성공. 레거시 세션: 기존 legacy 저장
-// 경로만 타고 새 이벤트 테이블에는 절대 쓰지 않는다.
+// v3 세션: 그리기 → appendStrokeEvents(스트로크 전체를 단일 호출로) 호출, replay가
+// 저장된 이벤트로 상태를 재구성, clear-all은 canClearAll(교사)만 성공. 레거시
+// 세션: 기존 legacy 저장 경로만 타고 새 이벤트 테이블에는 절대 쓰지 않는다.
+//
+// R9 corrective(최종 라운드) — appendStrokeEvent(단수, 세그먼트 1개씩 순차 호출)
+// 를 appendStrokeEvents(복수, 스트로크 전체 배열을 단일 원자적 RPC 호출)로 교체.
 
 vi.mock("./scratchpad-actions", () => ({
   saveWhiteboardStrokes: vi.fn().mockResolvedValue(undefined),
@@ -19,7 +22,7 @@ vi.mock("./annotation-events-actions", async () => {
   );
   return {
     ...actual,
-    appendStrokeEvent: vi.fn().mockResolvedValue(undefined),
+    appendStrokeEvents: vi.fn().mockResolvedValue(undefined),
     appendClearAllEvent: vi.fn().mockResolvedValue(undefined),
     replayAnnotationEvents: vi.fn().mockResolvedValue([]),
   };
@@ -68,7 +71,7 @@ beforeEach(() => {
 });
 
 describe("WhiteboardCanvas — v3 (session_annotation_events)", () => {
-  it("그리기 동작은 legacy 저장이 아니라 appendStrokeEvent를 호출한다", async () => {
+  it("그리기 동작은 legacy 저장이 아니라 appendStrokeEvents를 호출한다", async () => {
     render(
       <WhiteboardCanvas
         sessionId="s1"
@@ -83,15 +86,15 @@ describe("WhiteboardCanvas — v3 (session_annotation_events)", () => {
     fireEvent.click(screen.getByText("✏️ 필기 모드"));
     drawOneSegment();
 
-    await waitFor(() => expect(annotationActions.appendStrokeEvent).toHaveBeenCalledTimes(1));
-    expect(annotationActions.appendStrokeEvent).toHaveBeenCalledWith(
+    await waitFor(() => expect(annotationActions.appendStrokeEvents).toHaveBeenCalledTimes(1));
+    expect(annotationActions.appendStrokeEvents).toHaveBeenCalledWith(
       "s1",
-      expect.objectContaining({ tool: "pen" })
+      [expect.objectContaining({ tool: "pen" })]
     );
     expect(scratchpadActions.saveWhiteboardStrokes).not.toHaveBeenCalled();
   });
 
-  it("여러 pointer-move tick으로 이뤄진 스트로크는 세그먼트 전부가 appendStrokeEvent로 저장된다(Defect 1)", async () => {
+  it("여러 pointer-move tick으로 이뤄진 스트로크는 세그먼트 전부가 단일 appendStrokeEvents 호출로 한 번에 저장된다(Defect 1, R9 corrective 최종: 원자적 단일 요청)", async () => {
     render(
       <WhiteboardCanvas
         sessionId="s1"
@@ -106,22 +109,24 @@ describe("WhiteboardCanvas — v3 (session_annotation_events)", () => {
     fireEvent.click(screen.getByText("✏️ 필기 모드"));
     drawMultiSegmentStroke();
 
-    await waitFor(() => expect(annotationActions.appendStrokeEvent).toHaveBeenCalledTimes(3));
-    const calledSegs = vi
-      .mocked(annotationActions.appendStrokeEvent)
-      .mock.calls.map(([, seg]) => seg);
-    // 세그먼트 순서 그대로 3개 전부 저장됨 — 마지막 것만 남지 않는다. 각 세그먼트의
-    // 끝점(x1)이 다음 세그먼트의 시작점(x0)과 이어져 원래 경로(10,10→20,20→30,10→
-    // 15,25)가 끊김 없이 복원 가능함을 확인한다(좌표는 정규화되어 저장되므로 절대값이
-    // 아니라 연결 관계로 검증한다).
+    // 세그먼트마다 개별 호출(N번 왕복)이 아니라, 스트로크 전체가 단 한 번의
+    // 호출로 보내진다 — 성능(왕복 횟수)과 원자성(부분 실패 방지) 둘 다 이 한
+    // 번의 호출 안에서 DB 트랜잭션으로 보장된다.
+    await waitFor(() => expect(annotationActions.appendStrokeEvents).toHaveBeenCalledTimes(1));
+    const [, calledSegs] = vi.mocked(annotationActions.appendStrokeEvents).mock.calls[0];
+    expect(calledSegs).toHaveLength(3);
+    // 세그먼트 순서 그대로 3개 전부 한 배열로 저장됨 — 마지막 것만 남지 않는다. 각
+    // 세그먼트의 끝점(x1)이 다음 세그먼트의 시작점(x0)과 이어져 원래 경로(10,10→
+    // 20,20→30,10→15,25)가 끊김 없이 복원 가능함을 확인한다(좌표는 정규화되어
+    // 저장되므로 절대값이 아니라 연결 관계로 검증한다).
     expect(calledSegs[0].x1).toBeCloseTo(calledSegs[1].x0);
     expect(calledSegs[1].x1).toBeCloseTo(calledSegs[2].x0);
     expect(calledSegs[0].x0).not.toBeCloseTo(calledSegs[2].x1);
   });
 
-  it("스트로크 저장 실패 시 로컬에 낙관적으로 그린 스트로크를 서버 replay 기준으로 되돌린다(고스트 스트로크 방지)", async () => {
-    vi.mocked(annotationActions.appendStrokeEvent).mockRejectedValueOnce(new Error("network error"));
-    vi.mocked(annotationActions.replayAnnotationEvents).mockResolvedValue([]); // 서버엔 아무 것도 저장 안 됨
+  it("스트로크 저장 실패 시 로컬에 낙관적으로 그린 스트로크를 서버 replay 기준으로 되돌린다(고스트 스트로크 방지) — 다중 세그먼트도 전부 되돌아간다", async () => {
+    vi.mocked(annotationActions.appendStrokeEvents).mockRejectedValueOnce(new Error("network error"));
+    vi.mocked(annotationActions.replayAnnotationEvents).mockResolvedValue([]); // 서버엔 아무 것도 저장 안 됨(원자적 실패 — 부분 저장 없음)
 
     render(
       <WhiteboardCanvas
@@ -135,9 +140,12 @@ describe("WhiteboardCanvas — v3 (session_annotation_events)", () => {
       />
     );
     fireEvent.click(screen.getByText("✏️ 필기 모드"));
-    drawOneSegment();
+    drawMultiSegmentStroke(); // 3개 세그먼트 — 단일 호출 실패 시 전부(부분 아님) 되돌려져야 함
 
     // 실패하면 에러 문구가 뜨고, replayAnnotationEvents로 서버 기준(빈 상태)으로 재동기화된다.
+    // appendStrokeEvents는 1번만 호출됐다(세그먼트별 재시도/부분 호출 없음) — 실패한
+    // 그 한 번의 호출이 스트로크 전체(3개 세그먼트)를 대표하므로, 실패 = 전체 실패다.
+    expect(annotationActions.appendStrokeEvents).toHaveBeenCalledTimes(1);
     await waitFor(() => expect(screen.getByText(/network error/)).toBeInTheDocument());
     await waitFor(() => expect(annotationActions.replayAnnotationEvents).toHaveBeenCalledWith("s1"));
   });
@@ -225,7 +233,7 @@ describe("WhiteboardCanvas — 레거시(legacy_sessions.whiteboard_strokes)", (
     await waitFor(() => expect(scratchpadActions.saveWhiteboardStrokes).toHaveBeenCalled(), {
       timeout: 2000,
     });
-    expect(annotationActions.appendStrokeEvent).not.toHaveBeenCalled();
+    expect(annotationActions.appendStrokeEvents).not.toHaveBeenCalled();
     expect(annotationActions.appendClearAllEvent).not.toHaveBeenCalled();
     expect(annotationActions.replayAnnotationEvents).not.toHaveBeenCalled();
   });

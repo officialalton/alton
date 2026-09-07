@@ -1,18 +1,19 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { reconstructVisibleStrokes, type AnnotationEvent } from "./annotation-events-types";
 
-const { insertMock, orderMock, eqMock, selectMock, fromMock } = vi.hoisted(() => {
+const { insertMock, orderMock, eqMock, selectMock, fromMock, rpcMock } = vi.hoisted(() => {
   const insertMock = vi.fn();
   const orderMock = vi.fn();
   const eqMock = vi.fn(() => ({ order: orderMock }));
   const selectMock = vi.fn(() => ({ eq: eqMock }));
   const fromMock = vi.fn(() => ({ insert: insertMock, select: selectMock }));
-  return { insertMock, orderMock, eqMock, selectMock, fromMock };
+  const rpcMock = vi.fn();
+  return { insertMock, orderMock, eqMock, selectMock, fromMock, rpcMock };
 });
 
 vi.mock("@/lib/auth", () => ({
   requireUser: vi.fn().mockResolvedValue({
-    supabase: { from: fromMock },
+    supabase: { from: fromMock, rpc: rpcMock },
     user: { id: "u1" },
     profile: { role: "teacher", name: "선생님" },
   }),
@@ -23,27 +24,43 @@ describe("annotation-events-actions (R8 follow-up, session_annotation_events)", 
     vi.clearAllMocks();
     insertMock.mockResolvedValue({ error: null });
     orderMock.mockResolvedValue({ data: [], error: null });
+    rpcMock.mockResolvedValue({ data: [], error: null });
   });
 
-  describe("appendStrokeEvent", () => {
-    it("author_id는 항상 현재 로그인 사용자로 고정해서 stroke 이벤트를 append한다", async () => {
-      const { appendStrokeEvent } = await import("./annotation-events-actions");
-      await appendStrokeEvent("s1", { x0: 0.1, y0: 0.1, x1: 0.2, y1: 0.2, color: "#000", tool: "pen" });
+  // R9 corrective(최종 라운드) — 세그먼트마다 개별 insert를 순차 호출하던
+  // appendStrokeEvent(단수) 루프는 (1) 세그먼트 수만큼 느리고 (2) 중간 실패 시
+  // 반쪽 스트로크가 남는 원자성 결함이 있어, 스트로크 전체를 단일 RPC 호출
+  // (append_stroke_events, DB 트랜잭션으로 원자적 append)로 보내는
+  // appendStrokeEvents(복수)로 교체됐다.
+  describe("appendStrokeEvents", () => {
+    it("author_id를 클라이언트가 넘기지 않고, 세그먼트 배열 전체를 단일 RPC 호출로 append한다", async () => {
+      const { appendStrokeEvents } = await import("./annotation-events-actions");
+      const segs = [
+        { x0: 0.1, y0: 0.1, x1: 0.2, y1: 0.2, color: "#000", tool: "pen" as const },
+        { x0: 0.2, y0: 0.2, x1: 0.3, y1: 0.3, color: "#000", tool: "pen" as const },
+      ];
+      await appendStrokeEvents("s1", segs);
 
-      expect(fromMock).toHaveBeenCalledWith("session_annotation_events");
-      expect(insertMock).toHaveBeenCalledWith({
-        session_id: "s1",
-        author_id: "u1",
-        event_type: "stroke",
-        payload: { x0: 0.1, y0: 0.1, x1: 0.2, y1: 0.2, color: "#000", tool: "pen" },
+      expect(rpcMock).toHaveBeenCalledTimes(1);
+      expect(rpcMock).toHaveBeenCalledWith("append_stroke_events", {
+        p_session_id: "s1",
+        p_segments: segs,
       });
+      // author_id는 DB 함수 내부에서 auth.uid()로 고정되므로 클라이언트가 넘기지 않는다.
+      expect(insertMock).not.toHaveBeenCalled();
     });
 
-    it("insert 에러는 그대로 throw한다", async () => {
-      insertMock.mockResolvedValue({ error: { message: "boom" } });
-      const { appendStrokeEvent } = await import("./annotation-events-actions");
+    it("세그먼트가 빈 배열이면 RPC를 호출하지 않는다", async () => {
+      const { appendStrokeEvents } = await import("./annotation-events-actions");
+      await appendStrokeEvents("s1", []);
+      expect(rpcMock).not.toHaveBeenCalled();
+    });
+
+    it("RPC 에러는 그대로 throw한다(호출자가 잡아 replayAndRedraw로 재동기화)", async () => {
+      rpcMock.mockResolvedValue({ data: null, error: { message: "boom" } });
+      const { appendStrokeEvents } = await import("./annotation-events-actions");
       await expect(
-        appendStrokeEvent("s1", { x0: 0, y0: 0, x1: 0, y1: 0, color: "#000", tool: "pen" })
+        appendStrokeEvents("s1", [{ x0: 0, y0: 0, x1: 0, y1: 0, color: "#000", tool: "pen" }])
       ).rejects.toThrow("boom");
     });
   });

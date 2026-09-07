@@ -13,16 +13,23 @@ import type { StrokePayload, AnnotationEvent } from "./annotation-events-types";
 // "use server" 파일은 async 함수만 export할 수 있어(Next.js 제약), 타입과 순수 함수
 // reconstructVisibleStrokes()는 ./annotation-events-types.ts로 분리했다.
 
-// 정규화 좌표(0.0~1.0)로 받은 stroke를 이벤트로 append한다. author_id는 항상
-// 현재 로그인 사용자로 고정한다 — RLS도 author_id = auth.uid()를 강제하므로
-// 다른 사용자 명의로 기록을 시도하면 DB에서 한 번 더 막힌다(belt-and-suspenders).
-export async function appendStrokeEvent(sessionId: string, stroke: StrokePayload): Promise<void> {
-  const { supabase, user } = await requireUser();
-  const { error } = await supabase.from("session_annotation_events").insert({
-    session_id: sessionId,
-    author_id: user.id,
-    event_type: "stroke",
-    payload: stroke,
+// R9 corrective(최종 라운드, 2026-09-07) — 한 스트로크를 이루는 세그먼트 전부를
+// 단일 RPC 호출(append_stroke_events, supabase/migrations/
+// 20261227000000_r9_atomic_append_stroke_events.sql)로 보낸다. 이전에는
+// 세그먼트마다 별도 insert를 순차 호출했는데(appendStrokeEvent 루프), 이는
+// (1) 세그먼트 수만큼 순차 왕복이 생겨 느리고 (2) 중간 호출이 실패하면 앞쪽
+// 세그먼트는 이미 커밋되고 뒤쪽은 안 돼 "반쪽 스트로크"가 영구 남는 원자성
+// 결함이 있었다. DB 함수가 하나의 트랜잭션 안에서 전부 append하거나 전부
+// 실패시키므로, 이 함수 호출은 성공/실패 둘 중 하나만 있고 부분 성공이 없다.
+// author_id는 함수 내부에서 auth.uid()로 고정한다(클라이언트가 넘기지 않음) —
+// RLS도 author_id = auth.uid()를 강제하므로 다른 사용자 명의로 기록을 시도하면
+// DB에서 한 번 더 막힌다(belt-and-suspenders).
+export async function appendStrokeEvents(sessionId: string, segments: StrokePayload[]): Promise<void> {
+  if (segments.length === 0) return;
+  const { supabase } = await requireUser();
+  const { error } = await supabase.rpc("append_stroke_events", {
+    p_session_id: sessionId,
+    p_segments: segments,
   });
   if (error) throw new Error(error.message);
 }

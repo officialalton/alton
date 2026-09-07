@@ -2566,3 +2566,87 @@ admin을 이미 포함하고 있었음(마이그레이션 추가 불필요, 확�
   클린, 전체 `vitest run --no-file-parallelism` + `next build` 최종 1회 확인.
 - 외부 변경: 0건. Stripe/Mercury/Wise/Google/이메일 등 실제 외부 API 호출 없음,
   Vercel 배포/`git push`/main 병합 없음, 로컬 커밋만.
+
+## 2026-09-07 — R9 corrective(최종 라운드): 스트로크 저장 원자성/성능 결함 수정
+
+바로 위 R9 corrective(`7d6c262`)에서 "여러 세그먼트를 순서대로 전부 append"까지는
+고쳤지만, 그 append가 여전히 `for (const seg of segs) { await appendStrokeEvent(...) }`
+로 세그먼트마다 별도 DB 호출을 순차 실행하는 구조였다. 이 라운드는 그 호출 방식
+자체를 고친다 — 개별 행 스키마나 replay/재구성 로직은 건드리지 않는다.
+
+**결함**
+1. 성능 — 세그먼트 수만큼 순차 왕복(round-trip)이 생겨 스트로크가 길어질수록
+   저장이 느려진다.
+2. 원자성 — 루프 중간 호출이 실패하면(네트워크 순단, 서버 거부) 그 앞의
+   세그먼트는 이미 커밋되고 뒤는 커밋되지 않은 "반쪽 스트로크"가 영구
+   남는다. `session_annotation_events`는 append-only(UPDATE/DELETE 트리거로
+   전면 차단)라 되돌릴 수도 없다. 실패 시 `replayAndRedraw()`는 서버에 이미
+   남은 앞쪽 세그먼트를 다시 그릴 뿐 지우지 못해, "전부 성공 또는 전부 실패"가
+   보장되지 않았다.
+
+**수정**
+- DB: `supabase/migrations/20261227000000_r9_atomic_append_stroke_events.sql`에
+  `append_stroke_events(p_session_id uuid, p_segments jsonb) returns setof
+  session_annotation_events` 함수를 추가했다. 스트로크 세그먼트 배열 전체를
+  jsonb 배열로 받아, 함수 호출 하나(=하나의 트랜잭션) 안에서 `with ordinality`로
+  입력 순서를 보존하며 한 행씩 INSERT한다. 도중에 필수 필드(x0,y0,x1,y1,color,tool)
+  가 빠진 세그먼트를 만나면 exception을 raise하는데, plpgsql 함수 호출 전체가
+  하나의 문장이라 예외를 잡지 않으면 그 호출에서 이미 INSERT한 행까지 전부
+  자동 롤백된다(all-or-nothing). `SECURITY INVOKER`(기본값, 명시 안 함)라
+  호출자 권한 그대로 실행되어 기존 RLS INSERT 정책("세션 당사자 기록, clear_all은
+  선생님만")이 매 행 INSERT마다 그대로 적용된다 — 이 함수로 RLS를 우회할 방법은
+  없다. seq(bigserial)는 함수 내부 루프가 입력 순서대로 한 행씩 순차 INSERT하므로
+  세그먼트 순서와 동일한 순서로 단조 증가 배정된다.
+- 서버 액션(`annotation-events-actions.ts`): 세그먼트 하나를 append하던
+  `appendStrokeEvent(sessionId, stroke)`를 세그먼트 배열 전체를 위 RPC 한 번으로
+  보내는 `appendStrokeEvents(sessionId, segments)`로 교체. author_id는 여전히
+  클라이언트가 넘기지 않고 DB 함수 내부에서 `auth.uid()`로 고정(belt-and-suspenders
+  유지).
+- 클라이언트(`WhiteboardCanvas.tsx`): `handlePointerUp`의
+  `for (const seg of segs) { await appendStrokeEvent(...) }` 루프를
+  `await appendStrokeEvents(sessionId, segs.map(toNormalized))` 단일 호출로 교체.
+  실패 시 `replayAndRedraw()` → 실패 메시지 표시 순서(R9 corrective 1차에서 고친
+  순서)는 그대로 유지 — 이제 이 호출 자체가 원자적이므로 실패하면 서버에는
+  이 스트로크의 세그먼트가 정말 0개 저장되고, replay가 그 사실을 정확히
+  반영한다(부분 저장된 유령 세그먼트가 있을 수 없음).
+- `currentStrokeSegsRef`(세그먼트 누적 배열), `reconstructVisibleStrokes()`,
+  개별 `stroke` 이벤트 행의 payload 모양(x0,y0,x1,y1,color,tool)은 전혀
+  바꾸지 않았다 — 바뀐 것은 "N번의 개별 호출"을 "1번의 원자적 호출"로 보내는
+  경로뿐이다.
+
+**테스트**
+- `annotation-events-actions.test.ts`: `appendStrokeEvents`가 세그먼트 배열
+  전체를 `supabase.rpc("append_stroke_events", ...)` 한 번으로 호출하는지,
+  빈 배열이면 호출 자체를 생략하는지, RPC 에러를 그대로 throw하는지 검증.
+- `WhiteboardCanvas.test.tsx`: 3개 세그먼트 스트로크가 `appendStrokeEvents`를
+  정확히 1회(세그먼트별 N회가 아님) 호출하고 배열 순서가 그대로 유지되는지,
+  그 1회 호출이 실패하면(다중 세그먼트 포함) `replayAndRedraw()`로 재동기화되고
+  실패 메시지가 뜨는지 검증.
+- `session-annotation-events.integration.test.ts`(실제 로컬 Postgres, 신규
+  `describe("append_stroke_events RPC — ...")` 블록):
+  - 순서 보존: 3개 세그먼트를 한 번에 보내면 반환된 행과, 이어서 다시 읽은
+    replay 조회(seq 오름차순) 양쪽 모두 입력 순서 그대로(`seg-a, seg-b, seg-c`)
+    나오는지 확인 — SSR/mount replay와 두 번째 클라이언트의 Realtime 재구성이
+    같은 `select ... order by seq` 경로를 타므로 이 조회 하나로 두 경로를
+    대표해서 검증했다.
+  - 부분 실패 원자성: 5개 세그먼트 중 3번째에 `tool` 필드를 빠뜨려 함수 내부
+    검증에서 실패하도록 만들고, 호출 전체가 exception을 던지며 세션의
+    이벤트 개수가 호출 전후로 변하지 않음(0건 잔존, `atomic-a`/`atomic-b`
+    포함해 전부 사라짐)을 확인.
+  - 세션과 무관한 제3자 선생님이 호출하면 RLS로 전체가 거부되고 0건 저장.
+  - 빈 배열/비배열 jsonb를 보내면 즉시 거부되고 0건 저장.
+- {student, teacher, admin} × clear_all 권한 매트릭스(R9 corrective 1차에서
+  추가한 기존 테스트, `describe("clear_all 권한 role matrix ...")`, `ScratchpadTab.test.tsx`
+  admin 버튼 노출 케이스 포함)는 이번 라운드가 clear-all 로직을 전혀 건드리지
+  않았음을 그대로 재실행해 확인 — 전체 스위트 1회 실행에 포함되어 회귀 없이
+  통과.
+- 검증: `supabase db reset --local` 성공(마이그레이션 순서 문제 없음,
+  `20261227000000_r9_atomic_append_stroke_events.sql`까지 정상 적용), 영향받은
+  4개 파일(`session-annotation-events.integration.test.ts`,
+  `WhiteboardCanvas.test.tsx`, `annotation-events-actions.test.ts`,
+  `ScratchpadTab.test.tsx`) 개별 실행 39/39 통과, `npx tsc --noEmit` 클린,
+  전체 `vitest run --no-file-parallelism` 207 files / 1379 tests 전부 통과,
+  `next build` 성공(정적 페이지 생성까지 완료, 에러 없음).
+- 외부 변경: 0건. Stripe/Mercury/Wise/Google/이메일 등 실제 외부 API 호출 없음,
+  Vercel 배포/`git push`/main 병합 없음, 로컬 커밋만. `R10/payout` 관련 파일은
+  건드리지 않았다.

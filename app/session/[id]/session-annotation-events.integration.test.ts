@@ -204,6 +204,95 @@ describe("session_annotation_events — append/replay (실제 DB)", () => {
     ).toThrow(/row-level security|policy/i);
   });
 
+  // R9 corrective(최종 라운드, 2026-09-07) — append_stroke_events(uuid, jsonb) RPC
+  // (supabase/migrations/20261227000000_r9_atomic_append_stroke_events.sql)를 실제
+  // DB로 검증한다: 순서 보존, 원자적 all-or-nothing(부분 실패 시 0건 잔존).
+  describe("append_stroke_events RPC — 스트로크 전체를 단일 호출로 원자적 append", () => {
+    function callAppend(actorId: string, segmentsJson: string): string {
+      return asUser(
+        actorId,
+        `select payload->>'label' from append_stroke_events('${sessionId}'::uuid, '${segmentsJson}'::jsonb) order by seq asc;`
+      );
+    }
+
+    function countForSession(): number {
+      return Number(
+        asUser(
+          TEACHER_ID,
+          `select count(*) from session_annotation_events where session_id = '${sessionId}';`
+        )
+      );
+    }
+
+    it("여러 세그먼트를 한 번에 보내면 입력 순서 그대로 seq 오름차순으로 append된다(순서 보존)", () => {
+      const before = countForSession();
+      const segments = JSON.stringify([
+        { x0: 0.1, y0: 0.1, x1: 0.2, y1: 0.2, color: "#1A1A1A", tool: "pen", label: "seg-a" },
+        { x0: 0.2, y0: 0.2, x1: 0.3, y1: 0.1, color: "#1A1A1A", tool: "pen", label: "seg-b" },
+        { x0: 0.3, y0: 0.1, x1: 0.15, y1: 0.25, color: "#1A1A1A", tool: "pen", label: "seg-c" },
+      ]).replace(/'/g, "''");
+
+      const rows = callAppend(TEACHER_ID, segments);
+      expect(rows.split("\n")).toEqual(["seg-a", "seg-b", "seg-c"]);
+
+      // replay 경로(seq 오름차순 전체 조회)로도 같은 순서가 그대로 재구성됨을 확인 —
+      // SSR/mount replay와 두 번째 클라이언트의 realtime 재구성이 동일한 경로를
+      // 타므로, 이 select 하나로 두 경로 모두를 대표해서 검증한다.
+      const replayed = asUser(
+        TEACHER_ID,
+        `select payload->>'label' from session_annotation_events where session_id = '${sessionId}' and payload->>'label' like 'seg-%' order by seq asc;`
+      );
+      expect(replayed.split("\n")).toEqual(["seg-a", "seg-b", "seg-c"]);
+      expect(countForSession()).toBe(before + 3);
+    });
+
+    it("부분 실패 시(중간 세그먼트 payload 모양이 깨짐) 전체가 롤백되어 0건도 저장되지 않는다(원자성)", () => {
+      const before = countForSession();
+      // 5개 중 3번째(atomic-c)가 필수 필드(tool)를 빠뜨려 함수 내부 검증에서
+      // exception이 발생한다 — 앞서 이미 만들어졌을 atomic-a/atomic-b를 포함해
+      // 이 호출 전체(하나의 트랜잭션)가 롤백되어야 한다.
+      const segments = JSON.stringify([
+        { x0: 0.1, y0: 0.1, x1: 0.2, y1: 0.2, color: "#1A1A1A", tool: "pen", label: "atomic-a" },
+        { x0: 0.2, y0: 0.2, x1: 0.3, y1: 0.1, color: "#1A1A1A", tool: "pen", label: "atomic-b" },
+        { x0: 0.3, y0: 0.1, x1: 0.15, y1: 0.25, color: "#1A1A1A", label: "atomic-c" }, // tool 누락
+        { x0: 0.15, y0: 0.25, x1: 0.4, y1: 0.4, color: "#1A1A1A", tool: "pen", label: "atomic-d" },
+        { x0: 0.4, y0: 0.4, x1: 0.5, y1: 0.5, color: "#1A1A1A", tool: "pen", label: "atomic-e" },
+      ]).replace(/'/g, "''");
+
+      expect(() => callAppend(TEACHER_ID, segments)).toThrow(/필수 필드/);
+
+      // 0건도 남지 않았는지(부분 성공 없음) — atomic-a/atomic-b조차 없어야 한다.
+      expect(countForSession()).toBe(before);
+      const leftover = asUser(
+        TEACHER_ID,
+        `select count(*) from session_annotation_events where session_id = '${sessionId}' and payload->>'label' like 'atomic-%';`
+      );
+      expect(Number(leftover)).toBe(0);
+    });
+
+    it("세션과 무관한 제3자 선생님이 호출하면 RLS로 전체가 거부되고 0건 저장된다", () => {
+      const before = countForSession();
+      const segments = JSON.stringify([
+        { x0: 0.1, y0: 0.1, x1: 0.2, y1: 0.2, color: "#1A1A1A", tool: "pen", label: "intruder-a" },
+        { x0: 0.2, y0: 0.2, x1: 0.3, y1: 0.1, color: "#1A1A1A", tool: "pen", label: "intruder-b" },
+      ]).replace(/'/g, "''");
+
+      expect(() => callAppend(OTHER_TEACHER_ID, segments)).toThrow(/row-level security|policy/i);
+      expect(countForSession()).toBe(before);
+    });
+
+    it("빈 배열/비배열 jsonb를 보내면 즉시 거부되고 아무 것도 저장되지 않는다", () => {
+      const before = countForSession();
+      expect(() =>
+        asUser(
+          TEACHER_ID,
+          `select * from append_stroke_events('${sessionId}'::uuid, '[]'::jsonb);`
+        )
+      ).toThrow(/비어있지 않은/);
+      expect(countForSession()).toBe(before);
+    });
+  });
+
   it("append-only: 기록된 이벤트는 UPDATE/DELETE 둘 다 트리거로 차단된다", () => {
     const id = asUser(
       TEACHER_ID,
