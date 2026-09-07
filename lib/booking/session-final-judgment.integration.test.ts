@@ -434,7 +434,13 @@ describe("2026-09-05 후속 — 재판정 시 entitlement 대사(reconciliation)
     psql(`update reservations set starts_at = starts_at - interval '365 days', ends_at = ends_at - interval '365 days' where id = (select reservation_id from sessions where id = '${sessionId}');`);
     psql(`select finalize_lesson_session('${sessionId}', 'completed', '${TEACHER_ID}', '완료(오판정)');`);
     const payoutItemId = psql(`select id from payout_items where session_id = '${sessionId}';`);
-    psql(`update payout_items set status = 'paid' where id = '${payoutItemId}';`);
+    // R10 corrective(요구사항 1, 2026-09-07): paid는 payout_items_paid_requires_confirmation
+    // CHECK 제약 때문에 provider_transaction_id/provider_confirmed_at도 함께 있어야 한다.
+    // 이 테스트는 상태머신 함수를 거치지 않고 직접 paid로 만드는 시나리오(오판정 이후
+    // 이미 지급된 상태를 재현)이므로 확인 컬럼도 같은 UPDATE에서 채운다.
+    psql(
+      `update payout_items set status = 'paid', provider_transaction_id = 'test-tx-${payoutItemId}', provider_confirmed_at = now() where id = '${payoutItemId}';`
+    );
     const amountBefore = psql(`select amount_minor from payout_items where id = '${payoutItemId}';`);
 
     psql(`
