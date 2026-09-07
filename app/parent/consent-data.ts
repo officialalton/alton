@@ -43,36 +43,36 @@ export async function loadChildrenConsentStatus(
     name: extractName(c.profile),
   }));
 
-  const results: ChildConsentStatus[] = [];
-  for (const child of children) {
-    const [{ data: isUnder13 }, { data: hasValidConsent }, { data: latest }] = await Promise.all([
-      supabase.rpc("is_under_13", { p_student_id: child.studentId }),
-      supabase.rpc("has_valid_guardian_consent", { p_student_id: child.studentId }),
-      supabase
-        .from("guardian_consents")
-        .select("id, consented_at, revoked_at, consent_policy_versions(title)")
-        .eq("student_id", child.studentId)
-        .order("created_at", { ascending: false })
-        .limit(1)
-        .maybeSingle(),
-    ]);
+  return Promise.all(
+    children.map(async (child) => {
+      const [{ data: isUnder13 }, { data: hasValidConsent }, { data: latest }] = await Promise.all([
+        supabase.rpc("is_under_13", { p_student_id: child.studentId }),
+        supabase.rpc("has_valid_guardian_consent", { p_student_id: child.studentId }),
+        supabase
+          .from("guardian_consents")
+          .select("id, consented_at, revoked_at, consent_policy_versions(title)")
+          .eq("student_id", child.studentId)
+          .order("created_at", { ascending: false })
+          .limit(1)
+          .maybeSingle(),
+      ]);
 
-    results.push({
-      studentId: child.studentId,
-      name: child.name,
-      isUnder13: Boolean(isUnder13),
-      hasValidConsent: Boolean(hasValidConsent),
-      latestConsent: latest
-        ? {
-            id: latest.id as string,
-            policyVersionTitle: extractTitle(latest.consent_policy_versions),
-            consentedAt: latest.consented_at as string,
-            revokedAt: (latest.revoked_at as string | null) ?? null,
-          }
-        : null,
-    });
-  }
-  return results;
+      return {
+        studentId: child.studentId,
+        name: child.name,
+        isUnder13: Boolean(isUnder13),
+        hasValidConsent: Boolean(hasValidConsent),
+        latestConsent: latest
+          ? {
+              id: latest.id as string,
+              policyVersionTitle: extractTitle(latest.consent_policy_versions),
+              consentedAt: latest.consented_at as string,
+              revokedAt: (latest.revoked_at as string | null) ?? null,
+            }
+          : null,
+      };
+    })
+  );
 }
 
 export type TrialSmartNotesConsentStatus = {
@@ -119,17 +119,17 @@ export async function loadTrialSmartNotesConsentStatus(
     );
   const enrolledChildIds = new Set((enrollments ?? []).map((e) => e.child_id as string));
 
-  const results: TrialSmartNotesConsentStatus[] = [];
-  for (const child of children) {
-    if (!enrolledChildIds.has(child.studentId)) continue;
-    const { data: consent } = await supabase
-      .from("trial_smart_notes_consents")
-      .select("id")
-      .eq("child_id", child.studentId)
-      .maybeSingle();
-    results.push({ studentId: child.studentId, name: child.name, hasConsented: !!consent });
-  }
-  return results;
+  const enrolledChildren = children.filter((child) => enrolledChildIds.has(child.studentId));
+  return Promise.all(
+    enrolledChildren.map(async (child) => {
+      const { data: consent } = await supabase
+        .from("trial_smart_notes_consents")
+        .select("id")
+        .eq("child_id", child.studentId)
+        .maybeSingle();
+      return { studentId: child.studentId, name: child.name, hasConsented: !!consent };
+    })
+  );
 }
 
 export async function loadActiveConsentPolicy(

@@ -37,33 +37,49 @@ export default async function ParentHomePage({
     (child && children.some((c) => c.studentId === child) ? child : null) ??
     children[0].studentId;
 
-  const dashboard = await loadDashboardData(supabase, currentChildId);
-  const { upcoming, past } = await loadLessons(supabase, currentChildId);
-  const curricula = await loadCurricula(supabase, currentChildId);
-
-  const memosByEnrollment: Record<string, Awaited<ReturnType<typeof loadMemos>>> = {};
-  for (const c of curricula) {
-    memosByEnrollment[c.enrollmentId] = await loadMemos(supabase, c.enrollmentId);
-  }
+  const [
+    dashboard,
+    { upcoming, past },
+    curricula,
+    credits,
+    entitlements,
+    consentChildren,
+    activeConsentPolicy,
+    trialSmartNotesChildren,
+    pendingRegularIntentChoices,
+    childrenSubjectEnrollments,
+    lessonBooking,
+  ] = await Promise.all([
+    loadDashboardData(supabase, currentChildId),
+    loadLessons(supabase, currentChildId),
+    loadCurricula(supabase, currentChildId),
+    loadParentCreditsData(supabase, user.id, currentChildId),
+    loadParentEntitlementsData(supabase, user.id, children),
+    loadChildrenConsentStatus(supabase, user.id),
+    loadActiveConsentPolicy(supabase),
+    loadTrialSmartNotesConsentStatus(supabase, user.id),
+    loadPendingRegularIntentChoices(supabase, user.id),
+    loadChildrenSubjectEnrollments(supabase, children),
+    loadLessonBookingData(supabase, currentChildId),
+  ]);
 
   const pastSessionIds = past.map((l) => l.sessionId);
-  const reviews = await loadReviews(supabase, pastSessionIds);
-  const myFeedback = await loadStudentFeedback(supabase, currentChildId, pastSessionIds);
-  const credits = await loadParentCreditsData(supabase, user.id, currentChildId);
-  const entitlements = await loadParentEntitlementsData(supabase, user.id, children);
-  const consentChildren = await loadChildrenConsentStatus(supabase, user.id);
-  const activeConsentPolicy = await loadActiveConsentPolicy(supabase);
-  const trialSmartNotesChildren = await loadTrialSmartNotesConsentStatus(supabase, user.id);
-  const pendingRegularIntentChoices = await loadPendingRegularIntentChoices(supabase, user.id);
-  const childrenSubjectEnrollments = await loadChildrenSubjectEnrollments(
-    supabase,
-    children
-  );
-  const progressedTrialEnrollmentIds = await loadProgressedTrialEnrollmentIds(
-    supabase,
-    childrenSubjectEnrollments
-  );
-  const lessonBooking = await loadLessonBookingData(supabase, currentChildId);
+
+  const [memosEntries, reviews, myFeedback, progressedTrialEnrollmentIds] =
+    await Promise.all([
+      Promise.all(
+        curricula.map(
+          async (c) => [c.enrollmentId, await loadMemos(supabase, c.enrollmentId)] as const
+        )
+      ),
+      loadReviews(supabase, pastSessionIds),
+      loadStudentFeedback(supabase, currentChildId, pastSessionIds),
+      loadProgressedTrialEnrollmentIds(supabase, childrenSubjectEnrollments),
+    ]);
+  const memosByEnrollment = Object.fromEntries(memosEntries) as Record<
+    string,
+    Awaited<ReturnType<typeof loadMemos>>
+  >;
 
   return (
     <ParentShell

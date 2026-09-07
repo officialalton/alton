@@ -126,69 +126,77 @@ export async function loadParentEntitlementsData(
 
   // 2) 현재 유효한 가격(단건/20회 패키지).
   const nowIso = new Date().toISOString();
-  const { data: products } = await admin
-    .from("entitlement_products")
-    .select("id, code, quantity")
-    .in("code", ["lesson_pack_1", "lesson_pack_10", "lesson_pack_20"]);
 
-  const prices: EntitlementProductPrice[] = [];
-  for (const product of products ?? []) {
-    const { data: versions } = await admin
-      .from("entitlement_product_versions")
-      .select(
-        "version_number, price_minor, unit_price_minor, currency, validity_months, discount_minor, discount_percent, effective_from, effective_until, discontinued_at"
-      )
-      .eq("entitlement_product_id", product.id)
-      .lte("effective_from", nowIso)
-      .is("discontinued_at", null)
-      .order("effective_from", { ascending: false });
+  // products(가격 산정 기준) 조회 후 버전 조회가 필요하므로 먼저 fetch하되,
+  // 계약/잔액/구매내역(3~5)은 products와 무관하므로 동시에 조회한다.
+  const [{ data: products }, { data: contracts }, { data: grantDetails }, { data: receipts }] =
+    await Promise.all([
+      admin
+        .from("entitlement_products")
+        .select("id, code, quantity")
+        .in("code", ["lesson_pack_1", "lesson_pack_10", "lesson_pack_20"]),
+      // 3) 계약 결제 가능 자격(active) — purchase-actions.ts와 동일 조건.
+      admin
+        .from("contracts")
+        .select("child_id, status")
+        .in("child_id", childIds)
+        .eq("status", "active"),
+      // 4) 자녀별 수업권 잔액. M2부터 정규(120분)/체험(60분) grant가 공존할 수 있어
+      // entitlement_grant_details 뷰(grant + 상품 + 수업유형 + 잔액 합산, 20261012000000
+      // §2)로 lesson_type_code별로 갈라 조회한다 — 예전처럼 entitlement_grants를 통째로
+      // 합산하면 체험 1회가 "정규 수업권 잔여"에 섞여 보이는 실제 버그가 생긴다.
+      admin
+        .from("entitlement_grant_details")
+        .select("grant_id, child_id, expires_at, remaining, lesson_type_code, source_consultation_id")
+        .in("child_id", childIds),
+      // 5) 자녀별 구매 내역(purchase_receipts).
+      admin
+        .from("purchase_receipts")
+        .select(
+          "purchase_id, child_id, contract_id, contract_version_number, product_code, lesson_type_label, lesson_duration_minutes, quantity, unit_price_minor, package_price_minor, discount_minor, discount_percent, tax_minor, total_minor, currency, validity_months, expires_at, price_policy_version, refund_policy_version, terms_version, status, stripe_checkout_session_id, stripe_payment_intent_id, created_at, confirmed_at, dispute_status"
+        )
+        .in("child_id", childIds)
+        .order("created_at", { ascending: false }),
+    ]);
 
-    const current = (versions ?? []).find(
-      (v) => v.effective_until === null || v.effective_until === undefined || v.effective_until > nowIso
-    );
-    if (!current) continue;
-
-    prices.push({
-      productCode: product.code,
-      productName: productDisplayName(product.code),
-      quantity: product.quantity,
-      unitPriceMinor: current.unit_price_minor,
-      packagePriceMinor: current.price_minor,
-      discountMinor: current.discount_minor,
-      discountPercent: Number(current.discount_percent),
-      currency: current.currency,
-      validityMonths: current.validity_months,
-      versionNumber: current.version_number,
-    });
-  }
-
-  // 3) 계약 결제 가능 자격(active) — purchase-actions.ts와 동일 조건.
-  const { data: contracts } = await admin
-    .from("contracts")
-    .select("child_id, status")
-    .in("child_id", childIds)
-    .eq("status", "active");
   const activeChildIds = new Set((contracts ?? []).map((c) => c.child_id as string));
-
-  // 4) 자녀별 수업권 잔액. M2부터 정규(120분)/체험(60분) grant가 공존할 수 있어
-  // entitlement_grant_details 뷰(grant + 상품 + 수업유형 + 잔액 합산, 20261012000000
-  // §2)로 lesson_type_code별로 갈라 조회한다 — 예전처럼 entitlement_grants를 통째로
-  // 합산하면 체험 1회가 "정규 수업권 잔여"에 섞여 보이는 실제 버그가 생긴다.
-  const { data: grantDetails } = await admin
-    .from("entitlement_grant_details")
-    .select("grant_id, child_id, expires_at, remaining, lesson_type_code, source_consultation_id")
-    .in("child_id", childIds);
   const regularGrants = (grantDetails ?? []).filter((g) => g.lesson_type_code === "regular");
   const trialGrants = (grantDetails ?? []).filter((g) => g.lesson_type_code === "trial");
 
-  // 5) 자녀별 구매 내역(purchase_receipts).
-  const { data: receipts } = await admin
-    .from("purchase_receipts")
-    .select(
-      "purchase_id, child_id, contract_id, contract_version_number, product_code, lesson_type_label, lesson_duration_minutes, quantity, unit_price_minor, package_price_minor, discount_minor, discount_percent, tax_minor, total_minor, currency, validity_months, expires_at, price_policy_version, refund_policy_version, terms_version, status, stripe_checkout_session_id, stripe_payment_intent_id, created_at, confirmed_at, dispute_status"
-    )
-    .in("child_id", childIds)
-    .order("created_at", { ascending: false });
+  const priceResults = await Promise.all(
+    (products ?? []).map(async (product) => {
+      const { data: versions } = await admin
+        .from("entitlement_product_versions")
+        .select(
+          "version_number, price_minor, unit_price_minor, currency, validity_months, discount_minor, discount_percent, effective_from, effective_until, discontinued_at"
+        )
+        .eq("entitlement_product_id", product.id)
+        .lte("effective_from", nowIso)
+        .is("discontinued_at", null)
+        .order("effective_from", { ascending: false });
+
+      const current = (versions ?? []).find(
+        (v) => v.effective_until === null || v.effective_until === undefined || v.effective_until > nowIso
+      );
+      if (!current) return null;
+
+      return {
+        productCode: product.code,
+        productName: productDisplayName(product.code),
+        quantity: product.quantity,
+        unitPriceMinor: current.unit_price_minor,
+        packagePriceMinor: current.price_minor,
+        discountMinor: current.discount_minor,
+        discountPercent: Number(current.discount_percent),
+        currency: current.currency,
+        validityMonths: current.validity_months,
+        versionNumber: current.version_number,
+      };
+    })
+  );
+  const prices: EntitlementProductPrice[] = priceResults.filter(
+    (p): p is EntitlementProductPrice => p !== null
+  );
 
   const summaries: ChildEntitlementSummary[] = scopedChildren.map((child) => {
     const childRegularGrants = regularGrants.filter((g) => g.child_id === child.studentId);

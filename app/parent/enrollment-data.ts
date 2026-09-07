@@ -17,12 +17,12 @@ export async function loadChildrenSubjectEnrollments(
   supabase: SupabaseClient,
   children: { studentId: string; name: string }[]
 ): Promise<ChildSubjectEnrollments[]> {
-  const result: ChildSubjectEnrollments[] = [];
-  for (const c of children) {
-    const enrollments = await loadStudentSubjectEnrollments(supabase, c.studentId);
-    result.push({ childId: c.studentId, childName: c.name, enrollments });
-  }
-  return result;
+  return Promise.all(
+    children.map(async (c) => {
+      const enrollments = await loadStudentSubjectEnrollments(supabase, c.studentId);
+      return { childId: c.studentId, childName: c.name, enrollments };
+    })
+  );
 }
 
 // (2026-09-06) 홈 배너(regular-intent-data.ts)와 정확히 같은 기준으로 "정규 진행

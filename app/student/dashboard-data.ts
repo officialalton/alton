@@ -34,26 +34,38 @@ export async function loadDashboardData(
   supabase: SupabaseClient,
   studentId: string
 ): Promise<DashboardData> {
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("name")
-    .eq("id", studentId)
-    .single();
-
-  const { data: enrollments } = await supabase
-    .from("enrollments")
-    .select("id, teacher_id, subject:subjects(name)")
-    .eq("student_id", studentId)
-    .eq("status", "active");
+  const [{ data: profile }, { data: enrollments }] = await Promise.all([
+    supabase.from("profiles").select("name").eq("id", studentId).single(),
+    supabase
+      .from("enrollments")
+      .select("id, teacher_id, subject:subjects(name)")
+      .eq("student_id", studentId)
+      .eq("status", "active"),
+  ]);
 
   const enrollmentIds = (enrollments ?? []).map((e) => e.id);
   const teacherIds = Array.from(
     new Set((enrollments ?? []).map((e) => e.teacher_id))
   );
 
-  const { data: teacherProfiles } = teacherIds.length
-    ? await supabase.from("profiles").select("id, name").in("id", teacherIds)
-    : { data: [] as { id: string; name: string }[] };
+  const now = new Date();
+  const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+  const monthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+
+  const [{ data: teacherProfiles }, { data: sessions }] = await Promise.all([
+    teacherIds.length
+      ? supabase.from("profiles").select("id, name").in("id", teacherIds)
+      : Promise.resolve({ data: [] as { id: string; name: string }[] }),
+    enrollmentIds.length
+      ? supabase
+          .from("legacy_sessions")
+          .select(
+            "id, enrollment_id, session_number, unit_title, status, scheduled_at, duration_minutes"
+          )
+          .in("enrollment_id", enrollmentIds)
+          .order("scheduled_at", { ascending: true })
+      : Promise.resolve({ data: [] as never[] }),
+  ]);
 
   const subjectByEnrollment = new Map(
     (enrollments ?? []).map((e) => [
@@ -64,20 +76,6 @@ export async function loadDashboardData(
   const teacherNameById = new Map(
     (teacherProfiles ?? []).map((t) => [t.id, t.name])
   );
-
-  const now = new Date();
-  const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
-  const monthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 1);
-
-  const { data: sessions } = enrollmentIds.length
-    ? await supabase
-        .from("legacy_sessions")
-        .select(
-          "id, enrollment_id, session_number, unit_title, status, scheduled_at, duration_minutes"
-        )
-        .in("enrollment_id", enrollmentIds)
-        .order("scheduled_at", { ascending: true })
-    : { data: [] as never[] };
 
   const calendarByDay: Record<number, CalendarDaySession[]> = {};
   const upcoming: UpcomingLesson[] = [];

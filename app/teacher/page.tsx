@@ -20,50 +20,71 @@ export default async function TeacherHomePage({
   const { user, supabase } = await requireUser();
   const { tab } = await searchParams;
 
-  const dashboard = await loadTeacherDashboard(supabase, user.id);
-  const roster = await loadRoster(supabase, user.id);
-  const mySubjects = await loadMySubjects(supabase, user.id);
+  const [
+    dashboard,
+    roster,
+    mySubjects,
+    { current: currentAssignments, past: pastAssignments },
+    availabilityRules,
+    availabilityExceptions,
+    lessonSchedule,
+    { data: teacherProfile },
+  ] = await Promise.all([
+    loadTeacherDashboard(supabase, user.id),
+    loadRoster(supabase, user.id),
+    loadMySubjects(supabase, user.id),
+    loadTeacherAssignments(supabase, user.id),
+    listMyAvailabilityRules(),
+    listTeacherAvailabilityExceptions(),
+    listMyLessonSchedule(),
+    supabase.from("profiles").select("timezone").eq("id", user.id).maybeSingle(),
+  ]);
+  const availabilityTimezone = resolveUserTimezone({
+    profileTimezone: (teacherProfile?.timezone as string) ?? null,
+    householdDefaultTimezone: null,
+  });
+
   const curricula = await loadAllStudentCurricula(
     supabase,
     roster.map((r) => ({ studentId: r.studentId, studentName: r.studentName }))
   );
 
-  const memosByEnrollment: Record<string, Awaited<ReturnType<typeof loadMemos>>> = {};
-  for (const c of curricula) {
-    memosByEnrollment[c.enrollmentId] = await loadMemos(supabase, c.enrollmentId);
-  }
-
   const allSessionIds = curricula
     .flatMap((c) => c.units.map((u) => u.sessionId))
     .filter((id): id is string => !!id);
-  const reviews = await loadReviews(supabase, allSessionIds);
-
-  const studentFeedback: Record<string, Awaited<ReturnType<typeof loadStudentFeedback>>[string]> = {};
   const studentIds = Array.from(new Set(curricula.map((c) => c.studentId)));
-  for (const studentId of studentIds) {
-    const sessionIdsForStudent = curricula
-      .filter((c) => c.studentId === studentId)
-      .flatMap((c) => c.units.map((u) => u.sessionId))
-      .filter((id): id is string => !!id);
-    const feedback = await loadStudentFeedback(supabase, studentId, sessionIdsForStudent);
+
+  const [memosEntries, reviews, studentFeedbackEntries, reviewedSessionIds] =
+    await Promise.all([
+      Promise.all(
+        curricula.map(
+          async (c) => [c.enrollmentId, await loadMemos(supabase, c.enrollmentId)] as const
+        )
+      ),
+      loadReviews(supabase, allSessionIds),
+      Promise.all(
+        studentIds.map(async (studentId) => {
+          const sessionIdsForStudent = curricula
+            .filter((c) => c.studentId === studentId)
+            .flatMap((c) => c.units.map((u) => u.sessionId))
+            .filter((id): id is string => !!id);
+          return loadStudentFeedback(supabase, studentId, sessionIdsForStudent);
+        })
+      ),
+      loadReviewedSessionIds(
+        supabase,
+        dashboard.past.map((l) => l.sessionId)
+      ),
+    ]);
+
+  const memosByEnrollment = Object.fromEntries(memosEntries) as Record<
+    string,
+    Awaited<ReturnType<typeof loadMemos>>
+  >;
+  const studentFeedback: Record<string, Awaited<ReturnType<typeof loadStudentFeedback>>[string]> = {};
+  for (const feedback of studentFeedbackEntries) {
     Object.assign(studentFeedback, feedback);
   }
-
-  const reviewedSessionIds = await loadReviewedSessionIds(
-    supabase,
-    dashboard.past.map((l) => l.sessionId)
-  );
-  const { current: currentAssignments, past: pastAssignments } =
-    await loadTeacherAssignments(supabase, user.id);
-
-  const availabilityRules = await listMyAvailabilityRules();
-  const availabilityExceptions = await listTeacherAvailabilityExceptions();
-  const lessonSchedule = await listMyLessonSchedule();
-  const { data: teacherProfile } = await supabase.from("profiles").select("timezone").eq("id", user.id).maybeSingle();
-  const availabilityTimezone = resolveUserTimezone({
-    profileTimezone: (teacherProfile?.timezone as string) ?? null,
-    householdDefaultTimezone: null,
-  });
 
   return (
     <TeacherShell

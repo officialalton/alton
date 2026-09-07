@@ -27,46 +27,69 @@ export default async function StudentHomePage({
 }) {
   const { user, supabase } = await requireUser();
   const { tab } = await searchParams;
-  const dashboard = await loadDashboardData(supabase, user.id);
-  const vocabWords = await loadVocabWords(supabase, user.id);
-  const problemLog = await loadProblemLog(supabase, user.id);
-  const { upcoming, past } = await loadLessons(supabase, user.id);
-  const curricula = await loadCurricula(supabase, user.id);
-
-  const memosByEnrollment: Record<string, Awaited<ReturnType<typeof loadMemos>>> = {};
-  for (const c of curricula) {
-    memosByEnrollment[c.enrollmentId] = await loadMemos(supabase, c.enrollmentId);
-  }
+  const [
+    dashboard,
+    vocabWords,
+    problemLog,
+    { upcoming, past },
+    curricula,
+    homework,
+    materialsLibrary,
+    credits,
+    stats,
+    subjectEnrollments,
+    lessonBooking,
+    teacherList,
+  ] = await Promise.all([
+    loadDashboardData(supabase, user.id),
+    loadVocabWords(supabase, user.id),
+    loadProblemLog(supabase, user.id),
+    loadLessons(supabase, user.id),
+    loadCurricula(supabase, user.id),
+    loadStudentHomework(supabase, user.id),
+    loadMaterialsLibrary(supabase, user.id),
+    loadCreditsData(supabase, user.id),
+    loadStats(supabase, user.id),
+    loadStudentSubjectEnrollments(supabase, user.id),
+    loadLessonBookingData(supabase, user.id),
+    loadTeacherList(supabase, user.id),
+  ]);
 
   const pastSessionIds = past.map((l) => l.sessionId);
-  const reviews = await loadReviews(supabase, pastSessionIds);
-  const myFeedback = await loadStudentFeedback(supabase, user.id, pastSessionIds);
-  const homework = await loadStudentHomework(supabase, user.id);
-  const materialsLibrary = await loadMaterialsLibrary(supabase, user.id);
-  const credits = await loadCreditsData(supabase, user.id);
-  const stats = await loadStats(supabase, user.id);
-  const subjectEnrollments = await loadStudentSubjectEnrollments(supabase, user.id);
-  const lessonBooking = await loadLessonBookingData(supabase, user.id);
 
-  const teacherList = await loadTeacherList(supabase, user.id);
+  const [memosEntries, reviews, myFeedback, teacherEntries] = await Promise.all([
+    Promise.all(
+      curricula.map(
+        async (c) => [c.enrollmentId, await loadMemos(supabase, c.enrollmentId)] as const
+      )
+    ),
+    loadReviews(supabase, pastSessionIds),
+    loadStudentFeedback(supabase, user.id, pastSessionIds),
+    Promise.all(
+      teacherList.map(async (t) => {
+        const [profile, sessionHistory, chatThread] = await Promise.all([
+          loadTeacherProfile(supabase, user.id, t.teacherId),
+          loadTeacherSessionHistory(supabase, user.id, t.teacherId),
+          ensureThreadAndLoadMessages(supabase, user.id, t.teacherId),
+        ]);
+        return { teacherId: t.teacherId, profile, sessionHistory, chatThread };
+      })
+    ),
+  ]);
+  const memosByEnrollment = Object.fromEntries(memosEntries) as Record<
+    string,
+    Awaited<ReturnType<typeof loadMemos>>
+  >;
   const teacherProfiles: Record<string, Awaited<ReturnType<typeof loadTeacherProfile>>> = {};
   const teacherSessionHistory: Record<
     string,
     Awaited<ReturnType<typeof loadTeacherSessionHistory>>
   > = {};
   const chatThreads: Record<string, Awaited<ReturnType<typeof ensureThreadAndLoadMessages>>> = {};
-  for (const t of teacherList) {
-    teacherProfiles[t.teacherId] = await loadTeacherProfile(supabase, user.id, t.teacherId);
-    teacherSessionHistory[t.teacherId] = await loadTeacherSessionHistory(
-      supabase,
-      user.id,
-      t.teacherId
-    );
-    chatThreads[t.teacherId] = await ensureThreadAndLoadMessages(
-      supabase,
-      user.id,
-      t.teacherId
-    );
+  for (const entry of teacherEntries) {
+    teacherProfiles[entry.teacherId] = entry.profile;
+    teacherSessionHistory[entry.teacherId] = entry.sessionHistory;
+    chatThreads[entry.teacherId] = entry.chatThread;
   }
 
   return (

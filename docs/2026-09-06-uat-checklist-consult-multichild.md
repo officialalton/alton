@@ -196,3 +196,15 @@
 - [x] **#3 중도 종료 자녀 탭 숨김** — `app/parent/children-data.ts`의 `loadChildren()`이 상담 상태와 무관하게 모든 자녀를 보여주던 문제. 자녀별로 active `subject_enrollments`가 없고 그 자녀에 연결된(`consultations.child_id`) 최신 상담의 `closure_type`이 `no_trial`/`trial_no_convert`면 탭 목록에서 제외. 이미 정규 전환된(active 수강 있는) 자녀는 상담 기록과 무관하게 절대 숨기지 않음. 자녀 1명뿐인 극단 케이스는 기존 `page.tsx`의 "연결된 자녀 계정이 없습니다" 빈 상태 처리가 그대로 커버.
 - [x] 검증: `supabase db reset --local` 성공(신규 마이그레이션 없음) / `npx tsc --noEmit` 0 에러 / `app/parent/children-data.test.ts` 중도 종료 숨김 케이스 4건 추가 / `app/parent/TrialConversionPanel.test.tsx` 리뷰 미확정 케이스 갱신(행은 보이되 버튼 없음) / 신규 통합 테스트 `app/parent/parent-portal-trial-consultation-consistency.integration.test.ts`(로컬 Postgres, 실제 앱 함수 호출) 7건 전부 통과 / `npx vitest run`(전체) 189파일·1270건 전부 통과(`--no-file-parallelism`으로 재확인 — 병렬 실행 시 다른 통합 테스트의 선생님 예약가능시간 데이터 경합으로 flaky해지는 기존 이슈이며 이번 변경과 무관함을 확인) / `npx next build` 성공.
 - [ ] 브라우저로 실제 Preview에서 체험만 하고 중도 종료된 자녀가 실제로 상단 탭에서 사라지는지, 정규 전환된 자녀는 그대로 보이는지, 리뷰 미확정 상태에서도 홈 배너가 뜨는지 눈으로 확인하는 것은 이번 세션 범위 밖 — Preview alias 갱신 후 직접 확인 권장.
+
+### 2026-09-06 13차 세션 — 포털 홈 페이지 순차 로더 병렬화(성능 개선 1라운드) — 캐싱은 별도 라운드
+
+배경: 학생/보호자/선생님 포털 홈 페이지(`app/*/page.tsx`)가 서로 의존관계 없는 데이터 로더 여러 개를 `Promise.all` 없이 순차 `await`하고, 자녀별/교사별/학생별 반복문 안에서도 순차 `await`(N+1)하는 성능 문제가 이전 조사에서 확인됐다. 관리자 포털은 이미 병렬화돼 있어 기준으로 삼았다. 상세 내용은 `docs/CURRENT.md`의 "2026-09-06(오픈 전 성능 개선 1라운드)" 절 참고.
+
+- [x] `app/parent/page.tsx`, `app/student/page.tsx`, `app/teacher/page.tsx` — 서로 독립인 로더를 `Promise.all`로 병렬화(데이터 의존관계가 있는 부분만 순차 유지).
+- [x] `app/student/dashboard-data.ts` — `profile`/`enrollments` 조회, 그 뒤 `teacherProfiles`/`legacy_sessions` 조회를 각각 `Promise.all`로 병렬화.
+- [x] N+1 반복문 제거 — `app/parent/enrollment-data.ts`(자녀별 수강 과목), `app/parent/consent-data.ts`(자녀별 동의 상태 2곳), `app/parent/entitlements-data.ts`(상품별 가격 버전 + 계약/잔액/구매내역 3쿼리), `app/teacher/curriculum-data.ts`(학생별 커리큘럼) — 전부 `Promise.all(...map(...))`로 교체.
+- [x] 로더 반환값/쿼리 조건은 전혀 변경하지 않음(순서만 변경하는 순수 성능 리팩터) — 캐싱(`revalidate`/`cache()`/`unstable_cache`)은 이번 라운드 범위 밖.
+- [x] 검증: `supabase db reset --local` 성공(신규 마이그레이션 없음) / `npx tsc --noEmit` 0 에러 / `npx vitest run`(전체) 189파일·1270건 전부 통과 / `npx next build` 성공.
+- [ ] **다음 오픈 전 별도 라운드 과제로 이관**: 캐싱 도입(`revalidate`/`cache()`/`unstable_cache` 등)으로 반복 조회 비용을 추가로 줄이는 작업 — 이번 라운드는 순차→병렬 전환만 다뤘고 캐싱은 별도 승인·설계가 필요해 범위에서 제외했다.
+- [ ] 브라우저로 실제 Preview에서 각 포털 홈 페이지 첫 로딩 체감 속도가 개선됐는지 눈으로 확인하는 것은 이번 세션 범위 밖 — Preview alias 갱신 후 직접 확인 권장.
