@@ -1,11 +1,9 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import UsersTab from "./UsersTab";
-import * as actions from "./users-actions";
 import type { ParentListItem, StudentListItem, TeacherListItem } from "./users-data";
 
 vi.mock("./users-actions", () => ({
-  inviteParent: vi.fn(),
   inviteStudent: vi.fn(),
   inviteTeacher: vi.fn(),
   setStudentStatus: vi.fn(),
@@ -98,21 +96,6 @@ describe("UsersTab", () => {
     expect(screen.getByText(/QC 경고 2회/)).toBeInTheDocument();
   });
 
-  it("학부모 초대 폼을 제출하면 inviteParent가 호출되고 목록에 추가된다", async () => {
-    vi.mocked(actions.inviteParent).mockResolvedValue("parent-id");
-    render(<UsersTab {...baseProps} />);
-    fireEvent.click(screen.getByText("+ 초대"));
-    fireEvent.change(screen.getByPlaceholderText("이름"), { target: { value: "최유진" } });
-    fireEvent.change(screen.getByPlaceholderText("이메일"), {
-      target: { value: "yujin@example.com" },
-    });
-    fireEvent.click(screen.getByText("초대 보내기"));
-    await waitFor(() =>
-      expect(actions.inviteParent).toHaveBeenCalledWith({
-        name: "최유진",
-        email: "yujin@example.com",
-      })
-    );
-    await waitFor(() => expect(screen.getByText("최유진")).toBeInTheDocument());
-  });
+  // (2026-09-07) 레거시 "학부모 초대" 폼은 제거됐다(DirectAccountCreationForm의
+  // "지인/추천"이 완전히 상위 호환) — 관련 테스트도 함께 제거했다.
 });

@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { inviteParent, inviteStudent } from "./users-actions";
+import { useState, type MouseEvent } from "react";
+import { inviteStudent } from "./users-actions";
+import { updateUserBasicInfo } from "./user-edit-actions";
 import StudentDetailPanel from "./StudentDetailPanel";
 import TeacherDetailPanel from "./TeacherDetailPanel";
 import DirectAccountCreationForm from "./DirectAccountCreationForm";
@@ -70,6 +71,10 @@ export default function UsersTab({
     setTeachers((prev) => prev.map((t) => (t.id === id ? { ...t, ...patch } : t)));
   }
 
+  function patchParent(id: string, patch: Partial<ParentListItem>) {
+    setParents((prev) => prev.map((p) => (p.id === id ? { ...p, ...patch } : p)));
+  }
+
   if (openStudent) {
     return (
       <StudentDetailPanel
@@ -119,30 +124,33 @@ export default function UsersTab({
               key={p.id}
               className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5"
             >
-              <div className="text-[13.5px] font-bold text-ink">{p.name}</div>
-              <div className="text-[12px] text-grey-500 mt-0.5">{p.email}</div>
-              <div className="text-[12px] text-grey-500 mt-0.5">
-                자녀: {p.childrenNames.length ? p.childrenNames.join(", ") : "없음"}
+              <div className="flex items-start justify-between gap-2">
+                <div>
+                  <div className="text-[13.5px] font-bold text-ink">{p.name}</div>
+                  <div className="text-[12px] text-grey-500 mt-0.5">{p.email}</div>
+                  <div className="text-[12px] text-grey-500 mt-0.5">
+                    자녀: {p.childrenNames.length ? p.childrenNames.join(", ") : "없음"}
+                  </div>
+                </div>
+                <UserEditToggle
+                  profileId={p.id}
+                  role="parent"
+                  name={p.name}
+                  email={p.email}
+                  onUpdated={(patch) => patchParent(p.id, patch)}
+                />
               </div>
             </div>
           ))}
-          <InviteForm
-            fields={["name", "email"]}
-            submitLabel="학부모 초대"
-            onSubmit={async (values) => {
-              await inviteParent({ name: values.name, email: values.email });
-              setParents((prev) => [
-                {
-                  id: `pending-${Date.now()}`,
-                  name: values.name,
-                  email: values.email,
-                  joinedAt: new Date().toISOString(),
-                  childrenNames: [],
-                },
-                ...prev,
-              ]);
-            }}
-          />
+          {/* (2026-09-07) 레거시 "학부모 초대"(자녀 없이 보호자만 먼저 만들고 나중에
+              자녀를 추가하는 경로, account_invites 기반) 폼은 제거됐다 —
+              "지인/추천"(DirectAccountCreationForm, 보호자+학생을 한 번에 만드는
+              trial_onboarding_links 기반 경로)이 완전히 상위 호환하고, 레거시 폼은
+              production에서 React 미니파이 오류(#441 — 서버 액션이 던진 예외가
+              Next.js에 의해 일반화된 메시지로 마스킹되어 그대로 전파됨, 위
+              sendTrialOnboardingNoticeAction의 동일 클래스 버그와 같은 원인)로
+              막 크래시가 났다. 서버 액션 inviteParent()는 users-actions.ts에서
+              완전히 제거했다(다른 호출부 없음 확인됨). */}
           <DirectAccountCreationForm />
         </>
       )}
@@ -150,21 +158,32 @@ export default function UsersTab({
       {subtab === "students" && (
         <>
           {students.map((s) => (
-            <button
-              key={s.id}
-              onClick={() => setOpenStudentId(s.id)}
-              className="w-full text-left border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5"
-            >
-              <div className="flex items-center justify-between">
-                <span className="text-[13.5px] font-bold text-ink">{s.name}</span>
-                <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-grey-100 text-ink">
-                  {STUDENT_STATUS_LABEL[s.status] ?? s.status}
-                </span>
+            <div key={s.id} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5">
+              <button
+                onClick={() => setOpenStudentId(s.id)}
+                className="w-full text-left"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-[13.5px] font-bold text-ink">{s.name}</span>
+                  <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-grey-100 text-ink">
+                    {STUDENT_STATUS_LABEL[s.status] ?? s.status}
+                  </span>
+                </div>
+                <div className="text-[12px] text-grey-500 mt-0.5">
+                  {s.email} {s.grade ? `· ${s.grade}` : ""} · 수업권 {s.creditBalance}장
+                </div>
+              </button>
+              <div className="mt-1.5">
+                <UserEditToggle
+                  profileId={s.id}
+                  role="student"
+                  name={s.name}
+                  email={s.email}
+                  grade={s.grade ?? ""}
+                  onUpdated={(patch) => patchStudent(s.id, patch)}
+                />
               </div>
-              <div className="text-[12px] text-grey-500 mt-0.5">
-                {s.email} {s.grade ? `· ${s.grade}` : ""} · 수업권 {s.creditBalance}장
-              </div>
-            </button>
+            </div>
           ))}
           <InviteForm
             fields={["name", "email", "grade", "parentId"]}
@@ -238,6 +257,128 @@ export default function UsersTab({
           </div>
         </>
       )}
+    </div>
+  );
+}
+
+// 2026-09-07(M4 UAT 후속) — "이메일 주소가 잘못됐어가 여러 이슈가 발생할 수
+// 있는데 수기로 수정할 수 있는 구조는 있어야지"(제품 오너). 보호자/학생 카드에
+// 이름·이메일(학생은 학년도)을 고칠 수 있는 최소 편집 폼을 붙인다.
+function UserEditToggle({
+  profileId,
+  role,
+  name,
+  email,
+  grade,
+  onUpdated,
+}: {
+  profileId: string;
+  role: "parent" | "student";
+  name: string;
+  email: string;
+  grade?: string;
+  onUpdated: (patch: { name: string; email: string; grade?: string | null }) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const [nameValue, setNameValue] = useState(name);
+  const [emailValue, setEmailValue] = useState(email);
+  const [gradeValue, setGradeValue] = useState(grade ?? "");
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  function openForm(e: MouseEvent) {
+    e.stopPropagation();
+    setNameValue(name);
+    setEmailValue(email);
+    setGradeValue(grade ?? "");
+    setError(null);
+    setOpen(true);
+  }
+
+  async function handleSave(e: MouseEvent) {
+    e.stopPropagation();
+    setError(null);
+    setSaving(true);
+    try {
+      const result = await updateUserBasicInfo({
+        profileId,
+        role,
+        name: nameValue,
+        email: emailValue,
+        grade: role === "student" ? gradeValue : undefined,
+      });
+      onUpdated({ name: result.name, email: result.email, grade: result.grade });
+      setOpen(false);
+    } catch (e2) {
+      setError(e2 instanceof Error ? e2.message : "수정에 실패했습니다.");
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  if (!open) {
+    return (
+      <button
+        type="button"
+        onClick={openForm}
+        data-testid={`user-edit-open-${profileId}`}
+        className="text-[11px] font-bold px-2.5 py-1 rounded-lg border-[1.5px] border-grey-200 text-ink"
+      >
+        수정
+      </button>
+    );
+  }
+
+  return (
+    <div
+      className="border-[1.5px] border-grey-200 rounded-lg px-3 py-2.5 mt-1.5 bg-grey-50"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <input
+        value={nameValue}
+        onChange={(e) => setNameValue(e.target.value)}
+        placeholder="이름"
+        className="w-full px-2.5 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12px] mb-1.5"
+      />
+      <input
+        value={emailValue}
+        onChange={(e) => setEmailValue(e.target.value)}
+        placeholder="이메일"
+        type="email"
+        data-testid={`user-edit-email-${profileId}`}
+        className="w-full px-2.5 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12px] mb-1.5"
+      />
+      {role === "student" && (
+        <input
+          value={gradeValue}
+          onChange={(e) => setGradeValue(e.target.value)}
+          placeholder="학년 (예: 10학년)"
+          className="w-full px-2.5 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12px] mb-1.5"
+        />
+      )}
+      <div className="flex gap-2">
+        <button
+          type="button"
+          disabled={saving}
+          onClick={handleSave}
+          data-testid={`user-edit-save-${profileId}`}
+          className="text-[11.5px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
+        >
+          {saving ? "저장 중..." : "저장"}
+        </button>
+        <button
+          type="button"
+          disabled={saving}
+          onClick={(e) => {
+            e.stopPropagation();
+            setOpen(false);
+          }}
+          className="text-[11.5px] font-semibold text-grey-500"
+        >
+          취소
+        </button>
+      </div>
+      {error && <p className="text-[11.5px] text-red mt-1.5">{error}</p>}
     </div>
   );
 }
