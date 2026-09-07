@@ -10,6 +10,15 @@ vi.mock("@/app/consult-actions", () => ({
 
 import ConsultAvailabilityMonthView from "./ConsultAvailabilityMonthView";
 
+const noopProps = {
+  rules: [],
+  exceptions: [],
+  busyId: null,
+  onAddFullDayException: vi.fn(),
+  onAddPartialException: vi.fn(),
+  onRemoveException: vi.fn(),
+};
+
 // 그리드에 이전/다음 달 오버플로우 셀도 같은 날짜 숫자로 렌더링되므로
 // (예: "15일" aria-label이 두 번 나올 수 있음), 현재 달 셀(text-grey-200
 // 클래스가 없는 쪽)만 골라 클릭 대상으로 쓴다.
@@ -30,7 +39,7 @@ describe("ConsultAvailabilityMonthView", () => {
       { startsAt: "2026-10-16T01:00:00.000Z" },
     ]);
 
-    render(<ConsultAvailabilityMonthView timezone="UTC" initialYearMonth="2026-10" />);
+    render(<ConsultAvailabilityMonthView timezone="UTC" initialYearMonth="2026-10" {...noopProps} />);
 
     await waitFor(() => expect(listOpenHomepageConsultSlotsMock).toHaveBeenCalled());
     await waitFor(() => expect(screen.queryByText("불러오는 중...")).not.toBeInTheDocument());
@@ -43,7 +52,7 @@ describe("ConsultAvailabilityMonthView", () => {
 
   it("슬롯이 없는 날짜를 클릭하면 빈 상태 메시지를 보여준다", async () => {
     listOpenHomepageConsultSlotsMock.mockResolvedValue([]);
-    render(<ConsultAvailabilityMonthView timezone="UTC" initialYearMonth="2026-10" />);
+    render(<ConsultAvailabilityMonthView timezone="UTC" initialYearMonth="2026-10" {...noopProps} />);
     await waitFor(() => expect(listOpenHomepageConsultSlotsMock).toHaveBeenCalled());
 
     fireEvent.click(currentMonthDayButton("10일"));
@@ -53,7 +62,7 @@ describe("ConsultAvailabilityMonthView", () => {
 
   it("조회 실패 시 에러 메시지를 보여준다", async () => {
     listOpenHomepageConsultSlotsMock.mockRejectedValue(new Error("네트워크 오류"));
-    render(<ConsultAvailabilityMonthView timezone="UTC" />);
+    render(<ConsultAvailabilityMonthView timezone="UTC" {...noopProps} />);
     await waitFor(() => expect(screen.getByText("네트워크 오류")).toBeInTheDocument());
   });
 });

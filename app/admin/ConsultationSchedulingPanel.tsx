@@ -216,7 +216,15 @@ export default function ConsultationSchedulingPanel() {
       <section className="mb-8">
         <div className="flex items-center justify-between mb-2">
           <h2 className="text-[14px] font-extrabold text-ink">승인 대기 상담 신청 ({pending.length})</h2>
-          <div className="flex gap-2">
+        </div>
+        {/* 2026-09-07 — 제품 오너 지적: 정상 운영 중 관리자가 수동으로 조작할 일이 거의
+            없는 실패 복구용 디버그/운영 도구다(Calendar·Smart Notes 동기화는 기본적으로
+            자동 재처리되고, 이 버튼들은 그 자동 재처리가 실패했을 때만 필요). 완전히
+            지우면 실제 장애 복구 시 쓸 수 없게 되므로 삭제 대신 기본 접힘 섹션으로
+            이동한다. */}
+        <details className="mb-3">
+          <summary className="text-[12px] font-bold text-grey-500 cursor-pointer select-none">고급/운영 도구</summary>
+          <div className="flex gap-2 mt-2">
             <button
               className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5"
               onClick={() => withBusy("__retry", async () => { await retryFailedConsultationCalendarSyncs(); }, "Calendar 재처리")}
@@ -230,7 +238,7 @@ export default function ConsultationSchedulingPanel() {
               Smart Notes 미매칭 재처리
             </button>
           </div>
-        </div>
+        </details>
         {loading ? (
           <p className="text-[13px] text-grey-500">불러오는 중...</p>
         ) : pending.length === 0 ? (
@@ -286,7 +294,7 @@ export default function ConsultationSchedulingPanel() {
           </div>
         </div>
         {view === "month" && (
-          <div className="mb-4" data-testid="consultation-month-calendar">
+          <div className="mb-4 max-w-[280px]" data-testid="consultation-month-calendar">
             <MonthCalendar
               timezone={timezone}
               selectedDateKey={selectedDateKey}
@@ -495,23 +503,29 @@ export default function ConsultationSchedulingPanel() {
         })()}
       </section>
 
-      <section className="mb-8">
-        <div className="flex items-center justify-between mb-2">
-          <h2 className="text-[14px] font-extrabold text-ink">Workspace Events 구독 상태</h2>
-          <div className="flex gap-2">
-            <button
-              className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5"
-              onClick={() => withBusy("__renew_subscriptions", async () => { await retryExpiringWorkspaceEventsSubscriptions(); }, "만료 임박 구독 갱신")}
-            >
-              만료 임박 구독 갱신 실행
-            </button>
-            <button
-              className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5"
-              onClick={() => withBusy("__reconcile_smart_notes", async () => { await runSmartNotesReconciliation(); }, "Smart Notes 사후 대조")}
-            >
-              Smart Notes 사후 대조 실행
-            </button>
-          </div>
+      {/* 2026-09-07 — 제품 오너 지적: 정상 운영 중에는 이 구독이 자동으로 생성·갱신되고
+          (수락/예약 확정 시점, docs/CURRENT.md "Workspace Events 구독 수명주기" 참고),
+          만료 임박 자동 재시도도 이미 있어 관리자가 평소에 볼 필요가 거의 없는
+          디버그 정보다. 다만 자동 갱신이 실패했을 때(예: 인증/쿼터 문제)는 실제로
+          여기서 수동 재시도해야 하는 운영 도구이므로 완전히 지우지 않고 기본 접힘
+          섹션으로만 옮긴다. */}
+      <details className="mb-8">
+        <summary className="text-[14px] font-extrabold text-ink cursor-pointer select-none">
+          고급/운영 도구 — Workspace Events 구독 상태
+        </summary>
+        <div className="flex gap-2 mt-2 mb-2">
+          <button
+            className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5"
+            onClick={() => withBusy("__renew_subscriptions", async () => { await retryExpiringWorkspaceEventsSubscriptions(); }, "만료 임박 구독 갱신")}
+          >
+            만료 임박 구독 갱신 실행
+          </button>
+          <button
+            className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5"
+            onClick={() => withBusy("__reconcile_smart_notes", async () => { await runSmartNotesReconciliation(); }, "Smart Notes 사후 대조")}
+          >
+            Smart Notes 사후 대조 실행
+          </button>
         </div>
         {subscriptions.length === 0 ? (
           <p className="text-[13px] text-grey-500">등록된 구독이 없습니다(상담·수업이 아직 확정되지 않았거나 전부 신규).</p>
@@ -566,7 +580,7 @@ export default function ConsultationSchedulingPanel() {
             </div>
           ))
         )}
-      </section>
+      </details>
 
       <section>
         <div className="flex items-center justify-between mb-2">
@@ -586,7 +600,21 @@ export default function ConsultationSchedulingPanel() {
             ))}
           </div>
         </div>
-        <ConsultAvailabilityMonthView timezone={timezone} />
+        <ConsultAvailabilityMonthView
+          timezone={timezone}
+          rules={rules}
+          exceptions={exceptions}
+          busyId={busyId}
+          onAddFullDayException={({ date, isClosed }) =>
+            withBusy("__consult_exception_full", () => addConsultAvailabilityException({ date, isClosed, reason: "관리자 등록" }))
+          }
+          onAddPartialException={({ date, isClosed, startTime, endTime }) =>
+            withBusy("__consult_exception_partial", () =>
+              addConsultAvailabilityException({ date, isClosed, startTime, endTime, reason: "관리자 등록(부분 시간)" })
+            )
+          }
+          onRemoveException={(exceptionId) => withBusy(exceptionId, () => removeConsultAvailabilityException(exceptionId), "예외 삭제")}
+        />
 
         <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">
           <p className="text-[12.5px] font-bold text-ink mb-2">반복 주간 가능시간</p>
@@ -701,7 +729,12 @@ export default function ConsultationSchedulingPanel() {
           ) : (
             exceptions.map((ex) => (
               <p key={ex.id} className="text-[12.5px] text-grey-700 mb-1">
-                {ex.exception_date} — {ex.is_closed ? "휴무" : `${ex.start_time}~${ex.end_time} 임시 오픈`}
+                {ex.exception_date} —{" "}
+                {ex.is_closed
+                  ? ex.start_time
+                    ? `${ex.start_time}~${ex.end_time} 부분 휴무`
+                    : "종일 휴무"
+                  : `${ex.start_time}~${ex.end_time} 임시 오픈`}
                 {ex.reason && ` (${ex.reason})`}
                 <button className="ml-2 underline text-red" onClick={() => withBusy(ex.id, () => removeConsultAvailabilityException(ex.id), "예외 삭제")}>
                   삭제

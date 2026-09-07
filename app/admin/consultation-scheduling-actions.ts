@@ -359,11 +359,15 @@ export async function addConsultAvailabilityException(params: {
   reason?: string;
 }): Promise<void> {
   const { adminUserId, supabase } = await requireAdmin();
+  // 2026-09-07 — 특정 날짜 전체가 아니라 일부 시간대만 휴무로 등록할 수 있어야 한다는
+  // 지적을 반영: is_closed=true여도 startTime/endTime이 주어지면 그 시간대만 부분
+  // 휴무로 저장한다(값이 없으면 기존처럼 종일 휴무). is_closed=false(임시 오픈)는
+  // 원래도 startTime/endTime이 필수(테이블 check 제약)였으므로 그대로 둔다.
   const { error } = await supabase.from("consult_availability_exceptions").insert({
     exception_date: params.date,
     is_closed: params.isClosed,
-    start_time: params.isClosed ? null : params.startTime,
-    end_time: params.isClosed ? null : params.endTime,
+    start_time: params.startTime || null,
+    end_time: params.endTime || null,
     reason: params.reason || null,
     created_by: adminUserId,
   });
