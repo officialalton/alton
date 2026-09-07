@@ -63,6 +63,7 @@ export default function SessionShell({
   docLinks,
   whiteboardStrokes,
   problemLog,
+  writesEnabled = true,
 }: {
   sessionId: string;
   studentId: string;
@@ -85,9 +86,17 @@ export default function SessionShell({
   docLinks: DocLink[];
   whiteboardStrokes: CanvasStroke[];
   problemLog: ProblemLogEntry[];
+  // R8 1/N — v3(sessions_v3 cutover) 세션은 canvas_annotations/homework_items/
+  // vocab_words 등 필기·과제·단어장 하위 테이블이 아직 legacy_sessions만 참조한다
+  // (FK 마이그레이션은 이번 라운드 범위 밖, item 3 annotation event log 별도 작업에서
+  // 다룰 예정). 그 사이 v3 세션에서 저장을 시도하면 FK 위반으로 서버 액션이 깨지므로,
+  // writesEnabled=false일 때 편집 컴포넌트에 읽기전용에 해당하는 viewerRole을 넘겨
+  // 저장 UI 자체를 숨긴다 — DB 레벨 강제가 아니라 UI 가드임을 명시.
+  writesEnabled?: boolean;
 }) {
   const router = useRouter();
   const isTeacher = viewerRole === "teacher";
+  const contentViewerRole: SessionViewViewer = writesEnabled ? viewerRole : "admin";
 
   const validTabs = useMemo(
     () => TABS.filter((t) => !t.teacherOnly || isTeacher),
@@ -182,28 +191,34 @@ export default function SessionShell({
         endLabel={endLabel}
       />
 
+      {!writesEnabled && (
+        <div className="px-6 py-2 text-[12.5px] text-amber-800 bg-amber-50 border-b border-amber-200">
+          이 수업은 새 예약 시스템(v3) 세션입니다 — 필기·과제·단어장 저장은 다음
+          라운드에서 지원됩니다. 지금은 배정된 교재 열람만 가능합니다.
+        </div>
+      )}
       {activeTab === "material" ? (
         <MaterialTab
           sessionId={sessionId}
           studentId={studentId}
           material={material}
-          viewerRole={viewerRole}
+          viewerRole={contentViewerRole}
           tipsVisible={tipsVisible}
         />
       ) : activeTab === "vocab" ? (
         <VocabTab
           initialWords={vocabWords}
           isTeacher={isTeacher}
-          canManage={viewerRole === "student"}
+          canManage={viewerRole === "student" && writesEnabled}
           studentName={studentName}
         />
       ) : activeTab === "homework" ? (
         <HomeworkTab
           sessionId={sessionId}
           initialItems={homeworkList}
-          viewerRole={viewerRole}
+          viewerRole={contentViewerRole}
         />
-      ) : activeTab === "aigen" && isTeacher ? (
+      ) : activeTab === "aigen" && isTeacher && writesEnabled ? (
         <AigenTab
           sessionId={sessionId}
           subjectId={subjectId}
@@ -216,12 +231,12 @@ export default function SessionShell({
       ) : activeTab === "docs" ? (
         <ScratchpadTab
           sessionId={sessionId}
-          viewerRole={viewerRole}
+          viewerRole={contentViewerRole}
           initialDocLinks={docLinks}
           initialWhiteboardStrokes={whiteboardStrokes}
         />
       ) : activeTab === "log" ? (
-        <ProblemLogTab initialEntries={problemLog} viewerRole={viewerRole} />
+        <ProblemLogTab initialEntries={problemLog} viewerRole={contentViewerRole} />
       ) : (
         <div className="p-8 text-[14px] text-grey-500">
           {validTabs.find((t) => t.id === activeTab)?.label} 탭은 준비 중입니다.

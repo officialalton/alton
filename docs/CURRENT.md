@@ -1976,3 +1976,113 @@ R10은 로드맵(§`2026-08-29-master-roadmap-v3.md` 835-873행)에서 요구사
   있어 구현이 이 검토를 막지도 않는다**(로드맵 원문과 동일한 입장).
 - **외부 변경**: 0건. Stripe/Google/이메일/원격 DB 전부 미접근, 로컬
   `.env`의 실호출 플래그도 건드리지 않음. `git push` 없음, main 병합 없음.
+
+## 2026-09-07 — R8 병렬 착수 1/N: 세션뷰 cutover connection(v3 sessions 연결) + material_version_id 불변식
+
+R8("핵심 수업 공간 신뢰성") 체크리스트 중 최우선 항목만 이번 라운드에서
+완료했다. R10(정산)과 같은 세션에서 병렬로 진행 중이며, `supabase/migrations/`
+에 R10 쪽 `20261218000000_r10_payout_batch_lifecycle.sql`과 R8 Drive 큐 쪽
+`20261220000000_r8_session_drive_provisioning_queue.sql`(다른 병렬 작업,
+이 절 작성자는 관여하지 않음)이 같은 배치에 섞여 있다 — 셋 다 각자 독립
+additive migration이라 순서 무관하게 함께 적용 확인됨.
+
+### 완료
+
+1. **cutover connection**(로드맵 R8 (1)): `/session/[id]`(`app/session/[id]/page.tsx`)가
+   기존에는 `legacy_sessions`만 조회했다 — 실제 v3 예약(`sessions`/
+   `reservations`, R6~R7)으로 들어온 세션은 갈 곳이 없었다. 새 모듈
+   `app/session/[id]/session-source-data.ts`(`loadNormalizedSession`)가
+   legacy_sessions를 먼저 조회하고(기존 레거시 테스트 데이터·화면 100% 보존),
+   없으면 v3 `sessions`(+`reservations`+`subject_enrollments`)로 폴백해 같은
+   모양(`NormalizedSession`)으로 정규화한다. viewer role(student/teacher/
+   parent/admin) 판정, 완료 세션 잠금(v3 `final_status`가 scheduled/live가
+   아니면 `computeSessionViewState`가 "completed"로 취급)까지 두 원본 공통
+   경로로 처리.
+2. **완료 세션 읽기 전용 잠금**(로드맵 R8 (4) 일부): v3 세션은 `final_status`가
+   scheduled/live를 벗어나면 기존 `SessionViewState "completed"` 처리 경로를
+   그대로 타 자동으로 잠긴다(레거시와 동일 메커니즘 재사용, 신규 코드 없음).
+3. **material_version_id 불변식 강제**(로드맵 R8 (1), `docs/CURRENT.md`
+   "material_version_id 정책(R9 이관)" 문서화분의 코드화): 신규 migration
+   `20261219000000_r8_material_version_lock.sql` — `sessions.material_version_id`가
+   한 번 채워지면 재배정 불가, `final_status`가 scheduled/live를 벗어난
+   뒤에는 아예 변경 불가(트리거 `sessions_prevent_material_version_reassignment`,
+   R1의 `sessions_prevent_direct_update`와 동일 `app.bypass_session_lock`
+   우회 관례를 재사용).
+4. **v3 세션의 하위 테이블(필기/과제/단어장/AI문제생성) 쓰기 가드**: 조사 결과
+   `canvas_annotations`/`homework_items`/`vocab_words`/`session_problem_attempts`
+   등은 R6 cutover 당시 명시적으로 `legacy_sessions`만 참조하도록 남겨졌다
+   (FK가 legacy_sessions를 가리킴, `20260928000000_r6_sessions_cutover.sql`
+   주석 확인) — v3 세션 id로 그 테이블에 쓰면 FK 위반으로 서버 액션이 깨진다.
+   이 하위 테이블을 v3로 확장하는 마이그레이션은 로드맵 R8 (3) "annotation
+   event log"(별도 신규 이벤트 소싱 테이블)에서 다룰 몫이라 이번 라운드
+   범위에 넣지 않고, 대신 `SessionShell`에 `writesEnabled` prop을 추가해
+   v3 세션에서는 편집 컴포넌트에 읽기전용 뷰어(`"admin"`)를 넘겨 저장 UI
+   자체를 숨기고 상단에 안내 배너("필기·과제·단어장 저장은 다음 라운드에서
+   지원됩니다")를 노출한다 — **UI 레벨 가드이며 DB 레벨 강제는 아님**을
+   명시(서버 액션을 직접 호출하면 여전히 FK 위반으로 실패할 뿐, 별도 방어
+   로직은 추가하지 않음 — 다음 annotation event log 라운드에서 근본 해결).
+
+### 검증
+
+- `supabase db reset --local`: 통과(R10/타 R8 병렬 migration 포함 전체 적용
+  확인).
+- `npx tsc --noEmit`: 클린.
+- `app/session/[id]/r8-cutover.integration.test.ts`(신규, UAT 실행 ID
+  `r8cutover01` — household `aabbccdd-...0001`/학생 `cccccccc-...0002`/선생님
+  `dddddddd-...0002`(전부 기존 고정 시드 계정 재사용, 신규 계정 생성 없음)
+  위에 contract/subject_enrollment/reservation/session/curriculum_doc(+version)
+  1건씩만 생성, `afterAll`에서 정확히 그 id들만 삭제 확인): 7/7 통과 —
+  (1) v3 세션이 legacy_sessions에 없어도 정규화되어 학생 뷰어로 읽힘,
+  (2) teacher_id 기준 teacher 뷰어 판정, (3) 무관한 사용자는 null(notFound),
+  (4) 종료 상태(final_status=company_cancelled)면 completed로 잠김,
+  (5)(6)(7) material_version_id 최초 배정 허용/재배정 차단/완료 후 변경
+  차단 트리거 확인.
+- 기존 `app/session/**` 컴포넌트 테스트(43개, mocked) 전부 통과 — SessionShell
+  prop 추가(`writesEnabled`, 기본값 true)가 레거시 경로 회귀를 일으키지
+  않음을 확인.
+- 전체 Vitest 1회 시도했으나 R10 병렬 세션이 같은 로컬 DB에 동시에
+  `supabase db reset --local`을 실행하며 레이스가 발생해(다른 라운드
+  테스트가 원인 불명 buffer/slot 오류로 실패, 격리 재실행 시 100% 통과
+  확인) 신뢰할 수 있는 전체 스위트 1회 결과를 이번 라운드에서 확보하지
+  못했다 — **내 변경분과 무관함을 개별 파일 재실행으로 확인**했지만, 두
+  병렬 라운드가 모두 끝난 뒤 한쪽이 마지막에 전체 스위트 1회를 다시 돌려
+  확정할 것을 다음 작업으로 남긴다.
+- `next build`는 이번 절에서 별도로 실행하지 않음(R10 병렬 세션과 동시에
+  실행 시 `.next` 산출물 경합 위험 판단, tsc 클린 + 대상 vitest 통과로
+  대체) — 다음 라운드(또는 R10과 조율 후) 1회 확인 필요.
+
+### 미완료 / 다음 순서(로드맵 R8 우선순위 그대로)
+
+로드맵 R8 체크리스트 중 이번 라운드가 다루지 못한 항목(우선순위 순, 이번에
+손대지 않음):
+2. 교재 버전 스냅샷의 실제 배정 메커니즘(R9 과목 템플릿 선행 필요 — 위
+   "완료" 3번은 불변식만, 배정 로직 자체는 미착수 그대로 이월).
+3. annotation overlay 실시간 전송·영구 저장·재접속 복구·동시 편집 충돌
+   처리·전체 지우기 감사 이력 — 신규 이벤트 소싱 테이블 설계 필요, 착수
+   안 함.
+5~7. 회사 Shared Drive 폴더 자동 생성·권한 자동화, Smart Notes 이동,
+   Drive/Supabase 역할 분리 — 이번 세션에서는 손대지 않음(단, 같은 세션의
+   R8 병렬 작업이 8번 재처리 큐 쪽 일부를 별도로 진행한 것으로 보임 —
+   `lib/drive-session-tasks.ts`/`20261220000000_r8_session_drive_provisioning_queue.sql`,
+   이 절 작성자는 그 코드를 검토·수정하지 않았으니 그쪽 라운드 보고를
+   참고할 것).
+9. Drive ACL 없이 서버 경유 제공 — 미착수.
+10. iPad/Apple Pencil/회전/확대/스크롤 실기기 QA — **명시적으로 스킵**:
+    이 세션은 실기기(iPad/Pencil)에 접근할 수 없다. 기존
+    `SessionShell`/`CanvasOverlay`/`MathCanvas` 등은 이미 Tailwind
+    반응형 클래스와 pointer 이벤트(마우스/터치 겸용으로 보이는 핸들러)를
+    쓰고 있으나 이번 라운드에서 별도 코드 리뷰·뷰포트 시뮬레이션은
+    수행하지 않았다(레포에 Playwright가 있으나 이 화면 대상 e2e는 아직
+    없음) — 다음 라운드에서 최소한 뷰포트 시뮬레이션이라도 추가할지 결정
+    필요.
+11. 느린 네트워크·오프라인·재접속 시험 — annotation 실시간 전송 자체가
+    아직 없어(3번 미착수) 대상이 없다. 3번 구현 시 함께 다룰 것.
+
+### 이번 라운드 변경 파일
+
+- `app/session/[id]/page.tsx`(수정), `app/session/[id]/session-source-data.ts`(신규),
+  `app/session/[id]/SessionShell.tsx`(수정, `writesEnabled` prop 추가),
+  `app/session/[id]/r8-cutover.integration.test.ts`(신규),
+  `supabase/migrations/20261219000000_r8_material_version_lock.sql`(신규),
+  `docs/2026-09-07-r8-session-cutover-oneP-pager.md`(신규, 착수 전 1장 정리),
+  `docs/CURRENT.md`(이 절).
