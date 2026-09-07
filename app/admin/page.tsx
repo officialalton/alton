@@ -20,7 +20,7 @@ import {
 } from "./consultation-data";
 import { listOpenContractActivationRetries } from "./consultation-actions";
 import { loadDevLog } from "./dev-log-data";
-import { loadPayouts } from "./payouts-data";
+import { loadPayoutBatches } from "./payout-batches-data";
 import { loadTeacherCandidatesBySubject } from "./matching-data";
 import { loadWorkspaceProvisionings } from "./workspace-data";
 import { loadEntitlementProducts, loadEntitlementProductVersions } from "./entitlement-data";
@@ -57,7 +57,7 @@ export default async function AdminHomePage({
     driveIssues,
     staleEnvelopes,
     contractActivationRetries,
-    payouts,
+    payoutBatches,
     teacherCandidatesBySubject,
     workspaceProvisionings,
     entitlementProducts,
@@ -81,7 +81,7 @@ export default async function AdminHomePage({
     loadDriveArtifactIssues(supabase),
     loadStaleEnvelopeVersions(supabase),
     listOpenContractActivationRetries(),
-    loadPayouts(supabase),
+    loadPayoutBatches(supabase),
     loadTeacherCandidatesBySubject(supabase),
     loadWorkspaceProvisionings(supabase),
     loadEntitlementProducts(supabase),
@@ -131,7 +131,7 @@ export default async function AdminHomePage({
       staleEnvelopes={staleEnvelopes}
       contractActivationRetries={contractActivationRetries}
       devLogContent={devLogContent}
-      payouts={payouts}
+      payoutBatches={payoutBatches}
       teacherCandidatesBySubject={teacherCandidatesBySubject}
       workspaceProvisionings={workspaceProvisionings}
       entitlementProducts={entitlementProducts}

@@ -25,8 +25,8 @@ import type {
 } from "./consultation-data";
 import type { ContractActivationRetryItem } from "./consultation-actions";
 import DevLogTab from "./DevLogTab";
-import PayoutsTab from "./PayoutsTab";
-import type { PayoutListItem } from "./payouts-data";
+import PayoutBatchesTab from "./PayoutBatchesTab";
+import type { PayoutBatchListItem } from "./payout-batches-data";
 import MatchingTab from "./MatchingTab";
 import type { MatchingTeacherCandidate } from "./matching-data";
 import WorkspaceTab from "./WorkspaceTab";
@@ -61,7 +61,7 @@ const NAV_ITEMS = [
   { id: "unified-schedule", label: "통합 일정", icon: "🗺️" },
   { id: "booking", label: "예약", icon: "🗓️" },
   { id: "qc", label: "QC", icon: "🛡" },
-  { id: "payouts", label: "정산", icon: "💸" },
+  { id: "payouts", label: "정산 (v3)", icon: "💸" },
   { id: "workspace", label: "Workspace", icon: "🔑" },
   { id: "documents", label: "문서", icon: "📁" },
   { id: "devlog", label: "개발 로그", icon: "🧾" },
@@ -88,7 +88,7 @@ export default function AdminShell({
   staleEnvelopes,
   contractActivationRetries,
   devLogContent,
-  payouts,
+  payoutBatches,
   teacherCandidatesBySubject,
   workspaceProvisionings,
   entitlementProducts,
@@ -120,7 +120,7 @@ export default function AdminShell({
   staleEnvelopes: StaleEnvelopeContract[];
   contractActivationRetries: ContractActivationRetryItem[];
   devLogContent: string;
-  payouts: PayoutListItem[];
+  payoutBatches: PayoutBatchListItem[];
   teacherCandidatesBySubject: Record<string, MatchingTeacherCandidate[]>;
   workspaceProvisionings: WorkspaceProvisioningItem[];
   entitlementProducts: EntitlementProductListItem[];
@@ -278,7 +278,7 @@ export default function AdminShell({
           ) : activeTab === "devlog" ? (
             <DevLogTab content={devLogContent} />
           ) : activeTab === "payouts" ? (
-            <PayoutsTab initialPayouts={payouts} />
+            <PayoutBatchesTab initialBatches={payoutBatches} />
           ) : activeTab === "matching" ? (
             <MatchingTab
               students={students}
