@@ -87,6 +87,7 @@ async function sendDirectOnboardingNoticeInternal(params: {
     p_guardian_email: guardianEmail,
     p_guardian_name: guardianName,
     p_students: studentsPayload,
+    p_admin_id: actorUserId,
   });
   if (error || !data?.[0]) throw new Error(error?.message ?? "온보딩 링크 발급에 실패했습니다.");
   const linkId: string = data[0].link_id;

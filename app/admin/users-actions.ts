@@ -3,6 +3,7 @@
 import { createAdminClient } from "@/lib/supabase-admin";
 import { requireAdmin } from "@/lib/admin-auth";
 import { sendInviteEmail } from "@/lib/invite-email";
+import { currentRequestOrigin } from "@/lib/request-origin";
 import { assertTeacherHasValidRate } from "@/lib/enrollment/teacher-rate-check";
 
 async function inviteAndCreateProfile(params: {
@@ -11,10 +12,9 @@ async function inviteAndCreateProfile(params: {
   role: "parent" | "student" | "teacher";
 }): Promise<string> {
   const admin = createAdminClient();
+  const siteUrl = await currentRequestOrigin();
   const redirectTo =
-    params.role === "parent"
-      ? `${process.env.NEXT_PUBLIC_SITE_URL}/set-password?role=parent`
-      : `${process.env.NEXT_PUBLIC_SITE_URL}/set-password`;
+    params.role === "parent" ? `${siteUrl}/set-password?role=parent` : `${siteUrl}/set-password`;
   const { data, error } = await admin.auth.admin.inviteUserByEmail(params.email, {
     redirectTo,
   });
