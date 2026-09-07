@@ -510,7 +510,13 @@ function ContractSendForm({
         disabled={busy || !approverTitle.trim()}
         onClick={() =>
           onSend(async () => {
-            await sendRegularContractOneClickAction({
+            // (2026-09-06 버그 수정) sendRegularContractOneClickAction은 DocuSign
+            // 발송 실패를 throw가 아니라 { status: "failed", error } 값으로
+            // 반환한다(계약을 draft로 유지하기 위한 의도적 설계 — 위 함수 주석
+            // 참고). 이 반환값을 그냥 버리면 재시도 버튼을 눌러도 관리자에게
+            // 아무 피드백이 없어 "고장난 것처럼" 보인다 — 실제로는 아래에서
+            // 반환값을 확인해 실패 사유를 화면에 노출한다.
+            const result = await sendRegularContractOneClickAction({
               childId,
               subjectEnrollmentId,
               guardianEmail,
@@ -518,6 +524,14 @@ function ContractSendForm({
               childName,
               approverTitle: approverTitle.trim(),
             });
+            if (result.status === "failed") {
+              const isPreviewGate = result.error.includes("DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS");
+              throw new Error(
+                isPreviewGate
+                  ? "Preview 환경에서는 실제 DocuSign 발송이 비활성화되어 있습니다(정상 동작). 계약은 draft 상태로 남으며, 실제 발송은 Production 환경에서만 이루어집니다."
+                  : `발송 실패: ${result.error}`
+              );
+            }
           })
         }
       >

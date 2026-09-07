@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi, beforeEach } from "vitest";
 import ConsultationKanbanBoard from "./ConsultationKanbanBoard";
-import { sendTrialOnboardingNoticeAction } from "./trial-onboarding-actions";
+import { sendTrialOnboardingNoticeAction, sendRegularContractOneClickAction } from "./trial-onboarding-actions";
 
 const refreshMock = vi.fn();
 vi.mock("next/navigation", () => ({
@@ -382,5 +382,133 @@ describe("2026-09-06: 상담 카드·상세에 상담 시각 노출", () => {
     );
     await waitFor(() => expect(screen.getByText(/재상담 후보/)).toBeInTheDocument());
     expect(screen.getByText(/예전 상담 — 예산 문제로 보류/)).toBeInTheDocument();
+  });
+});
+
+// (2026-09-06 제품 오너 지시) "정규 계약" 발송 실패 배너가 뜬 뒤 회사 승인자
+// 직함을 입력하고 재시도해도 관리자에게 아무 피드백이 없어 "재시도 버튼이
+// 고장난 것"처럼 보인다는 보고 — 실제 원인은 sendRegularContractOneClickAction이
+// 실패를 throw가 아니라 { status: "failed", error } 값으로 반환하는데,
+// ContractSendForm의 onClick 핸들러가 그 반환값을 그냥 버리고 있었던 것
+// (버그). Preview 환경에서는 DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS 게이트로
+// 실제 DocuSign 호출이 항상 막혀 있으므로 이 자체는 버그가 아니지만, 그
+// 사실이 화면에 전혀 드러나지 않는 건 버그였다 — 이제 결과를 확인해 화면에
+// 표시한다.
+describe("ConsultationKanbanBoard — 정규 계약 발송 실패 피드백(2026-09-06 버그 수정)", () => {
+  function contractCardDetail() {
+    return {
+      consultation: {
+        id: "c1",
+        contact_name: "세온장",
+        contact_email: "seonjang@example.com",
+        contact_phone: null,
+        student_grade: "10학년",
+        status: "completed",
+        outcome: "regular_recommended",
+        child_id: "child1",
+        trial_intent_confirmed_at: "2026-09-01T00:00:00Z",
+      },
+      pipeline: {
+        consultationId: "c1",
+        subjectEnrollmentId: "se1",
+        trialEntitlementGrantStatus: null,
+        trialEntitlementGrantError: null,
+        steps: [
+          { key: "account_linked", done: true, label: "보호자·학생 계정 연결" },
+          { key: "assignment", done: true, label: "과목·선생님 배정" },
+        ],
+      },
+      childName: "세온장",
+      guardianEmail: "guardian@example.com",
+      guardianName: "보호자",
+      contractId: "contract1",
+      contractStatus: "draft",
+      latestContractVersionHasEnvelope: false,
+      noticeDeliveryStatus: null as "pending" | "sent" | "failed" | null,
+      noticeSendError: null as string | null,
+      noticeSentAt: null as string | null,
+    };
+  }
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    findDuplicateConsultationCandidatesMock.mockResolvedValue([]);
+    listKanbanBoardActionMock.mockResolvedValue([
+      {
+        id: "c1",
+        contact_name: "세온장",
+        contact_email: "seonjang@example.com",
+        contact_phone: null,
+        student_grade: "10학년",
+        status: "completed",
+        outcome: "regular_recommended",
+        stage: "contract_sent" as const,
+      },
+    ]);
+    getConsultationCardDetailActionMock.mockResolvedValue(contractCardDetail());
+  });
+
+  it("Preview DocuSign 게이트로 실패하면 재시도 시 '환경 제약' 메시지를 화면에 보여준다(무피드백 버그 수정)", async () => {
+    (sendRegularContractOneClickAction as ReturnType<typeof vi.fn>).mockResolvedValue({
+      status: "failed",
+      contractVersionId: "cv1",
+      error: "DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS=true가 아니면 실제 DocuSign API를 호출하지 않습니다.",
+    });
+
+    render(<ConsultationKanbanBoard subjects={subjects} teacherCandidatesBySubject={teacherCandidatesBySubject} />);
+
+    fireEvent.click(await screen.findByText("세온장"));
+    await screen.findByTestId("consultation-card-detail");
+
+    fireEvent.change(screen.getByPlaceholderText("회사 승인자 직함(필수)"), {
+      target: { value: "대표이사" },
+    });
+    fireEvent.click(screen.getByText("회사 승인 및 계약 발송"));
+
+    await waitFor(() =>
+      expect(sendRegularContractOneClickAction).toHaveBeenCalledWith(
+        expect.objectContaining({ childId: "child1", subjectEnrollmentId: "se1", approverTitle: "대표이사" })
+      )
+    );
+    await waitFor(() =>
+      expect(screen.getByText(/Preview 환경에서는 실제 DocuSign 발송이 비활성화되어 있습니다/)).toBeInTheDocument()
+    );
+  });
+
+  it("다른 사유(실제 API 오류)로 실패하면 그 오류 메시지를 그대로 화면에 보여준다", async () => {
+    (sendRegularContractOneClickAction as ReturnType<typeof vi.fn>).mockResolvedValue({
+      status: "failed",
+      contractVersionId: "cv1",
+      error: "DocuSign 봉투 생성 실패: 500 Internal Server Error",
+    });
+
+    render(<ConsultationKanbanBoard subjects={subjects} teacherCandidatesBySubject={teacherCandidatesBySubject} />);
+
+    fireEvent.click(await screen.findByText("세온장"));
+    await screen.findByTestId("consultation-card-detail");
+
+    fireEvent.change(screen.getByPlaceholderText("회사 승인자 직함(필수)"), {
+      target: { value: "대표이사" },
+    });
+    fireEvent.click(screen.getByText("회사 승인 및 계약 발송"));
+
+    await waitFor(() =>
+      expect(screen.getByText(/발송 실패: DocuSign 봉투 생성 실패/)).toBeInTheDocument()
+    );
+  });
+
+  it("회사 승인자 직함을 입력하면 재시도 버튼이 활성화된다(비활성화 고정 버그 아님)", async () => {
+    render(<ConsultationKanbanBoard subjects={subjects} teacherCandidatesBySubject={teacherCandidatesBySubject} />);
+
+    fireEvent.click(await screen.findByText("세온장"));
+    await screen.findByTestId("consultation-card-detail");
+
+    const button = screen.getByText("회사 승인 및 계약 발송") as HTMLButtonElement;
+    expect(button.disabled).toBe(true);
+
+    fireEvent.change(screen.getByPlaceholderText("회사 승인자 직함(필수)"), {
+      target: { value: "대표이사" },
+    });
+    expect(button.disabled).toBe(false);
   });
 });

@@ -208,3 +208,12 @@
 - [x] 검증: `supabase db reset --local` 성공(신규 마이그레이션 없음) / `npx tsc --noEmit` 0 에러 / `npx vitest run`(전체) 189파일·1270건 전부 통과 / `npx next build` 성공.
 - [ ] **다음 오픈 전 별도 라운드 과제로 이관**: 캐싱 도입(`revalidate`/`cache()`/`unstable_cache` 등)으로 반복 조회 비용을 추가로 줄이는 작업 — 이번 라운드는 순차→병렬 전환만 다뤘고 캐싱은 별도 승인·설계가 필요해 범위에서 제외했다.
 - [ ] 브라우저로 실제 Preview에서 각 포털 홈 페이지 첫 로딩 체감 속도가 개선됐는지 눈으로 확인하는 것은 이번 세션 범위 밖 — Preview alias 갱신 후 직접 확인 권장.
+
+### 2026-09-06 14차 세션 — 병렬화 직후 제품 오너 즉시 보고 2건(수업 리스트 회귀 의심 / 정규 계약 재시도 무피드백)
+
+13차 세션(병렬화) 배포 직후 제품 오너가 즉시 보고한 2가지. 상세 근거는 `docs/CURRENT.md`의 "2026-09-06(제품 오너 즉시 보고 2건 — 병렬화 직후)" 절 참고.
+
+- [x] **#1 보호자 포털 수업 리스트 회귀 의심(조사 결과: 버그 아님)** — `git show ae95c39`로 관련 diff(`app/parent/page.tsx` 외 4개 파일)를 전부 정독해 의존관계 파괴가 없음을 확인. 실제 seed 데이터로 로컬 DB에 대고 `loadLessons`/`loadCurricula`/`loadDashboardData`를 service-role·실제 보호자 RLS 세션(JWT) 양쪽으로 병렬/순차 호출해 결과가 완전히 동일함을 실증. 병렬화 자체는 원인이 아니다.
+- [x] **#2 관리자 칸반 "정규 계약" 재시도 무피드백(버그, 수정 완료)** — `sendRegularContractOneClickAction`이 DocuSign 발송 실패를 throw가 아니라 `{status:"failed", error}` 반환값으로 돌려주는데, `ContractSendForm.onClick`(`app/admin/ConsultationKanbanBoard.tsx`)이 이 반환값을 확인하지 않고 버려서 재시도해도 아무 피드백이 없었다. 반환값의 `status`를 확인해 실패 시 throw하도록 수정하고, Preview DocuSign 게이트(`DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS`)로 인한 실패는 "Preview 환경에서는 실제 DocuSign 발송이 비활성화되어 있습니다(정상 동작)"로 문구를 구분해 관리자가 실제 버그와 환경 제약을 헷갈리지 않게 함. 재시도 버튼 자체(빈 입력 시 비활성화, 입력 시 활성화)는 정상 동작임을 확인.
+- [x] 검증: `supabase db reset --local` 성공(신규 마이그레이션 없음) / `npx tsc --noEmit` 0 에러 / 신규 통합 테스트 `app/parent/parent-home-lessons-parallel-regression.integration.test.ts`(로컬 Postgres, service-role + 실제 RLS 세션 양쪽) 2건, `app/admin/ConsultationKanbanBoard.test.tsx` 신규 3건 — 전부 통과 / `npx vitest run`(전체) 190파일·1275건 중 1건만 실패(`lib/timezone-persistence.integration.test.ts` — 단독 실행 시 통과하는 기존 병렬 실행 플레이크, 재확인 결과 이번 변경과 무관) / `npx next build` 성공.
+- [ ] 브라우저로 실제 Preview에서 "세온장" 카드의 "정규 계약" 섹션에 회사 승인자 직함을 입력하고 재시도했을 때 새 Preview 게이트 안내 문구가 실제로 뜨는지 눈으로 확인하는 것은 이번 세션 범위 밖 — Preview alias 갱신 후 직접 확인 권장.
