@@ -1,5 +1,79 @@
 # ALTON — 현재 상태 (2026-09-07 기준)
 
+> **2026-09-07(R10 corrective) 제품 오너 리뷰 4건 수정 — paid 전이 가드,
+> 역분개 재설계, 레거시 teacher_payouts 쓰기 완전 차단, 관리자 UI/DB 상태
+> 불일치 정정.** 배경: R10 Task A/B/C(`1072dda`, `6cb8ee6`) 완료 후 제품
+> 오너가 4가지 결함을 지적했고, 이번 라운드는 그 4건을 전부 고치는 순수
+> 기술 corrective다(신규 기능 없음, DB additive migration만).
+>
+> **수정 1 — paid는 이제 provider_pending + provider_transaction_id +
+> provider_confirmed_at(신규, 최종 성공 확인 시각) 세 조건이 모두 있어야만
+> 성립한다.** 이전에는 `real_disbursement_enabled()`가 true이기만 하면
+> `mark_payout_batch_paid()`가 approved/processing에서 곧바로 paid로 전이할
+> 수 있었다(실제 Mercury/Wise 확인 없이 "지급 완료" 표시 가능). 신규 함수
+> `mark_payout_batch_provider_confirmed()`가 provider_pending 상태 +
+> provider_transaction_id 존재를 확인한 뒤에만 `provider_confirmed_at`을
+> 채우고, `mark_payout_batch_paid()`는 이제 provider_pending 상태가 아니거나
+> 두 확인 컬럼 중 하나라도 없으면 무조건 거부한다. **CHECK 제약
+> `payout_batches_paid_requires_confirmation`/`payout_items_paid_requires_confirmation`**을
+> 두 테이블에 추가해 이 불변을 함수 본문이 아니라 테이블 레벨에서도 강제한다
+> — 다른 코드 경로(직접 UPDATE 등)로도 우회 불가함을 통합 테스트로 확인
+> (마이그레이션 `20261224000000_r10_paid_transition_guard_and_reversal_fix.sql`).
+>
+> **수정 2 — `reverse_payout_item()`이 게이트 상태와 무관하게 항상
+> approved에서 시작하도록 재설계.** 이전 버전은 게이트가 열려 있으면 "지금
+> 열려있다"는 이유만으로 새 paid batch/item을 낙관적으로 만들었다(실제 송금
+> 확인 없이). 이제는 항상 approved 상태로 새 batch/item을 만들고, paid까지
+> 가려면 정규 payout과 동일한
+> `dispatch_payout_batch → mark_payout_batch_provider_pending →
+> mark_payout_batch_provider_confirmed → mark_payout_batch_paid` 파이프라인을
+> 그대로 통과해야 한다.
+>
+> **수정 3 — `app/admin/payouts-cron.ts`가 이제 진짜 no-op이다.**
+> `runGeneratePayouts()`는 `computePayoutAmounts()`로 금액만 계산해 반환하고
+> `teacher_payouts`에 대한 select/insert/update/upsert/delete를 전혀 하지
+> 않는다(파일에 "teacher_payouts" 문자열 자체가 없음). Route Handler
+> (`app/api/cron/generate-payouts/route.ts`)는 이미 410 no-op이었고
+> `vercel.json`의 cron 등록도 비어 있었지만(선행 라운드), 이 함수 자체에
+> 쓰기 로직이 남아있다는 지적이 있어 완전히 제거했다. **회귀 가드**:
+> `lib/legacy-teacher-payouts-write-guard.test.ts`가 `app/`·`lib/`·
+> `supabase/migrations/` 전체를 정적으로 grep해 `teacher_payouts`에 대한
+> INSERT/UPDATE/UPSERT/DELETE(Supabase 클라이언트 및 raw SQL 둘 다) 경로가
+> 하나도 없음을 확인한다(허용목록은 비어 있음 — 새 write가 필요하면 이 테스트
+> 부터 고쳐야 함이 강제됨). **DB 레벨 방어도 추가**: authenticated/anon
+> 역할의 `teacher_payouts` insert/update/delete grant를 명시적으로 revoke
+> (원래도 없었지만 회귀 방지 목적으로 재확인 REVOKE). service_role은
+> Supabase 구조상 RLS/grant를 우회하므로 실제 차단선은 코드 레벨(no-op화)이고
+> DB REVOKE는 심층 방어다.
+>
+> **수정 4 — `PayoutBatchesTab`의 "실패 처리" 버튼과
+> `mark_payout_batch_failed()`의 허용 상태를 일치시켰다.** 기존 버튼은
+> reviewing/reviewed 상태에서도 노출됐지만 DB 함수는 processing/approved만
+> 허용해 에러가 났다. 검토 중 batch를 반려하는 것은 정상 업무 흐름이므로
+> DB 함수의 허용 상태를 draft/calculated/reviewing/reviewed/approved(및 아직
+> 이 화면에서 도달 불가한 processing/dispatch_requested/provider_pending)로
+> 넓혔다 — paid는 여전히 절대 불가. 컴포넌트 전체를 감사해 다른 버튼
+> (검토 제출/승인)은 이미 DB 허용 상태와 일치함을 확인했다.
+>
+> **통합 테스트**(`lib/booking/payout-batch-lifecycle.integration.test.ts`,
+> 로컬 Postgres에 psql로 직접 검증, `supabase db reset --local` 후 전체
+> 통과): (a) 게이트 닫힘 — processing/dispatch_requested/provider_pending/
+> paid 전체 매트릭스 거부, (b) 게이트 열림 — provider_pending +
+> transaction id + 최종 확인이 모두 있어야만 paid, 하나라도 없으면 거부(각
+> 조합 개별 확인), (c) CHECK 제약이 함수 우회 직접 UPDATE도 구조적으로
+> 거부, (d) 역분개가 게이트 열림/닫힘과 무관하게 항상 approved에서 시작하고
+> 정규 파이프라인을 그대로 거쳐야만 paid가 됨, (e)
+> `mark_payout_batch_failed`가 reviewing/reviewed에서도 실제로 동작.
+> `lib/legacy-teacher-payouts-write-guard.test.ts`(레거시 쓰기 경로 0건 정적
+> 확인) 및 `app/admin/PayoutBatchesTab.test.tsx`(상태별 실패 처리 버튼 노출
+> 매트릭스, draft/calculated/reviewing/reviewed/approved=노출,
+> paid/failed=비노출)도 추가.
+>
+> **범위 밖(의도적)**: 실제 Mercury/Wise API 클라이언트, webhook 핸들러는
+> 여전히 레포에 없다(순수 상태머신·가드만). `mark_payout_batch_provider_confirmed()`를
+> 실제로 호출하는 배선(webhook/재조회 대사 배치)도 다음 라운드(법인 설립
+> 이후) 과제다.
+>
 > **2026-09-07(추가 8, R8 6/N) Shared Drive 폴더/권한 실패 재처리 큐(Gate C
 > GW-12 인수 기준) 구현.** 배경: R8 체크리스트의 "폴더·권한·파일 이동 실패
 > 재처리와 정기 대조" + Gate C GW-12("잘못된 fileId 등 Drive/Meet API 실패가
