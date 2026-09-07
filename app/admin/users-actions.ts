@@ -29,24 +29,16 @@ async function inviteAndCreateProfile(params: {
   return userId;
 }
 
-// (2026-08-30 R2 Task 4) 계정 초대는 더 이상 즉시 Supabase Auth 계정을 만들지
-// 않는다 — account_invites에 ALTON 자체 토큰(해시만 저장)으로 초대를 기록하고,
-// 실제 계정·역할·household 연결은 초대 수락 시(app/api/invite/accept)
-// 하나의 트랜잭션에서 처리한다(만료/재발송/철회/중복 방지를 DB 상태 머신으로
-// 관리하기 위함 — 상세는 supabase/migrations/20260902000000_r2_account_invites.sql).
-export async function inviteParent(params: { name: string; email: string }): Promise<string> {
-  const { supabase } = await requireAdmin();
-  const { data, error } = await supabase.rpc("create_account_invite", {
-    p_email: params.email,
-    p_name: params.name,
-    p_role: "parent",
-    p_household_id: null,
-  });
-  if (error) throw new Error(error.message);
-  const row = data![0];
-  await sendInviteEmail({ to: params.email, name: params.name, token: row.raw_token, role: "parent" });
-  return row.invite_id;
-}
+// (2026-09-07) 레거시 "학부모 초대"(inviteParent, account_invites 기반 — 자녀
+// 없이 보호자만 먼저 만들고 나중에 자녀를 추가하는 경로)는 제거했다. 지인/추천
+// 경로(app/admin/direct-account-actions.ts의 sendDirectOnboardingNoticeAction,
+// trial_onboarding_links 기반)가 보호자+학생을 한 번에 만드는 완전한 상위
+// 호환이라 UsersTab에서 두 폼이 중복 노출됐고, 레거시 쪽은 production에서
+// React 미니파이 오류(#441)로 크래시가 났다(원인: 이 함수가 예외를 그대로
+// throw해 Next.js Server Action 오류 마스킹에 걸림 — sendTrialOnboardingNoticeAction/
+// sendDirectOnboardingNoticeAction에서 이미 고친 것과 동일한 클래스의 버그).
+// 다른 호출부가 없음을 확인하고 함수 자체를 삭제했다(더 이상 UI가 없어
+// 예외 마스킹 버그를 별도로 고칠 필요도 없어졌다).
 
 // (2026-08-30 R2 Task 3) 가족 관계 원본은 households/household_members다 —
 // guardian_students는 동결됐고 DB 트리거가 쓰기를 거부한다. 부모가 이미 속한
