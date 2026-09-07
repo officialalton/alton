@@ -2176,3 +2176,92 @@ migration을 추가했다. 기존 마이그레이션 파일은 수정하지 않�
   2/2 통과. `supabase db reset --local` 성공(두 신규 마이그레이션 포함 전체
   적용). 전체 스위트 결과는 이 라운드 마지막 절에 통합 기록.
 - 외부 변경: 0건.
+
+## 2026-09-07 — R10 Task C: 관리자 정산 화면을 v3 payout_batches로 완전 대체
+
+- `app/admin/PayoutBatchesTab.tsx` + `payout-batches-data.ts`/`payout-batches-actions.ts`를
+  admin nav "정산 (v3)" 탭에 연결(`app/admin/page.tsx`/`AdminShell.tsx`).
+  레거시 `PayoutsTab.tsx`(teacher_payouts 기반)는 삭제해 두 화면이 동시에
+  노출되지 않게 함.
+- 법인 설립 전 지급 경계 정책(2026-09-07)에 따라 이 화면에서 도달 가능한
+  최대 상태는 **승인(approved)**이다. processing/paid로 보내는 서버 액션
+  자체를 만들지 않았다 — DB `real_disbursement_enabled()` 게이트(R10 Task A)
+  와 별개로 UI 레이어에서도 "거부될 액션을 아예 노출하지 않는다"는 요구를
+  지킨다.
+- 레거시 `teacher_payouts` 테이블은 R13 전까지 읽기 전용으로 보존하되, 더
+  이상 어떤 코드 경로도 쓰지 않도록 막았다:
+  - `app/api/cron/generate-payouts/route.ts`를 no-op(410 반환)으로 바꾸고
+    `vercel.json`의 cron 등록을 제거(매달 1일 자동 생성 크론이 실제로
+    비활성화됨).
+  - `app/admin/payouts-actions.ts`(generatePayouts/markPayoutPaid/
+    markPayoutsPaidBulk/revertPayoutToPending)는 UI에서 더 이상 호출되지
+    않지만 "use server" export라 액션 ID로 직접 호출될 여지가 남아 있어,
+    본문을 전부 `throw`로 막았다(관리자 권한 확인은 유지).
+- 신규/갱신 테스트: `payout-batches-data.test.ts`, `payout-batches-actions.test.ts`,
+  `PayoutBatchesTab.test.tsx`, `payouts-actions.test.ts`(비활성화 동작
+  검증으로 재작성), `route.test.ts`(410 no-op 검증으로 재작성),
+  `AdminShell.test.tsx`(탭 라벨/렌더 대상 갱신).
+- 범위 밖으로 남긴 것(Task C 5단계, "next-priority"): 학생/보호자용 정산
+  상세·이의제기(dispute/appeal) 화면. 관리자 화면 자체를 이번에 처음
+  만들었고 학생/보호자 쪽 UX·권한 모델은 아직 설계되지 않아 지금 만들면
+  재설계 위험이 크다고 판단 — R11 이후 별도 라운드에서 설계부터 시작할 것.
+- 검증: `supabase db reset --local` 성공, `npx tsc --noEmit` 클린,
+  스코프 vitest(위 신규/갱신 파일들) 전부 통과. 전체 스위트 결과는 이
+  라운드 마지막 절에 통합 기록.
+- 외부 변경: 0건 (Vercel cron 등록은 로컬 `vercel.json` 파일 변경일 뿐 —
+  실제 배포/재배포는 하지 않음).
+
+## 2026-09-07 — R8 follow-up Task D: 세션 주석(화이트보드) 이벤트 로그 도입
+
+- 신규 `supabase/migrations/20261223000000_r8_session_annotation_events.sql`:
+  v3 `sessions` 전용 append-only 이벤트 테이블 `session_annotation_events`.
+  - `seq`(전역 bigserial)가 동시 편집 순서의 유일한 근거 — 세션별 카운터가
+    아니라 전역 시퀀스를 쓰는 이유와 append-only 강제 방식(트리거로
+    UPDATE/DELETE를 role과 무관하게 전면 차단, service_role도 예외 없음 —
+    테스트/마이그레이션 정리용 `app.bypass_annotation_lock` GUC만 예외)을
+    마이그레이션 주석에 명문화.
+  - `event_type in ('stroke','clear_all')` — clear_all은 삭제가 아니라
+    이벤트로 기록되어 이전 stroke가 영구 보존됨(감사 추적).
+  - RLS: 조회는 세션 당사자/관리자, 기록(INSERT)은 `author_id = auth.uid()`
+    본인 명의만, `clear_all`은 신규 헬퍼 `is_session_teacher_v3()`로
+    선생님/관리자만 허용.
+- 신규 `app/session/[id]/annotation-events-actions.ts`: append(stroke/
+  clear_all)·replay 서버 액션 + 순수 함수 `reconstructVisibleStrokes()`
+  (재접속 시 마지막 clear_all 이후 stroke만 재구성).
+- **두 트랙 공존 상태(의도적, 이번 라운드 범위 밖)**: 기존
+  `WhiteboardCanvas.tsx`는 여전히 Realtime broadcast + `legacy_sessions.
+  whiteboard_strokes`(마지막 스냅샷 jsonb) 방식 그대로다. 새 이벤트 테이블은
+  v3 세션에 대해서만 존재하고, 프론트엔드를 이 테이블·서버 액션에 연결하는
+  리와이어링(그리기 UI가 `appendStrokeEvent`/`replayAnnotationEvents`를
+  호출하도록 바꾸는 작업)과 레거시→신규 백필은 하지 않았다 — R9 세션뷰
+  통합 라운드에서 WhiteboardCanvas를 다시 만질 때 함께 처리할 것을 권장.
+  레거시 데이터는 읽기 호환만 유지되고 새 쓰기는 신규 테이블에만 쌓인다는
+  원칙만 이번에 못박았다.
+- 검증(로컬 Postgres 직접 psql, `app/session/[id]/session-annotation-events.
+  integration.test.ts`): (1) append 후 seq 오름차순 재생이 실제 기록 순서와
+  일치, (2) 여러 stroke를 한 트랜잭션으로 동시에 넣어도 seq가 유일한 전체
+  순서를 보장(중복/역전 없음), (3) clear_all은 삭제가 아니라 이벤트로
+  쌓이고 이전 stroke 개수가 줄지 않음, (4) 학생/보호자는 clear_all 기록이
+  RLS로 차단됨, (5) 세션 무관 제3자·author_id 위조는 RLS로 차단됨,
+  (6) UPDATE/DELETE는 authenticated 역할(RLS 필터로 0건 처리)과
+  service_role(트리거로 명시적 에러) 양쪽 모두에서 실제로 막힘을 확인.
+  순수 함수 `reconstructVisibleStrokes()`는 별도 단위 테스트로 clear_all
+  이전/이후 분리, 빈 결과, 순서 보존을 검증.
+- 검증: `supabase db reset --local` 성공(신규 마이그레이션 포함), 위 통합
+  테스트 7개 + 액션 단위 테스트 8개 통과, `npx tsc --noEmit` 클린. 전체
+  스위트 결과는 아래 절에 통합 기록.
+- 외부 변경: 0건.
+
+## 2026-09-07 — Task C/D 완료 후 전체 검증 (최종 1회)
+
+- `supabase db reset --local`: 성공 (Task C/D의 신규 마이그레이션 포함 전체
+  마이그레이션 적용 + seed 완료).
+- `npx tsc --noEmit`: 에러 0건.
+- `npx vitest run --no-file-parallelism`(DB reset 직후, 전체 스위트):
+  **205 test files / 1340 tests 전부 통과**.
+- `npx next build`: 성공 (Turbopack, 32개 페이지 생성 완료, TypeScript
+  타입체크 포함 통과).
+- Task C 5단계(학생/보호자 정산 상세·이의제기 화면)는 위에 문서화한 대로
+  이번 라운드에서 의도적으로 보류.
+- Task D의 WhiteboardCanvas 프론트엔드 리와이어링·레거시 백필도 위에
+  문서화한 대로 이번 라운드 범위 밖으로 명시적으로 남김.
