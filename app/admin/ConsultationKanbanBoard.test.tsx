@@ -2,6 +2,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi, beforeEach } from "vitest";
 import ConsultationKanbanBoard from "./ConsultationKanbanBoard";
 import { sendTrialOnboardingNoticeAction, sendRegularContractOneClickAction } from "./trial-onboarding-actions";
+import { recordConsultationOutcome } from "./consultation-scheduling-actions";
 
 const refreshMock = vi.fn();
 vi.mock("next/navigation", () => ({
@@ -550,5 +551,109 @@ describe("ConsultationKanbanBoard — 정규 계약 발송 실패 피드백(2026
       target: { value: "대표이사" },
     });
     expect(button.disabled).toBe(false);
+  });
+});
+
+// 2026-09-07 — "정규 진행 권장" 선택 후 "기록"을 누르면 "Minified React error #441"이
+// 그대로 렌더링되던 문제 조사. recordConsultationOutcome()을 { ok, error } 반환으로
+// 바꿨으므로(consultation-scheduling-actions.ts), OutcomeForm이 실패 시 예외를 던지지
+// 않고 화면에 에러 문구를 그대로 표시하는지(마스킹 재발 방지) 회귀 검증한다.
+describe("ConsultationKanbanBoard — OutcomeForm 상담 결과 기록(2026-09-07 #441 마스킹 재발 방지)", () => {
+  function scheduledCardRow() {
+    return {
+      id: "c-outcome",
+      contact_name: "박서준",
+      contact_email: "seojun@example.com",
+      contact_phone: null,
+      student_grade: "9학년",
+      status: "scheduled",
+      outcome: null,
+      stage: "scheduled" as const,
+    };
+  }
+
+  function scheduledCardDetail() {
+    return {
+      consultation: {
+        id: "c-outcome",
+        contact_name: "박서준",
+        contact_email: "seojun@example.com",
+        contact_phone: null,
+        student_grade: "9학년",
+        status: "scheduled",
+        outcome: null,
+        child_id: null,
+        trial_intent_confirmed_at: null,
+      },
+      pipeline: null,
+      childName: null,
+      guardianEmail: "seojun@example.com",
+      guardianName: "박서준",
+      contractId: null,
+      contractStatus: null,
+      latestContractVersionHasEnvelope: false,
+      noticeDeliveryStatus: null as "pending" | "sent" | "failed" | null,
+      noticeSendError: null as string | null,
+      noticeSentAt: null as string | null,
+      childCards: [] as { consultationId: string; childName: string | null }[],
+    };
+  }
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    findDuplicateConsultationCandidatesMock.mockResolvedValue([]);
+    listKanbanBoardActionMock.mockResolvedValue([scheduledCardRow()]);
+    getConsultationCardDetailActionMock.mockResolvedValue(scheduledCardDetail());
+  });
+
+  it("recordConsultationOutcome이 { ok: false, error }를 반환하면(outcome=regular_recommended) 예외 없이 에러 문구를 그대로 보여준다", async () => {
+    vi.mocked(recordConsultationOutcome).mockResolvedValueOnce({
+      ok: false,
+      error: "동의 확인이 완료되지 않아 상담 결과를 기록할 수 없습니다.",
+    });
+
+    render(<ConsultationKanbanBoard subjects={subjects} teacherCandidatesBySubject={teacherCandidatesBySubject} />);
+
+    fireEvent.click(await screen.findByText("박서준"));
+    await screen.findByTestId("consultation-card-detail");
+
+    fireEvent.change(screen.getByPlaceholderText("관리자 검토 요약(필수)"), {
+      target: { value: "정규 진행 권장 요약" },
+    });
+    fireEvent.change(screen.getByDisplayValue("체험 진행 권장"), {
+      target: { value: "regular_recommended" },
+    });
+    fireEvent.click(screen.getByText("기록"));
+
+    await waitFor(() =>
+      expect(screen.getByText("동의 확인이 완료되지 않아 상담 결과를 기록할 수 없습니다.")).toBeInTheDocument()
+    );
+    // "Minified React error"로 마스킹되지 않고, 컴포넌트가 항상 던지는 일반화된
+    // 메시지도 아니라 실제 서버 에러 메시지 그대로가 표시돼야 한다.
+    expect(screen.queryByText(/Minified React error/)).not.toBeInTheDocument();
+
+    expect(recordConsultationOutcome).toHaveBeenCalledWith(
+      expect.objectContaining({ consultationId: "c-outcome", outcome: "regular_recommended", adminReviewSummary: "정규 진행 권장 요약" })
+    );
+  });
+
+  it("recordConsultationOutcome이 { ok: true }를 반환하면(outcome=regular_recommended) 정상 진행되고 에러가 표시되지 않는다", async () => {
+    vi.mocked(recordConsultationOutcome).mockResolvedValueOnce({ ok: true });
+
+    render(<ConsultationKanbanBoard subjects={subjects} teacherCandidatesBySubject={teacherCandidatesBySubject} />);
+
+    fireEvent.click(await screen.findByText("박서준"));
+    await screen.findByTestId("consultation-card-detail");
+
+    fireEvent.change(screen.getByPlaceholderText("관리자 검토 요약(필수)"), {
+      target: { value: "정규 진행 권장 요약" },
+    });
+    fireEvent.change(screen.getByDisplayValue("체험 진행 권장"), {
+      target: { value: "regular_recommended" },
+    });
+    fireEvent.click(screen.getByText("기록"));
+
+    await waitFor(() => expect(recordConsultationOutcome).toHaveBeenCalled());
+    expect(screen.queryByText(/Minified React error/)).not.toBeInTheDocument();
   });
 });

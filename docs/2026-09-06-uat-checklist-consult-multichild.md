@@ -293,3 +293,14 @@
 - [ ] **`npx next build` 미확인** — 이 세션이 작업하는 동안 다른 세션이 `app/admin/ConsultationSchedulingPanel.tsx`/`consultation-scheduling-actions.ts`를 동시에 수정 중이라(타입 에러 `RecordConsultationOutcomeResult` 발생, 내 파일이 원인 아님) 로컬에서 클린 빌드 통과를 확인하지 못했다 — 그 세션이 커밋한 뒤 재확인 필요.
 - [ ] non-prod(`worpsqwqgnspddnrtnvq`) 마이그레이션 반영 및 Preview alias 재연결은 이 세션 마지막 단계로 진행 예정(문서 갱신 시점 기준 아직 전) — 결과는 `docs/CURRENT.md` 또는 다음 세션 기록 확인.
 - [ ] 브라우저로 실제 Preview에서 관리자 "수정" 버튼으로 실제 이메일을 바꾼 뒤 그 계정으로 로그인까지 되는지, 지인/추천 링크 "학생 취소" 후 실제로 그 학생만 빠지고 나머지는 정상 온보딩되는지 눈으로 확인하는 것은 이번 세션 범위 밖(실제 이메일 발송/로그인 계정 변경 금지 제약과도 맞물림) — Preview alias 갱신 후 직접 확인 권장.
+
+### 2026-09-07 22차 세션 — "상담 결과 기록"(정규 진행 권장) #441 재현 조사 + 방어 코드
+
+제품 오너가 관리자 칸반에서 "정규 진행 권장" 선택 후 "기록"을 누르면 "Minified React error #441"이 뜬다고 보고(체험 진행 권장은 정상). 상세 근거는 `docs/CURRENT.md`의 "2026-09-07(추가 4)" 절 참고.
+
+- [x] **SQL 레벨 재현 시도 3가지 — 전부 성공(에러 재현 실패)**: (1) 최소 조건(동의 확인 + 검토 요약만) psql 직접 호출, (2) 기존 연결된 학생(child_id 존재, 재상담 시나리오), (3) 동일 상담에 대한 멱등 재호출. `admin_record_consultation_outcome(p_outcome='regular_recommended', ...)`가 세 경우 모두 정상 반환했다.
+- [x] **실제 브라우저 재현 시도 — 성공(에러 재현 실패)**: 로컬 dev 서버(다른 세션이 이미 띄워둔 프로세스, kill하지 않음)에 관리자로 로그인해 칸반 카드 상세에서 "정규 진행 권장" 선택 → 검토 요약 입력 → "기록" 클릭까지 실제로 재현. 에러 없이 정상 기록되고 카드가 "계약" 칸으로 이동했다.
+- [x] **한계**: Next.js는 dev 모드에서 Server Action 예외를 마스킹하지 않는다(production 빌드에서만 "Minified React error #441"). 즉 이번 로컬 재현으로는 프로덕션 특유의 마스킹 현상 자체를 재관찰할 수 없었다 — 제품 오너가 겪은 정확한 데이터 상태를 특정하지 못했다.
+- [x] **그래도 고친 것(방어 코드)**: `recordConsultationOutcome()`(`consultation-scheduling-actions.ts`)이 RPC 에러를 그대로 `throw`하던 것을 이 코드베이스 표준 규칙(`{ ok, error }`, 예외 전파 없음)에 맞춰 통일. 호출부 2곳(`ConsultationKanbanBoard.tsx` OutcomeForm, `ConsultationSchedulingPanel.tsx`) 모두 결과를 체크해 에러를 화면에 그대로 노출하도록 수정.
+- [x] 검증: `supabase db reset --local` 성공 / `npx tsc --noEmit` 0 에러 / `consultation-scheduling-actions.test.ts` 신규 3건(RPC 에러/성공/requireAdmin 예외 모두 `{ ok, error }`로 정규화) + `ConsultationKanbanBoard.test.tsx` 신규 2건(OutcomeForm 실패 시 예외 없이 에러 문구 렌더링, "Minified React error" 미노출) 추가 — 전부 통과. `npx vitest run`(전체) 첫 실행은 다른 두 세션과 로컬 DB를 공유하다 30건 실패(booking 도메인, teacher_buffer_violation 등 — 내 변경과 무관한 파일)했으나 `supabase db reset --local`로 DB를 정리한 뒤 재실행하니 196파일·1299건 전부 통과. `npx next build` 성공(32 라우트).
+- [ ] **미해결**: 제품 오너가 실제로 겪은 정확한 SQL 실패 원인은 특정하지 못했다. Preview(production 빌드)에서 동일 절차를 다시 밟아 재현되는지 확인 필요 — 재현되면 이번에 추가한 방어 코드 덕분에 실제 에러 메시지가 화면에 그대로 노출되므로 후속 조사가 훨씬 쉬워진다.

@@ -232,21 +232,33 @@ export async function cancelConsultationRequest(consultationId: string, reason: 
   await cancelSyncedConsultationCalendarEvent(consultationId);
 }
 
-/** 요구사항 6: 상담 결과 기록(체험 진행 권장/정규 진행 권장/보류/종료) — M2/M3 연결 지점. */
+export type RecordConsultationOutcomeResult = { ok: true } | { ok: false; error: string };
+
+/** 요구사항 6: 상담 결과 기록(체험 진행 권장/정규 진행 권장/보류/종료) — M2/M3 연결 지점.
+ * 2026-09-07 — 검증 실패·RPC 에러를 throw하지 않고 항상 { ok, error } 형태로
+ * 반환한다(예외를 던지면 Next.js가 production 빌드에서 "Minified React error #441"로
+ * 마스킹한다 — `app/admin/workspace-actions.ts`/`trial-onboarding-actions.ts`/
+ * `lesson-schedule-actions.ts` 등 이 코드베이스 전체에 이미 적용된 표준 패턴을
+ * 여기도 동일하게 맞춘다). */
 export async function recordConsultationOutcome(params: {
   consultationId: string;
   outcome: "trial_recommended" | "regular_recommended" | "on_hold" | "closed";
   notes: string;
   adminReviewSummary: string;
-}): Promise<void> {
-  const { supabase } = await requireAdmin();
-  const { error } = await supabase.rpc("admin_record_consultation_outcome", {
-    p_consultation_id: params.consultationId,
-    p_outcome: params.outcome,
-    p_notes: params.notes || null,
-    p_admin_review_summary: params.adminReviewSummary || null,
-  });
-  if (error) throw new Error(error.message);
+}): Promise<RecordConsultationOutcomeResult> {
+  try {
+    const { supabase } = await requireAdmin();
+    const { error } = await supabase.rpc("admin_record_consultation_outcome", {
+      p_consultation_id: params.consultationId,
+      p_outcome: params.outcome,
+      p_notes: params.notes || null,
+      p_admin_review_summary: params.adminReviewSummary || null,
+    });
+    if (error) return { ok: false, error: error.message };
+    return { ok: true };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "상담 결과 기록에 실패했습니다." };
+  }
 }
 
 /** M2 — 체험수업권 지급 관리자 복구 동선(요구사항 7). outcome이 이미 'trial_recommended'로

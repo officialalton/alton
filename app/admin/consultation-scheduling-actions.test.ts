@@ -68,4 +68,55 @@ describe("recordConsultationOutcome", () => {
       p_admin_review_summary: "요약",
     });
   });
+
+  // 2026-09-07 — "정규 진행 권장" 선택 시 "Minified React error #441" 마스킹 재현
+  // 조사 중, RPC 에러를 그대로 throw하던 것이 이 프로젝트 전역 규칙(workspace-actions.ts,
+  // trial-onboarding-actions.ts, lesson-schedule-actions.ts와 동일)에서 벗어나 있음을
+  // 확인하고 { ok, error } 반환으로 통일했다. outcome 값과 무관하게 RPC 에러가
+  // 예외로 전파되지 않고 항상 { ok: false, error } 형태로 돌아오는지 검증한다.
+  it("RPC 에러를 던지지 않고 { ok: false, error } 형태로 반환한다(outcome=regular_recommended)", async () => {
+    rpcMock.mockResolvedValueOnce({ data: null, error: { message: "동의 확인이 완료되지 않아 상담 결과를 기록할 수 없습니다." } });
+    const { recordConsultationOutcome } = await import("./consultation-scheduling-actions");
+
+    const result = await recordConsultationOutcome({
+      consultationId: "consult-2",
+      outcome: "regular_recommended",
+      notes: "",
+      adminReviewSummary: "정규 진행 권장 요약",
+    });
+
+    expect(result).toEqual({
+      ok: false,
+      error: "동의 확인이 완료되지 않아 상담 결과를 기록할 수 없습니다.",
+    });
+  });
+
+  it("성공 시 { ok: true }를 반환한다(outcome=regular_recommended)", async () => {
+    rpcMock.mockResolvedValueOnce({ data: null, error: null });
+    const { recordConsultationOutcome } = await import("./consultation-scheduling-actions");
+
+    const result = await recordConsultationOutcome({
+      consultationId: "consult-3",
+      outcome: "regular_recommended",
+      notes: "",
+      adminReviewSummary: "정규 진행 권장 요약",
+    });
+
+    expect(result).toEqual({ ok: true });
+  });
+
+  it("requireAdmin()이 throw해도(비관리자) 예외를 전파하지 않고 { ok: false, error }로 반환한다", async () => {
+    const { requireAdmin } = await import("@/lib/admin-auth");
+    vi.mocked(requireAdmin).mockRejectedValueOnce(new Error("관리자만 사용할 수 있습니다."));
+    const { recordConsultationOutcome } = await import("./consultation-scheduling-actions");
+
+    const result = await recordConsultationOutcome({
+      consultationId: "consult-4",
+      outcome: "regular_recommended",
+      notes: "",
+      adminReviewSummary: "요약",
+    });
+
+    expect(result).toEqual({ ok: false, error: "관리자만 사용할 수 있습니다." });
+  });
 });

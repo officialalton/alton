@@ -506,8 +506,12 @@ function OutcomeForm({ consultationId, onDone }: { consultationId: string; onDon
           setBusy(true);
           setError(null);
           try {
-            await recordConsultationOutcome({ consultationId, outcome, notes: "", adminReviewSummary: summary });
-            onDone();
+            const result = await recordConsultationOutcome({ consultationId, outcome, notes: "", adminReviewSummary: summary });
+            if (!result.ok) {
+              setError(result.error);
+            } else {
+              onDone();
+            }
           } catch (e) {
             setError(e instanceof Error ? e.message : "기록에 실패했습니다.");
           }

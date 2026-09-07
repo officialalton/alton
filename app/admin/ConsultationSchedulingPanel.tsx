@@ -446,9 +446,15 @@ export default function ConsultationSchedulingPanel() {
                   onSubmit={(e) => {
                     e.preventDefault();
                     if (!outcomeValue || outcomeSummary.trim() === "") return;
-                    withBusy(c.id, () =>
-                      recordConsultationOutcome({ consultationId: c.id, outcome: outcomeValue, notes: "", adminReviewSummary: outcomeSummary })
-                    ).then(() => setOutcomeOpenId(null));
+                    withBusy(c.id, async () => {
+                      const result = await recordConsultationOutcome({
+                        consultationId: c.id,
+                        outcome: outcomeValue,
+                        notes: "",
+                        adminReviewSummary: outcomeSummary,
+                      });
+                      if (!result.ok) throw new Error(result.error);
+                    }).then(() => setOutcomeOpenId(null));
                   }}
                 >
                   <label className="text-[12px] text-ink">
