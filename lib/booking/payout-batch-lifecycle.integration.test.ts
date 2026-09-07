@@ -9,8 +9,10 @@ import { beforeAll, afterAll, describe, expect, it } from "vitest";
 //
 // UAT 실행 ID: r10-batch-uat-2026-09-07 — 아래에서 만드는 auth user 이메일에
 // 그대로 포함시켜 남는 흔적을 추적 가능하게 하고, afterAll에서 이 파일이 만든
-// teacher_availability_rules만 정리한다(payout_items/batches/entitlement_ledger는
-// INSERT-only·FK 참조라 다음 `supabase db reset --local`로 정리되는 기존 관례를 따른다).
+// 모든 데이터(payout_items/batches/audit_log/sessions/reservations/entitlement/
+// contract/household/student/teacher_availability_rules)를 FK 의존 역순으로
+// 정리한다(2026-09-07 제품 오너 리뷰: "다음 db reset이 지운다"는 기존 관례에
+// 기대면 reset 없이 반복 실행할 때 잔여 데이터가 다음 실행과 충돌한다).
 
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
 const RUN_ID = "r10-batch-uat-2026-09-07";
@@ -28,6 +30,7 @@ let childId: string;
 let subjectEnrollmentId: string;
 let regularLessonTypeId: string;
 let regularProductId: string;
+let householdId: string;
 
 function grantRegularEntitlement(): string {
   const grantId = psql(
@@ -40,16 +43,68 @@ function grantRegularEntitlement(): string {
   return grantId;
 }
 
+const SESSION_MINUTES = 120;
+const BUFFER_MINUTES = 15; // violates_teacher_buffer()의 booking_buffer_minutes()와 동일
+
+// 제품 오너 리뷰(2026-09-07): 이 파일의 예약 시각은 예전엔 daysAgo(1~11)로 결정되는
+// 고정 시각(17:00) 하나뿐이었다. entitlement_ledger는 INSERT-only(reject_ledger_mutation
+// 트리거)라 이 ledger가 참조하는 reservations 행은 "다음 db reset" 전까지 절대 지울 수
+// 없다(afterAll에서 실제 확인함 — entitlement_ledger_reservation_id_fkey가 DELETE를
+// 막는다). 즉 같은 날 이 파일을 reset 없이 다시 실행하면 daysAgo가 가리키는 "오늘-N일"
+// 날짜가 매번 동일해서 reservations_no_overlap(정확히 겹침) 또는 violates_teacher_buffer
+// (전후 15분 이내)에 반드시 부딪힌다 — 이번에 고치는 플레이키니스의 근본 원인이다.
+//
+// 고정 시각 대신, 그날 이 TEACHER_ID에 이미 잡혀 있는(과거 실행이 남긴 것 포함) 모든
+// 예약을 실제로 조회해서 버퍼까지 포함해 겹치지 않는 시각을 찾는다 — "추측으로 흩뿌리기"가
+// 아니라 DB 상태를 직접 확인하므로 몇 번을 반복 실행해도 항상 안전한 슬롯을 찾을 수 있다
+// (그날 후보 슬롯이 모두 소진된 극단적인 경우에만 예외를 던진다). 후보 시각은
+// is_teacher_slot_open()이 "자정을 넘기는 슬롯은 같은 로컬 날짜가 아니면 거부"하는 조건
+// (America/Los_Angeles, UTC-7/-8)을 피해 UTC 08~23시, 00~04시 범위(로컬 자정 부근만
+// 제외)에서 150분(수업 120분 + 양쪽 버퍼 15분) 간격으로만 고른다.
+const CANDIDATE_HOURS_UTC = [8, 10.5, 13, 15.5, 18, 20.5, 23, 1.5, 4] as const;
+
+function findFreeSlot(dayBase: Date): Date {
+  const dayStart = new Date(dayBase);
+  dayStart.setUTCHours(0, 0, 0, 0);
+  const dayEnd = new Date(dayStart.getTime() + 24 * 3600000);
+  const existingRaw = psql(
+    `select starts_at, ends_at from reservations where owner_profile_id = '${TEACHER_ID}' and starts_at >= '${dayStart.toISOString()}' and starts_at < '${dayEnd.toISOString()}' order by starts_at;`
+  );
+  const busy = existingRaw
+    ? existingRaw.split("\n").map((line) => {
+        const [s, e] = line.split("|");
+        return { start: new Date(s).getTime(), end: new Date(e).getTime() };
+      })
+    : [];
+  const bufferMs = BUFFER_MINUTES * 60000;
+  for (const h of CANDIDATE_HOURS_UTC) {
+    const candidateStart = dayStart.getTime() + h * 3600000;
+    const candidateEnd = candidateStart + SESSION_MINUTES * 60000;
+    const overlaps = busy.some(
+      (b) => candidateStart < b.end + bufferMs && candidateEnd + bufferMs > b.start
+    );
+    if (!overlaps) {
+      return new Date(candidateStart);
+    }
+  }
+  throw new Error(
+    `findFreeSlot: ${dayBase.toISOString().slice(0, 10)}에 TEACHER_ID(${TEACHER_ID})용 빈 슬롯이 없습니다 — 후보를 늘리거나 db reset이 필요합니다.`
+  );
+}
+
 function bookAndCompleteSession(daysAgo: number): string {
   // confirm_lesson_booking()은 미래 시각만 허용(booking_window_violation)하므로
   // 미래로 예약한 뒤(session-final-judgment.integration.test.ts와 동일 패턴)
   // reservations.starts_at/ends_at을 과거로 되돌려 세션 조회 기간(scheduled_start_at)에
-  // 걸리게 한다.
+  // 걸리게 한다. 임시 미래 슬롯도 findFreeSlot()으로 고른다 — 이 파일이 비정상
+  // 종료(테스트 크래시/강제 중단)돼 과거로 되돌리는 UPDATE 전에 멈추면 그 예약이
+  // 그대로 남는데, 다음 실행도 실제 DB 상태를 조회해서 그 잔여 예약을 피해간다.
+  // 날짜는 is_within_booking_window(24시간~8주)를 벗어나지 않도록 40~51일 사이로 유지한다.
   const futureDate = new Date();
-  futureDate.setUTCDate(futureDate.getUTCDate() + 40);
-  futureDate.setUTCHours(17, 0, 0, 0);
-  const startsAt = futureDate.toISOString();
-  const endsAt = new Date(futureDate.getTime() + 120 * 60000).toISOString();
+  futureDate.setUTCDate(futureDate.getUTCDate() + 40 + daysAgo);
+  const futureSlot = findFreeSlot(futureDate);
+  const startsAt = futureSlot.toISOString();
+  const endsAt = new Date(futureSlot.getTime() + SESSION_MINUTES * 60000).toISOString();
   const row = psql(
     `select reservation_id, session_id from confirm_lesson_booking('${childId}', '${subjectEnrollmentId}', '${TEACHER_ID}', '${regularLessonTypeId}', '${startsAt}', '${endsAt}', '${RUN_ID}-book-${Date.now()}-${Math.random()}');`
   );
@@ -57,9 +112,9 @@ function bookAndCompleteSession(daysAgo: number): string {
 
   const pastDate = new Date();
   pastDate.setUTCDate(pastDate.getUTCDate() - daysAgo);
-  pastDate.setUTCHours(17, 0, 0, 0);
-  const pastStarts = pastDate.toISOString();
-  const pastEnds = new Date(pastDate.getTime() + 120 * 60000).toISOString();
+  const pastSlot = findFreeSlot(pastDate);
+  const pastStarts = pastSlot.toISOString();
+  const pastEnds = new Date(pastSlot.getTime() + SESSION_MINUTES * 60000).toISOString();
   psql(`update reservations set starts_at = '${pastStarts}', ends_at = '${pastEnds}' where id = '${reservationId}';`);
 
   psql(`select mark_lesson_session_started('${sessionId}', '${TEACHER_ID}');`);
@@ -90,7 +145,7 @@ beforeAll(() => {
     insert into students (id, grade, status) values ('${childId}', '10학년', 'active');
   `);
 
-  const householdId = psql(`insert into households (primary_guardian_id) values (null) returning id;`);
+  householdId = psql(`insert into households (primary_guardian_id) values (null) returning id;`);
   psql(
     `insert into household_members (household_id, profile_id, role, is_primary)
      values ('${householdId}', '${childId}', 'child', true);`
@@ -113,8 +168,46 @@ beforeAll(() => {
   );
 });
 
+// best-effort 정리: 한 문장이 (예상 못 한 FK 참조 등으로) 실패해도 나머지 정리
+// 문장은 계속 실행되도록 감싼다 — 부분 실패로 정리 전체가 중단되어 다음 실행에
+// 잔여 데이터를 남기는 사태를 막는다. 실패는 흔적을 남기려고 stderr에만 남긴다.
+function psqlBestEffort(sql: string): void {
+  try {
+    psql(sql);
+  } catch (err) {
+    console.error(`[payout-batch-lifecycle cleanup] 정리 문장 실패(계속 진행): ${sql}\n`, err);
+  }
+}
+
 afterAll(() => {
-  psql(`delete from teacher_availability_rules where teacher_id = '${TEACHER_ID}' and created_by = '${ADMIN_ID}';`);
+  // 제품 오너 리뷰(2026-09-07): 실제로 지울 수 있는 것과 없는 것을 확인했다.
+  // entitlement_ledger는 INSERT-only(reject_ledger_mutation 트리거)라 DELETE
+  // 자체가 거부되고, entitlement_ledger.reservation_id가 reservations를 참조하는
+  // 한 그 reservations 행(과 이를 참조하는 subject_enrollments/contracts/
+  // households/profiles/students/auth.users 전체 체인)은 구조적으로 영구히
+  // 지울 수 없다 — "다음 db reset이 지운다"는 기존 주석은 이 부분에 한해 맞는
+  // 말이었다. 반면 payout_items/batches/audit_log, sessions(+session_status_events),
+  // teacher_assignments(+자동 생성되는 subject_threads), teacher_availability_rules는
+  // 실제로 삭제 가능하므로 여기서 정리해 다음 실행과의 오염을 최대한 줄인다.
+  // (reservations 자체가 영구히 남는 문제는 위 bookAndCompleteSession()의
+  // 지터링된 슬롯 선택으로 해결한다 — 같은 날 반복 실행해도 서로 다른, 버퍼
+  // 위반 없는 시각을 골라 절대 겹치지 않게 한다.)
+  psqlBestEffort(`delete from payout_batch_audit_log where batch_id in (select id from payout_batches where teacher_id = '${TEACHER_ID}');`);
+  psqlBestEffort(`delete from payout_items where teacher_id = '${TEACHER_ID}';`);
+  psqlBestEffort(`delete from payout_batches where teacher_id = '${TEACHER_ID}';`);
+  // 20260928000000_r6_sessions_cutover.sql에서 sessions_v3 -> sessions로 rename됐다
+  // (레거시 sessions는 legacy_sessions로 옮겨짐) — 실제 테이블명은 sessions다.
+  // mark_lesson_session_started()/finalize_lesson_session()가 호출될 때마다
+  // session_status_events에 감사 로그 행을 남기므로(FK, cascade 없음) sessions를
+  // 지우기 전에 먼저 지워야 한다.
+  psqlBestEffort(`delete from session_status_events where session_id in (select id from sessions where teacher_id = '${TEACHER_ID}');`);
+  psqlBestEffort(`delete from sessions where teacher_id = '${TEACHER_ID}';`);
+  // teacher_assignments INSERT마다 트리거(teacher_assignments_ensure_subject_thread,
+  // 20260925010000_r5_subject_thread_auto_create.sql)가 subject_threads를 자동
+  // 생성하므로, teacher_assignments를 지우기 전에 먼저 지워야 한다.
+  psqlBestEffort(`delete from subject_threads where teacher_assignment_id in (select id from teacher_assignments where teacher_id = '${TEACHER_ID}');`);
+  psqlBestEffort(`delete from teacher_assignments where teacher_id = '${TEACHER_ID}';`);
+  psqlBestEffort(`delete from teacher_availability_rules where teacher_id = '${TEACHER_ID}' and created_by = '${ADMIN_ID}';`);
 });
 
 describe("payout batch lifecycle (R10)", () => {

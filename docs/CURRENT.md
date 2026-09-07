@@ -1,5 +1,30 @@
 # ALTON — 현재 상태 (2026-09-07 기준)
 
+> **2026-09-07(테스트 위생) `lib/booking/payout-batch-lifecycle.integration.test.ts`
+> 플레이키니스 수정 — 예약 시간대 충돌·잔여 데이터 정리.** 배경: 제품 오너가 R10
+> payout 통합 테스트를 리뷰하면서 이 파일의 예약/세션 시각이 "40일 뒤 17:00"
+> 같은 고정값이라 다른 로컬 예약이나 이전에 비정상 종료된 실행의 잔여 데이터와
+> 충돌할 수 있다고 지적했다(실제 회귀는 아니고 테스트 위생 문제). 조사 결과
+> `reservations_no_overlap`(GiST exclusion, teacher_id+시간범위) /
+> `violates_teacher_buffer`(전후 15분) 두 DB 제약이 실제 충돌 지점이었고,
+> `entitlement_ledger`가 INSERT-only(`reject_ledger_mutation` 트리거)라 그
+> ledger가 참조하는 `reservations`(및 그 아래 `subject_enrollments`/
+> `contracts`/`households`/`profiles`/`students`/`auth.users`)는 구조적으로
+> 영구히 삭제할 수 없다는 것도 확인했다. 수정: (1) `bookAndCompleteSession()`이
+> 이제 그날 이 파일 전용 TEACHER_ID에 실제로 잡혀 있는 예약을 DB에서 직접
+> 조회해 버퍼까지 포함해 겹치지 않는 시각(`findFreeSlot()`, 150분 간격, 하루
+> 최대 9슬롯)을 고른다 — 고정 시각 추측 대신 실제 DB 상태를 확인하므로 반복
+> 실행해도 항상 안전하다(슬롯이 소진되면 조용히 깨지는 대신 명확한 예외를
+> 던진다). (2) `afterAll()`이 실제로 삭제 가능한 데이터(payout_items/batches/
+> audit_log, sessions+session_status_events, teacher_assignments+자동 생성되는
+> subject_threads, teacher_availability_rules)를 FK 의존 역순으로 정리하도록
+> 강화했다(이전에는 teacher_availability_rules만 지웠음). 검증:
+> `supabase db reset --local` 후 이 파일을 reset 없이 9회 연속 실행해 전부
+> 통과함을 확인(10회째부터는 해당 날짜의 슬롯이 소진돼 의도된 명시적 예외로
+> 실패 — 무한 반복을 보장하진 않지만 실전에서 겪는 "reset 없이 몇 번 다시
+> 돌리는" 시나리오는 확실히 해결됨). 애플리케이션 로직/마이그레이션/트리거는
+> 손대지 않음(테스트 파일만 수정).
+>
 > **2026-09-07(R10 corrective) 제품 오너 리뷰 4건 수정 — paid 전이 가드,
 > 역분개 재설계, 레거시 teacher_payouts 쓰기 완전 차단, 관리자 UI/DB 상태
 > 불일치 정정.** 배경: R10 Task A/B/C(`1072dda`, `6cb8ee6`) 완료 후 제품
