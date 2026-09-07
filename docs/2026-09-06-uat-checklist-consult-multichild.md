@@ -226,7 +226,7 @@
 - [x] **#2 회사 승인자 직함 기본값 고정** — `ConsultationKanbanBoard.tsx`/`TrialOnboardingPanel.tsx`의 `approverTitle` 초기값을 `"CEO, Do Kyung Kim"`으로 고정(수정 가능은 유지).
 - [x] **#3 설계 확인(코드 변경 없음)** — "정규 진행 희망" 확인(`confirmRegularProgressIntent`)은 계약 자동 발송을 트리거하지 않는다. 계약 발송은 관리자가 회사 승인자 직함을 입력하고 수동으로 "회사 승인 및 계약 발송"을 눌러야만 실행되는 의도된 설계임을 코드로 확인.
 - [x] 검증: `supabase db reset --local` 성공(스키마 변경 없음) / `npx tsc --noEmit` 0 에러 / `app/admin/ConsultationKanbanBoard.test.tsx` 신규 2건 + 기존 1건 갱신, 전부 통과 / `npx vitest run`(전체) 190파일·1277건 중 5건만 실패(`lib/booking/trial-entitlement-and-cancellation.integration.test.ts` — 변경 전 커밋에서도 동일 실패 확인, 무관) / `npx next build` 성공.
-- [ ] **#4 체험 생략 → 바로 정규 등록 플로우 완성** — 미착수. `outcome='regular_recommended'`일 때 `TrialOnboardingStudentsForm` 렌더 조건 확장, 학생 계정 생성 완료 시 계약 draft 자동 생성, `sendRegularContractOneClickAction`의 `trial_regular_progress_selections` 체크를 이 경로에서 우회하는 작업이 남아있다. 설계 메모는 `docs/CURRENT.md` "다음 라운드 TODO" 참고.
+- [x] **#4 체험 생략 → 바로 정규 등록 플로우 완성** — 완료(후속 세션). `outcome='regular_recommended'`일 때 `TrialOnboardingStudentsForm` 렌더 조건 확장, `_create_student_kanban_card()`의 학생 카드 outcome 하드코딩 수정(원 카드 outcome 그대로 전파), `sendRegularContractOneClickAction`의 `trial_regular_progress_selections` 체크를 이 경로에서 우회. 계약 draft 자동 생성은 별도 로직 없이 기존 "과목·선생님 배정"(`planTrialSubjectAndAssignTeacherAction`)이 이미 `get_or_create_draft_contract_for_child`를 호출하므로 그대로 커버됨을 확인. 상세는 `docs/CURRENT.md` "2026-09-06(4번 완결)" 절 참고.
 - [ ] **#5 지인/추천 — 상담 없이 바로 계정 생성** — 미착수. 신규 관리자 화면(상담 칸반과 분리), `consultation_id` nullable 여부 스키마 확인부터 시작 필요.
 - [ ] 브라우저로 실제 Preview에서 자녀 카드가 있는 가족 카드를 열어 폼이 실제로 숨겨지고 이동 링크가 동작하는지, 회사 승인자 직함이 기본값으로 채워져 있는지 눈으로 확인하는 것은 이번 세션 범위 밖 — Preview alias 갱신 후 직접 확인 권장.
 
@@ -239,3 +239,14 @@
 - [x] **관리자 수동 버튼 유지** — "회사 승인 및 계약 발송" 버튼은 제거하지 않았다. 이미 자동 발송된 건에 눌러도 멱등(`already_sent`)이라 중복 발송되지 않고, 화면에는 "이미 발송된 계약입니다(자동 발송 포함)." 안내 + "재발송(새 버전)" 버튼이 뜬다.
 - [x] 검증: `supabase db reset --local` 성공(신규 마이그레이션 없음) / `npx tsc --noEmit` 0 에러 / 실제 로컬 DB 대상 통합 테스트 신규 2건(`app/parent/trial-conversion-auto-send.integration.test.ts`, `confirm_regular_progress_intent` RPC → `sendRegularContractForSubjectEnrollment` 실제 순서 호출)로 자동 발송 실패 시에도 선택 레코드가 남는 것과 재호출 시 멱등성 확인 / mock 단위 테스트 `app/parent/trial-conversion-actions.test.ts`(신규 3건) + `app/admin/trial-onboarding-actions.test.ts`(기존 2건 구조 갱신) 통과 / `npx vitest run`(전체) 192파일·1282건 중 5건만 실패(`lib/booking/trial-entitlement-and-cancellation.integration.test.ts` — 이번 변경 이전부터의 기존 known flaky, 무관) / `npx next build` 성공.
 - [ ] 브라우저로 실제 Preview에서 보호자 계정으로 "정규 진행 희망" 확인 버튼을 눌렀을 때 관리자 칸반의 "정규 계약" 섹션이 자동으로 "이미 발송된 계약입니다(자동 발송 포함)." 상태로 바뀌는지(또는 Preview DocuSign 게이트로 실패해 기존 발송 폼이 남아있는지) 눈으로 확인하는 것은 이번 세션 범위 밖 — Preview alias 갱신 후 직접 확인 권장.
+
+### 2026-09-06 17차 세션 — 4번(체험 생략→정규 등록 플로우) 완결
+
+15차 세션에서 미착수였던 #4를 완결. 상세 근거는 `docs/CURRENT.md`의 "2026-09-06(4번 완결)" 절 참고.
+
+- [x] **`ConsultationKanbanBoard.tsx`의 `TrialOnboardingStudentsForm` 노출 조건을 `regular_recommended`까지 확장** — 체험 진행 확정(보호자 확인) 단계를 건너뛰고 바로 학생 계정 생성 온보딩 폼을 노출. 헤더/버튼 라벨을 outcome별로 분기.
+- [x] **`_create_student_kanban_card()`(`supabase/migrations/20261213000000_m4_regular_recommended_onboarding_path.sql`, additive) — 학생별 카드의 outcome 하드코딩 수정** — `'trial_recommended'` 고정값 대신 원 카드(`v_root.outcome`)를 그대로 물려받는다(`consult_outcome` enum 캐스팅 필요, 최초 시도 시 타입 불일치 오류로 실패 → 캐스팅 추가해 재검증). 체험수업권 자동 지급 시도(`20261211000000`이 추가)는 `outcome='trial_recommended'`에만 유지 — `regular_recommended`는 지급 대상 아님.
+- [x] **계약 draft 자동 생성 — 신규 로직 불필요, 기존 흐름이 이미 커버** — "과목·선생님 배정"(`planTrialSubjectAndAssignTeacherAction`)이 outcome과 무관하게 `child_id`만 있으면 노출되고 이미 `get_or_create_draft_contract_for_child`로 draft 계약을 만든다는 것을 코드 조사로 확인 — 이 시점(과목·선생님 배정 완료)에 계약 draft가 자연히 생긴다.
+- [x] **`sendRegularContractOneClickAction()`의 `trial_regular_progress_selections` 체크 우회** — `params.childId`로 학생 카드 outcome을 조회해 `regular_recommended`면 존재 체크를 건너뛰고 바로 발송. `trial_recommended` 경로는 조건 분기로 완전히 그대로 유지(회귀 방지 테스트로 고정).
+- [x] 검증: `supabase db reset --local` 성공 / `npx tsc --noEmit` 0 에러 / 신규 통합 테스트 `app/consult/regular-recommended-onboarding-path.integration.test.ts`(로컬 Postgres, 상담 결과 기록→학생 계정 생성→학생 카드 outcome 전파→과목 배정→계약 draft까지 실제 DB로 끝까지 검증 2건) + `app/admin/trial-onboarding-actions.test.ts` bypass 단위 테스트 2건(regular_recommended bypass / trial_recommended 회귀 방지) 신규, 전부 통과 / `npx vitest run`(전체) 193파일·1286건 중 5건만 실패(`lib/booking/trial-entitlement-and-cancellation.integration.test.ts` — 날짜 의존 기존 known flaky, 이번 변경과 완전 무관 파일) / `npx next build` 성공.
+- [ ] 브라우저로 실제 Preview에서 관리자가 상담 결과를 "정규 진행 권장"으로 기록 → 학생 계정 생성 온보딩 발송 → 보호자 확인 → 과목·선생님 배정 → "정규 계약" 섹션이 실제로 노출되고 "회사 승인 및 계약 발송" 버튼이 동작하는지 끝까지 눈으로 확인하는 것은 이번 세션 범위 밖(DocuSign 실제 발송·실제 이메일 발송 금지 제약과도 맞물림) — Preview alias 갱신 후 직접 확인 권장.

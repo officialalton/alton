@@ -96,10 +96,23 @@ describe("sendRegularContractOneClickAction — 실패 후 재처리→성공", 
     return { select: () => ({ eq: () => ({ maybeSingle: () => Promise.resolve({ data: { id: "selection1" }, error: null }) }) }) };
   }
 
+  // 2026-09-06 — sendRegularContractOneClickAction()이 이제 childId로 학생
+  // 카드의 outcome을 먼저 조회한다(regular_recommended 경로 bypass 판단).
+  // 기존(trial_recommended) 테스트는 outcome을 trial_recommended로 응답해
+  // 기존 selection 필수 체크 경로를 그대로 탄다 — 회귀 없음을 고정.
+  function mockConsultationOutcome(outcome: string) {
+    return {
+      select: () => ({
+        eq: () => ({ order: () => ({ limit: () => ({ maybeSingle: () => Promise.resolve({ data: { outcome }, error: null }) }) }) }),
+      }),
+    };
+  }
+
   it("1차 발송 실패는 draft 상태로 남고, 2차 재처리는 같은 계약 버전을 재사용해 회사 재선서명·새 버전 생성 없이 성공한다", async () => {
     let versionQueryCallCount = 0;
     adminFromMock.mockImplementation((table: string) => {
       if (table === "trial_regular_progress_selections") return mockSelectionExists();
+      if (table === "consultations") return mockConsultationOutcome("trial_recommended");
       if (table === "contract_versions") {
         return {
           select: () => ({
@@ -174,6 +187,7 @@ describe("sendRegularContractOneClickAction — 실패 후 재처리→성공", 
   it("이미 발송 완료(envelope 있음)된 계약 버전에 재클릭하면 중복 발송하지 않고 그대로 반환한다", async () => {
     adminFromMock.mockImplementation((table: string) => {
       if (table === "trial_regular_progress_selections") return mockSelectionExists();
+      if (table === "consultations") return mockConsultationOutcome("trial_recommended");
       if (table === "contract_versions") {
         return {
           select: () => ({
@@ -209,6 +223,69 @@ describe("sendRegularContractOneClickAction — 실패 후 재처리→성공", 
     expect(result).toEqual({ status: "already_sent", contractVersionId: "version1", envelopeId: "env-already-sent" });
     expect(sendContractMock).not.toHaveBeenCalled();
     expect(companySignOffMock).not.toHaveBeenCalled();
+  });
+
+  // 2026-09-06(정규 진행 권장 경로 완결) — outcome='regular_recommended'인
+  // 학생은 체험을 거치지 않아 trial_regular_progress_selections 행이 존재할
+  // 수 없다. 이 경로에서는 selection 조회 자체를 하지 않고(트랜잭션 절약,
+  // "unexpected table" throw로 호출 여부를 검증) 바로 발송을 진행해야 한다.
+  it("outcome=regular_recommended이면 정규 진행 희망 선택 존재 체크를 건너뛰고 바로 발송한다", async () => {
+    adminFromMock.mockImplementation((table: string) => {
+      if (table === "consultations") return mockConsultationOutcome("regular_recommended");
+      if (table === "trial_regular_progress_selections") {
+        throw new Error("regular_recommended 경로는 trial_regular_progress_selections를 조회하면 안 된다");
+      }
+      if (table === "contract_versions") {
+        return {
+          select: () => ({
+            eq: () => ({
+              eq: () => ({
+                order: () => ({ limit: () => Promise.resolve({ data: [], error: null }) }),
+              }),
+            }),
+          }),
+          insert: () => ({ select: () => ({ single: () => Promise.resolve({ data: { id: "version1" }, error: null }) }) }),
+        };
+      }
+      if (table === "profiles") {
+        return { select: () => ({ eq: () => ({ single: () => Promise.resolve({ data: { name: "테스트 관리자" }, error: null }) }) }) };
+      }
+      throw new Error(`unexpected table ${table}`);
+    });
+    adminRpcMock.mockResolvedValue({ data: "contract1", error: null });
+    companySignOffMock.mockResolvedValue(undefined);
+    sendContractMock.mockResolvedValueOnce({ envelopeId: "env-regular-1" });
+
+    const result = await sendRegularContractOneClickAction({
+      childId: "child1",
+      subjectEnrollmentId: "se1",
+      guardianEmail: "g@example.com",
+      guardianName: "학부모",
+      childName: "학생",
+      approverTitle: "CEO",
+    });
+    expect(result).toEqual({ status: "sent", contractVersionId: "version1", envelopeId: "env-regular-1" });
+  });
+
+  it("outcome=regular_recommended가 아니고 정규 진행 희망 선택도 없으면 여전히 거부한다(회귀 방지)", async () => {
+    adminFromMock.mockImplementation((table: string) => {
+      if (table === "consultations") return mockConsultationOutcome("trial_recommended");
+      if (table === "trial_regular_progress_selections") {
+        return { select: () => ({ eq: () => ({ maybeSingle: () => Promise.resolve({ data: null, error: null }) }) }) };
+      }
+      throw new Error(`unexpected table ${table}`);
+    });
+
+    await expect(
+      sendRegularContractOneClickAction({
+        childId: "child1",
+        subjectEnrollmentId: "se1",
+        guardianEmail: "g@example.com",
+        guardianName: "학부모",
+        childName: "학생",
+        approverTitle: "CEO",
+      })
+    ).rejects.toThrow("보호자의 정규 진행 희망 표시가 아직 없습니다.");
   });
 });
 

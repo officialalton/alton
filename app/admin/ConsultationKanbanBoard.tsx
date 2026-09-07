@@ -316,12 +316,19 @@ function ConsultationCardDetailPanel({
         {/* 3. 체험 신청 단계 — 체험 동의/온보딩 안내, 체험수업권 재처리.
             2026-09-06: 결과 기록 직후 이 다음 단계를 놓치기 쉽다는 지적(UAT)에 따라
             강조 박스 + 주요 버튼 스타일로 눈에 띄게 바꿨다(로직은 그대로). */}
-        {c.outcome === "trial_recommended" && (
+        {/* 2026-09-06(정규 진행 권장 경로 완결) — outcome이 regular_recommended면
+            체험을 거치지 않으므로 "체험 진행 확정" 단계는 건너뛰고 바로 학생
+            계정 생성 온보딩 폼을 보여준다. 학생 계정 생성 자체(Auth 계정 생성,
+            household 연결, 학생별 카드 생성)는 체험/정규 여부와 무관한 범용
+            절차라 TrialOnboardingStudentsForm/발송 액션을 그대로 재사용한다
+            (이름에 "trial"이 있어도 실질은 온보딩 범용 로직 — 리네임은 범위 밖). */}
+        {(c.outcome === "trial_recommended" || c.outcome === "regular_recommended") && (
           <div className="mb-3 space-y-2 border-[1.5px] border-ink rounded-lg px-3 py-2.5 bg-grey-100/50">
             <div className="text-[11.5px] font-bold text-ink">
-              다음 단계 — 체험 온보딩{!c.trial_intent_confirmed_at ? "(아직 진행 안 됨)" : ""}
+              다음 단계 — {c.outcome === "regular_recommended" ? "정규 등록" : "체험"} 온보딩
+              {c.outcome === "trial_recommended" && !c.trial_intent_confirmed_at ? "(아직 진행 안 됨)" : ""}
             </div>
-            {!c.trial_intent_confirmed_at && (
+            {c.outcome === "trial_recommended" && !c.trial_intent_confirmed_at && (
               <button
                 className={btnPrimary}
                 disabled={busy}
@@ -349,13 +356,15 @@ function ConsultationCardDetailPanel({
                 ))}
               </div>
             ) : (
-              c.trial_intent_confirmed_at && detail.pipeline && !detail.pipeline.steps.find((s) => s.key === "account_linked")?.done && (
+              (c.outcome === "regular_recommended" || c.trial_intent_confirmed_at) &&
+              detail.pipeline &&
+              !detail.pipeline.steps.find((s) => s.key === "account_linked")?.done && (
                 <TrialOnboardingStudentsForm
                   consultationId={c.id}
                   defaultGuardianEmail={detail.guardianEmail ?? c.contact_email ?? ""}
                   defaultGuardianName={detail.guardianName ?? c.contact_name ?? ""}
                   defaultStudentGrade={c.student_grade ?? ""}
-                  submitLabel="체험 온보딩 안내 발송"
+                  submitLabel={c.outcome === "regular_recommended" ? "정규 등록 온보딩 안내 발송" : "체험 온보딩 안내 발송"}
                   noticeDeliveryStatus={detail.noticeDeliveryStatus}
                   noticeSendError={detail.noticeSendError}
                   onResult={(result) => {

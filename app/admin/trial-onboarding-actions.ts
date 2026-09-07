@@ -340,14 +340,34 @@ export async function sendRegularContractOneClickAction(params: {
 
   // 정규 진행 희망(8번)이 없으면 발송하지 않는다 — 별도 고객용 제안 승인
   // 단계는 없지만, 보호자의 명시적 희망 표시는 최소 전제조건으로 유지한다.
-  const { data: selection, error: selectionError } = await admin
-    .from("trial_regular_progress_selections")
-    .select("id")
-    .eq("subject_enrollment_id", params.subjectEnrollmentId)
+  //
+  // 2026-09-06(정규 진행 권장 경로 완결) — 상담 결과가 애초에
+  // outcome='regular_recommended'(체험 생략)인 학생은 체험을 거치지 않으므로
+  // trial_regular_progress_selections 행이 존재할 방법이 없다(그 행은 체험
+  // 리뷰 이후 보호자가 "정규 진행 희망"을 확인할 때만 생성된다). 이 학생의
+  // 칸반 카드(consultations.child_id = params.childId) outcome이
+  // regular_recommended면 이 존재 체크를 건너뛴다 — trial_recommended 경로의
+  // 기존 체크는 그대로 유지(회귀 없음).
+  const { data: childConsultation, error: childConsultationError } = await admin
+    .from("consultations")
+    .select("outcome")
+    .eq("child_id", params.childId)
+    .order("created_at", { ascending: false })
+    .limit(1)
     .maybeSingle();
-  if (selectionError) throw new Error(selectionError.message);
-  if (!selection) {
-    throw new Error("보호자의 정규 진행 희망 표시가 아직 없습니다.");
+  if (childConsultationError) throw new Error(childConsultationError.message);
+  const isRegularRecommendedPath = childConsultation?.outcome === "regular_recommended";
+
+  if (!isRegularRecommendedPath) {
+    const { data: selection, error: selectionError } = await admin
+      .from("trial_regular_progress_selections")
+      .select("id")
+      .eq("subject_enrollment_id", params.subjectEnrollmentId)
+      .maybeSingle();
+    if (selectionError) throw new Error(selectionError.message);
+    if (!selection) {
+      throw new Error("보호자의 정규 진행 희망 표시가 아직 없습니다.");
+    }
   }
 
   const { data: approverProfile, error: approverProfileError } = await admin
