@@ -6,6 +6,16 @@
 // 다시 검증).
 
 import { requireUser } from "@/lib/auth";
+import { createAdminClient } from "@/lib/supabase-admin";
+import { sendRegularContractForSubjectEnrollment } from "@/lib/regular-contract-send";
+
+// 2026-09-06(제품 오너 정책 변경) — 승인자가 "CEO, Do Kyung Kim" 하나로
+// 고정된 뒤로, 보호자가 "정규 진행 희망"을 확인하면 관리자가 매번 수동으로
+// "회사 승인 및 계약 발송" 버튼을 누르지 않아도 자동으로 계약이 발송된다.
+// 이 자동 발송 경로에는 직함 입력란 자체가 없다 — 시스템이 이 고정값을
+// 그대로 쓴다(app/admin 쪽 수동 버튼의 기본값과 동일한 문자열).
+const AUTO_APPROVER_NAME = "Do Kyung Kim";
+const AUTO_APPROVER_TITLE = "CEO, Do Kyung Kim";
 
 export type TrialLessonReviewForFamily = {
   reviewId: string;
@@ -69,10 +79,76 @@ export async function hasConfirmedRegularProgressIntent(subjectEnrollmentId: str
 }
 
 export async function confirmRegularProgressIntent(subjectEnrollmentId: string): Promise<{ selectionId: string }> {
-  const { supabase } = await requireUser();
+  const { supabase, user, profile } = await requireUser();
   const { data, error } = await supabase.rpc("confirm_regular_progress_intent", {
     p_subject_enrollment_id: subjectEnrollmentId,
   });
   if (error) throw new Error(error.message);
-  return { selectionId: data as string };
+  const selectionId = data as string;
+
+  // 2026-09-06(제품 오너 정책 변경) — 선택 레코드가 남은 직후 자동으로 계약
+  // 발송을 시도한다. best-effort: 계약 발송이 실패해도(Preview DocuSign
+  // 게이트, 일시적 오류 등) 보호자의 "정규 진행 희망 확인" 자체는 이미 위
+  // RPC로 성공했으므로 이 함수는 절대 실패시키지 않는다 — 실패는 로그로만
+  // 남기고, 관리자 화면의 "회사 승인 및 계약 발송" 수동 버튼으로 재시도할
+  // 수 있게 남겨둔다.
+  await tryAutoSendRegularContract({
+    subjectEnrollmentId,
+    guardianUserId: user.id,
+    guardianName: profile?.name ?? "",
+    guardianEmail: user.email ?? "",
+  });
+
+  return { selectionId };
+}
+
+async function tryAutoSendRegularContract(params: {
+  subjectEnrollmentId: string;
+  guardianUserId: string;
+  guardianName: string;
+  guardianEmail: string;
+}): Promise<void> {
+  try {
+    const admin = createAdminClient();
+    const { data: enrollment, error: enrollError } = await admin
+      .from("subject_enrollments")
+      .select("id, child_id")
+      .eq("id", params.subjectEnrollmentId)
+      .single();
+    if (enrollError) throw new Error(enrollError.message);
+    if (!enrollment) throw new Error("과목 수강 정보를 찾을 수 없습니다.");
+
+    const { data: childProfile, error: childError } = await admin
+      .from("profiles")
+      .select("name")
+      .eq("id", enrollment.child_id)
+      .single();
+    if (childError) throw new Error(childError.message);
+
+    const result = await sendRegularContractForSubjectEnrollment(admin, {
+      childId: enrollment.child_id,
+      subjectEnrollmentId: params.subjectEnrollmentId,
+      guardianEmail: params.guardianEmail,
+      guardianName: params.guardianName,
+      childName: childProfile?.name ?? "",
+      approverName: AUTO_APPROVER_NAME,
+      approverTitle: AUTO_APPROVER_TITLE,
+      triggeredByUserId: params.guardianUserId,
+    });
+    console.info(
+      JSON.stringify({
+        type: "auto_regular_contract_send",
+        subjectEnrollmentId: params.subjectEnrollmentId,
+        result,
+        at: new Date().toISOString(),
+      })
+    );
+  } catch (e) {
+    const message = e instanceof Error ? e.message : String(e);
+    console.error(
+      "정규 진행 희망 확인 후 자동 계약 발송 실패(관리자가 수동으로 재시도해야 함):",
+      params.subjectEnrollmentId,
+      message
+    );
+  }
 }

@@ -229,3 +229,13 @@
 - [ ] **#4 체험 생략 → 바로 정규 등록 플로우 완성** — 미착수. `outcome='regular_recommended'`일 때 `TrialOnboardingStudentsForm` 렌더 조건 확장, 학생 계정 생성 완료 시 계약 draft 자동 생성, `sendRegularContractOneClickAction`의 `trial_regular_progress_selections` 체크를 이 경로에서 우회하는 작업이 남아있다. 설계 메모는 `docs/CURRENT.md` "다음 라운드 TODO" 참고.
 - [ ] **#5 지인/추천 — 상담 없이 바로 계정 생성** — 미착수. 신규 관리자 화면(상담 칸반과 분리), `consultation_id` nullable 여부 스키마 확인부터 시작 필요.
 - [ ] 브라우저로 실제 Preview에서 자녀 카드가 있는 가족 카드를 열어 폼이 실제로 숨겨지고 이동 링크가 동작하는지, 회사 승인자 직함이 기본값으로 채워져 있는지 눈으로 확인하는 것은 이번 세션 범위 밖 — Preview alias 갱신 후 직접 확인 권장.
+
+### 2026-09-06 16차 세션 — 정규 진행 희망 확인 시 자동 계약 발송으로 정책 변경(승인자 CEO, Do Kyung Kim 고정)
+
+15차 세션의 #3(설계 확인, 코드 변경 없음)을 뒤집는 제품 오너 정책 변경. 승인자가 "CEO, Do Kyung Kim" 하나로 고정된 뒤로는 관리자가 매번 수동으로 버튼을 누를 필요가 없다는 판단에 따라, 보호자가 "정규 진행 희망"을 확인하는 순간 자동으로 계약이 발송되도록 바꿨다.
+
+- [x] **`confirmRegularProgressIntent()`(`app/parent/trial-conversion-actions.ts`)가 선택 레코드 저장 직후 자동으로 계약을 발송** — 승인자 직함 입력란 없이 시스템이 `"CEO, Do Kyung Kim"`(approverName: `"Do Kyung Kim"`) 고정값을 사용. 계약 발송 로직은 `lib/regular-contract-send.ts`의 `sendRegularContractForSubjectEnrollment()`로 공용화해 관리자 원클릭 발송(`sendRegularContractOneClickAction`)과 공유(`lib/contract-send-internal.ts`로 DB/DocuSign 세부 로직도 함께 분리).
+- [x] **best-effort** — 자동 발송이 실패해도(Preview/로컬 DocuSign 게이트 등) 보호자의 "정규 진행 희망 확인" 자체는 실패하지 않는다(예외를 삼키고 로그만 남김).
+- [x] **관리자 수동 버튼 유지** — "회사 승인 및 계약 발송" 버튼은 제거하지 않았다. 이미 자동 발송된 건에 눌러도 멱등(`already_sent`)이라 중복 발송되지 않고, 화면에는 "이미 발송된 계약입니다(자동 발송 포함)." 안내 + "재발송(새 버전)" 버튼이 뜬다.
+- [x] 검증: `supabase db reset --local` 성공(신규 마이그레이션 없음) / `npx tsc --noEmit` 0 에러 / 실제 로컬 DB 대상 통합 테스트 신규 2건(`app/parent/trial-conversion-auto-send.integration.test.ts`, `confirm_regular_progress_intent` RPC → `sendRegularContractForSubjectEnrollment` 실제 순서 호출)로 자동 발송 실패 시에도 선택 레코드가 남는 것과 재호출 시 멱등성 확인 / mock 단위 테스트 `app/parent/trial-conversion-actions.test.ts`(신규 3건) + `app/admin/trial-onboarding-actions.test.ts`(기존 2건 구조 갱신) 통과 / `npx vitest run`(전체) 192파일·1282건 중 5건만 실패(`lib/booking/trial-entitlement-and-cancellation.integration.test.ts` — 이번 변경 이전부터의 기존 known flaky, 무관) / `npx next build` 성공.
+- [ ] 브라우저로 실제 Preview에서 보호자 계정으로 "정규 진행 희망" 확인 버튼을 눌렀을 때 관리자 칸반의 "정규 계약" 섹션이 자동으로 "이미 발송된 계약입니다(자동 발송 포함)." 상태로 바뀌는지(또는 Preview DocuSign 게이트로 실패해 기존 발송 폼이 남아있는지) 눈으로 확인하는 것은 이번 세션 범위 밖 — Preview alias 갱신 후 직접 확인 권장.

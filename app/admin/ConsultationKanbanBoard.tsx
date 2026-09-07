@@ -407,15 +407,25 @@ function ConsultationCardDetailPanel({
                   onSend={(fn) => run(fn)}
                 />
               ) : (
-                <button
-                  className={btnSecondary}
-                  disabled={busy}
-                  onClick={() => run(async () => {
-                    await createNewContractVersionForResend({ contractId: detail.contractId! });
-                  })}
-                >
-                  재발송(새 버전)
-                </button>
+                <div className="space-y-1.5">
+                  {/* 2026-09-06(정책 변경) — 보호자가 "정규 진행 희망"을 확인하면
+                      이제 관리자가 버튼을 누르지 않아도 자동으로 발송된다(승인자가
+                      "CEO, Do Kyung Kim"으로 고정된 이후). 이미 envelope가 있으면
+                      수동 클릭 없이도 도달할 수 있는 상태라, 자동 발송이었는지
+                      수동이었는지 이 화면만으로는 구분하지 않지만 "이미 발송됨"
+                      임은 분명히 보여준다 — 재발송(새 버전)은 여전히 필요할 때만
+                      쓰는 별도 액션이다. */}
+                  <div className="text-[12px] text-grey-500">이미 발송된 계약입니다(자동 발송 포함).</div>
+                  <button
+                    className={btnSecondary}
+                    disabled={busy}
+                    onClick={() => run(async () => {
+                      await createNewContractVersionForResend({ contractId: detail.contractId! });
+                    })}
+                  >
+                    재발송(새 버전)
+                  </button>
+                </div>
               )}
             </div>
           )}

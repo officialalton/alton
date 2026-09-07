@@ -2,8 +2,9 @@
 
 import { requireAdmin, requireAdminOrCapability } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
-import { createEnvelope, assertDocusignSandboxBaseUri, getEnvelopeStatus } from "@/lib/docusign";
-import { renderFamilyContractHtml, type CompanyApprovalForTemplate } from "@/lib/contracts/family-contract-template";
+import { getEnvelopeStatus } from "@/lib/docusign";
+import type { CompanyApprovalForTemplate } from "@/lib/contracts/family-contract-template";
+import { companySignOffContractVersionInternal, sendContractForSignatureInternal } from "@/lib/contract-send-internal";
 import { processOneDriveArtifact, MAX_RETRY_COUNT, type DriveArtifactRow } from "@/lib/drive-artifacts";
 
 // R3: 상담(consultation) → 체험(trial) → 제안서(proposal) → 계약(contract) 최소
@@ -555,11 +556,7 @@ export async function createContractFromProposal(params: {
 export async function companySignOffContractVersion(contractVersionId: string): Promise<void> {
   const { adminUserId: actorUserId } = await requireAdmin();
   const admin = createAdminClient();
-  const { error } = await admin
-    .from("contract_versions")
-    .update({ company_signed_at: new Date().toISOString(), company_signed_by: actorUserId })
-    .eq("id", contractVersionId);
-  if (error) throw new Error(error.message);
+  await companySignOffContractVersionInternal(admin, contractVersionId, actorUserId);
 }
 
 /**
@@ -580,73 +577,8 @@ export async function sendContractForSignature(params: {
   companyApproval: CompanyApprovalForTemplate;
 }): Promise<{ envelopeId: string }> {
   await requireAdmin();
-  assertDocusignSandboxBaseUri();
-
   const admin = createAdminClient();
-
-  const { data: version, error: versionError } = await admin
-    .from("contract_versions")
-    .select("id, contract_id, company_signed_at")
-    .eq("id", params.contractVersionId)
-    .single();
-  if (versionError) throw new Error(versionError.message);
-  if (!version) throw new Error("존재하지 않는 계약 버전입니다.");
-  if (!version.company_signed_at) {
-    throw new Error("회사 승인이 완료되지 않은 계약 버전은 보호자에게 발송할 수 없습니다. companySignOffContractVersion을 먼저 호출하세요.");
-  }
-
-  const { envelopeId } = await createEnvelope({
-    recipientEmail: params.recipientEmail,
-    recipientName: params.recipientName,
-    documentHtml: renderFamilyContractHtml({
-      parentName: params.recipientName,
-      studentName: params.childName,
-      companyApproval: params.companyApproval,
-    }),
-    emailSubject: "Alton Education 서비스 이용 계약서",
-    webhookUrl: params.webhookUrl,
-  });
-
-  const { error } = await admin
-    .from("contract_versions")
-    .update({
-      docusign_envelope_id: envelopeId,
-      docusign_envelope_status: "sent",
-      docusign_status_updated_at: new Date().toISOString(),
-    })
-    .eq("id", params.contractVersionId);
-  if (error) throw new Error(error.message);
-
-  const { error: contractStatusError } = await admin
-    .from("contracts")
-    .update({ status: "sent" })
-    .eq("id", version.contract_id);
-  if (contractStatusError) throw new Error(contractStatusError.message);
-
-  // 정책(20260913000000 §3 version_status 코멘트): "새 버전 서명(sent 이상 진행) 시
-  // 이전 active 버전은 superseded로 처리". 최초 발송(이 계약의 유일한 버전)일 때는
-  // 다른 active 버전이 없으므로 이 update는 0행에 영향을 주고 조용히 끝난다 —
-  // 재발송(createNewContractVersionForResend로 만든 새 버전을 이 함수로 발송할 때)에만
-  // 실제로 이전 버전을 superseded로 바꾼다.
-  const { error: supersedeError } = await admin
-    .from("contract_versions")
-    .update({ version_status: "superseded" })
-    .eq("contract_id", version.contract_id)
-    .eq("version_status", "active")
-    .neq("id", params.contractVersionId);
-  if (supersedeError) throw new Error(supersedeError.message);
-
-  console.info(
-    JSON.stringify({
-      type: "docusign_envelope_sent",
-      contractVersionId: params.contractVersionId,
-      contractId: version.contract_id,
-      envelopeId,
-      at: new Date().toISOString(),
-    })
-  );
-
-  return { envelopeId };
+  return sendContractForSignatureInternal(admin, params);
 }
 
 /**

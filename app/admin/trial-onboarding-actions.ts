@@ -11,11 +11,9 @@ import { createHash } from "node:crypto";
 import { requireAdminOrCapability } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { planSubjectEnrollment, assignTeacherToSubjectEnrollment } from "./subject-enrollment-actions";
-import { companySignOffContractVersion, sendContractForSignature } from "./consultation-actions";
-import { recordOrGetCompanyApproval } from "@/lib/contract-company-approval";
 import { sendEmail, escapeHtml } from "@/lib/email";
 import { currentRequestOrigin } from "@/lib/request-origin";
-import { appendVercelProtectionBypass } from "@/lib/vercel-protection-bypass";
+import { sendRegularContractForSubjectEnrollment, type SendRegularContractResult } from "@/lib/regular-contract-send";
 
 // 기존 상담 관리 액션(app/admin/consultation-actions.ts)과 동일한 capability를
 // 재사용한다 — 새 권한 이름을 따로 만들지 않는다.
@@ -320,11 +318,15 @@ export async function planTrialSubjectAndAssignTeacherAction(params: {
 // 성공으로 표시하지 않고 재처리 가능한 상태로 남긴다(계약/버전 상태 자체가
 // 재처리 판단 기준이라 별도 상태 컬럼을 추가하지 않았다).
 // =========================================================================
-export type SendRegularContractResult =
-  | { status: "already_sent"; contractVersionId: string; envelopeId: string }
-  | { status: "sent"; contractVersionId: string; envelopeId: string }
-  | { status: "failed"; contractVersionId: string; error: string };
+export type { SendRegularContractResult };
 
+// 2026-09-06(제품 오너 정책 변경) — 승인자 직함이 "CEO, Do Kyung Kim"으로
+// 고정된 뒤로 보호자가 "정규 진행 희망"을 확인하면 자동으로 계약이 발송된다
+// (app/parent/trial-conversion-actions.ts의 confirmRegularProgressIntent).
+// 이 버튼은 자동 발송이 실패했거나(Preview DocuSign 게이트 등) 재발송이
+// 필요한 경우를 위해 그대로 남긴다 — 핵심 로직은 lib/regular-contract-send.ts로
+// 옮겨 두 경로가 공유하므로, 이미 자동 발송된 건에 이 버튼을 눌러도(멱등)
+// 새 envelope가 만들어지지 않고 "already_sent"로 반환된다.
 export async function sendRegularContractOneClickAction(params: {
   childId: string;
   subjectEnrollmentId: string;
@@ -348,82 +350,23 @@ export async function sendRegularContractOneClickAction(params: {
     throw new Error("보호자의 정규 진행 희망 표시가 아직 없습니다.");
   }
 
-  const { data: contractId, error: contractError } = await admin.rpc("get_or_create_draft_contract_for_child", {
-    p_child_id: params.childId,
-  });
-  if (contractError) throw new Error(contractError.message);
-
-  // ① 기존 계약/진행중 envelope 대조.
-  const { data: existingVersions, error: versionsError } = await admin
-    .from("contract_versions")
-    .select("id, docusign_envelope_id, docusign_envelope_status, company_signed_at")
-    .eq("contract_id", contractId as string)
-    .eq("version_status", "active")
-    .order("version_number", { ascending: false })
-    .limit(1);
-  if (versionsError) throw new Error(versionsError.message);
-  const existing = existingVersions?.[0];
-
-  if (existing?.docusign_envelope_id) {
-    // 이미 발송된 상태 — 중복 클릭/재시도로 새 envelope를 만들지 않는다.
-    return { status: "already_sent", contractVersionId: existing.id, envelopeId: existing.docusign_envelope_id };
-  }
-
-  // ② 필요한 계약 버전 생성(없으면). proposal_id 없이 만든다(정상 흐름에서
-  // proposals 불필요).
-  let contractVersionId: string;
-  if (existing) {
-    contractVersionId = existing.id;
-  } else {
-    const { data: created, error: createError } = await admin
-      .from("contract_versions")
-      .insert({ contract_id: contractId as string, version_number: 1, price_policy_snapshot: {} })
-      .select("id")
-      .single();
-    if (createError) throw new Error(createError.message);
-    contractVersionId = created.id;
-  }
-
-  // ③ 회사 전자승인(이미 승인됐으면 재승인하지 않는다 — 재처리 시 멱등). 게이트
-  // 플래그(company_signed_at)와 별개로, 승인자·직함·계약 주체·문서 식별값은
-  // recordOrGetCompanyApproval이 변경 불가능한 감사 이력에 남긴다 — 이미 있으면
-  // 그 값을 그대로 재사용해 문서를 만든다(중복 클릭해도 승인 내용이 바뀌지 않음).
-  if (!existing?.company_signed_at) {
-    await companySignOffContractVersion(contractVersionId);
-  }
   const { data: approverProfile, error: approverProfileError } = await admin
     .from("profiles")
     .select("name")
     .eq("id", actorUserId)
     .single();
   if (approverProfileError) throw new Error(approverProfileError.message);
-  const companyApproval = await recordOrGetCompanyApproval(admin, {
-    contractVersionId,
-    approvedByUserId: actorUserId,
+
+  return sendRegularContractForSubjectEnrollment(admin, {
+    childId: params.childId,
+    subjectEnrollmentId: params.subjectEnrollmentId,
+    guardianEmail: params.guardianEmail,
+    guardianName: params.guardianName,
+    childName: params.childName,
     approverName: approverProfile?.name ?? "[관리자 이름 미등록]",
     approverTitle: params.approverTitle,
+    triggeredByUserId: actorUserId,
   });
-
-  // ④·⑤ 회사 전자승인이 삽입된 문서로 DocuSign 발송 + 상태·외부 ID 저장.
-  // 이번 라운드는 DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS가 아니면 항상 실패하는
-  // mock/비활성 경로만 검증한다(lib/docusign.ts) — 실패를 성공으로 표시하지
-  // 않고, 계약은 'draft'/버전은 미발송 상태로 남아 재처리 가능하다. 승인
-  // 감사 행은 이미 위에서 기록됐으므로 재시도해도 다시 기록되지 않는다.
-  const siteUrl = await currentRequestOrigin();
-  try {
-    const { envelopeId } = await sendContractForSignature({
-      contractVersionId,
-      recipientEmail: params.guardianEmail,
-      recipientName: params.guardianName,
-      childName: params.childName,
-      webhookUrl: appendVercelProtectionBypass(`${siteUrl}/api/webhooks/docusign`),
-      companyApproval,
-    });
-    return { status: "sent", contractVersionId, envelopeId };
-  } catch (e) {
-    const message = e instanceof Error ? e.message : String(e);
-    return { status: "failed", contractVersionId, error: message };
-  }
 }
 
 // =========================================================================

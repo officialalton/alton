@@ -24,9 +24,9 @@ vi.mock("./subject-enrollment-actions", () => ({
   planSubjectEnrollment: vi.fn(),
   assignTeacherToSubjectEnrollment: vi.fn(),
 }));
-vi.mock("./consultation-actions", () => ({
-  companySignOffContractVersion: companySignOffMock,
-  sendContractForSignature: sendContractMock,
+vi.mock("@/lib/contract-send-internal", () => ({
+  companySignOffContractVersionInternal: companySignOffMock,
+  sendContractForSignatureInternal: sendContractMock,
 }));
 vi.mock("@/lib/contract-company-approval", () => ({
   recordOrGetCompanyApproval: recordOrGetCompanyApprovalMock,
@@ -168,7 +168,7 @@ describe("sendRegularContractOneClickAction — 실패 후 재처리→성공", 
     // 1번만 호출됐다(재서명 없음) — 중복 생성/중복 선서명이 없음을 확인.
     expect(companySignOffMock).toHaveBeenCalledTimes(1);
     expect(sendContractMock).toHaveBeenCalledTimes(2);
-    expect(sendContractMock).toHaveBeenNthCalledWith(2, expect.objectContaining({ contractVersionId: "version1" }));
+    expect(sendContractMock).toHaveBeenNthCalledWith(2, expect.anything(), expect.objectContaining({ contractVersionId: "version1" }));
   });
 
   it("이미 발송 완료(envelope 있음)된 계약 버전에 재클릭하면 중복 발송하지 않고 그대로 반환한다", async () => {
@@ -190,6 +190,9 @@ describe("sendRegularContractOneClickAction — 실패 후 재처리→성공", 
             }),
           }),
         };
+      }
+      if (table === "profiles") {
+        return { select: () => ({ eq: () => ({ single: () => Promise.resolve({ data: { name: "테스트 관리자" }, error: null }) }) }) };
       }
       throw new Error(`unexpected table ${table}`);
     });
