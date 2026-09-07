@@ -436,10 +436,26 @@ describe("2026-09-05 후속 — 재판정 시 entitlement 대사(reconciliation)
     const payoutItemId = psql(`select id from payout_items where session_id = '${sessionId}';`);
     // R10 corrective(요구사항 1, 2026-09-07): paid는 payout_items_paid_requires_confirmation
     // CHECK 제약 때문에 provider_transaction_id/provider_confirmed_at도 함께 있어야 한다.
-    // 이 테스트는 상태머신 함수를 거치지 않고 직접 paid로 만드는 시나리오(오판정 이후
-    // 이미 지급된 상태를 재현)이므로 확인 컬럼도 같은 UPDATE에서 채운다.
+    // R10 corrective(2026-09-07, 트리거 보강 — 20261225000000): payout_items가
+    // paid로 전이하려면 이제 부모 payout_batch가 이미 paid여야 한다(트리거
+    // guard_payout_item_paid_transition). 이 테스트는 상태머신 함수를 거치지 않고
+    // 직접 paid로 만드는 시나리오(오판정 이전에 이미 지급 완료된 batch/item을
+    // 재현)이므로, 먼저 paid 상태의 부모 batch를 직접 만든 뒤(트리거가 요구하는
+    // provider_pending -> paid 전이 경로를 그대로 따름) item을 그 batch에
+    // 연결하면서 paid로 전이시킨다.
+    const legacyBatchId = psql(
+      `insert into payout_batches (teacher_id, period_start, period_end, currency, status, approved_at)
+       select teacher_id, current_date, current_date, currency, 'approved', now() from payout_items where id = '${payoutItemId}'
+       returning id;`
+    );
     psql(
-      `update payout_items set status = 'paid', provider_transaction_id = 'test-tx-${payoutItemId}', provider_confirmed_at = now() where id = '${payoutItemId}';`
+      `update payout_batches set status = 'provider_pending', provider_transaction_id = 'test-tx-batch-${legacyBatchId}' where id = '${legacyBatchId}';`
+    );
+    psql(
+      `update payout_batches set status = 'paid', provider_confirmed_at = now() where id = '${legacyBatchId}';`
+    );
+    psql(
+      `update payout_items set batch_id = '${legacyBatchId}', status = 'paid', provider_transaction_id = 'test-tx-${payoutItemId}', provider_confirmed_at = now() where id = '${payoutItemId}';`
     );
     const amountBefore = psql(`select amount_minor from payout_items where id = '${payoutItemId}';`);
 

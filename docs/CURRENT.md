@@ -2339,3 +2339,99 @@ migration을 추가했다. 기존 마이그레이션 파일은 수정하지 않�
   이번 라운드에서 의도적으로 보류.
 - Task D의 WhiteboardCanvas 프론트엔드 리와이어링·레거시 백필도 위에
   문서화한 대로 이번 라운드 범위 밖으로 명시적으로 남김.
+
+## 2026-09-07 — R10 corrective 2차: paid 전이 CHECK 제약의 구조적 허점을 트리거로 보강
+
+`8dc77b5`(R10 corrective 1차, `20261224000000_r10_paid_transition_guard_and_reversal_fix.sql`)가
+paid는 `provider_transaction_id`·`provider_confirmed_at`이 모두 있어야 한다는
+CHECK 제약을 추가했지만, **CHECK 제약은 UPDATE 이전(OLD) 상태를 볼 수 없다는
+구조적 한계**가 있었다 — 제품 오너 리뷰에서 지적된 대로, 특권 직접 UPDATE 한
+문장으로 `status='approved' -> status='paid'`를 쓰면서 동시에 두 확인 컬럼까지
+채우면 provider_pending 단계를 완전히 건너뛰고도 CHECK를 통과할 수 있었다.
+
+- 신규 `supabase/migrations/20261225000000_r10_paid_transition_trigger_guard.sql`
+  (additive, `20261224000000`은 그대로 유지 — CHECK와 트리거는 서로 다른 불변을
+  지키는 상호 보완 관계):
+  - `payout_batches`: `guard_payout_batch_paid_transition()` BEFORE INSERT OR
+    UPDATE 트리거. INSERT로 곧바로 `status='paid'`인 행을 만들 수 없고, UPDATE로
+    `paid`로 "새로" 전이하려면 `OLD.status = 'provider_pending'`이어야만 한다 —
+    그 외 이전 상태(approved/processing/dispatch_requested 등)에서의 직접
+    전이는 확인 컬럼이 채워져 있어도 트리거가 거부한다.
+  - `payout_items`: `guard_payout_item_paid_transition()` BEFORE INSERT OR
+    UPDATE 트리거. INSERT로 곧바로 paid 생성 불가. UPDATE로 paid 전이하려면
+    "그 시점에 부모 `payout_batches`가 이미 `paid`"여야 한다. `mark_payout_batch_paid()`
+    (20261224000000 정의)는 이미 같은 트랜잭션 안에서 (1) batch를 paid로 UPDATE
+    → (2) 그 다음 statement로 items를 paid로 UPDATE 순서였으므로(재정렬 불필요 —
+    원래부터 batch가 먼저였음), 트랜잭션 내 자신의 앞선 쓰기는 항상 보이는
+    Postgres MVCC 규칙에 따라 (2) 시점에는 이미 batch가 paid로 보여 정상 경로는
+    그대로 통과한다.
+  - 두 트리거 함수 모두 `public/anon/authenticated/service_role`에서 실행 권한을
+    명시적으로 revoke(트리거 전용, 직접 호출 불가).
+
+- 필수 통합 테스트 5건, 모두 `lib/booking/payout-batch-lifecycle.integration.test.ts`에
+  추가·재검증(총 11 tests, 전부 통과):
+  1. **게이트 열림 + 확인 컬럼까지 한 문장에 채운 approved→paid 직접 UPDATE 거부**:
+     "트리거가 direct UPDATE로 approved->paid를 확인 컬럼과 함께 한 문장에
+     넣어도 거부한다" — `guard_payout_batch_paid_transition`이
+     `/provider_pending 상태에서만 paid로 전이할 수 있습니다/`로 거부, 상태는
+     approved에 그대로 남고 provider_transaction_id도 null 유지됨을 확인.
+  2. **provider_pending이지만 확인 컬럼 누락 시 CHECK가 여전히 거부(트리거와
+     나란히 있어도 회귀 없음)**: "트리거가 추가된 뒤에도 provider_pending +
+     확인 컬럼 누락 조합은 CHECK가 그대로 거부한다" — 트리거의 OLD.status
+     검사는 통과(provider_pending)하지만 CHECK
+     (`payout_batches_paid_requires_confirmation`)가 여전히 거부, 함수 경로
+     (`mark_payout_batch_paid`)도 동일하게 거부됨을 재확인. 기존
+     "CHECK 제약이 ... 구조적으로 거부한다" 테스트도 이제 batch를 먼저
+     provider_pending까지 올려 트리거를 통과시킨 뒤 CHECK 단독 동작을
+     검증하도록 갱신.
+  3. **정규 파이프라인 end-to-end 성공**: "정규 파이프라인(provider_pending ->
+     provider_confirmed -> paid)은 트리거가 있어도 end-to-end로 성공한다" —
+     `dispatch_payout_batch -> mark_payout_batch_provider_pending ->
+     mark_payout_batch_provider_confirmed -> mark_payout_batch_paid`가 트리거
+     추가 후에도 batch/item 모두 paid로 정상 도달함을 확인.
+  4. **payout_items 단독 직접 paid 거부**: "payout_items를 batch와
+     독립적으로(또는 batch가 paid이기 전에) 직접 paid로 만들면 거부된다" —
+     부모 batch가 approved일 때, 그리고 provider_pending일 때(아직 paid
+     아님) 각각 item을 직접 paid로 만드는 UPDATE가
+     `guard_payout_item_paid_transition`에 의해 거부되고 item 상태가 바뀌지
+     않음을 확인.
+  5. **역분개(reversal) 항목도 동일 가드 적용, 지름길 없음 재확인**:
+     "reverse_payout_item으로 만든 reversal item도 새 트리거 하에서 정규
+     파이프라인 없이는 paid 지름길이 없다" — `reverse_payout_item()`이 만든
+     새 batch/item을 직접 paid로 전이시키려는 시도(item 단독, batch 단독 모두)가
+     트리거로 거부됨을 확인. 기존 "reverse_payout_item은 게이트가 열려
+     있어도..." 테스트도 트리거 추가 후 그대로 통과함을 재검증.
+- 부수 수정: `lib/booking/session-final-judgment.integration.test.ts`의
+  "payout_items가 이미 paid였으면 금액은 바뀌지 않고
+  superseded_by_reconciliation_task_id로만 표시된다" 테스트가 batch_id가 null인
+  채로 item을 직접 paid로 만들던 기존 방식이 새 트리거에 걸려, 먼저 paid 상태의
+  부모 batch를 정상적으로 만든 뒤(approved → provider_pending → paid, 트리거가
+  요구하는 전이 경로 그대로) item을 그 batch에 연결하며 paid로 전이시키도록
+  수정. 트리거가 실제로 무결성을 지키고 있음을 보여주는 부수 효과.
+- 검증: `supabase db reset --local` 성공(신규 마이그레이션 포함),
+  `npx vitest run --no-file-parallelism`(DB reset 직후, 전체 스위트) **206 test
+  files / 1360 tests 전부 통과**(위 5건 포함), `npx tsc --noEmit` 에러 0건,
+  `npx next build` 성공(Turbopack, 32개 페이지, 타입체크 포함).
+- 외부 변경: 0건.
+
+### 후속 항목(지금 구현하지 않음, 실제 지급 연동 활성화 전 반드시 처리) — `mark_payout_batch_processing()`
+
+`mark_payout_batch_processing()`(구형/레거시 processing 상태 함수, `20261218000000`
+정의)은 신규 파이프라인(`dispatch_payout_batch`/`mark_payout_batch_provider_pending`/
+`mark_payout_batch_provider_confirmed`/`mark_payout_batch_paid`)과 병행 존재하며,
+지금 당장은 이번 corrective의 blocker가 아니다(v3 admin UI인
+`payout-batches-actions.ts`가 호출하지 않고, `mark_payout_batch_paid()`가
+provider_pending만 허용하도록 재정의되어 있어 processing을 거쳐 paid로 갈 수
+없다 — `20261224000000`의 함수 주석에 이미 명시). 그러나 **실제
+Mercury/Wise 연동을 켜기 전에는 반드시 다음 중 하나를 결정하고 처리해야
+한다**:
+- (a) `mark_payout_batch_processing()`을 완전히 제거하거나,
+- (b) approved 상태에서만 processing으로 갈 수 있게 유지하되 신규 파이프라인과
+  상태 충돌이 없도록 명시적으로 제약(예: processing에서 dispatch_requested로
+  갈 수 없다는 CHECK나 트리거)을 추가하거나,
+- (c) 신규 파이프라인으로 완전히 흡수 통합.
+
+두 상태 모델(구형 processing 경로 vs 신규 dispatch_requested/provider_pending
+경로)이 병존하는 채로 실제 연동을 켜면, 두 경로 중 어느 쪽이 "진실"인지
+운영자가 혼동할 여지가 있다 — 법인 설립 후 실제 지급 연동 착수 R 단계의
+필수 선행 점검 항목으로 기록한다.

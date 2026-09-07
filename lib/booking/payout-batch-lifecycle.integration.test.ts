@@ -288,6 +288,10 @@ describe("payout batch lifecycle (R10)", () => {
 
   // R10 corrective(요구사항 1): CHECK 제약은 함수 본문과 무관하게 구조적으로
   // paid + 확인 컬럼 누락 조합을 거부한다 — 새 batch를 만들어 직접 검증.
+  // (2026-09-07 트리거 보강 이후: 트리거는 OLD.status=provider_pending일 때만
+  //  paid 전이를 허용하므로, CHECK 자체를 단독으로 시험하려면 batch를 먼저
+  //  provider_pending까지 올려서 트리거 검사를 통과시킨 뒤 확인 컬럼 누락 상태로
+  //  paid를 시도해야 한다.)
   it("CHECK 제약이 provider_transaction_id/provider_confirmed_at 없는 paid 행을 구조적으로 거부한다", () => {
     grantRegularEntitlement();
     bookAndCompleteSession(6);
@@ -299,15 +303,29 @@ describe("payout batch lifecycle (R10)", () => {
     const batchId = psql(
       `select batch_id from generate_payout_batches('${ps}', '${pe}', '${TEACHER_ID}');`
     );
+    psql(`select approve_payout_batch('${batchId}', '${ADMIN_ID}');`);
 
-    expect(() => psql(`update payout_batches set status = 'paid' where id = '${batchId}';`)).toThrow(
-      /payout_batches_paid_requires_confirmation/
-    );
-    expect(() =>
-      psql(
-        `update payout_batches set status = 'paid', provider_transaction_id = 'x' where id = '${batchId}';`
-      )
-    ).toThrow(/payout_batches_paid_requires_confirmation/);
+    psql(`update payout_disbursement_gate set real_disbursement_enabled = true where id = true;`);
+    try {
+      psql(`select dispatch_payout_batch('${batchId}', 'mercury', '${ADMIN_ID}');`);
+      psql(`select mark_payout_batch_provider_pending('${batchId}', 'mercury-tx-check-only');`);
+      expect(psql(`select status from payout_batches where id = '${batchId}';`)).toBe(
+        "provider_pending"
+      );
+
+      // 트리거의 OLD.status 검사는 통과(provider_pending)하지만, CHECK가
+      // provider_confirmed_at(및 이번 사례는 transaction_id도) 누락을 거부해야 한다.
+      expect(() =>
+        psql(`update payout_batches set status = 'paid' where id = '${batchId}';`)
+      ).toThrow(/payout_batches_paid_requires_confirmation/);
+      expect(() =>
+        psql(
+          `update payout_batches set status = 'paid', provider_transaction_id = 'x' where id = '${batchId}';`
+        )
+      ).toThrow(/payout_batches_paid_requires_confirmation/);
+    } finally {
+      psql(`update payout_disbursement_gate set real_disbursement_enabled = false where id = true;`);
+    }
   });
 
   it("reverse_payout_item은 게이트가 열려 있어도(요구사항 2) 항상 approved에서 시작하고, 정규 payout과 동일한 파이프라인을 거쳐야만 paid가 된다", () => {
@@ -401,5 +419,209 @@ describe("payout batch lifecycle (R10)", () => {
     psql(`select mark_payout_batch_failed('${batchId}', '${RUN_ID} 검토 중 반려', '${ADMIN_ID}');`);
     expect(psql(`select status from payout_batches where id = '${batchId}';`)).toBe("failed");
     expect(psql(`select count(*) from payout_items where batch_id = '${batchId}';`)).toBe("0");
+  });
+
+  // R10 corrective(2026-09-07, CHECK 제약 보강 — 20261225000000): CHECK 제약은
+  // 행의 현재 컬럼만 볼 수 있어 OLD.status를 검사할 수 없다. 특권 직접 UPDATE가
+  // approved -> paid를 한 문장으로 실행하면서 provider_transaction_id·
+  // provider_confirmed_at까지 같은 문장에서 채우면 CHECK만으로는 막을 수 없었다
+  // — 이 트리거(payout_batches_paid_transition_guard)가 OLD.status=provider_pending을
+  // 구조적으로 강제하는지 검증한다.
+  it("트리거가 direct UPDATE로 approved->paid를 확인 컬럼과 함께 한 문장에 넣어도 거부한다", () => {
+    grantRegularEntitlement();
+    bookAndCompleteSession(9);
+    const periodStart = new Date();
+    periodStart.setUTCDate(periodStart.getUTCDate() - 10);
+    const ps = periodStart.toISOString().slice(0, 10);
+    const pe = new Date().toISOString().slice(0, 10);
+
+    const batchId = psql(
+      `select batch_id from generate_payout_batches('${ps}', '${pe}', '${TEACHER_ID}');`
+    );
+    psql(`select approve_payout_batch('${batchId}', '${ADMIN_ID}');`);
+    expect(psql(`select status from payout_batches where id = '${batchId}';`)).toBe("approved");
+
+    // 게이트 상태와 무관하게(CHECK를 우회하려는 시도이지 게이트 우회 시도가
+    // 아니므로 게이트는 닫힌 채로 둔다) 확인 컬럼까지 한 문장에서 채워서
+    // approved -> paid 직접 UPDATE를 시도한다.
+    expect(() =>
+      psql(
+        `update payout_batches set status = 'paid', provider_transaction_id = 'shortcut-tx', provider_confirmed_at = now() where id = '${batchId}';`
+      )
+    ).toThrow(/provider_pending 상태에서만 paid로 전이할 수 있습니다/);
+
+    expect(psql(`select status from payout_batches where id = '${batchId}';`)).toBe("approved");
+    expect(psql(`select provider_transaction_id is null from payout_batches where id = '${batchId}';`)).toBe(
+      "t"
+    );
+  });
+
+  // 이전 라운드 CHECK 제약(provider_pending이지만 확인 컬럼 누락)이 새 트리거와
+  // 나란히 있어도 여전히 통과하는지(둘 다 독립적으로 paid를 막는지) 재확인한다.
+  it("트리거가 추가된 뒤에도 provider_pending + 확인 컬럼 누락 조합은 CHECK가 그대로 거부한다", () => {
+    grantRegularEntitlement();
+    bookAndCompleteSession(10);
+    const periodStart = new Date();
+    periodStart.setUTCDate(periodStart.getUTCDate() - 10);
+    const ps = periodStart.toISOString().slice(0, 10);
+    const pe = new Date().toISOString().slice(0, 10);
+
+    const batchId = psql(
+      `select batch_id from generate_payout_batches('${ps}', '${pe}', '${TEACHER_ID}');`
+    );
+    psql(`select approve_payout_batch('${batchId}', '${ADMIN_ID}');`);
+
+    psql(`update payout_disbursement_gate set real_disbursement_enabled = true where id = true;`);
+    try {
+      psql(`select dispatch_payout_batch('${batchId}', 'mercury', '${ADMIN_ID}');`);
+      psql(`select mark_payout_batch_provider_pending('${batchId}', 'mercury-tx-partial');`);
+      expect(psql(`select status from payout_batches where id = '${batchId}';`)).toBe(
+        "provider_pending"
+      );
+
+      // provider_pending이므로 트리거의 OLD.status 검사는 통과하지만,
+      // provider_confirmed_at이 없어 CHECK가 여전히 거부해야 한다.
+      expect(() =>
+        psql(`update payout_batches set status = 'paid' where id = '${batchId}';`)
+      ).toThrow(/payout_batches_paid_requires_confirmation/);
+
+      // 함수 경로로도 동일하게 거부(20261224000000의 기존 가드, 재확인).
+      expect(() => psql(`select mark_payout_batch_paid('${batchId}', '${ADMIN_ID}');`)).toThrow(
+        /제공자 최종 성공 확인/
+      );
+    } finally {
+      psql(`update payout_disbursement_gate set real_disbursement_enabled = false where id = true;`);
+    }
+  });
+
+  // R10 corrective(2026-09-07): 정규 파이프라인(provider_pending -> confirmed ->
+  // paid)이 트리거가 추가된 뒤에도 end-to-end로 정상 동작하는지 재확인한다.
+  it("정규 파이프라인(provider_pending -> provider_confirmed -> paid)은 트리거가 있어도 end-to-end로 성공한다", () => {
+    grantRegularEntitlement();
+    const sessionId = bookAndCompleteSession(1);
+    const periodStart = new Date();
+    periodStart.setUTCDate(periodStart.getUTCDate() - 10);
+    const ps = periodStart.toISOString().slice(0, 10);
+    const pe = new Date().toISOString().slice(0, 10);
+
+    const batchId = psql(
+      `select batch_id from generate_payout_batches('${ps}', '${pe}', '${TEACHER_ID}');`
+    );
+    const itemId = psql(`select id from payout_items where session_id = '${sessionId}';`);
+    psql(`select approve_payout_batch('${batchId}', '${ADMIN_ID}');`);
+
+    psql(`update payout_disbursement_gate set real_disbursement_enabled = true where id = true;`);
+    try {
+      psql(`select dispatch_payout_batch('${batchId}', 'mercury', '${ADMIN_ID}');`);
+      psql(`select mark_payout_batch_provider_pending('${batchId}', 'mercury-tx-e2e');`);
+      psql(`select mark_payout_batch_provider_confirmed('${batchId}', '${ADMIN_ID}');`);
+      psql(`select mark_payout_batch_paid('${batchId}', '${ADMIN_ID}');`);
+
+      expect(psql(`select status from payout_batches where id = '${batchId}';`)).toBe("paid");
+      expect(psql(`select status from payout_items where id = '${itemId}';`)).toBe("paid");
+    } finally {
+      psql(`update payout_disbursement_gate set real_disbursement_enabled = false where id = true;`);
+    }
+  });
+
+  // R10 corrective(2026-09-07, CHECK 제약 보강): payout_items 단독 직접 UPDATE로
+  // batch와 무관하게(또는 batch가 아직 paid가 아닌 상태에서) paid로 만드는 시도가
+  // 트리거(payout_items_paid_transition_guard)에 의해 거부되는지 검증한다.
+  it("payout_items를 batch와 독립적으로(또는 batch가 paid이기 전에) 직접 paid로 만들면 거부된다", () => {
+    grantRegularEntitlement();
+    bookAndCompleteSession(2);
+    const periodStart = new Date();
+    periodStart.setUTCDate(periodStart.getUTCDate() - 10);
+    const ps = periodStart.toISOString().slice(0, 10);
+    const pe = new Date().toISOString().slice(0, 10);
+
+    const batchId = psql(
+      `select batch_id from generate_payout_batches('${ps}', '${pe}', '${TEACHER_ID}');`
+    );
+    const itemId = psql(`select id from payout_items where batch_id = '${batchId}';`);
+    psql(`select approve_payout_batch('${batchId}', '${ADMIN_ID}');`);
+    expect(psql(`select status from payout_batches where id = '${batchId}';`)).toBe("approved");
+
+    // batch는 여전히 approved(paid 아님) — item만 직접 paid로 바꾸려는 시도.
+    expect(() =>
+      psql(
+        `update payout_items set status = 'paid', provider_transaction_id = 'x', provider_confirmed_at = now() where id = '${itemId}';`
+      )
+    ).toThrow(/부모 payout_batch가 이미 paid 상태일 때만/);
+    expect(psql(`select status from payout_items where id = '${itemId}';`)).toBe("approved");
+
+    // batch를 정규 파이프라인으로 paid까지 올려도, batch UPDATE와 별개의 트랜잭션에서
+    // item만 뒤늦게 직접 paid로 바꾸려는 시도는 여전히 막혀야 한다는 것을 보여주기
+    // 위해, 이번에는 batch를 provider_pending까지만 두고(아직 paid 아님) item을
+    // 직접 paid로 바꿔본다 — 부모가 provider_pending일 뿐이라 여전히 거부되어야 한다.
+    psql(`update payout_disbursement_gate set real_disbursement_enabled = true where id = true;`);
+    try {
+      psql(`select dispatch_payout_batch('${batchId}', 'mercury', '${ADMIN_ID}');`);
+      psql(`select mark_payout_batch_provider_pending('${batchId}', 'mercury-tx-item-direct');`);
+      expect(psql(`select status from payout_batches where id = '${batchId}';`)).toBe(
+        "provider_pending"
+      );
+
+      expect(() =>
+        psql(
+          `update payout_items set status = 'paid', provider_transaction_id = 'x', provider_confirmed_at = now() where id = '${itemId}';`
+        )
+      ).toThrow(/부모 payout_batch가 이미 paid 상태일 때만/);
+      // item 상태는 dispatch/provider_pending 단계에서는 그대로 approved다
+      // (mark_payout_batch_paid만이 item을 paid로 올린다) — 거부된 시도가
+      // 이 상태를 바꾸지 않았는지 확인.
+      expect(psql(`select status from payout_items where id = '${itemId}';`)).toBe("approved");
+    } finally {
+      psql(`update payout_disbursement_gate set real_disbursement_enabled = false where id = true;`);
+    }
+  });
+
+  // R10 corrective(2026-09-07): reverse_payout_item()이 만드는 reversal item도
+  // 새 트리거가 있는 상태에서 여전히 정규 파이프라인 없이는 paid로 지름길을
+  // 낼 수 없는지(INSERT 시점 및 이후 직접 UPDATE 시도 둘 다) 재확인한다.
+  it("reverse_payout_item으로 만든 reversal item도 새 트리거 하에서 정규 파이프라인 없이는 paid 지름길이 없다", () => {
+    grantRegularEntitlement();
+    const sessionId = bookAndCompleteSession(11);
+    const periodStart = new Date();
+    periodStart.setUTCDate(periodStart.getUTCDate() - 11);
+    const ps = periodStart.toISOString().slice(0, 10);
+    const pe = new Date().toISOString().slice(0, 10);
+
+    const batchId = psql(
+      `select batch_id from generate_payout_batches('${ps}', '${pe}', '${TEACHER_ID}');`
+    );
+    psql(`select approve_payout_batch('${batchId}', '${ADMIN_ID}');`);
+    const itemId = psql(`select id from payout_items where session_id = '${sessionId}';`);
+
+    psql(`update payout_disbursement_gate set real_disbursement_enabled = true where id = true;`);
+    try {
+      psql(`select dispatch_payout_batch('${batchId}', 'mercury', '${ADMIN_ID}');`);
+      psql(`select mark_payout_batch_provider_pending('${batchId}', 'mercury-tx-rev-orig');`);
+      psql(`select mark_payout_batch_provider_confirmed('${batchId}', '${ADMIN_ID}');`);
+      psql(`select mark_payout_batch_paid('${batchId}', '${ADMIN_ID}');`);
+    } finally {
+      psql(`update payout_disbursement_gate set real_disbursement_enabled = false where id = true;`);
+    }
+
+    const newItemId = psql(`select reverse_payout_item('${itemId}', '${RUN_ID} 트리거 재검증', '${ADMIN_ID}');`);
+    const [revStatus, revBatchId] = psql(
+      `select status, batch_id from payout_items where id = '${newItemId}';`
+    ).split("|");
+    expect(revStatus).toBe("approved");
+    expect(psql(`select status from payout_batches where id = '${revBatchId}';`)).toBe("approved");
+
+    // reversal item을 직접 paid로 만들려는 시도 — 부모 batch가 approved일 뿐이므로 거부.
+    expect(() =>
+      psql(
+        `update payout_items set status = 'paid', provider_transaction_id = 'x', provider_confirmed_at = now() where id = '${newItemId}';`
+      )
+    ).toThrow(/부모 payout_batch가 이미 paid 상태일 때만/);
+
+    // 부모 batch 자체도 트리거로 인해 approved -> paid 직접 지름길이 불가.
+    expect(() =>
+      psql(
+        `update payout_batches set status = 'paid', provider_transaction_id = 'x', provider_confirmed_at = now() where id = '${revBatchId}';`
+      )
+    ).toThrow(/provider_pending 상태에서만 paid로 전이할 수 있습니다/);
   });
 });
