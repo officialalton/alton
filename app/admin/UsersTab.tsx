@@ -4,6 +4,7 @@ import { useState } from "react";
 import { inviteParent, inviteStudent } from "./users-actions";
 import StudentDetailPanel from "./StudentDetailPanel";
 import TeacherDetailPanel from "./TeacherDetailPanel";
+import DirectAccountCreationForm from "./DirectAccountCreationForm";
 import type { AdminSubject } from "./subject-data";
 import type {
   CreditTransaction,
@@ -142,6 +143,7 @@ export default function UsersTab({
               ]);
             }}
           />
+          <DirectAccountCreationForm />
         </>
       )}
 
