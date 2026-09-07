@@ -1,10 +1,15 @@
 "use client";
 
-// M4 — 보호자가 확정된 체험 리뷰를 확인한 뒤 "정규 진행 희망"을 표시하는 패널.
+// M4 — 보호자가 체험 리뷰를 확인한 뒤 "정규 진행 희망"을 표시하는 패널.
 // 리뷰 본문 자체는 app/student/EnrollmentTab.tsx(학생·보호자 공용)가 이미
 // 보여주므로 여기서는 중복 표시하지 않고, "정규 진행 희망" 버튼과 그 의미
-// 설명만 담당한다. 확정된 리뷰가 없으면 아무것도 보여주지 않는다(리뷰 미확정 →
-// 정규 진행 선택 단계로 못 넘어감).
+// 설명만 담당한다.
+//
+// (2026-09-06) 여기 넘어오는 enrollments는 이미 app/parent/EnrollmentTab.tsx가
+// getProgressedTrialEnrollmentIds(app/parent/regular-intent-data.ts — 홈 배너와
+// 동일 기준)로 필터링한 "체험 세션이 진행 중이거나 끝난" 과목뿐이다. 리뷰가 아직
+// 확정 안 됐으면 버튼 대신 대기 안내를 보여준다(정규 진행 선택 자체는 확정 리뷰가
+// 있어야만 가능 — confirm_regular_progress_intent RPC가 서버에서 재검증).
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -51,15 +56,23 @@ function TrialConversionRow({
       .catch(() => setConfirmed(false));
   }, [subjectEnrollmentId]);
 
-  // 리뷰가 아직 확정되지 않았으면 이 단계 자체를 보여주지 않는다(정규 진행
-  // 선택은 확정 리뷰가 있어야만 가능 — 서버에서도 같은 조건을 다시 검증한다).
   // confirmed 조회가 끝나기 전에는 아무것도 그리지 않는다 — 안 그러면 이미
-  // 접수된 경우에도 버튼이 잠깐 보였다 사라지는 깜빡임이 생긴다.
-  if (!hasFinalReview || confirmed === undefined) return null;
+  // 접수된 경우에도 버튼이 잠깐 보였다 사라지는 깜빡임이 생긴다. 이 컴포넌트에
+  // 넘어오는 enrollments는 이미 "체험 세션이 진행 중이거나 끝난" 과목만이다
+  // (app/parent/EnrollmentTab.tsx가 홈 배너와 동일한 기준으로 필터링 — 2026-09-06).
+  // 리뷰가 아직 확정되지 않았으면 버튼 대신 대기 안내만 보여준다(정규 진행 선택은
+  // 확정 리뷰가 있어야만 가능 — 서버 confirm_regular_progress_intent가 재검증).
+  if (confirmed === undefined || hasFinalReview === undefined) return null;
 
   return (
     <div className="mx-8 mb-4 border-[1.5px] border-grey-200 rounded-xl px-5 py-4">
       <div className="text-[13px] font-bold text-ink mb-1">{subjectName} — 정규 수업 진행 여부</div>
+      {!hasFinalReview ? (
+        <p className="text-[12px] text-grey-500">
+          체험 수업 리뷰가 준비되면 정규 수업 진행 여부를 선택할 수 있습니다. 조금만 기다려주세요.
+        </p>
+      ) : (
+        <>
       <p className="text-[12px] text-grey-500 mb-2.5">
         위 체험 리뷰를 확인하셨다면, 정규 수업 진행을 희망하시는지 알려주세요. 이 버튼을
         누르는 것은 <b>계약 체결이나 결제가 아니며</b>, 관리자에게 "계약 준비를 시작해주세요"라는
@@ -95,6 +108,8 @@ function TrialConversionRow({
           접수 완료 — 관리자가 확인 후 정규 계약서를 이메일로 보내드립니다. 서명을 완료하시면
           단건·10회·20회 수업권 구매로 이어집니다.
         </div>
+      )}
+        </>
       )}
     </div>
   );

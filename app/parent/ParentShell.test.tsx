@@ -58,6 +58,7 @@ const lessonsProps = {
   trialSmartNotesChildren: [],
   pendingRegularIntentChoices: [],
   childrenSubjectEnrollments: [],
+  progressedTrialEnrollmentIds: [],
   lessonBooking: {
     bookableEnrollments: [],
     upcomingBookings: [],

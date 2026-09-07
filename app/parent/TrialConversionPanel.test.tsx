@@ -27,11 +27,12 @@ describe("TrialConversionPanel", () => {
     (hasConfirmedRegularProgressIntent as ReturnType<typeof vi.fn>).mockResolvedValue(false);
   });
 
-  it("확정된 리뷰가 없으면 정규 진행 희망 단계를 보여주지 않는다(리뷰 미확정 시 진행 차단)", async () => {
+  it("확정된 리뷰가 없으면 버튼 대신 대기 안내를 보여준다(리뷰 미확정 시 액션 차단, 2026-09-06부터 행 자체는 계속 보여줌)", async () => {
     (getTrialLessonReviewForFamily as ReturnType<typeof vi.fn>).mockResolvedValue(null);
-    const { container } = render(<TrialConversionPanel enrollments={[enrollment]} />);
+    render(<TrialConversionPanel enrollments={[enrollment]} />);
     await waitFor(() => expect(getTrialLessonReviewForFamily).toHaveBeenCalled());
-    expect(container).toBeEmptyDOMElement();
+    await screen.findByText(/리뷰가 준비되면/);
+    expect(screen.queryByRole("button", { name: "정규 진행 희망합니다" })).toBeNull();
   });
 
   it("확정된 리뷰가 있으면 계약 체결이 아니라는 안내와 함께 정규 진행 희망 버튼을 보여준다", async () => {

@@ -6,9 +6,12 @@ import type { ChildSubjectEnrollments } from "./enrollment-data";
 
 export default function ParentEnrollmentTab({
   childrenEnrollments,
+  progressedTrialEnrollmentIds,
 }: {
   childrenEnrollments: ChildSubjectEnrollments[];
+  progressedTrialEnrollmentIds: string[];
 }) {
+  const progressedIds = new Set(progressedTrialEnrollmentIds);
   return (
     <div>
       {childrenEnrollments.map((c) => (
@@ -17,7 +20,9 @@ export default function ParentEnrollmentTab({
             {c.childName}
           </div>
           <EnrollmentTab enrollments={c.enrollments} />
-          <TrialConversionPanel enrollments={c.enrollments} />
+          <TrialConversionPanel
+            enrollments={c.enrollments.filter((e) => progressedIds.has(e.id))}
+          />
         </div>
       ))}
     </div>

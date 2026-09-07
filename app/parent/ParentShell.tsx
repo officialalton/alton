@@ -71,6 +71,7 @@ export default function ParentShell({
   trialSmartNotesChildren,
   pendingRegularIntentChoices,
   childrenSubjectEnrollments,
+  progressedTrialEnrollmentIds,
   lessonBooking,
 }: {
   parentName: string;
@@ -92,6 +93,7 @@ export default function ParentShell({
   trialSmartNotesChildren: TrialSmartNotesConsentStatus[];
   pendingRegularIntentChoices: PendingRegularIntentChoice[];
   childrenSubjectEnrollments: ChildSubjectEnrollments[];
+  progressedTrialEnrollmentIds: string[];
   lessonBooking: LessonBookingData;
 }) {
   const router = useRouter();
@@ -224,7 +226,10 @@ export default function ParentShell({
               timezone={lessonBooking.timezone}
             />
           ) : activeTab === "enrollment" ? (
-            <ParentEnrollmentTab childrenEnrollments={childrenSubjectEnrollments} />
+            <ParentEnrollmentTab
+              childrenEnrollments={childrenSubjectEnrollments}
+              progressedTrialEnrollmentIds={progressedTrialEnrollmentIds}
+            />
           ) : activeTab === "booking" ? (
             <LessonBookingTab
               key={currentChildId}

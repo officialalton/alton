@@ -9,7 +9,7 @@ import { loadParentCreditsData } from "./credits-data";
 import { loadParentEntitlementsData } from "./entitlements-data";
 import { loadChildrenConsentStatus, loadActiveConsentPolicy, loadTrialSmartNotesConsentStatus } from "./consent-data";
 import { loadPendingRegularIntentChoices } from "./regular-intent-data";
-import { loadChildrenSubjectEnrollments } from "./enrollment-data";
+import { loadChildrenSubjectEnrollments, loadProgressedTrialEnrollmentIds } from "./enrollment-data";
 import { loadLessonBookingData } from "@/app/student/lesson-booking-data";
 import ParentShell from "./ParentShell";
 
@@ -59,6 +59,10 @@ export default async function ParentHomePage({
     supabase,
     children
   );
+  const progressedTrialEnrollmentIds = await loadProgressedTrialEnrollmentIds(
+    supabase,
+    childrenSubjectEnrollments
+  );
   const lessonBooking = await loadLessonBookingData(supabase, currentChildId);
 
   return (
@@ -82,6 +86,7 @@ export default async function ParentHomePage({
       trialSmartNotesChildren={trialSmartNotesChildren}
       pendingRegularIntentChoices={pendingRegularIntentChoices}
       childrenSubjectEnrollments={childrenSubjectEnrollments}
+      progressedTrialEnrollmentIds={progressedTrialEnrollmentIds}
       lessonBooking={lessonBooking}
     />
   );

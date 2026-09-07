@@ -186,3 +186,13 @@
 - [x] **#2 버그/정책** — 선생님이 "수업 종료"로 조기 완료 처리해도, 학생 포털은 순수 `startsAt > now`만 봐서 예약 시작 시각이 안 지났으면 계속 "예정 수업"에 남아있었다. `app/student/lesson-booking-data.ts`를 선생님 포털(`TeacherLessonScheduleTab.isPastLesson()`)과 동일한 규칙으로 통일 — (시작 시각이 지났거나 OR `final_status`가 최종판정됨)이면 "지난 수업", 단 체험 수업은 리뷰가 `final` 확정되기 전까지는 계속 "예정 수업"에 남김(선생님·학생 판정 불일치 제거). 취소된 예약 처리는 변경 없음.
 - [x] 검증: `supabase db reset --local` 성공(신규 마이그레이션 없음) / `npx tsc --noEmit` 0 에러 / `LessonBookingTab.test.tsx` 레이아웃 회귀 2건, `lesson-booking-data.test.ts` 예정/지난 판정 4건 신규 추가 / `npx vitest run`(전체) 188파일·1259건 전부 통과 / `npx next build` 성공.
 - [ ] 브라우저로 실제 Preview에서 체험 예약 완료 학생의 "수업" 탭 위쪽 여백이 실제로 사라졌는지, 선생님이 조기 종료한 세션이 학생 쪽 "지난 수업"으로 즉시 넘어가는지 눈으로 확인하는 것은 이번 세션 범위 밖 — Preview alias 갱신 후 직접 확인 권장.
+
+### 2026-09-06 12차 세션 — 보호자 포털 "정규 진행 희망" 배너 통일 + 중도 종료 자녀 탭 숨김
+
+제품 오너가 코드 조사로 확인한 2가지를 확정 지시. `docs/CURRENT.md`의 "2026-09-06(제품 오너 확정 지시 2건)" 절에 상세 근거가 있다.
+
+- [x] **#1 홈 배너 조건 수정** — "정규 진행 희망 선택 필요" 배너가 체험 리뷰 확정(`lesson_reviews.status='final'`) 여부와 무관하게 떠야 한다는 지시. `app/parent/regular-intent-data.ts`에 공통 기준 함수 `getProgressedTrialEnrollmentIds()`(체험 세션이 `live`이거나 `scheduled`/`live`가 아닌 최종판정 — 즉 진행 중이거나 끝난 것)를 신설해 리뷰 확정 요건을 제거했다.
+- [x] **#2 핵심 버그 — 홈 배너/수강 과목 탭 조건 불일치** — 수강 과목 탭(`TrialConversionPanel`)과 홈 배너(`regular-intent-data.ts`)가 서로 다른 조건을 써서 "탭엔 뜨는데 홈엔 안 뜨는" 불일치가 있었다. `app/parent/enrollment-data.ts`의 `loadProgressedTrialEnrollmentIds()`가 같은 기준 함수를 재사용하도록 하고, `page.tsx`→`ParentShell.tsx`→`EnrollmentTab.tsx`로 이 universe를 그대로 전달해 두 화면이 정확히 같은 subject_enrollment 집합을 대상으로 삼도록 통일.
+- [x] **#3 중도 종료 자녀 탭 숨김** — `app/parent/children-data.ts`의 `loadChildren()`이 상담 상태와 무관하게 모든 자녀를 보여주던 문제. 자녀별로 active `subject_enrollments`가 없고 그 자녀에 연결된(`consultations.child_id`) 최신 상담의 `closure_type`이 `no_trial`/`trial_no_convert`면 탭 목록에서 제외. 이미 정규 전환된(active 수강 있는) 자녀는 상담 기록과 무관하게 절대 숨기지 않음. 자녀 1명뿐인 극단 케이스는 기존 `page.tsx`의 "연결된 자녀 계정이 없습니다" 빈 상태 처리가 그대로 커버.
+- [x] 검증: `supabase db reset --local` 성공(신규 마이그레이션 없음) / `npx tsc --noEmit` 0 에러 / `app/parent/children-data.test.ts` 중도 종료 숨김 케이스 4건 추가 / `app/parent/TrialConversionPanel.test.tsx` 리뷰 미확정 케이스 갱신(행은 보이되 버튼 없음) / 신규 통합 테스트 `app/parent/parent-portal-trial-consultation-consistency.integration.test.ts`(로컬 Postgres, 실제 앱 함수 호출) 7건 전부 통과 / `npx vitest run`(전체) 189파일·1270건 전부 통과(`--no-file-parallelism`으로 재확인 — 병렬 실행 시 다른 통합 테스트의 선생님 예약가능시간 데이터 경합으로 flaky해지는 기존 이슈이며 이번 변경과 무관함을 확인) / `npx next build` 성공.
+- [ ] 브라우저로 실제 Preview에서 체험만 하고 중도 종료된 자녀가 실제로 상단 탭에서 사라지는지, 정규 전환된 자녀는 그대로 보이는지, 리뷰 미확정 상태에서도 홈 배너가 뜨는지 눈으로 확인하는 것은 이번 세션 범위 밖 — Preview alias 갱신 후 직접 확인 권장.
