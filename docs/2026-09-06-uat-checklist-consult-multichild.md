@@ -280,3 +280,16 @@
 - [x] 검증: `supabase db reset --local` 성공(신규 마이그레이션 없음) / `npx tsc --noEmit` 0 에러 / `CreditsTab.test.tsx` 전면 재작성 + `ParentShell.test.tsx` 갱신(지인 추천/수업권 두 탭이 각각 올바른 컴포넌트를 렌더링하는지 확인) / `npx vitest run`(전체) 194파일·1288건 중 29건만 실패 — `git stash`로 이번 변경 이전 커밋에서도 동일하게 실패함을 확인한 기존 known flaky(날짜 의존 예약 버퍼/시드 데이터 unique 제약, 오늘 날짜 9/7 진입으로 flaky 범위가 더 넓어짐), 이번 변경과 무관 / `npx next build` 성공. 스키마 변경이 없어 원격 DB push는 불필요.
 - [ ] 브라우저로 실제 Preview에서 두 탭 이름이 실제로 겹치지 않고 "수업권" 탭에 20장이 정확히 보이는지 눈으로 확인하는 것은 이번 세션 범위 밖(DB 실측 + 컴포넌트 테스트로만 검증) — Preview alias 갱신 후 직접 확인 권장. 레거시 `credits-actions.ts`(이미 죽은 신규 결제 차단 코드)와 `students.credit_balance`/`credit_packages` 테이블 자체의 완전 제거는 범위 밖으로 남김(오픈 전 정리 단계 대상, `docs/CURRENT.md` 2026-09-01 항목 참고).
 - [ ] 브라우저로 실제 Preview alias 재연결 후 학부모 초대 이메일 링크와 "지인/추천" 계정 생성 안내 발송을 다시 실제로 눌러보고 눈으로 확인하는 것은 실제 이메일 발송 금지 제약과 맞물려 이번 세션 범위 밖 — Preview alias는 갱신했으니 제품 오너가 직접 재확인 권장.
+
+### 2026-09-07 21차 세션 — 관리자 "사용자" 탭 3건(레거시 초대 제거 / 지인·추천 재발송·취소 / 관리자 프로필 수기 수정)
+
+제품 오너가 "학부모 초대"를 눌렀다가 React #441로 크래시 났고 "지인/추천"과 겹치니 예전 기능을 없애자고 지시. 추가로 지인/추천 폼에서 잘못된 이메일로 등록된 학생을 재발송/취소할 수 있어야 한다는 요구와, 관리자가 사용자 이름/이메일을 수기로 수정할 수 있는 구조가 필요하다는 지적. 상세 근거는 `docs/CURRENT.md`의 "2026-09-07(추가 3)" 절 참고.
+
+- [x] **레거시 "학부모 초대" 제거** — `UsersTab.tsx`의 학부모 `InviteForm`과 `users-actions.ts`의 `inviteParent()`(account_invites 기반) 삭제, 다른 호출부 없음 확인. `DirectAccountCreationForm`(지인/추천)이 완전한 상위 호환.
+- [x] **지인/추천 링크 재발송(이메일 수정)** — 기존 `reissueTrialOnboardingLinkAction()`이 `consultation_id`가 null인 링크에서 상담 존재를 요구하는 RPC를 호출해 항상 실패하던 버그 발견·수정. `direct-account-actions.ts`에 `reissueDirectOnboardingLinkAction()` 신설, null 분기 시 위임.
+- [x] **지인/추천 학생 취소** — `trial_onboarding_link_students.status`에 `'cancelled'` 추가(마이그레이션 `20261216000000`), `cancel_trial_onboarding_link_student()` RPC + `cancelDirectOnboardingLinkStudentAction()`. `finalize_trial_onboarding_students()`가 cancelled 학생을 건너뛰도록 재정의. `TrialOnboardingLinkProgress.tsx`에 "학생 취소" 버튼 추가.
+- [x] **관리자의 사용자 정보 수기 수정** — `UsersTab.tsx` 보호자/학생 카드에 "수정" 버튼 + 인라인 편집 폼(이름/이메일/학년도). 새 서버 액션 `app/admin/user-edit-actions.ts`(`updateUserBasicInfo`)가 `auth.users.email`과 `profiles.name`을 함께 갱신, `profiles.admin_edited_by`/`admin_edited_at`로 최소 감사 로그.
+- [x] 검증: `supabase db reset --local` 성공 / `npx tsc --noEmit` 0 에러 / 신규 테스트 `app/admin/user-edit-actions.test.ts`(5건, mocked) + `app/admin/trial-onboarding-link-student-cancel.integration.test.ts`(3건, 로컬 Postgres psql 직접 검증) / `npx vitest run`(전체) 196파일 중 195개 통과·1294건 중 1292건 통과(실패 2건은 `lib/timezone-persistence.integration.test.ts`, 이번 변경과 무관한 파일).
+- [ ] **`npx next build` 미확인** — 이 세션이 작업하는 동안 다른 세션이 `app/admin/ConsultationSchedulingPanel.tsx`/`consultation-scheduling-actions.ts`를 동시에 수정 중이라(타입 에러 `RecordConsultationOutcomeResult` 발생, 내 파일이 원인 아님) 로컬에서 클린 빌드 통과를 확인하지 못했다 — 그 세션이 커밋한 뒤 재확인 필요.
+- [ ] non-prod(`worpsqwqgnspddnrtnvq`) 마이그레이션 반영 및 Preview alias 재연결은 이 세션 마지막 단계로 진행 예정(문서 갱신 시점 기준 아직 전) — 결과는 `docs/CURRENT.md` 또는 다음 세션 기록 확인.
+- [ ] 브라우저로 실제 Preview에서 관리자 "수정" 버튼으로 실제 이메일을 바꾼 뒤 그 계정으로 로그인까지 되는지, 지인/추천 링크 "학생 취소" 후 실제로 그 학생만 빠지고 나머지는 정상 온보딩되는지 눈으로 확인하는 것은 이번 세션 범위 밖(실제 이메일 발송/로그인 계정 변경 금지 제약과도 맞물림) — Preview alias 갱신 후 직접 확인 권장.
