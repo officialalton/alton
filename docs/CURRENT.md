@@ -2086,3 +2086,93 @@ additive migration이라 순서 무관하게 함께 적용 확인됨.
   `supabase/migrations/20261219000000_r8_material_version_lock.sql`(신규),
   `docs/2026-09-07-r8-session-cutover-oneP-pager.md`(신규, 착수 전 1장 정리),
   `docs/CURRENT.md`(이 절).
+
+## 2026-09-07 — R8∥R10 1라운드 종합 검증(병렬 라운드 종료 후 통합 확인)
+
+R8·R10을 같은 워킹트리에서 병렬 진행하는 과정에서 서로 다른 하위 에이전트가
+`app/session/[id]/` 파일을 동시에 건드릴 뻔한 충돌이 한 번 감지됐다 — 나중에
+시작한 쪽을 즉시 중단시켜 실제 코드 손실·덮어쓰기 없이 정리했다(먼저 시작한
+쪽의 작업만 유지). 이후 각자 자기 파일만 `git add`로 커밋해 최종적으로 커밋
+3건이 남았다: `e9d357e`(R8, Drive 재처리 큐), `a4f8d8d`(R10, payout batch
+lifecycle), `9d9cc5f`(R8, 세션뷰 v3 cutover + material_version_id 불변식).
+
+병렬 진행 중 각 라운드가 공유 로컬 DB 경합으로 "종합 전체 검증(tsc/vitest/
+next build 1회)"을 미뤘으므로, 두 라운드 종료 후 이 세션에서 직접 통합
+재검증을 수행했다:
+
+- `supabase db reset --local`: 성공. 3개 신규 마이그레이션
+  (`20261218000000_r10_payout_batch_lifecycle.sql`,
+  `20261219000000_r8_material_version_lock.sql`,
+  `20261220000000_r8_session_drive_provisioning_queue.sql`)이 타임스탬프
+  순서 충돌 없이 전부 적용됨.
+- `npx tsc --noEmit`: 클린.
+- `npx vitest run --no-file-parallelism`: **201개 파일 / 1318개 테스트 전부
+  통과**(0 실패) — 병렬 실행 중 개별 라운드가 보고했던 일시적 실패(공유 DB
+  경합 추정)는 이번 단독 순차 실행에서 재현되지 않음, 진짜 회귀 없음 확인.
+- `npx next build`: 성공(전 라우트 정상 빌드, `/session/[id]` 포함).
+
+**R8∥R10 1라운드 결론**: 코드 기준선 정상, 로컬 검증 전부 통과. 실제
+Google/DocuSign/Stripe/이메일 호출 없음, Production/main 미변경. 각 R의
+세부 미완료 항목(R8: annotation 실시간·Drive 자동화 실배선·iPad 실기기 QA
+등, R10: 관리자 UI·정산 상세·리포트·법률 blocker 2건)은 위 각 절에 이미
+기록된 그대로 다음 라운드로 이월.
+
+## 2026-09-07(야간 자율 라운드) Task A/B — R10 법인 설립 전 지급 경계 corrective migration + 실제 정산 파이프라인 데이터 모델(완료)
+
+제품 오너 지시(법인 설립 전 정책, 2026-09-07 야간)에 따라 `a4f8d8d`
+(`20261218000000_r10_payout_batch_lifecycle.sql`)가 열어둔 approved→
+processing/paid 경로를 DB 레벨에서 fail-closed로 막는 corrective additive
+migration을 추가했다. 기존 마이그레이션 파일은 수정하지 않음.
+
+- 신규 `supabase/migrations/20261221000000_r10_pre_incorporation_payout_gate.sql`:
+  - `payout_disbursement_gate`(단일 행, `real_disbursement_enabled boolean default false`)
+    + `real_disbursement_enabled()` 함수 — 앱 레이어의
+    `DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS` 패턴과 동일한 취지의 DB 레벨 게이트.
+    RLS로 authenticated에는 select만 허용, update 정책 자체를 부여하지 않아
+    앱 코드가 실수로 켤 수 없음(운영자가 SQL로만 전환).
+  - `mark_payout_batch_processing()`/`mark_payout_batch_paid()` 재정의 —
+    게이트가 false(기본값)면 즉시 raise exception, approved 상태는 그대로
+    유지된다(부분 실패 없음, 완전 거부).
+  - `reverse_payout_item()` 재설계 — 기존 설계(역분개 시 새 "paid" batch
+    생성)가 이 경계를 우회하는 모순이 있어, 게이트가 닫혀 있으면 역분개
+    batch/item이 approved에서 멈추도록 바꿨다(게이트가 켜지면 기존 설계
+    그대로 즉시 paid).
+  - 실제 Mercury/Wise API 호출 코드는 레포 전체에 없음을 grep으로 재확인
+    (`mercury`/`wise.com`/`api.mercury`/`api.wise` 전부 0건) — 이번 작업은
+    순수 DB 가드이며 막을 실호출 자체가 아직 없다.
+- 신규 `supabase/migrations/20261222000000_r10_settlement_pipeline_schema.sql`
+  (Task B, 로드맵 R10 "지급 인프라와 승인 정책" 확정 상태머신을 구조만 반영,
+  실제 연동 코드 없음):
+  - `v3_payout_batch_status`에 `calculated`/`reviewed`/`dispatch_requested`/
+    `provider_pending` 값 추가(기존 draft/reviewing/approved/processing/
+    paid/failed는 삭제하지 않음 — enum 값 제거는 위험해 additive만).
+  - `payout_batches`에 `dispatch_idempotency_key`(unique, batch당 1회 발급 —
+    재시도 시 동일 key 반환해 이중 지급 요청 방지)/`provider_transaction_id`/
+    `provider`/`dispatch_requested_at`/`provider_pending_at`/
+    `last_reconciliation_at`/`failure_reason` 추가.
+  - `payout_items`에 `provider_transaction_id`/`last_reconciliation_at`/
+    `failure_reason`/`retry_count` 추가 — 강사별 부분 실패 재시도가 배치
+    내 다른 강사 항목에 영향을 주지 않도록 항목 단위로 추적.
+  - `generate_payout_batches()`를 `calculated`로 생성하도록 재정의,
+    `submit_payout_batch_for_review()`/`approve_payout_batch()`는 draft/
+    calculated, reviewing/reviewed 둘 다 받아들이도록 조건 확장(기존 데이터·
+    테스트 호환, 새 어휘로 자연 전환).
+  - `dispatch_payout_batch(batch_id, provider, actor)`: approved→
+    dispatch_requested, idempotency key 발급. `mark_payout_batch_provider_pending()`:
+    dispatch_requested→provider_pending. 둘 다 `real_disbursement_enabled()`
+    게이트로 fail-closed — 값 자체는 enum에 존재하지만 게이트가 꺼진 동안
+    함수 호출로는 절대 도달 불가(구조적으로는 "값 존재", 동작상으로는
+    "도달 불가능"이라는 의미로 구현). 실제 Mercury/Wise API 클라이언트
+    코드는 이번에도 추가하지 않음(설계·스키마만).
+- 검증: `lib/booking/payout-batch-lifecycle.integration.test.ts` 갱신(1라운드
+  테스트가 approved→paid 성공을 가정했던 부분을 게이트 도입에 맞게 재작성) —
+  (1) approve_payout_batch는 여전히 approved까지 정상 도달, (2)
+  mark_payout_batch_processing/mark_payout_batch_paid 호출은 둘 다
+  "법인 설립 전 지급 경계" 메시지로 reject되고 상태가 approved에 그대로
+  머무름을 확인, (3) reverse_payout_item은 게이트가 닫힌 채로는 새 항목이
+  paid가 아니라 approved 상태로 생성됨을 확인(paid 시나리오 자체 검증을
+  위해 테스트 내부에서만 일시적으로 게이트를 켰다 껐다 — 실제 앱 경로 아님).
+  `npx vitest run lib/booking/payout-batch-lifecycle.integration.test.ts`
+  2/2 통과. `supabase db reset --local` 성공(두 신규 마이그레이션 포함 전체
+  적용). 전체 스위트 결과는 이 라운드 마지막 절에 통합 기록.
+- 외부 변경: 0건.

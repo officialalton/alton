@@ -150,22 +150,30 @@ describe("payout batch lifecycle (R10)", () => {
     );
     expect(secondRun).toBe("0");
 
-    // 승인 → 지급까지 상태 전이.
+    // 승인까지는 정책상 허용(법인 설립 전에도 검토·승인 원장은 진행).
     psql(`select approve_payout_batch('${batchId}', '${ADMIN_ID}');`);
     expect(psql(`select status from payout_batches where id = '${batchId}';`)).toBe("approved");
     expect(psql(`select status from payout_items where batch_id = '${batchId}';`)).toBe("approved");
 
-    psql(`select mark_payout_batch_paid('${batchId}', '${ADMIN_ID}');`);
-    expect(psql(`select status from payout_batches where id = '${batchId}';`)).toBe("paid");
-    expect(psql(`select status from payout_items where batch_id = '${batchId}';`)).toBe("paid");
+    // 법인 설립 전 지급 경계(2026-09-07, 20261221000000 corrective migration):
+    // approved -> processing/paid는 real_disbursement_enabled() 게이트가
+    // false(기본값)인 동안 fail-closed로 거부된다.
+    expect(() => psql(`select mark_payout_batch_processing('${batchId}');`)).toThrow(
+      /법인 설립 전 지급 경계/
+    );
+    expect(() => psql(`select mark_payout_batch_paid('${batchId}', '${ADMIN_ID}');`)).toThrow(
+      /법인 설립 전 지급 경계/
+    );
+    // 거부된 시도가 상태를 바꾸지 않았는지 확인.
+    expect(psql(`select status from payout_batches where id = '${batchId}';`)).toBe("approved");
 
     const auditActions = psql(
       `select string_agg(action, ',' order by created_at) from payout_batch_audit_log where batch_id = '${batchId}';`
     );
-    expect(auditActions).toBe("approved,paid");
+    expect(auditActions).toBe("approved");
   });
 
-  it("paid 상태 batch/item은 직접 수정할 수 없고, reverse_payout_item으로 역분개해야 한다", () => {
+  it("reverse_payout_item은 게이트가 닫혀 있으면 approved에서 멈추고, paid 항목 직접 수정은 여전히 트리거가 막는다", () => {
     grantRegularEntitlement();
     const sessionId = bookAndCompleteSession(2);
     const periodStart = new Date();
@@ -176,25 +184,38 @@ describe("payout batch lifecycle (R10)", () => {
     const row = psql(`select batch_id from generate_payout_batches('${ps}', '${pe}', '${TEACHER_ID}');`);
     const batchId = row.split("\n")[0];
     psql(`select approve_payout_batch('${batchId}', '${ADMIN_ID}');`);
-    psql(`select mark_payout_batch_paid('${batchId}', '${ADMIN_ID}');`);
 
     const itemId = psql(`select id from payout_items where session_id = '${sessionId}';`);
 
-    // 직접 수정 시도는 트리거가 막는다(R1 기존 불변).
+    // reverse_payout_item()은 paid 상태의 원본 항목만 대상으로 하므로, 이 시나리오를
+    // 시험하려면 게이트를 임시로 열어 paid까지 만든 뒤 다시 닫는다(운영 게이트
+    // 테이블을 테스트 목적으로만 직접 조작 — 실제 앱 코드 경로는 아님).
+    psql(`update payout_disbursement_gate set real_disbursement_enabled = true where id = true;`);
+    try {
+      psql(`select mark_payout_batch_processing('${batchId}');`);
+      psql(`select mark_payout_batch_paid('${batchId}', '${ADMIN_ID}');`);
+    } finally {
+      psql(`update payout_disbursement_gate set real_disbursement_enabled = false where id = true;`);
+    }
+    expect(psql(`select status from payout_items where id = '${itemId}';`)).toBe("paid");
+
+    // 직접 수정 시도는 트리거가 막는다(R1 기존 불변, 게이트와 무관).
     expect(() => psql(`update payout_items set amount_minor = 1 where id = '${itemId}';`)).toThrow();
 
     const [origAmount, origMinutes] = psql(
       `select amount_minor, payable_minutes from payout_items where id = '${itemId}';`
     ).split("|");
 
+    // 게이트가 닫힌 채로(기본값) 역분개 — 새 batch/item은 paid가 아니라 approved에서 멈춰야 한다.
     const newItemId = psql(`select reverse_payout_item('${itemId}', '${RUN_ID} 판정 정정', '${ADMIN_ID}');`);
-    const [revAmount, revMinutes, revType, revStatus] = psql(
-      `select amount_minor, payable_minutes, item_type, status from payout_items where id = '${newItemId}';`
+    const [revAmount, revMinutes, revType, revStatus, revBatchId] = psql(
+      `select amount_minor, payable_minutes, item_type, status, batch_id from payout_items where id = '${newItemId}';`
     ).split("|");
     expect(revAmount).toBe(String(-Number(origAmount)));
     expect(revMinutes).toBe(String(-Number(origMinutes)));
     expect(revType).toBe("reversal");
-    expect(revStatus).toBe("paid");
+    expect(revStatus).toBe("approved"); // paid가 아니다 — 법인 설립 전 경계.
+    expect(psql(`select status from payout_batches where id = '${revBatchId}';`)).toBe("approved");
 
     // 원본 항목은 그대로 불변.
     const stillOrig = psql(`select amount_minor from payout_items where id = '${itemId}';`);
