@@ -106,9 +106,11 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    ["홈", "수강 과목", "레슨", "선생님", "과제", "문제", "단어장", "교재", "수업권", "통계"].forEach(
+    ["홈", "수강 과목", "수업", "선생님", "과제", "문제", "단어장", "교재", "수업권", "통계"].forEach(
       (label) => expect(screen.getByText(label)).toBeInTheDocument()
     );
+    expect(screen.queryByText("레슨")).toBeNull();
+    expect(screen.queryByText("예약")).toBeNull();
     expect(screen.getByText(/지훈의 학습 현황/)).toBeInTheDocument();
   });
 
@@ -170,7 +172,7 @@ describe("StudentShell", () => {
     expect(screen.getByText("조건에 맞는 문제 기록이 없습니다.")).toBeInTheDocument();
   });
 
-  it("레슨 탭을 누르면 LessonsTab이 렌더링된다", () => {
+  it("수업 탭을 누르면 ClassesTab이 렌더링되고, 딱 두 개의 서브탭('예정 수업'/'지난 수업')만 보인다(레거시 '레슨'/'예약' 탭 제거)", () => {
     render(
       <StudentShell
         studentName="지훈"
@@ -180,8 +182,10 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("레슨"));
-    expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("수업"));
+    expect(screen.getByText("예정 수업")).toBeInTheDocument();
+    expect(screen.getByText("지난 수업")).toBeInTheDocument();
+    expect(screen.getByText("예약 가능한 과목이 없습니다(선생님 배정이 필요합니다).")).toBeInTheDocument();
   });
 
   it("과제 탭을 누르면 StudentHomeworkTab이 렌더링된다", () => {

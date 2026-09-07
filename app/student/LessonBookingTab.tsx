@@ -66,6 +66,11 @@ export type LessonBookingTabProps = {
     minutesLate?: number;
     notes?: string;
   }) => Promise<void>;
+  // "수업" 탭 정리(A안) — "레슨"/"예약"을 하나의 "수업" 탭(ClassesTab)으로 합치면서
+  // mode를 지정하면 예정/지난 중 하나의 블록만 보여준다(미지정 시 기존처럼 모두 표시 —
+  // 다른 호출부·테스트 호환).
+  mode?: "upcoming" | "past";
+  hideHeader?: boolean;
 };
 
 export default function LessonBookingTab({
@@ -79,6 +84,8 @@ export default function LessonBookingTab({
   onCancelBooking,
   onUpdateTimezone,
   onReportTeacherIssue,
+  mode: tabMode,
+  hideHeader = false,
 }: LessonBookingTabProps) {
   const router = useRouter();
   const [selectedEnrollmentId, setSelectedEnrollmentId] = useState<string>(bookableEnrollments[0]?.subjectEnrollmentId ?? "");
@@ -240,6 +247,14 @@ export default function LessonBookingTab({
     }
   }
 
+  // "수업" 탭 정리(A안) — 선생님 포털의 "수업 시작" Meet 자동 입장 패턴을 재사용한다.
+  // 팝업 차단을 피하려면 클릭 핸들러 안에서 동기적으로 새 탭을 먼저 열어야 한다.
+  function handleStartClass(meetLink: string | null) {
+    if (!meetLink) return;
+    const meetTab = window.open("", "_blank", "noopener,noreferrer");
+    if (meetTab) meetTab.location.href = meetLink;
+  }
+
   function openReportForm(sessionId: string) {
     setReportingSessionId(sessionId);
     setReportType("teacher_late");
@@ -268,8 +283,13 @@ export default function LessonBookingTab({
     }
   }
 
+  const showUpcoming = tabMode !== "past";
+  const showPast = tabMode !== "upcoming";
+
   return (
-    <div className="max-w-[640px] px-8 py-8">
+    <div className={hideHeader ? "" : "max-w-[640px] px-8 py-8"}>
+      {showUpcoming && !hideHeader && (
+        <>
       <h1 className="text-[20px] font-extrabold text-ink mb-1.5">수업 예약</h1>
       <p className="text-[13px] text-grey-500 mb-5">
         최소 24시간 이후부터 최대 8주 이내로 예약할 수 있습니다.
@@ -277,8 +297,10 @@ export default function LessonBookingTab({
           ? ` 수업은 ${selectedEnrollment.lessonDurationMinutes}분, 앞뒤 15분 버퍼가 자동 적용됩니다.`
           : " 수업은 120분(체험은 60분), 앞뒤 15분 버퍼가 자동 적용됩니다."}
       </p>
+        </>
+      )}
 
-      {browserTimezone && browserTimezone !== timezone && !timezoneBannerDismissed && (
+      {showUpcoming && browserTimezone && browserTimezone !== timezone && !timezoneBannerDismissed && (
         <div className="mb-5 text-[12px] bg-grey-100 rounded-lg px-4 py-3 flex items-center justify-between gap-3">
           <span>
             현재 브라우저 시간대는 <span className="font-semibold">{browserTimezone}</span>이지만 계정 설정은{" "}
@@ -303,7 +325,7 @@ export default function LessonBookingTab({
       {message && <div className="mb-4 text-[13px] font-semibold text-ink bg-green/10 rounded-lg px-4 py-3">{message}</div>}
       {error && <div className="mb-4 text-[13px] font-semibold text-red bg-red/5 rounded-lg px-4 py-3">{error}</div>}
 
-      {bookableEnrollments.length === 0 ? (
+      {showUpcoming && (bookableEnrollments.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center mb-8">
           예약 가능한 과목이 없습니다(선생님 배정이 필요합니다).
         </div>
@@ -454,8 +476,9 @@ export default function LessonBookingTab({
             </div>
           )}
         </div>
-      )}
+      ))}
 
+      {showUpcoming && (
       <div className="flex items-center justify-between mt-8 mb-2.5">
         <h2 className="text-[15px] font-bold text-ink">예정된 수업</h2>
         <div className="flex gap-1.5">
@@ -473,8 +496,9 @@ export default function LessonBookingTab({
           </button>
         </div>
       </div>
+      )}
 
-      {upcomingView === "calendar" && (
+      {showUpcoming && upcomingView === "calendar" && (
         <div className="border-[1.5px] border-grey-200 rounded-xl p-3 mb-4">
           <MonthCalendar
             timezone={timezone}
@@ -490,7 +514,7 @@ export default function LessonBookingTab({
         </div>
       )}
 
-      {(() => {
+      {showUpcoming && (() => {
         const visibleBookings =
           upcomingView === "calendar" && upcomingCalendarDateKey
             ? upcomingBookings.filter((b) => dateKeyInTimezone(b.startsAt, timezone) === upcomingCalendarDateKey)
@@ -524,14 +548,23 @@ export default function LessonBookingTab({
                 </button>
               )}
             </div>
-            <div className="mt-2 flex items-center gap-2">
+            <div className="mt-2 flex items-center gap-2 flex-wrap">
               <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-grey-100 text-grey-500">
                 {SYNC_STATUS_LABEL[b.googleSyncStatus] ?? b.googleSyncStatus}
               </span>
+              <button
+                onClick={() => router.push(`/session/${b.sessionId}`)}
+                className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-grey-100 text-ink"
+              >
+                수업 준비
+              </button>
               {b.googleMeetLink && (
-                <a href={b.googleMeetLink} target="_blank" rel="noreferrer" className="text-[12px] font-semibold text-ink underline">
-                  Meet 링크
-                </a>
+                <button
+                  onClick={() => handleStartClass(b.googleMeetLink)}
+                  className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-ink text-white"
+                >
+                  수업 시작
+                </button>
               )}
             </div>
             {cancellingReservationId === b.reservationId && (
@@ -566,10 +599,12 @@ export default function LessonBookingTab({
         ));
       })()}
 
-      <h2 className="text-[15px] font-bold text-ink mb-2.5 mt-8">지난 수업 지각·노쇼 신고</h2>
+      {showPast && (
+      <>
+      <h2 className="text-[15px] font-bold text-ink mb-2.5 mt-8">지난 수업</h2>
       {pastSessionsForReport.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-          최근 14일 이내 신고할 수 있는 수업이 없습니다.
+          최근 14일 이내 지난 수업이 없습니다.
         </div>
       ) : (
         pastSessionsForReport.map((s) => (
@@ -580,6 +615,12 @@ export default function LessonBookingTab({
                   {s.subjectName} · {s.teacherName} 선생님
                 </div>
                 <div className="text-[13px] text-grey-500 mt-0.5">{formatDateTime(s.startsAt, timezone)}</div>
+                <button
+                  onClick={() => router.push(`/session/${s.sessionId}`)}
+                  className="text-[12px] font-semibold text-blue mt-1"
+                >
+                  수업 준비 내역
+                </button>
               </div>
               {reportingSessionId !== s.sessionId &&
                 (reportedSessionIds.has(s.sessionId) ? (
@@ -648,6 +689,8 @@ export default function LessonBookingTab({
             )}
           </div>
         ))
+      )}
+      </>
       )}
     </div>
   );

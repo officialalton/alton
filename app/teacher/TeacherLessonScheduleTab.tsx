@@ -15,6 +15,14 @@ import {
   type TrialSessionNeedingReview,
   type ReviewCategoryOption,
 } from "./trial-review-actions";
+import type { ReportSessionIssueParams } from "./ScheduleTab";
+
+type ReportType = "teacher_late" | "student_no_show_reported";
+
+const REPORT_TYPE_LABEL: Record<ReportType, string> = {
+  teacher_late: "본인 지각",
+  student_no_show_reported: "학생 노쇼",
+};
 
 // M4 UAT #5 — 사용자가 실제로 써보고 지적한 대로, 체험 수업 리뷰 작성 진입점을
 // "배정" 탭(TrialReviewPanel, 이제 삭제됨)에서 이 화면("정규수업" 탭, 실제로
@@ -73,6 +81,12 @@ export type TeacherLessonScheduleTabProps = {
   // M5-b(R7) — 진행 중(live)인 수업에서 선생님 지각분을 당일 상호 합의로 연장(가능한
   // 만큼)하고, 나머지는 자동으로 보충시간(makeup_obligations)으로 이관한다.
   onResolveLateness: (params: { sessionId: string; lateMinutes: number; agreedExtendMinutes: number; reason: string }) => Promise<ActionResult>;
+  // "수업" 탭 정리 — 예정/지난 두 서브탭만 남기면서, 레거시 "지난 수업 기록·신고"
+  // 서브탭(ScheduleTab)의 지각·노쇼 신고 기능을 이 화면의 지난 수업 카드 안으로
+  // 흡수했다. mode를 지정하면 예정/지난 중 하나만 렌더링한다(미지정 시 기존처럼
+  // 예정 목록 + 접이식 지난 수업 목록을 모두 보여준다 — 다른 호출부·테스트 호환).
+  mode?: "upcoming" | "past";
+  onReportSessionIssue?: (params: ReportSessionIssueParams) => Promise<void>;
 };
 
 export default function TeacherLessonScheduleTab({
@@ -85,6 +99,8 @@ export default function TeacherLessonScheduleTab({
   onStartSession,
   onFinalizeSession,
   onResolveLateness,
+  mode,
+  onReportSessionIssue,
 }: TeacherLessonScheduleTabProps) {
   const router = useRouter();
   const [view, setView] = useState<"week-list" | "week" | "month">("week-list");
@@ -104,6 +120,41 @@ export default function TeacherLessonScheduleTab({
   const [latenessSessionId, setLatenessSessionId] = useState<string | null>(null);
   const [lateMinutesDraft, setLateMinutesDraft] = useState("10");
   const [extendMinutesDraft, setExtendMinutesDraft] = useState("10");
+  const [reportingSessionId, setReportingSessionId] = useState<string | null>(null);
+  const [reportType, setReportType] = useState<ReportType>("student_no_show_reported");
+  const [minutesLateDraft, setMinutesLateDraft] = useState("");
+  const [reportNotes, setReportNotes] = useState("");
+  const [reportSubmitting, setReportSubmitting] = useState(false);
+  const [reportError, setReportError] = useState<string | null>(null);
+  const [reportedSessionIds, setReportedSessionIds] = useState<Set<string>>(new Set());
+
+  function openReportForm(sessionId: string) {
+    setReportingSessionId(sessionId);
+    setReportType("student_no_show_reported");
+    setMinutesLateDraft("");
+    setReportNotes("");
+    setReportError(null);
+  }
+
+  async function handleSubmitReport(sessionId: string) {
+    if (!onReportSessionIssue) return;
+    setReportSubmitting(true);
+    setReportError(null);
+    try {
+      await onReportSessionIssue({
+        sessionId,
+        reportType,
+        minutesLate: reportType === "teacher_late" ? Number(minutesLateDraft) || undefined : undefined,
+        notes: reportNotes.trim() || undefined,
+      });
+      setReportedSessionIds((prev) => new Set(prev).add(sessionId));
+      setReportingSessionId(null);
+    } catch (e) {
+      setReportError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setReportSubmitting(false);
+    }
+  }
 
   const todayKey = todayKeyInTimezone(timezone);
   const nowMs = Date.now();
@@ -200,7 +251,7 @@ export default function TeacherLessonScheduleTab({
     [visibleLessons, nowMs]
   );
 
-  function renderLessonCard(lesson: TeacherLessonScheduleItem) {
+  function renderLessonCard(lesson: TeacherLessonScheduleItem, isPast = false) {
     const needsReview = lesson.isTrial && lesson.finalStatus === "completed" && lesson.reviewStatus !== "final";
     return (
       <div key={lesson.reservationId} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3">
@@ -403,6 +454,74 @@ export default function TeacherLessonScheduleTab({
             </div>
           </div>
         )}
+        {isPast && onReportSessionIssue && (
+          <div className="mt-2 flex items-center justify-end">
+            {reportedSessionIds.has(lesson.sessionId) ? (
+              <span className="text-[11px] font-semibold text-grey-500">신고 접수됨</span>
+            ) : reportingSessionId !== lesson.sessionId ? (
+              <button
+                disabled={reportSubmitting}
+                onClick={() => openReportForm(lesson.sessionId)}
+                className="text-[11px] font-semibold text-red disabled:opacity-50"
+              >
+                지각·노쇼 신고
+              </button>
+            ) : null}
+          </div>
+        )}
+        {isPast && reportingSessionId === lesson.sessionId && (
+          <div className="mt-3 border-t border-grey-200 pt-3">
+            {reportError && <div className="mb-2 text-[12px] font-semibold text-red">{reportError}</div>}
+            <label className="block text-[11px] font-bold text-grey-500 mb-1">신고 유형</label>
+            <select
+              className="w-full border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px] mb-2"
+              value={reportType}
+              onChange={(e) => setReportType(e.target.value as ReportType)}
+            >
+              {(Object.keys(REPORT_TYPE_LABEL) as ReportType[]).map((k) => (
+                <option key={k} value={k}>
+                  {REPORT_TYPE_LABEL[k]}
+                </option>
+              ))}
+            </select>
+            {reportType === "teacher_late" && (
+              <>
+                <label className="block text-[11px] font-bold text-grey-500 mb-1">지각 시간(분)</label>
+                <input
+                  type="number"
+                  min={1}
+                  className="w-full border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px] mb-2"
+                  value={minutesLateDraft}
+                  onChange={(e) => setMinutesLateDraft(e.target.value)}
+                  placeholder="예: 10"
+                />
+              </>
+            )}
+            <label className="block text-[11px] font-bold text-grey-500 mb-1">상세 내용(선택)</label>
+            <input
+              className="w-full border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px] mb-2"
+              value={reportNotes}
+              onChange={(e) => setReportNotes(e.target.value)}
+              placeholder="상황을 알려주세요"
+            />
+            <div className="flex gap-2 justify-end">
+              <button
+                disabled={reportSubmitting}
+                onClick={() => setReportingSessionId(null)}
+                className="text-[12px] font-semibold text-grey-500 disabled:opacity-50"
+              >
+                닫기
+              </button>
+              <button
+                disabled={reportSubmitting || (reportType === "teacher_late" && !minutesLateDraft)}
+                onClick={() => handleSubmitReport(lesson.sessionId)}
+                className="text-[12px] font-bold text-white bg-red rounded-lg px-3 py-1.5 disabled:opacity-50"
+              >
+                신고 제출
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -533,8 +652,13 @@ export default function TeacherLessonScheduleTab({
     }
   }
 
+  const showUpcomingSection = mode !== "past";
+  const showPastSection = mode !== "upcoming";
+
   return (
     <div className="max-w-[640px] px-8 py-8">
+      {showUpcomingSection && (
+      <>
       <div className="flex items-center justify-between mb-1.5">
         <h1 className="text-[20px] font-extrabold text-ink">수업 일정</h1>
         <div className="flex gap-1.5">
@@ -554,10 +678,12 @@ export default function TeacherLessonScheduleTab({
         캘린더의 다른 개인 일정이 있어 "외부 일정·예약 불가"입니다(제목·내용·참석자는 절대 표시하지 않습니다). 실제
         Google 조회는 Sandbox 승인 전까지 항상 빈 결과를 반환합니다.
       </p>
+      </>
+      )}
 
       {error && <div className="mb-4 text-[13px] font-semibold text-red bg-red/5 rounded-lg px-4 py-3">{error}</div>}
 
-      {view === "month" && (
+      {showUpcomingSection && view === "month" && (
         <div className="border-[1.5px] border-grey-200 rounded-xl p-3 mb-4">
           <MonthCalendar
             timezone={timezone}
@@ -570,7 +696,7 @@ export default function TeacherLessonScheduleTab({
         </div>
       )}
 
-      {view === "week" && (
+      {showUpcomingSection && view === "week" && (
         <div className="grid grid-cols-7 gap-1 mb-4">
           {weekGrid.map((cell) => {
             const badge = badgesByDate[cell.dateKey];
@@ -602,7 +728,7 @@ export default function TeacherLessonScheduleTab({
         </div>
       )}
 
-      {selectedDateKey && externalBusyForSelectedDate.length > 0 && (
+      {showUpcomingSection && selectedDateKey && externalBusyForSelectedDate.length > 0 && (
         <div className="mb-4">
           <div className="text-[11px] font-bold text-grey-500 mb-1">외부 일정(예약 불가)</div>
           <div className="flex flex-wrap gap-1.5">
@@ -616,24 +742,41 @@ export default function TeacherLessonScheduleTab({
         </div>
       )}
 
-      {upcomingLessons.length === 0 ? (
-        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-          {view !== "week-list" && selectedDateKey ? "이 날짜에 예정된 수업이 없습니다." : "예정된 수업이 없습니다."}
-        </div>
-      ) : (
-        upcomingLessons.map((lesson) => renderLessonCard(lesson))
+      {showUpcomingSection && (
+        upcomingLessons.length === 0 ? (
+          <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
+            {view !== "week-list" && selectedDateKey ? "이 날짜에 예정된 수업이 없습니다." : "예정된 수업이 없습니다."}
+          </div>
+        ) : (
+          upcomingLessons.map((lesson) => renderLessonCard(lesson))
+        )
       )}
 
-      {pastLessons.length > 0 && (
-        <div className="mt-6 border-t border-grey-200 pt-4">
-          <button
-            onClick={() => setShowPastLessons((v) => !v)}
-            className="text-[12.5px] font-semibold text-grey-500"
-          >
-            지난 수업 ({pastLessons.length}) {showPastLessons ? "숨기기 ▲" : "펼치기 ▼"}
-          </button>
-          {showPastLessons && <div className="mt-3">{pastLessons.map((lesson) => renderLessonCard(lesson))}</div>}
+      {showPastSection && mode === "past" ? (
+        <div>
+          {pastLessons.length === 0 ? (
+            <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
+              지난 수업이 없습니다.
+            </div>
+          ) : (
+            pastLessons.map((lesson) => renderLessonCard(lesson, true))
+          )}
         </div>
+      ) : (
+        showPastSection &&
+        pastLessons.length > 0 && (
+          <div className="mt-6 border-t border-grey-200 pt-4">
+            <button
+              onClick={() => setShowPastLessons((v) => !v)}
+              className="text-[12.5px] font-semibold text-grey-500"
+            >
+              지난 수업 ({pastLessons.length}) {showPastLessons ? "숨기기 ▲" : "펼치기 ▼"}
+            </button>
+            {showPastLessons && (
+              <div className="mt-3">{pastLessons.map((lesson) => renderLessonCard(lesson, true))}</div>
+            )}
+          </div>
+        )
       )}
 
       {reviewModalError && !reviewModalSession && (

@@ -85,46 +85,52 @@ function TerminationRequestControl({ a }: { a: TeacherAssignedSubject }) {
     );
   }
 
+  // 2026-09-06(A안 UI 정리) — 실수 클릭을 막고 부차적 액션임을 드러내기 위해
+  // 카드 우측 하단에 작게 배치한다(이전에는 카드 상단부에 눈에 띄게 있었음).
   if (!open) {
     return (
-      <button
-        onClick={() => setOpen(true)}
-        className="text-[11px] font-semibold text-grey-500 underline mt-1.5"
-      >
-        배정 종료 요청
-      </button>
+      <div className="flex justify-end mt-1.5">
+        <button
+          onClick={() => setOpen(true)}
+          className="text-[10.5px] font-medium text-grey-400 underline"
+        >
+          배정 종료 요청
+        </button>
+      </div>
     );
   }
 
   return (
-    <div className="mt-1.5">
-      <textarea
-        className="w-full border border-grey-300 rounded px-2 py-1 text-[12px]"
-        placeholder="종료 요청 사유"
-        value={reason}
-        onChange={(e) => setReason(e.target.value)}
-      />
-      <div className="flex gap-2 mt-1">
-        <button
-          disabled={submitting || reason.trim().length === 0}
-          onClick={async () => {
-            setSubmitting(true);
-            await requestOwnTerminationAsTeacher({
-              subjectEnrollmentId: a.subjectEnrollmentId,
-              teacherAssignmentId: a.assignmentId,
-              reason,
-            });
-            setMyRequests(await listMyTerminationRequests());
-            setOpen(false);
-            setSubmitting(false);
-          }}
-          className="text-[11px] font-bold px-2.5 py-1 rounded bg-ink text-white disabled:opacity-50"
-        >
-          요청 제출 (관리자만 확정 가능)
-        </button>
-        <button onClick={() => setOpen(false)} className="text-[11px] text-grey-500">
-          취소
-        </button>
+    <div className="mt-1.5 flex justify-end">
+      <div className="w-full max-w-[280px]">
+        <textarea
+          className="w-full border border-grey-300 rounded px-2 py-1 text-[12px]"
+          placeholder="종료 요청 사유"
+          value={reason}
+          onChange={(e) => setReason(e.target.value)}
+        />
+        <div className="flex gap-2 mt-1 justify-end">
+          <button onClick={() => setOpen(false)} className="text-[11px] text-grey-500">
+            취소
+          </button>
+          <button
+            disabled={submitting || reason.trim().length === 0}
+            onClick={async () => {
+              setSubmitting(true);
+              await requestOwnTerminationAsTeacher({
+                subjectEnrollmentId: a.subjectEnrollmentId,
+                teacherAssignmentId: a.assignmentId,
+                reason,
+              });
+              setMyRequests(await listMyTerminationRequests());
+              setOpen(false);
+              setSubmitting(false);
+            }}
+            className="text-[11px] font-bold px-2.5 py-1 rounded bg-ink text-white disabled:opacity-50"
+          >
+            요청 제출 (관리자만 확정 가능)
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -214,9 +220,9 @@ export default function AssignmentsTab({
                 커리큘럼 보기
               </button>
             )}
-            {a.status === "active" && <TerminationRequestControl a={a} />}
             <StudentProfileDisclosure a={a} />
             <TeachingHistoryDisclosure a={a} />
+            {a.status === "active" && <TerminationRequestControl a={a} />}
           </div>
         ))
       )}

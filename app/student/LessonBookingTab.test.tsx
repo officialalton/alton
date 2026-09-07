@@ -30,7 +30,7 @@ const baseProps = {
 describe("LessonBookingTab — 지각·노쇼 신고", () => {
   it("신고 대상 수업이 없으면 안내 문구를 보여준다", () => {
     render(<LessonBookingTab {...baseProps} />);
-    expect(screen.getByText("최근 14일 이내 신고할 수 있는 수업이 없습니다.")).toBeInTheDocument();
+    expect(screen.getByText("최근 14일 이내 지난 수업이 없습니다.")).toBeInTheDocument();
   });
 
   it("선생님 지각·노쇼를 신고하면 onReportTeacherIssue가 호출되고 접수됨으로 바뀐다", async () => {
@@ -177,5 +177,48 @@ describe("LessonBookingTab — 체험 학생도 직접 예약할 수 있어야 �
         })
       )
     );
+  });
+});
+
+describe("LessonBookingTab — mode(A안 '수업' 탭 통합)", () => {
+  const upcomingBooking: UpcomingBooking = {
+    reservationId: "r1",
+    sessionId: "sess-1",
+    subjectName: "SAT Math",
+    teacherName: "김선생",
+    startsAt: new Date(Date.now() + 3600_000).toISOString(),
+    endsAt: new Date(Date.now() + 7200_000).toISOString(),
+    googleMeetLink: "https://meet.google.com/abc-defg-hij",
+    googleSyncStatus: "synced",
+  };
+
+  it("mode='upcoming'이면 예정 수업 블록만 보이고 지난 수업 블록은 숨겨진다", () => {
+    render(<LessonBookingTab {...baseProps} upcomingBookings={[upcomingBooking]} pastSessionsForReport={[pastSession]} mode="upcoming" />);
+    expect(screen.getByText(/SAT Math · 김선생 선생님/)).toBeInTheDocument();
+    expect(screen.queryByText("지난 수업")).toBeNull();
+  });
+
+  it("mode='past'이면 지난 수업 블록만 보이고 예정 수업 블록·예약 생성 폼은 숨겨진다", () => {
+    render(<LessonBookingTab {...baseProps} upcomingBookings={[upcomingBooking]} pastSessionsForReport={[pastSession]} mode="past" />);
+    expect(screen.getByText("지난 수업")).toBeInTheDocument();
+    expect(screen.queryByText("수업 준비")).toBeNull();
+    expect(screen.queryByText("수업 예약")).toBeNull();
+  });
+
+  it("예정 수업 카드에 '수업 준비'(세션뷰 이동)와 '수업 시작'(Meet 새 탭) 버튼이 보인다", () => {
+    const openSpy = vi.spyOn(window, "open").mockReturnValue({ location: { href: "" } } as unknown as Window);
+    const pushMock = vi.fn();
+    render(<LessonBookingTab {...baseProps} upcomingBookings={[upcomingBooking]} mode="upcoming" />);
+
+    fireEvent.click(screen.getByText("수업 준비"));
+    fireEvent.click(screen.getByText("수업 시작"));
+    expect(openSpy).toHaveBeenCalledWith("", "_blank", "noopener,noreferrer");
+    openSpy.mockRestore();
+    void pushMock;
+  });
+
+  it("지난 수업 카드에 '수업 준비 내역' 링크가 보인다", () => {
+    render(<LessonBookingTab {...baseProps} pastSessionsForReport={[pastSession]} mode="past" />);
+    expect(screen.getByText("수업 준비 내역")).toBeInTheDocument();
   });
 });

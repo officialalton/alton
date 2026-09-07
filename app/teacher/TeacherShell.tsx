@@ -6,7 +6,6 @@ import { logout } from "@/app/login/actions";
 import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
 import TeacherHomeDashboard from "./TeacherHomeDashboard";
 import type { TeacherDashboardData } from "./dashboard-data";
-import ScheduleTab from "./ScheduleTab";
 import CurriculumTab from "./CurriculumTab";
 import type { RosterStudent } from "./roster-data";
 import type { MySubject } from "./mysubjects-data";
@@ -88,10 +87,13 @@ export default function TeacherShell({
   );
   // M4 골든패스 실사용 버그 #5 — 선생님 포털 "수업"(레거시 legacy_sessions 뷰) 탭과
   // "수업 일정"(v3 sessions/reservations, Calendar/Meet 연동) 탭이 기능 중복이라는
-  // 지적에 따라 하나의 "수업" 네비게이션 항목으로 합쳤다. v3 예약/캘린더 UI를 기본으로
-  // 하고, 레거시 뷰 고유 기능(수업 기록 열람, 지각·노쇼 신고, 레거시 리뷰 작성)은
-  // 서브탭으로 흡수한다.
-  const [lessonSubtab, setLessonSubtab] = useState<"current" | "legacy-record">("current");
+  // 지적에 따라 하나의 "수업" 네비게이션 항목으로 합쳤다.
+  // 2026-09-06(A안 UI 정리) — "예정/지난 수업"과 "지난 수업 기록·신고"라는 두 서브탭이
+  // 여전히 기능이 겹친다는 지적에 따라, 딱 두 개의 서브탭("예정 수업"/"지난 수업")으로
+  // 다시 정리했다. 레거시 지각·노쇼 신고 기능은 별도 탭이 아니라 "지난 수업" 서브탭의
+  // 각 카드 안으로 완전히 흡수했다(TeacherLessonScheduleTab의 mode="past" +
+  // onReportSessionIssue).
+  const [lessonSubtab, setLessonSubtab] = useState<"upcoming" | "past">("upcoming");
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const [timezoneModalOpen, setTimezoneModalOpen] = useState(false);
   const [curriculumJump, setCurriculumJump] = useState<{
@@ -182,7 +184,7 @@ export default function TeacherShell({
           ) : activeTab === "lesson-schedule" ? (
             <div>
               <div className="px-8 pt-8 flex gap-1.5">
-                {(["current", "legacy-record"] as const).map((s) => (
+                {(["upcoming", "past"] as const).map((s) => (
                   <button
                     key={s}
                     onClick={() => setLessonSubtab(s)}
@@ -190,33 +192,26 @@ export default function TeacherShell({
                       lessonSubtab === s ? "bg-ink text-white" : "bg-grey-100 text-grey-500"
                     }`}
                   >
-                    {s === "current" ? "예정/지난 수업" : "지난 수업 기록·신고"}
+                    {s === "upcoming" ? "예정 수업" : "지난 수업"}
                   </button>
                 ))}
               </div>
-              {lessonSubtab === "current" ? (
-                <TeacherLessonScheduleTab
-                  lessons={lessons}
-                  exceptions={availabilityExceptions}
-                  timezone={availabilityTimezone}
-                  onCancel={async (reservationId, reason) => {
-                    const result = await cancelMyLessonScheduleBooking({ reservationId, reason });
-                    if (!result.ok) throw new Error(result.error);
-                  }}
-                  onLoadExternalBusy={listMyExternalBusyBlocks}
-                  onRefresh={() => listMyLessonSchedule().then(setLessons)}
-                  onStartSession={startMyLessonSession}
-                  onFinalizeSession={finalizeMyLessonSession}
-                  onResolveLateness={resolveMyLessonLateness}
-                />
-              ) : (
-                <ScheduleTab
-                  upcoming={dashboard.upcoming}
-                  past={dashboard.past}
-                  reviewedSessionIds={reviewedSessionIds}
-                  onReportSessionIssue={reportSessionIssue}
-                />
-              )}
+              <TeacherLessonScheduleTab
+                lessons={lessons}
+                exceptions={availabilityExceptions}
+                timezone={availabilityTimezone}
+                mode={lessonSubtab}
+                onCancel={async (reservationId, reason) => {
+                  const result = await cancelMyLessonScheduleBooking({ reservationId, reason });
+                  if (!result.ok) throw new Error(result.error);
+                }}
+                onLoadExternalBusy={listMyExternalBusyBlocks}
+                onRefresh={() => listMyLessonSchedule().then(setLessons)}
+                onStartSession={startMyLessonSession}
+                onFinalizeSession={finalizeMyLessonSession}
+                onResolveLateness={resolveMyLessonLateness}
+                onReportSessionIssue={reportSessionIssue}
+              />
             </div>
           ) : activeTab === "availability" ? (
             <TeacherAvailabilityTab

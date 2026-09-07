@@ -164,3 +164,16 @@
 - [x] **#2 기능 누락** — "수업 시작"을 눌러도 Meet로 자동 입장하지 않음(옆의 "Meet 입장" 링크는 별도 존재). `handleStartSession`에서 클릭 즉시 동기적으로 빈 탭을 열어두고(팝업 차단 회피), `startMyLessonSession()` 성공 시 그 탭의 `location.href`를 `lesson.googleMeetLink`로 이동(실패 시 빈 탭은 닫음). 학생 포털(`app/student/LessonsTab.tsx`)의 "수업 입장"은 내부 `/session/[id]` 라우팅 방식이라 이 서버 액션+Meet 링크 조합 패턴과 구조가 달라 변경 대상에서 제외.
 - [x] 검증: `supabase status`로 로컬 DB 포트(54422) 확인 후 `supabase db reset --local` 성공(신규 마이그레이션 없음) / psql로 두 실패 시나리오 실측 재현(수정 전) / `npx tsc --noEmit` 0 에러 / `npx vitest run app/teacher/TeacherLessonScheduleTab.test.tsx` 19건(신규 3건 포함) 통과 / `npx vitest run`(전체) 187파일·1246건 전부 통과 / `npx next build` 성공.
 - [ ] 브라우저로 실제 Preview에서 "수업 시작" 클릭 시 새 탭이 실제로 Meet 화면으로 이동하는지(팝업 차단 설정에 따라 다를 수 있음), "수업 종료" 클릭 시 마스킹 없이 실제 한국어 에러 메시지가 보이는지 눈으로 확인하는 것은 이번 세션 범위 밖 — Preview alias 갱신 후 직접 확인 권장.
+
+### 2026-09-06 10차 세션 — "A안" UI 정리(선생님 "수업"/"배정" 탭, 학생 "레슨"+"예약" 병합) — 스키마 변경 없음
+
+제품 오너가 "A안"(UI 정리만, 스키마 변경·큰 기능 추가 없음)을 승인. **"B안"(학생 전용 프로필 페이지 신설, 세션뷰·커리큘럼 연동)은 R9 범위로 이번엔 명시적으로 보류됐고, 별도 R9 라운드 승인이 필요하다.** 상세 근거는 `docs/CURRENT.md`의 "2026-09-06(A안 UI 정리)" 절 참고.
+
+- [x] **선생님 포털 "수업" 탭** — "예정/지난 수업"(v3)/"지난 수업 기록·신고"(레거시) 두 서브탭이 여전히 겹친다는 지적에 따라, `TeacherLessonScheduleTab.tsx`에 `mode`/`onReportSessionIssue` prop을 추가해 레거시 지각·노쇼 신고 기능을 v3 "지난 수업" 카드 안으로 흡수. `TeacherShell.tsx`는 이제 딱 "예정 수업"/"지난 수업" 두 서브탭만 렌더링.
+- [x] **선생님 포털 "배정" 탭** — "배정 종료 요청" 버튼을 `AssignmentsTab.tsx` 카드 우측 하단의 작은 밑줄 텍스트로 이동(실수 클릭 방지).
+- [x] **학생 포털 "레슨"+"예약" 병합** — `ClassesTab.tsx`(신규 래퍼)로 nav 항목을 "수업" 하나로 합침. v3(`LessonBookingTab.tsx`, `mode` prop 추가)가 주 콘텐츠, 레거시(`LessonsTab.tsx`, `forcedSubtab`/`hideHeader` prop 추가)는 접힌 "커리큘럼 진행·리뷰" 섹션으로 흡수 — 두 테이블(`legacy_sessions` vs `sessions`)이 달라 행 단위로는 합치지 않음(스키마 변경 없음).
+- [x] **예정/지난 서브탭 버그 재현·수정** — `LessonsTab.tsx` 단독 테스트로는 재현 실패 안 났으나(자체 로직은 정상), 병합 후 outer subtab과 v3/레거시 두 섹션이 어긋날 위험을 `ClassesTab.test.tsx`에서 "지난 수업 클릭 시 두 섹션 모두 실제로 바뀌는지" 테스트로 고정.
+- [x] **학생 포털 "예정 수업" 버튼 2개** — "수업 준비"(`/session/[id]`로 이동, 기존 라우트 재사용) / "수업 시작"(선생님 포털과 동일 패턴 — 클릭 시 동기적으로 빈 탭을 열고 Meet 링크로 이동).
+- [x] **학생 포털 "지난 수업" 링크** — "수업 준비 내역"(`/session/[id]`)만 추가. "세션뷰 스냅샷"은 레거시 세션 기반이라 개념 자체가 없어(스키마 없음) 만들지 않고 항목을 뺐다. 리뷰는 레거시 섹션에서 그대로 열람 가능.
+- [x] 검증: `supabase db reset --local` 성공(신규 마이그레이션 없음) / `npx tsc --noEmit` 0 에러 / `npx vitest run`(전체) 188파일·1253건 전부 통과 / `npx next build` 성공.
+- [ ] 브라우저로 실제 Preview에서 학생 포털 "수업" 탭의 서브탭 전환·"수업 준비"/"수업 시작" 버튼·"지난 수업" 링크가 눈으로 정상 동작하는지 확인하는 것은 이번 세션 범위 밖 — Preview alias 갱신 후 직접 확인 권장.

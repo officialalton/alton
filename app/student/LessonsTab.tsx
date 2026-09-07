@@ -23,6 +23,13 @@ export default function LessonsTab({
   reviews,
   myFeedback,
   readOnly = false,
+  // "수업" 탭 정리(A안) — 레슨(레거시 legacy_sessions 기반, 커리큘럼·리뷰 연동)과
+  // 예약(v3 sessions/reservations, Meet 연동)을 하나의 "수업" 탭(ClassesTab)으로
+  // 합치면서, 이 컴포넌트는 그 안의 "레거시 기록·리뷰" 섹션으로 흡수됐다.
+  // forcedSubtab이 주어지면 자체 예정/지난 서브탭 바를 감추고 그 값만 보여준다
+  // (바깥 ClassesTab의 예정/지난 서브탭과 동기화하기 위함).
+  forcedSubtab,
+  hideHeader = false,
 }: {
   upcoming: LessonItem[];
   past: LessonItem[];
@@ -31,8 +38,12 @@ export default function LessonsTab({
   reviews: Record<string, ReviewData>;
   myFeedback: Record<string, StudentFeedback>;
   readOnly?: boolean;
+  forcedSubtab?: "upcoming" | "past";
+  hideHeader?: boolean;
 }) {
-  const [subtab, setSubtab] = useState<"upcoming" | "past">("upcoming");
+  const [internalSubtab, setInternalSubtab] = useState<"upcoming" | "past">("upcoming");
+  const subtab = forcedSubtab ?? internalSubtab;
+  const setSubtab = setInternalSubtab;
   const [subView, setSubView] = useState<SubView>({ type: "list" });
 
   if (subView.type === "curriculum") {
@@ -62,25 +73,27 @@ export default function LessonsTab({
   }
 
   return (
-    <div className="max-w-[640px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-5">레슨</h1>
+    <div className={hideHeader ? "" : "max-w-[640px] px-8 py-8"}>
+      {!hideHeader && <h1 className="text-[20px] font-extrabold text-ink mb-5">레슨</h1>}
 
-      <div className="flex gap-4 mb-5 border-b border-grey-200">
-        {(["upcoming", "past"] as const).map((id) => (
-          <button
-            key={id}
-            onClick={() => setSubtab(id)}
-            className={
-              "text-[13.5px] font-semibold pb-2.5 -mb-px border-b-2 " +
-              (subtab === id
-                ? "text-ink border-ink"
-                : "text-grey-500 border-transparent")
-            }
-          >
-            {id === "upcoming" ? "예정된 수업" : "지난 수업"}
-          </button>
-        ))}
-      </div>
+      {!forcedSubtab && (
+        <div className="flex gap-4 mb-5 border-b border-grey-200">
+          {(["upcoming", "past"] as const).map((id) => (
+            <button
+              key={id}
+              onClick={() => setSubtab(id)}
+              className={
+                "text-[13.5px] font-semibold pb-2.5 -mb-px border-b-2 " +
+                (subtab === id
+                  ? "text-ink border-ink"
+                  : "text-grey-500 border-transparent")
+              }
+            >
+              {id === "upcoming" ? "예정된 수업" : "지난 수업"}
+            </button>
+          ))}
+        </div>
+      )}
 
       {subtab === "upcoming" ? (
         <UpcomingList

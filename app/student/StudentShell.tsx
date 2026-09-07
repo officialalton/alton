@@ -10,7 +10,6 @@ import VocabTab from "@/app/session/[id]/VocabTab";
 import type { VocabEntry } from "@/app/session/[id]/vocab-data";
 import ProblemLogTab from "@/app/session/[id]/ProblemLogTab";
 import type { ProblemLogEntry } from "@/app/session/[id]/problemlog-data";
-import LessonsTab from "./LessonsTab";
 import type { LessonItem } from "./lessons-data";
 import type { CurriculumData } from "./curriculum-data";
 import type { Memo } from "./memo-data";
@@ -32,7 +31,7 @@ import type {
 import type { ChatMessage } from "./chat-data";
 import EnrollmentTab from "./EnrollmentTab";
 import type { SubjectEnrollmentView } from "./enrollment-data";
-import LessonBookingTab from "./LessonBookingTab";
+import ClassesTab from "./ClassesTab";
 import type { LessonBookingData } from "./lesson-booking-data";
 import {
   listAvailableSlotsForBooking,
@@ -46,8 +45,10 @@ import { reportTeacherIssue } from "./incident-report-actions";
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
   { id: "enrollment", label: "수강 과목", icon: "🎓" },
-  { id: "booking", label: "예약", icon: "🗓️" },
-  { id: "lessons", label: "레슨", icon: "📅" },
+  // 2026-09-06(A안 UI 정리) — "예약"(v3 예약/캘린더)과 "레슨"(레거시 커리큘럼·리뷰)이
+  // 기능 중복이라는 지적에 따라 하나의 "수업" 탭으로 합쳤다(ClassesTab, 예정/지난
+  // 두 서브탭). 자세한 내용은 ClassesTab.tsx 상단 주석 참고.
+  { id: "classes", label: "수업", icon: "📅" },
   { id: "teacher", label: "선생님", icon: "👤" },
   { id: "homework", label: "과제", icon: "📝" },
   { id: "problemlog", label: "문제", icon: "📋" },
@@ -189,14 +190,20 @@ export default function StudentShell({
             <HomeDashboard
               studentName={studentName}
               data={dashboard}
-              onShowLessons={() => selectTab("lessons")}
+              onShowLessons={() => selectTab("classes")}
               onShowStats={() => selectTab("stats")}
               timezone={lessonBooking.timezone}
             />
           ) : activeTab === "enrollment" ? (
             <EnrollmentTab enrollments={subjectEnrollments} />
-          ) : activeTab === "booking" ? (
-            <LessonBookingTab
+          ) : activeTab === "classes" ? (
+            <ClassesTab
+              upcoming={upcoming}
+              past={past}
+              curricula={curricula}
+              memosByEnrollment={memosByEnrollment}
+              reviews={reviews}
+              myFeedback={myFeedback}
               bookableEnrollments={lessonBooking.bookableEnrollments}
               upcomingBookings={lessonBooking.upcomingBookings}
               pastSessionsForReport={lessonBooking.pastSessionsForReport}
@@ -217,15 +224,6 @@ export default function StudentShell({
             />
           ) : activeTab === "problemlog" ? (
             <ProblemLogTab initialEntries={problemLog} viewerRole="student" />
-          ) : activeTab === "lessons" ? (
-            <LessonsTab
-              upcoming={upcoming}
-              past={past}
-              curricula={curricula}
-              memosByEnrollment={memosByEnrollment}
-              reviews={reviews}
-              myFeedback={myFeedback}
-            />
           ) : activeTab === "homework" ? (
             <StudentHomeworkTab
               initialTodo={homeworkTodo}

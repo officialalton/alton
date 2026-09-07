@@ -67,13 +67,17 @@ describe("TeacherShell", () => {
     expect(screen.getByText("박서연 선생님, 안녕하세요")).toBeInTheDocument();
   });
 
-  it("수업 탭을 누르면 통합된 예정/지난 수업(v3) 뷰가 기본으로 렌더링되고, 서브탭으로 레거시 기록·신고 화면도 볼 수 있다", () => {
+  it("수업 탭을 누르면 딱 두 개의 서브탭('예정 수업'/'지난 수업')만 보이고, 지난 수업 서브탭에는 레거시 지각·노쇼 신고 기능이 흡수되어 있다", () => {
     render(<TeacherShell {...baseProps} />);
     fireEvent.click(screen.getByText("수업"));
+    expect(screen.getByText("예정 수업")).toBeInTheDocument();
+    expect(screen.getByText("지난 수업")).toBeInTheDocument();
     expect(screen.getByText("예정 수업 목록")).toBeInTheDocument();
+    expect(screen.queryByText("지난 수업 기록·신고")).toBeNull();
+    expect(screen.queryByText("예정/지난 수업")).toBeNull();
 
-    fireEvent.click(screen.getByText("지난 수업 기록·신고"));
-    expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("지난 수업"));
+    expect(screen.getByText("지난 수업이 없습니다.")).toBeInTheDocument();
   });
 
   it("배정 탭에서 학년/연락처가 보이고, 커리큘럼 진입 버튼을 누르면 커리큘럼 탭의 학생별 뷰로 이동한다(M4 골든패스 #6/#7)", () => {
