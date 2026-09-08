@@ -1,7 +1,13 @@
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
-import type { OverlayUnit } from "./student-curriculum-data";
+import {
+  loadStudentCurriculum,
+  loadEligibleLibrary,
+  type OverlayUnit,
+  type StudentCurriculum,
+  type EligibleLibrary,
+} from "./student-curriculum-data";
 
 async function requireAssignedTeacherOrAdmin(subjectEnrollmentId: string) {
   const supabase = await createClient();
@@ -53,6 +59,22 @@ function mapUnitRow(row: {
     keywordIds: [],
     materialDocIds: [],
   };
+}
+
+// UI 진입점(선생님 포털 "배정" 탭 → "운영 커리큘럼 관리") 전용 로더. 인가는
+// requireAssignedTeacherOrAdmin을 그대로 재사용한다 — 이 함수는 그 위에 새
+// 권한 검사를 추가하지 않으며(중복/약화 방지), 담당이 아닌 선생님이 호출하면
+// 여기서 바로 거부된다(RLS가 다시 한번 막아준다).
+export async function loadStudentCurriculumPanelData(
+  subjectEnrollmentId: string,
+  subjectId: string
+): Promise<{ initial: StudentCurriculum; library: EligibleLibrary }> {
+  const { supabase } = await requireAssignedTeacherOrAdmin(subjectEnrollmentId);
+  const [initial, library] = await Promise.all([
+    loadStudentCurriculum(supabase, subjectEnrollmentId),
+    loadEligibleLibrary(supabase, subjectId),
+  ]);
+  return { initial, library };
 }
 
 export async function ensureActiveOverlay(subjectEnrollmentId: string): Promise<string> {

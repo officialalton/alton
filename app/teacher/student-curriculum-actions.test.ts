@@ -41,12 +41,28 @@ vi.mock("@/utils/supabase/server", () => ({
   createClient: vi.fn().mockResolvedValue(mockSupabase),
 }));
 
-import { excludeUnit, moveUnit, setUnitStatus } from "./student-curriculum-actions";
+import {
+  excludeUnit,
+  moveUnit,
+  setUnitStatus,
+  loadStudentCurriculumPanelData,
+} from "./student-curriculum-actions";
 
 describe("담당 학생 인가", () => {
   it("담당이 아닌 선생님이 호출하면 거부한다", async () => {
     state.assignment = null;
     await expect(excludeUnit("enr1", "unit1")).rejects.toThrow(
+      "담당 학생의 커리큘럼만 조정할 수 있습니다."
+    );
+  });
+
+  // R9 Task 3 UI 배선 — 선생님 포털 "배정" 탭에서 새로 연결한 진입점의 로더.
+  // 담당 배정이 아니면 데이터 조회(loadStudentCurriculum/loadEligibleLibrary)까지
+  // 가지 않고 requireAssignedTeacherOrAdmin에서 바로 거부되어야 한다 — 새 권한
+  // 검사를 추가한 게 아니라 기존 검사를 재사용한다는 것을 확인한다.
+  it("loadStudentCurriculumPanelData — 담당이 아닌 선생님이 호출하면 거부한다(다른 학생 데이터 미노출)", async () => {
+    state.assignment = null;
+    await expect(loadStudentCurriculumPanelData("enr-not-mine", "sub1")).rejects.toThrow(
       "담당 학생의 커리큘럼만 조정할 수 있습니다."
     );
   });

@@ -100,6 +100,10 @@ export default function TeacherShell({
     studentId: string;
     subjectId: string;
   } | null>(null);
+  const [operatingCurriculumJump, setOperatingCurriculumJump] = useState<{
+    subjectEnrollmentId: string;
+    subjectId: string;
+  } | null>(null);
 
   function selectTab(id: TabId) {
     setActiveTab(id);
@@ -108,6 +112,11 @@ export default function TeacherShell({
 
   function openCurriculumFromAssignment(studentId: string, subjectId: string) {
     setCurriculumJump({ studentId, subjectId });
+    selectTab("curriculum");
+  }
+
+  function openOperatingCurriculumFromAssignment(subjectEnrollmentId: string, subjectId: string) {
+    setOperatingCurriculumJump({ subjectEnrollmentId, subjectId });
     selectTab("curriculum");
   }
 
@@ -180,6 +189,7 @@ export default function TeacherShell({
               current={currentAssignments}
               past={pastAssignments}
               onOpenCurriculum={openCurriculumFromAssignment}
+              onOpenOperatingCurriculum={openOperatingCurriculumFromAssignment}
             />
           ) : activeTab === "lesson-schedule" ? (
             <div>
@@ -234,6 +244,8 @@ export default function TeacherShell({
               studentFeedback={studentFeedback}
               jumpTo={curriculumJump}
               onJumpConsumed={() => setCurriculumJump(null)}
+              operatingCurriculumJumpTo={operatingCurriculumJump}
+              onOperatingCurriculumJumpConsumed={() => setOperatingCurriculumJump(null)}
             />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">

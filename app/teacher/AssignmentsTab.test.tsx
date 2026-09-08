@@ -92,4 +92,23 @@ describe("AssignmentsTab — M3 배정 종료 요청/과거 이력", () => {
     fireEvent.click(screen.getByText("커리큘럼 보기"));
     expect(onOpenCurriculum).toHaveBeenCalledWith("st1", "sub1");
   });
+
+  it("R9 Task 3 UI 배선 — '운영 커리큘럼 관리' 진입 버튼은 subjectEnrollmentId·subjectId로 콜백을 호출한다", () => {
+    const onOpenOperatingCurriculum = vi.fn();
+    render(
+      <AssignmentsTab
+        current={current}
+        past={[]}
+        onOpenOperatingCurriculum={onOpenOperatingCurriculum}
+      />
+    );
+
+    fireEvent.click(screen.getByText("운영 커리큘럼 관리"));
+    expect(onOpenOperatingCurriculum).toHaveBeenCalledWith("se1", "sub1");
+  });
+
+  it("onOpenOperatingCurriculum이 없으면 '운영 커리큘럼 관리' 버튼이 보이지 않는다", () => {
+    render(<AssignmentsTab current={current} past={[]} />);
+    expect(screen.queryByText("운영 커리큘럼 관리")).toBeNull();
+  });
 });

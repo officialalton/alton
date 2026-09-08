@@ -169,10 +169,12 @@ export default function AssignmentsTab({
   current,
   past,
   onOpenCurriculum,
+  onOpenOperatingCurriculum,
 }: {
   current: TeacherAssignedSubject[];
   past: TeacherAssignedSubject[];
   onOpenCurriculum?: (studentId: string, subjectId: string) => void;
+  onOpenOperatingCurriculum?: (subjectEnrollmentId: string, subjectId: string) => void;
 }) {
   return (
     <div className="max-w-[640px] px-8 py-8">
@@ -212,13 +214,25 @@ export default function AssignmentsTab({
                 {a.status === "active" ? "배정중" : "예정"}
               </span>
             </div>
-            {onOpenCurriculum && (
-              <button
-                onClick={() => onOpenCurriculum(a.studentId, a.subjectId)}
-                className="text-[12px] font-semibold px-3 py-1.5 rounded-full bg-grey-100 text-ink mt-2"
-              >
-                커리큘럼 보기
-              </button>
+            {(onOpenCurriculum || onOpenOperatingCurriculum) && (
+              <div className="flex flex-wrap gap-2 mt-2">
+                {onOpenCurriculum && (
+                  <button
+                    onClick={() => onOpenCurriculum(a.studentId, a.subjectId)}
+                    className="text-[12px] font-semibold px-3 py-1.5 rounded-full bg-grey-100 text-ink"
+                  >
+                    커리큘럼 보기
+                  </button>
+                )}
+                {onOpenOperatingCurriculum && (
+                  <button
+                    onClick={() => onOpenOperatingCurriculum(a.subjectEnrollmentId, a.subjectId)}
+                    className="text-[12px] font-semibold px-3 py-1.5 rounded-full bg-grey-100 text-ink"
+                  >
+                    운영 커리큘럼 관리
+                  </button>
+                )}
+              </div>
             )}
             <StudentProfileDisclosure a={a} />
             <TeachingHistoryDisclosure a={a} />

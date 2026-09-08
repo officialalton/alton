@@ -9,11 +9,15 @@ import MySubjectsTab from "./MySubjectsTab";
 import type { MySubject } from "./mysubjects-data";
 import type { RosterStudent } from "./roster-data";
 import type { TeacherCurriculumData } from "./curriculum-data";
+import StudentCurriculumPanel from "./StudentCurriculumPanel";
+import { loadStudentCurriculumPanelData } from "./student-curriculum-actions";
+import type { StudentCurriculum, EligibleLibrary } from "./student-curriculum-data";
 
 type SubView =
   | { type: "list" }
   | { type: "curriculum"; enrollmentId: string }
-  | { type: "review"; sessionId: string };
+  | { type: "review"; sessionId: string }
+  | { type: "operating-curriculum"; subjectEnrollmentId: string; subjectId: string };
 
 export default function CurriculumTab({
   mySubjects,
@@ -24,6 +28,8 @@ export default function CurriculumTab({
   studentFeedback,
   jumpTo,
   onJumpConsumed,
+  operatingCurriculumJumpTo,
+  onOperatingCurriculumJumpConsumed,
 }: {
   mySubjects: MySubject[];
   students: RosterStudent[];
@@ -33,6 +39,8 @@ export default function CurriculumTab({
   studentFeedback: Record<string, StudentFeedback>;
   jumpTo: { studentId: string; subjectId: string } | null;
   onJumpConsumed: () => void;
+  operatingCurriculumJumpTo?: { subjectEnrollmentId: string; subjectId: string } | null;
+  onOperatingCurriculumJumpConsumed?: () => void;
 }) {
   const [subtab, setSubtab] = useState<"mine" | "students">("mine");
   const [selectedStudentId, setSelectedStudentId] = useState<string | null>(
@@ -53,6 +61,24 @@ export default function CurriculumTab({
     onJumpConsumed();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [jumpTo]);
+
+  useEffect(() => {
+    if (!operatingCurriculumJumpTo) return;
+    setSubtab("students");
+    setSubView({ type: "operating-curriculum", ...operatingCurriculumJumpTo });
+    onOperatingCurriculumJumpConsumed?.();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [operatingCurriculumJumpTo]);
+
+  if (subView.type === "operating-curriculum") {
+    return (
+      <StudentCurriculumOperatingView
+        subjectEnrollmentId={subView.subjectEnrollmentId}
+        subjectId={subView.subjectId}
+        onBack={() => setSubView({ type: "list" })}
+      />
+    );
+  }
 
   if (subView.type === "curriculum") {
     const data = curricula.find((c) => c.enrollmentId === subView.enrollmentId);
@@ -116,6 +142,69 @@ export default function CurriculumTab({
           onOpenCurriculum={(enrollmentId) =>
             setSubView({ type: "curriculum", enrollmentId })
           }
+        />
+      )}
+    </div>
+  );
+}
+
+// R9(Task 3 UI 배선) — "배정" 탭에서 특정 담당 학생·과목으로 진입한 "운영
+// 커리큘럼 관리" 화면. 데이터는 여기서 직접 조회하지 않고 student-curriculum-
+// actions.ts의 loadStudentCurriculumPanelData()(서버 액션)를 통해서만 가져온다
+// — 담당 배정 검사(requireAssignedTeacherOrAdmin)와 RLS가 그대로 적용되므로,
+// 이 화면은 새 인가 로직을 추가하지 않는다. 담당이 아닌 학생의 subjectEnrollmentId로
+// 진입을 시도하면(예: 잘못된 딥링크) 로더가 에러를 던지고 화면에 그 메시지만 보여준다.
+function StudentCurriculumOperatingView({
+  subjectEnrollmentId,
+  subjectId,
+  onBack,
+}: {
+  subjectEnrollmentId: string;
+  subjectId: string;
+  onBack: () => void;
+}) {
+  const [state, setState] = useState<
+    | { status: "loading" }
+    | { status: "error"; message: string }
+    | { status: "ready"; initial: StudentCurriculum; library: EligibleLibrary }
+  >({ status: "loading" });
+
+  useEffect(() => {
+    let cancelled = false;
+    setState({ status: "loading" });
+    loadStudentCurriculumPanelData(subjectEnrollmentId, subjectId)
+      .then(({ initial, library }) => {
+        if (!cancelled) setState({ status: "ready", initial, library });
+      })
+      .catch((e) => {
+        if (!cancelled) {
+          setState({
+            status: "error",
+            message: e instanceof Error ? e.message : "불러오지 못했습니다.",
+          });
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [subjectEnrollmentId, subjectId]);
+
+  return (
+    <div className="max-w-[640px] px-8 pt-8">
+      <button onClick={onBack} className="text-[13px] text-grey-500 font-semibold px-6">
+        ← 뒤로
+      </button>
+      {state.status === "loading" && (
+        <div className="px-6 py-8 text-[13px] text-grey-500">불러오는 중...</div>
+      )}
+      {state.status === "error" && (
+        <div className="px-6 py-8 text-[13px] text-red">{state.message}</div>
+      )}
+      {state.status === "ready" && (
+        <StudentCurriculumPanel
+          subjectEnrollmentId={subjectEnrollmentId}
+          initial={state.initial}
+          library={state.library}
         />
       )}
     </div>

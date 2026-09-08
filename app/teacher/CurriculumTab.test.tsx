@@ -1,8 +1,9 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import CurriculumTab from "./CurriculumTab";
 import type { RosterStudent } from "./roster-data";
 import type { TeacherCurriculumData } from "./curriculum-data";
+import { loadStudentCurriculumPanelData } from "./student-curriculum-actions";
 
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: vi.fn(), replace: vi.fn() }),
@@ -18,6 +19,18 @@ vi.mock("./mysubjects-actions", () => ({
 
 vi.mock("@/app/student/memo-actions", () => ({
   addMemo: vi.fn(),
+}));
+
+// R9 Task 3 UI 배선 — 운영 커리큘럼 화면은 loadStudentCurriculumPanelData()
+// (서버 액션, requireAssignedTeacherOrAdmin으로 인가)로만 데이터를 가져온다.
+vi.mock("./student-curriculum-actions", () => ({
+  loadStudentCurriculumPanelData: vi.fn(),
+  ensureActiveOverlay: vi.fn(),
+  addCanonicalUnit: vi.fn(),
+  createSupplementUnit: vi.fn(),
+  excludeUnit: vi.fn(),
+  moveUnit: vi.fn(),
+  setUnitStatus: vi.fn(),
 }));
 
 const students: RosterStudent[] = [
@@ -70,6 +83,8 @@ const baseProps = {
   studentFeedback: {},
   jumpTo: null,
   onJumpConsumed: vi.fn(),
+  operatingCurriculumJumpTo: null,
+  onOperatingCurriculumJumpConsumed: vi.fn(),
 };
 
 describe("CurriculumTab", () => {
@@ -101,5 +116,43 @@ describe("CurriculumTab", () => {
     );
     expect(screen.getByText("완료")).toBeInTheDocument();
     expect(baseProps.onJumpConsumed).toHaveBeenCalled();
+  });
+
+  it("R9 Task 3 UI 배선 — operatingCurriculumJumpTo가 주어지면 담당 학생의 운영 커리큘럼 화면으로 바로 진입한다", async () => {
+    (loadStudentCurriculumPanelData as ReturnType<typeof vi.fn>).mockResolvedValue({
+      initial: { overlayId: "ov1", units: [] },
+      library: { units: [], publishedDocs: [] },
+    });
+    const onOperatingCurriculumJumpConsumed = vi.fn();
+
+    render(
+      <CurriculumTab
+        {...baseProps}
+        operatingCurriculumJumpTo={{ subjectEnrollmentId: "se1", subjectId: "sub1" }}
+        onOperatingCurriculumJumpConsumed={onOperatingCurriculumJumpConsumed}
+      />
+    );
+
+    expect(loadStudentCurriculumPanelData).toHaveBeenCalledWith("se1", "sub1");
+    expect(onOperatingCurriculumJumpConsumed).toHaveBeenCalled();
+    await waitFor(() => expect(screen.getByText("학생 운영 커리큘럼")).toBeInTheDocument());
+  });
+
+  it("R9 Task 3 UI 배선 — 담당이 아닌 학생의 운영 커리큘럼으로 진입을 시도하면 로더가 에러를 보여준다(원본 데이터 노출 없음)", async () => {
+    (loadStudentCurriculumPanelData as ReturnType<typeof vi.fn>).mockRejectedValue(
+      new Error("담당 학생의 커리큘럼만 조정할 수 있습니다.")
+    );
+
+    render(
+      <CurriculumTab
+        {...baseProps}
+        operatingCurriculumJumpTo={{ subjectEnrollmentId: "se-not-mine", subjectId: "sub1" }}
+      />
+    );
+
+    await waitFor(() =>
+      expect(screen.getByText("담당 학생의 커리큘럼만 조정할 수 있습니다.")).toBeInTheDocument()
+    );
+    expect(screen.queryByText("학생 운영 커리큘럼")).toBeNull();
   });
 });

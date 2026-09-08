@@ -1,5 +1,30 @@
 # ALTON — 현재 상태 (2026-09-07 기준)
 
+> **2026-09-07(R9 Task 3 UI 배선) `StudentCurriculumPanel`을 선생님 포털
+> 네비게이션에 실제로 연결.** 배경: R9 Task 3(`63f5f57`)가 학생 운영
+> 커리큘럼 오버레이(스키마+데이터 로더+액션+패널 컴포넌트, 테스트 포함)를
+> 완성했지만, 그 라운드의 최종 보고 자체가 "패널이 선생님 포털 네비게이션에
+> 연결되지 않았다"고 지적했다. 이번 작업은 그 배선만 추가한다(스키마·RLS·
+> 서버 액션 로직은 미변경). 새 진입점: "배정" 탭(`AssignmentsTab`)의 각
+> 담당 학생·과목 카드에 기존 "커리큘럼 보기"와 나란히 "운영 커리큘럼 관리"
+> 버튼을 추가했다 — `teacher_assignments`/`subject_enrollments` 기반이라
+> Task 3 스키마의 `subject_enrollment_id`와 정확히 맞아떨어지는 유일한
+> 기존 화면이라 여기를 선택했다(레거시 `enrollments` 기반 "커리큘럼" 탭의
+> 학생별 상세와는 별개 ID 공간). 클릭하면 `TeacherShell`이 "커리큘럼" 탭으로
+> 전환하며 `CurriculumTab`에 새 `operatingCurriculumJumpTo` 상태를 전달하고,
+> `CurriculumTab`은 새 `StudentCurriculumOperatingView`(내부 컴포넌트)를
+> 렌더링한다. 이 뷰는 새 서버 액션 `loadStudentCurriculumPanelData(subjectEnrollmentId,
+> subjectId)`(`app/teacher/student-curriculum-actions.ts`)로만 데이터를
+> 가져오는데, 이 함수는 기존 `requireAssignedTeacherOrAdmin`을 그대로
+> 재사용할 뿐 새 인가 로직을 추가하지 않는다 — 담당 배정이 아니면 RLS와
+> 앱 레벨 체크가 그대로 막고, 화면은 에러 메시지만 보여준다(원본 데이터
+> 유출 없음). 테스트: `AssignmentsTab.test.tsx`(새 버튼→콜백), `CurriculumTab.test.tsx`
+> (jump로 진입 시 로더 호출 및 패널 렌더, 담당 아닌 경우 에러 표시),
+> `student-curriculum-actions.test.ts`(새 로더의 담당-아님 거부). 검증:
+> `supabase db reset --local` + 전체 `tsc --noEmit` + 전체
+> `vitest run --no-file-parallelism`(212 files / 1425 tests 통과) + `next build`
+> 모두 통과. 세션/화이트보드, R10 정산 파일은 손대지 않음.
+>
 > **2026-09-07(테스트 위생) `lib/booking/payout-batch-lifecycle.integration.test.ts`
 > 플레이키니스 수정 — 예약 시간대 충돌·잔여 데이터 정리.** 배경: 제품 오너가 R10
 > payout 통합 테스트를 리뷰하면서 이 파일의 예약/세션 시각이 "40일 뒤 17:00"
