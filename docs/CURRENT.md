@@ -1,5 +1,22 @@
 # ALTON — 현재 상태 (2026-09-08 기준)
 
+> **2026-09-08 — bypass GUC 보안 정리 계획 수립(코드 변경 없음, 계획 전용).**
+> `876b30a`(R8 annotation-lock corrective) 감사에서 남겨둔 나머지
+> `app.bypass_*` GUC 7건(`bypass_session_lock`, `bypass_teacher_rate_protect`,
+> `bypass_invite_protect`, `bypass_status_protect`, `bypass_consent_protect`,
+> `bypass_reconciliation_task_lock`, `bypass_trial_session_auto_complete`)에
+> 대해, 각각의 보호 불변식·실제 SET 호출 경로·role별 도달 가능성·정상 흐름
+> 의존성·GUC 없는 대체 방식·수정 대상을 정리한 계획 문서를 작성했다 —
+> `docs/superpowers/plans/2026-09-08-bypass-guc-security-cleanup.md`. 이번
+> 라운드는 계획/문서화만 수행했고 마이그레이션·앱 코드는 전혀 건드리지
+> 않았다. 제품 오너 지시("세션 불변식·동의·계정 상태·초대·정산 관련 항목은
+> Preview/non-prod 반영 전 별도 보안 정리 라운드로 반드시 닫아야 한다")에
+> 따라 5개 상위 우선순위 항목의 Preview 게이트 해당 여부를 정리했고,
+> `bypass_reconciliation_task_lock`/`bypass_trial_session_auto_complete`는
+> 별도로 위험도·선행조건을 분류했다. 몇 가지 항목(정확한 안전 대체 구조,
+> R10 정산 파이프라인과의 의존관계 등)은 계획 문서의 "결정 필요" 섹션에
+> 제품 오너 확인 대상으로 남겨뒀다.
+
 > **2026-09-08 — Part D: R9 Gap 1/2 — v3 과제 format별 UI 렌더링 + 교사/관리자
 > 읽기전용 제출 현황 뷰 (제품 오너 리뷰로 확인된 두 번째 공백).**
 >
