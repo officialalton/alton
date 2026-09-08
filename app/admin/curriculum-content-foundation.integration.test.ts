@@ -60,24 +60,6 @@ function makeUnit(subjectId: string, label: string): string {
   );
 }
 
-function makePublishedDoc(subjectId: string, unitId: string): { docId: string; sectionId: string } {
-  const docId = psql(
-    `insert into curriculum_docs (title, subject_id, unit_id, owner_type, status)
-     values ('키워드테스트 교재', '${subjectId}', '${unitId}', 'admin', 'published') returning id;`
-  );
-  const sectionId = psql(
-    `insert into curriculum_doc_sections (curriculum_doc_id, position, title, body)
-     values ('${docId}', 1, '섹션1', '본문') returning id;`
-  );
-  return { docId, sectionId };
-}
-
-function makeConfirmedProblem(subjectId: string): string {
-  return psql(
-    `insert into problems (format, subject_id, status, created_by)
-     values ('mc', '${subjectId}', 'confirmed', '${ADMIN_ID}') returning id;`
-  );
-}
 
 describe("subject_keywords 사전 — 과목별 고유성", () => {
   it("같은 과목 안에서는 정규화(trim/lower) 라벨 중복이 실패한다", () => {
@@ -114,8 +96,14 @@ describe("subject_keywords 사전 — 과목별 고유성", () => {
   });
 });
 
-describe("선택 가능(teaching-selectable) 관계 — 공개/확정 콘텐츠만 허용", () => {
-  it("공개(published)되지 않은 교재의 섹션은 키워드 관계에 들어갈 수 없다", () => {
+// R9 corrective 2 (제품 오너 리뷰): 태깅(키워드 관계)은 저작 편의 기능이지
+// 공개/확정 게이트가 아니다 — draft 섹션/미확정 문제에도 태깅할 수 있어야
+// 하고, 나중에 unpublish/unconfirm 되어도 관계 행은 삭제되지 않아야 한다.
+// "선택 가능(teaching-selectable)" 여부는 읽기 시점에
+// curriculum_doc_section_keywords_selectable / problem_keywords_selectable
+// 뷰가 published/confirmed를 검사해서 걸러낸다.
+describe("선택 가능(teaching-selectable) 게이트는 쓰기가 아니라 읽기 시점(뷰)에 있다", () => {
+  it("공개(published)되지 않은 교재의 섹션에도 키워드를 태깅할 수 있다(저작 편의 — 공개 게이트 아님)", () => {
     unitId = makeUnit(SUBJECT_MATH_ID, `임시단원A ${Date.now()}`);
     const docId = psql(
       `insert into curriculum_docs (title, subject_id, unit_id, owner_type, status)
@@ -129,34 +117,19 @@ describe("선택 가능(teaching-selectable) 관계 — 공개/확정 콘텐츠�
       `insert into subject_keywords (subject_id, label) values ('${SUBJECT_MATH_ID}', '테스트키워드-미공개 ${Date.now()}') returning id;`
     );
 
-    const err = psqlExpectError(
-      `insert into curriculum_doc_section_keywords (section_id, keyword_id) values ('${sectionId}', '${keywordId}');`
+    const relId = psql(
+      `insert into curriculum_doc_section_keywords (section_id, keyword_id) values ('${sectionId}', '${keywordId}') returning section_id;`
     );
-    expect(err).toMatch(/공개\(published\)되지 않은/);
+    expect(relId).toBe(sectionId);
+
+    // 태깅에는 성공했지만 draft이므로 선택 가능 뷰에는 보이지 않는다.
+    const selectable = psql(
+      `select count(*) from curriculum_doc_section_keywords_selectable where section_id = '${sectionId}';`
+    );
+    expect(selectable).toBe("0");
   });
 
-  it("공개된 교재의 섹션은 키워드 관계에 들어갈 수 있고, published에서 벗어나면 관계가 정리된다", () => {
-    unitId = makeUnit(SUBJECT_MATH_ID, `임시단원B ${Date.now()}`);
-    const { docId, sectionId } = makePublishedDoc(SUBJECT_MATH_ID, unitId);
-    const keywordId = psql(
-      `insert into subject_keywords (subject_id, label) values ('${SUBJECT_MATH_ID}', '테스트키워드-공개 ${Date.now()}') returning id;`
-    );
-    psql(
-      `insert into curriculum_doc_section_keywords (section_id, keyword_id) values ('${sectionId}', '${keywordId}');`
-    );
-    const countBefore = psql(
-      `select count(*) from curriculum_doc_section_keywords where section_id = '${sectionId}';`
-    );
-    expect(countBefore).toBe("1");
-
-    psql(`update curriculum_docs set status = 'draft' where id = '${docId}';`);
-    const countAfter = psql(
-      `select count(*) from curriculum_doc_section_keywords where section_id = '${sectionId}';`
-    );
-    expect(countAfter).toBe("0");
-  });
-
-  it("확정(confirmed)되지 않은 문제는 키워드 관계에 들어갈 수 없다", () => {
+  it("확정(confirmed)되지 않은 문제에도 키워드를 태깅할 수 있다(저작 편의 — 확정 게이트 아님)", () => {
     const problemId = psql(
       `insert into problems (format, subject_id, status, created_by)
        values ('mc', '${SUBJECT_MATH_ID}', 'draft', '${ADMIN_ID}') returning id;`
@@ -164,22 +137,91 @@ describe("선택 가능(teaching-selectable) 관계 — 공개/확정 콘텐츠�
     const keywordId = psql(
       `insert into subject_keywords (subject_id, label) values ('${SUBJECT_MATH_ID}', '테스트키워드-draft문제 ${Date.now()}') returning id;`
     );
-    const err = psqlExpectError(
-      `insert into problem_keywords (problem_id, keyword_id) values ('${problemId}', '${keywordId}');`
+    const relId = psql(
+      `insert into problem_keywords (problem_id, keyword_id) values ('${problemId}', '${keywordId}') returning problem_id;`
     );
-    expect(err).toMatch(/확정\(confirmed\)되지 않은/);
+    expect(relId).toBe(problemId);
+
+    const selectable = psql(
+      `select count(*) from problem_keywords_selectable where problem_id = '${problemId}';`
+    );
+    expect(selectable).toBe("0");
   });
 
-  it("확정된 문제는 키워드 관계에 들어갈 수 있고, draft로 되돌아가면 관계가 정리된다", () => {
-    const problemId = makeConfirmedProblem(SUBJECT_MATH_ID);
-    const keywordId = psql(
-      `insert into subject_keywords (subject_id, label) values ('${SUBJECT_MATH_ID}', '테스트키워드-confirmed문제 ${Date.now()}') returning id;`
+  // 회귀 테스트(제품 오너 지시한 정확한 시나리오): 관리자가 draft 섹션에 태깅 →
+  // unpublish(또는 draft 유지) → 관계가 DB에 그대로 남아있는지 확인 → 그 draft
+  // 콘텐츠가 "선택 가능" 뷰에는 안 보이는지 확인 → publish → 같은 관계가 재태깅
+  // 없이 그대로 선택 가능 뷰에 나타나는지 확인.
+  it("draft에 태깅 → unpublish해도 관계 보존 → 선택 가능 뷰에는 미노출 → publish하면 재태깅 없이 노출", () => {
+    unitId = makeUnit(SUBJECT_MATH_ID, `임시단원C ${Date.now()}`);
+    const docId = psql(
+      `insert into curriculum_docs (title, subject_id, unit_id, owner_type, status)
+       values ('회귀테스트 교재', '${SUBJECT_MATH_ID}', '${unitId}', 'admin', 'draft') returning id;`
     );
+    const sectionId = psql(
+      `insert into curriculum_doc_sections (curriculum_doc_id, position, title, body)
+       values ('${docId}', 1, '섹션1', '본문') returning id;`
+    );
+    const keywordId = psql(
+      `insert into subject_keywords (subject_id, label) values ('${SUBJECT_MATH_ID}', '테스트키워드-회귀 ${Date.now()}') returning id;`
+    );
+
+    // 1) draft 상태에서 태깅
+    psql(
+      `insert into curriculum_doc_section_keywords (section_id, keyword_id) values ('${sectionId}', '${keywordId}');`
+    );
+    expect(
+      psql(`select count(*) from curriculum_doc_section_keywords where section_id = '${sectionId}';`)
+    ).toBe("1");
+    expect(
+      psql(`select count(*) from curriculum_doc_section_keywords_selectable where section_id = '${sectionId}';`)
+    ).toBe("0");
+
+    // 2) publish했다가 다시 unpublish(draft로 되돌림) — 관계가 삭제되지 않는지 확인
+    psql(`update curriculum_docs set status = 'published' where id = '${docId}';`);
+    psql(`update curriculum_docs set status = 'draft' where id = '${docId}';`);
+    expect(
+      psql(`select count(*) from curriculum_doc_section_keywords where section_id = '${sectionId}';`)
+    ).toBe("1");
+    expect(
+      psql(`select count(*) from curriculum_doc_section_keywords_selectable where section_id = '${sectionId}';`)
+    ).toBe("0");
+
+    // 3) publish — 재태깅 없이 같은 관계가 선택 가능 뷰에 나타난다
+    psql(`update curriculum_docs set status = 'published' where id = '${docId}';`);
+    const selectableRow = psql(
+      `select keyword_id from curriculum_doc_section_keywords_selectable where section_id = '${sectionId}';`
+    );
+    expect(selectableRow).toBe(keywordId);
+  });
+
+  it("draft 문제에 태깅 → unconfirm해도 관계 보존 → 선택 가능 뷰에는 미노출 → confirm하면 재태깅 없이 노출", () => {
+    const problemId = psql(
+      `insert into problems (format, subject_id, status, created_by)
+       values ('mc', '${SUBJECT_MATH_ID}', 'draft', '${ADMIN_ID}') returning id;`
+    );
+    const keywordId = psql(
+      `insert into subject_keywords (subject_id, label) values ('${SUBJECT_MATH_ID}', '테스트키워드-문제회귀 ${Date.now()}') returning id;`
+    );
+
     psql(`insert into problem_keywords (problem_id, keyword_id) values ('${problemId}', '${keywordId}');`);
     expect(psql(`select count(*) from problem_keywords where problem_id = '${problemId}';`)).toBe("1");
+    expect(
+      psql(`select count(*) from problem_keywords_selectable where problem_id = '${problemId}';`)
+    ).toBe("0");
 
+    psql(`update problems set status = 'confirmed' where id = '${problemId}';`);
     psql(`update problems set status = 'draft' where id = '${problemId}';`);
-    expect(psql(`select count(*) from problem_keywords where problem_id = '${problemId}';`)).toBe("0");
+    expect(psql(`select count(*) from problem_keywords where problem_id = '${problemId}';`)).toBe("1");
+    expect(
+      psql(`select count(*) from problem_keywords_selectable where problem_id = '${problemId}';`)
+    ).toBe("0");
+
+    psql(`update problems set status = 'confirmed' where id = '${problemId}';`);
+    const selectableRow = psql(
+      `select keyword_id from problem_keywords_selectable where problem_id = '${problemId}';`
+    );
+    expect(selectableRow).toBe(keywordId);
   });
 });
 
