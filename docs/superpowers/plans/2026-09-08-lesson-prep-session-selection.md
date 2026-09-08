@@ -2,11 +2,19 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 >
-> **STATUS: DRAFT — submitted for product-owner approval before any code work starts.** Built on
+> **STATUS: DRAFT v2 — submitted for product-owner approval before any code work starts.** Built on
 > the approved curriculum-content foundation (`docs/superpowers/plans/2026-09-07-curriculum-
 > content-foundation.md`, APPROVED) and the confirmed policy decisions in
 > `docs/superpowers/specs/2026-09-08-lesson-prep-session-selection-kickoff.md` §6. Do not start
 > Task 1 until this plan itself is approved.
+>
+> **v2 revision (2026-09-08):** product-owner review found v1's Task 1–2 missing an immutable
+> per-session content manifest — storing only unit/keyword selections and re-deriving candidates by
+> dynamic keyword lookup at session-view time would let newly-published content silently join an
+> already-pinned session, violating the session-content-snapshot invariant. Task 2 is rewritten
+> around a `session_content_manifest` that `pinSessionSelection()` computes and freezes exactly once;
+> Task 3's data source is corrected accordingly. Tasks 3–4's direction (used-in-lesson event,
+> homework composition with two toggles) is unchanged from v1.
 
 **Goal:** Let a teacher prepare an upcoming v3 session's content ahead of time (possibly across
 multiple curriculum-overlay units at once), pin that preparation immutably once the session starts,
@@ -39,6 +47,17 @@ teacher session-view (`app/session/[id]/`) and `StudentCurriculumPanel`.
   overlay may have been unpublished/unconfirmed by the time of either of these two moments — both
   moments must re-check `curriculum_doc_section_keywords_selectable`/`problem_keywords_selectable`
   (or the equivalent predicate) and reject/exclude anything that no longer passes.
+- **A pinned session's content list is an immutable manifest, not a re-derivable keyword query.**
+  `pinSessionSelection()` must freeze the exact list of material sections and problems that pass
+  the selectable check at pin time into a session-scoped manifest table, recorded by content type +
+  canonical id (+ version/display-position if applicable). After pin, this list never gains new rows
+  because something new got published/tagged with the same keyword later — the session-view reads
+  the manifest, not a live keyword join. The only thing allowed to change post-pin is *visibility*:
+  a display-time safety gate re-joins each manifest row against the selectable view and hides (never
+  deletes or mutates) any row that has since become unpublished/unconfirmed. This keeps two
+  invariants distinct: the manifest's *membership* is frozen forever at pin time; the manifest's
+  *current visibility* is re-checked every time it's read, as defense-in-depth, exactly like the
+  homework-composition re-check in (b) above but for display rather than write.
 - "Used in lesson" is recorded ONLY by an explicit teacher action (single instant, not a
   start/end range) for a material section or a problem — never inferred from a tab being opened or
   any other passive viewing signal.
@@ -54,14 +73,15 @@ teacher session-view (`app/session/[id]/`) and `StudentCurriculumPanel`.
 
 | File | Responsibility |
 | --- | --- |
-| `supabase/migrations/20261232000000_r9_session_prepared_selection.sql` | Prepared-selection container + multi-unit/keyword-subset children, staging/attach/pin/detach state machine, pin invariant. |
-| `supabase/migrations/20261233000000_r9_session_content_use_events.sql` | Append-only "used in lesson" event table (material section + problem), RLS scoped to session participants (teacher/admin write+read; student excluded per decision 5). |
-| `supabase/migrations/20261234000000_r9_homework_composition.sql` | Homework-composition write path with the two inclusion-toggle filters, gated by `problem_keywords_selectable` at write time. |
+| `supabase/migrations/20261232000000_r9_session_prepared_selection.sql` | Prepared-selection container + multi-unit/keyword-subset children, staging/attach/pin/detach state machine. (Pin here only means "ready to freeze" — the actual freeze is Task 2's manifest table.) |
+| `supabase/migrations/20261233000000_r9_session_content_manifest.sql` | **New in v2.** Immutable per-session content manifest (content type, canonical id, display position, snapshot fields), populated exactly once by `pinSessionSelection()`, insert/update/delete blocked afterward by trigger. |
+| `supabase/migrations/20261234000000_r9_session_content_use_events.sql` | Append-only "used in lesson" event table (material section + problem), RLS scoped to session participants (teacher/admin write+read; student excluded per decision 5). |
+| `supabase/migrations/20261235000000_r9_homework_composition.sql` | Homework-composition write path with the two inclusion-toggle filters, gated by `problem_keywords_selectable` at write time. |
 | `app/teacher/session-prep-data.ts` | Load: a subject_enrollment's held/staged prepared selections (the "임시보관함"), an upcoming session's currently-attached selection, keyword-filtered eligible content for pinning. |
-| `app/teacher/session-prep-actions.ts` | Teacher-only: `createPreparedSelection`, `addUnitToSelection`, `removeUnitFromSelection`, `setSelectionActiveKeywords`, `attachSelectionToSession`, `detachSelectionFromSession` (→ back to holding area), `pinSessionSelection`. |
+| `app/teacher/session-prep-actions.ts` | Teacher-only: `createPreparedSelection`, `addUnitToSelection`, `removeUnitFromSelection`, `setSelectionActiveKeywords`, `attachSelectionToSession`, `detachSelectionFromSession` (→ back to holding area), `pinSessionSelection` (now: re-verify → freeze manifest → mark selection pinned, one transaction). |
 | `app/teacher/SessionPrepPanel.tsx` | Teacher UI: holding-area list, attach-to-session picker, multi-unit/keyword composer, pin action with a clear "locked after this" warning. |
-| `app/session/[id]/session-content-data.ts` | Session-view data loader: pinned selection's keyword-filtered material/problem candidates (re-checked against selectable views at read time too, defense-in-depth alongside the pin-time check). |
-| `app/session/[id]/session-content-use-actions.ts` | `markMaterialUsedInLesson`, `markProblemUsedInLesson` — the only writers of the use-event table. |
+| `app/session/[id]/session-content-data.ts` | Session-view data loader: reads the session's frozen `session_content_manifest` rows (NOT a dynamic keyword query), joined against the selectable views purely as a display-time visibility gate — hides currently-unpublished/unconfirmed manifest rows without altering the manifest itself. |
+| `app/session/[id]/session-content-use-actions.ts` | `markMaterialUsedInLesson`, `markProblemUsedInLesson` — the only writers of the use-event table; target ids must exist in the session's manifest. |
 | `app/session/[id]/MaterialTab.tsx`, `app/session/[id]/HomeworkTab.tsx` (or existing equivalents — verify actual current file names before editing) | Filter candidates by the session's pinned active-keyword set; add the explicit "사용 처리" action; homework composer UI with the two toggles. |
 | `app/teacher/homework-composition-actions.ts` | `composeHomeworkFromSession(sessionId, keywordIds, count, { includeUsedInLesson, includeAlreadyAttempted })` — re-verifies `confirmed` status per problem at write time, writes into `homework_items` (schema reviewed first — see Task 4). |
 
@@ -88,35 +108,37 @@ round), `sessions` (`final_status`), `teacher_assignments`/`is_active_teacher_fo
 - [ ] Implement `createPreparedSelection`, `addUnitToSelection`, `removeUnitFromSelection`, `setSelectionActiveKeywords`, `attachSelectionToSession`, `detachSelectionFromSession` in `session-prep-actions.ts`; implement `loadHeldSelections` (holding area list for a subject_enrollment), `loadSessionSelection` (currently-attached selection for a session) in `session-prep-data.ts`.
 - [ ] Re-run tests, `supabase db reset --local`, `tsc --noEmit`; commit only this task's files.
 
-## Task 2: Pin-time selectable-view re-verification + `pinSessionSelection`
+## Task 2: Immutable session content manifest — pin-time freeze, not a live keyword query
 
 **Files:**
+- Create: `supabase/migrations/20261233000000_r9_session_content_manifest.sql`
 - Modify: `app/teacher/session-prep-actions.ts` (add `pinSessionSelection`)
-- Test: extend Task 1's integration test file
+- Modify: `app/session/[id]/session-content-data.ts` (create if it doesn't exist yet — this is the manifest reader)
+- Test: extend Task 1's integration test file + a new one for the display-time visibility gate
 
 **Consumes:** Task 1's schema; `curriculum_doc_section_keywords_selectable`/
 `problem_keywords_selectable` views (corrective 2, foundation round).
 
-**Produces:** A `pinSessionSelection(sessionId)` action/RPC that, in one transaction: (a) re-checks
-that every unit/keyword-subset combination in the attached-but-unpinned selection still resolves to
-at least the content that was selectable when added — specifically, it must re-run the selectable-
-view predicate for every section/problem the pin will make reachable, and (b) only then flips
-`status → 'pinned'`, refusing (with a clear error identifying which piece became unselectable) if
-anything referenced has been unpublished/unconfirmed since it was added to the selection. This is
-the first of the two required re-verification points (decision: pin time).
+**Produces:**
+- `session_content_manifest(id, session_id, content_type enum('material_section','problem'), content_id, source_overlay_unit_id, display_position, published_doc_version_at_pin nullable, created_at)` — one row per piece of content that was selectable at the moment of pin. `content_id` is the canonical `curriculum_doc_sections.id` or `problems.id`. `published_doc_version_at_pin` (or whatever the actual versioning column on the content's parent doc is called — verify against `curriculum_doc_versions` before naming this) records what was current at pin time, for audit/display purposes; it is NOT used to re-fetch different content later.
+- **Insert-once, then permanently frozen**: a trigger allows INSERT only while the owning `session_prepared_selections` row's `status = 'staged'` (i.e., during the pin transaction itself, before the selection flips to `'pinned'`), and unconditionally rejects UPDATE, DELETE, and any INSERT once that selection is `'pinned'` — this covers "no reorder, no addition, no removal" after pin in one rule, mirroring `material_version_id`'s lock shape but applied to a multi-row table instead of a single column.
+- `pinSessionSelection(sessionId)` (rewritten from v1) now does, in one transaction: (1) re-run the selectable-view predicate for every section/problem the currently-staged selection's units/keywords resolve to, aborting with a clear error naming the first unselectable item if anything fails; (2) if all pass, bulk-INSERT the exact resulting list into `session_content_manifest` with display positions; (3) only then flip `session_prepared_selections.status → 'pinned'` and set `pinned_at`. Steps (2) and (3) happen in the same transaction the trigger's "staged" check relies on, so there is no window where a manifest could be partially written and then rejected.
+- `session-content-data.ts`'s session-view reader queries `session_content_manifest` for the session (never a keyword/tag join against canonical content), then LEFT JOINs each row against `curriculum_doc_section_keywords_selectable`/`problem_keywords_selectable` purely to decide **current visibility** — a manifest row whose target no longer passes is filtered out of what's returned to the caller, but the manifest row itself is untouched. This same gated reader is used for both the teacher's and the student's view of session content (neither role ever sees a manifest row that has since become unpublished/unconfirmed).
 
-- [ ] Write integration tests: content that was selectable when added to the selection but gets unpublished/unconfirmed before pin causes `pinSessionSelection` to fail with a clear identification of the offending item, and the selection stays `staged` (not partially pinned); content that remains selectable pins successfully; pinning is blocked once the session's `final_status` has already moved off `scheduled` (mirrors `material_version_id`'s existing UAT pattern, reuse the same check, don't reinvent it).
-- [ ] Implement `pinSessionSelection`, run tests, `supabase db reset --local`, `tsc --noEmit`; commit separately from Task 1.
+- [ ] Write integration tests: (a) pinning freezes exactly the selectable-at-that-moment content into the manifest; (b) **after pin, publishing new content tagged with the same keywords the session used does NOT appear in that session's manifest** (the core gap this v2 revision closes — prove it explicitly: publish new matching content post-pin, re-read the manifest, assert it's absent); (c) **after pin, changing a canonical unit's keyword relationships does not change the manifest** (manifest is immune to later keyword-relation edits, not just to new content); (d) **after pin, unpublishing/unconfirming a manifest item hides it from the session-view read** (visibility gate works) **without removing or mutating the manifest row itself** (query the manifest table directly, confirm the row still exists with its original data — only the gated reader's output changes); (e) direct DB-level attempts to INSERT/UPDATE/DELETE `session_content_manifest` rows for an already-pinned session are rejected by the trigger, including an attempt that bypasses the `pinSessionSelection` action entirely (proves the guard is a real DB constraint, not just app-code discipline); (f) content that was selectable when added to the selection but gets unpublished/unconfirmed before pin still causes `pinSessionSelection` to fail with a clear identification of the offending item, and neither the selection nor any manifest row is created (no partial freeze); (g) pinning is blocked once the session's `final_status` has already moved off `scheduled` (reuse the `material_version_id` check, don't reinvent it).
+- [ ] Implement the migration + `pinSessionSelection` + `session-content-data.ts`'s manifest reader, run tests, `supabase db reset --local`, `tsc --noEmit`; commit separately from Task 1.
 
 ## Task 3: "Used in lesson" event — teacher-only, session-scoped, append-only
 
 **Files:**
-- Create: `supabase/migrations/20261233000000_r9_session_content_use_events.sql`
+- Create: `supabase/migrations/20261234000000_r9_session_content_use_events.sql`
 - Create: `app/session/[id]/session-content-use-actions.ts`
 - Modify: session-view material/problem tab components (verify actual current file names first — do not assume, check `app/session/[id]/` directly) to add an explicit "사용 처리" button
 - Test: matching `*.test.ts`/`*.integration.test.ts`
 
-**Consumes:** `sessions`, session-participant authorization (whatever check already gates
+**Consumes:** `sessions`, `session_content_manifest` (Task 2 — a use-event's `target_id` must
+reference a row that exists in this session's manifest; marking something not in the manifest as
+used is rejected), session-participant authorization (whatever check already gates
 `session_annotation_events` writes — reuse it, don't invent a new authorization primitive).
 
 **Produces:**
@@ -130,7 +152,7 @@ the first of the two required re-verification points (decision: pin time).
 ## Task 4: Homework composition — two independent inclusion toggles, issue-time re-verification
 
 **Files:**
-- Create: `supabase/migrations/20261234000000_r9_homework_composition.sql`
+- Create: `supabase/migrations/20261235000000_r9_homework_composition.sql`
 - Create: `app/teacher/homework-composition-actions.ts`
 - Modify: homework UI (verify actual current homework-tab file name/shape first — review `homework_items`'s existing schema before assuming it can carry both toggles, per the kickoff doc's own §4 caveat)
 - Test: matching `*.test.ts` + one DB integration test
@@ -162,16 +184,24 @@ includeAlreadyAttempted })`:
 
 ## Acceptance gate
 
-Before this plan is considered complete, demonstrate with database integration tests that: (1) a
-pinned selection's content can never change after pin, verified the same way `material_version_id`'s
-immutability is verified; (2) content that becomes unpublished/unconfirmed between "added to
-selection" and "pin time" blocks the pin with a clear error, and separately, content that becomes
-unpublished/unconfirmed between "tagged" and "homework issue time" is silently excluded from the
-homework candidate pool (two distinct re-verification points, both proven); (3) an explicit "used in
-lesson" mark is the only way a `session_content_use_events` row is created — no passive-viewing code
-path ever writes one; (4) a student cannot read another student's prepared selection, held/staged
-selections, use events, or homework composition (RLS parity with the foundation round's acceptance-
-gate claim 3); (5) `vocab_words` remains completely untouched by every table/action in this plan.
+Before this plan is considered complete, demonstrate with database integration tests that:
+(1) a session's `session_content_manifest` membership is permanently frozen at pin time —
+publishing new matching content afterward does not add to it, editing canonical keyword relations
+afterward does not change it, and no direct DB write can insert/update/delete a manifest row once
+its session is pinned, including bypassing the app-level action entirely; (2) content that becomes
+unpublished/unconfirmed between "added to selection" and "pin time" blocks the pin with a clear
+error naming the offending item, and no manifest row or partial freeze is left behind; (3) a
+manifest row whose target becomes unpublished/unconfirmed AFTER pin is hidden from the session-view
+read (both teacher and student) by the display-time gate, while the manifest row itself remains
+unchanged in the table; (4) content that becomes unpublished/unconfirmed between "tagged" and
+"homework issue time" is silently excluded from the homework candidate pool (the second, separate
+re-verification point, distinct from (2)/(3)'s pin-time and display-time checks); (5) an explicit
+"used in lesson" mark is the only way a `session_content_use_events` row is created — no
+passive-viewing code path ever writes one, and marking something not present in the session's
+manifest is rejected; (6) a student cannot read another student's prepared selection, held/staged
+selections, manifest, use events, or homework composition (RLS parity with the foundation round's
+acceptance-gate claim 3); (7) `vocab_words` remains completely untouched by every table/action in
+this plan.
 
 ## Verification discipline (every task)
 

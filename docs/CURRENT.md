@@ -3034,3 +3034,28 @@ specs/2026-09-08-lesson-prep-policy-review.md`로 확장 정리했다(각 질문
 이벤트, 과제 조립 write 경로의 issue 시점 재검증 + 두 토글)를 작성해 **승인 대기 상태로
 제출**했다. **코드 작업은 이 계획이 승인된 뒤에만 시작한다.** 이번 라운드도 non-prod
 반영·Preview 배포·UAT 계정 생성·외부 호출 전혀 없음(문서만).
+
+## 2026-09-08 — 구현 계획 v2: 세션별 immutable 콘텐츠 manifest 보완(승인 대기 유지)
+
+제품 오너 리뷰에서 v1 계획의 Task 1~2가 pin 시점의 콘텐츠 목록을 고정하는 구조 없이
+"단원·키워드 선택만 저장 → 세션 화면에서 키워드로 동적 재조회"하는 설계였음을 지적함 —
+이 경우 pin 이후 새로 공개된 콘텐츠가 이미 진행된 세션에 섞여 콘텐츠 스냅샷 불변식을
+위반할 수 있음. `docs/superpowers/plans/2026-09-08-lesson-prep-session-selection.md`를
+v2로 보완(코드 작업은 아직 시작 안 함, 문서만):
+
+- Task 2를 "Pin-time selectable-view re-verification"에서 **"Immutable session content
+  manifest"**로 재설계: `pinSessionSelection()`이 selectable view로 재검증 → 통과한 정확한
+  목록(콘텐츠 유형·원본 ID·표시 순서·필요시 공개 당시 버전)을 `session_content_manifest`에
+  한 트랜잭션으로 동결(freeze) → 그 다음에만 선택을 `pinned`로 표시.
+- manifest는 세션이 pinned가 된 뒤로는 INSERT/UPDATE/DELETE/재정렬을 트리거로 전부 차단
+  (직접 DB 우회도 차단 대상 — 테스트로 증명 요구).
+- 세션 화면은 동적 키워드 조회가 아니라 이 manifest를 읽되, 읽을 때마다 selectable view와
+  다시 조인해 이후 공개 취소·미확정된 항목은 교사·학생 모두에게 숨긴다(manifest 자체는
+  변경하지 않고 현재 접근 가능 여부만 게이트).
+- 필수 테스트 6종 명시: pin 후 신규 공개 콘텐츠 미포함, pin 후 키워드 관계 변경에도 불변,
+  pin 후 공개 취소 항목은 숨김(행 자체는 보존), 직접 DB 우회 차단, pin 전 공개취소/미확정
+  시 pin 자체 거부(부분 동결 없음), 세션 상태가 scheduled를 벗어나면 pin 차단.
+
+Task 3(레슨 사용 이벤트)·Task 4(과제 조립) 방향은 v1과 동일하게 유지, 다만 Task 3의 사용
+이벤트는 이제 "manifest에 존재하는 항목만" 사용 처리 가능하도록 제약이 추가됨. **여전히
+코드 작업 시작 전, 계획 승인 대기 상태.** 이번 라운드도 문서만, 외부 변경 전혀 없음.
