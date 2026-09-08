@@ -3365,3 +3365,75 @@ reset 직후, 22/22 + 14/14 통과, 신규 시나리오 4개 개별 확인) → 
 
 R9 Task 3(사용 처리 이벤트)/Task 4(과제 구성)는 이번에도 착수하지 않음 — 이 라운드는 Task 1/2
 corrective 범위로 한정.
+
+## 2026-09-07 — R9 corrective(2차): prepared_selection_content_items의 단원 출처를 UPDATE로도 다른 선택에 못 붙이게 구조적으로 잠금
+
+제품 오너 리뷰에서 위 corrective(`20261237000000`) 자체에 남아있던 실제 구멍을 발견: 새로 추가된
+`prepared_selection_unit_id` 컬럼과 `check_prepared_content_item_selectable()` 트리거가
+`BEFORE INSERT`에만 걸려 있었다(20261232000000의 트리거 정의를 그대로 재사용 — 함수 본문만
+`CREATE OR REPLACE`했을 뿐 트리거 자체는 다시 만들지 않음). `session_prepared_selection_content_items_lock()`
+(`BEFORE UPDATE OR DELETE`)은 "부모 선택이 pinned가 아닌가"만 검사할 뿐 어느 컬럼이 바뀌는지는
+보지 않는다. 결과적으로 담당 선생님이 자신의 staged 콘텐츠 항목의 `prepared_selection_unit_id`를
+완전히 다른 `session_prepared_selections`(다른 선생님/다른 학생/다른 subject_enrollment)의 단원
+id로 UPDATE해도 어떤 트리거도 막지 않았고, `pin_session_selection()`은 그 값을 그대로 믿고
+`overlay_unit_id`를 매니페스트의 `source_overlay_unit_id`로 복사한다 — 크로스 테넌트/크로스 학생
+데이터 유출 가능 지점.
+
+신규 additive 마이그레이션 `supabase/migrations/20261238000000_r9_corrective_content_item_unit_update_guard.sql`
+(기존 `20261232000000`/`20261233000000`/`20261237000000`는 직접 편집하지 않음):
+
+1. **복합 유니크 제약**: `session_prepared_selection_units (id, prepared_selection_id)` 추가(`id`가
+   이미 PK로 유니크이므로 순수 additive, 기존 동작에 영향 없음) — 복합 FK의 참조 대상이 되기 위한
+   전제.
+2. **복합 FK**: `session_prepared_selection_content_items (prepared_selection_unit_id,
+   prepared_selection_id)` → `session_prepared_selection_units (id, prepared_selection_id)`. 이제
+   이 두 컬럼이 서로 다른 선택을 가리키는 조합은 INSERT든 UPDATE든 Postgres 자체가 제약
+   위반으로 거부한다(트리거가 아니라 constraint). 기존 단독 FK(`ON DELETE CASCADE` 담당)는
+   그대로 유지, 대체하지 않음.
+3. **트리거 확장**: `check_prepared_content_item_selectable()` 트리거를
+   `BEFORE INSERT OR UPDATE OF prepared_selection_id, prepared_selection_unit_id, content_type,
+   content_id`로 재생성(함수 본문은 이미 `new.*` 기준이라 무변경). 이 네 컬럼 중 하나라도 바뀌는
+   UPDATE는 INSERT와 동일한 전체 재검증(단원 소속 + 그 단원만의 키워드 범위 내 selectable)을
+   다시 받는다.
+4. **`pin_session_selection()` 방어적 이중 확인(defense-in-depth)**: 복합 FK가 구조적으로
+   막아주더라도, pin 시점에 각 스테이징 항목의 `prepared_selection_unit_id`가 실제로
+   `v_selection.id`에 속하는지 함수 자신이 다시 명시적으로 확인한다((0f), FK 하나만 맹신하지
+   않음). 불일치 시 매니페스트 0행/status 전이 없이 즉시 실패.
+
+`app/teacher/session-content-manifest.integration.test.ts`에 신규 `describe`
+(`corrective(2차) — prepared_selection_unit_id는 UPDATE로도 다른 선택의 단원을 가리킬 수 없다`) 3건 추가:
+
+1. 담당 선생님이 자신의 staged 항목의 `prepared_selection_unit_id`를 완전히 무관한(다른 학생)
+   선택의 단원 id로 UPDATE 시도 — `BEFORE` 트리거가 복합 FK 검사보다 먼저 실행되므로 트리거의
+   명시적 한국어 에러(`/이 단원은 다른 준비된 선택에 속해 있어 출처로 지목할 수 없습니다/`)가
+   먼저 표면화됨을 확인, 값이 실제로 바뀌지 않았음도 재확인.
+2. 그 selectable 트리거를 superuser 권한으로 일시 `disable`한 뒤(정상 앱 코드 경로 밖의 하위
+   레벨 접근을 흉내내 트리거를 우회) 같은 UPDATE를 시도 — 이번에는 복합 FK 자체가 독립적인
+   방어선으로 거부함을 `violates foreign key constraint ...
+   session_prepared_selection_content_items_unit_selection_fk` 메시지로 직접 확인(요구된 "SQL
+   레벨에서 제약 위반으로 실패시킨다"의 직접 증거 — 이 상태를 만드는 것 자체가 트리거+FK 이중
+   방어로 도달 불가능함을 보임). 트리거를 되살린 뒤 정상 pin이 여전히 성공함(매니페스트 1행,
+   status='pinned')도 재확인.
+3. 단원은 그대로 두고 `content_id`만 그 단원 키워드 범위 밖의 콘텐츠로 바꾸는 UPDATE — 확장된
+   트리거가 재검증을 다시 받아 거부됨(`/선택 가능\(published\/confirmed\)하지 않거나 이 단원의
+   키워드 범위 밖인 콘텐츠는 담을 수 없습니다/`) 확인 — 요구사항 2(트리거의 UPDATE 확장)가
+   실제로 동작함의 증거.
+
+기존 corrective(1차) 테스트(다중 단원 겹침 시 provenance 정확성 2건, 빈 pin 방지 2건 포함
+`session-content-manifest.integration.test.ts` 25건 전체) 및 `session-prepared-selection.integration.test.ts`
+14건, `session-prep-actions.test.ts` 9건 전부 새 제약/트리거 아래에서도 계속 통과.
+
+검증: `supabase db reset --local`(신규 마이그레이션 1개 포함 전부 정상 적용) → `tsc --noEmit`(클린)
+→ 영향받은 세 파일 fresh reset 직후 단독/조합 실행으로 전부 통과(25/25, 14/14, 9/9 — 신규 3건 포함)
+확인. **주의**: 이 세 파일을 fresh reset 없이 연달아 재실행하거나 여러 파일을 한 vitest 프로세스에
+같이 넣어 실행하면 각 파일의 `reservationOffsetDays` 카운터가 파일별로 독립적으로 2000부터
+시작해 서로 다른 파일의 예약 시간대와 겹치거나, 실패한 이전 실행이 정리(`afterEach`)를 못 마친
+채 남긴 행과 겹쳐 `reservations_no_overlap` 배타 제약 위반이 산발적으로 발생함을 실측(이번 세
+파일 자체의 로직 문제가 아니라 이 저장소에 이미 기록된 기존 known flaky 패턴과 동일 원인) —
+fresh reset 직후 1회 실행 기준으로만 판단. 전체 `vitest run --no-file-parallelism`을 fresh
+`supabase db reset --local` 직후 1회 실행: **216 files / 1489 tests 전부 통과**(stderr에 보이는
+다수의 `ERROR:`/`RAISE` 줄은 여러 다른 스위트의 "이 경우엔 거부돼야 한다" 테스트들이 기대한
+psql 에러 출력이며 실패가 아님 — 최종 리포트가 216/216·1489/1489 통과로 확정). `next build` 성공.
+
+R9 Task 3(사용 처리 이벤트)/Task 4(과제 구성)는 이번에도 착수하지 않음 — 이 라운드는 Task 1/2
+corrective(2차, UPDATE 시점 단원 출처 잠금) 범위로 한정.

@@ -739,6 +739,121 @@ describe("corrective — prepared_selection_unit_id가 source_overlay_unit_id의
   });
 });
 
+// R9 corrective(2차, 20261238000000_r9_corrective_content_item_unit_update_guard.sql)
+// — 제품 오너가 지목한 실제 구멍(UPDATE 시점에는 prepared_selection_unit_id의
+// 소속 선택이 전혀 재검증되지 않던 문제)에 대한 직접 증거.
+describe("corrective(2차) — prepared_selection_unit_id는 UPDATE로도 다른 선택의 단원을 가리킬 수 없다", () => {
+  it("담당 선생님이 자신의 스테이징 항목의 prepared_selection_unit_id를 다른(무관한) 선택의 단원으로 UPDATE하면 복합 FK 위반으로 거부된다", () => {
+    const { selectionId, unitRowId, keywordId, sessionId, contractId } = createAttachedStagedSelection();
+    const sectionId = makeSelectableSection(keywordId);
+    const itemId = asUser(
+      TEACHER_ID,
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'material_section', '${sectionId}', 1) returning id;`
+    );
+
+    // 완전히 별개의 선택(다른 학생/enrollment)을 하나 더 만들고, 그 안의 단원
+    // 행 id를 얻는다.
+    const other = createAttachedStagedSelection();
+
+    const err = asUserExpectError(
+      TEACHER_ID,
+      `update session_prepared_selection_content_items set prepared_selection_unit_id = '${other.unitRowId}' where id = '${itemId}';`
+    );
+    // BEFORE 트리거(check_prepared_content_item_selectable(), 이번 corrective로
+    // UPDATE OF prepared_selection_unit_id에도 확장됨)가 Postgres의 복합 FK
+    // 제약 검사보다 먼저 실행되므로, 이 조합에서는 트리거의 명시적 한국어
+    // 에러가 먼저 표면화된다("이 단원은 다른 준비된 선택에 속해 있어..."). 복합
+    // FK는 이 트리거를 우회하는 어떤 경로(예: 트리거 없는 하위 레벨 접근)에도
+    // 대비하는 두 번째 방어선이다 — 아래 두 번째 테스트가 그 방어선 자체를
+    // 별도로 증명한다.
+    expect(err).toMatch(/이 단원은 다른 준비된 선택에 속해 있어 출처로 지목할 수 없습니다/);
+
+    // 실제로 값이 바뀌지 않았는지 확인한다.
+    const stillPointsAtOriginal = psql(
+      `select prepared_selection_unit_id from session_prepared_selection_content_items where id = '${itemId}';`
+    );
+    expect(stillPointsAtOriginal).toBe(unitRowId);
+
+    excludeFromCleanup(contractId);
+    excludeFromCleanup(other.contractId);
+  });
+
+  it("트리거를 우회해도(superuser가 selectable 트리거를 일시적으로 disable) 복합 FK 자체가 독립적인 방어선으로 여전히 거부한다", () => {
+    const { selectionId, unitRowId, keywordId, sessionId, contractId } = createAttachedStagedSelection();
+    const sectionId = makeSelectableSection(keywordId);
+    const itemId = asUser(
+      TEACHER_ID,
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'material_section', '${sectionId}', 1) returning id;`
+    );
+    const other = createAttachedStagedSelection();
+
+    // 위 테스트는 BEFORE 트리거가 먼저 막는다는 것을 보였다 — 이 테스트는 그
+    // 트리거를 superuser 권한으로 일시적으로 disable해서(정상 앱 코드 경로에는
+    // 없는 하위 레벨 접근을 흉내낸다) 트리거가 없어도 복합 FK 자체가 독립적으로
+    // 이 상태를 막는지 확인한다. 이것이 요구된 "복합 FK가 SQL 레벨에서 이
+    // 시도 자체를 제약 위반으로 실패시킨다"의 직접 증거다.
+    psql(
+      `alter table session_prepared_selection_content_items disable trigger session_prepared_selection_content_items_check_selectable;`
+    );
+    let err: string;
+    try {
+      err = psqlExpectError(
+        `update session_prepared_selection_content_items set prepared_selection_unit_id = '${other.unitRowId}' where id = '${itemId}';`
+      );
+    } finally {
+      psql(
+        `alter table session_prepared_selection_content_items enable trigger session_prepared_selection_content_items_check_selectable;`
+      );
+    }
+    expect(err).toMatch(/violates foreign key constraint/);
+    expect(err).toContain("session_prepared_selection_content_items_unit_selection_fk");
+
+    // 값이 실제로 바뀌지 않았는지, 그리고 정상적인 pin은 여전히 성공하는지도
+    // 확인한다(트리거를 되살렸으므로 정상 경로는 영향받지 않는다).
+    const stillPointsAtOriginal = psql(
+      `select prepared_selection_unit_id from session_prepared_selection_content_items where id = '${itemId}';`
+    );
+    expect(stillPointsAtOriginal).toBe(unitRowId);
+
+    asUser(TEACHER_ID, `select pin_session_selection('${sessionId}');`);
+    const manifestCount = psql(`select count(*) from session_content_manifest where session_id = '${sessionId}';`);
+    expect(manifestCount).toBe("1");
+    const status = psql(`select status from session_prepared_selections where id = '${selectionId}';`);
+    expect(status).toBe("pinned");
+
+    excludeFromCleanup(contractId);
+    excludeFromCleanup(other.contractId);
+  });
+
+  it("content_type/content_id를 바꾸는 UPDATE도(단원은 그대로 두고) selectable 트리거의 재검증을 다시 받는다 — 범위 밖 콘텐츠로 바꾸면 거부된다", () => {
+    const { selectionId, unitRowId, keywordId, sessionId, contractId } = createAttachedStagedSelection();
+    const sectionId = makeSelectableSection(keywordId);
+    const itemId = asUser(
+      TEACHER_ID,
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'material_section', '${sectionId}', 1) returning id;`
+    );
+
+    // 이 단원의 키워드 범위 밖의(다른 키워드로 태깅된) 섹션으로 content_id를
+    // 바꾼다 — INSERT 시점 트리거가 확장 전이었다면 이 UPDATE는 아무 검증도
+    // 받지 않고 통과했을 것이다.
+    const otherKeywordId = psql(
+      `insert into subject_keywords (subject_id, label) values ('${SUBJECT_ID}', '무관한키워드 ${Date.now()}_${Math.random()}') returning id;`
+    );
+    const outOfScopeSectionId = makeSelectableSection(otherKeywordId);
+
+    const err = asUserExpectError(
+      TEACHER_ID,
+      `update session_prepared_selection_content_items set content_id = '${outOfScopeSectionId}' where id = '${itemId}';`
+    );
+    expect(err).toMatch(/선택 가능\(published\/confirmed\)하지 않거나 이 단원의 키워드 범위 밖인 콘텐츠는 담을 수 없습니다/);
+
+    excludeFromCleanup(contractId);
+  });
+});
+
 describe("corrective — 빈 pin 방지(포함된 콘텐츠 0개인 채로 pin할 수 없다)", () => {
   it("staged+included 콘텐츠가 0개인 준비된 선택은 pin_session_selection()이 거부하고, status는 staged로 남으며 매니페스트는 0행이다", () => {
     const { selectionId, sessionId } = createAttachedStagedSelection();
