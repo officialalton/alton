@@ -13,7 +13,6 @@ import VocabTab from "./VocabTab";
 import type { VocabEntry } from "./vocab-data";
 import HomeworkTab from "./HomeworkTab";
 import type { HomeworkItem } from "./homework-data";
-import AigenTab from "./AigenTab";
 import ScratchpadTab from "./ScratchpadTab";
 import type { DocLink } from "./scratchpad-data";
 import type { CanvasStroke } from "./material-data";
@@ -21,10 +20,13 @@ import type { StrokePayload } from "./annotation-events-types";
 import ProblemLogTab from "./ProblemLogTab";
 import type { ProblemLogEntry } from "./problemlog-data";
 
+// R9(Task 4) — 세션 중 신규 문제 생성 탭("문제 생성")은 여기서 제거됐다.
+// AI 문제 생성은 이제 관리자 콘텐츠 에디터(app/admin/CurriculumDocEditor.tsx)
+// 전용 화면이며 검수·공개된 문제만 이 세션뷰의 과제/문제 기록 탭에 나타난다
+// (docs/superpowers/specs/2026-09-07-curriculum-content-session-design.md §7).
 const TABS = [
   { id: "material", label: "교재", teacherOnly: false },
   { id: "homework", label: "과제", teacherOnly: false },
-  { id: "aigen", label: "문제 생성", teacherOnly: true },
   { id: "log", label: "문제 기록", teacherOnly: false },
   { id: "vocab", label: "단어장", teacherOnly: false },
   { id: "docs", label: "연습장", teacherOnly: false },
@@ -59,8 +61,6 @@ export default function SessionShell({
   material,
   vocabWords,
   homeworkItems,
-  subjectId,
-  unitOptions,
   docLinks,
   whiteboardStrokes,
   problemLog,
@@ -85,8 +85,6 @@ export default function SessionShell({
   material: MaterialData;
   vocabWords: VocabEntry[];
   homeworkItems: HomeworkItem[];
-  subjectId: string;
-  unitOptions: string[];
   docLinks: DocLink[];
   whiteboardStrokes: CanvasStroke[];
   problemLog: ProblemLogEntry[];
@@ -228,16 +226,6 @@ export default function SessionShell({
           sessionId={sessionId}
           initialItems={homeworkList}
           viewerRole={contentViewerRole}
-        />
-      ) : activeTab === "aigen" && isTeacher && writesEnabled ? (
-        <AigenTab
-          sessionId={sessionId}
-          subjectId={subjectId}
-          subjectName={subjectName}
-          unitOptions={unitOptions}
-          onFinalized={(items) =>
-            setHomeworkList((prev) => [...prev, ...items])
-          }
         />
       ) : activeTab === "docs" ? (
         <ScratchpadTab

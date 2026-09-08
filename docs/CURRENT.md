@@ -2650,3 +2650,102 @@ admin을 이미 포함하고 있었음(마이그레이션 추가 불필요, 확�
 - 외부 변경: 0건. Stripe/Mercury/Wise/Google/이메일 등 실제 외부 API 호출 없음,
   Vercel 배포/`git push`/main 병합 없음, 로컬 커밋만. `R10/payout` 관련 파일은
   건드리지 않았다.
+
+## 2026-09-07 — R9: 커리큘럼 콘텐츠 기반(docs/superpowers/plans/2026-09-07-curriculum-content-foundation.md) Task 1~4 완료
+
+`docs/superpowers/specs/2026-09-07-curriculum-content-session-design.md`(제품
+오너 승인)과 그 실행 계획의 Task 1~4를 순서대로 구현·검증·개별 커밋했다.
+각 커밋: `44125f0`(Task 1), `505d05b`(Task 2), `63f5f57`(Task 3), 그리고 이
+섹션과 함께 커밋되는 Task 4.
+
+### Task 1 — 과목별 공용 키워드 사전 + 콘텐츠 검수 관계(`44125f0`)
+
+`supabase/migrations/20261228000000_r9_curriculum_content_foundation.sql`:
+- `subject_keywords(subject_id, label, normalized_label, status, created_by)`
+  — `unique(subject_id, normalized_label)`로 "같은 라벨, 같은 과목 안에서만
+  중복 금지"를 강제. 라벨 정규화(trim+lower)와 `created_by`는 트리거가
+  채운다(클라이언트가 다른 사람 id를 넣을 수 없다).
+- 단원↔키워드(`subject_template_unit_keywords`), 섹션↔키워드
+  (`curriculum_doc_section_keywords`), 문제↔키워드(`problem_keywords`) 관계
+  테이블. 트리거로 "공개(published)된 교재의 섹션만", "확정(confirmed)된
+  문제만" 관계에 들어갈 수 있게 DB 레벨에서 강제(R8 material_version_id/R10
+  paid 전이 트리거와 같은 패턴) — 교재/문제가 나중에 draft로 되돌아가면
+  관련 관계 행을 자동으로 정리한다.
+- RLS: 인증된 사용자 전체 조회, 관리자만 쓰기(선생님/학생 쓰기는 명시적 거부).
+
+### Task 2 — 관리자 콘텐츠 에디터 키워드 태깅(`505d05b`)
+
+`app/admin/subject-data.ts`/`subject-actions.ts`, `curriculum-doc-data.ts`/
+`curriculum-doc-actions.ts`, `CurriculumDocEditor.tsx`를 확장해 단원/섹션/
+문제에 Task 1 카탈로그의 키워드를 태그할 수 있게 했다. 새 조회는 전부
+배치 처리(과목/섹션/문제 수가 늘어도 키워드·관계 조회는 각 테이블당 정확히
+한 번) — N+1 회귀 테스트로 확인. AI 생성 문제는 기존과 동일하게
+`confirmSectionProblems()`를 거쳐야만 `problems` 테이블에 `status:
+"confirmed"`로 들어가므로(그 전까지는 React state의 초안일 뿐 DB에 아무
+행도 없음) "관리자 확정 전까지 초안" 규칙은 그대로 유지된다.
+
+### Task 3 — 학생별 운영 커리큘럼 오버레이(`63f5f57`)
+
+`supabase/migrations/20261229000000_r9_student_curriculum_overlay.sql`:
+`student_curriculum_overlays`(subject_enrollment당 active 1개, 부분 unique
+인덱스) + `curriculum_overlay_units`(순서 있는 단원 인스턴스, `source_unit_id`
+nullable=보강 단원) + `curriculum_overlay_unit_keywords`/
+`curriculum_overlay_unit_materials`(Task 1과 같은 패턴으로 "공개된 교재만"
+강제). 권한은 기존 `teacher_assignments` 패턴을 재사용
+(`is_active_teacher_for_enrollment()`) — 새 인가 메커니즘을 만들지 않았다.
+재정렬은 `reorder_curriculum_overlay_units(overlay_id, ordered_unit_ids)`
+RPC 한 번으로 원자 처리(개수 불일치 시 전체 롤백, 통합 테스트로 확인).
+완료 상태는 트리거가 `status_changed_by/at`을 `auth.uid()`로 기록할 뿐,
+`session_problem_attempts`를 읽어 자동 전이시키는 코드는 전혀 없음을 통합
+테스트로 명시적으로 확인(그런 트리거가 실수로 추가되면 실패하도록).
+`app/teacher/student-curriculum-data.ts`(배치 로더)/`student-curriculum-actions.ts`
+(add/exclude/reorder/setStatus/setActiveKeywords, 담당 학생 여부를
+앱 레벨에서도 먼저 확인)/`StudentCurriculumPanel.tsx`(원본 문제 생성 UI 없음).
+
+### Task 4 — 세션 중 AI 문제 생성 제거(이 섹션과 함께 커밋)
+
+`app/session/[id]/AigenTab.tsx`, `AigenTab.test.tsx`, `aigen-actions.ts`,
+`aigen-data.ts`를 삭제하고 `SessionShell.tsx`의 `문제 생성` 탭·렌더 분기,
+`page.tsx`의 `subjectId`/`unitOptions` 전달을 함께 제거했다. 저장소 전체
+검색으로 `AigenTab`/`aigen-actions`/`aigen-data`/`generateProblems`/
+`finalizeProblemsToHomework`를 참조하는 다른 경로가 없음을 확인 — 남은
+백도어 없음. 관리자 콘텐츠 에디터(`app/admin/curriculum-doc-actions.ts`의
+`generateSectionProblems`/`regenerateProblem`/`confirmSectionProblems`)는
+전혀 건드리지 않아 admin AI 초안 작성 흐름은 그대로 유지된다. 학생 개인
+단어장(`vocab_words`, `VocabTab.tsx`, `vocab-actions.ts`/`vocab-data.ts`)과
+과제/문제기록/연습장(화이트보드) 탭의 기존 동작·권한은 전혀 손대지 않았다.
+`SessionShell.test.tsx`에 회귀 테스트 추가: "문제 생성" 탭은 학생/선생님
+어느 역할로도 더 이상 보이지 않는다는 것과, 교재/과제/단어장/연습장 탭
+노출은 그대로 유지된다는 것을 각각 확인.
+
+### 검증(Task 1~4 공통, 각 Task 커밋 전 개별 실행 + 이 섹션에서 최종 1회 재확인)
+
+- Task별: 해당 마이그레이션/파일 범위 테스트 개별 실행 통과(Task1 12/12,
+  Task2 admin 스위트 67 files/448 tests, Task3 teacher 스위트 15 files/97
+  tests including 통합 테스트 12/12, Task4 session 스위트 13 files/82
+  tests) — 매 Task 커밋 전 `supabase db reset --local` + `tsc --noEmit` 클린
+  확인.
+- 최종 1회: `supabase db reset --local`(전체 마이그레이션 순서 문제 없음,
+  `20261229000000_r9_student_curriculum_overlay.sql`까지 정상 적용) →
+  `npx vitest run --no-file-parallelism` **212 files / 1420 tests 전부
+  통과** → `npx tsc --noEmit` 클린 → `npx next build` 성공(정적 페이지
+  생성 포함, 에러 없음).
+- UAT 실행 ID: 사용하지 않음 — 이번 라운드는 스키마/서버 액션/화면 골격
+  구축이며, 사용자 흐름 관점의 Preview UAT는 계획서 자체가 명시한 대로
+  "다음 라운드(수업 준비·세션 문제 선택·과제 조립)"에서 실제 세션 흐름과
+  함께 검증하도록 남겨뒀다(아래 미완료 항목 참고).
+
+### 미완료 / 다음 순서
+
+- 계획서의 "Separate follow-on plan"(수업 준비 활성 키워드 선택, 세션
+  시작 시 콘텐츠 고정, 키워드 필터링된 교재/문제 탭, "수업 사용" 이벤트를
+  단순 열람과 분리해 기록, 확정 문제로 과제 조립)은 이번 라운드에 포함하지
+  않았다 — 계획서가 "Task 1~4가 수용된 뒤에만 시작"하도록 명시했다.
+- Task 3의 `StudentCurriculumPanel.tsx`는 아직 어느 화면에서도 실제로
+  마운트되지 않는다(교사 포털에 진입 경로 연결 안 됨) — 컴포넌트/서버
+  액션/DB는 완성·테스트됐지만, 다음 라운드에서 교사 포털 내비게이션에
+  연결하는 작업이 남아 있다.
+- Preview UAT(실제 로그인 흐름으로 화면 확인)는 아직 수행하지 않았다 —
+  다음 라운드에서 세션 흐름과 함께 한 번에 확인하는 편이 계획서 의도에
+  맞다고 판단해 이번 라운드는 자동 테스트(vitest, DB 통합 테스트)로만
+  검증했다.

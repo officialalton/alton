@@ -8,7 +8,6 @@ import SessionShell from "./SessionShell";
 import { loadMaterialData } from "./material-data";
 import { loadVocabWords } from "./vocab-data";
 import { loadHomeworkItems } from "./homework-data";
-import { loadUnitOptions } from "./aigen-data";
 import { loadDocLinks, parseWhiteboardStrokes } from "./scratchpad-data";
 import { loadProblemLog } from "./problemlog-data";
 import { loadNormalizedSession } from "./session-source-data";
@@ -54,7 +53,6 @@ export default async function SessionPage({
 
   const vocabWords = await loadVocabWords(supabase, session.studentId);
   const homeworkItems = await loadHomeworkItems(supabase, session.id);
-  const unitOptions = await loadUnitOptions(supabase, session.subjectId);
   const docLinks = await loadDocLinks(supabase, session.id);
   const whiteboardStrokes = parseWhiteboardStrokes(session.whiteboardStrokesRaw);
   const problemLog = await loadProblemLog(supabase, session.studentId);
@@ -86,8 +84,6 @@ export default async function SessionPage({
       material={material}
       vocabWords={vocabWords}
       homeworkItems={homeworkItems}
-      subjectId={session.subjectId}
-      unitOptions={unitOptions}
       docLinks={docLinks}
       whiteboardStrokes={whiteboardStrokes}
       problemLog={problemLog}

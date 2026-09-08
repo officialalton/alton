@@ -26,11 +26,6 @@ vi.mock("./homework-actions", () => ({
   addHomeworkItem: vi.fn(),
 }));
 
-vi.mock("./aigen-actions", () => ({
-  generateProblems: vi.fn(),
-  finalizeProblemsToHomework: vi.fn(),
-}));
-
 vi.mock("./scratchpad-actions", () => ({
   addDocLink: vi.fn(),
   removeDocLink: vi.fn(),
@@ -72,8 +67,6 @@ const baseProps = {
   studentName: "지훈",
   sessionNumber: 7,
   backHref: "/student",
-  subjectId: "subject-1",
-  unitOptions: ["이차방정식 단원"],
   docLinks: [],
   whiteboardStrokes: [],
   problemLog: [],
@@ -150,7 +143,10 @@ describe("SessionShell — 세션 상태바", () => {
 });
 
 describe("SessionShell — 탭 노출", () => {
-  it("문제 생성 탭은 선생님에게만 보인다", () => {
+  // R9(Task 4) — 세션 중 신규 문제 생성("문제 생성" 탭)은 완전히 제거됐다.
+  // AI 문제 생성은 관리자 콘텐츠 에디터 전용이고(app/admin/CurriculumDocEditor.tsx),
+  // 학생에게는 검수·확정된 문제만 과제/문제 기록 탭을 통해 노출된다.
+  it("문제 생성 탭은 학생/선생님 어느 쪽에도 더 이상 보이지 않는다", () => {
     const { rerender } = render(
       <SessionShell
         {...baseProps}
@@ -173,7 +169,24 @@ describe("SessionShell — 탭 노출", () => {
         durationMinutes={30}
       />
     );
-    expect(screen.getByText("문제 생성")).toBeInTheDocument();
+    expect(screen.queryByText("문제 생성")).not.toBeInTheDocument();
+  });
+
+  it("교재/과제/단어장/연습장 탭은 역할별 노출이 그대로 유지된다", () => {
+    render(
+      <SessionShell
+        {...baseProps}
+        viewerRole="teacher"
+        initialState="prep"
+        status="upcoming"
+        scheduledAt={null}
+        durationMinutes={30}
+      />
+    );
+    expect(screen.getByText("교재")).toBeInTheDocument();
+    expect(screen.getAllByText("과제").length).toBeGreaterThan(0);
+    expect(screen.getByText(`${baseProps.studentName} 학생의 단어장`)).toBeInTheDocument();
+    expect(screen.getByText("연습장")).toBeInTheDocument();
   });
 
   it("기본 활성 탭은 과제다", () => {
