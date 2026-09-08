@@ -1,6 +1,29 @@
 # ALTON — 현재 상태 (2026-09-08 기준)
 
-> **2026-09-08 — bypass GUC 보안 정리 계획 개정(코드 변경 없음, 계획/문서화만).**
+> **2026-09-08 — bypass GUC 보안 정리 계획 2차 개정(코드 변경 없음, 계획/문서화만).**
+> 제품 오너가 `bypass_consent_protect`/`bypass_teacher_rate_protect`에 대해
+> 이전 개정에서 확정했던 "필드 조합 검사" 설계를 반려했다 — 필드 검사만으로는
+> "직접 UPDATE가 허용 필드만 건드렸는가"만 증명할 뿐 "함수의 나머지 원자적
+> 부수효과(`revoke_guardian_consent()`의 `privacy_review_tasks` 행 생성,
+> `set_teacher_rate()`의 새 이력 INSERT + `teachers.hourly_rate_krw` 동기화)까지
+> 건너뛰지 않았는가"는 증명하지 못한다는 것이 반려 사유이며, 실제 함수 본문
+> 재확인으로 이 우려가 코드 사실과 일치함을 확인했다. 두 항목을 **1회용 DB
+> 토큰 방식**(`status_transition_tokens` 공용 테이블을 `action` 컬럼으로
+> 확장 — 대상 행 + 허용 작업(`revoke_consent`/`close_teacher_rate`) +
+> `txid_current()`를 묶는 토큰, 배치 2의 다중 호출자 GUC 3건과 같은 인프라
+> 공유·재사용)으로 재설계했다. 토큰 테이블 쓰기 권한은 GRANT/REVOKE로 구조적
+> 잠금(`session_content_manifest` 잠금과 동일 패턴 — 일반 role 전원 REVOKE,
+> RLS 활성 + 쓰기 정책 없음, SECURITY DEFINER 함수만 테이블 소유자 권한으로
+> 기록). `bypass_trial_session_auto_complete`는 기존 "결과 조건 재검증" 방향은
+> 그대로 유지한 채, `completed_at`이 `status`와 같은 UPDATE에서 항상 함께
+> 채워지는지, 그리고 링크된 세션이 미완료 상태일 때 관리자·service_role의
+> 직접 UPDATE 시도까지 역할 무관하게 거부되는지를 검증하는 테스트 시나리오를
+> 추가했다. 배치 1/배치 2 실행 순서 자체는 유지하되, 공유 토큰 테이블 구축
+> 시점이 배치 2-1(`bypass_status_protect`)에서 배치 1-1(`bypass_consent_protect`)로
+> 앞당겨졌다. 상세: `docs/superpowers/plans/2026-09-08-bypass-guc-security-cleanup.md`.
+> 이번 라운드도 마이그레이션·앱 코드는 전혀 건드리지 않았다.
+
+> **2026-09-08 — bypass GUC 보안 정리 계획 1차 개정(코드 변경 없음, 계획/문서화만) [위 2차 개정으로 일부 대체됨].**
 > 초안(`be18161`) 대비 `docs/superpowers/plans/2026-09-08-bypass-guc-security-cleanup.md`를
 > 4가지 축으로 개정했다: (1) 7개 GUC 전부를 하드 블로커로 확정(잠정 분류
 > 제거), (2) `bypass_reconciliation_task_lock`의 "R10 착수 여부 미확인" 서술이
