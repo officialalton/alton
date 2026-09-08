@@ -13,7 +13,10 @@ import { loadProblemLog } from "./problemlog-data";
 import { loadNormalizedSession } from "./session-source-data";
 import { replayAnnotationEvents } from "./annotation-events-actions";
 import { reconstructVisibleStrokes } from "./annotation-events-types";
-import { loadSessionKeywordOptions } from "@/app/teacher/homework-composition-data";
+import {
+  loadSessionKeywordOptions,
+  loadSessionHomeworkStatus,
+} from "@/app/teacher/homework-composition-data";
 
 // R8 1/N — cutover connection: 이 화면은 원래 legacy_sessions만 조회했다.
 // `loadNormalizedSession`이 legacy_sessions(R6 이전 레거시 세션뷰 테스트 데이터)와
@@ -73,6 +76,16 @@ export default async function SessionPage({
   const homeworkKeywordOptions =
     session.source === "v3" ? await loadSessionKeywordOptions(supabase, session.id) : [];
 
+  // Gap 2 (2026-09-08, 제품 오너 리뷰) — v3 세션에서 선생님/관리자에게만 발급된
+  // 과제의 학생 제출 현황(읽기전용)을 미리 불러온다. 인가는 이 로더가 그대로
+  // 넘겨받는 `supabase`(요청 사용자로 스코프된 클라이언트, service-role 아님)의
+  // RLS에 위임한다 — 담당 아닌 선생님이면 session_homework_items 자체가 RLS로
+  // 안 보여 빈 배열이 돌아온다.
+  const homeworkStatusItems =
+    session.source === "v3" && (session.viewerRole === "teacher" || session.viewerRole === "admin")
+      ? await loadSessionHomeworkStatus(supabase, session.id)
+      : [];
+
   return (
     <SessionShell
       sessionId={session.id}
@@ -99,6 +112,7 @@ export default async function SessionPage({
       initialAnnotationStrokes={initialAnnotationStrokes}
       currentUserId={user.id}
       homeworkKeywordOptions={homeworkKeywordOptions}
+      homeworkStatusItems={homeworkStatusItems}
     />
   );
 }

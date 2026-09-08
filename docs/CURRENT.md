@@ -1,5 +1,66 @@
 # ALTON — 현재 상태 (2026-09-08 기준)
 
+> **2026-09-08 — Part D: R9 Gap 1/2 — v3 과제 format별 UI 렌더링 + 교사/관리자
+> 읽기전용 제출 현황 뷰 (제품 오너 리뷰로 확인된 두 번째 공백).**
+>
+> **문제(Gap 1):** Part C corrective가 학생이 v3 과제를 읽고/저장하는 경로 자체는
+> 열었지만, `StudentHomeworkTab.tsx`는 `problems.format`/`options`를 이미 불러오고도
+> 실제로 쓰지 않고 모든 문제를 서술형 textarea 하나로만 보여줬다 — 객관식(mc)
+> 문제인데도 보기(options)가 화면에 전혀 없었고, 응답은 그냥 raw 문자열로
+> 저장됐다.
+>
+> **문제(Gap 2):** `session_homework_items`/`session_homework_attempts`에 대한
+> 담당 선생님/관리자 SELECT 권한은 DB에 있었지만(20261235000000,
+> 20261240000000), 그걸 실제로 보여주는 화면이 어디에도 없었다. 게다가 그
+> 문제의 실제 지문(`problems`)을 읽으려면 별도의 `problems` SELECT 정책을
+> 통과해야 하는데, 담당 선생님이 발급한 문제라도 published 교재 section에
+> 속하지 않고 본인이 만든 것도 아니면(예: 다른 선생님이 만든 confirmed 문제를
+> 키워드로 골라 발급한 경우) 그 정책을 통과하지 못하는 공백이 있었다 — 학생
+> 쪽에서 이미 고친 것과 정확히 같은 종류의 문제.
+>
+> **고침:**
+> 1. `app/student/StudentHomeworkTab.tsx` — `HomeworkV3AccordionItem`을
+>    `problem.format`에 따라 분기: `format === 'mc'`면 `problem.options`(문자열
+>    배열)를 실제 선택지 버튼으로 렌더링(단일 선택, `MaterialTab.tsx`의 기존 MC
+>    렌더링 패턴을 그대로 재사용)하고, 그 외(essay/math/알려지지 않은 값 전부)는
+>    서술형 textarea로 폴백한다(세 번째 format이 생겨도 크래시하거나 조용히
+>    비지 않고 이 폴백으로 처리됨을 명시).
+>    응답 JSON 모양을 이 라운드에서 확정: MC는 `{ type: "mc", selected: <0-based
+>    index> }`, 서술형은 `{ type: "text", text: string }` — 파일 상단 주석에
+>    문서화, `saveHomeworkV3Draft`/`submitHomeworkV3`(response: unknown, 그대로
+>    upsert)는 수정 없음. 제출(submitted=true) 후에는 옵션 버튼/textarea 모두
+>    `disabled`로 바뀌어 추가 입력이 불가능해진다(DB 잠금의 UI 반영일 뿐, 새
+>    강제 메커니즘 아님). DB 거부(예: 재제출 시도)가 오면 화면에 에러 메시지로
+>    보여주고 submitted 상태를 바꾸지 않는다(성공한 것처럼 보이지 않음).
+> 2. `supabase/migrations/20261245000000_r9_teacher_homework_answer_view.sql` —
+>    `problems`에 "담당 선생님/관리자는 배정한 과제 문제 조회" SELECT 정책 추가
+>    (`exists(select 1 from session_homework_items shi where shi.problem_id =
+>    problems.id and (is_session_teacher_v3(shi.session_id) or is_admin()))`).
+>    학생 쪽 20261240000000 정책과 대칭. 쓰기 정책은 추가하지 않음.
+> 3. `app/teacher/homework-composition-data.ts` — `loadSessionHomeworkStatus()`
+>    추가: `session_homework_items` → `problems` → `session_homework_attempts`
+>    3단계 조회로, 각 발급 항목의 상태(`not_started`/`draft`/`submitted`)와
+>    format별 응답을 반환. 서비스롤 클라이언트를 새로 만들지 않고 호출자가 넘긴
+>    (요청 사용자로 스코프된) `supabase` 클라이언트를 그대로 써서, 담당 아닌
+>    선생님이 호출하면 RLS가 걸러 빈 배열이 돌아온다 — 데이터 유출 없음.
+> 4. `app/session/[id]/HomeworkTab.tsx` — `canComposeFromSession`과 동일 조건(v3
+>    세션 + 실제 역할 teacher/admin)에서 `HomeworkStatusList`(읽기전용) 렌더링.
+>    MC는 선택한 보기 문자를 옵션 텍스트와 함께, 서술형은 작성 텍스트 그대로
+>    보여준다. 이 뷰에는 어떤 입력/저장 컨트롤도 없다(제품 오너의 명시적 지시
+>    — 교사/관리자 쓰기 경로는 이 라운드 전체에서 추가하지 않음).
+>    `SessionShell.tsx`/`app/session/[id]/page.tsx`가 `loadSessionHomeworkStatus`
+>    호출 결과를 v3 + teacher/admin 뷰어에만 내려준다.
+>
+> **검증:** `supabase db reset --local` → `tsc --noEmit`(클린) →
+> `StudentHomeworkTab.test.tsx`(MC/서술형 렌더링+저장 모양+제출 후 읽기전용+DB
+> 거부 노출, 5개 신규) + `HomeworkTab.test.tsx`(교사 읽기전용 뷰, 5개 신규) +
+> `homework-composition-status.test.ts`(loadSessionHomeworkStatus 상태 파생,
+> 5개 신규) + `homework-teacher-view.integration.test.ts`(psql 직접 RLS 검증 —
+> 담당 선생님/관리자 조회 가능, 무관한 선생님은 세 테이블 모두 0행이라 "거부"와
+> "제출 없음"을 구분, 다른 학생 회귀, 7개 신규) 전부 통과 →
+> `vitest run --no-file-parallelism` 풀스위트를 fresh reset 후 **두 번 연속**
+> 실행, 둘 다 **226 files / 1561 tests 100%** 통과 → `next build` 성공.
+>
 > **2026-09-08 — Part C: R9 corrective — Task 4(과제 구성)가 놓친 학생 read/write
 > 경로 수정.**
 >

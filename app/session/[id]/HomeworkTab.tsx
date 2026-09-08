@@ -5,7 +5,10 @@ import type { SessionViewViewer } from "@/lib/session-view";
 import { addHomeworkItem, saveHomeworkAnswer } from "./homework-actions";
 import type { HomeworkItem } from "./homework-data";
 import { composeHomeworkFromSession } from "@/app/teacher/homework-composition-actions";
-import type { HomeworkKeywordOption } from "@/app/teacher/homework-composition-data";
+import type {
+  HomeworkKeywordOption,
+  SessionHomeworkStatusItem,
+} from "@/app/teacher/homework-composition-data";
 
 export default function HomeworkTab({
   sessionId,
@@ -14,6 +17,7 @@ export default function HomeworkTab({
   sessionSource = "legacy",
   realViewerRole,
   keywordOptions = [],
+  homeworkStatusItems = [],
 }: {
   sessionId: string;
   initialItems: HomeworkItem[];
@@ -26,6 +30,10 @@ export default function HomeworkTab({
   sessionSource?: "legacy" | "v3";
   realViewerRole?: SessionViewViewer;
   keywordOptions?: HomeworkKeywordOption[];
+  // Gap 2 (2026-09-08) — 이 세션에서 발급된 v3 과제의 학생 제출 현황(읽기전용).
+  // canComposeFromSession과 동일한 조건(v3 세션 + 실제 역할 teacher/admin)에서만
+  // 보여준다 — 쓰기 UI는 절대 추가하지 않는다.
+  homeworkStatusItems?: SessionHomeworkStatusItem[];
 }) {
   const [items, setItems] = useState(initialItems);
   const isTeacher = viewerRole === "teacher";
@@ -72,6 +80,77 @@ export default function HomeworkTab({
 
       {canComposeFromSession && (
         <ComposeFromSessionForm sessionId={sessionId} keywordOptions={keywordOptions} />
+      )}
+
+      {canComposeFromSession && (
+        <HomeworkStatusList items={homeworkStatusItems} />
+      )}
+    </div>
+  );
+}
+
+// Gap 2 (2026-09-08) — 발급된 과제(session_homework_items)의 학생 제출 현황을
+// 읽기 전용으로 보여준다. 상태 표시(작성 전/임시 저장/제출완료)와, 제출됐다면
+// 실제 답안 내용을 보여준다 — MC는 선택한 보기(텍스트 포함), 서술형은 작성한
+// 텍스트 그대로. 여기엔 어떤 입력/저장 컨트롤도 없다(제품 오너 지시 — 교사/
+// 관리자는 학생 답안을 고칠 수 없다).
+const STATUS_LABEL: Record<SessionHomeworkStatusItem["status"], string> = {
+  not_started: "작성 전",
+  draft: "임시 저장됨",
+  submitted: "제출완료",
+};
+
+function isStatusOptions(v: unknown): v is string[] {
+  return Array.isArray(v) && v.every((o) => typeof o === "string");
+}
+
+function HomeworkStatusList({ items }: { items: SessionHomeworkStatusItem[] }) {
+  if (items.length === 0) return null;
+
+  return (
+    <div className="mt-6 pt-5 border-t border-grey-200">
+      <h3 className="text-[14px] font-bold text-ink mb-3">
+        이 세션에서 발급한 과제 — 제출 현황
+      </h3>
+      {items.map((item) => (
+        <HomeworkStatusRow key={item.id} item={item} />
+      ))}
+    </div>
+  );
+}
+
+function HomeworkStatusRow({ item }: { item: SessionHomeworkStatusItem }) {
+  const options = isStatusOptions(item.options) ? item.options : null;
+  const response = item.response as { type?: string; selected?: number; text?: string } | null;
+
+  return (
+    <div className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3.5 mb-2.5">
+      <div className="flex items-center justify-between mb-1.5">
+        <span className="text-[12.5px] font-semibold text-ink">
+          과제 #{item.position}
+        </span>
+        <span className="text-[11px] font-bold px-2.5 py-1 rounded-md bg-grey-100 text-grey-500">
+          {STATUS_LABEL[item.status]}
+        </span>
+      </div>
+      {item.passage && (
+        <p className="text-[12.5px] text-grey-500 leading-[1.6] mb-2 whitespace-pre-wrap">
+          {item.passage}
+        </p>
+      )}
+      {item.status === "not_started" ? (
+        <p className="text-[12.5px] text-grey-300">아직 답안이 없습니다.</p>
+      ) : item.format === "mc" && options && response?.type === "mc" ? (
+        <div className="text-[12.5px] text-ink">
+          선택한 답: {String.fromCharCode(65 + (response.selected ?? -1))}
+          {typeof response.selected === "number" && options[response.selected]
+            ? ` — ${options[response.selected]}`
+            : ""}
+        </div>
+      ) : response?.type === "text" ? (
+        <p className="text-[12.5px] text-ink whitespace-pre-wrap">{response.text}</p>
+      ) : (
+        <p className="text-[12.5px] text-grey-300">답안 형식을 표시할 수 없습니다.</p>
       )}
     </div>
   );
