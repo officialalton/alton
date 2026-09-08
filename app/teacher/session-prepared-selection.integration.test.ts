@@ -440,7 +440,7 @@ describe("attach/detach — 임시보관함 ↔ 세션", () => {
 
 describe("pin 이후 잠금 — 트리거가 모든 하위 테이블의 추가 변경을 거부한다", () => {
   it("status='pinned'로 전이한 뒤에는 단원/키워드/콘텐츠 추가·제거·재정렬·detach가 전부 거부된다", () => {
-    const { selectionId, unitRowId, keywordId, overlayUnitId, contractId } = createStagedSelectionWithUnit();
+    const { selectionId, unitRowId, keywordId, overlayUnitId, sessionId, contractId } = createStagedSelectionWithUnit();
     const sectionId = makeSelectableSection(keywordId);
     const itemId = asUser(
       TEACHER_ID,
@@ -448,10 +448,12 @@ describe("pin 이후 잠금 — 트리거가 모든 하위 테이블의 추가 �
        values ('${selectionId}', 'material_section', '${sectionId}', 1) returning id;`
     );
 
-    asUser(
-      TEACHER_ID,
-      `update session_prepared_selections set status = 'pinned', pinned_at = now() where id = '${selectionId}';`
-    );
+    // pin_session_selection()(Task 2)을 통해 실제로 pin한다 — 더 이상 status를
+    // 직접 UPDATE로 전이시키지 않는다(Task 2가 그 직접 경로를 RLS WITH CHECK로
+    // 막았으므로, 이제 이 방법 자체가 pin-lock이 실전에서 어떻게 걸리는지
+    // 증명하는 셈이다).
+    asUser(TEACHER_ID, `update session_prepared_selections set session_id = '${sessionId}' where id = '${selectionId}';`);
+    asUser(TEACHER_ID, `select pin_session_selection('${sessionId}');`);
 
     expect(
       asUserExpectError(
@@ -510,7 +512,7 @@ describe("pin 이후 잠금 — 트리거가 모든 하위 테이블의 추가 �
   });
 
   it("app.bypass_prepared_selection_lock GUC를 설정해도 pin-lock을 더 이상 우회할 수 없다(우회 경로 완전 제거 확인)", () => {
-    const { selectionId, unitRowId, keywordId, overlayUnitId, contractId } = createStagedSelectionWithUnit();
+    const { selectionId, unitRowId, keywordId, overlayUnitId, sessionId, contractId } = createStagedSelectionWithUnit();
     const sectionId = makeSelectableSection(keywordId);
     const itemId = asUser(
       TEACHER_ID,
@@ -518,13 +520,11 @@ describe("pin 이후 잠금 — 트리거가 모든 하위 테이블의 추가 �
        values ('${selectionId}', 'material_section', '${sectionId}', 1) returning id;`
     );
 
-    // 실제(un-bypassed) pin 전이 — pinSessionSelection()은 아직 없으므로(Task 2)
-    // 위 pin-lock 테스트와 동일하게 status를 직접 전이시켜 "이미 pin된 상태"를
-    // 시뮬레이션한다.
-    asUser(
-      TEACHER_ID,
-      `update session_prepared_selections set status = 'pinned', pinned_at = now() where id = '${selectionId}';`
-    );
+    // 실제(un-bypassed) pin 전이 — pin_session_selection()(Task 2)을 통해 진짜로
+    // pin한다(더 이상 status를 직접 UPDATE로 시뮬레이션하지 않는다 — Task 2가
+    // 그 직접 경로 자체를 RLS WITH CHECK로 막았다).
+    asUser(TEACHER_ID, `update session_prepared_selections set session_id = '${sessionId}' where id = '${selectionId}';`);
+    asUser(TEACHER_ID, `select pin_session_selection('${sessionId}');`);
 
     // 20261232000000_r9_session_prepared_selection.sql이 원래 두고 있던 bypass
     // GUC를 명시적으로 설정한 뒤 pinned 행/자식 행을 변경/삭제해본다 — 이 GUC는

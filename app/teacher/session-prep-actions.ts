@@ -273,3 +273,22 @@ export async function detachSelectionFromSession(preparedSelectionId: string): P
     .eq("id", preparedSelectionId);
   if (error) throw new Error(error.message);
 }
+
+// R9(레슨 준비 Task 2) — 이 액션은 의도적으로 requireOwningTeacherOrAdmin 같은
+// 앱 레벨 선인가를 거치지 않는다: 실제 인가는 전부
+// pin_session_selection()(supabase/migrations/20261233000000_r9_session_content_manifest.sql)
+// 함수 본문 안에서 (0a)~(0d)로 수행된다(SECURITY DEFINER라 RLS/앱 가드가 자동
+// 적용되지 않으므로 함수 스스로 검사해야 한다는 게 이 함수의 설계 전제다 —
+// 여기서 중복 선인가를 두면 "이 앱 코드 경로로만 호출해야 안전하다"는 잘못된
+// 인상을 줄 수 있다). 로그인 여부만 확인하고 나머지는 함수/DB 에러 메시지를
+// 그대로 전달한다.
+export async function pinSessionSelection(sessionId: string): Promise<void> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("로그인이 필요합니다.");
+
+  const { error } = await supabase.rpc("pin_session_selection", { p_session_id: sessionId });
+  if (error) throw new Error(error.message);
+}

@@ -1,5 +1,90 @@
 # ALTON — 현재 상태 (2026-09-07 기준)
 
+> **2026-09-07(R9 레슨 준비 Task 2만 — 불변 세션 콘텐츠 매니페스트 +
+> pin_session_selection(), Task 3~4는 여전히 착수하지 않음).** 계획서
+> (`docs/superpowers/plans/2026-09-08-lesson-prep-session-selection.md`, v4
+> 승인) Task 2를 구현했다: `supabase/migrations/20261233000000_r9_session_content_manifest.sql`이
+> 불변 `session_content_manifest(id, session_id, content_type, content_id,
+> source_overlay_unit_id, display_position, published_doc_version_at_pin,
+> created_at)`을 추가한다. curriculum_docs/problems에는 별도 버전 테이블/컬럼이
+> 없음을 확인했으므로 `published_doc_version_at_pin`은 pin 시점 curriculum_docs.
+> updated_at 스냅샷(감사/표시용, material_section만 값 있음)으로 채운다.
+>
+> **유일한 쓰기 경로:** `pin_session_selection(p_session_id uuid)`
+> (`SECURITY DEFINER`, `search_path = public, pg_temp` 고정, `EXECUTE`는
+> `authenticated`에게만·`PUBLIC`에서는 회수) 하나뿐이다. `session_content_manifest`에는
+> ordinary role(teacher/authenticated) 대상 INSERT/UPDATE/DELETE 그랜트를
+> 아예 만들지 않았다(이 프로젝트 기본 ACL이 새 테이블에 authenticated 앞
+> ALL을 자동 부여하므로 `revoke insert, update, delete, truncate ... from
+> public, anon, authenticated`로 명시적으로 되돌렸다) — RLS 정책조차 쓰기용은
+> 두지 않아 "정책 없음=기본 거부"와 "그랜트 자체 없음"이 이중으로 막는다.
+> `pin_session_selection()`은 SECURITY DEFINER라 RLS/앱 가드가 자동 적용되지
+> 않으므로 함수 본문 맨 앞에서 스스로 (0a) `auth.uid()` null 거부 (0b) 담당
+> 선생님(자신의 teacher_id + `is_active_teacher_for_enrollment()`) 또는
+> `is_admin()` (0c) 넘어온 sessionId가 실제로 이 staged 선택에 attach돼있는지
+> (session_id로 조회 자체가 이를 강제) (0d) 세션과 선택의
+> subject_enrollment_id 일치를 검사한다. 통과하면 staged+included 콘텐츠
+> 항목을 unit/keyword 범위+`curriculum_doc_section_keywords_selectable`/
+> `problem_keywords_selectable`로 전부 재검증(하나라도 실패하면 실패 항목을
+> 지목해 전체 중단, 매니페스트 0행)한 뒤에만 INSERT하고, 그 다음에만 `session_
+> prepared_selections.status`를 `pinned`로 전이한다 — 한 트랜잭션.
+>
+> **제품 오너가 지목한 핵심 구멍(이번 Task 2가 닫음):** Task 1의
+> `session_prepared_selections` "담당 선생님/관리자만 쓰기" 정책은 블랭킷 `for
+> all` 정책이라 `status='pinned'`로의 직접 UPDATE까지 허용했다 — 즉 선생님이
+> `pin_session_selection()`을 전혀 거치지 않고
+> `update session_prepared_selections set status='pinned'`만 실행해도 막을
+> 방법이 없었다(매니페스트 0행인 채로 "pinned" 세션이 만들어지는 결과). 고른
+> 해법(옵션 b, 컬럼 값 기반 WITH CHECK 좁히기): 정책의 `with check`에 `and
+> status <> 'pinned'`를 추가해 ordinary role의 UPDATE/INSERT 자체가 새 행의
+> status를 `'pinned'`로 만드는 것을 RLS 레벨에서 통과시키지 않는다.
+> `pin_session_selection()`은 SECURITY DEFINER(함수 소유자 권한, RLS 완전
+> 우회)로 실행되므로 이 좁힌 정책의 영향을 받지 않는다. 지난 corrective가
+> 증명했듯 세션/트랜잭션 로컬 GUC 마커 방식은 어떤 역할이든 스스로 SET할 수
+> 있어 안전하지 않다고 판단해 채택하지 않았다.
+>
+> **`app/session/[id]/session-content-data.ts`(신규):** `loadSessionContentManifest()`가
+> `session_content_manifest`만 읽고(키워드/단원 조인 없음, staged 콘텐츠
+> 테이블도 읽지 않음), `curriculum_doc_section_keywords_selectable`/
+> `problem_keywords_selectable`에 "이 content_id에 대한 행이 존재하는가"만
+> 확인하는 표시 시점 가시성 게이트를 건다. 게이트 탈락 행은 반환에서만
+> 제외되고 매니페스트 테이블 자체는 절대 변경하지 않는다(선생님/학생 세션-뷰가
+> 이 리더 하나를 공유).
+>
+> **`app/teacher/session-prep-actions.ts`에 `pinSessionSelection` 추가:**
+> 앱 레벨에서는 로그인 여부만 확인하고 `pin_session_selection` RPC 호출·에러
+> 전달만 한다 — 의도적으로 중복 선인가를 두지 않는다(실제 인가는 전부 DB
+> 함수 본문 안에서).
+>
+> **테스트:** `app/teacher/session-content-manifest.integration.test.ts`(신규,
+> psql 직접 검증, 18개) — (a) staged+included 정확한 freeze (b) pin 후 새로
+> 발행된 매칭 콘텐츠 미포함 (c) pin 후 정규 키워드 관계 변경 무영향 (d) pin
+> 후 unpublish/unconfirm돼도 매니페스트 행 자체는 원본 유지(표시 게이트만
+> 숨김) (e) staged 상태에서도 ordinary teacher-role 직접 INSERT/UPDATE/DELETE
+> 전부 거부(permission denied) (f) pick 후 pin 전 unpublish된 항목이 있으면
+> 전체 pin 실패+매니페스트 0행 (g) final_status가 scheduled 아니면 pin 거부
+> (h) 키워드 범위 매칭되지만 pick 안 됐거나(또는 excluded) 후보는 매니페스트에
+> 없음 (i) staged+included 밖 콘텐츠에 대한 매니페스트 행 없음 (j) 권한
+> 매트릭스: 담당 선생님(성공)/관리자(별도 경로 성공)/무관한 선생님(실패,0행)/
+> 과거 배정이었으나 현재 비활성인 선생님(실패,0행)/학생(실패,0행)/미부착
+> sessionId(실패, 0c 증명)/세션-선택 subject_enrollment_id 불일치(실패, 0d
+> 증명) (k) EXECUTE는 authenticated에게만·PUBLIC에는 없음, search_path 고정
+> (information_schema/pg_proc 조회) (l, 이번 corrective의 핵심) ordinary
+> teacher-role의 직접 `UPDATE ... SET status='pinned'`가 거부되고 매니페스트도
+> 0행으로 남음. 또한 `app/teacher/session-prep-actions.test.ts`에 mocked
+> `pinSessionSelection` 3개(미로그인 거부, RPC 위임, DB 에러 전달) +
+> `app/session/[id]/session-content-data.test.ts`(신규, mocked, 표시 시점
+> 가시성 게이트 필터링 2개) 추가. Task 1의
+> `session-prepared-selection.integration.test.ts`의 두 "pin 이후 잠금" 테스트는
+> 이제 status를 직접 UPDATE로 시뮬레이션하지 않고 실제
+> `pin_session_selection()`을 통해 pin한다(Task 2가 직접 UPDATE 경로 자체를
+> 막았으므로).
+>
+> **검증:** `supabase db reset --local`(클린, corrective 포함), `npx tsc
+> --noEmit`(클린), `npx vitest run --no-file-parallelism`(전체 스위트, 회귀
+> 없음), `npx next build`(클린). Task 3(사용 처리 이벤트)/Task 4(과제 구성)는
+> 착수하지 않았다 — 각각 별도 제품 오너 승인 후 진행한다.
+>
 > **2026-09-07(R9 레슨 준비 Task 1 corrective — pin-lock bypass 보안 결함 수정,
 > Task 2~4는 여전히 착수하지 않음).** 발견된 문제: 직전 라운드(Task 1)가 도입한
 > `session_prepared_selections`/`session_prepared_selection_units`/

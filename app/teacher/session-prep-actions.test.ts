@@ -95,6 +95,7 @@ import {
   reorderContentItems,
   attachSelectionToSession,
   detachSelectionFromSession,
+  pinSessionSelection,
 } from "./session-prep-actions";
 
 describe("담당 학생 인가 — 준비된 선택 최상위 액션", () => {
@@ -151,5 +152,32 @@ describe("attach/detach", () => {
     state.assignment = { id: "assign1" };
     await expect(attachSelectionToSession("sel1", "session1")).resolves.toBeUndefined();
     await expect(detachSelectionFromSession("sel1")).resolves.toBeUndefined();
+  });
+});
+
+// R9(레슨 준비 Task 2) — pinSessionSelection()은 의도적으로 앱 레벨 인가를
+// 중복하지 않는다(실제 인가는 pin_session_selection() DB 함수 안에서 한다).
+// 여기서는 로그인 여부 확인 + RPC 위임 + 에러 전달만 확인한다.
+describe("pinSessionSelection — 로그인만 확인하고 실제 인가/검증은 DB 함수(pin_session_selection RPC)에 위임한다", () => {
+  it("로그인하지 않은 경우 RPC를 호출하지 않고 거부한다", async () => {
+    mockSupabase.auth.getUser.mockResolvedValueOnce({ data: { user: null } });
+    mockSupabase.rpc.mockClear();
+    await expect(pinSessionSelection("session1")).rejects.toThrow("로그인이 필요합니다.");
+    expect(mockSupabase.rpc).not.toHaveBeenCalled();
+  });
+
+  it("로그인한 경우 pin_session_selection RPC를 정확히 한 번, 올바른 인자로 호출한다", async () => {
+    mockSupabase.rpc.mockClear();
+    state.rpcResult = { data: [{ id: "manifest1" }], error: null };
+    await expect(pinSessionSelection("session1")).resolves.toBeUndefined();
+    expect(mockSupabase.rpc).toHaveBeenCalledTimes(1);
+    expect(mockSupabase.rpc).toHaveBeenCalledWith("pin_session_selection", { p_session_id: "session1" });
+  });
+
+  it("DB 함수가 에러를 반환하면(권한 없음/재검증 실패 등) 그 메시지를 그대로 전달한다", async () => {
+    state.rpcResult = { data: null, error: { message: "이 준비된 선택을 pin할 권한이 없습니다." } };
+    await expect(pinSessionSelection("session1")).rejects.toThrow(
+      "이 준비된 선택을 pin할 권한이 없습니다."
+    );
   });
 });
