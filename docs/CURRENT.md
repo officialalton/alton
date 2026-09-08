@@ -81,6 +81,47 @@
 > 계획(레슨 준비/세션 문제 선택/과제 구성) 착수는 이번 라운드 범위 밖 —
 > 시작하지 않음.
 >
+> **2026-09-07(R9 corrective 1 추가분) 오버레이 베이스라인 시딩에 단원별
+> 참고 교재 누락분 보강.** 배경: 바로 위 corrective 1
+> (`ensure_active_curriculum_overlay`)이 단원·키워드는 시딩했지만 단원별
+> 참고 교재(`subject_template_unit_materials`)는 빠뜨려, 방금 만들어진
+> 오버레이를 선생님이 열어보면 단원마다 교재 구성이 비어 보이는 문제가
+> 남아 있었다. 조치: 기존 마이그레이션 파일을 고치지 않고 새 additive
+> 마이그레이션
+> `supabase/migrations/20261231000000_r9_corrective_overlay_baseline_materials.sql`을
+> 추가해 `ensure_active_curriculum_overlay()`를 `create or replace`로
+> 확장 — 같은 트랜잭션 안에서 각 베이스라인 단원의 `source_unit_id`가
+> `subject_template_unit_materials`로 연결한 교재 중 시딩 시점
+> `curriculum_docs.status = 'published'`인 것만 `curriculum_overlay_unit_materials`로
+> 복사한다(draft 교재는 SELECT 필터에서부터 제외되고, Task 3의
+> `check_overlay_unit_material_published` 트리거가 이중으로 막는다 —
+> corrective 2가 그대로 둔 그 쓰기측 게이트를 존중). 잠금/멱등성은 corrective
+> 1의 advisory xact lock + 활성 오버레이 조기 반환 로직을 그대로 재사용(별도
+> 동시성 방어를 새로 만들지 않음 — 같은 함수/트랜잭션 안이므로 이미 커버됨).
+> **검증 매핑:**
+> `app/teacher/student-curriculum-overlay.integration.test.ts`의
+> "ensure_active_curriculum_overlay — 최초 베이스라인 시딩" describe에 추가된
+> 4개 테스트가 각각 (1) 첫 호출 시 각 베이스라인 단원의 published 참고 교재가
+> 정확한 개수로(단원별 정확히 매칭, 과목 전체 합계와도 일치) 시딩됨, (2)
+> published/draft가 섞여 있으면 draft는 절대 시딩되지 않고 published만
+> 남음, (3) 8-way 동시 호출(`Promise.all`, service-role `supabase-js`)해도
+> 참고 교재 행이 N×8이 아니라 정확히 N(과목 전체 published
+> `subject_template_unit_materials` 행 수)으로 수렴함, (4) 오버레이가 이미
+> 만들어진 뒤 canonical `subject_template_unit_materials`에 새 교재를
+> 추가해도 이미 시딩된 학생 오버레이의 `curriculum_overlay_unit_materials`
+> 행 개수·내용이 전혀 바뀌지 않음(재호출은 활성 오버레이 조기 반환으로
+> 재시딩하지 않음)을 각각 증명한다.
+>
+> **검증:** `supabase db reset --local`(클린 적용) 후 대상 통합 테스트 24/24
+> 통과(신규/확장 4개 포함) 확인 → 신선한 `supabase db reset --local` 직후
+> 전체 `npx vitest run --no-file-parallelism`(**212 files / 1439 tests 전부
+> 통과**) → `npx tsc --noEmit`(clean) → `npx next build`(clean, 정적 페이지
+> 생성 포함) 각 1회 재확인. 이번 라운드도 로컬만 사용 — 원격 Supabase
+> migration push, Vercel Preview 배포, UAT 계정 생성, 실제 외부 API 호출,
+> `git push`, 별도 merge 전부 없음. corrective 2(published/confirmed
+> selectable 게이트) 로직은 읽기만 하고 손대지 않았고, 후속 계획(레슨
+> 준비/세션 문제 선택/과제 구성) 착수도 시작하지 않았다.
+>
 > **2026-09-07(R9 Acceptance gate 검증) 커리큘럼 콘텐츠 기반 계획서의
 > Acceptance gate 4개 항목을 실제 DB 통합 테스트로 증명.** 배경:
 > `docs/superpowers/plans/2026-09-07-curriculum-content-foundation.md`의

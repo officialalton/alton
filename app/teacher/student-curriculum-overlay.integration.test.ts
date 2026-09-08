@@ -504,6 +504,180 @@ describe("ensure_active_curriculum_overlay — 최초 베이스라인 시딩", (
     expect(Number(sourceRefs)).toBe(expectedUnitCount);
   });
 
+  // R9 corrective 1(추가분) — 20261231000000_r9_corrective_overlay_baseline_materials.sql:
+  // corrective 1의 원래 시딩이 단원/키워드는 스냅샷했지만 단원별 참고 교재
+  // (subject_template_unit_materials)는 빠뜨렸던 것을 확장한다. 여기서는
+  // baseUnitId에 공개(published) 교재를 하나 연결해두고, 시딩된 오버레이 단원의
+  // curriculum_overlay_unit_materials 행이 정확히 그 교재 하나(다른 단원과 섞이지
+  // 않고)로 채워지는지 정확한 개수로 확인한다.
+  it("처음 호출하면 각 베이스라인 단원의 공개(published) 참고 교재가 curriculum_overlay_unit_materials로 정확히 시딩된다", async () => {
+    const enrollmentId = makeEnrollment();
+    const docId = psql(
+      `insert into curriculum_docs (title, subject_id, unit_id, owner_type, status)
+       values ('베이스라인 참고교재 ${Date.now()}', '${SUBJECT_ID}', '${baseUnitId}', 'admin', 'published') returning id;`
+    );
+    psql(
+      `insert into subject_template_unit_materials (unit_id, curriculum_doc_id) values ('${baseUnitId}', '${docId}');`
+    );
+
+    try {
+      const { data: overlayId, error } = await adminClient.rpc("ensure_active_curriculum_overlay", {
+        p_subject_enrollment_id: enrollmentId,
+      });
+      expect(error).toBeNull();
+
+      // 이 원본 단원(baseUnitId)에 연결된 오버레이 단원 인스턴스는 정확히 그
+      // 하나의 published 교재만 참고 교재로 갖는다.
+      const materialsForBaseUnit = psql(
+        `select count(*) from curriculum_overlay_units ou
+         join curriculum_overlay_unit_materials m on m.overlay_unit_id = ou.id
+         where ou.overlay_id = '${overlayId}' and ou.source_unit_id = '${baseUnitId}';`
+      );
+      expect(Number(materialsForBaseUnit)).toBe(1);
+
+      const materialDocId = psql(
+        `select m.curriculum_doc_id from curriculum_overlay_units ou
+         join curriculum_overlay_unit_materials m on m.overlay_unit_id = ou.id
+         where ou.overlay_id = '${overlayId}' and ou.source_unit_id = '${baseUnitId}';`
+      );
+      expect(materialDocId).toBe(docId);
+
+      // 전체 오버레이의 참고 교재 총 개수는 과목 전체 canonical
+      // subject_template_unit_materials 행 수와 정확히 같아야 한다(단원 간 교재가
+      // 섞이지 않고, 하나도 빠짐없이 복사됐다는 것을 동시에 증명).
+      const expectedTotalMaterials = Number(
+        psql(
+          `select count(*) from subject_template_unit_materials tum
+           join subject_template_units u on u.id = tum.unit_id
+           join curriculum_docs d on d.id = tum.curriculum_doc_id
+           where u.subject_id = '${SUBJECT_ID}' and d.status = 'published';`
+        )
+      );
+      const overlayTotalMaterials = Number(
+        psql(
+          `select count(*) from curriculum_overlay_units ou
+           join curriculum_overlay_unit_materials m on m.overlay_unit_id = ou.id
+           where ou.overlay_id = '${overlayId}';`
+        )
+      );
+      expect(overlayTotalMaterials).toBe(expectedTotalMaterials);
+    } finally {
+      // 정리: 다음 테스트에 영향 주지 않도록 이 테스트가 만든 canonical 교재
+      // 연결과 교재 자체를 되돌린다.
+      psql(
+        `delete from subject_template_unit_materials where unit_id = '${baseUnitId}' and curriculum_doc_id = '${docId}';`
+      );
+      psql(`delete from curriculum_docs where id = '${docId}';`);
+    }
+  });
+
+  // draft 교재는 절대 시딩되면 안 된다 — check_overlay_unit_material_published
+  // 트리거(Task 3, corrective 2가 그대로 둔 쓰기 시점 published 게이트)와 시딩
+  // SELECT의 published 필터가 이중으로 이를 보장한다.
+  it("draft 상태인 참고 교재는 절대 시딩되지 않는다(published인 것만 시딩)", async () => {
+    const enrollmentId = makeEnrollment();
+    const publishedDocId = psql(
+      `insert into curriculum_docs (title, subject_id, unit_id, owner_type, status)
+       values ('공개교재 ${Date.now()}', '${SUBJECT_ID}', '${baseUnitId}', 'admin', 'published') returning id;`
+    );
+    const draftDocId = psql(
+      `insert into curriculum_docs (title, subject_id, unit_id, owner_type, status)
+       values ('초안교재 ${Date.now()}', '${SUBJECT_ID}', '${baseUnitId}', 'admin', 'draft') returning id;`
+    );
+    psql(
+      `insert into subject_template_unit_materials (unit_id, curriculum_doc_id) values ('${baseUnitId}', '${publishedDocId}');`
+    );
+    psql(
+      `insert into subject_template_unit_materials (unit_id, curriculum_doc_id) values ('${baseUnitId}', '${draftDocId}');`
+    );
+
+    try {
+      const { data: overlayId, error } = await adminClient.rpc("ensure_active_curriculum_overlay", {
+        p_subject_enrollment_id: enrollmentId,
+      });
+      expect(error).toBeNull();
+
+      const seededDocIds = psql(
+        `select coalesce(string_agg(m.curriculum_doc_id::text, ',' order by m.curriculum_doc_id), '')
+         from curriculum_overlay_units ou
+         join curriculum_overlay_unit_materials m on m.overlay_unit_id = ou.id
+         where ou.overlay_id = '${overlayId}' and ou.source_unit_id = '${baseUnitId}';`
+      );
+      expect(seededDocIds).toBe(publishedDocId);
+      expect(seededDocIds).not.toMatch(draftDocId);
+    } finally {
+      psql(
+        `delete from subject_template_unit_materials where unit_id = '${baseUnitId}' and curriculum_doc_id in ('${publishedDocId}', '${draftDocId}');`
+      );
+      psql(`delete from curriculum_docs where id in ('${publishedDocId}', '${draftDocId}');`);
+    }
+  });
+
+  // 스냅샷 불변성: 오버레이가 이미 만들어진 뒤 canonical 단원↔교재 관계가
+  // 바뀌어도(새 교재 추가) 이미 시딩된 학생 오버레이의
+  // curriculum_overlay_unit_materials 행은 절대 소급 변경되지 않는다 — 재호출은
+  // 이미 활성 오버레이가 있으므로 조기 반환하고 재시딩하지 않기 때문이다.
+  it("오버레이 생성 후 canonical 단원-교재 관계가 바뀌어도 이미 시딩된 학생 오버레이는 변하지 않는다(스냅샷 불변성)", async () => {
+    const enrollmentId = makeEnrollment();
+
+    const { data: overlayId, error: firstError } = await adminClient.rpc(
+      "ensure_active_curriculum_overlay",
+      { p_subject_enrollment_id: enrollmentId }
+    );
+    expect(firstError).toBeNull();
+
+    const beforeCount = Number(
+      psql(
+        `select count(*) from curriculum_overlay_units ou
+         join curriculum_overlay_unit_materials m on m.overlay_unit_id = ou.id
+         where ou.overlay_id = '${overlayId}' and ou.source_unit_id = '${baseUnitId}';`
+      )
+    );
+
+    // 오버레이가 이미 만들어진 "뒤에" canonical 관계를 바꾼다.
+    const newDocId = psql(
+      `insert into curriculum_docs (title, subject_id, unit_id, owner_type, status)
+       values ('사후추가교재 ${Date.now()}', '${SUBJECT_ID}', '${baseUnitId}', 'admin', 'published') returning id;`
+    );
+    psql(
+      `insert into subject_template_unit_materials (unit_id, curriculum_doc_id) values ('${baseUnitId}', '${newDocId}');`
+    );
+
+    try {
+      // 같은 enrollment에 재호출 — 이미 활성 오버레이가 있으므로 조기 반환,
+      // 재시딩하지 않는다.
+      const { data: secondOverlayId, error: secondError } = await adminClient.rpc(
+        "ensure_active_curriculum_overlay",
+        { p_subject_enrollment_id: enrollmentId }
+      );
+      expect(secondError).toBeNull();
+      expect(secondOverlayId).toBe(overlayId);
+
+      const afterCount = Number(
+        psql(
+          `select count(*) from curriculum_overlay_units ou
+           join curriculum_overlay_unit_materials m on m.overlay_unit_id = ou.id
+           where ou.overlay_id = '${overlayId}' and ou.source_unit_id = '${baseUnitId}';`
+        )
+      );
+      // canonical 쪽에 교재가 새로 하나 추가됐어도, 이미 만들어진 학생
+      // 오버레이의 시딩된 교재 개수는 그대로여야 한다(소급 반영 없음).
+      expect(afterCount).toBe(beforeCount);
+
+      const hasNewDoc = psql(
+        `select count(*) from curriculum_overlay_units ou
+         join curriculum_overlay_unit_materials m on m.overlay_unit_id = ou.id
+         where ou.overlay_id = '${overlayId}' and m.curriculum_doc_id = '${newDocId}';`
+      );
+      expect(Number(hasNewDoc)).toBe(0);
+    } finally {
+      psql(
+        `delete from subject_template_unit_materials where unit_id = '${baseUnitId}' and curriculum_doc_id = '${newDocId}';`
+      );
+      psql(`delete from curriculum_docs where id = '${newDocId}';`);
+    }
+  });
+
   it("시딩 시점의 단원 기본 키워드가 오버레이 단원 키워드로 스냅샷 복사된다", async () => {
     const enrollmentId = makeEnrollment();
     const keywordId = psql(
@@ -554,33 +728,69 @@ describe("ensure_active_curriculum_overlay — 최초 베이스라인 시딩", (
     const expectedUnitCount = countSubjectTemplateUnits();
     const CONCURRENCY = 8;
 
-    const results = await Promise.all(
-      Array.from({ length: CONCURRENCY }, () =>
-        adminClient.rpc("ensure_active_curriculum_overlay", {
-          p_subject_enrollment_id: enrollmentId,
-        })
+    // 동시성 테스트에도 참고 교재 시딩이 있는 상태에서 정확히 한 번만 일어나는지
+    // 확인하기 위해 baseUnitId에 published 교재 하나를 연결해둔다.
+    const docId = psql(
+      `insert into curriculum_docs (title, subject_id, unit_id, owner_type, status)
+       values ('동시성 참고교재 ${Date.now()}', '${SUBJECT_ID}', '${baseUnitId}', 'admin', 'published') returning id;`
+    );
+    psql(
+      `insert into subject_template_unit_materials (unit_id, curriculum_doc_id) values ('${baseUnitId}', '${docId}');`
+    );
+    const expectedTotalMaterials = Number(
+      psql(
+        `select count(*) from subject_template_unit_materials tum
+         join subject_template_units u on u.id = tum.unit_id
+         join curriculum_docs d on d.id = tum.curriculum_doc_id
+         where u.subject_id = '${SUBJECT_ID}' and d.status = 'published';`
       )
     );
 
-    for (const r of results) {
-      expect(r.error).toBeNull();
+    try {
+      const results = await Promise.all(
+        Array.from({ length: CONCURRENCY }, () =>
+          adminClient.rpc("ensure_active_curriculum_overlay", {
+            p_subject_enrollment_id: enrollmentId,
+          })
+        )
+      );
+
+      for (const r of results) {
+        expect(r.error).toBeNull();
+      }
+      const overlayIds = new Set(results.map((r) => r.data));
+      // 모든 동시 호출이 정확히 같은 오버레이 id 하나로 수렴해야 한다.
+      expect(overlayIds.size).toBe(1);
+
+      const activeOverlayCount = psql(
+        `select count(*) from student_curriculum_overlays
+         where subject_enrollment_id = '${enrollmentId}' and status = 'active';`
+      );
+      expect(Number(activeOverlayCount)).toBe(1);
+
+      const [overlayId] = overlayIds;
+      const seededCount = psql(
+        `select count(*) from curriculum_overlay_units where overlay_id = '${overlayId}';`
+      );
+      // CONCURRENCY번 동시 호출됐어도 베이스라인은 정확히 한 번만 시딩되어야
+      // 한다 — expectedUnitCount * CONCURRENCY가 아니라 expectedUnitCount여야 한다.
+      expect(Number(seededCount)).toBe(expectedUnitCount);
+
+      const seededMaterialsCount = Number(
+        psql(
+          `select count(*) from curriculum_overlay_units ou
+           join curriculum_overlay_unit_materials m on m.overlay_unit_id = ou.id
+           where ou.overlay_id = '${overlayId}';`
+        )
+      );
+      // 참고 교재도 마찬가지로 CONCURRENCY배가 아니라 정확히
+      // expectedTotalMaterials(= N)여야 한다.
+      expect(seededMaterialsCount).toBe(expectedTotalMaterials);
+    } finally {
+      psql(
+        `delete from subject_template_unit_materials where unit_id = '${baseUnitId}' and curriculum_doc_id = '${docId}';`
+      );
+      psql(`delete from curriculum_docs where id = '${docId}';`);
     }
-    const overlayIds = new Set(results.map((r) => r.data));
-    // 모든 동시 호출이 정확히 같은 오버레이 id 하나로 수렴해야 한다.
-    expect(overlayIds.size).toBe(1);
-
-    const activeOverlayCount = psql(
-      `select count(*) from student_curriculum_overlays
-       where subject_enrollment_id = '${enrollmentId}' and status = 'active';`
-    );
-    expect(Number(activeOverlayCount)).toBe(1);
-
-    const [overlayId] = overlayIds;
-    const seededCount = psql(
-      `select count(*) from curriculum_overlay_units where overlay_id = '${overlayId}';`
-    );
-    // CONCURRENCY번 동시 호출됐어도 베이스라인은 정확히 한 번만 시딩되어야
-    // 한다 — expectedUnitCount * CONCURRENCY가 아니라 expectedUnitCount여야 한다.
-    expect(Number(seededCount)).toBe(expectedUnitCount);
   });
 });
