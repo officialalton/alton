@@ -3059,3 +3059,31 @@ v2로 보완(코드 작업은 아직 시작 안 함, 문서만):
 Task 3(레슨 사용 이벤트)·Task 4(과제 조립) 방향은 v1과 동일하게 유지, 다만 Task 3의 사용
 이벤트는 이제 "manifest에 존재하는 항목만" 사용 처리 가능하도록 제약이 추가됨. **여전히
 코드 작업 시작 전, 계획 승인 대기 상태.** 이번 라운드도 문서만, 외부 변경 전혀 없음.
+
+## 2026-09-08 — 구현 계획 v3: 준비 콘텐츠 명시적 스테이징 + manifest 직접 쓰기 전면 차단(승인 대기 유지)
+
+제품 오너 리뷰에서 v2 계획의 두 가지 gap을 지적함 — (1) 준비 선택에 단원·키워드만 있고
+교사가 실제로 고른 교재 섹션·문제 목록 자체가 staged 상태에 명시적으로 저장되지 않음(키워드는
+후보를 좁히는 필터일 뿐, pin 대상은 교사가 고른 정확한 콘텐츠여야 함), (2)
+`session_content_manifest`가 staged 상태에서도 일반 교사 권한으로 직접 INSERT 가능한 설계였음
+(v2는 "pinned되면 차단"이라는 상태 기반 트리거였을 뿐, "애초에 권한 자체가 없음"이 아니었음).
+`docs/superpowers/plans/2026-09-08-lesson-prep-session-selection.md`를 v3로 보완(코드 작업은
+여전히 시작 안 함):
+
+- Task 1에 `session_prepared_selection_content_items` 신규 — 교사가 키워드로 후보를 좁힌 뒤
+  실제로 고른 교재 섹션·문제를 명시적으로 선택·제외(soft, `included=false`)·정렬. 이 목록이
+  실제 pin 대상이고, 단원·키워드는 후보를 좁히는 필터·구성 맥락일 뿐 pin 페이로드가 아님.
+  콘텐츠를 이 목록에 담을 때 selectable 여부·단원/키워드 스코프 내인지를 INSERT 시점에
+  트리거로 검사(선택 불가능하거나 범위 밖 콘텐츠는 애초에 담을 수 없음).
+- Task 2의 `pinSessionSelection()`을 `SECURITY DEFINER` 단일 원자 함수로 재정의 — staged +
+  included 콘텐츠 목록을 다시 한번 selectable/스코프 검증한 뒤 그 정확한 목록만 manifest로
+  복사. **`session_content_manifest`에 대한 일반 역할(교사)의 INSERT/UPDATE/DELETE 권한 자체를
+  아예 부여하지 않음**(staged 상태냐 pinned 상태냐와 무관하게 원천 차단 — v2의 "pinned되면
+  트리거가 막는다"보다 강한 보장). manifest 쓰기는 오직 이 함수 내부에서만 발생.
+- 신규 테스트 4종 추가: 키워드에 맞지만 교사가 고르지 않은(또는 제외한) 항목은 pin 뒤 manifest
+  미포함 / staged 콘텐츠가 pin 전 공개취소·미확정되면 pin 전체 거부 + manifest 0건(다른
+  유효 항목도 함께 0건, 부분 동결 없음) / staged 상태에서도 일반 교사 권한의 manifest 직접
+  INSERT 차단(pinned 이후뿐 아니라 staged 상태에서도 검증) / pin 함수가 선택 목록 밖 항목을
+  manifest에 넣지 못함(스코프 내 다른 후보가 있어도).
+
+**여전히 코드 작업 시작 전, 계획 승인 대기 상태.** 이번 라운드도 문서만, 외부 변경 전혀 없음.
