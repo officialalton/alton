@@ -8,6 +8,10 @@ import {
   submitMathAttempt,
   submitMcAttempt,
 } from "./actions";
+import {
+  markMaterialUsedInLesson,
+  markProblemUsedInLesson,
+} from "./session-content-use-actions";
 import MathCanvas from "./MathCanvas";
 import CanvasOverlay from "./CanvasOverlay";
 import VocabClickLayer from "./VocabClickLayer";
@@ -121,9 +125,18 @@ export default function MaterialTab({
           >
             {material.sections.map((s) => (
               <div key={s.id} id={`sec-${s.id}`} className="mb-11 scroll-mt-[72px]">
-                <h2 className="text-[22px] font-extrabold text-[#0b2545] mb-3">
-                  {s.title}
-                </h2>
+                <div className="flex items-start justify-between gap-3 mb-3">
+                  <h2 className="text-[22px] font-extrabold text-[#0b2545]">
+                    {s.title}
+                  </h2>
+                  {viewerRole === "teacher" && (
+                    <MarkUsedButton
+                      sessionId={sessionId}
+                      contentType="material_section"
+                      contentId={s.id}
+                    />
+                  )}
+                </div>
                 <div
                   className="text-[14px] leading-[1.75] text-ink [&_b]:font-bold"
                   dangerouslySetInnerHTML={{ __html: s.body }}
@@ -151,6 +164,52 @@ export default function MaterialTab({
         </CanvasOverlay>
       </div>
     </div>
+  );
+}
+
+// R9(레슨 준비 Task 3) — 명시적 "사용 처리" 버튼. 선생님이 실제로 클릭했을 때만
+// session_content_use_events에 한 행을 남긴다(session-content-use-actions.ts).
+// 탭을 열거나 스크롤하는 것만으로는 절대 호출되지 않는다 — onClick 핸들러 밖에서는
+// 이 액션들을 부르지 않는다.
+function MarkUsedButton({
+  sessionId,
+  contentType,
+  contentId,
+}: {
+  sessionId: string;
+  contentType: "material_section" | "problem";
+  contentId: string;
+}) {
+  const [state, setState] = useState<"idle" | "saving" | "done" | "error">("idle");
+
+  async function handleClick() {
+    if (state === "saving" || state === "done") return;
+    setState("saving");
+    try {
+      if (contentType === "material_section") {
+        await markMaterialUsedInLesson(sessionId, contentId);
+      } else {
+        await markProblemUsedInLesson(sessionId, contentId);
+      }
+      setState("done");
+    } catch {
+      setState("error");
+    }
+  }
+
+  return (
+    <button
+      onClick={handleClick}
+      disabled={state === "saving" || state === "done"}
+      className={
+        "flex-shrink-0 text-[11px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] " +
+        (state === "done"
+          ? "border-green bg-green-bg text-green"
+          : "border-grey-200 text-grey-500 hover:bg-grey-100")
+      }
+    >
+      {state === "done" ? "사용 처리됨" : state === "saving" ? "처리 중…" : "사용 처리"}
+    </button>
   );
 }
 
@@ -238,15 +297,20 @@ function ProblemCard({
 
   return (
     <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4.5 my-4">
-      <div className="flex flex-wrap gap-1.5 mb-2">
-        {tags.map((t) => (
-          <span
-            key={t}
-            className="text-[10.5px] font-bold px-2.5 py-1 rounded-lg bg-grey-100 text-grey-500"
-          >
-            {t}
-          </span>
-        ))}
+      <div className="flex flex-wrap items-center justify-between gap-1.5 mb-2">
+        <div className="flex flex-wrap gap-1.5">
+          {tags.map((t) => (
+            <span
+              key={t}
+              className="text-[10.5px] font-bold px-2.5 py-1 rounded-lg bg-grey-100 text-grey-500"
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+        {isTeacher && (
+          <MarkUsedButton sessionId={sessionId} contentType="problem" contentId={problem.id} />
+        )}
       </div>
 
       {isTeacher && problem.format === "mc" && problem.correctIndex !== null && (

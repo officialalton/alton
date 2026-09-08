@@ -3437,3 +3437,62 @@ psql 에러 출력이며 실패가 아님 — 최종 리포트가 216/216·1489/
 
 R9 Task 3(사용 처리 이벤트)/Task 4(과제 구성)는 이번에도 착수하지 않음 — 이 라운드는 Task 1/2
 corrective(2차, UPDATE 시점 단원 출처 잠금) 범위로 한정.
+
+## 2026-09-07 — R9 레슨 준비 Task 3: "사용 처리" 이벤트(교사/관리자 전용, append-only)
+
+계획서(`docs/superpowers/plans/2026-09-08-lesson-prep-session-selection.md`, v4 승인) Task 3만
+구현. Task 4(과제 구성)는 이번에도 별도 제품 오너 승인 후 착수한다.
+
+`supabase/migrations/20261234000000_r9_session_content_use_events.sql`:
+`session_content_use_events(id, session_id, content_type, content_id, recorded_by, recorded_at)` —
+`content_type`은 Task 1이 이미 정의한 `session_prepared_selection_content_type` enum을 그대로
+재사용(새 enum 안 만듦). 핵심 제약(이번 라운드 제품 오너가 지목한 구멍) — 대상
+`(session_id, content_type, content_id)`가 그 세션의 `session_content_manifest`에 실제로
+존재해야만 한다: 앱 레벨 체크가 아니라, `session_content_manifest`가 Task 2부터 이미 갖고 있던
+`unique(session_id, content_type, content_id)`를 그대로 겨냥하는 복합 외래키 하나로 DB 레벨에서
+강제한다(별도 트리거 불필요 — 자연스러운 FK 재사용). append-only는
+`session_annotation_events`(R8)와 동일한 이중 방어 패턴: RLS에 UPDATE/DELETE 정책을 두지 않음
+(기본 거부) + role 무관 원천 차단 BEFORE UPDATE/DELETE 트리거. 트리거 bypass GUC
+(`app.bypass_content_use_event_lock`)는 annotation_events와 동일한 관례로 테스트/정리 전용 —
+앱 코드/RLS 경로로는 어떤 role도 켤 수 없다. RLS: 조회/기록 모두
+`is_session_teacher_v3(session_id) or is_admin()`만 허용(기존 R8이 도입한 세션 담당 선생님 판정
+헬퍼를 그대로 재사용, 새 인가 메커니즘 없음) — **학생 정책은 아예 두지 않아** 조회/기록 양쪽
+모두 RLS 기본 거부로 전혀 접근 불가(annotation_events보다 좁은 경계, 계획서 decision 5).
+INSERT 정책은 `recorded_by = auth.uid()`도 강제해 타인 명의 위조 기록을 막는다.
+
+`app/session/[id]/session-content-use-actions.ts`(신규): `markMaterialUsedInLesson(sessionId,
+sectionId)`/`markProblemUsedInLesson(sessionId, problemId)` — 이 테이블의 유일한 쓰기 경로.
+`annotation-events-actions.ts`의 `appendClearAllEvent`와 동일한 패턴으로 앱 레벨 재인가를 하지
+않는다(실제 방어선은 RLS+복합 FK). `requireUser()`로 로그인만 확인.
+
+`app/session/[id]/MaterialTab.tsx`: 이 저장소에 별도 "문제" 탭은 없고(세션 뷰 탭은
+material/vocab/homework/docs/log뿐), 문제는 항상 `MaterialTab`의 교재 섹션 안에 임베드되어
+표시된다(`material.sections[].problems`) — 계획서의 "material/problem tab 컴포넌트"는 실제로는
+이 파일 하나다. 선생님에게만(`viewerRole === "teacher"`) 섹션 제목 옆 + 각 문제 카드 태그 줄
+옆에 명시적 "사용 처리" 버튼(`MarkUsedButton`)을 추가 — 클릭 시에만
+markMaterialUsedInLesson/markProblemUsedInLesson을 호출한다. 탭을 열거나 스크롤하는 것만으로는
+(IntersectionObserver 등 기존 로직 전부 그대로) 절대 호출되지 않는다.
+
+Tests: `session-content-use-events.integration.test.ts`(신규, psql 직접 검증, 8건) —
+(1) 교사가 섹션/문제를 사용 처리하면 정확히 1행씩 올바른 content_type/content_id/recorded_by로
+기록, (2) 기존 행 UPDATE/DELETE 모두 append-only 트리거가 거부(role 무관, 여전히 1행 잔존),
+(3) 학생은 쓰기(RLS 거부)도 읽기(SELECT 정책 없어 0행)도 불가 양방향 모두 확인, (4) 매니페스트를
+읽기만 하는 것(탭 열기 시뮬레이션)으로는 이벤트가 0행("봤다 ≠ 사용했다" 회귀 증명), (5) 이
+세션의 매니페스트에 없는(다른 키워드로 만든 무관한) 실재 문제를 대상으로 하면 복합 FK 위반으로
+거부되고 0행, (6) 매니페스트에 있는 콘텐츠는 관리자도(교사뿐 아니라) 기록 가능 — 그 외 무관한
+제3자 선생님 거부/recorded_by 위조 거부 2건 추가. `session-content-use-actions.test.ts`(신규,
+mocked, 3건) — content_type 고정 전달, recorded_by를 클라이언트가 아니라 `requireUser()`의
+user.id로 고정, DB 에러(예: FK 위반) 그대로 throw. `MaterialTab.test.tsx`에 3건 추가 — 선생님에게
+섹션/문제 버튼이 보이고 렌더링만으로는 액션이 호출되지 않음, 클릭해야만 호출됨, 학생에게는
+버튼이 아예 안 보임.
+
+검증: `supabase db reset --local`(신규 마이그레이션 1개 포함 전부 정상 적용) → `tsc --noEmit`
+클린 → 신규/영향 테스트 fresh reset 직후 개별 실행 전부 통과(8/8, 3/3, MaterialTab 13/13 포함) →
+전체 `vitest run --no-file-parallelism`을 fresh `supabase db reset --local` 직후 1회 실행:
+**216 files 중 214 passed / 1503 tests 중 1490 passed(8 skipped)** — 실패 5건은 전부
+`lib/booking/trial-entitlement-and-cancellation.integration.test.ts`의 `teacher_slot_not_open`
+(이 저장소에 이미 반복적으로 기록된 날짜 의존 known flaky, 이번 변경과 무관한 별도 파일 —
+docs/CURRENT.md 위 라운드들에서 동일 파일·동일 원인으로 여러 차례 재확인됨). `next build` 성공.
+
+R9 Task 4(과제 구성, 두 개의 독립 포함 토글 + 발급 시점 재검증)는 이번에도 착수하지 않음 — 별도
+제품 오너 승인 후.
