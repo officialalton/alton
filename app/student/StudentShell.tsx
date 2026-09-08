@@ -16,6 +16,7 @@ import type { Memo } from "./memo-data";
 import type { ReviewData, StudentFeedback } from "./review-data";
 import StudentHomeworkTab from "./StudentHomeworkTab";
 import type { StudentHomeworkItem } from "./homework-data";
+import type { StudentHomeworkV3Item } from "./homework-v3-data";
 import MaterialsLibraryTab from "./MaterialsLibraryTab";
 import type { LibrarySubject } from "./materials-data";
 import CreditsTab from "./CreditsTab";
@@ -74,6 +75,7 @@ export default function StudentShell({
   myFeedback,
   homeworkTodo,
   homeworkDone,
+  homeworkV3,
   materialsLibrary,
   credits,
   stats,
@@ -97,6 +99,7 @@ export default function StudentShell({
   myFeedback: Record<string, StudentFeedback>;
   homeworkTodo: StudentHomeworkItem[];
   homeworkDone: StudentHomeworkItem[];
+  homeworkV3: StudentHomeworkV3Item[];
   materialsLibrary: LibrarySubject[];
   credits: CreditsData;
   stats: StatsData;
@@ -228,6 +231,7 @@ export default function StudentShell({
             <StudentHomeworkTab
               initialTodo={homeworkTodo}
               initialDone={homeworkDone}
+              initialV3Items={homeworkV3}
             />
           ) : activeTab === "materials" ? (
             <MaterialsLibraryTab subjects={materialsLibrary} />

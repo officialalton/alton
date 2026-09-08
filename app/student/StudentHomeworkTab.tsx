@@ -3,17 +3,22 @@
 import { useState } from "react";
 import { saveHomeworkAnswer } from "@/app/session/[id]/homework-actions";
 import type { StudentHomeworkItem } from "./homework-data";
+import type { StudentHomeworkV3Item } from "./homework-v3-data";
+import { saveHomeworkV3Draft, submitHomeworkV3 } from "./homework-v3-actions";
 
 export default function StudentHomeworkTab({
   initialTodo,
   initialDone,
+  initialV3Items,
 }: {
   initialTodo: StudentHomeworkItem[];
   initialDone: StudentHomeworkItem[];
+  initialV3Items?: StudentHomeworkV3Item[];
 }) {
   const [todo, setTodo] = useState(initialTodo);
   const [done, setDone] = useState(initialDone);
   const [subtab, setSubtab] = useState<"todo" | "done">("todo");
+  const v3Items = initialV3Items ?? [];
 
   function handleSaved(item: StudentHomeworkItem, answer: string) {
     const updated = { ...item, studentAnswer: answer };
@@ -75,6 +80,114 @@ export default function StudentHomeworkTab({
             ))}
           </div>
         ))
+      )}
+
+      {v3Items.length > 0 && (
+        <div className="mt-8 pt-6 border-t border-grey-200">
+          <h2 className="text-[15px] font-extrabold text-ink mb-1">
+            새로 배정된 과제
+          </h2>
+          <p className="text-[12px] text-grey-500 mb-4">
+            선생님이 이 수업에서 새로 발급한 과제입니다.
+          </p>
+          {v3Items.map((item) => (
+            <HomeworkV3AccordionItem key={item.id} item={item} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function HomeworkV3AccordionItem({ item }: { item: StudentHomeworkV3Item }) {
+  const [open, setOpen] = useState(false);
+  const [answer, setAnswer] = useState(
+    typeof item.attempt?.response === "string" ? item.attempt.response : ""
+  );
+  const [submitted, setSubmitted] = useState(item.attempt?.submitted ?? false);
+  const [saving, setSaving] = useState(false);
+
+  const label =
+    `과제 #${item.position}` + (submitted ? " · 제출완료" : "");
+
+  async function handleSaveDraft() {
+    setSaving(true);
+    try {
+      await saveHomeworkV3Draft(item.id, answer);
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  async function handleSubmit() {
+    setSaving(true);
+    try {
+      await submitHomeworkV3(item.id, answer);
+      setSubmitted(true);
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  return (
+    <div className="border-[1.5px] border-grey-200 rounded-xl mb-2.5 overflow-hidden">
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="w-full flex items-center justify-between px-4 py-3 text-left"
+      >
+        <span className="text-[13px] font-semibold text-ink">{label}</span>
+        <span className="text-[12px] text-grey-300">{open ? "▾" : "▸"}</span>
+      </button>
+      {open && (
+        <div className="px-4 pb-4">
+          {!item.contentVisible ? (
+            <p className="text-[13px] text-grey-500 leading-[1.6]">
+              현재 이 문제는 볼 수 없습니다(선생님이 확정을 취소했을 수
+              있습니다). 배정 자체는 유지됩니다.
+            </p>
+          ) : (
+            <>
+              {item.problem?.passage && (
+                <>
+                  <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-1">
+                    문제
+                  </div>
+                  <p className="text-[13px] text-ink leading-[1.6] mb-3 whitespace-pre-wrap">
+                    {item.problem.passage}
+                  </p>
+                </>
+              )}
+              <textarea
+                value={answer}
+                onChange={(e) => setAnswer(e.target.value)}
+                disabled={submitted}
+                placeholder="답안을 작성하세요"
+                className="w-full min-h-[70px] px-3 py-2.5 border-[1.5px] border-grey-200 rounded-lg text-[13px] disabled:opacity-60"
+              />
+              {!submitted && (
+                <div className="flex gap-2 mt-2">
+                  <button
+                    onClick={handleSaveDraft}
+                    disabled={saving}
+                    className="text-[12px] font-semibold px-3 py-1.5 rounded-lg border border-grey-200"
+                  >
+                    임시 저장
+                  </button>
+                  <button
+                    onClick={handleSubmit}
+                    disabled={saving}
+                    className="text-[12px] font-semibold px-3 py-1.5 rounded-lg bg-ink text-white"
+                  >
+                    제출하기
+                  </button>
+                </div>
+              )}
+              {saving && (
+                <p className="text-[11px] text-grey-500 mt-1">저장 중...</p>
+              )}
+            </>
+          )}
+        </div>
       )}
     </div>
   );

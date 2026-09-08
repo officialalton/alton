@@ -1,5 +1,59 @@
 # ALTON — 현재 상태 (2026-09-08 기준)
 
+> **2026-09-08 — Part C: R9 corrective — Task 4(과제 구성)가 놓친 학생 read/write
+> 경로 수정.**
+>
+> **문제:** Task 4(`20261235000000_r9_homework_composition.sql`)는
+> `session_homework_items`의 RLS를 Task 3(`session_content_use_events`, 내부
+> 교사 기록)과 똑같이 "담당 선생님/관리자만 읽기·쓰기"로 만들었다. Task 3에는
+> 맞는 패턴이었지만(교사 내부 사용 기록), 과제는 정의상 학생이 읽고 답을
+> 내야 하는 것이라 그대로 베끼면 안 됐다 — 제품 오너 리뷰가 지적한 진짜
+> 공백. 결과적으로 (a) 학생이 본인에게 발급된 과제를 읽을 방법이 없었고,
+> (b) v3 답안을 담을 테이블 자체가 없었고(기존 `session_problem_attempts`는
+> `legacy_sessions`를 참조하는 별개 테이블이라 재사용 불가 — Task 4 헤더
+> 주석에서 이미 확인된 사실과 동일한 이유), (c) 학생 포털에 "배정된 과제
+> 목록 → 문제 내용 → 저장/제출"로 이어지는 실제 UI 경로가 없었다("발급
+> 완료" 라벨만 있고 그 다음이 없었다).
+>
+> **고침(`20261240000000_r9_corrective_student_homework_access.sql` +
+> 앱 레이어):**
+> 1. `session_homework_items`에 "학생 본인 조회" SELECT 정책 추가
+>    (`student_id = auth.uid()` — `students.id`가 `profiles.id = auth.uid()`를
+>    그대로 참조하므로 이 직접 비교가 "본인 것만"을 정확히 포착, 별도로
+>    `is_owning_student_for_enrollment()`를 경유할 필요 없음).
+> 2. 새 v3 답안 테이블 `session_homework_attempts` 추가 — "학생당 과제 항목당
+>    한 행, `submitted=false`인 동안 수정 가능, `submitted=true`가 되면
+>    트리거로 무조건 잠김(GUC bypass 없음 — 이 세션에서 세 차례 확인된
+>    안티패턴을 다시 만들지 않음)". append-only 이벤트 로그가 아니라 mutable
+>    단일 행을 택한 이유: 답안 초안은 "일어난 사실의 불변 기록"이 아니라
+>    "학생이 고쳐 쓰다가 최종 제출하는 진행 중인 입력"이라는 본질이 다르기
+>    때문(마이그레이션 파일 §2 주석에 근거 기록).
+> 3. 쓰기 인가: RLS `WITH CHECK` + 독립 SECURITY DEFINER 트리거
+>    (`check_homework_attempt_assigned_to_student`) 이중 방어로 "본인에게
+>    실제 배정된 항목에만" 답안을 쓸 수 있게 강제. 선생님/관리자에게는 쓰기
+>    권한을 주지 않음(학생 답안 대필/위조 선례가 코드베이스 어디에도 없어
+>    과잉 설계하지 않음) — 읽기만 `is_session_teacher_v3()`/`is_admin()`으로
+>    허용.
+> 4. 표시 시점 confirmed 재검증: `problems`에 "본인에게 과제로 배정된 문제는
+>    학생도 조회" SELECT 정책을 추가하되 status 필터는 걸지 않고(행 자체는
+>    항상 보임), `app/student/homework-v3-data.ts`가 Task 2 manifest 리더와
+>    동일한 정신으로 `problems.status`를 다시 읽어 confirmed가 아니면 콘텐츠만
+>    숨긴다(항목/배정 사실은 유지).
+> 5. 실제 학생 포털 UI: `app/student/homework-v3-data.ts`(리더),
+>    `app/student/homework-v3-actions.ts`(`saveHomeworkV3Draft`/
+>    `submitHomeworkV3` 서버 액션, RLS에 인가 위임), `StudentHomeworkTab.tsx`에
+>    "새로 배정된 과제" 섹션 추가(문제 내용 표시 → 임시 저장/제출 버튼).
+>    기존 legacy `homework_items`/`session_problem_attempts` 경로
+>    (`homework-data.ts`/`StudentHomeworkTab.tsx`의 기존 부분)는 전혀 건드리지
+>    않고 별도 섹션으로 병존시킴(두 개념을 절대 합치지 않음).
+>
+> **검증:** `supabase db reset --local` → `tsc --noEmit`(클린) →
+> `homework-v3.integration.test.ts`(11개, psql 직접 RLS/트리거 검증) +
+> `homework-v3-data.test.ts`(4개) + `homework-v3-actions.test.ts`(4개) +
+> `StudentHomeworkTab.test.tsx`/`StudentShell.test.tsx`(회귀) 전부 통과 →
+> `vitest run --no-file-parallelism` 풀스위트를 fresh reset 후 **두 번
+> 연속** 실행, 둘 다 224 files/1540 tests 100% 통과 → `next build` 성공.
+>
 > **2026-09-08 — Part A: `teacher_slot_not_open` 날짜 의존 실패 근본 수정 +
 > Part B: R9 Task 4(과제 구성) 구현, 계획 완료.**
 >
