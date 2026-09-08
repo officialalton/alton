@@ -3777,3 +3777,78 @@ non-prod 반영 전에 별도 보안 정리 라운드로 반드시 닫아야 한
 R9 Task 4는 착수 승인됨. 단, **`teacher_slot_not_open` 날짜 의존 테스트 실패는 Task 4 최종
 검수 전까지 근본 원인을 고쳐 전체 테스트가 실제로 녹색인 상태를 만들어야 한다** — 단독 실행
 실패를 "flaky"로 보고 끝내는 것은 허용되지 않는다(제품 오너 명시).
+
+## 2026-09-08 — R9 corrective: composeHomeworkFromSession() Gap 1/2 (v3 제출 제외 + 재구성 원자성)
+
+`b38fbab`(Gap 1/2 v3 과제 UI + 읽기전용 제출 현황) 이후 제품 오너 재검토로 확인된, Task 4의
+`composeHomeworkFromSession()` 자체(`d7f29fa`)에 남아있던 두 가지 진짜 공백을 고쳤다.
+
+**Gap 1 — `includeAlreadyAttempted` 토글이 legacy만 보고 v3 제출을 못 봄.** 종전 구현은
+`session_problem_attempts`(legacy)만 조회했다 — `session_homework_attempts`(v3, `2482908`)에
+`submitted=true`로 제출된 문제는 여전히 후보 풀에 남아 재출제될 수 있었다. 반면 draft
+(`submitted=false`)는 "이미 풀어봄"이 아니므로 계속 후보에 남아야 한다.
+
+제약(제품 오너 지시): 과제를 구성하는 선생님/관리자가 "이 학생이 어떤 problem_id를 제출했는가"만
+판별해야지, 다른 세션(다른 담당 선생님)의 실제 답안 원문(`response`)까지 열람 가능해져서는 안
+된다. `session_homework_attempts`의 기존 RLS(`2482908`)는 "그 항목이 속한 세션의 담당
+선생님"만 조회를 허용하므로, 그대로는 다른 세션에서 제출된 v3 attempt를 지금 이 세션 담당
+선생님이 볼 수 없다 — 이 교차-세션 판별 자체가 기존 RLS 밖의 새로운 필요다.
+
+**Gap 2 — 같은 세션 재구성 시 중복/부분실패/동시성.** 재구성이 이미 발급된 problem_id를 후보에서
+빼지 않아 `(session_id, problem_id)` 유니크 제약을 건드리면 요청 전체가 실패했다. 게다가
+"후보 조회 → 삽입"이 앱 레이어의 여러 왕복 요청(`.from()` 호출 여러 번)으로 나뉘어 있어 동시
+호출(더블클릭, 두 관리자 탭) 사이에 원자성이 없었다 — SELECT와 INSERT 사이 gap에 다른 요청이
+끼어들어 중복/position 충돌/부분 기록이 가능했다.
+
+**해결(마이그레이션 `20261250000000_r9_corrective_atomic_compose_homework.sql`):**
+후보 조회부터 삽입까지 전부를 단일 SECURITY DEFINER 함수 `compose_homework_from_session(
+p_session_id, p_keyword_ids, p_count, p_include_used_in_lesson, p_include_already_attempted)`
+하나로 묶었다 — Task 4 자체 설계(이미 SECURITY DEFINER 트리거로 confirmed 게이트를 두는 등
+DB 레벨 방어를 쓰는 아키텍처)에 가장 잘 맞는 확장이라 판단해, 앱 레이어에 새 왕복 요청을 추가하는
+대신 이 함수 내부에서 직접 `session_homework_attempts`를 join했다(프롬프트가 제시한 두 대안 중
+(b)). 함수 하나의 호출은 하나의 트랜잭션이라 그 자체로 원자적이고(전부 성공 또는 전부 롤백),
+`pg_advisory_xact_lock(hashtext(session_id))`로 같은 세션에 대한 동시 호출만 직렬화한다(다른
+세션의 동시 구성은 서로 막지 않음) — SELECT 이후 INSERT 사이의 gap에 다른 트랜잭션이 끼어들 수
+없다. 인가는 새 프리미티브를 만들지 않고 기존 `is_active_teacher_for_enrollment()`/`is_admin()`
+(`20261229000000`, student-curriculum-actions.ts의 `requireAssignedTeacherOrAdmin`과 동일한
+판정)을 그대로 재사용한다 — 이 함수가 SECURITY DEFINER라서 이 검사가 유일한 실제 방어선이다.
+
+Gap 1의 최소 노출은 이 함수 안에서 `session_homework_items` ⋈ `session_homework_attempts`를
+`problem_id`만 select하는 CTE로 구현했다 — `response` 컬럼은 이 함수 어디에서도 select하지
+않는다. Gap 2의 재구성 제외는 "이 세션에 이미 발급된 problem_id" CTE로 후보에서 뺀다(누가
+언제 구성했든). position은 세션 내 기존 최댓값(`v_start_position`, 락 획득 이후 조회라
+동시성 안전) 다음부터 이어서 매긴다. 요청한 `count`보다 후보가 적으면 `issued_count <
+requested_count`를 정직하게 반환한다 — 조용히 성공한 척하지 않는다.
+
+앱 레이어(`app/teacher/homework-composition-actions.ts`)는 이 RPC를 부르는 얇은 래퍼로
+바뀌었다: 반환 타입이 `string[]`에서 `{ issuedProblemIds, requestedCount, issuedCount }`로
+바뀌었고(하위 호환 깨는 의도적 변경 — 정직한 개수 신호를 UI까지 전달하기 위함),
+`HomeworkTab.tsx`의 "이 세션에서 과제 구성" UI가 `issuedCount < requestedCount`일 때
+"요청 N개 중 M개만 발급되었습니다(후보 부족)"를 명시적으로 보여준다.
+
+Tests: `app/teacher/homework-composition.integration.test.ts`에 4개 시나리오 추가(psql 직접
+DB 검증, `d7f29fa`/`2482908`이 이미 쓰던 패턴 재사용) —
+(1) 세션 A에서 제출 완료(submitted=true)된 문제는 새 세션 B 재구성 시 기본값(둘 다 끔)에서
+`issuedProblemIds`에 없고 `issuedCount=0`, `includeAlreadyAttempted=true`로 켜면
+`issuedProblemIds`에 포함되고 `issuedCount=1`로 재등장 확인 + legacy
+`session_problem_attempts` 경로 회귀 확인 1건 추가,
+(2) 초안(submitted=false)만 있는 문제는 기본값(끔)에서도 `issuedProblemIds`에 포함, `issuedCount=1`,
+(3) 후보 2개짜리 세션에 count=1로 먼저 구성(`issuedCount=1`, position=1) 후 같은 세션에
+count=5로 재구성하면 첫 번째로 뽑힌 problem_id는 다시 뽑히지 않고 나머지 하나만
+`issuedCount=1`·position=2로 발급, 총 행 수 2/distinct problem_id 2 확인, 후보 소진 후
+세 번째 호출은 `issuedCount=0`을 정직하게 반환(요청한 개수인 척하지 않음) 확인,
+(4) 후보 3개짜리 세션에 대해 `Promise.all`로 실제 두 개의 별도 psql 프로세스를 동시 실행,
+합쳐서 정확히 3개만 발급되고(`resultA.issuedCount + resultB.issuedCount === 3`) 중복
+problem_id 0건(`new Set(allIssuedIds).size === 3`), DB의 최종 행 수 3/distinct problem_id
+3/distinct position 3, position이 정확히 "1,2,3"으로 충돌 없이 이어짐을 확인.
+`homework-composition-toggles.test.ts`는 로직이 SQL로 이동함에 따라 "RPC를 올바른 인자로
+호출하고 응답을 정직하게 매핑하는가"만 가짜 클라이언트로 검증하도록 재작성(4건).
+`homework-composition-actions.test.ts`의 빈 결과 케이스도 새 반환 타입에 맞춰 갱신.
+
+검증: `supabase db reset --local`(신규 마이그레이션 정상 적용) → 영향 테스트 3개 파일 개별 실행
+19/19 통과(위 4개 시나리오 포함) → `tsc --noEmit` 클린 → 전체 `vitest run --no-file-parallelism`을
+fresh `supabase db reset --local` 직후 연속 2회 실행: **1회차 226 files/1564 tests 전부 통과,
+2회차도 226 files/1564 tests 전부 통과** — `teacher_slot_not_open` 등 이전에 기록됐던 날짜
+의존 flaky는 이번 두 번 모두 재현되지 않았다(0 실패). `next build` 성공.
+
+이것으로 R9 레슨 준비 계획(Task 1-4) 전체가 제품 오너 최종 승인 대기 상태다.

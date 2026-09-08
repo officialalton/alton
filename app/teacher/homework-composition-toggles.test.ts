@@ -1,18 +1,21 @@
 import { describe, expect, it, vi } from "vitest";
 
-// R9(레슨 준비 Task 4) — composeHomeworkFromSession()의 후보 풀 계산 로직
-// (issue-time 재검증 + 두 토글의 독립 적용)을 가짜 supabase 클라이언트로
-// 검증한다. 인가/에러 케이스는 homework-composition-actions.test.ts가 이미
-// 다룬다 — 이 파일은 오직 "어떤 문제가 최종 후보 풀/발급 목록에 남는가"에
-// 집중한다.
+// R9 corrective(20261250000000) — composeHomeworkFromSession()의 후보 풀
+// 계산/토글 필터링/이미-발급-제외/원자성은 이제 DB 함수
+// compose_homework_from_session() 안에서 전부 이뤄진다(app/teacher/
+// homework-composition.integration.test.ts가 실제 DB로 그 로직 자체를
+// 검증한다). 이 파일은 오직 "서버 액션이 그 RPC를 올바른 인자로 부르고,
+// 반환된 issued_problem_ids/requested_count/issued_count를 그대로 정직하게
+// 앱 형태로 매핑하는가"만 가짜 supabase 클라이언트로 확인한다.
 
 const { mockSupabase, state } = vi.hoisted(() => {
   const state: {
-    selectableProblemIds: string[]; // problem_keywords_selectable을 통과하는 문제(=confirmed 재검증 결과)
-    usedProblemIds: string[]; // session_content_use_events에 있는 문제
-    attemptedProblemIds: string[]; // session_problem_attempts에 있는 문제
-    inserted: Array<Record<string, unknown>>;
-  } = { selectableProblemIds: [], usedProblemIds: [], attemptedProblemIds: [], inserted: [] };
+    rpcArgs: Record<string, unknown> | null;
+    rpcResult: { issued_problem_ids: string[] | null; requested_count: number; issued_count: number };
+  } = {
+    rpcArgs: null,
+    rpcResult: { issued_problem_ids: [], requested_count: 0, issued_count: 0 },
+  };
 
   const mockSupabase = {
     auth: { getUser: vi.fn().mockResolvedValue({ data: { user: { id: "teacher1" } } }) },
@@ -48,64 +51,11 @@ const { mockSupabase, state } = vi.hoisted(() => {
           }),
         };
       }
-      if (table === "problem_keywords_selectable") {
-        return {
-          select: () => ({
-            in: () =>
-              Promise.resolve({
-                data: state.selectableProblemIds.map((problem_id) => ({ problem_id })),
-                error: null,
-              }),
-          }),
-        };
-      }
-      if (table === "session_content_use_events") {
-        return {
-          select: () => ({
-            eq: () => ({
-              eq: () => ({
-                in: () =>
-                  Promise.resolve({
-                    data: state.usedProblemIds.map((content_id) => ({ content_id })),
-                    error: null,
-                  }),
-              }),
-            }),
-          }),
-        };
-      }
-      if (table === "session_problem_attempts") {
-        return {
-          select: () => ({
-            eq: () => ({
-              in: () =>
-                Promise.resolve({
-                  data: state.attemptedProblemIds.map((problem_id) => ({ problem_id })),
-                  error: null,
-                }),
-            }),
-          }),
-        };
-      }
-      if (table === "session_homework_items") {
-        return {
-          select: () => ({
-            eq: () => ({
-              order: () => ({
-                limit: () => Promise.resolve({ data: [], error: null }),
-              }),
-            }),
-          }),
-          insert: (rows: Array<Record<string, unknown>>) => {
-            state.inserted = rows;
-            return {
-              select: () =>
-                Promise.resolve({ data: rows.map((r) => ({ problem_id: r.problem_id })), error: null }),
-            };
-          },
-        };
-      }
       throw new Error(`unexpected table ${table}`);
+    }),
+    rpc: vi.fn((_name: string, args: Record<string, unknown>) => {
+      state.rpcArgs = args;
+      return { single: () => Promise.resolve({ data: state.rpcResult, error: null }) };
     }),
   };
   return { mockSupabase, state };
@@ -117,74 +67,59 @@ vi.mock("@/utils/supabase/server", () => ({
 
 import { composeHomeworkFromSession } from "./homework-composition-actions";
 
-describe("composeHomeworkFromSession — 발급 시점 재검증", () => {
-  it("problem_keywords 관계는 있어도 지금 unconfirmed면(=problem_keywords_selectable 밖) 후보에서 빠진다", async () => {
-    // problem_keywords_selectable을 통과하는 것은 confirmed-p뿐 — unconfirmed-p는
-    // 태깅 시점엔 존재했더라도 이 뷰가 이미 걸러낸 상태로 이 함수에 도달한다.
-    state.selectableProblemIds = ["confirmed-p"];
-    state.usedProblemIds = [];
-    state.attemptedProblemIds = [];
+describe("composeHomeworkFromSession — RPC 위임", () => {
+  it("compose_homework_from_session RPC를 올바른 인자로 호출한다", async () => {
+    state.rpcResult = { issued_problem_ids: ["p1", "p2"], requested_count: 5, issued_count: 2 };
 
-    const result = await composeHomeworkFromSession("sess1", ["kw1"], 10, {
+    const result = await composeHomeworkFromSession("sess1", ["kw1", "kw2"], 5, {
       includeUsedInLesson: true,
-      includeAlreadyAttempted: true,
+      includeAlreadyAttempted: false,
     });
 
-    expect(result).toEqual(["confirmed-p"]);
-    expect(result).not.toContain("unconfirmed-p");
+    expect(mockSupabase.rpc).toHaveBeenCalledWith("compose_homework_from_session", {
+      p_session_id: "sess1",
+      p_keyword_ids: ["kw1", "kw2"],
+      p_count: 5,
+      p_include_used_in_lesson: true,
+      p_include_already_attempted: false,
+    });
+    expect(result).toEqual({ issuedProblemIds: ["p1", "p2"], requestedCount: 5, issuedCount: 2 });
   });
-});
 
-describe("composeHomeworkFromSession — 두 토글의 독립 적용(4가지 조합)", () => {
-  // 고정 픽스처: neither(둘 다 아님), used(사용됨만), attempted(풀어봄만), both(둘 다).
-  function setFixture() {
-    state.selectableProblemIds = ["neither", "used", "attempted", "both"];
-    state.usedProblemIds = ["used", "both"];
-    state.attemptedProblemIds = ["attempted", "both"];
-  }
+  it("issued_problem_ids가 null이면 빈 배열로 매핑한다(후보가 아예 없던 경우)", async () => {
+    state.rpcResult = { issued_problem_ids: null, requested_count: 3, issued_count: 0 };
 
-  it("둘 다 끔 — neither만 포함", async () => {
-    setFixture();
+    const result = await composeHomeworkFromSession("sess1", ["kw1"], 3, {
+      includeUsedInLesson: false,
+      includeAlreadyAttempted: false,
+    });
+
+    expect(result).toEqual({ issuedProblemIds: [], requestedCount: 3, issuedCount: 0 });
+  });
+
+  it("issued_count < requested_count를 그대로 정직하게 전달한다(부족을 숨기지 않음)", async () => {
+    state.rpcResult = { issued_problem_ids: ["p1"], requested_count: 10, issued_count: 1 };
+
     const result = await composeHomeworkFromSession("sess1", ["kw1"], 10, {
       includeUsedInLesson: false,
       includeAlreadyAttempted: false,
     });
-    expect(result.sort()).toEqual(["neither"]);
+
+    expect(result.issuedCount).toBe(1);
+    expect(result.requestedCount).toBe(10);
+    expect(result.issuedCount).toBeLessThan(result.requestedCount);
   });
 
-  it("사용된 문제만 포함(includeUsedInLesson=true, includeAlreadyAttempted=false) — neither+used, attempted/both 제외", async () => {
-    setFixture();
-    const result = await composeHomeworkFromSession("sess1", ["kw1"], 10, {
-      includeUsedInLesson: true,
-      includeAlreadyAttempted: false,
-    });
-    expect(result.sort()).toEqual(["neither", "used"]);
-  });
+  it("RPC가 에러를 반환하면 그대로 던진다", async () => {
+    mockSupabase.rpc = vi.fn(() => ({
+      single: () => Promise.resolve({ data: null, error: { message: "boom" } }),
+    })) as unknown as typeof mockSupabase.rpc;
 
-  it("이미 풀어본 문제만 포함(includeUsedInLesson=false, includeAlreadyAttempted=true) — neither+attempted, used/both 제외", async () => {
-    setFixture();
-    const result = await composeHomeworkFromSession("sess1", ["kw1"], 10, {
-      includeUsedInLesson: false,
-      includeAlreadyAttempted: true,
-    });
-    expect(result.sort()).toEqual(["attempted", "neither"]);
-  });
-
-  it("둘 다 켬 — 네 개 전부 포함", async () => {
-    setFixture();
-    const result = await composeHomeworkFromSession("sess1", ["kw1"], 10, {
-      includeUsedInLesson: true,
-      includeAlreadyAttempted: true,
-    });
-    expect(result.sort()).toEqual(["attempted", "both", "neither", "used"]);
-  });
-
-  it("count로 발급 개수를 제한한다", async () => {
-    setFixture();
-    const result = await composeHomeworkFromSession("sess1", ["kw1"], 2, {
-      includeUsedInLesson: true,
-      includeAlreadyAttempted: true,
-    });
-    expect(result.length).toBe(2);
+    await expect(
+      composeHomeworkFromSession("sess1", ["kw1"], 5, {
+        includeUsedInLesson: false,
+        includeAlreadyAttempted: false,
+      })
+    ).rejects.toThrow("boom");
   });
 });

@@ -1,13 +1,18 @@
-import { execFileSync } from "node:child_process";
+import { execFile, execFileSync } from "node:child_process";
+import { promisify } from "node:util";
 import { afterEach, describe, expect, it } from "vitest";
+
+const execFileAsync = promisify(execFile);
 
 // R9(레슨 준비 Task 4) — session_homework_items/check_homework_item_problem_confirmed
 // (supabase/migrations/20261235000000_r9_homework_composition.sql)의 DB 레벨
 // 강제(confirmed 게이트, RLS)를 session-content-manifest.integration.test.ts와
-// 동일한 psql 직접 검증 패턴으로 확인한다. composeHomeworkFromSession() 자체
-// (후보 풀 계산/토글 필터링)는 app/teacher/homework-composition-toggles.test.ts가
-// 가짜 supabase 클라이언트로 이미 검증했다 — 이 파일은 "앱 코드를 우회해도
-// DB가 막는가"만 겨냥한다.
+// 동일한 psql 직접 검증 패턴으로 확인한다. composeHomeworkFromSession() 자체의
+// 얇은 RPC 위임은 app/teacher/homework-composition-toggles.test.ts가 가짜
+// supabase 클라이언트로 검증했다 — 이 파일은 "앱 코드를 우회해도 DB가
+// 막는가"에 더해, R9 corrective(20261250000000)가 고친 compose_homework_from_session()
+// DB 함수 자체(v3 제출 완료 제외, 재구성 시 중복 제외, 동시 호출 원자성/정직한
+// issued_count)를 실제 DB로 겨냥한다.
 
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
 
@@ -129,6 +134,85 @@ function makeVisibleConfirmedProblem(): string {
   );
 }
 
+type ComposeResult = { issuedProblemIds: string[]; requestedCount: number; issuedCount: number };
+
+function parseComposeRow(raw: string): ComposeResult {
+  const [idsField, requestedField, issuedField] = raw.split("|");
+  const idsStr = (idsField ?? "").trim();
+  return {
+    issuedProblemIds: idsStr.length > 0 ? idsStr.split(",") : [],
+    requestedCount: Number(requestedField),
+    issuedCount: Number(issuedField),
+  };
+}
+
+function compose(
+  userId: string,
+  sessionId: string,
+  keywordIds: string[],
+  count: number,
+  includeUsedInLesson: boolean,
+  includeAlreadyAttempted: boolean
+): ComposeResult {
+  const kwArray = `array[${keywordIds.map((id) => `'${id}'`).join(",")}]::uuid[]`;
+  const raw = asUser(
+    userId,
+    `select array_to_string(issued_problem_ids, ',') as ids, requested_count, issued_count
+     from compose_homework_from_session('${sessionId}', ${kwArray}, ${count}, ${includeUsedInLesson}, ${includeAlreadyAttempted});`
+  );
+  return parseComposeRow(raw);
+}
+
+async function composeAsync(
+  userId: string,
+  sessionId: string,
+  keywordIds: string[],
+  count: number,
+  includeUsedInLesson: boolean,
+  includeAlreadyAttempted: boolean
+): Promise<ComposeResult> {
+  const kwArray = `array[${keywordIds.map((id) => `'${id}'`).join(",")}]::uuid[]`;
+  const sql = `
+    set role authenticated;
+    do $$ begin perform set_config('request.jwt.claim.sub', '${userId}', false); end $$;
+    select array_to_string(issued_problem_ids, ',') as ids, requested_count, issued_count
+    from compose_homework_from_session('${sessionId}', ${kwArray}, ${count}, ${includeUsedInLesson}, ${includeAlreadyAttempted});
+    reset role;
+  `;
+  const { stdout } = await execFileAsync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-q", "-t", "-A", "-c", sql]);
+  return parseComposeRow(stdout.trim());
+}
+
+function makeKeyword(): string {
+  return psql(
+    `insert into subject_keywords (subject_id, label, normalized_label)
+     values ('${SUBJECT_ID}', '키워드 ${Date.now()}_${Math.random()}', 'kw-${Date.now()}-${Math.random()}') returning id;`
+  );
+}
+
+function tagProblemWithKeyword(problemId: string, keywordId: string): void {
+  psql(
+    `insert into problem_keywords (problem_id, keyword_id, created_by) values ('${problemId}', '${keywordId}', '${ADMIN_ID}');`
+  );
+}
+
+// 담당 선생님 명의로 session_homework_items에 직접 발급한 항목을 만든다(테스트
+// 픽스처 — compose 함수 자체를 쓰지 않고 "이미 발급됨" 상태를 준비할 때).
+function issueHomeworkItemDirect(sessionId: string, problemId: string, studentId: string, position: number): string {
+  return asUser(
+    TEACHER_ID,
+    `insert into session_homework_items (session_id, problem_id, student_id, position, composed_by)
+     values ('${sessionId}', '${problemId}', '${studentId}', ${position}, '${TEACHER_ID}') returning id;`
+  );
+}
+
+function submitHomeworkAttempt(homeworkItemId: string, studentId: string, submitted: boolean): void {
+  psql(
+    `insert into session_homework_attempts (homework_item_id, student_id, response, submitted)
+     values ('${homeworkItemId}', '${studentId}', '{"type":"text","text":"x"}'::jsonb, ${submitted});`
+  );
+}
+
 describe("session_homework_items — confirmed 게이트(DB 레벨, 앱 코드 우회해도 막힘)", () => {
   it("confirmed 문제는 정상적으로 insert된다", () => {
     const { sessionId, contractId } = makeEnrollmentWithSession();
@@ -225,6 +309,166 @@ describe("session_homework_items — RLS(세션 담당 선생님/관리자만 �
     );
     const rows = asUser(TEACHER_ID, `select count(*) from session_homework_items where session_id = '${sessionId}';`);
     expect(rows).toBe("1");
+    void contractId;
+  });
+});
+
+describe("compose_homework_from_session — Gap 1: v3 제출 완료(submitted=true)도 '이미 풀어봄'으로 친다", () => {
+  it("시나리오 1: 제출된 v3 과제 문제는 새 세션 재구성 시 기본값(끔)에서 제외되고, 토글을 켜면 다시 나타난다", () => {
+    const { sessionId: sessionA, contractId } = makeEnrollmentWithSession();
+    const keywordId = makeKeyword();
+    const problemId = makeProblem("confirmed");
+    tagProblemWithKeyword(problemId, keywordId);
+
+    // 세션 A에서 이 문제를 과제로 발급하고, 학생이 "제출"까지 마친 상태를 만든다.
+    const itemId = issueHomeworkItemDirect(sessionA, problemId, STUDENT_ID, 1);
+    submitHomeworkAttempt(itemId, STUDENT_ID, true);
+
+    // 같은 과목/키워드의 새 세션 B에서 재구성 — 기본값(끔)이면 제외되어야 한다.
+    const { sessionId: sessionB } = makeEnrollmentWithSession();
+    const excluded = compose(TEACHER_ID, sessionB, [keywordId], 10, false, false);
+    expect(excluded.issuedProblemIds).not.toContain(problemId);
+    expect(excluded.issuedCount).toBe(0);
+    expect(excluded.requestedCount).toBe(10);
+
+    // includeAlreadyAttempted=true로 켜면 다시 후보에 포함되어 발급된다.
+    const included = compose(TEACHER_ID, sessionB, [keywordId], 10, false, true);
+    expect(included.issuedProblemIds).toContain(problemId);
+    expect(included.issuedCount).toBe(1);
+
+    void contractId;
+  });
+
+  it("시나리오 2: 초안(submitted=false)뿐인 v3 과제 문제는 기본값(끔)에서도 여전히 후보로 남는다", () => {
+    const { sessionId: sessionA, contractId } = makeEnrollmentWithSession();
+    const keywordId = makeKeyword();
+    const problemId = makeProblem("confirmed");
+    tagProblemWithKeyword(problemId, keywordId);
+
+    const itemId = issueHomeworkItemDirect(sessionA, problemId, STUDENT_ID, 1);
+    submitHomeworkAttempt(itemId, STUDENT_ID, false); // draft — 제출 아님
+
+    const { sessionId: sessionB } = makeEnrollmentWithSession();
+    const result = compose(TEACHER_ID, sessionB, [keywordId], 10, false, false);
+    expect(result.issuedProblemIds).toContain(problemId);
+    expect(result.issuedCount).toBe(1);
+    expect(result.requestedCount).toBe(10);
+
+    void contractId;
+  });
+
+  it("legacy session_problem_attempts로 '이미 풀어봄'인 문제도 여전히 정상적으로 제외/포함된다(회귀)", () => {
+    const { sessionId: sessionA, contractId } = makeEnrollmentWithSession();
+    const keywordId = makeKeyword();
+    const problemId = makeProblem("confirmed");
+    tagProblemWithKeyword(problemId, keywordId);
+    // legacy 경로: session_problem_attempts에 학생의 시도 기록을 직접 남긴다.
+    psql(
+      `insert into session_problem_attempts (session_id, student_id, problem_id, response, saved)
+       values ((select id from legacy_sessions limit 1), '${STUDENT_ID}', '${problemId}', '{}'::jsonb, true);`
+    );
+
+    const excluded = compose(TEACHER_ID, sessionA, [keywordId], 10, false, false);
+    expect(excluded.issuedProblemIds).not.toContain(problemId);
+
+    const included = compose(TEACHER_ID, sessionA, [keywordId], 10, false, true);
+    expect(included.issuedProblemIds).toContain(problemId);
+
+    void contractId;
+  });
+});
+
+describe("compose_homework_from_session — Gap 2: 같은 세션 재구성 시 중복 제외 + position 연속 + 정직한 issued_count", () => {
+  it("시나리오 3: 같은 세션에 두 번 구성해도 이미 발급된 문제가 재선택되지 않고, position이 이어진다", () => {
+    const { sessionId, contractId } = makeEnrollmentWithSession();
+    const keywordId = makeKeyword();
+    const problemA = makeProblem("confirmed");
+    const problemB = makeProblem("confirmed");
+    tagProblemWithKeyword(problemA, keywordId);
+    tagProblemWithKeyword(problemB, keywordId);
+
+    const first = compose(TEACHER_ID, sessionId, [keywordId], 1, false, false);
+    expect(first.issuedCount).toBe(1);
+    expect(first.issuedProblemIds.length).toBe(1);
+    const firstIssuedId = first.issuedProblemIds[0];
+    expect([problemA, problemB]).toContain(firstIssuedId);
+
+    const firstPosition = Number(
+      psql(`select position from session_homework_items where session_id = '${sessionId}' and problem_id = '${firstIssuedId}';`)
+    );
+    expect(firstPosition).toBe(1);
+
+    // 두 번째 구성: count=5를 요청하지만 남은 후보는 하나뿐 — 첫 번째로 발급된
+    // 문제는 다시 뽑히지 않고, 나머지 하나만 발급되며 position은 2로 이어진다.
+    const second = compose(TEACHER_ID, sessionId, [keywordId], 5, false, false);
+    expect(second.issuedCount).toBe(1);
+    expect(second.requestedCount).toBe(5);
+    expect(second.issuedProblemIds).not.toContain(firstIssuedId);
+    const secondIssuedId = second.issuedProblemIds[0];
+    expect([problemA, problemB]).toContain(secondIssuedId);
+    expect(secondIssuedId).not.toBe(firstIssuedId);
+
+    const secondPosition = Number(
+      psql(`select position from session_homework_items where session_id = '${sessionId}' and problem_id = '${secondIssuedId}';`)
+    );
+    expect(secondPosition).toBe(2);
+
+    // 총 발급 행 수는 정확히 2, 중복 problem_id 없음.
+    const totalCount = psql(`select count(*) from session_homework_items where session_id = '${sessionId}';`);
+    expect(totalCount).toBe("2");
+    const distinctCount = psql(
+      `select count(distinct problem_id) from session_homework_items where session_id = '${sessionId}';`
+    );
+    expect(distinctCount).toBe("2");
+
+    // 후보가 완전히 소진된 세 번째 호출은 정직하게 issued_count=0을 반환한다
+    // (요청한 개수인 것처럼 속이지 않음).
+    const third = compose(TEACHER_ID, sessionId, [keywordId], 3, false, false);
+    expect(third.issuedCount).toBe(0);
+    expect(third.requestedCount).toBe(3);
+    expect(third.issuedProblemIds).toEqual([]);
+
+    void contractId;
+  });
+});
+
+describe("compose_homework_from_session — 시나리오 4: 동시 호출 원자성/직렬화", () => {
+  it("같은 세션에 대한 두 동시 호출이 중복 problem_id/position 충돌 없이, 후보 소진분만큼만 정직하게 나눠 발급한다", async () => {
+    const { sessionId, contractId } = makeEnrollmentWithSession();
+    const keywordId = makeKeyword();
+    // 후보를 정확히 3개만 준비 — 두 동시 호출이 각각 count=3을 요청하면 합쳐서
+    // 최대 3개만 발급될 수 있어야 한다(3+3=6이 아니라).
+    const problemIds = [makeProblem("confirmed"), makeProblem("confirmed"), makeProblem("confirmed")];
+    for (const p of problemIds) tagProblemWithKeyword(p, keywordId);
+
+    const [resultA, resultB] = await Promise.all([
+      composeAsync(TEACHER_ID, sessionId, [keywordId], 3, false, false),
+      composeAsync(TEACHER_ID, sessionId, [keywordId], 3, false, false),
+    ]);
+
+    const allIssuedIds = [...resultA.issuedProblemIds, ...resultB.issuedProblemIds];
+    // 합쳐서 정확히 후보 수(3)만큼만 발급됐고, 중복이 없다.
+    expect(allIssuedIds.length).toBe(3);
+    expect(new Set(allIssuedIds).size).toBe(3);
+    expect(resultA.issuedCount + resultB.issuedCount).toBe(3);
+
+    // DB에도 정확히 3행, problem_id 중복 없음, position 충돌(같은 세션 내 같은
+    // position 두 번) 없음.
+    const totalRows = Number(psql(`select count(*) from session_homework_items where session_id = '${sessionId}';`));
+    expect(totalRows).toBe(3);
+    const distinctProblems = Number(
+      psql(`select count(distinct problem_id) from session_homework_items where session_id = '${sessionId}';`)
+    );
+    expect(distinctProblems).toBe(3);
+    const distinctPositions = Number(
+      psql(`select count(distinct position) from session_homework_items where session_id = '${sessionId}';`)
+    );
+    expect(distinctPositions).toBe(3);
+    const positions = psql(
+      `select string_agg(position::text, ',' order by position) from session_homework_items where session_id = '${sessionId}';`
+    );
+    expect(positions).toBe("1,2,3");
+
     void contractId;
   });
 });

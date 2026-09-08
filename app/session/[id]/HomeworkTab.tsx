@@ -171,7 +171,9 @@ function ComposeFromSessionForm({
   const [includeUsedInLesson, setIncludeUsedInLesson] = useState(false);
   const [includeAlreadyAttempted, setIncludeAlreadyAttempted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [result, setResult] = useState<string[] | null>(null);
+  const [result, setResult] = useState<{ issuedProblemIds: string[]; requestedCount: number; issuedCount: number } | null>(
+    null
+  );
   const [error, setError] = useState<string | null>(null);
 
   function toggleKeyword(id: string) {
@@ -185,11 +187,11 @@ function ComposeFromSessionForm({
     setSubmitting(true);
     setError(null);
     try {
-      const problemIds = await composeHomeworkFromSession(sessionId, selectedKeywordIds, count, {
+      const composed = await composeHomeworkFromSession(sessionId, selectedKeywordIds, count, {
         includeUsedInLesson,
         includeAlreadyAttempted,
       });
-      setResult(problemIds);
+      setResult(composed);
     } catch (err) {
       setError(err instanceof Error ? err.message : "과제 구성에 실패했습니다.");
     } finally {
@@ -264,7 +266,9 @@ function ComposeFromSessionForm({
           {error && <p className="text-[12px] text-red-600 mt-2">{error}</p>}
           {result && (
             <p className="text-[12px] text-grey-500 mt-2">
-              {result.length}개 문제가 발급되었습니다.
+              {result.issuedCount < result.requestedCount
+                ? `요청 ${result.requestedCount}개 중 ${result.issuedCount}개만 발급되었습니다(후보 부족).`
+                : `${result.issuedCount}개 문제가 발급되었습니다.`}
             </p>
           )}
         </>

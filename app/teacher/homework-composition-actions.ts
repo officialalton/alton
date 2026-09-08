@@ -2,19 +2,31 @@
 
 import { createClient } from "@/utils/supabase/server";
 
-// R9(레슨 준비 Task 4) — session_homework_items(supabase/migrations/
-// 20261235000000_r9_homework_composition.sql)에 대한 유일한 쓰기 경로.
-// 후보 풀은 problem_keywords_selectable을 이 함수가 호출되는 "이 순간" 다시
-// 조회한다 — Task 2의 pin 시점 재검증과는 별개의, 계획서가 요구하는 두 번째
-// 재검증 지점이다. 태깅 시점(또는 이전 used-in-lesson 처리 시점)엔 confirmed
-// 였지만 호출 시점에 unconfirmed가 된 문제는 조용히 후보에서 빠진다. 실제
-// 방어선은 problems.status='confirmed'를 강제하는 DB 트리거
-// (check_homework_item_problem_confirmed)다 — 이 함수의 필터링은 그 위에 얹는
-// 앱 레벨 편의일 뿐이다.
+// R9(레슨 준비 Task 4, corrective 20261250000000) — session_homework_items
+// (supabase/migrations/20261235000000_r9_homework_composition.sql)에 대한
+// 유일한 쓰기 경로는 이제 DB 함수 compose_homework_from_session()이다.
+// 후보 조회부터 삽입까지를 그 함수 하나의 트랜잭션으로 묶어야만
+// (1) 이미 이 세션에 발급된 문제를 후보에서 빼는 로직과 (2) 동시 호출 간
+// 원자성/직렬화를 둘 다 보장할 수 있다 — 앱 레이어에서 여러 왕복 요청으로
+// "조회 후 삽입"을 흉내 내면 그 사이 gap에 다른 요청이 끼어들 수 있다
+// (corrective 마이그레이션의 헤더 주석 참고). 이 함수는 그 RPC를 부르는
+// 얇은 서버 액션일 뿐이며, 앱 레벨 사전 인가 검사(아래
+// requireAssignedTeacherOrAdminForSession)는 오직 더 빠르고 친절한 에러
+// 메시지를 위한 것이고 실제 방어선은 여전히 RPC 내부의
+// is_active_teacher_for_enrollment()/is_admin() 재검사다.
+// problem_keywords_selectable 재조회(Task 2 pin 시점과 별개의, 계획서가
+// 요구하는 두 번째 재검증 지점)와 "이미 풀어봄"(legacy + v3 제출 완료) 판정도
+// 전부 그 RPC 내부에서 이뤄진다.
 
 type ComposeOptions = {
   includeUsedInLesson: boolean;
   includeAlreadyAttempted: boolean;
+};
+
+export type ComposeHomeworkResult = {
+  issuedProblemIds: string[];
+  requestedCount: number;
+  issuedCount: number;
 };
 
 type SupabaseServerClient = Awaited<ReturnType<typeof createClient>>;
@@ -83,76 +95,29 @@ export async function composeHomeworkFromSession(
   keywordIds: string[],
   count: number,
   options: ComposeOptions
-): Promise<string[]> {
-  if (keywordIds.length === 0 || count <= 0) return [];
+): Promise<ComposeHomeworkResult> {
+  if (keywordIds.length === 0 || count <= 0) {
+    return { issuedProblemIds: [], requestedCount: count, issuedCount: 0 };
+  }
 
-  const { supabase, userId, studentId } = await requireAssignedTeacherOrAdminForSession(sessionId);
+  // 앱 레벨 사전 인가(빠른 에러 메시지용) — 실제 방어선은 RPC 내부.
+  const { supabase } = await requireAssignedTeacherOrAdminForSession(sessionId);
 
-  // 1) 후보 풀: 주어진 키워드로 태깅되어 있으면서 이 순간
-  //    problem_keywords_selectable(=confirmed)을 통과하는 문제.
-  const { data: selectableRows, error: selectableError } = await supabase
-    .from("problem_keywords_selectable")
-    .select("problem_id")
-    .in("keyword_id", keywordIds);
-  if (selectableError) throw new Error(selectableError.message);
+  const { data, error } = await supabase
+    .rpc("compose_homework_from_session", {
+      p_session_id: sessionId,
+      p_keyword_ids: keywordIds,
+      p_count: count,
+      p_include_used_in_lesson: options.includeUsedInLesson,
+      p_include_already_attempted: options.includeAlreadyAttempted,
+    })
+    .single();
+  if (error) throw new Error(error.message);
 
-  const candidateIds = Array.from(new Set((selectableRows ?? []).map((r) => r.problem_id as string)));
-  if (candidateIds.length === 0) return [];
-
-  // 2) 두 토글은 서로 독립적으로 적용한다 — 켬/끔 4가지 조합 모두 명시적으로
-  //    다른 후보 풀을 만든다.
-  const { data: usedRows, error: usedError } = await supabase
-    .from("session_content_use_events")
-    .select("content_id")
-    .eq("session_id", sessionId)
-    .eq("content_type", "problem")
-    .in("content_id", candidateIds);
-  if (usedError) throw new Error(usedError.message);
-  const usedIds = new Set((usedRows ?? []).map((r) => r.content_id as string));
-
-  const { data: attemptedRows, error: attemptedError } = await supabase
-    .from("session_problem_attempts")
-    .select("problem_id")
-    .eq("student_id", studentId)
-    .in("problem_id", candidateIds);
-  if (attemptedError) throw new Error(attemptedError.message);
-  const attemptedIds = new Set((attemptedRows ?? []).map((r) => r.problem_id as string));
-
-  const pool = candidateIds.filter((id) => {
-    if (!options.includeUsedInLesson && usedIds.has(id)) return false;
-    if (!options.includeAlreadyAttempted && attemptedIds.has(id)) return false;
-    return true;
-  });
-  if (pool.length === 0) return [];
-
-  const selected = pool.slice(0, count);
-
-  // 3) 이미 이 세션에 발급된 문제(session_id, problem_id 유니크)와 겹치지 않게
-  //    이번에 새로 매기는 position은 기존 최대값 다음부터 시작한다.
-  const { data: existingRows, error: existingError } = await supabase
-    .from("session_homework_items")
-    .select("position")
-    .eq("session_id", sessionId)
-    .order("position", { ascending: false })
-    .limit(1);
-  if (existingError) throw new Error(existingError.message);
-  const startPosition = existingRows && existingRows.length > 0 ? (existingRows[0].position as number) + 1 : 1;
-
-  const rows = selected.map((problemId, index) => ({
-    session_id: sessionId,
-    problem_id: problemId,
-    student_id: studentId,
-    position: startPosition + index,
-    was_used_in_lesson: usedIds.has(problemId),
-    was_already_attempted: attemptedIds.has(problemId),
-    composed_by: userId,
-  }));
-
-  const { data: inserted, error: insertError } = await supabase
-    .from("session_homework_items")
-    .insert(rows)
-    .select("problem_id");
-  if (insertError) throw new Error(insertError.message);
-
-  return (inserted ?? []).map((r) => r.problem_id as string);
+  const row = data as { issued_problem_ids: string[] | null; requested_count: number; issued_count: number };
+  return {
+    issuedProblemIds: row.issued_problem_ids ?? [],
+    requestedCount: row.requested_count,
+    issuedCount: row.issued_count,
+  };
 }

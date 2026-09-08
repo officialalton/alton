@@ -75,18 +75,18 @@ describe("composeHomeworkFromSession — 인가", () => {
     state.session = { id: "sess1", subject_enrollment_id: "enr1" };
   });
 
-  it("키워드가 없거나 count가 0 이하이면 즉시 빈 배열을 반환하고 DB를 조회하지 않는다", async () => {
+  it("키워드가 없거나 count가 0 이하이면 즉시 빈 결과를 반환하고 DB를 조회하지 않는다", async () => {
     await expect(
       composeHomeworkFromSession("sess1", [], 5, {
         includeUsedInLesson: false,
         includeAlreadyAttempted: false,
       })
-    ).resolves.toEqual([]);
+    ).resolves.toEqual({ issuedProblemIds: [], requestedCount: 5, issuedCount: 0 });
     await expect(
       composeHomeworkFromSession("sess1", ["kw1"], 0, {
         includeUsedInLesson: false,
         includeAlreadyAttempted: false,
       })
-    ).resolves.toEqual([]);
+    ).resolves.toEqual({ issuedProblemIds: [], requestedCount: 0, issuedCount: 0 });
   });
 });
