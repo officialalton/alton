@@ -7,6 +7,14 @@
 > (`docs/superpowers/plans/2026-09-07-curriculum-content-foundation.md` line 112–114) onto the
 > tables and code paths that actually exist today, and flags what a future planning pass still
 > needs to decide.
+>
+> **STATUS (2026-09-07): 파운데이션 1차 최종 승인 완료(corrective 3건 포함) — 이 문서의 정책
+> 질문 6건은 여전히 기획 확정 대기 상태이며, 그 확정 전에는 구현에 착수하지 않는다.** 실제
+> 구현 시 반드시 지킬 것(제품 오너 지시, 2026-09-07): 선택 가능 콘텐츠는 항상
+> `curriculum_doc_section_keywords_selectable`/`problem_keywords_selectable` 같은 읽기 전용
+> selectable view 기준으로 불러오고, **세션 콘텐츠 고정(pin) 시점과 과제 출제 시점 각각에서
+> published/confirmed 상태를 다시 검증**한다(선택 시점 검사 1회로 끝내지 않는다). 외부 호출·
+> Preview 배포·non-prod 반영은 사전 승인 없이 하지 않는다.
 
 ## 1. What exists today (verified this round)
 

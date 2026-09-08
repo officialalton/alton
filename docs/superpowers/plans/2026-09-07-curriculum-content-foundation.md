@@ -1,5 +1,7 @@
 # Curriculum Content Foundation Implementation Plan
 
+> **STATUS (2026-09-07): APPROVED — 제품 오너 최종 승인 완료.** Tasks 1–4 전부 구현·검증 완료(`44125f0`/`505d05b`/`63f5f57`/`5bea813`), 교사 포털 연결(`b2bb6d7`), acceptance gate 실증(`a0e0f81`), corrective 3건(`75c4dae`/`c70e9ed`/`e41edee`, `56780b2` 문서화)까지 전부 반영. 경계 확정(관리자 콘텐츠 원본 / 기본 커리큘럼 / 학생별 운영 커리큘럼) 및 selectable-view 기준 재검증 원칙은 `docs/CURRENT.md`의 "2026-09-07 — 콘텐츠·커리큘럼 파운데이션 1차, corrective 3건 + 제품 오너 승인" 절 참고. 아래 "Separate follow-on plan"은 이 승인으로 착수 가능 상태가 됐으나, **구현 착수 전 그 절의 정책 질문 6건이 기획 확정돼야 한다** — 착수 패키지는 `docs/superpowers/specs/2026-09-08-lesson-prep-session-selection-kickoff.md`.
+>
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Build the reviewed content, curriculum, and student pacing foundation that lets later lesson preparation, session problem selection, and homework composition use the same source of truth.

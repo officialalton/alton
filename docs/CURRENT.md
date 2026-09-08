@@ -2931,3 +2931,73 @@ RPC 한 번으로 원자 처리(개수 불일치 시 전체 롤백, 통합 테�
   다음 라운드에서 세션 흐름과 함께 한 번에 확인하는 편이 계획서 의도에
   맞다고 판단해 이번 라운드는 자동 테스트(vitest, DB 통합 테스트)로만
   검증했다.
+
+## 2026-09-07 — 콘텐츠·커리큘럼 파운데이션 1차, corrective 3건 + 제품 오너 승인
+
+Task 1~4(위 절) 이후 제품 오너 리뷰에서 발견된 gap을 corrective 3건으로
+닫고, **콘텐츠·커리큘럼 파운데이션 1차 전체가 최종 승인됐다**(2026-09-07).
+
+**Corrective 1 — 학생 운영 커리큘럼 최초 베이스라인**(`75c4dae` + 교재
+보완 `e41edee`): `ensure_active_curriculum_overlay()`가 빈 오버레이
+껍데기만 만들던 것을, 같은 트랜잭션 안에서 과목 기본 단원 + 단원별
+키워드 + **공개(`published`) 상태인 참고 교재만** `source_unit_id` 기준
+정확히 매핑해 시딩하도록 확장(draft 교재는 시딩 대상에서 절대 제외).
+`subject_enrollment_id` 단위 advisory xact lock + unique 활성 오버레이
+제약으로 동시 호출에도 오버레이 1개·베이스라인 1회만 생성됨을 8-way
+동시성 통합 테스트로 증명. 시딩 이후 원본(canonical) 단원·교재·키워드
+관계가 바뀌어도 이미 만든 학생 베이스라인은 불변임을 별도 테스트로 증명.
+**이 스냅샷은 콘텐츠 복제가 아니라 참조(`source_unit_id`)다.**
+
+**Corrective 2 — 키워드 태깅과 공개/확정 상태 분리**(`c70e9ed`,
+**승인됨**): 관리자는 draft 교재 섹션·미확정 문제에도 키워드를 태깅할 수
+있다(저작 편의 기능, 공개 게이트 아님). unpublish/unconfirm 시 키워드
+관계를 삭제하지 않고 보존한다. "선생님이 선택 가능한 콘텐츠인가"는 관계
+테이블의 존재 여부가 아니라 **읽기 시점**에 `curriculum_doc_section_
+keywords_selectable`/`problem_keywords_selectable` 뷰(security_invoker,
+published/confirmed만 통과)로 강제한다.
+
+**경계 확정(제품 오너 승인 기준, 이후 라운드도 이 기준을 따른다)**:
+- **관리자 콘텐츠 원본**(`curriculum_docs`/`curriculum_doc_sections`/
+  `problems`/`subject_keywords`): 관리자만 생성·수정·공개·확정. draft
+  상태에서도 키워드 태깅 가능(저작 편의), 공개/확정 여부와 키워드 관계
+  존재 여부는 서로 무관.
+- **기본 커리큘럼**(`subject_template_units`/`subject_template_unit_
+  materials`/`subject_template_unit_keywords`): 과목의 정본 커리큘럼
+  템플릿, 관리자만 관리. 학생 오버레이 생성 시 **참조**되지만 복제되지
+  않는다.
+- **학생별 운영 커리큘럼**(`student_curriculum_overlays`/`curriculum_
+  overlay_units`/`curriculum_overlay_unit_keywords`/`curriculum_overlay_
+  unit_materials`): `ensure_active_curriculum_overlay()`가 생성 시점에
+  기본 커리큘럼의 공개 콘텐츠만 스냅샷 시딩, 이후에는 담당 선생님의
+  추가·제외·재정렬·진도 상태 변경만으로 진화한다. 기본 커리큘럼이나
+  콘텐츠 원본이 나중에 바뀌어도 이미 생성된 스냅샷은 소급 변경되지 않는다.
+- **선택 가능성(selectability)은 항상 읽기 시점에 published/confirmed
+  뷰로 재검증한다** — 관계 테이블의 존재나 오버레이에 이미 들어있다는
+  사실 자체를 "지금도 선택 가능하다"의 증거로 쓰지 않는다.
+
+**후속 계획(수업 준비·세션 문제 선택·과제 조립)에 대한 제약(제품 오너
+지시, 이번 라운드에 반영해 다음 라운드 착수 기준으로 고정)**:
+- 아직 구현 착수하지 않는다 — `docs/superpowers/specs/2026-09-08-
+  lesson-prep-session-selection-kickoff.md`에 열어둔 정책 질문 6건은
+  기획 확정 대상으로 계속 유지한다(문서를 임의로 확정 짓지 않음).
+- 실제 구현 시에는 선택 가능 콘텐츠를 위 selectable view 기준으로만
+  불러와야 하고, **세션 콘텐츠 고정(pin) 시점과 과제 출제 시점 각각에서
+  다시 한번 공개·확정 상태를 재검증**해야 한다(선택 시점과 고정/출제
+  시점 사이에 상태가 바뀔 수 있으므로 단일 검사로 끝내지 않는다).
+
+**미완료로 유지되는 별도 항목**: WhiteboardCanvas Preview UAT(교사·학생
+두 브라우저 실측 확인)는 이번 라운드와 무관하게 여전히 미완료 — 진행
+가능한 v3 세션·테스트 학생 계정 구성은 제품 오너의 별도 승인 후에만
+진행한다(임의로 UAT 계정을 만들지 않는다).
+
+**외부 변경 원칙 복원**: 이 라운드 이후로 non-prod Supabase migration
+반영, Vercel Preview 배포, UAT 테스트 계정 생성, 실제 이메일·외부 API
+호출은 **제품 오너의 사전 승인 없이는 하지 않는다**(9/7 오후 세션에서
+이미 발생한 non-prod push·Preview 배포는 되돌리지 않되, 그 이후로는 이
+원칙을 적용한다).
+
+관련 커밋: `44125f0`(Task1) `505d05b`(Task2) `63f5f57`(Task3)
+`5bea813`(Task4) `b2bb6d7`(교사 포털 연결) `a0e0f81`(acceptance gate
+증명) `75c4dae`(corrective1) `c70e9ed`(corrective2) `56780b2`(docs)
+`e41edee`(corrective1 교재 보완). **콘텐츠·커리큘럼 파운데이션 1차 —
+제품 오너 최종 승인 완료.**
