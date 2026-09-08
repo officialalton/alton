@@ -169,6 +169,7 @@ function makeSelectableProblem(keywordId: string): string {
 // staged 선택을 만들고, sessionId에 attach한 뒤(단 pin은 하지 않음) 반환한다.
 function createAttachedStagedSelection(): {
   selectionId: string;
+  unitRowId: string;
   overlayUnitId: string;
   keywordId: string;
   enrollmentId: string;
@@ -190,23 +191,58 @@ function createAttachedStagedSelection(): {
     `insert into session_prepared_selection_unit_keywords (prepared_selection_unit_id, keyword_id)
      values ('${unitRowId}', '${keywordId}');`
   );
-  return { selectionId, overlayUnitId, keywordId, enrollmentId, sessionId, contractId };
+  return { selectionId, unitRowId, overlayUnitId, keywordId, enrollmentId, sessionId, contractId };
+}
+
+// R9 corrective(20261237000000_r9_corrective_content_item_unit_provenance.sql)
+// — 두 번째 오버레이 단원을 같은 오버레이 안에 추가하고, 같은 keywordId를 그
+// 단원의 활성 키워드 부분집합에도 넣는다(두 단원의 키워드 범위가 같은
+// keywordId에서 겹치게 만든다) — "여러 단원의 범위에 동시에 매칭되는 콘텐츠"
+// 시나리오를 구성하기 위한 헬퍼.
+function addSecondUnitSharingKeyword(
+  selectionId: string,
+  enrollmentId: string,
+  keywordId: string
+): { secondUnitRowId: string; secondOverlayUnitId: string } {
+  const overlayId = psql(
+    `select o.id from student_curriculum_overlays o where o.subject_enrollment_id = '${enrollmentId}' and o.status = 'active';`
+  );
+  const secondOverlayUnitId = asUser(
+    TEACHER_ID,
+    `insert into curriculum_overlay_units (overlay_id, source_unit_id, position, unit_title)
+     values ('${overlayId}', '${baseUnitId}', 2, 'Task2 corrective 두번째 단원') returning id;`
+  );
+  asUser(
+    TEACHER_ID,
+    `insert into curriculum_overlay_unit_keywords (overlay_unit_id, keyword_id) values ('${secondOverlayUnitId}', '${keywordId}');`
+  );
+  const secondUnitRowId = asUser(
+    TEACHER_ID,
+    `insert into session_prepared_selection_units (prepared_selection_id, overlay_unit_id, position)
+     values ('${selectionId}', '${secondOverlayUnitId}', 2) returning id;`
+  );
+  asUser(
+    TEACHER_ID,
+    `insert into session_prepared_selection_unit_keywords (prepared_selection_unit_id, keyword_id)
+     values ('${secondUnitRowId}', '${keywordId}');`
+  );
+  return { secondUnitRowId, secondOverlayUnitId };
 }
 
 describe("pin_session_selection() — 정확히 staged+included 목록만 매니페스트로 얼린다", () => {
   it("(a) pin은 staged+included 콘텐츠 목록을 정확히 매니페스트로 얼린다", () => {
-    const { selectionId, keywordId, sessionId, contractId } = createAttachedStagedSelection();
+    const { selectionId, unitRowId, keywordId, sessionId, contractId } = createAttachedStagedSelection();
     const sectionId = makeSelectableSection(keywordId);
     const problemId = makeSelectableProblem(keywordId);
     asUser(
       TEACHER_ID,
-      `insert into session_prepared_selection_content_items (prepared_selection_id, content_type, content_id, position)
-       values ('${selectionId}', 'material_section', '${sectionId}', 1);`
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'material_section', '${sectionId}', 1);`
     );
     asUser(
       TEACHER_ID,
-      `insert into session_prepared_selection_content_items (prepared_selection_id, content_type, content_id, position)
-       values ('${selectionId}', 'problem', '${problemId}', 2);`
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'problem', '${problemId}', 2);`
     );
 
     asUser(TEACHER_ID, `select pin_session_selection('${sessionId}');`);
@@ -228,20 +264,20 @@ describe("pin_session_selection() — 정확히 staged+included 목록만 매니
   });
 
   it("(h) 키워드 범위에는 매칭되지만 staged로 pick되지 않은(또는 excluded) 후보는 매니페스트에 없다", () => {
-    const { selectionId, keywordId, sessionId, contractId } = createAttachedStagedSelection();
+    const { selectionId, unitRowId, keywordId, sessionId, contractId } = createAttachedStagedSelection();
     const pickedSectionId = makeSelectableSection(keywordId);
     const neverPickedSectionId = makeSelectableSection(keywordId);
     const excludedProblemId = makeSelectableProblem(keywordId);
 
     asUser(
       TEACHER_ID,
-      `insert into session_prepared_selection_content_items (prepared_selection_id, content_type, content_id, position)
-       values ('${selectionId}', 'material_section', '${pickedSectionId}', 1);`
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'material_section', '${pickedSectionId}', 1);`
     );
     const excludedItemId = asUser(
       TEACHER_ID,
-      `insert into session_prepared_selection_content_items (prepared_selection_id, content_type, content_id, position)
-       values ('${selectionId}', 'problem', '${excludedProblemId}', 2) returning id;`
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'problem', '${excludedProblemId}', 2) returning id;`
     );
     asUser(TEACHER_ID, `update session_prepared_selection_content_items set included = false where id = '${excludedItemId}';`);
 
@@ -257,14 +293,14 @@ describe("pin_session_selection() — 정확히 staged+included 목록만 매니
   });
 
   it("(i) pin_session_selection()은 staged+included 목록 밖의 콘텐츠에 대해서는 매니페스트 행을 절대 쓰지 않는다", () => {
-    const { selectionId, keywordId, sessionId, contractId } = createAttachedStagedSelection();
+    const { selectionId, unitRowId, keywordId, sessionId, contractId } = createAttachedStagedSelection();
     const pickedSectionId = makeSelectableSection(keywordId);
     const outOfPickScopeProblemId = makeSelectableProblem(keywordId); // 같은 범위지만 pick 안 함
 
     asUser(
       TEACHER_ID,
-      `insert into session_prepared_selection_content_items (prepared_selection_id, content_type, content_id, position)
-       values ('${selectionId}', 'material_section', '${pickedSectionId}', 1);`
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'material_section', '${pickedSectionId}', 1);`
     );
 
     asUser(TEACHER_ID, `select pin_session_selection('${sessionId}');`);
@@ -277,12 +313,12 @@ describe("pin_session_selection() — 정확히 staged+included 목록만 매니
   });
 
   it("(b) pin 이후 같은 키워드로 새로 발행된 콘텐츠는 매니페스트에 추가되지 않는다", () => {
-    const { selectionId, keywordId, sessionId, contractId } = createAttachedStagedSelection();
+    const { selectionId, unitRowId, keywordId, sessionId, contractId } = createAttachedStagedSelection();
     const sectionId = makeSelectableSection(keywordId);
     asUser(
       TEACHER_ID,
-      `insert into session_prepared_selection_content_items (prepared_selection_id, content_type, content_id, position)
-       values ('${selectionId}', 'material_section', '${sectionId}', 1);`
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'material_section', '${sectionId}', 1);`
     );
     asUser(TEACHER_ID, `select pin_session_selection('${sessionId}');`);
 
@@ -301,12 +337,12 @@ describe("pin_session_selection() — 정확히 staged+included 목록만 매니
   });
 
   it("(c) pin 이후 단원의 정규 키워드 관계를 바꿔도 매니페스트는 변하지 않는다", () => {
-    const { selectionId, keywordId, overlayUnitId, sessionId, contractId } = createAttachedStagedSelection();
+    const { selectionId, unitRowId, keywordId, overlayUnitId, sessionId, contractId } = createAttachedStagedSelection();
     const sectionId = makeSelectableSection(keywordId);
     asUser(
       TEACHER_ID,
-      `insert into session_prepared_selection_content_items (prepared_selection_id, content_type, content_id, position)
-       values ('${selectionId}', 'material_section', '${sectionId}', 1);`
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'material_section', '${sectionId}', 1);`
     );
     asUser(TEACHER_ID, `select pin_session_selection('${sessionId}');`);
 
@@ -329,18 +365,18 @@ describe("pin_session_selection() — 정확히 staged+included 목록만 매니
   });
 
   it("(f) pick 이후 pin 이전에 unpublish된 항목은 pin 전체를 실패시키고 매니페스트를 0행으로 남긴다", () => {
-    const { selectionId, keywordId, sessionId } = createAttachedStagedSelection();
+    const { selectionId, unitRowId, keywordId, sessionId } = createAttachedStagedSelection();
     const goodSectionId = makeSelectableSection(keywordId);
     const toBeUnpublishedSectionId = makeSelectableSection(keywordId);
     asUser(
       TEACHER_ID,
-      `insert into session_prepared_selection_content_items (prepared_selection_id, content_type, content_id, position)
-       values ('${selectionId}', 'material_section', '${goodSectionId}', 1);`
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'material_section', '${goodSectionId}', 1);`
     );
     asUser(
       TEACHER_ID,
-      `insert into session_prepared_selection_content_items (prepared_selection_id, content_type, content_id, position)
-       values ('${selectionId}', 'material_section', '${toBeUnpublishedSectionId}', 2);`
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'material_section', '${toBeUnpublishedSectionId}', 2);`
     );
 
     // pick된 뒤 pin 전에 draft로 되돌린다(관리자 조작).
@@ -360,12 +396,12 @@ describe("pin_session_selection() — 정확히 staged+included 목록만 매니
   });
 
   it("(g) 세션의 final_status가 scheduled에서 벗어나면 pin이 거부된다", () => {
-    const { selectionId, keywordId, sessionId } = createAttachedStagedSelection();
+    const { selectionId, unitRowId, keywordId, sessionId } = createAttachedStagedSelection();
     const sectionId = makeSelectableSection(keywordId);
     asUser(
       TEACHER_ID,
-      `insert into session_prepared_selection_content_items (prepared_selection_id, content_type, content_id, position)
-       values ('${selectionId}', 'material_section', '${sectionId}', 1);`
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'material_section', '${sectionId}', 1);`
     );
     psql(`update sessions set final_status = 'completed' where id = '${sessionId}';`);
 
@@ -383,12 +419,12 @@ describe("pin_session_selection() 권한 매트릭스", () => {
     enrollmentId: string;
     contractId: string;
   } {
-    const { selectionId, keywordId, sessionId, enrollmentId, contractId } = createAttachedStagedSelection();
+    const { selectionId, unitRowId, keywordId, sessionId, enrollmentId, contractId } = createAttachedStagedSelection();
     const sectionId = makeSelectableSection(keywordId);
     asUser(
       TEACHER_ID,
-      `insert into session_prepared_selection_content_items (prepared_selection_id, content_type, content_id, position)
-       values ('${selectionId}', 'material_section', '${sectionId}', 1);`
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'material_section', '${sectionId}', 1);`
     );
     return { selectionId, sessionId, enrollmentId, contractId };
   }
@@ -476,18 +512,18 @@ describe("pin_session_selection() 권한 매트릭스", () => {
 
 describe("(d) pin 이후 표시 시점 가시성 — 매니페스트 행 자체는 절대 건드리지 않는다", () => {
   it("pin된 매니페스트 항목의 콘텐츠가 이후 unpublish/unconfirm돼도, 매니페스트 행 자체는 원본 그대로 남아있다", () => {
-    const { selectionId, keywordId, sessionId, contractId } = createAttachedStagedSelection();
+    const { selectionId, unitRowId, keywordId, sessionId, contractId } = createAttachedStagedSelection();
     const sectionId = makeSelectableSection(keywordId);
     const problemId = makeSelectableProblem(keywordId);
     asUser(
       TEACHER_ID,
-      `insert into session_prepared_selection_content_items (prepared_selection_id, content_type, content_id, position)
-       values ('${selectionId}', 'material_section', '${sectionId}', 1);`
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'material_section', '${sectionId}', 1);`
     );
     asUser(
       TEACHER_ID,
-      `insert into session_prepared_selection_content_items (prepared_selection_id, content_type, content_id, position)
-       values ('${selectionId}', 'problem', '${problemId}', 2);`
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'problem', '${problemId}', 2);`
     );
     asUser(TEACHER_ID, `select pin_session_selection('${sessionId}');`);
 
@@ -545,12 +581,12 @@ describe("함수 하드닝 — search_path 고정, PUBLIC EXECUTE 없음", () =>
 
 describe("session_content_manifest — ordinary role은 어떤 쓰기도 할 수 없다", () => {
   it("(e) staged 상태에서도 teacher-role 직접 INSERT/UPDATE/DELETE는 전부 거부된다", () => {
-    const { selectionId, keywordId, sessionId, contractId } = createAttachedStagedSelection();
+    const { selectionId, unitRowId, keywordId, sessionId, contractId } = createAttachedStagedSelection();
     const sectionId = makeSelectableSection(keywordId);
     asUser(
       TEACHER_ID,
-      `insert into session_prepared_selection_content_items (prepared_selection_id, content_type, content_id, position)
-       values ('${selectionId}', 'material_section', '${sectionId}', 1);`
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'material_section', '${sectionId}', 1);`
     );
     // 아직 staged 상태(pin 안 함) — v3가 고친 건 "잠금 트리거"가 아니라 "그랜트
     // 자체가 없음"이므로, staged 상태에서도 거부되어야 한다.
@@ -590,12 +626,12 @@ describe("session_content_manifest — ordinary role은 어떤 쓰기도 할 수
 
 describe("(l) session_prepared_selections.status를 pin_session_selection() 없이 직접 UPDATE로 'pinned'로 바꿀 수 없다", () => {
   it("담당 선생님의 직접 SQL UPDATE는 거부되고, 매니페스트도 0행으로 남는다", () => {
-    const { selectionId, keywordId, sessionId } = createAttachedStagedSelection();
+    const { selectionId, unitRowId, keywordId, sessionId } = createAttachedStagedSelection();
     const sectionId = makeSelectableSection(keywordId);
     asUser(
       TEACHER_ID,
-      `insert into session_prepared_selection_content_items (prepared_selection_id, content_type, content_id, position)
-       values ('${selectionId}', 'material_section', '${sectionId}', 1);`
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'material_section', '${sectionId}', 1);`
     );
 
     // 이게 바로 제품 오너가 지목한 핵심 구멍이다: pin_session_selection()을
@@ -620,6 +656,119 @@ describe("(l) session_prepared_selections.status를 pin_session_selection() 없�
     const status = psql(`select status from session_prepared_selections where id = '${selectionId}';`);
     expect(status).toBe("staged");
 
+    const manifestCount = psql(`select count(*) from session_content_manifest where session_id = '${sessionId}';`);
+    expect(manifestCount).toBe("0");
+  });
+});
+
+// R9 corrective(20261237000000_r9_corrective_content_item_unit_provenance.sql)
+// — 이 세 describe 블록이 제품 오너가 지목한 구멍(다중 단원 범위가 겹칠 때
+// source_overlay_unit_id가 임의로 도출되던 문제)에 대한 직접적인 증거다.
+describe("corrective — prepared_selection_unit_id가 source_overlay_unit_id의 유일한 출처다", () => {
+  it("두 단원의 활성 키워드 범위가 겹치는 콘텐츠를 단원2를 편성하며 pick하면, 매니페스트의 source_overlay_unit_id는 정확히 단원2의 overlay_unit_id다(단원1이 아니다)", () => {
+    const { selectionId, unitRowId: firstUnitRowId, overlayUnitId: firstOverlayUnitId, keywordId, enrollmentId, sessionId, contractId } =
+      createAttachedStagedSelection();
+    const { secondUnitRowId, secondOverlayUnitId } = addSecondUnitSharingKeyword(selectionId, enrollmentId, keywordId);
+    void firstUnitRowId;
+
+    // 같은 keywordId로 태깅된 콘텐츠 하나 — 단원1/단원2 둘 다의 활성 키워드
+    // 범위에 동시에 매칭된다(겹침을 실제로 구성).
+    const sharedSectionId = makeSelectableSection(keywordId);
+    const sectionSelectableForBothUnits = psql(
+      `select count(*) from session_prepared_selection_unit_keywords k
+       where k.keyword_id = '${keywordId}' and k.prepared_selection_unit_id in ('${firstUnitRowId}', '${secondUnitRowId}');`
+    );
+    expect(sectionSelectableForBothUnits).toBe("2"); // 사전 조건: 정말로 두 단원 다 이 키워드를 갖는다.
+
+    // 선생님이 이 콘텐츠를 "단원2를 편성하며" pick한다 — prepared_selection_unit_id가
+    // secondUnitRowId를 명시적으로 지목한다(단원1이 position 순서상 먼저더라도).
+    asUser(
+      TEACHER_ID,
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${secondUnitRowId}', 'material_section', '${sharedSectionId}', 1);`
+    );
+
+    asUser(TEACHER_ID, `select pin_session_selection('${sessionId}');`);
+
+    const sourceOverlayUnitId = psql(
+      `select source_overlay_unit_id from session_content_manifest where session_id = '${sessionId}' and content_id = '${sharedSectionId}';`
+    );
+    expect(sourceOverlayUnitId).toBe(secondOverlayUnitId);
+    expect(sourceOverlayUnitId).not.toBe(firstOverlayUnitId);
+    excludeFromCleanup(contractId);
+  });
+
+  it("pin 전 단원 position을 바꿔도(재정렬) 매니페스트의 source_overlay_unit_id는 단원의 정체성(overlay_unit_id)을 그대로 따르고 position에 영향받지 않는다", () => {
+    const { selectionId, unitRowId: firstUnitRowId, overlayUnitId: firstOverlayUnitId, keywordId, enrollmentId, sessionId, contractId } =
+      createAttachedStagedSelection();
+    const { secondUnitRowId, secondOverlayUnitId } = addSecondUnitSharingKeyword(selectionId, enrollmentId, keywordId);
+
+    const sharedSectionId = makeSelectableSection(keywordId);
+    asUser(
+      TEACHER_ID,
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${secondUnitRowId}', 'material_section', '${sharedSectionId}', 1);`
+    );
+
+    // pin 전에 단원 position을 맞바꾼다(단원2를 1번, 단원1을 2번으로) — 이제
+    // "position 순서상 먼저"인 단원이 뒤바뀐다. 예전 휴리스틱
+    // (order by position limit 1)이었다면 이 재정렬 하나만으로 source_overlay_unit_id가
+    // 바뀌었을 것이다 — corrective 이후에는 prepared_selection_unit_id를 직접
+    // 따라가므로 영향이 없어야 한다.
+    asUser(
+      TEACHER_ID,
+      `update session_prepared_selection_units set position = -1 where id = '${secondUnitRowId}';`
+    );
+    asUser(
+      TEACHER_ID,
+      `update session_prepared_selection_units set position = -2 where id = '${firstUnitRowId}';`
+    );
+    const positionsAfterSwap = psql(
+      `select id, position from session_prepared_selection_units where prepared_selection_id = '${selectionId}' order by position;`
+    );
+    expect(positionsAfterSwap).toContain(secondUnitRowId); // 사전 조건: 재정렬이 실제로 반영됐다.
+
+    asUser(TEACHER_ID, `select pin_session_selection('${sessionId}');`);
+
+    const sourceOverlayUnitId = psql(
+      `select source_overlay_unit_id from session_content_manifest where session_id = '${sessionId}' and content_id = '${sharedSectionId}';`
+    );
+    expect(sourceOverlayUnitId).toBe(secondOverlayUnitId);
+    expect(sourceOverlayUnitId).not.toBe(firstOverlayUnitId);
+    excludeFromCleanup(contractId);
+  });
+});
+
+describe("corrective — 빈 pin 방지(포함된 콘텐츠 0개인 채로 pin할 수 없다)", () => {
+  it("staged+included 콘텐츠가 0개인 준비된 선택은 pin_session_selection()이 거부하고, status는 staged로 남으며 매니페스트는 0행이다", () => {
+    const { selectionId, sessionId } = createAttachedStagedSelection();
+    // 콘텐츠 항목을 하나도 만들지 않은 채(또는 만들었어도 전부 excluded인 채)
+    // pin을 시도한다.
+
+    const err = asUserExpectError(TEACHER_ID, `select pin_session_selection('${sessionId}');`);
+    expect(err).toMatch(/포함된\(included\) 콘텐츠가 하나도 없는/);
+
+    const status = psql(`select status from session_prepared_selections where id = '${selectionId}';`);
+    expect(status).toBe("staged");
+    const manifestCount = psql(`select count(*) from session_content_manifest where session_id = '${sessionId}';`);
+    expect(manifestCount).toBe("0");
+  });
+
+  it("모든 콘텐츠 항목이 excluded인 준비된 선택도 마찬가지로 pin이 거부된다", () => {
+    const { selectionId, keywordId, sessionId, unitRowId } = createAttachedStagedSelection();
+    const sectionId = makeSelectableSection(keywordId);
+    const itemId = asUser(
+      TEACHER_ID,
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'material_section', '${sectionId}', 1) returning id;`
+    );
+    asUser(TEACHER_ID, `update session_prepared_selection_content_items set included = false where id = '${itemId}';`);
+
+    const err = asUserExpectError(TEACHER_ID, `select pin_session_selection('${sessionId}');`);
+    expect(err).toMatch(/포함된\(included\) 콘텐츠가 하나도 없는/);
+
+    const status = psql(`select status from session_prepared_selections where id = '${selectionId}';`);
+    expect(status).toBe("staged");
     const manifestCount = psql(`select count(*) from session_content_manifest where session_id = '${sessionId}';`);
     expect(manifestCount).toBe("0");
   });

@@ -182,9 +182,14 @@ async function nextContentItemPosition(
 
 // 선택 가능(published/confirmed)+범위 내 검사는 INSERT 트리거
 // (check_prepared_content_item_selectable)가 한다 — 여기서 다시 검사하지 않는다
-// (RLS/트리거가 진짜 방어선, 이 함수는 편의 계층일 뿐).
+// (RLS/트리거가 진짜 방어선, 이 함수는 편의 계층일 뿐). preparedSelectionUnitId는
+// corrective(20261237000000_r9_corrective_content_item_unit_provenance.sql)로
+// 추가된 필수 출처 컬럼 — 선생님이 이 콘텐츠를 고를 때 편성하고 있던 단원을
+// 호출자가 명시적으로 넘긴다(어느 단원을 보고 있었는지는 UI 상태이지 서버가
+// 추측할 수 있는 값이 아니다).
 export async function pickContentItem(
   preparedSelectionId: string,
+  preparedSelectionUnitId: string,
   contentType: PreparedContentType,
   contentId: string
 ): Promise<string> {
@@ -194,6 +199,7 @@ export async function pickContentItem(
     .from("session_prepared_selection_content_items")
     .insert({
       prepared_selection_id: preparedSelectionId,
+      prepared_selection_unit_id: preparedSelectionUnitId,
       content_type: contentType,
       content_id: contentId,
       position,

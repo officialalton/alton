@@ -17,6 +17,7 @@ export type PreparedSelectionUnit = {
 
 export type PreparedContentItem = {
   id: string;
+  preparedSelectionUnitId: string;
   contentType: PreparedContentType;
   contentId: string;
   position: number;
@@ -72,7 +73,7 @@ async function attachChildren(
       .order("position", { ascending: true }),
     supabase
       .from("session_prepared_selection_content_items")
-      .select("id, prepared_selection_id, content_type, content_id, position, included")
+      .select("id, prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position, included")
       .in("prepared_selection_id", selectionIds)
       .order("position", { ascending: true }),
   ]);
@@ -109,6 +110,7 @@ async function attachChildren(
     const list = contentItemsBySelection.get(row.prepared_selection_id) ?? [];
     list.push({
       id: row.id,
+      preparedSelectionUnitId: row.prepared_selection_unit_id,
       contentType: row.content_type,
       contentId: row.content_id,
       position: row.position,

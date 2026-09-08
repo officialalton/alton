@@ -305,19 +305,19 @@ describe("생성/편집 — 미부착(임시보관함) 또는 부착-미핀 상�
 
 describe("스테이징 콘텐츠 pick/exclude/재포함/재정렬", () => {
   it("키워드-적격 콘텐츠를 pick하고, 소프트 제외했다가 재포함하고, 원자적으로 재정렬할 수 있다", () => {
-    const { selectionId, keywordId } = createStagedSelectionWithUnit();
+    const { selectionId, unitRowId, keywordId } = createStagedSelectionWithUnit();
     const sectionId = makeSelectableSection(keywordId);
     const problemId = makeSelectableProblem(keywordId);
 
     const item1 = asUser(
       TEACHER_ID,
-      `insert into session_prepared_selection_content_items (prepared_selection_id, content_type, content_id, position)
-       values ('${selectionId}', 'material_section', '${sectionId}', 1) returning id;`
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'material_section', '${sectionId}', 1) returning id;`
     );
     const item2 = asUser(
       TEACHER_ID,
-      `insert into session_prepared_selection_content_items (prepared_selection_id, content_type, content_id, position)
-       values ('${selectionId}', 'problem', '${problemId}', 2) returning id;`
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'problem', '${problemId}', 2) returning id;`
     );
 
     // 소프트 제외 — 행은 유지된다.
@@ -346,26 +346,26 @@ describe("스테이징 콘텐츠 pick/exclude/재포함/재정렬", () => {
   });
 
   it("selectable하지 않은(draft) 콘텐츠는 INSERT 시점에 거부된다", () => {
-    const { selectionId, keywordId } = createStagedSelectionWithUnit();
+    const { selectionId, unitRowId, keywordId } = createStagedSelectionWithUnit();
     const unselectableSectionId = makeUnselectableSection(keywordId);
     const err = asUserExpectError(
       TEACHER_ID,
-      `insert into session_prepared_selection_content_items (prepared_selection_id, content_type, content_id, position)
-       values ('${selectionId}', 'material_section', '${unselectableSectionId}', 1);`
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'material_section', '${unselectableSectionId}', 1);`
     );
     expect(err).toMatch(/선택 가능\(published\/confirmed\)하지 않거나/);
   });
 
   it("이 선택의 단원/키워드 범위 밖인 콘텐츠(다른 키워드로만 태깅됨)는 INSERT 시점에 거부된다", () => {
-    const { selectionId } = createStagedSelectionWithUnit();
+    const { selectionId, unitRowId } = createStagedSelectionWithUnit();
     const unrelatedKeywordId = psql(
       `insert into subject_keywords (subject_id, label) values ('${SUBJECT_ID}', '무관키워드 ${Date.now()}') returning id;`
     );
     const outOfScopeSectionId = makeSelectableSection(unrelatedKeywordId);
     const err = asUserExpectError(
       TEACHER_ID,
-      `insert into session_prepared_selection_content_items (prepared_selection_id, content_type, content_id, position)
-       values ('${selectionId}', 'material_section', '${outOfScopeSectionId}', 1);`
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'material_section', '${outOfScopeSectionId}', 1);`
     );
     expect(err).toMatch(/선택 가능\(published\/confirmed\)하지 않거나/);
   });
@@ -373,12 +373,12 @@ describe("스테이징 콘텐츠 pick/exclude/재포함/재정렬", () => {
 
 describe("attach/detach — 임시보관함 ↔ 세션", () => {
   it("attach하면 session_id가 설정되고, detach하면 다시 null로 돌아가며 콘텐츠가 유지된다(임시보관함 재등장)", () => {
-    const { selectionId, sessionId, keywordId } = createStagedSelectionWithUnit();
+    const { selectionId, unitRowId, sessionId, keywordId } = createStagedSelectionWithUnit();
     const sectionId = makeSelectableSection(keywordId);
     const itemId = asUser(
       TEACHER_ID,
-      `insert into session_prepared_selection_content_items (prepared_selection_id, content_type, content_id, position)
-       values ('${selectionId}', 'material_section', '${sectionId}', 1) returning id;`
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'material_section', '${sectionId}', 1) returning id;`
     );
 
     asUser(TEACHER_ID, `update session_prepared_selections set session_id = '${sessionId}' where id = '${selectionId}';`);
@@ -444,8 +444,8 @@ describe("pin 이후 잠금 — 트리거가 모든 하위 테이블의 추가 �
     const sectionId = makeSelectableSection(keywordId);
     const itemId = asUser(
       TEACHER_ID,
-      `insert into session_prepared_selection_content_items (prepared_selection_id, content_type, content_id, position)
-       values ('${selectionId}', 'material_section', '${sectionId}', 1) returning id;`
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'material_section', '${sectionId}', 1) returning id;`
     );
 
     // pin_session_selection()(Task 2)을 통해 실제로 pin한다 — 더 이상 status를
@@ -478,8 +478,8 @@ describe("pin 이후 잠금 — 트리거가 모든 하위 테이블의 추가 �
     expect(
       asUserExpectError(
         TEACHER_ID,
-        `insert into session_prepared_selection_content_items (prepared_selection_id, content_type, content_id, position)
-         values ('${selectionId}', 'material_section', '${sectionId}', 55);`
+        `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+         values ('${selectionId}', '${unitRowId}', 'material_section', '${sectionId}', 55);`
       )
     ).toMatch(/핀 완료된/);
 
@@ -516,8 +516,8 @@ describe("pin 이후 잠금 — 트리거가 모든 하위 테이블의 추가 �
     const sectionId = makeSelectableSection(keywordId);
     const itemId = asUser(
       TEACHER_ID,
-      `insert into session_prepared_selection_content_items (prepared_selection_id, content_type, content_id, position)
-       values ('${selectionId}', 'material_section', '${sectionId}', 1) returning id;`
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'material_section', '${sectionId}', 1) returning id;`
     );
 
     // 실제(un-bypassed) pin 전이 — pin_session_selection()(Task 2)을 통해 진짜로

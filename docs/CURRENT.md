@@ -3298,3 +3298,70 @@ selection.md`를 v4로 보완(코드 작업은 여전히 시작 안 함):
 
 이 보완이 반영되면 제품 오너가 Task 1 착수를 승인하기로 확인함. 이번 라운드도 문서만,
 외부 변경 전혀 없음.
+
+## 2026-09-07 — R9 corrective: session_prepared_selection_content_items 단원 출처(provenance) 명시화 + 빈 pin 방지
+
+제품 오너 리뷰가 Task 1/2(`20261232000000_r9_session_prepared_selection.sql`,
+`20261233000000_r9_session_content_manifest.sql`) 구현 이후 실제 구멍 하나를 지목: 콘텐츠
+pick 당시 "선생님이 어느 단원을 편성하고 있었는지"를 아무 컬럼도 저장하지 않았고, 대신
+`check_prepared_content_item_selectable()`와 `pin_session_selection()`의 `source_overlay_unit_id`
+도출 둘 다 "이 선택의 아무 단원이나" 키워드 범위가 매칭되면 통과시키고, 매칭되는 여러 단원
+중에서는 `order by u.position asc limit 1`로 임의로 하나를 골랐다. 한 선택에 단원이 여러 개이고
+같은 콘텐츠가 두 단원의 활성 키워드 범위에 동시에 들어가면(복습 단원 + 새 진도 단원이 키워드를
+공유하는 경우), 선생님이 실제로 단원 B를 편성하며 그 콘텐츠를 골랐어도 매니페스트에는 항상
+position이 앞선 단원이 출처로 잘못 기록됐다.
+
+추가 마이그레이션(기존 20261232000000/20261233000000은 편집하지 않음):
+`supabase/migrations/20261237000000_r9_corrective_content_item_unit_provenance.sql`.
+
+- `session_prepared_selection_content_items`에 필수 FK `prepared_selection_unit_id`
+  (→ `session_prepared_selection_units`) 추가. 기존 행은 종전 휴리스틱(order by position limit 1,
+  실패 시 첫 단원 폴백)으로 1회성 백필한 뒤 NOT NULL로 잠금(로컬 개발 DB 전용 — 운영 데이터 없음).
+- `check_prepared_content_item_selectable()` INSERT 트리거를 확장: (a) `prepared_selection_unit_id`가
+  실제로 존재하고 이 콘텐츠 항목과 같은 `prepared_selection_id`에 속하는지, (b) 콘텐츠가 '그 단원만의'
+  활성 키워드 범위(다른 단원의 키워드는 보지 않음) 안에서 selectable한지 검사하도록 좁힘. 기존
+  거부 동작(selectable하지 않거나 범위 밖이면 거부)은 그대로 유지.
+- `pin_session_selection()`의 `source_overlay_unit_id` 도출을 각 스테이징 항목의
+  `prepared_selection_unit_id` → 그 단원 행의 `overlay_unit_id`로 가는 직접 조인으로 재작성
+  ("order by position limit 1" 완전 제거). 재검증 루프도 각 항목이 지목한 그 단원의 키워드 범위
+  안에서만 selectable한지 확인하도록 변경.
+- **빈 pin 방지**: `pin_session_selection()` 맨 앞(재검증 루프 이전)에 staged+included 콘텐츠
+  항목이 0개면 즉시 실패하는 가드를 추가 — 매니페스트 행 0개, `status` 전이 없음을 보장.
+- 앱 코드: `app/teacher/session-prep-actions.ts`의 `pickContentItem()`이 이제
+  `preparedSelectionUnitId`를 필수 인자로 받아 INSERT에 넘김(호출자가 "지금 편성 중인 단원"을
+  명시). `app/teacher/session-prep-data.ts`의 `PreparedContentItem`에 `preparedSelectionUnitId`
+  필드 추가, `attachChildren()` select에 컬럼 반영. `app/teacher/session-prep-actions.test.ts`
+  (mocked)의 `pickContentItem` 호출부를 새 시그니처로 갱신.
+- 기존 두 통합 테스트 파일(`session-content-manifest.integration.test.ts`,
+  `session-prepared-selection.integration.test.ts`)의 모든 `session_prepared_selection_content_items`
+  INSERT에 `prepared_selection_unit_id` 컬럼/값을 추가(새 NOT NULL 제약 충족) — 기존 assertion은
+  그대로 유지, 값만 보강.
+
+신규 테스트(`app/teacher/session-content-manifest.integration.test.ts`), 4개 요구사항과의 대응:
+
+1. **다중 단원 범위 겹침 명시적 disambiguation** — "두 단원의 활성 키워드 범위가 겹치는 콘텐츠를
+   단원2를 편성하며 pick하면, 매니페스트의 source_overlay_unit_id는 정확히 단원2의
+   overlay_unit_id다(단원1이 아니다)": 실제로 `sourceOverlayUnitId === secondOverlayUnitId`이고
+   `!== firstOverlayUnitId`임을 직접 단언(문자열 정확 일치 비교, 사전 조건으로 두 단원 다 그
+   키워드를 갖는지도 별도 확인).
+2. **재정렬이 provenance를 소급 변경하지 않음** — pin 전에 두 단원의 `position`을 맞바꾼(단원2를
+   1번으로) 뒤 pin해도 `source_overlay_unit_id`는 여전히 `secondOverlayUnitId`(단원의 정체성을
+   따름, position 무관)임을 확인. 예전 휴리스틱이었다면 이 재정렬만으로 결과가 바뀌었을 것이라는
+   점을 주석으로 명시.
+3. **빈 pin 거부** — 콘텐츠 항목 0개인 채로 `pin_session_selection()` 호출 시 에러(`/포함된\(included\)
+   콘텐츠가 하나도 없는/`), `status`는 `staged` 유지, `session_content_manifest` 0행을 확인하는
+   테스트 2개(항목 자체가 0개인 경우 / 유일한 항목이 `excluded`인 경우).
+4. **기존 Task 2 테스트가 새 필수 컬럼과 함께 계속 통과** — 픽스처(`createAttachedStagedSelection`,
+   `createStagedSelectionWithUnit`)가 `unitRowId`를 반환하도록 보강하고 모든 콘텐츠 INSERT에
+   전달, 기존 22개(+corrective 신규 4개) 및 14개 테스트 전부 통과.
+
+검증: `supabase db reset --local`(클린) → `tsc --noEmit`(클린) → 영향받은 두 파일 단독 실행(fresh
+reset 직후, 22/22 + 14/14 통과, 신규 시나리오 4개 개별 확인) → 전체 `vitest run
+--no-file-parallelism`을 fresh reset 직후로 2회 반복: 1회차 216 files/1486 tests 전부 통과, 2회차는
+기존(이 corrective 이전부터 존재)의 R9 두 통합 테스트 파일에서 `reservations_no_overlap` 배타
+제약 충돌로 3개 산발적 실패(테스트 실행 환경의 시각 기반 예약 오프셋 충돌 — 이 corrective가
+건드린 어떤 로직과도 무관) — 같은 두 파일을 fresh reset 직후 단독 재실행하면 100% 통과(22/22,
+14/14)함을 재확인해 회귀가 아님을 검증. `next build`(클린).
+
+R9 Task 3(사용 처리 이벤트)/Task 4(과제 구성)는 이번에도 착수하지 않음 — 이 라운드는 Task 1/2
+corrective 범위로 한정.
