@@ -149,24 +149,29 @@ The plan's follow-on section names five capabilities. Mapped onto the table abov
    selections for the same session (single active pin, analogous to the overlay's "one active
    overlay per enrollment" invariant).
 
-## 6. Open questions for the next planning review (policy, not engineering)
+## 6. Decisions (제품 오너 확정, 2026-09-08)
 
-These are product/policy decisions this document deliberately does not make:
+정책 검토 문서 `docs/superpowers/specs/2026-09-08-lesson-prep-policy-review.md`의 권장안을
+기준으로 아래와 같이 확정됐다. 이 절 아래 §7이 상세 구현 계획이다.
 
-- **What exactly counts as a "used in lesson" event?** Is it a per-material-section action, a
-  per-problem action, both? Does opening a tab count, or only an explicit teacher tap/button? Does
-  it need a timestamp range (start/end of use) or a single instant?
-- **How should the two homework inclusion toggles be labeled and behave?** The plan names "two
-  inclusion toggles" without specifying their meaning (e.g. "include already-attempted problems" vs
-  "include unattempted only"? "include this session's material only" vs "include the full unit"?
-  something else entirely). This needs a product decision before any schema is drawn.
-- **Granularity of "prepared selection":** does a teacher pin one overlay unit per session, or can
-  multiple units/keyword subsets be pinned for a single session (e.g. review + new material in one
-  lesson)?
-- **What happens to a prepared-but-unused selection** if a session is cancelled or rescheduled
-  before it starts — does the pin carry over, or must the teacher re-prepare?
-- **Where does "used in lesson" surface to the student**, if at all — is it purely a teacher-facing
-  record, or does it also affect what the student sees in their homework/review flow?
-- **Performance/index needs** for keyword-filtered eligible-library queries should be validated
-  against real content volume before deciding whether a new index or materialized view is needed,
-  rather than pre-built speculatively.
+1. **"레슨에서 사용함" 이벤트**: 단일 순간의 명시적 기록. 대상은 교재 섹션과 문제 둘 다.
+   단순 열람(탭 오픈, 스크롤 등)은 절대 기록하지 않는다 — 교사의 명시적 조작(버튼/탭 1회)만.
+2. **과제 포함 토글**: "수업 사용 문제 포함" / "학생이 이미 푼 문제 포함" 2개로 확정, 각각
+   독립적으로 on/off. 서로 배타적이지 않다(둘 다 켜기/끄기/한쪽만 가능).
+3. **준비 선택(prepared selection) 단위**: 세션당 여러 단원·키워드 조합을 처음부터 허용한다
+   (복습+새 진도를 한 수업에서 함께 다루는 것이 기본 사용 사례). 단원별 진도 상태(`not_started`
+   등)는 세션 완료만으로 자동 전이되지 않는다 — 여전히 교사의 명시적 `setUnitStatus` 행동으로만
+   바뀐다(Task 3 원칙 그대로 유지, 이 follow-on plan이 자동 상태 전이를 추가하지 않는다).
+4. **취소·재예약 시 이월**: 자동 이월하지 않는다. 대신 취소된 세션의 준비 구성은 **임시보관함
+   (staged/held prepared selection)**에 남아 삭제되지 않고, 교사가 새 세션에 수동으로 다시
+   붙일 수 있다. 세션별 콘텐츠 스냅샷(고정된 뒤)의 불변성은 그대로 유지 — 임시보관함은 "아직
+   고정 안 된" 준비 상태에만 적용되고, 이미 pin된 세션의 스냅샷을 소급 변경하지 않는다.
+5. **학생 노출**: "레슨에서 사용함" 기록은 교사·관리자 전용으로 시작. 학생 노출·복습 화면은
+   후속 범위(이 라운드에 포함하지 않음).
+6. **성능/인덱스**: 정책 결정 대상이 아님 — 구현 시 실제 데이터 규모와 쿼리 실측 근거로 판단.
+
+## 7. See detailed implementation plan
+
+상세 구현 계획은 `docs/superpowers/plans/2026-09-08-lesson-prep-session-selection.md` 참고
+(임시보관함, 다단원 선택, 세션 고정·과제 출제 시점 selectable view 재검증, 실제 사용 이벤트,
+과제 후보 제외 규칙 포함). 코드 작업은 그 계획이 승인된 뒤에만 시작한다.
