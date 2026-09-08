@@ -3575,3 +3575,20 @@ docs/CURRENT.md 위 라운드들에서 동일 파일·동일 원인으로 여러
 
 R9 Task 4(과제 구성, 두 개의 독립 포함 토글 + 발급 시점 재검증)는 이번에도 착수하지 않음 — 별도
 제품 오너 승인 후.
+
+## 2026-09-08 — 남은 7개 app.bypass_* 처리 방침 확정 + Task 4 착수 승인
+
+R8 annotation bypass corrective(`876b30a`)와 전수 감사 결과를 제품 오너가 승인. 감사에서 발견된
+나머지 7개 live bypass(`bypass_session_lock`/`bypass_teacher_rate_protect`/`bypass_invite_protect`/
+`bypass_status_protect`/`bypass_consent_protect`/`bypass_reconciliation_task_lock`/
+`bypass_trial_session_auto_complete`)는 **한꺼번에 제거하지 않는다** — 다음 기준으로 먼저 분류가
+필요하다: (1) 내부 정상 상태 전이(합법적 시스템 함수 자신의 재진입 등)에 실제로 필요한지, (2)
+일반 역할이 실제로 도달 가능한지(이번 감사에서는 전부 "불가능"으로 확인됐으나 재검증 필요), (3)
+제거 시 어떤 운영 흐름이 깨지는지. **세션 불변식·동의·계정 상태·초대·정산 관련 항목
+(session_lock/consent_protect/status_protect/invite_protect/teacher_rate_protect)은 Preview나
+non-prod 반영 전에 별도 보안 정리 라운드로 반드시 닫아야 한다** — 이번 라운드에서 조치하지
+않았고, 다음 보안 정리 라운드의 범위로 명시적으로 이월한다.
+
+R9 Task 4는 착수 승인됨. 단, **`teacher_slot_not_open` 날짜 의존 테스트 실패는 Task 4 최종
+검수 전까지 근본 원인을 고쳐 전체 테스트가 실제로 녹색인 상태를 만들어야 한다** — 단독 실행
+실패를 "flaky"로 보고 끝내는 것은 허용되지 않는다(제품 오너 명시).
