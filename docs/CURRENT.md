@@ -1,4 +1,74 @@
-# ALTON — 현재 상태 (2026-09-07 기준)
+# ALTON — 현재 상태 (2026-09-08 기준)
+
+> **2026-09-08 — Part A: `teacher_slot_not_open` 날짜 의존 실패 근본 수정 +
+> Part B: R9 Task 4(과제 구성) 구현, 계획 완료.**
+>
+> **Part A 근본 원인:** `supabase/lesson-reviews.integration.test.ts`와
+> `lib/booking/trial-entitlement-and-cancellation.integration.test.ts`가
+> `confirm_lesson_booking()`에 넘기는 예약 시각을 "지금부터 N일 뒤, **현재
+> 시각과 같은 시:분**"으로 계산했다. 두 파일 모두 `teacher_availability_rules`를
+> 요일 상관없이 00:00~23:59로 시딩해두지만, `is_teacher_slot_open()`
+> (`20260926000000_r6_availability_and_booking.sql`)은 자정을 넘기는 슬롯을
+> "시작/종료가 같은 로컬 날짜(America/Los_Angeles)"일 때만 통과시킨다. 따라서
+> 테스트를 실제로 실행한 시각이 LA 자정 부근이면, N일 뒤도 정확히 같은
+> 시:분이라 똑같이 자정 부근이 되어 `teacher_slot_not_open`으로 실패했다 —
+> "특정 요일에서만 실패"가 아니라 "실행한 실제 시각의 시:분"에 좌우되는
+> 버그였다(그래서 실행할 때마다 재현 여부가 달랐다).
+>
+> **수정(테스트 파일만, 애플리케이션 로직/마이그레이션 변경 없음):** 두
+> 파일 모두 `lib/booking/session-final-judgment.integration.test.ts`/
+> `session-late-and-disruption.integration.test.ts` 등 이미 이 문제를 겪지
+> 않던 다른 R6 통합 테스트가 쓰던 `FIXED_BOOKING_HOUR_UTC = 17`(America/
+> Los_Angeles PDT 10:00 / PST 09:00, 항상 확실한 현지 낮) 패턴을 그대로
+> 재사용해 예약 시:분을 고정했다 — 날짜(며칠 뒤)만 가변, 시각은 항상 안전한
+> 낮 시간이므로 실제 "오늘"이 언제든 자정 경계에 걸릴 수 없다(구조적으로
+> 안전 — 특정 날짜를 하드코딩해 문제를 다른 날로 옮긴 것이 아니다). db
+> reset 없이 반복 실행할 때의 잔여 예약 충돌(같은 근본 원인 클래스,
+> `payout-batch-lifecycle.integration.test.ts`의 `findFreeSlot()`가 이미
+> 다룬 문제)까지 완전히 없애지는 않았으므로 분(分)만 0~49 사이 무작위로
+> 흩뿌려 재발 확률을 낮췄다(선택 사항 보강, 이 fix의 핵심은 아님).
+> **검증:** `supabase db reset --local` 후 두 파일을 단독/전체 스위트로
+> 각각 실행해 통과 확인. 시:분이 항상 고정된 안전 구간이라는 것이 구조적
+> 근거이며, 특정 날짜에 우연히 통과한 것이 아님을 코드로 보장한다.
+>
+> **Part B — R9 Task 4(과제 구성, 계획 마지막 태스크):**
+> `supabase/migrations/20261235000000_r9_homework_composition.sql`이 새
+> `session_homework_items` 테이블을 만든다 — 기존 `homework_items`는 사전
+> 검토 결과 `session_id`가 R6 cutover(`20260928000000_r6_sessions_cutover.sql`)
+> 이후 지금도 **legacy_sessions**를 참조한다는 것을 확인했다(테이블 rename은
+> OID 기반이라 FK가 그대로 따라감) — 이번 라운드가 쓰는 `sessions`(구
+> `sessions_v3`, Task 2/3이 참조하는 바로 그 테이블)와는 별개의 FK 타겟이라
+> 재사용할 수 없었다(계획서 §4의 사전 검토 요구사항대로 실제로 확인 후 결정,
+> 가정하지 않음). `check_homework_item_problem_confirmed()` 트리거(SECURITY
+> DEFINER — problems RLS 가시성과 무관하게 항상 정확한 confirmed 상태를 봐야
+> 하므로)가 confirmed가 아닌 문제의 INSERT를 DB 레벨에서 거부한다. RLS는
+> `is_session_teacher_v3(session_id)`/`is_admin()`만 읽기·쓰기 가능(Task 3과
+> 동일한 결정 5 — 학생 제외, 추후 확장). `app/teacher/homework-composition-actions.ts`의
+> `composeHomeworkFromSession(sessionId, keywordIds, count, {includeUsedInLesson,
+> includeAlreadyAttempted})`가 `problem_keywords_selectable`을 호출 시점에 다시
+> 조회해(Task 2 pin-시점 재검증과는 별개의, 계획서가 요구한 두 번째 재검증
+> 지점) 후보 풀을 만들고, `session_content_use_events`/`session_problem_attempts`
+> 존재 여부로 두 토글을 독립적으로 적용한다. 인가는
+> `student-curriculum-actions.ts`의 `requireAssignedTeacherOrAdmin`과 동일한
+> predicate를 복제해 재사용(그 함수가 export되어 있지 않아 import는 못 함,
+> 새 메커니즘은 발명하지 않음). `app/session/[id]/HomeworkTab.tsx`에 v3
+> 세션·teacher/admin 실제 역할일 때만 보이는 "이 세션에서 과제 구성" UI를
+> 추가했다(레거시 과제 쓰기는 여전히 v3 세션에서 비활성 — 별개 테이블이라
+> 서로 간섭하지 않는다). 키워드 후보는
+> `app/teacher/homework-composition-data.ts`의 `loadSessionKeywordOptions()`가
+> 세션의 `session_content_manifest` 출처 오버레이 단원의 활성 키워드에서 가져온다.
+> **테스트:** `app/teacher/homework-composition-actions.test.ts`(인가),
+> `app/teacher/homework-composition-toggles.test.ts`(발급 시점 재검증 1건 +
+> 토글 4조합 + count 제한, 가짜 supabase 클라이언트), `app/teacher/
+> homework-composition.integration.test.ts`(confirmed 게이트 트리거를 DB에
+> 직접 SQL로 우회 시도해도 거부됨 3건, RLS 담당/비담당/관리자 4건) — 전부
+> `supabase db reset --local` 후 통과.
+>
+> **최종 검증:** `supabase db reset --local` → `tsc --noEmit`(에러 0) →
+> `vitest run --no-file-parallelism`: **221 files / 1521 tests 전부 통과,
+> 실패 0건** → `next build` 성공(정적 페이지 생성 32/32 포함). R8/R10/
+> whiteboard 관련 파일은 건드리지 않았고, Task 1~3의 기존 마이그레이션도
+> 수정하지 않았다(Task 4는 새 마이그레이션 파일 하나만 추가).
 
 > **2026-09-07(R8 corrective — session_annotation_events append-only lock의
 > settable GUC bypass 제거, 90d7012/6f292cc와 동일 취약점 클래스, Task 4는

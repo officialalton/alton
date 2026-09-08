@@ -26,6 +26,32 @@ let subjectEnrollmentId: string;
 let trialLessonTypeId: string;
 let trialProductId: string;
 
+// 2026-09-08 제품 오너 리뷰: 이 파일이 confirm_lesson_booking()에 넘기는 예약 시각은
+// 이전엔 전부 "지금부터 N일 뒤, 현재 시각과 같은 시:분"이었다. beforeAll에서 심는
+// teacher_availability_rules는 요일 상관없이 00:00~23:59(거의 종일)이지만,
+// is_teacher_slot_open()은 자정을 넘기는 슬롯을 "시작/종료가 같은 로컬 날짜"여야
+// 통과시키므로, 테스트를 실행한 실제 시각이 America/Los_Angeles 자정 부근이면
+// N일 뒤도 똑같이 자정 부근이 되어 teacher_slot_not_open으로 실패했다 — 요일이
+// 아니라 "실행 시각의 시:분"에 좌우되는 버그였다. lib/booking/session-final-judgment
+// 등 다른 통합 테스트가 이미 쓰는 FIXED_BOOKING_HOUR_UTC=17(PDT 10:00/PST 09:00,
+// 항상 현지 낮) 패턴을 그대로 재사용해 어떤 실제 "오늘"에도 안전하게 만든다.
+// 시(時)는 항상 17시 UTC 고정(위 이유), 분(分)만 0~49 사이에서 무작위로 흩뿌린다 —
+// 같은 파일을 db reset 없이 다시 실행했을 때 이전 실행이 남긴 예약(entitlement_ledger가
+// INSERT-only라 지워지지 않음, payout-batch-lifecycle.integration.test.ts와 동일한
+// 근본 원인)과 정확히 같은 분에 겹쳐 violates_teacher_buffer(전후 15분)에 걸리는
+// 것을 피하기 위함이지, "오늘이 언제든 안전"이라는 이 fix의 본 목적과는 무관하다
+// (시가 고정이라 날짜 경계 근처로 갈 일은 없다 — 무작위인 건 분뿐).
+const FIXED_BOOKING_HOUR_UTC = 17;
+function futureSlot(daysFromNow: number, durationMinutes = 60): { startsAt: string; endsAt: string } {
+  const startsAtDate = new Date();
+  startsAtDate.setUTCDate(startsAtDate.getUTCDate() + daysFromNow);
+  startsAtDate.setUTCHours(FIXED_BOOKING_HOUR_UTC, Math.floor(Math.random() * 50), 0, 0);
+  return {
+    startsAt: startsAtDate.toISOString(),
+    endsAt: new Date(startsAtDate.getTime() + durationMinutes * 60000).toISOString(),
+  };
+}
+
 beforeAll(() => {
   trialLessonTypeId = psql(`select id from lesson_types where code = 'trial';`);
   trialProductId = psql(`select id from entitlement_products where code = 'trial_lesson_grant';`);
@@ -84,8 +110,7 @@ describe("90일 체험수업권 만료 이후 예약 차단", () => {
     );
     psql(`insert into entitlement_ledger (grant_id, event_type, amount, business_event_id) values ('${grantId}', 'grant', 1, 'integration-expired-${Date.now()}');`);
 
-    const startsAt = new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString();
-    const endsAt = new Date(new Date(startsAt).getTime() + 60 * 60000).toISOString();
+    const { startsAt, endsAt } = futureSlot(2);
 
     expect(() =>
       psql(
@@ -102,8 +127,7 @@ describe("90일 체험수업권 만료 이후 예약 차단", () => {
     );
     psql(`insert into entitlement_ledger (grant_id, event_type, amount, business_event_id) values ('${grantId}', 'grant', 1, 'integration-valid-${Date.now()}');`);
 
-    const startsAt = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString();
-    const endsAt = new Date(new Date(startsAt).getTime() + 60 * 60000).toISOString();
+    const { startsAt, endsAt } = futureSlot(3);
     const sessionId = psql(
       `select session_id from confirm_lesson_booking('${childId}', '${subjectEnrollmentId}', '${TEACHER_ID}', '${trialLessonTypeId}', '${startsAt}', '${endsAt}', 'integration-valid-booking-${Date.now()}');`
     );
@@ -126,8 +150,7 @@ describe("24시간 기준 취소 처리(release vs 소진)", () => {
 
   it("학생이 수업 시작 24시간 이상 전에 취소하면 수업권을 소진하지 않고 해제(release)한다", () => {
     const grantId = grantFreshTrialEntitlement();
-    const startsAt = new Date(Date.now() + 6 * 24 * 60 * 60 * 1000).toISOString(); // 6일 뒤 — 24시간 이상 여유
-    const endsAt = new Date(new Date(startsAt).getTime() + 60 * 60000).toISOString();
+    const { startsAt, endsAt } = futureSlot(6); // 6일 뒤 — 24시간 이상 여유
     const reservationSessionRow = psql(
       `select reservation_id, session_id from confirm_lesson_booking('${childId}', '${subjectEnrollmentId}', '${TEACHER_ID}', '${trialLessonTypeId}', '${startsAt}', '${endsAt}', 'integration-release-${Date.now()}');`
     );
@@ -140,8 +163,7 @@ describe("24시간 기준 취소 처리(release vs 소진)", () => {
 
     // 소진되지 않았으므로 같은 grant로 재예약이 가능해야 한다(요구사항: 24시간
     // 이상 전 취소는 release + 90일 내 재예약 가능).
-    const rebookStartsAt = new Date(Date.now() + 4 * 24 * 60 * 60 * 1000).toISOString();
-    const rebookEndsAt = new Date(new Date(rebookStartsAt).getTime() + 60 * 60000).toISOString();
+    const { startsAt: rebookStartsAt, endsAt: rebookEndsAt } = futureSlot(4);
     const rebookSessionId = psql(
       `select session_id from confirm_lesson_booking('${childId}', '${subjectEnrollmentId}', '${TEACHER_ID}', '${trialLessonTypeId}', '${rebookStartsAt}', '${rebookEndsAt}', 'integration-rebook-${Date.now()}');`
     );
@@ -155,8 +177,7 @@ describe("24시간 기준 취소 처리(release vs 소진)", () => {
     // "지금 취소하면 24시간 미만"인 상황을 재현한다 — cancel_lesson_booking()은
     // 취소 시점의 reservations.starts_at만 보고 시간을 계산하므로 이 방법으로
     // 정확히 같은 분기를 검증할 수 있다.
-    const startsAt = new Date(Date.now() + 9 * 24 * 60 * 60 * 1000).toISOString();
-    const endsAt = new Date(new Date(startsAt).getTime() + 60 * 60000).toISOString();
+    const { startsAt, endsAt } = futureSlot(9);
     const reservationSessionRow = psql(
       `select reservation_id, session_id from confirm_lesson_booking('${childId}', '${subjectEnrollmentId}', '${TEACHER_ID}', '${trialLessonTypeId}', '${startsAt}', '${endsAt}', 'integration-consume-${Date.now()}');`
     );
@@ -174,8 +195,7 @@ describe("24시간 기준 취소 처리(release vs 소진)", () => {
 
   it("선생님·회사가 취소하면 시점과 무관하게 항상 해제(release)한다", () => {
     const grantId = grantFreshTrialEntitlement();
-    const startsAt = new Date(Date.now() + 11 * 24 * 60 * 60 * 1000).toISOString();
-    const endsAt = new Date(new Date(startsAt).getTime() + 60 * 60000).toISOString();
+    const { startsAt, endsAt } = futureSlot(11);
     const reservationSessionRow = psql(
       `select reservation_id, session_id from confirm_lesson_booking('${childId}', '${subjectEnrollmentId}', '${TEACHER_ID}', '${trialLessonTypeId}', '${startsAt}', '${endsAt}', 'integration-teacher-cancel-${Date.now()}');`
     );

@@ -124,8 +124,22 @@ beforeAll(() => {
   // — 병렬 실행 시 겹치면 teacher_buffer_violation이 나므로(2026-09-05 실측
   // 발견) 겹치지 않게 충분히 떨어뜨리되, is_within_booking_window() 상한(8주)
   // 안에 들어오게 +40일로 예약한다.
-  const startsAt = new Date(now + 40 * 24 * 60 * 60 * 1000).toISOString();
-  const endsAt = new Date(new Date(startsAt).getTime() + 60 * 60000).toISOString();
+  // 2026-09-08 제품 오너 리뷰: 이전엔 now+40일을 "현재 시각과 같은 시:분"으로 계산해서
+  // teacher_availability_rules가 00:00~23:59(거의 종일)로 시딩돼 있어도 is_teacher_slot_open()의
+  // "자정을 넘기는 슬롯은 시작/종료가 같은 로컬 날짜여야 한다" 조건에 실제 테스트 실행
+  // 시각이 America/Los_Angeles 자정 부근일 때만 걸려서 teacher_slot_not_open으로 실패했다
+  // (day-of-week가 아니라 실행 시각의 시:분에 의존하는 버그). lib/booking/session-final-judgment
+  // 등 다른 통합 테스트가 이미 쓰는 FIXED_BOOKING_HOUR_UTC=17 패턴을 그대로 재사용해 항상
+  // 현지 낮 시간(PDT는 10:00, PST는 09:00)에 슬롯을 고정한다 — 실제 "오늘"이 언제든 안전하다.
+  // 분(分)은 0~49 사이 무작위 — db reset 없이 이 파일을 반복 실행해도 이전
+  // 실행이 남긴 예약(entitlement_ledger가 INSERT-only라 지워지지 않음)과 정확히
+  // 같은 분에 겹쳐 teacher_buffer_violation이 나는 것을 피한다(시가 고정이라
+  // 날짜 경계 근처로 갈 일은 없다 — 이 fix의 본 목적과는 무관한 별개의 보강).
+  const FIXED_BOOKING_HOUR_UTC = 17;
+  const startsAtDate = new Date(now + 40 * 24 * 60 * 60 * 1000);
+  startsAtDate.setUTCHours(FIXED_BOOKING_HOUR_UTC, Math.floor(Math.random() * 50), 0, 0);
+  const startsAt = startsAtDate.toISOString();
+  const endsAt = new Date(startsAtDate.getTime() + 60 * 60000).toISOString();
   sessionId = psql(
     `select session_id from confirm_lesson_booking('${childId}', '${subjectEnrollmentId}', '${TEACHER_ID}', '${trialLessonTypeId}', '${startsAt}', '${endsAt}', 'integration-review-booking-${now}');`
   );
