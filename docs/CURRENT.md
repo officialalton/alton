@@ -1,5 +1,86 @@
 # ALTON — 현재 상태 (2026-09-07 기준)
 
+> **2026-09-07(R9 정정 라운드 — 제품 오너 지시 corrective 1/2) 오버레이
+> 최초 베이스라인 시딩 + 키워드 태깅/공개 게이트 분리.** 배경: 제품 오너가
+> Task 1(`44125f0`)/Task 3(`63f5f57`)를 리뷰하고 두 가지를 명시적으로
+> 잘못됐다고 지적, 후속 계획(레슨 준비 등) 착수 전 이 두 건만 로컬에서
+> 교정·검증하라고 지시(원격 Supabase push, Vercel Preview 배포, UAT 계정
+> 생성, 실제 외부 API 호출은 이번 라운드에서 전부 금지 — 전부 로컬만).
+>
+> **Corrective 1 — 오버레이 최초 베이스라인.** 문제:
+> `app/teacher/student-curriculum-actions.ts`의 `ensureActiveOverlay()`가
+> 빈 오버레이 껍데기만 만들었다(스펙 §4 "추가·제외·재정렬·진도 레이어" 취지
+> 위반 — 레이어를 얹을 기본 원본 자체가 없었다). 조치:
+> `supabase/migrations/20261230000000_r9_corrective_overlay_baseline_seed.sql`에
+> `ensure_active_curriculum_overlay(subject_enrollment_id)` 단일 plpgsql
+> 함수를 추가 — 오버레이 생성과 "과목의 기본 `subject_template_units` 전체를
+> `source_unit_id` 참조로 시딩 + 시딩 시점 `subject_template_unit_keywords`를
+> `curriculum_overlay_unit_keywords`로 스냅샷 복사"를 하나의 트랜잭션으로
+> 묶었다. 동시성/멱등성은 이 코드베이스의 기존 "ensure singleton row" 패턴
+> (R5 `20260925010000_r5_subject_thread_auto_create.sql`의 unique index +
+> `on conflict ... do nothing`)을 그대로 따르고, 여기에
+> `subject_enrollment_id` 단위 advisory xact lock을 더해 동시/재시도 호출을
+> 직렬화했다. `app/teacher/student-curriculum-actions.ts`의
+> `ensureActiveOverlay`는 이제 이 RPC 호출 하나로 대체(직접 insert 제거).
+> **검증 매핑:**
+> `app/teacher/student-curriculum-overlay.integration.test.ts`의
+> "ensure_active_curriculum_overlay — 최초 베이스라인 시딩" describe 블록 4개
+> 테스트가 각각 (a) 첫 호출 시 과목 기본 단원 수만큼 정확히 시딩되고
+> `source_unit_id`가 정본을 참조하며 정본 테이블 자체는 안 바뀜, (b) 시딩
+> 시점의 단원 기본 키워드가 스냅샷 복사됨, (c) 이미 활성 오버레이가 있으면
+> 재호출해도 재시딩 없이 같은 id 반환, (d) **실제 동시성**(service-role
+> `supabase-js` 클라이언트로 8개 `Promise.all` 동시 호출 — 동기 psql
+> 프로세스로는 재현 불가하여
+> `parent-home-lessons-parallel-regression.integration.test.ts`와 동일하게
+> 진짜 비동기 REST 호출 사용) 이후에도 활성 오버레이 정확히 1개 + 베이스라인
+> 단원 정확히 N개(= N×8이 아님)만 존재함을 각각 증명한다.
+> `app/teacher/student-curriculum-actions.test.ts`의 새 describe
+> "ensureActiveOverlay — corrective 1"은 mocked 클라이언트로 이 함수가
+> `ensure_active_curriculum_overlay` RPC를 정확히 1번만 호출하고 그 결과를
+> 그대로 반환하며, 담당이 아닌 선생님이면 RPC 자체를 호출하지 않고 거부됨을
+> 증명한다.
+>
+> **Corrective 2 — 키워드 태깅과 공개/확정 게이트 분리.** 문제: Task 1
+> 트리거가 "관계가 존재한다"와 "지도용으로 선택 가능하다"를 혼동했다 —
+> draft 섹션/미확정 문제는 애초에 태깅 자체가 막혀 있었고(저작 편의 기능이
+> 공개 게이트가 돼버림), unpublish/unconfirm 시 관계 행 자체가 삭제됐다
+> (관리자가 오탈자 수정 등으로 잠깐 draft로 되돌리면 태깅 결과가 통째로
+> 사라짐). 조치:
+> `supabase/migrations/20261230010000_r9_corrective_keyword_publish_gate.sql`에서
+> (1) `cleanup_section_keywords_on_unpublish`/`cleanup_problem_keywords_on_unconfirm`
+> 트리거·함수를 완전히 제거(관계 보존), (2)
+> `check_section_keyword_published`/`check_problem_keyword_confirmed`를
+> 존재·과목 일치 검사만 남기고 published/confirmed 게이트를 제거(태깅은
+> draft/미확정 콘텐츠에도 허용), (3) 읽기 시점 선택 가능 게이트로
+> `curriculum_doc_section_keywords_selectable`/`problem_keywords_selectable`
+> 뷰(둘 다 `security_invoker=true`로 기저 테이블 RLS 상속)를 신설 — 향후
+> "선생님이 실제로 고를 수 있는 콘텐츠" 쿼리는 관계 테이블이 아니라 이
+> 뷰를 읽어야 한다. `curriculum_overlay_unit_materials`의 자체
+> published-교재 게이트(Task 3, 별도 트리거)는 이미 올바른 쓰기측 게이트라
+> 손대지 않았다. **검증 매핑:**
+> `app/admin/curriculum-content-foundation.integration.test.ts`의 새 describe
+> "선택 가능(teaching-selectable) 게이트는 쓰기가 아니라 읽기 시점(뷰)에
+> 있다"에서 4개 테스트가 각각 (a) draft 섹션에 태깅이 **성공**하지만
+> `curriculum_doc_section_keywords_selectable`에는 안 보임, (b) 미확정
+> 문제에 태깅이 **성공**하지만 `problem_keywords_selectable`에는 안 보임을
+> 증명하고, 제품 오너가 지정한 정확한 회귀 시나리오 2개("draft 태깅 →
+> unpublish/unconfirm해도 관계가 DB에 그대로 남음 → 선택 가능 뷰에는
+> 미노출 → publish/confirm하면 **재태깅 없이** 같은 관계가 뷰에 나타남")를
+> 섹션·문제 양쪽에서 각각 증명한다.
+>
+> **검증:** 두 마이그레이션 적용 후 `supabase db reset --local` 성공(클린
+> 적용), corrective별로 각각 `supabase db reset --local` + 해당 통합
+> 테스트 통과를 먼저 확인한 뒤 커밋(로컬 커밋 2개, corrective 1개당 1개
+> 커밋 — 번들 금지), 마지막에 신선한 `db reset --local` 직후 전체
+> `tsc --noEmit`(clean) + 전체 `vitest run --no-file-parallelism`(212
+> files / 1436 tests 전부 통과) + `npx next build`(clean) 각 1회 실행. 이
+> 라운드는 로컬(`supabase db reset --local`, 로컬 Vitest, 로컬
+> `next build`)만 사용 — 원격 Supabase migration push, Vercel Preview 배포,
+> UAT 계정 생성, 실제 외부 API/이메일 호출 전부 없음(`git push` 없음, 별도
+> merge 없음). R8/R10/화이트보드(session-view) 파일은 손대지 않음. 후속
+> 계획(레슨 준비/세션 문제 선택/과제 구성) 착수는 이번 라운드 범위 밖 —
+> 시작하지 않음.
+>
 > **2026-09-07(R9 Acceptance gate 검증) 커리큘럼 콘텐츠 기반 계획서의
 > Acceptance gate 4개 항목을 실제 DB 통합 테스트로 증명.** 배경:
 > `docs/superpowers/plans/2026-09-07-curriculum-content-foundation.md`의
