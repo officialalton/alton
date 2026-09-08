@@ -1,5 +1,12 @@
 # Lesson Preparation, Session Selection, and Homework Composition — Implementation Plan
 
+> **STATUS (2026-09-08): APPROVED — 제품 오너 최종 승인 완료.** Task 1~4와 그 사이 발견된
+> corrective 전부(GUC bypass 3건 제거, unit provenance 강제, 학생 답안 경로, format별 UI,
+> 교사 읽기전용 뷰, 과제 재구성 원자성/최소노출) 반영 완료. 관련 커밋과 완료 범위 요약은
+> `docs/CURRENT.md`의 "2026-09-08 — 콘텐츠·커리큘럼 파운데이션 + 레슨 준비 계획(v4) 전체
+> 최종 승인, 범위 마감" 절 참고. 후속 항목(보안 정리 라운드, WhiteboardCanvas Preview UAT
+> 등)도 같은 절에 명시.
+>
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 >
 > **STATUS: DRAFT v2 — submitted for product-owner approval before any code work starts.** Built on

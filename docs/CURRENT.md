@@ -3852,3 +3852,53 @@ fresh `supabase db reset --local` 직후 연속 2회 실행: **1회차 226 files
 의존 flaky는 이번 두 번 모두 재현되지 않았다(0 실패). `next build` 성공.
 
 이것으로 R9 레슨 준비 계획(Task 1-4) 전체가 제품 오너 최종 승인 대기 상태다.
+
+## 2026-09-08 — 콘텐츠·커리큘럼 파운데이션 + 레슨 준비 계획(v4) 전체 최종 승인, 범위 마감
+
+**최종 승인 완료.** 콘텐츠·커리큘럼 파운데이션 1차(2026-09-07)에 이어, 수업 준비·세션 문제
+선택·과제 조립 계획(`docs/superpowers/plans/2026-09-08-lesson-prep-session-selection.md`, v4)의
+Task 1~4와 그 사이 발견된 모든 corrective가 제품 오너 최종 승인을 받았다.
+
+**완료 범위 요약**(관련 커밋 `44125f0`~`72a7a18`, 총 30여 개):
+- **콘텐츠 파운데이션**: 과목별 키워드 사전 + 단원/섹션/문제 관계, 공개·확정 콘텐츠만 선택
+  가능(읽기 시점 selectable view로 강제, 관리자 태깅은 draft에도 허용), 학생별 운영 커리큘럼
+  오버레이(복제 아닌 참조, 생성 시 공개 교재까지 원자적 베이스라인 시딩), 세션 내 AI 문제 생성
+  완전 제거.
+- **세션 준비(Task 1)**: 준비 임시보관함(취소 시 삭제 대신 detach), 다단원·단원별 키워드 범위
+  선택, 교사가 명시적으로 pick/exclude/order한 실제 콘텐츠 목록(키워드는 필터일 뿐 pin
+  페이로드 아님), composite FK로 콘텐츠-단원-selection 삼자 정합성 구조적 강제.
+- **세션 콘텐츠 manifest(Task 2)**: `pinSessionSelection()`(SECURITY DEFINER, 자체 인가 0a~0e
+  전수 검사) 단일 원자 함수만 manifest를 쓸 수 있음(일반 role은 INSERT/UPDATE/DELETE 권한
+  자체가 없음). pin은 그 시점 selectable 재검증 후 스냅샷 동결, 이후 신규 공개·키워드 변경에도
+  불변. 표시 시점엔 별도로 공개·확정 상태를 다시 게이트(행 자체는 안 바뀜).
+- **레슨 사용 이벤트(Task 3)**: manifest에 실제 존재하는 항목만(복합 FK) 교사 명시적 조작
+  1회당 1행, append-only, 교사·관리자 전용(학생 접근 불가).
+- **과제 조립(Task 4)**: 발급 시점 재검증(태깅 후 unconfirm된 문제 자동 제외), "수업 사용"/
+  "이미 풀어봄"(legacy+v3 제출 모두, 답안 원문 미노출) 두 토글 독립 제어, 같은 세션 재구성 시
+  기존 발급 문제 제외, advisory lock으로 동시 구성 안전, 후보 부족 시 발급 수 정직하게 반환.
+  학생 포털에 실제 응답 UI(객관식 선택지/서술형 입력, 제출 후 읽기전용) 및 교사·관리자용
+  읽기전용 제출 현황 화면까지 연결.
+- **보안 corrective**: 이번 계획 진행 중 동일 계열의 "설정 가능한 GUC bypass가 append-only/
+  불변 트리거를 무력화하는" 취약점을 4곳(`session_prepared_selections`, `session_content_use_events`,
+  `session_annotation_events`(R8, 기존 승인분), 그리고 감사로 발견한 7곳 추가)에서 발견,
+  그중 3곳은 이번에 완전 제거, 나머지 7곳(`bypass_session_lock`/`bypass_teacher_rate_protect`/
+  `bypass_invite_protect`/`bypass_status_protect`/`bypass_consent_protect`/
+  `bypass_reconciliation_task_lock`/`bypass_trial_session_auto_complete`)은 분류 후 별도
+  보안 정리 라운드로 명시적으로 이월(위 2026-09-08 절 "남은 7개 app.bypass_* 처리 방침" 참고).
+
+**후속 항목(다음 라운드로 이월, 이번 범위 아님)**:
+1. **보안 정리 라운드**: 위 7개 live `app.bypass_*` GUC — 특히 세션 불변식·동의·계정 상태·
+   초대·정산 관련(`session_lock`/`consent_protect`/`status_protect`/`invite_protect`/
+   `teacher_rate_protect`)은 Preview/non-prod 반영 전 반드시 닫아야 함(제품 오너 명시).
+2. **WhiteboardCanvas Preview UAT**: R9 화이트보드 연결(교사·학생 두 브라우저 실시간 반영,
+   재접속 replay, clear-all 권한) 실측 확인 여전히 미완료 — 진행 가능한 v3 세션·UAT 계정
+   구성은 제품 오너 별도 승인 후에만.
+3. **학생 노출 확장**: "레슨 사용" 기록의 학생 노출·복습 화면(현재 교사·관리자 전용으로 확정,
+   확장은 후속 범위).
+4. **레거시 화이트보드 백필**: 읽기 호환만 유지 중, 백필 계획 없음(의도적).
+5. R9 kickoff 문서(`docs/superpowers/specs/2026-09-08-lesson-prep-session-selection-kickoff.md`)
+   §6 확정 이후 새로 열린 세부 판단(예: v3 답안 JSON 모양 `{type,...}`)은 이미 확정 반영됨,
+   추가 정책 질문 없음.
+
+**외부 변경 원칙**: 계속 유지 — non-prod migration 반영, Vercel Preview 배포, UAT 테스트
+계정 생성, 실제 외부 API/이메일 호출은 제품 오너 사전 승인 없이 진행하지 않는다.
