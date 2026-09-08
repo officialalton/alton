@@ -3001,3 +3001,15 @@ published/confirmed만 통과)로 강제한다.
 증명) `75c4dae`(corrective1) `c70e9ed`(corrective2) `56780b2`(docs)
 `e41edee`(corrective1 교재 보완). **콘텐츠·커리큘럼 파운데이션 1차 —
 제품 오너 최종 승인 완료.**
+
+## 2026-09-08 — 수업 준비·세션 문제 선택·과제 조립 정책 질문 6건 기획 검토용 정리
+
+코드·마이그레이션·외부 변경 없이, 킥오프 문서(`2026-09-08-lesson-prep-
+session-selection-kickoff.md` §6)의 정책 질문 6건을 `docs/superpowers/
+specs/2026-09-08-lesson-prep-policy-review.md`로 확장 정리했다(각 질문의
+발생 시점·선택지별 교사/학생 경험·데이터 무결성·운영 부담·권장안·구현
+범위 분기점·기존 정책 충돌 여부). **아직 기획 확정 전 — 이 문서는 답을
+확정하지 않고 권장안만 제시한다.** 이 문서의 권장안이 확정되거나 다른
+선택으로 정정된 뒤에만 follow-on plan(수업 준비·세션 문제 선택·과제
+조립) 구현에 착수한다. 이번 라운드는 non-prod 반영·Preview 배포·UAT
+계정 생성·외부 호출 전혀 없음.
