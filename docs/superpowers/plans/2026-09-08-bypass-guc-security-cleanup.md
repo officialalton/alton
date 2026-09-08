@@ -1,5 +1,14 @@
 # bypass GUC 보안 정리 계획 (2026-09-08, 계획 전용 — 코드/마이그레이션 변경 없음)
 
+> **개정 이력**: 이 문서는 초안(2026-09-07 작성분) 대비 아래 4가지를 개정했다 —
+> (1) 7개 전부 하드 블로커로 확정(잠정/결정 필요 프레이밍 제거), (2)
+> `bypass_reconciliation_task_lock`의 "R10 착수 여부 미확인" 서술이 사실과
+> 달랐음을 정정(R10 payout 파이프라인은 이미 구현돼 있음 — 실제 커밋 확인
+> 완료), (3) 초안에 남아 있던 "결정 필요" 3개 항목을 실제 최신 함수 본문을
+> 전수 읽어 확정 결론으로 전환, (4) 7개 GUC 각각에 대해 "여러 대안 나열" 대신
+> 단일 확정 방향 + 구체적 테스트 시나리오로 재작성. 이 개정 라운드에서도
+> 코드/마이그레이션은 전혀 건드리지 않았다.
+
 ## 배경 패턴
 
 이 저장소에는 "append-only/immutability 트리거를 SECURITY DEFINER 내부 함수가
@@ -22,87 +31,130 @@ plain SQL `current_setting`/`set_config`)를 켜고 끈다"는 반복 패턴이 
 쓰던 내부 호출자가 실제로는 우회가 필요 없었다(애초에 자기 자신이 만든 행이라
 막힐 이유가 없었거나, append-only라 정리 자체를 포기하는 게 맞았다)"로
 귀결됐다 — **"안전한 대체재"가 아니라 "우회 분기 자체가 불필요했다"**는 것이
-공통 결론이었다. 이번 7건은 성격이 갈린다: 몇몇은 동일하게 "분기 삭제로
-충분"하지만, 최소 2건(`bypass_session_lock`, `bypass_trial_session_auto_complete`)은
-정말로 같은 함수/트리거 체인 내부에서 "내가 막 쓴 행을 내가 다시 건드려야
-한다"는 재진입(reentrancy) 요구가 있어 보이며, 대체재는 GUC가 아닌 다른
-메커니즘(아래 항목5)이어야 한다.
+공통 결론이었다. 이번 7건은 성격이 갈린다: 몇몇은 동일하게 "트리거를 필드
+조합 검사로 재작성하면 충분"하지만, 다중 호출자(같은 GUC를 여러 함수가
+공유)이거나 진짜 재진입(자기 트랜잭션에서 자기가 막은 트리거를 다시
+통과해야 함) 요구가 있는 경우는 GUC가 아닌 다른 구조적 메커니즘이 필요하다
+— 이번 개정에서 7건 각각에 대해 그 메커니즘을 하나씩 확정했다(아래 각 항목의
+"5. 안전한 대체").
 
-## 우선순위 표 (지정된 순서: session_lock → consent → status → invite → teacher_rate)
+## 실행 순서(2배치, 제품 오너 지시 반영)
 
-### 1. `bypass_session_lock`
+제품 오너가 지시한 착수 순서: **1배치(저영향/단순군)를 먼저 독립적으로
+검토·착수**하고, **이번 라운드가 수행한 최신 경로 전수 확인이 완료된 뒤에만**
+**2배치(고범위군)**를 세부 스코프로 더 쪼개 진행한다.
+
+- **배치 1 (단순·필드 검사 재작성으로 충분, 독립적으로 먼저 착수 가능)**
+  1. `bypass_consent_protect`
+  2. `bypass_teacher_rate_protect`
+  3. `bypass_trial_session_auto_complete`
+- **배치 2 (다중 호출자·공유 토큰 인프라 또는 구조 재설계 필요, 배치 1 이후 세부
+  스코프로 분할 진행)**
+  1. `bypass_status_protect` — 공유 토큰 테이블 인프라를 여기서 처음 구축
+  2. `bypass_invite_protect` — 배치 2-1의 토큰 인프라 재사용
+  3. `bypass_reconciliation_task_lock` — 배치 2-1의 토큰 인프라 재사용, 정산 도메인이므로 우선순위 상향
+  4. `bypass_session_lock` — 토큰 인프라와 무관한 별도 구조 재설계(두 불변식 분리)
+
+아래 "우선순위 표"의 절 순서는 참조 편의상 기존 순서(session_lock →
+consent → status → invite → teacher_rate → 정산/trial 2건)를 유지하지만,
+실제 착수 순서는 위 배치 순서를 따른다.
+
+## 우선순위 표 (문서 내 서술 순서: session_lock → consent → status → invite → teacher_rate → reconciliation → trial)
+
+### 1. `bypass_session_lock`  — 배치 2-4
 
 | 항목 | 내용 |
 |---|---|
 | 1. 보호 테이블·불변식 | `sessions`(`sessions_v3` → R6 cutover로 개명) 두 개의 서로 다른 불변식을 **같은 GUC 이름**으로 보호한다: (a) `final_status`가 `scheduled`/`live`를 벗어난 뒤에는 `reopen_session()`/`recomplete_session()`을 통해서만 바뀔 수 있다(`prevent_direct_final_status_update()`, `20260830040000_r1_reservation_session.sql`, R6 cutover 후 `20260928000000_r6_sessions_cutover.sql`에서 재정의), (b) 세션이 시작(`final_status <> 'scheduled'`)되거나 완료된 뒤에는 `material_version_id`를 재배정할 수 없다(`prevent_material_version_reassignment()`, `20261219000000_r8_material_version_lock.sql`). |
-| 2. 실제 SET 호출 경로 | `reopen_session(p_session_id, p_reason)`과 `recomplete_session(...)` 내부에서만 `perform set_config('app.bypass_session_lock', 'true', true)` 호출 — 둘 다 함수 시작부에서 `if not public.is_admin() then raise exception`으로 게이트한 뒤 `final_status`를 되돌리는 UPDATE 직전에 켠다. R6 cutover(`20260928000000_r6_sessions_cutover.sql`)가 이 두 함수를 `sessions_v3`에서 `sessions`로 재정의하면서 동일 패턴을 그대로 옮겼다. 앱 서버 액션이나 cron/웹훅에서 이 GUC를 직접 SET하는 코드는 repo 전체 grep(`app/`, `lib/`)에서 발견되지 않았다 — 유일한 SET 호출자는 이 두 SECURITY DEFINER 함수 자신이다. 통합 테스트(`app/session/[id]/r8-cutover.integration.test.ts`)는 `set_config('app.bypass_session_lock', ...)`를 fixture 정리용으로 직접 psql/superuser 경로에서 쓰고 있다(정확히 우회 가능성을 이용하는 코드). |
-| 3. 도달 가능성 | `authenticated`: `reopen_session`/`recomplete_session`은 `authenticated`에 GRANT돼 있지만 함수 본문의 `is_admin()` 검사가 실질 관문이라 일반 사용자는 함수를 호출해도 즉시 거부된다 — **직접 GUC를 SET할 권한 자체가 없고**(트리거 함수는 `revoke ... from public, anon, authenticated, service_role`), GUC 이름 자체에 대한 접근 제어도 없으므로 `authenticated` 세션이 임의 SQL을 실행할 수 있는 다른 취약점(예: SQL 인젝션)과 결합하면 이 GUC를 직접 SET하고 자기 세션의 UPDATE를 통과시킬 수 있다 — 트리거 자체는 role을 구분하지 않는다. 관리자(admin) 계정도 `authenticated`이므로 동일 카테고리이나 `is_admin()`을 통과하는 유일한 정상 그룹. Service role: RLS를 완전히 우회하고 커스텀 GUC 접근 제어도 없으므로, 어떤 service_role 연결(운영 스크립트, 백엔드 job)이든 `SET`만으로 `final_status`/`material_version_id` 불변식을 무력화할 수 있다 — 이것이 90d7012/6f292cc/876b30a와 동일한 핵심 위험. SECURITY DEFINER: `reopen_session`/`recomplete_session` 자신이 SECURITY DEFINER이고 이들이 이 GUC의 유일한 정상 호출자이지만, **다른 어떤 SECURITY DEFINER 함수든** 함수 소유자 권한으로 이 이름을 SET할 수 있다는 점은 동일 — GUC가 함수 경계를 특정하지 않는다. |
-| 4. 깨질 정상 흐름 | `reopen_session()`은 `completed → live` 전이를 기록한 뒤 그 UPDATE를 성공시키기 위해 자기 자신의 `prevent_direct_final_status_update` 트리거를 통과해야 한다 — 이건 **진짜 재진입 요구**(자기 트랜잭션 안에서 자기가 막은 트리거를 다시 통과해야 함)다. 단순 삭제로는 안 된다: 90d7012/6f292cc/876b30a와 달리 여기서는 "우회가 필요 없었다"가 성립하지 않는다(정상 관리자 재개방/재확정 기능 자체가 그 UPDATE를 필요로 함). 또한 `bypass_session_lock`이 두 트리거(final_status 락 + material_version_id 락)에 공유되므로, `reopen_session()`이 켜는 동안에는 **의도치 않게 material_version_id 락도 함께 풀린다** — 같은 트랜잭션 안에서 다른 코드가 `material_version_id`를 바꾸는 UPDATE를 끼워 넣으면 통과해버리는 부작용 경로가 이론상 존재한다(현재 두 함수 본문에는 그런 UPDATE가 없어 실사용 피해는 없어 보이지만, GUC 재사용 자체가 설계 결함). |
-| 5. 안전한 대체 | GUC 대신 "이 UPDATE가 `reopen_session`/`recomplete_session` 함수 본문 내부에서 나온 것"임을 구조적으로 위조 불가능하게 표시해야 한다. 제안: 트리거를 없애고 **UPDATE 권한 자체를 구조적으로 제한**하는 방향 — `sessions.final_status`/`material_version_id`에 대한 직접 UPDATE 권한을 아예 어떤 role에도 주지 않고(이미 RLS/grant로 사실상 막혀있다면 트리거가 불필요할 수도 있음, 확인 필요), 상태 전이는 오직 `reopen_session`/`recomplete_session`이 **트리거를 거치지 않는 내부 경로**(예: 같은 함수 안에서 `session_status_events`에만 쓰고 `sessions` 갱신은 별도의 `perform pg_advisory_xact_lock` + "이 세션이 지금 이 트랜잭션 안에서 함수 호출로 잠겨 있다"를 별도 테이블(예: `session_lock_tokens(session_id, xact_id)`)에 남기는 1회용 토큰 방식)으로 처리하게 재구성. 더 간단한 대안: 트리거 함수를 두 개로 분리하지 않고, `prevent_direct_final_status_update()`가 GUC 대신 **`pg_trigger_depth()`와 결합한 호출자 식별**은 여전히 위조 가능하므로 안전하지 않다 — 결국 "GUC를 없애고 함수 본문에서 직접 `alter table ... disable trigger`를 세션 트랜잭션 안에서 쓰는 것"도 슈퍼유저 권한이 필요해 일반 SECURITY DEFINER 함수 소유자로는 못 한다는 점을 이용해, **트리거 자체의 owner 권한을 이용한 재정의**(예: 함수 소유자만 실행 가능한 `perform pg_catalog.set_config`가 아니라, UPDATE 문 자체를 트리거가 없는 별도 unlogged/internal 테이블에 먼저 쓰고 뷰로 노출하는 구조 변경)까지 고려해야 한다 — 이 각도는 스키마 재구성 비용이 커서, **다음 라운드에서 반드시 재검토가 필요한 항목**으로 표시한다(결정 필요, 아래 참고). |
-| 6. 수정 대상 / Preview 게이트 | 신규 corrective migration이 `prevent_direct_final_status_update()`, `prevent_material_version_reassignment()`, `reopen_session()`, `recomplete_session()`(R6 cutover 버전 포함) 전부를 함께 고쳐야 한다(GUC 이름 공유 때문에 분리 수정 불가). `r8-cutover.integration.test.ts`의 GUC 기반 fixture 정리 코드도 함께 손봐야 한다. **Preview/non-prod 반영 전 필수 — 세션 최종 상태 불변식은 제품 오너 지시("세션 불변식... 반드시 닫아야 한다")에 명시적으로 해당.** |
+| 2. 실제 SET 호출 경로 | `reopen_session(p_session_id, p_reason)`과 `recomplete_session(...)` 내부에서만 `perform set_config('app.bypass_session_lock', 'true', true)` 호출 — 둘 다 함수 시작부에서 `if not public.is_admin() then raise exception`으로 게이트한 뒤 `final_status`를 되돌리는 UPDATE 직전에 켠다(`20260928000000_r6_sessions_cutover.sql:97-166` — 최신 버전, R6 cutover가 두 함수를 `sessions_v3`에서 `sessions`로 재정의). 앱 서버 액션이나 cron/웹훅에서 이 GUC를 직접 SET하는 코드는 repo 전체 grep(`app/`, `lib/`)에서 발견되지 않았다 — 유일한 SET 호출자는 이 두 SECURITY DEFINER 함수 자신이다. 통합 테스트(`app/session/[id]/r8-cutover.integration.test.ts`)는 `set_config('app.bypass_session_lock', ...)`를 fixture 정리용으로 직접 psql/superuser 경로에서 쓴다(정확히 우회 가능성을 이용하는 코드 — 대체 설계 시 이 테스트의 fixture 초기화 방식도 함께 손봐야 한다).|
+| 3. 도달 가능성 | `authenticated`: 함수 본문의 `is_admin()` 검사가 실질 관문이라 일반 사용자는 즉시 거부된다 — 트리거 자체는 role을 구분하지 않으므로, `authenticated`가 임의 SQL을 실행할 수 있는 다른 취약점과 결합하면 GUC를 직접 SET하고 UPDATE를 통과시킬 수 있다. Service role: RLS를 완전히 우회하고 커스텀 GUC 접근 제어도 없으므로, 어떤 service_role 연결(운영 스크립트, 백엔드 job)이든 `SET`만으로 두 불변식을 무력화할 수 있다 — 90d7012/6f292cc/876b30a와 동일한 핵심 위험. SECURITY DEFINER: `reopen_session`/`recomplete_session`이 이 GUC의 유일한 정상 호출자이지만, **다른 어떤 SECURITY DEFINER 함수든** 함수 소유자 권한으로 이 이름을 SET할 수 있다 — GUC가 함수 경계를 특정하지 않는다. |
+| 4. 깨질 정상 흐름 | `reopen_session()`은 `completed → live` 전이를 기록한 뒤 그 UPDATE를 성공시키기 위해 자기 자신의 `prevent_direct_final_status_update` 트리거를 통과해야 하는 **진짜 재진입**이다. 단순 삭제로는 안 된다 — 정상 관리자 재개방/재확정 기능 자체가 그 UPDATE를 필요로 한다. 또한 `bypass_session_lock`이 두 트리거(final_status 락 + material_version_id 락)에 공유되므로, `reopen_session()`이 켜는 동안에는 **의도치 않게 material_version_id 락도 함께 풀린다** — 같은 트랜잭션 안에서 다른 코드가 `material_version_id`를 바꾸는 UPDATE를 끼워 넣으면 통과해버리는 부작용 경로가 이론상 존재한다(현재 두 함수 본문에는 그런 UPDATE가 없어 실사용 피해는 없지만, GUC 재사용 자체가 설계 결함). |
+| 5. 안전한 대체(확정) | **구조 재설계 — 두 불변식을 각자의 1회용 토큰으로 분리한다.** 하나의 GUC를 두 트리거가 공유하는 것 자체가 근본 결함(4번에서 확인한 material_version_id 부작용 경로)이므로, 필드 검사 재작성이 아니라 구조 변경을 택한다: 신규 테이블 `session_invariant_unlock_tokens(session_id uuid, invariant text check (invariant in ('final_status','material_version_id')), xact_id bigint, created_at timestamptz default now())`를 두고, `reopen_session()`/`recomplete_session()`이 UPDATE 직전 자신이 실제로 필요로 하는 불변식 이름만 콕 집어 `insert ... values (p_session_id, 'final_status', txid_current())`로 토큰을 심는다. `prevent_direct_final_status_update()`/`prevent_material_version_reassignment()`는 GUC 대신 "`session_invariant_unlock_tokens`에 이 `session_id`+자기 불변식 이름+`txid_current()`가 일치하는 행이 있는가"만 확인하고, 있으면 그 자리에서 해당 행을 `delete`(1회용)한 뒤 통과시킨다. 두 불변식이 각자 자기 이름의 토큰만 확인하므로 4번의 부작용(재개방 중 material_version_id도 같이 풀리는 문제)이 구조적으로 사라진다. 토큰 INSERT/DELETE 권한은 일반 GRANT/REVOKE 대상이라 GUC처럼 "이름만 알면 아무나 켤 수 있는" 문제가 없다. |
+| 5-1. 테스트 시나리오 | ① `reopen_session()`/`recomplete_session()` 정상 호출 경로 통과 확인(관리자, completed→live, completed→재확정). ② 두 함수를 거치지 않고 `sessions.final_status`/`material_version_id` 직접 UPDATE 시도 시 거부 확인(트리거 여전히 작동). ③ `reopen_session()` 트랜잭션 도중 같은 트랜잭션에서 `material_version_id`를 바꾸는 별도 UPDATE를 끼워 넣었을 때 **거부**되는지 확인(현재 버그의 회귀 테스트 — 4번에서 지적한 부작용이 새 설계에서 실제로 막히는지 검증하는 핵심 케이스). ④ 토큰을 심고 UPDATE 전에 예외로 함수가 중단되는 경우 토큰이 트랜잭션 롤백과 함께 사라지는지(좀비 토큰 미잔존) 확인. ⑤ `r8-cutover.integration.test.ts`의 fixture 정리 코드를 새 토큰 테이블 방식으로 갱신 후 회귀. |
+| 6. 수정 대상 / Preview 게이트 | 신규 `session_invariant_unlock_tokens` 테이블/헬퍼 + `prevent_direct_final_status_update()`, `prevent_material_version_reassignment()`, `reopen_session()`, `recomplete_session()`(R6 cutover 버전) 전부 함께 수정 + `r8-cutover.integration.test.ts` fixture 갱신. **Preview/non-prod 반영 전 필수 — 하드 블로커("세션 불변식"에 정확히 해당).** |
 
-### 2. `bypass_consent_protect`
-
-| 항목 | 내용 |
-|---|---|
-| 1. 보호 테이블·불변식 | `guardian_consents`. DELETE는 항상 금지. UPDATE는 철회 관련 3개 필드(`revoked_at`, `revoked_by`, `revocation_reason`)만 허용되고 나머지(동의 당시 기록 — `policy_version_id`, `consented_by`, `consented_at`, `verification_method`, `verification_reference`, `notice_delivered_at`)는 절대 불변이어야 한다("당시 무엇에 동의했는지" 사후 증명용). |
-| 2. 실제 SET 호출 경로 | `revoke_guardian_consent(p_consent_id, p_reason)` 내부에서만, 철회 UPDATE 직전/직후에 켜고 끈다(`20260904000000_r2_minor_consent.sql`). 다른 SET 호출자는 repo 전체에서 발견되지 않음. |
-| 3. 도달 가능성 | `authenticated`: `revoke_guardian_consent`는 호출 전 `is_admin() or (auth.uid() = consented_by and 활성 보호자)` 검사를 통과해야 하며, 함수 자체가 SECURITY DEFINER라 일반 `authenticated`는 GUC를 직접 SET할 권한이 없다(트리거 함수는 role 제한 없음 — `current_setting`은 누구나 읽을 수 있고 `set_config`도 커스텀 GUC라 REVOKE 대상이 아니므로 임의 SQL 실행 경로가 있다면 authenticated도 이론상 SET 가능). 관리자: `is_admin()`을 통과하는 유일한 정상 관리 경로. Service role: RLS 우회 + GUC 접근 제어 없음 → 동일 위험. SECURITY DEFINER: `revoke_guardian_consent` 자신 외에 다른 SECURITY DEFINER 함수가 이 이름을 재사용하면 동일 위험. |
-| 4. 깨질 정상 흐름 | `revoke_guardian_consent()`는 철회 3개 필드만 갱신하는 단일 UPDATE 문 하나만 필요로 한다 — reopen_session류처럼 여러 단계 상태 전이를 거치는 재진입이 아니라 "이 함수가 스스로 만든 자기 자신의 UPDATE 한 줄"이다. 90d7012/6f292cc/876b30a 패턴과 훨씬 가깝다: 트리거가 애초에 "철회 3필드 변경은 항상 허용, 나머지 필드 변경만 차단"하도록 재작성하면 GUC 없이도 같은 보호를 유지하면서 `revoke_guardian_consent()`의 UPDATE를 그냥 통과시킬 수 있다(그 UPDATE 자체가 철회 3필드만 건드리므로). |
-| 5. 안전한 대체 | GUC 분기를 완전히 삭제하고, 트리거 조건을 뒤집는다: "동의 당시 기록 8개 필드 중 하나라도 바뀌면 무조건 거부"만 남기고 "그 외(철회 3필드만 바뀌는 경우)는 무조건 통과"로 재작성 — 이러면 `revoke_guardian_consent()`가 GUC 없이도 정상 작동하고, 어떤 다른 호출자도(서비스 롤 포함) 동의 당시 기록은 여전히 못 바꾼다. 유일한 남는 구멍은 "철회 3필드를 revoke_guardian_consent()를 거치지 않고 직접 UPDATE"이지만, 이는 GUC 문제가 아니라 원래도 있던 별도 이슈(트리거가 애초에 호출자를 구분하지 않으므로) — 필요하면 철회 3필드 UPDATE도 `is_admin() or 본인 보호자` 조건을 트리거 안에 직접 넣어(`auth.uid()` 검사) GUC 없이 막을 수 있다. |
-| 6. 수정 대상 / Preview 게이트 | `protect_guardian_consent()` 재작성 + `revoke_guardian_consent()`에서 `set_config` 호출 제거 + 회귀 테스트(정상 철회 통과 확인, 동의 당시 필드 직접 UPDATE 시도 거부 확인, service_role 경유 GUC 무력화 확인). **Preview/non-prod 반영 전 필수 — "동의" 항목으로 제품 오너 지시에 명시적으로 해당.** |
-
-### 3. `bypass_status_protect`
+### 2. `bypass_consent_protect`  — 배치 1-1
 
 | 항목 | 내용 |
 |---|---|
-| 1. 보호 테이블·불변식 | 여러 테이블의 `status` 컬럼(`students`/`account_status_apply` 대상 — `20260831011000_r2_account_status_apply.sql`) — "허용된 전이만, `transition_account_status()`를 통해서만" 규칙. `20260904000000_r2_minor_consent.sql`, `20260908000000_r2_teacher_reactivation_gate_fix.sql`, `20260903010000_r2_account_merge.sql`, `20260905000000_r2_workspace_provisioning.sql`, `20260909000000_r2_task8_capability_gates.sql`, `20260911000000_r3_contracts_cutover.sql`, `20260928000000_r6_sessions_cutover.sql` 등 다수 마이그레이션이 이 **같은 GUC 이름**을 자기 자신의 상태 전이 함수 안에서 재사용한다 — 즉 하나의 GUC가 시간이 지나며 계정/초대/계약/세션 등 서로 다른 여러 테이블·트리거를 보호하게 커졌다. |
-| 2. 실제 SET 호출 경로 | 위 8개 마이그레이션 파일 전부에서 `set_config('app.bypass_status_protect', 'true'/'false', true)` 쌍이 각 상태 전이 함수(가입/재활성화/합병/프로비저닝/캐퍼빌리티/계약 cutover/세션 cutover) 내부에 흩어져 있다 — grep 결과 총 14회 SET 호출(파일 7개, 각 2회 이상). 이렇게 호출자가 많다는 것 자체가 "GUC 하나로 여러 무관한 도메인을 보호"하는 설계가 이미 관리 불가능해지고 있다는 신호. |
-| 3. 도달 가능성 | `authenticated`: 트리거 함수 자체는 role을 구분하지 않고, 각 상태 전이 함수(`transition_account_status()` 등)가 개별적으로 `is_admin()`류 검사를 하는 것으로 보이나(각 함수 본문 확인 필요 — 아래 "결정 필요" 참고, 8개 파일 전부의 grant/게이트를 이번 라운드에서 전수 확인하지 못함), GUC 자체에는 어떤 접근 제어도 없다. 관리자: 정상 경로. Service role/SECURITY DEFINER: RLS 우회 + GUC 무방비로 동일 위험, 특히 8개의 서로 다른 함수가 같은 GUC를 켜고 끄므로 그중 하나라도 트랜잭션 중간에 예외 없이 끄기(`'false'`)를 실행하지 못하고 종료되면(예외/조기 return) 그 트랜잭션이 커밋될 때까지 다른 무관한 코드의 `status` UPDATE까지 우연히 통과할 위험도 있다(트랜잭션 로컬이라 커밋 후엔 사라지지만, 같은 트랜잭션 안에서는 위험). |
-| 4. 깨질 정상 흐름 | 8개 파일 각각의 함수가 "자기 자신이 계산한 허용된 전이"를 그 자리에서 한 번 UPDATE해야 하는 재진입 — `bypass_consent_protect`와 같은 유형(단일 UPDATE, 다단계 아님)이지만 관여 함수가 8개로 훨씬 많다는 점이 다르다. |
-| 5. 안전한 대체 | 근본적으로는 `bypass_consent_protect`와 동일한 해법(트리거를 "이 필드 조합으로 UPDATE되는 경우만 허용"으로 재작성)이 이상적이지만, 8개의 서로 다른 함수·서로 다른 허용 전이 규칙을 트리거 하나에 다 인코딩하는 것은 트리거를 지나치게 복잡하게 만든다. 더 현실적인 대안: **테이블 기반 1회용 토큰** — 각 상태 전이 함수가 UPDATE 직전에 `insert into status_transition_tokens (table_name, row_id, expected_new_status, created_in_xact) values (...)`로 자기 자신만 아는 토큰을 심고, 트리거가 GUC 대신 그 토큰 행의 존재 + `txid_current()` 일치를 확인한 뒤 즉시 그 토큰 행을 delete — 이러면 GUC처럼 "이름만 알면 아무나 켤 수 있는" 문제가 없다(토큰은 매 호출 새로 발급되는 값이라 추측 불가하고, 테이블 INSERT/DELETE 권한은 정상적으로 GRANT/REVOKE 대상이 된다). 이 방식을 `bypass_status_protect`뿐 아니라 다른 다중-호출자 GUC(`bypass_invite_protect`, `bypass_reconciliation_task_lock`)에도 공통 인프라로 재사용할 것을 제안. |
-| 6. 수정 대상 / Preview 게이트 | 8개 파일에 흩어진 함수 전부 + `protect_account_status()` 트리거 + (제안대로면) 신규 `status_transition_tokens` 테이블/헬퍼 함수 + 각 전이 함수별 회귀 테스트. 범위가 가장 넓은 항목이므로 별도 하위 스파이크(어느 함수가 실제 최신 버전인지 먼저 확정 — 같은 함수가 여러 마이그레이션에서 `create or replace`로 계속 재정의됨)가 선행돼야 한다. **Preview/non-prod 반영 전 필수 — "계정 상태" 항목으로 제품 오너 지시에 명시적으로 해당.** |
+| 1. 보호 테이블·불변식 | `guardian_consents`. DELETE는 항상 금지. UPDATE는 철회 관련 3개 필드(`revoked_at`, `revoked_by`, `revocation_reason`)만 허용되고 나머지(동의 당시 기록 — `policy_version_id`, `consented_by`, `consented_at`, `verification_method`, `verification_reference`, `notice_delivered_at`)는 절대 불변이어야 한다. |
+| 2. 실제 SET 호출 경로 | `revoke_guardian_consent(p_consent_id, p_reason)` 내부에서만, 철회 UPDATE 직전/직후에 켜고 끈다(`20260904000000_r2_minor_consent.sql:258-303`, 유일한 버전). 다른 SET 호출자는 repo 전체에서 발견되지 않음. |
+| 3. 도달 가능성 | `authenticated`: `revoke_guardian_consent`는 `is_admin() or (auth.uid() = consented_by and 활성 보호자)` 검사를 통과해야 한다(`20260904000000_r2_minor_consent.sql:279`, 확인 완료). Service role/SECURITY DEFINER: GUC 자체 접근 제어 없음 → 동일 위험. |
+| 4. 깨질 정상 흐름 | `revoke_guardian_consent()`는 철회 3개 필드만 갱신하는 단일 UPDATE 문 하나만 필요로 한다 — "이 함수가 스스로 만든 자기 자신의 UPDATE 한 줄"로, 90d7012/6f292cc/876b30a 패턴에 가깝다. |
+| 5. 안전한 대체(확정) | **필드 조합 검사로 트리거 재작성**(방식 a). GUC 분기를 완전히 삭제하고 `protect_guardian_consent()`를 "동의 당시 기록 8개 필드(`policy_version_id`, `consented_by`, `consented_at`, `verification_method`, `verification_reference`, `notice_delivered_at`, 및 나머지 불변 컬럼) 중 하나라도 바뀌면 무조건 거부, 그 외(철회 3필드만 바뀌는 경우)는 무조건 통과"로 재작성한다 — `revoke_guardian_consent()`의 UPDATE가 정확히 철회 3필드만 건드리므로 GUC 없이 통과한다. 이 방식을 택한 이유: 재진입 요구가 "함수 자신이 만드는 단일 UPDATE 하나"뿐이고 호출자가 하나뿐이라, 토큰 테이블 같은 인프라를 새로 만들 이유가 없다 — 트리거 조건만 뒤집으면 충분한 가장 단순한 경우. |
+| 5-1. 테스트 시나리오 | ① `revoke_guardian_consent()` 정상 철회 경로 통과 확인(관리자, 본인 보호자). ② 동의 당시 8개 필드 중 아무거나 직접 UPDATE 시도 시 거부 확인. ③ 철회 3필드만 직접 UPDATE(함수 우회) 시도 시 — 트리거는 통과시키지만 이는 원래도 GUC로 못 막던 별도 노출(호출자 미검증)이므로 회귀 아님, 문서화만. ④ service_role 경유로 동의 당시 필드 변경 시도 거부 확인(트리거가 role 무관하게 필드만 봄). |
+| 6. 수정 대상 / Preview 게이트 | `protect_guardian_consent()` 재작성 + `revoke_guardian_consent()`에서 `set_config` 호출 제거 + 회귀 테스트. **Preview/non-prod 반영 전 필수 — "동의" 항목 하드 블로커.** |
 
-### 4. `bypass_invite_protect`
-
-| 항목 | 내용 |
-|---|---|
-| 1. 보호 테이블·불변식 | `account_invites.status` — "지정된 함수(create/resend/accept/finalize/revoke)를 통해서만 변경"(`20260902000000_r2_account_invites.sql`). `account_invite_events`는 append 전용 로그(직접 보호 트리거는 없으나 invites와 항상 같은 트랜잭션에서 함께 쓰임). |
-| 2. 실제 SET 호출 경로 | `create_account_invite`, `resend_account_invite`, `revoke_account_invite`, `claim_account_invite`(**anon 포함 GRANT**), `finalize_account_invite`(service_role 전용), `mark_expired_invites`(`is_admin()` 게이트) — 6개 함수, `20260902000000_r2_account_invites.sql`에 5곳, `20260909000000_r2_task8_capability_gates.sql`에 추가 4곳(캐퍼빌리티 게이트가 초대 상태를 다시 건드리는 것으로 보임 — 정확한 목적은 해당 파일의 캐퍼빌리티 로직을 더 읽어야 확정 가능, 결정 필요 항목으로 아래 표시). |
-| 3. 도달 가능성 | `authenticated`: `create/resend/revoke_account_invite`는 `authenticated`에 GRANT — 함수 내부 게이트(초대 발송자 본인/관리자 확인으로 추정, 각 함수 본문 전수 확인은 이번 라운드에서 생략)가 실질 방어선. anon: `claim_account_invite`가 `anon, authenticated`에 GRANT돼 있고, 이 함수는 role 기반이 아니라 **토큰 해시 검증**으로 인가한다 — 즉 "role 검사가 없는 게 아니라 다른 종류의 인가(소유 토큰 증명)"이므로 다른 6개 GUC와 위험 성격이 다르다(로그인 전 사용자가 유효한 초대 토큰을 갖고 있다는 것 자체가 인가). 관리자: `mark_expired_invites`는 `is_admin()` 게이트 확인됨. Service role: `finalize_account_invite`는 `service_role`에만 GRANT — Node 서버 액션이 Auth 사용자 생성 후 호출하는 2단계 완료 함수로 추정(파일명·주석상). RLS 우회 경로 전반에는 여전히 GUC 자체의 무방비가 동일하게 적용됨. |
-| 4. 깨질 정상 흐름 | 6개 함수 각각이 자기 자신의 단일(또는 소수) `status` UPDATE를 위해 재진입한다 — `bypass_consent_protect`/`bypass_status_protect`와 같은 유형. `claim_account_invite`는 트랜잭션 안에서 최대 2번(가입 진행 중 재확인 시나리오 포함) 켜고 끄는 것이 확인됨. |
-| 5. 안전한 대체 | `bypass_status_protect` 항목에서 제안한 **테이블 기반 1회용 토큰** 방식이 여기서도 그대로 적용 가능 — 각 함수가 UPDATE 직전 자기만 아는 토큰을 발급하고 트리거가 토큰 존재+트랜잭션 일치만 확인. 대안으로 더 간단한 경로: 6개 함수가 만드는 상태 전이 집합(`pending→accepted`, `pending→manual_review`, `pending→expired`, `pending→revoked` 등)이 유한하고 트리거에서 `old.status`/`new.status` 조합만으로 "이 전이가 애초에 유효한 전이인지"를 검증할 수 있다면(즉 "누가 바꿨는지"가 아니라 "이 전이 자체가 상태 기계상 합법적인지"로 규칙을 바꾸면), GUC도 토큰도 필요 없이 **트리거가 상태 기계 자체를 검증**하는 구조로 단순화할 수 있다 — 다만 이러면 "정해진 함수를 거쳤는가"가 아니라 "결과 상태 조합이 합법적인가"만 보장되므로 감사 이벤트(`account_invite_events`) insert를 빼먹고 직접 UPDATE하는 것까지는 못 막는다(별도 문제, GUC 범위 밖). |
-| 6. 수정 대상 / Preview 게이트 | `protect_account_invite_status()` + 6개 함수 + `20260909000000_r2_task8_capability_gates.sql`의 추가 4개 SET 호출(먼저 그 정확한 목적 확인 필요) + 회귀 테스트(anon 토큰 경로, 관리자 경로, service_role 무력화 확인 포함). **Preview/non-prod 반영 전 필수 — "초대" 항목으로 제품 오너 지시에 명시적으로 해당.** |
-
-### 5. `bypass_teacher_rate_protect`
+### 3. `bypass_status_protect`  — 배치 2-1
 
 | 항목 | 내용 |
 |---|---|
-| 1. 보호 테이블·불변식 | `teacher_rate_history` — DELETE 항상 금지. UPDATE는 오직 `set_teacher_rate()`가 기존 "현재 이력"을 종료(`effective_until` 설정)하는 단일 문장만 허용, 그 외 모든 직접 UPDATE(`effective_until` 단독 변경 포함, 관리자 포함)는 차단 — "이력은 종료+신규가 같은 트랜잭션에서 원자적으로만" 규칙. |
-| 2. 실제 SET 호출 경로 | `set_teacher_rate()` 내부에서만(원본 `20260830100000_r1_teacher_rate_integrity.sql` 최초 도입 후 `20260830110000_r1_teacher_rate_integrity_fix.sql`이 게이트를 강화, `20260831000000_r2_sync_teachers_hourly_rate.sql`이 `teachers.hourly_rate_krw` 동기화를 추가하며 함수를 다시 `create or replace` — 세 버전 모두 동일한 GUC SET 위치·패턴 유지). |
-| 3. 도달 가능성 | `authenticated`/`anon`: `set_teacher_rate()`는 `revoke ... from public, anon, authenticated` + `grant ... to service_role`만 — 일반 사용자·관리자 화면에서 직접 호출 불가(이미 다른 GUC들보다 좁게 잠겨 있음). 관리자: 관리자 UI가 있다면 반드시 서버 액션이 service_role 클라이언트를 통해 이 함수를 호출하는 구조로 추정(직접 확인은 안 함 — `app/admin` 쪽 호출부 확인이 결정 필요 항목). Service role: 유일한 정상 호출 경로이면서 동시에 유일한 위험 경로 — service_role 연결이면 어차피 이 함수 없이도 `teacher_rate_history`에 직접 아무 값이나 INSERT/UPDATE 시도 가능(RLS 우회), GUC 유무와 무관하게 service_role 자체가 이미 가장 강한 신뢰 경계라는 점은 다른 6개보다 상대적으로 덜 심각한 요인. SECURITY DEFINER: `set_teacher_rate` 자신 외 다른 함수가 이 GUC명을 재사용하면 위험 — grep 결과 재사용 없음(2개 마이그레이션 버전만 존재, 실질적으로 한 곳). |
-| 4. 깨질 정상 흐름 | `set_teacher_rate()`는 기존 이력 종료(`effective_until` UPDATE) 후 새 이력 INSERT — 재진입은 그 UPDATE 한 줄뿐이고 함수 자신이 방금 `for update`로 잠근 정확히 그 행만 건드린다. `bypass_consent_protect`와 매우 유사한 단일-UPDATE 재진입 유형. |
-| 5. 안전한 대체 | `bypass_consent_protect`와 동일한 해법 적용 가능: 트리거를 "이 UPDATE가 `effective_until`만 바꾸고 다른 보호 필드는 그대로인가"로 이미 검사하고 있으므로(코드에 이미 그 로직 존재), GUC 분기를 없애고 그 필드 검사만 무조건 적용하도록(즉 "`effective_until`만 바뀌는 UPDATE는 항상 허용, 그 외 필드가 바뀌면 항상 거부") 재작성하면 `set_teacher_rate()`가 GUC 없이 통과한다. 단, 이러면 `set_teacher_rate()`를 거치지 않고 아무나(service_role 등) `effective_until`만 직접 UPDATE하는 것도 막지 못하게 되는데, 이는 GUC를 켠 상태에서도 원래 막지 못했던 것과 동일한 노출 수준(현재도 `bypass_teacher_rate_protect`를 아는 누구나 같은 UPDATE를 할 수 있음)이므로 순보안 측면에서 후퇴가 아니다. |
-| 6. 수정 대상 / Preview 게이트 | `protect_teacher_rate_history()` 재작성 + `set_teacher_rate()`(최신 버전, R2 sync 포함)에서 `set_config` 호출 제거 + 회귀 테스트. service_role 전용 함수로 이미 좁게 잠겨 있어 상대적으로 저위험이지만, 정산 관련 인접 데이터(시급)라는 점을 고려해 **Preview/non-prod 반영 전 필수로 포함할 것을 권고**(제품 오너 지시 문구가 "정산 관련 항목"을 명시하는데, 시급 자체는 정산의 입력값이므로 좁게 해석해도 해당 가능성이 높음 — 결정 필요 항목으로 아래 표시). |
+| 1. 보호 테이블·불변식 | `students`/`teachers`/`profiles` 등의 `status` 컬럼 — "허용된 전이만, 지정된 함수를 통해서만" 규칙. 아래 8개 파일이 이 **같은 GUC 이름**을 자기 자신의 상태 전이 함수 안에서 재사용한다. |
+| 2. 실제 SET 호출 경로(확정, 8개 파일 전수 확인 완료) | `transition_account_status()` — `20260831011000_r2_account_status_apply.sql`(최초), `20260904000000_r2_minor_consent.sql`, `20260905000000_r2_workspace_provisioning.sql`, `20260908000000_r2_teacher_reactivation_gate_fix.sql`(최신 재정의, line 21-90)로 4번 `create or replace`됨 — **최신 버전은 `20260908000000_r2_teacher_reactivation_gate_fix.sql:21`**. `merge_accounts()` — `20260903010000_r2_account_merge.sql`(최초), `20260909000000_r2_task8_capability_gates.sql`(capability 게이트 추가), `20260911000000_r3_contracts_cutover.sql:190-225`(최신, teacher_contracts 재배정 추가)로 3번 재정의 — **최신 버전은 `20260911000000_r3_contracts_cutover.sql`**. `recomplete_session()` — `20260928000000_r6_sessions_cutover.sql:123-331`(유일 버전, R6 cutover). |
+| 3. 도달 가능성(확정) | 8개 SET 호출부 전부의 **최신** 함수 본문을 직접 읽어 확인 — 예외 없이 전부 `is_admin()` 또는 `is_admin() OR current_user_has_capability(...)` 게이트가 함수 시작부에 있다: `transition_account_status()` 최신판(`20260908000000_r2_teacher_reactivation_gate_fix.sql:31`) `if not is_admin() then raise exception`; `merge_accounts()` 최신판(`20260911000000_r3_contracts_cutover.sql:61`) `if not (is_admin() or current_user_has_capability('manage_account_merges')) then raise exception`; `recomplete_session()`(`20260928000000_r6_sessions_cutover.sql:129`) `if not public.is_admin() then raise exception`. **"게이트 없는 SET 호출부는 없다"가 확정 결론** — 초안의 "각 함수 본문 확인 필요"는 이번 라운드에서 해소됐다. 다만 게이트가 함수 본문 안에만 있고 GUC 이름 자체는 여전히 무방비이므로(트리거는 role/게이트를 모른다), service_role 직접 연결이나 다른 SECURITY DEFINER 함수의 GUC 재사용 위험은 여전히 유효(90d7012류와 동일한 핵심 위험). |
+| 3-1. `20260909000000_r2_task8_capability_gates.sql`의 목적(확정) | 이 파일은 새 도메인을 여는 파일이 아니라, **기존에 `is_admin()`만 검사하던 관리자 전용 함수들을 `is_admin() OR current_user_has_capability(...)`로 넓히는 파일**이다(파일 헤더 주석 `20260909000000_r2_task8_capability_gates.sql:1-21`에 명시: "R2 Task 8 — 권한 모델... Task 4(초대)/5(계정 병합)/6(보호자 동의)/7(Workspace 프로비저닝)에서 새로 만든 관리자 전용 함수·RLS에 적용"). `bypass_status_protect`/`bypass_invite_protect`를 이 파일이 추가로 켜는 이유는 캐퍼빌리티 로직 자체가 초대/계정 상태를 건드리기 때문이 아니라, **이 파일이 `resend_account_invite()`/`revoke_account_invite()`/`merge_accounts()` 등 원래도 이 GUC들을 쓰던 함수를 `create or replace`로 다시 정의하면서(게이트만 넓히고 본문 로직은 그대로 옮김) 기존 SET 호출 코드를 그대로 승계**했기 때문이다(`resend_account_invite()` 본문 `20260909000000_r2_task8_capability_gates.sql:26-118`을 직접 읽어 확인 — `bypass_invite_protect` SET은 `account_invites.status` UPDATE 직전/직후 위치가 기존 파일과 동일 패턴). 즉 "왜 이 GUC들을 만지는가"의 답은 "새 함수가 아니라 기존 함수의 게이트만 확장한 재정의판이라서"다 — 결정 필요 항목 아님. |
+| 4. 깨질 정상 흐름 | 3개 함수(`transition_account_status`/`merge_accounts`/`recomplete_session`) 각각이 "자기 자신이 계산한 허용된 전이"를 그 자리에서 한 번(또는 소수) UPDATE해야 하는 재진입 — 단일 UPDATE 유형이지만 관여 함수·마이그레이션 파일이 여럿이라는 점이 `bypass_consent_protect`와 다르다. |
+| 5. 안전한 대체(확정) | **테이블 기반 1회용 토큰**(방식 b) — 여러 함수·여러 도메인(계정/계약/세션)이 이 GUC 하나를 공유하는 다중 호출자 구조라, `bypass_consent_protect`처럼 트리거 하나에 모든 전이 규칙을 인코딩하는 것은 트리거를 과도하게 복잡하게 만든다. 신규 공용 테이블 `status_transition_tokens(table_name text, row_id uuid, xact_id bigint default txid_current(), created_at timestamptz default now())`을 두고, `transition_account_status()`/`merge_accounts()`/`recomplete_session()`이 UPDATE 직전 `insert into status_transition_tokens (table_name, row_id) values (...)`로 토큰을 심는다. `protect_account_status()` 트리거는 GUC 대신 "`status_transition_tokens`에 이 테이블명+행 id+`txid_current()`가 일치하는 행이 있는가"만 확인하고 즉시 그 토큰 행을 delete한 뒤 통과시킨다. 이 인프라(`status_transition_tokens` 테이블 + 확인/소비 헬퍼 함수)는 배치 2-2(`bypass_invite_protect`)와 배치 2-3(`bypass_reconciliation_task_lock`)에서 **그대로 재사용**한다(테이블/함수 하나로 세 GUC를 대체) — 이번 라운드에서 그 공용 설계를 여기서 먼저 확정한다. |
+| 5-1. 테스트 시나리오 | ① 3개 함수 각각의 정상 호출 경로 통과 확인(관리자, capability 보유자). ② 3개 테이블(`students`/`teachers`/`profiles`/`sessions` 등 실제 대상) 각각에 대해 함수를 거치지 않은 직접 UPDATE 시도 거부 확인. ③ 토큰을 심은 뒤 함수가 예외로 중단되는 경우 토큰이 트랜잭션과 함께 롤백되는지 확인(좀비 토큰 없음). ④ 같은 트랜잭션 안에서 두 함수가 연달아 같은 행에 토큰을 심는 동시 호출 시나리오에서 토큰이 서로 간섭하지 않는지(각 토큰이 `txid_current()`로 트랜잭션 범위에 묶임) 확인. ⑤ service_role이 GUC를 직접 SET하는 기존 방식이 더 이상 통하지 않는지(회귀) 확인. |
+| 6. 수정 대상 / Preview 게이트 | 신규 `status_transition_tokens` 테이블/헬퍼 + `protect_account_status()` 트리거 + `transition_account_status()`(최신), `merge_accounts()`(최신), `recomplete_session()` 3개 함수 + 각 전이별 회귀 테스트. **Preview/non-prod 반영 전 필수 — 하드 블로커("계정 상태"에 정확히 해당).** |
 
-## 별도 분류: settlement/trial 계열 2건
+### 4. `bypass_invite_protect`  — 배치 2-2
 
-### `bypass_reconciliation_task_lock` — 위험도: 중간, 선행 조건 있음
+| 항목 | 내용 |
+|---|---|
+| 1. 보호 테이블·불변식 | `account_invites.status` — "지정된 함수(create/resend/accept/finalize/revoke)를 통해서만 변경"(`20260902000000_r2_account_invites.sql`). |
+| 2. 실제 SET 호출 경로 | `create_account_invite`, `resend_account_invite`, `revoke_account_invite`, `claim_account_invite`(anon 포함 GRANT), `finalize_account_invite`(service_role 전용), `mark_expired_invites`(`is_admin()` 게이트) — `20260902000000_r2_account_invites.sql`에 원본, `20260909000000_r2_task8_capability_gates.sql`이 `resend_account_invite`/`revoke_account_invite` 등을 capability 게이트 추가로 재정의(3-1 항목과 동일 이유 — 새 목적 아님, 게이트 확장 재정의). |
+| 3. `claim_account_invite`의 anon 토큰 인가(확정, 전체 함수 본문 직접 읽음 — `20260902000000_r2_account_invites.sql:269-323`, 유일한 버전) | **해시 비교**: 원문 토큰이 아니라 `encode(extensions.digest(p_token, 'sha256'), 'hex')`로 SHA-256 해시를 계산해 `account_invites.token_hash` 컬럼과 등호 비교(`where token_hash = v_hash`)한다 — 원문 토큰은 DB에 저장되지 않으므로 DB 유출 시에도 토큰 자체는 복구 불가. **만료 검사**: 저장된 `status`와 무관하게 항상 `expires_at <= now()`를 별도로 직접 검사(정리 배치 `mark_expired_invites()`가 아직 안 돌았어도 만료 토큰은 시간 기준으로 즉시 거부). **1회성/상태 검사**: `status = 'accepted'`면 멱등 응답(재제출 안전), `status <> 'pending'`인 모든 다른 상태(`superseded`/`revoked`/`manual_review`/`expired`)는 즉시 거부 — 토큰이 이미 소비됐거나 무효화됐으면 재사용 불가. **결론**: 이 경로의 인가는 role 검사가 아니라 "무작위 32바이트 토큰(`gen_random_bytes(32)`)을 알고 있다는 사실 자체"로 성립하며, GUC 우회 문제와는 **독립적**이다 — `bypass_invite_protect` 트리거를 어떻게 재설계하든 토큰 검증 로직 자체는 손댈 필요가 없다. 다만 `claim_account_invite`도 이 GUC를 이용해 `account_invites.status`를 UPDATE하므로, **트리거 재설계에는 반드시 포함**돼야 한다(토큰 검증과 GUC 우회는 별개 계층 — 토큰 검증은 "누가 이 함수를 호출할 자격이 있는가", GUC는 "이 함수의 UPDATE를 트리거가 어떻게 통과시키는가"). |
+| 4. 깨질 정상 흐름 | 6개 함수 각각이 자기 자신의 단일(또는 소수) `status` UPDATE를 위해 재진입 — `bypass_status_protect`와 같은 다중 호출자 유형. `claim_account_invite`는 트랜잭션 안에서 최대 1번(existing-auth-user 분기 또는 정상 수락 분기 중 하나) 켜고 끈다. |
+| 5. 안전한 대체(확정) | `bypass_status_protect`에서 구축한 **동일한 `status_transition_tokens` 공용 테이블/헬퍼를 재사용**한다(방식 b) — `create_account_invite`/`resend_account_invite`/`revoke_account_invite`/`claim_account_invite`/`finalize_account_invite`/`mark_expired_invites` 6개 함수 전부가 UPDATE 직전 동일한 헬퍼로 토큰을 심고 `protect_account_invite_status()`가 동일한 확인/소비 로직으로 검증한다. 별도 인프라를 새로 만들지 않는 이유: 이 GUC도 "다중 호출자가 각자의 단일 UPDATE를 위해 재진입"하는 동일 유형이라 `bypass_status_protect`와 근본적으로 같은 문제이고, 공용 테이블을 하나만 두면 관리 포인트가 줄어든다. |
+| 5-1. 테스트 시나리오 | ① 6개 함수 각각의 정상 경로 통과 확인(anon 토큰 클레임 포함). ② `account_invites.status` 직접 UPDATE 시도 거부 확인. ③ 토큰 해시 불일치/만료/이미 소비된 토큰으로 `claim_account_invite` 재시도 시 기존과 동일하게 거부되는지(트리거 변경이 토큰 검증 로직에 영향 없음을 확인) 회귀. ④ `mark_expired_invites()`(cron/관리자 배치)가 다건 처리 시 각 행마다 토큰이 올바르게 발급/소비되는지(배치 UPDATE에서도 1회용 토큰이 행 단위로 정확히 매칭되는지) 확인. |
+| 6. 수정 대상 / Preview 게이트 | `protect_account_invite_status()` + 6개 함수(최신 버전, capability 게이트 재정의판 포함) + 회귀 테스트. **Preview/non-prod 반영 전 필수 — 하드 블로커("초대"에 정확히 해당).** |
 
-- **보호 대상**: `session_judgment_reconciliation_tasks` — `resolve_session_reconciliation_task()`를 통해서만 UPDATE 가능(DELETE는 무조건 금지, GUC 무관).
-- **호출 경로**: `20261105000000_m5b_judgment_reconciliation_tasks.sql`(원본) 외에 `20261122000000_m5c_reconciliation_task_staleness.sql`, `20261123000000_m5c_student_cancelled_reconciliation.sql`, `20261124000000_m5c_final_reconciliation_integrity_gaps.sql` 등 M5c 라운드에서 새 정산 조정 함수들이 계속 이 GUC를 재사용하며 늘어났다(grep상 총 14회 SET) — `bypass_status_protect`처럼 "여러 함수가 같은 GUC를 공유"하는 유형이라 범위가 넓다.
-- **위험도 판단 근거**: 정산(판정/이의제기 처리) 도메인은 금전적 영향이 있어 원칙적으로 우선순위가 높아야 하지만, 이 태스크 테이블 자체는 "정산 최종 원장"이 아니라 "조정 작업 큐"(M5b/M5c, R10 정산 원장 이전 단계)로 보인다 — 실제 지급액에 영향을 주는 최종 원장 테이블(R10 payout 파이프라인, 아직 이 저장소에 도달하지 않은 것으로 보임 — `docs/CURRENT.md`에 R10 착수 여부 재확인 필요, 결정 필요)과의 관계를 먼저 확인해야 "정산 관련 항목" 해당 여부와 긴급도를 정확히 매길 수 있다.
-- **선행 조건**: (1) M5c의 4개 파일 중 어느 것이 각 함수의 최종 버전인지 정리, (2) R10 payout 파이프라인이 이 태스크 큐를 최종 지급 계산의 입력으로 실제로 소비하는지 확인 — 소비한다면 우선순위 표의 정산 항목과 동급으로 격상해야 함.
-- **잠정 권고**: R10 착수/의존관계 확인 전까지는 "정산 관련"으로 잠정 상위 5개와 함께 Preview 게이트에 포함하되(제품 오너 지시가 "정산 관련 항목"을 명시하므로 보수적으로 포함), 실제 corrective 작업 착수 순서는 위 확인 이후 재조정.
+### 5. `bypass_teacher_rate_protect`  — 배치 1-2
 
-### `bypass_trial_session_auto_complete` — 위험도: 낮음, 순수 내부 시스템 캐스케이드
+| 항목 | 내용 |
+|---|---|
+| 1. 보호 테이블·불변식 | `teacher_rate_history` — DELETE 항상 금지. UPDATE는 오직 `set_teacher_rate()`가 기존 "현재 이력"을 종료(`effective_until` 설정)하는 단일 문장만 허용, 그 외 모든 직접 UPDATE(관리자 포함)는 차단. |
+| 2. 실제 SET 호출 경로 | `set_teacher_rate()` 내부에서만(`20260830100000_r1_teacher_rate_integrity.sql` 최초, `20260830110000_r1_teacher_rate_integrity_fix.sql`이 게이트 강화, `20260831000000_r2_sync_teachers_hourly_rate.sql`이 최신 — `teachers.hourly_rate_krw` 동기화 추가, 동일 GUC SET 위치·패턴 유지). |
+| 3. 도달 가능성 | `set_teacher_rate()`는 `revoke ... from public, anon, authenticated` + `grant ... to service_role`만 — 일반 사용자·관리자 화면에서 직접 호출 불가. Service role: 유일한 정상 호출 경로이자 유일한 위험 경로 — service_role 연결이면 어차피 이 함수 없이도 `teacher_rate_history`에 직접 INSERT/UPDATE 가능(RLS 우회)하므로, GUC 유무와 무관하게 service_role 자체가 이미 가장 강한 신뢰 경계. |
+| 4. 깨질 정상 흐름 | `set_teacher_rate()`는 기존 이력 종료(`effective_until` UPDATE) 후 새 이력 INSERT — 재진입은 그 UPDATE 한 줄뿐이고 함수 자신이 `for update`로 잠근 정확히 그 행만 건드린다. `bypass_consent_protect`와 동일한 단일-UPDATE 재진입 유형. |
+| 5. 안전한 대체(확정) | **필드 조합 검사로 트리거 재작성**(방식 a) — 트리거가 이미 "이 UPDATE가 `effective_until`만 바꾸고 다른 보호 필드는 그대로인가"를 검사하는 로직을 갖고 있으므로, GUC 분기를 없애고 그 필드 검사만 무조건 적용("effective_until만 바뀌는 UPDATE는 항상 허용, 그 외 필드가 바뀌면 항상 거부")하도록 재작성한다. `set_teacher_rate()`를 거치지 않고 service_role이 `effective_until`만 직접 UPDATE하는 것은 여전히 막지 못하지만, 이는 GUC를 켠 상태에서도 원래 막지 못했던 것과 동일한 노출 수준(현재도 GUC 이름을 아는 누구나 같은 UPDATE 가능)이므로 순보안 측면에서 후퇴가 아니다 — `bypass_consent_protect`와 동일한 이유로 방식 a를 택한다(단일 호출자, 단일 UPDATE, 이미 존재하는 필드 검사를 무조건화하기만 하면 됨). |
+| 5-1. 테스트 시나리오 | ① `set_teacher_rate()` 정상 호출(신규 시급 설정) 통과 확인. ② `effective_until` 외 필드(예: `hourly_rate_krw`, `teacher_id`) 직접 UPDATE 시도 거부 확인. ③ `effective_until`만 직접 UPDATE(함수 우회) 시 트리거 통과 확인 — 기존 노출 수준과 동일함을 문서화(회귀 아님). ④ `teachers.hourly_rate_krw` 동기화(R2 sync)까지 포함한 최신 버전 회귀. |
+| 6. 수정 대상 / Preview 게이트 | `protect_teacher_rate_history()` 재작성 + `set_teacher_rate()`(R2 sync 포함 최신 버전)에서 `set_config` 호출 제거 + 회귀 테스트. **Preview/non-prod 반영 전 필수 — 하드 블로커(정산의 직접 입력값인 시급 이력이므로 "정산 관련 항목"에 해당).** |
 
-- **보호 대상**: `trial_sessions.status`의 직접 `completed` 전환 금지 — "실제 v3 세션이 완료됐을 때만 자동 반영".
-- **호출 경로**: 유일하게 `auto_complete_linked_trial_session()` 트리거 함수(AFTER UPDATE on `sessions`, `final_status = 'completed'`) 내부 — **사람이나 서버 액션이 직접 호출하는 함수가 아니라 DB 내부 캐스케이드 트리거**다. 다른 6개는 전부 사람이 트리거하는(관리자 조작, 사용자 요청, 서버 액션) SECURITY DEFINER 함수인 반면, 이것만 순수 시스템 이벤트 반응형이라는 점이 성격상 다르다.
-- **위험도 판단 근거**: 도달 가능성 측면에서 `authenticated`/anon이 이 GUC를 켤 이유·경로가 없고(그런 코드 경로 없음), service_role/SECURITY DEFINER 경로로 봐도 이 GUC 하나가 잘못 켜졌을 때 벌어지는 최악의 결과가 "체험 세션이 실제로는 안 끝났는데 완료로 표시"되는 정도로, 결제/정산/개인정보 관련 항목보다 blast radius가 작다.
-- **재진입 성격**: `bypass_session_lock`과 유사하게 "함수가 자기 자신이 막은 트리거를 뚫어야 하는 진짜 재진입"이지만, 호출자가 하나뿐이고 트리거 체인이 단순(sessions AFTER UPDATE → trial_sessions UPDATE 1회)해서 대체재 설계가 `bypass_session_lock`보다 훨씬 쉽다: `reject_direct_trial_session_completion()`을 "이 UPDATE가 `sessions.final_status='completed'`인 연결된 세션 때문에 발생한 것인지"를 `pg_trigger_depth() > 0`이 아니라 **호출자가 트리거 함수인지 자체를 GUC 없이 구분할 방법이 마땅치 않다는 점은 동일**하나, 대안으로 애초에 두 트리거를 하나의 함수로 합쳐(캐스케이드를 트리거 레벨에서 처리하지 않고 `sessions` AFTER UPDATE 트리거 안에서 `trial_sessions` UPDATE 시 별도 보호 트리거 자체를 이 컬럼에 대해서는 만들지 않고, "직접 UPDATE 금지"는 GRANT를 아예 안 주는 방식(트리거 대신 컬럼 권한)으로 대체 가능한지 검토할 가치가 있다.
-- **선행 조건**: 없음(다른 회차에 의존하지 않는 독립 항목) — 우선순위 상으로는 낮지만 착수 자체는 언제든 가능.
-- **잠정 권고**: Preview 게이트 하드 블로커는 아니라고 판단(아래 게이트 섹션 참고, 결정 필요로 재확인 요망).
+### 6. `bypass_reconciliation_task_lock`  — 배치 2-3 (정정됨: 정산 도메인 하드 블로커)
+
+> **정정 사항**: 초안은 "R10 payout 파이프라인이 아직 착수 전인지 미확인"이라는
+> 전제로 이 항목의 우선순위를 유보했다. 이는 **사실과 다르다** — R10 payout
+> 파이프라인은 이미 구현돼 있다(`git log --oneline --all | grep -i r10`으로
+> 확인한 실제 커밋: `1072dda` "feat(r10): pre-incorporation payout gate +
+> settlement pipeline schema", `a4f8d8d` "feat(r10): payout batch lifecycle
+> (draft→reviewing→approved→processing→paid, reversal)", `6cb8ee6` "feat(r10):
+> v3 payout_batches 관리자 화면", `ed72952`/`1519d26`/`55f9575`/`6871a3b` 등
+> 다수의 R10 corrective 커밋 — 이 세션 자체가 이번 회차에서 만들고 고친
+> 파이프라인이다). 아래는 그 실제 코드를 읽어 확인한 결론이다.
+
+| 항목 | 내용 |
+|---|---|
+| 1. 보호 테이블·불변식 | `session_judgment_reconciliation_tasks` — `resolve_session_reconciliation_task()`/`set_reconciliation_task_student_cancelled_disposition()`를 통해서만 UPDATE 가능(DELETE는 무조건 금지, GUC 무관 — `reject_reconciliation_task_direct_mutation()`이 트리거로 항상 거부, `20261105000000_m5b_judgment_reconciliation_tasks.sql:80-99`). |
+| 2. 실제 SET 호출 경로(최신 버전 확정) | `resolve_session_reconciliation_task()` — `20261105000000_m5b_judgment_reconciliation_tasks.sql`(원본) → `20261123000000_m5c_student_cancelled_reconciliation.sql` → **`20261124000000_m5c_final_reconciliation_integrity_gaps.sql:12-114`가 최신**(파일명 타임스탬프상 가장 나중, 전체 함수 본문 직접 읽음). `set_reconciliation_task_student_cancelled_disposition()` — **`20261124000000_m5c_final_reconciliation_integrity_gaps.sql:122-189`가 최신**(같은 파일, hold 금액 조회 범위를 grant 전체에서 reservation_id로 좁히는 수정). |
+| 3. 정산 파이프라인과의 실제 관계(확정, 코드 추적 완료) | ① `resolve_session_reconciliation_task()`는 반영 시 두 갈래로 갈린다 — 전제(세션 상태/entitlement disposition/작업 생성 이후 adjust 이력)가 어긋나면 `needs_review`로 전환하고 아무것도 적용하지 않는다(`:49-89`, 2026-09-06 보강분). 전제가 맞으면 `public.adjust_entitlement(v_task.entitlement_grant_id, v_task.required_entitlement_adjustment_amount, ...)`를 호출해 **`entitlement_ledger`에 조정 이벤트를 직접 기록**한다(`:92-98`). ② `entitlement_ledger`는 수업권 소진/해제 원장으로, 학생 결제/수업권 도메인의 핵심 정산 근거 테이블이다. ③ **payout(강사 지급) 측 연결**: `20261105000000_m5b_judgment_reconciliation_tasks.sql:1-14`의 파일 헤더 주석이 명시하듯, "지급액 재계산(`payout_items`)은 이미 `recomplete_session()`이 처리한다"(session의 `payable_minutes` 변경 → `upsert_session_payout_item()`이 `payout_items.amount_minor`를 세션당 upsert, `20261030000000_m5a_session_final_judgment.sql:50-102`) — 즉 reconciliation task 자체가 `payable_minutes`를 바꾸는 것이 아니라 **이미 재판정(`recomplete_session()`)으로 바뀐 `payable_minutes`에 맞춰 entitlement 쪽 후속 조정이 필요한지를 계산·적용하는 후속 단계**다. ④ `payout_items`에 이미 `paid`가 찍힌 항목은 `prevent_paid_item_mutation()`이 금액 변경을 막으므로, `superseded_by_reconciliation_task_id` 컬럼(`20261105000000_m5b_judgment_reconciliation_tasks.sql:18-24`)에 "이 정산 항목이 재판정으로 대체 대상이 됐다"는 표시만 남긴다 — 이 컬럼이 신설된 이유 자체가 "재판정(reconciliation)이 실제 지급 파이프라인(`payout_items`)에 영향을 준다"는 것을 코드 차원에서 증명한다. R10 이후(`20261218000000_r10_payout_batch_lifecycle.sql`, `20261222000000_r10_settlement_pipeline_schema.sql`, `20261224000000_r10_paid_transition_guard_and_reversal_fix.sql`) 이 역분개 처리 자체가 실제로 구현됐다(원 헤더 주석의 "실제 역분개 로직 자체는 R10 범위로 남긴다"가 이후 실제 R10 라운드에서 이행됨). **결론**: `session_judgment_reconciliation_tasks`는 "정산 최종 원장 자체는 아니지만, entitlement_ledger(수업권 정산 원장)와 payout_items(강사 지급 원장) 양쪽에 직접 쓰기/표시를 남기는 정산 파이프라인의 필수 단계"다 — "정산 관련 항목"에 명확히 해당하며, R10 착수 여부와 무관하게(그리고 실제로 R10은 이미 착수·구현돼 있으므로 더더욱) 하드 블로커로 분류하는 것이 맞다. |
+| 4. 깨질 정상 흐름 | `resolve_session_reconciliation_task()`/`set_reconciliation_task_student_cancelled_disposition()`가 자기 자신의 단일 UPDATE(상태 전환 또는 disposition 필드)를 위해 재진입 — `bypass_status_protect`/`bypass_invite_protect`와 동일한 다중 버전(4개 마이그레이션 파일에 걸쳐 재정의) 단일-UPDATE 재진입 유형. |
+| 5. 안전한 대체(확정) | `bypass_status_protect`에서 구축한 **동일한 `status_transition_tokens` 공용 테이블/헬퍼를 재사용**한다(방식 b) — 이유는 `bypass_invite_protect`와 동일: 다중 호출자(M5b/M5c에 걸쳐 여러 번 재정의된 2개 함수)가 각자의 단일 UPDATE를 위해 재진입하는 동일 유형이라, 별도 인프라를 새로 만들 필요가 없다. |
+| 5-1. 테스트 시나리오 | ① `resolve_session_reconciliation_task()` 정상 반영 경로(resolved) 통과 확인. ② 전제 불일치로 `needs_review` 전환되는 경로 통과 확인(이 경로도 토큰 필요 — 4-a). ③ `set_reconciliation_task_student_cancelled_disposition()` 정상 경로 통과 확인. ④ `session_judgment_reconciliation_tasks` 직접 UPDATE/DELETE 시도 거부 확인(DELETE는 GUC 무관하게 항상 거부이므로 별도 확인). ⑤ 같은 grant에 대해 다른 대사 작업이 개입한 뒤 저장된 조정량이 무효화되는 needs_review 전환 로직(2026-09-06 보강분, `:74-90`)이 새 트리거 설계에서도 정확히 동작하는지 회귀. |
+| 6. 수정 대상 / Preview 게이트 | `reconciliation_task_update_guard()` 트리거 + `resolve_session_reconciliation_task()`(최신, `20261124000000`) + `set_reconciliation_task_student_cancelled_disposition()`(최신, 같은 파일) + 회귀 테스트. **Preview/non-prod 반영 전 필수 — 하드 블로커("정산 관련 항목"에 해당, R10 payout 파이프라인 입력 경로로 확인 완료).** |
+
+### 7. `bypass_trial_session_auto_complete`  — 배치 1-3
+
+| 항목 | 내용 |
+|---|---|
+| 1. 보호 테이블·불변식 | `trial_sessions.status`의 직접 `completed` 전환 금지 — "실제 v3 세션이 완료됐을 때만 자동 반영". |
+| 2. 실제 SET 호출 경로 | 유일하게 `auto_complete_linked_trial_session()` 트리거 함수(AFTER UPDATE on `sessions`, `final_status = 'completed'`) 내부 — 사람이나 서버 액션이 직접 호출하는 함수가 아니라 DB 내부 캐스케이드 트리거. 다른 6개는 전부 사람이 트리거하는 SECURITY DEFINER 함수인 반면, 이것만 순수 시스템 이벤트 반응형이다. |
+| 3. 도달 가능성 | `authenticated`/anon이 이 GUC를 켤 이유·경로가 없다(그런 코드 경로 없음). Service role/SECURITY DEFINER 경로로도 이 GUC 하나가 잘못 켜졌을 때 최악의 결과는 "체험 세션이 실제로는 안 끝났는데 완료로 표시"되는 정도로, blast radius는 7개 중 가장 작다 — 다만 blast radius가 작다는 것이 하드 블로커 제외 사유는 아니라고 판단한다(아래 게이트 표 참고 — "세션 불변식"을 넓게 해석해 포함). |
+| 4. 깨질 정상 흐름 | `bypass_session_lock`과 유사한 재진입(함수가 자기 자신이 막은 트리거를 뚫어야 함)이지만, 호출자가 하나뿐이고 트리거 체인이 단순(sessions AFTER UPDATE → trial_sessions UPDATE 1회)하다. |
+| 5. 안전한 대체(확정) | **조건 재검증 방식으로 트리거 재작성**(방식 a의 변형 — "누가 호출했는가"가 아니라 "이 UPDATE를 정당화하는 조건이 지금 실제로 참인가"로 검사 축을 바꾼다). `reject_direct_trial_session_completion()`(가칭, 실제로는 기존 가드 트리거를 재작성)이 GUC나 호출자 식별에 의존하는 대신, `trial_sessions` UPDATE가 `status → 'completed'`로 바뀌는 시도일 때 트리거 내부에서 "이 trial_session에 연결된 `sessions` 행의 `final_status`가 실제로 `'completed'`인가"를 그 자리에서 직접 재조회해 확인한다 — 참이면 통과, 아니면 거부. 이렇게 하면 "누가 호출했는지"를 위조 불가능하게 증명할 필요 자체가 없어진다(캐스케이드 트리거든 다른 어떤 경로든, 결과적으로 링크된 세션이 실제로 completed 상태일 때만 통과되므로 결과 상태 자체가 항상 참이다). 이 방식을 택한 이유: 유일 호출자·단일 캐스케이드라 토큰 인프라는 과설계이고, 이 경우는 "호출자 증명"이 아니라 "결과 조건 검증"만으로 충분히 안전하다(방식 a의 정신과 같지만 필드 조합이 아니라 연결 테이블 조건을 검사한다는 점이 다름). |
+| 5-1. 테스트 시나리오 | ① `sessions.final_status`가 실제로 `completed`로 바뀌었을 때 연결된 `trial_sessions.status`가 자동으로 `completed`가 되는 정상 캐스케이드 확인. ② `trial_sessions.status`를 링크된 세션이 아직 `completed`가 아닌 상태에서 직접 `completed`로 UPDATE 시도 시 거부 확인. ③ 링크된 세션이 이미 `completed`인 상태에서 `trial_sessions.status`를 직접 `completed`로 UPDATE하는 경우 — 새 조건 검증 방식에서는 이례적으로 통과됨(호출자 미검증이므로) — 이는 GUC 방식에서도 GUC를 아는 누구나 가능했던 것과 동일 노출 수준임을 문서화(회귀 아님). ④ 캐스케이드가 여러 trial_sessions에 연쇄적으로 걸리는 경우(있다면) 모두 정상 처리되는지 확인. |
+| 6. 수정 대상 / Preview 게이트 | `auto_complete_linked_trial_session()` + trial_sessions 보호 트리거 재작성 + 회귀 테스트. **Preview/non-prod 반영 전 필수 — 하드 블로커("세션 불변식"을 trial_sessions까지 포함해 넓게 해석 — 제품 오너 지시 원문의 5개 카테고리 중 세션 불변식 범주에 속하는 것으로 확정.** |
 
 ## Preview/non-prod 게이트
 
@@ -115,15 +167,27 @@ non-prod 반영 전에 별도 보안 정리 라운드로 반드시 닫아야 한
 | `bypass_consent_protect` | **하드 블로커** | "동의"에 정확히 해당 |
 | `bypass_status_protect` | **하드 블로커** | "계정 상태"에 정확히 해당 |
 | `bypass_invite_protect` | **하드 블로커** | "초대"에 정확히 해당 |
-| `bypass_teacher_rate_protect` | **잠정 하드 블로커(결정 필요)** | 지시문에 "시급"이 명시돼 있지 않으나 정산의 직접 입력값 — 좁게 해석하면 제외 가능, 넓게 해석하면 포함. 제품 오너 확인 전까지 보수적으로 포함 권고. |
-| `bypass_reconciliation_task_lock` | **잠정 하드 블로커(결정 필요, R10 의존관계 확인 후 재조정)** | "정산 관련 항목"에 해당할 가능성이 높으나 이 태스크 큐가 R10 최종 원장의 입력인지 미확인 |
-| `bypass_trial_session_auto_complete` | **하드 블로커 아님(결정 필요로 재확인 권고)** | 지시문의 5개 카테고리(세션 불변식/동의/계정 상태/초대/정산) 중 어디에도 문자 그대로는 속하지 않고, blast radius도 가장 작다고 판단 — 다만 "세션 불변식"을 넓게 해석하면(trial_sessions도 세션의 일종) 포함해야 할 수 있어 최종 판단은 제품 오너에게 넘긴다. |
+| `bypass_teacher_rate_protect` | **하드 블로커** | 시급 이력은 정산(강사 지급액)의 직접 입력값 — "정산 관련 항목"에 해당 |
+| `bypass_reconciliation_task_lock` | **하드 블로커** | `entitlement_ledger`/`payout_items`(R10 payout 파이프라인, 이미 구현·가동 확인됨)에 직접 영향을 주는 정산 파이프라인 단계로 확인됨 — "정산 관련 항목"에 해당 |
+| `bypass_trial_session_auto_complete` | **하드 블로커** | "세션 불변식"을 trial_sessions까지 포함해 넓게 해석 — blast radius가 작다는 것은 착수 순서(배치 1, 가장 마지막)에는 반영하되 게이트 제외 사유는 아님 |
 
-## 결정 필요 (제품 오너 확인 요청)
+**7개 전부 Preview/non-prod 반영 전 하드 블로커** — 잠정/조건부 분류는 없다.
 
-1. **`bypass_session_lock`의 안전한 대체 구조** — 5번 항목에서 제시한 "구조적 재구성"이 비용 대비 타당한지, 아니면 더 단순한 절충(예: 트리거를 없애고 `sessions.final_status`/`material_version_id`에 대한 UPDATE grant를 아예 특정 role에만 주는 컬럼 단위 권한 접근)이 우선인지 방향 확인 필요 — 이번 라운드에서 코드 작성이 금지돼 있어 프로토타입으로 검증하지 못했다.
-2. **`bypass_status_protect`가 보호하는 8개 함수의 정확한 게이트(`is_admin()` 등) 전수 확인** — 이번 라운드에서는 대표 트리거 정의만 읽었고, 8개 SET 호출부 각각의 함수 본문을 전부 읽지는 못했다(범위상 시간 제약). corrective 착수 전 재확인 필요.
-3. **`20260909000000_r2_task8_capability_gates.sql`이 `bypass_invite_protect`/`bypass_status_protect`를 추가로 켜는 정확한 목적** — "캐퍼빌리티 게이트"가 초대/계정 상태와 어떻게 상호작용하는지 이번 라운드에서 깊이 읽지 못함.
-4. **`bypass_teacher_rate_protect`를 Preview 게이트 하드 블로커에 포함할지** — 지시문 문구("정산 관련 항목")가 시급 자체를 포함하는지 해석 확인 필요.
-5. **`bypass_reconciliation_task_lock`과 R10 payout 파이프라인의 실제 의존관계** — R10이 이 태스크 큐를 소비하는지, 아직 착수 전인지 `docs/CURRENT.md`의 최신 R10 관련 기록으로 재확인 필요(이번 라운드에서 R10 관련 섹션을 전수 검색하지 않음).
-6. **`bypass_trial_session_auto_complete`를 게이트 하드 블로커에서 뺄지** — "세션 불변식"을 얼마나 넓게 해석할지에 달림, 판단을 제품 오너에게 넘김.
+## 미완료/잔여 확인 사항
+
+이번 라운드의 목표(초안의 "결정 필요" 3개 항목을 실제 코드로 확정)는 모두
+달성됐다 — `bypass_status_protect`의 8개 SET 호출부 게이트, `task8_capability_gates.sql`의
+목적, `claim_account_invite`의 토큰 인가 방식 전부 실제 최신 함수 본문을 읽어
+확정 결론을 냈다(위 각 절의 "확정" 표시 항목 참고). 코드 조사 관점에서 남은
+모호성은 없다.
+
+## 결정 필요 (제품 오너 확인 요청 — 순수 정책/우선순위 판단만)
+
+이번 개정에서 투자 조사로 해소 가능한 항목은 전부 해소했으므로, 아래는
+코드를 더 읽어도 답이 나오지 않는 순수 비즈니스 판단만 남긴다.
+
+1. **`bypass_session_lock`의 구조 재설계(항목 1-5) 착수 시점** — 배치 2의
+   마지막 항목으로 제안했으나, 두 불변식을 분리하는 스키마 변경(신규 테이블)
+   자체가 다른 세 배치-2 항목(공용 토큰 인프라 재사용)보다 별도 설계이므로,
+   배치 2 안에서 이 항목만 별도 스프린트로 분리할지 병렬 진행할지는 리소스
+   배정 문제 — 제품 오너/팀 일정 판단 필요.

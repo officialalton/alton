@@ -1,6 +1,22 @@
 # ALTON — 현재 상태 (2026-09-08 기준)
 
-> **2026-09-08 — bypass GUC 보안 정리 계획 수립(코드 변경 없음, 계획 전용).**
+> **2026-09-08 — bypass GUC 보안 정리 계획 개정(코드 변경 없음, 계획/문서화만).**
+> 초안(`be18161`) 대비 `docs/superpowers/plans/2026-09-08-bypass-guc-security-cleanup.md`를
+> 4가지 축으로 개정했다: (1) 7개 GUC 전부를 하드 블로커로 확정(잠정 분류
+> 제거), (2) `bypass_reconciliation_task_lock`의 "R10 착수 여부 미확인" 서술이
+> 사실과 달랐음을 정정 — R10 payout 파이프라인은 이미 구현돼 있음을 실제
+> 커밋(`1072dda`/`a4f8d8d`/`6cb8ee6`/`ed72952`/`1519d26`/`55f9575`/`6871a3b` 등)과
+> `session_judgment_reconciliation_tasks` → `entitlement_ledger`/`payout_items`
+> 연결 코드를 직접 읽어 확인, (3) 초안에 남아 있던 "결정 필요" 3개 항목
+> (`bypass_status_protect`의 8개 SET 호출부 게이트, `task8_capability_gates.sql`의
+> 목적, `claim_account_invite`의 anon 토큰 인가 방식)을 실제 최신 함수 본문을
+> 전수 읽어 확정 결론으로 전환, (4) 7개 GUC 각각에 대해 "여러 대안 나열" 대신
+> 단일 확정 방향(필드 검사 재작성 / 공용 1회용 토큰 테이블 / 구조 재설계)과
+> 구체적 테스트 시나리오로 재작성. 남은 "결정 필요"는 `bypass_session_lock`
+> 구조 재설계의 착수 스케줄(리소스 배정) 1건뿐 — 순수 정책 판단만 남았다.
+> 이번 라운드도 마이그레이션·앱 코드는 전혀 건드리지 않았다.
+
+> **2026-09-08 — bypass GUC 보안 정리 계획 수립(코드 변경 없음, 계획 전용) [초안, 위 개정으로 대체됨].**
 > `876b30a`(R8 annotation-lock corrective) 감사에서 남겨둔 나머지
 > `app.bypass_*` GUC 7건(`bypass_session_lock`, `bypass_teacher_rate_protect`,
 > `bypass_invite_protect`, `bypass_status_protect`, `bypass_consent_protect`,
