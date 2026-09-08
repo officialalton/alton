@@ -60,18 +60,15 @@ beforeAll(() => {
 });
 
 afterAll(() => {
-  // session_annotation_events는 실제로 append-only(트리거로 UPDATE/DELETE 전면
-  // 차단)이므로, 테스트 fixture 정리에는 이 마이그레이션이 정의한 bypass GUC를
-  // 명시적으로 써야 한다(app/admin 등 어떤 앱 코드도 이 GUC를 켤 수 없음 — RLS/권한
-  // grant 대상이 아니라 superuser가 직접 psql로만 설정 가능).
-  psql(`
-    set app.bypass_annotation_lock = 'true';
-    delete from session_annotation_events where session_id = '${sessionId}';
-    delete from sessions where id = '${sessionId}';
-    delete from reservations where id = '${reservationId}';
-    delete from subject_enrollments where id = '${enrollmentId}';
-    delete from contracts where id = '${contractId}';
-  `);
+  // 20261239000000_r8_corrective_remove_annotation_lock_bypass.sql 이후
+  // session_annotation_events는 어떤 역할/GUC로도 UPDATE/DELETE할 수 없다(그게
+  // 바로 이 corrective가 고친 취약점 — app.bypass_annotation_lock GUC 분기 제거).
+  // 이 파일의 모든 테스트가 공유하는 sessionId 아래에 이미 여러 행이 쌓여 있으므로,
+  // 그 행들을 지울 방법 자체가 없고(append-only), session_annotation_events.session_id가
+  // sessions(id)를 FK(기본 RESTRICT)로 참조하므로 sessions/reservations/
+  // subject_enrollments/contracts 삭제도 함께 불가능해진다. 90d7012/6f292cc
+  // corrective와 동일한 관례대로 이 정리를 시도하지 않고 CLAUDE.md의 UAT 정리
+  // 관례(파일 전체 실행 사이 `supabase db reset --local`)에 맡긴다.
 });
 
 function insertStroke(actorId: string, seqLabel: string) {
@@ -315,5 +312,66 @@ describe("session_annotation_events — append/replay (실제 DB)", () => {
     expect(() => psql(`update session_annotation_events set payload = '{"x":1}'::jsonb where id = '${id}';`)).toThrow(
       /append-only/
     );
+  });
+
+  // R8 corrective(20261239000000) — app.bypass_annotation_lock GUC 분기를 완전히
+  // 제거했음을 두 각도에서 직접 증명한다: (1) 어차피 RLS로 막혀 있던 ordinary
+  // authenticated 경로, (2) 원래 이 GUC가 존재하던 이유였던 RLS-우회 privileged
+  // 경로(가장 가까운 시뮬레이션은 postgres/superuser로 직접 실행하는 것 — 90d7012의
+  // 테스트 스위트가 채택한 것과 동일한 근사).
+  describe("app.bypass_annotation_lock — 어떤 경로로도 더 이상 효과가 없다(R8 corrective 회귀)", () => {
+    it("ordinary authenticated 역할: GUC를 켜도 UPDATE/DELETE는 여전히 거부된다(RLS가 먼저 막음)", () => {
+      const id = asUser(
+        TEACHER_ID,
+        `insert into session_annotation_events (session_id, author_id, event_type, payload)
+         values ('${sessionId}', '${TEACHER_ID}', 'stroke', '{"label":"guc-ordinary"}'::jsonb) returning id;`
+      );
+
+      // authenticated에게는 애초에 UPDATE/DELETE 정책이 없으므로(RLS 기본 거부),
+      // GUC를 켜봐야 트리거까지 가지도 못하고 대상 행이 0건으로 걸러진다 — 에러
+      // 없이 조용히 아무 것도 바뀌지 않아야 한다.
+      asUser(
+        TEACHER_ID,
+        `set app.bypass_annotation_lock = 'true';
+         update session_annotation_events set payload = '{"x":1}'::jsonb where id = '${id}';`
+      );
+      asUser(
+        TEACHER_ID,
+        `set app.bypass_annotation_lock = 'true';
+         delete from session_annotation_events where id = '${id}';`
+      );
+
+      const stillThere = asUser(TEACHER_ID, `select payload from session_annotation_events where id = '${id}';`);
+      expect(stillThere).toBe('{"label": "guc-ordinary"}');
+    });
+
+    it("privileged(RLS 우회) 경로: superuser로 실행해도 GUC를 켜면 UPDATE/DELETE가 거부된다(수정 전에는 이 경로가 통과했었다)", () => {
+      const id = psql(
+        `insert into session_annotation_events (session_id, author_id, event_type, payload)
+         values ('${sessionId}', '${TEACHER_ID}', 'stroke', '{"label":"guc-privileged"}'::jsonb) returning id;`
+      );
+
+      // psql 기본 연결은 postgres(superuser) — RLS를 전면 우회하므로
+      // SECURITY DEFINER 함수나 service_role 경유 코드가 겪는 것과 동일한
+      // "RLS는 통과했지만 트리거가 최후 방어선" 상황을 대표한다. corrective 이전에는
+      // 여기서 GUC가 UPDATE/DELETE를 성공시켰지만, 이제는 트리거 함수 자체에
+      // bypass 분기가 없으므로 무조건 거부되어야 한다.
+      expect(() =>
+        psql(`
+          set app.bypass_annotation_lock = 'true';
+          update session_annotation_events set payload = '{"x":1}'::jsonb where id = '${id}';
+        `)
+      ).toThrow(/append-only/);
+
+      expect(() =>
+        psql(`
+          set app.bypass_annotation_lock = 'true';
+          delete from session_annotation_events where id = '${id}';
+        `)
+      ).toThrow(/append-only/);
+
+      const stillThere = psql(`select payload from session_annotation_events where id = '${id}';`);
+      expect(stillThere).toBe('{"label": "guc-privileged"}');
+    });
   });
 });

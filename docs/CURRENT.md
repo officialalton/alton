@@ -1,5 +1,84 @@
 # ALTON — 현재 상태 (2026-09-07 기준)
 
+> **2026-09-07(R8 corrective — session_annotation_events append-only lock의
+> settable GUC bypass 제거, 90d7012/6f292cc와 동일 취약점 클래스, Task 4는
+> 여전히 착수하지 않음).** 발견된 문제: `b4fd788`(R8 Task D)가 도입한
+> `session_annotation_events`의 append-only 트리거
+> (`prevent_annotation_event_mutation()`)가 "앱 코드/RLS로는 절대 켤 수 없는
+> GUC — 정리/마이그레이션 작업에서 superuser가 명시적으로 사용"이라는 가정
+> 아래 `app.bypass_annotation_lock` 커스텀 GUC 분기를 남겨두고 있었다.
+> 90d7012(`session_prepared_selections` pin-lock)/6f292cc
+> (`session_content_use_events`)에서 이미 증명된 것과 동일한 잘못된 가정이다 —
+> 플레인 SQL로 선언한 커스텀 GUC는 GRANT/REVOKE 대상이 아니라서 어떤
+> 실행 경로든 `SET`으로 켤 수 있다.
+>
+> **정정된 위험 모델(제품 오너 확인):** ordinary `authenticated` 역할에게는
+> `session_annotation_events`에 대한 UPDATE/DELETE RLS 정책도 GRANT도 아예
+> 없으므로, 일반 인증 세션이 이 GUC만으로 직접 행을 변경/삭제할 수는 없었다
+> (RLS가 먼저 0건으로 걸러낸다 — 90d7012/6f292cc의 사례와 달리 여기는 애초에
+> ordinary role이 도달 불가능했다). 그러나 SECURITY DEFINER 함수·service_role
+> 경유 코드·마이그레이션/운영 스크립트 등 RLS를 우회하는 모든 privileged 경로는
+> 커스텀 GUC 자체에 접근 제어가 없으므로, 그런 경로가 의도적으로든 향후
+> 버그로든 이 GUC를 설정하기만 하면 append-only 보장이 조용히 무력화될 수
+> 있었다 — role 도달 가능성과 무관하게 설정 가능한 탈출구 자체가 문제다.
+>
+> **수정:**
+> `supabase/migrations/20261239000000_r8_corrective_remove_annotation_lock_bypass.sql`
+> (additive — 원본 `20261223000000_r8_session_annotation_events.sql`은 건드리지
+> 않음)이 `prevent_annotation_event_mutation()`에서 bypass 분기를 완전히
+> 제거했다. 이제 append-only에는 설정 가능한 어떤 탈출구도 없다(진짜
+> superuser의 `ALTER TABLE ... DISABLE TRIGGER`만이 Postgres 자체 권한 모델에
+> 근거한 별개 카테고리로 남는다 — GUC가 아니라서 앱 코드가 흉내낼 수 없다).
+> `app/session/[id]/session-annotation-events.integration.test.ts`의 `afterAll`
+> cleanup도 함께 고쳤다 — 이 파일은 여러 테스트가 하나의 공유 세션에 append-only
+> 이벤트를 계속 쌓으므로(각 테스트가 독립 fixture를 쓰는 Task 1~3 계열 파일과는
+> 구조가 다름), bypass 제거 이후에는 그 이벤트들을 지울 방법이 없고
+> `session_annotation_events.session_id`가 `sessions(id)`를 FK(RESTRICT)로
+> 참조하므로 sessions/reservations/subject_enrollments/contracts 삭제도 함께
+> 불가능해진다. `afterAll`의 delete 시퀀스 자체를 제거하고 CLAUDE.md의 UAT 정리
+> 관례(`supabase db reset --local`)에 맡긴다. 새 관리자 우회 메커니즘은
+> 추가하지 않았다.
+>
+> **회귀 테스트 추가(두 각도):** (1) ordinary `authenticated` 역할 — 기존 stroke
+> 행에 `SET app.bypass_annotation_lock = 'true'` 후 UPDATE/DELETE를 시도해도
+> RLS가 먼저 막아 조용히 무변화임을 명시적으로 고정. (2) privileged/RLS-우회
+> 경로 — 이 코드베이스에서 SECURITY DEFINER/service_role을 가장 가깝게
+> 시뮬레이션하는 방법인 `postgres`(superuser, RLS 완전 우회) 세션으로
+> `SET app.bypass_annotation_lock = 'true'` 후 UPDATE/DELETE를 시도 — corrective
+> 이전에는 이 경로가 정확히 성공했었지만, 이제는 트리거 함수 자체에 분기가
+> 없으므로 무조건 "append-only" 예외로 거부됨을 증명한다.
+>
+> **검증:** `supabase db reset --local`(클린 적용, corrective 마이그레이션
+> 포함), `npx vitest run --no-file-parallelism`
+> `app/session/[id]/session-annotation-events.integration.test.ts`(16개 전부
+> 통과 — 신규 회귀 2건 포함), `npx tsc --noEmit`(클린), 전체
+> `npx vitest run --no-file-parallelism`(218개 파일·1505개 테스트 중 5건만
+> 실패 — 전부 `lib/booking/trial-entitlement-and-cancellation.integration.test.ts`
+> /`supabase/lesson-reviews.integration.test.ts`의 날짜 의존
+> `teacher_slot_not_open`, 신선한 `db reset --local` 후 두 파일만 단독 재실행해도
+> 동일하게 실패함을 재확인 — 이번 변경과 무관한 기존 known flaky, docs/CURRENT.md
+> 여러 라운드에서 이미 문서화됨), `npx next build`(클린).
+>
+> **감사(수정 없음, 보고만):** `app.bypass_*` 전수 grep 결과 —
+> `bypass_prepared_selection_lock`(90d7012에서 이미 제거),
+> `bypass_content_use_event_lock`(6f292cc에서 이미 제거),
+> `bypass_annotation_lock`(이번 라운드에서 제거) 외에
+> `bypass_session_lock`(`reopen_session()`/`recomplete_session()`,
+> `20260830040000_r1_reservation_session.sql`/`20261219000000_r8_material_version_lock.sql`),
+> `bypass_teacher_rate_protect`(`set_teacher_rate()`,
+> `20260830110000_r1_teacher_rate_integrity_fix.sql`),
+> `bypass_invite_protect`(`20260902000000_r2_account_invites.sql` 외),
+> `bypass_status_protect`(`20260831011000_r2_account_status_apply.sql` 외),
+> `bypass_consent_protect`(`20260904000000_r2_minor_consent.sql`),
+> `bypass_reconciliation_task_lock`(`20261105000000_m5b_judgment_reconciliation_tasks.sql`
+> 외), `bypass_trial_session_auto_complete`
+> (`20261125000000_m5d_session_completion_integrity.sql`)가 여전히 라이브 상태다.
+> 그 각 테이블에 대해 `authenticated`에 직접 UPDATE/DELETE GRANT가 없음을
+> 확인했으므로(grep), ordinary `authenticated` 역할은 이들 GUC로도 직접 도달할
+> 수 없다 — 전부 이번 annotation 사례와 같은 모양의 "privileged/RLS-우회 경로만
+> 도달 가능"한 라이브 항목이다. 제품 오너 지시대로 이번 라운드에서는 고치지
+> 않고 여기 보고만 한다 — 상세 재현 근거는 최종 보고 참고.
+>
 > **2026-09-07(R9 레슨 준비 Task 2만 — 불변 세션 콘텐츠 매니페스트 +
 > pin_session_selection(), Task 3~4는 여전히 착수하지 않음).** 계획서
 > (`docs/superpowers/plans/2026-09-08-lesson-prep-session-selection.md`, v4
