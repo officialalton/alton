@@ -3087,3 +3087,28 @@ Task 3(레슨 사용 이벤트)·Task 4(과제 조립) 방향은 v1과 동일하
   manifest에 넣지 못함(스코프 내 다른 후보가 있어도).
 
 **여전히 코드 작업 시작 전, 계획 승인 대기 상태.** 이번 라운드도 문서만, 외부 변경 전혀 없음.
+
+## 2026-09-08 — 구현 계획 v4: SECURITY DEFINER 함수 보안 조건 명시(마지막 보완, 승인 임박)
+
+`pinSessionSelection()`이 `SECURITY DEFINER`로 정의되므로(일반 역할에 manifest INSERT 권한
+자체가 없어 이 함수만이 유일한 쓰기 경로) 호출자 권한과 무관하게 함수 소유자 권한으로
+실행된다는 점을 제품 오너가 지적 — RLS·앱 레이어 가드는 함수 내부에 자동 적용되지 않으므로
+함수 본문이 직접 인가를 검증해야 함. `docs/superpowers/plans/2026-09-08-lesson-prep-session-
+selection.md`를 v4로 보완(코드 작업은 여전히 시작 안 함):
+
+- 함수 첫 단계(0a~0d)로 명시: `auth.uid()` 확인 → 호출자가 selection의 `teacher_id` 본인이면서
+  해당 `subject_enrollment_id`의 활성 담당 교사인지(`is_active_teacher_for_enrollment()` 명시적
+  재호출) 검증, 관리자는 `is_admin()`으로 별도 허용 경로 → 전달된 `sessionId`가 그 staged
+  selection에 실제 attach된 세션인지 확인 → 세션의 `subject_enrollment_id`와 selection의
+  `subject_enrollment_id` 일치 확인. 하나라도 실패하면 manifest 쓰기·상태 변경 전혀 없이 중단.
+- 함수는 고정 `search_path`(`public, pg_temp`)로 선언, `EXECUTE` 권한은 `authenticated`에만
+  부여하고 `PUBLIC`에서는 명시적으로 회수(Postgres 기본 동작인 `PUBLIC` EXECUTE 부여를 마이그
+  레이션에서 되돌림).
+- 신규 테스트: 담당 교사(성공)/관리자(성공)/같은 학생이지만 다른 시점 담당이었던 교사(실패,
+  manifest 0건)/무관한 교사(실패)/학생(실패)/담당 교사이지만 attach 안 된 세션 전달(실패,
+  0c 검증)/세션-selection subject_enrollment_id 불일치 시나리오(실패, 0d 검증)까지 포함한
+  전체 권한 매트릭스. `EXECUTE` 권한이 `authenticated`에만 있고 `PUBLIC`엔 없음, `search_path`
+  고정 여부도 `information_schema`/`pg_proc` 조회로 확인.
+
+이 보완이 반영되면 제품 오너가 Task 1 착수를 승인하기로 확인함. 이번 라운드도 문서만,
+외부 변경 전혀 없음.
