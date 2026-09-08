@@ -12,6 +12,7 @@ const ADMIN_ID = "aaaaaaaa-0000-0000-0000-000000000001"; // 관리자 (seed)
 const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001"; // 박서연 선생님 (seed, 지훈 담당)
 const OTHER_TEACHER_ID = "dddddddd-0000-0000-0000-000000000002"; // 이도현 선생님 (seed, 무관한 제3자)
 const STUDENT_ID = "cccccccc-0000-0000-0000-000000000001"; // 지훈 (seed)
+const OTHER_STUDENT_ID = "cccccccc-0000-0000-0000-000000000002"; // 이서아 (seed, 무관한 제3자 학생)
 const HOUSEHOLD_ID = "aabbccdd-0000-0000-0000-000000000001"; // 지훈 household (seed)
 const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001"; // SAT Math (seed)
 
@@ -135,6 +136,31 @@ describe("담당 선생님만 학생 오버레이를 조정할 수 있다", () =
        values ('${overlayId}', '${baseUnitId}', 1, '학생 시도') returning id;`
     );
     expect(err).toMatch(/row-level security|policy/i);
+  });
+
+  // Acceptance gate(계획서 §Acceptance gate) — "학생은 다른 선생님의 준비
+  // 데이터를 볼 수 없다"의 학생 축: 다른 학생(무관한 제3자)의 오버레이/오버레이
+  // 단원은 조회조차 되지 않아야 한다. 위 "학생 본인은 조회할 수 있지만..."
+  // 테스트는 본인 오버레이만 다뤘으므로, 여기서 교차 학생 차단을 명시적으로 검증한다.
+  it("다른 학생은 이 학생의 오버레이를 조회할 수 없다(RLS 거부 — 빈 결과)", () => {
+    const overlayId = createOverlay();
+    const unitId = asUser(
+      TEACHER_ID,
+      `insert into curriculum_overlay_units (overlay_id, source_unit_id, position, unit_title)
+       values ('${overlayId}', '${baseUnitId}', 1, '지훈 전용 단원') returning id;`
+    );
+
+    const overlayReadByOther = asUser(
+      OTHER_STUDENT_ID,
+      `select id from student_curriculum_overlays where id = '${overlayId}';`
+    );
+    expect(overlayReadByOther).toBe("");
+
+    const unitReadByOther = asUser(
+      OTHER_STUDENT_ID,
+      `select id from curriculum_overlay_units where id = '${unitId}';`
+    );
+    expect(unitReadByOther).toBe("");
   });
 });
 
@@ -306,5 +332,127 @@ describe("완료 상태 전이 — 선생님 명시적 행동으로만", () => {
        where c.relname = 'session_problem_attempts' and not t.tgisinternal;`
     );
     expect(triggerCount).toBe("0");
+  });
+});
+
+// Acceptance gate(계획서 §Acceptance gate) — "a teacher can add a published
+// canonical unit or compose a supplement unit without changing any canonical
+// row". 모든 정본(canonical) 테이블의 (행 수, md5 체크섬)을 오버레이 조작 전후로
+// 비교해 0 diff를 증명한다 — subject-curriculum-actions.ts의 addCanonicalUnit/
+// createSupplementUnit이 실제로 쓰는 것과 동일한 curriculum_overlay_units insert를
+// 그대로 재현한다.
+const CANONICAL_TABLES = [
+  "curriculum_docs",
+  "curriculum_doc_sections",
+  "problems",
+  "subject_template_units",
+  "subject_keywords",
+  "subject_template_unit_keywords",
+  "curriculum_doc_section_keywords",
+  "problem_keywords",
+] as const;
+
+function canonicalChecksums(): string {
+  const selects = CANONICAL_TABLES.map(
+    (t) => `select '${t}' as tbl, count(*) as n, coalesce(md5(string_agg(t.*::text, '' order by t.*::text)), '') as sum from ${t} t`
+  ).join(" union all ");
+  return psql(`${selects} order by tbl;`);
+}
+
+describe("정본(canonical) 테이블 무변경 — 오버레이 조작은 원본을 절대 바꾸지 않는다", () => {
+  it("공개 단원을 오버레이에 추가해도 모든 정본 테이블의 행수/체크섬이 그대로다", () => {
+    const before = canonicalChecksums();
+    const overlayId = createOverlay();
+    asUser(
+      TEACHER_ID,
+      `insert into curriculum_overlay_units (overlay_id, source_unit_id, position, unit_title)
+       values ('${overlayId}', '${baseUnitId}', 1, '정본 무변경 확인용 단원') returning id;`
+    );
+    const after = canonicalChecksums();
+    expect(after).toBe(before);
+  });
+
+  it("보강(supplement) 단원을 조립해도(참고 교재/키워드 연결 포함) 모든 정본 테이블이 그대로다", () => {
+    const docId = psql(
+      `insert into curriculum_docs (title, subject_id, owner_type, status)
+       values ('보강용 공개 교재 ${Date.now()}', '${SUBJECT_ID}', 'admin', 'published') returning id;`
+    );
+    const keywordId = psql(
+      `insert into subject_keywords (subject_id, label) values ('${SUBJECT_ID}', '보강테스트키워드 ${Date.now()}') returning id;`
+    );
+
+    const before = canonicalChecksums();
+    const overlayId = createOverlay();
+    const supplementUnitId = asUser(
+      TEACHER_ID,
+      `insert into curriculum_overlay_units (overlay_id, source_unit_id, position, unit_title, note)
+       values ('${overlayId}', null, 1, '보강 단원', '조합 테스트') returning id;`
+    );
+    asUser(
+      TEACHER_ID,
+      `insert into curriculum_overlay_unit_materials (overlay_unit_id, curriculum_doc_id)
+       values ('${supplementUnitId}', '${docId}');`
+    );
+    asUser(
+      TEACHER_ID,
+      `insert into curriculum_overlay_unit_keywords (overlay_unit_id, keyword_id)
+       values ('${supplementUnitId}', '${keywordId}');`
+    );
+    const after = canonicalChecksums();
+    expect(after).toBe(before);
+  });
+});
+
+// Acceptance gate — "the existing personal vocabulary table is untouched by
+// keyword operations". Task 1-4가 vocab_words에 FK/트리거/코드 경로를 전혀
+// 추가하지 않았음을 스키마 레벨로 확인하고, 키워드 카탈로그 조작이 실제로
+// vocab_words 행을 건드리지 않는다는 것도 행수/체크섬으로 증명한다.
+describe("vocab_words — 키워드 카탈로그 조작에 완전히 무관하다", () => {
+  it("어떤 R9 키워드/오버레이 테이블도 vocab_words를 참조하는 FK/트리거를 갖지 않는다", () => {
+    const fkCount = psql(`
+      select count(*) from information_schema.table_constraints tc
+      join information_schema.constraint_column_usage ccu
+        on tc.constraint_name = ccu.constraint_name and tc.constraint_schema = ccu.constraint_schema
+      where tc.constraint_type = 'FOREIGN KEY' and ccu.table_name = 'vocab_words'
+        and tc.table_name in (
+          'subject_keywords','subject_template_unit_keywords','curriculum_doc_section_keywords',
+          'problem_keywords','student_curriculum_overlays','curriculum_overlay_units',
+          'curriculum_overlay_unit_keywords','curriculum_overlay_unit_materials'
+        );
+    `);
+    expect(fkCount).toBe("0");
+
+    const triggerCount = psql(`
+      select count(*) from pg_trigger t
+      join pg_class c on c.oid = t.tgrelid
+      where c.relname = 'vocab_words' and not t.tgisinternal;
+    `);
+    expect(triggerCount).toBe("0");
+  });
+
+  it("키워드/오버레이 조작을 한 차례 수행해도 vocab_words 행수와 체크섬이 그대로다", () => {
+    const before = psql(
+      `select count(*) as n, coalesce(md5(string_agg(t.*::text, '' order by t.*::text)), '') as sum from vocab_words t;`
+    );
+
+    const keywordId = psql(
+      `insert into subject_keywords (subject_id, label) values ('${SUBJECT_ID}', 'vocab무변경확인 ${Date.now()}') returning id;`
+    );
+    const overlayId = createOverlay();
+    const unitId = asUser(
+      TEACHER_ID,
+      `insert into curriculum_overlay_units (overlay_id, source_unit_id, position, unit_title)
+       values ('${overlayId}', '${baseUnitId}', 1, 'vocab 무변경 확인용 단원') returning id;`
+    );
+    asUser(
+      TEACHER_ID,
+      `insert into curriculum_overlay_unit_keywords (overlay_unit_id, keyword_id)
+       values ('${unitId}', '${keywordId}');`
+    );
+
+    const after = psql(
+      `select count(*) as n, coalesce(md5(string_agg(t.*::text, '' order by t.*::text)), '') as sum from vocab_words t;`
+    );
+    expect(after).toBe(before);
   });
 });

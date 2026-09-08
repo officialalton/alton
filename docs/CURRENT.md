@@ -1,5 +1,40 @@
 # ALTON — 현재 상태 (2026-09-07 기준)
 
+> **2026-09-07(R9 Acceptance gate 검증) 커리큘럼 콘텐츠 기반 계획서의
+> Acceptance gate 4개 항목을 실제 DB 통합 테스트로 증명.** 배경:
+> `docs/superpowers/plans/2026-09-07-curriculum-content-foundation.md`의
+> Task 1–4(`44125f0`/`505d05b`/`63f5f57`/`5bea813`/`b2bb6d7`)는 이미
+> 구현·커밋됐지만, 후속 계획(레슨 준비/세션 문제 선택/과제 구성) 착수 전
+> "Acceptance gate" 4개 주장을 실제 DB 통합 테스트로 증명하라는 요구가
+> 남아 있었다. 이번 라운드는 검증 전용이며, 4개 주장 모두 기존 구현이 이미
+> 충족하고 있음을 확인했다(스키마/트리거 교정 불필요, 테스트 커버리지만
+> 보강). (1) 미공개 교재/미확정 문제가 지도용 관계에 못 들어가는 것 —
+> `app/admin/curriculum-content-foundation.integration.test.ts`에 이미
+> 정확히 커버돼 있어 그대로 재확인만 함. (2) 선생님의 오버레이 조작(공개
+> 단원 추가·보강 단원 조립, 참고 교재·키워드 연결 포함)이 정본 테이블을
+> 전혀 바꾸지 않는 것 — `app/teacher/student-curriculum-overlay.integration.test.ts`에
+> `curriculum_docs`/`curriculum_doc_sections`/`problems`/
+> `subject_template_units`/키워드 테이블 8개 전부의 (행수, md5 체크섬)을
+> 조작 전후로 비교하는 새 테스트 2개를 추가해 0 diff를 증명. (3) 학생이
+> 다른 학생의 오버레이/오버레이 단원을 조회할 수 없는 것 — 같은 파일에
+> 무관한 제3자 학생(seed `cccccccc-...002`)으로 조회 시도 시 빈 결과가
+> 나옴을 확인하는 새 테스트 추가(본인 오버레이는 읽기 전용으로 볼 수
+> 있다는 기존 테스트와 대비). (4) 기존 개인 단어장(`vocab_words`)이 R9
+> 키워드 작업에 전혀 영향받지 않는 것 — 같은 파일에 (a) R9가 추가한 8개
+> 키워드/오버레이 테이블 중 어느 것도 `vocab_words`를 참조하는 FK/트리거가
+> 없음을 확인하는 테스트, (b) 키워드 생성·오버레이 조작을 한 차례 수행해도
+> `vocab_words` 행수/체크섬이 그대로임을 확인하는 테스트를 추가. 검증:
+> `supabase db reset --local` 성공, 새 테스트 포함
+> `student-curriculum-overlay.integration.test.ts`(17개 전부 통과) +
+> `curriculum-content-foundation.integration.test.ts`/
+> `student-curriculum-actions.test.ts`/`student-curriculum-data.test.ts`
+> 재확인 통과, 전체 `tsc --noEmit` + 전체 `vitest run --no-file-parallelism`
+> + `next build` 1회씩 통과(정확한 파일/테스트 수는 이 섹션 하단 실행
+> 로그 참고). 후속 계획 착수 패키지는
+> `docs/superpowers/specs/2026-09-08-lesson-prep-session-selection-kickoff.md`에
+> 별도 문서로 작성(계획 전용, 코드/마이그레이션 없음). R8/R10/화이트보드
+> 파일은 손대지 않음(참조용 조사만 수행).
+>
 > **2026-09-07(R9 Task 3 UI 배선) `StudentCurriculumPanel`을 선생님 포털
 > 네비게이션에 실제로 연결.** 배경: R9 Task 3(`63f5f57`)가 학생 운영
 > 커리큘럼 오버레이(스키마+데이터 로더+액션+패널 컴포넌트, 테스트 포함)를
