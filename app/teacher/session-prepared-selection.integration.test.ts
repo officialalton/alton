@@ -60,6 +60,20 @@ function asUserExpectError(userId: string, sql: string): string {
 let baseUnitId: string;
 const cleanupContractIds: string[] = [];
 
+// pin된 session_prepared_selections 행은(20261236000000_r9_corrective_remove_pin_lock_bypass.sql
+// 이후) 어떤 세션에서도 더 이상 지울 수 없다 — bypass GUC가 완전히 제거됐기
+// 때문이다(그게 바로 이 corrective가 고치는 취약점). 따라서 이 테스트 파일은
+// 더 이상 per-test 정리에서 pinned 행을 지우려 하지 않는다: 그런 테스트가 만든
+// contract는 cleanupContractIds에서 미리 빼서 afterEach가 건드리지 않게 하고,
+// 실제 정리는 CLAUDE.md의 UAT 정리 관례대로 파일 전체 실행 사이 `supabase db
+// reset --local`에 맡긴다. 각 테스트가 고유한 이름/난수를 쓰므로(이미 기존
+// makeOverlayUnitWithKeyword/makeSelectableSection 등이 Date.now()+Math.random()으로
+// 그렇게 하고 있다) 남겨진 행들이 다른 테스트와 충돌하지도 않는다.
+function excludeFromCleanup(contractId: string): void {
+  const idx = cleanupContractIds.indexOf(contractId);
+  if (idx !== -1) cleanupContractIds.splice(idx, 1);
+}
+
 beforeAll(() => {
   baseUnitId = psql(
     `select id from subject_template_units where subject_id = '${SUBJECT_ID}' order by position limit 1;`
@@ -70,10 +84,12 @@ afterEach(() => {
   // 각 테스트가 만든 계약/등록/세션/오버레이를 정리한다. sessions/reservations는
   // subject_enrollments를 RESTRICT로 참조하므로(cascade 아님), 자식→부모 순으로
   // 명시적으로 지운 뒤 contracts를 지운다(그 외 오버레이/준비된 선택 등은
-  // subject_enrollments cascade로 함께 정리됨).
+  // subject_enrollments cascade로 함께 정리됨). pin-lock에는 이제 어떤 bypass도
+  // 없으므로(위 참고), 여기서 지우는 contract는 전부 pinned 행을 만들지 않았거나
+  // excludeFromCleanup으로 이미 제외된 것들뿐이다 — 그래서 bypass 없이도 항상
+  // 성공해야 정상이다.
   for (const id of cleanupContractIds.splice(0)) {
     psql(`
-      set app.bypass_prepared_selection_lock = 'true';
       delete from sessions where subject_enrollment_id in (select id from subject_enrollments where contract_id = '${id}');
       delete from reservations where subject_enrollment_id in (select id from subject_enrollments where contract_id = '${id}');
       delete from subject_threads where subject_enrollment_id in (select id from subject_enrollments where contract_id = '${id}');
@@ -94,7 +110,12 @@ function nextReservationOffsetDays(): number {
 
 // 준비된 선택은 subject_enrollment/세션 단위로 만들어지므로, 테스트마다 독립된
 // enrollment(+세션)를 새로 만들어 서로 간섭하지 않게 한다.
-function makeEnrollmentWithSession(): { enrollmentId: string; sessionId: string; reservationId: string } {
+function makeEnrollmentWithSession(): {
+  enrollmentId: string;
+  sessionId: string;
+  reservationId: string;
+  contractId: string;
+} {
   const contractId = psql(
     `insert into contracts (household_id, child_id, status) values ('${HOUSEHOLD_ID}', '${STUDENT_ID}', 'draft') returning id;`
   );
@@ -117,11 +138,17 @@ function makeEnrollmentWithSession(): { enrollmentId: string; sessionId: string;
      values ('${reservationId}', '${enrollmentId}', '${TEACHER_ID}', (select id from lesson_types where code = 'regular'), 60)
      returning id;`
   );
-  return { enrollmentId, sessionId, reservationId };
+  return { enrollmentId, sessionId, reservationId, contractId };
 }
 
-function makeOverlayUnitWithKeyword(): { overlayUnitId: string; keywordId: string; enrollmentId: string; sessionId: string } {
-  const { enrollmentId, sessionId } = makeEnrollmentWithSession();
+function makeOverlayUnitWithKeyword(): {
+  overlayUnitId: string;
+  keywordId: string;
+  enrollmentId: string;
+  sessionId: string;
+  contractId: string;
+} {
+  const { enrollmentId, sessionId, contractId } = makeEnrollmentWithSession();
   const overlayId = asUser(
     TEACHER_ID,
     `insert into student_curriculum_overlays (subject_enrollment_id) values ('${enrollmentId}') returning id;`
@@ -138,7 +165,7 @@ function makeOverlayUnitWithKeyword(): { overlayUnitId: string; keywordId: strin
     TEACHER_ID,
     `insert into curriculum_overlay_unit_keywords (overlay_unit_id, keyword_id) values ('${overlayUnitId}', '${keywordId}');`
   );
-  return { overlayUnitId, keywordId, enrollmentId, sessionId };
+  return { overlayUnitId, keywordId, enrollmentId, sessionId, contractId };
 }
 
 // 공개(published)된 교재 조각 하나를 새로 만들어 keywordId로 태깅한다(=selectable).
@@ -189,8 +216,9 @@ function createStagedSelectionWithUnit(): {
   keywordId: string;
   enrollmentId: string;
   sessionId: string;
+  contractId: string;
 } {
-  const { overlayUnitId, keywordId, enrollmentId, sessionId } = makeOverlayUnitWithKeyword();
+  const { overlayUnitId, keywordId, enrollmentId, sessionId, contractId } = makeOverlayUnitWithKeyword();
   const selectionId = asUser(
     TEACHER_ID,
     `insert into session_prepared_selections (subject_enrollment_id) values ('${enrollmentId}') returning id;`
@@ -205,7 +233,7 @@ function createStagedSelectionWithUnit(): {
     `insert into session_prepared_selection_unit_keywords (prepared_selection_unit_id, keyword_id)
      values ('${unitRowId}', '${keywordId}');`
   );
-  return { selectionId, unitRowId, overlayUnitId, keywordId, enrollmentId, sessionId };
+  return { selectionId, unitRowId, overlayUnitId, keywordId, enrollmentId, sessionId, contractId };
 }
 
 describe("생성/편집 — 미부착(임시보관함) 또는 부착-미핀 상태에서 다중 단원 + 단원별 키워드 부분집합", () => {
@@ -412,7 +440,7 @@ describe("attach/detach — 임시보관함 ↔ 세션", () => {
 
 describe("pin 이후 잠금 — 트리거가 모든 하위 테이블의 추가 변경을 거부한다", () => {
   it("status='pinned'로 전이한 뒤에는 단원/키워드/콘텐츠 추가·제거·재정렬·detach가 전부 거부된다", () => {
-    const { selectionId, unitRowId, keywordId, overlayUnitId } = createStagedSelectionWithUnit();
+    const { selectionId, unitRowId, keywordId, overlayUnitId, contractId } = createStagedSelectionWithUnit();
     const sectionId = makeSelectableSection(keywordId);
     const itemId = asUser(
       TEACHER_ID,
@@ -473,6 +501,89 @@ describe("pin 이후 잠금 — 트리거가 모든 하위 테이블의 추가 �
         `update session_prepared_selections set session_id = null where id = '${selectionId}';`
       )
     ).toMatch(/핀 완료된/);
+
+    // 이 selection은 이제 진짜로 pin되어 있어서 어떤 세션에서도 지울 수 없다
+    // (20261236000000_r9_corrective_remove_pin_lock_bypass.sql 이후 bypass가
+    // 없으므로). 그래서 이 테스트가 만든 contract는 afterEach의 일반 정리에서
+    // 제외하고 db reset에 맡긴다.
+    excludeFromCleanup(contractId);
+  });
+
+  it("app.bypass_prepared_selection_lock GUC를 설정해도 pin-lock을 더 이상 우회할 수 없다(우회 경로 완전 제거 확인)", () => {
+    const { selectionId, unitRowId, keywordId, overlayUnitId, contractId } = createStagedSelectionWithUnit();
+    const sectionId = makeSelectableSection(keywordId);
+    const itemId = asUser(
+      TEACHER_ID,
+      `insert into session_prepared_selection_content_items (prepared_selection_id, content_type, content_id, position)
+       values ('${selectionId}', 'material_section', '${sectionId}', 1) returning id;`
+    );
+
+    // 실제(un-bypassed) pin 전이 — pinSessionSelection()은 아직 없으므로(Task 2)
+    // 위 pin-lock 테스트와 동일하게 status를 직접 전이시켜 "이미 pin된 상태"를
+    // 시뮬레이션한다.
+    asUser(
+      TEACHER_ID,
+      `update session_prepared_selections set status = 'pinned', pinned_at = now() where id = '${selectionId}';`
+    );
+
+    // 20261232000000_r9_session_prepared_selection.sql이 원래 두고 있던 bypass
+    // GUC를 명시적으로 설정한 뒤 pinned 행/자식 행을 변경/삭제해본다 — 이 GUC는
+    // 어떤 역할에게도 그랜트가 필요 없는 커스텀 GUC라서 authenticated 세션에서도
+    // 그냥 SET할 수 있었다(이게 바로 이 corrective가 고친 보안 결함이다).
+    // 20261236000000_r9_corrective_remove_pin_lock_bypass.sql 적용 이후에는 이
+    // GUC를 설정해도 트리거 함수 본문에 그 분기 자체가 없으므로 아무 효과가
+    // 없어야 한다 — 즉 여전히 거부되어야 한다.
+    expect(
+      asUserExpectError(
+        TEACHER_ID,
+        `set app.bypass_prepared_selection_lock = 'true';
+         update session_prepared_selections set session_id = null where id = '${selectionId}';`
+      )
+    ).toMatch(/핀 완료된/);
+
+    expect(
+      asUserExpectError(
+        TEACHER_ID,
+        `set app.bypass_prepared_selection_lock = 'true';
+         delete from session_prepared_selections where id = '${selectionId}';`
+      )
+    ).toMatch(/핀 완료된/);
+
+    expect(
+      asUserExpectError(
+        TEACHER_ID,
+        `set app.bypass_prepared_selection_lock = 'true';
+         delete from session_prepared_selection_units where id = '${unitRowId}';`
+      )
+    ).toMatch(/핀 완료된/);
+
+    expect(
+      asUserExpectError(
+        TEACHER_ID,
+        `set app.bypass_prepared_selection_lock = 'true';
+         insert into session_prepared_selection_units (prepared_selection_id, overlay_unit_id, position)
+         values ('${selectionId}', '${overlayUnitId}', 4242);`
+      )
+    ).toMatch(/핀 완료된/);
+
+    expect(
+      asUserExpectError(
+        TEACHER_ID,
+        `set app.bypass_prepared_selection_lock = 'true';
+         update session_prepared_selection_content_items set included = false where id = '${itemId}';`
+      )
+    ).toMatch(/핀 완료된/);
+
+    expect(
+      asUserExpectError(
+        TEACHER_ID,
+        `set app.bypass_prepared_selection_lock = 'true';
+         delete from session_prepared_selection_content_items where id = '${itemId}';`
+      )
+    ).toMatch(/핀 완료된/);
+
+    // 이 테스트도 진짜로 pin된 행을 만들었으므로 db reset에 정리를 맡긴다.
+    excludeFromCleanup(contractId);
   });
 });
 

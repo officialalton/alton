@@ -1,5 +1,46 @@
 # ALTON — 현재 상태 (2026-09-07 기준)
 
+> **2026-09-07(R9 레슨 준비 Task 1 corrective — pin-lock bypass 보안 결함 수정,
+> Task 2~4는 여전히 착수하지 않음).** 발견된 문제: 직전 라운드(Task 1)가 도입한
+> `session_prepared_selections`/`session_prepared_selection_units`/
+> `_unit_keywords`/`_content_items`의 pin-lock 트리거
+> (`check_prepared_selection_not_pinned_self()`,
+> `check_prepared_selection_not_pinned()`)가 테스트/운영 정리용으로 둔
+> `app.bypass_prepared_selection_lock` 커스텀 GUC 분기를, "앱 코드 어떤
+> 역할에도 이 GUC를 설정할 권한/그랜트를 주지 않는다(superuser psql로만 설정
+> 가능)"는 잘못된 가정 아래 남겨두고 있었다 — 실제로는 플레인 SQL로 선언한
+> 커스텀 GUC는 GRANT/REVOKE 대상이 아니며 `authenticated`를 포함한 어떤 롤이든
+> 자기 세션에서 `SET app.bypass_prepared_selection_lock = 'true'` 한 줄로 pin된
+> 행과 하위 3개 테이블 전체의 불변식을 완전히 무력화할 수 있었다. 즉 Task 1이
+> 약속한 "pin 이후 불변" 보장이 실질적으로 존재하지 않았다.
+>
+> **수정:**
+> `supabase/migrations/20261236000000_r9_corrective_remove_pin_lock_bypass.sql`
+> (additive — 원본 `20261232000000_r9_session_prepared_selection.sql`은 건드리지
+> 않음)이 두 트리거 함수에서 bypass 분기를 완전히 제거했다. 이제 pin-lock에는
+> 설정 가능한 어떤 탈출구도 없다(오직 service_role만 Postgres 자체 권한 모델로
+> 우회 가능 — 이는 GUC가 아니라서 앱 코드가 흉내낼 수 없다).
+> `app/teacher/session-prepared-selection.integration.test.ts`의 cleanup도
+> 함께 고쳤다 — bypass에 의존해 pinned 행을 지우는 대신, pinned 행을 만든
+> 테스트의 contract id를 `excludeFromCleanup()`으로 `afterEach` 정리 대상에서
+> 빼고 `supabase db reset --local`(CLAUDE.md UAT 정리 관례)에 맡긴다. 새 관리자
+> 우회 메커니즘은 추가하지 않았다.
+>
+> **회귀 테스트 추가:** "app.bypass_prepared_selection_lock GUC를 설정해도
+> pin-lock을 더 이상 우회할 수 없다(우회 경로 완전 제거 확인)" —
+> pin된 selection에 대해 `SET app.bypass_prepared_selection_lock = 'true'`를
+> 명시적으로 실행한 뒤 selection 자체(UPDATE/DELETE)와 자식 테이블
+> (`session_prepared_selection_units`의 INSERT/DELETE,
+> `session_prepared_selection_content_items`의 UPDATE/DELETE) 변경을 시도해도
+> 전부 "핀 완료된…" 예외로 거부됨을 증명한다(이전 라운드의 "pin 이후 잠금"
+> 테스트는 bypass를 쓰지 않은 정상 경로만 확인했었다 — bypass 자체가 무력화됐는지는
+> 검증하지 않았었다).
+>
+> **검증:** `supabase db reset --local`(클린 적용, corrective 마이그레이션
+> 포함), `npx tsc --noEmit`(클린), `npx vitest run --no-file-parallelism`
+> (전체 214개 파일/1459개 테스트 통과 — 새 회귀 테스트 포함, 기존 pin-lock
+> 테스트도 새 cleanup 방식으로 계속 통과), `npx next build`(클린).
+>
 > **2026-09-07(레슨 준비/세션 선택 계획 Task 1만 — Task 2~4는 착수하지 않음)
 > 준비된 선택(prepared selection) 스테이징 스키마.** 배경:
 > `docs/superpowers/plans/2026-09-08-lesson-prep-session-selection.md`(v4,
