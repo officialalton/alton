@@ -13,6 +13,7 @@ import { loadProblemLog } from "./problemlog-data";
 import { loadNormalizedSession } from "./session-source-data";
 import { replayAnnotationEvents } from "./annotation-events-actions";
 import { reconstructVisibleStrokes } from "./annotation-events-types";
+import { loadSessionKeywordOptions } from "@/app/teacher/homework-composition-data";
 
 // R8 1/N — cutover connection: 이 화면은 원래 legacy_sessions만 조회했다.
 // `loadNormalizedSession`이 legacy_sessions(R6 이전 레거시 세션뷰 테스트 데이터)와
@@ -66,6 +67,12 @@ export default async function SessionPage({
       ? reconstructVisibleStrokes(await replayAnnotationEvents(session.id))
       : [];
 
+  // R9(레슨 준비 Task 4) — v3 세션에서만 과제 구성 UI가 필요한 키워드 후보를
+  // 미리 불러온다(legacy 세션엔 session_content_manifest가 없으므로 항상 빈
+  // 배열).
+  const homeworkKeywordOptions =
+    session.source === "v3" ? await loadSessionKeywordOptions(supabase, session.id) : [];
+
   return (
     <SessionShell
       sessionId={session.id}
@@ -91,6 +98,7 @@ export default async function SessionPage({
       sessionSource={session.source}
       initialAnnotationStrokes={initialAnnotationStrokes}
       currentUserId={user.id}
+      homeworkKeywordOptions={homeworkKeywordOptions}
     />
   );
 }

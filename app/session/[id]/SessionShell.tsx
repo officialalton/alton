@@ -13,6 +13,7 @@ import VocabTab from "./VocabTab";
 import type { VocabEntry } from "./vocab-data";
 import HomeworkTab from "./HomeworkTab";
 import type { HomeworkItem } from "./homework-data";
+import type { HomeworkKeywordOption } from "@/app/teacher/homework-composition-data";
 import ScratchpadTab from "./ScratchpadTab";
 import type { DocLink } from "./scratchpad-data";
 import type { CanvasStroke } from "./material-data";
@@ -68,6 +69,7 @@ export default function SessionShell({
   sessionSource,
   initialAnnotationStrokes,
   currentUserId,
+  homeworkKeywordOptions = [],
 }: {
   sessionId: string;
   studentId: string;
@@ -101,6 +103,10 @@ export default function SessionShell({
   sessionSource: "legacy" | "v3";
   initialAnnotationStrokes: StrokePayload[];
   currentUserId: string;
+  // R9(레슨 준비 Task 4) — v3 세션에서 과제 구성(composeHomeworkFromSession) UI가
+  // 고를 수 있는 키워드 후보. legacy 세션에는 항상 빈 배열이 넘어온다(그 세션엔
+  // session_content_manifest 자체가 없다).
+  homeworkKeywordOptions?: HomeworkKeywordOption[];
 }) {
   const router = useRouter();
   const isTeacher = viewerRole === "teacher";
@@ -226,6 +232,9 @@ export default function SessionShell({
           sessionId={sessionId}
           initialItems={homeworkList}
           viewerRole={contentViewerRole}
+          sessionSource={sessionSource}
+          realViewerRole={viewerRole}
+          keywordOptions={homeworkKeywordOptions}
         />
       ) : activeTab === "docs" ? (
         <ScratchpadTab
