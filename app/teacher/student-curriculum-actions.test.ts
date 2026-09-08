@@ -46,6 +46,7 @@ import {
   moveUnit,
   setUnitStatus,
   loadStudentCurriculumPanelData,
+  ensureActiveOverlay,
 } from "./student-curriculum-actions";
 
 describe("담당 학생 인가", () => {
@@ -70,6 +71,29 @@ describe("담당 학생 인가", () => {
   it("담당 선생님이면 상태를 변경할 수 있다", async () => {
     state.assignment = { id: "assign1" };
     await expect(setUnitStatus("enr1", "unit1", "completed")).resolves.toBeUndefined();
+  });
+});
+
+describe("ensureActiveOverlay — corrective 1: 단일 RPC로 생성+베이스라인 시딩 위임", () => {
+  it("DB 함수 ensure_active_curriculum_overlay를 정확히 한 번 호출하고 그 결과를 그대로 반환한다", async () => {
+    state.assignment = { id: "assign1" };
+    state.rpcResult = { data: "overlay-123" as unknown as unknown[], error: null };
+    mockSupabase.rpc.mockClear();
+    const overlayId = await ensureActiveOverlay("enr1");
+    expect(mockSupabase.rpc).toHaveBeenCalledTimes(1);
+    expect(mockSupabase.rpc).toHaveBeenCalledWith("ensure_active_curriculum_overlay", {
+      p_subject_enrollment_id: "enr1",
+    });
+    expect(overlayId).toBe("overlay-123");
+  });
+
+  it("담당이 아닌 선생님이면 RPC를 호출하지 않고 거부한다", async () => {
+    state.assignment = null;
+    mockSupabase.rpc.mockClear();
+    await expect(ensureActiveOverlay("enr-not-mine")).rejects.toThrow(
+      "담당 학생의 커리큘럼만 조정할 수 있습니다."
+    );
+    expect(mockSupabase.rpc).not.toHaveBeenCalled();
   });
 });
 

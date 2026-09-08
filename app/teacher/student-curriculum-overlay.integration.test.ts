@@ -1,4 +1,5 @@
 import { execFileSync } from "node:child_process";
+import { createClient } from "@supabase/supabase-js";
 import { beforeAll, describe, expect, it } from "vitest";
 
 // R9(Task 3) — 학생별 운영 커리큘럼 오버레이(supabase/migrations/
@@ -454,5 +455,132 @@ describe("vocab_words — 키워드 카탈로그 조작에 완전히 무관하�
       `select count(*) as n, coalesce(md5(string_agg(t.*::text, '' order by t.*::text)), '') as sum from vocab_words t;`
     );
     expect(after).toBe(before);
+  });
+});
+
+// R9 corrective 1 — ensure_active_curriculum_overlay(supabase/migrations/
+// 20261230000000_r9_corrective_overlay_baseline_seed.sql): 오버레이가 처음
+// 만들어질 때 과목 기본(canonical) 단원 전체 + 단원별 기본 키워드 스냅샷으로
+// 베이스라인을 시딩하고, 동시 호출에도 활성 오버레이 1개·베이스라인 시딩 1회만
+// 보장한다. 진짜 동시성(Promise.all)은 동기 execFileSync(psql)로는 재현할 수
+// 없으므로, parent-home-lessons-parallel-regression.integration.test.ts와 같은
+// 패턴으로 supabase-js 서비스롤 클라이언트(REST 경유, 실제 비동기 I/O)를 쓴다.
+const DB_URL_API = "http://127.0.0.1:54421";
+const SERVICE_ROLE_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImV4cCI6MTk4MzgxMjk5Nn0.EGIM96RAZx35lJzdJsyH-qQwv8Hdp7fsn3W0YpN81IU";
+
+const adminClient = createClient(DB_URL_API, SERVICE_ROLE_KEY);
+
+function countSubjectTemplateUnits(): number {
+  return Number(psql(`select count(*) from subject_template_units where subject_id = '${SUBJECT_ID}';`));
+}
+
+describe("ensure_active_curriculum_overlay — 최초 베이스라인 시딩", () => {
+  it("처음 호출하면 과목의 기본 단원 전체가 source_unit_id로 참조된 오버레이 단원으로 시딩된다", async () => {
+    const enrollmentId = makeEnrollment();
+    const expectedUnitCount = countSubjectTemplateUnits();
+
+    const { data: overlayId, error } = await adminClient.rpc("ensure_active_curriculum_overlay", {
+      p_subject_enrollment_id: enrollmentId,
+    });
+    expect(error).toBeNull();
+    expect(overlayId).toMatch(/^[0-9a-f-]{36}$/);
+
+    const seededCount = psql(
+      `select count(*) from curriculum_overlay_units where overlay_id = '${overlayId}';`
+    );
+    expect(Number(seededCount)).toBe(expectedUnitCount);
+
+    const canonicalUntouched = psql(
+      `select count(*) from subject_template_units where subject_id = '${SUBJECT_ID}';`
+    );
+    expect(Number(canonicalUntouched)).toBe(expectedUnitCount);
+
+    const sourceRefs = psql(
+      `select count(*) from curriculum_overlay_units ou
+       join subject_template_units u on u.id = ou.source_unit_id
+       where ou.overlay_id = '${overlayId}';`
+    );
+    expect(Number(sourceRefs)).toBe(expectedUnitCount);
+  });
+
+  it("시딩 시점의 단원 기본 키워드가 오버레이 단원 키워드로 스냅샷 복사된다", async () => {
+    const enrollmentId = makeEnrollment();
+    const keywordId = psql(
+      `insert into subject_keywords (subject_id, label) values ('${SUBJECT_ID}', '베이스라인키워드 ${Date.now()}') returning id;`
+    );
+    psql(
+      `insert into subject_template_unit_keywords (unit_id, keyword_id) values ('${baseUnitId}', '${keywordId}');`
+    );
+
+    const { data: overlayId, error } = await adminClient.rpc("ensure_active_curriculum_overlay", {
+      p_subject_enrollment_id: enrollmentId,
+    });
+    expect(error).toBeNull();
+
+    const overlayKeyword = psql(
+      `select k.keyword_id from curriculum_overlay_units ou
+       join curriculum_overlay_unit_keywords k on k.overlay_unit_id = ou.id
+       where ou.overlay_id = '${overlayId}' and ou.source_unit_id = '${baseUnitId}';`
+    );
+    expect(overlayKeyword).toBe(keywordId);
+
+    // 정리: 다음 테스트에 영향 주지 않도록 이 테스트가 만든 단원-키워드 관계를 되돌린다.
+    psql(
+      `delete from subject_template_unit_keywords where unit_id = '${baseUnitId}' and keyword_id = '${keywordId}';`
+    );
+  });
+
+  it("이미 활성 오버레이가 있으면 재호출해도 재시딩하지 않고 같은 오버레이 id를 반환한다", async () => {
+    const enrollmentId = makeEnrollment();
+    const expectedUnitCount = countSubjectTemplateUnits();
+
+    const { data: first } = await adminClient.rpc("ensure_active_curriculum_overlay", {
+      p_subject_enrollment_id: enrollmentId,
+    });
+    const { data: second } = await adminClient.rpc("ensure_active_curriculum_overlay", {
+      p_subject_enrollment_id: enrollmentId,
+    });
+    expect(second).toBe(first);
+
+    const seededCount = psql(
+      `select count(*) from curriculum_overlay_units where overlay_id = '${first}';`
+    );
+    expect(Number(seededCount)).toBe(expectedUnitCount);
+  });
+
+  it("동시 호출(Promise.all)해도 정확히 활성 오버레이 1개 + 베이스라인 단원 N개만 존재한다(N * 동시호출수가 아니다)", async () => {
+    const enrollmentId = makeEnrollment();
+    const expectedUnitCount = countSubjectTemplateUnits();
+    const CONCURRENCY = 8;
+
+    const results = await Promise.all(
+      Array.from({ length: CONCURRENCY }, () =>
+        adminClient.rpc("ensure_active_curriculum_overlay", {
+          p_subject_enrollment_id: enrollmentId,
+        })
+      )
+    );
+
+    for (const r of results) {
+      expect(r.error).toBeNull();
+    }
+    const overlayIds = new Set(results.map((r) => r.data));
+    // 모든 동시 호출이 정확히 같은 오버레이 id 하나로 수렴해야 한다.
+    expect(overlayIds.size).toBe(1);
+
+    const activeOverlayCount = psql(
+      `select count(*) from student_curriculum_overlays
+       where subject_enrollment_id = '${enrollmentId}' and status = 'active';`
+    );
+    expect(Number(activeOverlayCount)).toBe(1);
+
+    const [overlayId] = overlayIds;
+    const seededCount = psql(
+      `select count(*) from curriculum_overlay_units where overlay_id = '${overlayId}';`
+    );
+    // CONCURRENCY번 동시 호출됐어도 베이스라인은 정확히 한 번만 시딩되어야
+    // 한다 — expectedUnitCount * CONCURRENCY가 아니라 expectedUnitCount여야 한다.
+    expect(Number(seededCount)).toBe(expectedUnitCount);
   });
 });

@@ -77,24 +77,21 @@ export async function loadStudentCurriculumPanelData(
   return { initial, library };
 }
 
+// R9 corrective 1: 오버레이 생성 + 최초 베이스라인 시딩(과목 기본 단원 +
+// 단원별 기본 키워드 스냅샷)을 단일 DB 함수(=단일 트랜잭션)로 위임한다.
+// 동시 호출(예: 두 번의 중복 요청, 타임아웃 후 재시도)에도 advisory lock +
+// unique 부분 인덱스로 활성 오버레이 1개·베이스라인 시딩 1회만 보장된다
+// (supabase/migrations/20261230000000_r9_corrective_overlay_baseline_seed.sql
+// ensure_active_curriculum_overlay 참고). 이 함수 호출 전 인가 선검사는 여전히
+// 여기서 하고, RLS가 실제 방어선인 것도 기존과 동일하다.
 export async function ensureActiveOverlay(subjectEnrollmentId: string): Promise<string> {
   const { supabase } = await requireAssignedTeacherOrAdmin(subjectEnrollmentId);
 
-  const { data: existing } = await supabase
-    .from("student_curriculum_overlays")
-    .select("id")
-    .eq("subject_enrollment_id", subjectEnrollmentId)
-    .eq("status", "active")
-    .maybeSingle();
-  if (existing) return existing.id;
-
-  const { data, error } = await supabase
-    .from("student_curriculum_overlays")
-    .insert({ subject_enrollment_id: subjectEnrollmentId })
-    .select("id")
-    .single();
+  const { data, error } = await supabase.rpc("ensure_active_curriculum_overlay", {
+    p_subject_enrollment_id: subjectEnrollmentId,
+  });
   if (error) throw new Error(error.message);
-  return data.id;
+  return data as string;
 }
 
 async function nextPosition(supabase: Awaited<ReturnType<typeof createClient>>, overlayId: string) {
