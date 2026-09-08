@@ -1,5 +1,65 @@
 # ALTON — 현재 상태 (2026-09-07 기준)
 
+> **2026-09-07(레슨 준비/세션 선택 계획 Task 1만 — Task 2~4는 착수하지 않음)
+> 준비된 선택(prepared selection) 스테이징 스키마.** 배경:
+> `docs/superpowers/plans/2026-09-08-lesson-prep-session-selection.md`(v4,
+> 승인됨) Task 1만 구현 지시 — Task 2(불변 세션 콘텐츠 매니페스트 +
+> `pinSessionSelection()`), Task 3(사용 처리 이벤트), Task 4(과제 구성)는 각각
+> 별도 제품 오너 승인 후 착수 예정이며 이번 라운드에서 손대지 않았다.
+>
+> **추가:** `supabase/migrations/20261232000000_r9_session_prepared_selection.sql`
+> — `session_prepared_selections`(staged/pinned/archived, `session_id` nullable
+> = 임시보관함, 세션당 archived 아닌 선택 최대 1개를 유니크 부분 인덱스로 강제),
+> `session_prepared_selection_units`(준비된 선택당 복수 `curriculum_overlay_units`,
+> 순서 있음), `session_prepared_selection_unit_keywords`(단원별 활성 키워드
+> 부분집합 — 그 단원의 `curriculum_overlay_unit_keywords`의 부분집합인지 INSERT
+> 트리거가 검사), `session_prepared_selection_content_items`(실제 pin되는
+> 페이로드 — 선생님이 명시적으로 pick/exclude(soft, `included=false`)/order한
+> 교재 조각·문제 목록. INSERT 시점 트리거가 이 선택의 단원/키워드 범위 안에서
+> `curriculum_doc_section_keywords_selectable`/`problem_keywords_selectable`를
+> 통과하는지 검사 — 통과 못 하면 애초에 담기지 않는다). Pin-lock은
+> `20261219000000_r8_material_version_lock.sql`과 동일한 predicate 형태
+> (`OLD.status = 'pinned'`이면 이후 UPDATE/DELETE 전면 거부)를 4개 테이블 전부에
+> 적용했고, attach 시 대상 세션이 같은 `subject_enrollment_id`인지·아직
+> `scheduled`인지 별도 트리거로 검사한다. 재정렬은
+> `reorder_curriculum_overlay_units`(Task 3)와 동일한 원자적 다중-행 position
+> 재배정 RPC(`reorder_prepared_selection_content_items`) 하나로 묶었다. 테스트
+> cleanup 전용 bypass GUC(`app.bypass_prepared_selection_lock`)를 R8 lock과
+> 같은 관례로 추가했다(앱 코드 어떤 역할에도 grant하지 않음).
+>
+> **추가:** `app/teacher/session-prep-data.ts`(`loadHeldSelections`,
+> `loadSessionSelection`, `loadEligibleContentForSelection` — 뷰만 읽고
+> 관계 테이블을 직접 읽지 않음), `app/teacher/session-prep-actions.ts`
+> (`createPreparedSelection`, `addUnitToSelection`, `removeUnitFromSelection`,
+> `setSelectionActiveKeywords`, `pickContentItem`, `excludeContentItem`,
+> `includeContentItem`(재포함 — Task 1 체크리스트의 "제외를 되돌릴 수 있다"
+> 요구를 위해 자연스러운 반대짝으로 추가), `reorderContentItems`,
+> `attachSelectionToSession`, `detachSelectionFromSession` — 인가는
+> `student-curriculum-actions.ts`의 `requireAssignedTeacherOrAdmin` 패턴을
+> 그대로 재사용, 새 메커니즘 없음).
+>
+> **검증 매핑:** `app/teacher/session-prepared-selection.integration.test.ts`
+> (psql 직접 검증, 19개 테스트)가 Task 1 체크리스트의 각 항목을 증명한다 —
+> 미부착/부착-미핀 상태에서 다중 단원+단원별 키워드 부분집합 생성·편집, 키워드
+> 부분집합 위반 거부, 콘텐츠 pick→소프트 제외→재포함→원자적 재정렬, 선택
+> 불가능(draft)/범위 밖 콘텐츠의 INSERT 시점 거부, attach로 `session_id` 설정,
+> 다른 학생/과목 세션 attach 거부, detach 시 행·콘텐츠 유지하며 임시보관함
+> 재등장, **동시 attach 2건 중 정확히 1건만 성공**(service-role
+> `supabase-js` 클라이언트 `Promise.all` — 동기 psql로는 재현 불가하여 기존
+> corrective 1 동시성 테스트와 동일한 패턴), pin 이후 단원/키워드/콘텐츠
+> 추가·제거·재정렬·detach 전부 트리거 거부, 담당 아닌 제3자 선생님 RLS 거부,
+> 학생 조회 자체 불가(빈 결과), `vocab_words` 무관 FK/트리거 0건.
+> `app/teacher/session-prep-actions.test.ts`(mocked, 9개 테스트)는 인가 위임과
+> RPC 단일 호출을 확인한다. 실행: `supabase db reset --local`(클린 적용),
+> `npx tsc --noEmit`(클린), `npx vitest run --no-file-parallelism`(전체
+> 214개 파일/1458개 테스트 통과 — 회귀 없음), `npx next build`(클린).
+>
+> **미완료(다음 단계, 별도 승인 대기):** Task 2(`session_content_manifest` +
+> `SECURITY DEFINER pinSessionSelection()`), Task 3(사용 처리 이벤트), Task 4
+> (과제 구성 두 토글). Task 1은 `pinSessionSelection()` 자체를 구현하지
+> 않았다 — 스테이징이 `status='staged'`로 완전히 채워지고 세션에 attach된
+> 상태까지만 만든다.
+
 > **2026-09-07(R9 정정 라운드 — 제품 오너 지시 corrective 1/2) 오버레이
 > 최초 베이스라인 시딩 + 키워드 태깅/공개 게이트 분리.** 배경: 제품 오너가
 > Task 1(`44125f0`)/Task 3(`63f5f57`)를 리뷰하고 두 가지를 명시적으로
