@@ -75,10 +75,13 @@ beforeAll(() => {
 });
 
 afterEach(() => {
+  // 이 파일의 모든 fixture는 makePinnedSessionWithManifest()를 거치며, 그 함수가
+  // pin 직후 곧바로 excludeFromCleanup을 호출하므로 여기 도달하는 contractId는
+  // session_content_use_events 행을 가진 적이 없다(append-only라 애초에 지울 수
+  // 없음 — bypass 없이는 delete 자체가 불가능하고, bypass는 취약점이라 두지
+  // 않는다). 그래도 방어적으로 이 테이블 delete는 시도하지 않는다.
   for (const id of cleanupContractIds.splice(0)) {
     psql(`
-      set app.bypass_content_use_event_lock = 'true';
-      delete from session_content_use_events where session_id in (select id from sessions where subject_enrollment_id in (select id from subject_enrollments where contract_id = '${id}'));
       delete from sessions where subject_enrollment_id in (select id from subject_enrollments where contract_id = '${id}');
       delete from reservations where subject_enrollment_id in (select id from subject_enrollments where contract_id = '${id}');
       delete from subject_threads where subject_enrollment_id in (select id from subject_enrollments where contract_id = '${id}');

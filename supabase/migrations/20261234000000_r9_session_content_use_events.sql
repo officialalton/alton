@@ -68,12 +68,12 @@ create or replace function public.prevent_content_use_event_mutation()
 returns trigger
 language plpgsql as $$
 begin
-  -- session_annotation_events(20261223000000)와 동일한 패턴: 앱 코드/RLS로는
-  -- 절대 켤 수 없는 세션 로컬 GUC bypass만 정리/마이그레이션 작업(테스트 fixture
-  -- 정리 등)에서 superuser가 명시적으로 사용한다.
-  if coalesce(current_setting('app.bypass_content_use_event_lock', true), 'false') = 'true' then
-    return coalesce(new, old);
-  end if;
+  -- 어떤 설정 가능한 탈출구도 두지 않는다 — PostgreSQL 커스텀 GUC는
+  -- authenticated를 포함한 어떤 역할이든 자신의 세션에서 SET으로 켤 수 있으므로
+  -- (20261236000000_r9_corrective_remove_pin_lock_bypass.sql에서 실제로 증명된
+  -- 취약점), "app.bypass_..." 류의 조건부 우회는 절대 사용하지 않는다. 테스트
+  -- fixture 정리는 이 append-only 불변식을 우회하지 않고, 정리 대상에서
+  -- 제외(excludeFromCleanup)한 뒤 supabase db reset --local에 맡긴다.
   raise exception 'session_content_use_events는 append-only입니다 — 수정/삭제할 수 없습니다.';
 end;
 $$;
