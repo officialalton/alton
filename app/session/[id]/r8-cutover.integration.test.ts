@@ -130,8 +130,13 @@ describe("R8 cutover: v3 sessions <-> /session/[id]", () => {
     );
     const result = await loadNormalizedSession(admin, SESSION_ID, STUDENT_ID, "student");
     expect(result?.status).toBe("completed");
+    // (corrective) app.bypass_session_lock GUC는 제거되었다 — fixture를
+    // 되돌리기 위한 정상 경로는 session_invariant_unlock_tokens에 'final_status'
+    // 토큰을 인라인 INSERT한 뒤 같은 psql 세션(같은 트랜잭션)에서 바로 소비하는
+    // 것뿐이다(reopen_session()이 하는 것과 동일한 패턴, 다만 이 fixture 리셋은
+    // 관리자 함수 호출이 아니라 직접 재현).
     psql(
-      `select set_config('app.bypass_session_lock', 'true', false); update sessions set final_status = 'live' where id = '${SESSION_ID}';`
+      `insert into session_invariant_unlock_tokens (session_id, invariant) values ('${SESSION_ID}', 'final_status'); update sessions set final_status = 'live' where id = '${SESSION_ID}';`
     );
   });
 
@@ -143,10 +148,12 @@ describe("R8 cutover: v3 sessions <-> /session/[id]", () => {
   });
 
   it("scheduled 상태에서 최초 배정(null -> 값)은 허용된다", () => {
-    // 이전 테스트가 이미 VERSION_A를 배정했으므로, 트리거 우회 설정(app.bypass_session_lock)으로
-    // 먼저 null로 되돌린 뒤(같은 psql 연결 안에서, 테스트 픽스처 리셋 용도) 최초 배정을 재검증한다.
+    // 이전 테스트가 이미 VERSION_A를 배정했으므로, (corrective) 'material_version_id'
+    // 불변식 토큰을 심어 먼저 null로 되돌린 뒤(같은 psql 연결 안에서, 테스트
+    // 픽스처 리셋 용도) 최초 배정을 재검증한다. app.bypass_session_lock GUC는
+    // 제거되었다 — 정상 경로는 session_invariant_unlock_tokens 토큰뿐이다.
     psql(
-      `select set_config('app.bypass_session_lock', 'true', false); update sessions set material_version_id = null where id = '${SESSION_ID}';`
+      `insert into session_invariant_unlock_tokens (session_id, invariant) values ('${SESSION_ID}', 'material_version_id'); update sessions set material_version_id = null where id = '${SESSION_ID}';`
     );
     expect(() =>
       psql(`update sessions set material_version_id = '${VERSION_A}' where id = '${SESSION_ID}';`)

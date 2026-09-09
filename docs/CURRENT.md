@@ -1,5 +1,67 @@
 # ALTON — 현재 상태 (2026-09-09 기준)
 
+> **2026-09-09 — 배치 2-4(`bypass_session_lock`, 배치 2 마지막 항목) corrective
+> 완료.** 신규 마이그레이션
+> `supabase/migrations/20261261000000_r8_corrective_session_invariant_tokens.sql`.
+> `app.bypass_session_lock` GUC는 `sessions` 테이블의 서로 다른 두 불변식
+> (`final_status`, `material_version_id`)을 동시에 보호하고 있었다 — 다른 3개
+> 배치 2 항목과 달리 공유 `status_transition_tokens`를 재사용하지 않고, 전용
+> 테이블 `session_invariant_unlock_tokens(session_id, invariant, xact_id,
+> created_at)`을 새로 만들어 두 불변식을 완전히 분리했다(이유: 하나의 GUC가
+> 두 불변식을 같이 풀어주던 구조적 결함 — `reopen_session()`이 `final_status`를
+> 되돌리려고 GUC를 켜는 동안 같은 트랜잭션에서 `material_version_id`를 바꾸는
+> UPDATE가 끼어들면 그것도 함께 통과해버리는 이론상 부작용 경로가 있었다).
+>
+> **수정 내용**: (1) 신규 테이블 + private 헬퍼
+> `consume_session_invariant_unlock_token(session_id, invariant)`(status_transition_tokens와
+> 동일한 잠금 패턴 — RLS 활성화 + 정책 0개, 모든 ordinary role에서 전 권한
+> revoke, 트리거 함수 본문 안에서만 호출, 어떤 role에도 EXECUTE 없음). (2)
+> `prevent_direct_final_status_update()` — GUC 분기 제거, `'final_status'` 토큰
+> 확인/소비로 교체. (3) `prevent_material_version_reassignment()` — GUC 분기
+> 제거, `'material_version_id'` 토큰 확인/소비로 교체(토큰 소비는 함수당 최대
+> 1회만 일어나도록 상단에서 한 번만 확인 — 두 조건문이 각자 소비를 시도하면
+> 이중 소비/오탐 거부가 날 수 있어서). (4) `reopen_session(uuid, text)` —
+> `set_config()` 호출 제거, `final_status` UPDATE 직전 `'final_status'` 토큰만
+> 인라인 INSERT(`'material_version_id'` 토큰은 절대 발급하지 않는다 — 이 함수가
+> 그 컬럼을 전혀 건드리지 않기 때문이며, 바로 이 구분이 GUC 공유 시절의
+> 교차오염 부작용을 구조적으로 없앤다). (5) `recomplete_session(...)`은 **수정하지
+> 않았다** — 재조사 결과 이 함수는 이 GUC를 애초에 전혀 쓰지 않는다(다른
+> corrective, `20261259000000`/`20261260000000`이 이미 별도 GUC를 대체했고,
+> 이 함수의 `final_status` UPDATE는 `v_prev='live'`가 항상 보장되어 트리거를
+> 자연스럽게 통과한다). (6)
+> `app/session/[id]/r8-cutover.integration.test.ts`의 fixture 정리 코드 2곳(완료
+> 상태 검증 후 `final_status`를 `live`로 되돌리는 곳, `material_version_id`를
+> `null`로 되돌리는 곳)에서 `set_config('app.bypass_session_lock', ...)` 호출을
+> 제거하고, 같은 psql 트랜잭션 안에서 해당 invariant 토큰을 인라인 INSERT한
+> 뒤 바로 소비하는 방식으로 교체했다(reopen_session()이 하는 것과 동일한
+> 정상 경로 패턴).
+>
+> **신규 회귀 테스트**:
+> `app/session/[id]/session-invariant-unlock-token.integration.test.ts`(신규
+> 파일, 10 테스트) — ① 토큰 없는 직접 UPDATE 차단(final_status/material_version_id
+> 각각), ② 레거시 GUC 무효화(각각), ③ temp table 위조 토큰 차단(각각), ④
+> `reopen_session()` 정상 경로(completed→live, 토큰 잔존 0), ⑤ **핵심 회귀**:
+> 이미 `material_version_id`가 배정된 세션에서 `reopen_session()` 호출과 같은
+> 트랜잭션 안에 재배정 UPDATE를 끼워 넣으면 거부되고 전체 롤백됨(공유 GUC
+> 시절 실제로 존재했던 교차오염 부작용의 회귀 증명), ⑥ 같은 세션에 대한 두
+> 동시 `reopen_session()` 호출 — 기존 `for update` 잠금 덕분에 정확히 하나만
+> 성공, 토큰/이벤트 오염 없음, ⑦ `session_status_events` INSERT 강제 실패 시
+> 토큰·상태·이벤트 전체 롤백(좀비 토큰 없음).
+>
+> **검증**: `supabase db reset --local` → 대상 파일 2개(신규 + r8-cutover) 실행
+> 시 17/17 통과. `tsc --noEmit` 클린. `db reset` → 전체 스위트(`--no-file-parallelism`)
+> 연속 2회 실행: 두 번 다 232 test files / 1646 tests 전부 통과, 실패 0(중간에
+> `db reset --local` 직후 컨테이너가 완전히 준비되기 전에 곧바로 vitest를
+> 띄워 `households` 관련 FK 오류로 전체 실패한 시도가 1회 있었으나, DB 준비
+> 상태를 먼저 확인한 뒤 같은 조건으로 재실행하니 재현되지 않았다 — 코드
+> 결함이 아니라 실행 타이밍 문제로 확인). `next build` 성공.
+>
+> **배치 2(bypass GUC 보안 정리) 4개 항목 전부 완료** — status_protect,
+> invite_protect, reconciliation_task_lock(+ 잠금 순서 corrective),
+> session_lock 순서로 모두 구현/검증 완료. 이 문서와 계획 문서
+> (`docs/superpowers/plans/2026-09-08-bypass-guc-security-cleanup.md`)가 확정한
+> 범위를 벗어나는 새 작업(배치 3 등)은 시작하지 않았다.
+
 > **2026-09-09 — 배치 2-3 corrective의 corrective: `resolve_session_reconciliation_task()`
 > 잠금 순서 수정(실제 데드락 버그).** 신규 마이그레이션
 > `supabase/migrations/20261260000000_r2_corrective_reconciliation_lock_order.sql`.
