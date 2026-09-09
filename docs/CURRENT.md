@@ -1,5 +1,36 @@
 # ALTON — 현재 상태 (2026-09-09 기준)
 
+> **2026-09-09 — 기반 안정화·admin N+1 성능 수정까지 전부 승인 완료. 다음
+> 작업 스트림은 "Preview UAT 준비 및 실행"으로 새 세션에서 독립 진행.** 이
+> 세션(성능 측정 라운드까지)은 여기서 마감하고, 추가 코드·migration·리팩터링
+> 작업은 시작하지 않았다.
+>
+> **신규 계획 문서**:
+> `docs/superpowers/plans/2026-09-09-preview-uat-preparation-and-execution.md`
+> — non-prod migration 반영 대상, Preview 배포 대상, UAT 최소 계정 구성(관리자
+> ·교사·보호자·학생 각 1명, 실행 ID 원칙), 교사·학생 동시 접속용 v3 세션 준비
+> 절차, 외부 발송·결제·송금 차단 안전 플래그 사전 점검표(DocuSign/Calendar/
+> Workspace 실제 호출 플래그, `payout_disbursement_gate.real_disbursement_enabled`,
+> SMTP sandbox, Stripe test 키), 5개 흐름별 UAT 체크리스트(상담→온보딩→계정
+> 생성 / 계약·수업권→예약→수업 시작→세션뷰·화이트보드→종료 / 커리큘럼·교재·
+> 문제 선택→과제→학생 풀이 / 권한 분리 / 중복·실패·재시도·취소), blocker/이번
+> 라운드 수정/후속 백로그 분류 기준, UAT 종료 기준과 재검증 순서를 정리했다.
+> **이번 라운드에서는 코드/마이그레이션/설정을 변경하지 않았다 — 계획 문서
+> 작성만.**
+>
+> **범위·금지 원칙(신규 세션에도 그대로 적용)**:
+> - **범위 밖**: 다른 포털 성능 개선, 캐싱, 레거시 정리, 새 기능 개발.
+> - **UAT blocker로 취급하지 않는 보류 항목 3건**(명시적으로 이번 UAT 범위에서
+>   제외 — 다시 blocker로 재분류하지 않음): (1) `app/admin/page.tsx`가 다른
+>   모든 포털처럼 미들웨어 역할 게이트에만 의존하는 구조, (2) 미사용 RPC 3종
+>   (`apply_makeup_time`/`adjust_entitlement`/
+>   `retry_direct_onboarding_student_entitlement`) 삭제 여부, (3)
+>   `trial_lesson_review` RPC 계열 존치·삭제·연결 여부.
+> - **절대 금지**: 실제 고객 발송, 실제 결제·송금, Production 반영, `main`
+>   병합, `git push`. **non-prod migration 반영·Preview 배포·UAT 계정
+>   생성·UAT 세션 생성은 이 계획 보고를 검토한 뒤 제품 오너가 각각 개별
+>   승인해야 시작한다** — 계획 문서 작성만으로는 자동 진행하지 않는다.
+
 > **2026-09-09 — 성능 라운드 구현: admin 학생/교사 N+1 배치 조회로 교체
 > (제품 오너 승인 범위 그대로).** `app/admin/users-data.ts`의
 > `loadStudentCreditHistory(studentId)`/`loadTeacherQcWarnings(teacherId)`
