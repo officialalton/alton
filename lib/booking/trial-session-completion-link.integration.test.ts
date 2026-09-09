@@ -122,7 +122,7 @@ describe("trial_sessions ↔ 실제 v3 세션 연결·자동 완료 반영", () 
        values ('${consultationId}', '${childId}', '${SUBJECT_ID}', '${teacherId}', now() + interval '11 days') returning id;`
     );
     expect(() => psql(`update trial_sessions set status = 'completed' where id = '${trialSessionId}';`)).toThrow(
-      /직접 UPDATE할 수 없습니다/
+      /연결된 세션이 완료 상태가 아닙니다/
     );
   });
 
@@ -160,5 +160,119 @@ describe("trial_sessions ↔ 실제 v3 세션 연결·자동 완료 반영", () 
     expect(trialStatus).toBe("completed");
     const completedAt = psql(`select (completed_at is not null) from trial_sessions where id = '${trialSessionId}';`);
     expect(completedAt).toBe("t");
+  });
+
+  // 배치 1-3 corrective(20261254000000) — app.bypass_trial_session_auto_complete GUC를
+  // 결과 조건 재검증(연결 세션 final_status='completed' + completed_at 동시 non-null)으로
+  // 교체한 뒤의 회귀 테스트. 3차 개정이 추가한 completed_at 동시성 불변식까지 검증한다.
+  describe("reject_direct_trial_session_completion() — 결과 조건 재검증(corrective 회귀, 3차 개정)", () => {
+    it("② 링크된 세션이 completed가 아니면 authenticated/관리자/service_role 전부 직접 완료를 거부당한다(역할 무관)", () => {
+      const { childId, subjectEnrollmentId } = createTestChild("role-agnostic-block");
+      const consultationId = psql(
+        `insert into consultations (contact_name, contact_email, child_id) values ('테스트', 'm5d-role-agnostic@example.com', '${childId}') returning id;`
+      );
+      const trialSessionId = psql(
+        `insert into trial_sessions (consultation_id, child_id, subject_id, teacher_id, scheduled_at)
+         values ('${consultationId}', '${childId}', '${SUBJECT_ID}', '${teacherId}', now() + interval '21 days') returning id;`
+      );
+      grantTrialEntitlement(childId);
+      const startsAt = new Date();
+      startsAt.setUTCDate(startsAt.getUTCDate() + 21);
+      startsAt.setUTCHours(17, 0, 0, 0);
+      const endsAt = new Date(startsAt.getTime() + 60 * 60000);
+      psql(
+        `select session_id from confirm_lesson_booking('${childId}', '${subjectEnrollmentId}', '${teacherId}', '${trialLessonTypeId}', '${startsAt.toISOString()}', '${endsAt.toISOString()}', 'm5d-book-${Date.now()}');`
+      );
+      // 연결된 sessions.final_status는 아직 'scheduled' — completed가 아니다.
+
+      // authenticated 역할(관리자 클레임 포함)로 직접 완료 시도.
+      expect(() =>
+        psql(`
+          set role authenticated;
+          select set_config('request.jwt.claim.sub', '${ADMIN_ID}', false);
+          update trial_sessions set status = 'completed', completed_at = now() where id = '${trialSessionId}';
+          reset role;
+        `)
+      ).toThrow(/연결된 세션이 완료 상태가 아닙니다/);
+
+      // service_role/superuser(RLS 우회 경로 근사, psql 기본 연결) 직접 완료 시도 —
+      // 관리자 게이트가 없어도 결과 조건 재검증이 그대로 막는다.
+      expect(() =>
+        psql(`update trial_sessions set status = 'completed', completed_at = now() where id = '${trialSessionId}';`)
+      ).toThrow(/연결된 세션이 완료 상태가 아닙니다/);
+
+      const stillNotCompleted = psql(`select status from trial_sessions where id = '${trialSessionId}';`);
+      expect(stillNotCompleted).not.toBe("completed");
+    });
+
+    it("③(3차 개정 신규) 링크된 세션이 completed라도 completed_at 없이 직접 완료 시도하면 거부된다", () => {
+      const { childId, subjectEnrollmentId } = createTestChild("completed-at-missing");
+      const consultationId = psql(
+        `insert into consultations (contact_name, contact_email, child_id) values ('테스트', 'm5d-cam@example.com', '${childId}') returning id;`
+      );
+      const linkedTrialId = psql(
+        `insert into trial_sessions (consultation_id, child_id, subject_id, teacher_id, scheduled_at)
+         values ('${consultationId}', '${childId}', '${SUBJECT_ID}', '${teacherId}', now() + interval '22 days') returning id;`
+      );
+      grantTrialEntitlement(childId);
+      const startsAt = new Date();
+      startsAt.setUTCDate(startsAt.getUTCDate() + 22);
+      startsAt.setUTCHours(17, 0, 0, 0);
+      const endsAt = new Date(startsAt.getTime() + 60 * 60000);
+      const row = psql(
+        `select reservation_id, session_id from confirm_lesson_booking('${childId}', '${subjectEnrollmentId}', '${teacherId}', '${trialLessonTypeId}', '${startsAt.toISOString()}', '${endsAt.toISOString()}', 'm5d-book-${Date.now()}');`
+      );
+      const [, sessionId] = row.split("|");
+      psql(`select mark_lesson_session_started('${sessionId}', '${teacherId}');`);
+      psql(
+        `update reservations set starts_at = starts_at - interval '365 days', ends_at = ends_at - interval '365 days' where id = (select reservation_id from sessions where id = '${sessionId}');`
+      );
+      psql(`select finalize_lesson_session('${sessionId}', 'completed', '${teacherId}', '정상 완료');`);
+      // 캐스케이드로 이미 completed + completed_at 채워짐 — 다시 scheduled로 돌려
+      // "링크된 세션은 completed인데 completed_at 없이 직접 완료" 케이스를 만든다.
+      psql(`update trial_sessions set status = 'scheduled', completed_at = null where id = '${linkedTrialId}';`);
+
+      expect(() =>
+        psql(`update trial_sessions set status = 'completed' where id = '${linkedTrialId}';`)
+      ).toThrow(/completed_at도 함께 채워야 합니다/);
+
+      const stillNotCompleted = psql(`select status from trial_sessions where id = '${linkedTrialId}';`);
+      expect(stillNotCompleted).toBe("scheduled");
+    });
+
+    it("④ 링크된 세션이 completed이고 completed_at도 함께 채우면 직접 UPDATE가 통과한다(호출자 미검증은 GUC 방식과 동일 노출 수준)", () => {
+      const { childId, subjectEnrollmentId } = createTestChild("completed-at-present");
+      const consultationId = psql(
+        `insert into consultations (contact_name, contact_email, child_id) values ('테스트', 'm5d-cap@example.com', '${childId}') returning id;`
+      );
+      const linkedTrialId = psql(
+        `insert into trial_sessions (consultation_id, child_id, subject_id, teacher_id, scheduled_at)
+         values ('${consultationId}', '${childId}', '${SUBJECT_ID}', '${teacherId}', now() + interval '23 days') returning id;`
+      );
+      grantTrialEntitlement(childId);
+      const startsAt = new Date();
+      startsAt.setUTCDate(startsAt.getUTCDate() + 23);
+      startsAt.setUTCHours(17, 0, 0, 0);
+      const endsAt = new Date(startsAt.getTime() + 60 * 60000);
+      const row = psql(
+        `select reservation_id, session_id from confirm_lesson_booking('${childId}', '${subjectEnrollmentId}', '${teacherId}', '${trialLessonTypeId}', '${startsAt.toISOString()}', '${endsAt.toISOString()}', 'm5d-book-${Date.now()}');`
+      );
+      const [, sessionId] = row.split("|");
+      psql(`select mark_lesson_session_started('${sessionId}', '${teacherId}');`);
+      psql(
+        `update reservations set starts_at = starts_at - interval '365 days', ends_at = ends_at - interval '365 days' where id = (select reservation_id from sessions where id = '${sessionId}');`
+      );
+      psql(`select finalize_lesson_session('${sessionId}', 'completed', '${teacherId}', '정상 완료');`);
+      psql(`update trial_sessions set status = 'scheduled', completed_at = null where id = '${linkedTrialId}';`);
+
+      psql(
+        `update trial_sessions set status = 'completed', completed_at = now() where id = '${linkedTrialId}';`
+      );
+
+      const finalRow = psql(
+        `select status, (completed_at is not null) from trial_sessions where id = '${linkedTrialId}';`
+      );
+      expect(finalRow).toBe("completed|t");
+    });
   });
 });
