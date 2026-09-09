@@ -60,7 +60,8 @@ vi.mock("@/lib/booking/create-booking", () => ({
 
 const submitIncidentReportMock = vi.fn();
 vi.mock("@/lib/booking/incident-reports", () => ({
-  submitIncidentReport: (supabase: unknown, p: unknown) => submitIncidentReportMock(p),
+  submitIncidentReport: (supabase: unknown, reportedByUserId: string, p: unknown) =>
+    submitIncidentReportMock(reportedByUserId, p),
 }));
 
 beforeEach(() => {
@@ -187,6 +188,7 @@ describe("reportTeacherIssueForChild", () => {
       childId: "child1", sessionId: "s1", reportType: "teacher_no_show_reported", notes: "안 들어왔어요",
     });
     expect(submitIncidentReportMock).toHaveBeenCalledWith(
+      "guardian1",
       expect.objectContaining({ sessionId: "s1", reportType: "teacher_no_show_reported", notes: "안 들어왔어요" })
     );
   });

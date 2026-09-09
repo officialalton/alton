@@ -12,6 +12,6 @@ export async function reportTeacherIssue(params: {
   minutesLate?: number;
   notes?: string;
 }): Promise<void> {
-  const { supabase } = await requireUser();
-  await submitIncidentReport(supabase, params);
+  const { user, supabase } = await requireUser();
+  await submitIncidentReport(supabase, user.id, params);
 }

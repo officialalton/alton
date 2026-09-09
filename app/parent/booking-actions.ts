@@ -112,5 +112,5 @@ export async function reportTeacherIssueForChild(params: {
   await assertGuardianOfChild(supabase, user.id, params.childId);
   const admin = createAdminClient();
   await assertSessionBelongsToChild(admin, params.sessionId, params.childId);
-  await submitIncidentReport(supabase, params);
+  await submitIncidentReport(supabase, user.id, params);
 }

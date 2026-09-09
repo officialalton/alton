@@ -8,6 +8,7 @@ export type IncidentReportType = "teacher_late" | "student_no_show_reported" | "
 
 export async function submitIncidentReport(
   supabase: SupabaseClient,
+  reportedByUserId: string,
   params: {
     sessionId: string;
     reportType: IncidentReportType;
@@ -18,9 +19,15 @@ export async function submitIncidentReport(
   if (params.reportType === "teacher_late" && (params.minutesLate === undefined || params.minutesLate === null)) {
     throw new Error("선생님 지각 신고는 지각 시간(분)이 필요합니다.");
   }
+  // 버그 수정(2026-09-09, 기반 안정화 계획 7절 5단계): session_incident_reports.reported_by는
+  // NOT NULL이고 기본값·트리거가 없는데 이 함수가 여태 이 컬럼을 아예 채우지 않아서
+  // (호출부 확인 과정에서 발견) 이 함수는 호출될 때마다 항상 NOT NULL 위반으로
+  // 실패했다 — 실제로 신고를 남긴 적이 한 번도 없었던 셈이다. 인증된 호출자의
+  // id를 명시적으로 전달받아 채운다.
   const { error } = await supabase.from("session_incident_reports").insert({
     session_id: params.sessionId,
     report_type: params.reportType,
+    reported_by: reportedByUserId,
     minutes_late: params.minutesLate ?? null,
     notes: params.notes ?? null,
   });

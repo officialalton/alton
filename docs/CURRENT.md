@@ -85,9 +85,35 @@
 > 외 역할 재확인을 앱 코드 레벨에서도 추가할지 — 이번 라운드는 admin만
 > 예외적으로 강화하는 비일관적 변경을 피하기 위해 현행 유지로 판단했다.
 >
-> **남은 단계**: 5(P1 테스트 보강) → 6(정산 batch 생성 동시성 재현) →
-> 7(레거시/v3·ALTER 충돌 조사·문서화만). 예상 밖 정책 판단이나 UX 변경이
-> 발견되면 그 지점에서 멈추고 보고한다.
+> **5단계(P1 테스트 보강) 완료 — 실제 버그 1건 발견·수정.** 사전 확인 중
+> `lib/booking/incident-reports.ts::submitIncidentReport()`이
+> `session_incident_reports.reported_by`(NOT NULL, 기본값·트리거 없음)를
+> 전혀 채우지 않는 것을 발견 — **이 함수는 호출될 때마다 항상 NOT NULL
+> 위반으로 실패했다(선생님 지각/노쇼 신고 기능이 사실상 한 번도 동작한
+> 적이 없었던 것으로 보인다)**. 순수 버그 수정(CLAUDE.md 기준 자체 판단
+> 범위)으로 인증된 호출자 id를 `reported_by`로 명시 전달하도록 수정 —
+> 영향받는 3개 호출부(`app/student/incident-report-actions.ts`,
+> `app/parent/booking-actions.ts::reportTeacherIssueForChild`,
+> `app/teacher/incident-report-actions.ts`) 전부 수정.
+>
+> 그 외 대상 3건은 확인 결과 실제 소유자·권한 검증은 이미 RLS(homework_items:
+> `is_session_participant`, session_incident_reports: `is_session_related_v3`)
+> 또는 기존 `requireAdminOrCapability`(direct-account-actions.ts, 4단계에서
+> 이미 가드 확인됨)가 담당하고 있어 앱 코드 추가 변경은 하지 않고, 정상/권한
+> 거부(RLS 거부 전파)/잘못된 상태(DB CHECK·FK 위반) 테스트만 추가했다:
+> `app/student/incident-report-actions.test.ts`(신규),
+> `app/teacher/incident-report-actions.test.ts`(신규),
+> `app/session/[id]/homework-actions.test.ts`(신규),
+> `app/admin/direct-account-actions.test.ts`(신규, 정상/권한거부/중복이메일/
+> 이메일형식오류/메일발송실패 5케이스), `app/parent/booking-actions.test.ts`
+> 기존 테스트를 새 `submitIncidentReport` 시그니처(reported_by 인자 추가)에
+> 맞춰 갱신. 전체 스위트 239/239 파일·1678/1678 테스트 통과, `tsc`/
+> `next build` 클린. 제품 동작(UX)은 "신고가 실제로 저장됨"이라는 원래
+> 의도대로 복구된 것 외에 새로 추가되지 않았다.
+>
+> **남은 단계**: 6(정산 batch 생성 동시성 재현) → 7(레거시/v3·ALTER 충돌
+> 조사·문서화만). 예상 밖 정책 판단이나 UX 변경이 발견되면 그 지점에서
+> 멈추고 보고한다.
 
 > **2026-09-09 — 배치 2-4(`bypass_session_lock`, 배치 2 마지막 항목) corrective
 > 완료.** 신규 마이그레이션
