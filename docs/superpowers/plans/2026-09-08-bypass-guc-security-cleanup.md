@@ -81,6 +81,32 @@
 > 계획/문서 개정만 — 코드/마이그레이션은 전혀 건드리지 않았다. 배치
 > 2-1(`bypass_status_protect`)은 이 개정과 무관한 별도 항목이며 이번
 > 라운드에서 손대지 않았다.
+>
+> **6차 개정(2026-09-08, 이 라운드 — `bypass_reconciliation_task_lock`의
+> 동시 재판정/반영 경합 정책 확정, product-owner 결정 반영)**: 5차 개정
+> 필수 테스트 목록의 "동시 재판정/반영 경합" 항목이 "어느 쪽이 이겨야
+> 하는지는 이 문서가 아직 확정하지 않음 — 결정 필요"로 남겨뒀던 것을
+> 제품 오너가 확정했다 — **행 잠금(`for update`)을 먼저 획득하고 정상
+> 완료하는 쪽이 이긴다**는 단일 원칙 아래, (a) `recomplete_session()`이
+> 먼저 잠그면 대상 작업을 `superseded`로 전이시키고, 뒤이어 잠금을 얻는
+> `resolve_session_reconciliation_task()`는 재조회한 행이 더 이상
+> `pending`이 아님을 확인해 반려한다(무효 전이 명시적 거부 — 조용한
+> no-op도, 무관한 예외도 아님). (b) 반대로
+> `resolve_session_reconciliation_task()`가 먼저 잠그고 정상 완료하면
+> 대상 작업은 `resolved`(또는 함수 자체 로직에 따라 `needs_review`)가
+> 되고, 뒤이어 잠금을 얻는 `recomplete_session()`은 이미 종결 상태인 그
+> 행을 건드리지 않으며, 대신 자신의 새 재판정 결과를 반영하는 **새
+> 대사 작업 행을 INSERT**한다. 두 함수 모두 "잠그고, 잠근 뒤에
+> 현재 상태를 재검증하고 나서 전이 여부를 결정"하는 동일한 패턴을
+> 따라야 한다 — 이는 배치 2-1 corrective가 이미 채택한 "먼저 쓰기를
+> 잠그고, 그 다음에 상태를 검증한다"는 원칙(체크 후 쓰기가 아니라 잠금 후
+> 재검증)을 이 문서 전체에 걸친 공유 원칙으로 재확인한 것이다 — 상태
+> 전이를 두고 경쟁하는 함수는 반드시 대상 행을 먼저 잠근 뒤에 검증/전이해야
+> 하며, "검증 후 쓰기" 순서로 작성해서는 안 된다. 상세는 아래 "배치 2-3"
+> 절 "3. 정상 상태 전이"·"4. 필수 테스트 목록"·"6. 수정 대상" 갱신 내용
+> 참고. 이 개정도 계획/문서 개정만 — 코드/마이그레이션은 전혀 건드리지
+> 않았다. 배치 2-1(`bypass_status_protect`)의 코드/마이그레이션 파일이
+> 병행 작업 중이라면 그 파일들은 손대지 않았다.
 
 ## 배경 패턴
 
@@ -703,8 +729,17 @@ transition-type마다 하나, 어떤 action 값도 자기 자신의 전이보다
 
 - **`resolve_session_reconciliation_task(uuid, text)`** (최신
   `20261124000000_m5c_final_reconciliation_integrity_gaps.sql:12-114`) —
-  `is_admin()` 게이트, 이미 `resolved`/`superseded`/`needs_review`인
-  작업 재반영 차단 검사 후 4가지 분기: (a) 세션 `final_status`/
+  `is_admin()` 게이트, 대상 대사 작업 행을 `for update`로 잠근 뒤(기존
+  `:23`), **잠금 획득 직후 행을 재조회해 `status = 'pending'`인지
+  재검증**한다(6차 개정 — product-owner 확정 원칙 "잠금 후 재검증":
+  더 이상 "잠그기 전에 한 번 본 상태"를 신뢰하지 않고, 잠금을 쥔
+  시점의 실제 상태를 다시 읽는다). 재검증 결과 이미 `resolved`/
+  `superseded`/`needs_review`이면(즉 자신이 잠금을 기다리는 동안
+  `recomplete_session()`이 먼저 잠그고 `superseded`로 전이시킨 경우
+  포함) **명시적으로 반려**한다 — 조용한 no-op이나 상태와 무관한 예외가
+  아니라 "무효 전이" 자체를 사유로 하는 거부여야 한다(아래 "동시
+  재판정/반영 경합" 시나리오 A 참고). 재검증을 통과하면(여전히
+  `pending`) 4가지 분기로 진행: (a) 세션 `final_status`/
   `payable_minutes` 불일치 시 `:49-53` 토큰 발급 + `needs_review` UPDATE,
   (b) entitlement disposition 불일치 시 `:64-68` 토큰 발급 +
   `needs_review` UPDATE, (c) 작업 생성 이후 다른 adjust 존재 시 `:82-87`
@@ -723,19 +758,47 @@ transition-type마다 하나, 어떤 action 값도 자기 자신의 전이보다
   'true', true)` 한 번만 호출한 뒤 `:124-126`에서 이 세션에 걸린 기존
   `pending` 대사 작업을 `superseded`로 일괄 UPDATE(`where session_id =
   p_session_id and status = 'pending'` — 보통 0개 또는 1개 행이지만 SQL
-  자체는 다건 UPDATE)한다. **토큰 방식 재작성 시**: 이 UPDATE는 row-level
-  트리거(`reconciliation_task_update_guard()`)를 행마다 한 번씩 발동시키므로,
-  GUC 1회 SET을 이 UPDATE 앞의 토큰 `insert into
-  status_transition_tokens (table_name, row_id, action) values
-  ('session_judgment_reconciliation_tasks', <해당 행의 id>,
-  'reconciliation_task_supersede')`로 교체할 때 **대상이 될 수 있는 모든
-  `pending` 행 각각에 대해 토큰을 1건씩 미리 심어야 한다**(예:
-  `insert into status_transition_tokens (table_name, row_id, action)
-  select 'session_judgment_reconciliation_tasks', id,
-  'reconciliation_task_supersede' from session_judgment_reconciliation_tasks
-  where session_id = p_session_id and status = 'pending'`로 UPDATE 직전에
-  선행) — 단일 토큰 하나로 다건 UPDATE를 통과시킬 수 없다(트리거가 행별로
-  `row_id` 일치를 확인하므로).
+  자체는 다건 UPDATE)한다.
+
+  **토큰 방식 재작성 시 — 6차 개정, product-owner 확정 "잠금 후 재검증 +
+  두 하위 분기" 정책**: 이 corrective migration에서 `recomplete_session()`은
+  더 이상 "무조건 `pending` 행을 찾아 `superseded`로 UPDATE"하지 않는다.
+  대신 다음 순서를 따른다.
+  1. 이 세션에 걸린 대사 작업 후보 행(들)을 **`for update`로 먼저 잠근다**
+     (`select id, status from session_judgment_reconciliation_tasks where
+     session_id = p_session_id for update` — 기존 원본에는 없던 별도
+     select로, 이 corrective migration에서 새로 추가해야 하는 변경점).
+  2. **잠금을 획득한 뒤** 각 행의 `status`를 재조회해 현재 상태로
+     분기한다(이 재검증이 핵심 — 잠그기 전에 어떤 상태였는지는 신뢰하지
+     않는다):
+     - **(a) 여전히 `pending`인 행** — 기존 설계 그대로 `superseded`로
+       전이시킨다. 전이 직전에 그 행 각각에 대해 토큰을 1건씩 미리
+       심는다(`insert into status_transition_tokens (table_name, row_id,
+       action) select 'session_judgment_reconciliation_tasks', id,
+       'reconciliation_task_supersede' from
+       session_judgment_reconciliation_tasks where session_id =
+       p_session_id and status = 'pending'`로 UPDATE 직전에 선행) —
+       단일 토큰 하나로 다건 UPDATE를 통과시킬 수 없다(트리거가 행별로
+       `row_id` 일치를 확인하므로).
+     - **(b) 이미 `resolved` 또는 `needs_review`인 행(종결 상태)** —
+       이 행은 **전혀 건드리지 않는다**(UPDATE 시도 자체를 하지 않음 —
+       종결 상태는 이제 불변으로 취급). 대신 이 재판정의 새 판정
+       결과를 반영하는 **새 `session_judgment_reconciliation_tasks`
+       행을 INSERT**한다. 이것은 일반 `insert into
+       session_judgment_reconciliation_tasks (...)`이며, 이 테이블은
+       INSERT에 대해서는 `reconciliation_task_update_guard()`(`before
+       update` 트리거)의 대상이 아니므로 **토큰이 필요 없다** — 보호
+       대상은 기존 행의 `status`/기타 보호 컬럼의 *수정*이지 신규 행
+       생성이 아니다(`reject_reconciliation_task_direct_mutation()`도
+       DELETE만 차단하며 INSERT는 애초에 막지 않는다). 새로 INSERT되는
+       행은 `recomplete_session()`이 이번 재판정에서 산출한 필드 값
+       (판정 사유·기대 entitlement 등, 기존 INSERT 로직과 동일한 필드
+       집합)으로 채워지며 `status = 'pending'`으로 시작해 이후 정상적으로
+       `resolve_session_reconciliation_task()`의 대상이 된다.
+  3. (a)/(b) 분기는 **행 단위로 독립적으로 판단**한다 — 같은 세션에
+     여러 대사 작업 행이 걸려 있고 그중 일부는 아직 `pending`, 일부는
+     이미 `resolved`인 혼재 상황이 이론상 가능하므로, `recomplete_session()`은
+     잠근 각 행에 대해 개별적으로 (a) 또는 (b)를 적용한다.
 
 **4. 필수 테스트 목록**
 
@@ -788,24 +851,39 @@ transition-type마다 하나, 어떤 action 값도 자기 자신의 전이보다
      동명 temp `status_transition_tokens`에 위조 `reconciliation_task_supersede`
      토큰을 심고 직접 UPDATE 시도해도 거부(스키마 한정 요구사항 위반
      시나리오와 동일 패턴).
-  4. **동시 재판정/반영 경합**: `recomplete_session()`(같은 작업을
-     supersede 시도)과 `resolve_session_reconciliation_task()`(같은
-     작업을 resolve 시도)가 같은 대사 작업 행을 동시에 대상으로 할 때 —
-     둘 다 각자의 UPDATE 전에 대상 행을 `for update`로 잠그므로(
-     `resolve_session_reconciliation_task():26`, `recomplete_session()`
-     쪽은 이 항목 구현 시 동일하게 `select ... for update`를 대상 pending
-     행에 추가해야 함 — 현재 `20261123000000` 원본은 조건부 UPDATE만
-     하고 별도 `for update` select가 없으므로 **이 corrective migration에서
-     추가해야 할 변경점**) 먼저 잠근 트랜잭션이 커밋될 때까지 다른 쪽이
-     대기하고, 커밋 후 다시 상태를 확인하면 이미 `superseded`(또는
-     `resolved`)이므로 나중 트랜잭션은 자기 자신의 사전 상태 검사(각
-     함수의 `status = 'pending'`/`status <> 'pending'` 가드)에 걸려 실패
-     또는 no-op으로 끝나야 한다 — 검증 기준은 "양쪽 다 성공"이나 "행이
-     `resolved`와 `superseded` 사이의 애매한 상태로 남는 것"이 아니라,
-     **최종 상태가 `resolved` 또는 `superseded` 둘 중 정확히 하나이고,
-     진 쪽의 함수 호출은 명시적 예외로 실패하거나 `needs_review`류
-     방어 분기로 끝나야 한다**는 것(어느 쪽이 이겨야 하는지는 이 문서가
-     아직 확정하지 않음 — 아래 "결정 필요" 참고).
+  4. **동시 재판정/반영 경합(6차 개정 — product-owner 확정 정책에 따른
+     두 결정론적 결과로 재구성, 이전 판의 "결정 필요" 프레이밍 폐기)**:
+     `recomplete_session()`(같은 작업을 supersede 시도)과
+     `resolve_session_reconciliation_task()`(같은 작업을 resolve 시도)가
+     같은 대사 작업 행을 동시에 대상으로 할 때, 정책은 **"행 잠금(`for
+     update`)을 먼저 획득하고 정상 완료하는 쪽이 이긴다"** — 두 함수
+     모두 대상 행을 `for update`로 잠근 뒤(`resolve_session_reconciliation_task():23`,
+     `recomplete_session()` 쪽은 이 corrective migration에서 동일하게
+     `select ... for update`를 추가해야 함 — 위 "3. 정상 상태 전이"
+     참고) 잠금 획득 직후 행을 재조회해 현재 상태를 재검증하고 나서
+     전이 여부를 결정한다. 아래 두 결과를 각각 별도 테스트로 검증한다.
+     - **경합 결과 A — `recomplete_session()`이 먼저 잠금 획득**: 대상
+       행이 `superseded`로 전이된다. 잠금을 기다리던
+       `resolve_session_reconciliation_task()`는 잠금을 얻은 뒤 행을
+       재조회해 `status`가 더 이상 `pending`이 아님(`superseded`)을
+       확인하고 **무효 전이로 명시적으로 반려**한다(조용한 no-op이나
+       상태와 무관한 예외가 아니라, "이미 superseded된 작업은 반영할
+       수 없다"는 것을 사유로 하는 거부여야 함).
+     - **경합 결과 B — `resolve_session_reconciliation_task()`가 먼저
+       잠금 획득**: 대상 행이 `resolved`(또는 그 함수 자신의 내부 분기
+       로직에 따라 `needs_review`)로 전이된다. 잠금을 기다리던
+       `recomplete_session()`은 잠금을 얻은 뒤 행을 재조회해 이미 종결
+       상태임을 확인하고, **그 행을 전혀 mutate하지 않는다**(UPDATE
+       시도 자체가 없어야 함) — 대신 자신의 새 재판정 결과를 반영하는
+       **새 대사 작업 행을 INSERT**한다(위 "3. 정상 상태 전이" (b) 분기
+       참고).
+     - 두 결과 공통 검증: (i) 대상 행에 대한 **이중 전이가 없다**(같은
+       행이 `superseded`와 `resolved`/`needs_review` 사이를 오가거나
+       두 상태 모두를 거치지 않음). (ii) **훼손된 상태나 torn write가
+       없다**(트랜잭션 격리 하에서 각 함수가 자신의 UPDATE/INSERT를
+       원자적으로 완료하거나 전혀 하지 않음). (iii) 경합 결과 B에서
+       INSERT된 새 행은 원래 행과 별개의 `id`를 가지며 원래 행의
+       `resolved`/`needs_review` 상태를 되돌리지 않는다.
 
 **5. `public.status_transition_tokens` 완전 스키마 한정 + `search_path =
 public, pg_temp` 고정 의무**
@@ -832,18 +910,33 @@ public, pg_temp` 고정 의무**
 - `public.reject_reconciliation_task_direct_mutation()` — DELETE 차단
   트리거, 변경 없음(GUC 무관하게 항상 거부이므로 그대로 유지).
 - `public.resolve_session_reconciliation_task(uuid, text)` — 최신
-  (`20261124000000`) 기준 재작성, 4개 분기 전부 GUC → 토큰 교체.
+  (`20261124000000`) 기준 재작성, 4개 분기 전부 GUC → 토큰 교체 +
+  **6차 개정: 기존 `:23` `for update` 잠금 직후 대상 행을 재조회해
+  `status = 'pending'`인지 재검증하는 로직을 추가**(더 이상 잠그기
+  이전에 읽은 상태를 신뢰하지 않음) — 재검증 실패 시(이미 `resolved`/
+  `superseded`/`needs_review`) 명시적 반려 예외를 던진다(경합 결과 A,
+  위 "4. 필수 테스트 목록" 참고).
 - `public.set_reconciliation_task_student_cancelled_disposition(uuid,
   text, text)` — 최신(`20261124000000`) 기준 재작성.
 - `public.recomplete_session(uuid, v3_session_final_status, text)` —
-  최신(`20261123000000`) 기준 재작성 — **주의**: 이 함수는 배치 2-4에서도
-  수정 대상이므로(그쪽은 이 함수가 `bypass_session_lock`을 쓰지 않는다는
-  것만 확인하고 손대지 않을 예정이지만, 혹시 배치 2-4 구현 시점에 이
-  함수 본문이 이미 배치 2-3에서 바뀌어 있다면 배치 2-4는 그 바뀐 버전
-  위에 이어서 작업해야 한다) — 두 항목의 구현 순서를 실제로 정할 때
-  이 함수에 대해서만은 나중에 구현하는 쪽이 먼저 구현된 쪽의 최신
-  본문을 기준으로 시작해야 한다.
-- RLS/GRANT: 변경 없음.
+  최신(`20261123000000`) 기준 재작성. **6차 개정: 기존 "무조건
+  `pending` 행을 찾아 `superseded`로 UPDATE" 로직을 "대상 행을 `for
+  update`로 먼저 잠그고, 잠금 획득 후 재조회한 상태에 따라 (a) 여전히
+  `pending`이면 기존대로 supersede, (b) 이미 `resolved`/`needs_review`면
+  그 행은 건드리지 않고 새 대사 작업 행을 INSERT"하는 로직으로
+  교체**(상세는 위 "3. 정상 상태 전이" · "4. 필수 테스트 목록" 참고;
+  INSERT 경로는 `reconciliation_task_update_guard()`의 대상이 아니므로
+  토큰 불필요, supersede 경로만 `'reconciliation_task_supersede'` 토큰
+  필요). **주의**: 이 함수는 배치 2-4에서도 수정 대상이므로(그쪽은 이
+  함수가 `bypass_session_lock`을 쓰지 않는다는 것만 확인하고 손대지
+  않을 예정이지만, 혹시 배치 2-4 구현 시점에 이 함수 본문이 이미 배치
+  2-3에서 바뀌어 있다면 배치 2-4는 그 바뀐 버전 위에 이어서 작업해야
+  한다) — 두 항목의 구현 순서를 실제로 정할 때 이 함수에 대해서만은
+  나중에 구현하는 쪽이 먼저 구현된 쪽의 최신 본문을 기준으로 시작해야
+  한다.
+- RLS/GRANT: 변경 없음(새 대사 작업 행 INSERT는 `recomplete_session()`이
+  이미 갖고 있는 기존 INSERT 권한/SECURITY DEFINER 소유자 권한 범위
+  내이므로 추가 GRANT 불필요).
 
 ---
 

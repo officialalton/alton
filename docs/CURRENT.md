@@ -1,5 +1,26 @@
 # ALTON — 현재 상태 (2026-09-08 기준)
 
+> **2026-09-08 — bypass GUC 배치 2-3(`bypass_reconciliation_task_lock`) 동시
+> 재판정/반영 경합 정책 확정(계획/문서 전용, 코드/마이그레이션 변경 없음).**
+> `docs/superpowers/plans/2026-09-08-bypass-guc-security-cleanup.md`에 6차
+> 개정을 추가해, `recomplete_session()`(재판정)과
+> `resolve_session_reconciliation_task()`(반영)이 같은
+> `session_judgment_reconciliation_tasks` 행을 두고 경합할 때 "결정 필요"로
+> 남아 있던 항목을 product-owner가 확정한 정책으로 대체했다 — **행 잠금
+> (`for update`)을 먼저 획득하고 정상 완료하는 쪽이 이긴다**: (A)
+> `recomplete_session()`이 먼저 이기면 대상 행을 `superseded`로 전이시키고,
+> 뒤이어 잠금을 얻는 `resolve_session_reconciliation_task()`는 재조회한
+> 상태가 더 이상 `pending`이 아님을 확인해 명시적으로 반려한다. (B)
+> `resolve_session_reconciliation_task()`가 먼저 이기면 대상 행이
+> `resolved`/`needs_review`가 되고, 뒤이어 잠금을 얻는 `recomplete_session()`은
+> 그 행을 전혀 mutate하지 않고 대신 새 대사 작업 행을 INSERT한다. 두
+> 함수 모두 "잠그고, 잠근 뒤에 재검증"하는 동일 패턴을 따라야 하며, 이는
+> 배치 2-1 corrective가 채택한 원칙을 문서 전체의 공유 원칙으로 재확인한
+> 것이다. 필수 테스트 목록도 이 두 결정론적 결과(경합 결과 A/B)로
+> 재구성했다. 이번 라운드는 계획 문서만 갱신했고, 동시 진행 중일 수 있는
+> 배치 2-1 코드/마이그레이션 파일은 전혀 건드리지 않았다(작업 시작 전
+> `git status`로 확인 — 관련 미커밋 변경 없음).
+>
 > **2026-09-08 — bypass GUC 배치 2-1(`bypass_status_protect`) corrective 구현 완료.**
 > `docs/superpowers/plans/2026-09-08-bypass-guc-security-cleanup.md` "배치 2 상세
 > 실행 계획 > 배치 2-1"에 따라 신규 마이그레이션
