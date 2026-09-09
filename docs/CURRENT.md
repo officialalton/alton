@@ -54,9 +54,40 @@
 > 커버한다. 전체 스위트 234/234 파일·1662/1662 테스트 통과, `tsc`/
 > `next build` 클린.
 >
-> **남은 단계**: 4(관리자 service-role 감사) → 5(P1 테스트 보강) →
-> 6(정산 batch 생성 동시성 재현) → 7(레거시/v3·ALTER 충돌 조사·문서화만).
-> 예상 밖 정책 판단이나 UX 변경이 발견되면 그 지점에서 멈추고 보고한다.
+> **4단계(관리자 service-role 경로 감사) 완료 — 코드 누락 없음, 회귀 가드만
+> 추가.** `app/admin/*.ts`(19개 파일) 전수 스캔 결과 `createAdminClient()`를
+> 호출하는 exported 함수는 전부 이미 `requireAdmin()`/
+> `requireAdminOrCapability()`를 함수 본문 안에서 호출하고 있었다. 예외
+> 3건을 직접 검토해 안전함을 확인: (1) `getClosureDraftAction`은
+> `requireAdminOrCapability`를 이미 호출하는
+> `getConsultationCardDetailAction`에 위임 호출, (2) `users-data.ts`의
+> `loadEmailById`(admin client로 `auth.admin.listUsers()` 호출)는
+> `app/admin/page.tsx`에서만 쓰이는데, 이 page.tsx는 다른 모든 포털
+> page.tsx(`app/student`/`app/teacher`/`app/parent`)와 **동일하게**
+> `requireUser()` + 최상위 `middleware.ts`의 역할 기반 라우트 게이트(로그인
+> 사용자의 `profiles.role`이 그 경로의 홈이 아니면 리다이렉트)에만 의존하는
+> 일관된 아키텍처 패턴 — admin만의 예외적 누락이 아니라 앱 전체의 의도된
+> 설계였다. 여기에 admin/page.tsx만 별도로 `requireAdmin()`을 추가하는
+> 것은 페이지 레벨 보안 모델(미들웨어 단일 게이트) 자체를 바꾸는 아키텍처
+> 판단이라 이번 라운드 범위를 벗어난다고 보고 **코드를 바꾸지 않았다**(결정
+> 필요 항목으로 아래에 기록). (3) `payouts-cron.ts`는 이미
+> `lib/legacy-teacher-payouts-write-guard.test.ts`가 완전 no-op임을
+> 증명한 파일. 신규 회귀 가드
+> `app/admin/admin-action-auth-guard.test.ts` 추가 — 앞으로 추가되는
+> `createAdminClient()` 호출부가 `requireAdmin`류 없이 만들어지면 이
+> 테스트가 실패한다(정적 함수 본문 추출 로직을 별도 스크립트로 직접 검증:
+> 30개 함수 중 11개가 admin client를 쓰고 11개 전부 가드 있음을 확인).
+> 전체 스위트 235/235 파일·1664/1664 테스트 통과, `tsc`/`next build` 클린.
+>
+> **결정 필요(제품 오너)**: `app/admin/page.tsx`(및 이 파일이 호출하는
+> `users-data.ts`의 admin-client 우회 헬퍼)가 미들웨어 라우트 게이트에만
+> 의존하는 것을 이대로 둘지, 아니면 모든 포털 page.tsx에 `requireUser()`
+> 외 역할 재확인을 앱 코드 레벨에서도 추가할지 — 이번 라운드는 admin만
+> 예외적으로 강화하는 비일관적 변경을 피하기 위해 현행 유지로 판단했다.
+>
+> **남은 단계**: 5(P1 테스트 보강) → 6(정산 batch 생성 동시성 재현) →
+> 7(레거시/v3·ALTER 충돌 조사·문서화만). 예상 밖 정책 판단이나 UX 변경이
+> 발견되면 그 지점에서 멈추고 보고한다.
 
 > **2026-09-09 — 배치 2-4(`bypass_session_lock`, 배치 2 마지막 항목) corrective
 > 완료.** 신규 마이그레이션
