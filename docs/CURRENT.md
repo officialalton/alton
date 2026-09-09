@@ -1,5 +1,56 @@
 # ALTON — 현재 상태 (2026-09-08 기준)
 
+> **2026-09-08 — 배치 2-3 `bypass_reconciliation_task_lock` GUC corrective
+> 완료.** 신규 마이그레이션
+> `supabase/migrations/20261259000000_r2_corrective_reconciliation_task_lock_token.sql`로
+> `session_judgment_reconciliation_tasks` 보호에 쓰이던
+> `app.bypass_reconciliation_task_lock` GUC를 제거하고 `status_transition_tokens`
+> 공용 1회용 토큰 인프라로 교체했다. 대상은 실제 호출자 3개 —
+> `resolve_session_reconciliation_task()`(최신 `20261124000000` 정의),
+> `set_reconciliation_task_student_cancelled_disposition()`(최신
+> `20261124000000` 정의), `recomplete_session()`(최신 `20261123000000` 정의 —
+> 이전 pending 대사 작업을 superseded로 전환하는 부분만, 그 외 로직은
+> 전혀 손대지 않음)뿐이다. action 값 4개를 완전히 분리했다(product-owner
+> 5차 개정 반영) — `reconciliation_task_resolve`(pending→resolved),
+> `reconciliation_task_needs_review`(pending→needs_review, 3가지 원인
+> 공유), `reconciliation_task_supersede`(pending→superseded,
+> `recomplete_session()` 전용), `reconciliation_task_set_disposition`(status가
+> 아니라 disposition 3개 컬럼 UPDATE) — 어느 action 값도 자기 자신이 지정한
+> 전이보다 더 많은 것을 열 수 없다(`needs_review` 토큰으로는 `superseded`
+> 전이를 절대 열 수 없음을 별도 테스트로 확인). `resolve_session_reconciliation_task()`는
+> 기존 `select ... for update`가 이미 잠금 획득과 동시에 최신 커밋 상태를
+> 반환하는 구조라 별도 재조회 코드 없이도 "잠금 후 재검증" 정책을 만족했다.
+> `recomplete_session()`은 `mark_expired_invites()`와 동일한
+> candidates(id 오름차순 `for update` 잠금) → tokens(행별 개별
+> `reconciliation_task_supersede` 토큰 INSERT) → 배치 UPDATE 3단 CTE
+> 체인으로 재작성해 다건 pending 작업도 행당 정확히 1개 토큰만 소비하게
+> 했다 — candidates의 `for update`가 EvalPlanQual로 WHERE절을 재평가하므로
+> 잠금 대기 중 다른 트랜잭션이 해당 행을 이미 resolved/needs_review로
+> 전환했다면 자동으로 후보에서 제외된다. product-owner 6차 개정이 확정한
+> 경합 정책("행 잠금을 먼저 획득하고 정상 완료하는 쪽이 이긴다")의 두
+> 결과를 각각 실제 동시 프로세스(pg_sleep을 주입하는 테스트 전용 임시
+> 트리거로 잠금 보유 시간을 늘려 경합을 결정론적으로 재현)로 검증했다 —
+> 결과 A(`recomplete_session()` 선승): 대상 행이 `superseded`로 전이되고,
+> 뒤이어 잠금을 얻는 `resolve_session_reconciliation_task()`는 재조회한
+> 행이 더 이상 `pending`이 아님을 확인해 명시적으로 반려(조용한 no-op
+> 아님). 결과 B(`resolve_session_reconciliation_task()` 선승): 대상 행이
+> `resolved`로 전이되고, 뒤이어 잠금을 얻는 `recomplete_session()`은 그
+> 행을 전혀 mutate하지 않은 채(원본 로직에서 원래도 매 호출마다 무조건
+> 실행되던) 새 대사 작업 행을 INSERT한다. 신규 회귀 테스트
+> `lib/booking/reconciliation-task-lock-token.integration.test.ts`(12개
+> 케이스)로 정상 경로 3개(resolved/needs_review/set_disposition), 직접
+> UPDATE/DELETE 거부, 레거시 GUC 무효화, 세션 로컬 temp table 위조 차단,
+> 다른 action 값 토큰으로 supersede를 열 수 없음, 다건 pending 작업
+> supersede(행마다 개별 토큰 발급·소비, 좀비 토큰 0건), 정산 원장 반영
+> 실패 시 토큰/status/entitlement_ledger 전체 롤백, 경합 결과 A/B 둘 다를
+> 검증했다. `bypass_status_protect`/`bypass_invite_protect`/`bypass_session_lock`과
+> 이들의 이미 완료된 corrective, `recomplete_session()`의 그 외 로직(sessions
+> UPDATE, session_status_events/payout_items 처리, student_cancelled 24시간
+> 자동 판정)은 전혀 건드리지 않았다. `supabase db reset --local` 후 해당
+> 테스트 파일 12개 전부 통과, `tsc --noEmit` 클린, 전체 스위트
+> (`--no-file-parallelism`)를 fresh-reset 후 2회 연속 실행해 매번 231개
+> 파일 / 1635개 테스트 전부 통과 확인, `next build` 성공.
+>
 > **2026-09-08 — 배치 2-2 `bypass_invite_protect` GUC corrective 완료.**
 > 신규 마이그레이션
 > `supabase/migrations/20261258000000_r2_corrective_invite_protect_token.sql`로
