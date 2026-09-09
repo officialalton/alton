@@ -1,4 +1,4 @@
-import { execFileSync } from "node:child_process";
+import { execFileSync, spawn } from "node:child_process";
 import { beforeAll, afterAll, describe, expect, it } from "vitest";
 
 // R10(결제·환불·선생님 정산) — payout batch 생성·승인·지급·역분개 상태머신
@@ -490,6 +490,186 @@ describe("payout batch lifecycle (R10)", () => {
     // 원본 항목은 그대로 불변.
     const stillOrig = psql(`select amount_minor from payout_items where id = '${itemId}';`);
     expect(stillOrig).toBe(origAmount);
+  });
+
+  // R10 corrective(2026-09-09, 기반 안정화 1단계 — 정산 P0):
+  // reverse_payout_item()의 "원본당 역분개 정확히 1회" 멱등 정책
+  // (20261262000000_r10_corrective_reversal_idempotency.sql)을 검증한다.
+  // 원본을 paid까지 만드는 절차는 위 테스트와 동일한 패턴을 재사용한다.
+  function createPaidOriginalItem(daysAgo: number): string {
+    const sessionId = bookAndCompleteSession(daysAgo);
+    const periodStart = new Date();
+    // generate_payout_batches는 세션의 starts_at 날짜가 [periodStart, periodEnd] 안에
+    // 있어야만 묶는다 — daysAgo가 10을 넘는 호출도 있으므로 항상 daysAgo보다 넉넉히
+    // 앞선 날짜를 period 시작으로 잡는다(고정 -10일이면 daysAgo>10일 때 범위 밖).
+    periodStart.setUTCDate(periodStart.getUTCDate() - (daysAgo + 3));
+    const ps = periodStart.toISOString().slice(0, 10);
+    const pe = new Date().toISOString().slice(0, 10);
+    const batchId = psql(`select batch_id from generate_payout_batches('${ps}', '${pe}', '${TEACHER_ID}');`);
+    psql(`select approve_payout_batch('${batchId}', '${ADMIN_ID}');`);
+    const itemId = psql(`select id from payout_items where session_id = '${sessionId}';`);
+    psql(`update payout_disbursement_gate set real_disbursement_enabled = true where id = true;`);
+    try {
+      psql(`select dispatch_payout_batch('${batchId}', 'mercury', '${ADMIN_ID}');`);
+      psql(`select mark_payout_batch_provider_pending('${batchId}', 'mercury-tx-${itemId}');`);
+      psql(`select mark_payout_batch_provider_confirmed('${batchId}', '${ADMIN_ID}');`);
+      psql(`select mark_payout_batch_paid('${batchId}', '${ADMIN_ID}');`);
+    } finally {
+      psql(`update payout_disbursement_gate set real_disbursement_enabled = false where id = true;`);
+    }
+    expect(psql(`select status from payout_items where id = '${itemId}';`)).toBe("paid");
+    return itemId;
+  }
+
+  it("reverse_payout_item을 같은 원본에 순차 재시도하면 두 번째 호출은 새 행을 만들지 않고 기존 역분개 ID를 그대로 반환한다(멱등)", () => {
+    const itemId = createPaidOriginalItem(9);
+
+    const firstId = psql(`select reverse_payout_item('${itemId}', '${RUN_ID} 첫 호출', '${ADMIN_ID}');`);
+    const secondId = psql(`select reverse_payout_item('${itemId}', '${RUN_ID} 재시도', '${ADMIN_ID}');`);
+
+    expect(secondId).toBe(firstId);
+    expect(psql(`select count(*) from payout_items where reversed_from_item_id = '${itemId}';`)).toBe("1");
+    // 감사 로그도 정확히 1건만 존재 — 재시도가 새 로그를 남기지 않는다.
+    expect(
+      psql(
+        `select count(*) from payout_batch_audit_log where action = 'reversal_created' and note like '%${itemId}%';`
+      )
+    ).toBe("1");
+  });
+
+  it("같은 원본에 대한 동시 역분개 호출은 정확히 1건의 역분개 행만 남기고, 유니크 제약에 부딪힌 쪽은 에러 없이 같은 ID로 수렴한다", async () => {
+    const itemId = createPaidOriginalItem(10);
+
+    // 두 트랜잭션이 "기존 역분개 없음"을 확인한 뒤 INSERT 사이의 경합 창을 넓히기
+    // 위해, reversal item INSERT 직전에 짧게 지연시키는 트리거를 임시로 건다
+    // (reconciliation-task-lock-token.integration.test.ts와 동일한 기법).
+    psql(`
+      create or replace function delay_reversal_insert_for_test()
+      returns trigger language plpgsql as $$
+      begin
+        if new.item_type = 'reversal' then
+          perform pg_sleep(0.4);
+        end if;
+        return new;
+      end;
+      $$;
+    `);
+    psql(`
+      create trigger delay_reversal_insert
+        before insert on payout_items
+        for each row execute function delay_reversal_insert_for_test();
+    `);
+
+    function runReverse(reason: string): Promise<{ ok: boolean; output: string }> {
+      return new Promise((resolve) => {
+        const child = spawn("psql", [
+          DB_URL,
+          "-v",
+          "ON_ERROR_STOP=1",
+          "-q",
+          "-t",
+          "-A",
+          "-c",
+          `select reverse_payout_item('${itemId}', '${reason}', '${ADMIN_ID}');`,
+        ]);
+        let output = "";
+        child.stdout.on("data", (d) => (output += d.toString()));
+        child.stderr.on("data", (d) => (output += d.toString()));
+        child.on("close", (code) => resolve({ ok: code === 0, output: output.trim() }));
+      });
+    }
+
+    try {
+      const [a, b] = await Promise.all([
+        runReverse(`${RUN_ID} 동시 호출 A`),
+        runReverse(`${RUN_ID} 동시 호출 B`),
+      ]);
+      // 유니크 제약 위반은 함수 내부에서 잡아 재조회로 수렴하므로, 두 호출 모두
+      // 에러 없이 성공하고 같은 ID를 반환해야 한다.
+      expect(a.ok).toBe(true);
+      expect(b.ok).toBe(true);
+      expect(a.output).toBe(b.output);
+      expect(psql(`select count(*) from payout_items where reversed_from_item_id = '${itemId}';`)).toBe("1");
+    } finally {
+      psql(`drop trigger if exists delay_reversal_insert on payout_items;`);
+      psql(`drop function if exists delay_reversal_insert_for_test();`);
+    }
+  });
+
+  it("역분개 생성 도중 실패하면 전체 롤백되어 좀비 상태(역분개 없이 reversed_from_item_id만 존재 등)를 남기지 않고, 다음 호출이 정상적으로 새 역분개를 만든다", () => {
+    const itemId = createPaidOriginalItem(11);
+
+    // payout_batch_audit_log INSERT를 강제로 실패시키는 트리거 — reverse_payout_item()의
+    // 마지막 단계(감사 로그 기록)가 실패했을 때 앞서 만든 batch/item INSERT까지
+    // 전부 롤백되는지 확인한다(단일 함수 = 단일 트랜잭션이므로 구조적으로 원자적이어야 함).
+    psql(`
+      create or replace function fail_reversal_audit_log_for_test()
+      returns trigger language plpgsql as $$
+      begin
+        if new.action = 'reversal_created' and new.note like '%중간 실패 유도%' then
+          raise exception '테스트 유도 실패: 감사 로그 기록 실패';
+        end if;
+        return new;
+      end;
+      $$;
+    `);
+    psql(`
+      create trigger fail_reversal_audit_log
+        before insert on payout_batch_audit_log
+        for each row execute function fail_reversal_audit_log_for_test();
+    `);
+
+    try {
+      expect(() =>
+        psql(`select reverse_payout_item('${itemId}', '${RUN_ID} 중간 실패 유도', '${ADMIN_ID}');`)
+      ).toThrow(/테스트 유도 실패/);
+      // 좀비 상태 없음: 역분개 행도, reversed_from_item_id 표시도 전혀 남지 않았다.
+      expect(psql(`select count(*) from payout_items where reversed_from_item_id = '${itemId}';`)).toBe("0");
+    } finally {
+      psql(`drop trigger if exists fail_reversal_audit_log on payout_batch_audit_log;`);
+      psql(`drop function if exists fail_reversal_audit_log_for_test();`);
+    }
+
+    // 트리거 제거 후 재호출하면 정상적으로 새 역분개가 만들어진다(이전 실패가
+    // 유니크 제약을 선점하지 않았음을 함께 증명).
+    const newItemId = psql(`select reverse_payout_item('${itemId}', '${RUN_ID} 재시도 성공', '${ADMIN_ID}');`);
+    expect(
+      psql(`select reversed_from_item_id from payout_items where id = '${newItemId}';`)
+    ).toBe(itemId);
+  });
+
+  it("서로 다른 원본 항목에 대한 동시 역분개 호출은 서로 간섭 없이 모두 성공한다", async () => {
+    const itemIdA = createPaidOriginalItem(12);
+    const itemIdB = createPaidOriginalItem(13);
+
+    function runReverse(id: string, reason: string): Promise<{ ok: boolean; output: string }> {
+      return new Promise((resolve) => {
+        const child = spawn("psql", [
+          DB_URL,
+          "-v",
+          "ON_ERROR_STOP=1",
+          "-q",
+          "-t",
+          "-A",
+          "-c",
+          `select reverse_payout_item('${id}', '${reason}', '${ADMIN_ID}');`,
+        ]);
+        let output = "";
+        child.stdout.on("data", (d) => (output += d.toString()));
+        child.stderr.on("data", (d) => (output += d.toString()));
+        child.on("close", (code) => resolve({ ok: code === 0, output: output.trim() }));
+      });
+    }
+
+    const [a, b] = await Promise.all([
+      runReverse(itemIdA, `${RUN_ID} 비간섭 A`),
+      runReverse(itemIdB, `${RUN_ID} 비간섭 B`),
+    ]);
+    expect(a.ok).toBe(true);
+    expect(b.ok).toBe(true);
+    expect(a.output).not.toBe(b.output);
+    expect(psql(`select count(*) from payout_items where reversed_from_item_id = '${itemIdA}';`)).toBe("1");
+    expect(psql(`select count(*) from payout_items where reversed_from_item_id = '${itemIdB}';`)).toBe("1");
   });
 
   // R10 corrective(요구사항 4): mark_payout_batch_failed()가 검토 단계
