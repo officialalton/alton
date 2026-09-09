@@ -1,5 +1,28 @@
 # ALTON — 현재 상태 (2026-09-08 기준)
 
+> **2026-09-08 — bypass GUC 배치 2 상세 실행 계획 추가(계획/문서 전용, 코드
+> 변경 없음).** `docs/superpowers/plans/2026-09-08-bypass-guc-security-cleanup.md`에
+> 배치 2 4개 항목(`bypass_status_protect`/`bypass_invite_protect`/
+> `bypass_reconciliation_task_lock`/`bypass_session_lock`) 각각의 상세 실행
+> 계획(독립 마이그레이션 경계, 토큰 `action`/`invariant` 값, 정상 전이별
+> 발급/소비 지점, 필수 테스트 목록, `search_path`/스키마 한정 의무 명문화,
+> 수정 대상 전체 목록)을 새 절 "## 배치 2 상세 실행 계획"으로 추가했다.
+> 작성 전 4건 전부의 실제 최신 함수 본문을 다시 읽어 기존 문서의 사실관계
+> 오류 3건을 정정했다: (1) `bypass_status_protect`의 실제 호출자는
+> `transition_account_status()`/`merge_accounts()` 2개뿐 — `recomplete_session()`은
+> 이 GUC를 쓰지 않는다. (2) `bypass_reconciliation_task_lock`의 실제 호출자는
+> 3개 — 기존 두 함수 외에 `recomplete_session()`도 재판정 시 이전 pending
+> 대사 작업을 `superseded`로 전환하며 이 GUC를 쓴다(기존 문서 누락).
+> (3) `bypass_invite_protect`의 실제 호출자는 5개 — `create_account_invite()`/
+> `finalize_account_invite()`는 `status` 컬럼을 건드리지 않아 무관하고,
+> 대신 `resolve_manual_review_invite()`(revoke/link 2개 분기)가 실제
+> 호출자다(기존 문서 누락). 결론: 배치 2 4개 항목은 서로 진짜 순서
+> 의존성이 없다 — 전부 독립적으로 승인·구현·배포 가능(제품 오너 지시
+> 순서는 우선순위 편의). `bypass_session_lock`은 재조사 후에도 별도
+> 테이블(`session_invariant_unlock_tokens`) 설계를 유지하는 것이 맞다고
+> 재확인했다. 이 라운드는 계획/문서만 갱신 — 코드/마이그레이션은 전혀
+> 건드리지 않았다.
+
 > **2026-09-08 — bypass GUC 배치 1 corrective: status_transition_tokens temp table
 > 가로채기 취약점 수정(`20261255000000`).** 제품 오너 리뷰에서, 배치 1이 방금 구축한
 > `consume_status_transition_token()`/`revoke_guardian_consent()`/`set_teacher_rate()`

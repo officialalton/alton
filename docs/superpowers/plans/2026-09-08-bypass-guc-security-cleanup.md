@@ -30,6 +30,35 @@
 > 그대로 유지한 채 원자성·역할 무관성을 명시적으로 검증하는 테스트 시나리오를
 > 추가했다. 이 라운드도 계획/문서 개정만 — 코드/마이그레이션은 전혀 건드리지
 > 않았다.
+>
+> **4차 개정(2026-09-08, 이 라운드 — 배치 2 상세 실행 계획)**: 배치 1
+> (`consent`/`teacher_rate`/`trial_session_auto_complete`, 커밋 `a32f8f7`까지
+> 구현·corrective 완료)이 마무리된 뒤, 제품 오너가 배치 2(`status_protect`/
+> `invite_protect`/`reconciliation_task_lock`/`session_lock`) 4건 각각에 대한
+> **훨씬 더 상세한 실행 계획**(독립 마이그레이션 경계, 정확한 토큰 action 값,
+> 정상 전이별 발급/소비 지점, 필수 테스트 목록, `search_path`/스키마 한정
+> 의무 명문화, 수정 대상 전체 목록)을 요청했다. 이 개정은 그 실행 계획을
+> 새 절 "## 배치 2 상세 실행 계획"으로 추가한 것이며, 작성 전 4건 전부의
+> **실제 최신 함수 본문을 다시 읽어** 아래 세 가지 사실관계 오류를 발견해
+> 바로잡았다(위 3번째 문단 "우선순위 표"의 서술과 다름에 유의):
+> 1. **`bypass_status_protect`의 실제 호출자는 2개뿐이다** — `transition_account_status()`,
+>    `merge_accounts()`. `recomplete_session()`은 이 GUC를 전혀 참조하지
+>    않는다(전수 `grep` 재확인 — 문서 초판이 인용 라인 범위를 `merge_accounts()`와
+>    혼동했었다).
+> 2. **`bypass_reconciliation_task_lock`의 실제 호출자는 3개다** — 기존 두
+>    함수(`resolve_session_reconciliation_task()`, `set_reconciliation_task_student_cancelled_disposition()`)
+>    외에, **`recomplete_session()`도 이 GUC를 쓴다**(재판정 시 이전 pending
+>    대사 작업을 `superseded`로 전환하는 UPDATE, `20261123000000_m5c_student_cancelled_reconciliation.sql:123-126`)
+>    — 문서 초판에서 완전히 누락됐던 세 번째 호출자다.
+> 3. **`bypass_invite_protect`의 실제 호출자는 5개다** — `create_account_invite()`/
+>    `finalize_account_invite()`는 `status` 컬럼을 건드리지 않으므로(각각
+>    INSERT-only, `target_profile_id`/`auth_user_id`만 갱신) 이 GUC와 무관하다.
+>    반대로 문서 초판이 언급하지 않았던 **`resolve_manual_review_invite()`**
+>    (revoke/link 두 분기 모두)가 실제 호출자다. 정확한 5개: `resend_account_invite`,
+>    `revoke_account_invite`, `claim_account_invite`(2개 내부 분기),
+>    `resolve_manual_review_invite`(2개 내부 분기), `mark_expired_invites`.
+>
+> 이 개정에서도 코드/마이그레이션은 전혀 건드리지 않았다 — 문서만 갱신했다.
 
 ## 배경 패턴
 
@@ -277,3 +306,643 @@ non-prod 반영 전에 별도 보안 정리 라운드로 반드시 닫아야 한
 이 선택은 순수 설계 판단이라 위 "결정 필요" 섹션에는 넣지 않았지만, 제품
 오너가 반대 방향(전용 테이블)을 선호하면 스키마 변경 없이(트리거 로직만)
 쉽게 되돌릴 수 있는 결정이라는 점을 밝혀둔다.
+
+---
+
+## 배치 2 상세 실행 계획 (4차 개정, 2026-09-08)
+
+이 절은 배치 2의 4개 항목(`bypass_status_protect` → `bypass_invite_protect` →
+`bypass_reconciliation_task_lock` → `bypass_session_lock`, 제품 오너가 지시한
+착수 순서) 각각에 대해 위 "우선순위 표"의 고수준 분석을 대체하지 않고
+**그 위에 얹어 확장**한다 — 3번/4번/6번 절의 1~4번 항목(보호 테이블·불변식,
+SET 호출 경로, 도달 가능성, 깨질 정상 흐름)은 여전히 유효하며 아래에서
+반복하지 않는다. 다만 위 개정 이력의 3가지 사실관계 정정(recomplete_session이
+bypass_status_protect를 쓰지 않는다는 것, recomplete_session이
+bypass_reconciliation_task_lock의 세 번째 호출자라는 것, bypass_invite_protect의
+실제 호출자 5개 목록)은 이 절 전체에 반영되어 있다 — 위 3/4/6번 절의 해당
+서술과 다르면 **이 절이 최신·정확**이다.
+
+**공통 원칙(4개 항목 전부에 적용, 제품 오너 지시 — "배치 1의 공용 토큰을
+재사용하는 모든 함수는 ... 의무로 적용")**: 배치 1 corrective
+(`20261255000000_r_corrective_status_transition_tokens_search_path.sql`)가
+`consume_status_transition_token()`/`revoke_guardian_consent()`/
+`set_teacher_rate()` 세 함수에 적용한 두 규칙 —
+(a) `status_transition_tokens` 테이블에 대한 모든 참조를
+`public.status_transition_tokens`로 완전히 스키마 한정할 것,
+(b) 해당 함수의 `search_path`를 `public, pg_temp`로 명시 고정할 것 —
+은 아래 4개 항목이 새로 작성/재작성하는 **모든** 함수(SECURITY DEFINER
+함수든 트리거 함수든)에 **처음부터**, 나중에 손볼 사항이 아니라 최초
+구현 시점의 필수 요건으로 적용한다. 이 규칙을 빠뜨리면 배치 1에서 발견된
+것과 동일한 temp table 가로채기 취약점이 그대로 재현된다 — 아래 각
+항목의 "6. 수정 대상" 표에 이 요건을 별도로 다시 나열한다.
+
+### 배치 2-1. `bypass_status_protect`
+
+**1. 독립 migration 경계**
+
+신규 파일 1개: `202612XX000000_r2_corrective_status_protect_token.sql`
+(배치 1의 `20261252000000`/`20261253000000`과 동일한 명명 규칙 — `r2`는
+이 GUC를 최초로 도입한 R2 Task 2/5/7과의 연관을 표시).
+
+이 파일은 다른 배치 2 항목(invite_protect/reconciliation_task_lock)의
+파일을 전혀 건드리지 않는다 — 셋 다 `status_transition_tokens`/
+`consume_status_transition_token()`(배치 1에서 이미 구축·corrective 완료,
+불변)을 **읽기 전용으로 재사용**할 뿐, 그 인프라 자체를 다시 `create or
+replace`하지 않는다. 순서 의존성 없음 — status_protect, invite_protect,
+reconciliation_task_lock 3개는 서로에 대해 완전히 독립적으로
+승인·구현·배포할 수 있다(어느 순서로 하든, 심지어 동시에 진행해도 충돌
+없음). `bypass_session_lock`(배치 2-4)은 별도 테이블(`session_invariant_unlock_tokens`,
+아래 배치 2-4 참고)을 쓰므로 이 셋과도 완전히 독립적이다 — **배치 2
+4개 항목 사이에 진짜 순서 의존성은 없다**(상세 근거는 문서 맨 끝
+"배치 2 착수 순서/독립성" 절 참고).
+
+**2. 토큰 action 값**
+
+`'status_transition'` 단일 값(기존 3번 절에서 이미 제안했던 값을 그대로
+확정). 이 항목의 두 호출자(`transition_account_status()`, `merge_accounts()`)는
+전이 종류가 각각 하나뿐이고(허용된 역할별 상태 전이, 병합 시 `closed`
+고정) 서로 다른 대상 테이블(`students`/`teachers`/`parents`)이라 `table_name`
+컬럼만으로 충분히 구분되므로, `action`을 더 세분화할 필요가 없다.
+
+**3. 정상 상태 전이 — 실제 함수 본문 기준(재확인 완료)**
+
+- **`transition_account_status()`** (최신 `20260908000000_r2_teacher_reactivation_gate_fix.sql:21-95`) —
+  `is_admin()` 게이트, 유효 전이 목록(`pending→active`, `pending→inactive`,
+  `active→suspended`, `suspended→active`, `active→closure_pending`,
+  `suspended→closure_pending`, `closure_pending→closed`, `active→inactive`,
+  `suspended→inactive`, `inactive→active`) 및 미성년 동의/선생님 활성화
+  체크리스트 검사를 통과한 뒤, `:82` `perform set_config('app.bypass_status_protect', 'true', true)`
+  직전에 토큰을 심고, `:83-89`의 역할별 단일 UPDATE(`students`/`teachers`/`parents`
+  중 정확히 하나) 직후 `account_status_events`에 감사 이력을 남긴다.
+  **주의**: `recomplete_session()`은 이 GUC를 전혀 쓰지 않는다(위 개정 이력
+  정정 1번) — 3번 절의 "recomplete_session()" 인용은 잘못된 라인 범위
+  귀속이었다.
+- **`merge_accounts()`** (최신 `20260928000000_r6_sessions_cutover.sql:148-331`,
+  로직은 `20260911000000_r3_contracts_cutover.sql`과 동일 — sessions_v3→sessions
+  참조만 갱신) — `is_admin() or current_user_has_capability('manage_account_merges')`
+  게이트, 수십 개 FK 재배정 UPDATE를 마친 뒤, `:323` `set_config` 직전에
+  토큰을 심고 병합 대상(`v_merged_id`)의 역할별 단일 테이블을 `'closed'`로
+  UPDATE한다.
+
+두 함수 모두 "토큰 INSERT → 대상 테이블 UPDATE" 순서를 지키고, 토큰
+INSERT와 그 UPDATE 사이에 실패 가능한 로직이 없으므로(단일 문장 UPDATE
+직전 삽입) 원자성이 자연히 보장된다.
+
+**4. 필수 테스트 목록**
+
+- 정상 경로: `transition_account_status()`의 10개 유효 전이 각각(관리자
+  호출) 통과 — 특히 `pending→inactive`/`inactive→active`(2026-09-08
+  게이트 수정으로 새로 추가된 전이)와 미성년 동의/선생님 활성화 체크리스트
+  게이트가 여전히 토큰 발급 이전에 걸리는지 함께 확인. `merge_accounts()`의
+  `is_admin()` 경로와 `current_user_has_capability('manage_account_merges')`
+  경로 각각 정상 통과.
+- 직접 UPDATE 거부: `students`/`teachers`/`parents` 각 테이블의 `status`
+  컬럼을 함수 밖에서 직접 UPDATE 시도 — 토큰 없이는 전부 거부.
+- 레거시 GUC 무효화: `app.bypass_status_protect`를 service_role/관리자
+  세션에서 직접 `set_config`해도 트리거가 더 이상 이 GUC를 참조하지 않으므로
+  아무 효과 없음(직접 UPDATE는 여전히 거부) 확인.
+- **임시 테이블 우회 시도 거부**: 호출자가 `create temp table
+  status_transition_tokens (table_name text, row_id uuid, action text,
+  xact_id bigint, created_at timestamptz)`로 동명 temp table을 만들고
+  `('students', <대상 id>, 'status_transition', txid_current(), now())`
+  위조 행을 심은 뒤 `students.status`를 직접 UPDATE — `protect_account_status()`가
+  호출하는 `consume_status_transition_token()`이 `public.status_transition_tokens`로
+  완전히 스키마 한정돼 있으므로 temp table은 무시되고 거부되는지 확인
+  (배치 1 corrective, `20261255000000`의 회귀 테스트와 동일한 공격 재현
+  패턴을 이 트리거에도 적용).
+- 동시성: 서로 다른 두 트랜잭션이 각각 다른 프로필의 상태를 동시에
+  전이시킬 때 토큰이 `xact_id`(`txid_current()`)로 트랜잭션 범위에 정확히
+  묶여 서로 간섭하지 않는지. 같은 트랜잭션 내에서 `merge_accounts()`가
+  두 프로필(생존자/병합 대상)의 상태를 순차로 바꾸는 경우는 없지만(병합
+  대상만 `closed`로 바뀜), 만약 같은 트랜잭션에서 `transition_account_status()`를
+  두 번 호출하는 시나리오(예: 관리자가 한 트랜잭션에서 학생 A active화 후
+  학생 B active화)가 있다면 두 토큰이 서로 다른 `row_id`로 정확히
+  분리되는지 확인.
+- 실패 시 롤백: `transition_account_status()`가 토큰 INSERT 이후, UPDATE
+  이후, `account_status_events` INSERT에서 강제로 예외를 던지도록
+  했을 때 트랜잭션 전체 롤백 — 토큰도 UPDATE도 감사 이력도 전부 남지
+  않는지(좀비 토큰 없음) 확인. `merge_accounts()`도 동일하게 병합 대상
+  상태 UPDATE 이후 `account_merges` INSERT 단계에서 강제 실패시키는
+  케이스로 확인.
+
+**5. `public.status_transition_tokens` 완전 스키마 한정 + `search_path = public,
+pg_temp` 고정 의무**
+
+`protect_account_status()`(트리거), `transition_account_status()`,
+`merge_accounts()` 세 함수 모두 다음을 최초 구현 시점부터 지킨다:
+`consume_status_transition_token()` 호출부(트리거 내부)는 이미 배치 1
+corrective로 스키마 한정이 끝난 그 함수를 호출만 하므로 추가 조치가
+없지만, `transition_account_status()`/`merge_accounts()`가 직접 실행하는
+`insert into status_transition_tokens (...)` 문은 **`insert into
+public.status_transition_tokens (...)`로 완전히 스키마 한정**해야 하고,
+두 함수의 `language plpgsql security definer set search_path = ...`
+선언도 기존 `set search_path = public`에서 **`set search_path = public,
+pg_temp`로 변경**해야 한다(현재 두 함수 모두 `set search_path = public`
+뿐이므로 이 마이그레이션에서 함께 고쳐야 할 기존 결함이기도 하다).
+`protect_account_status()` 트리거 함수 자체는 테이블을 직접 참조하지
+않고 `consume_status_transition_token()` 호출만 하므로 `search_path`
+고정이 필수는 아니지만, 방어 심층화 차원에서 트리거 함수에도
+`language plpgsql set search_path = public, pg_temp`를 명시하는 편이
+일관성 있다(기존에는 `search_path` 설정이 아예 없었다 — plain
+`language plpgsql`).
+
+**6. 수정 대상 함수/트리거/RLS/grant 전체 목록**
+
+- `public.protect_account_status()` — 트리거 함수, GUC 분기 제거 →
+  `consume_status_transition_token('...', old.id, 'status_transition')`
+  확인으로 교체. `search_path = public, pg_temp` 추가(권장).
+- `public.transition_account_status(uuid, text, text)` — 최신 정의
+  (`20260908000000`) 기준 재작성, GUC set_config 제거 → 토큰 INSERT로
+  교체, `public.status_transition_tokens` 완전 스키마 한정,
+  `search_path = public, pg_temp`로 변경.
+- `public.merge_accounts(uuid, uuid, text)` — 최신 정의(`20260928000000`
+  버전, 로직은 `20260911000000`과 동일) 기준 재작성, 동일 교체.
+- 트리거 정의 자체(`students_protect_status`/`teachers_protect_status`/
+  `parents_protect_status`, `20260831011000_r2_account_status_apply.sql`)는
+  이름/부착 대상 불변 — 함수 본문만 교체되므로 `create trigger`를 다시
+  실행할 필요 없음(`create or replace function`으로 충분).
+- RLS: 변경 없음(이 세 트리거/함수가 관여하는 테이블의 RLS 정책은 이미
+  상태 컬럼 직접 쓰기를 허용하지 않음 — GUC/토큰은 트리거 레벨 방어).
+- GRANT/REVOKE: 변경 없음(`transition_account_status()`/`merge_accounts()`의
+  기존 EXECUTE grant는 그대로 유지 — 함수 내부 로직만 바뀜).
+- 신규 GRANT/REVOKE 없음 — `status_transition_tokens` 테이블 권한은
+  배치 1에서 이미 전부 잠겨 있다(추가 조치 불필요, 재확인만).
+
+---
+
+### 배치 2-2. `bypass_invite_protect`
+
+**1. 독립 migration 경계**
+
+신규 파일 1개: `202612XX000000_r2_corrective_invite_protect_token.sql`.
+배치 2-1(status_protect)과 순서 의존성 없음 — 공유하는 것은
+`status_transition_tokens`/`consume_status_transition_token()` 인프라뿐이고,
+그 인프라는 배치 1에서 이미 완성·불변이므로 이 파일 하나만으로 완결된다.
+배치 2-3(reconciliation_task_lock)과도 서로 다른 테이블(`account_invites`
+vs `session_judgment_reconciliation_tasks`)·서로 다른 트리거·서로 다른
+함수 집합이라 순서 의존성 없음.
+
+**2. 토큰 action 값**
+
+단일 값 `'invite_status_transition'`(기존 4번 절에서 제안했던 값 확정).
+5개 호출자가 전부 `account_invites.status`라는 같은 컬럼의 전이를
+다루고(다른 전이 "종류"로 세분화할 실익이 있는 하위 상태 전환들이지만
+모두 "지정된 함수를 통한 status 변경"이라는 하나의 불변식을 지키면
+충분), `row_id`(초대 id)로 이미 유일하게 식별되므로 `action`을 더
+세분화하지 않는다.
+
+**3. 정상 상태 전이 — 실제 함수 본문 기준(재확인 완료, 개정 이력 정정
+3번 반영 — 5개 호출자, `create_account_invite`/`finalize_account_invite`
+제외)**
+
+- **`resend_account_invite(uuid)`** (최신 `20260909000000_r2_task8_capability_gates.sql:25-` —
+  `manage_invites` capability 게이트 추가 재정의판, 본문 로직은
+  `20260902000000_r2_account_invites.sql:165-230`과 동일) — 기존 pending
+  초대를 `status='superseded'`로 전환하는 단일 UPDATE(`:210-212` 원본
+  라인 기준) 직전에 토큰 발급.
+- **`revoke_account_invite(uuid)`** (최신 `20260909000000_r2_task8_capability_gates.sql:96-121`) —
+  `status='revoked'` UPDATE 직전 토큰 발급.
+- **`claim_account_invite(text)`** (유일 버전 `20260902000000_r2_account_invites.sql:269-333`,
+  재정의 없음 — anon 포함 grant) — 트랜잭션당 최대 1회, 두 분기 중 하나만
+  실행: (a) 기존 auth 사용자 존재 시 `status='manual_review'`(`:311-313`),
+  (b) 정상 수락 시 `status='accepted'`(`:322-324`). 두 분기 모두 UPDATE
+  직전 토큰 발급.
+- **`resolve_manual_review_invite(uuid, text, uuid, uuid)`** (최신
+  `20260909000000_r2_task8_capability_gates.sql:125-` — `manage_invites`
+  capability 게이트 추가 재정의판, 로직은 `20260902000000:385-439`와
+  동일) — **개정 이력 정정 3번**: 이 함수가 이번 재조사에서 새로 확인된
+  5번째 호출자다. `p_action='revoke'` 분기(`status='revoked'`)와
+  `p_action='link'` 분기(`status='accepted'` + `target_profile_id`/
+  `auth_user_id` 동시 채움) 각각 UPDATE 직전 토큰 발급.
+- **`mark_expired_invites()`** (유일 버전 `20260902000000_r2_account_invites.sql:447-474`) —
+  배치 UPDATE(`where status='pending' and expires_at <= now()`로 매칭되는
+  **여러 행**을 한 문장으로 `status='expired'`로 전환) — 배치 UPDATE라
+  행마다 토큰을 개별 발급할 수 없으므로, 이 함수만 예외적으로 **"이
+  UPDATE 문 자체가 이 배치 함수에서 나왔는가"를 행 단위 토큰이 아니라
+  다른 방식으로 증명**해야 한다(아래 5-보충 참고).
+
+**3-보충. `mark_expired_invites()`의 구조적 차이 — 배치 UPDATE 토큰 설계**
+
+다른 4개 호출자는 전부 "함수 호출 1회당 정확히 1개 행의 단일 UPDATE"이므로
+토큰 1개=행 1개로 자연스럽게 맞아떨어지지만, `mark_expired_invites()`는
+조건에 매칭되는 임의 개수의 행을 한 UPDATE 문으로 동시에 전환한다.
+두 가지 방식을 검토했다:
+- **(채택) `returning id`로 대상 행 id를 먼저 커서로 뽑아 각 행에 대해
+  개별 토큰을 INSERT한 뒤 배치 UPDATE 실행** — `with candidates as (select
+  id from account_invites where status='pending' and expires_at <= now()
+  for update), tokens as (insert into public.status_transition_tokens
+  (table_name, row_id, action) select 'account_invites', id,
+  'invite_status_transition' from candidates returning 1) update
+  account_invites set status='expired', updated_at=now() where id in
+  (select id from candidates)`처럼 하나의 CTE 체인으로 "후보 확정 →
+  토큰 일괄 발급 → 배치 UPDATE"를 원자적으로 묶는다. 트리거는 여전히
+  행 단위로 `consume_status_transition_token()`을 호출하므로(Postgres
+  `BEFORE UPDATE FOR EACH ROW` 트리거는 배치 UPDATE에도 행마다 실행된다)
+  트리거 로직을 바꿀 필요가 없다 — 배치 UPDATE인지 단일 UPDATE인지는
+  트리거 입장에서 구분할 필요가 없는 세부사항이 된다.
+- **(기각) 배치 전용 별도 GUC 없는 "관리자 배치 예외" 트리거 분기** —
+  "이 UPDATE의 결과 행 개수가 N개 이상이면 mark_expired_invites일
+  가능성이 높다"는 식의 추론은 증명 불가능한 휴리스틱이라 기각.
+
+**4. 필수 테스트 목록**
+
+- 정상 경로: 5개 함수 각각(`resend`/`revoke`/`claim`의 두 분기/
+  `resolve_manual_review_invite`의 두 분기/`mark_expired_invites`) 통과
+  확인 — `claim_account_invite`는 anon 세션에서 호출하는 시나리오 포함.
+- 직접 UPDATE 거부: `account_invites.status`를 함수 밖에서 직접 UPDATE
+  시도 시 거부.
+- 레거시 GUC 무효화: `app.bypass_invite_protect`를 직접 SET해도 효과
+  없음(트리거가 더 이상 참조하지 않음) 확인.
+- **임시 테이블 우회 시도 거부**: 동명 temp `status_transition_tokens`에
+  위조 토큰(`'account_invites'`, 대상 초대 id, `'invite_status_transition'`)을
+  심고 직접 UPDATE 시도 — 거부 확인(배치 1 corrective와 동일 공격
+  클래스, `public.status_transition_tokens` 완전 스키마 한정으로 방어).
+- 동시성: 서로 다른 두 초대에 대해 `resend_account_invite()`와
+  `revoke_account_invite()`를 동시에(별도 트랜잭션) 호출해도 토큰이
+  `row_id`+`xact_id`로 정확히 분리되는지. `claim_account_invite()`가
+  같은 토큰을 두 번(재시도) 호출할 때 두 번째 호출은 이미 `status`가
+  바뀌어 있어 `v_row.status <> 'pending'` 분기(또는 `'accepted'` 멱등
+  분기)로 빠지고 새 토큰을 발급하지 않는지도 함께 확인 — 재사용 불가
+  회귀.
+- **배치 UPDATE 특화 테스트**: `mark_expired_invites()`가 3개 이상의
+  만료 초대를 한 번에 처리할 때, 각 행이 정확히 자기 몫의 토큰으로만
+  소비되고(다른 행의 토큰을 잘못 소비하거나 토큰이 남는 경우 없음)
+  최종적으로 `status_transition_tokens`에 좀비 행이 남지 않는지 확인 —
+  일반 단일-호출자 테스트로는 커버되지 않는 이 함수만의 케이스.
+- 실패 시 롤백: `resolve_manual_review_invite()`의 `link` 분기가
+  `household_members` INSERT는 성공했지만 `account_invite_events` INSERT
+  단계에서 강제 실패하도록 했을 때, 토큰·`account_invites` UPDATE·
+  `household_members` INSERT 전부 롤백되는지 확인.
+
+**5. `public.status_transition_tokens` 완전 스키마 한정 + `search_path =
+public, pg_temp` 고정 의무**
+
+`protect_account_invite_status()`(트리거), `resend_account_invite()`,
+`revoke_account_invite()`, `claim_account_invite()`,
+`resolve_manual_review_invite()`, `mark_expired_invites()` 6개 함수
+전부 처음부터 `insert into public.status_transition_tokens (...)`로
+완전히 스키마 한정하고, 각 SECURITY DEFINER 함수의 `set search_path =
+public`을 `set search_path = public, pg_temp`로 변경한다(현재 전부
+`set search_path = public`뿐).
+
+**6. 수정 대상 함수/트리거/RLS/grant 전체 목록**
+
+- `public.protect_account_invite_status()` — 트리거, GUC 분기 →
+  `consume_status_transition_token('account_invites', old.id,
+  'invite_status_transition')` 확인으로 교체.
+- `public.resend_account_invite(uuid)`, `public.revoke_account_invite(uuid)`,
+  `public.resolve_manual_review_invite(uuid, text, uuid, uuid)` — 전부
+  **최신(capability 게이트) 정의**(`20260909000000_r2_task8_capability_gates.sql`)
+  기준으로 재작성 — capability 게이트 로직은 그대로 유지, GUC만 토큰으로
+  교체.
+- `public.claim_account_invite(text)` — 유일 버전(`20260902000000`) 기준
+  재작성, anon/authenticated EXECUTE grant 불변.
+- `public.mark_expired_invites()` — 유일 버전 기준 재작성, 위 3-보충의
+  CTE 배치 토큰 패턴 적용.
+- `account_invites_protect_status` 트리거 정의(`20260902000000`) 자체는
+  불변(함수 본문만 교체).
+- RLS: 변경 없음(이 테이블은 원래 INSERT/UPDATE/DELETE에 대한 RLS 정책이
+  없음 — SECURITY DEFINER 함수만 쓰기 가능).
+- GRANT/REVOKE: 변경 없음(6개 함수의 기존 grant 그대로).
+
+---
+
+### 배치 2-3. `bypass_reconciliation_task_lock`
+
+**1. 독립 migration 경계**
+
+신규 파일 1개: `202612XX000000_r_corrective_reconciliation_task_lock_token.sql`
+(`m5` 접두 대신 `r`만 쓰는 이유: 이 corrective는 M5b/M5c 여러 파일에
+흩어진 정의를 한 곳에 모아 재작성하는 배치 1/2 corrective 계열이라 배치
+1의 `20261255000000_r_corrective_...` 명명과 통일). 배치 2-1/2-2와
+순서 의존성 없음 — 공유 인프라(`status_transition_tokens`)는 읽기 전용
+재사용. **단, 이 항목은 배치 2 안에서 유일하게 "제 항목 안에서" 다루는
+함수가 3개이고 그중 하나(`recomplete_session()`)가 배치 2-4
+(`bypass_session_lock`)의 대상 함수와 이름이 같다는 점에 주의** — 그러나
+같은 함수 안에서 서로 다른 GUC 2개(`bypass_session_lock`은 안 쓰고
+`bypass_reconciliation_task_lock`만 씀, 위 개정 이력 정정 2번 참고)를
+다루는 것이 아니라, `recomplete_session()`이 `bypass_reconciliation_task_lock`만
+쓰고 `bypass_session_lock`은 전혀 쓰지 않으므로 실제로는 **겹치지
+않는다** — 다만 이 파일과 배치 2-4 파일이 **같은 함수
+(`recomplete_session()`)를 `create or replace`**하게 되므로, 두 파일이
+서로 다른 시점에 배포되면 나중에 배포되는 쪽이 먼저 배포된 쪽의 변경을
+덮어쓰지 않도록 **각 파일이 반드시 "그 시점의 최신 함수 전체 본문"을
+기준으로 `create or replace`해야 한다**(부분 패치가 아니라 전체 함수
+재작성) — 이것이 이 두 항목 사이의 유일한 실질적 조율 지점이다(진짜
+"순서 의존성"은 아니지만 "동시 작업 시 조율 필요"에는 해당 — 아래
+"착수 순서/독립성" 절에서 다시 정리).
+
+**2. 토큰 action 값**
+
+3개로 세분화(기존 6번 절의 단일 `'reconciliation_task_transition'`
+제안을 3개로 쪼갬 — 컬럼 레벨 전이가 실제로 3가지로 구분되므로 요구사항
+3번 "distinct legitimate transition-type마다 하나"를 충족하려면 세분화가
+맞다):
+- `'reconciliation_task_resolve'` — `status: pending → resolved`
+  (`resolve_session_reconciliation_task()`의 정상 반영 경로).
+- `'reconciliation_task_needs_review'` — `status: pending → needs_review`
+  (`resolve_session_reconciliation_task()`의 3가지 전제-불일치 재확인
+  분기 전부가 이 값 하나를 공유 — 셋 다 결과적으로 동일한 컬럼 레벨
+  전이이므로 원인별로 나눌 실익이 없다) **및** `status: pending →
+  superseded`(`recomplete_session()`의 재판정 시 이전 pending 작업 무효화) —
+  주의: `superseded`는 `needs_review`와 다른 목표값이지만, 둘 다 "이
+  대사 작업은 더 이상 유효한 반영 대상이 아니다"라는 같은 성격의 방어적
+  차단 전이이고 소비하는 함수·트리거 로직이 동일하므로 값을 공유해도
+  안전 근거(누가 호출했는지 증명)에 영향이 없다 — 다만 명확성을 원하면
+  `'reconciliation_task_supersede'`로 별도 분리도 가능(제품 오너 선호에
+  따라 조정 가능한 세부 설계, 아래 "결정 필요" 참고).
+- `'reconciliation_task_set_disposition'` — `status` 컬럼이 아니라
+  `expected_entitlement_disposition`/`required_entitlement_adjustment_amount`/
+  `admin_disposition_reason` 3개 컬럼을 함께 바꾸는
+  `set_reconciliation_task_student_cancelled_disposition()`의 단일 UPDATE.
+
+**3. 정상 상태 전이 — 실제 함수 본문 기준(재확인 완료, 개정 이력 정정
+2번 반영 — 3개 호출자)**
+
+- **`resolve_session_reconciliation_task(uuid, text)`** (최신
+  `20261124000000_m5c_final_reconciliation_integrity_gaps.sql:12-114`) —
+  `is_admin()` 게이트, 이미 `resolved`/`superseded`/`needs_review`인
+  작업 재반영 차단 검사 후 4가지 분기: (a) 세션 `final_status`/
+  `payable_minutes` 불일치 시 `:49-53` 토큰 발급 + `needs_review` UPDATE,
+  (b) entitlement disposition 불일치 시 `:64-68` 토큰 발급 +
+  `needs_review` UPDATE, (c) 작업 생성 이후 다른 adjust 존재 시 `:82-87`
+  토큰 발급 + `needs_review` UPDATE, (d) 전제 전부 일치 시 `adjust_entitlement()`
+  호출 후 `:99-102` 토큰 발급 + `resolved` UPDATE.
+- **`set_reconciliation_task_student_cancelled_disposition(uuid, text, text)`** (최신,
+  같은 파일 `:122-189`) — `is_admin()` 게이트, `pending` 상태·
+  `student_cancelled` 판정·미자동판정 검사 후 hold 금액을
+  `reservation_id`로 좁혀 조회한 뒤(2026-09-06 수정) `:175-180`
+  토큰 발급 + disposition 필드 UPDATE.
+- **`recomplete_session(uuid, v3_session_final_status, text)`** (최신
+  `20261123000000_m5c_student_cancelled_reconciliation.sql:69-179` —
+  개정 이력 정정 2번, 문서 초판에서 누락됐던 호출자) — `sessions.final_status`
+  UPDATE와 `session_status_events`/`payout_items`/`upsert_session_payout_item()`
+  처리를 마친 뒤, `:123` 토큰 발급 + 이 세션에 걸린 기존 `pending`
+  대사 작업을 `superseded`로 일괄 전환(`where session_id = p_session_id
+  and status = 'pending'` — 보통 0개 또는 1개 행).
+
+**4. 필수 테스트 목록**
+
+- 정상 경로: `resolve_session_reconciliation_task()`의 4개 분기
+  (resolved 1개 + needs_review 3개 원인) 전부, `set_reconciliation_task_student_cancelled_disposition()`
+  정상 경로, `recomplete_session()`의 재판정(이전 pending 작업이 있는
+  케이스와 없는 케이스 둘 다) 경로 — 총 3개 함수, 6개 이상의 개별
+  시나리오.
+- 직접 UPDATE/DELETE 거부: `session_judgment_reconciliation_tasks`
+  직접 UPDATE(모든 컬럼 조합) 및 DELETE(트리거가 GUC 무관하게 항상
+  거부 — 이 케이스는 토큰과 무관하므로 별도 확인) 시도 거부.
+- 레거시 GUC 무효화: `app.bypass_reconciliation_task_lock`을 직접 SET해도
+  효과 없음 확인.
+- **임시 테이블 우회 시도 거부**: 동명 temp `status_transition_tokens`에
+  위조 토큰을 심고 `session_judgment_reconciliation_tasks`를 직접
+  UPDATE(예: `status='resolved'`로 위조) 시도 — 거부 확인.
+- 동시성: 서로 다른 세션의 대사 작업을 `resolve_session_reconciliation_task()`로
+  동시에 반영할 때 토큰 간섭 없음. **이 항목 특유의 동시성 케이스**:
+  `recomplete_session()`이 대사 작업을 `superseded`로 전환하는 것과
+  같은 트랜잭션 안에서 새 대사 작업을 INSERT하는데, 그 사이에 다른
+  세션(다른 관리자)이 같은 작업 id에 대해 `resolve_session_reconciliation_task()`를
+  호출하려 하면 `for update` 잠금(`resolve_session_reconciliation_task()`의
+  `:23` `for update`)에 걸려 대기하다가, `recomplete_session()` 커밋 후
+  조회하면 이미 `superseded`라 반영이 거부되는지 확인(레이스 컨디션
+  방어가 토큰 방식으로 전환한 뒤에도 `for update` 잠금으로 여전히
+  성립하는지).
+- 실패 시 롤백: `resolve_session_reconciliation_task()`가 `adjust_entitlement()`
+  호출 이후, `resolved` UPDATE 이전에 강제 실패하도록 했을 때 —
+  `adjust_entitlement()`가 만든 `entitlement_ledger` 행까지 포함해
+  전체 롤백되는지(대사 작업의 실제 정산 부수효과까지 포함한 원자성
+  확인 — 이 항목만의 특이 케이스, 다른 배치 2 항목은 정산 원장에
+  직접 쓰지 않음).
+
+**5. `public.status_transition_tokens` 완전 스키마 한정 + `search_path =
+public, pg_temp` 고정 의무**
+
+`reconciliation_task_update_guard()`(트리거), `resolve_session_reconciliation_task()`,
+`set_reconciliation_task_student_cancelled_disposition()`,
+`recomplete_session()` 4개 함수 전부 `public.status_transition_tokens`
+완전 스키마 한정 + `search_path = public, pg_temp` 고정을 최초 구현
+시점부터 지킨다(현재 4개 함수 모두 `set search_path = public`뿐).
+
+**6. 수정 대상 함수/트리거/RLS/grant 전체 목록**
+
+- `public.reconciliation_task_update_guard()` — 트리거(`before update`,
+  모든 컬럼), GUC 분기 → 3개 action 값 중 하나를 소비하는 로직으로
+  교체(어떤 컬럼이 바뀌었는지에 따라 어느 action을 확인할지 분기 필요 —
+  `status`가 바뀌면 `'reconciliation_task_resolve'` 또는
+  `'reconciliation_task_needs_review'` 중 `new.status` 값에 맞는 것을,
+  disposition 필드가 바뀌면 `'reconciliation_task_set_disposition'`을
+  확인).
+- `public.reject_reconciliation_task_direct_mutation()` — DELETE 차단
+  트리거, 변경 없음(GUC 무관하게 항상 거부이므로 그대로 유지).
+- `public.resolve_session_reconciliation_task(uuid, text)` — 최신
+  (`20261124000000`) 기준 재작성, 4개 분기 전부 GUC → 토큰 교체.
+- `public.set_reconciliation_task_student_cancelled_disposition(uuid,
+  text, text)` — 최신(`20261124000000`) 기준 재작성.
+- `public.recomplete_session(uuid, v3_session_final_status, text)` —
+  최신(`20261123000000`) 기준 재작성 — **주의**: 이 함수는 배치 2-4에서도
+  수정 대상이므로(그쪽은 이 함수가 `bypass_session_lock`을 쓰지 않는다는
+  것만 확인하고 손대지 않을 예정이지만, 혹시 배치 2-4 구현 시점에 이
+  함수 본문이 이미 배치 2-3에서 바뀌어 있다면 배치 2-4는 그 바뀐 버전
+  위에 이어서 작업해야 한다) — 두 항목의 구현 순서를 실제로 정할 때
+  이 함수에 대해서만은 나중에 구현하는 쪽이 먼저 구현된 쪽의 최신
+  본문을 기준으로 시작해야 한다.
+- RLS/GRANT: 변경 없음.
+
+---
+
+### 배치 2-4. `bypass_session_lock`
+
+**1. 독립 migration 경계**
+
+신규 파일 1개(신규 테이블 포함): `202612XX000000_r8_corrective_session_invariant_tokens.sql`
+(`r8`는 `material_version_id` 불변식을 도입한 R8과의 연관 표시,
+`prevent_direct_final_status_update()`는 R1 소유지만 이 파일에서 함께
+재작성). 이 항목은 `status_transition_tokens` 공유 인프라를 전혀 쓰지
+않으므로(아래 재확인 결과 별도 테이블 유지, 5번 참고) 배치 2-1/2-2/2-3
+어느 것과도 스키마 의존성이 없다. 유일한 조율 지점은 배치 2-3과 공유하는
+`recomplete_session()` 함수 본문(위 배치 2-3 "1. 독립 migration 경계"
+말미 참고) — 이 파일은 `recomplete_session()`을 **수정하지 않는다**
+(아래 3번에서 확인하듯 `recomplete_session()`은 `bypass_session_lock`을
+전혀 쓰지 않으므로 이 항목의 대상이 아니다). 따라서 실질적으로는 배치
+2-3과도 코드 레벨 접점이 없다 — **배치 2 4개 항목은 전부 독립적으로
+승인·구현·배포 가능**하다는 결론이 최종 확정된다.
+
+**2. 토큰 action 값** — 해당 없음(별도 테이블 `session_invariant_unlock_tokens`를
+쓰므로 `status_transition_tokens.action` 개념 자체가 적용되지 않는다).
+대신 이 테이블의 `invariant` 컬럼 값 2개를 확정한다: `'final_status'`,
+`'material_version_id'`(기존 1번 절에서 이미 제안한 값 그대로 확정 —
+변경 없음).
+
+**3. 정상 상태 전이 — 실제 함수 본문 기준(재확인 완료 — 중요 정정,
+recomplete_session은 대상 아님)**
+
+- **`reopen_session(uuid, text)`** (최신 `20260928000000_r6_sessions_cutover.sql:97-119`,
+  로직은 `20260830040000_r1_reservation_session.sql`의 원본과 동일 —
+  `sessions_v3`→`sessions` 참조만 갱신) — `is_admin()` 게이트, 대상
+  세션이 `scheduled`/`live`가 아님을 확인한 뒤, `session_status_events`
+  기록 후 `:117` `set_config` 직전 **`final_status` 불변식용 토큰만**
+  발급하고 `final_status`를 `'live'`로 되돌리는 단일 UPDATE 실행. 이
+  함수는 `material_version_id`를 전혀 건드리지 않으므로 `'material_version_id'`
+  토큰은 발급하지 않는다.
+- **`recomplete_session(uuid, v3_session_final_status, text)`** —
+  **개정 이력 정정 및 이번 재조사로 재확인**: 이 함수는 `final_status`를
+  UPDATE하지만(`v_prev`가 항상 `'live'`로 이미 검증된 상태이므로 `prevent_direct_final_status_update()`의
+  `old.final_status not in ('scheduled','live')` 조건 자체가 거짓이 되어
+  트리거를 자연스럽게 통과함), 이 함수 어디에도 `set_config('app.bypass_session_lock', ...)`
+  호출이 없다(전수 `grep` 재확인, 모든 버전 — `20260830040000`,
+  `20260928000000`, `20261030000000`, `20261104000000`, `20261105000000`,
+  `20261122000000`, `20261123000000` 전부 미발견). **즉
+  `recomplete_session()`은 이 항목(`bypass_session_lock`)의 정상 호출자가
+  아니다** — 위 3번/6번 절의 "reopen_session()과 recomplete_session()
+  둘 다 이 GUC를 켠다"는 서술은 정정한다. `bypass_session_lock`의
+  유일한 정상 호출자는 `reopen_session()` 하나뿐이다.
+  마찬가지로 `material_version_id`도 `reopen_session()`/`recomplete_session()`
+  어느 쪽에서도 UPDATE하지 않는다(두 함수 모두 이 컬럼을 참조조차
+  하지 않음) — `prevent_material_version_reassignment()`을 정상적으로
+  통과해야 하는 SECURITY DEFINER 함수 자체가 현재 코드베이스에 **하나도
+  없다**(이 불변식은 현재 순수 방어용이며, 정상 재배정 경로는 아직
+  구현되지 않았다 — R9 범위로 명시된 실제 배정 메커니즘이 아직 이
+  트리거를 우회할 필요가 있는 형태로 구현되지 않은 것으로 보인다).
+
+**3-보충. 토큰 인프라를 두 불변식에 어떻게 적용하는가**
+
+`reopen_session()`이 `final_status` 토큰만 발급하므로, 신규 설계에서도
+`material_version_id` 토큰을 발급하는 정상 호출자는 현재 없다 — 이는
+설계 결함이 아니라 **현재 상태의 정확한 반영**이다(`prevent_material_version_reassignment()`는
+계속 모든 재배정을 무조건 차단하는 순수 방어 트리거로 남는다, GUC/토큰
+분기 자체를 아예 제거해도 되지만 향후 R9에서 정상 재배정 함수가 추가될
+것을 대비해 토큰 확인 분기를 미리 갖춰 두는 쪽을 권장 — 그래야 R9가
+새 함수를 추가할 때 트리거를 다시 건드리지 않고 그 함수 안에서 토큰만
+발급하면 된다).
+
+**4. 필수 테스트 목록**
+
+- 정상 경로: `reopen_session()` 정상 호출(관리자, completed→live) 통과.
+- 직접 UPDATE 거부: `sessions.final_status`/`sessions.material_version_id`
+  각각 함수를 거치지 않은 직접 UPDATE 시도 거부.
+- 레거시 GUC 무효화: `app.bypass_session_lock`을 직접 SET해도 효과
+  없음 확인.
+- **임시 테이블 우회 시도 거부**: 동명 temp `session_invariant_unlock_tokens`에
+  위조 토큰(`session_id`+`invariant='final_status'`+`xact_id`)을 심고
+  `sessions.final_status`를 직접 UPDATE 시도 — 트리거가 이 신규 테이블도
+  `public.session_invariant_unlock_tokens`로 완전히 스키마 한정해
+  참조해야 거부되는지 확인(배치 1과 동일한 공격 클래스가 신규 테이블에도
+  그대로 적용 가능하므로, 신규 테이블도 처음부터 5번의 스키마 한정
+  의무를 지켜야 한다는 것을 보여주는 핵심 케이스).
+- **재진입 회귀(4번 절에서 지적한 원 부작용의 회귀 테스트)**:
+  `reopen_session()` 트랜잭션 도중 같은 트랜잭션에서 `material_version_id`를
+  바꾸는 별도 UPDATE를 끼워 넣었을 때 — `reopen_session()`이
+  `'final_status'` 토큰만 심었으므로 `'material_version_id'` 토큰은
+  없어 이 UPDATE가 거부되는지 확인(GUC 공유 시절의 부작용이 새 설계에서
+  구조적으로 막히는지 검증하는 핵심 케이스, 기존 5-1 절 ③과 동일 취지).
+- 동시성: 서로 다른 세션에 대한 `reopen_session()` 동시 호출 시 토큰이
+  `session_id`+`invariant`+`xact_id`로 정확히 분리되는지.
+- 실패 시 롤백: `reopen_session()`이 토큰 발급 후 UPDATE 이전에 강제
+  실패하도록 했을 때 토큰이 트랜잭션과 함께 롤백되는지(좀비 토큰 없음).
+- `r8-cutover.integration.test.ts`의 fixture 정리 코드(현재
+  `set_config('app.bypass_session_lock', ...)`를 fixture 초기화에
+  직접 사용 — 기존 3번 절에서 지적된 부분)를 새 토큰 INSERT 방식으로
+  갱신한 뒤 회귀.
+
+**5. `public.session_invariant_unlock_tokens` 완전 스키마 한정 +
+`search_path = public, pg_temp` 고정 의무 — 별도 테이블에도 동일 규칙
+적용**
+
+이 항목은 `status_transition_tokens`가 아니라 신규 테이블
+`session_invariant_unlock_tokens`를 쓰지만, 제품 오너가 명시한 "배치
+1의 공용 토큰을 재사용하는 모든 함수는 의무로 적용" 원칙의 **정신**(1회용
+DB 토큰으로 GUC를 대체하는 모든 곳은 temp table 가로채기에 처음부터
+안전해야 한다)은 테이블이 달라도 동일하게 적용된다 — `reopen_session()`,
+`prevent_direct_final_status_update()`, `prevent_material_version_reassignment()`
+3개 함수 전부 신규 테이블을 **처음부터 `public.session_invariant_unlock_tokens`로
+완전히 스키마 한정**하고, `reopen_session()`(SECURITY DEFINER)의
+`search_path`를 `public, pg_temp`로 고정한다(트리거 함수 2개는 방어
+심층화 차원에서 동일하게 설정 권장, 배치 2-1과 동일 논리).
+
+**6. 수정 대상 함수/트리거/RLS/grant 전체 목록**
+
+- 신규 테이블 `session_invariant_unlock_tokens(session_id uuid,
+  invariant text check (invariant in ('final_status', 'material_version_id')),
+  xact_id bigint not null default txid_current(), created_at timestamptz
+  not null default now())` — `status_transition_tokens`(`20261251000000`)와
+  동일한 잠금 패턴(RLS 활성화 + 정책 0개, `insert/update/delete/truncate/select`를
+  `public, anon, authenticated, service_role`에서 전부 revoke).
+- 신규 헬퍼 `public.consume_session_invariant_unlock_token(p_session_id
+  uuid, p_invariant text) returns boolean` — `consume_status_transition_token()`과
+  동일한 "확인+1회용 delete" 패턴, 어떤 role에도 EXECUTE 없음.
+- `public.prevent_direct_final_status_update()` — GUC 분기 →
+  `consume_session_invariant_unlock_token(old.id, 'final_status')` 확인으로
+  교체.
+- `public.prevent_material_version_reassignment()` — GUC 분기 →
+  `consume_session_invariant_unlock_token(old.id, 'material_version_id')`
+  확인으로 교체(현재 정상 호출자가 없어 사실상 이 분기가 항상 거부로
+  귀결되지만, 트리거 구조 자체는 3번 절 R9 대비 이유로 갖춰 둔다).
+- `public.reopen_session(uuid, text)` — 최신(`20260928000000`) 기준
+  재작성, `'final_status'` 토큰 INSERT로 교체.
+- `public.recomplete_session(...)` — **수정하지 않음**(3번 절 정정 —
+  이 GUC의 호출자가 아님). 배치 2-3에서 이미 재작성된 최신 본문을
+  그대로 둔다.
+- `r8-cutover.integration.test.ts` — fixture 정리 코드를 신규 테이블
+  INSERT 방식으로 갱신.
+- RLS/GRANT: 신규 테이블에 대한 RLS 활성화 + REVOKE(위 6번 첫 항목)
+  외에는 변경 없음.
+
+---
+
+## 배치 2 착수 순서/독립성 (4차 개정)
+
+**결론: 배치 2의 4개 항목은 전부 서로 독립적으로 승인·구현·배포할 수
+있다 — 제품 오너가 지시한 순서(status_protect → invite_protect →
+reconciliation_task_lock → session_lock)는 우선순위 편의를 위한
+권장 순서일 뿐, 그 순서를 지키지 않아도(또는 병렬로 진행해도) 깨지는
+것은 없다.**
+
+- **status_protect ↔ invite_protect ↔ reconciliation_task_lock**: 세 항목
+  모두 배치 1이 구축한 `status_transition_tokens`/
+  `consume_status_transition_token()`을 **읽기 전용으로만** 재사용하고,
+  그 인프라 자체를 다시 `create or replace`하지 않는다. 서로 다른
+  테이블(`students`/`teachers`/`parents` vs `account_invites` vs
+  `session_judgment_reconciliation_tasks`)·다른 트리거·다른 함수
+  집합이라 파일 레벨 충돌도 없다.
+- **reconciliation_task_lock ↔ session_lock**: 유일하게 같은 함수
+  (`recomplete_session()`)를 언급하지만, 실제로는 `recomplete_session()`이
+  `bypass_reconciliation_task_lock`만 쓰고 `bypass_session_lock`은 전혀
+  쓰지 않는다는 것이 이번 재조사로 확정됐으므로(위 배치 2-3/2-4의 3번
+  절), **session_lock 항목은 이 함수를 아예 수정하지 않는다** — 코드
+  레벨 접점이 사라진다. 유일하게 남는 것은 "만약 두 항목을 동시에
+  진행한다면, reconciliation_task_lock 쪽 구현자가 `recomplete_session()`을
+  `create or replace`로 재작성하는 동안 session_lock 쪽 구현자는 이
+  함수를 건드리지 않는다는 것을 서로 알고 있어야 한다"는 팀 내 커뮤니케이션
+  수준의 조율일 뿐, 마이그레이션 파일 사이의 스키마/순서 의존성은 아니다.
+- **`session_invariant_unlock_tokens` 별도 테이블 설계 — 재확인 후 유지**:
+  이전 리비전(위 "우선순위 표" 1번 절)이 `bypass_session_lock`을
+  `status_transition_tokens` 공유 테이블이 아니라 전용 테이블로 분리한
+  이유는 "하나의 GUC가 서로 다른 두 불변식(`final_status`/
+  `material_version_id`)을 보호하고 있어, 한 불변식을 위해 토큰을 풀면
+  다른 불변식도 함께 풀리는 구조적 부작용이 있다"는 것이었다. 이번
+  재조사에서 이 분석은 **그대로 유지**하는 것이 맞다고 재확인했다 —
+  이유: (1) `status_transition_tokens`의 `action` 컬럼으로 이 문제를
+  풀려면 `action` 값을 `'session_final_status_transition'`/
+  `'session_material_version_transition'`처럼 세션 전용으로 또 나눠야
+  하는데, 그러면 `table_name='sessions'`+`row_id`+`action` 조합이 사실상
+  `session_invariant_unlock_tokens`의 `session_id`+`invariant` 조합을
+  다른 테이블 안에서 재현하는 것과 다르지 않다 — 공유 테이블을 쓴다고
+  설계가 더 단순해지지 않는다. (2) 두 불변식이 완전히 다른 성격의
+  검사(시간적 순서 vs 참조 불변)이고, `bypass_status_protect`/
+  `bypass_invite_protect`/`bypass_reconciliation_task_lock`처럼 "여러
+  함수가 같은 종류의 단일 컬럼 전이를 반복"하는 패턴이 아니라 "한 함수가
+  두 개의 이종 불변식 중 하나만 풀어야 하는" 패턴이라 공유 테이블의
+  이점(관리 포인트 감소)이 적다. (3) 현재 `material_version_id` 쪽
+  정상 호출자가 아예 없어(3번 절 참고) 이 테이블이 당장은 `final_status`
+  용도로만 쓰이지만, R9에서 정상 재배정 함수가 추가될 때 별도 테이블이면
+  그 함수 하나만 이 테이블에 INSERT 권한(정확히는 SECURITY DEFINER
+  함수 소유자 권한)을 새로 얻으면 되고 공유 테이블의 `action` 값 목록을
+  다시 검토할 필요가 없다 — 따라서 별도 테이블 설계를 **다시 확정**한다.
+
+**결정 필요(순수 정책 판단, 코드 조사로 해소되지 않음)**: 없음 — 배치 2
+4개 항목은 이번 재조사로 진짜 순서 의존성이 없다는 것이 코드 레벨에서
+확정됐으므로, 제품 오너가 순서를 조정하고 싶다면(예: reconciliation_task_lock을
+가장 먼저) 그렇게 해도 안전하다는 것 외에 추가로 확인해야 할 정책
+판단은 남아 있지 않다. `bypass_reconciliation_task_lock`의 `action`
+값을 `needs_review`/`superseded`로 나눌지 하나로 합칠지(배치 2-3 "2.
+토큰 action 값" 참고)는 순수 세부 설계 선택이라 이 결정 필요 목록에는
+넣지 않았다.
