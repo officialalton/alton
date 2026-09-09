@@ -85,6 +85,41 @@ describe("protect_teacher_rate_history() / set_teacher_rate() — status_transit
     expect(stillOpen).toBe("t");
   });
 
+  it("⑤ [corrective] 세션 로컬 temp table로 위조 토큰을 심어도 거부된다(20261255000000 search_path/스키마 한정 수정 검증)", () => {
+    // 배치 1 corrective(20261255000000) 이전에는 consume_status_transition_token()과
+    // set_teacher_rate()가 status_transition_tokens를 스키마 한정 없이 참조하고
+    // search_path = public만 설정했다. PostgreSQL은 search_path 설정과 무관하게
+    // 세션의 pg_temp 스키마를 항상 먼저 찾으므로, 호출자가 자기 세션에 동명의
+    // temp table을 만들고 위조 토큰 행을 심으면 unqualified 참조가 진짜
+    // public.status_transition_tokens 대신 temp table로 resolve되어 잠금을
+    // 무력화할 수 있었다. 완전 스키마 한정(public.status_transition_tokens) +
+    // search_path 고정(public, pg_temp) 수정 이후에는 여전히 거부됨을 확인한다.
+    const teacherId = createTestTeacher("temp-table-attack");
+    const currentId = lastLine(
+      psql(`select set_teacher_rate('${teacherId}', 2500000, 'KRW', now() - interval '1 day');`)
+    );
+
+    expect(() =>
+      psql(`
+        create temp table status_transition_tokens (
+          table_name text not null,
+          row_id uuid not null,
+          action text not null,
+          xact_id bigint not null default txid_current(),
+          created_at timestamptz not null default now()
+        );
+        begin;
+        insert into status_transition_tokens (table_name, row_id, action, xact_id)
+        values ('teacher_rate_history', '${currentId}', 'close_teacher_rate', txid_current());
+        update teacher_rate_history set effective_until = now() where id = '${currentId}';
+        commit;
+      `)
+    ).toThrow(/직접 UPDATE할 수 없습니다/);
+
+    const stillOpen = psql(`select effective_until is null from teacher_rate_history where id = '${currentId}';`);
+    expect(stillOpen).toBe("t");
+  });
+
   it("④ 새 이력 INSERT 실패 시 트랜잭션 전체가 롤백된다(기존 이력이 종료된 채 새 이력 없이 남지 않음)", () => {
     const teacherId = createTestTeacher("atomicity");
     const currentId = lastLine(

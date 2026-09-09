@@ -1,5 +1,50 @@
 # ALTON — 현재 상태 (2026-09-08 기준)
 
+> **2026-09-08 — bypass GUC 배치 1 corrective: status_transition_tokens temp table
+> 가로채기 취약점 수정(`20261255000000`).** 제품 오너 리뷰에서, 배치 1이 방금 구축한
+> `consume_status_transition_token()`/`revoke_guardian_consent()`/`set_teacher_rate()`
+> 세 함수가 `status_transition_tokens`를 **스키마 한정 없이(unqualified)** 참조하고
+> `search_path = public`만 설정했던 것이 실제 취약점으로 지적됐다: PostgreSQL은
+> search_path 설정과 무관하게 세션의 `pg_temp` 스키마를 항상 먼저 검색하므로(스키마
+> 한정 참조만 이 규칙에서 예외), 호출자가 자기 세션에
+> `create temp table status_transition_tokens (...)`로 동명 테이블을 만들고 위조
+> 토큰 행을 심으면 세 함수의 unqualified 참조가 그 temp table로 resolve되어 진짜
+> `public.status_transition_tokens`에 걸린 GRANT/REVOKE 잠금(어떤 ordinary role에도
+> INSERT/UPDATE/DELETE/SELECT 없음)을 완전히 무력화할 수 있었다 — 호출자는 자기
+> temp table에 대해서는 항상 완전한 제어권을 가지기 때문이다.
+>
+> `20261255000000_r_corrective_status_transition_tokens_search_path.sql`이 세 함수
+> 모두를 `create or replace function`으로 재작성해 (1) 모든 테이블 참조를
+> `public.status_transition_tokens`로 완전히 스키마 한정하고(이것만으로 취약점이
+> 닫힌다 — 스키마 한정 참조는 pg_temp 우선순위 규칙의 영향을 받지 않음), (2) 방어
+> 심층화로 `search_path = public, pg_temp`를 명시적으로 고정했다(제품 오너 지시).
+> `bypass_trial_session_auto_complete`는 애초에 이 토큰 테이블을 쓰지 않으므로
+> 이번 수정 대상이 아니다 — 손대지 않았다.
+>
+> 회귀 테스트(`app/admin/consent-protect-token.integration.test.ts`,
+> `lib/booking/teacher-rate-protect-token.integration.test.ts`)에 다음을 추가/확인:
+> ① 권한 잠금 확인 — `authenticated`/`service_role` 모두 실제
+> `public.status_transition_tokens`에 INSERT/UPDATE/DELETE/SELECT 그랜트가 없음을
+> `has_table_privilege()`로 명시 단언. ② **공격 재현(신규, 핵심)** — 같은 세션 안에서
+> `create temp table status_transition_tokens (...)`로 동명 temp table을 만들고
+> 트리거가 찾을 `table_name`/`row_id`/`action`/`xact_id`와 일치하는 위조 토큰 행을
+> 심은 뒤, 실제 함수를 거치지 않은 직접 UPDATE(철회 3필드 / `effective_until`)를
+> 시도 — 수정 후에도 여전히 거부됨을 확인(수정 전이었다면 이 공격이 통과했을
+> 것). ③ 기존 원자성 회귀(정상 철회/시급 변경, 실패 시 롤백)가 모두 그대로 통과함을
+> 재확인 — 스키마 한정 수정이 정상 경로를 깨지 않았다.
+>
+> 검증: `supabase db reset --local` → 대상 테스트 12/12 통과(공격 재현 포함) →
+> `tsc --noEmit` 클린 → 전체 테스트 스위트(228 파일/1579 테스트, `vitest run
+> --no-file-parallelism` — 파일 간 병렬 실행 시 공유 로컬 DB에 대한 무관한
+> 기존 flake(`student-curriculum-overlay.integration.test.ts` 체크섬 경쟁 등)가
+> 있어 순차 실행으로 확인, 배치 1 base 커밋에서도 동일하게 재현되는 사전 존재
+> 이슈로 이번 변경과 무관함을 확인함) 신선 리셋 후 두 차례 모두 100% 통과 →
+> `next build` 성공. 배치 2(`bypass_status_protect`/`bypass_invite_protect`/
+> `bypass_reconciliation_task_lock`) 문서에도 "공유 토큰 인프라 재사용 시 동일한
+> 완전 스키마 한정 + search_path 고정 규칙을 처음부터 따를 것"이라는 주의사항을
+> 추가했다(`docs/superpowers/plans/2026-09-08-bypass-guc-security-cleanup.md`) —
+> 배치 2 자체는 이번 라운드에서 구현하지 않았다.
+
 > **2026-09-08 — bypass GUC 보안 정리 배치 1 착수(코드/마이그레이션 변경 실제 반영).**
 > `docs/superpowers/plans/2026-09-08-bypass-guc-security-cleanup.md`의 배치 1
 > (`bypass_consent_protect` → `bypass_teacher_rate_protect` →

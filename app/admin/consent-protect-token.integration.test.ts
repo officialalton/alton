@@ -80,6 +80,23 @@ afterAll(() => {
   // `supabase db reset --local`(CLAUDE.md UAT 관례)에 맡긴다.
 });
 
+describe("status_transition_tokens — 권한 잠금(GRANT/REVOKE) 확인", () => {
+  it("authenticated/service_role 모두 실제 public.status_transition_tokens에 INSERT/UPDATE/DELETE 권한이 없다", () => {
+    const grants = psql(`
+      select
+        has_table_privilege('authenticated', 'public.status_transition_tokens', 'INSERT'),
+        has_table_privilege('authenticated', 'public.status_transition_tokens', 'UPDATE'),
+        has_table_privilege('authenticated', 'public.status_transition_tokens', 'DELETE'),
+        has_table_privilege('authenticated', 'public.status_transition_tokens', 'SELECT'),
+        has_table_privilege('service_role', 'public.status_transition_tokens', 'INSERT'),
+        has_table_privilege('service_role', 'public.status_transition_tokens', 'UPDATE'),
+        has_table_privilege('service_role', 'public.status_transition_tokens', 'DELETE'),
+        has_table_privilege('service_role', 'public.status_transition_tokens', 'SELECT');
+    `);
+    expect(grants).toBe("f|f|f|f|f|f|f|f");
+  });
+});
+
 describe("protect_guardian_consent() / revoke_guardian_consent() — status_transition_tokens 1회용 토큰(corrective 회귀)", () => {
   it("① 정상 철회(관리자 경로) — 철회 3필드 UPDATE와 privacy_review_tasks 행 생성이 함께 일어난다", () => {
     const { guardianId, childId } = createGuardianAndChild("admin-path");
@@ -142,6 +159,44 @@ describe("protect_guardian_consent() / revoke_guardian_consent() — status_tran
     const stillActive = psql(`select revoked_at is null from guardian_consents where id = '${consentId}';`);
     expect(stillActive).toBe("t");
     void childId;
+  });
+
+  it("⑤ [corrective] 세션 로컬 temp table로 위조 토큰을 심어도 거부된다(20261255000000 search_path/스키마 한정 수정 검증)", () => {
+    // 배치 1 corrective(20261255000000) 이전에는 consume_status_transition_token()과
+    // revoke_guardian_consent()가 status_transition_tokens를 스키마 한정 없이
+    // 참조하고 search_path = public만 설정했다. PostgreSQL은 search_path 설정과
+    // 무관하게 세션의 pg_temp 스키마를 항상 먼저 찾으므로, 호출자가 자기 세션에
+    // 동명의 temp table을 만들고 위조 토큰 행을 심으면 그 함수들의 unqualified
+    // 참조가 진짜 public.status_transition_tokens 대신 이 temp table로 resolve되어
+    // 잠금을 완전히 무력화할 수 있었다. 이 테스트는 그 공격을 그대로 재현하고,
+    // 완전 스키마 한정(public.status_transition_tokens) + search_path 고정
+    // (public, pg_temp) 수정 이후에는 여전히 거부됨을 확인한다.
+    const { guardianId, childId } = createGuardianAndChild("temp-table-attack");
+    const consentId = consentAsGuardian(guardianId, childId);
+
+    expect(() =>
+      psql(`
+        create temp table status_transition_tokens (
+          table_name text not null,
+          row_id uuid not null,
+          action text not null,
+          xact_id bigint not null default txid_current(),
+          created_at timestamptz not null default now()
+        );
+        begin;
+        insert into status_transition_tokens (table_name, row_id, action, xact_id)
+        values ('guardian_consents', '${consentId}', 'revoke_consent', txid_current());
+        update guardian_consents
+        set revoked_at = now(), revoked_by = '${ADMIN_ID}', revocation_reason = 'temp table 위조 토큰 공격'
+        where id = '${consentId}';
+        commit;
+      `)
+    ).toThrow(/revoke_guardian_consent\(\)를 통해서만/);
+
+    const stillActive = psql(`select revoked_at is null from guardian_consents where id = '${consentId}';`);
+    expect(stillActive).toBe("t");
+    const taskCount = psql(`select count(*) from privacy_review_tasks where student_id = '${childId}';`);
+    expect(taskCount).toBe("0");
   });
 
   it("④ privacy_review_tasks INSERT 실패 시 트랜잭션 전체가 롤백된다(토큰도 철회 UPDATE도 남지 않음)", () => {

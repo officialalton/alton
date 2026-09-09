@@ -77,6 +77,32 @@ plain SQL `current_setting`/`set_config`)를 켜고 끈다"는 반복 패턴이 
 > 그 이후 세부 스코프 분할)는 제품 오너 지시대로 유지하되, 토큰 인프라 마이그레이션
 > 파일 하나는 배치 1 스코프에 포함시켜야 한다는 뜻이다.
 
+> **[2026-09-08 추가 — search_path/스키마 한정 corrective, `20261255000000`]** 배치 1
+> 구현 완료 후 제품 오너 리뷰에서, `consume_status_transition_token()`/
+> `revoke_guardian_consent()`/`set_teacher_rate()` 세 함수가 `status_transition_tokens`를
+> **스키마 한정 없이(unqualified)** 참조하고 `search_path = public`만 설정했던 것이
+> 취약점으로 지적됐다: PostgreSQL은 search_path 설정과 무관하게 세션의 `pg_temp`
+> 스키마를 항상 먼저 검색하므로(스키마 한정 참조만 이 규칙에서 예외), 호출자가
+> 자기 세션에 `create temp table status_transition_tokens (...)`로 동명 테이블을
+> 만들고 위조 토큰 행을 심으면 unqualified 참조가 그 temp table로 resolve되어
+> 진짜 `public.status_transition_tokens`의 GRANT/REVOKE 잠금을 완전히 무력화할 수
+> 있었다. `20261255000000_r_corrective_status_transition_tokens_search_path.sql`이
+> 세 함수 모두를 `public.status_transition_tokens`로 완전히 스키마 한정하고
+> `search_path = public, pg_temp`를 명시적으로 고정해 수정했다(회귀 테스트:
+> `app/admin/consent-protect-token.integration.test.ts`,
+> `lib/booking/teacher-rate-protect-token.integration.test.ts`의 temp table 공격
+> 재현 케이스). **배치 2(`bypass_status_protect`/`bypass_invite_protect`/
+> `bypass_reconciliation_task_lock`)가 이 공유 `status_transition_tokens` 인프라를
+> 재사용할 때, 그 구현이 참조하는 모든 곳(확인/소비 헬퍼 호출부, 각 함수의 토큰
+> INSERT문 등)도 처음부터 반드시 `public.status_transition_tokens`처럼 완전히
+> 스키마 한정하고, 관련 SECURITY DEFINER 함수(`transition_account_status()`,
+> `merge_accounts()`, `recomplete_session()`, `resolve_session_reconciliation_task()`,
+> `set_reconciliation_task_student_cancelled_disposition()`, `claim_account_invite()`
+> 등 및 `protect_account_status()`/`protect_account_invite_status()` 트리거)의
+> `search_path`도 `public, pg_temp`로 명시 고정해야 한다 — 이 규칙을 빠뜨리면
+> 배치 1에서 발견된 것과 동일한 temp table 가로채기 취약점이 배치 2 함수들에도
+> 그대로 재현된다.**
+
 - **배치 1 (단순 재진입, 독립적으로 먼저 착수 가능 — 단, 공유 토큰 인프라 신규 구축 포함)**
   1. `bypass_consent_protect` — 공유 토큰 테이블(`status_transition_tokens` + `action` 컬럼)을 여기서 처음 구축
   2. `bypass_teacher_rate_protect` — 배치 1-1의 토큰 인프라 재사용
