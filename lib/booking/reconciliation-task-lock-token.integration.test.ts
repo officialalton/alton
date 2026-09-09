@@ -566,4 +566,161 @@ describe("reconciliation_task_update_guard() — status_transition_tokens 1회�
       psql(`drop function if exists delay_reconciliation_resolve_for_test();`);
     }
   });
+
+  it("⑨ 잠금 순서 corrective(20261260000000) — resolve_session_reconciliation_task()가 task를 잠그는 시점엔 이미 sessions도 잠근 상태이므로, recomplete_session()과 동시 실행해도 데드락 없이 정책대로 직렬화된다", async () => {
+    // 배치 2-3 원본 코드는 task를 먼저 잠근 뒤(select ... for update) sessions를
+    // 나중에 잠갔다 — recomplete_session()(sessions 먼저, task 나중)과 반대
+    // 순서라 실제 순환 대기(데드락)가 가능했다. 이 테스트는 (1) resolve가 task
+    // 잠금을 보유하는 시점에 sessions 잠금도 이미 보유하고 있음을 pg_locks로
+    // 직접 확인해 새 잠금 순서를 증명하고, (2) 그 상태에서
+    // recomplete_session()을 동시에 실행해도 데드락 에러 없이 정상적으로
+    // 순차 처리되는 worst-case interleaving을 재현한다.
+    const { sessionId, taskId, grantId } = setupPendingTask(24);
+    const balanceBefore = Number(psql(`select coalesce(sum(amount),0) from entitlement_ledger where grant_id = '${grantId}';`));
+
+    // resolve()가 마지막 UPDATE(status='resolved')에 도달했을 때 잠깐 멈춰(pg_sleep)
+    // 그동안 이 백엔드가 보유한 잠금을 pg_locks로 관찰할 시간을 준다. 이 시점에
+    // 이미 task 행(select ... for update, 방금 재확인) 및 sessions 행(먼저 잠근 것)
+    // 모두를 이 트랜잭션이 보유하고 있어야 한다 — 이게 새 잠금 순서의 증거다.
+    psql(`
+      create or replace function delay_reconciliation_resolve_order_check_for_test()
+      returns trigger language plpgsql as $$
+      begin
+        if new.status = 'resolved' then
+          perform pg_sleep(1.0);
+        end if;
+        return new;
+      end;
+      $$;
+    `);
+    psql(`
+      create trigger delay_reconciliation_resolve_order_check
+        before update on session_judgment_reconciliation_tasks
+        for each row execute function delay_reconciliation_resolve_order_check_for_test();
+    `);
+
+    function runResolve(): Promise<{ ok: boolean; output: string }> {
+      return new Promise((resolve) => {
+        const child = spawn("psql", [
+          DB_URL,
+          "-v",
+          "ON_ERROR_STOP=1",
+          "-q",
+          "-t",
+          "-A",
+          "-c",
+          `
+            set role authenticated;
+            select set_config('request.jwt.claim.sub', '${ADMIN_ID}', false);
+            select resolve_session_reconciliation_task('${taskId}', '잠금 순서 검증 — 먼저 반영');
+            reset role;
+          `,
+        ]);
+        let output = "";
+        child.stdout.on("data", (d) => (output += d.toString()));
+        child.stderr.on("data", (d) => (output += d.toString()));
+        child.on("close", (code) => resolve({ ok: code === 0, output }));
+      });
+    }
+
+    function runRecomplete(): Promise<{ ok: boolean; output: string }> {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          const child = spawn("psql", [
+            DB_URL,
+            "-v",
+            "ON_ERROR_STOP=1",
+            "-q",
+            "-t",
+            "-A",
+            "-c",
+            `
+              set role authenticated;
+              select set_config('request.jwt.claim.sub', '${ADMIN_ID}', false);
+              select reopen_session('${sessionId}', '잠금 순서 검증 재현');
+              select recomplete_session('${sessionId}', 'student_no_show', '잠금 순서 검증 — 뒤늦은 재판정');
+              reset role;
+            `,
+          ]);
+          let output = "";
+          child.stdout.on("data", (d) => (output += d.toString()));
+          child.stderr.on("data", (d) => (output += d.toString()));
+          child.on("close", (code) => resolve({ ok: code === 0, output }));
+        }, 300); // resolve()가 sessions+task 잠금을 모두 잡고 pg_sleep에 들어갈 시간을 준다.
+      });
+    }
+
+    // resolve()가 pg_sleep 중인 동안(약 300ms~1300ms 구간) 그 백엔드가 실제로
+    // sessions와 session_judgment_reconciliation_tasks 두 릴레이션 모두에 대해
+    // tuple 잠금을 보유하고 있는지 pg_locks로 확인한다 — 잠금 순서가 바뀌지
+    // 않았다면(옛 버그) task만 보유하고 sessions는 아직 보유하지 못했을 시점이다.
+    function checkLocksDuringSleep(): Promise<{ heldSessions: boolean; heldTasks: boolean }> {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          const out = psql(`
+            select coalesce(bool_or(c.relname = 'sessions'), false)::text || '|' ||
+                   coalesce(bool_or(c.relname = 'session_judgment_reconciliation_tasks'), false)::text
+            from pg_locks l
+            join pg_class c on c.oid = l.relation
+            join pg_stat_activity a on a.pid = l.pid
+            where l.locktype = 'relation'
+              and l.mode = 'RowShareLock'
+              and a.query ilike '%resolve_session_reconciliation_task%';
+          `);
+          const [heldSessions, heldTasks] = out.split("|");
+          resolve({ heldSessions: heldSessions === "true", heldTasks: heldTasks === "true" });
+        }, 700); // resolve()가 확실히 pg_sleep(1.0) 안에 들어가 있을 시점.
+      });
+    }
+
+    try {
+      const [resolveResult, lockCheck, recompleteResult] = await Promise.all([
+        runResolve(),
+        checkLocksDuringSleep(),
+        runRecomplete(),
+      ]);
+
+      // (1) pg_locks 증거 — resolve()가 task 갱신을 위해 잠금을 들고 대기하는
+      // 동안 sessions 릴레이션에 대한 행 잠금도 이미 함께 보유하고 있다(RowShareLock은
+      // select ... for update가 relation 수준에 남기는 의도(intent) 잠금).
+      expect(lockCheck.heldSessions).toBe(true);
+      expect(lockCheck.heldTasks).toBe(true);
+
+      // (2) 데드락 없음 — 둘 다 정상 종료(정책적 반려는 있을 수 있어도 Postgres
+      // 데드락 감지로 인한 강제 중단은 없어야 한다).
+      expect(resolveResult.output).not.toMatch(/deadlock detected/i);
+      expect(recompleteResult.output).not.toMatch(/deadlock detected/i);
+      expect(resolveResult.ok).toBe(true); // resolve()가 먼저 시작해 먼저 sessions를 잠갔으므로 정상 반영된다(결과 B).
+      expect(recompleteResult.ok).toBe(true); // recomplete_session()은 실패하지 않는다 — 그 행을 건드리지 않을 뿐.
+
+      // (3) 최종 상태 전수 검증 — 결과 B: 원래 task는 resolved 그대로,
+      // recomplete_session()은 그 행을 superseded로 전환하지 않고 새 pending
+      // 행을 INSERT한다.
+      const [finalStatus, resolvedBy] = psql(
+        `select status, resolved_by::text from session_judgment_reconciliation_tasks where id = '${taskId}';`
+      ).split("|");
+      expect(finalStatus).toBe("resolved");
+      expect(resolvedBy).toBe(ADMIN_ID);
+
+      const balanceAfter = Number(psql(`select coalesce(sum(amount),0) from entitlement_ledger where grant_id = '${grantId}';`));
+      expect(balanceAfter).toBe(balanceBefore + 1); // entitlement_ledger 조정은 정확히 1건(resolve의 adjust_entitlement()만).
+
+      const newTaskRow = psql(
+        `select id, status from session_judgment_reconciliation_tasks where session_id = '${sessionId}' and id <> '${taskId}' order by created_at desc limit 1;`
+      );
+      const [newTaskId, newTaskStatus] = newTaskRow.split("|");
+      expect(newTaskId).not.toBe(taskId);
+      expect(newTaskStatus).toBe("pending"); // superseded가 아니다 — recomplete가 원래 행을 건드리지 않았다는 증거.
+
+      const tokenLeft = Number(
+        psql(
+          `select count(*) from status_transition_tokens where table_name = 'session_judgment_reconciliation_tasks' and row_id in ('${taskId}', '${newTaskId}');`
+        )
+      );
+      expect(tokenLeft).toBe(0); // 남은 1회용 토큰 없음.
+    } finally {
+      psql(`drop trigger if exists delay_reconciliation_resolve_order_check on session_judgment_reconciliation_tasks;`);
+      psql(`drop function if exists delay_reconciliation_resolve_order_check_for_test();`);
+    }
+  });
 });

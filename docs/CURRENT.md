@@ -1,5 +1,40 @@
-# ALTON — 현재 상태 (2026-09-08 기준)
+# ALTON — 현재 상태 (2026-09-09 기준)
 
+> **2026-09-09 — 배치 2-3 corrective의 corrective: `resolve_session_reconciliation_task()`
+> 잠금 순서 수정(실제 데드락 버그).** 신규 마이그레이션
+> `supabase/migrations/20261260000000_r2_corrective_reconciliation_lock_order.sql`.
+> 배치 2-3(`20261259000000`) 검토 중 확인된 실제 데드락 가능성 — `recomplete_session()`은
+> `sessions` 행을 먼저 잠근 뒤 대사 작업 후보 행을 잠그는데(정책과 일치, 이번에
+> 변경 없음 — 재확인만 함), `resolve_session_reconciliation_task()`는 반대로
+> `session_judgment_reconciliation_tasks` 행을 먼저 잠근 뒤(`select ... for update`)
+> 그 결과로 상태를 판정하고 나서야 `sessions` 행을 잠갔다. 두 함수가 같은
+> 세션+대사 작업 쌍에 동시에 실행되면 순환 대기(데드락)가 만들어질 수 있었다.
+> 수정: `resolve_session_reconciliation_task()`를 (a) 잠금 없이 task의
+> `session_id`만 먼저 읽고(그 값 외에는 신뢰하지 않음) (b) `sessions` 행을
+> 먼저 `select ... for update`로 잠근 뒤 (c) 그다음 대사 작업 행을 잠그고
+> (d) 잠금 이후 재조회한 값으로만 검증/분기하도록 재구성했다 — "sessions
+> 먼저, 그다음 task" 순서로 `recomplete_session()`과 통일. action 값·토큰
+> 발급 지점·needs_review/resolved/superseded 검증 로직은 배치 2-3에서 확정된
+> 것을 그대로 유지했고, 오직 `sessions`를 잠그는 시점만 앞당겼다.
+> `recomplete_session()`은 이미 "sessions 먼저" 순서였음을 재확인해 변경하지
+> 않았다. 신규 회귀 테스트(⑨ 잠금 순서 corrective)를
+> `lib/booking/reconciliation-task-lock-token.integration.test.ts`에 추가 —
+> `resolve_session_reconciliation_task()`가 대사 작업 행 갱신 직전(테스트
+> 전용 delay 트리거로 pg_sleep 주입) 실제로 `sessions`와
+> `session_judgment_reconciliation_tasks` 두 릴레이션 모두에 대한 행 잠금
+> (`pg_locks`의 `RowShareLock`)을 이미 보유하고 있음을 직접 확인해 새 잠금
+> 순서를 증명하고, 그 상태에서 `recomplete_session()`을 동시에 실행해도
+> `deadlock detected` 없이 정책대로(결과 B) 직렬화되며 최종 상태(task
+> resolved, 신규 pending 행 INSERT, entitlement_ledger 조정 정확히 1건,
+> 잔여 토큰 0건)가 전부 일관됨을 검증했다. `supabase db reset --local` 후
+> 해당 테스트 파일 13개(기존 12개 + 신규 1개) 전부 통과, `tsc --noEmit`
+> 클린, 전체 스위트(`--no-file-parallelism`)를 fresh-reset 후 2회 연속
+> 실행해 매번 231개 파일 / 1636개 테스트 전부 통과 확인, `next build` 성공.
+> `bypass_status_protect`/`bypass_invite_protect`/`bypass_session_lock`과
+> 이들의 이미 완료된 corrective, 배치 2-3에서 확정된 action 값/토큰 로직,
+> `recomplete_session()`/`resolve_session_reconciliation_task()`의 잠금
+> 순서와 무관한 그 외 로직은 전혀 건드리지 않았다.
+>
 > **2026-09-08 — 배치 2-3 `bypass_reconciliation_task_lock` GUC corrective
 > 완료.** 신규 마이그레이션
 > `supabase/migrations/20261259000000_r2_corrective_reconciliation_task_lock_token.sql`로
