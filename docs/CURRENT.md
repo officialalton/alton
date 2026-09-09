@@ -1,5 +1,47 @@
 # ALTON — 현재 상태 (2026-09-08 기준)
 
+> **2026-09-08 — 배치 2-2 `bypass_invite_protect` GUC corrective 완료.**
+> 신규 마이그레이션
+> `supabase/migrations/20261258000000_r2_corrective_invite_protect_token.sql`로
+> `account_invites.status` 보호에 쓰이던 `app.bypass_invite_protect` GUC를
+> 제거하고 배치 1에서 구축한 `status_transition_tokens` 공용 1회용 토큰
+> 인프라로 교체했다(`action = 'invite_status_transition'`). 대상은 실제
+> 호출자 5개 — `resend_account_invite()`/`revoke_account_invite()`(둘 다
+> `20260909000000` capability 게이트 최신 정의 기준)/`claim_account_invite()`(anon
+> 포함, 유일 버전)/`resolve_manual_review_invite()`(`20260909000000` 최신
+> 정의)/`mark_expired_invites()`(유일 버전) — 뿐이다. `create_account_invite()`(INSERT-only)와
+> `finalize_account_invite()`(status를 건드리지 않음)는 이 GUC와 무관해
+> 손대지 않았다. `protect_account_invite_status()` 트리거는 이번에 처음으로
+> SECURITY DEFINER + `search_path = public, pg_temp`를 명시했다(원본은 둘 다
+> 없었음). 4개 단일-행 호출자는 원본부터 이미 대상 행을 `select ... for
+> update`로 잠근 뒤 상태를 읽으므로 별도 잠금 추가가 필요 없었다 —
+> `mark_expired_invites()`만 여러 행을 한 UPDATE로 동시 전환하는 배치
+> 함수라 별도 설계가 필요했고, `candidates(for update로 잠근 후보 id) →
+> tokens(후보별 개별 토큰 INSERT) → expired(반드시 tokens의 출력에 의존하는
+> UPDATE)` 3단 CTE 체인으로 "행당 1개 토큰"을 구현했다 — 최초 구현 시
+> `expired`가 `candidates`에만 의존하도록 썼다가 PostgreSQL이 토큰 INSERT와
+> UPDATE의 실행 순서를 보장하지 않아 트리거가 아직 없는 토큰을 찾아 거부하는
+> 실패를 실제로 재현했고, `expired`의 WHERE 절을 `tokens`의 리턴값(`row_id`)에
+> 의존하도록 고쳐 해결했다(이 경위를 마이그레이션 주석에도 남겼다).
+> 신규 회귀 테스트
+> `app/admin/account-invite-protect-token.integration.test.ts`(16개 케이스)로
+> 5개 함수 각각의 정상 경로, 익명 사용자 초대 수락에서 토큰이 정확히 1회
+> 발급/소비되고 기존 해시 비교/만료 검사가 불변임을, `mark_expired_invites()`가
+> 3건 이상을 한 번에 처리할 때 각 행이 자기 몫의 토큰만 소비하고(교차 오염
+> 없음) 좀비 토큰이 남지 않음을, 직접 UPDATE 차단, 레거시 GUC 무효화, 세션
+> 로컬 temp table 위조 차단, `claim_account_invite()` 재시도(이미 accepted인
+> 초대에 대한 멱등 재호출, 중복 이벤트 없음), 동시성(같은 초대에 대한 두
+> `claim_account_invite()` 동시 호출은 `for update` 잠금으로 직렬화되어 둘 다
+> 에러 없이 성공하되 accepted 이벤트는 정확히 1건만 남고, 서로 다른 두 초대에
+> 대한 동시 `revoke_account_invite()`는 계속 독립적으로 성공), `resolve_manual_review_invite()`
+> link 분기 중 `account_invite_events` INSERT 강제 실패 시 토큰·status
+> UPDATE·`household_members` INSERT 전체 롤백을 각각 검증했다. `bypass_status_protect`(이미
+> corrective 완료)/`bypass_reconciliation_task_lock`/`bypass_session_lock`/`recomplete_session()`은
+> 건드리지 않았다. `supabase db reset --local` 후 해당 테스트 파일 16개 전부
+> 통과, `tsc --noEmit` 클린, 전체 스위트(`--no-file-parallelism`)를
+> fresh-reset 후 2회 연속 실행해 매번 230개 파일 / 1621개 테스트 전부 통과
+> 확인, `next build` 성공.
+>
 > **2026-09-08 — `transition_account_status()` TOCTOU 행 잠금 corrective
 > 후속 수정 완료.** 배치 2-1 corrective(`20261256000000`)로 GUC를
 > `status_transition_tokens`로 교체한 뒤, `transition_account_status()`가
