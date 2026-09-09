@@ -1,5 +1,36 @@
 # ALTON — 현재 상태 (2026-09-08 기준)
 
+> **2026-09-08 — bypass GUC 배치 2-1(`bypass_status_protect`) corrective 구현 완료.**
+> `docs/superpowers/plans/2026-09-08-bypass-guc-security-cleanup.md` "배치 2 상세
+> 실행 계획 > 배치 2-1"에 따라 신규 마이그레이션
+> `supabase/migrations/20261256000000_r2_corrective_status_protect_token.sql`을
+> 추가해 `protect_account_status()`(트리거)/`transition_account_status()`/
+> `merge_accounts()` 3개 함수를 `create or replace`했다. GUC(`app.bypass_status_protect`)
+> 분기를 완전히 제거하고 배치 1이 구축한 공유 `status_transition_tokens` 테이블 +
+> `consume_status_transition_token()` 헬퍼를 재사용 — action 값은 `'status_transition'`
+> 단일 값(두 호출자 모두 전이 종류가 하나뿐이고 대상 테이블(`students`/`teachers`/
+> `parents`)로 이미 구분되므로). `merge_accounts()`는 호출당 병합 대상 1개 행만
+> 상태를 바꾸므로 "행당 1개 토큰"과 "호출당 1개 토큰"이 동일 — 별도 설계 결정
+> 불필요. 배치 1 corrective(`20261255000000`)와 동일하게 두 함수 모두
+> `public.status_transition_tokens`로 완전히 스키마 한정하고 `search_path = public,
+> pg_temp`를 명시 고정했다. `recomplete_session()`(bypass_reconciliation_task_lock
+> 대상, 별개 항목)과 다른 Batch 2 항목(`bypass_invite_protect`/
+> `bypass_reconciliation_task_lock`/`bypass_session_lock`)은 전혀 건드리지 않았다.
+>
+> 신규 회귀 테스트: `app/admin/account-status-protect-token.integration.test.ts`
+> (12개 케이스) — ① 정상 전이(transition_account_status 관리자 경로 학생/선생님,
+> merge_accounts 관리자·capability 경로 각각) ② 직접 UPDATE 차단(students/teachers/
+> parents) ③ 레거시 GUC 무효화 ④ 세션 로컬 temp table 위조 토큰 거부(스키마 한정
+> 검증) ⑤ 동시성(서로 다른 행 순차 전이 무간섭, 같은 행 동시 호출 시 이중 적용/
+> 오염 없음) ⑥ 실패 시 전체 롤백(transition_account_status/merge_accounts 각각
+> account_status_events INSERT 강제 실패 → 토큰·상태 UPDATE·병합 기록 전부 롤백).
+>
+> 검증: `supabase db reset --local` 성공, `tsc --noEmit` clean, `next build` 성공,
+> 전체 테스트 스위트(`vitest run --no-file-parallelism`, 이 저장소에 기존부터 있던
+> curriculum-overlay 동시성 테스트의 파일-간 병렬 실행 시 DB 상태 경합 — 이 작업과
+> 무관 — 을 피하기 위해 사용) 신선한 `db reset` 후 2회 연속 실행 모두 229/229
+> 파일, 1591/1591 테스트 100% 통과.
+
 > **2026-09-08 — bypass GUC 배치 2 계획 문서 내부 정합성 정정(계획/문서 전용,
 > 코드 변경 없음).** 직전 라운드(바로 아래 항목)가 4차 개정에서 `recomplete_session()`
 > 관련 사실관계 3건을 정정했지만, 그 정정을 "개정 이력"과 "배치 2 상세 실행 계획"
