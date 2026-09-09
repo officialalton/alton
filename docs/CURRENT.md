@@ -1,5 +1,40 @@
 # ALTON — 현재 상태 (2026-09-09 기준)
 
+> **2026-09-09 — UAT 계획 문서 corrective: migration 개수 정정 + dry-run/
+> 의존성 검토(non-prod에 쓰기 없음).** 1단계 읽기 전용 사전 점검에서
+> non-prod(`worpsqwqgnspddnrtnvq`)가 `20261227000000`까지만 반영돼 있고
+> **30개 migration이 미반영**임을 확인(이전 계획서는 "이번 세션 신규 3개"만
+> 계산해 실제 미반영 규모를 놓쳤었음 — 이번 라운드에서 정정).
+>
+> `supabase db push --linked --dry-run`(쓰기 없음)과 30개 파일 각각의 정적
+> 검토로 확인: **DROP TABLE/TRUNCATE/컬럼 삭제/타입 변경 0건** — 전부 신규
+> 테이블·컬럼 추가·함수(RLS 포함) 재정의. 최상위(함수 본문 밖에서 즉시
+> 실행되는) `UPDATE`/`INSERT`/`DELETE`는 `20261237000000_r9_corrective_content_item_unit_provenance.sql`
+> 1개 파일 3건뿐 — 이 파일 자체 주석이 "로컬 dev reset 전용, 운영 데이터
+> 없음 가정"이라고 명시하는데, 대상 테이블이 이번 배치(`20261232000000`)에서
+> 처음 생기므로 **30개를 순서대로 반영하는 한 실제로는 빈 테이블 백필이라
+> 안전** — 단 이 파일만 따로 나중에 재실행하면 위험해진다는 점을 기록.
+> RLS 정책을 "새로 만드는" 것이 아니라 "기존 정책을 교체"하는 것은 2건
+> (`20261233000000` — 이번 배치 내 신규 테이블 대상이라 무해,
+> `20261264000000` — **이 30개 중 유일하게 이미 non-prod에 실재하던
+> 테이블(`session_incident_reports`, R6부터 존재)의 정책을 교체**, INSERT
+> 정책만 영향받고 기존 SELECT 정책·과거 행 조회에는 영향 없음).
+>
+> 도메인 경계가 타임스탬프로 깔끔히 분리됨을 확인: R9 커리큘럼·세션·과제
+> (`20261228~20261250`) → GUC 보안 정리(`20261251~20261261`) → 정산·신고자
+> corrective(`20261262~20261264`) — 도메인별로 나눠 반영해도 순서만 지키면
+> 실패할 구조적 이유가 없음.
+>
+> DocuSign(`DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS === "true"`)·Calendar
+> (`CALENDAR_SYNC_ALLOW_REAL_CALLS !== "true"`)는 코드 구조 자체가
+> fail-closed임을 코드로 재확인(값은 열람하지 않음). SMTP·Stripe는 코드로
+> fail-closed를 강제할 수 없어 **제품 오너가 UAT 시작 전 Preview 전용
+> sandbox/test 값으로 직접 교체·확인해야 한다는 조건으로 명시**.
+>
+> 상세 표는 `docs/superpowers/plans/2026-09-09-preview-uat-preparation-and-execution.md`
+> 1절 참고. **이번 라운드는 non-prod에 어떤 쓰기도 하지 않았다** — migration
+> 반영·Preview 배포·UAT 계정/세션 생성은 계속 승인 대기.
+
 > **2026-09-09 — 기반 안정화·admin N+1 성능 수정까지 전부 승인 완료. 다음
 > 작업 스트림은 "Preview UAT 준비 및 실행"으로 새 세션에서 독립 진행.** 이
 > 세션(성능 측정 라운드까지)은 여기서 마감하고, 추가 코드·migration·리팩터링

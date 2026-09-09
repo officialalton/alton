@@ -29,35 +29,112 @@ Preview 배포, UAT 계정·세션 생성은 이 계획을 검토한 뒤 제품 
 
 ## 1. Non-prod migration 목록과 Preview 배포 대상
 
-### 반영 대상 migration
-로컬 `supabase/migrations/`에는 현재 **173개** 파일이 있다(최신:
-`20261264000000_r6_corrective_incident_report_reported_by_identity.sql`, 이번
-세션의 기반 안정화 7단계 + corrective + 성능 라운드까지 전부 포함). 이번
-세션(기반 안정화 7단계 승인 이후, 성능 측정 라운드 착수 전까지)에서 새로
-추가된 것은 다음 **3개**다:
+### 정정(2026-09-09, 1단계 읽기 전용 사전 점검 실측 결과 반영)
+이 절의 이전 버전은 "이번 세션 신규 3개"만 계산하고, 그 이전부터 non-prod에
+이미 쌓여 있던 미반영분을 놓쳤다. `supabase migration list --linked`로 non-prod
+(`worpsqwqgnspddnrtnvq`)의 실제 반영 상태를 읽기 전용으로 확인한 결과는 다음과
+같다 — **아래 두 숫자를 명확히 구분한다**:
 
-1. `20261262000000_r10_corrective_reversal_idempotency.sql` — `reverse_payout_item()` 멱등화
-2. `20261263000000_r10_corrective_generate_payout_batches_lock.sql` — `generate_payout_batches()` 잠금
-3. `20261264000000_r6_corrective_incident_report_reported_by_identity.sql` — 신고자 신원 강제
+- **이번 세션에서 로컬에 새로 추가된 migration**: 3개
+  (`20261262000000`/`20261263000000`/`20261264000000` — 기반 안정화 7단계
+  승인 이후 작성됨).
+- **non-prod에 실제로 미반영된 migration**: **30개**
+  (`20261228000000` ~ `20261264000000`, non-prod는 `20261227000000`까지만
+  반영돼 있음). 위 3개는 이 30개 중 마지막 3개에 포함된다.
 
-(참고: `20261261000000_r8_corrective_session_invariant_tokens.sql`까지는 이전
-배치 2 라운드에서 이미 생성됐고 이번 세션 시작 시점에 로컬에 존재했다 — 이 3개
-중 실제로 non-prod에 아직 없는 것이 무엇인지는 **non-prod 프로젝트의 실제
-migration 이력을 확인해야 정확히 알 수 있다.**)
+### 30개 미반영 migration — 도메인별 목록과 영향
 
-**실행 시 반드시 먼저 할 일**: non-prod Supabase 프로젝트에 연결된 상태에서
-`supabase migration list`(또는 동등한 diff 확인)를 실행해 non-prod가 이미 어디까지
-반영돼 있는지 확인한 뒤, **그 이후 파일만** 순서대로 반영한다. 173개 전체를
-무조건 다시 반영하지 않는다 — 이미 적용된 마이그레이션에 대해 `supabase db push`가
-멱등적으로 처리하더라도, 실행 전 확인 없이 "전체 반영"을 가정하지 않는다.
+| # | 파일 | 도메인 | 변경 종류 | 기존 non-prod 데이터에 미칠 영향 | 롤백 불가 여부 |
+|---|---|---|---|---|---|
+| 1 | `20261228000000_r9_curriculum_content_foundation.sql` | R9 커리큘럼·콘텐츠 | 신규 테이블 4개(과목 키워드 카탈로그 등) + RLS | 없음(신규 기능, 기존 테이블 미변경) | 아니오 |
+| 2 | `20261229000000_r9_student_curriculum_overlay.sql` | R9 커리큘럼·콘텐츠 | 신규 테이블 4개(학생 커리큘럼 오버레이) + RLS | 없음(신규 테이블) | 아니오 |
+| 3 | `20261230000000_r9_corrective_overlay_baseline_seed.sql` | R9 커리큘럼·콘텐츠 | 함수 재정의(`ensure_active_curriculum_overlay`, 위 #2 테이블 대상) | 없음 — 이 함수가 다루는 테이블 자체가 #2에서 이번에 처음 생기므로 기존 행이 있을 수 없음 | 아니오 |
+| 4 | `20261230010000_r9_corrective_keyword_publish_gate.sql` | R9 커리큘럼·콘텐츠 | `drop function if exists` 2건(이번 배치에서 새로 만든 함수 정리) + 함수 재정의 | 없음(대상 함수도 이번 배치 산물) | 아니오 |
+| 5 | `20261231000000_r9_corrective_overlay_baseline_materials.sql` | R9 커리큘럼·콘텐츠 | 함수 재정의(베이스라인 시딩에 발행된 교재까지 포함) | 없음(#3과 동일 이유) | 아니오 |
+| 6 | `20261232000000_r9_session_prepared_selection.sql` | 세션·과제 | 신규 테이블 4개(수업 준비 스테이징) + RLS | 없음(신규 테이블) | 아니오 |
+| 7 | `20261233000000_r9_session_content_manifest.sql` | 세션·과제 | 신규 테이블 1개(`session_content_manifest`) + RLS + **기존 정책 교체**(`session_prepared_selections`의 쓰기 정책, #6에서 이번에 신설된 테이블) | 없음 — 교체 대상 정책도 이번 배치에서 신설된 테이블의 것 | 아니오 |
+| 8 | `20261234000000_r9_session_content_use_events.sql` | 세션·과제 | 신규 테이블 1개(`session_content_use_events`, append-only) + RLS | 없음 | 아니오 |
+| 9 | `20261235000000_r9_homework_composition.sql` | 세션·과제 | 신규 테이블 1개(`session_homework_items`) + RLS | 없음 | 아니오 |
+| 10 | `20261236000000_r9_corrective_remove_pin_lock_bypass.sql` | 세션·과제 | 함수 재정의(GUC bypass 제거, #6/#7 테이블 대상) | 없음 | 아니오 |
+| 11 | `20261237000000_r9_corrective_content_item_unit_provenance.sql` | 세션·과제 | 컬럼 추가 + **즉시 실행되는 백필 UPDATE 3건**(`session_prepared_selection_content_items`) + `NOT NULL` 잠금 | **이 파일 자체 주석이 "로컬 dev reset 흐름에서만 실행 가정, 운영 데이터 없음"이라고 명시** — 그러나 대상 테이블은 #6에서 이번 배치에 처음 생기므로 non-prod에 이 30개를 순서대로 한 번에 반영하는 한 실제로 빈 테이블에 대한 백필이라 안전하다. **주의**: 이 파일만 따로/나중에 재실행하거나 #6 반영 후 실제 사용자가 데이터를 쌓은 뒤 이 파일을 반영하면 위험해진다(3번째 UPDATE는 못 채운 행을 "그 선택의 첫 단원"으로 임의 귀속시킴) | 데이터가 있는 상태에서 실행했다면 사실상 예 — 이번엔 빈 테이블이라 실질적 위험 없음 |
+| 12 | `20261238000000_r9_corrective_content_item_unit_update_guard.sql` | 세션·과제 | 트리거/함수 추가(수정 가드) | 없음 | 아니오 |
+| 13 | `20261239000000_r8_corrective_remove_annotation_lock_bypass.sql` | 세션·과제 | 함수 재정의(GUC bypass 제거, `session_annotation_events` — **기존에 이미 non-prod에 있는 테이블**, R8에서 생성됨) | 낮음 — bypass 분기를 토큰 방식으로 교체하는 것뿐, 기존 정상 append 행에는 영향 없음. 다만 이 테이블은 실제 non-prod 데이터가 있을 수 있는 첫 파일이므로 반영 직후 기존 필기 이벤트 조회로 확인 권장 | 아니오 |
+| 14 | `20261240000000_r9_corrective_student_homework_access.sql` | 세션·과제 | RLS 정책 신설(#9 테이블 대상, 학생 접근 추가) | 없음(신규 테이블 대상) | 아니오 |
+| 15 | `20261245000000_r9_teacher_homework_answer_view.sql` | 세션·과제 | RLS 정책 신설(#9 테이블 대상) | 없음 | 아니오 |
+| 16 | `20261250000000_r9_corrective_atomic_compose_homework.sql` | 세션·과제 | 함수 재정의(원자성 보강) | 없음 | 아니오 |
+| 17 | `20261251000000_r_status_transition_tokens.sql` | GUC 보안 정리 | 신규 공유 테이블 `status_transition_tokens`(RLS 활성화, 정책 0개, 전 권한 revoke) | 없음(신규 테이블) | 아니오 |
+| 18 | `20261252000000_r2_corrective_consent_protect_token.sql` | GUC 보안 정리 | 함수 재정의(`bypass_consent_protect` 제거, 기존 동의 관련 함수 3개 대상 — **기존에 이미 non-prod에 있는 함수/테이블**) | 낮음 — GUC 우회 분기 제거는 정상 호출 경로(앱 서버 액션)에는 영향 없음, 오직 `SET app.bypass_consent_protect` 직접 호출 경로만 막힘(애초에 앱 코드가 쓰지 않던 경로) | 아니오 |
+| 19 | `20261253000000_r1_corrective_teacher_rate_protect_token.sql` | GUC 보안 정리 | 함수 재정의(`bypass_teacher_rate_protect` 제거) | #18과 동일 성격, 낮음 | 아니오 |
+| 20 | `20261254000000_m5d_corrective_trial_auto_complete_condition.sql` | GUC 보안 정리 | 함수 재정의(GUC 대신 결과-조건 재확인 방식) | 낮음 | 아니오 |
+| 21 | `20261255000000_r_corrective_status_transition_tokens_search_path.sql` | GUC 보안 정리 | 함수 재정의(`search_path` 명시, `#17` 테이블 스키마 한정 참조로 수정 — temp-table hijack 방지) | 없음(보안 강화, 정상 경로 동작 동일) | 아니오 |
+| 22 | `20261256000000_r2_corrective_status_protect_token.sql` | GUC 보안 정리 | 함수 재정의(`bypass_status_protect` 제거, `merge_accounts` 등 — **기존 계정 상태 전이에 실사용 함수**) | 낮음~중간 — 정상 호출 경로는 동일하게 동작하나, 계정 병합·상태 전이처럼 민감한 함수라 반영 직후 admin 포털에서 계정 상태 변경 1건 정도로 정상 동작 확인 권장 | 아니오 |
+| 23 | `20261257000000_r2_corrective_status_transition_row_lock.sql` | GUC 보안 정리 | 함수 재정의(`FOR UPDATE` 잠금 추가) | 없음(동시성 강화, 단일 호출 동작 동일) | 아니오 |
+| 24 | `20261258000000_r2_corrective_invite_protect_token.sql` | GUC 보안 정리 | 함수 재정의(초대 관련 5개 함수) | 낮음, #18과 동일 성격 | 아니오 |
+| 25 | `20261259000000_r2_corrective_reconciliation_task_lock_token.sql` | GUC 보안 정리 | 함수 재정의(대사 작업 관련 4개 함수 — **기존 미해결 대사 작업이 non-prod에 남아있을 수 있음**) | 중간 — 반영 시점에 이미 `pending`/`needs_review` 상태인 대사 작업이 있다면, 그 다음 처리(승인/반려)부터 새 토큰 방식을 타게 된다. 처리 자체의 정상 동작은 로컬에서 이미 충분히 검증됨(기반 안정화 세션) | 아니오 |
+| 26 | `20261260000000_r2_corrective_reconciliation_lock_order.sql` | GUC 보안 정리 | 함수 재정의(잠금 순서 통일, 데드락 방지) | 없음 | 아니오 |
+| 27 | `20261261000000_r8_corrective_session_invariant_tokens.sql` | GUC 보안 정리 | 신규 테이블 `session_invariant_unlock_tokens` + 함수 재정의(`reopen_session` 등 — **기존 `sessions` 테이블의 실사용 함수**) | 낮음~중간 — 정상 재개방 경로는 동일 동작, non-prod에 이미 완료/재개방 이력이 있는 세션이 있다면 그 세션들 자체는 변경 없음(과거 이력 데이터 아님, 함수 로직만 교체) | 아니오 |
+| 28 | `20261262000000_r10_corrective_reversal_idempotency.sql` | 정산 corrective | 컬럼 추가(`payout_items.reversed_from_item_id`) + 부분 유니크 제약 + 함수 재정의(`reverse_payout_item`) | **이번 세션 신규**. 낮음 — 신규 컬럼은 nullable, 기존 `payout_items` 행은 전부 `NULL`로 시작(기존 역분개 없음으로 해석). non-prod에 이미 수동으로 처리된 역분개 항목이 있다면 그 항목들은 이 컬럼이 채워지지 않은 채로 남는다(소급 연결 안 됨) — 반영 후 기존 역분개 건이 있었는지 1회 확인 권장 | 아니오 |
+| 29 | `20261263000000_r10_corrective_generate_payout_batches_lock.sql` | 정산 corrective | 함수 재정의(`generate_payout_batches`, `FOR UPDATE SKIP LOCKED` 추가) | **이번 세션 신규**. 없음(동시성 강화, 단일 호출 동작 동일) | 아니오 |
+| 30 | `20261264000000_r6_corrective_incident_report_reported_by_identity.sql` | 신고자 신원 corrective | **기존 정책 교체**(`session_incident_reports`의 INSERT 정책 — 이 테이블은 R6에서부터 이미 non-prod에 있었음) | **이번 세션 신규. 이 30개 중 유일하게 "이미 non-prod에 실재하던 테이블"의 RLS를 교체하는 항목** — 반영 직후 `reported_by`가 `NULL`이거나 세션 관련자 본인이 아닌 기존 행이 있다면(이번 세션에서 발견한 원 버그상 애초에 `reported_by` 자체가 항상 비어 인서트가 실패했으므로 실재 행이 있을 가능성은 낮음, 그러나 확인 필요) 새 정책 자체는 INSERT에만 영향(기존 SELECT 정책은 미변경)이라 과거 행 조회에는 영향 없음 | 아니오(정책 자체는 되돌리기 쉬움 — 다만 위조 방지가 사라진 상태로 되돌아감을 의미하므로 보안상 되돌리지 않는 것을 권장) |
 
-**주의가 필요한 마이그레이션**(non-prod 반영 시 특히 확인할 것):
-- `20261264000000` — `session_incident_reports` INSERT 정책 교체. non-prod에
-  이미 그 테이블에 대한 미완료 트랜잭션이나 이전 정책에 의존하는 통합 테스트
-  데이터가 있다면 충돌 여부 확인.
-- `20261262000000`/`20261263000000` — `payout_items`/`payout_batches` 관련.
-  non-prod에 기존 `payout_disbursement_gate.real_disbursement_enabled` 값이
-  실수로 `true`로 남아있지 않은지 반영 직후 반드시 재확인(아래 4절).
+**전체 요약**: 30개 중 `DROP TABLE`/`TRUNCATE`/컬럼 삭제/타입 변경은 **0건** —
+전부 신규 테이블·컬럼 추가·함수(RLS 포함) 재정의뿐이다. 데이터 손실 위험이
+있는 항목은 없다. "기존에 이미 non-prod에 존재하는 객체"를 건드리는 항목은
+#13, #18~#27(GUC 보안 정리 대다수), #30뿐이며, 전부 "정상 호출 경로 동작은
+동일, 우회 경로만 차단/토큰화"하는 성격이라 실제 데이터에 미치는 영향은
+낮다. **#11과 #30이 이번 검토에서 가장 주의 깊게 봐야 할 항목**(각각 위 표에
+근거 기재).
+
+### 2단계(dry-run·의존성 검토) 결과 — 실제 반영 없음
+
+`supabase db push --linked --dry-run`(non-prod 대상, **쓰기 없음**)을 실행해
+확인:
+- 30개 파일 전부가 "반영 대상"으로 정확히 식별됨(local=remote 기준 정확히
+  일치, 위 목록과 동일) — dry-run 자체는 SQL을 실행하지 않으므로 실행 중
+  실패 여부까지는 알려주지 않는다.
+- 정적 검토(각 파일 grep)로 확인: **최상위(함수 본문 밖) `UPDATE`/`DELETE`/
+  `INSERT`는 #11(`20261237000000`) 3건뿐** — 나머지 datawrite처럼 보이는
+  구문은 전부 `create or replace function ... $$ ... $$` 본문 안에 있어 이
+  마이그레이션 적용 시점이 아니라 그 함수가 나중에 호출될 때만 실행된다.
+- **도메인 경계가 타임스탬프로 깔끔히 분리돼 있다**: R9 커리큘럼·세션·과제
+  (`20261228~20261250`) → GUC 보안 정리(`20261251~20261261`) → 정산·신고자
+  corrective(`20261262~20261264`) 순서로 겹침이 없다. 즉 **도메인별로 나눠
+  반영해도 뒤 도메인이 앞 도메인의 대상을 참조하는 구조라 순서를 지키는 한
+  실패할 이유가 없다** — 다만 각 도메인 안에서는 파일 순서를 반드시 지켜야
+  한다(예: `20261232000000`이 먼저 있어야 `20261233000000`이 참조하는
+  테이블이 존재).
+
+**중단 가능성이 있는 migration**: 없음으로 판단(정적 검토 기준) — 전부 `if
+exists`/`if not exists`/`create or replace` 패턴을 쓰거나 이번 배치 내에서
+새로 만든 객체만 참조한다. 단, dry-run은 실제 실행이 아니므로 이 판단은
+**정적 분석 기준의 예상**이며 100% 보장은 아니다.
+
+**기존 데이터 조건이 필요한 migration**: **#11
+(`20261237000000_r9_corrective_content_item_unit_provenance.sql`)** 하나 —
+위 표 설명대로, 대상 테이블이 빈 상태일 때만 안전이 보장된 백필이다. 30개를
+한 번에(또는 R9 도메인을 통째로) 반영하는 한 문제 없다.
+
+**RLS 정책 교체 항목**(신규 테이블의 최초 정책 부여가 아니라 기존 정책을
+`drop policy`로 없애고 다시 만드는 것): **#7, #30** 둘뿐. #7은 이번 배치에서
+새로 생긴 테이블의 정책이라 실질적 위험 없음, #30은 위에서 설명한 대로 이미
+non-prod에 있던 테이블의 정책 교체라 유일하게 "실제 서비스 중인 테이블의 RLS
+교체"에 해당한다.
+
+### 안전 플래그 재확인(fail-closed 코드 경계, 값은 열람하지 않음)
+- **DocuSign**: `lib/docusign.ts:109` — `process.env.DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS
+  === "true"`. 정확히 문자열 `"true"`가 아니면(미설정 포함) 항상 차단 —
+  코드 구조 자체가 fail-closed. Preview에 이 변수가 설정돼 있음은 1단계에서
+  확인했으나 **실제 값은 열람하지 않았다** — `"true"`가 아님을 콘솔에서
+  확인하는 것은 여전히 필요.
+- **Calendar**: `lib/google-calendar.ts:32` — `process.env.CALENDAR_SYNC_ALLOW_REAL_CALLS
+  !== "true"`일 때 예외를 던지는 구조로, 동일하게 fail-closed. 값 열람 안 함,
+  콘솔 확인 필요.
+- **SMTP·Stripe는 코드로 fail-closed를 강제할 수 없는 항목**(`lib/email.ts`는
+  `SMTP_HOST` 미설정 시 발송 실패로 처리할 뿐 "안전한 값"인지는 판단하지
+  못하고, Stripe는 키 자체가 test/live를 결정한다) — **이 두 값이 실제로
+  Preview 전용 sandbox/test 값인지는 이번 세션이 확인할 수 없고, UAT 시작
+  전 제품 오너가 Vercel 콘솔에서 직접 값을 교체·확인해야 한다는 조건으로
+  남긴다.** 이 조건이 충족되기 전에는 UAT를 시작하지 않는다.
 
 ### Preview 배포 대상
 현재 브랜치 `preview/m4-integration-verification` 기준 최신 커밋까지(이번 세션의
