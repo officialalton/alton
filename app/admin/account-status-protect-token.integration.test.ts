@@ -79,6 +79,50 @@ function grantMergeCapability(profileId: string): void {
   psql(`insert into supervisor_capabilities (profile_id, capability) values ('${profileId}', 'manage_account_merges');`);
 }
 
+// 만 13세 미만 학생 — 미성년 동의 게이트 테스트용.
+function createMinorStudent(label: string): string {
+  const now = Date.now();
+  const id = psql(
+    `insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at)
+     values ('00000000-0000-0000-0000-000000000000', gen_random_uuid(), 'authenticated', 'authenticated', 'status-token-minor-${label}-${now}@example.com', 'x', now(), '{}', '{}', now(), now())
+     returning id;`
+  );
+  psql(`
+    insert into profiles (id, role, name, date_of_birth) values ('${id}', 'student', '토큰테스트 미성년 학생(${label})', ((now() at time zone 'utc')::date - interval '10 years')::date);
+    insert into students (id, grade, status) values ('${id}', '4학년', 'pending');
+  `);
+  return id;
+}
+
+function grantGuardianConsent(studentId: string): void {
+  psql(`
+    insert into consent_policy_versions (id, version, title, content_hash, effective_from, requires_reconsent)
+    select gen_random_uuid(), 'v-status-token-test', '토큰 테스트 정책', 'hash-status-token-test', now() - interval '1 day', false
+    where not exists (select 1 from consent_policy_versions where version = 'v-status-token-test');
+    insert into guardian_consents (student_id, policy_version_id, consented_by, verification_method)
+    select '${studentId}', id, '${ADMIN_ID}', 'test'
+    from consent_policy_versions where version = 'v-status-token-test';
+  `);
+}
+
+// 선생님 활성화 체크리스트(7개 조건)를 전부 충족시킨다 — 정상 pending→active
+// 경로와 활성화 게이트 테스트에서 재사용.
+function satisfyTeacherActivationChecklist(teacherId: string): void {
+  psql(`
+    insert into teacher_workspace_provisioning
+      (workspace_email, workspace_email_normalized, personal_contact_email, workspace_recovery_email,
+       linked_teacher_id, created_by, workspace_created_at, first_login_at, linked_at)
+    values
+      ('ws-${teacherId}@example.com', lower('ws-${teacherId}@example.com'), 'personal-${teacherId}@example.com',
+       'recovery-${teacherId}@example.com', '${teacherId}', '${ADMIN_ID}', now(), now(), now());
+    insert into teacher_rate_history (teacher_id, amount_minor, effective_from, created_by)
+    values ('${teacherId}', 30000, now() - interval '1 day', '${ADMIN_ID}');
+    update teachers set onboarding_completed_at = now() where id = '${teacherId}';
+    insert into teacher_contracts (teacher_id, doc_type, status, signed_at)
+    values ('${teacherId}', 'contract', 'signed', now());
+  `);
+}
+
 describe("protect_account_status() / transition_account_status() / merge_accounts() — status_transition_tokens 1회용 토큰(corrective 회귀)", () => {
   it("① 정상 전이 — transition_account_status() 관리자 경로(학생 pending→active)", () => {
     const studentId = createAdultStudent("admin-path");
@@ -193,28 +237,58 @@ describe("protect_account_status() / transition_account_status() / merge_account
     expect(status).toBe("pending");
   });
 
-  it("⑤ 동시성 — 서로 다른 프로필의 순차 전이가 토큰(xact_id)으로 서로 간섭하지 않는다", () => {
+  it("⑤ 동시성 — 서로 다른 프로필의 동시 전이는 계속 독립적으로 성공한다(false serialization 없음)", async () => {
     const studentA = createAdultStudent("concurrency-a");
-    const studentB = createAdultStudent("concurrency-b");
+    const teacherB = createTeacher("concurrency-b");
+    satisfyTeacherActivationChecklist(teacherB);
 
-    asUser(ADMIN_ID, `select transition_account_status('${studentA}'::uuid, 'active', 'A 전이');`);
-    asUser(ADMIN_ID, `select transition_account_status('${studentB}'::uuid, 'active', 'B 전이');`);
+    function callInBackground(profileId: string, newStatus: string): Promise<{ ok: boolean; output: string }> {
+      return new Promise((resolve) => {
+        const child = spawn("psql", [
+          DB_URL,
+          "-v",
+          "ON_ERROR_STOP=1",
+          "-q",
+          "-t",
+          "-A",
+          "-c",
+          `
+            set role authenticated;
+            select set_config('request.jwt.claim.sub', '${ADMIN_ID}', false);
+            select transition_account_status('${profileId}'::uuid, '${newStatus}', '동시 호출 테스트(서로 다른 행)');
+            reset role;
+          `,
+        ]);
+        let output = "";
+        child.stdout.on("data", (d) => (output += d.toString()));
+        child.stderr.on("data", (d) => (output += d.toString()));
+        child.on("close", (code) => resolve({ ok: code === 0, output }));
+      });
+    }
+
+    const [resA, resB] = await Promise.all([
+      callInBackground(studentA, "active"),
+      callInBackground(teacherB, "active"),
+    ]);
+
+    expect(resA.ok).toBe(true);
+    expect(resB.ok).toBe(true);
 
     expect(psql(`select status from students where id = '${studentA}';`)).toBe("active");
-    expect(psql(`select status from students where id = '${studentB}';`)).toBe("active");
+    expect(psql(`select status from teachers where id = '${teacherB}';`)).toBe("active");
 
-    const leftoverTokens = psql(
-      `select count(*) from status_transition_tokens where row_id in ('${studentA}', '${studentB}');`
-    );
-    expect(leftoverTokens).toBe("0");
+    const eventsA = Number(psql(`select count(*) from account_status_events where profile_id = '${studentA}';`));
+    const eventsB = Number(psql(`select count(*) from account_status_events where profile_id = '${teacherB}';`));
+    expect(eventsA).toBe(1);
+    expect(eventsB).toBe(1);
 
-    const events = psql(
-      `select count(*) from account_status_events where profile_id in ('${studentA}', '${studentB}');`
+    const leftoverTokens = Number(
+      psql(`select count(*) from status_transition_tokens where row_id in ('${studentA}', '${teacherB}');`)
     );
-    expect(events).toBe("2");
+    expect(leftoverTokens).toBe(0);
   });
 
-  it("⑤ 동시성 — 같은 행에 대한 동시 호출은 이중 적용/오염 없이 정확히 하나만 성공하거나 순차 직렬화된다", async () => {
+  it("⑤ 동시성 — 같은 행에 대한 동시 pending→active 호출은 정확히 하나만 성공하고 이벤트/토큰이 오염되지 않는다(corrective: FOR UPDATE 행 잠금)", async () => {
     const studentId = createAdultStudent("concurrency-same-row");
 
     function callInBackground(): Promise<{ ok: boolean; output: string }> {
@@ -244,33 +318,30 @@ describe("protect_account_status() / transition_account_status() / merge_account
     const [first, second] = await Promise.all([callInBackground(), callInBackground()]);
     const results = [first, second];
 
-    // 정확히 하나만 성공하거나(다른 하나는 "허용되지 않는 상태 전이" 로 실패)
-    // 혹은 둘 다 성공(직렬화되어 두 번째 호출 시점엔 이미 active→active가
-    // 아니라 순서상 실제로 pending→active가 한 번만 유효하므로, 두 번째는
-    // "허용되지 않는 상태 전이"로 실패하는 것이 정상 — 어느 쪽이든 상태
-        // 오염(예: 잘못된 enum 값, 중복 closed 등)은 없어야 한다.
-
+    // (corrective) 행 잠금(FOR UPDATE) + 잠금 후 재검증 덕분에, 나중에 잠금을
+    // 얻은 호출은 이미 'active'로 바뀐 상태를 다시 읽고 "허용되지 않는 상태
+    // 전이입니다"로 명확히 거부된다 — 정확히 하나만 성공해야 한다(이전
+    // 버전처럼 둘 다 성공하는 경우는 더 이상 없다).
     const successCount = results.filter((r) => r.ok).length;
-    expect(successCount).toBeGreaterThanOrEqual(1);
-    expect(successCount).toBeLessThanOrEqual(2);
+    expect(successCount).toBe(1);
+
+    const failed = results.find((r) => !r.ok);
+    expect(failed).toBeDefined();
+    expect(failed!.output).toMatch(/허용되지 않는 상태 전이입니다/);
 
     const finalStatus = psql(`select status from students where id = '${studentId}';`);
     expect(finalStatus).toBe("active");
 
-    const eventCount = psql(`select count(*) from account_status_events where profile_id = '${studentId}';`);
-    expect(Number(eventCount)).toBe(successCount);
+    // 상태 이벤트 정확히 1건 — 이중 기록 없음.
+    const eventCount = Number(psql(`select count(*) from account_status_events where profile_id = '${studentId}';`));
+    expect(eventCount).toBe(1);
 
-    // 두 트랜잭션이 모두 검증(v_current='pending')을 통과한 뒤 UPDATE에서
-    // 직렬화되는 경우, 늦게 커밋을 시도한 트랜잭션의 UPDATE는 이미 커밋된
-    // 'active' 값을 다시 'active'로 덮어쓰는 no-op(new.status is not distinct
-    // from old.status)이 되어 트리거가 토큰 확인/소비 자체를 건드리지 않는다
-    // — 그 트랜잭션이 인라인 INSERT한 토큰이 소비되지 않은 채 하나 남을 수
-    // 있다(harmless: 이 orphan 토큰은 자신의 xact_id에 영속적으로 묶여 있어
-    // 이후 어떤 트랜잭션도 재사용할 수 없다). 상태 오염(이중 적용, 잘못된
-    // 값)만 없으면 되므로 leftover 토큰 개수는 0 또는 1을 허용한다.
+    // 토큰 잔존 0건 — 실패한 호출은 잠금+재검증이 토큰 INSERT보다 먼저
+    // 일어나므로 애초에 토큰을 INSERT하지 못한 채 예외로 실패한다. 성공한
+    // 호출이 INSERT한 토큰은 protect_account_status() 트리거가 UPDATE
+    // 시점에 소비한다.
     const leftoverTokens = Number(psql(`select count(*) from status_transition_tokens where row_id = '${studentId}';`));
-    expect(leftoverTokens).toBeGreaterThanOrEqual(0);
-    expect(leftoverTokens).toBeLessThanOrEqual(1);
+    expect(leftoverTokens).toBe(0);
   });
 
   it("⑥ 실패 시 전체 롤백 — account_status_events INSERT 실패 시 토큰도 status UPDATE도 남지 않는다", () => {
@@ -348,5 +419,85 @@ describe("protect_account_status() / transition_account_status() / merge_account
       psql(`drop trigger if exists force_account_status_event_failure2 on account_status_events;`);
       psql(`drop function if exists force_account_status_event_failure_for_test2();`);
     }
+  });
+
+  // transition_account_status()의 v_valid 목록(20261257000000)에 있는 10개
+  // 전이 전부를 각자의 유효한 시작 상태에서 실제로 호출해 증명한다.
+  describe("⑦ 허용된 10개 상태 전이 전부", () => {
+    const cases: Array<{ from: string; to: string }> = [
+      { from: "pending", to: "active" },
+      { from: "pending", to: "inactive" },
+      { from: "active", to: "suspended" },
+      { from: "suspended", to: "active" },
+      { from: "active", to: "closure_pending" },
+      { from: "suspended", to: "closure_pending" },
+      { from: "closure_pending", to: "closed" },
+      { from: "active", to: "inactive" },
+      { from: "suspended", to: "inactive" },
+      { from: "inactive", to: "active" },
+    ];
+
+    it.each(cases)("$from → $to", ({ from, to }) => {
+      const parentId = createParent(`transition-${from}-${to}`, from);
+
+      asUser(ADMIN_ID, `select transition_account_status('${parentId}'::uuid, '${to}', '전이 목록 검증');`);
+
+      const status = psql(`select status from parents where id = '${parentId}';`);
+      expect(status).toBe(to);
+
+      const event = psql(
+        `select previous_status, new_status from account_status_events where profile_id = '${parentId}';`
+      );
+      expect(event).toBe(`${from}|${to}`);
+    });
+  });
+
+  // 13세 미만 학생 → active 게이트: is_under_13() && !has_valid_guardian_consent().
+  describe("⑧ 미성년 동의 게이트", () => {
+    it("유효한 보호자 동의 없이 13세 미만 학생을 active로 전환하면 거부된다", () => {
+      const minorId = createMinorStudent("no-consent");
+
+      expect(() =>
+        asUser(ADMIN_ID, `select transition_account_status('${minorId}'::uuid, 'active', '동의 없음 테스트');`)
+      ).toThrow(/13세 미만 학생은 유효한 보호자 동의 없이/);
+
+      const status = psql(`select status from students where id = '${minorId}';`);
+      expect(status).toBe("pending");
+    });
+
+    it("유효한 보호자 동의가 있으면 13세 미만 학생도 active로 전환할 수 있다", () => {
+      const minorId = createMinorStudent("with-consent");
+      grantGuardianConsent(minorId);
+
+      asUser(ADMIN_ID, `select transition_account_status('${minorId}'::uuid, 'active', '동의 있음 테스트');`);
+
+      const status = psql(`select status from students where id = '${minorId}';`);
+      expect(status).toBe("active");
+    });
+  });
+
+  // 선생님 활성화 게이트: get_teacher_activation_checklist()의 7개 조건이
+  // 전부 satisfied여야 pending → active가 허용된다.
+  describe("⑨ 선생님 활성화 게이트", () => {
+    it("활성화 선행조건이 충족되지 않으면 거부된다", () => {
+      const teacherId = createTeacher("activation-gate-unmet");
+
+      expect(() =>
+        asUser(ADMIN_ID, `select transition_account_status('${teacherId}'::uuid, 'active', '선행조건 미충족 테스트');`)
+      ).toThrow(/선생님 활성화 선행조건이 충족되지 않았습니다/);
+
+      const status = psql(`select status from teachers where id = '${teacherId}';`);
+      expect(status).toBe("pending");
+    });
+
+    it("활성화 선행조건 7개를 모두 충족하면 active로 전환할 수 있다", () => {
+      const teacherId = createTeacher("activation-gate-met");
+      satisfyTeacherActivationChecklist(teacherId);
+
+      asUser(ADMIN_ID, `select transition_account_status('${teacherId}'::uuid, 'active', '선행조건 충족 테스트');`);
+
+      const status = psql(`select status from teachers where id = '${teacherId}';`);
+      expect(status).toBe("active");
+    });
   });
 });

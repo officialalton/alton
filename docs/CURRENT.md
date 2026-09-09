@@ -1,5 +1,37 @@
 # ALTON — 현재 상태 (2026-09-08 기준)
 
+> **2026-09-08 — `transition_account_status()` TOCTOU 행 잠금 corrective
+> 후속 수정 완료.** 배치 2-1 corrective(`20261256000000`)로 GUC를
+> `status_transition_tokens`로 교체한 뒤, `transition_account_status()`가
+> 대상 역할 테이블(`students`/`teachers`/`parents`) 행을 잠그지 않은 채
+> 현재 상태를 읽고 검증하던 TOCTOU 레이스가 남아 있었다 — 같은 행에 대해
+> 동일한 전이(예: `pending → active`)를 요청하는 두 동시 호출이 둘 다
+> `pending`을 읽고 검증을 통과해 `account_status_events`에 중복 이벤트가
+> 쌓일 수 있었다. 신규 마이그레이션
+> `supabase/migrations/20261257000000_r2_corrective_status_transition_row_lock.sql`
+> (`create or replace function`, 기존 `20261256000000` 파일은 수정하지
+> 않음)로 역할 확정 직후 `select ... for update`로 대상 행을 먼저 잠그고,
+> 잠금 확보 후 `get_account_status()`로 상태를 재조회해 그 값으로 전이
+> 유효성을 검증하도록 고쳤다 — 대기하던 호출이 잠금을 얻었을 때 이미 다른
+> 트랜잭션이 전이를 커밋했다면 기존과 동일한 "허용되지 않는 상태
+> 전이입니다" 오류로 자연스럽게 거부된다(새 오류 경로 없음). `merge_accounts()`는
+> 조사 결과 이미 `profiles` 행을 `v_first`/`v_second` 정렬 순서로
+> `for update` 잠근 뒤에야 상태를 읽으므로 같은 레이스가 없어 변경하지
+> 않았다. `app/admin/account-status-protect-token.integration.test.ts`의
+> 기존 동시성 테스트(⑤)를 이전 라운드의 느슨한 "하나 이상 성공 허용" 검증
+> 대신 진짜 동시(별도 psql 프로세스 + `Promise.all`) 호출로 "정확히
+> 하나만 성공, 이벤트 정확히 1건, 토큰 잔존 0건"을 단언하도록 교체했고,
+> 서로 다른 행에 대한 동시 호출은 계속 독립적으로 성공함을 검증하는
+> 테스트도 추가했다. 또한 이 함수의 10개 허용 전이 전부를
+> `it.each`로 개별 검증하는 테스트, 미성년 동의 게이트(13세 미만 학생
+> `active` 전환), 선생님 활성화 체크리스트(7개 조건) 게이트를 각각
+> 미충족/충족 양쪽으로 검증하는 테스트를 신규 추가했다. `bypass_invite_protect`/
+> `bypass_reconciliation_task_lock`/`bypass_session_lock`/`recomplete_session()`은
+> 건드리지 않았다. `supabase db reset --local` 후 해당 테스트 파일 전체
+> 통과, `tsc --noEmit` 클린, 전체 스위트(`--no-file-parallelism`)를
+> fresh-reset 후 2회 연속 실행해 매번 229개 파일 / 1605개 테스트 전부
+> 통과 확인, `next build` 성공.
+>
 > **2026-09-08 — bypass GUC 배치 2-3(`bypass_reconciliation_task_lock`) 동시
 > 재판정/반영 경합 정책 확정(계획/문서 전용, 코드/마이그레이션 변경 없음).**
 > `docs/superpowers/plans/2026-09-08-bypass-guc-security-cleanup.md`에 6차
