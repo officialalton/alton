@@ -421,6 +421,95 @@ describe("payout batch lifecycle (R10)", () => {
     }
   });
 
+  // R10 corrective(2026-09-09, 기반 안정화 계획 7절 6단계): generate_payout_batches()가
+  // 미배치 pending 항목을 조회(SELECT)한 뒤 새 batch를 INSERT하고, 그 조회 결과
+  // item_ids를 대상으로 UPDATE ... set batch_id = v_batch_id로 배정한다. 이 UPDATE는
+  // "batch_id가 여전히 null인 행만" 조건으로 걸지 않으므로, 두 트랜잭션이 같은
+  // 미배치 항목 집합을 동시에 조회한 뒤 각자 다른 batch를 만들어 순서대로 그 항목들의
+  // batch_id를 자기 batch로 덮어쓰면, 먼저 커밋한 batch는 반환값(item_count)과
+  // 달리 실제로는 항목이 하나도 안 남는 고아 batch가 되고, 나중에 커밋한 batch가
+  // 그 항목들을 전부 가져가는 경합이 이론적으로 가능한지 실제로 재현한다.
+  it("generate_payout_batches 동시 호출 시 미배치 항목이 두 batch에 이중 배정되거나 유실되지 않는다(동시성 재현)", async () => {
+    grantRegularEntitlement();
+    const sessionId = bookAndCompleteSession(9);
+    const itemId = psql(`select id from payout_items where session_id = '${sessionId}';`);
+
+    const periodStart = new Date();
+    periodStart.setUTCDate(periodStart.getUTCDate() - 12);
+    const ps = periodStart.toISOString().slice(0, 10);
+    const pe = new Date().toISOString().slice(0, 10);
+
+    // generate_payout_batches()의 INSERT INTO payout_batches 직후에 짧게 멈추는
+    // 트리거를 걸어, 두 트랜잭션 모두 "미배치 pending 항목 조회"를 마친 뒤
+    // 서로의 batch INSERT/UPDATE가 끝나기 전에 경합 구간에 머무르게 한다.
+    psql(`
+      create or replace function delay_payout_batch_insert_for_test()
+      returns trigger language plpgsql as $$
+      begin
+        perform pg_sleep(0.4);
+        return new;
+      end;
+      $$;
+    `);
+    psql(`
+      create trigger delay_payout_batch_insert
+        after insert on payout_batches
+        for each row execute function delay_payout_batch_insert_for_test();
+    `);
+
+    function runGenerate(): Promise<{ ok: boolean; output: string }> {
+      return new Promise((resolve) => {
+        const child = spawn("psql", [
+          DB_URL,
+          "-v",
+          "ON_ERROR_STOP=1",
+          "-q",
+          "-t",
+          "-A",
+          "-c",
+          `select batch_id, item_count from generate_payout_batches('${ps}', '${pe}', '${TEACHER_ID}');`,
+        ]);
+        let output = "";
+        child.stdout.on("data", (d) => (output += d.toString()));
+        child.stderr.on("data", (d) => (output += d.toString()));
+        child.on("close", (code) => resolve({ ok: code === 0, output: output.trim() }));
+      });
+    }
+
+    let results: { ok: boolean; output: string }[];
+    try {
+      results = await Promise.all([runGenerate(), runGenerate()]);
+    } finally {
+      psql(`drop trigger if exists delay_payout_batch_insert on payout_batches;`);
+      psql(`drop function if exists delay_payout_batch_insert_for_test();`);
+    }
+
+    // 두 호출 모두 에러 없이 끝나야 한다(교착 등으로 죽지 않음 — SKIP LOCKED는
+    // 대기 없이 건너뛰므로 데드락 자체가 발생할 수 없는 구조다).
+    expect(results.every((r) => r.ok)).toBe(true);
+
+    // 수정 전 실제 재현됐던 증상: 두 호출 모두 item_count=1을 반환(둘 다 같은
+    // 항목을 자기가 배정했다고 믿음). 수정 후에는 FOR UPDATE SKIP LOCKED 덕분에
+    // 정확히 한쪽만 그 항목을 그룹에 포함해 item_count=1을 반환하고, 나머지
+    // 한쪽은 그 항목이 이미 잠겨 있어 후보에서 제외되므로 batch 자체를 만들지
+    // 않는다(빈 output, 즉 "0 rows" — batch_id|item_count 문자열이 비어 있음).
+    const outputsWithItem = results.filter((r) => r.output.length > 0);
+    expect(outputsWithItem).toHaveLength(1);
+    expect(outputsWithItem[0].output).toBe(`${outputsWithItem[0].output.split("|")[0]}|1`);
+
+    // 핵심 검증: 이 항목은 정확히 하나의 batch에만 배정돼야 하고(중복 배정 없음),
+    // 미배치로 유실되지도 않아야 한다(batch_id가 null로 남지 않음).
+    const finalStatus = psql(`select status, batch_id is null from payout_items where id = '${itemId}';`);
+    expect(finalStatus).toBe("batched|f");
+
+    // 고아 batch가 생기지 않았는지: 반환값이 가리키는 batch에 이 항목이 실제로
+    // 연결돼 있어야 한다(반환값과 실제 DB 상태 일치 — 수정 전에는 이 값이
+    // 서로 달랐다).
+    const createdBatchId = outputsWithItem[0].output.split("|")[0];
+    expect(psql(`select batch_id from payout_items where id = '${itemId}';`)).toBe(createdBatchId);
+    expect(psql(`select count(*) from payout_items where batch_id = '${createdBatchId}';`)).toBe("1");
+  });
+
   it("reverse_payout_item은 게이트가 열려 있어도(요구사항 2) 항상 approved에서 시작하고, 정규 payout과 동일한 파이프라인을 거쳐야만 paid가 된다", () => {
     grantRegularEntitlement();
     const sessionId = bookAndCompleteSession(7);
