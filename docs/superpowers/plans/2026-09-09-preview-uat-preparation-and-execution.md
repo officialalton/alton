@@ -169,18 +169,28 @@ non-prod에 있던 테이블의 정책 교체라 유일하게 "실제 서비스 
   전 제품 오너가 Vercel 콘솔에서 직접 값을 교체·확인해야 한다는 조건으로
   남긴다.** 이 조건이 충족되기 전에는 UAT를 시작하지 않는다.
 
-### Preview 배포 대상
-현재 브랜치 `preview/m4-integration-verification` 기준 최신 커밋까지(이번 세션의
-전체 커밋 — 기반 안정화 7단계, incident-report corrective, 성능 측정 라운드,
-admin N+1 수정)를 Vercel Preview에 배포하는 것을 대상으로 한다. **`main` 병합은
-하지 않는다** — Preview 배포는 브랜치를 그대로 Vercel Preview 환경에 올리는
-것이지 병합이 아니다.
+### Preview 배포 — 완료(2026-09-09, 제품 오너 승인)
 
-Preview 배포 전 확인:
-- Preview 환경 변수가 이미 설정돼 있는지(Vercel 프로젝트 설정) — 특히 4절의
-  안전 플래그들이 전부 비활성 상태로 들어가는지.
-- Preview가 연결하는 Supabase 프로젝트가 **non-prod**인지(운영 프로젝트가
-  아닌지) 재확인 — URL/프로젝트 ref를 실행 직전에 다시 확인한다.
+**대상 커밋**: `1b6335a`(브랜치 `preview/m4-integration-verification`,
+working tree clean 확인 후 배포). **배포 ID**: `dpl_4YUqPzVBzDAfCnqbxPjwgjWzWxWm`.
+**Preview URL**: `https://alton-o90ch0k7c-alton7.vercel.app`. **Inspector**:
+`https://vercel.com/alton7/alton/4YUqPzVBzDAfCnqbxPjwgjWzWxWm`.
+
+**실행 직전 재확인**: `vercel whoami` → `officialalton` 계정, `.vercel/project.json`
+→ 대상 프로젝트 `alton7/alton`(`prj_PN2skh92lFA1DvBZpBhE2fLr2wso`) 일치 확인 후
+`vercel deploy`(`--prod` 플래그 없음 — Preview 배포)를 실행했다. 배포 후
+`vercel inspect`로 `target: preview`, `status: Ready` 재확인(Production 승격
+아님을 배포 자체의 메타데이터로 확인).
+
+**로그인 없이 확인 가능한 수준의 검증**: 루트(`/`)에 인증 없이 요청 →
+`302` + Vercel SSO 리다이렉트(`location: https://vercel.com/sso-api?...`) —
+Deployment Protection이 정상 작동해 콘텐츠가 노출되지 않음을 확인(기존
+라운드들과 동일한 known limitation, 실제 화면·기능 확인은 로그인 필요 —
+이번 라운드 범위 밖). 이 이상의 라우트 확인, UAT 계정 생성, 상담·예약·
+수업·이메일·결제·송금 동작은 실행하지 않았다.
+
+**하지 않은 것**: `main` 병합, `git push`, Production 배포/승격, alias 변경,
+환경변수 변경.
 
 ## 2. UAT 최소 계정 구성
 

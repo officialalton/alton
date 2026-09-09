@@ -1,5 +1,31 @@
 # ALTON — 현재 상태 (2026-09-09 기준)
 
+> **2026-09-09 — `preview/m4-integration-verification` HEAD를 Vercel Preview에
+> 배포 완료(제품 오너 승인).** 실행 직전 `vercel whoami`로 계정
+> (`officialalton`), `.vercel/project.json`으로 대상 프로젝트(`alton7/alton`,
+> `prj_PN2skh92lFA1DvBZpBhE2fLr2wso`) 재확인 후 `vercel deploy`(`--prod` 없이,
+> 즉 Preview)를 실행했다.
+>
+> - **대상 커밋**: `1b6335a`(브랜치 `preview/m4-integration-verification`,
+>   working tree clean 확인 후 배포)
+> - **배포 ID**: `dpl_4YUqPzVBzDAfCnqbxPjwgjWzWxWm`
+> - **Preview URL**: `https://alton-o90ch0k7c-alton7.vercel.app`
+> - **Inspector**: `https://vercel.com/alton7/alton/4YUqPzVBzDAfCnqbxPjwgjWzWxWm`
+> - `vercel inspect`로 `target: preview`, `status: Ready` 재확인(Production
+>   승격 아님).
+> - 로그인 없이 루트(`/`) 요청 → `302` + Vercel SSO 리다이렉트
+>   (`location: https://vercel.com/sso-api?...`) — Deployment Protection이
+>   정상 작동해 콘텐츠가 노출되지 않음을 확인(기존 라운드들과 동일한 known
+>   limitation, 실제 화면 확인은 로그인 필요). 이 이상의 라우트·기능 확인은
+>   하지 않았다.
+>
+> **하지 않은 것**: `main` 병합, `git push`, Production 배포/승격, alias
+> 변경, 환경변수 변경, UAT 계정 생성, 상담·예약·수업·이메일·결제·송금 관련
+> 어떤 동작도 실행하지 않았다.
+>
+> **다음 승인 대기**: SMTP sandbox·Stripe test 설정 확인/교체(제품 오너 직접
+> 수행), UAT 계정 생성.
+
 > **2026-09-09 — non-prod(`worpsqwqgnspddnrtnvq`)에 UAT용 migration 30개
 > 반영 완료(제품 오너 승인, 실패 없이 전부 성공).** `supabase migration list
 > --linked` 원문 기준: 반영 전 로컬 173개 중 **143개가 이미 적용돼 있었고
