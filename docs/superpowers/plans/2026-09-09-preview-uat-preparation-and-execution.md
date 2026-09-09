@@ -32,15 +32,16 @@ Preview 배포, UAT 계정·세션 생성은 이 계획을 검토한 뒤 제품 
 ### 반영 대상 migration
 로컬 `supabase/migrations/`에는 현재 **173개** 파일이 있다(최신:
 `20261264000000_r6_corrective_incident_report_reported_by_identity.sql`, 이번
-세션의 기반 안정화 7단계 + corrective + 성능 라운드까지 전부 포함). 이 세션에서
-새로 추가된 것은 다음 4개다:
+세션의 기반 안정화 7단계 + corrective + 성능 라운드까지 전부 포함). 이번
+세션(기반 안정화 7단계 승인 이후, 성능 측정 라운드 착수 전까지)에서 새로
+추가된 것은 다음 **3개**다:
 
 1. `20261262000000_r10_corrective_reversal_idempotency.sql` — `reverse_payout_item()` 멱등화
 2. `20261263000000_r10_corrective_generate_payout_batches_lock.sql` — `generate_payout_batches()` 잠금
 3. `20261264000000_r6_corrective_incident_report_reported_by_identity.sql` — 신고자 신원 강제
 
 (참고: `20261261000000_r8_corrective_session_invariant_tokens.sql`까지는 이전
-배치 2 라운드에서 이미 생성됐고 이번 세션 시작 시점에 로컬에 존재했다 — 이 4개
+배치 2 라운드에서 이미 생성됐고 이번 세션 시작 시점에 로컬에 존재했다 — 이 3개
 중 실제로 non-prod에 아직 없는 것이 무엇인지는 **non-prod 프로젝트의 실제
 migration 이력을 확인해야 정확히 알 수 있다.**)
 
@@ -105,24 +106,31 @@ Google Workspace 계정 발급은 실제 Workspace API 쓰기가 필요하므로
 UAT 계정 두 명(교사/학생)이 동시에 접속해서 검증할 수 있는 `sessions`(v3) 행
 1건.
 
-**안전한 준비 절차**(가능한 한 실제 앱 플로우로, 최소한만 직접 개입):
+**안전한 준비 절차**(전부 실제 앱 플로우 — DB 직접 수정 없음):
 1. 위 2절의 UAT 교사·학생·보호자 계정과 계약(contract)·수업권(entitlement)까지는
    실제 흐름(상담→온보딩→계약→수업권 부여)으로 만든다 — 이것 자체가 5절 첫 번째
    흐름의 검증 대상이므로 별도로 미리 만들지 않는다.
 2. 예약(`reservation`)은 **실제 예약 화면**(교사 가능 시간 → 학생/보호자 예약)으로
-   만들되, `starts_at`을 **UAT 실행 시각으로부터 5~10분 뒤** 정도로 가깝게 잡아
-   "수업 시작" 버튼이 실제로 눌리는 순간까지 오래 기다리지 않도록 한다(예약
-   자체는 `is_within_booking_window`가 24시간~8주 미래만 허용하므로, 예약을 미리
-   미래 시각으로 잡은 뒤 3번처럼 시각만 당긴다).
-3. 예약 시각을 UAT 진행 시점에 맞추기 위해, 필요하면 **admin 권한으로 딱 이
-   예약 1건의 `starts_at`/`ends_at`만** UAT 직전에 조정한다(다른 통합 테스트가
-   과거 세션을 만들 때 쓰는 것과 동일한 기법 — `reservations` 테이블 직접
-   UPDATE, 실제 앱 코드 경로는 아니지만 데이터 상태만 바꾸는 것이므로 부작용
-   없음). 이 조정은 **UAT 실행 ID가 붙은 이 예약 1건에만** 적용하고 다른
-   데이터는 건드리지 않는다.
+   만든다. `is_within_booking_window`가 24시간~8주 미래만 허용하므로 예약
+   시각은 그 범위 안의 아무 미래 시각으로 잡는다 — 이후 그 시각을 기다리지
+   않는다(아래 3번 참고).
+3. **`starts_at`을 기다리지 않고 바로 "수업 시작"을 진행한다.**
+   `mark_lesson_session_started()`(`supabase/migrations/20261030000000_m5a_session_final_judgment.sql`)를
+   직접 확인한 결과, 이 함수는 세션의 `final_status = 'scheduled'`와 예약의
+   `status = 'confirmed'`만 검사할 뿐 `starts_at`이 현재 시각을 지났는지는
+   전혀 확인하지 않는다 — 즉 예약이 확정되는 순간부터 교사가 실제 "수업 시작"
+   버튼을 눌러도 정상적으로 진행된다. 예약 시각 자체를 게이트로 오해해 DB를
+   직접 고치지 않는다 — **`reservations.starts_at`/`ends_at`을 직접 UPDATE하는
+   절차는 이 계획에서 쓰지 않는다**(예약·수업권·알림·세션 관련 규칙을 우회할
+   수 있어 UAT 데이터라도 허용하지 않는다는 제품 오너 지적 반영).
 4. 세션(`sessions` 행)은 예약이 확정되면 `confirm_lesson_booking()`이 자동으로
    만든다 — 별도로 만들 필요 없음.
-5. 커리큘럼/교재는 4번째 흐름(커리큘럼·교재·문제 선택)에서 관리자/교사가 UAT
+5. 종료도 마찬가지로 DB 직접 수정 없이, 기존에 검증된 정상 종료
+   (`finalize_lesson_session(outcome='completed')`) 또는 정책상 허용된 조기
+   종료 경로(예: 학생 사유 조기종료 `earlyEndReason='student_reason'`, 또는
+   회사/선생님 귀책 조기종료 전용 경로)만 실제 UI로 그대로 검증한다 — 시간을
+   맞추기 위한 목적의 DB 수정은 하지 않는다.
+6. 커리큘럼/교재는 4번째 흐름(커리큘럼·교재·문제 선택)에서 관리자/교사가 UAT
    중 직접 구성하는 것을 검증 대상으로 삼는다 — 미리 채워두지 않는다.
 
 **안전장치**: 이 세션은 실제 Google Meet 연결(`google_meeting_code`)이 필요한
