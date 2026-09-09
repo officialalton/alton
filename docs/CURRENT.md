@@ -42,10 +42,21 @@
 > 재정렬, 로직 변경 없음). 전체 스위트 233/233 파일·1652/1652 테스트
 > 통과, `tsc`/`next build` 클린.
 >
-> **남은 단계**: 3(수업 상태변경 P0 테스트) → 4(관리자 service-role 감사) →
-> 5(P1 테스트 보강) → 6(정산 batch 생성 동시성 재현) → 7(레거시/v3·ALTER
-> 충돌 조사·문서화만). 예상 밖 정책 판단이나 UX 변경이 발견되면 그 지점에서
-> 멈추고 보고한다.
+> **3단계(수업 상태변경 P0 테스트) 완료**. `app/teacher/lesson-schedule-actions.ts`의
+> `startMyLessonSession`/`finalizeMyLessonSession`/`resolveMyLessonLateness`
+> 세 액션에 정상/권한 거부/잘못된 상태 3케이스씩 총 10개 테스트 추가
+> (`app/teacher/lesson-schedule-actions.test.ts`, `requireUser`/
+> `createAdminClient`를 `app/student/booking-actions.test.ts`와 동일한
+> 패턴으로 mock). 이 RPC들의 실제 상태머신(정상 전이·잘못된 상태 거부)
+> 자체는 `lib/booking/session-final-judgment.integration.test.ts` 등에서
+> 이미 DB 레벨로 검증돼 있었으므로, 이번 테스트는 그 위에 얹힌 액션
+> 레이어(본인 세션 재확인 권한 게이트, RPC 에러의 `{ok:false}` 변환 계약)를
+> 커버한다. 전체 스위트 234/234 파일·1662/1662 테스트 통과, `tsc`/
+> `next build` 클린.
+>
+> **남은 단계**: 4(관리자 service-role 감사) → 5(P1 테스트 보강) →
+> 6(정산 batch 생성 동시성 재현) → 7(레거시/v3·ALTER 충돌 조사·문서화만).
+> 예상 밖 정책 판단이나 UX 변경이 발견되면 그 지점에서 멈추고 보고한다.
 
 > **2026-09-09 — 배치 2-4(`bypass_session_lock`, 배치 2 마지막 항목) corrective
 > 완료.** 신규 마이그레이션
