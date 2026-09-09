@@ -62,6 +62,60 @@
 > (`docs/superpowers/plans/2026-09-08-bypass-guc-security-cleanup.md`)가 확정한
 > 범위를 벗어나는 새 작업(배치 3 등)은 시작하지 않았다.
 
+> **2026-09-09 — 제품 오너가 배치 2-4와 감사 대상 GUC 우회 7건 전체를 최종
+> 승인.** 재개방 정상 경로, `final_status`/`material_version_id` 두 불변식
+> 분리, 직접 변경·GUC·임시 테이블 위조 차단, 동시성·롤백까지 확인 완료 —
+> **`docs/superpowers/plans/2026-09-08-bypass-guc-security-cleanup.md`가 감사한
+> 7개 settable-GUC-bypass 취약점(배치 1 3건 + 배치 2 4건) 전체가 종결됐다.**
+> 신규 기능 개발은 보류하고, 다음 라운드는 오픈 전 기반 코드 리뷰·성능 진단의
+> **실행 계획 수립**으로 전환(코드 수정 없음, 계획 문서만).
+>
+> **실행 계획 문서 신설(2차 수정, 제품 오너 보완 지시 반영 후 확정)**:
+> `docs/superpowers/plans/2026-09-09-codebase-review-and-performance-diagnosis.md`.
+> Explore 서브에이전트 5개를 병렬 실행해 (1) 계정·권한·가족·RLS, (2) 상담·예약·
+> 수업·정산 상태 전이와 DB 제약, (3) 레거시/v3 경로 중복, (4) 서버 액션·
+> migration·테스트 정합성, (5) 페이지별 쿼리 성능을 1차 탐색(170개 migration/
+> 62개 액션 파일 전수 정독은 예산상 생략, grep 기반 스캔 + 대표 파일 정독)했다.
+> 1차 결과를 제품 오너가 검토한 뒤 4가지 보완 지시를 받아 계획을 2차로 확정했다.
+> **코드/마이그레이션 변경 없음 — 이번 라운드도 계획 문서 작성 + 이 항목만
+> 추가.**
+>
+> **보완 지시 반영 내용**:
+> 1. **정산 P0 설계 확정** — `reverse_payout_item()`: 원본 paid item 1건당 역분개는
+>    정확히 1회만 허용. `payout_items.reversed_from_item_id`(원본 참조 FK) 추가 +
+>    `unique (reversed_from_item_id) where not null` 제약으로 중복 생성을 DB
+>    레벨에서 차단. 함수는 원본 행 `for update` 잠금 후 기존 reversal이 있으면 그
+>    ID를 그대로 반환하는 멱등 동작으로 확정(신규 음수 항목·감사 로그 생성 안 함).
+>    필수 테스트 5종(정상/순차 재시도/동시 호출/중간 실패 롤백/서로 다른 원본 간
+>    비간섭)을 계획에 명시.
+> 2. **성능은 실측 선행** — `loadCurricula()`/교사 대시보드 N+1은 **P0 후보로만
+>    유지**, P0 확정은 학생 수×enrollment 수 조건 매트릭스(1/10/30 × 1/3/5)로
+>    개발 DB에서 서버 응답시간·PostgREST 왕복 수·순차 대기 구간·페이지 TTFB를
+>    먼저 측정한 뒤 결정. 순서는 ① 기준선 측정 → ② 배치 조회로 변경 → ③ 동일
+>    조건 재측정으로 계획에 고정.
+> 3. **테스트 공백 4건 재산정** — 일괄 P0 확정을 철회. 실제 확인 결과
+>    `app/teacher/lesson-schedule-actions.ts`(수업 시작/종료/지각 처리, 정산 직결)
+>    만 P0로 유지. `app/admin/direct-account-actions.ts`(계정운영), `app/student/
+>    incident-report-actions.ts`(안전, 순위는 이르게), `app/session/[id]/
+>    homework-actions.ts`(채점 무결성, 소유자 체크 존재 여부 착수 시 확인 필요)는
+>    실제 금전/권한 영향이 낮아 P1로 하향.
+> 4. **`trial_lesson_review` RPC 계열(5개 함수) 현행 유지** — 삭제·이관 보류.
+>    `20261016000000_m4_trial_review_and_regular_conversion.sql`→
+>    `20261017000000_m4_admin_function_auth_fix.sql`→
+>    `20261027000000_m4_unified_lesson_reviews.sql` 순으로 정의됐고 TypeScript
+>    호출부는 재확인해도 0건 — 다만 실제 통합 여부·데이터 잔존·운영 UI 사용
+>    여부를 별도 조사한 뒤에만 삭제/이관을 결정하기로 확정, 이번 계획에는
+>    포함하지 않음.
+>
+> **확정 실행 순서**: 정산 P0(`reverse_payout_item` 설계+테스트 5종) →
+> 성능 기준선 측정 및 N+1 개선(측정 후 확정) → 수업 상태변경 테스트
+> (`lesson-schedule-actions.ts`) → 나머지 권한·레거시 정리(`createAdminClient()`
+> 회귀 방지, legacy∪v3 union 헬퍼 추출, 나머지 P1 테스트 보강).
+>
+> **외부 변경**: 없음. Preview 배포, non-prod migration 반영, 외부 API 호출,
+> main 병합 전부 하지 않았다. **다음 작업은 제품 오너가 확정한 위 실행 순서대로
+> 시작한다 — 이번 라운드에서도 어떤 코드도 수정하지 않았다.**
+
 > **2026-09-09 — 배치 2-3 corrective의 corrective: `resolve_session_reconciliation_task()`
 > 잠금 순서 수정(실제 데드락 버그).** 신규 마이그레이션
 > `supabase/migrations/20261260000000_r2_corrective_reconciliation_lock_order.sql`.
