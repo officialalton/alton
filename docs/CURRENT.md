@@ -1,5 +1,68 @@
 # ALTON — 현재 상태 (2026-09-09 기준)
 
+> **2026-09-09 — non-prod에 UAT 계정·세션 준비 완료(제품 오너 승인, UAT 흐름
+> 자체는 아직 실행 안 함, 데이터 정리도 안 함).** 실행 ID `uat-2026-09-09`.
+> **로그인 비밀번호는 이 문서·Git 어디에도 기록하지 않는다** — 별도로 전달함.
+>
+> **대상 배포 재확인**: 목표한 Preview(`dpl_4YUqPzVBzDAfCnqbxPjwgjWzWxWm`,
+> `https://alton-o90ch0k7c-alton7.vercel.app`)는 여전히 최신 Ready Preview임을
+> 재확인(`vercel ls`). **다만 이 확인 과정에서 23분 전에 생성된 별도
+> Production 배포(`https://alton-ld8yf4n2l-alton7.vercel.app`, target:
+> Production)를 발견했다 — 이 세션이 만든 것이 아니다.** Production은
+> 건드리지 않았고 조사도 더 하지 않았다 — **제품 오너가 의도한 것인지 확인
+> 필요**(결정 필요 항목으로 아래 남김).
+>
+> **계정 생성**(전부 `uat-2026-09-09-*@example.com` 이메일):
+> - **관리자**(`eece0bd9-eee7-475e-8281-e766a4e1ac13`) — **직접 DB 생성**(부트스트랩
+>   불가피 — 최초 관리자를 만드는 "실제 플로우" 자체가 존재하지 않음, 기존
+>   `supabase/seed.sql`과 동일한 패턴).
+> - **교사**(`27ed7d4e-7e74-4ed9-8b03-3b3f4f7aaa59`) — **직접 DB 생성**(profiles+
+>   `set_teacher_rate()` 실호출, `teachers` 테이블 행은 만들지 않음) — 이유:
+>   `teachers.status='active'` 전환은 `transition_account_status()`가 Google
+>   Workspace 발급·최초 로그인·계약 서명 등 6개 선행조건을 실제로 강제하는데
+>   (`enforce_teacher_active_requires_rate` 등), 이번 라운드는 Google 실호출이
+>   금지돼 있어 그 경로를 통과시킬 수 없다. `teacher_assignments.teacher_id`는
+>   `profiles(id)`만 참조하므로(`teachers` 테이블 불필요) 예약·세션 생성에는
+>   지장이 없음을 코드로 확인 후 진행.
+> - **보호자**(`158fe508-be18-4462-a91b-b5263c5a1ebb`)·**학생**
+>   (`c55b8574-77ff-4130-ac36-ffbd754ddd24`) — **실제 온보딩 플로우로 생성**:
+>   `create_direct_onboarding_link_multi()` RPC(관리자가 실제로 호출하는 것과
+>   동일 함수)를 직접 호출해 온보딩 링크 발급 → `vercel curl`로 Preview에
+>   배포된 실제 HTTP 엔드포인트(`/api/trial-onboarding/redeem` →
+>   `/api/trial-onboarding/confirm-email`)를 그대로 호출 → 실제 Supabase Auth
+>   계정 생성 + `households`/`household_members`/`students`/`parents`/
+>   `finalize_trial_onboarding_students()`까지 앱 코드 그대로 실행됨을 DB로
+>   확인. **이 과정에서 학생 이메일로 비밀번호 설정 안내 메일이 실제로 1회
+>   발송됨**(`trial_onboarding_link_students.invite_status='sent'`, 오류 없음)
+>   — Preview의 Mailtrap sandbox SMTP로 나갔을 것으로 판단되나, **Mailtrap
+>   수신함 자체를 열람할 API/대시보드 접근 권한이 이 세션에는 없어 실제
+>   캡처를 직접 확인하지 못했다** — 제품 오너가 Mailtrap sandbox에서
+>   `uat-2026-09-09-student@example.com` 수신 여부를 직접 확인 필요.
+>   4개 계정 모두 로그인 가능하도록 비밀번호는 `auth.users.encrypted_password`에
+>   직접 설정했다(관리자/교사와 동일한 부트스트랩 방식 — Supabase 자체 비밀번호
+>   재설정 UI 흐름을 curl로 재현하는 대신 택함, 계정 생성 자체는 실제 플로우
+>   그대로였음을 위에서 별도로 밝힘).
+>
+> **v3 세션 준비**(계획 문서 3절 수정판 그대로 — DB 시각 직접 수정 없음):
+> 계약(`3e84e939-c84b-4537-b71f-b52c696a48ac`, draft) → subject_enrollment
+> (`df4473f4-5173-4e5e-9b42-be46835fc71f`, SAT Math, planned) → teacher_assignment
+> (`8c7bcbf5-9453-4a0b-b6b8-d36fdbd98362`, active) → entitlement_grant
+> (`cc44e12d-df07-4134-a48d-44f7fa72754e`, 5회) 전부 실제 테이블 삽입/RPC로
+> 준비 후, **`confirm_lesson_booking()`을 실제로 호출**해 2026-09-12
+> 18:00~20:00 UTC 슬롯으로 실제 예약(`4aedc2cb-6276-4586-9975-7cccc81142fd`)과
+> 세션(`8573bfbf-e6fa-46b1-896d-5512c4b97ad1`, `final_status='scheduled'`)을
+> 생성했다. 예약 시각을 기다리지 않고 UAT 진행 시 바로 "수업 시작"을 눌러
+> 검증 가능(`mark_lesson_session_started()`는 시각이 아니라 상태만 확인함을
+> 코드로 재확인 완료 — 계획 문서 3절 corrective 그대로).
+>
+> **하지 않은 것**: UAT 흐름 자체 실행(권한 분리 확인, 세션뷰·화이트보드,
+> 과제 등), 생성한 데이터의 정리, 실제 외부 수신자 발송(Mailtrap sandbox로만
+> 나감), Production·main 변경, Vercel 환경변수 변경, 실제 결제·송금·DocuSign·
+> Calendar·Google 호출.
+>
+> **결정 필요**: (1) 위에서 발견한 예상 밖 Production 배포가 의도된 것인지,
+> (2) Mailtrap sandbox에서 학생 초대 메일 캡처를 제품 오너가 직접 확인.
+
 > **2026-09-09 — `preview/m4-integration-verification` HEAD를 Vercel Preview에
 > 배포 완료(제품 오너 승인).** 실행 직전 `vercel whoami`로 계정
 > (`officialalton`), `.vercel/project.json`으로 대상 프로젝트(`alton7/alton`,
