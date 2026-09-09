@@ -1,5 +1,52 @@
 # ALTON — 현재 상태 (2026-09-09 기준)
 
+> **2026-09-09 — 기반 안정화 계획(제품 오너 야간 자율 승인) 진행 중 — 1~2단계
+> 완료.** 계획 문서 7절 순서대로 진행. 각 단계 독립 커밋·로컬 검증(신규
+> migration 시 `db reset --local`, 대상 테스트, `tsc --noEmit`, 전체 테스트,
+> `next build`) 완료 후 다음 단계로 진행. **전부 local 전용 — Preview/
+> non-prod/UAT 계정/배포/push/main 병합/실제 외부 호출(이메일·결제·정산·
+> Google·Wise·Mercury·Stripe) 없음.**
+>
+> **1단계(정산 P0) 완료** — 커밋 `b855043`. `reverse_payout_item()`을 원본
+> paid item 하나당 역분개 정확히 1회만 허용하도록 재작성:
+> `payout_items.reversed_from_item_id` FK + 부분 유니크 제약(구조적 방어),
+> 원본 행 `FOR UPDATE` 잠금 후 재검증, 기존 역분개가 있으면 신규 생성 없이
+> 그 ID를 그대로 반환하는 멱등 동작, 동시 INSERT 경합은
+> `unique_violation`을 잡아 재조회로 수렴. 필수 테스트 4종(순차 재시도/
+> 동시 호출/중간 실패 롤백/비간섭) 추가 —
+> `lib/booking/payout-batch-lifecycle.integration.test.ts` 15/15 통과,
+> 전체 스위트 232/232 파일·1650/1650 테스트 통과, `tsc`/`next build` 클린.
+>
+> **2단계(성능 기준선·N+1 개선) 완료** — 커밋 이번 항목과 함께 기록.
+> `app/student/curriculum-data.ts::loadCurricula()`를 로컬 개발 DB에
+> 학생 1/10/30명 × enrollment 1/3/5개 조합을 실제로 시딩해 기준선을
+> 측정한 뒤 배치 조회로 재작성, 동일 조건으로 재측정했다(측정 스크립트는
+> 계획 문서 5절 절차대로 일회성으로 실행 후 삭제 — 커밋 대상 아님).
+>
+> | 조건 | 기준선(수정 전) 왕복 수 | 개선 후 왕복 수 |
+> |---|---|---|
+> | 학생 1명 × enrollment 1개 | 5회 | 5회 |
+> | 학생 10명 × enrollment 3개 | 110회(교사대시보드 전체) | 50회 |
+> | 학생 30명 × enrollment 5개 | 510회(교사대시보드 전체) | 150회 |
+> | `loadCurricula()` 단일 호출(enrollment 5개 기준) | 17회 | 5회(enrollment 수와 무관하게 고정) |
+>
+> 왕복 수가 조합 규모에 선형 이상으로 증가함이 실측으로 확인되어(교사
+> 대시보드가 학생 수 × (2+3×enrollment 수)로 증가) 계획 문서 6절 P0 확정
+> 기준 (b)를 충족 — P0로 확정하고 수정했다. `enrollments`/
+> `teacher_curriculum_templates`/`teacher_curriculum_template_units`/
+> `legacy_sessions` 4개 쿼리로 고정(기존 3N+2 → 4, `.or()`/`.in()` 배치
+> 조회), 응답 데이터 모양은 동일 — 회귀 테스트
+> `app/student/curriculum-data.test.ts` 신규 추가(쿼리 수 고정 검증 +
+> 매핑 결과 동일성). 추가로 `app/teacher/dashboard-data.ts`의 독립 쿼리
+> 3개(profile/teacherRow/enrollments)를 `Promise.all`로 병렬화(P1, 순수
+> 재정렬, 로직 변경 없음). 전체 스위트 233/233 파일·1652/1652 테스트
+> 통과, `tsc`/`next build` 클린.
+>
+> **남은 단계**: 3(수업 상태변경 P0 테스트) → 4(관리자 service-role 감사) →
+> 5(P1 테스트 보강) → 6(정산 batch 생성 동시성 재현) → 7(레거시/v3·ALTER
+> 충돌 조사·문서화만). 예상 밖 정책 판단이나 UX 변경이 발견되면 그 지점에서
+> 멈추고 보고한다.
+
 > **2026-09-09 — 배치 2-4(`bypass_session_lock`, 배치 2 마지막 항목) corrective
 > 완료.** 신규 마이그레이션
 > `supabase/migrations/20261261000000_r8_corrective_session_invariant_tokens.sql`.

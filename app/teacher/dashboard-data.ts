@@ -38,23 +38,17 @@ export async function loadTeacherDashboard(
   supabase: SupabaseClient,
   teacherId: string
 ): Promise<TeacherDashboardData> {
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("name")
-    .eq("id", teacherId)
-    .single();
-
-  const { data: teacherRow } = await supabase
-    .from("teachers")
-    .select("status")
-    .eq("id", teacherId)
-    .single();
-
-  const { data: enrollments } = await supabase
-    .from("enrollments")
-    .select("id, student_id, subject:subjects(name)")
-    .eq("teacher_id", teacherId)
-    .eq("status", "active");
+  // 세 쿼리는 서로 독립(공통 입력은 teacherId뿐)이므로 병렬 실행한다 — 계획
+  // 문서 5절 P1(기존: 순차 3회 대기).
+  const [{ data: profile }, { data: teacherRow }, { data: enrollments }] = await Promise.all([
+    supabase.from("profiles").select("name").eq("id", teacherId).single(),
+    supabase.from("teachers").select("status").eq("id", teacherId).single(),
+    supabase
+      .from("enrollments")
+      .select("id, student_id, subject:subjects(name)")
+      .eq("teacher_id", teacherId)
+      .eq("status", "active"),
+  ]);
 
   const enrollmentIds = (enrollments ?? []).map((e) => e.id);
   const studentIds = Array.from(new Set((enrollments ?? []).map((e) => e.student_id)));
