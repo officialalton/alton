@@ -29,18 +29,51 @@ Preview 배포, UAT 계정·세션 생성은 이 계획을 검토한 뒤 제품 
 
 ## 1. Non-prod migration 목록과 Preview 배포 대상
 
-### 정정(2026-09-09, 1단계 읽기 전용 사전 점검 실측 결과 반영)
-이 절의 이전 버전은 "이번 세션 신규 3개"만 계산하고, 그 이전부터 non-prod에
-이미 쌓여 있던 미반영분을 놓쳤다. `supabase migration list --linked`로 non-prod
-(`worpsqwqgnspddnrtnvq`)의 실제 반영 상태를 읽기 전용으로 확인한 결과는 다음과
-같다 — **아래 두 숫자를 명확히 구분한다**:
+### 반영 완료(2026-09-09) — 이 절은 이제 실행 기록이다
+
+**30개 전부 non-prod에 반영 완료.** `supabase migration list --linked` 원문
+기준: 반영 전 로컬 173개 중 **143개가 이미 적용돼 있었고(마지막 적용분
+`20261227000000`), 30개(`20261228000000`~`20261264000000`)가 미반영**이었다
+(143+30=173). 아래 두 숫자를 구분해 기록해 둔다:
 
 - **이번 세션에서 로컬에 새로 추가된 migration**: 3개
   (`20261262000000`/`20261263000000`/`20261264000000` — 기반 안정화 7단계
   승인 이후 작성됨).
-- **non-prod에 실제로 미반영된 migration**: **30개**
-  (`20261228000000` ~ `20261264000000`, non-prod는 `20261227000000`까지만
-  반영돼 있음). 위 3개는 이 30개 중 마지막 3개에 포함된다.
+- **non-prod에 실제로 미반영이었던 migration**: 30개(위 3개 포함, 나머지
+  27개는 그 이전 라운드부터 이미 로컬에 존재했으나 non-prod에는 한 번도
+  반영되지 않았던 것).
+
+**복원용 스냅샷**: 반영 직전 `supabase db dump --linked`로 schema
+덤프(824KB, `public`+`auth`)와 data 덤프(205KB, `--data-only --use-copy`)를
+생성했다. **두 파일 모두 이 저장소 밖 세션 scratchpad에 있고 Git 추적 대상이
+아니다.** 데이터 삭제·정리·변환은 하지 않았다.
+
+**반영 실행**: `supabase db push --linked`로 30개(`20261228000000`~
+`20261264000000`) 전부를 dry-run에서 확인한 순서 그대로, 도메인 분할 없이
+한 번에 반영 — **전부 오류 없이 성공**.
+
+**반영 후 검증**: `supabase migration list --linked` 재조회 →
+**173/173 local=remote 완전 일치**(mismatch 0건). 반영 후 스키마 재덤프로
+구조 확인 — 신규 테이블 7개(`student_curriculum_overlays`,
+`session_prepared_selections`, `session_content_manifest`,
+`session_content_use_events`, `session_homework_items`,
+`status_transition_tokens`, `session_invariant_unlock_tokens`) 전부 존재 +
+RLS 활성화, 핵심 함수 5개(`reverse_payout_item`, `generate_payout_batches`,
+`reopen_session`, `ensure_active_curriculum_overlay`,
+`pin_session_selection`) 전부 존재/재정의 확인,
+`payout_items_reversed_from_item_id_key` 부분 유니크 인덱스 존재 확인,
+`session_incident_reports` INSERT 정책이 정확히 `reported_by = auth.uid()
+AND (...)`로 반영됨을 실제 정책 텍스트로 확인. **`payout_disbursement_gate.
+real_disbursement_enabled = false`**(읽기 전용 확인, `enabled_at`/
+`enabled_by`/`note` 전부 NULL — 이번 배치가 이 테이블 데이터를 변경하지
+않으므로 그대로 안전).
+
+**실패 없음** — 롤백·migration repair 불필요. 계정 생성, 상담·예약 생성,
+이메일 발송, 지급 상태 변경은 전혀 하지 않았다. **실제 고객 발송, 실제
+결제·송금, Production 반영, `main` 병합, `git push`는 전혀 없었다.**
+
+아래 표(반영 전 작성한 도메인별 영향 분석)는 그대로 남겨 이번 반영이 어떤
+근거로 승인됐는지 기록해 둔다.
 
 ### 30개 미반영 migration — 도메인별 목록과 영향
 

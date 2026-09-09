@@ -1,5 +1,46 @@
 # ALTON — 현재 상태 (2026-09-09 기준)
 
+> **2026-09-09 — non-prod(`worpsqwqgnspddnrtnvq`)에 UAT용 migration 30개
+> 반영 완료(제품 오너 승인, 실패 없이 전부 성공).** `supabase migration list
+> --linked` 원문 기준: 반영 전 로컬 173개 중 **143개가 이미 적용돼 있었고
+> (마지막 적용분 `20261227000000`), 30개(`20261228000000`~`20261264000000`)가
+> 미반영**이었다(143+30=173). 이 30개를 dry-run에서 확인한 그대로, 도메인
+> 분할 없이 한 번에 순서대로 반영했다.
+>
+> **복원용 스냅샷**: 반영 직전 `supabase db dump --linked`로 schema
+> 덤프(824KB, `public`+`auth`)와 data 덤프(205KB, `--data-only --use-copy`)를
+> 생성했다. **두 파일 모두 이 저장소 밖 세션 scratchpad에 있고 Git 추적
+> 대상이 아니다** — 데이터 삭제·정리·변환은 전혀 하지 않았다.
+>
+> **반영 범위**: `20261228000000_r9_curriculum_content_foundation.sql`부터
+> `20261264000000_r6_corrective_incident_report_reported_by_identity.sql`까지
+> 정확히 30개(R9 커리큘럼·콘텐츠, 세션·과제, GUC 보안 정리, 정산 corrective,
+> 신고자 신원 corrective 5개 도메인 전부 — 상세 목록은
+> `docs/superpowers/plans/2026-09-09-preview-uat-preparation-and-execution.md`
+> 1절 표 참고).
+>
+> **반영 후 검증**: `supabase migration list --linked` 재조회 →
+> **173/173 local=remote 완전 일치**(mismatch 0건). 반영 후 스키마 재덤프로
+> 구조 확인: 신규 테이블 7개(`student_curriculum_overlays`,
+> `session_prepared_selections`, `session_content_manifest`,
+> `session_content_use_events`, `session_homework_items`,
+> `status_transition_tokens`, `session_invariant_unlock_tokens`) 전부 존재
+> +RLS 활성화, 핵심 함수 5개(`reverse_payout_item`, `generate_payout_batches`,
+> `reopen_session`, `ensure_active_curriculum_overlay`,
+> `pin_session_selection`) 전부 존재/재정의 확인,
+> `payout_items_reversed_from_item_id_key` 부분 유니크 인덱스 존재 확인,
+> `session_incident_reports` INSERT 정책이 정확히 `reported_by = auth.uid()
+> AND (...)`로 반영됨을 실제 정책 텍스트로 확인. `payout_disbursement_gate.
+> real_disbursement_enabled = false`(읽기 전용 확인, `enabled_at`/`enabled_by`/
+> `note` 전부 NULL — 이번 배치가 이 테이블 데이터를 변경하지 않음).
+>
+> **실패 없음** — 롤백·migration repair 불필요. 계정 생성, 상담·예약 생성,
+> 이메일 발송, 지급 상태 변경은 전혀 하지 않았다. **실제 고객 발송, 실제
+> 결제·송금, Production 반영, `main` 병합, `git push`는 전혀 없었다.**
+>
+> **다음 승인 대기**: Preview 배포, UAT 계정·세션 생성, SMTP·Stripe 설정
+> 변경, UAT 실행 — 이 문서 커밋 이후에도 계속 승인 대기 상태.
+
 > **2026-09-09 — UAT 계획 문서 corrective: migration 개수 정정 + dry-run/
 > 의존성 검토(non-prod에 쓰기 없음).** 1단계 읽기 전용 사전 점검에서
 > non-prod(`worpsqwqgnspddnrtnvq`)가 `20261227000000`까지만 반영돼 있고
