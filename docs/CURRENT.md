@@ -131,8 +131,36 @@
 > batch_id`가 정확히 일치함을 확인). 전체 스위트 239/239 파일·1679/1679
 > 테스트 통과, `tsc`/`next build` 클린.
 >
-> **남은 단계**: 7(레거시/v3·ALTER 충돌 조사·문서화만, 코드 변경 없음).
-> 예상 밖 정책 판단이나 UX 변경이 발견되면 그 지점에서 멈추고 보고한다.
+> **7단계(레거시/v3·migration ALTER 충돌 조사) 완료 — 조사·문서화만, 코드
+> 변경 없음(지시대로).**
+> - **migration ALTER 충돌**: 계획 문서 4절이 예산상 생략했던 고빈도 테이블
+>   (`sessions`, `reservations`, `payout_items`, `payout_batches`,
+>   `entitlement_grants`) 대상 `ALTER TABLE` 전수 스캔을 완료했다. 모든
+>   ALTER문이 컬럼 추가(`add column`)/제약 추가(`add constraint`)/RLS
+>   활성화이며 시간순으로 서로 겹치지 않는 컬럼·제약만 다뤄 **충돌 없음**을
+>   확인. 유일하게 같은 제약을 drop 후 다시 add하는 경우(`sessions`의
+>   `sessions_curriculum_doc_id_fkey`, `sessions_smart_notes_status_check`)도
+>   전부 같은 마이그레이션 파일 안에서 drop-then-readd로 완결되는 패턴이라
+>   순서 의존적 충돌 위험이 없다.
+> - **레거시/v3 읽기 병합**: 2026-09-09 최초 탐색(위 계획 문서 3절)에서
+>   확인한 내용 그대로 재확인 — `legacy_sessions ∪ sessions` 병합 읽기
+>   로직이 `app/student/dashboard-data.ts` 등 8개 이상 파일에 독립
+>   재구현돼 있으나, 쓰기 경로는 서로 배타적으로 게이트돼 있어 P0급 충돌은
+>   없다. **공용 헬퍼 추출 리팩터링, 레거시 RPC·죽은 코드 삭제,
+>   `trial_lesson_review` 변경은 지시대로 하지 않았다** — 이 항목들은 계획
+>   문서 3절/4절에 이미 후속 작업으로 기록돼 있고 이번 라운드 범위 밖이다.
+>
+> **기반 안정화 계획(2026-09-09 확정) 전체 7단계 완료.** 코드 변경 요약:
+> `reverse_payout_item()`(정산 P0), `loadCurricula()` N+1 제거 +
+> 대시보드 병렬화(성능), `lesson-schedule-actions.ts` 테스트(수업
+> 상태변경 P0), 관리자 service-role 회귀 가드(코드 변경 없음),
+> `submitIncidentReport()` reported_by 버그 수정 + P1 테스트 3건,
+> `generate_payout_batches()` 동시성 수정(정산). 총 7개 커밋, 전부 독립
+> 커밋·로컬 검증(각 단계 `tsc`/전체 테스트/`next build`) 완료. **Preview,
+> non-prod, UAT 계정, 배포, push, main 병합, 실제 외부 호출 전부 하지
+> 않았다.** 예상 밖 정책 판단으로 코드를 바꾸지 않고 기록만 한 지점 1건
+> (4단계, admin/page.tsx의 미들웨어 단일 게이트 유지 여부)과 미결 정책
+> 1건(4절, 미사용 RPC 3종 삭제 여부)이 남아 있다 — 제품 오너 확인 필요.
 
 > **2026-09-09 — 배치 2-4(`bypass_session_lock`, 배치 2 마지막 항목) corrective
 > 완료.** 신규 마이그레이션
