@@ -59,6 +59,28 @@
 >    `resolve_manual_review_invite`(2개 내부 분기), `mark_expired_invites`.
 >
 > 이 개정에서도 코드/마이그레이션은 전혀 건드리지 않았다 — 문서만 갱신했다.
+>
+> **5차 개정(2026-09-08, 이 라운드 — `bypass_reconciliation_task_lock`
+> 항목의 supersede 전이 재검토, product-owner 리뷰 반영)**: 4차 개정에서
+> 확정한 배치 2-3 설계가 `resolve_session_reconciliation_task()`의
+> `needs_review` 전이와 `recomplete_session()`의 `superseded` 전이를 같은
+> action 값(`'reconciliation_task_needs_review'`)으로 묶어 소비하도록
+> 했던 부분을 반려하고, `superseded` 전용 action 값
+> `'reconciliation_task_supersede'`를 신설해 완전히 분리했다 — 하나의
+> action 값이 자기 자신이 지정한 전이보다 더 많은 것을 열어줄 수 있는
+> 여지를 값 레벨에서 원천 차단하기 위함(상세 근거는 "배치 2 상세 실행
+> 계획 > 배치 2-3" 절의 "2. 토큰 action 값" 참고). 이와 함께
+> `recomplete_session()`이 `pending` 대사 작업을 다건 UPDATE할 수 있다는
+> 점(현재 코드가 `where ... and status = 'pending'` 조건부 다건 UPDATE)을
+> 반영해 "대상 행 각각에 토큰을 1건씩 미리 심어야 한다"는 구현 세부와,
+> 동시성 테스트를 위해 `recomplete_session()`에도
+> `resolve_session_reconciliation_task()`와 동일하게 대상 행에 대한
+> `for update` select를 추가해야 한다는 점을 명시했다. 배치 2-3의 필수
+> 테스트 목록에 "직접 supersede 위조 차단(다른 action 토큰으로는 불가함을
+> 포함)"·"동시 재판정/반영 경합" 시나리오를 구체화해 추가했다. 이 개정도
+> 계획/문서 개정만 — 코드/마이그레이션은 전혀 건드리지 않았다. 배치
+> 2-1(`bypass_status_protect`)은 이 개정과 무관한 별도 항목이며 이번
+> 라운드에서 손대지 않았다.
 
 ## 배경 패턴
 
@@ -632,29 +654,49 @@ public`을 `set search_path = public, pg_temp`로 변경한다(현재 전부
 "순서 의존성"은 아니지만 "동시 작업 시 조율 필요"에는 해당 — 아래
 "착수 순서/독립성" 절에서 다시 정리).
 
-**2. 토큰 action 값**
+**2. 토큰 action 값 (5차 개정 — product-owner 리뷰 반영, `superseded`
+전용 값으로 분리)**
 
-3개로 세분화(기존 6번 절의 단일 `'reconciliation_task_transition'`
-제안을 3개로 쪼갬 — 컬럼 레벨 전이가 실제로 3가지로 구분되므로 요구사항
-3번 "distinct legitimate transition-type마다 하나"를 충족하려면 세분화가
-맞다):
+4개로 세분화(3차 개정까지의 3개 제안에서, `needs_review`와 `superseded`가
+같은 `'reconciliation_task_needs_review'` 값을 공유하던 설계를 폐기하고
+`superseded` 전용 값을 신설 — 근거는 아래 "5차 개정 — 왜 공유를
+폐기했는가" 참고):
 - `'reconciliation_task_resolve'` — `status: pending → resolved`
-  (`resolve_session_reconciliation_task()`의 정상 반영 경로).
+  (`resolve_session_reconciliation_task()`의 정상 반영 경로, `:100-103`).
 - `'reconciliation_task_needs_review'` — `status: pending → needs_review`
   (`resolve_session_reconciliation_task()`의 3가지 전제-불일치 재확인
   분기 전부가 이 값 하나를 공유 — 셋 다 결과적으로 동일한 컬럼 레벨
-  전이이므로 원인별로 나눌 실익이 없다) **및** `status: pending →
-  superseded`(`recomplete_session()`의 재판정 시 이전 pending 작업 무효화) —
-  주의: `superseded`는 `needs_review`와 다른 목표값이지만, 둘 다 "이
-  대사 작업은 더 이상 유효한 반영 대상이 아니다"라는 같은 성격의 방어적
-  차단 전이이고 소비하는 함수·트리거 로직이 동일하므로 값을 공유해도
-  안전 근거(누가 호출했는지 증명)에 영향이 없다 — 다만 명확성을 원하면
-  `'reconciliation_task_supersede'`로 별도 분리도 가능(제품 오너 선호에
-  따라 조정 가능한 세부 설계, 아래 "결정 필요" 참고).
+  전이(`:51`/`:67`/`:84`)이므로 원인별로 나눌 실익이 없다). **이 값은
+  `needs_review` 전이에만 쓰인다 — `superseded` 전이에는 절대 쓰지
+  않는다(아래 참고).**
+- `'reconciliation_task_supersede'` — `status: pending → superseded`
+  (`recomplete_session()`이 재판정 시 이전 `pending` 작업을 무효화하는
+  전이 전용, `20261123000000_m5c_student_cancelled_reconciliation.sql:123-126`).
+  **`needs_review`와 별개의 독립된 action 값이며 서로 대체 불가.**
 - `'reconciliation_task_set_disposition'` — `status` 컬럼이 아니라
   `expected_entitlement_disposition`/`required_entitlement_adjustment_amount`/
   `admin_disposition_reason` 3개 컬럼을 함께 바꾸는
-  `set_reconciliation_task_student_cancelled_disposition()`의 단일 UPDATE.
+  `set_reconciliation_task_student_cancelled_disposition()`의 단일 UPDATE
+  (`:175-180`).
+
+**5차 개정 — 왜 `needs_review`/`superseded` 공유를 폐기했는가**: 3차
+개정까지는 "둘 다 같은 성격의 방어적 차단 전이이므로 값을 공유해도
+안전 근거에 영향 없다"고 판단했으나, 이는 트리거의 검증 정밀도를
+과소평가한 것이다 — `reconciliation_task_update_guard()`가 `new.status`
+값만으로 어느 action을 확인할지 분기하더라도, 만약 트리거 구현이 (실수로,
+또는 향후 유지보수 중) "`needs_review` **또는** `superseded`로 가는
+전이는 `reconciliation_task_needs_review` 토큰이면 통과"처럼 느슨하게
+작성되면, `resolve_session_reconciliation_task()`가 정당하게 발급한
+`needs_review` 토큰이 (동시에 같은 트랜잭션 안에 있다면) `superseded`
+전이까지 부당하게 열어줄 수 있는 여지가 생긴다 — 값을 공유하는 순간
+"이 토큰이 정확히 어느 전이를 허가하는지"가 값 자체가 아니라 트리거
+구현의 정확성에 의존하게 되므로, 요구사항 3번("distinct legitimate
+transition-type마다 하나, 어떤 action 값도 자기 자신의 전이보다 더
+많은 것을 열어주면 안 된다")을 값 레벨에서 보장하지 못한다. 값을
+`'reconciliation_task_supersede'`로 분리하면 트리거가 `new.status =
+'superseded'`일 때 오직 이 값만 확인하도록 강제되어, 구현 실수로도
+`needs_review` 토큰이 `superseded`를 열 수 없다 — 방어가 "트리거를
+올바르게 짰다는 신뢰"가 아니라 "값 자체의 유일성"에서 나온다.
 
 **3. 정상 상태 전이 — 실제 함수 본문 기준(재확인 완료, 개정 이력 정정
 2번 반영 — 3개 호출자)**
@@ -677,9 +719,23 @@ public`을 `set search_path = public, pg_temp`로 변경한다(현재 전부
   `20261123000000_m5c_student_cancelled_reconciliation.sql:69-179` —
   개정 이력 정정 2번, 문서 초판에서 누락됐던 호출자) — `sessions.final_status`
   UPDATE와 `session_status_events`/`payout_items`/`upsert_session_payout_item()`
-  처리를 마친 뒤, `:123` 토큰 발급 + 이 세션에 걸린 기존 `pending`
-  대사 작업을 `superseded`로 일괄 전환(`where session_id = p_session_id
-  and status = 'pending'` — 보통 0개 또는 1개 행).
+  처리를 마친 뒤, 현재 코드는 `:123` `set_config('app.bypass_reconciliation_task_lock',
+  'true', true)` 한 번만 호출한 뒤 `:124-126`에서 이 세션에 걸린 기존
+  `pending` 대사 작업을 `superseded`로 일괄 UPDATE(`where session_id =
+  p_session_id and status = 'pending'` — 보통 0개 또는 1개 행이지만 SQL
+  자체는 다건 UPDATE)한다. **토큰 방식 재작성 시**: 이 UPDATE는 row-level
+  트리거(`reconciliation_task_update_guard()`)를 행마다 한 번씩 발동시키므로,
+  GUC 1회 SET을 이 UPDATE 앞의 토큰 `insert into
+  status_transition_tokens (table_name, row_id, action) values
+  ('session_judgment_reconciliation_tasks', <해당 행의 id>,
+  'reconciliation_task_supersede')`로 교체할 때 **대상이 될 수 있는 모든
+  `pending` 행 각각에 대해 토큰을 1건씩 미리 심어야 한다**(예:
+  `insert into status_transition_tokens (table_name, row_id, action)
+  select 'session_judgment_reconciliation_tasks', id,
+  'reconciliation_task_supersede' from session_judgment_reconciliation_tasks
+  where session_id = p_session_id and status = 'pending'`로 UPDATE 직전에
+  선행) — 단일 토큰 하나로 다건 UPDATE를 통과시킬 수 없다(트리거가 행별로
+  `row_id` 일치를 확인하므로).
 
 **4. 필수 테스트 목록**
 
@@ -712,6 +768,44 @@ public`을 `set search_path = public, pg_temp`로 변경한다(현재 전부
   전체 롤백되는지(대사 작업의 실제 정산 부수효과까지 포함한 원자성
   확인 — 이 항목만의 특이 케이스, 다른 배치 2 항목은 정산 원장에
   직접 쓰지 않음).
+- **(5차 개정 추가) `superseded` 전이 전용 시나리오 — `needs_review`와
+  분리된 `'reconciliation_task_supersede'` 값 검증**:
+  1. **정상 supersede 경로**: `pending` 대사 작업이 걸린 세션을
+     `recomplete_session()`으로 재판정 → 해당 작업이 `superseded`로
+     전이되고, 유효한 `reconciliation_task_supersede` 토큰이 발급·
+     소비됐는지 확인(다건 pending 케이스 포함 — 각 행마다 개별 토큰
+     1건씩 소비됐는지).
+  2. **직접 supersede 위조 차단**: `recomplete_session()`을 거치지 않고
+     `session_judgment_reconciliation_tasks.status`를 직접
+     `'superseded'`로 UPDATE 시도 → 토큰 없음으로 거부. **추가로**: 같은
+     행에 대해 `reconciliation_task_needs_review` 토큰(다른 action 값)만
+     심어두고 `superseded`로 직접 UPDATE 시도 → **여전히 거부**되어야
+     한다(action 값이 정확히 일치하지 않으면 어떤 토큰도 supersede를
+     열 수 없음을 증명 — "토큰이 존재하기만 하면 통과"가 아니라 "정확히
+     이 action 값이어야 통과"임을 검증하는 핵심 케이스).
+  3. **GUC·임시 테이블 위조 차단**: `app.bypass_reconciliation_task_lock`을
+     직접 SET해도 효과 없음(레거시 GUC 무효화 항목과 동일 근거 재확인),
+     동명 temp `status_transition_tokens`에 위조 `reconciliation_task_supersede`
+     토큰을 심고 직접 UPDATE 시도해도 거부(스키마 한정 요구사항 위반
+     시나리오와 동일 패턴).
+  4. **동시 재판정/반영 경합**: `recomplete_session()`(같은 작업을
+     supersede 시도)과 `resolve_session_reconciliation_task()`(같은
+     작업을 resolve 시도)가 같은 대사 작업 행을 동시에 대상으로 할 때 —
+     둘 다 각자의 UPDATE 전에 대상 행을 `for update`로 잠그므로(
+     `resolve_session_reconciliation_task():26`, `recomplete_session()`
+     쪽은 이 항목 구현 시 동일하게 `select ... for update`를 대상 pending
+     행에 추가해야 함 — 현재 `20261123000000` 원본은 조건부 UPDATE만
+     하고 별도 `for update` select가 없으므로 **이 corrective migration에서
+     추가해야 할 변경점**) 먼저 잠근 트랜잭션이 커밋될 때까지 다른 쪽이
+     대기하고, 커밋 후 다시 상태를 확인하면 이미 `superseded`(또는
+     `resolved`)이므로 나중 트랜잭션은 자기 자신의 사전 상태 검사(각
+     함수의 `status = 'pending'`/`status <> 'pending'` 가드)에 걸려 실패
+     또는 no-op으로 끝나야 한다 — 검증 기준은 "양쪽 다 성공"이나 "행이
+     `resolved`와 `superseded` 사이의 애매한 상태로 남는 것"이 아니라,
+     **최종 상태가 `resolved` 또는 `superseded` 둘 중 정확히 하나이고,
+     진 쪽의 함수 호출은 명시적 예외로 실패하거나 `needs_review`류
+     방어 분기로 끝나야 한다**는 것(어느 쪽이 이겨야 하는지는 이 문서가
+     아직 확정하지 않음 — 아래 "결정 필요" 참고).
 
 **5. `public.status_transition_tokens` 완전 스키마 한정 + `search_path =
 public, pg_temp` 고정 의무**
@@ -725,12 +819,16 @@ public, pg_temp` 고정 의무**
 **6. 수정 대상 함수/트리거/RLS/grant 전체 목록**
 
 - `public.reconciliation_task_update_guard()` — 트리거(`before update`,
-  모든 컬럼), GUC 분기 → 3개 action 값 중 하나를 소비하는 로직으로
-  교체(어떤 컬럼이 바뀌었는지에 따라 어느 action을 확인할지 분기 필요 —
-  `status`가 바뀌면 `'reconciliation_task_resolve'` 또는
-  `'reconciliation_task_needs_review'` 중 `new.status` 값에 맞는 것을,
+  모든 컬럼), GUC 분기 → 4개 action 값 중 하나를 소비하는 로직으로
+  교체(어떤 컬럼이 바뀌었는지·`new.status`가 무엇인지에 따라 어느
+  action을 확인할지 분기 필요 — `status`가 `'resolved'`로 바뀌면
+  `'reconciliation_task_resolve'`, `'needs_review'`로 바뀌면
+  `'reconciliation_task_needs_review'`, **`'superseded'`로 바뀌면 반드시
+  `'reconciliation_task_supersede'`만**(다른 action 값으로는 이 전이를
+  절대 열지 않음 — 5차 개정, 위 "2. 토큰 action 값" 절 참고),
   disposition 필드가 바뀌면 `'reconciliation_task_set_disposition'`을
-  확인).
+  확인 — 4개 action 값은 서로 배타적이며 어느 것도 자기 자신이 지정한
+  전이 외의 전이를 열 수 없다).
 - `public.reject_reconciliation_task_direct_mutation()` — DELETE 차단
   트리거, 변경 없음(GUC 무관하게 항상 거부이므로 그대로 유지).
 - `public.resolve_session_reconciliation_task(uuid, text)` — 최신

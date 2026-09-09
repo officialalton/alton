@@ -4122,3 +4122,28 @@ Task 1~4와 그 사이 발견된 모든 corrective가 제품 오너 최종 승�
 
 **외부 변경 원칙**: 계속 유지 — non-prod migration 반영, Vercel Preview 배포, UAT 테스트
 계정 생성, 실제 외부 API/이메일 호출은 제품 오너 사전 승인 없이 진행하지 않는다.
+
+## 2026-09-08 — `bypass_reconciliation_task_lock` 계획 5차 개정: supersede 전이 action 값 분리 (계획/문서 전용)
+
+제품 오너 리뷰에서 배치 2-3(`bypass_reconciliation_task_lock`) 상세 계획이
+`resolve_session_reconciliation_task()`의 `needs_review` 전이와
+`recomplete_session()`의 `superseded` 전이(재판정 시 이전 pending 대사 작업 무효화)를
+같은 토큰 action 값(`'reconciliation_task_needs_review'`)으로 공유하도록 설계했던
+점을 지적 — 값 레벨에서 두 전이를 구분하지 못하면 트리거 구현 실수로 한 전이의
+토큰이 다른 전이까지 열어줄 위험이 있다는 지적을 반영해, `docs/superpowers/plans/2026-09-08-bypass-guc-security-cleanup.md`를
+5차 개정: `superseded` 전용 action 값 `'reconciliation_task_supersede'`를 신설하고
+(총 4개 action 값으로 확정: `resolve`/`needs_review`/`supersede`/`set_disposition`),
+`recomplete_session()`의 다건 UPDATE 특성(대상 pending 행 각각에 토큰 1건씩 필요)과
+동시성 테스트를 위한 `for update` 추가 필요성을 명시. 필수 테스트 목록에
+"직접 supersede 위조 차단(다른 action 토큰으로는 열리지 않음 포함)"과 "동시
+재판정/반영 경합" 시나리오를 구체화해 추가.
+
+**코드/마이그레이션 변경 없음 — 계획 문서만 개정.** 동시에 진행 중이던 배치 2-1
+(`bypass_status_protect`, `supabase/migrations/20261256000000_r2_corrective_status_protect_token.sql`
+작업 중)과는 무관한 별도 절이며 그쪽 파일은 손대지 않았다.
+
+**결정 필요(제품 오너 확인 대기)**: 배치 2-3의 "동시 재판정/반영 경합" 테스트에서
+`recomplete_session()`(supersede 시도)과 `resolve_session_reconciliation_task()`
+(resolve 시도)가 같은 대사 작업 행을 두고 경합할 때 어느 쪽이 이겨야 하는지(우선순위)는
+이 문서가 아직 확정하지 않았다 — `for update` 잠금으로 "둘 다 성공"이나 "애매한 상태"는
+막히지만, 어느 쪽을 우선할지는 제품 정책 판단이 필요.
