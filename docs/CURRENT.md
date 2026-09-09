@@ -1,5 +1,65 @@
 # ALTON — 현재 상태 (2026-09-08 기준)
 
+> **2026-09-08 — bypass GUC 보안 정리 배치 1 착수(코드/마이그레이션 변경 실제 반영).**
+> `docs/superpowers/plans/2026-09-08-bypass-guc-security-cleanup.md`의 배치 1
+> (`bypass_consent_protect` → `bypass_teacher_rate_protect` →
+> `bypass_trial_session_auto_complete`)을 실제로 구현했다. 배치 2
+> (`bypass_session_lock`/`bypass_status_protect`/`bypass_invite_protect`/
+> `bypass_reconciliation_task_lock`)는 이번 라운드에서 건드리지 않았다 — 계획대로
+> 별도 스코프.
+>
+> - `20261251000000_r_status_transition_tokens.sql`(신규) — 공유 1회용 토큰
+>   테이블 `status_transition_tokens(table_name, row_id, action, xact_id,
+>   created_at)`을 신설. `session_content_manifest`(20261233000000)와 동일한
+>   잠금 패턴 — 어떤 ordinary role(public/anon/authenticated/service_role)에도
+>   INSERT/UPDATE/DELETE/SELECT 그랜트 없음, RLS 활성 + 쓰기 정책 0개. private
+>   헬퍼 `consume_status_transition_token()`(SECURITY DEFINER, 어떤 role에도
+>   EXECUTE 없음 — 트리거 본문 안에서만 호출)이 "토큰 존재 확인 + 1회용 삭제"를
+>   담당한다. 제품 오너 지시대로 범용 "토큰 발급" 함수는 만들지 않았다 — 발급은
+>   각 SECURITY DEFINER 함수(`revoke_guardian_consent()`, `set_teacher_rate()`)
+>   본문 안 인라인 INSERT로만 이루어진다.
+> - `20261252000000_r2_corrective_consent_protect_token.sql` — `app.bypass_consent_protect`
+>   GUC 분기를 완전히 제거. `protect_guardian_consent()`는 동의 당시 8개
+>   필드는 그대로 무조건 불변 유지, 철회 3필드만 바뀌는 UPDATE는
+>   `status_transition_tokens`에서 `action='revoke_consent'` 토큰을 확인·소비해야만
+>   통과한다. `revoke_guardian_consent()`는 인가 검사 후 철회 UPDATE 직전에
+>   토큰을 인라인 INSERT하고, 철회 UPDATE·`privacy_review_tasks` INSERT까지
+>   전부 같은 트랜잭션 — 어느 단계든 실패하면 토큰도 함께 롤백된다(좀비 토큰
+>   없음, 회귀 테스트로 확인).
+> - `20261253000000_r1_corrective_teacher_rate_protect_token.sql` — `app.bypass_teacher_rate_protect`
+>   GUC 분기를 완전히 제거. `protect_teacher_rate_history()`는 금액·통화·teacher_id·
+>   effective_from은 그대로 무조건 불변, `effective_until`만 바뀌는 UPDATE는
+>   `action='close_teacher_rate'` 토큰을 확인·소비해야만 통과한다.
+>   `set_teacher_rate()`(R2 sync 포함 최신 버전)는 기존 이력 종료 UPDATE 직전에
+>   토큰을 인라인 INSERT하고, 종료 UPDATE·새 이력 INSERT·`teachers.hourly_rate_krw`
+>   동기화까지 전부 같은 트랜잭션.
+> - `20261254000000_m5d_corrective_trial_auto_complete_condition.sql` — `app.bypass_trial_session_auto_complete`
+>   GUC 참조를 완전히 제거(토큰 인프라도 쓰지 않음 — 유일 호출자·단일
+>   캐스케이드라 과설계로 판단, 계획 그대로). `reject_direct_trial_session_completion()`을
+>   결과 조건 재검증으로 재작성 — `trial_sessions.status`가 `completed`로
+>   바뀌려면 (1) 연결된 `sessions.final_status`가 실제로 `completed`인가(직접
+>   재조회, role/게이트 무관 — 관리자·service_role도 예외 없음), (2) 같은
+>   UPDATE에서 `completed_at`도 non-null로 함께 채워지는가, 둘 다 참이어야
+>   한다. `auto_complete_linked_trial_session()`은 GUC set/reset 호출만
+>   제거(원래도 status/completed_at을 같은 UPDATE에서 함께 채우고 있었음 —
+>   캐스케이드 정상 동작에는 영향 없음).
+> - 신규 회귀 테스트(실제 로컬 Postgres 대상 psql 통합 테스트, 이 저장소의
+>   기존 패턴 그대로): `app/admin/consent-protect-token.integration.test.ts`(5),
+>   `lib/booking/teacher-rate-protect-token.integration.test.ts`(4),
+>   `lib/booking/trial-session-completion-link.integration.test.ts`에 4개 케이스
+>   추가(기존 파일 확장, 역할 무관성 + `completed_at` 동시성 케이스 포함).
+>   GUC 이름을 fixture 정리에 쓰던 기존 테스트 파일은 없었음(grep 확인) —
+>   fixture 마이그레이션 불필요.
+> - 전체 스위트(1576 테스트) 두 차례 fresh `db reset --local` 후 실행 — 둘 다
+>   신규/수정 테스트 전부 통과, 실패는 `app/teacher/student-curriculum-overlay.integration.test.ts`의
+>   기존(이번 변경과 무관) checksum 병렬 실행 오염 플레이크 2건뿐이며, 이
+>   플레이크는 이번 변경 전 baseline(`git stash` 후 재현)에서도 동일하게
+>   재현됨을 확인했다(그 baseline 실행에서는 오히려 4건 실패 — 실행마다 순서가
+>   달라 실패 개수가 변동하는 전형적 테스트 간 오염 패턴). `tsc --noEmit`,
+>   `next build` 전부 통과.
+>
+> 상세: `docs/superpowers/plans/2026-09-08-bypass-guc-security-cleanup.md`.
+
 > **2026-09-08 — bypass GUC 보안 정리 계획 2차 개정(코드 변경 없음, 계획/문서화만).**
 > 제품 오너가 `bypass_consent_protect`/`bypass_teacher_rate_protect`에 대해
 > 이전 개정에서 확정했던 "필드 조합 검사" 설계를 반려했다 — 필드 검사만으로는
