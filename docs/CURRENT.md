@@ -1,5 +1,33 @@
 # ALTON — 현재 상태 (2026-09-09 기준)
 
+> **2026-09-09 — Mailtrap 검증 시도 중단, 후속 백로그 1건만 기록(코드·
+> 스키마·데이터 변경 없음).** 기존 학생 초대 메일(직접 온보딩 경로로 만든
+> UAT 학생)이 Mailtrap 설정 전에 발송된 것으로 판단돼 재검증이 필요했다.
+>
+> **조사 결과(발견, 백로그로만 기록)**: 관리자 UI/서버 액션 어디에도
+> "직접(지인·추천) 온보딩" 경로로 만든 학생의 비밀번호 설정 메일을
+> 재발송하는 기능이 연결돼 있지 않다. `resendStudentInviteAction()`
+> (`app/admin/student-invite-actions.ts`, UI: `StudentInviteStatusPanel`)이
+> 유일한 재발송 경로인데, `consultations.child_id`로만 대상을 찾도록
+> 설계돼 있어 `consultation_id`가 처음부터 `null`인 직접 온보딩 학생
+> (`create_direct_onboarding_link_multi()`로 생성)에는 이 기능 자체가
+> 노출되지 않는다. 재발송을 실제로 트리거하는 유일한 코드 경로
+> (`/api/trial-onboarding/confirm-email` → `resendStudentSetPasswordEmail()`)도
+> 같은 라우트가 먼저 `redeem_trial_onboarding_link()`를 다시 호출하는데,
+> 이미 `status='redeemed'`인 링크는 재호출 시 "이미 사용된 링크" 예외로
+> 막혀 새 코드나 상담 연결 없이는 통과할 방법이 없다.
+>
+> **결정(제품 오너)**: 이미 redeemed된 직접 온보딩 링크의 상태를 되돌려
+> 강제로 재발송 경로를 통과시키지 않는다(UAT 데이터·멱등성 정책 검증
+> 목적에 맞지 않음). 이 설계 갭은 **후속 백로그**로만 남기고 이번 UAT
+> 범위에서 고치지 않는다. Mailtrap SMTP 실제 캡처 검증은 **다음 정상
+> 상담 UAT 흐름(상담 신청 또는 상담 동의 요청 메일 등, 이메일 발송이
+> 원래 포함된 경로)에서 최신 Preview로 1회 수행**하고, 그 결과를 제품
+> 오너가 Mailtrap My Sandbox에서 직접 확인하기로 확정.
+>
+> **이번 라운드에서 한 것**: 코드 조사(grep/read)만 — 코드·스키마·데이터
+> 변경 없음. UAT 계정·세션은 이전 라운드에서 만든 상태 그대로 유지.
+
 > **2026-09-09 — non-prod에 UAT 계정·세션 준비 완료(제품 오너 승인, UAT 흐름
 > 자체는 아직 실행 안 함, 데이터 정리도 안 함).** 실행 ID `uat-2026-09-09`.
 > **로그인 비밀번호는 이 문서·Git 어디에도 기록하지 않는다** — 별도로 전달함.
