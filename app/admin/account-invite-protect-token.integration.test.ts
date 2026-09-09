@@ -83,23 +83,37 @@ function insertInvite(opts: {
   status?: string;
   expiresInHours?: number;
   rawToken?: string;
+  email?: string;
 }): { inviteId: string; rawToken: string } {
   const rawToken = opts.rawToken ?? `raw-${opts.label}-${Date.now()}-${Math.random()}`;
   const tokenHash = sha256Hex(rawToken);
   const now = Date.now();
   const expiresAt = `now() + interval '${opts.expiresInHours ?? 168} hours'`;
   const householdSql = opts.householdId ? `'${opts.householdId}'` : "null";
+  const email = opts.email ?? `invite-${opts.label}-${now}@example.com`;
   const inviteId = psql(`
     insert into account_invites (
       email_normalized, email_original, invitee_name, role, household_id, invited_by,
       status, token_hash, expires_at
     ) values (
-      lower('invite-${opts.label}-${now}@example.com'), 'invite-${opts.label}-${now}@example.com',
+      lower('${email}'), '${email}',
       '초대테스트(${opts.label})', '${opts.role}', ${householdSql}, '${opts.invitedBy}',
       '${opts.status ?? "pending"}', '${tokenHash}', ${expiresAt}
     ) returning id;
   `);
   return { inviteId, rawToken };
+}
+
+// createParent()와 동일한 auth.users INSERT 패턴이지만 profiles/parents 행을
+//만들지 않는다 — "이메일이 같은 기존 Auth 계정" 시나리오는 profiles가 아직
+// 없는 상태(가입 진행 중/불완전)도 포함하므로 auth.users 존재 여부만으로
+// 충분하다(claim_account_invite()도 auth.users만 조회한다).
+function createAuthUserWithEmail(label: string, email: string): string {
+  return psql(
+    `insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at)
+     values ('00000000-0000-0000-0000-000000000000', gen_random_uuid(), 'authenticated', 'authenticated', '${email}', 'x', now(), '{}', '{}', now(), now())
+     returning id;`
+  );
 }
 
 describe("protect_account_invite_status() / 5개 호출자 — status_transition_tokens 1회용 토큰(corrective 회귀)", () => {
@@ -505,5 +519,97 @@ describe("protect_account_invite_status() / 5개 호출자 — status_transition
       psql(`drop trigger if exists force_invite_event_failure on account_invite_events;`);
       psql(`drop function if exists force_invite_event_failure_for_test();`);
     }
+  });
+
+  it("⑩ 이메일이 같은 기존 Auth 계정 존재 — 익명 claim_account_invite()가 manual_review로 정확히 전이(토큰 정확히 발급/소비, 이벤트 정확히 1건)", () => {
+    const inviter = createParent("existing-auth-manual-review-inviter");
+    const now = Date.now();
+    const sharedEmail = `existing-auth-manual-review-${now}@example.com`;
+    const existingAuthId = createAuthUserWithEmail("existing-auth-manual-review", sharedEmail);
+    const { inviteId, rawToken } = insertInvite({
+      label: "existing-auth-manual-review",
+      role: "parent",
+      invitedBy: inviter,
+      email: sharedEmail,
+    });
+
+    // claim 이전: 이 초대에 대한 토큰은 아직 없다.
+    const before = Number(
+      psql(`select count(*) from status_transition_tokens where table_name = 'account_invites' and row_id = '${inviteId}';`)
+    );
+    expect(before).toBe(0);
+
+    const result = asAnon(`select status, auth_user_id from claim_account_invite('${rawToken}');`);
+    expect(result).toBe(`manual_review|${existingAuthId}`);
+
+    // 초대 상태가 정확히 manual_review로 전이됨.
+    const status = psql(`select status from account_invites where id = '${inviteId}';`);
+    expect(status).toBe("manual_review");
+
+    // manual_review 이벤트가 정확히 1건.
+    const eventCount = Number(
+      psql(`select count(*) from account_invite_events where invite_id = '${inviteId}' and event_type = 'manual_review';`)
+    );
+    expect(eventCount).toBe(1);
+
+    // 해당 초대의 토큰 잔존 0건(발급 1건 + 트리거가 즉시 소비).
+    const tokenLeft = Number(
+      psql(`select count(*) from status_transition_tokens where table_name = 'account_invites' and row_id = '${inviteId}';`)
+    );
+    expect(tokenLeft).toBe(0);
+  });
+
+  it("⑪ 재시도 — manual_review 상태의 초대에 같은 토큰으로 다시 claim_account_invite()를 호출하면 명시적으로 거부되고(현재 상태를 담은 예외), 토큰/이벤트/상태 모두 그대로 유지된다", () => {
+    // (주의) claim_account_invite()의 accepted 분기만 멱등(에러 없이 같은
+    // 결과 반환)이고, manual_review를 포함한 그 외 비-pending 상태는
+    // `if v_row.status <> 'pending' then raise exception '%', v_row.status;`
+    // 분기를 그대로 타 상태 문자열을 담은 예외를 던진다(코드 원본 확인,
+    // corrective가 손대지 않은 기존 로직) — 이 테스트는 실제 동작(명시적
+    // 예외, 상태 문자열 = 'manual_review')을 그대로 검증한다. 침묵 실패나
+    // 모호한 결과가 아니다.
+    const inviter = createParent("existing-auth-manual-review-retry-inviter");
+    const now = Date.now();
+    const sharedEmail = `existing-auth-manual-review-retry-${now}@example.com`;
+    createAuthUserWithEmail("existing-auth-manual-review-retry", sharedEmail);
+    const { inviteId, rawToken } = insertInvite({
+      label: "existing-auth-manual-review-retry",
+      role: "parent",
+      invitedBy: inviter,
+      email: sharedEmail,
+    });
+
+    const first = asAnon(`select status from claim_account_invite('${rawToken}');`);
+    expect(first).toBe("manual_review");
+
+    const eventCountAfterFirst = Number(
+      psql(`select count(*) from account_invite_events where invite_id = '${inviteId}' and event_type = 'manual_review';`)
+    );
+    expect(eventCountAfterFirst).toBe(1);
+    const tokenLeftAfterFirst = Number(
+      psql(`select count(*) from status_transition_tokens where table_name = 'account_invites' and row_id = '${inviteId}';`)
+    );
+    expect(tokenLeftAfterFirst).toBe(0);
+
+    // 재시도 — 같은 토큰. manual_review는 accepted처럼 멱등 반환하지 않고
+    // 명시적으로 예외를 던진다(예외 메시지 = 현재 status 값).
+    expect(() => asAnon(`select status from claim_account_invite('${rawToken}');`)).toThrow(/manual_review/);
+
+    // 상태는 그대로 manual_review — 재전이 없음.
+    const status = psql(`select status from account_invites where id = '${inviteId}';`);
+    expect(status).toBe("manual_review");
+
+    // 이벤트는 여전히 정확히 1건 — 중복/추가 이벤트 없음.
+    const eventCountAfterSecond = Number(
+      psql(`select count(*) from account_invite_events where invite_id = '${inviteId}' and event_type = 'manual_review';`)
+    );
+    expect(eventCountAfterSecond).toBe(1);
+
+    // 토큰 잔존 여전히 0건 — 새 토큰이 발급되지 않았다(예외 발생 전에
+    // status <> 'pending' 검사에서 이미 걸러지므로 INSERT 자체가 실행되지
+    // 않는다).
+    const tokenLeftAfterSecond = Number(
+      psql(`select count(*) from status_transition_tokens where table_name = 'account_invites' and row_id = '${inviteId}';`)
+    );
+    expect(tokenLeftAfterSecond).toBe(0);
   });
 });

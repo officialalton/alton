@@ -4273,3 +4273,31 @@ Task 1~4와 그 사이 발견된 모든 corrective가 제품 오너 최종 승�
 (resolve 시도)가 같은 대사 작업 행을 두고 경합할 때 어느 쪽이 이겨야 하는지(우선순위)는
 이 문서가 아직 확정하지 않았다 — `for update` 잠금으로 "둘 다 성공"이나 "애매한 상태"는
 막히지만, 어느 쪽을 우선할지는 제품 정책 판단이 필요.
+
+## 2026-09-08 — `claim_account_invite()` 기존 Auth 계정 분기 회귀 테스트 추가 (테스트 전용)
+
+`app/admin/account-invite-protect-token.integration.test.ts`에 제품 오너가 지정한
+정확한 시나리오 2건을 추가: ⑩ 초대 이메일과 같은 기존 `auth.users` 행이 있을 때
+익명 `claim_account_invite()` 호출 → `account_invites.status`가 `manual_review`로
+정확히 전이, `account_invite_events`에 `event_type = 'manual_review'` 이벤트가
+정확히 1건, 해당 초대의 `status_transition_tokens` 잔존 0건을 확인. ⑪ 같은
+토큰으로 재시도 → 코드를 직접 읽어 확인한 실제 동작(비-`pending`·비-`accepted`
+상태는 `raise exception '%', v_row.status` 분기를 타 상태 문자열을 담은 명시적
+예외를 던짐, corrective가 손대지 않은 기존 로직)을 그대로 검증 — 새 토큰/이벤트
+없음, 상태는 `manual_review`로 그대로 유지.
+
+테스트 전용 변경만 있었다: 기존 `claim_account_invite()` 함수의 기존 Auth 계정
+분기(`20261258000000_r2_corrective_invite_protect_token.sql`)는 코드를 읽어
+확인한 결과 이미 요구된 대로 동작하고 있었다 — 코드/마이그레이션 변경 없음.
+`app/admin/account-invite-protect-token.integration.test.ts`의 `insertInvite()`에
+선택적 `email` 오버라이드 파라미터를, 그리고 기존 `createParent()`와 동일한
+`auth.users` INSERT 패턴을 재사용하는 `createAuthUserWithEmail()` 헬퍼를 추가한
+것 외에는 프로덕션 코드에 손대지 않았다.
+
+검증: `supabase db reset --local` → 대상 파일만 실행 시 18/18 통과(기존 16 +
+신규 2). `tsc --noEmit` 클린. `db reset` → 전체 스위트(`--no-file-parallelism`)
+2회 연속 실행: 두 번 다 230 test files / 1623 tests 전부 통과, 실패 0.
+`next build` 성공.
+
+**결정 필요**: 없음 — 재시도 시나리오의 실제 동작이 명시적 예외(모호하지 않음)로
+확인되어, 이전에 우려했던 "침묵/모호한 결과"는 실제로 발생하지 않는다.
