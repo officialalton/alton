@@ -1,5 +1,50 @@
 # ALTON — 현재 상태 (2026-09-09 기준)
 
+> **2026-09-09 — 기반 안정화 계획 corrective: `session_incident_reports`
+> 신고자 신원 위조 차단(제품 오너 최종 승인 전 지적 사항).** 5단계에서
+> `reported_by` 미기록 버그를 고쳐 신고 기능이 다시 동작하게 됐는데,
+> INSERT 정책이 `is_session_related_v3(session_id)`만 확인하고 `reported_by`가
+> 실제 호출자(`auth.uid()`)와 같은지는 확인하지 않아 세션 관련자가 요청
+> 바디에 다른 사용자의 id를 넣어 신고자를 위조할 수 있는 구조였음을
+> 제품 오너가 지적 — 이를 닫는 corrective 라운드.
+>
+> **조사**: `session_incident_reports`에 대한 유일한 INSERT 경로는
+> `lib/booking/incident-reports.ts::submitIncidentReport()`(학생/교사/보호자
+> 3개 서버 액션에서 호출) 하나뿐이고, 셋 다 `requireUser()`로 얻은 세션
+> 사용자의 id를 그대로 전달한다. `app/admin/booking-actions.ts`는 이
+> 테이블을 SELECT만 한다 — 관리자가 대신 신고를 기록해야 하는 정당한 예외
+> 경로가 실제로 존재하지 않으므로, 예외를 만들지 않고 `reported_by =
+> auth.uid()`를 무조건 강제했다.
+>
+> **수정**:
+> `supabase/migrations/20261264000000_r6_corrective_incident_report_reported_by_identity.sql`
+> — INSERT 정책을 `reported_by = auth.uid() and (is_session_related_v3(...)
+> or is_admin() or capability)`로 교체(기존 세션 관련성 요건은 관리자
+> 분기에도 그대로 유지, "신원 위조 방지"는 독립된 AND 조건으로 추가).
+> `session_content_use_events`의 `recorded_by = auth.uid()`와 동일한 기존
+> 패턴을 그대로 재사용.
+>
+> **테스트(신규)**: `app/student/incident-report-reported-by-identity.integration.test.ts`
+> — 실제 v3 세션(confirm_lesson_booking으로 생성)에 대해 (1) 학생/보호자/
+> 교사 본인이 자기 id로 신고 성공, (2) 세션 관련자(학생/보호자)가 다른
+> 사용자의 id를 `reported_by`에 넣으면 RLS가 거부, (3) 세션과 무관한
+> 제3자는 본인 id로도 세션 관련성 요건에서 거부됨을 psql role-switch로
+> 검증(총 6케이스). 기존 앱 레이어 단위테스트(3개 액션 파일)는 이미
+> 호출자 자신의 id를 전달하고 있어 그대로 통과.
+>
+> **검증**: `db reset --local` → 신규 통합 테스트 6/6 통과, 기존 관련
+> 단위테스트 15/15 통과, 전체 스위트 240/240 파일·1685/1685 테스트
+> 통과, `tsc`/`next build` 클린.
+>
+> **범위 준수**: 이 corrective 외 7단계 범위 밖 기능·리팩터링·외부 변경은
+> 하지 않았다. **Preview/non-prod/UAT 계정/배포/push/main 병합/실제 외부
+> 호출 없음.**
+>
+> **성능 라운드 관련**: 제품 오너가 이번엔 "N+1 구조 제거"까지만 승인 —
+> 응답시간 개선 수치는 로컬 측정치일 뿐 재현 가능한 HTTP/TTFB 기준이
+> 아니므로, 다음 성능 라운드에서 포털별 실측 전후 수치로 별도 검증하기로
+> 확인.
+
 > **2026-09-09 — 기반 안정화 계획(제품 오너 야간 자율 승인) 진행 중 — 1~2단계
 > 완료.** 계획 문서 7절 순서대로 진행. 각 단계 독립 커밋·로컬 검증(신규
 > migration 시 `db reset --local`, 대상 테스트, `tsc --noEmit`, 전체 테스트,
