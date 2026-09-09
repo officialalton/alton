@@ -291,41 +291,63 @@ export async function loadTeachers(supabase: SupabaseClient): Promise<TeacherLis
   }));
 }
 
-export async function loadStudentCreditHistory(
+// 성능 corrective(2026-09-09, 성능 측정 라운드) — 기존 loadStudentCreditHistory(studentId)/
+// loadTeacherQcWarnings(teacherId) 단건 버전은 app/admin/page.tsx가 학생/교사 전원에 대해
+// 각각 개별 호출(N+1)해 admin 페이지 로드마다 학생 수만큼 DB 왕복이 발생했다(실측:
+// admin이 웜 상태에서도 가장 느린 페이지, seed 학생 99명 기준). 학생 ID/교사 ID 전체를
+// 각각 .in() 한 번으로 읽어 클라이언트에서 그룹핑하는 배치 버전으로 교체한다 — 반환
+// 데이터 모양·정렬·빈 배열 처리는 기존 단건 버전과 완전히 동일하게 유지한다(각 id별
+// 배열은 여전히 created_at/occurred_at 내림차순, 매칭되는 행이 없는 id는 빈 배열).
+
+export async function loadStudentCreditHistoryBatch(
   supabase: SupabaseClient,
-  studentId: string
-): Promise<CreditTransaction[]> {
+  studentIds: string[]
+): Promise<Record<string, CreditTransaction[]>> {
+  const result: Record<string, CreditTransaction[]> = {};
+  for (const id of studentIds) result[id] = [];
+  if (studentIds.length === 0) return result;
+
   const { data } = await supabase
     .from("credit_transactions")
-    .select("id, type, amount, reason, created_at")
-    .eq("student_id", studentId)
+    .select("id, student_id, type, amount, reason, created_at")
+    .in("student_id", studentIds)
     .order("created_at", { ascending: false });
 
-  return (data ?? []).map((t) => ({
-    id: t.id,
-    type: t.type,
-    amount: t.amount,
-    reason: t.reason,
-    createdAt: t.created_at,
-  }));
+  for (const t of data ?? []) {
+    (result[t.student_id] ??= []).push({
+      id: t.id,
+      type: t.type,
+      amount: t.amount,
+      reason: t.reason,
+      createdAt: t.created_at,
+    });
+  }
+  return result;
 }
 
-export async function loadTeacherQcWarnings(
+export async function loadTeacherQcWarningsBatch(
   supabase: SupabaseClient,
-  teacherId: string
-): Promise<QcWarning[]> {
+  teacherIds: string[]
+): Promise<Record<string, QcWarning[]>> {
+  const result: Record<string, QcWarning[]> = {};
+  for (const id of teacherIds) result[id] = [];
+  if (teacherIds.length === 0) return result;
+
   const { data } = await supabase
     .from("teacher_qc_warnings")
-    .select("id, type, detail, occurred_at, student:students(profile:profiles(name))")
-    .eq("teacher_id", teacherId)
+    .select("id, teacher_id, type, detail, occurred_at, student:students(profile:profiles(name))")
+    .in("teacher_id", teacherIds)
     .order("occurred_at", { ascending: false });
 
-  return (data ?? []).map((w) => ({
-    id: w.id,
-    type: w.type,
-    detail: w.detail,
-    occurredAt: w.occurred_at,
-    studentName:
-      extractName((Array.isArray(w.student) ? w.student[0] : w.student)?.profile) || null,
-  }));
+  for (const w of data ?? []) {
+    (result[w.teacher_id] ??= []).push({
+      id: w.id,
+      type: w.type,
+      detail: w.detail,
+      occurredAt: w.occurred_at,
+      studentName:
+        extractName((Array.isArray(w.student) ? w.student[0] : w.student)?.profile) || null,
+    });
+  }
+  return result;
 }

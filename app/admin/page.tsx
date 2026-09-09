@@ -6,8 +6,8 @@ import {
   loadParents,
   loadStudents,
   loadTeachers,
-  loadStudentCreditHistory,
-  loadTeacherQcWarnings,
+  loadStudentCreditHistoryBatch,
+  loadTeacherQcWarningsBatch,
 } from "./users-data";
 import {
   loadConsultations,
@@ -92,22 +92,12 @@ export default async function AdminHomePage({
     listOpenOrRecentPaymentDisputes(),
   ]);
 
-  const [creditHistoryEntries, qcWarningsEntries] = await Promise.all([
-    Promise.all(
-      students.map(async (s) => [s.id, await loadStudentCreditHistory(supabase, s.id)] as const)
-    ),
-    Promise.all(
-      teachers.map(async (t) => [t.id, await loadTeacherQcWarnings(supabase, t.id)] as const)
-    ),
+  // 성능 corrective(2026-09-09): 학생/교사 수와 무관하게 각각 배치 쿼리 1회씩만
+  // 실행한다(기존: 학생/교사 각각 개별 호출하는 N+1 — admin 페이지 최악 TTFB의 원인).
+  const [creditHistoryByStudent, qcWarningsByTeacher] = await Promise.all([
+    loadStudentCreditHistoryBatch(supabase, students.map((s) => s.id)),
+    loadTeacherQcWarningsBatch(supabase, teachers.map((t) => t.id)),
   ]);
-  const creditHistoryByStudent = Object.fromEntries(creditHistoryEntries) as Record<
-    string,
-    Awaited<ReturnType<typeof loadStudentCreditHistory>>
-  >;
-  const qcWarningsByTeacher = Object.fromEntries(qcWarningsEntries) as Record<
-    string,
-    Awaited<ReturnType<typeof loadTeacherQcWarnings>>
-  >;
 
   return (
     <AdminShell
