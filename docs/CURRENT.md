@@ -1,5 +1,41 @@
 # ALTON — 현재 상태 (2026-09-08 기준)
 
+> **2026-09-08 — bypass GUC 배치 2 계획 문서 내부 정합성 정정(계획/문서 전용,
+> 코드 변경 없음).** 직전 라운드(바로 아래 항목)가 4차 개정에서 `recomplete_session()`
+> 관련 사실관계 3건을 정정했지만, 그 정정을 "개정 이력"과 "배치 2 상세 실행 계획"
+> 절에만 반영하고 문서 앞부분의 **원래 감사(audit) 표**(`### 1. bypass_session_lock`,
+> `### 3. bypass_status_protect`, `### 4. bypass_invite_protect` — 이 라운드 이전
+> 커밋에 이미 존재하던 절)는 갱신하지 않고 남겨둬서, 같은 문서 안에 서로 모순되는
+> 서술이 공존했다(예: 앞쪽 표는 "recomplete_session()이 bypass_status_protect를
+> 쓴다"고 하고, 뒤쪽 "주의" 문단은 "3번 절의 recomplete_session() 인용은 잘못됐다"고
+> 지적만 하고 실제로 고치지는 않음). 이번 라운드는 **모든 마이그레이션 파일을
+> 다시 전수 재확인**하여(각 함수가 여러 마이그레이션에서 `create or replace`로
+> 재정의되므로 가장 최근 정의만이 유효하다는 점에 유의해 확인) 세 감사 표를 그
+> 최신 사실에 맞춰 직접 고쳤다:
+> - `bypass_session_lock`: 실제 호출자는 `reopen_session()` 1개뿐. `recomplete_session()`은
+>   이 GUC를 전혀 쓰지 않는다 — 이유는 `prevent_direct_final_status_update()` 트리거가
+>   `old.final_status not in ('scheduled','live')`일 때만 차단하는데, `recomplete_session()`은
+>   항상 `reopen_session()`이 먼저 `final_status`를 `'live'`로 되돌린 뒤에만 호출되므로
+>   (`v_prev is distinct from 'live'`면 예외) 트리거 조건이 애초에 성립하지 않아 GUC 없이도
+>   통과한다.
+> - `bypass_status_protect`: 실제 호출자는 `transition_account_status()`/`merge_accounts()`
+>   2개뿐. `recomplete_session()`의 `20260928000000_r6_sessions_cutover.sql`판이
+>   한때 이 GUC를 썼지만, 이후 `20261122000000_m5c_reconciliation_task_staleness.sql`/
+>   `20261123000000_m5c_student_cancelled_reconciliation.sql`이 이 함수를 다시
+>   `create or replace`하면서 그 SET 호출이 제거되고 `bypass_reconciliation_task_lock`
+>   SET으로 대체됐다(최신 정의는 `20261123000000_m5c_student_cancelled_reconciliation.sql`).
+> - `bypass_invite_protect`: 실제 호출자는 5개(`resend_account_invite`/
+>   `revoke_account_invite`/`claim_account_invite`(2분기)/`resolve_manual_review_invite`
+>   (2분기)/`mark_expired_invites`). `create_account_invite()`(INSERT-only)와
+>   `finalize_account_invite()`(UPDATE가 `target_profile_id`/`auth_user_id`/`updated_at`만
+>   건드림, `status` 아님)는 무관하다.
+>
+> 세 값 모두 이미 "개정 이력"/"배치 2 상세 실행 계획" 절이 서술하던 것과 정확히
+> 일치한다 — 이번 라운드는 새 사실을 발견한 것이 아니라, 문서 앞부분에 남아 있던
+> **미반영 잔재**(항목 수·함수 목록·테스트 시나리오·"수정 대상" 목록에 흩어진
+> `recomplete_session`/`create_account_invite`/`finalize_account_invite` 오기재)를
+> 문서 전체에 일관되게 반영한 것이다. 코드/마이그레이션은 전혀 건드리지 않았다.
+
 > **2026-09-08 — bypass GUC 배치 2 상세 실행 계획 추가(계획/문서 전용, 코드
 > 변경 없음).** `docs/superpowers/plans/2026-09-08-bypass-guc-security-cleanup.md`에
 > 배치 2 4개 항목(`bypass_status_protect`/`bypass_invite_protect`/
