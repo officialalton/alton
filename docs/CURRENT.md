@@ -1,5 +1,90 @@
 # ALTON — 현재 상태 (2026-09-09 기준)
 
+> **2026-09-09 — 성능 측정 라운드(기반 안정화 7단계 승인 직후 착수). 측정과
+> 수정 후보만 — 코드 변경 없음.** 제품 오너 지시대로 포털별 대표 화면의
+> 쿼리 수·순차 대기·TTFB를 재현 가능한 방식으로 측정하고, 남은 N+1·클라이언트
+> 이중 fetch를 우선순위화했다. **admin 페이지 역할 게이트, 미사용 RPC 3종,
+> `trial_lesson_review`는 이번 라운드에서 손대지 않았다. Preview/non-prod
+> 반영·UAT 계정 생성·배포·push·main 병합·외부 호출 전부 하지 않았다.**
+>
+> **측정 방법(재현 가능)**: 로컬 `next dev`(포트 3000, 이미 실행 중이던
+> 서버) + `supabase db reset --local` 직후의 seed 데이터(학생 99명, 활성
+> subject_enrollment 71건, session 125건, teacher_assignment 61건 — 이미
+> 어느 정도 실서비스 규모를 반영한 seed)를 그대로 사용했다. seed에 포함된
+> 알려진 개발용 계정(비밀번호 전부 `alton-dev-1234`, `supabase/seed.sql`
+> 확인 가능)으로 실제 로그인 후 각 포털 홈을 하드 리로드해 브라우저
+> Navigation Timing API(`performance.getEntriesByType('navigation')[0]`)로
+> `responseStart - requestStart`(TTFB)와 `loadEventEnd`를 측정했다 — 이
+> 절차는 그대로 재실행 가능하다(같은 계정으로 로그인 후 새로고침 + 콘솔에서
+> 같은 스크립트 실행). 대표 화면 선정 기준: 각 역할에서 **가장 데이터가
+> 많은 실제 계정**(교사 박서연=담당 50건, 학생 지훈=수강 49건, 그 보호자
+> 김민지)을 골라 "최악에 가까운 실제 사례"를 쟀다.
+>
+> **TTFB 측정 결과** (dev 서버라 프로덕션 빌드보다 절대값은 크다 — 첫
+> 히트는 Turbopack 라우트 컴파일 비용이 섞여 더 큼, "웜" = 같은 라우트
+> 재방문 값. 우선순위 판단은 상대 비교·구조적 원인 위주로 한다):
+>
+> | 페이지 | 콜드(첫 히트) TTFB | 웜 TTFB | 비고 |
+> |---|---|---|---|
+> | `/materials/[id]` | 748ms | **251ms** | 가장 가벼움 — 단일 문서 조회 |
+> | `/teacher` | (컴파일 후 측정) | **509~513ms** | 교사 50건 담당 기준 |
+> | `/student` | 671ms | **545ms** | 학생 49건 수강 기준 |
+> | `/session/[id]` | 1152ms | **470~577ms** | 세션뷰(교재·과제·문제기록 등 통합) |
+> | `/parent` | 704ms | **572ms** | |
+> | `/admin` | 1035ms | **856ms** | **웜 상태에서도 가장 느림 — 아래 N+1이 원인으로 확인됨** |
+>
+> **핵심 발견 — 확정 P0/P1 후보: `app/admin/page.tsx`의 학생·교사별 N+1**
+> (`docs/superpowers/plans/2026-09-09-codebase-review-and-performance-diagnosis.md`
+> 1차 탐색에서는 발견되지 않았던 항목 — 이번 라운드에서 새로 확인)
+> - `app/admin/page.tsx:94-101` — 대시보드에 필요한 병렬 쿼리들이 끝난
+>   뒤, **학생 전원**(seed 기준 99명)에 대해 `loadStudentCreditHistory()`를,
+>   **교사 전원**에 대해 `loadTeacherQcWarnings()`를 `students.map(async ...)
+>   `/`teachers.map(async ...)`로 각각 호출한다 — `Promise.all`로
+>   병렬화돼 있어도 학생 수만큼(99+)의 개별 DB 왕복이 admin 페이지 로드마다
+>   발생한다. 실제 운영 규모(수백~수천 학생)로 커지면 왕복 수가 그대로
+>   비례해 늘어나는 구조적 결함이며, `/admin`이 웜 상태에서도 가장 느린
+>   것과 직접 일치한다.
+> - 근거: `app/admin/users-data.ts:294-326`의
+>   `loadStudentCreditHistory(supabase, studentId)`/`loadTeacherQcWarnings
+>   (supabase, teacherId)`는 각각 `credit_transactions`/`teacher_qc_warnings`를
+>   `student_id`/`teacher_id` 단건 `eq()`로만 조회 — `.in()` 배치 조회로
+>   바꾸고 client에서 `groupBy`하면 전체를 쿼리 2회로 축소 가능해 보인다
+>   (`loadCurricula()`에 이미 적용한 것과 동일한 패턴).
+> - **이번 라운드에서는 수정하지 않았다** — 다음 승인 시 최우선 수정
+>   후보로 제안.
+>
+> **그 외 확인된 `.map(async ...)` 루프(낮은 우선순위 후보, 규모가 작아
+> 체감 영향 적음)**:
+> - `app/parent/consent-data.ts:45-56`, `:124`(자녀별, 가족당 보통 1~3명),
+>   `app/parent/entitlements-data.ts:167`(수업권 상품 카탈로그, 보통
+>   한 자릿수), `app/parent/enrollment-data.ts:21`(자녀별),
+>   `app/admin/trial-onboarding-actions.ts:719`(enrollment별, 온보딩
+>   배치당 소수) — 전부 N이 작아(가족 규모/상품 카탈로그 크기) 이번
+>   라운드 우선순위에서는 낮게 매겼다. 구조는 admin의 학생/교사 루프와
+>   동일한 패턴이라, admin 건을 고치는 김에 같은 리팩터링 템플릿을
+>   재사용할 수 있다.
+> - `app/teacher/curriculum-data.ts:14`(`loadAllStudentCurricula`)의
+>   학생별 루프는 **이미 2단계에서 내부 N+1(loadCurricula)을 고정 4쿼리로
+>   줄였으므로** 별도 조치 불필요 — 학생 수만큼 병렬 호출되는 것 자체는
+>   남아있지만 각 호출이 이제 상수 비용이라 우선순위 낮음.
+>
+> **클라이언트 이중 fetch**: `/session/[id]` 최초 로드 시 브라우저
+> Network 탭을 확인한 결과 정적 자산(JS/CSS/폰트) 외에 별도의 REST/XHR
+> 왕복이 없었다 — 서버 컴포넌트가 서버 사이드에서만 데이터를 읽고
+> 클라이언트로 다시 요청하지 않음을 실측으로 확인(캐시 HIT 사례에서도
+> 동일). 1차 탐색(코드베이스 리뷰 계획 문서 5절)에서 "정당한 실시간
+> 데이터"로 분류했던 화이트보드/채팅의 `useEffect`, "사용자 상호작용
+> 트리거"로 분류했던 `ConsultRequestTab`/`InquiryTab`의 재요청도 이번
+> 실측에서 새로 뒤집을 근거를 찾지 못했다 — **새로운 이중 fetch 발견
+> 없음.**
+>
+> **다음 단계 제안(제품 오너 승인 대기, 이번 라운드에서는 실행 안 함)**:
+> 1. `app/admin/page.tsx`의 학생/교사 N+1을 `.in()` 배치 조회로 축소(최우선 —
+>    유일하게 실측으로 확인된 admin 페이지의 웜 상태 병목).
+> 2. 여유가 있다면 parent 포털의 자녀별 루프 3건도 같은 패턴으로 정리
+>    (체감 효과는 작음, 리팩터링 비용도 작음).
+> 3. 실제 개선 후 같은 계정·같은 절차로 재측정해 전후 수치를 다시 기록.
+
 > **2026-09-09 — 기반 안정화 계획 corrective: `session_incident_reports`
 > 신고자 신원 위조 차단(제품 오너 최종 승인 전 지적 사항).** 5단계에서
 > `reported_by` 미기록 버그를 고쳐 신고 기능이 다시 동작하게 됐는데,
