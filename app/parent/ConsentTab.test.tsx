@@ -2,6 +2,8 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import ConsentTab from "./ConsentTab";
 import type { ChildConsentStatus, ConsentPolicyOption, TrialSmartNotesConsentStatus } from "./consent-data";
+import type { ChildSubjectEnrollments } from "./enrollment-data";
+import { confirmRegularProgressIntent, hasConfirmedRegularProgressIntent } from "./trial-conversion-actions";
 
 const refreshMock = vi.fn();
 vi.mock("next/navigation", () => ({
@@ -13,6 +15,11 @@ const consentToTrialSmartNotesMock = vi.fn();
 vi.mock("./consent-actions", () => ({
   consentForChild: (...args: unknown[]) => consentForChildMock(...args),
   consentToTrialSmartNotes: (...args: unknown[]) => consentToTrialSmartNotesMock(...args),
+}));
+
+vi.mock("./trial-conversion-actions", () => ({
+  confirmRegularProgressIntent: vi.fn(),
+  hasConfirmedRegularProgressIntent: vi.fn(),
 }));
 
 const activePolicy: ConsentPolicyOption = {
@@ -180,5 +187,70 @@ describe("ConsentTab", () => {
     );
     fireEvent.click(screen.getByText("Smart Notes 이용 원문 보기"));
     expect(screen.getByTestId("consent-document-modal")).toHaveTextContent("원문 준비 중입니다.");
+  });
+});
+
+describe("ConsentTab — 정규 진행 희망 섹션(2026-09-10, P0-5)", () => {
+  const childrenSubjectEnrollments: ChildSubjectEnrollments[] = [
+    {
+      childId: "s1",
+      childName: "지훈",
+      enrollments: [{ id: "se1", subjectName: "SAT Math" } as never],
+    },
+  ];
+
+  it("정규 진행 희망 대상 과목이 없으면 섹션을 보여주지 않는다", () => {
+    render(<ConsentTab children={[]} activePolicy={activePolicy} trialSmartNotesChildren={[]} />);
+    expect(screen.queryByTestId("regular-intent-section")).not.toBeInTheDocument();
+  });
+
+  it("정규 진행 희망 대상 과목이 있으면 체험 리뷰 상태와 무관하게 바로 선택 버튼을 보여준다", async () => {
+    (hasConfirmedRegularProgressIntent as ReturnType<typeof vi.fn>).mockResolvedValue(false);
+    render(
+      <ConsentTab
+        children={[]}
+        activePolicy={activePolicy}
+        trialSmartNotesChildren={[]}
+        childrenSubjectEnrollments={childrenSubjectEnrollments}
+        progressedTrialEnrollmentIds={["se1"]}
+      />
+    );
+
+    expect(screen.getByTestId("regular-intent-section")).toBeInTheDocument();
+    expect(await screen.findByRole("button", { name: "정규 진행 희망합니다" })).toBeInTheDocument();
+  });
+
+  it("focusSubjectEnrollmentId로 지정된 항목이 강조 표시된다", async () => {
+    (hasConfirmedRegularProgressIntent as ReturnType<typeof vi.fn>).mockResolvedValue(false);
+    render(
+      <ConsentTab
+        children={[]}
+        activePolicy={activePolicy}
+        trialSmartNotesChildren={[]}
+        childrenSubjectEnrollments={childrenSubjectEnrollments}
+        progressedTrialEnrollmentIds={["se1"]}
+        focusSubjectEnrollmentId="se1"
+      />
+    );
+
+    const row = await screen.findByTestId("regular-intent-row-se1");
+    expect(row.className).toContain("ring-2");
+  });
+
+  it("이미 정규 진행 희망을 접수한 과목은 버튼 대신 접수 완료 문구를 보여주고 재요청하지 않는다", async () => {
+    (hasConfirmedRegularProgressIntent as ReturnType<typeof vi.fn>).mockResolvedValue(true);
+    render(
+      <ConsentTab
+        children={[]}
+        activePolicy={activePolicy}
+        trialSmartNotesChildren={[]}
+        childrenSubjectEnrollments={childrenSubjectEnrollments}
+        progressedTrialEnrollmentIds={["se1"]}
+      />
+    );
+
+    expect(await screen.findByText(/접수 완료/)).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "정규 진행 희망합니다" })).not.toBeInTheDocument();
+    expect(confirmRegularProgressIntent).not.toHaveBeenCalled();
   });
 });

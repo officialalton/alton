@@ -74,11 +74,17 @@ export default function ParentShell({
   childrenSubjectEnrollments,
   progressedTrialEnrollmentIds,
   lessonBooking,
+  focusSubjectEnrollmentId,
 }: {
   parentName: string;
   childrenList: Child[];
   currentChildId: string;
   initialTab?: string;
+  // 2026-09-10(P0-5) — 부모 홈 알림에서 특정 자녀·수강 정규 진행 동의로
+  // 정확히 이동하기 위한 식별값. URL(`?focus=`)에서 그대로 온다 — 새로고침·
+  // 뒤로가기·앞으로가기에도 유지되도록 로컬 state가 아니라 이 prop(서버가
+  // searchParams에서 읽어 내려줌)을 그대로 ConsentTab까지 전달한다.
+  focusSubjectEnrollmentId?: string;
   dashboard: DashboardData;
   upcoming: LessonItem[];
   past: LessonItem[];
@@ -130,6 +136,16 @@ export default function ParentShell({
   function selectChild(studentId: string) {
     setActiveTab("home");
     router.push(`?child=${studentId}&tab=home`, { scroll: false });
+  }
+
+  // 2026-09-10(P0-5) — 부모 홈의 "정규 진행 희망 선택이 필요해요" 알림은
+  // "수강 과목" 탭이 아니라 동의 탭의 해당 학생·수강 항목으로 정확히
+  // 이동해야 한다. child/focus를 URL에 실어 새로고침·뒤로가기·앞으로가기
+  // 뒤에도 대상이 그대로 유지되게 한다.
+  function goToRegularIntentConsent(childId: string, subjectEnrollmentId: string) {
+    setActiveTab("consent");
+    router.push(`?child=${childId}&tab=consent&focus=${subjectEnrollmentId}`, { scroll: false });
+    router.refresh();
   }
 
   const activeLabel = NAV_ITEMS.find((n) => n.id === activeTab)?.label ?? "";
@@ -234,7 +250,7 @@ export default function ParentShell({
               pendingRegularIntentChoices={pendingRegularIntentChoices}
               onSelectChild={selectChild}
               onGoToConsent={() => selectTab("consent")}
-              onGoToEnrollment={() => selectTab("enrollment")}
+              onGoToRegularIntentConsent={goToRegularIntentConsent}
             />
           )}
           {activeTab === "home" ? (
@@ -246,10 +262,7 @@ export default function ParentShell({
               timezone={lessonBooking.timezone}
             />
           ) : activeTab === "enrollment" ? (
-            <ParentEnrollmentTab
-              childrenEnrollments={childrenSubjectEnrollments}
-              progressedTrialEnrollmentIds={progressedTrialEnrollmentIds}
-            />
+            <ParentEnrollmentTab childrenEnrollments={childrenSubjectEnrollments} />
           ) : activeTab === "booking" ? (
             <LessonBookingTab
               key={currentChildId}
@@ -284,6 +297,9 @@ export default function ParentShell({
               children={consentChildren}
               activePolicy={activeConsentPolicy}
               trialSmartNotesChildren={trialSmartNotesChildren}
+              childrenSubjectEnrollments={childrenSubjectEnrollments}
+              progressedTrialEnrollmentIds={progressedTrialEnrollmentIds}
+              focusSubjectEnrollmentId={focusSubjectEnrollmentId}
             />
           ) : activeTab === "family" ? (
             <FamilyTab onGoToConsultRequest={() => selectTab("consultRequest")} />
@@ -315,7 +331,7 @@ function ChildrenStatusRow({
   pendingRegularIntentChoices,
   onSelectChild,
   onGoToConsent,
-  onGoToEnrollment,
+  onGoToRegularIntentConsent,
 }: {
   childrenList: Child[];
   currentChildId: string;
@@ -324,7 +340,7 @@ function ChildrenStatusRow({
   pendingRegularIntentChoices: PendingRegularIntentChoice[];
   onSelectChild: (studentId: string) => void;
   onGoToConsent: () => void;
-  onGoToEnrollment: () => void;
+  onGoToRegularIntentConsent: (childId: string, subjectEnrollmentId: string) => void;
 }) {
   if (childrenList.length === 0) return null;
 
@@ -334,7 +350,8 @@ function ChildrenStatusRow({
         const needsConsent =
           consentChildren.some((c) => c.studentId === child.studentId && c.isUnder13 && !c.hasValidConsent) ||
           trialSmartNotesChildren.some((c) => c.studentId === child.studentId && !c.hasConsented);
-        const needsRegularIntent = pendingRegularIntentChoices.some((p) => p.childId === child.studentId);
+        const regularIntentChoice = pendingRegularIntentChoices.find((p) => p.childId === child.studentId);
+        const needsRegularIntent = !!regularIntentChoice;
         const needsAction = needsConsent || needsRegularIntent;
 
         return (
@@ -360,8 +377,16 @@ function ChildrenStatusRow({
                     동의 필요한 문서가 있어요 →
                   </button>
                 )}
-                {needsRegularIntent && (
-                  <button onClick={onGoToEnrollment} className="text-[12px] font-semibold text-ink">
+                {regularIntentChoice && (
+                  <button
+                    onClick={() =>
+                      onGoToRegularIntentConsent(
+                        regularIntentChoice.childId,
+                        regularIntentChoice.subjectEnrollmentId
+                      )
+                    }
+                    className="text-[12px] font-semibold text-ink"
+                  >
                     정규 진행 희망 선택이 필요해요 →
                   </button>
                 )}

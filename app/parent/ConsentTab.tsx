@@ -3,16 +3,27 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { ChildConsentStatus, ConsentPolicyOption, TrialSmartNotesConsentStatus } from "./consent-data";
+import type { ChildSubjectEnrollments } from "./enrollment-data";
 import { consentForChild, consentToTrialSmartNotes } from "./consent-actions";
+import TrialConversionPanel from "./TrialConversionPanel";
 
 export default function ConsentTab({
   children,
   activePolicy,
   trialSmartNotesChildren,
+  childrenSubjectEnrollments = [],
+  progressedTrialEnrollmentIds = [],
+  focusSubjectEnrollmentId,
 }: {
   children: ChildConsentStatus[];
   activePolicy: ConsentPolicyOption | null;
   trialSmartNotesChildren: TrialSmartNotesConsentStatus[];
+  // 2026-09-10(P0-5) — "정규 진행 희망" 선택을 수강 과목 탭이 아니라 이 동의
+  // 탭으로 옮겼다. 부모 홈 알림이 특정 자녀·수강을 정확히 가리켜야 하므로
+  // childId/subjectEnrollmentId 기준 데이터를 그대로 받는다.
+  childrenSubjectEnrollments?: ChildSubjectEnrollments[];
+  progressedTrialEnrollmentIds?: string[];
+  focusSubjectEnrollmentId?: string;
 }) {
   const router = useRouter();
   const [busyStudentId, setBusyStudentId] = useState<string | null>(null);
@@ -49,6 +60,10 @@ export default function ConsentTab({
   }
 
   const minors = children.filter((c) => c.isUnder13);
+  const progressedIds = new Set(progressedTrialEnrollmentIds);
+  const childrenWithRegularIntentChoices = childrenSubjectEnrollments
+    .map((c) => ({ ...c, enrollments: c.enrollments.filter((e) => progressedIds.has(e.id)) }))
+    .filter((c) => c.enrollments.length > 0);
 
   return (
     <div className="max-w-[560px] px-8 py-8">
@@ -199,6 +214,25 @@ export default function ConsentTab({
               </div>
             ))}
           </div>
+        </div>
+      )}
+
+      {childrenWithRegularIntentChoices.length > 0 && (
+        <div className="mt-9 -mx-8 border-t border-grey-200 pt-5" data-testid="regular-intent-section">
+          <h2 className="text-[14px] font-extrabold text-ink mb-1.5 mx-8">정규 진행 희망</h2>
+          <p className="text-[12.5px] text-grey-500 mb-4 leading-[1.6] mx-8">
+            체험 수업을 마친 과목에 대해 정규 수업 진행을 희망하시는지 알려주세요. 체험 리뷰
+            작성 여부와 관계없이 언제든 선택할 수 있습니다.
+          </p>
+          {childrenWithRegularIntentChoices.map((c) => (
+            <div key={c.childId}>
+              <div className="mx-8 pt-2 text-[13px] font-bold text-grey-500">{c.childName}</div>
+              <TrialConversionPanel
+                enrollments={c.enrollments}
+                focusSubjectEnrollmentId={focusSubjectEnrollmentId}
+              />
+            </div>
+          ))}
         </div>
       )}
 

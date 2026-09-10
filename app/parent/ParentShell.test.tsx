@@ -210,7 +210,7 @@ describe("ParentShell", () => {
     expect(screen.queryByText(/동의 필요한 문서가/)).not.toBeInTheDocument();
   });
 
-  it("2026-09-10(UI/UX 정리 1차): 정규 진행 희망 선택이 필요한 자녀는 홈의 자녀 카드에 배지로 표시되고, 누르면 수강 과목 탭으로 이동한다", () => {
+  it("2026-09-10(P0-5): 정규 진행 희망 선택이 필요한 자녀는 홈의 자녀 카드에 배지로 표시되고, 누르면 동의 탭의 해당 학생·수강 항목으로 이동한다", () => {
     render(
       <ParentShell
         parentName="김민지"
@@ -227,7 +227,7 @@ describe("ParentShell", () => {
     expect(badge).toBeInTheDocument();
 
     fireEvent.click(badge);
-    expect(pushMock).toHaveBeenCalledWith("?child=s1&tab=enrollment", { scroll: false });
+    expect(pushMock).toHaveBeenCalledWith("?child=s1&tab=consent&focus=se1", { scroll: false });
   });
 
   it("2026-09-10(UI/UX 1차 리뷰 지적): 동명이인이어도 childId로 정확히 매칭해 다른 자녀에게는 배지를 표시하지 않는다", () => {

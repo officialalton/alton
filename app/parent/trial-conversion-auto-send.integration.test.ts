@@ -234,3 +234,67 @@ describe("정규 진행 희망 확인 → 자동 계약 발송(실제 DB/실제 
     expect(versionCount).toBe("1"); // 새 버전이 만들어지지 않았다.
   });
 });
+
+describe("정규 진행 희망 확인 — 체험 리뷰 게이트 제거(2026-09-10, P0-5, 실제 DB)", () => {
+  it("확정된(final) 체험 리뷰가 전혀 없어도 confirm_regular_progress_intent RPC가 성공한다", async () => {
+    const guardian = await createGuardian("리뷰없는보호자1");
+    const childId = createChild("리뷰없는자녀1");
+    const householdId = createHouseholdWithChild(guardian.id, childId);
+    const enrollmentId = createSubjectEnrollment(householdId, childId);
+    // createFinalTrialReview()를 의도적으로 호출하지 않는다 — lesson_reviews에
+    // 이 subject_enrollment에 대한 행이 전혀 없는 상태에서 RPC를 호출한다.
+
+    const guardianClient = await signInAsGuardian(guardian.email);
+    const { data: selectionId, error: rpcError } = await guardianClient.rpc("confirm_regular_progress_intent", {
+      p_subject_enrollment_id: enrollmentId,
+    });
+
+    expect(rpcError).toBeNull();
+    expect(selectionId).toBeTruthy();
+
+    const selectionRow = psql(
+      `select id from trial_regular_progress_selections where subject_enrollment_id = '${enrollmentId}';`
+    );
+    expect(selectionRow).toBe(selectionId);
+  });
+
+  it("이미 다른 가족(household) 소유 수강에는 여전히 예외를 던진다(리뷰 게이트만 제거, 권한 확인은 유지)", async () => {
+    const guardian = await createGuardian("남의보호자1");
+    const otherGuardian = await createGuardian("진짜보호자1");
+    const childId = createChild("남의자녀1");
+    const householdId = createHouseholdWithChild(otherGuardian.id, childId);
+    const enrollmentId = createSubjectEnrollment(householdId, childId);
+
+    const guardianClient = await signInAsGuardian(guardian.email);
+    const { error: rpcError } = await guardianClient.rpc("confirm_regular_progress_intent", {
+      p_subject_enrollment_id: enrollmentId,
+    });
+
+    expect(rpcError).not.toBeNull();
+    expect(rpcError?.message).toContain("본인 가족의 과목 수강에 대해서만");
+  });
+
+  it("이미 접수된 수강에 다시 호출하면 새 행을 만들지 않고 기존 id를 그대로 반환한다(멱등, 리뷰 게이트 제거 후에도 유지)", async () => {
+    const guardian = await createGuardian("멱등보호자1");
+    const childId = createChild("멱등자녀1");
+    const householdId = createHouseholdWithChild(guardian.id, childId);
+    const enrollmentId = createSubjectEnrollment(householdId, childId);
+
+    const guardianClient = await signInAsGuardian(guardian.email);
+    const first = await guardianClient.rpc("confirm_regular_progress_intent", {
+      p_subject_enrollment_id: enrollmentId,
+    });
+    const second = await guardianClient.rpc("confirm_regular_progress_intent", {
+      p_subject_enrollment_id: enrollmentId,
+    });
+
+    expect(first.error).toBeNull();
+    expect(second.error).toBeNull();
+    expect(second.data).toBe(first.data);
+
+    const count = psql(
+      `select count(*) from trial_regular_progress_selections where subject_enrollment_id = '${enrollmentId}';`
+    );
+    expect(count).toBe("1");
+  });
+});

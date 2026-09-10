@@ -16,10 +16,10 @@ import ParentShell from "./ParentShell";
 export default async function ParentHomePage({
   searchParams,
 }: {
-  searchParams: Promise<{ child?: string; tab?: string; purchase?: string }>;
+  searchParams: Promise<{ child?: string; tab?: string; purchase?: string; focus?: string }>;
 }) {
   const { user, profile, supabase } = await requireUser();
-  const { child, tab, purchase } = await searchParams;
+  const { child, tab, purchase, focus } = await searchParams;
 
   const children = await loadChildren(supabase, user.id);
 
@@ -111,6 +111,7 @@ export default async function ParentHomePage({
       childrenSubjectEnrollments={childrenSubjectEnrollments}
       progressedTrialEnrollmentIds={progressedTrialEnrollmentIds}
       lessonBooking={lessonBooking}
+      focusSubjectEnrollmentId={focus}
     />
   );
 }
