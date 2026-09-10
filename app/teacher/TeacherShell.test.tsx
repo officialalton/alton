@@ -54,6 +54,7 @@ const baseProps = {
   availabilityExceptions: [],
   availabilityTimezone: "America/Los_Angeles",
   lessonSchedule: [],
+  materialsSubjects: [],
 };
 
 describe("TeacherShell", () => {
@@ -105,8 +106,22 @@ describe("TeacherShell", () => {
 
   it("다른 탭을 누르면 준비 중 문구를 보여준다", () => {
     render(<TeacherShell {...baseProps} />);
+    fireEvent.click(screen.getByText("정산"));
+    expect(screen.getByText("정산 탭은 준비 중입니다.")).toBeInTheDocument();
+  });
+
+  it("2026-09-09(UAT 지적): '교재' 탭에서 담당 과목의 공개된 교재를 볼 수 있다", () => {
+    render(
+      <TeacherShell
+        {...baseProps}
+        materialsSubjects={[
+          { subjectId: "sub1", subjectName: "SAT Math", docs: [{ id: "doc1", title: "이차방정식 개념", unitTitle: "2회차" }] },
+        ]}
+      />
+    );
     fireEvent.click(screen.getByText("교재"));
-    expect(screen.getByText("교재 탭은 준비 중입니다.")).toBeInTheDocument();
+    expect(screen.getByText("SAT Math")).toBeInTheDocument();
+    expect(screen.getByText(/이차방정식 개념/)).toBeInTheDocument();
   });
 
   it("계정 메뉴를 열면 로그아웃 버튼이 보인다", () => {

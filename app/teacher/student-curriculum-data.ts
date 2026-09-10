@@ -102,9 +102,19 @@ export type LibraryDoc = {
   title: string;
 };
 
+export type LibraryKeyword = {
+  id: string;
+  label: string;
+};
+
 export type EligibleLibrary = {
   units: LibraryUnit[];
   publishedDocs: LibraryDoc[];
+  // 2026-09-09(UAT 지적, 제품 오너 승인) — "학생별 오버레이에서 키워드
+  // 추가·제외·수정"을 실제로 하려면 고를 수 있는 키워드 사전이 필요하다.
+  // 과목 공용 키워드 사전(subject_keywords, 관리자가 관리)을 그대로 재사용한다
+  // — 오버레이 전용 키워드를 새로 만들지 않는다(원본은 관리자 기준본 하나).
+  keywords: LibraryKeyword[];
 };
 
 // 선생님이 "라이브러리에서 불러오기"로 고를 수 있는 원본: 과목 템플릿 단원 전체
@@ -115,7 +125,7 @@ export async function loadEligibleLibrary(
   supabase: SupabaseClient,
   subjectId: string
 ): Promise<EligibleLibrary> {
-  const [{ data: units }, { data: docs }] = await Promise.all([
+  const [{ data: units }, { data: docs }, { data: keywords }] = await Promise.all([
     supabase
       .from("subject_template_units")
       .select("id, position, unit_title")
@@ -127,10 +137,17 @@ export async function loadEligibleLibrary(
       .eq("subject_id", subjectId)
       .eq("status", "published")
       .order("title", { ascending: true }),
+    supabase
+      .from("subject_keywords")
+      .select("id, label")
+      .eq("subject_id", subjectId)
+      .eq("status", "active")
+      .order("label", { ascending: true }),
   ]);
 
   return {
     units: (units ?? []).map((u) => ({ id: u.id, position: u.position, unitTitle: u.unit_title })),
     publishedDocs: (docs ?? []).map((d) => ({ id: d.id, title: d.title })),
+    keywords: (keywords ?? []).map((k) => ({ id: k.id, label: k.label })),
   };
 }

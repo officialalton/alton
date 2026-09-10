@@ -4,7 +4,7 @@ import { useState, type Dispatch, type SetStateAction } from "react";
 import { createCurriculumDoc } from "./curriculum-doc-actions";
 import CurriculumDocEditor from "./CurriculumDocEditor";
 import type { DocEditorData } from "./curriculum-doc-data";
-import type { AdminSubject } from "./subject-data";
+import { selectableSubjects, type AdminSubject } from "./subject-data";
 
 const STATUS_LABEL: Record<string, string> = {
   draft: "초안",
@@ -166,7 +166,9 @@ function NewDocForm({
       <div className="mb-4">
         <label className="text-[12.5px] font-bold text-ink mb-1.5 block">과목</label>
         <div className="flex flex-wrap gap-2">
-          {subjects.map((s) => (
+          {/* 2026-09-09(UAT 지적, 제품 오너 승인): 보관된 과목은 새 교재의
+              연결 후보에서 제외한다. */}
+          {selectableSubjects(subjects).map((s) => (
             <button
               key={s.subjectId}
               onClick={() => {

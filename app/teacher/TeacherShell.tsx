@@ -24,6 +24,8 @@ import {
 } from "./availability-actions";
 import { reportSessionIssue } from "./incident-report-actions";
 import TeacherLessonScheduleTab from "./TeacherLessonScheduleTab";
+import TeacherMaterialsLibraryTab from "./MaterialsLibraryTab";
+import type { LibrarySubject } from "@/app/student/materials-data";
 import {
   listMyLessonSchedule,
   cancelMyLessonScheduleBooking,
@@ -62,6 +64,7 @@ export default function TeacherShell({
   availabilityExceptions,
   availabilityTimezone,
   lessonSchedule,
+  materialsSubjects,
 }: {
   initialTab?: string;
   dashboard: TeacherDashboardData;
@@ -78,6 +81,7 @@ export default function TeacherShell({
   availabilityExceptions: AvailabilityExceptionRow[];
   availabilityTimezone: string;
   lessonSchedule: TeacherLessonScheduleItem[];
+  materialsSubjects: LibrarySubject[];
 }) {
   const router = useRouter();
   const [lessons, setLessons] = useState<TeacherLessonScheduleItem[]>(lessonSchedule);
@@ -247,6 +251,8 @@ export default function TeacherShell({
               operatingCurriculumJumpTo={operatingCurriculumJump}
               onOperatingCurriculumJumpConsumed={() => setOperatingCurriculumJump(null)}
             />
+          ) : activeTab === "materials" ? (
+            <TeacherMaterialsLibraryTab subjects={materialsSubjects} />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.

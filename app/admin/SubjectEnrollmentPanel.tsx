@@ -24,7 +24,7 @@ import {
   type TeacherAssignmentHistoryItem,
 } from "./subject-enrollment-actions";
 import type { StudentListItem } from "./users-data";
-import type { AdminSubject } from "./subject-data";
+import { selectableSubjects, type AdminSubject } from "./subject-data";
 import type { MatchingTeacherCandidate } from "./matching-data";
 
 export default function SubjectEnrollmentPanel({
@@ -347,7 +347,9 @@ function NewEnrollmentForm({
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const available = subjects.filter((s) => !existingSubjectIds.has(s.subjectId));
+  // 2026-09-09(UAT 지적, 제품 오너 승인): 보관(archived) 처리된 과목은 신규
+  // 배정 후보에서 제외한다 — 기존 배정은 그대로 유지되고 이 목록에서만 안 뜬다.
+  const available = selectableSubjects(subjects).filter((s) => !existingSubjectIds.has(s.subjectId));
   if (available.length === 0) return null;
 
   async function handlePlan() {

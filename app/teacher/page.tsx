@@ -11,6 +11,7 @@ import TeacherShell from "./TeacherShell";
 import { listMyAvailabilityRules, listTeacherAvailabilityExceptions } from "./availability-actions";
 import { listMyLessonSchedule } from "./lesson-schedule-actions";
 import { resolveUserTimezone } from "@/lib/timezone";
+import { loadTeacherMaterialsLibrary } from "./materials-data";
 
 export default async function TeacherHomePage({
   searchParams,
@@ -39,6 +40,7 @@ export default async function TeacherHomePage({
     listMyLessonSchedule(),
     supabase.from("profiles").select("timezone").eq("id", user.id).maybeSingle(),
   ]);
+  const materialsSubjects = await loadTeacherMaterialsLibrary(supabase, user.id);
   const availabilityTimezone = resolveUserTimezone({
     profileTimezone: (teacherProfile?.timezone as string) ?? null,
     householdDefaultTimezone: null,
@@ -103,6 +105,7 @@ export default async function TeacherHomePage({
       availabilityExceptions={availabilityExceptions}
       availabilityTimezone={availabilityTimezone}
       lessonSchedule={lessonSchedule}
+      materialsSubjects={materialsSubjects}
     />
   );
 }

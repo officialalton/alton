@@ -84,5 +84,16 @@ describe("loadEligibleLibrary", () => {
     const result = await loadEligibleLibrary(mock as never, "sub1");
     expect(result.units).toEqual([{ id: "u1", position: 1, unitTitle: "단원1" }]);
     expect(result.publishedDocs).toEqual([{ id: "doc1", title: "공개교재" }]);
+    expect(result.keywords).toEqual([]);
+  });
+
+  it("2026-09-09(UAT 지적, 제품 오너 승인): 과목 공용 키워드 사전(subject_keywords)을 함께 담는다", async () => {
+    const mock = makeSupabaseMock({
+      subject_template_units: [],
+      curriculum_docs: [],
+      subject_keywords: [{ id: "kw1", label: "이차방정식" }],
+    });
+    const result = await loadEligibleLibrary(mock as never, "sub1");
+    expect(result.keywords).toEqual([{ id: "kw1", label: "이차방정식" }]);
   });
 });

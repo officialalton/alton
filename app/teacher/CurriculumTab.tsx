@@ -10,6 +10,7 @@ import type { MySubject } from "./mysubjects-data";
 import type { RosterStudent } from "./roster-data";
 import type { TeacherCurriculumData } from "./curriculum-data";
 import StudentCurriculumPanel from "./StudentCurriculumPanel";
+import SessionPrepPanel from "./SessionPrepPanel";
 import { loadStudentCurriculumPanelData } from "./student-curriculum-actions";
 import type { StudentCurriculum, EligibleLibrary } from "./student-curriculum-data";
 
@@ -17,7 +18,8 @@ type SubView =
   | { type: "list" }
   | { type: "curriculum"; enrollmentId: string }
   | { type: "review"; sessionId: string }
-  | { type: "operating-curriculum"; subjectEnrollmentId: string; subjectId: string };
+  | { type: "operating-curriculum"; subjectEnrollmentId: string; subjectId: string }
+  | { type: "session-prep"; subjectEnrollmentId: string; subjectId: string };
 
 export default function CurriculumTab({
   mySubjects,
@@ -76,6 +78,21 @@ export default function CurriculumTab({
         subjectEnrollmentId={subView.subjectEnrollmentId}
         subjectId={subView.subjectId}
         onBack={() => setSubView({ type: "list" })}
+        onOpenSessionPrep={() =>
+          setSubView({ type: "session-prep", subjectEnrollmentId: subView.subjectEnrollmentId, subjectId: subView.subjectId })
+        }
+      />
+    );
+  }
+
+  if (subView.type === "session-prep") {
+    return (
+      <SessionPrepView
+        subjectEnrollmentId={subView.subjectEnrollmentId}
+        subjectId={subView.subjectId}
+        onBack={() =>
+          setSubView({ type: "operating-curriculum", subjectEnrollmentId: subView.subjectEnrollmentId, subjectId: subView.subjectId })
+        }
       />
     );
   }
@@ -158,10 +175,12 @@ function StudentCurriculumOperatingView({
   subjectEnrollmentId,
   subjectId,
   onBack,
+  onOpenSessionPrep,
 }: {
   subjectEnrollmentId: string;
   subjectId: string;
   onBack: () => void;
+  onOpenSessionPrep: () => void;
 }) {
   const [state, setState] = useState<
     | { status: "loading" }
@@ -191,9 +210,16 @@ function StudentCurriculumOperatingView({
 
   return (
     <div className="max-w-[640px] px-8 pt-8">
-      <button onClick={onBack} className="text-[13px] text-grey-500 font-semibold px-6">
-        ← 뒤로
-      </button>
+      <div className="flex items-center justify-between px-6">
+        <button onClick={onBack} className="text-[13px] text-grey-500 font-semibold">
+          ← 뒤로
+        </button>
+        {state.status === "ready" && (
+          <button onClick={onOpenSessionPrep} className="text-[12.5px] font-bold text-ink underline">
+            세션 준비 하기 →
+          </button>
+        )}
+      </div>
       {state.status === "loading" && (
         <div className="px-6 py-8 text-[13px] text-grey-500">불러오는 중...</div>
       )}
@@ -208,6 +234,63 @@ function StudentCurriculumOperatingView({
         />
       )}
     </div>
+  );
+}
+
+// 2026-09-09(UAT 지적, 제품 오너 승인) — "운영 커리큘럼 관리"와 동일한 데이터
+// 소스(loadStudentCurriculumPanelData)를 그대로 재사용해 오버레이 단원·키워드
+// 사전을 불러온 뒤 SessionPrepPanel에 넘긴다. sessionId 없이(운영 커리큘럼
+// 화면에서 바로 진입) 열리면 "지금 세션에 고정할 준비" 대신 "다음 수업에 쓸
+// 준비"를 임시보관함(staged)에 만들어 두는 흐름이 된다 — 세션에 실제로
+// 고정하려면 실제 예정 수업의 sessionId가 있는 경로(추후 "수업" 탭 연동)로
+// 다시 들어와야 한다. 이번 라운드는 세션 준비 자체의 최초 구현이 목표라 그
+// 두 번째 진입 경로 배선은 범위 밖으로 남긴다.
+function SessionPrepView({
+  subjectEnrollmentId,
+  subjectId,
+  onBack,
+}: {
+  subjectEnrollmentId: string;
+  subjectId: string;
+  onBack: () => void;
+}) {
+  const [state, setState] = useState<
+    | { status: "loading" }
+    | { status: "error"; message: string }
+    | { status: "ready"; initial: StudentCurriculum; library: EligibleLibrary }
+  >({ status: "loading" });
+
+  useEffect(() => {
+    let cancelled = false;
+    setState({ status: "loading" });
+    loadStudentCurriculumPanelData(subjectEnrollmentId, subjectId)
+      .then(({ initial, library }) => {
+        if (!cancelled) setState({ status: "ready", initial, library });
+      })
+      .catch((e) => {
+        if (!cancelled) {
+          setState({ status: "error", message: e instanceof Error ? e.message : "불러오지 못했습니다." });
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [subjectEnrollmentId, subjectId]);
+
+  if (state.status === "loading") {
+    return <div className="px-8 py-8 text-[13px] text-grey-500">불러오는 중...</div>;
+  }
+  if (state.status === "error") {
+    return <div className="px-8 py-8 text-[13px] text-red">{state.message}</div>;
+  }
+  return (
+    <SessionPrepPanel
+      subjectEnrollmentId={subjectEnrollmentId}
+      overlayUnits={state.initial.units}
+      keywords={state.library.keywords}
+      sessionId={null}
+      onBack={onBack}
+    />
   );
 }
 

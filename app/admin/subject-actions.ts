@@ -42,17 +42,19 @@ export async function renameSubject(subjectId: string, name: string): Promise<vo
   }
 }
 
-export async function deleteSubject(subjectId: string): Promise<void> {
+// 2026-09-09(UAT 지적, 제품 오너 승인) — 실사용 참조가 있는 과목은 하드 삭제
+// 대신 보관(archive) 처리한다. 참조 카운트·분기는 DB 함수
+// attempt_delete_or_archive_subject()(20261266000000)가 담당 — 앱 레벨에서는
+// 결과만 그대로 UI에 전달한다.
+export type DeleteSubjectResult = { archived: boolean; reason: string | null };
+
+export async function deleteSubject(subjectId: string): Promise<DeleteSubjectResult> {
   const { supabase } = await requireAdmin();
-  const { error } = await supabase.from("subjects").delete().eq("id", subjectId);
-  if (error) {
-    if (error.code === "23503") {
-      throw new Error(
-        "이 과목은 이미 선생님 커리큘럼/매칭/교재 등에서 사용 중이라 삭제할 수 없습니다."
-      );
-    }
-    throw new Error(error.message);
-  }
+  const { data, error } = await supabase
+    .rpc("attempt_delete_or_archive_subject", { p_subject_id: subjectId })
+    .single<{ archived: boolean; reason: string | null }>();
+  if (error) throw new Error(error.message);
+  return { archived: data.archived, reason: data.reason };
 }
 
 export async function addSubjectUnit(

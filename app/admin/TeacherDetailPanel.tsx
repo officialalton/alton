@@ -5,6 +5,13 @@ import { useRouter } from "next/navigation";
 import { setTeacherStatus, setTeacherHourlyRate } from "./users-actions";
 import { assignTeacherSubject, unassignTeacherSubject } from "./teacher-subjects-actions";
 import type { AdminSubject } from "./subject-data";
+
+// 2026-09-09(UAT 지적, 제품 오너 승인): 보관된 과목은 신규 담당 배정 후보에서
+// 제외하되, 이미 이 선생님에게 배정돼 있던 과목이면(보관 전에 배정된 경우)
+// 이력 조회를 위해 계속 보여준다.
+function selectableForTeacher(subjects: AdminSubject[], assignedSubjectIds: string[]): AdminSubject[] {
+  return subjects.filter((s) => !s.archivedAt || assignedSubjectIds.includes(s.subjectId));
+}
 import type { QcWarning, TeacherListItem } from "./users-data";
 
 const STATUS_LABEL: Record<string, string> = {
@@ -133,7 +140,7 @@ export default function TeacherDetailPanel({
           담당 과목
         </div>
         <div className="flex flex-wrap gap-2 mb-2">
-          {subjects.map((s) => {
+          {selectableForTeacher(subjects, assignedSubjectIds).map((s) => {
             const assigned = assignedSubjectIds.includes(s.subjectId);
             return (
               <button

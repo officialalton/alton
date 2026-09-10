@@ -303,7 +303,17 @@ export default function TeacherLessonScheduleTab({
             수업 준비
           </button>
           {lesson.googleMeetLink && (
-            <a href={lesson.googleMeetLink} target="_blank" rel="noreferrer" className="text-[12px] font-semibold text-ink underline">
+            // 2026-09-09(UAT 지적): "수업 시작"은 이미 진행중(live)으로 전환된
+            // 뒤에는 더 보이지 않고 "Meet 입장" 링크만 남는데, 지금까지 이
+            // 링크는 Meet만 열고 세션뷰로는 이동하지 않았다 — "수업 시작"과
+            // 동일하게 재입장 시에도 Meet + 세션뷰가 함께 열리도록 통일한다.
+            <a
+              href={lesson.googleMeetLink}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => router.push(`/session/${lesson.sessionId}`)}
+              className="text-[12px] font-semibold text-ink underline"
+            >
               Meet 입장
             </a>
           )}
