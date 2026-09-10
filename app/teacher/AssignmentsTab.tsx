@@ -214,9 +214,14 @@ export default function AssignmentsTab({
                 {a.status === "active" ? "배정중" : "예정"}
               </span>
             </div>
-            {(onOpenCurriculum || onOpenOperatingCurriculum) && (
+            {((onOpenCurriculum && a.hasLegacyCurriculum) || onOpenOperatingCurriculum) && (
               <div className="flex flex-wrap gap-2 mt-2">
-                {onOpenCurriculum && (
+                {/* 2026-09-09(UAT 정정) — 이 배정(teacher_assignments/subject_enrollments,
+                    v3)과 같은 (학생, 과목) 조합의 레거시 enrollments가 실제로 있을 때만
+                    "커리큘럼 보기"를 보여준다. 예전에는 무조건 노출돼, v3 전용 배정(레거시
+                    없음)에서 눌러도 CurriculumTab의 jumpTo가 legacy curricula에서 못 찾아
+                    아무 화면도 안 뜨는 죽은 버튼이었다. */}
+                {onOpenCurriculum && a.hasLegacyCurriculum && (
                   <button
                     onClick={() => onOpenCurriculum(a.studentId, a.subjectId)}
                     className="text-[12px] font-semibold px-3 py-1.5 rounded-full bg-grey-100 text-ink"

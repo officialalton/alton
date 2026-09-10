@@ -21,6 +21,11 @@ export type TeacherAssignedSubject = {
   status: "planned" | "active" | "ended";
   effectiveFrom: string;
   effectiveUntil: string | null;
+  // 2026-09-09(UAT 정정) — 이 v3 배정과 같은 (student, subject) 조합의 레거시
+  // enrollments 행이 실제로 있을 때만 true. "배정" 탭의 "커리큘럼 보기"(레거시
+  // 커리큘럼 뷰) 버튼을 이 값이 있을 때만 보여줘, v3 전용 배정에서 아무 데도
+  // 연결되지 않는 죽은 클릭을 만들지 않는다.
+  hasLegacyCurriculum: boolean;
 };
 
 export async function loadTeacherAssignments(
@@ -58,9 +63,24 @@ export async function loadTeacherAssignments(
   const studentPhoneById = new Map((students ?? []).map((s) => [s.id, s.phone]));
   const studentGradeById = new Map((studentRows ?? []).map((s) => [s.id, s.grade]));
 
+  // 2026-09-09(UAT 정정) — "커리큘럼 보기"(레거시) 버튼을 실제 레거시 데이터가
+  // 있는 조합에서만 보여주기 위해, 이 교사의 레거시 enrollments를 (student_id,
+  // subject_id) 키로 조회해둔다(roster-data.ts::loadRoster()의 동일 패턴).
+  const { data: legacyEnrollments } = childIds.length
+    ? await supabase
+        .from("enrollments")
+        .select("student_id, subject_id")
+        .eq("teacher_id", teacherId)
+        .in("student_id", childIds)
+    : { data: [] as { student_id: string; subject_id: string }[] };
+  const legacyKeys = new Set(
+    (legacyEnrollments ?? []).map((e) => `${e.student_id}:${e.subject_id}`)
+  );
+
   const rows: TeacherAssignedSubject[] = assignments.map((a) => {
     const enrollment = enrollmentById.get(a.subject_enrollment_id);
     const childId = enrollment?.child_id ?? "";
+    const subjectId = enrollment?.subject_id ?? "";
     return {
       assignmentId: a.id,
       subjectEnrollmentId: a.subject_enrollment_id,
@@ -68,11 +88,12 @@ export async function loadTeacherAssignments(
       studentName: studentNameById.get(childId) ?? "",
       studentGrade: studentGradeById.get(childId) ?? null,
       studentPhone: studentPhoneById.get(childId) ?? null,
-      subjectId: enrollment?.subject_id ?? "",
+      subjectId,
       subjectName: extractName(enrollment?.subject),
       status: a.status,
       effectiveFrom: a.effective_from,
       effectiveUntil: a.effective_until,
+      hasLegacyCurriculum: legacyKeys.has(`${childId}:${subjectId}`),
     };
   });
 

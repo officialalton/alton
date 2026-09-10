@@ -140,6 +140,7 @@ describe("TeacherHomeDashboard", () => {
             status: "active",
             effectiveFrom: "2026-08-01T00:00:00Z",
             effectiveUntil: null,
+            hasLegacyCurriculum: false,
           },
         ]}
         onShowAssignments={onShowAssignments}

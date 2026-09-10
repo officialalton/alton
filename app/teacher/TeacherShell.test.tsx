@@ -98,6 +98,7 @@ describe("TeacherShell", () => {
         status: "active" as const,
         effectiveFrom: "2026-08-01T00:00:00Z",
         effectiveUntil: null,
+        hasLegacyCurriculum: true,
       },
     ];
     render(<TeacherShell {...baseProps} currentAssignments={currentAssignments} />);

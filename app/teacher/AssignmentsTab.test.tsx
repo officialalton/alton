@@ -27,6 +27,7 @@ const current: TeacherAssignedSubject[] = [
     status: "active",
     effectiveFrom: "2026-08-01T00:00:00Z",
     effectiveUntil: null,
+    hasLegacyCurriculum: true,
   },
 ];
 
@@ -91,6 +92,27 @@ describe("AssignmentsTab — M3 배정 종료 요청/과거 이력", () => {
 
     fireEvent.click(screen.getByText("커리큘럼 보기"));
     expect(onOpenCurriculum).toHaveBeenCalledWith("st1", "sub1");
+  });
+
+  it("2026-09-09 UAT 정정 — 레거시 커리큘럼이 없는 v3 전용 배정은 '커리큘럼 보기' 버튼 자체가 없다(죽은 클릭 방지)", () => {
+    const onOpenCurriculum = vi.fn();
+    const onOpenOperatingCurriculum = vi.fn();
+    const v3Only: TeacherAssignedSubject[] = [
+      { ...current[0], assignmentId: "ta2", hasLegacyCurriculum: false },
+    ];
+    render(
+      <AssignmentsTab
+        current={v3Only}
+        past={[]}
+        onOpenCurriculum={onOpenCurriculum}
+        onOpenOperatingCurriculum={onOpenOperatingCurriculum}
+      />
+    );
+
+    expect(screen.queryByText("커리큘럼 보기")).not.toBeInTheDocument();
+    // v3 전용이어도 "운영 커리큘럼 관리"는 항상 정확히 연결돼야 한다.
+    fireEvent.click(screen.getByText("운영 커리큘럼 관리"));
+    expect(onOpenOperatingCurriculum).toHaveBeenCalledWith("se1", "sub1");
   });
 
   it("R9 Task 3 UI 배선 — '운영 커리큘럼 관리' 진입 버튼은 subjectEnrollmentId·subjectId로 콜백을 호출한다", () => {

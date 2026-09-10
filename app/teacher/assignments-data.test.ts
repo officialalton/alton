@@ -6,7 +6,7 @@ import { loadTeacherAssignments } from "./assignments-data";
 // "학생" 탭 자체를 없애고 "배정" 탭(assignments-data.ts, 이미 v3 스키마 기준)으로
 // 통합했다 — 이 테스트는 그 통합된 탭이 학년/연락처까지 포함해 학생을 정상적으로
 // 찾아내는지 고정한다.
-function makeSupabase() {
+function makeSupabase(params: { legacyEnrollments?: Array<{ student_id: string; subject_id: string }> } = {}) {
   const assignments = [
     {
       id: "ta1",
@@ -19,6 +19,7 @@ function makeSupabase() {
   const enrollments = [{ id: "se1", child_id: "student-se-on-jang", subject_id: "sub1", subject: { name: "테스트1" } }];
   const students = [{ id: "student-se-on-jang", name: "세온장", phone: "010-1111-2222" }];
   const studentRows = [{ id: "student-se-on-jang", grade: "고1" }];
+  const legacyEnrollments = params.legacyEnrollments ?? [];
 
   return {
     from: vi.fn((table: string) => {
@@ -36,6 +37,12 @@ function makeSupabase() {
       if (table === "students") {
         return { select: () => ({ in: () => Promise.resolve({ data: studentRows }) }) };
       }
+      // 2026-09-09(UAT 정정) — hasLegacyCurriculum 계산용 레거시 enrollments 조회.
+      if (table === "enrollments") {
+        return {
+          select: () => ({ eq: () => ({ in: () => Promise.resolve({ data: legacyEnrollments }) }) }),
+        };
+      }
       throw new Error(`unexpected table ${table}`);
     }),
   };
@@ -52,5 +59,22 @@ describe("loadTeacherAssignments — M4 골든패스 실사용 버그 #2/#6", ()
     expect(current[0].studentGrade).toBe("고1");
     expect(current[0].studentPhone).toBe("010-1111-2222");
     expect(current[0].subjectName).toBe("테스트1");
+    expect(current[0].hasLegacyCurriculum).toBe(false);
+  });
+
+  it("2026-09-09 UAT 정정 — 같은 (학생, 과목) 조합의 레거시 enrollments가 있으면 hasLegacyCurriculum이 true다", async () => {
+    const supabase = makeSupabase({
+      legacyEnrollments: [{ student_id: "student-se-on-jang", subject_id: "sub1" }],
+    });
+    const { current } = await loadTeacherAssignments(supabase as never, "teacher-test1");
+    expect(current[0].hasLegacyCurriculum).toBe(true);
+  });
+
+  it("2026-09-09 UAT 정정 — 다른 과목의 레거시 enrollments는 hasLegacyCurriculum을 true로 만들지 않는다", async () => {
+    const supabase = makeSupabase({
+      legacyEnrollments: [{ student_id: "student-se-on-jang", subject_id: "sub-other" }],
+    });
+    const { current } = await loadTeacherAssignments(supabase as never, "teacher-test1");
+    expect(current[0].hasLegacyCurriculum).toBe(false);
   });
 });
