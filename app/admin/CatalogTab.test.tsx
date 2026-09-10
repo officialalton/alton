@@ -42,10 +42,9 @@ describe("CatalogTab", () => {
     expect(screen.getByText("배포된 교재가 없습니다.")).toBeInTheDocument();
   });
 
-  it("아직 구현 안 된 서브탭을 누르면 준비 중 문구를 보여준다", () => {
+  it("2026-09-10(UI/UX 정리 1차): 미구현 '승인 대기' 서브탭은 더 이상 노출되지 않는다", () => {
     render(<CatalogTab subjects={subjects} docs={[]} />);
-    fireEvent.click(screen.getByText("승인 대기"));
-    expect(screen.getByText("승인 대기 탭은 준비 중입니다.")).toBeInTheDocument();
+    expect(screen.queryByText("승인 대기")).not.toBeInTheDocument();
   });
 
   it("교재 문서 탭에서 배포하면 교재 라이브러리 탭에도 서브탭 전환 없이 즉시 반영된다", async () => {

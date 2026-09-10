@@ -58,13 +58,15 @@ const baseProps = {
 };
 
 describe("TeacherShell", () => {
-  it("사이드바 8개 항목을 보여주고, 기본 탭은 홈이다(M4 골든패스 #5/#6 — '수업 일정'과 '수업' 통합, '학생' 탭 제거)", () => {
+  it("2026-09-10(UI/UX 정리 1차): 사이드바 항목을 보여주고, 기본 탭은 홈이다('배정'은 '담당 학생'으로, 미구현 '정산'은 숨김)", () => {
     render(<TeacherShell {...baseProps} />);
-    ["홈", "배정", "수업", "가능시간", "커리큘럼", "교재", "정산"].forEach((label) =>
+    ["홈", "담당 학생", "수업", "가능시간", "커리큘럼", "교재"].forEach((label) =>
       expect(screen.getByText(label)).toBeInTheDocument()
     );
     expect(screen.queryByText("학생")).toBeNull();
     expect(screen.queryByText("수업 일정")).toBeNull();
+    expect(screen.queryByText("정산")).toBeNull();
+    expect(screen.queryByText("배정")).toBeNull();
     expect(screen.getByText("박서연 선생님, 안녕하세요")).toBeInTheDocument();
   });
 
@@ -81,7 +83,7 @@ describe("TeacherShell", () => {
     expect(screen.getByText("지난 수업이 없습니다.")).toBeInTheDocument();
   });
 
-  it("배정 탭에서 학년/연락처가 보이고, 커리큘럼 진입 버튼을 누르면 커리큘럼 탭의 학생별 뷰로 이동한다(M4 골든패스 #6/#7)", () => {
+  it("담당 학생 탭에서 학년/연락처가 보이고, 커리큘럼 진입 버튼을 누르면 커리큘럼 탭의 학생별 뷰로 이동한다(M4 골든패스 #6/#7)", () => {
     const currentAssignments = [
       {
         assignmentId: "ta1",
@@ -98,16 +100,10 @@ describe("TeacherShell", () => {
       },
     ];
     render(<TeacherShell {...baseProps} currentAssignments={currentAssignments} />);
-    fireEvent.click(screen.getByText("배정"));
+    fireEvent.click(screen.getByText("담당 학생"));
     expect(screen.getByText("11학년")).toBeInTheDocument();
     fireEvent.click(screen.getByText("커리큘럼 보기"));
     expect(screen.getByText("학생별")).toBeInTheDocument();
-  });
-
-  it("다른 탭을 누르면 준비 중 문구를 보여준다", () => {
-    render(<TeacherShell {...baseProps} />);
-    fireEvent.click(screen.getByText("정산"));
-    expect(screen.getByText("정산 탭은 준비 중입니다.")).toBeInTheDocument();
   });
 
   it("2026-09-09(UAT 지적): '교재' 탭에서 담당 과목의 공개된 교재를 볼 수 있다", () => {

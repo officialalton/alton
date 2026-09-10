@@ -38,12 +38,11 @@ import {
 
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
-  { id: "assignments", label: "배정", icon: "🎯" },
+  { id: "assignments", label: "담당 학생", icon: "🎯" },
   { id: "lesson-schedule", label: "수업", icon: "📆" },
   { id: "availability", label: "가능시간", icon: "🗓" },
   { id: "curriculum", label: "커리큘럼", icon: "📘" },
   { id: "materials", label: "교재", icon: "📚" },
-  { id: "settlement", label: "정산", icon: "💰" },
 ] as const;
 
 type TabId = (typeof NAV_ITEMS)[number]["id"];
@@ -186,7 +185,10 @@ export default function TeacherShell({
           {activeTab === "home" ? (
             <TeacherHomeDashboard
               data={dashboard}
+              currentAssignments={currentAssignments}
               onShowSchedule={() => selectTab("lesson-schedule")}
+              onShowAssignments={() => selectTab("assignments")}
+              onShowCurriculum={() => selectTab("curriculum")}
             />
           ) : activeTab === "assignments" ? (
             <AssignmentsTab

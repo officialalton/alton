@@ -126,9 +126,7 @@ describe("AdminShell", () => {
       "구 크레딧(레거시)",
       "수업권",
       "통합 일정",
-      "QC",
-      "정산 (v3)",
-      "문서",
+      "정산",
       "개발 로그",
     ].forEach((label) => expect(screen.getByText(label)).toBeInTheDocument());
     expect(screen.getByText("관리자, 안녕하세요")).toBeInTheDocument();
@@ -186,10 +184,10 @@ describe("AdminShell", () => {
     expect(screen.getByText("남은 항목")).toBeInTheDocument();
   });
 
-  it("정산 탭을 누르면 PayoutBatchesTab(v3)이 렌더링된다", () => {
+  it("정산 탭을 누르면 PayoutBatchesTab이 렌더링된다", () => {
     render(<AdminShell {...baseProps} />);
-    fireEvent.click(screen.getByText("정산 (v3)"));
-    expect(screen.getByText("정산 (v3)", { selector: "h1" })).toBeInTheDocument();
+    fireEvent.click(screen.getByText("정산"));
+    expect(screen.getByText("정산", { selector: "h1" })).toBeInTheDocument();
     expect(screen.getByText("Batch 생성")).toBeInTheDocument();
   });
 });

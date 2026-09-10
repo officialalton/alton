@@ -346,7 +346,8 @@ export default function LessonBookingTab({
 
       {showUpcoming && (bookableEnrollments.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center mb-8">
-          예약 가능한 과목이 없습니다(선생님 배정이 필요합니다).
+          아직 선생님 배정이 완료되지 않았어요. 배정이 끝나면 이 화면에서
+          바로 예약할 수 있어요.
         </div>
       ) : !showBookingForm ? (
         <div className="mb-6">
@@ -404,7 +405,10 @@ export default function LessonBookingTab({
           <div className="mt-4">
             {loadingSlots && <div className="text-[13px] text-grey-500">예약 가능 시간을 불러오는 중…</div>}
             {!loadingSlots && slots && slots.length === 0 && (
-              <div className="text-[13px] text-grey-500">현재 예약 가능한 시간이 없습니다.</div>
+              <div className="text-[13px] text-grey-500">
+                지금은 열린 시간이 없어요. 다른 날짜를 확인해보시거나 선생님께
+                시간 조율을 요청해보세요.
+              </div>
             )}
             {!loadingSlots && slots && slots.length > 0 && (
               <div className="mb-4">
@@ -448,7 +452,9 @@ export default function LessonBookingTab({
                       : "날짜를 선택하세요"}
                   </div>
                   {selectedDateKey && slotsForSelectedDate.length === 0 && (
-                    <div className="text-[13px] text-grey-500">이 날짜는 예약 가능한 시간이 없습니다.</div>
+                    <div className="text-[13px] text-grey-500">
+                      이 날짜는 열린 시간이 없어요. 다른 날짜를 선택해보세요.
+                    </div>
                   )}
                   <div className="flex flex-wrap gap-1.5">
                     {slotsForSelectedDate.map((slot) => (
@@ -561,7 +567,9 @@ export default function LessonBookingTab({
         if (visibleBookings.length === 0) {
           return (
             <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-              {upcomingView === "calendar" && upcomingCalendarDateKey ? "이 날짜에 예정된 수업이 없습니다." : "예정된 수업이 없습니다."}
+              {upcomingView === "calendar" && upcomingCalendarDateKey
+                ? "이 날짜에 예정된 수업이 없습니다."
+                : "예정된 수업이 없어요. 위에서 새 수업을 예약해보세요."}
             </div>
           );
         }

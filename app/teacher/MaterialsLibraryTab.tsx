@@ -17,7 +17,7 @@ export default function TeacherMaterialsLibraryTab({
 
       {subjects.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-          열람할 수 있는 교재가 없습니다.
+          아직 공개된 교재가 없어요. 관리자가 교재를 공개하면 여기 보여드릴게요.
         </div>
       ) : (
         subjects.map((subject) => (

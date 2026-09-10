@@ -186,7 +186,9 @@ describe("StudentShell", () => {
     fireEvent.click(screen.getByText("수업"));
     expect(screen.getByText("예정 수업")).toBeInTheDocument();
     expect(screen.getByText("지난 수업")).toBeInTheDocument();
-    expect(screen.getByText("예약 가능한 과목이 없습니다(선생님 배정이 필요합니다).")).toBeInTheDocument();
+    expect(
+      screen.getByText("아직 선생님 배정이 완료되지 않았어요. 배정이 끝나면 이 화면에서 바로 예약할 수 있어요.")
+    ).toBeInTheDocument();
   });
 
   it("과제 탭을 누르면 StudentHomeworkTab이 렌더링된다", () => {
@@ -200,7 +202,9 @@ describe("StudentShell", () => {
       />
     );
     fireEvent.click(screen.getByText("과제"));
-    expect(screen.getByText("작성이 필요한 과제가 없습니다.")).toBeInTheDocument();
+    expect(
+      screen.getByText("지금은 할 과제가 없어요. 새 과제가 오면 여기 보여드릴게요.")
+    ).toBeInTheDocument();
   });
 
   it("교재 탭을 누르면 MaterialsLibraryTab이 렌더링된다", () => {
@@ -214,7 +218,9 @@ describe("StudentShell", () => {
       />
     );
     fireEvent.click(screen.getByText("교재"));
-    expect(screen.getByText("열람할 수 있는 교재가 없습니다.")).toBeInTheDocument();
+    expect(
+      screen.getByText("아직 배정된 교재가 없어요. 담당 선생님이 곧 준비해드릴 예정이에요.")
+    ).toBeInTheDocument();
   });
 
   it("통계 탭을 누르면 StatsTab이 렌더링된다", () => {

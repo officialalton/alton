@@ -62,8 +62,8 @@ export default function StudentHomeworkTab({
       {grouped.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
           {subtab === "todo"
-            ? "작성이 필요한 과제가 없습니다."
-            : "아직 작성 완료한 과제가 없습니다."}
+            ? "지금은 할 과제가 없어요. 새 과제가 오면 여기 보여드릴게요."
+            : "아직 작성 완료한 과제가 없어요."}
         </div>
       ) : (
         grouped.map(([key, group]) => (

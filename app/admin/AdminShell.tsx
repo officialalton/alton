@@ -60,10 +60,8 @@ const NAV_ITEMS = [
   { id: "entitlements", label: "수업권", icon: "🎫" },
   { id: "unified-schedule", label: "통합 일정", icon: "🗺️" },
   { id: "booking", label: "예약", icon: "🗓️" },
-  { id: "qc", label: "QC", icon: "🛡" },
-  { id: "payouts", label: "정산 (v3)", icon: "💸" },
+  { id: "payouts", label: "정산", icon: "💸" },
   { id: "workspace", label: "Workspace", icon: "🔑" },
-  { id: "documents", label: "문서", icon: "📁" },
   { id: "devlog", label: "개발 로그", icon: "🧾" },
 ] as const;
 
@@ -230,7 +228,7 @@ export default function AdminShell({
 
         <div className="flex-1">
           {activeTab === "home" ? (
-            <AdminHomeDashboard data={dashboard} />
+            <AdminHomeDashboard data={dashboard} onNavigate={selectTab} />
           ) : activeTab === "catalog" ? (
             <CatalogTab subjects={subjects} docs={docs} />
           ) : activeTab === "users" ? (

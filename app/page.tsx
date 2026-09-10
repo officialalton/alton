@@ -216,7 +216,8 @@ export default function LandingPage() {
           </h2>
 
           <p className="text-[14.5px] text-grey-500 text-center mb-8">
-            아래 양식을 남겨주시면 담당자가 연락드립니다.
+            희망 시간을 선택해 신청하시면, 관리자가 확인 후 확정 안내를
+            보내드립니다.
           </p>
           <ConsultForm />
         </section>

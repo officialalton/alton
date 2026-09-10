@@ -132,7 +132,7 @@ export default function PayoutBatchesTab({
 
   return (
     <div className="max-w-[900px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-1">정산 (v3)</h1>
+      <h1 className="text-[20px] font-extrabold text-ink mb-1">정산</h1>
       <p className="text-[13px] text-grey-500 mb-2">
         payout_batches 기반 정산 배치. 법인 설립 전이라 이 화면에서는 <b>승인</b>까지만
         진행할 수 있습니다 — 실제 지급(Mercury/Wise 연동)은 법인 설립 후 별도로 활성화됩니다.
