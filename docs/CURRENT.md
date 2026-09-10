@@ -1,6 +1,7 @@
 # ALTON — 현재 상태 (2026-09-10 기준)
 
-> **2026-09-10 — P1-1 측정 및 1차 개선 완료(관리자 상담 탭·탭 전환 로딩).**
+> **2026-09-10 — P1-1 측정 및 1차 체감 개선(관리자 상담 탭·탭 전환 로딩) —
+> "완료" 아님, 근본 원인은 P1-3에서 해소 예정.**
 > 로컬 프로덕션 빌드에서 실측(Playwright): `/admin?tab=consult` GET~
 > domcontentloaded 216ms, networkidle까지 1161ms(추가 POST
 > `listKanbanBoardAction` 1회 발생) — 반면 `/admin?tab=entitlements`는
@@ -18,7 +19,9 @@
 > 순차 실행이었던 것을 `Promise.all`로 병렬화(왕복 2회 제거) — SSR이 이미
 > 가진 `consultations`를 재사용해 클라이언트 재조회 자체를 없애는 것은
 > `classifyStage()`가 관리자 전용 파이프라인 조회를 필요로 해 이번 배치에서
-> 안전하게 제거하지 못함(별도 설계 필요, P1-3으로 이관). 검증:
+> 안전하게 제거하지 못함(별도 설계 필요, P1-3으로 이관). **빈 화면만
+> 가려진 것이지 상담 탭의 긴 로딩 원인(탭 전환마다 전체 재실행 + 마운트 후
+> 재조회)은 아직 해소되지 않았다 — P1-3에서 바로 이어서 처리한다.** 검증:
 > `supabase db reset --local` 후 전체 스위트 252 files/1765 tests 통과,
 > `tsc`/`eslint` 클린, `next build` 성공. migration 없음, 기존 데이터
 > 이관 없음. Production 무변경. P1-2(다른 포털·무거운 화면 전수 측정)는
