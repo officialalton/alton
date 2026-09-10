@@ -37,8 +37,16 @@ export default async function ParentHomePage({
     (child && children.some((c) => c.studentId === child) ? child : null) ??
     children[0].studentId;
 
+  // 2026-09-09(UAT 정정) — 학생 홈과 동일한 이유로 loadDashboardData()가
+  // 이 자녀의 v3 예약(loadLessonBookingData 결과)을 병합해야 한다(app/student/page.tsx
+  // 참고, 같은 함수를 그대로 재사용).
+  const lessonBookingPromise = loadLessonBookingData(supabase, currentChildId);
+  const dashboardPromise = lessonBookingPromise.then((lb) =>
+    loadDashboardData(supabase, currentChildId, lb)
+  );
   const [
     dashboard,
+    lessonBooking,
     { upcoming, past },
     curricula,
     credits,
@@ -48,9 +56,9 @@ export default async function ParentHomePage({
     trialSmartNotesChildren,
     pendingRegularIntentChoices,
     childrenSubjectEnrollments,
-    lessonBooking,
   ] = await Promise.all([
-    loadDashboardData(supabase, currentChildId),
+    dashboardPromise,
+    lessonBookingPromise,
     loadLessons(supabase, currentChildId),
     loadCurricula(supabase, currentChildId),
     loadParentCreditsData(supabase, user.id),
@@ -60,7 +68,6 @@ export default async function ParentHomePage({
     loadTrialSmartNotesConsentStatus(supabase, user.id),
     loadPendingRegularIntentChoices(supabase, user.id),
     loadChildrenSubjectEnrollments(supabase, children),
-    loadLessonBookingData(supabase, currentChildId),
   ]);
 
   const pastSessionIds = past.map((l) => l.sessionId);

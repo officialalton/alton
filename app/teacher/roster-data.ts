@@ -6,6 +6,10 @@ export type RosterSubject = {
   subjectName: string;
   currentSession: number;
   totalSessions: number;
+  // 2026-09-09(UAT 정정) — "학생별" 탭이 이 과목을 눌렀을 때 레거시 커리큘럼
+  // 뷰(`enrollmentId`가 legacy `enrollments.id`)로 갈지, v3 운영 커리큘럼 뷰
+  // (`enrollmentId`가 실제로는 `subject_enrollments.id`)로 갈지 구분하는 데 쓴다.
+  source: "legacy" | "v3";
 };
 
 export type RosterStudent = {
@@ -103,6 +107,7 @@ export async function loadRoster(
       subjectName: extractName(e.subject),
       currentSession: e.current_session,
       totalSessions: e.total_sessions,
+      source: "legacy",
     });
   }
   for (const r of v3Rows) {
@@ -117,6 +122,7 @@ export async function loadRoster(
       subjectName: extractName(r.subject),
       currentSession: 0,
       totalSessions: 0,
+      source: "v3",
     });
   }
 

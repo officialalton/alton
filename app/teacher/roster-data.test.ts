@@ -57,7 +57,7 @@ describe("loadRoster", () => {
         studentId: "s1",
         studentName: "지훈",
         grade: "10학년",
-        subjects: [{ enrollmentId: "e1", subjectId: "sub1", subjectName: "SAT Math", currentSession: 3, totalSessions: 10 }],
+        subjects: [{ enrollmentId: "e1", subjectId: "sub1", subjectName: "SAT Math", currentSession: 3, totalSessions: 10, source: "legacy" }],
       },
     ]);
   });
@@ -84,7 +84,7 @@ describe("loadRoster", () => {
         studentName: "UAT Kid 113",
         grade: null,
         subjects: [
-          { enrollmentId: "se1", subjectId: "fff052c7-e78f-4100-9dcb-ace4d3bbd2bb", subjectName: "AP Calculus AB", currentSession: 0, totalSessions: 0 },
+          { enrollmentId: "se1", subjectId: "fff052c7-e78f-4100-9dcb-ace4d3bbd2bb", subjectName: "AP Calculus AB", currentSession: 0, totalSessions: 0, source: "v3" },
         ],
       },
     ]);

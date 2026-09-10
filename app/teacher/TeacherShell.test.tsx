@@ -34,6 +34,7 @@ const roster: RosterStudent[] = [
         subjectName: "SAT Math",
         currentSession: 8,
         totalSessions: 12,
+        source: "legacy",
       },
     ],
   },

@@ -45,6 +45,7 @@ const students: RosterStudent[] = [
         subjectName: "SAT Math",
         currentSession: 8,
         totalSessions: 12,
+        source: "legacy",
       },
     ],
   },
@@ -105,6 +106,53 @@ describe("CurriculumTab", () => {
     fireEvent.click(screen.getByText("학생별"));
     fireEvent.click(screen.getByText("SAT Math"));
     expect(screen.getByText("완료")).toBeInTheDocument();
+  });
+
+  it("2026-09-09 UAT 정정 — v3(teacher_assignments+subject_enrollments) 전용 배정 학생도 학생별 탭에서 빈 화면이 아니라 운영 커리큘럼으로 진입한다", async () => {
+    (loadStudentCurriculumPanelData as ReturnType<typeof vi.fn>).mockResolvedValue({
+      initial: { overlayId: "ov-v3", units: [] },
+      library: { units: [], publishedDocs: [] },
+    });
+
+    const v3OnlyStudents: RosterStudent[] = [
+      {
+        studentId: "st2",
+        studentName: "민지",
+        grade: null,
+        subjects: [
+          {
+            enrollmentId: "se-v3-1", // 실제로는 subject_enrollments.id
+            subjectId: "sub2",
+            subjectName: "SAT English",
+            currentSession: 0,
+            totalSessions: 0,
+            source: "v3",
+          },
+        ],
+      },
+    ];
+
+    render(
+      <CurriculumTab {...baseProps} students={v3OnlyStudents} curricula={[]} />
+    );
+    fireEvent.click(screen.getByText("학생별"));
+
+    // 레거시 curricula가 비어 있어도(v3 전용 배정) "아직 배정된 커리큘럼이
+    // 없습니다"가 아니라 실제 과목이 보여야 한다 — 회귀 시 이 지점에서 실패.
+    expect(
+      screen.queryByText("아직 배정된 커리큘럼이 없습니다.")
+    ).not.toBeInTheDocument();
+    expect(screen.getByText("SAT English")).toBeInTheDocument();
+    expect(screen.getByText("운영 커리큘럼")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText("SAT English"));
+
+    // 레거시 {type:"curriculum"} 빈 화면(data 없으면 null 렌더)이 아니라
+    // v3 운영 커리큘럼 화면(loadStudentCurriculumPanelData 경유)으로 가야 한다.
+    expect(loadStudentCurriculumPanelData).toHaveBeenCalledWith("se-v3-1", "sub2");
+    await waitFor(() =>
+      expect(screen.getByText("학생 운영 커리큘럼")).toBeInTheDocument()
+    );
   });
 
   it("jumpTo가 주어지면 바로 해당 학생/과목의 커리큘럼으로 진입한다", () => {

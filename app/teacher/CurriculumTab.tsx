@@ -7,7 +7,7 @@ import type { Memo } from "@/app/student/memo-data";
 import type { ReviewData, StudentFeedback } from "@/app/student/review-data";
 import MySubjectsTab from "./MySubjectsTab";
 import type { MySubject } from "./mysubjects-data";
-import type { RosterStudent } from "./roster-data";
+import type { RosterStudent, RosterSubject } from "./roster-data";
 import type { TeacherCurriculumData } from "./curriculum-data";
 import StudentCurriculumPanel from "./StudentCurriculumPanel";
 import SessionPrepPanel from "./SessionPrepPanel";
@@ -155,9 +155,14 @@ export default function CurriculumTab({
           students={students}
           selectedStudentId={selectedStudentId}
           onSelectStudent={setSelectedStudentId}
-          curricula={curricula}
-          onOpenCurriculum={(enrollmentId) =>
-            setSubView({ type: "curriculum", enrollmentId })
+          onOpenSubject={(subject) =>
+            subject.source === "v3"
+              ? setSubView({
+                  type: "operating-curriculum",
+                  subjectEnrollmentId: subject.enrollmentId,
+                  subjectId: subject.subjectId,
+                })
+              : setSubView({ type: "curriculum", enrollmentId: subject.enrollmentId })
           }
         />
       )}
@@ -294,22 +299,22 @@ function SessionPrepView({
   );
 }
 
-function StatusLabel(c: TeacherCurriculumData) {
-  return `${c.currentSession}/${c.totalSessions}회차`;
+function StatusLabel(s: RosterSubject) {
+  // v3 배정은 legacy처럼 번호가 매겨진 "회차"가 없다(단원 오버레이 기반) —
+  // 0/0으로 잘못 보이지 않게 별도 표기.
+  return s.source === "v3" ? "운영 커리큘럼" : `${s.currentSession}/${s.totalSessions}회차`;
 }
 
 function StudentSubjectPicker({
   students,
   selectedStudentId,
   onSelectStudent,
-  curricula,
-  onOpenCurriculum,
+  onOpenSubject,
 }: {
   students: RosterStudent[];
   selectedStudentId: string | null;
   onSelectStudent: (id: string) => void;
-  curricula: TeacherCurriculumData[];
-  onOpenCurriculum: (enrollmentId: string) => void;
+  onOpenSubject: (subject: RosterSubject) => void;
 }) {
   if (students.length === 0) {
     return (
@@ -319,9 +324,13 @@ function StudentSubjectPicker({
     );
   }
 
-  const subjectsForStudent = curricula.filter(
-    (c) => c.studentId === selectedStudentId
-  );
+  // 2026-09-09(UAT 정정) — 레거시 전용 `curricula`(TeacherCurriculumData[])로
+  // 필터링하면 v3(teacher_assignments+subject_enrollments)로만 배정된 학생은
+  // 여기서 늘 0건이 되어 "아직 배정된 커리큘럼이 없습니다"만 보였다(실제
+  // 배정이 있어도 빈 화면). `students`(roster-data.ts::loadRoster())가 이미
+  // legacy+v3를 합쳐 담고 있으므로 그걸 그대로 쓴다 — 별도 조회 없음.
+  const subjectsForStudent =
+    students.find((s) => s.studentId === selectedStudentId)?.subjects ?? [];
 
   return (
     <div>
@@ -347,18 +356,18 @@ function StudentSubjectPicker({
           아직 배정된 커리큘럼이 없습니다.
         </div>
       ) : (
-        subjectsForStudent.map((c) => (
+        subjectsForStudent.map((s) => (
           <button
-            key={c.enrollmentId}
-            onClick={() => onOpenCurriculum(c.enrollmentId)}
+            key={s.enrollmentId}
+            onClick={() => onOpenSubject(s)}
             className="w-full text-left border-[1.5px] border-grey-200 rounded-xl px-5 py-3.5 mb-2.5"
           >
             <div className="flex items-center justify-between">
               <span className="text-[13.5px] font-bold text-ink">
-                {c.subjectName}
+                {s.subjectName}
               </span>
               <span className="text-[12px] font-bold px-3 py-1 rounded-full bg-grey-100 text-ink">
-                {StatusLabel(c)}
+                {StatusLabel(s)}
               </span>
             </div>
           </button>

@@ -28,8 +28,18 @@ export default async function StudentHomePage({
 }) {
   const { user, supabase } = await requireUser();
   const { tab } = await searchParams;
+  // 2026-09-09(UAT 정정) — 홈 대시보드가 레거시 legacy_sessions만 조회해
+  // v3 전용 배정 학생의 예정 수업이 홈 캘린더/위젯에서 누락되던 문제 수정.
+  // loadDashboardData()가 v3 예약(loadLessonBookingData 결과)을 병합하려면
+  // 그 결과가 먼저 있어야 하므로, dashboard만 lessonBooking에 의존하는
+  // 체인으로 분리하고 나머지 로더는 그대로 전부 병렬 유지한다.
+  const lessonBookingPromise = loadLessonBookingData(supabase, user.id);
+  const dashboardPromise = lessonBookingPromise.then((lb) =>
+    loadDashboardData(supabase, user.id, lb)
+  );
   const [
     dashboard,
+    lessonBooking,
     vocabWords,
     problemLog,
     { upcoming, past },
@@ -40,10 +50,10 @@ export default async function StudentHomePage({
     credits,
     stats,
     subjectEnrollments,
-    lessonBooking,
     teacherList,
   ] = await Promise.all([
-    loadDashboardData(supabase, user.id),
+    dashboardPromise,
+    lessonBookingPromise,
     loadVocabWords(supabase, user.id),
     loadProblemLog(supabase, user.id),
     loadLessons(supabase, user.id),
@@ -54,7 +64,6 @@ export default async function StudentHomePage({
     loadCreditsData(supabase, user.id),
     loadStats(supabase, user.id),
     loadStudentSubjectEnrollments(supabase, user.id),
-    loadLessonBookingData(supabase, user.id),
     loadTeacherList(supabase, user.id),
   ]);
 

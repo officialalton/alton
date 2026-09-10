@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { DashboardData } from "./dashboard-data";
+import { dateKeyInTimezone } from "@/lib/calendar-date-utils";
+import { DEFAULT_TIMEZONE } from "@/lib/timezone";
 
 const WEEKDAYS = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -71,11 +73,12 @@ function TodayLessonBanner({
 }) {
   if (upcoming.length === 0) return null;
 
+  const tz = timezone ?? DEFAULT_TIMEZONE;
   const sorted = [...upcoming].sort(
     (a, b) => new Date(a.scheduledAt).getTime() - new Date(b.scheduledAt).getTime()
   );
-  const todayKey = dateKeyInTimezone(new Date().toISOString(), timezone);
-  const todayLesson = sorted.find((l) => dateKeyInTimezone(l.scheduledAt, timezone) === todayKey);
+  const todayKey = dateKeyInTimezone(new Date().toISOString(), tz);
+  const todayLesson = sorted.find((l) => dateKeyInTimezone(l.scheduledAt, tz) === todayKey);
 
   if (todayLesson) {
     return (
@@ -109,9 +112,6 @@ function TodayLessonBanner({
   );
 }
 
-function dateKeyInTimezone(iso: string, timezone?: string): string {
-  return new Intl.DateTimeFormat("en-CA", { timeZone: timezone }).format(new Date(iso));
-}
 
 function CalendarCard({
   data,
@@ -191,7 +191,8 @@ function CalendarCard({
                 key={s.sessionId}
                 className="text-[12.5px] text-ink px-3 py-2 rounded-lg bg-grey-100 mb-1.5"
               >
-                {s.subjectName} · {s.sessionNumber}회차
+                {s.subjectName}
+                {s.sessionNumber !== null ? ` · ${s.sessionNumber}회차` : ""}
               </div>
             ))
           )}
@@ -238,7 +239,8 @@ function UpcomingWidget({
               {formatKoreanDateTime(lesson.scheduledAt, timezone)}
             </div>
             <div className="text-[13px] font-semibold text-ink">
-              {lesson.subjectName} · {lesson.sessionNumber}회차
+              {lesson.subjectName}
+              {lesson.sessionNumber !== null ? ` · ${lesson.sessionNumber}회차` : ""}
               {lesson.unitTitle ? ` · ${lesson.unitTitle}` : ""}
             </div>
             <div className="text-[11.5px] text-grey-500 mt-0.5">

@@ -5261,3 +5261,144 @@ non-prod DB에 두 마이그레이션 반영 완료. **Production에는 배포�
 `teacher_assignments` 병행 조회 상태 — v3 부분을 새 프로필 테이블로 교체) →
 ④ 레거시 `teacher_curriculum_templates`는 여전히 건드리지 않는다(레거시
 계정이 소진된 뒤 별도 폐기 라운드).
+
+## 2026-09-09 — UI/UX 정리 1차 구현(4배치) + 1차 리뷰 보완 3건, Preview 배포 완료
+
+**배경**: R9(콘텐츠·커리큘럼 파운데이션) 종료 후, "처음 방문한 학부모·학생·
+교사·관리자가 설명 없이 자기 다음 행동을 알 수 있는가"를 목표로 한 UI/UX
+정리 라운드. 레거시 데이터 이관·권한 모델 변경은 이 라운드 범위에서 명시적
+제외.
+
+**1차 구현(4개 독립 커밋, 완료)**:
+1. 세션 화면 재구성 — 탭 순서·기본 탭(교재) 정리, 문제 생성 탭 완전 제거,
+   종료 확인 모달 도입.
+2. 미구현 메뉴·빈 상태 정리 — 작동하지 않는 기능은 숨기고, 작동하는 "정산"은
+   이름만 정리.
+3. 역할별 첫 화면 — 학생/교사/관리자 홈 대시보드 신규(`HomeDashboard.tsx`,
+   `TeacherHomeDashboard.tsx`, `AdminHomeDashboard.tsx`). 관리자 홈 카드는
+   실제 구현된 화면만 연결.
+4. 모바일 내비게이션 — `MobileBottomNav.tsx`(학생/학부모/교사, primary+더보기
+   시트), `MobileDrawerNav.tsx`(관리자 전용, 그룹형 드로어) 신규 공용 컴포넌트.
+   데스크톱 `<aside>`는 `hidden md:flex`만 추가, Shell 재작성 없음. 학부모
+   동의는 상시 하단 메뉴가 아니라 홈 배지로만 노출.
+
+**1차 리뷰 보완(제품 오너 지적 3건 + 모바일 접근성, 완료, 커밋 `11c8a3a`)**:
+1. **세션 조기 종료 사유** — `SessionShell.tsx`가 예정 종료 전 종료를
+   `window.confirm`만 누르면 `earlyEndReason: "student_reason"`으로 자동
+   기록하던 로직 제거. 예정 종료 전이면 화면 내 모달에서 사유(학생 사유/
+   선생님 사유/서비스 장애)를 명시적으로 선택하게 하고, "학생 사유"만 이
+   화면에서 `finalizeMyLessonSession()`을 호출해 완료 처리한다. "선생님
+   사유"/"서비스 장애"는 안내 문구만 보여주고 finalize를 호출하지 않는다
+   (각각 "수업 일정" 탭의 "지각 당일 연장", 관리자 장애 판정 요청 경로로
+   유도). `isEarlyEnd()` 헬퍼로 예정 종료 시각 이전 여부를 판별.
+2. **관리자 "개발 로그" 숨김** — `AdminShell.tsx`의 `NAV_ITEMS`(렌더링용)와
+   `HIDDEN_TABS`(비렌더링, devlog만 포함)를 분리, `ALL_TABS = [...NAV_ITEMS,
+   ...HIDDEN_TABS]`로 `TabId`/`validTabIds`/`activeLabel`만 파생. 사이드바·
+   모바일 운영 드로어 어디에도 노출되지 않지만 `?tab=devlog` 직접 접근은
+   그대로 동작(내부 전용 경로).
+3. **학부모 "정규 진행 희망" 배지 — childId 기준 매칭** —
+   `PendingRegularIntentChoice`에 `childId` 필드 추가
+   (`regular-intent-data.ts::loadPendingRegularIntentChoices()`), `ParentShell.tsx`의
+   `ChildrenStatusRow`가 `p.childName === child.name` 대신
+   `p.childId === child.studentId`로 비교하도록 변경. 동명이인 형제자매
+   시나리오 회귀 테스트 추가.
+4. **모바일 접근성** — `MobileBottomNav.tsx`의 "더보기" 버튼,
+   `MobileDrawerNav.tsx`의 햄버거 버튼에 `aria-expanded`/`aria-haspopup`
+   추가. 바깥 영역 탭으로 닫히는 동작과 하단 바가 콘텐츠를 가리지 않는 여백
+   (`pb-16`)은 기존 구현에서 이미 충족 확인(코드 검토로 확인, 실제 좁은
+   화면 수동 조작은 미실시).
+
+**검증**: 타겟 테스트(SessionShell 11/11, AdminShell 12/12, ParentShell
+12/12 등 7개 파일 55/55) + `tsc --noEmit` 클린 + 전체 스위트(`supabase db
+reset --local` 후) 250 files / 1743 tests 통과 + `next build` 성공.
+
+**외부 변경**: `origin/preview/m4-integration-verification`에 push(커밋
+`11c8a3a`), Preview 배포(`dpl_6J3brjNyuZCrfiWUCwyngMa9xyMg`,
+`https://alton-1m6b59cfc-alton7.vercel.app`, `vercel inspect` 결과
+`target: preview` 확인). **Production 무변경.**
+
+**다음 단계(진행 중, blocker 아님)**: 제품 오너가 이번 보완을 1차 승인 →
+실제 사용자 UAT 진행 → 그 결과를 바탕으로 마지막 전체 UI/UX 점검(2차) 예정.
+2차 점검 전까지는 이번 UI/UX 라운드의 코드 변경을 추가로 진행하지 않는다
+(UAT 결과 대기).
+
+## 2026-09-09 — 상담 로딩·포털 로딩·UAT 3건·콘텐츠 모델 조사 (v2 정본, 조사만)
+
+**정본**: `docs/2026-09-09-consult-loading-and-keyword-content-investigation-v2.md`.
+1차 보고(`docs/2026-09-09-consult-loading-and-keyword-content-investigation.md`)는
+"실측 완료" 표현이 부정확했고 수치도 과소 산정이었다(예: 파이프라인 순차
+조회 "3~5회"→실제 11회) — **v2로 전량 대체됨, 1차 문서의 개별 수치·결론은
+더 이상 참조하지 말 것.** 아래는 v2(제품 오너의 3차 정정 지적까지 반영한
+최종본)의 핵심만 발췌 — 세부 근거·표·Preview UAT 시나리오는 반드시 v2
+원문 참고.
+
+**측정 방법**: 로컬 `supabase start` + `next dev`(seed 61건) 위에서
+Playwright로 실제 로그인(`e2e/helpers.ts`의 기존 `loginAs()` 재사용) →
+페이지 이동 → 네트워크 요청을 계측. 로컬 seed는 운영 규모보다 훨씬 작아
+"현재 코드 구조가 만드는 요청 패턴"의 실측이지 운영 규모 절대 지연의
+실측은 아님.
+
+1. **상담 탭 실측**: GET 요청 전체 소요(TTFB 아님, "요청 전송→domcontentloaded"
+   구간) 576ms + 마운트 후 클라이언트 재조회 734ms+632ms(React 19.2.8의
+   dev StrictMode 이중 마운트로 dev에서 2회, 프로덕션은 1회 추정) =
+   networkidle 2496ms. **`ConsultationKanbanBoard`가 mount 후
+   `listKanbanBoardAction()`을 중복 호출**(SSR이 이미 받은 `consultations`
+   prop 미사용)하는 구조가 근본 원인.
+2. **정정된 수치(최종)**: 상담 전체 61건/활성 57건/`trial_recommended`
+   42건. `admin/page.tsx` 1차 로더 **23개** + 그 결과에 의존하는 2차 배치
+   **2개**(`loadStudentCreditHistoryBatch`/`loadTeacherQcWarningsBatch`,
+   1차 완료 후 순차 실행 — 의도된 구조). 완전한(계약까지 간)
+   `trial_recommended` 카드 하나의 `getTrialOnboardingPipelineAction()`
+   순차 DB 조회는 **최대 11회**(전수 재확인 완료).
+3. **포털 로딩 결론(정확한 표현으로 고정)**: 학생·교사·학부모 **홈**은
+   mount 후 추가 클라이언트 재조회가 **없다**(admin 상담 탭과 다름) —
+   이건 확인된 사실. 다만 **SSR 자체가 여러 탭 데이터를 한 번에 읽는
+   과다 로딩 가능성은 아직 측정·판정하지 않았다**(`app/student/page.tsx`
+   13개/`app/teacher/page.tsx` 7개/`app/parent/page.tsx` 11개 로더가
+   실제로 존재함을 코드로 확인만 함, 소요시간 미측정) — **"포털 공통
+   문제 없음"이라고 결론 내리지 않는다.** 관리자 사용자·정산, 학생
+   수업·교재·문제 아카이브, 교사 학생별 커리큘럼·수업 준비, 학부모
+   다자녀 화면은 전부 별도 성능 배치의 측정 대상으로 남아있다(아직
+   측정 안 함).
+4. **UAT 3건**: 학생 홈-수업 불일치(`dashboard-data.ts`가 v3 미조회)와
+   교사 학생별 빈 화면(`CurriculumTab.tsx`의 `StudentSubjectPicker`가
+   legacy `curricula`만 필터)은 코드로 원인 확정, migration 불필요로
+   보임. 키워드 저장 중복 안내는 재현 결과 이미 정상 동작(반증). React
+   error #441은 로컬 dev 재현 실패 — **조사 종료 아님**, P0-2에서
+   Preview/프로덕션 빌드로 재현 절차·5개 시나리오·안전한 사용자 문구
+   전환까지 구체화됨(v2 본문 참고).
+5. **교재 저장**: title/본문/티칭팁 전부 blur 시점 자동 저장(디바운스
+   아님), 저장 상태·이탈 경고·에러 노출 전부 없음(fire-and-forget).
+   배포는 단순 플래그, 버전 격리 없음 — 배포된 교재 수정이 과거/진행 중
+   세션에도 즉시 반영됨을 코드로 확인(`sessions.material_version_id`는
+   배정 메커니즘 자체가 없는 죽은 컬럼).
+6. **키워드 자동 구성 — 제품 정책 확정**: 교사가 매 회차 콘텐츠를 직접
+   선택해 pin하는 현행 방식은 유지하지 않는다. 세션 콘텐츠는 회차
+   키워드+공개 콘텐츠로 **자동 구성**, 교사는 키워드 적용·제거만, 변경은
+   목록에 즉시 반영. **수업 시작 시점에 자동 구성 목록+교재 버전을 불변
+   스냅샷으로 고정**해 과거 수업을 재현(5번 교재 버전 격리 부재 문제와
+   동일 메커니즘 공유하도록 설계). P2-4 범위: `pinSessionSelection()`
+   개별 선택 UI 제거, 세션 시작 시 스냅샷 테이블(가칭
+   `session_content_snapshot`/`_problems`) additive 신설, 기존 완료
+   세션은 소급 스냅샷 없이 그대로 유지.
+7. **구현 배치**: P0-1(학생/교사 화면 버그 2건, 코드만, Preview UAT에
+   시간대·날짜 경계 검증 포함) → P0-2(#441 Preview/프로덕션 재현 후
+   수정) → P1(상담 탭 로딩, admin 국소 문제로 범위 한정) → P2-1(교재
+   저장 UX, migration 불필요) → P2-2(문제 은행 스키마 additive) →
+   P2-3(문제은행·채점·과제 화면) → P2-4(키워드 자동 구성 전환, 위 6번
+   정책 기준). 각 배치의 코드/migration 범위·기존 데이터 이관 여부·
+   Preview UAT 시나리오·합격 기준은 v2 본문 "구현 배치 제안" 절 참고.
+
+**환경 메모**: 조사 중 로컬 `next dev`가 이미 떠 있던 것을 실수로
+`pkill -f "next dev"`로 함께 종료시켰다가 즉시 재기동함(사용자에게 안내
+완료) — 이후 모든 측정은 재기동한 서버 기준. 조사에 쓴 임시 Playwright
+스크립트는 저장소에 커밋하지 않고 삭제. 로컬 `supabase`/`next dev`는
+계속 실행 중으로 남겨둠.
+
+**결정 필요**: 없음(조사 단계 승인 검토 대기, 정책 질문은 이번 라운드에서
+전부 정리됨 — 6번 키워드 자동 구성만 확정 정책으로 반영 완료). 코드/
+마이그레이션/Preview/Production 변경 없음. 다음은 P0-1부터 순서대로 구현
+착수 예정.
+
+**결정 필요**: 없음(이번 라운드는 정정만). 다음은 P0-1 → P0-2 → P1 →
+P2-1 → P2-2·P2-3 → P2-4 순서로 구현 범위 승인 검토 예정(제품 오너 확인).
