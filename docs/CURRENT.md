@@ -1,5 +1,21 @@
 # ALTON — 현재 상태 (2026-09-10 기준)
 
+> **2026-09-10 — P0-6 v3 공통 매칭 확정 + 커리큘럼 출처 보존 코드 완료,
+> non-prod migration 적용·Preview 배포 완료(target: preview 확인,
+> `https://alton-ro2d0ev2d-alton7.vercel.app`), 지인 추천 다자녀 Preview
+> UAT 대기.** `confirm_student_teacher_subject_match()`(migration
+> `20261270000000`)로 과목 수강 계획·선생님 배정·학생 활성화·커리큘럼
+> 시딩을 하나의 트랜잭션으로 묶어 매칭 탭(legacy `enrollments` 폐기)과
+> 상담 체험 신청이 전부 이 공통 경로만 쓰게 통일했다(총 회차 수 없음,
+> 권한 "매칭권한"으로 표준화). 커리큘럼은 교사 운영본 우선/공통 원본
+> 폴백(가산 아님) 정책으로 물리 복사하고, `curriculum_overlay_units`에
+> `source_kind`+`source_teacher_template_unit_id`를 추가해 출처를
+> 영구 보존(교사 운영본 수정·삭제 후에도 기존 학생 사본·출처 불변).
+> 배정 성공·시딩 실패 시 매칭 탭·상담 체험 신청 화면에 사용자 문구 +
+> "다시 시도"(멱등, 중복 없음)를 노출. 실제 로컬 Postgres 통합 테스트
+> 6건 전부 통과, 254/254 파일·1785/1785 테스트 통과. 상세:
+> `docs/2026-09-10-p-execution-roadmap.md` P0-6.
+
 > **2026-09-10 — P0-5 학부모 정규 진행 동의 경로·게이트 수정 코드 완료,
 > Preview UAT(다자녀 계정) 대기.** 부모 홈의 "정규 진행 희망" 알림이
 > "수강 과목" 탭 대신 동의 탭(`ConsentTab.tsx`)의 해당 학생·수강 항목으로
