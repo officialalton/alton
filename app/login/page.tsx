@@ -1,6 +1,9 @@
+import { redirect } from "next/navigation";
 import { login } from "./actions";
 import { signInWithGoogleForTeacher } from "./teacher-google-actions";
 import { signInWithGoogleForAdmin } from "@/app/admin/google-link-actions";
+import { createClient } from "@/utils/supabase/server";
+import { resolveAccountDestination } from "@/lib/auth";
 
 export default async function LoginPage({
   searchParams,
@@ -8,6 +11,28 @@ export default async function LoginPage({
   searchParams: Promise<{ error?: string; notice?: string }>;
 }) {
   const { error, notice } = await searchParams;
+
+  // 2026-09-10(P0-3) — /login은 middleware matcher(포털 경로만 보호) 밖이라
+  // 세션 유무와 무관하게 항상 로그인 폼을 그렸다. 그래서 로그인 직전 방문했던
+  // /login 히스토리 항목으로 브라우저 뒤로가기를 누르면, 세션이 여전히
+  // 유효한데도 다시 로그인 화면이 렌더링됐다(역할·계정 상태 무관하게 재현 —
+  // middleware/캐시/OAuth 문제가 아니라 이 페이지 자체에 "이미 로그인돼
+  // 있으면 돌려보낸다"는 분기가 없었던 것). login/actions.ts가 로그인 성공
+  // 직후 이미 쓰고 있는 resolveAccountDestination()을 그대로 재사용해,
+  // 유효한 세션이면 그 계정 상태에 맞는 곳(역할 홈/온보딩 게이트)으로 보내고,
+  // 세션이 없거나 만료·로그아웃 상태일 때만 이 폼을 그대로 보여준다.
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (user) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", user.id)
+      .single();
+    redirect(await resolveAccountDestination(supabase, profile?.role));
+  }
 
   return (
     <main className="min-h-screen bg-grey-100 flex items-center justify-center px-5 py-10">
