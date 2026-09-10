@@ -5163,3 +5163,101 @@ Task 1~4와 그 사이 발견된 모든 corrective가 제품 오너 최종 승�
    간접 확인됐다(그렇지 않으면 `consume` 이벤트가 존재할 수 없음). 다만 정확히
    어떤 버튼을 순서대로 눌렀는지는 제품 오너에게 직접 확인된 적 없음 — 항목 6의
    교정 여부를 결정할 때 함께 확인 필요.
+
+## 2026-09-09 — UAT 정리 라운드 1-3 완료(과목 보관·v3 교재 열람·키워드 UI)
+
+제품 오너가 앞선 UAT 발견 사항 조사(과목 삭제 오류, 교사 교재 조회 실패,
+레거시/v3 콘텐츠 구조 매핑, 회차별 키워드 설계)를 승인하고 지시한 4개 항목 중
+1~3번을 구현·검증까지 완료했다. 4번(레거시 정리 설계)은 이 문서 하단의 별도
+설계 보고 절 참고 — 이번 라운드에서는 설계만 제출하고 구현하지 않았다(제품
+오너 지시).
+
+**1. 과목 삭제 정책(하드 삭제 → 보관)** — `subjects.archived_at/archived_reason`
+컬럼 추가, `attempt_delete_or_archive_subject()` RPC(20261266000000)가
+`enrollments`/`subject_enrollments`/`teacher_curriculum_templates`/
+`curriculum_docs`/`problems`/`trial_sessions`/`proposal_subjects` 참조 건수를
+세어 구체적 사유를 반환한다(참조 0건일 때만 실제 삭제, `contract_version_subjects`는
+이미 폐기된 테이블이라 대상에서 제외 확인). `app/admin/subject-actions.ts::deleteSubject()`가
+이 RPC를 호출하도록 교체, `SubjectTemplateTab.tsx`가 보관 사유를 그대로 노출.
+보관된 과목은 `selectableSubjects()` 헬퍼로 `SubjectEnrollmentPanel`(신규 배정),
+`MatchingTab`(신규 매칭), `CurriculumDocsTab`(새 교재), `TeacherDetailPanel`
+(기존 배정은 유지, 신규만 차단)에서 제외.
+
+**2. v3 교재 열람 경로** — `curriculum_docs`/`curriculum_doc_sections` SELECT
+RLS(20261267000000)를 레거시 `enrollments` 단독 조건에서
+`subject_enrollments`+`teacher_assignments`까지 OR로 확장(레거시 읽기 호환
+유지, 신규 v3 흐름의 권한 원본은 v3 테이블). `app/student/materials-data.ts::loadMaterialsLibrary()`도
+두 소스를 함께 조회. 교사 포털에 처음으로 "교재" 탭을 구현
+(`app/teacher/materials-data.ts::loadTeacherMaterialsLibrary()` + `MaterialsLibraryTab.tsx`,
+지금까지 네비게이션 항목만 있고 "탭은 준비 중입니다"만 뜨던 자리). `session-prep-data.ts`가
+같은 `curriculum_doc_sections`/`problems` RLS 경로를 그대로 쓰고 있어 별도
+이관 없이 자동으로 함께 해결됨을 확인(사용자 지시대로 반드시 확인).
+
+**3. 키워드 기반 콘텐츠 흐름 UI 연동** — 데이터 테이블 존재만으로 완료 처리하지
+않고 실제 화면을 연결했다: 관리자 `SubjectTemplateTab`에 과목 키워드 사전
+생성 + 회차별 태그·해제 UI(기존 `subject-actions.ts` 함수는 있었지만 UI가
+없었음), 교사 `StudentCurriculumPanel`(운영 커리큘럼)에 단원별 키워드
+추가·제외 UI(기존 `setActiveKeywords()`는 있었지만 UI가 없었음, `EligibleLibrary`에
+`keywords` 필드 추가). 그리고 지금까지 `session-prep-data.ts`/`session-prep-actions.ts`
+백엔드(R9 Task 1-2)만 있고 이를 쓰는 화면이 전혀 없던 "세션 준비"를 신규
+구현(`SessionPrepPanel.tsx`, "배정→운영 커리큘럼 관리→세션 준비 하기"로 진입):
+확정 회차를 고르고 그 단원에 키워드를 지정하면, 그 키워드로 검색되는 공개
+교재 섹션·확정 문제 후보가 표시되고, 선생님이 실제로 고른 항목만
+`pinSessionSelection()`으로 세션에 고정된다 — 키워드만으로 교재·문제가 자동
+첨부되지 않는다.
+
+**검증**: `tsc --noEmit` 클린, `supabase db reset --local` 후 전체 스위트
+248 files / 1721 tests 통과(신규 통합 테스트 2건 — 과목 보관 정책 psql 검증,
+v3 전용 계정의 curriculum_docs 열람 RLS 검증 — 포함), `next build` 성공.
+non-prod DB에 두 마이그레이션 반영 완료. **Production에는 배포하지 않음**
+(오늘 오배포 사고 이후 제품 오너 지시 — 위 "Production 오배포 사고" 절 참고).
+
+**남은 것(4번, 설계만 — 아래 별도 절)**: `teacher_curriculum_templates`를
+당장 손대지 않고, "교사 공통 운영본"이 v3에서 어떤 엔터티로 대체되는지에 대한
+설계를 제출한다. `sessions.material_version_id`/`curriculum_doc_id`/
+`curriculum_doc_versions` 죽은 컬럼 제거는 v3 세션 준비 경로가 실제 UAT에서
+완주된 뒤 별도 라운드에서 처리(이번 라운드에서 하지 않음, 제품 오너 지시).
+
+### 4번 설계 보고 — "교사 공통 운영본"의 v3 대체 엔터티 (코드/마이그레이션 미반영, 설계만)
+
+**문제**: 레거시 모델은 `teacher_curriculum_templates`(교사+과목당 1개, 그
+교사가 그 과목을 가르칠 때 쓰는 기본 단원 세트)가 "관리자 기준본"과 "학생별
+실제 수업"(당시엔 `enrollments`/`legacy_sessions`) 사이에서 교사의 반복
+커스터마이징을 기억해주는 중간 계층이었다. v3는 이 계층이 없다 —
+`ensure_active_curriculum_overlay()`가 새 `subject_enrollment`마다 오버레이를
+**항상 관리자 기준본(`subject_template_units`)에서** 새로 시딩한다. 즉 교사가
+학생 A의 커리큘럼을 조정해도, 학생 B가 새로 배정되면 그 조정은 전혀 반영되지
+않고 다시 기준본 그대로 시작한다 — 매 학생마다 같은 조정을 반복해야 한다.
+
+**제안하는 v3 엔터티**: 신규 테이블 2개(가칭, `teacher_curriculum_templates`와
+이름 충돌을 피하기 위해 "profile"로 명명 — 레거시와 별개 테이블이며 레거시는
+그대로 둔다).
+
+- `teacher_curriculum_profiles (id, teacher_id, subject_id, created_at)` —
+  unique(teacher_id, subject_id). 관리자 기준본처럼 "단원 목록의 헤더"만.
+- `teacher_curriculum_profile_units (id, profile_id, source_unit_id nullable,
+  position, unit_title, note, teacher_comment, created_at)` — 교사가 관리자
+  기준본 위에서 만들어둔 자기 과목 운영 방식(추가/제외/재정렬/코멘트).
+  `curriculum_overlay_units`와 거의 동일한 형태지만 학생 종속이 없다.
+- (선택) `teacher_curriculum_profile_unit_keywords` — 교사가 자신의 프로필
+  단원에 기본으로 붙여두고 싶은 키워드. 새 키워드 사전을 만들지 않고
+  `subject_keywords`(관리자 기준본)를 그대로 참조한다 — 키워드 원본은 항상
+  관리자 하나뿐이어야 한다는 원칙 유지.
+
+**소유자·수정 권한·우선순위·생성 시점**:
+
+| 계층 | 엔터티 | 소유자 | 수정 권한 | 생성 시점 |
+|---|---|---|---|---|
+| 관리자 기준본 | `subjects`, `subject_template_units`, `subject_keywords` | 관리자 | 관리자만 | 과목 개설 시 |
+| 교사 운영본(신규 제안) | `teacher_curriculum_profiles`, `_profile_units`(+keywords) | 배정된 교사 | 그 교사 본인 + 관리자 | 그 교사가 그 과목으로 **처음** 배정받아 "내 과목"/배정 화면을 열 때, 관리자 기준본을 스냅샷 복사(그 뒤 관리자 기준본이 바뀌어도 이미 만들어진 교사 운영본은 자동 갱신되지 않음 — 학생 오버레이가 관리자 기준본 변경에 자동 반응하지 않는 것과 동일한 원칙) |
+| 학생별 오버레이 | `student_curriculum_overlays`, `curriculum_overlay_units`(+keywords/materials) | 그 학생을 담당하는 교사 | 담당 교사 + 관리자(학생 본인은 조회만, 기존 정책 유지) | 그 `subject_enrollment`에 `teacher_assignment`가 처음 생길 때, **교사 운영본이 있으면 그것에서, 없으면 관리자 기준본에서** 스냅샷 복사(우선순위: 교사 운영본 > 관리자 기준본) |
+| 세션 고정본 | `session_prepared_selections` → `session_content_manifest` | 담당 교사 | 담당 교사(pin 이후 불변, 기존 정책 유지) | 특정 세션을 준비할 때, **그 시점 학생별 오버레이의 단원·키워드**를 기준으로 검색해 교사가 선택·고정 — 교사 운영본/관리자 기준본과 직접 연결되지 않음(기존 그대로) |
+
+**이관 순서 제안**(이번 라운드에서 실행하지 않음, 승인 후 별도 라운드):
+① `teacher_curriculum_profiles`/`_profile_units` 스키마 추가(additive) →
+② `ensure_active_curriculum_overlay()`의 시딩 소스를 "교사 운영본 있으면 그걸로, 없으면 기준본으로" 분기하도록 수정 →
+③ 교사 포털 "내 과목"(`mysubjects-data.ts`/`MySubjectsTab.tsx`)을 이 신규 테이블
+기반으로 다시 연결(지금은 레거시 `teacher_curriculum_templates`/v3
+`teacher_assignments` 병행 조회 상태 — v3 부분을 새 프로필 테이블로 교체) →
+④ 레거시 `teacher_curriculum_templates`는 여전히 건드리지 않는다(레거시
+계정이 소진된 뒤 별도 폐기 라운드).
