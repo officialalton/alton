@@ -330,8 +330,9 @@ Preview UAT에서 확인된 문제: 사용자 탭은 충분히 빨라졌지만, 
   **로컬 환경은 실제 Preview의 네트워크 지연·데이터량을 재현하지 못하므로,
   실제로 느렸던 Preview 계정에서 최초 진입·재진입의 요청 수·인증 횟수·첫
   콘텐츠 표시 시간 실측 없이는 체감 성능 개선을 완료로 보지 않는다.**
-- **배포**: 커밋 후 push, migration 없음(신규 컬럼·테이블 추가 없이 쿼리·
-  컴포넌트 구조만 변경), Preview 배포(`target: preview` 확인).
+- **배포**: 커밋 `95d4066` push 완료, migration 없음(신규 컬럼·테이블
+  추가 없이 쿼리·컴포넌트 구조만 변경), Preview 배포 완료
+  `https://alton-p1xqcxiab-alton7.vercel.app`(`target: preview` 확인).
   Production 미배포.
 - **다음 배치(합의된 순서, 이번 배치에 포함 안 함)**: (1) 신규 통합
   보드·계약 발송 탭(origin migration 포함), (2) 커리큘럼 표시·진입
