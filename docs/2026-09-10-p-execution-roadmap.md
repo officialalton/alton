@@ -323,8 +323,9 @@
   URL 직접 진입(매칭 탭)·탭 전환(매칭→사용자)·뒤로가기/앞으로가기·권한
   회귀(학부모 계정으로 `/admin` 접근 시 `/parent`로 리다이렉트, 관리자
   화면 노출 안 됨) 전부 통과 확인.
-- **배포**: 커밋 후 push, non-prod 그대로(신규 migration 없음), Preview
-  배포 완료(`target: preview` 확인). Production 미배포.
+- **배포**: 커밋 `83bf78d` push 완료, non-prod 그대로(신규 migration 없음),
+  Preview 배포 완료 `https://alton-akbw734vf-alton7.vercel.app`
+  (`target: preview` 확인). Production 미배포.
 
 ### P1-1 관리자 상담 탭 — **측정 및 1차 체감 개선 완료(2026-09-10) — "완료"가 아님, 근본 원인은 P1-3에서 해소**
 

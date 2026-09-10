@@ -38,9 +38,9 @@
 > 실제 Preview 네트워크 지연(원인으로 지목된 15~20초)을 재현하지 않는다
 > — 제품 오너가 실제 Preview에서 동일 시나리오로 체감 확인 필요. URL
 > 직접 진입·탭 전환·뒤로가기/앞으로가기·권한 회귀(비관리자 계정의
-> `/admin` 접근 시 자기 포털로 리다이렉트) 전부 통과 확인. 커밋:
-> [해시는 배포 후 갱신], Preview URL은 배포 뒤 확정. 상세:
-> `docs/2026-09-10-p-execution-roadmap.md` "P1 재우선순위(로딩 감사 기반)" 절.
+> `/admin` 접근 시 자기 포털로 리다이렉트) 전부 통과 확인. 커밋 `83bf78d`,
+> Preview `https://alton-akbw734vf-alton7.vercel.app`(target: preview 확인).
+> 상세: `docs/2026-09-10-p-execution-roadmap.md` "P1 재우선순위(로딩 감사 기반)" 절.
 
 > **2026-09-10 — P0-6 v3 공통 매칭 확정 + 커리큘럼 출처 보존 코드 완료,
 > non-prod migration 적용·Preview 배포 완료(target: preview 확인,
