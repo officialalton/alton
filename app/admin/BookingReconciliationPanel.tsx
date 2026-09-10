@@ -3,7 +3,8 @@
 // R6 6/N — 관리자 예약 운영 화면: Calendar/Meet 동기화 불일치(reconciliation_needed/failed)
 // 예약 목록 확인, 수동 재처리 트리거, 회사/선생님 귀책 취소.
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useTabCachedData } from "./use-tab-cached-data";
 import {
   loadBookingReconciliationDashboardAction,
   retryCalendarSyncNow,
@@ -21,16 +22,10 @@ import {
   adminApplyMakeupTimeToBooking,
   resolveSessionJudgmentReconciliationTask,
   setReconciliationTaskStudentCancelledDisposition,
-  type ReconciliationRow,
-  type NotificationOutboxSummary,
-  type IncidentReportAdminRow,
-  type ExternalCalendarChangeRow,
   type ExternalChangeResolution,
-  type SessionJudgmentRow,
   type SessionOutcome,
-  type MakeupObligationRow,
-  type ReconciliationTaskRow,
   type TeacherReconciliationResult,
+  type BookingReconciliationDashboard,
 } from "./booking-actions";
 
 const FINAL_STATUS_LABEL: Record<string, string> = {
@@ -93,20 +88,42 @@ function ListSkeleton({ rows = 3 }: { rows?: number }) {
   );
 }
 
-export default function BookingReconciliationPanel() {
-  const [rows, setRows] = useState<ReconciliationRow[] | null>(null);
-  const [outboxSummary, setOutboxSummary] = useState<NotificationOutboxSummary[] | null>(null);
-  const [incidentReports, setIncidentReports] = useState<IncidentReportAdminRow[] | null>(null);
-  const [externalChanges, setExternalChanges] = useState<ExternalCalendarChangeRow[] | null>(null);
-  const [loading, setLoading] = useState(false);
+// 2026-09-10(P1 재진입 성능 배치) — "예약"은 상태 변화가 잦은 화면으로
+// 분류돼 TTL 10초를 쓴다.
+const BOOKING_TTL_MS = 10_000;
+
+export default function BookingReconciliationPanel({
+  initialDashboard,
+}: {
+  initialDashboard?: BookingReconciliationDashboard;
+}) {
+  const {
+    data: dashboard,
+    error: fetchError,
+    refreshing,
+    refresh,
+  } = useTabCachedData<BookingReconciliationDashboard>({
+    cacheKey: "booking-dashboard",
+    ttlMs: BOOKING_TTL_MS,
+    seedData: initialDashboard,
+    fetcher: loadBookingReconciliationDashboardAction,
+  });
+  const loading = dashboard === null;
+  const rows = dashboard?.reconciliationNeeded ?? null;
+  const outboxSummary = dashboard?.outboxSummary ?? null;
+  const incidentReports = dashboard?.incidentReports ?? null;
+  const externalChanges = dashboard?.externalChanges ?? null;
+  const judgmentRows = dashboard?.sessionsNeedingJudgment ?? null;
+  const finalizedRows = dashboard?.recentlyFinalized ?? null;
+  const makeupObligations = dashboard?.makeupObligations ?? null;
+  const reconciliationTasks = dashboard?.reconciliationTasks ?? null;
   const [message, setMessage] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [mutationError, setMutationError] = useState<string | null>(null);
+  const error = mutationError ?? fetchError;
   const [cancellingReservationId, setCancellingReservationId] = useState<string | null>(null);
   const [cancelReasonDraft, setCancelReasonDraft] = useState("");
   const [resolvingReservationId, setResolvingReservationId] = useState<string | null>(null);
   const [resolveReasonDraft, setResolveReasonDraft] = useState("");
-  const [judgmentRows, setJudgmentRows] = useState<SessionJudgmentRow[] | null>(null);
-  const [finalizedRows, setFinalizedRows] = useState<SessionJudgmentRow[] | null>(null);
   const [judgmentBusyId, setJudgmentBusyId] = useState<string | null>(null);
   const [reopeningSessionId, setReopeningSessionId] = useState<string | null>(null);
   const [reopenReasonDraft, setReopenReasonDraft] = useState("");
@@ -116,45 +133,24 @@ export default function BookingReconciliationPanel() {
   const [partialInterruptionSessionId, setPartialInterruptionSessionId] = useState<string | null>(null);
   const [partialInterruptionReasonDraft, setPartialInterruptionReasonDraft] = useState("");
   const [partialInterruptionMinutesDraft, setPartialInterruptionMinutesDraft] = useState("");
-  const [makeupObligations, setMakeupObligations] = useState<MakeupObligationRow[] | null>(null);
   const [applyingObligationId, setApplyingObligationId] = useState<string | null>(null);
   const [applyReservationIdDraft, setApplyReservationIdDraft] = useState("");
   const [applyMinutesDraft, setApplyMinutesDraft] = useState("");
-  const [reconciliationTasks, setReconciliationTasks] = useState<ReconciliationTaskRow[] | null>(null);
   const [resolvingTaskId, setResolvingTaskId] = useState<string | null>(null);
   const [dispositionSelectTaskId, setDispositionSelectTaskId] = useState<string | null>(null);
   const [dispositionDraft, setDispositionDraft] = useState<"consume" | "release">("consume");
   const [dispositionReasonDraft, setDispositionReasonDraft] = useState("");
   const [submittingDispositionTaskId, setSubmittingDispositionTaskId] = useState<string | null>(null);
   const [retryResults, setRetryResults] = useState<TeacherReconciliationResult[] | null>(null);
-
-  // 2026-09-10(P1-2) — 이 화면이 마운트 시 8개 서버 액션을 각각 호출하던 것을
-  // loadBookingReconciliationDashboardAction() 하나로 합쳤다. 인증도 그 액션
-  // 안에서 한 번만 수행되므로, 이 화면의 최초 로딩은 1번의 클라이언트→서버
-  // 왕복 안에서 8개 조회가 전부 끝난다(이전엔 8번의 별도 왕복, 각자 인증 재확인).
-  async function refresh() {
-    setLoading(true);
-    setError(null);
-    try {
-      const dashboard = await loadBookingReconciliationDashboardAction();
-      setRows(dashboard.reconciliationNeeded);
-      setOutboxSummary(dashboard.outboxSummary);
-      setIncidentReports(dashboard.incidentReports);
-      setExternalChanges(dashboard.externalChanges);
-      setJudgmentRows(dashboard.sessionsNeedingJudgment);
-      setFinalizedRows(dashboard.recentlyFinalized);
-      setMakeupObligations(dashboard.makeupObligations);
-      setReconciliationTasks(dashboard.reconciliationTasks);
-    } catch (e) {
-      setError(e instanceof Error ? e.message : String(e));
-    } finally {
-      setLoading(false);
-    }
-  }
+  // 2026-09-10(P1 재진입 성능 배치) — 예전엔 이 화면 전체의 최초-로딩
+  // 플래그(loading)를 handleRetryNow/handleCancel/handleResolveExternalChange의
+  // 진행 중 표시로도 같이 썼다. loading을 캐시 기반 "아직 한 번도 못 읽음"
+  // 의미로 좁히면서, 저 세 액션 진행 중 버튼 비활성화는 별도 플래그로 분리했다.
+  const [actionBusy, setActionBusy] = useState(false);
 
   async function handleResolveReconciliationTask(taskId: string) {
     setResolvingTaskId(taskId);
-    setError(null);
+    setMutationError(null);
     try {
       const { result } = await resolveSessionJudgmentReconciliationTask({ taskId, reason: "관리자 확인 후 반영" });
       setMessage(
@@ -164,7 +160,7 @@ export default function BookingReconciliationPanel() {
       );
       await refresh();
     } catch (e) {
-      setError(e instanceof Error ? e.message : String(e));
+      setMutationError(e instanceof Error ? e.message : String(e));
     } finally {
       setResolvingTaskId(null);
     }
@@ -172,11 +168,11 @@ export default function BookingReconciliationPanel() {
 
   async function handleSubmitStudentCancelledDisposition(taskId: string) {
     if (!dispositionReasonDraft.trim()) {
-      setError("사유를 입력해야 합니다.");
+      setMutationError("사유를 입력해야 합니다.");
       return;
     }
     setSubmittingDispositionTaskId(taskId);
-    setError(null);
+    setMutationError(null);
     try {
       await setReconciliationTaskStudentCancelledDisposition({
         taskId,
@@ -188,15 +184,11 @@ export default function BookingReconciliationPanel() {
       setDispositionReasonDraft("");
       await refresh();
     } catch (e) {
-      setError(e instanceof Error ? e.message : String(e));
+      setMutationError(e instanceof Error ? e.message : String(e));
     } finally {
       setSubmittingDispositionTaskId(null);
     }
   }
-
-  useEffect(() => {
-    refresh();
-  }, []);
 
   // 2026-09-10(P1-2) — "지금 재처리"는 페이지 최초 로딩과 분리된 사용자 트리거
   // 동작으로 유지한다(자동 로딩 경로에 넣지 않음). retryExternalCalendarReconciliationNow()가
@@ -204,8 +196,8 @@ export default function BookingReconciliationPanel() {
   // retryResults에 남겨 화면에서 바로 확인할 수 있게 한다 — 클릭 한 번에 개별
   // 실패가 묻히지 않게 하기 위함.
   async function handleRetryNow() {
-    setLoading(true);
-    setError(null);
+    setActionBusy(true);
+    setMutationError(null);
     setMessage(null);
     setRetryResults(null);
     try {
@@ -224,16 +216,16 @@ export default function BookingReconciliationPanel() {
       setRetryResults(externalResults);
       await refresh();
     } catch (e) {
-      setError(e instanceof Error ? e.message : String(e));
+      setMutationError(e instanceof Error ? e.message : String(e));
     } finally {
-      setLoading(false);
+      setActionBusy(false);
     }
   }
 
   async function handleCancel(reservationId: string) {
     const reason = cancelReasonDraft.trim() || "관리자 취소";
-    setLoading(true);
-    setError(null);
+    setActionBusy(true);
+    setMutationError(null);
     try {
       await adminCancelLessonBooking({ reservationId, cancelledByRole: "company", reason });
       setMessage("취소 처리됐습니다(수업권 release + 필요 시 만료일 30일 연장).");
@@ -241,16 +233,16 @@ export default function BookingReconciliationPanel() {
       setCancelReasonDraft("");
       await refresh();
     } catch (e) {
-      setError(e instanceof Error ? e.message : String(e));
+      setMutationError(e instanceof Error ? e.message : String(e));
     } finally {
-      setLoading(false);
+      setActionBusy(false);
     }
   }
 
   async function handleResolveExternalChange(reservationId: string, resolution: ExternalChangeResolution) {
     const reason = resolveReasonDraft.trim() || "관리자 확인";
-    setLoading(true);
-    setError(null);
+    setActionBusy(true);
+    setMutationError(null);
     try {
       if (resolution === "accepted_google_time") {
         await resolveExternalChangeAcceptGoogleTime({ reservationId, reason });
@@ -278,9 +270,9 @@ export default function BookingReconciliationPanel() {
       setResolveReasonDraft("");
       await refresh();
     } catch (e) {
-      setError(e instanceof Error ? e.message : String(e));
+      setMutationError(e instanceof Error ? e.message : String(e));
     } finally {
-      setLoading(false);
+      setActionBusy(false);
     }
   }
 
@@ -291,14 +283,14 @@ export default function BookingReconciliationPanel() {
       teacher_no_show: "관리자 확인 — 선생님 노쇼",
     };
     setJudgmentBusyId(sessionId);
-    setError(null);
+    setMutationError(null);
     setMessage(null);
     try {
       await adminFinalizeLessonSession({ sessionId, outcome, reason: reasonByOutcome[outcome] });
       setMessage("세션을 확정했습니다.");
       await refresh();
     } catch (e) {
-      setError(e instanceof Error ? e.message : String(e));
+      setMutationError(e instanceof Error ? e.message : String(e));
     } finally {
       setJudgmentBusyId(null);
     }
@@ -308,7 +300,7 @@ export default function BookingReconciliationPanel() {
     const reason = infraIncidentReasonDraft.trim() || "회사·Meet 인프라 장애";
     const providedMinutes = Number(infraIncidentMinutesDraft) || 0;
     setJudgmentBusyId(sessionId);
-    setError(null);
+    setMutationError(null);
     setMessage(null);
     try {
       await adminFinalizeSessionAsInfraIncident({ sessionId, reason, providedMinutes });
@@ -320,7 +312,7 @@ export default function BookingReconciliationPanel() {
       setInfraIncidentSessionId(null);
       await refresh();
     } catch (e) {
-      setError(e instanceof Error ? e.message : String(e));
+      setMutationError(e instanceof Error ? e.message : String(e));
     } finally {
       setJudgmentBusyId(null);
     }
@@ -329,12 +321,12 @@ export default function BookingReconciliationPanel() {
   async function handleResolveTeacherPartialInterruption(sessionId: string) {
     const minutes = Number(partialInterruptionMinutesDraft);
     if (!Number.isFinite(minutes) || minutes < 0) {
-      setError("실제 제공 분은 0 이상이어야 합니다.");
+      setMutationError("실제 제공 분은 0 이상이어야 합니다.");
       return;
     }
     const reason = partialInterruptionReasonDraft.trim() || "선생님 사유로 일부만 제공";
     setJudgmentBusyId(sessionId);
-    setError(null);
+    setMutationError(null);
     setMessage(null);
     try {
       await adminResolveTeacherPartialInterruption({ sessionId, actualProvidedMinutes: minutes, reason });
@@ -342,7 +334,7 @@ export default function BookingReconciliationPanel() {
       setPartialInterruptionSessionId(null);
       await refresh();
     } catch (e) {
-      setError(e instanceof Error ? e.message : String(e));
+      setMutationError(e instanceof Error ? e.message : String(e));
     } finally {
       setJudgmentBusyId(null);
     }
@@ -351,15 +343,15 @@ export default function BookingReconciliationPanel() {
   async function handleApplyMakeupTime(obligationId: string) {
     const minutes = Number(applyMinutesDraft);
     if (!applyReservationIdDraft.trim()) {
-      setError("적용할 예약 ID를 입력하세요.");
+      setMutationError("적용할 예약 ID를 입력하세요.");
       return;
     }
     if (!Number.isFinite(minutes) || minutes <= 0) {
-      setError("적용 분은 0보다 커야 합니다.");
+      setMutationError("적용 분은 0보다 커야 합니다.");
       return;
     }
     setApplyingObligationId(obligationId);
-    setError(null);
+    setMutationError(null);
     setMessage(null);
     try {
       await adminApplyMakeupTimeToBooking({ reservationId: applyReservationIdDraft.trim(), obligationId, minutes });
@@ -368,7 +360,7 @@ export default function BookingReconciliationPanel() {
       setApplyMinutesDraft("");
       await refresh();
     } catch (e) {
-      setError(e instanceof Error ? e.message : String(e));
+      setMutationError(e instanceof Error ? e.message : String(e));
     } finally {
       setApplyingObligationId(null);
     }
@@ -377,7 +369,7 @@ export default function BookingReconciliationPanel() {
   async function handleReopen(sessionId: string) {
     const reason = reopenReasonDraft.trim() || "관리자 재검토";
     setJudgmentBusyId(sessionId);
-    setError(null);
+    setMutationError(null);
     setMessage(null);
     try {
       await adminReopenSession({ sessionId, reason });
@@ -386,7 +378,7 @@ export default function BookingReconciliationPanel() {
       setReopenReasonDraft("");
       await refresh();
     } catch (e) {
-      setError(e instanceof Error ? e.message : String(e));
+      setMutationError(e instanceof Error ? e.message : String(e));
     } finally {
       setJudgmentBusyId(null);
     }
@@ -396,13 +388,22 @@ export default function BookingReconciliationPanel() {
     <div className="max-w-[880px] px-8 py-8">
       <div className="flex items-center justify-between mb-1.5">
         <h1 className="text-[20px] font-extrabold text-ink">예약 운영 · Calendar 동기화 불일치</h1>
-        <button
-          disabled={loading}
-          onClick={handleRetryNow}
-          className="text-[13px] font-bold bg-ink text-white rounded-lg px-4 py-2 disabled:opacity-50"
-        >
-          지금 재처리
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={refresh}
+            disabled={refreshing}
+            className="text-[12px] font-bold text-ink underline disabled:opacity-50"
+          >
+            {refreshing ? "새로고침 중..." : "새로고침"}
+          </button>
+          <button
+            disabled={loading || actionBusy}
+            onClick={handleRetryNow}
+            className="text-[13px] font-bold bg-ink text-white rounded-lg px-4 py-2 disabled:opacity-50"
+          >
+            지금 재처리
+          </button>
+        </div>
       </div>
       <p className="text-[13px] text-grey-500 mb-5">
         Google Calendar/Meet 생성이 실패했거나 재시도 한도(5회)를 넘긴 예약입니다. 예약·수업권 hold 자체는
@@ -447,8 +448,8 @@ export default function BookingReconciliationPanel() {
         </div>
       )}
 
-      {loading && !rows ? (
-        <div className="text-[13px] text-grey-500">불러오는 중…</div>
+      {loading ? (
+        <ListSkeleton />
       ) : !rows || rows.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
           불일치 예약이 없습니다.
@@ -473,7 +474,7 @@ export default function BookingReconciliationPanel() {
             {cancellingReservationId !== r.reservationId ? (
               <div className="mt-3 flex justify-end">
                 <button
-                  disabled={loading}
+                  disabled={loading || actionBusy}
                   onClick={() => {
                     setCancellingReservationId(r.reservationId);
                     setCancelReasonDraft("");
@@ -495,14 +496,14 @@ export default function BookingReconciliationPanel() {
                 />
                 <div className="flex gap-2 justify-end">
                   <button
-                    disabled={loading}
+                    disabled={loading || actionBusy}
                     onClick={() => setCancellingReservationId(null)}
                     className="text-[12px] font-semibold text-grey-500 disabled:opacity-50"
                   >
                     닫기
                   </button>
                   <button
-                    disabled={loading}
+                    disabled={loading || actionBusy}
                     onClick={() => handleCancel(r.reservationId)}
                     className="text-[12px] font-bold text-white bg-red rounded-lg px-3 py-1.5 disabled:opacity-50"
                   >
@@ -548,7 +549,7 @@ export default function BookingReconciliationPanel() {
             {resolvingReservationId !== c.reservationId ? (
               <div className="mt-3 flex justify-end">
                 <button
-                  disabled={loading}
+                  disabled={loading || actionBusy}
                   onClick={() => {
                     setResolvingReservationId(c.reservationId);
                     setResolveReasonDraft("");
@@ -584,7 +585,7 @@ export default function BookingReconciliationPanel() {
                 )}
                 <div className="flex flex-wrap gap-2 justify-end">
                   <button
-                    disabled={loading}
+                    disabled={loading || actionBusy}
                     onClick={() => setResolvingReservationId(null)}
                     className="text-[12px] font-semibold text-grey-500 disabled:opacity-50"
                   >
@@ -593,14 +594,14 @@ export default function BookingReconciliationPanel() {
                   {c.externalChangeStatus === "deleted" ? (
                     <>
                       <button
-                        disabled={loading}
+                        disabled={loading || actionBusy}
                         onClick={() => handleResolveExternalChange(c.reservationId, "recreated_after_deletion")}
                         className="text-[12px] font-bold text-ink disabled:opacity-50"
                       >
                         ALTON 일정 유지(재생성)
                       </button>
                       <button
-                        disabled={loading}
+                        disabled={loading || actionBusy}
                         onClick={() => handleResolveExternalChange(c.reservationId, "confirmed_cancelled")}
                         className="text-[12px] font-bold text-white bg-red rounded-lg px-3 py-1.5 disabled:opacity-50"
                       >
@@ -610,21 +611,21 @@ export default function BookingReconciliationPanel() {
                   ) : (
                     <>
                       <button
-                        disabled={loading}
+                        disabled={loading || actionBusy}
                         onClick={() => handleResolveExternalChange(c.reservationId, "dismissed")}
                         className="text-[12px] font-semibold text-grey-500 disabled:opacity-50"
                       >
                         무시(오탐)
                       </button>
                       <button
-                        disabled={loading}
+                        disabled={loading || actionBusy}
                         onClick={() => handleResolveExternalChange(c.reservationId, "kept_alton_time")}
                         className="text-[12px] font-bold text-ink disabled:opacity-50"
                       >
                         ALTON 시간 유지
                       </button>
                       <button
-                        disabled={loading}
+                        disabled={loading || actionBusy}
                         onClick={() => handleResolveExternalChange(c.reservationId, "accepted_google_time")}
                         className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
                       >

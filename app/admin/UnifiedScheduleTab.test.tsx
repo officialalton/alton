@@ -26,7 +26,7 @@ beforeEach(() => {
 describe("UnifiedScheduleTab", () => {
   it("예약이 없으면 안내 문구를 보여준다", async () => {
     vi.mocked(actions.listAllTeacherLessons).mockResolvedValue([]);
-    render(<UnifiedScheduleTab />);
+    render(<UnifiedScheduleTab initialMonthAnchor="2026-09" />);
     await waitFor(() => expect(screen.getByText("해당 범위에 예약이 없습니다.")).toBeInTheDocument());
   });
 
@@ -44,7 +44,7 @@ describe("UnifiedScheduleTab", () => {
         status: "confirmed", googleSyncStatus: "synced", externalChangeStatus: "none",
       },
     ]);
-    render(<UnifiedScheduleTab />);
+    render(<UnifiedScheduleTab initialMonthAnchor="2026-09" />);
     await waitFor(() => expect(screen.getByText(/김선생 선생님/)).toBeInTheDocument());
     expect(screen.getByText(/이선생 선생님/)).toBeInTheDocument();
 
@@ -62,7 +62,7 @@ describe("UnifiedScheduleTab", () => {
         status: "confirmed", googleSyncStatus: "synced", externalChangeStatus: "time_changed",
       },
     ]);
-    render(<UnifiedScheduleTab />);
+    render(<UnifiedScheduleTab initialMonthAnchor="2026-09" />);
     await waitFor(() => expect(screen.getByText("외부 변경 감지·확인 필요")).toBeInTheDocument());
   });
 });

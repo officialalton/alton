@@ -7,6 +7,7 @@ import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
 import MobileDrawerNav from "@/app/components/MobileDrawerNav";
 import { linkAdminGoogleAccount } from "./google-link-actions";
 import { resolveAdminTab, type AdminTabId } from "./admin-tabs";
+import { setActiveAdminUser, clearAdminTabCache } from "./tab-data-cache";
 import AdminHomeDashboard from "./AdminHomeDashboard";
 import type { AdminDashboardData } from "./dashboard-data";
 import CatalogTab from "./CatalogTab";
@@ -17,6 +18,8 @@ import UnifiedScheduleTab from "./UnifiedScheduleTab";
 import ConsultationTab from "./ConsultationTab";
 import type { KanbanCard } from "./consultation-kanban-actions";
 import InquiryAndMeetingTab from "./InquiryAndMeetingTab";
+import type { AdminInquiryThread } from "./inquiry-and-meeting-actions";
+import type { UnifiedScheduleLessonRow, BookingReconciliationDashboard } from "./booking-actions";
 import type {
   ConsultationListItem,
   TrialSessionListItem,
@@ -80,6 +83,7 @@ type TabId = AdminTabId;
 
 export default function AdminShell({
   initialTab,
+  adminUserId,
   dashboard,
   subjects,
   docs,
@@ -96,6 +100,10 @@ export default function AdminShell({
   staleEnvelopes,
   contractActivationRetries,
   initialKanbanCards,
+  initialInquiryThreads,
+  initialUnifiedScheduleLessons,
+  initialUnifiedScheduleMonthAnchor,
+  initialBookingDashboard,
   devLogContent,
   payoutBatches,
   teacherCandidatesBySubject,
@@ -110,6 +118,10 @@ export default function AdminShell({
   googleLinkSuccess,
 }: {
   initialTab?: string;
+  // 2026-09-10(P1 재진입 성능 배치) — 탭 데이터 캐시(tab-data-cache.ts)를
+  // "현재 로그인한 관리자"에 묶기 위한 id. 값이 바뀌면(계정 전환) 캐시를
+  // 즉시 폐기한다.
+  adminUserId: string;
   googleLinkError?: string;
   googleLinkSuccess?: boolean;
   dashboard: AdminDashboardData;
@@ -133,6 +145,13 @@ export default function AdminShell({
   staleEnvelopes: StaleEnvelopeContract[];
   contractActivationRetries: ContractActivationRetryItem[];
   initialKanbanCards?: KanbanCard[];
+  // 2026-09-10(P1 재진입 성능 배치) — 문의·면담/통합 일정/예약도 SSR로 초기
+  // 데이터를 내려받아 첫 진입 시 "불러오는 중..." 빈 화면 대신 바로 콘텐츠를
+  // 보여준다(신규 탭의 initialKanbanCards와 동일한 패턴).
+  initialInquiryThreads?: AdminInquiryThread[];
+  initialUnifiedScheduleLessons?: UnifiedScheduleLessonRow[];
+  initialUnifiedScheduleMonthAnchor: string;
+  initialBookingDashboard?: BookingReconciliationDashboard;
   devLogContent: string;
   payoutBatches: PayoutBatchListItem[];
   teacherCandidatesBySubject: Record<string, MatchingTeacherCandidate[]>;
@@ -159,6 +178,12 @@ export default function AdminShell({
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setActiveTab(resolveAdminTab(initialTab));
   }, [initialTab]);
+
+  // 2026-09-10(P1 재진입 성능 배치) — adminUserId가 이전과 다르면(계정 전환·
+  // 권한 변경으로 세션이 바뀐 경우) 탭 데이터 캐시를 즉시 비운다.
+  useEffect(() => {
+    setActiveAdminUser(adminUserId);
+  }, [adminUserId]);
 
   function selectTab(id: TabId) {
     setActiveTab(id);
@@ -248,7 +273,7 @@ export default function AdminShell({
                 시간대 설정
               </button>
               <div className="h-px bg-grey-200 my-1" />
-              <form action={logout}>
+              <form action={logout} onSubmit={() => clearAdminTabCache()}>
                 <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-red">
                   로그아웃
                 </button>
@@ -298,9 +323,12 @@ export default function AdminShell({
               openOrRecentPaymentDisputes={openOrRecentPaymentDisputes}
             />
           ) : activeTab === "unified-schedule" ? (
-            <UnifiedScheduleTab />
+            <UnifiedScheduleTab
+              initialLessons={initialUnifiedScheduleLessons}
+              initialMonthAnchor={initialUnifiedScheduleMonthAnchor}
+            />
           ) : activeTab === "booking" ? (
-            <BookingReconciliationPanel />
+            <BookingReconciliationPanel initialDashboard={initialBookingDashboard} />
           ) : activeTab === "consult" ? (
             <ConsultationTab
               consultations={consultations}
@@ -316,7 +344,7 @@ export default function AdminShell({
               initialKanbanCards={initialKanbanCards}
             />
           ) : activeTab === "inquiry" ? (
-            <InquiryAndMeetingTab />
+            <InquiryAndMeetingTab initialThreads={initialInquiryThreads} />
           ) : activeTab === "devlog" ? (
             <DevLogTab content={devLogContent} />
           ) : activeTab === "payouts" ? (

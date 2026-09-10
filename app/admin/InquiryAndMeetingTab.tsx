@@ -5,7 +5,7 @@
 // meeting_requests, meeting_availability_rules/exceptions) — 최소 구현: 문의함
 // (목록 + 답장 + 해결 처리)과 면담 운영(목록 + 상태 변경 + 가용시간 CRUD).
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   listInquiryThreadsForAdmin,
   sendAdminHouseholdMessage,
@@ -17,10 +17,15 @@ import {
   addMeetingAvailabilityException,
   removeMeetingAvailabilityException,
   type AdminInquiryThread,
-  type AdminMeetingRequest,
-  type MeetingAvailabilityRule,
-  type MeetingAvailabilityException,
 } from "./inquiry-and-meeting-actions";
+import { useTabCachedData } from "./use-tab-cached-data";
+
+// 2026-09-10(P1 재진입 성능 배치) — "문의·면담"은 상태 변화가 상대적으로
+// 느린 화면으로 분류돼 TTL 30초를 쓴다. 문의함(기본 서브탭)은 admin/page.tsx가
+// SSR로 내려주는 initialThreads로 최초 진입을 채우고, 면담 운영은 서브탭을
+// 열 때만 조회하되(기존 지연 로딩 유지) 재진입 시에는 이 TTL 캐시로 직전
+// 데이터를 즉시 보여준다.
+const INQUIRY_TTL_MS = 30_000;
 
 const WEEKDAY_LABEL = ["일", "월", "화", "수", "목", "금", "토"];
 const MEETING_STATUS_LABEL: Record<string, string> = {
@@ -37,24 +42,55 @@ function formatDateTime(iso: string | null): string {
 
 type SubTab = "inbox" | "meetings";
 
-function InquiryInbox() {
-  const [threads, setThreads] = useState<AdminInquiryThread[] | null>(null);
-  const [error, setError] = useState<string | null>(null);
+function InquiryThreadSkeleton() {
+  return (
+    <div data-testid="inquiry-inbox-skeleton">
+      {[0, 1, 2].map((i) => (
+        <div key={i} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3 animate-pulse">
+          <div className="flex items-center justify-between">
+            <div className="h-3.5 w-32 bg-grey-200 rounded" />
+            <div className="h-6 w-12 bg-grey-100 rounded-lg" />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function InquiryInbox({ initialThreads }: { initialThreads?: AdminInquiryThread[] }) {
+  const {
+    data: threads,
+    error: fetchError,
+    refresh,
+    refreshing,
+  } = useTabCachedData<AdminInquiryThread[]>({
+    cacheKey: "inquiry-inbox",
+    ttlMs: INQUIRY_TTL_MS,
+    seedData: initialThreads,
+    fetcher: listInquiryThreadsForAdmin,
+  });
+  const [mutationError, setMutationError] = useState<string | null>(null);
   const [openHouseholdId, setOpenHouseholdId] = useState<string | null>(null);
   const [reply, setReply] = useState("");
   const [busy, setBusy] = useState(false);
+  const error = mutationError ?? fetchError;
 
-  function load() {
-    listInquiryThreadsForAdmin().then(setThreads).catch((e) => setError(e instanceof Error ? e.message : "불러오기에 실패했습니다."));
-  }
-  useEffect(() => { load(); }, []);
+  if (threads === null) return <InquiryThreadSkeleton />;
 
   return (
     <div>
+      <div className="flex justify-end mb-2">
+        <button
+          onClick={refresh}
+          disabled={refreshing}
+          className="text-[12px] font-bold text-ink underline disabled:opacity-50"
+        >
+          {refreshing ? "새로고침 중..." : "새로고침"}
+        </button>
+      </div>
       {error && <p className="text-[12px] text-red mb-3">{error}</p>}
-      {threads === null && <p className="text-[13px] text-grey-500">불러오는 중...</p>}
-      {threads && threads.length === 0 && <p className="text-[13px] text-grey-500">문의 내역이 없습니다.</p>}
-      {threads?.map((t) => (
+      {threads.length === 0 && <p className="text-[13px] text-grey-500">문의 내역이 없습니다.</p>}
+      {threads.map((t) => (
         <div key={t.householdId} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3">
           <div className="flex items-center justify-between mb-2">
             <span className="text-[13.5px] font-bold text-ink">
@@ -98,9 +134,9 @@ function InquiryInbox() {
                     try {
                       await sendAdminHouseholdMessage(t.householdId, reply);
                       setReply("");
-                      load();
+                      refresh();
                     } catch (e) {
-                      setError(e instanceof Error ? e.message : "전송에 실패했습니다.");
+                      setMutationError(e instanceof Error ? e.message : "전송에 실패했습니다.");
                     } finally {
                       setBusy(false);
                     }
@@ -117,7 +153,7 @@ function InquiryInbox() {
                     setBusy(true);
                     try {
                       await resolveHouseholdInquiryThread(t.householdId);
-                      load();
+                      refresh();
                     } finally {
                       setBusy(false);
                     }
@@ -134,11 +170,38 @@ function InquiryInbox() {
   );
 }
 
+function MeetingOperationsSkeleton() {
+  return (
+    <div data-testid="meeting-operations-skeleton">
+      <h3 className="text-[13.5px] font-extrabold text-ink mb-2">면담 요청 목록</h3>
+      {[0, 1].map((i) => (
+        <div key={i} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3 animate-pulse">
+          <div className="h-3.5 w-40 bg-grey-200 rounded mb-2" />
+          <div className="h-3 w-56 bg-grey-100 rounded" />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function MeetingOperations() {
-  const [meetings, setMeetings] = useState<AdminMeetingRequest[] | null>(null);
-  const [rules, setRules] = useState<MeetingAvailabilityRule[]>([]);
-  const [exceptions, setExceptions] = useState<MeetingAvailabilityException[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  // 2026-09-10(P1 재진입 성능 배치) — "면담 운영" 서브탭은 SSR 시딩 없이
+  // (기본 서브탭이 아니므로) 처음 열 때만 조회하되, 이후 재진입은 TTL
+  // 캐시(30초)로 직전 데이터를 즉시 보여주고 백그라운드로 갱신한다.
+  const {
+    data: dashboard,
+    error: fetchError,
+    refresh,
+    refreshing,
+  } = useTabCachedData({
+    cacheKey: "inquiry-meetings",
+    ttlMs: INQUIRY_TTL_MS,
+    fetcher: loadMeetingOperationsDashboardAction,
+  });
+  const meetings = dashboard?.requests ?? null;
+  const rules = dashboard?.rules ?? [];
+  const exceptions = dashboard?.exceptions ?? [];
+  const [mutationError, setMutationError] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
   const [ruleFormOpen, setRuleFormOpen] = useState(false);
   const [ruleWeekday, setRuleWeekday] = useState(1);
@@ -146,38 +209,39 @@ function MeetingOperations() {
   const [ruleEnd, setRuleEnd] = useState("18:00");
   const [exceptionFormOpen, setExceptionFormOpen] = useState(false);
   const [exceptionDate, setExceptionDate] = useState("");
-
-  // 2026-09-10(P1-2) — 3개 서버 액션(면담 요청·가용 규칙·예외일)을 각각 호출하던
-  // 것을 loadMeetingOperationsDashboardAction() 하나로 합쳤다. 인증도 그 안에서
-  // 한 번만 수행된다.
-  function load() {
-    loadMeetingOperationsDashboardAction()
-      .then((d) => { setMeetings(d.requests); setRules(d.rules); setExceptions(d.exceptions); })
-      .catch((e) => setError(e instanceof Error ? e.message : "불러오기에 실패했습니다."));
-  }
-  useEffect(() => { load(); }, []);
+  const error = mutationError ?? fetchError;
 
   async function withBusy(id: string, fn: () => Promise<void>) {
     setBusyId(id);
     try {
       await fn();
-      load();
+      refresh();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "처리에 실패했습니다.");
+      setMutationError(e instanceof Error ? e.message : "처리에 실패했습니다.");
     } finally {
       setBusyId(null);
     }
   }
 
+  if (meetings === null) return <MeetingOperationsSkeleton />;
+
   return (
     <div>
+      <div className="flex justify-end mb-2">
+        <button
+          onClick={refresh}
+          disabled={refreshing}
+          className="text-[12px] font-bold text-ink underline disabled:opacity-50"
+        >
+          {refreshing ? "새로고침 중..." : "새로고침"}
+        </button>
+      </div>
       {error && <p className="text-[12px] text-red mb-3">{error}</p>}
 
       <section className="mb-8">
         <h3 className="text-[13.5px] font-extrabold text-ink mb-2">면담 요청 목록</h3>
-        {meetings === null && <p className="text-[13px] text-grey-500">불러오는 중...</p>}
-        {meetings && meetings.length === 0 && <p className="text-[13px] text-grey-500">면담 요청이 없습니다.</p>}
-        {meetings?.map((m) => (
+        {meetings.length === 0 && <p className="text-[13px] text-grey-500">면담 요청이 없습니다.</p>}
+        {meetings.map((m) => (
           <div key={m.id} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3">
             <p className="text-[13.5px] font-bold text-ink">
               {m.householdLabel}{m.childName ? ` · ${m.childName}` : ""} — {MEETING_STATUS_LABEL[m.status] ?? m.status}
@@ -309,7 +373,7 @@ function MeetingOperations() {
   );
 }
 
-export default function InquiryAndMeetingTab() {
+export default function InquiryAndMeetingTab({ initialThreads }: { initialThreads?: AdminInquiryThread[] }) {
   const [sub, setSub] = useState<SubTab>("inbox");
   return (
     <div className="p-6">
@@ -324,7 +388,7 @@ export default function InquiryAndMeetingTab() {
           </button>
         ))}
       </div>
-      {sub === "inbox" ? <InquiryInbox /> : <MeetingOperations />}
+      {sub === "inbox" ? <InquiryInbox initialThreads={initialThreads} /> : <MeetingOperations />}
     </div>
   );
 }

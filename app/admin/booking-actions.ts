@@ -164,14 +164,17 @@ export type UnifiedScheduleLessonRow = {
 // 2026-09-10(P1-2) — 이전엔 날짜 범위 없이 전체 예약/세션을 조회해 클라이언트에서만
 // 오늘/주간/월간으로 걸러냈다(데이터가 늘어날수록 계속 느려지는 구조). 오늘/주간/월간
 // 뷰가 실제로 쓰는 범위보다 넉넉하게 앞뒤 여유를 두고 서버에서 먼저 좁힌다.
-const UNIFIED_SCHEDULE_PAST_DAYS = 30;
-const UNIFIED_SCHEDULE_FUTURE_DAYS = 120;
-
-export async function listAllTeacherLessons(): Promise<UnifiedScheduleLessonRow[]> {
+//
+// 2026-09-10(P1 재진입 성능 배치) — 고정 30일 전~120일 후(총 150일) 조회를
+// "현재 화면에 표시 중인 달 ± 1개월"로 더 좁혔다. UnifiedScheduleTab이 달력의
+// 월을 이동할 때만 그 달 범위를 추가로 요청한다(이미 조회한 달은 클라이언트
+// 캐시에 남아 재요청하지 않는다) — 파라미터를 생략하면 기존처럼 오늘 기준
+// 기본 범위를 쓴다(하위 호환).
+export async function listAllTeacherLessons(range?: { from: string; to: string }): Promise<UnifiedScheduleLessonRow[]> {
   await requireAdminOrCapability(BOOKING_CAPABILITY);
   const admin = createAdminClient();
-  const since = new Date(Date.now() - UNIFIED_SCHEDULE_PAST_DAYS * 24 * 60 * 60 * 1000).toISOString();
-  const until = new Date(Date.now() + UNIFIED_SCHEDULE_FUTURE_DAYS * 24 * 60 * 60 * 1000).toISOString();
+  const since = range?.from ?? new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
+  const until = range?.to ?? new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
   const { data, error } = await admin
     .from("sessions")
     .select(

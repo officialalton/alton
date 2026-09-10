@@ -61,6 +61,41 @@ function baseRow(overrides: Partial<Record<string, unknown>> = {}) {
   };
 }
 
+// 2026-09-10(P1 성능 배치) — classifyStage가 카드마다 getTrialOnboardingPipelineAction()을
+// 호출하던 것을 보드 전체에 대한 배치 조회(subject_enrollments/sessions/
+// trial_regular_progress_selections)로 바꿨다. 이 헬퍼는 테이블별로 다른
+// 응답을 주는 adminFromMock을 구성한다 — child1의 최신 subject_enrollment id를
+// "se1"로 고정하고, hasSession/hasRegularIntent로 그 두 배치 쿼리 결과를 조절한다.
+function mockTrialProgressTables(opts: { hasSession?: boolean; hasRegularIntent?: boolean } = {}) {
+  adminFromMock.mockImplementation((table: string) => {
+    if (table === "subject_enrollments") {
+      return {
+        select: () => ({
+          in: () => ({
+            order: () =>
+              Promise.resolve({ data: [{ id: "se1", child_id: "child1", created_at: "2026-01-01" }] }),
+          }),
+        }),
+      };
+    }
+    if (table === "sessions") {
+      return {
+        select: () => ({
+          in: () => Promise.resolve({ data: opts.hasSession ? [{ subject_enrollment_id: "se1" }] : [] }),
+        }),
+      };
+    }
+    if (table === "trial_regular_progress_selections") {
+      return {
+        select: () => ({
+          in: () => Promise.resolve({ data: opts.hasRegularIntent ? [{ subject_enrollment_id: "se1" }] : [] }),
+        }),
+      };
+    }
+    return { select: () => ({ not: () => Promise.resolve({ data: [] }) }) };
+  });
+}
+
 describe("listKanbanBoardAction — 5단계 stage 분류", () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -90,49 +125,21 @@ describe("listKanbanBoardAction — 5단계 stage 분류", () => {
 
   it("outcome=trial_recommended이고 체험 예약이 아직이면 '체험 신청' 컬럼으로 분류한다", async () => {
     listConsultationsMock.mockResolvedValue([baseRow({ status: "completed", outcome: "trial_recommended", child_id: "child1" })]);
-    pipelineMock.mockResolvedValue({
-      consultationId: "c1",
-      subjectEnrollmentId: "se1",
-      trialEntitlementGrantStatus: null,
-      trialEntitlementGrantError: null,
-      steps: [
-        { key: "trial_booking", done: false, label: "체험 예약" },
-        { key: "contract_sent", done: false, label: "계약 발송" },
-      ],
-    });
+    mockTrialProgressTables({ hasSession: false, hasRegularIntent: false });
     const cards = await listKanbanBoardAction();
     expect(cards[0].stage).toBe("trial_requested");
   });
 
   it("체험 예약은 됐지만 계약 발송 전이면 '체험 일정 확정' 컬럼으로 분류한다", async () => {
     listConsultationsMock.mockResolvedValue([baseRow({ status: "completed", outcome: "trial_recommended", child_id: "child1" })]);
-    pipelineMock.mockResolvedValue({
-      consultationId: "c1",
-      subjectEnrollmentId: "se1",
-      trialEntitlementGrantStatus: null,
-      trialEntitlementGrantError: null,
-      steps: [
-        { key: "trial_booking", done: true, label: "체험 예약" },
-        { key: "contract_sent", done: false, label: "계약 발송" },
-      ],
-    });
+    mockTrialProgressTables({ hasSession: true, hasRegularIntent: false });
     const cards = await listKanbanBoardAction();
     expect(cards[0].stage).toBe("trial_scheduled");
   });
 
   it("체험 예약·계약 발송은 안 됐어도 보호자 정규 진행 희망(regular_intent)이 있으면 '계약' 컬럼으로 분류한다(2026-09-05 사용자 지시 3번)", async () => {
     listConsultationsMock.mockResolvedValue([baseRow({ status: "completed", outcome: "trial_recommended", child_id: "child1" })]);
-    pipelineMock.mockResolvedValue({
-      consultationId: "c1",
-      subjectEnrollmentId: "se1",
-      trialEntitlementGrantStatus: null,
-      trialEntitlementGrantError: null,
-      steps: [
-        { key: "trial_booking", done: true, label: "체험 예약" },
-        { key: "regular_intent", done: true, label: "정규 진행 희망" },
-        { key: "contract_sent", done: false, label: "계약 발송" },
-      ],
-    });
+    mockTrialProgressTables({ hasSession: true, hasRegularIntent: true });
     const cards = await listKanbanBoardAction();
     expect(cards[0].stage).toBe("contract_sent");
   });

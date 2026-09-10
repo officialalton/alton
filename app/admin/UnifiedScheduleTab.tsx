@@ -11,6 +11,20 @@ import { dateKeyInTimezone, buildWeekGrid, todayKeyInTimezone } from "@/lib/cale
 import { listAllTeacherLessons, type UnifiedScheduleLessonRow } from "./booking-actions";
 import { getMyTimezoneSettings } from "@/lib/timezone-actions";
 import { DEFAULT_TIMEZONE } from "@/lib/timezone";
+import { useTabCachedData } from "./use-tab-cached-data";
+
+// 2026-09-10(P1 재진입 성능 배치) — "통합 일정"은 최대 TTL 30초로 분류된다.
+// 달 이동 시 그 달 ± 1개월 범위만 서버에 다시 요청하고, 이미 조회한 달은
+// (해당 달의 캐시 키가 살아있는 동안) 재요청하지 않는다.
+const UNIFIED_SCHEDULE_TTL_MS = 30_000;
+
+function monthRangeFor(yearMonth: string): { from: string; to: string } {
+  const [y, m] = yearMonth.split("-").map(Number);
+  return {
+    from: new Date(Date.UTC(y, m - 2, 1)).toISOString(),
+    to: new Date(Date.UTC(y, m + 1, 0, 23, 59, 59)).toISOString(),
+  };
+}
 
 const SYNC_STATUS_LABEL: Record<string, string> = {
   pending: "동기화 준비 중",
@@ -30,7 +44,15 @@ function formatDateTime(iso: string, timezone: string): string {
   }).format(new Date(iso));
 }
 
-export default function UnifiedScheduleTab() {
+export default function UnifiedScheduleTab({
+  initialLessons,
+  initialMonthAnchor,
+}: {
+  initialLessons?: UnifiedScheduleLessonRow[];
+  // admin/page.tsx가 SSR 시 실제로 읽어준 "오늘이 속한 달"(YYYY-MM) — 이
+  // 값과 다른 달로 이동하기 전까지는 initialLessons를 그대로 쓴다.
+  initialMonthAnchor: string;
+}) {
   // R6 — 관리자 본인의 시간대 설정(계정 드롭다운 "시간대 설정")을 따른다.
   // resolveUserTimezone() 우선순위상 관리자는 household가 없어 개인 설정 →
   // 전역 기본값(America/Los_Angeles) 순으로 결정된다.
@@ -38,30 +60,25 @@ export default function UnifiedScheduleTab() {
   useEffect(() => {
     getMyTimezoneSettings().then((s) => setTimezone(s.resolvedTimezone));
   }, []);
-  const [lessons, setLessons] = useState<UnifiedScheduleLessonRow[] | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [view, setView] = useState<"today" | "week" | "month">("today");
   const [selectedDateKey, setSelectedDateKey] = useState<string | null>(null);
+  const [monthAnchor, setMonthAnchor] = useState(initialMonthAnchor);
   const [teacherFilter, setTeacherFilter] = useState<string>("all");
   const [subjectFilter, setSubjectFilter] = useState<string>("all");
   const [statusFilter, setStatusFilter] = useState<string>("all");
 
-  async function refresh() {
-    setLoading(true);
-    setError(null);
-    try {
-      setLessons(await listAllTeacherLessons());
-    } catch (e) {
-      setError(e instanceof Error ? e.message : String(e));
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    refresh();
-  }, []);
+  const {
+    data: lessons,
+    error,
+    refreshing,
+    refresh,
+  } = useTabCachedData<UnifiedScheduleLessonRow[]>({
+    cacheKey: `unified-schedule:${monthAnchor}`,
+    ttlMs: UNIFIED_SCHEDULE_TTL_MS,
+    seedData: monthAnchor === initialMonthAnchor ? initialLessons : undefined,
+    fetcher: () => listAllTeacherLessons(monthRangeFor(monthAnchor)),
+  });
+  const loading = lessons === null;
 
   const todayKey = todayKeyInTimezone(timezone);
   const weekGrid = useMemo(() => buildWeekGrid(todayKey), [todayKey]);
@@ -151,8 +168,8 @@ export default function UnifiedScheduleTab() {
             <option key={k} value={k}>{label}</option>
           ))}
         </select>
-        <button onClick={refresh} disabled={loading} className="text-[12px] font-bold text-ink underline disabled:opacity-50">
-          새로고침
+        <button onClick={refresh} disabled={refreshing} className="text-[12px] font-bold text-ink underline disabled:opacity-50">
+          {refreshing ? "새로고침 중..." : "새로고침"}
         </button>
       </div>
 
@@ -164,6 +181,10 @@ export default function UnifiedScheduleTab() {
             onSelectDate={(k) => setSelectedDateKey(k === selectedDateKey ? null : k)}
             badgesByDate={badgesByDate}
             initialYearMonth={todayKey.slice(0, 7)}
+            onMonthChange={(ym) => {
+              setMonthAnchor(ym);
+              setSelectedDateKey(null);
+            }}
           />
         </div>
       )}
@@ -194,8 +215,15 @@ export default function UnifiedScheduleTab() {
         </div>
       )}
 
-      {loading && !lessons ? (
-        <div className="text-[13px] text-grey-500">불러오는 중…</div>
+      {loading ? (
+        <div data-testid="unified-schedule-skeleton">
+          {[0, 1, 2].map((i) => (
+            <div key={i} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3 animate-pulse">
+              <div className="h-3.5 w-56 bg-grey-200 rounded mb-2" />
+              <div className="h-3 w-32 bg-grey-100 rounded" />
+            </div>
+          ))}
+        </div>
       ) : visibleLessons.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">해당 범위에 예약이 없습니다.</div>
       ) : (

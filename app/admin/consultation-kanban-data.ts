@@ -10,7 +10,6 @@ import {
   listConsultationsForAdmin,
   type ConsultationListItem,
 } from "./consultation-scheduling-actions";
-import { getTrialOnboardingPipelineAction } from "./trial-onboarding-actions";
 import type { KanbanStage } from "./consultation-kanban-constants";
 
 // 2026-09-06(UAT 지적): 다자녀 온보딩의 원 상담(가족) 카드는 정책상 이력으로
@@ -20,13 +19,64 @@ import type { KanbanStage } from "./consultation-kanban-constants";
 // 내려준다. 삭제·이동은 하지 않는다(카드 자체는 그대로).
 export type KanbanCard = ConsultationListItem & { stage: KanbanStage; is_family_root_with_children: boolean };
 
+type TrialProgress = { trialBookingDone: boolean; regularIntentDone: boolean };
+
+// 2026-09-10(P1 성능 배치) — 이전에는 카드마다 getTrialOnboardingPipelineAction()을
+// 호출해 카드당 인증 1회 + 순차 조회 최대 10회(subject_enrollments →
+// teacher_assignments → trial_smart_notes_consents → entitlement_grants →
+// sessions → lesson_reviews → trial_regular_progress_selections → contracts →
+// contract_versions → purchases)가 반복됐다 — "체험 추천" 카드 수에 비례해
+// N+1이 그대로 커졌다. 칸반 카드 단계 판정에는 저 13개 파이프라인 스텝 중
+// 실제로 딱 2개(trial_booking, regular_intent)만 쓰이므로, 보드 전체에 대해
+// 이 두 사실만 배치 쿼리 3회(자녀별 최신 subject_enrollment 1회 + 그 위의
+// sessions 존재 여부 1회 + trial_regular_progress_selections 존재 여부 1회)로
+// 한 번에 읽는다. 카드 수가 늘어도 쿼리 수는 늘지 않는다(N+1 제거). 상세
+// 파이프라인(카드 상세 패널의 13단계 전체 표시)은 여전히
+// getTrialOnboardingPipelineAction()을 그대로 쓴다 — 그건 카드 1개를 열 때만
+// 호출되므로 N+1이 아니다.
+async function loadTrialProgressByChild(
+  admin: ReturnType<typeof createAdminClient>,
+  childIds: string[]
+): Promise<Map<string, TrialProgress>> {
+  const result = new Map<string, TrialProgress>();
+  if (childIds.length === 0) return result;
+
+  const { data: enrollments } = await admin
+    .from("subject_enrollments")
+    .select("id, child_id, created_at")
+    .in("child_id", childIds)
+    .order("created_at", { ascending: false });
+
+  const latestEnrollmentByChild = new Map<string, string>();
+  for (const e of enrollments ?? []) {
+    if (!latestEnrollmentByChild.has(e.child_id)) latestEnrollmentByChild.set(e.child_id, e.id);
+  }
+  const enrollmentIds = Array.from(latestEnrollmentByChild.values());
+  if (enrollmentIds.length === 0) return result;
+
+  const [{ data: sessionRows }, { data: intentRows }] = await Promise.all([
+    admin.from("sessions").select("subject_enrollment_id").in("subject_enrollment_id", enrollmentIds),
+    admin
+      .from("trial_regular_progress_selections")
+      .select("subject_enrollment_id")
+      .in("subject_enrollment_id", enrollmentIds),
+  ]);
+  const enrollmentsWithSession = new Set((sessionRows ?? []).map((r) => r.subject_enrollment_id as string));
+  const enrollmentsWithIntent = new Set((intentRows ?? []).map((r) => r.subject_enrollment_id as string));
+
+  for (const [childId, enrollmentId] of latestEnrollmentByChild.entries()) {
+    result.set(childId, {
+      trialBookingDone: enrollmentsWithSession.has(enrollmentId),
+      regularIntentDone: enrollmentsWithIntent.has(enrollmentId),
+    });
+  }
+  return result;
+}
+
 /** 개별 상담을 5단계 중 하나로 분류한다. 기존 상태값은 전혀 바꾸지 않고
  * 표시용으로만 압축한다 — 세부 상태(status/outcome/pipeline)는 카드 상세 패널에서
  * 그대로 조회 가능하다. */
-async function classifyStage(
-  admin: ReturnType<typeof createAdminClient>,
-  row: ConsultationListItem
-): Promise<KanbanStage> {
+function classifyStage(row: ConsultationListItem, trialProgressByChild: Map<string, TrialProgress>): KanbanStage {
   if (row.status === "requested") return "requested";
   if (row.status === "scheduled") return "scheduled";
   if (row.status !== "completed") return "scheduled"; // 예외적 상태는 안전하게 2단계로
@@ -35,9 +85,8 @@ async function classifyStage(
   if (row.outcome === "regular_recommended") return "contract_sent";
 
   // outcome === 'trial_recommended' — 파이프라인 단계로 세분화한다.
-  const pipeline = await getTrialOnboardingPipelineAction(row.id, row.child_id, row.trial_intent_confirmed_at);
-  const done = (key: string) => pipeline.steps.find((s) => s.key === key)?.done ?? false;
-  if (!done("trial_booking")) return "trial_requested";
+  const progress = row.child_id ? trialProgressByChild.get(row.child_id) : undefined;
+  if (!progress?.trialBookingDone) return "trial_requested";
   // 2026-09-05 사용자 지시: "계약" 단계는 관리자의 실제 발송 여부가 아니라
   // 보호자의 정규 진행 희망 표시(regular_intent) 시점부터 시작한다 — 관리자가
   // 아직 발송 버튼을 누르지 않았어도 카드는 이미 "계약" 칸에 있어야 한다.
@@ -45,7 +94,7 @@ async function classifyStage(
   // closure_type='contract_signed'를 채워 이 상담을 "지난 상담"으로 옮기므로
   // (app/api/webhooks/docusign/route.ts), 여기서는 그 이후 상태를 별도로 분기할
   // 필요가 없다.
-  if (!done("regular_intent")) return "trial_scheduled";
+  if (!progress.regularIntentDone) return "trial_scheduled";
   return "contract_sent";
 }
 
@@ -67,7 +116,19 @@ export async function loadKanbanBoard(admin: ReturnType<typeof createAdminClient
   ]);
   const closedIds = new Set((closedIdsData ?? []).map((r) => r.id as string));
   const active = rows.filter((r) => !closedIds.has(r.id) && r.status !== "cancelled" && r.status !== "no_show");
-  const stages = await Promise.all(active.map((r) => classifyStage(admin, r)));
+
+  // classifyStage가 실제로 trial_recommended+completed인 카드에서만 파이프라인
+  // 정보를 쓰므로, 그 대상 자녀 id만 모아 배치 조회한다(카드 수와 무관하게
+  // 쿼리 3회).
+  const trialChildIds = Array.from(
+    new Set(
+      active
+        .filter((r) => r.status === "completed" && r.outcome === "trial_recommended" && r.child_id)
+        .map((r) => r.child_id as string)
+    )
+  );
+  const trialProgressByChild = await loadTrialProgressByChild(admin, trialChildIds);
+  const stages = active.map((r) => classifyStage(r, trialProgressByChild));
 
   const rootIdsWithChildren = new Set((rootIdsData ?? []).map((r) => r.family_root_consultation_id as string));
 

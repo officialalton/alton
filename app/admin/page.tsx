@@ -19,6 +19,8 @@ import { loadDevLog } from "./dev-log-data";
 import { loadPayoutBatches } from "./payout-batches-data";
 import { loadTeacherCandidatesBySubject, loadStudentsForMatching } from "./matching-data";
 import { loadWorkspaceProvisionings } from "./workspace-data";
+import { listInquiryThreadsForAdmin } from "./inquiry-and-meeting-actions";
+import { listAllTeacherLessons, loadBookingReconciliationDashboardAction } from "./booking-actions";
 import { loadEntitlementProducts, loadEntitlementProductVersions } from "./entitlement-data";
 import {
   listOpenPriceChangeNotices,
@@ -57,6 +59,16 @@ export default async function AdminHomePage({
 
   const devLogContent = loadDevLog();
 
+  // 2026-09-10(P1 재진입 성능 배치) — 통합 일정은 전체 150일을 매번 읽는 대신
+  // "현재 화면에 표시할 달 ± 1개월"만 SSR로 읽는다. 이 기본 범위는 오늘이
+  // 속한 달을 기준으로 하고, 관리자가 달력에서 다른 달로 이동하면
+  // UnifiedScheduleTab이 그 달 범위만 클라이언트에서 추가 조회한다(캐시에
+  // 없는 달만 새로 조회 — 이미 본 달은 재요청하지 않음).
+  const now = new Date();
+  const unifiedScheduleMonthAnchor = `${now.getUTCFullYear()}-${String(now.getUTCMonth() + 1).padStart(2, "0")}`;
+  const unifiedScheduleRangeFrom = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - 1, 1)).toISOString();
+  const unifiedScheduleRangeTo = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 2, 0, 23, 59, 59)).toISOString();
+
   const [
     dashboard,
     subjects,
@@ -73,6 +85,9 @@ export default async function AdminHomePage({
     staleEnvelopes,
     contractActivationRetries,
     initialKanbanCards,
+    initialInquiryThreads,
+    initialUnifiedScheduleLessons,
+    initialBookingDashboard,
     payoutBatches,
     teacherCandidatesBySubject,
     workspaceProvisionings,
@@ -98,6 +113,11 @@ export default async function AdminHomePage({
     need("consult") ? loadStaleEnvelopeVersions(supabase) : Promise.resolve([]),
     need("consult") ? listOpenContractActivationRetries() : Promise.resolve([]),
     need("consult") ? loadKanbanBoard(createAdminClient()) : Promise.resolve(undefined),
+    need("inquiry") ? listInquiryThreadsForAdmin() : Promise.resolve(undefined),
+    need("unified-schedule")
+      ? listAllTeacherLessons({ from: unifiedScheduleRangeFrom, to: unifiedScheduleRangeTo })
+      : Promise.resolve(undefined),
+    need("booking") ? loadBookingReconciliationDashboardAction() : Promise.resolve(undefined),
     need("payouts") ? loadPayoutBatches(supabase) : Promise.resolve([]),
     need("consult", "matching") ? loadTeacherCandidatesBySubject(supabase) : Promise.resolve({}),
     need("workspace") ? loadWorkspaceProvisionings(supabase) : Promise.resolve([]),
@@ -120,6 +140,7 @@ export default async function AdminHomePage({
   return (
     <AdminShell
       initialTab={tab}
+      adminUserId={user.id}
       googleLinkError={googleLinkError}
       googleLinkSuccess={!!googleLinkSuccess}
       dashboard={dashboard}
@@ -138,6 +159,10 @@ export default async function AdminHomePage({
       staleEnvelopes={staleEnvelopes}
       contractActivationRetries={contractActivationRetries}
       initialKanbanCards={initialKanbanCards}
+      initialInquiryThreads={initialInquiryThreads}
+      initialUnifiedScheduleLessons={initialUnifiedScheduleLessons}
+      initialUnifiedScheduleMonthAnchor={unifiedScheduleMonthAnchor}
+      initialBookingDashboard={initialBookingDashboard}
       devLogContent={devLogContent}
       payoutBatches={payoutBatches}
       teacherCandidatesBySubject={teacherCandidatesBySubject}

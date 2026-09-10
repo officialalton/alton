@@ -16,6 +16,7 @@ import {
   type KanbanCard,
   type ConsultationCardDetail,
 } from "./consultation-kanban-actions";
+import { getCachedTabData, setCachedTabData } from "./tab-data-cache";
 import {
   KANBAN_STAGE_ORDER,
   KANBAN_STAGE_LABEL,
@@ -59,6 +60,12 @@ function formatConsultTime(iso: string | null): string {
   return new Date(iso).toLocaleString("ko-KR", { dateStyle: "medium", timeStyle: "short" });
 }
 
+const CONSULT_KANBAN_CACHE_KEY = "consult-kanban";
+// 2026-09-10(P1 재진입 성능 배치) — "신규" 탭은 상태 변화가 잦다고 분류돼
+// TTL 10초를 쓴다. SSR(initialCards)이 매 진입마다 새로 내려오므로 이
+// 캐시는 주로 재진입 사이 "직전 데이터를 즉시 보여주는" 역할을 한다.
+const CONSULT_KANBAN_TTL_MS = 10_000;
+
 export default function ConsultationKanbanBoard({
   subjects,
   teacherCandidatesBySubject,
@@ -74,22 +81,33 @@ export default function ConsultationKanbanBoard({
   initialCards?: KanbanCard[];
 }) {
   const router = useRouter();
-  const [cards, setCards] = useState<KanbanCard[] | null>(initialCards ?? null);
+  const [cards, setCards] = useState<KanbanCard[] | null>(
+    () => initialCards ?? getCachedTabData<KanbanCard[]>(CONSULT_KANBAN_CACHE_KEY)?.data ?? null
+  );
   const [error, setError] = useState<string | null>(null);
   const [openId, setOpenId] = useState<string | null>(null);
 
   async function load() {
     try {
-      setCards(await listKanbanBoardAction());
+      const data = await listKanbanBoardAction();
+      setCards(data);
+      setCachedTabData(CONSULT_KANBAN_CACHE_KEY, data);
     } catch (e) {
       setError(e instanceof Error ? e.message : "칸반 보드 조회에 실패했습니다.");
     }
   }
 
   useEffect(() => {
-    if (initialCards) return;
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    load();
+    if (initialCards) {
+      setCachedTabData(CONSULT_KANBAN_CACHE_KEY, initialCards);
+      return;
+    }
+    const cached = getCachedTabData<KanbanCard[]>(CONSULT_KANBAN_CACHE_KEY);
+    const age = cached ? Date.now() - cached.fetchedAt : Infinity;
+    if (age > CONSULT_KANBAN_TTL_MS) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      load();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

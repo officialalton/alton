@@ -86,6 +86,7 @@ const dashboard: AdminDashboardData = {
 };
 
 const baseProps = {
+  adminUserId: "admin1",
   dashboard,
   subjects: [],
   docs: [],
@@ -93,6 +94,7 @@ const baseProps = {
   students: [],
   matchingStudents: [],
   creditHistoryByStudent: {},
+  initialUnifiedScheduleMonthAnchor: "2026-09",
   consultations: [],
   trials: [],
   proposals: [],
