@@ -81,7 +81,7 @@ describe("ParentShell", () => {
       />
     );
     ["홈", "레슨", "지인 추천", "수업권", "통계"].forEach((label) =>
-      expect(screen.getByText(label)).toBeInTheDocument()
+      expect(screen.getAllByText(label).length).toBeGreaterThan(0)
     );
     expect(screen.getAllByText("지훈").length).toBeGreaterThan(0);
     expect(screen.getAllByText("이서아").length).toBeGreaterThan(0);
@@ -114,7 +114,7 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("레슨"));
+    fireEvent.click(screen.getAllByText("레슨")[0]);
     expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
   });
 

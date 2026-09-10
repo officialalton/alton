@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { logout } from "@/app/login/actions";
+import MobileBottomNav from "@/app/components/MobileBottomNav";
 import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
 import TeacherHomeDashboard from "./TeacherHomeDashboard";
 import type { TeacherDashboardData } from "./dashboard-data";
@@ -125,9 +126,15 @@ export default function TeacherShell({
 
   const activeLabel = NAV_ITEMS.find((n) => n.id === activeTab)?.label ?? "";
 
+  // 2026-09-10(UI/UX 정리 1차, 배치4) — 모바일 하단 탭: 홈·수업·담당 학생·
+  // 커리큘럼 + 더보기(가능시간·교재).
+  const MOBILE_PRIMARY_IDS: TabId[] = ["home", "lesson-schedule", "assignments", "curriculum"];
+  const mobilePrimary = NAV_ITEMS.filter((n) => MOBILE_PRIMARY_IDS.includes(n.id));
+  const mobileMore = NAV_ITEMS.filter((n) => !MOBILE_PRIMARY_IDS.includes(n.id));
+
   return (
     <div className="min-h-screen bg-white flex">
-      <aside className="w-[88px] shrink-0 border-r border-grey-200 flex flex-col items-center py-5 gap-1">
+      <aside className="hidden md:flex w-[88px] shrink-0 border-r border-grey-200 flex-col items-center py-5 gap-1">
         <div className="w-9 h-9 rounded-full bg-red text-white font-extrabold text-[15px] flex items-center justify-center mb-4">
           A
         </div>
@@ -146,7 +153,14 @@ export default function TeacherShell({
         ))}
       </aside>
 
-      <div className="flex-1 flex flex-col">
+      <MobileBottomNav
+        primary={mobilePrimary}
+        more={mobileMore}
+        activeId={activeTab}
+        onSelect={(id) => selectTab(id as TabId)}
+      />
+
+      <div className="flex-1 flex flex-col pb-16 md:pb-0">
         <div className="flex items-center justify-end gap-4 border-b border-grey-200 px-6 py-3 relative">
           <button
             onClick={() => setAccountMenuOpen((v) => !v)}

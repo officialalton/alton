@@ -61,7 +61,7 @@ describe("TeacherShell", () => {
   it("2026-09-10(UI/UX 정리 1차): 사이드바 항목을 보여주고, 기본 탭은 홈이다('배정'은 '담당 학생'으로, 미구현 '정산'은 숨김)", () => {
     render(<TeacherShell {...baseProps} />);
     ["홈", "담당 학생", "수업", "가능시간", "커리큘럼", "교재"].forEach((label) =>
-      expect(screen.getByText(label)).toBeInTheDocument()
+      expect(screen.getAllByText(label).length).toBeGreaterThan(0)
     );
     expect(screen.queryByText("학생")).toBeNull();
     expect(screen.queryByText("수업 일정")).toBeNull();
@@ -72,7 +72,7 @@ describe("TeacherShell", () => {
 
   it("수업 탭을 누르면 딱 두 개의 서브탭('예정 수업'/'지난 수업')만 보이고, 지난 수업 서브탭에는 레거시 지각·노쇼 신고 기능이 흡수되어 있다", () => {
     render(<TeacherShell {...baseProps} />);
-    fireEvent.click(screen.getByText("수업"));
+    fireEvent.click(screen.getAllByText("수업")[0]);
     expect(screen.getByText("예정 수업")).toBeInTheDocument();
     expect(screen.getByText("지난 수업")).toBeInTheDocument();
     expect(screen.getByText("예정 수업 목록")).toBeInTheDocument();
@@ -100,7 +100,7 @@ describe("TeacherShell", () => {
       },
     ];
     render(<TeacherShell {...baseProps} currentAssignments={currentAssignments} />);
-    fireEvent.click(screen.getByText("담당 학생"));
+    fireEvent.click(screen.getAllByText("담당 학생")[0]);
     expect(screen.getByText("11학년")).toBeInTheDocument();
     fireEvent.click(screen.getByText("커리큘럼 보기"));
     expect(screen.getByText("학생별")).toBeInTheDocument();

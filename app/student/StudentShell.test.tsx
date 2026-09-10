@@ -108,7 +108,7 @@ describe("StudentShell", () => {
       />
     );
     ["홈", "수강 과목", "수업", "선생님", "과제", "문제", "단어장", "교재", "수업권", "통계"].forEach(
-      (label) => expect(screen.getByText(label)).toBeInTheDocument()
+      (label) => expect(screen.getAllByText(label).length).toBeGreaterThan(0)
     );
     expect(screen.queryByText("레슨")).toBeNull();
     expect(screen.queryByText("예약")).toBeNull();
@@ -183,7 +183,7 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("수업"));
+    fireEvent.click(screen.getAllByText("수업")[0]);
     expect(screen.getByText("예정 수업")).toBeInTheDocument();
     expect(screen.getByText("지난 수업")).toBeInTheDocument();
     expect(
@@ -201,7 +201,7 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("과제"));
+    fireEvent.click(screen.getAllByText("과제")[0]);
     expect(
       screen.getByText("지금은 할 과제가 없어요. 새 과제가 오면 여기 보여드릴게요.")
     ).toBeInTheDocument();
@@ -217,7 +217,7 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("교재"));
+    fireEvent.click(screen.getAllByText("교재")[0]);
     expect(
       screen.getByText("아직 배정된 교재가 없어요. 담당 선생님이 곧 준비해드릴 예정이에요.")
     ).toBeInTheDocument();

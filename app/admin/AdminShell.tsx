@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { logout } from "@/app/login/actions";
 import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
+import MobileDrawerNav from "@/app/components/MobileDrawerNav";
 import { linkAdminGoogleAccount } from "./google-link-actions";
 import AdminHomeDashboard from "./AdminHomeDashboard";
 import type { AdminDashboardData } from "./dashboard-data";
@@ -144,9 +145,29 @@ export default function AdminShell({
 
   const activeLabel = NAV_ITEMS.find((n) => n.id === activeTab)?.label ?? "";
 
+  // 2026-09-10(UI/UX 정리 1차, 배치4) — 관리자는 항목이 많아(13개) 바텀탭
+  // 대신 햄버거 드로어 + 그룹 헤더(운영/콘텐츠/정산)로 정리한다.
+  const OPERATIONS_IDS: TabId[] = [
+    "home",
+    "users",
+    "matching",
+    "consult",
+    "inquiry",
+    "unified-schedule",
+    "booking",
+    "workspace",
+    "devlog",
+  ];
+  const CONTENT_IDS: TabId[] = ["catalog"];
+  const mobileGroups = [
+    { label: "운영", items: NAV_ITEMS.filter((n) => OPERATIONS_IDS.includes(n.id)) },
+    { label: "콘텐츠", items: NAV_ITEMS.filter((n) => CONTENT_IDS.includes(n.id)) },
+    { label: "정산", items: NAV_ITEMS.filter((n) => !OPERATIONS_IDS.includes(n.id) && !CONTENT_IDS.includes(n.id)) },
+  ];
+
   return (
     <div className="min-h-screen bg-white flex">
-      <aside className="w-[88px] shrink-0 border-r border-grey-200 flex flex-col items-center py-5 gap-1">
+      <aside className="hidden md:flex w-[88px] shrink-0 border-r border-grey-200 flex-col items-center py-5 gap-1">
         <div className="w-9 h-9 rounded-full bg-red text-white font-extrabold text-[15px] flex items-center justify-center mb-4">
           A
         </div>
@@ -164,6 +185,8 @@ export default function AdminShell({
           </button>
         ))}
       </aside>
+
+      <MobileDrawerNav groups={mobileGroups} activeId={activeTab} onSelect={(id) => selectTab(id as TabId)} />
 
       <div className="flex-1 flex flex-col">
         <div className="flex items-center justify-end gap-4 border-b border-grey-200 px-6 py-3 relative">

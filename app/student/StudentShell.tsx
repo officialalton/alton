@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { logout } from "@/app/login/actions";
 import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
+import MobileBottomNav from "@/app/components/MobileBottomNav";
 import HomeDashboard from "./HomeDashboard";
 import type { DashboardData } from "./dashboard-data";
 import VocabTab from "@/app/session/[id]/VocabTab";
@@ -132,9 +133,15 @@ export default function StudentShell({
 
   const activeLabel = NAV_ITEMS.find((n) => n.id === activeTab)?.label ?? "";
 
+  // 2026-09-10(UI/UX 정리 1차, 배치4) — 모바일 하단 탭: 홈·수업·과제·교재 +
+  // 더보기(나머지). 데스크톱 사이드바는 그대로 두고 모바일에서만 숨긴다.
+  const MOBILE_PRIMARY_IDS: TabId[] = ["home", "classes", "homework", "materials"];
+  const mobilePrimary = NAV_ITEMS.filter((n) => MOBILE_PRIMARY_IDS.includes(n.id));
+  const mobileMore = NAV_ITEMS.filter((n) => !MOBILE_PRIMARY_IDS.includes(n.id));
+
   return (
     <div className="min-h-screen bg-white flex">
-      <aside className="w-[88px] shrink-0 border-r border-grey-200 flex flex-col items-center py-5 gap-1">
+      <aside className="hidden md:flex w-[88px] shrink-0 border-r border-grey-200 flex-col items-center py-5 gap-1">
         <div className="w-9 h-9 rounded-full bg-red text-white font-extrabold text-[15px] flex items-center justify-center mb-4">
           A
         </div>
@@ -153,7 +160,14 @@ export default function StudentShell({
         ))}
       </aside>
 
-      <div className="flex-1 flex flex-col">
+      <MobileBottomNav
+        primary={mobilePrimary}
+        more={mobileMore}
+        activeId={activeTab}
+        onSelect={(id) => selectTab(id as TabId)}
+      />
+
+      <div className="flex-1 flex flex-col pb-16 md:pb-0">
         <div className="flex items-center justify-end gap-4 border-b border-grey-200 px-6 py-3 relative">
           <button
             onClick={() => setAccountMenuOpen((v) => !v)}
