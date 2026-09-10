@@ -5136,6 +5136,27 @@ Task 1~4와 그 사이 발견된 모든 corrective가 제품 오너 최종 승�
 
 ### 아직 확인 안 된 것
 
+## 2026-09-09 — Production 오배포 사고 및 제품 오너 결정(운영 반영본 확정)
+
+`vercel --prod=false` 명령이 의도와 다르게 **Production으로 배포되고
+`app.alton.education`에 alias까지 완료**됐다(개발자 실수 — Preview에만 배포하려던
+의도였음). 배포된 커밋은 `605fdbf`(`preview/m4-integration-verification`,
+"Preview UAT 지적 5건 반영" — about:blank 버그, 교사 커리큘럼 v3 표시 누락,
+체험수업권 DOB 게이트 폐기, 교사 "수업 준비" 진입 추가 등).
+
+- **Production 배포**: `dpl_36VYgTKkd45ToKJvoz6sdv3GrLwY`
+  (`https://alton-funhoyhq7-alton7.vercel.app`, target: production)
+- **alias**: `https://app.alton.education`
+- **직전 정상 Production 배포**(git `main`, 롤백 후보였으나 미사용):
+  `dpl_Hs8DQZ46ZmhW4BYXBRLCLKHcuz6e` (`alton-4ilxslteb-alton7.vercel.app`)
+
+**제품 오너 결정(확정)**: 롤백하지 않는다. `dpl_36VYgTKkd45ToKJvoz6sdv3GrLwY`를
+**현재 운영 반영본**으로 그대로 유지한다. 이후 별도 승인 전까지 Production에 대한
+추가 배포, alias 변경, 환경변수 변경, UAT 데이터 작업을 전부 금지한다. 지금
+진행 중인 UAT 관련 후속 수정은 로컬/Preview 검증으로만 계속하며 Production에는
+다시 올리지 않는다(다음 Preview 배포는 `vercel`을 인자 없이 실행해 target이
+`preview`인지 매번 결과 JSON으로 확인한 뒤에만 진행).
+
 9. 오늘 UAT 중 제품 오너가 teacher1 계정으로 실수 진입해 실제 사전 존재 세션
    "세온장·테스트1"의 "수업 시작"을 클릭한 건 — 이후 조사로 이 세션이 실제로
    `finalize_lesson_session()`까지(완료/노쇼 확정) 진행된 것으로 항목 6에서
