@@ -80,8 +80,6 @@ export default function TeacherAssignmentTerminationPanel() {
     }
   }
 
-  if (!requests) return null;
-
   return (
     <div className="max-w-[640px] px-8 py-8 border-t border-grey-200 mt-8">
       <h2 className="text-[16px] font-extrabold text-ink mb-1.5">선생님 배정 종료 요청</h2>
@@ -89,7 +87,19 @@ export default function TeacherAssignmentTerminationPanel() {
         trial/regular 구분 없이 단일 배정 관계에 대한 정식 종료(재배정 또는 수강 종료) 요청 목록입니다.
       </p>
 
-      {requests.length === 0 ? (
+      {requests === null ? (
+        // 2026-09-10(P1-2) — 이전엔 데이터 도착 전 이 영역 전체가 아무것도
+        // 그리지 않았다(UX 보완이며 성능 개선 근거는 아님). 최종 목록 형태의
+        // 스켈레톤을 먼저 보여준다.
+        <div className="space-y-2.5" data-testid="termination-panel-skeleton">
+          {Array.from({ length: 2 }).map((_, i) => (
+            <div key={i} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 animate-pulse">
+              <div className="h-3.5 w-1/3 bg-grey-100 rounded mb-2" />
+              <div className="h-3 w-1/2 bg-grey-100 rounded" />
+            </div>
+          ))}
+        </div>
+      ) : requests.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
           접수된 종료 요청이 없습니다.
         </div>

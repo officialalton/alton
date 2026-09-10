@@ -20,14 +20,34 @@ export type AdminInquiryThread = {
   hasOpen: boolean;
 };
 
+// 2026-09-10(P1-2) — 데이터가 늘어나도 이 화면이 계속 느려지지 않도록 최근
+// 90일 + 상한을 둔다(지금은 데이터가 거의 없어 체감되지 않지만, 그게 이 화면이
+// 빠른 이유는 아니라는 게 P1-2 조사 결론이었다). 열린(open) 문의는 오래됐어도
+// 놓치면 안 되므로 기간 제한과 별개로 항상 포함한다.
+const INQUIRY_LOOKBACK_DAYS = 90;
+const INQUIRY_MESSAGE_LIMIT = 500;
+
 export async function listInquiryThreadsForAdmin(): Promise<AdminInquiryThread[]> {
   await requireAdmin();
   const admin = createAdminClient();
-  const { data, error } = await admin
-    .from("household_messages")
-    .select("id, household_id, sender_role, body, status, created_at, household:households(primary_guardian_id, guardian:profiles!households_primary_guardian_id_fkey(name))")
-    .order("created_at", { ascending: true });
+  const since = new Date(Date.now() - INQUIRY_LOOKBACK_DAYS * 24 * 60 * 60 * 1000).toISOString();
+  const [{ data: recent, error }, { data: openOlder, error: openError }] = await Promise.all([
+    admin
+      .from("household_messages")
+      .select("id, household_id, sender_role, body, status, created_at, household:households(primary_guardian_id, guardian:profiles!households_primary_guardian_id_fkey(name))")
+      .gte("created_at", since)
+      .order("created_at", { ascending: true })
+      .limit(INQUIRY_MESSAGE_LIMIT),
+    admin
+      .from("household_messages")
+      .select("id, household_id, sender_role, body, status, created_at, household:households(primary_guardian_id, guardian:profiles!households_primary_guardian_id_fkey(name))")
+      .lt("created_at", since)
+      .eq("status", "open")
+      .order("created_at", { ascending: true }),
+  ]);
   if (error) throw new Error(error.message);
+  if (openError) throw new Error(openError.message);
+  const data = [...(openOlder ?? []), ...(recent ?? [])];
 
   const byHousehold = new Map<string, AdminInquiryThread>();
   for (const row of data ?? []) {
@@ -97,12 +117,21 @@ export type AdminMeetingRequest = {
 export async function listMeetingRequestsForAdmin(): Promise<AdminMeetingRequest[]> {
   await requireAdmin();
   const admin = createAdminClient();
+  return loadMeetingRequestsForAdmin(admin);
+}
+
+async function loadMeetingRequestsForAdmin(
+  admin: ReturnType<typeof createAdminClient>
+): Promise<AdminMeetingRequest[]> {
   const { data, error } = await admin
     .from("meeting_requests")
     .select(
       "id, subject, status, starts_at, ends_at, google_meet_link, created_at, household:households(guardian:profiles!households_primary_guardian_id_fkey(name)), child:profiles!meeting_requests_child_id_fkey(name)"
     )
-    .order("created_at", { ascending: false });
+    .order("created_at", { ascending: false })
+    // 2026-09-10(P1-2) — 미래 데이터 증가 대비 상한. 최신순 정렬이라 최근 건이
+    // 먼저 나온다.
+    .limit(500);
   if (error) throw new Error(error.message);
   return (data ?? []).map((r) => {
     const householdRel = r.household as { guardian?: { name?: string } | { name?: string }[] } | { guardian?: { name?: string } | { name?: string }[] }[] | null;
@@ -152,6 +181,12 @@ export type MeetingAvailabilityException = {
 export async function listMeetingAvailabilityRules(): Promise<MeetingAvailabilityRule[]> {
   await requireAdmin();
   const admin = createAdminClient();
+  return loadMeetingAvailabilityRules(admin);
+}
+
+async function loadMeetingAvailabilityRules(
+  admin: ReturnType<typeof createAdminClient>
+): Promise<MeetingAvailabilityRule[]> {
   const { data, error } = await admin
     .from("meeting_availability_rules")
     .select("id, weekday, start_time, end_time, active")
@@ -183,12 +218,39 @@ export async function deactivateMeetingAvailabilityRule(ruleId: string): Promise
 export async function listMeetingAvailabilityExceptions(): Promise<MeetingAvailabilityException[]> {
   await requireAdmin();
   const admin = createAdminClient();
+  return loadMeetingAvailabilityExceptions(admin);
+}
+
+async function loadMeetingAvailabilityExceptions(
+  admin: ReturnType<typeof createAdminClient>
+): Promise<MeetingAvailabilityException[]> {
   const { data, error } = await admin
     .from("meeting_availability_exceptions")
     .select("id, exception_date, is_closed, start_time, end_time, reason")
     .order("exception_date", { ascending: true });
   if (error) throw new Error(error.message);
   return (data ?? []) as MeetingAvailabilityException[];
+}
+
+export type MeetingOperationsDashboard = {
+  requests: AdminMeetingRequest[];
+  rules: MeetingAvailabilityRule[];
+  exceptions: MeetingAvailabilityException[];
+};
+
+/**
+ * 2026-09-10(P1-2) — "면담 운영" 서브탭이 마운트 시 호출하던 3개 서버 액션을
+ * 하나로 합친다. 인증(requireAdmin)도 이 함수 안에서 한 번만 수행한다.
+ */
+export async function loadMeetingOperationsDashboardAction(): Promise<MeetingOperationsDashboard> {
+  await requireAdmin();
+  const admin = createAdminClient();
+  const [requests, rules, exceptions] = await Promise.all([
+    loadMeetingRequestsForAdmin(admin),
+    loadMeetingAvailabilityRules(admin),
+    loadMeetingAvailabilityExceptions(admin),
+  ]);
+  return { requests, rules, exceptions };
 }
 
 export async function addMeetingAvailabilityException(params: {

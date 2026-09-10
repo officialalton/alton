@@ -5,27 +5,20 @@
 
 import { useEffect, useState } from "react";
 import {
-  listReconciliationNeededBookings,
+  loadBookingReconciliationDashboardAction,
   retryCalendarSyncNow,
   adminCancelLessonBooking,
-  listNotificationOutboxSummary,
-  listRecentIncidentReports,
-  listExternalCalendarChanges,
   resolveExternalCalendarChange,
   resolveExternalChangeAcceptGoogleTime,
   resolveExternalChangeKeepAltonTime,
   resolveExternalChangeRecreateAfterDeletion,
   resolveExternalChangeCancelDueToDeletion,
   retryExternalCalendarReconciliationNow,
-  listSessionsNeedingFinalJudgment,
-  listRecentlyFinalizedSessions,
   adminFinalizeLessonSession,
   adminReopenSession,
   adminFinalizeSessionAsInfraIncident,
   adminResolveTeacherPartialInterruption,
-  listOutstandingMakeupObligations,
   adminApplyMakeupTimeToBooking,
-  listSessionJudgmentReconciliationTasks,
   resolveSessionJudgmentReconciliationTask,
   setReconciliationTaskStudentCancelledDisposition,
   type ReconciliationRow,
@@ -37,6 +30,7 @@ import {
   type SessionOutcome,
   type MakeupObligationRow,
   type ReconciliationTaskRow,
+  type TeacherReconciliationResult,
 } from "./booking-actions";
 
 const FINAL_STATUS_LABEL: Record<string, string> = {
@@ -84,6 +78,21 @@ const NOTIFICATION_TYPE_LABEL: Record<string, string> = {
   reminder_2h: "2시간 전 리마인드",
 };
 
+// 2026-09-10(P1-2) — 이 화면의 여러 하위 영역이 데이터 도착 전 아무것도 그리지
+// 않던 문제(UX 보완, 성능 개선 근거 아님)를 없애기 위한 최종 목록 형태 스켈레톤.
+function ListSkeleton({ rows = 3 }: { rows?: number }) {
+  return (
+    <div className="space-y-3 mb-3" data-testid="booking-list-skeleton">
+      {Array.from({ length: rows }).map((_, i) => (
+        <div key={i} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 animate-pulse">
+          <div className="h-3.5 w-1/3 bg-grey-100 rounded mb-2" />
+          <div className="h-3 w-1/2 bg-grey-100 rounded" />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function BookingReconciliationPanel() {
   const [rows, setRows] = useState<ReconciliationRow[] | null>(null);
   const [outboxSummary, setOutboxSummary] = useState<NotificationOutboxSummary[] | null>(null);
@@ -117,29 +126,25 @@ export default function BookingReconciliationPanel() {
   const [dispositionDraft, setDispositionDraft] = useState<"consume" | "release">("consume");
   const [dispositionReasonDraft, setDispositionReasonDraft] = useState("");
   const [submittingDispositionTaskId, setSubmittingDispositionTaskId] = useState<string | null>(null);
+  const [retryResults, setRetryResults] = useState<TeacherReconciliationResult[] | null>(null);
 
+  // 2026-09-10(P1-2) — 이 화면이 마운트 시 8개 서버 액션을 각각 호출하던 것을
+  // loadBookingReconciliationDashboardAction() 하나로 합쳤다. 인증도 그 액션
+  // 안에서 한 번만 수행되므로, 이 화면의 최초 로딩은 1번의 클라이언트→서버
+  // 왕복 안에서 8개 조회가 전부 끝난다(이전엔 8번의 별도 왕복, 각자 인증 재확인).
   async function refresh() {
     setLoading(true);
     setError(null);
     try {
-      const [reconciliation, outbox, incidents, changes, judgment, finalized, obligations, tasks] = await Promise.all([
-        listReconciliationNeededBookings(),
-        listNotificationOutboxSummary(),
-        listRecentIncidentReports(),
-        listExternalCalendarChanges(),
-        listSessionsNeedingFinalJudgment(),
-        listRecentlyFinalizedSessions(),
-        listOutstandingMakeupObligations(),
-        listSessionJudgmentReconciliationTasks(),
-      ]);
-      setRows(reconciliation);
-      setOutboxSummary(outbox);
-      setIncidentReports(incidents);
-      setExternalChanges(changes);
-      setJudgmentRows(judgment);
-      setFinalizedRows(finalized);
-      setMakeupObligations(obligations);
-      setReconciliationTasks(tasks);
+      const dashboard = await loadBookingReconciliationDashboardAction();
+      setRows(dashboard.reconciliationNeeded);
+      setOutboxSummary(dashboard.outboxSummary);
+      setIncidentReports(dashboard.incidentReports);
+      setExternalChanges(dashboard.externalChanges);
+      setJudgmentRows(dashboard.sessionsNeedingJudgment);
+      setFinalizedRows(dashboard.recentlyFinalized);
+      setMakeupObligations(dashboard.makeupObligations);
+      setReconciliationTasks(dashboard.reconciliationTasks);
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
@@ -193,19 +198,30 @@ export default function BookingReconciliationPanel() {
     refresh();
   }, []);
 
+  // 2026-09-10(P1-2) — "지금 재처리"는 페이지 최초 로딩과 분리된 사용자 트리거
+  // 동작으로 유지한다(자동 로딩 경로에 넣지 않음). retryExternalCalendarReconciliationNow()가
+  // 이제 교사별 성공/실패를 그대로 반환하므로, 집계 숫자 뒤에 실패한 교사를
+  // retryResults에 남겨 화면에서 바로 확인할 수 있게 한다 — 클릭 한 번에 개별
+  // 실패가 묻히지 않게 하기 위함.
   async function handleRetryNow() {
     setLoading(true);
     setError(null);
     setMessage(null);
+    setRetryResults(null);
     try {
-      const [result, externalResult] = await Promise.all([
+      const [result, externalResults] = await Promise.all([
         retryCalendarSyncNow(),
         retryExternalCalendarReconciliationNow(),
       ]);
+      const checked = externalResults.filter((r) => r.checked).length;
+      const changesDetected = externalResults.reduce((sum, r) => sum + r.changesDetected, 0);
+      const failed = externalResults.filter((r) => r.error);
       setMessage(
         `${result.attempted}건 재시도 — 성공 ${result.succeeded}, 재시도 대기 ${result.failed}, 수동확인 필요 ${result.reconciliationNeeded}` +
-          ` · 외부 변경 대조: 선생님 ${externalResult.teachersChecked}명 확인, 신규 감지 ${externalResult.changesDetected}건`
+          ` · 외부 변경 대조: 선생님 ${checked}명 확인, 신규 감지 ${changesDetected}건` +
+          (failed.length > 0 ? ` · 대조 실패 ${failed.length}명(아래 목록 참고)` : "")
       );
+      setRetryResults(externalResults);
       await refresh();
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
@@ -396,6 +412,21 @@ export default function BookingReconciliationPanel() {
       {message && <div className="mb-4 text-[13px] font-semibold text-ink bg-green/10 rounded-lg px-4 py-3">{message}</div>}
       {error && <div className="mb-4 text-[13px] font-semibold text-red bg-red/5 rounded-lg px-4 py-3">{error}</div>}
 
+      {retryResults && retryResults.some((r) => r.error) && (
+        <div className="mb-6 border-[1.5px] border-red/30 bg-red/5 rounded-xl px-4 py-3" data-testid="retry-failures">
+          <h2 className="text-[13px] font-bold text-red mb-2">외부 변경 대조 실패한 선생님</h2>
+          <ul className="space-y-1">
+            {retryResults
+              .filter((r) => r.error)
+              .map((r) => (
+                <li key={r.teacherId} className="text-[12px] text-red">
+                  {r.teacherName ?? r.teacherId}: {r.error}
+                </li>
+              ))}
+          </ul>
+        </div>
+      )}
+
       {outboxSummary && outboxSummary.length > 0 && (
         <div className="mb-6">
           <h2 className="text-[14px] font-bold text-ink mb-2">알림 발송 대기 현황</h2>
@@ -491,7 +522,9 @@ export default function BookingReconciliationPanel() {
         관리자가 확인 처리해야만 확정됩니다. **UI 고도화 예정**: 지금은 이 목록 형태로만
         제공하고, 선생님별 금주/주간/월간 통합 일정 캘린더 뷰는 후속 작업으로 남아 있습니다.
       </p>
-      {!externalChanges || externalChanges.length === 0 ? (
+      {externalChanges === null ? (
+        <ListSkeleton />
+      ) : externalChanges.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center mb-8">
           감지된 외부 변경이 없습니다.
         </div>
@@ -640,7 +673,9 @@ export default function BookingReconciliationPanel() {
         선생님이 "수업 종료"를 누르지 않았거나 관리자가 직접 확정해야 하는 건입니다. 완료/학생 노쇼/선생님
         노쇼 중 하나로 확정하면 수업권 소진·해제와 정산 항목(payable_minutes)이 같은 트랜잭션으로 반영됩니다.
       </p>
-      {!judgmentRows || judgmentRows.length === 0 ? (
+      {judgmentRows === null ? (
+        <ListSkeleton />
+      ) : judgmentRows.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">판정 대기 중인 세션이 없습니다.</div>
       ) : (
         judgmentRows.map((s) => (
@@ -800,7 +835,9 @@ export default function BookingReconciliationPanel() {
         항목은 새 상태 기준으로 자동 재계산되지만, 수업권 소진/해제 자체가 바뀌어야 하는 경우(예:
         완료→선생님 노쇼)는 "수업권 원장" 탭의 조정 기능으로 별도 반영해야 합니다.
       </p>
-      {!finalizedRows || finalizedRows.length === 0 ? (
+      {finalizedRows === null ? (
+        <ListSkeleton />
+      ) : finalizedRows.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">확정된 세션이 없습니다.</div>
       ) : (
         finalizedRows.map((s) => (
@@ -855,7 +892,9 @@ export default function BookingReconciliationPanel() {
         선생님 지각 당일 연장으로 다 못 채운 분, 회사·Meet 장애로 중단돼 못 제공한 분이 여기 쌓입니다. 학생의
         미래 정규 예약 ID를 입력해 그 예약 뒤에 이어붙이면 소비됩니다(새 예약 생성 없음, 수업권 추가 소진 없음).
       </p>
-      {!makeupObligations || makeupObligations.length === 0 ? (
+      {makeupObligations === null ? (
+        <ListSkeleton />
+      ) : makeupObligations.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">잔여 보충시간이 없습니다.</div>
       ) : (
         makeupObligations.map((o) => (
@@ -938,7 +977,9 @@ export default function BookingReconciliationPanel() {
         적용됩니다(같은 작업은 한 번만 반영 가능). 이미 지급 완료(paid)된 정산 항목의 금액 자체는
         여기서 바뀌지 않고 역분개 대상으로 표시만 됩니다.
       </p>
-      {!reconciliationTasks || reconciliationTasks.length === 0 ? (
+      {reconciliationTasks === null ? (
+        <ListSkeleton />
+      ) : reconciliationTasks.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">대사 작업이 없습니다.</div>
       ) : (
         reconciliationTasks.map((t) => (

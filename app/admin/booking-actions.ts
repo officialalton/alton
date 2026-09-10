@@ -60,11 +60,21 @@ export type ReconciliationRow = {
 export async function listReconciliationNeededBookings(): Promise<ReconciliationRow[]> {
   await requireAdminOrCapability(BOOKING_CAPABILITY);
   const admin = createAdminClient();
+  return loadReconciliationNeededBookings(admin);
+}
+
+async function loadReconciliationNeededBookings(
+  admin: ReturnType<typeof createAdminClient>
+): Promise<ReconciliationRow[]> {
   const { data, error } = await admin
     .from("reservations")
     .select("id, owner_profile_id, starts_at, google_sync_status, google_sync_error, google_sync_retry_count, teacher:profiles!reservations_owner_profile_id_fkey(name)")
     .in("google_sync_status", ["reconciliation_needed", "failed"])
-    .order("starts_at", { ascending: true });
+    .order("starts_at", { ascending: true })
+    // 2026-09-10(P1-2) — 데이터가 늘어나도 화면이 계속 느려지지 않도록 상한을 둔다
+    // (지금은 대상 자체가 몇 건 안 되지만, 그건 이 화면이 빠른 이유가 아니라 아직
+    // 데이터가 적을 뿐이라 상한이 필요하다는 결론이었다).
+    .limit(200);
   if (error) throw new Error(error.message);
   return (data ?? []).map((r) => ({
     reservationId: r.id as string,
@@ -108,6 +118,12 @@ export type NotificationOutboxSummary = {
 export async function listNotificationOutboxSummary(): Promise<NotificationOutboxSummary[]> {
   await requireAdminOrCapability(BOOKING_CAPABILITY);
   const admin = createAdminClient();
+  return loadNotificationOutboxSummary(admin);
+}
+
+async function loadNotificationOutboxSummary(
+  admin: ReturnType<typeof createAdminClient>
+): Promise<NotificationOutboxSummary[]> {
   const { data, error } = await admin
     .from("booking_notification_outbox")
     .select("notification_type, status");
@@ -145,15 +161,26 @@ export type UnifiedScheduleLessonRow = {
  * 타는 전체 재검증 체인(가용성·FreeBusy·버퍼·중복예약·수업권·알림)을 그대로 재사용한다 —
  * 이 함수는 조회 전용.
  */
+// 2026-09-10(P1-2) — 이전엔 날짜 범위 없이 전체 예약/세션을 조회해 클라이언트에서만
+// 오늘/주간/월간으로 걸러냈다(데이터가 늘어날수록 계속 느려지는 구조). 오늘/주간/월간
+// 뷰가 실제로 쓰는 범위보다 넉넉하게 앞뒤 여유를 두고 서버에서 먼저 좁힌다.
+const UNIFIED_SCHEDULE_PAST_DAYS = 30;
+const UNIFIED_SCHEDULE_FUTURE_DAYS = 120;
+
 export async function listAllTeacherLessons(): Promise<UnifiedScheduleLessonRow[]> {
   await requireAdminOrCapability(BOOKING_CAPABILITY);
   const admin = createAdminClient();
+  const since = new Date(Date.now() - UNIFIED_SCHEDULE_PAST_DAYS * 24 * 60 * 60 * 1000).toISOString();
+  const until = new Date(Date.now() + UNIFIED_SCHEDULE_FUTURE_DAYS * 24 * 60 * 60 * 1000).toISOString();
   const { data, error } = await admin
     .from("sessions")
     .select(
-      "id, teacher_id, teacher:profiles!sessions_teacher_id_fkey(name), reservation:reservations!sessions_reservation_id_fkey(id, starts_at, ends_at, status, google_sync_status, external_change_status), subject_enrollment:subject_enrollments!sessions_subject_enrollment_id_fkey(subject:subjects(name), child:profiles!subject_enrollments_child_id_fkey(name))"
+      "id, teacher_id, teacher:profiles!sessions_teacher_id_fkey(name), reservation:reservations!sessions_reservation_id_fkey!inner(id, starts_at, ends_at, status, google_sync_status, external_change_status), subject_enrollment:subject_enrollments!sessions_subject_enrollment_id_fkey(subject:subjects(name), child:profiles!subject_enrollments_child_id_fkey(name))"
     )
-    .order("id", { ascending: true });
+    .gte("reservation.starts_at", since)
+    .lte("reservation.starts_at", until)
+    .order("id", { ascending: true })
+    .limit(2000);
   if (error) throw new Error(error.message);
 
   function one<T>(rel: T | T[] | null | undefined): T | null {
@@ -209,6 +236,12 @@ export type IncidentReportAdminRow = {
 export async function listRecentIncidentReports(): Promise<IncidentReportAdminRow[]> {
   await requireAdminOrCapability(BOOKING_CAPABILITY);
   const admin = createAdminClient();
+  return loadRecentIncidentReports(admin);
+}
+
+async function loadRecentIncidentReports(
+  admin: ReturnType<typeof createAdminClient>
+): Promise<IncidentReportAdminRow[]> {
   const { data, error } = await admin
     .from("session_incident_reports")
     .select(
@@ -262,13 +295,21 @@ const EXTERNAL_CHANGE_STATUS_LABEL: Record<string, string> = {
 export async function listExternalCalendarChanges(): Promise<ExternalCalendarChangeRow[]> {
   await requireAdminOrCapability(BOOKING_CAPABILITY);
   const admin = createAdminClient();
+  return loadExternalCalendarChanges(admin);
+}
+
+async function loadExternalCalendarChanges(
+  admin: ReturnType<typeof createAdminClient>
+): Promise<ExternalCalendarChangeRow[]> {
   const { data, error } = await admin
     .from("reservations")
     .select(
       "id, starts_at, external_change_status, external_change_detected_at, external_change_detail, teacher:profiles!reservations_owner_profile_id_fkey(name)"
     )
     .neq("external_change_status", "none")
-    .order("external_change_detected_at", { ascending: true });
+    .order("external_change_detected_at", { ascending: true })
+    // 2026-09-10(P1-2) — 미래 데이터 증가 대비 상한.
+    .limit(200);
   if (error) throw new Error(error.message);
   return (data ?? []).map((r) => ({
     reservationId: r.id as string,
@@ -408,21 +449,68 @@ export async function resolveExternalChangeCancelDueToDeletion(params: { reserva
   await resolveExternalCalendarChange({ reservationId: params.reservationId, resolution: "confirmed_cancelled", reason: params.reason });
 }
 
-/** 관리자가 "지금 재처리"를 누를 때 재처리 워커와 함께 모든 선생님의 외부 변경도 한 번 대조한다. */
-export async function retryExternalCalendarReconciliationNow(): Promise<{ teachersChecked: number; changesDetected: number }> {
+export type TeacherReconciliationResult = {
+  teacherId: string;
+  teacherName: string | null;
+  checked: boolean;
+  changesDetected: number;
+  error: string | null;
+};
+
+// 2026-09-10(P1-2) — 한 번에 너무 많은 Google Calendar 호출을 동시에 내지 않도록
+// 청크 단위로 나눠 처리한다("bounded" — 무제한 동시 실행은 아님). 현재 교사 수
+// 기준으로는 사실상 한 청크로 끝나지만, 교사 수가 늘어도 상한이 있는 구조로 둔다.
+const RECONCILIATION_CONCURRENCY = 5;
+
+/**
+ * 관리자가 "지금 재처리"를 누를 때 모든 선생님의 외부 변경을 대조한다.
+ * 2026-09-10(P1-2) — 이전에는 `for`문으로 교사를 한 명씩 순차 처리해(N번의 순차
+ * Google API 왕복) 교사 수에 비례해 느려졌고, 개별 실패(`result.error`)는 집계
+ * 숫자에 묻혀 어떤 교사가 실패했는지 화면에서 알 수 없었다. 이제 청크 단위
+ * `Promise.allSettled`로 병렬 처리하고, 교사별 결과(성공/실패·사유)를 그대로
+ * 반환해 화면에서 실패한 교사를 특정할 수 있게 한다.
+ */
+export async function retryExternalCalendarReconciliationNow(): Promise<TeacherReconciliationResult[]> {
   await requireAdminOrCapability(BOOKING_CAPABILITY);
   const admin = createAdminClient();
-  const { data: teachers, error } = await admin.from("teachers").select("id").not("workspace_email", "is", null);
+  const { data: teachers, error } = await admin
+    .from("teachers")
+    .select("id, profile:profiles!teachers_id_fkey(name)")
+    .not("workspace_email", "is", null);
   if (error) throw new Error(error.message);
 
-  let teachersChecked = 0;
-  let changesDetected = 0;
-  for (const t of teachers ?? []) {
-    const result = await reconcileTeacherCalendarChanges(t.id as string);
-    if (result.checked) teachersChecked += 1;
-    changesDetected += result.changesDetected;
+  function one<T>(rel: T | T[] | null | undefined): T | null {
+    return Array.isArray(rel) ? (rel[0] ?? null) : (rel ?? null);
   }
-  return { teachersChecked, changesDetected };
+
+  const rows = teachers ?? [];
+  const results: TeacherReconciliationResult[] = [];
+  for (let i = 0; i < rows.length; i += RECONCILIATION_CONCURRENCY) {
+    const chunk = rows.slice(i, i + RECONCILIATION_CONCURRENCY);
+    const settled = await Promise.allSettled(chunk.map((t) => reconcileTeacherCalendarChanges(t.id as string)));
+    settled.forEach((outcome, idx) => {
+      const t = chunk[idx];
+      const teacherName = (one(t.profile as unknown) as { name?: string } | null)?.name ?? null;
+      if (outcome.status === "fulfilled") {
+        results.push({
+          teacherId: t.id as string,
+          teacherName,
+          checked: outcome.value.checked,
+          changesDetected: outcome.value.changesDetected,
+          error: outcome.value.error ?? null,
+        });
+      } else {
+        results.push({
+          teacherId: t.id as string,
+          teacherName,
+          checked: false,
+          changesDetected: 0,
+          error: outcome.reason instanceof Error ? outcome.reason.message : String(outcome.reason),
+        });
+      }
+    });
+  }
+  return results;
 }
 
 // =========================================================================
@@ -512,6 +600,12 @@ async function incidentReportCounts(admin: ReturnType<typeof createAdminClient>,
 export async function listSessionsNeedingFinalJudgment(): Promise<SessionJudgmentRow[]> {
   await requireAdminOrCapability(BOOKING_CAPABILITY);
   const admin = createAdminClient();
+  return loadSessionsNeedingFinalJudgment(admin);
+}
+
+async function loadSessionsNeedingFinalJudgment(
+  admin: ReturnType<typeof createAdminClient>
+): Promise<SessionJudgmentRow[]> {
   const { data, error } = await admin
     .from("sessions")
     .select(SESSION_JUDGMENT_SELECT)
@@ -537,6 +631,12 @@ export async function listSessionsNeedingFinalJudgment(): Promise<SessionJudgmen
 export async function listRecentlyFinalizedSessions(): Promise<SessionJudgmentRow[]> {
   await requireAdminOrCapability(BOOKING_CAPABILITY);
   const admin = createAdminClient();
+  return loadRecentlyFinalizedSessions(admin);
+}
+
+async function loadRecentlyFinalizedSessions(
+  admin: ReturnType<typeof createAdminClient>
+): Promise<SessionJudgmentRow[]> {
   const { data, error } = await admin
     .from("sessions")
     .select(SESSION_JUDGMENT_SELECT)
@@ -664,6 +764,12 @@ export type MakeupObligationRow = {
 export async function listOutstandingMakeupObligations(): Promise<MakeupObligationRow[]> {
   await requireAdminOrCapability(BOOKING_CAPABILITY);
   const admin = createAdminClient();
+  return loadOutstandingMakeupObligations(admin);
+}
+
+async function loadOutstandingMakeupObligations(
+  admin: ReturnType<typeof createAdminClient>
+): Promise<MakeupObligationRow[]> {
   const [{ data, error }, { data: balances, error: balanceError }] = await Promise.all([
     admin
       .from("makeup_obligations")
@@ -777,6 +883,12 @@ export type ReconciliationTaskRow = {
 export async function listSessionJudgmentReconciliationTasks(): Promise<ReconciliationTaskRow[]> {
   await requireAdminOrCapability(BOOKING_CAPABILITY);
   const admin = createAdminClient();
+  return loadSessionJudgmentReconciliationTasks(admin);
+}
+
+async function loadSessionJudgmentReconciliationTasks(
+  admin: ReturnType<typeof createAdminClient>
+): Promise<ReconciliationTaskRow[]> {
   const { data, error } = await admin
     .from("session_judgment_reconciliation_tasks")
     .select(
@@ -801,6 +913,60 @@ export async function listSessionJudgmentReconciliationTasks(): Promise<Reconcil
     reason: row.reason as string | null,
     adminDispositionReason: row.admin_disposition_reason as string | null,
   }));
+}
+
+export type BookingReconciliationDashboard = {
+  reconciliationNeeded: ReconciliationRow[];
+  outboxSummary: NotificationOutboxSummary[];
+  incidentReports: IncidentReportAdminRow[];
+  externalChanges: ExternalCalendarChangeRow[];
+  sessionsNeedingJudgment: SessionJudgmentRow[];
+  recentlyFinalized: SessionJudgmentRow[];
+  makeupObligations: MakeupObligationRow[];
+  reconciliationTasks: ReconciliationTaskRow[];
+};
+
+/**
+ * 2026-09-10(P1-2) — "예약 운영/Calendar 동기화 불일치" 화면이 마운트 시 이 8개를
+ * 각각 별도 서버 액션으로 호출하던 구조를 하나로 합친다. 인증(requireAdminOrCapability)도
+ * 이 함수 안에서 한 번만 수행하고 그 결과(admin 클라이언트)를 8개 조회에 그대로
+ * 재사용한다 — 8번의 개별 액션 호출이 각자 반복하던 인증 왕복을 1번으로 줄인다.
+ * (React cache()는 브라우저가 여러 서버 액션을 별도 HTTP 요청으로 호출하는 이상
+ * 요청 간 인증 중복을 없애지 못한다 — 이 함수처럼 애초에 한 요청 안에 다 묶는 것만
+ * 실질적인 해결책이다.)
+ */
+export async function loadBookingReconciliationDashboardAction(): Promise<BookingReconciliationDashboard> {
+  await requireAdminOrCapability(BOOKING_CAPABILITY);
+  const admin = createAdminClient();
+  const [
+    reconciliationNeeded,
+    outboxSummary,
+    incidentReports,
+    externalChanges,
+    sessionsNeedingJudgment,
+    recentlyFinalized,
+    makeupObligations,
+    reconciliationTasks,
+  ] = await Promise.all([
+    loadReconciliationNeededBookings(admin),
+    loadNotificationOutboxSummary(admin),
+    loadRecentIncidentReports(admin),
+    loadExternalCalendarChanges(admin),
+    loadSessionsNeedingFinalJudgment(admin),
+    loadRecentlyFinalizedSessions(admin),
+    loadOutstandingMakeupObligations(admin),
+    loadSessionJudgmentReconciliationTasks(admin),
+  ]);
+  return {
+    reconciliationNeeded,
+    outboxSummary,
+    incidentReports,
+    externalChanges,
+    sessionsNeedingJudgment,
+    recentlyFinalized,
+    makeupObligations,
+    reconciliationTasks,
+  };
 }
 
 /**

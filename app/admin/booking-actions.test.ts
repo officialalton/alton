@@ -16,10 +16,10 @@ vi.mock("@/lib/booking/calendar-sync", () => ({
   processPendingCalendarSyncs: () => processPendingCalendarSyncsMock(),
 }));
 
-const reservationsOrderMock = vi.fn();
+const reservationsLimitMock = vi.fn();
 const adminFromMock = vi.fn((table: string) => {
   if (table === "reservations") {
-    return { select: () => ({ in: () => ({ order: reservationsOrderMock }) }) };
+    return { select: () => ({ in: () => ({ order: () => ({ limit: reservationsLimitMock }) }) }) };
   }
   throw new Error(`unexpected table ${table}`);
 });
@@ -32,7 +32,7 @@ beforeEach(() => {
   confirmLessonBookingMock.mockResolvedValue({ reservationId: "r1", sessionId: "s1" });
   cancelLessonBookingMock.mockResolvedValue(undefined);
   processPendingCalendarSyncsMock.mockResolvedValue({ attempted: 2, succeeded: 1, failed: 1, reconciliationNeeded: 0, skippedRace: 0 });
-  reservationsOrderMock.mockResolvedValue({
+  reservationsLimitMock.mockResolvedValue({
     data: [
       {
         id: "r1", owner_profile_id: "t1", starts_at: "2026-10-10T19:00:00Z",

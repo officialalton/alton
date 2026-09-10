@@ -10,12 +10,10 @@ import {
   listInquiryThreadsForAdmin,
   sendAdminHouseholdMessage,
   resolveHouseholdInquiryThread,
-  listMeetingRequestsForAdmin,
+  loadMeetingOperationsDashboardAction,
   updateMeetingRequestStatus,
-  listMeetingAvailabilityRules,
   addMeetingAvailabilityRule,
   deactivateMeetingAvailabilityRule,
-  listMeetingAvailabilityExceptions,
   addMeetingAvailabilityException,
   removeMeetingAvailabilityException,
   type AdminInquiryThread,
@@ -149,9 +147,12 @@ function MeetingOperations() {
   const [exceptionFormOpen, setExceptionFormOpen] = useState(false);
   const [exceptionDate, setExceptionDate] = useState("");
 
+  // 2026-09-10(P1-2) — 3개 서버 액션(면담 요청·가용 규칙·예외일)을 각각 호출하던
+  // 것을 loadMeetingOperationsDashboardAction() 하나로 합쳤다. 인증도 그 안에서
+  // 한 번만 수행된다.
   function load() {
-    Promise.all([listMeetingRequestsForAdmin(), listMeetingAvailabilityRules(), listMeetingAvailabilityExceptions()])
-      .then(([m, r, e]) => { setMeetings(m); setRules(r); setExceptions(e); })
+    loadMeetingOperationsDashboardAction()
+      .then((d) => { setMeetings(d.requests); setRules(d.rules); setExceptions(d.exceptions); })
       .catch((e) => setError(e instanceof Error ? e.message : "불러오기에 실패했습니다."));
   }
   useEffect(() => { load(); }, []);
