@@ -23,23 +23,28 @@ import type { CanvasStroke } from "./material-data";
 import type { StrokePayload } from "./annotation-events-types";
 import ProblemLogTab from "./ProblemLogTab";
 import type { ProblemLogEntry } from "./problemlog-data";
+import { finalizeMyLessonSession } from "@/app/teacher/lesson-schedule-actions";
 
 // R9(Task 4) — 세션 중 신규 문제 생성 탭("문제 생성")은 여기서 제거됐다.
 // AI 문제 생성은 이제 관리자 콘텐츠 에디터(app/admin/CurriculumDocEditor.tsx)
 // 전용 화면이며 검수·공개된 문제만 이 세션뷰의 과제/문제 기록 탭에 나타난다
 // (docs/superpowers/specs/2026-09-07-curriculum-content-session-design.md §7).
+//
+// 2026-09-10(UI/UX 정리 1차) — 탭 순서를 수업 중 실제 사용 순서로 재배치
+// (교재 설명 → 화이트보드 필기 → 단어 확인 → 즉석 문제 → 끝나고 과제 확인).
+// 아직 구현되지 않은 "보충 자료" 탭은 노출하지 않는다(백엔드 준비되면 다시 추가).
 const TABS = [
   { id: "material", label: "교재", teacherOnly: false },
-  { id: "homework", label: "과제", teacherOnly: false },
-  { id: "log", label: "문제 기록", teacherOnly: false },
-  { id: "vocab", label: "단어장", teacherOnly: false },
   { id: "docs", label: "연습장", teacherOnly: false },
-  { id: "files", label: "보충 자료", teacherOnly: false },
+  { id: "vocab", label: "단어장", teacherOnly: false },
+  { id: "log", label: "문제 기록", teacherOnly: false },
+  { id: "homework", label: "과제", teacherOnly: false },
 ] as const;
 
 type TabId = (typeof TABS)[number]["id"];
 
-const DEFAULT_TAB: TabId = "homework";
+// 2026-09-10(UI/UX 정리 1차): 수업에 들어오면 가장 먼저 펼치는 화면은 교재다.
+const DEFAULT_TAB: TabId = "material";
 
 const VIEWER_LABEL: Record<SessionViewViewer, string> = {
   student: "학생",
@@ -130,6 +135,9 @@ export default function SessionShell({
   const [state, setState] = useState(initialState);
   const [tipsVisible, setTipsVisible] = useState(true);
   const [homeworkList, setHomeworkList] = useState(homeworkItems);
+  const [showEndLessonConfirm, setShowEndLessonConfirm] = useState(false);
+  const [endingLesson, setEndingLesson] = useState(false);
+  const [endLessonError, setEndLessonError] = useState<string | null>(null);
 
   // 상태(prep/live/completed)를 주기적으로 재계산 — 시작/종료 시각이 지나면
   // 새로고침 없이도 상태바가 자동으로 전환되게 한다.
@@ -144,6 +152,52 @@ export default function SessionShell({
   function selectTab(tabId: TabId) {
     setActiveTab(tabId);
     router.replace(`?tab=${tabId}`, { scroll: false });
+  }
+
+  // 2026-09-10(UI/UX 정리 1차) — 세션뷰 안에서도 수업을 종료할 수 있게 한다.
+  // 학생명·종료 시각을 보여주는 확인 모달을 거친 뒤, 기존 종료 로직
+  // (TeacherLessonScheduleTab.tsx::handleFinalizeSession과 동일한 outcome/
+  // reason/조기종료 재시도 패턴)을 그대로 재사용한다 — 새 종료 로직을 만들지
+  // 않는다.
+  async function handleConfirmEndLesson() {
+    setEndingLesson(true);
+    setEndLessonError(null);
+    try {
+      const result = await finalizeMyLessonSession({
+        sessionId,
+        outcome: "completed",
+        reason: "선생님 수업 종료",
+      });
+      if (!result.ok) {
+        if (result.error.includes("조기 종료 사유가 필요합니다")) {
+          const confirmed = window.confirm(
+            "예약 종료 시각이 아직 되지 않았습니다. 학생 사유(조퇴 등)로 지금 완료 처리하시겠습니까?\n\n선생님 귀책으로 일찍 끝난 경우 '수업 일정' 탭의 '지각 당일 연장'을, 회사·Meet 장애인 경우 관리자에게 장애 판정을 요청해주세요."
+          );
+          if (confirmed) {
+            const retryResult = await finalizeMyLessonSession({
+              sessionId,
+              outcome: "completed",
+              reason: "학생 사유 조기 종료",
+              earlyEndReason: "student_reason",
+            });
+            if (!retryResult.ok) {
+              setEndLessonError(retryResult.error);
+              return;
+            }
+          } else {
+            return;
+          }
+        } else {
+          setEndLessonError(result.error);
+          return;
+        }
+      }
+      setShowEndLessonConfirm(false);
+      setState("completed");
+      router.refresh();
+    } finally {
+      setEndingLesson(false);
+    }
   }
 
   const scheduledLabel = useMemo(
@@ -210,13 +264,42 @@ export default function SessionShell({
         viewerRole={viewerRole}
         scheduledLabel={scheduledLabel}
         endLabel={endLabel}
+        onRequestEndLesson={() => setShowEndLessonConfirm(true)}
       />
+
+      {showEndLessonConfirm && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
+          <div className="bg-white rounded-xl px-6 py-5 max-w-[360px] w-full">
+            <div className="text-[15px] font-bold text-ink mb-2">수업을 종료할까요?</div>
+            <p className="text-[13px] text-grey-500 mb-4">
+              {studentName} 학생과의 수업을 지금({formatKoreanTime(new Date())}) 종료 처리합니다.
+              종료 후에는 이 수업을 다시 진행 중 상태로 되돌릴 수 없습니다.
+            </p>
+            {endLessonError && <p className="text-[12px] text-red mb-3">{endLessonError}</p>}
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={() => setShowEndLessonConfirm(false)}
+                disabled={endingLesson}
+                className="text-[13px] font-semibold text-grey-500 px-3 py-2 disabled:opacity-50"
+              >
+                취소
+              </button>
+              <button
+                onClick={handleConfirmEndLesson}
+                disabled={endingLesson}
+                className="text-[13px] font-bold text-white bg-ink px-4 py-2 rounded-lg disabled:opacity-50"
+              >
+                {endingLesson ? "종료 처리 중..." : "수업 종료"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {!writesEnabled && (
         <div className="px-6 py-2 text-[12.5px] text-amber-800 bg-amber-50 border-b border-amber-200">
-          이 수업은 새 예약 시스템(v3) 세션입니다 — 과제·단어장 저장은 다음
-          라운드에서 지원됩니다. 화이트보드는 사용 가능하며, 그 외에는 배정된
-          교재 열람만 가능합니다.
+          이 수업에서는 화이트보드만 저장할 수 있어요. 교재·과제·단어장은
+          열람만 가능합니다.
         </div>
       )}
       {activeTab === "material" ? (
@@ -255,12 +338,8 @@ export default function SessionShell({
           initialAnnotationStrokes={initialAnnotationStrokes}
           currentUserId={currentUserId}
         />
-      ) : activeTab === "log" ? (
-        <ProblemLogTab initialEntries={problemLog} viewerRole={contentViewerRole} />
       ) : (
-        <div className="p-8 text-[14px] text-grey-500">
-          {validTabs.find((t) => t.id === activeTab)?.label} 탭은 준비 중입니다.
-        </div>
+        <ProblemLogTab initialEntries={problemLog} viewerRole={contentViewerRole} />
       )}
     </div>
   );
@@ -271,11 +350,13 @@ function StatusBar({
   viewerRole,
   scheduledLabel,
   endLabel,
+  onRequestEndLesson,
 }: {
   state: SessionViewState;
   viewerRole: SessionViewViewer;
   scheduledLabel: string | null;
   endLabel: string | null;
+  onRequestEndLesson: () => void;
 }) {
   if (state === "live") {
     return (
@@ -297,11 +378,10 @@ function StatusBar({
           )}
           {viewerRole === "teacher" && (
             <button
-              disabled
-              title="이 화면은 아직 실제 예약 시스템과 연결되지 않았습니다(R8에서 연결 예정) — 실제 수업 종료는 '수업 일정' 탭에서 처리하세요."
-              className="bg-grey-200 text-grey-500 font-bold text-[13px] px-4 py-1.5 rounded-md cursor-not-allowed"
+              onClick={onRequestEndLesson}
+              className="bg-ink text-white font-bold text-[13px] px-4 py-1.5 rounded-md"
             >
-              수업 종료(R8 연결 예정)
+              수업 종료
             </button>
           )}
         </span>

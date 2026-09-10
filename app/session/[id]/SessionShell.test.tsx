@@ -1,9 +1,15 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import SessionShell from "./SessionShell";
+import { finalizeMyLessonSession } from "@/app/teacher/lesson-schedule-actions";
 
+const refreshMock = vi.fn();
 vi.mock("next/navigation", () => ({
-  useRouter: () => ({ push: vi.fn(), replace: vi.fn() }),
+  useRouter: () => ({ push: vi.fn(), replace: vi.fn(), refresh: refreshMock }),
+}));
+
+vi.mock("@/app/teacher/lesson-schedule-actions", () => ({
+  finalizeMyLessonSession: vi.fn(),
 }));
 
 vi.mock("./actions", () => ({
@@ -108,7 +114,8 @@ describe("SessionShell — 세션 상태바", () => {
     expect(screen.queryByText(/수업 종료/)).not.toBeInTheDocument();
   });
 
-  it("2026-09-06: live 상태에서 선생님에게 보이는 수업 종료 버튼은 R8 연결 전까지 비활성 상태다(실제 처리 버튼처럼 보이지 않아야 함)", () => {
+  it("2026-09-10(UI/UX 정리 1차): live 상태에서 선생님이 '수업 종료'를 누르면 학생명·종료 시각을 보여주는 확인 모달이 뜨고, 확인해야만 기존 종료 로직이 호출된다", async () => {
+    vi.mocked(finalizeMyLessonSession).mockResolvedValue({ ok: true });
     render(
       <SessionShell
         {...baseProps}
@@ -119,12 +126,24 @@ describe("SessionShell — 세션 상태바", () => {
         durationMinutes={30}
       />
     );
-    const button = screen.getByText("수업 종료(R8 연결 예정)");
-    expect(button).toBeInTheDocument();
-    expect(button).toBeDisabled();
-    expect(
-      screen.queryByText("선생님이 안 보이시나요? (노쇼 알림)")
-    ).not.toBeInTheDocument();
+    const openButton = screen.getByRole("button", { name: "수업 종료" });
+    expect(openButton).not.toBeDisabled();
+    fireEvent.click(openButton);
+
+    // 확인 모달에 학생명이 표시된다 — 아직 finalize는 호출되지 않는다.
+    expect(screen.getByText(/수업을 종료할까요\?/)).toBeInTheDocument();
+    expect(screen.getByText(new RegExp(`${baseProps.studentName} 학생과의 수업을`))).toBeInTheDocument();
+    expect(finalizeMyLessonSession).not.toHaveBeenCalled();
+
+    const confirmButtons = screen.getAllByRole("button", { name: "수업 종료" });
+    fireEvent.click(confirmButtons[confirmButtons.length - 1]);
+    await waitFor(() =>
+      expect(finalizeMyLessonSession).toHaveBeenCalledWith({
+        sessionId: baseProps.sessionId,
+        outcome: "completed",
+        reason: "선생님 수업 종료",
+      })
+    );
   });
 
   it("completed 상태에서는 완료 배지를 보여준다", () => {
@@ -189,7 +208,7 @@ describe("SessionShell — 탭 노출", () => {
     expect(screen.getByText("연습장")).toBeInTheDocument();
   });
 
-  it("기본 활성 탭은 과제다", () => {
+  it("2026-09-10(UI/UX 정리 1차): 기본 활성 탭은 교재다", () => {
     render(
       <SessionShell
         {...baseProps}
@@ -200,8 +219,6 @@ describe("SessionShell — 탭 노출", () => {
         durationMinutes={30}
       />
     );
-    expect(
-      screen.getByRole("heading", { name: "과제" })
-    ).toBeInTheDocument();
+    expect(screen.getByText("이 세션에는 아직 배정된 교재가 없습니다.")).toBeInTheDocument();
   });
 });
