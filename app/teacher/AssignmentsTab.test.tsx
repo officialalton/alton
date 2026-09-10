@@ -112,7 +112,7 @@ describe("AssignmentsTab — M3 배정 종료 요청/과거 이력", () => {
     expect(screen.queryByText("커리큘럼 보기")).not.toBeInTheDocument();
     // v3 전용이어도 "운영 커리큘럼 관리"는 항상 정확히 연결돼야 한다.
     fireEvent.click(screen.getByText("운영 커리큘럼 관리"));
-    expect(onOpenOperatingCurriculum).toHaveBeenCalledWith("se1", "sub1");
+    expect(onOpenOperatingCurriculum).toHaveBeenCalledWith("se1", "sub1", "김학생", "SAT Math");
   });
 
   it("R9 Task 3 UI 배선 — '운영 커리큘럼 관리' 진입 버튼은 subjectEnrollmentId·subjectId로 콜백을 호출한다", () => {
@@ -126,7 +126,7 @@ describe("AssignmentsTab — M3 배정 종료 요청/과거 이력", () => {
     );
 
     fireEvent.click(screen.getByText("운영 커리큘럼 관리"));
-    expect(onOpenOperatingCurriculum).toHaveBeenCalledWith("se1", "sub1");
+    expect(onOpenOperatingCurriculum).toHaveBeenCalledWith("se1", "sub1", "김학생", "SAT Math");
   });
 
   it("onOpenOperatingCurriculum이 없으면 '운영 커리큘럼 관리' 버튼이 보이지 않는다", () => {

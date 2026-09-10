@@ -141,12 +141,11 @@ describe("SubjectTemplateTab", () => {
 
   it("2026-09-09(UAT 지적, 제품 오너 승인): 과목 키워드를 추가하면 사전에 반영되고, 회차에 태그·해제할 수 있다", async () => {
     vi.mocked(actions.createSubjectKeyword).mockResolvedValue({
-      id: "kw1",
-      label: "이차방정식",
-      status: "active",
+      ok: true,
+      value: { id: "kw1", label: "이차방정식", status: "active" },
     });
-    vi.mocked(actions.assignUnitKeyword).mockResolvedValue(undefined);
-    vi.mocked(actions.removeUnitKeyword).mockResolvedValue(undefined);
+    vi.mocked(actions.assignUnitKeyword).mockResolvedValue({ ok: true });
+    vi.mocked(actions.removeUnitKeyword).mockResolvedValue({ ok: true });
     render(<Wrapper initialSubjects={[satMath]} />);
     fireEvent.click(screen.getByText("편집"));
 
@@ -165,5 +164,23 @@ describe("SubjectTemplateTab", () => {
 
     fireEvent.click(tagButtons[0]);
     await waitFor(() => expect(actions.removeUnitKeyword).toHaveBeenCalledWith("u1", "kw1"));
+  });
+
+  it("2026-09-10(P0-2) — 키워드 추가 실패는 { ok:false, error } 문구만 안내하고 던지지 않는다(Minified React error #441 마스킹 버그 재발 방지)", async () => {
+    vi.mocked(actions.createSubjectKeyword).mockResolvedValue({
+      ok: false,
+      error: "이미 존재하는 키워드입니다.",
+    });
+    render(<Wrapper initialSubjects={[satMath]} />);
+    fireEvent.click(screen.getByText("편집"));
+
+    fireEvent.change(screen.getByPlaceholderText("새 키워드 (예: 이차방정식)"), {
+      target: { value: "중복키워드" },
+    });
+    fireEvent.click(screen.getByText("추가"));
+
+    await waitFor(() => expect(screen.getByText("이미 존재하는 키워드입니다.")).toBeInTheDocument());
+    // 새로 만든 값이 화면 상태(사전)에는 반영되지 않아야 한다 — DB/화면 불일치 방지.
+    expect(screen.queryByText("중복키워드")).not.toBeInTheDocument();
   });
 });

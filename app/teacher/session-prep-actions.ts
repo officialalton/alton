@@ -64,6 +64,15 @@ function translateError(error: { code?: string; message: string }): never {
   throw new Error(error.message);
 }
 
+// 2026-09-10(P0-2) — translateError()와 같은 메시지 매핑이지만 throw하지
+// 않는다(위 setSelectionActiveKeywords()가 { ok, error } 반환 방식으로
+// 바뀌면서 필요해짐 — 이 파일의 다른 함수들은 이번 수정 범위 밖이라 여전히
+// translateError()를 그대로 쓴다).
+function translateErrorMessage(error: { code?: string; message: string }): string {
+  if (error.code === "23505") return "이미 존재하거나 중복된 항목입니다.";
+  return error.message;
+}
+
 export async function loadHeldSelectionsForEnrollment(
   subjectEnrollmentId: string
 ): Promise<PreparedSelection[]> {
@@ -142,19 +151,35 @@ export async function removeUnitFromSelection(
 // 활성 키워드 부분집합 재설정 — delete-then-insert(student-curriculum-actions.ts
 // setActiveKeywords와 동일 패턴). 부분집합 검증(오버레이 단원의 키워드인지)은
 // INSERT 트리거가 한다.
+export type SetKeywordsResult = { ok: true } | { ok: false; error: string };
+
+// 2026-09-10(P0-2) — Minified React error #441 마스킹 버그: 이 함수가 검증
+// 실패를 throw했는데, Next.js가 production에서 Server Action의 미처리 예외를
+// 이 일반화된 문구로 마스킹해 "세션 준비" 화면에 그대로 노출시켰다(dev에서는
+// 실제 메시지가 보여 재현이 늦었다 — app/teacher/lesson-schedule-actions.ts의
+// 2026-09-06 동일 사례와 같은 원인). 항상 { ok, error }로 반환해 예외를
+// 전파하지 않는다.
 export async function setSelectionActiveKeywords(
   preparedSelectionId: string,
   preparedSelectionUnitId: string,
   keywordIds: string[]
-): Promise<void> {
-  const { supabase } = await requireOwningTeacherOrAdmin(preparedSelectionId);
+): Promise<SetKeywordsResult> {
+  let supabase: Awaited<ReturnType<typeof requireOwningTeacherOrAdmin>>["supabase"];
+  try {
+    ({ supabase } = await requireOwningTeacherOrAdmin(preparedSelectionId));
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "권한을 확인할 수 없습니다." };
+  }
+
   const { error: deleteError } = await supabase
     .from("session_prepared_selection_unit_keywords")
     .delete()
     .eq("prepared_selection_unit_id", preparedSelectionUnitId);
-  if (deleteError) translateError(deleteError);
+  if (deleteError) {
+    return { ok: false, error: translateErrorMessage(deleteError) };
+  }
 
-  if (keywordIds.length === 0) return;
+  if (keywordIds.length === 0) return { ok: true };
   const { error: insertError } = await supabase
     .from("session_prepared_selection_unit_keywords")
     .insert(
@@ -163,7 +188,10 @@ export async function setSelectionActiveKeywords(
         keyword_id: keywordId,
       }))
     );
-  if (insertError) translateError(insertError);
+  if (insertError) {
+    return { ok: false, error: translateErrorMessage(insertError) };
+  }
+  return { ok: true };
 }
 
 async function nextContentItemPosition(

@@ -176,7 +176,7 @@ describe("CurriculumTab", () => {
     render(
       <CurriculumTab
         {...baseProps}
-        operatingCurriculumJumpTo={{ subjectEnrollmentId: "se1", subjectId: "sub1" }}
+        operatingCurriculumJumpTo={{ subjectEnrollmentId: "se1", subjectId: "sub1", studentName: "지훈", subjectName: "SAT Math" }}
         onOperatingCurriculumJumpConsumed={onOperatingCurriculumJumpConsumed}
       />
     );
@@ -194,7 +194,7 @@ describe("CurriculumTab", () => {
     render(
       <CurriculumTab
         {...baseProps}
-        operatingCurriculumJumpTo={{ subjectEnrollmentId: "se-not-mine", subjectId: "sub1" }}
+        operatingCurriculumJumpTo={{ subjectEnrollmentId: "se-not-mine", subjectId: "sub1", studentName: "지훈", subjectName: "SAT Math" }}
       />
     );
 

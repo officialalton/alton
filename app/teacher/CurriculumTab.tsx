@@ -18,8 +18,8 @@ type SubView =
   | { type: "list" }
   | { type: "curriculum"; enrollmentId: string }
   | { type: "review"; sessionId: string }
-  | { type: "operating-curriculum"; subjectEnrollmentId: string; subjectId: string }
-  | { type: "session-prep"; subjectEnrollmentId: string; subjectId: string };
+  | { type: "operating-curriculum"; subjectEnrollmentId: string; subjectId: string; studentName: string; subjectName: string }
+  | { type: "session-prep"; subjectEnrollmentId: string; subjectId: string; studentName: string; subjectName: string };
 
 export default function CurriculumTab({
   mySubjects,
@@ -41,7 +41,12 @@ export default function CurriculumTab({
   studentFeedback: Record<string, StudentFeedback>;
   jumpTo: { studentId: string; subjectId: string } | null;
   onJumpConsumed: () => void;
-  operatingCurriculumJumpTo?: { subjectEnrollmentId: string; subjectId: string } | null;
+  operatingCurriculumJumpTo?: {
+    subjectEnrollmentId: string;
+    subjectId: string;
+    studentName: string;
+    subjectName: string;
+  } | null;
   onOperatingCurriculumJumpConsumed?: () => void;
 }) {
   const [subtab, setSubtab] = useState<"mine" | "students">("mine");
@@ -77,10 +82,10 @@ export default function CurriculumTab({
       <StudentCurriculumOperatingView
         subjectEnrollmentId={subView.subjectEnrollmentId}
         subjectId={subView.subjectId}
+        studentName={subView.studentName}
+        subjectName={subView.subjectName}
         onBack={() => setSubView({ type: "list" })}
-        onOpenSessionPrep={() =>
-          setSubView({ type: "session-prep", subjectEnrollmentId: subView.subjectEnrollmentId, subjectId: subView.subjectId })
-        }
+        onOpenSessionPrep={() => setSubView({ ...subView, type: "session-prep" })}
       />
     );
   }
@@ -90,9 +95,9 @@ export default function CurriculumTab({
       <SessionPrepView
         subjectEnrollmentId={subView.subjectEnrollmentId}
         subjectId={subView.subjectId}
-        onBack={() =>
-          setSubView({ type: "operating-curriculum", subjectEnrollmentId: subView.subjectEnrollmentId, subjectId: subView.subjectId })
-        }
+        studentName={subView.studentName}
+        subjectName={subView.subjectName}
+        onBack={() => setSubView({ ...subView, type: "operating-curriculum" })}
       />
     );
   }
@@ -161,6 +166,11 @@ export default function CurriculumTab({
                   type: "operating-curriculum",
                   subjectEnrollmentId: subject.enrollmentId,
                   subjectId: subject.subjectId,
+                  // 2026-09-10(P0-2) — "세션 준비"까지 이어지는 화면에서 "이번
+                  // 수업"이 어느 학생 것인지 식별할 수 있게 이름을 함께 들고 간다.
+                  studentName:
+                    students.find((s) => s.studentId === selectedStudentId)?.studentName ?? "",
+                  subjectName: subject.subjectName,
                 })
               : setSubView({ type: "curriculum", enrollmentId: subject.enrollmentId })
           }
@@ -179,11 +189,15 @@ export default function CurriculumTab({
 function StudentCurriculumOperatingView({
   subjectEnrollmentId,
   subjectId,
+  studentName,
+  subjectName,
   onBack,
   onOpenSessionPrep,
 }: {
   subjectEnrollmentId: string;
   subjectId: string;
+  studentName: string;
+  subjectName: string;
   onBack: () => void;
   onOpenSessionPrep: () => void;
 }) {
@@ -225,6 +239,11 @@ function StudentCurriculumOperatingView({
           </button>
         )}
       </div>
+      {/* 2026-09-10(P0-2) — "이 세션"이 어느 학생·과목인지 화면 상단에서 바로
+          알 수 있게 표시(내부 용어 대신 식별 정보). */}
+      <div className="px-6 text-[12px] text-grey-500 font-semibold mt-1">
+        {studentName} 학생 · {subjectName}
+      </div>
       {state.status === "loading" && (
         <div className="px-6 py-8 text-[13px] text-grey-500">불러오는 중...</div>
       )}
@@ -253,10 +272,14 @@ function StudentCurriculumOperatingView({
 function SessionPrepView({
   subjectEnrollmentId,
   subjectId,
+  studentName,
+  subjectName,
   onBack,
 }: {
   subjectEnrollmentId: string;
   subjectId: string;
+  studentName: string;
+  subjectName: string;
   onBack: () => void;
 }) {
   const [state, setState] = useState<
@@ -294,6 +317,8 @@ function SessionPrepView({
       overlayUnits={state.initial.units}
       keywords={state.library.keywords}
       sessionId={null}
+      studentName={studentName}
+      subjectName={subjectName}
       onBack={onBack}
     />
   );

@@ -187,40 +187,41 @@ function SubjectDetailEditor({
     const label = newKeyword.trim();
     if (!label) return;
     setKeywordError(null);
-    try {
-      const created = await createSubjectKeyword(subject.subjectId, label);
-      const next = [...keywords, created].sort((a, b) => a.label.localeCompare(b.label));
-      setKeywords(next);
-      onKeywordsChange(next);
-      setNewKeyword("");
-    } catch (e) {
-      setKeywordError(e instanceof Error ? e.message : "키워드 추가에 실패했습니다.");
+    // 2026-09-10(P0-2) — createSubjectKeyword()가 이제 던지지 않고 { ok, error }를
+    // 반환한다(Minified React error #441 마스킹 버그 수정 — production에서 서버
+    // 액션이 throw하면 이 화면에 그 마스킹된 문구가 그대로 노출됐다).
+    const result = await createSubjectKeyword(subject.subjectId, label);
+    if (!result.ok) {
+      setKeywordError(result.error);
+      return;
     }
+    const next = [...keywords, result.value].sort((a, b) => a.label.localeCompare(b.label));
+    setKeywords(next);
+    onKeywordsChange(next);
+    setNewKeyword("");
   }
 
   async function handleToggleUnitKeyword(unitId: string, keywordId: string, currentlyTagged: boolean) {
     setKeywordError(null);
-    try {
-      if (currentlyTagged) {
-        await removeUnitKeyword(unitId, keywordId);
-      } else {
-        await assignUnitKeyword(unitId, keywordId);
-      }
-      commit(
-        units.map((u) =>
-          u.id === unitId
-            ? {
-                ...u,
-                keywordIds: currentlyTagged
-                  ? (u.keywordIds ?? []).filter((id) => id !== keywordId)
-                  : [...(u.keywordIds ?? []), keywordId],
-              }
-            : u
-        )
-      );
-    } catch (e) {
-      setKeywordError(e instanceof Error ? e.message : "키워드 태그 변경에 실패했습니다.");
+    const result = currentlyTagged
+      ? await removeUnitKeyword(unitId, keywordId)
+      : await assignUnitKeyword(unitId, keywordId);
+    if (!result.ok) {
+      setKeywordError(result.error);
+      return;
     }
+    commit(
+      units.map((u) =>
+        u.id === unitId
+          ? {
+              ...u,
+              keywordIds: currentlyTagged
+                ? (u.keywordIds ?? []).filter((id) => id !== keywordId)
+                : [...(u.keywordIds ?? []), keywordId],
+            }
+          : u
+      )
+    );
   }
 
   async function handleRename(name: string) {

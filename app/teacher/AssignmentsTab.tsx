@@ -174,7 +174,12 @@ export default function AssignmentsTab({
   current: TeacherAssignedSubject[];
   past: TeacherAssignedSubject[];
   onOpenCurriculum?: (studentId: string, subjectId: string) => void;
-  onOpenOperatingCurriculum?: (subjectEnrollmentId: string, subjectId: string) => void;
+  onOpenOperatingCurriculum?: (
+    subjectEnrollmentId: string,
+    subjectId: string,
+    studentName: string,
+    subjectName: string
+  ) => void;
 }) {
   return (
     <div className="max-w-[640px] px-8 py-8">
@@ -231,7 +236,9 @@ export default function AssignmentsTab({
                 )}
                 {onOpenOperatingCurriculum && (
                   <button
-                    onClick={() => onOpenOperatingCurriculum(a.subjectEnrollmentId, a.subjectId)}
+                    onClick={() =>
+                      onOpenOperatingCurriculum(a.subjectEnrollmentId, a.subjectId, a.studentName, a.subjectName)
+                    }
                     className="text-[12px] font-semibold px-3 py-1.5 rounded-full bg-grey-100 text-ink"
                   >
                     운영 커리큘럼 관리

@@ -28,12 +28,20 @@ export default function SessionPrepPanel({
   overlayUnits,
   keywords,
   sessionId,
+  studentName,
+  subjectName,
   onBack,
 }: {
   subjectEnrollmentId: string;
   overlayUnits: OverlayUnit[];
   keywords: LibraryKeyword[];
   sessionId: string | null;
+  // 2026-09-10(P0-2) — "이 세션"이 내부 id일 뿐 어느 학생·수업인지 화면에
+  // 식별되지 않는다는 지적 반영. 지금은 특정 예정 수업(일시)까지 연결되지
+  // 않아(sessionId가 항상 null인 진입 경로, P2-4에서 실제 세션 연결 예정)
+  // 학생·과목까지만 표시한다.
+  studentName: string;
+  subjectName: string;
   onBack: () => void;
 }) {
   const [selection, setSelection] = useState<PreparedSelection | null>(null);
@@ -127,17 +135,21 @@ export default function SessionPrepPanel({
     const nextKeywordIds = unit.keywordIds.includes(keywordId)
       ? unit.keywordIds.filter((id) => id !== keywordId)
       : [...unit.keywordIds, keywordId];
-    try {
-      await setSelectionActiveKeywords(selection.id, preparedSelectionUnitId, nextKeywordIds);
-      setSelection((prev) =>
-        prev
-          ? { ...prev, units: prev.units.map((u) => (u.id === preparedSelectionUnitId ? { ...u, keywordIds: nextKeywordIds } : u)) }
-          : prev
-      );
-      await refresh(selection.id);
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "키워드 변경에 실패했습니다.");
+    // 2026-09-10(P0-2) — setSelectionActiveKeywords()가 이제 던지지 않고
+    // { ok, error }를 반환한다(Minified React error #441 마스킹 버그 수정 —
+    // production에서 서버 액션이 throw하면 이 화면에 그 마스킹된 문구가 그대로
+    // 노출됐다).
+    const result = await setSelectionActiveKeywords(selection.id, preparedSelectionUnitId, nextKeywordIds);
+    if (!result.ok) {
+      setError(result.error);
+      return;
     }
+    setSelection((prev) =>
+      prev
+        ? { ...prev, units: prev.units.map((u) => (u.id === preparedSelectionUnitId ? { ...u, keywordIds: nextKeywordIds } : u)) }
+        : prev
+    );
+    await refresh(selection.id);
   }
 
   async function handlePick(preparedSelectionUnitId: string, contentType: "material_section" | "problem", contentId: string) {
@@ -200,6 +212,10 @@ export default function SessionPrepPanel({
         ← 뒤로
       </button>
       <h2 className="text-[16px] font-extrabold text-ink mb-1">세션 준비</h2>
+      {/* 2026-09-10(P0-2) — "이번 수업"을 학생·과목으로 식별해 상단에 표시 */}
+      <div className="text-[12px] text-grey-500 font-semibold mb-2">
+        {studentName} 학생 · {subjectName}
+      </div>
       <p className="text-[12.5px] text-grey-500 mb-4">
         확정할 회차와 키워드를 고르면 그 키워드로 검색되는 공개 교재·문제
         후보가 아래에 뜹니다. 실제로 이 세션에 쓸 자료는 직접 골라야만
@@ -226,9 +242,16 @@ export default function SessionPrepPanel({
 
       {selection && (
         <>
-          <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2">
-            이 세션에 포함할 회차
+          <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-1">
+            이번 수업에 포함할 회차
           </div>
+          {/* 2026-09-10(P0-2) — "포함할 회차"가 무슨 뜻인지(이번 수업에서
+              참조할 커리큘럼 회차) 짧게 안내. P2-4에서 키워드 자동 구성으로
+              바뀌면 이 문구·흐름도 그 정책에 맞게 다시 정리한다. */}
+          <p className="text-[11px] text-grey-400 mb-2">
+            이번 수업에서 다룰 커리큘럼 회차를 고르세요 — 고른 회차의 키워드로
+            아래 교재·문제 후보가 검색됩니다.
+          </p>
           <div className="flex flex-wrap gap-1.5 mb-4">
             {overlayUnits.map((u) => {
               const included = selection.units.some((su) => su.overlayUnitId === u.id);

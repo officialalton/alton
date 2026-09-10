@@ -107,6 +107,8 @@ export default function TeacherShell({
   const [operatingCurriculumJump, setOperatingCurriculumJump] = useState<{
     subjectEnrollmentId: string;
     subjectId: string;
+    studentName: string;
+    subjectName: string;
   } | null>(null);
 
   // 2026-09-10(P0-3 2차) — 공용 포털 내비게이션 결함: activeTab이 마운트
@@ -131,8 +133,13 @@ export default function TeacherShell({
     selectTab("curriculum");
   }
 
-  function openOperatingCurriculumFromAssignment(subjectEnrollmentId: string, subjectId: string) {
-    setOperatingCurriculumJump({ subjectEnrollmentId, subjectId });
+  function openOperatingCurriculumFromAssignment(
+    subjectEnrollmentId: string,
+    subjectId: string,
+    studentName: string,
+    subjectName: string
+  ) {
+    setOperatingCurriculumJump({ subjectEnrollmentId, subjectId, studentName, subjectName });
     selectTab("curriculum");
   }
 

@@ -41,25 +41,28 @@ vi.mock("@/utils/supabase/server", () => ({
 import { assignUnitKeyword } from "./subject-actions";
 
 describe("assignUnitKeyword", () => {
+  // 2026-09-10(P0-2) — Minified React error #441 마스킹 버그 수정으로
+  // assignUnitKeyword()가 이제 던지지 않고 { ok, error }를 반환한다.
   it("단원과 키워드의 과목이 다르면 거부한다(교차 과목 태깅 방지)", async () => {
     state.unit = { subject_id: "sub-math" };
     state.keyword = { subject_id: "sub-rw" };
-    await expect(assignUnitKeyword("unit1", "kw1")).rejects.toThrow(
-      "단원과 키워드는 같은 과목이어야 합니다."
-    );
+    await expect(assignUnitKeyword("unit1", "kw1")).resolves.toEqual({
+      ok: false,
+      error: "단원과 키워드는 같은 과목이어야 합니다.",
+    });
   });
 
   it("같은 과목이면 태그한다", async () => {
     state.unit = { subject_id: "sub-math" };
     state.keyword = { subject_id: "sub-math" };
     state.insertError = null;
-    await expect(assignUnitKeyword("unit1", "kw1")).resolves.toBeUndefined();
+    await expect(assignUnitKeyword("unit1", "kw1")).resolves.toEqual({ ok: true });
   });
 
   it("이미 태그된 관계(23505)는 조용히 무시한다(멱등)", async () => {
     state.unit = { subject_id: "sub-math" };
     state.keyword = { subject_id: "sub-math" };
     state.insertError = { code: "23505", message: "duplicate" };
-    await expect(assignUnitKeyword("unit1", "kw1")).resolves.toBeUndefined();
+    await expect(assignUnitKeyword("unit1", "kw1")).resolves.toEqual({ ok: true });
   });
 });

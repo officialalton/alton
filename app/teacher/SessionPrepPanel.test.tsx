@@ -43,7 +43,7 @@ describe("SessionPrepPanel", () => {
     vi.mocked(actions.loadHeldSelectionsForEnrollment).mockResolvedValue([]);
     vi.mocked(actions.createPreparedSelection).mockResolvedValue("sel1");
     render(
-      <SessionPrepPanel subjectEnrollmentId="se1" overlayUnits={overlayUnits} keywords={keywords} sessionId={null} onBack={vi.fn()} />
+      <SessionPrepPanel subjectEnrollmentId="se1" overlayUnits={overlayUnits} keywords={keywords} sessionId={null} studentName="지훈" subjectName="SAT Math" onBack={vi.fn()} />
     );
 
     await waitFor(() => expect(screen.getByText("+ 새 세션 준비 시작")).toBeInTheDocument());
@@ -58,10 +58,10 @@ describe("SessionPrepPanel", () => {
     ]);
     vi.mocked(actions.loadEligibleContent).mockResolvedValue({ materialSections: [], problems: [] });
     vi.mocked(actions.addUnitToSelection).mockResolvedValue("su1");
-    vi.mocked(actions.setSelectionActiveKeywords).mockResolvedValue(undefined);
+    vi.mocked(actions.setSelectionActiveKeywords).mockResolvedValue({ ok: true });
 
     render(
-      <SessionPrepPanel subjectEnrollmentId="se1" overlayUnits={overlayUnits} keywords={keywords} sessionId={null} onBack={vi.fn()} />
+      <SessionPrepPanel subjectEnrollmentId="se1" overlayUnits={overlayUnits} keywords={keywords} sessionId={null} studentName="지훈" subjectName="SAT Math" onBack={vi.fn()} />
     );
 
     const unitButton = await screen.findByText("이차방정식", { selector: "button" });
@@ -71,6 +71,32 @@ describe("SessionPrepPanel", () => {
     const keywordButton = await screen.findByText("판별식");
     fireEvent.click(keywordButton);
     await waitFor(() => expect(actions.setSelectionActiveKeywords).toHaveBeenCalledWith("sel1", "su1", ["kw1"]));
+  });
+
+  it("2026-09-10(P0-2) — 키워드 변경 실패는 { ok:false, error } 문구만 안내하고 던지지 않는다(Minified React error #441 마스킹 버그 재발 방지)", async () => {
+    vi.mocked(actions.loadHeldSelectionsForEnrollment).mockResolvedValue([
+      { id: "sel1", subjectEnrollmentId: "se1", teacherId: "t1", status: "staged", sessionId: null, pinnedAt: null, units: [], contentItems: [] },
+    ]);
+    vi.mocked(actions.loadEligibleContent).mockResolvedValue({ materialSections: [], problems: [] });
+    vi.mocked(actions.addUnitToSelection).mockResolvedValue("su1");
+    vi.mocked(actions.setSelectionActiveKeywords).mockResolvedValue({
+      ok: false,
+      error: "담당 학생의 커리큘럼만 조정할 수 있습니다.",
+    });
+
+    render(
+      <SessionPrepPanel subjectEnrollmentId="se1" overlayUnits={overlayUnits} keywords={keywords} sessionId={null} studentName="지훈" subjectName="SAT Math" onBack={vi.fn()} />
+    );
+
+    const unitButton = await screen.findByText("이차방정식", { selector: "button" });
+    fireEvent.click(unitButton);
+    await waitFor(() => expect(actions.addUnitToSelection).toHaveBeenCalledWith("sel1", "ou1"));
+
+    const keywordButton = await screen.findByText("판별식");
+    fireEvent.click(keywordButton);
+    await waitFor(() =>
+      expect(screen.getByText("담당 학생의 커리큘럼만 조정할 수 있습니다.")).toBeInTheDocument()
+    );
   });
 
   it("교재 후보를 선택하면 pickContentItem이 호출되고, sessionId가 있으면 고정 버튼이 attachSelectionToSession과 pinSessionSelection을 호출한다", async () => {
@@ -95,7 +121,7 @@ describe("SessionPrepPanel", () => {
     vi.mocked(actions.pinSessionSelection).mockResolvedValue(undefined);
 
     render(
-      <SessionPrepPanel subjectEnrollmentId="se1" overlayUnits={overlayUnits} keywords={keywords} sessionId="sess1" onBack={vi.fn()} />
+      <SessionPrepPanel subjectEnrollmentId="se1" overlayUnits={overlayUnits} keywords={keywords} sessionId="sess1" studentName="지훈" subjectName="SAT Math" onBack={vi.fn()} />
     );
 
     const pickButton = await screen.findByText("선택");

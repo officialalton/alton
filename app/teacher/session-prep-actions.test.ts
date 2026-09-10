@@ -126,7 +126,7 @@ describe("담당 학생 인가 — 준비된 선택 하위 테이블 액션(prep
     state.assignment = { id: "assign1" };
     await expect(addUnitToSelection("sel1", "overlay-unit-1")).resolves.toBe("unit1");
     await expect(removeUnitFromSelection("sel1", "unit1")).resolves.toBeUndefined();
-    await expect(setSelectionActiveKeywords("sel1", "unit1", ["kw1", "kw2"])).resolves.toBeUndefined();
+    await expect(setSelectionActiveKeywords("sel1", "unit1", ["kw1", "kw2"])).resolves.toEqual({ ok: true });
     await expect(pickContentItem("sel1", "unit1", "material_section", "sec1")).resolves.toBe("item1");
     await expect(excludeContentItem("sel1", "item1")).resolves.toBeUndefined();
     await expect(includeContentItem("sel1", "item1")).resolves.toBeUndefined();
