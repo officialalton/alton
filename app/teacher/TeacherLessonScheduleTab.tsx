@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { TeacherLessonScheduleItem, ExternalBusyBlock, ActionResult } from "./lesson-schedule-actions";
+import { isPastLesson } from "./lesson-schedule-data";
 import type { AvailabilityExceptionRow } from "./availability-actions";
 import MonthCalendar, { type DayBadge } from "@/app/components/MonthCalendar";
 import { dateKeyInTimezone, dateKeysCoveredByInterval, buildWeekGrid, todayKeyInTimezone } from "@/lib/calendar-date-utils";
@@ -26,15 +27,9 @@ const REPORT_TYPE_LABEL: Record<ReportType, string> = {
 
 // M4 UAT #5 — 사용자가 실제로 써보고 지적한 대로, 체험 수업 리뷰 작성 진입점을
 // "배정" 탭(TrialReviewPanel, 이제 삭제됨)에서 이 화면("정규수업" 탭, 실제로
-// 진행한 v3 세션이 예정/지난으로 보이는 곳)으로 옮겼다. 완료된 체험 수업은
-// 리뷰를 확정하기 전까지 "예정된 수업" 쪽에 남아있다가, 확정해야 "지난 수업"
-// 목록으로 넘어간다(정규 수업은 R9 범위 밖 — 기존 날짜/상태 기준 그대로 유지).
-function isPastLesson(lesson: TeacherLessonScheduleItem, nowMs: number): boolean {
-  const ended = new Date(lesson.endsAt).getTime() < nowMs;
-  if (!ended) return false;
-  if (lesson.isTrial && lesson.reviewStatus !== "final") return false;
-  return true;
-}
+// 진행한 v3 세션이 예정/지난으로 보이는 곳)으로 옮겼다. `isPastLesson()` 판정
+// 자체는 2026-09-10(P0-4)부터 `lesson-schedule-data.ts`(v3 조회 정본)에서
+// 가져와 교사 홈 대시보드와 공유한다 — 화면마다 판정 기준이 갈리지 않게.
 
 // 2026-09-03 정책 전환(요구사항 1) — 선생님이 organizer로 생성한 Calendar 이벤트의
 // 생성·변경·취소·동기화 상태. 내부 Google 오류 원문은 노출하지 않는다(관리자 화면 전용).

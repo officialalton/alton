@@ -210,7 +210,8 @@ function CalendarCard({
                 key={s.sessionId}
                 className="text-[12.5px] text-ink px-3 py-2 rounded-lg bg-grey-100 mb-1.5"
               >
-                {s.studentName} · {s.subjectName} · {s.sessionNumber}회차
+                {s.studentName} · {s.subjectName}
+                {s.sessionNumber !== null ? ` · ${s.sessionNumber}회차` : ""}
               </div>
             ))
           )}
@@ -253,7 +254,8 @@ function UpcomingWidget({
               {formatKoreanDateTime(lesson.scheduledAt)}
             </div>
             <div className="text-[13px] font-semibold text-ink">
-              {lesson.studentName} · {lesson.subjectName} · {lesson.sessionNumber}회차
+              {lesson.studentName} · {lesson.subjectName}
+              {lesson.sessionNumber !== null ? ` · ${lesson.sessionNumber}회차` : ""}
               {lesson.unitTitle ? ` · ${lesson.unitTitle}` : ""}
             </div>
           </button>

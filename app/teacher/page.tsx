@@ -21,6 +21,26 @@ export default async function TeacherHomePage({
   const { user, supabase } = await requireUser();
   const { tab } = await searchParams;
 
+  // 2026-09-10(P0-4) — 교사 홈 대시보드가 "수업" 탭과 같은 v3 예약을 보게
+  // 하려면 loadTeacherLessonSchedule() 결과(+이 교사의 timezone)가 먼저 있어야
+  // 한다. 학생 홈(2026-09-09 정정)과 동일하게 dashboard만 그 결과에 체이닝하고
+  // 나머지 로더는 그대로 병렬 유지한다.
+  const lessonSchedulePromise = listMyLessonSchedule();
+  const teacherProfilePromise = supabase
+    .from("profiles")
+    .select("timezone")
+    .eq("id", user.id)
+    .maybeSingle();
+  const dashboardPromise = Promise.all([lessonSchedulePromise, teacherProfilePromise]).then(
+    ([lessonSchedule, { data: teacherProfile }]) => {
+      const timezone = resolveUserTimezone({
+        profileTimezone: (teacherProfile?.timezone as string) ?? null,
+        householdDefaultTimezone: null,
+      });
+      return loadTeacherDashboard(supabase, user.id, lessonSchedule, timezone);
+    }
+  );
+
   const [
     dashboard,
     roster,
@@ -31,14 +51,14 @@ export default async function TeacherHomePage({
     lessonSchedule,
     { data: teacherProfile },
   ] = await Promise.all([
-    loadTeacherDashboard(supabase, user.id),
+    dashboardPromise,
     loadRoster(supabase, user.id),
     loadMySubjects(supabase, user.id),
     loadTeacherAssignments(supabase, user.id),
     listMyAvailabilityRules(),
     listTeacherAvailabilityExceptions(),
-    listMyLessonSchedule(),
-    supabase.from("profiles").select("timezone").eq("id", user.id).maybeSingle(),
+    lessonSchedulePromise,
+    teacherProfilePromise,
   ]);
   const materialsSubjects = await loadTeacherMaterialsLibrary(supabase, user.id);
   const availabilityTimezone = resolveUserTimezone({

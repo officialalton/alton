@@ -25,6 +25,19 @@ export type TeacherLessonScheduleItem = {
   reviewStatus: "none" | "draft" | "final";
 };
 
+// M4 UAT #5 — 완료된 체험 수업은 리뷰를 확정하기 전까지 "예정된 수업" 쪽에
+// 남아있다가, 확정해야 "지난 수업" 목록으로 넘어간다(정규 수업은 R9 범위 밖 —
+// 기존 날짜/상태 기준 그대로 유지). 원래 TeacherLessonScheduleTab.tsx에만
+// 있던 로컬 함수였으나, 2026-09-10(P0-4) 교사 홈 대시보드도 정확히 같은
+// "예정/지난" 판정을 써야 해서 이 모듈(v3 조회 정본)로 옮겨 공유한다 — 화면마다
+// 판정 기준이 갈리는 것을 막기 위함.
+export function isPastLesson(lesson: TeacherLessonScheduleItem, nowMs: number): boolean {
+  const ended = new Date(lesson.endsAt).getTime() < nowMs;
+  if (!ended) return false;
+  if (lesson.isTrial && lesson.reviewStatus !== "final") return false;
+  return true;
+}
+
 export async function loadTeacherLessonSchedule(
   supabase: SupabaseClient,
   teacherId: string
