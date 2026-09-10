@@ -218,7 +218,9 @@ describe("ParentShell", () => {
         currentChildId="s1"
         dashboard={dashboard}
         {...lessonsProps}
-        pendingRegularIntentChoices={[{ subjectEnrollmentId: "se1", childName: "지훈", subjectName: "AP Calculus AB" }]}
+        pendingRegularIntentChoices={[
+          { subjectEnrollmentId: "se1", childId: "s1", childName: "지훈", subjectName: "AP Calculus AB" },
+        ]}
       />
     );
     const badge = screen.getByText("정규 진행 희망 선택이 필요해요 →");
@@ -226,6 +228,31 @@ describe("ParentShell", () => {
 
     fireEvent.click(badge);
     expect(replaceMock).toHaveBeenCalledWith("?child=s1&tab=enrollment", { scroll: false });
+  });
+
+  it("2026-09-10(UI/UX 1차 리뷰 지적): 동명이인이어도 childId로 정확히 매칭해 다른 자녀에게는 배지를 표시하지 않는다", () => {
+    // s1과 s3는 이름이 같지만("지훈") id가 다르다 — 이름만으로 매칭하면
+    // pendingRegularIntentChoices가 s3(childId)를 가리켜도 s1 카드에 배지가
+    // 잘못 뜨게 된다.
+    const duplicateNameChildren: Child[] = [
+      { studentId: "s1", name: "지훈", isPrimary: true },
+      { studentId: "s3", name: "지훈", isPrimary: false },
+    ];
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={duplicateNameChildren}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+        pendingRegularIntentChoices={[
+          { subjectEnrollmentId: "se1", childId: "s3", childName: "지훈", subjectName: "AP Calculus AB" },
+        ]}
+      />
+    );
+    const badges = screen.getAllByText("정규 진행 희망 선택이 필요해요 →");
+    // 두 카드 모두 이름은 "지훈"이지만 배지는 childId가 일치하는 카드(s3) 하나에만 떠야 한다.
+    expect(badges).toHaveLength(1);
   });
 
   it("정규 진행 희망 선택이 필요한 과목이 없으면 그 배지를 보여주지 않는다", () => {

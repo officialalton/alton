@@ -322,7 +322,7 @@ function ChildrenStatusRow({
         const needsConsent =
           consentChildren.some((c) => c.studentId === child.studentId && c.isUnder13 && !c.hasValidConsent) ||
           trialSmartNotesChildren.some((c) => c.studentId === child.studentId && !c.hasConsented);
-        const needsRegularIntent = pendingRegularIntentChoices.some((p) => p.childName === child.name);
+        const needsRegularIntent = pendingRegularIntentChoices.some((p) => p.childId === child.studentId);
         const needsAction = needsConsent || needsRegularIntent;
 
         return (

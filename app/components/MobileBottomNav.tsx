@@ -45,6 +45,8 @@ export default function MobileBottomNav({
         {more.length > 0 && (
           <button
             onClick={() => setMoreOpen((v) => !v)}
+            aria-expanded={moreOpen}
+            aria-haspopup="true"
             className={
               "flex-1 flex flex-col items-center justify-center gap-0.5 py-2 text-[10.5px] font-semibold " +
               (moreOpen || moreActive ? "text-ink" : "text-grey-300")

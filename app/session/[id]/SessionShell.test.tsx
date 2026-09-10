@@ -1,7 +1,11 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import SessionShell from "./SessionShell";
 import { finalizeMyLessonSession } from "@/app/teacher/lesson-schedule-actions";
+
+beforeEach(() => {
+  vi.mocked(finalizeMyLessonSession).mockReset();
+});
 
 const refreshMock = vi.fn();
 vi.mock("next/navigation", () => ({
@@ -114,7 +118,7 @@ describe("SessionShell — 세션 상태바", () => {
     expect(screen.queryByText(/수업 종료/)).not.toBeInTheDocument();
   });
 
-  it("2026-09-10(UI/UX 정리 1차): live 상태에서 선생님이 '수업 종료'를 누르면 학생명·종료 시각을 보여주는 확인 모달이 뜨고, 확인해야만 기존 종료 로직이 호출된다", async () => {
+  it("2026-09-10(UI/UX 정리 1차): 예정 종료 시각 이후 '수업 종료'를 누르면 확인 모달이 뜨고, 확인해야만 기존 종료 로직이 호출된다", async () => {
     vi.mocked(finalizeMyLessonSession).mockResolvedValue({ ok: true });
     render(
       <SessionShell
@@ -122,7 +126,7 @@ describe("SessionShell — 세션 상태바", () => {
         viewerRole="teacher"
         initialState="live"
         status="upcoming"
-        scheduledAt={new Date().toISOString()}
+        scheduledAt={new Date(Date.now() - 40 * 60_000).toISOString()}
         durationMinutes={30}
       />
     );
@@ -144,6 +148,97 @@ describe("SessionShell — 세션 상태바", () => {
         reason: "선생님 수업 종료",
       })
     );
+  });
+
+  it("2026-09-10(UI/UX 1차 리뷰 지적): 예정 종료 전 '수업 종료'를 누르면 window.confirm 없이 사유 선택 UI가 뜨고, 사유를 고르기 전에는 finalize가 호출되지 않는다", () => {
+    const confirmSpy = vi.spyOn(window, "confirm");
+    render(
+      <SessionShell
+        {...baseProps}
+        viewerRole="teacher"
+        initialState="live"
+        status="upcoming"
+        scheduledAt={new Date().toISOString()}
+        durationMinutes={30}
+      />
+    );
+    fireEvent.click(screen.getByRole("button", { name: "수업 종료" }));
+
+    expect(
+      screen.getByText("예정 종료 시각 전입니다 — 조기 종료 사유를 선택하세요")
+    ).toBeInTheDocument();
+    expect(screen.getByText("학생 사유(조퇴 등)")).toBeInTheDocument();
+    expect(screen.getByText("선생님 사유(지각 등)")).toBeInTheDocument();
+    expect(screen.getByText("서비스 장애(Meet 연결 등)")).toBeInTheDocument();
+    expect(finalizeMyLessonSession).not.toHaveBeenCalled();
+    expect(confirmSpy).not.toHaveBeenCalled();
+  });
+
+  it("2026-09-10(UI/UX 1차 리뷰 지적): 조기 종료에서 '학생 사유'를 선택하고 확인하면 earlyEndReason: student_reason으로 finalize가 호출된다", async () => {
+    vi.mocked(finalizeMyLessonSession).mockResolvedValue({ ok: true });
+    render(
+      <SessionShell
+        {...baseProps}
+        viewerRole="teacher"
+        initialState="live"
+        status="upcoming"
+        scheduledAt={new Date().toISOString()}
+        durationMinutes={30}
+      />
+    );
+    fireEvent.click(screen.getByRole("button", { name: "수업 종료" }));
+    fireEvent.click(screen.getByText("학생 사유(조퇴 등)"));
+
+    expect(screen.getByText("학생 사유로 종료할까요?")).toBeInTheDocument();
+    const confirmButtons = screen.getAllByRole("button", { name: "수업 종료" });
+    fireEvent.click(confirmButtons[confirmButtons.length - 1]);
+
+    await waitFor(() =>
+      expect(finalizeMyLessonSession).toHaveBeenCalledWith({
+        sessionId: baseProps.sessionId,
+        outcome: "completed",
+        reason: "학생 사유 조기 종료",
+        earlyEndReason: "student_reason",
+      })
+    );
+  });
+
+  it("2026-09-10(UI/UX 1차 리뷰 지적): 조기 종료에서 '선생님 사유'를 선택하면 안내만 보여주고 finalize를 호출하지 않는다", () => {
+    render(
+      <SessionShell
+        {...baseProps}
+        viewerRole="teacher"
+        initialState="live"
+        status="upcoming"
+        scheduledAt={new Date().toISOString()}
+        durationMinutes={30}
+      />
+    );
+    fireEvent.click(screen.getByRole("button", { name: "수업 종료" }));
+    fireEvent.click(screen.getByText("선생님 사유(지각 등)"));
+
+    expect(screen.getByText(/지각 당일 연장/)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "확인" }));
+    expect(finalizeMyLessonSession).not.toHaveBeenCalled();
+  });
+
+  it("2026-09-10(UI/UX 1차 리뷰 지적): 조기 종료에서 '서비스 장애'를 선택하면 안내만 보여주고 finalize를 호출하지 않는다", () => {
+    render(
+      <SessionShell
+        {...baseProps}
+        viewerRole="teacher"
+        initialState="live"
+        status="upcoming"
+        scheduledAt={new Date().toISOString()}
+        durationMinutes={30}
+      />
+    );
+    fireEvent.click(screen.getByRole("button", { name: "수업 종료" }));
+    fireEvent.click(screen.getByText("서비스 장애(Meet 연결 등)"));
+
+    expect(screen.getByText(/관리자에게/)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "확인" }));
+    expect(finalizeMyLessonSession).not.toHaveBeenCalled();
   });
 
   it("completed 상태에서는 완료 배지를 보여준다", () => {

@@ -23,9 +23,11 @@ export default function MobileDrawerNav({
   return (
     <>
       <button
-        onClick={() => setOpen(true)}
+        onClick={() => setOpen((v) => !v)}
         className="md:hidden fixed top-3 left-3 z-40 w-9 h-9 rounded-full bg-white border border-grey-200 flex items-center justify-center text-[16px]"
         aria-label="메뉴 열기"
+        aria-expanded={open}
+        aria-haspopup="true"
       >
         ☰
       </button>

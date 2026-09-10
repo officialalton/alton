@@ -127,9 +127,20 @@ describe("AdminShell", () => {
       "수업권",
       "통합 일정",
       "정산",
-      "개발 로그",
     ].forEach((label) => expect(screen.getByText(label)).toBeInTheDocument());
     expect(screen.getByText("관리자, 안녕하세요")).toBeInTheDocument();
+  });
+
+  it("2026-09-10(UI/UX 1차 리뷰 지적): '개발 로그'는 일반 네비게이션(사이드바)에 노출되지 않는다", () => {
+    render(<AdminShell {...baseProps} />);
+    expect(screen.queryByText("개발 로그")).not.toBeInTheDocument();
+  });
+
+  it("2026-09-10(UI/UX 1차 리뷰 지적): 모바일 '운영' 드로어를 열어도 '개발 로그'가 보이지 않는다", () => {
+    render(<AdminShell {...baseProps} />);
+    fireEvent.click(screen.getByLabelText("메뉴 열기"));
+    expect(screen.getByText("운영")).toBeInTheDocument();
+    expect(screen.queryByText("개발 로그")).not.toBeInTheDocument();
   });
 
   it("사용자 탭을 누르면 UsersTab이 렌더링된다", () => {
@@ -177,9 +188,8 @@ describe("AdminShell", () => {
     expect(screen.getByText("수업권 원장")).toBeInTheDocument();
   });
 
-  it("개발 로그 탭을 누르면 DevLogTab이 tickets.md 내용을 렌더링한다", () => {
-    render(<AdminShell {...baseProps} />);
-    fireEvent.click(screen.getByText("개발 로그"));
+  it("2026-09-10(UI/UX 1차 리뷰 지적): 내비게이션엔 없지만 ?tab=devlog 직접 접근으로는 DevLogTab이 그대로 열린다(내부 전용 경로)", () => {
+    render(<AdminShell {...baseProps} initialTab="devlog" />);
     expect(screen.getByText("완료된 항목")).toBeInTheDocument();
     expect(screen.getByText("남은 항목")).toBeInTheDocument();
   });

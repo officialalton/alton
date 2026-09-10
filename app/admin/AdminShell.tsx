@@ -63,10 +63,18 @@ const NAV_ITEMS = [
   { id: "booking", label: "예약", icon: "🗓️" },
   { id: "payouts", label: "정산", icon: "💸" },
   { id: "workspace", label: "Workspace", icon: "🔑" },
-  { id: "devlog", label: "개발 로그", icon: "🧾" },
 ] as const;
 
-type TabId = (typeof NAV_ITEMS)[number]["id"];
+// 2026-09-10(UI/UX 1차 리뷰 지적) — "개발 로그"는 일반 운영 업무 중 볼 메뉴가
+// 아니므로 데스크톱 사이드바·모바일 드로어 어디에도 노출하지 않는다. 완전히
+// 없애지는 않고, `?tab=devlog` 직접 접근(내부 전용 경로)으로만 계속 열람할
+// 수 있게 별도 목록으로 둔다 — NAV_ITEMS에는 넣지 않으므로 어떤 내비게이션
+// 렌더링에도 등장하지 않는다.
+const HIDDEN_TABS = [{ id: "devlog", label: "개발 로그", icon: "🧾" }] as const;
+
+const ALL_TABS = [...NAV_ITEMS, ...HIDDEN_TABS] as const;
+
+type TabId = (typeof ALL_TABS)[number]["id"];
 
 export default function AdminShell({
   initialTab,
@@ -130,7 +138,7 @@ export default function AdminShell({
   openOrRecentPaymentDisputes: Awaited<ReturnType<typeof listOpenOrRecentPaymentDisputes>>;
 }) {
   const router = useRouter();
-  const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
+  const validTabIds = useMemo(() => ALL_TABS.map((n) => n.id), []);
   const [activeTab, setActiveTab] = useState<TabId>(
     validTabIds.includes(initialTab as TabId) ? (initialTab as TabId) : "home"
   );
@@ -143,7 +151,7 @@ export default function AdminShell({
     router.replace(`?tab=${id}`, { scroll: false });
   }
 
-  const activeLabel = NAV_ITEMS.find((n) => n.id === activeTab)?.label ?? "";
+  const activeLabel = ALL_TABS.find((n) => n.id === activeTab)?.label ?? "";
 
   // 2026-09-10(UI/UX 정리 1차, 배치4) — 관리자는 항목이 많아(13개) 바텀탭
   // 대신 햄버거 드로어 + 그룹 헤더(운영/콘텐츠/정산)로 정리한다.
@@ -156,7 +164,6 @@ export default function AdminShell({
     "unified-schedule",
     "booking",
     "workspace",
-    "devlog",
   ];
   const CONTENT_IDS: TabId[] = ["catalog"];
   const mobileGroups = [

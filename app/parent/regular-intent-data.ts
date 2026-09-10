@@ -21,6 +21,10 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 
 export type PendingRegularIntentChoice = {
   subjectEnrollmentId: string;
+  // 2026-09-10(UI/UX 1차 리뷰 지적) — 동명이인 형제자매·개명 시 이름만으로는
+  // 자녀를 오식별할 수 있다. childId를 함께 내려 화면에서는 항상 id로
+  // 비교하고, childName은 표시용으로만 쓴다.
+  childId: string;
   childName: string;
   subjectName: string;
 };
@@ -102,6 +106,7 @@ export async function loadPendingRegularIntentChoices(
     .filter((e) => progressedIds.has(e.id) && !selectedIds.has(e.id))
     .map((e) => ({
       subjectEnrollmentId: e.id,
+      childId: e.child_id as string,
       childName: childNameById.get(e.child_id) ?? "",
       subjectName: extractName(e.subject),
     }));

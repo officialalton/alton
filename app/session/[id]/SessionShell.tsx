@@ -138,6 +138,14 @@ export default function SessionShell({
   const [showEndLessonConfirm, setShowEndLessonConfirm] = useState(false);
   const [endingLesson, setEndingLesson] = useState(false);
   const [endLessonError, setEndLessonError] = useState<string | null>(null);
+  // 2026-09-10(UI/UX 1차 리뷰 지적) — 예정 종료 전 조기 종료는 사유를 반드시
+  // 화면에서 선택하게 한다. window.confirm으로 "학생 사유"를 자동 기록하던
+  // 방식을 없앤다 — "학생 사유"만 이 화면에서 완료 처리하고, 선생님 귀책·
+  // 서비스 장애는 각각 기존 처리 경로로 안내만 한다(이 화면에서 finalize를
+  // 호출하지 않음).
+  const [earlyEndReasonChoice, setEarlyEndReasonChoice] = useState<
+    "student_reason" | "teacher_fault" | "service_incident" | null
+  >(null);
 
   // 상태(prep/live/completed)를 주기적으로 재계산 — 시작/종료 시각이 지나면
   // 새로고침 없이도 상태바가 자동으로 전환되게 한다.
@@ -154,45 +162,49 @@ export default function SessionShell({
     router.replace(`?tab=${tabId}`, { scroll: false });
   }
 
-  // 2026-09-10(UI/UX 정리 1차) — 세션뷰 안에서도 수업을 종료할 수 있게 한다.
-  // 학생명·종료 시각을 보여주는 확인 모달을 거친 뒤, 기존 종료 로직
-  // (TeacherLessonScheduleTab.tsx::handleFinalizeSession과 동일한 outcome/
-  // reason/조기종료 재시도 패턴)을 그대로 재사용한다 — 새 종료 로직을 만들지
-  // 않는다.
+  // 2026-09-10(UI/UX 정리 1차, 1차 리뷰 보완) — 세션뷰 안에서도 수업을 종료할
+  // 수 있게 한다. 예정 종료 시각 전이면(조기 종료) 사유를 화면에서 먼저
+  // 선택하게 하고, "학생 사유"만 이 화면에서 실제로 완료 처리한다(기존
+  // finalizeMyLessonSession 로직을 그대로 재사용 — 새 종료 로직을 만들지
+  // 않음). 선생님 귀책·서비스 장애는 이 화면에서 finalize를 호출하지 않고
+  // 기존 경로(수업 일정 탭의 "지각 당일 연장", 관리자 장애 판정 요청)로만
+  // 안내한다 — window.confirm은 쓰지 않는다.
+  function isEarlyEnd(): boolean {
+    if (!scheduledAt) return false;
+    const end = new Date(scheduledAt).getTime() + durationMinutes * 60_000;
+    return Date.now() < end;
+  }
+
   async function handleConfirmEndLesson() {
+    const early = isEarlyEnd();
+    if (early && earlyEndReasonChoice !== "student_reason") {
+      // 선생님 사유/서비스 장애는 안내만 하고 이 화면에서는 종료 처리하지
+      // 않는다(가드 — 버튼 자체가 그 두 경우엔 노출되지 않지만 이중 확인).
+      return;
+    }
     setEndingLesson(true);
     setEndLessonError(null);
     try {
-      const result = await finalizeMyLessonSession({
-        sessionId,
-        outcome: "completed",
-        reason: "선생님 수업 종료",
-      });
-      if (!result.ok) {
-        if (result.error.includes("조기 종료 사유가 필요합니다")) {
-          const confirmed = window.confirm(
-            "예약 종료 시각이 아직 되지 않았습니다. 학생 사유(조퇴 등)로 지금 완료 처리하시겠습니까?\n\n선생님 귀책으로 일찍 끝난 경우 '수업 일정' 탭의 '지각 당일 연장'을, 회사·Meet 장애인 경우 관리자에게 장애 판정을 요청해주세요."
-          );
-          if (confirmed) {
-            const retryResult = await finalizeMyLessonSession({
+      const result = await finalizeMyLessonSession(
+        early
+          ? {
               sessionId,
               outcome: "completed",
               reason: "학생 사유 조기 종료",
               earlyEndReason: "student_reason",
-            });
-            if (!retryResult.ok) {
-              setEndLessonError(retryResult.error);
-              return;
             }
-          } else {
-            return;
-          }
-        } else {
-          setEndLessonError(result.error);
-          return;
-        }
+          : {
+              sessionId,
+              outcome: "completed",
+              reason: "선생님 수업 종료",
+            }
+      );
+      if (!result.ok) {
+        setEndLessonError(result.error);
+        return;
       }
       setShowEndLessonConfirm(false);
+      setEarlyEndReasonChoice(null);
       setState("completed");
       router.refresh();
     } finally {
@@ -264,34 +276,152 @@ export default function SessionShell({
         viewerRole={viewerRole}
         scheduledLabel={scheduledLabel}
         endLabel={endLabel}
-        onRequestEndLesson={() => setShowEndLessonConfirm(true)}
+        onRequestEndLesson={() => {
+          setEarlyEndReasonChoice(null);
+          setEndLessonError(null);
+          setShowEndLessonConfirm(true);
+        }}
       />
 
       {showEndLessonConfirm && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
           <div className="bg-white rounded-xl px-6 py-5 max-w-[360px] w-full">
-            <div className="text-[15px] font-bold text-ink mb-2">수업을 종료할까요?</div>
-            <p className="text-[13px] text-grey-500 mb-4">
-              {studentName} 학생과의 수업을 지금({formatKoreanTime(new Date())}) 종료 처리합니다.
-              종료 후에는 이 수업을 다시 진행 중 상태로 되돌릴 수 없습니다.
-            </p>
-            {endLessonError && <p className="text-[12px] text-red mb-3">{endLessonError}</p>}
-            <div className="flex justify-end gap-2">
-              <button
-                onClick={() => setShowEndLessonConfirm(false)}
-                disabled={endingLesson}
-                className="text-[13px] font-semibold text-grey-500 px-3 py-2 disabled:opacity-50"
-              >
-                취소
-              </button>
-              <button
-                onClick={handleConfirmEndLesson}
-                disabled={endingLesson}
-                className="text-[13px] font-bold text-white bg-ink px-4 py-2 rounded-lg disabled:opacity-50"
-              >
-                {endingLesson ? "종료 처리 중..." : "수업 종료"}
-              </button>
-            </div>
+            {!isEarlyEnd() ? (
+              <>
+                <div className="text-[15px] font-bold text-ink mb-2">수업을 종료할까요?</div>
+                <p className="text-[13px] text-grey-500 mb-4">
+                  {studentName} 학생과의 수업을 지금({formatKoreanTime(new Date())}) 종료 처리합니다.
+                  종료 후에는 이 수업을 다시 진행 중 상태로 되돌릴 수 없습니다.
+                </p>
+                {endLessonError && <p className="text-[12px] text-red mb-3">{endLessonError}</p>}
+                <div className="flex justify-end gap-2">
+                  <button
+                    onClick={() => setShowEndLessonConfirm(false)}
+                    disabled={endingLesson}
+                    className="text-[13px] font-semibold text-grey-500 px-3 py-2 disabled:opacity-50"
+                  >
+                    취소
+                  </button>
+                  <button
+                    onClick={handleConfirmEndLesson}
+                    disabled={endingLesson}
+                    className="text-[13px] font-bold text-white bg-ink px-4 py-2 rounded-lg disabled:opacity-50"
+                  >
+                    {endingLesson ? "종료 처리 중..." : "수업 종료"}
+                  </button>
+                </div>
+              </>
+            ) : earlyEndReasonChoice === null ? (
+              <>
+                <div className="text-[15px] font-bold text-ink mb-2">
+                  예정 종료 시각 전입니다 — 조기 종료 사유를 선택하세요
+                </div>
+                <p className="text-[13px] text-grey-500 mb-4">
+                  {studentName} 학생과의 수업이 아직 예정 종료 시각({endLabel ?? "-"})
+                  전입니다. 실제 사유에 맞는 항목을 선택해주세요.
+                </p>
+                <div className="flex flex-col gap-2 mb-4">
+                  <button
+                    onClick={() => setEarlyEndReasonChoice("student_reason")}
+                    className="text-left text-[13px] font-semibold text-ink border-[1.5px] border-grey-200 rounded-lg px-3.5 py-2.5"
+                  >
+                    학생 사유(조퇴 등)
+                  </button>
+                  <button
+                    onClick={() => setEarlyEndReasonChoice("teacher_fault")}
+                    className="text-left text-[13px] font-semibold text-ink border-[1.5px] border-grey-200 rounded-lg px-3.5 py-2.5"
+                  >
+                    선생님 사유(지각 등)
+                  </button>
+                  <button
+                    onClick={() => setEarlyEndReasonChoice("service_incident")}
+                    className="text-left text-[13px] font-semibold text-ink border-[1.5px] border-grey-200 rounded-lg px-3.5 py-2.5"
+                  >
+                    서비스 장애(Meet 연결 등)
+                  </button>
+                </div>
+                <div className="flex justify-end">
+                  <button
+                    onClick={() => setShowEndLessonConfirm(false)}
+                    className="text-[13px] font-semibold text-grey-500 px-3 py-2"
+                  >
+                    취소
+                  </button>
+                </div>
+              </>
+            ) : earlyEndReasonChoice === "student_reason" ? (
+              <>
+                <div className="text-[15px] font-bold text-ink mb-2">학생 사유로 종료할까요?</div>
+                <p className="text-[13px] text-grey-500 mb-4">
+                  {studentName} 학생과의 수업을 학생 사유(조퇴 등)로 지금(
+                  {formatKoreanTime(new Date())}) 종료 처리합니다. 원장에 조기 종료
+                  사유가 "학생 사유"로 기록됩니다.
+                </p>
+                {endLessonError && <p className="text-[12px] text-red mb-3">{endLessonError}</p>}
+                <div className="flex justify-end gap-2">
+                  <button
+                    onClick={() => setEarlyEndReasonChoice(null)}
+                    disabled={endingLesson}
+                    className="text-[13px] font-semibold text-grey-500 px-3 py-2 disabled:opacity-50"
+                  >
+                    ← 사유 다시 선택
+                  </button>
+                  <button
+                    onClick={handleConfirmEndLesson}
+                    disabled={endingLesson}
+                    className="text-[13px] font-bold text-white bg-ink px-4 py-2 rounded-lg disabled:opacity-50"
+                  >
+                    {endingLesson ? "종료 처리 중..." : "수업 종료"}
+                  </button>
+                </div>
+              </>
+            ) : earlyEndReasonChoice === "teacher_fault" ? (
+              <>
+                <div className="text-[15px] font-bold text-ink mb-2">이 화면에서는 종료할 수 없어요</div>
+                <p className="text-[13px] text-grey-500 mb-4">
+                  선생님 귀책(지각 등)으로 일찍 끝난 경우, 이 화면이 아니라
+                  "수업 일정" 탭의 "지각 당일 연장"에서 처리해주세요. 여기서는
+                  수업이 종료 처리되지 않습니다.
+                </p>
+                <div className="flex justify-end gap-2">
+                  <button
+                    onClick={() => setEarlyEndReasonChoice(null)}
+                    className="text-[13px] font-semibold text-grey-500 px-3 py-2"
+                  >
+                    ← 사유 다시 선택
+                  </button>
+                  <button
+                    onClick={() => setShowEndLessonConfirm(false)}
+                    className="text-[13px] font-bold text-white bg-ink px-4 py-2 rounded-lg"
+                  >
+                    확인
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="text-[15px] font-bold text-ink mb-2">이 화면에서는 종료할 수 없어요</div>
+                <p className="text-[13px] text-grey-500 mb-4">
+                  서비스 장애(Meet 연결 실패 등)로 일찍 끝난 경우, 관리자에게
+                  장애 판정을 요청해주세요. 여기서는 수업이 종료 처리되지
+                  않습니다.
+                </p>
+                <div className="flex justify-end gap-2">
+                  <button
+                    onClick={() => setEarlyEndReasonChoice(null)}
+                    className="text-[13px] font-semibold text-grey-500 px-3 py-2"
+                  >
+                    ← 사유 다시 선택
+                  </button>
+                  <button
+                    onClick={() => setShowEndLessonConfirm(false)}
+                    className="text-[13px] font-bold text-white bg-ink px-4 py-2 rounded-lg"
+                  >
+                    확인
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}
