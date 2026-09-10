@@ -232,6 +232,12 @@ function ConsultationCardDetailPanel({
   const [busy, setBusy] = useState(false);
   const [closing, setClosing] = useState(false);
   const [duplicateCandidates, setDuplicateCandidates] = useState<DuplicateConsultationCandidate[]>([]);
+  // 2026-09-10 — 배정 자체는 성공했지만 학생 활성화·커리큘럼 시딩이
+  // best-effort로 실패했을 때의 경고(빨간 error와 구분되는 amber 경고).
+  // retry는 실패했던 바로 그 호출을 그대로 다시 실행한다 —
+  // confirm_student_teacher_subject_match는 멱등이라 다시 눌러도
+  // 중복 배정·중복 단원이 생기지 않는다.
+  const [warning, setWarning] = useState<{ message: string; retry: () => void } | null>(null);
 
   async function load() {
     try {
@@ -257,11 +263,12 @@ function ConsultationCardDetailPanel({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [consultationId]);
 
-  async function run(fn: () => Promise<void>) {
+  async function run(fn: () => Promise<{ warning?: string | null } | void>) {
     setBusy(true);
     setError(null);
     try {
-      await fn();
+      const result = await fn();
+      setWarning(result?.warning ? { message: result.warning, retry: () => run(fn) } : null);
       await load();
       onChanged();
     } catch (e) {
@@ -321,6 +328,22 @@ function ConsultationCardDetailPanel({
           </div>
         )}
         {error && <p className={errText}>{error}</p>}
+        {warning && (
+          <div
+            className="border-[1.5px] border-amber-300 bg-amber-50 rounded-lg px-3 py-2.5 mb-3"
+            data-testid="assignment-warning"
+          >
+            <p className="text-[12px] font-bold text-ink mb-1">배정은 완료됐지만 후속 처리가 끝나지 않았습니다</p>
+            <p className="text-[11.5px] text-grey-600 mb-1.5">{warning.message}</p>
+            <button
+              disabled={busy}
+              onClick={warning.retry}
+              className="text-[11.5px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
+            >
+              {busy ? "다시 시도 중..." : "다시 시도"}
+            </button>
+          </div>
+        )}
 
         {/* 1. 상담 신청 단계 — 수락/거절 */}
         {c.status === "requested" && (
@@ -650,7 +673,7 @@ function SubjectTeacherAssignForm({
   subjects: AdminSubject[];
   teacherCandidatesBySubject: Record<string, MatchingTeacherCandidate[]>;
   busy: boolean;
-  onAssign: (fn: () => Promise<void>) => void;
+  onAssign: (fn: () => Promise<{ warning?: string | null } | void>) => void;
 }) {
   const [subjectId, setSubjectId] = useState<string | null>(null);
 
@@ -686,12 +709,13 @@ function SubjectTeacherAssignForm({
                 disabled={busy}
                 onClick={() =>
                   onAssign(async () => {
-                    await planTrialSubjectAndAssignTeacherAction({
+                    const result = await planTrialSubjectAndAssignTeacherAction({
                       childId,
                       subjectId,
                       teacherId: t.id,
                       effectiveFrom: new Date().toISOString(),
                     });
+                    return { warning: result.curriculumWarning ?? result.activationWarning ?? null };
                   })
                 }
               >

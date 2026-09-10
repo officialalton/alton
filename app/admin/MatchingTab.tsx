@@ -102,27 +102,44 @@ function MatchForm({
 }) {
   const [subjectId, setSubjectId] = useState<string | null>(null);
   const [teacherId, setTeacherId] = useState<string | null>(null);
-  const [totalSessions, setTotalSessions] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // 2026-09-10 — 배정 자체는 성공했지만 학생 활성화·커리큘럼 시딩이
+  // best-effort로 실패했을 때의 경고. null이면 경고 없음(정상 종료).
+  const [warnings, setWarnings] = useState<{ activation: string | null; curriculum: string | null } | null>(null);
 
   const candidates = subjectId ? teacherCandidatesBySubject[subjectId] ?? [] : [];
-  const sessionsNumber = Number(totalSessions);
-  const canSubmit =
-    !!subjectId && !!teacherId && Number.isFinite(sessionsNumber) && sessionsNumber >= 1;
+  const canSubmit = !!subjectId && !!teacherId;
 
+  // 2026-09-10(P0 결함 수정) — "총 회차 수" 수동 입력을 제거했다. 매칭 확정은
+  // 이제 실패 시 {ok,error}를 반환하므로(React error #441로 마스킹되던 문제
+  // 수정) throw/catch 대신 result.ok를 확인한다.
+  //
+  // 2026-09-10(커리큘럼 시딩 실패 가시성) — confirmMatch는 배정 자체가 실패한
+  // 경우에만 {ok:false}를 반환한다. 배정은 성공했지만 학생 활성화·커리큘럼
+  // 시딩이 실패했으면 {ok:true, activationWarning/curriculumWarning}로
+  // 돌아온다 — 이 경우 바로 onMatched()로 넘어가지 않고 경고와 "다시 시도"
+  // 버튼을 보여준다. confirmMatch(=confirm_student_teacher_subject_match)는
+  // 이미 같은 조합에 대해 멱등이므로(과목 수강 계획·선생님 배정은 재사용,
+  // 커리큘럼 시딩도 활성 오버레이가 없을 때만 다시 시도) 같은 버튼을 다시
+  // 누르는 것 자체가 안전한 재시도 경로다 — 중복 배정·중복 단원이 생기지
+  // 않는다.
   async function handleConfirm() {
     if (!subjectId || !teacherId || submitting) return;
     setError(null);
     setSubmitting(true);
-    try {
-      await confirmMatch(student.id, teacherId, subjectId, sessionsNumber);
-      onMatched();
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "매칭에 실패했습니다.");
-    } finally {
-      setSubmitting(false);
+    const result = await confirmMatch(student.id, teacherId, subjectId);
+    setSubmitting(false);
+    if (!result.ok) {
+      setError(result.error);
+      return;
     }
+    if (result.activationWarning || result.curriculumWarning) {
+      setWarnings({ activation: result.activationWarning, curriculum: result.curriculumWarning });
+      return;
+    }
+    setWarnings(null);
+    onMatched();
   }
 
   return (
@@ -185,19 +202,41 @@ function MatchForm({
         </div>
       )}
 
-      <div className="mb-4">
-        <label className="text-[12.5px] font-bold text-ink mb-1.5 block">총 회차 수</label>
-        <input
-          type="number"
-          min={1}
-          value={totalSessions}
-          onChange={(e) => setTotalSessions(e.target.value)}
-          placeholder="예: 20"
-          className="w-full px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px]"
-        />
-      </div>
-
       {error && <p className="text-[13px] text-red mb-4">{error}</p>}
+
+      {warnings && (
+        <div
+          className="mb-4 border-[1.5px] border-amber-300 bg-amber-50 rounded-xl px-4 py-3.5"
+          data-testid="match-partial-warning"
+        >
+          <p className="text-[13px] font-bold text-ink mb-1.5">
+            배정은 완료됐지만 후속 처리가 끝나지 않았습니다
+          </p>
+          {warnings.curriculum && (
+            <p className="text-[12.5px] text-grey-600 mb-1">
+              학생별 커리큘럼 준비에 실패했습니다 — {warnings.curriculum}
+            </p>
+          )}
+          {warnings.activation && (
+            <p className="text-[12.5px] text-grey-600 mb-1">{warnings.activation}</p>
+          )}
+          <div className="flex gap-2 mt-2.5">
+            <button
+              disabled={submitting}
+              onClick={handleConfirm}
+              className="text-[12.5px] font-bold px-3.5 py-2 rounded-lg bg-ink text-white disabled:opacity-50"
+            >
+              {submitting ? "다시 시도 중..." : "다시 시도"}
+            </button>
+            <button
+              onClick={onMatched}
+              className="text-[12.5px] font-semibold text-grey-500 px-3.5 py-2"
+            >
+              나중에 처리(매칭 완료로 넘어가기)
+            </button>
+          </div>
+        </div>
+      )}
 
       <button
         disabled={!canSubmit || submitting}

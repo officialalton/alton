@@ -1,71 +1,55 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
-const { insertMock, updateEqMock, mockSupabase } = vi.hoisted(() => {
-  const insertMock = vi.fn();
-  const updateEqMock = vi.fn();
-  const mockSupabase = {
-    auth: { getUser: vi.fn().mockResolvedValue({ data: { user: { id: "admin1" } } }) },
-    from: vi.fn((table: string) => {
-      if (table === "profiles") {
-        return {
-          select: () => ({
-            eq: () => ({
-              single: () => Promise.resolve({ data: { role: "admin" } }),
-            }),
-          }),
-        };
-      }
-      if (table === "enrollments") {
-        return { insert: insertMock };
-      }
-      if (table === "students") {
-        return { update: () => ({ eq: updateEqMock }) };
-      }
-      throw new Error(`unexpected table ${table}`);
-    }),
-  };
-  return { insertMock, updateEqMock, mockSupabase };
-});
+// 2026-09-10(매칭 공통화) — confirmMatch()는 이제 matching-common-actions.ts의
+// confirmStudentTeacherSubjectMatch()에 그대로 위임하는 얇은 어댑터다(legacy
+// enrollments 테이블을 더 이상 건드리지 않는다). 이 파일은 그 위임 자체만
+// 검증한다 — 실제 배정 로직 검증은 matching-common-actions.test.ts에서 한다.
 
-vi.mock("@/utils/supabase/server", () => ({
-  createClient: vi.fn().mockResolvedValue(mockSupabase),
+const confirmStudentTeacherSubjectMatchMock = vi.fn();
+vi.mock("./matching-common-actions", () => ({
+  confirmStudentTeacherSubjectMatch: (...args: unknown[]) => confirmStudentTeacherSubjectMatchMock(...args),
 }));
 
 import { confirmMatch } from "./matching-actions";
 
-describe("confirmMatch", () => {
-  beforeEach(() => {
-    insertMock.mockReset();
-    updateEqMock.mockReset();
-  });
-
-  it("총 회차 수가 1 미만이면 서버 호출 없이 에러를 던진다", async () => {
-    await expect(confirmMatch("s1", "t1", "sub1", 0)).rejects.toThrow(
-      "총 회차 수는 1 이상이어야 합니다."
-    );
-    expect(insertMock).not.toHaveBeenCalled();
-  });
-
-  it("정상 매칭 시 enrollments를 만들고 학생 상태를 active로 바꾼다", async () => {
-    insertMock.mockResolvedValue({ error: null });
-    updateEqMock.mockResolvedValue({ error: null });
-    await confirmMatch("s1", "t1", "sub1", 20);
-    expect(insertMock).toHaveBeenCalledWith({
-      student_id: "s1",
-      teacher_id: "t1",
-      subject_id: "sub1",
-      status: "active",
-      total_sessions: 20,
-      current_session: 1,
+describe("confirmMatch (매칭 탭 어댑터)", () => {
+  it("studentId/teacherId/subjectId를 childId로 매핑해 confirmStudentTeacherSubjectMatch에 위임한다", async () => {
+    confirmStudentTeacherSubjectMatchMock.mockResolvedValue({
+      ok: true,
+      subjectEnrollmentId: "se1",
+      teacherAssignmentId: "ta1",
+      overlayId: "ov1",
+      activationWarning: null,
+      curriculumWarning: null,
     });
-    expect(updateEqMock).toHaveBeenCalledWith("id", "s1");
+
+    const result = await confirmMatch("s1", "t1", "sub1");
+
+    expect(confirmStudentTeacherSubjectMatchMock).toHaveBeenCalledWith({
+      childId: "s1",
+      teacherId: "t1",
+      subjectId: "sub1",
+    });
+    expect(result).toEqual({
+      ok: true,
+      subjectEnrollmentId: "se1",
+      teacherAssignmentId: "ta1",
+      overlayId: "ov1",
+      activationWarning: null,
+      curriculumWarning: null,
+    });
   });
 
-  it("중복 매칭(unique 제약 위반)이면 친화적 에러로 변환한다", async () => {
-    insertMock.mockResolvedValue({ error: { code: "23505", message: "duplicate" } });
-    await expect(confirmMatch("s1", "t1", "sub1", 20)).rejects.toThrow(
-      "이미 이 학생-선생님-과목 조합으로 매칭되어 있습니다."
-    );
-    expect(updateEqMock).not.toHaveBeenCalled();
+  it("공통 경로가 {ok:false,error}를 반환하면 그대로 전달한다", async () => {
+    confirmStudentTeacherSubjectMatchMock.mockResolvedValue({
+      ok: false,
+      error: "선생님(t1)에게 유효한 현재 시급 이력이 없어 배정할 수 없습니다.",
+    });
+
+    const result = await confirmMatch("s1", "t1", "sub1");
+    expect(result).toEqual({
+      ok: false,
+      error: "선생님(t1)에게 유효한 현재 시급 이력이 없어 배정할 수 없습니다.",
+    });
   });
 });

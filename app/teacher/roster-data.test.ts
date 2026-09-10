@@ -11,14 +11,15 @@ function makeSupabase(params: {
     id: string;
     student_id: string;
     subject_id: string;
-    current_session: number;
-    total_sessions: number;
     subject: { name: string };
   }>;
   assignments: Array<{
     subject_enrollment: { id: string; subject_id: string; child_id: string; subject: { name: string } };
   }>;
   students: Array<{ id: string; grade: string | null; profile: { name: string } }>;
+  // 2026-09-10(P0 결함 수정) — currentSession/totalSessions는 이제
+  // enrollments.total_sessions가 아니라 legacy_sessions 실적으로 계산한다.
+  legacySessions?: Array<{ enrollment_id: string; status: string }>;
 }) {
   return {
     from: vi.fn((table: string) => {
@@ -30,6 +31,9 @@ function makeSupabase(params: {
       }
       if (table === "students") {
         return { select: () => ({ in: () => Promise.resolve({ data: params.students }) }) };
+      }
+      if (table === "legacy_sessions") {
+        return { select: () => ({ in: () => Promise.resolve({ data: params.legacySessions ?? [] }) }) };
       }
       throw new Error(`unexpected table ${table}`);
     }),
@@ -43,13 +47,19 @@ describe("loadRoster", () => {
     expect(result).toEqual([]);
   });
 
-  it("레거시 enrollments 학생만 있어도 그대로 반환한다", async () => {
+  it("레거시 enrollments 학생만 있어도 그대로 반환한다(회차 수는 legacy_sessions 실적으로 계산)", async () => {
     const supabase = makeSupabase({
       enrollments: [
-        { id: "e1", student_id: "s1", subject_id: "sub1", current_session: 3, total_sessions: 10, subject: { name: "SAT Math" } },
+        { id: "e1", student_id: "s1", subject_id: "sub1", subject: { name: "SAT Math" } },
       ],
       assignments: [],
       students: [{ id: "s1", grade: "10학년", profile: { name: "지훈" } }],
+      legacySessions: [
+        { enrollment_id: "e1", status: "completed" },
+        { enrollment_id: "e1", status: "completed" },
+        { enrollment_id: "e1", status: "completed" },
+        { enrollment_id: "e1", status: "upcoming" },
+      ],
     });
     const result = await loadRoster(supabase as never, "t1");
     expect(result).toEqual([
@@ -57,7 +67,7 @@ describe("loadRoster", () => {
         studentId: "s1",
         studentName: "지훈",
         grade: "10학년",
-        subjects: [{ enrollmentId: "e1", subjectId: "sub1", subjectName: "SAT Math", currentSession: 3, totalSessions: 10, source: "legacy" }],
+        subjects: [{ enrollmentId: "e1", subjectId: "sub1", subjectName: "SAT Math", currentSession: 3, totalSessions: 4, source: "legacy" }],
       },
     ]);
   });
@@ -93,7 +103,7 @@ describe("loadRoster", () => {
   it("같은 학생·과목 조합이 legacy와 v3 양쪽에 있어도 중복 표시되지 않는다", async () => {
     const supabase = makeSupabase({
       enrollments: [
-        { id: "e1", student_id: "s1", subject_id: "sub1", current_session: 3, total_sessions: 10, subject: { name: "SAT Math" } },
+        { id: "e1", student_id: "s1", subject_id: "sub1", subject: { name: "SAT Math" } },
       ],
       assignments: [
         { subject_enrollment: { id: "se1", subject_id: "sub1", child_id: "s1", subject: { name: "SAT Math" } } },
@@ -109,7 +119,7 @@ describe("loadRoster", () => {
   it("한 학생이 legacy 과목과 v3 과목을 서로 다르게 갖고 있으면 둘 다 보여준다", async () => {
     const supabase = makeSupabase({
       enrollments: [
-        { id: "e1", student_id: "s1", subject_id: "sub1", current_session: 3, total_sessions: 10, subject: { name: "SAT Math" } },
+        { id: "e1", student_id: "s1", subject_id: "sub1", subject: { name: "SAT Math" } },
       ],
       assignments: [
         { subject_enrollment: { id: "se2", subject_id: "sub2", child_id: "s1", subject: { name: "AP Calculus AB" } } },

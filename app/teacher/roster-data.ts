@@ -35,9 +35,7 @@ export async function loadRoster(
   const [{ data: enrollments }, { data: assignments }] = await Promise.all([
     supabase
       .from("enrollments")
-      .select(
-        "id, student_id, subject_id, current_session, total_sessions, subject:subjects(name)"
-      )
+      .select("id, student_id, subject_id, subject:subjects(name)")
       .eq("teacher_id", teacherId)
       .eq("status", "active"),
     supabase
@@ -49,7 +47,7 @@ export async function loadRoster(
       .eq("status", "active"),
   ]);
 
-  type LegacyRow = { id: string; student_id: string; subject_id: string; current_session: number; total_sessions: number; subject: unknown };
+  type LegacyRow = { id: string; student_id: string; subject_id: string; subject: unknown };
   type V3Row = { id: string; subjectId: string; studentId: string; subject: unknown };
 
   const legacyRows: LegacyRow[] = enrollments ?? [];
@@ -60,6 +58,26 @@ export async function loadRoster(
   });
 
   if (legacyRows.length === 0 && v3Rows.length === 0) return [];
+
+  // 2026-09-10(P0 결함 수정) — enrollments.total_sessions/current_session은
+  // 매칭 확정 시 더 이상 입력받지 않는다. 회차 표시는 그 대신 legacy_sessions
+  // 실적으로 계산한다(app/student/teacher-data.ts가 v3 sessions로 계산하는
+  // 것과 같은 접근).
+  const legacyEnrollmentIds = legacyRows.map((e) => e.id);
+  const { data: legacySessions } = legacyEnrollmentIds.length
+    ? await supabase
+        .from("legacy_sessions")
+        .select("enrollment_id, status")
+        .in("enrollment_id", legacyEnrollmentIds)
+    : { data: [] as { enrollment_id: string; status: string }[] };
+  const totalByEnrollment = new Map<string, number>();
+  const doneByEnrollment = new Map<string, number>();
+  for (const s of legacySessions ?? []) {
+    totalByEnrollment.set(s.enrollment_id, (totalByEnrollment.get(s.enrollment_id) ?? 0) + 1);
+    if (s.status === "completed") {
+      doneByEnrollment.set(s.enrollment_id, (doneByEnrollment.get(s.enrollment_id) ?? 0) + 1);
+    }
+  }
 
   const studentIds = Array.from(
     new Set([...legacyRows.map((e) => e.student_id), ...v3Rows.map((r) => r.studentId)])
@@ -105,8 +123,8 @@ export async function loadRoster(
       enrollmentId: e.id,
       subjectId: e.subject_id,
       subjectName: extractName(e.subject),
-      currentSession: e.current_session,
-      totalSessions: e.total_sessions,
+      currentSession: doneByEnrollment.get(e.id) ?? 0,
+      totalSessions: totalByEnrollment.get(e.id) ?? 0,
       source: "legacy",
     });
   }

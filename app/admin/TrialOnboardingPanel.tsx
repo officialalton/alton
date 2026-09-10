@@ -250,9 +250,13 @@ function CandidateCard({
           childId={c.childId!}
           open={assignOpen}
           onOpen={() => setAssignOpen(true)}
-          onDone={(activationWarning) => {
-            setAssignOpen(false);
-            setError(activationWarning ?? null);
+          onDone={(warning) => {
+            // 2026-09-10 — 경고(활성화/커리큘럼 실패)가 있으면 폼을 닫지
+            // 않는다. 입력했던 과목/선생님 ID가 그대로 남아있어, 같은 "배정
+            // 확정" 버튼을 다시 누르는 것 자체가 안전한 재시도 경로다
+            // (confirm_student_teacher_subject_match는 멱등).
+            if (!warning) setAssignOpen(false);
+            setError(warning ?? null);
             onChanged();
           }}
         />
@@ -388,7 +392,7 @@ function TrialAssignmentForm({
   childId: string;
   open: boolean;
   onOpen: () => void;
-  onDone: (activationWarning?: string | null) => void;
+  onDone: (warning?: string | null) => void;
 }) {
   const [subjectId, setSubjectId] = useState("");
   const [teacherId, setTeacherId] = useState("");
@@ -438,7 +442,10 @@ function TrialAssignmentForm({
               teacherId,
               effectiveFrom: new Date().toISOString(),
             });
-            onDone(result.activationWarning);
+            const warning = result.curriculumWarning
+              ? `학생별 커리큘럼 준비에 실패했습니다 — ${result.curriculumWarning}`
+              : (result.activationWarning ?? null);
+            onDone(warning);
           } catch (e) {
             setError(e instanceof Error ? e.message : String(e));
           }

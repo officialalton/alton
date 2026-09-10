@@ -33,9 +33,7 @@ export async function loadCurricula(
 ): Promise<CurriculumData[]> {
   const { data: enrollments } = await supabase
     .from("enrollments")
-    .select(
-      "id, teacher_id, subject_id, total_sessions, current_session, subject:subjects(name)"
-    )
+    .select("id, teacher_id, subject_id, subject:subjects(name)")
     .eq("student_id", studentId)
     .eq("status", "active");
 
@@ -111,13 +109,21 @@ export async function loadCurricula(
       };
     });
 
+    // 2026-09-10(P0 결함 수정) — enrollments.total_sessions/current_session은
+    // 매칭 확정 시 더 이상 입력받지 않는다(제품 정책: 회차 수는 커리큘럼
+    // 단원 구성으로 관리). 회차 표시는 그 대신 실제 커리큘럼 단원 수와 완료
+    // 단원 수로 계산한다 — app/student/teacher-data.ts가 이미 legacy_sessions
+    // 실적으로 회차를 세는 것과 같은 접근이다.
+    const completedCount = curriculumUnits.filter((u) => u.status === "done").length;
+    const totalSessions = curriculumUnits.length;
+
     return {
       enrollmentId: e.id,
       subjectId: e.subject_id,
       subjectName: extractName(e.subject),
       teacherName: teacherNameById.get(e.teacher_id) ?? "",
-      totalSessions: e.total_sessions,
-      currentSession: e.current_session,
+      totalSessions,
+      currentSession: Math.min(completedCount + 1, Math.max(totalSessions, 1)),
       units: curriculumUnits,
     };
   });

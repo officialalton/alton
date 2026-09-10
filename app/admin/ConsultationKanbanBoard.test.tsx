@@ -179,6 +179,40 @@ describe("ConsultationKanbanBoard — 과목·선생님 배정 클릭 UI(2026-09
     );
   });
 
+  it("2026-09-10: 배정은 성공했지만 커리큘럼 시딩이 실패하면 경고와 재시도 버튼을 보여준다(#441/DB 오류를 그대로 노출하지 않음)", async () => {
+    planTrialSubjectAndAssignTeacherActionMock.mockResolvedValue({
+      subjectEnrollmentId: "se1",
+      teacherAssignmentId: "ta1",
+      activationWarning: null,
+      curriculumWarning: "선생님 배정은 완료됐지만, 학생별 커리큘럼을 만들지 못했습니다(관리자가 직접 확인·재처리해야 합니다).",
+    });
+    render(
+      <ConsultationKanbanBoard subjects={subjects} teacherCandidatesBySubject={teacherCandidatesBySubject} />
+    );
+
+    fireEvent.click(await screen.findByText("김민지"));
+    await screen.findByTestId("consultation-card-detail");
+    fireEvent.click(screen.getByTestId("assign-subject-subj-math"));
+    fireEvent.click(screen.getByTestId("assign-teacher-teacher-1"));
+
+    const warningBox = await screen.findByTestId("assignment-warning");
+    expect(warningBox).toHaveTextContent("배정은 완료됐지만 후속 처리가 끝나지 않았습니다");
+    expect(warningBox).toHaveTextContent("학생별 커리큘럼을 만들지 못했습니다");
+    expect(screen.queryByText(/Minified React error/)).not.toBeInTheDocument();
+
+    // 재시도 — 성공(경고 없음)했다고 가정하면 경고가 사라진다.
+    planTrialSubjectAndAssignTeacherActionMock.mockResolvedValue({
+      subjectEnrollmentId: "se1",
+      teacherAssignmentId: "ta1",
+      activationWarning: null,
+      curriculumWarning: null,
+    });
+    fireEvent.click(screen.getByText("다시 시도"));
+
+    await waitFor(() => expect(planTrialSubjectAndAssignTeacherActionMock).toHaveBeenCalledTimes(2));
+    await waitFor(() => expect(screen.queryByTestId("assignment-warning")).not.toBeInTheDocument());
+  });
+
   it("과목 수강 계획이 이미 있으면(subjectEnrollmentId 존재) 배정 폼을 보여주지 않는다", async () => {
     getConsultationCardDetailActionMock.mockResolvedValue({
       ...cardDetail(),

@@ -10,7 +10,7 @@
 import { createHash } from "node:crypto";
 import { requireAdminOrCapability } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
-import { planSubjectEnrollment, assignTeacherToSubjectEnrollment } from "./subject-enrollment-actions";
+import { confirmStudentTeacherSubjectMatch } from "./matching-common-actions";
 import { sendEmail, escapeHtml } from "@/lib/email";
 import { currentRequestOrigin } from "@/lib/request-origin";
 import { sendRegularContractForSubjectEnrollment, type SendRegularContractResult } from "@/lib/regular-contract-send";
@@ -18,6 +18,10 @@ import { sendRegularContractForSubjectEnrollment, type SendRegularContractResult
 // 기존 상담 관리 액션(app/admin/consultation-actions.ts)과 동일한 capability를
 // 재사용한다 — 새 권한 이름을 따로 만들지 않는다.
 const CONSULT_CAPABILITY = "manage_consultations";
+// 2026-09-10(매칭 공통화) — 학생-선생님-과목 배정 자체는 매칭 탭과 동일한
+// 권한 기준(매칭권한)으로 표준화한다. 이 상수는 planTrialSubjectAndAssignTeacherAction
+// 에서만 쓴다 — 이 파일의 다른 상담 액션들은 그대로 manage_consultations를 쓴다.
+const MATCHING_CAPABILITY = "매칭권한";
 
 export async function confirmTrialIntentAction(consultationId: string): Promise<void> {
   const { actorUserId } = await requireAdminOrCapability(CONSULT_CAPABILITY);
@@ -278,35 +282,40 @@ async function sendTrialOnboardingNoticeInternal(params: {
 // 코드 확인 완료). "체험 예약에는 현재 배정된 선생님의 가능시간만 표시"는 R6가
 // 이미 배정된 teacher_id 기준으로 가능시간을 조회하므로 별도 구현 불필요.
 // =========================================================================
+// 2026-09-10(매칭 공통화) — 이 함수는 이제 subject-enrollment-actions.ts의
+// planSubjectEnrollment()/assignTeacherToSubjectEnrollment()를 순차 호출하지
+// 않는다(부분 성공 가능 — 앞 단계만 성공하고 뒷단계가 실패할 수 있었음).
+// matching-common-actions.ts의 공통 v3 배정 경로(하나의 트랜잭션으로 과목
+// 수강 계획·선생님 배정·학생 활성화·커리큘럼 시딩을 전부 처리)로 옮겼다 —
+// 매칭 탭과 동일한 경로다. effectiveFrom은 공통 경로가 항상 호출 시점(now())을
+// 쓰므로 더 이상 전달하지 않는다(두 호출부 모두 이미 new Date().toISOString()을
+// 그대로 넘기고 있었어 실질적 차이 없음).
 export async function planTrialSubjectAndAssignTeacherAction(params: {
   childId: string;
   subjectId: string;
   teacherId: string;
   effectiveFrom: string;
-}): Promise<{ subjectEnrollmentId: string; teacherAssignmentId: string; activationWarning: string | null }> {
-  await requireAdminOrCapability(CONSULT_CAPABILITY);
-  const admin = createAdminClient();
+}): Promise<{
+  subjectEnrollmentId: string;
+  teacherAssignmentId: string;
+  activationWarning: string | null;
+  curriculumWarning: string | null;
+}> {
+  await requireAdminOrCapability(MATCHING_CAPABILITY);
 
-  // draft 계약(요구사항 9의 "기존 계약 대조"와 같은 헬퍼) — 체험 단계에서는
-  // 이 계약이 draft로 남아있는 것 자체가 "아직 정규 계약 아님"의 정확한 표현.
-  const { data: contractId, error: contractError } = await admin.rpc("get_or_create_draft_contract_for_child", {
-    p_child_id: params.childId,
-  });
-  if (contractError) throw new Error(contractError.message);
-
-  const { id: subjectEnrollmentId } = await planSubjectEnrollment({
+  const result = await confirmStudentTeacherSubjectMatch({
     childId: params.childId,
-    subjectId: params.subjectId,
-    contractId: contractId as string,
-  });
-
-  const { id: teacherAssignmentId, activationWarning } = await assignTeacherToSubjectEnrollment({
-    subjectEnrollmentId,
     teacherId: params.teacherId,
-    effectiveFrom: params.effectiveFrom,
+    subjectId: params.subjectId,
   });
+  if (!result.ok) throw new Error(result.error);
 
-  return { subjectEnrollmentId, teacherAssignmentId, activationWarning };
+  return {
+    subjectEnrollmentId: result.subjectEnrollmentId,
+    teacherAssignmentId: result.teacherAssignmentId,
+    activationWarning: result.activationWarning,
+    curriculumWarning: result.curriculumWarning,
+  };
 }
 
 // =========================================================================
