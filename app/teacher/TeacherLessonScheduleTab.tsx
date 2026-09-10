@@ -292,6 +292,16 @@ export default function TeacherLessonScheduleTab({
           {lesson.externalChangeStatus !== "none" && (
             <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-red/10 text-red">관리자 확인 필요(외부 변경 감지)</span>
           )}
+          {/* 2026-09-09(UAT 지적): 학생 포털엔 "수업 준비"(/session/[id] 진입)가
+              있는데 선생님 쪽엔 없어 세션뷰(교재·화이트보드)로 들어갈 방법이
+              "홈" 탭의 예정 수업 위젯(최근 5건만)뿐이었다. 학생 쪽과 동일하게
+              여기서도 직접 진입할 수 있게 추가. */}
+          <button
+            onClick={() => router.push(`/session/${lesson.sessionId}`)}
+            className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-grey-100 text-ink"
+          >
+            수업 준비
+          </button>
           {lesson.googleMeetLink && (
             <a href={lesson.googleMeetLink} target="_blank" rel="noreferrer" className="text-[12px] font-semibold text-ink underline">
               Meet 입장
@@ -544,27 +554,31 @@ export default function TeacherLessonScheduleTab({
   }
 
   async function handleStartSession(sessionId: string, meetLink: string | null) {
-    // 2026-09-06(UAT — "수업 시작" 후 Meet 자동 입장 누락) — 팝업 차단을 피하려면 클릭
-    // 핸들러 안에서 동기적으로 새 탭을 열어야 한다(서버 액션 응답을 기다린 뒤 열면
-    // 대부분의 브라우저가 사용자 제스처와 분리된 window.open으로 간주해 차단한다).
-    // 먼저 빈 탭을 열어두고, 시작이 실제로 성공했을 때만 그 탭의 위치를 Meet 링크로
-    // 바꾼다(실패 시에는 빈 탭을 바로 닫는다).
-    const meetTab = meetLink ? window.open("", "_blank", "noopener,noreferrer") : null;
+    // 2026-09-09(제품 오너 지시 — about:blank 버그 수정): 빈 탭을 먼저 연 뒤
+    // location.href를 나중에 설정하는 패턴을 완전히 제거한다("noopener"가
+    // 있으면 window.open()이 null을 반환해 location.href 대입이 항상 스킵되던
+    // 버그가 있었다). Meet URL을 window.open()에 직접 전달한다. 팝업 차단을
+    // 피하려면 클릭 핸들러 안에서(서버 액션 응답을 기다리기 전에) 동기적으로
+    // 열어야 하므로, 시작 성공 여부와 무관하게 이 시점에 바로 연다 — 이미 이
+    // 버튼은 실제 배정된 교사에게만 노출되고 meetLink 자체는 시작 여부와
+    // 무관하게 이미 발급돼 있으므로 안전하다.
+    if (meetLink) {
+      window.open(meetLink, "_blank", "noopener,noreferrer");
+    }
     setSessionActionBusyId(sessionId);
     setError(null);
     try {
       const result = await onStartSession(sessionId);
       if (!result.ok) {
-        meetTab?.close();
         setError(result.error);
         return;
       }
-      if (meetLink && meetTab) {
-        meetTab.location.href = meetLink;
-      }
+      // 2026-09-09(UAT 지적): "수업 시작"은 Meet 입장뿐 아니라 이 화면(현재 탭)도
+      // 바로 세션뷰(교재·화이트보드)로 이동해야 한다 — 지금까지는 "수업 준비"를
+      // 별도로 눌러야만 들어갈 수 있었다.
+      router.push(`/session/${sessionId}`);
       await onRefresh();
     } catch (e) {
-      meetTab?.close();
       setError(e instanceof Error ? e.message : String(e));
     } finally {
       setSessionActionBusyId(null);

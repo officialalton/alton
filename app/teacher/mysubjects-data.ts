@@ -30,15 +30,31 @@ export async function loadMySubjects(
   supabase: SupabaseClient,
   teacherId: string
 ): Promise<MySubject[]> {
-  const { data: enrollments } = await supabase
-    .from("enrollments")
-    .select("subject_id, subject:subjects(name)")
-    .eq("teacher_id", teacherId)
-    .eq("status", "active");
+  // 2026-09-09(UAT 지적): 레거시 1:1 enrollments만 조회하면 R5 매칭 모델
+  // (teacher_assignments + subject_enrollments)로 배정된 v3 담당 과목이
+  // 전혀 보이지 않는다(app/admin/users-data.ts::loadTeachers()와 동일한
+  // 부류의 표시 버그). 두 소스를 함께 조회해 합친다.
+  const [{ data: enrollments }, { data: assignments }] = await Promise.all([
+    supabase
+      .from("enrollments")
+      .select("subject_id, subject:subjects(name)")
+      .eq("teacher_id", teacherId)
+      .eq("status", "active"),
+    supabase
+      .from("teacher_assignments")
+      .select("subject_enrollment:subject_enrollments!inner(subject_id, subject:subjects(name))")
+      .eq("teacher_id", teacherId)
+      .eq("status", "active"),
+  ]);
 
   const subjectNameById = new Map<string, string>();
   for (const e of enrollments ?? []) {
     subjectNameById.set(e.subject_id, extractName(e.subject));
+  }
+  for (const a of assignments ?? []) {
+    const se = Array.isArray(a.subject_enrollment) ? a.subject_enrollment[0] : a.subject_enrollment;
+    if (!se) continue;
+    subjectNameById.set(se.subject_id, extractName(se.subject));
   }
   if (subjectNameById.size === 0) return [];
 

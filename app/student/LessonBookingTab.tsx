@@ -262,11 +262,16 @@ export default function LessonBookingTab({
   }
 
   // "수업" 탭 정리(A안) — 선생님 포털의 "수업 시작" Meet 자동 입장 패턴을 재사용한다.
-  // 팝업 차단을 피하려면 클릭 핸들러 안에서 동기적으로 새 탭을 먼저 열어야 한다.
-  function handleStartClass(meetLink: string | null) {
+  // 2026-09-09(제품 오너 지시 — about:blank 버그 수정): 빈 탭을 먼저 연 뒤
+  // location.href를 나중에 설정하는 패턴을 완전히 제거한다("noopener"가 있으면
+  // window.open()이 null을 반환해 location.href 대입이 항상 스킵되던 버그가
+  // 있었다). Meet URL을 window.open()에 직접 전달한다.
+  function handleStartClass(sessionId: string, meetLink: string | null) {
     if (!meetLink) return;
-    const meetTab = window.open("", "_blank", "noopener,noreferrer");
-    if (meetTab) meetTab.location.href = meetLink;
+    window.open(meetLink, "_blank", "noopener,noreferrer");
+    // 2026-09-09(UAT 지적): Meet 입장뿐 아니라 이 화면(현재 탭)도 바로
+    // 세션뷰(교재·화이트보드)로 이동해야 한다.
+    router.push(`/session/${sessionId}`);
   }
 
   function openReportForm(sessionId: string) {
@@ -301,7 +306,7 @@ export default function LessonBookingTab({
   const showPast = tabMode !== "upcoming";
 
   return (
-    <div className={hideHeader ? "" : "max-w-[640px] px-8 py-8"}>
+    <div className={hideHeader ? "max-w-[640px] px-8 pt-4" : "max-w-[640px] px-8 py-8"}>
       {showUpcoming && !hideHeader && (
         <>
       <h1 className="text-[20px] font-extrabold text-ink mb-1.5">수업 예약</h1>
@@ -594,7 +599,7 @@ export default function LessonBookingTab({
               </button>
               {b.googleMeetLink && (
                 <button
-                  onClick={() => handleStartClass(b.googleMeetLink)}
+                  onClick={() => handleStartClass(b.sessionId, b.googleMeetLink)}
                   className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-ink text-white"
                 >
                   수업 시작

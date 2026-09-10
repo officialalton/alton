@@ -17,7 +17,8 @@ vi.mock("./trial-review-actions", () => ({
 }));
 
 const refreshMock = vi.fn();
-vi.mock("next/navigation", () => ({ useRouter: () => ({ refresh: refreshMock }) }));
+const pushMock = vi.fn();
+vi.mock("next/navigation", () => ({ useRouter: () => ({ refresh: refreshMock, push: pushMock }) }));
 
 const lesson: TeacherLessonScheduleItem = {
   reservationId: "r1",
@@ -81,6 +82,41 @@ describe("TeacherLessonScheduleTab", () => {
     expect(screen.getByText(/120분/)).toBeInTheDocument();
   });
 
+  it("2026-09-09(UAT 지적): '수업 준비'는 각 수업 카드의 정확한 sessionId로만 세션뷰에 진입하고, 다른 수업으로 이동하지 않는다", () => {
+    const otherLesson: TeacherLessonScheduleItem = {
+      ...lesson,
+      reservationId: "r2",
+      sessionId: "s2",
+      studentName: "민지",
+      subjectName: "AP Calculus AB",
+    };
+    render(
+      <TeacherLessonScheduleTab
+        lessons={[lesson, otherLesson]}
+        exceptions={[]}
+        timezone="America/Los_Angeles"
+        onCancel={vi.fn()}
+        onRefresh={vi.fn()}
+        onLoadExternalBusy={vi.fn().mockResolvedValue([])}
+        onStartSession={vi.fn()}
+        onFinalizeSession={vi.fn()}
+        onResolveLateness={vi.fn()}
+      />
+    );
+
+    const prepButtons = screen.getAllByText("수업 준비");
+    expect(prepButtons).toHaveLength(2);
+
+    fireEvent.click(prepButtons[1]);
+    expect(pushMock).toHaveBeenCalledWith(`/session/${otherLesson.sessionId}`);
+    expect(pushMock).not.toHaveBeenCalledWith(`/session/${lesson.sessionId}`);
+
+    pushMock.mockClear();
+    fireEvent.click(prepButtons[0]);
+    expect(pushMock).toHaveBeenCalledWith(`/session/${lesson.sessionId}`);
+    expect(pushMock).not.toHaveBeenCalledWith(`/session/${otherLesson.sessionId}`);
+  });
+
   it("M5-a: scheduled 상태 수업에는 수업 시작 버튼만 보이고 클릭 시 호출된다(2026-09-06: 완료/노쇼는 시작 전에는 노출되지 않음)", async () => {
     const onStartSession = vi.fn().mockResolvedValue({ ok: true });
     const onRefresh = vi.fn().mockResolvedValue(undefined);
@@ -106,9 +142,8 @@ describe("TeacherLessonScheduleTab", () => {
     await waitFor(() => expect(onRefresh).toHaveBeenCalled());
   });
 
-  it("2026-09-06(UAT): 수업 시작 성공 시 Meet 링크로 새 탭을 열고 이동한다", async () => {
-    const fakeTab = { closed: false, close: vi.fn(), location: { href: "" } };
-    const openSpy = vi.spyOn(window, "open").mockReturnValue(fakeTab as unknown as Window);
+  it("2026-09-09(제품 오너 지시): 수업 시작 클릭 시 Meet URL이 window.open()에 직접 전달되고, 시작 성공 시 세션뷰로 이동한다", async () => {
+    const openSpy = vi.spyOn(window, "open").mockReturnValue(null);
     const onStartSession = vi.fn().mockResolvedValue({ ok: true });
     const onRefresh = vi.fn().mockResolvedValue(undefined);
     render(
@@ -127,16 +162,21 @@ describe("TeacherLessonScheduleTab", () => {
 
     fireEvent.click(screen.getByText("수업 시작"));
 
-    // 팝업 차단을 피하려면 클릭 핸들러 안에서 동기적으로 빈 탭을 먼저 열어야 한다.
-    expect(openSpy).toHaveBeenCalledWith("", "_blank", "noopener,noreferrer");
+    // 빈 탭을 연 뒤 location.href를 나중에 설정하는 패턴은 완전히 제거됐다
+    // ("noopener"가 있으면 window.open()이 null을 반환해 location.href 대입이
+    // 항상 스킵되는 버그가 있었다) — 실제 Meet URL이 window.open()에 직접
+    // 전달되는지 검증한다. 팝업 차단을 피하려면 클릭 핸들러 안에서 동기적으로
+    // 열려야 하므로 onStartSession 응답을 기다리기 전에 이미 호출돼 있어야 한다.
+    expect(openSpy).toHaveBeenCalledWith(lesson.googleMeetLink, "_blank", "noopener,noreferrer");
     await waitFor(() => expect(onStartSession).toHaveBeenCalledWith("s1"));
-    await waitFor(() => expect(fakeTab.location.href).toBe("https://meet.google.com/abc-defg-hij"));
+    // 2026-09-09(UAT 지적): Meet 새 탭뿐 아니라 현재 탭도 세션뷰로 이동해야 한다.
+    await waitFor(() => expect(pushMock).toHaveBeenCalledWith("/session/s1"));
+    await waitFor(() => expect(onRefresh).toHaveBeenCalled());
     openSpy.mockRestore();
   });
 
-  it("2026-09-06(#441 마스킹 버그): 수업 시작이 실패(ok:false)하면 미리 연 탭을 닫고 에러 메시지를 그대로 보여준다(마스킹 없음)", async () => {
-    const fakeTab = { closed: false, close: vi.fn(), location: { href: "" } };
-    const openSpy = vi.spyOn(window, "open").mockReturnValue(fakeTab as unknown as Window);
+  it("2026-09-06(#441 마스킹 버그): 수업 시작이 실패(ok:false)해도 에러 메시지를 그대로 보여준다(마스킹 없음)", async () => {
+    const openSpy = vi.spyOn(window, "open").mockReturnValue(null);
     const onStartSession = vi.fn().mockResolvedValue({
       ok: false,
       error: "본인 수업만 시작할 수 있습니다.",
@@ -158,7 +198,10 @@ describe("TeacherLessonScheduleTab", () => {
     fireEvent.click(screen.getByText("수업 시작"));
     await waitFor(() => expect(screen.getByText("본인 수업만 시작할 수 있습니다.")).toBeInTheDocument());
     expect(screen.queryByText(/Minified React error/)).not.toBeInTheDocument();
-    expect(fakeTab.close).toHaveBeenCalled();
+    // 2026-09-09(제품 오너 지시): 더는 핸들을 붙잡고 있다가 닫는 방식이 아니라
+    // Meet URL을 window.open()에 직접 전달하므로, 시작 실패와 무관하게 클릭
+    // 시점에 이미 열려있다 — 세션뷰로는 이동하지 않아야 한다.
+    expect(pushMock).not.toHaveBeenCalledWith("/session/s1");
     openSpy.mockRestore();
   });
 

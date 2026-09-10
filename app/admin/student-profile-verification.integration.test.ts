@@ -1,16 +1,20 @@
 import { execFileSync } from "node:child_process";
 import { beforeAll, describe, expect, it } from "vitest";
 
-// M4 UAT #2 후속(2026-09-05) — 신규 로직 3건을 로컬 Postgres에 직접 psql로
+// M4 UAT #2 후속(2026-09-05) — 신규 로직을 로컬 Postgres에 직접 psql로
 // 검증한다(다른 통합 테스트와 동일한 psql shell-out 패턴,
 // lib/booking/trial-entitlement-and-cancellation.integration.test.ts 참고):
-//  1) 관리자 확인 게이트 — 생년월일 미확인 학생에게는 grant_trial_entitlement_
-//     for_consultation()이 체험수업권 지급 자체를 거부하고, verify_student_
-//     date_of_birth() 이후에는 지급이 성공한다.
-//  2) verify_student_date_of_birth()는 관리자 전용이고, 생년월일이 아직 없으면
-//     확인 처리할 수 없다.
-//  3) complete_student_profile()의 SAT null 통과(0으로 강제 변환하지 않음) +
+//  1) verify_student_date_of_birth()는 관리자 전용이고, 생년월일이 아직 없으면
+//     확인 처리할 수 없다. 확인 완료 처리하면 확인시각·확인자가 기록된다.
+//  2) complete_student_profile()의 SAT null 통과(0으로 강제 변환하지 않음) +
 //     gpa_scale 저장.
+//
+// 2026-09-09(UAT 지적, 제품 오너 정책 변경): "관리자 생년월일 확인이 없으면
+// 체험수업권 지급을 거부한다"는 게이트 자체를 폐기했다
+// (20261265000000_m4_drop_dob_verification_gate_from_trial_grant.sql). DOB
+// 확인 기능(verify_student_date_of_birth())은 그대로 남아있지만 더는 체험수업권
+// 지급을 막지 않으므로, 그 부분을 검증하던 테스트는 제거하고 "확인 여부와
+// 무관하게 지급이 성공한다"로 갱신했다.
 
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
 const ADMIN_ID = "aaaaaaaa-0000-0000-0000-000000000001";
@@ -55,7 +59,7 @@ function createStudent(label: string): string {
   return id;
 }
 
-describe("생년월일 관리자 확인 게이트", () => {
+describe("생년월일 관리자 확인 기능(체험수업권 지급 게이트 아님, 2026-09-09 정책 변경)", () => {
   let studentId: string;
   let consultationId: string;
 
@@ -85,10 +89,11 @@ describe("생년월일 관리자 확인 게이트", () => {
   // 다음 `supabase db reset --local`로 정리되는 것을 전제로 하고 별도 cleanup은
   // 하지 않는다.
 
-  it("생년월일 미확인 학생에게는 체험수업권 지급을 거부한다", () => {
-    expect(() =>
-      psql(`select grant_trial_entitlement_for_consultation('${consultationId}');`)
-    ).toThrow(/관리자의 생년월일 확인이 완료되지 않아/);
+  it("생년월일 확인 여부와 무관하게 체험수업권 지급이 성공한다(2026-09-09 게이트 폐기)", () => {
+    const grantId = psql(`select grant_trial_entitlement_for_consultation('${consultationId}');`);
+    expect(grantId).toMatch(/^[0-9a-f-]{36}$/);
+    const verifiedRow = psql(`select date_of_birth_verified_at is not null from profiles where id = '${studentId}';`);
+    expect(verifiedRow).toBe("f");
   });
 
   it("관리자가 아니면 확인 처리를 할 수 없다", () => {
@@ -104,7 +109,7 @@ describe("생년월일 관리자 확인 게이트", () => {
     );
   });
 
-  it("관리자가 확인 완료 처리하면 확인시각·확인자가 기록되고, 이후 체험수업권 지급이 성공한다", () => {
+  it("관리자가 확인 완료 처리하면 확인시각·확인자가 기록된다", () => {
     psqlAsAdmin(`select verify_student_date_of_birth('${studentId}');`);
 
     const verifiedRow = psql(
@@ -113,9 +118,6 @@ describe("생년월일 관리자 확인 게이트", () => {
     const [verified, verifiedBy] = verifiedRow.split("|");
     expect(verified).toBe("t");
     expect(verifiedBy).toBe(ADMIN_ID);
-
-    const grantId = psql(`select grant_trial_entitlement_for_consultation('${consultationId}');`);
-    expect(grantId).toMatch(/^[0-9a-f-]{36}$/);
   });
 });
 

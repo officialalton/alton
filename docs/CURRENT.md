@@ -5066,3 +5066,79 @@ Task 1~4와 그 사이 발견된 모든 corrective가 제품 오너 최종 승�
 
 **결정 필요**: 없음 — 재시도 시나리오의 실제 동작이 명시적 예외(모호하지 않음)로
 확인되어, 이전에 우려했던 "침묵/모호한 결과"는 실제로 발생하지 않는다.
+
+## 2026-09-09 — Preview UAT 실행 중 발견 사항 백로그
+
+`preview/m4-integration-verification` Preview 배포에서 제품 오너가 실제 UI로
+직접 UAT를 진행하며 발견한 사항. 이번 라운드 중 즉시 처리한 것과, 후속으로
+남겨둔 것을 구분해 기록한다(실행 ID: 신규 guardian `matchbox512+alton-uat-r2-*@gmail.com`,
+학생 "UAT Kid 113"/`f2d49de8-dd52-430e-8ae5-eebac0058f02`).
+
+### 이번 라운드에 반영 완료
+
+1. **체험수업권 미지급 시 학생 예약 화면이 통째로 숨는 문제** — `app/student/lesson-booking-data.ts`가
+   `entitlement_grants`(체험수업권 실제 지급 여부)로 예약 후보 자체를 필터링해,
+   "선생님 배정이 필요합니다" 문구가 실제로는 "체험수업권 지급 대기 중"인 경우까지
+   오인시켰다. 잔여량 검증은 예약 확정 시 `hold_entitlement()`가 이미 최종
+   강제하므로(`사용 가능한 수업권이 없습니다`), 선생님 배정 여부만으로 후보를
+   보여주도록 수정(`lesson-booking-data.ts`, `lesson-booking-data.test.ts`).
+   제품 오너 지시로 반영, 정책 재확인 불필요.
+2. **체험수업권 지급 게이트에서 "관리자 생년월일 확인" 요건 제거** — M4 UAT #2
+   후속(`20261102000000`)에서 추가됐던 정책을 제품 오너가 이번 UAT에서 폐기
+   지시. `20261265000000_m4_drop_dob_verification_gate_from_trial_grant.sql`로
+   `grant_trial_entitlement_for_consultation()`/`grant_trial_entitlement_for_student()`
+   두 함수에서 DOB 확인 블록만 제거(Smart Notes 동의 게이트는 유지). non-prod에
+   `db push` 완료. `profiles.date_of_birth_verified_at` 컬럼과 관리자 "생년월일
+   확인 완료" 버튼(`verify_student_date_of_birth()`)은 다른 용도로 남겨둠 —
+   지급 게이트 역할만 제거.
+
+### 후속 처리 필요 (미반영 — 백로그)
+
+3. **관리자 상담 카드의 "체험수업권 지급 재처리"/"선생님 배정" 버튼이 확인 절차 없이
+   즉시 실행됨** — `app/admin/ConsultationKanbanBoard.tsx:390-398`(재처리),
+   `:646-666`(선생님 배정, `SubjectTeacherAssignForm`), 동일 패턴이
+   `ConsultationSchedulingPanel.tsx:395-398`에도 중복. 제품 오너 지시: 확인
+   다이얼로그 추가 필요. **아직 코드 미반영.**
+4. **"완료(이력)" 상담 카드가 지난 상담으로 자동 이동해야 함** — 현재
+   `listKanbanBoardAction()`(`app/admin/consultation-kanban-actions.ts:62-84`)은
+   `closure_type IS NOT NULL`(관리자가 "상담 종료"를 수동으로 눌러야 세팅)로만
+   지난 상담 이동을 결정한다. 제품 오너 결정: trial_recommended 완료 후
+   파이프라인의 `trial_booking` 단계까지 끝나면(= `classifyStage()`가
+   `trial_requested`를 벗어나는 시점) 자동으로 `closure_type`을 세팅해 지난
+   상담으로 넘기는 방식(자동 이동, 수동 "상담 종료" 불필요)으로 확정. **아직
+   코드 미반영** — `admin_close_consultation()` 자동 세팅 지점(정규 계약 서명
+   완료 시 DocuSign 웹훅에서 이미 하는 것과 동일한 패턴)을 체험 경로에도
+   추가해야 함.
+5. **`app/student/LessonBookingTab.tsx:344` 안내 문구가 원인을 구분하지 못함** —
+   "예약 가능한 과목이 없습니다(선생님 배정이 필요합니다)"가 "선생님 미배정"과
+   "체험수업권 미지급" 두 원인을 하나의 문구로 뭉뚱그린다. 항목 1 반영 후에도
+   "선생님 미배정" 케이스에서는 여전히 이 문구가 쓰이므로 문구 자체는 남아있지만,
+   두 원인을 구분해서 보여주는 게 나은지는 후속 폴리싱 라운드에서 판단.
+6. **"이미 consume된 예약은 release할 수 없습니다" — 선생님 취소 버튼 UX 갭** —
+   `release_entitlement()`(`20260830050000_r1_entitlement.sql:147`)는 이미
+   `consume`(수업 완료/노쇼 확정으로 크레딧이 영구 소비됨) 처리된 예약의 `release`를
+   설계상 영구 차단한다(원장 1예약당 1개 종결 이벤트만 허용하는 멱등성 보장이라
+   의도된 동작). 문제는 선생님이 실수로 "수업 시작"→"수업 종료(완료)"를 눌러
+   세션이 종결된 뒤에는 선생님 쪽 "취소" 버튼이 막다른 길이라는 것 — 자기
+   서비스 방식의 되돌리기가 없다. 기존 관리자 경로(`adminReopenSession()` →
+   `adminRecompleteSession()` → 정산 재처리 작업(`resolveSessionJudgmentReconciliationTask()`)
+   경유)로만 교정 가능. "세온장·테스트1" 세션(오늘 UAT 중 실수로 시작 클릭됐던
+   실제 사전 존재 체험 레슨)이 정확히 이 상태로 막혀있다. **결정 필요**: 이
+   상태를 관리자 경로로 지금 교정할지, 아니면 이대로 "UAT 중 실수 데이터"로
+   보존하고 넘어갈지 제품 오너 판단 대기.
+7. **admin "매칭된 학생(수강 중)" 표시가 레거시 `enrollments` 테이블만 조회** —
+   `app/admin/users-data.ts::loadTeachers()`(약 238-290행)가 v3
+   `teacher_assignments`/`subject_enrollments`를 전혀 조회하지 않아, teacher1처럼
+   실제 활성 v3 배정이 있어도 관리자 화면엔 "매칭된 학생 없음"으로 보인다.
+   표시 전용 버그, 예약/수업권 로직에는 영향 없음. **미반영.**
+8. **직접 온보딩(지인·추천) 경로의 학생 초대 재발송 기능 부재** — `f519bed`에
+   이미 별도 기록됨(코드 변경 없이 후속 백로그로만 기록).
+
+### 아직 확인 안 된 것
+
+9. 오늘 UAT 중 제품 오너가 teacher1 계정으로 실수 진입해 실제 사전 존재 세션
+   "세온장·테스트1"의 "수업 시작"을 클릭한 건 — 이후 조사로 이 세션이 실제로
+   `finalize_lesson_session()`까지(완료/노쇼 확정) 진행된 것으로 항목 6에서
+   간접 확인됐다(그렇지 않으면 `consume` 이벤트가 존재할 수 없음). 다만 정확히
+   어떤 버튼을 순서대로 눌렀는지는 제품 오너에게 직접 확인된 적 없음 — 항목 6의
+   교정 여부를 결정할 때 함께 확인 필요.

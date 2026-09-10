@@ -139,7 +139,7 @@ describe("loadLessonBookingData — 체험 학생도 정규수업과 동일하�
     ]);
   });
 
-  it("체험(planned) 수강이라도 체험수업권이 아직 지급되지 않았으면 예약 후보에 넣지 않는다", async () => {
+  it("체험(planned) 수강은 체험수업권이 아직 지급되지 않았어도 예약 후보에는 넣는다(잔여량 검증은 예약 확정 시 hold_entitlement()가 최종 강제, 2026-09-09 UAT 지적)", async () => {
     const supabase = makeSupabase({
       enrollments: [{ id: "e3", subject_id: "sub1", status: "planned", subject: { name: "AP Calculus AB" } }],
       assignments: [
@@ -158,7 +158,17 @@ describe("loadLessonBookingData — 체험 학생도 정규수업과 동일하�
     });
 
     const result = await loadLessonBookingData(supabase as never, "child3");
-    expect(result.bookableEnrollments).toEqual([]);
+    expect(result.bookableEnrollments).toEqual([
+      {
+        subjectEnrollmentId: "e3",
+        subjectName: "AP Calculus AB",
+        teacherId: "t3",
+        teacherName: "이선생",
+        lessonTypeId: "lt-trial",
+        lessonDurationMinutes: 60,
+        isTrial: true,
+      },
+    ]);
   });
 
   it("선생님 배정이 없으면 상태와 무관하게 예약 후보가 아니다", async () => {

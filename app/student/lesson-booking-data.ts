@@ -58,25 +58,14 @@ export async function loadLessonBookingData(
     | { id: string; duration_minutes: number }
     | undefined;
 
-  // 선생님이 배정되면(teacher_assignments active) 체험 학생도 정규수업과 동일하게
-  // 본인이 직접 예약할 수 있어야 한다 — 체험 단계에서는 subject_enrollments.status가
-  // 계약 활성화 전까지 'planned'로 남아있으므로, "체험수업권이 실제로 지급돼 있는지"로
-  // 예약 가능 여부를 대신 판단한다(실제 잔여량 검증은 예약 시점 hold_entitlement()가
-  // 최종 강제 — 여기서는 후보 목록만 보여준다).
-  let hasTrialGrant = false;
-  if (trialType) {
-    const { data: trialGrant } = await supabase
-      .from("entitlement_grants")
-      .select("id, entitlement_products!inner(code)")
-      .eq("child_id", childId)
-      .eq("entitlement_products.code", "trial_lesson_grant")
-      .gt("expires_at", new Date().toISOString())
-      .maybeSingle();
-    hasTrialGrant = !!trialGrant;
-  }
-
+  // 2026-09-09(UAT 지적): 체험수업권 지급 여부로 후보 목록 자체를 숨기면,
+  // "선생님 배정이 필요합니다" 문구가 실제로는 "체험수업권 지급 대기 중"인
+  // 경우까지 오인시킨다. 수업권 잔여량 검증은 어차피 예약 확정 시
+  // hold_entitlement()가 최종 강제하므로("사용 가능한 수업권이 없습니다"),
+  // 여기서는 선생님 배정 여부만으로 후보를 보여주고 실제 부족 여부는 예약
+  // 시도 시점의 에러로 안내한다.
   const bookableEnrollments: BookableSubjectEnrollment[] = enrollments
-    .filter((e) => e.currentTeacher && (e.status === "active" ? !!regularType : e.status === "planned" && hasTrialGrant && !!trialType))
+    .filter((e) => e.currentTeacher && (e.status === "active" ? !!regularType : e.status === "planned" && !!trialType))
     .map((e) => {
       const isTrial = e.status !== "active";
       const type = isTrial ? trialType! : regularType!;

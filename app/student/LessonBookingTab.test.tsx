@@ -4,8 +4,9 @@ import LessonBookingTab from "./LessonBookingTab";
 import type { PastSessionForReport, UpcomingBooking, BookableSubjectEnrollment } from "./lesson-booking-data";
 
 const refreshMock = vi.fn();
+const pushMock = vi.fn();
 vi.mock("next/navigation", () => ({
-  useRouter: () => ({ refresh: refreshMock, push: vi.fn() }),
+  useRouter: () => ({ refresh: refreshMock, push: pushMock }),
 }));
 
 const pastSession: PastSessionForReport = {
@@ -251,16 +252,22 @@ describe("LessonBookingTab — mode(A안 '수업' 탭 통합)", () => {
     expect(screen.queryByText("수업 예약")).toBeNull();
   });
 
-  it("예정 수업 카드에 '수업 준비'(세션뷰 이동)와 '수업 시작'(Meet 새 탭) 버튼이 보인다", () => {
-    const openSpy = vi.spyOn(window, "open").mockReturnValue({ location: { href: "" } } as unknown as Window);
-    const pushMock = vi.fn();
+  it("예정 수업 카드에 '수업 준비'(세션뷰 이동)와 '수업 시작'(Meet 새 탭 + 세션뷰 이동) 버튼이 보인다", () => {
+    const openSpy = vi.spyOn(window, "open").mockReturnValue(null);
+    pushMock.mockClear();
     render(<LessonBookingTab {...baseProps} upcomingBookings={[upcomingBooking]} mode="upcoming" />);
 
     fireEvent.click(screen.getByText("수업 준비"));
+    expect(pushMock).toHaveBeenCalledWith(`/session/${upcomingBooking.sessionId}`);
     fireEvent.click(screen.getByText("수업 시작"));
-    expect(openSpy).toHaveBeenCalledWith("", "_blank", "noopener,noreferrer");
+    // 2026-09-09(제품 오너 지시): 빈 탭을 연 뒤 location.href를 나중에 설정하는
+    // 패턴은 완전히 제거됐다("noopener"가 있으면 window.open()이 null을 반환해
+    // location.href 대입이 항상 스킵되는 버그가 있었다) — 실제 Meet URL이
+    // window.open()에 직접 전달되는지 검증한다.
+    expect(openSpy).toHaveBeenCalledWith(upcomingBooking.googleMeetLink, "_blank", "noopener,noreferrer");
+    // 2026-09-09(UAT 지적): "수업 시작"도 Meet 새 탭뿐 아니라 현재 탭을 세션뷰로 이동해야 한다.
+    expect(pushMock).toHaveBeenCalledWith(`/session/${upcomingBooking.sessionId}`);
     openSpy.mockRestore();
-    void pushMock;
   });
 
   it("지난 수업 카드에 '수업 준비 내역' 링크가 보인다", () => {
