@@ -5402,3 +5402,72 @@ Playwright로 실제 로그인(`e2e/helpers.ts`의 기존 `loginAs()` 재사용)
 
 **결정 필요**: 없음(이번 라운드는 정정만). 다음은 P0-1 → P0-2 → P1 →
 P2-1 → P2-2·P2-3 → P2-4 순서로 구현 범위 승인 검토 예정(제품 오너 확인).
+
+## 2026-09-09 — P0-1 구현 완료: 학생 홈 v3 일정 누락 + 교사 학생별 v3 빈 화면
+
+제품 오너 승인 범위(P0-1, 딱 두 UAT 오류)만 구현. migration 없음, 기존
+데이터 이관 없음, Production 무변경(로컬 non-prod + Preview 배포·검증만
+진행). 커밋 `4b6d41d`(`preview/m4-integration-verification`).
+
+**1. 학생 홈 일정 불일치**: `app/student/dashboard-data.ts::loadDashboardData()`가
+이제 호출자가 이미 가져온 `loadLessonBookingData()` 결과(v3
+`sessions`/`reservations`)를 세 번째 인자로 받아 병합한다(추가 조회 없음 —
+`app/student/page.tsx`/`app/parent/page.tsx`가 `lessonBooking`을 먼저
+resolve한 뒤 `dashboard`에 전달하도록 로더 순서만 조정, 나머지 로더는 그대로
+병렬). "이번 달"/날짜 판정도 서버 프로세스 로컬 시간대 대신
+`lib/calendar-date-utils::dateKeyInTimezone()`(이미 "수업" 탭 v3 캘린더가
+쓰던 것과 동일 함수)로 통일 — 홈 캘린더·예정 수업 위젯·날짜 상세(같은
+`calendarByDay`를 공유)·"수업" 탭이 이제 같은 소스·같은 시간대 기준.
+`UpcomingLesson.sessionNumber`/`CalendarDaySession.sessionNumber`를
+`number | null`로 변경(v3는 회차 개념 없음), `HomeDashboard.tsx` 렌더 가드
+추가 + 중복 구현이던 로컬 `dateKeyInTimezone`을 정본 함수로 교체.
+
+**2. 교사 학생별 커리큘럼 빈 화면**: `app/teacher/roster-data.ts`의
+`RosterSubject`에 `source: "legacy" | "v3"` 추가. `CurriculumTab.tsx`의
+`StudentSubjectPicker`가 레거시 전용 `curricula`(TeacherCurriculumData[])
+대신 이미 legacy+v3를 합쳐 담고 있는 `students`(roster)를 그대로 써서 과목
+카드를 렌더 — v3 전용 배정 과목을 클릭하면 `{type:"operating-curriculum"}`
+(v3 운영 커리큘럼 화면)으로, 레거시는 그대로 `{type:"curriculum"}`으로
+정확히 분기한다. `jumpTo`(다른 화면에서의 딥링크) 경로는 이번 배치 범위
+밖 — 여전히 레거시 `curricula`만 매칭한다(별도 알려진 갭으로 남김, 사용자
+승인 범위가 "학생별 탭 일반 클릭 경로"로 명시됐던 것에 한정).
+
+**검증**:
+- `tsc --noEmit` 클린.
+- 신규/수정 테스트: `app/student/dashboard-data.test.ts`(신규, 4/4 통과 —
+  레거시 전용, v3 전용, 자정 경계, 레거시+v3 정렬), `app/teacher/CurriculumTab.test.tsx`에
+  v3 전용 배정 학생 클릭 시나리오 추가(1건), `roster-data.test.ts`/
+  `TeacherShell.test.tsx` 기존 스냅샷을 `source` 필드 반영해 갱신.
+- `supabase db reset --local` 후 전체 스위트(`--no-file-parallelism`)
+  251 files / 1748 tests 전부 통과(신규 5건 포함). `next build` 성공.
+- **실제 화면 검증(Playwright, 로컬 non-prod)**: teacher `seoyeon@example.com`
+  계정으로 학생 jihoon에게 레거시 등록이 전혀 없는 v3 전용
+  `subject_enrollment`+`teacher_assignment`(AP Calculus AB, UAT 전용
+  임시 행)를 만들어 "학생별" 탭에서 정상 노출·클릭 시 "학생 운영 커리큘럼"
+  화면 진입 확인. 같은 학생에 v3 `reservations`+`sessions`(임시) 1건을
+  만들어 학생 홈 예정 수업 위젯과 "수업" 탭 양쪽에 동일하게 노출됨을 확인.
+  검증 후 임시 행(subject_enrollments/teacher_assignments/reservations/
+  sessions/연관 subject_threads) 전부 삭제, `supabase db reset --local`로
+  최종 재확인.
+- 시간대·날짜 경계는 자동 테스트로 고정(자정 직후 KST 세션이 서버 UTC
+  기준으로는 전날/전월이어도 올바른 현지 날짜에 집계됨을 단위 테스트로
+  검증) — 실제 Preview에서 여러 시간대 계정으로 사람이 직접 재현하는
+  수동 UAT는 이번 라운드에서 하지 않음(아래 "확인 안 된 것" 참고).
+
+**Preview 배포**: `vercel`(인자 없음) → `dpl_6mhDwL2xMjz6yU23GUaZ25siVs92`,
+`https://alton-kdgwu410n-alton7.vercel.app`, `vercel inspect` 결과
+`target: preview` 확인. 빌드 성공(정적 페이지 생성 포함). **이 Preview
+URL에서 실제 계정으로 한 대화형 UAT는 이번 라운드에서 수행하지 못함** —
+Preview가 가리키는 공유 non-prod Supabase 프로젝트에 실행 ID 붙은 전용
+UAT 계정을 새로 만들어야 하는데, 이번 세션은 로컬 `supabase`(별도 non-prod
+인스턴스, 같은 마이그레이션 상태)에서 그 역할을 대신했다 — 동일 코드 기준
+동일한 시나리오를 실제 화면에서 확인했다는 점에서 실질적으로 동등하나,
+"공유 Preview 환경 자체"에서의 재현은 아니다.
+
+**외부 변경**: git push(`preview/m4-integration-verification`, 커밋
+`4b6d41d`) + 위 Preview 배포. **Production 무변경**(배포·환경변수·데이터
+전부 손대지 않음).
+
+**확인 안 된 것(다음 라운드)**: `jumpTo`(다른 화면에서 커리큘럼으로
+바로 진입하는 딥링크) 경로의 동일한 legacy-only 한계, 공유 Preview
+환경에서 실제 계정으로 하는 대화형 UAT.
