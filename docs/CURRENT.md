@@ -1,5 +1,23 @@
 # ALTON — 현재 상태 (2026-09-10 기준)
 
+> **2026-09-10 — P0-2 범위 확장: 관리자 "교재 문서"(섹션·문제 키워드)의
+> React error #441도 같은 원인으로 수정.** 제품 오너가 P0-2 Preview UAT
+> 중 세 번째 발생 지점을 직접 발견: 과목 템플릿에서 만든 키워드가 교재
+> 문서 섹션의 후보 목록에 바로 반영되지 않고, 같은 키워드를 다시 만들면
+> #441이 노출됨. 원인은 `app/admin/curriculum-doc-actions.ts`의
+> `assignSectionKeyword`/`removeSectionKeyword`/`assignProblemKeyword`/
+> `removeProblemKeyword`/`createSubjectKeywordForDoc` 다섯 함수가 이번
+> P0-2 1차 수정에서 빠져 있었던 것 — 정확히 같은 throw 기반 패턴. 다섯
+> 함수 모두 `{ ok, error }` 반환으로 전환하고, 공용 `KeywordTagger`
+> 컴포넌트(Promise reject 계약을 그대로 씀)와의 경계에서는
+> `CurriculumDocEditor.tsx`의 각 콜백이 `!result.ok`면 다시 `throw`해
+> 기존 try/catch·에러 문구 표시 로직은 그대로 재사용(컴포넌트 계약 변경
+> 없음). 검증: 관련 테스트 갱신, `tsc`/`eslint` 클린, `supabase db reset
+> --local` 후 전체 스위트 252 files/1765 tests 통과, `next build` 성공.
+> migration 없음, 기존 데이터 이관 없음. Production 무변경. (키워드가
+> "바로 반영 안 됨" 부분은 별도 캐시 이슈 가능성이 있어 P1-3 완료 후
+> 재확인 필요 — 이번엔 #441 발생 원인만 확정·수정.)
+
 > **2026-09-10 — P1-1 측정 및 1차 체감 개선(관리자 상담 탭·탭 전환 로딩) —
 > "완료" 아님, 근본 원인은 P1-3에서 해소 예정.**
 > 로컬 프로덕션 빌드에서 실측(Playwright): `/admin?tab=consult` GET~

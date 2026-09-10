@@ -144,10 +144,21 @@ export async function moveSection(sectionId: string, otherSectionId: string): Pr
 // 그대로 올린다(예: draft 교재에 태그 시도).
 // =========================================================================
 
+// 2026-09-10(P0-2 확장) — Minified React error #441 마스킹 버그가 이
+// 파일의 섹션·문제 키워드 액션에도 그대로 있었다(관리자 "교재 문서" 편집
+// 화면에서 실사용 재현 — 이미 subject-actions.ts/session-prep-actions.ts에
+// 적용한 것과 동일한 수정: throw 대신 { ok, error } 반환). 다만 이 파일이
+// 호출부에서 쓰는 `KeywordTagger` 공용 컴포넌트는 Promise reject 계약을
+// 그대로 쓰므로, 서버 액션 자체는 { ok, error }로 경계를 건너오고
+// CurriculumDocEditor.tsx의 각 콜백이 그 결과를 다시 throw로 바꿔
+// KeywordTagger의 기존 try/catch에 그대로 맞춘다(공용 컴포넌트 계약은
+// 바꾸지 않음).
+export type KeywordActionResult = { ok: true } | { ok: false; error: string };
+
 export async function assignSectionKeyword(
   sectionId: string,
   keywordId: string
-): Promise<void> {
+): Promise<KeywordActionResult> {
   const { supabase } = await requireAdmin();
 
   const { data: section } = await supabase
@@ -161,37 +172,39 @@ export async function assignSectionKeyword(
     .select("subject_id")
     .eq("id", keywordId)
     .single();
-  if (!docRow || !keyword) throw new Error("존재하지 않는 섹션 또는 키워드입니다.");
+  if (!docRow || !keyword) return { ok: false, error: "존재하지 않는 섹션 또는 키워드입니다." };
   if (docRow.subject_id !== keyword.subject_id) {
-    throw new Error("교재와 키워드는 같은 과목이어야 합니다.");
+    return { ok: false, error: "교재와 키워드는 같은 과목이어야 합니다." };
   }
 
   const { error } = await supabase
     .from("curriculum_doc_section_keywords")
     .insert({ section_id: sectionId, keyword_id: keywordId });
-  if (error) {
-    if (error.code === "23505") return; // 이미 태그됨 — 멱등 처리
-    throw new Error(error.message);
+  if (error && error.code !== "23505") {
+    // 23505(이미 태그됨)는 멱등 처리 — 에러 아님.
+    return { ok: false, error: error.message };
   }
+  return { ok: true };
 }
 
 export async function removeSectionKeyword(
   sectionId: string,
   keywordId: string
-): Promise<void> {
+): Promise<KeywordActionResult> {
   const { supabase } = await requireAdmin();
   const { error } = await supabase
     .from("curriculum_doc_section_keywords")
     .delete()
     .eq("section_id", sectionId)
     .eq("keyword_id", keywordId);
-  if (error) throw new Error(error.message);
+  if (error) return { ok: false, error: error.message };
+  return { ok: true };
 }
 
 export async function assignProblemKeyword(
   problemId: string,
   keywordId: string
-): Promise<void> {
+): Promise<KeywordActionResult> {
   const { supabase } = await requireAdmin();
 
   const { data: problem } = await supabase
@@ -204,37 +217,42 @@ export async function assignProblemKeyword(
     .select("subject_id")
     .eq("id", keywordId)
     .single();
-  if (!problem || !keyword) throw new Error("존재하지 않는 문제 또는 키워드입니다.");
+  if (!problem || !keyword) return { ok: false, error: "존재하지 않는 문제 또는 키워드입니다." };
   if (problem.subject_id && problem.subject_id !== keyword.subject_id) {
-    throw new Error("문제와 키워드는 같은 과목이어야 합니다.");
+    return { ok: false, error: "문제와 키워드는 같은 과목이어야 합니다." };
   }
 
   const { error } = await supabase
     .from("problem_keywords")
     .insert({ problem_id: problemId, keyword_id: keywordId });
-  if (error) {
-    if (error.code === "23505") return; // 이미 태그됨 — 멱등 처리
-    throw new Error(error.message);
+  if (error && error.code !== "23505") {
+    return { ok: false, error: error.message };
   }
+  return { ok: true };
 }
 
 export async function removeProblemKeyword(
   problemId: string,
   keywordId: string
-): Promise<void> {
+): Promise<KeywordActionResult> {
   const { supabase } = await requireAdmin();
   const { error } = await supabase
     .from("problem_keywords")
     .delete()
     .eq("problem_id", problemId)
     .eq("keyword_id", keywordId);
-  if (error) throw new Error(error.message);
+  if (error) return { ok: false, error: error.message };
+  return { ok: true };
 }
+
+export type CreateSubjectKeywordForDocResult =
+  | { ok: true; value: SubjectKeyword }
+  | { ok: false; error: string };
 
 export async function createSubjectKeywordForDoc(
   subjectId: string,
   label: string
-): Promise<SubjectKeyword> {
+): Promise<CreateSubjectKeywordForDocResult> {
   const { supabase } = await requireAdmin();
   const { data, error } = await supabase
     .from("subject_keywords")
@@ -242,10 +260,10 @@ export async function createSubjectKeywordForDoc(
     .select("id, label, status")
     .single();
   if (error) {
-    if (error.code === "23505") throw new Error("이미 존재하는 키워드입니다.");
-    throw new Error(error.message);
+    if (error.code === "23505") return { ok: false, error: "이미 존재하는 키워드입니다." };
+    return { ok: false, error: error.message };
   }
-  return { id: data.id, label: data.label, status: data.status };
+  return { ok: true, value: { id: data.id, label: data.label, status: data.status } };
 }
 
 export type ProblemFormat = "mc" | "essay" | "math";

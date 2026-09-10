@@ -307,7 +307,7 @@ describe("CurriculumDocEditor", () => {
     });
 
     it("배포된 교재의 섹션에서 카탈로그 키워드를 태그할 수 있다", async () => {
-      vi.mocked(docActions.assignSectionKeyword).mockResolvedValue(undefined);
+      vi.mocked(docActions.assignSectionKeyword).mockResolvedValue({ ok: true });
       const publishedDoc = {
         ...doc,
         status: "published",
@@ -344,11 +344,10 @@ describe("CurriculumDocEditor", () => {
 
     it("카탈로그에 없는 키워드는 새로 만들어 태그한다", async () => {
       vi.mocked(docActions.createSubjectKeywordForDoc).mockResolvedValue({
-        id: "kw2",
-        label: "새키워드",
-        status: "active",
+        ok: true,
+        value: { id: "kw2", label: "새키워드", status: "active" },
       });
-      vi.mocked(docActions.assignSectionKeyword).mockResolvedValue(undefined);
+      vi.mocked(docActions.assignSectionKeyword).mockResolvedValue({ ok: true });
       const publishedDoc = { ...doc, status: "published" };
       render(<CurriculumDocEditor doc={publishedDoc} onBack={vi.fn()} onDeleted={vi.fn()} />);
 

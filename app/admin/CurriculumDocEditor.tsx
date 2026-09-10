@@ -343,18 +343,23 @@ function SectionEditor({
               : null
           }
           onCreate={async (label) => {
-            const kw = await createSubjectKeywordForDoc(subjectId, label);
-            onCatalogAdd(kw);
-            return kw;
+            // 2026-09-10(P0-2 확장) — 서버 액션은 { ok, error }로 반환하고,
+            // 여기서 KeywordTagger의 기존 reject 계약으로 다시 바꾼다.
+            const result = await createSubjectKeywordForDoc(subjectId, label);
+            if (!result.ok) throw new Error(result.error);
+            onCatalogAdd(result.value);
+            return result.value;
           }}
           onAssign={async (kw) => {
-            await assignSectionKeyword(section.id, kw.id);
+            const result = await assignSectionKeyword(section.id, kw.id);
+            if (!result.ok) throw new Error(result.error);
             const next = [...sectionKeywords, kw];
             setSectionKeywords(next);
             onPatch({ keywords: next });
           }}
           onRemove={async (kw) => {
-            await removeSectionKeyword(section.id, kw.id);
+            const result = await removeSectionKeyword(section.id, kw.id);
+            if (!result.ok) throw new Error(result.error);
             const next = sectionKeywords.filter((k) => k.id !== kw.id);
             setSectionKeywords(next);
             onPatch({ keywords: next });
@@ -428,16 +433,19 @@ function SectionEditor({
                   catalog={catalog}
                   disabledReason={null}
                   onCreate={async (label) => {
-                    const kw = await createSubjectKeywordForDoc(subjectId, label);
-                    onCatalogAdd(kw);
-                    return kw;
+                    const result = await createSubjectKeywordForDoc(subjectId, label);
+                    if (!result.ok) throw new Error(result.error);
+                    onCatalogAdd(result.value);
+                    return result.value;
                   }}
                   onAssign={async (kw) => {
-                    await assignProblemKeyword(p.id, kw.id);
+                    const result = await assignProblemKeyword(p.id, kw.id);
+                    if (!result.ok) throw new Error(result.error);
                     patchProblemKeywords(p.id, [...(p.keywords ?? []), kw]);
                   }}
                   onRemove={async (kw) => {
-                    await removeProblemKeyword(p.id, kw.id);
+                    const result = await removeProblemKeyword(p.id, kw.id);
+                    if (!result.ok) throw new Error(result.error);
                     patchProblemKeywords(
                       p.id,
                       (p.keywords ?? []).filter((k) => k.id !== kw.id)
