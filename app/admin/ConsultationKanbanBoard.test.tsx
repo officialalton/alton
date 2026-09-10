@@ -3,6 +3,7 @@ import { describe, expect, it, vi, beforeEach } from "vitest";
 import ConsultationKanbanBoard from "./ConsultationKanbanBoard";
 import { sendTrialOnboardingNoticeAction, sendRegularContractOneClickAction } from "./trial-onboarding-actions";
 import { recordConsultationOutcome } from "./consultation-scheduling-actions";
+import type { KanbanCard } from "./consultation-kanban-actions";
 
 const refreshMock = vi.fn();
 vi.mock("next/navigation", () => ({
@@ -655,5 +656,41 @@ describe("ConsultationKanbanBoard — OutcomeForm 상담 결과 기록(2026-09-0
 
     await waitFor(() => expect(recordConsultationOutcome).toHaveBeenCalled());
     expect(screen.queryByText(/Minified React error/)).not.toBeInTheDocument();
+  });
+});
+
+describe("ConsultationKanbanBoard — initialCards(2026-09-10, P1-3 상담 SSR 중복 조회 제거)", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("initialCards가 있으면 마운트 시 listKanbanBoardAction()을 호출하지 않고 바로 카드를 보여준다", async () => {
+    render(
+      <ConsultationKanbanBoard
+        subjects={subjects}
+        teacherCandidatesBySubject={teacherCandidatesBySubject}
+        initialCards={[cardRow()] as unknown as KanbanCard[]}
+      />
+    );
+
+    expect(await screen.findByText("김민지")).toBeInTheDocument();
+    expect(listKanbanBoardActionMock).not.toHaveBeenCalled();
+  });
+
+  it("initialCards가 없으면 기존처럼 마운트 시 listKanbanBoardAction()을 호출한다", async () => {
+    listKanbanBoardActionMock.mockResolvedValue([cardRow()]);
+
+    render(<ConsultationKanbanBoard subjects={subjects} teacherCandidatesBySubject={teacherCandidatesBySubject} />);
+
+    await waitFor(() => expect(listKanbanBoardActionMock).toHaveBeenCalledTimes(1));
+    expect(await screen.findByText("김민지")).toBeInTheDocument();
+  });
+
+  it("initialCards가 빈 배열이면(상담이 하나도 없는 정상 상태) 재조회하지 않고 빈 상태를 보여준다", async () => {
+    render(
+      <ConsultationKanbanBoard subjects={subjects} teacherCandidatesBySubject={teacherCandidatesBySubject} initialCards={[]} />
+    );
+
+    await waitFor(() => expect(listKanbanBoardActionMock).not.toHaveBeenCalled());
   });
 });

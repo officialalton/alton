@@ -1,5 +1,43 @@
 # ALTON — 현재 상태 (2026-09-10 기준)
 
+> **2026-09-10 — P1-3 1차 배치: 상담 SSR 중복 제거 + 관리자 탭별 SSR 로딩
+> 분리 완료(Preview 미배포, UAT 대기).** payoutBatches/workspaceProvisionings
+> 건의 실패(아래 항목)와 달리, **클라이언트 재조회로 옮기지 않고 SSR인 채로
+> `searchParams.tab` 기준 조건부 실행**만 적용했다(migration 없음). (1)
+> `listKanbanBoardAction()`의 조회 로직을 `consultation-kanban-data.ts`의
+> `loadKanbanBoard()`로 분리해 `admin/page.tsx`가 상담 탭 SSR 시 직접 호출,
+> `initialKanbanCards`로 내려 마운트 후 중복 POST를 없앴다(직접 URL 진입 시
+> 마운트 POST 1건→0건, networkidle 1411ms→807~866ms). (2) `admin/page.tsx`의
+> 25개 로더 전부를 `admin-tabs.ts`의 `resolveAdminTab()` 기준으로 게이팅해
+> 탭별로 실제 필요한 것만 실행(홈 1개/사용자 6개/상담 11개/매칭 3개/정산
+> 1개/Workspace 1개, 이전엔 탭 무관 25개 고정). 직접 URL·뒤로가기·앞으로가기
+> 회귀 UAT 통과, 자동 테스트 253/253·1770/1770 통과. 상세:
+> `docs/2026-09-10-p-execution-roadmap.md` P1-3.
+
+> **2026-09-10 — P1-3 payoutBatches·workspaceProvisionings 클라이언트
+> 재조회 전환 보류(코드 되돌림, Preview 미배포).** 정산·Workspace 탭 데이터를
+> `admin/page.tsx` 초기 `Promise.all`에서 빼고 탭 마운트 시 `list*Action()`을
+> 직접 호출하도록(`ConsultationKanbanBoard`와 동일 패턴) 바꿨으나, 동일 조건
+> 로컬 프로덕션 빌드 측정에서 두 탭 첫 콘텐츠 표시가 실제로 느려지고(정산
+> 82ms→220ms, Workspace 45ms→107~140ms — 서버 액션 POST+RSC GET 왕복 추가분)
+> 무관한 탭(매칭) 전환 시간은 개선이 측정되지 않아(17~85ms→19~72ms, 로컬
+> Supabase가 빨라 로더 2개 제거 효과가 잡음 수준) 채택하지 않았다. 관련 코드
+> 전부 원복(`AdminShell.tsx`/`PayoutBatchesTab.tsx`/`WorkspaceTab.tsx`/
+> `page.tsx`/`payout-batches-actions.ts`/`workspace-actions.ts` 및 테스트).
+> P1-3은 계속 진행하되 "SSR 선로딩→클라이언트 재조회" 방식은 다른 화면에도
+> 쓰지 않는다. 상세: `docs/2026-09-10-p-execution-roadmap.md` P1-3.
+
+> **2026-09-10 — P2-1 교재 관리·키워드 분류 정책 보완(문서만).** 교재 문서와
+> 교재 라이브러리는 하나의 교재 관리 흐름으로 통합한다. 키워드는 관리자 과목
+> 템플릿에서만 생성·수정·삭제하며, 교재는 해당 과목의 기존 키워드 하나에만
+> 연결한다. 교재 문서에서는 모든 후보를 칩으로 표시해 하나를 선택·해제할 수
+> 있고 검색·자유 생성은 제공하지 않는다. 초안에서도 태그할 수 있으나 자동
+> 콘텐츠 후보에는 배포 교재만 포함한다. 키워드별 교재 순서는 운영자 정렬 순서와
+> 제목 자연 정렬을 사용하며, 회차 자동 구성도 이를 따른다. 현행 교재·섹션
+> 키워드 모델의 migration·기존 데이터 처리·배포본 호환은 P2-1 구현 전 조사와
+> 승인 대상이다. P0에는 즉시 반영·중복 오류 안정화만 남긴다. 코드·migration·
+> Preview·Production 변경 없음.
+
 > **2026-09-10 — P0-2 범위 확장: 관리자 "교재 문서"(섹션·문제 키워드)의
 > React error #441도 같은 원인으로 수정.** 제품 오너가 P0-2 Preview UAT
 > 중 세 번째 발생 지점을 직접 발견: 과목 템플릿에서 만든 키워드가 교재

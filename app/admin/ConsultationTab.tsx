@@ -18,6 +18,7 @@ import {
 import type { ContractActivationRetryItem } from "./consultation-actions";
 import ConsultationSchedulingPanel from "./ConsultationSchedulingPanel";
 import ConsultationKanbanBoard from "./ConsultationKanbanBoard";
+import type { KanbanCard } from "./consultation-kanban-actions";
 import ClosedConsultationsSection from "./ClosedConsultationsSection";
 import type {
   ConsultationListItem,
@@ -60,6 +61,7 @@ export default function ConsultationTab({
   contractActivationRetries,
   subjects,
   teacherCandidatesBySubject,
+  initialKanbanCards,
 }: {
   consultations: ConsultationListItem[];
   trials: TrialSessionListItem[];
@@ -71,6 +73,10 @@ export default function ConsultationTab({
   contractActivationRetries: ContractActivationRetryItem[];
   subjects: AdminSubject[];
   teacherCandidatesBySubject: Record<string, MatchingTeacherCandidate[]>;
+  // 2026-09-10(P1-3) — admin/page.tsx가 상담 탭 SSR 시 내려주는 칸반 초기
+  // 데이터. ConsultationKanbanBoard로 그대로 전달해 마운트 후 중복 조회를
+  // 없앤다.
+  initialKanbanCards?: KanbanCard[];
 }) {
   const [sub, setSub] = useState<SubTab>("consult");
 
@@ -97,7 +103,11 @@ export default function ConsultationTab({
       </div>
 
       {sub === "consult" && (
-        <ConsultationKanbanBoard subjects={subjects} teacherCandidatesBySubject={teacherCandidatesBySubject} />
+        <ConsultationKanbanBoard
+          subjects={subjects}
+          teacherCandidatesBySubject={teacherCandidatesBySubject}
+          initialCards={initialKanbanCards}
+        />
       )}
       {sub === "scheduling" && <ConsultationSchedulingPanel />}
       {sub === "trial" && <TrialSection trials={trials} consultations={consultations} />}

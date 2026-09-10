@@ -62,12 +62,19 @@ function formatConsultTime(iso: string | null): string {
 export default function ConsultationKanbanBoard({
   subjects,
   teacherCandidatesBySubject,
+  initialCards,
 }: {
   subjects: AdminSubject[];
   teacherCandidatesBySubject: Record<string, MatchingTeacherCandidate[]>;
+  // 2026-09-10(P1-3) — admin/page.tsx가 상담 탭 SSR 시 loadKanbanBoard()를
+  // 직접 호출해 내려주는 초기 데이터. 있으면 마운트 시 재조회(listKanbanBoardAction()
+  // POST)를 하지 않고 그대로 표시한다 — 사용자가 명시적으로 액션을 실행해
+  // refresh()가 호출될 때만 클라이언트에서 다시 조회한다. 없으면(예: 향후
+  // 다른 진입 경로) 기존처럼 마운트 시 스스로 조회한다.
+  initialCards?: KanbanCard[];
 }) {
   const router = useRouter();
-  const [cards, setCards] = useState<KanbanCard[] | null>(null);
+  const [cards, setCards] = useState<KanbanCard[] | null>(initialCards ?? null);
   const [error, setError] = useState<string | null>(null);
   const [openId, setOpenId] = useState<string | null>(null);
 
@@ -80,8 +87,10 @@ export default function ConsultationKanbanBoard({
   }
 
   useEffect(() => {
+    if (initialCards) return;
     // eslint-disable-next-line react-hooks/set-state-in-effect
     load();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function refresh() {

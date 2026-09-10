@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { logout } from "@/app/login/actions";
 import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
 import MobileDrawerNav from "@/app/components/MobileDrawerNav";
 import { linkAdminGoogleAccount } from "./google-link-actions";
+import { resolveAdminTab, type AdminTabId } from "./admin-tabs";
 import AdminHomeDashboard from "./AdminHomeDashboard";
 import type { AdminDashboardData } from "./dashboard-data";
 import CatalogTab from "./CatalogTab";
@@ -14,6 +15,7 @@ import BillingTab from "./BillingTab";
 import BookingReconciliationPanel from "./BookingReconciliationPanel";
 import UnifiedScheduleTab from "./UnifiedScheduleTab";
 import ConsultationTab from "./ConsultationTab";
+import type { KanbanCard } from "./consultation-kanban-actions";
 import InquiryAndMeetingTab from "./InquiryAndMeetingTab";
 import type {
   ConsultationListItem,
@@ -74,7 +76,9 @@ const HIDDEN_TABS = [{ id: "devlog", label: "개발 로그", icon: "🧾" }] as 
 
 const ALL_TABS = [...NAV_ITEMS, ...HIDDEN_TABS] as const;
 
-type TabId = (typeof ALL_TABS)[number]["id"];
+// 2026-09-10(P1-3) — 탭 id 유효성 판정은 admin-tabs.ts의 resolveAdminTab()로
+// admin/page.tsx와 공유한다(둘이 어긋나면 탭과 SSR 데이터가 어긋난다).
+type TabId = AdminTabId;
 
 export default function AdminShell({
   initialTab,
@@ -94,6 +98,7 @@ export default function AdminShell({
   driveIssues,
   staleEnvelopes,
   contractActivationRetries,
+  initialKanbanCards,
   devLogContent,
   payoutBatches,
   teacherCandidatesBySubject,
@@ -126,6 +131,7 @@ export default function AdminShell({
   driveIssues: DriveArtifactIssue[];
   staleEnvelopes: StaleEnvelopeContract[];
   contractActivationRetries: ContractActivationRetryItem[];
+  initialKanbanCards?: KanbanCard[];
   devLogContent: string;
   payoutBatches: PayoutBatchListItem[];
   teacherCandidatesBySubject: Record<string, MatchingTeacherCandidate[]>;
@@ -138,10 +144,7 @@ export default function AdminShell({
   openOrRecentPaymentDisputes: Awaited<ReturnType<typeof listOpenOrRecentPaymentDisputes>>;
 }) {
   const router = useRouter();
-  const validTabIds = useMemo(() => ALL_TABS.map((n) => n.id), []);
-  const [activeTab, setActiveTab] = useState<TabId>(
-    validTabIds.includes(initialTab as TabId) ? (initialTab as TabId) : "home"
-  );
+  const [activeTab, setActiveTab] = useState<TabId>(resolveAdminTab(initialTab));
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const [timezoneModalOpen, setTimezoneModalOpen] = useState(false);
 
@@ -153,8 +156,7 @@ export default function AdminShell({
   // activeTab을 그 값으로 다시 맞춘다.
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setActiveTab(validTabIds.includes(initialTab as TabId) ? (initialTab as TabId) : "home");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setActiveTab(resolveAdminTab(initialTab));
   }, [initialTab]);
 
   function selectTab(id: TabId) {
@@ -317,6 +319,7 @@ export default function AdminShell({
               contractActivationRetries={contractActivationRetries}
               subjects={subjects}
               teacherCandidatesBySubject={teacherCandidatesBySubject}
+              initialKanbanCards={initialKanbanCards}
             />
           ) : activeTab === "inquiry" ? (
             <InquiryAndMeetingTab />
