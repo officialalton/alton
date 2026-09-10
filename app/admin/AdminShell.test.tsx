@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import AdminShell from "./AdminShell";
 import type { AdminDashboardData } from "./dashboard-data";
@@ -129,6 +129,19 @@ describe("AdminShell", () => {
       "정산",
     ].forEach((label) => expect(screen.getByText(label)).toBeInTheDocument());
     expect(screen.getByText("관리자, 안녕하세요")).toBeInTheDocument();
+  });
+
+  it("2026-09-10(P0-3 2차) — 브라우저 뒤로가기/앞으로가기로 initialTab prop이 바뀌면 activeTab이 그대로 따라간다(마운트 시점에만 반영되던 정체 상태 수정)", async () => {
+    const { rerender } = render(<AdminShell {...baseProps} initialTab="entitlements" />);
+    expect(await screen.findByText("수업권 원장")).toBeInTheDocument();
+
+    // Next.js가 뒤로가기로 새 initialTab을 다시 내려주는 상황을 재현한다 —
+    // AdminShell 컴포넌트 자체는 리마운트되지 않고 새 props만 받는다.
+    rerender(<AdminShell {...baseProps} initialTab="catalog" />);
+    await waitFor(() =>
+      expect(screen.getByRole("heading", { name: "과목 템플릿" })).toBeInTheDocument()
+    );
+    expect(screen.queryByText("수업권 원장")).not.toBeInTheDocument();
   });
 
   it("2026-09-10(UI/UX 1차 리뷰 지적): '개발 로그'는 일반 네비게이션(사이드바)에 노출되지 않는다", () => {

@@ -4,9 +4,9 @@ import ParentShell from "./ParentShell";
 import type { DashboardData } from "@/app/student/dashboard-data";
 import type { Child } from "./children-data";
 
-const replaceMock = vi.fn();
+const pushMock = vi.fn();
 vi.mock("next/navigation", () => ({
-  useRouter: () => ({ push: vi.fn(), replace: replaceMock, refresh: vi.fn() }),
+  useRouter: () => ({ push: pushMock, replace: vi.fn(), refresh: vi.fn() }),
 }));
 
 vi.mock("@/app/login/actions", () => ({
@@ -101,7 +101,7 @@ describe("ParentShell", () => {
     // "이서아"는 상단 자녀 전환 pill과 홈의 자녀 현황 카드 양쪽에 나타난다 —
     // DOM 순서상 상단 pill이 먼저 렌더링된다.
     fireEvent.click(screen.getAllByText("이서아")[0]);
-    expect(replaceMock).toHaveBeenCalledWith("?child=s2&tab=home", { scroll: false });
+    expect(pushMock).toHaveBeenCalledWith("?child=s2&tab=home", { scroll: false });
   });
 
   it("레슨 탭을 누르면 읽기전용 LessonsTab이 렌더링된다(메모 입력창 없음)", () => {
@@ -194,7 +194,7 @@ describe("ParentShell", () => {
     expect(badge).toBeInTheDocument();
 
     fireEvent.click(badge);
-    expect(replaceMock).toHaveBeenCalledWith("?child=s1&tab=consent", { scroll: false });
+    expect(pushMock).toHaveBeenCalledWith("?child=s1&tab=consent", { scroll: false });
   });
 
   it("동의가 전부 완료되면 배지를 보여주지 않는다", () => {
@@ -227,7 +227,7 @@ describe("ParentShell", () => {
     expect(badge).toBeInTheDocument();
 
     fireEvent.click(badge);
-    expect(replaceMock).toHaveBeenCalledWith("?child=s1&tab=enrollment", { scroll: false });
+    expect(pushMock).toHaveBeenCalledWith("?child=s1&tab=enrollment", { scroll: false });
   });
 
   it("2026-09-10(UI/UX 1차 리뷰 지적): 동명이인이어도 childId로 정확히 매칭해 다른 자녀에게는 배지를 표시하지 않는다", () => {

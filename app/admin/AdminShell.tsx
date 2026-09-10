@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { logout } from "@/app/login/actions";
 import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
@@ -145,10 +145,27 @@ export default function AdminShell({
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const [timezoneModalOpen, setTimezoneModalOpen] = useState(false);
 
+  // 2026-09-10(P0-3 2차) — activeTab은 최초 마운트 시 initialTab으로만
+  // 초기화되고, 이후 브라우저 뒤로가기/앞으로가기로 이 페이지의 URL(및 그에
+  // 따라 새로 내려오는 initialTab prop)이 바뀌어도 useState 초기값은 다시
+  // 계산되지 않는다(React의 통상적인 동작) — 그래서 주소창은 바뀌는데 화면은
+  // 이전 탭에 멈춰 있는 어긋남이 재현됐다. initialTab이 바뀔 때마다
+  // activeTab을 그 값으로 다시 맞춘다.
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setActiveTab(validTabIds.includes(initialTab as TabId) ? (initialTab as TabId) : "home");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialTab]);
+
   function selectTab(id: TabId) {
     setActiveTab(id);
     setAccountMenuOpen(false);
-    router.replace(`?tab=${id}`, { scroll: false });
+    // 2026-09-10(P0-3 2차) — 탭 전환을 replace에서 push로: 이전엔 매 탭
+    // 전환이 히스토리 항목 하나(admin 진입 시점)를 계속 덮어써, 관리자 세션
+    // 전체가 뒤로가기 한 번에 통째로 빠져나가 로그인/OAuth 이력으로
+    // 건너뛰었다. push로 바꿔 탭 전환마다 되돌아갈 수 있는 자체 히스토리
+    // 항목을 만든다(포털 밖으로 나가는 것과 포털 내부 탭 이동을 구분).
+    router.push(`?tab=${id}`, { scroll: false });
   }
 
   const activeLabel = ALL_TABS.find((n) => n.id === activeTab)?.label ?? "";

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { logout } from "@/app/login/actions";
 import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
@@ -119,9 +119,21 @@ export default function StudentShell({
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const [timezoneModalOpen, setTimezoneModalOpen] = useState(false);
 
+  // 2026-09-10(P0-3 2차) — 공용 포털 내비게이션 결함: activeTab이 마운트
+  // 시점의 initialTab으로만 초기화돼, 브라우저 뒤로가기/앞으로가기로 URL이
+  // 바뀌어도(그래서 새 initialTab prop이 내려와도) 다시 반영되지 않았다.
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setActiveTab(validTabIds.includes(initialTab as TabId) ? (initialTab as TabId) : "home");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialTab]);
+
   function selectTab(id: TabId) {
     setActiveTab(id);
-    router.replace(`?tab=${id}`, { scroll: false });
+    // 2026-09-10(P0-3 2차) — replace→push: 탭 전환마다 되돌아갈 수 있는
+    // 히스토리 항목을 만들어, 뒤로가기 한 번이 포털 밖(로그인/OAuth)까지
+    // 건너뛰지 않고 직전 탭으로만 이동하게 한다.
+    router.push(`?tab=${id}`, { scroll: false });
     // 이 화면(및 부모용 ParentShell)은 모든 탭 데이터를 최초 서버 렌더 시점에
     // props로 한 번에 받아와 클라이언트에서 탭만 전환한다 — 탭 전환 자체는
     // 새 서버 요청을 만들지 않으므로, 그 사이(예: Stripe 결제 완료) 바뀐 서버

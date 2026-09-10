@@ -1,6 +1,38 @@
 # ALTON — 현재 상태 (2026-09-10 기준)
 
-> **2026-09-10 — P0-3 원인 확정·수정 완료: `/login`이 유효 세션을 확인하지
+> **2026-09-10 — P0-3 완료(2차): 공용 포털 내비게이션의 탭 상태·history 결함
+> 원인 확정·수정.** `/login` 가드 수정과는 별개로, 최신 Preview에서 "관리자
+> 홈에서 수업권으로 이동해도 URL은 `/admin?tab=home`"과 "이어서 뒤로가기가
+> Google OAuth 계정 선택 화면으로 감"이 재현됐다(학생·교사도 동일). 로컬
+> Playwright로 재현·확정: `AdminShell`/`StudentShell`/`TeacherShell`/
+> `ParentShell` 넷 모두 `const [activeTab, setActiveTab] = useState<TabId>(initialTab...)`로
+> **마운트 시점에만** `activeTab`을 초기화하고, 이후 `initialTab` prop이
+> 바뀌어도(브라우저 뒤로가기/앞으로가기로 Next가 새 searchParams를 내려줄
+> 때) 다시 반영하는 로직이 전혀 없었다 — 그래서 주소창은 바뀌어도 화면은
+> 이전 탭에 멈춰 있었다(프로덕션 빌드로 로컬 재현 성공, dev 모드에선
+> 안 보임). 또한 탭 전환이 전부 `router.replace()`라 관리자/학생/교사
+> 세션 전체가 브라우저 히스토리 한 칸에 계속 덮어써져, 탭을 아무리
+> 옮겨다녀도 뒤로가기 한 번이면 포털 진입 이전(로그인/OAuth) 이력으로
+> 바로 빠졌다. **수정**: 네 Shell 전부에 `initialTab`이 바뀔 때마다
+> `activeTab`을 다시 맞추는 `useEffect` 추가, 탭 전환의 `router.replace`를
+> `router.push`로 교체(탭마다 되돌아갈 수 있는 히스토리 항목 생성) — `replace`를
+> 무분별하게 전면 교체하거나 OAuth redirect를 건드리지 않고, 확인된 두 지점만
+> 최소로 고쳤다. **로컬 검증(프로덕션 빌드, Playwright)**: 관리자 — 수업권→
+> 커리큘럼 클릭 후 뒤로가기 시 URL·화면이 정확히 수업권으로 일치, 앞으로가기도
+> 커리큘럼으로 정확히 일치(수정 전엔 앞으로가기 시 URL만 바뀌고 화면은 홈에
+> 멈춰 있던 것 확인). 학생 — 수업→교재 클릭 후 뒤로가기 2회로 각 탭을 거쳐
+> 정확히 홈까지 복귀. 교사도 동일 패턴 확인. `app/admin/AdminShell.test.tsx`에
+> `rerender()`로 initialTab 변경을 재현하는 회귀 테스트 추가(1건, 관리자
+> 대표 — 나머지 세 Shell은 동일 패턴이라 Playwright 실측으로 커버).
+> `app/parent/ParentShell.test.tsx`의 기존 `replace` 단언 3건을 `push`로
+> 갱신(동작 자체가 아니라 호출 방식만 바뀐 것 반영). `tsc`/`eslint` 클린
+> (교사 Shell의 기존 미사용 변수 경고 1건은 이번 diff와 무관, 파일 전체
+> 스캔 결과 이미 존재하던 것). `supabase db reset --local` 후 전체 스위트
+> 252 files/1762 tests 통과, `next build` 성공. migration 없음, 기존
+> 데이터 이관 없음. Preview 재배포·세 역할 실사용자 계정 최종 확인은
+> 별도로 진행 예정.
+
+> **2026-09-10 — P0-3 원인 확정·수정 완료(1차): `/login`이 유효 세션을 확인하지
 > 않던 결함.** 재현 결과 관리자·학생·교사 어떤 화면에서든 브라우저 뒤로가기를
 > 누르면 로그인 화면이 뜨는 현상이 재현됐고(역할 무관), 실제 원인은 다음
 > 다섯 후보 — 브라우저 history, OAuth/callback, 서버 세션 판정, 클라이언트
@@ -73,6 +105,19 @@
 > 실제 원인을 측정한 뒤 수정한다. P0-3의 역할별 Preview UAT는 P0-1 마감과 병행할 수
 > 있으나, 코드 수정은 원인이 확정된 뒤에만 진행한다. 코드·migration·Preview·Production
 > 변경 없음.
+
+> **2026-09-10 — P0-3 2차 재현: 내부 탭 이력 누락으로 Google OAuth 이력 이동
+> (조사 재개).** `/login` 유효 세션 가드는 별도 결함으로 수정됐지만, 최신 Preview에서
+> 관리자 홈 → 수업권 이동 후 주소가 `/admin?tab=home`인 채 수업권 화면이 표시됐고,
+> 브라우저 뒤로가기는 직전 관리자 탭이 아니라 Google OAuth 계정 선택 화면으로 갔다.
+> 학생·교사 포털에서도 같은 현상이 재현돼 공용 포털 내비게이션·history 처리 결함으로
+> 본다. 탭 전환의 URL/history 갱신과 OAuth callback 이력 처리를 실제로 추적해, 한 번의
+> 뒤로가기가 직전 앱 화면으로 돌아오도록 수정해야 한다. 화면과 URL 불일치가 먼저
+> 확인된 핵심 증거이며, P0-3은 완료가 아니다. 코드·migration·Preview·Production 변경 없음.
+
+> **2026-09-10 — P0-4 Preview UAT 완료.** 제품 오너가 최신 Preview에서 교사 홈과
+> 수업 탭의 예정 일정이 동일하게 정상 노출됨을 확인했다. P0-4는 코드·자동 검증·
+> Preview 확인까지 마감한다. Production 변경 없음.
 
 > **2026-09-10 — P2-3 범위 보완: 학생 세션 문제 화면과 문제 기록 분리(문서만).**
 > Preview UAT에서 학생 세션 상단에 "문제 기록"만 있고 현재 회차 문제를 풀어 답안을
