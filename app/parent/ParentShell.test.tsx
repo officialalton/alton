@@ -83,8 +83,8 @@ describe("ParentShell", () => {
     ["홈", "레슨", "지인 추천", "수업권", "통계"].forEach((label) =>
       expect(screen.getByText(label)).toBeInTheDocument()
     );
-    expect(screen.getByText("지훈")).toBeInTheDocument();
-    expect(screen.getByText("이서아")).toBeInTheDocument();
+    expect(screen.getAllByText("지훈").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("이서아").length).toBeGreaterThan(0);
     expect(screen.getByText(/지훈의 학습 현황/)).toBeInTheDocument();
   });
 
@@ -98,7 +98,9 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("이서아"));
+    // "이서아"는 상단 자녀 전환 pill과 홈의 자녀 현황 카드 양쪽에 나타난다 —
+    // DOM 순서상 상단 pill이 먼저 렌더링된다.
+    fireEvent.click(screen.getAllByText("이서아")[0]);
     expect(replaceMock).toHaveBeenCalledWith("?child=s2&tab=home", { scroll: false });
   });
 
@@ -174,7 +176,7 @@ describe("ParentShell", () => {
     expect(screen.getByText("로그아웃")).toBeInTheDocument();
   });
 
-  it("동의가 필요한 문서가 있으면 홈 화면 상단에 배너를 보여주고, 누르면 동의 탭으로 이동한다", () => {
+  it("2026-09-10(UI/UX 정리 1차): 동의가 필요한 자녀는 홈의 자녀 카드에 배지로 표시되고, 누르면 동의 탭으로 이동한다", () => {
     render(
       <ParentShell
         parentName="김민지"
@@ -188,13 +190,14 @@ describe("ParentShell", () => {
         trialSmartNotesChildren={[{ studentId: "s1", name: "지훈", hasConsented: false }]}
       />
     );
-    expect(screen.getByText("동의가 필요한 문서가 2건 있습니다. 눌러서 확인하기 →")).toBeInTheDocument();
+    const badge = screen.getByText("동의 필요한 문서가 있어요 →");
+    expect(badge).toBeInTheDocument();
 
-    fireEvent.click(screen.getByText("동의가 필요한 문서가 2건 있습니다. 눌러서 확인하기 →"));
+    fireEvent.click(badge);
     expect(replaceMock).toHaveBeenCalledWith("?child=s1&tab=consent", { scroll: false });
   });
 
-  it("동의가 전부 완료되면 배너를 보여주지 않는다", () => {
+  it("동의가 전부 완료되면 배지를 보여주지 않는다", () => {
     render(
       <ParentShell
         parentName="김민지"
@@ -204,10 +207,10 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    expect(screen.queryByText(/동의가 필요한 문서가/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/동의 필요한 문서가/)).not.toBeInTheDocument();
   });
 
-  it("정규 진행 희망 선택이 필요한 과목이 있으면 홈 화면 상단에 배너를 보여주고, 누르면 수강 과목 탭으로 이동한다", () => {
+  it("2026-09-10(UI/UX 정리 1차): 정규 진행 희망 선택이 필요한 자녀는 홈의 자녀 카드에 배지로 표시되고, 누르면 수강 과목 탭으로 이동한다", () => {
     render(
       <ParentShell
         parentName="김민지"
@@ -218,14 +221,14 @@ describe("ParentShell", () => {
         pendingRegularIntentChoices={[{ subjectEnrollmentId: "se1", childName: "지훈", subjectName: "AP Calculus AB" }]}
       />
     );
-    const banner = screen.getByText("정규 진행 희망 선택이 필요한 과목이 1건 있습니다. 눌러서 확인하기 →");
-    expect(banner).toBeInTheDocument();
+    const badge = screen.getByText("정규 진행 희망 선택이 필요해요 →");
+    expect(badge).toBeInTheDocument();
 
-    fireEvent.click(banner);
+    fireEvent.click(badge);
     expect(replaceMock).toHaveBeenCalledWith("?child=s1&tab=enrollment", { scroll: false });
   });
 
-  it("정규 진행 희망 선택이 필요한 과목이 없으면 그 배너를 보여주지 않는다", () => {
+  it("정규 진행 희망 선택이 필요한 과목이 없으면 그 배지를 보여주지 않는다", () => {
     render(
       <ParentShell
         parentName="김민지"
@@ -235,6 +238,6 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    expect(screen.queryByText(/정규 진행 희망 선택이 필요한/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/정규 진행 희망 선택이 필요해요/)).not.toBeInTheDocument();
   });
 });

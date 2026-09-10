@@ -3,17 +3,32 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { TeacherDashboardData } from "./dashboard-data";
+import type { TeacherAssignedSubject } from "./assignments-data";
 
 const WEEKDAYS = ["일", "월", "화", "수", "목", "금", "토"];
 
+// 2026-09-10(UI/UX 정리 1차) — "오늘 수업 → 수업 준비 → 담당 학생" 흐름.
+// 새 쿼리는 추가하지 않는다: "오늘 수업"은 이미 있는 upcoming 목록에서 오늘
+// 날짜인 항목을 고르고, "담당 학생"은 이미 배정 탭에 내려오는
+// currentAssignments를 요약한다. "수업 준비"는 "이번 주 준비 필요 건수" 같은
+// 전용 카운트 데이터가 없어(세션별 준비 상태를 집계하는 쿼리가 아직 없음)
+// 이번 라운드에서는 커리큘럼 탭(세션 준비 화면 진입점)으로 바로 이동하는
+// 안내 카드로만 두고, 카운트가 필요하면 별도로 보고한다.
 export default function TeacherHomeDashboard({
   data,
+  currentAssignments,
   onShowSchedule,
+  onShowAssignments,
+  onShowCurriculum,
 }: {
   data: TeacherDashboardData;
+  currentAssignments: TeacherAssignedSubject[];
   onShowSchedule: () => void;
+  onShowAssignments: () => void;
+  onShowCurriculum: () => void;
 }) {
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
+  const router = useRouter();
   const status = data.status;
 
   return (
@@ -34,11 +49,88 @@ export default function TeacherHomeDashboard({
         </div>
       )}
 
+      <TodayLessonBanner
+        upcoming={data.upcoming}
+        onEnter={(sessionId) => router.push(`/session/${sessionId}`)}
+      />
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+        <ActionCard title="수업 준비" onClick={onShowCurriculum}>
+          담당 학생의 다음 수업에 쓸 교재·문제를 미리 골라두세요.
+        </ActionCard>
+        <ActionCard title={`담당 학생 (${currentAssignments.length})`} onClick={onShowAssignments}>
+          {currentAssignments.length === 0
+            ? "아직 배정된 학생이 없어요."
+            : currentAssignments
+                .slice(0, 3)
+                .map((a) => `${a.studentName}(${a.subjectName})`)
+                .join(", ") + (currentAssignments.length > 3 ? " 외" : "")}
+        </ActionCard>
+      </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-6">
         <CalendarCard data={data} selectedDay={selectedDay} onSelectDay={setSelectedDay} />
         <UpcomingWidget upcoming={data.upcoming} onShowAll={onShowSchedule} />
       </div>
     </div>
+  );
+}
+
+function TodayLessonBanner({
+  upcoming,
+  onEnter,
+}: {
+  upcoming: TeacherDashboardData["upcoming"];
+  onEnter: (sessionId: string) => void;
+}) {
+  const withTime = upcoming.filter((l): l is typeof l & { scheduledAt: string } => !!l.scheduledAt);
+  if (withTime.length === 0) return null;
+
+  const sorted = [...withTime].sort(
+    (a, b) => new Date(a.scheduledAt).getTime() - new Date(b.scheduledAt).getTime()
+  );
+  const todayKey = new Intl.DateTimeFormat("en-CA").format(new Date());
+  const todayLesson = sorted.find(
+    (l) => new Intl.DateTimeFormat("en-CA").format(new Date(l.scheduledAt)) === todayKey
+  );
+  if (!todayLesson) return null;
+
+  return (
+    <div className="flex items-center justify-between gap-3 bg-ink text-white rounded-xl px-5 py-4 mb-6">
+      <div>
+        <div className="text-[12px] font-semibold text-white/70 mb-0.5">오늘 수업</div>
+        <div className="text-[14px] font-bold">
+          {formatKoreanDateTime(todayLesson.scheduledAt)} · {todayLesson.studentName} ·{" "}
+          {todayLesson.subjectName}
+        </div>
+      </div>
+      <button
+        onClick={() => onEnter(todayLesson.sessionId)}
+        className="text-[12.5px] font-bold bg-white text-ink px-4 py-2 rounded-lg shrink-0"
+      >
+        입장하기 →
+      </button>
+    </div>
+  );
+}
+
+function ActionCard({
+  title,
+  onClick,
+  children,
+}: {
+  title: string;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className="text-left border-[1.5px] border-grey-200 rounded-xl px-5 py-4 hover:border-ink transition-colors"
+    >
+      <h2 className="text-[13.5px] font-bold text-ink mb-1.5">{title}</h2>
+      <p className="text-[12px] text-grey-500">{children}</p>
+    </button>
   );
 }
 

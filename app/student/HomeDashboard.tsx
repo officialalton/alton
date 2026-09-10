@@ -21,6 +21,7 @@ export default function HomeDashboard({
   timezone?: string;
 }) {
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
+  const router = useRouter();
 
   return (
     <div className="px-8 py-8">
@@ -29,6 +30,12 @@ export default function HomeDashboard({
           {studentName}의 학습 현황
         </h1>
       </div>
+
+      <TodayLessonBanner
+        upcoming={data.upcoming}
+        timezone={timezone}
+        onEnter={(sessionId) => router.push(`/session/${sessionId}`)}
+      />
 
       <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-6">
         <div>
@@ -48,6 +55,62 @@ export default function HomeDashboard({
       </div>
     </div>
   );
+}
+
+// 2026-09-10(UI/UX 정리 1차) — "오늘 수업"이 있으면 가장 먼저 보이게 한다.
+// 새 쿼리는 추가하지 않는다(이미 홈에 내려오는 upcoming 목록에서 오늘 날짜인
+// 항목을 골라 보여줄 뿐). 오늘 수업이 없으면 다음 수업까지 D-day만 안내한다.
+function TodayLessonBanner({
+  upcoming,
+  timezone,
+  onEnter,
+}: {
+  upcoming: DashboardData["upcoming"];
+  timezone?: string;
+  onEnter: (sessionId: string) => void;
+}) {
+  if (upcoming.length === 0) return null;
+
+  const sorted = [...upcoming].sort(
+    (a, b) => new Date(a.scheduledAt).getTime() - new Date(b.scheduledAt).getTime()
+  );
+  const todayKey = dateKeyInTimezone(new Date().toISOString(), timezone);
+  const todayLesson = sorted.find((l) => dateKeyInTimezone(l.scheduledAt, timezone) === todayKey);
+
+  if (todayLesson) {
+    return (
+      <div className="flex items-center justify-between gap-3 bg-ink text-white rounded-xl px-5 py-4 mb-6">
+        <div>
+          <div className="text-[12px] font-semibold text-white/70 mb-0.5">오늘 수업</div>
+          <div className="text-[14px] font-bold">
+            {formatKoreanDateTime(todayLesson.scheduledAt, timezone)} · {todayLesson.subjectName}
+          </div>
+        </div>
+        <button
+          onClick={() => onEnter(todayLesson.sessionId)}
+          className="text-[12.5px] font-bold bg-white text-ink px-4 py-2 rounded-lg shrink-0"
+        >
+          입장하기 →
+        </button>
+      </div>
+    );
+  }
+
+  const next = sorted[0];
+  const daysUntil = Math.max(
+    0,
+    Math.ceil((new Date(next.scheduledAt).getTime() - Date.now()) / (24 * 60 * 60 * 1000))
+  );
+  return (
+    <div className="bg-grey-100 rounded-xl px-5 py-4 mb-6 text-[13px] text-grey-500">
+      다음 수업까지 D-{daysUntil} · {formatKoreanDateTime(next.scheduledAt, timezone)}{" "}
+      {next.subjectName}
+    </div>
+  );
+}
+
+function dateKeyInTimezone(iso: string, timezone?: string): string {
+  return new Intl.DateTimeFormat("en-CA", { timeZone: timezone }).format(new Date(iso));
 }
 
 function CalendarCard({

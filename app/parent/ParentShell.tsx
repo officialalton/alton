@@ -121,10 +121,6 @@ export default function ParentShell({
 
   const activeLabel = NAV_ITEMS.find((n) => n.id === activeTab)?.label ?? "";
 
-  const pendingConsentCount =
-    consentChildren.filter((c) => c.isUnder13 && !c.hasValidConsent).length +
-    trialSmartNotesChildren.filter((c) => !c.hasConsented).length;
-
   return (
     <div className="min-h-screen bg-white flex">
       <aside className="w-[88px] shrink-0 border-r border-grey-200 flex flex-col items-center py-5 gap-1">
@@ -201,21 +197,17 @@ export default function ParentShell({
         </div>
 
         <div className="flex-1">
-          {activeTab === "home" && pendingConsentCount > 0 && (
-            <button
-              onClick={() => selectTab("consent")}
-              className="w-full text-left bg-red/10 text-red text-[13px] font-semibold px-6 py-3 border-b border-red/20"
-            >
-              동의가 필요한 문서가 {pendingConsentCount}건 있습니다. 눌러서 확인하기 →
-            </button>
-          )}
-          {activeTab === "home" && pendingRegularIntentChoices.length > 0 && (
-            <button
-              onClick={() => selectTab("enrollment")}
-              className="w-full text-left bg-ink/10 text-ink text-[13px] font-semibold px-6 py-3 border-b border-grey-200"
-            >
-              정규 진행 희망 선택이 필요한 과목이 {pendingRegularIntentChoices.length}건 있습니다. 눌러서 확인하기 →
-            </button>
+          {activeTab === "home" && (
+            <ChildrenStatusRow
+              childrenList={childrenList}
+              currentChildId={currentChildId}
+              consentChildren={consentChildren}
+              trialSmartNotesChildren={trialSmartNotesChildren}
+              pendingRegularIntentChoices={pendingRegularIntentChoices}
+              onSelectChild={selectChild}
+              onGoToConsent={() => selectTab("consent")}
+              onGoToEnrollment={() => selectTab("enrollment")}
+            />
           )}
           {activeTab === "home" ? (
             <HomeDashboard
@@ -278,6 +270,78 @@ export default function ParentShell({
           )}
         </div>
       </div>
+    </div>
+  );
+}
+
+// 2026-09-10(UI/UX 정리 1차) — "자녀별 현황 → 예약·동의 필요 조치"를 한 화면
+// 흐름으로 만든다. 새 쿼리는 추가하지 않는다 — 이미 홈에 내려오던 전체 자녀
+// 동의·정규 진행 선택 데이터를 자녀별로 나눠서 카드로 보여줄 뿐이다. 자녀별
+// "다음 수업" 요약은 현재 currentChildId 기준으로만 데이터가 내려오므로(다른
+// 자녀 것까지 한 번에 보려면 새 쿼리가 필요) 이번 라운드에는 포함하지 않는다.
+function ChildrenStatusRow({
+  childrenList,
+  currentChildId,
+  consentChildren,
+  trialSmartNotesChildren,
+  pendingRegularIntentChoices,
+  onSelectChild,
+  onGoToConsent,
+  onGoToEnrollment,
+}: {
+  childrenList: Child[];
+  currentChildId: string;
+  consentChildren: ChildConsentStatus[];
+  trialSmartNotesChildren: TrialSmartNotesConsentStatus[];
+  pendingRegularIntentChoices: PendingRegularIntentChoice[];
+  onSelectChild: (studentId: string) => void;
+  onGoToConsent: () => void;
+  onGoToEnrollment: () => void;
+}) {
+  if (childrenList.length === 0) return null;
+
+  return (
+    <div className="px-6 pt-5 pb-1 flex flex-wrap gap-3">
+      {childrenList.map((child) => {
+        const needsConsent =
+          consentChildren.some((c) => c.studentId === child.studentId && c.isUnder13 && !c.hasValidConsent) ||
+          trialSmartNotesChildren.some((c) => c.studentId === child.studentId && !c.hasConsented);
+        const needsRegularIntent = pendingRegularIntentChoices.some((p) => p.childName === child.name);
+        const needsAction = needsConsent || needsRegularIntent;
+
+        return (
+          <div
+            key={child.studentId}
+            className={
+              "min-w-[220px] border-[1.5px] rounded-xl px-4 py-3 " +
+              (needsAction ? "border-red/30 bg-red/5" : "border-grey-200")
+            }
+          >
+            <button onClick={() => onSelectChild(child.studentId)} className="text-[13.5px] font-bold text-ink mb-1.5">
+              {child.name}
+              {child.studentId === currentChildId && (
+                <span className="ml-1.5 text-[10.5px] font-semibold text-grey-500">(보는 중)</span>
+              )}
+            </button>
+            {!needsAction ? (
+              <p className="text-[12px] text-grey-500">필요한 조치가 없어요.</p>
+            ) : (
+              <div className="flex flex-col gap-1 items-start">
+                {needsConsent && (
+                  <button onClick={onGoToConsent} className="text-[12px] font-semibold text-red">
+                    동의 필요한 문서가 있어요 →
+                  </button>
+                )}
+                {needsRegularIntent && (
+                  <button onClick={onGoToEnrollment} className="text-[12px] font-semibold text-ink">
+                    정규 진행 희망 선택이 필요해요 →
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
