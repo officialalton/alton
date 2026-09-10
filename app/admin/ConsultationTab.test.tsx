@@ -113,6 +113,13 @@ describe("ConsultationTab", () => {
     expect(screen.getByTestId("kanban-column-requested")).toBeInTheDocument();
   });
 
+  it("2026-09-10(P1-1) — 데이터 도착 전에는 '불러오는 중' 텍스트 한 줄 대신 5개 컬럼 골격 스켈레톤을 즉시 보여준다", () => {
+    render(<ConsultationTab {...baseProps} />);
+    // listKanbanBoardAction()의 응답이 아직 도착하지 않은 첫 렌더 시점(동기 확인).
+    expect(screen.getByTestId("consultation-kanban-board-skeleton")).toBeInTheDocument();
+    expect(screen.queryByText("불러오는 중...")).not.toBeInTheDocument();
+  });
+
   it("보호자 동의 대기 서브탭으로 전환하면 대기 목록이 기본으로 보이고, 완료 탭을 누르면 완료 목록을 보여준다(대기/완료 분리, 2026-09-05)", () => {
     render(<ConsultationTab {...baseProps} />);
     fireEvent.click(screen.getByText("보호자 동의 대기"));

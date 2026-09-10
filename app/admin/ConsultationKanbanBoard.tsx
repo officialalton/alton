@@ -90,7 +90,32 @@ export default function ConsultationKanbanBoard({
   }
 
   if (error) return <p className={errText}>{error}</p>;
-  if (!cards) return <p className="text-[13px] text-grey-500">불러오는 중...</p>;
+
+  // 2026-09-10(P1-1) — 데이터 도착 전에도 5개 컬럼 골격 + 카드 모양
+  // 스켈레톤을 즉시 그린다("불러오는 중..." 텍스트 한 줄만 보이던 것 수정).
+  // 실제 개수·내용은 listKanbanBoardAction() 응답이 오면 그대로 대체된다.
+  if (!cards) {
+    return (
+      <div className="grid grid-cols-5 gap-3" data-testid="consultation-kanban-board-skeleton">
+        {KANBAN_STAGE_ORDER.map((stage) => (
+          <div key={stage} className="min-w-0">
+            <div className="text-[12.5px] font-bold text-ink mb-2 flex items-center justify-between">
+              <span>{KANBAN_STAGE_LABEL[stage]}</span>
+              <span className="text-[11px] font-semibold text-grey-300">-</span>
+            </div>
+            <div className="space-y-2">
+              {[0, 1].map((i) => (
+                <div
+                  key={i}
+                  className="border-[1.5px] border-grey-100 rounded-xl px-3 py-2.5 h-[52px] bg-grey-100 animate-pulse"
+                />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div>

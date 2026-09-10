@@ -64,16 +64,21 @@ async function classifyStage(
 export async function listKanbanBoardAction(): Promise<KanbanCard[]> {
   await requireAdminOrCapability(CONSULT_CAPABILITY);
   const admin = createAdminClient();
-  const rows = await listConsultationsForAdmin({ from: "2020-01-01T00:00:00.000Z", to: "2035-01-01T00:00:00.000Z" });
-  const { data: closedIdsData } = await admin.from("consultations").select("id").not("closure_type", "is", null);
+  // 2026-09-10(P1-1) — 세 조회(rows/closedIds/rootIds)는 서로 독립이다.
+  // 이전엔 순차 실행(rows → closedIds → [stages] → rootIds)이라 왕복이
+  // 불필요하게 늘어났다 — 병렬로 묶어 왕복 2회를 없앤다. (전체 이력 조회
+  // 범위 자체를 DB 쪽에서 좁히는 것은 listConsultationsForAdmin()이 다른
+  // 화면과 공유하는 함수라 이번 배치에서는 건드리지 않는다 — 범위 조정은
+  // 별도 배치로 분리.)
+  const [rows, { data: closedIdsData }, { data: rootIdsData }] = await Promise.all([
+    listConsultationsForAdmin({ from: "2020-01-01T00:00:00.000Z", to: "2035-01-01T00:00:00.000Z" }),
+    admin.from("consultations").select("id").not("closure_type", "is", null),
+    admin.from("consultations").select("family_root_consultation_id").not("family_root_consultation_id", "is", null),
+  ]);
   const closedIds = new Set((closedIdsData ?? []).map((r) => r.id as string));
   const active = rows.filter((r) => !closedIds.has(r.id) && r.status !== "cancelled" && r.status !== "no_show");
   const stages = await Promise.all(active.map((r) => classifyStage(admin, r)));
 
-  const { data: rootIdsData } = await admin
-    .from("consultations")
-    .select("family_root_consultation_id")
-    .not("family_root_consultation_id", "is", null);
   const rootIdsWithChildren = new Set((rootIdsData ?? []).map((r) => r.family_root_consultation_id as string));
 
   return active.map((r, i) => ({

@@ -1,5 +1,29 @@
 # ALTON — 현재 상태 (2026-09-10 기준)
 
+> **2026-09-10 — P1-1 측정 및 1차 개선 완료(관리자 상담 탭·탭 전환 로딩).**
+> 로컬 프로덕션 빌드에서 실측(Playwright): `/admin?tab=consult` GET~
+> domcontentloaded 216ms, networkidle까지 1161ms(추가 POST
+> `listKanbanBoardAction` 1회 발생) — 반면 `/admin?tab=entitlements`는
+> networkidle 729ms(추가 POST 없음), `/admin`(홈) 697ms. **확정된 구조적
+> 문제**: 탭을 어디로 옮기든(`/admin?tab=X`) 매번 `admin/page.tsx`의 23개
+> 1차 로더 + 2개 후속 로더 전체가 새 요청마다 다시 실행된다(모든 탭이 하나의
+> 라우트를 쿼리 파라미터로만 나눠 쓰기 때문 — P0-3의 push/replace 전환은
+> 이 재실행 여부에 영향 없음, 그건 브라우저 history 항목 생성 방식만
+> 바꾼다). 이건 이번 배치에서 고치지 않았다 — Suspense 기반으로 탭별 로더를
+> 분리하는 더 큰 리팩터가 필요해 **P1-3으로 이관**한다.
+> **이번에 고친 것**: (1) `ConsultationKanbanBoard`가 데이터 도착 전
+> "불러오는 중..." 텍스트 한 줄 대신 5개 컬럼 골격 + 카드 모양 스켈레톤을
+> 즉시 렌더(회귀 테스트로 동기 확인 고정). (2) `listKanbanBoardAction()`
+> 내부의 서로 독립인 세 조회(전체 상담 rows/종료 id/가족 root id)가
+> 순차 실행이었던 것을 `Promise.all`로 병렬화(왕복 2회 제거) — SSR이 이미
+> 가진 `consultations`를 재사용해 클라이언트 재조회 자체를 없애는 것은
+> `classifyStage()`가 관리자 전용 파이프라인 조회를 필요로 해 이번 배치에서
+> 안전하게 제거하지 못함(별도 설계 필요, P1-3으로 이관). 검증:
+> `supabase db reset --local` 후 전체 스위트 252 files/1765 tests 통과,
+> `tsc`/`eslint` 클린, `next build` 성공. migration 없음, 기존 데이터
+> 이관 없음. Production 무변경. P1-2(다른 포털·무거운 화면 전수 측정)는
+> 이 보고 뒤 별도 우선순위로 진행 예정.
+
 > **2026-09-10 — P0-2 원인 확정·수정 완료: 관리자 과목 키워드·교사 세션 준비
 > 키워드 변경의 React error #441.** 로컬 프로덕션 빌드로 정확히 재현: 관리자
 > 과목 템플릿에서 중복 키워드를 추가하면 화면에 "Minified React error #441;
