@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import { confirmMatch } from "./matching-actions";
-import type { MatchingTeacherCandidate } from "./matching-data";
-import type { StudentListItem } from "./users-data";
+import type { MatchingTeacherCandidate, MatchingStudentItem } from "./matching-data";
 import { selectableSubjects, type AdminSubject } from "./subject-data";
 import SubjectEnrollmentPanel from "./SubjectEnrollmentPanel";
 import TeacherAssignmentTerminationPanel from "./TeacherAssignmentTerminationPanel";
@@ -14,7 +13,9 @@ export default function MatchingTab({
   subjects,
   teacherCandidatesBySubject,
 }: {
-  students: StudentListItem[];
+  // 2026-09-10(P1) — 사용자 탭용 무거운 StudentListItem 대신 매칭 전용 경량
+  // 타입을 쓴다(id·name·grade·parentNames·status만).
+  students: MatchingStudentItem[];
   subjects: AdminSubject[];
   teacherCandidatesBySubject: Record<string, MatchingTeacherCandidate[]>;
 }) {
@@ -94,7 +95,7 @@ function MatchForm({
   onBack,
   onMatched,
 }: {
-  student: StudentListItem;
+  student: MatchingStudentItem;
   subjects: AdminSubject[];
   teacherCandidatesBySubject: Record<string, MatchingTeacherCandidate[]>;
   onBack: () => void;

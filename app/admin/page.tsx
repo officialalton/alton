@@ -3,13 +3,7 @@ import { createAdminClient } from "@/lib/supabase-admin";
 import { loadAdminDashboard, type AdminDashboardData } from "./dashboard-data";
 import { loadSubjectCatalog } from "./subject-data";
 import { loadAllCurriculumDocs } from "./curriculum-doc-data";
-import {
-  loadParents,
-  loadStudents,
-  loadTeachers,
-  loadStudentCreditHistoryBatch,
-  loadTeacherQcWarningsBatch,
-} from "./users-data";
+import { loadParents, loadStudents, loadStudentCreditHistoryBatch } from "./users-data";
 import {
   loadConsultations,
   loadTrialSessions,
@@ -23,7 +17,7 @@ import { listOpenContractActivationRetries } from "./consultation-actions";
 import { loadKanbanBoard } from "./consultation-kanban-data";
 import { loadDevLog } from "./dev-log-data";
 import { loadPayoutBatches } from "./payout-batches-data";
-import { loadTeacherCandidatesBySubject } from "./matching-data";
+import { loadTeacherCandidatesBySubject, loadStudentsForMatching } from "./matching-data";
 import { loadWorkspaceProvisionings } from "./workspace-data";
 import { loadEntitlementProducts, loadEntitlementProductVersions } from "./entitlement-data";
 import {
@@ -69,7 +63,7 @@ export default async function AdminHomePage({
     docs,
     parents,
     students,
-    teachers,
+    matchingStudents,
     consultations,
     trials,
     proposals,
@@ -93,8 +87,8 @@ export default async function AdminHomePage({
     need("catalog", "users", "consult", "matching") ? loadSubjectCatalog(supabase) : Promise.resolve([]),
     need("catalog") ? loadAllCurriculumDocs(supabase) : Promise.resolve([]),
     need("users") ? loadParents(supabase) : Promise.resolve([]),
-    need("users", "billing", "matching") ? loadStudents(supabase) : Promise.resolve([]),
-    need("users") ? loadTeachers(supabase) : Promise.resolve([]),
+    need("billing") ? loadStudents(supabase) : Promise.resolve([]),
+    need("matching") ? loadStudentsForMatching(supabase) : Promise.resolve([]),
     need("consult") ? loadConsultations(supabase) : Promise.resolve([]),
     need("consult") ? loadTrialSessions(supabase) : Promise.resolve([]),
     need("consult") ? loadProposals(supabase) : Promise.resolve([]),
@@ -115,12 +109,13 @@ export default async function AdminHomePage({
     need("entitlements") ? listOpenOrRecentPaymentDisputes() : Promise.resolve([]),
   ]);
 
-  // 성능 corrective(2026-09-09): 학생/교사 수와 무관하게 각각 배치 쿼리 1회씩만
-  // 실행한다(기존: 학생/교사 각각 개별 호출하는 N+1 — admin 페이지 최악 TTFB의 원인).
-  const [creditHistoryByStudent, qcWarningsByTeacher] = await Promise.all([
-    need("users", "billing") ? loadStudentCreditHistoryBatch(supabase, students.map((s) => s.id)) : Promise.resolve({}),
-    need("users") ? loadTeacherQcWarningsBatch(supabase, teachers.map((t) => t.id)) : Promise.resolve({}),
-  ]);
+  // 성능 corrective(2026-09-09, 2026-09-10 갱신): "사용자" 탭의 학생/선생님
+  // 목록·이력은 이제 UsersTab이 서브탭을 열 때 listStudentsForUsersTabAction/
+  // listTeachersForUsersTabAction으로 지연 조회한다 — 여기서는 "billing" 탭이
+  // 계속 SSR로 필요로 하는 학생 수업권 이력만 배치로 읽는다.
+  const creditHistoryByStudent = need("billing")
+    ? await loadStudentCreditHistoryBatch(supabase, students.map((s) => s.id))
+    : {};
 
   return (
     <AdminShell
@@ -132,9 +127,8 @@ export default async function AdminHomePage({
       docs={docs}
       parents={parents}
       students={students}
-      teachers={teachers}
+      matchingStudents={matchingStudents}
       creditHistoryByStudent={creditHistoryByStudent}
-      qcWarningsByTeacher={qcWarningsByTeacher}
       consultations={consultations}
       trials={trials}
       proposals={proposals}

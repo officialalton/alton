@@ -5,6 +5,49 @@ import { requireAdmin } from "@/lib/admin-auth";
 import { sendInviteEmail } from "@/lib/invite-email";
 import { currentRequestOrigin } from "@/lib/request-origin";
 import { assertTeacherHasValidRate } from "@/lib/enrollment/teacher-rate-check";
+import {
+  loadStudents,
+  loadTeachers,
+  loadStudentCreditHistoryBatch,
+  loadTeacherQcWarningsBatch,
+  type StudentListItem,
+  type TeacherListItem,
+  type CreditTransaction,
+  type QcWarning,
+} from "./users-data";
+
+// 2026-09-10(P1 — 관리자 "사용자" 탭 최초 진입 15~20초 개선) — 이전에는
+// admin/page.tsx가 "사용자" 탭에 진입할 때(기본 서브탭은 "학부모"인데도)
+// 학부모·학생·선생님 목록을 전부 SSR에서 함께 읽었다. 이제 최초 SSR은
+// 학부모(가벼움)만 읽고, 학생/선생님은 그 서브탭을 실제로 열 때만 이
+// 두 액션으로 클라이언트에서 조회한다 — 인증도 액션 하나당 한 번뿐이고
+// (기존에도 그랬음), 수업권 이력/QC 경고도 같은 액션에 묶어 별도 왕복을
+// 만들지 않는다.
+export async function listStudentsForUsersTabAction(): Promise<{
+  students: StudentListItem[];
+  creditHistoryByStudent: Record<string, CreditTransaction[]>;
+}> {
+  const { supabase } = await requireAdmin();
+  const students = await loadStudents(supabase);
+  const creditHistoryByStudent = await loadStudentCreditHistoryBatch(
+    supabase,
+    students.map((s) => s.id)
+  );
+  return { students, creditHistoryByStudent };
+}
+
+export async function listTeachersForUsersTabAction(): Promise<{
+  teachers: TeacherListItem[];
+  qcWarningsByTeacher: Record<string, QcWarning[]>;
+}> {
+  const { supabase } = await requireAdmin();
+  const teachers = await loadTeachers(supabase);
+  const qcWarningsByTeacher = await loadTeacherQcWarningsBatch(
+    supabase,
+    teachers.map((t) => t.id)
+  );
+  return { teachers, qcWarningsByTeacher };
+}
 
 async function inviteAndCreateProfile(params: {
   email: string;

@@ -31,7 +31,7 @@ import DevLogTab from "./DevLogTab";
 import PayoutBatchesTab from "./PayoutBatchesTab";
 import type { PayoutBatchListItem } from "./payout-batches-data";
 import MatchingTab from "./MatchingTab";
-import type { MatchingTeacherCandidate } from "./matching-data";
+import type { MatchingTeacherCandidate, MatchingStudentItem } from "./matching-data";
 import WorkspaceTab from "./WorkspaceTab";
 import type { WorkspaceProvisioningItem } from "./workspace-data";
 import EntitlementLedgerTab from "./EntitlementLedgerTab";
@@ -47,9 +47,7 @@ import type { DocEditorData } from "./curriculum-doc-data";
 import type {
   CreditTransaction,
   ParentListItem,
-  QcWarning,
   StudentListItem,
-  TeacherListItem,
 } from "./users-data";
 
 const NAV_ITEMS = [
@@ -87,9 +85,8 @@ export default function AdminShell({
   docs,
   parents,
   students,
-  teachers,
   creditHistoryByStudent,
-  qcWarningsByTeacher,
+  matchingStudents,
   consultations,
   trials,
   proposals,
@@ -119,10 +116,14 @@ export default function AdminShell({
   subjects: AdminSubject[];
   docs: DocEditorData[];
   parents: ParentListItem[];
+  // 2026-09-10(P1) — "사용자" 탭의 학생/선생님 목록·수업권 이력·QC 경고는
+  // 더 이상 SSR로 안 내려온다(UsersTab이 서브탭을 열 때 직접 조회). students는
+  // 이제 "구 크레딧(레거시)" 탭에서만 쓴다. teachers/qcWarningsByTeacher
+  // props 자체를 없앴다.
   students: StudentListItem[];
-  teachers: TeacherListItem[];
   creditHistoryByStudent: Record<string, CreditTransaction[]>;
-  qcWarningsByTeacher: Record<string, QcWarning[]>;
+  // 2026-09-10(P1) — 매칭 탭 전용 경량 학생 목록(id·name·grade·parentNames·status).
+  matchingStudents: MatchingStudentItem[];
   consultations: ConsultationListItem[];
   trials: TrialSessionListItem[];
   proposals: ProposalListItem[];
@@ -281,14 +282,7 @@ export default function AdminShell({
           ) : activeTab === "catalog" ? (
             <CatalogTab subjects={subjects} docs={docs} />
           ) : activeTab === "users" ? (
-            <UsersTab
-              initialParents={parents}
-              initialStudents={students}
-              initialTeachers={teachers}
-              subjects={subjects}
-              creditHistoryByStudent={creditHistoryByStudent}
-              qcWarningsByTeacher={qcWarningsByTeacher}
-            />
+            <UsersTab initialParents={parents} subjects={subjects} />
           ) : activeTab === "billing" ? (
             <BillingTab
               initialStudents={students}
@@ -329,7 +323,7 @@ export default function AdminShell({
             <PayoutBatchesTab initialBatches={payoutBatches} />
           ) : activeTab === "matching" ? (
             <MatchingTab
-              students={students}
+              students={matchingStudents}
               subjects={subjects}
               teacherCandidatesBySubject={teacherCandidatesBySubject}
             />

@@ -1,5 +1,47 @@
 # ALTON — 현재 상태 (2026-09-10 기준)
 
+> **2026-09-10 — 로딩 감사 문서(`docs/2026-09-10-portal-loading-code-audit.md`)
+> 기반 P1 재우선순위 1차 배치: 관리자 "사용자" 탭 학생/선생님 지연 로딩 +
+> "매칭" 탭 전용 경량 로더 + `loadEmailById()` 페이지네이션 수정 완료,
+> Preview 배포 완료(target: preview 확인). 매칭·신규 보드·커리큘럼 관련
+> 후속 UAT는 별도 배치로 진행.** 매칭 공통화(P0-6)와 충돌하지 않게 별도
+> 배치로 진행했다. (1) **사용자 탭**: 기본 서브탭(학부모)만 SSR로 로드하고,
+> 학생/선생님은 그 서브탭을 실제로 열 때
+> `listStudentsForUsersTabAction`/`listTeachersForUsersTabAction` 서버
+> 액션으로 지연 조회(각각 `requireAdmin` 1회 + 목록/이력 배치 쿼리).
+> `UsersTab.tsx`는 로드 전 상태를 `null`로 구분해 최종 행 형태의 스켈레톤을
+> 보여준다. `admin/page.tsx`는 더 이상 SSR에서 `loadTeachers()`를 호출하지
+> 않고, `loadStudents()`는 "billing"(구 크레딧) 탭에서만 실행한다. (2)
+> **매칭 탭**: `matching-data.ts`에 `loadStudentsForMatching()`(id·이름·학년·
+> 보호자·상태만, 가구/보호자 조인만 하고 수강 과목·이메일·AP·비교과는 조회
+> 안 함)과 `MatchingStudentItem` 경량 타입을 신설해, 기존 사용자 탭용
+> 무거운 `loadStudents()` 결과를 재사용하던 것을 대체했다(`MatchingTab.tsx`,
+> `SubjectEnrollmentPanel.tsx`가 이 경량 타입을 사용). 매칭 확정 로직
+> 자체(P0-6의 `confirmMatch`/`confirm_student_teacher_subject_match`)는
+> 손대지 않았다. (3) **`loadEmailById()` 정확성 수정**: 이전에는 첫 페이지
+> (`perPage: 200`) 하나만 읽어 전체 Auth 사용자가 200명을 넘으면 뒤쪽
+> 페이지의 이메일이 조용히 누락됐다. 이제 대상 userIds를 전부 찾거나
+> 더 이상 페이지가 없을 때까지(최대 100페이지 상한) 순회한다 — 새 회귀
+> 테스트 4건(`load-email-by-id.test.ts`) 추가. AP/비교과 카운트를 상세
+> 패널 전용으로 더 분리하는 작업은 이번 배치 범위 밖으로 남겼다(후속
+> 과제, 별도 배치로 진행 예정). 로컬 검증: `tsc --noEmit` 통과, 변경 파일
+> eslint 통과(기존 무관 warning 2건 제외), `supabase db reset --local`
+> 정상, 전체 255/255 파일·1789/1789 테스트 통과, `next build` 성공.
+> **Preview UAT용 실측(로컬 프로덕션 빌드, Playwright, 매 시나리오 새
+> 브라우저 컨텍스트=완전 로그아웃 상태에서 재로그인)**: 사용자〉학부모
+> 최초 진입(직접 URL) 175ms/28개 요청, 사용자〉학생 서브탭 오픈(스켈레톤
+> 노출 확인) 200ms/1개 요청, 사용자〉선생님 서브탭 오픈(스켈레톤 노출
+> 확인) 201ms/2개 요청, 매칭 대상 목록 최초 진입(직접 URL) 134ms/28개
+> 요청. 이전 배치(이 코드 변경 전) 대비 서브탭 오픈 시 요청이 1~2개로
+> 격리됨을 확인(이전엔 사용자 탭 진입 시 학부모·학생·선생님 전체가 한
+> 요청 묶음으로 함께 실행됨). 로컬 Docker Supabase 환경이라 절대 ms는
+> 실제 Preview 네트워크 지연(원인으로 지목된 15~20초)을 재현하지 않는다
+> — 제품 오너가 실제 Preview에서 동일 시나리오로 체감 확인 필요. URL
+> 직접 진입·탭 전환·뒤로가기/앞으로가기·권한 회귀(비관리자 계정의
+> `/admin` 접근 시 자기 포털로 리다이렉트) 전부 통과 확인. 커밋:
+> [해시는 배포 후 갱신], Preview URL은 배포 뒤 확정. 상세:
+> `docs/2026-09-10-p-execution-roadmap.md` "P1 재우선순위(로딩 감사 기반)" 절.
+
 > **2026-09-10 — P0-6 v3 공통 매칭 확정 + 커리큘럼 출처 보존 코드 완료,
 > non-prod migration 적용·Preview 배포 완료(target: preview 확인,
 > `https://alton-ro2d0ev2d-alton7.vercel.app`), 지인 추천 다자녀 Preview

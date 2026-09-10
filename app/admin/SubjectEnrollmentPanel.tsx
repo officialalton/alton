@@ -23,16 +23,16 @@ import {
   type SubjectEnrollmentListItem,
   type TeacherAssignmentHistoryItem,
 } from "./subject-enrollment-actions";
-import type { StudentListItem } from "./users-data";
 import { selectableSubjects, type AdminSubject } from "./subject-data";
-import type { MatchingTeacherCandidate } from "./matching-data";
+import type { MatchingTeacherCandidate, MatchingStudentItem } from "./matching-data";
 
 export default function SubjectEnrollmentPanel({
   students,
   subjects,
   teacherCandidatesBySubject,
 }: {
-  students: StudentListItem[];
+  // 2026-09-10(P1) — id·name만 쓰므로 매칭 전용 경량 타입으로 충분하다.
+  students: MatchingStudentItem[];
   subjects: AdminSubject[];
   teacherCandidatesBySubject: Record<string, MatchingTeacherCandidate[]>;
 }) {

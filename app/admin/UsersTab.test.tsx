@@ -1,7 +1,8 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi, beforeEach } from "vitest";
 import UsersTab from "./UsersTab";
 import type { ParentListItem, StudentListItem, TeacherListItem } from "./users-data";
+import { listStudentsForUsersTabAction, listTeachersForUsersTabAction } from "./users-actions";
 
 vi.mock("./users-actions", () => ({
   inviteStudent: vi.fn(),
@@ -11,6 +12,8 @@ vi.mock("./users-actions", () => ({
   adjustStudentCredit: vi.fn(),
   setTeacherHourlyRate: vi.fn(),
   verifyStudentDateOfBirth: vi.fn(),
+  listStudentsForUsersTabAction: vi.fn(),
+  listTeachersForUsersTabAction: vi.fn(),
 }));
 
 vi.mock("./teacher-subjects-actions", () => ({
@@ -68,32 +71,40 @@ const teachers: TeacherListItem[] = [
 
 const baseProps = {
   initialParents: parents,
-  initialStudents: students,
-  initialTeachers: teachers,
   subjects: [],
-  creditHistoryByStudent: {},
-  qcWarningsByTeacher: {},
 };
 
 describe("UsersTab", () => {
+  beforeEach(() => {
+    vi.mocked(listStudentsForUsersTabAction).mockResolvedValue({
+      students,
+      creditHistoryByStudent: {},
+    });
+    vi.mocked(listTeachersForUsersTabAction).mockResolvedValue({
+      teachers,
+      qcWarningsByTeacher: { t1: [{}, {}] as never },
+    });
+  });
+
   it("기본 서브탭은 학부모이고 목록을 보여준다", () => {
     render(<UsersTab {...baseProps} />);
     expect(screen.getByText("김민지")).toBeInTheDocument();
     expect(screen.getByText(/자녀: 지훈/)).toBeInTheDocument();
   });
 
-  it("학생 서브탭에서 학생을 클릭하면 상세로 이동한다", () => {
+  it("학생 서브탭에서 학생을 클릭하면 상세로 이동한다", async () => {
     render(<UsersTab {...baseProps} />);
     fireEvent.click(screen.getByText("학생"));
+    await waitFor(() => expect(screen.getByText("지훈")).toBeInTheDocument());
     fireEvent.click(screen.getByText("지훈"));
     expect(screen.getByText("수업권")).toBeInTheDocument();
     expect(screen.getByText("14장")).toBeInTheDocument();
   });
 
-  it("선생님 서브탭에서 QC 경고 횟수를 보여준다", () => {
+  it("선생님 서브탭에서 QC 경고 횟수를 보여준다", async () => {
     render(<UsersTab {...baseProps} />);
     fireEvent.click(screen.getByText("선생님"));
-    expect(screen.getByText(/QC 경고 2회/)).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText(/QC 경고 2회/)).toBeInTheDocument());
   });
 
   // (2026-09-07) 레거시 "학부모 초대" 폼은 제거됐다(DirectAccountCreationForm의

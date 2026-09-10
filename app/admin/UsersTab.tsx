@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useState, type MouseEvent } from "react";
-import { inviteStudent } from "./users-actions";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
+import { inviteStudent, listStudentsForUsersTabAction, listTeachersForUsersTabAction } from "./users-actions";
 import { updateUserBasicInfo } from "./user-edit-actions";
 import StudentDetailPanel from "./StudentDetailPanel";
 import TeacherDetailPanel from "./TeacherDetailPanel";
@@ -15,6 +15,13 @@ import type {
   StudentListItem,
   TeacherListItem,
 } from "./users-data";
+
+// 2026-09-10(P1 — 관리자 "사용자" 탭 최초 진입 15~20초 개선) — 이전에는
+// 기본 서브탭이 "학부모"인데도 admin/page.tsx가 학생·선생님 목록(가구 관계·
+// 수강 과목·AP·비교과·Auth 이메일까지 포함한 무거운 조회)을 함께 SSR로
+// 읽었다. 이제 학부모만 SSR로 즉시 표시하고, 학생/선생님은 그 서브탭을
+// 실제로 열 때만 listStudentsForUsersTabAction()/listTeachersForUsersTabAction()
+// 으로 조회한다(각각 인증 1회, 수업권 이력/QC 경고도 같은 액션에 묶임).
 
 const SUBTABS = [
   { id: "parents", label: "학부모" },
@@ -37,40 +44,51 @@ const TEACHER_STATUS_LABEL: Record<string, string> = {
 
 export default function UsersTab({
   initialParents,
-  initialStudents,
-  initialTeachers,
   subjects,
-  creditHistoryByStudent,
-  qcWarningsByTeacher,
 }: {
   initialParents: ParentListItem[];
-  initialStudents: StudentListItem[];
-  initialTeachers: TeacherListItem[];
   subjects: AdminSubject[];
-  creditHistoryByStudent: Record<string, CreditTransaction[]>;
-  qcWarningsByTeacher: Record<string, QcWarning[]>;
 }) {
   const [subtab, setSubtab] = useState<SubtabId>("parents");
   const [parents, setParents] = useState(initialParents);
-  const [students, setStudents] = useState(initialStudents);
-  const [teachers, setTeachers] = useState(initialTeachers);
-  const [history, setHistory] = useState(creditHistoryByStudent);
+  // 2026-09-10(P1) — null이면 "아직 이 서브탭을 연 적 없음"(스켈레톤 표시),
+  // 빈 배열이면 "조회했는데 0명"을 구분한다.
+  const [students, setStudents] = useState<StudentListItem[] | null>(null);
+  const [teachers, setTeachers] = useState<TeacherListItem[] | null>(null);
+  const [history, setHistory] = useState<Record<string, CreditTransaction[]>>({});
+  const [qcWarningsByTeacher, setQcWarningsByTeacher] = useState<Record<string, QcWarning[]>>({});
   const [openStudentId, setOpenStudentId] = useState<string | null>(null);
   const [openTeacherId, setOpenTeacherId] = useState<string | null>(null);
   const directLinksListRef = useRef<DirectAccountLinksListHandle>(null);
 
-  const openStudent = students.find((s) => s.id === openStudentId);
-  const openTeacher = teachers.find((t) => t.id === openTeacherId);
+  useEffect(() => {
+    if (subtab === "students" && students === null) {
+      listStudentsForUsersTabAction().then((r) => {
+        setStudents(r.students);
+        setHistory(r.creditHistoryByStudent);
+      });
+    }
+    if (subtab === "teachers" && teachers === null) {
+      listTeachersForUsersTabAction().then((r) => {
+        setTeachers(r.teachers);
+        setQcWarningsByTeacher(r.qcWarningsByTeacher);
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [subtab]);
+
+  const openStudent = students?.find((s) => s.id === openStudentId);
+  const openTeacher = teachers?.find((t) => t.id === openTeacherId);
 
   function patchStudent(id: string, patch: Partial<StudentListItem>, newTx?: CreditTransaction) {
-    setStudents((prev) => prev.map((s) => (s.id === id ? { ...s, ...patch } : s)));
+    setStudents((prev) => prev?.map((s) => (s.id === id ? { ...s, ...patch } : s)) ?? prev);
     if (newTx) {
       setHistory((prev) => ({ ...prev, [id]: [newTx, ...(prev[id] ?? [])] }));
     }
   }
 
   function patchTeacher(id: string, patch: Partial<TeacherListItem>) {
-    setTeachers((prev) => prev.map((t) => (t.id === id ? { ...t, ...patch } : t)));
+    setTeachers((prev) => prev?.map((t) => (t.id === id ? { ...t, ...patch } : t)) ?? prev);
   }
 
   function patchParent(id: string, patch: Partial<ParentListItem>) {
@@ -158,7 +176,24 @@ export default function UsersTab({
         </>
       )}
 
-      {subtab === "students" && (
+      {subtab === "students" && students === null && (
+        <div aria-busy="true" data-testid="students-skeleton">
+          {[0, 1, 2].map((i) => (
+            <div
+              key={i}
+              className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5 animate-pulse"
+            >
+              <div className="flex items-center justify-between">
+                <div className="h-3.5 w-24 bg-grey-200 rounded" />
+                <div className="h-4 w-14 bg-grey-200 rounded-full" />
+              </div>
+              <div className="h-3 w-40 bg-grey-100 rounded mt-2" />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {subtab === "students" && students !== null && (
         <>
           {students.map((s) => (
             <div key={s.id} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5">
@@ -223,14 +258,31 @@ export default function UsersTab({
                   apCourseCount: 0,
                   extracurricularCount: 0,
                 },
-                ...prev,
+                ...(prev ?? []),
               ]);
             }}
           />
         </>
       )}
 
-      {subtab === "teachers" && (
+      {subtab === "teachers" && teachers === null && (
+        <div aria-busy="true" data-testid="teachers-skeleton">
+          {[0, 1, 2].map((i) => (
+            <div
+              key={i}
+              className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5 animate-pulse"
+            >
+              <div className="flex items-center justify-between">
+                <div className="h-3.5 w-24 bg-grey-200 rounded" />
+                <div className="h-4 w-14 bg-grey-200 rounded-full" />
+              </div>
+              <div className="h-3 w-40 bg-grey-100 rounded mt-2" />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {subtab === "teachers" && teachers !== null && (
         <>
           {teachers.map((t) => (
             <button

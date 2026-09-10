@@ -65,12 +65,33 @@ function extractName(rel: unknown): string {
   return (row as { name?: string } | null)?.name ?? "";
 }
 
-async function loadEmailById(userIds: string[]): Promise<Map<string, string>> {
+// 2026-09-10(P1 — 사용자 탭 이메일 조회 정확성 수정) — 이전에는 첫 페이지
+// (perPage: 200) 하나만 읽어서 전체 Auth 사용자가 200명을 넘으면 뒤쪽
+// 페이지에 있는 사용자의 이메일이 조용히 누락됐다. 이제 대상 userIds를
+// 전부 찾거나 더 이상 페이지가 없을 때까지 순회한다. 각 역할(학부모/학생/
+// 선생님)이 서브탭을 열 때만 지연 조회되므로(사용자 탭 lazy-loading,
+// 2026-09-10) 한 호출의 대상 userIds는 그 역할 하나 분량으로 이미 좁혀져
+// 있다 — 그래도 목록 자체가 200명을 넘을 수 있으므로 페이지네이션은
+// 안전을 위해 계속 순회한다. maxPages는 전체 Auth 사용자 수가 비정상적으로
+// 커진 경우에도 무한 루프를 막기 위한 상한이다.
+export async function loadEmailById(userIds: string[]): Promise<Map<string, string>> {
   const admin = createAdminClient();
-  const { data } = await admin.auth.admin.listUsers({ perPage: 200 });
   const emailById = new Map<string, string>();
-  for (const u of data?.users ?? []) {
-    if (userIds.includes(u.id)) emailById.set(u.id, u.email ?? "");
+  if (userIds.length === 0) return emailById;
+
+  const remaining = new Set(userIds);
+  const perPage = 200;
+  const maxPages = 100;
+  for (let page = 1; page <= maxPages && remaining.size > 0; page++) {
+    const { data } = await admin.auth.admin.listUsers({ page, perPage });
+    const users = data?.users ?? [];
+    for (const u of users) {
+      if (remaining.has(u.id)) {
+        emailById.set(u.id, u.email ?? "");
+        remaining.delete(u.id);
+      }
+    }
+    if (users.length < perPage) break;
   }
   return emailById;
 }
