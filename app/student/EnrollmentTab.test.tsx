@@ -94,3 +94,52 @@ describe("EnrollmentTab — 커리큘럼 보기 진입(v3 읽기 전용)", () =>
     expect(await screen.findByText("수강 과목")).toBeInTheDocument();
   });
 });
+
+// v3 종료된 수강 담당 교사 표시 결함 수정(2026-09-11) — 매칭 종료로 활성
+// 배정이 없어진 것과 "애초에 배정된 적 없음"을 구분해서 보여준다.
+describe("EnrollmentTab — 종료된 수강의 담당 교사 표시", () => {
+  beforeEach(() => vi.clearAllMocks());
+
+  it("활성 매칭이 없어도 이 수강 건 자체의 종료 이력이 있으면 '마지막 담당 선생님'으로 보여준다", async () => {
+    (getTrialLessonReviewForFamily as ReturnType<typeof vi.fn>).mockResolvedValue(null);
+    const terminated: SubjectEnrollmentView = {
+      id: "se-terminated",
+      subjectId: "sub1",
+      subjectName: "SAT Math",
+      status: "terminated",
+      currentTeacher: null,
+      upcomingTeacherChange: null,
+      history: [
+        {
+          id: "a1",
+          teacherId: "t1",
+          teacherName: "박서연 선생님",
+          status: "ended",
+          effectiveFrom: "2026-08-01T00:00:00Z",
+          effectiveUntil: "2026-09-01T00:00:00Z",
+          reason: "매칭 종료",
+        },
+      ],
+    };
+    render(<EnrollmentTab enrollments={[terminated]} />);
+    expect(await screen.findByText(/마지막 담당 선생님/)).toBeInTheDocument();
+    expect(screen.getByText("박서연 선생님")).toBeInTheDocument();
+    expect(screen.queryByText("배정 전")).toBeNull();
+  });
+
+  it("종료 이력조차 없으면(정말 배정된 적 없음) '배정 전'을 그대로 보여준다", async () => {
+    (getTrialLessonReviewForFamily as ReturnType<typeof vi.fn>).mockResolvedValue(null);
+    const neverAssigned: SubjectEnrollmentView = {
+      id: "se-new",
+      subjectId: "sub2",
+      subjectName: "AP Bio",
+      status: "planned",
+      currentTeacher: null,
+      upcomingTeacherChange: null,
+      history: [],
+    };
+    render(<EnrollmentTab enrollments={[neverAssigned]} />);
+    expect(await screen.findByText("배정 전")).toBeInTheDocument();
+    expect(screen.queryByText(/마지막 담당 선생님/)).toBeNull();
+  });
+});

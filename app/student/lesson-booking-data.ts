@@ -19,6 +19,10 @@ export type BookableSubjectEnrollment = {
 export type UpcomingBooking = {
   reservationId: string;
   sessionId: string;
+  // 선택 필드로 둔 이유: 기존 테스트 픽스처(여러 파일)가 이 필드 없이
+  // UpcomingBooking을 직접 만들어 쓰고 있어, 실제 로더(loadLessonBookingData)
+  // 는 항상 채우되 타입은 하위 호환을 위해 optional로 둔다.
+  subjectEnrollmentId?: string;
   subjectName: string;
   teacherName: string;
   startsAt: string;
@@ -34,8 +38,23 @@ export type PastSessionForReport = {
   startsAt: string;
 };
 
+// v3 재매칭 후 예약 결함 수정(2026-09-11) — 같은 과목에 이미 종료(terminated)·
+// 완료(completed)된 수강 이력이 있는 학생은 "재매칭"이다. 재매칭 직후 새
+// subject_enrollment는 항상 'planned'로 시작하는데, 그동안 이 로더가 status만
+// 보고 무조건 "체험" 후보로 취급해(isTrial = status !== 'active') 이미 정규
+// 계약이 있는 가족에게도 새 체험 슬롯을 내줄 뻔했다(재매칭만으로 체험 기회가
+// 새로 생기면 안 된다는 정책 위반). 계약/수업권이 아직 활성화되지 않은
+// 재매칭 건은 체험 후보 목록에서 빼고, 대신 "정규 계약 대기" 안내 대상으로
+// 분리한다 — 캘린더를 띄우기 전에 활성화 대기 상태를 바로 알려준다.
+export type PendingActivationSubject = {
+  subjectEnrollmentId: string;
+  subjectName: string;
+  teacherName: string;
+};
+
 export type LessonBookingData = {
   bookableEnrollments: BookableSubjectEnrollment[];
+  pendingActivationSubjects?: PendingActivationSubject[];
   upcomingBookings: UpcomingBooking[];
   pastSessionsForReport: PastSessionForReport[];
   timezone: string;
@@ -58,27 +77,55 @@ export async function loadLessonBookingData(
     | { id: string; duration_minutes: number }
     | undefined;
 
+  // 같은 과목으로 이미 종료·완료된 수강 이력이 있으면(재매칭) 새 'planned'
+  // 건을 체험 후보로 보여주지 않는다 — subjectId 기준, 이 enrollment 자신은
+  // 제외.
+  const subjectIdsWithPriorEnrollment = new Set(
+    enrollments
+      .filter((e) => e.status === "terminated" || e.status === "completed")
+      .map((e) => e.subjectId)
+  );
+
   // 2026-09-09(UAT 지적): 체험수업권 지급 여부로 후보 목록 자체를 숨기면,
   // "선생님 배정이 필요합니다" 문구가 실제로는 "체험수업권 지급 대기 중"인
   // 경우까지 오인시킨다. 수업권 잔여량 검증은 어차피 예약 확정 시
   // hold_entitlement()가 최종 강제하므로("사용 가능한 수업권이 없습니다"),
   // 여기서는 선생님 배정 여부만으로 후보를 보여주고 실제 부족 여부는 예약
   // 시도 시점의 에러로 안내한다.
-  const bookableEnrollments: BookableSubjectEnrollment[] = enrollments
-    .filter((e) => e.currentTeacher && (e.status === "active" ? !!regularType : e.status === "planned" && !!trialType))
-    .map((e) => {
-      const isTrial = e.status !== "active";
-      const type = isTrial ? trialType! : regularType!;
-      return {
+  const bookableEnrollments: BookableSubjectEnrollment[] = [];
+  const pendingActivationSubjects: PendingActivationSubject[] = [];
+  for (const e of enrollments) {
+    if (!e.currentTeacher) continue;
+    if (e.status === "active" && regularType) {
+      bookableEnrollments.push({
         subjectEnrollmentId: e.id,
         subjectName: e.subjectName,
-        teacherId: e.currentTeacher!.teacherId,
-        teacherName: e.currentTeacher!.teacherName,
-        lessonTypeId: type.id,
-        lessonDurationMinutes: type.duration_minutes,
-        isTrial,
-      };
-    });
+        teacherId: e.currentTeacher.teacherId,
+        teacherName: e.currentTeacher.teacherName,
+        lessonTypeId: regularType.id,
+        lessonDurationMinutes: regularType.duration_minutes,
+        isTrial: false,
+      });
+    } else if (e.status === "planned") {
+      if (subjectIdsWithPriorEnrollment.has(e.subjectId)) {
+        pendingActivationSubjects.push({
+          subjectEnrollmentId: e.id,
+          subjectName: e.subjectName,
+          teacherName: e.currentTeacher.teacherName,
+        });
+      } else if (trialType) {
+        bookableEnrollments.push({
+          subjectEnrollmentId: e.id,
+          subjectName: e.subjectName,
+          teacherId: e.currentTeacher.teacherId,
+          teacherName: e.currentTeacher.teacherName,
+          lessonTypeId: trialType.id,
+          lessonDurationMinutes: trialType.duration_minutes,
+          isTrial: true,
+        });
+      }
+    }
+  }
 
   const enrollmentIds = enrollments.map((e) => e.id);
   let upcomingBookings: UpcomingBooking[] = [];
@@ -95,6 +142,7 @@ export async function loadLessonBookingData(
     type BookingRow = {
       reservationId: string | null;
       sessionId: string;
+      subjectEnrollmentId: string;
       subjectName: string;
       teacherName: string;
       startsAt: string;
@@ -117,6 +165,7 @@ export async function loadLessonBookingData(
         return {
           reservationId: reservation.id as string,
           sessionId: s.id as string,
+          subjectEnrollmentId: s.subject_enrollment_id as string,
           subjectName: (subject as { name?: string } | null)?.name ?? "",
           teacherName: (teacher as { name?: string } | null)?.name ?? "",
           startsAt: reservation.starts_at as string,
@@ -153,7 +202,16 @@ export async function loadLessonBookingData(
       const timeEnded = new Date(r.startsAt) <= now;
       const finalized = r.finalStatus !== "scheduled" && r.finalStatus !== "live";
       if (!timeEnded && !finalized) return false;
-      if (r.isTrial && reviewStatusBySession.get(r.sessionId) !== "final") return false;
+      // v3 재매칭 후 예약 결함 수정(2026-09-11) — 체험 수업이 "완료(completed)"로
+      // 판정됐을 때만 리뷰 확정을 기다린다. 취소·노쇼 등 다른 최종 판정은 리뷰
+      // 대상이 아니므로(선생님 포털도 동일 — 리뷰는 실제로 진행된 수업만 남긴다),
+      // 리뷰 미확정을 이유로 "예정 수업"에 계속 묶어두면 안 된다. 예전에는 체험
+      // 수업이면 finalStatus와 무관하게 무조건 리뷰 확정 전까지 예정으로
+      // 남겨뒀다 — 이미 완료 판정된 체험 수업이 리뷰만 안 끝났다는 이유로 계속
+      // "수업 시작" 버튼과 함께 예정 수업 목록에 남는 표시 결함의 원인이었다.
+      if (r.isTrial && r.finalStatus === "completed" && reviewStatusBySession.get(r.sessionId) !== "final") {
+        return false;
+      }
       return true;
     }
 
@@ -162,6 +220,7 @@ export async function loadLessonBookingData(
       .map((r) => ({
         reservationId: r.reservationId as string,
         sessionId: r.sessionId,
+        subjectEnrollmentId: r.subjectEnrollmentId,
         subjectName: r.subjectName,
         teacherName: r.teacherName,
         startsAt: r.startsAt,
@@ -190,6 +249,7 @@ export async function loadLessonBookingData(
 
   return {
     bookableEnrollments,
+    pendingActivationSubjects,
     upcomingBookings,
     pastSessionsForReport,
     timezone: resolveUserTimezone({

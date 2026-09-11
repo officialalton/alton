@@ -181,6 +181,61 @@ describe("loadLessonBookingData — 체험 학생도 정규수업과 동일하�
     const result = await loadLessonBookingData(supabase as never, "child4");
     expect(result.bookableEnrollments).toEqual([]);
   });
+
+  // v3 재매칭 후 예약 결함 수정(2026-09-11, Preview UAT 지적) — 같은 과목으로
+  // 이미 종료(terminated)된 수강 이력이 있는 채로 재매칭된 planned 건은 "새
+  // 체험 기회"가 아니다. 체험 후보로 보여주지 않고 "정규 계약 대기"로
+  // 분리한다(재매칭만으로 체험 기회가 새로 생기면 안 된다는 정책).
+  it("같은 과목에 종료된 수강 이력이 있는 재매칭 건은 체험 후보에서 빠지고 정규 계약 대기로 분류된다", async () => {
+    const supabase = makeSupabase({
+      enrollments: [
+        { id: "e-old", subject_id: "sub1", status: "terminated", subject: { name: "SAT Math" } },
+        { id: "e-new", subject_id: "sub1", status: "planned", subject: { name: "SAT Math" } },
+      ],
+      assignments: [
+        {
+          id: "a-new",
+          subject_enrollment_id: "e-new",
+          teacher_id: "t1",
+          status: "active",
+          effective_from: "2026-01-01",
+          effective_until: null,
+          reason: null,
+          teacher: { name: "박선생" },
+        },
+      ],
+      hasTrialGrant: false,
+    });
+
+    const result = await loadLessonBookingData(supabase as never, "child5");
+    expect(result.bookableEnrollments).toEqual([]);
+    expect(result.pendingActivationSubjects).toEqual([
+      { subjectEnrollmentId: "e-new", subjectName: "SAT Math", teacherName: "박선생" },
+    ]);
+  });
+
+  it("종료 이력이 없는 진짜 첫 체험 건은 그대로 체험 후보로 남는다", async () => {
+    const supabase = makeSupabase({
+      enrollments: [{ id: "e-first", subject_id: "sub1", status: "planned", subject: { name: "SAT Math" } }],
+      assignments: [
+        {
+          id: "a-first",
+          subject_enrollment_id: "e-first",
+          teacher_id: "t1",
+          status: "active",
+          effective_from: "2026-01-01",
+          effective_until: null,
+          reason: null,
+          teacher: { name: "박선생" },
+        },
+      ],
+      hasTrialGrant: false,
+    });
+
+    const result = await loadLessonBookingData(supabase as never, "child6");
+    expect(result.bookableEnrollments.map((b) => b.subjectEnrollmentId)).toEqual(["e-first"]);
+    expect(result.pendingActivationSubjects).toEqual([]);
+  });
 });
 
 // 2026-09-06 — 선생님이 조기 종료(finalize_lesson_session)로 완료 처리한 세션이
@@ -284,6 +339,29 @@ describe("loadLessonBookingData — 예정/지난 판정(final_status 반영, 20
       hasTrialGrant: true,
       sessions: [makeSessionRow({ id: "s1", startsAt: futureStart, endsAt: futureEnd, finalStatus: "completed", isTrial: true })],
       reviews: [{ trial_session_id: "s1", status: "final" }],
+    });
+
+    const result = await loadLessonBookingData(supabase as never, "child1");
+    expect(result.upcomingBookings).toEqual([]);
+    expect(result.pastSessionsForReport.map((r) => r.sessionId)).toEqual(["s1"]);
+  });
+
+  // v3 재매칭 후 예약 결함 수정(2026-09-11, Preview UAT 지적) — 리뷰 확정 대기는
+  // "완료(completed)돼서 리뷰가 필요한" 체험 수업에만 적용된다. 취소·노쇼 등
+  // 다른 최종 판정은 리뷰 대상이 아니므로, 리뷰 미확정을 이유로 계속 "예정
+  // 수업"·"수업 시작" 대상에 남아있으면 안 된다.
+  it("체험 수업이 completed가 아닌 다른 최종판정(예: student_cancelled)이면 리뷰가 없어도 '지난 수업'으로 넘어간다", async () => {
+    const futureStart = new Date(Date.now() + 3600_000).toISOString();
+    const futureEnd = new Date(Date.now() + 7200_000).toISOString();
+    const trialEnrollments = [{ id: "e1", subject_id: "sub1", status: "planned" as const, subject: { name: "AP Calculus AB" } }];
+    const supabase = makeSupabase({
+      enrollments: trialEnrollments,
+      assignments,
+      hasTrialGrant: true,
+      sessions: [
+        makeSessionRow({ id: "s1", startsAt: futureStart, endsAt: futureEnd, finalStatus: "student_cancelled", isTrial: true }),
+      ],
+      reviews: [],
     });
 
     const result = await loadLessonBookingData(supabase as never, "child1");

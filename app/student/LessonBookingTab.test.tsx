@@ -203,6 +203,7 @@ describe("LessonBookingTab — 예약 폼 레이아웃 정리(2026-09-06)", () =
     const trialBooking: UpcomingBooking = {
       reservationId: "r2",
       sessionId: "sess-2",
+      subjectEnrollmentId: trialEnrollment.subjectEnrollmentId,
       subjectName: trialEnrollment.subjectName,
       teacherName: trialEnrollment.teacherName,
       startsAt: new Date(Date.now() + 3600_000).toISOString(),
@@ -224,6 +225,35 @@ describe("LessonBookingTab — 예약 폼 레이아웃 정리(2026-09-06)", () =
     expect(screen.getByText(/이미 체험 수업을 예약하셨습니다/)).toBeInTheDocument();
     expect(screen.queryByText("예약 가능 시간을 불러오는 중…")).not.toBeInTheDocument();
     await waitFor(() => expect(onListSlots).not.toHaveBeenCalled());
+  });
+
+  // v3 재매칭 후 예약 결함 수정(2026-09-11, Preview UAT 지적) — 매칭 종료된
+  // 옛 수강 건(다른 subjectEnrollmentId)의 예약이 같은 과목명·선생님명이라는
+  // 이유만으로 재매칭된 새 수강 건의 체험 예약을 막으면 안 된다.
+  it("다른(옛) 수강 건의 예약은 과목·선생님명이 같아도 새 수강 건의 체험 예약을 막지 않는다", async () => {
+    const staleBookingFromOldEnrollment: UpcomingBooking = {
+      reservationId: "r-old",
+      sessionId: "sess-old",
+      subjectEnrollmentId: "e2-old-terminated",
+      subjectName: trialEnrollment.subjectName,
+      teacherName: trialEnrollment.teacherName,
+      startsAt: new Date(Date.now() + 3600_000).toISOString(),
+      endsAt: new Date(Date.now() + 7200_000).toISOString(),
+      googleMeetLink: null,
+      googleSyncStatus: "synced",
+    };
+    const onListSlots = vi.fn().mockResolvedValue([]);
+    render(
+      <LessonBookingTab
+        {...baseProps}
+        bookableEnrollments={[trialEnrollment]}
+        upcomingBookings={[staleBookingFromOldEnrollment]}
+        onListSlots={onListSlots}
+      />
+    );
+    fireEvent.click(screen.getByText("+ 새 수업 예약하기"));
+    expect(screen.queryByText(/이미 체험 수업을 예약하셨습니다/)).toBeNull();
+    await waitFor(() => expect(onListSlots).toHaveBeenCalled());
   });
 });
 

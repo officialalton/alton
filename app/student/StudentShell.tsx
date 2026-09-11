@@ -234,6 +234,7 @@ export default function StudentShell({
               reviews={reviews}
               myFeedback={myFeedback}
               bookableEnrollments={lessonBooking.bookableEnrollments}
+              pendingActivationSubjects={lessonBooking.pendingActivationSubjects}
               upcomingBookings={lessonBooking.upcomingBookings}
               pastSessionsForReport={lessonBooking.pastSessionsForReport}
               timezone={lessonBooking.timezone}

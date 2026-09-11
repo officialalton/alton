@@ -267,6 +267,7 @@ export default function ParentShell({
             <LessonBookingTab
               key={currentChildId}
               bookableEnrollments={lessonBooking.bookableEnrollments}
+              pendingActivationSubjects={lessonBooking.pendingActivationSubjects}
               upcomingBookings={lessonBooking.upcomingBookings}
               pastSessionsForReport={lessonBooking.pastSessionsForReport}
               timezone={lessonBooking.timezone}

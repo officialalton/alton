@@ -121,15 +121,30 @@ export default function EnrollmentTab({
               </span>
             </div>
 
-            <div className="text-[13px] text-ink mb-1">
-              담당 선생님:{" "}
-              <span className="font-semibold">
-                {e.currentTeacher ? e.currentTeacher.teacherName : "배정 전"}
-              </span>
-            </div>
-            {e.currentTeacher && (
-              <div className="text-[12px] text-grey-500">
-                {formatDate(e.currentTeacher.effectiveFrom)}부터
+            {/* v3 종료된 수강 담당 교사 표시 결함 수정(2026-09-11) — 활성
+                매칭이 없다고 무조건 "배정 전"을 보여주면, 매칭 종료로
+                담당 교사가 사라진 게 아니라 "애초에 배정된 적 없음"처럼
+                읽혀 오해를 준다. 이 과목 수강 건 자체의 종료 이력
+                (e.history, enrollment 단위로 이미 스코프됨 — 다른 수강
+                건의 교사가 섞일 수 없다)에 마지막 교사가 있으면 그걸
+                보여준다. */}
+            {e.currentTeacher ? (
+              <>
+                <div className="text-[13px] text-ink mb-1">
+                  담당 선생님: <span className="font-semibold">{e.currentTeacher.teacherName}</span>
+                </div>
+                <div className="text-[12px] text-grey-500">
+                  {formatDate(e.currentTeacher.effectiveFrom)}부터
+                </div>
+              </>
+            ) : e.history.length > 0 ? (
+              <div className="text-[13px] text-ink mb-1">
+                마지막 담당 선생님:{" "}
+                <span className="font-semibold">{e.history[0].teacherName}</span>
+              </div>
+            ) : (
+              <div className="text-[13px] text-ink mb-1">
+                담당 선생님: <span className="font-semibold">배정 전</span>
               </div>
             )}
 

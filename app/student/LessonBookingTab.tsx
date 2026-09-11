@@ -2,7 +2,12 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import type { BookableSubjectEnrollment, UpcomingBooking, PastSessionForReport } from "./lesson-booking-data";
+import type {
+  BookableSubjectEnrollment,
+  PendingActivationSubject,
+  UpcomingBooking,
+  PastSessionForReport,
+} from "./lesson-booking-data";
 import type { WeeklySeriesOccurrenceResult, BookingActionOutcome } from "@/lib/booking/create-booking";
 import MonthCalendar from "@/app/components/MonthCalendar";
 import { dateKeyInTimezone, todayKeyInTimezone } from "@/lib/calendar-date-utils";
@@ -38,6 +43,9 @@ const SYNC_STATUS_LABEL: Record<string, string> = {
 
 export type LessonBookingTabProps = {
   bookableEnrollments: BookableSubjectEnrollment[];
+  // v3 재매칭 후 예약 결함 수정(2026-09-11) — 계약/수업권이 아직 활성화되지
+  // 않은 재매칭 건. 캘린더를 띄우는 대신 "정규 계약 대기" 안내만 보여준다.
+  pendingActivationSubjects?: PendingActivationSubject[];
   upcomingBookings: UpcomingBooking[];
   pastSessionsForReport: PastSessionForReport[];
   timezone: string;
@@ -75,6 +83,7 @@ export type LessonBookingTabProps = {
 
 export default function LessonBookingTab({
   bookableEnrollments,
+  pendingActivationSubjects = [],
   upcomingBookings,
   pastSessionsForReport,
   timezone,
@@ -118,12 +127,16 @@ export default function LessonBookingTab({
 
   const selectedEnrollment = bookableEnrollments.find((e) => e.subjectEnrollmentId === selectedEnrollmentId) ?? null;
 
-  // 체험 수업은 1회만 예약 가능 — 선택된 과목이 체험이고 이미 그 과목·선생님으로 예정된
-  // 수업이 있다면 더 예약할 수 없는 상태이므로, 폼 대신 안내만 보여주고 슬롯 조회도
-  // 생략한다("예약 가능 시간을 불러오는 중…"이 의미 없이 계속 떠 있던 버그의 원인).
+  // 체험 수업은 1회만 예약 가능 — 선택된 과목이 체험이고 "이 수강 건" 자체로
+  // 이미 예정된 수업이 있다면 더 예약할 수 없는 상태이므로, 폼 대신 안내만
+  // 보여주고 슬롯 조회도 생략한다("예약 가능 시간을 불러오는 중…"이 의미
+  // 없이 계속 떠 있던 버그의 원인). v3 재매칭 후 예약 결함 수정(2026-09-11)
+  // — 과목명·선생님명 문자열 일치로 판정하면, 매칭 종료된 옛 수강 건의
+  // 예약(같은 과목·같은 선생님으로 재매칭한 경우)까지 걸려 "이미 예약함"으로
+  // 잘못 막았다 — subjectEnrollmentId로만 비교한다.
   const hasExistingTrialBooking =
     !!selectedEnrollment?.isTrial &&
-    upcomingBookings.some((b) => b.subjectName === selectedEnrollment.subjectName && b.teacherName === selectedEnrollment.teacherName);
+    upcomingBookings.some((b) => b.subjectEnrollmentId === selectedEnrollment.subjectEnrollmentId);
 
   // onListSlots는 부모(ParentShell/StudentShell)가 매 렌더마다 새로 만드는
   // 인라인 함수라 참조가 계속 바뀐다 — 이걸 그대로 useEffect 의존성에 넣으면
@@ -352,6 +365,17 @@ export default function LessonBookingTab({
 
       {message && <div className="mb-4 text-[13px] font-semibold text-ink bg-green/10 rounded-lg px-4 py-3">{message}</div>}
       {error && <div className="mb-4 text-[13px] font-semibold text-red bg-red/5 rounded-lg px-4 py-3">{error}</div>}
+
+      {showUpcoming && pendingActivationSubjects.length > 0 && (
+        <div className="mb-4 text-[12.5px] text-grey-600 bg-grey-100 rounded-lg px-4 py-3">
+          {pendingActivationSubjects.map((s) => (
+            <div key={s.subjectEnrollmentId}>
+              {s.subjectName} · {s.teacherName} 선생님 — 정규 계약 대기 상태입니다. 계약과 수업권이
+              확인되면 예약할 수 있습니다.
+            </div>
+          ))}
+        </div>
+      )}
 
       {showUpcoming && (bookableEnrollments.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center mb-8">

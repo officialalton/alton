@@ -33,6 +33,7 @@ export default function ClassesTab({
   reviews,
   myFeedback,
   bookableEnrollments,
+  pendingActivationSubjects,
   upcomingBookings,
   pastSessionsForReport,
   timezone,
@@ -66,6 +67,7 @@ export default function ClassesTab({
 
       <LessonBookingTab
         bookableEnrollments={bookableEnrollments}
+        pendingActivationSubjects={pendingActivationSubjects}
         upcomingBookings={upcomingBookings}
         pastSessionsForReport={pastSessionsForReport}
         timezone={timezone}
