@@ -154,7 +154,7 @@ describe("LessonBookingTab — 체험 학생도 직접 예약할 수 있어야 �
 
   it("체험 과목의 예약은 체험 수업권(lessonTypeId)과 60분으로 onCreateBooking을 호출한다", async () => {
     const slots = [new Date("2026-10-15T18:00:00.000Z")];
-    const onCreateBooking = vi.fn().mockResolvedValue({ reservationId: "r1", sessionId: "s1" });
+    const onCreateBooking = vi.fn().mockResolvedValue({ ok: true, data: { reservationId: "r1", sessionId: "s1" } });
     render(
       <LessonBookingTab
         {...baseProps}

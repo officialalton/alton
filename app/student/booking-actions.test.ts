@@ -22,11 +22,15 @@ vi.mock("@/lib/supabase-admin", () => ({
 const confirmLessonBookingMock = vi.fn();
 const createWeeklyLessonSeriesMock = vi.fn();
 const cancelLessonBookingMock = vi.fn();
-vi.mock("@/lib/booking/create-booking", () => ({
-  confirmLessonBooking: (p: unknown) => confirmLessonBookingMock(p),
-  createWeeklyLessonSeries: (p: unknown) => createWeeklyLessonSeriesMock(p),
-  cancelLessonBooking: (p: unknown) => cancelLessonBookingMock(p),
-}));
+vi.mock("@/lib/booking/create-booking", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@/lib/booking/create-booking")>();
+  return {
+    ...actual,
+    confirmLessonBooking: (p: unknown) => confirmLessonBookingMock(p),
+    createWeeklyLessonSeries: (p: unknown) => createWeeklyLessonSeriesMock(p),
+    cancelLessonBooking: (p: unknown) => cancelLessonBookingMock(p),
+  };
+});
 
 beforeEach(() => {
   vi.clearAllMocks();
@@ -44,18 +48,23 @@ describe("createMyLessonBooking", () => {
       subjectEnrollmentId: "e1", teacherId: "t1", lessonTypeId: "lt1",
       startsAt: new Date("2026-10-10T19:00:00Z"), durationMinutes: 120,
     });
-    expect(result).toEqual({ reservationId: "r1", sessionId: "s1" });
+    expect(result).toEqual({ ok: true, data: { reservationId: "r1", sessionId: "s1" } });
     expect(confirmLessonBookingMock).toHaveBeenCalledWith(
       expect.objectContaining({ childId: "student1", teacherId: "t1" })
     );
   });
 
-  it("배정된 선생님이 아니면 거부한다", async () => {
+  it("배정된 선생님이 아니면 안내 문구를 담은 실패 결과를 반환한다(throw하지 않음 — P0 #441 회귀 방지)", async () => {
     teacherAssignmentMaybeSingleMock.mockResolvedValue({ data: null });
     const { createMyLessonBooking } = await import("./booking-actions");
-    await expect(
-      createMyLessonBooking({ subjectEnrollmentId: "e1", teacherId: "t1", lessonTypeId: "lt1", startsAt: new Date(), durationMinutes: 120 })
-    ).rejects.toThrow("현재 배정된 선생님이 아닙니다");
+    const result = await createMyLessonBooking({
+      subjectEnrollmentId: "e1", teacherId: "t1", lessonTypeId: "lt1", startsAt: new Date(), durationMinutes: 120,
+    });
+    expect(result.ok).toBe(false);
+    if (!result.ok) {
+      expect(result.errorCode).toBe("no_assignment");
+      expect(result.message).not.toMatch(/현재 배정된 선생님이 아닙니다/);
+    }
   });
 });
 

@@ -12,7 +12,9 @@ import {
   confirmLessonBooking,
   createWeeklyLessonSeries,
   cancelLessonBooking,
+  toBookingActionOutcomeError,
   type WeeklySeriesOccurrenceResult,
+  type BookingActionOutcome,
 } from "@/lib/booking/create-booking";
 import {
   assertGuardianOfChild,
@@ -42,14 +44,19 @@ export type CreateLessonBookingParams = {
 
 export async function createLessonBookingForChild(
   params: CreateLessonBookingParams
-): Promise<{ reservationId: string; sessionId: string }> {
+): Promise<BookingActionOutcome<{ reservationId: string; sessionId: string }>> {
   const { user, supabase } = await requireUser();
   await assertGuardianOfChild(supabase, user.id, params.childId);
-  const admin = createAdminClient();
-  await assertActiveTeacherAssignment(admin, params.subjectEnrollmentId, params.teacherId);
+  try {
+    const admin = createAdminClient();
+    await assertActiveTeacherAssignment(admin, params.subjectEnrollmentId, params.teacherId);
 
-  const idempotencyKey = `guardian-booking:${params.childId}:${params.subjectEnrollmentId}:${params.startsAt.toISOString()}`;
-  return confirmLessonBooking({ ...params, idempotencyKey });
+    const idempotencyKey = `guardian-booking:${params.childId}:${params.subjectEnrollmentId}:${params.startsAt.toISOString()}`;
+    const data = await confirmLessonBooking({ ...params, idempotencyKey });
+    return { ok: true, data };
+  } catch (e) {
+    return { ok: false, ...toBookingActionOutcomeError(e) };
+  }
 }
 
 export type CreateWeeklySeriesParams = {
@@ -65,14 +72,19 @@ export type CreateWeeklySeriesParams = {
 
 export async function createWeeklyLessonSeriesForChild(
   params: CreateWeeklySeriesParams
-): Promise<WeeklySeriesOccurrenceResult[]> {
+): Promise<BookingActionOutcome<WeeklySeriesOccurrenceResult[]>> {
   const { user, supabase } = await requireUser();
   await assertGuardianOfChild(supabase, user.id, params.childId);
-  const admin = createAdminClient();
-  await assertActiveTeacherAssignment(admin, params.subjectEnrollmentId, params.teacherId);
+  try {
+    const admin = createAdminClient();
+    await assertActiveTeacherAssignment(admin, params.subjectEnrollmentId, params.teacherId);
 
-  const idempotencyKeyPrefix = `guardian-series:${params.childId}:${params.subjectEnrollmentId}:${params.firstStartsAt.toISOString()}`;
-  return createWeeklyLessonSeries({ ...params, idempotencyKeyPrefix, createdBy: user.id });
+    const idempotencyKeyPrefix = `guardian-series:${params.childId}:${params.subjectEnrollmentId}:${params.firstStartsAt.toISOString()}`;
+    const data = await createWeeklyLessonSeries({ ...params, idempotencyKeyPrefix, createdBy: user.id });
+    return { ok: true, data };
+  } catch (e) {
+    return { ok: false, ...toBookingActionOutcomeError(e) };
+  }
 }
 
 /** R6: 브라우저 감지 timezone 제안 UI가 "적용" 클릭 시 호출 — 자녀 profiles.timezone 갱신. */

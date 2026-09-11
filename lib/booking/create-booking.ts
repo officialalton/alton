@@ -31,6 +31,43 @@ export type ConfirmBookingResult = {
   sessionId: string;
 };
 
+// P0(2026-09-10) — 예약 확정(confirm_lesson_booking/create_weekly_lesson_series)이
+// 던지는 예외를 서버 액션이 그대로 다시 throw하면, 프로덕션 빌드에서는 Next.js가
+// Server Action 에러 메시지를 digest로 가려버려 클라이언트에 "React error #441"류의
+// 뜻 없는 문구만 남는다(개발 모드에서는 원문이 그대로 보여 재현되지 않았음). 예약
+// 확정처럼 "수업권 없음", "선생님 일정 충돌" 같은 정상적으로 발생 가능한 실패는
+// 서버 액션이 throw하지 않고 이 타입으로 반환해, 화면이 항상 안내 문구 + 재시도
+// 가능한 상태로 처리하도록 한다.
+export type BookingActionOutcome<T> =
+  | { ok: true; data: T }
+  | { ok: false; errorCode: "no_entitlement" | "no_assignment" | "slot_conflict" | "booking_failed"; message: string };
+
+export function toBookingActionOutcomeError(e: unknown): {
+  errorCode: "no_entitlement" | "no_assignment" | "slot_conflict" | "booking_failed";
+  message: string;
+} {
+  const raw = e instanceof Error ? e.message : String(e);
+  if (raw.includes("사용 가능한 수업권이 없습니다")) {
+    return {
+      errorCode: "no_entitlement",
+      message: "사용 가능한 수업권이 없어 예약을 확정할 수 없습니다. 담당자에게 문의해주세요.",
+    };
+  }
+  if (raw.includes("teacher_freebusy_conflict") || raw.includes("겹치는 일정")) {
+    return {
+      errorCode: "slot_conflict",
+      message: "선택한 시간이 방금 다른 일정과 겹치게 됐습니다. 다른 시간을 선택해주세요.",
+    };
+  }
+  if (raw.includes("배정") || raw.includes("assignment")) {
+    return {
+      errorCode: "no_assignment",
+      message: "선생님 매칭 정보를 확인할 수 없어 예약을 진행할 수 없습니다. 담당자에게 문의해주세요.",
+    };
+  }
+  return { errorCode: "booking_failed", message: "예약을 확정하지 못했습니다. 잠시 후 다시 시도해주세요." };
+}
+
 function bestEffortSyncCalendarEvent(reservationId: string): void {
   // fire-and-forget이 아니라 실제로 기다리되(void 반환 함수 자체는 async), 실패가
   // confirmLessonBooking()의 성공 응답을 절대 막지 못하게 여기서 완전히 삼킨다.

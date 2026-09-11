@@ -9,7 +9,9 @@ import {
   confirmLessonBooking,
   createWeeklyLessonSeries,
   cancelLessonBooking,
+  toBookingActionOutcomeError,
   type WeeklySeriesOccurrenceResult,
+  type BookingActionOutcome,
 } from "@/lib/booking/create-booking";
 import { assertActiveTeacherAssignment, assertReservationBelongsToChild } from "@/lib/booking/authorization";
 import { listAvailableSlotsForBooking as queryAvailableSlots, type AvailableSlotsQuery } from "@/lib/booking/query-slots";
@@ -31,13 +33,18 @@ export type CreateLessonBookingParams = {
 
 export async function createMyLessonBooking(
   params: CreateLessonBookingParams
-): Promise<{ reservationId: string; sessionId: string }> {
+): Promise<BookingActionOutcome<{ reservationId: string; sessionId: string }>> {
   const { user } = await requireUser();
-  const admin = createAdminClient();
-  await assertActiveTeacherAssignment(admin, params.subjectEnrollmentId, params.teacherId);
+  try {
+    const admin = createAdminClient();
+    await assertActiveTeacherAssignment(admin, params.subjectEnrollmentId, params.teacherId);
 
-  const idempotencyKey = `student-booking:${user.id}:${params.subjectEnrollmentId}:${params.startsAt.toISOString()}`;
-  return confirmLessonBooking({ ...params, childId: user.id, idempotencyKey });
+    const idempotencyKey = `student-booking:${user.id}:${params.subjectEnrollmentId}:${params.startsAt.toISOString()}`;
+    const data = await confirmLessonBooking({ ...params, childId: user.id, idempotencyKey });
+    return { ok: true, data };
+  } catch (e) {
+    return { ok: false, ...toBookingActionOutcomeError(e) };
+  }
 }
 
 export type CreateWeeklySeriesParams = {
@@ -52,13 +59,18 @@ export type CreateWeeklySeriesParams = {
 
 export async function createMyWeeklyLessonSeries(
   params: CreateWeeklySeriesParams
-): Promise<WeeklySeriesOccurrenceResult[]> {
+): Promise<BookingActionOutcome<WeeklySeriesOccurrenceResult[]>> {
   const { user } = await requireUser();
-  const admin = createAdminClient();
-  await assertActiveTeacherAssignment(admin, params.subjectEnrollmentId, params.teacherId);
+  try {
+    const admin = createAdminClient();
+    await assertActiveTeacherAssignment(admin, params.subjectEnrollmentId, params.teacherId);
 
-  const idempotencyKeyPrefix = `student-series:${user.id}:${params.subjectEnrollmentId}:${params.firstStartsAt.toISOString()}`;
-  return createWeeklyLessonSeries({ ...params, childId: user.id, idempotencyKeyPrefix, createdBy: user.id });
+    const idempotencyKeyPrefix = `student-series:${user.id}:${params.subjectEnrollmentId}:${params.firstStartsAt.toISOString()}`;
+    const data = await createWeeklyLessonSeries({ ...params, childId: user.id, idempotencyKeyPrefix, createdBy: user.id });
+    return { ok: true, data };
+  } catch (e) {
+    return { ok: false, ...toBookingActionOutcomeError(e) };
+  }
 }
 
 /** R6: 브라우저 감지 timezone 제안 UI가 "적용" 클릭 시 호출 — 본인 profiles.timezone 갱신. */

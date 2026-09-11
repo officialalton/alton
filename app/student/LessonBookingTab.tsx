@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { BookableSubjectEnrollment, UpcomingBooking, PastSessionForReport } from "./lesson-booking-data";
-import type { WeeklySeriesOccurrenceResult } from "@/lib/booking/create-booking";
+import type { WeeklySeriesOccurrenceResult, BookingActionOutcome } from "@/lib/booking/create-booking";
 import MonthCalendar from "@/app/components/MonthCalendar";
 import { dateKeyInTimezone, todayKeyInTimezone } from "@/lib/calendar-date-utils";
 
@@ -48,7 +48,7 @@ export type LessonBookingTabProps = {
     lessonTypeId: string;
     startsAt: Date;
     durationMinutes: number;
-  }) => Promise<{ reservationId: string; sessionId: string }>;
+  }) => Promise<BookingActionOutcome<{ reservationId: string; sessionId: string }>>;
   onCreateWeeklySeries: (params: {
     subjectEnrollmentId: string;
     teacherId: string;
@@ -57,7 +57,7 @@ export type LessonBookingTabProps = {
     durationMinutes: number;
     occurrences: number;
     seriesTimezone: string;
-  }) => Promise<WeeklySeriesOccurrenceResult[]>;
+  }) => Promise<BookingActionOutcome<WeeklySeriesOccurrenceResult[]>>;
   onCancelBooking: (reservationId: string, reason: string) => Promise<void>;
   onUpdateTimezone?: (timezone: string) => Promise<void>;
   onReportTeacherIssue: (params: {
@@ -206,18 +206,22 @@ export default function LessonBookingTab({
     setMessage(null);
     try {
       if (mode === "single" || selectedEnrollment.isTrial) {
-        await onCreateBooking({
+        const result = await onCreateBooking({
           subjectEnrollmentId: selectedEnrollment.subjectEnrollmentId,
           teacherId: selectedEnrollment.teacherId,
           lessonTypeId: selectedEnrollment.lessonTypeId,
           startsAt: slot,
           durationMinutes: selectedEnrollment.lessonDurationMinutes,
         });
+        if (!result.ok) {
+          setError(result.message);
+          return;
+        }
         setMessage("예약이 확정됐습니다.");
         router.refresh();
         await refetchSlots();
       } else {
-        const results = await onCreateWeeklySeries({
+        const result = await onCreateWeeklySeries({
           subjectEnrollmentId: selectedEnrollment.subjectEnrollmentId,
           teacherId: selectedEnrollment.teacherId,
           lessonTypeId: selectedEnrollment.lessonTypeId,
@@ -226,6 +230,11 @@ export default function LessonBookingTab({
           occurrences: 8,
           seriesTimezone: timezone,
         });
+        if (!result.ok) {
+          setError(result.message);
+          return;
+        }
+        const results = result.data;
         const succeeded = results.filter((r) => r.reservationId).length;
         const firstFailure = results.find((r) => r.failureReason);
         setMessage(

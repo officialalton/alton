@@ -1,5 +1,64 @@
 # ALTON — 현재 상태 (2026-09-10 기준)
 
+> **2026-09-10 — P0: 직접 계정 생성(계정 생성 탭) 유입의 동의·체험 수업권·
+> 예약 3중 결함 원인 확정·수정 완료.** 제품 오너가 실사용 중 발견(나이 입력
+> 전 보호자 동의 노출, 학생 포털에 체험 수업권 미표시, 예약 확정 시
+> React error #441). 세 증상 모두 "게이트가 그 게이트를 해제할 수단보다
+> 앞서 있는" 같은 유형의 결함으로 확정, 코드 조사만으로 원인 특정(로컬
+> non-prod DB의 실제 UAT 계정 레코드로 실증) — 오염된 동의/수업권 데이터는
+> 발견되지 않아 **정리용 migration은 불필요**했다.
+> 1. **나이 입력 전 동의 노출**: `lib/auth.ts::resolveAccountDestination()`가
+>    미성년자 보호자 동의 게이트(`current_account_access_allowed()`,
+>    R2 `guardian_consents`)를 학생 프로필 완성(생년월일 입력) 게이트보다
+>    먼저 검사했다. `is_under_13()`은 `date_of_birth`가 null이면
+>    fail-closed(미성년 취급)라, 생년월일을 아직 입력하지 않은 모든 신규
+>    학생(직접 계정 생성·상담 유입 공통)이 `/consent-pending`에 갇히고
+>    `/complete-profile`(생년월일 입력 화면)에 도달할 방법이 없는 순환
+>    데드락이었다. 두 게이트 순서를 맞바꿔 프로필 완성이 항상 먼저
+>    오도록 수정(`lib/auth.ts`).
+> 2. **체험 수업권 미표시**: 직접 계정 생성 경로(`consultation_id is null`)의
+>    `finalize_trial_onboarding_students()`/`retry_trial_onboarding_student()`가
+>    학생 계정 생성 **직후** `grant_trial_entitlement_for_student()`를
+>    즉시 시도했는데, 이 시점엔 체험 Smart Notes 동의가 있을 수 없어
+>    항상 실패(`trial_entitlement_grant_status='failed'`)로 조용히
+>    남았다(사용자에게 안내 없음). 상담 경로는 이미 "동의 제출 시점에
+>    지급 시도"(`record_trial_smart_notes_consent()` → `grant_trial_
+>    entitlement_for_consultation()`) 패턴을 쓰고 있었으므로, 직접생성
+>    경로도 동일한 패턴으로 맞췄다: 계정 생성 시점에는 `awaiting_consent`
+>    상태만 남기고(새 허용값 추가, additive), 실제 지급 시도는
+>    `record_trial_smart_notes_consent()`에 동일한 pending→granted/failed
+>    분기를 추가해 동의 제출 시점으로 이동(`grant_trial_entitlement_for_
+>    student()` 재사용, 함수 자체는 변경 없음). Additive migration
+>    `20261272000000_p0_direct_creation_consent_entitlement_fix.sql`.
+>    로컬 DB에서 계정 생성→`awaiting_consent`→동의 제출→`granted`+
+>    `entitlement_grants` 1건 생성까지 실측 확인, `guardian_consents`/
+>    `consultations` 어느 쪽에도 부작용 없음을 확인.
+> 3. **예약 확정 시 React error #441**: 원인은 hydration이 아니라 Next.js가
+>    프로덕션 Server Action의 미처리 예외를 digest로 가려버리는, 이미
+>    이 프로젝트에 여러 번 있었던 동일 패턴(관리자 키워드·교사 세션 준비
+>    키워드 배치 등 참고). `confirmLessonBooking()`/`createWeeklyLessonSeries()`가
+>    던지는 "수업권 없음"/"선생님 배정 없음"/"일정 충돌" 예외가 그대로
+>    다시 throw되고 있었다. `lib/booking/create-booking.ts`에 공용
+>    `BookingActionOutcome<T>`(`{ok:true,data}|{ok:false,errorCode,message}`)와
+>    `toBookingActionOutcomeError()`를 추가하고, `app/student/booking-
+>    actions.ts`/`app/parent/booking-actions.ts`의 예약 확정 액션 4개를
+>    throw 대신 이 타입 반환으로 전환(가디언/자녀 소유권 검증 실패 같은
+>    비정상 상황은 그대로 throw 유지 — 예약 확정 자체의 정상적 실패
+>    사유만 안내 문구로 전환). `LessonBookingTab.tsx`(학생·학부모 포털
+>    공용 컴포넌트)가 `result.ok`로 분기해 항상 안내 문구+재시도 가능한
+>    상태로 처리하도록 갱신.
+> **검증**: `tsc --noEmit`/`eslint` 클린(무관 pre-existing lint 경고 3건
+> 확인·본 diff와 무관). `supabase db reset --local` 후 전체 스위트
+> `--no-file-parallelism`으로 259 files/1804 tests 전부 통과(초기 시도에서
+> 63자 식별자 truncation으로 인한 check 제약 미교체·20261216000000의
+> `cancelled` 스킵 분기 누락 2건을 발견해 수정 — 최종본은 반영 완료).
+> `next build` 성공. 로컬 DB에서 직접생성 경로 전체 흐름(계정 생성→
+> awaiting_consent→동의 제출→granted→entitlement_grants 생성)을
+> psql로 직접 재현·확인. **미완료**: 공유 Preview 환경에서 실제 계정으로
+> 하는 대화형 UAT(예약 화면 렌더→시간 선택→확정→중복 예약 방지, 상담
+> 유입 경로와의 회귀 비교 포함)는 이번 라운드에서 아직 수행하지 않음 —
+> 코드 커밋·Preview 배포 직후 진행 예정. Production 무변경.
+>
 > **2026-09-10 — B. 신규 통합 보드·정규 계약 발송·계정 생성 탭: 완료
 > (신규 현황/정규 계약 발송/계정 생성 3개 탭 전부), Preview 배포 완료
 > (target: preview 확인), Production 미적용, migration 없음.** 관리자
