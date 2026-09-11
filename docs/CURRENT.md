@@ -1,5 +1,44 @@
 # ALTON — 현재 상태 (2026-09-11 기준)
 
+> **2026-09-11 — P4-1(B) 경량 가구 아카이브·복귀: 구현 완료, Preview UAT 대기.**
+> 착수 정리는 `docs/2026-09-11-p4-1b-household-archive-plan.md`.
+> 마이그레이션 1건 추가(`20261283000000_p4_1b_household_archive.sql`, 전부 additive).
+> 1. **별도 아카이브 상태**: `households.archived_at/archived_by` +
+>    `household_archive_requests`(선점·재시도) + `household_archive_events`
+>    (INSERT-only 감사). R2 계정 상태(`closure_pending`/`closed`)는 재사용하지
+>    않는다 — `lib/auth.ts`가 그 상태에서 즉시 로그아웃시키는데 로그인 차단은
+>    범위 밖이다. 조회 전용 함수 2개: `preview_household_archive_impact()`,
+>    `archived_household_profile_ids()`.
+> 2. **C-2 종료 파이프라인 재사용**: `lib/household/household-archive.ts`가
+>    자녀별 활성 매칭을 `createTerminationRequest()` +
+>    `processTeacherAssignmentTermination({resolution:'end_enrollment'})`로 끝내고,
+>    남은 미래 확정 예약만 `cancelLessonBooking()`으로 취소한다(Calendar 해제 포함).
+>    새 종료·취소 경로를 만들지 않았다.
+> 3. **진행 중 수업은 변경 전 차단**: 가구 전체를 먼저 조회해 `final_status='live'`가
+>    하나라도 있으면 어떤 예약·매칭·플래그도 건드리지 않고 멈춘다(요청은 `failed`로
+>    남아 같은 버튼으로 재시도). 이미 시작된 수업은 `starts_at`으로 잡히지 않으므로
+>    live 판정에는 시간 조건을 두지 않는다.
+> 4. **완료 수업·사용 수업권 보존**: 최종 판정이 끝난 세션(완료/취소/노쇼)은 취소
+>    시도조차 하지 않는다. 미사용 수업권이 취소로 해제·만료 연장되는 것은
+>    `cancel_lesson_booking`의 기존 정책 그대로(새 정책 아님).
+> 5. **복귀는 플래그 해제만**: 취소된 예약·종료된 매칭·수강 상태를 자동 복원하지
+>    않으며 화면에도 그렇게 안내한다.
+> 6. **UI**: 사용자 탭에 `아카이브됨` 서브탭 추가(목록·복귀), 학부모 행에 `아카이브`
+>    버튼 + 영향 미리보기 확인 모달. 아카이브된 가구의 보호자·자녀는
+>    `loadParents`/`loadStudents`/`loadStudentsForMatching`에서 제외된다(목록당 왕복 +1).
+> **범위 밖(기록)**: 상담 예약(`consult_requests`)은 이메일 기반이라 가구에 귀속되지
+> 않아 이번 아카이브 대상에 넣지 않았다. 공동 보호자 가구 모델 변경도 하지 않았다.
+> **검증**: DB 통합 8 + 오케스트레이션 유닛 7 + 컴포넌트 6 + 목록 필터 3 신규 통과,
+> tsc 클린, 신규·수정 파일 eslint 클린(무관 pre-existing 오류 32건은 손대지 않은
+> 파일), `next build` 성공. **`db reset` 후 직렬 전체 실행 271 files / 1910 tests
+> 전부 통과(293.2s).** 직렬 실행이 실제 회귀 1건을 잡아냈다 — `loadParents()`가
+> households를 1회 더 읽게 되면서 기존 목 2곳(`list-parents-for-users-tab-action.test.ts`의
+> households 테이블·`.not()` 체인)이 깨졌고, 목을 갱신해 해결했다.
+> **다음**: Preview에서 실제 가구로 아카이브 → 목록 제외 → 복귀 확인(UAT 실행 ID
+> `p4-1b-archive-20260911`). **P4-2(교사 계좌·정산)·P4-3(교사별 서류 보관)은 후속
+> 계획 문서로만 유지하며 이번 라운드 미착수** — 서류 제출은 업무 게이트가 아니라
+> 업로드·보관 창구다(`docs/2026-09-10-p4-3-admin-documents-tab-design.md:19-20`에 이미 반영).
+
 > **2026-09-11 — P4-1(A) 기존 주 보호자에게 자녀 추가: 구현 완료, Preview UAT
 > 대기.** 커밋 `d158cc0`(`preview/m4-integration-verification`), Preview
 > `https://alton-6krtt3nv8-alton7.vercel.app`. 착수 1장 정리는
@@ -20,9 +59,24 @@
 >    없음) — 중복이면 링크 생성·발송을 시작하지 않고 입력란에 인라인 안내.
 > **검증**: 액션 유닛 8 + 폼 컴포넌트 6 + DB 통합 4(주 보호자 후보 필터, 기존
 > 가구 재사용·형제자매 행 불변, 멱등 재실행, 공동 보호자 finalize 실패) 통과,
-> tsc/eslint 클린, `next build` 성공. 전체 스위트는 로컬 통합 테스트가 단일
-> 로컬 DB를 병렬 공유해 실행마다 3~6건이 무작위로 실패한다(P4-1과 무관 —
-> 이번 변경을 제외하고 돌려도 6건 실패, 해당 파일만 단독 실행하면 전부 통과).
+> tsc/eslint 클린, `next build` 성공.
+> **전체 스위트 실패 = 공유 DB 간섭으로 확정(2026-09-11 실측)**: 병렬 기본
+> 실행에서는 `supabase db reset --local` 직후에도 매 실행 3~6건이 무작위로
+> 실패하고 실패 파일이 매번 달라진다(관측된 실패: curriculum-docs-v3-access /
+> student-curriculum-overlay / payout-batch-lifecycle /
+> session-teacher-partial-interruption / trial-entitlement-and-cancellation /
+> consultation-outcome-smart-notes-gate / trial-sessions-guardian-consent /
+> session-content-manifest / account-status-protect-token /
+> session-annotation-events / incident-report-reported-by-identity /
+> timezone-persistence / smart-notes-no-gate-and-late-summary / lesson-reviews).
+> 원인은 통합 테스트들이 하나의 로컬 Postgres를 병렬 공유하면서 고정 라벨
+> 픽스처(예: `consult_consent_versions.version_label='gate-relax-ok-v1'`)와
+> 전역 테스트 트리거(`force_session_status_event_failure_for_test()`)를 쓰기
+> 때문이다. 근거 3가지: (a) 해당 파일만 단독 실행하면 전부 통과, (b) P4-1
+> 변경을 제외하고 돌려도 6건 실패(오히려 더 많음), (c) **`db reset` 후
+> `vitest run --no-file-parallelism`(직렬) 전체 실행 = 267 files / 1885 tests
+> 전부 통과, 286.8s.** 테스트 인프라 개편은 이번 범위 밖 — 당분간 전체
+> 검증은 직렬 실행 결과를 기준으로 삼는다.
 > **다음**: Preview에서 `+ 자녀 추가` 실제 발송 → 보호자 링크 확인 → 자녀 계정
 > 생성 → 학부모 포털에 자녀 2명 표시 + 기존 자녀 상태 불변 확인(UAT 실행 ID
 > `p4-1-add-child-20260911`). P4-3(관리자 문서 탭)은 이번 라운드 미착수.

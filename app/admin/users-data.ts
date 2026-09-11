@@ -7,6 +7,8 @@ export type ParentListItem = {
   email: string;
   joinedAt: string;
   childrenNames: string[];
+  // P4-1(B): 아카이브 대상 가구. 가구가 없는 보호자(관계가 아직 안 맺어진 경우)는 null.
+  householdId: string | null;
 };
 
 export type StudentListItem = {
@@ -87,6 +89,14 @@ export async function loadEmailById(userIds: string[]): Promise<Map<string, stri
   return emailById;
 }
 
+// P4-1(B) — 아카이브된 가구 id 집합. 관리자 목록에서 그 가구의 보호자·자녀를
+// 제외하기 위해 목록당 왕복 1회만 추가한다(아카이브된 가구만 읽으므로 보통 0~수십 행).
+export async function loadArchivedHouseholdIds(supabase: SupabaseClient): Promise<Set<string>> {
+  const { data, error } = await supabase.from("households").select("id").not("archived_at", "is", null);
+  if (error) throw new Error(`archived_households_query_failed:${error.code ?? "unknown"}`);
+  return new Set((data ?? []).map((h) => h.id as string));
+}
+
 // 2026-09-10(P1 — 학부모 SSR 회귀 조사 후속) — 이 함수는 이제 SSR
 // Promise.all에서 호출되지 않고(admin/page.tsx), listParentsForUsersTabAction()을
 // 통해서만 호출된다. 어느 단계가 느리거나 실패하는지 구분할 수 있도록 각
@@ -151,30 +161,47 @@ export async function loadParents(supabase: SupabaseClient): Promise<ParentListI
     childrenByHousehold.set(l.household_id, list);
   }
 
+  // P4-1(B) — 아카이브된 가구의 보호자는 이 목록에서 제외한다(아카이브됨 서브탭에만 보인다).
   t = Date.now();
+  const archivedHouseholdIds = await loadArchivedHouseholdIds(supabase);
+  logUsersTabStage("users_tab.parents.archived_households", t, { count: archivedHouseholdIds.size });
+  const activeParents = parents.filter((p) =>
+    (householdIdsByParent.get(p.id) ?? []).some((id) => !archivedHouseholdIds.has(id)) ||
+    (householdIdsByParent.get(p.id) ?? []).length === 0
+  );
+  if (activeParents.length === 0) return [];
+
+  t = Date.now();
+  const activeParentIds = activeParents.map((p) => p.id);
   let emailById: Map<string, string>;
   try {
-    emailById = await loadEmailById(parentIds);
-    logUsersTabStage("users_tab.parents.email_rpc", t, { requested: parentIds.length, found: emailById.size });
+    emailById = await loadEmailById(activeParentIds);
+    logUsersTabStage("users_tab.parents.email_rpc", t, { requested: activeParentIds.length, found: emailById.size });
   } catch (e) {
     logUsersTabStage("users_tab.parents.email_rpc", t, {
-      requested: parentIds.length,
+      requested: activeParentIds.length,
       errorCode: e instanceof Error ? e.message : "unknown",
     });
     throw new Error(`email_rpc_failed:${e instanceof Error ? e.message : "unknown"}`);
   }
 
-  logUsersTabStage("users_tab.parents.total", totalStart, { count: parents.length });
+  logUsersTabStage("users_tab.parents.total", totalStart, { count: activeParents.length });
 
-  return parents.map((p) => ({
-    id: p.id,
-    name: extractName(p.profile),
-    email: emailById.get(p.id) ?? "",
-    joinedAt: p.joined_at,
-    childrenNames: (householdIdsByParent.get(p.id) ?? []).flatMap(
-      (householdId) => childrenByHousehold.get(householdId) ?? []
-    ),
-  }));
+  return activeParents.map((p) => {
+    const activeHouseholdIds = (householdIdsByParent.get(p.id) ?? []).filter(
+      (id) => !archivedHouseholdIds.has(id)
+    );
+    return {
+      id: p.id,
+      name: extractName(p.profile),
+      email: emailById.get(p.id) ?? "",
+      joinedAt: p.joined_at,
+      childrenNames: activeHouseholdIds.flatMap(
+        (householdId) => childrenByHousehold.get(householdId) ?? []
+      ),
+      householdId: activeHouseholdIds[0] ?? null,
+    };
+  });
 }
 
 export async function loadStudents(supabase: SupabaseClient): Promise<StudentListItem[]> {
@@ -200,6 +227,14 @@ export async function loadStudents(supabase: SupabaseClient): Promise<StudentLis
     householdIdByStudent.set(l.profile_id, l.household_id);
   }
 
+  // P4-1(B) — 아카이브된 가구의 자녀는 이 목록에서 제외한다.
+  const archivedHouseholdIds = await loadArchivedHouseholdIds(supabase);
+  const activeStudents = students.filter((s) => {
+    const householdId = householdIdByStudent.get(s.id);
+    return !householdId || !archivedHouseholdIds.has(householdId);
+  });
+  if (activeStudents.length === 0) return [];
+
   const householdIds = Array.from(new Set(Array.from(householdIdByStudent.values())));
   const { data: guardianLinks } = await supabase
     .from("household_members")
@@ -215,7 +250,7 @@ export async function loadStudents(supabase: SupabaseClient): Promise<StudentLis
   }
 
   const parentsByStudent = new Map<string, string[]>();
-  for (const s of students) {
+  for (const s of activeStudents) {
     const householdId = householdIdByStudent.get(s.id);
     parentsByStudent.set(
       s.id,
@@ -258,7 +293,7 @@ export async function loadStudents(supabase: SupabaseClient): Promise<StudentLis
     );
   }
 
-  return students.map((s) => {
+  return activeStudents.map((s) => {
     const profile = (Array.isArray(s.profile) ? s.profile[0] : s.profile) as
       | { name?: string; date_of_birth?: string | null; date_of_birth_verified_at?: string | null }
       | null;

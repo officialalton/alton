@@ -15,6 +15,7 @@ function chain(rows: Row[]) {
     select: () => builder,
     eq: () => builder,
     in: () => builder,
+    not: () => builder,
     order: () => builder,
     then: (resolve: (v: { data: Row[]; error: null }) => void) => resolve({ data: rows, error: null }),
   };
@@ -32,6 +33,9 @@ vi.mock("@/utils/supabase/server", () => ({
     from: (table: string) => {
       if (table === "profiles") return { select: () => ({ eq: () => ({ single: profileSingleMock }) }) };
       if (table === "parents") return chain(parentsRows);
+      // P4-1(B, 2026-09-11) — loadParents()는 아카이브된 가구를 제외하기 위해
+      // households를 1회 추가 조회한다. 이 스펙에는 아카이브된 가구가 없다.
+      if (table === "households") return chain([]);
       if (table === "household_members") {
         // loadParents()는 household_members를 role별로 두 번 순서대로 조회한다
         // (guardian 링크 먼저, child 링크 다음) — 호출 순서에 맞춰 다른 결과를 준다.

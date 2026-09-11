@@ -8,6 +8,8 @@ import {
   listTeachersForUsersTabAction,
 } from "./users-actions";
 import { updateUserBasicInfo } from "./user-edit-actions";
+import ArchivedHouseholdsList from "./ArchivedHouseholdsList";
+import HouseholdArchiveControls from "./HouseholdArchiveControls";
 import StudentDetailPanel from "./StudentDetailPanel";
 import TeacherDetailPanel from "./TeacherDetailPanel";
 import type { AdminSubject } from "./subject-data";
@@ -30,6 +32,8 @@ const SUBTABS = [
   { id: "parents", label: "학부모" },
   { id: "students", label: "학생" },
   { id: "teachers", label: "선생님" },
+  // P4-1(B, 2026-09-11) — 아카이브된 가구는 위 목록에서 빠지고 여기서만 보인다.
+  { id: "archived", label: "아카이브됨" },
 ] as const;
 type SubtabId = (typeof SUBTABS)[number]["id"];
 
@@ -211,18 +215,29 @@ export default function UsersTab({
                     자녀: {p.childrenNames.length ? p.childrenNames.join(", ") : "없음"}
                   </div>
                 </div>
-                <UserEditToggle
-                  profileId={p.id}
-                  role="parent"
-                  name={p.name}
-                  email={p.email}
-                  onUpdated={(patch) => patchParent(p.id, patch)}
-                />
+                <div className="flex items-center gap-2 shrink-0">
+                  <UserEditToggle
+                    profileId={p.id}
+                    role="parent"
+                    name={p.name}
+                    email={p.email}
+                    onUpdated={(patch) => patchParent(p.id, patch)}
+                  />
+                </div>
               </div>
+              {p.householdId && (
+                <HouseholdArchiveControls
+                  householdId={p.householdId}
+                  guardianName={p.name}
+                  onArchived={loadParentsNow}
+                />
+              )}
             </div>
           ))}
         </>
       )}
+
+      {subtab === "archived" && <ArchivedHouseholdsList />}
 
       {subtab === "students" && students === null && (
         <div aria-busy="true" data-testid="students-skeleton">

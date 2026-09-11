@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { loadArchivedHouseholdIds } from "./users-data";
 
 export type MatchingTeacherCandidate = {
   id: string;
@@ -60,7 +61,15 @@ export async function loadStudentsForMatching(supabase: SupabaseClient): Promise
     guardianNamesByHousehold.set(l.household_id, list);
   }
 
-  return students.map((s) => {
+  // P4-1(B) — 아카이브된 가구의 자녀는 매칭 대기 목록에서도 제외한다.
+  const archivedHouseholdIds = await loadArchivedHouseholdIds(supabase);
+
+  return students
+    .filter((s) => {
+      const householdId = householdIdByStudent.get(s.id);
+      return !householdId || !archivedHouseholdIds.has(householdId);
+    })
+    .map((s) => {
     const householdId = householdIdByStudent.get(s.id);
     return {
       id: s.id,
