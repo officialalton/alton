@@ -30,10 +30,11 @@ const insertMock = vi.fn();
 beforeEach(() => {
   vi.clearAllMocks();
   requireAdminOrCapabilityMock.mockResolvedValue({ actorUserId: "admin1" });
-  adminRpcMock.mockResolvedValue({
-    data: [{ link_id: "link1", raw_token: "raw-token-abc" }],
-    error: null,
-  });
+  adminRpcMock.mockImplementation((fn: string) =>
+    fn === "find_auth_user_id_by_email"
+      ? Promise.resolve({ data: null, error: null })
+      : Promise.resolve({ data: [{ link_id: "link1", raw_token: "raw-token-abc" }], error: null })
+  );
   updateEqMock.mockResolvedValue({ error: null });
   insertMock.mockResolvedValue({ error: null });
   adminFromMock.mockImplementation((table: string) => {
@@ -113,5 +114,27 @@ describe("sendDirectOnboardingNoticeAction", () => {
     expect(insertMock).toHaveBeenCalledWith(
       expect.objectContaining({ link_id: "link1", event_type: "notice_failed" })
     );
+  });
+
+  // 2026-09-11(제품 오너 확정 정책) — 지인/추천(직접 생성) 경로도 상담 경로와
+  // 동일하게 자녀 이메일이 기존 auth.users와 겹치면 링크 생성·발송 전에 막는다.
+  it("자녀 이메일이 기존 Auth 계정과 겹치면 링크를 발급·발송하지 않고 duplicate_emails를 반환한다", async () => {
+    adminRpcMock.mockImplementation((fn: string, args: { p_email?: string }) => {
+      if (fn === "find_auth_user_id_by_email") {
+        return Promise.resolve({
+          data: args.p_email === "student@example.com" ? "existing-user-id" : null,
+          error: null,
+        });
+      }
+      throw new Error(`이 테스트에서는 ${fn} RPC가 호출되면 안 됩니다(발급 전 차단 실패).`);
+    });
+
+    const result = await sendDirectOnboardingNoticeAction(VALID_PARAMS);
+
+    expect(result).toEqual({
+      status: "duplicate_emails",
+      collisions: [{ name: "김학생", email: "student@example.com" }],
+    });
+    expect(sendEmailMock).not.toHaveBeenCalled();
   });
 });

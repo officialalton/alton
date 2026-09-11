@@ -322,7 +322,11 @@ describe("sendTrialOnboardingNoticeAction", () => {
 
   it("처음 발송하면 이메일을 보내고 발송 완료 상태로 기록한다", async () => {
     mockNoExistingLink();
-    adminRpcMock.mockResolvedValue({ data: [{ link_id: "l1", raw_token: "tok1" }], error: null });
+    adminRpcMock.mockImplementation((fn: string) =>
+      fn === "find_auth_user_id_by_email"
+        ? Promise.resolve({ data: null, error: null })
+        : Promise.resolve({ data: [{ link_id: "l1", raw_token: "tok1" }], error: null })
+    );
     sendEmailMock.mockResolvedValue(undefined);
 
     const result = await sendTrialOnboardingNoticeAction(baseParams);
@@ -367,12 +371,41 @@ describe("sendTrialOnboardingNoticeAction", () => {
 
   it("발송이 실패하면 계정 생성과 무관하게 실패 상태로만 남는다", async () => {
     mockNoExistingLink();
-    adminRpcMock.mockResolvedValue({ data: [{ link_id: "l1", raw_token: "tok1" }], error: null });
+    adminRpcMock.mockImplementation((fn: string) =>
+      fn === "find_auth_user_id_by_email"
+        ? Promise.resolve({ data: null, error: null })
+        : Promise.resolve({ data: [{ link_id: "l1", raw_token: "tok1" }], error: null })
+    );
     sendEmailMock.mockRejectedValue(new Error("SMTP 연결 실패"));
 
     const result = await sendTrialOnboardingNoticeAction(baseParams);
 
     expect(result).toEqual({ status: "failed", linkId: "l1", error: "SMTP 연결 실패" });
+  });
+
+  // 2026-09-11(제품 오너 확정 정책) — 자녀 이메일이 기존 auth.users와 이미
+  // 겹치면 링크 생성·발송 자체를 막는다(재결정 대상 아님). 새로 발생한
+  // 실패이므로 성공 문구(sent/already_sent)가 나오면 안 된다.
+  it("자녀 이메일이 기존 Auth 계정과 겹치면 링크를 발급·발송하지 않고 duplicate_emails를 반환한다", async () => {
+    mockNoExistingLink();
+    adminRpcMock.mockImplementation((fn: string, args: { p_email?: string }) => {
+      if (fn === "find_auth_user_id_by_email") {
+        return Promise.resolve({
+          data: args.p_email === "s@example.com" ? "existing-user-id" : null,
+          error: null,
+        });
+      }
+      throw new Error(`이 테스트에서는 ${fn} RPC가 호출되면 안 됩니다(발급 전 차단 실패).`);
+    });
+
+    const result = await sendTrialOnboardingNoticeAction(baseParams);
+
+    expect(result).toEqual({
+      status: "duplicate_emails",
+      collisions: [{ name: "학생", email: "s@example.com" }],
+    });
+    expect(sendEmailMock).not.toHaveBeenCalled();
+    expect(adminRpcMock).not.toHaveBeenCalledWith("create_trial_onboarding_link_multi", expect.anything());
   });
 
   // 2026-09-05 보완 — 클라이언트 검증(빈 값이면 버튼 비활성화)을 우회해 서버
@@ -440,7 +473,11 @@ describe("sendTrialOnboardingNoticeAction", () => {
 
   it("학생 N명을 create_trial_onboarding_link_multi에 배열로 전달한다", async () => {
     mockNoExistingLink();
-    adminRpcMock.mockResolvedValue({ data: [{ link_id: "l1", raw_token: "tok1" }], error: null });
+    adminRpcMock.mockImplementation((fn: string) =>
+      fn === "find_auth_user_id_by_email"
+        ? Promise.resolve({ data: null, error: null })
+        : Promise.resolve({ data: [{ link_id: "l1", raw_token: "tok1" }], error: null })
+    );
     sendEmailMock.mockResolvedValue(undefined);
 
     await sendTrialOnboardingNoticeAction({
@@ -483,7 +520,11 @@ describe("sendTrialOnboardingNoticeAction", () => {
   // trim된 값이어야 한다.
   it("보호자 이메일 앞뒤에 공백이 섞여도 trim된 값으로 RPC에 전달한다(GoTrue 이메일 형식 거부 방지)", async () => {
     mockNoExistingLink();
-    adminRpcMock.mockResolvedValue({ data: [{ link_id: "l1", raw_token: "tok1" }], error: null });
+    adminRpcMock.mockImplementation((fn: string) =>
+      fn === "find_auth_user_id_by_email"
+        ? Promise.resolve({ data: null, error: null })
+        : Promise.resolve({ data: [{ link_id: "l1", raw_token: "tok1" }], error: null })
+    );
     sendEmailMock.mockResolvedValue(undefined);
 
     await sendTrialOnboardingNoticeAction({

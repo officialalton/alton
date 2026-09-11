@@ -27,9 +27,19 @@ export default function DirectAccountCreationForm({ onSent }: { onSent?: () => v
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [lastResult, setLastResult] = useState<SendDirectOnboardingNoticeResult | null>(null);
+  // 2026-09-11(제품 오너 확정 정책) — 발급 전 자녀 이메일 중복 차단 시, 어느
+  // 학생 입력란이 문제인지 이메일별로 표시한다(일반 에러 배너 대신).
+  const [duplicateEmails, setDuplicateEmails] = useState<Set<string>>(new Set());
   const { toasts, showToast, dismiss } = useToasts();
 
   function updateStudent(index: number, field: keyof StudentRow, value: string) {
+    if (field === "email" && duplicateEmails.size > 0) {
+      setDuplicateEmails((prev) => {
+        const next = new Set(prev);
+        next.delete(students[index].email.trim().toLowerCase());
+        return next;
+      });
+    }
     setStudents((prev) => prev.map((s, i) => (i === index ? { ...s, [field]: value } : s)));
   }
   function addStudentRow() {
@@ -43,6 +53,7 @@ export default function DirectAccountCreationForm({ onSent }: { onSent?: () => v
     setGuardianName("");
     setStudents([emptyRow()]);
     setError(null);
+    setDuplicateEmails(new Set());
   }
 
   const isValid =
@@ -104,6 +115,11 @@ export default function DirectAccountCreationForm({ onSent }: { onSent?: () => v
                 placeholder="학생 이메일"
                 className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]"
               />
+              {duplicateEmails.has(s.email.trim().toLowerCase()) && (
+                <p className="text-[11px] text-red" data-testid={`duplicate-email-${i}`}>
+                  이미 사용 중인 이메일입니다. 다른 이메일을 입력해주세요.
+                </p>
+              )}
               <input
                 value={s.grade}
                 onChange={(e) => updateStudent(i, "grade", e.target.value)}
@@ -139,6 +155,7 @@ export default function DirectAccountCreationForm({ onSent }: { onSent?: () => v
             onClick={async () => {
               setBusy(true);
               setError(null);
+              setDuplicateEmails(new Set());
               try {
                 const result = await sendDirectOnboardingNoticeAction({
                   guardianEmail,
@@ -151,7 +168,10 @@ export default function DirectAccountCreationForm({ onSent }: { onSent?: () => v
                   })),
                 });
                 setLastResult(result);
-                if (result.status === "failed") {
+                if (result.status === "duplicate_emails") {
+                  setDuplicateEmails(new Set(result.collisions.map((c) => c.email.trim().toLowerCase())));
+                  showToast("error", `이미 사용 중인 이메일이 있어 발송하지 않았습니다: ${result.collisions.map((c) => c.email).join(", ")}`);
+                } else if (result.status === "failed") {
                   setError(`발송 실패(관리자 조치 필요) — ${result.error}`);
                   showToast("error", `발송 실패 — ${result.error}`);
                 } else {

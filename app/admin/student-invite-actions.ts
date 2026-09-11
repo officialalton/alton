@@ -13,7 +13,6 @@
 
 import { requireAdminOrCapability } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
-import { currentRequestOrigin } from "@/lib/request-origin";
 import { resendStudentSetPasswordEmail } from "@/lib/trial-onboarding-finalize";
 
 const CONSULT_CAPABILITY = "manage_consultations";
@@ -152,9 +151,7 @@ export async function resendStudentInviteAction(consultationId: string): Promise
     p_stage: "invite",
   });
 
-  const origin = await currentRequestOrigin();
   await resendStudentSetPasswordEmail({
-    url: new URL(origin),
     linkStudentId: linkStudent.id,
     studentEmail,
     studentName: linkStudent.student_name,

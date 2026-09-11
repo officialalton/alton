@@ -13,6 +13,7 @@ import { requireAdminOrCapability } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { sendEmail, escapeHtml } from "@/lib/email";
 import { currentRequestOrigin } from "@/lib/request-origin";
+import { findExistingAuthEmailCollisions, type OnboardingEmailCollision } from "@/lib/onboarding-email-guard";
 
 const CONSULT_CAPABILITY = "manage_consultations";
 const SIMPLE_EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -26,7 +27,8 @@ export type DirectOnboardingStudentInput = {
 
 export type SendDirectOnboardingNoticeResult =
   | { status: "sent"; linkId: string; sentAt: string; localRedeemUrl: string | null }
-  | { status: "failed"; linkId: string; error: string };
+  | { status: "failed"; linkId: string; error: string }
+  | { status: "duplicate_emails"; collisions: OnboardingEmailCollision[] };
 
 function assertDirectOnboardingParamsValid(params: {
   guardianEmail: string;
@@ -82,6 +84,16 @@ async function sendDirectOnboardingNoticeInternal(params: {
     grade: s.grade?.trim() || null,
     subject: s.subject?.trim() || null,
   }));
+
+  // 2026-09-11(제품 오너 확정 정책) — 링크 생성·발송 전 자녀 이메일이 기존
+  // auth.users와 중복되면 차단한다(sendTrialOnboardingNoticeInternal과 동일 정책).
+  const collisions = await findExistingAuthEmailCollisions(
+    admin,
+    studentsPayload.map((s) => ({ name: s.name, email: s.email }))
+  );
+  if (collisions.length > 0) {
+    return { status: "duplicate_emails", collisions };
+  }
 
   const { data, error } = await admin.rpc("create_direct_onboarding_link_multi", {
     p_guardian_email: guardianEmail,

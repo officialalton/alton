@@ -1,31 +1,23 @@
-import { createAdminClient } from "@/lib/supabase-admin";
-import { createGuardianAndStudentThenRedirect, redirectWithError } from "@/lib/trial-onboarding-finalize";
+import { NextResponse } from "next/server";
 
-// M4 (6/N) — 보호자가 확인 화면에서 "이 이메일로 계속"을 선택했을 때(= prospect
-// 이메일을 그대로 로그인 이메일로 쓰는 가장 흔한 경로). 온보딩 링크를 받은
-// 그 주소로 실제로 링크를 열어 이 라우트까지 도달했다는 사실 자체가 상담
-// 연락처(이메일) 접근 확인이다 — 별도 이메일 소유 확인 절차를 추가로 거치지
-// 않는다(요구사항: 다른 이메일로 바꿀 때만 별도 확인 필요).
+// 2026-09-11(제품 오너 재검토 — 실제 브라우저 E2E 재검증 중 지적) — 이 GET
+// 라우트는 더 이상 계정을 만들지 않는다. 예전에는 "이 이메일로 계속" 버튼이
+// 이 URL로의 단순 GET(<a href>)이었고, 그 GET 자체가 redeem_trial_onboarding_link()
+// 호출 + 실제 Auth 계정 생성까지 전부 실행했다 — 명시적 버튼 클릭이라는
+// 이유로 부작용을 GET에 둔 것 자체가 결함이다(이메일 클라이언트의 링크
+// 프리스캔, 브라우저 프리페치, 재클릭 등 GET이 여러 번 일어날 수 있는
+// 모든 경로가 그대로 계정 생성 경로가 된다). 이제 이 URL을 직접 열어도
+// 확인 페이지로 리다이렉트만 할 뿐 아무 것도 바뀌지 않는다 — 실제 계정
+// 생성·claim/lease 처리·복구 링크 발급·메일 발송은 그 페이지의 버튼이
+// 호출하는 Server Action(confirmTrialOnboardingLinkAction, "use server")에서만
+// 일어난다.
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const token = url.searchParams.get("token");
   if (!token) {
-    return redirectWithError(url, "유효하지 않은 온보딩 링크입니다.");
+    return NextResponse.redirect(new URL("/login?error=" + encodeURIComponent("유효하지 않은 온보딩 링크입니다."), url));
   }
-
-  const admin = createAdminClient();
-  const { data, error } = await admin.rpc("redeem_trial_onboarding_link", { p_token: token });
-  if (error || !data?.[0]) {
-    return redirectWithError(url, "유효하지 않거나 만료된 온보딩 링크입니다.");
-  }
-  const redeemed = data[0];
-
-  // 2026-09-06(복수 자녀 온보딩) — 학생 1~N명은 이제 trial_onboarding_link_students
-  // 테이블에서 링크 id 기준으로 직접 조회한다(단일 studentEmail/studentName 전달 안 함).
-  return createGuardianAndStudentThenRedirect({
-    url,
-    linkId: redeemed.link_id,
-    guardianEmail: redeemed.guardian_email,
-    guardianName: redeemed.guardian_name,
-  });
+  return NextResponse.redirect(
+    new URL(`/consult/trial-onboarding/confirm-email?token=${encodeURIComponent(token)}`, url)
+  );
 }

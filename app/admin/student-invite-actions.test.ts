@@ -137,7 +137,6 @@ describe("resendStudentInviteAction", () => {
       p_stage: "invite",
     });
     expect(resendStudentSetPasswordEmailMock).toHaveBeenCalledWith({
-      url: new URL("http://localhost:3010"),
       linkStudentId: "ls1",
       studentEmail: "student@example.com",
       studentName: "학생",

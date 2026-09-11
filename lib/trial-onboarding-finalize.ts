@@ -1,12 +1,11 @@
-import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { sendEmail, escapeHtml } from "@/lib/email";
+import { currentRequestOrigin } from "@/lib/request-origin";
 
 // M4 (6/N) — 신규 보호자 계정 실제 생성 + finalize + /set-password 리다이렉트를
 // 공통 헬퍼로 뺐다. "prospect 이메일 그대로 유지"와 "다른 이메일로 변경 후 확인
-// 완료" 두 경로(app/api/trial-onboarding/confirm-email/route.ts,
-// app/api/trial-onboarding/confirm-email-change/route.ts) 둘 다 이 함수로
-// 수렴한다 — 계정 생성 로직이 두 곳에 따로 존재하며 갈라지는 것을 막기 위함.
+// 완료" 두 경로 둘 다 이 함수로 수렴한다 — 계정 생성 로직이 두 곳에 따로
+// 존재하며 갈라지는 것을 막기 위함.
 //
 // 2026-09-11(실제 버그 수정 — 공유 non-prod 실측 재현, matchbox512+alton-uat-p8@gmail.com,
 // 제품 오너 재검토 반영) — 경쟁·부분 실패 보호는 "새 보호자 Auth 계정을
@@ -19,15 +18,28 @@ import { sendEmail, escapeHtml } from "@/lib/email";
 // 신규 보호자 경로)가 그 claim_id를 함께 제시해야만 반영된다 — 리스가
 // 만료돼 다른 요청이 새 claim_id로 넘겨받은 뒤 이전 요청이 뒤늦게 도착해도
 // 새 리스를 건드리지 못한다.
+//
+// 2026-09-11(제품 오너 재검토, 2차 — GET 부작용 제거) — 이 함수는 이제 절대
+// GET 요청 핸들러(Route Handler)에서 직접 호출되지 않는다. 예전에는
+// app/api/trial-onboarding/confirm-email(-change)/route.ts의 GET 핸들러가
+// 이 함수를 바로 불러 "링크를 여는 것"만으로 계정을 만들었다 — 이메일
+// 클라이언트의 링크 프리스캔이나 재클릭처럼 GET이 여러 번 일어날 수 있는
+// 상황에서 그 자체가 실제 부작용(계정 생성·이메일 발송)을 낼 수 있는 설계였다.
+// 이제 계정 생성·복구 링크 발급·메일 발송은 오직 명시적 확인 버튼이 호출하는
+// Server Action(app/consult/trial-onboarding-finalize-actions.ts)에서만
+// 실행되고, GET 라우트는 확인 페이지로 리다이렉트만 한다(무변경). 반환값도
+// NextResponse 대신 상대 경로 문자열로 바꿔 Server Action의 redirect()가
+// 그대로 쓸 수 있게 했다.
+export type FinalizeRedirect = { redirectPath: string };
+
 export async function createGuardianAndStudentThenRedirect(params: {
-  url: URL;
   linkId: string;
   guardianEmail: string;
   guardianName: string;
   // 2026-09-06(복수 자녀 온보딩) — studentEmail/studentName 단일 필드는 더 이상
   // 받지 않는다. 링크에 딸린 학생 1~N명은 trial_onboarding_link_students에서
   // 직접 조회한다(관리자가 발송 시점에 이미 입력해둔 값, 재입력 불필요).
-}): Promise<NextResponse> {
+}): Promise<FinalizeRedirect> {
   const admin = createAdminClient();
 
   // 2026-09-06 추가(재상담 — 제품 오너 확정) — 이 온보딩 이메일로 이미 보호자
@@ -38,7 +50,7 @@ export async function createGuardianAndStudentThenRedirect(params: {
   const existingGuardianId = await admin.rpc("find_auth_user_id_by_email", { p_email: params.guardianEmail });
   if (existingGuardianId.error) {
     console.error("기존 보호자 계정 확인 실패:", params.guardianEmail, existingGuardianId.error);
-    return redirectWithError(params.url, "계정 확인에 실패했습니다. 관리자에게 문의해주세요.");
+    return redirectWithError("계정 확인에 실패했습니다. 관리자에게 문의해주세요.");
   }
   if (existingGuardianId.data) {
     const hasProfile = await admin
@@ -61,7 +73,7 @@ export async function createGuardianAndStudentThenRedirect(params: {
     // 쓸 수 있는 증거로 판정한다(사용자가 조작 가능한 값은 신뢰하지 않음).
     const owned = await verifyOrphanOwnership(admin, existingGuardianId.data as string, params.linkId);
     if (!owned) {
-      return redirectWithError(params.url, "이미 사용 중인 이메일입니다. 관리자에게 문의해주세요.");
+      return redirectWithError("이미 사용 중인 이메일입니다. 관리자에게 문의해주세요.");
     }
     // 이 온보딩이 직전 시도에서 만든 고아 계정임이 증명됐다 — claim을 잡고
     // (동시 재시도 직렬화) 이 계정을 재사용해 이어서 완료한다.
@@ -115,32 +127,32 @@ async function verifyOrphanOwnership(
 // claim을 잡고 신규(혹은 증명된 고아) 보호자 계정 생성/재사용 경로를 진행한다.
 async function withClaim(
   admin: ReturnType<typeof createAdminClient>,
-  params: { url: URL; linkId: string; guardianEmail: string; guardianName: string },
+  params: { linkId: string; guardianEmail: string; guardianName: string },
   provenOrphanAuthUserId: string | null
-): Promise<NextResponse> {
+): Promise<FinalizeRedirect> {
   const { data: claimData, error: claimError } = await admin.rpc("claim_trial_onboarding_link_finalize", {
     p_link_id: params.linkId,
   });
   if (claimError) {
     console.error("온보딩 링크 claim 실패:", params.linkId, claimError);
-    return redirectWithError(params.url, mapClaimError(claimError.message));
+    return redirectWithError(mapClaimError(claimError.message));
   }
   const claim = claimData?.[0];
   if (!claim) {
-    return redirectWithError(params.url, "유효하지 않은 온보딩 링크입니다.");
+    return redirectWithError("유효하지 않은 온보딩 링크입니다.");
   }
   if (claim.action === "busy") {
-    return redirectWithError(params.url, "지금 다른 요청이 이 링크를 처리하고 있습니다. 잠시 후 다시 시도해주세요.");
+    return redirectWithError("지금 다른 요청이 이 링크를 처리하고 있습니다. 잠시 후 다시 시도해주세요.");
   }
   if (claim.action === "already_redeemed") {
     if (!claim.redeemed_auth_user_id) {
-      return redirectWithError(params.url, "계정 상태를 확인할 수 없습니다. 관리자에게 문의해주세요.");
+      return redirectWithError("계정 상태를 확인할 수 없습니다. 관리자에게 문의해주세요.");
     }
     const { data: userData, error: userError } = await admin.auth.admin.getUserById(claim.redeemed_auth_user_id);
     if (userError || userData?.user?.email?.toLowerCase() !== params.guardianEmail.toLowerCase()) {
-      return redirectWithError(params.url, "이 링크와 연결된 계정 정보가 일치하지 않습니다. 관리자에게 문의해주세요.");
+      return redirectWithError("이 링크와 연결된 계정 정보가 일치하지 않습니다. 관리자에게 문의해주세요.");
     }
-    return generateGuardianRecoveryRedirect(admin, params.url, params.guardianEmail);
+    return generateGuardianRecoveryRedirect(admin, params.guardianEmail);
   }
 
   const claimId = claim.claim_id as string;
@@ -175,7 +187,7 @@ async function withClaim(
         // 넘어가지 않고 충돌로 처리한다.
         console.error("보호자 Auth 계정 생성 실패:", params.guardianEmail, guardianCreateError);
         await releaseFinalizeClaim(admin, params.linkId, claimId);
-        return redirectWithError(params.url, "보호자 계정 생성에 실패했습니다. 관리자에게 문의해주세요.");
+        return redirectWithError("보호자 계정 생성에 실패했습니다. 관리자에게 문의해주세요.");
       }
       guardianAuthUserId = guardianCreated.user.id;
       const recorded = await admin.rpc("record_pending_guardian_account", {
@@ -192,7 +204,7 @@ async function withClaim(
         await admin.auth.admin.deleteUser(guardianAuthUserId).catch((e) => {
           console.error("고아 보호자 Auth 계정 정리 실패:", guardianAuthUserId, e);
         });
-        return redirectWithError(params.url, "처리 중 충돌이 발생했습니다. 다시 시도해주세요.");
+        return redirectWithError("처리 중 충돌이 발생했습니다. 다시 시도해주세요.");
       }
     }
 
@@ -200,7 +212,7 @@ async function withClaim(
   } catch (e) {
     await releaseFinalizeClaim(admin, params.linkId, claimId);
     console.error("온보딩 finalize 중 예외:", params.linkId, e);
-    return redirectWithError(params.url, "계정 생성 중 오류가 발생했습니다. 관리자에게 문의해주세요.");
+    return redirectWithError("계정 생성 중 오류가 발생했습니다. 관리자에게 문의해주세요.");
   }
 }
 
@@ -223,29 +235,25 @@ async function releaseFinalizeClaim(
 
 async function generateGuardianRecoveryRedirect(
   admin: ReturnType<typeof createAdminClient>,
-  url: URL,
   guardianEmail: string
-): Promise<NextResponse> {
+): Promise<FinalizeRedirect> {
   const { data: linkData, error: linkError } = await admin.auth.admin.generateLink({
     type: "recovery",
     email: guardianEmail,
   });
   if (linkError || !linkData?.properties?.hashed_token) {
-    return redirectWithError(url, "로그인 링크 생성에 실패했습니다. 관리자에게 문의해주세요.");
+    return redirectWithError("로그인 링크 생성에 실패했습니다. 관리자에게 문의해주세요.");
   }
-  return NextResponse.redirect(
-    new URL(
-      `/set-password?role=parent&token_hash=${encodeURIComponent(linkData.properties.hashed_token)}&type=recovery`,
-      url
-    )
-  );
+  return {
+    redirectPath: `/set-password?role=parent&token_hash=${encodeURIComponent(linkData.properties.hashed_token)}&type=recovery`,
+  };
 }
 
 async function finalizeWithGuardian(
   admin: ReturnType<typeof createAdminClient>,
-  params: { url: URL; linkId: string; guardianEmail: string; guardianName: string },
+  params: { linkId: string; guardianEmail: string; guardianName: string },
   guardian: { guardianAuthUserId: string; isNewGuardian: boolean; claimId: string | null }
-): Promise<NextResponse> {
+): Promise<FinalizeRedirect> {
   const { guardianAuthUserId, isNewGuardian, claimId } = guardian;
 
   // 링크에 딸린 학생 1~N명 명단 — 아직 처리 안 된(created가 아닌) 학생만
@@ -256,7 +264,7 @@ async function finalizeWithGuardian(
   if (studentsError || !students?.length) {
     console.error("온보딩 학생 명단 조회 실패:", params.linkId, studentsError);
     if (isNewGuardian && claimId) await releaseFinalizeClaim(admin, params.linkId, claimId);
-    return redirectWithError(params.url, "온보딩 학생 명단을 찾을 수 없습니다. 관리자에게 문의해주세요.");
+    return redirectWithError("온보딩 학생 명단을 찾을 수 없습니다. 관리자에게 문의해주세요.");
   }
 
   const finalizeItems: { link_student_id: string; child_auth_user_id: string }[] = [];
@@ -301,7 +309,7 @@ async function finalizeWithGuardian(
       console.error("고아 보호자 Auth 계정 정리 실패:", guardianAuthUserId, e);
     });
     if (claimId) await releaseFinalizeClaim(admin, params.linkId, claimId);
-    return redirectWithError(params.url, "학생 계정 생성에 실패했습니다. 관리자에게 문의해주세요.");
+    return redirectWithError("학생 계정 생성에 실패했습니다. 관리자에게 문의해주세요.");
   }
 
   const { data: finalizeData, error: finalizeError } = await admin.rpc("finalize_trial_onboarding_students", {
@@ -327,7 +335,7 @@ async function finalizeWithGuardian(
       )
     );
     if (isNewGuardian && claimId) await releaseFinalizeClaim(admin, params.linkId, claimId);
-    return redirectWithError(params.url, "계정 연결에 실패했습니다. 관리자에게 문의해주세요.");
+    return redirectWithError("계정 연결에 실패했습니다. 관리자에게 문의해주세요.");
   }
   const finalizeRow = finalizeData?.[0];
 
@@ -339,7 +347,6 @@ async function finalizeWithGuardian(
   for (const s of refreshedStudents ?? []) {
     if (s.status === "created" && s.child_auth_user_id && s.invite_status !== "sent") {
       await sendStudentSetPasswordEmail(admin, {
-        url: params.url,
         linkStudentId: s.id,
         studentEmail: s.student_email,
         studentName: s.student_name,
@@ -361,14 +368,14 @@ async function finalizeWithGuardian(
       : finalizeRow && finalizeRow.failed_count > 0
         ? `자녀가 추가로 연결됐습니다(${finalizeRow.failed_count}명은 실패 — 관리자 재시도 필요). 기존 계정으로 로그인해주세요.`
         : "자녀가 추가로 연결됐습니다. 기존 계정으로 로그인해주세요.";
-    return NextResponse.redirect(new URL("/login?notice=" + encodeURIComponent(label), params.url));
+    return { redirectPath: "/login?notice=" + encodeURIComponent(label) };
   }
 
-  return generateGuardianRecoveryRedirect(admin, params.url, params.guardianEmail);
+  return generateGuardianRecoveryRedirect(admin, params.guardianEmail);
 }
 
-export function redirectWithError(url: URL, message: string): NextResponse {
-  return NextResponse.redirect(new URL("/login?error=" + encodeURIComponent(message), url));
+export function redirectWithError(message: string): FinalizeRedirect {
+  return { redirectPath: "/login?error=" + encodeURIComponent(message) };
 }
 
 // 2026-09-06(복수 자녀 온보딩) — 기존 보호자 계정 재사용 경로는 이제
@@ -387,7 +394,7 @@ export function redirectWithError(url: URL, message: string): NextResponse {
 // 재발송할 수 있게 한다 — 이전에는 console.error만 남기고 아무 흔적이 없었다).
 async function sendStudentSetPasswordEmail(
   admin: ReturnType<typeof createAdminClient>,
-  params: { url: URL; linkStudentId: string; studentEmail: string; studentName: string }
+  params: { linkStudentId: string; studentEmail: string; studentName: string }
 ): Promise<void> {
   const { data, error } = await admin.auth.admin.generateLink({
     type: "recovery",
@@ -403,10 +410,8 @@ async function sendStudentSetPasswordEmail(
     return;
   }
 
-  const setPasswordUrl = new URL(
-    `/set-password?token_hash=${encodeURIComponent(data.properties.hashed_token)}&type=recovery`,
-    params.url
-  );
+  const origin = await currentRequestOrigin();
+  const setPasswordUrl = `${origin}/set-password?token_hash=${encodeURIComponent(data.properties.hashed_token)}&type=recovery`;
 
   try {
     await sendEmail({
@@ -415,7 +420,7 @@ async function sendStudentSetPasswordEmail(
       html: `
         <p>안녕하세요, ${escapeHtml(params.studentName)}님.</p>
         <p>Alton Education 학생 계정이 생성되었습니다.</p>
-        <p><a href="${setPasswordUrl.toString()}">여기를 눌러 비밀번호를 설정해주세요</a></p>
+        <p><a href="${setPasswordUrl}">여기를 눌러 비밀번호를 설정해주세요</a></p>
         <p>본인이 요청하지 않았다면 이 메일을 무시하세요.</p>
         <p>감사합니다.<br/>Alton Education</p>
       `,
@@ -444,7 +449,6 @@ async function sendStudentSetPasswordEmail(
 // 재사용하는 공용 헬퍼 — 계정을 다시 만들지 않고, 이미 존재하는 학생 Auth
 // 계정에 대해서만 비밀번호 설정 이메일을 다시 보낸다.
 export async function resendStudentSetPasswordEmail(params: {
-  url: URL;
   linkStudentId: string;
   studentEmail: string;
   studentName: string;

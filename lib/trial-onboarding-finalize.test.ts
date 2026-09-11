@@ -44,10 +44,16 @@ vi.mock("@/lib/email", () => ({
   escapeHtml: (v: string) => v,
 }));
 
+// currentRequestOrigin()은 next/headers의 headers()를 쓰는데, 이건 실제
+// Next.js 요청 스코프(Route Handler/Server Action 실행 중) 밖에서는(=이
+// 유닛 테스트 환경) 예외를 던진다 — 실제 런타임에서는 문제 없다.
+vi.mock("@/lib/request-origin", () => ({
+  currentRequestOrigin: async () => "https://alton-preview.vercel.app",
+}));
+
 import { createGuardianAndStudentThenRedirect } from "./trial-onboarding-finalize";
 
 const BASE_PARAMS = {
-  url: new URL("https://alton-preview.vercel.app/api/trial-onboarding/confirm-email"),
   linkId: "link-1",
   guardianEmail: "guardian@example.com",
   guardianName: "보호자",
@@ -141,8 +147,8 @@ describe("createGuardianAndStudentThenRedirect — 온보딩 링크 재사용(cl
     const res = await createGuardianAndStudentThenRedirect(BASE_PARAMS);
 
     expect(createUserMock).not.toHaveBeenCalled();
-    expect(res.headers.get("location")).toContain("/login?error=");
-    expect(decodeURIComponent(res.headers.get("location") ?? "")).toContain("다른 요청");
+    expect(res.redirectPath).toContain("/login?error=");
+    expect(decodeURIComponent(res.redirectPath)).toContain("다른 요청");
   });
 
   it("이미 redeemed된 링크(같은 이메일로 이미 성공)는 계정을 다시 만들지 않고 로그인 링크로 안내한다", async () => {
@@ -160,7 +166,7 @@ describe("createGuardianAndStudentThenRedirect — 온보딩 링크 재사용(cl
 
     expect(createUserMock).not.toHaveBeenCalled();
     expect(generateLinkMock).toHaveBeenCalledWith({ type: "recovery", email: "guardian@example.com" });
-    expect(res.headers.get("location")).toContain("/set-password");
+    expect(res.redirectPath).toContain("/set-password");
   });
 
   it("already_redeemed인데 이메일이 이 요청과 다르면(데이터 불일치) 계정으로 안내하지 않고 관리자 문의로 막는다", async () => {
@@ -178,7 +184,7 @@ describe("createGuardianAndStudentThenRedirect — 온보딩 링크 재사용(cl
 
     expect(createUserMock).not.toHaveBeenCalled();
     expect(generateLinkMock).not.toHaveBeenCalled();
-    expect(decodeURIComponent(res.headers.get("location") ?? "")).toContain("일치하지 않습니다");
+    expect(decodeURIComponent(res.redirectPath)).toContain("일치하지 않습니다");
   });
 
   it("보호자 계정 생성 후 학생 계정 생성이 실패해도 재시도 시 pending_guardian_auth_user_id를 재사용해 보호자 계정을 중복 생성하지 않는다", async () => {
@@ -215,7 +221,7 @@ describe("createGuardianAndStudentThenRedirect — 온보딩 링크 재사용(cl
     expect(deleteUserMock).toHaveBeenCalledWith("guardian-id");
     // claim을 잃었으므로 학생 계정 생성으로 진행하지 않는다.
     expect(createUserMock).toHaveBeenCalledTimes(1);
-    expect(decodeURIComponent(res.headers.get("location") ?? "")).toContain("충돌");
+    expect(decodeURIComponent(res.redirectPath)).toContain("충돌");
   });
 });
 
@@ -266,7 +272,7 @@ describe("createGuardianAndStudentThenRedirect — 고아 Auth 계정 복구(부
 
     expect(createUserMock).not.toHaveBeenCalled();
     expect(rpcMock).not.toHaveBeenCalledWith("claim_trial_onboarding_link_finalize", expect.anything());
-    expect(decodeURIComponent(res.headers.get("location") ?? "")).toContain("이미 사용 중인 이메일");
+    expect(decodeURIComponent(res.redirectPath)).toContain("이미 사용 중인 이메일");
   });
 
   it("사용자가 로그인 후 스스로 고쳐 쓸 수 있는 user_metadata에 가짜 trial_onboarding_link_id를 넣어도 소유 증거로 인정하지 않는다(app_metadata만 신뢰)", async () => {
@@ -297,7 +303,7 @@ describe("createGuardianAndStudentThenRedirect — 고아 Auth 계정 복구(부
     const res = await createGuardianAndStudentThenRedirect(BASE_PARAMS);
 
     expect(createUserMock).not.toHaveBeenCalled();
-    expect(decodeURIComponent(res.headers.get("location") ?? "")).toContain("이미 사용 중인 이메일");
+    expect(decodeURIComponent(res.redirectPath)).toContain("이미 사용 중인 이메일");
   });
 
   it("app_metadata는 일치해도 이 계정이 다른 온보딩 링크의 pending/redeemed 계정으로도 걸려 있으면(교차 링크) 재사용을 거부한다", async () => {
@@ -324,7 +330,7 @@ describe("createGuardianAndStudentThenRedirect — 고아 Auth 계정 복구(부
     const res = await createGuardianAndStudentThenRedirect(BASE_PARAMS);
 
     expect(createUserMock).not.toHaveBeenCalled();
-    expect(decodeURIComponent(res.headers.get("location") ?? "")).toContain("이미 사용 중인 이메일");
+    expect(decodeURIComponent(res.redirectPath)).toContain("이미 사용 중인 이메일");
   });
 });
 
@@ -356,7 +362,7 @@ describe("createGuardianAndStudentThenRedirect — 학생 비밀번호 설정 �
 
     const res = await createGuardianAndStudentThenRedirect(BASE_PARAMS);
 
-    expect(res.status).toBe(307);
+    expect(res.redirectPath).toContain("/set-password");
     expect(sendEmailMock).not.toHaveBeenCalled();
     expect(consoleErrorSpy).toHaveBeenCalled();
     expect(fromMock).toHaveBeenCalledWith("trial_onboarding_link_students");
@@ -487,7 +493,7 @@ describe("createGuardianAndStudentThenRedirect — 복수 자녀", () => {
 
     const res = await createGuardianAndStudentThenRedirect(BASE_PARAMS);
 
-    expect(res.status).toBe(307);
+    expect(res.redirectPath).toContain("/login?notice=");
     expect(createUserMock).toHaveBeenCalledTimes(2);
     expect(sendEmailMock).toHaveBeenCalledTimes(2);
     const recipients = sendEmailMock.mock.calls.map((c) => c[0].to);
@@ -536,7 +542,7 @@ describe("createGuardianAndStudentThenRedirect — 이미 완료된 링크를 �
     const res = await createGuardianAndStudentThenRedirect(BASE_PARAMS);
 
     expect(createUserMock).not.toHaveBeenCalled();
-    const notice = decodeURIComponent(res.headers.get("location") ?? "");
+    const notice = decodeURIComponent(res.redirectPath);
     expect(notice).toContain("이미 등록된 계정입니다");
     expect(notice).not.toContain("추가로 연결됐습니다");
   });

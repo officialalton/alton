@@ -15,6 +15,7 @@ import { sendEmail, escapeHtml } from "@/lib/email";
 import { currentRequestOrigin } from "@/lib/request-origin";
 import { sendRegularContractForSubjectEnrollment, type SendRegularContractResult } from "@/lib/regular-contract-send";
 import { loadTrialPipelinesBatch } from "./trial-pipeline-data";
+import { findExistingAuthEmailCollisions, type OnboardingEmailCollision } from "@/lib/onboarding-email-guard";
 
 // 기존 상담 관리 액션(app/admin/consultation-actions.ts)과 동일한 capability를
 // 재사용한다 — 새 권한 이름을 따로 만들지 않는다.
@@ -76,7 +77,8 @@ export async function createTrialOnboardingLinkAction(params: {
 export type SendTrialOnboardingNoticeResult =
   | { status: "sent"; linkId: string; sentAt: string; localRedeemUrl: string | null }
   | { status: "already_sent"; linkId: string; sentAt: string }
-  | { status: "failed"; linkId: string; error: string };
+  | { status: "failed"; linkId: string; error: string }
+  | { status: "duplicate_emails"; collisions: OnboardingEmailCollision[] };
 
 export type TrialOnboardingStudentInput = {
   name: string;
@@ -193,6 +195,20 @@ async function sendTrialOnboardingNoticeInternal(params: {
       // forceReissue=true로 명시적 재발급을 요청할 수 있다 — 위 주석 참고.)
       return { status: "already_sent", linkId: existingLink.id, sentAt: existingLink.notice_sent_at! };
     }
+  }
+
+  // 2026-09-11(제품 오너 확정 정책) — 실제로 새 링크를 만들기 전(위의 진짜
+  // 멱등 already_sent 반환 이후)에만 자녀 이메일이 기존 auth.users와
+  // 중복되는지 확인한다. 발급 후 충돌은 기존 부분 실패·재시도 경로가 담당한다.
+  const collisions = await findExistingAuthEmailCollisions(
+    admin,
+    params.students.map((s) => ({ name: s.name.trim(), email: s.email.trim() }))
+  );
+  if (collisions.length > 0) {
+    return { status: "duplicate_emails", collisions };
+  }
+
+  if (existingLink) {
     // 아직 한 번도 성공적으로 보내지 못한(pending 또는 failed) 링크이거나,
     // 관리자가 명시적으로 재발급(forceReissue)을 요청한 경우 — 기존 링크를
     // 안전하게 폐기(revoked)하고 같은 상담에 새 링크를 발급해 그 토큰으로

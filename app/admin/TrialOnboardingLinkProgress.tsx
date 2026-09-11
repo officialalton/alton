@@ -215,6 +215,11 @@ export default function TrialOnboardingLinkProgress({ linkId }: { linkId: string
                                 showToast("success", "새 링크를 발급하고 재발송했습니다.");
                               } else if (result.status === "already_sent") {
                                 showToast("success", "이미 새 링크가 발송된 상태입니다.");
+                              } else if (result.status === "duplicate_emails") {
+                                showToast(
+                                  "error",
+                                  `이미 사용 중인 이메일이 있어 재발급하지 않았습니다: ${result.collisions.map((c) => c.email).join(", ")}`
+                                );
                               } else {
                                 showToast("error", `재발급 실패 — ${result.error}`);
                               }
