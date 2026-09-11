@@ -8,6 +8,7 @@ import type { ReviewData, StudentFeedback } from "@/app/student/review-data";
 import MySubjectsTab from "./MySubjectsTab";
 import type { MySubject } from "./mysubjects-data";
 import type { RosterStudent, RosterSubject } from "./roster-data";
+import { formatCurriculumProgressLabel } from "@/lib/curriculum-overlay-progress";
 import type { TeacherCurriculumData } from "./curriculum-data";
 import StudentCurriculumPanel from "./StudentCurriculumPanel";
 import SessionPrepPanel from "./SessionPrepPanel";
@@ -39,8 +40,12 @@ export default function CurriculumTab({
   memosByEnrollment: Record<string, Memo[]>;
   reviews: Record<string, ReviewData>;
   studentFeedback: Record<string, StudentFeedback>;
-  jumpTo: { studentId: string; subjectId: string } | null;
-  onJumpConsumed: () => void;
+  // C-1(2026-09-10) — 이 점프는 예전에 "배정" 탭의 레거시 "커리큘럼 보기"
+  // 버튼이 트리거했는데, 그 버튼을 제거하면서 실제 호출부가 없어졌다("학생별"
+  // 탭 안의 레거시 과목 클릭은 이 prop과 무관한 로컬 subView 상태를 쓴다).
+  // 다른 진입점이 생길 수 있어 타입은 남겨두되 선택적으로 바꾼다.
+  jumpTo?: { studentId: string; subjectId: string } | null;
+  onJumpConsumed?: () => void;
   operatingCurriculumJumpTo?: {
     subjectEnrollmentId: string;
     subjectId: string;
@@ -65,7 +70,7 @@ export default function CurriculumTab({
     setSubView(
       match ? { type: "curriculum", enrollmentId: match.enrollmentId } : { type: "list" }
     );
-    onJumpConsumed();
+    onJumpConsumed?.();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [jumpTo]);
 
@@ -325,9 +330,12 @@ function SessionPrepView({
 }
 
 function StatusLabel(s: RosterSubject) {
-  // v3 배정은 legacy처럼 번호가 매겨진 "회차"가 없다(단원 오버레이 기반) —
-  // 0/0으로 잘못 보이지 않게 별도 표기.
-  return s.source === "v3" ? "운영 커리큘럼" : `${s.currentSession}/${s.totalSessions}회차`;
+  // C-1(2026-09-10) — v3 배정은 curriculum_overlay_units 기준 진도로 통일한다
+  // ("0/0회차"·단순 "운영 커리큘럼" 표기 금지). legacy는 기존 회차 실적 표기
+  // 그대로 둔다(단원 오버레이 개념 자체가 없는 별도 데이터 모델).
+  return s.source === "v3"
+    ? formatCurriculumProgressLabel({ totalUnits: s.totalSessions, doneUnits: s.currentSession, sourceLabel: null })
+    : `${s.currentSession}/${s.totalSessions}회차`;
 }
 
 function StudentSubjectPicker({
@@ -395,6 +403,9 @@ function StudentSubjectPicker({
                 {StatusLabel(s)}
               </span>
             </div>
+            {s.curriculumSourceLabel && (
+              <div className="text-[11px] text-grey-400 mt-1">{s.curriculumSourceLabel}</div>
+            )}
           </button>
         ))
       )}

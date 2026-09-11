@@ -77,13 +77,27 @@ export async function loadTeacherCandidatesBySubject(
 ): Promise<Record<string, MatchingTeacherCandidate[]>> {
   const { data: links } = await supabase
     .from("teacher_curriculum_templates")
-    .select("subject_id, teacher:teachers(id, status, profile:profiles(name))");
+    .select("id, subject_id, teacher:teachers(id, status, profile:profiles(name))");
+  if (!links || links.length === 0) return {};
+
+  // C-1(2026-09-10) — 단원이 0개인 빈 운영본은 후보에서 제외한다. 서버측
+  // confirm_student_teacher_subject_match()도 동일하게 "단원 1개 이상"을
+  // 요구하므로, 여기서 걸러두지 않으면 UI에서 고를 수 있는데 실제 배정
+  // 시점에는 거부되는 불일치가 생긴다.
+  const templateIds = links.map((l) => l.id as string);
+  const { data: unitRows } = await supabase
+    .from("teacher_curriculum_template_units")
+    .select("template_id")
+    .in("template_id", templateIds);
+  const templateIdsWithUnits = new Set((unitRows ?? []).map((u) => u.template_id as string));
 
   const bySubject: Record<string, MatchingTeacherCandidate[]> = {};
-  for (const l of (links ?? []) as {
+  for (const l of links as {
+    id: string;
     subject_id: string;
     teacher: unknown;
   }[]) {
+    if (!templateIdsWithUnits.has(l.id)) continue;
     const teacher = extractOne<{
       id: string;
       status: string;

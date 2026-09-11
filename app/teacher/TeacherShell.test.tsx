@@ -35,6 +35,7 @@ const roster: RosterStudent[] = [
         currentSession: 8,
         totalSessions: 12,
         source: "legacy",
+        curriculumSourceLabel: null,
       },
     ],
   },
@@ -84,7 +85,7 @@ describe("TeacherShell", () => {
     expect(screen.getByText("지난 수업이 없습니다.")).toBeInTheDocument();
   });
 
-  it("담당 학생 탭에서 학년/연락처가 보이고, 커리큘럼 진입 버튼을 누르면 커리큘럼 탭의 학생별 뷰로 이동한다(M4 골든패스 #6/#7)", () => {
+  it("담당 학생 탭에서 학년/연락처가 보이고, C-1(2026-09-10) 이후 '커리큘럼 보기'는 없고 '운영 커리큘럼 관리'만으로 이동한다(M4 골든패스 #6/#7)", () => {
     const currentAssignments = [
       {
         assignmentId: "ta1",
@@ -104,8 +105,9 @@ describe("TeacherShell", () => {
     render(<TeacherShell {...baseProps} currentAssignments={currentAssignments} />);
     fireEvent.click(screen.getAllByText("담당 학생")[0]);
     expect(screen.getByText("11학년")).toBeInTheDocument();
-    fireEvent.click(screen.getByText("커리큘럼 보기"));
-    expect(screen.getByText("학생별")).toBeInTheDocument();
+    expect(screen.queryByText("커리큘럼 보기")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByText("운영 커리큘럼 관리"));
+    expect(screen.getByText("지훈 학생 · SAT Math")).toBeInTheDocument();
   });
 
   it("2026-09-09(UAT 지적): '교재' 탭에서 담당 과목의 공개된 교재를 볼 수 있다", () => {

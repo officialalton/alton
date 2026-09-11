@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { loadCurriculumOverlayProgressByEnrollment, getCurriculumOverlayProgress } from "@/lib/curriculum-overlay-progress";
 
 // M4 골든패스 실사용 버그 #1 — 이 파일은 원래 legacy `enrollments`/`teachers` 테이블
 // (정규 전환 후에만 채워짐)을 조회했다. 체험 수업만 진행 중인 학생은 `subject_enrollments`
@@ -10,6 +11,8 @@ export type TeacherSubject = {
   subjectName: string;
   currentSession: number;
   totalSessions: number;
+  // C-1(2026-09-10) — "교사 운영 커리큘럼 기준"/"공통 커리큘럼 기준" 표시용.
+  curriculumSourceLabel: string | null;
 };
 
 export type TeacherListItem = {
@@ -95,38 +98,22 @@ export async function loadTeacherList(
   const nameById = new Map((profiles ?? []).map((p) => [p.id, p.name]));
   const schoolById = new Map((teacherRows ?? []).map((t) => [t.id, t.school]));
 
+  // C-1(2026-09-10) — 진도는 세션 실적이 아니라 curriculum_overlay_units
+  // 기준으로 통일한다(다른 화면과 동일 기준).
   const enrollmentIds = Array.from(
     new Set(assignments.map((a) => a.subjectEnrollmentId))
   );
-  const { data: sessions } = enrollmentIds.length
-    ? await supabase
-        .from("sessions")
-        .select("subject_enrollment_id, final_status")
-        .in("subject_enrollment_id", enrollmentIds)
-    : { data: [] as { subject_enrollment_id: string; final_status: string }[] };
-
-  const totalByEnrollment = new Map<string, number>();
-  const doneByEnrollment = new Map<string, number>();
-  for (const s of sessions ?? []) {
-    totalByEnrollment.set(
-      s.subject_enrollment_id,
-      (totalByEnrollment.get(s.subject_enrollment_id) ?? 0) + 1
-    );
-    if (s.final_status === "completed") {
-      doneByEnrollment.set(
-        s.subject_enrollment_id,
-        (doneByEnrollment.get(s.subject_enrollment_id) ?? 0) + 1
-      );
-    }
-  }
+  const progressByEnrollment = await loadCurriculumOverlayProgressByEnrollment(supabase, enrollmentIds);
 
   const bySubjectMap = new Map<string, TeacherSubject[]>();
   for (const a of assignments) {
     const list = bySubjectMap.get(a.teacherId) ?? [];
+    const progress = getCurriculumOverlayProgress(progressByEnrollment, a.subjectEnrollmentId);
     list.push({
       subjectName: a.subjectName,
-      currentSession: doneByEnrollment.get(a.subjectEnrollmentId) ?? 0,
-      totalSessions: totalByEnrollment.get(a.subjectEnrollmentId) ?? 0,
+      currentSession: progress.doneUnits,
+      totalSessions: progress.totalUnits,
+      curriculumSourceLabel: progress.sourceLabel,
     });
     bySubjectMap.set(a.teacherId, list);
   }

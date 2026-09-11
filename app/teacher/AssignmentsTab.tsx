@@ -168,12 +168,10 @@ function formatDate(iso: string | null): string {
 export default function AssignmentsTab({
   current,
   past,
-  onOpenCurriculum,
   onOpenOperatingCurriculum,
 }: {
   current: TeacherAssignedSubject[];
   past: TeacherAssignedSubject[];
-  onOpenCurriculum?: (studentId: string, subjectId: string) => void;
   onOpenOperatingCurriculum?: (
     subjectEnrollmentId: string,
     subjectId: string,
@@ -219,31 +217,18 @@ export default function AssignmentsTab({
                 {a.status === "active" ? "배정중" : "예정"}
               </span>
             </div>
-            {((onOpenCurriculum && a.hasLegacyCurriculum) || onOpenOperatingCurriculum) && (
+            {/* C-1(2026-09-10) — 레거시 읽기 전용 "커리큘럼 보기" 버튼은 제거됐다.
+                교사에게는 수정 가능한 "운영 커리큘럼 관리"만 제공한다. */}
+            {onOpenOperatingCurriculum && (
               <div className="flex flex-wrap gap-2 mt-2">
-                {/* 2026-09-09(UAT 정정) — 이 배정(teacher_assignments/subject_enrollments,
-                    v3)과 같은 (학생, 과목) 조합의 레거시 enrollments가 실제로 있을 때만
-                    "커리큘럼 보기"를 보여준다. 예전에는 무조건 노출돼, v3 전용 배정(레거시
-                    없음)에서 눌러도 CurriculumTab의 jumpTo가 legacy curricula에서 못 찾아
-                    아무 화면도 안 뜨는 죽은 버튼이었다. */}
-                {onOpenCurriculum && a.hasLegacyCurriculum && (
-                  <button
-                    onClick={() => onOpenCurriculum(a.studentId, a.subjectId)}
-                    className="text-[12px] font-semibold px-3 py-1.5 rounded-full bg-grey-100 text-ink"
-                  >
-                    커리큘럼 보기
-                  </button>
-                )}
-                {onOpenOperatingCurriculum && (
-                  <button
-                    onClick={() =>
-                      onOpenOperatingCurriculum(a.subjectEnrollmentId, a.subjectId, a.studentName, a.subjectName)
-                    }
-                    className="text-[12px] font-semibold px-3 py-1.5 rounded-full bg-grey-100 text-ink"
-                  >
-                    운영 커리큘럼 관리
-                  </button>
-                )}
+                <button
+                  onClick={() =>
+                    onOpenOperatingCurriculum(a.subjectEnrollmentId, a.subjectId, a.studentName, a.subjectName)
+                  }
+                  className="text-[12px] font-semibold px-3 py-1.5 rounded-full bg-grey-100 text-ink"
+                >
+                  운영 커리큘럼 관리
+                </button>
               </div>
             )}
             <StudentProfileDisclosure a={a} />

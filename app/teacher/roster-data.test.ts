@@ -20,6 +20,9 @@ function makeSupabase(params: {
   // 2026-09-10(P0 결함 수정) — currentSession/totalSessions는 이제
   // enrollments.total_sessions가 아니라 legacy_sessions 실적으로 계산한다.
   legacySessions?: Array<{ enrollment_id: string; status: string }>;
+  // C-1(2026-09-10) — v3 과목의 진도는 curriculum_overlay_units 기준.
+  overlays?: Array<{ id: string; subject_enrollment_id: string }>;
+  overlayUnits?: Array<{ overlay_id: string; status: string; source_kind: string }>;
 }) {
   return {
     from: vi.fn((table: string) => {
@@ -34,6 +37,12 @@ function makeSupabase(params: {
       }
       if (table === "legacy_sessions") {
         return { select: () => ({ in: () => Promise.resolve({ data: params.legacySessions ?? [] }) }) };
+      }
+      if (table === "student_curriculum_overlays") {
+        return { select: () => ({ in: () => ({ eq: () => Promise.resolve({ data: params.overlays ?? [] }) }) }) };
+      }
+      if (table === "curriculum_overlay_units") {
+        return { select: () => ({ in: () => Promise.resolve({ data: params.overlayUnits ?? [] }) }) };
       }
       throw new Error(`unexpected table ${table}`);
     }),
@@ -67,7 +76,7 @@ describe("loadRoster", () => {
         studentId: "s1",
         studentName: "지훈",
         grade: "10학년",
-        subjects: [{ enrollmentId: "e1", subjectId: "sub1", subjectName: "SAT Math", currentSession: 3, totalSessions: 4, source: "legacy" }],
+        subjects: [{ enrollmentId: "e1", subjectId: "sub1", subjectName: "SAT Math", currentSession: 3, totalSessions: 4, source: "legacy", curriculumSourceLabel: null }],
       },
     ]);
   });
@@ -94,7 +103,7 @@ describe("loadRoster", () => {
         studentName: "UAT Kid 113",
         grade: null,
         subjects: [
-          { enrollmentId: "se1", subjectId: "fff052c7-e78f-4100-9dcb-ace4d3bbd2bb", subjectName: "AP Calculus AB", currentSession: 0, totalSessions: 0, source: "v3" },
+          { enrollmentId: "se1", subjectId: "fff052c7-e78f-4100-9dcb-ace4d3bbd2bb", subjectName: "AP Calculus AB", currentSession: 0, totalSessions: 0, source: "v3", curriculumSourceLabel: null },
         ],
       },
     ]);

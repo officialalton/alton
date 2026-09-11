@@ -37,8 +37,8 @@ function makeSupabase() {
       if (table === "teachers") {
         return { select: () => ({ in: () => Promise.resolve({ data: teachers }) }) };
       }
-      if (table === "sessions") {
-        return { select: () => ({ in: () => Promise.resolve({ data: [] }) }) };
+      if (table === "student_curriculum_overlays") {
+        return { select: () => ({ in: () => ({ eq: () => Promise.resolve({ data: [] }) }) }) };
       }
       throw new Error(`unexpected table ${table}`);
     }),

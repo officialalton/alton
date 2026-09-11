@@ -100,10 +100,6 @@ export default function TeacherShell({
   const [lessonSubtab, setLessonSubtab] = useState<"upcoming" | "past">("upcoming");
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const [timezoneModalOpen, setTimezoneModalOpen] = useState(false);
-  const [curriculumJump, setCurriculumJump] = useState<{
-    studentId: string;
-    subjectId: string;
-  } | null>(null);
   const [operatingCurriculumJump, setOperatingCurriculumJump] = useState<{
     subjectEnrollmentId: string;
     subjectId: string;
@@ -126,11 +122,6 @@ export default function TeacherShell({
     // 히스토리 항목을 만들어, 뒤로가기 한 번이 포털 밖(로그인/OAuth)까지
     // 건너뛰지 않고 직전 탭으로만 이동하게 한다.
     router.push(`?tab=${id}`, { scroll: false });
-  }
-
-  function openCurriculumFromAssignment(studentId: string, subjectId: string) {
-    setCurriculumJump({ studentId, subjectId });
-    selectTab("curriculum");
   }
 
   function openOperatingCurriculumFromAssignment(
@@ -227,7 +218,6 @@ export default function TeacherShell({
             <AssignmentsTab
               current={currentAssignments}
               past={pastAssignments}
-              onOpenCurriculum={openCurriculumFromAssignment}
               onOpenOperatingCurriculum={openOperatingCurriculumFromAssignment}
             />
           ) : activeTab === "lesson-schedule" ? (
@@ -281,8 +271,6 @@ export default function TeacherShell({
               memosByEnrollment={memosByEnrollment}
               reviews={reviews}
               studentFeedback={studentFeedback}
-              jumpTo={curriculumJump}
-              onJumpConsumed={() => setCurriculumJump(null)}
               operatingCurriculumJumpTo={operatingCurriculumJump}
               onOperatingCurriculumJumpConsumed={() => setOperatingCurriculumJump(null)}
             />

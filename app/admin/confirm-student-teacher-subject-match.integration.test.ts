@@ -82,6 +82,19 @@ function createTeacher(label: string, withValidRate: boolean): string {
   return id;
 }
 
+// C-1(2026-09-10) — 이제 confirm_student_teacher_subject_match()는 선생님이
+// 해당 과목의 운영 커리큘럼(단원 1개 이상)을 갖고 있어야만 배정을 허용한다.
+// 이 헬퍼로 그 전제조건을 만족시켜, 다른 테스트(원자성/멱등성 등)가 이
+// 가드가 아니라 원래 검증하려던 것만 확인하도록 격리한다.
+function giveTeacherOperatingCurriculum(teacherId: string, subjectId: string): void {
+  const templateId = psql(
+    `insert into teacher_curriculum_templates (teacher_id, subject_id) values ('${teacherId}', '${subjectId}') returning id;`
+  );
+  psql(
+    `insert into teacher_curriculum_template_units (template_id, position, unit_title) values ('${templateId}', 1, '기본 단원');`
+  );
+}
+
 function createSubject(label: string): string {
   // name은 unique 제약이 있다 — DB reset 없이 이 파일을 반복 실행해도 충돌하지
   // 않도록 매번 고유한 이름을 만든다.
@@ -113,6 +126,7 @@ describe("confirm_student_teacher_subject_match (2026-09-10, 매칭 공통화, �
     createHousehold(childId);
     const subjectId = createSubject("원자성과목1");
     const teacherId = createTeacher("원자성교사1", false); // 유효 시급 없음
+    giveTeacherOperatingCurriculum(teacherId, subjectId); // 시급 검증만 격리해서 확인
 
     const adminClient = await signInAsAdmin(adminUser.email);
     const { error } = await adminClient.rpc("confirm_student_teacher_subject_match", {
@@ -136,6 +150,7 @@ describe("confirm_student_teacher_subject_match (2026-09-10, 매칭 공통화, �
     createHousehold(childId);
     const subjectId = createSubject("멱등과목1");
     const teacherId = createTeacher("멱등교사1", true);
+    giveTeacherOperatingCurriculum(teacherId, subjectId);
 
     const adminClient = await signInAsAdmin(adminUser.email);
     const first = await adminClient.rpc("confirm_student_teacher_subject_match", {
@@ -212,7 +227,7 @@ describe("confirm_student_teacher_subject_match (2026-09-10, 매칭 공통화, �
     expect(units.some((u) => u.includes("공통 원본 단원"))).toBe(false);
   });
 
-  it("교사 운영본이 없으면 기존 공통 원본(subject_template_units)으로 폴백한다", async () => {
+  it("2026-09-10(C-1): 교사 운영본이 없으면 공통 원본으로 폴백하지 않고 배정 자체를 거부한다", async () => {
     const adminUser = await createAdminUser("관리자4");
     const childId = createChild("폴백학생1");
     createHousehold(childId);
@@ -222,20 +237,37 @@ describe("confirm_student_teacher_subject_match (2026-09-10, 매칭 공통화, �
     psql(`insert into subject_template_units (subject_id, position, unit_title) values ('${subjectId}', 1, '공통 원본 단원 A');`);
 
     const adminClient = await signInAsAdmin(adminUser.email);
-    const { data, error } = await adminClient
-      .rpc("confirm_student_teacher_subject_match", {
-        p_child_id: childId,
-        p_teacher_id: teacherId,
-        p_subject_id: subjectId,
-      })
-      .single();
-    expect(error).toBeNull();
-    const matchData = data as MatchRpcRow;
+    const { error } = await adminClient.rpc("confirm_student_teacher_subject_match", {
+      p_child_id: childId,
+      p_teacher_id: teacherId,
+      p_subject_id: subjectId,
+    });
 
-    const units = psql(
-      `select unit_title || '|' || source_kind from curriculum_overlay_units where overlay_id = '${matchData.out_overlay_id}' order by position;`
-    ).split("\n");
-    expect(units).toEqual(["공통 원본 단원 A|subject_template"]);
+    expect(error).not.toBeNull();
+    expect(error?.message).toContain("운영 커리큘럼이 없어 배정할 수 없습니다");
+    const enrollmentCount = psql(
+      `select count(*) from subject_enrollments where child_id = '${childId}' and subject_id = '${subjectId}';`
+    );
+    expect(enrollmentCount).toBe("0"); // 신규 매칭은 공통 원본 폴백을 쓰지 않는다 — 아무것도 만들어지지 않음.
+  });
+
+  it("2026-09-10(C-1): 운영본에 단원이 0개(빈 템플릿)여도 배정을 거부한다", async () => {
+    const adminUser = await createAdminUser("관리자4-2");
+    const childId = createChild("빈운영본학생1");
+    createHousehold(childId);
+    const subjectId = createSubject("빈운영본과목1");
+    const teacherId = createTeacher("빈운영본교사1", true);
+    psql(`insert into teacher_curriculum_templates (teacher_id, subject_id) values ('${teacherId}', '${subjectId}');`); // 단원 없음
+
+    const adminClient = await signInAsAdmin(adminUser.email);
+    const { error } = await adminClient.rpc("confirm_student_teacher_subject_match", {
+      p_child_id: childId,
+      p_teacher_id: teacherId,
+      p_subject_id: subjectId,
+    });
+
+    expect(error).not.toBeNull();
+    expect(error?.message).toContain("운영 커리큘럼이 없어 배정할 수 없습니다");
   });
 
   it("서로 다른 시점에 매칭된 두 학생은 그 사이 교사 운영본이 바뀌면 서로 다른 스냅샷을 갖는다", async () => {

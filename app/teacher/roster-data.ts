@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { loadCurriculumOverlayProgressByEnrollment, getCurriculumOverlayProgress } from "@/lib/curriculum-overlay-progress";
 
 export type RosterSubject = {
   enrollmentId: string;
@@ -10,6 +11,9 @@ export type RosterSubject = {
   // 뷰(`enrollmentId`가 legacy `enrollments.id`)로 갈지, v3 운영 커리큘럼 뷰
   // (`enrollmentId`가 실제로는 `subject_enrollments.id`)로 갈지 구분하는 데 쓴다.
   source: "legacy" | "v3";
+  // C-1(2026-09-10) — v3 과목의 출처 표시("교사 운영 커리큘럼 기준"/"공통
+  // 커리큘럼 기준"). legacy 과목은 이 개념이 없어 항상 null.
+  curriculumSourceLabel: string | null;
 };
 
 export type RosterStudent = {
@@ -79,6 +83,13 @@ export async function loadRoster(
     }
   }
 
+  // C-1(2026-09-10) — v3 과목의 진도는 더 이상 세션 실적(0으로 고정되던 버그)이
+  // 아니라 curriculum_overlay_units 기준으로 계산한다.
+  const v3ProgressByEnrollment = await loadCurriculumOverlayProgressByEnrollment(
+    supabase,
+    v3Rows.map((r) => r.id)
+  );
+
   const studentIds = Array.from(
     new Set([...legacyRows.map((e) => e.student_id), ...v3Rows.map((r) => r.studentId)])
   );
@@ -126,6 +137,7 @@ export async function loadRoster(
       currentSession: doneByEnrollment.get(e.id) ?? 0,
       totalSessions: totalByEnrollment.get(e.id) ?? 0,
       source: "legacy",
+      curriculumSourceLabel: null,
     });
   }
   for (const r of v3Rows) {
@@ -134,13 +146,15 @@ export async function loadRoster(
     const key = `${r.studentId}:${r.subjectId}`;
     if (seenSubjectPerStudent.has(key)) continue;
     seenSubjectPerStudent.add(key);
+    const progress = getCurriculumOverlayProgress(v3ProgressByEnrollment, r.id);
     student.subjects.push({
       enrollmentId: r.id,
       subjectId: r.subjectId,
       subjectName: extractName(r.subject),
-      currentSession: 0,
-      totalSessions: 0,
+      currentSession: progress.doneUnits,
+      totalSessions: progress.totalUnits,
       source: "v3",
+      curriculumSourceLabel: progress.sourceLabel,
     });
   }
 
