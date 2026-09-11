@@ -1,5 +1,42 @@
 # ALTON — 현재 상태 (2026-09-11 기준)
 
+> **2026-09-11 — C-2 완료 확정 / 온보딩(체험 온보딩 링크 재사용 버그 보완)
+> 완료.** C-2는 실제 예약·취소·목록 즉시 갱신까지 Preview에서 확인되어
+> 완료 처리됨(4차 재구현 포함, 위 항목 참고). 온보딩은 UAT 중 발견된
+> "확인 GET이 계정을 생성/재생성하는" 결함과 "발급 전 자녀 이메일 중복
+> 미차단" 두 가지를 마감했다. 최종 배포 커밋 `5c83190`
+> (`preview/m4-integration-verification`, Preview
+> `https://alton-2wfcsc2np-alton7.vercel.app`).
+> 1. **확인 GET 무변경화**: `lib/trial-onboarding-finalize.ts`가 URL 대신
+>    상대 경로(`FinalizeRedirect`)를 반환하도록 리팩터링, 계정 생성·복구
+>    링크 발급·메일 발송을 새 Server Action(`app/consult/trial-onboarding-finalize-actions.ts`)
+>    으로 이동 — `redeem`/`confirm-email`/`confirm-email-change` GET은
+>    이제 읽기 전용 검증과 확인 화면 리다이렉트만 한다. `confirm_trial_login_email_change()`는
+>    "멱등"일 뿐 "무변경"은 아니었다(첫 호출에 status/confirmed_at/이벤트를
+>    기록)는 지적을 받아, 순수 조회 전용 `peek_trial_login_email_change()`
+>    (마이그레이션 `20261282000000`)를 추가해 GET·미리보기 페이지는 이것만
+>    쓰도록 교체. 실제 확정은 기존 함수 그대로 POST Server Action에서만.
+>    신규/부분완료/redeemed 상태 및 pending 이메일변경요청 모두 Preview에서
+>    GET 전후 DB 상태·이벤트 수 불변을 실측 확인, POST에서만 전이됨도 확인.
+> 2. **발급 전 자녀 이메일 중복 차단**: 공통 헬퍼 `lib/onboarding-email-guard.ts`를
+>    상담 경로(`sendTrialOnboardingNoticeAction`)·직접 생성 경로
+>    (`sendDirectOnboardingNoticeAction`) 양쪽에 적용 — 기존 auth.users와
+>    겹치면 링크 생성·발송 전에 차단하고 해당 학생 입력란에 인라인 오류
+>    표시(`duplicate_emails` 결과 상태 신설). 발급 후 충돌은 기존 부분
+>    실패·재시도 경로 그대로 유지. 전용 UAT 관리자 계정으로 두 경로 모두
+>    Preview에서 실제 제출해 확인.
+> **P4-1 관련**: "기존 주 보호자 선택 + 자녀 추가"(`AddChildToGuardianForm`,
+> 미착수)는 학생 배열 행 추가와 별개의 진입점으로 문서(`docs/2026-09-10-p4-1-account-expansion-and-household-archive-investigation.md`
+> "확정 정책 (2026-09-11)" 절)에 이미 구분돼 있고, 그 문서에 착수 시
+> `lib/onboarding-email-guard.ts`를 그대로 재사용하도록 명시돼 있음 — 다음
+> 라운드는 그 문서 기준으로 설계·구현 진행.
+> **UAT 정리**: 이번 라운드에서 만든 전용 UAT 계정·픽스처(실행 ID
+> `onboarding-e2e-20260911b`/`20260912c`/`20260912d`, UAT 관리자
+> `onboarding-e2e-uat-admin-20260912`)는 전부 `transition_account_status()`/
+> `banned_until` 승인 절차로 비활성화·세션 무효화만 하고 삭제하지 않음.
+> **외부 변경**: git push 2회, Preview 배포 2회, 마이그레이션 1건을 로컬+
+> 공유 non-prod DB에 additive로 적용. Production 무변경.
+
 > **2026-09-11 — C-2(4차, 2차 보완): 예약 판정을 종료 이력 추정 대신 실제
 > 계약·체험권 사용 이력 기준으로 재구현. C-2 마무리 배치(migration 없음,
 > app 코드만).** 제품 오너가 C-2(4차) 1차 구현("종료·완료 이력이 있는
