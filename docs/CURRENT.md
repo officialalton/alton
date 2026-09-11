@@ -1,5 +1,23 @@
 # ALTON — 현재 상태 (2026-09-10 기준)
 
+> **2026-09-10 — P0(3차): 비밀번호 설정 직후 학생이 /complete-profile에
+> 도달하지 못하는 회귀 수정.** 제품 오너가 즉시 재발견: 학생이 비밀번호를
+> 설정한 뒤 개인정보(생년월일 등) 입력 화면이 나타나지 않음. **원인**:
+> 신규 학생 계정(`students.status`)은 항상 `'pending'`으로 시작해 관리자가
+> 매칭 등으로 `active` 전환하기 전까지는 `resolveAccountDestination()`의
+> `pending` 분기(옛 `lib/auth.ts:51-53`)가 학생 프로필 완성
+> 게이트(`/complete-profile`)보다 먼저 리턴했다 — 1·2차 수정에서 고친
+> "생년월일/미성년 판정 순서" 버그와 같은 유형이 pending 게이트에도
+> 있었던 것. **수정**: 프로필 완성 게이트를 계정 lifecycle 상태(suspended/
+> pending) 체크보다 먼저 오도록 이동 — 승인 상태와 무관하게 항상 최우선
+> 확인. migration 불필요(app 코드만, `lib/auth.ts`). **검증**: 회귀
+> 테스트 2건 추가(pending+프로필 미완료 → `/complete-profile`, pending+
+> 프로필 완료 → `/account-pending` 유지), `tsc`/eslint 클린, `supabase db
+> reset --local` 후 전체 스위트 259 files/1808 tests 통과, `next build`
+> 성공. **외부 변경**: 커밋 `5c7bc28` push, Preview 배포 →
+> `https://alton-6ullrv6dg-alton7.vercel.app`(target: preview 확인).
+> migration 없음. Production 무변경.
+>
 > **2026-09-10 — P0(2차): 생년월일 미입력 자녀에게 미성년 동의 카드/배지
 > 조기 노출 수정.** 직전 P0 배치 배포 후 제품 오너가 Preview에서 즉시 재발견:
 > 직접 계정 생성 다자녀 가구(자녀 3명)에서 계정 생성 직후 `/parent`가
