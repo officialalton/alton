@@ -45,6 +45,7 @@ const pastSession: PastSessionForReport = {
   subjectName: "SAT Math",
   teacherName: "김선생",
   startsAt: "2026-08-25T05:00:00.000Z",
+  needsReview: false,
 };
 
 const baseProps = {

@@ -36,20 +36,28 @@ export type PastSessionForReport = {
   subjectName: string;
   teacherName: string;
   startsAt: string;
+  // v3 재매칭 후 예약 결함 수정(2026-09-11) — 체험 수업이 완료 판정됐지만
+  // 리뷰가 아직 확정(final)되지 않았으면 true. 리뷰 여부와 무관하게 이
+  // 세션은 이미 "지난 수업"으로 분류되고("예정 수업"·"수업 시작" 대상에서
+  // 빠짐), 이 플래그로 "리뷰 작성 필요"만 표시한다(제품 오너 지시).
+  needsReview: boolean;
 };
 
-// v3 재매칭 후 예약 결함 수정(2026-09-11) — 같은 과목에 이미 종료(terminated)·
-// 완료(completed)된 수강 이력이 있는 학생은 "재매칭"이다. 재매칭 직후 새
-// subject_enrollment는 항상 'planned'로 시작하는데, 그동안 이 로더가 status만
-// 보고 무조건 "체험" 후보로 취급해(isTrial = status !== 'active') 이미 정규
-// 계약이 있는 가족에게도 새 체험 슬롯을 내줄 뻔했다(재매칭만으로 체험 기회가
-// 새로 생기면 안 된다는 정책 위반). 계약/수업권이 아직 활성화되지 않은
-// 재매칭 건은 체험 후보 목록에서 빼고, 대신 "정규 계약 대기" 안내 대상으로
-// 분리한다 — 캘린더를 띄우기 전에 활성화 대기 상태를 바로 알려준다.
+// v3 재매칭 후 예약 결함 수정(2026-09-11, 2차 보완) — 최초 구현은 "같은
+// 과목에 종료 이력이 있으면 정규 계약 대기"로 일괄 추정했는데, 종료 이력은
+// 계약 상태·체험권 사용 여부의 신뢰할 수 있는 대리 지표가 아니라는 지적을
+// 받았다. 실제 계약·체험권 사용 이력(entitlement_grants/entitlement_ledger)과
+// 기존 활성화 판정 경로(subject_enrollment_activation_ready, R5/M4)를 그대로
+// 재사용해 실제 차단 사유를 구분한다 — 상태를 추정하지 않는다.
+export type PendingActivationReason =
+  | "contract_pending" // subject_enrollment_activation_ready() = false(기본계약 미활성)
+  | "no_entitlement" // 계약은 active인데 사용 가능한 정규 수업권이 없음(체험도 이미 소진)
+  | "activation_pending"; // 계약도 active, 정규 수업권도 있음 — 시스템/관리자의 수강 활성화(planned→active) 처리만 남음(정규 예약 조건 자체는 이미 충족)
 export type PendingActivationSubject = {
   subjectEnrollmentId: string;
   subjectName: string;
   teacherName: string;
+  reason: PendingActivationReason;
 };
 
 export type LessonBookingData = {
@@ -59,6 +67,19 @@ export type LessonBookingData = {
   pastSessionsForReport: PastSessionForReport[];
   timezone: string;
 };
+
+function unwrapOne<T>(rel: unknown): T | null {
+  return (Array.isArray(rel) ? rel[0] : rel) as T | null;
+}
+
+// entitlement_grants→entitlement_products→entitlement_types→lesson_types 조인
+// 결과에서 실제 수업 유형 코드('trial'|'regular')만 뽑아낸다.
+function extractLessonTypeCode(entitlementProduct: unknown): string | null {
+  const product = unwrapOne<{ entitlement_type?: unknown }>(entitlementProduct);
+  const type = unwrapOne<{ lesson_type?: unknown }>(product?.entitlement_type);
+  const lessonType = unwrapOne<{ code?: string }>(type?.lesson_type);
+  return lessonType?.code ?? null;
+}
 
 export async function loadLessonBookingData(
   supabase: SupabaseClient,
@@ -77,54 +98,32 @@ export async function loadLessonBookingData(
     | { id: string; duration_minutes: number }
     | undefined;
 
-  // 같은 과목으로 이미 종료·완료된 수강 이력이 있으면(재매칭) 새 'planned'
-  // 건을 체험 후보로 보여주지 않는다 — subjectId 기준, 이 enrollment 자신은
-  // 제외.
-  const subjectIdsWithPriorEnrollment = new Set(
-    enrollments
-      .filter((e) => e.status === "terminated" || e.status === "completed")
-      .map((e) => e.subjectId)
-  );
-
-  // 2026-09-09(UAT 지적): 체험수업권 지급 여부로 후보 목록 자체를 숨기면,
-  // "선생님 배정이 필요합니다" 문구가 실제로는 "체험수업권 지급 대기 중"인
-  // 경우까지 오인시킨다. 수업권 잔여량 검증은 어차피 예약 확정 시
-  // hold_entitlement()가 최종 강제하므로("사용 가능한 수업권이 없습니다"),
-  // 여기서는 선생님 배정 여부만으로 후보를 보여주고 실제 부족 여부는 예약
-  // 시도 시점의 에러로 안내한다.
-  const bookableEnrollments: BookableSubjectEnrollment[] = [];
-  const pendingActivationSubjects: PendingActivationSubject[] = [];
-  for (const e of enrollments) {
-    if (!e.currentTeacher) continue;
-    if (e.status === "active" && regularType) {
-      bookableEnrollments.push({
-        subjectEnrollmentId: e.id,
-        subjectName: e.subjectName,
-        teacherId: e.currentTeacher.teacherId,
-        teacherName: e.currentTeacher.teacherName,
-        lessonTypeId: regularType.id,
-        lessonDurationMinutes: regularType.duration_minutes,
-        isTrial: false,
-      });
-    } else if (e.status === "planned") {
-      if (subjectIdsWithPriorEnrollment.has(e.subjectId)) {
-        pendingActivationSubjects.push({
-          subjectEnrollmentId: e.id,
-          subjectName: e.subjectName,
-          teacherName: e.currentTeacher.teacherName,
-        });
-      } else if (trialType) {
-        bookableEnrollments.push({
-          subjectEnrollmentId: e.id,
-          subjectName: e.subjectName,
-          teacherId: e.currentTeacher.teacherId,
-          teacherName: e.currentTeacher.teacherName,
-          lessonTypeId: trialType.id,
-          lessonDurationMinutes: trialType.duration_minutes,
-          isTrial: true,
-        });
-      }
-    }
+  // 실제 체험/정규 수업권 잔량(child 단위 — 체험수업권은 상담 1건당 1개,
+  // subject_enrollment가 아니라 학생 본인에게 귀속된다. M2,
+  // 20261012000000_m2_trial_entitlement.sql). RLS가 이미 본인/보호자로
+  // 범위를 제한하므로 추가 소유권 검증 없이 그대로 조회한다.
+  const { data: grantRows } = await supabase
+    .from("entitlement_grants")
+    .select(
+      "id, entitlement_product:entitlement_products(entitlement_type:entitlement_types(lesson_type:lesson_types(code)))"
+    )
+    .eq("child_id", childId)
+    .gt("expires_at", new Date().toISOString());
+  const grantIds = (grantRows ?? []).map((g) => g.id as string);
+  const { data: ledgerRows } = grantIds.length
+    ? await supabase.from("entitlement_ledger").select("grant_id, amount").in("grant_id", grantIds)
+    : { data: [] as { grant_id: string; amount: number }[] };
+  const remainingByGrant = new Map<string, number>();
+  for (const l of ledgerRows ?? []) {
+    remainingByGrant.set(l.grant_id, (remainingByGrant.get(l.grant_id) ?? 0) + (l.amount as number));
+  }
+  let trialRemaining = 0;
+  let regularRemaining = 0;
+  for (const g of grantRows ?? []) {
+    const code = extractLessonTypeCode(g.entitlement_product);
+    const remaining = remainingByGrant.get(g.id as string) ?? 0;
+    if (code === "trial") trialRemaining += remaining;
+    else if (code === "regular") regularRemaining += remaining;
   }
 
   const enrollmentIds = enrollments.map((e) => e.id);
@@ -156,33 +155,39 @@ export async function loadLessonBookingData(
 
     const rows = (sessions ?? [])
       .map((s): BookingRow | null => {
-        const reservation = Array.isArray(s.reservation) ? s.reservation[0] : s.reservation;
-        const teacher = Array.isArray(s.teacher) ? s.teacher[0] : s.teacher;
-        const subjectEnrollment = Array.isArray(s.subject_enrollment) ? s.subject_enrollment[0] : s.subject_enrollment;
-        const subject = subjectEnrollment ? (Array.isArray(subjectEnrollment.subject) ? subjectEnrollment.subject[0] : subjectEnrollment.subject) : null;
-        const lessonType = Array.isArray(s.lesson_type) ? s.lesson_type[0] : s.lesson_type;
+        const reservation = unwrapOne<{
+          id: string;
+          starts_at: string;
+          ends_at: string;
+          status: string;
+          google_meet_link: string | null;
+          google_sync_status: string;
+        }>(s.reservation);
+        const teacher = unwrapOne<{ name?: string }>(s.teacher);
+        const subjectEnrollment = unwrapOne<{ subject?: unknown }>(s.subject_enrollment);
+        const subject = unwrapOne<{ name?: string }>(subjectEnrollment?.subject);
+        const lessonType = unwrapOne<{ code?: string }>(s.lesson_type);
         if (!reservation) return null;
         return {
-          reservationId: reservation.id as string,
+          reservationId: reservation.id,
           sessionId: s.id as string,
           subjectEnrollmentId: s.subject_enrollment_id as string,
-          subjectName: (subject as { name?: string } | null)?.name ?? "",
-          teacherName: (teacher as { name?: string } | null)?.name ?? "",
-          startsAt: reservation.starts_at as string,
-          endsAt: reservation.ends_at as string,
-          status: reservation.status as string,
-          googleMeetLink: (reservation.google_meet_link as string | null) ?? null,
-          googleSyncStatus: reservation.google_sync_status as string,
+          subjectName: subject?.name ?? "",
+          teacherName: teacher?.name ?? "",
+          startsAt: reservation.starts_at,
+          endsAt: reservation.ends_at,
+          status: reservation.status,
+          googleMeetLink: reservation.google_meet_link,
+          googleSyncStatus: reservation.google_sync_status,
           finalStatus: s.final_status as string,
-          isTrial: (lessonType as { code?: string } | null)?.code === "trial",
+          isTrial: lessonType?.code === "trial",
         };
       })
       .filter((r): r is BookingRow => r !== null);
 
-    // 체험 수업의 확정 리뷰 상태 — 선생님 포털(app/teacher/lesson-schedule-data.ts,
-    // TeacherLessonScheduleTab.isPastLesson)과 동일하게, 체험 수업은 리뷰가 확정되기
-    // 전까지는 "지난 수업"으로 넘기지 않는다. 같은 수업이 선생님 쪽은 "예정"인데 학생
-    // 쪽은 "지난"으로 보이는 혼란을 막기 위함(2026-09-06 제품 오너 지적).
+    // 체험 수업의 확정 리뷰 상태 — "지난 수업" 분류 자체에는 더 이상 쓰지
+    // 않는다(아래 isPastSession 참고, 2026-09-11 2차 보완). 리뷰 미확정
+    // 여부만 표시용(needsReview)으로 남긴다.
     const trialSessionIds = rows.filter((r) => r.isTrial).map((r) => r.sessionId);
     const { data: reviews } = trialSessionIds.length
       ? await supabase.from("lesson_reviews").select("trial_session_id, status").in("trial_session_id", trialSessionIds)
@@ -192,27 +197,20 @@ export async function loadLessonBookingData(
     const now = new Date();
     const fourteenDaysAgo = new Date(now.getTime() - 14 * 24 * 60 * 60_000);
 
-    // 예정/지난 판정(2026-09-06 정리) — 기존에는 순수 startsAt > now 여부만으로
-    // 판정해 sessions.status/finalize_lesson_session() 결과와 무관했다(선생님이
-    // 조기 종료 처리해도 시작 시각이 안 지났으면 학생 쪽은 계속 "예정 수업"에 남는
-    // 어색함이 있었음). 이제 (1) 시작 시각이 지났거나 (2) 세션이 이미 최종판정됐으면
-    // (final_status가 scheduled/live가 아니면) "지난 수업"으로 분류한다 — 단, 체험
-    // 수업은 선생님 포털과 동일하게 리뷰 확정 전까지는 예정 쪽에 남긴다.
+    // 예정/지난 판정(2026-09-06 정리, 2026-09-11 2차 보완) — (1) 시작 시각이
+    // 지났거나 (2) 세션이 이미 최종판정됐으면(final_status가 scheduled/live가
+    // 아니면) "지난 수업"으로 분류한다. 예전에는 체험 수업이면 리뷰가
+    // 확정(final)되기 전까지 이 판정과 무관하게 계속 "예정 수업"에 남겨뒀다
+    // — 완료된 체험 수업이 리뷰만 안 끝났다는 이유로 "수업 시작" 버튼과 함께
+    // 예정 수업 목록에 계속 남는 표시 결함의 원인이었다(제품 오너 지시로
+    // 제거). 리뷰 필요 여부는 이제 needsReview 플래그로만 별도 표시한다.
     function isPastSession(r: BookingRow): boolean {
       const timeEnded = new Date(r.startsAt) <= now;
       const finalized = r.finalStatus !== "scheduled" && r.finalStatus !== "live";
-      if (!timeEnded && !finalized) return false;
-      // v3 재매칭 후 예약 결함 수정(2026-09-11) — 체험 수업이 "완료(completed)"로
-      // 판정됐을 때만 리뷰 확정을 기다린다. 취소·노쇼 등 다른 최종 판정은 리뷰
-      // 대상이 아니므로(선생님 포털도 동일 — 리뷰는 실제로 진행된 수업만 남긴다),
-      // 리뷰 미확정을 이유로 "예정 수업"에 계속 묶어두면 안 된다. 예전에는 체험
-      // 수업이면 finalStatus와 무관하게 무조건 리뷰 확정 전까지 예정으로
-      // 남겨뒀다 — 이미 완료 판정된 체험 수업이 리뷰만 안 끝났다는 이유로 계속
-      // "수업 시작" 버튼과 함께 예정 수업 목록에 남는 표시 결함의 원인이었다.
-      if (r.isTrial && r.finalStatus === "completed" && reviewStatusBySession.get(r.sessionId) !== "final") {
-        return false;
-      }
-      return true;
+      return timeEnded || finalized;
+    }
+    function needsReview(r: BookingRow): boolean {
+      return r.isTrial && r.finalStatus === "completed" && reviewStatusBySession.get(r.sessionId) !== "final";
     }
 
     upcomingBookings = rows
@@ -235,8 +233,85 @@ export async function loadLessonBookingData(
     // 대상 목록만 노출한다.
     pastSessionsForReport = rows
       .filter((r) => r.status === "confirmed" && isPastSession(r) && new Date(r.startsAt) >= fourteenDaysAgo)
-      .map((r) => ({ sessionId: r.sessionId, subjectName: r.subjectName, teacherName: r.teacherName, startsAt: r.startsAt }))
+      .map((r) => ({
+        sessionId: r.sessionId,
+        subjectName: r.subjectName,
+        teacherName: r.teacherName,
+        startsAt: r.startsAt,
+        needsReview: needsReview(r),
+      }))
       .sort((a, b) => new Date(b.startsAt).getTime() - new Date(a.startsAt).getTime());
+  }
+
+  // 2026-09-09(UAT 지적): 체험수업권 지급 여부로 후보 목록 자체를 숨기면,
+  // "선생님 배정이 필요합니다" 문구가 실제로는 "체험수업권 지급 대기 중"인
+  // 경우까지 오인시킨다. 수업권 잔여량 검증은 어차피 예약 확정 시
+  // hold_entitlement()가 최종 강제하므로("사용 가능한 수업권이 없습니다"),
+  // 여기서는 실제 잔량·계약 상태를 안내에만 쓰고 최종 부족 여부는 예약
+  // 시도 시점의 에러로도 안내한다.
+  //
+  // 2026-09-11(2차 보완) — 'planned' 건을 체험 후보로 볼지는 이제 실제
+  // 체험수업권 잔량(child 단위, 위에서 계산한 trialRemaining)으로 판단한다.
+  // 이미 이 수강 건으로 예약해둔 체험(아직 hold 상태 — 소진 전)까지 후보
+  // 목록에서 빼면 "이미 예약하셨습니다" 안내 자체가 안 뜨게 되므로,
+  // upcomingBookings에 이 수강 건의 예약이 있으면 잔량이 0이어도 그대로
+  // 후보로 남긴다(화면은 기존처럼 "이미 예약하셨습니다"로 안내).
+  const bookableEnrollments: BookableSubjectEnrollment[] = [];
+  const pendingActivationSubjects: PendingActivationSubject[] = [];
+  for (const e of enrollments) {
+    if (!e.currentTeacher) continue;
+    if (e.status === "active" && regularType) {
+      bookableEnrollments.push({
+        subjectEnrollmentId: e.id,
+        subjectName: e.subjectName,
+        teacherId: e.currentTeacher.teacherId,
+        teacherName: e.currentTeacher.teacherName,
+        lessonTypeId: regularType.id,
+        lessonDurationMinutes: regularType.duration_minutes,
+        isTrial: false,
+      });
+    } else if (e.status === "planned" && trialType) {
+      const hasUpcomingTrialForThisEnrollment = upcomingBookings.some(
+        (b) => b.subjectEnrollmentId === e.id
+      );
+      if (trialRemaining > 0 || hasUpcomingTrialForThisEnrollment) {
+        bookableEnrollments.push({
+          subjectEnrollmentId: e.id,
+          subjectName: e.subjectName,
+          teacherId: e.currentTeacher.teacherId,
+          teacherName: e.currentTeacher.teacherName,
+          lessonTypeId: trialType.id,
+          lessonDurationMinutes: trialType.duration_minutes,
+          isTrial: true,
+        });
+      } else {
+        // 체험수업권이 없다(한 번도 지급된 적 없거나 이미 소진) — 실제
+        // 계약 활성화 판정(subject_enrollment_activation_ready, R5/M4가
+        // 이미 쓰는 유일한 판정 경로)을 그대로 재사용해 진짜 원인을
+        // 구분한다: 계약이 아직 active가 아니면 "정규 계약 대기", 계약은
+        // active인데 정규 수업권도 없으면 "사용 가능한 수업권 없음".
+        const { data: activationReady } = await supabase.rpc("subject_enrollment_activation_ready", {
+          p_subject_enrollment_id: e.id,
+        });
+        // 계약도 active, 정규 수업권도 있으면 정규 예약 조건 자체는 이미
+        // 충족된 상태다 — "수업권 없음"으로 잘못 안내하지 않는다. 이 상태는
+        // subject_enrollments.status가 아직 'planned'→'active'로 전환만
+        // 안 된 것뿐이라(자동 전환 트리거 없음, 관리자 활성화 대기) 정규
+        // 후보로 즉시 넣지는 않되(상태 전이 없이 예약을 열면 다른 화면의
+        // 'active' 전제와 어긋날 수 있음), 원인은 정확히 구분해 안내한다.
+        const reason: PendingActivationReason = !activationReady
+          ? "contract_pending"
+          : regularRemaining > 0
+            ? "activation_pending"
+            : "no_entitlement";
+        pendingActivationSubjects.push({
+          subjectEnrollmentId: e.id,
+          subjectName: e.subjectName,
+          teacherName: e.currentTeacher.teacherName,
+          reason,
+        });
+      }
+    }
   }
 
   const { data: profile } = await supabase.from("profiles").select("timezone").eq("id", childId).maybeSingle();

@@ -5,9 +5,18 @@ import { useRouter } from "next/navigation";
 import type {
   BookableSubjectEnrollment,
   PendingActivationSubject,
+  PendingActivationReason,
   UpcomingBooking,
   PastSessionForReport,
 } from "./lesson-booking-data";
+
+// v3 재매칭 후 예약 결함 수정(2026-09-11, 2차 보완) — 실제 계약·수업권 상태를
+// 그대로 구분해 보여준다(추정 금지, 제품 오너 지시).
+const PENDING_ACTIVATION_REASON_LABEL: Record<PendingActivationReason, string> = {
+  contract_pending: "정규 계약 대기 상태입니다. 계약이 확인되면 예약할 수 있습니다.",
+  no_entitlement: "사용 가능한 수업권이 없습니다. 수업권 구매 후 예약할 수 있습니다.",
+  activation_pending: "계약과 수업권이 모두 확인되었습니다. 수강 활성화 처리가 끝나면 곧 예약할 수 있습니다.",
+};
 import type { WeeklySeriesOccurrenceResult, BookingActionOutcome } from "@/lib/booking/create-booking";
 import MonthCalendar from "@/app/components/MonthCalendar";
 import { dateKeyInTimezone, todayKeyInTimezone } from "@/lib/calendar-date-utils";
@@ -367,11 +376,10 @@ export default function LessonBookingTab({
       {error && <div className="mb-4 text-[13px] font-semibold text-red bg-red/5 rounded-lg px-4 py-3">{error}</div>}
 
       {showUpcoming && pendingActivationSubjects.length > 0 && (
-        <div className="mb-4 text-[12.5px] text-grey-600 bg-grey-100 rounded-lg px-4 py-3">
+        <div className="mb-4 text-[12.5px] text-grey-600 bg-grey-100 rounded-lg px-4 py-3 space-y-1">
           {pendingActivationSubjects.map((s) => (
             <div key={s.subjectEnrollmentId}>
-              {s.subjectName} · {s.teacherName} 선생님 — 정규 계약 대기 상태입니다. 계약과 수업권이
-              확인되면 예약할 수 있습니다.
+              {s.subjectName} · {s.teacherName} 선생님 — {PENDING_ACTIVATION_REASON_LABEL[s.reason]}
             </div>
           ))}
         </div>
@@ -691,8 +699,13 @@ export default function LessonBookingTab({
           <div key={s.sessionId} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3">
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-[14px] font-bold text-ink">
+                <div className="text-[14px] font-bold text-ink flex items-center gap-1.5">
                   {s.subjectName} · {s.teacherName} 선생님
+                  {s.needsReview && (
+                    <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-yellow-bg text-ink">
+                      리뷰 작성 필요
+                    </span>
+                  )}
                 </div>
                 <div className="text-[13px] text-grey-500 mt-0.5">{formatDateTime(s.startsAt, timezone)}</div>
                 <button
