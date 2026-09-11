@@ -285,20 +285,37 @@ export async function loadLessonBookingData(
           isTrial: true,
         });
       } else {
-        // 체험수업권이 없다(한 번도 지급된 적 없거나 이미 소진) — 실제
-        // 계약 활성화 판정(subject_enrollment_activation_ready, R5/M4가
-        // 이미 쓰는 유일한 판정 경로)을 그대로 재사용해 진짜 원인을
-        // 구분한다: 계약이 아직 active가 아니면 "정규 계약 대기", 계약은
-        // active인데 정규 수업권도 없으면 "사용 가능한 수업권 없음".
+        // 체험수업권이 없다(한 번도 지급된 적 없거나 이미 소진) — 계약이
+        // 이미 active라면 여기서 바로 활성화까지 시도한다(자가서비스 RPC,
+        // 2026-09-11 3차 보완 — "계약·수업권 조건을 충족했는데 대기 안내만
+        // 받는" 상태로 남기지 않는다. 매칭 확인 시점에도 같은 시도를 하지만
+        // (confirm_student_teacher_subject_match), 계약이 매칭 이후에
+        // 뒤늦게 active로 바뀐 기존 건은 이 로더가 열릴 때 스스로 따라잡는다
+        // — 멱등이라 반복 호출해도 안전).
+        const { data: activated } = await supabase.rpc("activate_subject_enrollment_if_ready", {
+          p_subject_enrollment_id: e.id,
+        });
+        if (activated && regularType) {
+          bookableEnrollments.push({
+            subjectEnrollmentId: e.id,
+            subjectName: e.subjectName,
+            teacherId: e.currentTeacher.teacherId,
+            teacherName: e.currentTeacher.teacherName,
+            lessonTypeId: regularType.id,
+            lessonDurationMinutes: regularType.duration_minutes,
+            isTrial: false,
+          });
+          continue;
+        }
+        // 활성화가 안 됐다(계약이 아직 draft) — 실제 계약 활성화 판정
+        // (subject_enrollment_activation_ready, R5/M4가 이미 쓰는 유일한
+        // 판정 경로)을 그대로 재사용해 진짜 원인을 구분한다: 계약이 아직
+        // active가 아니면 "정규 계약 대기", 계약은 active인데(위 자가활성화
+        // 시도가 그래도 실패했다면 — 예: 동시에 다른 요청이 먼저 활성화한
+        // 경쟁 상태) 정규 수업권도 없으면 "사용 가능한 수업권 없음".
         const { data: activationReady } = await supabase.rpc("subject_enrollment_activation_ready", {
           p_subject_enrollment_id: e.id,
         });
-        // 계약도 active, 정규 수업권도 있으면 정규 예약 조건 자체는 이미
-        // 충족된 상태다 — "수업권 없음"으로 잘못 안내하지 않는다. 이 상태는
-        // subject_enrollments.status가 아직 'planned'→'active'로 전환만
-        // 안 된 것뿐이라(자동 전환 트리거 없음, 관리자 활성화 대기) 정규
-        // 후보로 즉시 넣지는 않되(상태 전이 없이 예약을 열면 다른 화면의
-        // 'active' 전제와 어긋날 수 있음), 원인은 정확히 구분해 안내한다.
         const reason: PendingActivationReason = !activationReady
           ? "contract_pending"
           : regularRemaining > 0

@@ -89,10 +89,14 @@ function makeSupabase(params: {
       throw new Error(`unexpected table ${table}`);
     }),
     rpc: vi.fn((fn: string, args: { p_subject_enrollment_id: string }) => {
+      const ready = params.activationReadyByEnrollmentId?.[args.p_subject_enrollment_id] ?? false;
       if (fn === "subject_enrollment_activation_ready") {
-        return Promise.resolve({
-          data: params.activationReadyByEnrollmentId?.[args.p_subject_enrollment_id] ?? false,
-        });
+        return Promise.resolve({ data: ready });
+      }
+      // 실제 RPC와 동일하게: 조건이 충족돼 있으면(ready) 자가활성화가
+      // 성공(true)한다고 가정한다 — planned 상태 전제, 멱등.
+      if (fn === "activate_subject_enrollment_if_ready") {
+        return Promise.resolve({ data: ready });
       }
       throw new Error(`unexpected rpc ${fn}`);
     }),
@@ -210,37 +214,36 @@ describe("loadLessonBookingData — 재매칭 건의 실제 차단 사유 판정
     ]);
   });
 
-  it("계약은 active인데 정규 수업권이 없으면 '수업권 없음'으로 분류한다(체험도 이미 소진)", async () => {
+  // 2026-09-11(3차 보완, 제품 오너 지시) — "계약·수업권 조건을 충족했는데
+  // 대기 안내만 받는" 상태로 남기지 않는다: 계약이 active면(M4가 이미
+  // 활성화 조건을 "기본계약 active"만으로 단순화했으므로, 정규 수업권
+  // 보유 여부와 무관하게) activate_subject_enrollment_if_ready()로 즉시
+  // planned→active까지 처리하고 정규 예약 후보로 넣는다. 정규 수업권이
+  // 실제로 부족하면(이 테스트처럼 수업권 grant 자체가 없어도) 여기서
+  // 막지 않고, 기존 설계 원칙 그대로 예약 확정 시점의 hold_entitlement()가
+  // "사용 가능한 수업권이 없습니다"로 최종 확인한다(2026-09-09 UAT 지적,
+  // 이 파일 상단 주석과 동일 원칙 — 정규든 체험이든 사전 차단하지 않는다).
+  it("계약이 active면 정규 수업권 보유 여부와 무관하게 즉시 활성화되어 정규 예약 후보가 된다", async () => {
     const supabase = makeSupabase({
       enrollments: planned,
       assignments,
-      grants: [{ id: "g-used", lessonTypeCode: "trial", remaining: 0 }],
+      grants: [{ id: "g-used", lessonTypeCode: "trial", remaining: 0 }], // 정규 수업권 grant 자체가 없음
       activationReadyByEnrollmentId: { "e-new": true },
     });
 
     const result = await loadLessonBookingData(supabase as never, "child6");
-    expect(result.bookableEnrollments).toEqual([]);
-    expect(result.pendingActivationSubjects).toEqual([
-      { subjectEnrollmentId: "e-new", subjectName: "SAT Math", teacherName: "박선생", reason: "no_entitlement" },
+    expect(result.bookableEnrollments).toEqual([
+      {
+        subjectEnrollmentId: "e-new",
+        subjectName: "SAT Math",
+        teacherId: "t1",
+        teacherName: "박선생",
+        lessonTypeId: "lt-regular",
+        lessonDurationMinutes: 120,
+        isTrial: false,
+      },
     ]);
-  });
-
-  it("계약도 active이고 정규 수업권도 있으면 '활성화 처리 대기'로 구분한다(수업권 없음으로 잘못 안내하지 않음)", async () => {
-    const supabase = makeSupabase({
-      enrollments: planned,
-      assignments,
-      grants: [
-        { id: "g-used", lessonTypeCode: "trial", remaining: 0 },
-        { id: "g-regular", lessonTypeCode: "regular", remaining: 5 },
-      ],
-      activationReadyByEnrollmentId: { "e-new": true },
-    });
-
-    const result = await loadLessonBookingData(supabase as never, "child7");
-    expect(result.bookableEnrollments).toEqual([]);
-    expect(result.pendingActivationSubjects).toEqual([
-      { subjectEnrollmentId: "e-new", subjectName: "SAT Math", teacherName: "박선생", reason: "activation_pending" },
-    ]);
+    expect(result.pendingActivationSubjects).toEqual([]);
   });
 
   it("재매칭 건이라도 체험수업권이 아직 남아있으면(미사용) 정상적으로 체험 후보로 남는다 — 종료 이력만으로 체험 기회를 없애지 않는다", async () => {
