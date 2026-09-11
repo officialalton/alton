@@ -12,11 +12,11 @@ vi.mock("./matching-actions", () => ({
 // students 전체(활성 학생 포함)를 보여주는 게 의도된 동작이라, 이 파일의
 // "매칭 대기 학생만 보인다" 단언과 충돌한다 — 자체 테스트(SubjectEnrollmentPanel용
 // 별도 테스트에서 다룸)가 있으므로 여기서는 mock으로 대체한다.
-const subjectEnrollmentPanelMock = vi.fn(() => null);
+const subjectEnrollmentPanelMock = vi.fn((_props: unknown) => null);
 vi.mock("./SubjectEnrollmentPanel", () => ({
   default: (props: unknown) => subjectEnrollmentPanelMock(props),
 }));
-const terminationPanelMock = vi.fn(() => null);
+const terminationPanelMock = vi.fn((_props: unknown) => null);
 vi.mock("./TeacherAssignmentTerminationPanel", () => ({
   default: (props: unknown) => terminationPanelMock(props),
 }));
