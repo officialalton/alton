@@ -57,10 +57,10 @@ export async function createGuardianAndStudentThenRedirect(params: {
     // Auth 계정은 있는데 profiles가 없다 — 이 이메일로 만들어진 진짜 "무관한
     // 기존 계정"일 수도 있고, 이전 시도가 createUser() 성공 직후(record_pending
     // 호출 전) 죽어서 남은 이 온보딩 자신의 고아 계정일 수도 있다. 이메일이
-    // 같다는 사실만으로는 구분할 수 없으므로, createUser() 시점에 남겨둔
-    // raw_user_meta_data.trial_onboarding_link_id로 실제 소유를 증명한다.
-    const { data: orphanUser, error: orphanError } = await admin.auth.admin.getUserById(existingGuardianId.data as string);
-    if (orphanError || orphanUser?.user?.user_metadata?.trial_onboarding_link_id !== params.linkId) {
+    // 같다는 사실만으로는 구분할 수 없다 — verifyOrphanOwnership()이 서버만
+    // 쓸 수 있는 증거로 판정한다(사용자가 조작 가능한 값은 신뢰하지 않음).
+    const owned = await verifyOrphanOwnership(admin, existingGuardianId.data as string, params.linkId);
+    if (!owned) {
       return redirectWithError(params.url, "이미 사용 중인 이메일입니다. 관리자에게 문의해주세요.");
     }
     // 이 온보딩이 직전 시도에서 만든 고아 계정임이 증명됐다 — claim을 잡고
@@ -69,6 +69,47 @@ export async function createGuardianAndStudentThenRedirect(params: {
   }
 
   return withClaim(admin, params, null);
+}
+
+// 2026-09-11(제품 오너 재검토) — 이 계정이 "이 온보딩 링크가 실제로 만든
+// 계정"인지는 사용자가 조작할 수 없는 증거로만 판정해야 한다.
+// admin.auth.admin.createUser()의 user_metadata(raw_user_meta_data)는
+// 클라이언트가 로그인 후 supabase.auth.updateUser({ data: {...} })로 직접
+// 고쳐 쓸 수 있는 값이다 — 사용자가 임의의 trial_onboarding_link_id를 넣어
+// 무관한 자기 계정을 다른 사람의 온보딩 링크에 연결시키는 것을 막을 수
+// 없다는 뜻이다. app_metadata(raw_app_meta_data)는 service_role(관리자
+// API)로만 쓸 수 있고 클라이언트 세션으로는 절대 고칠 수 없으므로, 소유
+// 증거는 반드시 여기에 남기고 여기서만 읽는다. 추가로, 이 auth id가 다른
+// 온보딩 링크의 pending/redeemed 계정으로도 걸려 있지 않은지(=한 계정이
+// 여러 링크에 걸쳐 혼선되지 않는지) 확인해 서버 쪽 연결 정보 하나만으로
+// 판단하지 않는다.
+async function verifyOrphanOwnership(
+  admin: ReturnType<typeof createAdminClient>,
+  candidateAuthUserId: string,
+  linkId: string
+): Promise<boolean> {
+  const { data: candidate, error: getError } = await admin.auth.admin.getUserById(candidateAuthUserId);
+  if (getError || !candidate?.user) return false;
+  if (candidate.user.app_metadata?.trial_onboarding_link_id !== linkId) return false;
+  // 이 계정이 "실제로 이 온보딩이 발급한 확인 이메일을 확인해 만들어졌다"는
+  // 근거(생성 시 email_confirm: true로 확정) — user_metadata와 달리
+  // 클라이언트가 스스로 이메일을 재확인 처리할 수는 없다.
+  if (!candidate.user.email_confirmed_at) return false;
+
+  const { data: crossLinkRows, error: crossLinkError } = await admin
+    .from("trial_onboarding_links")
+    .select("id")
+    .neq("id", linkId)
+    .or(`pending_guardian_auth_user_id.eq.${candidateAuthUserId},redeemed_auth_user_id.eq.${candidateAuthUserId}`);
+  if (crossLinkError) {
+    console.error("고아 계정 교차 링크 확인 실패(안전하게 거부):", candidateAuthUserId, crossLinkError);
+    return false;
+  }
+  if (crossLinkRows && crossLinkRows.length > 0) {
+    console.error("고아 계정이 다른 온보딩 링크에도 걸려 있어 재사용을 거부합니다:", candidateAuthUserId, crossLinkRows);
+    return false;
+  }
+  return true;
 }
 
 // claim을 잡고 신규(혹은 증명된 고아) 보호자 계정 생성/재사용 경로를 진행한다.
@@ -119,11 +160,13 @@ async function withClaim(
       const { data: guardianCreated, error: guardianCreateError } = await admin.auth.admin.createUser({
         email: params.guardianEmail,
         email_confirm: true,
-        // trial_onboarding_link_id — 이 계정이 "이 온보딩 링크가 실제로 만든
-        // 계정"임을 나중에 증명하기 위한 태그(위 getUserById 기반 고아 복구
-        // 로직이 참조한다). 이메일 일치만으로 무관한 계정을 재사용하지 않기
-        // 위한 근거.
-        user_metadata: { name: params.guardianName, trial_onboarding_link_id: params.linkId },
+        user_metadata: { name: params.guardianName },
+        // trial_onboarding_link_id는 app_metadata(raw_app_meta_data)에만
+        // 남긴다 — user_metadata(raw_user_meta_data)는 사용자가 로그인 후
+        // supabase.auth.updateUser({ data: {...} })로 직접 고쳐 쓸 수 있어
+        // "이 계정이 이 온보딩이 만들었다"는 증거로 쓸 수 없다(verifyOrphanOwnership()
+        // 참고). app_metadata는 service_role만 쓸 수 있다.
+        app_metadata: { trial_onboarding_link_id: params.linkId },
       });
       if (guardianCreateError || !guardianCreated?.user) {
         // 2026-09-11 — claim으로 동시 생성 시도를 직렬화했으므로, 여기서 나는

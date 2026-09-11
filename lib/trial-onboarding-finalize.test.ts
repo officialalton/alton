@@ -10,9 +10,16 @@ const updateEqMock = vi.fn().mockResolvedValue({ error: null });
 // 계정에 profiles 행이 있는지"를 확인하는 체인. 기본값은 "있음"(정상적인
 // 기존 보호자)으로 두고, 고아 계정 시나리오를 검증하는 테스트만 null로 덮는다.
 const profilesMaybeSingleMock = vi.fn().mockResolvedValue({ data: { id: "existing-guardian-id" } });
+// trial_onboarding_links.select("id").neq(...).or(...) — 고아 계정이 다른
+// 링크에도 걸려 있는지 확인하는 교차 조회. 기본값은 "없음"(정상적인 단일
+// 링크 소유).
+const crossLinkOrMock = vi.fn().mockResolvedValue({ data: [], error: null });
 const fromMock = vi.fn((table: string) => {
   if (table === "profiles") {
     return { select: () => ({ eq: () => ({ eq: () => ({ maybeSingle: profilesMaybeSingleMock }) }) }) };
+  }
+  if (table === "trial_onboarding_links") {
+    return { select: () => ({ neq: () => ({ or: crossLinkOrMock }) }) };
   }
   return { update: () => ({ eq: updateEqMock }) };
 });
@@ -107,6 +114,7 @@ beforeEach(() => {
   getStudentsCallCount = 0;
   updateEqMock.mockResolvedValue({ error: null });
   profilesMaybeSingleMock.mockResolvedValue({ data: { id: "existing-guardian-id" } });
+  crossLinkOrMock.mockResolvedValue({ data: [], error: null });
   createUserMock
     .mockResolvedValueOnce({ data: { user: { id: "guardian-id" } }, error: null })
     .mockResolvedValueOnce({ data: { user: { id: "student-id" } }, error: null });
@@ -223,7 +231,9 @@ describe("createGuardianAndStudentThenRedirect — 고아 Auth 계정 복구(부
     });
     profilesMaybeSingleMock.mockResolvedValue({ data: null }); // profiles 없음 — 고아 상태
     getUserByIdMock.mockResolvedValueOnce({
-      data: { user: { email: "guardian@example.com", user_metadata: { trial_onboarding_link_id: "link-1" } } },
+      // app_metadata(=raw_app_meta_data, service_role만 쓸 수 있음)에만
+      // 근거를 둔다 — user_metadata는 신뢰하지 않는다는 것을 아래 테스트가 증명한다.
+      data: { user: { email: "guardian@example.com", email_confirmed_at: "2026-09-11T00:00:00Z", app_metadata: { trial_onboarding_link_id: "link-1" }, user_metadata: {} } },
       error: null,
     });
     createUserMock.mockReset().mockResolvedValueOnce({ data: { user: { id: "student-id" } }, error: null });
@@ -246,9 +256,9 @@ describe("createGuardianAndStudentThenRedirect — 고아 Auth 계정 복구(부
       return defaultRpcImpl(fnName);
     });
     profilesMaybeSingleMock.mockResolvedValue({ data: null });
-    // metadata가 없거나 다른 링크를 가리킴 — 이 온보딩이 만든 계정이라는 증거 없음.
+    // app_metadata가 없거나 다른 링크를 가리킴 — 이 온보딩이 만든 계정이라는 증거 없음.
     getUserByIdMock.mockResolvedValueOnce({
-      data: { user: { email: "guardian@example.com", user_metadata: {} } },
+      data: { user: { email: "guardian@example.com", email_confirmed_at: "2026-09-11T00:00:00Z", app_metadata: {}, user_metadata: {} } },
       error: null,
     });
 
@@ -256,6 +266,64 @@ describe("createGuardianAndStudentThenRedirect — 고아 Auth 계정 복구(부
 
     expect(createUserMock).not.toHaveBeenCalled();
     expect(rpcMock).not.toHaveBeenCalledWith("claim_trial_onboarding_link_finalize", expect.anything());
+    expect(decodeURIComponent(res.headers.get("location") ?? "")).toContain("이미 사용 중인 이메일");
+  });
+
+  it("사용자가 로그인 후 스스로 고쳐 쓸 수 있는 user_metadata에 가짜 trial_onboarding_link_id를 넣어도 소유 증거로 인정하지 않는다(app_metadata만 신뢰)", async () => {
+    // 2026-09-11(제품 오너 재검토) — user_metadata(raw_user_meta_data)는
+    // supabase.auth.updateUser({ data: {...} })로 사용자 본인이 직접 고칠 수
+    // 있다. 이 필드에 다른 사람의 온보딩 링크 id를 넣어 무관한 자기 계정을
+    // 그 링크에 연결시키려는 시도를 흉내낸다 — app_metadata가 비어있으므로
+    // (또는 다른 값이므로) 거부돼야 한다.
+    rpcMock.mockImplementation((fnName: string) => {
+      if (fnName === "find_auth_user_id_by_email") {
+        return Promise.resolve({ data: "attacker-account-id", error: null });
+      }
+      return defaultRpcImpl(fnName);
+    });
+    profilesMaybeSingleMock.mockResolvedValue({ data: null });
+    getUserByIdMock.mockResolvedValueOnce({
+      data: {
+        user: {
+          email: "guardian@example.com",
+          email_confirmed_at: "2026-09-11T00:00:00Z",
+          app_metadata: {}, // 서버만 쓸 수 있는 필드 — 조작되지 않았다.
+          user_metadata: { trial_onboarding_link_id: "link-1" }, // 사용자가 직접 써넣은 값.
+        },
+      },
+      error: null,
+    });
+
+    const res = await createGuardianAndStudentThenRedirect(BASE_PARAMS);
+
+    expect(createUserMock).not.toHaveBeenCalled();
+    expect(decodeURIComponent(res.headers.get("location") ?? "")).toContain("이미 사용 중인 이메일");
+  });
+
+  it("app_metadata는 일치해도 이 계정이 다른 온보딩 링크의 pending/redeemed 계정으로도 걸려 있으면(교차 링크) 재사용을 거부한다", async () => {
+    rpcMock.mockImplementation((fnName: string) => {
+      if (fnName === "find_auth_user_id_by_email") {
+        return Promise.resolve({ data: "cross-linked-account-id", error: null });
+      }
+      return defaultRpcImpl(fnName);
+    });
+    profilesMaybeSingleMock.mockResolvedValue({ data: null });
+    getUserByIdMock.mockResolvedValueOnce({
+      data: {
+        user: {
+          email: "guardian@example.com",
+          email_confirmed_at: "2026-09-11T00:00:00Z",
+          app_metadata: { trial_onboarding_link_id: "link-1" },
+          user_metadata: {},
+        },
+      },
+      error: null,
+    });
+    crossLinkOrMock.mockResolvedValueOnce({ data: [{ id: "some-other-link" }], error: null });
+
+    const res = await createGuardianAndStudentThenRedirect(BASE_PARAMS);
+
+    expect(createUserMock).not.toHaveBeenCalled();
     expect(decodeURIComponent(res.headers.get("location") ?? "")).toContain("이미 사용 중인 이메일");
   });
 });
