@@ -9,6 +9,7 @@
 // DirectAccountLinksList)는 로직 변경 없이 그대로 옮겼다.
 
 import { useRef } from "react";
+import AddChildToGuardianForm from "./AddChildToGuardianForm";
 import DirectAccountCreationForm from "./DirectAccountCreationForm";
 import DirectAccountLinksList, { type DirectAccountLinksListHandle } from "./DirectAccountLinksList";
 
@@ -19,10 +20,12 @@ export default function AccountCreationTab() {
     <div className="max-w-[640px] px-8 py-8">
       <h1 className="text-[20px] font-extrabold text-ink mb-1.5">계정 생성</h1>
       <p className="text-[13px] text-grey-500 mb-5">
-        상담 없이 보호자+학생 계정을 바로 만듭니다. 발송·생성 결과와 자녀별 계정 상태는 아래
-        발송 내역에서 확인·재발송할 수 있습니다.
+        상담 없이 계정을 바로 만듭니다. <b>부모 계정 생성</b>은 보호자와 자녀를 함께 새로
+        만들고, <b>자녀 추가</b>는 이미 계정이 있는 주 보호자에게 자녀 1명을 더합니다. 발송·생성
+        결과와 자녀별 계정 상태는 아래 발송 내역에서 확인·재발송할 수 있습니다.
       </p>
       <DirectAccountCreationForm onSent={() => linksListRef.current?.refresh()} />
+      <AddChildToGuardianForm onSent={() => linksListRef.current?.refresh()} />
       <DirectAccountLinksList ref={linksListRef} />
     </div>
   );

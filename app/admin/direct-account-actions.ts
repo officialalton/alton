@@ -14,6 +14,7 @@ import { createAdminClient } from "@/lib/supabase-admin";
 import { sendEmail, escapeHtml } from "@/lib/email";
 import { currentRequestOrigin } from "@/lib/request-origin";
 import { findExistingAuthEmailCollisions, type OnboardingEmailCollision } from "@/lib/onboarding-email-guard";
+import { loadEmailById } from "./users-data";
 
 const CONSULT_CAPABILITY = "manage_consultations";
 const SIMPLE_EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -336,4 +337,174 @@ export async function cancelDirectOnboardingLinkStudentAction(
     p_reason: reason ?? null,
   });
   if (error) throw new Error(error.message);
+}
+
+// =========================================================================
+// 2026-09-11(P4-1) — 기존 주 보호자에게 자녀 추가.
+//
+// 조사 문서(docs/2026-09-10-p4-1-account-expansion-and-household-archive-
+// investigation.md A절)의 결론대로 **새 RPC·새 링크 타입·마이그레이션 없이**
+// 위의 직접 생성 경로를 그대로 재사용한다. "기존 보호자 이메일 + 학생 1명"으로
+// create_direct_onboarding_link_multi를 부르면, redeem 시점에
+// lib/trial-onboarding-finalize.ts가 보호자 Auth 계정이 이미 있음을 확인하고
+// p_new_guardian=false 분기를 타서 기존 household에 자녀만 추가한다.
+// 발송 경로가 갈라지지 않도록 여기서도 sendDirectOnboardingNoticeInternal()
+// 하나만 호출한다(자녀 이메일 중복 차단·이벤트 로그·발송 내역 목록 포함).
+//
+// 확정 정책(2026-09-11): 대상은 **주 보호자만**이다. 공동 보호자는 1차 범위
+// 밖이며, finalize_trial_onboarding_students의 기존 보호자 분기가
+// households.primary_guardian_id로만 가구를 찾기 때문에(20261272000000 마이그레이션
+// :85-89) 후보 목록도 같은 기준으로 만든다 — "선택은 되는데 redeem에서 실패"를
+// 원천 차단하기 위함이다.
+// =========================================================================
+
+export type PrimaryGuardianCandidate = {
+  guardianId: string;
+  name: string;
+  email: string;
+  childrenNames: string[];
+};
+
+// 이름은 부분 일치, 이메일은 정확 일치로 찾는다 — auth.users는 PostgREST로 조인할
+// 수 없어 이메일 부분 검색을 하려면 새 SECURITY DEFINER 함수가 필요한데, 이번
+// 범위에서 마이그레이션을 추가하지 않기 위해 기존 find_auth_user_id_by_email
+// (정확 일치)을 그대로 쓴다. 관리자는 보통 보호자 이름으로 찾는다.
+export async function searchPrimaryGuardiansAction(query: string): Promise<PrimaryGuardianCandidate[]> {
+  await requireAdminOrCapability(CONSULT_CAPABILITY);
+  const q = query.trim();
+  if (q.length < 2) return [];
+  const admin = createAdminClient();
+
+  const candidateIds = new Set<string>();
+
+  const { data: byName, error: byNameError } = await admin
+    .from("profiles")
+    .select("id, name")
+    .eq("role", "parent")
+    .ilike("name", `%${q}%`)
+    .limit(50);
+  if (byNameError) throw new Error(byNameError.message);
+  for (const p of byName ?? []) candidateIds.add(p.id);
+
+  if (q.includes("@")) {
+    const { data: byEmail, error: byEmailError } = await admin.rpc("find_auth_user_id_by_email", { p_email: q });
+    if (byEmailError) throw new Error(byEmailError.message);
+    if (byEmail) candidateIds.add(byEmail as string);
+  }
+  if (candidateIds.size === 0) return [];
+
+  // 주 보호자만 남긴다(= 이 계정이 primary_guardian_id인 household가 있는 경우).
+  const { data: households, error: householdsError } = await admin
+    .from("households")
+    .select("id, primary_guardian_id, created_at")
+    .in("primary_guardian_id", Array.from(candidateIds))
+    .order("created_at", { ascending: true });
+  if (householdsError) throw new Error(householdsError.message);
+  if (!households?.length) return [];
+
+  // 한 보호자가 여러 household의 주 보호자인 비정상 데이터가 있어도 finalize와
+  // 동일하게 "가장 먼저 만들어진 것 1개"만 본다(20261272000000 :84, :86).
+  const householdByGuardian = new Map<string, string>();
+  for (const h of households) {
+    if (h.primary_guardian_id && !householdByGuardian.has(h.primary_guardian_id)) {
+      householdByGuardian.set(h.primary_guardian_id, h.id);
+    }
+  }
+  const guardianIds = Array.from(householdByGuardian.keys()).slice(0, 20);
+  const householdIds = guardianIds.map((g) => householdByGuardian.get(g)!);
+
+  const { data: childLinks, error: childError } = await admin
+    .from("household_members")
+    .select("household_id, child:profiles(name)")
+    .eq("role", "child")
+    .in("household_id", householdIds);
+  if (childError) throw new Error(childError.message);
+
+  const childrenByHousehold = new Map<string, string[]>();
+  for (const l of childLinks ?? []) {
+    const rel = Array.isArray(l.child) ? l.child[0] : l.child;
+    const name = (rel as { name?: string } | null)?.name ?? "";
+    const list = childrenByHousehold.get(l.household_id) ?? [];
+    if (name) list.push(name);
+    childrenByHousehold.set(l.household_id, list);
+  }
+
+  const nameById = new Map((byName ?? []).map((p) => [p.id, p.name ?? ""]));
+  const missingNameIds = guardianIds.filter((id) => !nameById.has(id));
+  if (missingNameIds.length > 0) {
+    const { data: extraProfiles, error: extraError } = await admin
+      .from("profiles")
+      .select("id, name, role")
+      .in("id", missingNameIds);
+    if (extraError) throw new Error(extraError.message);
+    for (const p of extraProfiles ?? []) {
+      if (p.role === "parent") nameById.set(p.id, p.name ?? "");
+    }
+  }
+
+  const emailById = await loadEmailById(guardianIds);
+
+  return guardianIds
+    // 이메일을 확인할 수 없는 계정은 애초에 발송 대상이 될 수 없으므로 후보에서 뺀다.
+    .filter((id) => nameById.has(id) && (emailById.get(id) ?? "").length > 0)
+    .map((id) => ({
+      guardianId: id,
+      name: nameById.get(id) ?? "",
+      email: emailById.get(id) ?? "",
+      childrenNames: childrenByHousehold.get(householdByGuardian.get(id)!) ?? [],
+    }));
+}
+
+export async function sendAddChildToGuardianNoticeAction(params: {
+  guardianId: string;
+  student: DirectOnboardingStudentInput;
+}): Promise<SendDirectOnboardingNoticeResult> {
+  try {
+    return await sendAddChildToGuardianNoticeInternal(params);
+  } catch (e) {
+    const message = e instanceof Error ? e.message : String(e);
+    return { status: "failed", linkId: "", error: message };
+  }
+}
+
+async function sendAddChildToGuardianNoticeInternal(params: {
+  guardianId: string;
+  student: DirectOnboardingStudentInput;
+}): Promise<SendDirectOnboardingNoticeResult> {
+  await requireAdminOrCapability(CONSULT_CAPABILITY);
+  const admin = createAdminClient();
+
+  // 클라이언트가 보낸 보호자 이메일·이름을 신뢰하지 않는다 — id만 받아 서버에서
+  // 다시 해석하고, finalize와 똑같은 조건(주 보호자 + role='parent')으로 검증한다.
+  const { data: household, error: householdError } = await admin
+    .from("households")
+    .select("id")
+    .eq("primary_guardian_id", params.guardianId)
+    .order("created_at", { ascending: true })
+    .limit(1)
+    .maybeSingle();
+  if (householdError) throw new Error(householdError.message);
+  if (!household) {
+    throw new Error("주 보호자가 아니거나 연결된 가구가 없는 계정입니다 — 자녀 추가는 주 보호자에게만 할 수 있습니다.");
+  }
+
+  const { data: profile, error: profileError } = await admin
+    .from("profiles")
+    .select("name, role")
+    .eq("id", params.guardianId)
+    .maybeSingle();
+  if (profileError) throw new Error(profileError.message);
+  if (!profile || profile.role !== "parent") throw new Error("보호자 계정이 아닙니다.");
+  const guardianName = (profile.name ?? "").trim();
+  if (!guardianName) throw new Error("보호자 이름이 비어 있어 안내를 보낼 수 없습니다 — 관리자에게 문의해주세요.");
+
+  const emailById = await loadEmailById([params.guardianId]);
+  const guardianEmail = emailById.get(params.guardianId) ?? "";
+  if (!guardianEmail) throw new Error("보호자 이메일을 확인할 수 없습니다 — 관리자에게 문의해주세요.");
+
+  return sendDirectOnboardingNoticeInternal({
+    guardianEmail,
+    guardianName,
+    students: [params.student],
+  });
 }

@@ -71,7 +71,7 @@ export default function DirectAccountCreationForm({ onSent }: { onSent?: () => v
           }}
           className="text-[12.5px] font-bold px-4 py-2.5 rounded-lg border-[1.5px] border-grey-200 text-ink w-full"
         >
-          + 계정 생성
+          + 부모 계정 생성
         </button>
         <ToastStack toasts={toasts} dismiss={dismiss} />
       </div>
