@@ -369,7 +369,8 @@ migration은 만들지 않음)을 한 보드에서 관리하도록 이관했다.
     뜨는 것 자체는 `account-creation-kanban-merge.test.ts` 단위 테스트로만
     검증했다 — Preview UAT에서 실제 계정 생성 건으로 카드 노출까지
     확인이 필요하다.
-- **배포**: migration 없음. 커밋 push 완료, Preview 배포 완료.
+- **배포**: migration 없음. 커밋 `c379490` push 완료, Preview 배포 완료
+  `https://alton-abcd2hcf4-alton7.vercel.app`(`target: preview` 확인).
   Production 미적용.
 - **범위 밖(P4-3, 별도 후속 배치로 유지)**: 관리자 문서 탭(회사 문서/
   계약/동의서)과 지정 Google Drive 폴더 연동은 사용자 확인대로 이번
