@@ -1,5 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+vi.mock("next/cache", () => ({ revalidatePath: vi.fn() }));
+
 vi.mock("@/lib/auth", () => ({
   requireUser: vi.fn().mockResolvedValue({ user: { id: "student1" }, supabase: {} }),
 }));

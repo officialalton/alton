@@ -6,7 +6,16 @@ const deleteUserMock = vi.fn().mockResolvedValue({ error: null });
 const getUserByIdMock = vi.fn();
 const rpcMock = vi.fn();
 const updateEqMock = vi.fn().mockResolvedValue({ error: null });
-const fromMock = vi.fn(() => ({ update: () => ({ eq: updateEqMock }) }));
+// profiles.select().eq().eq().maybeSingle() — "이미 존재하는 보호자 Auth
+// 계정에 profiles 행이 있는지"를 확인하는 체인. 기본값은 "있음"(정상적인
+// 기존 보호자)으로 두고, 고아 계정 시나리오를 검증하는 테스트만 null로 덮는다.
+const profilesMaybeSingleMock = vi.fn().mockResolvedValue({ data: { id: "existing-guardian-id" } });
+const fromMock = vi.fn((table: string) => {
+  if (table === "profiles") {
+    return { select: () => ({ eq: () => ({ eq: () => ({ maybeSingle: profilesMaybeSingleMock }) }) }) };
+  }
+  return { update: () => ({ eq: updateEqMock }) };
+});
 vi.mock("@/lib/supabase-admin", () => ({
   createAdminClient: () => ({
     auth: {
@@ -44,57 +53,64 @@ const BASE_PARAMS = {
 // 흉내낸다(첫 호출=pending, 이후 호출=created — finalize가 성공했다고 가정).
 let getStudentsCallCount = 0;
 
+// 기본 rpc 응답 — "이 호출이 유일한 진행자"(claim action: 'proceed')를
+// 가정한다. busy/already_redeemed를 검증하는 테스트는 이 함수를 감싸
+// claim_trial_onboarding_link_finalize 호출만 골라 덮어쓴다(mockImplementationOnce는
+// "다음 rpc 호출"을 가로채는데, find_auth_user_id_by_email이 claim보다 먼저
+// 호출되므로 함수 이름으로 구분해야 한다).
+function defaultRpcImpl(fnName: string): Promise<{ data: unknown; error: unknown }> {
+  if (fnName === "claim_trial_onboarding_link_finalize") {
+    return Promise.resolve({
+      data: [{ action: "proceed", redeemed_auth_user_id: null, pending_guardian_auth_user_id: null, claim_id: "claim-1" }],
+      error: null,
+    });
+  }
+  if (fnName === "record_pending_guardian_account") {
+    return Promise.resolve({ data: true, error: null });
+  }
+  if (fnName === "release_trial_onboarding_link_finalize_claim") {
+    return Promise.resolve({ data: null, error: null });
+  }
+  if (fnName === "find_auth_user_id_by_email") {
+    return Promise.resolve({ data: null, error: null });
+  }
+  if (fnName === "get_trial_onboarding_link_students") {
+    getStudentsCallCount += 1;
+    const created = getStudentsCallCount > 1;
+    return Promise.resolve({
+      data: [
+        {
+          id: "ls-1",
+          student_name: "학생",
+          student_email: "student@example.com",
+          student_grade: null,
+          student_subject: null,
+          status: created ? "created" : "pending",
+          child_auth_user_id: created ? "student-id" : null,
+          error: null,
+        },
+      ],
+      error: null,
+    });
+  }
+  if (fnName === "finalize_trial_onboarding_students") {
+    return Promise.resolve({
+      data: [{ household_id: "household-1", guardian_id: "guardian-id", created_count: 1, failed_count: 0 }],
+      error: null,
+    });
+  }
+  return Promise.resolve({ data: null, error: null });
+}
+
 beforeEach(() => {
   vi.clearAllMocks();
   getStudentsCallCount = 0;
   updateEqMock.mockResolvedValue({ error: null });
+  profilesMaybeSingleMock.mockResolvedValue({ data: { id: "existing-guardian-id" } });
   createUserMock
     .mockResolvedValueOnce({ data: { user: { id: "guardian-id" } }, error: null })
     .mockResolvedValueOnce({ data: { user: { id: "student-id" } }, error: null });
-  rpcMock.mockImplementation((fnName: string) => {
-    // 2026-09-11(온보딩 링크 재사용 시 혼란스러운 오류 수정) — claim/release
-    // 리스는 기본적으로 "이 호출이 유일한 진행자"(action: 'proceed')를
-    // 가정한다. busy/already_redeemed 분기는 해당 describe 블록에서 개별
-    // 테스트가 rpcMock.mockImplementationOnce로 덮어쓴다.
-    if (fnName === "claim_trial_onboarding_link_finalize") {
-      return Promise.resolve({
-        data: [{ action: "proceed", redeemed_auth_user_id: null, pending_guardian_auth_user_id: null }],
-        error: null,
-      });
-    }
-    if (fnName === "record_pending_guardian_account" || fnName === "release_trial_onboarding_link_finalize_claim") {
-      return Promise.resolve({ data: null, error: null });
-    }
-    if (fnName === "find_auth_user_id_by_email") {
-      return Promise.resolve({ data: null, error: null });
-    }
-    if (fnName === "get_trial_onboarding_link_students") {
-      getStudentsCallCount += 1;
-      const created = getStudentsCallCount > 1;
-      return Promise.resolve({
-        data: [
-          {
-            id: "ls-1",
-            student_name: "학생",
-            student_email: "student@example.com",
-            student_grade: null,
-            student_subject: null,
-            status: created ? "created" : "pending",
-            child_auth_user_id: created ? "student-id" : null,
-            error: null,
-          },
-        ],
-        error: null,
-      });
-    }
-    if (fnName === "finalize_trial_onboarding_students") {
-      return Promise.resolve({
-        data: [{ household_id: "household-1", guardian_id: "guardian-id", created_count: 1, failed_count: 0 }],
-        error: null,
-      });
-    }
-    return Promise.resolve({ error: null });
-  });
+  rpcMock.mockImplementation(defaultRpcImpl);
   generateLinkMock.mockImplementation(async ({ email }: { email: string }) => ({
     data: { properties: { hashed_token: `hash-for-${email}` } },
     error: null,
@@ -108,8 +124,10 @@ beforeEach(() => {
 // action(busy/already_redeemed/proceed)에 따라 분기가 실제로 갈리는지 검증한다.
 describe("createGuardianAndStudentThenRedirect — 온보딩 링크 재사용(claim/lease)", () => {
   it("다른 요청이 리스를 쥐고 있으면(action: busy) 계정 생성 없이 재시도 안내로 리다이렉트한다", async () => {
-    rpcMock.mockImplementationOnce(() =>
-      Promise.resolve({ data: [{ action: "busy", redeemed_auth_user_id: null, pending_guardian_auth_user_id: null }], error: null })
+    rpcMock.mockImplementation((fnName: string) =>
+      fnName === "claim_trial_onboarding_link_finalize"
+        ? Promise.resolve({ data: [{ action: "busy", redeemed_auth_user_id: null, pending_guardian_auth_user_id: null, claim_id: null }], error: null })
+        : defaultRpcImpl(fnName)
     );
 
     const res = await createGuardianAndStudentThenRedirect(BASE_PARAMS);
@@ -120,11 +138,13 @@ describe("createGuardianAndStudentThenRedirect — 온보딩 링크 재사용(cl
   });
 
   it("이미 redeemed된 링크(같은 이메일로 이미 성공)는 계정을 다시 만들지 않고 로그인 링크로 안내한다", async () => {
-    rpcMock.mockImplementationOnce(() =>
-      Promise.resolve({
-        data: [{ action: "already_redeemed", redeemed_auth_user_id: "guardian-id", pending_guardian_auth_user_id: null }],
-        error: null,
-      })
+    rpcMock.mockImplementation((fnName: string) =>
+      fnName === "claim_trial_onboarding_link_finalize"
+        ? Promise.resolve({
+            data: [{ action: "already_redeemed", redeemed_auth_user_id: "guardian-id", pending_guardian_auth_user_id: null, claim_id: null }],
+            error: null,
+          })
+        : defaultRpcImpl(fnName)
     );
     getUserByIdMock.mockResolvedValueOnce({ data: { user: { email: "guardian@example.com" } }, error: null });
 
@@ -136,11 +156,13 @@ describe("createGuardianAndStudentThenRedirect — 온보딩 링크 재사용(cl
   });
 
   it("already_redeemed인데 이메일이 이 요청과 다르면(데이터 불일치) 계정으로 안내하지 않고 관리자 문의로 막는다", async () => {
-    rpcMock.mockImplementationOnce(() =>
-      Promise.resolve({
-        data: [{ action: "already_redeemed", redeemed_auth_user_id: "other-guardian-id", pending_guardian_auth_user_id: null }],
-        error: null,
-      })
+    rpcMock.mockImplementation((fnName: string) =>
+      fnName === "claim_trial_onboarding_link_finalize"
+        ? Promise.resolve({
+            data: [{ action: "already_redeemed", redeemed_auth_user_id: "other-guardian-id", pending_guardian_auth_user_id: null, claim_id: null }],
+            error: null,
+          })
+        : defaultRpcImpl(fnName)
     );
     getUserByIdMock.mockResolvedValueOnce({ data: { user: { email: "someone-else@example.com" } }, error: null });
 
@@ -152,11 +174,13 @@ describe("createGuardianAndStudentThenRedirect — 온보딩 링크 재사용(cl
   });
 
   it("보호자 계정 생성 후 학생 계정 생성이 실패해도 재시도 시 pending_guardian_auth_user_id를 재사용해 보호자 계정을 중복 생성하지 않는다", async () => {
-    rpcMock.mockImplementationOnce(() =>
-      Promise.resolve({
-        data: [{ action: "proceed", redeemed_auth_user_id: null, pending_guardian_auth_user_id: "already-created-guardian-id" }],
-        error: null,
-      })
+    rpcMock.mockImplementation((fnName: string) =>
+      fnName === "claim_trial_onboarding_link_finalize"
+        ? Promise.resolve({
+            data: [{ action: "proceed", redeemed_auth_user_id: null, pending_guardian_auth_user_id: "already-created-guardian-id", claim_id: "claim-1" }],
+            error: null,
+          })
+        : defaultRpcImpl(fnName)
     );
     createUserMock.mockReset().mockResolvedValueOnce({ data: { user: { id: "student-id" } }, error: null });
 
@@ -166,6 +190,73 @@ describe("createGuardianAndStudentThenRedirect — 온보딩 링크 재사용(cl
     // 학생 1명분(1회)만 호출돼야 한다 — 보호자용 호출이 없어야 한다.
     expect(createUserMock).toHaveBeenCalledTimes(1);
     expect(createUserMock).toHaveBeenCalledWith(expect.objectContaining({ email: "student@example.com" }));
+  });
+
+  it("record_pending_guardian_account가 claim 소유권 상실을 알리면(false) 방금 만든 보호자 계정을 정리하고 재시도를 안내한다", async () => {
+    // 2026-09-11(제품 오너 재검토) — createUser() 성공 직후, record 호출
+    // 사이에 리스가 만료돼 다른 요청이 새 claim_id로 넘겨받은 상황을 흉내낸다.
+    rpcMock.mockImplementation((fnName: string) => {
+      if (fnName === "record_pending_guardian_account") {
+        return Promise.resolve({ data: false, error: null });
+      }
+      return defaultRpcImpl(fnName);
+    });
+
+    const res = await createGuardianAndStudentThenRedirect(BASE_PARAMS);
+
+    expect(deleteUserMock).toHaveBeenCalledWith("guardian-id");
+    // claim을 잃었으므로 학생 계정 생성으로 진행하지 않는다.
+    expect(createUserMock).toHaveBeenCalledTimes(1);
+    expect(decodeURIComponent(res.headers.get("location") ?? "")).toContain("충돌");
+  });
+});
+
+describe("createGuardianAndStudentThenRedirect — 고아 Auth 계정 복구(부분 실패 후 재시도)", () => {
+  it("이메일이 이미 auth.users에 있어도 profiles가 없고 이 온보딩 링크가 만든 계정임이 metadata로 증명되면 재사용한다", async () => {
+    // 2026-09-11(제품 오너 재검토) — createUser() 성공 직후(record_pending_guardian_account
+    // 호출 전) 프로세스가 죽어 고아 계정만 남은 상태의 재시도를 흉내낸다.
+    rpcMock.mockImplementation((fnName: string) => {
+      if (fnName === "find_auth_user_id_by_email") {
+        return Promise.resolve({ data: "orphan-guardian-id", error: null });
+      }
+      return defaultRpcImpl(fnName);
+    });
+    profilesMaybeSingleMock.mockResolvedValue({ data: null }); // profiles 없음 — 고아 상태
+    getUserByIdMock.mockResolvedValueOnce({
+      data: { user: { email: "guardian@example.com", user_metadata: { trial_onboarding_link_id: "link-1" } } },
+      error: null,
+    });
+    createUserMock.mockReset().mockResolvedValueOnce({ data: { user: { id: "student-id" } }, error: null });
+
+    await createGuardianAndStudentThenRedirect(BASE_PARAMS);
+
+    // 보호자 계정을 새로 만들지 않고(createUser는 학생 1명분만) 고아 계정(orphan-guardian-id)을
+    // 재사용해 finalize까지 이어져야 한다.
+    expect(createUserMock).toHaveBeenCalledTimes(1);
+    expect(createUserMock).toHaveBeenCalledWith(expect.objectContaining({ email: "student@example.com" }));
+    const finalizeCall = rpcMock.mock.calls.find((c) => c[0] === "finalize_trial_onboarding_students");
+    expect(finalizeCall?.[1]).toMatchObject({ p_guardian_auth_user_id: "orphan-guardian-id", p_new_guardian: true });
+  });
+
+  it("이메일이 auth.users에 있고 profiles도 없는데 이 온보딩 링크가 만든 계정이라는 증거가 없으면(무관한 계정) 병합하지 않고 관리자 문의로 막는다", async () => {
+    rpcMock.mockImplementation((fnName: string) => {
+      if (fnName === "find_auth_user_id_by_email") {
+        return Promise.resolve({ data: "unrelated-account-id", error: null });
+      }
+      return defaultRpcImpl(fnName);
+    });
+    profilesMaybeSingleMock.mockResolvedValue({ data: null });
+    // metadata가 없거나 다른 링크를 가리킴 — 이 온보딩이 만든 계정이라는 증거 없음.
+    getUserByIdMock.mockResolvedValueOnce({
+      data: { user: { email: "guardian@example.com", user_metadata: {} } },
+      error: null,
+    });
+
+    const res = await createGuardianAndStudentThenRedirect(BASE_PARAMS);
+
+    expect(createUserMock).not.toHaveBeenCalled();
+    expect(rpcMock).not.toHaveBeenCalledWith("claim_trial_onboarding_link_finalize", expect.anything());
+    expect(decodeURIComponent(res.headers.get("location") ?? "")).toContain("이미 사용 중인 이메일");
   });
 });
 
@@ -234,7 +325,7 @@ describe("createGuardianAndStudentThenRedirect — 부분 실패 시 고아 Auth
     rpcMock.mockImplementation((fnName: string) => {
       if (fnName === "claim_trial_onboarding_link_finalize") {
         return Promise.resolve({
-          data: [{ action: "proceed", redeemed_auth_user_id: null, pending_guardian_auth_user_id: null }],
+          data: [{ action: "proceed", redeemed_auth_user_id: null, pending_guardian_auth_user_id: null, claim_id: "claim-1" }],
           error: null,
         });
       }
@@ -259,7 +350,7 @@ describe("createGuardianAndStudentThenRedirect — 부분 실패 시 고아 Auth
       if (fnName === "finalize_trial_onboarding_students") {
         return Promise.resolve({ error: { message: "finalize boom" } });
       }
-      return Promise.resolve({ error: null });
+      return defaultRpcImpl(fnName);
     });
 
     await createGuardianAndStudentThenRedirect(BASE_PARAMS);
@@ -280,7 +371,7 @@ describe("createGuardianAndStudentThenRedirect — 복수 자녀", () => {
     rpcMock.mockImplementation((fnName: string) => {
       if (fnName === "claim_trial_onboarding_link_finalize") {
         return Promise.resolve({
-          data: [{ action: "proceed", redeemed_auth_user_id: null, pending_guardian_auth_user_id: null }],
+          data: [{ action: "proceed", redeemed_auth_user_id: null, pending_guardian_auth_user_id: null, claim_id: "claim-1" }],
           error: null,
         });
       }
@@ -323,7 +414,7 @@ describe("createGuardianAndStudentThenRedirect — 복수 자녀", () => {
           error: null,
         });
       }
-      return Promise.resolve({ error: null });
+      return defaultRpcImpl(fnName);
     });
 
     const res = await createGuardianAndStudentThenRedirect(BASE_PARAMS);

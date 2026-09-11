@@ -6,6 +6,7 @@
 // 쓰기(confirm_lesson_booking 등 service_role 전용 RPC)는 lib/booking/create-booking.ts가
 // admin 클라이언트로 수행한다.
 
+import { revalidatePath } from "next/cache";
 import { requireUser } from "@/lib/auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import {
@@ -53,6 +54,9 @@ export async function createLessonBookingForChild(
 
     const idempotencyKey = `guardian-booking:${params.childId}:${params.subjectEnrollmentId}:${params.startsAt.toISOString()}`;
     const data = await confirmLessonBooking({ ...params, idempotencyKey });
+    // 2026-09-11(UAT 발견, 학생 booking-actions.ts와 동일 원칙) — 클라이언트
+    // router.refresh()만으로는 "예정된 수업" 목록이 즉시 반영되지 않던 문제.
+    revalidatePath("/parent");
     return { ok: true, data };
   } catch (e) {
     return { ok: false, ...toBookingActionOutcomeError(e) };
@@ -81,6 +85,7 @@ export async function createWeeklyLessonSeriesForChild(
 
     const idempotencyKeyPrefix = `guardian-series:${params.childId}:${params.subjectEnrollmentId}:${params.firstStartsAt.toISOString()}`;
     const data = await createWeeklyLessonSeries({ ...params, idempotencyKeyPrefix, createdBy: user.id });
+    revalidatePath("/parent");
     return { ok: true, data };
   } catch (e) {
     return { ok: false, ...toBookingActionOutcomeError(e) };
@@ -105,12 +110,13 @@ export async function cancelLessonBookingForChild(params: {
   await assertGuardianOfChild(supabase, user.id, params.childId);
   const admin = createAdminClient();
   await assertReservationBelongsToChild(admin, params.reservationId, params.childId);
-  return cancelLessonBooking({
+  await cancelLessonBooking({
     reservationId: params.reservationId,
     cancelledByRole: "student",
     cancelledById: user.id,
     reason: params.reason,
   });
+  revalidatePath("/parent");
 }
 
 export async function reportTeacherIssueForChild(params: {

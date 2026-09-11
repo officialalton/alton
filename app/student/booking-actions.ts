@@ -3,6 +3,7 @@
 // R6 6/N — 학생 본인이 정규수업을 예약·취소하는 서버 액션(app/parent/booking-actions.ts의
 // 보호자용 버전과 동일 로직, "이 자녀가 내 가족"이 아니라 "이게 내 계정인지"만 다르다).
 
+import { revalidatePath } from "next/cache";
 import { requireUser } from "@/lib/auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import {
@@ -41,6 +42,11 @@ export async function createMyLessonBooking(
 
     const idempotencyKey = `student-booking:${user.id}:${params.subjectEnrollmentId}:${params.startsAt.toISOString()}`;
     const data = await confirmLessonBooking({ ...params, childId: user.id, idempotencyKey });
+    // 2026-09-11(UAT 발견) — 예약 확정 직후 클라이언트의 router.refresh()만으로는
+    // "예정된 수업" 목록이 즉시 반영되지 않고 페이지를 새로 열어야만 보이는
+    // 경우가 있었다(예약 실패로 오인하고 재시도할 위험). 이 액션을 성공시킨
+    // 시점에 /student 경로를 서버에서 명시적으로 무효화해 확실히 반영한다.
+    revalidatePath("/student");
     return { ok: true, data };
   } catch (e) {
     return { ok: false, ...toBookingActionOutcomeError(e) };
@@ -67,6 +73,7 @@ export async function createMyWeeklyLessonSeries(
 
     const idempotencyKeyPrefix = `student-series:${user.id}:${params.subjectEnrollmentId}:${params.firstStartsAt.toISOString()}`;
     const data = await createWeeklyLessonSeries({ ...params, childId: user.id, idempotencyKeyPrefix, createdBy: user.id });
+    revalidatePath("/student");
     return { ok: true, data };
   } catch (e) {
     return { ok: false, ...toBookingActionOutcomeError(e) };
@@ -84,10 +91,11 @@ export async function cancelMyLessonBooking(params: { reservationId: string; rea
   const { user } = await requireUser();
   const admin = createAdminClient();
   await assertReservationBelongsToChild(admin, params.reservationId, user.id);
-  return cancelLessonBooking({
+  await cancelLessonBooking({
     reservationId: params.reservationId,
     cancelledByRole: "student",
     cancelledById: user.id,
     reason: params.reason,
   });
+  revalidatePath("/student");
 }
