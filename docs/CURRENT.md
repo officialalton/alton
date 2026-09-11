@@ -1,5 +1,40 @@
 # ALTON — 현재 상태 (2026-09-10 기준)
 
+> **2026-09-10 — P0(2차): 생년월일 미입력 자녀에게 미성년 동의 카드/배지
+> 조기 노출 수정.** 직전 P0 배치 배포 후 제품 오너가 Preview에서 즉시 재발견:
+> 직접 계정 생성 다자녀 가구(자녀 3명)에서 계정 생성 직후 `/parent`가
+> "보호자 동의" 화면에 3자녀 전원을 "동의 필요"로 표시 — 매칭·체험 예약이
+> 전혀 없는 상태였다. **원인**: `is_under_13(p_student_id)`는 `date_of_birth`가
+> null이면 fail-closed로 미성년 취급한다(로그인 차단 게이트용 의도된
+> 동작, `20260904000000`). `app/parent/consent-data.ts`가 같은 함수를
+> 보호자 대시보드의 "동의 필요" 카드/배지 노출 조건으로도 재사용해, 아직
+> 한 번도 로그인하지 않아 생년월일이 없는 모든 신규 자녀(상담·직접생성
+> 공통, 실제 나이 무관)가 즉시 경고성 UI로 뜨는 것이었다 — 화면에 보이는
+> "Smart Notes(...) 및 가족 서비스 이용 동의" 문구는 `consent_policy_versions`
+> 활성 정책의 title을 그대로 출력한 것으로, 실제로는 R2 미성년 동의
+> (`guardian_consents`)이지 체험 Smart Notes 동의(`trial_smart_notes_consents`,
+> 매칭된 자녀만 노출하는 기존 로직은 이미 정상)가 아니었다 — 두 동의는
+> 코드상 이미 분리돼 있었고, 문제는 미성년 판정의 "모름"과 "13세 미만
+> 확정"을 구분하지 않은 것뿐. **수정**: additive migration
+> `20261273000000`으로 `student_date_of_birth_known()`(fail-closed 아님,
+> 생년월일 입력 여부만 반환) 추가 — 로그인 차단 게이트 자체는 보수적으로
+> 그대로 유지. `consent-data.ts`/`ConsentTab.tsx`/`ParentShell.tsx`의
+> 미성년 동의 카드·배지 노출 조건에 `dobKnown`을 추가해 생년월일 미입력
+> 자녀는 카드/배지 없이 통과한다. **검증**: `tsc`/eslint 클린(신규 lint
+> 오류 없음, pre-existing `react/no-children-prop` 무관 경고만 재확인),
+> `supabase db reset --local` 후 전체 스위트 259 files/1806 tests 통과,
+> `next build` 성공. 로컬 DB로 3자녀 직접생성 가구를 실제로 만들어
+> `is_under_13=true`/`dob_known=false` 확인 → 1명만
+> `confirm_student_teacher_subject_match()`로 매칭 → 그 자녀만
+> `subject_enrollments` 보유 확인 → Smart Notes 동의 제출 →
+> `entitlement_grants` 1건 생성까지 실측 재현. **외부 변경**: 커밋
+> `3eba56c` push, migration을 `supabase db push`로 공유 non-prod DB에
+> 반영, Preview 배포 → `https://alton-6xg4v2agw-alton7.vercel.app`
+> (`target: preview` 확인). Production 무변경. **미완료**: 제품 오너가
+> 보고했던 실제 "테스트 학부모 3"(테스트 자녀 4/5/6) Preview 계정으로
+> 직접 재확인은 이번 라운드에서 아직 수행하지 못함 — 제품 오너의 진행 중
+> UAT에서 이어서 확인 예정.
+>
 > **2026-09-10 — P0: 직접 계정 생성(계정 생성 탭) 유입의 동의·체험 수업권·
 > 예약 3중 결함 원인 확정·수정 완료.** 제품 오너가 실사용 중 발견(나이 입력
 > 전 보호자 동의 노출, 학생 포털에 체험 수업권 미표시, 예약 확정 시
