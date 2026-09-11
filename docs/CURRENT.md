@@ -31,7 +31,8 @@
 > 프로덕션 빌드 Playwright로 최초 진입(스켈레톤→목록 전환 확인)·탭
 > 재진입·로그아웃 후 재로그인 전부 정상 표시 확인. migration 없음(쿼리·
 > 컴포넌트 구조 변경만). 상세: `docs/2026-09-10-p-execution-roadmap.md`
-> "학부모 기본 SSR 경로 회귀 수정" 절.
+> "학부모 기본 SSR 경로 회귀 수정" 절. 커밋 `afce26b`, Preview
+> `https://alton-evner8a3m-alton7.vercel.app`(target: preview 확인).
 
 > **2026-09-10 — Preview 회귀 조사 후속 P1 성능 배치: 사용자 탭 이메일 조회
 > RPC 교체(non-prod migration), 매칭 하단 현황표 N+1 제거, 과목·교재 목록

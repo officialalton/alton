@@ -315,7 +315,9 @@ Preview UAT: 학생·선생님 서브탭·매칭 현황표·과목/교재는 정
   전환(429ms), 탭 재진입(213ms, 항상 재조회 — 캐시 없음, 학생/선생님과
   동일한 기존 동작), 로그아웃 후 재로그인 후 정상 표시 전부 확인.
   migration 없음(쿼리·컴포넌트 구조 변경만).
-- **배포**: 커밋 후 push, Preview 배포. Production 미적용.
+- **배포**: 커밋 `afce26b` push 완료, Preview 배포 완료
+  `https://alton-evner8a3m-alton7.vercel.app`(`target: preview` 확인).
+  Production 미적용.
 - **로컬 환경의 한계**: 실제 Preview에서 RPC가 왜 실패했는지(대량 id로
   인한 지연·타임아웃인지, 다른 원인인지)는 이번 수정으로 구조적 위험
   (SSR 전체 실패)은 제거됐지만, 근본 원인 자체는 이번에 추가한 구조화
