@@ -46,6 +46,8 @@
 > 전후 체감 확인은 제품 오너 UAT 필요** — 로컬 seed 데이터는 회귀를
 > 유발한 실제 Auth/문서 누적량을 재현하지 못한다. 상세:
 > `docs/2026-09-10-p-execution-roadmap.md` "P1 회귀 조사 후속 성능 배치" 절.
+> 커밋 `b95c224`, migration `20261271000000` non-prod 적용 완료, Preview
+> `https://alton-3t0h72r0k-alton7.vercel.app`(target: preview 확인).
 
 > **2026-09-10 — P1 재진입 로딩 배치(A): 신규(상담)·문의·면담·통합 일정·예약
 > 4개 탭의 "재진입 시 빈 화면부터 재조회" 문제 코드 완료, Preview 배포

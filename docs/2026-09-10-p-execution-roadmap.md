@@ -349,8 +349,10 @@ P1-A(재진입 로딩) 배포 뒤 Preview UAT에서 사용자 탭 학부모/학�
   누적량·후보 카드 수·교재 문서 수를 재현하지 못한다. Preview에서 실제
   데이터량 기준 전후 체감(첫 콘텐츠 표시 시간·요청 수·카드/문서 수 증가
   시 쿼리 수)을 제품 오너가 확인해야 이 배치를 완료로 본다.
-- **배포**: migration `20261271000000`은 non-prod에만 적용, 커밋 push,
-  Preview 배포(`target: preview` 확인). Production 미적용.
+- **배포**: 커밋 `b95c224` push 완료, migration `20261271000000`은
+  non-prod에만 적용 완료, Preview 배포 완료
+  `https://alton-3t0h72r0k-alton7.vercel.app`(`target: preview` 확인).
+  Production 미적용.
 
 ### P1 재진입 로딩 배치(A) — 신규·문의·면담·통합 일정·예약 — **완료(2026-09-10), Preview 배포 완료, 실제 느린 계정 실측은 제품 오너 확인 대기**
 
