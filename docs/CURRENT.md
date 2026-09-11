@@ -1,5 +1,51 @@
 # ALTON — 현재 상태 (2026-09-10 기준)
 
+> **2026-09-10 — C-1(1차): 커리큘럼 진도 표시 통일 + 교사 운영본 필수화.**
+> 승인된 범위대로 구현·검증·Preview 배포 완료.
+> 1. **진도 표시 통일**: `lib/curriculum-overlay-progress.ts` 신설 —
+>    `curriculum_overlay_units` 기준으로 "진도 미시작 · 회차 N개"(수업 전)/
+>    "진행 N / 전체 M회차"(진행 후)를 한 곳에서 계산. 교사 "담당 학생"
+>    (`roster-data.ts`)과 학생 포털 "선생님" 탭(`teacher-data.ts`)이 그동안
+>    서로 다른 기준(레거시 세션 실적/v3 세션 실적, 둘 다 v3 배정에는 세션
+>    개념이 없어 "0/0회차"로 항상 잘못 표시)을 쓰던 것을 이것으로 교체.
+>    출처는 "교사 운영 커리큘럼 기준"/"공통 커리큘럼 기준"으로 표시(내부
+>    `source_kind` 값 노출 없음).
+> 2. **레거시 읽기 전용 뷰 제거**: `AssignmentsTab.tsx`의 "커리큘럼 보기"
+>    버튼과 `TeacherShell.tsx`의 진입 경로(`curriculumJump`)를 제거 —
+>    교사에게는 수정 가능한 "운영 커리큘럼 관리"만 제공. **범위 한정**:
+>    "학생별" 탭 안에서 순수 레거시(v3 미배정) 과목을 클릭하는 별도 경로는
+>    이번에 손대지 않았다 — 그 학생들의 유일한 커리큘럼 접근 수단이라
+>    제거 시 완전히 갈 곳이 없어지므로, 별도 정책 확인 후 처리한다.
+> 3. **교사 운영본 필수화(서버 강제)**: `confirm_student_teacher_subject_match()`
+>    (공통 매칭 RPC, migration `20261274000000`)에 "선생님이 이 과목의
+>    운영 커리큘럼(단원 1개 이상)을 갖고 있어야 배정 가능" 가드 추가 —
+>    기존에는 UI 후보 필터(`matching-data.ts::loadTeacherCandidatesBySubject`)
+>    만 있어 직접 RPC 호출로 우회 가능했다. 같은 기준(단원 1개 이상)으로
+>    UI 후보 목록도 함께 좁혀 서버·화면이 항상 일치하게 했다.
+> 4. **신규 매칭 폴백 제거**: 위 가드 덕분에 새 매칭은 공통 원본
+>    (`subject_template_units`) 폴백을 더 이상 쓰지 않는다(가드가 배정
+>    자체를 막으므로 `seed_curriculum_overlay_for_match()`의 기존 폴백
+>    분기가 이 경로로는 도달하지 않음). 기존에 이미 만들어진 매칭·
+>    오버레이는 전혀 건드리지 않았다(강제 전환 migration 없음).
+> **의도적으로 이번 배치에 넣지 않은 것**: 완료 회차 수정 잠금(실제 v3
+> 완료 판정 모델이 아직 확정되지 않아 별도 정책 보고로만 남김), 관리자
+> 상세 화면(`SubjectEnrollmentPanel`/`StudentDetailPanel`/`TeacherDetailPanel`)
+> 진도 표시 추가(신규 UI 추가라 범위·디자인 확인 후 후속 배치로 진행 권장).
+> **검증**: `tsc`/eslint 클린(무관 pre-existing 오류 5건 `git stash`로
+> 재확인). `supabase db reset --local` 후 전체 스위트
+> `--no-file-parallelism`으로 261 files/1822 tests 통과(중간에 이전
+> 세션에서 남은 teacher_assignments 잔여 데이터로 무관한 통합테스트
+> 62건이 일시적으로 실패했었으나, 재-reset 후 재실행해 내 변경과 무관한
+> 테스트 간 데이터 오염이었음을 확인 — 최종본은 클린 재실행 기준).
+> `next build` 성공. 새 RPC 가드는 통합테스트(`confirm-student-teacher-
+> subject-match.integration.test.ts`)에 신규 케이스 2건(운영본 없음 거부,
+> 빈 운영본 거부) 추가하고 기존 "폴백" 테스트를 "거부" 기대로 갱신,
+> 원자성·멱등성 테스트에는 운영본을 미리 부여해 원래 검증 대상(시급
+> 검증)만 격리되도록 조정. **외부 변경**: 커밋 `8fa1035` push, migration을
+> `supabase db push`로 공유 non-prod DB에 반영, Preview 배포 →
+> `https://alton-fc4tyw5ad-alton7.vercel.app`(target: preview 확인).
+> Production 무변경.
+>
 > **2026-09-10 — 백로그 기록(제품 오너 요청, 코드 변경 없음): 기존 보호자에
 > 자녀 계정 추가 기능.** 현재 신규 > 계정 생성 탭은 "보호자+자녀 1~N명"을
 > 한 번에 새로 만드는 흐름만 있고, 이미 계정이 있는 보호자에게 자녀만
