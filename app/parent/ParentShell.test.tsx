@@ -185,7 +185,7 @@ describe("ParentShell", () => {
         dashboard={dashboard}
         {...lessonsProps}
         consentChildren={[
-          { studentId: "s1", name: "지훈", isUnder13: true, hasValidConsent: false, latestConsent: null },
+          { studentId: "s1", name: "지훈", isUnder13: true, dobKnown: true, hasValidConsent: false, latestConsent: null },
         ]}
         trialSmartNotesChildren={[{ studentId: "s1", name: "지훈", hasConsented: false }]}
       />
@@ -195,6 +195,22 @@ describe("ParentShell", () => {
 
     fireEvent.click(badge);
     expect(pushMock).toHaveBeenCalledWith("?child=s1&tab=consent", { scroll: false });
+  });
+
+  it("2026-09-10(P0): 생년월일이 아직 입력되지 않은 자녀는 is_under_13이 true여도 배지를 띄우지 않는다(계정 생성 직후 회귀 방지)", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+        consentChildren={[
+          { studentId: "s1", name: "지훈", isUnder13: true, dobKnown: false, hasValidConsent: false, latestConsent: null },
+        ]}
+      />
+    );
+    expect(screen.queryByText(/동의 필요한 문서가/)).not.toBeInTheDocument();
   });
 
   it("동의가 전부 완료되면 배지를 보여주지 않는다", () => {

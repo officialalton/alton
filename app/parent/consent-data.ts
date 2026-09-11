@@ -4,6 +4,11 @@ export type ChildConsentStatus = {
   studentId: string;
   name: string;
   isUnder13: boolean;
+  // 2026-09-10(P0) — is_under_13()은 생년월일이 없으면 fail-closed로 true를
+  // 반환한다(로그인 차단 게이트용 의도된 동작). 계정 생성 직후처럼 생년월일이
+  // 아직 입력되지 않은 자녀까지 "미성년 확정"으로 오인해 동의 카드/배지를
+  // 띄우지 않도록, 실제로 생년월일이 입력됐는지를 별도로 들고 다닌다.
+  dobKnown: boolean;
   hasValidConsent: boolean;
   latestConsent: {
     id: string;
@@ -45,8 +50,9 @@ export async function loadChildrenConsentStatus(
 
   return Promise.all(
     children.map(async (child) => {
-      const [{ data: isUnder13 }, { data: hasValidConsent }, { data: latest }] = await Promise.all([
+      const [{ data: isUnder13 }, { data: dobKnown }, { data: hasValidConsent }, { data: latest }] = await Promise.all([
         supabase.rpc("is_under_13", { p_student_id: child.studentId }),
+        supabase.rpc("student_date_of_birth_known", { p_student_id: child.studentId }),
         supabase.rpc("has_valid_guardian_consent", { p_student_id: child.studentId }),
         supabase
           .from("guardian_consents")
@@ -61,6 +67,7 @@ export async function loadChildrenConsentStatus(
         studentId: child.studentId,
         name: child.name,
         isUnder13: Boolean(isUnder13),
+        dobKnown: Boolean(dobKnown),
         hasValidConsent: Boolean(hasValidConsent),
         latestConsent: latest
           ? {

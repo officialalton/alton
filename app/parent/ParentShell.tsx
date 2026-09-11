@@ -348,8 +348,9 @@ function ChildrenStatusRow({
     <div className="px-6 pt-5 pb-1 flex flex-wrap gap-3">
       {childrenList.map((child) => {
         const needsConsent =
-          consentChildren.some((c) => c.studentId === child.studentId && c.isUnder13 && !c.hasValidConsent) ||
-          trialSmartNotesChildren.some((c) => c.studentId === child.studentId && !c.hasConsented);
+          consentChildren.some(
+            (c) => c.studentId === child.studentId && c.isUnder13 && c.dobKnown && !c.hasValidConsent
+          ) || trialSmartNotesChildren.some((c) => c.studentId === child.studentId && !c.hasConsented);
         const regularIntentChoice = pendingRegularIntentChoices.find((p) => p.childId === child.studentId);
         const needsRegularIntent = !!regularIntentChoice;
         const needsAction = needsConsent || needsRegularIntent;

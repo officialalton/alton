@@ -44,6 +44,7 @@ describe("ConsentTab", () => {
         studentId: "student1",
         name: "지훈",
         isUnder13: true,
+        dobKnown: true,
         hasValidConsent: false,
         latestConsent: null,
       },
@@ -66,12 +67,26 @@ describe("ConsentTab", () => {
     });
   });
 
+  it("생년월일이 아직 입력되지 않은 자녀는 is_under_13이 true여도 동의 카드를 띄우지 않는다(계정 생성 직후 P0 회귀 방지)", () => {
+    const children: ChildConsentStatus[] = [
+      { studentId: "student1", name: "테스트 자녀 4", isUnder13: true, dobKnown: false, hasValidConsent: false, latestConsent: null },
+      { studentId: "student2", name: "테스트 자녀 5", isUnder13: true, dobKnown: false, hasValidConsent: false, latestConsent: null },
+    ];
+    render(<ConsentTab children={children} activePolicy={activePolicy} trialSmartNotesChildren={[]} />);
+    expect(
+      screen.getByText("동의가 필요한 만 13세 미만 자녀가 없습니다.")
+    ).toBeInTheDocument();
+    expect(screen.queryByTestId("consent-card-student1")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("consent-card-student2")).not.toBeInTheDocument();
+  });
+
   it("정책 원문 링크가 없으면 팝업에 '원문 준비 중입니다'를 보여준다", () => {
     const children: ChildConsentStatus[] = [
       {
         studentId: "student1",
         name: "지훈",
         isUnder13: true,
+        dobKnown: true,
         hasValidConsent: false,
         latestConsent: null,
       },
@@ -96,6 +111,7 @@ describe("ConsentTab", () => {
         studentId: "student1",
         name: "지훈",
         isUnder13: true,
+        dobKnown: true,
         hasValidConsent: true,
         latestConsent: {
           id: "consent1",
@@ -114,7 +130,7 @@ describe("ConsentTab", () => {
 
   it("Smart Notes는 가족계약 조항이라는 안내 문구를 보여주고, 회차별 ON/OFF 컨트롤은 없다", () => {
     const children: ChildConsentStatus[] = [
-      { studentId: "student2", name: "이서아", isUnder13: false, hasValidConsent: true, latestConsent: null },
+      { studentId: "student2", name: "이서아", isUnder13: false, dobKnown: true, hasValidConsent: true, latestConsent: null },
     ];
     render(<ConsentTab children={children} activePolicy={activePolicy} trialSmartNotesChildren={[]} />);
     expect(screen.getByTestId("smart-notes-contract-notice")).toBeInTheDocument();

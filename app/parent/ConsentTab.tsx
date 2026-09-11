@@ -59,7 +59,10 @@ export default function ConsentTab({
     }
   }
 
-  const minors = children.filter((c) => c.isUnder13);
+  // 2026-09-10(P0) — 생년월일이 아직 입력되지 않은 자녀(계정 생성 직후 등)는
+  // is_under_13()이 fail-closed로 true를 반환해도 "미성년 확정"이 아니므로
+  // 동의 카드를 띄우지 않는다(dobKnown으로 구분).
+  const minors = children.filter((c) => c.isUnder13 && c.dobKnown);
   const progressedIds = new Set(progressedTrialEnrollmentIds);
   const childrenWithRegularIntentChoices = childrenSubjectEnrollments
     .map((c) => ({ ...c, enrollments: c.enrollments.filter((e) => progressedIds.has(e.id)) }))
