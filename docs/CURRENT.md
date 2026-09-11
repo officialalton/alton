@@ -58,6 +58,11 @@
 > 하는 대화형 UAT(예약 화면 렌더→시간 선택→확정→중복 예약 방지, 상담
 > 유입 경로와의 회귀 비교 포함)는 이번 라운드에서 아직 수행하지 않음 —
 > 코드 커밋·Preview 배포 직후 진행 예정. Production 무변경.
+> **외부 변경**: 커밋 `aa6daf1`(`preview/m4-integration-verification`)
+> push, additive migration `20261272000000`을 `supabase db push`로 공유
+> non-prod Supabase 프로젝트에 반영, `vercel` 배포 →
+> `https://alton-e357njylf-alton7.vercel.app`(`vercel inspect` 결과
+> `target: preview` 확인). Production 무변경.
 >
 > **2026-09-10 — B. 신규 통합 보드·정규 계약 발송·계정 생성 탭: 완료
 > (신규 현황/정규 계약 발송/계정 생성 3개 탭 전부), Preview 배포 완료
