@@ -59,6 +59,12 @@ export default function CurriculumTab({
     students[0]?.studentId ?? null
   );
   const [subView, setSubView] = useState<SubView>({ type: "list" });
+  // 2026-09-11(응답 속도 개선) — "운영 커리큘럼 관리"↔"세션 준비"를 오갈 때
+  // 같은 subjectEnrollmentId의 데이터를 매번 새로 불러오지 않도록 부모에서
+  // 캐시한다(둘 다 loadStudentCurriculumPanelData의 같은 결과를 쓴다).
+  const [curriculumPanelCache, setCurriculumPanelCache] = useState<
+    Record<string, { initial: StudentCurriculum; library: EligibleLibrary }>
+  >({});
 
   useEffect(() => {
     if (!jumpTo) return;
@@ -89,6 +95,10 @@ export default function CurriculumTab({
         subjectId={subView.subjectId}
         studentName={subView.studentName}
         subjectName={subView.subjectName}
+        cached={curriculumPanelCache[subView.subjectEnrollmentId]}
+        onLoaded={(data) =>
+          setCurriculumPanelCache((prev) => ({ ...prev, [subView.subjectEnrollmentId]: data }))
+        }
         onBack={() => setSubView({ type: "list" })}
         onOpenSessionPrep={() => setSubView({ ...subView, type: "session-prep" })}
       />
@@ -102,6 +112,10 @@ export default function CurriculumTab({
         subjectId={subView.subjectId}
         studentName={subView.studentName}
         subjectName={subView.subjectName}
+        cached={curriculumPanelCache[subView.subjectEnrollmentId]}
+        onLoaded={(data) =>
+          setCurriculumPanelCache((prev) => ({ ...prev, [subView.subjectEnrollmentId]: data }))
+        }
         onBack={() => setSubView({ ...subView, type: "operating-curriculum" })}
       />
     );
@@ -196,6 +210,8 @@ function StudentCurriculumOperatingView({
   subjectId,
   studentName,
   subjectName,
+  cached,
+  onLoaded,
   onBack,
   onOpenSessionPrep,
 }: {
@@ -203,6 +219,8 @@ function StudentCurriculumOperatingView({
   subjectId: string;
   studentName: string;
   subjectName: string;
+  cached?: { initial: StudentCurriculum; library: EligibleLibrary };
+  onLoaded: (data: { initial: StudentCurriculum; library: EligibleLibrary }) => void;
   onBack: () => void;
   onOpenSessionPrep: () => void;
 }) {
@@ -210,14 +228,23 @@ function StudentCurriculumOperatingView({
     | { status: "loading" }
     | { status: "error"; message: string }
     | { status: "ready"; initial: StudentCurriculum; library: EligibleLibrary }
-  >({ status: "loading" });
+  >(cached ? { status: "ready", ...cached } : { status: "loading" });
 
   useEffect(() => {
+    // 2026-09-11(응답 속도 개선) — 부모가 이미 캐시해둔 결과가 있으면
+    // 서버 왕복 없이 그대로 쓴다("세션 준비"에서 되돌아올 때 등).
+    if (cached) {
+      setState({ status: "ready", ...cached });
+      return;
+    }
     let cancelled = false;
     setState({ status: "loading" });
     loadStudentCurriculumPanelData(subjectEnrollmentId, subjectId)
       .then(({ initial, library }) => {
-        if (!cancelled) setState({ status: "ready", initial, library });
+        if (!cancelled) {
+          setState({ status: "ready", initial, library });
+          onLoaded({ initial, library });
+        }
       })
       .catch((e) => {
         if (!cancelled) {
@@ -230,7 +257,8 @@ function StudentCurriculumOperatingView({
     return () => {
       cancelled = true;
     };
-  }, [subjectEnrollmentId, subjectId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [subjectEnrollmentId, subjectId, cached]);
 
   return (
     <div className="max-w-[640px] px-8 pt-8">
@@ -279,26 +307,40 @@ function SessionPrepView({
   subjectId,
   studentName,
   subjectName,
+  cached,
+  onLoaded,
   onBack,
 }: {
   subjectEnrollmentId: string;
   subjectId: string;
   studentName: string;
   subjectName: string;
+  cached?: { initial: StudentCurriculum; library: EligibleLibrary };
+  onLoaded: (data: { initial: StudentCurriculum; library: EligibleLibrary }) => void;
   onBack: () => void;
 }) {
   const [state, setState] = useState<
     | { status: "loading" }
     | { status: "error"; message: string }
     | { status: "ready"; initial: StudentCurriculum; library: EligibleLibrary }
-  >({ status: "loading" });
+  >(cached ? { status: "ready", ...cached } : { status: "loading" });
 
   useEffect(() => {
+    // 2026-09-11(응답 속도 개선) — "운영 커리큘럼 관리"에서 이미 불러온
+    // 결과가 있으면 재사용한다(같은 subjectEnrollmentId를 매번 다시 조회
+    // 하지 않음).
+    if (cached) {
+      setState({ status: "ready", ...cached });
+      return;
+    }
     let cancelled = false;
     setState({ status: "loading" });
     loadStudentCurriculumPanelData(subjectEnrollmentId, subjectId)
       .then(({ initial, library }) => {
-        if (!cancelled) setState({ status: "ready", initial, library });
+        if (!cancelled) {
+          setState({ status: "ready", initial, library });
+          onLoaded({ initial, library });
+        }
       })
       .catch((e) => {
         if (!cancelled) {
@@ -308,7 +350,8 @@ function SessionPrepView({
     return () => {
       cancelled = true;
     };
-  }, [subjectEnrollmentId, subjectId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [subjectEnrollmentId, subjectId, cached]);
 
   if (state.status === "loading") {
     return <div className="px-8 py-8 text-[13px] text-grey-500">불러오는 중...</div>;

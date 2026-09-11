@@ -16,24 +16,25 @@ async function requireAssignedTeacherOrAdmin(subjectEnrollmentId: string) {
   } = await supabase.auth.getUser();
   if (!user) throw new Error("로그인이 필요합니다.");
 
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("role")
-    .eq("id", user.id)
-    .single();
+  // 2026-09-11(응답 속도 개선) — profile 조회와 담당 배정 조회는 서로
+  // 의존하지 않는다(둘 다 user.id만 있으면 됨) — 순차 왕복 대신 병렬로
+  // 묶는다. admin/비교사인 경우 assignment 조회 결과는 그냥 버려진다(왕복
+  // 자체는 병렬이라 추가 지연 없음). 실제 방어선은 여전히 RLS
+  // (is_active_teacher_for_enrollment) — 여기는 읽기 쉬운 에러 메시지를
+  // 주기 위한 앱 레벨 선인가일 뿐, 순서를 바꿔도 보안 성질은 동일하다.
+  const [{ data: profile }, { data: assignment }] = await Promise.all([
+    supabase.from("profiles").select("role").eq("id", user.id).single(),
+    supabase
+      .from("teacher_assignments")
+      .select("id")
+      .eq("subject_enrollment_id", subjectEnrollmentId)
+      .eq("teacher_id", user.id)
+      .in("status", ["planned", "active"])
+      .maybeSingle(),
+  ]);
 
   if (profile?.role === "admin") return { supabase, user };
   if (profile?.role !== "teacher") throw new Error("선생님만 사용할 수 있습니다.");
-
-  // 앱 레벨 선인가 — 실제 방어선은 RLS(is_active_teacher_for_enrollment)다.
-  // 여기서 먼저 걸러 "담당 학생이 아닙니다" 같은 읽기 쉬운 메시지를 준다.
-  const { data: assignment } = await supabase
-    .from("teacher_assignments")
-    .select("id")
-    .eq("subject_enrollment_id", subjectEnrollmentId)
-    .eq("teacher_id", user.id)
-    .in("status", ["planned", "active"])
-    .maybeSingle();
   if (!assignment) throw new Error("담당 학생의 커리큘럼만 조정할 수 있습니다.");
 
   return { supabase, user };
