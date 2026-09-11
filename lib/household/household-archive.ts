@@ -144,8 +144,13 @@ export async function restoreHousehold(params: {
 }
 
 // 아카이브된 가구에 속한 profile id 집합 — 관리자 목록에서 제외할 때 쓴다(왕복 1회).
-export async function archivedHouseholdProfileIds(): Promise<Set<string>> {
-  const admin = createAdminClient();
+// 호출자가 이미 admin 클라이언트를 들고 있으면 그대로 넘긴다(목록 로더는 대부분
+// 그렇다) — 여기서 새로 만들면 같은 요청에 클라이언트가 둘 생기고, 클라이언트를
+// 주입받아 테스트하는 기존 로더 스펙에서도 쓸 수 없게 된다.
+export async function archivedHouseholdProfileIds(
+  client?: ReturnType<typeof createAdminClient>
+): Promise<Set<string>> {
+  const admin = client ?? createAdminClient();
   const { data, error } = await admin.rpc("archived_household_profile_ids");
   if (error) throw new Error(error.message);
   return new Set((data ?? []).map((row: Record<string, unknown>) => row.profile_id as string));

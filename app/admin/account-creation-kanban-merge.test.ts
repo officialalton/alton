@@ -39,6 +39,13 @@ function makeAdminMock(tables: Record<string, Row[]>) {
   return {
     callCounts,
     insertCalls,
+    // P4-1(B, 2026-09-11) — loadKanbanBoard()가 아카이브된 가구의 자녀 카드를
+    // 빼기 위해 archived_household_profile_ids() RPC를 이 클라이언트로 1회
+    // 호출한다(목록당 왕복 +1 고정). 이 스펙에는 아카이브된 가구가 없다.
+    rpc: (fn: string) => {
+      callCounts[`rpc:${fn}`] = (callCounts[`rpc:${fn}`] ?? 0) + 1;
+      return Promise.resolve({ data: [], error: null });
+    },
     from: (table: string) => {
       callCounts[table] = (callCounts[table] ?? 0) + 1;
       if (table === "consultations") {

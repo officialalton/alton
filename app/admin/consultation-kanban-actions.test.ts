@@ -8,7 +8,14 @@ const { adminFromMock, rpcMock, listConsultationsMock, pipelineMock } = vi.hoist
 }));
 
 vi.mock("@/lib/supabase-admin", () => ({
-  createAdminClient: () => ({ from: adminFromMock, auth: { admin: { getUserById: vi.fn().mockResolvedValue({ data: { user: null } }) } } }),
+  // P4-1(B, 2026-09-11) — loadKanbanBoard()가 아카이브된 가구의 자녀 카드를
+  // 빼기 위해 archived_household_profile_ids() RPC를 1회 호출한다.
+  // 이 스펙에는 아카이브된 가구가 없다.
+  createAdminClient: () => ({
+    from: adminFromMock,
+    rpc: vi.fn().mockResolvedValue({ data: [], error: null }),
+    auth: { admin: { getUserById: vi.fn().mockResolvedValue({ data: { user: null } }) } },
+  }),
 }));
 vi.mock("@/lib/admin-auth", () => ({
   requireAdminOrCapability: vi.fn().mockResolvedValue({ supabase: { rpc: rpcMock }, actorUserId: "admin1" }),

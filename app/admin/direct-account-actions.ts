@@ -15,6 +15,7 @@ import { sendEmail, escapeHtml } from "@/lib/email";
 import { currentRequestOrigin } from "@/lib/request-origin";
 import { findExistingAuthEmailCollisions, type OnboardingEmailCollision } from "@/lib/onboarding-email-guard";
 import { loadEmailById } from "./users-data";
+import { archivedHouseholdProfileIds } from "@/lib/household/household-archive";
 
 const CONSULT_CAPABILITY = "manage_consultations";
 const SIMPLE_EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -284,7 +285,7 @@ export async function listDirectOnboardingLinksAction(): Promise<DirectOnboardin
 
   const { data: links, error: linksError } = await admin
     .from("trial_onboarding_links")
-    .select("id, guardian_email, guardian_name, status, notice_delivery_status, notice_sent_at, created_at")
+    .select("id, guardian_email, guardian_name, status, notice_delivery_status, notice_sent_at, created_at, redeemed_auth_user_id")
     .is("consultation_id", null)
     .order("created_at", { ascending: false });
   if (linksError) throw new Error(linksError.message);
@@ -293,9 +294,28 @@ export async function listDirectOnboardingLinksAction(): Promise<DirectOnboardin
   const linkIds = links.map((l) => l.id);
   const { data: students, error: studentsError } = await admin
     .from("trial_onboarding_link_students")
-    .select("link_id, status")
+    .select("link_id, status, child_auth_user_id")
     .in("link_id", linkIds);
   if (studentsError) throw new Error(studentsError.message);
+
+  // P4-1(B) — 아카이브된 가구의 발송 건은 이 목록에서 뺀다(아카이브됨 서브탭에서만
+  // 다룬다). 링크 1건은 보호자 1명(=가구 1개)에 귀속되므로, 링크를 사용한 보호자
+  // 계정이나 그 링크로 만들어진 자녀 중 하나라도 아카이브된 가구면 링크 전체를 숨긴다.
+  const archivedProfileIds = await archivedHouseholdProfileIds(admin);
+  const archivedLinkIds = new Set<string>();
+  if (archivedProfileIds.size > 0) {
+    for (const l of links) {
+      if (l.redeemed_auth_user_id && archivedProfileIds.has(l.redeemed_auth_user_id as string)) {
+        archivedLinkIds.add(l.id as string);
+      }
+    }
+    for (const s of students ?? []) {
+      const childId = s.child_auth_user_id as string | null;
+      if (childId && archivedProfileIds.has(childId)) archivedLinkIds.add(s.link_id as string);
+    }
+  }
+  const visibleLinks = links.filter((l) => !archivedLinkIds.has(l.id as string));
+  if (visibleLinks.length === 0) return [];
 
   const summaryByLinkId = new Map<string, { total: number; created: number; failed: number; cancelled: number }>();
   for (const s of students ?? []) {
@@ -307,7 +327,7 @@ export async function listDirectOnboardingLinksAction(): Promise<DirectOnboardin
     summaryByLinkId.set(s.link_id, entry);
   }
 
-  return links.map((l) => {
+  return visibleLinks.map((l) => {
     const summary = summaryByLinkId.get(l.id) ?? { total: 0, created: 0, failed: 0, cancelled: 0 };
     return {
       linkId: l.id,

@@ -6,6 +6,7 @@
 // payout-batches-data.ts/workspace-data.ts와 동일한 관행).
 
 import { createAdminClient } from "@/lib/supabase-admin";
+import { archivedHouseholdProfileIds } from "@/lib/household/household-archive";
 import {
   listConsultationsForAdmin,
   type ConsultationListItem,
@@ -209,17 +210,24 @@ export async function loadKanbanBoard(admin: ReturnType<typeof createAdminClient
   // 범위 자체를 DB 쪽에서 좁히는 것은 listConsultationsForAdmin()이 다른
   // 화면과 공유하는 함수라 이번 배치에서는 건드리지 않는다 — 범위 조정은
   // 별도 배치로 분리.)
-  const [rows, { data: closedIdsData }, { data: rootIdsData }, accountCreationRows] = await Promise.all([
-    listConsultationsForAdmin({ from: "2020-01-01T00:00:00.000Z", to: "2035-01-01T00:00:00.000Z" }),
-    admin.from("consultations").select("id").not("closure_type", "is", null),
-    admin.from("consultations").select("family_root_consultation_id").not("family_root_consultation_id", "is", null),
-    loadAccountCreationCards(admin),
-  ]);
+  const [rows, { data: closedIdsData }, { data: rootIdsData }, accountCreationRows, archivedProfileIds] =
+    await Promise.all([
+      listConsultationsForAdmin({ from: "2020-01-01T00:00:00.000Z", to: "2035-01-01T00:00:00.000Z" }),
+      admin.from("consultations").select("id").not("closure_type", "is", null),
+      admin.from("consultations").select("family_root_consultation_id").not("family_root_consultation_id", "is", null),
+      loadAccountCreationCards(admin),
+      // P4-1(B) — 아카이브된 가구의 자녀 카드는 보드에서 뺀다. 상담 카드와
+      // 계정 생성 카드 둘 다 child_id를 자녀 profile id로 채우므로(계정 생성
+      // 카드는 child_auth_user_id) 합친 뒤 한 번만 걸러도 양쪽이 모두 처리된다.
+      archivedHouseholdProfileIds(admin),
+    ]);
   const closedIds = new Set((closedIdsData ?? []).map((r) => r.id as string));
   const activeConsultations = rows.filter((r) => !closedIds.has(r.id) && r.status !== "cancelled" && r.status !== "no_show");
   // 2026-09-10(P1-B) — 계정 생성 카드까지 합친 뒤에 파이프라인 배치 조회를
   // 한 번만 실행한다(카드 출처와 무관하게 여전히 쿼리 3회 고정).
-  const active = [...activeConsultations, ...accountCreationRows];
+  const active = [...activeConsultations, ...accountCreationRows].filter(
+    (r) => !(r.child_id && archivedProfileIds.has(r.child_id))
+  );
 
   // classifyStage가 실제로 trial_recommended+completed인 카드에서만 파이프라인
   // 정보를 쓰므로, 그 대상 자녀 id만 모아 배치 조회한다(카드 수와 무관하게
