@@ -17,10 +17,14 @@ function makeSupabase(params: {
     subject_enrollment: { id: string; subject_id: string; child_id: string; subject: { name: string } };
   }>;
   students: Array<{ id: string; grade: string | null; profile: { name: string } }>;
-  // 2026-09-10(P0 결함 수정) — currentSession/totalSessions는 이제
-  // enrollments.total_sessions가 아니라 legacy_sessions 실적으로 계산한다.
-  legacySessions?: Array<{ enrollment_id: string; status: string }>;
-  // C-1(2026-09-10) — v3 과목의 진도는 curriculum_overlay_units 기준.
+  // C-1(2026-09-10) — 레거시 회차 수는 이제 legacy_sessions 행 수가 아니라
+  // app/student/curriculum-data.ts::loadCurricula()와 동일하게
+  // teacher_curriculum_template_units 개수·완료 단원 수로 계산한다(목록
+  // 카드와 커리큘럼 상세 화면의 회차 표기가 서로 달라 보이던 불일치 수정).
+  legacyTemplates?: Array<{ id: string; subject_id: string }>;
+  legacyUnits?: Array<{ id: string; template_id: string }>;
+  legacySessions?: Array<{ enrollment_id: string; status: string; source_template_unit_id: string | null }>;
+  // v3 과목의 진도는 curriculum_overlay_units 기준.
   overlays?: Array<{ id: string; subject_enrollment_id: string }>;
   overlayUnits?: Array<{ overlay_id: string; status: string; source_kind: string }>;
 }) {
@@ -34,6 +38,12 @@ function makeSupabase(params: {
       }
       if (table === "students") {
         return { select: () => ({ in: () => Promise.resolve({ data: params.students }) }) };
+      }
+      if (table === "teacher_curriculum_templates") {
+        return { select: () => ({ eq: () => ({ in: () => Promise.resolve({ data: params.legacyTemplates ?? [] }) }) }) };
+      }
+      if (table === "teacher_curriculum_template_units") {
+        return { select: () => ({ in: () => Promise.resolve({ data: params.legacyUnits ?? [] }) }) };
       }
       if (table === "legacy_sessions") {
         return { select: () => ({ in: () => Promise.resolve({ data: params.legacySessions ?? [] }) }) };
@@ -56,18 +66,25 @@ describe("loadRoster", () => {
     expect(result).toEqual([]);
   });
 
-  it("레거시 enrollments 학생만 있어도 그대로 반환한다(회차 수는 legacy_sessions 실적으로 계산)", async () => {
+  it("레거시 enrollments 학생만 있어도 그대로 반환한다(회차 수는 커리큘럼 상세 화면과 동일하게 template 단원 기준으로 계산)", async () => {
     const supabase = makeSupabase({
       enrollments: [
         { id: "e1", student_id: "s1", subject_id: "sub1", subject: { name: "SAT Math" } },
       ],
       assignments: [],
       students: [{ id: "s1", grade: "10학년", profile: { name: "지훈" } }],
+      legacyTemplates: [{ id: "tpl1", subject_id: "sub1" }],
+      legacyUnits: [
+        { id: "u1", template_id: "tpl1" },
+        { id: "u2", template_id: "tpl1" },
+        { id: "u3", template_id: "tpl1" },
+        { id: "u4", template_id: "tpl1" },
+      ],
       legacySessions: [
-        { enrollment_id: "e1", status: "completed" },
-        { enrollment_id: "e1", status: "completed" },
-        { enrollment_id: "e1", status: "completed" },
-        { enrollment_id: "e1", status: "upcoming" },
+        { enrollment_id: "e1", status: "completed", source_template_unit_id: "u1" },
+        { enrollment_id: "e1", status: "completed", source_template_unit_id: "u2" },
+        { enrollment_id: "e1", status: "completed", source_template_unit_id: "u3" },
+        { enrollment_id: "e1", status: "upcoming", source_template_unit_id: "u4" },
       ],
     });
     const result = await loadRoster(supabase as never, "t1");
@@ -76,9 +93,34 @@ describe("loadRoster", () => {
         studentId: "s1",
         studentName: "지훈",
         grade: "10학년",
-        subjects: [{ enrollmentId: "e1", subjectId: "sub1", subjectName: "SAT Math", currentSession: 3, totalSessions: 4, source: "legacy", curriculumSourceLabel: null }],
+        // 4단원 중 3단원 완료 -> currentSession = min(3+1, max(4,1)) = 4
+        subjects: [{ enrollmentId: "e1", subjectId: "sub1", subjectName: "SAT Math", currentSession: 4, totalSessions: 4, source: "legacy", curriculumSourceLabel: null }],
       },
     ]);
+  });
+
+  it("2026-09-10(C-1 회귀 방지): 커리큘럼 단원이 아직 없는 레거시 과목은 '0/0회차'가 아니라 목록·상세가 동일한 기준으로 계산된다", async () => {
+    const supabase = makeSupabase({
+      enrollments: [
+        { id: "e1", student_id: "s1", subject_id: "sub1", subject: { name: "테스트1" } },
+      ],
+      assignments: [],
+      students: [{ id: "s1", grade: null, profile: { name: "테스트1444" } }],
+      // 아직 어떤 legacy_sessions 실적도 없는 상태 — 예전 로직은 이걸 "0/0회차"로
+      // 표시했지만, 상세 화면(loadCurricula)은 template 단원 수(3개)를
+      // totalSessions로 쓰고 있어 "1/3회차"로 보였다. 이제 목록도 동일하게
+      // 3단원 중 0개 완료 -> "1/3회차"로 일치해야 한다.
+      legacyTemplates: [{ id: "tpl1", subject_id: "sub1" }],
+      legacyUnits: [
+        { id: "u1", template_id: "tpl1" },
+        { id: "u2", template_id: "tpl1" },
+        { id: "u3", template_id: "tpl1" },
+      ],
+      legacySessions: [],
+    });
+    const result = await loadRoster(supabase as never, "t1");
+    expect(result[0].subjects[0].totalSessions).toBe(3);
+    expect(result[0].subjects[0].currentSession).toBe(1);
   });
 
   it("teacher1의 실제 활성 v3 배정 시나리오 — legacy enrollments가 비어있어도 v3 배정 학생이 노출된다", async () => {
