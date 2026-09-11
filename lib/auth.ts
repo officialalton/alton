@@ -45,13 +45,6 @@ export async function resolveAccountDestination(
       encodeURIComponent("계정 정보를 확인할 수 없습니다. 관리자에게 문의해주세요.")
     );
   }
-  if (status === "suspended") {
-    return "/account-suspended";
-  }
-  if (status === "pending") {
-    return "/account-pending";
-  }
-
   // M4 UAT #2(2026-09-05): 학생 프로필 완성(생년월일/학교명/학년 등) 강제
   // 게이트 — 완료 전에는 학생 포털의 다른 어떤 기능도 쓸 수 없어야 하고,
   // 건너뛰기 불가, 로그인마다 재확인해야 한다는 확정 UX를 이 함수 하나에
@@ -59,19 +52,28 @@ export async function resolveAccountDestination(
   // 자동 전파한다. current_student_profile_completed()는 학생이 아니면
   // 항상 true라 다른 role에는 영향이 없다.
   //
-  // P0(2026-09-10, 직접 계정 생성 경로 순환 데드락): 이 게이트는 반드시 아래
-  // current_account_access_allowed() 체크보다 먼저 와야 한다.
-  // is_under_13()은 profiles.date_of_birth가 null이면 fail-closed로 미성년
-  // 취급하므로, 생년월일을 아직 입력하지 않은 학생(특히 상담 없이 계정만 만든
-  // 직접생성 경로)은 순서가 반대일 경우 /consent-pending으로 보내지고,
-  // 거기서는 /complete-profile로 갈 방법이 없어 영원히 갇힌다. 생년월일
-  // 입력을 먼저 통과시켜야 그 다음 나이 기반 동의 게이트가 실제 값으로
-  // 정확히 평가된다.
+  // P0(2026-09-10, 2차 수정): 이 게이트는 반드시 아래 pending/suspended,
+  // current_account_access_allowed() 체크보다 먼저 와야 한다. 신규 학생
+  // 계정(특히 상담 없이 계정만 만든 직접생성 경로)은 students.status가
+  // 항상 'pending'으로 시작해 관리자가 매칭 등으로 active 전환하기 전까지는
+  // 이 함수 앞부분의 pending 체크가 먼저 리턴해버린다 — 그 뒤에 프로필
+  // 완성 게이트를 두면 비밀번호를 막 설정한 학생이 /complete-profile에
+  // 영원히 도달하지 못하고 /account-pending에 갇힌다(1차 수정 때 고쳤던
+  // "생년월일 입력 전 동의 화면에 갇히는" 문제와 같은 유형의 순서 버그가
+  // pending 게이트에도 있었음). 프로필 완성은 계정 lifecycle 상태와 무관하게
+  // 항상 최우선으로 확인한다.
   if (role === "student") {
     const { data: profileCompleted } = await supabase.rpc("current_student_profile_completed");
     if (profileCompleted === false) {
       return "/complete-profile";
     }
+  }
+
+  if (status === "suspended") {
+    return "/account-suspended";
+  }
+  if (status === "pending") {
+    return "/account-pending";
   }
 
   const { data: accessAllowed } = await supabase.rpc("current_account_access_allowed");

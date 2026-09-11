@@ -149,6 +149,32 @@ describe("resolveAccountDestination — 학생 프로필 완성 게이트(M4)", 
     expect(dest).toBe("/student");
   });
 
+  it("2026-09-10(P0 2차): pending 상태인 신규 학생도 프로필 미완료면 /account-pending보다 /complete-profile을 먼저 보여준다(비밀번호 설정 직후 학생은 항상 pending)", async () => {
+    const { resolveAccountDestination } = await import("./auth");
+    const supabase = fakeSupabaseWithRpcMap({
+      rpc: {
+        current_account_status: "pending",
+        current_account_access_allowed: true,
+        current_student_profile_completed: false,
+      },
+    });
+    const dest = await resolveAccountDestination(supabase as never, "student");
+    expect(dest).toBe("/complete-profile");
+  });
+
+  it("2026-09-10(P0 2차): pending 상태 학생도 프로필을 완료했으면 /account-pending으로 보낸다", async () => {
+    const { resolveAccountDestination } = await import("./auth");
+    const supabase = fakeSupabaseWithRpcMap({
+      rpc: {
+        current_account_status: "pending",
+        current_account_access_allowed: true,
+        current_student_profile_completed: true,
+      },
+    });
+    const dest = await resolveAccountDestination(supabase as never, "student");
+    expect(dest).toBe("/account-pending");
+  });
+
   it("학생이 아닌 role(보호자)은 프로필 완성 게이트를 확인하지 않는다", async () => {
     const { resolveAccountDestination } = await import("./auth");
     const supabase = fakeSupabaseWithRpcMap({
