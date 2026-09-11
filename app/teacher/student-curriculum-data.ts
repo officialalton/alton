@@ -2,94 +2,21 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 
 // R9(Task 3) — 담당 학생의 운영 커리큘럼(오버레이) + 조합 가능한 라이브러리 콘텐츠를
 // 읽기 전용으로 로드한다. RLS(20261229000000_r9_student_curriculum_overlay.sql)가
-// "담당 선생님/본인 학생/관리자"만 조회를 허용하므로, 이 함수는 그 이상의 권한
-// 검사를 하지 않는다 — 담당이 아닌 선생님이 호출하면 그냥 빈 결과가 온다.
-
-export type OverlayUnit = {
-  id: string;
-  sourceUnitId: string | null;
-  position: number;
-  unitTitle: string;
-  note: string | null;
-  status: "not_started" | "in_progress" | "completed" | "reinforcement_needed" | "skipped";
-  statusChangedAt: string | null;
-  keywordIds: string[];
-  materialDocIds: string[];
-};
-
-export type StudentCurriculum = {
-  overlayId: string | null;
-  units: OverlayUnit[];
-};
-
-export async function loadStudentCurriculum(
-  supabase: SupabaseClient,
-  subjectEnrollmentId: string
-): Promise<StudentCurriculum> {
-  const { data: overlay } = await supabase
-    .from("student_curriculum_overlays")
-    .select("id")
-    .eq("subject_enrollment_id", subjectEnrollmentId)
-    .eq("status", "active")
-    .maybeSingle();
-
-  if (!overlay) return { overlayId: null, units: [] };
-
-  const { data: units } = await supabase
-    .from("curriculum_overlay_units")
-    .select(
-      "id, source_unit_id, position, unit_title, note, status, status_changed_at"
-    )
-    .eq("overlay_id", overlay.id)
-    .order("position", { ascending: true });
-
-  const unitIds = (units ?? []).map((u) => u.id);
-
-  // N+1 방지: 단원마다 따로 조회하지 않고 이 오버레이의 전체 단원 id 집합에
-  // 대해 키워드/자료 관계를 각각 한 번씩만 조회한다.
-  const [{ data: keywordRows }, { data: materialRows }] = await Promise.all([
-    unitIds.length
-      ? supabase
-          .from("curriculum_overlay_unit_keywords")
-          .select("overlay_unit_id, keyword_id")
-          .in("overlay_unit_id", unitIds)
-      : Promise.resolve({ data: [] as { overlay_unit_id: string; keyword_id: string }[] }),
-    unitIds.length
-      ? supabase
-          .from("curriculum_overlay_unit_materials")
-          .select("overlay_unit_id, curriculum_doc_id")
-          .in("overlay_unit_id", unitIds)
-      : Promise.resolve({ data: [] as { overlay_unit_id: string; curriculum_doc_id: string }[] }),
-  ]);
-
-  const keywordIdsByUnit = new Map<string, string[]>();
-  for (const row of keywordRows ?? []) {
-    const list = keywordIdsByUnit.get(row.overlay_unit_id) ?? [];
-    list.push(row.keyword_id);
-    keywordIdsByUnit.set(row.overlay_unit_id, list);
-  }
-  const materialIdsByUnit = new Map<string, string[]>();
-  for (const row of materialRows ?? []) {
-    const list = materialIdsByUnit.get(row.overlay_unit_id) ?? [];
-    list.push(row.curriculum_doc_id);
-    materialIdsByUnit.set(row.overlay_unit_id, list);
-  }
-
-  return {
-    overlayId: overlay.id,
-    units: (units ?? []).map((u) => ({
-      id: u.id,
-      sourceUnitId: u.source_unit_id,
-      position: u.position,
-      unitTitle: u.unit_title,
-      note: u.note,
-      status: u.status,
-      statusChangedAt: u.status_changed_at,
-      keywordIds: keywordIdsByUnit.get(u.id) ?? [],
-      materialDocIds: materialIdsByUnit.get(u.id) ?? [],
-    })),
-  };
-}
+// "담당 선생님/본인 학생·보호자/관리자"만 조회를 허용하므로, 이 함수는 그 이상의
+// 권한 검사를 하지 않는다 — 담당이 아닌 선생님이 호출하면 그냥 빈 결과가 온다.
+//
+// v3 커리큘럼 열람 결함 수정(2026-09-11) — 오버레이 읽기(loadStudentCurriculum)는
+// 학생/학부모 읽기 전용 화면(app/student/curriculum-overlay-actions.ts)에서도
+// 그대로 재사용한다. 이 파일에서 재수출만 하고 실제 정의는 lib/curriculum-
+// overlay-data.ts에 둔 이유: app/teacher가 편집 전용 서버 액션
+// (student-curriculum-actions.ts, 담당 교사만)을 갖고 있어 app/student·
+// app/parent가 그걸 직접 import하면 안 되는데, 읽기 로더 자체는 순수 조회라
+// 공유해도 안전하다 — 공유 지점을 app/teacher 밖(lib/)에 둬서 방향을 명확히 한다.
+export {
+  loadStudentCurriculum,
+  type OverlayUnit,
+  type StudentCurriculum,
+} from "@/lib/curriculum-overlay-data";
 
 export type LibraryUnit = {
   id: string;

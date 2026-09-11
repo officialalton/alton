@@ -165,6 +165,68 @@ describe("담당 선생님만 학생 오버레이를 조정할 수 있다", () =
   });
 });
 
+// v3 커리큘럼 열람 결함 수정(2026-09-11, 마이그레이션
+// 20261275000000_v3_curriculum_overlay_guardian_read.sql) — 학생 본인뿐 아니라
+// 그 가구의 보호자도 오버레이/오버레이 단원을 조회할 수 있어야 한다(학생
+// 포털·학부모 포털 공용 읽기 전용 커리큘럼 열람). subject_enrollments/
+// teacher_assignments가 이미 쓰는 is_enrollment_child_or_guardian()을 그대로
+// 재사용했으므로, 보호자 쓰기는 여전히 불가함도 함께 확인한다.
+describe("보호자도 자녀의 오버레이를 조회할 수 있다(쓰기는 여전히 불가)", () => {
+  const GUARDIAN_ID = "bbbbbbbb-0000-0000-0000-000000000001"; // 지훈 모 (seed, HOUSEHOLD_ID 소속)
+
+  it("연결된 보호자는 오버레이와 오버레이 단원을 조회할 수 있다", () => {
+    const overlayId = createOverlay();
+    const unitId = asUser(
+      TEACHER_ID,
+      `insert into curriculum_overlay_units (overlay_id, source_unit_id, position, unit_title)
+       values ('${overlayId}', '${baseUnitId}', 1, '보호자 열람 확인용 단원') returning id;`
+    );
+
+    const overlayRead = asUser(
+      GUARDIAN_ID,
+      `select id from student_curriculum_overlays where id = '${overlayId}';`
+    );
+    expect(overlayRead).toBe(overlayId);
+
+    const unitRead = asUser(
+      GUARDIAN_ID,
+      `select id from curriculum_overlay_units where id = '${unitId}';`
+    );
+    expect(unitRead).toBe(unitId);
+  });
+
+  it("연결된 보호자도 오버레이 단원을 쓸 수는 없다(읽기 전용)", () => {
+    const overlayId = createOverlay();
+    const err = asUserExpectError(
+      GUARDIAN_ID,
+      `insert into curriculum_overlay_units (overlay_id, source_unit_id, position, unit_title)
+       values ('${overlayId}', '${baseUnitId}', 1, '보호자 쓰기 시도') returning id;`
+    );
+    expect(err).toMatch(/row-level security|policy/i);
+  });
+
+  it("가구와 무관한 제3자는 여전히 조회할 수 없다", () => {
+    const overlayId = createOverlay();
+    const unitId = asUser(
+      TEACHER_ID,
+      `insert into curriculum_overlay_units (overlay_id, source_unit_id, position, unit_title)
+       values ('${overlayId}', '${baseUnitId}', 1, '무관한 제3자 차단 확인용 단원') returning id;`
+    );
+
+    const overlayReadByOther = asUser(
+      OTHER_TEACHER_ID,
+      `select id from student_curriculum_overlays where id = '${overlayId}';`
+    );
+    expect(overlayReadByOther).toBe("");
+
+    const unitReadByOther = asUser(
+      OTHER_TEACHER_ID,
+      `select id from curriculum_overlay_units where id = '${unitId}';`
+    );
+    expect(unitReadByOther).toBe("");
+  });
+});
+
 describe("기본 원본(subject_template_units)은 오버레이 조작으로 바뀌지 않는다", () => {
   it("단원 추가/제외/재정렬을 해도 subject_template_units 원본 행은 그대로다", () => {
     const before = psql(

@@ -2,10 +2,15 @@ import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import { describe, expect, it, vi, beforeEach } from "vitest";
 import EnrollmentTab from "./EnrollmentTab";
 import { getTrialLessonReviewForFamily } from "@/app/parent/trial-conversion-actions";
+import { loadMyCurriculumOverlay } from "./curriculum-overlay-actions";
 import type { SubjectEnrollmentView } from "./enrollment-data";
 
 vi.mock("@/app/parent/trial-conversion-actions", () => ({
   getTrialLessonReviewForFamily: vi.fn(),
+}));
+
+vi.mock("./curriculum-overlay-actions", () => ({
+  loadMyCurriculumOverlay: vi.fn(),
 }));
 
 const enrollment: SubjectEnrollmentView = {
@@ -50,5 +55,42 @@ describe("EnrollmentTab — 확정 체험 리뷰 표시(학생/보호자 공용)
     expect(screen.getByText("체험 수업 리뷰 (선생님 확정)")).toBeInTheDocument();
     expect(screen.getByText("빠른 습득력")).toBeInTheDocument();
     expect(screen.queryByRole("button", { name: "정규 진행 희망합니다" })).toBeNull();
+  });
+});
+
+// v3 커리큘럼 열람 결함 수정(2026-09-11) — 이 탭(subject_enrollments 기준)에
+// 뜨는 모든 과목이 v3이므로 진입 버튼을 항상 노출한다. 같은 컴포넌트를 자녀별로
+// 재사용하는 학부모 포털(app/parent/EnrollmentTab.tsx)에도 그대로 적용된다.
+describe("EnrollmentTab — 커리큘럼 보기 진입(v3 읽기 전용)", () => {
+  beforeEach(() => vi.clearAllMocks());
+
+  it("과목 카드에서 '커리큘럼 보기'를 누르면 해당 과목의 읽기 전용 커리큘럼으로 전환되고, 뒤로가기로 목록에 복귀한다", async () => {
+    (getTrialLessonReviewForFamily as ReturnType<typeof vi.fn>).mockResolvedValue(null);
+    (loadMyCurriculumOverlay as ReturnType<typeof vi.fn>).mockResolvedValue({
+      overlayId: "overlay1",
+      units: [
+        {
+          id: "u1",
+          sourceUnitId: "src1",
+          position: 1,
+          unitTitle: "이차방정식",
+          note: null,
+          status: "not_started",
+          statusChangedAt: null,
+          keywordIds: [],
+          materialDocIds: [],
+        },
+      ],
+    });
+
+    render(<EnrollmentTab enrollments={[enrollment]} />);
+    fireEvent.click(await screen.findByText("커리큘럼 보기 →"));
+
+    expect(loadMyCurriculumOverlay).toHaveBeenCalledWith("se1");
+    expect((await screen.findAllByText("이차방정식", { exact: false })).length).toBeGreaterThan(0);
+    expect(screen.queryByText("수강 과목")).toBeNull();
+
+    fireEvent.click(screen.getByText("← 뒤로"));
+    expect(await screen.findByText("수강 과목")).toBeInTheDocument();
   });
 });

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import type { SubjectEnrollmentView } from "./enrollment-data";
 import { getTrialLessonReviewForFamily } from "@/app/parent/trial-conversion-actions";
+import CurriculumOverlayView from "./CurriculumOverlayView";
 
 // M4 UI 폴리싱 — 확정된 체험 리뷰만 노출한다(초안·Smart Notes 원본·Drive 링크·
 // 내부 메모는 이 함수 자체가 반환하지 않으므로 화면에서 실수로 보여줄 수도 없다).
@@ -68,6 +69,28 @@ export default function EnrollmentTab({
 }: {
   enrollments: SubjectEnrollmentView[];
 }) {
+  // v3 커리큘럼 열람 결함 수정(2026-09-11) — 이 탭은 subject_enrollments(v3)만
+  // 조회하므로(loadStudentSubjectEnrollments, enrollment-data.ts) 여기 뜨는
+  // 과목은 전부 v3다. 레거시 전용 학생의 커리큘럼("수업" 탭 안 레거시 세션
+  // 카드 클릭, LessonsTab.tsx)은 이 탭에 아예 나타나지 않으므로 건드리지
+  // 않는다. 자녀별로 이 컴포넌트를 따로 렌더링하는 학부모 포털
+  // (app/parent/EnrollmentTab.tsx)에서도 인스턴스별 로컬 상태라 자녀 간
+  // 섞이지 않는다.
+  const [openCurriculum, setOpenCurriculum] = useState<{
+    enrollmentId: string;
+    subjectName: string;
+  } | null>(null);
+
+  if (openCurriculum) {
+    return (
+      <CurriculumOverlayView
+        subjectEnrollmentId={openCurriculum.enrollmentId}
+        subjectName={openCurriculum.subjectName}
+        onBack={() => setOpenCurriculum(null)}
+      />
+    );
+  }
+
   return (
     <div className="max-w-[640px] px-8 py-8">
       <h1 className="text-[20px] font-extrabold text-ink mb-1.5">
@@ -115,6 +138,14 @@ export default function EnrollmentTab({
                 {e.upcomingTeacherChange.teacherName} 선생님으로 변경 예정
               </div>
             )}
+
+            <button
+              type="button"
+              onClick={() => setOpenCurriculum({ enrollmentId: e.id, subjectName: e.subjectName })}
+              className="text-[12px] font-semibold text-blue mt-1"
+            >
+              커리큘럼 보기 →
+            </button>
 
             <TrialReviewDisplay subjectEnrollmentId={e.id} />
 
