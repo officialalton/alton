@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type MouseEvent } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import {
   inviteStudent,
   listParentsForUsersTabAction,
@@ -10,8 +10,6 @@ import {
 import { updateUserBasicInfo } from "./user-edit-actions";
 import StudentDetailPanel from "./StudentDetailPanel";
 import TeacherDetailPanel from "./TeacherDetailPanel";
-import DirectAccountCreationForm from "./DirectAccountCreationForm";
-import DirectAccountLinksList, { type DirectAccountLinksListHandle } from "./DirectAccountLinksList";
 import type { AdminSubject } from "./subject-data";
 import type {
   CreditTransaction,
@@ -69,7 +67,6 @@ export default function UsersTab({
   const [qcWarningsByTeacher, setQcWarningsByTeacher] = useState<Record<string, QcWarning[]>>({});
   const [openStudentId, setOpenStudentId] = useState<string | null>(null);
   const [openTeacherId, setOpenTeacherId] = useState<string | null>(null);
-  const directLinksListRef = useRef<DirectAccountLinksListHandle>(null);
 
   function loadParentsNow() {
     setLoadingParents(true);
@@ -224,17 +221,6 @@ export default function UsersTab({
               </div>
             </div>
           ))}
-          {/* (2026-09-07) 레거시 "학부모 초대"(자녀 없이 보호자만 먼저 만들고 나중에
-              자녀를 추가하는 경로, account_invites 기반) 폼은 제거됐다 —
-              "지인/추천"(DirectAccountCreationForm, 보호자+학생을 한 번에 만드는
-              trial_onboarding_links 기반 경로)이 완전히 상위 호환하고, 레거시 폼은
-              production에서 React 미니파이 오류(#441 — 서버 액션이 던진 예외가
-              Next.js에 의해 일반화된 메시지로 마스킹되어 그대로 전파됨, 위
-              sendTrialOnboardingNoticeAction의 동일 클래스 버그와 같은 원인)로
-              막 크래시가 났다. 서버 액션 inviteParent()는 users-actions.ts에서
-              완전히 제거했다(다른 호출부 없음 확인됨). */}
-          <DirectAccountCreationForm onSent={() => directLinksListRef.current?.refresh()} />
-          <DirectAccountLinksList ref={directLinksListRef} />
         </>
       )}
 

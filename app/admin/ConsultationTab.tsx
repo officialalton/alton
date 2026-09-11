@@ -19,6 +19,7 @@ import type { ContractActivationRetryItem } from "./consultation-actions";
 import ConsultationSchedulingPanel from "./ConsultationSchedulingPanel";
 import ConsultationKanbanBoard from "./ConsultationKanbanBoard";
 import RegularContractTab from "./RegularContractTab";
+import AccountCreationTab from "./AccountCreationTab";
 import type { KanbanCard } from "./consultation-kanban-actions";
 import ClosedConsultationsSection from "./ClosedConsultationsSection";
 import type {
@@ -33,16 +34,19 @@ import type {
 import type { AdminSubject } from "./subject-data";
 import type { MatchingTeacherCandidate } from "./matching-data";
 
-type SubTab = "consult" | "contracts" | "scheduling" | "trial" | "consent" | "errors" | "past";
+type SubTab = "consult" | "contracts" | "accounts" | "scheduling" | "trial" | "consent" | "errors" | "past";
 
 // 2026-09-10(P1-B 신규 통합 보드) — "상담 현황"을 "신규 현황"으로 개칭하고
 // (상담 유입 + 계정 생성 유입을 한 보드에 합침), 매칭 탭 하단에 있던 "정규
-// 계약 발송 대기"를 "정규 계약 발송" 탭으로 이관해 "신규 현황" 바로
-// 다음에 둔다. 나머지 서브탭(상담 운영/체험 관리/보호자 동의 대기/지난
-// 상담/오류 재처리)은 이번 배치 범위 밖 — 변경 없음.
+// 계약 발송 대기"를 "정규 계약 발송" 탭으로, 사용자 > 학부모 탭에 있던
+// 계정 생성 폼/발송 내역을 "계정 생성" 탭으로 이관했다. 탭 순서는 "신규
+// 현황 → 정규 계약 발송 → 계정 생성" 순. 나머지 서브탭(상담 운영/체험
+// 관리/보호자 동의 대기/지난 상담/오류 재처리)은 이번 배치 범위 밖 —
+// 변경 없음.
 const SUB_NAV: { id: SubTab; label: string }[] = [
   { id: "consult", label: "신규 현황" },
   { id: "contracts", label: "정규 계약 발송" },
+  { id: "accounts", label: "계정 생성" },
   { id: "scheduling", label: "상담 운영(신청·수락·캘린더)" },
   { id: "trial", label: "체험 관리" },
   { id: "consent", label: "보호자 동의 대기" },
@@ -89,9 +93,9 @@ export default function ConsultationTab({
 
   return (
     <div className="px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-1">상담</h1>
+      <h1 className="text-[20px] font-extrabold text-ink mb-1">신규</h1>
       <p className="text-[13px] text-grey-500 mb-5">
-        상담 → 체험 → 제안서 흐름과 관련 예외 상황을 관리합니다.
+        상담·계정 생성 유입부터 체험·정규 전환·계약까지의 흐름과 예외 상황을 관리합니다.
       </p>
 
       <div className="flex gap-1 mb-6 border-b border-grey-200">
@@ -117,6 +121,7 @@ export default function ConsultationTab({
         />
       )}
       {sub === "contracts" && <RegularContractTab />}
+      {sub === "accounts" && <AccountCreationTab />}
       {sub === "scheduling" && <ConsultationSchedulingPanel />}
       {sub === "trial" && <TrialSection trials={trials} consultations={consultations} />}
       {sub === "consent" && <ConsentGapSection gaps={consentGaps} completed={completedConsents} />}
