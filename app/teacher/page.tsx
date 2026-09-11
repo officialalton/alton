@@ -5,8 +5,8 @@ import { loadMySubjects } from "./mysubjects-data";
 import { loadAllStudentCurricula } from "./curriculum-data";
 import { loadReviewedSessionIds } from "./review-status-data";
 import { loadTeacherAssignments } from "./assignments-data";
-import { loadMemos } from "@/app/student/memo-data";
-import { loadReviews, loadStudentFeedback } from "@/app/student/review-data";
+import { loadMemosByEnrollmentIds } from "@/app/student/memo-data";
+import { loadReviews, loadStudentFeedbackForStudents } from "@/app/student/review-data";
 import TeacherShell from "./TeacherShell";
 import { listMyAvailabilityRules, listTeacherAvailabilityExceptions } from "./availability-actions";
 import { listMyLessonSchedule } from "./lesson-schedule-actions";
@@ -41,6 +41,10 @@ export default async function TeacherHomePage({
     }
   );
 
+  // 2026-09-11(제품 오너 실사용 보고 — "학생별 커리큘럼" 진입이 매우 느림,
+  // 실측 결과 Gateway Timeout까지 발생) — materialsSubjects는 roster 등
+  // 앞 단계 결과에 의존하지 않는데도 별도 순차 단계로 분리돼 있었다 — 첫
+  // Promise.all에 합쳐 왕복 1회를 없앤다.
   const [
     dashboard,
     roster,
@@ -50,6 +54,7 @@ export default async function TeacherHomePage({
     availabilityExceptions,
     lessonSchedule,
     { data: teacherProfile },
+    materialsSubjects,
   ] = await Promise.all([
     dashboardPromise,
     loadRoster(supabase, user.id),
@@ -59,13 +64,17 @@ export default async function TeacherHomePage({
     listTeacherAvailabilityExceptions(),
     lessonSchedulePromise,
     teacherProfilePromise,
+    loadTeacherMaterialsLibrary(supabase, user.id),
   ]);
-  const materialsSubjects = await loadTeacherMaterialsLibrary(supabase, user.id);
   const availabilityTimezone = resolveUserTimezone({
     profileTimezone: (teacherProfile?.timezone as string) ?? null,
     householdDefaultTimezone: null,
   });
 
+  // 2026-09-11(같은 라운드) — loadAllStudentCurricula()는 이제 담당 학생
+  // 전체를 쿼리 4회로 배치 조회한다(기존: 학생 수만큼 동시 쿼리 — 담당
+  // 학생이 많은 실제 계정에서 DB 커넥션 과부하로 Gateway Timeout까지
+  // 발생했다).
   const curricula = await loadAllStudentCurricula(
     supabase,
     roster.map((r) => ({ studentId: r.studentId, studentName: r.studentName }))
@@ -75,38 +84,19 @@ export default async function TeacherHomePage({
     .flatMap((c) => c.units.map((u) => u.sessionId))
     .filter((id): id is string => !!id);
   const studentIds = Array.from(new Set(curricula.map((c) => c.studentId)));
+  const enrollmentIds = curricula.map((c) => c.enrollmentId);
 
-  const [memosEntries, reviews, studentFeedbackEntries, reviewedSessionIds] =
-    await Promise.all([
-      Promise.all(
-        curricula.map(
-          async (c) => [c.enrollmentId, await loadMemos(supabase, c.enrollmentId)] as const
-        )
-      ),
-      loadReviews(supabase, allSessionIds),
-      Promise.all(
-        studentIds.map(async (studentId) => {
-          const sessionIdsForStudent = curricula
-            .filter((c) => c.studentId === studentId)
-            .flatMap((c) => c.units.map((u) => u.sessionId))
-            .filter((id): id is string => !!id);
-          return loadStudentFeedback(supabase, studentId, sessionIdsForStudent);
-        })
-      ),
-      loadReviewedSessionIds(
-        supabase,
-        dashboard.past.map((l) => l.sessionId)
-      ),
-    ]);
-
-  const memosByEnrollment = Object.fromEntries(memosEntries) as Record<
-    string,
-    Awaited<ReturnType<typeof loadMemos>>
-  >;
-  const studentFeedback: Record<string, Awaited<ReturnType<typeof loadStudentFeedback>>[string]> = {};
-  for (const feedback of studentFeedbackEntries) {
-    Object.assign(studentFeedback, feedback);
-  }
+  // 2026-09-11(같은 라운드) — memos/feedback도 enrollment·학생 수만큼
+  // 개별 쿼리하던 것을 각 쿼리 1회 배치 조회로 교체했다(위와 동일한 이유).
+  const [memosByEnrollment, reviews, studentFeedback, reviewedSessionIds] = await Promise.all([
+    loadMemosByEnrollmentIds(supabase, enrollmentIds),
+    loadReviews(supabase, allSessionIds),
+    loadStudentFeedbackForStudents(supabase, studentIds, allSessionIds),
+    loadReviewedSessionIds(
+      supabase,
+      dashboard.past.map((l) => l.sessionId)
+    ),
+  ]);
 
   return (
     <TeacherShell
