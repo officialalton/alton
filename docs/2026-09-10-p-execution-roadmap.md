@@ -341,7 +341,9 @@ migration은 만들지 않음)을 한 보드에서 관리하도록 이관했다.
 - **로컬 환경의 한계**: seed 데이터에는 계정 생성 완료 건이 없어 실제
   카드 노출·배지·상세는 단위 테스트로만 검증했다 — Preview에서 실제
   계정 생성 건으로 카드가 뜨는지 확인이 필요하다.
-- **배포**: migration 없음. 커밋 후 push, Preview 배포. Production 미적용.
+- **배포**: migration 없음. 커밋 `ecca6ad` push 완료, Preview 배포 완료
+  `https://alton-jyp32z31x-alton7.vercel.app`(`target: preview` 확인).
+  Production 미적용.
 - **범위 밖(문서에 이미 있던 별도 메모, 이번 배치에 포함하지 않음)**:
   "계정 생성 폼·발송 내역을 신규의 별도 '계정 생성' 서브탭으로 추가
   이관"과 "P4-3 관리자 문서 탭(회사 문서/계약/동의서)" 계획이 이 문서에
