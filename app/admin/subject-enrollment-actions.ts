@@ -33,6 +33,10 @@ export type SubjectEnrollmentListItem = {
   contractId: string;
   currentTeacherId: string | null;
   currentTeacherName: string | null;
+  // C-2(2차, 2026-09-11) — 관리자 직접 종료 확인 화면이 영향 미리보기
+  // (previewTerminationImpactAction)를 부르려면 teacher_assignments 행 id가
+  // 필요하다(teacher_id가 아니라) — currentTeacherId만으로는 호출할 수 없었다.
+  currentTeacherAssignmentId: string | null;
   createdAt: string;
 };
 
@@ -55,7 +59,7 @@ export async function listSubjectEnrollmentsForChild(
   const enrollmentIds = data.map((r) => r.id);
   const { data: activeAssignments } = await admin
     .from("teacher_assignments")
-    .select("subject_enrollment_id, teacher_id, teacher:profiles!teacher_assignments_teacher_id_fkey(name)")
+    .select("id, subject_enrollment_id, teacher_id, teacher:profiles!teacher_assignments_teacher_id_fkey(name)")
     .in("subject_enrollment_id", enrollmentIds)
     .eq("status", "active");
 
@@ -63,6 +67,7 @@ export async function listSubjectEnrollmentsForChild(
     (activeAssignments ?? []).map((a) => [
       a.subject_enrollment_id as string,
       {
+        assignmentId: a.id as string,
         id: a.teacher_id as string,
         name: (extractOne<{ name?: string }>(a.teacher)?.name as string | undefined) ?? null,
       },
@@ -81,6 +86,7 @@ export async function listSubjectEnrollmentsForChild(
       contractId: row.contract_id,
       currentTeacherId: t?.id ?? null,
       currentTeacherName: t?.name ?? null,
+      currentTeacherAssignmentId: t?.assignmentId ?? null,
       createdAt: row.created_at,
     };
   });

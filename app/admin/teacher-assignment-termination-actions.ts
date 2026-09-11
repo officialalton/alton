@@ -29,6 +29,14 @@ export type TerminationRequestListItem = {
   effectiveFrom: string | null;
   error: string | null;
   createdAt: string;
+  // C-2(2차, 2026-09-11) — 재배정 선생님 선택을 이름 드롭다운(과목별 커리큘럼
+  // 보유 후보)으로 바꾸려면 subjectId가 필요하다(이전엔 UUID를 직접 입력받아
+  // 필요 없었음). 확인 화면에 "학생·과목·현재 선생님"을 보여주기 위한 표시용
+  // 필드도 함께 채운다.
+  subjectId: string;
+  subjectName: string | null;
+  childName: string | null;
+  currentTeacherName: string | null;
 };
 
 export async function listTerminationRequests(): Promise<TerminationRequestListItem[]> {
@@ -39,20 +47,56 @@ export async function listTerminationRequests(): Promise<TerminationRequestListI
     .select("*")
     .order("created_at", { ascending: false });
   if (error) throw new Error(error.message);
-  return (data ?? []).map((r) => ({
-    id: r.id,
-    subjectEnrollmentId: r.subject_enrollment_id,
-    teacherAssignmentId: r.teacher_assignment_id,
-    requestedByRole: r.requested_by_role,
-    requestedBy: r.requested_by,
-    reason: r.reason,
-    status: r.status,
-    resolution: r.resolution,
-    newTeacherId: r.new_teacher_id,
-    effectiveFrom: r.effective_from,
-    error: r.error,
-    createdAt: r.created_at,
-  }));
+  if (!data || data.length === 0) return [];
+
+  const enrollmentIds = Array.from(new Set(data.map((r) => r.subject_enrollment_id as string)));
+  const assignmentIds = Array.from(new Set(data.map((r) => r.teacher_assignment_id as string)));
+
+  const [{ data: enrollmentRows }, { data: assignmentRows }] = await Promise.all([
+    admin
+      .from("subject_enrollments")
+      .select("id, subject_id, child:profiles!subject_enrollments_child_id_fkey(name), subject:subjects(name)")
+      .in("id", enrollmentIds),
+    admin
+      .from("teacher_assignments")
+      .select("id, teacher:profiles!teacher_assignments_teacher_id_fkey(name)")
+      .in("id", assignmentIds),
+  ]);
+
+  const enrollmentById = new Map((enrollmentRows ?? []).map((e) => [e.id as string, e]));
+  const teacherNameByAssignmentId = new Map(
+    (assignmentRows ?? []).map((a) => [
+      a.id as string,
+      extractOneName(a.teacher),
+    ])
+  );
+
+  return data.map((r) => {
+    const enrollment = enrollmentById.get(r.subject_enrollment_id as string);
+    return {
+      id: r.id,
+      subjectEnrollmentId: r.subject_enrollment_id,
+      teacherAssignmentId: r.teacher_assignment_id,
+      requestedByRole: r.requested_by_role,
+      requestedBy: r.requested_by,
+      reason: r.reason,
+      status: r.status,
+      resolution: r.resolution,
+      newTeacherId: r.new_teacher_id,
+      effectiveFrom: r.effective_from,
+      error: r.error,
+      createdAt: r.created_at,
+      subjectId: (enrollment?.subject_id as string) ?? "",
+      subjectName: enrollment ? extractOneName(enrollment.subject) : null,
+      childName: enrollment ? extractOneName(enrollment.child) : null,
+      currentTeacherName: teacherNameByAssignmentId.get(r.teacher_assignment_id as string) ?? null,
+    };
+  });
+}
+
+function extractOneName(rel: unknown): string | null {
+  const row = Array.isArray(rel) ? rel[0] : rel;
+  return (row as { name?: string } | null)?.name ?? null;
 }
 
 export async function previewTerminationImpactAction(
@@ -93,6 +137,37 @@ export async function processTerminationRequestAction(params: {
     processedBy: actorUserId,
     newTeacherId: params.newTeacherId,
     effectiveFrom: params.effectiveFrom,
+  });
+}
+
+// C-2(2차, 2026-09-11, 제품 오너 지시) — 관리자 직접 종료는 "요청 생성 →
+// 목록에서 재조회해 처리" 두 단계로 화면을 나누지 않는다: 영향 미리보기까지
+// 확인한 관리자가 한 번의 확인으로 즉시 종료를 실행하는 단일 흐름이 필요하다.
+// 내부적으로는 기존 요청·감사·재시도 경로(createTerminationRequest →
+// processTeacherAssignmentTermination)를 그대로 재사용한다 — 새 종료 로직을
+// 만들지 않고, 같은 호출을 한 서버 액션 안에서 연달아 실행할 뿐이다. 교사·
+// 보호자가 접수한 요청을 관리자가 나중에 목록에서 처리하는 기존 흐름
+// (processTerminationRequestAction, 위)은 그대로 유지 — 이 함수는 "관리자가
+// 지금 바로 종료를 시작"하는 경우에만 쓴다. 재배정(reassign)은 이미
+// TeacherChangeForm(변경 확정 버튼)으로 요청 없이 즉시 가능하므로, 이 빠른
+// 경로는 수강 종료(end_enrollment)만 지원한다.
+export async function adminTerminateAssignmentNow(params: {
+  subjectEnrollmentId: string;
+  teacherAssignmentId: string;
+  reason: string;
+}) {
+  const { actorUserId } = await requireAdminOrCapability(MATCHING_CAPABILITY);
+  const { requestId } = await createTerminationRequest({
+    subjectEnrollmentId: params.subjectEnrollmentId,
+    teacherAssignmentId: params.teacherAssignmentId,
+    requestedByRole: "admin",
+    requestedBy: actorUserId,
+    reason: params.reason,
+  });
+  return processTeacherAssignmentTermination({
+    requestId,
+    resolution: "end_enrollment",
+    processedBy: actorUserId,
   });
 }
 

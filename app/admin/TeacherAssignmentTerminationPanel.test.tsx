@@ -28,6 +28,10 @@ const baseRequest = {
   effectiveFrom: null,
   error: null,
   createdAt: "2026-09-01T00:00:00Z",
+  subjectId: "sub1",
+  subjectName: "SAT Math",
+  childName: "테스트 학생",
+  currentTeacherName: "박서연",
 };
 
 describe("TeacherAssignmentTerminationPanel", () => {
@@ -43,7 +47,7 @@ describe("TeacherAssignmentTerminationPanel", () => {
     ]);
     (processTerminationRequestAction as ReturnType<typeof vi.fn>).mockResolvedValue({ status: "completed" });
 
-    render(<TeacherAssignmentTerminationPanel />);
+    render(<TeacherAssignmentTerminationPanel teacherCandidatesBySubject={{}} />);
 
     await screen.findByText(/요청자: teacher/);
     fireEvent.click(screen.getByText("처리"));
@@ -67,12 +71,35 @@ describe("TeacherAssignmentTerminationPanel", () => {
       error: "새 선생님과 시간 충돌",
     });
 
-    render(<TeacherAssignmentTerminationPanel />);
+    render(<TeacherAssignmentTerminationPanel teacherCandidatesBySubject={{}} />);
     await screen.findByText(/요청자: teacher/);
     fireEvent.click(screen.getByText("처리"));
     await waitFor(() => screen.getByText("종료 처리 확정"));
     fireEvent.click(screen.getByText("종료 처리 확정"));
 
     await screen.findByText(/새 선생님과 시간 충돌/);
+  });
+
+  // C-2(2차, 2026-09-11) — UUID 직접 입력을 없애고 해당 과목 운영 커리큘럼
+  // 보유 후보만 이름으로 고르게 한다.
+  it("학생·과목·현재 선생님을 보여주고, 재배정 선택은 UUID 입력이 아니라 해당 과목 후보 이름 드롭다운이다", async () => {
+    (listTerminationRequests as ReturnType<typeof vi.fn>).mockResolvedValue([baseRequest]);
+    (previewTerminationImpactAction as ReturnType<typeof vi.fn>).mockResolvedValue([]);
+
+    render(
+      <TeacherAssignmentTerminationPanel
+        teacherCandidatesBySubject={{ sub1: [{ id: "t2", name: "이도현" }] }}
+      />
+    );
+
+    await screen.findByText("테스트 학생 · SAT Math");
+    expect(screen.getByText(/현재 선생님: 박서연/)).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText("처리"));
+    await waitFor(() => screen.getByText("새 선생님으로 재배정"));
+    fireEvent.click(screen.getByText("새 선생님으로 재배정"));
+
+    expect(screen.queryByPlaceholderText("새 선생님 ID")).toBeNull();
+    expect(await screen.findByText("이도현")).toBeInTheDocument();
   });
 });

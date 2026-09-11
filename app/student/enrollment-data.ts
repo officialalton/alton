@@ -17,11 +17,16 @@ export type TeacherAssignmentRecord = {
   reason: string | null;
 };
 
+// v3 커리큘럼/종료 표시 결함 수정(2026-09-11) — 이 타입이 실제 DB
+// v3_subject_enrollment_status enum(20260830000000_r1_enums_and_capabilities.sql)
+// 과 어긋나 있었다: DB는 'completed'/'terminated'를 쓰는데 이 타입은 존재하지도
+// 않는 'ended'를 썼다. 학생·학부모 포털이 종료된 과목의 상태 배지를 빈 값으로
+// 그리던 원인 — enum 값 그대로 맞춘다.
 export type SubjectEnrollmentView = {
   id: string;
   subjectId: string;
   subjectName: string;
-  status: "planned" | "active" | "paused" | "ended";
+  status: "planned" | "active" | "paused" | "completed" | "terminated";
   currentTeacher: TeacherAssignmentRecord | null;
   upcomingTeacherChange: TeacherAssignmentRecord | null;
   history: TeacherAssignmentRecord[];

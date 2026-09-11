@@ -52,7 +52,8 @@ const STATUS_LABEL: Record<SubjectEnrollmentView["status"], string> = {
   planned: "예정",
   active: "수강중",
   paused: "일시중지",
-  ended: "종료",
+  completed: "완료",
+  terminated: "종료",
 };
 
 function formatDate(iso: string | null): string {

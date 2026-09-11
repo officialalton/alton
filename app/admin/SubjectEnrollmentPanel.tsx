@@ -3,26 +3,47 @@
 // R5 — 과목 수강/선생님 배정 관리자 패널. 기존 "매칭"(MatchingTab) 탭 안에
 // 추가 섹션으로 얹는다(spec: 큰 신규 최상위 화면을 만들지 않는다). 학생 ID로
 // 조회해 과목 수강 목록/상태/현재 선생님/배정 이력/미래 예약 영향/문서 권한
-// 재처리 큐를 보여주고, 활성화·최초 배정·선생님 변경 액션을 제공한다.
+// 재처리 큐를 보여주고, 활성화·배정·변경·종료를 처리한다.
+//
+// C-2(2차, 2026-09-11, 제품 오너 지시) — 세 가지를 한 번에 정리했다.
+// 1. "새 과목 수강 계획" 드롭다운이 종료(terminated)된 과목까지 후보에서
+//    막고 있던 필터 버그 수정 — 활성 수강 중복 방지는 유지하되, 종료된
+//    과목은 다시 배정 후보로 나와야 한다(재등록 정책, decideReturningSubjectEnrollment
+//    와 동일한 "live" 정의를 여기서도 그대로 쓴다).
+// 2. "수강 계획 생성 → 활성화 → 교사 배정" 3단계였던 관리자 흐름을 "과목
+//    선택 → 선생님 선택 → 배정 확인" 한 번으로 통합했다(AssignTeacherForm) —
+//    신규 매칭(MatchingTab의 MatchForm)과 동일하게 matching-common-actions.ts
+//    의 confirmMatch() 하나만 호출한다(내부 subject_enrollment 생성/재사용·
+//    선생님 배정·학생 활성화·커리큘럼 시딩을 전부 시스템이 처리). "활성화"
+//    버튼은 그대로 유지한다 — 계약 active + 결제완료 수업권이라는 별도
+//    조건이라 배정과 분리된 채로 있어야 한다.
+// 3. "배정 종료"를 요청 생성→목록에서 재조회해 처리하는 두 단계가 아니라,
+//    영향 확인 화면을 거쳐 한 번에 실행하는 단일 흐름(TerminateAssignmentPanel)
+//    으로 추가했다. 내부적으로 기존 요청·감사·재시도 경로(teacher-assignment-
+//    termination-actions.ts::adminTerminateAssignmentNow)를 그대로 재사용한다.
+//    교사·보호자가 접수한 요청을 관리자가 처리하는 기존 흐름
+//    (TeacherAssignmentTerminationPanel)은 손대지 않았다.
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { confirmMatch } from "./matching-actions";
 import {
   activateSubjectEnrollment,
-  assignTeacherToSubjectEnrollment,
   changeTeacherAssignment,
   checkSubjectEnrollmentActivationReadiness,
-  checkTrialTeacherSuccession,
-  getContractIdForChild,
   listDocumentPermissionRetries,
   listFutureBookingImpact,
   listSubjectEnrollmentsForChild,
   listTeacherAssignmentHistory,
-  planSubjectEnrollment,
   type DocumentPermissionRetryItem,
   type FutureBookingImpactItem,
   type SubjectEnrollmentListItem,
   type TeacherAssignmentHistoryItem,
 } from "./subject-enrollment-actions";
+import {
+  adminTerminateAssignmentNow,
+  previewTerminationImpactAction,
+} from "./teacher-assignment-termination-actions";
+import type { TerminationImpactReservation } from "@/lib/enrollment/teacher-assignment-termination";
 import { selectableSubjects, type AdminSubject } from "./subject-data";
 import type { MatchingTeacherCandidate, MatchingStudentItem } from "./matching-data";
 
@@ -42,6 +63,7 @@ export default function SubjectEnrollmentPanel({
   const [history, setHistory] = useState<TeacherAssignmentHistoryItem[]>([]);
   const [impact, setImpact] = useState<FutureBookingImpactItem[]>([]);
   const [retries, setRetries] = useState<DocumentPermissionRetryItem[] | null>(null);
+  const [terminatingId, setTerminatingId] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
 
@@ -56,6 +78,10 @@ export default function SubjectEnrollmentPanel({
     } finally {
       setBusy(false);
     }
+  }
+
+  async function refresh() {
+    if (childId) setEnrollments(await listSubjectEnrollmentsForChild(childId));
   }
 
   async function expand(enrollmentId: string) {
@@ -94,7 +120,7 @@ export default function SubjectEnrollmentPanel({
       }
       await activateSubjectEnrollment(enrollmentId);
       setMessage("활성화되었습니다.");
-      if (childId) setEnrollments(await listSubjectEnrollmentsForChild(childId));
+      await refresh();
     } catch (e) {
       setMessage(e instanceof Error ? e.message : "활성화 실패");
     } finally {
@@ -102,22 +128,19 @@ export default function SubjectEnrollmentPanel({
     }
   }
 
-  async function handleAssignInitial(enrollmentId: string, teacherId: string, subjectId: string) {
+  async function handleAssign(teacherId: string, subjectId: string) {
     setBusy(true);
     setMessage(null);
     try {
-      const check = await checkTrialTeacherSuccession({ teacherId, subjectId });
-      if (!check.proposal.canPropose) {
-        setMessage(check.blockMessages.join(" "));
+      const result = await confirmMatch(childId, teacherId, subjectId);
+      if (!result.ok) {
+        setMessage(result.error);
         return;
       }
-      const result = await assignTeacherToSubjectEnrollment({
-        subjectEnrollmentId: enrollmentId,
-        teacherId,
-        effectiveFrom: new Date().toISOString(),
-      });
-      setMessage(result.activationWarning ?? "선생님이 배정되었습니다.");
-      if (childId) setEnrollments(await listSubjectEnrollmentsForChild(childId));
+      setMessage(
+        result.curriculumWarning ?? result.activationWarning ?? "선생님이 배정되었습니다."
+      );
+      await refresh();
     } catch (e) {
       setMessage(e instanceof Error ? e.message : "배정 실패");
     } finally {
@@ -161,10 +184,33 @@ export default function SubjectEnrollmentPanel({
         reason,
       });
       setMessage("선생님이 변경되었습니다. 확정된 미래 예약은 자동 이전되지 않으니 안내가 필요합니다.");
-      if (childId) setEnrollments(await listSubjectEnrollmentsForChild(childId));
+      await refresh();
       await expand(enrollmentId);
     } catch (e) {
       setMessage(e instanceof Error ? e.message : "변경 실패");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleTerminate(enrollmentId: string, teacherAssignmentId: string, reason: string) {
+    setBusy(true);
+    setMessage(null);
+    try {
+      const result = await adminTerminateAssignmentNow({
+        subjectEnrollmentId: enrollmentId,
+        teacherAssignmentId,
+        reason,
+      });
+      if (result.status === "failed") {
+        setMessage(result.error ?? "종료 처리 중 오류가 발생했습니다.");
+        return;
+      }
+      setMessage("배정이 종료되었습니다.");
+      setTerminatingId(null);
+      await refresh();
+    } catch (e) {
+      setMessage(e instanceof Error ? e.message : "종료 실패");
     } finally {
       setBusy(false);
     }
@@ -179,11 +225,21 @@ export default function SubjectEnrollmentPanel({
     }
   }
 
+  // 활성 배정이 있는 과목만 새 배정 후보에서 제외한다 — 'planned'인데
+  // 아직 미배정이거나 종료(terminated/completed)된 과목은 다시 선택할 수
+  // 있어야 한다(재등록 정책). confirmMatch(=confirm_student_teacher_subject_
+  // match)가 살아있는 subject_enrollment는 재사용하고, 없으면(종료된 것만
+  // 있거나 아예 없으면) 새로 만든다 — 여기서 상태를 더 세밀히 나눌 필요가
+  // 없다.
+  const subjectIdsWithActiveTeacher = new Set(
+    (enrollments ?? []).filter((e) => e.currentTeacherId).map((e) => e.subjectId)
+  );
+
   return (
     <div className="max-w-[720px] px-8 py-8 border-t border-grey-200 mt-6">
       <h2 className="text-[16px] font-extrabold text-ink mb-1.5">과목 수강 · 선생님 배정 (R5)</h2>
       <p className="text-[12.5px] text-grey-500 mb-4">
-        학생 ID로 과목 수강 상태·현재 선생님·배정 이력을 조회하고, 활성화·배정·변경을 처리합니다.
+        학생 ID로 과목 수강 상태·현재 선생님·배정 이력을 조회하고, 활성화·배정·변경·종료를 처리합니다.
       </p>
 
       <div className="flex flex-wrap gap-2 mb-4">
@@ -205,11 +261,11 @@ export default function SubjectEnrollmentPanel({
       {busy && <p className="text-[12.5px] text-grey-500 mb-3">처리 중...</p>}
 
       {childId && (
-        <NewEnrollmentForm
-          childId={childId}
+        <AssignTeacherForm
           subjects={subjects}
-          existingSubjectIds={new Set((enrollments ?? []).map((e) => e.subjectId))}
-          onPlanned={async () => setEnrollments(await listSubjectEnrollmentsForChild(childId))}
+          teacherCandidatesBySubject={teacherCandidatesBySubject}
+          blockedSubjectIds={subjectIdsWithActiveTeacher}
+          onAssign={handleAssign}
         />
       )}
 
@@ -237,6 +293,16 @@ export default function SubjectEnrollmentPanel({
                   활성화
                 </button>
               )}
+              {en.currentTeacherId && en.currentTeacherAssignmentId && (
+                <button
+                  onClick={() =>
+                    setTerminatingId(terminatingId === en.id ? null : en.id)
+                  }
+                  className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-red text-red"
+                >
+                  {terminatingId === en.id ? "닫기" : "배정 종료"}
+                </button>
+              )}
               <button
                 onClick={() => expand(en.id)}
                 className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200"
@@ -246,25 +312,6 @@ export default function SubjectEnrollmentPanel({
             </div>
           </div>
 
-          {!en.currentTeacherId && (
-            <div className="mt-2 flex flex-wrap gap-2">
-              {(teacherCandidatesBySubject[en.subjectId] ?? []).map((c) => (
-                <button
-                  key={c.id}
-                  onClick={() => {
-                    // 2026-09-06(UAT 지적): 이름을 누르는 즉시 배정이 확정돼 실수
-                    // 클릭 방지 절차가 없었다 — 확정 전 확인 한 단계를 추가한다.
-                    if (!window.confirm(`${c.name} 선생님을 이 과목에 배정할까요?`)) return;
-                    handleAssignInitial(en.id, c.id, en.subjectId);
-                  }}
-                  className="text-[11.5px] font-semibold px-2.5 py-1 rounded-full border-[1.5px] border-grey-200"
-                >
-                  {c.name} 배정
-                </button>
-              ))}
-            </div>
-          )}
-
           {en.currentTeacherId && (
             <TeacherChangeForm
               enrollmentId={en.id}
@@ -272,6 +319,18 @@ export default function SubjectEnrollmentPanel({
                 (c) => c.id !== en.currentTeacherId
               )}
               onSubmit={handleChangeTeacher}
+            />
+          )}
+
+          {terminatingId === en.id && en.currentTeacherAssignmentId && (
+            <TerminateAssignmentConfirm
+              childName={en.childName}
+              subjectName={en.subjectName}
+              teacherName={en.currentTeacherName}
+              teacherAssignmentId={en.currentTeacherAssignmentId}
+              busy={busy}
+              onCancel={() => setTerminatingId(null)}
+              onConfirm={(reason) => handleTerminate(en.id, en.currentTeacherAssignmentId!, reason)}
             />
           )}
 
@@ -332,68 +391,81 @@ export default function SubjectEnrollmentPanel({
   );
 }
 
-function NewEnrollmentForm({
-  childId,
+function AssignTeacherForm({
   subjects,
-  existingSubjectIds,
-  onPlanned,
+  teacherCandidatesBySubject,
+  blockedSubjectIds,
+  onAssign,
 }: {
-  childId: string;
   subjects: AdminSubject[];
-  existingSubjectIds: Set<string>;
-  onPlanned: () => void;
+  teacherCandidatesBySubject: Record<string, MatchingTeacherCandidate[]>;
+  blockedSubjectIds: Set<string>;
+  onAssign: (teacherId: string, subjectId: string) => void;
 }) {
   const [subjectId, setSubjectId] = useState("");
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [teacherId, setTeacherId] = useState("");
 
   // 2026-09-09(UAT 지적, 제품 오너 승인): 보관(archived) 처리된 과목은 신규
-  // 배정 후보에서 제외한다 — 기존 배정은 그대로 유지되고 이 목록에서만 안 뜬다.
-  const available = selectableSubjects(subjects).filter((s) => !existingSubjectIds.has(s.subjectId));
+  // 배정 후보에서 제외한다. 여기에 더해 "이미 활성 배정이 있는 과목"만
+  // blockedSubjectIds로 제외한다 — 종료(terminated)된 과목은 다시 뜬다.
+  const available = selectableSubjects(subjects).filter((s) => !blockedSubjectIds.has(s.subjectId));
+  const candidates = subjectId ? teacherCandidatesBySubject[subjectId] ?? [] : [];
   if (available.length === 0) return null;
 
-  async function handlePlan() {
-    if (!subjectId || busy) return;
-    setBusy(true);
-    setError(null);
-    try {
-      const contractId = await getContractIdForChild(childId);
-      if (!contractId) {
-        setError("이 학생의 기본계약이 아직 없습니다. 계약을 먼저 생성해주세요.");
-        return;
-      }
-      await planSubjectEnrollment({ childId, subjectId, contractId });
-      setSubjectId("");
-      onPlanned();
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "과목 수강 생성 실패");
-    } finally {
-      setBusy(false);
-    }
+  function handleSubjectChange(next: string) {
+    setSubjectId(next);
+    setTeacherId("");
+  }
+
+  function handleConfirm() {
+    if (!subjectId || !teacherId) return;
+    const teacherName = candidates.find((c) => c.id === teacherId)?.name ?? "";
+    if (!window.confirm(`${teacherName} 선생님을 이 과목에 배정할까요?`)) return;
+    onAssign(teacherId, subjectId);
+    setSubjectId("");
+    setTeacherId("");
   }
 
   return (
     <div className="mb-4 flex flex-wrap items-center gap-2">
       <select
         value={subjectId}
-        onChange={(e) => setSubjectId(e.target.value)}
+        onChange={(e) => handleSubjectChange(e.target.value)}
         className="text-[12px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5"
       >
-        <option value="">+ 새 과목 수강 계획...</option>
+        <option value="">+ 새 배정: 과목 선택...</option>
         {available.map((s) => (
           <option key={s.subjectId} value={s.subjectId}>
             {s.subjectName}
           </option>
         ))}
       </select>
+      {subjectId && (
+        <select
+          value={teacherId}
+          onChange={(e) => setTeacherId(e.target.value)}
+          className="text-[12px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5"
+        >
+          <option value="">선생님 선택...</option>
+          {candidates.map((c) => (
+            <option key={c.id} value={c.id}>
+              {c.name}
+            </option>
+          ))}
+        </select>
+      )}
+      {subjectId && candidates.length === 0 && (
+        <span className="text-[11.5px] text-grey-500">
+          이 과목을 가르치는 선생님이 없습니다. 먼저 선생님의 담당 과목을 등록해주세요.
+        </span>
+      )}
       <button
-        disabled={!subjectId || busy}
-        onClick={handlePlan}
+        disabled={!subjectId || !teacherId}
+        onClick={handleConfirm}
         className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 disabled:opacity-50"
       >
-        수강 계획 생성
+        배정 확인
       </button>
-      {error && <span className="text-[11.5px] text-red">{error}</span>}
     </div>
   );
 }
@@ -451,6 +523,79 @@ function TeacherChangeForm({
       >
         변경 확정
       </button>
+    </div>
+  );
+}
+
+// C-2(2차, 2026-09-11) — 관리자 직접 종료: "배정 종료 → 영향 확인 및 최종
+// 확인 → 실행" 한 흐름. 대상 학생·과목·선생님을 보여주고, 영향받는 미래
+// 예약을 미리보기로 확인한 뒤에만 실행 버튼이 활성화된다.
+function TerminateAssignmentConfirm({
+  childName,
+  subjectName,
+  teacherName,
+  teacherAssignmentId,
+  busy,
+  onCancel,
+  onConfirm,
+}: {
+  childName: string | null;
+  subjectName: string | null;
+  teacherName: string | null;
+  teacherAssignmentId: string;
+  busy: boolean;
+  onCancel: () => void;
+  onConfirm: (reason: string) => void;
+}) {
+  const [impact, setImpact] = useState<TerminationImpactReservation[] | null>(null);
+  const [reason, setReason] = useState("");
+
+  useEffect(() => {
+    let cancelled = false;
+    previewTerminationImpactAction(teacherAssignmentId).then((data) => {
+      if (!cancelled) setImpact(data);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [teacherAssignmentId]);
+
+  return (
+    <div className="mt-3 bg-red/5 border border-red/20 rounded-lg p-3">
+      <div className="text-[12.5px] font-bold text-ink mb-1">
+        {childName ?? "이 학생"} · {subjectName ?? "이 과목"} · {teacherName ?? "이 선생님"} 배정을
+        정말 종료할까요?
+      </div>
+      {impact === null ? (
+        <p className="text-[11.5px] text-grey-500 mb-2">영향 확인 중...</p>
+      ) : (
+        <p className="text-[11.5px] text-grey-600 mb-2">
+          영향받는 미래 예약 {impact.length}건
+          {impact.some((i) => i.hasActiveHold) && " (보유분 있음 — 정식 취소 처리되며 수업권은 해제됩니다)"}
+          {impact.length > 0 && " — 취소된 예약은 자동 복원되지 않습니다."}
+        </p>
+      )}
+      <input
+        value={reason}
+        onChange={(e) => setReason(e.target.value)}
+        placeholder="종료 사유"
+        className="text-[11.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1 w-full mb-2"
+      />
+      <div className="flex gap-2">
+        <button
+          disabled={busy || !reason.trim() || impact === null}
+          onClick={() => onConfirm(reason.trim())}
+          className="text-[11.5px] font-bold px-3 py-1.5 rounded-lg bg-red text-white disabled:opacity-50"
+        >
+          {busy ? "처리 중..." : "종료 실행"}
+        </button>
+        <button
+          onClick={onCancel}
+          className="text-[11.5px] font-semibold text-grey-500 px-3 py-1.5"
+        >
+          취소
+        </button>
+      </div>
     </div>
   );
 }

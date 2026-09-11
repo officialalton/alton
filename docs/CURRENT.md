@@ -1,5 +1,52 @@
 # ALTON — 현재 상태 (2026-09-11 기준)
 
+> **2026-09-11 — C-2(2차): 관리자 매칭/종료 화면 UX 결함 4건 수정 — 제품 오너가
+> Preview에서 1차 결과를 직접 확인하다 발견.** 전부 기존 M3/R5 화면의 결함이며
+> 신규 스키마·migration 없음(app 코드만).
+> 1. **"새 배정" 과목 드롭다운이 종료된 과목을 영구 차단하던 버그 수정**:
+>    `SubjectEnrollmentPanel.tsx`의 후보 필터가 학생의 모든 과거 `subject_
+>    enrollments`(상태 무관)를 제외 대상으로 삼아, 한 번 종료(terminated)된
+>    과목은 재등록 정책(`decideReturningSubjectEnrollment`)이 있어도 화면에서
+>    다시 선택할 방법이 없었다. 활성 배정이 있는 과목만 제외하도록 수정 —
+>    종료된 과목은 같은/다른 선생님으로 다시 배정 가능.
+> 2. **"수강 계획 생성 → 활성화 → 교사 배정" 3단계 관리자 흐름을 "과목 선택 →
+>    선생님 선택 → 배정 확인" 한 번으로 통합**: `planSubjectEnrollment` +
+>    `assignTeacherToSubjectEnrollment` 개별 호출을 없애고, 신규 매칭
+>    (MatchingTab)과 동일하게 `confirmMatch`(=`confirm_student_teacher_
+>    subject_match`, C-1 가드 내장)를 재사용 — subject_enrollment 생성/재사용·
+>    선생님 배정·학생 활성화·커리큘럼 시딩을 시스템이 한 번에 처리. "활성화"
+>    (계약 active+결제완료 수업권 게이트)는 별도 조건이라 그대로 남겨뒀다.
+> 3. **관리자 직접 종료를 "요청 생성 → 목록에서 재조회해 처리" 두 단계에서
+>    "배정 종료 → 영향 확인 → 실행" 한 흐름으로 변경**: 신규
+>    `adminTerminateAssignmentNow()`가 내부적으로 기존 요청·감사·재시도 경로
+>    (`createTerminationRequest` → `processTeacherAssignmentTermination`,
+>    resolution 고정 `end_enrollment`)를 그대로 재사용하되 한 서버 액션
+>    안에서 연달아 실행한다 — 확인 화면에 대상 학생·과목·현재 선생님과
+>    영향받는 미래 예약 수(+보유분 여부)를 보여준 뒤에만 실행 가능. **재배정
+>    (resolution=reassign)은 이 빠른 경로에 포함하지 않았다** — 이미
+>    `TeacherChangeForm`(선생님 변경 드롭다운)으로 요청 없이 즉시 가능하기
+>    때문. 교사·보호자가 접수한 요청을 관리자가 처리하는 기존
+>    `TeacherAssignmentTerminationPanel` 흐름은 그대로 유지.
+> 4. **모든 배정 화면의 선택 방식을 이름 기반으로 통일 + 학생·학부모 종료
+>    표시 누락 수정**: `TeacherAssignmentTerminationPanel`의 재배정 "새 선생님
+>    ID" UUID 직접 입력을 해당 과목 운영 커리큘럼 보유 후보 드롭다운으로 교체
+>    (신규 매칭·선생님 변경과 동일 후보 기준·서버 검증). 확인 화면에 학생·
+>    과목·현재 선생님 이름도 함께 표시하도록 목록 로더를 확장. 별도로
+>    `app/student/enrollment-data.ts`의 `SubjectEnrollmentView.status` 타입이
+>    실제 DB enum(`v3_subject_enrollment_status`: planned/active/paused/
+>    completed/terminated)과 달리 존재하지도 않는 `'ended'`를 쓰고 있어 학생·
+>    학부모 포털 "수강 과목" 탭이 종료된 과목의 상태 배지를 빈 값으로 그리던
+>    버그를 함께 수정(`completed`/`terminated` 추가).
+> **검증**: 신규/변경 컴포넌트·서버 액션 테스트(과목 선택→선생님 선택→배정
+> 확인 흐름, 종료된 과목 재선택, 배정 종료 단일 흐름 각 1건 이상 포함),
+> tsc/eslint 클린(무관 pre-existing 오류 1건 `git diff`로 재확인 — `Teacher
+> AssignmentTerminationPanel.tsx`의 최초 `useEffect(refresh, [])`, 이번
+> 변경과 무관), `supabase db reset --local` 후 전체 263 files/1842 tests
+> 통과, `next build` 성공, `playwright test e2e/r5-subject-enrollment-
+> teacher-assignment.spec.ts` 12/12 통과. **다음**: 제품 오너가 Preview에서
+> "종료한 과목 재선택 → 동일/다른 교사 배정"과 "요청 없는 관리자 직접 종료"를
+> 직접 확인.
+>
 > **2026-09-11 — C-2(1차): 재배정에도 C-1의 "선생님 운영 커리큘럼 보유" 서버
 > 가드를 확대 적용.** 기존 매칭 종료·재배정 파이프라인(M3,
 > `lib/enrollment/teacher-assignment-termination.ts` + `change_teacher_assignment()`

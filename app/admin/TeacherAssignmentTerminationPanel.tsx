@@ -14,6 +14,7 @@ import {
   listSubjectTeachingHistoryForCurrentTeacher,
 } from "./teacher-assignment-termination-actions";
 import type { TerminationImpactReservation } from "@/lib/enrollment/teacher-assignment-termination";
+import type { MatchingTeacherCandidate } from "./matching-data";
 
 const STATUS_LABEL: Record<string, string> = {
   requested: "요청됨",
@@ -23,7 +24,13 @@ const STATUS_LABEL: Record<string, string> = {
   cancelled: "취소됨",
 };
 
-export default function TeacherAssignmentTerminationPanel() {
+export default function TeacherAssignmentTerminationPanel({
+  teacherCandidatesBySubject,
+}: {
+  // C-2(2차, 2026-09-11) — 재배정 선생님 선택을 UUID 직접 입력에서 이름
+  // 드롭다운(해당 과목 운영 커리큘럼 보유 후보만)으로 바꾸기 위해 필요.
+  teacherCandidatesBySubject: Record<string, MatchingTeacherCandidate[]>;
+}) {
   const [requests, setRequests] = useState<TerminationRequestListItem[] | null>(null);
   const [openId, setOpenId] = useState<string | null>(null);
   const [impact, setImpact] = useState<TerminationImpactReservation[] | null>(null);
@@ -109,7 +116,11 @@ export default function TeacherAssignmentTerminationPanel() {
             <div className="flex items-center justify-between">
               <div>
                 <div className="text-[13.5px] font-bold text-ink">
-                  요청자: {r.requestedByRole} · {STATUS_LABEL[r.status] ?? r.status}
+                  {r.childName ?? "학생 미상"} · {r.subjectName ?? "과목 미상"}
+                </div>
+                <div className="text-[12px] text-grey-500 mt-0.5">
+                  현재 선생님: {r.currentTeacherName ?? "미상"} · 요청자: {r.requestedByRole} ·{" "}
+                  {STATUS_LABEL[r.status] ?? r.status}
                 </div>
                 <div className="text-[12px] text-grey-500 mt-0.5">사유: {r.reason}</div>
                 {r.error && <div className="text-[12px] text-red mt-0.5">오류: {r.error}</div>}
@@ -162,12 +173,21 @@ export default function TeacherAssignmentTerminationPanel() {
 
                 {resolution === "reassign" && (
                   <div className="flex items-center gap-2 mb-2">
-                    <input
+                    {/* C-2(2차, 2026-09-11) — UUID 직접 입력 대신 이 과목의
+                        운영 커리큘럼을 가진 선생님만 이름으로 고른다(신규
+                        매칭·선생님 변경과 동일한 후보 기준·서버 검증). */}
+                    <select
                       className="border border-grey-300 rounded px-2 py-1 text-[12.5px]"
-                      placeholder="새 선생님 ID"
                       value={newTeacherId}
                       onChange={(e) => setNewTeacherId(e.target.value)}
-                    />
+                    >
+                      <option value="">새 선생님 선택...</option>
+                      {(teacherCandidatesBySubject[r.subjectId] ?? []).map((c) => (
+                        <option key={c.id} value={c.id}>
+                          {c.name}
+                        </option>
+                      ))}
+                    </select>
                     <input
                       className="border border-grey-300 rounded px-2 py-1 text-[12.5px]"
                       type="date"
