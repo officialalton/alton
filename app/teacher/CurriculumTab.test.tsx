@@ -207,4 +207,38 @@ describe("CurriculumTab", () => {
     );
     expect(screen.queryByText("학생 운영 커리큘럼")).toBeNull();
   });
+
+  // 2026-09-11(제품 오너 지적 — 캐시 정확성) — "운영 커리큘럼 관리"↔"세션
+  // 준비"를 오갈 때 체감 속도를 위해 부모 캐시로 즉시 렌더하되, 서버 재검증
+  // (requireAssignedTeacherOrAdmin 재실행 포함)은 매번 실제로 일어나야 한다
+  // — 캐시가 있다고 서버 호출 자체를 건너뛰면 (1) 이전 방문 중 저장한 편집
+  // 내용이 반영 안 된 오래된 화면을 보여줄 수 있고, (2) 선생님 변경·매칭
+  // 종료 후에도 권한 재검증 없이 화면이 그대로 열릴 수 있다.
+  it("운영 커리큘럼↔세션 준비를 오가도 매번 서버에서 다시 검증·조회한다(캐시로 요청을 건너뛰지 않음)", async () => {
+    const mockFn = loadStudentCurriculumPanelData as ReturnType<typeof vi.fn>;
+    mockFn.mockClear();
+    mockFn.mockResolvedValue({
+      initial: { overlayId: "ov1", units: [] },
+      library: { units: [], publishedDocs: [], keywords: [] },
+    });
+
+    render(
+      <CurriculumTab
+        {...baseProps}
+        operatingCurriculumJumpTo={{ subjectEnrollmentId: "se1", subjectId: "sub1", studentName: "지훈", subjectName: "SAT Math" }}
+      />
+    );
+    await waitFor(() => expect(screen.getByText("학생 운영 커리큘럼")).toBeInTheDocument());
+    expect(mockFn).toHaveBeenCalledTimes(1);
+
+    fireEvent.click(screen.getByText("세션 준비 하기 →"));
+    await waitFor(() => expect(screen.getByText("세션 준비")).toBeInTheDocument());
+    // 부모 캐시가 있어 화면은 바로 뜨지만, 서버 재검증 호출은 여전히 나가야 한다.
+    expect(mockFn).toHaveBeenCalledTimes(2);
+
+    fireEvent.click(screen.getByText("← 뒤로"));
+    await waitFor(() => expect(screen.getByText("학생 운영 커리큘럼")).toBeInTheDocument());
+    expect(mockFn).toHaveBeenCalledTimes(3);
+    expect(mockFn).toHaveBeenNthCalledWith(3, "se1", "sub1");
+  });
 });

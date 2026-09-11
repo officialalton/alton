@@ -205,6 +205,59 @@ export default function CurriculumTab({
 // — 담당 배정 검사(requireAssignedTeacherOrAdmin)와 RLS가 그대로 적용되므로,
 // 이 화면은 새 인가 로직을 추가하지 않는다. 담당이 아닌 학생의 subjectEnrollmentId로
 // 진입을 시도하면(예: 잘못된 딥링크) 로더가 에러를 던지고 화면에 그 메시지만 보여준다.
+// 2026-09-11(제품 오너 지적 — 캐시 정확성) — "부모 캐시가 있으면 서버 요청을
+// 아예 건너뛴다"는 처음 접근은 두 가지 문제가 있었다: (1) 이전 방문에서 저장한
+// 편집 내용이 로컬 state(StudentCurriculumPanel의 useState(initial...))에만
+// 있고 부모 캐시에는 반영되지 않아, 같은 화면을 다시 열면 편집 전 캐시된
+// 내용을 보여줄 수 있었다(신선도 버그). (2) 캐시로 서버 요청 자체를 건너뛰면
+// requireAssignedTeacherOrAdmin() 재검증도 건너뛰어, 선생님 변경·매칭 종료
+// 이후에도 예전 화면이 그대로 보일 수 있었다(권한 재검증 회피).
+// stale-while-revalidate로 바꾼다 — 캐시가 있으면 화면은 즉시 그 내용으로
+// 그리되(재진입 체감 속도 유지), 항상 서버에 다시 요청해(권한 재검증 포함)
+// 최신 값으로 캐시·state를 갱신한다. 재검증이 실패하면(권한 상실 등) 오래된
+// 내용을 계속 보여주지 않고 에러로 전환한다.
+function useStudentCurriculumPanelData(
+  subjectEnrollmentId: string,
+  subjectId: string,
+  cached: { initial: StudentCurriculum; library: EligibleLibrary } | undefined,
+  onLoaded: (data: { initial: StudentCurriculum; library: EligibleLibrary }) => void
+) {
+  const [state, setState] = useState<
+    | { status: "loading" }
+    | { status: "error"; message: string }
+    | { status: "ready"; initial: StudentCurriculum; library: EligibleLibrary }
+  >(cached ? { status: "ready", ...cached } : { status: "loading" });
+
+  useEffect(() => {
+    let cancelled = false;
+    loadStudentCurriculumPanelData(subjectEnrollmentId, subjectId)
+      .then(({ initial, library }) => {
+        if (!cancelled) {
+          setState({ status: "ready", initial, library });
+          onLoaded({ initial, library });
+        }
+      })
+      .catch((e) => {
+        if (!cancelled) {
+          setState({
+            status: "error",
+            message: e instanceof Error ? e.message : "불러오지 못했습니다.",
+          });
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
+    // cached는 최초 렌더의 즉시 표시 여부만 결정한다(위 useState 초기값) —
+    // 여기서 의존성으로 넣으면 캐시 갱신 때마다 재요청이 다시 발동해 무한
+    // 루프가 된다. 재검증 자체는 subjectEnrollmentId/subjectId가 바뀔 때만
+    // (=이 컴포넌트가 다른 학생·과목으로 다시 마운트될 때만) 실행하면 된다.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [subjectEnrollmentId, subjectId]);
+
+  return state;
+}
+
 function StudentCurriculumOperatingView({
   subjectEnrollmentId,
   subjectId,
@@ -224,41 +277,7 @@ function StudentCurriculumOperatingView({
   onBack: () => void;
   onOpenSessionPrep: () => void;
 }) {
-  const [state, setState] = useState<
-    | { status: "loading" }
-    | { status: "error"; message: string }
-    | { status: "ready"; initial: StudentCurriculum; library: EligibleLibrary }
-  >(cached ? { status: "ready", ...cached } : { status: "loading" });
-
-  useEffect(() => {
-    // 2026-09-11(응답 속도 개선) — 부모가 이미 캐시해둔 결과가 있으면
-    // 서버 왕복 없이 그대로 쓴다("세션 준비"에서 되돌아올 때 등).
-    if (cached) {
-      setState({ status: "ready", ...cached });
-      return;
-    }
-    let cancelled = false;
-    setState({ status: "loading" });
-    loadStudentCurriculumPanelData(subjectEnrollmentId, subjectId)
-      .then(({ initial, library }) => {
-        if (!cancelled) {
-          setState({ status: "ready", initial, library });
-          onLoaded({ initial, library });
-        }
-      })
-      .catch((e) => {
-        if (!cancelled) {
-          setState({
-            status: "error",
-            message: e instanceof Error ? e.message : "불러오지 못했습니다.",
-          });
-        }
-      });
-    return () => {
-      cancelled = true;
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [subjectEnrollmentId, subjectId, cached]);
+  const state = useStudentCurriculumPanelData(subjectEnrollmentId, subjectId, cached, onLoaded);
 
   return (
     <div className="max-w-[640px] px-8 pt-8">
@@ -319,39 +338,7 @@ function SessionPrepView({
   onLoaded: (data: { initial: StudentCurriculum; library: EligibleLibrary }) => void;
   onBack: () => void;
 }) {
-  const [state, setState] = useState<
-    | { status: "loading" }
-    | { status: "error"; message: string }
-    | { status: "ready"; initial: StudentCurriculum; library: EligibleLibrary }
-  >(cached ? { status: "ready", ...cached } : { status: "loading" });
-
-  useEffect(() => {
-    // 2026-09-11(응답 속도 개선) — "운영 커리큘럼 관리"에서 이미 불러온
-    // 결과가 있으면 재사용한다(같은 subjectEnrollmentId를 매번 다시 조회
-    // 하지 않음).
-    if (cached) {
-      setState({ status: "ready", ...cached });
-      return;
-    }
-    let cancelled = false;
-    setState({ status: "loading" });
-    loadStudentCurriculumPanelData(subjectEnrollmentId, subjectId)
-      .then(({ initial, library }) => {
-        if (!cancelled) {
-          setState({ status: "ready", initial, library });
-          onLoaded({ initial, library });
-        }
-      })
-      .catch((e) => {
-        if (!cancelled) {
-          setState({ status: "error", message: e instanceof Error ? e.message : "불러오지 못했습니다." });
-        }
-      });
-    return () => {
-      cancelled = true;
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [subjectEnrollmentId, subjectId, cached]);
+  const state = useStudentCurriculumPanelData(subjectEnrollmentId, subjectId, cached, onLoaded);
 
   if (state.status === "loading") {
     return <div className="px-8 py-8 text-[13px] text-grey-500">불러오는 중...</div>;
