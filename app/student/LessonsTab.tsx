@@ -156,7 +156,8 @@ function UpcomingList({
                 onClick={() => onOpenCurriculum(lesson.enrollmentId)}
                 className="text-[13px] font-bold text-ink"
               >
-                {lesson.subjectName} · {lesson.sessionNumber}회차
+                {lesson.subjectName}
+                {lesson.sessionNumber != null ? ` · ${lesson.sessionNumber}회차` : ""}
                 {lesson.unitTitle ? ` · ${lesson.unitTitle}` : ""}
               </button>
             </div>
@@ -212,7 +213,8 @@ function PastList({
               onClick={() => onOpenCurriculum(lesson.enrollmentId)}
               className="text-[13px] font-bold text-ink"
             >
-              {lesson.subjectName} · {lesson.sessionNumber}회차
+              {lesson.subjectName}
+              {lesson.sessionNumber != null ? ` · ${lesson.sessionNumber}회차` : ""}
               {lesson.unitTitle ? ` · ${lesson.unitTitle}` : ""}
             </button>
           </div>

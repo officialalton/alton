@@ -37,6 +37,12 @@ export default async function StudentHomePage({
   const dashboardPromise = lessonBookingPromise.then((lb) =>
     loadDashboardData(supabase, user.id, lb)
   );
+  // 2026-09-11 — "수업" 탭 예정 수업 목록도 홈과 동일하게 v3 예약을
+  // 병합해야 한다(레거시 legacy_sessions만 조회하면 v3 전용 배정 학생의
+  // 예정 수업이 "수업" 탭에서 누락된다).
+  const lessonsPromise = lessonBookingPromise.then((lb) =>
+    loadLessons(supabase, user.id, lb)
+  );
   const [
     dashboard,
     lessonBooking,
@@ -56,7 +62,7 @@ export default async function StudentHomePage({
     lessonBookingPromise,
     loadVocabWords(supabase, user.id),
     loadProblemLog(supabase, user.id),
-    loadLessons(supabase, user.id),
+    lessonsPromise,
     loadCurricula(supabase, user.id),
     loadStudentHomework(supabase, user.id),
     loadStudentHomeworkV3(supabase, user.id),

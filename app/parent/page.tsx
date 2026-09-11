@@ -44,6 +44,12 @@ export default async function ParentHomePage({
   const dashboardPromise = lessonBookingPromise.then((lb) =>
     loadDashboardData(supabase, currentChildId, lb)
   );
+  // 2026-09-11 — "수업" 탭 예정 수업 목록도 홈과 동일하게 v3 예약을
+  // 병합해야 한다(레거시 legacy_sessions만 조회하면 v3 전용 배정 자녀의
+  // 예정 수업이 학부모 "수업" 탭에서 누락된다).
+  const lessonsPromise = lessonBookingPromise.then((lb) =>
+    loadLessons(supabase, currentChildId, lb)
+  );
   const [
     dashboard,
     lessonBooking,
@@ -59,7 +65,7 @@ export default async function ParentHomePage({
   ] = await Promise.all([
     dashboardPromise,
     lessonBookingPromise,
-    loadLessons(supabase, currentChildId),
+    lessonsPromise,
     loadCurricula(supabase, currentChildId),
     loadParentCreditsData(supabase, user.id),
     loadParentEntitlementsData(supabase, user.id, children),
