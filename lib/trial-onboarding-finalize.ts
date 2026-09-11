@@ -348,9 +348,19 @@ async function finalizeWithGuardian(
   }
 
   if (!isNewGuardian) {
-    const label = finalizeRow && finalizeRow.failed_count > 0
-      ? `자녀가 추가로 연결됐습니다(${finalizeRow.failed_count}명은 실패 — 관리자 재시도 필요). 기존 계정으로 로그인해주세요.`
-      : "자녀가 추가로 연결됐습니다. 기존 계정으로 로그인해주세요.";
+    // 2026-09-11(제품 오너 재검토) — 이 문구는 "이번 호출에서 실제로 뭔가
+    // 새로 처리됐을 때만" 보여야 한다. 이미 완료된 링크를 단순히 다시 열었을
+    // 뿐인데(예: 이메일 링크 재클릭) 매번 "자녀가 추가로 연결됐습니다"라고
+    // 안내하면 실제로는 아무 변화가 없었는데도 방금 뭔가 처리된 것처럼
+    // 오인시킨다. createdStudentAuthIdsThisRequest(이번 호출에서 새로 만든
+    // 학생 Auth 계정)와 finalizeRow.failed_count(이번 호출에서 새로 발생한
+    // 실패)로만 "새로 처리됨" 여부를 판단한다.
+    const somethingNewThisCall = createdStudentAuthIdsThisRequest.length > 0 || (finalizeRow?.failed_count ?? 0) > 0;
+    const label = !somethingNewThisCall
+      ? "이미 등록된 계정입니다. 기존 계정으로 로그인해주세요."
+      : finalizeRow && finalizeRow.failed_count > 0
+        ? `자녀가 추가로 연결됐습니다(${finalizeRow.failed_count}명은 실패 — 관리자 재시도 필요). 기존 계정으로 로그인해주세요.`
+        : "자녀가 추가로 연결됐습니다. 기존 계정으로 로그인해주세요.";
     return NextResponse.redirect(new URL("/login?notice=" + encodeURIComponent(label), params.url));
   }
 

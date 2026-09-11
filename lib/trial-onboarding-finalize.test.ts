@@ -494,3 +494,50 @@ describe("createGuardianAndStudentThenRedirect — 복수 자녀", () => {
     expect(recipients).toEqual(expect.arrayContaining(["a@example.com", "b@example.com"]));
   });
 });
+
+describe("createGuardianAndStudentThenRedirect — 이미 완료된 링크를 단순 재오픈(새로 처리되는 것 없음)", () => {
+  it("모든 학생이 이미 created 상태면 계정을 만들지 않고, '자녀가 추가로 연결됐습니다'가 아니라 중립적인 안내를 보여준다", async () => {
+    // 2026-09-11(제품 오너 재검토) — 이메일 링크를 단순히 다시 열었을 뿐인데(예:
+    // 이메일 클라이언트 재클릭) 실제로는 아무 것도 새로 처리되지 않았는데도
+    // "자녀가 추가로 연결됐습니다"라고 안내하면 사용자가 방금 뭔가 바뀐 것으로
+    // 오인한다.
+    createUserMock.mockReset(); // 이번 시나리오에서는 절대 호출되면 안 된다.
+    rpcMock.mockImplementation((fnName: string) => {
+      if (fnName === "find_auth_user_id_by_email") {
+        return Promise.resolve({ data: "existing-guardian-id", error: null });
+      }
+      if (fnName === "get_trial_onboarding_link_students") {
+        return Promise.resolve({
+          data: [
+            {
+              id: "ls-a",
+              student_name: "학생A",
+              student_email: "a@example.com",
+              student_grade: null,
+              student_subject: null,
+              status: "created",
+              child_auth_user_id: "student-a-id",
+              invite_status: "sent",
+              error: null,
+            },
+          ],
+          error: null,
+        });
+      }
+      if (fnName === "finalize_trial_onboarding_students") {
+        return Promise.resolve({
+          data: [{ household_id: "household-1", guardian_id: "existing-guardian-id", created_count: 1, failed_count: 0 }],
+          error: null,
+        });
+      }
+      return defaultRpcImpl(fnName);
+    });
+
+    const res = await createGuardianAndStudentThenRedirect(BASE_PARAMS);
+
+    expect(createUserMock).not.toHaveBeenCalled();
+    const notice = decodeURIComponent(res.headers.get("location") ?? "");
+    expect(notice).toContain("이미 등록된 계정입니다");
+    expect(notice).not.toContain("추가로 연결됐습니다");
+  });
+});
