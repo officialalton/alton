@@ -80,6 +80,30 @@ describe("loadKanbanBoard — 계정 생성 유입 통합", () => {
     expect(admin.insertCalls).toHaveLength(0);
   });
 
+  it("2026-09-10(제품 오너 지적): 같은 보호자가 만든 자녀별 카드도 자녀 이름으로 구분된다", async () => {
+    listConsultationsMock.mockResolvedValue([]);
+    const admin = makeAdminMock({
+      trial_onboarding_links: [
+        { id: "link1", guardian_name: "박보호자", guardian_email: "parent@example.com" },
+      ],
+      trial_onboarding_link_students: [
+        { id: "student-row-1", link_id: "link1", student_name: "자녀A", student_grade: "10학년", child_auth_user_id: "child1", created_at: "2026-01-01" },
+        { id: "student-row-2", link_id: "link1", student_name: "자녀B", student_grade: "9학년", child_auth_user_id: "child2", created_at: "2026-01-01" },
+      ],
+    });
+
+    const { loadKanbanBoard } = await import("./consultation-kanban-data");
+    const cards = await loadKanbanBoard(admin as never);
+
+    expect(cards).toHaveLength(2);
+    expect(cards[0].contact_name).toBe("박보호자");
+    expect(cards[1].contact_name).toBe("박보호자");
+    expect(cards.map((c) => c.requested_children?.[0]?.name)).toEqual(
+      expect.arrayContaining(["자녀A", "자녀B"])
+    );
+    expect(cards.find((c) => c.child_id === "child1")?.student_grade).toBe("10학년");
+  });
+
   it("계정이 아직 안 만들어진(child_auth_user_id 없음) 학생은 카드로 나타나지 않는다", async () => {
     listConsultationsMock.mockResolvedValue([]);
     const admin = makeAdminMock({

@@ -93,19 +93,26 @@ async function loadTrialProgressByChild(
 const ACCOUNT_CREATION_CARD_LIMIT = 200;
 
 function buildAccountCreationCard(
-  student: { id: string; student_name: string; child_auth_user_id: string; created_at: string },
+  student: { id: string; student_name: string; student_grade: string | null; child_auth_user_id: string; created_at: string },
   link: { guardian_name: string; guardian_email: string }
 ): ConsultationListItem {
   // 계정 생성 카드는 이미 계정이 만들어진 뒤라 "상담 신청/일정 확정"에
   // 해당하는 단계가 없다 — classifyStage()가 곧바로 체험 파이프라인 분기를
   // 타도록 status='completed'/outcome='trial_recommended'로 둔다. 이 값은
   // 화면 조합용일 뿐 어떤 테이블에도 쓰이지 않는다.
+  //
+  // 2026-09-10(제품 오너 지적): 보호자 1명이 자녀 여러 명을 만들면 카드마다
+  // contact_name/contact_email이 전부 같은 보호자 정보라 어느 카드가 어느
+  // 자녀인지 구분이 안 됐다. requested_children는 원래 다자녀 상담의
+  // "아직 개별 카드로 안 쪼개진 자녀 목록"을 보여주던 필드인데, 카드 렌더
+  // 코드가 이미 "자녀 N명: 이름, 이름"을 그대로 출력하므로 여기서는 이 카드가
+  // 담당하는 자녀 1명만 담아 재사용한다(새 UI 코드 없이 동일한 방식으로 표시).
   return {
     id: `link:${student.id}`,
     contact_name: link.guardian_name,
     contact_email: link.guardian_email,
     contact_phone: null,
-    student_grade: null,
+    student_grade: student.student_grade,
     concerns: null,
     status: "completed",
     source: "admin",
@@ -136,7 +143,7 @@ function buildAccountCreationCard(
     family_root_consultation_id: null,
     is_child_onboarding_card: false,
     source_link_child_id: null,
-    requested_children: null,
+    requested_children: [{ name: student.student_name, grade: student.student_grade ?? undefined }],
     consultReadiness: "not_applicable",
     completionReadiness: "not_applicable",
   };
@@ -152,7 +159,7 @@ async function loadAccountCreationCards(admin: ReturnType<typeof createAdminClie
   const linkById = new Map(linkRows.map((l) => [l.id, l]));
   const { data: studentRows } = await admin
     .from("trial_onboarding_link_students")
-    .select("id, link_id, student_name, child_auth_user_id, created_at")
+    .select("id, link_id, student_name, student_grade, child_auth_user_id, created_at")
     .in("link_id", linkRows.map((l) => l.id))
     .eq("status", "created")
     .order("created_at", { ascending: false })
