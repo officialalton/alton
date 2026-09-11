@@ -17,7 +17,18 @@ import type { KanbanStage } from "./consultation-kanban-constants";
 // 학생별 카드와 나란히 있으면 관리자가 "왜 안 없어지냐"고 혼동하므로, 최소한
 // 시각적으로 구분(흐리게 + "완료(이력)" 배지)할 수 있게 이 플래그를 함께
 // 내려준다. 삭제·이동은 하지 않는다(카드 자체는 그대로).
-export type KanbanCard = ConsultationListItem & { stage: KanbanStage; is_family_root_with_children: boolean };
+//
+// 2026-09-10(P1-B 신규 통합 보드) — 이 보드는 이제 상담 유입뿐 아니라
+// "계정 생성"(consultation_id가 null인 trial_onboarding_links, 관리자가
+// 상담 없이 보호자+학생 계정을 바로 만드는 기존 흐름) 유입도 함께 보여준다.
+// intakeSource가 그 구분이다. 계정 생성 카드는 consultations 테이블에 아무
+// 행도 만들지 않는다(가짜 상담 레코드 금지) — 화면에서만 ConsultationListItem과
+// 같은 모양으로 조합해 기존 카드 렌더링·파이프라인 로직을 그대로 재사용한다.
+export type KanbanCard = ConsultationListItem & {
+  stage: KanbanStage;
+  is_family_root_with_children: boolean;
+  intakeSource: "consultation" | "account_creation";
+};
 
 type TrialProgress = { trialBookingDone: boolean; regularIntentDone: boolean };
 
@@ -73,6 +84,88 @@ async function loadTrialProgressByChild(
   return result;
 }
 
+// 2026-09-10(P1-B 신규 통합 보드) — "계정 생성"(consultation_id가 null인
+// trial_onboarding_links) 유입 중 학생 계정까지 만들어진 건만 카드로
+// 보여준다(아직 보호자가 링크를 열지 않은 건은 "발급 대기"일 뿐 진행할
+// 파이프라인이 없어 이 보드에 넣지 않는다 — 기존 "계정 생성" 화면의 발송
+// 내역 목록에서 그대로 확인 가능). 최대 200건까지만 읽어 유입이 늘어도
+// 첫 화면이 느려지지 않게 한다.
+const ACCOUNT_CREATION_CARD_LIMIT = 200;
+
+function buildAccountCreationCard(
+  student: { id: string; student_name: string; child_auth_user_id: string; created_at: string },
+  link: { guardian_name: string; guardian_email: string }
+): ConsultationListItem {
+  // 계정 생성 카드는 이미 계정이 만들어진 뒤라 "상담 신청/일정 확정"에
+  // 해당하는 단계가 없다 — classifyStage()가 곧바로 체험 파이프라인 분기를
+  // 타도록 status='completed'/outcome='trial_recommended'로 둔다. 이 값은
+  // 화면 조합용일 뿐 어떤 테이블에도 쓰이지 않는다.
+  return {
+    id: `link:${student.id}`,
+    contact_name: link.guardian_name,
+    contact_email: link.guardian_email,
+    contact_phone: null,
+    student_grade: null,
+    concerns: null,
+    status: "completed",
+    source: "admin",
+    starts_at: null,
+    ends_at: null,
+    scheduled_at: null,
+    hold_expires_at: null,
+    google_event_id: null,
+    google_meet_link: null,
+    google_sync_status: "not_applicable",
+    google_sync_retry_count: 0,
+    google_sync_last_error: null,
+    smart_notes_config_status: "not_applicable",
+    smart_notes_config_error: null,
+    smart_notes_drive_file_id: null,
+    admin_review_summary: null,
+    outcome: "trial_recommended",
+    outcome_notes: null,
+    prospect_contact_id: null,
+    consent_version_id: null,
+    consent_confirmed_at: null,
+    child_id: student.child_auth_user_id,
+    trial_intent_confirmed_at: student.created_at,
+    trial_entitlement_grant_id: null,
+    trial_entitlement_grant_status: "not_applicable",
+    trial_entitlement_grant_error: null,
+    trial_entitlement_grant_expires_at: null,
+    family_root_consultation_id: null,
+    is_child_onboarding_card: false,
+    source_link_child_id: null,
+    requested_children: null,
+    consultReadiness: "not_applicable",
+    completionReadiness: "not_applicable",
+  };
+}
+
+async function loadAccountCreationCards(admin: ReturnType<typeof createAdminClient>): Promise<ConsultationListItem[]> {
+  const { data: linkRows } = await admin
+    .from("trial_onboarding_links")
+    .select("id, guardian_name, guardian_email")
+    .is("consultation_id", null);
+  if (!linkRows || linkRows.length === 0) return [];
+
+  const linkById = new Map(linkRows.map((l) => [l.id, l]));
+  const { data: studentRows } = await admin
+    .from("trial_onboarding_link_students")
+    .select("id, link_id, student_name, child_auth_user_id, created_at")
+    .in("link_id", linkRows.map((l) => l.id))
+    .eq("status", "created")
+    .order("created_at", { ascending: false })
+    .limit(ACCOUNT_CREATION_CARD_LIMIT);
+
+  return (studentRows ?? [])
+    .filter((s): s is typeof s & { child_auth_user_id: string } => !!s.child_auth_user_id)
+    .map((s) => {
+      const link = linkById.get(s.link_id)!;
+      return buildAccountCreationCard(s, link);
+    });
+}
+
 /** 개별 상담을 5단계 중 하나로 분류한다. 기존 상태값은 전혀 바꾸지 않고
  * 표시용으로만 압축한다 — 세부 상태(status/outcome/pipeline)는 카드 상세 패널에서
  * 그대로 조회 가능하다. */
@@ -109,13 +202,17 @@ export async function loadKanbanBoard(admin: ReturnType<typeof createAdminClient
   // 범위 자체를 DB 쪽에서 좁히는 것은 listConsultationsForAdmin()이 다른
   // 화면과 공유하는 함수라 이번 배치에서는 건드리지 않는다 — 범위 조정은
   // 별도 배치로 분리.)
-  const [rows, { data: closedIdsData }, { data: rootIdsData }] = await Promise.all([
+  const [rows, { data: closedIdsData }, { data: rootIdsData }, accountCreationRows] = await Promise.all([
     listConsultationsForAdmin({ from: "2020-01-01T00:00:00.000Z", to: "2035-01-01T00:00:00.000Z" }),
     admin.from("consultations").select("id").not("closure_type", "is", null),
     admin.from("consultations").select("family_root_consultation_id").not("family_root_consultation_id", "is", null),
+    loadAccountCreationCards(admin),
   ]);
   const closedIds = new Set((closedIdsData ?? []).map((r) => r.id as string));
-  const active = rows.filter((r) => !closedIds.has(r.id) && r.status !== "cancelled" && r.status !== "no_show");
+  const activeConsultations = rows.filter((r) => !closedIds.has(r.id) && r.status !== "cancelled" && r.status !== "no_show");
+  // 2026-09-10(P1-B) — 계정 생성 카드까지 합친 뒤에 파이프라인 배치 조회를
+  // 한 번만 실행한다(카드 출처와 무관하게 여전히 쿼리 3회 고정).
+  const active = [...activeConsultations, ...accountCreationRows];
 
   // classifyStage가 실제로 trial_recommended+completed인 카드에서만 파이프라인
   // 정보를 쓰므로, 그 대상 자녀 id만 모아 배치 조회한다(카드 수와 무관하게
@@ -136,5 +233,6 @@ export async function loadKanbanBoard(admin: ReturnType<typeof createAdminClient
     ...r,
     stage: stages[i],
     is_family_root_with_children: !r.is_child_onboarding_card && rootIdsWithChildren.has(r.id),
+    intakeSource: r.id.startsWith("link:") ? "account_creation" : "consultation",
   }));
 }

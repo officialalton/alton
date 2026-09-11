@@ -56,7 +56,7 @@ const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
   { id: "users", label: "사용자", icon: "👥" },
   { id: "matching", label: "매칭", icon: "🔗" },
-  { id: "consult", label: "상담", icon: "🗓" },
+  { id: "consult", label: "신규", icon: "🗓" },
   { id: "inquiry", label: "문의·면담", icon: "💬" },
   { id: "catalog", label: "커리큘럼", icon: "📘" },
   { id: "billing", label: "구 크레딧(레거시)", icon: "💳" },

@@ -86,14 +86,19 @@ export default function ConsultationKanbanBoard({
   );
   const [error, setError] = useState<string | null>(null);
   const [openId, setOpenId] = useState<string | null>(null);
+  const [refreshing, setRefreshing] = useState(false);
 
   async function load() {
+    setRefreshing(true);
     try {
       const data = await listKanbanBoardAction();
       setCards(data);
       setCachedTabData(CONSULT_KANBAN_CACHE_KEY, data);
+      setError(null);
     } catch (e) {
       setError(e instanceof Error ? e.message : "칸반 보드 조회에 실패했습니다.");
+    } finally {
+      setRefreshing(false);
     }
   }
 
@@ -116,36 +121,74 @@ export default function ConsultationKanbanBoard({
     router.refresh();
   }
 
-  if (error) return <p className={errText}>{error}</p>;
+  // 2026-09-10(P1-B) — "신규" 탭은 이제 상담 유입 + 계정 생성 유입을 함께
+  // 보여주는 통합 보드다. 조회 실패 시 빈 화면 대신 재시도 가능한 문구를
+  // 보여주고, 명시적 새로고침 버튼도 항상 노출한다.
+  const headerBar = (
+    <div className="flex items-center justify-end mb-3">
+      <button
+        onClick={refresh}
+        disabled={refreshing}
+        className="text-[12px] font-bold text-ink underline disabled:opacity-50"
+      >
+        {refreshing ? "새로고침 중..." : "새로고침"}
+      </button>
+    </div>
+  );
+
+  if (error) {
+    return (
+      <div>
+        {headerBar}
+        <div
+          className="border-[1.5px] border-red/30 bg-red/5 rounded-xl px-5 py-4 flex items-center justify-between"
+          data-testid="kanban-board-error"
+        >
+          <span className="text-[13px] text-red font-semibold">{error}</span>
+          <button
+            onClick={refresh}
+            disabled={refreshing}
+            className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-red/30 text-red disabled:opacity-50"
+          >
+            {refreshing ? "다시 시도 중..." : "다시 시도"}
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   // 2026-09-10(P1-1) — 데이터 도착 전에도 5개 컬럼 골격 + 카드 모양
   // 스켈레톤을 즉시 그린다("불러오는 중..." 텍스트 한 줄만 보이던 것 수정).
   // 실제 개수·내용은 listKanbanBoardAction() 응답이 오면 그대로 대체된다.
   if (!cards) {
     return (
-      <div className="grid grid-cols-5 gap-3" data-testid="consultation-kanban-board-skeleton">
-        {KANBAN_STAGE_ORDER.map((stage) => (
-          <div key={stage} className="min-w-0">
-            <div className="text-[12.5px] font-bold text-ink mb-2 flex items-center justify-between">
-              <span>{KANBAN_STAGE_LABEL[stage]}</span>
-              <span className="text-[11px] font-semibold text-grey-300">-</span>
+      <div>
+        {headerBar}
+        <div className="grid grid-cols-5 gap-3" data-testid="consultation-kanban-board-skeleton">
+          {KANBAN_STAGE_ORDER.map((stage) => (
+            <div key={stage} className="min-w-0">
+              <div className="text-[12.5px] font-bold text-ink mb-2 flex items-center justify-between">
+                <span>{KANBAN_STAGE_LABEL[stage]}</span>
+                <span className="text-[11px] font-semibold text-grey-300">-</span>
+              </div>
+              <div className="space-y-2">
+                {[0, 1].map((i) => (
+                  <div
+                    key={i}
+                    className="border-[1.5px] border-grey-100 rounded-xl px-3 py-2.5 h-[52px] bg-grey-100 animate-pulse"
+                  />
+                ))}
+              </div>
             </div>
-            <div className="space-y-2">
-              {[0, 1].map((i) => (
-                <div
-                  key={i}
-                  className="border-[1.5px] border-grey-100 rounded-xl px-3 py-2.5 h-[52px] bg-grey-100 animate-pulse"
-                />
-              ))}
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     );
   }
 
   return (
     <div>
+      {headerBar}
       <div className="grid grid-cols-5 gap-3" data-testid="consultation-kanban-board">
         {KANBAN_STAGE_ORDER.map((stage) => {
           const inStage = cards.filter((c) => c.stage === stage);
@@ -166,6 +209,14 @@ export default function ConsultationKanbanBoard({
                     }`}
                   >
                     <div className="text-[13px] font-bold text-ink truncate flex items-center gap-1">
+                      <span
+                        className={
+                          "text-[10px] font-semibold rounded px-1 py-0.5 shrink-0 " +
+                          (c.intakeSource === "account_creation" ? "bg-blue-50 text-blue-600" : "bg-grey-100 text-grey-500")
+                        }
+                      >
+                        {c.intakeSource === "account_creation" ? "계정 생성" : "상담 신청"}
+                      </span>
                       {c.is_family_root_with_children && (
                         <span
                           title="학생별 카드가 이미 생성된 원 상담(가족) 카드 — 더 이상 진행되지 않는 이력입니다. 정책상 삭제하지 않고 계속 보관합니다."
@@ -543,6 +594,10 @@ function ConsultationCardDetailPanel({
           />
         )}
 
+        {/* 2026-09-10(P1-B) — "계정 생성" 카드(id가 "link:"로 시작)는 consultations
+            테이블에 행이 없어 상담 종료 개념 자체가 없다 — 이 섹션은 상담
+            유입 카드에서만 보여준다. */}
+        {!consultationId.startsWith("link:") && (
         <div className="border-t border-grey-200 pt-3 mt-2">
           {!closing ? (
             <button className={btnSecondary} disabled={busy} onClick={() => setClosing(true)}>
@@ -557,6 +612,7 @@ function ConsultationCardDetailPanel({
             />
           )}
         </div>
+        )}
       </div>
     </div>
   );

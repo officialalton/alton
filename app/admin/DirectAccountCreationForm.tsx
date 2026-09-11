@@ -60,7 +60,7 @@ export default function DirectAccountCreationForm({ onSent }: { onSent?: () => v
           }}
           className="text-[12.5px] font-bold px-4 py-2.5 rounded-lg border-[1.5px] border-grey-200 text-ink w-full"
         >
-          + 지인/추천 — 상담 없이 바로 계정 생성
+          + 계정 생성
         </button>
         <ToastStack toasts={toasts} dismiss={dismiss} />
       </div>
@@ -69,7 +69,7 @@ export default function DirectAccountCreationForm({ onSent }: { onSent?: () => v
 
   return (
     <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mt-4">
-      <div className="text-[13px] font-bold text-ink mb-1">지인/추천 — 상담 없이 바로 계정 생성</div>
+      <div className="text-[13px] font-bold text-ink mb-1">계정 생성</div>
       <p className="text-[11.5px] text-grey-500 mb-3">
         상담 칸반과 완전히 무관하게 보호자+학생 계정을 바로 생성합니다. 보호자에게 계정 생성 안내
         이메일이 1개 발송되고, 학생 계정 생성이 성공하면 체험수업권도 동일하게 지급됩니다.

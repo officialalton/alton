@@ -18,9 +18,6 @@ vi.mock("./SubjectEnrollmentPanel", () => ({
 vi.mock("./TeacherAssignmentTerminationPanel", () => ({
   default: () => null,
 }));
-vi.mock("./TrialOnboardingPanel", () => ({
-  default: () => null,
-}));
 
 const pendingStudent: StudentListItem = {
   id: "st1",

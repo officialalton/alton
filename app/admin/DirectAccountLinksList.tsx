@@ -55,7 +55,7 @@ const DirectAccountLinksList = forwardRef<DirectAccountLinksListHandle>(function
 
   return (
     <div className="mt-6">
-      <div className="text-[13px] font-bold text-ink mb-2">지인/추천 발송 내역</div>
+      <div className="text-[13px] font-bold text-ink mb-2">계정 생성 발송 내역</div>
       {loadError && <div className="text-[11.5px] text-red mb-2">{loadError}</div>}
       {!links ? (
         <div className="text-[11.5px] text-grey-500">불러오는 중...</div>

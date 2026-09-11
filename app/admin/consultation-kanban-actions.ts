@@ -60,10 +60,133 @@ export type ConsultationCardDetail = {
   childCards: { consultationId: string; childName: string | null }[];
 };
 
+// 2026-09-10(P1-B 신규 통합 보드) — 카드 id가 "link:"로 시작하면 상담이
+// 아니라 "계정 생성"(consultation_id가 null인 trial_onboarding_links) 유입
+// 카드다. consultations 테이블에는 그 행이 없으므로 별도 경로로 상세를
+// 조합한다 — 가짜 상담 레코드를 만들지 않고, 화면 표시용으로만
+// ConsultationCardDetail과 같은 모양을 맞춘다.
+async function getAccountCreationCardDetail(
+  admin: ReturnType<typeof createAdminClient>,
+  cardId: string
+): Promise<ConsultationCardDetail> {
+  const studentRowId = cardId.slice("link:".length);
+  const { data: studentRow, error: studentError } = await admin
+    .from("trial_onboarding_link_students")
+    .select("id, link_id, student_name, child_auth_user_id, created_at")
+    .eq("id", studentRowId)
+    .maybeSingle();
+  if (studentError) throw new Error(studentError.message);
+  if (!studentRow) throw new Error("계정 생성 건을 찾을 수 없습니다.");
+
+  const { data: link, error: linkError } = await admin
+    .from("trial_onboarding_links")
+    .select("id, guardian_name, guardian_email")
+    .eq("id", studentRow.link_id)
+    .maybeSingle();
+  if (linkError) throw new Error(linkError.message);
+  if (!link) throw new Error("계정 생성 링크를 찾을 수 없습니다.");
+
+  const childId = studentRow.child_auth_user_id;
+  const consultation: ConsultationListItem = {
+    id: cardId,
+    contact_name: link.guardian_name,
+    contact_email: link.guardian_email,
+    contact_phone: null,
+    student_grade: null,
+    concerns: null,
+    status: "completed",
+    source: "admin",
+    starts_at: null,
+    ends_at: null,
+    scheduled_at: null,
+    hold_expires_at: null,
+    google_event_id: null,
+    google_meet_link: null,
+    google_sync_status: "not_applicable",
+    google_sync_retry_count: 0,
+    google_sync_last_error: null,
+    smart_notes_config_status: "not_applicable",
+    smart_notes_config_error: null,
+    smart_notes_drive_file_id: null,
+    admin_review_summary: null,
+    outcome: "trial_recommended",
+    outcome_notes: null,
+    prospect_contact_id: null,
+    consent_version_id: null,
+    consent_confirmed_at: null,
+    child_id: childId,
+    trial_intent_confirmed_at: studentRow.created_at,
+    trial_entitlement_grant_id: null,
+    trial_entitlement_grant_status: "not_applicable",
+    trial_entitlement_grant_error: null,
+    trial_entitlement_grant_expires_at: null,
+    family_root_consultation_id: null,
+    is_child_onboarding_card: false,
+    source_link_child_id: null,
+    requested_children: null,
+    consultReadiness: "not_applicable",
+    completionReadiness: "not_applicable",
+  };
+
+  const pipeline = await getTrialOnboardingPipelineAction(cardId, childId, consultation.trial_intent_confirmed_at);
+
+  let contractId: string | null = null;
+  let contractStatus: string | null = null;
+  let latestContractVersionHasEnvelope = false;
+  if (childId) {
+    const { data: contract } = await admin
+      .from("contracts")
+      .select("id, status")
+      .eq("child_id", childId)
+      .order("created_at", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+    if (contract) {
+      contractId = contract.id;
+      contractStatus = contract.status;
+      const { data: version } = await admin
+        .from("contract_versions")
+        .select("docusign_envelope_id")
+        .eq("contract_id", contract.id)
+        .eq("version_status", "active")
+        .order("version_number", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+      latestContractVersionHasEnvelope = !!version?.docusign_envelope_id;
+    }
+  }
+
+  return {
+    consultation,
+    pipeline,
+    childName: studentRow.student_name,
+    guardianEmail: link.guardian_email,
+    guardianName: link.guardian_name,
+    contractId,
+    contractStatus,
+    latestContractVersionHasEnvelope,
+    // 계정 생성 건의 안내 발송 상태는 "계정 생성" 화면의 발송 내역 목록에서
+    // 이미 확인 가능하다(listDirectOnboardingLinksAction) — 이 카드는 이미
+    // 계정이 생성된 뒤의 진행 상황을 보여주는 게 목적이라 여기서는 다루지
+    // 않는다(범위 밖).
+    noticeDeliveryStatus: null,
+    noticeSendError: null,
+    noticeSentAt: null,
+    latestOnboardingLinkId: null,
+    // 계정 생성 링크의 다자녀 형제자매는 family_root_consultation_id가 아니라
+    // 같은 link_id로 묶인다 — 이번 배치 범위 밖으로 보류(형제자매 배지 없음).
+    childCards: [],
+  };
+}
+
 /** 카드 상세 패널 — 교사 배정을 제외한 모든 후속 액션에 필요한 정보를 한 번에 모은다. */
 export async function getConsultationCardDetailAction(consultationId: string): Promise<ConsultationCardDetail> {
   await requireAdminOrCapability(CONSULT_CAPABILITY);
   const admin = createAdminClient();
+
+  if (consultationId.startsWith("link:")) {
+    return getAccountCreationCardDetail(admin, consultationId);
+  }
 
   const { data: consultationRow, error } = await admin
     .from("consultations")

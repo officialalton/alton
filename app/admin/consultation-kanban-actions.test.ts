@@ -92,7 +92,7 @@ function mockTrialProgressTables(opts: { hasSession?: boolean; hasRegularIntent?
         }),
       };
     }
-    return { select: () => ({ not: () => Promise.resolve({ data: [] }) }) };
+    return { select: () => ({ not: () => Promise.resolve({ data: [] }), is: () => Promise.resolve({ data: [] }) }) };
   });
 }
 
@@ -100,7 +100,7 @@ describe("listKanbanBoardAction — 5단계 stage 분류", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     adminFromMock.mockReturnValue({
-      select: () => ({ not: () => Promise.resolve({ data: [] }) }),
+      select: () => ({ not: () => Promise.resolve({ data: [] }), is: () => Promise.resolve({ data: [] }) }),
     });
   });
 
@@ -147,7 +147,7 @@ describe("listKanbanBoardAction — 5단계 stage 분류", () => {
   it("종료(closure_type not null)된 상담은 칸반 보드에서 제외한다", async () => {
     listConsultationsMock.mockResolvedValue([baseRow({ id: "c1" }), baseRow({ id: "c2" })]);
     adminFromMock.mockReturnValue({
-      select: () => ({ not: () => Promise.resolve({ data: [{ id: "c2" }] }) }),
+      select: () => ({ not: () => Promise.resolve({ data: [{ id: "c2" }] }), is: () => Promise.resolve({ data: [] }) }),
     });
     const cards = await listKanbanBoardAction();
     expect(cards.map((c) => c.id)).toEqual(["c1"]);

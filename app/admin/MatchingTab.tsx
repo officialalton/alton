@@ -6,7 +6,6 @@ import type { MatchingTeacherCandidate, MatchingStudentItem } from "./matching-d
 import { selectableSubjects, type AdminSubject } from "./subject-data";
 import SubjectEnrollmentPanel from "./SubjectEnrollmentPanel";
 import TeacherAssignmentTerminationPanel from "./TeacherAssignmentTerminationPanel";
-import TrialOnboardingPanel from "./TrialOnboardingPanel";
 
 export default function MatchingTab({
   students,
@@ -82,8 +81,11 @@ export default function MatchingTab({
         teacherCandidatesBySubject={teacherCandidatesBySubject}
       />
 
+      {/* 2026-09-10(P1-B 신규 통합 보드) — "상담 → 체험 → 정규 전환"
+          현황판과 "정규 계약 발송 대기"는 신규(상담) 탭의 "신규 현황"/
+          "정규 계약 발송" 탭으로 이관했다. 매칭 화면은 이제 학생·과목·
+          선생님 매칭과 매칭 종료/재매칭 이력만 다룬다. */}
       <TeacherAssignmentTerminationPanel />
-      <TrialOnboardingPanel />
     </div>
   );
 }
