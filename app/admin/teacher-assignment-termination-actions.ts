@@ -39,6 +39,20 @@ export type TerminationRequestListItem = {
   currentTeacherName: string | null;
 };
 
+// 2026-09-11(매칭 화면 서브탭 분리) — "종료 요청" 탭의 미처리 건수 배지용.
+// 상세 목록(listTerminationRequests, enrollment/assignment 조인까지 포함)을
+// 배지 하나 때문에 항상 불러오지 않도록 개수만 별도로 가볍게 조회한다.
+export async function countPendingTerminationRequests(): Promise<number> {
+  await requireAdminOrCapability(MATCHING_CAPABILITY);
+  const admin = createAdminClient();
+  const { count, error } = await admin
+    .from("teacher_assignment_termination_requests")
+    .select("id", { count: "exact", head: true })
+    .in("status", ["requested", "processing", "failed"]);
+  if (error) throw new Error(error.message);
+  return count ?? 0;
+}
+
 export async function listTerminationRequests(): Promise<TerminationRequestListItem[]> {
   await requireAdminOrCapability(MATCHING_CAPABILITY);
   const admin = createAdminClient();

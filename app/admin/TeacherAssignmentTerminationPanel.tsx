@@ -26,10 +26,15 @@ const STATUS_LABEL: Record<string, string> = {
 
 export default function TeacherAssignmentTerminationPanel({
   teacherCandidatesBySubject,
+  onPendingCountChange,
 }: {
   // C-2(2차, 2026-09-11) — 재배정 선생님 선택을 UUID 직접 입력에서 이름
   // 드롭다운(해당 과목 운영 커리큘럼 보유 후보만)으로 바꾸기 위해 필요.
   teacherCandidatesBySubject: Record<string, MatchingTeacherCandidate[]>;
+  // 2026-09-11(매칭 화면 서브탭 분리) — 이 패널이 실제로 열려있는 동안은
+  // 이미 가진 목록에서 미처리 건수를 계산해 부모(탭 배지)에 그대로 알려준다
+  // (별도 count 쿼리 재호출 없이).
+  onPendingCountChange?: (count: number) => void;
 }) {
   const [requests, setRequests] = useState<TerminationRequestListItem[] | null>(null);
   const [openId, setOpenId] = useState<string | null>(null);
@@ -42,11 +47,16 @@ export default function TeacherAssignmentTerminationPanel({
   const [error, setError] = useState<string | null>(null);
 
   async function refresh() {
+    let list: TerminationRequestListItem[] = [];
     try {
-      setRequests(await listTerminationRequests());
+      list = await listTerminationRequests();
     } catch {
-      setRequests([]);
+      list = [];
     }
+    setRequests(list);
+    onPendingCountChange?.(
+      list.filter((r) => r.status === "requested" || r.status === "processing" || r.status === "failed").length
+    );
   }
 
   useEffect(() => {

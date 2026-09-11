@@ -1,12 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { confirmMatch } from "./matching-actions";
 import type { MatchingTeacherCandidate, MatchingStudentItem } from "./matching-data";
 import { selectableSubjects, type AdminSubject } from "./subject-data";
 import SubjectEnrollmentPanel from "./SubjectEnrollmentPanel";
 import TeacherAssignmentTerminationPanel from "./TeacherAssignmentTerminationPanel";
+import { countPendingTerminationRequests } from "./teacher-assignment-termination-actions";
 
+type MatchingSubtab = "waiting" | "manage" | "closure";
+
+const SUBTABS: { id: MatchingSubtab; label: string }[] = [
+  { id: "waiting", label: "매칭 대기" },
+  { id: "manage", label: "매칭 관리" },
+  { id: "closure", label: "종료 요청" },
+];
+
+// 2026-09-11(제품 오너 지시) — 기존엔 "매칭 대기 목록 + 과목 수강·매칭(R5)
+// + 종료 요청"을 한 화면에 전부 쌓아 보여줬다(탭이 없어 세 영역 모두 항상
+// 마운트·조회됨). 세 영역을 서브탭으로 분리해 선택한 탭의 데이터만
+// 조회하도록 바꾼다 — 기존 매칭·종료 처리 로직(confirmMatch,
+// SubjectEnrollmentPanel/TeacherAssignmentTerminationPanel 내부 서버
+// 액션)은 그대로 재사용하고 화면 구조·문구만 정리한다.
 export default function MatchingTab({
   students,
   subjects,
@@ -18,8 +33,19 @@ export default function MatchingTab({
   subjects: AdminSubject[];
   teacherCandidatesBySubject: Record<string, MatchingTeacherCandidate[]>;
 }) {
+  const [subtab, setSubtab] = useState<MatchingSubtab>("waiting");
   const [matchedIds, setMatchedIds] = useState<string[]>([]);
   const [openStudentId, setOpenStudentId] = useState<string | null>(null);
+  const [pendingClosureCount, setPendingClosureCount] = useState<number | null>(null);
+
+  // "종료 요청" 탭을 아직 열지 않아도 배지 숫자는 보여야 하므로, 개수만
+  // 가볍게 한 번 조회한다(상세 목록은 그 탭을 열 때만 TeacherAssignmentTerminationPanel이
+  // 직접 조회 — 아래 onPendingCountChange로 이 값을 최신으로 덮어쓴다).
+  useEffect(() => {
+    countPendingTerminationRequests()
+      .then(setPendingClosureCount)
+      .catch(() => setPendingClosureCount(null));
+  }, []);
 
   const pending = students.filter(
     (s) => s.status === "pending" && !matchedIds.includes(s.id)
@@ -42,50 +68,82 @@ export default function MatchingTab({
   }
 
   return (
-    <div className="max-w-[640px] px-8 py-8">
+    <div className="max-w-[720px] px-8 py-8">
       <h1 className="text-[20px] font-extrabold text-ink mb-1.5">매칭</h1>
       <p className="text-[13px] text-grey-500 mb-5">
-        매칭 대기 중인 학생을 과목별로 선생님과 연결합니다.
+        학생·선생님 매칭 확정, 진행 중인 매칭 관리, 종료 요청 처리를 다룹니다.
       </p>
 
-      {pending.length === 0 ? (
-        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-          매칭 대기 중인 학생이 없습니다.
-        </div>
-      ) : (
-        pending.map((s) => (
-          <div
-            key={s.id}
-            className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5 flex items-center justify-between"
+      <div className="flex gap-1.5 mb-6 border-b border-grey-200">
+        {SUBTABS.map((t) => (
+          <button
+            key={t.id}
+            onClick={() => setSubtab(t.id)}
+            className={
+              "text-[13px] font-bold px-3.5 py-2 -mb-px border-b-2 " +
+              (subtab === t.id
+                ? "border-ink text-ink"
+                : "border-transparent text-grey-400")
+            }
           >
-            <div>
-              <div className="text-[13.5px] font-bold text-ink">{s.name}</div>
-              <div className="text-[12px] text-grey-500 mt-0.5">
-                {s.grade ?? "학년 미입력"}
-                {s.parentNames.length > 0 ? ` · 보호자 ${s.parentNames.join(", ")}` : ""}
-              </div>
+            {t.label}
+            {t.id === "closure" && pendingClosureCount != null && pendingClosureCount > 0 && (
+              <span className="ml-1.5 inline-flex items-center justify-center text-[11px] font-bold text-white bg-red rounded-full min-w-[18px] h-[18px] px-1">
+                {pendingClosureCount}
+              </span>
+            )}
+          </button>
+        ))}
+      </div>
+
+      {subtab === "waiting" && (
+        <>
+          <p className="text-[12.5px] text-grey-500 mb-4">
+            매칭 대기 중인 학생을 과목별로 선생님과 연결합니다.
+          </p>
+          {pending.length === 0 ? (
+            <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
+              매칭 대기 중인 학생이 없습니다.
             </div>
-            <button
-              onClick={() => setOpenStudentId(s.id)}
-              className="text-[12px] font-bold px-3.5 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink shrink-0"
-            >
-              매칭하기
-            </button>
-          </div>
-        ))
+          ) : (
+            pending.map((s) => (
+              <div
+                key={s.id}
+                className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5 flex items-center justify-between"
+              >
+                <div>
+                  <div className="text-[13.5px] font-bold text-ink">{s.name}</div>
+                  <div className="text-[12px] text-grey-500 mt-0.5">
+                    {s.grade ?? "학년 미입력"}
+                    {s.parentNames.length > 0 ? ` · 보호자 ${s.parentNames.join(", ")}` : ""}
+                  </div>
+                </div>
+                <button
+                  onClick={() => setOpenStudentId(s.id)}
+                  className="text-[12px] font-bold px-3.5 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink shrink-0"
+                >
+                  매칭하기
+                </button>
+              </div>
+            ))
+          )}
+        </>
       )}
 
-      <SubjectEnrollmentPanel
-        students={students}
-        subjects={subjects}
-        teacherCandidatesBySubject={teacherCandidatesBySubject}
-      />
+      {subtab === "manage" && (
+        <SubjectEnrollmentPanel
+          students={students}
+          subjects={subjects}
+          teacherCandidatesBySubject={teacherCandidatesBySubject}
+        />
+      )}
 
-      {/* 2026-09-10(P1-B 신규 통합 보드) — "상담 → 체험 → 정규 전환"
-          현황판과 "정규 계약 발송 대기"는 신규(상담) 탭의 "신규 현황"/
-          "정규 계약 발송" 탭으로 이관했다. 매칭 화면은 이제 학생·과목·
-          선생님 매칭과 매칭 종료/재매칭 이력만 다룬다. */}
-      <TeacherAssignmentTerminationPanel teacherCandidatesBySubject={teacherCandidatesBySubject} />
+      {subtab === "closure" && (
+        <TeacherAssignmentTerminationPanel
+          teacherCandidatesBySubject={teacherCandidatesBySubject}
+          onPendingCountChange={setPendingClosureCount}
+        />
+      )}
     </div>
   );
 }

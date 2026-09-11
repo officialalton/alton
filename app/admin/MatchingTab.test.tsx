@@ -12,11 +12,16 @@ vi.mock("./matching-actions", () => ({
 // students 전체(활성 학생 포함)를 보여주는 게 의도된 동작이라, 이 파일의
 // "매칭 대기 학생만 보인다" 단언과 충돌한다 — 자체 테스트(SubjectEnrollmentPanel용
 // 별도 테스트에서 다룸)가 있으므로 여기서는 mock으로 대체한다.
+const subjectEnrollmentPanelMock = vi.fn(() => null);
 vi.mock("./SubjectEnrollmentPanel", () => ({
-  default: () => null,
+  default: (props: unknown) => subjectEnrollmentPanelMock(props),
 }));
+const terminationPanelMock = vi.fn(() => null);
 vi.mock("./TeacherAssignmentTerminationPanel", () => ({
-  default: () => null,
+  default: (props: unknown) => terminationPanelMock(props),
+}));
+vi.mock("./teacher-assignment-termination-actions", () => ({
+  countPendingTerminationRequests: vi.fn().mockResolvedValue(0),
 }));
 
 const pendingStudent: StudentListItem = {
@@ -58,6 +63,30 @@ const teacherCandidatesBySubject = {
 };
 
 describe("MatchingTab", () => {
+  // 2026-09-11(매칭 화면 서브탭 분리) — 탭을 시각적으로만 숨긴 채 세 영역
+  // 데이터를 전부 가져오면 안 된다는 요구사항 회귀 테스트: 선택하지 않은
+  // 서브탭의 패널은 아예 마운트되지 않아야 한다.
+  it("서브탭을 선택해야 그 패널이 마운트된다(선택하지 않은 탭의 상세 조회를 미리 하지 않는다)", () => {
+    subjectEnrollmentPanelMock.mockClear();
+    terminationPanelMock.mockClear();
+    render(
+      <MatchingTab
+        students={[pendingStudent]}
+        subjects={subjects}
+        teacherCandidatesBySubject={teacherCandidatesBySubject}
+      />
+    );
+    expect(subjectEnrollmentPanelMock).not.toHaveBeenCalled();
+    expect(terminationPanelMock).not.toHaveBeenCalled();
+
+    fireEvent.click(screen.getByText("매칭 관리"));
+    expect(subjectEnrollmentPanelMock).toHaveBeenCalledTimes(1);
+    expect(terminationPanelMock).not.toHaveBeenCalled();
+
+    fireEvent.click(screen.getByText("종료 요청"));
+    expect(terminationPanelMock).toHaveBeenCalledTimes(1);
+  });
+
   it("매칭 대기(pending) 학생만 목록에 보여준다", () => {
     render(
       <MatchingTab

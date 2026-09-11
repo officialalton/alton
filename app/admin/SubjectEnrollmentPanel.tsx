@@ -271,9 +271,9 @@ export default function SubjectEnrollmentPanel({
 
   return (
     <div className="max-w-[720px] px-8 py-8 border-t border-grey-200 mt-6">
-      <h2 className="text-[16px] font-extrabold text-ink mb-1.5">과목 수강 · 매칭 (R5)</h2>
+      <h2 className="text-[16px] font-extrabold text-ink mb-1.5">진행 중인 매칭 관리</h2>
       <p className="text-[12.5px] text-grey-500 mb-4">
-        학생 ID로 과목 수강 상태·현재 선생님·매칭 이력을 조회하고, 활성화·매칭·선생님 변경·매칭 종료를 처리합니다.
+        학생을 선택해 과목별 수강 상태·현재 선생님·매칭 이력을 확인하고, 활성화·매칭·선생님 변경·매칭 종료를 처리합니다.
       </p>
 
       <div className="flex flex-wrap gap-2 mb-4">
