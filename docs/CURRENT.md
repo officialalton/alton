@@ -1,5 +1,100 @@
 # ALTON — 현재 상태 (2026-09-11 기준)
 
+> **2026-09-11 — C-2(1차): 재배정에도 C-1의 "선생님 운영 커리큘럼 보유" 서버
+> 가드를 확대 적용.** 기존 매칭 종료·재배정 파이프라인(M3,
+> `lib/enrollment/teacher-assignment-termination.ts` + `change_teacher_assignment()`
+> RPC)은 이미 존재해 새로 만들지 않았다 — 조사 결과 이 경로를 "손보는" 구체적
+> 결함 하나를 발견해 고쳤다: C-1이 신규 매칭 RPC(`confirm_student_teacher_
+> subject_match`)에만 "새 선생님이 이 과목 운영 커리큘럼(단원 1개 이상)을
+> 가져야 배정 가능" 서버 가드를 넣었고, 재배정에 쓰이는
+> `change_teacher_assignment()`에는 UI 후보 필터만 있고 서버 가드가 없어
+> 직접 RPC 호출로 우회 가능했다. 조사를 넓혀 **세 번째 경로도 같은 구멍이
+> 있음을 추가로 발견**: `assignTeacherToSubjectEnrollment()`(관리자 "배정"
+> 버튼 — 종료 후 재등록으로 새로 만들어진, 아직 담당 교사가 없는
+> subject_enrollment에 최초 배정할 때 쓰는 경로)는 RPC조차 거치지 않고
+> teacher_assignments에 직접 INSERT해 두 RPC의 가드 어느 쪽도 안 걸렸다.
+> **조치**: (1) migration `20261276000000`로 `change_teacher_assignment()`에
+> 동일 가드를 다른 모든 변경(기존 배정 종료·스레드 archive·문서권한큐)보다
+> 먼저 추가 — 실패 시 기존 배정·예약·학생 커리큘럼이 전혀 바뀌지 않는다.
+> (2) 신규 `lib/enrollment/teacher-curriculum-check.ts`(기존
+> `trial_teacher_succession_eligibility` RPC의 `has_curriculum` 재사용, 새
+> SQL 없음)로 `assignTeacherToSubjectEnrollment()`에도 같은 확인을 추가.
+> **의도적으로 하지 않은 것**: DB 트리거로 전면 통합(전체 스위트에서
+> `teacher_assignments`에 직접 INSERT하는 기존 테스트·경로가 다수라 회귀
+> 위험이 커 이번 배치 범위 밖으로 보류 — 현재는 이 세 진입점에서만 강제).
+> `curriculum_handoff_status`(R5 placeholder, M3가 이미 "운영 게이트로 쓰지
+> 않는다"고 명시)는 조사만 하고 손대지 않음(제품 오너 지시) — 실제로 어디서도
+> 읽지 않는 완전한 dead 컬럼임을 코드 전수 확인, 새 인수인계 상태/승인 절차
+> 추가 없음. 오버레이 자체는 subject_enrollment 단위(교사 단위 아님)라 재배정
+> 후에도 그대로 유지되고, RLS(`is_active_teacher_for_enrollment`)가 활성
+> 배정을 따라가 이전 선생님은 조회·편집 모두 즉시 사라지고 새 선생님은
+> 자동으로 접근 권한을 얻는다(데이터 이관 코드 불필요, 통합테스트로 확인).
+> "종료했던 기존 선생님에게 다시 배정"(같은 enrollment 내 복귀, 그리고 수강
+> 종료 후 재등록된 새 enrollment로의 배정 둘 다)은 새 배정 행을 만들 뿐 과거
+> 종료 이력을 절대 덮어쓰지 않으며, 같은 교사라는 이유로 막히지 않는다(운영
+> 커리큘럼 보유만 확인) — 과거 수업 이력·취소된 예약은 기존 정책대로 보존/
+> 미복원(변경 없음). 종료 확정 전 요청 취소(`cancelTerminationRequestAction`)는
+> `teacher_assignment_termination_requests.status`만 바꿀 뿐
+> teacher_assignments를 전혀 참조하지 않아 기존 배정에 구조적으로 영향을 줄
+> 수 없음을 테스트로 고정. P4-1(가구 아카이브) 의존 확인: `end_enrollment`
+> resolution 로직과 `previewTerminationImpact()` 반환 형태는 이번 변경으로
+> 전혀 건드리지 않았다(재배정 경로만 수정) — P4-1 착수 시 재확인 불필요.
+> **검증**: 신규/변경 유닛·통합·e2e 테스트(가드 거부 시 무변경 3건, 통과 시
+> 접근 전환 1건, 동일 교사 재배정 2건, 취소 요청 무영향 1건 포함),
+> `tsc`/eslint 클린(신규 경고 2건은 미사용 목 매개변수 표기뿐), `supabase db
+> reset --local` 후 전체 263 files/1839 tests 통과, `next build` 성공,
+> `playwright test e2e/r5-subject-enrollment-teacher-assignment.spec.ts` 12/12
+> 통과(같은 배치에서 무관한 사전 존재 오류 메시지 문구 불일치 1건도 함께
+> 정정 — C-2와 무관, 실제 DB 메시지에 맞춤). **미완료**: P4-3/P4-1은 정책
+> 질문 답변 후 각각 별도 배치. **다음**: 이 배치 Preview UAT 승인 대기.
+>
+> **2026-09-11 — C-1(커리큘럼 진도 표시 통일 + 교사 운영본 필수화) 제품 오너
+> Preview UAT 통과, 배치 종료.** 검증 범위: "학생별" v3 커리큘럼 카드 진도
+> 표기 통일(레거시 회귀 수정 포함, 위 2026-09-10/11 항목), 학생 포털 "수강
+> 과목" 탭 v3 과목별 "커리큘럼 보기" 읽기 전용 진입, 학부모 포털 자녀별 동일
+> 열람(같은 컴포넌트 재사용). **C-1 완료 범위에 포함하지 않은 것**: 회차별
+> 세션뷰·지난 수업 기록과의 연동(위 2026-09-11 "회차별 세션뷰·콘텐츠 버전
+> 관리 정책 확정" 문서 항목 참고 — 정책만 확정, 구현은 P2-4/P3-1~3의 후속
+> 배치).
+>
+> **학생·학부모 v3 커리큘럼 열람 결함 수정**(제품 오너가 UAT 중 발견: 학생
+> 포털에 v3 커리큘럼을 열 수 있는 진입 경로 자체가 없었음 — 레거시
+> `CurriculumView`/`enrollments`에만 연결돼 있어 v3 `subject_enrollments`만
+> 가진 학생은 커리큘럼을 열 수 없었다). `app/student/EnrollmentTab.tsx`
+> 과목 카드에 "커리큘럼 보기 →" 추가 → 신설
+> `app/student/CurriculumOverlayView.tsx`(읽기 전용, 편집 UI 없음)가
+> `curriculum_overlay_units`를 표시. 같은 컴포넌트를 학부모 포털이 자녀별로
+> 재사용하므로(`app/parent/EnrollmentTab.tsx`) 학부모도 별도 구현 없이 동일
+> 열람 가능 — 자녀 이름 헤더가 항상 표시돼 다자녀 가구도 구분됨. 읽기 로더를
+> `lib/curriculum-overlay-data.ts`로 분리해(재수출 유지) 학생·학부모가 교사
+> 전용 편집 서버 액션(`requireAssignedTeacherOrAdmin`)을 거치지 않고도 순수
+> 읽기 경로를 갖도록 하고, migration `20261275000000`으로
+> `student_curriculum_overlays`/`curriculum_overlay_units`/
+> `curriculum_overlay_unit_keywords`/`curriculum_overlay_unit_materials`의
+> 조회 RLS에 보호자(`is_enrollment_child_or_guardian`, R1부터 기존 재사용)를
+> 추가했다(기존엔 담당 교사/본인 학생/관리자만 — 보호자 조회 경로 자체가
+> 없었음). 쓰기 정책은 변경 없음(담당 교사/관리자만). 레거시 과목의 기존
+> `CurriculumView` 진입 경로는 무변경. **검증**: 신규 유닛·컴포넌트 테스트,
+> 통합테스트(보호자 조회 가능·쓰기 불가·무관한 제3자 차단 신규 3건 포함
+> 27건) 통과, `tsc`/eslint 클린, `supabase db reset --local` 후 전체 263
+> files/1834 tests 통과, `next build` 성공. **외부 변경**: 커밋 `18a8334`
+> push, migration `supabase db push`로 공유 non-prod DB 반영, Preview
+> `https://alton-2gd6ihdgu-alton7.vercel.app`(target: preview 확인, 제품
+> 오너 UAT 통과 확인). Production 무변경.
+>
+> **다음**: C-2(매칭 종료·재매칭) 착수. P4-3/P4-1은 정책 질문 답변 후 각각
+> 별도 배치로 구현.
+
+> **2026-09-11 — 회차별 세션뷰·콘텐츠 버전 관리 정책 확정(문서만).**
+> 정본: `docs/2026-09-11-curriculum-session-view-and-content-version-policy.md`.
+> 관리자 기본본 → 교사 운영본 → 학생 개별본의 모든 회차에 예약 전부터 세션뷰를
+> 제공한다. 상위 구성 변경은 기존 하위 구성에 자동 덮어쓰지 않는다.
+> 교재·문제 본문은 공통 버전을 참조하고 수업 시작 시 목록·순서·버전을 고정한다.
+> 학생별 필기·답안·채점·시도 이력은 분리하며 종료 후 당시 세션뷰를 다시 열람한다.
+> 기존 ‘예정 수업이 있어야 준비 가능’ 기준은 폐기한다. P2-4/P3-1~3에 반영했으며,
+> 구현 완료나 C-1 전체 UAT 승인을 뜻하지 않는다. 코드·DB·외부 서비스 변경 없음.
+
+
 > **2026-09-10/11 — C-1 UAT 회귀 수정 + P4-3 설계·P4-1 조사 완료.**
 > 제품 오너가 C-1 재검증 중 발견: 같은 학생·과목의 회차 표기가 "학생별"
 > 목록 카드와 커리큘럼 상세 화면에서 서로 달랐다(레거시 과목 한정 —
@@ -28,8 +123,7 @@
 > `households.archived_at` 컬럼 migration 필요, 단일 큰 RPC 대신 기존
 > M3 종료 패턴(claim+원장+재시도) 재사용을 권고. 로드맵
 > (`docs/2026-09-10-p-execution-roadmap.md` P4)에 백로그 항목으로 반영.
-> **다음**: C-1 승인 시 C-2(매칭 종료·재매칭) 착수, P4-3/P4-1은 정책
-> 질문 답변 후 각각 별도 배치로 구현.
+> (C-1 최종 승인·다음 순서는 위 2026-09-11 항목 참고.)
 >
 > **2026-09-10 — P0(직접 계정 생성 유입 3중 결함): 제품 오너 Preview UAT
 > 통과, 배치 종료.** 검증 범위: `계정 생성 → 교사 매칭 → 체험 동의 → 체험

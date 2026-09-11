@@ -19,6 +19,7 @@ import {
   type TrialSuccessionProposal,
 } from "@/lib/enrollment/subject-enrollment-decision";
 import { assertTeacherHasValidRate } from "@/lib/enrollment/teacher-rate-check";
+import { assertTeacherHasOperatingCurriculum } from "@/lib/enrollment/teacher-curriculum-check";
 
 const MATCHING_CAPABILITY = "매칭권한";
 
@@ -249,10 +250,19 @@ export async function checkTrialTeacherSuccession(params: {
 }
 
 /**
- * 최초 선생님 배정(체험 배정을 정규로 전환하는 경우 포함, 기존 활성 배정이
- * 없는 경우) — teacher_assignments에 직접 INSERT. DB 트리거
- * (teacher_assignments_enforce_rate)가 최종 방어선이지만, 원시 에러 대신
- * 먼저 확인해 안내한다.
+ * 최초 선생님 배정(체험 배정을 정규로 전환하는 경우, 그리고 재등록 후 새
+ * subject_enrollment에 처음 배정하는 경우 포함 — 기존 활성 배정이 없는
+ * 경우) — teacher_assignments에 직접 INSERT. DB 트리거
+ * (teacher_assignments_enforce_rate)가 시급 요건의 최종 방어선이지만, 원시
+ * 에러 대신 먼저 확인해 안내한다.
+ *
+ * C-2(2026-09-11) — 이 경로는 confirm_student_teacher_subject_match()(C-1)·
+ * change_teacher_assignment()(C-2)와 달리 RPC를 거치지 않고 테이블에 직접
+ * INSERT하므로, 두 RPC에 있는 "선생님이 이 과목 운영 커리큘럼을 가져야
+ * 배정 가능" 서버 가드가 이 경로에는 없었다(UI 후보 목록만 걸러져 있었음 —
+ * 조사 중 발견). 재등록(subject_enrollments 신규 생성) 후 관리자가 같은
+ * 선생님을 포함해 아무 선생님이나 이 함수로 다시 배정할 수 있으므로,
+ * 여기도 같은 기준을 서버에서 강제한다.
  */
 export async function assignTeacherToSubjectEnrollment(params: {
   subjectEnrollmentId: string;
@@ -265,6 +275,19 @@ export async function assignTeacherToSubjectEnrollment(params: {
   // R2 선생님 active 전환(app/admin/users-actions.ts)과 같은 공유 함수
   // (lib/enrollment/teacher-rate-check.ts)로 확인한다.
   await assertTeacherHasValidRate(admin, params.teacherId, TRIAL_SUCCESSION_BLOCK_MESSAGES.no_valid_rate);
+
+  const { data: enrollment, error: enrollmentError } = await admin
+    .from("subject_enrollments")
+    .select("subject_id")
+    .eq("id", params.subjectEnrollmentId)
+    .single();
+  if (enrollmentError) throw new Error(enrollmentError.message);
+  await assertTeacherHasOperatingCurriculum(
+    admin,
+    params.teacherId,
+    enrollment.subject_id,
+    "선택한 선생님은 이 과목의 운영 커리큘럼이 없어 배정할 수 없습니다."
+  );
 
   const { data, error } = await admin
     .from("teacher_assignments")

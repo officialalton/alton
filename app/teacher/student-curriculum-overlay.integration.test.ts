@@ -856,3 +856,139 @@ describe("ensure_active_curriculum_overlay — 최초 베이스라인 시딩", (
     }
   });
 });
+
+// C-2(2026-09-11, 제품 오너 승인) — 재배정(change_teacher_assignment)에도 C-1과
+// 동일한 "새 선생님이 이 과목 운영 커리큘럼을 가져야 배정 가능" 서버 가드를
+// 적용했다(migration 20261276000000). 여기서는 (1) 가드가 다른 모든 변경보다
+// 먼저 실행돼 실패 시 기존 배정·스레드·문서권한큐가 전혀 바뀌지 않는지, (2)
+// 통과 시 오버레이/오버레이 단원 RLS 접근이 실제로 이전 선생님→새 선생님으로
+// 전환되고 학생 조회는 그대로 유지되는지를 검증한다. 이 검사는 배정 자격
+// 확인일 뿐이므로, 오버레이 데이터 자체를 새 선생님 것으로 복사/덮어쓰는
+// 로직은 추가하지 않았다 — student_curriculum_overlays가 애초에
+// subject_enrollment 단위라 그대로 유지된다.
+describe("C-2 — 재배정에도 선생님 운영 커리큘럼 보유를 서버에서 강제한다", () => {
+  it("운영 커리큘럼이 없는 선생님으로 재배정을 시도하면 거부되고, 기존 배정·스레드·문서권한큐가 전혀 바뀌지 않는다", async () => {
+    const enrollmentId = makeEnrollment();
+    const before = psql(
+      `select id, status, teacher_id from teacher_assignments where subject_enrollment_id = '${enrollmentId}' and status = 'active';`
+    );
+    const beforeThreadCounts = psql(
+      `select count(*) filter (where status = 'archived'), count(*) filter (where status = 'active')
+       from subject_threads where subject_enrollment_id = '${enrollmentId}';`
+    );
+    const beforeRetryCount = psql(
+      `select count(*) from document_permission_retries where subject_enrollment_id = '${enrollmentId}';`
+    );
+
+    // OTHER_TEACHER_ID는 seed 기준 SUBJECT_ID(SAT Math)의 teacher_curriculum_templates
+    // 행이 아예 없다(TEACHER_ID만 있음) — 가드 거부의 자연스러운 대상.
+    const { error } = await adminClient.rpc("change_teacher_assignment", {
+      p_subject_enrollment_id: enrollmentId,
+      p_new_teacher_id: OTHER_TEACHER_ID,
+      p_effective_from: new Date(Date.now() + 86400000).toISOString(),
+      p_reason: "guard_rejection_test",
+      p_changed_by: ADMIN_ID,
+    });
+    expect(error?.message).toMatch(/운영 커리큘럼이 없어 배정할 수 없습니다/);
+
+    const after = psql(
+      `select id, status, teacher_id from teacher_assignments where subject_enrollment_id = '${enrollmentId}' and status = 'active';`
+    );
+    expect(after).toBe(before);
+    const afterAnyNewRow = psql(
+      `select count(*) from teacher_assignments where subject_enrollment_id = '${enrollmentId}' and teacher_id = '${OTHER_TEACHER_ID}';`
+    );
+    expect(afterAnyNewRow).toBe("0");
+    const afterThreadCounts = psql(
+      `select count(*) filter (where status = 'archived'), count(*) filter (where status = 'active')
+       from subject_threads where subject_enrollment_id = '${enrollmentId}';`
+    );
+    expect(afterThreadCounts).toBe(beforeThreadCounts);
+    const afterRetryCount = psql(
+      `select count(*) from document_permission_retries where subject_enrollment_id = '${enrollmentId}';`
+    );
+    expect(afterRetryCount).toBe(beforeRetryCount);
+  });
+
+  it("운영 커리큘럼을 가진 선생님으로 재배정하면, 오버레이 접근이 이전 선생님→새 선생님으로 전환되고 학생 조회는 그대로 유지된다", async () => {
+    const enrollmentId = makeEnrollment();
+    const overlayId = asUser(
+      TEACHER_ID,
+      `insert into student_curriculum_overlays (subject_enrollment_id) values ('${enrollmentId}') returning id;`
+    );
+    const unitId = asUser(
+      TEACHER_ID,
+      `insert into curriculum_overlay_units (overlay_id, source_unit_id, position, unit_title)
+       values ('${overlayId}', '${baseUnitId}', 1, '재배정 전환 확인용 단원') returning id;`
+    );
+
+    // OTHER_TEACHER_ID에게 이 과목 운영 커리큘럼을 부여해 가드를 통과시킨다.
+    const templateId = psql(
+      `insert into teacher_curriculum_templates (teacher_id, subject_id) values ('${OTHER_TEACHER_ID}', '${SUBJECT_ID}') returning id;`
+    );
+    psql(
+      `insert into teacher_curriculum_template_units (template_id, position, unit_title) values ('${templateId}', 1, '재배정 대상 선생님용 단원');`
+    );
+
+    try {
+      const { data: newAssignmentId, error } = await adminClient.rpc("change_teacher_assignment", {
+        p_subject_enrollment_id: enrollmentId,
+        p_new_teacher_id: OTHER_TEACHER_ID,
+        p_effective_from: new Date(Date.now() + 86400000).toISOString(),
+        p_reason: "guard_pass_test",
+        p_changed_by: ADMIN_ID,
+      });
+      expect(error).toBeNull();
+      expect(newAssignmentId).toMatch(/^[0-9a-f-]{36}$/);
+
+      // 이전 선생님(TEACHER_ID)의 배정은 ended로 전환됐으므로
+      // is_active_teacher_for_enrollment가 더 이상 true를 주지 않는다 — 편집은
+      // 물론 조회도 즉시 사라진다(오버레이 RLS는 "담당 선생님"을 활성 상태
+      // 기준으로만 판정).
+      const oldTeacherRead = asUser(
+        TEACHER_ID,
+        `select id from curriculum_overlay_units where id = '${unitId}';`
+      );
+      expect(oldTeacherRead).toBe("");
+      // RLS의 USING 절이 0행으로 걸러내는 UPDATE는 예외를 던지지 않고 "0행
+      // 갱신"으로 조용히 성공한다(SQL 표준 동작) — RETURNING으로 실제 영향
+      // 받은 행이 없는지 직접 확인한다(빈 문자열 = 갱신된 행 없음).
+      const oldTeacherWriteResult = asUser(
+        TEACHER_ID,
+        `update curriculum_overlay_units set note = '이전 선생님 쓰기 시도' where id = '${unitId}' returning id;`
+      );
+      expect(oldTeacherWriteResult).toBe("");
+      const noteUnchanged = psql(`select note from curriculum_overlay_units where id = '${unitId}';`);
+      expect(noteUnchanged).not.toBe("이전 선생님 쓰기 시도");
+
+      // 새 선생님(OTHER_TEACHER_ID)은 이제 담당 선생님이므로 같은 오버레이 단원을
+      // 조회·수정할 수 있다 — 오버레이 자체는 subject_enrollment 단위라 그대로,
+      // 새로 복사/생성되지 않았음을 overlayId가 같다는 사실로도 확인한다.
+      const newTeacherRead = asUser(
+        OTHER_TEACHER_ID,
+        `select id from curriculum_overlay_units where id = '${unitId}';`
+      );
+      expect(newTeacherRead).toBe(unitId);
+      const newTeacherWrite = asUser(
+        OTHER_TEACHER_ID,
+        `update curriculum_overlay_units set note = '새 선생님 수정' where id = '${unitId}' returning note;`
+      );
+      expect(newTeacherWrite).toBe("새 선생님 수정");
+
+      // 학생 본인 조회는 선생님 교체와 무관하게 그대로 유지된다.
+      const studentRead = asUser(
+        STUDENT_ID,
+        `select id from curriculum_overlay_units where id = '${unitId}';`
+      );
+      expect(studentRead).toBe(unitId);
+
+      const overlayStillSame = psql(
+        `select count(*) from student_curriculum_overlays where subject_enrollment_id = '${enrollmentId}';`
+      );
+      expect(overlayStillSame).toBe("1");
+    } finally {
+      psql(`delete from teacher_curriculum_template_units where template_id = '${templateId}';`);
+      psql(`delete from teacher_curriculum_templates where id = '${templateId}';`);
+    }
+  });
+});
