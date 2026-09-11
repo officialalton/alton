@@ -1,5 +1,32 @@
 # ALTON — 현재 상태 (2026-09-11 기준)
 
+> **2026-09-11 — P4-1(A) 기존 주 보호자에게 자녀 추가: 구현 완료, Preview UAT
+> 대기.** 커밋 `d158cc0`(`preview/m4-integration-verification`), Preview
+> `https://alton-6krtt3nv8-alton7.vercel.app`. 착수 1장 정리는
+> `docs/2026-09-11-p4-1-add-child-to-guardian-plan.md`.
+> 1. **마이그레이션·새 RPC·새 링크 타입 없음.** 관리자 `신규 > 계정 생성` 탭에
+>    `+ 자녀 추가` 진입점을 추가하고(기존 `+ 계정 생성`은 `+ 부모 계정 생성`으로
+>    라벨만 변경, 로직 불변), 발송은 기존 직접 생성 경로
+>    (`create_direct_onboarding_link_multi` → `sendDirectOnboardingNoticeInternal`)
+>    하나만 쓴다. redeem 시점에 `finalize_trial_onboarding_students`의
+>    `p_new_guardian=false` 분기가 기존 household에 자녀만 추가한다(형제자매 불변).
+> 2. **후보는 주 보호자만.** `searchPrimaryGuardiansAction()`이
+>    `households.primary_guardian_id` 기준으로만 후보를 만든다 — finalize의 기존
+>    보호자 분기가 같은 컬럼으로만 가구를 찾기 때문에 공동 보호자를 고르면
+>    redeem에서 실패한다(확정 정책대로 공동 보호자는 1차 범위 밖).
+>    발송 액션은 클라이언트가 준 이메일을 신뢰하지 않고 `guardianId`만 받아
+>    서버에서 주 보호자·`role='parent'`·이메일을 다시 확인한다.
+> 3. **자녀 이메일 중복 차단은 `lib/onboarding-email-guard.ts` 재사용**(새 헬퍼
+>    없음) — 중복이면 링크 생성·발송을 시작하지 않고 입력란에 인라인 안내.
+> **검증**: 액션 유닛 8 + 폼 컴포넌트 6 + DB 통합 4(주 보호자 후보 필터, 기존
+> 가구 재사용·형제자매 행 불변, 멱등 재실행, 공동 보호자 finalize 실패) 통과,
+> tsc/eslint 클린, `next build` 성공. 전체 스위트는 로컬 통합 테스트가 단일
+> 로컬 DB를 병렬 공유해 실행마다 3~6건이 무작위로 실패한다(P4-1과 무관 —
+> 이번 변경을 제외하고 돌려도 6건 실패, 해당 파일만 단독 실행하면 전부 통과).
+> **다음**: Preview에서 `+ 자녀 추가` 실제 발송 → 보호자 링크 확인 → 자녀 계정
+> 생성 → 학부모 포털에 자녀 2명 표시 + 기존 자녀 상태 불변 확인(UAT 실행 ID
+> `p4-1-add-child-20260911`). P4-3(관리자 문서 탭)은 이번 라운드 미착수.
+
 > **2026-09-11 — C-2 완료 확정 / 온보딩(체험 온보딩 링크 재사용 버그 보완)
 > 완료.** C-2는 실제 예약·취소·목록 즉시 갱신까지 Preview에서 확인되어
 > 완료 처리됨(4차 재구현 포함, 위 항목 참고). 온보딩은 UAT 중 발견된
