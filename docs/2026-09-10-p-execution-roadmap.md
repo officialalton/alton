@@ -267,6 +267,91 @@
 
 ## P1 — 전반 로딩 개선
 
+### P1 회귀 조사 후속 성능 배치 — 사용자 이메일 조회·매칭 현황표·과목 및 교재 — **완료(2026-09-10), Preview 배포 완료, Production 미적용**
+
+P1-A(재진입 로딩) 배포 뒤 Preview UAT에서 사용자 탭 학부모/학생/선생님
+목록이 다시 느려지고, 매칭 하단 "상담→체험→정규 전환" 현황표와 "과목 및
+교재" 탭도 매우 느리다는 보고를 받았다. 조사 결과 셋 다 원인이 다르다.
+
+1. **사용자 탭 이메일 조회(회귀, 이전 배치 원인)**
+   - **원인**: `loadEmailById()`가 200명 초과 시 이메일이 누락되던 버그를
+     고치면서 대상을 다 찾을 때까지 `auth.admin.listUsers()` 페이지를
+     순회하도록 바꿨는데(커밋 `83bf78d`), Preview는 몇 주간 UAT로 Auth
+     사용자 수가 계속 누적돼 대상이 뒷페이지에 있으면 왕복이 계속 늘었다.
+   - **설계 검토**: `profiles`에는 이메일 컬럼이 없어 내부 테이블로 대체
+     불가. 이 프로젝트가 이미 다른 곳(로그인 이메일 변경 중복 확인,
+     `20261018000000` 마이그레이션)에서 `auth.users`를 SECURITY DEFINER
+     SQL 함수로 직접 조회하는 선례가 있음을 확인 — 이 방식이 id 기본키
+     조회 1회로 끝나 Admin API 페이지네이션보다 근본적으로 낫다.
+   - **구현**: 신규 함수 `get_emails_by_user_ids(p_user_ids uuid[])
+     returns table(user_id uuid, email text)`(migration
+     `20261271000000`) — `security definer`, `set search_path = public`,
+     PUBLIC/anon/authenticated 실행 권한 명시적 `revoke`,
+     `service_role`에만 `grant`. `loadEmailById()`는 이제 이 RPC를 1회
+     호출한다 — 대상 규모와 무관하게 왕복 1회, 페이지 제한 없어 정확성도
+     그대로.
+   - **검증**: 단위 테스트(빈 배열·중복 id·존재하지 않는 id·200명 초과·
+     대소문자 이메일 6건, mock 기반) + 실제 로컬 Postgres/Auth 통합
+     테스트(같은 6개 케이스 + `authenticated` 역할 호출 거부 확인) 전부
+     통과. `authenticated`로 실제 로그인한 세션이 이 함수를 호출하면
+     에러가 나는 것을 실측 확인(권한 경계 실증).
+
+2. **매칭 하단 "상담→체험→정규 전환" 현황표(기존 코드, 데이터 누적으로
+   체감 심화)**
+   - **원인**: `CandidateCard`가 카드마다 `getTrialOnboardingPipelineAction()`을
+     호출 — 카드당 인증 1회 + 순차 조회 최대 10회, 최대 50카드 × 10 =
+     최대 500회 순차 DB 왕복.
+   - **구현**: `trial-pipeline-data.ts`에 `loadTrialPipelinesBatch()`
+     신설 — 신규(상담) 칸반 N+1 수정과 동일한 방식으로, 후보 전체에
+     대해 배치 쿼리 9회(자녀별 최신 수강 계획·활성 배정·동의·체험수업권·
+     세션·리뷰·정규 진행 희망·계약·계약 버전·결제)만 실행하고 카드 수와
+     무관하게 고정이다. `getTrialOnboardingPipelineAction()`(카드 상세
+     모달, 단일 후보 전용)도 같은 배치 로더를 후보 1개로 호출하도록
+     리팩터해 계산 로직 중복을 없앴다. `TrialOnboardingPanel`은 이제
+     후보 목록 로드 직후 `loadTrialPipelinesBatchAction()` 한 번으로
+     전체 파이프라인을 받아와 각 카드에 내려준다. 데이터 도착 전에도
+     최종 카드 형태 스켈레톤을 보여준다(이전엔 `return null`로 완전히
+     빈 화면). 신규 통합 보드로 이 화면이 이관되더라도
+     `loadTrialPipelinesBatch()`를 그대로 재사용할 수 있다.
+   - **검증**: 새 단위 테스트(`trial-pipeline-data.test.ts`) — 후보
+     3명(각기 다른 진행 단계)에 대해 관련 테이블 11개가 각각 정확히
+     1회씩만 조회되는지(N+1 아님), 각 후보의 단계 판정이 서로 섞이지
+     않는지 확인. 기존 `TrialOnboardingPanel.test.tsx`(배치 액션으로
+     이관 후 26건 전부 통과)도 유지.
+
+3. **과목 및 교재(기존 코드, 데이터 누적으로 체감 심화)**
+   - **원인**: `loadAllCurriculumDocs()`가 전체 문서의 섹션 본문·티칭
+     팁·문제·키워드까지 `.limit()` 없이 전부 읽었다 — 목록 화면
+     (`CurriculumDocsTab`/`MaterialsLibraryTab`)은 실제로 제목·상태·
+     과목·단원·섹션 개수만 쓰는데도.
+   - **구현**: `loadCurriculumDocList()`(쿼리 2회 고정: 문서 메타데이터
+     + 섹션 개수 집계)를 신설해 `admin/page.tsx` SSR이 이걸 쓰도록
+     교체. 문서 상세(섹션·문제·키워드)는 `getCurriculumDocDetailAction()`
+     으로 문서를 실제로 열 때만 조회(같은 세션 안에서는 캐시, 재조회
+     안 함). 기존 `loadAllCurriculumDocs()`는 하위 호환을 위해 남기되
+     내부적으로 새 `loadCurriculumDocsByIds(supabase, null)`을 호출하도록
+     리팩터(더 이상 SSR 경로에서 쓰지 않음). "교재 문서" 목록에는
+     "더 보기" 표시 페이지네이션(20개씩)을 추가했다 — 다만 "교재
+     라이브러리"의 과목→단원 드릴다운은 정확한 카운트가 필요해 데이터
+     자체(경량 메타데이터)는 여전히 전체를 읽는다(무거운 본문/문제만
+     빠졌으므로 데이터가 늘어도 가볍다).
+   - **검증**: `CatalogTab.test.tsx`/`CurriculumDocsTab.test.tsx`/
+     `MaterialsLibraryTab.test.tsx`/`curriculum-doc-data.test.ts` 전부
+     경량 타입·지연 조회 방식으로 갱신 후 통과(기존 배포·삭제·문제 생성
+     흐름, `/materials/[id]` URL 진입 회귀 없음 확인).
+- **로컬 전체 검증**: `tsc --noEmit`·eslint(이 배치 신규 오류 없음),
+  `supabase db reset --local` 정상, 전체 257/257 파일·1800/1800 테스트
+  통과, `next build` 성공. 로컬 프로덕션 빌드 구조 측정(seed 데이터):
+  사용자 탭 학생/선생님 서브탭 1~2요청, 매칭 현황표 최초 진입
+  650ms/33요청, 과목 템플릿 기본 진입 203ms/29요청, 교재 문서 목록
+  전환 시 추가 요청 0건, 편집 진입 시에만 2요청.
+- **로컬 환경의 한계**: seed 데이터는 이번 회귀를 유발한 실제 Auth 사용자
+  누적량·후보 카드 수·교재 문서 수를 재현하지 못한다. Preview에서 실제
+  데이터량 기준 전후 체감(첫 콘텐츠 표시 시간·요청 수·카드/문서 수 증가
+  시 쿼리 수)을 제품 오너가 확인해야 이 배치를 완료로 본다.
+- **배포**: migration `20261271000000`은 non-prod에만 적용, 커밋 push,
+  Preview 배포(`target: preview` 확인). Production 미적용.
+
 ### P1 재진입 로딩 배치(A) — 신규·문의·면담·통합 일정·예약 — **완료(2026-09-10), Preview 배포 완료, 실제 느린 계정 실측은 제품 오너 확인 대기**
 
 Preview UAT에서 확인된 문제: 사용자 탭은 충분히 빨라졌지만, 신규(상담)·

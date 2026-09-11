@@ -13,7 +13,7 @@ import {
   listRegularConversionCandidatesAction,
   planTrialSubjectAndAssignTeacherAction,
   sendRegularContractOneClickAction,
-  getTrialOnboardingPipelineAction,
+  loadTrialPipelinesBatchAction,
   type TrialOnboardingCandidate,
   type RegularConversionCandidate,
   type TrialOnboardingPipeline,
@@ -33,14 +33,42 @@ const LINK_STATUS_LABEL: Record<TrialOnboardingCandidate["linkStatus"], string> 
   revoked: "온보딩 링크 취소됨",
 };
 
+// 2026-09-10(P1 성능 배치) — 데이터 도착 전에도 최종 카드 형태 스켈레톤을
+// 즉시 보여준다("빈 화면"으로 퇴행하지 않도록).
+function CandidateCardSkeleton() {
+  return (
+    <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3 animate-pulse" data-testid="trial-candidate-skeleton">
+      <div className="flex items-center justify-between">
+        <div className="h-3.5 w-40 bg-grey-200 rounded" />
+        <div className="h-5 w-16 bg-grey-100 rounded-full" />
+      </div>
+      <div className="mt-3 space-y-1.5">
+        {[0, 1, 2].map((i) => (
+          <div key={i} className="h-2.5 w-32 bg-grey-100 rounded" />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function TrialOnboardingPanel() {
   const [candidates, setCandidates] = useState<TrialOnboardingCandidate[] | null>(null);
   const [conversions, setConversions] = useState<RegularConversionCandidate[] | null>(null);
+  // 2026-09-10(P1 성능 배치) — 후보 전체의 파이프라인을 배치로 한 번에 조회해
+  // consultationId 기준으로 보관한다. candidates 응답이 오면 곧이어 이걸
+  // 채우므로, candidates는 있는데 pipelinesByConsultation이 아직 null인
+  // 짧은 구간에는 카드 골격만 보이고 단계 목록은 비어 있다가 채워진다.
+  const [pipelinesByConsultation, setPipelinesByConsultation] = useState<Record<
+    string,
+    TrialOnboardingPipeline
+  > | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   async function refresh() {
+    let loadedCandidates: TrialOnboardingCandidate[] = [];
     try {
-      setCandidates(await listTrialOnboardingCandidatesAction());
+      loadedCandidates = await listTrialOnboardingCandidatesAction();
+      setCandidates(loadedCandidates);
     } catch {
       setCandidates([]);
     }
@@ -49,13 +77,34 @@ export default function TrialOnboardingPanel() {
     } catch {
       setConversions([]);
     }
+    try {
+      setPipelinesByConsultation(
+        await loadTrialPipelinesBatchAction(
+          loadedCandidates.map((c) => ({
+            consultationId: c.consultationId,
+            childId: c.childId,
+            trialIntentConfirmedAt: c.trialIntentConfirmedAt,
+          }))
+        )
+      );
+    } catch {
+      setPipelinesByConsultation({});
+    }
   }
 
   useEffect(() => {
     refresh();
   }, []);
 
-  if (!candidates || !conversions) return null;
+  if (!candidates || !conversions) {
+    return (
+      <div className="max-w-[640px] px-8 py-8 border-t border-grey-200 mt-8">
+        <h2 className="text-[16px] font-extrabold text-ink mb-1.5">상담 → 체험 → 정규 전환</h2>
+        <CandidateCardSkeleton />
+        <CandidateCardSkeleton />
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-[640px] px-8 py-8 border-t border-grey-200 mt-8">
@@ -69,9 +118,18 @@ export default function TrialOnboardingPanel() {
           체험 추천된 상담이 없습니다.
         </div>
       ) : (
-        candidates.map((c) => (
-          <CandidateCard key={c.childId ?? c.consultationId} candidate={c} onChanged={refresh} />
-        ))
+        candidates.map((c) =>
+          pipelinesByConsultation === null ? (
+            <CandidateCardSkeleton key={c.childId ?? c.consultationId} />
+          ) : (
+            <CandidateCard
+              key={c.childId ?? c.consultationId}
+              candidate={c}
+              pipeline={pipelinesByConsultation[c.consultationId] ?? null}
+              onChanged={refresh}
+            />
+          )
+        )
       )}
 
       <h3 className="text-[14px] font-extrabold text-ink mt-6 mb-1.5">정규 계약 발송 대기</h3>
@@ -93,30 +151,22 @@ export default function TrialOnboardingPanel() {
 
 function CandidateCard({
   candidate: c,
+  pipeline,
   onChanged,
 }: {
   candidate: TrialOnboardingCandidate;
+  // 2026-09-10(P1 성능 배치) — 이전에는 카드마다 자체적으로
+  // getTrialOnboardingPipelineAction()을 호출했다(카드 수만큼 인증+순차
+  // 조회 반복). 이제 부모(TrialOnboardingPanel)가 후보 전체를 배치로 한
+  // 번에 조회해 이 prop으로 내려준다 — 배치 응답이 아직 안 왔으면 null.
+  pipeline: TrialOnboardingPipeline | null;
   onChanged: () => void;
 }) {
-  const [pipeline, setPipeline] = useState<TrialOnboardingPipeline | null>(null);
   const [linkOpen, setLinkOpen] = useState(false);
   const [linkResult, setLinkResult] = useState<SendTrialOnboardingNoticeResult | null>(null);
   const [assignOpen, setAssignOpen] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  async function loadPipeline() {
-    try {
-      setPipeline(await getTrialOnboardingPipelineAction(c.consultationId, c.childId, c.trialIntentConfirmedAt));
-    } catch {
-      setPipeline(null);
-    }
-  }
-
-  useEffect(() => {
-    loadPipeline();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [c.childId, c.trialIntentConfirmedAt]);
 
   const doneCount = pipeline?.steps.filter((s) => s.done).length ?? 0;
   const currentStep = pipeline?.steps.find((s) => !s.done);
@@ -279,7 +329,6 @@ function CandidateCard({
               setError(null);
               try {
                 await retryTrialEntitlementGrant(c.consultationId);
-                await loadPipeline();
                 onChanged();
               } catch (e) {
                 setError(e instanceof Error ? e.message : String(e));

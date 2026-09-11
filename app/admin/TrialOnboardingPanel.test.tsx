@@ -4,7 +4,7 @@ import TrialOnboardingPanel from "./TrialOnboardingPanel";
 import {
   listTrialOnboardingCandidatesAction,
   listRegularConversionCandidatesAction,
-  getTrialOnboardingPipelineAction,
+  loadTrialPipelinesBatchAction,
   confirmTrialIntentAction,
   sendRegularContractOneClickAction,
   sendTrialOnboardingNoticeAction,
@@ -15,7 +15,7 @@ import { createNewContractVersionForResend } from "./consultation-actions";
 vi.mock("./trial-onboarding-actions", () => ({
   listTrialOnboardingCandidatesAction: vi.fn(),
   listRegularConversionCandidatesAction: vi.fn(),
-  getTrialOnboardingPipelineAction: vi.fn(),
+  loadTrialPipelinesBatchAction: vi.fn(),
   confirmTrialIntentAction: vi.fn(),
   createTrialOnboardingLinkAction: vi.fn(),
   planTrialSubjectAndAssignTeacherAction: vi.fn(),
@@ -95,9 +95,9 @@ describe("TrialOnboardingPanel", () => {
       .mockResolvedValueOnce([baseCandidate])
       .mockResolvedValueOnce([{ ...baseCandidate, trialIntentConfirmedAt: "2026-09-03T00:00:00Z" }]);
     (listRegularConversionCandidatesAction as ReturnType<typeof vi.fn>).mockResolvedValue([]);
-    (getTrialOnboardingPipelineAction as ReturnType<typeof vi.fn>)
-      .mockResolvedValueOnce({ consultationId: "c1", subjectEnrollmentId: null, steps: stepList([]) })
-      .mockResolvedValueOnce({ consultationId: "c1", subjectEnrollmentId: null, steps: stepList(["trial_intent"]) });
+    (loadTrialPipelinesBatchAction as ReturnType<typeof vi.fn>)
+      .mockResolvedValueOnce({ c1: { consultationId: "c1", subjectEnrollmentId: null, steps: stepList([]) } })
+      .mockResolvedValueOnce({ c1: { consultationId: "c1", subjectEnrollmentId: null, steps: stepList(["trial_intent"]) } });
     (confirmTrialIntentAction as ReturnType<typeof vi.fn>).mockResolvedValue(undefined);
 
     render(<TrialOnboardingPanel />);
@@ -120,10 +120,8 @@ describe("TrialOnboardingPanel", () => {
       { ...baseCandidate, trialIntentConfirmedAt: "2026-09-03T00:00:00Z" },
     ]);
     (listRegularConversionCandidatesAction as ReturnType<typeof vi.fn>).mockResolvedValue([]);
-    (getTrialOnboardingPipelineAction as ReturnType<typeof vi.fn>).mockResolvedValue({
-      consultationId: "c1",
-      subjectEnrollmentId: null,
-      steps: stepList(["trial_intent"]),
+    (loadTrialPipelinesBatchAction as ReturnType<typeof vi.fn>).mockResolvedValue({
+      c1: { consultationId: "c1", subjectEnrollmentId: null, steps: stepList(["trial_intent"]) },
     });
     (sendTrialOnboardingNoticeAction as ReturnType<typeof vi.fn>).mockResolvedValue({
       status: "sent",
@@ -168,10 +166,8 @@ describe("TrialOnboardingPanel", () => {
       { ...baseCandidate, trialIntentConfirmedAt: "2026-09-03T00:00:00Z", childId: "child1", linkStatus: "redeemed" },
     ]);
     (listRegularConversionCandidatesAction as ReturnType<typeof vi.fn>).mockResolvedValue([]);
-    (getTrialOnboardingPipelineAction as ReturnType<typeof vi.fn>).mockResolvedValue({
-      consultationId: "c1",
-      subjectEnrollmentId: null,
-      steps: stepList(["trial_intent", "account_linked"]),
+    (loadTrialPipelinesBatchAction as ReturnType<typeof vi.fn>).mockResolvedValue({
+      c1: { consultationId: "c1", subjectEnrollmentId: null, steps: stepList(["trial_intent", "account_linked"]) },
     });
 
     render(<TrialOnboardingPanel />);
@@ -295,20 +291,24 @@ describe("TrialOnboardingPanel", () => {
       { ...baseCandidate, trialIntentConfirmedAt: "2026-09-03T00:00:00Z", childId: "child1", linkStatus: "redeemed" },
     ]);
     (listRegularConversionCandidatesAction as ReturnType<typeof vi.fn>).mockResolvedValue([]);
-    (getTrialOnboardingPipelineAction as ReturnType<typeof vi.fn>)
+    (loadTrialPipelinesBatchAction as ReturnType<typeof vi.fn>)
       .mockResolvedValueOnce({
-        consultationId: "c1",
-        subjectEnrollmentId: "se1",
-        trialEntitlementGrantStatus: "failed",
-        trialEntitlementGrantError: "연결된 학생 계정이 없어 체험수업권을 지급할 수 없습니다.",
-        steps: stepList(["trial_intent", "account_linked", "assignment", "trial_consent"]),
+        c1: {
+          consultationId: "c1",
+          subjectEnrollmentId: "se1",
+          trialEntitlementGrantStatus: "failed",
+          trialEntitlementGrantError: "연결된 학생 계정이 없어 체험수업권을 지급할 수 없습니다.",
+          steps: stepList(["trial_intent", "account_linked", "assignment", "trial_consent"]),
+        },
       })
       .mockResolvedValueOnce({
-        consultationId: "c1",
-        subjectEnrollmentId: "se1",
-        trialEntitlementGrantStatus: "granted",
-        trialEntitlementGrantError: null,
-        steps: stepList(["trial_intent", "account_linked", "assignment", "trial_consent", "trial_entitlement"]),
+        c1: {
+          consultationId: "c1",
+          subjectEnrollmentId: "se1",
+          trialEntitlementGrantStatus: "granted",
+          trialEntitlementGrantError: null,
+          steps: stepList(["trial_intent", "account_linked", "assignment", "trial_consent", "trial_entitlement"]),
+        },
       });
     (retryTrialEntitlementGrant as ReturnType<typeof vi.fn>).mockResolvedValue(undefined);
 
@@ -318,6 +318,6 @@ describe("TrialOnboardingPanel", () => {
     fireEvent.click(screen.getByRole("button", { name: "체험수업권 지급 재시도" }));
 
     await waitFor(() => expect(retryTrialEntitlementGrant).toHaveBeenCalledWith("c1"));
-    await waitFor(() => expect(getTrialOnboardingPipelineAction).toHaveBeenCalledTimes(2));
+    await waitFor(() => expect(loadTrialPipelinesBatchAction).toHaveBeenCalledTimes(2));
   });
 });

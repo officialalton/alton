@@ -3,7 +3,8 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { createClient } from "@/utils/supabase/server";
 import { sanitizeDocHtml } from "@/lib/sanitize-doc-html";
-import type { DocProblem, DocSection } from "./curriculum-doc-data";
+import type { DocProblem, DocSection, DocEditorData } from "./curriculum-doc-data";
+import { loadCurriculumDocDetail } from "./curriculum-doc-data";
 import type { SubjectKeyword } from "./subject-data";
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
@@ -22,6 +23,14 @@ async function requireAdmin() {
     .single();
   if (profile?.role !== "admin") throw new Error("관리자만 사용할 수 있습니다.");
   return { supabase, user };
+}
+
+// 2026-09-10(P1 성능 배치) — "교재 문서" 목록은 경량 목록(loadCurriculumDocList)만
+// SSR로 받는다. 관리자가 실제로 문서를 열 때(편집 화면 진입)만 이 액션으로
+// 섹션·문제·키워드 전체를 조회한다.
+export async function getCurriculumDocDetailAction(docId: string): Promise<DocEditorData | null> {
+  const { supabase } = await requireAdmin();
+  return loadCurriculumDocDetail(supabase, docId);
 }
 
 export async function createCurriculumDoc(params: {

@@ -46,7 +46,7 @@ import type {
   listOpenOrRecentPaymentDisputes,
 } from "./entitlement-actions";
 import type { AdminSubject } from "./subject-data";
-import type { DocEditorData } from "./curriculum-doc-data";
+import type { CurriculumDocListItem } from "./curriculum-doc-data";
 import type {
   CreditTransaction,
   ParentListItem,
@@ -126,7 +126,7 @@ export default function AdminShell({
   googleLinkSuccess?: boolean;
   dashboard: AdminDashboardData;
   subjects: AdminSubject[];
-  docs: DocEditorData[];
+  docs: CurriculumDocListItem[];
   parents: ParentListItem[];
   // 2026-09-10(P1) — "사용자" 탭의 학생/선생님 목록·수업권 이력·QC 경고는
   // 더 이상 SSR로 안 내려온다(UsersTab이 서브탭을 열 때 직접 조회). students는

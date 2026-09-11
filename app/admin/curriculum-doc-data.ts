@@ -49,15 +49,36 @@ function extractUnitTitle(rel: unknown): string | null {
   return (row as { unit_title?: string } | null)?.unit_title ?? null;
 }
 
+// 2026-09-10(P1 성능 배치 — "과목 및 교재" 첫 진입) — 이 함수는 문서마다
+// 전체 섹션 본문·티칭 팁·문제·키워드까지 통째로 읽는다. 관리자 목록 화면
+// (CurriculumDocsTab/MaterialsLibraryTab)은 실제로 제목·상태·과목·단원·
+// 섹션 개수만 쓰므로, 목록 첫 진입에는 아래 loadCurriculumDocList()(경량,
+// 본문/문제 미조회)를 쓰고 이 함수는 특정 문서를 "열 때"만
+// loadCurriculumDocsByIds()를 통해 호출한다. 전체를 무제한으로 읽는 이
+// 함수 자체는 하위 호환(기존 테스트)을 위해 그대로 두되, admin/page.tsx의
+// SSR 경로에서는 더 이상 호출하지 않는다.
 export async function loadAllCurriculumDocs(
   supabase: SupabaseClient
 ): Promise<DocEditorData[]> {
-  const { data: docs } = await supabase
+  return loadCurriculumDocsByIds(supabase, null);
+}
+
+/** 특정 문서 id들만(또는 docIds=null이면 전체) 전체 상세(섹션·문제·키워드
+ * 포함)를 읽는다. 문서 하나를 열 때는 [docId] 하나만 넘겨 그 문서만 조회한다 —
+ * 목록 전체를 다시 읽지 않는다. */
+export async function loadCurriculumDocsByIds(
+  supabase: SupabaseClient,
+  filterDocIds: string[] | null
+): Promise<DocEditorData[]> {
+  if (filterDocIds && filterDocIds.length === 0) return [];
+  let query = supabase
     .from("curriculum_docs")
     .select(
       "id, title, status, subject_id, unit_id, subject:subjects(name), unit:subject_template_units!curriculum_docs_unit_id_fkey(unit_title)"
     )
     .order("title", { ascending: true });
+  if (filterDocIds) query = query.in("id", filterDocIds);
+  const { data: docs } = await query;
   if (!docs || docs.length === 0) return [];
 
   const docIds = docs.map((d) => d.id);
@@ -182,5 +203,63 @@ export async function loadAllCurriculumDocs(
     status: d.status,
     sections: sectionsByDoc.get(d.id) ?? [],
     subjectKeywords: keywordsBySubject.get(d.subject_id) ?? [],
+  }));
+}
+
+/** 문서 하나의 전체 상세(섹션·문제·키워드)를 읽는다 — 편집 화면(CurriculumDocEditor)을
+ * 열 때만 호출한다. */
+export async function loadCurriculumDocDetail(
+  supabase: SupabaseClient,
+  docId: string
+): Promise<DocEditorData | null> {
+  const [doc] = await loadCurriculumDocsByIds(supabase, [docId]);
+  return doc ?? null;
+}
+
+// 2026-09-10(P1 성능 배치) — 목록 화면(CurriculumDocsTab의 flat 목록,
+// MaterialsLibraryTab의 과목→단원→교재 드릴다운)은 섹션 본문·티칭 팁·
+// 문제·키워드를 전혀 렌더링하지 않는다(제목·상태·과목·단원·섹션 개수만
+// 씀). 이 함수는 그 목록에 필요한 값만 조회한다 — curriculum_docs 1회 +
+// 섹션 개수 집계 1회, 총 2회 쿼리로 끝난다(문서·섹션 수와 무관하게 고정).
+export type CurriculumDocListItem = {
+  id: string;
+  title: string;
+  subjectId: string;
+  subjectName: string;
+  unitId: string | null;
+  unitTitle: string | null;
+  status: string;
+  sectionCount: number;
+};
+
+export async function loadCurriculumDocList(supabase: SupabaseClient): Promise<CurriculumDocListItem[]> {
+  const { data: docs } = await supabase
+    .from("curriculum_docs")
+    .select(
+      "id, title, status, subject_id, unit_id, subject:subjects(name), unit:subject_template_units!curriculum_docs_unit_id_fkey(unit_title)"
+    )
+    .order("title", { ascending: true });
+  if (!docs || docs.length === 0) return [];
+
+  const docIds = docs.map((d) => d.id);
+  const { data: sectionRows } = await supabase
+    .from("curriculum_doc_sections")
+    .select("curriculum_doc_id")
+    .in("curriculum_doc_id", docIds);
+
+  const sectionCountByDoc = new Map<string, number>();
+  for (const s of sectionRows ?? []) {
+    sectionCountByDoc.set(s.curriculum_doc_id, (sectionCountByDoc.get(s.curriculum_doc_id) ?? 0) + 1);
+  }
+
+  return docs.map((d) => ({
+    id: d.id,
+    title: d.title,
+    subjectId: d.subject_id,
+    subjectName: extractName(d.subject),
+    unitId: d.unit_id,
+    unitTitle: extractUnitTitle(d.unit),
+    status: d.status,
+    sectionCount: sectionCountByDoc.get(d.id) ?? 0,
   }));
 }

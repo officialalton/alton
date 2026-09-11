@@ -2,7 +2,7 @@ import { requireUser } from "@/lib/auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { loadAdminDashboard, type AdminDashboardData } from "./dashboard-data";
 import { loadSubjectCatalog } from "./subject-data";
-import { loadAllCurriculumDocs } from "./curriculum-doc-data";
+import { loadCurriculumDocList } from "./curriculum-doc-data";
 import { loadParents, loadStudents, loadStudentCreditHistoryBatch } from "./users-data";
 import {
   loadConsultations,
@@ -100,7 +100,7 @@ export default async function AdminHomePage({
   ] = await Promise.all([
     need("home") ? loadAdminDashboard(supabase, user.id) : Promise.resolve(EMPTY_DASHBOARD),
     need("catalog", "users", "consult", "matching") ? loadSubjectCatalog(supabase) : Promise.resolve([]),
-    need("catalog") ? loadAllCurriculumDocs(supabase) : Promise.resolve([]),
+    need("catalog") ? loadCurriculumDocList(supabase) : Promise.resolve([]),
     need("users") ? loadParents(supabase) : Promise.resolve([]),
     need("billing") ? loadStudents(supabase) : Promise.resolve([]),
     need("matching") ? loadStudentsForMatching(supabase) : Promise.resolve([]),

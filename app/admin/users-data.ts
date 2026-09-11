@@ -65,33 +65,24 @@ function extractName(rel: unknown): string {
   return (row as { name?: string } | null)?.name ?? "";
 }
 
-// 2026-09-10(P1 — 사용자 탭 이메일 조회 정확성 수정) — 이전에는 첫 페이지
-// (perPage: 200) 하나만 읽어서 전체 Auth 사용자가 200명을 넘으면 뒤쪽
-// 페이지에 있는 사용자의 이메일이 조용히 누락됐다. 이제 대상 userIds를
-// 전부 찾거나 더 이상 페이지가 없을 때까지 순회한다. 각 역할(학부모/학생/
-// 선생님)이 서브탭을 열 때만 지연 조회되므로(사용자 탭 lazy-loading,
-// 2026-09-10) 한 호출의 대상 userIds는 그 역할 하나 분량으로 이미 좁혀져
-// 있다 — 그래도 목록 자체가 200명을 넘을 수 있으므로 페이지네이션은
-// 안전을 위해 계속 순회한다. maxPages는 전체 Auth 사용자 수가 비정상적으로
-// 커진 경우에도 무한 루프를 막기 위한 상한이다.
+// 2026-09-10(P1 — 사용자 탭 이메일 조회 성능 배치) — 처음에는 Admin API
+// 첫 페이지(perPage: 200)만 읽어 200명 넘으면 이메일이 누락되는 버그가
+// 있었고, 그 다음엔 정확성을 위해 대상을 다 찾을 때까지 페이지를 전부
+// 순회하도록 고쳤지만 Auth 사용자 수가 많은 환경(Preview처럼 몇 주간
+// UAT가 누적된 곳)에서 대상이 뒷페이지에 있으면 왕복이 계속 늘어났다.
+// 이제 auth.users를 id로 직접 조회하는 SECURITY DEFINER 함수
+// get_emails_by_user_ids(migration 20261271000000, service_role 전용)를
+// RPC로 호출한다 — 대상이 몇 명이든, 전체 Auth 사용자 수와 무관하게 항상
+// 왕복 1회로 끝나고, 페이지 제한이 없어 정확성도 그대로 유지된다.
 export async function loadEmailById(userIds: string[]): Promise<Map<string, string>> {
   const admin = createAdminClient();
   const emailById = new Map<string, string>();
   if (userIds.length === 0) return emailById;
 
-  const remaining = new Set(userIds);
-  const perPage = 200;
-  const maxPages = 100;
-  for (let page = 1; page <= maxPages && remaining.size > 0; page++) {
-    const { data } = await admin.auth.admin.listUsers({ page, perPage });
-    const users = data?.users ?? [];
-    for (const u of users) {
-      if (remaining.has(u.id)) {
-        emailById.set(u.id, u.email ?? "");
-        remaining.delete(u.id);
-      }
-    }
-    if (users.length < perPage) break;
+  const { data, error } = await admin.rpc("get_emails_by_user_ids", { p_user_ids: userIds });
+  if (error) throw new Error(error.message);
+  for (const row of (data ?? []) as { user_id: string; email: string | null }[]) {
+    emailById.set(row.user_id, row.email ?? "");
   }
   return emailById;
 }

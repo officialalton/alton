@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, type Dispatch, type SetStateAction } from "react";
-import { createCurriculumDoc } from "./curriculum-doc-actions";
+import { createCurriculumDoc, getCurriculumDocDetailAction } from "./curriculum-doc-actions";
 import CurriculumDocEditor from "./CurriculumDocEditor";
-import type { DocEditorData } from "./curriculum-doc-data";
+import type { DocEditorData, CurriculumDocListItem } from "./curriculum-doc-data";
 import { selectableSubjects, type AdminSubject } from "./subject-data";
 
 const STATUS_LABEL: Record<string, string> = {
@@ -13,22 +13,77 @@ const STATUS_LABEL: Record<string, string> = {
   rejected: "반려됨",
 };
 
+// 2026-09-10(P1 성능 배치) — 목록 첫 진입은 이미 경량(loadCurriculumDocList,
+// 본문·문제 미포함)이라 빠르다. 목록 자체가 계속 누적돼도 화면이 무거워지지
+// 않도록, 표시 개수만 클라이언트에서 페이지네이션한다(데이터 자체는 이미
+// 가벼워서 서버 쪽 limit 없이도 안전 — 과목/단원 드릴다운(MaterialsLibraryTab)이
+// 전체 목록을 필요로 하므로 서버 쿼리 자체는 제한하지 않는다).
+const PAGE_SIZE = 20;
+
 export default function CurriculumDocsTab({
   docs,
   setDocs,
   subjects,
 }: {
-  docs: DocEditorData[];
-  setDocs: Dispatch<SetStateAction<DocEditorData[]>>;
+  docs: CurriculumDocListItem[];
+  setDocs: Dispatch<SetStateAction<CurriculumDocListItem[]>>;
   subjects: AdminSubject[];
 }) {
   const [openDocId, setOpenDocId] = useState<string | null>(null);
+  // 2026-09-10(P1 성능 배치) — 문서를 실제로 열 때만 섹션·문제·키워드 전체를
+  // 조회한다. 한 번 연 문서는 이 캐시에 남아 다시 열 때 재조회하지 않는다
+  // (같은 세션 안에서만 — 페이지를 새로고침하면 사라짐, 장기 캐시 아님).
+  const [detailCache, setDetailCache] = useState<Record<string, DocEditorData>>({});
+  const [loadingDetailId, setLoadingDetailId] = useState<string | null>(null);
+  const [detailError, setDetailError] = useState<string | null>(null);
   const [creating, setCreating] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
-  const open = docs.find((d) => d.id === openDocId);
+  const open = openDocId ? (detailCache[openDocId] ?? null) : null;
+
+  async function openDoc(docId: string) {
+    setOpenDocId(docId);
+    if (detailCache[docId]) return;
+    setLoadingDetailId(docId);
+    setDetailError(null);
+    try {
+      const detail = await getCurriculumDocDetailAction(docId);
+      if (!detail) {
+        setDetailError("문서를 찾을 수 없습니다.");
+        setOpenDocId(null);
+        return;
+      }
+      setDetailCache((prev) => ({ ...prev, [docId]: detail }));
+    } catch (e) {
+      setDetailError(e instanceof Error ? e.message : "문서를 불러오지 못했습니다.");
+      setOpenDocId(null);
+    } finally {
+      setLoadingDetailId(null);
+    }
+  }
+
+  function updateListItemFromDetail(updated: DocEditorData) {
+    setDocs((prev) =>
+      prev.map((d) =>
+        d.id === updated.id
+          ? {
+              ...d,
+              title: updated.title,
+              status: updated.status,
+              subjectId: updated.subjectId,
+              subjectName: updated.subjectName,
+              unitId: updated.unitId,
+              unitTitle: updated.unitTitle,
+              sectionCount: updated.sections.length,
+            }
+          : d
+      )
+    );
+  }
 
   function handleDocChanged(updated: DocEditorData) {
-    setDocs((prev) => prev.map((d) => (d.id === updated.id ? updated : d)));
+    setDetailCache((prev) => ({ ...prev, [updated.id]: updated }));
+    updateListItemFromDetail(updated);
   }
 
   function handleBackFromEditor(updated: DocEditorData) {
@@ -38,13 +93,46 @@ export default function CurriculumDocsTab({
 
   function handleDocDeleted(docId: string) {
     setDocs((prev) => prev.filter((d) => d.id !== docId));
+    setDetailCache((prev) => {
+      const next = { ...prev };
+      delete next[docId];
+      return next;
+    });
     setOpenDocId(null);
   }
 
   function handleCreated(doc: DocEditorData) {
-    setDocs((prev) => [...prev, doc].sort((a, b) => a.title.localeCompare(b.title)));
+    setDocs((prev) =>
+      [
+        ...prev,
+        {
+          id: doc.id,
+          title: doc.title,
+          subjectId: doc.subjectId,
+          subjectName: doc.subjectName,
+          unitId: doc.unitId,
+          unitTitle: doc.unitTitle,
+          status: doc.status,
+          sectionCount: doc.sections.length,
+        },
+      ].sort((a, b) => a.title.localeCompare(b.title))
+    );
+    setDetailCache((prev) => ({ ...prev, [doc.id]: doc }));
     setCreating(false);
     setOpenDocId(doc.id);
+  }
+
+  if (openDocId && loadingDetailId === openDocId) {
+    return (
+      <div className="max-w-[640px] px-8 py-8" data-testid="curriculum-doc-detail-skeleton">
+        <div className="h-5 w-48 bg-grey-200 rounded animate-pulse mb-4" />
+        <div className="space-y-2.5">
+          {[0, 1, 2].map((i) => (
+            <div key={i} className="h-16 border-[1.5px] border-grey-100 rounded-xl bg-grey-100 animate-pulse" />
+          ))}
+        </div>
+      </div>
+    );
   }
 
   if (open) {
@@ -68,39 +156,52 @@ export default function CurriculumDocsTab({
     );
   }
 
+  const visibleDocs = docs.slice(0, visibleCount);
+
   return (
     <div className="max-w-[640px] px-8 py-8">
       <h1 className="text-[20px] font-extrabold text-ink mb-1.5">교재 문서</h1>
       <p className="text-[13px] text-grey-500 mb-5">
         목차(섹션)와 본문을 작성하고, 배포하면 학생·선생님이 열람할 수 있습니다.
       </p>
+      {detailError && <p className="text-[12.5px] text-red mb-3">{detailError}</p>}
 
       {docs.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center mb-3">
           아직 만든 교재가 없습니다.
         </div>
       ) : (
-        docs.map((d) => (
-          <div
-            key={d.id}
-            className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5 flex items-center justify-between"
-          >
-            <div>
-              <div className="text-[13.5px] font-bold text-ink">{d.title}</div>
-              <div className="text-[12px] text-grey-500 mt-0.5">
-                {d.subjectName}
-                {d.unitTitle ? ` · ${d.unitTitle}` : ""} · 섹션 {d.sections.length}개 ·{" "}
-                {STATUS_LABEL[d.status] ?? d.status}
-              </div>
-            </div>
-            <button
-              onClick={() => setOpenDocId(d.id)}
-              className="text-[12px] font-bold px-3.5 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink shrink-0"
+        <>
+          {visibleDocs.map((d) => (
+            <div
+              key={d.id}
+              className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5 flex items-center justify-between"
             >
-              편집
+              <div>
+                <div className="text-[13.5px] font-bold text-ink">{d.title}</div>
+                <div className="text-[12px] text-grey-500 mt-0.5">
+                  {d.subjectName}
+                  {d.unitTitle ? ` · ${d.unitTitle}` : ""} · 섹션 {d.sectionCount}개 ·{" "}
+                  {STATUS_LABEL[d.status] ?? d.status}
+                </div>
+              </div>
+              <button
+                onClick={() => openDoc(d.id)}
+                className="text-[12px] font-bold px-3.5 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink shrink-0"
+              >
+                편집
+              </button>
+            </div>
+          ))}
+          {visibleCount < docs.length && (
+            <button
+              onClick={() => setVisibleCount((v) => v + PAGE_SIZE)}
+              className="text-[12.5px] font-semibold text-ink underline w-full text-center mb-2.5"
+            >
+              더 보기({docs.length - visibleCount}개 남음)
             </button>
-          </div>
-        ))
+          )}
+        </>
       )}
 
       <button

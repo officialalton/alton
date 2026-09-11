@@ -14,6 +14,7 @@ import { confirmStudentTeacherSubjectMatch } from "./matching-common-actions";
 import { sendEmail, escapeHtml } from "@/lib/email";
 import { currentRequestOrigin } from "@/lib/request-origin";
 import { sendRegularContractForSubjectEnrollment, type SendRegularContractResult } from "@/lib/regular-contract-send";
+import { loadTrialPipelinesBatch } from "./trial-pipeline-data";
 
 // 기존 상담 관리 액션(app/admin/consultation-actions.ts)과 동일한 capability를
 // 재사용한다 — 새 권한 이름을 따로 만들지 않는다.
@@ -447,22 +448,6 @@ export type TrialOnboardingPipeline = {
   trialEntitlementGrantError: string | null;
 };
 
-const PIPELINE_STEP_LABELS: Record<TrialPipelineStepKey, string> = {
-  trial_intent: "체험 희망 확정",
-  account_linked: "보호자·학생 계정 연결",
-  assignment: "과목·선생님 배정",
-  trial_consent: "체험 Smart Notes 동의",
-  trial_entitlement: "체험수업권 지급",
-  trial_booking: "체험 예약",
-  smart_notes: "Smart Notes 연결",
-  review: "선생님 리뷰 확정",
-  regular_intent: "정규 진행 희망",
-  contract_sent: "계약 발송",
-  signed: "보호자 서명",
-  purchase: "정규상품 구매",
-  subject_active: "과목 활성화",
-};
-
 export async function listTrialOnboardingCandidatesAction(): Promise<TrialOnboardingCandidate[]> {
   await requireAdminOrCapability(CONSULT_CAPABILITY);
   const admin = createAdminClient();
@@ -543,6 +528,12 @@ export async function listTrialOnboardingCandidatesAction(): Promise<TrialOnboar
   });
 }
 
+// 2026-09-10(P1 성능 배치) — 카드별로 각각 10개 안팎의 순차 쿼리를 다시
+// 실행하던 조합 로직을 trial-pipeline-data.ts의 배치 로더로 옮겼다. 이
+// 함수(단일 후보, 카드 상세 모달 전용)는 그 배치 로더를 후보 1개로 호출해
+// 결과를 그대로 돌려준다 — 계산 로직은 하나만 유지하고, 여러 후보를 한
+// 화면에 나열하는 곳(TrialOnboardingPanel의 loadTrialPipelinesBatchAction)은
+// 같은 로더를 후보 전체에 대해 한 번에 호출해 N+1을 피한다.
 export async function getTrialOnboardingPipelineAction(
   consultationId: string,
   childId: string | null,
@@ -550,139 +541,23 @@ export async function getTrialOnboardingPipelineAction(
 ): Promise<TrialOnboardingPipeline> {
   await requireAdminOrCapability(CONSULT_CAPABILITY);
   const admin = createAdminClient();
+  const results = await loadTrialPipelinesBatch(admin, [{ consultationId, childId, trialIntentConfirmedAt }]);
+  const pipeline = results.get(consultationId);
+  if (!pipeline) throw new Error("파이프라인 조회에 실패했습니다.");
+  return pipeline;
+}
 
-  const { data: consultationRow } = await admin
-    .from("consultations")
-    .select("trial_entitlement_grant_status, trial_entitlement_grant_error")
-    .eq("id", consultationId)
-    .maybeSingle();
-
-  const done: Partial<Record<TrialPipelineStepKey, boolean>> = {
-    trial_intent: !!trialIntentConfirmedAt,
-    account_linked: !!childId,
-  };
-  let subjectEnrollmentId: string | null = null;
-
-  if (childId) {
-    const { data: enrollment } = await admin
-      .from("subject_enrollments")
-      .select("id, status")
-      .eq("child_id", childId)
-      .order("created_at", { ascending: false })
-      .limit(1)
-      .maybeSingle();
-    subjectEnrollmentId = enrollment?.id ?? null;
-    done.assignment = false;
-    done.subject_active = enrollment?.status === "active";
-
-    if (subjectEnrollmentId) {
-      const { data: assignment } = await admin
-        .from("teacher_assignments")
-        .select("id")
-        .eq("subject_enrollment_id", subjectEnrollmentId)
-        .eq("status", "active")
-        .maybeSingle();
-      done.assignment = !!assignment;
-    }
-
-    const { data: consent } = await admin
-      .from("trial_smart_notes_consents")
-      .select("id")
-      .eq("child_id", childId)
-      .maybeSingle();
-    done.trial_consent = !!consent;
-
-    const { data: grant } = await admin
-      .from("entitlement_grants")
-      .select("id, entitlement_products!inner(code)")
-      .eq("child_id", childId)
-      .eq("entitlement_products.code", "trial_lesson_grant")
-      .maybeSingle();
-    done.trial_entitlement = !!grant;
-
-    if (subjectEnrollmentId) {
-      const { data: trialSession } = await admin
-        .from("sessions")
-        .select("id, smart_notes_status")
-        .eq("subject_enrollment_id", subjectEnrollmentId)
-        .order("created_at", { ascending: false })
-        .limit(1)
-        .maybeSingle();
-      done.trial_booking = !!trialSession;
-      // "applied"는 sessions.smart_notes_status의 유효한 값이 아니다(체크 제약:
-      // not_applicable/pending/active/completed/failed) — 원본이 실제로 연결돼도
-      // 이 비교가 항상 false였다(2026-09-05 실사용 발견, 웹훅 쪽도 함께 수정).
-      done.smart_notes = trialSession?.smart_notes_status === "completed";
-
-      const { data: review } = await admin
-        .from("lesson_reviews")
-        .select("id")
-        .eq("subject_enrollment_id", subjectEnrollmentId)
-        .eq("lesson_type", "trial")
-        .eq("status", "final")
-        .maybeSingle();
-      done.review = !!review;
-
-      const { data: selection } = await admin
-        .from("trial_regular_progress_selections")
-        .select("id")
-        .eq("subject_enrollment_id", subjectEnrollmentId)
-        .maybeSingle();
-      done.regular_intent = !!selection;
-    }
-
-    const { data: contract } = await admin
-      .from("contracts")
-      .select("id, status")
-      .eq("child_id", childId)
-      .order("created_at", { ascending: false })
-      .limit(1)
-      .maybeSingle();
-    if (contract) {
-      const { data: version } = await admin
-        .from("contract_versions")
-        .select("docusign_envelope_id")
-        .eq("contract_id", contract.id)
-        .order("version_number", { ascending: false })
-        .limit(1)
-        .maybeSingle();
-      done.contract_sent = !!version?.docusign_envelope_id;
-      done.signed = contract.status === "active";
-
-      const { data: purchase } = await admin
-        .from("purchases")
-        .select("id")
-        .eq("contract_id", contract.id)
-        .eq("status", "succeeded")
-        .limit(1)
-        .maybeSingle();
-      done.purchase = !!purchase;
-    }
-  }
-
-  const order: TrialPipelineStepKey[] = [
-    "trial_intent",
-    "account_linked",
-    "assignment",
-    "trial_consent",
-    "trial_entitlement",
-    "trial_booking",
-    "smart_notes",
-    "review",
-    "regular_intent",
-    "contract_sent",
-    "signed",
-    "purchase",
-    "subject_active",
-  ];
-
-  return {
-    consultationId,
-    subjectEnrollmentId,
-    trialEntitlementGrantStatus: consultationRow?.trial_entitlement_grant_status ?? null,
-    trialEntitlementGrantError: consultationRow?.trial_entitlement_grant_error ?? null,
-    steps: order.map((key) => ({ key, done: !!done[key], label: PIPELINE_STEP_LABELS[key] })),
-  };
+// 2026-09-10(P1 성능 배치) — TrialOnboardingPanel의 "상담 → 체험 → 정규
+// 전환" 현황표가 카드마다 위 액션을 개별 호출하던 것을 없애고, 후보 전체의
+// 13단계 상태를 배치 쿼리 9회로 한 번에 읽는다. 인증도 이 호출 전체에서
+// 한 번만 수행한다. 후보 수가 늘어도 쿼리 수는 늘지 않는다.
+export async function loadTrialPipelinesBatchAction(
+  candidates: { consultationId: string; childId: string | null; trialIntentConfirmedAt: string | null }[]
+): Promise<Record<string, TrialOnboardingPipeline>> {
+  await requireAdminOrCapability(CONSULT_CAPABILITY);
+  const admin = createAdminClient();
+  const map = await loadTrialPipelinesBatch(admin, candidates);
+  return Object.fromEntries(map);
 }
 
 export type RegularConversionCandidate = {

@@ -5,7 +5,7 @@ import SubjectTemplateTab from "./SubjectTemplateTab";
 import CurriculumDocsTab from "./CurriculumDocsTab";
 import MaterialsLibraryTab from "./MaterialsLibraryTab";
 import type { AdminSubject } from "./subject-data";
-import type { DocEditorData } from "./curriculum-doc-data";
+import type { CurriculumDocListItem } from "./curriculum-doc-data";
 
 const SUBTABS = [
   { id: "subjects", label: "과목 템플릿" },
@@ -20,7 +20,7 @@ export default function CatalogTab({
   docs: initialDocs,
 }: {
   subjects: AdminSubject[];
-  docs: DocEditorData[];
+  docs: CurriculumDocListItem[];
 }) {
   const [subtab, setSubtab] = useState<SubtabId>("subjects");
   const [subjects, setSubjects] = useState(initialSubjects);
