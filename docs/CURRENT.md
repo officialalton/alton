@@ -1,5 +1,38 @@
 # ALTON — 현재 상태 (2026-09-10 기준)
 
+> **2026-09-10 — 학부모 기본 SSR 경로 회귀 수정: 완료, Preview 배포 완료
+> (target: preview 확인), Production 미적용.** Preview UAT에서 "사용자"
+> 탭의 학부모(기본 서브탭)가 아예 표시되지 않는 회귀가 보고됐다. 원인:
+> `admin/page.tsx`가 `loadParents(supabase)`를 20여 개 로더와 함께 하나의
+> `Promise.all`로 묶어 실행했는데, `loadParents()` 내부의 이메일 조회
+> (`loadEmailById` → `get_emails_by_user_ids` RPC, 이전 배치에서 추가)가
+> 실패하면 예외가 `Promise.all` 전체를 타고 올라가 **사용자 탭이 아니라
+> `AdminHomePage` 서버 컴포넌트 전체**가 예외를 던졌다 — 이 SSR 전용
+> 경로에는 스켈레톤도 에러 격리도 없어 "무한 로딩인지 실패인지 구분 불가"
+> 증상으로 나타났다(학생/선생님은 이미 별도 서버 액션+스켈레톤 구조라
+> 영향 없음). **구조적 수정**: `loadParents()`를 SSR `Promise.all`에서
+> 완전히 제거하고, 학생/선생님과 동일하게 `listParentsForUsersTabAction()`
+> 전용 서버 액션으로 분리했다 — 예외를 던지지 않고 항상
+> `{ok:true,data}|{ok:false,errorCode}`를 반환해 페이지 전체가 절대
+> 깨지지 않는다. `UsersTab`은 이제 관리자 셸·탭을 즉시 렌더하고, 학부모
+> 영역만 최종 행 형태 스켈레톤 → 목록으로 대체하거나, 실패 시 그 영역에만
+> "불러오지 못했습니다 · 다시 시도"를 보여준다(재시도는 그 액션만 재호출,
+> 다른 서브탭/탭은 영향 없음). `loadParents()`에는 단계별(학부모 조회 →
+> 가구 관계 조회 → 이메일 RPC) 소요 시간·건수·오류 코드를 구조화된
+> 서버 로그로 남기되 이름·이메일 등 개인정보는 기록하지 않는다.
+> "사용자" 탭 SSR에 다른 불필요한 로더가 섞여 있는지도 재확인 —
+> `loadSubjectCatalog()`만 남아있고 이는 `UsersTab`의 선생님 상세 패널
+> (과목 배정)에 실제로 필요해 정당함을 확인, 제거하지 않았다. 학생/
+> 선생님/매칭/교재 등 이미 정상인 경로는 변경하지 않았다. **검증**:
+> 단위 테스트(`list-parents-for-users-tab-action.test.ts` 3건 — 빈 결과·
+> RPC 실패 시 ok:false·300명 규모에서도 RPC 1회), `UsersTab.test.tsx`에
+> 스켈레톤·에러·재시도 테스트 3건 추가, 전체 258/258 파일·1805/1805
+> 테스트 통과, `tsc`/eslint(신규 오류 없음), `next build` 성공. 로컬
+> 프로덕션 빌드 Playwright로 최초 진입(스켈레톤→목록 전환 확인)·탭
+> 재진입·로그아웃 후 재로그인 전부 정상 표시 확인. migration 없음(쿼리·
+> 컴포넌트 구조 변경만). 상세: `docs/2026-09-10-p-execution-roadmap.md`
+> "학부모 기본 SSR 경로 회귀 수정" 절.
+
 > **2026-09-10 — Preview 회귀 조사 후속 P1 성능 배치: 사용자 탭 이메일 조회
 > RPC 교체(non-prod migration), 매칭 하단 현황표 N+1 제거, 과목·교재 목록
 > 경량화. 코드 완료, Preview 배포 완료(target: preview 확인), Production

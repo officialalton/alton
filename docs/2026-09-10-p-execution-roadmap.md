@@ -267,6 +267,61 @@
 
 ## P1 — 전반 로딩 개선
 
+### 학부모 기본 SSR 경로 회귀 수정 — **완료(2026-09-10), Preview 배포 완료, Production 미적용**
+
+Preview UAT: 학생·선생님 서브탭·매칭 현황표·과목/교재는 정상인데, "사용자"
+탭 기본 서브탭인 학부모 목록이 아예 뜨지 않고, 기본 탭이라 클릭 트리거도
+없어 무한 로딩인지 실패인지 사용자가 구분할 수 없다는 보고.
+
+- **원인**: `admin/page.tsx`가 `loadParents(supabase)`를 20여 개 로더와
+  함께 하나의 `Promise.all`로 실행했고, `try/catch`가 전혀 없었다.
+  `loadParents()`가 내부에서 호출하는 `loadEmailById()`(이전 배치에서
+  `get_emails_by_user_ids` RPC로 교체)가 실패하면 예외가 `Promise.all`을
+  타고 올라가 **`AdminHomePage` 서버 컴포넌트 전체**가 예외를 던졌다 —
+  이 경로엔 스켈레톤도 에러 격리도 없어 "그냥 안 뜸" 증상으로 나타났다.
+  학생/선생님은 이미 별도 서버 액션(`listStudentsForUsersTabAction`/
+  `listTeachersForUsersTabAction`)으로 분리돼 있어 이 문제와 무관했다.
+- **다른 로더 개입 가능성 재확인**: "사용자" 탭 SSR에서 실제로 실행되는
+  로더는 `loadSubjectCatalog()`(need에 "users" 포함)뿐이었다 — 이는
+  `UsersTab`의 선생님 상세 패널(과목 배정 UI)이 실제로 쓰는 데이터라
+  제거 대상이 아님을 확인했다. 즉 원인은 `loadParents()` 하나로 좁혀진다.
+- **구현**:
+  1. `loadParents(supabase)`를 `admin/page.tsx`의 `Promise.all`에서
+     완전히 제거(더 이상 SSR 경로에서 호출 안 함).
+  2. `listParentsForUsersTabAction()`(users-actions.ts) 신설 — 예외를
+     던지지 않고 항상 `{ok:true,data:ParentListItem[]}` 또는
+     `{ok:false,errorCode:string}`을 반환한다. 페이지 전체가 이 액션의
+     실패로 절대 깨지지 않는다.
+  3. `UsersTab.tsx`가 학생/선생님과 동일한 패턴으로 마운트 시(기본
+     서브탭이 학부모이므로 즉시) 이 액션을 호출 — 응답 전엔 최종 행
+     형태 스켈레톤(`data-testid="parents-skeleton"`), 실패하면 그
+     영역에만 "불러오지 못했습니다 · 다시 시도"(`data-testid=
+     "parents-error"`) 박스를 보여주고 재시도 버튼은 같은 액션만
+     다시 호출한다. 다른 서브탭·다른 관리자 탭은 전혀 영향받지 않는다.
+  4. `loadParents()`(users-data.ts) 내부에 단계별(학부모 조회 → 가구
+     관계(guardian) 조회 → 가구 관계(child) 조회 → 이메일 RPC) 소요
+     시간(ms)·건수·오류 코드를 `console.log(JSON.stringify(...))`로
+     구조화 기록 — 이름·이메일 등 개인정보는 기록하지 않는다(건수·
+     오류 코드만). 각 단계 쿼리도 이제 `.error`를 명시적으로 확인해
+     실패 시 단계명이 포함된 오류로 던진다(이전엔 실패를 조용히
+     무시하고 빈 배열처럼 취급했을 수 있음).
+- **검증**: 신규 단위 테스트(`list-parents-for-users-tab-action.test.ts`,
+  3건) — 학부모 0명(RPC 미호출 확인)·이메일 RPC 실패 시 `{ok:false,
+  errorCode}` 반환(예외 전파 안 함)·300명 규모에서도 RPC 호출 정확히
+  1회. `UsersTab.test.tsx`에 스켈레톤 노출·에러 표시(다른 서브탭은 정상
+  동작 확인)·재시도 성공 테스트 3건 추가. 전체 258/258 파일·1805/1805
+  테스트 통과, `tsc --noEmit`·eslint(신규 오류 없음), `next build` 성공.
+  로컬 프로덕션 빌드 Playwright: 최초 진입 시 스켈레톤 노출 후 목록
+  전환(429ms), 탭 재진입(213ms, 항상 재조회 — 캐시 없음, 학생/선생님과
+  동일한 기존 동작), 로그아웃 후 재로그인 후 정상 표시 전부 확인.
+  migration 없음(쿼리·컴포넌트 구조 변경만).
+- **배포**: 커밋 후 push, Preview 배포. Production 미적용.
+- **로컬 환경의 한계**: 실제 Preview에서 RPC가 왜 실패했는지(대량 id로
+  인한 지연·타임아웃인지, 다른 원인인지)는 이번 수정으로 구조적 위험
+  (SSR 전체 실패)은 제거됐지만, 근본 원인 자체는 이번에 추가한 구조화
+  로그로 다음 실패 시 Preview 서버 로그에서 단계별로 특정할 수 있게
+  됐다 — 로컬 seed로는 재현되지 않아 사전 확인은 불가했다.
+
 ### P1 회귀 조사 후속 성능 배치 — 사용자 이메일 조회·매칭 현황표·과목 및 교재 — **완료(2026-09-10), Preview 배포 완료, Production 미적용**
 
 P1-A(재진입 로딩) 배포 뒤 Preview UAT에서 사용자 탭 학부모/학생/선생님

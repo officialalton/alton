@@ -49,7 +49,6 @@ import type { AdminSubject } from "./subject-data";
 import type { CurriculumDocListItem } from "./curriculum-doc-data";
 import type {
   CreditTransaction,
-  ParentListItem,
   StudentListItem,
 } from "./users-data";
 
@@ -87,7 +86,6 @@ export default function AdminShell({
   dashboard,
   subjects,
   docs,
-  parents,
   students,
   creditHistoryByStudent,
   matchingStudents,
@@ -127,7 +125,11 @@ export default function AdminShell({
   dashboard: AdminDashboardData;
   subjects: AdminSubject[];
   docs: CurriculumDocListItem[];
-  parents: ParentListItem[];
+  // 2026-09-10(P1 — 학부모 SSR 회귀 조사 후속) — 학부모 목록도 더 이상 SSR로
+  // 안 내려온다. loadParents()가 admin/page.tsx의 거대한 Promise.all 안에서
+  // 실패하면 "사용자" 탭이 아니라 admin 페이지 전체가 깨지던 문제를 없애기
+  // 위해, 학생/선생님과 동일하게 UsersTab이 직접
+  // listParentsForUsersTabAction()으로 조회한다.
   // 2026-09-10(P1) — "사용자" 탭의 학생/선생님 목록·수업권 이력·QC 경고는
   // 더 이상 SSR로 안 내려온다(UsersTab이 서브탭을 열 때 직접 조회). students는
   // 이제 "구 크레딧(레거시)" 탭에서만 쓴다. teachers/qcWarningsByTeacher
@@ -307,7 +309,7 @@ export default function AdminShell({
           ) : activeTab === "catalog" ? (
             <CatalogTab subjects={subjects} docs={docs} />
           ) : activeTab === "users" ? (
-            <UsersTab initialParents={parents} subjects={subjects} />
+            <UsersTab subjects={subjects} />
           ) : activeTab === "billing" ? (
             <BillingTab
               initialStudents={students}

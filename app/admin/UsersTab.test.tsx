@@ -2,7 +2,11 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi, beforeEach } from "vitest";
 import UsersTab from "./UsersTab";
 import type { ParentListItem, StudentListItem, TeacherListItem } from "./users-data";
-import { listStudentsForUsersTabAction, listTeachersForUsersTabAction } from "./users-actions";
+import {
+  listParentsForUsersTabAction,
+  listStudentsForUsersTabAction,
+  listTeachersForUsersTabAction,
+} from "./users-actions";
 
 vi.mock("./users-actions", () => ({
   inviteStudent: vi.fn(),
@@ -12,6 +16,7 @@ vi.mock("./users-actions", () => ({
   adjustStudentCredit: vi.fn(),
   setTeacherHourlyRate: vi.fn(),
   verifyStudentDateOfBirth: vi.fn(),
+  listParentsForUsersTabAction: vi.fn(),
   listStudentsForUsersTabAction: vi.fn(),
   listTeachersForUsersTabAction: vi.fn(),
 }));
@@ -70,12 +75,13 @@ const teachers: TeacherListItem[] = [
 ];
 
 const baseProps = {
-  initialParents: parents,
   subjects: [],
 };
 
 describe("UsersTab", () => {
   beforeEach(() => {
+    vi.clearAllMocks();
+    vi.mocked(listParentsForUsersTabAction).mockResolvedValue({ ok: true, data: parents });
     vi.mocked(listStudentsForUsersTabAction).mockResolvedValue({
       students,
       creditHistoryByStudent: {},
@@ -86,10 +92,37 @@ describe("UsersTab", () => {
     });
   });
 
-  it("기본 서브탭은 학부모이고 목록을 보여준다", () => {
+  it("최초 진입 시 스켈레톤을 먼저 보여준 뒤 학부모 목록으로 대체된다", async () => {
     render(<UsersTab {...baseProps} />);
-    expect(screen.getByText("김민지")).toBeInTheDocument();
+    expect(screen.getByTestId("parents-skeleton")).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText("김민지")).toBeInTheDocument());
     expect(screen.getByText(/자녀: 지훈/)).toBeInTheDocument();
+    expect(screen.queryByTestId("parents-skeleton")).not.toBeInTheDocument();
+  });
+
+  it("학부모 조회가 실패하면 목록 영역에만 오류·다시 시도를 보여주고, 페이지 전체는 깨지지 않는다", async () => {
+    vi.mocked(listParentsForUsersTabAction).mockResolvedValue({ ok: false, errorCode: "email_rpc_failed:권한 없음" });
+    render(<UsersTab {...baseProps} />);
+
+    await waitFor(() => expect(screen.getByTestId("parents-error")).toBeInTheDocument());
+    expect(screen.getByText("불러오지 못했습니다")).toBeInTheDocument();
+
+    // 다른 서브탭(관리자 셸의 나머지 부분에 해당)은 정상 동작 — 페이지가
+    // 통째로 깨지지 않았음을 확인.
+    fireEvent.click(screen.getByText("학생"));
+    await waitFor(() => expect(screen.getByText("지훈")).toBeInTheDocument());
+  });
+
+  it("다시 시도를 누르면 학부모 조회를 다시 호출하고 성공하면 목록을 보여준다", async () => {
+    vi.mocked(listParentsForUsersTabAction).mockResolvedValueOnce({ ok: false, errorCode: "parents_query_failed:unknown" });
+    render(<UsersTab {...baseProps} />);
+    await waitFor(() => expect(screen.getByTestId("parents-error")).toBeInTheDocument());
+
+    vi.mocked(listParentsForUsersTabAction).mockResolvedValueOnce({ ok: true, data: parents });
+    fireEvent.click(screen.getByText("다시 시도"));
+
+    await waitFor(() => expect(screen.getByText("김민지")).toBeInTheDocument());
+    expect(listParentsForUsersTabAction).toHaveBeenCalledTimes(2);
   });
 
   it("학생 서브탭에서 학생을 클릭하면 상세로 이동한다", async () => {

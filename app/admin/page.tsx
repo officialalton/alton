@@ -3,7 +3,7 @@ import { createAdminClient } from "@/lib/supabase-admin";
 import { loadAdminDashboard, type AdminDashboardData } from "./dashboard-data";
 import { loadSubjectCatalog } from "./subject-data";
 import { loadCurriculumDocList } from "./curriculum-doc-data";
-import { loadParents, loadStudents, loadStudentCreditHistoryBatch } from "./users-data";
+import { loadStudents, loadStudentCreditHistoryBatch } from "./users-data";
 import {
   loadConsultations,
   loadTrialSessions,
@@ -73,7 +73,6 @@ export default async function AdminHomePage({
     dashboard,
     subjects,
     docs,
-    parents,
     students,
     matchingStudents,
     consultations,
@@ -101,7 +100,6 @@ export default async function AdminHomePage({
     need("home") ? loadAdminDashboard(supabase, user.id) : Promise.resolve(EMPTY_DASHBOARD),
     need("catalog", "users", "consult", "matching") ? loadSubjectCatalog(supabase) : Promise.resolve([]),
     need("catalog") ? loadCurriculumDocList(supabase) : Promise.resolve([]),
-    need("users") ? loadParents(supabase) : Promise.resolve([]),
     need("billing") ? loadStudents(supabase) : Promise.resolve([]),
     need("matching") ? loadStudentsForMatching(supabase) : Promise.resolve([]),
     need("consult") ? loadConsultations(supabase) : Promise.resolve([]),
@@ -146,7 +144,6 @@ export default async function AdminHomePage({
       dashboard={dashboard}
       subjects={subjects}
       docs={docs}
-      parents={parents}
       students={students}
       matchingStudents={matchingStudents}
       creditHistoryByStudent={creditHistoryByStudent}

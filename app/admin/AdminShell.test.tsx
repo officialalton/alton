@@ -31,6 +31,9 @@ vi.mock("./users-actions", () => ({
   setStudentStatus: vi.fn(),
   setTeacherStatus: vi.fn(),
   adjustStudentCredit: vi.fn(),
+  listParentsForUsersTabAction: vi.fn().mockResolvedValue({ ok: true, data: [] }),
+  listStudentsForUsersTabAction: vi.fn().mockResolvedValue({ students: [], creditHistoryByStudent: {} }),
+  listTeachersForUsersTabAction: vi.fn().mockResolvedValue({ teachers: [], qcWarningsByTeacher: {} }),
 }));
 
 vi.mock("./teacher-subjects-actions", () => ({

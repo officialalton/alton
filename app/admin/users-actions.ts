@@ -6,15 +6,44 @@ import { sendInviteEmail } from "@/lib/invite-email";
 import { currentRequestOrigin } from "@/lib/request-origin";
 import { assertTeacherHasValidRate } from "@/lib/enrollment/teacher-rate-check";
 import {
+  loadParents,
   loadStudents,
   loadTeachers,
   loadStudentCreditHistoryBatch,
   loadTeacherQcWarningsBatch,
+  type ParentListItem,
   type StudentListItem,
   type TeacherListItem,
   type CreditTransaction,
   type QcWarning,
 } from "./users-data";
+
+// 2026-09-10(P1 — 학부모 SSR 회귀 조사 후속) — admin/page.tsx의 거대한
+// Promise.all 안에서 loadParents()가 실패(또는 지연)하면 "사용자" 탭뿐
+// 아니라 페이지 전체가 예외를 던져 admin/error.tsx로 튕겨나갔다(원인
+// 구분 불가능한 "그냥 아무것도 안 뜸" 증상). 학생/선생님과 동일하게 이
+// 액션으로 분리하고, 예외를 던지는 대신 {ok, data, errorCode}로
+// 응답한다 — 페이지 전체를 절대 깨뜨리지 않고, UsersTab이 실패를
+// 명확히 구분해 "다시 시도" 버튼을 보여줄 수 있게 한다.
+export type ListParentsResult = { ok: true; data: ParentListItem[] } | { ok: false; errorCode: string };
+
+export async function listParentsForUsersTabAction(): Promise<ListParentsResult> {
+  const startedAt = Date.now();
+  try {
+    const { supabase } = await requireAdmin();
+    const data = await loadParents(supabase);
+    console.log(
+      JSON.stringify({ event: "server_timing", stage: "users_tab.parents.action_total", ms: Date.now() - startedAt, count: data.length })
+    );
+    return { ok: true, data };
+  } catch (e) {
+    const errorCode = e instanceof Error ? e.message : "unknown_error";
+    console.log(
+      JSON.stringify({ event: "server_timing_error", stage: "users_tab.parents.action", ms: Date.now() - startedAt, errorCode })
+    );
+    return { ok: false, errorCode };
+  }
+}
 
 // 2026-09-10(P1 — 관리자 "사용자" 탭 최초 진입 15~20초 개선) — 이전에는
 // admin/page.tsx가 "사용자" 탭에 진입할 때(기본 서브탭은 "학부모"인데도)

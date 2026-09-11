@@ -87,22 +87,42 @@ export async function loadEmailById(userIds: string[]): Promise<Map<string, stri
   return emailById;
 }
 
+// 2026-09-10(P1 — 학부모 SSR 회귀 조사 후속) — 이 함수는 이제 SSR
+// Promise.all에서 호출되지 않고(admin/page.tsx), listParentsForUsersTabAction()을
+// 통해서만 호출된다. 어느 단계가 느리거나 실패하는지 구분할 수 있도록 각
+// 쿼리 단계마다 소요 시간·건수·오류 코드를 구조화된 로그로 남긴다 — 이름·
+// 이메일 등 개인정보는 기록하지 않는다(건수·id 개수만).
+function logUsersTabStage(stage: string, startedAt: number, extra: Record<string, unknown> = {}) {
+  console.log(JSON.stringify({ event: "server_timing", stage, ms: Date.now() - startedAt, ...extra }));
+}
+
 export async function loadParents(supabase: SupabaseClient): Promise<ParentListItem[]> {
-  const { data: parents } = await supabase
+  const totalStart = Date.now();
+
+  let t = Date.now();
+  const { data: parents, error: parentsError } = await supabase
     .from("parents")
     .select("id, joined_at, profile:profiles(name)")
     .order("joined_at", { ascending: false });
+  logUsersTabStage("users_tab.parents.query", t, { count: parents?.length ?? 0, errorCode: parentsError?.code ?? null });
+  if (parentsError) throw new Error(`parents_query_failed:${parentsError.code ?? "unknown"}`);
   if (!parents || parents.length === 0) return [];
 
   const parentIds = parents.map((p) => p.id);
 
   // (2026-08-30 R2 Task 3) 가족 관계는 households/household_members가 원본이다
   // (guardian_students는 동결). 계정 정보(parents)는 그대로 두고 관계 조인만 교체.
-  const { data: guardianLinks } = await supabase
+  t = Date.now();
+  const { data: guardianLinks, error: guardianError } = await supabase
     .from("household_members")
     .select("profile_id, household_id")
     .eq("role", "guardian")
     .in("profile_id", parentIds);
+  logUsersTabStage("users_tab.parents.guardian_links", t, {
+    count: guardianLinks?.length ?? 0,
+    errorCode: guardianError?.code ?? null,
+  });
+  if (guardianError) throw new Error(`guardian_links_query_failed:${guardianError.code ?? "unknown"}`);
 
   const householdIdsByParent = new Map<string, string[]>();
   for (const l of guardianLinks ?? []) {
@@ -112,11 +132,17 @@ export async function loadParents(supabase: SupabaseClient): Promise<ParentListI
   }
 
   const householdIds = Array.from(new Set((guardianLinks ?? []).map((l) => l.household_id)));
-  const { data: childLinks } = await supabase
+  t = Date.now();
+  const { data: childLinks, error: childError } = await supabase
     .from("household_members")
     .select("household_id, child:profiles(name)")
     .eq("role", "child")
     .in("household_id", householdIds.length > 0 ? householdIds : [""]);
+  logUsersTabStage("users_tab.parents.child_links", t, {
+    count: childLinks?.length ?? 0,
+    errorCode: childError?.code ?? null,
+  });
+  if (childError) throw new Error(`child_links_query_failed:${childError.code ?? "unknown"}`);
 
   const childrenByHousehold = new Map<string, string[]>();
   for (const l of childLinks ?? []) {
@@ -125,7 +151,20 @@ export async function loadParents(supabase: SupabaseClient): Promise<ParentListI
     childrenByHousehold.set(l.household_id, list);
   }
 
-  const emailById = await loadEmailById(parentIds);
+  t = Date.now();
+  let emailById: Map<string, string>;
+  try {
+    emailById = await loadEmailById(parentIds);
+    logUsersTabStage("users_tab.parents.email_rpc", t, { requested: parentIds.length, found: emailById.size });
+  } catch (e) {
+    logUsersTabStage("users_tab.parents.email_rpc", t, {
+      requested: parentIds.length,
+      errorCode: e instanceof Error ? e.message : "unknown",
+    });
+    throw new Error(`email_rpc_failed:${e instanceof Error ? e.message : "unknown"}`);
+  }
+
+  logUsersTabStage("users_tab.parents.total", totalStart, { count: parents.length });
 
   return parents.map((p) => ({
     id: p.id,

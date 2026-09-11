@@ -1,7 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState, type MouseEvent } from "react";
-import { inviteStudent, listStudentsForUsersTabAction, listTeachersForUsersTabAction } from "./users-actions";
+import {
+  inviteStudent,
+  listParentsForUsersTabAction,
+  listStudentsForUsersTabAction,
+  listTeachersForUsersTabAction,
+} from "./users-actions";
 import { updateUserBasicInfo } from "./user-edit-actions";
 import StudentDetailPanel from "./StudentDetailPanel";
 import TeacherDetailPanel from "./TeacherDetailPanel";
@@ -43,14 +48,19 @@ const TEACHER_STATUS_LABEL: Record<string, string> = {
 };
 
 export default function UsersTab({
-  initialParents,
   subjects,
 }: {
-  initialParents: ParentListItem[];
   subjects: AdminSubject[];
 }) {
   const [subtab, setSubtab] = useState<SubtabId>("parents");
-  const [parents, setParents] = useState(initialParents);
+  // 2026-09-10(P1 — 학부모 SSR 회귀 조사 후속) — 학부모도 학생/선생님과
+  // 동일하게 null=아직 조회 안 됨(스켈레톤), 빈 배열=조회했는데 0명을
+  // 구분한다. parentsErrorCode가 있으면 목록 영역에만 "불러오지 못했습니다 ·
+  // 다시 시도"를 보여준다(페이지 전체는 절대 깨지지 않는다 — 액션이
+  // {ok,data,errorCode} 계약이라 예외를 던지지 않음).
+  const [parents, setParents] = useState<ParentListItem[] | null>(null);
+  const [parentsErrorCode, setParentsErrorCode] = useState<string | null>(null);
+  const [loadingParents, setLoadingParents] = useState(false);
   // 2026-09-10(P1) — null이면 "아직 이 서브탭을 연 적 없음"(스켈레톤 표시),
   // 빈 배열이면 "조회했는데 0명"을 구분한다.
   const [students, setStudents] = useState<StudentListItem[] | null>(null);
@@ -61,7 +71,26 @@ export default function UsersTab({
   const [openTeacherId, setOpenTeacherId] = useState<string | null>(null);
   const directLinksListRef = useRef<DirectAccountLinksListHandle>(null);
 
+  function loadParentsNow() {
+    setLoadingParents(true);
+    setParentsErrorCode(null);
+    listParentsForUsersTabAction().then((result) => {
+      setLoadingParents(false);
+      if (result.ok) {
+        setParents(result.data);
+      } else {
+        setParentsErrorCode(result.errorCode);
+      }
+    });
+  }
+
   useEffect(() => {
+    // 기본 서브탭이 학부모이므로 최초 마운트 시 바로 조회한다(학생/선생님은
+    // 해당 서브탭을 열 때만).
+    if (subtab === "parents" && parents === null && !loadingParents && !parentsErrorCode) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      loadParentsNow();
+    }
     if (subtab === "students" && students === null) {
       listStudentsForUsersTabAction().then((r) => {
         setStudents(r.students);
@@ -92,7 +121,7 @@ export default function UsersTab({
   }
 
   function patchParent(id: string, patch: Partial<ParentListItem>) {
-    setParents((prev) => prev.map((p) => (p.id === id ? { ...p, ...patch } : p)));
+    setParents((prev) => prev?.map((p) => (p.id === id ? { ...p, ...patch } : p)) ?? prev);
   }
 
   if (openStudent) {
@@ -137,7 +166,40 @@ export default function UsersTab({
         ))}
       </div>
 
-      {subtab === "parents" && (
+      {subtab === "parents" && parents === null && !parentsErrorCode && (
+        <div aria-busy="true" data-testid="parents-skeleton">
+          {[0, 1, 2].map((i) => (
+            <div
+              key={i}
+              className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5 animate-pulse"
+            >
+              <div className="flex items-center justify-between">
+                <div className="h-3.5 w-24 bg-grey-200 rounded" />
+                <div className="h-4 w-14 bg-grey-200 rounded-full" />
+              </div>
+              <div className="h-3 w-40 bg-grey-100 rounded mt-2" />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {subtab === "parents" && parentsErrorCode && (
+        <div
+          className="border-[1.5px] border-red/30 bg-red/5 rounded-xl px-5 py-4 mb-2.5 flex items-center justify-between"
+          data-testid="parents-error"
+        >
+          <span className="text-[13px] text-red font-semibold">불러오지 못했습니다</span>
+          <button
+            onClick={loadParentsNow}
+            disabled={loadingParents}
+            className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-red/30 text-red disabled:opacity-50"
+          >
+            {loadingParents ? "다시 시도 중..." : "다시 시도"}
+          </button>
+        </div>
+      )}
+
+      {subtab === "parents" && parents !== null && (
         <>
           {parents.map((p) => (
             <div
@@ -225,7 +287,7 @@ export default function UsersTab({
           ))}
           <InviteForm
             fields={["name", "email", "grade", "parentId"]}
-            parents={parents}
+            parents={parents ?? []}
             submitLabel="학생 초대"
             onSubmit={async (values) => {
               if (!values.parentId) throw new Error("학부모를 선택해주세요.");
@@ -235,7 +297,7 @@ export default function UsersTab({
                 grade: values.grade,
                 parentId: values.parentId,
               });
-              const parent = parents.find((p) => p.id === values.parentId);
+              const parent = (parents ?? []).find((p) => p.id === values.parentId);
               setStudents((prev) => [
                 {
                   id: `pending-${Date.now()}`,
