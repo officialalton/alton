@@ -43,7 +43,7 @@ describe("TeacherAssignmentTerminationPanel", () => {
   it("요청 목록을 렌더링하고, 영향 미리보기 후 처리 확정을 호출한다", async () => {
     (listTerminationRequests as ReturnType<typeof vi.fn>).mockResolvedValue([baseRequest]);
     (previewTerminationImpactAction as ReturnType<typeof vi.fn>).mockResolvedValue([
-      { reservationId: "r1", startsAt: "x", endsAt: "y", hasActiveHold: true },
+      { reservationId: "r1", startsAt: "x", endsAt: "y", hasActiveHold: true, sessionFinalStatus: "scheduled" },
     ]);
     (processTerminationRequestAction as ReturnType<typeof vi.fn>).mockResolvedValue({ status: "completed" });
 
@@ -54,7 +54,7 @@ describe("TeacherAssignmentTerminationPanel", () => {
 
     await waitFor(() => expect(screen.getByText(/영향받는 미래 예약 1건/)).toBeInTheDocument());
 
-    fireEvent.click(screen.getByText("종료 처리 확정"));
+    fireEvent.click(screen.getByText("매칭 종료 확정"));
 
     await waitFor(() =>
       expect(processTerminationRequestAction).toHaveBeenCalledWith(
@@ -74,8 +74,8 @@ describe("TeacherAssignmentTerminationPanel", () => {
     render(<TeacherAssignmentTerminationPanel teacherCandidatesBySubject={{}} />);
     await screen.findByText(/요청자: teacher/);
     fireEvent.click(screen.getByText("처리"));
-    await waitFor(() => screen.getByText("종료 처리 확정"));
-    fireEvent.click(screen.getByText("종료 처리 확정"));
+    await waitFor(() => screen.getByText("매칭 종료 확정"));
+    fireEvent.click(screen.getByText("매칭 종료 확정"));
 
     await screen.findByText(/새 선생님과 시간 충돌/);
   });
@@ -96,8 +96,8 @@ describe("TeacherAssignmentTerminationPanel", () => {
     expect(screen.getByText(/현재 선생님: 박서연/)).toBeInTheDocument();
 
     fireEvent.click(screen.getByText("처리"));
-    await waitFor(() => screen.getByText("새 선생님으로 재배정"));
-    fireEvent.click(screen.getByText("새 선생님으로 재배정"));
+    await waitFor(() => screen.getByText("재매칭"));
+    fireEvent.click(screen.getByText("재매칭"));
 
     expect(screen.queryByPlaceholderText("새 선생님 ID")).toBeNull();
     expect(await screen.findByText("이도현")).toBeInTheDocument();

@@ -19,6 +19,13 @@ export type TerminationImpactReservation = {
   startsAt: string;
   endsAt: string;
   hasActiveHold: boolean;
+  // C-2(2026-09-11) — 연결 세션의 최종 판정 상태(v3_session_final_status).
+  // 'scheduled'/'live'가 아니면 이미 최종 판정이 끝난(완료/취소/노쇼 등)
+  // 이력이라 종료 처리 대상이 아니다 — reservations.status는 세션이 최종
+  // 판정돼도 바뀌지 않으므로(finalize_lesson_session()이 그 컬럼을 건드리지
+  // 않음), 이 필드 없이는 "이미 지나간 예약"과 "아직 처리해야 할 예약"을
+  // 구분할 수 없다.
+  sessionFinalStatus: string;
 };
 
 export async function previewTerminationImpact(
@@ -34,8 +41,12 @@ export async function previewTerminationImpact(
     startsAt: row.starts_at as string,
     endsAt: row.ends_at as string,
     hasActiveHold: Boolean(row.has_active_hold),
+    sessionFinalStatus: row.session_final_status as string,
   }));
 }
+
+// 아직 최종 판정 전(=실제로 취소/이관 처리 대상)인 예약만 골라낸다.
+const ACTIONABLE_SESSION_STATUSES = new Set(["scheduled", "live"]);
 
 export async function createTerminationRequest(params: {
   subjectEnrollmentId: string;
@@ -134,6 +145,20 @@ export async function processTeacherAssignmentTermination(
   try {
     const impact = await previewTerminationImpact(request.teacher_assignment_id);
 
+    // C-2(2026-09-11, 제품 오너 지시) — 진행 중인 수업이 있으면 종료 자체를
+    // 보류한다. 이미 시작된 수업을 취소·이관 대상으로 잘못 건드리지 않기
+    // 위해, 예약 처리를 하나라도 시작하기 전에 먼저 전체를 확인한다(부분
+    // 진행 방지 — 어느 예약도 손대지 않은 채 실패해야 재시도가 안전하다).
+    const live = impact.filter((r) => r.sessionFinalStatus === "live");
+    if (live.length > 0) {
+      const detail = live
+        .map((r) => `예약 ${r.reservationId}(${r.startsAt} 시작)`)
+        .join(", ");
+      throw new Error(
+        `진행 중인 수업이 있어 지금 종료할 수 없습니다 — ${detail}. 수업이 끝난 뒤 다시 시도하세요.`
+      );
+    }
+
     for (const r of impact) {
       const { data: already } = await admin
         .from("teacher_assignment_termination_reservation_actions")
@@ -142,6 +167,20 @@ export async function processTeacherAssignmentTermination(
         .eq("reservation_id", r.reservationId)
         .maybeSingle();
       if (already) continue; // 재처리 시 이미 처리한 예약은 건너뜀 — 중복 처리 방지.
+
+      // 이미 최종 판정이 끝난(완료/취소/노쇼 등) 세션의 예약은 실제로 수업이
+      // 진행돼 수업권이 이미 소진됐을 수 있다 — 완료된 수업과 사용한
+      // 수업권은 그대로 보존한다. 취소·release를 시도하지 않고 건너뛴
+      // 사실만 감사 이력에 남긴다.
+      if (!ACTIONABLE_SESSION_STATUSES.has(r.sessionFinalStatus)) {
+        await admin.from("teacher_assignment_termination_reservation_actions").insert({
+          termination_request_id: params.requestId,
+          reservation_id: r.reservationId,
+          action: "skipped_already_delivered",
+          detail: `세션이 이미 최종 판정됨(${r.sessionFinalStatus}) — 완료된 수업·수업권 보존, 취소하지 않음`,
+        });
+        continue;
+      }
 
       if (params.resolution === "reassign" && params.newTeacherId) {
         const reassigned = await tryReassignReservation(r.reservationId, params.newTeacherId);

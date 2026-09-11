@@ -167,16 +167,16 @@ describe("SubjectEnrollmentPanel", () => {
       />
     );
     fireEvent.click(screen.getByText("지훈"));
-    await waitFor(() => screen.getByText(/새 배정: 과목 선택/));
+    await waitFor(() => screen.getByText(/새 매칭: 과목 선택/));
 
     // sub1(활성 배정 있음)은 후보로 없고, sub2(terminated)는 있어야 한다.
-    const subjectSelect = screen.getByDisplayValue("+ 새 배정: 과목 선택...");
+    const subjectSelect = screen.getByDisplayValue("+ 새 매칭: 과목 선택...");
     expect(screen.queryByText("SAT Math", { selector: "option" })).toBeNull();
     fireEvent.change(subjectSelect, { target: { value: "sub2" } });
 
     const teacherSelect = await screen.findByDisplayValue("선생님 선택...");
     fireEvent.change(teacherSelect, { target: { value: "t3" } });
-    fireEvent.click(screen.getByText("배정 확인"));
+    fireEvent.click(screen.getByText("매칭 확인"));
 
     await waitFor(() =>
       expect(matchingActions.confirmMatch).toHaveBeenCalledWith("st1", "t3", "sub2")
@@ -184,8 +184,8 @@ describe("SubjectEnrollmentPanel", () => {
   });
 
   // C-2(2차, 2026-09-11) — 관리자 직접 종료는 요청 생성→목록 재처리 두 단계가
-  // 아니라 "배정 종료 → 영향 확인 → 실행" 한 흐름이어야 한다.
-  it("배정 종료 버튼을 누르면 영향을 미리 보여주고, 확인하면 adminTerminateAssignmentNow를 한 번만 호출한다", async () => {
+  // 아니라 "매칭 종료 → 영향 확인 → 실행" 한 흐름이어야 한다.
+  it("매칭 종료 버튼을 누르면 영향을 미리 보여주고, 확인하면 adminTerminateAssignmentNow를 한 번만 호출한다", async () => {
     vi.mocked(actions.listSubjectEnrollmentsForChild).mockResolvedValue([
       {
         id: "en1",
@@ -202,7 +202,13 @@ describe("SubjectEnrollmentPanel", () => {
       },
     ]);
     vi.mocked(terminationActions.previewTerminationImpactAction).mockResolvedValue([
-      { reservationId: "r1", startsAt: "2026-10-01T00:00:00Z", endsAt: "2026-10-01T01:00:00Z", hasActiveHold: true },
+      {
+        reservationId: "r1",
+        startsAt: "2026-10-01T00:00:00Z",
+        endsAt: "2026-10-01T01:00:00Z",
+        hasActiveHold: true,
+        sessionFinalStatus: "scheduled",
+      },
     ]);
     vi.mocked(terminationActions.adminTerminateAssignmentNow).mockResolvedValue({ status: "completed" });
 
@@ -210,14 +216,14 @@ describe("SubjectEnrollmentPanel", () => {
       <SubjectEnrollmentPanel students={[student]} subjects={subjects} teacherCandidatesBySubject={{}} />
     );
     fireEvent.click(screen.getByText("지훈"));
-    await waitFor(() => screen.getByText("배정 종료"));
-    fireEvent.click(screen.getByText("배정 종료"));
+    await waitFor(() => screen.getByText("매칭 종료"));
+    fireEvent.click(screen.getByText("매칭 종료"));
 
     expect(await screen.findByText(/박서연.*정말 종료할까요/)).toBeInTheDocument();
-    await waitFor(() => expect(screen.getByText(/영향받는 미래 예약 1건/)).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText(/취소될 예정 예약 1건/)).toBeInTheDocument());
 
     fireEvent.change(screen.getByPlaceholderText("종료 사유"), { target: { value: "학생 요청" } });
-    fireEvent.click(screen.getByText("종료 실행"));
+    fireEvent.click(screen.getByText("매칭 종료 실행"));
 
     await waitFor(() =>
       expect(terminationActions.adminTerminateAssignmentNow).toHaveBeenCalledWith({
@@ -227,5 +233,58 @@ describe("SubjectEnrollmentPanel", () => {
       })
     );
     expect(terminationActions.adminTerminateAssignmentNow).toHaveBeenCalledTimes(1);
+  });
+
+  // C-2(2026-09-11, Preview UAT 결함 수정) — 진행 중(live)인 수업이 있으면
+  // 화면에서부터 실행을 막아야 한다("진행 중 수업 때문에 종료를 보류해야
+  // 한다면 대상 수업과 다음 행동을 안내"). 화면에 보이는 영향과 실제 처리
+  // 대상도 일치해야 하므로, 이미 완료된 예약은 "취소될 예정"에서 빠진다.
+  it("진행 중인 수업이 있으면 매칭 종료 실행을 막고 안내하며, 이미 완료된 예약은 취소 대상에서 제외해 보여준다", async () => {
+    vi.mocked(actions.listSubjectEnrollmentsForChild).mockResolvedValue([
+      {
+        id: "en1",
+        childId: "st1",
+        childName: "지훈",
+        subjectId: "sub1",
+        subjectName: "SAT Math",
+        status: "active",
+        contractId: "c1",
+        currentTeacherId: "t1",
+        currentTeacherName: "박서연",
+        currentTeacherAssignmentId: "ta1",
+        createdAt: "2026-01-01",
+      },
+    ]);
+    vi.mocked(terminationActions.previewTerminationImpactAction).mockResolvedValue([
+      {
+        reservationId: "r-live",
+        startsAt: "2026-10-01T00:00:00Z",
+        endsAt: "2026-10-01T01:00:00Z",
+        hasActiveHold: false,
+        sessionFinalStatus: "live",
+      },
+      {
+        reservationId: "r-done",
+        startsAt: "2026-10-02T00:00:00Z",
+        endsAt: "2026-10-02T01:00:00Z",
+        hasActiveHold: false,
+        sessionFinalStatus: "completed",
+      },
+    ]);
+
+    render(
+      <SubjectEnrollmentPanel students={[student]} subjects={subjects} teacherCandidatesBySubject={{}} />
+    );
+    fireEvent.click(screen.getByText("지훈"));
+    await waitFor(() => screen.getByText("매칭 종료"));
+    fireEvent.click(screen.getByText("매칭 종료"));
+
+    expect(await screen.findByText(/진행 중인 수업이 1건 있어/)).toBeInTheDocument();
+    expect(screen.getByText(/취소될 예정 예약 0건/)).toBeInTheDocument();
+    expect(screen.getByText(/이미 완료·종결된 예약 1건/)).toBeInTheDocument();
+
+    fireEvent.change(screen.getByPlaceholderText("종료 사유"), { target: { value: "학생 요청" } });
+    expect(screen.getByText("매칭 종료 실행")).toBeDisabled();
+    expect(terminationActions.adminTerminateAssignmentNow).not.toHaveBeenCalled();
   });
 });

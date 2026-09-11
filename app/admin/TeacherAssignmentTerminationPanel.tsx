@@ -89,9 +89,9 @@ export default function TeacherAssignmentTerminationPanel({
 
   return (
     <div className="max-w-[640px] px-8 py-8 border-t border-grey-200 mt-8">
-      <h2 className="text-[16px] font-extrabold text-ink mb-1.5">선생님 배정 종료 요청</h2>
+      <h2 className="text-[16px] font-extrabold text-ink mb-1.5">매칭 종료 요청</h2>
       <p className="text-[13px] text-grey-500 mb-5">
-        trial/regular 구분 없이 단일 배정 관계에 대한 정식 종료(재배정 또는 수강 종료) 요청 목록입니다.
+        trial/regular 구분 없이 단일 매칭 관계에 대한 정식 종료(재매칭 또는 매칭 종료) 요청 목록입니다.
       </p>
 
       {requests === null ? (
@@ -141,8 +141,10 @@ export default function TeacherAssignmentTerminationPanel({
                   <div className="text-[12.5px] text-grey-500">영향 확인 중...</div>
                 ) : (
                   <div className="text-[12.5px] text-grey-600 mb-2">
-                    영향받는 미래 예약 {impact.length}건
+                    영향받는 미래 예약 {impact.filter((i) => i.sessionFinalStatus === "scheduled").length}건
                     {impact.some((i) => i.hasActiveHold) && " (보유분 있음)"}
+                    {impact.some((i) => i.sessionFinalStatus === "live") &&
+                      " — 진행 중인 수업이 있어 지금은 처리할 수 없습니다."}
                   </div>
                 )}
 
@@ -159,7 +161,7 @@ export default function TeacherAssignmentTerminationPanel({
                       checked={resolution === "end_enrollment"}
                       onChange={() => setResolution("end_enrollment")}
                     />
-                    수강 종료
+                    매칭 종료(재매칭 없음)
                   </label>
                   <label className="text-[12.5px] flex items-center gap-1">
                     <input
@@ -167,7 +169,7 @@ export default function TeacherAssignmentTerminationPanel({
                       checked={resolution === "reassign"}
                       onChange={() => setResolution("reassign")}
                     />
-                    새 선생님으로 재배정
+                    재매칭
                   </label>
                 </div>
 
@@ -200,11 +202,11 @@ export default function TeacherAssignmentTerminationPanel({
                 {error && <div className="text-[12.5px] text-red mb-2">{error}</div>}
 
                 <button
-                  disabled={busy}
+                  disabled={busy || (impact?.some((i) => i.sessionFinalStatus === "live") ?? false)}
                   onClick={() => process(r)}
                   className="text-[12.5px] font-bold text-white bg-ink rounded px-3 py-1.5 disabled:opacity-50"
                 >
-                  {busy ? "처리 중..." : "종료 처리 확정"}
+                  {busy ? "처리 중..." : resolution === "reassign" ? "재매칭 확정" : "매칭 종료 확정"}
                 </button>
               </div>
             )}
