@@ -1,5 +1,36 @@
-# ALTON — 현재 상태 (2026-09-10 기준)
+# ALTON — 현재 상태 (2026-09-11 기준)
 
+> **2026-09-10/11 — C-1 UAT 회귀 수정 + P4-3 설계·P4-1 조사 완료.**
+> 제품 오너가 C-1 재검증 중 발견: 같은 학생·과목의 회차 표기가 "학생별"
+> 목록 카드와 커리큘럼 상세 화면에서 서로 달랐다(레거시 과목 한정 —
+> 목록은 `legacy_sessions` 행 수, 상세는 `teacher_curriculum_template_units`
+> 개수를 각각 다른 "totalSessions"로 써 왔음). `roster-data.ts`의 레거시
+> 계산식을 `app/student/curriculum-data.ts::loadCurricula()`와 동일하게
+> 통일 — migration 없음. 로컬 프로덕션 빌드 + Playwright로 실제 교사
+> 계정 로그인 → "배정" 탭 레거시 버튼 부재 확인 → "학생별" v3 커리큘럼
+> 카드가 "진행 1 / 전체 3회차 · 교사 운영 커리큘럼 기준"으로 정확히
+> 표시됨을 end-to-end 재현(신규 매칭 생성 → 단원 1개 완료 처리 →
+> 화면 확인). 전체 261 files/1823 tests 통과, `next build` 성공. 커밋
+> `7203a3c`, Preview `https://alton-ojue5vihy-alton7.vercel.app`
+> (target: preview 확인).
+>
+> 같은 라운드에서 **P4-3(관리자 문서 탭) 상세 설계**
+> (`docs/2026-09-10-p4-3-admin-documents-tab-design.md`)와
+> **P4-1(기존 보호자 자녀 추가·경량 가구 아카이브) 조사 보고서**
+> (`docs/2026-09-10-p4-1-account-expansion-and-household-archive-investigation.md`)
+> 작성 완료 — 둘 다 코드·migration·외부 연동 변경 없음, 문서만.
+> P4-3은 계약 아카이브(읽기 전용)·동의서 이관·회사 문서 Drive 통합
+> 1차 범위를 확정하고 7개 open question을 남김(RLS 비대칭 1건 포함).
+> P4-1은 "기존 보호자 자녀 추가"가 이미 존재하는 경로(`p_new_guardian
+> =false` 분기)의 UI+얇은 액션 래퍼로 대부분 가능함을 확인(중복 이메일
+> 미검증·공동 보호자 미지원 2건은 실제 갭), "가구 아카이브"는 R2
+> `closure_pending`/`closed`(로그인 차단) 재사용 금지 확인, 신규
+> `households.archived_at` 컬럼 migration 필요, 단일 큰 RPC 대신 기존
+> M3 종료 패턴(claim+원장+재시도) 재사용을 권고. 로드맵
+> (`docs/2026-09-10-p-execution-roadmap.md` P4)에 백로그 항목으로 반영.
+> **다음**: C-1 승인 시 C-2(매칭 종료·재매칭) 착수, P4-3/P4-1은 정책
+> 질문 답변 후 각각 별도 배치로 구현.
+>
 > **2026-09-10 — P0(직접 계정 생성 유입 3중 결함): 제품 오너 Preview UAT
 > 통과, 배치 종료.** 검증 범위: `계정 생성 → 교사 매칭 → 체험 동의 → 체험
 > 수업권 표시 → 예약 완료 → 수업 종료`까지 정상 확인. 계정 생성 직후 모든
