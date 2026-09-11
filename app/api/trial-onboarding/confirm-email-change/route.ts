@@ -1,15 +1,16 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase-admin";
 
-// 2026-09-11(제품 오너 재검토 — GET 부작용 제거) — confirm_trial_login_email_change()
-// 자체(=이메일로 받은 확인 링크를 클릭해 "이 새 이메일을 실제로 소유한다"는
-// 것을 증명하는 단계)는 멱등(이미 confirmed면 그대로 같은 결과를 돌려줄 뿐
-// 예외를 던지지 않는다)이라 GET에 남겨둔다 — 이메일로 전달되는 확인 링크가
-// GET인 것 자체는 업계 표준이고, 다시 열어도 상태가 어긋나지 않는다.
-// 하지만 그 다음 단계(실제 Auth 계정 생성·복구 링크 발급·메일 발송)는 더
-// 이상 여기서 실행하지 않는다 — 확인 페이지로 넘겨 그 페이지의 버튼이
-// 호출하는 Server Action(confirmTrialOnboardingEmailChangeAction)에서만
-// 실행한다.
+// 2026-09-11(제품 오너 재지적 — GET 무변경 요구 미충족) — confirm_trial_login_email_change()는
+// "멱등"(두 번째 호출부터 같은 결과)이지 "무변경"이 아니다 — status='pending'인
+// 요청을 처음 열 때 status를 'confirmed'로 바꾸고 confirmed_at을 채우고
+// trial_onboarding_link_events에 이벤트까지 남긴다. 이 상태 전이 자체가
+// GET만으로 실행되면 안 된다(실사용 진입점이 없다는 사실은 면제 사유가
+// 아니다 — 코드 자체가 안전해야 한다). 여기서는 순수 조회 전용
+// peek_trial_login_email_change()(어떤 UPDATE/INSERT도 하지 않음)로 상태만
+// 확인하고 확인 페이지로 넘긴다. 실제 상태 전이(confirmed 처리)는 그 페이지의
+// 버튼이 호출하는 Server Action(confirmTrialOnboardingEmailChangeAction →
+// confirm_trial_login_email_change)에서만 실행한다.
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const token = url.searchParams.get("token");
@@ -18,12 +19,18 @@ export async function GET(request: Request) {
   }
 
   const admin = createAdminClient();
-  const { data: confirmData, error: confirmError } = await admin.rpc("confirm_trial_login_email_change", {
+  const { data: peekData, error: peekError } = await admin.rpc("peek_trial_login_email_change", {
     p_token: token,
   });
-  if (confirmError || !confirmData?.[0]) {
+  const peeked = peekData?.[0];
+  if (peekError || !peeked) {
     return NextResponse.redirect(
       new URL("/login?error=" + encodeURIComponent("유효하지 않거나 만료된 확인 링크입니다."), url)
+    );
+  }
+  if (peeked.status === "expired") {
+    return NextResponse.redirect(
+      new URL("/login?error=" + encodeURIComponent("만료된 확인 링크입니다. 관리자에게 재발급을 요청해주세요."), url)
     );
   }
 

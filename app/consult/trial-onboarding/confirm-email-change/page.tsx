@@ -1,12 +1,14 @@
 import { createAdminClient } from "@/lib/supabase-admin";
 import ConfirmEmailChangeForm from "./ConfirmEmailChangeForm";
 
-// 2026-09-11(제품 오너 재검토 — GET 부작용 제거) — "다른 이메일로 변경 후
-// 확인 완료" 흐름의 확인 화면. app/api/trial-onboarding/confirm-email-change/route.ts의
-// GET이 이메일 소유 확인(confirm_trial_login_email_change, 멱등)까지만
-// 마치고 여기로 넘어온다. 실제 Auth 계정 생성은 이 페이지의 버튼이 호출하는
-// Server Action에서만 일어난다 — 이 페이지를 그냥 열거나 새로고침해도
-// 아무 일도 일어나지 않는다.
+// 2026-09-11(제품 오너 재지적 — GET 무변경 요구 미충족) — "다른 이메일로
+// 변경 후 확인 완료" 흐름의 확인 화면. GET 경로(route.ts와 이 페이지 모두)는
+// peek_trial_login_email_change()(순수 조회, 어떤 UPDATE/INSERT도 하지
+// 않음)로만 상태를 확인한다 — confirm_trial_login_email_change()는 첫 호출에
+// status를 'confirmed'로 바꾸고 이벤트를 남기는 실제 상태 전이라 GET에서
+// 호출하지 않는다. 실제 이메일 확인 확정과 Auth 계정 생성은 이 페이지의
+// 버튼이 호출하는 Server Action(confirmTrialOnboardingEmailChangeAction)에서만
+// 일어난다 — 이 페이지를 그냥 열거나 새로고침해도 아무 일도 일어나지 않는다.
 export default async function ConfirmEmailChangePage({
   searchParams,
 }: {
@@ -22,12 +24,11 @@ export default async function ConfirmEmailChangePage({
   }
 
   const admin = createAdminClient();
-  // confirm_trial_login_email_change()는 멱등하다 — 이미 confirmed 상태면
-  // 예외 없이 같은 결과를 그대로 돌려준다. 여기서는 순전히 화면 표시용으로만
-  // 다시 호출한다(계정을 만들지 않는다).
-  const { data, error } = await admin.rpc("confirm_trial_login_email_change", { p_token: token });
-  const confirmed = data?.[0];
-  if (error || !confirmed) {
+  // peek_trial_login_email_change()는 순수 조회 전용이다 — 화면 표시를
+  // 위해 호출해도 status/confirmed_at/이벤트 어느 것도 바꾸지 않는다.
+  const { data, error } = await admin.rpc("peek_trial_login_email_change", { p_token: token });
+  const peeked = data?.[0];
+  if (error || !peeked || peeked.status === "expired") {
     return (
       <main className="max-w-md mx-auto px-6 py-16">
         <p className="text-[14px] text-ink">
@@ -40,7 +41,7 @@ export default async function ConfirmEmailChangePage({
   const { data: link, error: linkError } = await admin
     .from("trial_onboarding_links")
     .select("guardian_name, student_name")
-    .eq("id", confirmed.link_id)
+    .eq("id", peeked.link_id)
     .maybeSingle();
   if (linkError || !link) {
     return (
@@ -58,7 +59,7 @@ export default async function ConfirmEmailChangePage({
         {link.student_name} 학생의 보호자({link.guardian_name})님, 앞으로 Alton Education에 로그인할 때
         사용할 이메일이 아래 주소로 확인됐습니다.
       </p>
-      <ConfirmEmailChangeForm token={token} confirmedEmail={confirmed.requested_email} />
+      <ConfirmEmailChangeForm token={token} confirmedEmail={peeked.requested_email} />
     </main>
   );
 }
