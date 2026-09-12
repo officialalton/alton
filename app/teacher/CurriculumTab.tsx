@@ -3,8 +3,6 @@
 import { useEffect, useState } from "react";
 import CurriculumView from "@/app/student/CurriculumView";
 import ReviewPanel from "@/app/student/ReviewPanel";
-import type { Memo } from "@/app/student/memo-data";
-import type { ReviewData, StudentFeedback } from "@/app/student/review-data";
 import MySubjectsTab from "./MySubjectsTab";
 import type { MySubject } from "./mysubjects-data";
 import type { RosterStudent, RosterSubject } from "./roster-data";
@@ -14,6 +12,9 @@ import StudentCurriculumPanel from "./StudentCurriculumPanel";
 import SessionPrepPanel from "./SessionPrepPanel";
 import { loadStudentCurriculumPanelData } from "./student-curriculum-actions";
 import type { StudentCurriculum, EligibleLibrary } from "./student-curriculum-data";
+import { loadLegacyCurriculumDetail, loadReviewDetail } from "./legacy-curriculum-actions";
+import type { Memo } from "@/app/student/memo-data";
+import type { ReviewData, StudentFeedback } from "@/app/student/review-data";
 
 type SubView =
   | { type: "list" }
@@ -25,10 +26,6 @@ type SubView =
 export default function CurriculumTab({
   mySubjects,
   students,
-  curricula,
-  memosByEnrollment,
-  reviews,
-  studentFeedback,
   jumpTo,
   onJumpConsumed,
   operatingCurriculumJumpTo,
@@ -36,15 +33,13 @@ export default function CurriculumTab({
 }: {
   mySubjects: MySubject[];
   students: RosterStudent[];
-  curricula: TeacherCurriculumData[];
-  memosByEnrollment: Record<string, Memo[]>;
-  reviews: Record<string, ReviewData>;
-  studentFeedback: Record<string, StudentFeedback>;
-  // C-1(2026-09-10) — 이 점프는 예전에 "배정" 탭의 레거시 "커리큘럼 보기"
-  // 버튼이 트리거했는데, 그 버튼을 제거하면서 실제 호출부가 없어졌다("학생별"
-  // 탭 안의 레거시 과목 클릭은 이 prop과 무관한 로컬 subView 상태를 쓴다).
-  // 다른 진입점이 생길 수 있어 타입은 남겨두되 선택적으로 바꾼다.
-  jumpTo?: { studentId: string; subjectId: string } | null;
+  // 2026-09-11(제품 오너 UAT — 첫 진입 지연 재지적) — 예전엔 담당 학생
+  // 전체의 커리큘럼 상세(curricula)를 이 화면 진입 시점에 미리 다 읽어서
+  // studentId+subjectId로 그 안에서 enrollmentId를 찾았다. 이제 상세는
+  // legacy-curriculum-actions.ts가 enrollmentId 하나로만 온디맨드
+  // 조회하므로, 점프 호출자가 이미 알고 있는 enrollmentId를 직접 받는다
+  // (현재 실제 호출부는 없음 — 다른 진입점이 생길 수 있어 타입만 남김).
+  jumpTo?: { studentId: string; enrollmentId: string } | null;
   onJumpConsumed?: () => void;
   operatingCurriculumJumpTo?: {
     subjectEnrollmentId: string;
@@ -68,14 +63,9 @@ export default function CurriculumTab({
 
   useEffect(() => {
     if (!jumpTo) return;
-    const match = curricula.find(
-      (c) => c.studentId === jumpTo.studentId && c.subjectId === jumpTo.subjectId
-    );
     setSubtab("students");
     setSelectedStudentId(jumpTo.studentId);
-    setSubView(
-      match ? { type: "curriculum", enrollmentId: match.enrollmentId } : { type: "list" }
-    );
+    setSubView({ type: "curriculum", enrollmentId: jumpTo.enrollmentId });
     onJumpConsumed?.();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [jumpTo]);
@@ -122,12 +112,9 @@ export default function CurriculumTab({
   }
 
   if (subView.type === "curriculum") {
-    const data = curricula.find((c) => c.enrollmentId === subView.enrollmentId);
-    if (!data) return null;
     return (
-      <CurriculumView
-        data={data}
-        initialMemos={memosByEnrollment[data.enrollmentId] ?? []}
+      <LegacyCurriculumView
+        enrollmentId={subView.enrollmentId}
         onBack={() => setSubView({ type: "list" })}
         onReview={(sessionId) => setSubView({ type: "review", sessionId })}
       />
@@ -135,15 +122,7 @@ export default function CurriculumTab({
   }
 
   if (subView.type === "review") {
-    return (
-      <ReviewPanel
-        sessionId={subView.sessionId}
-        review={reviews[subView.sessionId] ?? null}
-        myFeedback={studentFeedback[subView.sessionId] ?? null}
-        onBack={() => setSubView({ type: "list" })}
-        readOnly
-      />
-    );
+    return <LegacyReviewView sessionId={subView.sessionId} onBack={() => setSubView({ type: "list" })} />;
   }
 
   return (
@@ -355,6 +334,119 @@ function SessionPrepView({
       studentName={studentName}
       subjectName={subjectName}
       onBack={onBack}
+    />
+  );
+}
+
+// 2026-09-11(제품 오너 UAT — 첫 진입 지연 재지적) — 레거시 과목의 커리큘럼
+// 상세(단원별 제목·메모·코멘트·세션 일정)는 이 화면을 실제로 열 때만
+// 조회한다(legacy-curriculum-actions.ts::loadLegacyCurriculumDetail).
+// 예전엔 "학생별" 목록에 진입하는 시점에 담당 학생 전체의 이 데이터를
+// 이미 다 읽어와서 curricula prop으로 들고 있었다.
+function LegacyCurriculumView({
+  enrollmentId,
+  onBack,
+  onReview,
+}: {
+  enrollmentId: string;
+  onBack: () => void;
+  onReview: (sessionId: string) => void;
+}) {
+  const [state, setState] = useState<
+    | { status: "loading" }
+    | { status: "error"; message: string }
+    | { status: "ready"; data: TeacherCurriculumData; memos: Memo[] }
+  >({ status: "loading" });
+
+  useEffect(() => {
+    let cancelled = false;
+    setState({ status: "loading" });
+    loadLegacyCurriculumDetail(enrollmentId)
+      .then((result) => {
+        if (cancelled) return;
+        if (!result) {
+          setState({ status: "error", message: "커리큘럼을 찾을 수 없습니다." });
+          return;
+        }
+        setState({ status: "ready", data: result.curriculum, memos: result.memos });
+      })
+      .catch((e) => {
+        if (!cancelled) {
+          setState({ status: "error", message: e instanceof Error ? e.message : "불러오지 못했습니다." });
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [enrollmentId]);
+
+  if (state.status === "loading") {
+    return <div className="max-w-[640px] px-8 py-8 text-[13px] text-grey-500">불러오는 중...</div>;
+  }
+  if (state.status === "error") {
+    return (
+      <div className="max-w-[640px] px-8 py-8">
+        <button onClick={onBack} className="text-[13px] text-grey-500 font-semibold mb-4">
+          ← 뒤로
+        </button>
+        <p className="text-[13px] text-red">{state.message}</p>
+      </div>
+    );
+  }
+  return (
+    <CurriculumView
+      data={state.data}
+      initialMemos={state.memos}
+      onBack={onBack}
+      onReview={onReview}
+    />
+  );
+}
+
+function LegacyReviewView({ sessionId, onBack }: { sessionId: string; onBack: () => void }) {
+  const [state, setState] = useState<
+    | { status: "loading" }
+    | { status: "error"; message: string }
+    | { status: "ready"; review: ReviewData | null; myFeedback: StudentFeedback | null }
+  >({ status: "loading" });
+
+  useEffect(() => {
+    let cancelled = false;
+    setState({ status: "loading" });
+    loadReviewDetail(sessionId)
+      .then(({ review, myFeedback }) => {
+        if (!cancelled) setState({ status: "ready", review, myFeedback });
+      })
+      .catch((e) => {
+        if (!cancelled) {
+          setState({ status: "error", message: e instanceof Error ? e.message : "불러오지 못했습니다." });
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [sessionId]);
+
+  if (state.status === "loading") {
+    return <div className="max-w-[640px] px-8 py-8 text-[13px] text-grey-500">불러오는 중...</div>;
+  }
+  if (state.status === "error") {
+    return (
+      <div className="max-w-[640px] px-8 py-8">
+        <button onClick={onBack} className="text-[13px] text-grey-500 font-semibold mb-4">
+          ← 뒤로
+        </button>
+        <p className="text-[13px] text-red">{state.message}</p>
+      </div>
+    );
+  }
+  return (
+    <ReviewPanel
+      sessionId={sessionId}
+      review={state.review}
+      myFeedback={state.myFeedback}
+      onBack={onBack}
+      readOnly
     />
   );
 }

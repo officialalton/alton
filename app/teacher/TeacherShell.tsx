@@ -10,9 +10,6 @@ import type { TeacherDashboardData } from "./dashboard-data";
 import CurriculumTab from "./CurriculumTab";
 import type { RosterStudent } from "./roster-data";
 import type { MySubject } from "./mysubjects-data";
-import type { TeacherCurriculumData } from "./curriculum-data";
-import type { Memo } from "@/app/student/memo-data";
-import type { ReviewData, StudentFeedback } from "@/app/student/review-data";
 import AssignmentsTab from "./AssignmentsTab";
 import type { TeacherAssignedSubject } from "./assignments-data";
 import TeacherAvailabilityTab from "./TeacherAvailabilityTab";
@@ -53,11 +50,6 @@ export default function TeacherShell({
   dashboard,
   roster,
   mySubjects,
-  curricula,
-  memosByEnrollment,
-  reviews,
-  studentFeedback,
-  reviewedSessionIds,
   currentAssignments,
   pastAssignments,
   availabilityRules,
@@ -70,11 +62,6 @@ export default function TeacherShell({
   dashboard: TeacherDashboardData;
   roster: RosterStudent[];
   mySubjects: MySubject[];
-  curricula: TeacherCurriculumData[];
-  memosByEnrollment: Record<string, Memo[]>;
-  reviews: Record<string, ReviewData>;
-  studentFeedback: Record<string, StudentFeedback>;
-  reviewedSessionIds: string[];
   currentAssignments: TeacherAssignedSubject[];
   pastAssignments: TeacherAssignedSubject[];
   availabilityRules: TeacherAvailabilityRuleRow[];
@@ -267,10 +254,6 @@ export default function TeacherShell({
             <CurriculumTab
               mySubjects={mySubjects}
               students={roster}
-              curricula={curricula}
-              memosByEnrollment={memosByEnrollment}
-              reviews={reviews}
-              studentFeedback={studentFeedback}
               operatingCurriculumJumpTo={operatingCurriculumJump}
               onOperatingCurriculumJumpConsumed={() => setOperatingCurriculumJump(null)}
             />

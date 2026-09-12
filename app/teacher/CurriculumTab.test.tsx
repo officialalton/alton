@@ -4,6 +4,16 @@ import CurriculumTab from "./CurriculumTab";
 import type { RosterStudent } from "./roster-data";
 import type { TeacherCurriculumData } from "./curriculum-data";
 import { loadStudentCurriculumPanelData } from "./student-curriculum-actions";
+import { loadLegacyCurriculumDetail, loadReviewDetail } from "./legacy-curriculum-actions";
+
+// 2026-09-11(제품 오너 UAT — 첫 진입 지연 재지적) — 레거시 커리큘럼 상세는
+// 이제 이 화면을 열 때만 legacy-curriculum-actions.ts로 온디맨드 조회한다
+// (예전엔 curricula/memosByEnrollment/reviews/studentFeedback을 부모가
+// 미리 다 가져와 props로 내려줬다).
+vi.mock("./legacy-curriculum-actions", () => ({
+  loadLegacyCurriculumDetail: vi.fn(),
+  loadReviewDetail: vi.fn(),
+}));
 
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: vi.fn(), replace: vi.fn() }),
@@ -79,10 +89,6 @@ const curricula: TeacherCurriculumData[] = [
 const baseProps = {
   mySubjects: [],
   students,
-  curricula,
-  memosByEnrollment: {},
-  reviews: {},
-  studentFeedback: {},
   jumpTo: null,
   onJumpConsumed: vi.fn(),
   operatingCurriculumJumpTo: null,
@@ -102,11 +108,16 @@ describe("CurriculumTab", () => {
     expect(screen.getByText("8/12회차")).toBeInTheDocument();
   });
 
-  it("과목을 클릭하면 커리큘럼 상세로 이동한다", () => {
+  it("과목을 클릭하면 커리큘럼 상세로 이동한다(온디맨드 조회)", async () => {
+    (loadLegacyCurriculumDetail as ReturnType<typeof vi.fn>).mockResolvedValue({
+      curriculum: curricula[0],
+      memos: [],
+    });
     render(<CurriculumTab {...baseProps} />);
     fireEvent.click(screen.getByText("학생별"));
     fireEvent.click(screen.getByText("SAT Math"));
-    expect(screen.getByText("완료")).toBeInTheDocument();
+    expect(loadLegacyCurriculumDetail).toHaveBeenCalledWith("e1");
+    await waitFor(() => expect(screen.getByText("완료")).toBeInTheDocument());
   });
 
   it("2026-09-09 UAT 정정 — v3(teacher_assignments+subject_enrollments) 전용 배정 학생도 학생별 탭에서 빈 화면이 아니라 운영 커리큘럼으로 진입한다", async () => {
@@ -135,7 +146,7 @@ describe("CurriculumTab", () => {
     ];
 
     render(
-      <CurriculumTab {...baseProps} students={v3OnlyStudents} curricula={[]} />
+      <CurriculumTab {...baseProps} students={v3OnlyStudents} />
     );
     fireEvent.click(screen.getByText("학생별"));
 
@@ -159,14 +170,18 @@ describe("CurriculumTab", () => {
     );
   });
 
-  it("jumpTo가 주어지면 바로 해당 학생/과목의 커리큘럼으로 진입한다", () => {
+  it("jumpTo가 주어지면 바로 해당 학생/enrollment의 커리큘럼으로 진입한다", async () => {
+    (loadLegacyCurriculumDetail as ReturnType<typeof vi.fn>).mockResolvedValue({
+      curriculum: curricula[0],
+      memos: [],
+    });
     render(
       <CurriculumTab
         {...baseProps}
-        jumpTo={{ studentId: "st1", subjectId: "sub1" }}
+        jumpTo={{ studentId: "st1", enrollmentId: "e1" }}
       />
     );
-    expect(screen.getByText("완료")).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText("완료")).toBeInTheDocument());
     expect(baseProps.onJumpConsumed).toHaveBeenCalled();
   });
 
