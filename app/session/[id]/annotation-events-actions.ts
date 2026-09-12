@@ -121,3 +121,35 @@ export async function loadMyPrivateMaterialStrokes(
   if (error) throw new Error(error.message);
   return (data ?? []).map((row) => row.payload as StrokePayload);
 }
+
+// P3 5단계 — 교재 위 "함께 보는 필기"만 재구성한다.
+//
+// replayAnnotationEvents()는 세션의 모든 이벤트를 범위 구분 없이 돌려준다
+// (R9 화이트보드 탭이 쓰던 경로). 그걸 교재 공용 캔버스에 그대로 쓰면, 학생
+// 본인에게는 자기 개인 필기까지 공용 레이어에 섞여 보인다 — 남에게 새는 것은
+// 아니지만(RLS가 막는다) 화면상 범위 구분이 무너진다.
+export async function loadSharedMaterialStrokes(
+  sessionId: string,
+  curriculumDocId: string
+): Promise<StrokePayload[]> {
+  const { supabase } = await requireUser();
+  const { data, error } = await supabase
+    .from("session_annotation_events")
+    .select("payload, event_type, seq")
+    .eq("session_id", sessionId)
+    .eq("scope", "teacher_shared")
+    .eq("curriculum_doc_id", curriculumDocId)
+    .order("seq", { ascending: true });
+  if (error) throw new Error(error.message);
+
+  // "전체 지우기"는 삭제가 아니라 이벤트다 — 마지막 clear_all 이후의 획만 그린다.
+  const rows = data ?? [];
+  let start = 0;
+  rows.forEach((row, i) => {
+    if (row.event_type === "clear_all") start = i + 1;
+  });
+  return rows
+    .slice(start)
+    .filter((row) => row.event_type === "stroke")
+    .map((row) => row.payload as StrokePayload);
+}

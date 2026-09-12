@@ -10,6 +10,22 @@ import { annotationScale, pointerToCanvas } from "./annotation-scale";
 
 const COLORS = ["#1A1A1A", "#C8102E", "#1B6FB0"];
 
+// 필기를 얹는 동안 본문이 재배치되지 않도록 고정하는 논리 폭.
+//
+// 기준 너비로 좌표를 비례 환산하는 것만으로는 부족하다 — 이미지처럼 통째로
+// 확대되는 콘텐츠는 맞지만, 텍스트 본문은 화면이 좁아지면 줄이 다시 나뉘어
+// "세 번째 줄의 그 단어"가 아예 다른 자리로 간다. 비율 환산은 그 이동을
+// 따라갈 수 없다.
+//
+// 그래서 필기가 있는 동안에는 본문을 이 논리 폭으로 고정해 두고, 화면이 좁으면
+// 통째로 축소해서 보여준다. 줄바꿈이 어느 화면에서나 동일하므로 필기는 언제나
+// 같은 문장·같은 그림 위에 남는다. 필기를 숨기면 다시 화면 폭에 맞춰 편하게
+// 읽는 모드로 돌아간다.
+//
+// 값은 데스크톱 읽기 영역의 실제 본문 폭과 같게 맞춘다(컬럼 760 - 좌우 여백 80).
+// 그래야 데스크톱에서는 축소가 전혀 일어나지 않고, 좁은 화면에서만 줄어든다.
+const ANNOTATION_LAYOUT_WIDTH = 680;
+
 /**
  * 교재 본문 위에 얹는 필기 캔버스 — 콘텐츠 전체 높이에 걸친 단일 캔버스다
  * (섹션마다 따로 두면 필기가 섹션 경계에서 끊긴다, functional-spec §5).
@@ -33,6 +49,7 @@ export default function CanvasOverlay({
   initialStrokes,
   canDraw,
   scope = "teacher_shared",
+  persistence = "legacy",
   children,
 }: {
   sessionId: string;
@@ -40,6 +57,12 @@ export default function CanvasOverlay({
   initialStrokes: CanvasStroke[];
   canDraw: boolean;
   scope?: CanvasScope;
+  /**
+   * 어디에 저장할지. canvas_annotations는 session_id가 legacy_sessions를
+   * 가리키므로 v3 수업에서는 쓸 수 없다 — 그래서 v3 수업의 교재 필기는 지금까지
+   * 저장 경로가 없어 아예 막혀 있었다. v3는 범위가 붙는 이벤트 로그에 남긴다.
+   */
+  persistence?: "legacy" | "events";
   children: React.ReactNode;
 }) {
   const isPrivate = scope === "student_private";
@@ -58,6 +81,29 @@ export default function CanvasOverlay({
   const [color, setColor] = useState(COLORS[0]);
   const [saved, setSaved] = useState(false);
   const [saveError, setSaveError] = useState(false);
+  const [showAnnotations, setShowAnnotations] = useState(true);
+  // 그림이 늦게 로드되면 본문 높이가 늘어나 그 아래 내용이 밀린다. 그 전에
+  // 그은 필기는 밀리기 전 자리를 가리키게 되므로, 본문 안의 그림이 전부
+  // 자리를 잡은 뒤에 필기를 시작할 수 있게 한다.
+  const [contentReady, setContentReady] = useState(false);
+
+  // 저장하지 못한 획은 브라우저에 남겨 둔다. 연결이 끊긴 채로 새로고침하거나
+  // 탭이 닫히면 메모리에만 있던 버퍼가 통째로 사라져, 학생이 그린 필기가
+  // 소리 없이 없어진다. 다시 열었을 때 이어서 저장한다.
+  const pendingKey = `alton:unsaved-strokes:${sessionId}:${curriculumDocId}:${scope}`;
+
+  const rememberPending = useCallback(() => {
+    try {
+      if (pendingRef.current.length === 0) window.localStorage.removeItem(pendingKey);
+      else window.localStorage.setItem(pendingKey, JSON.stringify(pendingRef.current));
+    } catch {
+      // 저장소를 못 쓰는 환경(시크릿 모드 등)에서는 조용히 넘어간다 —
+      // 이 기능이 없다고 해서 필기 자체가 막혀서는 안 된다.
+    }
+  }, [pendingKey]);
+  const [layoutScale, setLayoutScale] = useState(1);
+  const [layoutHeight, setLayoutHeight] = useState<number | null>(null);
+  const outerRef = useRef<HTMLDivElement | null>(null);
 
   // 필기는 교재 본문 위에 얹힌다. 창 크기나 확대 배율이 바뀌면 본문이 다시
   // 흐르고 캔버스 너비도 달라지므로, 그릴 때의 기준 너비(w)로 환산해서 다시
@@ -107,6 +153,99 @@ export default function CanvasOverlay({
     }
   }, [drawSegment]);
 
+  // 필기를 보여주는 동안에는 본문 폭을 ANNOTATION_LAYOUT_WIDTH로 고정하고,
+  // 화면이 그보다 좁으면 통째로 축소한다. 줄바꿈이 화면 크기와 무관해지므로
+  // 필기가 가리키는 문장이 달라지지 않는다.
+  const layoutPinned = showAnnotations;
+
+  const measureLayout = useCallback(() => {
+    const outer = outerRef.current;
+    const wrap = wrapRef.current;
+    if (!outer || !wrap) return;
+    if (!layoutPinned) {
+      setLayoutScale(1);
+      setLayoutHeight(null);
+      return;
+    }
+    const available = outer.clientWidth;
+    const next = available > 0 && available < ANNOTATION_LAYOUT_WIDTH
+      ? available / ANNOTATION_LAYOUT_WIDTH
+      : 1;
+    setLayoutScale(next);
+    // 축소한 만큼 바깥 높이도 줄여야 아래 내용과 겹치지 않는다.
+    setLayoutHeight(wrap.scrollHeight * next);
+  }, [layoutPinned]);
+
+  // 지난번에 저장하지 못한 획을 되살린다 — 화면에 다시 그리고, 저장도 다시 시도한다.
+  //
+  // 복구는 반드시 한 번만 일어나야 한다. 남아 있는 버퍼를 "읽기만" 하면 이
+  // effect가 두 번 실행될 때(개발 모드의 StrictMode, 빠른 재마운트 등) 같은
+  // 획이 두 번 저장된다 — 실제로 그렇게 중복 저장되는 것을 확인했다. 그래서
+  // 읽는 즉시 저장소에서 지워 "가져갔다"고 표시하고, 저장에 실패하면
+  // rememberPending()이 다시 써 넣는다.
+  const recoveredOnceRef = useRef(false);
+  useEffect(() => {
+    if (recoveredOnceRef.current) return;
+    recoveredOnceRef.current = true;
+
+    let recovered: CanvasStroke[] = [];
+    try {
+      const raw = window.localStorage.getItem(pendingKey);
+      if (raw) recovered = JSON.parse(raw) as CanvasStroke[];
+      window.localStorage.removeItem(pendingKey);
+    } catch {
+      recovered = [];
+    }
+    if (!Array.isArray(recovered) || recovered.length === 0) return;
+    pendingRef.current = [...recovered, ...pendingRef.current];
+    strokesRef.current = [...strokesRef.current, ...recovered];
+    recovered.forEach(drawSegment);
+    scheduleSave();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pendingKey]);
+
+  useEffect(() => {
+    const wrap = wrapRef.current;
+    if (!wrap) return;
+    const images = Array.from(wrap.querySelectorAll("img"));
+    const pending = images.filter((img) => !img.complete);
+    if (pending.length === 0) {
+      setContentReady(true);
+      return;
+    }
+    let left = pending.length;
+    const done = () => {
+      left -= 1;
+      if (left <= 0) {
+        setContentReady(true);
+        measureLayout();
+        resize();
+      }
+    };
+    pending.forEach((img) => {
+      img.addEventListener("load", done, { once: true });
+      img.addEventListener("error", done, { once: true });
+    });
+    return () => {
+      pending.forEach((img) => {
+        img.removeEventListener("load", done);
+        img.removeEventListener("error", done);
+      });
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [children]);
+
+  useEffect(() => {
+    measureLayout();
+    const outer = outerRef.current;
+    const wrap = wrapRef.current;
+    if (!outer || !wrap || typeof ResizeObserver === "undefined") return;
+    const ro = new ResizeObserver(measureLayout);
+    ro.observe(outer);
+    ro.observe(wrap);
+    return () => ro.disconnect();
+  }, [measureLayout]);
+
   useEffect(() => {
     resize();
     const wrap = wrapRef.current;
@@ -144,16 +283,24 @@ export default function CanvasOverlay({
     if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
     saveTimerRef.current = setTimeout(async () => {
       try {
-        if (isPrivate) {
-          // 범위가 붙는 append-only 경로로만 남긴다. 공용 캔버스 행을 덮어쓰면
-          // 교사가 다음 로드에서 그대로 보게 된다.
-          await appendScopedStrokeEvents({
-            sessionId,
-            segments: pendingRef.current,
-            scope: "student_private",
-            curriculumDocId,
-          });
+        if (isPrivate || persistence === "events") {
+          // append-only라 "아직 안 보낸 것"만 보낸다. 실패하면 되돌려 다음
+          // 시도에 함께 보내므로 필기가 사라지지도, 중복되지도 않는다.
+          const batch = pendingRef.current;
           pendingRef.current = [];
+          try {
+            await appendScopedStrokeEvents({
+              sessionId,
+              segments: batch,
+              scope: isPrivate ? "student_private" : "teacher_shared",
+              curriculumDocId,
+            });
+          } catch (e) {
+            pendingRef.current = [...batch, ...pendingRef.current];
+            rememberPending();
+            throw e;
+          }
+          rememberPending();
         } else {
           await saveCanvasStrokes(sessionId, curriculumDocId, strokesRef.current);
         }
@@ -169,7 +316,8 @@ export default function CanvasOverlay({
   function pos(e: React.PointerEvent<HTMLCanvasElement>) {
     const canvas = canvasRef.current!;
     const rect = canvas.getBoundingClientRect();
-    // 화면에 그려진 크기와 캔버스 내부 픽셀 크기가 다를 수 있다(확대·축소).
+    // 화면에 보이는 크기(축소 포함)와 캔버스 내부 논리 픽셀 크기가 다르다.
+    // 항상 논리 좌표계로 바꿔 기록한다.
     return pointerToCanvas(e.clientX, e.clientY, rect, canvas);
   }
 
@@ -193,9 +341,11 @@ export default function CanvasOverlay({
     };
     drawSegment(seg);
     strokesRef.current.push(seg);
-    if (isPrivate) {
+    if (isPrivate || persistence === "events") {
       pendingRef.current.push(seg);
-    } else {
+      rememberPending();
+    }
+    if (!isPrivate) {
       channelRef.current?.send({ type: "broadcast", event: "stroke", payload: seg });
     }
     lastPosRef.current = p;
@@ -219,8 +369,35 @@ export default function CanvasOverlay({
 
   return (
     <div>
-      {canDraw && (
-        <div className="flex items-center gap-3 mb-3 sticky top-0 bg-white/95 py-2 z-20">
+      <div className="flex flex-wrap items-center gap-3 mb-3 sticky top-0 bg-white/95 py-2 z-20">
+        {/* 필기를 보여주는 동안에는 본문 폭이 고정된다(줄바꿈이 달라지면 필기가
+            가리키는 문장이 바뀌므로). 편하게 읽고 싶을 때는 필기를 숨기면
+            화면 폭에 맞춰 다시 흐른다. */}
+        <button
+          onClick={() => setShowAnnotations((v) => !v)}
+          aria-pressed={showAnnotations}
+          className={
+            "text-[12px] font-bold px-3 py-1.5 rounded-full border-[1.5px] " +
+            (showAnnotations ? "border-grey-200 text-ink" : "bg-ink text-white border-ink")
+          }
+        >
+          {showAnnotations ? "필기 숨기고 넓게 읽기" : "필기 보기"}
+        </button>
+        {layoutPinned && layoutScale < 1 && (
+          <span className="text-[11px] text-grey-500">
+            필기 위치를 지키려고 본문을 축소해서 보여주고 있어요
+          </span>
+        )}
+      </div>
+
+      {canDraw && showAnnotations && !contentReady && (
+        <p className="text-[11.5px] text-grey-500 mb-2">
+          교재의 그림을 불러오는 중입니다 — 다 불러온 뒤에 필기해야 위치가 어긋나지 않아요.
+        </p>
+      )}
+
+      {canDraw && showAnnotations && contentReady && (
+        <div className="flex flex-wrap items-center gap-3 mb-3 sticky top-0 bg-white/95 py-2 z-20">
           <button
             onClick={() => setDrawMode((v) => !v)}
             className={
@@ -288,7 +465,29 @@ export default function CanvasOverlay({
         </div>
       )}
 
-      <div ref={wrapRef} className="relative">
+      <div
+        ref={outerRef}
+        className="relative"
+        style={
+          layoutPinned && layoutScale < 1
+            ? { overflow: "hidden", height: layoutHeight ?? undefined }
+            : undefined
+        }
+      >
+        <div
+          ref={wrapRef}
+          className="relative"
+          style={
+            layoutPinned
+              ? {
+                  width: ANNOTATION_LAYOUT_WIDTH,
+                  maxWidth: "none",
+                  transform: layoutScale < 1 ? `scale(${layoutScale})` : undefined,
+                  transformOrigin: "top left",
+                }
+              : undefined
+          }
+        >
         {children}
         <canvas
           ref={canvasRef}
@@ -301,7 +500,9 @@ export default function CanvasOverlay({
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
           onPointerLeave={handlePointerUp}
+          hidden={!showAnnotations}
         />
+        </div>
       </div>
     </div>
   );

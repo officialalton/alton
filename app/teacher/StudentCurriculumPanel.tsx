@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import UnitPrepPanel from "./UnitPrepPanel";
+import { loadUnitPrepSummaries, type UnitPrepSummary } from "./unit-prep-actions";
+import { useEffect } from "react";
 import {
   ensureActiveOverlay,
   addCanonicalUnit,
@@ -43,6 +45,8 @@ export default function StudentCurriculumPanel({
 }) {
   // P2/P3 3단계 — 예약이 없어도 여기서 바로 회차를 준비한다.
   const [preparingUnit, setPreparingUnit] = useState<{ id: string; title: string } | null>(null);
+  // 회차별 준비 상태를 한 번에 불러와 목록에서 바로 보여준다.
+  const [prepSummaries, setPrepSummaries] = useState<Record<string, UnitPrepSummary>>({});
   const [overlayId, setOverlayId] = useState(initial.overlayId);
   const [units, setUnits] = useState(initial.units);
   const [showAddPanel, setShowAddPanel] = useState(false);
@@ -132,6 +136,24 @@ export default function StudentCurriculumPanel({
     }
   }
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    if (preparingUnit) return;
+    const ids = units.map((u) => u.id);
+    if (ids.length === 0) return;
+    let cancelled = false;
+    loadUnitPrepSummaries(ids)
+      .then((next) => {
+        if (!cancelled) setPrepSummaries(next);
+      })
+      .catch(() => {
+        // 준비 상태는 보조 정보다 — 못 불러와도 커리큘럼 자체는 계속 쓸 수 있어야 한다.
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [units, preparingUnit]);
+
   if (preparingUnit) {
     return (
       <UnitPrepPanel
@@ -202,6 +224,40 @@ export default function StudentCurriculumPanel({
               </button>
             </div>
           </div>
+          {/* P2/P3 6단계 — 이 회차를 얼마나 준비했는지 목록에서 바로 읽힌다.
+              내부 상태값이 아니라 사람이 읽는 말로만 쓴다. */}
+          <div className="flex flex-wrap items-center gap-1.5 mb-2">
+            {(() => {
+              const p = prepSummaries[u.id];
+              if (!p) return null;
+              const chips: { label: string; tone: "ready" | "muted" | "locked" }[] = [];
+              chips.push(
+                p.itemCount > 0
+                  ? { label: `자료 ${p.itemCount}개 준비됨`, tone: "ready" }
+                  : { label: "준비한 자료 없음", tone: "muted" }
+              );
+              if (!p.hasGoal) chips.push({ label: "목표 미작성", tone: "muted" });
+              if (p.linkedLessonCount > 0)
+                chips.push({ label: `수업 ${p.linkedLessonCount}개에 연결됨`, tone: "ready" });
+              if (p.hasFrozenLesson) chips.push({ label: "진행한 수업 있음", tone: "locked" });
+              return chips.map((c) => (
+                <span
+                  key={c.label}
+                  className={
+                    "text-[10.5px] font-bold rounded-full px-2 py-0.5 " +
+                    (c.tone === "ready"
+                      ? "bg-green/10 text-green"
+                      : c.tone === "locked"
+                        ? "bg-ink text-white"
+                        : "bg-grey-100 text-grey-500")
+                  }
+                >
+                  {c.label}
+                </span>
+              ));
+            })()}
+          </div>
+
           <select
             value={u.status}
             onChange={(e) => handleStatus(u.id, e.target.value as OverlayUnit["status"])}

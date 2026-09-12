@@ -83,6 +83,7 @@ export default function SessionShell({
   sessionSource,
   initialAnnotationStrokes,
   privateMaterialStrokes = [],
+  sharedMaterialStrokes = [],
   sessionProblems = [],
   lessonContext = { unitTitle: null, goal: null, supplementTitles: [] },
   currentUserId,
@@ -122,6 +123,8 @@ export default function SessionShell({
   initialAnnotationStrokes: StrokePayload[];
   /** 학생 본인만 보는 교재 필기 — 다른 역할에는 빈 배열이 내려온다. */
   privateMaterialStrokes?: StrokePayload[];
+  /** 교재의 공용 필기(범위로 걸러낸 것). */
+  sharedMaterialStrokes?: StrokePayload[];
   /** 수업 시작 시 고정된 문제들(고정된 버전의 내용). */
   sessionProblems?: SessionProblem[];
   /** 이 수업이 커리큘럼의 어느 회차이고 그 목표가 무엇인지. */
@@ -465,6 +468,9 @@ export default function SessionShell({
           viewerRole={contentViewerRole}
           tipsVisible={tipsVisible}
           privateStrokes={privateMaterialStrokes}
+          sharedStrokes={sessionSource === "v3" ? sharedMaterialStrokes : undefined}
+          sessionSource={sessionSource}
+          annotationViewerRole={viewerRole}
         />
       ) : activeTab === "problems" ? (
         <ProblemsPanel

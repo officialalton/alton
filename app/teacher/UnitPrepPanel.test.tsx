@@ -116,14 +116,14 @@ describe("UnitPrepPanel — 예약 없이 회차를 준비한다", () => {
   it("이미 연결된 수업은 바로 열 수 있다", async () => {
     mockAll({ lessons: [{ sessionId: "sess-9", startsAt: null, alreadyLinked: true }] });
     renderPanel();
-    fireEvent.click(await screen.findByText("연결됨 · 수업 열기"));
+    fireEvent.click(await screen.findByText("연결됨 · 수업 열기 →"));
     expect(pushMock).toHaveBeenCalledWith("/teacher/session-prep/sess-9");
   });
 
   it("내부 id를 화면에 노출하지 않는다", async () => {
     mockAll({ lessons: [{ sessionId: "sess-9", startsAt: null, alreadyLinked: true }] });
     const { container } = renderPanel();
-    await waitFor(() => expect(screen.getByText("연결됨 · 수업 열기")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("연결됨 · 수업 열기 →")).toBeInTheDocument());
     expect(container.textContent).not.toContain("sess-9");
     expect(container.textContent).not.toContain("unit-1");
   });

@@ -16,6 +16,7 @@ import { loadSessionLessonContext } from "./session-context-data";
 import {
   replayAnnotationEvents,
   loadMyPrivateMaterialStrokes,
+  loadSharedMaterialStrokes,
 } from "./annotation-events-actions";
 import { reconstructVisibleStrokes } from "./annotation-events-types";
 import {
@@ -92,6 +93,13 @@ export default async function SessionPage({
         })
       : [];
 
+  // P3 5단계 — 교재의 공용 필기만 따로 재구성한다(범위 구분 없이 전체를
+  // 재생하면 학생 본인 화면에서 개인 필기가 공용 레이어에 섞인다).
+  const sharedMaterialStrokes =
+    session.source === "v3" && material?.docId
+      ? await loadSharedMaterialStrokes(session.id, material.docId)
+      : [];
+
   // P3 3단계 — 학생 본인의 개인 교재 필기. 다른 역할에서는 조회 정책이 빈
   // 결과를 주므로 화면에도 존재하지 않는다.
   const privateMaterialStrokes =
@@ -137,6 +145,7 @@ export default async function SessionPage({
       sessionSource={session.source}
       initialAnnotationStrokes={initialAnnotationStrokes}
       privateMaterialStrokes={privateMaterialStrokes}
+      sharedMaterialStrokes={sharedMaterialStrokes}
       sessionProblems={sessionProblems}
       lessonContext={lessonContext}
       currentUserId={user.id}

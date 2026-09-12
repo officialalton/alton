@@ -258,3 +258,69 @@ export async function linkUnitPrepToLesson(
   if (error) return { ok: false, error: error.message };
   return { ok: true };
 }
+
+// P2/P3 6단계 — 커리큘럼 목록에서 "전체 회차와 준비 상태"를 한눈에 본다.
+// 회차를 하나씩 열어보지 않고도 어디까지 준비했는지 알 수 있어야 한다.
+export type UnitPrepSummary = {
+  overlayUnitId: string;
+  hasGoal: boolean;
+  itemCount: number;
+  linkedLessonCount: number;
+  /** 이미 시작·종료돼 내용이 고정된 수업이 있는지. */
+  hasFrozenLesson: boolean;
+};
+
+export async function loadUnitPrepSummaries(
+  overlayUnitIds: string[]
+): Promise<Record<string, UnitPrepSummary>> {
+  if (overlayUnitIds.length === 0) return {};
+  const { supabase } = await requireTeacherOrAdmin();
+
+  const { data: preps } = await supabase
+    .from("curriculum_unit_preps")
+    .select("id, overlay_unit_id, goal")
+    .in("overlay_unit_id", overlayUnitIds);
+
+  const prepIds = (preps ?? []).map((p) => p.id as string);
+  const itemCountByPrep = new Map<string, number>();
+  if (prepIds.length) {
+    const { data: items } = await supabase
+      .from("curriculum_unit_prep_items")
+      .select("prep_id")
+      .in("prep_id", prepIds);
+    for (const item of items ?? []) {
+      const key = item.prep_id as string;
+      itemCountByPrep.set(key, (itemCountByPrep.get(key) ?? 0) + 1);
+    }
+  }
+
+  const { data: links } = await supabase
+    .from("session_curriculum_units")
+    .select("overlay_unit_id, session_id")
+    .in("overlay_unit_id", overlayUnitIds);
+  const sessionIds = Array.from(new Set((links ?? []).map((l) => l.session_id as string)));
+  const frozenSessions = new Set<string>();
+  if (sessionIds.length) {
+    const { data: sessions } = await supabase
+      .from("sessions")
+      .select("id, final_status")
+      .in("id", sessionIds);
+    for (const s of sessions ?? []) {
+      if (s.final_status !== "scheduled") frozenSessions.add(s.id as string);
+    }
+  }
+
+  const summaries: Record<string, UnitPrepSummary> = {};
+  for (const unitId of overlayUnitIds) {
+    const prep = (preps ?? []).find((p) => p.overlay_unit_id === unitId);
+    const unitLinks = (links ?? []).filter((l) => l.overlay_unit_id === unitId);
+    summaries[unitId] = {
+      overlayUnitId: unitId,
+      hasGoal: Boolean((prep?.goal as string | null)?.trim()),
+      itemCount: prep ? (itemCountByPrep.get(prep.id as string) ?? 0) : 0,
+      linkedLessonCount: unitLinks.length,
+      hasFrozenLesson: unitLinks.some((l) => frozenSessions.has(l.session_id as string)),
+    };
+  }
+  return summaries;
+}

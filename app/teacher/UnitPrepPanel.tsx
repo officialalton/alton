@@ -84,17 +84,27 @@ export default function UnitPrepPanel({
   const pickedIds = new Set((prep?.items ?? []).map((i) => i.contentId));
 
   return (
-    <div className="max-w-[680px] px-6 py-6">
+    <div className="max-w-[760px] mx-auto px-5 sm:px-8 py-7">
       <button onClick={onBack} className="text-[13px] text-grey-500 font-semibold mb-4">
-        ← 뒤로
+        ← 커리큘럼으로
       </button>
-      <h2 className="text-[17px] font-extrabold text-ink mb-1">{unitTitle}</h2>
-      <div className="text-[12px] text-grey-500 font-semibold mb-1">
-        {studentName} 학생 · {subjectName}
+
+      {/* 수업 화면의 머리말과 같은 체계로 쓴다 — 커리큘럼 → 준비 → 수업 →
+          복습에서 같은 말과 같은 위계를 본다. */}
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-1">
+        <span className="text-[11.5px] font-bold text-grey-500">{studentName} 학생</span>
+        <span className="text-[11.5px] text-grey-300">·</span>
+        <span className="text-[11.5px] font-semibold text-grey-500">
+          {subjectName} › {unitTitle}
+        </span>
+        <span className="text-[10.5px] font-bold text-grey-500 bg-grey-100 rounded-full px-2 py-0.5 ml-auto">
+          회차 준비
+        </span>
       </div>
-      <p className="text-[12.5px] text-grey-500 mb-5">
-        예약이 없어도 회차를 미리 준비할 수 있습니다. 준비한 내용은 언제든 고칠 수
-        있고, 실제 수업이 시작될 때 그 시점의 내용으로 고정됩니다.
+      <h2 className="text-[19px] sm:text-[21px] font-extrabold text-ink leading-tight">{unitTitle}</h2>
+      <p className="text-[13px] leading-[1.65] text-grey-500 mt-1.5 mb-6">
+        예약이 없어도 미리 준비할 수 있습니다. 준비한 내용은 언제든 고칠 수 있고,
+        실제 수업이 시작될 때 그 시점의 내용으로 고정됩니다.
       </p>
 
       {loading && <p className="text-[13px] text-grey-500">불러오는 중...</p>}
@@ -103,7 +113,7 @@ export default function UnitPrepPanel({
       {prep && (
         <>
           <section className="mb-6">
-            <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-1.5">
+            <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2">
               이 회차의 목표
             </div>
             <textarea
@@ -114,7 +124,7 @@ export default function UnitPrepPanel({
               }}
               rows={2}
               placeholder="이 회차가 끝났을 때 학생이 무엇을 할 수 있어야 하는지 적으세요."
-              className="w-full text-[13px] border-[1.5px] border-grey-200 rounded-lg px-3 py-2"
+              className="w-full text-[14px] leading-[1.7] border-[1.5px] border-grey-200 rounded-xl px-3.5 py-2.5"
             />
           </section>
 
@@ -194,9 +204,12 @@ export default function UnitPrepPanel({
           </section>
 
           <section>
-            <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-1.5">
-              예정된 수업에 연결
+            <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2">
+              수업에 연결하기
             </div>
+            <p className="text-[12px] text-grey-500 mb-2">
+              연결해도 아직 고정되지 않습니다 — 수업을 시작할 때 그 시점의 준비 내용이 고정됩니다.
+            </p>
             {lessons.length === 0 ? (
               <p className="text-[12.5px] text-grey-500">
                 아직 이 학생의 예정된 수업이 없습니다. 수업이 잡히면 여기에서 이 회차를 연결할 수 있습니다.
@@ -210,7 +223,7 @@ export default function UnitPrepPanel({
                       onClick={() => router.push(`/teacher/session-prep/${l.sessionId}`)}
                       className="text-[11.5px] font-bold text-ink"
                     >
-                      연결됨 · 수업 열기
+                      연결됨 · 수업 열기 →
                     </button>
                   ) : (
                     <button

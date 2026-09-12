@@ -30,6 +30,9 @@ export default function MaterialTab({
   viewerRole,
   tipsVisible,
   privateStrokes = [],
+  sharedStrokes,
+  sessionSource = "legacy",
+  annotationViewerRole,
 }: {
   sessionId: string;
   studentId: string;
@@ -38,12 +41,22 @@ export default function MaterialTab({
   tipsVisible: boolean;
   /** 학생 본인만 보는 교재 필기. 다른 역할에는 서버가 아예 내려주지 않는다. */
   privateStrokes?: CanvasStroke[];
+  /** v3 수업의 공용 교재 필기(이벤트 로그에서 재구성한 것). */
+  sharedStrokes?: CanvasStroke[];
+  sessionSource?: "legacy" | "v3";
+  /**
+   * 필기 가능 여부만 판단하는 역할. 다른 탭(단어장·과제)은 v3에서 아직 쓰기가
+   * 안 되지만 교재 필기는 이벤트 로그로 저장되므로, 그 제한을 여기까지
+   * 끌고 오지 않는다.
+   */
+  annotationViewerRole?: SessionViewViewer;
 }) {
   // P3 3단계 — 원본 교재는 그대로 두고 필기 레이어만 바꿔 끼운다. 학생은
   // "함께 보는 필기"와 "나만 보는 필기"를 오갈 수 있고, 교사에게는 공용
   // 필기 하나뿐이다(학생 개인 필기는 교사에게 존재 자체가 보이지 않는다).
   const [scope, setScope] = useState<CanvasScope>("teacher_shared");
-  const canUsePrivate = viewerRole === "student";
+  const drawRole = annotationViewerRole ?? viewerRole;
+  const canUsePrivate = drawRole === "student";
   const activeScope: CanvasScope = canUsePrivate ? scope : "teacher_shared";
   const [activeSectionId, setActiveSectionId] = useState<string | null>(
     material?.sections[0]?.id ?? null
@@ -122,7 +135,7 @@ export default function MaterialTab({
         ))}
       </nav>
 
-      <div className="max-w-[760px] mx-auto px-5 sm:px-8 py-8">
+      <div className="max-w-[760px] mx-auto px-3 sm:px-10 py-8">
         {canUsePrivate && (
           <div className="flex items-center gap-1.5 mb-3">
             {(
@@ -149,9 +162,14 @@ export default function MaterialTab({
           key={activeScope}
           sessionId={sessionId}
           curriculumDocId={material.docId}
-          initialStrokes={activeScope === "student_private" ? privateStrokes : material.canvasStrokes}
-          canDraw={viewerRole === "student" || viewerRole === "teacher"}
+          initialStrokes={
+            activeScope === "student_private"
+              ? privateStrokes
+              : (sharedStrokes ?? material.canvasStrokes)
+          }
+          canDraw={drawRole === "student" || drawRole === "teacher"}
           scope={activeScope}
+          persistence={sessionSource === "v3" ? "events" : "legacy"}
         >
           <VocabClickLayer
             sessionId={sessionId}
