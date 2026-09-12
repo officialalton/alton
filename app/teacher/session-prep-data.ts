@@ -178,6 +178,10 @@ export type EligibleProblem = {
 export type EligibleSelectionContent = {
   materialSections: EligibleMaterialSection[];
   problems: EligibleProblem[];
+  // 후보가 비었을 때 "왜 비었는가"를 구분하기 위한 값. 회차에 키워드가 하나도
+  // 없어서 비는 것과, 키워드는 있는데 공개된 콘텐츠가 없어서 비는 것은 선생님이
+  // 해야 할 일이 다르다. 같은 문구로 뭉뚱그리면 고를 게 없는 이유를 알 수 없다.
+  keywordCount?: number;
 };
 
 // 선생님이 스테이징 콘텐츠로 고를 수 있는 후보 — 이 선택의 모든 단원의 활성

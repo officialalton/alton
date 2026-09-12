@@ -146,7 +146,7 @@ export async function loadUnitEligibleContent(overlayUnitId: string): Promise<El
     .select("keyword_id")
     .eq("overlay_unit_id", overlayUnitId);
   const keywordIds = Array.from(new Set((keywordRows ?? []).map((k) => k.keyword_id as string)));
-  if (!keywordIds.length) return { materialSections: [], problems: [] };
+  if (!keywordIds.length) return { materialSections: [], problems: [], keywordCount: 0 };
 
   const [{ data: sectionKeywordRows }, { data: problemKeywordRows }] = await Promise.all([
     supabase
@@ -172,6 +172,7 @@ export async function loadUnitEligibleContent(overlayUnitId: string): Promise<El
   const problemById = new Map((problemDetails ?? []).map((p) => [p.id as string, p]));
 
   return {
+    keywordCount: keywordIds.length,
     materialSections: (sectionKeywordRows ?? [])
       .map((row) => {
         const detail = sectionById.get(row.section_id as string);

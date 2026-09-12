@@ -27,12 +27,12 @@ const emptyPrep = { goal: "", items: [], linkedLessons: [] };
 
 function mockAll(overrides: {
   prep?: typeof emptyPrep;
-  content?: { materialSections: unknown[]; problems: unknown[] };
+  content?: { materialSections: unknown[]; problems: unknown[]; keywordCount?: number };
   lessons?: unknown[];
 } = {}) {
   (loadUnitPrep as ReturnType<typeof vi.fn>).mockResolvedValue(overrides.prep ?? emptyPrep);
   (loadUnitEligibleContent as ReturnType<typeof vi.fn>).mockResolvedValue(
-    overrides.content ?? { materialSections: [], problems: [] }
+    overrides.content ?? { materialSections: [], problems: [], keywordCount: 2 }
   );
   (listBookedLessonsForUnit as ReturnType<typeof vi.fn>).mockResolvedValue(overrides.lessons ?? []);
 }
@@ -65,8 +65,26 @@ describe("UnitPrepPanel — 예약 없이 회차를 준비한다", () => {
   it("준비 자료 없음·공개된 문제 없음을 각각 구분해 알려준다", async () => {
     renderPanel();
     await waitFor(() => expect(screen.getByText(/아직 담은 자료가 없습니다/)).toBeInTheDocument());
-    expect(screen.getByText(/공개된 문제가 없습니다/)).toBeInTheDocument();
+    expect(screen.getByText(/확정된 문제가 없습니다/)).toBeInTheDocument();
     expect(screen.getByText(/공개 교재가 없습니다/)).toBeInTheDocument();
+  });
+
+  // 후보가 비는 원인은 둘이고, 선생님이 할 일이 다르다. 같은 문구로 뭉뚱그리면
+  // "왜 아무것도 못 고르지"에서 멈춘다 — Preview UAT의 '선택 실패'가 이것이었다.
+  it("키워드가 없어서 비었으면 키워드를 지정하라고 알려준다", async () => {
+    mockAll({ content: { materialSections: [], problems: [], keywordCount: 0 } });
+    renderPanel();
+    await waitFor(() =>
+      expect(screen.getAllByText(/이 회차에 아직 키워드가 없습니다/).length).toBeGreaterThan(0)
+    );
+    expect(screen.queryByText(/공개 교재가 없습니다/)).not.toBeInTheDocument();
+  });
+
+  it("키워드는 있는데 공개된 콘텐츠가 없으면 그렇게 알려준다", async () => {
+    mockAll({ content: { materialSections: [], problems: [], keywordCount: 3 } });
+    renderPanel();
+    await waitFor(() => expect(screen.getByText(/공개 교재가 없습니다/)).toBeInTheDocument());
+    expect(screen.queryByText(/아직 키워드가 없습니다/)).not.toBeInTheDocument();
   });
 
   it("목표를 적고 포커스를 벗어나면 저장한다", async () => {

@@ -41,6 +41,12 @@ export default function UnitPrepPanel({
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
 
+  // 후보가 비었을 때 원인을 구분한다. 회차에 키워드가 없으면 담을 수 있는 게
+  // 생길 수가 없고, 선생님이 할 일은 "기다리기"가 아니라 "키워드 지정"이다.
+  const noKeyword = eligible.keywordCount === 0;
+  const noKeywordNotice =
+    "이 회차에 아직 키워드가 없습니다. 커리큘럼에서 이 회차에 키워드를 지정하면 담을 수 있는 교재와 문제가 나타납니다.";
+
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
@@ -164,7 +170,7 @@ export default function UnitPrepPanel({
               교재 후보
             </div>
             {eligible.materialSections.length === 0 ? (
-              <p className="text-[12.5px] text-grey-500">이 회차의 키워드로 찾은 공개 교재가 없습니다.</p>
+              <p className="text-[12.5px] text-grey-500">{noKeyword ? noKeywordNotice : "이 회차의 키워드로 찾은 공개 교재가 없습니다. 교재가 공개되면 여기에 나타납니다."}</p>
             ) : (
               eligible.materialSections.map((s) => (
                 <div key={s.sectionId} className="flex items-center justify-between text-[12.5px] py-1.5">
@@ -186,7 +192,7 @@ export default function UnitPrepPanel({
               문제 후보
             </div>
             {eligible.problems.length === 0 ? (
-              <p className="text-[12.5px] text-grey-500">이 회차의 키워드로 공개된 문제가 없습니다.</p>
+              <p className="text-[12.5px] text-grey-500">{noKeyword ? noKeywordNotice : "이 회차의 키워드로 확정된 문제가 없습니다. 문제가 확정되면 여기에 나타납니다."}</p>
             ) : (
               eligible.problems.map((p) => (
                 <div key={p.problemId} className="flex items-center justify-between text-[12.5px] py-1.5">
