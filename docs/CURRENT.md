@@ -1,5 +1,41 @@
 # ALTON — 현재 상태 (2026-09-11 기준)
 
+> **2026-09-12 — P4-2: 지급 예정일 저장 + Wise 자동 송금 구조 완료.**
+> 커밋 `e454240`(+ 배포 수정 1건), Preview `https://alton-861uvoqcg-alton7.vercel.app`.
+> 마이그레이션 2건(`20261288000000`, `20261289000000`)을 공유 non-prod에 적용
+> 완료(pending 0). **Production 무변경, `real_disbursement_enabled()` = false 유지.**
+> 상세는 `docs/2026-09-12-p4-2-teacher-settlement-plan.md` "5차" 절.
+> 1. **송금 제공자는 Wise 전용**. Mercury는 법인 계좌·운영비·자금 관리용이며 교사
+>    정산의 자동/수동 송금·대사·웹훅 경로에 넣지 않는다. 앱에
+>    `TEACHER_PAYOUT_PROVIDER` 상수만 두고 **제공자를 고르는 입력을 없앴다**
+>    (`dispatchPayoutBatchNow()`도 provider 파라미터를 받지 않는다). 자동·수동
+>    실행이 같은 서비스·같은 `dispatch_idempotency_key`를 쓴다.
+> 2. **지급 예정일은 저장값**(`payout_batches.scheduled_payout_date`). 승인 시점에
+>    확정되며 화면에서 재계산하지 않는다 — 규칙이 바뀌어도 과거 건이 안 바뀐다.
+>    규칙: 그 달 10일 03:00 UTC 이전 승인 → 그 달 10일, 이후 → 다음 달 10일.
+>    변경은 관리자만·사유 필수, 전후 날짜·사유·처리자·시각을
+>    `payout_scheduled_date_events`(INSERT-only)에 기록.
+> 3. **자동 송금**: cron `0 3 10 * *`(UTC). 대상 = 승인됨 + 전역 스위치 + 묶음별
+>    스위치 + 예정일 도래 + 외부 송금 미기록. **게이트가 닫혀 있으면 상태도
+>    멱등키도 만들지 않고** 건너뛴 사실만 `payout_auto_dispatch_runs`에 남긴다.
+> 4. **외부 은행 송금 기록은 게이트와 분리**(제품 오너 확정) — Wise API를 부르지
+>    않으므로 게이트와 무관하게 허용하되 조건을 좁게 강제: 승인된 묶음만, **금액이
+>    승인된 최종 송금액과 정확히 일치**(다르면 조정·재승인 유도), 통화 일치,
+>    완료일·은행 참조값 필수, 처리자·시각 기록, 기록 뒤 지급 완료 +
+>    `unique(batch_id)`로 재기록 차단 + 금액·예정일 변경 차단.
+> 5. **기존 R10 보호장치와 충돌한 3곳에 좁은 예외**: paid 전이 가드
+>    (`provider_pending → paid`만 허용)에 외부 기록 경로 예외, paid 근거 CHECK를
+>    "제공자 확인 **또는** 외부 송금 기록"으로 확장(근거 없는 paid는 여전히 불가),
+>    `payout_items.external_transfer_recorded` 플래그 추가.
+> **실제 버그 1건 수정**: `scheduled_payout_date`를 `new Date()`로 파싱해 로컬
+> 시간대에서 하루 밀려 표시되던 문제(10월 10일 → 10월 9일).
+> **검증 방식 교정**: 로컬 `tsc --noEmit` 출력에서 `.test.` 줄을 걸러보던 습관 때문에
+> 테스트 픽스처 타입 오류를 놓쳐 배포가 한 번 실패했다. **앞으로 tsc 출력을 걸러내지
+> 않는다**(Vercel 빌드는 테스트 파일까지 타입체크한다).
+> **검증**: `db reset` 후 직렬 전체 **284 files / 2029 tests 통과**(292.3s).
+> **다음**: 실제 Wise API 클라이언트·웹훅·대사, `real_disbursement_enabled()` 활성화,
+> `CRON_SECRET` 설정(두 크론 모두 미설정 상태라 아직 동작하지 않음).
+
 > **2026-09-12 — P4-2 Preview UAT 완료 + 피드백 반영.** 제품 오너가 Preview에서
 > 전 기능 동작을 확인("기능들은 다 잘 작동해")하고 남긴 피드백 11건을 반영했다.
 > 커밋 `83a717e`, Preview `https://alton-is51visnx-alton7.vercel.app`.
