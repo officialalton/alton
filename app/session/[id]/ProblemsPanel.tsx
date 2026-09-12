@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { SessionProblem } from "./session-problem-data";
 import type { ProblemWorkBoard as Board } from "./problem-work-actions";
 import { openProblemWork, submitProblemWork, loadProblemWorkBoard, listProblemAttempts } from "./problem-work-actions";
-import ProblemWorkBoardCanvas from "./ProblemWorkBoard";
+import ProblemWorkBoardCanvas, { type ProblemBoardHandle } from "./ProblemWorkBoard";
+import LearningText from "./LearningText";
 
 const DIFFICULTY_LABEL: Record<string, string> = {
   easy: "쉬움",
@@ -35,6 +36,7 @@ export default function ProblemsPanel({
   const [attempts, setAttempts] = useState<{ workId: string; attemptNo: number; submitted: boolean }[]>([]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const boardRef = useRef<ProblemBoardHandle | null>(null);
 
   const isStudent = viewerRole === "student";
   const isTeacher = viewerRole === "teacher";
@@ -77,7 +79,7 @@ export default function ProblemsPanel({
   }
 
   return (
-    <div className="max-w-[760px] mx-auto px-5 sm:px-8 py-6">
+    <div className="max-w-[760px] mx-auto px-5 sm:px-8 py-7">
       {error && <p className="text-[12.5px] text-red mb-3">{error}</p>}
 
       {problems.map((p) => {
@@ -85,10 +87,10 @@ export default function ProblemsPanel({
         return (
           <article
             key={p.problemId}
-            className="border-[1.5px] border-grey-200 rounded-2xl px-5 sm:px-6 py-5 mb-4"
+            className="border-[1.5px] border-grey-200 rounded-2xl px-5 sm:px-7 py-6 mb-5"
           >
-            <header className="flex flex-wrap items-center gap-2 mb-3">
-              <span className="text-[13px] font-extrabold text-ink">문제 {p.number}</span>
+            <header className="flex flex-wrap items-center gap-2 mb-4">
+              <span className="text-[14px] font-extrabold text-ink">문제 {p.number}</span>
               {p.difficulty && (
                 <span className="text-[10.5px] font-bold text-grey-500 border border-grey-200 rounded-full px-2 py-0.5">
                   {DIFFICULTY_LABEL[p.difficulty] ?? p.difficulty}
@@ -103,14 +105,15 @@ export default function ProblemsPanel({
                 {p.solved ? "제출함" : p.attempts > 0 ? "푸는 중" : "아직 풀지 않음"}
               </span>
               {p.attempts > 1 && (
-                <span className="text-[10.5px] font-semibold text-grey-500">{p.attempts}번 풀었음</span>
+                <span className="text-[10.5px] font-semibold text-grey-500">{p.attempts}번 풀어봄</span>
               )}
             </header>
 
             {p.passage ? (
-              <div className="text-[15px] leading-[1.75] text-ink whitespace-pre-wrap mb-4">
-                {p.passage}
-              </div>
+              <LearningText
+                text={p.passage}
+                className="learning-body text-[15px] sm:text-[16px] leading-[1.8] text-ink mb-5"
+              />
             ) : (
               <p className="text-[13px] text-grey-500 mb-4">지문이 없는 문제입니다.</p>
             )}
@@ -121,12 +124,12 @@ export default function ProblemsPanel({
                   <li
                     key={i}
                     className={
-                      "text-[14px] leading-[1.7] py-1.5 px-3 rounded-lg mb-1 " +
+                      "text-[14.5px] leading-[1.75] py-2 px-3.5 rounded-lg mb-1.5 " +
                       (p.correctIndex === i ? "bg-green/10 font-bold text-ink" : "text-ink")
                     }
                   >
                     <span className="text-grey-500 mr-2">{i + 1}</span>
-                    {opt}
+                    <LearningText text={opt} className="learning-body inline" />
                     {p.correctIndex === i && (
                       <span className="ml-2 text-[11px] font-bold text-green">정답</span>
                     )}
@@ -140,7 +143,10 @@ export default function ProblemsPanel({
                 <div className="text-[10.5px] font-bold text-grey-300 uppercase tracking-wide mb-1">
                   해설
                 </div>
-                <p className="text-[13.5px] leading-[1.7] text-ink whitespace-pre-wrap">{p.explanation}</p>
+                <LearningText
+                  text={p.explanation}
+                  className="learning-body text-[13.5px] leading-[1.75] text-ink"
+                />
               </div>
             )}
 
@@ -171,8 +177,24 @@ export default function ProblemsPanel({
                     <button
                       disabled={busy}
                       onClick={async () => {
-                        await submitProblemWork(board.workId);
-                        setBoard({ ...board, submitted: true });
+                        setBusy(true);
+                        setError(null);
+                        try {
+                          // 제출 전에 아직 저장되지 않은 획을 먼저 저장한다.
+                          // 저장에 실패하면 제출하지 않는다 — 저장 안 된 풀이가
+                          // "제출 완료"로 보이면 안 된다.
+                          const saved = await boardRef.current?.flush();
+                          if (saved === false) {
+                            setError("필기를 저장하지 못해 제출하지 않았습니다. 연결을 확인한 뒤 다시 제출하세요.");
+                            return;
+                          }
+                          await submitProblemWork(board.workId);
+                          setBoard({ ...board, submitted: true });
+                        } catch (e) {
+                          setError(e instanceof Error ? e.message : "제출하지 못했습니다.");
+                        } finally {
+                          setBusy(false);
+                        }
                       }}
                       className="text-[12.5px] font-bold px-4 py-2 rounded-lg bg-ink text-white disabled:opacity-50"
                     >
@@ -183,12 +205,21 @@ export default function ProblemsPanel({
               )}
             </div>
 
-            {isOpen && board && (
+            {isOpen && board && board.workId === "" && (
+              <p className="mt-4 text-[12.5px] text-grey-500">
+                학생이 아직 이 문제를 풀기 시작하지 않았습니다. 학생이 풀이판을 열면
+                여기에서 볼 수 있고, 그때 피드백을 남길 수 있습니다.
+              </p>
+            )}
+
+            {isOpen && board && board.workId !== "" && (
               <div className="mt-4">
                 {attempts.length > 1 && (
                   <div className="flex flex-wrap items-center gap-1.5 mb-2">
+                    {/* "회차"는 커리큘럼 회차를 가리키는 말이라 여기서는 쓰지
+                        않는다 — 여기 숫자는 같은 문제를 몇 번째로 푸는지다. */}
                     <span className="text-[11px] font-bold text-grey-300 uppercase tracking-wide">
-                      지난 풀이
+                      이전 풀이
                     </span>
                     {attempts.map((a) => (
                       <button
@@ -202,12 +233,13 @@ export default function ProblemsPanel({
                             : "border-grey-200 text-grey-500")
                         }
                       >
-                        {a.attemptNo}회
+                        {a.attemptNo}번째
                       </button>
                     ))}
                   </div>
                 )}
                 <ProblemWorkBoardCanvas
+                  ref={boardRef}
                   key={board.workId}
                   sessionId={sessionId}
                   problemId={p.problemId}

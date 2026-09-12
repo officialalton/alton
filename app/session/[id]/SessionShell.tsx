@@ -9,6 +9,8 @@ import {
 } from "@/lib/session-view";
 import MaterialTab from "./MaterialTab";
 import ProblemsPanel from "./ProblemsPanel";
+import LessonContextHeader from "./LessonContextHeader";
+import type { SessionLessonContext } from "./session-context-data";
 import type { MaterialData } from "./material-data";
 import type { SessionProblem } from "./session-problem-data";
 import VocabTab from "./VocabTab";
@@ -82,6 +84,7 @@ export default function SessionShell({
   initialAnnotationStrokes,
   privateMaterialStrokes = [],
   sessionProblems = [],
+  lessonContext = { unitTitle: null, goal: null, supplementTitles: [] },
   currentUserId,
   homeworkKeywordOptions = [],
   homeworkStatusItems = [],
@@ -121,6 +124,8 @@ export default function SessionShell({
   privateMaterialStrokes?: StrokePayload[];
   /** 수업 시작 시 고정된 문제들(고정된 버전의 내용). */
   sessionProblems?: SessionProblem[];
+  /** 이 수업이 커리큘럼의 어느 회차이고 그 목표가 무엇인지. */
+  lessonContext?: SessionLessonContext;
   currentUserId: string;
   // R9(레슨 준비 Task 4) — v3 세션에서 과제 구성(composeHomeworkFromSession) UI가
   // 고를 수 있는 키워드 후보. legacy 세션에는 항상 빈 배열이 넘어온다(그 세션엔
@@ -244,11 +249,11 @@ export default function SessionShell({
           >
             ← 나가기
           </button>
-          <div>
-            <div className="text-[15px] font-bold text-ink">{unitTitle}</div>
-            <div className="text-[12.5px] text-grey-500">
-              {subjectName} · {studentName} · {sessionNumber}회차
-            </div>
+          {/* P2/P3 5단계 — 학생·과목·회차·목표는 바로 아래 LessonContextHeader가
+              한 번만 보여준다. 여기서 같은 내용을 또 쓰면 좁은 화면에서 두 줄이
+              겹쳐 읽기 어려워진다. 상단 바에는 나가기와 탭만 남긴다. */}
+          <div className="text-[13px] font-bold text-ink whitespace-nowrap">
+            {sessionNumber}회차
           </div>
         </div>
 
@@ -436,10 +441,20 @@ export default function SessionShell({
         </div>
       )}
 
+      {/* P2/P3 5단계 — 커리큘럼 → 준비 → 수업 → 복습이 같은 말로 이어지도록,
+          수업 화면에서도 "어느 회차이고 목표가 무엇인지"를 먼저 보여준다. */}
+      <LessonContextHeader
+        studentName={studentName}
+        subjectName={subjectName}
+        context={lessonContext}
+        stateLabel={state === "live" ? "수업 중" : state === "completed" ? "지난 수업" : "수업 전"}
+      />
+
       {!writesEnabled && (
         <div className="px-6 py-2 text-[12.5px] text-amber-800 bg-amber-50 border-b border-amber-200">
-          이 수업에서는 화이트보드만 저장할 수 있어요. 교재·과제·단어장은
-          열람만 가능합니다.
+          {/* 기술적 배경(레거시 테이블 참조)이 아니라 "지금 무엇을 할 수
+              있는가"로 쓴다. */}
+          이 수업에서는 필기만 저장됩니다. 교재·과제·단어장은 읽기만 할 수 있어요.
         </div>
       )}
       {activeTab === "material" ? (

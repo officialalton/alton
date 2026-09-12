@@ -5,13 +5,14 @@ import {
   computeSessionViewState,
 } from "@/lib/auth";
 import SessionShell from "./SessionShell";
-import { loadMaterialData } from "./material-data";
+import { loadMaterialData, loadPinnedMaterialData } from "./material-data";
 import { loadVocabWords } from "./vocab-data";
 import { loadHomeworkItems } from "./homework-data";
 import { loadDocLinks, parseWhiteboardStrokes } from "./scratchpad-data";
 import { loadProblemLog } from "./problemlog-data";
 import { loadNormalizedSession } from "./session-source-data";
 import { loadSessionProblems } from "./session-problem-data";
+import { loadSessionLessonContext } from "./session-context-data";
 import {
   replayAnnotationEvents,
   loadMyPrivateMaterialStrokes,
@@ -52,12 +53,11 @@ export default async function SessionPage({
     session.durationMinutes
   );
 
-  const material = await loadMaterialData(
-    supabase,
-    session.curriculumDocId,
-    session.id,
-    session.studentId
-  );
+  // P2/P3 5단계 — v3 수업은 "준비해서 고정한 교재"를 먼저 보여준다. 고정된
+  // 교재가 없는 수업(준비 없이 시작했거나 레거시)만 기존 경로로 내려간다.
+  const material =
+    (session.source === "v3" ? await loadPinnedMaterialData(supabase, session.id) : null) ??
+    (await loadMaterialData(supabase, session.curriculumDocId, session.id, session.studentId));
 
   const vocabWords = await loadVocabWords(supabase, session.studentId);
   const homeworkItems = await loadHomeworkItems(supabase, session.id);
@@ -77,6 +77,11 @@ export default async function SessionPage({
   // R9(레슨 준비 Task 4) — v3 세션에서만 과제 구성 UI가 필요한 키워드 후보를
   // 미리 불러온다(legacy 세션엔 session_content_manifest가 없으므로 항상 빈
   // 배열).
+  const lessonContext =
+    session.source === "v3"
+      ? await loadSessionLessonContext(supabase, session.id)
+      : { unitTitle: null, goal: null, supplementTitles: [] };
+
   // P3 4단계 — 수업 시작 시 고정된 문제들. 정답·해설은 볼 자격이 있을 때만
   // 채워진다(학생은 자기 풀이 제출 뒤, 보호자는 자녀에게 열리는 시점과 동일).
   const sessionProblems =
@@ -133,6 +138,7 @@ export default async function SessionPage({
       initialAnnotationStrokes={initialAnnotationStrokes}
       privateMaterialStrokes={privateMaterialStrokes}
       sessionProblems={sessionProblems}
+      lessonContext={lessonContext}
       currentUserId={user.id}
       homeworkKeywordOptions={homeworkKeywordOptions}
       homeworkStatusItems={homeworkStatusItems}

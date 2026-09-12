@@ -45,10 +45,45 @@ export async function openProblemWork(params: {
   const isOwner = user.id === params.studentId;
   const isTeacher = user.id === session.teacher_id;
   if (!isOwner && !isTeacher) {
-    throw new Error("이 풀이판을 열 권한이 없습니다.");
+    // 보호자는 연결된 자녀의 풀이를 읽기 전용으로 본다(2026-09-12 정책).
+    // 연결 판단은 DB에 맡긴다 — 여기서 가족 관계를 다시 계산하지 않는다.
+    const { data: guardianOk } = await supabase.rpc("is_session_guardian_v3", {
+      p_session_id: params.sessionId,
+    });
+    if (!guardianOk) throw new Error("이 풀이판을 열 권한이 없습니다.");
   }
   // 재풀이는 학생 본인만 시작한다 — 교사가 학생의 풀이 회차를 늘리지 않는다.
   const newAttempt = Boolean(params.newAttempt) && isOwner;
+
+  // 교사가 풀이판을 "보려고" 열었을 뿐인데 학생의 풀이 기록이 생기면, 학생
+  // 화면에 아직 손대지도 않은 문제가 "푸는 중"으로 보인다. 교사는 이미 있는
+  // 판만 연다 — 없으면 빈 판을 돌려주고 아무것도 만들지 않는다.
+  if (!isOwner) {
+    const { data: existing } = await supabase
+      .from("session_problem_work")
+      .select("id, attempt_no, submitted_at")
+      .eq("session_id", params.sessionId)
+      .eq("student_id", params.studentId)
+      .eq("problem_id", params.problemId)
+      .order("attempt_no", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+    if (!existing) {
+      return {
+        workId: "",
+        attemptNo: 0,
+        submitted: false,
+        studentStrokes: [],
+        feedbackStrokes: [],
+      };
+    }
+    return {
+      workId: existing.id as string,
+      attemptNo: existing.attempt_no as number,
+      submitted: Boolean(existing.submitted_at),
+      ...(await loadBoardStrokes(supabase, existing.id as string)),
+    };
+  }
 
   const { data: workId, error } = await admin.rpc("start_problem_work", {
     p_session_id: params.sessionId,

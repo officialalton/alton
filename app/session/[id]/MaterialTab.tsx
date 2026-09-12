@@ -88,9 +88,11 @@ export default function MaterialTab({
   }
 
   return (
-    <div className="grid grid-cols-[220px_1fr]">
-      <nav className="border-r border-grey-200 p-4 sticky top-0 self-start h-[calc(100vh-56px)] overflow-y-auto">
-        <div className="text-[10.5px] font-extrabold text-grey-300 uppercase tracking-wider px-2 mb-1">
+    // 좁은 화면에서는 목차를 본문 위로 접어 올린다. 예전에는 220px 고정
+    // 사이드바가 그대로 남아 본문이 화면 밖으로 밀려 읽을 수 없었다.
+    <div className="md:grid md:grid-cols-[220px_1fr]">
+      <nav className="border-b md:border-b-0 md:border-r border-grey-200 p-4 md:sticky md:top-0 md:self-start md:h-[calc(100vh-56px)] md:overflow-y-auto flex md:block gap-1.5 overflow-x-auto">
+        <div className="hidden md:block text-[10.5px] font-extrabold text-grey-300 uppercase tracking-wider px-2 mb-1">
           교재 목차
         </div>
         {material.sections.map((s) => (
@@ -98,7 +100,7 @@ export default function MaterialTab({
             key={s.id}
             onClick={() => scrollToSection(s.id)}
             className={
-              "w-full text-left flex items-center gap-2 px-2.5 py-2 rounded-lg text-[13px] mb-0.5 " +
+              "md:w-full text-left flex items-center gap-2 px-2.5 py-2 rounded-lg text-[13px] mb-0.5 whitespace-nowrap md:whitespace-normal flex-shrink-0 " +
               (activeSectionId === s.id
                 ? "bg-red-bg text-red font-bold"
                 : "text-grey-500 hover:bg-grey-100")
@@ -120,7 +122,7 @@ export default function MaterialTab({
         ))}
       </nav>
 
-      <div className="max-w-[720px] px-8 py-8">
+      <div className="max-w-[760px] mx-auto px-5 sm:px-8 py-8">
         {canUsePrivate && (
           <div className="flex items-center gap-1.5 mb-3">
             {(
@@ -159,7 +161,7 @@ export default function MaterialTab({
             {material.sections.map((s) => (
               <div key={s.id} id={`sec-${s.id}`} className="mb-11 scroll-mt-[72px]">
                 <div className="flex items-start justify-between gap-3 mb-3">
-                  <h2 className="text-[22px] font-extrabold text-[#0b2545]">
+                  <h2 className="text-[21px] sm:text-[23px] font-extrabold text-[#0b2545] leading-tight">
                     {s.title}
                   </h2>
                   {viewerRole === "teacher" && (
@@ -170,8 +172,11 @@ export default function MaterialTab({
                     />
                   )}
                 </div>
+                {/* P2/P3 5단계 — 읽기 영역. learning-body가 그림·표·수식이
+                    잘리거나 겹치지 않도록 처리한다(app/globals.css). 본문 HTML은
+                    저장 시점에 이미 sanitize된 것이다(lib/sanitize-doc-html.ts). */}
                 <div
-                  className="text-[14px] leading-[1.75] text-ink [&_b]:font-bold"
+                  className="learning-body text-[15px] sm:text-[16px] leading-[1.85] text-ink [&_b]:font-bold"
                   dangerouslySetInnerHTML={{ __html: s.body }}
                 />
                 {s.teachingTip && tipsVisible && viewerRole === "teacher" && (

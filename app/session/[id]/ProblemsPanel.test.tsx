@@ -3,6 +3,7 @@ import { describe, expect, it, vi, beforeEach } from "vitest";
 import ProblemsPanel from "./ProblemsPanel";
 import type { SessionProblem } from "./session-problem-data";
 import {
+  appendProblemWorkStrokes,
   openProblemWork,
   submitProblemWork,
   listProblemAttempts,
@@ -127,7 +128,7 @@ describe("ProblemsPanel — 문제를 보면서 풀이판을 연다", () => {
     );
   });
 
-  it("지난 풀이가 여러 개면 회차를 골라 볼 수 있다", async () => {
+  it("이전 풀이가 여러 개면 골라서 다시 볼 수 있다", async () => {
     (listProblemAttempts as ReturnType<typeof vi.fn>).mockResolvedValue([
       { workId: "w1", attemptNo: 1, submitted: true },
       { workId: "w2", attemptNo: 2, submitted: false },
@@ -141,8 +142,40 @@ describe("ProblemsPanel — 문제를 보면서 풀이판을 연다", () => {
     });
     renderPanel([unsolved]);
     fireEvent.click(screen.getByText("✏️ 풀이판 열기"));
-    fireEvent.click(await screen.findByText("1회"));
+    fireEvent.click(await screen.findByText("1번째"));
     await waitFor(() => expect(loadProblemWorkBoard).toHaveBeenCalledWith("w1"));
+  });
+
+  it("제출 전에 저장하지 못하면 제출하지 않고 이유를 알려준다", async () => {
+    (appendProblemWorkStrokes as ReturnType<typeof vi.fn>).mockRejectedValue(new Error("네트워크"));
+    renderPanel([unsolved]);
+    fireEvent.click(screen.getByText("✏️ 풀이판 열기"));
+    const canvas = await screen.findByTestId("problem-work-canvas");
+    fireEvent.pointerDown(canvas, { clientX: 5, clientY: 5 });
+    fireEvent.pointerMove(canvas, { clientX: 40, clientY: 40 });
+    fireEvent.pointerUp(canvas);
+
+    fireEvent.click(screen.getByText("풀이 제출"));
+    await waitFor(() =>
+      expect(screen.getByText(/필기를 저장하지 못해 제출하지 않았습니다/)).toBeInTheDocument()
+    );
+    expect(submitProblemWork).not.toHaveBeenCalled();
+    // 제출 버튼이 그대로 남아 다시 시도할 수 있다.
+    expect(screen.getByText("풀이 제출")).toBeInTheDocument();
+  });
+
+  it("제출하면 아직 저장되지 않은 필기를 먼저 저장한다", async () => {
+    (appendProblemWorkStrokes as ReturnType<typeof vi.fn>).mockResolvedValue(undefined);
+    renderPanel([unsolved]);
+    fireEvent.click(screen.getByText("✏️ 풀이판 열기"));
+    const canvas = await screen.findByTestId("problem-work-canvas");
+    fireEvent.pointerDown(canvas, { clientX: 5, clientY: 5 });
+    fireEvent.pointerMove(canvas, { clientX: 40, clientY: 40 });
+    fireEvent.pointerUp(canvas);
+
+    fireEvent.click(screen.getByText("풀이 제출"));
+    await waitFor(() => expect(appendProblemWorkStrokes).toHaveBeenCalled());
+    await waitFor(() => expect(submitProblemWork).toHaveBeenCalledWith("w1"));
   });
 
   it("학생이 풀이를 제출하면 서버에 기록한다", async () => {

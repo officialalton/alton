@@ -6,6 +6,7 @@ import { createClient } from "@/utils/supabase/client";
 import { saveCanvasStrokes } from "./canvas-actions";
 import { appendScopedStrokeEvents } from "./annotation-events-actions";
 import type { CanvasStroke } from "./material-data";
+import { annotationScale, pointerToCanvas } from "./annotation-scale";
 
 const COLORS = ["#1A1A1A", "#C8102E", "#1B6FB0"];
 
@@ -58,21 +59,27 @@ export default function CanvasOverlay({
   const [saved, setSaved] = useState(false);
   const [saveError, setSaveError] = useState(false);
 
+  // 필기는 교재 본문 위에 얹힌다. 창 크기나 확대 배율이 바뀌면 본문이 다시
+  // 흐르고 캔버스 너비도 달라지므로, 그릴 때의 기준 너비(w)로 환산해서 다시
+  // 그린다 — 그래야 필기가 원래 문장 위에 그대로 남는다. w가 없는 과거 필기는
+  // 지금 너비에서 그렸다고 보고 그대로 그린다(기존 동작 유지).
   const drawSegment = useCallback((seg: CanvasStroke) => {
-    const ctx = canvasRef.current?.getContext("2d");
-    if (!ctx) return;
+    const canvas = canvasRef.current;
+    const ctx = canvas?.getContext("2d");
+    if (!canvas || !ctx) return;
+    const scale = annotationScale(canvas.width, seg.w);
     ctx.lineCap = "round";
     if (seg.tool === "eraser") {
       ctx.globalCompositeOperation = "destination-out";
-      ctx.lineWidth = 22;
+      ctx.lineWidth = 22 * scale;
     } else {
       ctx.globalCompositeOperation = "source-over";
       ctx.strokeStyle = seg.color;
-      ctx.lineWidth = 2.5;
+      ctx.lineWidth = 2.5 * scale;
     }
     ctx.beginPath();
-    ctx.moveTo(seg.x0, seg.y0);
-    ctx.lineTo(seg.x1, seg.y1);
+    ctx.moveTo(seg.x0 * scale, seg.y0 * scale);
+    ctx.lineTo(seg.x1 * scale, seg.y1 * scale);
     ctx.stroke();
   }, []);
 
@@ -94,6 +101,8 @@ export default function CanvasOverlay({
       canvas.height = height;
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
+      // 크기를 바꾸면 캔버스는 비워진다. 기준 너비로 환산해 전부 다시 그린다.
+      canvas.getContext("2d")?.clearRect(0, 0, width, height);
       strokesRef.current.forEach(drawSegment);
     }
   }, [drawSegment]);
@@ -158,8 +167,10 @@ export default function CanvasOverlay({
   }
 
   function pos(e: React.PointerEvent<HTMLCanvasElement>) {
-    const rect = canvasRef.current!.getBoundingClientRect();
-    return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    const canvas = canvasRef.current!;
+    const rect = canvas.getBoundingClientRect();
+    // 화면에 그려진 크기와 캔버스 내부 픽셀 크기가 다를 수 있다(확대·축소).
+    return pointerToCanvas(e.clientX, e.clientY, rect, canvas);
   }
 
   function handlePointerDown(e: React.PointerEvent<HTMLCanvasElement>) {
@@ -178,6 +189,7 @@ export default function CanvasOverlay({
       y1: p.y,
       color,
       tool,
+      w: canvasRef.current?.width,
     };
     drawSegment(seg);
     strokesRef.current.push(seg);
