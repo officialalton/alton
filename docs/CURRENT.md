@@ -2,7 +2,8 @@
 
 > **2026-09-12 — P4-2(교사 정산 흐름): 구현 완료, 공유 non-prod 적용 완료,
 > Preview UAT 대기.** 커밋 `222e32b`(`preview/m4-integration-verification`),
-> Preview `https://alton-qyixf1uoz-alton7.vercel.app`. 마이그레이션
+> Preview `https://alton-a4iyl6od4-alton7.vercel.app`(2026-09-12 상태 4단계
+> 정리 반영, 커밋 `fffe887`). 마이그레이션
 > `20261284000000`은 dry-run으로 적용 대기 1건 확인 후 공유 non-prod
 > (`worpsqwqgnspddnrtnvq`)에 push, 적용 후 pending 0 확인. **Production 무변경.** 착수 정리는 `docs/2026-09-12-p4-2-teacher-settlement-plan.md`.
 > 마이그레이션 1건 추가(`20261284000000_p4_2_teacher_payout_account_and_documents.sql`,
