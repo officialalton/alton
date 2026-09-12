@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { SessionViewViewer } from "@/lib/session-view";
-import type { MaterialData, MaterialProblem } from "./material-data";
+import type { MaterialData, MaterialProblem, CanvasStroke } from "./material-data";
 import {
   submitEssayAttempt,
   submitMathAttempt,
@@ -13,7 +13,7 @@ import {
   markProblemUsedInLesson,
 } from "./session-content-use-actions";
 import MathCanvas from "./MathCanvas";
-import CanvasOverlay from "./CanvasOverlay";
+import CanvasOverlay, { type CanvasScope } from "./CanvasOverlay";
 import VocabClickLayer from "./VocabClickLayer";
 import AutoGrowTextarea from "./AutoGrowTextarea";
 
@@ -29,13 +29,22 @@ export default function MaterialTab({
   material,
   viewerRole,
   tipsVisible,
+  privateStrokes = [],
 }: {
   sessionId: string;
   studentId: string;
   material: MaterialData;
   viewerRole: SessionViewViewer;
   tipsVisible: boolean;
+  /** 학생 본인만 보는 교재 필기. 다른 역할에는 서버가 아예 내려주지 않는다. */
+  privateStrokes?: CanvasStroke[];
 }) {
+  // P3 3단계 — 원본 교재는 그대로 두고 필기 레이어만 바꿔 끼운다. 학생은
+  // "함께 보는 필기"와 "나만 보는 필기"를 오갈 수 있고, 교사에게는 공용
+  // 필기 하나뿐이다(학생 개인 필기는 교사에게 존재 자체가 보이지 않는다).
+  const [scope, setScope] = useState<CanvasScope>("teacher_shared");
+  const canUsePrivate = viewerRole === "student";
+  const activeScope: CanvasScope = canUsePrivate ? scope : "teacher_shared";
   const [activeSectionId, setActiveSectionId] = useState<string | null>(
     material?.sections[0]?.id ?? null
   );
@@ -112,11 +121,35 @@ export default function MaterialTab({
       </nav>
 
       <div className="max-w-[720px] px-8 py-8">
+        {canUsePrivate && (
+          <div className="flex items-center gap-1.5 mb-3">
+            {(
+              [
+                ["teacher_shared", "함께 보는 필기"],
+                ["student_private", "나만 보는 필기"],
+              ] as const
+            ).map(([value, label]) => (
+              <button
+                key={value}
+                onClick={() => setScope(value)}
+                aria-pressed={activeScope === value}
+                className={
+                  "text-[11.5px] font-bold px-3 py-1.5 rounded-full border-[1.5px] " +
+                  (activeScope === value ? "bg-ink text-white border-ink" : "border-grey-200 text-grey-500")
+                }
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        )}
         <CanvasOverlay
+          key={activeScope}
           sessionId={sessionId}
           curriculumDocId={material.docId}
-          initialStrokes={material.canvasStrokes}
+          initialStrokes={activeScope === "student_private" ? privateStrokes : material.canvasStrokes}
           canDraw={viewerRole === "student" || viewerRole === "teacher"}
+          scope={activeScope}
         >
           <VocabClickLayer
             sessionId={sessionId}

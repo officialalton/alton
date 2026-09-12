@@ -53,7 +53,7 @@ export default function LessonPrepScreen({ context }: { context: SessionPrepCont
           onClick={() => router.push(`/session/${context.sessionId}`)}
           className="mt-3 text-[12.5px] font-bold px-4 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink"
         >
-          수업 화면 열기
+          수업 열기
         </button>
       </div>
 

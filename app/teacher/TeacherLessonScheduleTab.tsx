@@ -307,7 +307,7 @@ export default function TeacherLessonScheduleTab({
             onClick={() => router.push(`/session/${lesson.sessionId}`)}
             className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-grey-100 text-ink"
           >
-            수업 화면
+            수업 열기
           </button>
           {lesson.googleMeetLink && (
             // 2026-09-09(UAT 지적): "수업 시작"은 이미 진행중(live)으로 전환된

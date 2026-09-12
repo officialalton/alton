@@ -34,6 +34,37 @@ export async function appendStrokeEvents(sessionId: string, segments: StrokePayl
   if (error) throw new Error(error.message);
 }
 
+// P3 3단계(제품 오너 피드백 4) — 범위를 지정해 필기를 남긴다. 범위를 주지 않는
+// appendStrokeEvents()는 전부 공용 필기가 되므로, 학생 개인 교재 필기와 문제
+// 풀이 필기는 반드시 이 경로를 쓴다. 주인(owner_student_id)은 서버가 정하므로
+// 클라이언트가 다른 학생 명의로 남길 수 없다.
+export type AnnotationScope =
+  | "teacher_shared"
+  | "student_private"
+  | "problem_student"
+  | "problem_teacher_feedback";
+
+export async function appendScopedStrokeEvents(params: {
+  sessionId: string;
+  segments: StrokePayload[];
+  scope: AnnotationScope;
+  curriculumDocId?: string | null;
+  problemId?: string | null;
+  problemWorkId?: string | null;
+}): Promise<void> {
+  if (params.segments.length === 0) return;
+  const { supabase } = await requireUser();
+  const { error } = await supabase.rpc("append_scoped_stroke_events", {
+    p_session_id: params.sessionId,
+    p_segments: params.segments,
+    p_scope: params.scope,
+    p_curriculum_doc_id: params.curriculumDocId ?? null,
+    p_problem_id: params.problemId ?? null,
+    p_problem_work_id: params.problemWorkId ?? null,
+  });
+  if (error) throw new Error(error.message);
+}
+
 // "전체 지우기"는 삭제가 아니라 이벤트로 기록된다 — 이전 stroke 행은 영구 보존되고,
 // replayAnnotationEvents()를 호출하는 쪽이 clear_all 이후의 stroke만 다시 그리면 된다.
 // 선생님이 아닌 사용자가 호출하면 RLS의 clear_all 전용 정책에서 거부된다
@@ -68,4 +99,25 @@ export async function replayAnnotationEvents(sessionId: string): Promise<Annotat
     payload: row.payload,
     createdAt: row.created_at,
   }));
+}
+
+// P3 3단계 — 학생 본인의 개인 교재 필기만 재구성해 돌려준다. RLS의 범위별
+// 조회 정책(student_private는 owner_student_id = auth.uid())이 실질적인
+// 게이트라, 교사·보호자·관리자가 이 함수를 호출해도 빈 배열이 나온다.
+export async function loadMyPrivateMaterialStrokes(
+  sessionId: string,
+  curriculumDocId: string
+): Promise<StrokePayload[]> {
+  const { supabase, user } = await requireUser();
+  const { data, error } = await supabase
+    .from("session_annotation_events")
+    .select("payload")
+    .eq("session_id", sessionId)
+    .eq("scope", "student_private")
+    .eq("curriculum_doc_id", curriculumDocId)
+    .eq("owner_student_id", user.id)
+    .eq("event_type", "stroke")
+    .order("seq", { ascending: true });
+  if (error) throw new Error(error.message);
+  return (data ?? []).map((row) => row.payload as StrokePayload);
 }

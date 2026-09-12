@@ -59,9 +59,9 @@ describe("LessonPrepScreen", () => {
     await waitFor(() => expect(screen.getByTestId("prep-panel")).toHaveTextContent("sess-1"));
   });
 
-  it("이 수업의 세션뷰로 바로 이동할 수 있다", async () => {
+  it("이 수업의 세션뷰로 바로 이동할 수 있다(화면 진입이며 수업 시작 처리가 아니다)", async () => {
     render(<LessonPrepScreen context={context} />);
-    fireEvent.click(screen.getByText("수업 화면 열기"));
+    fireEvent.click(screen.getByText("수업 열기"));
     expect(pushMock).toHaveBeenCalledWith("/session/sess-1");
   });
 

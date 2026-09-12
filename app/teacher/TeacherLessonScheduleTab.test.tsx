@@ -82,7 +82,7 @@ describe("TeacherLessonScheduleTab", () => {
     expect(screen.getByText(/120분/)).toBeInTheDocument();
   });
 
-  it("2026-09-09(UAT 지적): '수업 화면'은 각 수업 카드의 정확한 sessionId로만 세션뷰에 진입하고, 다른 수업으로 이동하지 않는다", () => {
+  it("2026-09-09(UAT 지적): '수업 열기'는 각 수업 카드의 정확한 sessionId로만 세션뷰에 진입하고, 다른 수업으로 이동하지 않는다", () => {
     const otherLesson: TeacherLessonScheduleItem = {
       ...lesson,
       reservationId: "r2",
@@ -104,7 +104,7 @@ describe("TeacherLessonScheduleTab", () => {
       />
     );
 
-    const prepButtons = screen.getAllByText("수업 화면");
+    const prepButtons = screen.getAllByText("수업 열기");
     expect(prepButtons).toHaveLength(2);
 
     fireEvent.click(prepButtons[1]);

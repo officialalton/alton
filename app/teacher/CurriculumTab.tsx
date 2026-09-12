@@ -286,6 +286,8 @@ function StudentCurriculumOperatingView({
           subjectEnrollmentId={subjectEnrollmentId}
           initial={state.initial}
           library={state.library}
+          studentName={studentName}
+          subjectName={subjectName}
         />
       )}
     </div>

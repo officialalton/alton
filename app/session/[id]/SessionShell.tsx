@@ -76,6 +76,7 @@ export default function SessionShell({
   writesEnabled = true,
   sessionSource,
   initialAnnotationStrokes,
+  privateMaterialStrokes = [],
   currentUserId,
   homeworkKeywordOptions = [],
   homeworkStatusItems = [],
@@ -111,6 +112,8 @@ export default function SessionShell({
   // 읽기전용 강제를 우회해 실제 viewerRole·이벤트 로그 초기 상태를 별도로 넘긴다.
   sessionSource: "legacy" | "v3";
   initialAnnotationStrokes: StrokePayload[];
+  /** 학생 본인만 보는 교재 필기 — 다른 역할에는 빈 배열이 내려온다. */
+  privateMaterialStrokes?: StrokePayload[];
   currentUserId: string;
   // R9(레슨 준비 Task 4) — v3 세션에서 과제 구성(composeHomeworkFromSession) UI가
   // 고를 수 있는 키워드 후보. legacy 세션에는 항상 빈 배열이 넘어온다(그 세션엔
@@ -439,6 +442,7 @@ export default function SessionShell({
           material={material}
           viewerRole={contentViewerRole}
           tipsVisible={tipsVisible}
+          privateStrokes={privateMaterialStrokes}
         />
       ) : activeTab === "vocab" ? (
         <VocabTab

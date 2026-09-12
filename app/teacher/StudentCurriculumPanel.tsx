@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import UnitPrepPanel from "./UnitPrepPanel";
 import {
   ensureActiveOverlay,
   addCanonicalUnit,
@@ -31,11 +32,17 @@ export default function StudentCurriculumPanel({
   subjectEnrollmentId,
   initial,
   library,
+  studentName = "",
+  subjectName = "",
 }: {
   subjectEnrollmentId: string;
   initial: StudentCurriculum;
   library: EligibleLibrary;
+  studentName?: string;
+  subjectName?: string;
 }) {
+  // P2/P3 3단계 — 예약이 없어도 여기서 바로 회차를 준비한다.
+  const [preparingUnit, setPreparingUnit] = useState<{ id: string; title: string } | null>(null);
   const [overlayId, setOverlayId] = useState(initial.overlayId);
   const [units, setUnits] = useState(initial.units);
   const [showAddPanel, setShowAddPanel] = useState(false);
@@ -125,6 +132,18 @@ export default function StudentCurriculumPanel({
     }
   }
 
+  if (preparingUnit) {
+    return (
+      <UnitPrepPanel
+        overlayUnitId={preparingUnit.id}
+        unitTitle={preparingUnit.title}
+        studentName={studentName}
+        subjectName={subjectName}
+        onBack={() => setPreparingUnit(null)}
+      />
+    );
+  }
+
   const sorted = [...units].sort((a, b) => a.position - b.position);
   const current = sorted.find((u) => u.status === "in_progress") ?? sorted[0];
   const upcoming = sorted.filter((u) => u.id !== current?.id);
@@ -171,6 +190,12 @@ export default function StudentCurriculumPanel({
                 className="text-[11.5px] font-semibold text-grey-500 disabled:opacity-30"
               >
                 ↓
+              </button>
+              <button
+                onClick={() => setPreparingUnit({ id: u.id, title: u.unitTitle })}
+                className="text-[11.5px] font-bold text-ink"
+              >
+                회차 준비
               </button>
               <button onClick={() => handleExclude(u.id)} className="text-[11.5px] font-semibold text-red">
                 제외
