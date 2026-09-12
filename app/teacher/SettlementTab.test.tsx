@@ -58,7 +58,8 @@ const SETTLEMENT = {
     },
   ],
   scheduledTotalsByCurrency: { KRW: 150000 },
-  confirmedTotalsByCurrency: { KRW: 80000 },
+  inReviewTotalsByCurrency: { KRW: 40000 },
+  approvedTotalsByCurrency: { KRW: 80000 },
   paidTotalsByCurrency: { KRW: 200000 },
   nextPayoutMonth: "2026-10",
   refreshedAt: "2026-09-12T03:00:00.000Z",
@@ -84,17 +85,35 @@ beforeEach(() => {
 });
 
 describe("SettlementTab — 예정액 요약", () => {
-  it("예정·확정·지급 완료 금액을 나눠 보여주고 지급 예정 월·갱신 시각·변동 안내를 함께 표시한다", async () => {
+  it("예정·검토 중·송금 승인됨·지급 완료 4단계를 나눠 보여준다", async () => {
     render(<SettlementTab />);
     // 같은 금액이 월별 표에도 나오므로 요약 카드(예정)만 콕 집어 확인한다.
     const scheduled = await screen.findAllByText("150,000 KRW");
     expect(scheduled.length).toBeGreaterThan(0);
+    for (const label of ["검토 중", "송금 승인됨", "지급 완료"]) {
+      expect(screen.getAllByText(label).length).toBeGreaterThan(0);
+    }
+    expect(screen.getByText("40,000 KRW")).toBeInTheDocument();
     expect(screen.getByText("80,000 KRW")).toBeInTheDocument();
     expect(screen.getByText("200,000 KRW")).toBeInTheDocument();
-    expect(screen.getByText(/지급 예정 월: 2026년 10월/)).toBeInTheDocument();
+    // '확정'이라는 모호한 라벨은 더 이상 쓰지 않는다.
+    expect(screen.queryByText("확정(지급 대기)")).not.toBeInTheDocument();
+  });
+
+  it("지급 예정 월·갱신 시각·변동 안내를 표시하고 구체 지급일은 표시하지 않는다", async () => {
+    render(<SettlementTab />);
+    expect(await screen.findByText(/지급 예정 월: 2026년 10월/)).toBeInTheDocument();
     expect(screen.getByText(/마지막 갱신:/)).toBeInTheDocument();
     expect(screen.getByText(/확정 전까지 금액이 변동될 수 있습니다/)).toBeInTheDocument();
     expect(screen.getByText(/공제를 반영하지 않은 총액/)).toBeInTheDocument();
+    expect(screen.getByText(/구체적인 지급일은 확정되면 안내합니다/)).toBeInTheDocument();
+  });
+
+  it("마감 뒤 변동은 승인된 금액을 고치지 않고 다음 정산월 조정으로 간다고 안내한다", async () => {
+    render(<SettlementTab />);
+    expect(
+      await screen.findByText(/이미 승인된 금액을 고치지 않고 다음 정산월의 조정 항목으로 반영합니다/)
+    ).toBeInTheDocument();
   });
 
   it("월 행을 펼치면 수업별 산출 근거를 보여준다", async () => {
@@ -110,7 +129,8 @@ describe("SettlementTab — 예정액 요약", () => {
     loadMock.mockResolvedValue({
       months: [],
       scheduledTotalsByCurrency: {},
-      confirmedTotalsByCurrency: {},
+      inReviewTotalsByCurrency: {},
+      approvedTotalsByCurrency: {},
       paidTotalsByCurrency: {},
       nextPayoutMonth: null,
       refreshedAt: "2026-09-12T03:00:00.000Z",

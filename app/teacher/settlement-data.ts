@@ -22,7 +22,38 @@ export function maskAccountNumber(last4: string): string {
   return `****${last4}`;
 }
 
-export type SettlementStatus = "scheduled" | "confirmed" | "paid";
+// 2026-09-12(제품 오너 확정 흐름) — 정산 상태는 아래 4단계로만 말한다.
+//   예정(scheduled)      : 최종 판정되어 정산 항목이 생긴 수업의 실시간 합계.
+//                          예약만 된 미진행 수업은 포함하지 않는다. 재판정·조정에
+//                          따라 변동될 수 있다. 아직 정산 묶음(batch)이 없다.
+//   검토 중(in_review)   : 정산 대상 월이 끝나 월별 정산 묶음이 만들어졌고
+//                          관리자가 산출 근거·조정 내역·계좌를 확인하는 단계.
+//   송금 승인됨(approved): 송금 권한을 가진 운영자가 실제 지급 대상으로 최종
+//                          승인한 상태. **사람의 유일한 승인 지점**이다.
+//                          이후 송금 요청됨/금융사 처리 중도 실행 단계일 뿐이라
+//                          교사 화면에서는 이 묶음으로 함께 보여준다.
+//   지급 완료(paid)      : 금융사 처리까지 끝난 상태.
+// 사람이 예정액을 수기로 계산하거나 임의로 확정하는 경로는 만들지 않는다 —
+// 금액은 언제나 payout_items(정산 원장)에서 온다.
+export type SettlementStatus = "scheduled" | "in_review" | "approved" | "paid";
+
+// payout_batches.status(= DB 어휘) → 교사에게 보여줄 4단계 매핑.
+// batch가 아직 없으면(= 월 마감 전) 'scheduled'다.
+export function settlementStatusOf(
+  batchStatus: string | null | undefined,
+  itemStatus: string | null | undefined
+): SettlementStatus {
+  if (!batchStatus) return itemStatus === "paid" ? "paid" : "scheduled";
+  if (batchStatus === "paid" || itemStatus === "paid") return "paid";
+  // approved 이후(dispatch_requested/provider_pending/processing)는 사람이 다시
+  // 판단하는 단계가 아니라 실행 단계다 — 교사에게는 '송금 승인됨'으로 묶는다.
+  if (["approved", "dispatch_requested", "provider_pending", "processing"].includes(batchStatus)) {
+    return "approved";
+  }
+  // draft/calculated/reviewing/reviewed와 failed(실행 실패로 관리자에게 되돌아온
+  // 상태)는 전부 아직 관리자 손에 있다.
+  return "in_review";
+}
 
 export type SettlementLine = {
   payoutItemId: string;
@@ -51,10 +82,12 @@ export type SettlementMonth = {
 
 export type TeacherSettlement = {
   months: SettlementMonth[];
-  /** 아직 배치에 담기지 않아 변동될 수 있는 금액(통화별). */
+  /** 예정 — 아직 정산 묶음이 없고 변동될 수 있는 금액(통화별). */
   scheduledTotalsByCurrency: Record<string, number>;
-  /** 배치에 담겼지만 아직 지급되지 않은 금액(통화별). */
-  confirmedTotalsByCurrency: Record<string, number>;
+  /** 검토 중 — 월별 묶음이 생겨 관리자가 확인 중인 금액(통화별). */
+  inReviewTotalsByCurrency: Record<string, number>;
+  /** 송금 승인됨 — 운영자가 지급 대상으로 최종 승인한 금액(통화별). */
+  approvedTotalsByCurrency: Record<string, number>;
   /** 지급 완료 금액(통화별). */
   paidTotalsByCurrency: Record<string, number>;
   /** 다음 지급 예정 월 — 예정 금액이 있는 가장 이른 월의 익월. 없으면 null. */
@@ -85,7 +118,8 @@ export async function loadTeacherSettlement(
   const empty: TeacherSettlement = {
     months: [],
     scheduledTotalsByCurrency: {},
-    confirmedTotalsByCurrency: {},
+    inReviewTotalsByCurrency: {},
+    approvedTotalsByCurrency: {},
     paidTotalsByCurrency: {},
     nextPayoutMonth: null,
     refreshedAt,
@@ -140,7 +174,8 @@ export async function loadTeacherSettlement(
 
   const byMonthCurrency = new Map<string, SettlementMonth>();
   const scheduledTotalsByCurrency: Record<string, number> = {};
-  const confirmedTotalsByCurrency: Record<string, number> = {};
+  const inReviewTotalsByCurrency: Record<string, number> = {};
+  const approvedTotalsByCurrency: Record<string, number> = {};
   const paidTotalsByCurrency: Record<string, number> = {};
 
   for (const item of items) {
@@ -150,13 +185,11 @@ export async function loadTeacherSettlement(
       : null;
     const batch = item.batch_id ? batchById.get(item.batch_id as string) : undefined;
 
-    // 지급 상태 3분류. paid 전이는 이번 범위 밖이며 여기서는 읽기만 한다.
-    const status: SettlementStatus =
-      batch?.status === "paid" || item.status === "paid"
-        ? "paid"
-        : item.batch_id
-          ? "confirmed"
-          : "scheduled";
+    // 지급 상태 4분류. 실제 송금·paid 전이는 이번 범위 밖이며 여기서는 읽기만 한다.
+    const status: SettlementStatus = settlementStatusOf(
+      (batch?.status as string | undefined) ?? null,
+      item.status as string
+    );
 
     // 예약 시작일을 모르면(세션·예약이 정리된 예외적 데이터) 월로 묶을 수 없다 —
     // 금액이 화면에서 사라지지 않도록 'unknown' 버킷에 남긴다.
@@ -198,12 +231,12 @@ export async function loadTeacherSettlement(
       });
     }
 
-    const bucket =
-      status === "scheduled"
-        ? scheduledTotalsByCurrency
-        : status === "confirmed"
-          ? confirmedTotalsByCurrency
-          : paidTotalsByCurrency;
+    const bucket = {
+      scheduled: scheduledTotalsByCurrency,
+      in_review: inReviewTotalsByCurrency,
+      approved: approvedTotalsByCurrency,
+      paid: paidTotalsByCurrency,
+    }[status];
     bucket[currency] = (bucket[currency] ?? 0) + line.amountMinor;
   }
 
@@ -226,7 +259,8 @@ export async function loadTeacherSettlement(
   return {
     months,
     scheduledTotalsByCurrency,
-    confirmedTotalsByCurrency,
+    inReviewTotalsByCurrency,
+    approvedTotalsByCurrency,
     paidTotalsByCurrency,
     nextPayoutMonth,
     refreshedAt,

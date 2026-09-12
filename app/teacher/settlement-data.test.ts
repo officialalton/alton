@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { loadTeacherSettlement, nextMonthKey } from "./settlement-data";
+import { loadTeacherSettlement, nextMonthKey, settlementStatusOf } from "./settlement-data";
 
 // P4-2 — 교사 정산 조회. 검증 대상은 "원장 상태 → 예정/확정/지급 완료 3분류"와
 // 월 그룹핑(수업 월 = 예약 시작일 기준, 지급 예정 월 = 그 익월)이다.
@@ -58,6 +58,33 @@ describe("nextMonthKey", () => {
   });
 });
 
+describe("settlementStatusOf — DB 배치 상태 → 교사 4단계 매핑", () => {
+  it("정산 묶음이 없으면 예정이다(월 마감 전)", () => {
+    expect(settlementStatusOf(null, "pending")).toBe("scheduled");
+  });
+
+  it("묶음이 생겼지만 아직 승인 전이면 전부 검토 중이다", () => {
+    for (const s of ["draft", "calculated", "reviewing", "reviewed"]) {
+      expect(settlementStatusOf(s, "batched")).toBe("in_review");
+    }
+  });
+
+  it("실행이 실패해 관리자에게 되돌아온 묶음도 검토 중으로 보여준다", () => {
+    expect(settlementStatusOf("failed", "batched")).toBe("in_review");
+  });
+
+  it("승인 이후의 실행 단계는 교사에게 '송금 승인됨' 하나로 묶는다", () => {
+    for (const s of ["approved", "dispatch_requested", "provider_pending", "processing"]) {
+      expect(settlementStatusOf(s, "batched")).toBe("approved");
+    }
+  });
+
+  it("지급 완료는 배치 또는 항목 어느 쪽 기준으로도 잡는다", () => {
+    expect(settlementStatusOf("paid", "batched")).toBe("paid");
+    expect(settlementStatusOf("approved", "paid")).toBe("paid");
+  });
+});
+
 describe("loadTeacherSettlement", () => {
   it("정산 내역이 없으면 빈 결과와 null 지급 예정 월을 돌려준다", async () => {
     const { client } = supabaseMock({ payout_items: [] });
@@ -65,17 +92,21 @@ describe("loadTeacherSettlement", () => {
     expect(result.months).toEqual([]);
     expect(result.nextPayoutMonth).toBeNull();
     expect(result.scheduledTotalsByCurrency).toEqual({});
+    expect(result.inReviewTotalsByCurrency).toEqual({});
+    expect(result.approvedTotalsByCurrency).toEqual({});
   });
 
-  it("배치가 없는 항목은 예정, 배치에 담기면 확정, 배치가 paid면 지급 완료로 나눈다", async () => {
+  it("예정·검토 중·송금 승인됨·지급 완료 4단계로 나눈다", async () => {
     const { client } = supabaseMock({
       ...BASE_TABLES,
       payout_items: [
         item({ id: "i-scheduled", session_id: "sess-2", batch_id: null }),
-        item({ id: "i-confirmed", session_id: "sess-1", batch_id: "b-approved", amount_minor: 30000 }),
+        item({ id: "i-review", session_id: "sess-1", batch_id: "b-calculated", amount_minor: 10000 }),
+        item({ id: "i-approved", session_id: "sess-1", batch_id: "b-approved", amount_minor: 30000 }),
         item({ id: "i-paid", session_id: "sess-1", batch_id: "b-paid", amount_minor: 20000 }),
       ],
       payout_batches: [
+        { id: "b-calculated", status: "calculated", paid_at: null },
         { id: "b-approved", status: "approved", paid_at: null },
         { id: "b-paid", status: "paid", paid_at: "2026-09-05T00:00:00.000Z" },
       ],
@@ -84,7 +115,8 @@ describe("loadTeacherSettlement", () => {
     const result = await loadTeacherSettlement(client, "t1");
 
     expect(result.scheduledTotalsByCurrency).toEqual({ KRW: 50000 });
-    expect(result.confirmedTotalsByCurrency).toEqual({ KRW: 30000 });
+    expect(result.inReviewTotalsByCurrency).toEqual({ KRW: 10000 });
+    expect(result.approvedTotalsByCurrency).toEqual({ KRW: 30000 });
     expect(result.paidTotalsByCurrency).toEqual({ KRW: 20000 });
     // 예정 금액이 있는 가장 이른 수업 월(2026-09)의 익월.
     expect(result.nextPayoutMonth).toBe("2026-10");
@@ -114,7 +146,7 @@ describe("loadTeacherSettlement", () => {
     });
   });
 
-  it("같은 달이라도 상태가 다르면 줄을 나눠 보여준다(예정과 확정이 섞이지 않는다)", async () => {
+  it("같은 달이라도 상태가 다르면 줄을 나눠 보여준다(예정과 송금 승인됨이 섞이지 않는다)", async () => {
     const { client } = supabaseMock({
       ...BASE_TABLES,
       payout_items: [
@@ -127,7 +159,7 @@ describe("loadTeacherSettlement", () => {
     const result = await loadTeacherSettlement(client, "t1");
 
     const august = result.months.filter((m) => m.settlementMonth === "2026-08");
-    expect(august.map((m) => m.status).sort()).toEqual(["confirmed", "scheduled"]);
+    expect(august.map((m) => m.status).sort()).toEqual(["approved", "scheduled"]);
   });
 
   it("수업 수가 늘어도 조회 횟수는 고정이다(N+1 아님)", async () => {

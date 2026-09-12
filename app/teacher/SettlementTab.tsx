@@ -23,9 +23,13 @@ import {
 } from "./settlement-actions";
 import type { SettlementMonth, TeacherSettlement } from "./settlement-data";
 
+// 2026-09-12(제품 오너 확정 흐름) — 교사 화면은 아래 4단계로만 말한다.
+// '확정'이라는 모호한 말 대신 '송금 승인됨'을 쓴다: 사람이 실제 지급 대상으로
+// 최종 승인한 지점이 어디인지가 교사에게 분명해야 하기 때문이다.
 const STATUS_LABEL: Record<SettlementMonth["status"], string> = {
   scheduled: "예정",
-  confirmed: "확정",
+  in_review: "검토 중",
+  approved: "송금 승인됨",
   paid: "지급 완료",
 };
 
@@ -68,7 +72,18 @@ export default function SettlementTab() {
       })
       .catch((e) => {
         setError(e instanceof Error ? e.message : String(e));
-        setSettlement((prev) => prev ?? { months: [], scheduledTotalsByCurrency: {}, confirmedTotalsByCurrency: {}, paidTotalsByCurrency: {}, nextPayoutMonth: null, refreshedAt: new Date().toISOString() });
+        setSettlement(
+          (prev) =>
+            prev ?? {
+              months: [],
+              scheduledTotalsByCurrency: {},
+              inReviewTotalsByCurrency: {},
+              approvedTotalsByCurrency: {},
+              paidTotalsByCurrency: {},
+              nextPayoutMonth: null,
+              refreshedAt: new Date().toISOString(),
+            }
+        );
         setDocuments((prev) => prev ?? []);
       });
   }
@@ -101,20 +116,30 @@ export default function SettlementTab() {
             지급 예정 월:{" "}
             {settlement.nextPayoutMonth ? formatMonth(settlement.nextPayoutMonth) : "—"} (수업 월의 익월)
           </div>
+          <div>구체적인 지급일은 확정되면 안내합니다.</div>
           <div>마지막 갱신: {new Date(settlement.refreshedAt).toLocaleString("ko-KR")}</div>
           <div>수업 판정·조정 결과에 따라 확정 전까지 금액이 변동될 수 있습니다.</div>
           <div>세금·수수료 등 공제를 반영하지 않은 총액입니다.</div>
         </div>
-        <div className="grid grid-cols-2 gap-3 mt-3 pt-3 border-t border-grey-200">
+        <div className="grid grid-cols-3 gap-3 mt-3 pt-3 border-t border-grey-200">
           <div>
-            <div className="text-[11.5px] font-bold text-grey-400 mb-0.5">확정(지급 대기)</div>
-            <TotalsRow totals={settlement.confirmedTotalsByCurrency} emptyLabel="없음" />
+            <div className="text-[11.5px] font-bold text-grey-400 mb-0.5">검토 중</div>
+            <TotalsRow totals={settlement.inReviewTotalsByCurrency} emptyLabel="없음" />
+          </div>
+          <div>
+            <div className="text-[11.5px] font-bold text-grey-400 mb-0.5">송금 승인됨</div>
+            <TotalsRow totals={settlement.approvedTotalsByCurrency} emptyLabel="없음" />
           </div>
           <div>
             <div className="text-[11.5px] font-bold text-grey-400 mb-0.5">지급 완료</div>
             <TotalsRow totals={settlement.paidTotalsByCurrency} emptyLabel="없음" />
           </div>
         </div>
+        <p className="text-[11px] text-grey-400 mt-2">
+          정산 대상 월이 끝나면 월별 정산 묶음이 만들어져 <b>검토 중</b>으로 넘어가고, 운영자가
+          지급 대상으로 최종 승인하면 <b>송금 승인됨</b>이 됩니다. 마감 뒤 수업 판정이나 금액이
+          바뀌면 이미 승인된 금액을 고치지 않고 다음 정산월의 조정 항목으로 반영합니다.
+        </p>
       </section>
 
       <section className="mb-4">
