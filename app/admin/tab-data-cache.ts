@@ -43,3 +43,12 @@ export function setCachedTabData<T>(key: string, data: T): void {
   if (activeAdminUserId === null) return; // setActiveAdminUser 이전에는 캐시하지 않는다
   cache.set(key, { data, fetchedAt: Date.now() });
 }
+
+/**
+ * 특정 키만 버린다. 어떤 동작이 그 데이터를 바꿨을 때, 다음에 그 화면을 보는
+ * 쪽이 TTL을 기다리지 않고 새로 읽게 한다 — 두 탭이 같은 키를 공유하므로
+ * 한쪽에서 버리면 다른 쪽도 이전 상태를 계속 보지 않는다.
+ */
+export function invalidateCachedTabData(...keys: string[]): void {
+  for (const key of keys) cache.delete(key);
+}

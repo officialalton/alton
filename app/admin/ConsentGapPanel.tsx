@@ -3,6 +3,7 @@
 import ConsentGapSection from "./ConsentGapSection";
 import { listConsentGapsAction, listCompletedConsentsAction } from "./consent-actions";
 import { useTabCachedData } from "./use-tab-cached-data";
+import { invalidateCachedTabData } from "./tab-data-cache";
 import type { ConsentGapItem, CompletedConsentItem } from "./consultation-data";
 
 // P4-3 1단계 — `문서 > 동의서`의 데이터 컨테이너.
@@ -15,6 +16,15 @@ import type { ConsentGapItem, CompletedConsentItem } from "./consultation-data";
 export const CONSENT_GAPS_CACHE_KEY = "consent-gaps";
 export const CONSENT_COMPLETED_CACHE_KEY = "consent-completed";
 export const CONSENT_CACHE_TTL_MS = 30_000;
+
+/**
+ * 동의 상태를 바꾸는 동작 뒤에 부른다. 이 화면과 `신규 > 오류/재처리 현황판`이
+ * 같은 캐시를 공유하므로, 한 번 버리면 두 화면 모두 다음 조회에서 최신 상태를
+ * 읽는다(이전 상태가 계속 보이지 않는다).
+ */
+export function invalidateConsentCaches(): void {
+  invalidateCachedTabData(CONSENT_GAPS_CACHE_KEY, CONSENT_COMPLETED_CACHE_KEY);
+}
 
 export default function ConsentGapPanel() {
   const gaps = useTabCachedData<ConsentGapItem[]>({
@@ -36,5 +46,26 @@ export default function ConsentGapPanel() {
     return <p className="text-[13px] text-grey-500 px-1 py-6">불러오는 중…</p>;
   }
 
-  return <ConsentGapSection gaps={gaps.data} completed={completed.data} />;
+  return (
+    <div>
+      <div className="flex items-center gap-2 mb-3">
+        <button
+          onClick={() => {
+            // 가족이 앱 밖에서 동의를 마친 경우처럼, 이 앱이 알 수 없는 변화를
+            // 즉시 반영하려면 TTL을 기다리지 않고 다시 읽을 수 있어야 한다.
+            invalidateConsentCaches();
+            void gaps.refresh();
+            void completed.refresh();
+          }}
+          className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink"
+        >
+          새로고침
+        </button>
+        {(gaps.refreshing || completed.refreshing) && (
+          <span className="text-[11.5px] text-grey-500">불러오는 중…</span>
+        )}
+      </div>
+      <ConsentGapSection gaps={gaps.data} completed={completed.data} />
+    </div>
+  );
 }

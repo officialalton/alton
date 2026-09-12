@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import ConsentGapPanel from "./ConsentGapPanel";
+import ContractArchivePanel from "./ContractArchivePanel";
 
 // P4-3 — 관리자 `문서` 탭. 회사 문서 / 계약 / 동의서 / 교사 서류 네 영역의
 // 아카이브다. **조회·다운로드만 한다** — 계약 발송·재발송·무효화 같은 쓰기
@@ -57,9 +58,7 @@ export default function DocumentsTab() {
           회사 문서는 Google Drive의 전용 폴더를 읽어 보여줍니다. 아직 연결되지 않았습니다.
         </p>
       )}
-      {sub === "contracts" && (
-        <p className="text-[13px] text-grey-500 py-6">계약 아카이브는 준비 중입니다.</p>
-      )}
+      {sub === "contracts" && <ContractArchivePanel />}
       {sub === "teacher-docs" && (
         <p className="text-[13px] text-grey-500 py-6">교사 서류 보관함은 준비 중입니다.</p>
       )}

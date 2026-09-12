@@ -2,25 +2,13 @@ import { createAdminClient } from "@/lib/supabase-admin";
 import { getDriveApiAccessToken } from "@/lib/google-workspace-auth";
 import { getR3PreviewDriveAccessToken } from "@/lib/drive-preview-verify-auth";
 import { downloadCompletedDocument, downloadCertificateOfCompletion } from "@/lib/docusign";
+import { driveFetch, DRIVE_API } from "@/lib/drive/fetch";
 
 const MAX_RETRY_COUNT = 5;
 
-const DRIVE_API = "https://www.googleapis.com/drive/v3";
 const DRIVE_UPLOAD_API = "https://www.googleapis.com/upload/drive/v3";
 const SHARED_DRIVE_NAME = "ALTON Integration Sandbox";
 const TEST_FOLDER_NAME = "R3 Test";
-
-async function driveFetch(url: string, token: string, init?: RequestInit): Promise<Response> {
-  const res = await fetch(url, {
-    ...init,
-    headers: { ...(init?.headers ?? {}), Authorization: `Bearer ${token}` },
-  });
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`Drive API 요청 실패 (status ${res.status}): ${text.slice(0, 300)}`);
-  }
-  return res;
-}
 
 async function findOrCreateFolder(
   token: string,
