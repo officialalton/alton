@@ -291,11 +291,23 @@ export default function TeacherLessonScheduleTab({
               있는데 선생님 쪽엔 없어 세션뷰(교재·화이트보드)로 들어갈 방법이
               "홈" 탭의 예정 수업 위젯(최근 5건만)뿐이었다. 학생 쪽과 동일하게
               여기서도 직접 진입할 수 있게 추가. */}
+          {/* P2/P3 2단계 — 예약된 수업에서 바로 "그 수업의" 회차 준비 화면으로
+              들어간다. 예전엔 운영 커리큘럼 화면에서만 준비를 열 수 있어 실제
+              수업에 고정할 수 없었다(임시보관함에만 쌓였다). 지난 수업에는
+              준비할 것이 없으므로 예정 수업에만 노출한다. */}
+          {!isPast && (
+            <button
+              onClick={() => router.push(`/teacher/session-prep/${lesson.sessionId}`)}
+              className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-grey-100 text-ink"
+            >
+              회차 준비
+            </button>
+          )}
           <button
             onClick={() => router.push(`/session/${lesson.sessionId}`)}
             className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-grey-100 text-ink"
           >
-            수업 준비
+            수업 화면
           </button>
           {lesson.googleMeetLink && (
             // 2026-09-09(UAT 지적): "수업 시작"은 이미 진행중(live)으로 전환된

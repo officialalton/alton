@@ -618,6 +618,142 @@ describe("인가 — 담당이 아닌 선생님/무관한 역할은 조작할 �
   });
 });
 
+// P2/P3 2단계 — pin이 "이 수업이 어떤 회차를 다뤘는지"와 "고정 시점의 문제
+// 버전"까지 같은 트랜잭션에서 기록하는지 확인한다
+// (supabase/migrations/20261295000000_p2_p3_pin_records_units_and_problem_version.sql).
+describe("pin 시점 기록 — 회차 연결과 문제 버전 고정", () => {
+  it("pin하면 고른 회차가 이 수업에 연결되고, 첫 회차가 기본 회차가 된다", () => {
+    const { selectionId, unitRowId, keywordId, overlayUnitId, sessionId, contractId } =
+      createStagedSelectionWithUnit();
+    excludeFromCleanup(contractId);
+
+    // 두 번째 회차를 더해서 기본/보강 구분을 확인한다.
+    const secondOverlayUnitId = asUser(
+      TEACHER_ID,
+      `insert into curriculum_overlay_units (overlay_id, source_unit_id, position, unit_title)
+       values ((select overlay_id from curriculum_overlay_units where id = '${overlayUnitId}'), '${baseUnitId}', 2, '보강 회차') returning id;`
+    );
+    const secondUnitRowId = asUser(
+      TEACHER_ID,
+      `insert into session_prepared_selection_units (prepared_selection_id, overlay_unit_id, position)
+       values ('${selectionId}', '${secondOverlayUnitId}', 2) returning id;`
+    );
+    void secondUnitRowId;
+
+    const sectionId = makeSelectableSection(keywordId);
+    asUser(
+      TEACHER_ID,
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'material_section', '${sectionId}', 1);`
+    );
+    asUser(TEACHER_ID, `update session_prepared_selections set session_id = '${sessionId}' where id = '${selectionId}';`);
+    asUser(TEACHER_ID, `select pin_session_selection('${sessionId}');`);
+
+    expect(
+      psql(
+        `select overlay_unit_id || ':' || role from session_curriculum_units
+         where session_id = '${sessionId}' order by role, overlay_unit_id;`
+      ).split("\n").sort()
+    ).toEqual([`${overlayUnitId}:primary`, `${secondOverlayUnitId}:supplement`].sort());
+  });
+
+  it("같은 회차가 여러 수업에 연결될 수 있다(재수업·보강)", () => {
+    const { selectionId, unitRowId, keywordId, overlayUnitId, enrollmentId, sessionId, contractId } =
+      createStagedSelectionWithUnit();
+    excludeFromCleanup(contractId);
+    const sectionId = makeSelectableSection(keywordId);
+    asUser(
+      TEACHER_ID,
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'material_section', '${sectionId}', 1);`
+    );
+    asUser(TEACHER_ID, `update session_prepared_selections set session_id = '${sessionId}' where id = '${selectionId}';`);
+    asUser(TEACHER_ID, `select pin_session_selection('${sessionId}');`);
+
+    // 같은 등록의 두 번째 수업에서 같은 회차를 다시 다룬다.
+    const offset = nextReservationOffsetDays();
+    const secondReservationId = psql(
+      `insert into reservations (kind, subject_enrollment_id, owner_profile_id, starts_at, ends_at, status)
+       values ('lesson', '${enrollmentId}', '${TEACHER_ID}', now() + interval '${offset} days', now() + interval '${offset} days 1 hour', 'confirmed') returning id;`
+    );
+    const secondSessionId = psql(
+      `insert into sessions (reservation_id, subject_enrollment_id, teacher_id, lesson_type_id, scheduled_duration_minutes)
+       values ('${secondReservationId}', '${enrollmentId}', '${TEACHER_ID}', (select id from lesson_types where code = 'regular'), 60)
+       returning id;`
+    );
+    const secondSelectionId = asUser(
+      TEACHER_ID,
+      `insert into session_prepared_selections (subject_enrollment_id) values ('${enrollmentId}') returning id;`
+    );
+    const secondUnitRowId = asUser(
+      TEACHER_ID,
+      `insert into session_prepared_selection_units (prepared_selection_id, overlay_unit_id, position)
+       values ('${secondSelectionId}', '${overlayUnitId}', 1) returning id;`
+    );
+    asUser(
+      TEACHER_ID,
+      `insert into session_prepared_selection_unit_keywords (prepared_selection_unit_id, keyword_id)
+       values ('${secondUnitRowId}', '${keywordId}');`
+    );
+    asUser(
+      TEACHER_ID,
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${secondSelectionId}', '${secondUnitRowId}', 'material_section', '${sectionId}', 1);`
+    );
+    asUser(TEACHER_ID, `update session_prepared_selections set session_id = '${secondSessionId}' where id = '${secondSelectionId}';`);
+    asUser(TEACHER_ID, `select pin_session_selection('${secondSessionId}');`);
+
+    expect(
+      psql(`select count(*) from session_curriculum_units where overlay_unit_id = '${overlayUnitId}';`)
+    ).toBe("2");
+    // 각 수업의 기본 회차는 여전히 하나씩이다.
+    expect(
+      psql(
+        `select count(*) from session_curriculum_units
+         where session_id in ('${sessionId}', '${secondSessionId}') and role = 'primary';`
+      )
+    ).toBe("2");
+  });
+
+  it("문제를 고정하면 그 시점의 공개 버전이 함께 박히고, 이후 새 버전이 공개돼도 바뀌지 않는다", () => {
+    const { selectionId, unitRowId, keywordId, sessionId, contractId } = createStagedSelectionWithUnit();
+    excludeFromCleanup(contractId);
+    const problemId = makeSelectableProblem(keywordId);
+    const versionAtPin = psql(`select published_version_id from problems where id = '${problemId}';`);
+    expect(versionAtPin).not.toBe("");
+
+    asUser(
+      TEACHER_ID,
+      `insert into session_prepared_selection_content_items (prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position)
+       values ('${selectionId}', '${unitRowId}', 'problem', '${problemId}', 1);`
+    );
+    asUser(TEACHER_ID, `update session_prepared_selections set session_id = '${sessionId}' where id = '${selectionId}';`);
+    asUser(TEACHER_ID, `select pin_session_selection('${sessionId}');`);
+
+    expect(
+      psql(
+        `select problem_version_id from session_content_manifest
+         where session_id = '${sessionId}' and content_type = 'problem';`
+      )
+    ).toBe(versionAtPin);
+
+    // 새 버전을 만들어 공개한다 — 이미 고정된 수업은 그대로여야 한다.
+    const newVersionId = psql(
+      `select create_problem_draft_version('${problemId}', '고쳐 쓴 지문', null, null, null, null, '${ADMIN_ID}');`
+    );
+    psql(`select submit_problem_version_for_review('${newVersionId}', '${ADMIN_ID}');`);
+    psql(`select publish_problem_version('${newVersionId}', '${ADMIN_ID}');`);
+    expect(psql(`select published_version_id from problems where id = '${problemId}';`)).toBe(newVersionId);
+
+    expect(
+      psql(
+        `select problem_version_id from session_content_manifest
+         where session_id = '${sessionId}' and content_type = 'problem';`
+      )
+    ).toBe(versionAtPin);
+  });
+});
+
 // Acceptance-adjacent — vocab_words 무관 확인(계획서 §Acceptance gate 항목 7).
 describe("vocab_words — 완전히 무관하다", () => {
   it("이 마이그레이션의 어떤 테이블도 vocab_words를 참조하는 FK/트리거를 갖지 않는다", () => {

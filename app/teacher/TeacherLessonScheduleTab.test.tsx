@@ -82,7 +82,7 @@ describe("TeacherLessonScheduleTab", () => {
     expect(screen.getByText(/120분/)).toBeInTheDocument();
   });
 
-  it("2026-09-09(UAT 지적): '수업 준비'는 각 수업 카드의 정확한 sessionId로만 세션뷰에 진입하고, 다른 수업으로 이동하지 않는다", () => {
+  it("2026-09-09(UAT 지적): '수업 화면'은 각 수업 카드의 정확한 sessionId로만 세션뷰에 진입하고, 다른 수업으로 이동하지 않는다", () => {
     const otherLesson: TeacherLessonScheduleItem = {
       ...lesson,
       reservationId: "r2",
@@ -104,7 +104,7 @@ describe("TeacherLessonScheduleTab", () => {
       />
     );
 
-    const prepButtons = screen.getAllByText("수업 준비");
+    const prepButtons = screen.getAllByText("수업 화면");
     expect(prepButtons).toHaveLength(2);
 
     fireEvent.click(prepButtons[1]);
@@ -115,6 +115,38 @@ describe("TeacherLessonScheduleTab", () => {
     fireEvent.click(prepButtons[0]);
     expect(pushMock).toHaveBeenCalledWith(`/session/${lesson.sessionId}`);
     expect(pushMock).not.toHaveBeenCalledWith(`/session/${otherLesson.sessionId}`);
+  });
+
+  it("P2/P3 2단계: 예정 수업에서만 '회차 준비'가 보이고, 그 수업의 준비 화면으로 이동한다", () => {
+    const pastLesson: TeacherLessonScheduleItem = {
+      ...lesson,
+      reservationId: "r3",
+      sessionId: "s3",
+      startsAt: new Date(Date.now() - 240 * 60_000).toISOString(),
+      endsAt: new Date(Date.now() - 120 * 60_000).toISOString(),
+      finalStatus: "completed",
+    };
+    render(
+      <TeacherLessonScheduleTab
+        lessons={[lesson, pastLesson]}
+        exceptions={[]}
+        timezone="America/Los_Angeles"
+        onCancel={vi.fn()}
+        onRefresh={vi.fn()}
+        onLoadExternalBusy={vi.fn().mockResolvedValue([])}
+        onStartSession={vi.fn()}
+        onFinalizeSession={vi.fn()}
+        onResolveLateness={vi.fn()}
+      />
+    );
+
+    // 지난 수업 카드에는 준비할 것이 없으므로 버튼이 붙지 않는다.
+    const prepButtons = screen.getAllByText("회차 준비");
+    expect(prepButtons).toHaveLength(1);
+
+    fireEvent.click(prepButtons[0]);
+    expect(pushMock).toHaveBeenCalledWith(`/teacher/session-prep/${lesson.sessionId}`);
+    expect(pushMock).not.toHaveBeenCalledWith(`/teacher/session-prep/${pastLesson.sessionId}`);
   });
 
   it("M5-a: scheduled 상태 수업에는 수업 시작 버튼만 보이고 클릭 시 호출된다(2026-09-06: 완료/노쇼는 시작 전에는 노출되지 않음)", async () => {
