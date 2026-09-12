@@ -1,6 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { useTabCachedData } from "./use-tab-cached-data";
+import { listConsentGapsAction } from "./consent-actions";
+import {
+  CONSENT_GAPS_CACHE_KEY,
+  CONSENT_CACHE_TTL_MS,
+} from "./ConsentGapPanel";
 import { useRouter } from "next/navigation";
 import {
   createTrialSessionFromConsultation,
@@ -49,7 +55,6 @@ const SUB_NAV: { id: SubTab; label: string }[] = [
   { id: "accounts", label: "계정 생성" },
   { id: "scheduling", label: "상담 운영(신청·수락·캘린더)" },
   { id: "trial", label: "체험 관리" },
-  { id: "consent", label: "보호자 동의 대기" },
   { id: "past", label: "지난 상담" },
   { id: "errors", label: "오류/재처리 현황판" },
 ];
@@ -65,8 +70,6 @@ export default function ConsultationTab({
   consultations,
   trials,
   proposals,
-  consentGaps,
-  completedConsents,
   driveIssues,
   staleEnvelopes,
   contractActivationRetries,
@@ -77,8 +80,6 @@ export default function ConsultationTab({
   consultations: ConsultationListItem[];
   trials: TrialSessionListItem[];
   proposals: ProposalListItem[];
-  consentGaps: ConsentGapItem[];
-  completedConsents: CompletedConsentItem[];
   driveIssues: DriveArtifactIssue[];
   staleEnvelopes: StaleEnvelopeContract[];
   contractActivationRetries: ContractActivationRetryItem[];
@@ -124,13 +125,11 @@ export default function ConsultationTab({
       {sub === "accounts" && <AccountCreationTab />}
       {sub === "scheduling" && <ConsultationSchedulingPanel />}
       {sub === "trial" && <TrialSection trials={trials} consultations={consultations} />}
-      {sub === "consent" && <ConsentGapSection gaps={consentGaps} completed={completedConsents} />}
       {sub === "past" && <ClosedConsultationsSection />}
       {sub === "errors" && (
         <ErrorDashboardSection
           driveIssues={driveIssues}
           staleEnvelopes={staleEnvelopes}
-          consentGaps={consentGaps}
           duplicateCandidates={consultations.filter((c) => c.duplicateOfConsultationId)}
           contractActivationRetries={contractActivationRetries}
         />
@@ -682,79 +681,25 @@ function NewProposalForm({
   );
 }
 
-function ConsentGapSection({ gaps, completed }: { gaps: ConsentGapItem[]; completed: CompletedConsentItem[] }) {
-  const [view, setView] = useState<"pending" | "done">("pending");
-
-  return (
-    <div>
-      <div className="flex gap-1 mb-4 border-b border-grey-200">
-        <button
-          onClick={() => setView("pending")}
-          className={
-            "text-[12.5px] font-bold px-3 py-2 -mb-px border-b-2 " +
-            (view === "pending" ? "border-ink text-ink" : "border-transparent text-grey-500")
-          }
-        >
-          대기 ({gaps.length})
-        </button>
-        <button
-          onClick={() => setView("done")}
-          className={
-            "text-[12.5px] font-bold px-3 py-2 -mb-px border-b-2 " +
-            (view === "done" ? "border-ink text-ink" : "border-transparent text-grey-500")
-          }
-        >
-          완료 ({completed.length})
-        </button>
-      </div>
-
-      {view === "pending" ? (
-        <>
-          <p className="text-[13px] text-grey-500 mb-4">
-            생년월일 미입력 또는 필수 보호자 동의가 없어 이용이 막혀 있는 학생 목록입니다.
-          </p>
-          {gaps.length === 0 ? (
-            <p className="text-[13px] text-grey-500">막혀 있는 학생이 없습니다.</p>
-          ) : (
-            gaps.map((g) => (
-              <div key={g.childId} className={card}>
-                <div className="text-[14px] font-bold text-ink">{g.childName ?? g.childId}</div>
-                <div className="text-[12px] text-grey-500">
-                  {!g.hasDob && "생년월일 미입력"}
-                  {!g.hasDob && !g.hasActiveConsent && " · "}
-                  {!g.hasActiveConsent && "유효한 보호자 동의 없음"}
-                </div>
-              </div>
-            ))
-          )}
-        </>
-      ) : completed.length === 0 ? (
-        <p className="text-[13px] text-grey-500">완료된 동의가 없습니다.</p>
-      ) : (
-        completed.map((c) => (
-          <div key={c.childId} className={card}>
-            <div className="text-[14px] font-bold text-ink">{c.childName ?? c.childId}</div>
-            <div className="text-[12px] text-grey-500">동의 완료</div>
-          </div>
-        ))
-      )}
-    </div>
-  );
-}
-
 function ErrorDashboardSection({
   driveIssues,
   staleEnvelopes,
-  consentGaps,
   duplicateCandidates,
   contractActivationRetries,
 }: {
   driveIssues: DriveArtifactIssue[];
   staleEnvelopes: StaleEnvelopeContract[];
-  consentGaps: ConsentGapItem[];
   duplicateCandidates: ConsultationListItem[];
   contractActivationRetries: ContractActivationRetryItem[];
 }) {
+  // P4-3 1단계 — 동의 현황은 `문서 > 동의서`와 같은 캐시 키를 쓴다. 두 화면이
+  // 공통 부모 없이 같은 데이터를 보고, TTL 안에서는 한 번만 조회한다.
+  const consentGapsCache = useTabCachedData<ConsentGapItem[]>({
+    cacheKey: CONSENT_GAPS_CACHE_KEY,
+    ttlMs: CONSENT_CACHE_TTL_MS,
+    fetcher: listConsentGapsAction,
+  });
+  const consentGaps = consentGapsCache.data ?? [];
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState<string | null>(null);
   const [retrySummary, setRetrySummary] = useState<{ attempted: number; stillFailing: number } | null>(

@@ -8,8 +8,6 @@ import {
   loadConsultations,
   loadTrialSessions,
   loadProposals,
-  loadConsentGaps,
-  loadCompletedConsents,
   loadDriveArtifactIssues,
   loadStaleEnvelopeVersions,
 } from "./consultation-data";
@@ -78,8 +76,6 @@ export default async function AdminHomePage({
     consultations,
     trials,
     proposals,
-    consentGaps,
-    completedConsents,
     driveIssues,
     staleEnvelopes,
     contractActivationRetries,
@@ -105,8 +101,6 @@ export default async function AdminHomePage({
     need("consult") ? loadConsultations(supabase) : Promise.resolve([]),
     need("consult") ? loadTrialSessions(supabase) : Promise.resolve([]),
     need("consult") ? loadProposals(supabase) : Promise.resolve([]),
-    need("consult") ? loadConsentGaps(supabase) : Promise.resolve([]),
-    need("consult") ? loadCompletedConsents(supabase) : Promise.resolve([]),
     need("consult") ? loadDriveArtifactIssues(supabase) : Promise.resolve([]),
     need("consult") ? loadStaleEnvelopeVersions(supabase) : Promise.resolve([]),
     need("consult") ? listOpenContractActivationRetries() : Promise.resolve([]),
@@ -150,8 +144,6 @@ export default async function AdminHomePage({
       consultations={consultations}
       trials={trials}
       proposals={proposals}
-      consentGaps={consentGaps}
-      completedConsents={completedConsents}
       driveIssues={driveIssues}
       staleEnvelopes={staleEnvelopes}
       contractActivationRetries={contractActivationRetries}

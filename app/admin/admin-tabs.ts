@@ -16,6 +16,9 @@ export const ADMIN_NAV_TAB_IDS = [
   "unified-schedule",
   "booking",
   "payouts",
+  // P4-3 — 문서 아카이브. 운영 흐름(신규·문의·일정·예약) 뒤, 시스템성
+  // 탭(Workspace) 앞에 둔다.
+  "documents",
   "workspace",
 ] as const;
 

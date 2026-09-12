@@ -36,6 +36,7 @@ import type { PayoutBatchListItem } from "./payout-batches-data";
 import MatchingTab from "./MatchingTab";
 import type { MatchingTeacherCandidate, MatchingStudentItem } from "./matching-data";
 import WorkspaceTab from "./WorkspaceTab";
+import DocumentsTab from "./DocumentsTab";
 import type { WorkspaceProvisioningItem } from "./workspace-data";
 import EntitlementLedgerTab from "./EntitlementLedgerTab";
 import type { EntitlementProductListItem, ProductVersionListItem } from "./entitlement-data";
@@ -64,6 +65,7 @@ const NAV_ITEMS = [
   { id: "unified-schedule", label: "통합 일정", icon: "🗺️" },
   { id: "booking", label: "예약", icon: "🗓️" },
   { id: "payouts", label: "정산", icon: "💸" },
+  { id: "documents", label: "문서", icon: "📄" },
   { id: "workspace", label: "Workspace", icon: "🔑" },
 ] as const;
 
@@ -92,8 +94,6 @@ export default function AdminShell({
   consultations,
   trials,
   proposals,
-  consentGaps,
-  completedConsents,
   driveIssues,
   staleEnvelopes,
   contractActivationRetries,
@@ -141,8 +141,6 @@ export default function AdminShell({
   consultations: ConsultationListItem[];
   trials: TrialSessionListItem[];
   proposals: ProposalListItem[];
-  consentGaps: ConsentGapItem[];
-  completedConsents: CompletedConsentItem[];
   driveIssues: DriveArtifactIssue[];
   staleEnvelopes: StaleEnvelopeContract[];
   contractActivationRetries: ContractActivationRetryItem[];
@@ -210,6 +208,9 @@ export default function AdminShell({
     "inquiry",
     "unified-schedule",
     "booking",
+    // P4-3 — 여기 넣지 않으면 아래 mobileGroups의 기본 분류(그 외 = 정산)로
+    // 떨어져 문서 탭이 정산 그룹에 표시된다.
+    "documents",
     "workspace",
   ];
   const CONTENT_IDS: TabId[] = ["catalog"];
@@ -337,8 +338,6 @@ export default function AdminShell({
               consultations={consultations}
               trials={trials}
               proposals={proposals}
-              consentGaps={consentGaps}
-              completedConsents={completedConsents}
               driveIssues={driveIssues}
               staleEnvelopes={staleEnvelopes}
               contractActivationRetries={contractActivationRetries}
@@ -358,6 +357,8 @@ export default function AdminShell({
               subjects={subjects}
               teacherCandidatesBySubject={teacherCandidatesBySubject}
             />
+          ) : activeTab === "documents" ? (
+            <DocumentsTab />
           ) : activeTab === "workspace" ? (
             <WorkspaceTab provisionings={workspaceProvisionings} />
           ) : (

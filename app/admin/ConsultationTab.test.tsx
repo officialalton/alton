@@ -92,10 +92,6 @@ const baseProps = {
   ],
   trials: [],
   proposals: [],
-  consentGaps: [
-    { childId: "s1", childName: "지훈", hasDob: false, hasActiveConsent: false },
-  ],
-  completedConsents: [{ childId: "s2", childName: "이서아" }],
   driveIssues: [
     { id: "d1", contractId: "ct1", artifactType: "signed_document", syncStatus: "retryable_failed" as const },
   ],
@@ -120,15 +116,11 @@ describe("ConsultationTab", () => {
     expect(screen.queryByText("불러오는 중...")).not.toBeInTheDocument();
   });
 
-  it("보호자 동의 대기 서브탭으로 전환하면 대기 목록이 기본으로 보이고, 완료 탭을 누르면 완료 목록을 보여준다(대기/완료 분리, 2026-09-05)", () => {
+  // P4-3 1단계 — 보호자 동의 화면은 `문서 > 동의서`로 옮겼다.
+  // 표시 동작은 ConsentGapSection.test.tsx에서 검증한다.
+  it("보호자 동의 대기 서브탭은 더 이상 신규 탭에 없다", () => {
     render(<ConsultationTab {...baseProps} />);
-    fireEvent.click(screen.getByText("보호자 동의 대기"));
-    expect(screen.getByText("지훈")).toBeInTheDocument();
-    expect(screen.queryByText("이서아")).not.toBeInTheDocument();
-
-    fireEvent.click(screen.getByText("완료 (1)"));
-    expect(screen.getByText("이서아")).toBeInTheDocument();
-    expect(screen.queryByText("지훈")).not.toBeInTheDocument();
+    expect(screen.queryByText("보호자 동의 대기")).not.toBeInTheDocument();
   });
 
   it("오류/재처리 현황판 서브탭에서 Drive 실패 항목을 원인별로 보여준다", () => {
