@@ -279,3 +279,27 @@ export async function getMyDocumentDownloadUrlAction(documentId: string): Promis
   if (signError || !signed?.signedUrl) throw new Error(signError?.message ?? "다운로드 링크를 만들지 못했습니다.");
   return signed.signedUrl;
 }
+
+// P4-2(UAT 후속) — 잘못 올린 서류를 교사가 직접 지울 수 있어야 한다.
+// 파일 본문과 메타 행을 함께 지운다(둘 중 하나만 남는 상태를 만들지 않는다).
+export async function deleteMyDocumentAction(documentId: string): Promise<void> {
+  const { userId } = await requireTeacherUser();
+  const admin = createAdminClient();
+  const { data, error } = await admin
+    .from("teacher_documents")
+    .select("id, teacher_id, storage_path")
+    .eq("id", documentId)
+    .maybeSingle();
+  if (error) throw new Error(error.message);
+  if (!data || data.teacher_id !== userId) {
+    throw new Error("본인이 업로드한 서류만 삭제할 수 있습니다.");
+  }
+
+  const { error: removeError } = await admin.storage
+    .from("teacher-documents")
+    .remove([data.storage_path as string]);
+  if (removeError) throw new Error(removeError.message);
+
+  const { error: deleteError } = await admin.from("teacher_documents").delete().eq("id", documentId);
+  if (deleteError) throw new Error(deleteError.message);
+}

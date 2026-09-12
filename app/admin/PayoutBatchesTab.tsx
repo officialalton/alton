@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TeacherPayoutAccountsPanel from "./TeacherPayoutAccountsPanel";
 import type { PayoutBatchListItem } from "./payout-batches-data";
 import { previousMonthRange } from "./payouts-data";
@@ -10,6 +10,9 @@ import {
   approvePayoutBatch,
   markPayoutBatchFailed,
   adjustPayoutBatchAmount,
+  listPayoutBatchesAction,
+  deletePayoutBatch,
+  closePayoutMonthNow,
 } from "./payout-batches-actions";
 
 // R10 Task C — 레거시 PayoutsTab(teacher_payouts)을 대체하는 v3 payout_batches
@@ -35,6 +38,8 @@ const STATUS_LABEL: Record<string, string> = {
 // P4-2(2차) — 조정이 허용되는 상태. 송금 요청 이후(dispatch_requested/
 // provider_pending/processing/paid)와 failed는 DB 함수가 거부하므로 버튼도 감춘다.
 const ADJUSTABLE_STATUSES = new Set(["draft", "calculated", "reviewing", "reviewed", "approved"]);
+// 승인 전(검토 단계)만 삭제 가능 — DB의 delete_payout_batch()와 같은 목록이다.
+const DELETABLE_STATUSES = new Set(["draft", "calculated", "reviewing", "reviewed"]);
 const ACTIONABLE_DRAFT = new Set(["draft", "calculated"]);
 const ACTIONABLE_REVIEW = new Set(["draft", "calculated", "reviewing", "reviewed"]);
 // R10 corrective(요구사항 4, 2026-09-07 리뷰): mark_payout_batch_failed()가
@@ -81,11 +86,26 @@ export default function PayoutBatchesTab({
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [failReasonDraft, setFailReasonDraft] = useState<Record<string, string>>({});
 
-  async function refresh() {
-    // 서버 컴포넌트 재로드 대신, batch 액션 성공 시 페이지 새로고침으로
-    // 최신 payout_batches/payout_items/audit_log를 다시 읽는다(단순함 우선).
-    window.location.reload();
+  // P4-2(UAT 후속) — 전체 새로고침 대신 목록만 다시 읽는다. 탭을 처음 열 때도
+  // 이 조회로 채운다(SSR initialBatches는 첫 진입 표시용일 뿐이며, 클라이언트
+  // 탭 전환으로 들어오면 비어 있을 수 있다 — 실제로 "목록이 사라지는" 버그였다).
+  // 상태 갱신은 전부 Promise 콜백 안에서만 한다(react-hooks/set-state-in-effect).
+  function refresh(): Promise<void> {
+    return listPayoutBatchesAction()
+      .then((rows) => {
+        setBatches(rows);
+        setBusyId(null);
+      })
+      .catch((e) => {
+        setMessage(e instanceof Error ? e.message : "정산 배치를 불러오지 못했습니다.");
+        setBusyId(null);
+      });
   }
+
+  useEffect(() => {
+    void refresh();
+    // 최초 진입 시 1회만 조회한다(이후 갱신은 각 액션이 직접 부른다).
+  }, []);
 
   async function handleGenerate() {
     setGenerating(true);
@@ -120,6 +140,42 @@ export default function PayoutBatchesTab({
       await refresh();
     } catch (e) {
       setMessage(e instanceof Error ? e.message : "승인 실패");
+      setBusyId(null);
+    }
+  }
+
+  async function handleCloseMonth() {
+    setGenerating(true);
+    setMessage(null);
+    try {
+      const result = await closePayoutMonthNow(periodStart, periodEnd);
+      setMessage(
+        `자동 마감 실행: 묶음 ${result.closed}건 · 새로 담긴 항목 ${result.itemCount}건 (이미 담긴 항목은 건너뜁니다)`
+      );
+      await refresh();
+    } catch (e) {
+      setMessage(e instanceof Error ? e.message : "자동 마감 실행 실패");
+    } finally {
+      setGenerating(false);
+    }
+  }
+
+  async function handleDelete(id: string) {
+    if (!window.confirm("이 정산 묶음을 삭제할까요? 수업 항목은 지워지지 않고 미배치로 돌아가 다음 마감에 다시 잡힙니다.")) {
+      return;
+    }
+    setBusyId(id);
+    try {
+      const result = await deletePayoutBatch(id);
+      if (result.status === "rejected") {
+        setMessage(result.error);
+        setBusyId(null);
+        return;
+      }
+      setMessage("정산 묶음을 삭제했습니다. 수업 항목은 미배치로 돌아갔습니다.");
+      await refresh();
+    } catch (e) {
+      setMessage(e instanceof Error ? e.message : "삭제 실패");
       setBusyId(null);
     }
   }
@@ -216,12 +272,26 @@ export default function PayoutBatchesTab({
         </div>
         <button
           disabled={generating}
+          onClick={handleCloseMonth}
+          data-testid="close-month-now"
+          className="text-[12px] font-bold px-3.5 py-2 rounded-lg bg-ink text-white disabled:opacity-50"
+        >
+          {generating ? "처리 중..." : "월 마감 실행"}
+        </button>
+        <button
+          disabled={generating}
           onClick={handleGenerate}
           className="text-[12px] font-bold px-3.5 py-2 rounded-lg border-[1.5px] border-grey-200 disabled:opacity-50"
         >
-          {generating ? "생성 중..." : "Batch 생성"}
+          {generating ? "생성 중..." : "Batch 생성(구경로)"}
         </button>
       </div>
+      <p className="text-[11.5px] text-grey-500 mb-3">
+        정상 경로는 <b>매월 1일 자동 마감</b>입니다(크론). 위 <b>월 마감 실행</b>은 같은 자동 마감을
+        수동으로 한 번 더 돌리는 버튼이라 여러 번 눌러도 같은 항목이 두 번 묶이지 않고, 이미 만들어진
+        묶음에 새 항목만 더합니다. <b>Batch 생성(구경로)</b>은 이전 방식으로, 열린 묶음을 재사용하지
+        않아 같은 기간에 묶음이 또 생길 수 있으니 특별한 경우에만 쓰세요.
+      </p>
       {message && <p className="text-[12px] text-grey-500 mb-4">{message}</p>}
 
       {batches.length === 0 ? (
@@ -353,10 +423,36 @@ export default function PayoutBatchesTab({
                     </div>
                   )}
 
+                  {DELETABLE_STATUSES.has(b.status) && (
+                    <div className="mt-3 pt-3 border-t border-grey-100">
+                      <div className="text-[11px] font-bold text-grey-300 mb-1">묶음 삭제</div>
+                      <p className="text-[11px] text-grey-400 mb-1.5">
+                        승인 전에만 삭제할 수 있습니다. 수업 항목은 지워지지 않고 <b>미배치</b>로 돌아가
+                        다음 마감에 다시 잡힙니다. 이 묶음에 넣은 <b>관리자 조정은 묶음과 함께 사라지고</b>,
+                        마감 뒤 재판정으로 생긴 이월 조정은 남아 다음 마감에 다시 잡힙니다.
+                      </p>
+                      <button
+                        disabled={busyId === b.id}
+                        onClick={() => handleDelete(b.id)}
+                        data-testid={`delete-batch-${b.id}`}
+                        className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-red/30 text-red disabled:opacity-50"
+                      >
+                        묶음 삭제
+                      </button>
+                    </div>
+                  )}
+
                   {ACTIONABLE_FAILED.has(b.status) && (
-                    <div className="mt-3 flex items-center gap-2">
+                    <div className="mt-3 pt-3 border-t border-grey-100">
+                      <div className="text-[11px] font-bold text-grey-300 mb-1">지급 실패 기록</div>
+                      <p className="text-[11px] text-grey-400 mb-1.5">
+                        송금이 실패했을 때 사유와 함께 <b>실패</b> 상태로 기록하는 운영용 버튼입니다. 실제
+                        송금 연동을 연 뒤 쓰는 기능이라 지금은 쓸 일이 거의 없습니다. 실패로 기록해도 금액은
+                        바뀌지 않습니다.
+                      </p>
+                    <div className="flex items-center gap-2">
                       <input
-                        placeholder="실패 사유"
+                        placeholder="지급 실패 사유(예: 계좌 오류로 송금 반려)"
                         value={failReasonDraft[b.id] ?? ""}
                         onChange={(e) =>
                           setFailReasonDraft((prev) => ({ ...prev, [b.id]: e.target.value }))
@@ -370,6 +466,7 @@ export default function PayoutBatchesTab({
                       >
                         실패 처리
                       </button>
+                    </div>
                     </div>
                   )}
                 </div>

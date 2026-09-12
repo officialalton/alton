@@ -215,6 +215,9 @@ describe("AdminShell", () => {
     render(<AdminShell {...baseProps} />);
     fireEvent.click(screen.getByText("정산"));
     expect(screen.getByText("정산", { selector: "h1" })).toBeInTheDocument();
-    expect(screen.getByText("Batch 생성")).toBeInTheDocument();
+    // P4-2(2026-09-12): 정상 경로가 자동 마감으로 바뀌면서 기본 버튼이
+    // "월 마감 실행"이 됐다(기존 "Batch 생성"은 구경로로 남겨 이름이 바뀜).
+    // 설명 문단에도 같은 문구가 나오므로 버튼으로 한정한다.
+    expect(screen.getByRole("button", { name: "월 마감 실행" })).toBeInTheDocument();
   });
 });

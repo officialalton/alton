@@ -214,3 +214,85 @@ describe("upsert_session_payout_item() — 마감 뒤 재판정은 차액 이월
     expect(psql(`select count(*) from payout_items where adjusts_payout_item_id = '${itemId}';`)).toBe("0");
   });
 });
+
+describe("delete_payout_batch() — 승인 전 되돌리기 (UAT 후속)", () => {
+  it("승인 전 묶음을 지우면 수업 항목은 미배치로 돌아가 다음 마감에 다시 잡힌다", () => {
+    const teacher = createTeacher("del");
+    const { itemId } = createSessionPayoutItem(teacher, "2026-11-10", 40000);
+    psql(`select * from close_payout_period('2026-11-01', '2026-11-30');`);
+    const batchId = psql(`select id from payout_batches where teacher_id = '${teacher}' and period_start = '2026-11-01';`);
+
+    psql(`select delete_payout_batch('${batchId}'::uuid, '${ADMIN_ID}'::uuid);`);
+
+    expect(psql(`select count(*) from payout_batches where id = '${batchId}';`)).toBe("0");
+    // 항목은 남아 있고 미배치 상태다 — 자동 산정 근거는 사라지지 않는다.
+    expect(psql(`select batch_id is null, status from payout_items where id = '${itemId}';`)).toBe("t|pending");
+
+    // 다시 마감하면 새 묶음에 그대로 잡힌다.
+    psql(`select * from close_payout_period('2026-11-01', '2026-11-30');`);
+    expect(psql(`select count(*) from payout_items where id = '${itemId}' and batch_id is not null;`)).toBe("1");
+  });
+
+  it("승인된 묶음은 삭제할 수 없다", () => {
+    const teacher = createTeacher("del-approved");
+    createSessionPayoutItem(teacher, "2026-12-10", 40000);
+    psql(`select * from close_payout_period('2026-12-01', '2026-12-31');`);
+    const batchId = psql(`select id from payout_batches where teacher_id = '${teacher}' and period_start = '2026-12-01';`);
+    psql(`select approve_payout_batch('${batchId}'::uuid, '${ADMIN_ID}'::uuid);`);
+
+    expect(() => psql(`select delete_payout_batch('${batchId}'::uuid, '${ADMIN_ID}'::uuid);`)).toThrow(
+      /승인 전\(검토 단계\) 묶음만 삭제할 수 있습니다/
+    );
+  });
+
+  // 2026-09-12 제품 오너 판단으로 정책 변경: 조정이 붙어 있어도 승인 전이면 삭제할 수 있다.
+  it("조정 내역이 있어도 승인 전이면 삭제되고, 조정 항목·이력은 묶음과 함께 사라진다", () => {
+    const teacher = createTeacher("del-adjusted");
+    const { itemId } = createSessionPayoutItem(teacher, "2027-01-10", 40000);
+    psql(`select * from close_payout_period('2027-01-01', '2027-01-31');`);
+    const batchId = psql(`select id from payout_batches where teacher_id = '${teacher}' and period_start = '2027-01-01';`);
+    psql(`select add_payout_batch_adjustment('${batchId}'::uuid, -1000, '차감', '${ADMIN_ID}'::uuid);`);
+
+    psql(`select delete_payout_batch('${batchId}'::uuid, '${ADMIN_ID}'::uuid);`);
+
+    expect(psql(`select count(*) from payout_batches where id = '${batchId}';`)).toBe("0");
+    expect(psql(`select count(*) from payout_batch_adjustments where batch_id = '${batchId}';`)).toBe("0");
+    // 관리자 조정 항목은 함께 사라진다(다음 달로 이월되지 않는다).
+    expect(psql(`select count(*) from payout_items where teacher_id = '${teacher}' and item_type = 'adjustment';`)).toBe("0");
+    // 수업 항목은 남아서 미배치로 돌아간다.
+    expect(psql(`select batch_id is null, status from payout_items where id = '${itemId}';`)).toBe("t|pending");
+  });
+
+  it("묶음 삭제 경로 밖에서는 조정 이력을 여전히 지울 수 없다(INSERT-only 유지)", () => {
+    const teacher = createTeacher("adj-immutable");
+    createSessionPayoutItem(teacher, "2027-02-10", 40000);
+    psql(`select * from close_payout_period('2027-02-01', '2027-02-28');`);
+    const batchId = psql(`select id from payout_batches where teacher_id = '${teacher}' and period_start = '2027-02-01';`);
+    psql(`select add_payout_batch_adjustment('${batchId}'::uuid, -1000, '차감', '${ADMIN_ID}'::uuid);`);
+
+    expect(() => psql(`delete from payout_batch_adjustments where batch_id = '${batchId}';`)).toThrow(/INSERT-only/);
+    expect(() => psql(`update payout_batch_adjustments set reason = 'x' where batch_id = '${batchId}';`)).toThrow(
+      /INSERT-only/
+    );
+  });
+
+  it("마감 뒤 재판정으로 생긴 이월 조정은 묶음을 지워도 살아남아 다음 마감에 잡힌다", () => {
+    const teacher = createTeacher("del-carry");
+    const { sessionId } = createSessionPayoutItem(teacher, "2027-03-10", 60000);
+    psql(`select * from close_payout_period('2027-03-01', '2027-03-31');`);
+    const marchBatch = psql(`select id from payout_batches where teacher_id = '${teacher}' and period_start = '2027-03-01';`);
+    psql(`select approve_payout_batch('${marchBatch}'::uuid, '${ADMIN_ID}'::uuid);`);
+    psql(`update sessions set payable_minutes = 30 where id = '${sessionId}';`);
+    psql(`select upsert_session_payout_item('${sessionId}');`);
+
+    // 4월 마감으로 이월 조정이 묶였다가, 그 묶음을 삭제한다.
+    psql(`select * from close_payout_period('2027-04-01', '2027-04-30');`);
+    const aprilBatch = psql(`select id from payout_batches where teacher_id = '${teacher}' and period_start = '2027-04-01';`);
+    psql(`select delete_payout_batch('${aprilBatch}'::uuid, '${ADMIN_ID}'::uuid);`);
+
+    // 이월 조정 항목은 살아 있고 미배치로 돌아갔다(관리자 조정과 달리 사라지지 않는다).
+    expect(
+      psql(`select amount_minor, batch_id is null from payout_items where teacher_id = '${teacher}' and adjusts_payout_item_id is not null;`)
+    ).toBe("-30000|t");
+  });
+});

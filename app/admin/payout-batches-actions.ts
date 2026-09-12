@@ -2,6 +2,7 @@
 
 import { createAdminClient } from "@/lib/supabase-admin";
 import { requireAdmin } from "@/lib/admin-auth";
+import { loadPayoutBatches, type PayoutBatchListItem } from "./payout-batches-data";
 
 // R10 Task C — v3 payout_batches 상태 전이 서버 액션.
 //
@@ -101,4 +102,29 @@ export async function closePayoutMonthNow(periodStart: string, periodEnd: string
   const { closePayoutPeriod } = await import("@/lib/payout/close-payout-month");
   const batches = await closePayoutPeriod({ periodStart, periodEnd });
   return { closed: batches.length, itemCount: batches.reduce((n, b) => n + b.itemCount, 0) };
+}
+
+// P4-2(UAT 후속) — 목록을 클라이언트에서 직접 조회한다.
+// 기존에는 SSR이 내려준 initialBatches를 useState 초기값으로만 썼는데, 관리자 탭
+// 전환이 클라이언트 라우팅이라 탭을 처음 열 때 빈 배열을 잡고 그대로 굳었다
+// (= "Batch 생성 후 나갔다 다시 들어오면 목록이 비어 보인다"는 실제 버그).
+export async function listPayoutBatchesAction(): Promise<PayoutBatchListItem[]> {
+  const { supabase } = await requireAdmin();
+  return loadPayoutBatches(supabase);
+}
+
+// P4-2(UAT 후속) — 잘못된 기간으로 마감했을 때 되돌릴 수 있게 한다.
+// 승인 전(검토 단계)만 허용하고, 관리자 조정이 붙은 묶음은 거부한다(조정 이력은
+// INSERT-only 감사 기록이라 지울 수 없다). 항목은 삭제하지 않고 미배치로 되돌린다.
+export type DeletePayoutBatchResult = { status: "deleted" } | { status: "rejected"; error: string };
+
+export async function deletePayoutBatch(batchId: string): Promise<DeletePayoutBatchResult> {
+  const { adminUserId } = await requireAdmin();
+  const admin = createAdminClient();
+  const { error } = await admin.rpc("delete_payout_batch", {
+    p_batch_id: batchId,
+    p_actor_id: adminUserId,
+  });
+  if (error) return { status: "rejected", error: error.message };
+  return { status: "deleted" };
 }

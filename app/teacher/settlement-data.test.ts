@@ -63,8 +63,16 @@ describe("settlementStatusOf — DB 배치 상태 → 교사 4단계 매핑", ()
     expect(settlementStatusOf(null, "pending")).toBe("scheduled");
   });
 
-  it("묶음이 생겼지만 아직 승인 전이면 전부 검토 중이다", () => {
-    for (const s of ["draft", "calculated", "reviewing", "reviewed"]) {
+  // 2026-09-12 제품 오너 지시: 묶음이 생긴 것만으로 교사 화면이 '검토 중'이 되면 안 된다.
+  // 관리자가 '검토 제출'을 눌러야 검토 중이다.
+  it("묶음이 만들어지기만 한 상태(draft/calculated)는 아직 '예정'이다", () => {
+    for (const s of ["draft", "calculated"]) {
+      expect(settlementStatusOf(s, "batched")).toBe("scheduled");
+    }
+  });
+
+  it("검토 제출 이후(reviewing/reviewed)부터 '검토 중'이다", () => {
+    for (const s of ["reviewing", "reviewed"]) {
       expect(settlementStatusOf(s, "batched")).toBe("in_review");
     }
   });
@@ -106,7 +114,7 @@ describe("loadTeacherSettlement", () => {
         item({ id: "i-paid", session_id: "sess-1", batch_id: "b-paid", amount_minor: 20000 }),
       ],
       payout_batches: [
-        { id: "b-calculated", status: "calculated", paid_at: null },
+        { id: "b-calculated", status: "reviewing", paid_at: null },
         { id: "b-approved", status: "approved", paid_at: null },
         { id: "b-paid", status: "paid", paid_at: "2026-09-05T00:00:00.000Z" },
       ],

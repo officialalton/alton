@@ -25,9 +25,13 @@ export function maskAccountNumber(last4: string): string {
 // 2026-09-12(제품 오너 확정 흐름) — 정산 상태는 아래 4단계로만 말한다.
 //   예정(scheduled)      : 최종 판정되어 정산 항목이 생긴 수업의 실시간 합계.
 //                          예약만 된 미진행 수업은 포함하지 않는다. 재판정·조정에
-//                          따라 변동될 수 있다. 아직 정산 묶음(batch)이 없다.
-//   검토 중(in_review)   : 정산 대상 월이 끝나 월별 정산 묶음이 만들어졌고
-//                          관리자가 산출 근거·조정 내역·계좌를 확인하는 단계.
+//                          따라 변동될 수 있다. **월별 묶음이 만들어졌더라도
+//                          관리자가 검토를 시작하기 전(draft/calculated)까지는
+//                          계속 '예정'이다**(2026-09-12 제품 오너 지시 — 묶음
+//                          생성만으로 교사 화면이 '검토 중'이 되면 안 된다).
+//   검토 중(in_review)   : 관리자가 **검토 제출**을 눌러 실제로 검토가 시작된 뒤
+//                          (reviewing/reviewed) 산출 근거·조정 내역·계좌를
+//                          확인하는 단계.
 //   송금 승인됨(approved): 송금 권한을 가진 운영자가 실제 지급 대상으로 최종
 //                          승인한 상태. **사람의 유일한 승인 지점**이다.
 //                          이후 송금 요청됨/금융사 처리 중도 실행 단계일 뿐이라
@@ -45,13 +49,16 @@ export function settlementStatusOf(
 ): SettlementStatus {
   if (!batchStatus) return itemStatus === "paid" ? "paid" : "scheduled";
   if (batchStatus === "paid" || itemStatus === "paid") return "paid";
+  // 묶음이 만들어지기만 한 상태(draft/calculated)는 아직 사람이 들여다보기 전이다 —
+  // 교사에게는 여전히 '예정'으로 보여준다. '검토 중'은 검토 제출부터다.
+  if (["draft", "calculated"].includes(batchStatus)) return "scheduled";
   // approved 이후(dispatch_requested/provider_pending/processing)는 사람이 다시
   // 판단하는 단계가 아니라 실행 단계다 — 교사에게는 '송금 승인됨'으로 묶는다.
   if (["approved", "dispatch_requested", "provider_pending", "processing"].includes(batchStatus)) {
     return "approved";
   }
-  // draft/calculated/reviewing/reviewed와 failed(실행 실패로 관리자에게 되돌아온
-  // 상태)는 전부 아직 관리자 손에 있다.
+  // reviewing/reviewed와 failed(실행 실패로 관리자에게 되돌아온 상태)는
+  // 관리자가 실제로 들여다보고 있는 단계다.
   return "in_review";
 }
 
@@ -110,6 +117,15 @@ export type TeacherSettlement = {
   /** 이 화면이 원장을 읽은 시각(ISO). "마지막 갱신 시각"으로 표시한다. */
   refreshedAt: string;
 };
+
+// P4-2(UAT 후속, 2026-09-12 제품 오너 확정) — 지급일은 **수업 월의 익월 10일** 고정이다.
+export const PAYOUT_DAY_OF_MONTH = 10;
+
+/** 'YYYY-MM' 지급 예정 월 → 'YYYY-MM-DD' 지급일. */
+export function payoutDateOf(payoutMonth: string): string | null {
+  if (!/^\d{4}-\d{2}$/.test(payoutMonth)) return null;
+  return `${payoutMonth}-${String(PAYOUT_DAY_OF_MONTH).padStart(2, "0")}`;
+}
 
 function monthKey(iso: string): string {
   return iso.slice(0, 7);

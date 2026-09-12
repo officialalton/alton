@@ -10,7 +10,7 @@
 //  * 제출 서류에는 "필수/미제출" 같은 게이트로 읽힐 표현을 쓰지 않는다 —
 //    제출 여부가 정산·매칭·수업을 막지 않는다.
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   getMyPayoutAccountAction,
   listMyDocumentsAction,
@@ -18,14 +18,24 @@ import {
   saveMyPayoutAccountAction,
   uploadMyDocumentAction,
   getMyDocumentDownloadUrlAction,
+  deleteMyDocumentAction,
   type MaskedPayoutAccount,
   type TeacherDocumentItem,
 } from "./settlement-actions";
-import type { SettlementMonth, TeacherSettlement } from "./settlement-data";
+import { PAYOUT_DAY_OF_MONTH, type SettlementMonth, type TeacherSettlement } from "./settlement-data";
 
 // 2026-09-12(제품 오너 확정 흐름) — 교사 화면은 아래 4단계로만 말한다.
 // '확정'이라는 모호한 말 대신 '송금 승인됨'을 쓴다: 사람이 실제 지급 대상으로
 // 최종 승인한 지점이 어디인지가 교사에게 분명해야 하기 때문이다.
+// P4-2(UAT 후속) — 한 화면에 다 쌓여 있어 찾기 어렵다는 피드백에 따라 4개 서브탭으로 쪼갠다.
+const SUBTABS = [
+  { id: "summary", label: "정산 현황" },
+  { id: "history", label: "정산 내역" },
+  { id: "account", label: "계좌" },
+  { id: "documents", label: "서류" },
+] as const;
+type SubtabId = (typeof SUBTABS)[number]["id"];
+
 const STATUS_LABEL: Record<SettlementMonth["status"], string> = {
   scheduled: "예정",
   in_review: "검토 중",
@@ -33,10 +43,39 @@ const STATUS_LABEL: Record<SettlementMonth["status"], string> = {
   paid: "지급 완료",
 };
 
+// P4-2(UAT 후속) — 금액은 통화 코드(KRW) 대신 기호(₩/$)로 보여준다.
+// KRW/JPY는 소수 단위가 없어 minor가 곧 금액이고, 그 외는 100분의 1 단위다.
+const ZERO_DECIMAL_CURRENCIES = new Set(["KRW", "JPY"]);
+
 function formatAmount(minor: number, currency: string): string {
-  // KRW는 소수 단위가 없어 minor가 곧 원 금액이다. 그 외 통화는 100분의 1 단위로 본다.
-  const value = currency === "KRW" || currency === "JPY" ? minor : minor / 100;
-  return `${value.toLocaleString("ko-KR")} ${currency}`;
+  const zeroDecimal = ZERO_DECIMAL_CURRENCIES.has(currency);
+  const value = zeroDecimal ? minor : minor / 100;
+  try {
+    return new Intl.NumberFormat("ko-KR", {
+      style: "currency",
+      currency,
+      currencyDisplay: "narrowSymbol",
+      minimumFractionDigits: zeroDecimal ? 0 : 2,
+      maximumFractionDigits: zeroDecimal ? 0 : 2,
+    }).format(value);
+  } catch {
+    // 알 수 없는 통화 코드도 금액이 사라지지 않게 한다.
+    return `${value.toLocaleString("ko-KR")} ${currency}`;
+  }
+}
+
+// P4-2(UAT 후속, 2026-09-12) — 상태별로 지급 일정을 다르게 말한다.
+// 검토 중인 건에 "지급 예정일 10월 10일"만 덩그러니 보이면, 10일이 지난 뒤에도
+// 같은 날짜가 남아 지급 시점을 오해하게 된다 — 검토 중에는 "검토 완료 후 지급"을
+// 앞세우고 예정일은 괄호로만 덧붙인다.
+function payoutScheduleLabel(m: SettlementMonth): string {
+  if (m.payoutMonth === "unknown") return "지급 일정 미정";
+  const dateLabel = `${formatMonth(m.payoutMonth)} ${PAYOUT_DAY_OF_MONTH}일`;
+  if (m.status === "paid") {
+    return m.paidAt ? `지급일 ${new Date(m.paidAt).toLocaleDateString("ko-KR")}` : "지급 완료";
+  }
+  if (m.status === "in_review") return `검토 완료 후 지급 (예정일 ${dateLabel})`;
+  return `지급 예정일 ${dateLabel}`;
 }
 
 function formatMonth(key: string): string {
@@ -61,6 +100,7 @@ export default function SettlementTab() {
   const [documents, setDocuments] = useState<TeacherDocumentItem[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [openMonth, setOpenMonth] = useState<string | null>(null);
+  const [subtab, setSubtab] = useState<SubtabId>("summary");
 
   function reload(): Promise<void> {
     return Promise.all([loadMySettlementAction(), getMyPayoutAccountAction(), listMyDocumentsAction()])
@@ -108,15 +148,39 @@ export default function SettlementTab() {
       </p>
       {error && <p className="text-[12px] text-red mb-3">{error}</p>}
 
+      <div className="flex gap-4 mb-5 border-b border-grey-200">
+        {SUBTABS.map((t) => (
+          <button
+            key={t.id}
+            onClick={() => setSubtab(t.id)}
+            data-testid={`settlement-subtab-${t.id}`}
+            className={
+              "text-[13.5px] font-semibold pb-2.5 -mb-px border-b-2 " +
+              (subtab === t.id ? "text-ink border-ink" : "text-grey-500 border-transparent")
+            }
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
+
+      {subtab === "summary" && (
       <section className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">
         <div className="text-[13px] font-bold text-ink mb-2">다음 지급 예정액</div>
         <TotalsRow totals={settlement.scheduledTotalsByCurrency} emptyLabel="예정된 금액이 없습니다." />
         <div className="text-[11.5px] text-grey-500 mt-1.5 space-y-0.5">
           <div>
-            지급 예정 월:{" "}
-            {settlement.nextPayoutMonth ? formatMonth(settlement.nextPayoutMonth) : "—"} (수업 월의 익월)
+            <b>
+              매월 {PAYOUT_DAY_OF_MONTH}일에 전월 수업분을 지급합니다.
+            </b>{" "}
+            (예: 9월 수업분 → 10월 {PAYOUT_DAY_OF_MONTH}일)
           </div>
-          <div>구체적인 지급일은 확정되면 안내합니다.</div>
+          <div>
+            위 예정 금액의 지급 예정일:{" "}
+            {settlement.nextPayoutMonth
+              ? `${formatMonth(settlement.nextPayoutMonth)} ${PAYOUT_DAY_OF_MONTH}일`
+              : "—"}
+          </div>
           <div>마지막 갱신: {new Date(settlement.refreshedAt).toLocaleString("ko-KR")}</div>
           <div>수업 판정·조정 결과에 따라 확정 전까지 금액이 변동될 수 있습니다.</div>
           <div>세금·수수료 등 공제를 반영하지 않은 총액입니다.</div>
@@ -141,7 +205,9 @@ export default function SettlementTab() {
           바뀌면 이미 승인된 금액을 고치지 않고 다음 정산월의 조정 항목으로 반영합니다.
         </p>
       </section>
+      )}
 
+      {subtab === "history" && (
       <section className="mb-4">
         <div className="text-[13px] font-bold text-ink mb-2">월별 정산 내역</div>
         {settlement.months.length === 0 ? (
@@ -166,8 +232,7 @@ export default function SettlementTab() {
                         {formatMonth(m.settlementMonth)} 수업분
                       </div>
                       <div className="text-[12px] text-grey-500 mt-0.5">
-                        지급 예정 월 {formatMonth(m.payoutMonth)} · 수업 {m.lessonCount}건
-                        {m.paidAt ? ` · 지급일 ${new Date(m.paidAt).toLocaleDateString("ko-KR")}` : ""}
+                        {payoutScheduleLabel(m)} · 수업 {m.lessonCount}건
                       </div>
                     </div>
                     <div className="text-right shrink-0">
@@ -254,9 +319,38 @@ export default function SettlementTab() {
           })
         )}
       </section>
+      )}
 
-      <PayoutAccountCard account={account} onSaved={setAccount} />
-      <DocumentsCard documents={documents ?? []} onUploaded={(d) => setDocuments((prev) => [d, ...(prev ?? [])])} />
+      {subtab === "account" && <PayoutAccountCard account={account} onSaved={setAccount} />}
+      {subtab === "documents" && (
+        <DocumentsCard
+          documents={documents ?? []}
+          onUploaded={(d) => setDocuments((prev) => [d, ...(prev ?? [])])}
+          onDeleted={(id) => setDocuments((prev) => (prev ?? []).filter((d) => d.id !== id))}
+        />
+      )}
+    </div>
+  );
+}
+
+function Field({
+  label,
+  hint,
+  children,
+}: {
+  label: string;
+  hint?: string;
+  children: React.ReactNode;
+}) {
+  // 힌트를 label 안에 두면 접근성 이름이 "계좌번호 하이픈(-)은..."처럼 합쳐져
+  // 입력을 라벨로 찾기 어려워진다 — 힌트는 label 밖에 둔다.
+  return (
+    <div className="block">
+      <label className="block">
+        <span className="block text-[11.5px] font-bold text-grey-400 mb-0.5">{label}</span>
+        {children}
+      </label>
+      {hint && <span className="block text-[11px] text-grey-400 mt-0.5">{hint}</span>}
     </div>
   );
 }
@@ -269,6 +363,8 @@ function PayoutAccountCard({
   onSaved: (a: MaskedPayoutAccount) => void;
 }) {
   const [editing, setEditing] = useState(false);
+  // P4-2(UAT 후속) — 통화가 미리 채워져 있으면 "이미 저장된 값"처럼 보인다는
+  // 피드백에 따라, 입력은 라벨이 붙은 필드로 나누고 통화는 선택으로 바꾼다.
   const [form, setForm] = useState({ accountHolderName: "", bankName: "", accountNumber: "", currency: "KRW" });
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -311,32 +407,43 @@ function PayoutAccountCard({
           </button>
         </>
       ) : (
-        <div className="space-y-1.5">
+        <div className="space-y-2">
           {error && <p className="text-[12px] text-red">{error}</p>}
-          <input
-            value={form.accountHolderName}
-            onChange={(e) => setForm((f) => ({ ...f, accountHolderName: e.target.value }))}
-            placeholder="예금주"
-            className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]"
-          />
-          <input
-            value={form.bankName}
-            onChange={(e) => setForm((f) => ({ ...f, bankName: e.target.value }))}
-            placeholder="은행명"
-            className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]"
-          />
-          <input
-            value={form.accountNumber}
-            onChange={(e) => setForm((f) => ({ ...f, accountNumber: e.target.value }))}
-            placeholder="계좌번호(전체 입력)"
-            className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]"
-          />
-          <input
-            value={form.currency}
-            onChange={(e) => setForm((f) => ({ ...f, currency: e.target.value }))}
-            placeholder="통화(예: KRW)"
-            className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]"
-          />
+          <Field label="예금주">
+            <input
+              value={form.accountHolderName}
+              onChange={(e) => setForm((f) => ({ ...f, accountHolderName: e.target.value }))}
+              placeholder="통장에 적힌 이름 그대로"
+              className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]"
+            />
+          </Field>
+          <Field label="은행명">
+            <input
+              value={form.bankName}
+              onChange={(e) => setForm((f) => ({ ...f, bankName: e.target.value }))}
+              placeholder="예: 우리은행"
+              className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]"
+            />
+          </Field>
+          <Field label="계좌번호" hint="띄어쓰기 없이 하이픈(-)을 넣어서 작성해주세요. 예: 1002-123-456789">
+            <input
+              value={form.accountNumber}
+              onChange={(e) => setForm((f) => ({ ...f, accountNumber: e.target.value }))}
+              placeholder="전체 계좌번호"
+              className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]"
+            />
+          </Field>
+          <Field label="통화">
+            <select
+              value={form.currency}
+              onChange={(e) => setForm((f) => ({ ...f, currency: e.target.value }))}
+              aria-label="통화"
+              className="w-full border border-grey-200 rounded px-2 py-1 text-[12px] bg-white"
+            >
+              <option value="KRW">KRW (원)</option>
+              <option value="USD">USD (달러)</option>
+            </select>
+          </Field>
           <p className="text-[11px] text-grey-400">
             보안을 위해 저장된 계좌번호는 끝 4자리만 표시됩니다. 수정할 때는 전체를 다시 입력해주세요.
           </p>
@@ -379,12 +486,16 @@ function PayoutAccountCard({
 function DocumentsCard({
   documents,
   onUploaded,
+  onDeleted,
 }: {
   documents: TeacherDocumentItem[];
   onUploaded: (d: TeacherDocumentItem) => void;
+  onDeleted: (id: string) => void;
 }) {
   const [busy, setBusy] = useState(false);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   return (
     <section className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4">
@@ -420,15 +531,38 @@ function DocumentsCard({
               >
                 내려받기
               </button>
+              {/* P4-2(UAT 후속) — 잘못 올린 파일을 교사가 직접 지울 수 있어야 한다. */}
+              <button
+                type="button"
+                disabled={deletingId === d.id}
+                data-testid={`delete-document-${d.id}`}
+                className="text-[11.5px] font-bold text-red shrink-0 disabled:opacity-50"
+                onClick={async () => {
+                  if (!window.confirm(`'${d.fileName}'을(를) 삭제할까요? 되돌릴 수 없습니다.`)) return;
+                  setDeletingId(d.id);
+                  setError(null);
+                  try {
+                    await deleteMyDocumentAction(d.id);
+                    onDeleted(d.id);
+                  } catch (e) {
+                    setError(e instanceof Error ? e.message : String(e));
+                  } finally {
+                    setDeletingId(null);
+                  }
+                }}
+              >
+                {deletingId === d.id ? "삭제 중..." : "삭제"}
+              </button>
             </li>
           ))}
         </ul>
       )}
+      {/* 기본 file input은 버튼처럼 보이지 않는다는 피드백 — 입력은 숨기고 버튼으로 연다. */}
       <input
+        ref={inputRef}
         type="file"
         aria-label="서류 업로드"
-        disabled={busy}
-        className="text-[11.5px]"
+        className="hidden"
         onChange={async (e) => {
           const file = e.target.files?.[0];
           if (!file) return;
@@ -448,6 +582,15 @@ function DocumentsCard({
           }
         }}
       />
+      <button
+        type="button"
+        disabled={busy}
+        onClick={() => inputRef.current?.click()}
+        data-testid="upload-document"
+        className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
+      >
+        {busy ? "업로드 중..." : "파일 선택해서 올리기"}
+      </button>
       <p className="text-[11px] text-grey-400 mt-1">PDF 또는 이미지(PNG/JPG/HEIC), 10MB 이하</p>
     </section>
   );
