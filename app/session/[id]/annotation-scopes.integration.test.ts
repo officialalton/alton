@@ -4,7 +4,7 @@ import { beforeAll, describe, expect, it } from "vitest";
 // P3 — 필기 범위 4분할의 권한을 실제 DB(RLS)로 검증한다.
 // 확정 정책(2026-09-12):
 //   ① 교사 공용 필기: 교사·학생이 함께 본다
-//   ② 학생 개인 교재 필기: **학생만** 본다 — 교사는 열람하지 않는다
+//   ② 교재 학생 필기: 학생이 쓰고 학생·담당 교사·연결된 보호자가 본다(2026-09-12 확정)
 //   ③ 문제 풀이: 학생 풀이와 교사 피드백이 **별도 레이어**, 교사는 학생 원본을 덮어쓰지 않는다
 //   ④ 교사 준비 초안: 교사 전용, 명시적으로 공개해야 공용 필기가 된다
 // 화면 규칙이 아니라 데이터 규칙이어야 하므로 RLS로 강제하고 여기서 못박는다.
@@ -63,7 +63,8 @@ let enrollmentId: string;
 beforeAll(() => {
   // 같은 선생님으로 반복 실행할 때 이전 실행이 남긴 예약과 겹치지 않도록 먼 미래의
   // 임의 슬롯을 쓴다(reservations_no_overlap 배타 제약).
-  const slotOffsetDays = 700 + Math.floor(Math.random() * 2000);
+  // 다른 통합 테스트 파일과 겹치지 않는 날짜 구간(위 unit-prep 주석 참고).
+  const slotOffsetDays = 5000 + Math.floor(Math.random() * 300);
   const contractId = psql(
     `insert into contracts (household_id, child_id, status) values ('${HOUSEHOLD_ID}', '${STUDENT_ID}', 'draft') returning id;`
   );
@@ -113,9 +114,9 @@ describe("① 교사 공용 필기", () => {
 
   // 2026-09-12 확정 — 교사 공용 필기는 교사가 작성한다. 학생이 설명 위에
   // 덧쓸 자리는 "나만 보는 교재 필기"와 문제별 풀이판이다.
-  // 학생이 쓸 자리가 없어진 것이 아니다 — 아래 ②(개인 교재 필기)와
-  // ③(문제별 풀이판)이 학생의 쓰기 영역이다.
-  it("학생은 교사 공용 필기에 쓸 수 없다", () => {
+  // 학생이 쓸 자리가 없어진 것이 아니다 — 학생에게는 교재 위 "학생 필기"
+  // 레이어와 문제별 풀이판이 있다.
+  it("학생은 선생님 필기 레이어에 쓸 수 없다", () => {
     expect(asUserExpectError(STUDENT_ID, insertEvent(STUDENT_ID, "teacher_shared", ""))).toMatch(
       /row-level security|policy/i
     );
@@ -147,33 +148,39 @@ describe("① 교사 공용 필기", () => {
   });
 });
 
-describe("② 학생 개인 교재 필기 — 교사는 열람하지 않는다", () => {
-  it("학생이 쓰고 본인만 본다", () => {
+describe("② 교재 학생 필기 레이어 — 수업 관계자가 함께 본다", () => {
+  it("학생이 쓰면 학생 본인·담당 교사·연결된 보호자가 본다", () => {
     asUser(
       STUDENT_ID,
       `insert into session_annotation_events (session_id, author_id, event_type, payload, scope, curriculum_doc_id, owner_student_id)
-       values ('${sessionId}', '${STUDENT_ID}', 'stroke', '{"private":1}'::jsonb, 'student_private', '${docId}', '${STUDENT_ID}');`
+       values ('${sessionId}', '${STUDENT_ID}', 'stroke', '{"layer":1}'::jsonb, 'student_shared', '${docId}', '${STUDENT_ID}');`
     );
-    const byStudent = asUser(
-      STUDENT_ID,
-      `select count(*) from session_annotation_events where scope = 'student_private' and session_id = '${sessionId}';`
-    );
-    expect(Number(byStudent)).toBe(1);
+    const count = (who: string) =>
+      asUser(
+        who,
+        `select count(*) from session_annotation_events where scope = 'student_shared' and session_id = '${sessionId}';`
+      );
+    expect(Number(count(STUDENT_ID))).toBe(1);
+    expect(Number(count(TEACHER_ID))).toBe(1);
+    const guardianId = psql(`select primary_guardian_id from households where id = '${HOUSEHOLD_ID}';`);
+    if (guardianId) expect(Number(count(guardianId))).toBe(1);
   });
 
-  it("담당 교사에게도 보이지 않는다(요구사항의 핵심)", () => {
-    const byTeacher = asUser(
-      TEACHER_ID,
-      `select count(*) from session_annotation_events where scope = 'student_private' and session_id = '${sessionId}';`
-    );
-    expect(byTeacher).toBe("0");
+  it("담당이 아닌 교사·다른 학생에게는 보이지 않는다", () => {
+    const count = (who: string) =>
+      asUser(
+        who,
+        `select count(*) from session_annotation_events where scope = 'student_shared' and session_id = '${sessionId}';`
+      );
+    expect(count(OTHER_TEACHER_ID)).toBe("0");
+    expect(count(OTHER_STUDENT_ID)).toBe("0");
   });
 
-  it("교사가 학생 개인 필기를 대신 쓸 수 없다", () => {
+  it("교사가 학생 필기를 대신 쓸 수 없다", () => {
     const stderr = asUserExpectError(
       TEACHER_ID,
       `insert into session_annotation_events (session_id, author_id, event_type, payload, scope, curriculum_doc_id, owner_student_id)
-       values ('${sessionId}', '${TEACHER_ID}', 'stroke', '{}'::jsonb, 'student_private', '${docId}', '${STUDENT_ID}');`
+       values ('${sessionId}', '${TEACHER_ID}', 'stroke', '{}'::jsonb, 'student_shared', '${docId}', '${STUDENT_ID}');`
     );
     expect(stderr).toMatch(/row-level security|policy/i);
   });
@@ -289,61 +296,6 @@ describe("③ 문제 풀이 화이트보드 — 풀이판 단위로 분리된다
     }
   });
 
-  it("학생 개인 교재 필기는 서버에 영속 저장되고 본인만 다시 불러온다", () => {
-    const docId = psql(
-      `insert into curriculum_docs (title, subject_id, owner_type, status)
-       values ('개인필기 교재 ${Date.now()}_${Math.random()}', '${SUBJECT_ID}', 'admin', 'published') returning id;`
-    );
-
-    // 학생이 범위를 지정해 필기를 남긴다(화면의 "나만 보는 필기"와 같은 경로).
-    asUser(
-      STUDENT_ID,
-      `select append_scoped_stroke_events(
-         '${sessionId}',
-         '[{"x0":1,"y0":1,"x1":2,"y1":2,"color":"#000","tool":"pen"},
-           {"x0":2,"y0":2,"x1":3,"y1":3,"color":"#000","tool":"pen"}]'::jsonb,
-         'student_private', '${docId}');`
-    );
-
-    // 새로고침·재접속·기기 변경 후에도 같은 조회로 복원된다(서버 저장이므로).
-    expect(
-      asUser(
-        STUDENT_ID,
-        `select count(*) from session_annotation_events
-         where session_id = '${sessionId}' and scope = 'student_private'
-           and curriculum_doc_id = '${docId}' and owner_student_id = '${STUDENT_ID}';`
-      )
-    ).toBe("2");
-
-    // 주인은 서버가 정한다 — 클라이언트가 남의 명의로 남길 수 없다.
-    expect(
-      psql(
-        `select count(*) from session_annotation_events
-         where curriculum_doc_id = '${docId}' and author_id = owner_student_id;`
-      )
-    ).toBe("2");
-
-    // 교사·관리자·보호자 모두 존재조차 알 수 없다.
-    expect(
-      asUser(TEACHER_ID, `select count(*) from session_annotation_events where curriculum_doc_id = '${docId}';`)
-    ).toBe("0");
-    expect(
-      asUser(ADMIN_ID, `select count(*) from session_annotation_events where curriculum_doc_id = '${docId}';`)
-    ).toBe("0");
-
-    // 공개 범위를 바꾸는 경로가 없다 — 기존 필기의 scope는 수정 자체가 막혀 있다.
-    expect(
-      psqlExpectError(
-        `update session_annotation_events set scope = 'teacher_shared' where curriculum_doc_id = '${docId}';`
-      )
-    ).toMatch(/append-only/);
-
-    // 공용 캔버스로 복사되지도 않는다.
-    expect(
-      psql(`select count(*) from canvas_annotations where session_id = '${sessionId}' and curriculum_doc_id = '${docId}';`)
-    ).toBe("0");
-  });
-
   it("보호자는 연결된 자녀의 공용 필기·문제 풀이·교사 피드백을 읽기 전용으로 본다", () => {
     const guardianId = psql(`select primary_guardian_id from households where id = '${HOUSEHOLD_ID}';`);
     if (!guardianId) return;
@@ -374,20 +326,6 @@ describe("③ 문제 풀이 화이트보드 — 풀이판 단위로 분리된다
     expect(
       asUser(guardianId, `select count(*) from session_annotation_events where problem_work_id = '${w}' and scope = 'problem_teacher_feedback';`)
     ).toBe("1");
-  });
-
-  it("보호자에게도 학생 개인 교재 메모는 보이지 않는다", () => {
-    const guardianId = psql(`select primary_guardian_id from households where id = '${HOUSEHOLD_ID}';`);
-    if (!guardianId) return;
-
-    asUser(
-      STUDENT_ID,
-      `insert into session_annotation_events (session_id, author_id, event_type, payload, scope, curriculum_doc_id, owner_student_id)
-       values ('${sessionId}', '${STUDENT_ID}', 'stroke', '{}'::jsonb, 'student_private', '${docId}', '${STUDENT_ID}');`
-    );
-    expect(
-      asUser(guardianId, `select count(*) from session_annotation_events where scope = 'student_private' and session_id = '${sessionId}';`)
-    ).toBe("0");
   });
 
   it("보호자는 읽기 전용이다 — 어떤 범위에도 필기를 남길 수 없다", () => {
@@ -445,6 +383,68 @@ describe("③ 문제 풀이 화이트보드 — 풀이판 단위로 분리된다
     expect(
       asUser(guardianId, `select count(*) from session_annotation_events where session_id = '${otherSession}';`)
     ).toBe("0");
+  });
+
+  // 2026-09-12 확정 — 쓰기 주체와 과거 기록 보존 규칙(조회 범위는 ②에서 확인).
+  describe("교재 학생 필기 레이어 — 쓰기 주체와 과거 기록", () => {
+    it("보호자는 어느 레이어에도 쓸 수 없다", () => {
+      const guardianId = psql(
+        `select primary_guardian_id from households where id = '${HOUSEHOLD_ID}';`
+      );
+      if (!guardianId) return;
+      expect(
+        asUserExpectError(
+          guardianId,
+          `insert into session_annotation_events (session_id, author_id, event_type, payload, scope, curriculum_doc_id, owner_student_id)
+           values ('${sessionId}', '${guardianId}', 'stroke', '{}'::jsonb, 'student_shared', '${docId}', '${guardianId}');`
+        )
+      ).toMatch(/row-level security|policy/i);
+    });
+
+    it("다른 학생의 명의로는 쓸 수 없다", () => {
+      expect(
+        asUserExpectError(
+          STUDENT_ID,
+          `insert into session_annotation_events (session_id, author_id, event_type, payload, scope, curriculum_doc_id, owner_student_id)
+           values ('${sessionId}', '${STUDENT_ID}', 'stroke', '{}'::jsonb, 'student_shared', '${docId}', '${OTHER_STUDENT_ID}');`
+        )
+      ).toMatch(/row-level security|policy/i);
+    });
+
+    it("과거 비공개 기록은 보존되고, 자동으로 공개되지 않는다", () => {
+      // 정책 변경 전 기록을 직접 심는다(이제 앱은 이 범위로 쓰지 않는다).
+      psql(
+        `insert into session_annotation_events (session_id, author_id, event_type, payload, scope, curriculum_doc_id, owner_student_id)
+         values ('${sessionId}', '${STUDENT_ID}', 'stroke', '{"legacy":true}'::jsonb, 'student_private', '${docId}', '${STUDENT_ID}');`
+      );
+      const legacyCount = (who: string) =>
+        asUser(
+          who,
+          `select count(*) from session_annotation_events where scope = 'student_private' and payload->>'legacy' = 'true';`
+        );
+      // 쓴 본인은 계속 본다.
+      expect(legacyCount(STUDENT_ID)).toBe("1");
+      // 교사·보호자에게는 여전히 보이지 않는다(자동 공개 아님).
+      expect(legacyCount(TEACHER_ID)).toBe("0");
+      const guardianId = psql(
+        `select primary_guardian_id from households where id = '${HOUSEHOLD_ID}';`
+      );
+      if (guardianId) expect(legacyCount(guardianId)).toBe("0");
+      // 삭제되지도 않는다.
+      expect(
+        psql(`select count(*) from session_annotation_events where payload->>'legacy' = 'true';`)
+      ).toBe("1");
+    });
+
+    it("보존 범위에는 더 이상 새로 쓸 수 없다", () => {
+      expect(
+        asUserExpectError(
+          STUDENT_ID,
+          `insert into session_annotation_events (session_id, author_id, event_type, payload, scope, curriculum_doc_id, owner_student_id)
+           values ('${sessionId}', '${STUDENT_ID}', 'stroke', '{}'::jsonb, 'student_private', '${docId}', '${STUDENT_ID}');`
+        )
+      ).toMatch(/row-level security|policy/i);
+    });
   });
 
   it("제출하면 답안과 '그때까지의 필기'가 함께 고정된다", () => {

@@ -37,7 +37,8 @@ function asUser(userId: string, sql: string): string {
 const admin = createClient(API_URL, SERVICE_ROLE_KEY, { auth: { persistSession: false } });
 
 let baseUnitId: string;
-let offset = 1500 + Math.floor(Math.random() * 300) * 2;
+// 다른 통합 테스트 파일과 겹치지 않는 날짜 구간.
+let offset = 7000 + Math.floor(Math.random() * 300) * 2;
 
 beforeAll(() => {
   baseUnitId = psql(

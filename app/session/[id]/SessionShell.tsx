@@ -82,8 +82,9 @@ export default function SessionShell({
   writesEnabled = true,
   sessionSource,
   initialAnnotationStrokes,
-  privateMaterialStrokes = [],
-  sharedMaterialStrokes = [],
+  legacyPrivateMaterialStrokes = [],
+  teacherMaterialStrokes = [],
+  studentMaterialStrokes = [],
   sessionProblems = [],
   lessonContext = { unitTitle: null, goal: null, supplementTitles: [] },
   currentUserId,
@@ -121,10 +122,12 @@ export default function SessionShell({
   // 읽기전용 강제를 우회해 실제 viewerRole·이벤트 로그 초기 상태를 별도로 넘긴다.
   sessionSource: "legacy" | "v3";
   initialAnnotationStrokes: StrokePayload[];
-  /** 학생 본인만 보는 교재 필기 — 다른 역할에는 빈 배열이 내려온다. */
-  privateMaterialStrokes?: StrokePayload[];
-  /** 교재의 공용 필기(범위로 걸러낸 것). */
-  sharedMaterialStrokes?: StrokePayload[];
+  /** 정책 변경 전 본인이 남긴 비공개 교재 필기(보존 기록). */
+  legacyPrivateMaterialStrokes?: StrokePayload[];
+  /** 교재의 선생님 필기 레이어. */
+  teacherMaterialStrokes?: StrokePayload[];
+  /** 교재의 학생 필기 레이어. */
+  studentMaterialStrokes?: StrokePayload[];
   /** 수업 시작 시 고정된 문제들(고정된 버전의 내용). */
   sessionProblems?: SessionProblem[];
   /** 이 수업이 커리큘럼의 어느 회차이고 그 목표가 무엇인지. */
@@ -467,8 +470,9 @@ export default function SessionShell({
           material={material}
           viewerRole={contentViewerRole}
           tipsVisible={tipsVisible}
-          privateStrokes={privateMaterialStrokes}
-          sharedStrokes={sessionSource === "v3" ? sharedMaterialStrokes : undefined}
+          legacyPrivateStrokes={legacyPrivateMaterialStrokes}
+          teacherStrokes={teacherMaterialStrokes}
+          studentStrokes={studentMaterialStrokes}
           sessionSource={sessionSource}
           annotationViewerRole={viewerRole}
           viewerUserId={currentUserId}

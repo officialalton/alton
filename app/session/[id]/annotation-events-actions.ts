@@ -40,7 +40,8 @@ export async function appendStrokeEvents(sessionId: string, segments: StrokePayl
 // 클라이언트가 다른 학생 명의로 남길 수 없다.
 export type AnnotationScope =
   | "teacher_shared"
-  | "student_private"
+  // 2026-09-12 확정 — 학생의 교재 필기는 공유 레이어다(비공개 구분이 없어졌다).
+  | "student_shared"
   | "problem_student"
   | "problem_teacher_feedback";
 
@@ -101,10 +102,9 @@ export async function replayAnnotationEvents(sessionId: string): Promise<Annotat
   }));
 }
 
-// P3 3단계 — 학생 본인의 개인 교재 필기만 재구성해 돌려준다. RLS의 범위별
-// 조회 정책(student_private는 owner_student_id = auth.uid())이 실질적인
-// 게이트라, 교사·보호자·관리자가 이 함수를 호출해도 빈 배열이 나온다.
-export async function loadMyPrivateMaterialStrokes(
+// 정책 변경(2026-09-12) 전에 본인이 남긴 비공개 교재 필기. **보존 전용**이다 —
+// 새로 쓰지 않고, 자동으로 공개하지도 않는다. 쓴 본인 화면에서만 계속 보인다.
+export async function loadMyLegacyPrivateMaterialStrokes(
   sessionId: string,
   curriculumDocId: string
 ): Promise<StrokePayload[]> {
@@ -122,13 +122,13 @@ export async function loadMyPrivateMaterialStrokes(
   return (data ?? []).map((row) => row.payload as StrokePayload);
 }
 
-// P3 5단계 — 교재 위 "함께 보는 필기"만 재구성한다.
+// P3 7단계 — 교재 위 "선생님 필기" 레이어만 재구성한다.
 //
 // replayAnnotationEvents()는 세션의 모든 이벤트를 범위 구분 없이 돌려준다
 // (R9 화이트보드 탭이 쓰던 경로). 그걸 교재 공용 캔버스에 그대로 쓰면, 학생
 // 본인에게는 자기 개인 필기까지 공용 레이어에 섞여 보인다 — 남에게 새는 것은
 // 아니지만(RLS가 막는다) 화면상 범위 구분이 무너진다.
-export async function loadSharedMaterialStrokes(
+export async function loadTeacherMaterialStrokes(
   sessionId: string,
   curriculumDocId: string
 ): Promise<StrokePayload[]> {
@@ -152,4 +152,23 @@ export async function loadSharedMaterialStrokes(
     .slice(start)
     .filter((row) => row.event_type === "stroke")
     .map((row) => row.payload as StrokePayload);
+}
+
+// P3 7단계 — 교재 위 "학생 필기" 레이어. 학생·담당 교사·연결된 보호자가 본다.
+// 누가 볼 수 있는지는 RLS가 판단하므로, 자격이 없으면 빈 배열이 나온다.
+export async function loadStudentMaterialStrokes(
+  sessionId: string,
+  curriculumDocId: string
+): Promise<StrokePayload[]> {
+  const { supabase } = await requireUser();
+  const { data, error } = await supabase
+    .from("session_annotation_events")
+    .select("payload")
+    .eq("session_id", sessionId)
+    .eq("scope", "student_shared")
+    .eq("curriculum_doc_id", curriculumDocId)
+    .eq("event_type", "stroke")
+    .order("seq", { ascending: true });
+  if (error) throw new Error(error.message);
+  return (data ?? []).map((row) => row.payload as StrokePayload);
 }

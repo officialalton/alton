@@ -79,7 +79,7 @@ function insertStroke(actorId: string, seqLabel: string) {
   const scopeCols = isStudent
     ? `, scope, owner_student_id`
     : `, scope`;
-  const scopeVals = isStudent ? `, 'student_private', '${actorId}'` : `, 'teacher_shared'`;
+  const scopeVals = isStudent ? `, 'student_shared', '${actorId}'` : `, 'teacher_shared'`;
   return asUser(
     actorId,
     `insert into session_annotation_events (session_id, author_id, event_type, payload${scopeCols})
@@ -110,7 +110,7 @@ describe("session_annotation_events — append/replay (실제 DB)", () => {
     const out = asUser(
       STUDENT_ID,
       `insert into session_annotation_events (session_id, author_id, event_type, payload, scope, owner_student_id)
-       select '${sessionId}', '${STUDENT_ID}', 'stroke', jsonb_build_object('label', 'race-' || g), 'student_private', '${STUDENT_ID}'::uuid
+       select '${sessionId}', '${STUDENT_ID}', 'stroke', jsonb_build_object('label', 'race-' || g), 'student_shared', '${STUDENT_ID}'::uuid
        from generate_series(1, 5) g
        returning seq;`
     );

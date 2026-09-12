@@ -15,8 +15,9 @@ import { loadSessionProblems } from "./session-problem-data";
 import { loadSessionLessonContext } from "./session-context-data";
 import {
   replayAnnotationEvents,
-  loadMyPrivateMaterialStrokes,
-  loadSharedMaterialStrokes,
+  loadMyLegacyPrivateMaterialStrokes,
+  loadTeacherMaterialStrokes,
+  loadStudentMaterialStrokes,
 } from "./annotation-events-actions";
 import { reconstructVisibleStrokes } from "./annotation-events-types";
 import {
@@ -93,18 +94,21 @@ export default async function SessionPage({
         })
       : [];
 
-  // P3 5단계 — 교재의 공용 필기만 따로 재구성한다(범위 구분 없이 전체를
-  // 재생하면 학생 본인 화면에서 개인 필기가 공용 레이어에 섞인다).
-  const sharedMaterialStrokes =
+  // P3 7단계 — 교재 위 두 레이어를 각각 따로 재구성한다. 화면에서 각자
+  // 켜고 끌 수 있어야 하므로 섞어서 내려보내지 않는다.
+  const teacherMaterialStrokes =
     session.source === "v3" && material?.docId
-      ? await loadSharedMaterialStrokes(session.id, material.docId)
+      ? await loadTeacherMaterialStrokes(session.id, material.docId)
+      : [];
+  const studentMaterialStrokes =
+    session.source === "v3" && material?.docId
+      ? await loadStudentMaterialStrokes(session.id, material.docId)
       : [];
 
-  // P3 3단계 — 학생 본인의 개인 교재 필기. 다른 역할에서는 조회 정책이 빈
-  // 결과를 주므로 화면에도 존재하지 않는다.
-  const privateMaterialStrokes =
+  // 정책 변경 전에 본인이 남긴 비공개 필기(보존 기록). 쓴 본인에게만 내려온다.
+  const legacyPrivateMaterialStrokes =
     profile?.role === "student" && material?.docId
-      ? await loadMyPrivateMaterialStrokes(session.id, material.docId)
+      ? await loadMyLegacyPrivateMaterialStrokes(session.id, material.docId)
       : [];
 
   const homeworkKeywordOptions =
@@ -144,8 +148,9 @@ export default async function SessionPage({
       writesEnabled={session.source === "legacy"}
       sessionSource={session.source}
       initialAnnotationStrokes={initialAnnotationStrokes}
-      privateMaterialStrokes={privateMaterialStrokes}
-      sharedMaterialStrokes={sharedMaterialStrokes}
+      legacyPrivateMaterialStrokes={legacyPrivateMaterialStrokes}
+      teacherMaterialStrokes={teacherMaterialStrokes}
+      studentMaterialStrokes={studentMaterialStrokes}
       sessionProblems={sessionProblems}
       lessonContext={lessonContext}
       currentUserId={user.id}

@@ -4,7 +4,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { RealtimeChannel } from "@supabase/supabase-js";
 import { createClient } from "@/utils/supabase/client";
 import { saveCanvasStrokes } from "./canvas-actions";
-import { appendScopedStrokeEvents } from "./annotation-events-actions";
 import type { CanvasStroke } from "./material-data";
 import { annotationScale, pointerToCanvas } from "./annotation-scale";
 
@@ -41,31 +40,18 @@ const ANNOTATION_LAYOUT_WIDTH = 680;
  *     않는다** — 구독도 송신도 없다. 저장은 범위가 붙는 이벤트 경로로만 하고
  *     공용 캔버스(canvas_annotations)는 건드리지 않는다.
  */
-export type CanvasScope = "teacher_shared" | "student_private";
-
 export default function CanvasOverlay({
   sessionId,
   curriculumDocId,
   initialStrokes,
   canDraw,
-  scope = "teacher_shared",
-  authorRole = "teacher",
   viewerUserId,
-  persistence = "legacy",
   children,
 }: {
   sessionId: string;
   curriculumDocId: string;
   initialStrokes: CanvasStroke[];
   canDraw: boolean;
-  scope?: CanvasScope;
-  /** 보는 사람의 역할. 공용 필기에 쓸 수 있는지 판단한다. */
-  authorRole?: "teacher" | "student" | "reader";
-  /**
-   * 지금 보고 있는 사람. 저장하지 못한 필기를 브라우저에 남길 때 계정별로
-   * 갈라 두기 위해 필요하다 — 같은 브라우저에서 다른 사람이 로그인했을 때
-   * 남의 필기가 복구되거나 그 사람 명의로 저장되면 안 된다.
-   */
   viewerUserId?: string;
   /**
    * 어디에 저장할지. canvas_annotations는 session_id가 legacy_sessions를
@@ -75,11 +61,8 @@ export default function CanvasOverlay({
   persistence?: "legacy" | "events";
   children: React.ReactNode;
 }) {
-  const isPrivate = scope === "student_private";
-  // 2026-09-12 확정 — 교사 공용 필기는 교사가 작성한다. 학생은 같은 교재 위
-  // 자기 개인 필기에만 쓴다. 서버(범위별 INSERT 정책)가 실제 방어선이고,
-  // 여기서는 쓸 수 없는 도구를 아예 보여주지 않는다.
-  const writable = canDraw && (isPrivate || authorRole === "teacher");
+  const isPrivate = false;
+  const writable = canDraw;
   const wrapRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const channelRef = useRef<RealtimeChannel | null>(null);
@@ -115,7 +98,7 @@ export default function CanvasOverlay({
   // viewerUserId를 모르면 아예 남기지 않는다(누구 것인지 모르는 필기를
   // 브라우저에 두지 않는다).
   const pendingKey = viewerUserId
-    ? `alton:unsaved-strokes:${viewerUserId}:${sessionId}:${curriculumDocId}:${scope}`
+    ? `alton:unsaved-strokes:${viewerUserId}:${sessionId}:${curriculumDocId}:legacy`
     : null;
 
   const rememberPending = useCallback(() => {
@@ -327,27 +310,7 @@ export default function CanvasOverlay({
     if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
     saveTimerRef.current = setTimeout(async () => {
       try {
-        if (isPrivate || persistence === "events") {
-          // append-only라 "아직 안 보낸 것"만 보낸다. 실패하면 되돌려 다음
-          // 시도에 함께 보내므로 필기가 사라지지도, 중복되지도 않는다.
-          const batch = pendingRef.current;
-          pendingRef.current = [];
-          try {
-            await appendScopedStrokeEvents({
-              sessionId,
-              segments: batch,
-              scope: isPrivate ? "student_private" : "teacher_shared",
-              curriculumDocId,
-            });
-          } catch (e) {
-            pendingRef.current = [...batch, ...pendingRef.current];
-            rememberPending();
-            throw e;
-          }
-          rememberPending();
-        } else {
-          await saveCanvasStrokes(sessionId, curriculumDocId, strokesRef.current);
-        }
+        await saveCanvasStrokes(sessionId, curriculumDocId, strokesRef.current);
         setSaveError(false);
         setSaved(true);
         setTimeout(() => setSaved(false), 1500);
@@ -385,10 +348,8 @@ export default function CanvasOverlay({
     };
     drawSegment(seg);
     strokesRef.current.push(seg);
-    if (isPrivate || persistence === "events") {
-      pendingRef.current.push(seg);
-      rememberPending();
-    }
+    pendingRef.current.push(seg);
+    rememberPending();
     if (!isPrivate) {
       channelRef.current?.send({ type: "broadcast", event: "stroke", payload: seg });
     }

@@ -54,7 +54,10 @@ function asUserExpectError(userId: string, sql: string): string {
 
 let baseUnitId: string;
 const cleanupContractIds: string[] = [];
-let reservationOffsetDays = 700 + Math.floor(Math.random() * 400) * 2;
+// 통합 테스트 파일마다 예약 시각이 겹치지 않도록 서로 다른 '날짜 구간'을 쓴다.
+// 같은 선생님 소유 예약은 시간대가 겹칠 수 없고(reservations_no_overlap), 파일들이
+// 모두 '지금 시각 + N일'로 심기 때문에 구간이 겹치면 실행 순서에 따라 깨진다.
+let reservationOffsetDays = 3000 + Math.floor(Math.random() * 300) * 2;
 
 beforeAll(() => {
   baseUnitId = psql(

@@ -13,7 +13,8 @@ import {
   markProblemUsedInLesson,
 } from "./session-content-use-actions";
 import MathCanvas from "./MathCanvas";
-import CanvasOverlay, { type CanvasScope } from "./CanvasOverlay";
+import CanvasOverlay from "./CanvasOverlay";
+import MaterialAnnotationLayers from "./MaterialAnnotationLayers";
 import VocabClickLayer from "./VocabClickLayer";
 import AutoGrowTextarea from "./AutoGrowTextarea";
 
@@ -29,8 +30,9 @@ export default function MaterialTab({
   material,
   viewerRole,
   tipsVisible,
-  privateStrokes = [],
-  sharedStrokes,
+  legacyPrivateStrokes = [],
+  teacherStrokes = [],
+  studentStrokes = [],
   sessionSource = "legacy",
   viewerUserId,
   annotationViewerRole,
@@ -40,10 +42,12 @@ export default function MaterialTab({
   material: MaterialData;
   viewerRole: SessionViewViewer;
   tipsVisible: boolean;
-  /** 학생 본인만 보는 교재 필기. 다른 역할에는 서버가 아예 내려주지 않는다. */
-  privateStrokes?: CanvasStroke[];
-  /** v3 수업의 공용 교재 필기(이벤트 로그에서 재구성한 것). */
-  sharedStrokes?: CanvasStroke[];
+  /** 정책 변경 전 본인이 남긴 비공개 교재 필기(보존 기록). */
+  legacyPrivateStrokes?: CanvasStroke[];
+  /** 교재의 선생님 필기 레이어. */
+  teacherStrokes?: CanvasStroke[];
+  /** 교재의 학생 필기 레이어. */
+  studentStrokes?: CanvasStroke[];
   sessionSource?: "legacy" | "v3";
   /** 지금 보고 있는 사람 — 미저장 필기를 계정별로 갈라 두는 데 쓴다. */
   viewerUserId?: string;
@@ -54,13 +58,10 @@ export default function MaterialTab({
    */
   annotationViewerRole?: SessionViewViewer;
 }) {
-  // P3 3단계 — 원본 교재는 그대로 두고 필기 레이어만 바꿔 끼운다. 학생은
-  // "함께 보는 필기"와 "나만 보는 필기"를 오갈 수 있고, 교사에게는 공용
-  // 필기 하나뿐이다(학생 개인 필기는 교사에게 존재 자체가 보이지 않는다).
-  const [scope, setScope] = useState<CanvasScope>("teacher_shared");
+  // P3 7단계 — 교재 위에는 학생 필기·선생님 필기 두 레이어가 있다. 보는
+  // 사람은 각자 켜고 끄고, 쓰기는 자기 레이어에만 가능하다.
   const drawRole = annotationViewerRole ?? viewerRole;
-  const canUsePrivate = drawRole === "student";
-  const activeScope: CanvasScope = canUsePrivate ? scope : "teacher_shared";
+  const layerRole = drawRole === "student" ? "student" : drawRole === "teacher" ? "teacher" : "reader";
   const [activeSectionId, setActiveSectionId] = useState<string | null>(
     material?.sections[0]?.id ?? null
   );
@@ -103,79 +104,8 @@ export default function MaterialTab({
       ?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
-  return (
-    // 좁은 화면에서는 목차를 본문 위로 접어 올린다. 예전에는 220px 고정
-    // 사이드바가 그대로 남아 본문이 화면 밖으로 밀려 읽을 수 없었다.
-    <div className="md:grid md:grid-cols-[220px_1fr]">
-      <nav className="border-b md:border-b-0 md:border-r border-grey-200 p-4 md:sticky md:top-0 md:self-start md:h-[calc(100vh-56px)] md:overflow-y-auto flex md:block gap-1.5 overflow-x-auto">
-        <div className="hidden md:block text-[10.5px] font-extrabold text-grey-300 uppercase tracking-wider px-2 mb-1">
-          교재 목차
-        </div>
-        {material.sections.map((s) => (
-          <button
-            key={s.id}
-            onClick={() => scrollToSection(s.id)}
-            className={
-              "md:w-full text-left flex items-center gap-2 px-2.5 py-2 rounded-lg text-[13px] mb-0.5 whitespace-nowrap md:whitespace-normal flex-shrink-0 " +
-              (activeSectionId === s.id
-                ? "bg-red-bg text-red font-bold"
-                : "text-grey-500 hover:bg-grey-100")
-            }
-          >
-            <span
-              className={
-                "inline-block w-1.5 h-1.5 rounded-full flex-shrink-0 " +
-                (activeSectionId === s.id ? "bg-red" : "bg-grey-300")
-              }
-            />
-            {s.title}
-            {s.problems.length > 0 && (
-              <span className="ml-auto text-[10px] opacity-70" title="확인 문제 포함">
-                ✏️
-              </span>
-            )}
-          </button>
-        ))}
-      </nav>
-
-      <div className="max-w-[760px] mx-auto px-3 sm:px-10 py-8">
-        {canUsePrivate && (
-          <div className="flex items-center gap-1.5 mb-3">
-            {(
-              [
-                ["teacher_shared", "함께 보는 필기"],
-                ["student_private", "나만 보는 필기"],
-              ] as const
-            ).map(([value, label]) => (
-              <button
-                key={value}
-                onClick={() => setScope(value)}
-                aria-pressed={activeScope === value}
-                className={
-                  "text-[11.5px] font-bold px-3 py-1.5 rounded-full border-[1.5px] " +
-                  (activeScope === value ? "bg-ink text-white border-ink" : "border-grey-200 text-grey-500")
-                }
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-        )}
-        <CanvasOverlay
-          key={activeScope}
-          sessionId={sessionId}
-          curriculumDocId={material.docId}
-          initialStrokes={
-            activeScope === "student_private"
-              ? privateStrokes
-              : (sharedStrokes ?? material.canvasStrokes)
-          }
-          canDraw={drawRole === "student" || drawRole === "teacher"}
-          scope={activeScope}
-          authorRole={drawRole === "teacher" ? "teacher" : drawRole === "student" ? "student" : "reader"}
-          viewerUserId={viewerUserId}
-          persistence={sessionSource === "v3" ? "events" : "legacy"}
-        >
+  const materialBody = (
+    <>
           <VocabClickLayer
             sessionId={sessionId}
             studentId={studentId}
@@ -222,7 +152,70 @@ export default function MaterialTab({
             ))}
             <div className="h-[60vh]" aria-hidden />
           </VocabClickLayer>
-        </CanvasOverlay>
+    </>
+  );
+
+  return (
+    // 좁은 화면에서는 목차를 본문 위로 접어 올린다. 예전에는 220px 고정
+    // 사이드바가 그대로 남아 본문이 화면 밖으로 밀려 읽을 수 없었다.
+    <div className="md:grid md:grid-cols-[220px_1fr]">
+      <nav className="border-b md:border-b-0 md:border-r border-grey-200 p-4 md:sticky md:top-0 md:self-start md:h-[calc(100vh-56px)] md:overflow-y-auto flex md:block gap-1.5 overflow-x-auto">
+        <div className="hidden md:block text-[10.5px] font-extrabold text-grey-300 uppercase tracking-wider px-2 mb-1">
+          교재 목차
+        </div>
+        {material.sections.map((s) => (
+          <button
+            key={s.id}
+            onClick={() => scrollToSection(s.id)}
+            className={
+              "md:w-full text-left flex items-center gap-2 px-2.5 py-2 rounded-lg text-[13px] mb-0.5 whitespace-nowrap md:whitespace-normal flex-shrink-0 " +
+              (activeSectionId === s.id
+                ? "bg-red-bg text-red font-bold"
+                : "text-grey-500 hover:bg-grey-100")
+            }
+          >
+            <span
+              className={
+                "inline-block w-1.5 h-1.5 rounded-full flex-shrink-0 " +
+                (activeSectionId === s.id ? "bg-red" : "bg-grey-300")
+              }
+            />
+            {s.title}
+            {s.problems.length > 0 && (
+              <span className="ml-auto text-[10px] opacity-70" title="확인 문제 포함">
+                ✏️
+              </span>
+            )}
+          </button>
+        ))}
+      </nav>
+
+      <div className="max-w-[760px] mx-auto px-3 sm:px-10 py-8">
+        {sessionSource === "v3" ? (
+          <MaterialAnnotationLayers
+            sessionId={sessionId}
+            curriculumDocId={material.docId}
+            studentStrokes={studentStrokes}
+            teacherStrokes={teacherStrokes}
+            legacyPrivateStrokes={legacyPrivateStrokes}
+            role={layerRole}
+            viewerUserId={viewerUserId}
+          >
+            {materialBody}
+          </MaterialAnnotationLayers>
+        ) : (
+          // 레거시 수업은 예전 단일 캔버스 경로를 그대로 쓴다(저장 대상 테이블이
+          // legacy_sessions를 가리키므로 새 레이어 모델을 적용할 수 없다).
+          <CanvasOverlay
+            sessionId={sessionId}
+            curriculumDocId={material.docId}
+            initialStrokes={material.canvasStrokes}
+            canDraw={drawRole === "student" || drawRole === "teacher"}
+            viewerUserId={viewerUserId}
+          >
+            {materialBody}
+          </CanvasOverlay>
+        )}
       </div>
     </div>
   );
