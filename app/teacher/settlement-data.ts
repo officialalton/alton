@@ -82,6 +82,20 @@ export type SettlementAdjustment = {
   createdAt: string;
 };
 
+export type SettlementDateChange = {
+  id: string;
+  previousDate: string | null;
+  newDate: string;
+  reason: string | null;
+  createdAt: string;
+};
+
+export type SettlementExternalTransfer = {
+  transferredOn: string;
+  amountMinor: number;
+  currency: string;
+};
+
 export type SettlementMonth = {
   /** 수업이 있었던 월 — 'YYYY-MM' */
   settlementMonth: string;
@@ -97,6 +111,14 @@ export type SettlementMonth = {
   totalAmountMinor: number;
   lessonCount: number;
   paidAt: string | null;
+  /** 저장된 지급 예정일(없으면 아직 승인 전이라 정해지지 않았다는 뜻). */
+  scheduledPayoutDate: string | null;
+  /** 이 묶음이 자동 송금 대상인지. */
+  autoDispatchEnabled: boolean;
+  /** 예정일이 바뀐 이력(교사에게 필요한 범위: 전후 날짜와 사유). */
+  dateChanges: SettlementDateChange[];
+  /** 은행에서 직접 송금해 완료 기록된 건. */
+  externalTransfer: SettlementExternalTransfer | null;
   lines: SettlementLine[];
   /** 관리자 조정 내역(사유·시각). 교사도 볼 수 있다. */
   adjustments: SettlementAdjustment[];
@@ -168,9 +190,13 @@ export async function loadTeacherSettlement(
   const batchIds = Array.from(new Set(items.map((i) => i.batch_id as string | null).filter(Boolean) as string[]));
   const sessionIds = Array.from(new Set(items.map((i) => i.session_id as string | null).filter(Boolean) as string[]));
 
-  const [{ data: batches }, { data: sessions }, { data: adjustmentRows }] = await Promise.all([
+  const [{ data: batches }, { data: sessions }, { data: adjustmentRows }, { data: dateChangeRows }, { data: externalRows }] =
+    await Promise.all([
     batchIds.length
-      ? supabase.from("payout_batches").select("id, status, paid_at").in("id", batchIds)
+      ? supabase
+          .from("payout_batches")
+          .select("id, status, paid_at, scheduled_payout_date, auto_dispatch_enabled")
+          .in("id", batchIds)
       : Promise.resolve({ data: [] as Record<string, unknown>[] }),
     sessionIds.length
       ? supabase.from("sessions").select("id, reservation_id, subject_enrollment_id").in("id", sessionIds)
@@ -183,7 +209,45 @@ export async function loadTeacherSettlement(
           .in("batch_id", batchIds)
           .order("created_at", { ascending: false })
       : Promise.resolve({ data: [] as Record<string, unknown>[] }),
+    // 지급 예정일 변경 이력 — 교사도 "왜 날짜가 바뀌었는지" 알 수 있어야 한다.
+    batchIds.length
+      ? supabase
+          .from("payout_scheduled_date_events")
+          .select("id, batch_id, previous_date, new_date, reason, created_at")
+          .in("batch_id", batchIds)
+          .order("created_at", { ascending: false })
+      : Promise.resolve({ data: [] as Record<string, unknown>[] }),
+    // 외부 송금(은행 직접 송금) 완료 기록. 은행 참조값·메모는 교사에게 내리지 않는다.
+    batchIds.length
+      ? supabase
+          .from("payout_external_transfers")
+          .select("batch_id, transferred_on, amount_minor, currency")
+          .in("batch_id", batchIds)
+      : Promise.resolve({ data: [] as Record<string, unknown>[] }),
   ]);
+
+  const dateChangesByBatch = new Map<string, SettlementDateChange[]>();
+  for (const e of dateChangeRows ?? []) {
+    const list = dateChangesByBatch.get(e.batch_id as string) ?? [];
+    list.push({
+      id: e.id as string,
+      previousDate: (e.previous_date as string | null) ?? null,
+      newDate: e.new_date as string,
+      reason: (e.reason as string | null) ?? null,
+      createdAt: e.created_at as string,
+    });
+    dateChangesByBatch.set(e.batch_id as string, list);
+  }
+  const externalByBatch = new Map<string, SettlementExternalTransfer>(
+    (externalRows ?? []).map((r) => [
+      r.batch_id as string,
+      {
+        transferredOn: r.transferred_on as string,
+        amountMinor: Number(r.amount_minor ?? 0),
+        currency: r.currency as string,
+      },
+    ])
+  );
 
   const adjustmentsByBatch = new Map<string, SettlementAdjustment[]>();
   for (const a of adjustmentRows ?? []) {
@@ -291,6 +355,10 @@ export async function loadTeacherSettlement(
         totalAmountMinor: line.amountMinor,
         lessonCount: isAdjustment ? 0 : 1,
         paidAt: (batch?.paid_at as string | null) ?? null,
+        scheduledPayoutDate: (batch?.scheduled_payout_date as string | null) ?? null,
+        autoDispatchEnabled: batch ? batch.auto_dispatch_enabled !== false : true,
+        dateChanges: item.batch_id ? dateChangesByBatch.get(item.batch_id as string) ?? [] : [],
+        externalTransfer: item.batch_id ? externalByBatch.get(item.batch_id as string) ?? null : null,
         lines: isAdjustment ? [] : [line],
         adjustments: item.batch_id ? adjustmentsByBatch.get(item.batch_id as string) ?? [] : [],
       });

@@ -13,6 +13,12 @@ import {
   listPayoutBatchesAction,
   deletePayoutBatch,
   closePayoutMonthNow,
+  setPayoutBatchScheduledDate,
+  setPayoutBatchAutoDispatch,
+  getAutoDispatchEnabled,
+  setAutoDispatchEnabled,
+  dispatchPayoutBatchNow,
+  recordExternalPayoutTransfer,
 } from "./payout-batches-actions";
 
 // R10 Task C — 레거시 PayoutsTab(teacher_payouts)을 대체하는 v3 payout_batches
@@ -76,6 +82,12 @@ export default function PayoutBatchesTab({
   // P4-2(2차) — 최종 송금액 가감 조정 입력. 자동 산정 항목을 고치는 것이 아니라
   // 별도 조정 항목을 추가하는 것이므로 금액·사유만 받는다.
   const [adjustDraft, setAdjustDraft] = useState<Record<string, { amount: string; reason: string }>>({});
+  // P4-2 — 자동 송금 전역 스위치 + 묶음별 지급 예정일/외부 송금 입력.
+  const [autoDispatchOn, setAutoDispatchOn] = useState<boolean | null>(null);
+  const [dateDraft, setDateDraft] = useState<Record<string, { date: string; reason: string }>>({});
+  const [externalDraft, setExternalDraft] = useState<
+    Record<string, { date: string; amount: string; reference: string; memo: string }>
+  >({});
   const [batches, setBatches] = useState(initialBatches);
   const defaults = previousMonthRange(new Date());
   const [periodStart, setPeriodStart] = useState(defaults.periodStart);
@@ -103,6 +115,9 @@ export default function PayoutBatchesTab({
   }
 
   useEffect(() => {
+    void getAutoDispatchEnabled()
+      .then(setAutoDispatchOn)
+      .catch(() => setAutoDispatchOn(null));
     void refresh();
     // 최초 진입 시 1회만 조회한다(이후 갱신은 각 액션이 직접 부른다).
   }, []);
@@ -157,6 +172,23 @@ export default function PayoutBatchesTab({
       setMessage(e instanceof Error ? e.message : "자동 마감 실행 실패");
     } finally {
       setGenerating(false);
+    }
+  }
+
+  async function runBatchAction(id: string, fn: () => Promise<{ status: string; error?: string }>, okMessage: string) {
+    setBusyId(id);
+    try {
+      const result = await fn();
+      if (result.status === "rejected") {
+        setMessage(result.error ?? "처리하지 못했습니다.");
+        setBusyId(null);
+        return;
+      }
+      setMessage(okMessage);
+      await refresh();
+    } catch (e) {
+      setMessage(e instanceof Error ? e.message : "처리 실패");
+      setBusyId(null);
     }
   }
 
@@ -285,6 +317,31 @@ export default function PayoutBatchesTab({
         >
           {generating ? "생성 중..." : "Batch 생성(구경로)"}
         </button>
+      </div>
+      <div className="flex items-center gap-2 mb-3 text-[12px]">
+        <span className="font-bold text-grey-400">자동 송금(전역)</span>
+        <span data-testid="auto-dispatch-global">
+          {autoDispatchOn === null ? "확인 중..." : autoDispatchOn ? "켜짐" : "꺼짐"}
+        </span>
+        <button
+          disabled={autoDispatchOn === null}
+          data-testid="toggle-auto-dispatch"
+          onClick={async () => {
+            const next = !autoDispatchOn;
+            const result = await setAutoDispatchEnabled(next);
+            if (result.status === "rejected") setMessage(result.error);
+            else {
+              setAutoDispatchOn(next);
+              setMessage(next ? "자동 송금을 켰습니다." : "자동 송금을 껐습니다. 예정일이 와도 자동으로 나가지 않습니다.");
+            }
+          }}
+          className="text-[12px] font-bold px-3 py-1 rounded-lg border-[1.5px] border-grey-200 disabled:opacity-50"
+        >
+          {autoDispatchOn ? "끄기" : "켜기"}
+        </button>
+        <span className="text-[11px] text-grey-400">
+          매월 10일 03:00 UTC에 지급 예정일이 도래한 <b>송금 승인</b> 묶음만 자동 처리합니다.
+        </span>
       </div>
       <p className="text-[11.5px] text-grey-500 mb-3">
         정상 경로는 <b>매월 1일 자동 마감</b>입니다(크론). 위 <b>월 마감 실행</b>은 같은 자동 마감을
@@ -419,6 +476,173 @@ export default function PayoutBatchesTab({
                         >
                           조정 추가
                         </button>
+                      </div>
+                    </div>
+                  )}
+
+                  {b.status === "approved" && (
+                    <div className="mt-3 pt-3 border-t border-grey-100 space-y-3">
+                      <div>
+                        <div className="text-[11px] font-bold text-grey-300 mb-1">지급 예정일 · 자동 송금</div>
+                        <div className="text-[12px] text-grey-500 mb-1.5">
+                          예정일 <b data-testid={`sched-${b.id}`}>{b.scheduledPayoutDate ?? "미정"}</b> · 자동 송금{" "}
+                          <b>{b.autoDispatchEnabled ? "대상" : "제외"}</b>
+                          <button
+                            data-testid={`toggle-batch-auto-${b.id}`}
+                            disabled={busyId === b.id}
+                            onClick={() =>
+                              runBatchAction(
+                                b.id,
+                                () => setPayoutBatchAutoDispatch(b.id, !b.autoDispatchEnabled),
+                                b.autoDispatchEnabled ? "자동 송금 대상에서 제외했습니다." : "자동 송금 대상에 포함했습니다."
+                              )
+                            }
+                            className="ml-2 text-[11.5px] font-bold text-ink underline disabled:opacity-50"
+                          >
+                            {b.autoDispatchEnabled ? "제외" : "포함"}
+                          </button>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <input
+                            type="date"
+                            value={dateDraft[b.id]?.date ?? ""}
+                            onChange={(e) =>
+                              setDateDraft((p) => ({ ...p, [b.id]: { date: e.target.value, reason: p[b.id]?.reason ?? "" } }))
+                            }
+                            data-testid={`date-input-${b.id}`}
+                            className="px-2 py-1 border-[1.5px] border-grey-200 rounded-lg text-[12px]"
+                          />
+                          <input
+                            placeholder="변경 사유"
+                            value={dateDraft[b.id]?.reason ?? ""}
+                            onChange={(e) =>
+                              setDateDraft((p) => ({ ...p, [b.id]: { date: p[b.id]?.date ?? "", reason: e.target.value } }))
+                            }
+                            className="px-2 py-1 border-[1.5px] border-grey-200 rounded-lg text-[12px] flex-1"
+                          />
+                          <button
+                            disabled={busyId === b.id}
+                            data-testid={`change-date-${b.id}`}
+                            onClick={() =>
+                              runBatchAction(
+                                b.id,
+                                () =>
+                                  setPayoutBatchScheduledDate({
+                                    batchId: b.id,
+                                    newDate: dateDraft[b.id]?.date ?? "",
+                                    reason: dateDraft[b.id]?.reason ?? "",
+                                  }),
+                                "지급 예정일을 변경했습니다."
+                              )
+                            }
+                            className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 disabled:opacity-50"
+                          >
+                            예정일 변경
+                          </button>
+                        </div>
+                      </div>
+
+                      <div>
+                        <div className="text-[11px] font-bold text-grey-300 mb-1">지금 송금 요청</div>
+                        <p className="text-[11px] text-grey-400 mb-1.5">
+                          예정일을 기다리지 않고 <b>Wise</b> 송금 경로로 넘깁니다(교사 정산은 Wise 전용).
+                          자동 실행과 같은 서비스·같은 멱등성 키를 써서 이중 송금이 생기지 않습니다.
+                          법인 설립 전 지급 경계가 닫혀 있는 동안에는 거부되며, 그 사유가 그대로 표시됩니다.
+                        </p>
+                        <button
+                          disabled={busyId === b.id}
+                          data-testid={`dispatch-now-${b.id}`}
+                          onClick={() =>
+                            runBatchAction(
+                              b.id,
+                              () => dispatchPayoutBatchNow(b.id),
+                              "송금 요청을 보냈습니다."
+                            )
+                          }
+                          className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 disabled:opacity-50"
+                        >
+                          지금 송금 요청
+                        </button>
+                      </div>
+
+                      <div>
+                        <div className="text-[11px] font-bold text-grey-300 mb-1">외부 송금 완료 기록</div>
+                        <p className="text-[11px] text-grey-400 mb-1.5">
+                          은행에서 직접 보낸 경우에만 씁니다. Wise API를 호출하지 않고 이미 보낸 사실만
+                          기록하며, 기록하면 <b>지급 완료</b>가 되고 금액·예정일을 더는 바꿀 수 없습니다.
+                        </p>
+                        <div className="flex flex-wrap items-center gap-2">
+                          <input
+                            type="date"
+                            value={externalDraft[b.id]?.date ?? ""}
+                            onChange={(e) =>
+                              setExternalDraft((p) => ({
+                                ...p,
+                                [b.id]: { ...(p[b.id] ?? { amount: "", reference: "", memo: "" }), date: e.target.value },
+                              }))
+                            }
+                            data-testid={`external-date-${b.id}`}
+                            className="px-2 py-1 border-[1.5px] border-grey-200 rounded-lg text-[12px]"
+                          />
+                          <input
+                            placeholder={`금액(${b.currency})`}
+                            inputMode="numeric"
+                            value={externalDraft[b.id]?.amount ?? ""}
+                            onChange={(e) =>
+                              setExternalDraft((p) => ({
+                                ...p,
+                                [b.id]: { ...(p[b.id] ?? { date: "", reference: "", memo: "" }), amount: e.target.value },
+                              }))
+                            }
+                            data-testid={`external-amount-${b.id}`}
+                            className="px-2 py-1 border-[1.5px] border-grey-200 rounded-lg text-[12px] w-32"
+                          />
+                          <input
+                            placeholder="은행 거래 참조값"
+                            value={externalDraft[b.id]?.reference ?? ""}
+                            onChange={(e) =>
+                              setExternalDraft((p) => ({
+                                ...p,
+                                [b.id]: { ...(p[b.id] ?? { date: "", amount: "", memo: "" }), reference: e.target.value },
+                              }))
+                            }
+                            data-testid={`external-ref-${b.id}`}
+                            className="px-2 py-1 border-[1.5px] border-grey-200 rounded-lg text-[12px] flex-1"
+                          />
+                          <input
+                            placeholder="메모(선택)"
+                            value={externalDraft[b.id]?.memo ?? ""}
+                            onChange={(e) =>
+                              setExternalDraft((p) => ({
+                                ...p,
+                                [b.id]: { ...(p[b.id] ?? { date: "", amount: "", reference: "" }), memo: e.target.value },
+                              }))
+                            }
+                            className="px-2 py-1 border-[1.5px] border-grey-200 rounded-lg text-[12px] flex-1"
+                          />
+                          <button
+                            disabled={busyId === b.id}
+                            data-testid={`record-external-${b.id}`}
+                            onClick={() =>
+                              runBatchAction(
+                                b.id,
+                                () =>
+                                  recordExternalPayoutTransfer({
+                                    batchId: b.id,
+                                    transferredOn: externalDraft[b.id]?.date ?? "",
+                                    amountMinor: Math.round(Number(externalDraft[b.id]?.amount ?? "0")),
+                                    currency: b.currency,
+                                    bankReference: externalDraft[b.id]?.reference ?? "",
+                                    memo: externalDraft[b.id]?.memo,
+                                  }),
+                                "외부 송금 완료로 기록했습니다."
+                              )
+                            }
+                            className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 disabled:opacity-50"
+                          >
+                            완료 기록
+                          </button>
+                        </div>
                       </div>
                     </div>
                   )}

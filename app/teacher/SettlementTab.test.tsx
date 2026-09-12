@@ -52,6 +52,10 @@ const SETTLEMENT = {
       totalAmountMinor: 150000,
       lessonCount: 2,
       paidAt: null,
+      scheduledPayoutDate: "2026-10-10",
+      autoDispatchEnabled: true,
+      dateChanges: [],
+      externalTransfer: null,
       adjustments: [
         {
           id: "adj1",
@@ -122,8 +126,8 @@ describe("SettlementTab — 예정액 요약", () => {
   it("매월 10일 전월분 지급 안내와 예정 금액의 지급 예정일을 함께 보여준다", async () => {
     render(<SettlementTab />);
     expect(await screen.findByText(/매월 10일에 전월 수업분을 지급합니다/)).toBeInTheDocument();
-    expect(screen.getByText(/위 예정 금액의 지급 예정일:/)).toBeInTheDocument();
-    expect(screen.getByText(/2026년 10월 10일/)).toBeInTheDocument();
+    // <b> 때문에 텍스트가 여러 노드로 쪼개져 있어 컨테이너 기준으로 확인한다.
+    expect(screen.getByText(/송금 승인 시점에 정해집니다/)).toBeInTheDocument();
     expect(screen.getByText(/마지막 갱신:/)).toBeInTheDocument();
     expect(screen.getByText(/확정 전까지 금액이 변동될 수 있습니다/)).toBeInTheDocument();
     expect(screen.getByText(/공제를 반영하지 않은 총액/)).toBeInTheDocument();
@@ -167,6 +171,55 @@ describe("SettlementTab — 예정액 요약", () => {
     expect(screen.getByTestId(`final-${key}`)).toHaveTextContent("₩150,000");
   });
 
+  it("지급 예정일과 자동 송금 여부를 상세에 구분해 보여준다", async () => {
+    render(<SettlementTab />);
+    await openSubtab("history");
+    fireEvent.click(await screen.findByTestId("settlement-month-2026-09|KRW|scheduled"));
+
+    const key = "2026-09|KRW|scheduled";
+    expect(await screen.findByTestId(`sched-${key}`)).toHaveTextContent("2026. 10. 10.");
+    expect(screen.getByTestId(`auto-dispatch-${key}`)).toHaveTextContent("대상");
+  });
+
+  it("예정일이 아직 정해지지 않았으면 구체적인 날짜를 보여주지 않는다", async () => {
+    loadMock.mockResolvedValue({
+      ...SETTLEMENT,
+      months: [{ ...SETTLEMENT.months[0], scheduledPayoutDate: null }],
+    });
+    render(<SettlementTab />);
+    await openSubtab("history");
+    expect(await screen.findByText(/승인 후 지급 예정일이 정해집니다/)).toBeInTheDocument();
+  });
+
+  it("지급 예정일 변경 이력과 은행 직접 송금 사실을 교사도 볼 수 있다", async () => {
+    loadMock.mockResolvedValue({
+      ...SETTLEMENT,
+      months: [
+        {
+          ...SETTLEMENT.months[0],
+          status: "paid" as const,
+          scheduledPayoutDate: "2026-10-10",
+          dateChanges: [
+            {
+              id: "dc1",
+              previousDate: "2026-10-10",
+              newDate: "2026-10-20",
+              reason: "은행 점검으로 연기",
+              createdAt: "2026-10-05T00:00:00.000Z",
+            },
+          ],
+          externalTransfer: { transferredOn: "2026-10-20", amountMinor: 150000, currency: "KRW" },
+        },
+      ],
+    });
+    render(<SettlementTab />);
+    await openSubtab("history");
+    fireEvent.click(await screen.findByTestId("settlement-month-2026-09|KRW|paid"));
+
+    expect(await screen.findByTestId("date-change-dc1")).toHaveTextContent("은행 점검으로 연기");
+    expect(screen.getByTestId("external-2026-09|KRW|paid")).toHaveTextContent("은행 직접 송금");
+  });
+
   it("관리자 조정 내역의 사유와 금액을 교사도 볼 수 있다", async () => {
     render(<SettlementTab />);
     await openSubtab("history");
@@ -182,15 +235,13 @@ describe("SettlementTab — 예정액 요약", () => {
     });
     render(<SettlementTab />);
     await openSubtab("history");
-    expect(
-      await screen.findByText(/검토 완료 후 지급 \(예정일 2026년 10월 10일\)/)
-    ).toBeInTheDocument();
+    expect(await screen.findByText(/검토 완료 후 지급 \(예정일 2026\. 10\. 10\.\)/)).toBeInTheDocument();
   });
 
   it("예정 건은 지급 예정일을 그대로 보여준다", async () => {
     render(<SettlementTab />);
     await openSubtab("history");
-    expect(await screen.findByText(/지급 예정일 2026년 10월 10일/)).toBeInTheDocument();
+    expect(await screen.findByText(/지급 예정일 2026\. 10\. 10\./)).toBeInTheDocument();
   });
 
   it("정산 내역이 없으면 빈 상태 문구를 보여준다", async () => {

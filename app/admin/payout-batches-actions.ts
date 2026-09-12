@@ -128,3 +128,105 @@ export async function deletePayoutBatch(batchId: string): Promise<DeletePayoutBa
   if (error) return { status: "rejected", error: error.message };
   return { status: "deleted" };
 }
+
+// =========================================================================
+// P4-2 — 지급 예정일 / 자동 송금 / 지금 송금 요청 / 외부 송금 완료 기록
+// =========================================================================
+
+export type PayoutActionResult = { status: "ok" } | { status: "rejected"; error: string };
+
+/** 관리자만 지급 예정일을 바꾼다. 변경 전후·사유·처리자·시각은 DB가 이력으로 남긴다. */
+export async function setPayoutBatchScheduledDate(params: {
+  batchId: string;
+  newDate: string;
+  reason: string;
+}): Promise<PayoutActionResult> {
+  const { adminUserId } = await requireAdmin();
+  const admin = createAdminClient();
+  const { error } = await admin.rpc("set_payout_batch_scheduled_date", {
+    p_batch_id: params.batchId,
+    p_new_date: params.newDate,
+    p_reason: params.reason,
+    p_actor_id: adminUserId,
+  });
+  if (error) return { status: "rejected", error: error.message };
+  return { status: "ok" };
+}
+
+export async function setPayoutBatchAutoDispatch(batchId: string, enabled: boolean): Promise<PayoutActionResult> {
+  const { adminUserId } = await requireAdmin();
+  const admin = createAdminClient();
+  const { error } = await admin.rpc("set_payout_batch_auto_dispatch", {
+    p_batch_id: batchId,
+    p_enabled: enabled,
+    p_actor_id: adminUserId,
+  });
+  if (error) return { status: "rejected", error: error.message };
+  return { status: "ok" };
+}
+
+export async function getAutoDispatchEnabled(): Promise<boolean> {
+  await requireAdmin();
+  const admin = createAdminClient();
+  const { data, error } = await admin
+    .from("payout_auto_dispatch_settings")
+    .select("enabled")
+    .eq("id", true)
+    .maybeSingle();
+  if (error) throw new Error(error.message);
+  return Boolean(data?.enabled);
+}
+
+export async function setAutoDispatchEnabled(enabled: boolean): Promise<PayoutActionResult> {
+  const { adminUserId } = await requireAdmin();
+  const admin = createAdminClient();
+  const { error } = await admin.rpc("set_auto_dispatch_enabled", {
+    p_enabled: enabled,
+    p_actor_id: adminUserId,
+  });
+  if (error) return { status: "rejected", error: error.message };
+  return { status: "ok" };
+}
+
+// 지금 송금 요청 — 자동 예정일을 기다리지 않고 송금 경로로 넘긴다.
+// 실제 송금 여부는 DB의 real_disbursement_enabled() 게이트가 결정한다. 게이트가
+// 닫혀 있으면 dispatch_payout_batch()가 예외를 던지고, 그 사유가 그대로 화면에 뜬다
+// (이 액션이 게이트를 우회하거나 성공한 척하지 않는다).
+// 제공자는 받지 않는다 — 교사 정산은 Wise 전용이다(TEACHER_PAYOUT_PROVIDER).
+// 자동 실행과 수동 실행이 같은 서비스·같은 멱등성 키(dispatch_idempotency_key)를 쓴다.
+export async function dispatchPayoutBatchNow(batchId: string): Promise<PayoutActionResult> {
+  const { adminUserId } = await requireAdmin();
+  const admin = createAdminClient();
+  const { TEACHER_PAYOUT_PROVIDER } = await import("@/lib/payout/auto-dispatch");
+  const { error } = await admin.rpc("dispatch_payout_batch", {
+    p_batch_id: batchId,
+    p_provider: TEACHER_PAYOUT_PROVIDER,
+    p_requested_by: adminUserId,
+  });
+  if (error) return { status: "rejected", error: error.message };
+  return { status: "ok" };
+}
+
+// 외부 송금 완료 기록 — 은행에서 직접 보낸 건을 기록만 한다(금융 API 호출 없음).
+export async function recordExternalPayoutTransfer(params: {
+  batchId: string;
+  transferredOn: string;
+  amountMinor: number;
+  currency: string;
+  bankReference: string;
+  memo?: string;
+}): Promise<PayoutActionResult> {
+  const { adminUserId } = await requireAdmin();
+  const admin = createAdminClient();
+  const { error } = await admin.rpc("record_external_payout_transfer", {
+    p_batch_id: params.batchId,
+    p_transferred_on: params.transferredOn,
+    p_amount_minor: params.amountMinor,
+    p_currency: params.currency,
+    p_bank_reference: params.bankReference,
+    p_memo: params.memo ?? null,
+    p_actor_id: adminUserId,
+  });
+  if (error) return { status: "rejected", error: error.message };
+  return { status: "ok" };
+}

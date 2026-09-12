@@ -68,14 +68,30 @@ function formatAmount(minor: number, currency: string): string {
 // 검토 중인 건에 "지급 예정일 10월 10일"만 덩그러니 보이면, 10일이 지난 뒤에도
 // 같은 날짜가 남아 지급 시점을 오해하게 된다 — 검토 중에는 "검토 완료 후 지급"을
 // 앞세우고 예정일은 괄호로만 덧붙인다.
+// 'YYYY-MM-DD' 날짜 문자열은 new Date()로 파싱하면 UTC 자정이 되고, 그걸 로컬
+// 시간대로 렌더하면 하루 밀린다(지급 예정일 10월 10일이 10월 9일로 보였다).
+// 날짜만 있는 값은 시간대 변환 없이 그대로 표기한다.
+function formatDateOnly(dateOnly: string): string {
+  const [y, m, d] = dateOnly.split("-");
+  if (!y || !m || !d) return dateOnly;
+  return `${y}. ${Number(m)}. ${Number(d)}.`;
+}
+
+// 지급 예정일은 승인 시점에 묶음에 저장된다. **저장된 값이 있을 때만 구체적인
+// 날짜를 보여준다** — 승인 전에는 아직 정해지지 않았으므로 "매월 10일" 규칙만 안내한다.
 function payoutScheduleLabel(m: SettlementMonth): string {
-  if (m.payoutMonth === "unknown") return "지급 일정 미정";
-  const dateLabel = `${formatMonth(m.payoutMonth)} ${PAYOUT_DAY_OF_MONTH}일`;
   if (m.status === "paid") {
+    // 외부 송금일은 날짜만 있는 값, paid_at은 시각까지 있는 값이라 표기 방법이 다르다.
+    if (m.externalTransfer) return `지급일 ${formatDateOnly(m.externalTransfer.transferredOn)}`;
     return m.paidAt ? `지급일 ${new Date(m.paidAt).toLocaleDateString("ko-KR")}` : "지급 완료";
   }
-  if (m.status === "in_review") return `검토 완료 후 지급 (예정일 ${dateLabel})`;
-  return `지급 예정일 ${dateLabel}`;
+  if (m.scheduledPayoutDate) {
+    const dateLabel = formatDateOnly(m.scheduledPayoutDate);
+    return m.status === "in_review" ? `검토 완료 후 지급 (예정일 ${dateLabel})` : `지급 예정일 ${dateLabel}`;
+  }
+  // 아직 승인 전이라 예정일이 정해지지 않았다.
+  if (m.status === "in_review") return "검토 중 · 승인되면 지급 예정일이 정해집니다";
+  return "승인 후 지급 예정일이 정해집니다";
 }
 
 function formatMonth(key: string): string {
@@ -176,10 +192,9 @@ export default function SettlementTab() {
             (예: 9월 수업분 → 10월 {PAYOUT_DAY_OF_MONTH}일)
           </div>
           <div>
-            위 예정 금액의 지급 예정일:{" "}
-            {settlement.nextPayoutMonth
-              ? `${formatMonth(settlement.nextPayoutMonth)} ${PAYOUT_DAY_OF_MONTH}일`
-              : "—"}
+            지급 예정일은 <b>송금 승인 시점에 정해집니다</b>. 그 달 {PAYOUT_DAY_OF_MONTH}일 전에
+            승인되면 그 달 {PAYOUT_DAY_OF_MONTH}일, 이후에 승인되면 다음 달 {PAYOUT_DAY_OF_MONTH}일에
+            지급됩니다.
           </div>
           <div>마지막 갱신: {new Date(settlement.refreshedAt).toLocaleString("ko-KR")}</div>
           <div>수업 판정·조정 결과에 따라 확정 전까지 금액이 변동될 수 있습니다.</div>
@@ -267,6 +282,39 @@ export default function SettlementTab() {
                         <dd data-testid={`final-${key}`}>{formatAmount(m.totalAmountMinor, m.currency)}</dd>
                       </div>
                     </dl>
+                    <dl className="text-[11.5px] text-grey-500 mb-2 space-y-0.5">
+                      <div className="flex justify-between">
+                        <dt>지급 예정일</dt>
+                        <dd data-testid={`sched-${key}`}>
+                          {m.scheduledPayoutDate ? formatDateOnly(m.scheduledPayoutDate) : "승인 후 확정"}
+                        </dd>
+                      </div>
+                      <div className="flex justify-between">
+                        <dt>자동 송금</dt>
+                        <dd data-testid={`auto-dispatch-${key}`}>
+                          {m.autoDispatchEnabled ? "대상" : "대상 아님(개별 처리)"}
+                        </dd>
+                      </div>
+                      {m.externalTransfer && (
+                        <div className="flex justify-between">
+                          <dt>지급 방식</dt>
+                          <dd data-testid={`external-${key}`}>
+                            은행 직접 송금 · {formatDateOnly(m.externalTransfer.transferredOn)}
+                          </dd>
+                        </div>
+                      )}
+                    </dl>
+                    {m.dateChanges.length > 0 && (
+                      <ul className="text-[11px] text-grey-400 mb-2 space-y-0.5">
+                        {m.dateChanges.map((c) => (
+                          <li key={c.id} data-testid={`date-change-${c.id}`}>
+                            지급 예정일 {c.previousDate ? `${c.previousDate} → ` : ""}
+                            {c.newDate}
+                            {c.reason ? ` — ${c.reason}` : ""}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                     {m.adjustments.length > 0 && (
                       <ul className="text-[11px] text-grey-400 mb-2 space-y-0.5">
                         {m.adjustments.map((a) => (

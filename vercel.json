@@ -3,6 +3,10 @@
     {
       "path": "/api/cron/close-payout-month",
       "schedule": "0 3 1 * *"
+    },
+    {
+      "path": "/api/cron/dispatch-approved-payouts",
+      "schedule": "0 3 10 * *"
     }
   ]
 }

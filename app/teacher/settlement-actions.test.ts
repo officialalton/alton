@@ -41,7 +41,7 @@ function nextResult(table: string): QueryResult {
 }
 function builder(table: string) {
   const chain: Record<string, unknown> = {};
-  for (const m of ["select", "eq", "in", "order"]) chain[m] = () => chain;
+  for (const m of ["select", "eq", "in", "order", "limit"]) chain[m] = () => chain;
   chain.insert = (payload: Record<string, unknown>) => {
     calls.push({ table, op: "insert", payload });
     return chain;
@@ -137,6 +137,20 @@ describe("saveMyPayoutAccountAction", () => {
     const shortNumber = await saveMyPayoutAccountAction({ ...VALID_INPUT, accountNumber: "12" });
     expect(shortNumber.status).toBe("invalid");
 
+    expect(calls).toEqual([]);
+  });
+
+  it("송금이 진행 중인 정산 건이 있으면 계좌를 바꿀 수 없다", async () => {
+    // P4-2: 송금 요청 이후에는 수취 계좌를 바꿀 수 없다(돈이 나가는 중에 계좌가
+    // 바뀌면 어디로 갔는지 설명할 수 없다). 지급 완료 뒤에는 다시 바꿀 수 있다.
+    setQueue("payout_batches", [{ data: [{ id: "b1" }], error: null }]);
+
+    const result = await saveMyPayoutAccountAction(VALID_INPUT);
+
+    expect(result).toEqual({
+      status: "invalid",
+      message: "송금이 진행 중인 정산 건이 있어 지금은 계좌를 변경할 수 없습니다. 지급 완료 후 변경해주세요.",
+    });
     expect(calls).toEqual([]);
   });
 

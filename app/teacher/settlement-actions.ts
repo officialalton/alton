@@ -125,6 +125,24 @@ export async function saveMyPayoutAccountAction(
   }
 
   const admin = createAdminClient();
+
+  // P4-2 — 실제 송금 요청 이후에는 계좌를 바꿀 수 없다. 돈이 이미 나가는 중인데
+  // 수취 계좌가 바뀌면 어디로 갔는지 설명할 수 없게 된다. 지급이 끝난(paid) 뒤에는
+  // 다음 정산을 위해 다시 바꿀 수 있다 — 막는 것은 "진행 중"인 동안뿐이다.
+  const { data: inFlight, error: inFlightError } = await admin
+    .from("payout_batches")
+    .select("id")
+    .eq("teacher_id", userId)
+    .in("status", ["dispatch_requested", "provider_pending", "processing"])
+    .limit(1);
+  if (inFlightError) throw new Error(inFlightError.message);
+  if (inFlight && inFlight.length > 0) {
+    return {
+      status: "invalid",
+      message: "송금이 진행 중인 정산 건이 있어 지금은 계좌를 변경할 수 없습니다. 지급 완료 후 변경해주세요.",
+    };
+  }
+
   const { data: existing, error: existingError } = await admin
     .from("teacher_payout_accounts")
     .select("id, account_holder_name, bank_name, account_number_last4, currency, country, swift_or_routing")

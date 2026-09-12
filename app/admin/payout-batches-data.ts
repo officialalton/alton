@@ -48,6 +48,10 @@ export type PayoutBatchListItem = {
   approvedAt: string | null;
   paidAt: string | null;
   failureReason: string | null;
+  // P4-2: 지급 예정일은 저장값이다(화면에서 계산하지 않는다).
+  scheduledPayoutDate: string | null;
+  autoDispatchEnabled: boolean;
+  externalTransferRecordedAt: string | null;
   items: PayoutBatchItem[];
   auditLog: PayoutBatchAuditEntry[];
 };
@@ -55,7 +59,9 @@ export type PayoutBatchListItem = {
 export async function loadPayoutBatches(supabase: SupabaseClient): Promise<PayoutBatchListItem[]> {
   const { data: batches } = await supabase
     .from("payout_batches")
-    .select("id, teacher_id, period_start, period_end, currency, status, created_at, approved_at, paid_at, failure_reason")
+    .select(
+      "id, teacher_id, period_start, period_end, currency, status, created_at, approved_at, paid_at, failure_reason, scheduled_payout_date, auto_dispatch_enabled, external_transfer_recorded_at"
+    )
     .order("created_at", { ascending: false });
   if (!batches || batches.length === 0) return [];
 
@@ -119,6 +125,9 @@ export async function loadPayoutBatches(supabase: SupabaseClient): Promise<Payou
       approvedAt: b.approved_at,
       paidAt: b.paid_at,
       failureReason: b.failure_reason ?? null,
+      scheduledPayoutDate: (b.scheduled_payout_date as string | null) ?? null,
+      autoDispatchEnabled: b.auto_dispatch_enabled !== false,
+      externalTransferRecordedAt: (b.external_transfer_recorded_at as string | null) ?? null,
       items: batchItems,
       auditLog: auditByBatch.get(b.id) ?? [],
     };

@@ -6,10 +6,11 @@ import type { PayoutBatchListItem } from "./payout-batches-data";
 // P4-2(UAT 후속) — 탭이 마운트되면 목록을 직접 조회한다(SSR initialBatches만
 // 믿다가 "탭을 다시 열면 목록이 비어 보이는" 버그가 있었다). 기본 목은 SSR로
 // 받은 값과 같은 배열을 돌려주도록 beforeEach에서 채운다.
-const { listMock, deleteMock, closeMonthMock } = vi.hoisted(() => ({
+const { listMock, deleteMock, closeMonthMock, autoDispatchMock } = vi.hoisted(() => ({
   listMock: vi.fn(),
   deleteMock: vi.fn(),
   closeMonthMock: vi.fn(),
+  autoDispatchMock: vi.fn(),
 }));
 
 vi.mock("./payout-batches-actions", () => ({
@@ -21,6 +22,12 @@ vi.mock("./payout-batches-actions", () => ({
   listPayoutBatchesAction: listMock,
   deletePayoutBatch: deleteMock,
   closePayoutMonthNow: closeMonthMock,
+  getAutoDispatchEnabled: autoDispatchMock,
+  setAutoDispatchEnabled: vi.fn(),
+  setPayoutBatchScheduledDate: vi.fn(),
+  setPayoutBatchAutoDispatch: vi.fn(),
+  dispatchPayoutBatchNow: vi.fn(),
+  recordExternalPayoutTransfer: vi.fn(),
 }));
 
 const batches: PayoutBatchListItem[] = [
@@ -48,6 +55,7 @@ beforeEach(() => {
   listMock.mockResolvedValue([]);
   deleteMock.mockResolvedValue({ status: "deleted" });
   closeMonthMock.mockResolvedValue({ closed: 1, itemCount: 2 });
+  autoDispatchMock.mockResolvedValue(true);
 });
 
 describe("PayoutBatchesTab (v3, R10 Task C)", () => {
