@@ -54,6 +54,21 @@ export default function ContractArchivePanel() {
   // 다운로드 결과를 계약별로 따로 보여준다 — "파일 없음"과 "실패"는 다른 일이다.
   const [downloadState, setDownloadState] = useState<Record<string, string>>({});
 
+  // 서버는 사유 코드만 준다(내부 예외·Drive 응답·파일 경로를 응답에 담지
+  // 않는다). 사용자에게 보일 문구는 화면이 고른다.
+  function messageForReason(reason: string | undefined): string {
+    switch (reason) {
+      case "not_found":
+        return "문서를 찾을 수 없거나 열람 권한이 없습니다.";
+      case "not_stored":
+        return "아직 보관이 끝나지 않아 내려받을 수 없습니다.";
+      case "fetch_failed":
+        return "지금은 내려받을 수 없습니다. 잠시 뒤 다시 시도해 주세요.";
+      default:
+        return "내려받지 못했습니다.";
+    }
+  }
+
   useEffect(() => {
     let cancelled = false;
     setError(null);
@@ -75,10 +90,10 @@ export default function ContractArchivePanel() {
     try {
       const res = await fetch(`/api/admin/contract-artifacts/${row.signedArtifactId}`);
       if (!res.ok) {
-        const payload = (await res.json().catch(() => ({}))) as { error?: string };
+        const payload = (await res.json().catch(() => ({}))) as { reason?: string };
         setDownloadState((prev) => ({
           ...prev,
-          [row.contractId]: payload.error ?? "내려받지 못했습니다.",
+          [row.contractId]: messageForReason(payload.reason),
         }));
         return;
       }
@@ -89,9 +104,14 @@ export default function ContractArchivePanel() {
       a.download = `계약-${row.studentName || row.contractId}.pdf`;
       a.click();
       URL.revokeObjectURL(url);
-      setDownloadState((prev) => ({ ...prev, [row.contractId]: "내려받았습니다." }));
+      // 브라우저가 실제로 저장했는지는 이 화면도 알 수 없다 — "받았습니다"라고
+      // 단정하지 않는다.
+      setDownloadState((prev) => ({ ...prev, [row.contractId]: "내려받기를 시작했습니다." }));
     } catch {
-      setDownloadState((prev) => ({ ...prev, [row.contractId]: "내려받지 못했습니다." }));
+      setDownloadState((prev) => ({
+        ...prev,
+        [row.contractId]: messageForReason("fetch_failed"),
+      }));
     }
   }
 

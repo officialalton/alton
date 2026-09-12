@@ -3,6 +3,12 @@ import { describe, expect, it, vi, beforeEach } from "vitest";
 import DocumentsTab from "./DocumentsTab";
 import { listConsentGapsAction, listCompletedConsentsAction } from "./consent-actions";
 
+vi.mock("./teacher-documents-actions", () => ({
+  listTeacherDocumentSummariesAction: vi.fn(async () => []),
+  listTeacherDocumentsAction: vi.fn(async () => []),
+  getTeacherDocumentDownloadUrlAction: vi.fn(),
+}));
+
 vi.mock("./contract-archive-actions", () => ({
   listContractArchiveAction: vi.fn(async () => []),
 }));
@@ -55,8 +61,6 @@ describe("DocumentsTab", () => {
 
   it("아직 연결되지 않은 영역은 준비 중임을 밝힌다", () => {
     render(<DocumentsTab />);
-    fireEvent.click(screen.getByText("교사 서류"));
-    expect(screen.getByText(/교사 서류 보관함은 준비 중입니다/)).toBeInTheDocument();
     fireEvent.click(screen.getByText("회사 문서"));
     expect(screen.getByText(/아직 연결되지 않았습니다/)).toBeInTheDocument();
   });

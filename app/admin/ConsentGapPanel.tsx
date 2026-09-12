@@ -3,7 +3,12 @@
 import ConsentGapSection from "./ConsentGapSection";
 import { listConsentGapsAction, listCompletedConsentsAction } from "./consent-actions";
 import { useTabCachedData } from "./use-tab-cached-data";
-import { invalidateCachedTabData } from "./tab-data-cache";
+import {
+  CONSENT_GAPS_CACHE_KEY,
+  CONSENT_COMPLETED_CACHE_KEY,
+  CONSENT_CACHE_TTL_MS,
+  invalidateConsentCaches,
+} from "./consent-cache";
 import type { ConsentGapItem, CompletedConsentItem } from "./consultation-data";
 
 // P4-3 1단계 — `문서 > 동의서`의 데이터 컨테이너.
@@ -13,19 +18,7 @@ import type { ConsentGapItem, CompletedConsentItem } from "./consultation-data";
 // 네트워크 요청이 나가지 않는다 — 두 탭이 공통 부모 없이 데이터를 공유한다.
 //
 // 상태가 자주 바뀌는 화면이 아니라 TTL을 30초로 둔다(정규 계약 발송의 10초와 대비).
-export const CONSENT_GAPS_CACHE_KEY = "consent-gaps";
-export const CONSENT_COMPLETED_CACHE_KEY = "consent-completed";
-export const CONSENT_CACHE_TTL_MS = 30_000;
-
-/**
- * 동의 상태를 바꾸는 동작 뒤에 부른다. 이 화면과 `신규 > 오류/재처리 현황판`이
- * 같은 캐시를 공유하므로, 한 번 버리면 두 화면 모두 다음 조회에서 최신 상태를
- * 읽는다(이전 상태가 계속 보이지 않는다).
- */
-export function invalidateConsentCaches(): void {
-  invalidateCachedTabData(CONSENT_GAPS_CACHE_KEY, CONSENT_COMPLETED_CACHE_KEY);
-}
-
+// 캐시 키와 무효화 함수는 consent-cache.ts가 정본이다.
 export default function ConsentGapPanel() {
   const gaps = useTabCachedData<ConsentGapItem[]>({
     cacheKey: CONSENT_GAPS_CACHE_KEY,

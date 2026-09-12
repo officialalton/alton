@@ -78,20 +78,48 @@ describe("ContractArchivePanel", () => {
     );
   });
 
-  it("다운로드 실패 사유를 서버 응답 그대로 보여준다", async () => {
+  it("다운로드 실패를 사용자 문구로 안내한다(내부 사유를 그대로 노출하지 않는다)", async () => {
     vi.stubGlobal(
       "fetch",
       vi.fn().mockResolvedValue({
         ok: false,
-        json: async () => ({ error: "아직 보관되지 않은 문서입니다." }),
+        json: async () => ({ reason: "fetch_failed" }),
       })
     );
-    render(<ContractArchivePanel />);
+    const { container } = render(<ContractArchivePanel />);
     await waitFor(() => expect(screen.getByText("서명본 내려받기")).toBeInTheDocument());
     fireEvent.click(screen.getByText("서명본 내려받기"));
     await waitFor(() =>
-      expect(screen.getByText("아직 보관되지 않은 문서입니다.")).toBeInTheDocument()
+      expect(screen.getByText(/잠시 뒤 다시 시도해 주세요/)).toBeInTheDocument()
     );
+    // 서버 사유 코드나 내부 용어가 화면에 그대로 나오지 않는다.
+    expect(container.textContent).not.toContain("fetch_failed");
+  });
+
+  it("접근 불가·파일 없음·일시적 실패를 각각 다른 문구로 안내한다", async () => {
+    const cases: [string, RegExp][] = [
+      ["not_found", /찾을 수 없거나 열람 권한이 없습니다/],
+      ["not_stored", /아직 보관이 끝나지 않아/],
+      ["fetch_failed", /잠시 뒤 다시 시도해 주세요/],
+    ];
+    for (const [reason, expected] of cases) {
+      vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: false, json: async () => ({ reason }) }));
+      const view = render(<ContractArchivePanel />);
+      await waitFor(() => expect(view.getByText("서명본 내려받기")).toBeInTheDocument());
+      fireEvent.click(view.getByText("서명본 내려받기"));
+      await waitFor(() => expect(view.getByText(expected)).toBeInTheDocument());
+      view.unmount();
+    }
+  });
+
+  it("브라우저 저장 여부를 단정하지 않는다", async () => {
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: true, blob: async () => new Blob(["pdf"]) }));
+    vi.stubGlobal("URL", { createObjectURL: () => "blob:x", revokeObjectURL: vi.fn() });
+    render(<ContractArchivePanel />);
+    await waitFor(() => expect(screen.getByText("서명본 내려받기")).toBeInTheDocument());
+    fireEvent.click(screen.getByText("서명본 내려받기"));
+    await waitFor(() => expect(screen.getByText("내려받기를 시작했습니다.")).toBeInTheDocument());
+    expect(screen.queryByText("내려받았습니다.")).not.toBeInTheDocument();
   });
 
   it("검색·상태 필터가 서버 조회에 전달된다", async () => {

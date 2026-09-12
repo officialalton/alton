@@ -3,10 +3,7 @@
 import { useState } from "react";
 import { useTabCachedData } from "./use-tab-cached-data";
 import { listConsentGapsAction } from "./consent-actions";
-import {
-  CONSENT_GAPS_CACHE_KEY,
-  CONSENT_CACHE_TTL_MS,
-} from "./ConsentGapPanel";
+import { CONSENT_GAPS_CACHE_KEY, CONSENT_CACHE_TTL_MS } from "./consent-cache";
 import { useRouter } from "next/navigation";
 import {
   createTrialSessionFromConsultation,

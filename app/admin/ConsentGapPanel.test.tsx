@@ -1,6 +1,7 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi, beforeEach } from "vitest";
-import ConsentGapPanel, { invalidateConsentCaches } from "./ConsentGapPanel";
+import ConsentGapPanel from "./ConsentGapPanel";
+import { invalidateConsentCaches } from "./consent-cache";
 import { listConsentGapsAction, listCompletedConsentsAction } from "./consent-actions";
 import {
   setActiveAdminUser,

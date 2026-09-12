@@ -36,19 +36,23 @@ export async function GET(
     .maybeSingle();
 
   if (!artifact) {
-    return NextResponse.json({ error: "문서를 찾을 수 없습니다." }, { status: 404 });
+    // 권한 부족과 존재하지 않음을 밖에서 구분하지 않는다(존재 여부 자체가 정보다).
+    return NextResponse.json({ reason: "not_found" }, { status: 404 });
   }
 
-  // "파일 없음"과 "다운로드 실패"를 구분해 돌려준다.
+  // 내부 상태값(sync_status)이나 Drive 응답은 응답 본문에 담지 않는다 —
+  // 화면은 reason 코드만 보고 자기 문구를 고른다. 상세 원인은 서버 로그로 간다.
   if (artifact.sync_status !== "succeeded" || !artifact.drive_file_id) {
-    return NextResponse.json(
-      {
-        error: "아직 보관되지 않은 문서입니다.",
+    console.warn(
+      JSON.stringify({
+        event: "contract_artifact_download_blocked",
         reason: "not_stored",
+        artifactId,
         syncStatus: artifact.sync_status,
-      },
-      { status: 409 }
+        hasFileId: Boolean(artifact.drive_file_id),
+      })
     );
+    return NextResponse.json({ reason: "not_stored" }, { status: 409 });
   }
 
   const { data: contract } = await supabase
@@ -66,8 +70,8 @@ export async function GET(
     detail: { artifactType: artifact.artifact_type, contractId: artifact.contract_id },
   };
 
-  // 시작을 먼저 남긴다 — 중간에 끊겨도 "열람을 시도했다"는 사실은 남는다.
-  await recordDocumentAccess({ ...auditBase, action: "download_started" });
+  // 접근 시작을 먼저 남긴다 — 중간에 끊겨도 "열람을 시도했다"는 사실은 남는다.
+  await recordDocumentAccess({ ...auditBase, action: "download_requested" });
 
   try {
     const token = await getDriveTokenForCurrentEnv();
@@ -77,8 +81,9 @@ export async function GET(
     );
     const body = await res.arrayBuffer();
 
-    // 바이트를 확보한 뒤에야 완료로 기록한다.
-    await recordDocumentAccess({ ...auditBase, action: "download_completed" });
+    // 여기까지가 서버가 보장할 수 있는 전부다 — 원본을 확보해 응답으로 넘겼다.
+    // 브라우저가 실제로 저장했는지는 알 수 없으므로 "다운로드 완료"로 적지 않는다.
+    await recordDocumentAccess({ ...auditBase, action: "file_retrieved" });
 
     const fileName = `contract-${artifact.contract_id}-${artifact.artifact_type}.pdf`;
     return new NextResponse(body, {
@@ -89,14 +94,18 @@ export async function GET(
       },
     });
   } catch (e) {
-    await recordDocumentAccess({
-      ...auditBase,
-      action: "download_failed",
-      detail: { ...auditBase.detail, message: e instanceof Error ? e.message : String(e) },
-    });
-    return NextResponse.json(
-      { error: "문서를 내려받지 못했습니다.", reason: "fetch_failed" },
-      { status: 502 }
+    // 상세 원인(Drive 응답·예외 메시지·파일 경로)은 서버 로그에만 남긴다.
+    const message = e instanceof Error ? e.message : String(e);
+    console.error(
+      JSON.stringify({
+        event: "contract_artifact_download_failed",
+        artifactId,
+        driveFileId: artifact.drive_file_id,
+        message,
+      })
     );
+    // 감사 detail에도 원문을 복제하지 않는다 — 실패했다는 사실만 남긴다.
+    await recordDocumentAccess({ ...auditBase, action: "download_failed" });
+    return NextResponse.json({ reason: "fetch_failed" }, { status: 502 });
   }
 }

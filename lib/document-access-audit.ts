@@ -2,14 +2,20 @@ import { createAdminClient } from "@/lib/supabase-admin";
 
 // P4-3 2단계 — 문서 접근 감사 기록.
 //
-// **링크 발급과 실제 다운로드를 구분한다.** 발급만 해 놓고 완료로 기록하면
-// "누가 실제로 받아 갔는가"를 되짚을 수 없다. 계약은 서버가 바이트를 흘려보내
-// 시작·완료·실패를 각각 남길 수 있고, 교사 서류는 서명 URL 방식이라 발급까지만
-// 보장된다 — 그 차이를 action 값으로 남긴다.
+// **확인할 수 없는 것을 확인한 것처럼 적지 않는다.**
+//
+// 서버가 Drive에서 바이트를 확보한 시점은 사용자의 다운로드 완료가 아니다 —
+// 브라우저가 실제로 저장했는지는 이 앱이 알 수 없다. 그래서 "사용자가 받아
+// 갔다"를 뜻하는 값은 두지 않고, 서버가 보장할 수 있는 것만 남긴다.
+// 교사 서류는 서명 URL 방식이라 발급까지만 보장된다.
 export type DocumentAccessAction =
+  /** 인가를 통과해 접근을 시작했다. */
+  | "download_requested"
+  /** 서버가 원본 바이트를 확보해 응답으로 넘겼다 — 브라우저 저장 여부는 보장하지 않는다. */
+  | "file_retrieved"
+  /** 서명 URL을 내줬다 — 실제 내려받았는지는 알 수 없다. */
   | "download_url_issued"
-  | "download_started"
-  | "download_completed"
+  /** 인가 통과 뒤 확보·전달에 실패했다. */
   | "download_failed";
 
 export async function recordDocumentAccess(params: {
