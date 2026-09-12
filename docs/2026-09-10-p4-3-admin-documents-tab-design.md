@@ -1,7 +1,10 @@
 # P4-3 관리자 문서 탭 설계 — 회사 문서 / 계약 / 동의서
 
-상태: **설계안(2026-09-10). 구현 착수 전 제품 오너 승인 필요.**
+상태: **설계안(2026-09-10 최초, 2026-09-12 P4-2 구현 대조 반영). 구현 착수 전
+제품 오너 승인 필요.**
 범위 근거: `docs/2026-09-10-p-execution-roadmap.md:982-994`(P4-3 관리자 문서 운영).
+대조 대상: P4-2 구현(`docs/2026-09-12-p4-2-teacher-settlement-plan.md`,
+마이그레이션 `20261284000000_p4_2_teacher_payout_account_and_documents.sql`).
 
 이 문서는 계획만 만든다. 코드·마이그레이션·환경변수·Google Drive 권한은
 이 설계 승인 전에 아무것도 바꾸지 않는다.
@@ -9,6 +12,35 @@
 ---
 
 ## 1. 개요
+
+### 2026-09-11 추가 확정 — 교사 제출 서류 아카이브
+
+- 기존 회사 문서·계약·동의서 구성에 **교사별 제출 서류 보관 영역**을 추가한다.
+  아래의 기존 3분할 설명은 초기 설계이며, 이 추가 범위를 반영해 상세 설계한다.
+- 교사가 본인 제출 창구에서 업로드하면 관리자 `문서`에서 해당 교사별로
+  아카이빙되어 조회·다운로드할 수 있어야 한다. 단순 업로드·보관 창구로 사용한다.
+- **제출 여부·검토·승인·보완 상태를 정산·매칭·수업 등 특정 업무의 게이트로
+  사용하지 않는다.** 미제출 시 정산 보류 여부는 미결정 항목이 아니라 게이트를
+  두지 않는 것으로 확정한다.
+- 교사는 본인 서류만 접근하며 기존 관리자 전용 계약·동의서 권한은 확대하지
+  않는다. 파일과 교사 연결, 저장 경로·메타데이터·접근 권한은 후속 상세 설계한다.
+  회사 문서의 읽기 전용 정책과 교사 제출용 업로드 경로는 구분한다.
+- 계좌 정보는 관리자 `정산`의 교사별 목록에서 조회한다(P4-2). 이 절은 계획
+  반영이며 현재 P4-1 작업에 추가하지 않고, 코드·DB·Drive 권한을 변경하지 않는다.
+
+### 2026-09-12 대조 — P4-2가 이미 만든 것 / P4-3이 할 일
+
+P4-2 구현이 끝나면서 이 설계의 전제 두 가지가 바뀌었다.
+
+- **바뀐 것 1 — 저장소가 이미 있다.** `teacher_documents` 테이블과 비공개
+  Storage 버킷 `teacher-documents`가 P4-2에서 생성됐다. P4-3은 **새로 만들지
+  않고 읽기만 한다**(§6). 교사 서류용 추가 migration은 필요 없다.
+- **바뀐 것 2 — 게이트 불가가 스키마로 고정됐다.** `teacher_documents`에는
+  승인·검토·보완 상태 컬럼이 아예 없다. 정책 문장뿐 아니라 **구조적으로**
+  게이트를 만들 수 없고, 그 부재는 회귀 테스트로 고정돼 있다
+  (`app/teacher/teacher-settlement-rls.integration.test.ts`).
+- **그대로인 것**: 회사 문서(Drive 읽기 전용)·계약(읽기 전용 아카이브)·
+  동의서(이관) 설계는 변경 없다.
 
 ### 1.1 목표
 
@@ -19,6 +51,7 @@
 | 회사 문서 | 법인 기초 서류·계약서 양식 열람/다운로드 | Google Drive(폴더 구조·파일 메타데이터 자체가 1차 진실 소스) |
 | 계약 | **읽기 전용 아카이브** — 계약·서명 상태 조회, 서명본 다운로드 | `contracts` / `contract_versions` / `drive_artifacts` |
 | 동의서 | 보호자 동의 대기·완료 현황(기존 `신규 > 보호자 동의 대기` 이관) | `profiles` / `guardian_consents` |
+| 교사 서류 | **읽기 전용 보관함** — 교사별 제출 파일 조회·다운로드 | `teacher_documents` + 비공개 Storage 버킷 `teacher-documents` (**P4-2에서 이미 생성됨**) |
 
 ### 1.2 확정 정책(재논의하지 않음)
 
@@ -30,12 +63,22 @@
 6. `문서 > 계약`은 조회·다운로드만 한다. 발송/재발송/무효화 버튼을 두지 않는다.
 7. 계약 쓰기 동작의 진입점은 `신규 > 정규 계약 발송` **한 곳뿐**이다.
 8. 보호자 동의 대기는 `문서 > 동의서`로 이관한다.
+9. **교사 서류는 P4-2가 만든 원본을 그대로 읽는다** — 관리자용 사본 테이블·
+   캐시·별도 버킷을 만들지 않는다. 업로드 창구는 교사 포털 `정산` 탭 하나뿐이고,
+   관리자 문서 탭은 **읽기 전용**이다(업로드·삭제·대체 버튼을 두지 않는다).
+10. **제출·검토·승인·미제출 여부는 어떤 업무의 조건도 되지 않는다.** 정산·매칭·
+    수업 어느 경로도 `teacher_documents`를 읽지 않는다. 화면에도 "미제출",
+    "검토 필요", "승인됨" 같은 상태 배지를 만들지 않는다.
+11. 교사는 본인 파일만 접근한다(P4-2 경로 그대로, 변경 없음). 계약·동의서의
+    관리자 전용 권한은 확대하지 않는다.
 
 ### 1.3 이번 범위 밖
 
 - 실제 Drive/폴더 생성, Shared Drive 멤버십·권한 부여
 - 실제 환경변수 추가(이 문서에 이름과 용도만 기록)
-- 마이그레이션 작성(§6 결론: 초기 범위에서는 불필요)
+- 마이그레이션 **실행**(§7 결론: 문서 접근 감사 테이블 1건이 필요하다 —
+  설계만 하고 이번 라운드에서 작성·적용하지 않는다)
+- `teacher_documents`·`teacher-documents` 버킷의 스키마 변경(P4-2 구조를 그대로 쓴다)
 - 회사 문서 업로드·편집·삭제(1차는 읽기 전용)
 - `company_documents` 테이블의 복구 또는 제거
 
@@ -73,9 +116,14 @@ entitlements, unified-schedule, booking, payouts, workspace
 - 서브탭은 상위 탭 내부 `useState`로 관리한다. `신규` 탭이 쓰는 방식
   (`app/admin/ConsultationTab.tsx:46-55`의 `SUB_NAV`, `:91`의 `useState<SubTab>`)을
   그대로 따르고, 서브탭을 URL에 싣지 않는다(현행 관례와 일치).
-- 서브탭 순서: `회사 문서` → `계약` → `동의서`. 기본 서브탭은 **`계약`**을
-  권고한다 — 회사 문서는 별도 capability가 없으면 빈 화면이 되고, 계약이
-  가장 자주 쓰이는 조회 대상이다.
+- 서브탭 순서(2026-09-12 갱신): `회사 문서` → `계약` → `동의서` → `교사 서류`.
+  기본 서브탭은 **`계약`**을 권고한다 — 회사 문서는 별도 capability가 없으면
+  빈 화면이 되고, 계약이 가장 자주 쓰이는 조회 대상이다. `교사 서류`는 조회
+  빈도가 가장 낮아 맨 뒤에 둔다.
+- 서브탭별 게이트가 다르다는 점에 주의한다: `회사 문서`만
+  `manage_company_documents` capability이고, `계약`·`동의서`·`교사 서류`는
+  전부 `requireAdmin()`이다(§9-1, §9-9). 서브탭 하나가 권한 부족으로 비어도
+  나머지 서브탭은 정상 동작해야 한다 — 탭 전체를 막지 않는다.
 
 ### 2.3 기존 탭에 대한 영향
 
@@ -98,7 +146,7 @@ entitlements, unified-schedule, booking, payouts, workspace
 
 **구현 규칙**: `문서 > 계약` 컴포넌트는 `trial-onboarding-actions.ts`의 발송
 액션, `consultation-actions.ts:633`의 `voidContractVersion`을 **import 하지
-않는다**. 이 규칙은 테스트로 고정한다(§7 참고).
+않는다**. 이 규칙은 테스트로 고정한다(§8 참고).
 
 ---
 
@@ -177,7 +225,7 @@ RLS 현황을 그대로 따른다.
 관한 DB RLS가 이미 이 문자열로 열려 있고, 다른 문자열을 앱에서만 쓰면
 "앱은 통과하는데 DB가 빈 결과를 주는" 어긋남이 생긴다.
 
-> **주의(열린 항목 §8-1)**: `contracts` 자체의 select 정책에는
+> **주의(열린 항목 §9-1)**: `contracts` 자체의 select 정책에는
 > `manage_consultations`가 없다. `role='admin'`이 아닌 운영자는
 > `contract_versions`는 보이는데 `contracts`는 안 보이는 비대칭 상태다.
 > 현재 실제 운영자는 전부 `role='admin'`이라 드러나지 않지만, 문서 탭은
@@ -276,11 +324,12 @@ base64로 부풀리게 된다.
 `lib/drive-artifacts.ts:346-347`). 구현 시 `driveFetch`를 export 하거나
 `lib/drive/fetch.ts`로 추출해 공유한다. 복붙 금지.
 
-**로깅**: 다운로드는 개인정보 접근이므로, 누가 어느 `drive_artifact_id`를
-언제 받았는지 구조화 로그(`console.error`/로그 싱크의 기존 JSON 패턴,
-`lib/drive-artifacts.ts:101-108` 참고)로 남긴다. 감사 테이블은 만들지 않는다
-(§6 — migration 없음 원칙 유지). 감사 테이블이 필요하다는 판단이 서면 별도
-승인 항목이다(§8-4).
+**로깅(2026-09-12 정정)**: 다운로드는 개인정보 접근이므로 구조화 로그와
+**DB 감사 기록을 함께** 남긴다. 초안에는 "감사 테이블은 만들지 않는다"고
+적혀 있었으나 §9-4에서 "1차부터 DB 감사 기록을 남긴다"로 확정됐다 —
+이 문단이 그 확정과 어긋나 있었고, 여기서 확정 쪽으로 통일한다. 기록 대상은
+§7이 정의하는 공용 테이블 `document_access_events` 한 곳이다(계약 서명본과
+교사 제출 서류가 같은 테이블을 쓴다).
 
 ---
 
@@ -446,12 +495,12 @@ RLS 정책이 없어도 모순이 없으며, (3) `계약권한`/`manage_consulta
 없다. 따라서 회사 문서 기능은 Preview에서 **동작하지 않는 것이 정상**이다 —
 Preview에서는 "이 환경에서는 회사 문서를 열람할 수 없습니다" 빈 상태를
 명시적으로 렌더한다. Preview에서도 UAT하려면 그 서비스 계정을 새 Drive에도
-초대해야 하는데, 이는 별도 승인 항목이다(§8-3).
+초대해야 하는데, 이는 별도 승인 항목이다(§9-3).
 
 또한 `DRIVE_SCOPE`는 전체 `drive` 스코프다(`lib/google-workspace-auth.ts:40`).
 읽기 전용 목적에는 `drive.readonly`가 맞지만, DWD 스코프 목록 변경은 Google
 Workspace 관리 콘솔 작업이라 이번 범위 밖이다 — 1차는 기존 `DRIVE_SCOPE`를
-재사용하고, 코드에서 쓰기 API를 호출하지 않는 것으로 제한한다(§8-2).
+재사용하고, 코드에서 쓰기 API를 호출하지 않는 것으로 제한한다(§9-2).
 
 ### 5.4 서버 액션 개요
 
@@ -520,22 +569,171 @@ listCompanyDocumentsAction(input?: { folderPath?: string })
 
 ---
 
-## 6. Migration 필요 여부
+## 6. 교사 제출 서류 보관 설계 (`문서 > 교사 서류`)
 
-| 서브 영역 | 필요 여부 | 근거 |
+**성격: 읽기 전용 보관함이다.** 업로드는 교사 포털에서만 하고, 관리자 문서
+탭은 교사별로 찾아 열어보는 창구다. 제출 여부로 어떤 업무도 막지 않는다.
+
+### 6.1 이미 존재하는 구조 — 그대로 읽는다(P4-2, 재확인 완료)
+
+마이그레이션 `20261284000000_p4_2_teacher_payout_account_and_documents.sql`.
+
+| 대상 | 실제 정의 | P4-3에서 |
 | --- | --- | --- |
-| 계약 아카이브 | **불필요** | `contracts`/`contract_versions`/`drive_artifacts`/`contract_company_approvals`/`contract_activation_retries`가 모두 존재하고, 조회 RLS도 이미 `is_admin() or manage_consultations`로 열려 있다(§3.2). 읽기 전용이라 새 컬럼·상태·제약이 없다. |
-| 동의서 이관 | **불필요** | 화면 위치 이동과 데이터 로딩 경로 변경뿐. `loadConsentGaps`(`app/admin/consultation-data.ts:192`)의 쿼리 자체를 바꾸지 않는다. capability `manage_guardian_consent`와 그 RLS는 이미 존재한다(`supabase/migrations/20260909000000_r2_task8_capability_gates.sql:515`). |
-| 회사 문서 | **불필요** | 1차 진실 소스가 Drive이고 로컬 캐시 테이블을 만들지 않는다(정책 4). `manage_company_documents`는 `supervisor_capabilities`에 관리자가 직접 부여하는 자유 텍스트라 enum/DDL 변경이 없다(`20260912000000_...:376-377` 주석의 기존 관례). `company_documents` 테이블은 손대지 않는다(정책 3). |
+| `teacher_documents` | `id / teacher_id / file_name / storage_path / content_type / size_bytes / note / uploaded_at / uploaded_by` | **그대로 조회**. 컬럼 추가·변경 없음 |
+| Storage 버킷 `teacher-documents` | 비공개(`public=false`), 경로 규칙 `<teacher_id>/<uuid>-<파일명>` | **그대로 조회·서명 URL 발급** |
+| `teacher_documents` RLS | select: `teacher_id = auth.uid() or is_admin() or current_user_has_capability('정산권한')`. **쓰기 정책 없음**(= 클라이언트 직접 쓰기 불가, 서버 액션 전용) | 변경 없음 |
+| Storage 정책 `교사 본인 서류 조회` | `bucket_id = 'teacher-documents'` + 경로 첫 세그먼트가 본인 id (또는 관리자·정산권한) | 변경 없음 |
+| 업로드 창구 | 교사 포털 `정산` 탭 — `uploadMyDocumentAction()` / `listMyDocumentsAction()` / `getMyDocumentDownloadUrlAction()` (`app/teacher/settlement-actions.ts`) | **P4-3은 이 경로를 건드리지 않는다** |
 
-> **결론: P4-3 초기 범위 전체에 마이그레이션이 필요하지 않다.** 세 영역
-> 어디에도 DDL 변경이 없다. 만약 구현 중 §8의 열린 항목(특히 §8-1 RLS
-> 비대칭, §8-4 다운로드 감사 테이블)이 "필요"로 결론 나면, 그때만 별도
-> additive 마이그레이션을 승인받는다.
+**게이트를 만들 수 없는 구조**: `teacher_documents`에는 승인·검토·보완 상태
+컬럼이 존재하지 않는다(`status`/`review_status`/`approved_at`/`approved_by`/
+`reviewed_at` 전부 없음). 이 부재 자체가 회귀 테스트로 고정돼 있다
+(`app/teacher/teacher-settlement-rls.integration.test.ts` — "승인·검토·보완 상태
+컬럼이 존재하지 않는다"). P4-3도 이 컬럼들을 **추가하지 않는다.**
+
+### 6.2 데이터 원본과 권한 (확정)
+
+- **원본 하나**: `teacher_documents` + `teacher-documents` 버킷. 관리자용 사본
+  테이블·목록 캐시·미러 버킷을 만들지 않는다.
+- **앱 게이트: `requireAdmin()`.** 계약·동의서와 같은 수준으로 제한한다
+  (§9-1의 확정 — 비관리자 운영자에게 열지 않는다). 교사 인사 서류는 계약·
+  동의서와 같은 민감도로 다룬다.
+- **중요 — RLS가 실제 통제가 아니다**: 관리자 조회는 `createAdminClient()`
+  (service_role)로 하므로 RLS를 우회한다. 따라서 `teacher_documents` RLS에
+  `정산권한`이 열려 있는 것과 무관하게, **문서 탭의 실제 접근 통제는
+  `requireAdmin()` 하나뿐**이다. 이 게이트를 빠뜨리면 RLS가 막아주지 않는다 —
+  구현 시 액션 진입점마다 반드시 건다.
+  (그 RLS의 `정산권한` 허용은 교사 본인·정산 운영자의 **직접 조회** 경로용으로
+  남겨둔다. 이번에 좁히는 migration은 만들지 않는다.)
+- **교사 쪽은 무변경**: 교사는 본인 파일만 본다. P4-2의 `getMyDocumentDownloadUrlAction()`이
+  이미 `teacher_id !== 본인`이면 거부한다.
+
+### 6.3 화면 구성
+
+2단 구조다.
+
+**(a) 교사 목록** — 파일을 1건 이상 올린 교사만 표시한다.
+
+| 열 | 원본 |
+| --- | --- |
+| 선생님 이름 | `profiles.name` |
+| 파일 수 | `teacher_documents` count |
+| 최근 업로드 | `max(uploaded_at)` |
+
+- 정렬: 최근 업로드 내림차순.
+- 검색: 이름 부분 일치(관리자 사용자 탭과 같은 방식).
+- 빈 상태: "업로드된 교사 서류가 없습니다."
+- **표시하지 않는 것**: 제출률, "미제출", "검토 필요", 필수 서류 체크리스트,
+  승인 배지. 정책 10을 화면에서 지키는 부분이다.
+
+**(b) 교사 선택 후 파일 목록**
+
+| 열 | 원본 |
+| --- | --- |
+| 파일명 | `file_name` |
+| 형식 | `content_type` |
+| 크기 | `size_bytes` |
+| 메모 | `note` |
+| 업로드 시각 | `uploaded_at` |
+| 내려받기 | §6.4 |
+
+- 빈 상태: "이 선생님이 업로드한 서류가 없습니다."
+- 정렬: 업로드 시각 내림차순.
+- **쿼리 수**: 목록 2회(`teacher_documents` 집계 1 + `profiles` 이름 1),
+  상세 1회. 교사 수·파일 수에 비례한 N+1을 만들지 않는다.
+
+### 6.4 다운로드 흐름 — 계약과 다르게 간다
+
+계약 서명본(§3.5)은 Drive라서 **서버 스트리밍**이 필요했다. 교사 서류는
+Supabase Storage라 **진짜 단기 서명 URL**을 쓸 수 있다(서비스 계정 토큰이
+URL에 실리지 않는다). 그래서 방식이 다르다 — 같게 맞추려고 스트리밍을
+끼워 넣지 않는다.
+
+```
+클릭 → adminGetTeacherDocumentUrlAction(documentId)
+  1. requireAdmin()                                   // 유일한 실제 접근 통제
+  2. teacher_documents 행 조회(service_role)
+  3. document_access_events INSERT (§7)               // 감사 — 발급 전에 남긴다
+  4. storage.from('teacher-documents').createSignedUrl(storage_path, 60)
+  5. URL 반환 → 브라우저가 새 탭에서 연다
+```
+
+- **TTL 60초 고정**. P4-2의 교사 본인 다운로드와 같은 값이다.
+- **한계를 문서에 남긴다**: 서명 URL 방식의 감사 기록은 "발급 시각"이지
+  "실제 내려받은 시각"이 아니다. 발급 즉시 감사 행을 남기고 TTL을 짧게
+  유지하는 것으로 갈음한다. 실제 페치까지 감사해야 한다는 요구가 생기면
+  계약과 동일한 서버 스트리밍으로 바꾼다(그때는 별도 승인 항목).
+- 관리자 화면에 **삭제·대체 버튼을 두지 않는다**(정책 9).
+
+### 6.5 "게이트가 아니다"를 구조로 지키는 방법
+
+정책 문장만으로는 나중에 깨진다. 세 가지로 고정한다.
+
+1. **스키마**: 상태 컬럼 부재(§6.1) — 이미 테스트로 고정됨.
+2. **의존 방향 정적 검사(신규)**: 정산·매칭·수업 모듈이
+   `teacher_documents`/`teacher-documents`를 참조하지 않는지 확인하는 테스트를
+   추가한다. 대상 경로: `app/teacher/settlement-data.ts`,
+   `app/admin/payout-batches-*`, `app/admin/payouts-*`,
+   `lib/enrollment/*`, `lib/booking/*`. §2.4의 "계약 화면 중복 금지" 정적
+   검사와 같은 패턴이다.
+3. **문구**: 화면에 상태 배지·필수 목록을 만들지 않는다(§6.3).
+
+### 6.6 교사 서류에 필요한 migration
+
+**없다.** 테이블·버킷·RLS·Storage 정책이 P4-2에 전부 있다. P4-3이 새로
+필요로 하는 DB 객체는 다운로드 감사 테이블 하나뿐이고, 그건 계약 서명본과
+공용이다(§7).
 
 ---
 
-## 7. 단계별 구현 순서 제안
+## 7. Migration 필요 여부
+
+| 서브 영역 | 필요 여부 | 근거 |
+| --- | --- | --- |
+| 계약 아카이브 | **감사 테이블만 필요** | 계약 본문·버전·서명본 조회는 기존 데이터를 재사용한다. 다운로드를 1차부터 DB 감사로 남기므로(§9-4) 접근 감사 테이블이 필요하다. |
+| 동의서 이관 | **불필요** | 화면 위치 이동과 데이터 로딩 경로 변경뿐. `loadConsentGaps`(`app/admin/consultation-data.ts:192`)의 쿼리 자체를 바꾸지 않는다. capability `manage_guardian_consent`와 그 RLS는 이미 존재한다(`supabase/migrations/20260909000000_r2_task8_capability_gates.sql:515`). |
+| 회사 문서 | **불필요** | 1차 진실 소스가 Drive이고 로컬 캐시 테이블을 만들지 않는다(정책 4). `manage_company_documents`는 `supervisor_capabilities`에 관리자가 직접 부여하는 자유 텍스트라 enum/DDL 변경이 없다(`20260912000000_...:376-377` 주석의 기존 관례). `company_documents` 테이블은 손대지 않는다(정책 3). |
+| 교사 서류 | **불필요** | 테이블(`teacher_documents`)·비공개 버킷(`teacher-documents`)·RLS·Storage 정책이 P4-2(`20261284000000`)에 전부 있다. P4-3은 읽기만 한다(§6.1). 상태 컬럼은 **추가하지 않는다**(정책 10). |
+
+> **결론: P4-3에 필요한 additive migration은 문서 접근 감사 테이블 1건뿐이다.**
+> 계약 서명본과 교사 제출 서류가 **같은 테이블**을 쓴다 — 접근 감사 대상이
+> "개인정보가 포함된 문서 다운로드"로 같고, 두 개로 나누면 조회·보존 정책이
+> 갈라지기 때문이다. contracts RLS 비대칭 보정, `company_documents` 테이블
+> 변경, `teacher_documents` 스키마 변경은 이번 범위에 포함하지 않는다.
+
+### 7.1 감사 테이블 설계 — `document_access_events`
+
+```
+document_access_events
+  id            uuid pk default gen_random_uuid()
+  actor_id      uuid not null references profiles(id)   -- 내려받은 관리자
+  target_kind   text not null check (in ('contract_artifact','teacher_document'))
+  target_id     uuid not null                            -- drive_artifacts.id 또는 teacher_documents.id
+  subject_id    uuid references profiles(id)             -- 문서의 귀속 대상(학생 또는 교사), 조회 편의용
+  action        text not null check (in ('download','download_url_issued'))
+  detail        jsonb not null default '{}'::jsonb       -- 파일명·버전 등 비민감 식별 정보만
+  created_at    timestamptz not null default now()
+index on (target_kind, target_id, created_at desc)
+index on (actor_id, created_at desc)
+```
+
+- **INSERT-only**: `household_archive_events`/`teacher_payout_account_events`와
+  같은 패턴으로 update/delete 차단 트리거를 건다.
+- **RLS**: 조회는 `is_admin()`만. 쓰기 정책 없음(서버 액션 service_role 전용).
+- **`action` 두 값의 구분**: 계약은 서버가 바이트를 흘려보내므로 실제
+  `download`을 기록한다. 교사 서류는 서명 URL 발급이라
+  `download_url_issued`를 기록한다(§6.4의 한계와 짝을 이룬다) — 같은 테이블에
+  섞되 무엇을 보장하는 기록인지 값으로 구분한다.
+- **detail에 개인정보를 넣지 않는다**: 파일명·문서 종류·버전 정도만 담고,
+  계좌번호·주민번호류 본문 내용은 절대 복제하지 않는다
+  (`teacher_payout_account_events`가 전체 계좌번호를 복제하지 않는 것과 같은 원칙).
+- **보존 기간**: 이번 설계에서 자동 삭제를 만들지 않는다. 개인정보 보존·삭제
+  일괄 정책은 P6 범위이며, 그때 이 테이블도 함께 다룬다.
+
+---
+
+## 8. 단계별 구현 순서 제안
 
 | 순서 | 작업 | 이유 |
 | --- | --- | --- |
@@ -543,8 +741,13 @@ listCompanyDocumentsAction(input?: { folderPath?: string })
 | 2 | 동의서 이관 (§4) | 위험도가 가장 낮다 — 컴포넌트가 self-contained이고 신규 쿼리·신규 권한·외부 서비스가 전혀 없다. SSR prop 제거로 `신규` 탭 로딩도 같이 가벼워진다. |
 | 3 | 계약 아카이브 (§3) — 목록·상세까지, 다운로드 제외 | 순수 내부 데이터라 마이그레이션도 외부 호출도 없다. 이 단계까지는 Drive 리소스 준비를 기다리지 않아도 된다. |
 | 4 | 계약 서명본 다운로드 (§3.5) | `driveFetch` export/추출이 선행돼야 하고, 기존 `ALTON Integration Sandbox`에 이미 올라간 파일을 읽는 것이라 새 Drive 준비와 무관하게 검증 가능하다. |
-| 5 | 회사 문서 Drive 연동 (§5) | 전용 Shared Drive 생성·서비스 계정 초대·환경변수 3개라는 **외부 프로비저닝 승인**에 막혀 있다. 앞 단계를 볼모로 잡지 않도록 맨 뒤에 둔다. |
-| 6 | 문서 탭 전체 UI 폴리싱 | CLAUDE.md 규칙: 개별 기능 단위가 아니라 마일스톤 종료 시 역할별 화면을 묶어 폴리싱한다. |
+| 5 | **교사 서류 보관함 (§6)** | **외부 의존이 0이다** — 테이블·버킷이 P4-2에 이미 있고 Drive도 환경변수도 필요 없다. 회사 문서(외부 승인 대기)보다 먼저 끝낼 수 있다. |
+| 6 | 회사 문서 Drive 연동 (§5) | 전용 Shared Drive 생성·서비스 계정 초대·환경변수 3개라는 **외부 프로비저닝 승인**에 막혀 있다. 앞 단계를 볼모로 잡지 않도록 맨 뒤에 둔다. |
+| 7 | 문서 탭 전체 UI 폴리싱 | CLAUDE.md 규칙: 개별 기능 단위가 아니라 마일스톤 종료 시 역할별 화면을 묶어 폴리싱한다. |
+
+> 감사 테이블(§7.1)은 4단계(계약 다운로드) 착수 시점에 만든다 — 5단계(교사
+> 서류)가 같은 테이블을 재사용한다. 4·5단계 순서를 바꾸면 감사 테이블을
+> 5단계로 당긴다.
 
 **단계별 고정 검증**
 
@@ -552,50 +755,93 @@ listCompanyDocumentsAction(input?: { folderPath?: string })
   섹션을 렌더하는지 + 같은 `cacheKey`로 중복 fetch가 없는지.
 - 3단계: 계약 목록 쿼리 수 ≤ 2 (§3.3), `문서 > 계약` 모듈이 발송/무효화
   액션을 import 하지 않는다는 정적 검사(§2.4).
-- 4·5단계: 권한 없는 사용자·다른 Drive 소속 fileId·`sync_status != 'succeeded'`
-  세 케이스가 전부 거부되는지 통합 테스트.
+- 4단계: 권한 없는 사용자·다른 Drive 소속 fileId·`sync_status != 'succeeded'`
+  세 케이스가 전부 거부되는지 통합 테스트 + 다운로드마다 감사 1행.
+- 5단계(교사 서류): ① `requireAdmin()` 없는 호출이 거부되는지, ② 다운로드
+  URL 발급마다 감사 1행이 남는지, ③ **정산·매칭·수업 모듈이
+  `teacher_documents`를 참조하지 않는다는 정적 검사**(§6.5-2), ④ 교사 본인
+  경로(P4-2)가 그대로 동작하고 타 교사 파일은 여전히 막히는지 회귀.
+- 6단계: 회사 문서 Drive 권한 케이스.
 - 전 단계: 실행 ID 붙은 전용 UAT 계정 사용, 종료 후 실행 ID 단위 정리.
 
 ---
 
-## 8. 구현 착수 전 확인 필요한 나머지 질문
+## 9. 확정 정책 (2026-09-11 / 2026-09-12)
 
 1. **`contracts` select RLS의 capability 비대칭** — `contract_versions`와
    `drive_artifacts`의 조회 정책에는 `manage_consultations`가 있는데
    (`20260913000000_...:172-181`, `20260912000000_...:363-372`),
    `contracts` 본체 정책에는 없다(`20260830080000_r1_rls_policies.sql:77-82`).
    `role='admin'`이 아닌 운영자에게 문서 탭을 열어줄 계획이 있는가?
-   있다면 `contracts` 조회 정책에 capability를 추가하는 additive
-   마이그레이션이 1건 필요하다(그러면 §6 결론이 바뀐다). 없다면 문서 탭
-   전체를 `requireAdmin()`(`lib/admin-auth.ts:3`)으로 좁히는 것도 선택지다.
+   계약·동의서는 당분간 `requireAdmin()`으로 제한한다. 비관리자 운영자에게
+   열지 않으므로 contracts RLS 보정 migration은 만들지 않는다. 회사 문서만
+   `manage_company_documents` capability를 사용한다.
 
 2. **Drive 스코프 축소 여부** — 회사 문서는 읽기 전용이므로
    `drive.readonly`가 최소권한에 맞지만, 현재 DWD 등록 스코프는 전체 `drive`
    하나다(`lib/google-workspace-auth.ts:40`). Google Workspace 관리 콘솔에서
-   `drive.readonly`를 추가 등록할 것인가, 아니면 기존 스코프를 재사용하고
-   코드 레벨에서만 읽기로 제한할 것인가?
+   기존 DWD `drive` 스코프를 유지하고 Workspace 관리 콘솔 변경은 하지 않는다.
+   앱 코드에서 목록·다운로드만 허용한다.
 
 3. **Preview 환경에서 회사 문서 UAT를 할 것인가** — 현재 Preview용 Drive
    서비스 계정(`r3-drive-preview-verify@...`,
    `lib/drive-preview-verify-auth.ts:24`)은 `ALTON Integration Sandbox`에만
    초대돼 있다. Preview에서 회사 문서를 실제로 확인하려면 이 계정을 새
-   Drive에도 초대해야 한다 — 회사 법인 서류가 들어갈 Drive에 "검증 후 회수
-   예정"인 임시 계정을 넣는 셈이라 승인이 필요하다. 대안은 Preview에서
-   기능을 끄고(빈 상태) Production 배포 후 확인하는 것.
+   Drive에도 초대해야 한다. Preview UAT는 실제 법인 서류가 아닌 전용 Shared
+   Drive 안의 더미 문서 UAT 폴더만 대상으로 하며, 검증 계정에 실제 법인 서류
+   접근 권한을 주지 않는다.
 
 4. **계약서 다운로드 감사 기록의 보존 형태** — §3.5는 구조화 로그만
-   남기는 안이다(마이그레이션 없음). 개인정보 접근 이력을 DB로 남겨야 하는
-   요구(P6 권한·감사 항목)가 이미 확정돼 있다면, 지금 `document_access_logs`
-   같은 테이블을 같이 만드는 편이 나중에 소급하는 것보다 낫다. 판단 필요.
+   남기는 안이다. 개인정보 접근 이력 요구에 따라 1차부터 DB 감사 기록을
+   남긴다. 최소 감사 테이블을 위한 additive migration을 설계에 포함한다.
 
 5. **회사 문서 폴더 구조의 확정본** — §5.2는 `법인 서류/`, `계약서 양식/`
-   2개를 가정했다. 실제로 어떤 폴더·문서를 노출할지 확정해야 UI의 빈 상태와
-   브레드크럼 깊이(1단만 허용할지, 무제한 하위 폴더를 허용할지)를 정할 수 있다.
+   2개 최상위 폴더를 사용하고 한 단계 하위 폴더까지만 UI에 노출한다.
 
 6. **계약 목록의 기본 정렬·기간 기본값** — §3.3은 "기간 무제한, 생성일
-   내림차순"을 가정했다. 계약 건수가 늘면 기본을 최근 90일로 좁히는 편이
-   나을 수 있다. 운영 관점의 선택.
+   진행 중 계약은 기간과 무관하게 모두 표시한다. 완료·취소 계약은 최근
+   90일을 기본으로 하며, 상태·기간 필터와 페이지네이션으로 과거 자료를 연다.
 
 7. **회사 문서 업로드 시점** — 1차는 읽기 전용이고 파일 추가는 Drive에서
-   직접 한다. 이 운영 방식으로 확정인지, 아니면 2차에서 관리자 화면 업로드를
-   전제로 서비스 계정을 처음부터 Content Manager로 초대해 둘지.
+   직접 하는 읽기 전용 방식으로 확정한다. 관리자 업로드와 Content Manager
+   권한은 2차에서 별도 결정하며 이번 Drive 준비에 포함하지 않는다.
+
+### 2026-09-12 추가 확정 (P4-2 구현 대조 후)
+
+8. **교사 서류 저장소** — P4-2가 만든 `teacher_documents` + 비공개 버킷
+   `teacher-documents`를 **그대로 읽는다**. 사본·캐시·미러를 만들지 않고,
+   이 영역 때문에 추가되는 migration은 없다.
+9. **교사 서류 접근 권한** — 앱 게이트는 `requireAdmin()`이다(계약·동의서와
+   동일 수준). 관리자 조회는 service_role로 RLS를 우회하므로 **이 게이트가
+   유일한 실제 통제**다. `teacher_documents` RLS의 `정산권한` 허용은 교사 본인·
+   정산 운영자의 직접 조회용으로 남기고, 좁히는 migration은 만들지 않는다.
+10. **관리자 문서 탭은 교사 서류에 대해 읽기 전용** — 업로드·삭제·대체 버튼을
+    두지 않는다. 업로드 창구는 교사 포털 `정산` 탭 하나뿐이다.
+11. **게이트 금지를 구조로 고정** — 상태 컬럼을 추가하지 않고(스키마), 정산·
+    매칭·수업 모듈이 `teacher_documents`를 참조하지 않는다는 정적 검사를 두고,
+    화면에 상태 배지·필수 목록을 만들지 않는다(§6.5).
+12. **다운로드 감사 테이블은 계약과 공용** — `document_access_events` 1개를
+    만들어 계약 서명본(`download`)과 교사 서류(`download_url_issued`)를 함께
+    기록한다(§7.1). 교사 서류는 서명 URL 방식이라 "발급 시각" 기록임을
+    문서에 명시했고, 실제 페치까지 감사해야 한다면 서버 스트리밍으로 바꾸는
+    별도 승인 항목이다.
+
+---
+
+## 10. 구현 시 필요한 외부 변경 (이번 라운드에서는 하지 않음)
+
+이 설계를 구현할 때 **ALTON 코드·DB 밖에서** 사람이 해야 하는 일만 모았다.
+아래 3·4번은 회사 문서(§5)에만 해당하며, 계약·동의서·교사 서류는 외부 변경
+없이 구현할 수 있다.
+
+| # | 항목 | 대상 | 필요 시점 |
+| --- | --- | --- | --- |
+| 1 | additive migration 1건(`document_access_events`) 작성·로컬 적용·공유 non-prod push | Supabase non-prod(`worpsqwqgnspddnrtnvq`) | 계약 다운로드(4단계) 착수 시 |
+| 2 | Preview 배포 | Vercel | 각 단계 UAT 시 |
+| 3 | **전용 Shared Drive(또는 전용 최상위 폴더) 생성 + 폴더 구조(`법인 서류/`, `계약서 양식/`) 준비 + 서비스 계정 초대** | Google Workspace | 회사 문서(6단계) 착수 전 |
+| 4 | **환경변수 3개 추가**(§5.5의 이름·용도 그대로) | Vercel Preview/Production | 회사 문서(6단계) 착수 전 |
+| 5 | Preview 검증 계정을 **더미 문서 UAT 폴더에만** 초대(실제 법인 서류 접근 금지, §9-3) | Google Workspace | 회사 문서 UAT 시 |
+
+**하지 않는 것**: Workspace 관리 콘솔의 DWD 스코프 변경(§9-2 — 기존 `drive`
+스코프를 그대로 두고 코드에서 읽기·다운로드만 호출), `teacher_documents`·
+`teacher-documents` 버킷 변경, Production DB 변경, 실제 법인 서류 접근 권한 부여.
