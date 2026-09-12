@@ -60,14 +60,16 @@ const baseProps = {
 };
 
 describe("TeacherShell", () => {
-  it("2026-09-10(UI/UX 정리 1차): 사이드바 항목을 보여주고, 기본 탭은 홈이다('배정'은 '담당 학생'으로, 미구현 '정산'은 숨김)", () => {
+  // 2026-09-12(P4-2): '정산' 탭이 실제로 구현되어 사이드바에 노출된다 —
+  // 이전(2026-09-10 UI/UX 정리 1차)에는 미구현이라 숨겨두고 이 스펙이 그 부재를
+  // 못박고 있었다. 나머지 라벨 정리('배정'→'담당 학생' 등)는 그대로 유지한다.
+  it("2026-09-12(P4-2): 사이드바에 '정산'을 포함한 항목을 보여주고, 기본 탭은 홈이다('배정'은 '담당 학생'으로)", () => {
     render(<TeacherShell {...baseProps} />);
-    ["홈", "담당 학생", "수업", "가능시간", "커리큘럼", "교재"].forEach((label) =>
+    ["홈", "담당 학생", "수업", "가능시간", "커리큘럼", "교재", "정산"].forEach((label) =>
       expect(screen.getAllByText(label).length).toBeGreaterThan(0)
     );
     expect(screen.queryByText("학생")).toBeNull();
     expect(screen.queryByText("수업 일정")).toBeNull();
-    expect(screen.queryByText("정산")).toBeNull();
     expect(screen.queryByText("배정")).toBeNull();
     expect(screen.getByText("박서연 선생님, 안녕하세요")).toBeInTheDocument();
   });

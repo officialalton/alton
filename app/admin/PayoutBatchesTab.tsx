@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import TeacherPayoutAccountsPanel from "./TeacherPayoutAccountsPanel";
 import type { PayoutBatchListItem } from "./payout-batches-data";
 import { previousMonthRange } from "./payouts-data";
 import {
@@ -61,6 +62,8 @@ export default function PayoutBatchesTab({
 }: {
   initialBatches: PayoutBatchListItem[];
 }) {
+  // P4-2(2026-09-12) — 관리자 정산 화면에 `수취 계좌` 서브탭을 추가한다.
+  const [subtab, setSubtab] = useState<"batches" | "accounts">("batches");
   const [batches, setBatches] = useState(initialBatches);
   const defaults = previousMonthRange(new Date());
   const [periodStart, setPeriodStart] = useState(defaults.periodStart);
@@ -130,9 +133,20 @@ export default function PayoutBatchesTab({
     }
   }
 
+  if (subtab === "accounts") {
+    return (
+      <div className="max-w-[900px] px-8 py-8">
+        <h1 className="text-[20px] font-extrabold text-ink mb-1">정산</h1>
+        <SettlementSubtabs subtab={subtab} onChange={setSubtab} />
+        <TeacherPayoutAccountsPanel />
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-[900px] px-8 py-8">
       <h1 className="text-[20px] font-extrabold text-ink mb-1">정산</h1>
+      <SettlementSubtabs subtab={subtab} onChange={setSubtab} />
       <p className="text-[13px] text-grey-500 mb-2">
         payout_batches 기반 정산 배치. 법인 설립 전이라 이 화면에서는 <b>승인</b>까지만
         진행할 수 있습니다 — 실제 지급(Mercury/Wise 연동)은 법인 설립 후 별도로 활성화됩니다.
@@ -279,6 +293,36 @@ export default function PayoutBatchesTab({
           );
         })
       )}
+    </div>
+  );
+}
+
+// P4-2 — 정산 탭 서브탭(배치 / 수취 계좌).
+function SettlementSubtabs({
+  subtab,
+  onChange,
+}: {
+  subtab: "batches" | "accounts";
+  onChange: (v: "batches" | "accounts") => void;
+}) {
+  const tabs: { id: "batches" | "accounts"; label: string }[] = [
+    { id: "batches", label: "정산 배치" },
+    { id: "accounts", label: "수취 계좌" },
+  ];
+  return (
+    <div className="flex gap-4 mb-4 border-b border-grey-200">
+      {tabs.map((t) => (
+        <button
+          key={t.id}
+          onClick={() => onChange(t.id)}
+          className={
+            "text-[13.5px] font-semibold pb-2.5 -mb-px border-b-2 " +
+            (subtab === t.id ? "text-ink border-ink" : "text-grey-500 border-transparent")
+          }
+        >
+          {t.label}
+        </button>
+      ))}
     </div>
   );
 }

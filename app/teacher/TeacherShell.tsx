@@ -23,6 +23,7 @@ import {
 import { reportSessionIssue } from "./incident-report-actions";
 import TeacherLessonScheduleTab from "./TeacherLessonScheduleTab";
 import TeacherMaterialsLibraryTab from "./MaterialsLibraryTab";
+import SettlementTab from "./SettlementTab";
 import type { LibrarySubject } from "@/app/student/materials-data";
 import {
   listMyLessonSchedule,
@@ -41,6 +42,9 @@ const NAV_ITEMS = [
   { id: "availability", label: "가능시간", icon: "🗓" },
   { id: "curriculum", label: "커리큘럼", icon: "📘" },
   { id: "materials", label: "교재", icon: "📚" },
+  // P4-2(2026-09-12) — 교사가 본인 정산 내역·지급 예정액·수취 계좌·제출 서류를
+  // 한 곳에서 찾을 수 있게 하는 진입점.
+  { id: "settlement", label: "정산", icon: "💸" },
 ] as const;
 
 type TabId = (typeof NAV_ITEMS)[number]["id"];
@@ -259,6 +263,8 @@ export default function TeacherShell({
             />
           ) : activeTab === "materials" ? (
             <TeacherMaterialsLibraryTab subjects={materialsSubjects} />
+          ) : activeTab === "settlement" ? (
+            <SettlementTab />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.
