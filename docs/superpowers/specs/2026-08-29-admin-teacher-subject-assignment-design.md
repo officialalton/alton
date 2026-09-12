@@ -1,5 +1,7 @@
 # 관리자가 선생님 담당 과목을 배정하는 기능 설계
 
+> **문서 상태: 과거 설계 이력.** 신규 teacher assignment는 v3 기간 이력 모델이 우선한다.
+
 ## 배경
 
 `app/admin/TeacherDetailPanel.tsx`의 "담당 과목" 칸은 사실 `enrollments`(실제 매칭된 학생) 기준으로 계산된 `teacher.subjectNames`를 보여주고 있었다 — "매칭된 학생 없음"이라는 폴백 문구가 이를 정확히 말해준다. 정작 "이 선생님이 어떤 과목을 가르칠 수 있는가"(`teacher_curriculum_templates`, 선생님 포털의 "내 과목")는 관리자 화면 어디에도 안 보이고, 관리자가 이걸 직접 등록해줄 방법도 없다.

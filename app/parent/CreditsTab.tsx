@@ -2,85 +2,26 @@
 
 import { useState } from "react";
 import type { ParentCreditsData } from "./credits-data";
-import { createCreditCheckoutSession } from "./credits-actions";
 
-export default function CreditsTab({
-  data,
-  studentId,
-  purchaseStatus,
-}: {
-  data: ParentCreditsData;
-  studentId: string;
-  purchaseStatus?: "success" | "cancelled";
-}) {
-  const [loadingPackageId, setLoadingPackageId] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  async function handlePurchase(packageId: string) {
-    setError(null);
-    setLoadingPackageId(packageId);
-    try {
-      const url = await createCreditCheckoutSession(packageId, studentId);
-      window.location.href = url;
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "결제를 시작할 수 없습니다.");
-      setLoadingPackageId(null);
-    }
-  }
-
+// 2026-09-07 — 이 컴포넌트는 원래 "수업권 잔여 장수 조회 + 충전" 화면이었으나,
+// R4에서 도입된 EntitlementsTab("수업권" 탭, entitlements-data.ts/purchases/
+// entitlement_grants 기반)이 그 역할을 완전히 대체했다. 레거시 `students.
+// credit_balance`/`credit_packages`(이 컴포넌트가 쓰던 데이터)는 R4 전환 이후
+// 실제 구매로 절대 갱신되지 않는데, 두 탭이 똑같이 "수업권"이라는 이름으로
+// 나란히 떠 있어 보호자가 최신 잔여 수업권을 확인할 때 이 탭(레거시, 항상 0)을
+// 보고 "결제했는데 0장"이라고 오인하는 실제 버그가 발생했다(제품 오너 실사용
+// 확인, `docs/CURRENT.md` 2026-09-07 항목). 잔여 장수/충전 UI는 제거하고
+// 지인 추천 코드만 남긴다 — referral_code는 여전히 이 테이블(parents)이
+// source of truth라 데이터 로더(`credits-data.ts`)는 그대로 재사용한다.
+export default function CreditsTab({ data }: { data: ParentCreditsData }) {
   return (
     <div className="max-w-[560px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-5">수업권</h1>
-
-      {purchaseStatus === "success" && (
-        <div className="bg-green/10 text-green text-[13px] font-semibold rounded-lg px-4 py-3 mb-4">
-          결제가 완료되었습니다. 잠시 후 수업권 잔여 장수에 반영됩니다.
-        </div>
+      <h1 className="text-[20px] font-extrabold text-ink mb-5">지인 추천</h1>
+      {data.referralCode ? (
+        <ReferralCard code={data.referralCode} />
+      ) : (
+        <p className="text-[13px] text-grey-500">추천 코드가 아직 없습니다.</p>
       )}
-      {purchaseStatus === "cancelled" && (
-        <div className="bg-grey-100 text-grey-500 text-[13px] font-semibold rounded-lg px-4 py-3 mb-4">
-          결제가 취소되었습니다.
-        </div>
-      )}
-
-      <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4.5 mb-4">
-        <h2 className="text-[14px] font-bold text-ink mb-3">수업권 현황</h2>
-        <div className="text-[28px] font-extrabold text-ink mb-4">
-          {data.balance}
-          <span className="text-[14px] font-semibold text-grey-500 ml-1.5">
-            장 보유
-          </span>
-        </div>
-
-        {data.packages.length > 0 && (
-          <div className="grid grid-cols-3 gap-2 mb-3">
-            {data.packages.map((pkg) => (
-              <div
-                key={pkg.id}
-                className="border-[1.5px] border-grey-200 rounded-xl px-3 py-3 text-center"
-              >
-                <div className="text-[14px] font-bold text-ink">{pkg.name}</div>
-                <div className="text-[12px] text-grey-500 mt-0.5 mb-2">
-                  ${pkg.priceUsd.toLocaleString()}
-                </div>
-                <button
-                  onClick={() => handlePurchase(pkg.id)}
-                  disabled={loadingPackageId !== null}
-                  className="text-[12px] font-bold text-white bg-ink rounded-lg px-2 py-1.5 w-full disabled:opacity-50"
-                >
-                  {loadingPackageId === pkg.id ? "이동 중…" : "충전하기"}
-                </button>
-              </div>
-            ))}
-          </div>
-        )}
-        {error && <p className="text-[12px] text-red mb-1">{error}</p>}
-        <p className="text-[12px] text-grey-500">
-          충전 버튼을 누르면 Stripe 결제 페이지로 이동합니다.
-        </p>
-      </div>
-
-      {data.referralCode && <ReferralCard code={data.referralCode} />}
     </div>
   );
 }

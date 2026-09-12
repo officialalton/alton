@@ -3,20 +3,32 @@ import {
   requireUser,
   getRoleHomePath,
   computeSessionViewState,
-  type SessionViewViewer,
 } from "@/lib/auth";
 import SessionShell from "./SessionShell";
-import { loadMaterialData } from "./material-data";
+import { loadMaterialData, loadPinnedMaterialData } from "./material-data";
 import { loadVocabWords } from "./vocab-data";
 import { loadHomeworkItems } from "./homework-data";
-import { loadUnitOptions } from "./aigen-data";
 import { loadDocLinks, parseWhiteboardStrokes } from "./scratchpad-data";
 import { loadProblemLog } from "./problemlog-data";
+import { loadNormalizedSession } from "./session-source-data";
+import { loadSessionProblems } from "./session-problem-data";
+import { loadSessionLessonContext } from "./session-context-data";
+import {
+  replayAnnotationEvents,
+  loadMyLegacyPrivateMaterialStrokes,
+  loadTeacherMaterialStrokes,
+  loadStudentMaterialStrokes,
+} from "./annotation-events-actions";
+import { reconstructVisibleStrokes } from "./annotation-events-types";
+import {
+  loadSessionKeywordOptions,
+  loadSessionHomeworkStatus,
+} from "@/app/teacher/homework-composition-data";
 
-function extractSubjectName(subject: unknown): string {
-  const row = Array.isArray(subject) ? subject[0] : subject;
-  return (row as { name?: string } | null)?.name ?? "";
-}
+// R8 1/N — cutover connection: 이 화면은 원래 legacy_sessions만 조회했다.
+// `loadNormalizedSession`이 legacy_sessions(R6 이전 레거시 세션뷰 테스트 데이터)와
+// v3 sessions/reservations(R6~R7 실제 예약)를 둘 다 판별해 같은 모양으로 정규화한다
+// — 자세한 배경은 docs/2026-09-07-r8-session-cutover-oneP-pager.md 참고.
 
 export default async function SessionPage({
   params,
@@ -29,89 +41,121 @@ export default async function SessionPage({
   const { tab } = await searchParams;
   const { user, profile, supabase } = await requireUser();
 
-  const { data: session } = await supabase
-    .from("sessions")
-    .select(
-      "id, session_number, unit_title, status, scheduled_at, duration_minutes, enrollment_id, curriculum_doc_id, whiteboard_strokes"
-    )
-    .eq("id", id)
-    .single();
-
+  const session = await loadNormalizedSession(
+    supabase,
+    id,
+    user.id,
+    profile?.role
+  );
   if (!session) notFound();
-
-  const { data: enrollment } = await supabase
-    .from("enrollments")
-    .select("student_id, teacher_id, subject_id, subject:subjects(name)")
-    .eq("id", session.enrollment_id)
-    .single();
-
-  if (!enrollment) notFound();
-
-  const { data: people } = await supabase
-    .from("profiles")
-    .select("id, name")
-    .in("id", [enrollment.student_id, enrollment.teacher_id]);
-
-  const studentName =
-    people?.find((p) => p.id === enrollment.student_id)?.name ?? "학생";
-
-  let viewerRole: SessionViewViewer;
-  if (user.id === enrollment.student_id) {
-    viewerRole = "student";
-  } else if (user.id === enrollment.teacher_id) {
-    viewerRole = "teacher";
-  } else if (profile?.role === "parent") {
-    viewerRole = "parent";
-  } else if (profile?.role === "admin") {
-    viewerRole = "admin";
-  } else {
-    // RLS가 이미 막았어야 하는 경우지만, 방어적으로 한 번 더 확인.
-    notFound();
-  }
 
   const initialState = computeSessionViewState(
     session.status,
-    session.scheduled_at,
-    session.duration_minutes
+    session.scheduledAt,
+    session.durationMinutes
   );
 
-  const material = await loadMaterialData(
-    supabase,
-    session.curriculum_doc_id,
-    session.id,
-    enrollment.student_id
-  );
+  // P2/P3 5단계 — v3 수업은 "준비해서 고정한 교재"를 먼저 보여준다. 고정된
+  // 교재가 없는 수업(준비 없이 시작했거나 레거시)만 기존 경로로 내려간다.
+  const material =
+    (session.source === "v3" ? await loadPinnedMaterialData(supabase, session.id) : null) ??
+    (await loadMaterialData(supabase, session.curriculumDocId, session.id, session.studentId));
 
-  const vocabWords = await loadVocabWords(supabase, enrollment.student_id);
+  const vocabWords = await loadVocabWords(supabase, session.studentId);
   const homeworkItems = await loadHomeworkItems(supabase, session.id);
-  const unitOptions = await loadUnitOptions(supabase, enrollment.subject_id);
   const docLinks = await loadDocLinks(supabase, session.id);
-  const whiteboardStrokes = parseWhiteboardStrokes(session.whiteboard_strokes);
-  const problemLog = await loadProblemLog(supabase, enrollment.student_id);
+  const whiteboardStrokes = parseWhiteboardStrokes(session.whiteboardStrokesRaw);
+  const problemLog = await loadProblemLog(supabase, session.studentId);
+
+  // R9 — v3 세션은 legacy_sessions.whiteboard_strokes가 아예 없으므로(위
+  // session-source-data.ts 주석 참고) session_annotation_events를 replay해서
+  // 현재 보여야 할 stroke만 미리 재구성해 SSR로 내려준다. 레거시 세션은 이벤트
+  // 테이블을 아예 조회하지 않는다 — 정책상 레거시는 읽기 호환만 유지.
+  const initialAnnotationStrokes =
+    session.source === "v3"
+      ? reconstructVisibleStrokes(await replayAnnotationEvents(session.id))
+      : [];
+
+  // R9(레슨 준비 Task 4) — v3 세션에서만 과제 구성 UI가 필요한 키워드 후보를
+  // 미리 불러온다(legacy 세션엔 session_content_manifest가 없으므로 항상 빈
+  // 배열).
+  const lessonContext =
+    session.source === "v3"
+      ? await loadSessionLessonContext(supabase, session.id)
+      : { unitTitle: null, goal: null, supplementTitles: [] };
+
+  // P3 4단계 — 수업 시작 시 고정된 문제들. 정답·해설은 볼 자격이 있을 때만
+  // 채워진다(학생은 자기 풀이 제출 뒤, 보호자는 자녀에게 열리는 시점과 동일).
+  const sessionProblems =
+    session.source === "v3"
+      ? await loadSessionProblems(supabase, session.id, {
+          canSeeAnswers: profile?.role === "teacher" || profile?.role === "admin",
+          studentId: session.studentId,
+        })
+      : [];
+
+  // P3 7단계 — 교재 위 두 레이어를 각각 따로 재구성한다. 화면에서 각자
+  // 켜고 끌 수 있어야 하므로 섞어서 내려보내지 않는다.
+  const teacherMaterialStrokes =
+    session.source === "v3" && material?.docId
+      ? await loadTeacherMaterialStrokes(session.id, material.docId)
+      : [];
+  const studentMaterialStrokes =
+    session.source === "v3" && material?.docId
+      ? await loadStudentMaterialStrokes(session.id, material.docId)
+      : [];
+
+  // 정책 변경 전에 본인이 남긴 비공개 필기(보존 기록). 쓴 본인에게만 내려온다.
+  const legacyPrivateMaterialStrokes =
+    profile?.role === "student" && material?.docId
+      ? await loadMyLegacyPrivateMaterialStrokes(session.id, material.docId)
+      : [];
+
+  const homeworkKeywordOptions =
+    session.source === "v3" ? await loadSessionKeywordOptions(supabase, session.id) : [];
+
+  // Gap 2 (2026-09-08, 제품 오너 리뷰) — v3 세션에서 선생님/관리자에게만 발급된
+  // 과제의 학생 제출 현황(읽기전용)을 미리 불러온다. 인가는 이 로더가 그대로
+  // 넘겨받는 `supabase`(요청 사용자로 스코프된 클라이언트, service-role 아님)의
+  // RLS에 위임한다 — 담당 아닌 선생님이면 session_homework_items 자체가 RLS로
+  // 안 보여 빈 배열이 돌아온다.
+  const homeworkStatusItems =
+    session.source === "v3" && (session.viewerRole === "teacher" || session.viewerRole === "admin")
+      ? await loadSessionHomeworkStatus(supabase, session.id)
+      : [];
 
   return (
     <SessionShell
       sessionId={session.id}
-      studentId={enrollment.student_id}
-      unitTitle={session.unit_title ?? `${session.session_number}회차`}
-      subjectName={extractSubjectName(enrollment.subject)}
-      studentName={studentName}
-      sessionNumber={session.session_number}
-      viewerRole={viewerRole}
+      studentId={session.studentId}
+      unitTitle={session.unitTitle ?? `${session.sessionNumber}회차`}
+      subjectName={session.subjectName}
+      studentName={session.studentName}
+      sessionNumber={session.sessionNumber}
+      viewerRole={session.viewerRole}
       initialTab={tab}
       initialState={initialState}
       status={session.status}
-      scheduledAt={session.scheduled_at}
-      durationMinutes={session.duration_minutes}
+      scheduledAt={session.scheduledAt}
+      durationMinutes={session.durationMinutes}
       backHref={getRoleHomePath(profile?.role)}
       material={material}
       vocabWords={vocabWords}
       homeworkItems={homeworkItems}
-      subjectId={enrollment.subject_id}
-      unitOptions={unitOptions}
       docLinks={docLinks}
       whiteboardStrokes={whiteboardStrokes}
       problemLog={problemLog}
+      writesEnabled={session.source === "legacy"}
+      sessionSource={session.source}
+      initialAnnotationStrokes={initialAnnotationStrokes}
+      legacyPrivateMaterialStrokes={legacyPrivateMaterialStrokes}
+      teacherMaterialStrokes={teacherMaterialStrokes}
+      studentMaterialStrokes={studentMaterialStrokes}
+      sessionProblems={sessionProblems}
+      lessonContext={lessonContext}
+      currentUserId={user.id}
+      homeworkKeywordOptions={homeworkKeywordOptions}
+      homeworkStatusItems={homeworkStatusItems}
     />
   );
 }

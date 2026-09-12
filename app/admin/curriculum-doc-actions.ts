@@ -3,7 +3,9 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { createClient } from "@/utils/supabase/server";
 import { sanitizeDocHtml } from "@/lib/sanitize-doc-html";
-import type { DocProblem, DocSection } from "./curriculum-doc-data";
+import type { DocProblem, DocSection, DocEditorData } from "./curriculum-doc-data";
+import { loadCurriculumDocDetail } from "./curriculum-doc-data";
+import type { SubjectKeyword } from "./subject-data";
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
@@ -21,6 +23,14 @@ async function requireAdmin() {
     .single();
   if (profile?.role !== "admin") throw new Error("관리자만 사용할 수 있습니다.");
   return { supabase, user };
+}
+
+// 2026-09-10(P1 성능 배치) — "교재 문서" 목록은 경량 목록(loadCurriculumDocList)만
+// SSR로 받는다. 관리자가 실제로 문서를 열 때(편집 화면 진입)만 이 액션으로
+// 섹션·문제·키워드 전체를 조회한다.
+export async function getCurriculumDocDetailAction(docId: string): Promise<DocEditorData | null> {
+  const { supabase } = await requireAdmin();
+  return loadCurriculumDocDetail(supabase, docId);
 }
 
 export async function createCurriculumDoc(params: {
@@ -135,6 +145,136 @@ export async function moveSection(sectionId: string, otherSectionId: string): Pr
   await supabase.from("curriculum_doc_sections").update({ position: b.position }).eq("id", a.id);
 }
 
+// =========================================================================
+// R9(Task 2) — 교재 조각(section)/문제 키워드 태깅
+// DB 트리거(20261228000000_r9_curriculum_content_foundation.sql)가 "공개된
+// 교재의 섹션만", "확정된 문제만" 관계에 들어갈 수 있게 막는다 — 여기서는
+// 과목 불일치를 먼저 걸러 더 읽기 쉬운 에러를 주고, 그 외에는 트리거 에러를
+// 그대로 올린다(예: draft 교재에 태그 시도).
+// =========================================================================
+
+// 2026-09-10(P0-2 확장) — Minified React error #441 마스킹 버그가 이
+// 파일의 섹션·문제 키워드 액션에도 그대로 있었다(관리자 "교재 문서" 편집
+// 화면에서 실사용 재현 — 이미 subject-actions.ts/session-prep-actions.ts에
+// 적용한 것과 동일한 수정: throw 대신 { ok, error } 반환). 다만 이 파일이
+// 호출부에서 쓰는 `KeywordTagger` 공용 컴포넌트는 Promise reject 계약을
+// 그대로 쓰므로, 서버 액션 자체는 { ok, error }로 경계를 건너오고
+// CurriculumDocEditor.tsx의 각 콜백이 그 결과를 다시 throw로 바꿔
+// KeywordTagger의 기존 try/catch에 그대로 맞춘다(공용 컴포넌트 계약은
+// 바꾸지 않음).
+export type KeywordActionResult = { ok: true } | { ok: false; error: string };
+
+export async function assignSectionKeyword(
+  sectionId: string,
+  keywordId: string
+): Promise<KeywordActionResult> {
+  const { supabase } = await requireAdmin();
+
+  const { data: section } = await supabase
+    .from("curriculum_doc_sections")
+    .select("curriculum_doc_id, doc:curriculum_docs(subject_id, status)")
+    .eq("id", sectionId)
+    .single();
+  const docRow = Array.isArray(section?.doc) ? section?.doc[0] : section?.doc;
+  const { data: keyword } = await supabase
+    .from("subject_keywords")
+    .select("subject_id")
+    .eq("id", keywordId)
+    .single();
+  if (!docRow || !keyword) return { ok: false, error: "존재하지 않는 섹션 또는 키워드입니다." };
+  if (docRow.subject_id !== keyword.subject_id) {
+    return { ok: false, error: "교재와 키워드는 같은 과목이어야 합니다." };
+  }
+
+  const { error } = await supabase
+    .from("curriculum_doc_section_keywords")
+    .insert({ section_id: sectionId, keyword_id: keywordId });
+  if (error && error.code !== "23505") {
+    // 23505(이미 태그됨)는 멱등 처리 — 에러 아님.
+    return { ok: false, error: error.message };
+  }
+  return { ok: true };
+}
+
+export async function removeSectionKeyword(
+  sectionId: string,
+  keywordId: string
+): Promise<KeywordActionResult> {
+  const { supabase } = await requireAdmin();
+  const { error } = await supabase
+    .from("curriculum_doc_section_keywords")
+    .delete()
+    .eq("section_id", sectionId)
+    .eq("keyword_id", keywordId);
+  if (error) return { ok: false, error: error.message };
+  return { ok: true };
+}
+
+export async function assignProblemKeyword(
+  problemId: string,
+  keywordId: string
+): Promise<KeywordActionResult> {
+  const { supabase } = await requireAdmin();
+
+  const { data: problem } = await supabase
+    .from("problems")
+    .select("subject_id, status")
+    .eq("id", problemId)
+    .single();
+  const { data: keyword } = await supabase
+    .from("subject_keywords")
+    .select("subject_id")
+    .eq("id", keywordId)
+    .single();
+  if (!problem || !keyword) return { ok: false, error: "존재하지 않는 문제 또는 키워드입니다." };
+  if (problem.subject_id && problem.subject_id !== keyword.subject_id) {
+    return { ok: false, error: "문제와 키워드는 같은 과목이어야 합니다." };
+  }
+
+  const { error } = await supabase
+    .from("problem_keywords")
+    .insert({ problem_id: problemId, keyword_id: keywordId });
+  if (error && error.code !== "23505") {
+    return { ok: false, error: error.message };
+  }
+  return { ok: true };
+}
+
+export async function removeProblemKeyword(
+  problemId: string,
+  keywordId: string
+): Promise<KeywordActionResult> {
+  const { supabase } = await requireAdmin();
+  const { error } = await supabase
+    .from("problem_keywords")
+    .delete()
+    .eq("problem_id", problemId)
+    .eq("keyword_id", keywordId);
+  if (error) return { ok: false, error: error.message };
+  return { ok: true };
+}
+
+export type CreateSubjectKeywordForDocResult =
+  | { ok: true; value: SubjectKeyword }
+  | { ok: false; error: string };
+
+export async function createSubjectKeywordForDoc(
+  subjectId: string,
+  label: string
+): Promise<CreateSubjectKeywordForDocResult> {
+  const { supabase } = await requireAdmin();
+  const { data, error } = await supabase
+    .from("subject_keywords")
+    .insert({ subject_id: subjectId, label })
+    .select("id, label, status")
+    .single();
+  if (error) {
+    if (error.code === "23505") return { ok: false, error: "이미 존재하는 키워드입니다." };
+    return { ok: false, error: error.message };
+  }
+  return { ok: true, value: { id: data.id, label: data.label, status: data.status } };
+}
+
 export type ProblemFormat = "mc" | "essay" | "math";
 export type ProblemDifficulty = "easy" | "medium" | "hard";
 
@@ -151,7 +291,7 @@ export async function generateSectionProblems(params: {
   difficulty: ProblemDifficulty;
   format: ProblemFormat;
   count: number;
-}): Promise<Omit<DocProblem, "id">[]> {
+}): Promise<Omit<DocProblem, "id" | "keywords">[]> {
   await requireAdmin();
   const { sectionTitle, subjectName, skillType, difficulty, format, count } = params;
   const clampedCount = Math.max(1, Math.min(10, count));
@@ -248,9 +388,9 @@ export async function regenerateProblem(params: {
   skillType: string;
   difficulty: ProblemDifficulty;
   format: ProblemFormat;
-  current: Omit<DocProblem, "id">;
+  current: Omit<DocProblem, "id" | "keywords">;
   feedback: string;
-}): Promise<Omit<DocProblem, "id">> {
+}): Promise<Omit<DocProblem, "id" | "keywords">> {
   await requireAdmin();
   const { sectionTitle, subjectName, skillType, difficulty, format, current, feedback } = params;
 
@@ -333,7 +473,7 @@ ${current.correctIndex !== null ? `정답 인덱스: ${current.correctIndex}` : 
 export async function confirmSectionProblems(
   sectionId: string,
   subjectId: string,
-  drafts: Omit<DocProblem, "id">[]
+  drafts: Omit<DocProblem, "id" | "keywords">[]
 ): Promise<DocProblem[]> {
   const { supabase, user } = await requireAdmin();
 
@@ -364,6 +504,7 @@ export async function confirmSectionProblems(
       correctIndex: data.correct_index,
       explanation: data.explanation,
       difficulty: data.difficulty,
+      keywords: [],
     });
   }
   return created;

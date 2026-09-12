@@ -34,6 +34,23 @@ export async function revokeChildConsent(consentId: string, reason: string) {
 }
 
 /**
+ * M4 체험 온보딩 — "체험 Smart Notes 동의". guardian_consents(13세 미만
+ * 개인정보 동의)와는 별개 개념/테이블(trial_smart_notes_consents)이다.
+ * 이 동의가 있어야 체험수업권이 자동 지급된다(트리거). 자격 검증(본인
+ * household 자녀인지)과 멱등 처리(이미 동의했으면 그대로 반환)는
+ * record_trial_smart_notes_consent()가 전부 수행한다.
+ */
+export async function consentToTrialSmartNotes(childId: string, policyVersion: string) {
+  const { supabase } = await requireUser();
+
+  const { error } = await supabase.rpc("record_trial_smart_notes_consent", {
+    p_child_id: childId,
+    p_policy_version: policyVersion,
+  });
+  if (error) throw new Error(error.message);
+}
+
+/**
  * 자녀 생년월일 설정. 학생 본인은 자가수정이 차단되어 있어(§4) 보호자·
  * 관리자만 이 경로로 설정할 수 있다 — 자격 검증은
  * set_student_date_of_birth()가 수행한다. 전담 설정 화면은 아직 없다(온보딩

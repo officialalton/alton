@@ -3,10 +3,11 @@ import { describe, expect, it, vi } from "vitest";
 import CatalogTab from "./CatalogTab";
 import * as docActions from "./curriculum-doc-actions";
 import type { AdminSubject } from "./subject-data";
-import type { DocEditorData } from "./curriculum-doc-data";
+import type { CurriculumDocListItem, DocEditorData } from "./curriculum-doc-data";
 
 vi.mock("./curriculum-doc-actions", () => ({
   createCurriculumDoc: vi.fn(),
+  getCurriculumDocDetailAction: vi.fn(),
   updateDocTitle: vi.fn(),
   setDocPublished: vi.fn(),
   addSection: vi.fn(),
@@ -23,6 +24,32 @@ vi.mock("./curriculum-doc-actions", () => ({
 const subjects: AdminSubject[] = [
   { subjectId: "sub1", subjectName: "SAT Math", units: [] },
 ];
+
+// 2026-09-10(P1 성능 배치) — CatalogTab/CurriculumDocsTab은 이제 경량 목록
+// (CurriculumDocListItem)만 받고, "편집"을 눌러야 getCurriculumDocDetailAction()으로
+// 전체 상세를 지연 조회한다. 테스트에서는 목록 항목과 그에 대응하는 전체
+// 상세를 함께 준비하고, 상세 액션 mock이 id로 찾아 돌려주게 한다.
+function listItem(overrides: Partial<CurriculumDocListItem> & { id: string }): CurriculumDocListItem {
+  return {
+    title: "이차방정식",
+    subjectId: "sub1",
+    subjectName: "SAT Math",
+    unitId: null,
+    unitTitle: null,
+    status: "draft",
+    sectionCount: 0,
+    ...overrides,
+  };
+}
+
+function toDetail(item: CurriculumDocListItem): DocEditorData {
+  return { ...item, sections: [] };
+}
+
+function mockDetailLookup(items: CurriculumDocListItem[]) {
+  const byId = new Map(items.map((d) => [d.id, toDetail(d)]));
+  vi.mocked(docActions.getCurriculumDocDetailAction).mockImplementation(async (id: string) => byId.get(id) ?? null);
+}
 
 describe("CatalogTab", () => {
   it("기본 서브탭은 과목 템플릿이다", () => {
@@ -42,30 +69,20 @@ describe("CatalogTab", () => {
     expect(screen.getByText("배포된 교재가 없습니다.")).toBeInTheDocument();
   });
 
-  it("아직 구현 안 된 서브탭을 누르면 준비 중 문구를 보여준다", () => {
+  it("2026-09-10(UI/UX 정리 1차): 미구현 '승인 대기' 서브탭은 더 이상 노출되지 않는다", () => {
     render(<CatalogTab subjects={subjects} docs={[]} />);
-    fireEvent.click(screen.getByText("승인 대기"));
-    expect(screen.getByText("승인 대기 탭은 준비 중입니다.")).toBeInTheDocument();
+    expect(screen.queryByText("승인 대기")).not.toBeInTheDocument();
   });
 
   it("교재 문서 탭에서 배포하면 교재 라이브러리 탭에도 서브탭 전환 없이 즉시 반영된다", async () => {
-    const docs: DocEditorData[] = [
-      {
-        id: "doc1",
-        title: "이차방정식",
-        subjectId: "sub1",
-        subjectName: "SAT Math",
-        unitId: null,
-        unitTitle: null,
-        status: "draft",
-        sections: [],
-      },
-    ];
+    const docs = [listItem({ id: "doc1", status: "draft" })];
+    mockDetailLookup(docs);
     vi.mocked(docActions.setDocPublished).mockResolvedValue(undefined);
     render(<CatalogTab subjects={subjects} docs={docs} />);
 
     fireEvent.click(screen.getByText("교재 문서"));
     fireEvent.click(screen.getByText("편집"));
+    await screen.findByText("배포하기");
     fireEvent.click(screen.getByText("배포하기"));
     await waitFor(() =>
       expect(screen.getByText("배포 취소(초안으로)")).toBeInTheDocument()
@@ -83,23 +100,14 @@ describe("CatalogTab", () => {
   });
 
   it("배포 취소 직후 '뒤로'를 누르지 않고 바로 라이브러리 탭으로 이동해도 즉시 반영된다", async () => {
-    const docs: DocEditorData[] = [
-      {
-        id: "doc1",
-        title: "이차방정식",
-        subjectId: "sub1",
-        subjectName: "SAT Math",
-        unitId: null,
-        unitTitle: null,
-        status: "published",
-        sections: [],
-      },
-    ];
+    const docs = [listItem({ id: "doc1", status: "published" })];
+    mockDetailLookup(docs);
     vi.mocked(docActions.setDocPublished).mockResolvedValue(undefined);
     render(<CatalogTab subjects={subjects} docs={docs} />);
 
     fireEvent.click(screen.getByText("교재 문서"));
     fireEvent.click(screen.getByText("편집"));
+    await screen.findByText("배포 취소(초안으로)");
     fireEvent.click(screen.getByText("배포 취소(초안으로)"));
     await waitFor(() => expect(screen.getByText("배포하기")).toBeInTheDocument());
 
@@ -110,28 +118,11 @@ describe("CatalogTab", () => {
   });
 
   it("교재 문서 탭에서 삭제하면 교재 라이브러리 탭 카운트에도 즉시 반영된다", async () => {
-    const docs: DocEditorData[] = [
-      {
-        id: "doc1",
-        title: "이차방정식",
-        subjectId: "sub1",
-        subjectName: "SAT Math",
-        unitId: null,
-        unitTitle: null,
-        status: "draft",
-        sections: [],
-      },
-      {
-        id: "doc2",
-        title: "이차함수",
-        subjectId: "sub1",
-        subjectName: "SAT Math",
-        unitId: null,
-        unitTitle: null,
-        status: "published",
-        sections: [],
-      },
+    const docs = [
+      listItem({ id: "doc1", title: "이차방정식", status: "draft" }),
+      listItem({ id: "doc2", title: "이차함수", status: "published" }),
     ];
+    mockDetailLookup(docs);
     vi.mocked(docActions.deleteCurriculumDoc).mockResolvedValue(undefined);
     render(<CatalogTab subjects={subjects} docs={docs} />);
 
@@ -140,6 +131,7 @@ describe("CatalogTab", () => {
 
     fireEvent.click(screen.getByText("교재 문서"));
     fireEvent.click(screen.getAllByText("편집")[1]); // doc2(published)
+    await screen.findByText("배포 취소(초안으로)");
     fireEvent.click(screen.getByText("배포 취소(초안으로)"));
     await waitFor(() => expect(screen.getByText("배포하기")).toBeInTheDocument());
     fireEvent.click(screen.getByText("이 교재 삭제"));

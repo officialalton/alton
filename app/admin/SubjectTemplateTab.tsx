@@ -9,8 +9,11 @@ import {
   updateSubjectUnit,
   removeSubjectUnit,
   moveSubjectUnit,
+  createSubjectKeyword,
+  assignUnitKeyword,
+  removeUnitKeyword,
 } from "./subject-actions";
-import type { AdminSubject, SubjectUnit } from "./subject-data";
+import type { AdminSubject, SubjectKeyword, SubjectUnit } from "./subject-data";
 
 export default function SubjectTemplateTab({
   subjects,
@@ -65,6 +68,10 @@ export default function SubjectTemplateTab({
           setOpenSubjectId(null);
         }}
         onUnitsChange={(units) => patchSubject(open.subjectId, { units })}
+        onKeywordsChange={(keywords) => patchSubject(open.subjectId, { keywords })}
+        onArchived={(reason) =>
+          patchSubject(open.subjectId, { archivedAt: new Date().toISOString(), archivedReason: reason })
+        }
       />
     );
   }
@@ -83,8 +90,18 @@ export default function SubjectTemplateTab({
           className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5 flex items-center justify-between"
         >
           <div>
-            <div className="text-[13.5px] font-bold text-ink">{s.subjectName}</div>
-            <div className="text-[12px] text-grey-500 mt-0.5">{s.units.length}개 회차</div>
+            <div className="text-[13.5px] font-bold text-ink flex items-center gap-1.5">
+              {s.subjectName}
+              {s.archivedAt && (
+                <span className="text-[10.5px] font-bold px-1.5 py-0.5 rounded bg-grey-100 text-grey-500">
+                  보관됨
+                </span>
+              )}
+            </div>
+            <div className="text-[12px] text-grey-500 mt-0.5">
+              {s.units.length}개 회차
+              {s.archivedAt && s.archivedReason ? ` · ${s.archivedReason}` : ""}
+            </div>
           </div>
           <button
             onClick={() => setOpenSubjectId(s.subjectId)}
@@ -140,20 +157,71 @@ function SubjectDetailEditor({
   onRenamed,
   onDeleted,
   onUnitsChange,
+  onKeywordsChange,
+  onArchived,
 }: {
   subject: AdminSubject;
   onBack: () => void;
   onRenamed: (name: string) => void;
   onDeleted: () => void;
   onUnitsChange: (units: SubjectUnit[]) => void;
+  onKeywordsChange: (keywords: SubjectKeyword[]) => void;
+  onArchived: (reason: string | null) => void;
 }) {
   const [units, setUnits] = useState(subject.units);
+  const [keywords, setKeywords] = useState(subject.keywords ?? []);
+  const [newKeyword, setNewKeyword] = useState("");
+  const [keywordError, setKeywordError] = useState<string | null>(null);
   const [confirmingDelete, setConfirmingDelete] = useState(false);
   const [deleteError, setDeleteError] = useState<string | null>(null);
+  const [archivedNotice, setArchivedNotice] = useState<string | null>(
+    subject.archivedAt ? subject.archivedReason ?? "이 과목은 보관 처리되어 있습니다." : null
+  );
 
   function commit(next: SubjectUnit[]) {
     setUnits(next);
     onUnitsChange(next);
+  }
+
+  async function handleCreateKeyword() {
+    const label = newKeyword.trim();
+    if (!label) return;
+    setKeywordError(null);
+    // 2026-09-10(P0-2) — createSubjectKeyword()가 이제 던지지 않고 { ok, error }를
+    // 반환한다(Minified React error #441 마스킹 버그 수정 — production에서 서버
+    // 액션이 throw하면 이 화면에 그 마스킹된 문구가 그대로 노출됐다).
+    const result = await createSubjectKeyword(subject.subjectId, label);
+    if (!result.ok) {
+      setKeywordError(result.error);
+      return;
+    }
+    const next = [...keywords, result.value].sort((a, b) => a.label.localeCompare(b.label));
+    setKeywords(next);
+    onKeywordsChange(next);
+    setNewKeyword("");
+  }
+
+  async function handleToggleUnitKeyword(unitId: string, keywordId: string, currentlyTagged: boolean) {
+    setKeywordError(null);
+    const result = currentlyTagged
+      ? await removeUnitKeyword(unitId, keywordId)
+      : await assignUnitKeyword(unitId, keywordId);
+    if (!result.ok) {
+      setKeywordError(result.error);
+      return;
+    }
+    commit(
+      units.map((u) =>
+        u.id === unitId
+          ? {
+              ...u,
+              keywordIds: currentlyTagged
+                ? (u.keywordIds ?? []).filter((id) => id !== keywordId)
+                : [...(u.keywordIds ?? []), keywordId],
+            }
+          : u
+      )
+    );
   }
 
   async function handleRename(name: string) {
@@ -165,7 +233,13 @@ function SubjectDetailEditor({
   async function handleDelete() {
     setDeleteError(null);
     try {
-      await deleteSubject(subject.subjectId);
+      const result = await deleteSubject(subject.subjectId);
+      setConfirmingDelete(false);
+      if (result.archived) {
+        setArchivedNotice(result.reason ?? "이 과목은 보관 처리되었습니다.");
+        onArchived(result.reason);
+        return;
+      }
       onDeleted();
     } catch (e) {
       setDeleteError(e instanceof Error ? e.message : "삭제에 실패했습니다.");
@@ -218,6 +292,44 @@ function SubjectDetailEditor({
         className="text-[20px] font-extrabold text-ink mb-5 w-full px-2 py-1 border-[1.5px] border-transparent hover:border-grey-200 focus:border-grey-200 rounded-lg -ml-2"
       />
 
+      {/* 2026-09-09(UAT 지적, 제품 오너 승인) — 과목 공용 키워드 사전. 여기서
+          만든 키워드가 아래 회차별 태깅, 교사 운영 커리큘럼 오버레이, 교재/문제
+          태깅에서 그대로 재사용되는 원본이다. */}
+      <div className="mb-5">
+        <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2">
+          과목 키워드 사전
+        </div>
+        <div className="flex flex-wrap gap-1.5 mb-2">
+          {keywords.length === 0 && (
+            <span className="text-[12px] text-grey-500">아직 등록된 키워드가 없습니다.</span>
+          )}
+          {keywords.map((k) => (
+            <span
+              key={k.id}
+              className="text-[11.5px] font-semibold px-2.5 py-1 rounded-full bg-grey-100 text-ink"
+            >
+              {k.label}
+            </span>
+          ))}
+        </div>
+        <div className="flex gap-2">
+          <input
+            value={newKeyword}
+            onChange={(e) => setNewKeyword(e.target.value)}
+            placeholder="새 키워드 (예: 이차방정식)"
+            className="flex-1 px-3 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12.5px]"
+          />
+          <button
+            onClick={handleCreateKeyword}
+            disabled={!newKeyword.trim()}
+            className="text-[12px] font-bold px-3.5 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
+          >
+            추가
+          </button>
+        </div>
+        {keywordError && <p className="text-[12px] text-red mt-1.5">{keywordError}</p>}
+      </div>
+
       {units.map((u, idx) => (
         <div
           key={u.id}
@@ -239,6 +351,25 @@ function SubjectDetailEditor({
             onBlur={(e) => handleField(u.id, "note", e.target.value)}
             className="w-full px-3 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12.5px] mb-2"
           />
+          {keywords.length > 0 && (
+            <div className="flex flex-wrap gap-1.5 mb-2">
+              {keywords.map((k) => {
+                const tagged = (u.keywordIds ?? []).includes(k.id);
+                return (
+                  <button
+                    key={k.id}
+                    onClick={() => handleToggleUnitKeyword(u.id, k.id, tagged)}
+                    className={
+                      "text-[11px] font-semibold px-2 py-1 rounded-full border-[1.5px] " +
+                      (tagged ? "bg-ink text-white border-ink" : "border-grey-200 text-grey-500")
+                    }
+                  >
+                    {k.label}
+                  </button>
+                );
+              })}
+            </div>
+          )}
           <div className="flex items-center gap-3">
             <button
               disabled={idx === 0}
@@ -272,10 +403,21 @@ function SubjectDetailEditor({
       </button>
 
       <div className="border-t border-grey-200 pt-5">
+        {archivedNotice && (
+          <p className="text-[12.5px] text-ink bg-grey-100 rounded-lg px-3 py-2 mb-3">
+            이 과목은 보관 처리되었습니다: {archivedNotice}
+            <br />
+            <span className="text-grey-500">
+              이름·기존 이력은 그대로 유지되며, 신규 배정·템플릿 선택·교재 연결
+              후보에서만 제외됩니다.
+            </span>
+          </p>
+        )}
         {confirmingDelete ? (
           <div className="flex items-center gap-3">
             <span className="text-[12.5px] text-ink">
-              정말 &quot;{subject.subjectName}&quot; 과목을 삭제하시겠습니까?
+              정말 &quot;{subject.subjectName}&quot; 과목을 삭제하시겠습니까? 사용
+              이력이 있으면 삭제 대신 보관 처리됩니다.
             </span>
             <button
               onClick={handleDelete}

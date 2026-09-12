@@ -3,6 +3,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
+import { confirmOwnEmailAfterPasswordSet } from "./actions";
 
 export default function SetPasswordPage() {
   const router = useRouter();
@@ -94,6 +95,12 @@ export default function SetPasswordPage() {
       setError(updateError.message);
       return;
     }
+
+    // 지금 이 브라우저 세션이 실제로 이메일의 링크를 열어 비밀번호 설정에
+    // 성공한 그 사용자다 — 이 시점에 email_confirm을 true로 올린다(학생 계정의
+    // "실제 이메일 확인" 검증 이벤트, 2026-09-05 추가). 실패해도 비밀번호 설정
+    // 자체는 이미 끝났으니 로그인 흐름을 막지 않는다.
+    await confirmOwnEmailAfterPasswordSet().catch(() => {});
 
     // 추천인 코드(referral)는 이 단계에서 검증/적립하지 않는다 — 크레딧 적립 로직은
     // 결제/크레딧 티켓(024/032)에서 credit_transactions에 반영한다. 여기서는 값만 받아둔다.

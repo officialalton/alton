@@ -87,6 +87,23 @@ insert into students (id, grade, status, credit_balance) values
   ('cccccccc-0000-0000-0000-000000000002', '11학년', 'active', 8),
   ('88888888-0000-0000-0000-000000000001', '9학년', 'pending', 0);
 
+-- M4(2026-09-05) 프로필 완성 게이트 추가 — 기존 e2e/시드 시나리오가 로그인 직후
+-- /complete-profile로 새로 리다이렉트되는 회귀를 막기 위해, 이미 활성 상태인 시드
+-- 학생들은 프로필을 완성된 것으로 미리 채워둔다(9학년 pending 학생은 계정 상태
+-- 게이트가 먼저 걸려 이 화면에 도달하지 않으므로 그대로 둔다).
+update students set
+  school_name = '서울국제학교',
+  sat_score = 1350,
+  gpa = 3.7,
+  gpa_scale = '4.0',
+  target_colleges = array['Stanford University'],
+  intended_majors = array['Computer Science'],
+  profile_completed_at = now()
+where id in (
+  'cccccccc-0000-0000-0000-000000000001',
+  'cccccccc-0000-0000-0000-000000000002'
+);
+
 -- (2026-08-30 R2 추가) teachers.status='active'로 바로 INSERT하면 R1의
 -- teachers_enforce_active_requires_rate 트리거가 유효한 현재 시급 이력
 -- (teacher_rate_history)을 요구한다 — teacher_rate_history.teacher_id는
@@ -177,7 +194,7 @@ insert into enrollments (id, student_id, teacher_id, subject_id, status, total_s
   ('22222222-0000-0000-0000-000000000003', 'cccccccc-0000-0000-0000-000000000001', 'dddddddd-0000-0000-0000-000000000001',
     'eeeeeeee-0000-0000-0000-000000000005', 'active', 12, 1);
 
-insert into sessions (
+insert into legacy_sessions (
   id, enrollment_id, session_number, unit_title, source_template_unit_id, teacher_comment, status, scheduled_at
 ) values
   ('44444444-0000-0000-0000-000000000001', '22222222-0000-0000-0000-000000000001', 1, '함수의 기초와 그래프 해석', '11111111-0000-0000-0000-000000000001', null, 'completed', now() - interval '5 weeks'),
@@ -211,7 +228,7 @@ insert into problems (id, format, passage, options, correct_index, explanation, 
     'confirmed', 'dddddddd-0000-0000-0000-000000000001');
 
 -- 8회차 세션에 이 교재를 배정
-update sessions set curriculum_doc_id = '33333333-0000-0000-0000-000000000001'
+update legacy_sessions set curriculum_doc_id = '33333333-0000-0000-0000-000000000001'
   where id = '44444444-0000-0000-0000-000000000008';
 
 -- 세션에 배정되지 않은 교재도 하나 더 시드 — 023(교재 라이브러리)에서

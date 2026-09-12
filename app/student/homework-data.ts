@@ -34,7 +34,7 @@ export async function loadStudentHomework(
 
   const { data: sessions } = enrollmentIds.length
     ? await supabase
-        .from("sessions")
+        .from("legacy_sessions")
         .select("id, enrollment_id, session_number")
         .in("enrollment_id", enrollmentIds)
     : { data: [] as never[] };

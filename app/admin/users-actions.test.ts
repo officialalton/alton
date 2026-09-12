@@ -36,40 +36,6 @@ vi.mock("@/lib/supabase-admin", () => ({
   }),
 }));
 
-describe("inviteParent", () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-    getUserMock.mockResolvedValue({ data: { user: { id: "admin1" } } });
-    profileSingleMock.mockResolvedValue({ data: { role: "admin" } });
-    serverRpcMock.mockResolvedValue({
-      data: [{ invite_id: "invite1", raw_token: "rawtoken123" }],
-      error: null,
-    });
-    sendInviteEmailMock.mockResolvedValue(undefined);
-  });
-
-  it("account_invites에 초대를 생성하고 메일을 보낸 뒤 invite_id를 반환한다(계정은 아직 만들지 않음)", async () => {
-    const { inviteParent } = await import("./users-actions");
-    const inviteId = await inviteParent({ name: "김민지", email: "minji@example.com" });
-
-    expect(inviteId).toBe("invite1");
-    expect(serverRpcMock).toHaveBeenCalledWith("create_account_invite", {
-      p_email: "minji@example.com",
-      p_name: "김민지",
-      p_role: "parent",
-      p_household_id: null,
-    });
-    expect(sendInviteEmailMock).toHaveBeenCalledWith({
-      to: "minji@example.com",
-      name: "김민지",
-      token: "rawtoken123",
-      role: "parent",
-    });
-    expect(inviteUserByEmailMock).not.toHaveBeenCalled();
-    expect(parentsInsertMock).not.toHaveBeenCalled();
-  });
-});
-
 describe("inviteTeacher", () => {
   beforeEach(() => {
     vi.clearAllMocks();

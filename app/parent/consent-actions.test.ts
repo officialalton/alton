@@ -66,6 +66,33 @@ describe("revokeChildConsent", () => {
   });
 });
 
+describe("consentToTrialSmartNotes", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    rpcMock.mockResolvedValue({ error: null });
+  });
+
+  it("record_trial_smart_notes_consent RPC를 호출한다", async () => {
+    const { consentToTrialSmartNotes } = await import("./consent-actions");
+    await consentToTrialSmartNotes("student1", "v1");
+
+    expect(rpcMock).toHaveBeenCalledWith("record_trial_smart_notes_consent", {
+      p_child_id: "student1",
+      p_policy_version: "v1",
+    });
+  });
+
+  it("RPC 에러를 그대로 던진다", async () => {
+    rpcMock.mockResolvedValue({
+      error: { message: "본인 가족의 자녀에 대해서만 동의를 기록할 수 있습니다." },
+    });
+    const { consentToTrialSmartNotes } = await import("./consent-actions");
+    await expect(consentToTrialSmartNotes("student1", "v1")).rejects.toThrow(
+      "본인 가족의 자녀에 대해서만 동의를 기록할 수 있습니다."
+    );
+  });
+});
+
 describe("setChildDateOfBirth", () => {
   beforeEach(() => {
     vi.clearAllMocks();

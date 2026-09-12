@@ -18,19 +18,30 @@ const students: StudentListItem[] = [
     creditBalance: 14,
     parentNames: ["김민지"],
     subjectNames: ["SAT Math"],
+    dateOfBirth: null,
+    dateOfBirthVerifiedAt: null,
+    schoolName: null,
+    satScore: 0,
+    gpa: null,
+    gpaScale: null,
+    targetColleges: [],
+    intendedMajors: [],
+    profileCompletedAt: null,
+    apCourseCount: 0,
+    extracurricularCount: 0,
   },
 ];
 
 describe("BillingTab", () => {
   it("패키지 가격과 학생별 수업권 잔액을 보여준다", () => {
-    render(<BillingTab initialStudents={students} creditHistoryByStudent={{}} />);
+    render(<BillingTab subjects={[]} initialStudents={students} creditHistoryByStudent={{}} />);
     expect(screen.getByText("10장")).toBeInTheDocument();
     expect(screen.getByText("지훈")).toBeInTheDocument();
     expect(screen.getByText("14장")).toBeInTheDocument();
   });
 
   it("학생을 클릭하면 상세(조정 UI)로 이동한다", () => {
-    render(<BillingTab initialStudents={students} creditHistoryByStudent={{}} />);
+    render(<BillingTab subjects={[]} initialStudents={students} creditHistoryByStudent={{}} />);
     fireEvent.click(screen.getByText("지훈"));
     expect(screen.getByText("조정 적용")).toBeInTheDocument();
   });

@@ -14,7 +14,7 @@ export default function MaterialsLibraryTab({
 
       {subjects.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-          열람할 수 있는 교재가 없습니다.
+          아직 배정된 교재가 없어요. 담당 선생님이 곧 준비해드릴 예정이에요.
         </div>
       ) : (
         subjects.map((subject) => (

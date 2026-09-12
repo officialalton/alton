@@ -1,9 +1,9 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import MaterialsLibraryTab from "./MaterialsLibraryTab";
-import type { DocEditorData } from "./curriculum-doc-data";
+import type { CurriculumDocListItem } from "./curriculum-doc-data";
 
-function makeDoc(overrides: Partial<DocEditorData>): DocEditorData {
+function makeDoc(overrides: Partial<CurriculumDocListItem>): CurriculumDocListItem {
   return {
     id: "doc1",
     title: "제목",
@@ -12,12 +12,12 @@ function makeDoc(overrides: Partial<DocEditorData>): DocEditorData {
     unitId: null,
     unitTitle: null,
     status: "published",
-    sections: [],
+    sectionCount: 0,
     ...overrides,
   };
 }
 
-const docs: DocEditorData[] = [
+const docs: CurriculumDocListItem[] = [
   makeDoc({ id: "d1", title: "이차방정식 개념 정리", unitId: "u1", unitTitle: "이차방정식과 이차함수" }),
   makeDoc({ id: "d2", title: "이차함수 그래프 심화", unitId: "u1", unitTitle: "이차방정식과 이차함수" }),
   makeDoc({ id: "d3", title: "미배정 교재", unitId: null, unitTitle: null }),

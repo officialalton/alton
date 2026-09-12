@@ -1,5 +1,7 @@
 # 구글 워크스페이스 전면 전환 + 전체 목업 갭 로드맵
 
+> **문서 상태: 대체됨.** 이 초기 조사 문서의 Google Docs iframe, DocuSign, Drive 범위와 우선순위는 후속 검토에서 변경됐다. 최신 기준은 `docs/2026-08-29-product-architecture-v3.md`, `docs/2026-08-29-developer-handoff-v3.md`, `docs/2026-08-29-master-roadmap-v3.md`다.
+
 ## 배경
 
 프로덕션에서 학생이 Calendly로 실제 예약을 확정해도 `sessions` 테이블에 전혀 반영되지 않는 버그를 추적하는 과정에서, 근본 원인이 코드 버그가 아니라 **Calendly 웹훅이 유료 플랜(개인 계정 기준 Standard 이상, 조직 계정 기준 Teams 이상)에서만 열리는 기능**이라는 걸 확인했다 — 즉 지금 구조로는 선생님이 늘어날수록 인당 비용이 발생한다.

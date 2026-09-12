@@ -1,5 +1,7 @@
 # 교재 문서 편집기 업그레이드 Implementation Plan
 
+> **문서 상태: 과거 구현 이력·직접 재실행 금지.** 현재 결과를 이해할 때만 참고하고 신규 작업은 v3 문서를 따른다.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** 교재 문서 편집기(`app/admin/CurriculumDocEditor.tsx` 등)에 섹션 타입 구분(개념 설명/문제 생성), 문제 포맷별(객관식 5지선다/서술형/수학 화이트보드형) 전용 저작 UI, 리치텍스트 표 삽입, 문서 삭제 기능을 추가한다.

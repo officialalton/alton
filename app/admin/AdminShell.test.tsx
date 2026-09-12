@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import AdminShell from "./AdminShell";
 import type { AdminDashboardData } from "./dashboard-data";
@@ -31,12 +31,52 @@ vi.mock("./users-actions", () => ({
   setStudentStatus: vi.fn(),
   setTeacherStatus: vi.fn(),
   adjustStudentCredit: vi.fn(),
-  setTeacherCalendlyUrl: vi.fn(),
+  listParentsForUsersTabAction: vi.fn().mockResolvedValue({ ok: true, data: [] }),
+  listStudentsForUsersTabAction: vi.fn().mockResolvedValue({ students: [], creditHistoryByStudent: {} }),
+  listTeachersForUsersTabAction: vi.fn().mockResolvedValue({ teachers: [], qcWarningsByTeacher: {} }),
 }));
 
 vi.mock("./teacher-subjects-actions", () => ({
   assignTeacherSubject: vi.fn(),
   unassignTeacherSubject: vi.fn(),
+}));
+
+vi.mock("./consultation-actions", () => ({
+  createConsultation: vi.fn(),
+  scheduleConsultation: vi.fn(),
+  rescheduleConsultation: vi.fn(),
+  cancelConsultation: vi.fn(),
+  markConsultationNoShow: vi.fn(),
+  findDuplicateConsultationCandidates: vi.fn(),
+  createClassificationTag: vi.fn(),
+  listClassificationTags: vi.fn(),
+  tagConsultation: vi.fn(),
+  untagConsultation: vi.fn(),
+  createTrialSessionFromConsultation: vi.fn(),
+  completeTrialSession: vi.fn(),
+  approveTrialException: vi.fn(),
+  cancelTrialSession: vi.fn(),
+  markTrialNoShow: vi.fn(),
+  createProposal: vi.fn(),
+  sendProposal: vi.fn(),
+  respondToProposal: vi.fn(),
+  retryFailedDriveArtifacts: vi.fn(),
+  reconcileDocusignStatus: vi.fn(),
+  createContractFromProposal: vi.fn(),
+  companySignOffContractVersion: vi.fn(),
+  sendContractForSignature: vi.fn(),
+  createNewContractVersionForResend: vi.fn(),
+  voidContractVersion: vi.fn(),
+}));
+
+vi.mock("./entitlement-actions", () => ({
+  createEntitlementProductVersion: vi.fn(),
+  discontinueEntitlementProductVersion: vi.fn(),
+  approveRefund: vi.fn(),
+  rejectRefund: vi.fn(),
+  extendEntitlementForCompanyOrTeacherCancellation: vi.fn(),
+  transferEntitlementBetweenChildren: vi.fn(),
+  adminLookupPurchaseDetail: vi.fn(),
 }));
 
 const dashboard: AdminDashboardData = {
@@ -49,39 +89,75 @@ const dashboard: AdminDashboardData = {
 };
 
 const baseProps = {
+  adminUserId: "admin1",
   dashboard,
   subjects: [],
   docs: [],
   parents: [],
   students: [],
-  teachers: [],
+  matchingStudents: [],
   creditHistoryByStudent: {},
-  qcWarningsByTeacher: {},
-  pendingConsults: [],
-  familyContracts: [],
+  initialUnifiedScheduleMonthAnchor: "2026-09",
+  consultations: [],
+  trials: [],
+  proposals: [],
+  consentGaps: [],
+  completedConsents: [],
+  driveIssues: [],
+  staleEnvelopes: [],
+  contractActivationRetries: [],
   devLogContent: "## Phase 1\n- [x] 완료된 항목\n- [ ] 남은 항목\n",
-  payouts: [],
+  payoutBatches: [],
   teacherCandidatesBySubject: {},
   workspaceProvisionings: [],
+  entitlementProducts: [],
+  entitlementProductVersions: [],
+  openPriceChangeNotices: [],
+  pendingRefundRequests: [],
+  purchasesNeedingReconciliation: [],
+  openOrRecentPaymentDisputes: [],
 };
 
 describe("AdminShell", () => {
-  it("사이드바 12개 항목을 보여주고, 기본 탭은 홈이다", () => {
+  it("사이드바 항목을 보여주고, 기본 탭은 홈이다", () => {
     render(<AdminShell {...baseProps} />);
     [
       "홈",
       "사용자",
       "매칭",
-      "상담",
+      "신규",
       "커리큘럼",
+      "구 크레딧(레거시)",
       "수업권",
-      "계약",
-      "QC",
+      "통합 일정",
       "정산",
-      "문서",
-      "개발 로그",
     ].forEach((label) => expect(screen.getByText(label)).toBeInTheDocument());
     expect(screen.getByText("관리자, 안녕하세요")).toBeInTheDocument();
+  });
+
+  it("2026-09-10(P0-3 2차) — 브라우저 뒤로가기/앞으로가기로 initialTab prop이 바뀌면 activeTab이 그대로 따라간다(마운트 시점에만 반영되던 정체 상태 수정)", async () => {
+    const { rerender } = render(<AdminShell {...baseProps} initialTab="entitlements" />);
+    expect(await screen.findByText("수업권 원장")).toBeInTheDocument();
+
+    // Next.js가 뒤로가기로 새 initialTab을 다시 내려주는 상황을 재현한다 —
+    // AdminShell 컴포넌트 자체는 리마운트되지 않고 새 props만 받는다.
+    rerender(<AdminShell {...baseProps} initialTab="catalog" />);
+    await waitFor(() =>
+      expect(screen.getByRole("heading", { name: "과목 템플릿" })).toBeInTheDocument()
+    );
+    expect(screen.queryByText("수업권 원장")).not.toBeInTheDocument();
+  });
+
+  it("2026-09-10(UI/UX 1차 리뷰 지적): '개발 로그'는 일반 네비게이션(사이드바)에 노출되지 않는다", () => {
+    render(<AdminShell {...baseProps} />);
+    expect(screen.queryByText("개발 로그")).not.toBeInTheDocument();
+  });
+
+  it("2026-09-10(UI/UX 1차 리뷰 지적): 모바일 '운영' 드로어를 열어도 '개발 로그'가 보이지 않는다", () => {
+    render(<AdminShell {...baseProps} />);
+    fireEvent.click(screen.getByLabelText("메뉴 열기"));
+    expect(screen.getByText("운영")).toBeInTheDocument();
+    expect(screen.queryByText("개발 로그")).not.toBeInTheDocument();
   });
 
   it("사용자 탭을 누르면 UsersTab이 렌더링된다", () => {
@@ -117,28 +193,31 @@ describe("AdminShell", () => {
     expect(screen.getByText("+ 과목 추가")).toBeInTheDocument();
   });
 
-  it("수업권 탭을 누르면 BillingTab이 렌더링된다", () => {
+  it("구 크레딧(레거시) 탭을 누르면 BillingTab이 렌더링된다", () => {
     render(<AdminShell {...baseProps} />);
-    fireEvent.click(screen.getByText("수업권"));
+    fireEvent.click(screen.getByText("구 크레딧(레거시)"));
     expect(screen.getByText("학생별 수업권 현황")).toBeInTheDocument();
   });
 
-  it("개발 로그 탭을 누르면 DevLogTab이 tickets.md 내용을 렌더링한다", () => {
+  it("수업권 탭을 누르면 EntitlementLedgerTab이 렌더링된다", () => {
     render(<AdminShell {...baseProps} />);
-    fireEvent.click(screen.getByText("개발 로그"));
+    fireEvent.click(screen.getByText("수업권"));
+    expect(screen.getByText("수업권 원장")).toBeInTheDocument();
+  });
+
+  it("2026-09-10(UI/UX 1차 리뷰 지적): 내비게이션엔 없지만 ?tab=devlog 직접 접근으로는 DevLogTab이 그대로 열린다(내부 전용 경로)", () => {
+    render(<AdminShell {...baseProps} initialTab="devlog" />);
     expect(screen.getByText("완료된 항목")).toBeInTheDocument();
     expect(screen.getByText("남은 항목")).toBeInTheDocument();
   });
 
-  it("계약 탭을 누르면 ContractsTab이 렌더링된다", () => {
-    render(<AdminShell {...baseProps} />);
-    fireEvent.click(screen.getByText("계약"));
-    expect(screen.getByText("발송 대기")).toBeInTheDocument();
-  });
-
-  it("정산 탭을 누르면 PayoutsTab이 렌더링된다", () => {
+  it("정산 탭을 누르면 PayoutBatchesTab이 렌더링된다", () => {
     render(<AdminShell {...baseProps} />);
     fireEvent.click(screen.getByText("정산"));
-    expect(screen.getByText("정산 생성")).toBeInTheDocument();
+    expect(screen.getByText("정산", { selector: "h1" })).toBeInTheDocument();
+    // P4-2(2026-09-12): 정상 경로가 자동 마감으로 바뀌면서 기본 버튼이
+    // "월 마감 실행"이 됐다(기존 "Batch 생성"은 구경로로 남겨 이름이 바뀜).
+    // 설명 문단에도 같은 문구가 나오므로 버튼으로 한정한다.
+    expect(screen.getByRole("button", { name: "월 마감 실행" })).toBeInTheDocument();
   });
 });

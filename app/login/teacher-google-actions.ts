@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
+import { currentRequestOrigin } from "@/lib/request-origin";
 
 // R2 Task 7 — 선생님 전용 "Google로 로그인" 진입점. 학생·보호자·관리자
 // 로그인 방식(이메일/비밀번호)은 이 함수와 무관하다. hd 파라미터는 Google
@@ -11,7 +12,7 @@ import { createClient } from "@/utils/supabase/server";
 // 레코드와 대조해서 한다(hd 클레임이나 이메일만으로 신뢰하지 않는다).
 export async function signInWithGoogleForTeacher(): Promise<void> {
   const supabase = await createClient();
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3010";
+  const siteUrl = await currentRequestOrigin();
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",

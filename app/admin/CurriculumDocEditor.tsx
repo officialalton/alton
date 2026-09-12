@@ -13,12 +13,18 @@ import {
   confirmSectionProblems,
   removeSectionProblem,
   deleteCurriculumDoc,
+  assignSectionKeyword,
+  removeSectionKeyword,
+  assignProblemKeyword,
+  removeProblemKeyword,
+  createSubjectKeywordForDoc,
   type ProblemFormat,
   type ProblemDifficulty,
 } from "./curriculum-doc-actions";
 import RichTextEditable from "./RichTextEditable";
 import ProblemDraftFields from "./ProblemDraftFields";
 import type { DocEditorData, DocProblem, DocSection } from "./curriculum-doc-data";
+import type { SubjectKeyword } from "./subject-data";
 
 const FORMAT_LABEL: Record<ProblemFormat, string> = {
   mc: "객관식",
@@ -45,6 +51,9 @@ export default function CurriculumDocEditor({
   const [title, setTitle] = useState(doc.title);
   const [status, setStatus] = useState(doc.status);
   const [sections, setSections] = useState(doc.sections);
+  // R9(Task 2): 이 과목의 키워드 사전 — 새 키워드를 만들면 여기에 추가해
+  // 같은 화면 안의 다른 섹션/문제 태깅 picker에도 즉시 나타나게 한다.
+  const [catalog, setCatalog] = useState<SubjectKeyword[]>(doc.subjectKeywords ?? []);
   const [publishing, setPublishing] = useState(false);
   const [pickingSectionType, setPickingSectionType] = useState(false);
   const [confirmingDelete, setConfirmingDelete] = useState(false);
@@ -162,6 +171,9 @@ export default function CurriculumDocEditor({
           isLast={idx === sections.length - 1}
           subjectId={doc.subjectId}
           subjectName={doc.subjectName}
+          docStatus={status}
+          catalog={catalog}
+          onCatalogAdd={(kw) => setCatalog((prev) => [...prev, kw])}
           onPatch={(patch) => patchSection(section.id, patch)}
           onRemove={() => handleRemoveSection(section.id)}
           onMove={(dir) => handleMoveSection(idx, dir)}
@@ -247,6 +259,9 @@ function SectionEditor({
   isLast,
   subjectId,
   subjectName,
+  docStatus,
+  catalog,
+  onCatalogAdd,
   onPatch,
   onRemove,
   onMove,
@@ -257,6 +272,9 @@ function SectionEditor({
   isLast: boolean;
   subjectId: string;
   subjectName: string;
+  docStatus: string;
+  catalog: SubjectKeyword[];
+  onCatalogAdd: (keyword: SubjectKeyword) => void;
   onPatch: (patch: Partial<DocSection>) => void;
   onRemove: () => void;
   onMove: (direction: -1 | 1) => void;
@@ -265,10 +283,16 @@ function SectionEditor({
   const [showProblemForm, setShowProblemForm] = useState(
     section.sectionType === "problem" && section.problems.length === 0
   );
+  const [sectionKeywords, setSectionKeywords] = useState(section.keywords ?? []);
 
   function commitProblems(next: DocProblem[]) {
     setProblems(next);
     onPatch({ problems: next });
+  }
+
+  function patchProblemKeywords(problemId: string, next: SubjectKeyword[]) {
+    const nextProblems = problems.map((p) => (p.id === problemId ? { ...p, keywords: next } : p));
+    commitProblems(nextProblems);
   }
 
   return (
@@ -304,6 +328,43 @@ function SectionEditor({
         <button onClick={onRemove} className="text-[12px] font-semibold text-red">
           삭제
         </button>
+      </div>
+
+      <div className="mb-3">
+        <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-1">
+          키워드
+        </div>
+        <KeywordTagger
+          assigned={sectionKeywords}
+          catalog={catalog}
+          disabledReason={
+            docStatus !== "published"
+              ? "교재를 배포(published)해야 이 섹션에 키워드를 태그할 수 있습니다."
+              : null
+          }
+          onCreate={async (label) => {
+            // 2026-09-10(P0-2 확장) — 서버 액션은 { ok, error }로 반환하고,
+            // 여기서 KeywordTagger의 기존 reject 계약으로 다시 바꾼다.
+            const result = await createSubjectKeywordForDoc(subjectId, label);
+            if (!result.ok) throw new Error(result.error);
+            onCatalogAdd(result.value);
+            return result.value;
+          }}
+          onAssign={async (kw) => {
+            const result = await assignSectionKeyword(section.id, kw.id);
+            if (!result.ok) throw new Error(result.error);
+            const next = [...sectionKeywords, kw];
+            setSectionKeywords(next);
+            onPatch({ keywords: next });
+          }}
+          onRemove={async (kw) => {
+            const result = await removeSectionKeyword(section.id, kw.id);
+            if (!result.ok) throw new Error(result.error);
+            const next = sectionKeywords.filter((k) => k.id !== kw.id);
+            setSectionKeywords(next);
+            onPatch({ keywords: next });
+          }}
+        />
       </div>
 
       {section.sectionType === "concept" && (
@@ -345,28 +406,53 @@ function SectionEditor({
             문제 ({problems.length})
           </div>
           {problems.map((p) => (
-            <div
-              key={p.id}
-              className="flex items-start justify-between gap-3 bg-grey-100 rounded-lg px-3 py-2.5 mb-2"
-            >
-              <div className="text-[12.5px] text-ink">
-                <span className="font-bold">[{FORMAT_LABEL[p.format]}]</span> {p.passage}
-                {p.format !== "mc" && (
-                  <p className="text-grey-500 mt-1">
-                    {p.format === "essay" ? "모범답안: " : "모범풀이: "}
-                    {p.explanation}
-                  </p>
-                )}
+            <div key={p.id} className="bg-grey-100 rounded-lg px-3 py-2.5 mb-2">
+              <div className="flex items-start justify-between gap-3">
+                <div className="text-[12.5px] text-ink">
+                  <span className="font-bold">[{FORMAT_LABEL[p.format]}]</span> {p.passage}
+                  {p.format !== "mc" && (
+                    <p className="text-grey-500 mt-1">
+                      {p.format === "essay" ? "모범답안: " : "모범풀이: "}
+                      {p.explanation}
+                    </p>
+                  )}
+                </div>
+                <button
+                  onClick={async () => {
+                    await removeSectionProblem(p.id);
+                    commitProblems(problems.filter((x) => x.id !== p.id));
+                  }}
+                  className="text-[11.5px] font-semibold text-red shrink-0"
+                >
+                  삭제
+                </button>
               </div>
-              <button
-                onClick={async () => {
-                  await removeSectionProblem(p.id);
-                  commitProblems(problems.filter((x) => x.id !== p.id));
-                }}
-                className="text-[11.5px] font-semibold text-red shrink-0"
-              >
-                삭제
-              </button>
+              <div className="mt-2">
+                <KeywordTagger
+                  assigned={p.keywords ?? []}
+                  catalog={catalog}
+                  disabledReason={null}
+                  onCreate={async (label) => {
+                    const result = await createSubjectKeywordForDoc(subjectId, label);
+                    if (!result.ok) throw new Error(result.error);
+                    onCatalogAdd(result.value);
+                    return result.value;
+                  }}
+                  onAssign={async (kw) => {
+                    const result = await assignProblemKeyword(p.id, kw.id);
+                    if (!result.ok) throw new Error(result.error);
+                    patchProblemKeywords(p.id, [...(p.keywords ?? []), kw]);
+                  }}
+                  onRemove={async (kw) => {
+                    const result = await removeProblemKeyword(p.id, kw.id);
+                    if (!result.ok) throw new Error(result.error);
+                    patchProblemKeywords(
+                      p.id,
+                      (p.keywords ?? []).filter((k) => k.id !== kw.id)
+                    );
+                  }}
+                />
+              </div>
             </div>
           ))}
 
@@ -417,7 +503,7 @@ function ProblemGenPanel({
   const [count, setCount] = useState(3);
   const [generating, setGenerating] = useState(false);
   const [confirming, setConfirming] = useState(false);
-  const [drafts, setDrafts] = useState<Omit<DocProblem, "id">[] | null>(null);
+  const [drafts, setDrafts] = useState<Omit<DocProblem, "id" | "keywords">[] | null>(null);
   const [feedbacks, setFeedbacks] = useState<string[]>([]);
   const [regeneratingIndex, setRegeneratingIndex] = useState<number | null>(null);
   const [confirmError, setConfirmError] = useState<string | null>(null);
@@ -442,7 +528,7 @@ function ProblemGenPanel({
     }
   }
 
-  function patchDraft(index: number, patch: Partial<Omit<DocProblem, "id">>) {
+  function patchDraft(index: number, patch: Partial<Omit<DocProblem, "id" | "keywords">>) {
     setConfirmError(null);
     setDrafts((prev) =>
       prev ? prev.map((d, i) => (i === index ? { ...d, ...patch } : d)) : prev
@@ -597,6 +683,138 @@ function ProblemGenPanel({
           취소
         </button>
       </div>
+    </div>
+  );
+}
+
+// R9(Task 2): 과목별 공용 키워드 사전에서 골라 태그하거나(중복은 그냥 무시),
+// 카탈로그에 없으면 새로 만들어 태그한다. 미공개 교재 섹션에 태그를 시도하면
+// disabledReason 문구를 보여주고 시도 자체를 막는다(실제 방어는 DB 트리거가
+// 하지만, 여기서 미리 막아 트리거 에러 문구가 그대로 노출되지 않게 한다).
+function KeywordTagger({
+  assigned,
+  catalog,
+  disabledReason,
+  onCreate,
+  onAssign,
+  onRemove,
+}: {
+  assigned: SubjectKeyword[];
+  catalog: SubjectKeyword[];
+  disabledReason: string | null;
+  onCreate: (label: string) => Promise<SubjectKeyword>;
+  onAssign: (keyword: SubjectKeyword) => Promise<void>;
+  onRemove: (keyword: SubjectKeyword) => Promise<void>;
+}) {
+  const [input, setInput] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  const assignedIds = new Set(assigned.map((k) => k.id));
+  const suggestions = catalog.filter(
+    (k) => !assignedIds.has(k.id) && k.label.toLowerCase().includes(input.trim().toLowerCase())
+  );
+
+  async function handleAdd(keyword: SubjectKeyword) {
+    if (assignedIds.has(keyword.id)) return; // 이미 태그된 키워드는 다시 태그하지 않는다
+    setBusy(true);
+    setError(null);
+    try {
+      await onAssign(keyword);
+      setInput("");
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "키워드 태그에 실패했습니다.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleCreateAndAdd() {
+    const label = input.trim();
+    if (!label) return;
+    const existing = catalog.find((k) => k.label.toLowerCase() === label.toLowerCase());
+    if (existing) {
+      await handleAdd(existing);
+      return;
+    }
+    setBusy(true);
+    setError(null);
+    try {
+      const created = await onCreate(label);
+      await onAssign(created);
+      setInput("");
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "키워드 생성에 실패했습니다.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <div>
+      <div className="flex flex-wrap gap-1.5 mb-1.5">
+        {assigned.map((k) => (
+          <span
+            key={k.id}
+            className="inline-flex items-center gap-1 text-[11.5px] font-semibold px-2 py-1 rounded-full bg-ink text-white"
+          >
+            {k.label}
+            <button
+              aria-label={`${k.label} 키워드 제거`}
+              onClick={() => onRemove(k)}
+              className="text-white/80 hover:text-white"
+            >
+              ×
+            </button>
+          </span>
+        ))}
+        {assigned.length === 0 && (
+          <span className="text-[11.5px] text-grey-500">태그된 키워드 없음</span>
+        )}
+      </div>
+
+      {disabledReason ? (
+        <p className="text-[11.5px] text-grey-500">{disabledReason}</p>
+      ) : (
+        <div className="relative">
+          <div className="flex gap-1.5">
+            <input
+              value={input}
+              disabled={busy}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  handleCreateAndAdd();
+                }
+              }}
+              placeholder="키워드 검색 또는 새 키워드 입력"
+              className="flex-1 px-2.5 py-1 border-[1.5px] border-grey-200 rounded-lg text-[12px]"
+            />
+            <button
+              disabled={busy || !input.trim()}
+              onClick={handleCreateAndAdd}
+              className="text-[11.5px] font-bold px-2.5 py-1 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-40"
+            >
+              추가
+            </button>
+          </div>
+          {input.trim() && suggestions.length > 0 && (
+            <div className="absolute z-10 mt-1 w-full bg-white border-[1.5px] border-grey-200 rounded-lg shadow-sm max-h-32 overflow-auto">
+              {suggestions.map((k) => (
+                <button
+                  key={k.id}
+                  onClick={() => handleAdd(k)}
+                  className="block w-full text-left px-2.5 py-1.5 text-[12px] hover:bg-grey-100"
+                >
+                  {k.label}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+      {error && <p className="text-[11.5px] text-red mt-1">{error}</p>}
     </div>
   );
 }

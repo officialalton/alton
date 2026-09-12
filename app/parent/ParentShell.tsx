@@ -1,8 +1,10 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { logout } from "@/app/login/actions";
+import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
+import MobileBottomNav from "@/app/components/MobileBottomNav";
 import HomeDashboard from "@/app/student/HomeDashboard";
 import type { DashboardData } from "@/app/student/dashboard-data";
 import LessonsTab from "@/app/student/LessonsTab";
@@ -10,21 +12,42 @@ import type { LessonItem } from "@/app/student/lessons-data";
 import type { CurriculumData } from "@/app/student/curriculum-data";
 import type { Memo } from "@/app/student/memo-data";
 import type { ReviewData, StudentFeedback } from "@/app/student/review-data";
-import type { BookableEnrollment } from "@/app/student/booking-data";
 import type { Child } from "./children-data";
 import CreditsTab from "./CreditsTab";
 import type { ParentCreditsData } from "./credits-data";
+import EntitlementsTab from "./EntitlementsTab";
+import type { ParentEntitlementsData } from "./entitlements-data";
 import ConsentTab from "./ConsentTab";
-import type { ChildConsentStatus, ConsentPolicyOption } from "./consent-data";
+import type { ChildConsentStatus, ConsentPolicyOption, TrialSmartNotesConsentStatus } from "./consent-data";
+import type { PendingRegularIntentChoice } from "./regular-intent-data";
 import FamilyTab from "./FamilyTab";
+import ConsultRequestTab from "./ConsultRequestTab";
+import InquiryTab from "./InquiryTab";
+import ParentEnrollmentTab from "./EnrollmentTab";
+import type { ChildSubjectEnrollments } from "./enrollment-data";
+import LessonBookingTab from "@/app/student/LessonBookingTab";
+import type { LessonBookingData } from "@/app/student/lesson-booking-data";
+import {
+  listAvailableSlotsForBooking,
+  createLessonBookingForChild,
+  createWeeklyLessonSeriesForChild,
+  cancelLessonBookingForChild,
+  updateChildTimezone,
+  reportTeacherIssueForChild,
+} from "./booking-actions";
 
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
+  { id: "enrollment", label: "수강 과목", icon: "🎓" },
+  { id: "booking", label: "예약", icon: "🗓️" },
   { id: "lessons", label: "레슨", icon: "📅" },
-  { id: "credits", label: "수업권", icon: "💳" },
+  { id: "credits", label: "지인 추천", icon: "💳" },
+  { id: "entitlements", label: "수업권", icon: "🎟️" },
   { id: "stats", label: "통계", icon: "📊" },
   { id: "consent", label: "동의", icon: "✅" },
   { id: "family", label: "가족", icon: "👨‍👩‍👧" },
+  { id: "consultRequest", label: "자녀상담", icon: "🗓️" },
+  { id: "inquiry", label: "문의", icon: "💬" },
 ] as const;
 
 type TabId = (typeof NAV_ITEMS)[number]["id"];
@@ -41,28 +64,44 @@ export default function ParentShell({
   memosByEnrollment,
   reviews,
   myFeedback,
-  bookableEnrollments,
   credits,
+  entitlements,
   purchaseStatus,
   consentChildren,
   activeConsentPolicy,
+  trialSmartNotesChildren,
+  pendingRegularIntentChoices,
+  childrenSubjectEnrollments,
+  progressedTrialEnrollmentIds,
+  lessonBooking,
+  focusSubjectEnrollmentId,
 }: {
   parentName: string;
   childrenList: Child[];
   currentChildId: string;
   initialTab?: string;
+  // 2026-09-10(P0-5) — 부모 홈 알림에서 특정 자녀·수강 정규 진행 동의로
+  // 정확히 이동하기 위한 식별값. URL(`?focus=`)에서 그대로 온다 — 새로고침·
+  // 뒤로가기·앞으로가기에도 유지되도록 로컬 state가 아니라 이 prop(서버가
+  // searchParams에서 읽어 내려줌)을 그대로 ConsentTab까지 전달한다.
+  focusSubjectEnrollmentId?: string;
   dashboard: DashboardData;
   upcoming: LessonItem[];
   past: LessonItem[];
-  bookableEnrollments: BookableEnrollment[];
   curricula: CurriculumData[];
   memosByEnrollment: Record<string, Memo[]>;
   reviews: Record<string, ReviewData>;
   myFeedback: Record<string, StudentFeedback>;
   credits: ParentCreditsData;
+  entitlements: ParentEntitlementsData;
   purchaseStatus?: "success" | "cancelled";
   consentChildren: ChildConsentStatus[];
   activeConsentPolicy: ConsentPolicyOption | null;
+  trialSmartNotesChildren: TrialSmartNotesConsentStatus[];
+  pendingRegularIntentChoices: PendingRegularIntentChoice[];
+  childrenSubjectEnrollments: ChildSubjectEnrollments[];
+  progressedTrialEnrollmentIds: string[];
+  lessonBooking: LessonBookingData;
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -70,22 +109,58 @@ export default function ParentShell({
     validTabIds.includes(initialTab as TabId) ? (initialTab as TabId) : "home"
   );
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
+  const [timezoneModalOpen, setTimezoneModalOpen] = useState(false);
+
+  // 2026-09-10(P0-3 2차) — 공용 포털 내비게이션 결함: activeTab이 마운트
+  // 시점의 initialTab으로만 초기화돼, 브라우저 뒤로가기/앞으로가기로 URL이
+  // 바뀌어도(그래서 새 initialTab prop이 내려와도) 다시 반영되지 않았다.
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setActiveTab(validTabIds.includes(initialTab as TabId) ? (initialTab as TabId) : "home");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialTab]);
 
   function selectTab(id: TabId) {
     setActiveTab(id);
-    router.replace(`?child=${currentChildId}&tab=${id}`, { scroll: false });
+    // 2026-09-10(P0-3 2차) — replace→push: 탭 전환마다 되돌아갈 수 있는
+    // 히스토리 항목을 만들어, 뒤로가기 한 번이 포털 밖(로그인/OAuth)까지
+    // 건너뛰지 않고 직전 탭으로만 이동하게 한다.
+    router.push(`?child=${currentChildId}&tab=${id}`, { scroll: false });
+    // 모든 탭 데이터를 최초 서버 렌더 시점에 props로 한 번에 받아오고 탭 전환
+    // 자체는 새 서버 요청을 만들지 않는다 — 그 사이(예: Stripe 결제 완료) 바뀐
+    // 서버 상태가 있어도 다른 탭에서 돌아왔을 때 예전 값이 그대로 보인다
+    // (실사용 확인 — 수업권 구매 직후 "수업권" 탭이 0장으로 보이던 문제).
+    router.refresh();
   }
 
   function selectChild(studentId: string) {
     setActiveTab("home");
-    router.replace(`?child=${studentId}&tab=home`, { scroll: false });
+    router.push(`?child=${studentId}&tab=home`, { scroll: false });
+  }
+
+  // 2026-09-10(P0-5) — 부모 홈의 "정규 진행 희망 선택이 필요해요" 알림은
+  // "수강 과목" 탭이 아니라 동의 탭의 해당 학생·수강 항목으로 정확히
+  // 이동해야 한다. child/focus를 URL에 실어 새로고침·뒤로가기·앞으로가기
+  // 뒤에도 대상이 그대로 유지되게 한다.
+  function goToRegularIntentConsent(childId: string, subjectEnrollmentId: string) {
+    setActiveTab("consent");
+    router.push(`?child=${childId}&tab=consent&focus=${subjectEnrollmentId}`, { scroll: false });
+    router.refresh();
   }
 
   const activeLabel = NAV_ITEMS.find((n) => n.id === activeTab)?.label ?? "";
 
+  // 2026-09-10(UI/UX 정리 1차, 배치4) — 모바일 하단 탭: 홈·예약·수업(레슨)
+  // + 더보기(나머지). "동의"는 상시 하단 메뉴가 아니라 홈의 배지로만 노출하되
+  // (배치3에서 반영), 더보기 시트에는 그대로 남겨 필요할 때 직접 찾아갈 수
+  // 있게 한다.
+  const MOBILE_PRIMARY_IDS: TabId[] = ["home", "booking", "lessons"];
+  const mobilePrimary = NAV_ITEMS.filter((n) => MOBILE_PRIMARY_IDS.includes(n.id));
+  const mobileMore = NAV_ITEMS.filter((n) => !MOBILE_PRIMARY_IDS.includes(n.id));
+
   return (
     <div className="min-h-screen bg-white flex">
-      <aside className="w-[88px] shrink-0 border-r border-grey-200 flex flex-col items-center py-5 gap-1">
+      <aside className="hidden md:flex w-[88px] shrink-0 border-r border-grey-200 flex-col items-center py-5 gap-1">
         <div className="w-9 h-9 rounded-full bg-red text-white font-extrabold text-[15px] flex items-center justify-center mb-4">
           A
         </div>
@@ -104,7 +179,14 @@ export default function ParentShell({
         ))}
       </aside>
 
-      <div className="flex-1 flex flex-col">
+      <MobileBottomNav
+        primary={mobilePrimary}
+        more={mobileMore}
+        activeId={activeTab}
+        onSelect={(id) => selectTab(id as TabId)}
+      />
+
+      <div className="flex-1 flex flex-col pb-16 md:pb-0">
         <div className="flex items-center justify-between gap-4 border-b border-grey-200 px-6 py-3 relative">
           <div className="flex items-center gap-2">
             {childrenList.map((c) => (
@@ -132,6 +214,16 @@ export default function ParentShell({
             </button>
             {accountMenuOpen && (
               <div className="absolute top-full right-0 mt-1 w-40 bg-white border-[1.5px] border-grey-200 rounded-lg shadow-sm py-1.5 z-30">
+                <button
+                  onClick={() => {
+                    setTimezoneModalOpen(true);
+                    setAccountMenuOpen(false);
+                  }}
+                  className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink"
+                >
+                  시간대 설정
+                </button>
+                <div className="h-px bg-grey-200 my-1" />
                 <form action={logout}>
                   <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-red">
                     로그아웃
@@ -139,16 +231,52 @@ export default function ParentShell({
                 </form>
               </div>
             )}
+            {timezoneModalOpen && (
+              <TimezoneSettingsModal
+                showHouseholdDefault={true}
+                onClose={() => setTimezoneModalOpen(false)}
+              />
+            )}
           </div>
         </div>
 
         <div className="flex-1">
+          {activeTab === "home" && (
+            <ChildrenStatusRow
+              childrenList={childrenList}
+              currentChildId={currentChildId}
+              consentChildren={consentChildren}
+              trialSmartNotesChildren={trialSmartNotesChildren}
+              pendingRegularIntentChoices={pendingRegularIntentChoices}
+              onSelectChild={selectChild}
+              onGoToConsent={() => selectTab("consent")}
+              onGoToRegularIntentConsent={goToRegularIntentConsent}
+            />
+          )}
           {activeTab === "home" ? (
             <HomeDashboard
               studentName={dashboard.studentName}
               data={dashboard}
               onShowLessons={() => selectTab("lessons")}
               onShowStats={() => selectTab("stats")}
+              timezone={lessonBooking.timezone}
+            />
+          ) : activeTab === "enrollment" ? (
+            <ParentEnrollmentTab childrenEnrollments={childrenSubjectEnrollments} />
+          ) : activeTab === "booking" ? (
+            <LessonBookingTab
+              key={currentChildId}
+              bookableEnrollments={lessonBooking.bookableEnrollments}
+              pendingActivationSubjects={lessonBooking.pendingActivationSubjects}
+              upcomingBookings={lessonBooking.upcomingBookings}
+              pastSessionsForReport={lessonBooking.pastSessionsForReport}
+              timezone={lessonBooking.timezone}
+              onListSlots={(teacherId, durationMinutes) => listAvailableSlotsForBooking({ teacherId, durationMinutes })}
+              onCreateBooking={(params) => createLessonBookingForChild({ ...params, childId: currentChildId })}
+              onCreateWeeklySeries={(params) => createWeeklyLessonSeriesForChild({ ...params, childId: currentChildId })}
+              onCancelBooking={(reservationId, reason) => cancelLessonBookingForChild({ reservationId, childId: currentChildId, reason })}
+              onUpdateTimezone={(timezone) => updateChildTimezone(currentChildId, timezone)}
+              onReportTeacherIssue={(params) => reportTeacherIssueForChild({ ...params, childId: currentChildId })}
             />
           ) : activeTab === "lessons" ? (
             <LessonsTab
@@ -157,21 +285,29 @@ export default function ParentShell({
               past={past}
               curricula={curricula}
               memosByEnrollment={memosByEnrollment}
-              bookableEnrollments={bookableEnrollments}
               reviews={reviews}
               myFeedback={myFeedback}
               readOnly
             />
           ) : activeTab === "credits" ? (
-            <CreditsTab
-              data={credits}
-              studentId={currentChildId}
-              purchaseStatus={purchaseStatus}
-            />
+            <CreditsTab data={credits} />
+          ) : activeTab === "entitlements" ? (
+            <EntitlementsTab data={entitlements} purchaseStatus={purchaseStatus} />
           ) : activeTab === "consent" ? (
-            <ConsentTab children={consentChildren} activePolicy={activeConsentPolicy} />
+            <ConsentTab
+              children={consentChildren}
+              activePolicy={activeConsentPolicy}
+              trialSmartNotesChildren={trialSmartNotesChildren}
+              childrenSubjectEnrollments={childrenSubjectEnrollments}
+              progressedTrialEnrollmentIds={progressedTrialEnrollmentIds}
+              focusSubjectEnrollmentId={focusSubjectEnrollmentId}
+            />
           ) : activeTab === "family" ? (
-            <FamilyTab />
+            <FamilyTab onGoToConsultRequest={() => selectTab("consultRequest")} />
+          ) : activeTab === "consultRequest" ? (
+            <ConsultRequestTab />
+          ) : activeTab === "inquiry" ? (
+            <InquiryTab />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.
@@ -179,6 +315,88 @@ export default function ParentShell({
           )}
         </div>
       </div>
+    </div>
+  );
+}
+
+// 2026-09-10(UI/UX 정리 1차) — "자녀별 현황 → 예약·동의 필요 조치"를 한 화면
+// 흐름으로 만든다. 새 쿼리는 추가하지 않는다 — 이미 홈에 내려오던 전체 자녀
+// 동의·정규 진행 선택 데이터를 자녀별로 나눠서 카드로 보여줄 뿐이다. 자녀별
+// "다음 수업" 요약은 현재 currentChildId 기준으로만 데이터가 내려오므로(다른
+// 자녀 것까지 한 번에 보려면 새 쿼리가 필요) 이번 라운드에는 포함하지 않는다.
+function ChildrenStatusRow({
+  childrenList,
+  currentChildId,
+  consentChildren,
+  trialSmartNotesChildren,
+  pendingRegularIntentChoices,
+  onSelectChild,
+  onGoToConsent,
+  onGoToRegularIntentConsent,
+}: {
+  childrenList: Child[];
+  currentChildId: string;
+  consentChildren: ChildConsentStatus[];
+  trialSmartNotesChildren: TrialSmartNotesConsentStatus[];
+  pendingRegularIntentChoices: PendingRegularIntentChoice[];
+  onSelectChild: (studentId: string) => void;
+  onGoToConsent: () => void;
+  onGoToRegularIntentConsent: (childId: string, subjectEnrollmentId: string) => void;
+}) {
+  if (childrenList.length === 0) return null;
+
+  return (
+    <div className="px-6 pt-5 pb-1 flex flex-wrap gap-3">
+      {childrenList.map((child) => {
+        const needsConsent =
+          consentChildren.some(
+            (c) => c.studentId === child.studentId && c.isUnder13 && c.dobKnown && !c.hasValidConsent
+          ) || trialSmartNotesChildren.some((c) => c.studentId === child.studentId && !c.hasConsented);
+        const regularIntentChoice = pendingRegularIntentChoices.find((p) => p.childId === child.studentId);
+        const needsRegularIntent = !!regularIntentChoice;
+        const needsAction = needsConsent || needsRegularIntent;
+
+        return (
+          <div
+            key={child.studentId}
+            className={
+              "min-w-[220px] border-[1.5px] rounded-xl px-4 py-3 " +
+              (needsAction ? "border-red/30 bg-red/5" : "border-grey-200")
+            }
+          >
+            <button onClick={() => onSelectChild(child.studentId)} className="text-[13.5px] font-bold text-ink mb-1.5">
+              {child.name}
+              {child.studentId === currentChildId && (
+                <span className="ml-1.5 text-[10.5px] font-semibold text-grey-500">(보는 중)</span>
+              )}
+            </button>
+            {!needsAction ? (
+              <p className="text-[12px] text-grey-500">필요한 조치가 없어요.</p>
+            ) : (
+              <div className="flex flex-col gap-1 items-start">
+                {needsConsent && (
+                  <button onClick={onGoToConsent} className="text-[12px] font-semibold text-red">
+                    동의 필요한 문서가 있어요 →
+                  </button>
+                )}
+                {regularIntentChoice && (
+                  <button
+                    onClick={() =>
+                      onGoToRegularIntentConsent(
+                        regularIntentChoice.childId,
+                        regularIntentChoice.subjectEnrollmentId
+                      )
+                    }
+                    className="text-[12px] font-semibold text-ink"
+                  >
+                    정규 진행 희망 선택이 필요해요 →
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }

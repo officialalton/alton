@@ -4,9 +4,9 @@ import ParentShell from "./ParentShell";
 import type { DashboardData } from "@/app/student/dashboard-data";
 import type { Child } from "./children-data";
 
-const replaceMock = vi.fn();
+const pushMock = vi.fn();
 vi.mock("next/navigation", () => ({
-  useRouter: () => ({ push: vi.fn(), replace: replaceMock }),
+  useRouter: () => ({ push: pushMock, replace: vi.fn(), refresh: vi.fn() }),
 }));
 
 vi.mock("@/app/login/actions", () => ({
@@ -23,6 +23,10 @@ vi.mock("@/app/student/review-actions", () => ({
 
 vi.mock("./credits-actions", () => ({
   createCreditCheckoutSession: vi.fn(),
+}));
+
+vi.mock("./purchase-actions", () => ({
+  createEntitlementCheckoutSession: vi.fn(),
 }));
 
 const childrenList: Child[] = [
@@ -47,13 +51,26 @@ const lessonsProps = {
   reviews: {},
   myFeedback: {},
   bookableEnrollments: [],
-  credits: { balance: 0, referralCode: null, packages: [] },
+  credits: { referralCode: null },
+  entitlements: { prices: [], children: [] },
   consentChildren: [],
   activeConsentPolicy: null,
+  trialSmartNotesChildren: [],
+  pendingRegularIntentChoices: [],
+  childrenSubjectEnrollments: [],
+  progressedTrialEnrollmentIds: [],
+  lessonBooking: {
+    bookableEnrollments: [],
+    upcomingBookings: [],
+    pastSessionsForReport: [],
+    regularLessonTypeId: null,
+    lessonDurationMinutes: 120,
+    timezone: "America/Los_Angeles",
+  },
 };
 
 describe("ParentShell", () => {
-  it("사이드바 5개 항목과 자녀 전환 pill을 보여주고, 기본 탭은 홈이다", () => {
+  it("사이드바 항목과 자녀 전환 pill을 보여주고, 기본 탭은 홈이다", () => {
     render(
       <ParentShell
         parentName="김민지"
@@ -63,11 +80,11 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    ["홈", "레슨", "수업권", "통계"].forEach((label) =>
-      expect(screen.getByText(label)).toBeInTheDocument()
+    ["홈", "레슨", "지인 추천", "수업권", "통계"].forEach((label) =>
+      expect(screen.getAllByText(label).length).toBeGreaterThan(0)
     );
-    expect(screen.getByText("지훈")).toBeInTheDocument();
-    expect(screen.getByText("이서아")).toBeInTheDocument();
+    expect(screen.getAllByText("지훈").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("이서아").length).toBeGreaterThan(0);
     expect(screen.getByText(/지훈의 학습 현황/)).toBeInTheDocument();
   });
 
@@ -81,8 +98,10 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("이서아"));
-    expect(replaceMock).toHaveBeenCalledWith("?child=s2&tab=home", { scroll: false });
+    // "이서아"는 상단 자녀 전환 pill과 홈의 자녀 현황 카드 양쪽에 나타난다 —
+    // DOM 순서상 상단 pill이 먼저 렌더링된다.
+    fireEvent.click(screen.getAllByText("이서아")[0]);
+    expect(pushMock).toHaveBeenCalledWith("?child=s2&tab=home", { scroll: false });
   });
 
   it("레슨 탭을 누르면 읽기전용 LessonsTab이 렌더링된다(메모 입력창 없음)", () => {
@@ -95,11 +114,27 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("레슨"));
+    fireEvent.click(screen.getAllByText("레슨")[0]);
     expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
   });
 
-  it("수업권 탭을 누르면 CreditsTab이 렌더링되고 결제수단 입력은 없다", () => {
+  it("지인 추천 탭을 누르면 CreditsTab(추천 코드 전용)이 렌더링되고 결제수단 입력은 없다", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+      />
+    );
+    fireEvent.click(screen.getByText("지인 추천"));
+    expect(screen.getByText("추천 코드가 아직 없습니다.")).toBeInTheDocument();
+    expect(screen.queryByText("장 보유")).not.toBeInTheDocument();
+    expect(screen.queryByPlaceholderText("0000 0000 0000 0000")).not.toBeInTheDocument();
+  });
+
+  it("수업권 탭을 누르면 EntitlementsTab(R4)이 렌더링된다", () => {
     render(
       <ParentShell
         parentName="김민지"
@@ -110,8 +145,7 @@ describe("ParentShell", () => {
       />
     );
     fireEvent.click(screen.getByText("수업권"));
-    expect(screen.getByText("장 보유")).toBeInTheDocument();
-    expect(screen.queryByPlaceholderText("0000 0000 0000 0000")).not.toBeInTheDocument();
+    expect(screen.getByText("수업권 구매/현황")).toBeInTheDocument();
   });
 
   it("다른 탭을 누르면 준비 중 문구를 보여준다", () => {
@@ -140,5 +174,113 @@ describe("ParentShell", () => {
     );
     fireEvent.click(screen.getByText("김민지 학부모님 ▾"));
     expect(screen.getByText("로그아웃")).toBeInTheDocument();
+  });
+
+  it("2026-09-10(UI/UX 정리 1차): 동의가 필요한 자녀는 홈의 자녀 카드에 배지로 표시되고, 누르면 동의 탭으로 이동한다", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+        consentChildren={[
+          { studentId: "s1", name: "지훈", isUnder13: true, dobKnown: true, hasValidConsent: false, latestConsent: null },
+        ]}
+        trialSmartNotesChildren={[{ studentId: "s1", name: "지훈", hasConsented: false }]}
+      />
+    );
+    const badge = screen.getByText("동의 필요한 문서가 있어요 →");
+    expect(badge).toBeInTheDocument();
+
+    fireEvent.click(badge);
+    expect(pushMock).toHaveBeenCalledWith("?child=s1&tab=consent", { scroll: false });
+  });
+
+  it("2026-09-10(P0): 생년월일이 아직 입력되지 않은 자녀는 is_under_13이 true여도 배지를 띄우지 않는다(계정 생성 직후 회귀 방지)", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+        consentChildren={[
+          { studentId: "s1", name: "지훈", isUnder13: true, dobKnown: false, hasValidConsent: false, latestConsent: null },
+        ]}
+      />
+    );
+    expect(screen.queryByText(/동의 필요한 문서가/)).not.toBeInTheDocument();
+  });
+
+  it("동의가 전부 완료되면 배지를 보여주지 않는다", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+      />
+    );
+    expect(screen.queryByText(/동의 필요한 문서가/)).not.toBeInTheDocument();
+  });
+
+  it("2026-09-10(P0-5): 정규 진행 희망 선택이 필요한 자녀는 홈의 자녀 카드에 배지로 표시되고, 누르면 동의 탭의 해당 학생·수강 항목으로 이동한다", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+        pendingRegularIntentChoices={[
+          { subjectEnrollmentId: "se1", childId: "s1", childName: "지훈", subjectName: "AP Calculus AB" },
+        ]}
+      />
+    );
+    const badge = screen.getByText("정규 진행 희망 선택이 필요해요 →");
+    expect(badge).toBeInTheDocument();
+
+    fireEvent.click(badge);
+    expect(pushMock).toHaveBeenCalledWith("?child=s1&tab=consent&focus=se1", { scroll: false });
+  });
+
+  it("2026-09-10(UI/UX 1차 리뷰 지적): 동명이인이어도 childId로 정확히 매칭해 다른 자녀에게는 배지를 표시하지 않는다", () => {
+    // s1과 s3는 이름이 같지만("지훈") id가 다르다 — 이름만으로 매칭하면
+    // pendingRegularIntentChoices가 s3(childId)를 가리켜도 s1 카드에 배지가
+    // 잘못 뜨게 된다.
+    const duplicateNameChildren: Child[] = [
+      { studentId: "s1", name: "지훈", isPrimary: true },
+      { studentId: "s3", name: "지훈", isPrimary: false },
+    ];
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={duplicateNameChildren}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+        pendingRegularIntentChoices={[
+          { subjectEnrollmentId: "se1", childId: "s3", childName: "지훈", subjectName: "AP Calculus AB" },
+        ]}
+      />
+    );
+    const badges = screen.getAllByText("정규 진행 희망 선택이 필요해요 →");
+    // 두 카드 모두 이름은 "지훈"이지만 배지는 childId가 일치하는 카드(s3) 하나에만 떠야 한다.
+    expect(badges).toHaveLength(1);
+  });
+
+  it("정규 진행 희망 선택이 필요한 과목이 없으면 그 배지를 보여주지 않는다", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+      />
+    );
+    expect(screen.queryByText(/정규 진행 희망 선택이 필요해요/)).not.toBeInTheDocument();
   });
 });
