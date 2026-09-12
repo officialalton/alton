@@ -55,6 +55,21 @@ function createHouseholdWithChild(label: string): Fixture {
   return { guardianId, childId, householdId, enrollmentId };
 }
 
+// 이 스펙이 신경 쓰는 것은 "과거/미래" 방향뿐이고 정확한 날짜가 아니다. 그런데
+// 예전에는 그 방향을 `now() + N days`로 표현해서, 예약이 **테스트를 실행한 실제
+// 시:분**에 심겼다. lib/booking의 예약 통합 테스트들은 17시(UTC) 고정 슬롯을
+// 쓰므로, 스위트를 UTC 16~18시 사이에 돌리면 같은 선생님의 예약이 15분 버퍼
+// 안에서 겹쳐 teacher_buffer_violation으로 그쪽 테스트가 깨졌다 — 코드가 아니라
+// "몇 시에 돌렸는가"에 좌우되는 실패였다.
+//
+// 그래서 날짜는 그대로 두고(과거/미래 방향이 이 스펙의 핵심이다) **시각만**
+// 03:00 UTC로 고정한다. 예약 테스트들의 17시 창에서 멀리 떨어져 있어 어떤
+// 시각에 스위트를 돌려도 겹치지 않는다. 기준점 자체를 몇 년 밖으로 밀면
+// -3일 같은 "과거" 케이스가 미래가 되어 스펙이 뒤집히므로 그렇게 하지 않는다.
+function archiveSpecSlot(startsInDays: number): string {
+  return `date_trunc('day', now()) + interval '${startsInDays} days' + interval '3 hours'`;
+}
+
 // 예약 + 세션을 직접 심는다(예약 RPC의 가능시간·수업권 검증은 이 스펙의 대상이 아니다).
 function createReservationWithSession(
   enrollmentId: string,
@@ -64,8 +79,8 @@ function createReservationWithSession(
   const reservationId = psql(
     `insert into reservations (kind, subject_enrollment_id, owner_profile_id, starts_at, ends_at, status)
      values ('lesson', '${enrollmentId}', '${TEACHER_ID}',
-             now() + interval '${opts.startsInDays} days',
-             now() + interval '${opts.startsInDays} days' + interval '60 minutes',
+             ${archiveSpecSlot(opts.startsInDays)},
+             ${archiveSpecSlot(opts.startsInDays)} + interval '60 minutes',
              '${opts.reservationStatus ?? "confirmed"}')
      returning id;`
   );

@@ -37,6 +37,11 @@ function resolveViewerRole(
 ): SessionViewViewer | null {
   if (userId === studentId) return "student";
   if (userId === teacherId) return "teacher";
+  // P3 4단계 개정(2026-09-12) — 보호자는 연결된 자녀의 학생 화면을 읽기
+  // 전용으로 본다. 여기서 "parent"를 돌려주는 것은 화면 재사용을 위한 것이고,
+  // 실제 차단은 두 겹이다: (1) 조회 범위는 RLS가 판단하므로 연결되지 않은
+  // 자녀의 수업은 아무것도 반환되지 않고(20261300000000), (2) 쓰기는 범위별
+  // INSERT 정책이 보호자를 전부 거부한다 — 버튼을 숨기는 것에 의존하지 않는다.
   if (profileRole === "parent") return "parent";
   if (profileRole === "admin") return "admin";
   return null;

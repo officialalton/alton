@@ -8,7 +8,9 @@ import {
   type SessionViewViewer,
 } from "@/lib/session-view";
 import MaterialTab from "./MaterialTab";
+import ProblemsPanel from "./ProblemsPanel";
 import type { MaterialData } from "./material-data";
+import type { SessionProblem } from "./session-problem-data";
 import VocabTab from "./VocabTab";
 import type { VocabEntry } from "./vocab-data";
 import HomeworkTab from "./HomeworkTab";
@@ -35,6 +37,8 @@ import { finalizeMyLessonSession } from "@/app/teacher/lesson-schedule-actions";
 // 아직 구현되지 않은 "보충 자료" 탭은 노출하지 않는다(백엔드 준비되면 다시 추가).
 const TABS = [
   { id: "material", label: "교재", teacherOnly: false },
+  // P3 4단계 — 이 수업에 고정된 문제를 읽고 푸는 화면. 문제마다 풀이판이 붙는다.
+  { id: "problems", label: "문제", teacherOnly: false },
   { id: "docs", label: "연습장", teacherOnly: false },
   { id: "vocab", label: "단어장", teacherOnly: false },
   { id: "log", label: "문제 기록", teacherOnly: false },
@@ -77,6 +81,7 @@ export default function SessionShell({
   sessionSource,
   initialAnnotationStrokes,
   privateMaterialStrokes = [],
+  sessionProblems = [],
   currentUserId,
   homeworkKeywordOptions = [],
   homeworkStatusItems = [],
@@ -114,6 +119,8 @@ export default function SessionShell({
   initialAnnotationStrokes: StrokePayload[];
   /** 학생 본인만 보는 교재 필기 — 다른 역할에는 빈 배열이 내려온다. */
   privateMaterialStrokes?: StrokePayload[];
+  /** 수업 시작 시 고정된 문제들(고정된 버전의 내용). */
+  sessionProblems?: SessionProblem[];
   currentUserId: string;
   // R9(레슨 준비 Task 4) — v3 세션에서 과제 구성(composeHomeworkFromSession) UI가
   // 고를 수 있는 키워드 후보. legacy 세션에는 항상 빈 배열이 넘어온다(그 세션엔
@@ -443,6 +450,13 @@ export default function SessionShell({
           viewerRole={contentViewerRole}
           tipsVisible={tipsVisible}
           privateStrokes={privateMaterialStrokes}
+        />
+      ) : activeTab === "problems" ? (
+        <ProblemsPanel
+          sessionId={sessionId}
+          studentId={studentId}
+          problems={sessionProblems}
+          viewerRole={viewerRole}
         />
       ) : activeTab === "vocab" ? (
         <VocabTab

@@ -329,6 +329,114 @@ describe("2. 준비 저장과 수업 시작 시점의 고정은 다르다", () =
   });
 });
 
+describe("3·4. 시작 시점의 최신 준비가 고정되고, 시작과 고정은 함께 성공한다", () => {
+  function linkedSession(): {
+    sessionId: string;
+    overlayUnitId: string;
+    prepId: string;
+    keywordId: string;
+    enrollmentId: string;
+    contractId: string;
+  } {
+    const { overlayUnitId, keywordId, enrollmentId, contractId } = makeUnitWithoutReservation();
+    const prepId = asUser(
+      TEACHER_ID,
+      `insert into curriculum_unit_preps (overlay_unit_id, created_by) values ('${overlayUnitId}', '${TEACHER_ID}') returning id;`
+    );
+    const first = makeSelectableProblem(keywordId);
+    asUser(
+      TEACHER_ID,
+      `insert into curriculum_unit_prep_items (prep_id, content_type, content_id, position)
+       values ('${prepId}', 'problem', '${first}', 1);`
+    );
+    const sessionId = addSessionFor(enrollmentId);
+    psql(`select link_unit_prep_to_session('${overlayUnitId}', '${sessionId}', '${TEACHER_ID}');`);
+    return { sessionId, overlayUnitId, prepId, keywordId, enrollmentId, contractId };
+  }
+
+  it("연결한 뒤 준비를 고치면, 시작 시점의 최신 구성이 고정된다", () => {
+    const { sessionId, prepId, keywordId, contractId } = linkedSession();
+    excludeFromCleanup(contractId);
+
+    // 연결 이후에 자료를 하나 더 담는다.
+    const added = makeSelectableProblem(keywordId);
+    asUser(
+      TEACHER_ID,
+      `insert into curriculum_unit_prep_items (prep_id, content_type, content_id, position)
+       values ('${prepId}', 'problem', '${added}', 2);`
+    );
+
+    psql(`select mark_lesson_session_started('${sessionId}', '${TEACHER_ID}');`);
+    expect(psql(`select count(*) from session_content_manifest where session_id = '${sessionId}';`)).toBe("2");
+    expect(
+      psql(`select count(*) from session_content_manifest where session_id = '${sessionId}' and content_id = '${added}';`)
+    ).toBe("1");
+  });
+
+  it("연결 뒤 준비에서 뺀 자료는 고정되지 않는다", () => {
+    const { sessionId, prepId, contractId } = linkedSession();
+    excludeFromCleanup(contractId);
+    psql(`delete from curriculum_unit_prep_items where prep_id = '${prepId}';`);
+
+    psql(`select mark_lesson_session_started('${sessionId}', '${TEACHER_ID}');`);
+    expect(psql(`select final_status from sessions where id = '${sessionId}';`)).toBe("live");
+    expect(psql(`select count(*) from session_content_manifest where session_id = '${sessionId}';`)).toBe("0");
+  });
+
+  it("같은 회차를 두 수업에 연결하면 각각의 시작 시점 구성이 따로 고정된다", () => {
+    const { sessionId, overlayUnitId, prepId, keywordId, enrollmentId, contractId } = linkedSession();
+    excludeFromCleanup(contractId);
+
+    const secondSessionId = addSessionFor(enrollmentId);
+    psql(`select link_unit_prep_to_session('${overlayUnitId}', '${secondSessionId}', '${TEACHER_ID}');`);
+
+    // 첫 수업을 먼저 시작한다(자료 1개 시점).
+    psql(`select mark_lesson_session_started('${sessionId}', '${TEACHER_ID}');`);
+    expect(psql(`select count(*) from session_content_manifest where session_id = '${sessionId}';`)).toBe("1");
+
+    // 그 뒤 준비에 자료를 더하고 두 번째 수업을 시작한다.
+    const added = makeSelectableProblem(keywordId);
+    asUser(
+      TEACHER_ID,
+      `insert into curriculum_unit_prep_items (prep_id, content_type, content_id, position)
+       values ('${prepId}', 'problem', '${added}', 2);`
+    );
+    psql(`select mark_lesson_session_started('${secondSessionId}', '${TEACHER_ID}');`);
+
+    expect(psql(`select count(*) from session_content_manifest where session_id = '${secondSessionId}';`)).toBe("2");
+    // 이미 시작한 첫 수업은 그대로다.
+    expect(psql(`select count(*) from session_content_manifest where session_id = '${sessionId}';`)).toBe("1");
+  });
+
+  it("준비 구성을 불러오지 못하면 빈 구성으로 시작하지 않고 시작 자체가 실패한다", () => {
+    const { sessionId, prepId, contractId } = linkedSession();
+    excludeFromCleanup(contractId);
+    // 준비 원본이 사라진 상황(조회 실패와 같은 결과)을 만든다.
+    psql(`delete from curriculum_unit_preps where id = '${prepId}';`);
+
+    expect(psqlExpectError(`select mark_lesson_session_started('${sessionId}', '${TEACHER_ID}');`)).toMatch(
+      /준비 구성을 불러오지 못했습니다/
+    );
+    // 시작과 고정이 함께 롤백된다 — 반쯤 시작된 상태가 남지 않는다.
+    expect(psql(`select final_status from sessions where id = '${sessionId}';`)).toBe("scheduled");
+    expect(psql(`select count(*) from session_content_manifest where session_id = '${sessionId}';`)).toBe("0");
+  });
+
+  it("중복 시작 요청으로 스냅샷·회차 연결이 중복되지 않는다", () => {
+    const { sessionId, overlayUnitId, contractId } = linkedSession();
+    excludeFromCleanup(contractId);
+    psql(`select mark_lesson_session_started('${sessionId}', '${TEACHER_ID}');`);
+    expect(psqlExpectError(`select mark_lesson_session_started('${sessionId}', '${TEACHER_ID}');`)).toMatch(
+      /이미 시작됐거나 종료된/
+    );
+
+    expect(psql(`select count(*) from session_content_manifest where session_id = '${sessionId}';`)).toBe("1");
+    expect(
+      psql(`select count(*) from session_curriculum_units where session_id = '${sessionId}' and overlay_unit_id = '${overlayUnitId}';`)
+    ).toBe("1");
+  });
+});
+
 describe("5. 교사 준비 초안 공개는 복사본이고 한 번만 들어간다", () => {
   // 공개한 필기는 append-only라 지울 수 없고, 그 필기를 참조하는 세션도 지울 수
   // 없다. 그래서 이 describe의 케이스는 정리 대상에서 빼고 파일 간 `db reset`에

@@ -268,14 +268,169 @@ describe("③ 문제 풀이 화이트보드 — 풀이판 단위로 분리된다
       asUser(OTHER_STUDENT_ID, `select count(*) from session_annotation_events where problem_work_id = '${w}';`)
     ).toBe("0");
 
-    // 보호자 — 문제 풀이는 열람 범위 밖(회차 목표·일정·진도·요약까지만)
+    // 보호자(2026-09-12 정책 개정) — 연결된 자녀의 풀이는 읽기 전용으로 본다.
     const guardianId = psql(`select primary_guardian_id from households where id = '${HOUSEHOLD_ID}';`);
     if (guardianId) {
-      expect(asUser(guardianId, `select count(*) from session_problem_work where id = '${w}';`)).toBe("0");
-      expect(
-        asUser(guardianId, `select count(*) from session_annotation_events where problem_work_id = '${w}';`)
-      ).toBe("0");
+      expect(asUser(guardianId, `select count(*) from session_problem_work where id = '${w}';`)).toBe("1");
     }
+  });
+
+  it("학생 개인 교재 필기는 서버에 영속 저장되고 본인만 다시 불러온다", () => {
+    const docId = psql(
+      `insert into curriculum_docs (title, subject_id, owner_type, status)
+       values ('개인필기 교재 ${Date.now()}_${Math.random()}', '${SUBJECT_ID}', 'admin', 'published') returning id;`
+    );
+
+    // 학생이 범위를 지정해 필기를 남긴다(화면의 "나만 보는 필기"와 같은 경로).
+    asUser(
+      STUDENT_ID,
+      `select append_scoped_stroke_events(
+         '${sessionId}',
+         '[{"x0":1,"y0":1,"x1":2,"y1":2,"color":"#000","tool":"pen"},
+           {"x0":2,"y0":2,"x1":3,"y1":3,"color":"#000","tool":"pen"}]'::jsonb,
+         'student_private', '${docId}');`
+    );
+
+    // 새로고침·재접속·기기 변경 후에도 같은 조회로 복원된다(서버 저장이므로).
+    expect(
+      asUser(
+        STUDENT_ID,
+        `select count(*) from session_annotation_events
+         where session_id = '${sessionId}' and scope = 'student_private'
+           and curriculum_doc_id = '${docId}' and owner_student_id = '${STUDENT_ID}';`
+      )
+    ).toBe("2");
+
+    // 주인은 서버가 정한다 — 클라이언트가 남의 명의로 남길 수 없다.
+    expect(
+      psql(
+        `select count(*) from session_annotation_events
+         where curriculum_doc_id = '${docId}' and author_id = owner_student_id;`
+      )
+    ).toBe("2");
+
+    // 교사·관리자·보호자 모두 존재조차 알 수 없다.
+    expect(
+      asUser(TEACHER_ID, `select count(*) from session_annotation_events where curriculum_doc_id = '${docId}';`)
+    ).toBe("0");
+    expect(
+      asUser(ADMIN_ID, `select count(*) from session_annotation_events where curriculum_doc_id = '${docId}';`)
+    ).toBe("0");
+
+    // 공개 범위를 바꾸는 경로가 없다 — 기존 필기의 scope는 수정 자체가 막혀 있다.
+    expect(
+      psqlExpectError(
+        `update session_annotation_events set scope = 'teacher_shared' where curriculum_doc_id = '${docId}';`
+      )
+    ).toMatch(/append-only/);
+
+    // 공용 캔버스로 복사되지도 않는다.
+    expect(
+      psql(`select count(*) from canvas_annotations where session_id = '${sessionId}' and curriculum_doc_id = '${docId}';`)
+    ).toBe("0");
+  });
+
+  it("보호자는 연결된 자녀의 공용 필기·문제 풀이·교사 피드백을 읽기 전용으로 본다", () => {
+    const guardianId = psql(`select primary_guardian_id from households where id = '${HOUSEHOLD_ID}';`);
+    if (!guardianId) return;
+
+    asUser(
+      TEACHER_ID,
+      `insert into session_annotation_events (session_id, author_id, event_type, payload, scope)
+       values ('${sessionId}', '${TEACHER_ID}', 'stroke', '{"x0":1,"y0":1,"x1":2,"y1":2,"color":"#000","tool":"pen"}'::jsonb, 'teacher_shared');`
+    );
+    const w = work(freshProblem("guardian-read"));
+    asUser(
+      STUDENT_ID,
+      `insert into session_annotation_events (session_id, author_id, event_type, payload, scope, problem_id, problem_work_id, owner_student_id)
+       values ('${sessionId}', '${STUDENT_ID}', 'stroke', '{}'::jsonb, 'problem_student', (select problem_id from session_problem_work where id = '${w}'), '${w}', '${STUDENT_ID}');`
+    );
+    asUser(
+      TEACHER_ID,
+      `insert into session_annotation_events (session_id, author_id, event_type, payload, scope, problem_id, problem_work_id, owner_student_id)
+       values ('${sessionId}', '${TEACHER_ID}', 'stroke', '{}'::jsonb, 'problem_teacher_feedback', (select problem_id from session_problem_work where id = '${w}'), '${w}', '${STUDENT_ID}');`
+    );
+
+    expect(
+      asUser(guardianId, `select count(*) from session_annotation_events where session_id = '${sessionId}' and scope = 'teacher_shared';`)
+    ).not.toBe("0");
+    expect(
+      asUser(guardianId, `select count(*) from session_annotation_events where problem_work_id = '${w}' and scope = 'problem_student';`)
+    ).toBe("1");
+    expect(
+      asUser(guardianId, `select count(*) from session_annotation_events where problem_work_id = '${w}' and scope = 'problem_teacher_feedback';`)
+    ).toBe("1");
+  });
+
+  it("보호자에게도 학생 개인 교재 메모는 보이지 않는다", () => {
+    const guardianId = psql(`select primary_guardian_id from households where id = '${HOUSEHOLD_ID}';`);
+    if (!guardianId) return;
+
+    asUser(
+      STUDENT_ID,
+      `insert into session_annotation_events (session_id, author_id, event_type, payload, scope, curriculum_doc_id, owner_student_id)
+       values ('${sessionId}', '${STUDENT_ID}', 'stroke', '{}'::jsonb, 'student_private', '${docId}', '${STUDENT_ID}');`
+    );
+    expect(
+      asUser(guardianId, `select count(*) from session_annotation_events where scope = 'student_private' and session_id = '${sessionId}';`)
+    ).toBe("0");
+  });
+
+  it("보호자는 읽기 전용이다 — 어떤 범위에도 필기를 남길 수 없다", () => {
+    const guardianId = psql(`select primary_guardian_id from households where id = '${HOUSEHOLD_ID}';`);
+    if (!guardianId) return;
+    const w = work(freshProblem("guardian-write"));
+
+    // 공용 필기 — 예전에는 is_session_related_v3에 보호자가 포함돼 통과했다.
+    expect(
+      asUserExpectError(
+        guardianId,
+        `insert into session_annotation_events (session_id, author_id, event_type, payload, scope)
+         values ('${sessionId}', '${guardianId}', 'stroke', '{}'::jsonb, 'teacher_shared');`
+      )
+    ).toMatch(/row-level security|policy/i);
+
+    // 학생 풀이 레이어
+    expect(
+      asUserExpectError(
+        guardianId,
+        `insert into session_annotation_events (session_id, author_id, event_type, payload, scope, problem_id, problem_work_id, owner_student_id)
+         values ('${sessionId}', '${guardianId}', 'stroke', '{}'::jsonb, 'problem_student', (select problem_id from session_problem_work where id = '${w}'), '${w}', '${STUDENT_ID}');`
+      )
+    ).toMatch(/row-level security|policy/i);
+
+    // 교사 피드백 레이어
+    expect(
+      asUserExpectError(
+        guardianId,
+        `insert into session_annotation_events (session_id, author_id, event_type, payload, scope, problem_id, problem_work_id, owner_student_id)
+         values ('${sessionId}', '${guardianId}', 'stroke', '{}'::jsonb, 'problem_teacher_feedback', (select problem_id from session_problem_work where id = '${w}'), '${w}', '${STUDENT_ID}');`
+      )
+    ).toMatch(/row-level security|policy/i);
+  });
+
+  it("연결되지 않은 자녀의 수업은 보호자에게도 보이지 않는다(자녀 간 분리)", () => {
+    const guardianId = psql(`select primary_guardian_id from households where id = '${HOUSEHOLD_ID}';`);
+    if (!guardianId) return;
+
+    // 이 보호자와 연결되지 않은 다른 학생의 수업을 하나 만든다.
+    const otherHousehold = psql(
+      `select id from households where id <> '${HOUSEHOLD_ID}' limit 1;`
+    );
+    if (!otherHousehold) return;
+    const otherSession = psql(
+      `select s.id from sessions s
+       join subject_enrollments se on se.id = s.subject_enrollment_id
+       where se.child_id <> '${STUDENT_ID}' limit 1;`
+    );
+    if (!otherSession) return;
+
+    expect(
+      asUser(guardianId, `select count(*) from session_problem_work where session_id = '${otherSession}';`)
+    ).toBe("0");
+    expect(
+      asUser(guardianId, `select count(*) from session_annotation_events where session_id = '${otherSession}';`)
+    ).toBe("0");
   });
 
   it("풀이판은 수업 시작 시 고정된 문제 버전과 연결된다", () => {

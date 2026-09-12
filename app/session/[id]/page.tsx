@@ -11,6 +11,7 @@ import { loadHomeworkItems } from "./homework-data";
 import { loadDocLinks, parseWhiteboardStrokes } from "./scratchpad-data";
 import { loadProblemLog } from "./problemlog-data";
 import { loadNormalizedSession } from "./session-source-data";
+import { loadSessionProblems } from "./session-problem-data";
 import {
   replayAnnotationEvents,
   loadMyPrivateMaterialStrokes,
@@ -76,6 +77,16 @@ export default async function SessionPage({
   // R9(레슨 준비 Task 4) — v3 세션에서만 과제 구성 UI가 필요한 키워드 후보를
   // 미리 불러온다(legacy 세션엔 session_content_manifest가 없으므로 항상 빈
   // 배열).
+  // P3 4단계 — 수업 시작 시 고정된 문제들. 정답·해설은 볼 자격이 있을 때만
+  // 채워진다(학생은 자기 풀이 제출 뒤, 보호자는 자녀에게 열리는 시점과 동일).
+  const sessionProblems =
+    session.source === "v3"
+      ? await loadSessionProblems(supabase, session.id, {
+          canSeeAnswers: profile?.role === "teacher" || profile?.role === "admin",
+          studentId: session.studentId,
+        })
+      : [];
+
   // P3 3단계 — 학생 본인의 개인 교재 필기. 다른 역할에서는 조회 정책이 빈
   // 결과를 주므로 화면에도 존재하지 않는다.
   const privateMaterialStrokes =
@@ -121,6 +132,7 @@ export default async function SessionPage({
       sessionSource={session.source}
       initialAnnotationStrokes={initialAnnotationStrokes}
       privateMaterialStrokes={privateMaterialStrokes}
+      sessionProblems={sessionProblems}
       currentUserId={user.id}
       homeworkKeywordOptions={homeworkKeywordOptions}
       homeworkStatusItems={homeworkStatusItems}
