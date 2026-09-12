@@ -471,6 +471,7 @@ export default function SessionShell({
           sharedStrokes={sessionSource === "v3" ? sharedMaterialStrokes : undefined}
           sessionSource={sessionSource}
           annotationViewerRole={viewerRole}
+          viewerUserId={currentUserId}
         />
       ) : activeTab === "problems" ? (
         <ProblemsPanel
@@ -478,6 +479,7 @@ export default function SessionShell({
           studentId={studentId}
           problems={sessionProblems}
           viewerRole={viewerRole}
+          viewerUserId={currentUserId}
         />
       ) : activeTab === "vocab" ? (
         <VocabTab

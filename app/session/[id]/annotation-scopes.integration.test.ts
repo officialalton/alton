@@ -111,16 +111,30 @@ describe("① 교사 공용 필기", () => {
     expect(Number(seen)).toBeGreaterThan(0);
   });
 
-  // 공용 필기는 "함께 보는" 범위를 뜻하지 작성자를 교사로 제한하는 것이 아니다 —
-  // 학생도 공용 캔버스에 그릴 수 있다(R8 이후 기존 동작을 그대로 유지한다).
-  it("학생도 공용 필기에 쓸 수 있다(기존 동작 유지)", () => {
-    asUser(STUDENT_ID, insertEvent(STUDENT_ID, "teacher_shared", ""));
+  // 2026-09-12 확정 — 교사 공용 필기는 교사가 작성한다. 학생이 설명 위에
+  // 덧쓸 자리는 "나만 보는 교재 필기"와 문제별 풀이판이다.
+  // 학생이 쓸 자리가 없어진 것이 아니다 — 아래 ②(개인 교재 필기)와
+  // ③(문제별 풀이판)이 학생의 쓰기 영역이다.
+  it("학생은 교사 공용 필기에 쓸 수 없다", () => {
+    expect(asUserExpectError(STUDENT_ID, insertEvent(STUDENT_ID, "teacher_shared", ""))).toMatch(
+      /row-level security|policy/i
+    );
     expect(
       asUser(
         TEACHER_ID,
         `select count(*) from session_annotation_events where session_id = '${sessionId}' and scope = 'teacher_shared' and author_id = '${STUDENT_ID}';`
       )
-    ).toBe("1");
+    ).toBe("0");
+  });
+
+  it("교사는 공용 필기에 쓸 수 있다", () => {
+    asUser(TEACHER_ID, insertEvent(TEACHER_ID, "teacher_shared", ""));
+    expect(
+      asUser(
+        TEACHER_ID,
+        `select count(*) from session_annotation_events where session_id = '${sessionId}' and scope = 'teacher_shared' and author_id = '${TEACHER_ID}';`
+      )
+    ).not.toBe("0");
   });
 
   it("clear_all은 교사·관리자만 기록한다", () => {
@@ -431,6 +445,103 @@ describe("③ 문제 풀이 화이트보드 — 풀이판 단위로 분리된다
     expect(
       asUser(guardianId, `select count(*) from session_annotation_events where session_id = '${otherSession}';`)
     ).toBe("0");
+  });
+
+  it("제출하면 답안과 '그때까지의 필기'가 함께 고정된다", () => {
+    const problem = freshProblem("submit-freeze");
+    const w = work(problem);
+    asUser(
+      STUDENT_ID,
+      `insert into session_annotation_events (session_id, author_id, event_type, payload, scope, problem_id, problem_work_id, owner_student_id)
+       values ('${sessionId}', '${STUDENT_ID}', 'stroke', '{}'::jsonb, 'problem_student', '${problem}', '${w}', '${STUDENT_ID}');`
+    );
+    const seqBefore = psql(
+      `select max(seq) from session_annotation_events where problem_work_id = '${w}' and scope = 'problem_student';`
+    );
+
+    psql(`select submit_problem_attempt('${w}', '${STUDENT_ID}', 2, null);`);
+
+    expect(psql(`select submitted_choice_index from session_problem_work where id = '${w}';`)).toBe("2");
+    expect(psql(`select submitted_stroke_seq from session_problem_work where id = '${w}';`)).toBe(seqBefore);
+
+    // 제출한 뒤 덧그린 필기는 경계 밖이라 "그때 낸 풀이"와 구분된다.
+    asUser(
+      STUDENT_ID,
+      `insert into session_annotation_events (session_id, author_id, event_type, payload, scope, problem_id, problem_work_id, owner_student_id)
+       values ('${sessionId}', '${STUDENT_ID}', 'stroke', '{}'::jsonb, 'problem_student', '${problem}', '${w}', '${STUDENT_ID}');`
+    );
+    expect(psql(`select submitted_stroke_seq from session_problem_work where id = '${w}';`)).toBe(seqBefore);
+    expect(
+      psql(
+        `select count(*) from session_annotation_events
+         where problem_work_id = '${w}' and scope = 'problem_student' and seq > ${seqBefore};`
+      )
+    ).toBe("1");
+  });
+
+  it("제출한 답안은 바뀌지 않는다", () => {
+    const w = work(freshProblem("submit-immutable"));
+    psql(`select submit_problem_attempt('${w}', '${STUDENT_ID}', 1, null);`);
+    expect(
+      psqlExpectError(`update session_problem_work set submitted_choice_index = 3 where id = '${w}';`)
+    ).toMatch(/이미 제출한 풀이입니다/);
+    expect(psql(`select submitted_choice_index from session_problem_work where id = '${w}';`)).toBe("1");
+  });
+
+  it("본인 풀이만 제출할 수 있고, 두 번 눌러도 한 번만 처리된다", () => {
+    const w = work(freshProblem("submit-guard"));
+    expect(psqlExpectError(`select submit_problem_attempt('${w}', '${TEACHER_ID}', 0, null);`)).toMatch(
+      /본인 풀이만/
+    );
+    psql(`select submit_problem_attempt('${w}', '${STUDENT_ID}', 0, null);`);
+    const at = psql(`select submitted_at from session_problem_work where id = '${w}';`);
+    psql(`select submit_problem_attempt('${w}', '${STUDENT_ID}', 3, null);`);
+    expect(psql(`select submitted_at from session_problem_work where id = '${w}';`)).toBe(at);
+    expect(psql(`select submitted_choice_index from session_problem_work where id = '${w}';`)).toBe("0");
+  });
+
+  it("다시 풀면 새 시도가 생기고 이전 답안·풀이·피드백이 그대로 남는다", () => {
+    const problem = freshProblem("reattempt-keeps");
+    const first = work(problem);
+    asUser(
+      STUDENT_ID,
+      `insert into session_annotation_events (session_id, author_id, event_type, payload, scope, problem_id, problem_work_id, owner_student_id)
+       values ('${sessionId}', '${STUDENT_ID}', 'stroke', '{}'::jsonb, 'problem_student', '${problem}', '${first}', '${STUDENT_ID}');`
+    );
+    asUser(
+      TEACHER_ID,
+      `insert into session_annotation_events (session_id, author_id, event_type, payload, scope, problem_id, problem_work_id, owner_student_id)
+       values ('${sessionId}', '${TEACHER_ID}', 'stroke', '{}'::jsonb, 'problem_teacher_feedback', '${problem}', '${first}', '${STUDENT_ID}');`
+    );
+    psql(`select submit_problem_attempt('${first}', '${STUDENT_ID}', 1, null);`);
+
+    const second = work(problem, true);
+    expect(second).not.toBe(first);
+    expect(psql(`select attempt_no from session_problem_work where id = '${second}';`)).toBe("2");
+
+    // 1차 시도의 답안·풀이·피드백은 그대로다.
+    expect(psql(`select submitted_choice_index from session_problem_work where id = '${first}';`)).toBe("1");
+    expect(
+      psql(`select count(*) from session_annotation_events where problem_work_id = '${first}';`)
+    ).toBe("2");
+    // 새 시도는 비어 있다.
+    expect(
+      psql(`select count(*) from session_annotation_events where problem_work_id = '${second}';`)
+    ).toBe("0");
+  });
+
+  it("교사는 학생이 제출한 뒤에도 피드백을 계속 남길 수 있다", () => {
+    const problem = freshProblem("feedback-after-submit");
+    const w = work(problem);
+    psql(`select submit_problem_attempt('${w}', '${STUDENT_ID}', 0, null);`);
+    asUser(
+      TEACHER_ID,
+      `insert into session_annotation_events (session_id, author_id, event_type, payload, scope, problem_id, problem_work_id, owner_student_id)
+       values ('${sessionId}', '${TEACHER_ID}', 'stroke', '{}'::jsonb, 'problem_teacher_feedback', '${problem}', '${w}', '${STUDENT_ID}');`
+    );
+    expect(
+      psql(`select count(*) from session_annotation_events where problem_work_id = '${w}' and scope = 'problem_teacher_feedback';`)
+    ).toBe("1");
   });
 
   it("풀이판은 수업 시작 시 고정된 문제 버전과 연결된다", () => {

@@ -12,8 +12,18 @@ export type ProblemWorkBoard = {
   workId: string;
   attemptNo: number;
   submitted: boolean;
-  /** 학생이 남긴 원본 풀이. */
+  /** 제출 시점에 고정된 답안. */
+  submittedChoiceIndex: number | null;
+  submittedText: string | null;
+  /**
+   * 제출 시점까지의 학생 풀이 필기 경계. 이 값보다 뒤에 그린 획은 제출 뒤에
+   * 덧그린 것이라 채점 대상이 아니었다.
+   */
+  submittedStrokeSeq: string | null;
+  /** 학생이 남긴 원본 풀이(제출 시점까지). */
   studentStrokes: StrokePayload[];
+  /** 제출한 뒤에 덧그린 획 — 채점 대상이 아니었음을 구분해 보여준다. */
+  strokesAfterSubmit: StrokePayload[];
   /** 교사 피드백 — 같은 풀이판 위의 별도 레이어다. */
   feedbackStrokes: StrokePayload[];
 };
@@ -61,7 +71,7 @@ export async function openProblemWork(params: {
   if (!isOwner) {
     const { data: existing } = await supabase
       .from("session_problem_work")
-      .select("id, attempt_no, submitted_at")
+      .select("id, attempt_no, submitted_at, submitted_choice_index, submitted_text, submitted_stroke_seq")
       .eq("session_id", params.sessionId)
       .eq("student_id", params.studentId)
       .eq("problem_id", params.problemId)
@@ -73,7 +83,11 @@ export async function openProblemWork(params: {
         workId: "",
         attemptNo: 0,
         submitted: false,
+        submittedChoiceIndex: null,
+        submittedText: null,
+        submittedStrokeSeq: null,
         studentStrokes: [],
+        strokesAfterSubmit: [],
         feedbackStrokes: [],
       };
     }
@@ -81,7 +95,14 @@ export async function openProblemWork(params: {
       workId: existing.id as string,
       attemptNo: existing.attempt_no as number,
       submitted: Boolean(existing.submitted_at),
-      ...(await loadBoardStrokes(supabase, existing.id as string)),
+      submittedChoiceIndex: (existing.submitted_choice_index as number | null) ?? null,
+      submittedText: (existing.submitted_text as string | null) ?? null,
+      submittedStrokeSeq: (existing.submitted_stroke_seq as string | null) ?? null,
+      ...(await loadBoardStrokes(
+        supabase,
+        existing.id as string,
+        (existing.submitted_stroke_seq as string | null) ?? null
+      )),
     };
   }
 
@@ -95,38 +116,53 @@ export async function openProblemWork(params: {
 
   const { data: work } = await supabase
     .from("session_problem_work")
-    .select("id, attempt_no, submitted_at")
+    .select("id, attempt_no, submitted_at, submitted_choice_index, submitted_text, submitted_stroke_seq")
     .eq("id", workId as string)
     .maybeSingle();
 
+  const boundary = (work?.submitted_stroke_seq as string | null) ?? null;
   return {
     workId: workId as string,
     attemptNo: (work?.attempt_no as number) ?? 1,
     submitted: Boolean(work?.submitted_at),
-    ...(await loadBoardStrokes(supabase, workId as string)),
+    submittedChoiceIndex: (work?.submitted_choice_index as number | null) ?? null,
+    submittedText: (work?.submitted_text as string | null) ?? null,
+    submittedStrokeSeq: boundary,
+    ...(await loadBoardStrokes(supabase, workId as string, boundary)),
   };
 }
 
 async function loadBoardStrokes(
   supabase: Awaited<ReturnType<typeof requireUser>>["supabase"],
-  workId: string
-): Promise<{ studentStrokes: StrokePayload[]; feedbackStrokes: StrokePayload[] }> {
+  workId: string,
+  submittedStrokeSeq: string | null
+): Promise<{
+  studentStrokes: StrokePayload[];
+  strokesAfterSubmit: StrokePayload[];
+  feedbackStrokes: StrokePayload[];
+}> {
   // RLS가 실질적인 게이트다 — 볼 자격이 없으면 빈 배열이 나온다.
   const { data } = await supabase
     .from("session_annotation_events")
-    .select("payload, scope")
+    .select("payload, scope, seq")
     .eq("problem_work_id", workId)
     .eq("event_type", "stroke")
     .order("seq", { ascending: true });
 
   const studentStrokes: StrokePayload[] = [];
+  const strokesAfterSubmit: StrokePayload[] = [];
   const feedbackStrokes: StrokePayload[] = [];
+  const boundary = submittedStrokeSeq ? BigInt(submittedStrokeSeq) : null;
+
   for (const row of data ?? []) {
-    (row.scope === "problem_teacher_feedback" ? feedbackStrokes : studentStrokes).push(
-      row.payload as StrokePayload
-    );
+    if (row.scope === "problem_teacher_feedback") {
+      feedbackStrokes.push(row.payload as StrokePayload);
+      continue;
+    }
+    const isAfterSubmit = boundary !== null && BigInt(row.seq as string) > boundary;
+    (isAfterSubmit ? strokesAfterSubmit : studentStrokes).push(row.payload as StrokePayload);
   }
-  return { studentStrokes, feedbackStrokes };
+  return { studentStrokes, strokesAfterSubmit, feedbackStrokes };
 }
 
 /** 이 수업에서 이 학생이 지금까지 푼 회차 목록(복습 화면에서 과거 풀이를 연다). */
@@ -154,15 +190,19 @@ export async function loadProblemWorkBoard(workId: string): Promise<ProblemWorkB
   const { supabase } = await requireUser();
   const { data: work } = await supabase
     .from("session_problem_work")
-    .select("id, attempt_no, submitted_at")
+    .select("id, attempt_no, submitted_at, submitted_choice_index, submitted_text, submitted_stroke_seq")
     .eq("id", workId)
     .maybeSingle();
   if (!work) return null;
+  const boundary = (work.submitted_stroke_seq as string | null) ?? null;
   return {
     workId: work.id as string,
     attemptNo: work.attempt_no as number,
     submitted: Boolean(work.submitted_at),
-    ...(await loadBoardStrokes(supabase, workId)),
+    submittedChoiceIndex: (work.submitted_choice_index as number | null) ?? null,
+    submittedText: (work.submitted_text as string | null) ?? null,
+    submittedStrokeSeq: boundary,
+    ...(await loadBoardStrokes(supabase, workId, boundary)),
   };
 }
 
@@ -187,22 +227,22 @@ export async function appendProblemWorkStrokes(params: {
   if (error) throw new Error(error.message);
 }
 
-/** 학생이 이 회차 풀이를 제출한다 — 제출 뒤에야 정답·해설이 열린다. */
-export async function submitProblemWork(workId: string): Promise<void> {
-  const { user, supabase } = await requireUser();
-  const { data: work } = await supabase
-    .from("session_problem_work")
-    .select("id, student_id, submitted_at")
-    .eq("id", workId)
-    .maybeSingle();
-  if (!work) throw new Error("풀이판을 찾을 수 없습니다.");
-  if (work.student_id !== user.id) throw new Error("본인 풀이만 제출할 수 있습니다.");
-  if (work.submitted_at) return;
-
+/**
+ * 학생이 이 시도의 답안을 제출한다. 답안과 "제출 시점까지의 필기"가 함께
+ * 고정되므로, 나중에 AI 채점을 붙여도 무엇을 보고 채점했는지 되짚을 수 있다.
+ * 교사 피드백은 제출 뒤에도 계속 추가할 수 있다.
+ */
+export async function submitProblemWork(
+  workId: string,
+  answer?: { choiceIndex?: number | null; text?: string | null }
+): Promise<void> {
+  const { user } = await requireUser();
   const admin = createAdminClient();
-  const { error } = await admin
-    .from("session_problem_work")
-    .update({ submitted_at: new Date().toISOString() })
-    .eq("id", workId);
+  const { error } = await admin.rpc("submit_problem_attempt", {
+    p_work_id: workId,
+    p_actor_id: user.id,
+    p_choice_index: answer?.choiceIndex ?? null,
+    p_text: answer?.text ?? null,
+  });
   if (error) throw new Error(error.message);
 }

@@ -49,6 +49,8 @@ export default function CanvasOverlay({
   initialStrokes,
   canDraw,
   scope = "teacher_shared",
+  authorRole = "teacher",
+  viewerUserId,
   persistence = "legacy",
   children,
 }: {
@@ -57,6 +59,14 @@ export default function CanvasOverlay({
   initialStrokes: CanvasStroke[];
   canDraw: boolean;
   scope?: CanvasScope;
+  /** 보는 사람의 역할. 공용 필기에 쓸 수 있는지 판단한다. */
+  authorRole?: "teacher" | "student" | "reader";
+  /**
+   * 지금 보고 있는 사람. 저장하지 못한 필기를 브라우저에 남길 때 계정별로
+   * 갈라 두기 위해 필요하다 — 같은 브라우저에서 다른 사람이 로그인했을 때
+   * 남의 필기가 복구되거나 그 사람 명의로 저장되면 안 된다.
+   */
+  viewerUserId?: string;
   /**
    * 어디에 저장할지. canvas_annotations는 session_id가 legacy_sessions를
    * 가리키므로 v3 수업에서는 쓸 수 없다 — 그래서 v3 수업의 교재 필기는 지금까지
@@ -66,6 +76,10 @@ export default function CanvasOverlay({
   children: React.ReactNode;
 }) {
   const isPrivate = scope === "student_private";
+  // 2026-09-12 확정 — 교사 공용 필기는 교사가 작성한다. 학생은 같은 교재 위
+  // 자기 개인 필기에만 쓴다. 서버(범위별 INSERT 정책)가 실제 방어선이고,
+  // 여기서는 쓸 수 없는 도구를 아예 보여주지 않는다.
+  const writable = canDraw && (isPrivate || authorRole === "teacher");
   const wrapRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const channelRef = useRef<RealtimeChannel | null>(null);
@@ -86,13 +100,26 @@ export default function CanvasOverlay({
   // 그은 필기는 밀리기 전 자리를 가리키게 되므로, 본문 안의 그림이 전부
   // 자리를 잡은 뒤에 필기를 시작할 수 있게 한다.
   const [contentReady, setContentReady] = useState(false);
+  // 그림을 끝내 불러오지 못하면 필기가 영영 잠긴다. 잠금은 "밀림을 막기 위한
+  // 잠깐"이어야 하므로, 실패·지연은 안내하고 다시 시도할 수 있게 한다.
+  const [imageProblem, setImageProblem] = useState(false);
+  const [imageRetry, setImageRetry] = useState(0);
+  // 축소해서 보는 동안 원하는 곳을 키워 볼 수 있어야 한다(모바일에서 글씨가
+  // 작아지므로). 1이면 화면에 맞춘 상태, 그보다 크면 확대해 가로로 움직인다.
+  const [zoom, setZoom] = useState(1);
 
   // 저장하지 못한 획은 브라우저에 남겨 둔다. 연결이 끊긴 채로 새로고침하거나
   // 탭이 닫히면 메모리에만 있던 버퍼가 통째로 사라져, 학생이 그린 필기가
   // 소리 없이 없어진다. 다시 열었을 때 이어서 저장한다.
-  const pendingKey = `alton:unsaved-strokes:${sessionId}:${curriculumDocId}:${scope}`;
+  // 키에 보는 사람이 들어간다. 계정·수업·교재·범위가 모두 다르면 다른 칸이다.
+  // viewerUserId를 모르면 아예 남기지 않는다(누구 것인지 모르는 필기를
+  // 브라우저에 두지 않는다).
+  const pendingKey = viewerUserId
+    ? `alton:unsaved-strokes:${viewerUserId}:${sessionId}:${curriculumDocId}:${scope}`
+    : null;
 
   const rememberPending = useCallback(() => {
+    if (!pendingKey) return;
     try {
       if (pendingRef.current.length === 0) window.localStorage.removeItem(pendingKey);
       else window.localStorage.setItem(pendingKey, JSON.stringify(pendingRef.current));
@@ -172,9 +199,9 @@ export default function CanvasOverlay({
       ? available / ANNOTATION_LAYOUT_WIDTH
       : 1;
     setLayoutScale(next);
-    // 축소한 만큼 바깥 높이도 줄여야 아래 내용과 겹치지 않는다.
-    setLayoutHeight(wrap.scrollHeight * next);
-  }, [layoutPinned]);
+    // 축소·확대한 만큼 바깥 높이도 맞춰야 아래 내용과 겹치지 않는다.
+    setLayoutHeight(wrap.scrollHeight * next * zoom);
+  }, [layoutPinned, zoom]);
 
   // 지난번에 저장하지 못한 획을 되살린다 — 화면에 다시 그리고, 저장도 다시 시도한다.
   //
@@ -185,6 +212,7 @@ export default function CanvasOverlay({
   // rememberPending()이 다시 써 넣는다.
   const recoveredOnceRef = useRef(false);
   useEffect(() => {
+    if (!pendingKey) return;
     if (recoveredOnceRef.current) return;
     recoveredOnceRef.current = true;
 
@@ -214,26 +242,42 @@ export default function CanvasOverlay({
       return;
     }
     let left = pending.length;
-    const done = () => {
-      left -= 1;
-      if (left <= 0) {
-        setContentReady(true);
-        measureLayout();
-        resize();
-      }
+    let failed = false;
+    const unlock = () => {
+      setContentReady(true);
+      setImageProblem(failed);
+      measureLayout();
+      resize();
     };
+    const done = (ok: boolean) => {
+      if (!ok) failed = true;
+      left -= 1;
+      if (left <= 0) unlock();
+    };
+    const onLoad = () => done(true);
+    const onError = () => done(false);
     pending.forEach((img) => {
-      img.addEventListener("load", done, { once: true });
-      img.addEventListener("error", done, { once: true });
+      img.addEventListener("load", onLoad, { once: true });
+      img.addEventListener("error", onError, { once: true });
     });
+    // 어떤 이유로든(아주 느린 네트워크, 이벤트가 오지 않는 경우) 오래 걸리면
+    // 잠금을 풀고 사실대로 알린다 — 필기를 아예 못 하는 것보다 낫다.
+    const timer = setTimeout(() => {
+      if (left > 0) {
+        failed = true;
+        left = 0;
+        unlock();
+      }
+    }, 8000);
     return () => {
+      clearTimeout(timer);
       pending.forEach((img) => {
-        img.removeEventListener("load", done);
-        img.removeEventListener("error", done);
+        img.removeEventListener("load", onLoad);
+        img.removeEventListener("error", onError);
       });
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [children]);
+  }, [children, imageRetry]);
 
   useEffect(() => {
     measureLayout();
@@ -322,13 +366,13 @@ export default function CanvasOverlay({
   }
 
   function handlePointerDown(e: React.PointerEvent<HTMLCanvasElement>) {
-    if (!drawMode) return;
+    if (!drawMode || !writable) return;
     drawingRef.current = true;
     lastPosRef.current = pos(e);
   }
 
   function handlePointerMove(e: React.PointerEvent<HTMLCanvasElement>) {
-    if (!drawMode || !drawingRef.current || !lastPosRef.current) return;
+    if (!drawMode || !writable || !drawingRef.current || !lastPosRef.current) return;
     const p = pos(e);
     const seg: CanvasStroke = {
       x0: lastPosRef.current.x,
@@ -383,20 +427,65 @@ export default function CanvasOverlay({
         >
           {showAnnotations ? "필기 숨기고 넓게 읽기" : "필기 보기"}
         </button>
-        {layoutPinned && layoutScale < 1 && (
+        {!writable && canDraw && !isPrivate && (
           <span className="text-[11px] text-grey-500">
-            필기 위치를 지키려고 본문을 축소해서 보여주고 있어요
+            선생님이 함께 보며 설명하는 필기입니다 — 내 필기는 “나만 보는 필기”에 남겨요
           </span>
+        )}
+        {layoutPinned && layoutScale < 1 && (
+          <>
+            <span className="text-[11px] text-grey-500">
+              필기 위치를 지키려고 본문을 축소해서 보여주고 있어요
+            </span>
+            <div className="flex items-center gap-1">
+              <button
+                onClick={() => setZoom((z) => Math.max(1, Math.round((z - 0.25) * 100) / 100))}
+                disabled={zoom <= 1}
+                aria-label="작게 보기"
+                className="text-[12px] font-bold px-2.5 py-1 rounded-lg border border-grey-200 disabled:opacity-40"
+              >
+                －
+              </button>
+              <span className="text-[11px] font-semibold text-grey-500 tabular-nums">
+                {Math.round(zoom * 100)}%
+              </span>
+              <button
+                onClick={() => setZoom((z) => Math.min(3, Math.round((z + 0.25) * 100) / 100))}
+                disabled={zoom >= 3}
+                aria-label="크게 보기"
+                className="text-[12px] font-bold px-2.5 py-1 rounded-lg border border-grey-200 disabled:opacity-40"
+              >
+                ＋
+              </button>
+            </div>
+          </>
         )}
       </div>
 
-      {canDraw && showAnnotations && !contentReady && (
+      {writable && showAnnotations && !contentReady && (
         <p className="text-[11.5px] text-grey-500 mb-2">
           교재의 그림을 불러오는 중입니다 — 다 불러온 뒤에 필기해야 위치가 어긋나지 않아요.
         </p>
       )}
 
-      {canDraw && showAnnotations && contentReady && (
+      {writable && showAnnotations && contentReady && imageProblem && (
+        <p className="text-[11.5px] text-grey-500 mb-2">
+          일부 그림을 불러오지 못했습니다. 그대로 필기할 수 있지만, 그림이 나중에
+          나타나면 위치가 밀릴 수 있어요.{" "}
+          <button
+            onClick={() => {
+              setContentReady(false);
+              setImageProblem(false);
+              setImageRetry((n) => n + 1);
+            }}
+            className="font-bold text-ink underline"
+          >
+            다시 불러오기
+          </button>
+        </p>
+      )}
+
+      {writable && showAnnotations && contentReady && (
         <div className="flex flex-wrap items-center gap-3 mb-3 sticky top-0 bg-white/95 py-2 z-20">
           <button
             onClick={() => setDrawMode((v) => !v)}
@@ -470,7 +559,12 @@ export default function CanvasOverlay({
         className="relative"
         style={
           layoutPinned && layoutScale < 1
-            ? { overflow: "hidden", height: layoutHeight ?? undefined }
+            ? {
+                // 확대하면 가로로 넘치므로 이 영역 안에서 움직여 읽는다.
+                overflowX: zoom > 1 ? "auto" : "hidden",
+                overflowY: "hidden",
+                height: layoutHeight ?? undefined,
+              }
             : undefined
         }
       >
@@ -482,7 +576,8 @@ export default function CanvasOverlay({
               ? {
                   width: ANNOTATION_LAYOUT_WIDTH,
                   maxWidth: "none",
-                  transform: layoutScale < 1 ? `scale(${layoutScale})` : undefined,
+                  transform:
+                    layoutScale < 1 ? `scale(${layoutScale * zoom})` : undefined,
                   transformOrigin: "top left",
                 }
               : undefined
@@ -493,7 +588,7 @@ export default function CanvasOverlay({
           ref={canvasRef}
           className={
             "absolute top-0 left-0 " +
-            (drawMode ? "pointer-events-auto cursor-crosshair" : "pointer-events-none")
+            (drawMode && writable ? "pointer-events-auto cursor-crosshair" : "pointer-events-none")
           }
           style={{ zIndex: 5, touchAction: "none" }}
           onPointerDown={handlePointerDown}

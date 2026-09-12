@@ -32,6 +32,7 @@ export default function MaterialTab({
   privateStrokes = [],
   sharedStrokes,
   sessionSource = "legacy",
+  viewerUserId,
   annotationViewerRole,
 }: {
   sessionId: string;
@@ -44,6 +45,8 @@ export default function MaterialTab({
   /** v3 수업의 공용 교재 필기(이벤트 로그에서 재구성한 것). */
   sharedStrokes?: CanvasStroke[];
   sessionSource?: "legacy" | "v3";
+  /** 지금 보고 있는 사람 — 미저장 필기를 계정별로 갈라 두는 데 쓴다. */
+  viewerUserId?: string;
   /**
    * 필기 가능 여부만 판단하는 역할. 다른 탭(단어장·과제)은 v3에서 아직 쓰기가
    * 안 되지만 교재 필기는 이벤트 로그로 저장되므로, 그 제한을 여기까지
@@ -169,6 +172,8 @@ export default function MaterialTab({
           }
           canDraw={drawRole === "student" || drawRole === "teacher"}
           scope={activeScope}
+          authorRole={drawRole === "teacher" ? "teacher" : drawRole === "student" ? "student" : "reader"}
+          viewerUserId={viewerUserId}
           persistence={sessionSource === "v3" ? "events" : "legacy"}
         >
           <VocabClickLayer

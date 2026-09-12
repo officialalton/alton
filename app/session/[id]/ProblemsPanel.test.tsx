@@ -37,7 +37,22 @@ beforeEach(() => {
     workId: "w1",
     attemptNo: 1,
     submitted: false,
+    submittedChoiceIndex: null,
+    submittedText: null,
+    submittedStrokeSeq: null,
     studentStrokes: [],
+    strokesAfterSubmit: [],
+    feedbackStrokes: [],
+  });
+  (loadProblemWorkBoard as ReturnType<typeof vi.fn>).mockResolvedValue({
+    workId: "w1",
+    attemptNo: 1,
+    submitted: true,
+    submittedChoiceIndex: 0,
+    submittedText: null,
+    submittedStrokeSeq: "10",
+    studentStrokes: [],
+    strokesAfterSubmit: [],
     feedbackStrokes: [],
   });
   (listProblemAttempts as ReturnType<typeof vi.fn>).mockResolvedValue([
@@ -137,7 +152,11 @@ describe("ProblemsPanel — 문제를 보면서 풀이판을 연다", () => {
       workId: "w1",
       attemptNo: 1,
       submitted: true,
+      submittedChoiceIndex: 0,
+      submittedText: null,
+      submittedStrokeSeq: "5",
       studentStrokes: [],
+      strokesAfterSubmit: [],
       feedbackStrokes: [],
     });
     renderPanel([unsolved]);
@@ -155,6 +174,7 @@ describe("ProblemsPanel — 문제를 보면서 풀이판을 연다", () => {
     fireEvent.pointerMove(canvas, { clientX: 40, clientY: 40 });
     fireEvent.pointerUp(canvas);
 
+    fireEvent.click(screen.getByText("가"));
     fireEvent.click(screen.getByText("풀이 제출"));
     await waitFor(() =>
       expect(screen.getByText(/필기를 저장하지 못해 제출하지 않았습니다/)).toBeInTheDocument()
@@ -173,16 +193,21 @@ describe("ProblemsPanel — 문제를 보면서 풀이판을 연다", () => {
     fireEvent.pointerMove(canvas, { clientX: 40, clientY: 40 });
     fireEvent.pointerUp(canvas);
 
+    fireEvent.click(screen.getByText("가"));
     fireEvent.click(screen.getByText("풀이 제출"));
     await waitFor(() => expect(appendProblemWorkStrokes).toHaveBeenCalled());
-    await waitFor(() => expect(submitProblemWork).toHaveBeenCalledWith("w1"));
+    await waitFor(() => expect(submitProblemWork).toHaveBeenCalled());
   });
 
   it("학생이 풀이를 제출하면 서버에 기록한다", async () => {
     renderPanel([unsolved]);
     fireEvent.click(screen.getByText("✏️ 풀이판 열기"));
-    fireEvent.click(await screen.findByText("풀이 제출"));
-    await waitFor(() => expect(submitProblemWork).toHaveBeenCalledWith("w1"));
+    // 객관식은 답을 고른 뒤에야 제출할 수 있다.
+    fireEvent.click(await screen.findByText("가"));
+    fireEvent.click(screen.getByText("풀이 제출"));
+    await waitFor(() =>
+      expect(submitProblemWork).toHaveBeenCalledWith("w1", { choiceIndex: 0 })
+    );
   });
 
   it("교사가 그리면 피드백 레이어로 기록된다고 알려준다", async () => {
@@ -207,7 +232,11 @@ describe("ProblemsPanel — 문제를 보면서 풀이판을 연다", () => {
       workId: "w1",
       attemptNo: 1,
       submitted: true,
+      submittedChoiceIndex: 1,
+      submittedText: null,
+      submittedStrokeSeq: "5",
       studentStrokes: [],
+      strokesAfterSubmit: [],
       feedbackStrokes: [],
     });
     renderPanel([{ ...unsolved, solved: true }]);
@@ -220,14 +249,19 @@ describe("ProblemsPanel — 문제를 보면서 풀이판을 연다", () => {
       workId: "w1",
       attemptNo: 1,
       submitted: false,
+      submittedChoiceIndex: null,
+      submittedText: null,
+      submittedStrokeSeq: null,
       studentStrokes: [],
+      strokesAfterSubmit: [],
       feedbackStrokes: [{ x0: 0, y0: 0, x1: 1, y1: 1, color: "#000", tool: "pen" }],
     });
     renderPanel([unsolved]);
     fireEvent.click(screen.getByText("✏️ 풀이판 열기"));
-    const toggle = await screen.findByText("선생님 피드백 숨기기");
+    const toggle = await screen.findByText("선생님 피드백");
+    expect(toggle).toHaveAttribute("aria-pressed", "true");
     fireEvent.click(toggle);
-    expect(screen.getByText("선생님 피드백 보기")).toBeInTheDocument();
+    expect(screen.getByText("선생님 피드백")).toHaveAttribute("aria-pressed", "false");
   });
 
   it("풀이판을 열지 못하면 사유를 보여준다", async () => {

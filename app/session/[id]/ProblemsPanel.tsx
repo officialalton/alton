@@ -25,15 +25,19 @@ export default function ProblemsPanel({
   studentId,
   problems,
   viewerRole,
+  viewerUserId,
 }: {
   sessionId: string;
   studentId: string;
   problems: SessionProblem[];
   viewerRole: "student" | "teacher" | "parent" | "admin";
+  /** 지금 보고 있는 사람 — 미저장 필기를 계정별로 갈라 두는 데 쓴다. */
+  viewerUserId?: string;
 }) {
   const [openId, setOpenId] = useState<string | null>(null);
   const [board, setBoard] = useState<Board | null>(null);
   const [attempts, setAttempts] = useState<{ workId: string; attemptNo: number; submitted: boolean }[]>([]);
+  const [answerChoice, setAnswerChoice] = useState<number | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const boardRef = useRef<ProblemBoardHandle | null>(null);
@@ -48,6 +52,7 @@ export default function ProblemsPanel({
     try {
       const next = await openProblemWork({ sessionId, studentId, problemId, newAttempt });
       setBoard(next);
+      setAnswerChoice(next.submittedChoiceIndex);
       setOpenId(problemId);
       setAttempts(await listProblemAttempts({ sessionId, studentId, problemId }));
     } catch (e) {
@@ -61,7 +66,10 @@ export default function ProblemsPanel({
     setBusy(true);
     try {
       const next = await loadProblemWorkBoard(workId);
-      if (next) setBoard(next);
+      if (next) {
+        setBoard(next);
+        setAnswerChoice(next.submittedChoiceIndex);
+      }
     } finally {
       setBusy(false);
     }
@@ -84,6 +92,7 @@ export default function ProblemsPanel({
 
       {problems.map((p) => {
         const isOpen = openId === p.problemId;
+        const pickedChoice = isOpen ? (board?.submitted ? board.submittedChoiceIndex : answerChoice) : null;
         return (
           <article
             key={p.problemId}
@@ -121,18 +130,30 @@ export default function ProblemsPanel({
             {p.options.length > 0 && (
               <ol className="mb-4">
                 {p.options.map((opt, i) => (
-                  <li
-                    key={i}
-                    className={
-                      "text-[14.5px] leading-[1.75] py-2 px-3.5 rounded-lg mb-1.5 " +
-                      (p.correctIndex === i ? "bg-green/10 font-bold text-ink" : "text-ink")
-                    }
-                  >
-                    <span className="text-grey-500 mr-2">{i + 1}</span>
-                    <LearningText text={opt} className="learning-body inline" />
-                    {p.correctIndex === i && (
-                      <span className="ml-2 text-[11px] font-bold text-green">정답</span>
-                    )}
+                  <li key={i}>
+                    <button
+                      type="button"
+                      disabled={!isStudent || !isOpen || Boolean(board?.submitted)}
+                      onClick={() => setAnswerChoice(i)}
+                      aria-pressed={pickedChoice === i}
+                      className={
+                        "w-full text-left text-[14.5px] leading-[1.75] py-2 px-3.5 rounded-lg mb-1.5 border-[1.5px] " +
+                        (p.correctIndex === i
+                          ? "bg-green/10 font-bold text-ink border-green/30"
+                          : pickedChoice === i
+                            ? "border-ink text-ink"
+                            : "border-transparent text-ink")
+                      }
+                    >
+                      <span className="text-grey-500 mr-2">{i + 1}</span>
+                      <LearningText text={opt} className="learning-body inline" />
+                      {p.correctIndex === i && (
+                        <span className="ml-2 text-[11px] font-bold text-green">정답</span>
+                      )}
+                      {pickedChoice === i && board?.submitted && (
+                        <span className="ml-2 text-[11px] font-bold text-grey-500">제출한 답</span>
+                      )}
+                    </button>
                   </li>
                 ))}
               </ol>
@@ -175,7 +196,10 @@ export default function ProblemsPanel({
                   </button>
                   {board && !board.submitted && (
                     <button
-                      disabled={busy}
+                      disabled={busy || (p.options.length > 0 && answerChoice === null)}
+                      title={
+                        p.options.length > 0 && answerChoice === null ? "답을 먼저 고르세요" : undefined
+                      }
                       onClick={async () => {
                         setBusy(true);
                         setError(null);
@@ -188,8 +212,9 @@ export default function ProblemsPanel({
                             setError("필기를 저장하지 못해 제출하지 않았습니다. 연결을 확인한 뒤 다시 제출하세요.");
                             return;
                           }
-                          await submitProblemWork(board.workId);
-                          setBoard({ ...board, submitted: true });
+                          await submitProblemWork(board.workId, { choiceIndex: answerChoice });
+                          const refreshed = await loadProblemWorkBoard(board.workId);
+                          if (refreshed) setBoard(refreshed);
                         } catch (e) {
                           setError(e instanceof Error ? e.message : "제출하지 못했습니다.");
                         } finally {
@@ -246,9 +271,11 @@ export default function ProblemsPanel({
                   workId={board.workId}
                   attemptNo={board.attemptNo}
                   studentStrokes={board.studentStrokes}
+                  strokesAfterSubmit={board.strokesAfterSubmit}
                   feedbackStrokes={board.feedbackStrokes}
                   canDraw={canDraw && !(isStudent && board.submitted)}
                   drawAsFeedback={isTeacher}
+                  viewerUserId={viewerUserId}
                   readOnlyReason={
                     viewerRole === "parent"
                       ? "보호자는 읽기 전용입니다"

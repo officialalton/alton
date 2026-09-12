@@ -71,11 +71,19 @@ afterAll(() => {
   // 관례(파일 전체 실행 사이 `supabase db reset --local`)에 맡긴다.
 });
 
+// 이 스펙이 검증하는 것은 seq가 만드는 "전체 순서"이지 누가 어디에 쓸 수
+// 있는가가 아니다. 다만 2026-09-12 확정으로 교사 공용 필기는 교사만 쓰므로,
+// 각자 자기가 쓸 수 있는 범위에 남긴다(학생은 개인 교재 필기).
 function insertStroke(actorId: string, seqLabel: string) {
+  const isStudent = actorId === STUDENT_ID;
+  const scopeCols = isStudent
+    ? `, scope, owner_student_id`
+    : `, scope`;
+  const scopeVals = isStudent ? `, 'student_private', '${actorId}'` : `, 'teacher_shared'`;
   return asUser(
     actorId,
-    `insert into session_annotation_events (session_id, author_id, event_type, payload)
-     values ('${sessionId}', '${actorId}', 'stroke', '{"x0":0.1,"y0":0.1,"x1":0.2,"y1":0.2,"color":"#1A1A1A","tool":"pen","label":"${seqLabel}"}'::jsonb)
+    `insert into session_annotation_events (session_id, author_id, event_type, payload${scopeCols})
+     values ('${sessionId}', '${actorId}', 'stroke', '{"x0":0.1,"y0":0.1,"x1":0.2,"y1":0.2,"color":"#1A1A1A","tool":"pen","label":"${seqLabel}"}'::jsonb${scopeVals})
      returning seq;`
   );
 }
@@ -87,8 +95,9 @@ describe("session_annotation_events — append/replay (실제 DB)", () => {
     const seq3 = insertStroke(STUDENT_ID, "s2");
 
     // 재생(replay): session_id로 필터링해 seq 오름차순 정렬하면 실제 기록 순서가 그대로 나온다.
-    const rows = asUser(
-      TEACHER_ID,
+    // 범위가 다른 두 종류를 한 번에 보려면 관리자로 읽는다 — 교사는 학생
+    // 개인 필기를 볼 수 없기 때문이다(그 자체가 다른 스펙에서 검증된다).
+    const rows = psql(
       `select payload->>'label' from session_annotation_events where session_id = '${sessionId}' order by seq asc;`
     );
     expect(rows.split("\n")).toEqual(["s1", "t1", "s2"]);
@@ -100,8 +109,8 @@ describe("session_annotation_events — append/replay (실제 DB)", () => {
     // 클라이언트 타임스탬프가 아니라 DB가 부여하는 seq만으로 순서가 결정됨을 검증.
     const out = asUser(
       STUDENT_ID,
-      `insert into session_annotation_events (session_id, author_id, event_type, payload)
-       select '${sessionId}', '${STUDENT_ID}', 'stroke', jsonb_build_object('label', 'race-' || g)
+      `insert into session_annotation_events (session_id, author_id, event_type, payload, scope, owner_student_id)
+       select '${sessionId}', '${STUDENT_ID}', 'stroke', jsonb_build_object('label', 'race-' || g), 'student_private', '${STUDENT_ID}'::uuid
        from generate_series(1, 5) g
        returning seq;`
     );

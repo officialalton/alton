@@ -36,9 +36,13 @@ const ProblemWorkBoard = forwardRef<
     workId: string;
     attemptNo: number;
     studentStrokes: StrokePayload[];
+    /** 제출 뒤에 덧그린 획 — 채점 대상이 아니었던 부분. */
+    strokesAfterSubmit?: StrokePayload[];
     feedbackStrokes: StrokePayload[];
     canDraw: boolean;
     drawAsFeedback: boolean;
+    /** 지금 보고 있는 사람 — 미저장 필기를 계정별로 갈라 두는 데 쓴다. */
+    viewerUserId?: string;
     readOnlyReason?: string;
     onSaveStateChange?: (state: "idle" | "saving" | "saved" | "error") => void;
   }
@@ -49,9 +53,11 @@ const ProblemWorkBoard = forwardRef<
     workId,
     attemptNo,
     studentStrokes,
+    strokesAfterSubmit = [],
     feedbackStrokes,
     canDraw,
     drawAsFeedback,
+    viewerUserId,
     readOnlyReason,
     onSaveStateChange,
   },
@@ -66,8 +72,28 @@ const ProblemWorkBoard = forwardRef<
 
   const [tool, setTool] = useState<"pen" | "eraser">("pen");
   const [color, setColor] = useState(COLORS[0]);
+  // 교재 필기와 같은 방식 — 보는 사람이 레이어를 각자 켜고 끈다.
+  const [showStudent, setShowStudent] = useState(true);
   const [showFeedback, setShowFeedback] = useState(true);
   const [saveState, setSaveState] = useState<"idle" | "saving" | "saved" | "error">("idle");
+
+  // 교재 필기와 같은 규칙 — 계정·수업·풀이판·레이어(학생 풀이 / 교사 피드백)가
+  // 모두 키에 들어간다. 누구 것인지 모르면 남기지 않는다.
+  const pendingKey = viewerUserId
+    ? `alton:unsaved-problem-strokes:${viewerUserId}:${sessionId}:${workId}:${
+        drawAsFeedback ? "problem_teacher_feedback" : "problem_student"
+      }`
+    : null;
+
+  const rememberPending = useCallback(() => {
+    if (!pendingKey) return;
+    try {
+      if (pendingRef.current.length === 0) window.localStorage.removeItem(pendingKey);
+      else window.localStorage.setItem(pendingKey, JSON.stringify(pendingRef.current));
+    } catch {
+      // 저장소를 못 쓰는 환경에서는 조용히 넘어간다.
+    }
+  }, [pendingKey]);
 
   function setSave(next: "idle" | "saving" | "saved" | "error") {
     setSaveState(next);
@@ -103,10 +129,21 @@ const ProblemWorkBoard = forwardRef<
     const ctx = canvas?.getContext("2d");
     if (!canvas || !ctx) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    studentStrokes.forEach((s) => drawSegment(s, drawAsFeedback ? false : false));
-    localRef.current.forEach((s) => drawSegment(s, drawAsFeedback));
-    if (showFeedback) feedbackStrokes.forEach((s) => drawSegment(s, true));
-  }, [studentStrokes, feedbackStrokes, showFeedback, drawAsFeedback, drawSegment]);
+    if (showStudent) {
+      studentStrokes.forEach((seg) => drawSegment(seg));
+      strokesAfterSubmit.forEach((seg) => drawSegment(seg));
+    }
+    localRef.current.forEach((seg) => drawSegment(seg, drawAsFeedback));
+    if (showFeedback) feedbackStrokes.forEach((seg) => drawSegment(seg, true));
+  }, [
+    studentStrokes,
+    strokesAfterSubmit,
+    feedbackStrokes,
+    showStudent,
+    showFeedback,
+    drawAsFeedback,
+    drawSegment,
+  ]);
 
   const fit = useCallback(() => {
     const canvas = canvasRef.current;
@@ -117,6 +154,28 @@ const ProblemWorkBoard = forwardRef<
     canvas.height = BOARD_HEIGHT;
     redraw();
   }, [redraw]);
+
+  // 저장하지 못한 획을 되살린다. 복구는 한 번만 — 버퍼를 읽는 즉시 저장소에서
+  // 지워 "가져갔다"고 표시하고, 저장에 실패하면 rememberPending()이 다시 쓴다.
+  const recoveredOnceRef = useRef(false);
+  useEffect(() => {
+    if (!pendingKey || recoveredOnceRef.current) return;
+    recoveredOnceRef.current = true;
+    let recovered: StrokePayload[] = [];
+    try {
+      const raw = window.localStorage.getItem(pendingKey);
+      if (raw) recovered = JSON.parse(raw) as StrokePayload[];
+      window.localStorage.removeItem(pendingKey);
+    } catch {
+      recovered = [];
+    }
+    if (!Array.isArray(recovered) || recovered.length === 0) return;
+    pendingRef.current = [...recovered, ...pendingRef.current];
+    localRef.current = [...localRef.current, ...recovered];
+    redraw();
+    void flush();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pendingKey]);
 
   useEffect(() => {
     fit();
@@ -141,14 +200,16 @@ const ProblemWorkBoard = forwardRef<
         asFeedback: drawAsFeedback,
       });
       pendingRef.current = pendingRef.current.slice(batch.length);
+      rememberPending();
       setSave("saved");
       return true;
     } catch {
+      rememberPending();
       setSave("error");
       return false;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sessionId, problemId, workId, drawAsFeedback]);
+  }, [sessionId, problemId, workId, drawAsFeedback, rememberPending]);
 
   useImperativeHandle(ref, () => ({
     flush,
@@ -209,14 +270,36 @@ const ProblemWorkBoard = forwardRef<
           <span className="text-[11.5px] text-grey-500">{readOnlyReason ?? "읽기 전용"}</span>
         )}
 
-        {feedbackStrokes.length > 0 && (
-          <button
-            onClick={() => setShowFeedback((v) => !v)}
-            aria-pressed={showFeedback}
-            className="text-[11.5px] font-bold px-3 py-1.5 rounded-full border-[1.5px] border-grey-200 text-ink ml-auto"
-          >
-            {showFeedback ? "선생님 피드백 숨기기" : "선생님 피드백 보기"}
-          </button>
+        <div className="flex items-center gap-1.5 ml-auto">
+          {(studentStrokes.length > 0 || strokesAfterSubmit.length > 0) && (
+            <button
+              onClick={() => setShowStudent((v) => !v)}
+              aria-pressed={showStudent}
+              className={
+                "text-[11.5px] font-bold px-3 py-1.5 rounded-full border-[1.5px] " +
+                (showStudent ? "bg-ink text-white border-ink" : "border-grey-200 text-grey-500")
+              }
+            >
+              학생 풀이
+            </button>
+          )}
+          {feedbackStrokes.length > 0 && (
+            <button
+              onClick={() => setShowFeedback((v) => !v)}
+              aria-pressed={showFeedback}
+              className={
+                "text-[11.5px] font-bold px-3 py-1.5 rounded-full border-[1.5px] " +
+                (showFeedback ? "bg-ink text-white border-ink" : "border-grey-200 text-grey-500")
+              }
+            >
+              선생님 피드백
+            </button>
+          )}
+        </div>
+        {strokesAfterSubmit.length > 0 && (
+          <span className="text-[11px] text-grey-500 w-full">
+            제출한 뒤에 덧그린 필기가 포함되어 있습니다 — 제출 당시 낸 풀이와는 구분해 보관됩니다.
+          </span>
         )}
 
         {saveState === "saving" && <span className="text-[11px] text-grey-500">저장 중…</span>}
@@ -254,6 +337,7 @@ const ProblemWorkBoard = forwardRef<
             drawSegment(seg, drawAsFeedback);
             pendingRef.current.push(seg);
             localRef.current.push(seg);
+            rememberPending();
             lastPosRef.current = p;
           }}
           onPointerUp={() => {
