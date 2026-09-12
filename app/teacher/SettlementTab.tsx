@@ -191,11 +191,6 @@ export default function SettlementTab() {
             </b>{" "}
             (예: 9월 수업분 → 10월 {PAYOUT_DAY_OF_MONTH}일)
           </div>
-          <div>
-            지급 예정일은 <b>송금 승인 시점에 정해집니다</b>. 그 달 {PAYOUT_DAY_OF_MONTH}일 전에
-            승인되면 그 달 {PAYOUT_DAY_OF_MONTH}일, 이후에 승인되면 다음 달 {PAYOUT_DAY_OF_MONTH}일에
-            지급됩니다.
-          </div>
           <div>마지막 갱신: {new Date(settlement.refreshedAt).toLocaleString("ko-KR")}</div>
           <div>수업 판정·조정 결과에 따라 확정 전까지 금액이 변동될 수 있습니다.</div>
           <div>세금·수수료 등 공제를 반영하지 않은 총액입니다.</div>

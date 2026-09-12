@@ -227,11 +227,21 @@ describe("record_external_payout_transfer() — 은행 직접 송금 기록", ()
     ).toThrow(/송금 승인된 묶음에만/);
   });
 
-  it("은행 참조값 없이는 기록할 수 없다", () => {
-    const { batchId } = createApprovedBatch("ext-noref", "2027-02-10");
+  // 2026-09-12 정정: 확인 메모는 사후 대사 보조 정보라 필수가 아니다.
+  it("확인 메모가 비어 있어도 기록된다(필수는 완료일과 금액 일치뿐)", () => {
+    const { batchId } = createApprovedBatch("ext-nomemo", "2027-02-10");
+    psql(`select record_external_payout_transfer('${batchId}'::uuid, '2027-03-10', 60000, 'KRW', '  ', null, '${ADMIN_ID}'::uuid);`);
+
+    expect(psql(`select status from payout_batches where id = '${batchId}';`)).toBe("paid");
+    // 공백만 넣으면 null로 저장한다(빈 문자열을 남기지 않는다).
+    expect(psql(`select bank_reference is null from payout_external_transfers where batch_id = '${batchId}';`)).toBe("t");
+  });
+
+  it("송금 완료일이 없으면 거부한다", () => {
+    const { batchId } = createApprovedBatch("ext-nodate", "2027-02-10");
     expect(() =>
-      psql(`select record_external_payout_transfer('${batchId}'::uuid, '2027-03-10', 1000, 'KRW', '  ', null, '${ADMIN_ID}'::uuid);`)
-    ).toThrow(/은행 거래 참조값/);
+      psql(`select record_external_payout_transfer('${batchId}'::uuid, null, 60000, 'KRW', 'X', null, '${ADMIN_ID}'::uuid);`)
+    ).toThrow(/송금 완료일/);
   });
 
   it("기록 뒤에는 금액도 예정일도 바꿀 수 없다", () => {
@@ -259,5 +269,83 @@ describe("교사 정산 송금 제공자는 Wise 전용 (2026-09-12 확정)", ()
     const definition = psql(`select pg_get_functiondef(oid) from pg_proc where proname = 'dispatch_payout_batch';`);
     expect(definition).toContain("if v_key is not null then");
     expect(definition).toContain("return v_key");
+  });
+});
+
+// 2026-09-12 제품 오너 지시로 정책이 둘로 갈린다. 섞이지 않게 분리해 고정한다.
+describe("자동 송금 기본값 — 새로 승인되는 묶음", () => {
+  it("승인하면 자동 송금 대상이 되고 예정일이 함께 정해진다", () => {
+    const { batchId } = createApprovedBatch("new-approval", "2026-01-10");
+    const row = psql(
+      `select auto_dispatch_enabled, scheduled_payout_date is not null from payout_batches where id = '${batchId}';`
+    );
+    expect(row).toBe("t|t");
+  });
+
+  it("관리자가 제외했더라도 재승인하면 다시 대상이 된다(재승인 = 보내도 된다는 판단)", () => {
+    const { batchId } = createApprovedBatch("reapprove-auto", "2026-01-10");
+    psql(`select set_payout_batch_auto_dispatch('${batchId}'::uuid, false, '${ADMIN_ID}'::uuid);`);
+    expect(psql(`select auto_dispatch_enabled from payout_batches where id = '${batchId}';`)).toBe("f");
+
+    // 조정하면 검토 중으로 돌아가고, 재승인하면 다시 대상이 된다.
+    psql(`select add_payout_batch_adjustment('${batchId}'::uuid, -1000, '보정', '${ADMIN_ID}'::uuid);`);
+    psql(`select approve_payout_batch('${batchId}'::uuid, '${ADMIN_ID}'::uuid);`);
+
+    expect(psql(`select auto_dispatch_enabled from payout_batches where id = '${batchId}';`)).toBe("t");
+  });
+});
+
+describe("기존 승인 묶음 보정 — 자동 송금은 켜지 않는다 (2026-09-12 UAT 결함)", () => {
+  function legacyApprovedBatch(label: string): string {
+    const teacher = createTeacher(label);
+    const batchId = psql(
+      `insert into payout_batches (teacher_id, period_start, period_end, currency, status, approved_at)
+       values ('${teacher}', '2026-01-01', '2026-01-31', 'KRW', 'approved', '2026-02-03T00:00:00Z') returning id;`
+    );
+    // 도입 전 상태 재현: 예정일 없음 + 자동 송금 제외.
+    psql(`update payout_batches set scheduled_payout_date = null, auto_dispatch_enabled = false where id = '${batchId}';`);
+    return batchId;
+  }
+
+  it("예정일만 승인 시각 기준으로 채우고 자동 송금은 제외 상태로 남긴다", () => {
+    const batchId = legacyApprovedBatch("backfill");
+
+    psql(`select ensure_payout_batch_scheduled_date('${batchId}'::uuid, '${ADMIN_ID}'::uuid);`);
+
+    // 2026-02-03 승인 → 그 달 10일(2026-02-10).
+    expect(psql(`select scheduled_payout_date from payout_batches where id = '${batchId}';`)).toBe("2026-02-10");
+    expect(psql(`select count(*) from payout_scheduled_date_events where batch_id = '${batchId}';`)).toBe("1");
+    // **자동 송금은 여전히 제외** — Wise 게이트를 여는 순간 과거 건이 나가면 안 된다.
+    expect(psql(`select auto_dispatch_enabled from payout_batches where id = '${batchId}';`)).toBe("f");
+    expect(psql(`select count(*) from list_due_auto_dispatch_batches('2026-02-10') where batch_id = '${batchId}';`)).toBe("0");
+  });
+
+  it("관리자가 명시적으로 포함시키면 그때부터 대상이 된다", () => {
+    const batchId = legacyApprovedBatch("backfill-include");
+    psql(`select ensure_payout_batch_scheduled_date('${batchId}'::uuid, '${ADMIN_ID}'::uuid);`);
+
+    psql(`select set_payout_batch_auto_dispatch('${batchId}'::uuid, true, '${ADMIN_ID}'::uuid);`);
+
+    expect(psql(`select count(*) from list_due_auto_dispatch_batches('2026-02-10') where batch_id = '${batchId}';`)).toBe("1");
+  });
+
+  it("이미 예정일이 있으면 덮어쓰지 않는다(관리자가 지정한 날짜 보호)", () => {
+    const { batchId } = createApprovedBatch("keep-date", "2027-11-10");
+    psql(`select set_payout_batch_scheduled_date('${batchId}'::uuid, '2028-01-15', '협의된 날짜', '${ADMIN_ID}'::uuid);`);
+
+    psql(`select ensure_payout_batch_scheduled_date('${batchId}'::uuid, '${ADMIN_ID}'::uuid);`);
+
+    expect(psql(`select scheduled_payout_date from payout_batches where id = '${batchId}';`)).toBe("2028-01-15");
+  });
+
+  it("승인 전 묶음에는 예정일을 확정할 수 없다", () => {
+    const teacher = createTeacher("backfill-unapproved");
+    const batchId = psql(
+      `insert into payout_batches (teacher_id, period_start, period_end, currency, status)
+       values ('${teacher}', '2026-02-01', '2026-02-28', 'KRW', 'calculated') returning id;`
+    );
+    expect(() => psql(`select ensure_payout_batch_scheduled_date('${batchId}'::uuid, '${ADMIN_ID}'::uuid);`)).toThrow(
+      /송금 승인된 묶음만/
+    );
   });
 });

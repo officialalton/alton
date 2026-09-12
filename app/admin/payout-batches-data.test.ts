@@ -110,6 +110,9 @@ describe("loadPayoutBatches", () => {
 
     const result = await loadPayoutBatches(supabase);
     expect(result[0].teacherName).toBe("알 수 없음");
-    expect(result[0].auditLog[0].actorName).toBe("알 수 없음");
+    // 2026-09-12(UAT 후속): 감사 로그의 처리자는 이제 별도 조회한다. 그래도 찾을 수
+    // 없으면 "알 수 없음" 대신 "(삭제된 계정)"으로 구분해 보여준다 — 예전에는 관리자
+    // 이름을 조회하지 않아 정상 처리 건까지 전부 "알 수 없음"이었다.
+    expect(result[0].auditLog[0].actorName).toBe("(삭제된 계정)");
   });
 });

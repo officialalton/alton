@@ -123,11 +123,11 @@ describe("SettlementTab — 예정액 요약", () => {
     expect(screen.queryByText("확정(지급 대기)")).not.toBeInTheDocument();
   });
 
-  it("매월 10일 전월분 지급 안내와 예정 금액의 지급 예정일을 함께 보여준다", async () => {
+  it("매월 10일 전월분 지급 안내와 갱신 시각·변동 안내를 보여준다", async () => {
     render(<SettlementTab />);
     expect(await screen.findByText(/매월 10일에 전월 수업분을 지급합니다/)).toBeInTheDocument();
-    // <b> 때문에 텍스트가 여러 노드로 쪼개져 있어 컨테이너 기준으로 확인한다.
-    expect(screen.getByText(/송금 승인 시점에 정해집니다/)).toBeInTheDocument();
+    // 2026-09-12: "승인 시점에 정해집니다" 문구는 제품 오너 요청으로 제거했다.
+    expect(screen.queryByText(/송금 승인 시점에 정해집니다/)).not.toBeInTheDocument();
     expect(screen.getByText(/마지막 갱신:/)).toBeInTheDocument();
     expect(screen.getByText(/확정 전까지 금액이 변동될 수 있습니다/)).toBeInTheDocument();
     expect(screen.getByText(/공제를 반영하지 않은 총액/)).toBeInTheDocument();

@@ -213,7 +213,8 @@ export async function recordExternalPayoutTransfer(params: {
   transferredOn: string;
   amountMinor: number;
   currency: string;
-  bankReference: string;
+  /** 송금 확인 메모(선택). 이체확인증 번호·은행 거래 ID·내부 전표 번호 등 사후 대사 보조 정보. */
+  bankReference?: string;
   memo?: string;
 }): Promise<PayoutActionResult> {
   const { adminUserId } = await requireAdmin();
@@ -223,8 +224,30 @@ export async function recordExternalPayoutTransfer(params: {
     p_transferred_on: params.transferredOn,
     p_amount_minor: params.amountMinor,
     p_currency: params.currency,
-    p_bank_reference: params.bankReference,
+    p_bank_reference: params.bankReference ?? null,
     p_memo: params.memo ?? null,
+    p_actor_id: adminUserId,
+  });
+  if (error) return { status: "rejected", error: error.message };
+  return { status: "ok" };
+}
+
+/** 지급 경계(real_disbursement_enabled) 상태 — 화면이 "지금 송금 요청"을 실행 버튼처럼
+ *  보여줄지, 비활성 안내로 보여줄지 판단하는 데 쓴다. */
+export async function getDisbursementGateEnabled(): Promise<boolean> {
+  await requireAdmin();
+  const admin = createAdminClient();
+  const { data, error } = await admin.rpc("real_disbursement_enabled");
+  if (error) throw new Error(error.message);
+  return Boolean(data);
+}
+
+/** 승인됐는데 지급 예정일이 비어 있는 묶음(도입 전 승인 건 등)을 안전하게 채운다. */
+export async function ensurePayoutBatchScheduledDate(batchId: string): Promise<PayoutActionResult> {
+  const { adminUserId } = await requireAdmin();
+  const admin = createAdminClient();
+  const { error } = await admin.rpc("ensure_payout_batch_scheduled_date", {
+    p_batch_id: batchId,
     p_actor_id: adminUserId,
   });
   if (error) return { status: "rejected", error: error.message };

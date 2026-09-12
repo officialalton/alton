@@ -24,6 +24,8 @@ export type PayoutBatchItem = {
   currency: string;
   payableMinutes: number;
   status: string;
+  /** 조정 항목이면 왜 조정했는지. 운영자가 목록에서 바로 알 수 있어야 한다. */
+  adjustmentReason: string | null;
 };
 
 export type PayoutBatchAuditEntry = {
@@ -72,7 +74,7 @@ export async function loadPayoutBatches(supabase: SupabaseClient): Promise<Payou
     supabase.from("profiles").select("id, name").in("id", teacherIds),
     supabase
       .from("payout_items")
-      .select("id, batch_id, item_type, amount_minor, currency, payable_minutes, status")
+      .select("id, batch_id, item_type, amount_minor, currency, payable_minutes, status, adjustment_reason")
       .in("batch_id", batchIds),
     supabase
       .from("payout_batch_audit_log")
@@ -92,17 +94,29 @@ export async function loadPayoutBatches(supabase: SupabaseClient): Promise<Payou
       currency: it.currency,
       payableMinutes: it.payable_minutes,
       status: it.status,
+      adjustmentReason: (it.adjustment_reason as string | null) ?? null,
     });
     itemsByBatch.set(it.batch_id, list);
   }
-  const actorNameById = nameById; // audit actor는 profiles.id를 참조(관리자/시스템)
+  // 2026-09-12(UAT 후속) — 감사 로그의 처리자가 전부 "알 수 없음"으로 보이던 원인:
+  // 여기서 쓰던 이름 맵은 **교사 id로만** 만들어져 관리자 id가 아예 들어 있지 않았다.
+  // 감사 로그에 실제로 찍히는 actor는 대부분 관리자이므로 그 id들을 따로 조회한다.
+  const auditActorIds = Array.from(
+    new Set((auditRows ?? []).map((a) => a.actor_id as string | null).filter((v): v is string => Boolean(v)))
+  ).filter((id) => !nameById.has(id));
+  const actorNameById = new Map(nameById);
+  if (auditActorIds.length > 0) {
+    const { data: actorProfiles } = await supabase.from("profiles").select("id, name").in("id", auditActorIds);
+    for (const p of actorProfiles ?? []) actorNameById.set(p.id as string, (p.name as string) ?? "");
+  }
   const auditByBatch = new Map<string, PayoutBatchAuditEntry[]>();
   for (const a of auditRows ?? []) {
     const list = auditByBatch.get(a.batch_id) ?? [];
     list.push({
       id: a.id,
       action: a.action,
-      actorName: a.actor_id ? actorNameById.get(a.actor_id) ?? "알 수 없음" : null,
+      // actor_id가 없으면 시스템(자동 마감·자동 송금)이 한 일이다.
+      actorName: a.actor_id ? actorNameById.get(a.actor_id) ?? "(삭제된 계정)" : null,
       note: a.note,
       createdAt: a.created_at,
     });
