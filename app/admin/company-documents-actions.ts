@@ -1,20 +1,24 @@
 "use server";
 
-import { requireAdminOrCapability } from "@/lib/admin-auth";
+import { requireAdmin } from "@/lib/admin-auth";
 import { driveFetch, getDriveTokenForCurrentEnv, DRIVE_API } from "@/lib/drive/fetch";
 import { recordDocumentAccess } from "@/lib/document-access-audit";
 
 // P4-3 4단계 — `문서 > 회사 문서`. Drive 전용 폴더를 **읽기 전용**으로 연결한다.
 //
-// 권한(2026-09-12 확정): 현재는 기존 관리자 계정으로 조회·다운로드한다.
-// 계정 id를 코드에 박지 않고 공통 권한 검사 함수를 쓴다. 향후 마스터/중간
-// 관리자 체계가 들어오면 업무별로 다시 좁힌다.
+// 권한(2026-09-12 확정): **관리자 전용이다.** 서버에서 관리자 자격을 명시적으로
+// 확인한다 — capability를 가졌더라도 관리자가 아니면 거부한다.
+//
+// capability를 OR 조건으로 함께 받는 게이트는 쓰지 않는다. 그런 게이트는
+// capability만 있어도 통과시키므로, "지금은 그 capability를 가진 사람이 없다"에
+// 기대는 셈이 된다. 그건 정책 보장이 아니라 우연이다. 향후 중간 관리자에게
+// 업무별 권한을 나눌 때 그 자리에서 게이트를 다시 정한다.
+//
+// 계정 id는 코드에 박지 않고 공통 권한 검사 함수를 쓴다.
 //
 // 외부 준비(전용 Shared Drive 생성·서비스 계정 초대·환경변수 설정)와 코드는
 // 분리한다. 플래그가 꺼져 있으면 Drive를 호출하지 않고 "아직 연결되지 않음"을
 // 돌려주므로, 준비 전에도 화면 흐름 전체를 확인할 수 있다.
-const CAPABILITY = "manage_company_documents";
-
 export type CompanyDocumentEntry = {
   id: string;
   name: string;
@@ -47,7 +51,7 @@ function driveConfig(): { driveId: string; rootFolderId: string } | null {
 export async function listCompanyDocumentsAction(
   folderId?: string
 ): Promise<CompanyDocumentsResult> {
-  await requireAdminOrCapability(CAPABILITY);
+  await requireAdmin();
 
   const config = driveConfig();
   if (!config) return { state: "not_configured" };
@@ -108,7 +112,7 @@ export type CompanyDocumentOpenResult =
 export async function openCompanyDocumentAction(
   fileId: string
 ): Promise<CompanyDocumentOpenResult> {
-  const { actorUserId } = await requireAdminOrCapability(CAPABILITY);
+  const { adminUserId } = await requireAdmin();
 
   const config = driveConfig();
   if (!config) return { ok: false, reason: "not_configured" };
@@ -141,7 +145,7 @@ export async function openCompanyDocumentAction(
     // 서버가 원본을 확보해 응답으로 넘긴 것까지 기록한다 — 브라우저 저장
     // 여부는 여기서도 알 수 없다.
     await recordDocumentAccess({
-      actorId: actorUserId,
+      actorId: adminUserId,
       targetKind: "company_document",
       targetId: fileId,
       action: "file_retrieved",

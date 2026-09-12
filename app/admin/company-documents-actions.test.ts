@@ -4,12 +4,12 @@ import { describe, expect, it, vi, beforeEach, afterEach } from "vitest";
 // 설정 전 안내·권한 없음·빈 폴더·조회 실패·파일 열기를 전부 테스트 데이터로 본다.
 // 실제 Drive 생성·서비스 계정 초대·환경변수 설정만 외부 준비로 남는다.
 
-const requireAdminOrCapability = vi.fn();
+const requireAdmin = vi.fn();
 const driveFetch = vi.fn();
 const insert = vi.fn(async () => ({ error: null }));
 
 vi.mock("@/lib/admin-auth", () => ({
-  requireAdminOrCapability: (...a: unknown[]) => requireAdminOrCapability(...a),
+  requireAdmin: (...a: unknown[]) => requireAdmin(...a),
 }));
 vi.mock("@/lib/drive/fetch", () => ({
   DRIVE_API: "https://drive.test/v3",
@@ -25,7 +25,7 @@ const originalEnv = { ...process.env };
 beforeEach(() => {
   vi.clearAllMocks();
   vi.resetModules();
-  requireAdminOrCapability.mockResolvedValue({ supabase: {}, actorUserId: "admin-1" });
+  requireAdmin.mockResolvedValue({ supabase: {}, adminUserId: "admin-1" });
 });
 
 afterEach(() => {
@@ -64,9 +64,9 @@ describe("설정 전에는 Drive를 호출하지 않는다", () => {
 describe("권한", () => {
   it("권한이 없으면 Drive에 손대기 전에 거부된다", async () => {
     configure();
-    requireAdminOrCapability.mockRejectedValue(new Error("이 작업을 수행할 권한이 없습니다."));
+    requireAdmin.mockRejectedValue(new Error("관리자만 사용할 수 있습니다."));
     const { listCompanyDocumentsAction } = await import("./company-documents-actions");
-    await expect(listCompanyDocumentsAction()).rejects.toThrow("이 작업을 수행할 권한이 없습니다.");
+    await expect(listCompanyDocumentsAction()).rejects.toThrow("관리자만 사용할 수 있습니다.");
     expect(driveFetch).not.toHaveBeenCalled();
   });
 
@@ -75,7 +75,7 @@ describe("권한", () => {
     driveFetch.mockResolvedValue({ json: async () => ({ files: [] }) });
     const { listCompanyDocumentsAction } = await import("./company-documents-actions");
     await listCompanyDocumentsAction();
-    expect(requireAdminOrCapability).toHaveBeenCalledWith("manage_company_documents");
+    expect(requireAdmin).toHaveBeenCalled();
   });
 });
 
@@ -167,28 +167,32 @@ describe("파일 열기", () => {
   });
 });
 
-// 현재 정책은 "관리자만 접근"이다. 실제 서버 조건이 그 정책과 같은지 확인한다.
-//
-// requireAdminOrCapability(cap)는 (role='admin') OR (cap 보유)로 통과시킨다.
-// manage_company_documents는 아직 아무에게도 부여돼 있지 않으므로, 현재
-// 통과하는 사람은 관리자뿐이다 — 정책과 일치한다. 나중에 중간 관리자에게
-// 이 capability를 부여하면 그 사람도 통과한다(의도된 확장 지점).
-describe("서버 권한 조건이 '관리자만 접근' 정책과 일치한다", () => {
-  it("게이트에 회사 문서 capability 이름을 넘긴다", async () => {
+// 정책은 "관리자만 접근"이다. 서버가 관리자 자격을 **명시적으로** 확인해야
+// 한다 — "지금은 그 capability를 가진 사람이 없으니 사실상 관리자만"은 정책
+// 보장이 아니다. 비관리자가 capability를 갖게 되는 순간 뚫린다.
+describe("서버가 관리자 자격을 명시적으로 확인한다", () => {
+  it("목록 조회는 requireAdmin을 부른다", async () => {
     configure();
     driveFetch.mockResolvedValue({ json: async () => ({ files: [] }) });
     const { listCompanyDocumentsAction } = await import("./company-documents-actions");
     await listCompanyDocumentsAction();
-    expect(requireAdminOrCapability).toHaveBeenCalledWith("manage_company_documents");
+    expect(requireAdmin).toHaveBeenCalled();
   });
 
-  it("파일 열기에도 같은 게이트를 건다", async () => {
+  it("파일 열기도 requireAdmin을 부르고, 거부되면 Drive에 손대지 않는다", async () => {
     configure();
-    requireAdminOrCapability.mockRejectedValue(new Error("이 작업을 수행할 권한이 없습니다."));
+    requireAdmin.mockRejectedValue(new Error("관리자만 사용할 수 있습니다."));
     const { openCompanyDocumentAction } = await import("./company-documents-actions");
-    await expect(openCompanyDocumentAction("f1")).rejects.toThrow();
-    expect(requireAdminOrCapability).toHaveBeenCalledWith("manage_company_documents");
+    await expect(openCompanyDocumentAction("f1")).rejects.toThrow("관리자만 사용할 수 있습니다.");
     expect(driveFetch).not.toHaveBeenCalled();
+  });
+
+  it("capability만으로 통과시키는 게이트를 쓰지 않는다", async () => {
+    const fs = await import("node:fs");
+    const src = fs.readFileSync("app/admin/company-documents-actions.ts", "utf-8");
+    // requireAdminOrCapability는 capability만 있어도 통과시킨다(OR).
+    expect(src).not.toContain("requireAdminOrCapability");
+    expect(src).not.toContain("requireCapabilityOnly");
   });
 
   it("계정 id를 코드에 박지 않는다", async () => {
