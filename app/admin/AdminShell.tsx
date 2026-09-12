@@ -314,6 +314,7 @@ export default function AdminShell({
             <BillingTab
               initialStudents={students}
               creditHistoryByStudent={creditHistoryByStudent}
+              subjects={subjects}
             />
           ) : activeTab === "entitlements" ? (
             <EntitlementLedgerTab

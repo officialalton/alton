@@ -2,7 +2,6 @@
 
 import { useEffect, useState, type MouseEvent } from "react";
 import {
-  inviteStudent,
   listParentsForUsersTabAction,
   listStudentsForUsersTabAction,
   listTeachersForUsersTabAction,
@@ -55,6 +54,13 @@ export default function UsersTab({
   subjects: AdminSubject[];
 }) {
   const [subtab, setSubtab] = useState<SubtabId>("parents");
+  // 2026-09-11(제품 오너 지시) — 학부모/학생/선생님 탭 우측 상단 검색.
+  // 이 화면들은 서브탭을 열 때 그 탭의 전체 목록을 한 번에 불러오고
+  // 페이지네이션이 없으므로(위 loadStudentsForUsersTabAction 등 참고),
+  // 이미 메모리에 있는 전체 목록에 클라이언트 필터만 적용해도 "해당 탭의
+  // 전체 검색 대상"을 그대로 만족한다 — 검색을 위해 서버에 추가 조회를
+  // 하거나 상세·커리큘럼을 미리 불러오지 않는다.
+  const [searchQuery, setSearchQuery] = useState("");
   // 2026-09-10(P1 — 학부모 SSR 회귀 조사 후속) — 학부모도 학생/선생님과
   // 동일하게 null=아직 조회 안 됨(스켈레톤), 빈 배열=조회했는데 0명을
   // 구분한다. parentsErrorCode가 있으면 목록 영역에만 "불러오지 못했습니다 ·
@@ -110,6 +116,30 @@ export default function UsersTab({
   const openStudent = students?.find((s) => s.id === openStudentId);
   const openTeacher = teachers?.find((t) => t.id === openTeacherId);
 
+  const normalizedQuery = searchQuery.trim().toLowerCase();
+  const filteredParents = !normalizedQuery
+    ? parents
+    : (parents ?? []).filter(
+        (p) =>
+          p.name.toLowerCase().includes(normalizedQuery) ||
+          p.email.toLowerCase().includes(normalizedQuery)
+      );
+  const filteredStudents = !normalizedQuery
+    ? students
+    : (students ?? []).filter(
+        (s) =>
+          s.name.toLowerCase().includes(normalizedQuery) ||
+          s.email.toLowerCase().includes(normalizedQuery) ||
+          s.parentNames.some((n) => n.toLowerCase().includes(normalizedQuery))
+      );
+  const filteredTeachers = !normalizedQuery
+    ? teachers
+    : (teachers ?? []).filter(
+        (t) =>
+          t.name.toLowerCase().includes(normalizedQuery) ||
+          t.email.toLowerCase().includes(normalizedQuery)
+      );
+
   function patchStudent(id: string, patch: Partial<StudentListItem>, newTx?: CreditTransaction) {
     setStudents((prev) => prev?.map((s) => (s.id === id ? { ...s, ...patch } : s)) ?? prev);
     if (newTx) {
@@ -130,6 +160,7 @@ export default function UsersTab({
       <StudentDetailPanel
         student={openStudent}
         history={history[openStudent.id] ?? []}
+        subjects={subjects}
         onBack={() => setOpenStudentId(null)}
         onUpdated={(patch, newTx) => patchStudent(openStudent.id, patch, newTx)}
       />
@@ -152,19 +183,29 @@ export default function UsersTab({
     <div className="max-w-[640px] px-8 py-8">
       <h1 className="text-[20px] font-extrabold text-ink mb-5">사용자</h1>
 
-      <div className="flex gap-4 mb-5 border-b border-grey-200">
-        {SUBTABS.map((t) => (
-          <button
-            key={t.id}
-            onClick={() => setSubtab(t.id)}
-            className={
-              "text-[13.5px] font-semibold pb-2.5 -mb-px border-b-2 " +
-              (subtab === t.id ? "text-ink border-ink" : "text-grey-500 border-transparent")
-            }
-          >
-            {t.label}
-          </button>
-        ))}
+      <div className="flex items-center justify-between mb-5 border-b border-grey-200">
+        <div className="flex gap-4">
+          {SUBTABS.map((t) => (
+            <button
+              key={t.id}
+              onClick={() => setSubtab(t.id)}
+              className={
+                "text-[13.5px] font-semibold pb-2.5 -mb-px border-b-2 " +
+                (subtab === t.id ? "text-ink border-ink" : "text-grey-500 border-transparent")
+              }
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+        {(subtab === "parents" || subtab === "students" || subtab === "teachers") && (
+          <input
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder={subtab === "students" ? "이름·이메일·보호자 이름 검색" : "이름·이메일 검색"}
+            className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 mb-2.5 w-[220px]"
+          />
+        )}
       </div>
 
       {subtab === "parents" && parents === null && !parentsErrorCode && (
@@ -202,7 +243,10 @@ export default function UsersTab({
 
       {subtab === "parents" && parents !== null && (
         <>
-          {parents.map((p) => (
+          {(filteredParents ?? []).length === 0 && normalizedQuery && (
+            <p className="text-[12.5px] text-grey-500 mb-3">검색 결과가 없습니다.</p>
+          )}
+          {(filteredParents ?? []).map((p) => (
             <div
               key={p.id}
               className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5"
@@ -258,7 +302,10 @@ export default function UsersTab({
 
       {subtab === "students" && students !== null && (
         <>
-          {students.map((s) => (
+          {(filteredStudents ?? []).length === 0 && normalizedQuery && (
+            <p className="text-[12.5px] text-grey-500 mb-3">검색 결과가 없습니다.</p>
+          )}
+          {(filteredStudents ?? []).map((s) => (
             <div key={s.id} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5">
               <button
                 onClick={() => setOpenStudentId(s.id)}
@@ -286,45 +333,6 @@ export default function UsersTab({
               </div>
             </div>
           ))}
-          <InviteForm
-            fields={["name", "email", "grade", "parentId"]}
-            parents={parents ?? []}
-            submitLabel="학생 초대"
-            onSubmit={async (values) => {
-              if (!values.parentId) throw new Error("학부모를 선택해주세요.");
-              await inviteStudent({
-                name: values.name,
-                email: values.email,
-                grade: values.grade,
-                parentId: values.parentId,
-              });
-              const parent = (parents ?? []).find((p) => p.id === values.parentId);
-              setStudents((prev) => [
-                {
-                  id: `pending-${Date.now()}`,
-                  name: values.name,
-                  email: values.email,
-                  grade: values.grade || null,
-                  status: "pending",
-                  creditBalance: 0,
-                  parentNames: parent ? [parent.name] : [],
-                  subjectNames: [],
-                  dateOfBirth: null,
-                  dateOfBirthVerifiedAt: null,
-                  schoolName: null,
-                  satScore: null,
-                  gpa: null,
-                  gpaScale: null,
-                  targetColleges: [],
-                  intendedMajors: [],
-                  profileCompletedAt: null,
-                  apCourseCount: 0,
-                  extracurricularCount: 0,
-                },
-                ...(prev ?? []),
-              ]);
-            }}
-          />
         </>
       )}
 
@@ -347,7 +355,10 @@ export default function UsersTab({
 
       {subtab === "teachers" && teachers !== null && (
         <>
-          {teachers.map((t) => (
+          {(filteredTeachers ?? []).length === 0 && normalizedQuery && (
+            <p className="text-[12.5px] text-grey-500 mb-3">검색 결과가 없습니다.</p>
+          )}
+          {(filteredTeachers ?? []).map((t) => (
             <button
               key={t.id}
               onClick={() => setOpenTeacherId(t.id)}

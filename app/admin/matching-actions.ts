@@ -10,8 +10,24 @@
 // 공통 경로만 호출한다. 총 회차 수 파라미터는 이 경로에 존재하지 않는다.
 
 import { confirmStudentTeacherSubjectMatch, type ConfirmStudentTeacherSubjectMatchResult } from "./matching-common-actions";
+import { requireAdminOrCapability } from "@/lib/admin-auth";
+import { createAdminClient } from "@/lib/supabase-admin";
+import { loadTeacherCandidatesBySubject, type MatchingTeacherCandidate } from "./matching-data";
+
+const MATCHING_CAPABILITY = "매칭권한";
 
 export type ConfirmMatchResult = ConfirmStudentTeacherSubjectMatchResult;
+
+// 2026-09-11(매칭 관리를 학생 프로필로 이전) — 과목별 배정 가능 선생님
+// 목록은 학생 개별 데이터가 아니라 전역 데이터라, 학생 프로필을 열 때마다
+// 새로 계산할 필요는 없지만 그렇다고 모든 학생 목록 조회 시점에 미리
+// 가져올 이유도 없다 — "+ 과목 매칭"을 실제로 열 때만 조회한다.
+export async function loadTeacherCandidatesBySubjectAction(): Promise<
+  Record<string, MatchingTeacherCandidate[]>
+> {
+  await requireAdminOrCapability(MATCHING_CAPABILITY);
+  return loadTeacherCandidatesBySubject(createAdminClient());
+}
 
 export async function confirmMatch(
   studentId: string,

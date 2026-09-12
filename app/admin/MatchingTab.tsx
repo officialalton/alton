@@ -4,24 +4,24 @@ import { useEffect, useState } from "react";
 import { confirmMatch } from "./matching-actions";
 import type { MatchingTeacherCandidate, MatchingStudentItem } from "./matching-data";
 import { selectableSubjects, type AdminSubject } from "./subject-data";
-import SubjectEnrollmentPanel from "./SubjectEnrollmentPanel";
 import TeacherAssignmentTerminationPanel from "./TeacherAssignmentTerminationPanel";
 import { countPendingTerminationRequests } from "./teacher-assignment-termination-actions";
 
-type MatchingSubtab = "waiting" | "manage" | "closure";
+type MatchingSubtab = "waiting" | "closure";
 
-const SUBTABS: { id: MatchingSubtab; label: string }[] = [
-  { id: "waiting", label: "매칭 대기" },
-  { id: "manage", label: "매칭 관리" },
-  { id: "closure", label: "종료 요청" },
-];
+const SUBTAB_LABEL: Record<MatchingSubtab, string> = {
+  waiting: "매칭 대기",
+  closure: "종료 요청",
+};
 
-// 2026-09-11(제품 오너 지시) — 기존엔 "매칭 대기 목록 + 과목 수강·매칭(R5)
-// + 종료 요청"을 한 화면에 전부 쌓아 보여줬다(탭이 없어 세 영역 모두 항상
-// 마운트·조회됨). 세 영역을 서브탭으로 분리해 선택한 탭의 데이터만
-// 조회하도록 바꾼다 — 기존 매칭·종료 처리 로직(confirmMatch,
-// SubjectEnrollmentPanel/TeacherAssignmentTerminationPanel 내부 서버
-// 액션)은 그대로 재사용하고 화면 구조·문구만 정리한다.
+// 2026-09-11(제품 오너 지시 — 정보 구조 재편) — "매칭 관리"(진행 중인
+// 과목별 매칭 조회·선생님 변경·매칭 종료)는 학생 개별 데이터라 여기(전체
+// 학생을 다루는 화면)가 아니라 "사용자 > 학생 > 학생 프로필"로 옮겼다
+// (SubjectEnrollmentPanel 참고). 이 화면은 이제 "매칭 대기"(신규 매칭
+// 확정)와 "종료 요청"(교사·보호자가 접수한 요청 처리) 두 가지만 다룬다 —
+// 둘 다 여러 학생을 한 번에 훑어야 하는 진짜 "목록" 성격의 화면이라 그대로
+// 남긴다. 각 탭 배지는 그 탭과 같은 기준의 건수만 보여주고, 탭을 열지
+// 않은 상태에서는 상세 데이터를 조회하지 않는다.
 export default function MatchingTab({
   students,
   subjects,
@@ -71,29 +71,32 @@ export default function MatchingTab({
     <div className="max-w-[720px] px-8 py-8">
       <h1 className="text-[20px] font-extrabold text-ink mb-1.5">매칭</h1>
       <p className="text-[13px] text-grey-500 mb-5">
-        학생·선생님 매칭 확정, 진행 중인 매칭 관리, 종료 요청 처리를 다룹니다.
+        신규 매칭 확정과 종료 요청 처리를 다룹니다. 진행 중인 매칭 관리는 사용자 &gt; 학생의 학생 프로필에서 합니다.
       </p>
 
       <div className="flex gap-1.5 mb-6 border-b border-grey-200">
-        {SUBTABS.map((t) => (
-          <button
-            key={t.id}
-            onClick={() => setSubtab(t.id)}
-            className={
-              "text-[13px] font-bold px-3.5 py-2 -mb-px border-b-2 " +
-              (subtab === t.id
-                ? "border-ink text-ink"
-                : "border-transparent text-grey-400")
-            }
-          >
-            {t.label}
-            {t.id === "closure" && pendingClosureCount != null && pendingClosureCount > 0 && (
-              <span className="ml-1.5 inline-flex items-center justify-center text-[11px] font-bold text-white bg-red rounded-full min-w-[18px] h-[18px] px-1">
-                {pendingClosureCount}
-              </span>
-            )}
-          </button>
-        ))}
+        {(Object.keys(SUBTAB_LABEL) as MatchingSubtab[]).map((id) => {
+          const count = id === "waiting" ? pending.length : pendingClosureCount;
+          return (
+            <button
+              key={id}
+              onClick={() => setSubtab(id)}
+              className={
+                "text-[13px] font-bold px-3.5 py-2 -mb-px border-b-2 " +
+                (subtab === id
+                  ? "border-ink text-ink"
+                  : "border-transparent text-grey-400")
+              }
+            >
+              {SUBTAB_LABEL[id]}
+              {count != null && count > 0 && (
+                <span className="ml-1.5 inline-flex items-center justify-center text-[11px] font-bold text-white bg-red rounded-full min-w-[18px] h-[18px] px-1">
+                  {count}
+                </span>
+              )}
+            </button>
+          );
+        })}
       </div>
 
       {subtab === "waiting" && (
@@ -128,14 +131,6 @@ export default function MatchingTab({
             ))
           )}
         </>
-      )}
-
-      {subtab === "manage" && (
-        <SubjectEnrollmentPanel
-          students={students}
-          subjects={subjects}
-          teacherCandidatesBySubject={teacherCandidatesBySubject}
-        />
       )}
 
       {subtab === "closure" && (

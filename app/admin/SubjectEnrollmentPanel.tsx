@@ -1,9 +1,17 @@
 "use client";
 
-// R5 — 과목 수강/선생님 배정 관리자 패널. 기존 "매칭"(MatchingTab) 탭 안에
-// 추가 섹션으로 얹는다(spec: 큰 신규 최상위 화면을 만들지 않는다). 학생 ID로
-// 조회해 과목 수강 목록/상태/현재 선생님/배정 이력/미래 예약 영향/문서 권한
-// 재처리 큐를 보여주고, 활성화·배정·변경·종료를 처리한다.
+// R5 — 과목 수강/선생님 배정 관리자 패널. 특정 학생 하나의 과목 수강
+// 목록/상태/현재 선생님/배정 이력/미래 예약 영향/문서 권한 재처리 큐를
+// 보여주고, 활성화·배정·변경·종료를 처리한다.
+//
+// 2026-09-11(제품 오너 지시 — 정보 구조 재편) — 원래 이 패널은 "매칭"
+// 탭 안에서 학생을 고르는 버튼 목록(모든 학생)을 함께 그렸다. 이제 이
+// 화면 자체는 "사용자 > 학생 > 학생 프로필"(StudentDetailPanel) 안에
+// 그 학생 하나만을 위해 내장되므로, 학생 선택 UI는 제거하고 이미 정해진
+// childId 하나만 받는다. teacherCandidatesBySubject(과목별 배정 가능
+// 선생님)는 학생 개별 데이터가 아니라 전역 데이터라 이 컴포넌트가 열릴
+// 때(=학생 프로필을 열 때) 그 자리에서 한 번만 조회한다(모든 학생 목록을
+// 불러오는 시점에는 조회하지 않음).
 //
 // C-2(2차, 2026-09-11, 제품 오너 지시) — 세 가지를 한 번에 정리했다.
 // 1. "새 과목 수강 계획" 드롭다운이 종료(terminated)된 과목까지 후보에서
@@ -45,7 +53,8 @@ import {
 } from "./teacher-assignment-termination-actions";
 import type { TerminationImpactReservation } from "@/lib/enrollment/teacher-assignment-termination";
 import { selectableSubjects, type AdminSubject } from "./subject-data";
-import type { MatchingTeacherCandidate, MatchingStudentItem } from "./matching-data";
+import type { MatchingTeacherCandidate } from "./matching-data";
+import { loadTeacherCandidatesBySubjectAction } from "./matching-actions";
 
 // C-2(2차, 2026-09-11, 제품 오너 정책 확정) — "수강 종료"와 "매칭 종료"를
 // 별도 사용자 기능으로 나누지 않고 화면 용어를 "매칭"으로 통일한다(새
@@ -70,22 +79,25 @@ function describeEnrollmentStatus(en: SubjectEnrollmentListItem): string {
 }
 
 export default function SubjectEnrollmentPanel({
-  students,
+  childId,
   subjects,
-  teacherCandidatesBySubject,
 }: {
-  // 2026-09-10(P1) — id·name만 쓰므로 매칭 전용 경량 타입으로 충분하다.
-  students: MatchingStudentItem[];
+  childId: string;
   subjects: AdminSubject[];
-  teacherCandidatesBySubject: Record<string, MatchingTeacherCandidate[]>;
 }) {
-  const [childId, setChildId] = useState<string>("");
   const [enrollments, setEnrollments] = useState<SubjectEnrollmentListItem[] | null>(null);
+  const [teacherCandidatesBySubject, setTeacherCandidatesBySubject] = useState<
+    Record<string, MatchingTeacherCandidate[]>
+  >({});
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [history, setHistory] = useState<TeacherAssignmentHistoryItem[]>([]);
   const [impact, setImpact] = useState<FutureBookingImpactItem[]>([]);
   const [retries, setRetries] = useState<DocumentPermissionRetryItem[] | null>(null);
   const [terminatingId, setTerminatingId] = useState<string | null>(null);
+  // 2026-09-11(제품 오너 지시) — "+ 과목 매칭"은 프로필 상단의 명시적
+  // 트리거다. 기본은 접힘(기존 매칭·상태를 먼저 보여주고, 새 배정 폼은
+  // 필요할 때만).
+  const [showAssignForm, setShowAssignForm] = useState(false);
   const [busy, setBusy] = useState(false);
   // C-2(2차, 2026-09-11, Preview UAT 지적) — 성공 메시지도 항상 빨간색(오류
   // 색상)으로 표시되던 버그 수정. 종류를 함께 들고 다녀 성공/오류를 다른
@@ -99,21 +111,33 @@ export default function SubjectEnrollmentPanel({
     setMessage({ text, kind: "success" });
   }
 
-  async function loadForChild(id: string) {
-    setChildId(id);
+  useEffect(() => {
+    let cancelled = false;
     setBusy(true);
     setMessage(null);
-    try {
-      setEnrollments(await listSubjectEnrollmentsForChild(id));
-    } catch (e) {
-      showError(e instanceof Error ? e.message : "조회 실패");
-    } finally {
-      setBusy(false);
-    }
-  }
+    Promise.all([
+      listSubjectEnrollmentsForChild(childId),
+      loadTeacherCandidatesBySubjectAction(),
+    ])
+      .then(([enrollmentsData, candidates]) => {
+        if (cancelled) return;
+        setEnrollments(enrollmentsData);
+        setTeacherCandidatesBySubject(candidates);
+      })
+      .catch((e) => {
+        if (!cancelled) showError(e instanceof Error ? e.message : "조회 실패");
+      })
+      .finally(() => {
+        if (!cancelled) setBusy(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [childId]);
 
   async function refresh() {
-    if (childId) setEnrollments(await listSubjectEnrollmentsForChild(childId));
+    setEnrollments(await listSubjectEnrollmentsForChild(childId));
   }
 
   async function expand(enrollmentId: string) {
@@ -270,25 +294,17 @@ export default function SubjectEnrollmentPanel({
   );
 
   return (
-    <div className="max-w-[720px] px-8 py-8 border-t border-grey-200 mt-6">
-      <h2 className="text-[16px] font-extrabold text-ink mb-1.5">진행 중인 매칭 관리</h2>
-      <p className="text-[12.5px] text-grey-500 mb-4">
-        학생을 선택해 과목별 수강 상태·현재 선생님·매칭 이력을 확인하고, 활성화·매칭·선생님 변경·매칭 종료를 처리합니다.
-      </p>
-
-      <div className="flex flex-wrap gap-2 mb-4">
-        {students.map((s) => (
-          <button
-            key={s.id}
-            onClick={() => loadForChild(s.id)}
-            className={
-              "text-[12px] font-semibold px-3 py-1.5 rounded-full border-[1.5px] " +
-              (childId === s.id ? "bg-ink text-white border-ink" : "border-grey-200 text-ink")
-            }
-          >
-            {s.name}
-          </button>
-        ))}
+    <div>
+      <div className="flex items-center justify-between mb-3">
+        <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide">
+          수강 과목 · 매칭
+        </div>
+        <button
+          onClick={() => setShowAssignForm((v) => !v)}
+          className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white"
+        >
+          {showAssignForm ? "닫기" : "+ 과목 매칭"}
+        </button>
       </div>
 
       {message && (
@@ -298,12 +314,15 @@ export default function SubjectEnrollmentPanel({
       )}
       {busy && <p className="text-[12.5px] text-grey-500 mb-3">처리 중...</p>}
 
-      {childId && (
+      {showAssignForm && (
         <AssignTeacherForm
           subjects={subjects}
           teacherCandidatesBySubject={teacherCandidatesBySubject}
           blockedSubjectIds={subjectIdsWithActiveTeacher}
-          onAssign={handleAssign}
+          onAssign={(teacherId, subjectId) => {
+            setShowAssignForm(false);
+            handleAssign(teacherId, subjectId);
+          }}
         />
       )}
 

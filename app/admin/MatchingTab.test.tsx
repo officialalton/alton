@@ -8,14 +8,9 @@ import type { AdminSubject } from "./subject-data";
 vi.mock("./matching-actions", () => ({
   confirmMatch: vi.fn(),
 }));
-// R5: SubjectEnrollmentPanel은 이 컴포넌트와 별개 관심사(과목 수강/선생님 배정)이고
-// students 전체(활성 학생 포함)를 보여주는 게 의도된 동작이라, 이 파일의
-// "매칭 대기 학생만 보인다" 단언과 충돌한다 — 자체 테스트(SubjectEnrollmentPanel용
-// 별도 테스트에서 다룸)가 있으므로 여기서는 mock으로 대체한다.
-const subjectEnrollmentPanelMock = vi.fn((_props: unknown) => null);
-vi.mock("./SubjectEnrollmentPanel", () => ({
-  default: (props: unknown) => subjectEnrollmentPanelMock(props),
-}));
+// 2026-09-11(제품 오너 지시 — 정보 구조 재편) — "매칭 관리"(SubjectEnrollmentPanel)는
+// 이제 이 화면이 아니라 학생 프로필에서 렌더링된다(전용 테스트는
+// SubjectEnrollmentPanel.test.tsx에서 다룸) — 여기서는 더 이상 쓰이지 않는다.
 const terminationPanelMock = vi.fn((_props: unknown) => null);
 vi.mock("./TeacherAssignmentTerminationPanel", () => ({
   default: (props: unknown) => terminationPanelMock(props),
@@ -63,11 +58,10 @@ const teacherCandidatesBySubject = {
 };
 
 describe("MatchingTab", () => {
-  // 2026-09-11(매칭 화면 서브탭 분리) — 탭을 시각적으로만 숨긴 채 세 영역
-  // 데이터를 전부 가져오면 안 된다는 요구사항 회귀 테스트: 선택하지 않은
-  // 서브탭의 패널은 아예 마운트되지 않아야 한다.
-  it("서브탭을 선택해야 그 패널이 마운트된다(선택하지 않은 탭의 상세 조회를 미리 하지 않는다)", () => {
-    subjectEnrollmentPanelMock.mockClear();
+  // 2026-09-11(매칭 화면 서브탭 분리) — 탭을 시각적으로만 숨긴 채 상세
+  // 데이터를 전부 가져오면 안 된다는 요구사항 회귀 테스트: "종료 요청"
+  // 탭을 열기 전까지 그 패널은 마운트되지 않아야 한다.
+  it("종료 요청 탭을 선택해야 그 패널이 마운트된다(선택하지 않으면 상세 조회를 미리 하지 않는다)", () => {
     terminationPanelMock.mockClear();
     render(
       <MatchingTab
@@ -76,15 +70,25 @@ describe("MatchingTab", () => {
         teacherCandidatesBySubject={teacherCandidatesBySubject}
       />
     );
-    expect(subjectEnrollmentPanelMock).not.toHaveBeenCalled();
-    expect(terminationPanelMock).not.toHaveBeenCalled();
-
-    fireEvent.click(screen.getByText("매칭 관리"));
-    expect(subjectEnrollmentPanelMock).toHaveBeenCalledTimes(1);
     expect(terminationPanelMock).not.toHaveBeenCalled();
 
     fireEvent.click(screen.getByText("종료 요청"));
     expect(terminationPanelMock).toHaveBeenCalledTimes(1);
+  });
+
+  // 2026-09-11(제품 오너 지시) — "매칭 대기" 탭도 현재 대기 목록과 동일한
+  // 기준의 학생 수 배지를 보여줘야 한다(전체 상세를 다시 읽지 않고, 이미
+  // 가진 students prop에서 계산).
+  it("매칭 대기 탭에 대기 학생 수 배지를 보여준다", () => {
+    render(
+      <MatchingTab
+        students={[pendingStudent, activeStudent]}
+        subjects={subjects}
+        teacherCandidatesBySubject={teacherCandidatesBySubject}
+      />
+    );
+    const waitingTab = screen.getByText("매칭 대기").closest("button")!;
+    expect(within(waitingTab).getByText("1")).toBeInTheDocument();
   });
 
   it("매칭 대기(pending) 학생만 목록에 보여준다", () => {

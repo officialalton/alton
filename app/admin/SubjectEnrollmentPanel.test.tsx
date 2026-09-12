@@ -19,6 +19,7 @@ vi.mock("./subject-enrollment-actions", () => ({
 
 vi.mock("./matching-actions", () => ({
   confirmMatch: vi.fn(),
+  loadTeacherCandidatesBySubjectAction: vi.fn().mockResolvedValue({}),
 }));
 
 vi.mock("./teacher-assignment-termination-actions", () => ({
@@ -74,10 +75,9 @@ describe("SubjectEnrollmentPanel", () => {
     ]);
 
     render(
-      <SubjectEnrollmentPanel students={[student]} subjects={subjects} teacherCandidatesBySubject={{}} />
+      <SubjectEnrollmentPanel childId="st1" subjects={subjects} />
     );
 
-    fireEvent.click(screen.getByText("지훈"));
 
     await waitFor(() => expect(screen.getByText(/SAT Math/)).toBeInTheDocument());
     expect(screen.getByRole("button", { name: "활성화" })).toBeInTheDocument();
@@ -105,9 +105,8 @@ describe("SubjectEnrollmentPanel", () => {
     });
 
     render(
-      <SubjectEnrollmentPanel students={[student]} subjects={subjects} teacherCandidatesBySubject={{}} />
+      <SubjectEnrollmentPanel childId="st1" subjects={subjects} />
     );
-    fireEvent.click(screen.getByText("지훈"));
     await waitFor(() => screen.getByRole("button", { name: "활성화" }));
     fireEvent.click(screen.getByRole("button", { name: "활성화" }));
 
@@ -158,15 +157,15 @@ describe("SubjectEnrollmentPanel", () => {
       curriculumWarning: null,
     });
     vi.spyOn(window, "confirm").mockReturnValue(true);
+    vi.mocked(matchingActions.loadTeacherCandidatesBySubjectAction).mockResolvedValue({
+      sub2: [{ id: "t3", name: "이도현" }],
+    });
 
     render(
-      <SubjectEnrollmentPanel
-        students={[student]}
-        subjects={subjects}
-        teacherCandidatesBySubject={{ sub2: [{ id: "t3", name: "이도현" }] }}
-      />
+      <SubjectEnrollmentPanel childId="st1" subjects={subjects} />
     );
-    fireEvent.click(screen.getByText("지훈"));
+    await waitFor(() => screen.getByText("+ 과목 매칭"));
+    fireEvent.click(screen.getByText("+ 과목 매칭"));
     await waitFor(() => screen.getByText(/새 매칭: 과목 선택/));
 
     // sub1(활성 배정 있음)은 후보로 없고, sub2(terminated)는 있어야 한다.
@@ -213,9 +212,8 @@ describe("SubjectEnrollmentPanel", () => {
     vi.mocked(terminationActions.adminTerminateAssignmentNow).mockResolvedValue({ status: "completed" });
 
     render(
-      <SubjectEnrollmentPanel students={[student]} subjects={subjects} teacherCandidatesBySubject={{}} />
+      <SubjectEnrollmentPanel childId="st1" subjects={subjects} />
     );
-    fireEvent.click(screen.getByText("지훈"));
     await waitFor(() => screen.getByText("매칭 종료"));
     fireEvent.click(screen.getByText("매칭 종료"));
 
@@ -273,9 +271,8 @@ describe("SubjectEnrollmentPanel", () => {
     ]);
 
     render(
-      <SubjectEnrollmentPanel students={[student]} subjects={subjects} teacherCandidatesBySubject={{}} />
+      <SubjectEnrollmentPanel childId="st1" subjects={subjects} />
     );
-    fireEvent.click(screen.getByText("지훈"));
     await waitFor(() => screen.getByText("매칭 종료"));
     fireEvent.click(screen.getByText("매칭 종료"));
 

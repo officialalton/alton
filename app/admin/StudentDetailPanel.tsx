@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { setStudentStatus, adjustStudentCredit, verifyStudentDateOfBirth } from "./users-actions";
 import type { CreditTransaction, StudentListItem } from "./users-data";
+import SubjectEnrollmentPanel from "./SubjectEnrollmentPanel";
+import type { AdminSubject } from "./subject-data";
 
 const STATUS_LABEL: Record<string, string> = {
   active: "활성",
@@ -21,11 +23,13 @@ const TX_TYPE_LABEL: Record<string, string> = {
 export default function StudentDetailPanel({
   student,
   history,
+  subjects,
   onBack,
   onUpdated,
 }: {
   student: StudentListItem;
   history: CreditTransaction[];
+  subjects: AdminSubject[];
   onBack: () => void;
   onUpdated: (patch: Partial<StudentListItem>, newTx?: CreditTransaction) => void;
 }) {
@@ -170,14 +174,20 @@ export default function StudentDetailPanel({
 
       <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">
         <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2">
-          학부모 / 담당 과목
+          학부모
         </div>
         <p className="text-[13px] text-ink">
           {student.parentNames.length ? student.parentNames.join(", ") : "연결된 학부모 없음"}
         </p>
-        <p className="text-[13px] text-ink mt-1">
-          {student.subjectNames.length ? student.subjectNames.join(", ") : "매칭된 과목 없음"}
-        </p>
+      </div>
+
+      {/* 2026-09-11(제품 오너 지시 — 정보 구조 재편) — "매칭 관리"(과목별
+          수강 상태·현재 선생님·매칭 이력, "+ 과목 매칭", 선생님 변경·매칭
+          종료)를 관리자 "매칭" 화면에서 이 학생 프로필로 옮겼다. 처리 로직은
+          SubjectEnrollmentPanel(공통 처리 경로) 그대로 재사용 — 화면
+          위치만 이동. */}
+      <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">
+        <SubjectEnrollmentPanel childId={student.id} subjects={subjects} />
       </div>
 
       <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">
