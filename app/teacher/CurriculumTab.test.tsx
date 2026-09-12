@@ -229,7 +229,7 @@ describe("CurriculumTab", () => {
   // — 캐시가 있다고 서버 호출 자체를 건너뛰면 (1) 이전 방문 중 저장한 편집
   // 내용이 반영 안 된 오래된 화면을 보여줄 수 있고, (2) 선생님 변경·매칭
   // 종료 후에도 권한 재검증 없이 화면이 그대로 열릴 수 있다.
-  it("운영 커리큘럼↔세션 준비를 오가도 매번 서버에서 다시 검증·조회한다(캐시로 요청을 건너뛰지 않음)", async () => {
+  it("운영 커리큘럼에 들어가면 서버에서 검증·조회한다(캐시로 요청을 건너뛰지 않음)", async () => {
     const mockFn = loadStudentCurriculumPanelData as ReturnType<typeof vi.fn>;
     mockFn.mockClear();
     mockFn.mockResolvedValue({
@@ -246,14 +246,14 @@ describe("CurriculumTab", () => {
     await waitFor(() => expect(screen.getByText("학생 운영 커리큘럼")).toBeInTheDocument());
     expect(mockFn).toHaveBeenCalledTimes(1);
 
-    fireEvent.click(screen.getByText("세션 준비 하기 →"));
-    await waitFor(() => expect(screen.getByText("세션 준비")).toBeInTheDocument());
-    // 부모 캐시가 있어 화면은 바로 뜨지만, 서버 재검증 호출은 여전히 나가야 한다.
-    expect(mockFn).toHaveBeenCalledTimes(2);
+    // P2/P3(2026-09-12) — 준비 화면은 회차 준비 하나로 통일했다. 별도
+    // "세션 준비" 진입점은 제거했으므로 그 왕복 자체가 없다.
+    expect(screen.queryByText("세션 준비 하기 →")).not.toBeInTheDocument();
+    expect(mockFn).toHaveBeenNthCalledWith(1, "se1", "sub1");
+  });
 
-    fireEvent.click(screen.getByText("← 뒤로"));
-    await waitFor(() => expect(screen.getByText("학생 운영 커리큘럼")).toBeInTheDocument());
-    expect(mockFn).toHaveBeenCalledTimes(3);
-    expect(mockFn).toHaveBeenNthCalledWith(3, "se1", "sub1");
+  it("별도 '세션 준비' 화면으로 가는 진입점이 없다(준비는 회차 준비 하나뿐)", async () => {
+    render(<CurriculumTab {...baseProps} />);
+    expect(screen.queryByText(/세션 준비/)).not.toBeInTheDocument();
   });
 });

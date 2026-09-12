@@ -1,78 +1,97 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi, beforeEach } from "vitest";
 import LessonPrepScreen from "./LessonPrepScreen";
-import { loadStudentCurriculumPanelData } from "@/app/teacher/student-curriculum-actions";
+import type { SessionPrepContext } from "./prep-context-data";
 
 const pushMock = vi.fn();
 vi.mock("next/navigation", () => ({ useRouter: () => ({ push: pushMock }) }));
 
-vi.mock("@/app/teacher/student-curriculum-actions", () => ({
-  loadStudentCurriculumPanelData: vi.fn(),
-}));
-
-// 준비 UI 자체는 이미 테스트가 있는 기존 컴포넌트다. 여기서 확인할 것은
-// "이 화면이 실제 sessionId를 넘겨준다"는 연결뿐이라 패널은 대역으로 바꾼다.
-vi.mock("@/app/teacher/SessionPrepPanel", () => ({
-  default: ({ sessionId }: { sessionId: string | null }) => (
-    <div data-testid="prep-panel">{sessionId ?? "세션 없음"}</div>
+// 준비 UI 자체는 UnitPrepPanel의 테스트가 이미 덮는다. 여기서 볼 것은
+// "수업에서 들어와도 같은 회차 준비가 열리는가"뿐이라 패널은 대역으로 둔다.
+vi.mock("@/app/teacher/UnitPrepPanel", () => ({
+  default: ({ overlayUnitId, unitTitle }: { overlayUnitId: string; unitTitle: string }) => (
+    <div data-testid="unit-prep-panel" data-unit={overlayUnitId}>
+      {unitTitle}
+    </div>
   ),
 }));
 
-const context = {
+const linked: SessionPrepContext = {
   sessionId: "sess-1",
   subjectEnrollmentId: "se-1",
   subjectId: "subj-1",
   studentName: "지훈",
   subjectName: "SAT Math",
-  startsAt: "2026-09-20T18:00:00.000Z",
-  endsAt: "2026-09-20T19:30:00.000Z",
-  pinned: false,
+  startsAt: "2026-09-14T06:00:00.000Z",
+  endsAt: "2026-09-14T07:00:00.000Z",
+  frozen: false,
+  linkedUnitId: "unit-1",
+  linkedUnitTitle: "테스트1-1",
 };
 
-describe("LessonPrepScreen", () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-    (loadStudentCurriculumPanelData as ReturnType<typeof vi.fn>).mockResolvedValue({
-      initial: { units: [] },
-      library: { keywords: [] },
-    });
+beforeEach(() => vi.clearAllMocks());
+
+describe("수업에서 들어온 준비 화면", () => {
+  it("연결된 회차의 준비를 그대로 연다(회차를 다시 고르라고 하지 않는다)", () => {
+    render(<LessonPrepScreen context={linked} />);
+    const panel = screen.getByTestId("unit-prep-panel");
+    expect(panel).toHaveAttribute("data-unit", "unit-1");
+    expect(panel).toHaveTextContent("테스트1-1");
+    // 예전 "세션 준비"가 묻던 회차 선택 문구가 없다.
+    expect(screen.queryByText(/회차를 고르세요/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/새 세션 준비 시작/)).not.toBeInTheDocument();
   });
 
-  it("어떤 수업인지 학생·과목·일시로 식별해 보여준다", async () => {
-    render(<LessonPrepScreen context={context} />);
+  it("어떤 수업인지 학생·과목·일시로 식별한다", () => {
+    render(<LessonPrepScreen context={linked} />);
     expect(screen.getByText(/지훈 학생 · SAT Math/)).toBeInTheDocument();
-    await waitFor(() => expect(screen.getByTestId("prep-panel")).toBeInTheDocument());
   });
 
-  it("내부 id를 화면에 노출하지 않는다", async () => {
-    const { container } = render(<LessonPrepScreen context={context} />);
-    await waitFor(() => expect(screen.getByTestId("prep-panel")).toBeInTheDocument());
-    // 대역 패널이 sessionId를 출력하므로 그 노드만 제외하고 검사한다.
-    screen.getByTestId("prep-panel").remove();
-    expect(container.textContent).not.toContain("sess-1");
-    expect(container.textContent).not.toContain("se-1");
-    expect(container.textContent).not.toContain("subj-1");
-  });
-
-  it("준비 패널에 실제 세션을 연결해 넘긴다(예전엔 항상 비어 있었다)", async () => {
-    render(<LessonPrepScreen context={context} />);
-    await waitFor(() => expect(screen.getByTestId("prep-panel")).toHaveTextContent("sess-1"));
-  });
-
-  it("이 수업의 세션뷰로 바로 이동할 수 있다(화면 진입이며 수업 시작 처리가 아니다)", async () => {
-    render(<LessonPrepScreen context={context} />);
+  it("수업 열기로 세션뷰에 들어간다(고정과 무관하다)", () => {
+    render(<LessonPrepScreen context={linked} />);
     fireEvent.click(screen.getByText("수업 열기"));
     expect(pushMock).toHaveBeenCalledWith("/session/sess-1");
   });
 
-  it("커리큘럼을 불러오지 못하면 사유를 보여주고 준비 패널을 열지 않는다", async () => {
-    (loadStudentCurriculumPanelData as ReturnType<typeof vi.fn>).mockRejectedValue(
-      new Error("담당 학생의 세션 준비만 조정할 수 있습니다.")
+  it("수동 고정 버튼을 두지 않는다", () => {
+    render(<LessonPrepScreen context={linked} />);
+    for (const banned of ["고정하기", "이 세션에 고정하기(이후 수정 불가)", "고정"]) {
+      expect(screen.queryByText(banned)).not.toBeInTheDocument();
+    }
+  });
+
+  it("이미 시작한 수업이면 고정됐다고 알려준다", () => {
+    render(<LessonPrepScreen context={{ ...linked, frozen: true }} />);
+    expect(screen.getByText(/시작 시점으로 고정되었습니다/)).toBeInTheDocument();
+  });
+
+  it("연결된 회차가 없으면 준비 화면 대신 안내와 이동 경로를 준다", () => {
+    render(
+      <LessonPrepScreen context={{ ...linked, linkedUnitId: null, linkedUnitTitle: null }} />
     );
-    render(<LessonPrepScreen context={context} />);
-    await waitFor(() =>
-      expect(screen.getByText("담당 학생의 세션 준비만 조정할 수 있습니다.")).toBeInTheDocument()
-    );
-    expect(screen.queryByTestId("prep-panel")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("unit-prep-panel")).not.toBeInTheDocument();
+    expect(screen.getByText(/연결된 회차가 없습니다/)).toBeInTheDocument();
+    fireEvent.click(screen.getByText("커리큘럼으로 가기"));
+    expect(pushMock).toHaveBeenCalledWith("/teacher?tab=curriculum");
+  });
+
+  it("내부 id를 화면에 노출하지 않는다", () => {
+    const { container } = render(<LessonPrepScreen context={linked} />);
+    screen.getByTestId("unit-prep-panel").remove();
+    expect(container.textContent).not.toContain("sess-1");
+    expect(container.textContent).not.toContain("unit-1");
+  });
+});
+
+describe("준비 화면은 하나뿐이다", () => {
+  it("옛 세션 준비 화면이 저장소에 남아 있지 않다", async () => {
+    const fs = await import("node:fs");
+    expect(fs.existsSync("app/teacher/SessionPrepPanel.tsx")).toBe(false);
+  });
+
+  it("수동 고정 서버 액션이 없다", async () => {
+    const fs = await import("node:fs");
+    const src = fs.readFileSync("app/teacher/session-prep-actions.ts", "utf-8");
+    expect(src).not.toContain("export async function pinSessionSelection");
   });
 });

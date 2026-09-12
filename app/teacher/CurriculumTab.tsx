@@ -9,7 +9,6 @@ import type { RosterStudent, RosterSubject } from "./roster-data";
 import { formatCurriculumProgressLabel } from "@/lib/curriculum-overlay-progress";
 import type { TeacherCurriculumData } from "./curriculum-data";
 import StudentCurriculumPanel from "./StudentCurriculumPanel";
-import SessionPrepPanel from "./SessionPrepPanel";
 import { loadStudentCurriculumPanelData } from "./student-curriculum-actions";
 import type { StudentCurriculum, EligibleLibrary } from "./student-curriculum-data";
 import { loadLegacyCurriculumDetail, loadReviewDetail } from "./legacy-curriculum-actions";
@@ -20,8 +19,7 @@ type SubView =
   | { type: "list" }
   | { type: "curriculum"; enrollmentId: string }
   | { type: "review"; sessionId: string }
-  | { type: "operating-curriculum"; subjectEnrollmentId: string; subjectId: string; studentName: string; subjectName: string }
-  | { type: "session-prep"; subjectEnrollmentId: string; subjectId: string; studentName: string; subjectName: string };
+  | { type: "operating-curriculum"; subjectEnrollmentId: string; subjectId: string; studentName: string; subjectName: string };
 
 export default function CurriculumTab({
   mySubjects,
@@ -90,23 +88,6 @@ export default function CurriculumTab({
           setCurriculumPanelCache((prev) => ({ ...prev, [subView.subjectEnrollmentId]: data }))
         }
         onBack={() => setSubView({ type: "list" })}
-        onOpenSessionPrep={() => setSubView({ ...subView, type: "session-prep" })}
-      />
-    );
-  }
-
-  if (subView.type === "session-prep") {
-    return (
-      <SessionPrepView
-        subjectEnrollmentId={subView.subjectEnrollmentId}
-        subjectId={subView.subjectId}
-        studentName={subView.studentName}
-        subjectName={subView.subjectName}
-        cached={curriculumPanelCache[subView.subjectEnrollmentId]}
-        onLoaded={(data) =>
-          setCurriculumPanelCache((prev) => ({ ...prev, [subView.subjectEnrollmentId]: data }))
-        }
-        onBack={() => setSubView({ ...subView, type: "operating-curriculum" })}
       />
     );
   }
@@ -245,7 +226,6 @@ function StudentCurriculumOperatingView({
   cached,
   onLoaded,
   onBack,
-  onOpenSessionPrep,
 }: {
   subjectEnrollmentId: string;
   subjectId: string;
@@ -254,7 +234,6 @@ function StudentCurriculumOperatingView({
   cached?: { initial: StudentCurriculum; library: EligibleLibrary };
   onLoaded: (data: { initial: StudentCurriculum; library: EligibleLibrary }) => void;
   onBack: () => void;
-  onOpenSessionPrep: () => void;
 }) {
   const state = useStudentCurriculumPanelData(subjectEnrollmentId, subjectId, cached, onLoaded);
 
@@ -264,11 +243,6 @@ function StudentCurriculumOperatingView({
         <button onClick={onBack} className="text-[13px] text-grey-500 font-semibold">
           ← 뒤로
         </button>
-        {state.status === "ready" && (
-          <button onClick={onOpenSessionPrep} className="text-[12.5px] font-bold text-ink underline">
-            세션 준비 하기 →
-          </button>
-        )}
       </div>
       {/* 2026-09-10(P0-2) — "이 세션"이 어느 학생·과목인지 화면 상단에서 바로
           알 수 있게 표시(내부 용어 대신 식별 정보). */}
@@ -293,53 +267,6 @@ function StudentCurriculumOperatingView({
     </div>
   );
 }
-
-// 2026-09-09(UAT 지적, 제품 오너 승인) — "운영 커리큘럼 관리"와 동일한 데이터
-// 소스(loadStudentCurriculumPanelData)를 그대로 재사용해 오버레이 단원·키워드
-// 사전을 불러온 뒤 SessionPrepPanel에 넘긴다. sessionId 없이(운영 커리큘럼
-// 화면에서 바로 진입) 열리면 "지금 세션에 고정할 준비" 대신 "다음 수업에 쓸
-// 준비"를 임시보관함(staged)에 만들어 두는 흐름이 된다 — 세션에 실제로
-// 고정하려면 실제 예정 수업의 sessionId가 있는 경로(추후 "수업" 탭 연동)로
-// 다시 들어와야 한다. 이번 라운드는 세션 준비 자체의 최초 구현이 목표라 그
-// 두 번째 진입 경로 배선은 범위 밖으로 남긴다.
-function SessionPrepView({
-  subjectEnrollmentId,
-  subjectId,
-  studentName,
-  subjectName,
-  cached,
-  onLoaded,
-  onBack,
-}: {
-  subjectEnrollmentId: string;
-  subjectId: string;
-  studentName: string;
-  subjectName: string;
-  cached?: { initial: StudentCurriculum; library: EligibleLibrary };
-  onLoaded: (data: { initial: StudentCurriculum; library: EligibleLibrary }) => void;
-  onBack: () => void;
-}) {
-  const state = useStudentCurriculumPanelData(subjectEnrollmentId, subjectId, cached, onLoaded);
-
-  if (state.status === "loading") {
-    return <div className="px-8 py-8 text-[13px] text-grey-500">불러오는 중...</div>;
-  }
-  if (state.status === "error") {
-    return <div className="px-8 py-8 text-[13px] text-red">{state.message}</div>;
-  }
-  return (
-    <SessionPrepPanel
-      subjectEnrollmentId={subjectEnrollmentId}
-      overlayUnits={state.initial.units}
-      keywords={state.library.keywords}
-      sessionId={null}
-      studentName={studentName}
-      subjectName={subjectName}
-      onBack={onBack}
-    />
-  );
-}
-
 // 2026-09-11(제품 오너 UAT — 첫 진입 지연 재지적) — 레거시 과목의 커리큘럼
 // 상세(단원별 제목·메모·코멘트·세션 일정)는 이 화면을 실제로 열 때만
 // 조회한다(legacy-curriculum-actions.ts::loadLegacyCurriculumDetail).

@@ -1,7 +1,8 @@
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
-import type { SubjectKeyword, SubjectUnit } from "./subject-data";
+import { loadSubjectCatalog } from "./subject-data";
+import type { AdminSubject, SubjectKeyword, SubjectUnit } from "./subject-data";
 
 async function requireAdmin() {
   const supabase = await createClient();
@@ -195,4 +196,20 @@ export async function moveSubjectUnit(unitId: string, otherUnitId: string): Prom
     .from("subject_template_units")
     .update({ position: b.position })
     .eq("id", a.id);
+}
+
+/**
+ * P2/P3(2026-09-12) — 과목 템플릿 목록을 화면에서 직접 불러온다.
+ *
+ * 그동안 이 목록은 admin/page.tsx가 SSR에서 읽어 prop으로 내려주고, CatalogTab이
+ * 그것을 useState 초기값으로만 썼다. 그런데 그 SSR 조회는 `?tab=catalog` 같은
+ * 특정 탭일 때만 실행된다 — 다른 탭에서 클라이언트 전환으로 커리큘럼에 들어오면
+ * prop이 빈 배열이라 "과목이 없음"처럼 보이고, 탭을 다시 들어가 서버 왕복이
+ * 일어나야 나타났다. 그게 "첫 진입에 목록이 안 보인다"의 원인이다.
+ *
+ * 화면이 스스로 불러오면 어느 경로로 들어와도 같은 결과를 본다.
+ */
+export async function listSubjectCatalogAction(): Promise<AdminSubject[]> {
+  const { supabase } = await requireAdmin();
+  return loadSubjectCatalog(supabase);
 }

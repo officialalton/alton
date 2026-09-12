@@ -87,25 +87,27 @@ export default function SubjectTemplateTab({
       {subjects.map((s) => (
         <div
           key={s.subjectId}
-          className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5 flex items-center justify-between"
+          className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5 flex items-center justify-between gap-3"
         >
-          <div>
-            <div className="text-[13.5px] font-bold text-ink flex items-center gap-1.5">
-              {s.subjectName}
+          <div className="min-w-0">
+            <div className="text-[13.5px] font-bold text-ink flex items-center gap-1.5 min-w-0">
+              <span className="truncate">{s.subjectName}</span>
               {s.archivedAt && (
                 <span className="text-[10.5px] font-bold px-1.5 py-0.5 rounded bg-grey-100 text-grey-500">
                   보관됨
                 </span>
               )}
             </div>
-            <div className="text-[12px] text-grey-500 mt-0.5">
+            {/* 보관 사유가 길면 예전에는 이 줄이 늘어나 '편집' 버튼을 밀어
+                두 줄로 깨뜨렸다. 설명 쪽이 줄어들게 한다. */}
+            <div className="text-[12px] text-grey-500 mt-0.5 truncate">
               {s.units.length}개 회차
               {s.archivedAt && s.archivedReason ? ` · ${s.archivedReason}` : ""}
             </div>
           </div>
           <button
             onClick={() => setOpenSubjectId(s.subjectId)}
-            className="text-[12px] font-bold px-3.5 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink"
+            className="text-[12px] font-bold px-3.5 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink whitespace-nowrap flex-shrink-0"
           >
             편집
           </button>

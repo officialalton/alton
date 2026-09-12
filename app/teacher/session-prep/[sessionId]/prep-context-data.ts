@@ -1,12 +1,14 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 
-// P2/P3 2단계 — "예약 전 회차 준비 화면"이 실제 예정 수업 하나를 가리키도록
-// 하는 조회. 지금까지 세션 준비(SessionPrepPanel)는 운영 커리큘럼 화면에서만
-// 열려서 sessionId가 항상 null이었고(= 임시보관함에만 쌓임), 실제 수업에
-// 고정할 수 없었다. 이 로더가 그 두 번째 진입 경로의 문맥을 만든다.
+// P2/P3 — 예정 수업에서 들어오는 준비 화면의 문맥.
 //
-// 내부 ID는 화면에 노출하지 않는다 — 여기서 돌려주는 식별 정보는 사람이 읽는
-// 학생 이름·과목명·수업 일시뿐이고, id들은 서버 호출에만 쓰인다.
+// **준비 화면은 회차 준비 하나로 통일한다.** 예전에는 수업에서 들어가면 별도
+// "세션 준비"(session_prepared_selections 기반)가 열려, 회차 목록에는
+// "연결됨"으로 보이는데 수업 쪽에서는 회차를 다시 고르라고 하는 어긋남이
+// 있었다. 원인은 데이터 전달이 아니라 준비 화면이 두 벌이었던 것이다.
+//
+// 이제 이 로더는 그 수업에 **연결된 회차**를 찾아 돌려주고, 화면은 그 회차의
+// 준비를 연다. 연결된 회차가 없으면 그 사실을 그대로 알려준다.
 export type SessionPrepContext = {
   sessionId: string;
   subjectEnrollmentId: string;
@@ -15,8 +17,11 @@ export type SessionPrepContext = {
   subjectName: string;
   startsAt: string | null;
   endsAt: string | null;
-  /** 이미 고정된 수업인지 — 화면은 읽기 전용 안내로 바뀐다. */
-  pinned: boolean;
+  /** 이미 시작·종료돼 내용이 고정된 수업인지. */
+  frozen: boolean;
+  /** 이 수업에 연결된 기본 회차. 없으면 null — 화면이 안내한다. */
+  linkedUnitId: string | null;
+  linkedUnitTitle: string | null;
 };
 
 export async function loadSessionPrepContext(
@@ -27,7 +32,7 @@ export async function loadSessionPrepContext(
   const { data, error } = await supabase
     .from("sessions")
     .select(
-      "id, subject_enrollment_id, reservation:reservations!sessions_reservation_id_fkey(starts_at, ends_at), subject_enrollment:subject_enrollments!sessions_subject_enrollment_id_fkey(subject_id, subject:subjects(name), child:profiles!subject_enrollments_child_id_fkey(name))"
+      "id, subject_enrollment_id, final_status, reservation:reservations!sessions_reservation_id_fkey(starts_at, ends_at), subject_enrollment:subject_enrollments!sessions_subject_enrollment_id_fkey(subject_id, subject:subjects(name), child:profiles!subject_enrollments_child_id_fkey(name))"
     )
     .eq("id", sessionId)
     .maybeSingle();
@@ -47,12 +52,24 @@ export async function loadSessionPrepContext(
   const child = one(enrollment?.child as unknown) as { name?: string } | null;
   if (!enrollment?.subject_id) return null;
 
-  const { data: selection } = await supabase
-    .from("session_prepared_selections")
-    .select("status")
+  // 이 수업이 다루는 기본 회차. 연결은 회차 준비 화면에서 만든다.
+  const { data: link } = await supabase
+    .from("session_curriculum_units")
+    .select("overlay_unit_id")
     .eq("session_id", sessionId)
-    .neq("status", "archived")
+    .eq("role", "primary")
     .maybeSingle();
+
+  let linkedUnitTitle: string | null = null;
+  const linkedUnitId = (link?.overlay_unit_id as string | undefined) ?? null;
+  if (linkedUnitId) {
+    const { data: unit } = await supabase
+      .from("curriculum_overlay_units")
+      .select("unit_title")
+      .eq("id", linkedUnitId)
+      .maybeSingle();
+    linkedUnitTitle = (unit?.unit_title as string | undefined) ?? null;
+  }
 
   return {
     sessionId: data.id as string,
@@ -62,6 +79,8 @@ export async function loadSessionPrepContext(
     subjectName: subject?.name ?? "",
     startsAt: reservation?.starts_at ?? null,
     endsAt: reservation?.ends_at ?? null,
-    pinned: selection?.status === "pinned",
+    frozen: data.final_status !== "scheduled",
+    linkedUnitId,
+    linkedUnitTitle,
   };
 }

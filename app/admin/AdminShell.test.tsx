@@ -24,6 +24,24 @@ vi.mock("./curriculum-doc-actions", () => ({
   removeSectionProblem: vi.fn(),
 }));
 
+// P2/P3(2026-09-12) — CatalogTab이 과목 목록을 스스로 불러온다(첫 진입에
+// 목록이 안 보이던 결함 수정). 이 스펙은 탭 렌더링만 보므로 로더는 대역으로 둔다.
+vi.mock("./subject-actions", () => ({
+  listSubjectCatalogAction: vi.fn(async () => []),
+  createSubject: vi.fn(),
+  renameSubject: vi.fn(),
+  deleteSubject: vi.fn(),
+  addSubjectUnit: vi.fn(),
+  updateSubjectUnit: vi.fn(),
+  removeSubjectUnit: vi.fn(),
+  createSubjectKeyword: vi.fn(),
+  assignUnitKeyword: vi.fn(),
+  removeUnitKeyword: vi.fn(),
+  moveSubjectUnit: vi.fn(),
+  archiveSubject: vi.fn(),
+  restoreSubject: vi.fn(),
+}));
+
 vi.mock("./users-actions", () => ({
   inviteParent: vi.fn(),
   inviteStudent: vi.fn(),
@@ -187,10 +205,11 @@ describe("AdminShell", () => {
     expect(screen.getByText("관리자, 안녕하세요")).toBeInTheDocument();
   });
 
-  it("커리큘럼 탭을 누르면 과목 템플릿 서브탭이 렌더링된다", () => {
+  it("커리큘럼 탭을 누르면 과목 템플릿 서브탭이 렌더링된다", async () => {
     render(<AdminShell {...baseProps} />);
     fireEvent.click(screen.getByText("커리큘럼"));
-    expect(screen.getByText("+ 과목 추가")).toBeInTheDocument();
+    // 목록은 화면이 직접 불러온다 — 도착한 뒤에 보인다.
+    expect(await screen.findByText("+ 과목 추가")).toBeInTheDocument();
   });
 
   it("구 크레딧(레거시) 탭을 누르면 BillingTab이 렌더링된다", () => {
