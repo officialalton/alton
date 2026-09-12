@@ -166,3 +166,35 @@ describe("파일 열기", () => {
     expect(driveFetch).not.toHaveBeenCalled();
   });
 });
+
+// 현재 정책은 "관리자만 접근"이다. 실제 서버 조건이 그 정책과 같은지 확인한다.
+//
+// requireAdminOrCapability(cap)는 (role='admin') OR (cap 보유)로 통과시킨다.
+// manage_company_documents는 아직 아무에게도 부여돼 있지 않으므로, 현재
+// 통과하는 사람은 관리자뿐이다 — 정책과 일치한다. 나중에 중간 관리자에게
+// 이 capability를 부여하면 그 사람도 통과한다(의도된 확장 지점).
+describe("서버 권한 조건이 '관리자만 접근' 정책과 일치한다", () => {
+  it("게이트에 회사 문서 capability 이름을 넘긴다", async () => {
+    configure();
+    driveFetch.mockResolvedValue({ json: async () => ({ files: [] }) });
+    const { listCompanyDocumentsAction } = await import("./company-documents-actions");
+    await listCompanyDocumentsAction();
+    expect(requireAdminOrCapability).toHaveBeenCalledWith("manage_company_documents");
+  });
+
+  it("파일 열기에도 같은 게이트를 건다", async () => {
+    configure();
+    requireAdminOrCapability.mockRejectedValue(new Error("이 작업을 수행할 권한이 없습니다."));
+    const { openCompanyDocumentAction } = await import("./company-documents-actions");
+    await expect(openCompanyDocumentAction("f1")).rejects.toThrow();
+    expect(requireAdminOrCapability).toHaveBeenCalledWith("manage_company_documents");
+    expect(driveFetch).not.toHaveBeenCalled();
+  });
+
+  it("계정 id를 코드에 박지 않는다", async () => {
+    const fs = await import("node:fs");
+    const src = fs.readFileSync("app/admin/company-documents-actions.ts", "utf-8");
+    expect(src).not.toMatch(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/);
+    expect(src).toContain('from "@/lib/admin-auth"');
+  });
+});
