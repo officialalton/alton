@@ -31,6 +31,10 @@
 > `provider_pending`/`paid` 전이(게이트 그대로), Production 변경.
 > **검증**: 신규 DB 통합 9 + 크론/날짜 유닛 9 + 교사 화면·데이터 계층 보강.
 > `db reset` 후 직렬 전체 **282 files / 1986 tests 통과**(278.7s).
+> **배포**: 커밋 `317fafa`, Preview `https://alton-3axdql4pd-alton7.vercel.app`.
+> 마이그레이션 `20261285000000`을 공유 non-prod(`worpsqwqgnspddnrtnvq`)에 적용
+> 완료(dry-run으로 대기 1건 확인 후 push, 적용 후 pending 0). Production 무변경.
+> cron은 `CRON_SECRET` 미설정 상태라 아직 동작하지 않는다(의도된 fail-closed).
 
 > **2026-09-12 — P4-2(교사 정산 흐름): 구현 완료, 공유 non-prod 적용 완료,
 > Preview UAT 대기.** 커밋 `222e32b`(`preview/m4-integration-verification`),
