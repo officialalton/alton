@@ -1,5 +1,43 @@
 # ALTON — 현재 상태 (2026-09-11 기준)
 
+> **2026-09-12 — P4-2 정산: 현재 구현 범위에서 종료. 다음은 P2/P3(콘텐츠 운영·
+> 세션뷰).**
+> **P4-2 남은 투두(하지 않음, 조건 충족 시 재개)**
+> 1. **Preview UAT** — **Wise Sandbox 연동 + 실제 수업·정산 데이터가 준비된 뒤**
+>    진행한다. 지금은 게이트가 닫혀 있어 `송금 요청됨`·`금융사 처리 중`·`지급 완료`를
+>    화면에서 만들 수 없다.
+> 2. **하지 않은 것**: Production 활성화, Wise 실송금 연동(API 클라이언트·웹훅·대사),
+>    `CRON_SECRET` 설정(월 마감·자동 송금 두 크론 모두 미설정이라 호출돼도 503).
+> `real_disbursement_enabled()` = false 유지.
+>
+> **P2/P3 착수 문서 작성 완료(구현 미착수)**:
+> `docs/2026-09-12-p2-p3-session-view-and-content-kickoff.md`.
+> 기존 구현을 실측해 **재구현하지 않을 것**과 **없는 것**을 갈라 놓았다.
+> - **이미 있어 재사용**: 세션뷰 5탭 껍데기, **교재 위 필기(`CanvasOverlay` — 필기
+>   모드 토글·펜·지우개·Realtime 동기화·`canvas_annotations` 저장)**,
+>   `session_annotation_events`(이벤트 재생), **수업 시작 스냅샷
+>   (`pin_session_selection` → `session_content_manifest`, 교재는
+>   `published_doc_version_at_pin` 참조)**, 문제은행(`problems`/`problem_keywords`/
+>   `session_problem_attempts`), 커리큘럼 3계층(관리자 기준본 → 교사 운영본 →
+>   학생 개별본)과 정본 무변경 통합 테스트.
+> - **없는 것(이번 설계 대상)**: ① 예약 전 회차 진입점(세션뷰는 실제 session id가
+>   없으면 `notFound()`), ② **필기 범위 구분** — `canvas_annotations`가
+>   `(session_id, curriculum_doc_id)` 단일 행이라 작성자·범위가 없어 교사 공용/학생
+>   개인/교사 준비 초안을 나눌 수 없다, ③ **문제 버전**(`problems`에 버전 컬럼 없음
+>   — 교재만 버전 보존됨), ④ 회차↔실제 수업 N:N 연결, ⑤ 세션뷰 UI 품질·역할별 모드,
+>   ⑥ 교재·문제 학습 화면 품질.
+> **구현 착수 전 제품 결정 5건**(착수 문서 §6): 학생 개인 필기의 교사 열람 여부,
+> 교사 준비 초안의 공개 시점, 회차↔수업 연결 방식, 문제 버전 전환 시점,
+> 보호자 열람 범위.
+
+> **2026-09-12 — P4-2 Preview UAT는 Wise 연동 전 운영 투두로 보류.** 정산 화면·월
+> 마감·조정·송금 승인·외부 송금 완료 기록의 구현과 non-prod 검증은 완료됐다. 다만
+> 실제 수업 데이터와 Wise API·웹훅 없이 반복하는 UAT의 효용이 낮으므로, Wise Sandbox
+> 연동 후 기존 승인 묶음 보정·새 승인 묶음·외부 송금 완료 기록을 함께 확인한다.
+> `real_disbursement_enabled()`·`CRON_SECRET`·Production은 계속 비활성 상태다.
+> **다음 개발은 P2/P3 콘텐츠 운영·회차별 세션뷰**(교재·문제 UI 폴리싱, 기존 교재 위
+> 필기 통합, 예약 전 회차별 준비)로 진행한다.
+
 > **2026-09-12 — P4-2 자동 송금 UAT 피드백 반영 완료.** 커밋 `2849aa3`,
 > Preview `https://alton-m3sequzcu-alton7.vercel.app`. 마이그레이션 2건
 > (`20261290000000`, `20261291000000`) 공유 non-prod 적용 완료(pending 0).
