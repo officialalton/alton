@@ -1,5 +1,37 @@
 # ALTON — 현재 상태 (2026-09-11 기준)
 
+> **2026-09-12 — P4-2(2차): 자동 월 마감 / 최종 송금액 조정 / 마감 뒤 차액 이월
+> 구현 완료.** 착수 정리·상세는 `docs/2026-09-12-p4-2-teacher-settlement-plan.md`
+> "2차 구현" 절. 마이그레이션 1건 추가
+> (`20261285000000_p4_2_payout_month_close_and_adjustments.sql`, 전부 additive).
+> 1. **자동 월 마감**: `close_payout_period()` 신설 +
+>    `GET /api/cron/close-payout-month`(`vercel.json` cron `0 3 1 * *`).
+>    **fail-closed** — `CRON_SECRET`이 없으면 503으로 아무것도 하지 않는다(스케줄
+>    등록과 실제 활성화 분리). 관리자 수동 실행(`generate_payout_batches`)은 운영
+>    보조 수단으로 남겼다. 중복 실행·실행 지연·월 경계 재시도 안전성은 3중 —
+>    기간 advisory lock + 후보 `FOR UPDATE SKIP LOCKED` + **열린 같은 기간 묶음
+>    재사용**(재실행 시 새 묶음 없이 새 항목만 추가).
+> 2. **날짜 기준 = UTC(조사 후 기존 관례 유지)**: `reservations.starts_at::date`
+>    (DB 타임존 UTC)와 `previousMonthRange()`가 이미 UTC였다. 기준을 바꾸면 월
+>    경계 수업이 다른 달로 재분류되므로 그대로 뒀다. 임의 지급일은 UI에 표시하지 않는다.
+> 3. **최종 송금액 조정**: `add_payout_batch_adjustment()` 신설. **수업별
+>    payout_items 금액·자동 산정 근거를 고치지 않고** 별도 조정 항목
+>    (`item_type='adjustment'`, `session_id is null`) + 사유·처리자·시각 이력
+>    (`payout_batch_adjustments`, INSERT-only)으로 처리한다. 검토 중에는 허용,
+>    **승인 뒤 송금 요청 전이면 `reviewed`로 되돌리고 재승인 요구**(감사 로그
+>    `reverted_to_review`), **송금 요청 이후에는 거부**.
+> 4. **마감 뒤 차액 이월**: `upsert_session_payout_item()`이 기존에는 `batched`
+>    항목도 제자리 갱신해 **이미 승인된 금액이 조용히 바뀔 수 있는 구멍**이
+>    있었다. 이제 승인 이후 묶음이면 원본을 건드리지 않고 차액만 미배치 조정
+>    항목으로 만들어(`adjusts_payout_item_id`로 원본 연결) **다음 마감이 자동으로
+>    싣는다**. 열린 묶음(검토 중)이면 종전대로 제자리 갱신해 검토 정확도를 지킨다.
+> 5. **교사 화면 분리 표시**: 자동 산정 수업 합계 / 관리자 조정액 / 최종 송금
+>    승인 금액을 나눠 보여주고 조정 사유·시각도 교사가 볼 수 있다.
+> **여전히 범위 밖**: 실제 송금·금융 제공자 호출·`dispatch_requested`/
+> `provider_pending`/`paid` 전이(게이트 그대로), Production 변경.
+> **검증**: 신규 DB 통합 9 + 크론/날짜 유닛 9 + 교사 화면·데이터 계층 보강.
+> `db reset` 후 직렬 전체 **282 files / 1986 tests 통과**(278.7s).
+
 > **2026-09-12 — P4-2(교사 정산 흐름): 구현 완료, 공유 non-prod 적용 완료,
 > Preview UAT 대기.** 커밋 `222e32b`(`preview/m4-integration-verification`),
 > Preview `https://alton-a4iyl6od4-alton7.vercel.app`(2026-09-12 상태 4단계

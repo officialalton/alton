@@ -162,6 +162,86 @@ describe("loadTeacherSettlement", () => {
     expect(august.map((m) => m.status).sort()).toEqual(["approved", "scheduled"]);
   });
 
+  it("자동 산정 수업 합계와 관리자 조정액을 분리해 집계한다", async () => {
+    const { client } = supabaseMock({
+      ...BASE_TABLES,
+      payout_items: [
+        item({ id: "i1", session_id: "sess-1", batch_id: "b1", amount_minor: 60000 }),
+        // 조정 항목은 세션에 매이지 않는다(session_id null).
+        item({
+          id: "adj1",
+          session_id: null,
+          batch_id: "b1",
+          item_type: "adjustment",
+          amount_minor: -10000,
+          payable_minutes: 0,
+          created_at: "2026-08-20T00:00:00.000Z",
+        }),
+      ],
+      payout_batches: [{ id: "b1", status: "reviewed", paid_at: null }],
+      payout_batch_adjustments: [
+        {
+          id: "a1",
+          batch_id: "b1",
+          amount_minor: -10000,
+          currency: "KRW",
+          reason: "교통비 차감",
+          created_at: "2026-08-20T00:00:00.000Z",
+        },
+      ],
+    });
+
+    const result = await loadTeacherSettlement(client, "t1");
+    const august = result.months.find((m) => m.settlementMonth === "2026-08")!;
+
+    expect(august.autoCalculatedAmountMinor).toBe(60000);
+    expect(august.adjustmentAmountMinor).toBe(-10000);
+    expect(august.totalAmountMinor).toBe(50000);
+    // 조정 항목은 수업 건수에 들어가지 않는다.
+    expect(august.lessonCount).toBe(1);
+    expect(august.lines).toHaveLength(1);
+    // 조정 사유는 교사에게도 보인다.
+    expect(august.adjustments).toEqual([
+      {
+        id: "a1",
+        amountMinor: -10000,
+        currency: "KRW",
+        reason: "교통비 차감",
+        createdAt: "2026-08-20T00:00:00.000Z",
+      },
+    ]);
+  });
+
+  it("아직 묶이지 않은 이월 조정 항목은 발생한 달로 묶어 보여준다", async () => {
+    const { client } = supabaseMock({
+      ...BASE_TABLES,
+      payout_items: [
+        item({
+          id: "carry",
+          session_id: null,
+          batch_id: null,
+          item_type: "adjustment",
+          amount_minor: -30000,
+          payable_minutes: 0,
+          created_at: "2026-09-15T00:00:00.000Z",
+        }),
+      ],
+      payout_batches: [],
+    });
+
+    const result = await loadTeacherSettlement(client, "t1");
+
+    expect(result.months).toHaveLength(1);
+    expect(result.months[0]).toMatchObject({
+      settlementMonth: "2026-09",
+      payoutMonth: "2026-10",
+      status: "scheduled",
+      adjustmentAmountMinor: -30000,
+      autoCalculatedAmountMinor: 0,
+      lessonCount: 0,
+    });
+  });
+
   it("수업 수가 늘어도 조회 횟수는 고정이다(N+1 아님)", async () => {
     const { client, callCounts } = supabaseMock({
       ...BASE_TABLES,

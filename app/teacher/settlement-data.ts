@@ -67,6 +67,14 @@ export type SettlementLine = {
   currency: string;
 };
 
+export type SettlementAdjustment = {
+  id: string;
+  amountMinor: number;
+  currency: string;
+  reason: string;
+  createdAt: string;
+};
+
 export type SettlementMonth = {
   /** 수업이 있었던 월 — 'YYYY-MM' */
   settlementMonth: string;
@@ -74,10 +82,17 @@ export type SettlementMonth = {
   payoutMonth: string;
   currency: string;
   status: SettlementStatus;
+  /** 시스템이 수업별로 자동 산정한 합계(관리자가 고칠 수 없는 값). */
+  autoCalculatedAmountMinor: number;
+  /** 관리자가 송금 전 더하거나 뺀 금액의 합(가산 +, 감액 -). */
+  adjustmentAmountMinor: number;
+  /** 최종 금액 = 자동 산정 합계 + 조정액. 승인 단계면 이것이 송금 승인 금액이다. */
   totalAmountMinor: number;
   lessonCount: number;
   paidAt: string | null;
   lines: SettlementLine[];
+  /** 관리자 조정 내역(사유·시각). 교사도 볼 수 있다. */
+  adjustments: SettlementAdjustment[];
 };
 
 export type TeacherSettlement = {
@@ -128,7 +143,7 @@ export async function loadTeacherSettlement(
   const { data: items, error } = await supabase
     .from("payout_items")
     .select(
-      "id, batch_id, session_id, item_type, amount_minor, currency, payable_minutes, hourly_rate_snapshot_minor, status"
+      "id, batch_id, session_id, item_type, amount_minor, currency, payable_minutes, hourly_rate_snapshot_minor, status, created_at, adjustment_reason"
     )
     .eq("teacher_id", teacherId);
   if (error) throw new Error(error.message);
@@ -137,14 +152,35 @@ export async function loadTeacherSettlement(
   const batchIds = Array.from(new Set(items.map((i) => i.batch_id as string | null).filter(Boolean) as string[]));
   const sessionIds = Array.from(new Set(items.map((i) => i.session_id as string | null).filter(Boolean) as string[]));
 
-  const [{ data: batches }, { data: sessions }] = await Promise.all([
+  const [{ data: batches }, { data: sessions }, { data: adjustmentRows }] = await Promise.all([
     batchIds.length
       ? supabase.from("payout_batches").select("id, status, paid_at").in("id", batchIds)
       : Promise.resolve({ data: [] as Record<string, unknown>[] }),
     sessionIds.length
       ? supabase.from("sessions").select("id, reservation_id, subject_enrollment_id").in("id", sessionIds)
       : Promise.resolve({ data: [] as Record<string, unknown>[] }),
+    // 관리자 조정 내역(사유·시각). RLS가 본인 묶음만 보여준다.
+    batchIds.length
+      ? supabase
+          .from("payout_batch_adjustments")
+          .select("id, batch_id, amount_minor, currency, reason, created_at")
+          .in("batch_id", batchIds)
+          .order("created_at", { ascending: false })
+      : Promise.resolve({ data: [] as Record<string, unknown>[] }),
   ]);
+
+  const adjustmentsByBatch = new Map<string, SettlementAdjustment[]>();
+  for (const a of adjustmentRows ?? []) {
+    const list = adjustmentsByBatch.get(a.batch_id as string) ?? [];
+    list.push({
+      id: a.id as string,
+      amountMinor: Number(a.amount_minor ?? 0),
+      currency: a.currency as string,
+      reason: a.reason as string,
+      createdAt: a.created_at as string,
+    });
+    adjustmentsByBatch.set(a.batch_id as string, list);
+  }
 
   const batchById = new Map((batches ?? []).map((b) => [b.id as string, b]));
   const reservationIds = Array.from(
@@ -191,9 +227,15 @@ export async function loadTeacherSettlement(
       item.status as string
     );
 
-    // 예약 시작일을 모르면(세션·예약이 정리된 예외적 데이터) 월로 묶을 수 없다 —
-    // 금액이 화면에서 사라지지 않도록 'unknown' 버킷에 남긴다.
-    const settlementMonth = startsAt ? monthKey(startsAt) : "unknown";
+    // 조정 항목은 수업에 매이지 않는다(session_id is null) — 발생한 달로 묶는다.
+    // 그 외에 예약 시작일을 모르는 예외적 데이터는 금액이 화면에서 사라지지 않도록
+    // 'unknown' 버킷에 남긴다.
+    const isAdjustment = !item.session_id;
+    const settlementMonth = startsAt
+      ? monthKey(startsAt)
+      : isAdjustment && item.created_at
+        ? monthKey(item.created_at as string)
+        : "unknown";
     const currency = item.currency as string;
     const key = `${settlementMonth}|${currency}|${status}`;
 
@@ -216,18 +258,25 @@ export async function loadTeacherSettlement(
     const existing = byMonthCurrency.get(key);
     if (existing) {
       existing.totalAmountMinor += line.amountMinor;
-      existing.lessonCount += 1;
-      existing.lines.push(line);
+      if (isAdjustment) existing.adjustmentAmountMinor += line.amountMinor;
+      else {
+        existing.autoCalculatedAmountMinor += line.amountMinor;
+        existing.lessonCount += 1;
+        existing.lines.push(line);
+      }
     } else {
       byMonthCurrency.set(key, {
         settlementMonth,
         payoutMonth: settlementMonth === "unknown" ? "unknown" : nextMonthKey(settlementMonth),
         currency,
         status,
+        autoCalculatedAmountMinor: isAdjustment ? 0 : line.amountMinor,
+        adjustmentAmountMinor: isAdjustment ? line.amountMinor : 0,
         totalAmountMinor: line.amountMinor,
-        lessonCount: 1,
+        lessonCount: isAdjustment ? 0 : 1,
         paidAt: (batch?.paid_at as string | null) ?? null,
-        lines: [line],
+        lines: isAdjustment ? [] : [line],
+        adjustments: item.batch_id ? adjustmentsByBatch.get(item.batch_id as string) ?? [] : [],
       });
     }
 

@@ -128,16 +128,54 @@
    고정 목록으로 만들지 않고 **자유 업로드·보관 창구**로 유지한다(종류 enum 추가
    없음). 미제출·검토·승인 상태가 정산·매칭·수업을 차단하지 않는다.
 
-### 아직 구현되지 않은 것 — 금융 연동 단계에서 채운다
+## 2차 구현(2026-09-12) — 자동 월 마감 / 최종 송금액 조정 / 차액 이월
 
-- **월별 묶음 자동 생성**: 확정 흐름은 "정산 대상 월이 끝나면 시스템이 자동
-  생성"이지만, 현재 `generate_payout_batches()`는 **관리자가 기간을 넣어
-  수동 실행**한다(`app/admin/PayoutBatchesTab.tsx`의 `Batch 생성`).
-  레거시 크론(`app/admin/payouts-cron.ts`)은 이미 no-op이다. 월말 자동 생성은
-  실제 금융 연동을 여는 단계에서 함께 붙인다 — 이번 라운드는 상태 표현만 맞췄다.
-- **다음 정산월 조정 항목 자동 생성**: 마감 뒤 변동을 조정 항목으로 넘기는
-  규칙은 확정됐고 DB에 덮어쓰기 방지(`prevent_paid_item_mutation`)와
-  역분개(`reverse_payout_item()`)가 이미 있으나, "다음 달 묶음에 자동으로
-  싣는" 오케스트레이션은 아직 없다. 같은 단계에서 붙인다.
-- **송금 실행 경로**: `dispatch_requested`/`provider_pending`/`paid`는
-  `real_disbursement_enabled()` 게이트가 닫혀 있어 도달 불가다. 이번에 열지 않았다.
+마이그레이션 `20261285000000_p4_2_payout_month_close_and_adjustments.sql`.
+
+### 자동 월 마감
+
+- `close_payout_period(period_start, period_end)` 신설. 정상 경로는 **자동 마감**이고,
+  관리자가 기간을 넣어 실행하는 `generate_payout_batches()`는 **운영 보조 수단**으로
+  남긴다(`closePayoutMonthNow()`가 같은 자동 마감 경로를 수동으로 한 번 더 돌린다).
+- 진입점: `GET /api/cron/close-payout-month`(`vercel.json` cron `0 3 1 * *`).
+  **fail-closed** — `CRON_SECRET`이 없으면 503으로 아무것도 하지 않는다. 스케줄
+  등록과 실제 활성화를 분리하기 위함이다(실제 송금 게이트와 같은 취지).
+- **중복 실행·실행 지연·월 경계 재시도 안전성**(3중):
+  1. 기간 단위 `pg_advisory_xact_lock` — 같은 기간 동시 마감을 직렬화.
+  2. 후보 항목 `FOR UPDATE ... SKIP LOCKED` — 같은 항목을 두 호출이 동시에 후보로
+     삼지 못한다(기존 `20261263000000` corrective와 같은 장치).
+  3. **열린 같은 기간 묶음 재사용** — 재실행 시 새 묶음을 만들지 않고 새 항목만
+     덧붙인다. `update ... where batch_id is null`로 이미 묶인 항목은 건드리지 않는다.
+- **날짜 기준: UTC**(조사 결과 기존 정산이 이미 UTC였다 —
+  `reservations.starts_at::date`(DB 타임존 UTC)와 `previousMonthRange()`). 기준을
+  바꾸면 월 경계 수업이 다른 달로 재분류되므로 일관성을 위해 유지했다.
+  **임의의 지급일은 UI에 표시하지 않는다.**
+
+### 최종 송금액 조정
+
+- `add_payout_batch_adjustment(batch, amount, reason, actor)` 신설.
+  **수업별 `payout_items` 금액과 자동 산정 근거를 고치지 않는다** — 별도 조정
+  항목(`item_type='adjustment'`, `session_id is null`)을 추가하고, 사유·처리자·시각은
+  `payout_batch_adjustments`(INSERT-only)에 남긴다.
+- 허용 시점: 검토 중에는 그대로. **승인 뒤 송금 요청 전이면 묶음을 `reviewed`로
+  되돌리고 `approved_at`을 지워 재승인을 요구한다**(감사 로그 `reverted_to_review`).
+  **송금 요청 이후(`dispatch_requested`/`provider_pending`/`processing`/`paid`)에는
+  거부**하고 "차액은 다음 정산월 조정 항목으로" 안내한다.
+- 화면 값: 자동 산정 수업 합계 / 가감액 / 최종 금액을 교사·관리자 모두 분리해 본다.
+
+### 마감 뒤 차액 이월
+
+- `upsert_session_payout_item()` 보완. 기존에는 `batched` 항목도 제자리 갱신해
+  **이미 승인된 묶음의 금액이 조용히 바뀔 수 있는 구멍**이 있었다.
+  - 묶음 없음 / 아직 열린 묶음(검토 중) → 기존대로 제자리 갱신(검토 정확도 유지)
+  - **승인 이후 묶음 → 원본 불변**, 차액만 미배치 조정 항목으로 생성하고
+    `adjusts_payout_item_id`로 원본과 연결
+  - 무지급 판정으로 바뀌면 원본을 지우지 않고 전액 차감 조정 항목을 만든다
+- 그 미배치 조정 항목은 **다음 `close_payout_period()`가 자동으로 싣는다**
+  (세션 기반 항목과 함께 한 번의 잠금 스캔으로 후보에 포함).
+
+### 여전히 범위 밖
+
+- 실제 송금, 금융 제공자 호출, `dispatch_requested`/`provider_pending`/`paid` 전이는
+  `real_disbursement_enabled()` 게이트가 닫혀 있어 도달 불가다. **이번에 열지 않았다.**
+- Production 변경 없음. cron은 `CRON_SECRET` 없이는 동작하지 않는다.

@@ -39,9 +39,20 @@ const SETTLEMENT = {
       payoutMonth: "2026-10",
       currency: "KRW",
       status: "scheduled" as const,
+      autoCalculatedAmountMinor: 160000,
+      adjustmentAmountMinor: -10000,
       totalAmountMinor: 150000,
       lessonCount: 2,
       paidAt: null,
+      adjustments: [
+        {
+          id: "adj1",
+          amountMinor: -10000,
+          currency: "KRW",
+          reason: "교통비 차감",
+          createdAt: "2026-09-11T00:00:00.000Z",
+        },
+      ],
       lines: [
         {
           payoutItemId: "i1",
@@ -123,6 +134,23 @@ describe("SettlementTab — 예정액 요약", () => {
     expect(await screen.findByText("김학생")).toBeInTheDocument();
     expect(screen.getByText("SAT Math")).toBeInTheDocument();
     expect(screen.getByText("60분")).toBeInTheDocument();
+  });
+
+  it("자동 산정 수업 합계·관리자 조정액·최종 금액을 분리해 보여준다", async () => {
+    render(<SettlementTab />);
+    fireEvent.click(await screen.findByTestId("settlement-month-2026-09|KRW|scheduled"));
+
+    const key = "2026-09|KRW|scheduled";
+    expect(await screen.findByTestId(`auto-${key}`)).toHaveTextContent("160,000 KRW");
+    expect(screen.getByTestId(`adjust-${key}`)).toHaveTextContent("-10,000 KRW");
+    expect(screen.getByTestId(`final-${key}`)).toHaveTextContent("150,000 KRW");
+  });
+
+  it("관리자 조정 내역의 사유와 금액을 교사도 볼 수 있다", async () => {
+    render(<SettlementTab />);
+    fireEvent.click(await screen.findByTestId("settlement-month-2026-09|KRW|scheduled"));
+    expect(await screen.findByTestId("adjust-reason-adj1")).toHaveTextContent("교통비 차감");
+    expect(screen.getByTestId("adjust-reason-adj1")).toHaveTextContent("-10,000 KRW");
   });
 
   it("정산 내역이 없으면 빈 상태 문구를 보여준다", async () => {

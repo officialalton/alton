@@ -179,7 +179,41 @@ export default function SettlementTab() {
                   </div>
                 </button>
                 {open && (
-                  <div className="mt-3 pt-3 border-t border-grey-200 overflow-x-auto">
+                  <div className="mt-3 pt-3 border-t border-grey-200">
+                    {/* 자동 산정과 관리자 조정을 분리해 보여준다 — 어느 금액이
+                        시스템 산출이고 어느 금액이 사람이 더한/뺀 것인지 교사가
+                        구분할 수 있어야 한다. */}
+                    <dl className="text-[11.5px] text-grey-500 mb-2 space-y-0.5">
+                      <div className="flex justify-between">
+                        <dt>자동 산정 수업 합계</dt>
+                        <dd data-testid={`auto-${key}`}>
+                          {formatAmount(m.autoCalculatedAmountMinor, m.currency)}
+                        </dd>
+                      </div>
+                      <div className="flex justify-between">
+                        <dt>관리자 조정액</dt>
+                        <dd data-testid={`adjust-${key}`}>
+                          {m.adjustmentAmountMinor > 0 ? "+" : ""}
+                          {formatAmount(m.adjustmentAmountMinor, m.currency)}
+                        </dd>
+                      </div>
+                      <div className="flex justify-between font-bold text-ink">
+                        <dt>{m.status === "paid" ? "지급 금액" : "최종 송금 승인 금액"}</dt>
+                        <dd data-testid={`final-${key}`}>{formatAmount(m.totalAmountMinor, m.currency)}</dd>
+                      </div>
+                    </dl>
+                    {m.adjustments.length > 0 && (
+                      <ul className="text-[11px] text-grey-400 mb-2 space-y-0.5">
+                        {m.adjustments.map((a) => (
+                          <li key={a.id} data-testid={`adjust-reason-${a.id}`}>
+                            {new Date(a.createdAt).toLocaleDateString("ko-KR")} ·{" "}
+                            {a.amountMinor > 0 ? "+" : ""}
+                            {formatAmount(a.amountMinor, a.currency)} — {a.reason}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    <div className="overflow-x-auto">
                     <table className="w-full text-[11.5px]">
                       <thead>
                         <tr className="text-grey-400 text-left">
@@ -212,6 +246,7 @@ export default function SettlementTab() {
                         ))}
                       </tbody>
                     </table>
+                    </div>
                   </div>
                 )}
               </div>

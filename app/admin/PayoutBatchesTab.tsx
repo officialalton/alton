@@ -9,6 +9,7 @@ import {
   submitPayoutBatchForReview,
   approvePayoutBatch,
   markPayoutBatchFailed,
+  adjustPayoutBatchAmount,
 } from "./payout-batches-actions";
 
 // R10 Task C — 레거시 PayoutsTab(teacher_payouts)을 대체하는 v3 payout_batches
@@ -31,6 +32,9 @@ const STATUS_LABEL: Record<string, string> = {
   failed: "실패",
 };
 
+// P4-2(2차) — 조정이 허용되는 상태. 송금 요청 이후(dispatch_requested/
+// provider_pending/processing/paid)와 failed는 DB 함수가 거부하므로 버튼도 감춘다.
+const ADJUSTABLE_STATUSES = new Set(["draft", "calculated", "reviewing", "reviewed", "approved"]);
 const ACTIONABLE_DRAFT = new Set(["draft", "calculated"]);
 const ACTIONABLE_REVIEW = new Set(["draft", "calculated", "reviewing", "reviewed"]);
 // R10 corrective(요구사항 4, 2026-09-07 리뷰): mark_payout_batch_failed()가
@@ -64,6 +68,9 @@ export default function PayoutBatchesTab({
 }) {
   // P4-2(2026-09-12) — 관리자 정산 화면에 `수취 계좌` 서브탭을 추가한다.
   const [subtab, setSubtab] = useState<"batches" | "accounts">("batches");
+  // P4-2(2차) — 최종 송금액 가감 조정 입력. 자동 산정 항목을 고치는 것이 아니라
+  // 별도 조정 항목을 추가하는 것이므로 금액·사유만 받는다.
+  const [adjustDraft, setAdjustDraft] = useState<Record<string, { amount: string; reason: string }>>({});
   const [batches, setBatches] = useState(initialBatches);
   const defaults = previousMonthRange(new Date());
   const [periodStart, setPeriodStart] = useState(defaults.periodStart);
@@ -113,6 +120,38 @@ export default function PayoutBatchesTab({
       await refresh();
     } catch (e) {
       setMessage(e instanceof Error ? e.message : "승인 실패");
+      setBusyId(null);
+    }
+  }
+
+  async function handleAdjust(id: string) {
+    const draft = adjustDraft[id];
+    const amount = Number(draft?.amount);
+    if (!Number.isFinite(amount) || amount === 0) {
+      setMessage("조정 금액을 0이 아닌 숫자로 입력해주세요.");
+      return;
+    }
+    if (!draft?.reason?.trim()) {
+      setMessage("조정 사유를 입력해주세요.");
+      return;
+    }
+    setBusyId(id);
+    try {
+      const result = await adjustPayoutBatchAmount({
+        batchId: id,
+        amountMinor: Math.round(amount),
+        reason: draft.reason.trim(),
+      });
+      if (result.status === "rejected") {
+        setMessage(result.error);
+        setBusyId(null);
+        return;
+      }
+      setAdjustDraft((prev) => ({ ...prev, [id]: { amount: "", reason: "" } }));
+      setMessage("조정을 반영했습니다. 승인된 묶음이었다면 재승인이 필요합니다.");
+      await refresh();
+    } catch (e) {
+      setMessage(e instanceof Error ? e.message : "조정 실패");
       setBusyId(null);
     }
   }
@@ -266,6 +305,52 @@ export default function PayoutBatchesTab({
 
                   {b.status === "failed" && b.failureReason && (
                     <div className="mt-2 text-[12px] text-red-600">실패 사유: {b.failureReason}</div>
+                  )}
+
+                  {ADJUSTABLE_STATUSES.has(b.status) && (
+                    <div className="mt-3 pt-3 border-t border-grey-100">
+                      <div className="text-[11px] font-bold text-grey-300 mb-1">최종 송금액 조정</div>
+                      <p className="text-[11px] text-grey-400 mb-1.5">
+                        수업별 자동 산정 금액은 고칠 수 없습니다. 가감할 금액과 사유를 남기면 별도
+                        조정 항목으로 기록됩니다. 승인된 묶음을 조정하면 검토 중으로 되돌아가 재승인이
+                        필요합니다. 송금 요청 이후에는 조정할 수 없습니다.
+                      </p>
+                      <div className="flex items-center gap-2">
+                        <input
+                          placeholder="금액(감액은 -)"
+                          inputMode="numeric"
+                          value={adjustDraft[b.id]?.amount ?? ""}
+                          onChange={(e) =>
+                            setAdjustDraft((prev) => ({
+                              ...prev,
+                              [b.id]: { amount: e.target.value, reason: prev[b.id]?.reason ?? "" },
+                            }))
+                          }
+                          data-testid={`adjust-amount-${b.id}`}
+                          className="px-2 py-1 border-[1.5px] border-grey-200 rounded-lg text-[12px] w-32"
+                        />
+                        <input
+                          placeholder="조정 사유"
+                          value={adjustDraft[b.id]?.reason ?? ""}
+                          onChange={(e) =>
+                            setAdjustDraft((prev) => ({
+                              ...prev,
+                              [b.id]: { amount: prev[b.id]?.amount ?? "", reason: e.target.value },
+                            }))
+                          }
+                          data-testid={`adjust-reason-${b.id}`}
+                          className="px-2 py-1 border-[1.5px] border-grey-200 rounded-lg text-[12px] flex-1"
+                        />
+                        <button
+                          disabled={busyId === b.id}
+                          onClick={() => handleAdjust(b.id)}
+                          data-testid={`adjust-submit-${b.id}`}
+                          className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 disabled:opacity-50"
+                        >
+                          조정 추가
+                        </button>
+                      </div>
+                    </div>
                   )}
 
                   {ACTIONABLE_FAILED.has(b.status) && (
