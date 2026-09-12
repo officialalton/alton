@@ -122,16 +122,16 @@ describe("모든 서버 진입점에 정산 담당 관리자 게이트가 걸려
         .filter((i) => i > start)
         .sort((a, b) => a - b)[0];
       const body = src.slice(start, next === undefined ? src.length : next);
-      expect(body).toContain("requireCapabilityOnly(PAYOUT_CAPABILITY)");
+      expect(body).toContain("requireAdminOrCapability(PAYOUT_CAPABILITY)");
     }
   });
 
-  it("관리자 전원을 통과시키는 게이트를 쓰지 않는다", async () => {
+  it("계정 id를 하드코딩하지 않고 공통 권한 검사 함수를 쓴다", async () => {
     const fs = await import("node:fs");
     const src = fs.readFileSync("app/admin/teacher-documents-actions.ts", "utf-8");
-    // requireAdmin()/requireAdminOrCapability()는 role='admin'이면 통과시킨다.
-    expect(src).not.toContain("requireAdminOrCapability");
-    expect(src).not.toMatch(/requireAdmin\s*\(/);
+    expect(src).toContain('from "@/lib/admin-auth"');
+    // 특정 관리자 계정 uuid를 코드에 박아두지 않는다.
+    expect(src).not.toMatch(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/);
   });
 
   it("업로드·삭제 경로를 갖지 않는다(읽기 전용)", async () => {

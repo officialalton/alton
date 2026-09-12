@@ -3,6 +3,11 @@ import { describe, expect, it, vi, beforeEach } from "vitest";
 import DocumentsTab from "./DocumentsTab";
 import { listConsentGapsAction, listCompletedConsentsAction } from "./consent-actions";
 
+vi.mock("./company-documents-actions", () => ({
+  listCompanyDocumentsAction: vi.fn(async () => ({ state: "not_configured" })),
+  openCompanyDocumentAction: vi.fn(),
+}));
+
 vi.mock("./teacher-documents-actions", () => ({
   listTeacherDocumentSummariesAction: vi.fn(async () => []),
   listTeacherDocumentsAction: vi.fn(async () => []),
@@ -59,10 +64,14 @@ describe("DocumentsTab", () => {
     expect(listCompletedConsentsAction).toHaveBeenCalled();
   });
 
-  it("아직 연결되지 않은 영역은 준비 중임을 밝힌다", () => {
+  it("네 서브탭이 모두 실제 화면을 연다", async () => {
     render(<DocumentsTab />);
-    fireEvent.click(screen.getByText("회사 문서"));
-    expect(screen.getByText(/아직 연결되지 않았습니다/)).toBeInTheDocument();
+    // 계약(기본) → 동의서 → 교사 서류 → 회사 문서 순으로 전환해도
+    // "준비 중" 자리표시가 남아 있지 않다.
+    for (const label of ["동의서", "교사 서류", "회사 문서"]) {
+      fireEvent.click(screen.getByText(label));
+      await waitFor(() => expect(screen.queryByText(/준비 중입니다/)).not.toBeInTheDocument());
+    }
   });
 });
 

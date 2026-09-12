@@ -20,15 +20,21 @@ import type { ConsentGapItem, CompletedConsentItem } from "./consultation-data";
 // 상태가 자주 바뀌는 화면이 아니라 TTL을 30초로 둔다(정규 계약 발송의 10초와 대비).
 // 캐시 키와 무효화 함수는 consent-cache.ts가 정본이다.
 export default function ConsentGapPanel() {
+  // 이 화면은 들어올 때마다 다시 읽는다. 동의는 보호자가 앱 밖에서 마치므로
+  // 관리자가 탭으로 "돌아온" 행동 자체가 최신을 보려는 의도다 — TTL이 남았다는
+  // 이유로 이전 상태를 보여주면 안 된다. 직전 데이터는 그대로 보여주고
+  // 배경에서 갱신하므로 화면이 비지 않는다.
   const gaps = useTabCachedData<ConsentGapItem[]>({
     cacheKey: CONSENT_GAPS_CACHE_KEY,
     ttlMs: CONSENT_CACHE_TTL_MS,
     fetcher: listConsentGapsAction,
+    revalidateOnMount: true,
   });
   const completed = useTabCachedData<CompletedConsentItem[]>({
     cacheKey: CONSENT_COMPLETED_CACHE_KEY,
     ttlMs: CONSENT_CACHE_TTL_MS,
     fetcher: listCompletedConsentsAction,
+    revalidateOnMount: true,
   });
 
   const error = gaps.error ?? completed.error;

@@ -14,7 +14,7 @@ import { describe, expect, it } from "vitest";
 // (lib/legacy-teacher-payouts-write-guard.test.ts)로 no-op임이 증명됨).
 //
 // 이 테스트는 앞으로 새로 추가되는 createAdminClient() 호출부가
-// requireAdmin()/requireAdminOrCapability()/requireCapabilityOnly() 없이 만들어지는 것을 막는
+// requireAdmin()/requireAdminOrCapability() 없이 만들어지는 것을 막는
 // 회귀 가드다 — "발견된 누락을 고치는" 것이 아니라 "앞으로 누락이 생기지
 // 않게 지키는" 목적.
 
@@ -99,10 +99,7 @@ describe("관리자 서버 액션의 createAdminClient() 호출부는 항상 req
       for (const fn of functions) {
         if (ALLOWLIST_FUNCTIONS.has(fn.name)) continue;
         if (!fn.body.includes("createAdminClient")) continue;
-        // requireCapabilityOnly는 requireAdmin류보다 **더 좁은** 게이트다
-        // (role='admin'만으로는 통과하지 못한다 — P4-3 교사 서류). 넓은 게이트를
-        // 요구하는 이 가드가 더 좁은 게이트를 위반으로 잡으면 안 된다.
-        const hasGuard = /require(Admin(OrCapability)?|CapabilityOnly)\s*\(/.test(fn.body);
+        const hasGuard = /requireAdmin(OrCapability)?\s*\(/.test(fn.body);
         if (!hasGuard) {
           offenders.push(`${rel}::${fn.name}`);
         }

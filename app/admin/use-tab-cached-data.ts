@@ -12,8 +12,15 @@ export function useTabCachedData<T>(opts: {
   ttlMs: number;
   seedData?: T;
   fetcher: () => Promise<T>;
+  /**
+   * 화면에 들어올 때마다 TTL과 무관하게 다시 읽는다(직전 데이터는 그대로
+   * 보여주고 배경에서 갱신). 앱 밖에서 상태가 바뀌는 화면 — 보호자가 동의를
+   * 마친 뒤 관리자가 확인하러 돌아오는 경우처럼 — 은 "돌아왔다"는 행동 자체가
+   * 최신을 보려는 의도이므로, TTL이 남았다고 이전 상태를 보여주면 안 된다.
+   */
+  revalidateOnMount?: boolean;
 }) {
-  const { cacheKey, ttlMs, seedData, fetcher } = opts;
+  const { cacheKey, ttlMs, seedData, fetcher, revalidateOnMount = false } = opts;
 
   const initial = getCachedTabData<T>(cacheKey);
   const [data, setData] = useState<T | null>(initial?.data ?? seedData ?? null);
@@ -50,7 +57,7 @@ export function useTabCachedData<T>(opts: {
       fetchedAtRef.current = Date.now();
     }
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    runFetch(false);
+    runFetch(revalidateOnMount);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cacheKey]);
 
