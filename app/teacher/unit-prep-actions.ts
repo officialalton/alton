@@ -153,7 +153,15 @@ export async function loadUnitEligibleContent(overlayUnitId: string): Promise<El
       .from("curriculum_doc_section_keywords_selectable")
       .select("section_id, keyword_id")
       .in("keyword_id", keywordIds),
-    supabase.from("problem_keywords_selectable").select("problem_id, keyword_id").in("keyword_id", keywordIds),
+    // 2026-09-13 정정: 신규 선택 후보는 **공개된 버전이 있는 문제**로 좁힌다.
+    // problem_keywords_selectable 은 problems.status='confirmed' 만 보므로, 검수
+    // 중이거나 AI가 만든 초안 — 내용을 읽을 수조차 없는 문제 — 도 후보로 잡혔다.
+    // 이미 고정된 문제를 **읽는** 경로는 그대로 둔다(보관됐다고 과거 수업에서
+    // 사라지면 안 된다).
+    supabase
+      .from("problem_auto_composition_candidates")
+      .select("problem_id, keyword_id")
+      .in("keyword_id", keywordIds),
   ]);
 
   const sectionIds = Array.from(new Set((sectionKeywordRows ?? []).map((r) => r.section_id as string)));

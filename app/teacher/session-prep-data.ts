@@ -215,8 +215,9 @@ export async function loadEligibleContentForSelection(
       .from("curriculum_doc_section_keywords_selectable")
       .select("section_id, keyword_id")
       .in("keyword_id", keywordIds),
+    // 신규 선택 후보는 공개된 버전이 있는 문제만(2026-09-13 정정).
     supabase
-      .from("problem_keywords_selectable")
+      .from("problem_auto_composition_candidates")
       .select("problem_id, keyword_id")
       .in("keyword_id", keywordIds),
   ]);

@@ -329,8 +329,8 @@ export type KeywordProblem = {
  * 위 두 계층에서는 **무엇이 들어올지**만 보여준다. 여기서 고르게 하면 학생 문맥
  * 없이 문제를 확정하는 셈이 되고, 그건 이 화면이 할 일이 아니다.
  *
- * problem_keywords_selectable 을 쓴다 — 확정됐고 보관되지 않은 문제만 후보다.
- * 관계가 있다는 것만으로 선택 가능으로 보지 않는다(R9 corrective 2).
+ * problem_auto_composition_candidates 를 쓴다 — 확정·미보관에 더해 **공개된 버전이
+ * 있는 문제만**. 관계가 있다는 것만으로 선택 가능으로 보지 않는다(R9 corrective 2).
  */
 export async function loadKeywordProblems(
   supabase: SupabaseClient,
@@ -339,7 +339,7 @@ export async function loadKeywordProblems(
   if (keywordIds.length === 0) return [];
 
   const { data: links } = await supabase
-    .from("problem_keywords_selectable")
+    .from("problem_auto_composition_candidates")
     .select("problem_id")
     .in("keyword_id", keywordIds);
 
