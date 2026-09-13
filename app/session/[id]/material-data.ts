@@ -307,3 +307,21 @@ export async function loadPlannedMaterialData(
     canvasStrokes: (annotation?.strokes as CanvasStroke[] | null) ?? [],
   };
 }
+
+/**
+ * 고정된 교재가 없을 때 "예정 구성"으로 내려가도 되는가.
+ *
+ * 2026-09-13 정정: **시작 전 수업에만** 내려간다. 시작·완료된 수업에 고정 자료가
+ * 없다고 해서 최신 예정 구성을 끼워 넣으면, 그 수업이 실제로 쓰지 않은 내용을 그
+ * 수업의 내용처럼 보여주게 된다. 회차 구성은 그 뒤로도 계속 바뀌므로, 같은 과거
+ * 수업을 열 때마다 다른 것이 보이게 된다.
+ *
+ * 시작·완료됐는데 고정 자료가 없는 수업(준비 없이 시작한 경우)은 비어 있는 채로
+ * 둔다 — 없었다는 사실이 사실이다.
+ */
+export function shouldFallBackToPlannedMaterial(
+  sessionSource: "v3" | "legacy",
+  state: "prep" | "live" | "completed"
+): boolean {
+  return sessionSource === "v3" && state === "prep";
+}

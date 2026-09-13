@@ -51,10 +51,20 @@ function makeKeyword(): string {
   return id;
 }
 
-/** 확정된 문제 하나 + 키워드 연결. 확정이 아니면 후보가 아니다. */
+/**
+ * 후보가 되려면 세 가지가 모두 맞아야 한다:
+ * 확정(problems.status) · 미보관 · **공개된 버전이 있음**(problem_versions).
+ * 검수 중이거나 AI가 만든 초안은 사람이 공개를 누르기 전까지 들어오지 않는다.
+ */
 function makeProblem(
   keywordId: string,
-  opts: { format?: string; difficulty?: string; confirmed?: boolean } = {}
+  opts: {
+    format?: string;
+    difficulty?: string;
+    confirmed?: boolean;
+    /** 공개된 버전을 만들지 않는다 — 검수 중이거나 초안인 문제. */
+    unpublished?: boolean;
+  } = {}
 ): string {
   const format = opts.format ?? "mc";
   const difficulty = opts.difficulty ?? "medium";
@@ -66,6 +76,14 @@ function makeProblem(
   );
   cleanupProblemIds.push(id);
   psql(`insert into problem_keywords (problem_id, keyword_id) values ('${id}', '${keywordId}');`);
+  // 문제를 만들면 1번 버전이 자동으로 생긴다(초안). 공개 상태만 바꾼다 —
+  // 새 버전을 끼워 넣으면 "문제당 공개본 하나" 규칙과 부딪힌다.
+  psql(
+    `update problem_versions
+     set status = '${opts.unpublished ? "in_review" : "published"}',
+         published_at = ${opts.unpublished ? "null" : "now()"}
+     where problem_id = '${id}' and version_no = 1;`
+  );
   return id;
 }
 
@@ -112,6 +130,13 @@ describe("관리자 기준본 문제 자동 구성", () => {
   it("확정되지 않은 문제는 후보가 아니다", () => {
     const kw = makeKeyword();
     makeProblem(kw, { confirmed: false });
+    const unitId = makeCatalogUnit([kw]);
+    expect(countOf(unitId)).toBe("0");
+  });
+
+  it("공개된 버전이 없으면 후보가 아니다 — 검수 중·AI 초안은 들어오지 않는다", () => {
+    const kw = makeKeyword();
+    makeProblem(kw, { unpublished: true });
     const unitId = makeCatalogUnit([kw]);
     expect(countOf(unitId)).toBe("0");
   });
@@ -222,44 +247,38 @@ describe("최초 상속과 상위 변경 반영은 다르다", () => {
     return id;
   }
 
-  it("상위 조건은 부를 때만 내려오고, 이미 정한 조건을 덮어쓰지 않는다", () => {
-    const kw = makeKeyword();
-    makeProblem(kw);
-    const catalogUnit = makeCatalogUnit([kw]);
-    setCriteria(catalogUnit, `array['mc'], array['easy'], 3`);
-
-    const teacherUnit = makeTeacherUnit(catalogUnit);
-    // 선생님이 먼저 자기 조건을 정해 뒀다.
+  const teacherTarget = (unitId: string) =>
     psql(
-      `insert into teacher_curriculum_template_unit_problem_criteria (unit_id, target_count)
-       values ('${teacherUnit}', 1);`
+      `select coalesce(target_count::text, '(없음)') from
+       teacher_curriculum_template_unit_problem_criteria where unit_id = '${unitId}';`
     );
 
-    psql(`select inherit_teacher_unit_problem_defaults('${teacherUnit}');`);
-
-    expect(
-      psql(
-        `select target_count from teacher_curriculum_template_unit_problem_criteria
-         where unit_id = '${teacherUnit}';`
-      )
-    ).toBe("1");
-  });
-
-  it("조건이 없으면 상위에서 받아 온다", () => {
+  // 확정 정책: 최초 상속은 **자동**이다. 회차가 만들어지는 순간 위층 조건이 내려온다.
+  it("회차를 만들면 상위 조건이 자동으로 내려온다", () => {
     const kw = makeKeyword();
     makeProblem(kw);
     const catalogUnit = makeCatalogUnit([kw]);
     setCriteria(catalogUnit, `null, null, 3`);
 
     const teacherUnit = makeTeacherUnit(catalogUnit);
-    psql(`select inherit_teacher_unit_problem_defaults('${teacherUnit}');`);
+    expect(teacherTarget(teacherUnit)).toBe("3");
+  });
 
-    expect(
-      psql(
-        `select target_count from teacher_curriculum_template_unit_problem_criteria
-         where unit_id = '${teacherUnit}';`
-      )
-    ).toBe("3");
+  it("선생님이 고친 조건을 수동 보정이 덮어쓰지 않는다", () => {
+    const kw = makeKeyword();
+    makeProblem(kw);
+    const catalogUnit = makeCatalogUnit([kw]);
+    setCriteria(catalogUnit, `null, null, 3`);
+
+    const teacherUnit = makeTeacherUnit(catalogUnit);
+    // 선생님이 자기 값으로 고쳤다.
+    psql(
+      `update teacher_curriculum_template_unit_problem_criteria
+       set target_count = 1 where unit_id = '${teacherUnit}';`
+    );
+
+    psql(`select inherit_teacher_unit_problem_defaults('${teacherUnit}');`);
+    expect(teacherTarget(teacherUnit)).toBe("1");
   });
 
   it("상위가 나중에 바뀌어도 저절로 내려오지 않는다", () => {
@@ -269,16 +288,10 @@ describe("최초 상속과 상위 변경 반영은 다르다", () => {
     setCriteria(catalogUnit, `null, null, 3`);
 
     const teacherUnit = makeTeacherUnit(catalogUnit);
-    psql(`select inherit_teacher_unit_problem_defaults('${teacherUnit}');`);
+    expect(teacherTarget(teacherUnit)).toBe("3");
 
-    // 관리자가 나중에 조건을 바꾼다.
+    // 관리자가 나중에 조건을 바꾼다 — 하위 조정을 덮어쓰지 않으려면 내려가면 안 된다.
     setCriteria(catalogUnit, `null, null, 9`);
-
-    expect(
-      psql(
-        `select target_count from teacher_curriculum_template_unit_problem_criteria
-         where unit_id = '${teacherUnit}';`
-      )
-    ).toBe("3");
+    expect(teacherTarget(teacherUnit)).toBe("3");
   });
 });

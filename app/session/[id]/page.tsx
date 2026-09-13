@@ -9,6 +9,7 @@ import {
   loadMaterialData,
   loadPinnedMaterialData,
   loadPlannedMaterialData,
+  shouldFallBackToPlannedMaterial,
 } from "./material-data";
 import { loadVocabWords } from "./vocab-data";
 import { loadHomeworkItems } from "./homework-data";
@@ -66,10 +67,15 @@ export default async function SessionPage({
 
   // P2/P3 5단계 — v3 수업은 "준비해서 고정한 교재"를 먼저 보여준다. 고정된
   // 교재가 없는 수업(준비 없이 시작했거나 레거시)만 기존 경로로 내려간다.
+  //
+  // 2026-09-13 정정: 예정 구성으로의 폴백은 **시작 전 수업에만** 적용한다. 시작·완료된
+  // 수업에 고정 자료가 없다고 해서 최신 예정 구성을 끼워 넣으면, 그 수업이 실제로
+  // 쓰지 않은 내용을 그 수업의 내용처럼 보여주게 된다. 회차 구성은 그 뒤로도 계속
+  // 바뀌므로 과거 수업을 열 때마다 다른 것이 보이게 된다.
+  const showPlannedInstead = shouldFallBackToPlannedMaterial(session.source, initialState);
   const material =
     (session.source === "v3" ? await loadPinnedMaterialData(supabase, session.id) : null) ??
-    // 수업 시작 전에는 고정된 내용이 없다 — 회차 교재 구성을 예정 내용으로 보여준다.
-    (session.source === "v3" ? await loadPlannedMaterialData(supabase, session.id) : null) ??
+    (showPlannedInstead ? await loadPlannedMaterialData(supabase, session.id) : null) ??
     (await loadMaterialData(supabase, session.curriculumDocId, session.id, session.studentId));
 
   const vocabWords = await loadVocabWords(supabase, session.studentId);

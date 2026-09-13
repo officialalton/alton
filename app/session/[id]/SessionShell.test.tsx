@@ -399,7 +399,7 @@ describe("SessionShell — 수업 준비 탭", () => {
     );
     fireEvent.click(screen.getByRole("button", { name: "수업 준비" }));
     expect(
-      screen.getByText(/진행 중인 이 수업의 고정 내용·필기·답안에는 반영되지 않습니다/)
+      screen.getByText(/필기·답안·피드백을 바꾸지 않으며/)
     ).toBeInTheDocument();
   });
 
@@ -416,8 +416,9 @@ describe("SessionShell — 수업 준비 탭", () => {
       />
     );
     fireEvent.click(screen.getByRole("button", { name: "수업 준비" }));
+    // 적용 범위를 "앞으로의 수업"이 아니라 대상이 분명하게 쓴다.
     expect(
-      screen.getByText(/시작 시점으로 고정돼 바뀌지 않습니다/)
+      screen.getByText(/이 회차를 쓰는 아직 시작하지 않은 수업에 적용됩니다/)
     ).toBeInTheDocument();
   });
 });
