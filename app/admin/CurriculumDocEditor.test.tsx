@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor, within } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import CurriculumDocEditor from "./CurriculumDocEditor";
 import * as docActions from "./curriculum-doc-actions";
 import type { DocEditorData } from "./curriculum-doc-data";
@@ -8,6 +8,7 @@ vi.mock("./curriculum-doc-actions", () => ({
   createCurriculumDoc: vi.fn(),
   updateDocTitle: vi.fn(),
   setDocPublished: vi.fn(),
+  setDocPrimaryKeyword: vi.fn(),
   addSection: vi.fn(),
   updateSection: vi.fn(),
   removeSection: vi.fn(),
@@ -32,6 +33,8 @@ const doc: DocEditorData = {
   unitId: null,
   unitTitle: null,
   status: "draft",
+  primaryKeywordId: null,
+  primaryKeywordPosition: null,
   sections: [
     {
       id: "sec1",
@@ -317,12 +320,15 @@ describe("CurriculumDocEditor", () => {
 
       const input = screen.getByPlaceholderText("키워드 검색 또는 새 키워드 입력");
       fireEvent.change(input, { target: { value: "판별" } });
-      fireEvent.click(screen.getByText("판별식"));
+      // 대표 키워드 select의 option에도 같은 글자가 있으므로 버튼만 고른다.
+      fireEvent.click(
+        screen.getAllByText("판별식").find((el) => el.tagName === "BUTTON")!
+      );
 
       await waitFor(() =>
         expect(docActions.assignSectionKeyword).toHaveBeenCalledWith("sec1", "kw1")
       );
-      await waitFor(() => expect(screen.getByText("판별식")).toBeInTheDocument());
+      await waitFor(() => expect(screen.getAllByText("판별식").length).toBeGreaterThan(0));
     });
 
     it("이미 태그된 키워드는 다시 태그 요청을 보내지 않는다(중복 방지)", async () => {
@@ -338,7 +344,10 @@ describe("CurriculumDocEditor", () => {
       // 이미 태그된 키워드는 칩으로만 보이고, 검색 제안 목록에는 다시 나오지 않는다.
       const input = screen.getByPlaceholderText("키워드 검색 또는 새 키워드 입력");
       fireEvent.change(input, { target: { value: "판별" } });
-      expect(screen.queryAllByText("판별식")).toHaveLength(1); // 칩 하나만
+      // 칩 하나만. 대표 키워드 select의 option은 별개 층이라 세지 않는다.
+      expect(
+        screen.queryAllByText("판별식").filter((el) => el.tagName !== "OPTION")
+      ).toHaveLength(1);
       expect(docActions.assignSectionKeyword).not.toHaveBeenCalled();
     });
 
@@ -362,5 +371,85 @@ describe("CurriculumDocEditor", () => {
         expect(docActions.assignSectionKeyword).toHaveBeenCalledWith("sec1", "kw2")
       );
     });
+  });
+});
+
+// P2 2차 — 교재당 대표 키워드 1개.
+// 섹션별 키워드("이 조각이 무엇을 다루는가")와는 다른 층이다. 대표 키워드는
+// "이 교재를 어느 키워드의 기본 교재로 둘 것인가"이고, 회차에 그 키워드가 붙으면
+// 이 교재가 자동으로 구성에 들어간다.
+describe("대표 키워드 지정", () => {
+  const docWithKeywords: DocEditorData = {
+    ...doc,
+    subjectKeywords: [
+      { id: "kw1", label: "이차함수", status: "active" },
+      { id: "kw2", label: "삼각비", status: "active" },
+    ],
+  };
+
+  beforeEach(() => vi.clearAllMocks());
+
+  it("미지정 상태로 시작하고, 고르면 바로 저장한다", async () => {
+    vi.mocked(docActions.setDocPrimaryKeyword).mockResolvedValue({ ok: true });
+    render(<CurriculumDocEditor doc={docWithKeywords} onBack={vi.fn()} onDeleted={vi.fn()} />);
+
+    const select = screen.getByLabelText("대표 키워드") as HTMLSelectElement;
+    expect(select.value).toBe("");
+
+    fireEvent.change(select, { target: { value: "kw1" } });
+    await waitFor(() =>
+      expect(docActions.setDocPrimaryKeyword).toHaveBeenCalledWith("doc1", "kw1", null)
+    );
+  });
+
+  it("키워드를 고르기 전에는 순서를 입력할 수 없다", () => {
+    render(<CurriculumDocEditor doc={docWithKeywords} onBack={vi.fn()} onDeleted={vi.fn()} />);
+    expect(screen.getByLabelText("키워드 안 순서")).toBeDisabled();
+  });
+
+  it("순서를 숫자로 적으면 함께 저장한다", async () => {
+    vi.mocked(docActions.setDocPrimaryKeyword).mockResolvedValue({ ok: true });
+    render(
+      <CurriculumDocEditor
+        doc={{ ...docWithKeywords, primaryKeywordId: "kw1" }}
+        onBack={vi.fn()}
+        onDeleted={vi.fn()}
+      />
+    );
+    const position = screen.getByLabelText("키워드 안 순서");
+    fireEvent.change(position, { target: { value: "2" } });
+    fireEvent.blur(position);
+    await waitFor(() =>
+      expect(docActions.setDocPrimaryKeyword).toHaveBeenCalledWith("doc1", "kw1", 2)
+    );
+  });
+
+  it("순서에 숫자가 아닌 값을 넣으면 저장하지 않고 알려준다", async () => {
+    render(
+      <CurriculumDocEditor
+        doc={{ ...docWithKeywords, primaryKeywordId: "kw1" }}
+        onBack={vi.fn()}
+        onDeleted={vi.fn()}
+      />
+    );
+    const position = screen.getByLabelText("키워드 안 순서");
+    fireEvent.change(position, { target: { value: "첫째" } });
+    fireEvent.blur(position);
+    await waitFor(() =>
+      expect(screen.getByText("순서는 1 이상의 숫자로 적어주세요.")).toBeInTheDocument()
+    );
+    expect(docActions.setDocPrimaryKeyword).not.toHaveBeenCalled();
+  });
+
+  it("저장 실패 사유를 그대로 보여준다", async () => {
+    vi.mocked(docActions.setDocPrimaryKeyword).mockResolvedValue({
+      ok: false,
+      error: "대표 키워드는 교재와 같은 과목이어야 합니다.",
+    });
+    render(<CurriculumDocEditor doc={docWithKeywords} onBack={vi.fn()} onDeleted={vi.fn()} />);
+    fireEvent.change(screen.getByLabelText("대표 키워드"), { target: { value: "kw2" } });
+    await waitFor(() =>
+      expect(screen.getByText("대표 키워드는 교재와 같은 과목이어야 합니다.")).toBeInTheDocument()
+    );
   });
 });

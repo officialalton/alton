@@ -16,7 +16,11 @@ import {
   inheritUnitDefaults,
   moveUnitMaterial,
   removeUnitMaterial,
+  addUnitMaterial,
+  loadUnitMaterialCatalog,
+  previewUnitMaterial,
   type UnitPrep,
+  type CatalogMaterial,
   type UnitComposition,
 } from "./unit-prep-actions";
 import type { EligibleSelectionContent } from "./session-prep-data";
@@ -50,6 +54,20 @@ export default function UnitPrepPanel({
   const [composition, setComposition] = useState<UnitComposition | null>(null);
   const [keywordToAdd, setKeywordToAdd] = useState("");
   const [notice, setNotice] = useState<string | null>(null);
+  const [catalog, setCatalog] = useState<CatalogMaterial[] | null>(null);
+  const [catalogOpen, setCatalogOpen] = useState(false);
+  const [catalogQuery, setCatalogQuery] = useState("");
+  const [preview, setPreview] = useState<{ title: string; sectionTitles: string[] } | null>(null);
+
+  async function openCatalog() {
+    setCatalogOpen(true);
+    setError(null);
+    try {
+      setCatalog(await loadUnitMaterialCatalog(overlayUnitId));
+    } catch {
+      setError("교재 목록을 불러오지 못했습니다.");
+    }
+  }
 
   // 후보가 비었을 때 원인을 구분한다. 회차에 키워드가 없으면 담을 수 있는 게
   // 생길 수가 없고, 선생님이 할 일은 "기다리기"가 아니라 "키워드 지정"이다.
@@ -103,6 +121,7 @@ export default function UnitPrepPanel({
       ]);
       setComposition(comp);
       setEligible(content);
+      if (catalogOpen) setCatalog(await loadUnitMaterialCatalog(overlayUnitId));
     } catch (e) {
       setError(e instanceof Error ? e.message : "저장하지 못했습니다.");
     } finally {
@@ -245,7 +264,7 @@ export default function UnitPrepPanel({
                   }
                   className="text-[12px] font-bold text-ink disabled:text-grey-300 ml-auto"
                 >
-                  기본 구성 가져오기
+                  기본 구성 보충하기
                 </button>
               )}
             </div>
@@ -271,8 +290,12 @@ export default function UnitPrepPanel({
                   key={m.curriculumDocId}
                   className="flex items-center justify-between text-[12.5px] py-1.5"
                 >
-                  <span className="truncate max-w-[440px]">
+                  <span className="truncate max-w-[420px]">
                     {index + 1}. {m.title}
+                    {/* 키워드를 떼면 자동분만 빠진다 — 어느 쪽인지 보여야 예측할 수 있다. */}
+                    <span className="text-[10.5px] text-grey-500 ml-1.5">
+                      {m.source === "auto" ? "키워드 자동" : "직접 담음"}
+                    </span>
                   </span>
                   <span className="flex items-center gap-2 flex-shrink-0">
                     <button
@@ -301,6 +324,85 @@ export default function UnitPrepPanel({
                   </span>
                 </div>
               ))
+            )}
+
+            <button
+              onClick={() => (catalogOpen ? setCatalogOpen(false) : void openCatalog())}
+              className="text-[12px] font-bold text-ink mt-2"
+            >
+              {catalogOpen ? "교재 목록 닫기" : "교재 목록에서 고르기"}
+            </button>
+
+            {catalogOpen && (
+              <div className="mt-2 border-[1.5px] border-grey-200 rounded-xl p-3">
+                <input
+                  aria-label="교재 검색"
+                  value={catalogQuery}
+                  onChange={(e) => setCatalogQuery(e.target.value)}
+                  placeholder="교재 제목으로 찾기"
+                  className="w-full text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 mb-2"
+                />
+                {catalog === null ? (
+                  <p className="text-[12.5px] text-grey-500">불러오는 중...</p>
+                ) : catalog.length === 0 ? (
+                  <p className="text-[12.5px] text-grey-500">이 과목에 공개된 교재가 없습니다.</p>
+                ) : (
+                  catalog
+                    .filter((c) => c.title.toLowerCase().includes(catalogQuery.trim().toLowerCase()))
+                    .map((c) => (
+                      <div
+                        key={c.curriculumDocId}
+                        className="flex items-center justify-between text-[12.5px] py-1.5"
+                      >
+                        <span className="truncate max-w-[380px]">
+                          {c.title}
+                          <span className="text-[10.5px] text-grey-500 ml-1.5">
+                            {c.primaryKeywordLabel ?? "대표 키워드 없음"}
+                          </span>
+                        </span>
+                        <span className="flex items-center gap-2 flex-shrink-0">
+                          <button
+                            onClick={() =>
+                              void previewUnitMaterial(c.curriculumDocId).then(setPreview)
+                            }
+                            className="text-[11.5px] font-bold text-grey-500"
+                          >
+                            미리보기
+                          </button>
+                          <button
+                            disabled={c.picked || saving}
+                            onClick={() =>
+                              void withComposition(() => addUnitMaterial(overlayUnitId, c.curriculumDocId))
+                            }
+                            className="text-[11.5px] font-bold text-ink disabled:text-grey-300"
+                          >
+                            {c.picked ? "담김" : "담기"}
+                          </button>
+                        </span>
+                      </div>
+                    ))
+                )}
+              </div>
+            )}
+
+            {preview && (
+              <div className="mt-2 border-[1.5px] border-grey-200 rounded-xl p-3">
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className="text-[12.5px] font-bold text-ink">{preview.title}</span>
+                  <button onClick={() => setPreview(null)} className="text-[11.5px] font-bold text-grey-500">
+                    닫기
+                  </button>
+                </div>
+                {preview.sectionTitles.length === 0 ? (
+                  <p className="text-[12px] text-grey-500">아직 내용이 없는 교재입니다.</p>
+                ) : (
+                  <ol className="text-[12px] text-grey-500 list-decimal pl-4">
+                    {preview.sectionTitles.map((t, i) => (
+                      <li key={i}>{t}</li>
+                    ))}
+                  </ol>
+                )}
+              </div>
             )}
           </section>
 

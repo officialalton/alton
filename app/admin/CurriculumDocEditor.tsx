@@ -4,6 +4,7 @@ import { useState } from "react";
 import {
   updateDocTitle,
   setDocPublished,
+  setDocPrimaryKeyword,
   addSection,
   updateSection,
   removeSection,
@@ -54,6 +55,25 @@ export default function CurriculumDocEditor({
   // R9(Task 2): 이 과목의 키워드 사전 — 새 키워드를 만들면 여기에 추가해
   // 같은 화면 안의 다른 섹션/문제 태깅 picker에도 즉시 나타나게 한다.
   const [catalog, setCatalog] = useState<SubjectKeyword[]>(doc.subjectKeywords ?? []);
+  // P2 2차 — 교재당 대표 키워드 1개. 섹션별 키워드(무엇을 다루는가)와는 다른
+  // 층이다: 대표 키워드는 "이 교재를 어느 키워드의 기본 교재로 둘 것인가"이고,
+  // 회차에 그 키워드가 붙으면 이 교재가 자동으로 구성에 들어간다.
+  const [primaryKeywordId, setPrimaryKeywordId] = useState(doc.primaryKeywordId ?? "");
+  const [primaryPosition, setPrimaryPosition] = useState(
+    doc.primaryKeywordPosition === null ? "" : String(doc.primaryKeywordPosition)
+  );
+  const [primaryError, setPrimaryError] = useState<string | null>(null);
+
+  async function savePrimaryKeyword(keywordId: string, positionText: string) {
+    setPrimaryError(null);
+    const parsed = positionText.trim() === "" ? null : Number(positionText);
+    if (parsed !== null && (!Number.isFinite(parsed) || parsed < 1)) {
+      setPrimaryError("순서는 1 이상의 숫자로 적어주세요.");
+      return;
+    }
+    const result = await setDocPrimaryKeyword(doc.id, keywordId || null, parsed);
+    if (!result.ok) setPrimaryError(result.error);
+  }
   const [publishing, setPublishing] = useState(false);
   const [pickingSectionType, setPickingSectionType] = useState(false);
   const [confirmingDelete, setConfirmingDelete] = useState(false);
@@ -161,6 +181,46 @@ export default function CurriculumDocEditor({
         {doc.unitTitle ? ` · ${doc.unitTitle}` : ""} ·{" "}
         {status === "published" ? "배포됨" : "초안"}
       </p>
+
+      {/* 대표 키워드 — 이 교재를 어느 키워드의 기본 교재로 둘 것인가.
+          회차에 그 키워드가 붙으면 이 교재가 자동으로 구성에 들어간다. */}
+      <div className="mb-6 border-[1.5px] border-grey-200 rounded-xl p-3.5">
+        <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2">
+          대표 키워드
+        </div>
+        <p className="text-[12px] text-grey-500 mb-2">
+          회차에 이 키워드가 설정되면 이 교재가 준비 구성에 자동으로 들어갑니다.
+          배포된 교재만 자동으로 들어갑니다.
+        </p>
+        <div className="flex flex-wrap items-center gap-2">
+          <select
+            aria-label="대표 키워드"
+            value={primaryKeywordId}
+            onChange={(e) => {
+              setPrimaryKeywordId(e.target.value);
+              void savePrimaryKeyword(e.target.value, primaryPosition);
+            }}
+            className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 max-w-[260px]"
+          >
+            <option value="">지정하지 않음</option>
+            {catalog.map((k) => (
+              <option key={k.id} value={k.id}>
+                {k.label}
+              </option>
+            ))}
+          </select>
+          <input
+            aria-label="키워드 안 순서"
+            value={primaryPosition}
+            disabled={!primaryKeywordId}
+            onChange={(e) => setPrimaryPosition(e.target.value)}
+            onBlur={() => void savePrimaryKeyword(primaryKeywordId, primaryPosition)}
+            placeholder="순서 (예: 1)"
+            className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 w-[120px] disabled:bg-grey-100"
+          />
+        </div>
+        {primaryError && <p className="text-[12px] text-red mt-1.5">{primaryError}</p>}
+      </div>
 
       {sections.map((section, idx) => (
         <SectionEditor

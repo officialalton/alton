@@ -334,7 +334,22 @@ export async function loadUnitPrepSummaries(
 // 있어야 한다. 아래 셋이 그 진입점이다.
 
 export type UnitKeyword = { id: string; label: string };
-export type UnitMaterial = { curriculumDocId: string; title: string; position: number };
+export type UnitMaterial = {
+  curriculumDocId: string;
+  title: string;
+  position: number;
+  /** auto = 회차 키워드에서 자동으로 들어온 것. manual = 선생님이 직접 담은 것. */
+  source: "auto" | "manual";
+};
+
+/** 회차 구성에 담을 수 있는 교재 전체 목록의 한 줄. */
+export type CatalogMaterial = {
+  curriculumDocId: string;
+  title: string;
+  primaryKeywordLabel: string | null;
+  /** 이미 이 회차 구성에 들어 있는가. */
+  picked: boolean;
+};
 
 export type UnitComposition = {
   keywords: UnitKeyword[];
@@ -366,7 +381,7 @@ export async function loadUnitComposition(overlayUnitId: string): Promise<UnitCo
     supabase.from("curriculum_overlay_unit_keywords").select("keyword_id").eq("overlay_unit_id", overlayUnitId),
     supabase
       .from("curriculum_overlay_unit_materials")
-      .select("curriculum_doc_id, position")
+      .select("curriculum_doc_id, position, source")
       .eq("overlay_unit_id", overlayUnitId)
       .order("position", { ascending: true }),
     subjectId
@@ -396,6 +411,7 @@ export async function loadUnitComposition(overlayUnitId: string): Promise<UnitCo
       curriculumDocId: m.curriculum_doc_id as string,
       title: titleById.get(m.curriculum_doc_id as string) ?? "(제목 없음)",
       position: m.position as number,
+      source: (m.source as "auto" | "manual") ?? "manual",
     })),
     hasTemplateDefaults: Boolean(unit?.source_unit_id),
     subjectKeywords: (subjectKeywordRows ?? []).map((k) => ({ id: k.id as string, label: k.label as string })),
@@ -484,16 +500,127 @@ export async function moveUnitMaterial(
   return { ok: true };
 }
 
+/**
+ * 회차 구성에서 교재를 뺀다.
+ *
+ * 뺐다는 사실을 남긴다 — 그러지 않으면 다음 자동 동기화가 방금 뺀 것을 그대로
+ * 되돌려 놓는다. 선생님이 같은 교재를 다시 담으면 이 기록은 지워진다.
+ */
 export async function removeUnitMaterial(
   overlayUnitId: string,
   curriculumDocId: string
 ): Promise<{ ok: true } | { ok: false; error: string }> {
-  const { supabase } = await requireTeacherOrAdmin();
+  const { supabase, user } = await requireTeacherOrAdmin();
+  const { error: excludeError } = await supabase
+    .from("curriculum_overlay_unit_material_exclusions")
+    .insert({ overlay_unit_id: overlayUnitId, curriculum_doc_id: curriculumDocId, created_by: user.id });
+  if (excludeError && excludeError.code !== "23505") {
+    return { ok: false, error: "교재를 빼지 못했습니다." };
+  }
   const { error } = await supabase
     .from("curriculum_overlay_unit_materials")
     .delete()
     .eq("overlay_unit_id", overlayUnitId)
     .eq("curriculum_doc_id", curriculumDocId);
   if (error) return { ok: false, error: "교재를 빼지 못했습니다." };
+  return { ok: true };
+}
+
+/** 회차 구성에 담을 수 있는 교재 전체(공개된 것). 제목과 대표 키워드를 함께 준다. */
+export async function loadUnitMaterialCatalog(overlayUnitId: string): Promise<CatalogMaterial[]> {
+  const { supabase } = await requireTeacherOrAdmin();
+
+  const { data: unit } = await supabase
+    .from("curriculum_overlay_units")
+    .select("overlay:student_curriculum_overlays!inner(subject_enrollment_id)")
+    .eq("id", overlayUnitId)
+    .maybeSingle();
+  const overlay = Array.isArray(unit?.overlay) ? unit?.overlay[0] : unit?.overlay;
+  const enrollmentId = (overlay as { subject_enrollment_id?: string } | undefined)?.subject_enrollment_id;
+  if (!enrollmentId) return [];
+
+  const { data: enrollment } = await supabase
+    .from("subject_enrollments")
+    .select("subject_id")
+    .eq("id", enrollmentId)
+    .maybeSingle();
+  if (!enrollment?.subject_id) return [];
+
+  const [{ data: docs }, { data: picked }] = await Promise.all([
+    supabase
+      .from("curriculum_docs")
+      .select("id, title, primary_keyword_id")
+      .eq("subject_id", enrollment.subject_id)
+      .eq("status", "published")
+      .order("title", { ascending: true }),
+    supabase
+      .from("curriculum_overlay_unit_materials")
+      .select("curriculum_doc_id")
+      .eq("overlay_unit_id", overlayUnitId),
+  ]);
+
+  const keywordIds = Array.from(
+    new Set((docs ?? []).map((d) => d.primary_keyword_id as string | null).filter(Boolean) as string[])
+  );
+  const { data: keywords } = keywordIds.length
+    ? await supabase.from("subject_keywords").select("id, label").in("id", keywordIds)
+    : { data: [] as { id: string; label: string }[] };
+  const labelById = new Map((keywords ?? []).map((k) => [k.id as string, k.label as string]));
+  const pickedIds = new Set((picked ?? []).map((p) => p.curriculum_doc_id as string));
+
+  return (docs ?? []).map((d) => ({
+    curriculumDocId: d.id as string,
+    title: d.title as string,
+    primaryKeywordLabel: d.primary_keyword_id ? labelById.get(d.primary_keyword_id as string) ?? null : null,
+    picked: pickedIds.has(d.id as string),
+  }));
+}
+
+/** 교재 미리보기 — 구성에 담기 전에 무엇인지 확인한다. 섹션 제목만 준다. */
+export async function previewUnitMaterial(
+  curriculumDocId: string
+): Promise<{ title: string; sectionTitles: string[] }> {
+  const { supabase } = await requireTeacherOrAdmin();
+  const [{ data: doc }, { data: sections }] = await Promise.all([
+    supabase.from("curriculum_docs").select("title").eq("id", curriculumDocId).maybeSingle(),
+    supabase
+      .from("curriculum_doc_sections")
+      .select("title, position")
+      .eq("curriculum_doc_id", curriculumDocId)
+      .order("position", { ascending: true }),
+  ]);
+  return {
+    title: (doc?.title as string) ?? "(제목 없음)",
+    sectionTitles: (sections ?? []).map((s) => s.title as string),
+  };
+}
+
+/**
+ * 선생님이 교재를 직접 담는다.
+ *
+ * 직접 담은 것은 manual이라 키워드를 떼도 사라지지 않는다. 전에 뺐던 교재라면
+ * 그 기록을 지운다 — 다시 담았다는 건 마음이 바뀌었다는 뜻이다.
+ */
+export async function addUnitMaterial(
+  overlayUnitId: string,
+  curriculumDocId: string
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  const { supabase, user } = await requireTeacherOrAdmin();
+  await supabase
+    .from("curriculum_overlay_unit_material_exclusions")
+    .delete()
+    .eq("overlay_unit_id", overlayUnitId)
+    .eq("curriculum_doc_id", curriculumDocId);
+
+  const { error } = await supabase
+    .from("curriculum_overlay_unit_materials")
+    .insert({
+      overlay_unit_id: overlayUnitId,
+      curriculum_doc_id: curriculumDocId,
+      source: "manual",
+      created_by: user.id,
+    });
+  // 이미 담겨 있는 것은 오류가 아니다.
+  if (error && error.code !== "23505") return { ok: false, error: "교재를 담지 못했습니다." };
   return { ok: true };
 }

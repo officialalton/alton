@@ -11,6 +11,9 @@ import {
 } from "./unit-prep-actions";
 
 vi.mock("./unit-prep-actions", () => ({
+  addUnitMaterial: (...a: unknown[]) => addUnitMaterial(...a),
+  loadUnitMaterialCatalog: (...a: unknown[]) => loadUnitMaterialCatalog(...a),
+  previewUnitMaterial: (...a: unknown[]) => previewUnitMaterial(...a),
   loadUnitComposition: (...a: unknown[]) => loadUnitComposition(...a),
   addUnitKeyword: (...a: unknown[]) => addUnitKeyword(...a),
   removeUnitKeyword: (...a: unknown[]) => removeUnitKeyword(...a),
@@ -30,6 +33,9 @@ const pushMock = vi.fn();
 vi.mock("next/navigation", () => ({ useRouter: () => ({ push: pushMock }) }));
 
 const loadUnitComposition = vi.fn();
+const addUnitMaterial = vi.fn();
+const loadUnitMaterialCatalog = vi.fn();
+const previewUnitMaterial = vi.fn();
 const addUnitKeyword = vi.fn();
 const removeUnitKeyword = vi.fn();
 const inheritUnitDefaults = vi.fn();
@@ -38,7 +44,7 @@ const removeUnitMaterial = vi.fn();
 
 const emptyComposition = {
   keywords: [] as { id: string; label: string }[],
-  materials: [] as { curriculumDocId: string; title: string; position: number }[],
+  materials: [] as { curriculumDocId: string; title: string; position: number; source: "auto" | "manual" }[],
   hasTemplateDefaults: false,
   subjectKeywords: [{ id: "kw-1", label: "이차함수" }],
 };
@@ -57,6 +63,12 @@ function mockAll(overrides: {
   inheritUnitDefaults.mockResolvedValue({ ok: true, keywordsAdded: 2, materialsAdded: 3 });
   moveUnitMaterial.mockResolvedValue({ ok: true });
   removeUnitMaterial.mockResolvedValue({ ok: true });
+  addUnitMaterial.mockResolvedValue({ ok: true });
+  loadUnitMaterialCatalog.mockResolvedValue([
+    { curriculumDocId: "d1", title: "이차함수 개론", primaryKeywordLabel: "이차함수", picked: false },
+    { curriculumDocId: "d9", title: "삼각비 기초", primaryKeywordLabel: null, picked: true },
+  ]);
+  previewUnitMaterial.mockResolvedValue({ title: "이차함수 개론", sectionTitles: ["정의", "그래프"] });
   (loadUnitPrep as ReturnType<typeof vi.fn>).mockResolvedValue(overrides.prep ?? emptyPrep);
   (loadUnitEligibleContent as ReturnType<typeof vi.fn>).mockResolvedValue(
     overrides.content ?? { materialSections: [], problems: [], keywordCount: 2 }
@@ -209,15 +221,15 @@ describe("UnitPrepPanel — 회차 키워드와 교재 구성", () => {
   it("템플릿에서 나온 회차에서만 기본 구성을 가져올 수 있다", async () => {
     renderPanel();
     await waitFor(() => expect(screen.getByLabelText("키워드 추가")).toBeInTheDocument());
-    expect(screen.queryByText("기본 구성 가져오기")).not.toBeInTheDocument();
+    expect(screen.queryByText("기본 구성 보충하기")).not.toBeInTheDocument();
   });
 
   it("기본 구성을 가져오면 무엇이 몇 개 왔는지 알려준다", async () => {
     mockAll({ composition: { hasTemplateDefaults: true } });
     renderPanel();
-    await waitFor(() => expect(screen.getByText("기본 구성 가져오기")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("기본 구성 보충하기")).toBeInTheDocument());
 
-    fireEvent.click(screen.getByText("기본 구성 가져오기"));
+    fireEvent.click(screen.getByText("기본 구성 보충하기"));
     await waitFor(() =>
       expect(screen.getByText(/키워드 2개, 교재 3개를 가져왔습니다/)).toBeInTheDocument()
     );
@@ -227,9 +239,9 @@ describe("UnitPrepPanel — 회차 키워드와 교재 구성", () => {
     mockAll({ composition: { hasTemplateDefaults: true } });
     inheritUnitDefaults.mockResolvedValue({ ok: true, keywordsAdded: 0, materialsAdded: 0 });
     renderPanel();
-    await waitFor(() => expect(screen.getByText("기본 구성 가져오기")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("기본 구성 보충하기")).toBeInTheDocument());
 
-    fireEvent.click(screen.getByText("기본 구성 가져오기"));
+    fireEvent.click(screen.getByText("기본 구성 보충하기"));
     await waitFor(() => expect(screen.getByText(/이미 기본 구성을 모두 가져왔습니다/)).toBeInTheDocument());
   });
 
@@ -237,8 +249,8 @@ describe("UnitPrepPanel — 회차 키워드와 교재 구성", () => {
     mockAll({
       composition: {
         materials: [
-          { curriculumDocId: "d1", title: "첫째 교재", position: 1 },
-          { curriculumDocId: "d2", title: "둘째 교재", position: 2 },
+          { curriculumDocId: "d1", title: "첫째 교재", position: 1, source: "auto" as const },
+          { curriculumDocId: "d2", title: "둘째 교재", position: 2, source: "manual" as const },
         ],
       },
     });
@@ -261,5 +273,72 @@ describe("UnitPrepPanel — 회차 키워드와 교재 구성", () => {
 
     fireEvent.click(screen.getByLabelText("이차함수 키워드 빼기"));
     await waitFor(() => expect(screen.getByText("키워드를 떼지 못했습니다.")).toBeInTheDocument());
+  });
+});
+
+// P2 2차 — 교재 전체 목록에서 제목을 보고, 미리보고, 고르고, 정렬한다.
+describe("UnitPrepPanel — 교재 목록·미리보기", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    mockAll();
+  });
+
+  it("목록에서 제목과 대표 키워드를 보고 담을 수 있다", async () => {
+    renderPanel();
+    await waitFor(() => expect(screen.getByText("교재 목록에서 고르기")).toBeInTheDocument());
+    fireEvent.click(screen.getByText("교재 목록에서 고르기"));
+
+    await waitFor(() => expect(screen.getByText("이차함수 개론")).toBeInTheDocument());
+    // 키워드 고르기 목록에도 같은 글자가 있으므로 개수로 확인한다.
+    expect(screen.getAllByText("이차함수").length).toBeGreaterThan(0);
+    // 대표 키워드가 없는 교재도 숨기지 않고 그 사실을 보여준다.
+    expect(screen.getByText("대표 키워드 없음")).toBeInTheDocument();
+
+    fireEvent.click(screen.getAllByText("담기")[0]);
+    await waitFor(() => expect(addUnitMaterial).toHaveBeenCalledWith("unit-1", "d1"));
+  });
+
+  it("이미 담긴 교재는 다시 담을 수 없다", async () => {
+    renderPanel();
+    await waitFor(() => expect(screen.getByText("교재 목록에서 고르기")).toBeInTheDocument());
+    fireEvent.click(screen.getByText("교재 목록에서 고르기"));
+    await waitFor(() => expect(screen.getByText("삼각비 기초")).toBeInTheDocument());
+    expect(screen.getByText("담김")).toBeDisabled();
+  });
+
+  it("제목으로 목록을 좁힐 수 있다", async () => {
+    renderPanel();
+    await waitFor(() => expect(screen.getByText("교재 목록에서 고르기")).toBeInTheDocument());
+    fireEvent.click(screen.getByText("교재 목록에서 고르기"));
+    await waitFor(() => expect(screen.getByText("이차함수 개론")).toBeInTheDocument());
+
+    fireEvent.change(screen.getByLabelText("교재 검색"), { target: { value: "삼각" } });
+    expect(screen.queryByText("이차함수 개론")).not.toBeInTheDocument();
+    expect(screen.getByText("삼각비 기초")).toBeInTheDocument();
+  });
+
+  it("담기 전에 교재 안을 미리 볼 수 있다", async () => {
+    renderPanel();
+    await waitFor(() => expect(screen.getByText("교재 목록에서 고르기")).toBeInTheDocument());
+    fireEvent.click(screen.getByText("교재 목록에서 고르기"));
+    await waitFor(() => expect(screen.getAllByText("미리보기").length).toBeGreaterThan(0));
+
+    fireEvent.click(screen.getAllByText("미리보기")[0]);
+    await waitFor(() => expect(screen.getByText("정의")).toBeInTheDocument());
+    expect(screen.getByText("그래프")).toBeInTheDocument();
+  });
+
+  it("자동으로 들어온 자료와 직접 담은 자료를 구분해 보여준다", async () => {
+    mockAll({
+      composition: {
+        materials: [
+          { curriculumDocId: "d1", title: "첫째 교재", position: 1, source: "auto" as const },
+          { curriculumDocId: "d2", title: "둘째 교재", position: 2, source: "manual" as const },
+        ],
+      },
+    });
+    renderPanel();
+    await waitFor(() => expect(screen.getByText("키워드 자동")).toBeInTheDocument());
+    expect(screen.getByText("직접 담음")).toBeInTheDocument();
   });
 });

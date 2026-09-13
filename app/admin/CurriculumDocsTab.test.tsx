@@ -59,6 +59,7 @@ const existingDocListItem: CurriculumDocListItem = {
   unitTitle: "함수의 기초",
   status: "draft",
   sectionCount: 0,
+  hasPrimaryKeyword: false,
 };
 
 const existingDocDetail: DocEditorData = {
@@ -66,6 +67,8 @@ const existingDocDetail: DocEditorData = {
   title: "이차방정식 개념 정리",
   subjectId: "sub1",
   subjectName: "SAT Math",
+  primaryKeywordId: null,
+  primaryKeywordPosition: null,
   unitId: "u1",
   unitTitle: "함수의 기초",
   status: "draft",
@@ -147,5 +150,26 @@ describe("CurriculumDocsTab", () => {
     await waitFor(() =>
       expect(screen.queryByText("이차방정식 개념 정리")).not.toBeInTheDocument()
     );
+  });
+});
+
+// P2 2차 — 임의 백필을 하지 않았으므로 기존 교재는 전부 대표 키워드가 없다.
+// 관리자가 그것을 찾아 지정할 수 있어야 한다.
+describe("대표 키워드 미지정 교재 찾기", () => {
+  const withKeyword = { ...existingDocListItem, id: "doc2", title: "지정된 교재", hasPrimaryKeyword: true };
+
+  it("미지정 교재에 표시가 붙고 건수를 알려준다", () => {
+    render(<Wrapper initialDocs={[existingDocListItem, withKeyword]} subjects={subjects} />);
+    expect(screen.getByText("(1건)")).toBeInTheDocument();
+    expect(screen.getByText(/대표 키워드 없음/)).toBeInTheDocument();
+  });
+
+  it("미지정만 보기로 좁힐 수 있다", () => {
+    render(<Wrapper initialDocs={[existingDocListItem, withKeyword]} subjects={subjects} />);
+    expect(screen.getByText("지정된 교재")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText("대표 키워드가 없는 교재만 보기"));
+    expect(screen.queryByText("지정된 교재")).not.toBeInTheDocument();
+    expect(screen.getByText("이차방정식 개념 정리")).toBeInTheDocument();
   });
 });

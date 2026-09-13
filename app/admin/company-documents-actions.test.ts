@@ -202,3 +202,27 @@ describe("서버가 관리자 자격을 명시적으로 확인한다", () => {
     expect(src).toContain('from "@/lib/admin-auth"');
   });
 });
+
+// 2026-09-12 — 제품 오너가 폴더 이름을 정리한다(Contracts → Contract Templates 등).
+// 이름으로 폴더를 찾는 코드가 하나라도 있으면 그 순간 연결이 끊긴다. 식별자로만
+// 다뤄야 한다.
+describe("폴더는 이름이 아니라 식별자로 다룬다", () => {
+  it("Drive 질의에 폴더 이름 조건을 쓰지 않는다", async () => {
+    const fs = await import("node:fs");
+    const src = fs.readFileSync("app/admin/company-documents-actions.ts", "utf-8");
+    // name은 표시용으로만 읽는다(fields=...,name,...). 질의 조건에는 쓰지 않는다.
+    expect(src).not.toMatch(/name\s*=\s*'/);
+    expect(src).not.toContain("name contains");
+    expect(src).not.toContain("COMPANY_DOCUMENTS_ROOT_FOLDER_NAME");
+  });
+
+  it("루트는 환경변수의 폴더 id이고, 없으면 Drive id 자체를 쓴다", async () => {
+    configure();
+    driveFetch.mockResolvedValue({ json: async () => ({ files: [] }) });
+    const { listCompanyDocumentsAction } = await import("./company-documents-actions");
+    await listCompanyDocumentsAction();
+    const url = driveFetch.mock.calls[0][0] as string;
+    expect(decodeURIComponent(url)).toContain("'root-1' in parents");
+    expect(url).toContain("driveId=drive-1");
+  });
+});

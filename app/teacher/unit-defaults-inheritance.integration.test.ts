@@ -53,7 +53,22 @@ function asUserExpectError(userId: string, sql: string): string {
 }
 
 const uniq = () => `${Date.now()}_${Math.random()}`;
+
+// 이 파일이 심는 교재와 원래 있던 교재를 가르는 기준선. 백필 여부는 "원래 있던
+// 교재"에 대해서만 물어야 한다.
+let preexistingDocIds: string[] = [];
+beforeAll(() => {
+  preexistingDocIds = psql(`select id from curriculum_docs;`).split("\n").filter(Boolean);
+});
 const cleanupContractIds: string[] = [];
+// 이 파일이 심는 교재도 치운다. 안 치우면 다음 실행에서 "원래 있던 교재"로
+// 둔갑해, 마이그레이션이 백필했는지 묻는 검사를 오염시킨다.
+const cleanupDocIds: string[] = [];
+function newDoc(sql: string): string {
+  const id = psql(sql);
+  cleanupDocIds.push(id);
+  return id;
+}
 const cleanupTemplateUnitIds: string[] = [];
 let templatePosition = 8000 + Math.floor(Math.random() * 300);
 
@@ -70,6 +85,9 @@ afterEach(() => {
   }
   for (const id of cleanupTemplateUnitIds.splice(0)) {
     psql(`delete from subject_template_units where id = '${id}';`);
+  }
+  for (const id of cleanupDocIds.splice(0)) {
+    psql(`delete from curriculum_docs where id = '${id}';`);
   }
 });
 
@@ -93,7 +111,7 @@ function makeTemplateUnit(): { unitId: string; keywordIds: string[]; docIds: str
 
   // position 순서가 그대로 내려오는지 보려고 제목 순서와 어긋나게 심는다.
   const docIds = ["ㄴ두번째", "ㄱ첫번째"].map((title) =>
-    psql(
+    newDoc(
       `insert into curriculum_docs (title, subject_id, owner_type, status)
        values ('${title} ${uniq()}', '${SUBJECT_ID}', 'admin', 'published') returning id;`
     )
@@ -138,78 +156,99 @@ const materialsOf = (u: string) =>
      from curriculum_overlay_unit_materials where overlay_unit_id = '${u}';`
   );
 
-describe("새 회차는 키워드 없는 초안으로 존재한다", () => {
-  it("회차를 만들어도 키워드·교재가 자동으로 채워지지 않는다", () => {
-    const { unitId } = makeTemplateUnit();
+// 2026-09-12 정정: 초기 상속과 기존 데이터 보정은 다른 이야기다.
+//   초기 상속 = 관리자 기준본에서 회차를 **처음 만들 때** 자동으로 내려온다.
+//   보정      = 이미 있는 회차를 나중에 채우는 것. 자동으로 하지 않는다.
+describe("초기 상속은 회차가 만들어질 때 자동으로 일어난다", () => {
+  it("관리자 기준본에서 갈라져 나온 회차는 만들어질 때 기본 키워드·교재를 받는다", () => {
+    const { unitId, docIds } = makeTemplateUnit();
     const overlayUnitId = makeOverlayUnit(unitId);
-    // 템플릿에 기본 구성이 있어도 만들기만으로는 내려오지 않는다.
+    expect(keywordsOf(overlayUnitId)).toBe("2");
+    expect(materialsOf(overlayUnitId)).toBe(`${docIds[0]},${docIds[1]}`);
+  });
+
+  it("기준본에서 갈라져 나오지 않은 회차는 빈 초안으로 남는다", () => {
+    const overlayUnitId = makeOverlayUnit(null);
     expect(keywordsOf(overlayUnitId)).toBe("0");
     expect(materialsOf(overlayUnitId)).toBe("");
+  });
+
+  it("이미 있는 회차는 관리자 기본이 바뀌어도 저절로 변하지 않는다", () => {
+    const { unitId } = makeTemplateUnit();
+    const overlayUnitId = makeOverlayUnit(unitId);
+    const before = materialsOf(overlayUnitId);
+
+    // 관리자가 나중에 교재를 하나 더 붙인다.
+    const lateDocId = newDoc(
+      `insert into curriculum_docs (title, subject_id, owner_type, status)
+       values ('나중 교재 ${uniq()}', '${SUBJECT_ID}', 'admin', 'published') returning id;`
+    );
+    psql(
+      `insert into subject_template_unit_materials (unit_id, curriculum_doc_id, position)
+       values ('${unitId}', '${lateDocId}', 9);`
+    );
+
+    // 이미 운영 중인 회차는 그대로다 — 보정은 선생님이 부를 때만 일어난다.
+    expect(materialsOf(overlayUnitId)).toBe(before);
   });
 });
 
 describe("물려받기는 선생님이 부를 때만 돈다", () => {
-  it("관리자 기본 키워드·교재가 순서대로 내려온다", () => {
-    const { unitId, keywordIds, docIds } = makeTemplateUnit();
-    const overlayUnitId = makeOverlayUnit(unitId);
-
-    const result = asUser(
-      TEACHER_ID,
-      `select keywords_added || '/' || materials_added from inherit_unit_defaults_from_template('${overlayUnitId}');`
-    );
-    expect(result).toBe("2/2");
-    expect(keywordsOf(overlayUnitId)).toBe("2");
-    // 관리자가 정한 position 순서 그대로 — 제목 순이 아니다.
-    expect(materialsOf(overlayUnitId)).toBe(`${docIds[0]},${docIds[1]}`);
-    expect(keywordIds.length).toBe(2);
-  });
-
-  it("두 번 불러도 중복되지 않는다", () => {
+  it("이미 상속받은 회차에서 다시 불러도 중복되지 않는다", () => {
     const { unitId } = makeTemplateUnit();
     const overlayUnitId = makeOverlayUnit(unitId);
-    asUser(TEACHER_ID, `select * from inherit_unit_defaults_from_template('${overlayUnitId}');`);
-    const second = asUser(
+    const again = asUser(
       TEACHER_ID,
       `select keywords_added || '/' || materials_added from inherit_unit_defaults_from_template('${overlayUnitId}');`
     );
-    expect(second).toBe("0/0");
+    expect(again).toBe("0/0");
     expect(keywordsOf(overlayUnitId)).toBe("2");
+  });
+
+  it("나중에 추가된 관리자 기본을 보충해 가져온다", () => {
+    const { unitId } = makeTemplateUnit();
+    const overlayUnitId = makeOverlayUnit(unitId);
+    const before = materialsOf(overlayUnitId);
+
+    const lateDocId = newDoc(
+      `insert into curriculum_docs (title, subject_id, owner_type, status)
+       values ('보충 교재 ${uniq()}', '${SUBJECT_ID}', 'admin', 'published') returning id;`
+    );
+    psql(
+      `insert into subject_template_unit_materials (unit_id, curriculum_doc_id, position)
+       values ('${unitId}', '${lateDocId}', 9);`
+    );
+
+    asUser(TEACHER_ID, `select * from inherit_unit_defaults_from_template('${overlayUnitId}');`);
+    expect(materialsOf(overlayUnitId)).toBe(`${before},${lateDocId}`);
   });
 
   it("선생님이 이미 고른 것을 덮어쓰거나 지우지 않는다", () => {
-    const { unitId, docIds } = makeTemplateUnit();
+    const { unitId } = makeTemplateUnit();
     const overlayUnitId = makeOverlayUnit(unitId);
+    const before = materialsOf(overlayUnitId);
 
-    // 선생님이 관리자 기본에 없는 교재를 먼저 담아 둔다.
-    const ownDocId = psql(
+    const ownDocId = newDoc(
       `insert into curriculum_docs (title, subject_id, owner_type, status)
        values ('선생님 교재 ${uniq()}', '${SUBJECT_ID}', 'admin', 'published') returning id;`
     );
     asUser(
       TEACHER_ID,
-      `insert into curriculum_overlay_unit_materials (overlay_unit_id, curriculum_doc_id, position)
-       values ('${overlayUnitId}', '${ownDocId}', 1);`
+      `insert into curriculum_overlay_unit_materials (overlay_unit_id, curriculum_doc_id)
+       values ('${overlayUnitId}', '${ownDocId}');`
     );
 
     asUser(TEACHER_ID, `select * from inherit_unit_defaults_from_template('${overlayUnitId}');`);
-
-    // 선생님이 먼저 고른 것이 1번을 지키고, 물려받은 것이 뒤에 붙는다.
-    expect(materialsOf(overlayUnitId)).toBe(`${ownDocId},${docIds[0]},${docIds[1]}`);
-  });
-
-  it("템플릿에서 갈라져 나오지 않은 회차는 물려받을 기본이 없다", () => {
-    const overlayUnitId = makeOverlayUnit(null);
-    expect(
-      asUser(
-        TEACHER_ID,
-        `select keywords_added || '/' || materials_added from inherit_unit_defaults_from_template('${overlayUnitId}');`
-      )
-    ).toBe("0/0");
+    // 상속받은 것이 앞 순서를 지키고, 선생님이 담은 것은 그대로 뒤에 남는다.
+    expect(materialsOf(overlayUnitId)).toBe(`${before},${ownDocId}`);
   });
 
   it("담당이 아닌 선생님은 남의 학생 회차에 아무것도 넣지 못한다", () => {
-    const { unitId, keywordIds } = makeTemplateUnit();
+    const { unitId } = makeTemplateUnit();
     const overlayUnitId = makeOverlayUnit(unitId);
+    const foreignKeywordId = psql(
+      `insert into subject_keywords (subject_id, label) values ('${SUBJECT_ID}', '침입 ${uniq()}') returning id;`
+    );
 
     // 함수는 오류가 아니라 0/0을 돌려준다 — 남의 회차는 읽을 수조차 없어서
     // source_unit_id가 보이지 않기 때문이다. 있는지 없는지를 알려주지 않는 쪽이
@@ -220,7 +259,6 @@ describe("물려받기는 선생님이 부를 때만 돈다", () => {
         `select keywords_added || '/' || materials_added from inherit_unit_defaults_from_template('${overlayUnitId}');`
       )
     ).toBe("0/0");
-    expect(keywordsOf(overlayUnitId)).toBe("0");
 
     // 회차 id를 알아내 직접 넣으려 해도 막힌다. 남의 회차는 보이지 않으므로
     // 같은-과목 검사 트리거가 먼저 "존재하지 않는다"고 끊는다 — 정책 위반보다
@@ -228,10 +266,9 @@ describe("물려받기는 선생님이 부를 때만 돈다", () => {
     const stderr = asUserExpectError(
       OTHER_TEACHER_ID,
       `insert into curriculum_overlay_unit_keywords (overlay_unit_id, keyword_id)
-       values ('${overlayUnitId}', '${keywordIds[0]}');`
+       values ('${overlayUnitId}', '${foreignKeywordId}');`
     );
     expect(stderr).toMatch(/row-level security|policy|존재하지 않는/i);
-    expect(keywordsOf(overlayUnitId)).toBe("0");
   });
 });
 
@@ -240,7 +277,7 @@ describe("교재 1개 : 대표 키워드 1개", () => {
     const keywordId = psql(
       `insert into subject_keywords (subject_id, label) values ('${SUBJECT_ID}', '대표 ${uniq()}') returning id;`
     );
-    const docId = psql(
+    const docId = newDoc(
       `insert into curriculum_docs (title, subject_id, owner_type, status, primary_keyword_id)
        values ('대표교재 ${uniq()}', '${SUBJECT_ID}', 'admin', 'draft', '${keywordId}') returning id;`
     );
@@ -261,10 +298,170 @@ describe("교재 1개 : 대표 키워드 1개", () => {
   it("마이그레이션이 기존 교재의 대표 키워드를 임의로 채우지 않았다", () => {
     // 대표 키워드는 관리자가 뜻을 담아 고르는 값이지 추정할 값이 아니다.
     // 이 파일이 직접 심은 교재('대표교재 …')만 값을 가져야 한다.
+    const idList = preexistingDocIds.map((id) => `'${id}'`).join(",");
+    expect(preexistingDocIds.length).toBeGreaterThan(0);
     const backfilled = psql(
       `select count(*) from curriculum_docs
-       where primary_keyword_id is not null and title not like '대표교재 %';`
+       where primary_keyword_id is not null and id in (${idList});`
     );
     expect(backfilled).toBe("0");
+  });
+});
+
+// P2 2차 — 키워드를 붙이면 그 키워드의 기본 교재가 자동으로 구성에 들어온다.
+// 선생님이 눌러야만 들어오는 구조로는 요구를 충족하지 못한다.
+describe("키워드 → 교재 자동 구성", () => {
+  const sourceOf = (u: string, d: string) =>
+    asUser(
+      TEACHER_ID,
+      `select source from curriculum_overlay_unit_materials
+       where overlay_unit_id = '${u}' and curriculum_doc_id = '${d}';`
+    );
+
+  /** 그 키워드를 대표 키워드로 갖는 공개 교재 하나. */
+  function makeKeywordDefaultDoc(keywordId: string, position: number): string {
+    return newDoc(
+      `insert into curriculum_docs (title, subject_id, owner_type, status, primary_keyword_id, primary_keyword_position)
+       values ('기본교재 ${uniq()}', '${SUBJECT_ID}', 'admin', 'published', '${keywordId}', ${position})
+       returning id;`
+    );
+  }
+
+  function bareUnitAndKeyword(): { overlayUnitId: string; keywordId: string } {
+    const overlayUnitId = makeOverlayUnit(null);
+    const keywordId = psql(
+      `insert into subject_keywords (subject_id, label) values ('${SUBJECT_ID}', '자동 ${uniq()}') returning id;`
+    );
+    return { overlayUnitId, keywordId };
+  }
+
+  it("키워드를 붙이는 것만으로 기본 교재가 들어온다", () => {
+    const { overlayUnitId, keywordId } = bareUnitAndKeyword();
+    const docB = makeKeywordDefaultDoc(keywordId, 2);
+    const docA = makeKeywordDefaultDoc(keywordId, 1);
+
+    asUser(
+      TEACHER_ID,
+      `insert into curriculum_overlay_unit_keywords (overlay_unit_id, keyword_id)
+       values ('${overlayUnitId}', '${keywordId}');`
+    );
+
+    // 관리자가 정한 키워드 안 순서대로.
+    expect(materialsOf(overlayUnitId)).toBe(`${docA},${docB}`);
+    expect(sourceOf(overlayUnitId, docA)).toBe("auto");
+  });
+
+  it("공개되지 않은 교재는 자동으로 들어오지 않는다", () => {
+    const { overlayUnitId, keywordId } = bareUnitAndKeyword();
+    newDoc(
+      `insert into curriculum_docs (title, subject_id, owner_type, status, primary_keyword_id)
+       values ('초안교재 ${uniq()}', '${SUBJECT_ID}', 'admin', 'draft', '${keywordId}') returning id;`
+    );
+    asUser(
+      TEACHER_ID,
+      `insert into curriculum_overlay_unit_keywords (overlay_unit_id, keyword_id)
+       values ('${overlayUnitId}', '${keywordId}');`
+    );
+    expect(materialsOf(overlayUnitId)).toBe("");
+  });
+
+  it("키워드를 떼면 자동으로 들어온 것만 빠지고 직접 담은 것은 남는다", () => {
+    const { overlayUnitId, keywordId } = bareUnitAndKeyword();
+    const autoDoc = makeKeywordDefaultDoc(keywordId, 1);
+    const ownDoc = newDoc(
+      `insert into curriculum_docs (title, subject_id, owner_type, status)
+       values ('직접 담은 교재 ${uniq()}', '${SUBJECT_ID}', 'admin', 'published') returning id;`
+    );
+
+    asUser(
+      TEACHER_ID,
+      `insert into curriculum_overlay_unit_keywords (overlay_unit_id, keyword_id)
+       values ('${overlayUnitId}', '${keywordId}');`
+    );
+    asUser(
+      TEACHER_ID,
+      `insert into curriculum_overlay_unit_materials (overlay_unit_id, curriculum_doc_id, source)
+       values ('${overlayUnitId}', '${ownDoc}', 'manual');`
+    );
+    expect(materialsOf(overlayUnitId)).toBe(`${autoDoc},${ownDoc}`);
+
+    asUser(
+      TEACHER_ID,
+      `delete from curriculum_overlay_unit_keywords
+       where overlay_unit_id = '${overlayUnitId}' and keyword_id = '${keywordId}';`
+    );
+    expect(materialsOf(overlayUnitId)).toBe(ownDoc);
+  });
+
+  it("선생님이 뺀 자동 자료는 다시 들어오지 않는다", () => {
+    const { overlayUnitId, keywordId } = bareUnitAndKeyword();
+    const autoDoc = makeKeywordDefaultDoc(keywordId, 1);
+    const otherKeywordId = psql(
+      `insert into subject_keywords (subject_id, label) values ('${SUBJECT_ID}', '자동2 ${uniq()}') returning id;`
+    );
+
+    asUser(
+      TEACHER_ID,
+      `insert into curriculum_overlay_unit_keywords (overlay_unit_id, keyword_id)
+       values ('${overlayUnitId}', '${keywordId}');`
+    );
+    // 선생님이 뺀다 — 뺐다는 사실을 기억해야 다음 동기화가 되돌리지 않는다.
+    asUser(
+      TEACHER_ID,
+      `insert into curriculum_overlay_unit_material_exclusions (overlay_unit_id, curriculum_doc_id)
+       values ('${overlayUnitId}', '${autoDoc}');
+       delete from curriculum_overlay_unit_materials
+       where overlay_unit_id = '${overlayUnitId}' and curriculum_doc_id = '${autoDoc}';`
+    );
+
+    // 다른 키워드를 붙여 동기화를 다시 돌려도 되돌아오지 않는다.
+    asUser(
+      TEACHER_ID,
+      `insert into curriculum_overlay_unit_keywords (overlay_unit_id, keyword_id)
+       values ('${overlayUnitId}', '${otherKeywordId}');`
+    );
+    expect(materialsOf(overlayUnitId)).toBe("");
+  });
+
+  it("자동 갱신이 선생님이 맞춰 둔 순서를 흔들지 않는다", () => {
+    const { overlayUnitId, keywordId } = bareUnitAndKeyword();
+    const firstDoc = makeKeywordDefaultDoc(keywordId, 1);
+    asUser(
+      TEACHER_ID,
+      `insert into curriculum_overlay_unit_keywords (overlay_unit_id, keyword_id)
+       values ('${overlayUnitId}', '${keywordId}');`
+    );
+
+    const ownDoc = newDoc(
+      `insert into curriculum_docs (title, subject_id, owner_type, status)
+       values ('맨 앞 교재 ${uniq()}', '${SUBJECT_ID}', 'admin', 'published') returning id;`
+    );
+    // 선생님이 자기 교재를 맨 앞으로 올린다.
+    asUser(
+      TEACHER_ID,
+      `insert into curriculum_overlay_unit_materials (overlay_unit_id, curriculum_doc_id, position, source)
+       values ('${overlayUnitId}', '${ownDoc}', 0, 'manual');`
+    );
+    expect(materialsOf(overlayUnitId)).toBe(`${ownDoc},${firstDoc}`);
+
+    // 새 키워드가 붙어 자동분이 더 들어와도 앞 순서는 그대로, 새 것은 뒤에.
+    const secondKeywordId = psql(
+      `insert into subject_keywords (subject_id, label) values ('${SUBJECT_ID}', '자동3 ${uniq()}') returning id;`
+    );
+    const lateDoc = makeKeywordDefaultDoc(secondKeywordId, 1);
+    asUser(
+      TEACHER_ID,
+      `insert into curriculum_overlay_unit_keywords (overlay_unit_id, keyword_id)
+       values ('${overlayUnitId}', '${secondKeywordId}');`
+    );
+    expect(materialsOf(overlayUnitId)).toBe(`${ownDoc},${firstDoc},${lateDoc}`);
+  });
+
+  it("기존 회차의 구성은 전부 manual로 남아 자동 회수 대상이 아니다", () => {
+    // 마이그레이션이 source 기본값을 manual로 뒀다는 것 — 이미 운영 중이던
+    // 구성이 키워드 변경만으로 사라지면 안 된다.
+    expect(
+      psql(`select count(*) from curriculum_overlay_unit_materials where source not in ('auto','manual');`)
+    ).toBe("0");
   });
 });

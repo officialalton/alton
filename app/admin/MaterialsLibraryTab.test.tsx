@@ -12,6 +12,7 @@ function makeDoc(overrides: Partial<CurriculumDocListItem>): CurriculumDocListIt
     unitId: null,
     unitTitle: null,
     status: "published",
+    hasPrimaryKeyword: false,
     sectionCount: 0,
     ...overrides,
   };

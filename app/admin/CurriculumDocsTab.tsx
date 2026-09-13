@@ -35,6 +35,9 @@ export default function CurriculumDocsTab({
   // (같은 세션 안에서만 — 페이지를 새로고침하면 사라짐, 장기 캐시 아님).
   const [detailCache, setDetailCache] = useState<Record<string, DocEditorData>>({});
   const [loadingDetailId, setLoadingDetailId] = useState<string | null>(null);
+  // P2 2차 — 대표 키워드 미지정 교재를 찾아 지정할 수 있어야 한다. 임의 백필을
+  // 하지 않았으므로 기존 교재는 전부 미지정이고, 관리자가 하나씩 정한다.
+  const [onlyMissingPrimary, setOnlyMissingPrimary] = useState(false);
   const [detailError, setDetailError] = useState<string | null>(null);
   const [creating, setCreating] = useState(false);
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
@@ -75,6 +78,7 @@ export default function CurriculumDocsTab({
               unitId: updated.unitId,
               unitTitle: updated.unitTitle,
               sectionCount: updated.sections.length,
+              hasPrimaryKeyword: Boolean(updated.primaryKeywordId),
             }
           : d
       )
@@ -114,6 +118,7 @@ export default function CurriculumDocsTab({
           unitTitle: doc.unitTitle,
           status: doc.status,
           sectionCount: doc.sections.length,
+          hasPrimaryKeyword: Boolean(doc.primaryKeywordId),
         },
       ].sort((a, b) => a.title.localeCompare(b.title))
     );
@@ -166,13 +171,25 @@ export default function CurriculumDocsTab({
       </p>
       {detailError && <p className="text-[12.5px] text-red mb-3">{detailError}</p>}
 
+      <label className="flex items-center gap-2 text-[12.5px] text-grey-500 mb-3">
+        <input
+          type="checkbox"
+          checked={onlyMissingPrimary}
+          onChange={(e) => setOnlyMissingPrimary(e.target.checked)}
+        />
+        대표 키워드가 없는 교재만 보기
+        <span className="text-grey-300">({docs.filter((d) => !d.hasPrimaryKeyword).length}건)</span>
+      </label>
+
       {docs.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center mb-3">
           아직 만든 교재가 없습니다.
         </div>
       ) : (
         <>
-          {visibleDocs.map((d) => (
+          {visibleDocs
+            .filter((d) => !onlyMissingPrimary || !d.hasPrimaryKeyword)
+            .map((d) => (
             <div
               key={d.id}
               className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5 flex items-center justify-between"
@@ -183,6 +200,7 @@ export default function CurriculumDocsTab({
                   {d.subjectName}
                   {d.unitTitle ? ` · ${d.unitTitle}` : ""} · 섹션 {d.sectionCount}개 ·{" "}
                   {STATUS_LABEL[d.status] ?? d.status}
+                  {!d.hasPrimaryKeyword && " · 대표 키워드 없음"}
                 </div>
               </div>
               <button
@@ -240,6 +258,9 @@ function NewDocForm({
         title: title.trim(),
         subjectId,
         subjectName: selectedSubject?.subjectName ?? "",
+        // 새 교재는 대표 키워드가 없다 — 관리자가 편집 화면에서 고른다.
+        primaryKeywordId: null,
+        primaryKeywordPosition: null,
         unitId,
         unitTitle: selectedSubject?.units.find((u) => u.id === unitId)?.unitTitle ?? null,
         status: "draft",

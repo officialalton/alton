@@ -37,6 +37,10 @@ export type DocEditorData = {
   sections: DocSection[];
   // R9(Task 2): 이 교재가 속한 과목의 공용 키워드 사전 전체(태깅 picker용).
   subjectKeywords?: SubjectKeyword[];
+  // P2 2차: 교재당 대표 키워드 1개. null은 "아직 정하지 않음"이다.
+  primaryKeywordId: string | null;
+  // 그 키워드 안에서의 기본 교재 순서. null이면 제목순으로 뒤에 붙는다.
+  primaryKeywordPosition: number | null;
 };
 
 function extractName(rel: unknown): string {
@@ -74,7 +78,7 @@ export async function loadCurriculumDocsByIds(
   let query = supabase
     .from("curriculum_docs")
     .select(
-      "id, title, status, subject_id, unit_id, subject:subjects(name), unit:subject_template_units!curriculum_docs_unit_id_fkey(unit_title)"
+      "id, title, status, subject_id, unit_id, primary_keyword_id, primary_keyword_position, subject:subjects(name), unit:subject_template_units!curriculum_docs_unit_id_fkey(unit_title)"
     )
     .order("title", { ascending: true });
   if (filterDocIds) query = query.in("id", filterDocIds);
@@ -203,6 +207,8 @@ export async function loadCurriculumDocsByIds(
     status: d.status,
     sections: sectionsByDoc.get(d.id) ?? [],
     subjectKeywords: keywordsBySubject.get(d.subject_id) ?? [],
+    primaryKeywordId: (d.primary_keyword_id as string | null) ?? null,
+    primaryKeywordPosition: (d.primary_keyword_position as number | null) ?? null,
   }));
 }
 
@@ -230,13 +236,15 @@ export type CurriculumDocListItem = {
   unitTitle: string | null;
   status: string;
   sectionCount: number;
+  // P2 2차: 대표 키워드가 아직 없는 교재를 목록에서 찾아낼 수 있어야 한다.
+  hasPrimaryKeyword: boolean;
 };
 
 export async function loadCurriculumDocList(supabase: SupabaseClient): Promise<CurriculumDocListItem[]> {
   const { data: docs } = await supabase
     .from("curriculum_docs")
     .select(
-      "id, title, status, subject_id, unit_id, subject:subjects(name), unit:subject_template_units!curriculum_docs_unit_id_fkey(unit_title)"
+      "id, title, status, subject_id, unit_id, primary_keyword_id, subject:subjects(name), unit:subject_template_units!curriculum_docs_unit_id_fkey(unit_title)"
     )
     .order("title", { ascending: true });
   if (!docs || docs.length === 0) return [];
@@ -261,5 +269,6 @@ export async function loadCurriculumDocList(supabase: SupabaseClient): Promise<C
     unitTitle: extractUnitTitle(d.unit),
     status: d.status,
     sectionCount: sectionCountByDoc.get(d.id) ?? 0,
+    hasPrimaryKeyword: Boolean(d.primary_keyword_id),
   }));
 }

@@ -164,6 +164,49 @@ export async function moveSection(sectionId: string, otherSectionId: string): Pr
 // 바꾸지 않음).
 export type KeywordActionResult = { ok: true } | { ok: false; error: string };
 
+/**
+ * 교재의 대표 키워드를 지정하거나 바꾼다(교재당 1개). null이면 해제한다.
+ *
+ * 대표 키워드는 "이 교재가 어느 키워드의 기본 교재인가"를 말한다 — 회차에 그
+ * 키워드가 붙으면 이 교재가 자동으로 구성에 들어간다. 그래서 섹션별 키워드
+ * 태깅과는 다른 층이다: 섹션 키워드는 "이 조각이 무엇을 다루는가"(후보 검색용),
+ * 대표 키워드는 "이 교재를 어디에 기본으로 넣을 것인가"(자동 구성용).
+ *
+ * 바꿔도 이미 구성에 들어간 교재가 회수되지는 않는다 — 선생님이 운영 중인 회차의
+ * 자동분은 다음 키워드 변경 때 맞춰진다. 과거 수업에 고정된 내용은 스냅샷이라
+ * 어느 쪽이든 영향을 받지 않는다.
+ */
+export async function setDocPrimaryKeyword(
+  docId: string,
+  keywordId: string | null,
+  position?: number | null
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  const { supabase } = await requireAdmin();
+
+  if (keywordId) {
+    const [{ data: doc }, { data: keyword }] = await Promise.all([
+      supabase.from("curriculum_docs").select("subject_id").eq("id", docId).maybeSingle(),
+      supabase.from("subject_keywords").select("subject_id").eq("id", keywordId).maybeSingle(),
+    ]);
+    if (!doc || !keyword) return { ok: false, error: "존재하지 않는 교재 또는 키워드입니다." };
+    // 트리거가 방어선이지만, 여기서 먼저 걸러 읽을 만한 문구를 준다.
+    if (doc.subject_id !== keyword.subject_id) {
+      return { ok: false, error: "대표 키워드는 교재와 같은 과목이어야 합니다." };
+    }
+  }
+
+  const { error } = await supabase
+    .from("curriculum_docs")
+    .update({
+      primary_keyword_id: keywordId,
+      // 키워드를 해제하면 그 안의 순서도 의미가 없다.
+      primary_keyword_position: keywordId ? position ?? null : null,
+    })
+    .eq("id", docId);
+  if (error) return { ok: false, error: "대표 키워드를 저장하지 못했습니다." };
+  return { ok: true };
+}
+
 export async function assignSectionKeyword(
   sectionId: string,
   keywordId: string
