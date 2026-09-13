@@ -18,7 +18,7 @@ export async function createMyTemplate(subjectId: string): Promise<{
 
   const { data: catalogUnits } = await supabase
     .from("subject_template_units")
-    .select("position, unit_title, note")
+    .select("id, position, unit_title, note")
     .eq("subject_id", subjectId)
     .order("position", { ascending: true });
 
@@ -26,11 +26,15 @@ export async function createMyTemplate(subjectId: string): Promise<{
     return { templateId: template.id, units: [] };
   }
 
+  // source_unit_id 를 채워야 관리자 기준본의 회차 키워드·기본 교재가 초기 상속된다
+  // (teacher_curriculum_template_units_inherit 트리거, 20261317000000). 이게 없으면
+  // 선생님이 배정받은 과목마다 키워드를 처음부터 다시 지정해야 한다.
   const { data: inserted, error: insertError } = await supabase
     .from("teacher_curriculum_template_units")
     .insert(
       catalogUnits.map((u) => ({
         template_id: template.id,
+        source_unit_id: u.id,
         position: u.position,
         unit_title: u.unit_title,
         note: u.note,

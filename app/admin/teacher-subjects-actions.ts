@@ -53,17 +53,20 @@ export async function assignTeacherSubject(
 
   const { data: catalogUnits } = await supabase
     .from("subject_template_units")
-    .select("position, unit_title, note")
+    .select("id, position, unit_title, note")
     .eq("subject_id", subjectId)
     .order("position", { ascending: true });
 
   if (!catalogUnits || catalogUnits.length === 0) return { ok: true };
 
+  // source_unit_id 를 채워야 관리자 기준본의 회차 키워드·기본 교재가 초기 상속된다
+  // (teacher_curriculum_template_units_inherit 트리거, 20261317000000).
   const { error: unitsError } = await supabase
     .from("teacher_curriculum_template_units")
     .insert(
       catalogUnits.map((u) => ({
         template_id: template.id,
+        source_unit_id: u.id,
         position: u.position,
         unit_title: u.unit_title,
         note: u.note,
