@@ -25,6 +25,15 @@ export type SessionProblem = {
   /** 이 학생이 이 수업에서 이 문제를 몇 번 풀었는지(0이면 아직 안 풀었다). */
   attempts: number;
   solved: boolean;
+  /**
+   * 이 수업이 쓴 문제 내용이 보존돼 있지 않다.
+   *
+   * 2026-09-13 확정: 고정된 버전이 없으면 **현재 공개본으로 대체하지 않는다.**
+   * 지금 내용을 보여주면 그 수업이 실제로 낸 문제라는 거짓말이 된다. 지문·선택지·
+   * 정답·해설은 비우고 화면이 사유를 말한다. **풀이 기록(attempts·solved)은
+   * 그대로 남긴다** — 학생이 풀었다는 사실 자체는 사라지면 안 된다.
+   */
+  preservedUnavailable?: boolean;
 };
 
 export type SessionProblemViewer = {
@@ -48,15 +57,15 @@ export async function loadSessionProblems(
   if (error) throw new Error(error.message);
   if (!rows?.length) return [];
 
-  // 고정된 버전을 우선 읽는다. problem_version_id가 비어 있는 행은 버전 체계
-  // 도입(20261293000000) 이전에 고정된 수업이므로, 그때의 값을 복원할 방법이
-  // 없다 — 이 경우에만 현재 공개 버전으로 대체한다.
+  // 고정된 버전만 읽는다.
+  //
+  // 2026-09-13 정정: 예전에는 problem_version_id 가 비어 있으면 **현재 공개 버전으로
+  // 대체**했다. 그러면 그 수업이 실제로 낸 문제가 아닌 것을 그 수업의 문제처럼
+  // 보여주게 되고, 이후 문제를 고칠 때마다 과거 수업이 달라진다. 복원할 근거가
+  // 없으면 없다고 말한다.
   const pinnedVersionIds = rows
     .map((r) => r.problem_version_id as string | null)
     .filter((v): v is string => Boolean(v));
-  const unversionedProblemIds = rows
-    .filter((r) => !r.problem_version_id)
-    .map((r) => r.content_id as string);
 
   const versionById = new Map<string, Record<string, unknown>>();
   if (pinnedVersionIds.length) {
@@ -68,16 +77,6 @@ export async function loadSessionProblems(
     for (const v of data ?? []) versionById.set(v.id as string, v);
   }
 
-  const fallbackByProblemId = new Map<string, Record<string, unknown>>();
-  if (unversionedProblemIds.length) {
-    const { data, error: fallbackError } = await supabase
-      .from("problem_versions")
-      .select("id, problem_id, passage, options, correct_index, explanation, difficulty")
-      .in("problem_id", unversionedProblemIds)
-      .eq("status", "published");
-    if (fallbackError) throw new Error(fallbackError.message);
-    for (const v of data ?? []) fallbackByProblemId.set(v.problem_id as string, v);
-  }
 
   // 풀이 상태 — 이 학생이 이 수업에서 이 문제를 푼 기록.
   const attemptsByProblemId = new Map<string, { attempts: number; solved: boolean }>();
@@ -99,10 +98,12 @@ export async function loadSessionProblems(
 
   return rows.map((r, index) => {
     const problemId = r.content_id as string;
-    const version =
-      (r.problem_version_id ? versionById.get(r.problem_version_id as string) : undefined) ??
-      fallbackByProblemId.get(problemId);
+    const version = r.problem_version_id
+      ? versionById.get(r.problem_version_id as string)
+      : undefined;
     const state = attemptsByProblemId.get(problemId) ?? { attempts: 0, solved: false };
+    // 버전이 없거나 그 버전 행이 사라졌다 — 당시 내용을 확인할 수 없다.
+    const preservedUnavailable = !version;
     // 학생은 자기 풀이를 제출한 뒤에만 정답·해설을 본다.
     const revealAnswers = viewer.canSeeAnswers || state.solved;
     const rawOptions = version?.options;
@@ -116,6 +117,7 @@ export async function loadSessionProblems(
       explanation: revealAnswers ? ((version?.explanation as string | null) ?? null) : null,
       attempts: state.attempts,
       solved: state.solved,
+      ...(preservedUnavailable ? { preservedUnavailable: true } : {}),
     };
   });
 }
