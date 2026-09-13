@@ -18,6 +18,11 @@ import { loadNormalizedSession } from "./session-source-data";
 import { loadSessionProblems } from "./session-problem-data";
 import { loadSessionLessonContext } from "./session-context-data";
 import {
+  loadComposition,
+  loadKeywordProblems,
+  loadPickableMaterials,
+} from "@/lib/unit-composition";
+import {
   replayAnnotationEvents,
   loadMyLegacyPrivateMaterialStrokes,
   loadTeacherMaterialStrokes,
@@ -90,6 +95,28 @@ export default async function SessionPage({
       ? await loadSessionLessonContext(supabase, session.id)
       : { unitTitle: null, goal: null, supplementTitles: [], primaryUnitId: null };
 
+  // 4절 — 준비를 수업 화면 안에서 한다. 별도 준비 화면과 같은 구성 패널을 쓰므로
+  // 준비 데이터를 두 곳에서 관리하지 않는다. 학생·학부모에게는 실어 보내지 않는다(7절).
+  const canPrepare = session.viewerRole === "teacher" || session.viewerRole === "admin";
+  const prepComposition =
+    canPrepare && lessonContext.primaryUnitId
+      ? await loadComposition(supabase, "student", lessonContext.primaryUnitId)
+      : null;
+  const prep = prepComposition
+    ? {
+        composition: prepComposition,
+        pickable: await loadPickableMaterials(
+          supabase,
+          prepComposition.subjectId,
+          prepComposition.materials.map((m) => m.curriculumDocId)
+        ),
+        problems: await loadKeywordProblems(
+          supabase,
+          prepComposition.keywords.map((k) => k.id)
+        ),
+      }
+    : null;
+
   // P3 4단계 — 수업 시작 시 고정된 문제들. 정답·해설은 볼 자격이 있을 때만
   // 채워진다(학생은 자기 풀이 제출 뒤, 보호자는 자녀에게 열리는 시점과 동일).
   const sessionProblems =
@@ -159,6 +186,7 @@ export default async function SessionPage({
       studentMaterialStrokes={studentMaterialStrokes}
       sessionProblems={sessionProblems}
       lessonContext={lessonContext}
+      prep={prep}
       currentUserId={user.id}
       homeworkKeywordOptions={homeworkKeywordOptions}
       homeworkStatusItems={homeworkStatusItems}

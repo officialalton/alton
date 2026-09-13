@@ -10,6 +10,12 @@ import {
 import MaterialTab from "./MaterialTab";
 import ProblemsPanel from "./ProblemsPanel";
 import LessonContextHeader from "./LessonContextHeader";
+import CompositionPanel from "@/app/lesson-prep/CompositionPanel";
+import type {
+  KeywordProblem,
+  PickableMaterial,
+  UnitComposition,
+} from "@/lib/unit-composition";
 import type { SessionLessonContext } from "./session-context-data";
 import type { MaterialData } from "./material-data";
 import type { SessionProblem } from "./session-problem-data";
@@ -45,6 +51,9 @@ const TABS = [
   { id: "vocab", label: "단어장", teacherOnly: false },
   { id: "log", label: "문제 기록", teacherOnly: false },
   { id: "homework", label: "과제", teacherOnly: false },
+  // 4절 — 별도 준비 페이지를 없애고 준비를 수업 화면 안으로 넣는다. 선생님·관리자만
+  // 보이고, 이 수업이 다루는 회차가 있을 때만 나타난다.
+  { id: "prep", label: "수업 준비", teacherOnly: true },
 ] as const;
 
 type TabId = (typeof TABS)[number]["id"];
@@ -67,6 +76,7 @@ export default function SessionShell({
   studentName,
   sessionNumber,
   viewerRole,
+  prep = null,
   initialTab,
   initialState,
   status,
@@ -98,6 +108,15 @@ export default function SessionShell({
   studentName: string;
   sessionNumber: number;
   viewerRole: SessionViewViewer;
+  /**
+   * 이 수업이 다루는 회차의 구성. 선생님·관리자에게만 실어 보낸다 — 학생·학부모에게
+   * 구성 편집과 교사 전용 초안을 노출하지 않는다(7절).
+   */
+  prep?: {
+    composition: UnitComposition;
+    pickable: PickableMaterial[];
+    problems: KeywordProblem[];
+  } | null;
   initialTab?: string;
   initialState: SessionViewState;
   status: string;
@@ -145,9 +164,16 @@ export default function SessionShell({
   const isTeacher = viewerRole === "teacher";
   const contentViewerRole: SessionViewViewer = writesEnabled ? viewerRole : "admin";
 
+  const canPrepare = viewerRole === "teacher" || viewerRole === "admin";
   const validTabs = useMemo(
-    () => TABS.filter((t) => !t.teacherOnly || isTeacher),
-    [isTeacher]
+    () =>
+      TABS.filter((t) => {
+        // 준비 탭은 관리자도 본다(teacherOnly 는 viewerRole==="teacher"만 통과시킨다).
+        // 다룰 회차가 없으면 빈 탭을 만들지 않는다.
+        if (t.id === "prep") return canPrepare && Boolean(prep);
+        return !t.teacherOnly || isTeacher;
+      }),
+    [isTeacher, canPrepare, prep]
   );
   const [activeTab, setActiveTab] = useState<TabId>(
     validTabs.some((t) => t.id === initialTab) ? (initialTab as TabId) : DEFAULT_TAB
@@ -454,9 +480,6 @@ export default function SessionShell({
         subjectName={subjectName}
         context={lessonContext}
         stateLabel={state === "live" ? "수업 중" : state === "completed" ? "지난 수업" : "수업 전"}
-        // 선생님·관리자만 구성을 고칠 수 있다. 학생·학부모에게는 준비 화면으로 가는
-        // 길 자체를 보여주지 않는다(7절).
-        canPrepare={viewerRole === "teacher" || viewerRole === "admin"}
       />
 
       {!writesEnabled && (
@@ -505,6 +528,14 @@ export default function SessionShell({
           keywordOptions={homeworkKeywordOptions}
           homeworkStatusItems={homeworkStatusItems}
         />
+      ) : activeTab === "prep" ? (
+        prep ? (
+          <CompositionPanel
+            composition={prep.composition}
+            pickable={prep.pickable}
+            problems={prep.problems}
+          />
+        ) : null
       ) : activeTab === "docs" ? (
         <ScratchpadTab
           sessionId={sessionId}
