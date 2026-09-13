@@ -317,3 +317,107 @@ describe("SessionShell — 탭 노출", () => {
     expect(screen.getByText("이 세션에는 아직 배정된 교재가 없습니다.")).toBeInTheDocument();
   });
 });
+
+// 4절 — 준비를 수업 화면 안에서 한다. 다만 **보이는 것과 적용 범위가 다르다**:
+// 시작한 수업의 내용은 시작 시점에 고정됐고, 이 탭이 보여주는 것은 회차의 현재
+// 구성이다. 말해주지 않으면 고정된 수업을 여기서 고치는 것처럼 보인다.
+describe("SessionShell — 수업 준비 탭", () => {
+  const prep = {
+    composition: {
+      layer: "student" as const,
+      unitId: "u1",
+      unitTitle: "이차방정식 응용 문제 (1)",
+      subjectId: "sub1",
+      subjectName: "SAT Math",
+      scopeLabel: "지훈 학생",
+      keywords: [],
+      materials: [],
+      subjectKeywords: [],
+      hasInheritableDefaults: false,
+    },
+    pickable: [],
+    problems: [],
+  };
+
+  it("학생에게는 준비 탭이 보이지 않는다", () => {
+    render(
+      <SessionShell
+        {...baseProps}
+        viewerRole="student"
+        initialState="live"
+        status="in_progress"
+        scheduledAt="2026-09-03T05:00:00.000Z"
+        durationMinutes={30}
+        prep={prep}
+      />
+    );
+    expect(screen.queryByRole("button", { name: "수업 준비" })).not.toBeInTheDocument();
+  });
+
+  it("다룰 회차가 없으면 선생님에게도 빈 탭을 만들지 않는다", () => {
+    render(
+      <SessionShell
+        {...baseProps}
+        viewerRole="teacher"
+        initialState="live"
+        status="in_progress"
+        scheduledAt="2026-09-03T05:00:00.000Z"
+        durationMinutes={30}
+        prep={null}
+      />
+    );
+    expect(screen.queryByRole("button", { name: "수업 준비" })).not.toBeInTheDocument();
+  });
+
+  it("시작 전에는 적용 범위 안내를 덧붙이지 않는다", () => {
+    render(
+      <SessionShell
+        {...baseProps}
+        viewerRole="teacher"
+        initialState="prep"
+        status="upcoming"
+        scheduledAt="2026-09-03T05:00:00.000Z"
+        durationMinutes={30}
+        prep={prep}
+      />
+    );
+    fireEvent.click(screen.getByRole("button", { name: "수업 준비" }));
+    expect(screen.queryByText(/고정/)).not.toBeInTheDocument();
+  });
+
+  it("진행 중인 수업에서는 고정된 내용에 반영되지 않는다고 말한다", () => {
+    render(
+      <SessionShell
+        {...baseProps}
+        viewerRole="teacher"
+        initialState="live"
+        status="in_progress"
+        scheduledAt="2026-09-03T05:00:00.000Z"
+        durationMinutes={30}
+        prep={prep}
+      />
+    );
+    fireEvent.click(screen.getByRole("button", { name: "수업 준비" }));
+    expect(
+      screen.getByText(/진행 중인 이 수업의 고정 내용·필기·답안에는 반영되지 않습니다/)
+    ).toBeInTheDocument();
+  });
+
+  it("지난 수업에서는 고정돼 바뀌지 않는다고 말한다", () => {
+    render(
+      <SessionShell
+        {...baseProps}
+        viewerRole="teacher"
+        initialState="completed"
+        status="completed"
+        scheduledAt="2026-09-03T05:00:00.000Z"
+        durationMinutes={30}
+        prep={prep}
+      />
+    );
+    fireEvent.click(screen.getByRole("button", { name: "수업 준비" }));
+    expect(
+      screen.getByText(/시작 시점으로 고정돼 바뀌지 않습니다/)
+    ).toBeInTheDocument();
+  });
+});

@@ -21,11 +21,18 @@ export default function CompositionPanel({
   composition,
   pickable,
   problems,
+  scopeNotice = null,
 }: {
   composition: UnitComposition;
   pickable: PickableMaterial[];
   /** 이 회차 키워드로 들어올 문제. 학생 층이 아니면 미리보기 전용이다. */
   problems: KeywordProblem[];
+  /**
+   * 이 화면에서 고치는 것이 무엇에 적용되는지. 이미 시작한 수업 안에서 열렸을 때처럼
+   * **보이는 것과 적용 범위가 다른** 자리에서 반드시 채운다 — 시작된 수업의 고정
+   * 콘텐츠를 여기서 고치는 것처럼 보이면 안 된다.
+   */
+  scopeNotice?: string | null;
 }) {
   const [keywordIds, setKeywordIds] = useState(composition.keywords.map((k) => k.id));
   const [materials, setMaterials] = useState<UnitMaterial[]>(composition.materials);
@@ -111,6 +118,12 @@ export default function CompositionPanel({
         {composition.subjectName}
         {layer !== "student" && " · 여기서 정한 구성이 학생 커리큘럼의 기본값이 됩니다"}
       </p>
+
+      {scopeNotice && (
+        <div className="text-[12.5px] text-ink bg-grey-100 border-[1.5px] border-grey-200 rounded-lg px-4 py-3 mb-4">
+          {scopeNotice}
+        </div>
+      )}
 
       {error && (
         <div className="text-[12.5px] text-red bg-red/5 border-[1.5px] border-red/20 rounded-lg px-4 py-2.5 mb-4">

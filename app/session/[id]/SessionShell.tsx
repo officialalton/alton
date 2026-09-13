@@ -534,6 +534,16 @@ export default function SessionShell({
             composition={prep.composition}
             pickable={prep.pickable}
             problems={prep.problems}
+            // 시작한 수업의 내용은 시작 시점에 고정됐다. 이 탭이 보여주는 것은 그
+            // 고정본이 아니라 **회차의 현재 구성**이므로, 무엇을 고치는 중이고
+            // 어디에 적용되는지 말하지 않으면 고정된 수업을 고치는 것처럼 보인다.
+            scopeNotice={
+              state === "prep"
+                ? null
+                : state === "live"
+                  ? "이 수업은 이미 시작돼 교재·문제가 시작 시점으로 고정됐습니다. 여기서 고치는 것은 회차의 구성이며, 진행 중인 이 수업의 고정 내용·필기·답안에는 반영되지 않습니다."
+                  : "지난 수업입니다. 이 수업의 교재·문제·필기·답안은 시작 시점으로 고정돼 바뀌지 않습니다. 여기서 고치는 것은 회차의 구성이며 앞으로의 수업에 적용됩니다."
+            }
           />
         ) : null
       ) : activeTab === "docs" ? (

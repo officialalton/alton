@@ -157,4 +157,25 @@ describe("수업 준비 구성 패널", () => {
       screen.getByText("이 키워드에 해당하는 확정된 문제가 아직 없습니다.")
     ).toBeInTheDocument();
   });
+
+  // 지시 1번 — 시작한 수업 안에서 이 패널이 열리면, 보이는 것과 적용 범위가 다르다.
+  // 말해주지 않으면 고정된 수업을 여기서 고치는 것처럼 보인다.
+  it("적용 범위 안내를 받으면 그대로 보여준다", () => {
+    render(
+      <CompositionPanel
+        composition={makeComposition({ layer: "student" })}
+        pickable={[]}
+        problems={[]}
+        scopeNotice="지난 수업입니다. 이 수업의 교재·문제·필기·답안은 시작 시점으로 고정돼 바뀌지 않습니다."
+      />
+    );
+    expect(
+      screen.getByText(/시작 시점으로 고정돼 바뀌지 않습니다/)
+    ).toBeInTheDocument();
+  });
+
+  it("안내가 없으면 아무 말도 덧붙이지 않는다", () => {
+    render(<CompositionPanel composition={makeComposition()} pickable={[]} problems={[]} />);
+    expect(screen.queryByText(/고정/)).not.toBeInTheDocument();
+  });
 });
