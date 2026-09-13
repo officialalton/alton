@@ -291,6 +291,16 @@ export async function generateBankProblemsAction(params: {
   if (!subject) return { ok: false, error: "존재하지 않는 과목입니다." };
   if (subject.archived_at) return { ok: false, error: "보관된 과목에는 문제를 만들 수 없습니다." };
 
+  // AI 키가 없는 환경(예: 키를 심지 않은 Preview)에서 "생성하지 못했습니다"만
+  // 돌려주면 관리자가 무엇을 해야 할지 알 수 없다. 설정 누락은 내부 오류가 아니라
+  // 사람이 조치할 수 있는 사실이므로 구분해서 말한다.
+  if (!process.env.ANTHROPIC_API_KEY) {
+    return {
+      ok: false,
+      error: "이 환경에는 AI 생성이 설정되어 있지 않습니다. 직접 쓰기로 문제를 만들어 주세요.",
+    };
+  }
+
   const { generateSectionProblems } = await import("./curriculum-doc-actions");
 
   let generated: Awaited<ReturnType<typeof generateSectionProblems>>;

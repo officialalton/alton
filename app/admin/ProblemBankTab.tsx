@@ -159,6 +159,7 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
             else setNotice(`${result.value}개를 초안으로 만들었습니다. 검수 후 공개하세요.`);
             await reload();
           } catch {
+            // 서버 액션이 던진 경우. 사유는 위의 { ok, error } 경로가 이미 전달한다.
             setError("문제를 생성하지 못했습니다.");
           } finally {
             setBusy(false);
