@@ -107,8 +107,8 @@ describe("TeacherDocumentsPanel", () => {
   });
 });
 
-describe("모든 서버 진입점에 정산 담당 관리자 게이트가 걸려 있다", () => {
-  it("teacher-documents-actions의 export 함수마다 requireCapabilityOnly를 부른다", async () => {
+describe("모든 서버 진입점에 관리자 게이트가 걸려 있다", () => {
+  it("teacher-documents-actions의 export 함수마다 requireAdmin을 부른다", async () => {
     const fs = await import("node:fs");
     const src = fs.readFileSync("app/admin/teacher-documents-actions.ts", "utf-8");
 
@@ -122,7 +122,7 @@ describe("모든 서버 진입점에 정산 담당 관리자 게이트가 걸려
         .filter((i) => i > start)
         .sort((a, b) => a - b)[0];
       const body = src.slice(start, next === undefined ? src.length : next);
-      expect(body).toContain("requireAdminOrCapability(PAYOUT_CAPABILITY)");
+      expect(body).toContain("requireAdmin()");
     }
   });
 

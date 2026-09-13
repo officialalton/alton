@@ -4,16 +4,16 @@ import { describe, expect, it, vi, beforeEach } from "vitest";
 // 구분한다). 거부된 요청에서는 파일 조회도, 서명 URL 발급도 일어나지 않아야
 // 한다 — 게이트를 통과한 뒤에야 저장소에 손을 댄다.
 //
-// 2026-09-12 정정: 현재는 기존 관리자 계정으로 조회·다운로드한다. 정산
+// 2026-09-12 확정: 관리자 전용. 비관리자는 정산 capability가 있어도 거부된다. 정산
 // capability를 필수 조건으로 두지 않는다.
 
-const requireAdminOrCapability = vi.fn();
+const requireAdmin = vi.fn();
 const from = vi.fn();
 const createSignedUrl = vi.fn();
 const insert = vi.fn(async () => ({ error: null }));
 
 vi.mock("@/lib/admin-auth", () => ({
-  requireAdminOrCapability: (...args: unknown[]) => requireAdminOrCapability(...args),
+  requireAdmin: (...args: unknown[]) => requireAdmin(...args),
 }));
 
 vi.mock("@/lib/supabase-admin", () => ({
@@ -32,11 +32,11 @@ beforeEach(() => {
 });
 
 function denyGate() {
-  requireAdminOrCapability.mockRejectedValue(new Error("이 작업을 수행할 권한이 없습니다."));
+  requireAdmin.mockRejectedValue(new Error("관리자만 사용할 수 있습니다."));
 }
 
 function allowGate() {
-  requireAdminOrCapability.mockResolvedValue({ supabase: {}, actorUserId: "admin-1" });
+  requireAdmin.mockResolvedValue({ supabase: {}, adminUserId: "admin-1" });
 }
 
 describe("권한 없는 요청은 파일에 손대기 전에 거부된다", () => {
@@ -44,7 +44,7 @@ describe("권한 없는 요청은 파일에 손대기 전에 거부된다", () =
     denyGate();
     const { listTeacherDocumentSummariesAction } = await import("./teacher-documents-actions");
     await expect(listTeacherDocumentSummariesAction()).rejects.toThrow(
-      "이 작업을 수행할 권한이 없습니다."
+      "관리자만 사용할 수 있습니다."
     );
     expect(from).not.toHaveBeenCalled();
   });
@@ -53,7 +53,7 @@ describe("권한 없는 요청은 파일에 손대기 전에 거부된다", () =
     denyGate();
     const { listTeacherDocumentsAction } = await import("./teacher-documents-actions");
     await expect(listTeacherDocumentsAction("t1")).rejects.toThrow(
-      "이 작업을 수행할 권한이 없습니다."
+      "관리자만 사용할 수 있습니다."
     );
     expect(from).not.toHaveBeenCalled();
   });
@@ -62,18 +62,24 @@ describe("권한 없는 요청은 파일에 손대기 전에 거부된다", () =
     denyGate();
     const { getTeacherDocumentDownloadUrlAction } = await import("./teacher-documents-actions");
     await expect(getTeacherDocumentDownloadUrlAction("d1")).rejects.toThrow(
-      "이 작업을 수행할 권한이 없습니다."
+      "관리자만 사용할 수 있습니다."
     );
     expect(createSignedUrl).not.toHaveBeenCalled();
     // 거부된 요청은 감사에도 남지 않는다(접근 자체가 없었다).
     expect(insert).not.toHaveBeenCalled();
   });
 
-  it("게이트에 정산 capability 이름을 넘긴다", async () => {
+  it("capability만으로 통과시키는 게이트를 쓰지 않는다", async () => {
+    const fs = await import("node:fs");
+    const src = fs.readFileSync("app/admin/teacher-documents-actions.ts", "utf-8");
+    expect(src).not.toContain("requireAdminOrCapability");
+  });
+
+  it("게이트로 관리자 자격을 명시적으로 확인한다", async () => {
     denyGate();
     const { listTeacherDocumentSummariesAction } = await import("./teacher-documents-actions");
     await expect(listTeacherDocumentSummariesAction()).rejects.toThrow();
-    expect(requireAdminOrCapability).toHaveBeenCalledWith("정산권한");
+    expect(requireAdmin).toHaveBeenCalled();
   });
 });
 

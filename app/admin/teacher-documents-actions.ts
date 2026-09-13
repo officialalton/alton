@@ -1,6 +1,6 @@
 "use server";
 
-import { requireAdminOrCapability } from "@/lib/admin-auth";
+import { requireAdmin } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { recordDocumentAccess } from "@/lib/document-access-audit";
 
@@ -10,23 +10,26 @@ import { recordDocumentAccess } from "@/lib/document-access-audit";
 // (P4-2), 이 파일은 그 원본을 조회만 한다. 관리자용 사본 테이블·캐시·미러
 // 버킷을 만들지 않는다.
 //
-// **게이트(2026-09-12 정정)**: 현재는 별도 정산 관리자 역할을 운영하지 않으므로
-// 기존 관리자 계정으로 조회·다운로드할 수 있다. 정산 capability 부여를 현재
-// 사용의 필수 조건으로 두지 않는다(capability 보유자도 통과하는 기존 RLS 의도는
-// 그대로 남긴다).
+// **게이트(2026-09-12 확정)**: **관리자 전용이다.** 서버에서 관리자 자격을
+// 명시적으로 확인한다 — 비관리자는 정산 capability를 가졌더라도 거부된다.
+// capability를 OR로 함께 받는 게이트는 쓰지 않는다. "지금은 그 capability를 가진
+// 사람이 없으니 사실상 관리자 전용"은 정책 보장이 아니라 우연이고, 누군가에게
+// 부여되는 순간 납세 서류가 조용히 열린다.
+//
+// 교사 본인의 업로드·조회·다운로드 경로(app/teacher/settlement-actions.ts)는
+// 이 게이트와 무관하게 그대로다 — 여기는 관리자 조회 경로 하나뿐이다.
 //
 // 교사·학생·보호자는 이 경로로 들어올 수 없다. 관리자 조회는 service_role로
 // 하므로 RLS가 막아주지 않는다 — 이 게이트가 실질적인 통제 지점이고, 거부되면
 // 파일 조회나 서명 URL 발급까지 가지 않도록 **모든 진입점 맨 앞에** 건다.
 //
 // 향후 마스터/중간 관리자 체계가 들어오면 이 게이트를 업무별로 다시 좁힌다
-// (docs/2026-09-12-p4-3-drive-provisioning-request.md §7 후속 계획).
+// (docs/2026-09-12-p4-3-drive-provisioning-request.md §7 후속 계획). `정산권한`
+// 이라는 이름은 그때 쓸 자리로 남겨 둘 뿐, 지금 게이트에는 쓰이지 않는다.
 //
 // **제출 여부는 어떤 업무의 조건도 아니다.** 승인·검토·보완 상태를 만들지 않고
 // (원본 테이블에 그런 컬럼 자체가 없다), 화면에도 "미제출"·"승인됨" 같은 배지를
 // 두지 않는다.
-const PAYOUT_CAPABILITY = "정산권한";
-
 export type TeacherDocumentSummary = {
   teacherId: string;
   teacherName: string;
@@ -45,7 +48,7 @@ export type TeacherDocumentItem = {
 
 /** 교사별 제출 현황 요약. 제출 건수와 최근 제출 시각만 — 판정하지 않는다. */
 export async function listTeacherDocumentSummariesAction(): Promise<TeacherDocumentSummary[]> {
-  await requireAdminOrCapability(PAYOUT_CAPABILITY);
+  await requireAdmin();
   const admin = createAdminClient();
 
   const { data: docs, error } = await admin
@@ -81,7 +84,7 @@ export async function listTeacherDocumentSummariesAction(): Promise<TeacherDocum
 
 /** 한 교사의 제출 파일 목록(메타데이터만). */
 export async function listTeacherDocumentsAction(teacherId: string): Promise<TeacherDocumentItem[]> {
-  await requireAdminOrCapability(PAYOUT_CAPABILITY);
+  await requireAdmin();
   const admin = createAdminClient();
 
   const { data, error } = await admin
@@ -108,12 +111,12 @@ export async function listTeacherDocumentsAction(teacherId: string): Promise<Tea
  * 실제로 내려받았는지는 알 수 없고, 그래서 감사에도 발급으로만 남긴다.
  *
  * 파일명이나 사용자가 고른 종류로 민감 여부를 가르지 않는다. 자유 업로드이므로
- * 모든 파일을 같은 기준(정산 담당 관리자 전용)으로 다룬다.
+ * 모든 파일을 같은 기준(관리자 전용)으로 다룬다.
  */
 export async function getTeacherDocumentDownloadUrlAction(
   documentId: string
 ): Promise<{ ok: true; url: string } | { ok: false; reason: "not_found" | "link_failed" }> {
-  const { actorUserId } = await requireAdminOrCapability(PAYOUT_CAPABILITY);
+  const { adminUserId: actorUserId } = await requireAdmin();
   const admin = createAdminClient();
 
   const { data: doc } = await admin
