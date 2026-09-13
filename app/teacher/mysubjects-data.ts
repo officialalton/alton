@@ -1,11 +1,20 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 
+export type SubjectKeyword = { id: string; label: string };
+
 export type TemplateUnit = {
   id: string;
   position: number;
   unitTitle: string;
   note: string | null;
   teacherComment: string | null;
+  /** 이 회차의 키워드. 관리자 기준본에서 초기 상속되고 선생님이 고칠 수 있다. */
+  keywordIds: string[];
+  /**
+   * 관리자 기준본 회차와 이어져 있는지. 이어져 있지 않으면 물려받을 기본이 없어
+   * "기준본에서 다시 가져오기"를 쓸 수 없다(선생님이 직접 추가한 보충 회차).
+   */
+  linkedToCatalog: boolean;
 };
 
 export type MySubject = {
@@ -13,6 +22,8 @@ export type MySubject = {
   subjectName: string;
   templateId: string | null;
   units: TemplateUnit[];
+  /** 이 과목의 공용 키워드 사전. 회차에 붙일 수 있는 후보 전체. */
+  keywords: SubjectKeyword[];
   /**
    * 보관된 과목. 신규 배정 후보에서는 빠지지만 **기존 커리큘럼은 계속 열어볼 수
    * 있어야 한다** — 보관은 숨김이지 접근 차단이 아니다(2026-09-12 확정).
@@ -96,13 +107,45 @@ export async function loadMySubjects(
   );
 
   const templateIds = (templates ?? []).map((t) => t.id);
-  const { data: units } = templateIds.length
+  // N+1 방지: 회차·키워드 사전·회차별 키워드를 각각 한 번씩만 조회한다
+  // (관리자 쪽 loadSubjects와 같은 방식).
+  const [{ data: units }, { data: keywords }] = await Promise.all([
+    templateIds.length
+      ? supabase
+          .from("teacher_curriculum_template_units")
+          .select("id, template_id, position, unit_title, note, teacher_comment, source_unit_id")
+          .in("template_id", templateIds)
+          .order("position", { ascending: true })
+      : Promise.resolve({ data: [] as never[] }),
+    supabase
+      .from("subject_keywords")
+      .select("id, subject_id, label")
+      .in("subject_id", subjectIds)
+      .eq("status", "active")
+      .order("label", { ascending: true }),
+  ]);
+
+  const unitIds = (units ?? []).map((u) => u.id);
+  const { data: unitKeywordRows } = unitIds.length
     ? await supabase
-        .from("teacher_curriculum_template_units")
-        .select("id, template_id, position, unit_title, note, teacher_comment")
-        .in("template_id", templateIds)
-        .order("position", { ascending: true })
-    : { data: [] as never[] };
+        .from("teacher_curriculum_template_unit_keywords")
+        .select("unit_id, keyword_id")
+        .in("unit_id", unitIds)
+    : { data: [] as { unit_id: string; keyword_id: string }[] };
+
+  const keywordIdsByUnit = new Map<string, string[]>();
+  for (const row of unitKeywordRows ?? []) {
+    const list = keywordIdsByUnit.get(row.unit_id) ?? [];
+    list.push(row.keyword_id);
+    keywordIdsByUnit.set(row.unit_id, list);
+  }
+
+  const keywordsBySubject = new Map<string, SubjectKeyword[]>();
+  for (const k of keywords ?? []) {
+    const list = keywordsBySubject.get(k.subject_id) ?? [];
+    list.push({ id: k.id, label: k.label });
+    keywordsBySubject.set(k.subject_id, list);
+  }
 
   const unitsByTemplate = new Map<string, TemplateUnit[]>();
   for (const u of units ?? []) {
@@ -113,6 +156,8 @@ export async function loadMySubjects(
       unitTitle: u.unit_title,
       note: u.note,
       teacherComment: u.teacher_comment,
+      keywordIds: keywordIdsByUnit.get(u.id) ?? [],
+      linkedToCatalog: Boolean(u.source_unit_id),
     });
     unitsByTemplate.set(u.template_id, list);
   }
@@ -124,6 +169,7 @@ export async function loadMySubjects(
       subjectName: subjectNameById.get(subjectId) ?? "",
       templateId,
       units: templateId ? unitsByTemplate.get(templateId) ?? [] : [],
+      keywords: keywordsBySubject.get(subjectId) ?? [],
       archived: archivedSubjectIds.has(subjectId),
     };
   });

@@ -10,6 +10,9 @@ vi.mock("./mysubjects-actions", () => ({
   updateTemplateUnit: vi.fn(),
   removeTemplateUnit: vi.fn(),
   moveTemplateUnit: vi.fn(),
+  addTemplateUnitKeyword: vi.fn(),
+  removeTemplateUnitKeyword: vi.fn(),
+  inheritUnitDefaults: vi.fn(),
 }));
 
 const withTemplate: MySubject = {
@@ -17,9 +20,10 @@ const withTemplate: MySubject = {
   subjectName: "SAT Math",
   templateId: "tpl1",
   archived: false,
+  keywords: [],
   units: [
-    { id: "u1", position: 1, unitTitle: "함수의 기초", note: null, teacherComment: null },
-    { id: "u7", position: 7, unitTitle: "이차방정식 응용", note: "실수 유형", teacherComment: null },
+    { id: "u1", position: 1, unitTitle: "함수의 기초", note: null, teacherComment: null, keywordIds: [], linkedToCatalog: true },
+    { id: "u7", position: 7, unitTitle: "이차방정식 응용", note: "실수 유형", teacherComment: null, keywordIds: [], linkedToCatalog: true },
   ],
 };
 
@@ -28,6 +32,7 @@ const withoutTemplate: MySubject = {
   subjectName: "AP Statistics",
   templateId: null,
   archived: false,
+  keywords: [],
   units: [],
 };
 
@@ -43,7 +48,7 @@ describe("MySubjectsTab", () => {
   it("템플릿 만들기를 누르면 생성 후 바로 편집 화면으로 이동한다", async () => {
     vi.mocked(actions.createMyTemplate).mockResolvedValue({
       templateId: "tpl2",
-      units: [{ id: "u1", position: 1, unitTitle: "기초 통계", note: null, teacherComment: null }],
+      units: [{ id: "u1", position: 1, unitTitle: "기초 통계", note: null, teacherComment: null, keywordIds: [], linkedToCatalog: true }],
     });
     render(<MySubjectsTab initialSubjects={[withoutTemplate]} />);
     fireEvent.click(screen.getByText("템플릿 만들기"));
@@ -57,6 +62,8 @@ describe("MySubjectsTab", () => {
     vi.mocked(actions.addTemplateUnit).mockResolvedValue({
       id: "u8",
       position: 8,
+      keywordIds: [],
+      linkedToCatalog: false,
       unitTitle: "새 회차",
       note: null,
       teacherComment: null,
@@ -89,7 +96,8 @@ describe("MySubjectsTab — 보관된 과목", () => {
     subjectName: "테스트 과목 1",
     templateId: "tpl9",
     archived: true,
-    units: [{ id: "u9", position: 1, unitTitle: "회차", note: null, teacherComment: null }],
+    keywords: [],
+    units: [{ id: "u9", position: 1, unitTitle: "회차", note: null, teacherComment: null, keywordIds: [], linkedToCatalog: true }],
   };
 
   it("현재 목록에는 보관 과목이 섞이지 않는다", () => {
@@ -108,5 +116,117 @@ describe("MySubjectsTab — 보관된 과목", () => {
     // 편집 진입이 살아 있어야 한다 — 접근 자체를 막으면 안 된다.
     fireEvent.click(screen.getByText("편집"));
     expect(screen.getByDisplayValue("회차")).toBeInTheDocument();
+  });
+});
+
+// P2 3차 — 관리자 기준본에서 내려온 키워드가 이 화면에 보이고, 선생님이 자기
+// 기본 구성으로 고칠 수 있어야 한다. 이게 안 되면 선생님은 배정받은 학생마다
+// 같은 키워드를 다시 찍게 된다.
+describe("회차 키워드", () => {
+  const withKeywords: MySubject = {
+    subjectId: "sub3",
+    subjectName: "SAT Reading",
+    templateId: "tpl3",
+    archived: false,
+    keywords: [
+      { id: "k1", label: "이차방정식" },
+      { id: "k2", label: "함수" },
+    ],
+    units: [
+      {
+        id: "u1",
+        position: 1,
+        unitTitle: "1회차",
+        note: null,
+        teacherComment: null,
+        keywordIds: ["k1"],
+        linkedToCatalog: true,
+      },
+    ],
+  };
+
+  function openEditor(subject: MySubject = withKeywords) {
+    render(<MySubjectsTab initialSubjects={[subject]} />);
+    fireEvent.click(screen.getByText("편집"));
+  }
+
+  it("기준본에서 내려온 키워드가 붙은 상태로 보인다", () => {
+    openEditor();
+    expect(screen.getByRole("button", { name: "이차방정식" })).toHaveAttribute(
+      "aria-pressed",
+      "true"
+    );
+    expect(screen.getByRole("button", { name: "함수" })).toHaveAttribute("aria-pressed", "false");
+  });
+
+  it("붙이지 않은 키워드를 누르면 붙고, 붙은 키워드를 누르면 떨어진다", async () => {
+    vi.mocked(actions.addTemplateUnitKeyword).mockResolvedValue({ ok: true });
+    vi.mocked(actions.removeTemplateUnitKeyword).mockResolvedValue({ ok: true });
+    openEditor();
+
+    fireEvent.click(screen.getByRole("button", { name: "함수" }));
+    await waitFor(() =>
+      expect(actions.addTemplateUnitKeyword).toHaveBeenCalledWith("u1", "k2")
+    );
+    await waitFor(() =>
+      expect(screen.getByRole("button", { name: "함수" })).toHaveAttribute("aria-pressed", "true")
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "이차방정식" }));
+    await waitFor(() =>
+      expect(actions.removeTemplateUnitKeyword).toHaveBeenCalledWith("u1", "k1")
+    );
+    await waitFor(() =>
+      expect(screen.getByRole("button", { name: "이차방정식" })).toHaveAttribute(
+        "aria-pressed",
+        "false"
+      )
+    );
+  });
+
+  it("실패하면 사유를 화면에 보여주고 상태를 바꾸지 않는다", async () => {
+    vi.mocked(actions.addTemplateUnitKeyword).mockResolvedValue({
+      ok: false,
+      error: "키워드를 붙이지 못했습니다.",
+    });
+    openEditor();
+
+    fireEvent.click(screen.getByRole("button", { name: "함수" }));
+    await waitFor(() =>
+      expect(screen.getByText("키워드를 붙이지 못했습니다.")).toBeInTheDocument()
+    );
+    expect(screen.getByRole("button", { name: "함수" })).toHaveAttribute("aria-pressed", "false");
+  });
+
+  it("기준본과 이어진 회차에는 보정 버튼이 있다", () => {
+    openEditor();
+    expect(screen.getByText("기준본에서 가져오기")).toBeInTheDocument();
+  });
+
+  it("직접 추가한 보충 회차에는 보정 버튼이 없다", () => {
+    // 물려받을 기준본이 없는 회차다. 버튼을 눌러도 할 일이 없으므로 보이지 않는다.
+    openEditor({
+      ...withKeywords,
+      units: [{ ...withKeywords.units[0], linkedToCatalog: false, keywordIds: [] }],
+    });
+    expect(screen.queryByText("기준본에서 가져오기")).not.toBeInTheDocument();
+    expect(
+      screen.getByText("직접 추가한 회차라 물려받을 기준본이 없습니다. 키워드를 직접 고르세요.")
+    ).toBeInTheDocument();
+  });
+
+  it("보정 결과는 추측하지 않고 서버가 돌려준 상태를 그린다", async () => {
+    vi.mocked(actions.inheritUnitDefaults).mockResolvedValue({
+      ok: true,
+      keywordsAdded: 1,
+      keywordIds: ["k1", "k2"],
+    });
+    openEditor();
+
+    fireEvent.click(screen.getByText("기준본에서 가져오기"));
+    await waitFor(() =>
+      expect(screen.getByText("기준본에서 키워드 1개를 가져왔습니다.")).toBeInTheDocument()
+    );
+    expect(screen.getByRole("button", { name: "함수" })).toHaveAttribute("aria-pressed", "true");
   });
 });

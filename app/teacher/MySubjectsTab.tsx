@@ -7,6 +7,9 @@ import {
   updateTemplateUnit,
   removeTemplateUnit,
   moveTemplateUnit,
+  addTemplateUnitKeyword,
+  removeTemplateUnitKeyword,
+  inheritUnitDefaults,
 } from "./mysubjects-actions";
 import type { MySubject, TemplateUnit } from "./mysubjects-data";
 
@@ -63,8 +66,9 @@ export default function MySubjectsTab({
         내 과목 커리큘럼
       </h1>
       <p className="text-[13px] text-grey-500 mb-5">
-        여기서 만든 회차 구성은 학생에게 새로 배정할 때 기본값으로
-        사용됩니다. 이미 배정된 학생의 진행 상황에는 영향을 주지 않습니다.
+        과목을 맡으면 관리자 기준본의 회차와 키워드가 여기로 내려옵니다. 여기서 고친
+        구성은 <strong className="text-ink font-bold">앞으로 새로 배정받는 학생</strong>의
+        커리큘럼 기본값이 됩니다. 이미 배정된 학생의 진행 상황은 바뀌지 않습니다.
       </p>
 
       <div className="flex gap-1 mb-3 border-b-[1.5px] border-grey-200">
@@ -153,6 +157,9 @@ function TemplateEditor({
   onUnitsChange: (units: TemplateUnit[]) => void;
 }) {
   const [units, setUnits] = useState(subject.units);
+  const [error, setError] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
+  const keywordLabelById = new Map(subject.keywords.map((k) => [k.id, k.label]));
 
   function commit(next: TemplateUnit[]) {
     setUnits(next);
@@ -182,6 +189,44 @@ function TemplateEditor({
     await updateTemplateUnit(unitId, { [field]: value });
   }
 
+  async function handleToggleKeyword(unitId: string, keywordId: string, attached: boolean) {
+    const result = attached
+      ? await removeTemplateUnitKeyword(unitId, keywordId)
+      : await addTemplateUnitKeyword(unitId, keywordId);
+    if (!result.ok) {
+      setError(result.error);
+      return;
+    }
+    setError(null);
+    commit(
+      units.map((u) =>
+        u.id === unitId
+          ? {
+              ...u,
+              keywordIds: attached
+                ? u.keywordIds.filter((k) => k !== keywordId)
+                : [...u.keywordIds, keywordId],
+            }
+          : u
+      )
+    );
+  }
+
+  async function handleInherit(unitId: string) {
+    const result = await inheritUnitDefaults(unitId);
+    if (!result.ok) {
+      setError(result.error);
+      return;
+    }
+    setError(null);
+    setNotice(
+      result.keywordsAdded === 0
+        ? "기준본에서 더 가져올 것이 없습니다."
+        : `기준본에서 키워드 ${result.keywordsAdded}개를 가져왔습니다.`
+    );
+    commit(units.map((u) => (u.id === unitId ? { ...u, keywordIds: result.keywordIds } : u)));
+  }
+
   async function handleMove(index: number, direction: -1 | 1) {
     const target = index + direction;
     if (target < 0 || target >= units.length) return;
@@ -205,9 +250,24 @@ function TemplateEditor({
       >
         ← 뒤로
       </button>
-      <h1 className="text-[20px] font-extrabold text-ink mb-5">
+      <h1 className="text-[20px] font-extrabold text-ink mb-1.5">
         {subject.subjectName} 커리큘럼 편집
       </h1>
+      <p className="text-[12.5px] text-grey-500 mb-4">
+        회차에 붙인 키워드에 따라 기본 교재가 자동으로 구성됩니다. 여기서 정한 구성은
+        앞으로 새로 배정받는 학생에게 내려갑니다.
+      </p>
+
+      {error && (
+        <div className="text-[12.5px] text-red bg-red/5 border-[1.5px] border-red/20 rounded-lg px-4 py-2.5 mb-3">
+          {error}
+        </div>
+      )}
+      {notice && !error && (
+        <div className="text-[12.5px] text-grey-500 bg-grey-100 rounded-lg px-4 py-2.5 mb-3">
+          {notice}
+        </div>
+      )}
 
       {units.map((u, idx) => (
         <div
@@ -236,7 +296,56 @@ function TemplateEditor({
             onBlur={(e) => handleField(u.id, "teacherComment", e.target.value)}
             className="w-full px-3 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12.5px] mb-2"
           />
+          {/* 회차 키워드 — 관리자 기준본에서 내려온 것과 선생님이 고친 것이 같은 줄에
+              보인다. 붙이면 그 키워드의 기본 교재가 자동 구성으로 따라 들어온다. */}
+          <div className="border-t-[1.5px] border-grey-100 pt-2.5 mb-2">
+            <div className="text-[11.5px] font-bold text-grey-500 mb-1.5">회차 키워드</div>
+            {subject.keywords.length === 0 ? (
+              <p className="text-[12px] text-grey-500">
+                이 과목에 등록된 키워드가 없습니다. 관리자가 과목 키워드를 만들면 여기에
+                나타납니다.
+              </p>
+            ) : (
+              <div className="flex flex-wrap gap-1.5">
+                {subject.keywords.map((k) => {
+                  const attached = u.keywordIds.includes(k.id);
+                  return (
+                    <button
+                      key={k.id}
+                      onClick={() => handleToggleKeyword(u.id, k.id, attached)}
+                      aria-pressed={attached}
+                      className={
+                        "text-[11.5px] font-semibold px-2.5 py-1 rounded-full border-[1.5px] " +
+                        (attached
+                          ? "bg-ink text-white border-ink"
+                          : "bg-white text-grey-500 border-grey-200")
+                      }
+                    >
+                      {k.label}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+            {u.keywordIds.length === 0 && subject.keywords.length > 0 && (
+              <p className="text-[11.5px] text-grey-500 mt-1.5">
+                {u.linkedToCatalog
+                  ? "이 회차에 키워드가 없습니다. 기준본에서 가져오거나 직접 고르세요."
+                  : "직접 추가한 회차라 물려받을 기준본이 없습니다. 키워드를 직접 고르세요."}
+              </p>
+            )}
+          </div>
+
           <div className="flex items-center gap-3">
+            {/* 보정은 수동이다 — 자동으로 돌면 선생님이 일부러 뺀 키워드를 되살린다. */}
+            {u.linkedToCatalog && (
+              <button
+                onClick={() => handleInherit(u.id)}
+                className="text-[12px] font-semibold text-grey-500"
+              >
+                기준본에서 가져오기
+              </button>
+            )}
             <button
               disabled={idx === 0}
               onClick={() => handleMove(idx, -1)}

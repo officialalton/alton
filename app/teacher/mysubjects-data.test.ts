@@ -12,6 +12,10 @@ function makeSupabase(params: {
   enrollments: Array<{ subject_id: string; subject: { name: string } }>;
   assignments: Array<{ subject_enrollment: { subject_id: string; subject: { name: string } } }>;
   assigned?: Array<{ subject_id: string; subject: { name: string; archived_at?: string | null } }>;
+  keywords?: Array<{ id: string; subject_id: string; label: string }>;
+  units?: Array<Record<string, unknown>>;
+  unitKeywords?: Array<{ unit_id: string; keyword_id: string }>;
+  templateIds?: Array<{ id: string; subject_id: string }>;
 }) {
   return {
     from: vi.fn((table: string) => {
@@ -29,11 +33,31 @@ function makeSupabase(params: {
             eq: () => {
               const result = Promise.resolve({ data: params.assigned ?? [] });
               return Object.assign(result, {
-                in: () => Promise.resolve({ data: [] }),
+                in: () => Promise.resolve({ data: params.templateIds ?? [] }),
               });
             },
           }),
         };
+      }
+      if (table === "subject_keywords") {
+        // 과목 공용 키워드 사전 — .in().eq().order() 로 끝난다.
+        return {
+          select: () => ({
+            in: () => ({
+              eq: () => ({ order: () => Promise.resolve({ data: params.keywords ?? [] }) }),
+            }),
+          }),
+        };
+      }
+      if (table === "teacher_curriculum_template_units") {
+        return {
+          select: () => ({
+            in: () => ({ order: () => Promise.resolve({ data: params.units ?? [] }) }),
+          }),
+        };
+      }
+      if (table === "teacher_curriculum_template_unit_keywords") {
+        return { select: () => ({ in: () => Promise.resolve({ data: params.unitKeywords ?? [] }) }) };
       }
       throw new Error(`unexpected table ${table}`);
     }),
@@ -91,6 +115,7 @@ describe("loadMySubjects", () => {
         subjectName: "AP Calculus AB",
         templateId: null,
         units: [],
+        keywords: [],
         archived: false,
       },
     ]);
@@ -125,5 +150,39 @@ describe("loadMySubjects — 배정만 된 과목", () => {
     expect(result.map((s) => s.subjectId).sort()).toEqual(["sub3", "sub9"]);
     expect(result.find((s) => s.subjectId === "sub9")?.archived).toBe(true);
     expect(result.find((s) => s.subjectId === "sub3")?.archived).toBe(false);
+  });
+});
+
+// P2 3차 — 관리자 기준본에서 내려온 회차 키워드가 화면까지 실려야 한다.
+// 여기서 빠지면 선생님은 상속이 동작해도 그것을 볼 수 없다.
+describe("loadMySubjects — 회차 키워드", () => {
+  it("회차별 키워드와 과목 키워드 사전을 함께 싣는다", async () => {
+    const supabase = makeSupabase({
+      enrollments: [],
+      assignments: [],
+      assigned: [{ subject_id: "sub1", subject: { name: "SAT Math" } }],
+      keywords: [
+        { id: "k1", subject_id: "sub1", label: "이차방정식" },
+        { id: "k2", subject_id: "sub1", label: "함수" },
+      ],
+      units: [
+        {
+          id: "u1",
+          template_id: "tpl1",
+          position: 1,
+          unit_title: "1회차",
+          note: null,
+          teacher_comment: null,
+          source_unit_id: "cat1",
+        },
+      ],
+      unitKeywords: [{ unit_id: "u1", keyword_id: "k1" }],
+      templateIds: [{ id: "tpl1", subject_id: "sub1" }],
+    });
+    const result = await loadMySubjects(supabase as never, "t1");
+    expect(result[0].keywords.map((k) => k.label)).toEqual(["이차방정식", "함수"]);
+    expect(result[0].units[0].keywordIds).toEqual(["k1"]);
+    // 기준본과 이어져 있으므로 "기준본에서 가져오기"를 쓸 수 있다.
+    expect(result[0].units[0].linkedToCatalog).toBe(true);
   });
 });
