@@ -482,6 +482,14 @@ function SubjectDetailEditor({
             </div>
           )}
           <div className="flex items-center gap-3">
+            {/* 4절 — 관리자 기준본 회차에서도 같은 준비 화면으로 들어간다.
+                이름은 세 계층 모두 "수업 준비"로 같다. */}
+            <a
+              href={`/lesson-prep/catalog/${u.id}`}
+              className="text-[12px] font-bold text-ink underline underline-offset-2"
+            >
+              수업 준비
+            </a>
             <button
               disabled={idx === 0}
               onClick={() => handleMove(idx, -1)}

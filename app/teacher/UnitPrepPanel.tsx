@@ -94,7 +94,7 @@ export default function UnitPrepPanel({
         setComposition(comp);
       })
       .catch((e) => {
-        if (!cancelled) setError(e instanceof Error ? e.message : "회차 준비를 불러오지 못했습니다.");
+        if (!cancelled) setError(e instanceof Error ? e.message : "수업 준비를 불러오지 못했습니다.");
       })
       .finally(() => {
         if (!cancelled) setLoading(false);
@@ -159,7 +159,7 @@ export default function UnitPrepPanel({
           {subjectName} › {unitTitle}
         </span>
         <span className="text-[10.5px] font-bold text-grey-500 bg-grey-100 rounded-full px-2 py-0.5 ml-auto">
-          회차 준비
+          수업 준비
         </span>
       </div>
       <h2 className="text-[19px] sm:text-[21px] font-extrabold text-ink leading-tight">{unitTitle}</h2>

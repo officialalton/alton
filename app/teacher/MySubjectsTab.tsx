@@ -376,6 +376,14 @@ function TemplateEditor({
           </div>
 
           <div className="flex items-center gap-3">
+            {/* 4절 — 모든 진입 버튼 이름은 "수업 준비"로 통일한다. 예약이나 실제
+                수업 기록 없이 회차 기준으로 열린다. */}
+            <a
+              href={`/lesson-prep/teacher/${u.id}`}
+              className="text-[12px] font-bold text-ink underline underline-offset-2"
+            >
+              수업 준비
+            </a>
             {/* 보정은 수동이다 — 자동으로 돌면 선생님이 일부러 뺀 키워드를 되살린다. */}
             {u.linkedToCatalog && (
               <button

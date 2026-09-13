@@ -117,7 +117,7 @@ describe("TeacherLessonScheduleTab", () => {
     expect(pushMock).not.toHaveBeenCalledWith(`/session/${otherLesson.sessionId}`);
   });
 
-  it("P2/P3 2단계: 예정 수업에서만 '회차 준비'가 보이고, 그 수업의 준비 화면으로 이동한다", () => {
+  it("P2/P3 2단계: 예정 수업에서만 '수업 준비'가 보이고, 그 수업의 준비 화면으로 이동한다", () => {
     const pastLesson: TeacherLessonScheduleItem = {
       ...lesson,
       reservationId: "r3",
@@ -141,7 +141,7 @@ describe("TeacherLessonScheduleTab", () => {
     );
 
     // 지난 수업 카드에는 준비할 것이 없으므로 버튼이 붙지 않는다.
-    const prepButtons = screen.getAllByText("회차 준비");
+    const prepButtons = screen.getAllByText("수업 준비");
     expect(prepButtons).toHaveLength(1);
 
     fireEvent.click(prepButtons[0]);

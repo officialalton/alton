@@ -300,7 +300,7 @@ export default function TeacherLessonScheduleTab({
               onClick={() => router.push(`/teacher/session-prep/${lesson.sessionId}`)}
               className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-grey-100 text-ink"
             >
-              회차 준비
+              수업 준비
             </button>
           )}
           <button

@@ -217,7 +217,7 @@ export default function StudentCurriculumPanel({
                 onClick={() => setPreparingUnit({ id: u.id, title: u.unitTitle })}
                 className="text-[11.5px] font-bold text-ink"
               >
-                회차 준비
+                수업 준비
               </button>
               <button onClick={() => handleExclude(u.id)} className="text-[11.5px] font-semibold text-red">
                 제외

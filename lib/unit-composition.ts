@@ -242,3 +242,52 @@ function one(rel: unknown): unknown {
 function relName(rel: unknown): string {
   return ((one(rel) as { name?: string } | null)?.name ?? "").trim();
 }
+
+export type PickableMaterial = {
+  curriculumDocId: string;
+  title: string;
+  primaryKeywordLabel: string | null;
+  /** 이미 이 회차 구성에 들어 있는가. */
+  picked: boolean;
+};
+
+/**
+ * 이 회차에 담을 수 있는 교재 목록.
+ *
+ * 공개된 것만 보여준다 — draft 교재는 학생에게 갈 수 없으므로 구성 후보도 아니다.
+ * 보관된 교재도 뺀다: 보관은 "신규 선택에서 제외"이지 삭제가 아니므로, 이미 담겨
+ * 있는 것은 그대로 두고 **새로 고르는 목록에서만** 빠진다.
+ */
+export async function loadPickableMaterials(
+  supabase: SupabaseClient,
+  subjectId: string,
+  pickedDocIds: string[]
+): Promise<PickableMaterial[]> {
+  if (!subjectId) return [];
+
+  const { data: docs } = await supabase
+    .from("curriculum_docs")
+    .select("id, title, primary_keyword_id")
+    .eq("subject_id", subjectId)
+    .eq("status", "published")
+    .is("archived_at", null)
+    .order("title", { ascending: true });
+
+  const keywordIds = Array.from(
+    new Set((docs ?? []).map((d) => d.primary_keyword_id as string | null).filter(Boolean))
+  ) as string[];
+  const { data: keywords } = keywordIds.length
+    ? await supabase.from("subject_keywords").select("id, label").in("id", keywordIds)
+    : { data: [] as { id: string; label: string }[] };
+  const labelById = new Map((keywords ?? []).map((k) => [k.id as string, k.label as string]));
+
+  const picked = new Set(pickedDocIds);
+  return (docs ?? []).map((d) => ({
+    curriculumDocId: d.id as string,
+    title: d.title as string,
+    primaryKeywordLabel: d.primary_keyword_id
+      ? labelById.get(d.primary_keyword_id as string) ?? null
+      : null,
+    picked: picked.has(d.id as string),
+  }));
+}
