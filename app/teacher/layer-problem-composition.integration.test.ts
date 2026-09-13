@@ -429,3 +429,140 @@ describe("이미 담긴 항목의 정리는 막지 않는다", () => {
     ).toThrow();
   });
 });
+
+// 지시 2·3번 — 준비안은 "무엇을"뿐 아니라 "어떤 버전을" 쓸지까지 저장한다. 상속은
+// 조건만 내려보내 다시 뽑는 것이 아니라 실제 선택 결과·버전·출처·제외·순서를
+// 그대로 이어받는다.
+describe("준비안이 버전을 못 박고, 상속이 그대로 이어받는다", () => {
+  const versionOf = (unitId: string, problemId: string) =>
+    psql(
+      `select coalesce(problem_version_id::text, '(없음)')
+       from subject_template_unit_problems
+       where unit_id = '${unitId}' and problem_id = '${problemId}';`
+    );
+
+  const publishedVersionOf = (problemId: string) =>
+    psql(`select published_version_id from problems where id = '${problemId}';`);
+
+  it("담는 순간의 공개 버전이 박힌다", () => {
+    const kw = makeKeyword();
+    const p = makeProblem(kw);
+    const unitId = makeCatalogUnit([kw]);
+
+    expect(versionOf(unitId, p)).toBe(publishedVersionOf(p));
+  });
+
+  it("나중에 새 버전이 공개돼도 준비안의 버전은 그대로다", () => {
+    const kw = makeKeyword();
+    const p = makeProblem(kw);
+    const unitId = makeCatalogUnit([kw]);
+    const before = versionOf(unitId, p);
+
+    // 새 버전을 공개한다 — 이전 공개본은 물러난다.
+    psql(`update problem_versions set status = 'archived' where problem_id = '${p}';`);
+    psql(
+      `insert into problem_versions (problem_id, version_no, passage, status, published_at)
+       values ('${p}', 2, '고친 본문 ${uniq()}', 'published', now());`
+    );
+    psql(
+      `update problems set published_version_id =
+         (select id from problem_versions where problem_id = '${p}' and version_no = 2)
+       where id = '${p}';`
+    );
+
+    expect(versionOf(unitId, p)).toBe(before);
+    expect(versionOf(unitId, p)).not.toBe(publishedVersionOf(p));
+  });
+
+  it("상속은 상위가 쓰던 버전을 그대로 물려준다", () => {
+    const kw = makeKeyword();
+    const p = makeProblem(kw);
+    const catalogUnit = makeCatalogUnit([kw]);
+    const catalogVersion = versionOf(catalogUnit, p);
+
+    // 상위가 담은 뒤에 새 버전이 공개됐다.
+    psql(`update problem_versions set status = 'archived' where problem_id = '${p}';`);
+    psql(
+      `insert into problem_versions (problem_id, version_no, passage, status, published_at)
+       values ('${p}', 2, '새 본문 ${uniq()}', 'published', now());`
+    );
+    psql(
+      `update problems set published_version_id =
+         (select id from problem_versions where problem_id = '${p}' and version_no = 2)
+       where id = '${p}';`
+    );
+
+    const teacherUnit = makeTeacherUnitFor(catalogUnit);
+    // 하위가 최신본을 새로 집으면 상위와 다른 내용으로 시작하게 된다.
+    expect(
+      psql(
+        `select coalesce(problem_version_id::text, '(없음)')
+         from teacher_curriculum_template_unit_problems
+         where unit_id = '${teacherUnit}' and problem_id = '${p}';`
+      )
+    ).toBe(catalogVersion);
+  });
+
+  it("상위에서 뺀 문제는 하위에서 되살아나지 않는다", () => {
+    const kw = makeKeyword();
+    const p = makeProblem(kw);
+    const catalogUnit = makeCatalogUnit([kw]);
+
+    // 상위에서 뺀다(제외 기록 포함).
+    psql(`delete from subject_template_unit_problems where unit_id = '${catalogUnit}';`);
+    psql(
+      `insert into subject_template_unit_problem_exclusions (unit_id, problem_id)
+       values ('${catalogUnit}', '${p}');`
+    );
+
+    const teacherUnit = makeTeacherUnitFor(catalogUnit);
+    expect(
+      psql(
+        `select count(*) from teacher_curriculum_template_unit_problems where unit_id = '${teacherUnit}';`
+      )
+    ).toBe("0");
+  });
+
+  it("상위의 순서와 출처 구분이 그대로 이어진다", () => {
+    const kw = makeKeyword();
+    const a = makeProblem(kw);
+    const b = makeProblem(kw);
+    const catalogUnit = makeCatalogUnit([kw]);
+
+    // 상위에서 순서를 뒤집고 하나를 직접 담은 것으로 바꿔 둔다.
+    psql(
+      `update subject_template_unit_problems set position = 50, source = 'manual'
+       where unit_id = '${catalogUnit}' and problem_id = '${a}';`
+    );
+    psql(
+      `update subject_template_unit_problems set position = 10
+       where unit_id = '${catalogUnit}' and problem_id = '${b}';`
+    );
+
+    const teacherUnit = makeTeacherUnitFor(catalogUnit);
+    expect(
+      psql(
+        `select string_agg(problem_id::text || ':' || source, ',' order by position)
+         from teacher_curriculum_template_unit_problems where unit_id = '${teacherUnit}';`
+      )
+    ).toBe(`${b}:auto,${a}:manual`);
+  });
+
+  function makeTeacherUnitFor(sourceUnitId: string): string {
+    psql(
+      `insert into teacher_curriculum_templates (teacher_id, subject_id)
+       values ('${TEACHER_ID}', '${SUBJECT_ID}') on conflict (teacher_id, subject_id) do nothing;`
+    );
+    const templateId = psql(
+      `select id from teacher_curriculum_templates
+       where teacher_id = '${TEACHER_ID}' and subject_id = '${SUBJECT_ID}';`
+    );
+    const id = psql(
+      `insert into teacher_curriculum_template_units (template_id, source_unit_id, position, unit_title)
+       values ('${templateId}', '${sourceUnitId}', ${900 + Math.floor(Math.random() * 30)}, '선생님 ${uniq()}')
+       returning id;`
+    );
+    cleanupTeacherUnitIds.push(id);
+    return id;
+  }
+});
