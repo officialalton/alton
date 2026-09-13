@@ -295,3 +295,78 @@ describe("최초 상속과 상위 변경 반영은 다르다", () => {
     expect(teacherTarget(teacherUnit)).toBe("3");
   });
 });
+
+// 지시 2번 — 후보 목록을 좁히는 것만으로는 부족하다. 화면을 거치지 않고 문제 id 를
+// 직접 넣는 경로가 있으므로 **쓰기 시점에** 거부해야 한다. 경로마다 막으면 새 경로가
+// 생길 때 또 빠지므로 테이블에 건다.
+describe("사용할 수 없는 문제는 쓰기에서 거부한다", () => {
+  const rejects = (sql: string) => {
+    expect(() => psql(sql)).toThrow();
+  };
+
+  it("공개된 버전이 없는 문제는 담기지 않는다", () => {
+    const kw = makeKeyword();
+    const p = makeProblem(kw, { unpublished: true });
+    const unitId = makeCatalogUnit([]);
+    rejects(
+      `insert into subject_template_unit_problems (unit_id, problem_id, position)
+       values ('${unitId}', '${p}', 1);`
+    );
+  });
+
+  it("확정되지 않은 문제는 담기지 않는다", () => {
+    const kw = makeKeyword();
+    const p = makeProblem(kw, { confirmed: false });
+    const unitId = makeCatalogUnit([]);
+    rejects(
+      `insert into subject_template_unit_problems (unit_id, problem_id, position)
+       values ('${unitId}', '${p}', 1);`
+    );
+  });
+
+  it("보관된 문제는 새로 담기지 않는다", () => {
+    const kw = makeKeyword();
+    const p = makeProblem(kw);
+    psql(`update problems set archived_at = now() where id = '${p}';`);
+    const unitId = makeCatalogUnit([]);
+    rejects(
+      `insert into subject_template_unit_problems (unit_id, problem_id, position)
+       values ('${unitId}', '${p}', 1);`
+    );
+  });
+
+  it("선생님 층에서도 같게 막는다", () => {
+    const kw = makeKeyword();
+    const p = makeProblem(kw, { unpublished: true });
+    const admin = makeCatalogUnit([]);
+    psql(
+      `insert into teacher_curriculum_templates (teacher_id, subject_id)
+       values ('${TEACHER_ID}', '${SUBJECT_ID}') on conflict (teacher_id, subject_id) do nothing;`
+    );
+    const templateId = psql(
+      `select id from teacher_curriculum_templates
+       where teacher_id = '${TEACHER_ID}' and subject_id = '${SUBJECT_ID}';`
+    );
+    const unitId = psql(
+      `insert into teacher_curriculum_template_units (template_id, source_unit_id, position, unit_title)
+       values ('${templateId}', '${admin}', ${940 + Math.floor(Math.random() * 20)}, '선생님 ${uniq()}')
+       returning id;`
+    );
+    cleanupTeacherUnitIds.push(unitId);
+    rejects(
+      `insert into teacher_curriculum_template_unit_problems (unit_id, problem_id, position)
+       values ('${unitId}', '${p}', 1);`
+    );
+  });
+
+  it("이미 담긴 문제는 나중에 보관돼도 빠지지 않는다", () => {
+    // 가드는 **새로 담는 것**만 본다. 과거 구성이 보관 때문에 사라지면 안 된다.
+    const kw = makeKeyword();
+    const p = makeProblem(kw);
+    const unitId = makeCatalogUnit([kw]);
+    expect(countOf(unitId)).toBe("1");
+
+    psql(`update problems set archived_at = now() where id = '${p}';`);
+    expect(countOf(unitId)).toBe("1");
+  });
+});
