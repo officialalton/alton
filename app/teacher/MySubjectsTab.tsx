@@ -10,6 +10,7 @@ import {
   addTemplateUnitKeyword,
   removeTemplateUnitKeyword,
   inheritUnitDefaults,
+  inheritTemplateDefaults,
 } from "./mysubjects-actions";
 import type { MySubject, TemplateUnit } from "./mysubjects-data";
 
@@ -159,7 +160,11 @@ function TemplateEditor({
   const [units, setUnits] = useState(subject.units);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
-  const keywordLabelById = new Map(subject.keywords.map((k) => [k.id, k.label]));
+  // 기준본과 이어져 있는데 키워드가 비어 있는 회차 — 보정 대상이다. 보충 회차는
+  // 물려받을 것이 없으므로 세지 않는다.
+  const pendingInherit = units.filter(
+    (u) => u.linkedToCatalog && u.keywordIds.length === 0
+  ).length;
 
   function commit(next: TemplateUnit[]) {
     setUnits(next);
@@ -227,6 +232,23 @@ function TemplateEditor({
     commit(units.map((u) => (u.id === unitId ? { ...u, keywordIds: result.keywordIds } : u)));
   }
 
+  async function handleInheritAll() {
+    const result = await inheritTemplateDefaults(subject.templateId!);
+    if (!result.ok) {
+      setError(result.error);
+      return;
+    }
+    setError(null);
+    setNotice(
+      result.keywordsAdded === 0
+        ? "기준본에서 더 가져올 것이 없습니다."
+        : `${result.keywordsAdded}개 키워드를 기준본에서 가져왔습니다.`
+    );
+    commit(
+      units.map((u) => ({ ...u, keywordIds: result.keywordIdsByUnit[u.id] ?? u.keywordIds }))
+    );
+  }
+
   async function handleMove(index: number, direction: -1 | 1) {
     const target = index + direction;
     if (target < 0 || target >= units.length) return;
@@ -257,6 +279,23 @@ function TemplateEditor({
         회차에 붙인 키워드에 따라 기본 교재가 자동으로 구성됩니다. 여기서 정한 구성은
         앞으로 새로 배정받는 학생에게 내려갑니다.
       </p>
+
+      {/* 마이그레이션 이전에 만들어진 템플릿은 연결만 복원되고 키워드는 비어 있다.
+          회차마다 하나씩 누르게 하지 않는다 — 여기서 한 번에 가져온다. */}
+      {pendingInherit > 0 && (
+        <div className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3 mb-3 flex items-center justify-between gap-3">
+          <p className="text-[12.5px] text-grey-500">
+            키워드가 비어 있는 회차가 {pendingInherit}개 있습니다. 관리자 기준본에서 한 번에
+            가져올 수 있습니다.
+          </p>
+          <button
+            onClick={handleInheritAll}
+            className="text-[12px] font-bold px-3.5 py-2 rounded-lg bg-ink text-white shrink-0"
+          >
+            전체 가져오기
+          </button>
+        </div>
+      )}
 
       {error && (
         <div className="text-[12.5px] text-red bg-red/5 border-[1.5px] border-red/20 rounded-lg px-4 py-2.5 mb-3">

@@ -187,6 +187,60 @@ export async function inheritUnitDefaults(
   };
 }
 
+/**
+ * 템플릿의 모든 회차를 한 번에 보정한다.
+ *
+ * 마이그레이션 이전에 만들어진 템플릿은 연결만 복원되고 키워드는 비어 있다
+ * (초기 상속 트리거는 회차 생성 시에만 돈다). 회차마다 하나씩 누르게 하면
+ * "선생님이 같은 키워드를 다시 지정하는 흐름"과 사실상 같아진다.
+ *
+ * 여전히 수동이다 — 선생님이 누를 때만 움직이고, 없는 것만 넣으며 아무것도
+ * 지우지 않는다.
+ */
+export async function inheritTemplateDefaults(
+  templateId: string
+): Promise<
+  | { ok: true; keywordsAdded: number; keywordIdsByUnit: Record<string, string[]> }
+  | { ok: false; error: string }
+> {
+  const { supabase } = await requireUser();
+  const { data, error } = await supabase.rpc("inherit_teacher_template_defaults", {
+    p_template_id: templateId,
+  });
+  if (error) {
+    console.error(
+      JSON.stringify({ event: "teacher_template_inherit_failed", message: error.message })
+    );
+    return { ok: false, error: "기준본에서 가져오지 못했습니다." };
+  }
+
+  const rows = (data ?? []) as { unit_id: string; keywords_added: number }[];
+  const keywordsAdded = rows.reduce((sum, r) => sum + (r.keywords_added ?? 0), 0);
+
+  // 화면은 실제로 남은 상태를 그린다 — 어떤 회차에 무엇이 들어갔는지 클라이언트가
+  // 계산하면 선생님이 빼 둔 것을 되살린 것처럼 보일 수 있다.
+  const { data: unitRows } = await supabase
+    .from("teacher_curriculum_template_units")
+    .select("id")
+    .eq("template_id", templateId);
+  const unitIds = (unitRows ?? []).map((u) => u.id as string);
+
+  const { data: keywordRows } = unitIds.length
+    ? await supabase
+        .from("teacher_curriculum_template_unit_keywords")
+        .select("unit_id, keyword_id")
+        .in("unit_id", unitIds)
+    : { data: [] as { unit_id: string; keyword_id: string }[] };
+
+  const keywordIdsByUnit: Record<string, string[]> = {};
+  for (const id of unitIds) keywordIdsByUnit[id] = [];
+  for (const row of keywordRows ?? []) {
+    (keywordIdsByUnit[row.unit_id] ??= []).push(row.keyword_id);
+  }
+
+  return { ok: true, keywordsAdded, keywordIdsByUnit };
+}
+
 export async function updateTemplateUnit(
   unitId: string,
   fields: { unitTitle?: string; note?: string; teacherComment?: string }

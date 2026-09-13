@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/admin-auth";
+import { adminGateDenied } from "@/lib/admin-route-gate";
 import { getAccessToken, isDocusignRealCallsAllowed } from "@/lib/docusign";
 
 // 계약 발송이 막히는 지점을 단계로 가른다. **아무것도 발송하지 않는다** —
@@ -24,8 +25,10 @@ function short(e: unknown): string {
 export async function GET() {
   try {
     await requireAdmin();
-  } catch {
-    return NextResponse.json({ error: "관리자만 확인할 수 있습니다." }, { status: 403 });
+  } catch (e) {
+    // 미로그인(401)과 로그인한 비관리자(403)를 구분한다 — 둘이 같은 응답이면
+    // "비관리자도 막힌다"를 확인할 방법이 없다.
+    return adminGateDenied(e);
   }
 
   const baseUri = process.env.DOCUSIGN_BASE_URI ?? "";

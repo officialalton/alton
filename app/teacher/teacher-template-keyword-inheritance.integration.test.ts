@@ -274,3 +274,68 @@ describe("학생 운영본은 선생님 기본 구성을 거쳐 내려받는다"
     expect(overlayKeywordIds(overlayUnitId).sort()).toEqual([kwA, kwB].sort());
   });
 });
+
+// 마이그레이션 이전에 만들어진 템플릿은 연결만 복원되고 키워드는 비어 있다.
+// 회차마다 하나씩 누르게 하면 "다시 지정하는 흐름"과 같아지므로 한 번에 부른다.
+describe("템플릿 전체 보정", () => {
+  /** 연결은 있지만 키워드가 비어 있는 회차 — 마이그레이션 이전 템플릿의 모습. */
+  function makeLinkedButEmptyUnit(templateId: string, sourceUnitId: string, position: number) {
+    const id = makeTeacherUnit(templateId, null, position);
+    psql(
+      `update teacher_curriculum_template_units set source_unit_id = '${sourceUnitId}' where id = '${id}';`
+    );
+    return id;
+  }
+
+  it("기준본과 이어진 회차를 한 번에 채운다", () => {
+    const kwA = makeKeyword();
+    const kwB = makeKeyword();
+    const first = makeAdminUnit([kwA]);
+    const second = makeAdminUnit([kwB]);
+
+    const templateId = makeTeacherTemplate();
+    const u1 = makeLinkedButEmptyUnit(templateId, first.unitId, 971);
+    const u2 = makeLinkedButEmptyUnit(templateId, second.unitId, 972);
+    expect(teacherKeywordIds(u1)).toEqual([]);
+    expect(teacherKeywordIds(u2)).toEqual([]);
+
+    psql(`select inherit_teacher_template_defaults('${templateId}');`);
+
+    expect(teacherKeywordIds(u1)).toEqual([kwA]);
+    expect(teacherKeywordIds(u2)).toEqual([kwB]);
+  });
+
+  it("기준본과 이어지지 않은 보충 회차는 건너뛴다", () => {
+    const kwA = makeKeyword();
+    const admin = makeAdminUnit([kwA]);
+
+    const templateId = makeTeacherTemplate();
+    const linked = makeLinkedButEmptyUnit(templateId, admin.unitId, 973);
+    const supplement = makeTeacherUnit(templateId, null, 974);
+
+    psql(`select inherit_teacher_template_defaults('${templateId}');`);
+
+    expect(teacherKeywordIds(linked)).toEqual([kwA]);
+    expect(teacherKeywordIds(supplement)).toEqual([]);
+  });
+
+  it("두 번 불러도 중복되지 않고 아무것도 지우지 않는다", () => {
+    const kwA = makeKeyword();
+    const kwExtra = makeKeyword();
+    const admin = makeAdminUnit([kwA]);
+
+    const templateId = makeTeacherTemplate();
+    const unitId = makeLinkedButEmptyUnit(templateId, admin.unitId, 975);
+    // 선생님이 기준본에 없는 키워드를 직접 붙여 뒀다.
+    psql(
+      `insert into teacher_curriculum_template_unit_keywords (unit_id, keyword_id)
+       values ('${unitId}', '${kwExtra}');`
+    );
+
+    psql(`select inherit_teacher_template_defaults('${templateId}');`);
+    psql(`select inherit_teacher_template_defaults('${templateId}');`);
+
+    // 기준본 키워드가 들어오되, 선생님이 직접 붙인 것은 그대로 남는다.
+    expect(teacherKeywordIds(unitId).sort()).toEqual([kwA, kwExtra].sort());
+  });
+});

@@ -13,6 +13,7 @@ vi.mock("./mysubjects-actions", () => ({
   addTemplateUnitKeyword: vi.fn(),
   removeTemplateUnitKeyword: vi.fn(),
   inheritUnitDefaults: vi.fn(),
+  inheritTemplateDefaults: vi.fn(),
 }));
 
 const withTemplate: MySubject = {
@@ -228,5 +229,72 @@ describe("회차 키워드", () => {
       expect(screen.getByText("기준본에서 키워드 1개를 가져왔습니다.")).toBeInTheDocument()
     );
     expect(screen.getByRole("button", { name: "함수" })).toHaveAttribute("aria-pressed", "true");
+  });
+});
+
+// 마이그레이션 이전 템플릿은 연결만 있고 키워드가 비어 있다. 회차마다 하나씩
+// 누르게 하면 "선생님이 같은 키워드를 다시 지정하는 흐름"과 같아진다.
+describe("템플릿 전체 보정", () => {
+  const emptyTemplate: MySubject = {
+    subjectId: "sub4",
+    subjectName: "SAT Reading",
+    templateId: "tpl4",
+    archived: false,
+    keywords: [
+      { id: "k1", label: "Speaking" },
+      { id: "k2", label: "Voca" },
+    ],
+    units: [
+      { id: "u1", position: 1, unitTitle: "1회차", note: null, teacherComment: null, keywordIds: [], linkedToCatalog: true },
+      { id: "u2", position: 2, unitTitle: "2회차", note: null, teacherComment: null, keywordIds: [], linkedToCatalog: true },
+    ],
+  };
+
+  it("비어 있는 회차 수를 알려주고 한 번에 가져오게 한다", () => {
+    render(<MySubjectsTab initialSubjects={[emptyTemplate]} />);
+    fireEvent.click(screen.getByText("편집"));
+    expect(
+      screen.getByText(/키워드가 비어 있는 회차가 2개 있습니다/)
+    ).toBeInTheDocument();
+    expect(screen.getByText("전체 가져오기")).toBeInTheDocument();
+  });
+
+  it("전체 가져오기는 서버가 돌려준 회차별 상태를 그대로 그린다", async () => {
+    vi.mocked(actions.inheritTemplateDefaults).mockResolvedValue({
+      ok: true,
+      keywordsAdded: 2,
+      keywordIdsByUnit: { u1: ["k1"], u2: ["k2"] },
+    });
+    render(<MySubjectsTab initialSubjects={[emptyTemplate]} />);
+    fireEvent.click(screen.getByText("편집"));
+    fireEvent.click(screen.getByText("전체 가져오기"));
+
+    await waitFor(() =>
+      expect(screen.getByText("2개 키워드를 기준본에서 가져왔습니다.")).toBeInTheDocument()
+    );
+    // 두 회차가 서로 다른 키워드를 받는다 — 한 덩어리로 뭉뚱그리지 않는다.
+    const speaking = screen.getAllByRole("button", { name: "Speaking" });
+    const voca = screen.getAllByRole("button", { name: "Voca" });
+    expect(speaking[0]).toHaveAttribute("aria-pressed", "true");
+    expect(voca[0]).toHaveAttribute("aria-pressed", "false");
+    expect(speaking[1]).toHaveAttribute("aria-pressed", "false");
+    expect(voca[1]).toHaveAttribute("aria-pressed", "true");
+    // 다 채워졌으므로 안내는 사라진다.
+    expect(screen.queryByText(/키워드가 비어 있는 회차가/)).not.toBeInTheDocument();
+  });
+
+  it("채울 것이 없으면 안내가 보이지 않는다", () => {
+    render(
+      <MySubjectsTab
+        initialSubjects={[
+          {
+            ...emptyTemplate,
+            units: [{ ...emptyTemplate.units[0], keywordIds: ["k1"] }],
+          },
+        ]}
+      />
+    );
+    fireEvent.click(screen.getByText("편집"));
+    expect(screen.queryByText(/키워드가 비어 있는 회차가/)).not.toBeInTheDocument();
   });
 });

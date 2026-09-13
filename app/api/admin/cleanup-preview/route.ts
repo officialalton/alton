@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/admin-auth";
+import { adminGateDenied } from "@/lib/admin-route-gate";
 import { createAdminClient } from "@/lib/supabase-admin";
 
 // 공유 비프로덕션 테스트 데이터 정리 — **실행 전 집계 전용**.
@@ -35,39 +36,52 @@ async function countOf(
 export async function GET() {
   try {
     await requireAdmin();
-  } catch {
-    return NextResponse.json({ error: "관리자만 확인할 수 있습니다." }, { status: 403 });
+  } catch (e) {
+    // 미로그인(401)과 로그인한 비관리자(403)를 구분한다 — 둘이 같은 응답이면
+    // "비관리자도 막힌다"를 확인할 방법이 없다.
+    return adminGateDenied(e);
   }
 
   const admin = createAdminClient();
 
   // 보존 계정 — 실제 사용자 id를 확인해 두어야 정리 대상에서 확실히 뺄 수 있다.
   //
-  // 한 번만 읽으면 페이지 밖의 계정을 "없다"고 단정하게 된다. 끝까지 넘긴다.
-  const allUsers: { id: string; email: string | null }[] = [];
-  for (let page = 1; page <= 20; page += 1) {
-    const { data: userPage, error } = await admin.auth.admin.listUsers({ page, perPage: 200 });
-    if (error) break;
-    const batch = userPage?.users ?? [];
-    for (const u of batch) allUsers.push({ id: u.id, email: u.email ?? null });
-    if (batch.length < 200) break;
+  // 2026-09-13 정정: 이전에는 auth.admin.listUsers()로 전체 목록을 훑었는데,
+  // Preview에서 그 호출이 **한 명도 돌려주지 않으면서 오류는 삼켜졌다**
+  // (authUsersScanned: 0). 그 결과가 "found:false"로 보고돼, 계정이 없는 것처럼
+  // 보였다. 조회 실패와 계정 없음은 전혀 다른 이야기이고, 후자로 오해하면
+  // 보존해야 할 계정을 정리 대상에 넣게 된다.
+  //
+  // 그래서 이메일 조회를 DB 함수로 바꾼다(20261318000000). Admin REST API의
+  // 동작에 기대지 않고 auth.users에서 직접 찾는다. listUsers는 진단용으로만
+  // 남기고, 실패하면 그 사유를 응답에 드러낸다.
+  const { data: preservedLookup, error: preservedLookupError } = await admin.rpc(
+    "lookup_auth_user_ids_by_email",
+    { p_emails: PRESERVED_EMAILS }
+  );
+  const foundByEmail = new Map<string, string>();
+  for (const row of (preservedLookup ?? []) as { user_id: string; email: string }[]) {
+    foundByEmail.set(row.email.trim().toLowerCase(), row.user_id);
   }
-
-  const norm = (v: string | null) => (v ?? "").trim().toLowerCase();
 
   const preserved: Array<{ email: string; found: boolean; userId?: string; role?: string }> = [];
   for (const email of PRESERVED_EMAILS) {
-    const user = allUsers.find((u) => norm(u.email) === norm(email));
-    if (!user) {
+    const userId = foundByEmail.get(email.trim().toLowerCase());
+    if (!userId) {
       preserved.push({ email, found: false });
       continue;
     }
     const { data: profile } = await admin
       .from("profiles")
       .select("role")
-      .eq("id", user.id)
+      .eq("id", userId)
       .maybeSingle();
-    preserved.push({ email, found: true, userId: user.id, role: (profile?.role as string) ?? "(프로필 없음)" });
+    preserved.push({
+      email,
+      found: true,
+      userId,
+      role: (profile?.role as string) ?? "(프로필 없음)",
+    });
   }
 
   const preservedIds = preserved.filter((p) => p.userId).map((p) => p.userId as string);
@@ -79,12 +93,26 @@ export async function GET() {
     .from("profiles")
     .select("id, role, name")
     .in("role", ["admin", "teacher"]);
+  const staffIds = (staffRows ?? []).map((r) => r.id as string);
+  const { data: staffEmailRows, error: staffEmailError } = staffIds.length
+    ? await admin.rpc("lookup_auth_emails_for_users", { p_user_ids: staffIds })
+    : { data: [], error: null };
+  const emailByUserId = new Map<string, string>();
+  for (const row of (staffEmailRows ?? []) as { user_id: string; email: string }[]) {
+    emailByUserId.set(row.user_id, row.email);
+  }
   const staffAccounts = (staffRows ?? []).map((r) => ({
     userId: r.id as string,
     role: r.role as string,
     name: r.name as string,
-    email: allUsers.find((u) => u.id === r.id)?.email ?? null,
+    email: emailByUserId.get(r.id as string) ?? null,
   }));
+
+  // 진단용 — 이 경로가 왜 계정을 못 찾는지 다음 사람이 추측하지 않도록 남긴다.
+  const lookupDiagnostics = {
+    emailLookupFailed: preservedLookupError?.message ?? null,
+    staffEmailLookupFailed: (staffEmailError as { message?: string } | null)?.message ?? null,
+  };
   const nowIso = new Date().toISOString();
 
   const [
@@ -165,7 +193,7 @@ export async function GET() {
     preserved,
     // 보존 계정을 식별하지 못하면 정리를 시작하면 안 된다 — 이 줄이 그 판단의 근거다.
     preservedAllFound: preserved.every((p) => p.found),
-    authUsersScanned: allUsers.length,
+    lookupDiagnostics,
     staffAccounts,
     users: { total: profilesTotal, byRole },
     households: { total: households, alreadyArchived: householdsArchived },
