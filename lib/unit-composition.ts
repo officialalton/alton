@@ -291,3 +291,55 @@ export async function loadPickableMaterials(
     picked: picked.has(d.id as string),
   }));
 }
+
+export type KeywordProblem = {
+  problemId: string;
+  /** 목록에서 알아볼 수 있을 만큼의 짧은 설명. 문제 전문을 늘어놓지 않는다. */
+  label: string;
+  difficulty: string | null;
+  format: string;
+};
+
+/**
+ * 이 회차의 키워드로 들어올 문제 미리보기.
+ *
+ * 2026-09-13 지시 4절: "관리자·선생님 기본 화면은 교재·문제를 미리보고 기본 구성을
+ * 편집한다." 문제 선택은 학생별 운영본(curriculum_unit_prep_items)에만 있으므로,
+ * 위 두 계층에서는 **무엇이 들어올지**만 보여준다. 여기서 고르게 하면 학생 문맥
+ * 없이 문제를 확정하는 셈이 되고, 그건 이 화면이 할 일이 아니다.
+ *
+ * problem_keywords_selectable 을 쓴다 — 확정됐고 보관되지 않은 문제만 후보다.
+ * 관계가 있다는 것만으로 선택 가능으로 보지 않는다(R9 corrective 2).
+ */
+export async function loadKeywordProblems(
+  supabase: SupabaseClient,
+  keywordIds: string[]
+): Promise<KeywordProblem[]> {
+  if (keywordIds.length === 0) return [];
+
+  const { data: links } = await supabase
+    .from("problem_keywords_selectable")
+    .select("problem_id")
+    .in("keyword_id", keywordIds);
+
+  const problemIds = Array.from(new Set((links ?? []).map((l) => l.problem_id as string)));
+  if (problemIds.length === 0) return [];
+
+  const { data: problems } = await supabase
+    .from("problems")
+    .select("id, format, passage, skill_type, difficulty")
+    .in("id", problemIds)
+    .order("created_at", { ascending: true });
+
+  return (problems ?? []).map((p) => {
+    const passage = ((p.passage as string | null) ?? "").trim();
+    const skill = ((p.skill_type as string | null) ?? "").trim();
+    const snippet = passage.length > 60 ? `${passage.slice(0, 60)}…` : passage;
+    return {
+      problemId: p.id as string,
+      label: snippet || skill || "(본문 없음)",
+      difficulty: (p.difficulty as string | null) ?? null,
+      format: p.format as string,
+    };
+  });
+}

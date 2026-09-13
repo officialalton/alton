@@ -2,7 +2,12 @@
 
 import { useState } from "react";
 import { addKeyword, removeKeyword, addMaterial, removeMaterial, swapMaterialOrder } from "./actions";
-import type { PickableMaterial, UnitComposition, UnitMaterial } from "@/lib/unit-composition";
+import type {
+  KeywordProblem,
+  PickableMaterial,
+  UnitComposition,
+  UnitMaterial,
+} from "@/lib/unit-composition";
 
 // 세 계층이 같이 쓰는 수업 준비 구성 패널.
 //
@@ -15,9 +20,12 @@ import type { PickableMaterial, UnitComposition, UnitMaterial } from "@/lib/unit
 export default function CompositionPanel({
   composition,
   pickable,
+  problems,
 }: {
   composition: UnitComposition;
   pickable: PickableMaterial[];
+  /** 이 회차 키워드로 들어올 문제. 학생 층이 아니면 미리보기 전용이다. */
+  problems: KeywordProblem[];
 }) {
   const [keywordIds, setKeywordIds] = useState(composition.keywords.map((k) => k.id));
   const [materials, setMaterials] = useState<UnitMaterial[]>(composition.materials);
@@ -237,6 +245,41 @@ export default function CompositionPanel({
               ))
             )}
           </div>
+        )}
+      </section>
+
+      {/* 4절 — 관리자·선생님 기본 화면은 문제를 **미리보기만** 한다. 실제 문제
+          선택은 학생별 문맥에서 한다(curriculum_unit_prep_items). 여기서 고르게
+          하면 학생 없이 문제를 확정하는 셈이 된다. */}
+      <section className="mt-7">
+        <h2 className="text-[13px] font-bold text-ink mb-1">
+          이 회차에 들어올 문제
+          <span className="text-grey-300 font-semibold ml-1.5">{problems.length}</span>
+        </h2>
+        <p className="text-[12px] text-grey-500 mb-2.5">
+          {layer === "student"
+            ? "키워드에 맞는 확정된 문제입니다. 실제 출제는 수업 준비에서 고릅니다."
+            : "키워드에 맞는 확정된 문제를 미리 봅니다. 실제 출제는 학생별 화면에서 고릅니다."}
+        </p>
+        {problems.length === 0 ? (
+          <p className="text-[12.5px] text-grey-500 bg-grey-100 rounded-lg px-4 py-4">
+            {keywordIds.length === 0
+              ? "키워드를 붙이면 해당하는 문제가 여기에 모입니다."
+              : "이 키워드에 해당하는 확정된 문제가 아직 없습니다."}
+          </p>
+        ) : (
+          <ul className="border-[1.5px] border-grey-200 rounded-xl divide-y divide-grey-100">
+            {problems.map((p) => (
+              <li key={p.problemId} className="px-4 py-2.5 flex items-center gap-3">
+                <span className="text-[12.5px] text-ink flex-1 min-w-0 truncate">{p.label}</span>
+                {p.difficulty && (
+                  <span className="text-[10.5px] font-bold px-1.5 py-0.5 rounded bg-grey-100 text-grey-500 shrink-0">
+                    {p.difficulty}
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
         )}
       </section>
     </div>

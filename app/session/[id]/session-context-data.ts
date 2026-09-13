@@ -10,6 +10,8 @@ export type SessionLessonContext = {
   goal: string | null;
   /** 보강으로 함께 다루는 회차 이름들. */
   supplementTitles: string[];
+  /** 이 수업이 다루는 기본 회차의 id — 수업 준비 화면으로 가는 길. */
+  primaryUnitId: string | null;
 };
 
 export async function loadSessionLessonContext(
@@ -20,7 +22,8 @@ export async function loadSessionLessonContext(
     .from("session_curriculum_units")
     .select("overlay_unit_id, role")
     .eq("session_id", sessionId);
-  if (!links?.length) return { unitTitle: null, goal: null, supplementTitles: [] };
+  if (!links?.length)
+    return { unitTitle: null, goal: null, supplementTitles: [], primaryUnitId: null };
 
   const unitIds = links.map((l) => l.overlay_unit_id as string);
   const { data: units } = await supabase
@@ -48,5 +51,6 @@ export async function loadSessionLessonContext(
       .filter((l) => l.role !== "primary")
       .map((l) => titleById.get(l.overlay_unit_id as string))
       .filter((t): t is string => Boolean(t)),
+    primaryUnitId: primaryId ?? null,
   };
 }

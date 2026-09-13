@@ -88,7 +88,7 @@ export default async function SessionPage({
   const lessonContext =
     session.source === "v3"
       ? await loadSessionLessonContext(supabase, session.id)
-      : { unitTitle: null, goal: null, supplementTitles: [] };
+      : { unitTitle: null, goal: null, supplementTitles: [], primaryUnitId: null };
 
   // P3 4단계 — 수업 시작 시 고정된 문제들. 정답·해설은 볼 자격이 있을 때만
   // 채워진다(학생은 자기 풀이 제출 뒤, 보호자는 자녀에게 열리는 시점과 동일).

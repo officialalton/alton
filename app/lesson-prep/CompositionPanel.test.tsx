@@ -38,7 +38,7 @@ beforeEach(() => vi.clearAllMocks());
 
 describe("수업 준비 구성 패널", () => {
   it("무엇을 고치는 중인지 머리말로 밝힌다", () => {
-    render(<CompositionPanel composition={makeComposition()} pickable={[]} />);
+    render(<CompositionPanel composition={makeComposition()} pickable={[]} problems={[]} />);
     expect(screen.getByText("내 기본 구성")).toBeInTheDocument();
     expect(screen.getByText("1회차 Speaking")).toBeInTheDocument();
     expect(screen.getByText(/SAT Reading/)).toBeInTheDocument();
@@ -50,6 +50,7 @@ describe("수업 준비 구성 패널", () => {
       <CompositionPanel
         composition={makeComposition({ layer: "student", scopeLabel: "테스트 자녀 10-1 학생" })}
         pickable={[]}
+        problems={[]}
       />
     );
     expect(screen.getByText("테스트 자녀 10-1 학생")).toBeInTheDocument();
@@ -57,13 +58,13 @@ describe("수업 준비 구성 패널", () => {
   });
 
   it("자동으로 들어온 교재와 직접 담은 교재를 구분해 보여준다", () => {
-    render(<CompositionPanel composition={makeComposition()} pickable={[]} />);
+    render(<CompositionPanel composition={makeComposition()} pickable={[]} problems={[]} />);
     expect(screen.getByText("키워드에서 자동")).toBeInTheDocument();
     expect(screen.getByText("직접 담음")).toBeInTheDocument();
   });
 
   it("붙은 키워드와 붙지 않은 키워드를 구분한다", () => {
-    render(<CompositionPanel composition={makeComposition()} pickable={[]} />);
+    render(<CompositionPanel composition={makeComposition()} pickable={[]} problems={[]} />);
     expect(screen.getByRole("button", { name: "Speaking" })).toHaveAttribute(
       "aria-pressed",
       "true"
@@ -73,7 +74,7 @@ describe("수업 준비 구성 패널", () => {
 
   it("교재를 빼면 층을 함께 넘긴다", async () => {
     vi.mocked(actions.removeMaterial).mockResolvedValue({ ok: true });
-    render(<CompositionPanel composition={makeComposition()} pickable={[]} />);
+    render(<CompositionPanel composition={makeComposition()} pickable={[]} problems={[]} />);
 
     fireEvent.click(screen.getAllByText("빼기")[0]);
     await waitFor(() =>
@@ -87,7 +88,7 @@ describe("수업 준비 구성 패널", () => {
       ok: false,
       error: "교재를 빼지 못했습니다.",
     });
-    render(<CompositionPanel composition={makeComposition()} pickable={[]} />);
+    render(<CompositionPanel composition={makeComposition()} pickable={[]} problems={[]} />);
 
     fireEvent.click(screen.getAllByText("빼기")[0]);
     await waitFor(() => expect(screen.getByText("교재를 빼지 못했습니다.")).toBeInTheDocument());
@@ -102,6 +103,7 @@ describe("수업 준비 구성 패널", () => {
           { curriculumDocId: "d1", title: "자동 교재", primaryKeywordLabel: "Speaking", picked: true },
           { curriculumDocId: "d9", title: "새 교재", primaryKeywordLabel: null, picked: false },
         ]}
+        problems={[]}
       />
     );
     fireEvent.click(screen.getByText("교재 담기"));
@@ -111,10 +113,48 @@ describe("수업 준비 구성 패널", () => {
 
   it("담긴 교재가 없으면 빈 상태를 말해준다", () => {
     render(
-      <CompositionPanel composition={makeComposition({ materials: [] })} pickable={[]} />
+      <CompositionPanel composition={makeComposition({ materials: [] })} pickable={[]} problems={[]} />
     );
     expect(
       screen.getByText("아직 담긴 교재가 없습니다. 키워드를 붙이거나 직접 담아 주세요.")
+    ).toBeInTheDocument();
+  });
+
+  // 4절 — 관리자·선생님 기본 화면은 문제를 "미리보고", 실제 출제는 학생별 문맥에서
+  // 한다. 여기서 고를 수 있게 하면 학생 없이 문제를 확정하는 셈이 된다.
+  it("키워드로 들어올 문제를 미리 보여준다", () => {
+    render(
+      <CompositionPanel
+        composition={makeComposition()}
+        pickable={[]}
+        problems={[
+          { problemId: "p1", label: "지문 첫 줄…", difficulty: "medium", format: "mcq" },
+          { problemId: "p2", label: "두 번째 문제", difficulty: null, format: "mcq" },
+        ]}
+      />
+    );
+    expect(screen.getByText("지문 첫 줄…")).toBeInTheDocument();
+    expect(screen.getByText("medium")).toBeInTheDocument();
+    expect(screen.getByText(/실제 출제는 학생별 화면에서 고릅니다/)).toBeInTheDocument();
+  });
+
+  it("키워드가 없으면 왜 문제가 비었는지 말해준다", () => {
+    render(
+      <CompositionPanel
+        composition={makeComposition({ keywords: [] })}
+        pickable={[]}
+        problems={[]}
+      />
+    );
+    expect(
+      screen.getByText("키워드를 붙이면 해당하는 문제가 여기에 모입니다.")
+    ).toBeInTheDocument();
+  });
+
+  it("키워드는 있는데 문제가 없으면 다르게 말한다", () => {
+    render(<CompositionPanel composition={makeComposition()} pickable={[]} problems={[]} />);
+    expect(
+      screen.getByText("이 키워드에 해당하는 확정된 문제가 아직 없습니다.")
     ).toBeInTheDocument();
   });
 });

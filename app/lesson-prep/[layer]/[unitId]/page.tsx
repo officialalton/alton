@@ -2,6 +2,7 @@ import { notFound, redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import {
   loadComposition,
+  loadKeywordProblems,
   loadPickableMaterials,
   type PrepLayer,
 } from "@/lib/unit-composition";
@@ -61,11 +62,19 @@ export default async function LessonPrepPage({
   // 남의 회차가 존재한다는 사실이 새어 나간다.
   if (!composition) notFound();
 
-  const pickable = await loadPickableMaterials(
-    supabase,
-    composition.subjectId,
-    composition.materials.map((m) => m.curriculumDocId)
-  );
+  const [pickable, problems] = await Promise.all([
+    loadPickableMaterials(
+      supabase,
+      composition.subjectId,
+      composition.materials.map((m) => m.curriculumDocId)
+    ),
+    loadKeywordProblems(
+      supabase,
+      composition.keywords.map((k) => k.id)
+    ),
+  ]);
 
-  return <CompositionPanel composition={composition} pickable={pickable} />;
+  return (
+    <CompositionPanel composition={composition} pickable={pickable} problems={problems} />
+  );
 }

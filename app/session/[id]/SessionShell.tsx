@@ -86,7 +86,7 @@ export default function SessionShell({
   teacherMaterialStrokes = [],
   studentMaterialStrokes = [],
   sessionProblems = [],
-  lessonContext = { unitTitle: null, goal: null, supplementTitles: [] },
+  lessonContext = { unitTitle: null, goal: null, supplementTitles: [], primaryUnitId: null },
   currentUserId,
   homeworkKeywordOptions = [],
   homeworkStatusItems = [],
@@ -454,6 +454,9 @@ export default function SessionShell({
         subjectName={subjectName}
         context={lessonContext}
         stateLabel={state === "live" ? "수업 중" : state === "completed" ? "지난 수업" : "수업 전"}
+        // 선생님·관리자만 구성을 고칠 수 있다. 학생·학부모에게는 준비 화면으로 가는
+        // 길 자체를 보여주지 않는다(7절).
+        canPrepare={viewerRole === "teacher" || viewerRole === "admin"}
       />
 
       {!writesEnabled && (
