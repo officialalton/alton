@@ -339,3 +339,93 @@ describe("템플릿 전체 보정", () => {
     expect(teacherKeywordIds(unitId).sort()).toEqual([kwA, kwExtra].sort());
   });
 });
+
+// 4절 "세 계층은 같은 UI를 재사용한다"의 전제 — 세 층이 같은 규칙으로 움직여야
+// 한 화면으로 다룰 수 있다. 관리자 기준본만 자동 구성이 없으면 같은 화면이
+// "자동으로 들어온 것"과 "직접 담은 것"을 구분해 보여줄 수 없다.
+describe("키워드 → 기본 교재 자동 구성은 세 계층에서 같게 동작한다", () => {
+  const cleanupDocIds: string[] = [];
+
+  afterEach(() => {
+    for (const id of cleanupDocIds.splice(0)) {
+      psql(`delete from curriculum_docs where id = '${id}';`);
+    }
+  });
+
+  /** 이 키워드를 대표 키워드로 가진 공개 교재 하나. */
+  function makeDefaultMaterial(keywordId: string): string {
+    const id = psql(
+      `insert into curriculum_docs (title, subject_id, owner_type, status, primary_keyword_id)
+       values ('기본 교재 ${uniq()}', '${SUBJECT_ID}', 'admin', 'published', '${keywordId}')
+       returning id;`
+    );
+    cleanupDocIds.push(id);
+    return id;
+  }
+
+  it("관리자 기준본: 키워드를 붙이면 기본 교재가 auto로 들어오고, 떼면 빠진다", () => {
+    const kw = makeKeyword();
+    const docId = makeDefaultMaterial(kw);
+    const admin = makeAdminUnit([]);
+
+    psql(
+      `insert into subject_template_unit_keywords (unit_id, keyword_id) values ('${admin.unitId}', '${kw}');`
+    );
+    expect(
+      psql(
+        `select source from subject_template_unit_materials
+         where unit_id = '${admin.unitId}' and curriculum_doc_id = '${docId}';`
+      )
+    ).toBe("auto");
+
+    psql(
+      `delete from subject_template_unit_keywords where unit_id = '${admin.unitId}' and keyword_id = '${kw}';`
+    );
+    expect(
+      psql(`select count(*) from subject_template_unit_materials where unit_id = '${admin.unitId}';`)
+    ).toBe("0");
+  });
+
+  it("관리자가 직접 담은 교재는 키워드를 떼도 남는다", () => {
+    const kw = makeKeyword();
+    const docId = makeDefaultMaterial(kw);
+    const admin = makeAdminUnit([]);
+
+    // 관리자가 손으로 담았다 — source 기본값은 manual 이다.
+    psql(
+      `insert into subject_template_unit_materials (unit_id, curriculum_doc_id, position)
+       values ('${admin.unitId}', '${docId}', 1);`
+    );
+    psql(
+      `insert into subject_template_unit_keywords (unit_id, keyword_id) values ('${admin.unitId}', '${kw}');`
+    );
+    psql(
+      `delete from subject_template_unit_keywords where unit_id = '${admin.unitId}' and keyword_id = '${kw}';`
+    );
+
+    expect(
+      psql(
+        `select source from subject_template_unit_materials
+         where unit_id = '${admin.unitId}' and curriculum_doc_id = '${docId}';`
+      )
+    ).toBe("manual");
+  });
+
+  it("선생님 기본 템플릿에서도 같게 동작한다", () => {
+    const kw = makeKeyword();
+    const docId = makeDefaultMaterial(kw);
+    const admin = makeAdminUnit([]);
+    const templateId = makeTeacherTemplate();
+    const unitId = makeTeacherUnit(templateId, admin.unitId, 981);
+
+    psql(
+      `insert into teacher_curriculum_template_unit_keywords (unit_id, keyword_id) values ('${unitId}', '${kw}');`
+    );
+    expect(
+      psql(
+        `select source from teacher_curriculum_template_unit_materials
+         where unit_id = '${unitId}' and curriculum_doc_id = '${docId}';`
+      )
+    ).toBe("auto");
+  });
+});
