@@ -85,6 +85,62 @@ export async function GET() {
       Object.values(g.byState).reduce((a, b) => a + b, 0) === g.total,
   }));
 
+  // 집계가 대상을 빠뜨리거나 겹쳐 세지 않았는지 원본 행 수와 대조한다.
+  // stateSumMatchesTotal 은 "조회된 대상 안에서" 합이 맞는다는 뜻일 뿐이다 —
+  // 대상 자체가 누락됐는지는 이 대조로만 알 수 있다(2026-09-13 지시 2번).
+  const rawCount = async (table: string, apply?: (q: never) => never) => {
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    let q: any = admin.from(table).select("*", { count: "exact", head: true });
+    if (apply) q = (apply as any)(q);
+    const { count, error: countError } = await q;
+    return countError ? null : (count ?? 0);
+  };
+
+  const rawTotals = {
+    catalogMaterials: await rawCount("subject_template_unit_materials"),
+    teacherMaterials: await rawCount("teacher_curriculum_template_unit_materials"),
+    studentMaterials: await rawCount("curriculum_overlay_unit_materials"),
+    sessionMaterials: await rawCount("session_content_manifest", ((q: any) =>
+      q.in("content_type", ["material_doc", "material_section"])) as never),
+    catalogProblems: await rawCount("subject_template_unit_problems"),
+    teacherProblems: await rawCount("teacher_curriculum_template_unit_problems"),
+    studentProblems: await rawCount("curriculum_unit_prep_items", ((q: any) =>
+      q.eq("content_type", "problem")) as never),
+    sessionProblems: await rawCount("session_content_manifest", ((q: any) =>
+      q.eq("content_type", "problem")) as never),
+  };
+
+  const coveredTotal = groups.reduce((sum, g) => sum + g.total, 0);
+  const rawTotal = Object.values(rawTotals).reduce<number>(
+    (sum, v) => sum + (v ?? 0),
+    0
+  );
+
+  // 본문이 실제로 무엇을 참조하는지. "업로드 경로가 없으니 전부 외부 참조"라고
+  // 단정하지 않고 세어 본다(2026-09-13 지시 3번).
+  const { data: sectionRows } = await admin
+    .from("curriculum_doc_sections")
+    .select("id, body");
+
+  const refs = { images: 0, pdfLinks: 0, otherEmbeds: 0, plainLinks: 0 };
+  const hosts = new Map<string, number>();
+  for (const row of sectionRows ?? []) {
+    const body = (row.body as string | null) ?? "";
+    refs.images += (body.match(/<img\b/gi) ?? []).length;
+    refs.otherEmbeds += (body.match(/<(iframe|video|audio|embed|object)\b/gi) ?? []).length;
+    for (const m of body.matchAll(/(?:src|href)\s*=\s*["']([^"']+)["']/gi)) {
+      const url = m[1];
+      if (/\.pdf(\?|#|$)/i.test(url)) refs.pdfLinks += 1;
+      else if (m[0].toLowerCase().startsWith("href")) refs.plainLinks += 1;
+      try {
+        const host = new URL(url, "https://example.invalid").host;
+        if (host && host !== "example.invalid") hosts.set(host, (hosts.get(host) ?? 0) + 1);
+      } catch {
+        // 상대 경로 등 — 호스트가 없다. 세지 않는다.
+      }
+    }
+  }
+
   // 현재 내용 기준 생성본과 정식 공개 스냅샷을 나눠 센다. 앞엣것은 과거 공개 내용을
   // 입증하는 자료가 아니다.
   const [{ count: publishCount }, { count: baselineCount }] = await Promise.all([
@@ -104,6 +160,23 @@ export async function GET() {
     countingUnit:
       "교재 수가 아니라 구성 행 수입니다. 같은 교재가 여러 회차에 담겨 있으면 각각 셉니다.",
     groups,
+    reconciliation: {
+      note:
+        "stateSumMatchesTotal 은 조회된 대상 안에서만 합이 맞는다는 뜻입니다. " +
+        "대상 누락·중복은 아래 원본 행 수 대조로 확인합니다.",
+      rawTotals,
+      rawTotal,
+      coveredTotal,
+      matches: rawTotal === coveredTotal,
+    },
+    bodyReferences: {
+      note:
+        "교재 본문(HTML)이 실제로 참조하는 것. 수업 내용에 포함되는 파일과 단순 " +
+        "참고 링크를 구분하려면 이 실태부터 확인해야 합니다.",
+      sectionsScanned: (sectionRows ?? []).length,
+      ...refs,
+      hosts: Object.fromEntries([...hosts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 20)),
+    },
     docVersions: {
       publish: publishCount ?? 0,
       currentContentBaseline: baselineCount ?? 0,

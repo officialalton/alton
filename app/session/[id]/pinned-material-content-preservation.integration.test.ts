@@ -146,3 +146,45 @@ describe("교재 본문이 공개 시점으로 보존된다", () => {
     ).toBe("t");
   });
 });
+
+// 지시 2번 — "새 교재 공개와 기존 교재 재공개에서 스냅샷이 생성되는지 실제 흐름으로
+// 검증해주세요." setDocPublished 가 내는 SQL 과 같은 모양으로 확인한다.
+describe("공개 경로에서 스냅샷이 실제로 생긴다", () => {
+  const versionCount = (docId: string) =>
+    psql(`select count(*) from curriculum_doc_versions where curriculum_doc_id = '${docId}';`);
+
+  it("초안 → 공개: status 변경만으로 스냅샷이 생긴다", () => {
+    const docId = psql(
+      `insert into curriculum_docs (title, subject_id, owner_type, status)
+       values ('교재 ${uniq()}', '${SUBJECT_ID}', 'admin', 'draft') returning id;`
+    );
+    cleanupDocIds.push(docId);
+    psql(
+      `insert into curriculum_doc_sections (curriculum_doc_id, position, title, body)
+       values ('${docId}', 1, '1절', '첫 공개 본문');`
+    );
+    expect(versionCount(docId)).toBe("0");
+
+    // setDocPublished 가 내는 것과 같은 UPDATE.
+    psql(`update curriculum_docs set status = 'published' where id = '${docId}';`);
+    expect(versionCount(docId)).toBe("1");
+  });
+
+  it("이미 공개된 교재의 재공개는 status 가 안 바뀌어 트리거가 돌지 않는다", () => {
+    // 이것이 앱에서 capture 를 명시적으로 부르는 이유다(curriculum-doc-actions).
+    const docId = psql(
+      `insert into curriculum_docs (title, subject_id, owner_type, status)
+       values ('교재 ${uniq()}', '${SUBJECT_ID}', 'admin', 'published') returning id;`
+    );
+    cleanupDocIds.push(docId);
+    expect(versionCount(docId)).toBe("1");
+
+    psql(`update curriculum_doc_sections set body = body where curriculum_doc_id = '${docId}';`);
+    psql(`update curriculum_docs set status = 'published' where id = '${docId}';`);
+    expect(versionCount(docId)).toBe("1");
+
+    // 앱이 부르는 명시적 캡처로만 새 버전이 생긴다.
+    psql(`select capture_curriculum_doc_version('${docId}', 'publish', '재공개');`);
+    expect(versionCount(docId)).toBe("2");
+  });
+});
