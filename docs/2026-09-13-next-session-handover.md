@@ -7,11 +7,12 @@
 
 | 항목 | 값 |
 | --- | --- |
-| 기준 커밋 | `eaff2f7` (2026-09-13 갱신) |
-| Preview | https://alton-f35zrxi3s-alton7.vercel.app |
-| 최신 마이그레이션 | `20261317000000_p2_teacher_template_keyword_layer.sql` |
-| 공유 비프로덕션 | `worpsqwqgnspddnrtnvq` — `20261317`까지 적용 완료 |
-| 테스트 기준선 | `npx supabase db reset --local && npx vitest run --no-file-parallelism` → 313 파일 / 2380 통과 |
+| 기준 커밋 | `749d84e` (2026-09-13 야간 갱신) |
+| Preview | https://alton-4jot4k4v9-alton7.vercel.app |
+| 최신 마이그레이션 | `20261320000000_p2_catalog_layer_auto_composition.sql` |
+| 공유 비프로덕션 | `worpsqwqgnspddnrtnvq` — `20261320`까지 적용 완료 |
+| 테스트 기준선 | `npx supabase db reset --local && npx vitest run --no-file-parallelism` → 314 파일 / 2403 통과 |
+| DocuSign | Preview `DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS=true` — **실제 샌드박스 발송이 열려 있다** |
 
 **브랜치 주의**: 이전 기준선에서 로컬 `preview/m4-integration-verification`이 origin보다
 22커밋 앞서 있었다(진단 경로·문제은행·교재 단위 전환이 전부 미푸시). 2026-09-13에
@@ -47,46 +48,53 @@ Production 설정·Drive 자료는 이번 작업들에서 한 번도 건드리�
 매기는데 상속 `INSERT ... SELECT`에 `ORDER BY`가 없어 **회차에 딸려 오는 교재 순서가 실행할
 때마다 달랐다**. 아래 3절의 "간헐 실패"가 이것이었다(같은 DB 상태에서 3회 중 1회 재현).
 
-### (2) 계약 발송이 막힌다 — 진단 경로 배포됨, 결과 확인 필요
+### (2) 계약 발송이 막힌다 — **원인 확정·해소 (2026-09-13)**
 
-**2026-09-13 진단 결과**: 로컬 샌드박스 자격증명으로 발송 없이 돌려 보니
-`env`·`jwt_sign`·`jwt_token`·`account_read`가 전부 통과했다. **인증·계정 접근은 원인이
-아니다.** `createEnvelope`는 `DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS`가 `true`가 아니면 첫 줄에서
-던지므로(`lib/docusign.ts`), 남은 후보는 그 게이트 값이다. Preview에는 8개 변수가 모두
-존재하지만(`vercel env ls preview`) 값이 Secret이라 아래 경로로만 읽을 수 있다.
+`/api/admin/docusign-preflight` 결과: `env`·`jwt_token`·`account_read`는 전부 통과하고
+`real_calls_gate`만 실패했다. **설정·인증·계정 접근은 원인이 아니었고 발송 게이트만
+닫혀 있었다.** `createEnvelope`는 `DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS`가 `true`가 아니면
+첫 줄에서 던진다(`lib/docusign.ts`).
 
-관리자로 열면 어디서 막히는지 나온다(봉투를 만들지 않는다):
+제품 오너 승인 후 Preview 환경변수를 `true`로 설정했다(Config 타입, Preview 전용,
+Production 미변경). 재배포 후 4단계 모두 `ok: true`를 확인했다.
+
+**주의: 이제부터 계약 발송을 시도하면 실제 샌드박스 봉투가 만들어지고 서명 요청
+메일이 나간다.** 진단 통과는 발송 경로 통과가 아니므로 아래 (4)의 최소 검증은
+여전히 남아 있다.
+
+### (3) 정리 대상 집계 재확인 — **보존 계정 식별 완료 (2026-09-13)**
+
+첫 집계의 `found:false`는 계정이 없어서가 아니었다. **auth 사용자 목록을 한 명도 읽지
+못했고(`authUsersScanned: 0`), 그 오류를 `if (error) break;`로 삼킨 뒤 결과를
+`found:false`로 보고**하고 있었다. 조회 실패와 계정 없음은 전혀 다른 이야기이고,
+후자로 오해하면 보존해야 할 계정을 정리 대상에 넣게 된다.
+
+이메일은 `profiles`에 없고 `auth.users`에만 있다. Admin REST API의 동작에 기대지 않도록
+DB 함수로 바꾸고(`20261318000000`), 조회가 실패하면 `lookupDiagnostics`에 사유를
+드러낸다. 재확인 결과:
 
 ```
-/api/admin/docusign-preflight
-```
-
-단계: `env`(설정 누락) → `real_calls_gate`(`DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS`)
-→ `jwt_token`(인증) → `account_read`(계정 접근). Preview에 DocuSign 환경변수는
-8개 모두 설정돼 있고 값은 Secret이라 코드에서 읽을 수 없다.
-
-### (3) 정리 대상 집계 재확인 — **보존 계정을 못 찾았다**
-
-첫 집계에서 `official@alton.education`과 `teacher1@alton.education`이 **둘 다
-`found:false`** 였다. 계정을 식별하지 못한 채로 정리를 시작하면 안 된다.
-
-조회 로직을 고쳤다(auth 사용자 페이지를 끝까지 넘기고, 못 찾으면 드러나게
-`preservedAllFound`·`staffAccounts`를 함께 돌려준다). 다시 열어야 한다:
-
-```
-/api/admin/cleanup-preview
+official@alton.education  → found: true, b2a34464-f8b1-4605-89cd-e3e56de44c67, admin
+teacher1@alton.education  → found: true, 2606bc3f-1d16-4f60-8e0e-5a2c2184e1d2, teacher
+preservedAllFound: true
 ```
 
 이 경로는 읽기 전용이다(insert/update/delete를 부르지 않는 것을 정적 검사로 고정).
 
-첫 집계 결과(참고): 사용자 109(교사 8·학부모 19·관리자 2·학생 80), 가구 19(아카이브 1),
-과목 5(아카이브 4), 교재 1, 문제 0, 키워드 10, 운영 커리큘럼 23(활성 23),
-매칭 v3 13·레거시 54, 미래 확정 예약 7, 수업 15(진행 중 0), 계약 32.
+집계(2026-09-13): 사용자 112(교사 8·학부모 20·관리자 2·학생 82), 가구 20(아카이브 16),
+과목 6(아카이브 4), 교재 6(공개 6), 문제 0, 키워드 11, 운영 커리큘럼 26(활성 26),
+매칭 v3 4·레거시 54·과목수강 41, 미래 확정 예약 4, 수업 17(진행 중 0), 계약 34.
 
-### (4) 데이터 정리 — **미착수**
+`preservedAccountImpact`: 보존 2계정에 걸린 활성 배정 3, 레거시 매칭 2, 커리큘럼
+템플릿 3. 확정 정책대로 **계정은 살리되 이 연결들은 정리 대상**이다.
 
-선행조건 두 개가 남아 있다: (3)의 보존 계정 식별, 그리고 계약→수업권→정규 수업
-**최소 점검**(정리 후에 새 UAT를 시작할 수단이 있는지 확인).
+### (4) 데이터 정리 — **미착수 (선행조건 1/2 충족)**
+
+- ✅ (3)의 보존 계정 식별 — 2026-09-13 완료
+- ❌ 계약→수업권→정규 수업 **최소 점검** — 미실시. 서명이 필요해 사람이 해야 한다.
+  DocuSign 게이트는 열려 있으므로 진행할 수 있다.
+
+**두 번째가 끝나기 전에는 정리를 시작하지 않는다.**
 
 정리 방식은 비활성화·아카이브다. 삭제하지 않는다. `official@alton.education`과
 `teacher1@alton.education`의 계정·로그인·권한은 유지하되, **그 계정에 걸린 오래된
@@ -103,6 +111,40 @@ Production 설정·Drive 자료는 이번 작업들에서 한 번도 건드리�
 통과로 기록한다.
 
 Drive 나머지는 전부 확인 완료(폴더 목록·탐색·빈 폴더·파일 열기·다운로드·감사 기록).
+
+2026-09-13 보완: 관리자 전용 점검 경로 세 곳이 미로그인과 "로그인한 비관리자"를
+똑같이 403·같은 문구로 돌려주고 있었다. 그래서 teacher1로 확인해도 응답만으로는
+미로그인과 구분할 수 없어 **확인 자체가 증거가 되지 못했다.** 401(로그인이 필요합니다)
+/403(관리자만 확인할 수 있습니다)으로 갈랐다(`lib/admin-route-gate.ts`). 이제 403이
+나오면 "로그인했지만 관리자가 아니다"가 확정된다.
+
+### (6) 화면 통합(4절) — 2·3단계 진행, 완결 아님
+
+**된 것**
+
+- 세 계층 스키마 정합(`20261320`). 관리자 기준본만 `source`가 없어 같은 화면이
+  "키워드에서 자동"과 "직접 담음"을 구분할 수 없었다. 세 층을 같은 규칙으로 맞췄다.
+- `lib/unit-composition.ts` — 층을 값으로 받아 회차 구성을 한 모양으로 읽는다.
+  머리말(`관리자 기준본 / 내 기본 구성 / ○○ 학생`)도 여기서 만든다.
+- `/lesson-prep/[layer]/[unitId]` — **예약·session ID 없이 회차 기준으로** 연다.
+  화면을 여는 것만으로 임시 예약이나 수업 기록을 만들지 않는다(6절).
+- 공용 구성 패널 — 키워드 붙이기/떼기, 교재 담기·빼기·순서, 자동/직접 구분,
+  키워드로 들어올 **문제 미리보기**(관리자·선생님 층은 미리보기 전용).
+- 진입점: 관리자 과목 템플릿 회차, 선생님 기본 템플릿 회차, 학생별 회차,
+  예정 수업 카드, 수업 화면 머리말. **이름은 전부 `수업 준비`**.
+  `수업 열기`·`수업 시작`은 다른 동작이라 이름을 유지했다.
+
+**안 된 것 (다음 세션의 첫 일감)**
+
+- **세션뷰 안으로의 완전 통합.** 지금은 `/lesson-prep/...`이 별도 화면이고,
+  `/teacher/session-prep/[sessionId]`(LessonPrepScreen)도 그대로 남아 있다.
+  지시는 "별도 준비 페이지를 없애고 준비 기능을 세션뷰 안으로 통합"이다.
+  이 재구성은 범위가 크고 되돌리기 어려워, 위 2·3단계를 제품 오너가 본 뒤에
+  하는 것이 맞다고 판단해 멈췄다.
+- **문제 자동 구성의 편집.** 문제 선택은 학생별 운영본에만 있다
+  (`curriculum_unit_prep_items`는 `overlay_unit_id`에 매달린다). 관리자·선생님 층에
+  문제 층을 둘 것인지가 정해지지 않았다 — 정하기 전에는 미리보기로 둔다.
+- **AI 생성·문제 구성 조건·명시적 재구성**이 이 패널에 아직 붙지 않았다.
 
 ## 2. 유지해야 할 확정 정책
 
