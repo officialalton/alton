@@ -334,6 +334,7 @@ describe("SessionShell — 수업 준비 탭", () => {
       materials: [],
       subjectKeywords: [],
       hasInheritableDefaults: false,
+      goal: null,
     },
     pickable: [],
     problems: [],

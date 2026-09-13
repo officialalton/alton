@@ -10,6 +10,8 @@ import {
   loadPinnedMaterialData,
   loadPlannedMaterialData,
   shouldFallBackToPlannedMaterial,
+  loadSessionFreezeState,
+  frozenMaterialNotice,
 } from "./material-data";
 import { loadVocabWords } from "./vocab-data";
 import { loadHomeworkItems } from "./homework-data";
@@ -77,6 +79,13 @@ export default async function SessionPage({
     (session.source === "v3" ? await loadPinnedMaterialData(supabase, session.id) : null) ??
     (showPlannedInstead ? await loadPlannedMaterialData(supabase, session.id) : null) ??
     (await loadMaterialData(supabase, session.curriculumDocId, session.id, session.studentId));
+
+  // 고정 자료가 없을 때 "없었다"고 단정하지 않는다. 문제만 고정된 수업과 고정
+  // 기록 자체가 없는 수업은 다르고, 앞엣것은 오류가 아니다.
+  const materialNotice =
+    session.source === "v3"
+      ? frozenMaterialNotice(initialState, await loadSessionFreezeState(supabase, session.id))
+      : null;
 
   const vocabWords = await loadVocabWords(supabase, session.studentId);
   const homeworkItems = await loadHomeworkItems(supabase, session.id);
@@ -193,6 +202,7 @@ export default async function SessionPage({
       sessionProblems={sessionProblems}
       lessonContext={lessonContext}
       prep={prep}
+      materialNotice={materialNotice}
       currentUserId={user.id}
       homeworkKeywordOptions={homeworkKeywordOptions}
       homeworkStatusItems={homeworkStatusItems}

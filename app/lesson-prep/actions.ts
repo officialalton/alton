@@ -207,3 +207,45 @@ export async function swapMaterialOrder(
   }
   return { ok: true };
 }
+
+/**
+ * 회차 목표를 저장한다.
+ *
+ * 빈 문자열과 null 을 구분해 넘긴다 — 사람이 일부러 비운 것(`""`)과 아직 아무도
+ * 정하지 않은 것(`null`)은 다르다. 앞엣것은 상속으로 되살아나면 안 된다.
+ *
+ * 학생 층의 목표는 회차 준비(curriculum_unit_preps)에 있다. 준비 행이 없으면
+ * 만든다 — 준비 화면이 어차피 만들던 행이라 새 상태를 더하지 않는다.
+ */
+export async function saveGoal(
+  layer: PrepLayer,
+  unitId: string,
+  goal: string
+): Promise<PrepResult> {
+  const { supabase, error: denied } = await gate(layer);
+  if (!supabase) return { ok: false, error: denied };
+
+  // 화면에서 지운 것은 "일부러 비움"이다. null 로 되돌리지 않는다.
+  const value = goal;
+
+  if (layer === "student") {
+    const { error } = await supabase
+      .from("curriculum_unit_preps")
+      .upsert({ overlay_unit_id: unitId, goal: value }, { onConflict: "overlay_unit_id" });
+    if (error) {
+      console.error(JSON.stringify({ event: "prep_goal_save_failed", layer, message: error.message }));
+      return { ok: false, error: "목표를 저장하지 못했습니다." };
+    }
+    return { ok: true };
+  }
+
+  const { error } = await supabase
+    .from(LAYERS[layer].unitTable)
+    .update({ goal: value })
+    .eq("id", unitId);
+  if (error) {
+    console.error(JSON.stringify({ event: "prep_goal_save_failed", layer, message: error.message }));
+    return { ok: false, error: "목표를 저장하지 못했습니다." };
+  }
+  return { ok: true };
+}

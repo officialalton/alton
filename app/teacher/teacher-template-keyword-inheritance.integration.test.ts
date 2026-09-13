@@ -429,3 +429,83 @@ describe("키워드 → 기본 교재 자동 구성은 세 계층에서 같게 �
     ).toBe("auto");
   });
 });
+
+// 지시 3번 — 목표도 3계층 상속. 의도적으로 비운 값과 아직 상속되지 않은 값을
+// 구분해 보존한다.
+describe("회차 목표의 상속과 수정 범위", () => {
+  it("회차를 만들면 기준본의 목표가 자동으로 내려온다", () => {
+    const admin = makeAdminUnit([]);
+    psql(`update subject_template_units set goal = '이차방정식 풀이' where id = '${admin.unitId}';`);
+
+    const templateId = makeTeacherTemplate();
+    const unitId = makeTeacherUnit(templateId, admin.unitId, admin.position);
+
+    expect(
+      psql(`select goal from teacher_curriculum_template_units where id = '${unitId}';`)
+    ).toBe("이차방정식 풀이");
+  });
+
+  it("선생님이 일부러 비운 목표를 보정이 되살리지 않는다", () => {
+    const admin = makeAdminUnit([]);
+    psql(`update subject_template_units set goal = '기준본 목표' where id = '${admin.unitId}';`);
+
+    const templateId = makeTeacherTemplate();
+    const unitId = makeTeacherUnit(templateId, admin.unitId, admin.position);
+    // 빈 문자열 = 일부러 비움. null = 아직 아무도 정하지 않음. 둘은 다르다.
+    psql(`update teacher_curriculum_template_units set goal = '' where id = '${unitId}';`);
+
+    psql(`select inherit_teacher_unit_goal('${unitId}');`);
+
+    expect(
+      psql(`select goal = '' from teacher_curriculum_template_units where id = '${unitId}';`)
+    ).toBe("t");
+  });
+
+  it("아직 상속되지 않은 목표는 보정으로 채운다", () => {
+    const admin = makeAdminUnit([]);
+    const templateId = makeTeacherTemplate();
+    // 연결만 있고 목표는 비어 있는 상태(마이그레이션 이전 템플릿의 모습).
+    const unitId = makeTeacherUnit(templateId, null, 991);
+    psql(
+      `update teacher_curriculum_template_units set source_unit_id = '${admin.unitId}' where id = '${unitId}';`
+    );
+    psql(`update subject_template_units set goal = '나중에 적은 목표' where id = '${admin.unitId}';`);
+
+    psql(`select inherit_teacher_unit_goal('${unitId}');`);
+
+    expect(
+      psql(`select goal from teacher_curriculum_template_units where id = '${unitId}';`)
+    ).toBe("나중에 적은 목표");
+  });
+
+  it("상위가 나중에 바뀌어도 저절로 내려오지 않는다", () => {
+    const admin = makeAdminUnit([]);
+    psql(`update subject_template_units set goal = '처음 목표' where id = '${admin.unitId}';`);
+
+    const templateId = makeTeacherTemplate();
+    const unitId = makeTeacherUnit(templateId, admin.unitId, admin.position);
+    psql(`update subject_template_units set goal = '바뀐 목표' where id = '${admin.unitId}';`);
+
+    expect(
+      psql(`select goal from teacher_curriculum_template_units where id = '${unitId}';`)
+    ).toBe("처음 목표");
+  });
+
+  it("학생 운영본은 선생님의 목표를 받는다", () => {
+    const admin = makeAdminUnit([]);
+    psql(`update subject_template_units set goal = '기준본 목표' where id = '${admin.unitId}';`);
+
+    const templateId = makeTeacherTemplate();
+    const teacherUnitId = makeTeacherUnit(templateId, admin.unitId, admin.position);
+    psql(
+      `update teacher_curriculum_template_units set goal = '선생님이 고친 목표' where id = '${teacherUnitId}';`
+    );
+
+    const { overlayId } = makeEnrollmentWithOverlay();
+    const overlayUnitId = makeOverlayUnit(overlayId, admin.unitId, 904);
+
+    expect(
+      psql(`select goal from curriculum_unit_preps where overlay_unit_id = '${overlayUnitId}';`)
+    ).toBe("선생님이 고친 목표");
+  });
+});

@@ -1,7 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { addKeyword, removeKeyword, addMaterial, removeMaterial, swapMaterialOrder } from "./actions";
+import {
+  addKeyword,
+  removeKeyword,
+  addMaterial,
+  removeMaterial,
+  swapMaterialOrder,
+  saveGoal,
+} from "./actions";
 import type {
   KeywordProblem,
   PickableMaterial,
@@ -38,6 +45,7 @@ export default function CompositionPanel({
   const [materials, setMaterials] = useState<UnitMaterial[]>(composition.materials);
   const [error, setError] = useState<string | null>(null);
   const [showPicker, setShowPicker] = useState(false);
+  const [goalSaved, setGoalSaved] = useState(false);
 
   const { layer, unitId } = composition;
   const pickedIds = new Set(materials.map((m) => m.curriculumDocId));
@@ -58,6 +66,17 @@ export default function CompositionPanel({
     // 키워드가 바뀌면 자동 구성이 DB에서 다시 계산된다. 화면이 그 결과를 추측하면
     // 실제와 어긋나므로 서버가 그린 상태를 다시 받는다.
     window.location.reload();
+  }
+
+  async function handleGoalBlur(value: string) {
+    if (value === (composition.goal ?? "")) return;
+    const result = await saveGoal(layer, unitId, value);
+    if (!result.ok) {
+      setError(result.error);
+      return;
+    }
+    setError(null);
+    setGoalSaved(true);
   }
 
   async function handleRemoveMaterial(docId: string) {
@@ -130,6 +149,29 @@ export default function CompositionPanel({
           {error}
         </div>
       )}
+
+      <section className="mb-7">
+        <h2 className="text-[13px] font-bold text-ink mb-1">
+          이 회차의 목표
+          {goalSaved && <span className="text-[11.5px] font-semibold text-grey-300 ml-2">저장됨</span>}
+        </h2>
+        <p className="text-[12px] text-grey-500 mb-2">
+          {layer === "student"
+            ? "이 학생의 이번 회차에서 달성할 것입니다. 수업·복습 화면의 머리말로 쓰입니다."
+            : "여기서 적은 목표는 아래 계층으로 내려갑니다. 아래에서 고친 목표는 덮어쓰지 않습니다."}
+        </p>
+        <textarea
+          defaultValue={composition.goal ?? ""}
+          onBlur={(e) => handleGoalBlur(e.target.value)}
+          rows={2}
+          placeholder={
+            composition.goal === null
+              ? "아직 정해지지 않았습니다"
+              : "비워 두면 목표 없이 진행합니다"
+          }
+          className="w-full px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px] leading-[1.6]"
+        />
+      </section>
 
       <section className="mb-7">
         <h2 className="text-[13px] font-bold text-ink mb-1">회차 키워드</h2>

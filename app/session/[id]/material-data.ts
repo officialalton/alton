@@ -325,3 +325,57 @@ export function shouldFallBackToPlannedMaterial(
 ): boolean {
   return sessionSource === "v3" && state === "prep";
 }
+
+/**
+ * 이 수업에 고정 기록이 남아 있는가.
+ *
+ * 2026-09-13 지시: "실제로 자료 없이 시작한 수업과 고정 기록을 확인할 수 없는
+ * 수업을 구분할 수 있는지 확인해주세요."
+ *
+ * 구분할 수 있다. session_content_manifest 에 **어떤 종류든 행이 있으면** 시작
+ * 시점에 고정이 일어난 것이다. loadPinnedMaterialData 는 교재 종류만 읽으므로
+ * "문제만 고정된 수업"에서도 null 을 돌려주는데, 그것은 기록이 없는 것과 다르다.
+ *
+ *   frozen_with_materials     고정됐고 교재도 있다
+ *   frozen_without_materials  고정은 됐는데 교재가 없다 — 문제만 있는 수업 등.
+ *                             **정상이다.** 교재가 없다고 오류로 만들지 않는다.
+ *   no_freeze_record          고정 기록 자체가 없다 — "없었다"고 단정할 수 없고,
+ *                             확인할 수 없다고 말해야 한다.
+ */
+export type SessionFreezeState =
+  | "frozen_with_materials"
+  | "frozen_without_materials"
+  | "no_freeze_record";
+
+export async function loadSessionFreezeState(
+  supabase: SupabaseClient,
+  sessionId: string
+): Promise<SessionFreezeState> {
+  const { data } = await supabase
+    .from("session_content_manifest")
+    .select("content_type")
+    .eq("session_id", sessionId);
+
+  if (!data?.length) return "no_freeze_record";
+  const hasMaterial = data.some(
+    (row) => row.content_type === "material_doc" || row.content_type === "material_section"
+  );
+  return hasMaterial ? "frozen_with_materials" : "frozen_without_materials";
+}
+
+/**
+ * 시작·완료된 수업에서 교재 자리에 무엇이라고 쓸 것인가.
+ * 시작 전 수업과 교재가 실제로 고정된 수업에는 아무 말도 덧붙이지 않는다.
+ */
+export function frozenMaterialNotice(
+  state: "prep" | "live" | "completed",
+  freezeState: SessionFreezeState
+): string | null {
+  if (state === "prep") return null;
+  if (freezeState === "frozen_with_materials") return null;
+  if (freezeState === "frozen_without_materials") {
+    return "이 수업에는 고정된 교재가 없습니다. 문제만으로 진행한 수업일 수 있습니다.";
+  }
+  // 기록이 없다 — 자료 없이 시작했는지, 기록이 남지 않았는지 구분할 근거가 없다.
+  return "이 수업의 고정된 교재 구성을 확인할 수 없습니다.";
+}

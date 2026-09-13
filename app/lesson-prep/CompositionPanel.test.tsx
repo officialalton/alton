@@ -5,6 +5,7 @@ import * as actions from "./actions";
 import type { UnitComposition } from "@/lib/unit-composition";
 
 vi.mock("./actions", () => ({
+  saveGoal: vi.fn(),
   addKeyword: vi.fn(),
   removeKeyword: vi.fn(),
   addMaterial: vi.fn(),
@@ -30,6 +31,7 @@ function makeComposition(over: Partial<UnitComposition> = {}): UnitComposition {
       { id: "k2", label: "Voca" },
     ],
     hasInheritableDefaults: true,
+    goal: null,
     ...over,
   };
 }
@@ -177,5 +179,57 @@ describe("수업 준비 구성 패널", () => {
   it("안내가 없으면 아무 말도 덧붙이지 않는다", () => {
     render(<CompositionPanel composition={makeComposition()} pickable={[]} problems={[]} />);
     expect(screen.queryByText(/고정/)).not.toBeInTheDocument();
+  });
+
+  // 지시 3번 — 의도적으로 비운 목표와 아직 상속되지 않은 목표는 다르다.
+  it("아직 정해지지 않은 목표와 일부러 비운 목표를 다르게 안내한다", () => {
+    const { unmount } = render(
+      <CompositionPanel composition={makeComposition({ goal: null })} pickable={[]} problems={[]} />
+    );
+    expect(screen.getByPlaceholderText("아직 정해지지 않았습니다")).toBeInTheDocument();
+    unmount();
+
+    render(
+      <CompositionPanel composition={makeComposition({ goal: "" })} pickable={[]} problems={[]} />
+    );
+    expect(screen.getByPlaceholderText("비워 두면 목표 없이 진행합니다")).toBeInTheDocument();
+  });
+
+  it("목표를 고치면 층과 함께 저장한다", async () => {
+    vi.mocked(actions.saveGoal).mockResolvedValue({ ok: true });
+    render(
+      <CompositionPanel
+        composition={makeComposition({ goal: "이전 목표" })}
+        pickable={[]}
+        problems={[]}
+      />
+    );
+    const box = screen.getByDisplayValue("이전 목표");
+    fireEvent.blur(box, { target: { value: "새 목표" } });
+    await waitFor(() => expect(actions.saveGoal).toHaveBeenCalledWith("teacher", "u1", "새 목표"));
+  });
+
+  it("바뀌지 않았으면 저장하지 않는다", async () => {
+    vi.mocked(actions.saveGoal).mockResolvedValue({ ok: true });
+    render(
+      <CompositionPanel
+        composition={makeComposition({ goal: "그대로" })}
+        pickable={[]}
+        problems={[]}
+      />
+    );
+    fireEvent.blur(screen.getByDisplayValue("그대로"), { target: { value: "그대로" } });
+    await waitFor(() => expect(actions.saveGoal).not.toHaveBeenCalled());
+  });
+
+  it("학생 층에서는 목표 안내가 다르다", () => {
+    render(
+      <CompositionPanel
+        composition={makeComposition({ layer: "student" })}
+        pickable={[]}
+        problems={[]}
+      />
+    );
+    expect(screen.getByText(/이 학생의 이번 회차에서 달성할 것입니다/)).toBeInTheDocument();
   });
 });

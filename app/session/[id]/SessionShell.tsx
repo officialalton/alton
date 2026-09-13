@@ -77,6 +77,7 @@ export default function SessionShell({
   sessionNumber,
   viewerRole,
   prep = null,
+  materialNotice = null,
   initialTab,
   initialState,
   status,
@@ -117,6 +118,11 @@ export default function SessionShell({
     pickable: PickableMaterial[];
     problems: KeywordProblem[];
   } | null;
+  /**
+   * 교재 자리에 덧붙일 말. 시작·완료된 수업인데 고정된 교재가 없을 때만 채운다 —
+   * 문제만 있는 수업(정상)과 고정 기록을 확인할 수 없는 수업을 구분해 말한다.
+   */
+  materialNotice?: string | null;
   initialTab?: string;
   initialState: SessionViewState;
   status: string;
@@ -489,6 +495,12 @@ export default function SessionShell({
           이 수업에서는 필기만 저장됩니다. 교재·과제·단어장은 읽기만 할 수 있어요.
         </div>
       )}
+      {activeTab === "material" && materialNotice && (
+        <div className="px-6 py-2.5 text-[12.5px] text-grey-500 bg-grey-100 border-b-[1.5px] border-grey-200">
+          {materialNotice}
+        </div>
+      )}
+
       {activeTab === "material" ? (
         <MaterialTab
           sessionId={sessionId}

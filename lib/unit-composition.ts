@@ -77,6 +77,14 @@ export type UnitComposition = {
   subjectKeywords: UnitKeyword[];
   /** 위 계층에서 물려받을 기본이 있는가(기준본 층은 자기가 기준이라 항상 false). */
   hasInheritableDefaults: boolean;
+  /**
+   * 이 회차에서 달성할 것.
+   *
+   * null 과 빈 문자열을 구분한다 — null 은 "아직 아무도 정하지 않았다(상속 대상)",
+   * 빈 문자열은 "사람이 일부러 비웠다". 둘을 같게 다루면 일부러 지운 목표가 상속으로
+   * 되살아난다.
+   */
+  goal: string | null;
 };
 
 /**
@@ -96,11 +104,12 @@ export async function resolveUnitScope(
   subjectName: string;
   scopeLabel: string;
   sourceUnitId: string | null;
+  goal: string | null;
 } | null> {
   if (layer === "catalog") {
     const { data } = await supabase
       .from("subject_template_units")
-      .select("unit_title, subject_id, subject:subjects(name)")
+      .select("unit_title, goal, subject_id, subject:subjects(name)")
       .eq("id", unitId)
       .maybeSingle();
     if (!data) return null;
@@ -111,6 +120,7 @@ export async function resolveUnitScope(
       scopeLabel: LAYERS.catalog.label,
       // 기준본이 곧 기준이다 — 위에서 물려받을 것이 없다.
       sourceUnitId: null,
+      goal: (data.goal as string | null) ?? null,
     };
   }
 
@@ -118,7 +128,7 @@ export async function resolveUnitScope(
     const { data } = await supabase
       .from("teacher_curriculum_template_units")
       .select(
-        "unit_title, source_unit_id, template:teacher_curriculum_templates!inner(subject_id, subject:subjects(name))"
+        "unit_title, goal, source_unit_id, template:teacher_curriculum_templates!inner(subject_id, subject:subjects(name))"
       )
       .eq("id", unitId)
       .maybeSingle();
@@ -132,6 +142,7 @@ export async function resolveUnitScope(
       subjectName: relName(template?.subject),
       scopeLabel: LAYERS.teacher.label,
       sourceUnitId: (data.source_unit_id as string | null) ?? null,
+      goal: (data.goal as string | null) ?? null,
     };
   }
 
@@ -159,6 +170,14 @@ export async function resolveUnitScope(
         .maybeSingle()
     : { data: null };
 
+  // 학생 층의 목표는 회차 준비에 있다(20261296000000). 준비 행이 없으면 아직
+  // 아무도 정하지 않은 것이므로 null 이다.
+  const { data: prepRow } = await supabase
+    .from("curriculum_unit_preps")
+    .select("goal")
+    .eq("overlay_unit_id", unitId)
+    .maybeSingle();
+
   const studentName = relName(enrollmentRow?.child);
   return {
     unitTitle: unitRow.unit_title as string,
@@ -167,6 +186,7 @@ export async function resolveUnitScope(
     // 학생 층은 누구의 것인지가 제일 중요하다 — 이름을 그대로 쓴다.
     scopeLabel: studentName ? `${studentName} 학생` : LAYERS.student.label,
     sourceUnitId: (unitRow.source_unit_id as string | null) ?? null,
+    goal: (prepRow?.goal as string | null) ?? null,
   };
 }
 
@@ -232,6 +252,7 @@ export async function loadComposition(
       label: k.label as string,
     })),
     hasInheritableDefaults: Boolean(scope.sourceUnitId),
+    goal: scope.goal,
   };
 }
 
