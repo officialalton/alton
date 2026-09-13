@@ -18,6 +18,9 @@ export default function MySubjectsTab({
   const [subjects, setSubjects] = useState(initialSubjects);
   const [openSubjectId, setOpenSubjectId] = useState<string | null>(null);
   const [creating, setCreating] = useState<string | null>(null);
+  // 보관된 과목은 새 작업 대상이 아니지만, 쌓아 둔 커리큘럼은 계속 열어볼 수
+  // 있어야 한다. 목록에서 빼는 대신 구분해서 보여준다.
+  const [showArchived, setShowArchived] = useState(false);
 
   const open = subjects.find((s) => s.subjectId === openSubjectId);
 
@@ -52,6 +55,8 @@ export default function MySubjectsTab({
     );
   }
 
+  const visibleSubjects = subjects.filter((s) => Boolean(s.archived) === showArchived);
+
   return (
     <div className="max-w-[640px] px-8 py-8">
       <h1 className="text-[20px] font-extrabold text-ink mb-1.5">
@@ -62,19 +67,52 @@ export default function MySubjectsTab({
         사용됩니다. 이미 배정된 학생의 진행 상황에는 영향을 주지 않습니다.
       </p>
 
-      {subjects.length === 0 ? (
+      <div className="flex gap-1 mb-3 border-b-[1.5px] border-grey-200">
+        {[
+          { archived: false, label: "현재" },
+          { archived: true, label: "보관됨" },
+        ].map((t) => (
+          <button
+            key={t.label}
+            onClick={() => setShowArchived(t.archived)}
+            className={
+              "text-[13px] font-bold px-3.5 py-2 -mb-[1.5px] border-b-[2px] " +
+              (showArchived === t.archived ? "border-ink text-ink" : "border-transparent text-grey-500")
+            }
+          >
+            {t.label}
+            <span className="text-grey-300 font-semibold ml-1">
+              {subjects.filter((s) => Boolean(s.archived) === t.archived).length}
+            </span>
+          </button>
+        ))}
+      </div>
+
+      {showArchived && (
+        <p className="text-[12px] text-grey-500 mb-3">
+          보관된 과목은 새 배정에 쓰이지 않습니다. 지금까지 만든 회차 구성은 그대로 있으니 여기서 열어볼 수
+          있습니다.
+        </p>
+      )}
+
+      {visibleSubjects.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-          담당 중인 과목이 없습니다.
+          {showArchived ? "보관된 과목이 없습니다." : "담당 중인 과목이 없습니다."}
         </div>
       ) : (
-        subjects.map((s) => (
+        visibleSubjects.map((s) => (
           <div
             key={s.subjectId}
             className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5 flex items-center justify-between"
           >
             <div>
-              <div className="text-[13.5px] font-bold text-ink">
+              <div className="text-[13.5px] font-bold text-ink flex items-center gap-1.5">
                 {s.subjectName}
+                {s.archived && (
+                  <span className="text-[10.5px] font-bold px-1.5 py-0.5 rounded bg-grey-100 text-grey-500">
+                    보관됨
+                  </span>
+                )}
               </div>
               <div className="text-[12px] text-grey-500 mt-0.5">
                 {s.templateId

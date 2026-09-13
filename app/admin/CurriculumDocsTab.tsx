@@ -1,7 +1,11 @@
 "use client";
 
 import { useState, type Dispatch, type SetStateAction } from "react";
-import { createCurriculumDoc, getCurriculumDocDetailAction } from "./curriculum-doc-actions";
+import {
+  createCurriculumDoc,
+  getCurriculumDocDetailAction,
+  setDocArchived,
+} from "./curriculum-doc-actions";
 import CurriculumDocEditor from "./CurriculumDocEditor";
 import type { DocEditorData, CurriculumDocListItem } from "./curriculum-doc-data";
 import { selectableSubjects, type AdminSubject } from "./subject-data";
@@ -38,6 +42,24 @@ export default function CurriculumDocsTab({
   // P2 2차 — 대표 키워드 미지정 교재를 찾아 지정할 수 있어야 한다. 임의 백필을
   // 하지 않았으므로 기존 교재는 전부 미지정이고, 관리자가 하나씩 정한다.
   const [onlyMissingPrimary, setOnlyMissingPrimary] = useState(false);
+  // 보관됨과 현재는 섞지 않는다. 기본 진입은 현재이고 검색도 그 안에서 돈다.
+  const [showArchived, setShowArchived] = useState(false);
+  const [query, setQuery] = useState("");
+  const [archiveError, setArchiveError] = useState<string | null>(null);
+
+  async function toggleArchived(docId: string, archived: boolean) {
+    setArchiveError(null);
+    const result = await setDocArchived(docId, archived);
+    if (!result.ok) {
+      setArchiveError(result.error);
+      return;
+    }
+    setDocs((prev) =>
+      prev.map((d) =>
+        d.id === docId ? { ...d, archivedAt: archived ? new Date().toISOString() : null } : d
+      )
+    );
+  }
   const [detailError, setDetailError] = useState<string | null>(null);
   const [creating, setCreating] = useState(false);
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
@@ -79,6 +101,8 @@ export default function CurriculumDocsTab({
               unitTitle: updated.unitTitle,
               sectionCount: updated.sections.length,
               hasPrimaryKeyword: Boolean(updated.primaryKeywordId),
+              archivedAt: d.archivedAt,
+              archivedReason: d.archivedReason,
             }
           : d
       )
@@ -119,6 +143,8 @@ export default function CurriculumDocsTab({
           status: doc.status,
           sectionCount: doc.sections.length,
           hasPrimaryKeyword: Boolean(doc.primaryKeywordId),
+          archivedAt: null,
+          archivedReason: null,
         },
       ].sort((a, b) => a.title.localeCompare(b.title))
     );
@@ -170,6 +196,43 @@ export default function CurriculumDocsTab({
         목차(섹션)와 본문을 작성하고, 배포하면 학생·선생님이 열람할 수 있습니다.
       </p>
       {detailError && <p className="text-[12.5px] text-red mb-3">{detailError}</p>}
+      {archiveError && <p className="text-[12.5px] text-red mb-3">{archiveError}</p>}
+
+      <div className="flex gap-1 mb-3 border-b-[1.5px] border-grey-200">
+        {[
+          { archived: false, label: "현재" },
+          { archived: true, label: "보관됨" },
+        ].map((t) => (
+          <button
+            key={t.label}
+            onClick={() => setShowArchived(t.archived)}
+            className={
+              "text-[13px] font-bold px-3.5 py-2 -mb-[1.5px] border-b-[2px] " +
+              (showArchived === t.archived ? "border-ink text-ink" : "border-transparent text-grey-500")
+            }
+          >
+            {t.label}
+            <span className="text-grey-300 font-semibold ml-1">
+              {docs.filter((d) => (t.archived ? Boolean(d.archivedAt) : !d.archivedAt)).length}
+            </span>
+          </button>
+        ))}
+      </div>
+
+      <input
+        aria-label="교재 검색"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder={showArchived ? "보관된 교재에서 찾기" : "교재 제목으로 찾기"}
+        className="w-full text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 mb-3"
+      />
+
+      {showArchived && (
+        <p className="text-[12px] text-grey-500 mb-3">
+          보관된 교재는 신규 선택과 자동 구성 후보에 나오지 않습니다. 이미 담긴 회차와 과거 수업 기록은
+          그대로 남아 있습니다.
+        </p>
+      )}
 
       <label className="flex items-center gap-2 text-[12.5px] text-grey-500 mb-3">
         <input
@@ -188,6 +251,12 @@ export default function CurriculumDocsTab({
       ) : (
         <>
           {visibleDocs
+            .filter((d) => (showArchived ? Boolean(d.archivedAt) : !d.archivedAt))
+            .filter(
+              (d) =>
+                query.trim() === "" ||
+                d.title.toLowerCase().includes(query.trim().toLowerCase())
+            )
             .filter((d) => !onlyMissingPrimary || !d.hasPrimaryKeyword)
             .map((d) => (
             <div
@@ -201,14 +270,23 @@ export default function CurriculumDocsTab({
                   {d.unitTitle ? ` · ${d.unitTitle}` : ""} · 섹션 {d.sectionCount}개 ·{" "}
                   {STATUS_LABEL[d.status] ?? d.status}
                   {!d.hasPrimaryKeyword && " · 대표 키워드 없음"}
+                  {d.archivedAt && " · 보관됨"}
                 </div>
               </div>
-              <button
-                onClick={() => openDoc(d.id)}
-                className="text-[12px] font-bold px-3.5 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink shrink-0"
-              >
-                편집
-              </button>
+              <span className="flex items-center gap-2 shrink-0">
+                <button
+                  onClick={() => void toggleArchived(d.id, !d.archivedAt)}
+                  className="text-[12px] font-bold text-grey-500 whitespace-nowrap"
+                >
+                  {d.archivedAt ? "보관 풀기" : "보관"}
+                </button>
+                <button
+                  onClick={() => openDoc(d.id)}
+                  className="text-[12px] font-bold px-3.5 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink whitespace-nowrap"
+                >
+                  편집
+                </button>
+              </span>
             </div>
           ))}
           {visibleCount < docs.length && (

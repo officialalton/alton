@@ -13,6 +13,11 @@ export type MySubject = {
   subjectName: string;
   templateId: string | null;
   units: TemplateUnit[];
+  /**
+   * 보관된 과목. 신규 배정 후보에서는 빠지지만 **기존 커리큘럼은 계속 열어볼 수
+   * 있어야 한다** — 보관은 숨김이지 접근 차단이 아니다(2026-09-12 확정).
+   */
+  archived: boolean;
 };
 
 export type CatalogUnit = {
@@ -65,11 +70,17 @@ export async function loadMySubjects(
     if (!se) continue;
     subjectNameById.set(se.subject_id, extractName(se.subject));
   }
+  // 보관된 과목도 목록에는 넣는다. 화면이 '현재'와 '보관됨'으로 나눠 보여주고,
+  // 보관된 쪽은 읽기 위주로 쓴다. 목록에서 빼버리면 이 선생님이 쌓아 둔
+  // 커리큘럼에 들어갈 길이 없어진다.
+  const archivedSubjectIds = new Set<string>();
   for (const a of assigned ?? []) {
     const subject = Array.isArray(a.subject) ? a.subject[0] : a.subject;
-    // 보관된 과목은 새 작업 대상이 아니다 — 기존 연결은 다른 화면에서 보존된다.
-    if ((subject as { archived_at?: string | null } | null)?.archived_at) continue;
-    subjectNameById.set(a.subject_id as string, extractName(a.subject));
+    const subjectId = a.subject_id as string;
+    if ((subject as { archived_at?: string | null } | null)?.archived_at) {
+      archivedSubjectIds.add(subjectId);
+    }
+    subjectNameById.set(subjectId, extractName(a.subject));
   }
   if (subjectNameById.size === 0) return [];
 
@@ -113,6 +124,7 @@ export async function loadMySubjects(
       subjectName: subjectNameById.get(subjectId) ?? "",
       templateId,
       units: templateId ? unitsByTemplate.get(templateId) ?? [] : [],
+      archived: archivedSubjectIds.has(subjectId),
     };
   });
 }

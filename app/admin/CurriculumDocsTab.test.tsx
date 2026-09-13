@@ -29,6 +29,7 @@ function Wrapper({
 vi.mock("./curriculum-doc-actions", () => ({
   createCurriculumDoc: vi.fn(),
   getCurriculumDocDetailAction: vi.fn(),
+  setDocArchived: vi.fn(),
   updateDocTitle: vi.fn(),
   setDocPublished: vi.fn(),
   addSection: vi.fn(),
@@ -60,6 +61,8 @@ const existingDocListItem: CurriculumDocListItem = {
   status: "draft",
   sectionCount: 0,
   hasPrimaryKeyword: false,
+  archivedAt: null,
+  archivedReason: null,
 };
 
 const existingDocDetail: DocEditorData = {
@@ -171,5 +174,51 @@ describe("대표 키워드 미지정 교재 찾기", () => {
     fireEvent.click(screen.getByText("대표 키워드가 없는 교재만 보기"));
     expect(screen.queryByText("지정된 교재")).not.toBeInTheDocument();
     expect(screen.getByText("이차방정식 개념 정리")).toBeInTheDocument();
+  });
+});
+
+// 보관됨과 현재는 한 목록에 섞지 않는다. 기본 진입은 현재이고, 검색도 지금 보고
+// 있는 구분 안에서만 동작한다.
+describe("교재 현재/보관됨 분리", () => {
+  const archivedDoc = {
+    ...existingDocListItem,
+    id: "doc9",
+    title: "보관된 교재",
+    archivedAt: "2026-09-11T00:00:00Z",
+  };
+
+  it("보관됨으로 옮기면 보관된 교재만 보인다", () => {
+    render(<Wrapper initialDocs={[existingDocListItem, archivedDoc]} subjects={subjects} />);
+    expect(screen.getByText("이차방정식 개념 정리")).toBeInTheDocument();
+    expect(screen.queryByText("보관된 교재")).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByText(/^보관됨/));
+    expect(screen.getByText("보관된 교재")).toBeInTheDocument();
+    expect(screen.queryByText("이차방정식 개념 정리")).not.toBeInTheDocument();
+  });
+
+  it("검색은 지금 보고 있는 구분 안에서만 동작한다", () => {
+    render(<Wrapper initialDocs={[existingDocListItem, archivedDoc]} subjects={subjects} />);
+    fireEvent.change(screen.getByLabelText("교재 검색"), { target: { value: "보관된" } });
+    // 현재 목록에는 그런 교재가 없다 — 보관됨 쪽을 뒤져서 끌어오지 않는다.
+    expect(screen.queryByText("보관된 교재")).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByText(/^보관됨/));
+    expect(screen.getByText("보관된 교재")).toBeInTheDocument();
+  });
+
+  it("보관해도 삭제가 아니라는 것을 문구로 알린다", () => {
+    render(<Wrapper initialDocs={[existingDocListItem, archivedDoc]} subjects={subjects} />);
+    fireEvent.click(screen.getByText(/^보관됨/));
+    expect(
+      screen.getByText(/이미 담긴 회차와 과거 수업 기록은\s*그대로 남아 있습니다/)
+    ).toBeInTheDocument();
+  });
+
+  it("보관 버튼이 서버 액션을 부른다", async () => {
+    vi.mocked(docActions.setDocArchived).mockResolvedValue({ ok: true });
+    render(<Wrapper initialDocs={[existingDocListItem]} subjects={subjects} />);
+    fireEvent.click(screen.getByText("보관"));
+    await waitFor(() => expect(docActions.setDocArchived).toHaveBeenCalledWith("doc1", true));
   });
 });

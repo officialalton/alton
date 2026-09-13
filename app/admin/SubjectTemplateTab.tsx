@@ -25,6 +25,8 @@ export default function SubjectTemplateTab({
 }) {
   const [openSubjectId, setOpenSubjectId] = useState<string | null>(null);
   const [adding, setAdding] = useState(false);
+  const [showArchived, setShowArchived] = useState(false);
+  const [query, setQuery] = useState("");
   const [newName, setNewName] = useState("");
   const [error, setError] = useState<string | null>(null);
 
@@ -77,6 +79,14 @@ export default function SubjectTemplateTab({
     );
   }
 
+  // 보관됨과 현재를 한 목록에 섞지 않는다. 기본 진입은 현재이고, 검색도 지금
+  // 보고 있는 구분 안에서만 동작한다 — 섞으면 "왜 이게 선택지에 안 나오지"를
+  // 목록만 보고 알 수 없다.
+  const visibleSubjects = subjects.filter((s) =>
+    (showArchived ? Boolean(s.archivedAt) : !s.archivedAt) &&
+    (query.trim() === "" || s.subjectName.toLowerCase().includes(query.trim().toLowerCase()))
+  );
+
   return (
     <div className="max-w-[640px] px-8 py-8">
       <h1 className="text-[20px] font-extrabold text-ink mb-1.5">과목 템플릿</h1>
@@ -85,7 +95,55 @@ export default function SubjectTemplateTab({
         다른 화면의 선택지로 그대로 사용됩니다.
       </p>
 
-      {subjects.map((s) => (
+      <div className="flex gap-1 mb-3 border-b-[1.5px] border-grey-200">
+        {[
+          { archived: false, label: "현재" },
+          { archived: true, label: "보관됨" },
+        ].map((t) => (
+          <button
+            key={t.label}
+            onClick={() => setShowArchived(t.archived)}
+            className={
+              "text-[13px] font-bold px-3.5 py-2 -mb-[1.5px] border-b-[2px] " +
+              (showArchived === t.archived
+                ? "border-ink text-ink"
+                : "border-transparent text-grey-500")
+            }
+          >
+            {t.label}
+            <span className="text-grey-300 font-semibold ml-1">
+              {subjects.filter((s) => (t.archived ? Boolean(s.archivedAt) : !s.archivedAt)).length}
+            </span>
+          </button>
+        ))}
+      </div>
+
+      <input
+        aria-label="과목 검색"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder={showArchived ? "보관된 과목에서 찾기" : "과목 이름으로 찾기"}
+        className="w-full text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 mb-3"
+      />
+
+      {showArchived && (
+        <p className="text-[12px] text-grey-500 mb-3">
+          보관된 과목은 새 배정·교재 생성 선택지에 나오지 않습니다. 기존 연결과 과거 기록은 그대로 남아 있어
+          여기서 열어볼 수 있습니다.
+        </p>
+      )}
+
+      {visibleSubjects.length === 0 && (
+        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center mb-3">
+          {query.trim()
+            ? "찾는 과목이 없습니다."
+            : showArchived
+              ? "보관된 과목이 없습니다."
+              : "아직 만든 과목이 없습니다."}
+        </div>
+      )}
+
+      {visibleSubjects.map((s) => (
         <div
           key={s.subjectId}
           className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5 flex items-center justify-between gap-3"

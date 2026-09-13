@@ -238,13 +238,16 @@ export type CurriculumDocListItem = {
   sectionCount: number;
   // P2 2차: 대표 키워드가 아직 없는 교재를 목록에서 찾아낼 수 있어야 한다.
   hasPrimaryKeyword: boolean;
+  // 보관된 교재는 현재 목록에서 빠지고 '보관됨'에서만 보인다.
+  archivedAt: string | null;
+  archivedReason: string | null;
 };
 
 export async function loadCurriculumDocList(supabase: SupabaseClient): Promise<CurriculumDocListItem[]> {
   const { data: docs } = await supabase
     .from("curriculum_docs")
     .select(
-      "id, title, status, subject_id, unit_id, primary_keyword_id, subject:subjects(name), unit:subject_template_units!curriculum_docs_unit_id_fkey(unit_title)"
+      "id, title, status, subject_id, unit_id, primary_keyword_id, archived_at, archived_reason, subject:subjects(name), unit:subject_template_units!curriculum_docs_unit_id_fkey(unit_title)"
     )
     .order("title", { ascending: true });
   if (!docs || docs.length === 0) return [];
@@ -270,5 +273,7 @@ export async function loadCurriculumDocList(supabase: SupabaseClient): Promise<C
     status: d.status,
     sectionCount: sectionCountByDoc.get(d.id) ?? 0,
     hasPrimaryKeyword: Boolean(d.primary_keyword_id),
+    archivedAt: (d.archived_at as string | null) ?? null,
+    archivedReason: (d.archived_reason as string | null) ?? null,
   }));
 }

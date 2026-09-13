@@ -86,7 +86,13 @@ describe("loadMySubjects", () => {
     });
     const result = await loadMySubjects(supabase as never, "2606bc3f-1d16-4f60-8e0e-5a2c2184e1d2");
     expect(result).toEqual([
-      { subjectId: "fff052c7-e78f-4100-9dcb-ace4d3bbd2bb", subjectName: "AP Calculus AB", templateId: null, units: [] },
+      {
+        subjectId: "fff052c7-e78f-4100-9dcb-ace4d3bbd2bb",
+        subjectName: "AP Calculus AB",
+        templateId: null,
+        units: [],
+        archived: false,
+      },
     ]);
   });
 });
@@ -103,7 +109,10 @@ describe("loadMySubjects — 배정만 된 과목", () => {
     expect(result[0].subjectName).toBe("SAT Reading Test 1");
   });
 
-  it("보관된 과목은 담당 과목 목록에 넣지 않는다", async () => {
+  // 2026-09-12 정정: 보관 과목을 목록에서 빼버리면 이 선생님이 쌓아 둔
+  // 커리큘럼에 들어갈 길이 없어진다. 빼지 않고 archived로 표시해 화면이
+  // '현재'와 '보관됨'으로 나눠 보여준다.
+  it("보관된 과목도 목록에 남기되 보관됨으로 표시한다", async () => {
     const supabase = makeSupabase({
       enrollments: [],
       assignments: [],
@@ -113,6 +122,8 @@ describe("loadMySubjects — 배정만 된 과목", () => {
       ],
     });
     const result = await loadMySubjects(supabase as never, "t1");
-    expect(result.map((s) => s.subjectId)).toEqual(["sub3"]);
+    expect(result.map((s) => s.subjectId).sort()).toEqual(["sub3", "sub9"]);
+    expect(result.find((s) => s.subjectId === "sub9")?.archived).toBe(true);
+    expect(result.find((s) => s.subjectId === "sub3")?.archived).toBe(false);
   });
 });

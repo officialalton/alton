@@ -136,7 +136,9 @@ describe("SubjectTemplateTab", () => {
       archivedReason: "교재 문서 1건이(가) 있어 보관 처리되었습니다.",
     };
     render(<Wrapper initialSubjects={[archivedSubject]} />);
-    expect(screen.getByText("보관됨")).toBeInTheDocument();
+    // 2026-09-12: 현재/보관됨을 나눠 보여준다. 보관된 과목은 '보관됨'에서 본다.
+    fireEvent.click(screen.getByText(/^보관됨/));
+    expect(screen.getAllByText("보관됨").length).toBeGreaterThan(0);
     expect(screen.getByText(/교재 문서 1건이\(가\) 있어 보관 처리되었습니다\./)).toBeInTheDocument();
   });
 

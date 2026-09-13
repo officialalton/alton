@@ -176,6 +176,36 @@ export type KeywordActionResult = { ok: true } | { ok: false; error: string };
  * 자동분은 다음 키워드 변경 때 맞춰진다. 과거 수업에 고정된 내용은 스냅샷이라
  * 어느 쪽이든 영향을 받지 않는다.
  */
+/**
+ * 교재를 보관하거나 보관을 푼다.
+ *
+ * **삭제가 아니다.** 보관된 교재는 신규 선택과 자동 구성 후보에서 빠지지만,
+ * 이미 회차에 담긴 것과 과거 수업에 고정된 내용은 그대로다 — 과거 수업이 읽는
+ * 것은 시작 시점의 매니페스트 스냅샷이고 그 조회는 id로 한다.
+ *
+ * 보관하면 이 교재를 대표 키워드로 쓰던 회차들의 자동 구성이 다시 맞춰진다
+ * (curriculum_docs_resync 트리거) — 선생님이 직접 담은 것은 건드리지 않는다.
+ */
+export async function setDocArchived(
+  docId: string,
+  archived: boolean,
+  reason?: string
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  const { supabase } = await requireAdmin();
+  const { error } = await supabase
+    .from("curriculum_docs")
+    .update({
+      archived_at: archived ? new Date().toISOString() : null,
+      archived_reason: archived ? reason?.trim() || null : null,
+    })
+    .eq("id", docId);
+  if (error) {
+    console.error(JSON.stringify({ event: "set_doc_archived_failed", message: error.message }));
+    return { ok: false, error: archived ? "보관하지 못했습니다." : "보관을 풀지 못했습니다." };
+  }
+  return { ok: true };
+}
+
 export async function setDocPrimaryKeyword(
   docId: string,
   keywordId: string | null,
