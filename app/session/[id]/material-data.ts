@@ -40,6 +40,14 @@ export type MaterialData = {
   title: string;
   sections: MaterialSection[];
   canvasStrokes: CanvasStroke[];
+  /**
+   * 이 수업이 쓴 교재 내용이 보존돼 있지 않다.
+   *
+   * 2026-09-13 확정: 고정된 버전이 없거나 그 내용을 확인할 수 없으면 **현재 교재로
+   * 조용히 대체하지 않는다.** 지금 내용을 보여주면 그 수업이 실제로 쓴 것이라는
+   * 거짓말이 된다. sections 는 비어 있고 화면이 사유를 말한다.
+   */
+  preservedUnavailable?: boolean;
 } | null;
 
 export async function loadMaterialData(
@@ -158,77 +166,127 @@ export async function loadPinnedMaterialData(
   sessionId: string
 ): Promise<MaterialData> {
   // 교재 전체(material_doc)와 과거의 조각 단위(material_section)를 함께 읽는다.
-  // 과거 수업은 조각으로 고정돼 있고, 그때 무엇을 보여줬는지는 그 시점의
-  // 사실이라 그대로 읽어야 한다.
   const { data: manifest } = await supabase
     .from("session_content_manifest")
-    .select("content_type, content_id, display_position")
+    .select("content_type, content_id, display_position, curriculum_doc_version_id")
     .eq("session_id", sessionId)
     .in("content_type", ["material_doc", "material_section"])
     .order("display_position", { ascending: true });
   if (!manifest?.length) return null;
 
-  // 교재 전체로 고정된 것은 그 교재의 모든 조각을 순서대로 펼친다.
-  const docIds = manifest
-    .filter((m) => m.content_type === "material_doc")
-    .map((m) => m.content_id as string);
-  const { data: docSections } = docIds.length
-    ? await supabase
-        .from("curriculum_doc_sections")
-        .select("id, curriculum_doc_id, position")
-        .in("curriculum_doc_id", docIds)
-        .order("position", { ascending: true })
-    : { data: [] as { id: string; curriculum_doc_id: string; position: number }[] };
+  const docId = manifest[0].content_type === "material_doc"
+    ? (manifest[0].content_id as string)
+    : await resolveSectionDocId(supabase, manifest[0].content_id as string);
 
-  const sectionIdsByDoc = new Map<string, string[]>();
-  for (const s of docSections ?? []) {
-    const key = s.curriculum_doc_id as string;
-    sectionIdsByDoc.set(key, [...(sectionIdsByDoc.get(key) ?? []), s.id as string]);
+  const { data: annotation } = docId
+    ? await supabase
+        .from("canvas_annotations")
+        .select("strokes")
+        .eq("session_id", sessionId)
+        .eq("curriculum_doc_id", docId)
+        .maybeSingle()
+    : { data: null };
+  const canvasStrokes = (annotation?.strokes as CanvasStroke[] | null) ?? [];
+
+  // 고정된 버전이 있으면 **그 버전의 스냅샷만** 읽는다. 살아 있는 본문은 보지
+  // 않는다 — 교재를 고쳐도 이 수업의 화면이 바뀌면 안 된다.
+  const versionIds = Array.from(
+    new Set(
+      manifest
+        .map((m) => m.curriculum_doc_version_id as string | null)
+        .filter((v): v is string => Boolean(v))
+    )
+  );
+
+  if (versionIds.length === 0) {
+    // 버전이 기록되지 않았다. 현재 내용으로 대체하지 않는다.
+    return {
+      docId: docId ?? "",
+      title: "이번 수업 교재",
+      sections: [],
+      canvasStrokes,
+      preservedUnavailable: true,
+    };
   }
 
-  const sectionIds = manifest.flatMap((m) =>
-    m.content_type === "material_doc"
-      ? sectionIdsByDoc.get(m.content_id as string) ?? []
-      : [m.content_id as string]
+  const { data: versions } = await supabase
+    .from("curriculum_doc_versions")
+    .select("id, curriculum_doc_id, snapshot")
+    .in("id", versionIds);
+
+  const snapshotById = new Map(
+    (versions ?? []).map((v) => [v.id as string, v.snapshot as DocSnapshot | null])
   );
-  if (!sectionIds.length) return null;
-  const { data: sections } = await supabase
-    .from("curriculum_doc_sections")
-    .select("id, title, body, teaching_tip, curriculum_doc_id")
-    .in("id", sectionIds);
-  if (!sections?.length) return null;
 
-  const byId = new Map(sections.map((s) => [s.id as string, s]));
-  const ordered = sectionIds.map((id) => byId.get(id)).filter((s): s is NonNullable<typeof s> => Boolean(s));
-  if (!ordered.length) return null;
+  const ordered: MaterialSection[] = [];
+  let title: string | null = null;
 
-  const docId = ordered[0].curriculum_doc_id as string;
-  const { data: doc } = await supabase
-    .from("curriculum_docs")
-    .select("id, title")
-    .eq("id", docId)
-    .maybeSingle();
+  for (const row of manifest) {
+    const snapshot = snapshotById.get(row.curriculum_doc_version_id as string);
+    const snapSections = snapshot?.sections ?? [];
+    if (title === null && snapshot?.title) title = snapshot.title;
 
-  const { data: annotation } = await supabase
-    .from("canvas_annotations")
-    .select("strokes")
-    .eq("session_id", sessionId)
-    .eq("curriculum_doc_id", docId)
-    .maybeSingle();
+    if (row.content_type === "material_doc") {
+      for (const sec of [...snapSections].sort((a, b) => a.position - b.position)) {
+        ordered.push(toMaterialSection(sec));
+      }
+    } else {
+      const sec = snapSections.find((x) => x.id === row.content_id);
+      if (sec) ordered.push(toMaterialSection(sec));
+    }
+  }
+
+  if (ordered.length === 0) {
+    // 버전은 가리키는데 내용이 비어 있다 — 스냅샷이 불완전하다.
+    return {
+      docId: docId ?? "",
+      title: title ?? "이번 수업 교재",
+      sections: [],
+      canvasStrokes,
+      preservedUnavailable: true,
+    };
+  }
 
   return {
-    docId,
-    title: (doc?.title as string) ?? "이번 수업 교재",
-    sections: ordered.map((s) => ({
-      id: s.id as string,
-      title: s.title as string,
-      body: (s.body as string) ?? "",
-      teachingTip: (s.teaching_tip as string | null) ?? null,
-      // 문제는 "문제" 탭에서 고정된 버전으로 다룬다 — 교재 안에 섞지 않는다.
-      problems: [],
-    })),
-    canvasStrokes: (annotation?.strokes as CanvasStroke[] | null) ?? [],
+    docId: docId ?? "",
+    title: title ?? "이번 수업 교재",
+    sections: ordered,
+    canvasStrokes,
   };
+}
+
+/** 버전 스냅샷의 모양(curriculum_doc_snapshot 이 만든다). */
+type DocSnapshot = {
+  title?: string;
+  sections?: { id: string; position: number; title: string; body: string | null; teachingTip: string | null }[];
+};
+
+function toMaterialSection(sec: {
+  id: string;
+  title: string;
+  body: string | null;
+  teachingTip: string | null;
+}): MaterialSection {
+  return {
+    id: sec.id,
+    title: sec.title,
+    body: sec.body ?? "",
+    teachingTip: sec.teachingTip ?? null,
+    // 문제는 "문제" 탭에서 고정된 버전으로 다룬다 — 교재 안에 섞지 않는다.
+    problems: [],
+  };
+}
+
+async function resolveSectionDocId(
+  supabase: SupabaseClient,
+  sectionId: string
+): Promise<string | null> {
+  const { data } = await supabase
+    .from("curriculum_doc_sections")
+    .select("curriculum_doc_id")
+    .eq("id", sectionId)
+    .maybeSingle();
+  return (data?.curriculum_doc_id as string | null) ?? null;
 }
 
 /**
