@@ -110,6 +110,20 @@ export async function GET() {
       q.eq("content_type", "problem")) as never),
   };
 
+  // 키 단위 대조 — 건수만 비교하면 한 행이 빠지고 다른 행이 두 번 세어져도 합이
+  // 같아 통과한다(2026-09-13 지시).
+  const { data: keyRows } = await admin
+    .from("prep_version_coverage_keys")
+    .select("layer, kind, row_key");
+  const keys = (keyRows ?? []) as { layer: string; kind: string; row_key: string }[];
+  const seen = new Set<string>();
+  const duplicateKeys: string[] = [];
+  for (const k of keys) {
+    const full = `${k.layer}:${k.kind}:${k.row_key}`;
+    if (seen.has(full)) duplicateKeys.push(full);
+    seen.add(full);
+  }
+
   const coveredTotal = groups.reduce((sum, g) => sum + g.total, 0);
   const rawTotal = Object.values(rawTotals).reduce<number>(
     (sum, v) => sum + (v ?? 0),
@@ -163,11 +177,19 @@ export async function GET() {
     reconciliation: {
       note:
         "stateSumMatchesTotal 은 조회된 대상 안에서만 합이 맞는다는 뜻입니다. " +
-        "대상 누락·중복은 아래 원본 행 수 대조로 확인합니다.",
+        "matches 는 원본 행 수·집계 합·서로 다른 키 수가 모두 같고 중복 키가 " +
+        "없을 때만 true 입니다 — 건수만 비교하면 누락과 중복이 상쇄됩니다.",
       rawTotals,
       rawTotal,
       coveredTotal,
-      matches: rawTotal === coveredTotal,
+      distinctKeys: seen.size,
+      duplicateKeyCount: duplicateKeys.length,
+      duplicateKeysSample: duplicateKeys.slice(0, 10),
+      // 셋이 모두 같아야 누락·중복이 없다. 건수만 같은 것으로는 부족하다.
+      matches:
+        rawTotal === coveredTotal &&
+        coveredTotal === seen.size &&
+        duplicateKeys.length === 0,
     },
     bodyReferences: {
       note:

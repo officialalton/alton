@@ -188,3 +188,92 @@ describe("공개 경로에서 스냅샷이 실제로 생긴다", () => {
     expect(versionCount(docId)).toBe("2");
   });
 });
+
+// 지시 — "재공개 시 스냅샷 생성이 실패하면 공개 성공으로 응답하지 않아야 합니다.
+// 공개 처리와 버전 생성의 일관성, 중복 클릭·동시 요청 시 버전 번호 충돌."
+describe("공개와 버전 생성의 일관성", () => {
+  const versionCount = (docId: string) =>
+    psql(`select count(*) from curriculum_doc_versions where curriculum_doc_id = '${docId}';`);
+  const statusOf = (docId: string) =>
+    psql(`select status from curriculum_docs where id = '${docId}';`);
+
+  function makeDraft(): string {
+    const docId = psql(
+      `insert into curriculum_docs (title, subject_id, owner_type, status)
+       values ('교재 ${uniq()}', '${SUBJECT_ID}', 'admin', 'draft') returning id;`
+    );
+    cleanupDocIds.push(docId);
+    psql(
+      `insert into curriculum_doc_sections (curriculum_doc_id, position, title, body)
+       values ('${docId}', 1, '1절', '본문');`
+    );
+    return docId;
+  }
+
+  it("초안 → 공개: 상태와 버전이 함께 생긴다", () => {
+    const docId = makeDraft();
+    psql(`select publish_curriculum_doc('${docId}', true);`);
+    expect(statusOf(docId)).toBe("published");
+    expect(versionCount(docId)).toBe("1");
+  });
+
+  it("재공개: 기존 버전을 고치지 않고 새 버전을 만든다", () => {
+    const docId = makeDraft();
+    psql(`select publish_curriculum_doc('${docId}', true);`);
+    psql(`update curriculum_doc_sections set body = '고친 본문' where curriculum_doc_id = '${docId}';`);
+    psql(`select publish_curriculum_doc('${docId}', true);`);
+
+    expect(versionCount(docId)).toBe("2");
+    // 1번은 처음 내용 그대로, 2번이 고친 내용이다.
+    expect(
+      psql(
+        `select snapshot->'sections'->0->>'body' from curriculum_doc_versions
+         where curriculum_doc_id = '${docId}' and version_number = 1;`
+      )
+    ).toBe("본문");
+    expect(
+      psql(
+        `select snapshot->'sections'->0->>'body' from curriculum_doc_versions
+         where curriculum_doc_id = '${docId}' and version_number = 2;`
+      )
+    ).toBe("고친 본문");
+  });
+
+  it("버전을 남기지 못하면 공개도 되돌아간다", () => {
+    const docId = makeDraft();
+    // 버전 테이블 쓰기를 막아 캡처를 실패시킨다. 같은 트랜잭션이므로 상태도
+    // 함께 되돌아가야 한다 — "공개됐는데 내용은 없는" 상태가 남으면 안 된다.
+    psql(
+      `create or replace function tmp_block_version_insert() returns trigger language plpgsql as $fn$
+       begin raise exception '일부러 실패'; end; $fn$;
+       create trigger tmp_block_version_insert before insert on curriculum_doc_versions
+       for each row execute function tmp_block_version_insert();`
+    );
+    try {
+      expect(() => psql(`select publish_curriculum_doc('${docId}', true);`)).toThrow();
+      expect(statusOf(docId)).toBe("draft");
+      expect(versionCount(docId)).toBe("0");
+    } finally {
+      psql(
+        `drop trigger if exists tmp_block_version_insert on curriculum_doc_versions;
+         drop function if exists tmp_block_version_insert();`
+      );
+    }
+  });
+
+  it("중복 클릭에도 버전 번호가 충돌하지 않고 순서대로 쌓인다", () => {
+    const docId = makeDraft();
+    psql(`select publish_curriculum_doc('${docId}', true);`);
+    // 같은 요청을 연달아 세 번. advisory lock 이 직렬화한다.
+    psql(`select publish_curriculum_doc('${docId}', true);`);
+    psql(`select publish_curriculum_doc('${docId}', true);`);
+    psql(`select publish_curriculum_doc('${docId}', true);`);
+
+    expect(
+      psql(
+        `select string_agg(version_number::text, ',' order by version_number)
+         from curriculum_doc_versions where curriculum_doc_id = '${docId}';`
+      )
+    ).toBe("1,2,3,4");
+  });
+});

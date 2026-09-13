@@ -67,32 +67,16 @@ export async function updateDocTitle(docId: string, title: string): Promise<void
 export async function setDocPublished(docId: string, published: boolean): Promise<void> {
   const { supabase } = await requireAdmin();
 
-  // 이미 공개된 교재를 다시 공개하는 경우를 먼저 가른다. 그때는 status 가 바뀌지
-  // 않아 스냅샷 트리거(20261327000000)가 돌지 않는다 — 내용을 고쳐 놓고 재공개해도
-  // 새 버전이 생기지 않아, 살아 있는 본문과 최신 스냅샷이 벌어진다.
-  const { data: before } = await supabase
-    .from("curriculum_docs")
-    .select("status")
-    .eq("id", docId)
-    .maybeSingle();
-  const wasPublished = (before?.status as string | undefined) === "published";
-
-  const { error } = await supabase
-    .from("curriculum_docs")
-    .update({ status: published ? "published" : "draft" })
-    .eq("id", docId);
+  // 상태 변경과 버전 생성을 한 트랜잭션으로 묶는다(20261331000000).
+  //
+  // 예전에는 UPDATE 한 번, 캡처 RPC 한 번이라 캡처가 실패해도 상태 변경은 이미
+  // 커밋돼 있었다 — "공개됐는데 그 시점 내용은 남지 않은" 상태가 남는다. 동시
+  // 요청이 같은 버전 번호를 계산해 깨지는 것도 DB 쪽 advisory lock 으로 막는다.
+  const { error } = await supabase.rpc("publish_curriculum_doc", {
+    p_doc_id: docId,
+    p_published: published,
+  });
   if (error) throw new Error(error.message);
-
-  // 재공개 = 새 버전. 공개한 버전은 고치지 않는다는 규칙을 지키려면 여기서 한 벌
-  // 더 떠야 한다. 최초 공개는 트리거가 이미 떴으므로 중복해서 뜨지 않는다.
-  if (published && wasPublished) {
-    const { error: captureError } = await supabase.rpc("capture_curriculum_doc_version", {
-      p_doc_id: docId,
-      p_origin: "publish",
-      p_note: "재공개",
-    });
-    if (captureError) throw new Error(captureError.message);
-  }
 }
 
 export async function addSection(
