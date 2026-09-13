@@ -343,6 +343,16 @@ function NewDocForm({
         unitTitle: selectedSubject?.units.find((u) => u.id === unitId)?.unitTitle ?? null,
         status: "draft",
         sections: [],
+        // 2026-09-12(UAT): 이 둘이 빠져 있어서 방금 만든 교재의 편집 화면에
+        // 대표 키워드 선택지가 비어 보였다("다시 들어가니까 나온다"의 원인 —
+        // 로딩이 느린 게 아니라 처음부터 없었다). 만든 직후에도 같은 화면을
+        // 보여주려면 여기서 함께 넘겨야 한다.
+        subjectKeywords: selectedSubject?.keywords ?? [],
+        subjectUnits: (selectedSubject?.units ?? []).map((u) => ({
+          id: u.id,
+          unitTitle: u.unitTitle,
+          position: u.position,
+        })),
       });
     } finally {
       setCreating(false);

@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { loadArchivedHouseholdIds } from "./users-data";
 
 export type PendingConsult = {
   id: string;
@@ -56,10 +57,58 @@ export async function loadAdminDashboard(
     .not("scheduled_at", "is", null)
     .order("scheduled_at", { ascending: true });
 
-  const { data: pendingStudentRows } = await supabase
-    .from("students")
-    .select("id, profile:profiles(name)")
-    .eq("status", "pending");
+  // 2026-09-12(UAT 지적) — 이 카드는 "학생 매칭 대기"인데 students.status가
+  // 'pending'인 학생을 세고 있었다. 그건 **계정 가입 대기**이지 매칭 대기가
+  // 아니다. 그래서 매칭과 무관한 학생들이 이 카드에 올라왔다.
+  //
+  // 매칭 대기 = 수강 중인 과목이 있는데 그 과목에 **활성 담당 교사가 없는**
+  // 학생. 담당이 붙으면 이 목록에서 저절로 빠진다.
+  const { data: openEnrollments } = await supabase
+    .from("subject_enrollments")
+    .select("id, child_id, status")
+    .in("status", ["planned", "active"]);
+
+  const enrollmentIds = (openEnrollments ?? []).map((e) => e.id as string);
+  const { data: activeAssignments } = enrollmentIds.length
+    ? await supabase
+        .from("teacher_assignments")
+        .select("subject_enrollment_id")
+        .eq("status", "active")
+        .in("subject_enrollment_id", enrollmentIds)
+    : { data: [] as { subject_enrollment_id: string }[] };
+
+  const matchedEnrollmentIds = new Set(
+    (activeAssignments ?? []).map((a) => a.subject_enrollment_id as string)
+  );
+  const waitingChildIds = Array.from(
+    new Set(
+      (openEnrollments ?? [])
+        .filter((e) => !matchedEnrollmentIds.has(e.id as string))
+        .map((e) => e.child_id as string)
+    )
+  );
+
+  // 아카이브된 가구의 자녀는 매칭 대상이 아니다(매칭 탭과 같은 기준).
+  const archivedHouseholdIds = await loadArchivedHouseholdIds(supabase);
+  const { data: childLinks } = waitingChildIds.length
+    ? await supabase
+        .from("household_members")
+        .select("profile_id, household_id")
+        .eq("role", "child")
+        .in("profile_id", waitingChildIds)
+    : { data: [] as { profile_id: string; household_id: string }[] };
+  const householdByChild = new Map(
+    (childLinks ?? []).map((l) => [l.profile_id as string, l.household_id as string])
+  );
+
+  const visibleChildIds = waitingChildIds.filter((id) => {
+    const householdId = householdByChild.get(id);
+    return !householdId || !archivedHouseholdIds.has(householdId);
+  });
+
+  const { data: pendingStudentRows } = visibleChildIds.length
+    ? await supabase.from("students").select("id, profile:profiles(name)").in("id", visibleChildIds)
+    : { data: [] as { id: string; profile: unknown }[] };
 
   const { data: pendingTeacherRows } = await supabase
     .from("teachers")

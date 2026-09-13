@@ -42,12 +42,22 @@ export async function GET() {
   const admin = createAdminClient();
 
   // 보존 계정 — 실제 사용자 id를 확인해 두어야 정리 대상에서 확실히 뺄 수 있다.
+  //
+  // 한 번만 읽으면 페이지 밖의 계정을 "없다"고 단정하게 된다. 끝까지 넘긴다.
+  const allUsers: { id: string; email: string | null }[] = [];
+  for (let page = 1; page <= 20; page += 1) {
+    const { data: userPage, error } = await admin.auth.admin.listUsers({ page, perPage: 200 });
+    if (error) break;
+    const batch = userPage?.users ?? [];
+    for (const u of batch) allUsers.push({ id: u.id, email: u.email ?? null });
+    if (batch.length < 200) break;
+  }
+
+  const norm = (v: string | null) => (v ?? "").trim().toLowerCase();
+
   const preserved: Array<{ email: string; found: boolean; userId?: string; role?: string }> = [];
-  const { data: userPage } = await admin.auth.admin.listUsers({ page: 1, perPage: 1000 });
   for (const email of PRESERVED_EMAILS) {
-    const user = (userPage?.users ?? []).find(
-      (u) => (u.email ?? "").toLowerCase() === email.toLowerCase()
-    );
+    const user = allUsers.find((u) => norm(u.email) === norm(email));
     if (!user) {
       preserved.push({ email, found: false });
       continue;
@@ -61,6 +71,20 @@ export async function GET() {
   }
 
   const preservedIds = preserved.filter((p) => p.userId).map((p) => p.userId as string);
+
+  // 보존 계정을 못 찾았을 때 "왜 못 찾았는지"를 볼 수 있어야 한다. 이메일 목록이
+  // 없으면 다음 단계가 추측이 된다. 관리자·교사만 (적은 수) 돌려준다 —
+  // 학생·보호자 이메일은 이 집계에 필요하지 않다.
+  const { data: staffRows } = await admin
+    .from("profiles")
+    .select("id, role, name")
+    .in("role", ["admin", "teacher"]);
+  const staffAccounts = (staffRows ?? []).map((r) => ({
+    userId: r.id as string,
+    role: r.role as string,
+    name: r.name as string,
+    email: allUsers.find((u) => u.id === r.id)?.email ?? null,
+  }));
   const nowIso = new Date().toISOString();
 
   const [
@@ -139,6 +163,10 @@ export async function GET() {
     generatedAt: nowIso,
     note: "읽기 전용 집계입니다. 이 경로는 아무것도 바꾸지 않습니다.",
     preserved,
+    // 보존 계정을 식별하지 못하면 정리를 시작하면 안 된다 — 이 줄이 그 판단의 근거다.
+    preservedAllFound: preserved.every((p) => p.found),
+    authUsersScanned: allUsers.length,
+    staffAccounts,
     users: { total: profilesTotal, byRole },
     households: { total: households, alreadyArchived: householdsArchived },
     subjects: { total: subjects, alreadyArchived: subjectsArchived },

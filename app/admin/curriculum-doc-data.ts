@@ -37,6 +37,9 @@ export type DocEditorData = {
   sections: DocSection[];
   // R9(Task 2): 이 교재가 속한 과목의 공용 키워드 사전 전체(태깅 picker용).
   subjectKeywords?: SubjectKeyword[];
+  // 이 과목의 단원 목록. 교재를 만들 때 단원을 안 정했어도 나중에 바꿀 수
+  // 있어야 한다 — 편집 화면이 이 목록으로 고르게 한다.
+  subjectUnits?: { id: string; unitTitle: string; position: number }[];
   // P2 2차: 교재당 대표 키워드 1개. null은 "아직 정하지 않음"이다.
   primaryKeywordId: string | null;
   // 그 키워드 안에서의 기본 교재 순서. null이면 제목순으로 뒤에 붙는다.
@@ -107,8 +110,12 @@ export async function loadCurriculumDocsByIds(
 
   // R9(Task 2) N+1 방지: 문서마다/섹션마다/문제마다 따로 조회하지 않고,
   // 이번 페이지에 등장하는 과목/섹션/문제 id 전체에 대해 각각 한 번씩만 조회한다.
-  const [{ data: subjectKeywordRows }, { data: sectionKeywordRows }, { data: problemKeywordRows }] =
-    await Promise.all([
+  const [
+    { data: subjectKeywordRows },
+    { data: sectionKeywordRows },
+    { data: problemKeywordRows },
+    { data: subjectUnitRows },
+  ] = await Promise.all([
       subjectIds.length
         ? supabase
             .from("subject_keywords")
@@ -127,6 +134,13 @@ export async function loadCurriculumDocsByIds(
             .from("problem_keywords")
             .select("problem_id, keyword:subject_keywords(id, label, status)")
             .in("problem_id", problemIds)
+        : Promise.resolve({ data: [] as never[] }),
+      subjectIds.length
+        ? supabase
+            .from("subject_template_units")
+            .select("id, subject_id, unit_title, position")
+            .in("subject_id", subjectIds)
+            .order("position", { ascending: true })
         : Promise.resolve({ data: [] as never[] }),
     ]);
 
@@ -164,6 +178,15 @@ export async function loadCurriculumDocsByIds(
     list.push({ id: row.id, label: row.label, status: row.status });
     keywordsBySubject.set(row.subject_id, list);
   }
+
+  const unitsBySubject = new Map<string, { id: string; unitTitle: string; position: number }[]>();
+  for (const u of subjectUnitRows ?? []) {
+    const row = u as { id: string; subject_id: string; unit_title: string; position: number };
+    const list = unitsBySubject.get(row.subject_id) ?? [];
+    list.push({ id: row.id, unitTitle: row.unit_title, position: row.position });
+    unitsBySubject.set(row.subject_id, list);
+  }
+  for (const list of unitsBySubject.values()) list.sort((a, b) => a.position - b.position);
 
   const problemsBySection = new Map<string, DocProblem[]>();
   for (const p of problems ?? []) {
@@ -207,6 +230,7 @@ export async function loadCurriculumDocsByIds(
     status: d.status,
     sections: sectionsByDoc.get(d.id) ?? [],
     subjectKeywords: keywordsBySubject.get(d.subject_id) ?? [],
+    subjectUnits: unitsBySubject.get(d.subject_id) ?? [],
     primaryKeywordId: (d.primary_keyword_id as string | null) ?? null,
     primaryKeywordPosition: (d.primary_keyword_position as number | null) ?? null,
   }));

@@ -5,6 +5,7 @@ import {
   updateDocTitle,
   setDocPublished,
   setDocPrimaryKeyword,
+  setDocUnit,
   addSection,
   updateSection,
   removeSection,
@@ -14,8 +15,6 @@ import {
   confirmSectionProblems,
   removeSectionProblem,
   deleteCurriculumDoc,
-  assignSectionKeyword,
-  removeSectionKeyword,
   assignProblemKeyword,
   removeProblemKeyword,
   createSubjectKeywordForDoc,
@@ -63,6 +62,15 @@ export default function CurriculumDocEditor({
     doc.primaryKeywordPosition === null ? "" : String(doc.primaryKeywordPosition)
   );
   const [primaryError, setPrimaryError] = useState<string | null>(null);
+  // 교재를 만들 때 단원을 안 정했어도 여기서 정할 수 있어야 한다.
+  const [unitId, setUnitId] = useState(doc.unitId ?? "");
+  const [unitError, setUnitError] = useState<string | null>(null);
+
+  async function saveUnit(nextUnitId: string) {
+    setUnitError(null);
+    const result = await setDocUnit(doc.id, nextUnitId || null);
+    if (!result.ok) setUnitError(result.error);
+  }
 
   async function savePrimaryKeyword(keywordId: string, positionText: string) {
     setPrimaryError(null);
@@ -182,6 +190,29 @@ export default function CurriculumDocEditor({
         {status === "published" ? "배포됨" : "초안"}
       </p>
 
+      <div className="mb-3 border-[1.5px] border-grey-200 rounded-xl p-3.5">
+        <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2">
+          단원
+        </div>
+        <select
+          aria-label="단원"
+          value={unitId}
+          onChange={(e) => {
+            setUnitId(e.target.value);
+            void saveUnit(e.target.value);
+          }}
+          className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 max-w-[300px]"
+        >
+          <option value="">단원 없음</option>
+          {(doc.subjectUnits ?? []).map((u) => (
+            <option key={u.id} value={u.id}>
+              {u.unitTitle}
+            </option>
+          ))}
+        </select>
+        {unitError && <p className="text-[12px] text-red mt-1.5">{unitError}</p>}
+      </div>
+
       {/* 대표 키워드 — 이 교재를 어느 키워드의 기본 교재로 둘 것인가.
           회차에 그 키워드가 붙으면 이 교재가 자동으로 구성에 들어간다. */}
       <div className="mb-6 border-[1.5px] border-grey-200 rounded-xl p-3.5">
@@ -231,7 +262,6 @@ export default function CurriculumDocEditor({
           isLast={idx === sections.length - 1}
           subjectId={doc.subjectId}
           subjectName={doc.subjectName}
-          docStatus={status}
           catalog={catalog}
           onCatalogAdd={(kw) => setCatalog((prev) => [...prev, kw])}
           onPatch={(patch) => patchSection(section.id, patch)}
@@ -319,7 +349,6 @@ function SectionEditor({
   isLast,
   subjectId,
   subjectName,
-  docStatus,
   catalog,
   onCatalogAdd,
   onPatch,
@@ -332,7 +361,6 @@ function SectionEditor({
   isLast: boolean;
   subjectId: string;
   subjectName: string;
-  docStatus: string;
   catalog: SubjectKeyword[];
   onCatalogAdd: (keyword: SubjectKeyword) => void;
   onPatch: (patch: Partial<DocSection>) => void;
@@ -343,7 +371,6 @@ function SectionEditor({
   const [showProblemForm, setShowProblemForm] = useState(
     section.sectionType === "problem" && section.problems.length === 0
   );
-  const [sectionKeywords, setSectionKeywords] = useState(section.keywords ?? []);
 
   function commitProblems(next: DocProblem[]) {
     setProblems(next);
@@ -390,42 +417,15 @@ function SectionEditor({
         </button>
       </div>
 
-      <div className="mb-3">
-        <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-1">
-          키워드
-        </div>
-        <KeywordTagger
-          assigned={sectionKeywords}
-          catalog={catalog}
-          disabledReason={
-            docStatus !== "published"
-              ? "교재를 배포(published)해야 이 섹션에 키워드를 태그할 수 있습니다."
-              : null
-          }
-          onCreate={async (label) => {
-            // 2026-09-10(P0-2 확장) — 서버 액션은 { ok, error }로 반환하고,
-            // 여기서 KeywordTagger의 기존 reject 계약으로 다시 바꾼다.
-            const result = await createSubjectKeywordForDoc(subjectId, label);
-            if (!result.ok) throw new Error(result.error);
-            onCatalogAdd(result.value);
-            return result.value;
-          }}
-          onAssign={async (kw) => {
-            const result = await assignSectionKeyword(section.id, kw.id);
-            if (!result.ok) throw new Error(result.error);
-            const next = [...sectionKeywords, kw];
-            setSectionKeywords(next);
-            onPatch({ keywords: next });
-          }}
-          onRemove={async (kw) => {
-            const result = await removeSectionKeyword(section.id, kw.id);
-            if (!result.ok) throw new Error(result.error);
-            const next = sectionKeywords.filter((k) => k.id !== kw.id);
-            setSectionKeywords(next);
-            onPatch({ keywords: next });
-          }}
-        />
-      </div>
+      {/* 2026-09-12(UAT 확정) — 섹션별 키워드 입력을 없앴다. 교재 단위 대표
+          키워드와 기능이 겹친다: 회차에 키워드가 붙으면 그 키워드를 대표
+          키워드로 갖는 **교재 전체**가 구성에 들어가고, 수업에 담기는 것도
+          교재 단위다. 조각마다 다시 키워드를 매기는 층은 더 이상 하는 일이
+          없으면서 "여기도 매겨야 하나"만 남긴다.
+
+          기존에 매겨진 섹션 키워드 데이터는 지우지 않았다 — 과거 기록이고,
+          curriculum_doc_section_keywords_selectable을 읽는 과거 수업 조회
+          경로가 그대로 살아 있어야 한다. 새로 매기는 자리만 없앤다. */}
 
       {section.sectionType === "concept" && (
         <>

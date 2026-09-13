@@ -48,6 +48,7 @@ const subjects: AdminSubject[] = [
     subjectId: "sub1",
     subjectName: "SAT Math",
     units: [{ id: "u1", position: 1, unitTitle: "함수의 기초", note: null }],
+    keywords: [{ id: "kw1", label: "이차방정식", status: "active" }],
   },
 ];
 
@@ -220,5 +221,31 @@ describe("교재 현재/보관됨 분리", () => {
     render(<Wrapper initialDocs={[existingDocListItem]} subjects={subjects} />);
     fireEvent.click(screen.getByText("보관"));
     await waitFor(() => expect(docActions.setDocArchived).toHaveBeenCalledWith("doc1", true));
+  });
+});
+
+// 2026-09-12(UAT) — 방금 만든 교재의 편집 화면에서 대표 키워드 선택지가 비어
+// 보였다. 로딩이 느린 게 아니라 만들 때 넘기는 객체에 과목 키워드·단원이
+// 아예 없었다. "다시 들어가니까 나온다"가 그 증거다(그때는 상세를 조회한다).
+describe("새로 만든 교재도 과목 키워드·단원을 바로 쓴다", () => {
+  it("만든 직후 에디터에서 대표 키워드와 단원을 고를 수 있다", async () => {
+    vi.mocked(docActions.createCurriculumDoc).mockResolvedValue({ id: "doc2" });
+    render(<Wrapper initialDocs={[]} subjects={subjects} />);
+
+    fireEvent.click(screen.getByText("+ 새 교재 만들기"));
+    fireEvent.change(screen.getByPlaceholderText("예: 이차방정식 개념 정리"), {
+      target: { value: "새 교재" },
+    });
+    fireEvent.click(screen.getByText("SAT Math"));
+    fireEvent.click(screen.getByText("만들기"));
+
+    await waitFor(() => expect(screen.getByDisplayValue("새 교재")).toBeInTheDocument());
+
+    // 상세를 다시 조회하지 않고도(= 다시 들어가지 않아도) 선택지가 있어야 한다.
+    const unitSelect = screen.getByLabelText("단원") as HTMLSelectElement;
+    expect(unitSelect.querySelectorAll("option").length).toBeGreaterThan(1);
+
+    const keywordSelect = screen.getByLabelText("대표 키워드") as HTMLSelectElement;
+    expect(keywordSelect.querySelectorAll("option").length).toBeGreaterThan(1);
   });
 });

@@ -5,7 +5,11 @@ import {
   computeSessionViewState,
 } from "@/lib/auth";
 import SessionShell from "./SessionShell";
-import { loadMaterialData, loadPinnedMaterialData } from "./material-data";
+import {
+  loadMaterialData,
+  loadPinnedMaterialData,
+  loadPlannedMaterialData,
+} from "./material-data";
 import { loadVocabWords } from "./vocab-data";
 import { loadHomeworkItems } from "./homework-data";
 import { loadDocLinks, parseWhiteboardStrokes } from "./scratchpad-data";
@@ -59,6 +63,8 @@ export default async function SessionPage({
   // 교재가 없는 수업(준비 없이 시작했거나 레거시)만 기존 경로로 내려간다.
   const material =
     (session.source === "v3" ? await loadPinnedMaterialData(supabase, session.id) : null) ??
+    // 수업 시작 전에는 고정된 내용이 없다 — 회차 교재 구성을 예정 내용으로 보여준다.
+    (session.source === "v3" ? await loadPlannedMaterialData(supabase, session.id) : null) ??
     (await loadMaterialData(supabase, session.curriculumDocId, session.id, session.studentId));
 
   const vocabWords = await loadVocabWords(supabase, session.studentId);

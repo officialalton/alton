@@ -186,6 +186,41 @@ export type KeywordActionResult = { ok: true } | { ok: false; error: string };
  * 보관하면 이 교재를 대표 키워드로 쓰던 회차들의 자동 구성이 다시 맞춰진다
  * (curriculum_docs_resync 트리거) — 선생님이 직접 담은 것은 건드리지 않는다.
  */
+/**
+ * 교재가 속한 단원을 바꾼다. null이면 단원 없음.
+ *
+ * 교재를 만들 때 단원을 안 정했으면 나중에 정할 길이 없었다 — 편집 화면에
+ * 그 입력이 아예 없어서, 다시 만드는 것 말고는 방법이 없었다.
+ */
+export async function setDocUnit(
+  docId: string,
+  unitId: string | null
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  const { supabase } = await requireAdmin();
+
+  if (unitId) {
+    // 다른 과목의 단원을 붙이면 교재가 과목 경계를 넘어 새어 나간다.
+    const [{ data: doc }, { data: unit }] = await Promise.all([
+      supabase.from("curriculum_docs").select("subject_id").eq("id", docId).maybeSingle(),
+      supabase.from("subject_template_units").select("subject_id").eq("id", unitId).maybeSingle(),
+    ]);
+    if (!doc || !unit) return { ok: false, error: "존재하지 않는 교재 또는 단원입니다." };
+    if (doc.subject_id !== unit.subject_id) {
+      return { ok: false, error: "교재와 단원은 같은 과목이어야 합니다." };
+    }
+  }
+
+  const { error } = await supabase
+    .from("curriculum_docs")
+    .update({ unit_id: unitId })
+    .eq("id", docId);
+  if (error) {
+    console.error(JSON.stringify({ event: "set_doc_unit_failed", message: error.message }));
+    return { ok: false, error: "단원을 저장하지 못했습니다." };
+  }
+  return { ok: true };
+}
+
 export async function setDocArchived(
   docId: string,
   archived: boolean,

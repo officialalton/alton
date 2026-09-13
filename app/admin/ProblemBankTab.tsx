@@ -14,6 +14,7 @@ import {
   type ProblemVersionRow,
   type ProblemBankFilter,
 } from "./problem-bank-actions";
+import { listSubjectCatalogAction } from "./subject-actions";
 import type { AdminSubject } from "./subject-data";
 
 // P2 3차 — 관리자 문제은행. 교재와 독립된 진입점이다.
@@ -31,6 +32,28 @@ const WORK_STATE_LABEL: Record<BankProblem["workState"], string> = {
 const FORMAT_LABEL: Record<string, string> = { mc: "객관식", essay: "서술형", math: "수식" };
 
 export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] }) {
+  // SSR prop은 탭 조건부로 오기 때문에(app/admin/page.tsx의 need(...)) 목록에서
+  // 빠지면 과목이 통째로 비어 버린다 — 실제로 그랬다. 화면이 그 목록에 기대지
+  // 않도록 스스로 불러온다. prop이 이미 있으면 그것으로 먼저 그리고 뒤에서 갱신한다.
+  const [catalog, setCatalog] = useState<AdminSubject[] | null>(
+    subjects.length ? subjects : null
+  );
+  const [catalogError, setCatalogError] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    listSubjectCatalogAction()
+      .then((rows) => {
+        if (!cancelled) setCatalog(rows);
+      })
+      .catch(() => {
+        if (!cancelled && !subjects.length) setCatalogError(true);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [subjects.length]);
+
   const [filter, setFilter] = useState<ProblemBankFilter>({});
   const [problems, setProblems] = useState<BankProblem[] | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -71,7 +94,7 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
     }
   }
 
-  const activeSubjects = subjects.filter((s) => !s.archivedAt);
+  const activeSubjects = (catalog ?? []).filter((s) => !s.archivedAt);
 
   return (
     <div className="max-w-[880px] px-8 py-8">
@@ -101,6 +124,20 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
           </button>
         ))}
       </div>
+
+      {catalog === null && !catalogError && (
+        <p className="text-[12.5px] text-grey-500 mb-3">과목을 불러오는 중...</p>
+      )}
+      {catalogError && (
+        <p className="text-[12.5px] text-red mb-3">
+          과목을 불러오지 못했습니다. 새로고침 후 다시 시도해주세요.
+        </p>
+      )}
+      {catalog !== null && activeSubjects.length === 0 && (
+        <p className="text-[12.5px] text-grey-500 mb-3">
+          먼저 커리큘럼에서 과목을 만들어야 문제를 추가할 수 있습니다.
+        </p>
+      )}
 
       <Filters
         subjects={activeSubjects}

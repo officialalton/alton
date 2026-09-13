@@ -94,7 +94,7 @@ export default async function AdminHomePage({
     openOrRecentPaymentDisputes,
   ] = await Promise.all([
     need("home") ? loadAdminDashboard(supabase, user.id) : Promise.resolve(EMPTY_DASHBOARD),
-    need("catalog", "users", "consult", "matching") ? loadSubjectCatalog(supabase) : Promise.resolve([]),
+    need("catalog", "users", "consult", "matching", "problem-bank") ? loadSubjectCatalog(supabase) : Promise.resolve([]),
     need("catalog") ? loadCurriculumDocList(supabase) : Promise.resolve([]),
     need("billing") ? loadStudents(supabase) : Promise.resolve([]),
     need("matching") ? loadStudentsForMatching(supabase) : Promise.resolve([]),

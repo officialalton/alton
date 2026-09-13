@@ -230,3 +230,80 @@ export async function loadPinnedMaterialData(
     canvasStrokes: (annotation?.strokes as CanvasStroke[] | null) ?? [],
   };
 }
+
+/**
+ * 수업 시작 전의 교재 — 회차 교재 구성을 그대로 보여준다.
+ *
+ * session_content_manifest는 **수업 시작 시점에** 채워진다(고정). 그래서 준비
+ * 중인 수업은 매니페스트가 비어 있고, 그것만 읽으면 화면이 "배정된 교재가
+ * 없습니다"가 된다 — 선생님이 회차에 교재를 다 넣어 뒀는데도 그렇다.
+ *
+ * 여기서 보여주는 것은 **아직 고정되지 않은 예정 내용**이다. 지금 바뀌면 화면도
+ * 바뀌고, 수업이 시작되면 그 시점 내용으로 고정된다. 고정된 뒤에는 매니페스트가
+ * 우선이므로 이 함수는 쓰이지 않는다.
+ */
+export async function loadPlannedMaterialData(
+  supabase: SupabaseClient,
+  sessionId: string
+): Promise<MaterialData> {
+  const { data: link } = await supabase
+    .from("session_curriculum_units")
+    .select("overlay_unit_id")
+    .eq("session_id", sessionId)
+    .eq("role", "primary")
+    .maybeSingle();
+  const overlayUnitId = link?.overlay_unit_id as string | undefined;
+  if (!overlayUnitId) return null;
+
+  const { data: materials } = await supabase
+    .from("curriculum_overlay_unit_materials")
+    .select("curriculum_doc_id, position")
+    .eq("overlay_unit_id", overlayUnitId)
+    .order("position", { ascending: true });
+  if (!materials?.length) return null;
+
+  const docIds = materials.map((m) => m.curriculum_doc_id as string);
+  // 배포됐고 보관되지 않은 교재만 — 학생에게 갈 수 없는 것을 미리 보여주지 않는다.
+  const { data: docs } = await supabase
+    .from("curriculum_docs")
+    .select("id, title")
+    .in("id", docIds)
+    .eq("status", "published")
+    .is("archived_at", null);
+  if (!docs?.length) return null;
+
+  const visibleIds = docIds.filter((id) => docs.some((d) => d.id === id));
+  const { data: sections } = await supabase
+    .from("curriculum_doc_sections")
+    .select("id, title, body, teaching_tip, curriculum_doc_id, position")
+    .in("curriculum_doc_id", visibleIds)
+    .order("position", { ascending: true });
+  if (!sections?.length) return null;
+
+  // 교재 순서를 지키고, 각 교재 안에서는 조각 순서를 지킨다.
+  const ordered = visibleIds.flatMap((docId) =>
+    (sections ?? []).filter((s) => s.curriculum_doc_id === docId)
+  );
+  if (!ordered.length) return null;
+
+  const firstDocId = visibleIds[0];
+  const { data: annotation } = await supabase
+    .from("canvas_annotations")
+    .select("strokes")
+    .eq("session_id", sessionId)
+    .eq("curriculum_doc_id", firstDocId)
+    .maybeSingle();
+
+  return {
+    docId: firstDocId,
+    title: (docs.find((d) => d.id === firstDocId)?.title as string) ?? "이번 회차 교재",
+    sections: ordered.map((s) => ({
+      id: s.id as string,
+      title: s.title as string,
+      body: (s.body as string) ?? "",
+      teachingTip: (s.teaching_tip as string | null) ?? null,
+      problems: [],
+    })),
+    canvasStrokes: (annotation?.strokes as CanvasStroke[] | null) ?? [],
+  };
+}
