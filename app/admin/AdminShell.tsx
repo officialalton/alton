@@ -11,6 +11,7 @@ import { setActiveAdminUser, clearAdminTabCache } from "./tab-data-cache";
 import AdminHomeDashboard from "./AdminHomeDashboard";
 import type { AdminDashboardData } from "./dashboard-data";
 import CatalogTab from "./CatalogTab";
+import ProblemBankTab from "./ProblemBankTab";
 import UsersTab from "./UsersTab";
 import BillingTab from "./BillingTab";
 import BookingReconciliationPanel from "./BookingReconciliationPanel";
@@ -60,6 +61,7 @@ const NAV_ITEMS = [
   { id: "consult", label: "신규", icon: "🗓" },
   { id: "inquiry", label: "문의·면담", icon: "💬" },
   { id: "catalog", label: "커리큘럼", icon: "📘" },
+  { id: "problem-bank", label: "문제은행", icon: "🧩" },
   { id: "billing", label: "구 크레딧(레거시)", icon: "💳" },
   { id: "entitlements", label: "수업권", icon: "🎫" },
   { id: "unified-schedule", label: "통합 일정", icon: "🗺️" },
@@ -213,7 +215,7 @@ export default function AdminShell({
     "documents",
     "workspace",
   ];
-  const CONTENT_IDS: TabId[] = ["catalog"];
+  const CONTENT_IDS: TabId[] = ["catalog", "problem-bank"];
   const mobileGroups = [
     { label: "운영", items: NAV_ITEMS.filter((n) => OPERATIONS_IDS.includes(n.id)) },
     { label: "콘텐츠", items: NAV_ITEMS.filter((n) => CONTENT_IDS.includes(n.id)) },
@@ -309,6 +311,8 @@ export default function AdminShell({
             <AdminHomeDashboard data={dashboard} onNavigate={selectTab} />
           ) : activeTab === "catalog" ? (
             <CatalogTab subjects={subjects} docs={docs} />
+          ) : activeTab === "problem-bank" ? (
+            <ProblemBankTab subjects={subjects} />
           ) : activeTab === "users" ? (
             <UsersTab subjects={subjects} />
           ) : activeTab === "billing" ? (

@@ -11,6 +11,8 @@ export const ADMIN_NAV_TAB_IDS = [
   "consult",
   "inquiry",
   "catalog",
+  // P2 3차 — 문제은행. 교재와 독립된 진입점이라 커리큘럼 바로 옆 콘텐츠 그룹에 둔다.
+  "problem-bank",
   "billing",
   "entitlements",
   "unified-schedule",
