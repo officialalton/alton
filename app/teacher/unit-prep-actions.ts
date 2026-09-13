@@ -325,3 +325,175 @@ export async function loadUnitPrepSummaries(
   }
   return summaries;
 }
+
+// =========================================================================
+// P2/P3 2차 — 회차의 키워드와 교재 기본 구성
+// =========================================================================
+// 회차는 키워드 없이 초안으로 존재할 수 있다(2026-09-12 확정). 그래서 준비
+// 화면은 "키워드가 없습니다"라고만 말하고 끝내면 안 되고, 그 자리에서 설정할 수
+// 있어야 한다. 아래 셋이 그 진입점이다.
+
+export type UnitKeyword = { id: string; label: string };
+export type UnitMaterial = { curriculumDocId: string; title: string; position: number };
+
+export type UnitComposition = {
+  keywords: UnitKeyword[];
+  materials: UnitMaterial[];
+  /** 이 회차가 과목 템플릿 단원에서 갈라져 나왔는가 — 물려받을 기본이 있는지. */
+  hasTemplateDefaults: boolean;
+  /** 과목 전체 키워드 후보(선생님이 고를 수 있는 것). */
+  subjectKeywords: UnitKeyword[];
+};
+
+export async function loadUnitComposition(overlayUnitId: string): Promise<UnitComposition> {
+  const { supabase } = await requireTeacherOrAdmin();
+
+  const { data: unit } = await supabase
+    .from("curriculum_overlay_units")
+    .select("source_unit_id, overlay:student_curriculum_overlays!inner(subject_enrollment_id)")
+    .eq("id", overlayUnitId)
+    .maybeSingle();
+
+  const overlay = Array.isArray(unit?.overlay) ? unit?.overlay[0] : unit?.overlay;
+  const enrollmentId = (overlay as { subject_enrollment_id?: string } | undefined)?.subject_enrollment_id;
+
+  const { data: enrollment } = enrollmentId
+    ? await supabase.from("subject_enrollments").select("subject_id").eq("id", enrollmentId).maybeSingle()
+    : { data: null };
+  const subjectId = enrollment?.subject_id as string | undefined;
+
+  const [{ data: linkRows }, { data: materialRows }, { data: subjectKeywordRows }] = await Promise.all([
+    supabase.from("curriculum_overlay_unit_keywords").select("keyword_id").eq("overlay_unit_id", overlayUnitId),
+    supabase
+      .from("curriculum_overlay_unit_materials")
+      .select("curriculum_doc_id, position")
+      .eq("overlay_unit_id", overlayUnitId)
+      .order("position", { ascending: true }),
+    subjectId
+      ? supabase
+          .from("subject_keywords")
+          .select("id, label")
+          .eq("subject_id", subjectId)
+          .eq("status", "active")
+          .order("label", { ascending: true })
+      : Promise.resolve({ data: [] as { id: string; label: string }[] }),
+  ]);
+
+  const keywordIds = (linkRows ?? []).map((r) => r.keyword_id as string);
+  const byId = new Map((subjectKeywordRows ?? []).map((k) => [k.id as string, k.label as string]));
+
+  const docIds = (materialRows ?? []).map((m) => m.curriculum_doc_id as string);
+  const { data: docs } = docIds.length
+    ? await supabase.from("curriculum_docs").select("id, title").in("id", docIds)
+    : { data: [] as { id: string; title: string }[] };
+  const titleById = new Map((docs ?? []).map((d) => [d.id as string, d.title as string]));
+
+  return {
+    // 과목 키워드 목록에서 이름을 찾는다. 못 찾으면(비활성 등) 목록에서 빼지 않고
+    // 붙어 있다는 사실을 그대로 보여준다 — 조용히 사라지면 왜 후보가 저런지 모른다.
+    keywords: keywordIds.map((id) => ({ id, label: byId.get(id) ?? "(더 이상 쓰지 않는 키워드)" })),
+    materials: (materialRows ?? []).map((m) => ({
+      curriculumDocId: m.curriculum_doc_id as string,
+      title: titleById.get(m.curriculum_doc_id as string) ?? "(제목 없음)",
+      position: m.position as number,
+    })),
+    hasTemplateDefaults: Boolean(unit?.source_unit_id),
+    subjectKeywords: (subjectKeywordRows ?? []).map((k) => ({ id: k.id as string, label: k.label as string })),
+  };
+}
+
+/** 회차에 키워드를 붙인다 — 준비 화면에서 바로 설정할 수 있게 하는 진입점. */
+export async function addUnitKeyword(
+  overlayUnitId: string,
+  keywordId: string
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  const { supabase } = await requireTeacherOrAdmin();
+  const { error } = await supabase
+    .from("curriculum_overlay_unit_keywords")
+    .insert({ overlay_unit_id: overlayUnitId, keyword_id: keywordId });
+  // 이미 붙어 있는 것은 오류가 아니다 — 원하는 상태가 이미 맞다.
+  if (error && error.code !== "23505") return { ok: false, error: "키워드를 붙이지 못했습니다." };
+  return { ok: true };
+}
+
+export async function removeUnitKeyword(
+  overlayUnitId: string,
+  keywordId: string
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  const { supabase } = await requireTeacherOrAdmin();
+  const { error } = await supabase
+    .from("curriculum_overlay_unit_keywords")
+    .delete()
+    .eq("overlay_unit_id", overlayUnitId)
+    .eq("keyword_id", keywordId);
+  if (error) return { ok: false, error: "키워드를 떼지 못했습니다." };
+  return { ok: true };
+}
+
+/**
+ * 과목 템플릿의 기본 구성을 이 회차로 물려받는다.
+ *
+ * 선생님이 눌러야 돈다. 이미 고른 것은 덮어쓰지 않고 없는 것만 내려온다
+ * (inherit_unit_defaults_from_template, 20261308000000).
+ */
+export async function inheritUnitDefaults(
+  overlayUnitId: string
+): Promise<{ ok: true; keywordsAdded: number; materialsAdded: number } | { ok: false; error: string }> {
+  const { supabase } = await requireTeacherOrAdmin();
+  const { data, error } = await supabase
+    .rpc("inherit_unit_defaults_from_template", { p_overlay_unit_id: overlayUnitId })
+    .maybeSingle();
+  if (error) return { ok: false, error: "기본 구성을 가져오지 못했습니다." };
+  const row = data as { keywords_added?: number; materials_added?: number } | null;
+  return { ok: true, keywordsAdded: row?.keywords_added ?? 0, materialsAdded: row?.materials_added ?? 0 };
+}
+
+/** 회차 교재 구성의 순서를 바꾼다. 인접한 둘을 맞바꾼다. */
+export async function moveUnitMaterial(
+  overlayUnitId: string,
+  curriculumDocId: string,
+  direction: "up" | "down"
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  const { supabase } = await requireTeacherOrAdmin();
+  const { data: rows } = await supabase
+    .from("curriculum_overlay_unit_materials")
+    .select("curriculum_doc_id, position")
+    .eq("overlay_unit_id", overlayUnitId)
+    .order("position", { ascending: true });
+
+  const list = rows ?? [];
+  const index = list.findIndex((r) => r.curriculum_doc_id === curriculumDocId);
+  const target = direction === "up" ? index - 1 : index + 1;
+  if (index === -1 || target < 0 || target >= list.length) return { ok: true };
+
+  const a = list[index];
+  const b = list[target];
+  // position에 고유 제약이 없으므로 잠깐 같은 값이 되어도 깨지지 않는다.
+  const { error } = await supabase
+    .from("curriculum_overlay_unit_materials")
+    .update({ position: b.position })
+    .eq("overlay_unit_id", overlayUnitId)
+    .eq("curriculum_doc_id", a.curriculum_doc_id);
+  if (error) return { ok: false, error: "순서를 바꾸지 못했습니다." };
+  const { error: secondError } = await supabase
+    .from("curriculum_overlay_unit_materials")
+    .update({ position: a.position })
+    .eq("overlay_unit_id", overlayUnitId)
+    .eq("curriculum_doc_id", b.curriculum_doc_id);
+  if (secondError) return { ok: false, error: "순서를 바꾸지 못했습니다." };
+  return { ok: true };
+}
+
+export async function removeUnitMaterial(
+  overlayUnitId: string,
+  curriculumDocId: string
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  const { supabase } = await requireTeacherOrAdmin();
+  const { error } = await supabase
+    .from("curriculum_overlay_unit_materials")
+    .delete()
+    .eq("overlay_unit_id", overlayUnitId)
+    .eq("curriculum_doc_id", curriculumDocId);
+  if (error) return { ok: false, error: "교재를 빼지 못했습니다." };
+  return { ok: true };
+}

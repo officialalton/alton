@@ -10,7 +10,14 @@ import {
   loadUnitEligibleContent,
   listBookedLessonsForUnit,
   linkUnitPrepToLesson,
+  loadUnitComposition,
+  addUnitKeyword,
+  removeUnitKeyword,
+  inheritUnitDefaults,
+  moveUnitMaterial,
+  removeUnitMaterial,
   type UnitPrep,
+  type UnitComposition,
 } from "./unit-prep-actions";
 import type { EligibleSelectionContent } from "./session-prep-data";
 
@@ -40,12 +47,15 @@ export default function UnitPrepPanel({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [composition, setComposition] = useState<UnitComposition | null>(null);
+  const [keywordToAdd, setKeywordToAdd] = useState("");
+  const [notice, setNotice] = useState<string | null>(null);
 
   // 후보가 비었을 때 원인을 구분한다. 회차에 키워드가 없으면 담을 수 있는 게
   // 생길 수가 없고, 선생님이 할 일은 "기다리기"가 아니라 "키워드 지정"이다.
   const noKeyword = eligible.keywordCount === 0;
   const noKeywordNotice =
-    "이 회차에 아직 키워드가 없습니다. 커리큘럼에서 이 회차에 키워드를 지정하면 담을 수 있는 교재와 문제가 나타납니다.";
+    "이 회차에 아직 키워드가 없습니다. 위의 \u2018이 회차의 키워드\u2019에서 키워드를 붙이면 담을 수 있는 교재와 문제가 나타납니다.";
 
   useEffect(() => {
     let cancelled = false;
@@ -55,13 +65,15 @@ export default function UnitPrepPanel({
       loadUnitPrep(overlayUnitId),
       loadUnitEligibleContent(overlayUnitId),
       listBookedLessonsForUnit(overlayUnitId),
+      loadUnitComposition(overlayUnitId),
     ])
-      .then(([p, content, booked]) => {
+      .then(([p, content, booked, comp]) => {
         if (cancelled) return;
         setPrep(p);
         setGoalDraft(p.goal);
         setEligible(content);
         setLessons(booked);
+        setComposition(comp);
       })
       .catch((e) => {
         if (!cancelled) setError(e instanceof Error ? e.message : "회차 준비를 불러오지 못했습니다.");
@@ -73,6 +85,30 @@ export default function UnitPrepPanel({
       cancelled = true;
     };
   }, [overlayUnitId]);
+
+  async function withComposition(run: () => Promise<{ ok: true } | { ok: false; error: string }>) {
+    setSaving(true);
+    setError(null);
+    try {
+      const result = await run();
+      if (!result.ok) {
+        setError(result.error);
+        return;
+      }
+      // 키워드가 바뀌면 고를 수 있는 후보가 바뀐다 — 둘을 같이 다시 읽지 않으면
+      // 화면이 서로 어긋난 상태를 보여준다.
+      const [comp, content] = await Promise.all([
+        loadUnitComposition(overlayUnitId),
+        loadUnitEligibleContent(overlayUnitId),
+      ]);
+      setComposition(comp);
+      setEligible(content);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "저장하지 못했습니다.");
+    } finally {
+      setSaving(false);
+    }
+  }
 
   async function withSave(run: () => Promise<void>) {
     setSaving(true);
@@ -132,6 +168,140 @@ export default function UnitPrepPanel({
               placeholder="이 회차가 끝났을 때 학생이 무엇을 할 수 있어야 하는지 적으세요."
               className="w-full text-[14px] leading-[1.7] border-[1.5px] border-grey-200 rounded-xl px-3.5 py-2.5"
             />
+          </section>
+
+          {/* P2 2차 — 회차의 키워드와 교재 기본 구성.
+              키워드가 없는 회차는 초안으로 그대로 두는 게 맞지만(확정 정책),
+              "없습니다"라고만 말하고 끝내면 선생님이 갈 곳이 없다. 설정하는
+              자리를 여기 둔다. */}
+          <section className="mb-6">
+            <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-1.5">
+              이 회차의 키워드
+            </div>
+            {composition && composition.keywords.length === 0 && (
+              <p className="text-[12.5px] text-grey-500 mb-2">
+                아직 키워드가 없습니다. 키워드를 정하면 담을 수 있는 교재와 문제가 나타납니다.
+              </p>
+            )}
+            <div className="flex flex-wrap items-center gap-1.5 mb-2">
+              {(composition?.keywords ?? []).map((k) => (
+                <span
+                  key={k.id}
+                  className="inline-flex items-center gap-1 text-[12px] bg-grey-100 rounded-full pl-2.5 pr-1.5 py-0.5"
+                >
+                  {k.label}
+                  <button
+                    aria-label={`${k.label} 키워드 빼기`}
+                    disabled={saving}
+                    onClick={() => void withComposition(() => removeUnitKeyword(overlayUnitId, k.id))}
+                    className="text-grey-500 font-bold px-1"
+                  >
+                    ×
+                  </button>
+                </span>
+              ))}
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <select
+                aria-label="키워드 추가"
+                value={keywordToAdd}
+                onChange={(e) => setKeywordToAdd(e.target.value)}
+                className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 max-w-[280px]"
+              >
+                <option value="">키워드 고르기…</option>
+                {(composition?.subjectKeywords ?? [])
+                  .filter((k) => !(composition?.keywords ?? []).some((c) => c.id === k.id))
+                  .map((k) => (
+                    <option key={k.id} value={k.id}>
+                      {k.label}
+                    </option>
+                  ))}
+              </select>
+              <button
+                disabled={!keywordToAdd || saving}
+                onClick={() => {
+                  const id = keywordToAdd;
+                  setKeywordToAdd("");
+                  void withComposition(() => addUnitKeyword(overlayUnitId, id));
+                }}
+                className="text-[12px] font-bold text-ink disabled:text-grey-300"
+              >
+                키워드 붙이기
+              </button>
+              {composition?.hasTemplateDefaults && (
+                <button
+                  disabled={saving}
+                  onClick={() =>
+                    void withComposition(async () => {
+                      const result = await inheritUnitDefaults(overlayUnitId);
+                      if (!result.ok) return result;
+                      setNotice(
+                        result.keywordsAdded + result.materialsAdded === 0
+                          ? "이미 기본 구성을 모두 가져왔습니다."
+                          : `기본 구성에서 키워드 ${result.keywordsAdded}개, 교재 ${result.materialsAdded}개를 가져왔습니다.`
+                      );
+                      return { ok: true } as const;
+                    })
+                  }
+                  className="text-[12px] font-bold text-ink disabled:text-grey-300 ml-auto"
+                >
+                  기본 구성 가져오기
+                </button>
+              )}
+            </div>
+            {notice && <p className="text-[12px] text-grey-500 mt-2">{notice}</p>}
+          </section>
+
+          {/* 교재 기본 구성 — 이 회차에서 어떤 교재를 어떤 순서로 쓸 것인가.
+              담은 자료(아래)와는 층이 다르다: 여기는 회차의 구성이고,
+              아래는 이번 수업에 실제로 올릴 조각이다. */}
+          <section className="mb-6">
+            <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-1.5">
+              이 회차의 교재 구성
+            </div>
+            {(composition?.materials ?? []).length === 0 ? (
+              <p className="text-[12.5px] text-grey-500">
+                {composition?.hasTemplateDefaults
+                  ? "아직 교재 구성이 없습니다. 위의 기본 구성 가져오기로 관리자가 정한 구성을 불러올 수 있습니다."
+                  : "아직 교재 구성이 없습니다."}
+              </p>
+            ) : (
+              (composition?.materials ?? []).map((m, index) => (
+                <div
+                  key={m.curriculumDocId}
+                  className="flex items-center justify-between text-[12.5px] py-1.5"
+                >
+                  <span className="truncate max-w-[440px]">
+                    {index + 1}. {m.title}
+                  </span>
+                  <span className="flex items-center gap-2 flex-shrink-0">
+                    <button
+                      aria-label={`${m.title} 위로`}
+                      disabled={saving || index === 0}
+                      onClick={() => void withComposition(() => moveUnitMaterial(overlayUnitId, m.curriculumDocId, "up"))}
+                      className="text-[11.5px] font-bold text-grey-500 disabled:text-grey-200"
+                    >
+                      ↑
+                    </button>
+                    <button
+                      aria-label={`${m.title} 아래로`}
+                      disabled={saving || index === (composition?.materials.length ?? 0) - 1}
+                      onClick={() => void withComposition(() => moveUnitMaterial(overlayUnitId, m.curriculumDocId, "down"))}
+                      className="text-[11.5px] font-bold text-grey-500 disabled:text-grey-200"
+                    >
+                      ↓
+                    </button>
+                    <button
+                      disabled={saving}
+                      onClick={() => void withComposition(() => removeUnitMaterial(overlayUnitId, m.curriculumDocId))}
+                      className="text-[11.5px] font-bold text-grey-500"
+                    >
+                      빼기
+                    </button>
+                  </span>
+                </div>
+              ))
+            )}
           </section>
 
           <section className="mb-6">

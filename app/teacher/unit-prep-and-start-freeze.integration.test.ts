@@ -249,6 +249,70 @@ describe("1. 예약 없이 회차를 준비한다", () => {
   });
 });
 
+// Preview UAT에서 보고된 "선택 실패"의 재검증용. 제품 오너가 전달한 회차에는
+// 키워드도, 준비 자료도, 수업 연결도 있었다 — 즉 빈 후보 문제가 아니었다.
+// 원인은 아직 확인되지 않았으므로, 담은 자료가 어디서 사라질 수 있는지를
+// 경로별로 고정해 둔다. 이 테스트가 통과해도 실제 UAT 사례는 미확인이다.
+describe("1-b. 담은 자료는 재조회·수업 연결 뒤에도 그대로 남는다", () => {
+  it("담기 → 재조회 → 수업 연결 → 준비 재진입에서 같은 자료가 유지된다", () => {
+    const { overlayUnitId, keywordId, enrollmentId } = makeUnitWithoutReservation();
+    const prepId = asUser(
+      TEACHER_ID,
+      `insert into curriculum_unit_preps (overlay_unit_id, goal, created_by)
+       values ('${overlayUnitId}', '유지 확인', '${TEACHER_ID}') returning id;`
+    );
+    const sectionId = makeSelectableSection(keywordId);
+    const problemId = makeSelectableProblem(keywordId);
+    asUser(
+      TEACHER_ID,
+      `insert into curriculum_unit_prep_items (prep_id, content_type, content_id, position) values
+         ('${prepId}', 'material_section', '${sectionId}', 1),
+         ('${prepId}', 'problem', '${problemId}', 2);`
+    );
+
+    // 새로고침 = 같은 회차로 준비를 다시 읽는 것. 준비 행이 새로 생기지 않고
+    // (overlay_unit_id unique) 담은 항목이 그대로여야 한다.
+    const reread = () =>
+      asUser(
+        TEACHER_ID,
+        `select string_agg(i.content_id::text, ',' order by i.position)
+         from curriculum_unit_prep_items i
+         join curriculum_unit_preps p on p.id = i.prep_id
+         where p.overlay_unit_id = '${overlayUnitId}';`
+      );
+    const expected = `${sectionId},${problemId}`;
+    expect(reread()).toBe(expected);
+    expect(
+      asUser(TEACHER_ID, `select count(*) from curriculum_unit_preps where overlay_unit_id = '${overlayUnitId}';`)
+    ).toBe("1");
+
+    // 수업이 잡혀 연결해도 준비 원본은 그대로다(연결은 고정이 아니다).
+    const sessionId = addSessionFor(enrollmentId);
+    psql(`select link_unit_prep_to_session('${overlayUnitId}', '${sessionId}', '${TEACHER_ID}');`);
+    expect(reread()).toBe(expected);
+
+    // 수업 쪽에서 준비로 들어오는 경로도 같은 회차를 가리켜야 한다 —
+    // 여기가 갈라지면 화면상 "연결 불일치"로 보인다.
+    expect(
+      asUser(
+        TEACHER_ID,
+        `select overlay_unit_id from session_curriculum_units
+         where session_id = '${sessionId}' and role = 'primary';`
+      )
+    ).toBe(overlayUnitId);
+    expect(reread()).toBe(expected);
+
+    // 후보 조회도 담은 자료를 계속 후보로 인정해야 한다(담김 표시의 근거).
+    expect(
+      asUser(
+        TEACHER_ID,
+        `select count(*) from curriculum_doc_section_keywords_selectable
+         where section_id = '${sectionId}' and keyword_id = '${keywordId}';`
+      )
+    ).toBe("1");
+  });
+});
+
 describe("2. 준비 저장과 수업 시작 시점의 고정은 다르다", () => {
   function preparedSession(): { sessionId: string; overlayUnitId: string; contractId: string; problemId: string } {
     const { overlayUnitId, keywordId, enrollmentId, contractId } = makeUnitWithoutReservation();

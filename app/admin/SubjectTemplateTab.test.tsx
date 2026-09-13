@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { useState } from "react";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import SubjectTemplateTab from "./SubjectTemplateTab";
 import * as actions from "./subject-actions";
 import type { AdminSubject } from "./subject-data";
@@ -22,6 +22,7 @@ vi.mock("./subject-actions", () => ({
   removeSubjectUnit: vi.fn(),
   moveSubjectUnit: vi.fn(),
   createSubjectKeyword: vi.fn(),
+  renameSubjectKeyword: vi.fn(),
   assignUnitKeyword: vi.fn(),
   removeUnitKeyword: vi.fn(),
 }));
@@ -158,11 +159,10 @@ describe("SubjectTemplateTab", () => {
     // 사전에 등록된 뒤에는 회차별 태그 버튼으로도 나타난다(두 곳 모두 표시).
     await waitFor(() => expect(screen.getAllByText("이차방정식").length).toBeGreaterThanOrEqual(2));
 
-    const tagButtons = screen.getAllByText("이차방정식").filter((el) => el.tagName === "BUTTON");
-    fireEvent.click(tagButtons[0]);
+    fireEvent.click(screen.getByLabelText("함수의 기초 회차에 이차방정식 태그"));
     await waitFor(() => expect(actions.assignUnitKeyword).toHaveBeenCalledWith("u1", "kw1"));
 
-    fireEvent.click(tagButtons[0]);
+    fireEvent.click(screen.getByLabelText("함수의 기초 회차에 이차방정식 해제"));
     await waitFor(() => expect(actions.removeUnitKeyword).toHaveBeenCalledWith("u1", "kw1"));
   });
 
@@ -182,5 +182,61 @@ describe("SubjectTemplateTab", () => {
     await waitFor(() => expect(screen.getByText("이미 존재하는 키워드입니다.")).toBeInTheDocument());
     // 새로 만든 값이 화면 상태(사전)에는 반영되지 않아야 한다 — DB/화면 불일치 방지.
     expect(screen.queryByText("중복키워드")).not.toBeInTheDocument();
+  });
+});
+
+// P2/P3 2차 — 키워드 이름 수정.
+// 키워드는 교재·문제·회차가 전부 id로 참조한다. 그래서 이름을 고치는 것이
+// "새로 만들어 옮기기"보다 안전하다 — 붙어 있던 연결이 그대로 유지된다.
+describe("과목 키워드 이름 수정", () => {
+  beforeEach(() => vi.clearAllMocks());
+
+  // 단원 제목과 겹치지 않는 키워드를 쓴다 — 겹치면 무엇을 눌렀는지 알 수 없다.
+  const withKeyword: AdminSubject = {
+    ...satMath,
+    keywords: [{ id: "kw1", label: "포물선", status: "active" }],
+  };
+
+  function openKeywordEditor() {
+    render(<Wrapper initialSubjects={[withKeyword]} />);
+    fireEvent.click(screen.getByText("편집"));
+    fireEvent.click(screen.getByTitle("이름 고치기"));
+    return screen.getByLabelText("포물선 이름 고치기");
+  }
+
+  it("이름을 고치면 목록에 새 이름이 보인다", async () => {
+    vi.mocked(actions.renameSubjectKeyword).mockResolvedValue({
+      ok: true,
+      value: { id: "kw1", label: "포물선의 축", status: "active" },
+    });
+    const input = openKeywordEditor();
+    fireEvent.change(input, { target: { value: "포물선의 축" } });
+    fireEvent.keyDown(input, { key: "Enter" });
+
+    await waitFor(() => expect(actions.renameSubjectKeyword).toHaveBeenCalledWith("kw1", "포물선의 축"));
+    await waitFor(() => expect(screen.getByTitle("이름 고치기")).toHaveTextContent("포물선의 축"));
+  });
+
+  it("이름이 겹치면 사유를 보여주고 편집 상태를 유지한다", async () => {
+    vi.mocked(actions.renameSubjectKeyword).mockResolvedValue({
+      ok: false,
+      error: "같은 과목에 이미 있는 키워드 이름입니다.",
+    });
+    const input = openKeywordEditor();
+    fireEvent.change(input, { target: { value: "삼각함수" } });
+    fireEvent.keyDown(input, { key: "Enter" });
+
+    await waitFor(() =>
+      expect(screen.getByText("같은 과목에 이미 있는 키워드 이름입니다.")).toBeInTheDocument()
+    );
+    // 고치던 값을 잃지 않아야 한다 — 다시 입력하게 만들면 안 된다.
+    expect(screen.getByLabelText("포물선 이름 고치기")).toHaveValue("삼각함수");
+  });
+
+  it("바꾸지 않고 빠져나오면 아무것도 부르지 않는다", async () => {
+    const input = openKeywordEditor();
+    fireEvent.keyDown(input, { key: "Escape" });
+    expect(actions.renameSubjectKeyword).not.toHaveBeenCalled();
+    expect(screen.getByTitle("이름 고치기")).toHaveTextContent("포물선");
   });
 });

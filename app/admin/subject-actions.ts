@@ -131,6 +131,41 @@ export async function createSubjectKeyword(
   return { ok: true, value: { id: data.id, label: data.label, status: data.status } };
 }
 
+/**
+ * 키워드 이름을 고친다.
+ *
+ * 키워드는 교재·문제·회차가 전부 id로 참조하므로, 이름을 고쳐도 이미 붙어 있는
+ * 연결은 그대로 유지된다 — 이름만 바뀐다. 새 키워드를 만들어 옮기는 방식이
+ * 아니라 여기서 이름을 고쳐야 하는 이유가 그것이다.
+ *
+ * 같은 과목 안에서 정규화된 이름이 겹치면 거부한다(대소문자·공백만 다른 이름을
+ * 서로 다른 키워드로 두면 후보가 조용히 갈라진다). 정규화는 DB 트리거가 하므로
+ * 여기서는 빈 값만 막고 충돌은 제약이 돌려주는 것을 그대로 읽는다.
+ */
+export async function renameSubjectKeyword(
+  keywordId: string,
+  label: string
+): Promise<KeywordActionResult<SubjectKeyword>> {
+  const { supabase } = await requireAdmin();
+
+  const trimmed = label.trim();
+  if (!trimmed) return { ok: false, error: "키워드 이름을 입력해주세요." };
+
+  const { data, error } = await supabase
+    .from("subject_keywords")
+    .update({ label: trimmed })
+    .eq("id", keywordId)
+    .select("id, label, status")
+    .maybeSingle();
+
+  if (error) {
+    if (error.code === "23505") return { ok: false, error: "같은 과목에 이미 있는 키워드 이름입니다." };
+    return { ok: false, error: error.message };
+  }
+  if (!data) return { ok: false, error: "존재하지 않는 키워드입니다." };
+  return { ok: true, value: { id: data.id, label: data.label, status: data.status } };
+}
+
 export async function assignUnitKeyword(
   unitId: string,
   keywordId: string

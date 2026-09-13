@@ -10,6 +10,7 @@ import {
   removeSubjectUnit,
   moveSubjectUnit,
   createSubjectKeyword,
+  renameSubjectKeyword,
   assignUnitKeyword,
   removeUnitKeyword,
 } from "./subject-actions";
@@ -174,6 +175,31 @@ function SubjectDetailEditor({
   const [keywords, setKeywords] = useState(subject.keywords ?? []);
   const [newKeyword, setNewKeyword] = useState("");
   const [keywordError, setKeywordError] = useState<string | null>(null);
+  // 이름을 고치는 중인 키워드. 키워드는 교재·문제·회차가 전부 id로 참조하므로
+  // 이름만 바뀌고 이미 붙은 연결은 그대로다.
+  const [editingKeywordId, setEditingKeywordId] = useState<string | null>(null);
+  const [editingLabel, setEditingLabel] = useState("");
+
+  async function handleRenameKeyword(keywordId: string) {
+    const label = editingLabel.trim();
+    const current = keywords.find((k) => k.id === keywordId);
+    if (!label || label === current?.label) {
+      setEditingKeywordId(null);
+      return;
+    }
+    setKeywordError(null);
+    const result = await renameSubjectKeyword(keywordId, label);
+    if (!result.ok) {
+      setKeywordError(result.error);
+      return;
+    }
+    const next = keywords
+      .map((k) => (k.id === keywordId ? result.value : k))
+      .sort((a, b) => a.label.localeCompare(b.label));
+    setKeywords(next);
+    onKeywordsChange(next);
+    setEditingKeywordId(null);
+  }
   const [confirmingDelete, setConfirmingDelete] = useState(false);
   const [deleteError, setDeleteError] = useState<string | null>(null);
   const [archivedNotice, setArchivedNotice] = useState<string | null>(
@@ -305,14 +331,36 @@ function SubjectDetailEditor({
           {keywords.length === 0 && (
             <span className="text-[12px] text-grey-500">아직 등록된 키워드가 없습니다.</span>
           )}
-          {keywords.map((k) => (
-            <span
-              key={k.id}
-              className="text-[11.5px] font-semibold px-2.5 py-1 rounded-full bg-grey-100 text-ink"
-            >
-              {k.label}
-            </span>
-          ))}
+          {keywords.map((k) =>
+            editingKeywordId === k.id ? (
+              <input
+                key={k.id}
+                autoFocus
+                aria-label={`${k.label} 이름 고치기`}
+                value={editingLabel}
+                onChange={(e) => setEditingLabel(e.target.value)}
+                onBlur={() => void handleRenameKeyword(k.id)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") void handleRenameKeyword(k.id);
+                  if (e.key === "Escape") setEditingKeywordId(null);
+                }}
+                className="text-[11.5px] font-semibold px-2.5 py-1 rounded-full border-[1.5px] border-grey-200 max-w-[180px]"
+              />
+            ) : (
+              <button
+                key={k.id}
+                title="이름 고치기"
+                onClick={() => {
+                  setEditingKeywordId(k.id);
+                  setEditingLabel(k.label);
+                  setKeywordError(null);
+                }}
+                className="text-[11.5px] font-semibold px-2.5 py-1 rounded-full bg-grey-100 text-ink"
+              >
+                {k.label}
+              </button>
+            )
+          )}
         </div>
         <div className="flex gap-2">
           <input
@@ -360,6 +408,9 @@ function SubjectDetailEditor({
                 return (
                   <button
                     key={k.id}
+                    // 사전 칩과 회차 태그 버튼이 같은 글자를 갖는다 — 무엇을 누르는
+                    // 자리인지 이름으로 구분해 둔다.
+                    aria-label={`${u.unitTitle} 회차에 ${k.label} ${tagged ? "해제" : "태그"}`}
                     onClick={() => handleToggleUnitKeyword(u.id, k.id, tagged)}
                     className={
                       "text-[11px] font-semibold px-2 py-1 rounded-full border-[1.5px] " +
