@@ -261,19 +261,30 @@ describe("공개와 버전 생성의 일관성", () => {
     }
   });
 
-  it("중복 클릭에도 버전 번호가 충돌하지 않고 순서대로 쌓인다", () => {
+  it("같은 내용의 중복 클릭은 버전 하나로 처리한다", () => {
+    // 버튼 연타·네트워크 재시도로 똑같은 내용의 버전이 쌓이면 기록이 의미를 잃고,
+    // 준비안이 어느 것을 가리켜야 하는지도 흐려진다.
     const docId = makeDraft();
     psql(`select publish_curriculum_doc('${docId}', true);`);
-    // 같은 요청을 연달아 세 번. advisory lock 이 직렬화한다.
     psql(`select publish_curriculum_doc('${docId}', true);`);
     psql(`select publish_curriculum_doc('${docId}', true);`);
     psql(`select publish_curriculum_doc('${docId}', true);`);
 
-    expect(
-      psql(
-        `select string_agg(version_number::text, ',' order by version_number)
-         from curriculum_doc_versions where curriculum_doc_id = '${docId}';`
-      )
-    ).toBe("1,2,3,4");
+    expect(versionCount(docId)).toBe("1");
+  });
+
+  it("내용을 고친 뒤의 재공개만 새 버전이 된다", () => {
+    const docId = makeDraft();
+    psql(`select publish_curriculum_doc('${docId}', true);`);
+    psql(`select publish_curriculum_doc('${docId}', true);`);
+    expect(versionCount(docId)).toBe("1");
+
+    psql(`update curriculum_doc_sections set body = '고친 본문' where curriculum_doc_id = '${docId}';`);
+    psql(`select publish_curriculum_doc('${docId}', true);`);
+    expect(versionCount(docId)).toBe("2");
+
+    // 다시 연타해도 더 늘지 않는다.
+    psql(`select publish_curriculum_doc('${docId}', true);`);
+    expect(versionCount(docId)).toBe("2");
   });
 });
