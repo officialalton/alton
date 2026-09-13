@@ -9,9 +9,17 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 // 테이블 자체는 절대 건드리지 않는다(숨김 ≠ 삭제/변경). 선생님/학생 양쪽
 // 세션-뷰 리더가 이 함수 하나를 공유한다(둘 다 같은 가시성 게이트를 받는다).
 
+export type SessionManifestContentType = "material_doc" | "material_section" | "problem";
+
 export type SessionManifestItem = {
   id: string;
-  contentType: "material_section" | "problem";
+  /**
+   * material_doc = 교재 전체(현재 방식). material_section = 교재 조각(과거 기록).
+   *
+   * 과거 수업의 material_section 행은 그대로 읽는다. 그때 무엇을 보여줬는지는
+   * 그 시점의 사실이고, 정책이 바뀌었다고 소급해 고칠 값이 아니다.
+   */
+  contentType: SessionManifestContentType;
   contentId: string;
   sourceOverlayUnitId: string | null;
   displayPosition: number;
@@ -32,6 +40,9 @@ export async function loadSessionContentManifest(
   if (error) throw new Error(error.message);
   if (!rows || rows.length === 0) return [];
 
+  const docIds = rows
+    .filter((r) => r.content_type === "material_doc")
+    .map((r) => r.content_id as string);
   const sectionIds = rows
     .filter((r) => r.content_type === "material_section")
     .map((r) => r.content_id as string);
@@ -53,6 +64,18 @@ export async function loadSessionContentManifest(
     for (const row of visibleSections ?? []) visibleSectionIds.add(row.section_id as string);
   }
 
+  // 교재 전체는 키워드를 거치지 않고 "지금도 보여도 되는가"만 본다. 키워드가
+  // 떨어졌다고 이미 고정된 교재가 사라지면 안 된다.
+  const visibleDocIds = new Set<string>();
+  if (docIds.length > 0) {
+    const { data: visibleDocs, error: docError } = await supabase
+      .from("curriculum_docs_selectable")
+      .select("curriculum_doc_id")
+      .in("curriculum_doc_id", docIds);
+    if (docError) throw new Error(docError.message);
+    for (const row of visibleDocs ?? []) visibleDocIds.add(row.curriculum_doc_id as string);
+  }
+
   const visibleProblemIds = new Set<string>();
   if (problemIds.length > 0) {
     const { data: visibleProblems, error: problemError } = await supabase
@@ -64,14 +87,15 @@ export async function loadSessionContentManifest(
   }
 
   return rows
-    .filter((r) =>
-      r.content_type === "material_section"
-        ? visibleSectionIds.has(r.content_id as string)
-        : visibleProblemIds.has(r.content_id as string)
-    )
+    .filter((r) => {
+      const id = r.content_id as string;
+      if (r.content_type === "material_doc") return visibleDocIds.has(id);
+      if (r.content_type === "material_section") return visibleSectionIds.has(id);
+      return visibleProblemIds.has(id);
+    })
     .map((r) => ({
       id: r.id as string,
-      contentType: r.content_type as "material_section" | "problem",
+      contentType: r.content_type as SessionManifestContentType,
       contentId: r.content_id as string,
       sourceOverlayUnitId: r.source_overlay_unit_id as string | null,
       displayPosition: r.display_position as number,

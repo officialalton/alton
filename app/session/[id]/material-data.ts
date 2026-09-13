@@ -157,15 +157,41 @@ export async function loadPinnedMaterialData(
   supabase: SupabaseClient,
   sessionId: string
 ): Promise<MaterialData> {
+  // 교재 전체(material_doc)와 과거의 조각 단위(material_section)를 함께 읽는다.
+  // 과거 수업은 조각으로 고정돼 있고, 그때 무엇을 보여줬는지는 그 시점의
+  // 사실이라 그대로 읽어야 한다.
   const { data: manifest } = await supabase
     .from("session_content_manifest")
-    .select("content_id, display_position")
+    .select("content_type, content_id, display_position")
     .eq("session_id", sessionId)
-    .eq("content_type", "material_section")
+    .in("content_type", ["material_doc", "material_section"])
     .order("display_position", { ascending: true });
   if (!manifest?.length) return null;
 
-  const sectionIds = manifest.map((m) => m.content_id as string);
+  // 교재 전체로 고정된 것은 그 교재의 모든 조각을 순서대로 펼친다.
+  const docIds = manifest
+    .filter((m) => m.content_type === "material_doc")
+    .map((m) => m.content_id as string);
+  const { data: docSections } = docIds.length
+    ? await supabase
+        .from("curriculum_doc_sections")
+        .select("id, curriculum_doc_id, position")
+        .in("curriculum_doc_id", docIds)
+        .order("position", { ascending: true })
+    : { data: [] as { id: string; curriculum_doc_id: string; position: number }[] };
+
+  const sectionIdsByDoc = new Map<string, string[]>();
+  for (const s of docSections ?? []) {
+    const key = s.curriculum_doc_id as string;
+    sectionIdsByDoc.set(key, [...(sectionIdsByDoc.get(key) ?? []), s.id as string]);
+  }
+
+  const sectionIds = manifest.flatMap((m) =>
+    m.content_type === "material_doc"
+      ? sectionIdsByDoc.get(m.content_id as string) ?? []
+      : [m.content_id as string]
+  );
+  if (!sectionIds.length) return null;
   const { data: sections } = await supabase
     .from("curriculum_doc_sections")
     .select("id, title, body, teaching_tip, curriculum_doc_id")
