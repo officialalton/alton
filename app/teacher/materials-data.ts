@@ -16,7 +16,10 @@ export async function loadTeacherMaterialsLibrary(
   supabase: SupabaseClient,
   teacherId: string
 ): Promise<LibrarySubject[]> {
-  const [{ data: enrollments }, { data: assignments }] = await Promise.all([
+  // 2026-09-12(UAT 지적) — mysubjects-data.ts와 같은 누락. 관리자가 배정한
+  // 담당 과목(teacher_curriculum_templates)을 읽지 않아, 학생 매칭이 없으면
+  // 라이브러리가 통째로 비었다. 회차 키워드나 수업 연결과는 무관한 층이다.
+  const [{ data: enrollments }, { data: assignments }, { data: assigned }] = await Promise.all([
     supabase
       .from("enrollments")
       .select("subject_id, subject:subjects(name)")
@@ -27,6 +30,10 @@ export async function loadTeacherMaterialsLibrary(
       .select("subject_enrollment:subject_enrollments!inner(subject_id, subject:subjects(name))")
       .eq("teacher_id", teacherId)
       .eq("status", "active"),
+    supabase
+      .from("teacher_curriculum_templates")
+      .select("subject_id, subject:subjects(name, archived_at)")
+      .eq("teacher_id", teacherId),
   ]);
 
   const subjects = new Map<string, string>();
@@ -37,6 +44,12 @@ export async function loadTeacherMaterialsLibrary(
     const se = Array.isArray(a.subject_enrollment) ? a.subject_enrollment[0] : a.subject_enrollment;
     if (!se) continue;
     subjects.set(se.subject_id, extractName(se.subject));
+  }
+
+  for (const a of assigned ?? []) {
+    const subject = Array.isArray(a.subject) ? a.subject[0] : a.subject;
+    if ((subject as { archived_at?: string | null } | null)?.archived_at) continue;
+    subjects.set(a.subject_id as string, extractName(a.subject));
   }
 
   const subjectIds = Array.from(subjects.keys());

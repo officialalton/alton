@@ -5,9 +5,13 @@ import { loadMySubjects } from "./mysubjects-data";
 // 조회해 R5 매칭 모델(teacher_assignments + subject_enrollments)로 배정된
 // v3 담당 과목을 놓치던 문제. 두 소스를 합쳐서 반환해야 한다.
 
+// 2026-09-12(UAT 지적) 추가: 세 번째 소스 teacher_curriculum_templates —
+// 관리자가 담당 과목을 배정하면 이 행만 생긴다. 학생이 매칭되기 전에도
+// 과목이 보여야 한다.
 function makeSupabase(params: {
   enrollments: Array<{ subject_id: string; subject: { name: string } }>;
   assignments: Array<{ subject_enrollment: { subject_id: string; subject: { name: string } } }>;
+  assigned?: Array<{ subject_id: string; subject: { name: string; archived_at?: string | null } }>;
 }) {
   return {
     from: vi.fn((table: string) => {
@@ -18,7 +22,18 @@ function makeSupabase(params: {
         return { select: () => ({ eq: () => ({ eq: () => Promise.resolve({ data: params.assignments }) }) }) };
       }
       if (table === "teacher_curriculum_templates") {
-        return { select: () => ({ eq: () => ({ in: () => Promise.resolve({ data: [] }) }) }) };
+        // 같은 표를 두 번 읽는다: 담당 과목 목록(.eq()으로 끝남)과 과목별
+        // 템플릿 id 조회(.eq().in()). 하나의 mock이 둘 다 받아야 한다.
+        return {
+          select: () => ({
+            eq: () => {
+              const result = Promise.resolve({ data: params.assigned ?? [] });
+              return Object.assign(result, {
+                in: () => Promise.resolve({ data: [] }),
+              });
+            },
+          }),
+        };
       }
       throw new Error(`unexpected table ${table}`);
     }),
@@ -73,5 +88,31 @@ describe("loadMySubjects", () => {
     expect(result).toEqual([
       { subjectId: "fff052c7-e78f-4100-9dcb-ace4d3bbd2bb", subjectName: "AP Calculus AB", templateId: null, units: [] },
     ]);
+  });
+});
+
+describe("loadMySubjects — 배정만 된 과목", () => {
+  it("학생 매칭이 없어도 관리자가 배정한 담당 과목이 보인다", async () => {
+    const supabase = makeSupabase({
+      enrollments: [],
+      assignments: [],
+      assigned: [{ subject_id: "sub3", subject: { name: "SAT Reading Test 1" } }],
+    });
+    const result = await loadMySubjects(supabase as never, "t1");
+    expect(result.map((s) => s.subjectId)).toEqual(["sub3"]);
+    expect(result[0].subjectName).toBe("SAT Reading Test 1");
+  });
+
+  it("보관된 과목은 담당 과목 목록에 넣지 않는다", async () => {
+    const supabase = makeSupabase({
+      enrollments: [],
+      assignments: [],
+      assigned: [
+        { subject_id: "sub3", subject: { name: "SAT Reading Test 1" } },
+        { subject_id: "sub9", subject: { name: "테스트 과목 1", archived_at: "2026-09-11T00:00:00Z" } },
+      ],
+    });
+    const result = await loadMySubjects(supabase as never, "t1");
+    expect(result.map((s) => s.subjectId)).toEqual(["sub3"]);
   });
 });

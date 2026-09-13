@@ -34,7 +34,12 @@ export async function loadMySubjects(
   // (teacher_assignments + subject_enrollments)로 배정된 v3 담당 과목이
   // 전혀 보이지 않는다(app/admin/users-data.ts::loadTeachers()와 동일한
   // 부류의 표시 버그). 두 소스를 함께 조회해 합친다.
-  const [{ data: enrollments }, { data: assignments }] = await Promise.all([
+  // 2026-09-12(UAT 지적) — 세 번째 소스가 빠져 있었다. 관리자가 담당 과목을
+  // 배정하면 teacher_curriculum_templates 행만 생기는데(assignTeacherSubject),
+  // 여기서는 그것을 읽지 않아 **학생이 매칭되기 전까지 과목이 보이지 않았다**.
+  // 배정만으로 기본 커리큘럼을 준비할 수 있어야 하므로 운영본 유무로 과목을
+  // 숨기지 않는다.
+  const [{ data: enrollments }, { data: assignments }, { data: assigned }] = await Promise.all([
     supabase
       .from("enrollments")
       .select("subject_id, subject:subjects(name)")
@@ -45,6 +50,10 @@ export async function loadMySubjects(
       .select("subject_enrollment:subject_enrollments!inner(subject_id, subject:subjects(name))")
       .eq("teacher_id", teacherId)
       .eq("status", "active"),
+    supabase
+      .from("teacher_curriculum_templates")
+      .select("subject_id, subject:subjects(name, archived_at)")
+      .eq("teacher_id", teacherId),
   ]);
 
   const subjectNameById = new Map<string, string>();
@@ -55,6 +64,12 @@ export async function loadMySubjects(
     const se = Array.isArray(a.subject_enrollment) ? a.subject_enrollment[0] : a.subject_enrollment;
     if (!se) continue;
     subjectNameById.set(se.subject_id, extractName(se.subject));
+  }
+  for (const a of assigned ?? []) {
+    const subject = Array.isArray(a.subject) ? a.subject[0] : a.subject;
+    // 보관된 과목은 새 작업 대상이 아니다 — 기존 연결은 다른 화면에서 보존된다.
+    if ((subject as { archived_at?: string | null } | null)?.archived_at) continue;
+    subjectNameById.set(a.subject_id as string, extractName(a.subject));
   }
   if (subjectNameById.size === 0) return [];
 

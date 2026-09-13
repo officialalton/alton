@@ -53,23 +53,29 @@ export default function TeacherDetailPanel({
     setSavedSubjectId(null);
     setTogglingSubjectId(subjectId);
     try {
-      if (assignedSubjectIds.includes(subjectId)) {
-        await unassignTeacherSubject(teacher.id, subjectId);
-        const next = assignedSubjectIds.filter((id) => id !== subjectId);
-        setAssignedSubjectIds(next);
-        onUpdated({ assignedSubjectIds: next });
-      } else {
-        await assignTeacherSubject(teacher.id, subjectId);
-        const next = [...assignedSubjectIds, subjectId];
-        setAssignedSubjectIds(next);
-        onUpdated({ assignedSubjectIds: next });
+      // 실패하면 기존 선택을 그대로 둔다 — 화면만 바뀌고 서버는 안 바뀐 상태로
+      // 갈라지면, 새로고침했을 때 되돌아온 것처럼 보인다.
+      const assigned = assignedSubjectIds.includes(subjectId);
+      const result = assigned
+        ? await unassignTeacherSubject(teacher.id, subjectId)
+        : await assignTeacherSubject(teacher.id, subjectId);
+      if (!result.ok) {
+        setSubjectError(result.error);
+        return;
       }
+      const next = assigned
+        ? assignedSubjectIds.filter((id) => id !== subjectId)
+        : [...assignedSubjectIds, subjectId];
+      setAssignedSubjectIds(next);
+      onUpdated({ assignedSubjectIds: next });
       setSavedSubjectId(subjectId);
       // 매칭 탭의 과목별 선생님 후보 목록은 admin/page.tsx 로드 시점에 고정된
       // props라서, 여기서 서버 데이터를 갱신해줘야 다른 탭에도 반영된다.
       router.refresh();
-    } catch (e) {
-      setSubjectError(e instanceof Error ? e.message : "과목 배정 처리에 실패했습니다.");
+    } catch {
+      // 서버 액션이 예외를 던지면 Production에서는 내부 오류 코드로 마스킹된다.
+      // 그 값을 화면에 그대로 내보내지 않는다.
+      setSubjectError("과목 배정 처리에 실패했습니다. 잠시 후 다시 시도해주세요.");
     } finally {
       setTogglingSubjectId(null);
     }

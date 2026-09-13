@@ -9,6 +9,9 @@ function makeSupabase(params: {
   enrollments: Array<{ subject_id: string; subject: { name: string } }>;
   assignments: Array<{ subject_enrollment: { subject_id: string; subject: { name: string } } }>;
   docs: Array<{ id: string; title: string; subject_id: string; unit_id: string | null }>;
+  // 2026-09-12(UAT 지적): 관리자가 배정한 담당 과목. 학생 매칭이 없어도
+  // 라이브러리가 비면 안 된다.
+  assigned?: Array<{ subject_id: string; subject: { name: string; archived_at?: string | null } }>;
 }) {
   return {
     from: vi.fn((table: string) => {
@@ -26,6 +29,9 @@ function makeSupabase(params: {
             }),
           }),
         };
+      }
+      if (table === "teacher_curriculum_templates") {
+        return { select: () => ({ eq: () => Promise.resolve({ data: params.assigned ?? [] }) }) };
       }
       if (table === "subject_template_units") {
         return { select: () => ({ in: () => Promise.resolve({ data: [] }) }) };
@@ -58,6 +64,33 @@ describe("loadTeacherMaterialsLibrary", () => {
     const supabase = makeSupabase({
       enrollments: [{ subject_id: "sub1", subject: { name: "SAT Math" } }],
       assignments: [],
+      docs: [],
+    });
+    const result = await loadTeacherMaterialsLibrary(supabase as never, "t1");
+    expect(result).toEqual([]);
+  });
+});
+
+describe("loadTeacherMaterialsLibrary — 배정만 된 과목", () => {
+  it("학생 매칭이 없어도 배정된 과목의 공개 교재가 보인다", async () => {
+    const supabase = makeSupabase({
+      enrollments: [],
+      assignments: [],
+      assigned: [{ subject_id: "sub3", subject: { name: "SAT Reading Test 1" } }],
+      docs: [{ id: "d1", title: "지문 읽기", subject_id: "sub3", unit_id: null }],
+    });
+    const result = await loadTeacherMaterialsLibrary(supabase as never, "t1");
+    expect(result.map((s) => s.subjectName)).toEqual(["SAT Reading Test 1"]);
+    expect(result[0].docs.map((d) => d.title)).toEqual(["지문 읽기"]);
+  });
+
+  it("보관된 과목의 교재는 라이브러리에 넣지 않는다", async () => {
+    const supabase = makeSupabase({
+      enrollments: [],
+      assignments: [],
+      assigned: [
+        { subject_id: "sub9", subject: { name: "테스트 과목 1", archived_at: "2026-09-11T00:00:00Z" } },
+      ],
       docs: [],
     });
     const result = await loadTeacherMaterialsLibrary(supabase as never, "t1");
