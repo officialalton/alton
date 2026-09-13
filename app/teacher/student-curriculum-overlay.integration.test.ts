@@ -633,10 +633,11 @@ describe("ensure_active_curriculum_overlay — 최초 베이스라인 시딩", (
     }
   });
 
-  // draft 교재는 절대 시딩되면 안 된다 — check_overlay_unit_material_published
-  // 트리거(Task 3, corrective 2가 그대로 둔 쓰기 시점 published 게이트)와 시딩
-  // SELECT의 published 필터가 이중으로 이를 보장한다.
-  it("draft 상태인 참고 교재는 절대 시딩되지 않는다(published인 것만 시딩)", async () => {
+  // 2026-09-13 정책 확정: 관리자·선생님 템플릿도 **공개되고 보관되지 않은 교재만**
+  // 신규 구성에 쓴다(20261324000000). 초안을 문제은행·교재 편집에서 관리하는 것과
+  // 수업 구성에 담는 것은 다르다. 그래서 이제는 "초안은 시딩되지 않는다"가 아니라
+  // **"초안은 애초에 기준본 구성에 담기지 않는다"** 가 검증 대상이다.
+  it("초안 교재는 기준본 구성에 담기지 않고, 공개 교재만 시딩된다", async () => {
     const enrollmentId = makeEnrollment();
     const publishedDocId = psql(
       `insert into curriculum_docs (title, subject_id, unit_id, owner_type, status)
@@ -649,9 +650,13 @@ describe("ensure_active_curriculum_overlay — 최초 베이스라인 시딩", (
     psql(
       `insert into subject_template_unit_materials (unit_id, curriculum_doc_id) values ('${baseUnitId}', '${publishedDocId}');`
     );
-    psql(
-      `insert into subject_template_unit_materials (unit_id, curriculum_doc_id) values ('${baseUnitId}', '${draftDocId}');`
-    );
+    // 초안은 담는 시점에 거부된다 — 아래로 내려갈 때 걸러지는 것이 아니라
+    // 애초에 구성에 들어가지 못한다.
+    expect(() =>
+      psql(
+        `insert into subject_template_unit_materials (unit_id, curriculum_doc_id) values ('${baseUnitId}', '${draftDocId}');`
+      )
+    ).toThrow();
 
     try {
       const { data: overlayId, error } = await adminClient.rpc("ensure_active_curriculum_overlay", {

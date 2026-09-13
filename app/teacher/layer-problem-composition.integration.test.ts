@@ -370,3 +370,62 @@ describe("사용할 수 없는 문제는 쓰기에서 거부한다", () => {
     expect(countOf(unitId)).toBe("1");
   });
 });
+
+// 지시 3번 — 새로 담는 검증과 이미 담긴 항목을 정리하는 동작은 다르다. 이미 담긴
+// 문제가 나중에 비공개·보관이 됐을 때 정렬·제외까지 막히면 시작 차단을 해소할 길이
+// 없어진다.
+describe("이미 담긴 항목의 정리는 막지 않는다", () => {
+  function attachedThenUnusable(): { unitId: string; problemId: string } {
+    const kw = makeKeyword();
+    const p = makeProblem(kw);
+    const unitId = makeCatalogUnit([kw]);
+    expect(countOf(unitId)).toBe("1");
+    // 담긴 뒤에 보관됐다.
+    psql(`update problems set archived_at = now() where id = '${p}';`);
+    return { unitId, problemId: p };
+  }
+
+  it("보관된 뒤에도 순서를 바꿀 수 있다", () => {
+    const { unitId, problemId } = attachedThenUnusable();
+    expect(() =>
+      psql(
+        `update subject_template_unit_problems set position = 99
+         where unit_id = '${unitId}' and problem_id = '${problemId}';`
+      )
+    ).not.toThrow();
+  });
+
+  it("보관된 뒤에도 뺄 수 있다", () => {
+    const { unitId, problemId } = attachedThenUnusable();
+    expect(() =>
+      psql(
+        `delete from subject_template_unit_problems
+         where unit_id = '${unitId}' and problem_id = '${problemId}';`
+      )
+    ).not.toThrow();
+    expect(countOf(unitId)).toBe("0");
+  });
+
+  it("보관된 뒤에도 제외 기록을 남길 수 있다", () => {
+    const { unitId, problemId } = attachedThenUnusable();
+    expect(() =>
+      psql(
+        `insert into subject_template_unit_problem_exclusions (unit_id, problem_id)
+         values ('${unitId}', '${problemId}');`
+      )
+    ).not.toThrow();
+  });
+
+  it("다른 문제로 바꾸는 것은 여전히 검증한다", () => {
+    const { unitId, problemId } = attachedThenUnusable();
+    const kw2 = makeKeyword();
+    const unusable = makeProblem(kw2, { unpublished: true });
+    // 교체는 "새로 담기"다 — 사용할 수 없는 문제로는 바꿀 수 없다.
+    expect(() =>
+      psql(
+        `update subject_template_unit_problems set problem_id = '${unusable}'
+         where unit_id = '${unitId}' and problem_id = '${problemId}';`
+      )
+    ).toThrow();
+  });
+});

@@ -1,38 +1,98 @@
--- P2 5차 — 사용할 수 없는 교재·문제는 **쓰기 시점에** 거부한다.
+-- P2 5차 — 사용할 수 없는 교재·문제는 **새로 담을 때** 거부한다.
 --
--- 2026-09-13 제품 오너 지적: "이번 세 경로 제한이 후보 목록 조회에만 적용됐는지,
--- 직접 추가·교체·상속·자동 구성 저장에서도 검증되는지 확인해주세요. 문제 ID를
--- 직접 전달해도 서버에서 사용 불가 문제를 거부해야 합니다."
+-- 2026-09-13 제품 오너 지적 둘을 함께 반영한다.
 --
--- 확인 결과 지적이 맞다. 앞선 커밋은 **후보 목록 조회만** 좁혔다. 직접 추가·상속·
--- 자동 구성은 id 를 그대로 넣으므로, 화면을 거치지 않으면 비공개 문제도 들어간다.
--- 학생 교재 테이블에만 published 가드가 있었고(20261229000000), 이번에 만든 관리자·
--- 선생님 층과 **문제 테이블 전부**에는 가드가 없었다.
+-- (1) "후보 목록 조회에만 적용됐는지, 직접 추가·교체·상속·자동 구성 저장에서도
+--     검증되는지 확인해주세요. 문제 ID를 직접 전달해도 서버에서 사용 불가 문제를
+--     거부해야 합니다."
 --
--- 경로마다 막으면 새 경로가 생길 때 또 빠진다. 테이블에 걸어 어느 경로로 들어와도
--- 같게 막는다.
+--     앞선 작업은 후보 목록만 좁혔다. 직접 추가·상속·자동 구성은 id 를 그대로
+--     넣으므로 화면을 거치지 않으면 사용 불가 콘텐츠가 들어간다. 경로마다 막으면
+--     새 경로가 생길 때 또 빠지므로 테이블에 건다.
 --
--- 막는 것은 **새로 담는 것**뿐이다:
---   - 이미 담겨 있던 행은 건드리지 않는다(insert/update 에서만 돈다).
---   - 이미 수업에 고정된 내용은 이 표들과 무관하다 — 보관됐다고 과거 수업에서
---     사라지면 안 된다.
+-- (2) "관리자·선생님 템플릿도 공개되고 보관되지 않은 교재만 신규 구성에 사용합니다.
+--     미공개 교재를 먼저 붙이는 기존 구현은 확정 정책의 예외가 아닙니다."
+--
+--     교재를 계획 단계에서는 느슨하게 두려던 판단을 접는다. 문제은행·교재 편집에서
+--     초안을 **관리하는 것**과 수업 구성에 **담는 것**은 다르다. 세 층 모두 같은
+--     기준을 쓴다.
+--
+-- **새로 담는 것과 이미 담긴 것을 정리하는 것은 다르다.** 이미 담긴 콘텐츠가 나중에
+-- 비공개·보관 상태가 됐을 때 순서를 바꾸거나 빼는 정리까지 막으면, 시작 차단을
+-- 해소할 길이 없어진다. 그래서 UPDATE 는 **콘텐츠가 바뀔 때만** 본다.
+--
+-- 이미 수업에 고정된 내용은 이 표들과 무관하다 — 보관됐다고 과거 수업에서 사라지면
+-- 안 된다.
 
 -- =========================================================================
--- 1. 교재는 여기서 막지 않는다 — 왜인지 남긴다
+-- 1. 교재 — 공개됐고 보관되지 않은 것만
 -- =========================================================================
--- 처음에는 교재에도 같은 가드를 걸었는데, 기존 설계를 깬다.
---
--- 관리자 기준본·선생님 기본 템플릿은 **계획하는 자리**다. 아직 공개되지 않은 교재를
--- 미리 붙여 두고 나중에 공개하는 흐름이 이미 있고, 하위로 내려갈 때 published 인
--- 것만 걸러진다(inherit 트리거들이 `d.status = 'published'` 를 본다). 실제로
--- "draft 상태인 참고 교재는 절대 시딩되지 않는다"가 회귀 테스트로 고정돼 있다.
---
--- 학생에게 실제로 가는 경계(curriculum_overlay_unit_materials)에는 이미
--- published 가드가 있다(20261229000000). 거기서 막는 것으로 충분하다.
---
--- 문제는 다르다. 공개 버전이 없는 문제는 problem_versions 조회 정책상 **내용을
--- 읽을 수조차 없어서**, 계획 단계에 담아 두어도 빈 자리가 될 뿐이다. 그래서
--- 문제만 모든 층에서 막는다.
+create or replace function public.check_unit_material_usable()
+returns trigger
+language plpgsql as $$
+declare
+  v_status doc_status;
+  v_archived timestamptz;
+begin
+  -- 기존 항목 정리(순서·source 변경)는 막지 않는다. 새로 담거나 다른 교재로
+  -- 바꿀 때만 본다.
+  if tg_op = 'UPDATE' and new.curriculum_doc_id = old.curriculum_doc_id then
+    return new;
+  end if;
+
+  select status, archived_at into v_status, v_archived
+  from curriculum_docs where id = new.curriculum_doc_id;
+
+  if v_status is null then
+    raise exception '존재하지 않는 교재입니다.';
+  end if;
+  if v_status <> 'published' then
+    raise exception '공개되지 않은 교재는 회차 구성에 담을 수 없습니다.';
+  end if;
+  if v_archived is not null then
+    raise exception '보관된 교재는 새로 담을 수 없습니다.';
+  end if;
+  return new;
+end;
+$$;
+
+create trigger subject_template_unit_materials_check_usable
+  before insert or update on subject_template_unit_materials
+  for each row execute function public.check_unit_material_usable();
+
+create trigger teacher_curriculum_template_unit_materials_check_usable
+  before insert or update on teacher_curriculum_template_unit_materials
+  for each row execute function public.check_unit_material_usable();
+
+-- 학생 층의 기존 가드(20261229000000)는 published 만 봤고 UPDATE 예외도 없었다.
+-- 같은 기준으로 맞추면서 created_by 채우기는 그대로 둔다.
+create or replace function public.check_overlay_unit_material_published()
+returns trigger
+language plpgsql as $$
+declare
+  v_status doc_status;
+  v_archived timestamptz;
+begin
+  if tg_op = 'UPDATE' and new.curriculum_doc_id = old.curriculum_doc_id then
+    return new;
+  end if;
+
+  select status, archived_at into v_status, v_archived
+  from curriculum_docs where id = new.curriculum_doc_id;
+
+  if v_status is null then
+    raise exception '존재하지 않는 교재입니다.';
+  end if;
+  if v_status <> 'published' then
+    raise exception '공개(published)되지 않은 교재는 학생 커리큘럼에 연결할 수 없습니다.';
+  end if;
+  if v_archived is not null then
+    raise exception '보관된 교재는 새로 담을 수 없습니다.';
+  end if;
+  new.created_by := auth.uid();
+  return new;
+end;
+$$;
 
 -- =========================================================================
 -- 2. 문제 — 확정·미보관에 더해 **공개된 버전이 있어야** 한다
@@ -47,6 +107,10 @@ declare
   v_status problem_status;
   v_archived timestamptz;
 begin
+  if tg_op = 'UPDATE' and new.problem_id = old.problem_id then
+    return new;
+  end if;
+
   select status, archived_at into v_status, v_archived
   from problems where id = new.problem_id;
 
@@ -89,6 +153,9 @@ declare
   v_archived timestamptz;
 begin
   if new.content_type <> 'problem' then
+    return new;
+  end if;
+  if tg_op = 'UPDATE' and new.content_id = old.content_id then
     return new;
   end if;
 
