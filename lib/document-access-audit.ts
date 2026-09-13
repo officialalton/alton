@@ -28,10 +28,14 @@ export async function recordDocumentAccess(params: {
   detail?: Record<string, unknown>;
 }): Promise<void> {
   const admin = createAdminClient();
+  // 회사 문서의 id는 Google Drive의 파일 id라 uuid가 아니다. 내부 행을 가리키는
+  // target_id와 섞으면 저장 자체가 실패한다(실제로 그랬다).
+  const isExternal = params.targetKind === "company_document";
   const { error } = await admin.from("document_access_events").insert({
     actor_id: params.actorId,
     target_kind: params.targetKind,
-    target_id: params.targetId,
+    target_id: isExternal ? null : params.targetId,
+    target_external_id: isExternal ? params.targetId : null,
     subject_id: params.subjectId ?? null,
     action: params.action,
     detail: params.detail ?? {},
