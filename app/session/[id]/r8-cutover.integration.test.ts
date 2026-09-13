@@ -65,9 +65,9 @@ describe("R8 cutover: v3 sessions <-> /session/[id]", () => {
       insert into curriculum_docs (id, title, subject_id, owner_type, status)
       values ('${CURRICULUM_DOC_ID}', '${RUN_ID} 교재', '${SUBJECT_ID}', 'admin', 'published');
       insert into curriculum_doc_versions (id, curriculum_doc_id, version_number, snapshot)
-      values ('${VERSION_A}', '${CURRICULUM_DOC_ID}', 1, '{}'::jsonb);
+      values ('${VERSION_A}', '${CURRICULUM_DOC_ID}', next_curriculum_doc_version_number('${CURRICULUM_DOC_ID}'), '{}'::jsonb);
       insert into curriculum_doc_versions (id, curriculum_doc_id, version_number, snapshot)
-      values ('${VERSION_B}', '${CURRICULUM_DOC_ID}', 2, '{}'::jsonb);
+      values ('${VERSION_B}', '${CURRICULUM_DOC_ID}', next_curriculum_doc_version_number('${CURRICULUM_DOC_ID}'), '{}'::jsonb);
     `);
   });
 

@@ -109,7 +109,7 @@ function createCurriculumVersion(label: string): string {
   );
   const versionId = psql(
     `insert into curriculum_doc_versions (id, curriculum_doc_id, version_number, snapshot)
-     values (gen_random_uuid(), '${docId}', 1, '{}'::jsonb)
+     values (gen_random_uuid(), '${docId}', next_curriculum_doc_version_number('${docId}'), '{}'::jsonb)
      returning id;`
   );
   return versionId;
