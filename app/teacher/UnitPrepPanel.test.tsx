@@ -342,3 +342,25 @@ describe("UnitPrepPanel — 교재 목록·미리보기", () => {
     expect(screen.getByText("직접 담음")).toBeInTheDocument();
   });
 });
+
+// 키워드 조건을 벗어나 고르는 것과, 학생에게 갈 수 없는 초안·보관 교재를 담는
+// 것은 다른 이야기다. 직접 담기도 배포된 교재만 허용한다.
+describe("UnitPrepPanel — 직접 담기도 배포된 교재만", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    mockAll();
+  });
+
+  it("서버가 거부하면 사유를 보여주고 구성이 늘지 않는다", async () => {
+    addUnitMaterial.mockResolvedValue({ ok: false, error: "배포된 교재만 담을 수 있습니다." });
+    renderPanel();
+    await waitFor(() => expect(screen.getByText("교재 목록에서 고르기")).toBeInTheDocument());
+    fireEvent.click(screen.getByText("교재 목록에서 고르기"));
+    await waitFor(() => expect(screen.getByText("이차함수 개론")).toBeInTheDocument());
+
+    fireEvent.click(screen.getAllByText("담기")[0]);
+    await waitFor(() =>
+      expect(screen.getByText("배포된 교재만 담을 수 있습니다.")).toBeInTheDocument()
+    );
+  });
+});

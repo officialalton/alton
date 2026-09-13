@@ -465,3 +465,154 @@ describe("키워드 → 교재 자동 구성", () => {
     ).toBe("0");
   });
 });
+
+// 키워드는 그대로인데 교재 쪽이 바뀌는 경우. 키워드를 붙이는 순간에만 동작하면
+// 이후에 배포된 교재가 영원히 누락된다.
+describe("교재 쪽이 바뀌어도 자동 구성이 따라온다", () => {
+  function unitWithKeyword(): { overlayUnitId: string; keywordId: string } {
+    const overlayUnitId = makeOverlayUnit(null);
+    const keywordId = psql(
+      `insert into subject_keywords (subject_id, label) values ('${SUBJECT_ID}', '추적 ${uniq()}') returning id;`
+    );
+    asUser(
+      TEACHER_ID,
+      `insert into curriculum_overlay_unit_keywords (overlay_unit_id, keyword_id)
+       values ('${overlayUnitId}', '${keywordId}');`
+    );
+    return { overlayUnitId, keywordId };
+  }
+
+  it("나중에 배포된 교재가 이미 키워드가 붙은 회차로 들어온다", () => {
+    const { overlayUnitId, keywordId } = unitWithKeyword();
+    expect(materialsOf(overlayUnitId)).toBe("");
+
+    // 초안으로 만들어 두고 — 아직 들어오면 안 된다.
+    const docId = newDoc(
+      `insert into curriculum_docs (title, subject_id, owner_type, status, primary_keyword_id)
+       values ('나중 배포 ${uniq()}', '${SUBJECT_ID}', 'admin', 'draft', '${keywordId}') returning id;`
+    );
+    expect(materialsOf(overlayUnitId)).toBe("");
+
+    // 배포하는 순간 들어온다.
+    psql(`update curriculum_docs set status = 'published' where id = '${docId}';`);
+    expect(materialsOf(overlayUnitId)).toBe(docId);
+  });
+
+  it("배포를 내리면 자동분에서 빠진다", () => {
+    const { overlayUnitId, keywordId } = unitWithKeyword();
+    const docId = newDoc(
+      `insert into curriculum_docs (title, subject_id, owner_type, status, primary_keyword_id)
+       values ('내릴 교재 ${uniq()}', '${SUBJECT_ID}', 'admin', 'published', '${keywordId}') returning id;`
+    );
+    expect(materialsOf(overlayUnitId)).toBe(docId);
+
+    psql(`update curriculum_docs set status = 'draft' where id = '${docId}';`);
+    expect(materialsOf(overlayUnitId)).toBe("");
+  });
+
+  it("대표 키워드를 옮기면 옛 회차에서 빠지고 새 회차로 들어온다", () => {
+    const a = unitWithKeyword();
+    const b = unitWithKeyword();
+    const docId = newDoc(
+      `insert into curriculum_docs (title, subject_id, owner_type, status, primary_keyword_id)
+       values ('옮길 교재 ${uniq()}', '${SUBJECT_ID}', 'admin', 'published', '${a.keywordId}') returning id;`
+    );
+    expect(materialsOf(a.overlayUnitId)).toBe(docId);
+    expect(materialsOf(b.overlayUnitId)).toBe("");
+
+    psql(`update curriculum_docs set primary_keyword_id = '${b.keywordId}' where id = '${docId}';`);
+    expect(materialsOf(a.overlayUnitId)).toBe("");
+    expect(materialsOf(b.overlayUnitId)).toBe(docId);
+  });
+
+  it("갱신이 수동 구성·제외·순서를 보존한다", () => {
+    const { overlayUnitId, keywordId } = unitWithKeyword();
+
+    // 선생님이 직접 담은 교재를 맨 앞에 둔다.
+    const ownDoc = newDoc(
+      `insert into curriculum_docs (title, subject_id, owner_type, status)
+       values ('내 교재 ${uniq()}', '${SUBJECT_ID}', 'admin', 'published') returning id;`
+    );
+    asUser(
+      TEACHER_ID,
+      `insert into curriculum_overlay_unit_materials (overlay_unit_id, curriculum_doc_id, position, source)
+       values ('${overlayUnitId}', '${ownDoc}', 0, 'manual');`
+    );
+
+    // 선생님이 뺀 자동 교재.
+    const excludedDoc = newDoc(
+      `insert into curriculum_docs (title, subject_id, owner_type, status, primary_keyword_id)
+       values ('뺀 교재 ${uniq()}', '${SUBJECT_ID}', 'admin', 'published', '${keywordId}') returning id;`
+    );
+    asUser(
+      TEACHER_ID,
+      `insert into curriculum_overlay_unit_material_exclusions (overlay_unit_id, curriculum_doc_id)
+       values ('${overlayUnitId}', '${excludedDoc}');
+       delete from curriculum_overlay_unit_materials
+       where overlay_unit_id = '${overlayUnitId}' and curriculum_doc_id = '${excludedDoc}';`
+    );
+
+    // 교재가 새로 배포돼 갱신이 돈다.
+    const lateDoc = newDoc(
+      `insert into curriculum_docs (title, subject_id, owner_type, status, primary_keyword_id)
+       values ('늦은 교재 ${uniq()}', '${SUBJECT_ID}', 'admin', 'published', '${keywordId}') returning id;`
+    );
+
+    // 수동분은 맨 앞 그대로, 뺀 것은 돌아오지 않고, 새 것만 뒤에 붙는다.
+    expect(materialsOf(overlayUnitId)).toBe(`${ownDoc},${lateDoc}`);
+  });
+
+  it("이미 시작한 수업의 고정 내용은 갱신에 흔들리지 않는다", () => {
+    const { overlayUnitId, keywordId } = unitWithKeyword();
+    const docId = newDoc(
+      `insert into curriculum_docs (title, subject_id, owner_type, status, primary_keyword_id)
+       values ('고정 확인 ${uniq()}', '${SUBJECT_ID}', 'admin', 'published', '${keywordId}') returning id;`
+    );
+    expect(materialsOf(overlayUnitId)).toBe(docId);
+
+    // 과거 수업이 읽는 것은 session_content_manifest 스냅샷이지 회차 구성이
+    // 아니다 — 회차 구성이 바뀌어도 고정된 매니페스트 행은 그대로다.
+    const before = psql(`select count(*) from session_content_manifest;`);
+    psql(`update curriculum_docs set status = 'draft' where id = '${docId}';`);
+    expect(materialsOf(overlayUnitId)).toBe("");
+    expect(psql(`select count(*) from session_content_manifest;`)).toBe(before);
+  });
+});
+
+// 서버가 마지막 방어선이다 — 목록을 연 사이에 배포가 내려갈 수 있다.
+describe("배포되지 않은 교재는 구성에 들어가지 않는다", () => {
+  it("초안 교재는 키워드를 통해서도 들어오지 않는다", () => {
+    const overlayUnitId = makeOverlayUnit(null);
+    const keywordId = psql(
+      `insert into subject_keywords (subject_id, label) values ('${SUBJECT_ID}', '초안확인 ${uniq()}') returning id;`
+    );
+    newDoc(
+      `insert into curriculum_docs (title, subject_id, owner_type, status, primary_keyword_id)
+       values ('초안 ${uniq()}', '${SUBJECT_ID}', 'admin', 'draft', '${keywordId}') returning id;`
+    );
+    asUser(
+      TEACHER_ID,
+      `insert into curriculum_overlay_unit_keywords (overlay_unit_id, keyword_id)
+       values ('${overlayUnitId}', '${keywordId}');`
+    );
+    expect(materialsOf(overlayUnitId)).toBe("");
+  });
+
+  it("키워드 기본 교재 뷰는 배포된 것만 돌려준다", () => {
+    const keywordId = psql(
+      `insert into subject_keywords (subject_id, label) values ('${SUBJECT_ID}', '뷰확인 ${uniq()}') returning id;`
+    );
+    newDoc(
+      `insert into curriculum_docs (title, subject_id, owner_type, status, primary_keyword_id)
+       values ('초안 ${uniq()}', '${SUBJECT_ID}', 'admin', 'draft', '${keywordId}') returning id;`
+    );
+    const publishedId = newDoc(
+      `insert into curriculum_docs (title, subject_id, owner_type, status, primary_keyword_id)
+       values ('배포 ${uniq()}', '${SUBJECT_ID}', 'admin', 'published', '${keywordId}') returning id;`
+    );
+    expect(
+      psql(`select string_agg(curriculum_doc_id::text, ',') from keyword_default_materials
+            where keyword_id = '${keywordId}';`)
+    ).toBe(publishedId);
+  });
+});

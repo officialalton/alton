@@ -600,12 +600,27 @@ export async function previewUnitMaterial(
  *
  * 직접 담은 것은 manual이라 키워드를 떼도 사라지지 않는다. 전에 뺐던 교재라면
  * 그 기록을 지운다 — 다시 담았다는 건 마음이 바뀌었다는 뜻이다.
+ *
+ * 배포된 교재만 담을 수 있다. 키워드 조건을 벗어나 고르는 것과, 학생에게 갈 수
+ * 없는 초안·보관 교재를 담는 것은 다른 이야기다. 목록도 배포된 것만 주지만,
+ * 목록을 연 사이에 배포가 내려갈 수 있으므로 서버에서 다시 확인한다.
  */
 export async function addUnitMaterial(
   overlayUnitId: string,
   curriculumDocId: string
 ): Promise<{ ok: true } | { ok: false; error: string }> {
   const { supabase, user } = await requireTeacherOrAdmin();
+
+  const { data: doc } = await supabase
+    .from("curriculum_docs")
+    .select("status")
+    .eq("id", curriculumDocId)
+    .maybeSingle();
+  if (!doc) return { ok: false, error: "존재하지 않는 교재입니다." };
+  if (doc.status !== "published") {
+    return { ok: false, error: "배포된 교재만 담을 수 있습니다." };
+  }
+
   await supabase
     .from("curriculum_overlay_unit_material_exclusions")
     .delete()
