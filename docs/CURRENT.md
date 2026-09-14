@@ -5,15 +5,15 @@
 > 커밋 `531e4bc` → `8dc0fdf` → `63d1189`(브랜치 `preview/m4-integration-verification`).
 > 전체 테스트 **2596 통과 / 1 skip**(`supabase db reset --local` 직후 `vitest run --no-file-parallelism`, 449s).
 >
-> **공유 non-prod: 46·47·48 전부 적용됨(2026-09-14 사용자 실행).** Preview
-> `https://alton-mcsbc18fd-alton7.vercel.app` = 커밋 `f51cef9` + Preview 환경변수
-> `CURRICULUM_DRIVE_ENABLED=true`, `CURRICULUM_DRIVE_ID=0AKnx7roQfcSaUk9PVA`,
-> `CURRICULUM_DRIVE_ALLOW_REAL_WRITES=false`(사용자 설정, Ready 33s). 첫 배포 `ke46evn0y`는
-> `"use server"` 파일의 상수 export 로 빌드 실패 → `f51cef9`로 정정.
+> **공유 non-prod: 46·47·48 적용됨.** Preview `https://alton-n2oaj70u1-alton7.vercel.app` = 커밋 `3bbda04`.
+> Preview 환경변수 `CURRICULUM_DRIVE_ENABLED=true`, `CURRICULUM_DRIVE_ID=0AKnx7roQfcSaUk9PVA`,
+> `CURRICULUM_DRIVE_ALLOW_REAL_WRITES=true`(사용자 설정).
 >
-> **교재 전용 Shared Drive**: id `0AKnx7roQfcSaUk9PVA`(회사 문서 Drive 와 별개 — 사용자 확인),
-> `r3-drive-preview-verify@alton-integration-sandbox.iam.gserviceaccount.com` Manager.
-> 실제 Drive 호출(폴더 동기화 계획·파일 목록)은 **아직 한 번도 실행되지 않았다** — 아래 조작 1.
+> **실제 Drive 연동 확인(2026-09-14)**: 교재 전용 Shared Drive `ALTON Company Tutoring Resources`
+> (id `0AKnx7roQfcSaUk9PVA`, 회사 문서 Drive 와 별개), 서비스 계정 Manager. 폴더 동기화가
+> 드라이브 읽기(이름 표시) → 실제 쓰기(과목 폴더 6개 → 단원 폴더, 실패 0)까지 Drive 에서 확인됨.
+> 남은 대기 = 단원 미지정 키워드(비non-prod 11개) — `3bbda04`의 **단원 지정 표**(Drive 자료 탭)에서
+> 사람이 정하면 다음 동기화에서 키워드 폴더가 생긴다. 파일 등록·공개(Drive 원본 경로)는 **아직 미실행**.
 >
 > **완료한 것**
 > 1. `기본 구성 업데이트`가 상위에서 **빠진 것을 빼고**(내려온 행만), 없는 것을 받고, **순서·목표**를
@@ -46,12 +46,12 @@
 >   iPad·Apple Pencil, 원본 교체·재공개 후 유지(RPC 테스트만), 학생·보호자 계정의 브라우저 확인, Preview.
 >
 > **사용자가 할 조작(순서대로)**
-> 1. Preview 관리자 > 과목 및 교재 > Drive 자료 > `폴더 동기화 실행` → "계획만 — 만들 폴더 N개"가
->    나오면 연결 OK(첫 실제 Drive **읽기**). 건너뜀 = 단원 미지정 키워드.
-> 2. N 확인 뒤 `CURRICULUM_DRIVE_ALLOW_REAL_WRITES`를 `true`로(rm 후 add) → 재배포 → 다시 실행
->    (첫 실제 Drive **쓰기**: 폴더 생성만, 삭제 없음).
-> 3. 키워드 폴더에 PDF 올리기 → `Drive 에서 불러오기` → 등록 → 공개(고정 사본). 또는 같은 탭 **로컬 표본**.
-> 4. Preview UAT: 교사 예정 수업 교재 탭 PDF 페이지·필기, 학생 계정 `수업 준비`·`/materials`.
+> 1. Drive 자료 탭 > 과목 선택 → "단원이 정해지지 않은 키워드" 표에서 단원 지정 → `폴더 동기화 실행`
+>    → Drive 단원 폴더 아래 키워드 폴더 확인.
+> 2. 키워드 폴더에 PDF 업로드 → 키워드 선택 → `Drive 에서 불러오기` → `자료로 등록` → `공개 (고정 사본)`
+>    (첫 Drive 원본 경로 공개 — 페이지 수·용량이 알림에 뜬다).
+> 3. 교재 문서 목록에 `PDF · Drive 원본`으로 보이는지, 회차 구성에 담아 교사 `수업 준비` 교재 탭에서
+>    페이지·필기, 학생 계정 `수업 준비`·`/materials` 확인.
 > **열린 결함·남은 것**: 기존 키워드 128개(로컬 기준) 단원 미지정 — 전환 대상, 사람이 정한다 /
 > `session_curriculum_units` 없는 회차(예약 미연결)의 필기는 수업이 없어 저장 대상이 없음(설계대로) /
 > 이전 항목(테스트 격리 `reservations_no_overlap`, `homework_items.session_id` 레거시, Google 이전
