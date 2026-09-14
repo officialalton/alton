@@ -139,9 +139,9 @@ export default function CurriculumOverlayView({
                     </span>
                   </div>
                   {u.note && <p className="text-[12.5px] text-grey-500">{u.note}</p>}
-                  {u.keywordLabels.length > 0 && (
+                  {(u.keywordLabels ?? []).length > 0 && (
                     <div className="flex flex-wrap gap-1 mt-1" aria-label="회차 키워드">
-                      {u.keywordLabels.map((k) => (
+                      {(u.keywordLabels ?? []).map((k) => (
                         <span key={k} className="text-[11px] font-semibold text-grey-500 border border-grey-200 rounded-full px-2 py-0.5">
                           {k}
                         </span>

@@ -75,8 +75,7 @@ const lessonsProps = {
   reviews: {},
   myFeedback: {},
   bookableEnrollments: [],
-  homeworkTodo: [],
-  homeworkDone: [],
+  studentId: "student-1",
   homeworkSets: [],
   materialsLibrary: [],
   credits: { balance: 0, guardianName: null, regularRemaining: 0, regularNearestExpiry: null, trialEntitlement: null },
@@ -203,7 +202,7 @@ describe("StudentShell", () => {
     );
     fireEvent.click(screen.getAllByText("과제")[0]);
     expect(
-      screen.getByText("지금은 할 과제가 없어요. 새 과제가 오면 여기 보여드릴게요.")
+      screen.getByText(/아직 발급된 과제가 없습니다/)
     ).toBeInTheDocument();
   });
 

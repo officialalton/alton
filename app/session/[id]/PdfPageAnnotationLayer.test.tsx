@@ -251,4 +251,29 @@ describe("PDF 페이지 필기 레이어", () => {
     fireEvent.click(screen.getByRole("button", { name: "전체 지우기" }));
     expect(actions.appendPageStrokeEvents).not.toHaveBeenCalled();
   });
+
+  it("저장이 끝난 획은 창 크기가 바뀌어 다시 그릴 때도 남는다(2026-09-14 UAT: 크기 조절 뒤 필기가 사라졌다)", async () => {
+    vi.mocked(actions.appendPageStrokeEvents).mockImplementation(async ({ segments }) => ({
+      savedEventIds: segments.map((s) => s.eventId!).filter(Boolean),
+    }));
+    const strokeCalls: number[] = [];
+    HTMLCanvasElement.prototype.getContext = vi.fn(() => ({
+      lineCap: "", lineWidth: 0, strokeStyle: "", globalCompositeOperation: "", fillStyle: "", font: "", textBaseline: "",
+      beginPath: vi.fn(), moveTo: vi.fn(), lineTo: vi.fn(), clearRect: vi.fn(), fillText: vi.fn(),
+      stroke: vi.fn(() => strokeCalls.push(1)),
+    })) as unknown as typeof HTMLCanvasElement.prototype.getContext;
+    const ref = createRef<PdfPageAnnotationHandle>();
+    const { rerender } = render(
+      <PdfPageAnnotationLayer ref={ref} target={target(1)} role="teacher" viewerUserId="t1" width={600} height={800} />
+    );
+    await enableDrawing();
+    await drawOne();
+    await act(async () => {
+      expect(await ref.current!.flush()).toBe(true);
+    });
+    strokeCalls.length = 0;
+    rerender(<PdfPageAnnotationLayer ref={ref} target={target(1)} role="teacher" viewerUserId="t1" width={400} height={533} />);
+    // 크기가 바뀌어 다시 그렸고, 그때 저장된 획이 그려졌다.
+    expect(strokeCalls.length).toBeGreaterThan(0);
+  });
 });

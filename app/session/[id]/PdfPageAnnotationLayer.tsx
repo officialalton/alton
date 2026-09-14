@@ -253,6 +253,13 @@ export default forwardRef<
     try {
       const { savedEventIds } = await appendPageStrokeEvents({ target, segments: batch, scope: myScope });
       ackSaved(store, savedEventIds, batch);
+      // 저장된 획은 이제 "저장된 필기" 목록에 있어야 한다 — 보관함에서만 지우면 다음 다시 그리기(창 크기
+      // 변경·확대)에서 사라진다(2026-09-14 UAT: 창을 줄이자 필기가 통째로 없어졌다).
+      const own = myScope === "teacher_shared" ? teacherStrokesRef : studentStrokesRef;
+      for (const seg of batch) {
+        if (seg.tool === "clear") own.current = [];
+        else own.current.push(seg);
+      }
       if (storeKey) persist(storeKey, store);
       setSaveState(hasUnsaved(store) ? "saving" : "saved");
       return !hasUnsaved(store);

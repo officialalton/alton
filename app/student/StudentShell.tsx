@@ -16,7 +16,6 @@ import type { CurriculumData } from "./curriculum-data";
 import type { Memo } from "./memo-data";
 import type { ReviewData, StudentFeedback } from "./review-data";
 import StudentHomeworkTab from "./StudentHomeworkTab";
-import type { StudentHomeworkItem } from "./homework-data";
 import type { StudentHomeworkSet } from "./homework-v3-data";
 import MaterialsLibraryTab from "./MaterialsLibraryTab";
 import type { LibrarySubject } from "./materials-data";
@@ -74,8 +73,7 @@ export default function StudentShell({
   memosByEnrollment,
   reviews,
   myFeedback,
-  homeworkTodo,
-  homeworkDone,
+  studentId,
   homeworkSets,
   materialsLibrary,
   credits,
@@ -98,8 +96,8 @@ export default function StudentShell({
   memosByEnrollment: Record<string, Memo[]>;
   reviews: Record<string, ReviewData>;
   myFeedback: Record<string, StudentFeedback>;
-  homeworkTodo: StudentHomeworkItem[];
-  homeworkDone: StudentHomeworkItem[];
+  /** 학생 본인 id(2026-09-14 과제 v3 통일 — 과제 패널이 쓴다). */
+  studentId: string;
   homeworkSets: StudentHomeworkSet[];
   materialsLibrary: LibrarySubject[];
   credits: CreditsData;
@@ -256,8 +254,7 @@ export default function StudentShell({
             <ProblemLogTab initialEntries={problemLog} viewerRole="student" />
           ) : activeTab === "homework" ? (
             <StudentHomeworkTab
-              initialTodo={homeworkTodo}
-              initialDone={homeworkDone}
+              studentId={studentId}
               homeworkSets={homeworkSets}
             />
           ) : activeTab === "materials" ? (
