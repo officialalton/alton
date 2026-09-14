@@ -54,12 +54,14 @@ begin
     return v_overlay_id;
   end if;
 
-  -- **두 칸을 함께 채운다.** source_unit_id 가 비어 있으면 상속이 돌지 않고,
-  -- 화면은 이 회차를 학생 전용 보강으로 표시한다.
+  -- source_kind='teacher_template' 인 행은 source_unit_id 를 가질 수 없다
+  -- (curriculum_overlay_units_source_consistency). 출처는 교사 회차 하나이고,
+  -- 기준본까지 거슬러 갈 일이 있으면 그 교사 회차를 통해 간다. 상속·물려받기·
+  -- 화면 표시가 전부 이 참조를 읽도록 아래에서 맞춘다.
   insert into curriculum_overlay_units
-    (overlay_id, source_teacher_template_unit_id, source_unit_id, source_kind,
+    (overlay_id, source_teacher_template_unit_id, source_kind,
      position, unit_title, note, created_by)
-  select v_overlay_id, tu.id, tu.source_unit_id, 'teacher_template',
+  select v_overlay_id, tu.id, 'teacher_template',
          tu.position, tu.unit_title, tu.note, auth.uid()
   from teacher_curriculum_template_units tu
   where tu.template_id = v_template_id
@@ -70,9 +72,9 @@ end;
 $$;
 
 comment on function public.seed_curriculum_overlay_for_match(uuid, uuid, uuid) is
-  'P2 10차: 매칭 확정 시 교사 기본 구성으로 학생 커리큘럼을 시딩한다. 교사 회차와 그 '
-  '회차가 갈라져 나온 기준본 회차를 **둘 다** 기록한다 — 전자만 적으면 상속 트리거가 '
-  '돌지 않고 화면이 보강 단원으로 잘못 표시한다.';
+  'P2 10차: 매칭 확정 시 교사 기본 구성으로 학생 커리큘럼을 시딩한다. 출처는 교사 회차 '
+  '하나로 기록한다(제약상 기준본 참조와 함께 쓸 수 없다) — 상속·물려받기·화면 표시가 '
+  '모두 이 참조를 읽는다.';
 
 -- =========================================================================
 -- 2. 상속은 교사 회차 참조만 있어도 돈다
@@ -196,20 +198,15 @@ end;
 $$;
 
 -- =========================================================================
--- 3. 이미 만들어진 행의 출처를 채운다
+-- 3. 기존 데이터는 고치지 않는다
 -- =========================================================================
--- 값을 **덮어쓰지 않는다** — 비어 있는 source_unit_id 만, 그 회차가 이미 가리키고
--- 있는 교사 회차에서 읽어 채운다. 새로 만들어 내는 정보가 아니라 시딩이 적었어야
--- 했는데 빠뜨린 연결이다.
+-- 제약(curriculum_overlay_units_source_consistency)이 source_kind 에 따라 어느 칸을
+-- 채울지 정해 두었으므로, 뒤늦게 두 칸을 함께 채우는 보정은 하지 않는다. 대신 위
+-- 트리거와 물려받기가 source_teacher_template_unit_id 만으로도 동작하므로 기존
+-- 행도 그대로 쓸 수 있다.
 --
--- 구성 내용(키워드·교재·문제)은 여기서 건드리지 않는다. 그것은 '물려받기'를 눌렀을
--- 때 들어온다 — 선생님이 일부러 비워 둔 것과 구분할 수 없기 때문이다.
-update curriculum_overlay_units u
-set source_unit_id = tu.source_unit_id
-from teacher_curriculum_template_units tu
-where u.source_teacher_template_unit_id = tu.id
-  and u.source_unit_id is null
-  and tu.source_unit_id is not null;
+-- 구성 내용(키워드·교재·문제)도 여기서 채우지 않는다 — '기본 구성 업데이트'를
+-- 눌렀을 때 들어온다. 선생님이 일부러 비워 둔 것과 구분할 수 없기 때문이다.
 
 -- =========================================================================
 -- 4. '물려받기'도 같은 기준을 본다

@@ -13,6 +13,12 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 export type OverlayUnit = {
   id: string;
   sourceUnitId: string | null;
+  /**
+   * 교사 기본 구성에서 갈라져 나온 회차의 출처. 매칭 경로로 만들어진 회차는
+   * sourceUnitId 가 아니라 이 칸을 쓴다(제약상 둘을 함께 쓸 수 없다).
+   * 둘 다 null 일 때만 학생 전용 보강 회차다.
+   */
+  sourceTeacherTemplateUnitId: string | null;
   position: number;
   unitTitle: string;
   note: string | null;
@@ -43,7 +49,7 @@ export async function loadStudentCurriculum(
   const { data: units } = await supabase
     .from("curriculum_overlay_units")
     .select(
-      "id, source_unit_id, position, unit_title, note, status, status_changed_at"
+      "id, source_unit_id, source_teacher_template_unit_id, position, unit_title, note, status, status_changed_at"
     )
     .eq("overlay_id", overlay.id)
     .order("position", { ascending: true });
@@ -85,6 +91,7 @@ export async function loadStudentCurriculum(
     units: (units ?? []).map((u) => ({
       id: u.id,
       sourceUnitId: u.source_unit_id,
+      sourceTeacherTemplateUnitId: u.source_teacher_template_unit_id,
       position: u.position,
       unitTitle: u.unit_title,
       note: u.note,

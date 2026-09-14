@@ -14,6 +14,7 @@ const data: StudentCurriculum = {
     {
       id: "u1",
       sourceUnitId: "src1",
+    sourceTeacherTemplateUnitId: null,
       position: 1,
       unitTitle: "이차방정식",
       note: "기초 개념",
@@ -25,6 +26,7 @@ const data: StudentCurriculum = {
     {
       id: "u2",
       sourceUnitId: "src2",
+    sourceTeacherTemplateUnitId: null,
       position: 2,
       unitTitle: "판별식",
       note: null,
@@ -36,6 +38,7 @@ const data: StudentCurriculum = {
     {
       id: "u3",
       sourceUnitId: null,
+    sourceTeacherTemplateUnitId: null,
       position: 3,
       unitTitle: "근과 계수의 관계",
       note: null,

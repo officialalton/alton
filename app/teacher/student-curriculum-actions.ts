@@ -43,6 +43,7 @@ async function requireAssignedTeacherOrAdmin(subjectEnrollmentId: string) {
 function mapUnitRow(row: {
   id: string;
   source_unit_id: string | null;
+  source_teacher_template_unit_id?: string | null;
   position: number;
   unit_title: string;
   note: string | null;
@@ -52,6 +53,7 @@ function mapUnitRow(row: {
   return {
     id: row.id,
     sourceUnitId: row.source_unit_id,
+    sourceTeacherTemplateUnitId: row.source_teacher_template_unit_id ?? null,
     position: row.position,
     unitTitle: row.unit_title,
     note: row.note,

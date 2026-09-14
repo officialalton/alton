@@ -20,6 +20,7 @@ const initial: StudentCurriculum = {
     {
       id: "u1",
       sourceUnitId: "src1",
+    sourceTeacherTemplateUnitId: null,
       position: 1,
       unitTitle: "이차방정식",
       note: null,

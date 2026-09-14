@@ -192,7 +192,9 @@ export default function StudentCurriculumPanel({
           <div className="flex items-center justify-between gap-2 mb-1.5">
             <span className="text-[13px] font-bold text-ink">
               {u.unitTitle}
-              {u.sourceUnitId === null && (
+              {/* 기준본에서든 교사 기본 구성에서든 갈라져 나왔으면 보강이 아니다.
+                  매칭 경로는 교사 회차만 가리키므로 그쪽도 함께 본다. */}
+              {u.sourceUnitId === null && u.sourceTeacherTemplateUnitId === null && (
                 <span className="ml-1.5 text-[10.5px] font-bold text-white bg-ink rounded-full px-1.5 py-0.5">
                   보강
                 </span>
