@@ -7,7 +7,12 @@
 >   반올림·절사). `submit_problem_attempt` 텍스트 답 자동 채점·채점 전 재입력, 공개 검사(spr 정답 필수·mc 선택지/정답 필수). 초안 RPC 8인수(7인수 제거).
 > - 문제은행: 형식 `숫자 입력(SPR)`, 초안 편집 정답 목록 칸, AI 스키마 `answers`, **난이도 선택**, **전체 공개**(보이는 초안 일괄), 지문·해설 칸 자동 확장.
 > - 문제 패널(수업·과제): SPR 입력 + `답 저장`, 채점 뒤 정답 목록 초록, 교사 채점 구역에 학생 답·자동 채점.
-> - 검증: 통합 20(spr 정규화·자동 채점·재입력·공개 검사 포함), 컴포넌트 ProblemsPanel 29·ProblemBankTab 26·HomeworkTab 7.
+> - **② 표·수식**: 본문의 마크다운 파이프 표를 표로 렌더(`splitLearningBlocks`), 수식 KaTeX 는 기존. AI 프롬프트에 표기 규칙.
+> - **③ 도형·그래프**(`20261361`): `lib/problem-figures` — FigureSpec(coordinate_plane | geometry) 검증 + 순수 SVG 렌더러. `problem_versions.figure/figure_checked`,
+>   초안 RPC 10인수, `mark_problem_figure_checked`, 그림 있으면 확인 없이 공개 불가(그림이 바뀌면 확인 해제). 문제은행 편집: JSON 칸 + 미리보기 + `그림 확인함`.
+>   AI 스키마 `figure`(모양 검증 통과만 저장). 문제 패널 지문 위 `ProblemFigure`.
+> - 검증: 통합 21(spr·figure 게이트 포함), 컴포넌트 ProblemsPanel 31·ProblemBankTab 27·HomeworkTab 7·figures 3·blocks 3.
+> - 남은 단계: ④ 이미지 첨부(Storage, 서명 URL) → ⑤ 유형 코드 표준화·유형별 문항 말투·RW 2지문/메모 블록. 표본 10문항 AI 생성 → 렌더 확인은 ⑤ 뒤.
 
 > **2026-09-14 야간 — P3 8차: 과제 답안·필기 분리 / 문제 화면 필기 / 채점 결과·점수 / 관리자 교재 탭 통합.**
 > 커밋 `424d0e1` → `(이번)`. **Preview `https://alton-riw673x9q-alton7.vercel.app`.** 공유 non-prod: **`20261359000000`까지 적용됨.**

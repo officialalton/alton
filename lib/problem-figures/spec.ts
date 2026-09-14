@@ -39,7 +39,17 @@ export type GeometrySpec = {
   notToScale?: boolean;
 };
 
-export type FigureSpec = CoordinatePlaneSpec | GeometrySpec;
+/** 올린 그림 파일(2026-09-14 ④). 비공개 버킷, 화면은 서명 URL 로 본다. */
+export type ImageFigureSpec = {
+  type: "image";
+  bucket: string;
+  path: string;
+  alt?: string;
+  /** 표시 최대 폭(px). 없으면 본문 폭. */
+  width?: number;
+};
+
+export type FigureSpec = CoordinatePlaneSpec | GeometrySpec | ImageFigureSpec;
 
 /** 최소한의 모양 검사 — 렌더러가 던지지 않게, 그리고 AI 출력이 이상하면 초안에 경고를 남기게. */
 export function validateFigureSpec(input: unknown): { ok: true; spec: FigureSpec } | { ok: false; error: string } {
@@ -69,6 +79,12 @@ export function validateFigureSpec(input: unknown): { ok: true; spec: FigureSpec
       }
     }
     return { ok: true, spec: s as unknown as CoordinatePlaneSpec };
+  }
+  if (s.type === "image") {
+    if (typeof s.bucket !== "string" || typeof s.path !== "string" || !s.path || s.path.includes("..")) {
+      return { ok: false, error: "image 는 bucket 과 path 가 필요합니다." };
+    }
+    return { ok: true, spec: s as unknown as ImageFigureSpec };
   }
   if (s.type === "geometry") {
     if (!Array.isArray(s.shapes) || s.shapes.length === 0) return { ok: false, error: "shapes 배열이 없습니다." };

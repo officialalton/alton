@@ -322,6 +322,32 @@ export async function createDraftVersionAction(params: {
   return { ok: true, value: data as string };
 }
 
+/**
+ * 문제 그림 파일 올리기(2026-09-14 ④). PNG·JPG·WEBP·SVG, 5MB 까지. 비공개 버킷에 두고 figure 데이터로 돌려준다 —
+ * 편집 칸이 그 데이터를 그림 데이터에 넣는다. 공개는 여전히 '그림 확인함' 뒤.
+ */
+export async function uploadProblemImageAction(
+  formData: FormData
+): Promise<BankResult<{ type: "image"; bucket: string; path: string; alt: string }>> {
+  await requireAdmin();
+  const file = formData.get("file");
+  const problemId = String(formData.get("problemId") ?? "");
+  if (!(file instanceof File)) return { ok: false, error: "파일이 없습니다." };
+  if (!problemId) return { ok: false, error: "문제를 알 수 없습니다." };
+  const allowed: Record<string, string> = { "image/png": "png", "image/jpeg": "jpg", "image/webp": "webp", "image/svg+xml": "svg" };
+  const ext = allowed[file.type];
+  if (!ext) return { ok: false, error: "PNG·JPG·WEBP·SVG 만 올릴 수 있습니다." };
+  if (file.size > 5 * 1024 * 1024) return { ok: false, error: "5MB 이하만 올릴 수 있습니다." };
+  const bytes = new Uint8Array(await file.arrayBuffer());
+  const { createHash } = await import("node:crypto");
+  const hash = createHash("sha256").update(bytes).digest("hex").slice(0, 16);
+  const path = `${problemId}/${hash}.${ext}`;
+  const admin = createAdminClient();
+  const { error } = await admin.storage.from("problem-assets").upload(path, Buffer.from(bytes), { contentType: file.type, upsert: true });
+  if (error) return { ok: false, error: readable(error.message, "그림을 올리지 못했습니다.") };
+  return { ok: true, value: { type: "image", bucket: "problem-assets", path, alt: file.name.replace(/\.[^.]+$/, "") } };
+}
+
 /** 관리자가 미리보기의 그림을 확인했다(2026-09-14 ③). 그림이 있는 버전은 이것 없이 공개되지 않는다. */
 export async function markFigureCheckedAction(versionId: string, checked: boolean): Promise<BankResult> {
   await requireAdmin();

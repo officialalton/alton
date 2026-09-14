@@ -25,6 +25,10 @@ vi.mock("./problem-work-actions", () => ({
   refreshSessionProblems: vi.fn(),
 }));
 
+vi.mock("./problem-image-actions", () => ({
+  getProblemImageUrlAction: vi.fn(async () => ({ ok: true, url: "https://signed.example/img.png", expiresInSeconds: 600 })),
+}));
+
 vi.mock("./PdfPageAnnotationLayer", () => ({
   default: ({ target, role }: { target: { problemId?: string }; role: string }) => (
     <div data-testid="problem-annotation-layer" data-problem={target.problemId} data-role={role} />
@@ -433,5 +437,11 @@ describe("ProblemsPanel — 도형·그래프(2026-09-14 ③)", () => {
   it("틀린 데이터는 그림 대신 사유를 보인다", () => {
     renderPanel([{ ...mc, figure: { type: "geometry", shapes: [] } }]);
     expect(screen.getByTestId("problem-figure-error")).toBeInTheDocument();
+  });
+
+  it("올린 그림 파일은 서명 URL 로 그린다(2026-09-14 ④)", async () => {
+    renderPanel([{ ...mc, figure: { type: "image", bucket: "problem-assets", path: "p1/abc.png", alt: "삼각형" } }]);
+    const img = await screen.findByAltText("삼각형");
+    expect(img).toHaveAttribute("src", "https://signed.example/img.png");
   });
 });

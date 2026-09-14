@@ -49,4 +49,10 @@ describe("문제 도형 생성기(2026-09-14 문제 템플릿 ③)", () => {
     expect(validateFigureSpec({ type: "nope" })).toMatchObject({ ok: false });
     expect(validateFigureSpec({ type: "coordinate_plane", xRange: [0, 1], yRange: [0, 1], items: [{ kind: "line", slope: 1 }] })).toMatchObject({ ok: false });
   });
+
+  it("image 는 bucket/path 가 있어야 하고 상위 경로는 막는다(④)", () => {
+    expect(validateFigureSpec({ type: "image", bucket: "problem-assets", path: "p/x.png" })).toMatchObject({ ok: true });
+    expect(validateFigureSpec({ type: "image", bucket: "problem-assets", path: "../x.png" })).toMatchObject({ ok: false });
+    expect(renderFigureSvg({ type: "image", bucket: "b", path: "p" })).toBe("");
+  });
 });

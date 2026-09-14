@@ -16,6 +16,7 @@ vi.mock("./problem-bank-actions", () => ({
   createDraftFromPublishedAction: (...a: unknown[]) => createDraftFromPublishedAction(...a),
   publishDraftAction: (...a: unknown[]) => publishDraftAction(...a),
   markFigureCheckedAction: (...a: unknown[]) => markFigureCheckedAction(...a),
+  uploadProblemImageAction: (...a: unknown[]) => uploadProblemImageAction(...a),
   setProblemArchivedAction: (...a: unknown[]) => setProblemArchivedAction(...a),
   setProblemKeywordAction: (...a: unknown[]) => setProblemKeywordAction(...a),
   updateProblemMetaAction: (...a: unknown[]) => updateProblemMetaAction(...a),
@@ -28,6 +29,7 @@ const createDraftVersionAction = vi.fn();
 const createDraftFromPublishedAction = vi.fn();
 const publishDraftAction = vi.fn();
 const markFigureCheckedAction = vi.fn(async (..._a: unknown[]) => ({ ok: true }));
+const uploadProblemImageAction = vi.fn(async (..._a: unknown[]) => ({ ok: true, value: { type: "image", bucket: "problem-assets", path: "p1/abc.png", alt: "fig" } }));
 const setProblemArchivedAction = vi.fn();
 const setProblemKeywordAction = vi.fn();
 const updateProblemMetaAction = vi.fn();

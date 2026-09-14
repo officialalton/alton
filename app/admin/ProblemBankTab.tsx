@@ -8,6 +8,7 @@ import {
   createDraftFromPublishedAction,
   publishDraftAction,
   markFigureCheckedAction,
+  uploadProblemImageAction,
   setProblemArchivedAction,
   setProblemKeywordAction,
   updateProblemMetaAction,
@@ -880,6 +881,7 @@ function DraftEditor({
     }
   })();
   const figureDirty = JSON.stringify(figureParsed.spec ?? null) !== JSON.stringify(source?.figure ?? null);
+  const [figureNotice, setFigureNotice] = useState<string | null>(null);
 
   const initialOptions = useMemo(() => {
     const existing = source?.options ?? [];
@@ -998,6 +1000,33 @@ function DraftEditor({
           placeholder='예: {"type":"coordinate_plane","xRange":[-2,8],"yRange":[-2,8],"items":[{"kind":"line","through":[[0,4],[4,0]]}]}'
           className="w-full text-[12px] font-mono border-[1.5px] border-grey-200 rounded-lg px-3 py-2 mb-1.5 resize-none overflow-hidden"
         />
+        <label className="inline-flex items-center gap-2 text-[12px] text-ink mb-1.5">
+          <span className="font-bold px-2.5 py-1 rounded-lg border-[1.5px] border-grey-200 cursor-pointer">그림 파일 올리기</span>
+          <input
+            type="file"
+            aria-label="그림 파일"
+            accept="image/png,image/jpeg,image/webp,image/svg+xml"
+            className="hidden"
+            disabled={busy}
+            onChange={async (e) => {
+              const file = e.target.files?.[0];
+              e.target.value = "";
+              if (!file) return;
+              const fd = new FormData();
+              fd.set("file", file);
+              fd.set("problemId", problem.id);
+              const r = await uploadProblemImageAction(fd);
+              if (!r.ok) {
+                setFigureNotice(`그림을 올리지 못했습니다 — ${r.error}`);
+                return;
+              }
+              setFigureText(JSON.stringify(r.value, null, 2));
+              setFigureNotice("그림을 올렸습니다. 미리보기를 확인하고 초안을 저장한 뒤 '그림 확인함'을 켜세요.");
+            }}
+          />
+          <span className="text-grey-500">PNG·JPG·WEBP·SVG, 5MB 이하 — 기출 도형·직접 그린 그림</span>
+        </label>
+        {figureNotice && <p className="text-[11.5px] text-ink mb-1.5">{figureNotice}</p>}
         {figureParsed.error && <p className="text-[11.5px] text-red mb-1.5">그림 데이터 오류 — {figureParsed.error}</p>}
         {figureParsed.spec != null && (
           <div className="border-[1.5px] border-grey-200 rounded-lg p-2 mb-1.5 inline-block bg-white">

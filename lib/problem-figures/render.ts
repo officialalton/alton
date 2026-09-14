@@ -13,6 +13,7 @@ function esc(text: string): string {
 const fmt = (n: number) => (Math.round(n * 100) / 100).toString();
 
 export function renderFigureSvg(spec: FigureSpec): string {
+  if (spec.type === "image") return ""; // 그림 파일은 컴포넌트가 서명 URL 로 그린다.
   return spec.type === "coordinate_plane" ? renderPlane(spec) : renderGeometry(spec);
 }
 
