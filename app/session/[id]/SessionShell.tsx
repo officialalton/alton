@@ -511,7 +511,9 @@ export default function SessionShell({
           studentId={studentId}
           viewerUserId={currentUserId}
           initialItems={homeworkList}
-          viewerRole={contentViewerRole}
+          // 2026-09-14 UAT: v3 과제 패널은 수업 문제 패널과 같은 경로(session_problem_work·문제 위 필기)로 쓰므로
+          // 레거시 FK 가드(contentViewerRole → admin)를 타면 학생이 답을 고르지도, 필기하지도 못한다.
+          viewerRole={sessionSource === "v3" ? viewerRole : contentViewerRole}
           sessionSource={sessionSource}
           realViewerRole={viewerRole}
           homeworkProblems={homeworkProblems}
