@@ -87,8 +87,10 @@ export async function removeKeyword(
 /**
  * 구성에서 교재를 뺀다.
  *
- * 자동으로 들어온 교재(source='auto')를 빼면 제외 기록을 남긴다. 그러지 않으면
- * 다음 동기화가 방금 뺀 것을 다시 넣는다 — 사람이 뺀 것을 자동이 되살리면 안 된다.
+ * 스스로 다시 들어올 수 있는 교재를 빼면 제외 기록을 남긴다 — 키워드에서 자동으로
+ * 들어온 것(source='auto')과 상위에서 내려온 것(inherited) 둘 다다. 그러지 않으면
+ * 다음 동기화·업데이트가 방금 뺀 것을 다시 넣는다. 사람이 뺀 것을 자동이 되살리면
+ * 안 된다. 직접 담은 것은 빼면 그만이라 기록이 필요 없다.
  */
 export async function removeMaterial(
   layer: PrepLayer,
@@ -99,9 +101,10 @@ export async function removeMaterial(
   if (!supabase) return { ok: false, error: denied };
 
   const spec = LAYERS[layer];
+  // 기준본에는 위가 없어 inherited 칸이 없다 — 있는 층에서만 읽는다.
   const { data: row } = await supabase
     .from(spec.materialTable)
-    .select("source")
+    .select(layer === "catalog" ? "source" : "source, inherited")
     .eq(spec.unitFk, unitId)
     .eq("curriculum_doc_id", curriculumDocId)
     .maybeSingle();
@@ -116,7 +119,8 @@ export async function removeMaterial(
     return { ok: false, error: "교재를 빼지 못했습니다." };
   }
 
-  if ((row?.source as string) === "auto") {
+  const removed = (row ?? {}) as { source?: string; inherited?: boolean };
+  if (removed.source === "auto" || Boolean(removed.inherited)) {
     const { error: exclusionError } = await supabase
       .from(spec.exclusionTable)
       .insert({ [spec.unitFk]: unitId, curriculum_doc_id: curriculumDocId });
@@ -271,6 +275,21 @@ export type RecompositionSummary = {
   inheritedMaterials: number;
   inheritedProblems: number;
   /**
+   * 상위에서 빠져 이 회차에서도 빠질 항목 수. 내려온 행(inherited)만 해당한다 —
+   * 직접 담은 것은 상위가 무엇을 하든 남는다.
+   */
+  withdrawnKeywords: number;
+  withdrawnMaterials: number;
+  withdrawnProblems: number;
+  /** 상위 순서를 따라 자리가 바뀌는 항목 수. */
+  reordered: number;
+  /** 사람이 순서를 바꿔 두어 상위 순서를 따르지 않는 목록 수(교재·문제 각 1). */
+  orderKeptByChoice: number;
+  /** 목표가 상위를 따라 바뀌는가(0/1). */
+  goalUpdated: number;
+  /** 사람이 고친 목표라 상위와 달라도 그대로 두는가(0/1). */
+  goalKeptByChoice: number;
+  /**
    * 미리 본 시점의 입력 지문. 적용할 때 그대로 들고 간다 — 그 사이에 무언가
    * 바뀌었으면 서버가 적용을 거절한다(다른 결과를 조용히 넣지 않는다).
    */
@@ -290,6 +309,13 @@ function asSummary(value: unknown): RecompositionSummary {
     inheritedKeywords: n("inheritedKeywords"),
     inheritedMaterials: n("inheritedMaterials"),
     inheritedProblems: n("inheritedProblems"),
+    withdrawnKeywords: n("withdrawnKeywords"),
+    withdrawnMaterials: n("withdrawnMaterials"),
+    withdrawnProblems: n("withdrawnProblems"),
+    reordered: n("reordered"),
+    orderKeptByChoice: n("orderKeptByChoice"),
+    goalUpdated: n("goalUpdated"),
+    goalKeptByChoice: n("goalKeptByChoice"),
     fingerprint: typeof v.fingerprint === "string" ? v.fingerprint : null,
   };
 }
@@ -437,6 +463,13 @@ export async function addProblem(
   const { supabase, error: denied } = await gate(layer);
   if (!supabase) return { ok: false, error: denied };
 
+  // 같은 문제를 다시 담으면 뺀 기록은 지운다 — 사람의 최신 의사가 우선이다.
+  await supabase
+    .from(problemExclusionTable(layer))
+    .delete()
+    .eq(layer === "student" ? "overlay_unit_id" : "unit_id", unitId)
+    .eq("problem_id", problemId);
+
   if (layer === "student") {
     const prepId = await prepIdFor(supabase, unitId);
     if (!prepId) return { ok: false, error: "이 회차의 준비를 만들지 못했습니다." };
@@ -506,6 +539,12 @@ export async function removeProblem(
       .eq("content_type", "problem")
       .eq("content_id", problemId);
     if (error) return { ok: false, error: "문제를 빼지 못했습니다." };
+
+    // 학생 층도 뺀 기록을 남긴다(20261347000000). 없으면 다음 '기본 구성 업데이트'가
+    // 교사 기본 구성에서 그대로 다시 내려보낸다.
+    await supabase
+      .from("curriculum_overlay_unit_problem_exclusions")
+      .insert({ overlay_unit_id: unitId, problem_id: problemId });
     return { ok: true };
   }
 
@@ -513,10 +552,7 @@ export async function removeProblem(
     layer === "catalog"
       ? "subject_template_unit_problems"
       : "teacher_curriculum_template_unit_problems";
-  const exclusionTable =
-    layer === "catalog"
-      ? "subject_template_unit_problem_exclusions"
-      : "teacher_curriculum_template_unit_problem_exclusions";
+  const exclusionTable = problemExclusionTable(layer);
 
   const { error } = await supabase
     .from(table)
@@ -528,6 +564,13 @@ export async function removeProblem(
   // 뺀 기록을 남긴다 — 없으면 다음 '다시 구성'에서 자동으로 되살아난다.
   await supabase.from(exclusionTable).insert({ unit_id: unitId, problem_id: problemId });
   return { ok: true };
+}
+
+/** 층마다 '뺀 문제' 기록이 있는 표. 학생 층은 회차(overlay_unit_id)로 가리킨다. */
+function problemExclusionTable(layer: PrepLayer): string {
+  if (layer === "catalog") return "subject_template_unit_problem_exclusions";
+  if (layer === "teacher") return "teacher_curriculum_template_unit_problem_exclusions";
+  return "curriculum_overlay_unit_problem_exclusions";
 }
 
 /** 쓰기 가드가 올려주는 한국어 사유는 그대로 보여준다 — 사람이 조치할 수 있는 사실이다. */

@@ -250,3 +250,66 @@ describe("수업 준비 구성 패널", () => {
     expect(screen.getByText(/이 학생의 이번 회차에서 달성할 것입니다/)).toBeInTheDocument();
   });
 });
+
+// P2 12차 — '기본 구성 업데이트'가 상위에서 빠진 것·순서·목표까지 보여준다.
+describe("기본 구성 업데이트 미리보기", () => {
+  const summary = {
+    materialsAdded: 0,
+    materialsRemoved: 0,
+    problemsAdded: 0,
+    problemsRemoved: 0,
+    problemsAvailable: 3,
+    versionsUpdated: 0,
+    inheritedKeywords: 0,
+    inheritedMaterials: 1,
+    inheritedProblems: 0,
+    withdrawnKeywords: 0,
+    withdrawnMaterials: 2,
+    withdrawnProblems: 1,
+    reordered: 2,
+    orderKeptByChoice: 1,
+    goalUpdated: 0,
+    goalKeptByChoice: 1,
+    fingerprint: "fp",
+  };
+
+  it("빠질 것·순서·목표를 숫자와 말로 보여주고, 사람이 한 일은 그대로 둔다고 밝힌다", async () => {
+    vi.mocked(actions.previewRecomposition).mockResolvedValue({ ok: true, value: summary });
+    render(
+      <CompositionPanel
+        composition={makeComposition({ parentPendingCount: 3 })}
+        pickable={[]}
+        problems={[]}
+      />
+    );
+    expect(screen.getByText(/위 계층과 어긋난 항목이 3개/)).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "기본 구성 업데이트" }));
+    await waitFor(() =>
+      expect(actions.previewRecomposition).toHaveBeenCalledWith("teacher", "u1")
+    );
+
+    expect(screen.getByText(/빠져 함께 빠질 것 — 키워드 0개 · 교재 2개 · 문제 1개/)).toBeInTheDocument();
+    expect(screen.getByText(/자리가 바뀔 항목 — 2개/)).toBeInTheDocument();
+    expect(screen.getByText(/직접 맞춘 순서는 그대로 둡니다/)).toBeInTheDocument();
+    expect(screen.getByText(/직접 고친 목표를 그대로 둡니다/)).toBeInTheDocument();
+  });
+
+  it("적용은 미리 본 지문을 그대로 들고 간다", async () => {
+    vi.mocked(actions.previewRecomposition).mockResolvedValue({ ok: true, value: summary });
+    vi.mocked(actions.applyRecomposition).mockResolvedValue({ ok: true, value: summary });
+    render(
+      <CompositionPanel
+        composition={makeComposition({ parentPendingCount: 1 })}
+        pickable={[]}
+        problems={[]}
+      />
+    );
+    fireEvent.click(screen.getByRole("button", { name: "기본 구성 업데이트" }));
+    await waitFor(() => expect(screen.getByRole("button", { name: "적용" })).toBeInTheDocument());
+    fireEvent.click(screen.getByRole("button", { name: "적용" }));
+    await waitFor(() =>
+      expect(actions.applyRecomposition).toHaveBeenCalledWith("teacher", "u1", "fp")
+    );
+  });
+});

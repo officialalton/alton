@@ -244,7 +244,7 @@ export default function CompositionPanel({
             <div className="text-[13px] font-bold text-ink mb-1">업데이트 있음</div>
             <p className="text-[12px] text-grey-500 mb-2.5">
               {composition.parentPendingCount > 0
-                ? `위 계층에 아직 받지 않은 항목이 ${composition.parentPendingCount}개 있습니다. `
+                ? `위 계층과 어긋난 항목이 ${composition.parentPendingCount}개 있습니다. `
                 : ""}
               {composition.hasUnappliedChanges
                 ? "키워드·조건이나 교재가 바뀌었습니다. "
@@ -267,10 +267,33 @@ export default function CompositionPanel({
               <div>
                 <ul className="text-[12.5px] text-ink mb-2.5 space-y-0.5">
                   {layer !== "catalog" && (
-                    <li>
-                      위 계층에서 받아올 것 — 키워드 {pending.inheritedKeywords}개 · 교재{" "}
-                      {pending.inheritedMaterials}개 · 문제 {pending.inheritedProblems}개
-                    </li>
+                    <>
+                      <li>
+                        위 계층에서 받아올 것 — 키워드 {pending.inheritedKeywords}개 · 교재{" "}
+                        {pending.inheritedMaterials}개 · 문제 {pending.inheritedProblems}개
+                      </li>
+                      <li>
+                        위 계층에서 빠져 함께 빠질 것 — 키워드 {pending.withdrawnKeywords}개 · 교재{" "}
+                        {pending.withdrawnMaterials}개 · 문제 {pending.withdrawnProblems}개
+                      </li>
+                      <li>
+                        위 계층 순서를 따라 자리가 바뀔 항목 — {pending.reordered}개
+                        {pending.orderKeptByChoice > 0 && (
+                          <span className="text-grey-500">
+                            {" "}
+                            (직접 맞춘 순서는 그대로 둡니다)
+                          </span>
+                        )}
+                      </li>
+                      <li>
+                        목표 —{" "}
+                        {pending.goalUpdated > 0
+                          ? "위 계층의 목표로 바뀝니다"
+                          : pending.goalKeptByChoice > 0
+                            ? "직접 고친 목표를 그대로 둡니다"
+                            : "바뀌지 않습니다"}
+                      </li>
+                    </>
                   )}
                   <li>
                     조건에 따른 교재 — 들어옴 {pending.materialsAdded}개 · 빠짐{" "}

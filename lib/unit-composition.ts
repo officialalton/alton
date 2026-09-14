@@ -172,7 +172,10 @@ export type UnitComposition = {
   hasUnappliedChanges: boolean;
   /** 담을 때의 버전과 지금 공개된 버전이 다른 항목 수. */
   outdatedVersionCount: number;
-  /** 상위 계층에 있는데 아직 이 회차에 없는 항목 수(교사가 뺀 것은 세지 않는다). */
+  /**
+   * 상위와 어긋난 항목 수 — 상위에 있는데 아직 없는 것 + 내려온 뒤 상위에서 없어진 것.
+   * 사람이 뺀 것(제외 기록)과 직접 담은 것은 세지 않는다.
+   */
   parentPendingCount: number;
   /**
    * 이 회차에 **실제로 담긴** 문제. 세 계층이 같은 모양으로 다룬다 — 학생 층은
@@ -347,9 +350,10 @@ export async function loadComposition(
         .eq("unit_id", unitId),
     ]);
 
-  // 상위 계층에 아직 받지 않은 것이 있는지. 기준본 층은 위가 없다.
+  // 상위와 어긋난 것이 있는지 — 아직 받지 않은 것과, 내려온 뒤 상위에서 없어진 것.
+  // 기준본 층은 위가 없다. 학생 층의 상위는 교사 회차(없으면 기준본)다(20261347000000).
   const { count: parentPending } =
-    layer === "teacher"
+    layer !== "catalog"
       ? await supabase
           .from("unit_parent_pending_updates")
           .select("*", { count: "exact", head: true })
