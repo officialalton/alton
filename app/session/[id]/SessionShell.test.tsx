@@ -337,6 +337,7 @@ describe("SessionShell — 수업 준비 탭", () => {
   composed: true,
   hasUnappliedChanges: false,
   outdatedVersionCount: 0,
+  problems: [],
       goal: null,
     },
     pickable: [],
@@ -386,7 +387,10 @@ describe("SessionShell — 수업 준비 탭", () => {
       />
     );
     fireEvent.click(screen.getByRole("button", { name: "수업 준비" }));
-    expect(screen.queryByText(/고정/)).not.toBeInTheDocument();
+    // 시작 전에는 '이미 고정된 수업을 여기서 고치는 것처럼 보이는' 안내를 붙이지
+    // 않는다. 구성 설명 자체가 고정 시점을 말하는 것은 그것과 다른 이야기다.
+    expect(screen.queryByText(/이미 시작한 수업/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/고정된 내용에는 반영되지 않습니다/)).not.toBeInTheDocument();
   });
 
   it("진행 중인 수업에서는 고정된 내용에 반영되지 않는다고 말한다", () => {

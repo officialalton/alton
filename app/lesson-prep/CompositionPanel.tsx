@@ -11,6 +11,8 @@ import {
   previewRecomposition,
   applyRecomposition,
   inheritDefaults,
+  addProblem,
+  removeProblem,
   type RecompositionSummary,
 } from "./actions";
 import type {
@@ -33,6 +35,8 @@ export default function CompositionPanel({
   pickable,
   problems,
   scopeNotice = null,
+  backHref = null,
+  backLabel = null,
 }: {
   composition: UnitComposition;
   pickable: PickableMaterial[];
@@ -44,6 +48,9 @@ export default function CompositionPanel({
    * 콘텐츠를 여기서 고치는 것처럼 보이면 안 된다.
    */
   scopeNotice?: string | null;
+  /** 예약된 수업에서 들어왔을 때 그 수업으로 돌아가는 길. */
+  backHref?: string | null;
+  backLabel?: string | null;
 }) {
   const [keywordIds, setKeywordIds] = useState(composition.keywords.map((k) => k.id));
   const [materials, setMaterials] = useState<UnitMaterial[]>(composition.materials);
@@ -53,6 +60,48 @@ export default function CompositionPanel({
   const [pending, setPending] = useState<RecompositionSummary | null>(null);
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
+  const [composedProblems, setComposedProblems] = useState(composition.problems);
+
+  // 후보에서 이미 담긴 것은 뺀다 — 같은 문제가 양쪽에 보이면 무엇을 눌러야 할지
+  // 알 수 없다.
+  const composedIds = new Set(composedProblems.map((p) => p.problemId));
+  const pickableProblems = problems.filter((p) => !composedIds.has(p.problemId));
+
+  async function takeProblem(problemId: string) {
+    setBusy(true);
+    setError(null);
+    const result = await addProblem(layer, unitId, problemId);
+    setBusy(false);
+    if (!result.ok) {
+      setError(result.error);
+      return;
+    }
+    const picked = problems.find((p) => p.problemId === problemId);
+    setComposedProblems((prev) => [
+      ...prev,
+      {
+        problemId,
+        label: picked?.label ?? "",
+        position: prev.length + 1,
+        difficulty: picked?.difficulty ?? null,
+        source: "manual" as const,
+        // 서버가 담는 순간의 공개 버전을 찍는다. 화면은 그 사실만 표시한다.
+        problemVersionId: "pending",
+      },
+    ]);
+  }
+
+  async function dropProblem(problemId: string) {
+    setBusy(true);
+    setError(null);
+    const result = await removeProblem(layer, unitId, problemId);
+    setBusy(false);
+    if (!result.ok) {
+      setError(result.error);
+      return;
+    }
+    setComposedProblems((prev) => prev.filter((p) => p.problemId !== problemId));
+  }
 
   const { layer, unitId } = composition;
   const pickedIds = new Set(materials.map((m) => m.curriculumDocId));
@@ -185,6 +234,14 @@ export default function CompositionPanel({
     <div className="max-w-[720px] px-8 py-8">
       {/* 무엇을 고치는 중인지 먼저 말한다 — 세 계층이 같은 화면이라 여기가 흐리면
           선생님이 학생 것을 고치는지 자기 기본을 고치는지 알 수 없다. */}
+      {backHref && backLabel && (
+        <a
+          href={backHref}
+          className="inline-block text-[12.5px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink mb-4"
+        >
+          {backLabel} →
+        </a>
+      )}
       <div className="text-[12px] font-bold text-grey-500 mb-1">{composition.scopeLabel}</div>
       <h1 className="text-[21px] font-extrabold text-ink leading-tight">
         {composition.unitTitle}
@@ -448,28 +505,68 @@ export default function CompositionPanel({
         )}
       </section>
 
-      {/* 4절 — 관리자·선생님 기본 화면은 문제를 **미리보기만** 한다. 실제 문제
-          선택은 학생별 문맥에서 한다(curriculum_unit_prep_items). 여기서 고르게
-          하면 학생 없이 문제를 확정하는 셈이 된다. */}
+      {/* 2026-09-13 지시 3번 — 문제를 담는 일이 별도 화면에만 있으면 안 된다.
+          세 계층 모두 여기서 담고 뺀다. 담기는 자리만 다르다(학생 층은 준비안). */}
       <section className="mt-7">
         <h2 className="text-[13px] font-bold text-ink mb-1">
-          이 회차에 들어올 문제
-          <span className="text-grey-300 font-semibold ml-1.5">{problems.length}</span>
+          이 회차의 문제
+          <span className="text-grey-300 font-semibold ml-1.5">{composedProblems.length}</span>
         </h2>
         <p className="text-[12px] text-grey-500 mb-2.5">
           {layer === "student"
-            ? "키워드에 맞는 확정된 문제입니다. 실제 출제는 수업 준비에서 고릅니다."
-            : "키워드에 맞는 확정된 문제를 미리 봅니다. 실제 출제는 학생별 화면에서 고릅니다."}
+            ? "이 학생이 이번 회차에서 풀 문제입니다. 수업을 시작하면 여기 담긴 그대로, 담을 때의 버전으로 고정됩니다."
+            : "여기서 담은 문제가 아래 계층의 기본값이 됩니다."}
         </p>
-        {problems.length === 0 ? (
+
+        {composedProblems.length === 0 ? (
           <p className="text-[12.5px] text-grey-500 bg-grey-100 rounded-lg px-4 py-4">
-            {keywordIds.length === 0
-              ? "키워드를 붙이면 해당하는 문제가 여기에 모입니다."
-              : "이 키워드에 해당하는 확정된 문제가 아직 없습니다."}
+            아직 담긴 문제가 없습니다. 아래 후보에서 고르세요.
           </p>
         ) : (
           <ul className="border-[1.5px] border-grey-200 rounded-xl divide-y divide-grey-100">
-            {problems.map((p) => (
+            {composedProblems.map((p) => (
+              <li key={p.problemId} className="px-4 py-2.5 flex items-center gap-3">
+                <span className="text-[12.5px] text-ink flex-1 min-w-0 truncate">{p.label}</span>
+                {p.source === "auto" && (
+                  <span className="text-[10.5px] font-bold px-1.5 py-0.5 rounded bg-grey-100 text-grey-500 shrink-0">
+                    키워드에서 자동
+                  </span>
+                )}
+                {!p.problemVersionId && (
+                  <span className="text-[10.5px] font-bold px-1.5 py-0.5 rounded bg-grey-100 text-grey-500 shrink-0">
+                    버전 미기록
+                  </span>
+                )}
+                {p.difficulty && (
+                  <span className="text-[10.5px] font-bold px-1.5 py-0.5 rounded bg-grey-100 text-grey-500 shrink-0">
+                    {p.difficulty}
+                  </span>
+                )}
+                <button
+                  disabled={busy}
+                  onClick={() => void dropProblem(p.problemId)}
+                  className="text-[11.5px] font-bold text-red shrink-0 disabled:opacity-50"
+                >
+                  빼기
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <h3 className="text-[12.5px] font-bold text-ink mt-5 mb-1">담을 수 있는 문제</h3>
+        <p className="text-[12px] text-grey-500 mb-2">
+          이 회차의 키워드로 찾은, 공개된 문제입니다. 모자라도 자동으로 만들지 않습니다.
+        </p>
+        {pickableProblems.length === 0 ? (
+          <p className="text-[12.5px] text-grey-500 bg-grey-100 rounded-lg px-4 py-4">
+            {keywordIds.length === 0
+              ? "키워드를 붙이면 해당하는 문제가 여기에 모입니다."
+              : "더 담을 문제가 없습니다."}
+          </p>
+        ) : (
+          <ul className="border-[1.5px] border-grey-200 rounded-xl divide-y divide-grey-100">
+            {pickableProblems.map((p) => (
               <li key={p.problemId} className="px-4 py-2.5 flex items-center gap-3">
                 <span className="text-[12.5px] text-ink flex-1 min-w-0 truncate">{p.label}</span>
                 {p.difficulty && (
@@ -477,6 +574,13 @@ export default function CompositionPanel({
                     {p.difficulty}
                   </span>
                 )}
+                <button
+                  disabled={busy}
+                  onClick={() => void takeProblem(p.problemId)}
+                  className="text-[11.5px] font-bold text-ink shrink-0 disabled:opacity-50"
+                >
+                  담기
+                </button>
               </li>
             ))}
           </ul>

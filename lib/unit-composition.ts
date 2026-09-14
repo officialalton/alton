@@ -26,6 +26,84 @@ export type LayerSpec = {
   label: string;
 };
 
+/**
+ * 층마다 담긴 문제를 어디서 읽는지.
+ *
+ * 학생 층만 모양이 다르다 — 문제는 회차가 아니라 **준비안**에 매달린다
+ * (curriculum_unit_prep_items). 그래서 회차 → 준비안 한 단계를 더 간다.
+ */
+async function loadUnitProblems(
+  supabase: SupabaseClient,
+  layer: PrepLayer,
+  unitId: string
+): Promise<UnitProblem[]> {
+  let rows: { problem_id: string; position: number; source: string; problem_version_id: string | null }[] = [];
+
+  if (layer === "student") {
+    const { data: prep } = await supabase
+      .from("curriculum_unit_preps")
+      .select("id")
+      .eq("overlay_unit_id", unitId)
+      .maybeSingle();
+    if (!prep) return [];
+    const { data } = await supabase
+      .from("curriculum_unit_prep_items")
+      .select("content_id, position, problem_version_id")
+      .eq("prep_id", prep.id as string)
+      .eq("content_type", "problem")
+      .order("position", { ascending: true });
+    rows = (data ?? []).map((r) => ({
+      problem_id: r.content_id as string,
+      position: r.position as number,
+      // 준비안에는 출처 구분이 없다 — 담긴 것은 전부 사람이 고른 결과로 본다.
+      source: "manual",
+      problem_version_id: (r.problem_version_id as string | null) ?? null,
+    }));
+  } else {
+    const table =
+      layer === "catalog"
+        ? "subject_template_unit_problems"
+        : "teacher_curriculum_template_unit_problems";
+    const { data } = await supabase
+      .from(table)
+      .select("problem_id, position, source, problem_version_id")
+      .eq("unit_id", unitId)
+      .order("position", { ascending: true });
+    rows = (data ?? []).map((r) => ({
+      problem_id: r.problem_id as string,
+      position: r.position as number,
+      source: (r.source as string) ?? "manual",
+      problem_version_id: (r.problem_version_id as string | null) ?? null,
+    }));
+  }
+
+  if (rows.length === 0) return [];
+
+  const { data: problems } = await supabase
+    .from("problems")
+    .select("id, passage, skill_type, difficulty")
+    .in(
+      "id",
+      rows.map((r) => r.problem_id)
+    );
+  const byId = new Map((problems ?? []).map((p) => [p.id as string, p]));
+
+  return rows.map((r) => {
+    const p = byId.get(r.problem_id);
+    const passage = ((p?.passage as string | null) ?? "").trim();
+    const skill = ((p?.skill_type as string | null) ?? "").trim();
+    const snippet = passage.length > 60 ? `${passage.slice(0, 60)}…` : passage;
+    return {
+      problemId: r.problem_id,
+      label: snippet || skill || "(본문 없음)",
+      position: r.position,
+      difficulty: (p?.difficulty as string | null) ?? null,
+      source: r.source === "auto" ? ("auto" as const) : ("manual" as const),
+      problemVersionId: r.problem_version_id,
+    };
+  });
+}
+
 export const LAYERS: Record<PrepLayer, LayerSpec> = {
   catalog: {
     unitTable: "subject_template_units",
@@ -94,6 +172,23 @@ export type UnitComposition = {
   hasUnappliedChanges: boolean;
   /** 담을 때의 버전과 지금 공개된 버전이 다른 항목 수. */
   outdatedVersionCount: number;
+  /**
+   * 이 회차에 **실제로 담긴** 문제. 세 계층이 같은 모양으로 다룬다 — 학생 층은
+   * 준비안(curriculum_unit_prep_items), 위 두 층은 각자의 구성 표에 담긴다.
+   */
+  problems: UnitProblem[];
+};
+
+export type UnitProblem = {
+  problemId: string;
+  /** 목록에서 알아볼 만큼의 짧은 설명. 문제 전문을 늘어놓지 않는다. */
+  label: string;
+  position: number;
+  difficulty: string | null;
+  /** auto = 키워드·조건에서 들어온 것. manual = 사람이 직접 담은 것. */
+  source: "auto" | "manual";
+  /** 담을 때의 공개 버전. null 이면 버전 제도 이전에 담긴 것이다. */
+  problemVersionId: string | null;
 };
 
 /**
@@ -280,6 +375,7 @@ export async function loadComposition(
     composed: scope.composed,
     hasUnappliedChanges: scope.dirty,
     outdatedVersionCount: driftCount ?? 0,
+    problems: await loadUnitProblems(supabase, layer, unitId),
   };
 }
 

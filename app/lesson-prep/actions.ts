@@ -392,3 +392,138 @@ export async function inheritDefaults(
     },
   };
 }
+
+// =========================================================================
+// 문제 담기 · 빼기 · 순서
+// =========================================================================
+// 2026-09-13 지시 3번: "별도 '회차 준비' 화면에서만 가능한 필수 작업을 남기지
+// 않습니다." 예전에는 문제를 담는 일이 교사 전용 '회차 준비' 화면에만 있었다.
+//
+// 층마다 담기는 자리가 다르다 — 학생 층은 준비안(curriculum_unit_prep_items),
+// 위 두 층은 각자의 구성 표다. 화면은 그 차이를 모르게 한다.
+
+/** 학생 층의 준비안 id. 없으면 만든다 — 화면이 항상 담을 수 있어야 한다. */
+async function prepIdFor(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  overlayUnitId: string
+): Promise<string | null> {
+  const { data: existing } = await supabase
+    .from("curriculum_unit_preps")
+    .select("id")
+    .eq("overlay_unit_id", overlayUnitId)
+    .maybeSingle();
+  if (existing) return existing.id as string;
+
+  const { data: created } = await supabase
+    .from("curriculum_unit_preps")
+    .insert({ overlay_unit_id: overlayUnitId })
+    .select("id")
+    .maybeSingle();
+  return (created?.id as string | undefined) ?? null;
+}
+
+export async function addProblem(
+  layer: PrepLayer,
+  unitId: string,
+  problemId: string
+): Promise<PrepResult> {
+  const { supabase, error: denied } = await gate(layer);
+  if (!supabase) return { ok: false, error: denied };
+
+  if (layer === "student") {
+    const prepId = await prepIdFor(supabase, unitId);
+    if (!prepId) return { ok: false, error: "이 회차의 준비를 만들지 못했습니다." };
+
+    const { data: last } = await supabase
+      .from("curriculum_unit_prep_items")
+      .select("position")
+      .eq("prep_id", prepId)
+      .order("position", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+
+    const { error } = await supabase.from("curriculum_unit_prep_items").insert({
+      prep_id: prepId,
+      content_type: "problem",
+      content_id: problemId,
+      position: ((last?.position as number | undefined) ?? 0) + 1,
+    });
+    if (error && error.code !== "23505") {
+      console.error(JSON.stringify({ event: "prep_problem_add_failed", layer, message: error.message }));
+      return { ok: false, error: readableWriteError(error.message, "문제를 담지 못했습니다.") };
+    }
+    return { ok: true };
+  }
+
+  const table =
+    layer === "catalog"
+      ? "subject_template_unit_problems"
+      : "teacher_curriculum_template_unit_problems";
+
+  const { data: last } = await supabase
+    .from(table)
+    .select("position")
+    .eq("unit_id", unitId)
+    .order("position", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  const { error } = await supabase.from(table).insert({
+    unit_id: unitId,
+    problem_id: problemId,
+    position: ((last?.position as number | undefined) ?? 0) + 1,
+    source: "manual",
+  });
+  if (error && error.code !== "23505") {
+    console.error(JSON.stringify({ event: "prep_problem_add_failed", layer, message: error.message }));
+    return { ok: false, error: readableWriteError(error.message, "문제를 담지 못했습니다.") };
+  }
+  return { ok: true };
+}
+
+export async function removeProblem(
+  layer: PrepLayer,
+  unitId: string,
+  problemId: string
+): Promise<PrepResult> {
+  const { supabase, error: denied } = await gate(layer);
+  if (!supabase) return { ok: false, error: denied };
+
+  if (layer === "student") {
+    const prepId = await prepIdFor(supabase, unitId);
+    if (!prepId) return { ok: true };
+    const { error } = await supabase
+      .from("curriculum_unit_prep_items")
+      .delete()
+      .eq("prep_id", prepId)
+      .eq("content_type", "problem")
+      .eq("content_id", problemId);
+    if (error) return { ok: false, error: "문제를 빼지 못했습니다." };
+    return { ok: true };
+  }
+
+  const table =
+    layer === "catalog"
+      ? "subject_template_unit_problems"
+      : "teacher_curriculum_template_unit_problems";
+  const exclusionTable =
+    layer === "catalog"
+      ? "subject_template_unit_problem_exclusions"
+      : "teacher_curriculum_template_unit_problem_exclusions";
+
+  const { error } = await supabase
+    .from(table)
+    .delete()
+    .eq("unit_id", unitId)
+    .eq("problem_id", problemId);
+  if (error) return { ok: false, error: "문제를 빼지 못했습니다." };
+
+  // 뺀 기록을 남긴다 — 없으면 다음 '다시 구성'에서 자동으로 되살아난다.
+  await supabase.from(exclusionTable).insert({ unit_id: unitId, problem_id: problemId });
+  return { ok: true };
+}
+
+/** 쓰기 가드가 올려주는 한국어 사유는 그대로 보여준다 — 사람이 조치할 수 있는 사실이다. */
+function readableWriteError(message: string, fallback: string): string {
+  return /[가-힣]/.test(message) ? message.replace(/^.*?:\s*/, "") : fallback;
+}

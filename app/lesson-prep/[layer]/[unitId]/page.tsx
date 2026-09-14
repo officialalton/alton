@@ -25,10 +25,16 @@ function isLayer(value: string): value is PrepLayer {
 
 export default async function LessonPrepPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ layer: string; unitId: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { layer, unitId } = await params;
+  const query = await searchParams;
+  // 예약된 수업에서 들어왔는지. 같은 화면이지만 "지금 어느 수업을 위해 준비하는
+  // 중인지"는 말해 줘야 한다.
+  const fromSessionId = typeof query.session === "string" ? query.session : null;
   if (!isLayer(layer)) notFound();
 
   const supabase = await createClient();
@@ -75,6 +81,17 @@ export default async function LessonPrepPage({
   ]);
 
   return (
-    <CompositionPanel composition={composition} pickable={pickable} problems={problems} />
+    <CompositionPanel
+      composition={composition}
+      pickable={pickable}
+      problems={problems}
+      scopeNotice={
+        fromSessionId
+          ? "예약된 수업에서 들어왔습니다. 여기서 고치는 것은 이 회차의 준비안이며, 수업을 시작할 때 그 시점의 준비안이 고정됩니다."
+          : null
+      }
+      backHref={fromSessionId ? `/session/${fromSessionId}` : null}
+      backLabel={fromSessionId ? "수업 열기" : null}
+    />
   );
 }

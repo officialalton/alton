@@ -34,6 +34,7 @@ function makeComposition(over: Partial<UnitComposition> = {}): UnitComposition {
   composed: true,
   hasUnappliedChanges: false,
   outdatedVersionCount: 0,
+  problems: [],
     goal: null,
     ...over,
   };
@@ -140,7 +141,9 @@ describe("수업 준비 구성 패널", () => {
     );
     expect(screen.getByText("지문 첫 줄…")).toBeInTheDocument();
     expect(screen.getByText("medium")).toBeInTheDocument();
-    expect(screen.getByText(/실제 출제는 학생별 화면에서 고릅니다/)).toBeInTheDocument();
+    // 2026-09-13 지시 3번: 세 계층 모두 여기서 담고 뺀다 — 미리보기 전용이 아니다.
+    expect(screen.getAllByText("담기").length).toBe(2);
+    expect(screen.getByText(/아래 계층의 기본값이 됩니다/)).toBeInTheDocument();
   });
 
   it("키워드가 없으면 왜 문제가 비었는지 말해준다", () => {
@@ -158,9 +161,7 @@ describe("수업 준비 구성 패널", () => {
 
   it("키워드는 있는데 문제가 없으면 다르게 말한다", () => {
     render(<CompositionPanel composition={makeComposition()} pickable={[]} problems={[]} />);
-    expect(
-      screen.getByText("이 키워드에 해당하는 확정된 문제가 아직 없습니다.")
-    ).toBeInTheDocument();
+    expect(screen.getByText("더 담을 문제가 없습니다.")).toBeInTheDocument();
   });
 
   // 지시 1번 — 시작한 수업 안에서 이 패널이 열리면, 보이는 것과 적용 범위가 다르다.
