@@ -10,6 +10,7 @@ import {
 } from "@/app/session/[id]/problemlog-actions";
 import MathCanvas from "@/app/session/[id]/MathCanvas";
 import AutoGrowTextarea from "@/app/session/[id]/AutoGrowTextarea";
+import AssetMaterialViewer from "@/app/session/[id]/AssetMaterialViewer";
 
 const DIFF_LABEL: Record<string, string> = {
   easy: "쉬움",
@@ -34,6 +35,51 @@ export default function LibraryDocView({
   doc: LibraryDocDetail;
   viewerRole: SessionViewViewer;
 }) {
+  // 파일 자료(PDF·영상)는 같은 뷰어로 읽는다 — 예약 없이, 필기 없이(수업이 아니다).
+  // 훅 순서를 지키기 위해 본문 교재 화면은 별도 컴포넌트다.
+  if (doc.kind !== "html") return <AssetLibraryDocView doc={doc} viewerRole={viewerRole} />;
+  return <HtmlLibraryDocView doc={doc} viewerRole={viewerRole} />;
+}
+
+function AssetLibraryDocView({ doc, viewerRole }: { doc: LibraryDocDetail; viewerRole: SessionViewViewer }) {
+  return (
+    <div className="min-h-screen bg-white">
+      <div className="border-b-[1.5px] border-grey-200 px-5 sm:px-8 py-4">
+        <h1 className="text-[18px] font-extrabold text-ink">{doc.title}</h1>
+        <p className="text-[12px] text-grey-500 mt-1">
+          {doc.kind === "pdf" ? `PDF${doc.asset?.pageCount ? ` · ${doc.asset.pageCount}쪽` : ""}` : "영상"} · 지금 공개된 버전
+        </p>
+      </div>
+      {doc.asset ? (
+        <AssetMaterialViewer
+          assets={[
+            {
+              docId: doc.id,
+              versionId: doc.asset.versionId,
+              kind: doc.kind === "video" ? "video" : "pdf",
+              title: doc.title,
+              pageCount: doc.asset.pageCount,
+              mimeType: doc.asset.mimeType,
+            },
+          ]}
+          sessionId={null}
+          role={viewerRole === "teacher" ? "teacher" : viewerRole === "student" ? "student" : "reader"}
+        />
+      ) : (
+        <p className="px-8 py-10 text-[13px] text-grey-500">이 자료의 공개 버전이 기록되지 않았습니다.</p>
+      )}
+    </div>
+  );
+}
+
+function HtmlLibraryDocView({
+  doc,
+  viewerRole,
+}: {
+  doc: LibraryDocDetail;
+  viewerRole: SessionViewViewer;
+}) {
+
   const [activeSectionId, setActiveSectionId] = useState<string | null>(
     doc.sections[0]?.id ?? null
   );

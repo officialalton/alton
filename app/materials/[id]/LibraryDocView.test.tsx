@@ -4,6 +4,7 @@ import LibraryDocView from "./LibraryDocView";
 import * as problemlogActions from "@/app/session/[id]/problemlog-actions";
 import type { LibraryDocDetail } from "@/app/student/materials-data";
 
+vi.mock("@/app/session/[id]/AssetMaterialViewer", () => ({ default: () => <div data-testid="asset-viewer" /> }));
 vi.mock("@/app/session/[id]/problemlog-actions", () => ({
   retryMcAttempt: vi.fn(),
   retryEssayAttempt: vi.fn(),
@@ -11,6 +12,8 @@ vi.mock("@/app/session/[id]/problemlog-actions", () => ({
 }));
 
 const doc: LibraryDocDetail = {
+  kind: "html",
+  asset: null,
   id: "doc1",
   title: "이차방정식 개념 정리",
   sections: [

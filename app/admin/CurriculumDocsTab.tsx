@@ -8,6 +8,7 @@ import {
 } from "./curriculum-doc-actions";
 import CurriculumDocEditor from "./CurriculumDocEditor";
 import type { DocEditorData, CurriculumDocListItem } from "./curriculum-doc-data";
+import { publishAssetDocAction } from "./curriculum-asset-actions";
 import { selectableSubjects, type AdminSubject } from "./subject-data";
 
 const STATUS_LABEL: Record<string, string> = {
@@ -46,6 +47,29 @@ export default function CurriculumDocsTab({
   const [showArchived, setShowArchived] = useState(false);
   const [query, setQuery] = useState("");
   const [archiveError, setArchiveError] = useState<string | null>(null);
+  const [assetNotice, setAssetNotice] = useState<string | null>(null);
+  const [publishingAssetId, setPublishingAssetId] = useState<string | null>(null);
+
+  // 파일 자료(PDF·영상)의 공개 — 원본을 지금 내려받아 고정 사본을 만든다. 편집 화면은
+  // 본문 섹션용이라 파일 자료에는 열지 않는다.
+  async function publishAsset(doc: CurriculumDocListItem) {
+    setAssetNotice(null);
+    setPublishingAssetId(doc.id);
+    try {
+      const result = await publishAssetDocAction(doc.id);
+      if (!result.ok) {
+        setAssetNotice(`공개하지 않았습니다 — ${result.error}`);
+        return;
+      }
+      setDocs((prev) => prev.map((d) => (d.id === doc.id ? { ...d, status: "published" } : d)));
+      setAssetNotice(
+        `공개했습니다 — 고정 사본 ${Math.round(result.bytes / 1024)}KB` +
+          (result.pageCount ? ` · ${result.pageCount}쪽` : "")
+      );
+    } finally {
+      setPublishingAssetId(null);
+    }
+  }
 
   async function toggleArchived(docId: string, archived: boolean) {
     setArchiveError(null);
@@ -145,6 +169,10 @@ export default function CurriculumDocsTab({
           hasPrimaryKeyword: Boolean(doc.primaryKeywordId),
           archivedAt: null,
           archivedReason: null,
+          // 여기서 만드는 것은 본문 편집 교재다. 파일 자료는 Drive 자료 탭에서 들어온다.
+          kind: "html" as const,
+          sourceDriveName: null,
+          hasDriveSource: false,
         },
       ].sort((a, b) => a.title.localeCompare(b.title))
     );
@@ -197,6 +225,7 @@ export default function CurriculumDocsTab({
       </p>
       {detailError && <p className="text-[12.5px] text-red mb-3">{detailError}</p>}
       {archiveError && <p className="text-[12.5px] text-red mb-3">{archiveError}</p>}
+      {assetNotice && <p className="text-[12.5px] text-ink bg-grey-100 rounded-lg px-3 py-2 mb-3">{assetNotice}</p>}
 
       <div className="flex gap-1 mb-3 border-b-[1.5px] border-grey-200">
         {[
@@ -264,10 +293,18 @@ export default function CurriculumDocsTab({
               className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5 flex items-center justify-between"
             >
               <div>
-                <div className="text-[13.5px] font-bold text-ink">{d.title}</div>
+                <div className="text-[13.5px] font-bold text-ink">
+                  {d.kind !== "html" && (
+                    <span className="text-[10.5px] font-bold text-grey-500 border border-grey-200 rounded-full px-1.5 py-0.5 mr-1.5 align-middle">
+                      {d.kind === "pdf" ? "PDF" : "영상"}
+                    </span>
+                  )}
+                  {d.title}
+                </div>
                 <div className="text-[12px] text-grey-500 mt-0.5">
                   {d.subjectName}
-                  {d.unitTitle ? ` · ${d.unitTitle}` : ""} · 섹션 {d.sectionCount}개 ·{" "}
+                  {d.unitTitle ? ` · ${d.unitTitle}` : ""}
+                  {d.kind === "html" ? ` · 섹션 ${d.sectionCount}개` : d.hasDriveSource ? " · Drive 원본" : " · 로컬 표본"} ·{" "}
                   {STATUS_LABEL[d.status] ?? d.status}
                   {!d.hasPrimaryKeyword && " · 대표 키워드 없음"}
                   {d.archivedAt && " · 보관됨"}
@@ -280,12 +317,23 @@ export default function CurriculumDocsTab({
                 >
                   {d.archivedAt ? "보관 풀기" : "보관"}
                 </button>
-                <button
-                  onClick={() => openDoc(d.id)}
-                  className="text-[12px] font-bold px-3.5 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink whitespace-nowrap"
-                >
-                  편집
-                </button>
+                {d.kind === "html" ? (
+                  <button
+                    onClick={() => openDoc(d.id)}
+                    className="text-[12px] font-bold px-3.5 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink whitespace-nowrap"
+                  >
+                    편집
+                  </button>
+                ) : (
+                  <button
+                    disabled={publishingAssetId === d.id || !d.hasDriveSource}
+                    title={!d.hasDriveSource ? "로컬 표본은 등록 때 이미 공개됐습니다" : undefined}
+                    onClick={() => void publishAsset(d)}
+                    className="text-[12px] font-bold px-3.5 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink whitespace-nowrap disabled:opacity-50"
+                  >
+                    {publishingAssetId === d.id ? "사본 확보 중…" : d.status === "published" ? "다시 공개(새 버전)" : "공개 (고정 사본)"}
+                  </button>
+                )}
               </span>
             </div>
           ))}

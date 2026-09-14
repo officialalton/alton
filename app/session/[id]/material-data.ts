@@ -35,11 +35,31 @@ export type CanvasStroke = {
   tool: "pen" | "eraser";
 };
 
+/**
+ * 파일 자료(PDF·영상) 한 건 — 수업이 쓰는 **공개 버전** 기준이다.
+ *
+ * 2026-09-14: 파일 자료는 curriculum_docs 의 한 종류(kind)이고 내용은 공개 시점 고정
+ * 사본에 있다(버전 스냅샷 asset). 화면은 versionId 로 서명 URL 을 받아 연다 — 원본
+ * Drive 파일이 바뀌거나 지워져도 이 버전은 그대로다.
+ */
+export type MaterialAsset = {
+  docId: string;
+  versionId: string;
+  kind: "pdf" | "video";
+  title: string;
+  pageCount: number | null;
+  mimeType: string;
+  /** 고정 사본이 기록되지 않은 버전 — 화면이 사유를 말한다. */
+  unavailable?: boolean;
+};
+
 export type MaterialData = {
   docId: string;
   title: string;
   sections: MaterialSection[];
   canvasStrokes: CanvasStroke[];
+  /** 이 수업의 파일 자료(PDF·영상), 표시 순서대로. HTML 섹션과 함께 있을 수 있다. */
+  assets?: MaterialAsset[];
   /**
    * 이 수업이 쓴 교재 내용이 보존돼 있지 않다.
    *
@@ -219,12 +239,19 @@ export async function loadPinnedMaterialData(
   );
 
   const ordered: MaterialSection[] = [];
+  const assets: MaterialAsset[] = [];
   let title: string | null = null;
 
   for (const row of manifest) {
     const snapshot = snapshotById.get(row.curriculum_doc_version_id as string);
     const snapSections = snapshot?.sections ?? [];
     if (title === null && snapshot?.title) title = snapshot.title;
+
+    // 파일 자료 — 고정 사본 참조를 그대로 넘긴다. 섹션은 없다.
+    if (row.content_type === "material_doc" && snapshot?.kind && snapshot.kind !== "html") {
+      assets.push(assetFromSnapshot(row.content_id as string, row.curriculum_doc_version_id as string, snapshot));
+      continue;
+    }
 
     if (row.content_type === "material_doc") {
       for (const sec of [...snapSections].sort((a, b) => a.position - b.position)) {
@@ -236,7 +263,7 @@ export async function loadPinnedMaterialData(
     }
   }
 
-  if (ordered.length === 0) {
+  if (ordered.length === 0 && assets.length === 0) {
     // 버전은 가리키는데 내용이 비어 있다 — 스냅샷이 불완전하다.
     return {
       docId: docId ?? "",
@@ -252,14 +279,30 @@ export async function loadPinnedMaterialData(
     title: title ?? "이번 수업 교재",
     sections: ordered,
     canvasStrokes,
+    ...(assets.length ? { assets } : {}),
   };
 }
 
 /** 버전 스냅샷의 모양(curriculum_doc_snapshot 이 만든다). */
 type DocSnapshot = {
   title?: string;
+  kind?: string;
+  asset?: { pageCount?: number; mimeType?: string; path?: string };
   sections?: { id: string; position: number; title: string; body: string | null; teachingTip: string | null }[];
 };
+
+function assetFromSnapshot(docId: string, versionId: string, snapshot: DocSnapshot): MaterialAsset {
+  const kind = snapshot.kind === "video" ? "video" : "pdf";
+  return {
+    docId,
+    versionId,
+    kind,
+    title: snapshot.title ?? "자료",
+    pageCount: typeof snapshot.asset?.pageCount === "number" ? snapshot.asset.pageCount : null,
+    mimeType: snapshot.asset?.mimeType ?? (kind === "pdf" ? "application/pdf" : "video/mp4"),
+    ...(snapshot.asset?.path ? {} : { unavailable: true }),
+  };
+}
 
 function toMaterialSection(sec: {
   id: string;
@@ -315,7 +358,7 @@ export async function loadPlannedMaterialData(
 
   const { data: materials } = await supabase
     .from("curriculum_overlay_unit_materials")
-    .select("curriculum_doc_id, position")
+    .select("curriculum_doc_id, position, curriculum_doc_version_id")
     .eq("overlay_unit_id", overlayUnitId)
     .order("position", { ascending: true });
   if (!materials?.length) return null;
@@ -324,27 +367,51 @@ export async function loadPlannedMaterialData(
   // 배포됐고 보관되지 않은 교재만 — 학생에게 갈 수 없는 것을 미리 보여주지 않는다.
   const { data: docs } = await supabase
     .from("curriculum_docs")
-    .select("id, title")
+    .select("id, title, kind")
     .in("id", docIds)
     .eq("status", "published")
     .is("archived_at", null);
   if (!docs?.length) return null;
 
   const visibleIds = docIds.filter((id) => docs.some((d) => d.id === id));
-  const { data: sections } = await supabase
-    .from("curriculum_doc_sections")
-    .select("id, title, body, teaching_tip, curriculum_doc_id, position")
-    .in("curriculum_doc_id", visibleIds)
-    .order("position", { ascending: true });
-  if (!sections?.length) return null;
+  const htmlIds = visibleIds.filter((id) => ((docs.find((d) => d.id === id)?.kind as string) ?? "html") === "html");
+  const assetIds = visibleIds.filter((id) => !htmlIds.includes(id));
+
+  // 파일 자료 — 준비안이 담을 때 고른 버전, 없으면 지금 공개본. 시작 전이므로 바뀔 수 있다.
+  const assets: MaterialAsset[] = [];
+  if (assetIds.length) {
+    const { data: versions } = await supabase
+      .from("curriculum_doc_versions")
+      .select("id, curriculum_doc_id, version_number, snapshot")
+      .in("curriculum_doc_id", assetIds)
+      .order("version_number", { ascending: false });
+    for (const docId of assetIds) {
+      const picked = materials.find((m) => m.curriculum_doc_id === docId)?.curriculum_doc_version_id as string | null;
+      const v =
+        (versions ?? []).find((x) => x.id === picked) ??
+        (versions ?? []).find((x) => x.curriculum_doc_id === docId);
+      const snap = v?.snapshot as DocSnapshot | undefined;
+      if (v && snap?.kind && snap.kind !== "html") {
+        assets.push(assetFromSnapshot(docId, v.id as string, snap));
+      }
+    }
+  }
+
+  const { data: sections } = htmlIds.length
+    ? await supabase
+        .from("curriculum_doc_sections")
+        .select("id, title, body, teaching_tip, curriculum_doc_id, position")
+        .in("curriculum_doc_id", htmlIds)
+        .order("position", { ascending: true })
+    : { data: [] as { id: string; title: string; body: string | null; teaching_tip: string | null; curriculum_doc_id: string; position: number }[] };
 
   // 교재 순서를 지키고, 각 교재 안에서는 조각 순서를 지킨다.
-  const ordered = visibleIds.flatMap((docId) =>
+  const ordered = htmlIds.flatMap((docId) =>
     (sections ?? []).filter((s) => s.curriculum_doc_id === docId)
   );
-  if (!ordered.length) return null;
+  if (!ordered.length && !assets.length) return null;
 
-  const firstDocId = visibleIds[0];
+  const firstDocId = htmlIds[0] ?? visibleIds[0];
   const { data: annotation } = await supabase
     .from("canvas_annotations")
     .select("strokes")
@@ -363,6 +430,7 @@ export async function loadPlannedMaterialData(
       problems: [],
     })),
     canvasStrokes: (annotation?.strokes as CanvasStroke[] | null) ?? [],
+    ...(assets.length ? { assets } : {}),
   };
 }
 

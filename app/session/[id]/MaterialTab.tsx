@@ -15,6 +15,7 @@ import {
 import MathCanvas from "./MathCanvas";
 import CanvasOverlay from "./CanvasOverlay";
 import MaterialAnnotationLayers from "./MaterialAnnotationLayers";
+import AssetMaterialViewer from "./AssetMaterialViewer";
 import VocabClickLayer from "./VocabClickLayer";
 import AutoGrowTextarea from "./AutoGrowTextarea";
 
@@ -95,6 +96,20 @@ export default function MaterialTab({
       <div className="p-8 text-[14px] text-grey-500">
         이 세션에는 아직 배정된 교재가 없습니다.
       </div>
+    );
+  }
+
+  // 2026-09-14 — 파일 자료(PDF·영상)만 있는 수업은 자료 뷰어가 교재 영역 전체다.
+  // HTML 섹션과 함께 있으면 섹션 아래에 이어서 보인다(아래 materialBody 뒤).
+  const assets = material.assets ?? [];
+  if (material.sections.length === 0 && assets.length > 0) {
+    return (
+      <AssetMaterialViewer
+        assets={assets}
+        sessionId={sessionSource === "v3" ? sessionId : null}
+        role={layerRole}
+        viewerUserId={viewerUserId}
+      />
     );
   }
 
@@ -217,6 +232,16 @@ export default function MaterialTab({
           </CanvasOverlay>
         )}
       </div>
+      {assets.length > 0 && (
+        <div className="md:col-span-2 border-t border-grey-200">
+          <AssetMaterialViewer
+            assets={assets}
+            sessionId={sessionSource === "v3" ? sessionId : null}
+            role={layerRole}
+            viewerUserId={viewerUserId}
+          />
+        </div>
+      )}
     </div>
   );
 }

@@ -172,3 +172,66 @@ export async function loadStudentMaterialStrokes(
   if (error) throw new Error(error.message);
   return (data ?? []).map((row) => row.payload as StrokePayload);
 }
+
+// =========================================================================
+// PDF 페이지 필기 — 수업 + 공개 버전 + 자료 + 페이지 + 범위
+// =========================================================================
+// 2026-09-14: 저장 대상에 버전·페이지가 들어간다. 서버(append_page_stroke_events)가
+// 버전이 그 자료의 것인지, 페이지가 범위 안인지, 이 수업의 자료인지 확인하고 세그먼트의
+// eventId 로 재시도 중복을 막는다. 조회는 같은 다섯 값으로 좁힌다 — 다른 페이지·다른
+// 버전의 획은 섞이지 않는다.
+
+export type PageStrokeTarget = {
+  sessionId: string;
+  curriculumDocId: string;
+  curriculumDocVersionId: string;
+  pageNumber: number;
+};
+
+export type PageStrokePayload = StrokePayload & { eventId?: string };
+
+export async function appendPageStrokeEvents(params: {
+  target: PageStrokeTarget;
+  segments: PageStrokePayload[];
+  scope: "teacher_shared" | "student_shared";
+}): Promise<{ savedEventIds: string[] }> {
+  if (params.segments.length === 0) return { savedEventIds: [] };
+  const { supabase } = await requireUser();
+  const { data, error } = await supabase.rpc("append_page_stroke_events", {
+    p_session_id: params.target.sessionId,
+    p_segments: params.segments,
+    p_scope: params.scope,
+    p_curriculum_doc_id: params.target.curriculumDocId,
+    p_curriculum_doc_version_id: params.target.curriculumDocVersionId,
+    p_page_number: params.target.pageNumber,
+  });
+  if (error) throw new Error(error.message);
+  return {
+    savedEventIds: ((data ?? []) as { client_event_id: string | null }[])
+      .map((r) => r.client_event_id)
+      .filter((v): v is string => Boolean(v)),
+  };
+}
+
+/** 한 페이지의 한 범위 필기. clear_all 은 페이지 필기에 쓰지 않으므로 stroke 만 읽는다. */
+export async function loadPageStrokes(
+  target: PageStrokeTarget,
+  scope: "teacher_shared" | "student_shared"
+): Promise<PageStrokePayload[]> {
+  const { supabase } = await requireUser();
+  const { data, error } = await supabase
+    .from("session_annotation_events")
+    .select("payload, client_event_id, seq")
+    .eq("session_id", target.sessionId)
+    .eq("scope", scope)
+    .eq("curriculum_doc_id", target.curriculumDocId)
+    .eq("curriculum_doc_version_id", target.curriculumDocVersionId)
+    .eq("page_number", target.pageNumber)
+    .eq("event_type", "stroke")
+    .order("seq", { ascending: true });
+  if (error) throw new Error(error.message);
+  return (data ?? []).map((row) => ({
+    ...(row.payload as StrokePayload),
+    ...(row.client_event_id ? { eventId: row.client_event_id as string } : {}),
+  }));
+}

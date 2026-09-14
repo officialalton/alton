@@ -132,7 +132,15 @@ function MaterialList({ materials }: { materials: UnitPreview["materials"] }) {
       {materials.map((m) => (
         <article key={m.curriculumDocId} className="mb-10">
           <h2 className="text-[18px] font-extrabold text-ink mb-4">{m.title}</h2>
-          {m.sections.length === 0 ? (
+          {m.kind && m.kind !== "html" ? (
+            // 파일 자료 — 본문이 없다. 지금 공개본을 과목 전체 보기와 같은 뷰어로 연다.
+            <a
+              href={`/materials/${m.curriculumDocId}`}
+              className="inline-flex items-center gap-2 text-[13px] font-bold text-ink border-[1.5px] border-grey-200 rounded-xl px-4 py-2.5"
+            >
+              {m.kind === "pdf" ? `📄 PDF${m.pageCount ? ` · ${m.pageCount}쪽` : ""}` : "▶ 영상"} · 열기 →
+            </a>
+          ) : m.sections.length === 0 ? (
             <p className="text-[13px] text-grey-500">내용이 없는 교재입니다.</p>
           ) : (
             m.sections.map((s) => (

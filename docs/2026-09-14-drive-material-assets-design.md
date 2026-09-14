@@ -1,0 +1,78 @@
+# Drive 기반 PDF·영상 교재 — 최소 구현 설계와 필요한 외부 자원
+
+2026-09-14 야간 작업. 제품 오너 지시(2026-09-14 §2~§9)에 따른 첫 구현. 코드·테스트·로컬 검증까지
+진행했고, **실제 Drive 폴더 생성·이름 변경·권한 확대는 하지 않았다.**
+
+## 1. 구조 — 파일 자료는 교재의 한 종류다
+
+파일 자료(PDF·영상)를 `curriculum_docs`의 한 종류(`kind = 'pdf' | 'video'`)로 둔다. 그래서
+회차 구성·상속·`기본 구성 업데이트`·수업 시작 고정(`session_content_manifest` +
+`curriculum_doc_version_id`)·학생 미리보기가 **바꾸지 않고 그대로** 통한다. 다른 것은 내용이
+어디에 있느냐다.
+
+| | HTML 교재 | 파일 자료 |
+| --- | --- | --- |
+| 내용 | `curriculum_doc_sections` | 공개 시점 **고정 사본**(Storage `curriculum-assets`) |
+| 공개 | `publish_curriculum_doc` (섹션 스냅샷) | `publish_curriculum_asset_doc(doc, asset)` — 사본 참조가 온전해야 공개 |
+| 버전 스냅샷 | `sections[]` | `kind`, `asset{bucket,path,bytes,sha256,mimeType,pageCount,sourceDrive*}` |
+| 원본 | — | Drive 파일 id(`source_drive_file_id`, unique) |
+
+- 같은 내용(sha256)을 다시 공개하면 새 버전을 만들지 않는다. 수정본은 새 버전이다.
+- 원본을 바꾸거나 지워도 공개 버전과 과거 수업(당시 고정본)은 그대로다.
+- 준비안은 자동으로 바뀌지 않는다 — `기본 구성 업데이트`가 버전 갱신을 보여주고 사람이 적용한다(기존 규칙).
+- HTML 공개 경로(`publish_curriculum_doc`)는 파일 자료를 거절한다. 상태 변경 트리거의 HTML 스냅샷 캡처는 파일 자료를 건너뛴다(빈 스냅샷이 최신 버전이 되는 것을 막는다).
+
+## 2. 과목 → 단원 → 키워드 → 자료
+
+- `subject_keywords.unit_id` (nullable) — 키워드는 단원 하나에 속한다. 같은 과목 단원만 붙는다(트리거).
+- **기존 키워드는 옮기지 않았다.** `subject_keywords_needing_unit` 뷰가 전환 대상(단원 없는 활성 키워드)과
+  후보 단원(지금 N:M 연결 수·첫 후보)을 보여준다. 로컬 seed 기준 128개 전부 전환 대상. 새 키워드는 앱이 단원을 요구한다(Drive 등록 경로).
+- 자료 하나 = 대표 키워드 하나(`primary_keyword_id`), 같은 키워드 안 순서 = `primary_keyword_position`(기존 컬럼 재사용).
+
+## 3. Drive 폴더 연동 — ALTON 이 기준, 단방향, id 로 연결
+
+- `curriculum_drive_folders(scope, ref_id, desired_name, applied_name, drive_folder_id, sync_status, attempts, last_error)`.
+  과목·단원·키워드가 생기거나 이름이 바뀌면 트리거가 **큐에만** 넣는다(pending / rename_pending). Drive 는 건드리지 않는다.
+- 처리기(`runCurriculumDriveFolderSyncAction`) — 과목 → 단원 → 키워드 순, 상위 폴더 id 가 있어야 만든다. 같은 상위 아래 같은 이름 폴더가 있으면 새로 만들지 않고 그 id 를 쓴다. 실패는 사유·시도 횟수를 남기고 다음에 다시. 삭제는 없다(보관 ≠ Drive 삭제).
+- `CURRICULUM_DRIVE_ALLOW_REAL_WRITES=true` 가 아니면 **계획만** 보여준다(dry run). 기본 false.
+- 단원이 정해지지 않은 키워드는 폴더 자리가 없어 건너뛴다(전환 대상).
+
+## 4. 가져오기·공개 (관리자 > 과목 및 교재 > Drive 자료)
+
+1. 과목·단원·키워드 선택 → `Drive 에서 불러오기/새로고침` — 키워드 폴더(id)의 파일을 후보로 읽는다(읽기만). PDF·영상만 등록 대상. 이미 등록된 파일은 `등록됨`.
+2. `자료로 등록` — 초안 `curriculum_docs` 한 건. 공개되지 않는다. 같은 파일 두 번 등록 불가(unique).
+3. `공개 (고정 사본)` — 원본을 지금 내려받아 페이지 수(pdf.js)·sha256 을 읽고 Storage 에 올린 뒤 RPC. 내려받기·페이지 읽기·업로드 중 하나라도 실패하면 **공개되지 않는다.** RPC 가 거절하면 올린 사본을 지운다.
+4. `로컬 표본으로 검증` — Drive 접근이 없을 때 PDF·영상 파일을 직접 올려 곧바로 고정 사본으로 공개하는 **검증용 경로**(관리자 전용, 100MB 이하). 목록에 `로컬 표본`으로 표시된다.
+
+## 5. 뷰어와 필기
+
+- `AssetMaterialViewer` — 자료 순서대로. PDF 는 한 페이지씩(pdf.js 캔버스 렌더, 늦은 렌더는 취소), 목차·이전/다음·확대. 마지막 페이지의 다음 = 다음 자료. 영상은 같은 자리에서 재생, 다른 자료로 가면 플레이어가 내려가며 정지. 자료 주소는 공개 버전 id 로 받는 10분 서명 URL(`getAssetVersionUrlAction` — 요청자 권한으로 버전 행이 읽혀야 한다).
+- 수업 화면(`/session/[id]`) 교재 탭: 파일 자료만 있으면 뷰어가 교재 영역 전체, HTML 과 함께면 섹션 아래. 시작 전 예정 구성·시작 후 고정 매니페스트 둘 다 파일 자료를 낸다.
+- 과목 전체 보기(`/materials/[id]`)·학생 회차 미리보기(`/unit-preview`)는 **지금 공개본**을 읽기 전용으로 연다(필기 없음).
+- 페이지 필기(`PdfPageAnnotationLayer`, `append_page_stroke_events`):
+  - 대상 = 수업 + 공개 버전 + 자료 + 페이지 + 범위(교사 공유 / 학생 공유). 서버가 버전 소속·PDF 여부·페이지 범위·이 수업의 자료인지 검증. 학생 필기 소유자는 서버가 정한다. 기존 RLS(범위별 기록·조회) 그대로.
+  - 컴포넌트는 대상마다 다시 마운트되고 보관함·채널·조회가 그 대상으로 좁혀진다(조사 문서 재현 1 차단).
+  - 대기 중·전송 중 획을 모두 임시 기록에 남기고 서버가 확인한 것만 지운다. 먼저 보낸 저장이 끝나도 그 뒤 획은 남는다(재현 2 차단). 획마다 `eventId`; 재시도·재접속 중복은 `unique (session_id, client_event_id)`가 막는다.
+  - 교사·학생 레이어를 각자 캔버스에 그린다 — 지우개가 상대 레이어에 닿지 않는다.
+  - 첫 버전: 저장이 끝나기 전 이동을 막는다. 실패 시 `저장 안 됨 · 다시 시도`를 보여주고 이동하지 않는다.
+  - 기존 HTML 필기(`curriculum_doc_id` 만, 페이지 null)는 그대로다. 새 PDF 페이지에 연결하지 않는다.
+
+## 6. 필요한 외부 자원과 최소 권한 (제품 오너가 만들 것)
+
+| 항목 | 값 |
+| --- | --- |
+| Shared Drive | **교재 전용** 1개(예: `ALTON Curriculum Materials`). 회사 문서 Drive·검증용 Sandbox 와 분리 |
+| 루트 폴더 | 그 드라이브 안 교재 루트(없으면 드라이브 루트) |
+| 서비스 계정 초대 | Preview: 기존 Preview 검증 계정(`r3-drive-preview-verify@…`)을 **이 드라이브에만** — 읽기 검증은 뷰어(Viewer), 폴더 생성·이름 변경까지 하려면 콘텐츠 관리자(Content manager). 회사 문서 Drive 의 권한은 바꾸지 않는다 |
+| 환경변수(Preview 먼저) | `CURRICULUM_DRIVE_ENABLED=true`, `CURRICULUM_DRIVE_ID=<드라이브 id>`, `CURRICULUM_DRIVE_ROOT_FOLDER_ID=<루트 폴더 id>`(선택), `CURRICULUM_DRIVE_ALLOW_REAL_WRITES=false`(계획 확인 뒤 true) |
+| 인증 | 기존 Drive 토큰 경로 재사용(`lib/drive/fetch.ts`). 새 인증 체인 없음 |
+| Storage | `curriculum-assets` 비공개 버킷(마이그레이션이 만든다). 클라이언트 직접 접근 없음 |
+
+Production 은 별도 단계다. 위 값은 설정하지 않는다.
+
+## 7. 검증 상태 (2026-09-14 기준)
+
+- **자동 테스트(로컬 DB)**: 키워드-단원 제약·전환 대상 뷰, 폴더 큐 트리거, 파일 자료 공개 RPC(온전성·중복 내용·HTML 경로 거절·권한), 페이지 필기 RPC(범위·버전·수업 소속·중복 eventId·소유자·RLS), 미리보기 kind/pageCount, 폴더 계획·실행(dry run·중복 폴더 방지·실패 기록), pdf.js 페이지 수·지문(2페이지 표본), 보관함(재현 1·2), 레이어 컴포넌트(재현 1·2·실패 재시도·보호자 읽기), 뷰어 이동 규칙, 관리자 패널, 라이브러리·미리보기 분기.
+- **실제 Drive**: 미연결(자원·환경변수 없음). 목록·내려받기·폴더 쓰기는 실제로 호출하지 않았다.
+- **두 계정 동시 필기, iPad·Apple Pencil, 영상 재생 시작·구간 이동·모바일**: 미확인.
+- **Preview**: 이 변경은 `20261348000000` 이 공유 non-prod 에 적용된 뒤에만 배포한다 — 적용 전 배포하면 `kind` 컬럼 조회가 실패해 교재 라이브러리·예정 교재 표시가 깨진다.

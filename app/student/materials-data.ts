@@ -39,6 +39,13 @@ export type LibraryDocDetail = {
   id: string;
   title: string;
   sections: LibrarySection[];
+  /** html = 섹션 본문. pdf/video = 파일 자료 — 지금 공개본(asset)을 뷰어가 연다(2026-09-14). */
+  kind: "html" | "pdf" | "video";
+  asset: {
+    versionId: string;
+    pageCount: number | null;
+    mimeType: string;
+  } | null;
 };
 
 export async function loadMaterialsLibrary(
@@ -116,11 +123,40 @@ export async function loadLibraryDoc(
 ): Promise<LibraryDocDetail | null> {
   const { data: doc } = await supabase
     .from("curriculum_docs")
-    .select("id, title")
+    .select("id, title, kind")
     .eq("id", docId)
     .eq("status", "published")
     .maybeSingle();
   if (!doc) return null;
+
+  const kind = ((doc as { kind?: string }).kind === "pdf" || (doc as { kind?: string }).kind === "video"
+    ? (doc as { kind: "pdf" | "video" }).kind
+    : "html") as "html" | "pdf" | "video";
+
+  // 파일 자료 — 과목 전체 보기는 **지금 공개본**을 쓴다(과거 수업은 당시 고정본).
+  if (kind !== "html") {
+    const { data: version } = await supabase
+      .from("curriculum_doc_versions")
+      .select("id, snapshot")
+      .eq("curriculum_doc_id", docId)
+      .order("version_number", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+    const snap = version?.snapshot as { asset?: { pageCount?: number; mimeType?: string } } | null;
+    return {
+      id: doc.id,
+      title: doc.title,
+      sections: [],
+      kind,
+      asset: version
+        ? {
+            versionId: version.id as string,
+            pageCount: typeof snap?.asset?.pageCount === "number" ? snap.asset.pageCount : null,
+            mimeType: snap?.asset?.mimeType ?? (kind === "pdf" ? "application/pdf" : "video/mp4"),
+          }
+        : null,
+    };
+  }
 
   const { data: sections } = await supabase
     .from("curriculum_doc_sections")
@@ -187,6 +223,8 @@ export async function loadLibraryDoc(
   return {
     id: doc.id,
     title: doc.title,
+    kind,
+    asset: null,
     sections: (sections ?? []).map((s) => ({
       id: s.id,
       title: s.title,

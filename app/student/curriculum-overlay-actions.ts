@@ -39,6 +39,10 @@ export type UnitPreviewMaterial = {
   curriculumDocId: string;
   title: string;
   versionId: string | null;
+  /** html = 섹션 본문. pdf/video = 파일 자료(2026-09-14) — 본문 대신 뷰어로 연다. */
+  kind?: "html" | "pdf" | "video";
+  pageCount?: number | null;
+  mimeType?: string | null;
   sections: { id: string; title: string; body: string }[];
 };
 

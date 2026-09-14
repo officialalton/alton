@@ -16,6 +16,14 @@ vi.mock("./session-content-use-actions", () => ({
   markProblemUsedInLesson: vi.fn().mockResolvedValue(undefined),
 }));
 
+vi.mock("./AssetMaterialViewer", () => ({
+  default: ({ assets, sessionId }: { assets: { title: string }[]; sessionId?: string | null }) => (
+    <div data-testid="asset-viewer" data-session={sessionId ?? ""}>
+      {assets.map((a) => a.title).join("|")}
+    </div>
+  ),
+}));
+
 vi.mock("./canvas-actions", () => ({
   saveCanvasStrokes: vi.fn(),
 }));
@@ -239,5 +247,44 @@ describe("MaterialTab", () => {
     Object.defineProperty(textarea, "scrollHeight", { value: 200, configurable: true });
     fireEvent.change(textarea, { target: { value: "긴 답안입니다" } });
     expect(textarea.style.height).toBe("200px");
+  });
+});
+
+
+// 2026-09-14 — 파일 자료(PDF·영상)는 자료 뷰어로 보인다.
+describe("파일 자료", () => {
+  const pdfAsset = {
+    docId: "d-pdf", versionId: "v-pdf", kind: "pdf" as const, title: "개념 설명.pdf", pageCount: 2, mimeType: "application/pdf",
+  };
+
+  it("파일 자료만 있는 수업은 자료 뷰어가 교재 영역 전체다", () => {
+    render(
+      <MaterialTab
+        sessionId="s1"
+        studentId="stu"
+        material={{ docId: "d-pdf", title: "개념 설명", sections: [], canvasStrokes: [], assets: [pdfAsset] }}
+        viewerRole="teacher"
+        tipsVisible={false}
+        sessionSource="v3"
+      />
+    );
+    expect(screen.getByTestId("asset-viewer")).toHaveTextContent("개념 설명.pdf");
+    expect(screen.getByTestId("asset-viewer").dataset.session).toBe("s1");
+    expect(screen.queryByText("교재 목차")).not.toBeInTheDocument();
+  });
+
+  it("HTML 섹션과 함께 있으면 섹션 아래에 이어서 보인다", () => {
+    render(
+      <MaterialTab
+        sessionId="s1"
+        studentId="stu"
+        material={{ ...material, assets: [pdfAsset] }}
+        viewerRole="teacher"
+        tipsVisible={false}
+        sessionSource="v3"
+      />
+    );
+    expect(screen.getByText("Lesson Overview", { selector: "h2" })).toBeInTheDocument();
+    expect(screen.getByTestId("asset-viewer")).toBeInTheDocument();
   });
 });

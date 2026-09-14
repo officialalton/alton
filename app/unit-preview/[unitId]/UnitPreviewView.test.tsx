@@ -86,3 +86,25 @@ describe("학생 회차 수업 준비 화면", () => {
     expect(screen.getByText("아직 준비된 문제가 없습니다")).toBeInTheDocument();
   });
 });
+
+describe("파일 자료", () => {
+  it("PDF·영상 자료는 본문 대신 뷰어로 가는 길을 보여준다", () => {
+    render(
+      <UnitPreviewView
+        preview={makePreview({
+          materials: [
+            { curriculumDocId: "d-pdf", title: "개념 설명", versionId: "v", kind: "pdf", pageCount: 2, mimeType: "application/pdf", sections: [] },
+            { curriculumDocId: "d-vid", title: "설명 영상", versionId: "v2", kind: "video", pageCount: null, mimeType: "video/mp4", sections: [] },
+          ],
+        })}
+        subjectName={null}
+        studentName={null}
+        backHref="/student"
+      />
+    );
+    const pdfLink = screen.getByRole("link", { name: /PDF · 2쪽 · 열기/ });
+    expect(pdfLink).toHaveAttribute("href", "/materials/d-pdf");
+    expect(screen.getByRole("link", { name: /영상 · 열기/ })).toHaveAttribute("href", "/materials/d-vid");
+    expect(screen.queryByText("내용이 없는 교재입니다.")).not.toBeInTheDocument();
+  });
+});

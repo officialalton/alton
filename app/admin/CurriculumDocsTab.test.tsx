@@ -26,6 +26,10 @@ function Wrapper({
   return <CurriculumDocsTab docs={docs} setDocs={setDocs} subjects={subjects} />;
 }
 
+vi.mock("./curriculum-asset-actions", () => ({
+  publishAssetDocAction: vi.fn(),
+}));
+
 vi.mock("./curriculum-doc-actions", () => ({
   createCurriculumDoc: vi.fn(),
   getCurriculumDocDetailAction: vi.fn(),
@@ -62,6 +66,9 @@ const existingDocListItem: CurriculumDocListItem = {
   status: "draft",
   sectionCount: 0,
   hasPrimaryKeyword: false,
+  kind: "html" as const,
+  sourceDriveName: null,
+  hasDriveSource: false,
   archivedAt: null,
   archivedReason: null,
 };
