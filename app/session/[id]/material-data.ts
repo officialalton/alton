@@ -263,6 +263,20 @@ export async function loadPinnedMaterialData(
     }
   }
 
+  // 2026-09-14 UAT: "교재 이름을 다 바꿨는데 반영이 안 됐네" — 고정되는 것은 **내용**(고정 사본)이고,
+  // 노출용 이름은 표시 문제라 지금 이름을 따른다. 읽지 못하면(권한·삭제) 고정 당시 이름으로 둔다.
+  if (assets.length > 0) {
+    const { data: docs } = await supabase
+      .from("curriculum_docs")
+      .select("id, title")
+      .in("id", assets.map((a) => a.docId));
+    const titleById = new Map((docs ?? []).map((d) => [d.id as string, (d.title as string | null)?.trim() || null]));
+    for (const a of assets) {
+      const now = titleById.get(a.docId);
+      if (now) a.title = now;
+    }
+  }
+
   if (ordered.length === 0 && assets.length === 0) {
     // 버전은 가리키는데 내용이 비어 있다 — 스냅샷이 불완전하다.
     return {

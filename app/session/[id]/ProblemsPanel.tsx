@@ -610,7 +610,11 @@ export default function ProblemsPanel({
                 </div>
               )}
 
-              {isTeacherLike && !p.planned && !p.graded && p.correctIndex !== null && (
+              {/* 2026-09-14 UAT: 서술형·SPR·풀이형도 교사는 해설을 볼 수 있어야 한다 — 객관식 정답 유무로 막지 않는다. */}
+              {isTeacherLike &&
+                !p.planned &&
+                !p.graded &&
+                (p.correctIndex !== null || Boolean(p.explanation) || (p.acceptedAnswers?.length ?? 0) > 0) && (
                 <button
                   type="button"
                   onClick={() => toggleReveal(p.problemId)}

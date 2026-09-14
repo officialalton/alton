@@ -332,6 +332,13 @@ describe("ProblemsPanel — 교사", () => {
     expect(sent.length).toBeGreaterThan(0);
   });
 
+  it("서술형·SPR·풀이형도 교사는 해설을 펼쳐 볼 수 있다 (2026-09-14 UAT: 해설이 없어졌다)", () => {
+    renderPanel([{ ...essay, explanation: "undeterred = not discouraged", latestWorkId: "w2", attempts: 1 }], "teacher");
+    expect(screen.queryByText("undeterred = not discouraged")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "정답·해설 보기" }));
+    expect(screen.getByText("undeterred = not discouraged")).toBeInTheDocument();
+  });
+
   it("서술형·풀이형은 정답/부분/오답을 골라야 채점을 끝낼 수 있고 한마디를 붙인다", async () => {
     renderPanel([{ ...essay, attempts: 1, myText: "student text", latestWorkId: "w2" }], "teacher");
     const done = screen.getByRole("button", { name: "채점 완료" });
