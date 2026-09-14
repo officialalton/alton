@@ -482,3 +482,55 @@ export async function runCurriculumDriveFolderSyncAction(): Promise<FolderSyncRe
     .in("sync_status", ["pending", "rename_pending", "failed"]);
   return { state: "ok", driveName, outcome, pendingAfter: count ?? 0 };
 }
+
+// ---------------------------------------------------------------- 키워드 → 단원 지정
+
+export type KeywordUnitRow = {
+  keywordId: string;
+  label: string;
+  unitId: string | null;
+  /** 지금 N:M 연결로 붙어 있는 단원 수(전환 힌트). */
+  linkedUnitCount: number;
+  candidateUnitId: string | null;
+};
+
+/**
+ * 이 과목의 활성 키워드와 단원 소속. 단원이 없는 것은 전환 대상이다
+ * (subject_keywords_needing_unit) — 자동으로 옮기지 않고 사람이 정한다.
+ */
+export async function listSubjectKeywordUnitsAction(subjectId: string): Promise<KeywordUnitRow[]> {
+  const { supabase } = await requireAdmin();
+  const [{ data: keywords }, { data: needing }] = await Promise.all([
+    supabase
+      .from("subject_keywords")
+      .select("id, label, unit_id")
+      .eq("subject_id", subjectId)
+      .eq("status", "active")
+      .order("label", { ascending: true }),
+    supabase
+      .from("subject_keywords_needing_unit")
+      .select("keyword_id, linked_unit_count, candidate_unit_id")
+      .eq("subject_id", subjectId),
+  ]);
+  const hint = new Map(
+    (needing ?? []).map((n) => [n.keyword_id as string, n as { linked_unit_count: number; candidate_unit_id: string | null }])
+  );
+  return (keywords ?? []).map((k) => ({
+    keywordId: k.id as string,
+    label: k.label as string,
+    unitId: (k.unit_id as string | null) ?? null,
+    linkedUnitCount: Number(hint.get(k.id as string)?.linked_unit_count ?? 0),
+    candidateUnitId: hint.get(k.id as string)?.candidate_unit_id ?? null,
+  }));
+}
+
+/** 키워드의 단원을 정한다(같은 과목 단원만 — DB 트리거가 확인). 폴더 큐에도 반영된다. */
+export async function setKeywordUnitAction(
+  keywordId: string,
+  unitId: string | null
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  const { supabase } = await requireAdmin();
+  const { error } = await supabase.from("subject_keywords").update({ unit_id: unitId }).eq("id", keywordId);
+  if (error) return { ok: false, error: error.message.replace(/^.*?:\s*/, "") };
+  return { ok: true };
+}
