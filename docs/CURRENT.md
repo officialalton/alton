@@ -1,4 +1,64 @@
-# ALTON — 현재 상태 (2026-09-11 기준)
+# ALTON — 현재 상태 (2026-09-14 기준)
+
+> **2026-09-14 야간 — P2 12·13차: 상위 변경의 완전한 반영 / 학생·보호자 회차별 '수업 준비' /
+> Drive 기반 PDF·영상 자료 최소 구현.**
+> 커밋 `531e4bc` → `8dc0fdf` → `63d1189`(브랜치 `preview/m4-integration-verification`).
+> 전체 테스트 **2596 통과 / 1 skip**(`supabase db reset --local` 직후 `vitest run --no-file-parallelism`, 449s).
+>
+> **Preview `https://alton-ps9vbu4k4-alton7.vercel.app` = 커밋 `8dc0fdf`까지만.** `63d1189`(Drive
+> 자료)는 **배포하지 않았다** — 공유 non-prod 에 `20261348000000` 이 없으면 `kind` 컬럼 조회가
+> 실패해 교재 라이브러리·예정 교재 표시가 깨진다. 아래 "사용자가 할 조작" 순서대로.
+>
+> **공유 non-prod 미적용 마이그레이션 3건**: `20261346000000`(구성 출처 표식), `20261347000000`
+> (상위 변경 내려보내기 + 학생 층 '뺀 문제' 기록), `20261348000000`(Drive 자료·키워드 단원·폴더 큐·
+> 고정 사본 버킷·페이지 필기). 이 세션에서 `npx supabase db push --linked` 가 도구 권한에 막혔다
+> (Production 배포로 분류됨). 46·47 없이도 지금 Preview(`8dc0fdf`)는 구버전 함수로 동작한다
+> (업데이트 미리보기의 새 항목이 0으로 보임, 학생 층 '뺀 문제' 기록 안 됨).
+>
+> **완료한 것**
+> 1. `기본 구성 업데이트`가 상위에서 **빠진 것을 빼고**(내려온 행만), 없는 것을 받고, **순서·목표**를
+>    따라간다(사람이 손댄 적 없을 때만). 각 행에 `inherited`·`inherited_position`, 회차에
+>    `inherited_goal`. 기존 행은 "지금 상위에 같은 것이 있으면 내려온 것"으로 **추정**해 채웠다.
+>    학생 층 `curriculum_overlay_unit_problem_exclusions` 신설(없어서 뺀 문제가 매번 되살아났다).
+>    내려온 교재를 빼면 제외 기록. `업데이트 있음`이 학생 층과 '빠질 것'도 센다.
+>    `overlay_unit_parent()`는 호출자 권한 — definer 로 두면 남의 회차 존재를 흘린다(테스트가 잡음).
+> 2. 학생·보호자 회차별 `수업 준비`: `/unit-preview/[unitId]`(읽기 전용, 교재·문제 탭,
+>    `unit_preview_for_viewer`). 수업 화면 문제 탭이 **시작 전 예정 문제**를 보여준다(planned,
+>    풀이판 없음). '수업 열기/회차 준비/세션 준비' 문구 → `수업 준비` 하나(진행 중 `수업 입장`, 지난
+>    수업 `수업 기록`). 교사 시작 전 카드엔 `수업 준비`만.
+> 3. Drive 기반 PDF·영상 자료 — 설계·자원·검증 상태는
+>    [`2026-09-14-drive-material-assets-design.md`](2026-09-14-drive-material-assets-design.md).
+>    파일 자료 = `curriculum_docs.kind`; 공개 = 고정 사본(`curriculum-assets` 버킷) 확보 후
+>    `publish_curriculum_asset_doc`; 키워드 → 단원 하나(`subject_keywords.unit_id`, 기존은 전환 대상 뷰);
+>    `curriculum_drive_folders` 큐(실제 쓰기는 `CURRICULUM_DRIVE_ALLOW_REAL_WRITES`); 관리자 `Drive 자료`
+>    탭(불러오기·등록·공개·로컬 표본); `AssetMaterialViewer`(PDF 페이지·목차·확대·다음 자료, 영상 정지);
+>    페이지 필기 `append_page_stroke_events`(버전·페이지·수업 소속 검증, eventId 중복 방지, 교사·학생
+>    레이어 별도 캔버스, 대기/전송 중 획 보존). **부수 수정**: `curriculum_doc_versions` 를 교재를
+>    볼 수 있는 사람이 읽는다 — 학생 권한의 고정 스냅샷 조회가 그동안 비어 있었다.
+>
+> **검증 구분**
+> - 자동 테스트(로컬 DB): 위 전부(2596). 조사 문서 재현 1·2 는 보관함·레이어 테스트로 차단 확인.
+> - 로컬 브라우저(`next dev` + 로컬 DB, 교사 계정): 2페이지 표본 PDF 를 고정 사본으로 공개 → 예정 수업의
+>   교재 탭에 1/2쪽 렌더 · 목차 · 확대 · 이전/다음 확인 → 필기 → 저장(2세그먼트, eventId 각각) →
+>   2쪽으로 이동(1쪽 획 없음) → 1쪽 복귀·새로고침 후 획 복원 확인.
+> - **미확인**: 실제 Drive(자원·환경변수 없음, 호출 안 함), 두 계정 동시 필기·상대 레이어 지우개
+>   (컴포넌트 테스트만), 저장 지연·실패·빠른 전환의 실제 화면 재현, 영상 재생·구간 이동·모바일,
+>   iPad·Apple Pencil, 원본 교체·재공개 후 유지(RPC 테스트만), 학생·보호자 계정의 브라우저 확인, Preview.
+>
+> **사용자가 할 조작(순서대로)**
+> 1. `npx supabase db push --linked` (46·47·48 적용) → `npx supabase migration list --linked` 로 확인.
+> 2. `npx vercel deploy --yes` (커밋 `63d1189`) → 새 Preview 주소로 UAT.
+> 3. 교재 전용 Shared Drive 1개 생성, Preview 검증 서비스 계정을 **그 드라이브에만** 초대(읽기 검증은
+>    뷰어, 폴더 생성까지는 콘텐츠 관리자), Preview 환경변수 `CURRICULUM_DRIVE_ENABLED=true`,
+>    `CURRICULUM_DRIVE_ID`, (선택) `CURRICULUM_DRIVE_ROOT_FOLDER_ID`; `CURRICULUM_DRIVE_ALLOW_REAL_WRITES`
+>    는 폴더 동기화 '계획'을 본 뒤 `true`.
+> 4. Drive 없이도 관리자 > 과목 및 교재 > Drive 자료 > **로컬 표본**으로 PDF 를 올려 뷰어·필기 UAT 가능.
+>
+> **열린 결함·남은 것**: 기존 키워드 128개(로컬 기준) 단원 미지정 — 전환 대상, 사람이 정한다 /
+> `session_curriculum_units` 없는 회차(예약 미연결)의 필기는 수업이 없어 저장 대상이 없음(설계대로) /
+> 이전 항목(테스트 격리 `reservations_no_overlap`, `homework_items.session_id` 레거시, Google 이전
+> 배포 실패 원인)은 그대로.
+
 
 > **2026-09-14 — P2 9~11차: 준비안 유지 → 다시 구성 → 수업 시작 고정 / 학생별
 > 자동 상속 / 수업 준비 화면 통합 / 학생·보호자 사전 열람.**
