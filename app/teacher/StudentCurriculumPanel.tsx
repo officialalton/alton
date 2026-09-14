@@ -63,8 +63,12 @@ export default function StudentCurriculumPanel({
     setError(null);
     try {
       const id = await withOverlayId();
-      const unit = await addCanonicalUnit(subjectEnrollmentId, id, sourceUnitId, unitTitle);
-      setUnits((prev) => [...prev, unit]);
+      const result = await addCanonicalUnit(subjectEnrollmentId, id, sourceUnitId, unitTitle);
+      if (!result.ok) {
+        setError(result.error);
+        return;
+      }
+      setUnits((prev) => [...prev, result.unit]);
       setShowAddPanel(false);
     } catch (e) {
       setError(e instanceof Error ? e.message : "단원 추가에 실패했습니다.");

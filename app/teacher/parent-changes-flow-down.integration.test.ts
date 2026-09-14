@@ -560,3 +560,50 @@ describe("관리자 기준본 층의 업데이트", () => {
     ).toBe("auto");
   });
 });
+
+// 2026-09-14 Preview 재현 — 회차가 없는 교사 템플릿으로 매칭되면 학생 커리큘럼이 비었다.
+describe("매칭 시딩 — 교사 템플릿이 비어 있으면 기준본에서 온다", () => {
+  it("빈 템플릿이면 기준본 회차를 복사하고, 회차가 있는 템플릿이면 그것을 쓴다", () => {
+    const cat = makeCatalogUnit();
+    // 이 과목의 기준본 회차가 하나 이상 있다(위에서 만든 것 포함).
+    const contractId = psql(
+      `insert into contracts (household_id, child_id, status) values ('${HOUSEHOLD_ID}', '${STUDENT_ID}', 'draft') returning id;`
+    );
+    cleanupContractIds.push(contractId);
+    const enrollmentId = psql(
+      `insert into subject_enrollments (child_id, subject_id, contract_id, status)
+       values ('${STUDENT_ID}', '${SUBJECT_ID}', '${contractId}', 'planned') returning id;`
+    );
+    psql(
+      `insert into teacher_assignments (subject_enrollment_id, teacher_id, status, effective_from)
+       values ('${enrollmentId}', '${TEACHER_ID}', 'active', now() - interval '1 day');`
+    );
+    // 회차가 하나도 없는 교사 템플릿 — 이 테스트의 교사 회차는 만들지 않는다.
+    const templateId = teacherTemplateId();
+    psql(`delete from teacher_curriculum_template_units where template_id = '${templateId}';`);
+
+    psql(`select seed_curriculum_overlay_for_match('${enrollmentId}', '${TEACHER_ID}', '${SUBJECT_ID}');`);
+    const count = psql(
+      `select count(*) from curriculum_overlay_units u join student_curriculum_overlays o on o.id = u.overlay_id
+       where o.subject_enrollment_id = '${enrollmentId}';`
+    );
+    expect(Number(count)).toBeGreaterThan(0);
+    expect(
+      psql(`select count(*) from curriculum_overlay_units u join student_curriculum_overlays o on o.id = u.overlay_id
+            where o.subject_enrollment_id = '${enrollmentId}' and u.source_unit_id = '${cat.unitId}';`)
+    ).toBe("1");
+  });
+
+  it("교사 회차가 기준본에서 갈라질 때 교재는 inherited 로 남는다(키워드보다 먼저 복사)", () => {
+    const cat = makeCatalogUnit();
+    const kw = makeKeyword();
+    const doc = makeDoc("키워드 기본");
+    psql(`update curriculum_docs set primary_keyword_id = '${kw}', primary_keyword_position = 1 where id = '${doc}';`);
+    psql(`insert into subject_template_unit_keywords (unit_id, keyword_id) values ('${cat.unitId}', '${kw}');`);
+    psql(`select update_unit_composition('catalog', '${cat.unitId}');`); // PDF/키워드 교재가 auto 로 들어온다
+    const tu = makeTeacherUnit(cat.unitId);
+    expect(
+      psql(`select inherited from teacher_curriculum_template_unit_materials where unit_id = '${tu}' and curriculum_doc_id = '${doc}';`)
+    ).toBe("t");
+  });
+});

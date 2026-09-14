@@ -108,12 +108,14 @@ async function nextPosition(supabase: Awaited<ReturnType<typeof createClient>>, 
   return (data?.position ?? 0) + 1;
 }
 
+export type AddUnitResult = { ok: true; unit: OverlayUnit } | { ok: false; error: string };
+
 export async function addCanonicalUnit(
   subjectEnrollmentId: string,
   overlayId: string,
   sourceUnitId: string,
   unitTitle: string
-): Promise<OverlayUnit> {
+): Promise<AddUnitResult> {
   const { supabase } = await requireAssignedTeacherOrAdmin(subjectEnrollmentId);
   const position = await nextPosition(supabase, overlayId);
   const { data, error } = await supabase
@@ -126,8 +128,23 @@ export async function addCanonicalUnit(
     })
     .select("id, source_unit_id, position, unit_title, note, status, status_changed_at")
     .single();
-  if (error) throw new Error(error.message);
-  return mapUnitRow(data);
+  // 2026-09-14: 던지지 않는다 — Production 에서 던진 예외는 "Minified React error #441" 로 가려져
+  // 사유(RLS·트리거 메시지)가 사라진다. 사유를 값으로 돌려주고 화면이 보여준다.
+  if (error) {
+    console.error(JSON.stringify({ event: "overlay_unit_add_failed", sourceUnitId, message: error.message }));
+    return { ok: false, error: readableDbError(error.message, "단원을 불러오지 못했습니다.") };
+  }
+  return { ok: true, unit: mapUnitRow(data) };
+}
+
+/**
+ * DB 가 올려준 사유를 사람이 읽을 수 있게 다듬는다. 한국어 메시지(트리거·RPC 의 raise)는 그대로,
+ * RLS 거절은 권한 문구로, 그 밖은 원문 앞에 짧은 설명을 붙인다.
+ */
+function readableDbError(message: string, fallback: string): string {
+  if (/row-level security/i.test(message)) return "이 학생의 커리큘럼을 고칠 권한이 없습니다(담당 선생님·관리자만).";
+  if (/[가-힣]/.test(message)) return message.replace(/^.*?:\s*/, "");
+  return `${fallback} (${message.slice(0, 160)})`;
 }
 
 export async function createSupplementUnit(
