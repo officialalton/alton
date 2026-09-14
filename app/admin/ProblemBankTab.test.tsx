@@ -17,6 +17,7 @@ vi.mock("./problem-bank-actions", () => ({
   publishDraftAction: (...a: unknown[]) => publishDraftAction(...a),
   markFigureCheckedAction: (...a: unknown[]) => markFigureCheckedAction(...a),
   uploadProblemImageAction: (...a: unknown[]) => uploadProblemImageAction(...a),
+  generateFigureForProblemAction: (...a: unknown[]) => generateFigureForProblemAction(...a),
   setProblemArchivedAction: (...a: unknown[]) => setProblemArchivedAction(...a),
   setProblemKeywordAction: (...a: unknown[]) => setProblemKeywordAction(...a),
   updateProblemMetaAction: (...a: unknown[]) => updateProblemMetaAction(...a),
@@ -29,6 +30,10 @@ const createDraftVersionAction = vi.fn();
 const createDraftFromPublishedAction = vi.fn();
 const publishDraftAction = vi.fn();
 const markFigureCheckedAction = vi.fn(async (..._a: unknown[]) => ({ ok: true }));
+const generateFigureForProblemAction = vi.fn(async (..._a: unknown[]) => ({
+  ok: true,
+  value: { type: "coordinate_plane", xRange: [-2, 8], yRange: [-2, 8], items: [{ kind: "points", points: [[1, 3]] }] },
+}));
 const uploadProblemImageAction = vi.fn(async (..._a: unknown[]) => ({ ok: true, value: { type: "image", bucket: "problem-assets", path: "p1/abc.png", alt: "fig" } }));
 const setProblemArchivedAction = vi.fn();
 const setProblemKeywordAction = vi.fn();
@@ -471,5 +476,34 @@ describe("보관은 삭제가 아니다", () => {
     expect(screen.getByLabelText("그림 확인함")).toBeDisabled(); // 저장 전엔 확인 못 한다
     fireEvent.change(box, { target: { value: '{"type":"geometry","shapes":[]}' } });
     expect(screen.getByText(/그림 데이터 오류/)).toBeInTheDocument();
+  });
+
+  it("그림 옵션을 고르면 AI 생성에 그 요구가 가고, Geometry 유형을 고르면 '도형 필수'가 기본이다(2026-09-14)", async () => {
+    render(<ProblemBankTab subjects={subjects} />);
+    await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());
+    fireEvent.change(screen.getByLabelText("새 문제 과목"), { target: { value: "sub1" } });
+    fireEvent.change(screen.getByLabelText("문제 유형"), { target: { value: "Geometry and Trigonometry" } });
+    expect(screen.getByLabelText("그림")).toHaveValue("require_geometry");
+    fireEvent.change(screen.getByLabelText("그림"), { target: { value: "require_plane" } });
+    fireEvent.click(screen.getByText("AI로 만들기"));
+    await waitFor(() =>
+      expect(generateBankProblemsAction).toHaveBeenCalledWith(expect.objectContaining({ figurePolicy: "require_plane" }))
+    );
+  });
+
+  it("초안에서 'AI로 좌표평면 그림 만들기'를 누르면 그림 칸이 채워지고 미리보기가 뜬다", async () => {
+    await openFirstProblem();
+    fireEvent.click(screen.getByRole("button", { name: "AI로 좌표평면 그림 만들기" }));
+    await waitFor(() => expect(generateFigureForProblemAction).toHaveBeenCalledWith(expect.objectContaining({ kind: "coordinate_plane" })));
+    await waitFor(() => expect(screen.getByTestId("problem-figure")).toBeInTheDocument());
+    expect((screen.getByLabelText("그림 데이터") as HTMLTextAreaElement).value).toContain("coordinate_plane");
+  });
+
+  it("지문에 표·수식이 있으면 편집 칸 아래에 학생 화면과 같은 미리보기(표 렌더)가 붙는다", async () => {
+    await openFirstProblem();
+    fireEvent.change(screen.getByLabelText("지문"), { target: { value: "Data:\n| Shift | Defective |\n|---|---|\n| 1 | 6 |\nQ?" } });
+    const preview = screen.getByTestId("passage-preview");
+    expect(preview.querySelector("table")).not.toBeNull();
+    expect(preview).toHaveTextContent("Defective");
   });
 });

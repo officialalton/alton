@@ -393,6 +393,14 @@ export async function createSubjectKeywordForDoc(
 }
 
 export type ProblemFormat = "mc" | "spr" | "essay" | "math";
+/** 그림 요구(2026-09-14): 모델 재량에 맡기면 도형이 거의 안 나온다 — 필수면 그림 없는 문항은 버린다. */
+export type FigurePolicy = "none" | "optional" | "require_plane" | "require_geometry";
+const FIGURE_POLICY_RULE: Record<FigurePolicy, string> = {
+  none: "figure 를 만들지 않는다. 그림 없이 풀 수 있는 문항만 만든다.",
+  optional: "그래프·도형이 꼭 필요한 문항에만 figure 데이터를 넣는다.",
+  require_plane: "**모든 문항에 figure(type:'coordinate_plane') 데이터가 있어야 한다.** 그래프를 읽어야만 풀 수 있는 문항(절편·교점·기울기·해 읽기 등)으로 만든다. 좌표는 문제 수치와 정확히 일치하고, 답이 그림에 글자로 드러나지 않게 한다.",
+  require_geometry: "**모든 문항에 figure(type:'geometry') 데이터가 있어야 한다.** 도형(삼각형·원·평행선·각 라벨)을 보고 풀어야 하는 문항으로 만든다. 라벨은 문제의 기호와 정확히 같게, 각 라벨은 선과 겹치지 않는 자리에, notToScale 은 실제 비율이 아닐 때만.",
+};
 export type ProblemDifficulty = "easy" | "medium" | "hard";
 
 const FORMAT_LABEL: Record<ProblemFormat, string> = {
@@ -409,9 +417,11 @@ export async function generateSectionProblems(params: {
   difficulty: ProblemDifficulty;
   format: ProblemFormat;
   count: number;
+  figurePolicy?: FigurePolicy;
 }): Promise<Omit<DocProblem, "id" | "keywords">[]> {
   await requireAdmin();
   const { sectionTitle, subjectName, skillType, difficulty, format, count } = params;
+  const figurePolicy: FigurePolicy = params.figurePolicy ?? "optional";
   const clampedCount = Math.max(1, Math.min(10, count));
 
   const message = await anthropic.messages.create({
@@ -486,7 +496,9 @@ ${findProblemSkill(skillType) ? `유형 규칙(실제 SAT/AP 문항 말투를 �
 ${format === "mc" ? "객관식은 반드시 선택지 4개와 정답 인덱스를 포함해주세요." : ""}
 ${format === "spr" ? "숫자 입력(SPR)은 SAT Math 학생 직접 입력 문항입니다: 정답이 하나의 수(정수·소수·분수)로 정해져야 하고, answers 에 동치 표현을 모두 넣어주세요(예: 7/2 와 3.5). 선택지는 만들지 마세요. 양수는 5자, 음수는 6자 안에 쓸 수 있는 값이어야 합니다." : ""}
 언어: 문항(지문·질문·선택지·SPR 정답)은 실제 SAT/AP 시험과 같이 **영어**로 쓴다. 해설(explanation)만 한국어로 쓴다.
-표기 규칙: 수식은 LaTeX 로 $…$(인라인)·$$…$$(블록) 안에 쓴다. 표가 필요하면 마크다운 파이프 표(| x | f(x) | / |---|---| / | 0 | 17 |)로 쓴다. 그래프·도형이 꼭 필요한 수학 문항은 figure 데이터로 넣는다(좌표는 문제 수치와 정확히 일치, 그림에 답이 그대로 드러나지 않게). 영어·독해 문항에는 figure 를 쓰지 않는다.
+표기 규칙: 수식은 LaTeX 로 $…$(인라인)·$$…$$(블록) 안에 쓴다. 표가 필요하면 마크다운 파이프 표(| x | f(x) | / |---|---| / | 0 | 17 |)로 쓴다.
+그림 규칙: ${FIGURE_POLICY_RULE[figurePolicy]}
+선택지 규칙: 값이 숫자·식이면 선택지에 "x =" 같은 변수 이름을 붙이지 않고 값만 쓴다(예: "118", "$\\frac{3}{2}$", "$4x^2 - 1$"). 단위·기호(°, $, %)는 문제 문장에 두고 선택지에는 붙이지 않는다(SAT 관례). 각도는 LaTeX 로 $118^\\circ$ 로 쓴다.
 이 문제들은 특정 학생이 아니라 이 교재를 배정받는 어떤 학생에게도 재사용될 문제
 은행에 들어갑니다. 실전 SAT/AP 시험에 나올 법한 퀄리티로 만들어주세요.`,
       },
@@ -517,7 +529,17 @@ ${format === "spr" ? "숫자 입력(SPR)은 SAT Math 학생 직접 입력 문항
   const raw = rawList.filter((p) => p && typeof p.passage === "string");
   if (raw.length === 0) throw new Error("AI 응답에 문제가 없습니다.");
 
-  return raw.map((p) => ({
+  const requiredType =
+    figurePolicy === "require_plane" ? "coordinate_plane" : figurePolicy === "require_geometry" ? "geometry" : null;
+  const kept = requiredType
+    ? raw.filter((p) => {
+        const v = p.figure ? validateFigureSpec(p.figure) : null;
+        return Boolean(v && v.ok && v.spec.type === requiredType);
+      })
+    : raw;
+  if (kept.length === 0) throw new Error("요구한 그림이 있는 문항이 하나도 만들어지지 않았습니다. 유형·개수를 바꿔 다시 시도하세요.");
+
+  return kept.map((p) => ({
     format,
     // 그림 데이터는 모양이 맞을 때만 받는다 — 틀리면 그림 없는 문제로 두고 사람이 붙인다.
     figure: p.figure && validateFigureSpec(p.figure).ok ? p.figure : null,
@@ -689,4 +711,59 @@ export async function deleteCurriculumDoc(docId: string): Promise<void> {
 
   const { error } = await supabase.from("curriculum_docs").delete().eq("id", docId);
   if (error) throw new Error(error.message);
+}
+
+
+/**
+ * 이미 있는 문제에 맞는 그림 데이터만 만든다(2026-09-14). 지문·선택지·해설을 주고 figure 하나를 받는다.
+ * 저장하지 않는다 — 편집 칸에 채워 사람이 미리보기로 확인한 뒤 저장·확인·공개한다.
+ */
+export async function generateFigureForProblem(params: {
+  passage: string;
+  options: string[] | null;
+  explanation: string;
+  kind: "coordinate_plane" | "geometry";
+}): Promise<{ ok: true; figure: unknown } | { ok: false; error: string }> {
+  await requireAdmin();
+  if (!process.env.ANTHROPIC_API_KEY) return { ok: false, error: "이 환경에는 AI 생성이 설정되어 있지 않습니다." };
+  const message = await anthropic.messages.create({
+    model: "claude-sonnet-5",
+    max_tokens: 2000,
+    tools: [
+      {
+        name: "make_figure",
+        description: "주어진 수학 문제에 맞는 그림 데이터 하나를 만든다.",
+        input_schema: {
+          type: "object",
+          properties: {
+            figure: {
+              type: "object",
+              description:
+                params.kind === "coordinate_plane"
+                  ? "{type:'coordinate_plane', xRange:[min,max], yRange:[min,max], items:[{kind:'line', through:[[x,y],[x,y]], label}, {kind:'line', slope, intercept}, {kind:'points', points:[[x,y]], labels:[]}, {kind:'function', fn:'linear'|'quadratic'|'exponential'|'abs'|'sqrt'|'cubic', params:[...]}, {kind:'segment', from, to}, {kind:'polyline', points}]}"
+                  : "{type:'geometry', shapes:[{kind:'polygon', points:[[x,y],...], vertexLabels:[], sideLabels:[], angleLabels:[{at:index, text}], rightAngleAt:[index]}, {kind:'circle', center:[x,y], radius, centerLabel, radiusLabel}, {kind:'segment', from, to, label}, {kind:'parallel_lines', y1, y2, transversal:[[x,y],[x,y]], labels:['m','n','k'], angleLabels:[{at:[x,y], text}]}, {kind:'label', at:[x,y], text}], notToScale:true}",
+            },
+          },
+          required: ["figure"],
+        },
+      },
+    ],
+    tool_choice: { type: "tool", name: "make_figure" },
+    messages: [
+      {
+        role: "user",
+        content: `다음 문제에 맞는 그림 데이터(${params.kind})를 만들어주세요. 좌표·길이·각은 문제의 수치와 정확히 일치해야 하고, 정답이 그림에 글자로 드러나면 안 됩니다. 라벨은 문제의 기호와 같게, 각 라벨은 선과 겹치지 않게.
+지문: ${params.passage}
+${params.options ? `선택지: ${params.options.join(" / ")}` : ""}
+해설: ${params.explanation}`,
+      },
+    ],
+  });
+  const toolUse = message.content.find((c) => c.type === "tool_use");
+  if (!toolUse || toolUse.type !== "tool_use") return { ok: false, error: "AI 응답을 처리할 수 없습니다." };
+  const figure = (toolUse.input as { figure?: unknown }).figure;
+  const v = validateFigureSpec(figure);
+  if (!v.ok) return { ok: false, error: `AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — ${v.error}` };
+  if (v.spec.type !== params.kind) return { ok: false, error: "요구한 종류의 그림이 아닙니다. 다시 시도하세요." };
+  return { ok: true, figure };
 }

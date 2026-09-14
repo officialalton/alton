@@ -348,6 +348,23 @@ export async function uploadProblemImageAction(
   return { ok: true, value: { type: "image", bucket: "problem-assets", path, alt: file.name.replace(/\.[^.]+$/, "") } };
 }
 
+/** 이미 있는 문제의 그림 데이터만 AI 로 만든다(저장 안 함 — 편집 칸에 채운다). */
+export async function generateFigureForProblemAction(params: {
+  passage: string;
+  options: string[] | null;
+  explanation: string;
+  kind: "coordinate_plane" | "geometry";
+}): Promise<BankResult<unknown>> {
+  await requireAdmin();
+  const { generateFigureForProblem } = await import("./curriculum-doc-actions");
+  try {
+    const r = await generateFigureForProblem(params);
+    return r.ok ? { ok: true, value: r.figure } : { ok: false, error: r.error };
+  } catch {
+    return { ok: false, error: "그림을 만들지 못했습니다. 잠시 후 다시 시도해주세요." };
+  }
+}
+
 /** 관리자가 미리보기의 그림을 확인했다(2026-09-14 ③). 그림이 있는 버전은 이것 없이 공개되지 않는다. */
 export async function markFigureCheckedAction(versionId: string, checked: boolean): Promise<BankResult> {
   await requireAdmin();
@@ -521,6 +538,8 @@ export async function generateBankProblemsAction(params: {
   format: string;
   count: number;
   keywordIds?: string[];
+  /** 그림 요구: none | optional | require_plane | require_geometry (2026-09-14). */
+  figurePolicy?: string;
 }): Promise<BankResult<number>> {
   await requireAdmin();
   const admin = createAdminClient();
@@ -555,9 +574,12 @@ export async function generateBankProblemsAction(params: {
       difficulty: params.difficulty as never,
       format: params.format as never,
       count: params.count,
+      figurePolicy: (params.figurePolicy as never) ?? "optional",
     });
-  } catch {
-    // AI 응답 처리 실패의 원문은 화면에 넘기지 않는다.
+  } catch (e) {
+    // 그림 요구를 못 채운 경우는 사람이 조치할 수 있는 사실이라 그대로 알린다. 그 외 원문은 넘기지 않는다.
+    const message = e instanceof Error ? e.message : "";
+    if (message.includes("그림이 있는 문항")) return { ok: false, error: message };
     return { ok: false, error: "문제를 생성하지 못했습니다. 잠시 후 다시 시도해주세요." };
   }
 

@@ -9,6 +9,7 @@ import {
   publishDraftAction,
   markFigureCheckedAction,
   uploadProblemImageAction,
+  generateFigureForProblemAction,
   setProblemArchivedAction,
   setProblemKeywordAction,
   updateProblemMetaAction,
@@ -18,6 +19,7 @@ import {
 } from "./problem-bank-actions";
 import { listSubjectCatalogAction } from "./subject-actions";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
+import LearningText from "@/app/session/[id]/LearningText";
 import { PROBLEM_SKILLS, findProblemSkill } from "@/lib/problem-skills";
 import { validateFigureSpec } from "@/lib/problem-figures/spec";
 import type { AdminSubject, SubjectKeyword } from "./subject-data";
@@ -422,6 +424,7 @@ function NewProblemRow({
     format: string;
     count: number;
     keywordIds?: string[];
+    figurePolicy?: string;
   }) => void;
 }) {
   const [subjectId, setSubjectId] = useState("");
@@ -430,6 +433,8 @@ function NewProblemRow({
   const [topic, setTopic] = useState("");
   // 2026-09-14 제품 오너: 만들 때 난이도를 고른다 — 직접 쓰기·AI 둘 다 같은 값.
   const [difficulty, setDifficulty] = useState<"easy" | "medium" | "hard">("medium");
+  // 2026-09-14: 그림은 모델 재량에 맡기면 거의 안 나온다 — 명시적으로 요구한다. 유형을 고르면 기본값이 따라온다.
+  const [figurePolicy, setFigurePolicy] = useState<"none" | "optional" | "require_plane" | "require_geometry">("optional");
   const [count, setCount] = useState("3");
   const [keywordIds, setKeywordIds] = useState<string[]>([]);
 
@@ -478,7 +483,12 @@ function NewProblemRow({
           onChange={(e) => {
             setSkillType(e.target.value);
             const skill = findProblemSkill(e.target.value);
-            if (skill) setFormat(skill.defaultFormat);
+            if (skill) {
+              setFormat(skill.defaultFormat);
+              setFigurePolicy(
+                skill.code === "math.geometry_trig" ? "require_geometry" : skill.family === "SAT Math" ? "optional" : "none"
+              );
+            }
           }}
           placeholder="유형 (선택 · 목록에서 고르거나 직접)"
           list="problem-skill-list"
@@ -505,6 +515,18 @@ function NewProblemRow({
           <option value="easy">쉬움</option>
           <option value="medium">보통</option>
           <option value="hard">어려움</option>
+        </select>
+        <select
+          aria-label="그림"
+          value={figurePolicy}
+          onChange={(e) => setFigurePolicy(e.target.value as typeof figurePolicy)}
+          title="AI 생성 때 그림(그래프·도형 데이터)을 요구할지"
+          className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5"
+        >
+          <option value="none">그림 없음</option>
+          <option value="optional">그림 필요하면</option>
+          <option value="require_plane">그림 필수 · 좌표평면</option>
+          <option value="require_geometry">그림 필수 · 도형</option>
         </select>
       </div>
 
@@ -583,6 +605,7 @@ function NewProblemRow({
               format,
               count: Number(count) || 1,
               keywordIds: keywordIds.length ? keywordIds : undefined,
+              figurePolicy,
             })
           }
           className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
@@ -893,6 +916,7 @@ function DraftEditor({
   })();
   const figureDirty = JSON.stringify(figureParsed.spec ?? null) !== JSON.stringify(source?.figure ?? null);
   const [figureNotice, setFigureNotice] = useState<string | null>(null);
+  const [figureBusy, setFigureBusy] = useState(false);
 
   const initialOptions = useMemo(() => {
     const existing = source?.options ?? [];
@@ -950,6 +974,26 @@ function DraftEditor({
         placeholder="문제 지문"
         className="w-full text-[13px] border-[1.5px] border-grey-200 rounded-lg px-3 py-2 mb-2 resize-none overflow-hidden"
       />
+      {/* 2026-09-14 UAT: 편집 칸엔 마크다운 원문(| 표 |, $수식$)이 그대로 보여 "허접해" 보였다 —
+          학생·교사 화면과 같은 렌더를 바로 아래에 보여준다. */}
+      {(passage.includes("|") || passage.includes("$") || passage.includes("__") || /^\s*[-•]\s/m.test(passage) || options.some((o) => o.includes("$"))) && (
+        <div className="mb-3 border-[1.5px] border-dashed border-grey-200 rounded-lg px-4 py-3" data-testid="passage-preview">
+          <div className="text-[10.5px] font-bold text-grey-300 uppercase tracking-wide mb-1">학생 화면 미리보기</div>
+          <LearningText text={passage} className="learning-body text-[14px] leading-[1.75] text-ink" />
+          {isMc && options.some((o) => o.trim()) && (
+            <ol className="mt-2">
+              {options.map((o, i) =>
+                o.trim() ? (
+                  <li key={i} className="text-[13.5px] text-ink py-0.5">
+                    <span className="text-grey-500 mr-2">{i + 1}</span>
+                    <LearningText text={o} className="learning-body inline" />
+                  </li>
+                ) : null
+              )}
+            </ol>
+          )}
+        </div>
+      )}
 
       {isMc && (
         <div className="mb-2">
@@ -1037,6 +1081,30 @@ function DraftEditor({
           />
           <span className="text-grey-500">PNG·JPG·WEBP·SVG, 5MB 이하 — 기출 도형·직접 그린 그림</span>
         </label>
+        <div className="flex flex-wrap items-center gap-2 mb-1.5">
+          {(["coordinate_plane", "geometry"] as const).map((kind) => (
+            <button
+              key={kind}
+              type="button"
+              disabled={busy || figureBusy || !passage.trim()}
+              onClick={async () => {
+                setFigureBusy(true);
+                setFigureNotice(null);
+                const r = await generateFigureForProblemAction({ passage, options: isMc ? options : null, explanation, kind });
+                setFigureBusy(false);
+                if (!r.ok) {
+                  setFigureNotice(`그림을 만들지 못했습니다 — ${r.error}`);
+                  return;
+                }
+                setFigureText(JSON.stringify(r.value, null, 2));
+                setFigureNotice("AI 가 그림 데이터를 만들었습니다. 미리보기를 확인하고 초안을 저장한 뒤 '그림 확인함'을 켜세요. 수치·라벨이 문제와 맞는지 꼭 보세요.");
+              }}
+              className="text-[12px] font-bold px-2.5 py-1 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
+            >
+              {figureBusy ? "만드는 중…" : kind === "coordinate_plane" ? "AI로 좌표평면 그림 만들기" : "AI로 도형 그림 만들기"}
+            </button>
+          ))}
+        </div>
         {figureNotice && <p className="text-[11.5px] text-ink mb-1.5">{figureNotice}</p>}
         {figureParsed.error && <p className="text-[11.5px] text-red mb-1.5">그림 데이터 오류 — {figureParsed.error}</p>}
         {figureParsed.spec != null && (
