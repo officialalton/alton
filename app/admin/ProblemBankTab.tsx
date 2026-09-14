@@ -348,6 +348,7 @@ function NewProblemRow({
     format: string;
     skillType?: string;
     topic?: string;
+    difficulty?: string;
     keywordIds?: string[];
   }) => void;
   onGenerate: (p: {
@@ -364,6 +365,8 @@ function NewProblemRow({
   const [format, setFormat] = useState("mc");
   const [skillType, setSkillType] = useState("");
   const [topic, setTopic] = useState("");
+  // 2026-09-14 제품 오너: 만들 때 난이도를 고른다 — 직접 쓰기·AI 둘 다 같은 값.
+  const [difficulty, setDifficulty] = useState<"easy" | "medium" | "hard">("medium");
   const [count, setCount] = useState("3");
   const [keywordIds, setKeywordIds] = useState<string[]>([]);
 
@@ -419,6 +422,16 @@ function NewProblemRow({
           placeholder="주제 (선택 · 예: 생태계)"
           className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 w-[180px]"
         />
+        <select
+          aria-label="난이도"
+          value={difficulty}
+          onChange={(e) => setDifficulty(e.target.value as "easy" | "medium" | "hard")}
+          className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5"
+        >
+          <option value="easy">쉬움</option>
+          <option value="medium">보통</option>
+          <option value="hard">어려움</option>
+        </select>
       </div>
 
       {/* 만들면서 바로 키워드를 붙인다. 선택 항목이고, 만든 뒤에도 고칠 수 있다. */}
@@ -470,6 +483,7 @@ function NewProblemRow({
               format,
               skillType: skillType.trim() || undefined,
               topic: topic.trim() || undefined,
+              difficulty,
               keywordIds: keywordIds.length ? keywordIds : undefined,
             })
           }
@@ -491,7 +505,7 @@ function NewProblemRow({
               subjectId,
               skillType: skillType.trim(),
               topic: topic.trim() || undefined,
-              difficulty: "medium",
+              difficulty,
               format,
               count: Number(count) || 1,
               keywordIds: keywordIds.length ? keywordIds : undefined,

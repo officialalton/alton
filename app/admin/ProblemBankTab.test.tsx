@@ -429,4 +429,16 @@ describe("보관은 삭제가 아니다", () => {
       expect(screen.getByText(/보관했습니다. 과거 기록은 그대로 남습니다./)).toBeInTheDocument()
     );
   });
+
+  it("난이도를 골라 만들면 AI 생성에 그 난이도가 간다(2026-09-14)", async () => {
+    render(<ProblemBankTab subjects={subjects} />);
+    await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());
+    fireEvent.change(screen.getByLabelText("새 문제 과목"), { target: { value: "sub1" } });
+    fireEvent.change(screen.getByLabelText("문제 유형"), { target: { value: "판별식" } });
+    fireEvent.change(screen.getByLabelText("난이도"), { target: { value: "hard" } });
+    fireEvent.click(screen.getByText("AI로 만들기"));
+    await waitFor(() =>
+      expect(generateBankProblemsAction).toHaveBeenCalledWith(expect.objectContaining({ difficulty: "hard" }))
+    );
+  });
 });
