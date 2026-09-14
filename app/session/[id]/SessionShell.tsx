@@ -9,7 +9,6 @@ import {
 } from "@/lib/session-view";
 import MaterialTab from "./MaterialTab";
 import ProblemsPanel from "./ProblemsPanel";
-import LessonContextHeader from "./LessonContextHeader";
 import CompositionPanel from "@/app/lesson-prep/CompositionPanel";
 import type {
   KeywordProblem,
@@ -293,6 +292,12 @@ export default function SessionShell({
           <div className="text-[13px] font-bold text-ink whitespace-nowrap">
             {sessionNumber}회차
           </div>
+          {/* 2026-09-14 제품 오너 — 준비 중·예정 일시는 별도 노란 줄이 아니라 회차 옆에. */}
+          {state === "prep" && (
+            <span className="text-[12.5px] text-grey-500 whitespace-nowrap" data-testid="prep-schedule">
+              🗓 수업 준비 중{scheduledLabel ? ` · ${scheduledLabel} 예정` : ""}
+            </span>
+          )}
         </div>
 
         <div className="flex items-center gap-4 flex-wrap">
@@ -479,15 +484,6 @@ export default function SessionShell({
         </div>
       )}
 
-      {/* P2/P3 5단계 — 커리큘럼 → 준비 → 수업 → 복습이 같은 말로 이어지도록,
-          수업 화면에서도 "어느 회차이고 목표가 무엇인지"를 먼저 보여준다. */}
-      <LessonContextHeader
-        studentName={studentName}
-        subjectName={subjectName}
-        context={lessonContext}
-        stateLabel={state === "live" ? "수업 중" : state === "completed" ? "지난 수업" : "수업 전"}
-      />
-
       {activeTab === "material" && materialNotice && (
         <div className="px-6 py-2.5 text-[12.5px] text-grey-500 bg-grey-100 border-b-[1.5px] border-grey-200">
           {materialNotice}
@@ -622,12 +618,8 @@ function StatusBar({
     );
   }
 
-  return (
-    <div className="px-6 py-2.5 bg-yellow-bg text-[13.5px]">
-      🗓 <b>수업 준비 중</b>
-      {scheduledLabel ? ` · ${scheduledLabel} 예정` : ""}
-    </div>
-  );
+  // 준비 중은 상단 바의 회차 옆에 적는다(2026-09-14) — 여기서는 줄을 만들지 않는다.
+  return null;
 }
 
 function formatKoreanDateTime(iso: string | null) {

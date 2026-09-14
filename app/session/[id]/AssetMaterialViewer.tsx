@@ -108,7 +108,7 @@ export default function AssetMaterialViewer({
     const measure = () => {
       setFitWidth(Math.max(0, el.clientWidth - 2));
       const top = el.getBoundingClientRect().top;
-      setFitHeight(Math.max(0, window.innerHeight - top - 16));
+      setFitHeight(Math.max(0, window.innerHeight - top - 8));
     };
     measure();
     window.addEventListener("resize", measure);
@@ -197,57 +197,64 @@ export default function AssetMaterialViewer({
         })}
       </nav>
 
-      <div className="px-3 sm:px-8 py-6">
-        <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-          <div className="text-[13px] font-bold text-ink flex items-center gap-2">
+      <div className="relative px-2 sm:px-4 py-2">
+        {/* 2026-09-14 UAT — 수업 중엔 교재가 화면을 채워야 한다. 제목·페이지·확대는 얇은 반투명
+            띠로 위 왼쪽에, 이전/다음은 아래 양쪽 구석의 화살표로. 나머지는 전부 페이지. */}
+        <div
+          className="absolute top-3 left-4 sm:left-6 z-10 flex items-center gap-2 bg-white/60 backdrop-blur-sm border border-white/60 shadow-sm rounded-lg px-2.5 py-1"
+          data-testid="asset-viewer-controls"
+        >
+          <span className="text-[12px] font-bold text-ink max-w-[220px] truncate" title={asset.title}>
             {asset.title}
-            {asset.kind === "pdf" && (
-              <form
-                className="flex items-center gap-1 text-grey-500 font-semibold"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  const n = Number(pageInput);
-                  if (Number.isInteger(n) && n >= 1 && n <= total) void guardedGo({ assetIndex: pos.assetIndex, page: n });
-                  setPageInput("");
-                }}
-              >
-                <input
-                  aria-label="페이지 번호"
-                  value={pageInput}
-                  onChange={(e) => setPageInput(e.target.value)}
-                  placeholder={String(pos.page)}
-                  inputMode="numeric"
-                  className="w-12 text-center text-[12px] border-[1.5px] border-grey-200 rounded px-1 py-0.5"
-                />
-                <span>/ {total}</span>
-              </form>
-            )}
-            {asset.kind === "video" && <span className="text-grey-500 font-semibold ml-2">영상</span>}
-          </div>
-          <div className="flex items-center gap-1.5">
-            {asset.kind === "pdf" && (
-              <>
-                <button onClick={() => setZoom((z) => Math.max(0.5, Math.round((z - 0.25) * 100) / 100))} className="text-[12px] font-bold px-2 py-1 rounded border border-grey-200">−</button>
-                <span className="text-[11.5px] text-grey-500 w-10 text-center">{Math.round(zoom * 100)}%</span>
-                <button onClick={() => setZoom((z) => Math.min(3, Math.round((z + 0.25) * 100) / 100))} className="text-[12px] font-bold px-2 py-1 rounded border border-grey-200">＋</button>
-              </>
-            )}
-            <button
-              onClick={() => void guardedGo(prevPosition(assets, pos))}
-              disabled={!prevPosition(assets, pos)}
-              className="text-[12px] font-bold px-3 py-1 rounded border border-grey-200 disabled:opacity-40"
+          </span>
+          {asset.kind === "pdf" && (
+            <form
+              className="flex items-center gap-1 text-grey-500 font-semibold text-[12px]"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const n = Number(pageInput);
+                if (Number.isInteger(n) && n >= 1 && n <= total) void guardedGo({ assetIndex: pos.assetIndex, page: n });
+                setPageInput("");
+              }}
             >
-              ← 이전
-            </button>
-            <button
-              onClick={() => void guardedGo(nextPosition(assets, pos))}
-              disabled={!nextPosition(assets, pos)}
-              className="text-[12px] font-bold px-3 py-1 rounded border border-grey-200 disabled:opacity-40"
-            >
-              {asset.kind === "pdf" && pos.page >= total && nextPosition(assets, pos) ? "다음 자료 →" : "다음 →"}
-            </button>
-          </div>
+              <input
+                aria-label="페이지 번호"
+                value={pageInput}
+                onChange={(e) => setPageInput(e.target.value)}
+                placeholder={String(pos.page)}
+                inputMode="numeric"
+                className="w-10 text-center text-[12px] border-[1.5px] border-grey-200 rounded px-1 py-0.5 bg-white/80"
+              />
+              <span>/ {total}</span>
+            </form>
+          )}
+          {asset.kind === "pdf" && (
+            <span className="flex items-center gap-1">
+              <button onClick={() => setZoom((z) => Math.max(0.5, Math.round((z - 0.25) * 100) / 100))} className="text-[12px] font-bold w-6 h-6 rounded border border-grey-200 bg-white/80">−</button>
+              <span className="text-[11px] text-grey-500 w-9 text-center">{Math.round(zoom * 100)}%</span>
+              <button onClick={() => setZoom((z) => Math.min(3, Math.round((z + 0.25) * 100) / 100))} className="text-[12px] font-bold w-6 h-6 rounded border border-grey-200 bg-white/80">＋</button>
+            </span>
+          )}
         </div>
+
+        {prevPosition(assets, pos) && (
+          <button
+            aria-label="이전 페이지"
+            onClick={() => void guardedGo(prevPosition(assets, pos))}
+            className="absolute bottom-4 left-4 sm:left-6 z-10 w-11 h-11 rounded-full bg-white/70 backdrop-blur-sm border border-white/60 shadow text-[18px] font-bold text-ink"
+          >
+            ←
+          </button>
+        )}
+        {nextPosition(assets, pos) && (
+          <button
+            aria-label={asset.kind === "pdf" && pos.page >= total ? "다음 자료" : "다음 페이지"}
+            onClick={() => void guardedGo(nextPosition(assets, pos))}
+            className="absolute bottom-4 right-4 sm:right-6 z-10 w-11 h-11 rounded-full bg-white/70 backdrop-blur-sm border border-white/60 shadow text-[18px] font-bold text-ink"
+          >
+            →
+          </button>
+        )}
 
         {navError && <p className="text-[12.5px] text-red mb-2">{navError}</p>}
         {urlError && <p className="text-[12.5px] text-red mb-2">{urlError}</p>}
@@ -256,7 +263,7 @@ export default function AssetMaterialViewer({
           <p className="text-[12.5px] text-grey-500 mb-2">이 자료의 고정 사본이 기록되지 않아 표시할 수 없습니다.</p>
         )}
 
-        <div ref={frameRef} className="relative w-full overflow-auto flex justify-center">
+        <div ref={frameRef} className="relative w-full overflow-auto flex justify-center" style={{ minHeight: fitHeight || undefined }}>
           {asset.kind === "video" ? (
             signed ? <VideoMaterialPlayer url={signed.url} mimeType={signed.mimeType} title={asset.title} /> : <p className="text-[12.5px] text-grey-500">자료를 불러오는 중…</p>
           ) : signed ? (
