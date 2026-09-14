@@ -15,7 +15,7 @@ const supabaseMock = {
     if (table === "session_review_categories") {
       return { upsert: categoryUpsertMock };
     }
-    if (table === "sessions") {
+    if (table === "legacy_sessions") {
       return {
         select: () => ({ eq: () => ({ maybeSingle: sessionMaybeSingleMock }) }),
       };

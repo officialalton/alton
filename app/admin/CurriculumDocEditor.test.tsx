@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor, within } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import CurriculumDocEditor from "./CurriculumDocEditor";
 import * as docActions from "./curriculum-doc-actions";
 import type { DocEditorData } from "./curriculum-doc-data";
@@ -8,6 +8,8 @@ vi.mock("./curriculum-doc-actions", () => ({
   createCurriculumDoc: vi.fn(),
   updateDocTitle: vi.fn(),
   setDocPublished: vi.fn(),
+  setDocPrimaryKeyword: vi.fn(),
+  setDocUnit: vi.fn(),
   addSection: vi.fn(),
   updateSection: vi.fn(),
   removeSection: vi.fn(),
@@ -17,6 +19,11 @@ vi.mock("./curriculum-doc-actions", () => ({
   confirmSectionProblems: vi.fn(),
   removeSectionProblem: vi.fn(),
   deleteCurriculumDoc: vi.fn(),
+  assignSectionKeyword: vi.fn(),
+  removeSectionKeyword: vi.fn(),
+  assignProblemKeyword: vi.fn(),
+  removeProblemKeyword: vi.fn(),
+  createSubjectKeywordForDoc: vi.fn(),
 }));
 
 const doc: DocEditorData = {
@@ -27,6 +34,8 @@ const doc: DocEditorData = {
   unitId: null,
   unitTitle: null,
   status: "draft",
+  primaryKeywordId: null,
+  primaryKeywordPosition: null,
   sections: [
     {
       id: "sec1",
@@ -290,5 +299,160 @@ describe("CurriculumDocEditor", () => {
     );
     expect(screen.getByText("이 교재 삭제")).toBeDisabled();
     expect(screen.getByText("배포 취소 후 삭제할 수 있습니다.")).toBeInTheDocument();
+  });
+
+  // 2026-09-12(UAT 확정) — 섹션별 키워드 입력을 없앴다. 교재 단위 대표 키워드와
+  // 기능이 겹친다: 회차에 키워드가 붙으면 교재 전체가 구성에 들어가고, 수업에
+  // 담기는 것도 교재 단위다. 조각마다 다시 매기는 층은 하는 일이 없다.
+  it("섹션에는 더 이상 키워드 입력이 없다", () => {
+    render(
+      <CurriculumDocEditor
+        doc={{ ...doc, status: "published" }}
+        onBack={vi.fn()}
+        onDeleted={vi.fn()}
+      />
+    );
+    expect(screen.queryByPlaceholderText("키워드 검색 또는 새 키워드 입력")).not.toBeInTheDocument();
+    expect(screen.queryByText("태그된 키워드 없음")).not.toBeInTheDocument();
+  });
+
+  it("섹션 키워드 서버 액션을 부르지 않는다", async () => {
+    const src = (await import("node:fs")).readFileSync(
+      "app/admin/CurriculumDocEditor.tsx",
+      "utf-8"
+    );
+    // 기존 데이터와 과거 수업 조회 경로는 그대로 두고, 새로 매기는 자리만 없앴다.
+    expect(src).not.toContain("assignSectionKeyword");
+    expect(src).not.toContain("removeSectionKeyword");
+  });
+});
+
+// P2 2차 — 교재당 대표 키워드 1개.
+// 섹션별 키워드("이 조각이 무엇을 다루는가")와는 다른 층이다. 대표 키워드는
+// "이 교재를 어느 키워드의 기본 교재로 둘 것인가"이고, 회차에 그 키워드가 붙으면
+// 이 교재가 자동으로 구성에 들어간다.
+describe("대표 키워드 지정", () => {
+  const docWithKeywords: DocEditorData = {
+    ...doc,
+    subjectKeywords: [
+      { id: "kw1", label: "이차함수", status: "active" },
+      { id: "kw2", label: "삼각비", status: "active" },
+    ],
+  };
+
+  beforeEach(() => vi.clearAllMocks());
+
+  it("미지정 상태로 시작하고, 고르면 바로 저장한다", async () => {
+    vi.mocked(docActions.setDocPrimaryKeyword).mockResolvedValue({ ok: true });
+    render(<CurriculumDocEditor doc={docWithKeywords} onBack={vi.fn()} onDeleted={vi.fn()} />);
+
+    const select = screen.getByLabelText("대표 키워드") as HTMLSelectElement;
+    expect(select.value).toBe("");
+
+    fireEvent.change(select, { target: { value: "kw1" } });
+    await waitFor(() =>
+      expect(docActions.setDocPrimaryKeyword).toHaveBeenCalledWith("doc1", "kw1", null)
+    );
+  });
+
+  it("키워드를 고르기 전에는 순서를 입력할 수 없다", () => {
+    render(<CurriculumDocEditor doc={docWithKeywords} onBack={vi.fn()} onDeleted={vi.fn()} />);
+    expect(screen.getByLabelText("키워드 안 순서")).toBeDisabled();
+  });
+
+  it("순서를 숫자로 적으면 함께 저장한다", async () => {
+    vi.mocked(docActions.setDocPrimaryKeyword).mockResolvedValue({ ok: true });
+    render(
+      <CurriculumDocEditor
+        doc={{ ...docWithKeywords, primaryKeywordId: "kw1" }}
+        onBack={vi.fn()}
+        onDeleted={vi.fn()}
+      />
+    );
+    const position = screen.getByLabelText("키워드 안 순서");
+    fireEvent.change(position, { target: { value: "2" } });
+    fireEvent.blur(position);
+    await waitFor(() =>
+      expect(docActions.setDocPrimaryKeyword).toHaveBeenCalledWith("doc1", "kw1", 2)
+    );
+  });
+
+  it("순서에 숫자가 아닌 값을 넣으면 저장하지 않고 알려준다", async () => {
+    render(
+      <CurriculumDocEditor
+        doc={{ ...docWithKeywords, primaryKeywordId: "kw1" }}
+        onBack={vi.fn()}
+        onDeleted={vi.fn()}
+      />
+    );
+    const position = screen.getByLabelText("키워드 안 순서");
+    fireEvent.change(position, { target: { value: "첫째" } });
+    fireEvent.blur(position);
+    await waitFor(() =>
+      expect(screen.getByText("순서는 1 이상의 숫자로 적어주세요.")).toBeInTheDocument()
+    );
+    expect(docActions.setDocPrimaryKeyword).not.toHaveBeenCalled();
+  });
+
+  it("저장 실패 사유를 그대로 보여준다", async () => {
+    vi.mocked(docActions.setDocPrimaryKeyword).mockResolvedValue({
+      ok: false,
+      error: "대표 키워드는 교재와 같은 과목이어야 합니다.",
+    });
+    render(<CurriculumDocEditor doc={docWithKeywords} onBack={vi.fn()} onDeleted={vi.fn()} />);
+    fireEvent.change(screen.getByLabelText("대표 키워드"), { target: { value: "kw2" } });
+    await waitFor(() =>
+      expect(screen.getByText("대표 키워드는 교재와 같은 과목이어야 합니다.")).toBeInTheDocument()
+    );
+  });
+});
+
+// 2026-09-12(UAT) — 교재를 만들 때 단원을 안 정했으면 나중에 정할 길이 없었다.
+describe("교재 단원 나중에 정하기", () => {
+  const docWithUnits: DocEditorData = {
+    ...doc,
+    unitId: null,
+    subjectUnits: [
+      { id: "u1", unitTitle: "함수의 기초", position: 1 },
+      { id: "u2", unitTitle: "이차방정식", position: 2 },
+    ],
+  };
+
+  beforeEach(() => vi.clearAllMocks());
+
+  it("단원 없이 만든 교재도 편집 화면에서 단원을 고를 수 있다", async () => {
+    vi.mocked(docActions.setDocUnit).mockResolvedValue({ ok: true });
+    render(<CurriculumDocEditor doc={docWithUnits} onBack={vi.fn()} onDeleted={vi.fn()} />);
+
+    const select = screen.getByLabelText("단원") as HTMLSelectElement;
+    expect(select.value).toBe("");
+
+    fireEvent.change(select, { target: { value: "u2" } });
+    await waitFor(() => expect(docActions.setDocUnit).toHaveBeenCalledWith("doc1", "u2"));
+  });
+
+  it("단원을 다시 없앨 수 있다", async () => {
+    vi.mocked(docActions.setDocUnit).mockResolvedValue({ ok: true });
+    render(
+      <CurriculumDocEditor
+        doc={{ ...docWithUnits, unitId: "u1" }}
+        onBack={vi.fn()}
+        onDeleted={vi.fn()}
+      />
+    );
+    fireEvent.change(screen.getByLabelText("단원"), { target: { value: "" } });
+    await waitFor(() => expect(docActions.setDocUnit).toHaveBeenCalledWith("doc1", null));
+  });
+
+  it("저장 실패 사유를 보여준다", async () => {
+    vi.mocked(docActions.setDocUnit).mockResolvedValue({
+      ok: false,
+      error: "교재와 단원은 같은 과목이어야 합니다.",
+    });
+    render(<CurriculumDocEditor doc={docWithUnits} onBack={vi.fn()} onDeleted={vi.fn()} />);
+    fireEvent.change(screen.getByLabelText("단원"), { target: { value: "u1" } });
+    await waitFor(() =>
+      expect(screen.getByText("교재와 단원은 같은 과목이어야 합니다.")).toBeInTheDocument()
+    );
   });
 });

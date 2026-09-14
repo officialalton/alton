@@ -9,6 +9,7 @@ import type {
 } from "./teacher-data";
 import type { ChatMessage } from "./chat-data";
 import ChatPanel from "./ChatPanel";
+import { formatCurriculumProgressLabel } from "@/lib/curriculum-overlay-progress";
 
 type SubView =
   | { type: "list" }
@@ -80,14 +81,21 @@ export default function TeacherTab({
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-1.5 mb-3.5">
+            <div className="flex flex-col gap-1 mb-3.5">
               {t.subjects.map((s) => (
-                <span
-                  key={s.subjectName}
-                  className="text-[12px] font-semibold px-3 py-1 rounded-full bg-grey-100 text-ink"
-                >
-                  {s.subjectName} · {s.currentSession}/{s.totalSessions}회차
-                </span>
+                <div key={s.subjectName} className="flex flex-wrap items-center gap-1.5">
+                  <span className="text-[12px] font-semibold px-3 py-1 rounded-full bg-grey-100 text-ink">
+                    {s.subjectName} ·{" "}
+                    {formatCurriculumProgressLabel({
+                      totalUnits: s.totalSessions,
+                      doneUnits: s.currentSession,
+                      sourceLabel: null,
+                    })}
+                  </span>
+                  {s.curriculumSourceLabel && (
+                    <span className="text-[11px] text-grey-400">{s.curriculumSourceLabel}</span>
+                  )}
+                </div>
               ))}
             </div>
 

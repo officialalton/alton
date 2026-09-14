@@ -1,10 +1,14 @@
 "use client";
 
 import { useState, type Dispatch, type SetStateAction } from "react";
-import { createCurriculumDoc } from "./curriculum-doc-actions";
+import {
+  createCurriculumDoc,
+  getCurriculumDocDetailAction,
+  setDocArchived,
+} from "./curriculum-doc-actions";
 import CurriculumDocEditor from "./CurriculumDocEditor";
-import type { DocEditorData } from "./curriculum-doc-data";
-import type { AdminSubject } from "./subject-data";
+import type { DocEditorData, CurriculumDocListItem } from "./curriculum-doc-data";
+import { selectableSubjects, type AdminSubject } from "./subject-data";
 
 const STATUS_LABEL: Record<string, string> = {
   draft: "초안",
@@ -13,22 +17,101 @@ const STATUS_LABEL: Record<string, string> = {
   rejected: "반려됨",
 };
 
+// 2026-09-10(P1 성능 배치) — 목록 첫 진입은 이미 경량(loadCurriculumDocList,
+// 본문·문제 미포함)이라 빠르다. 목록 자체가 계속 누적돼도 화면이 무거워지지
+// 않도록, 표시 개수만 클라이언트에서 페이지네이션한다(데이터 자체는 이미
+// 가벼워서 서버 쪽 limit 없이도 안전 — 과목/단원 드릴다운(MaterialsLibraryTab)이
+// 전체 목록을 필요로 하므로 서버 쿼리 자체는 제한하지 않는다).
+const PAGE_SIZE = 20;
+
 export default function CurriculumDocsTab({
   docs,
   setDocs,
   subjects,
 }: {
-  docs: DocEditorData[];
-  setDocs: Dispatch<SetStateAction<DocEditorData[]>>;
+  docs: CurriculumDocListItem[];
+  setDocs: Dispatch<SetStateAction<CurriculumDocListItem[]>>;
   subjects: AdminSubject[];
 }) {
   const [openDocId, setOpenDocId] = useState<string | null>(null);
-  const [creating, setCreating] = useState(false);
+  // 2026-09-10(P1 성능 배치) — 문서를 실제로 열 때만 섹션·문제·키워드 전체를
+  // 조회한다. 한 번 연 문서는 이 캐시에 남아 다시 열 때 재조회하지 않는다
+  // (같은 세션 안에서만 — 페이지를 새로고침하면 사라짐, 장기 캐시 아님).
+  const [detailCache, setDetailCache] = useState<Record<string, DocEditorData>>({});
+  const [loadingDetailId, setLoadingDetailId] = useState<string | null>(null);
+  // P2 2차 — 대표 키워드 미지정 교재를 찾아 지정할 수 있어야 한다. 임의 백필을
+  // 하지 않았으므로 기존 교재는 전부 미지정이고, 관리자가 하나씩 정한다.
+  const [onlyMissingPrimary, setOnlyMissingPrimary] = useState(false);
+  // 보관됨과 현재는 섞지 않는다. 기본 진입은 현재이고 검색도 그 안에서 돈다.
+  const [showArchived, setShowArchived] = useState(false);
+  const [query, setQuery] = useState("");
+  const [archiveError, setArchiveError] = useState<string | null>(null);
 
-  const open = docs.find((d) => d.id === openDocId);
+  async function toggleArchived(docId: string, archived: boolean) {
+    setArchiveError(null);
+    const result = await setDocArchived(docId, archived);
+    if (!result.ok) {
+      setArchiveError(result.error);
+      return;
+    }
+    setDocs((prev) =>
+      prev.map((d) =>
+        d.id === docId ? { ...d, archivedAt: archived ? new Date().toISOString() : null } : d
+      )
+    );
+  }
+  const [detailError, setDetailError] = useState<string | null>(null);
+  const [creating, setCreating] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+
+  const open = openDocId ? (detailCache[openDocId] ?? null) : null;
+
+  async function openDoc(docId: string) {
+    setOpenDocId(docId);
+    if (detailCache[docId]) return;
+    setLoadingDetailId(docId);
+    setDetailError(null);
+    try {
+      const detail = await getCurriculumDocDetailAction(docId);
+      if (!detail) {
+        setDetailError("문서를 찾을 수 없습니다.");
+        setOpenDocId(null);
+        return;
+      }
+      setDetailCache((prev) => ({ ...prev, [docId]: detail }));
+    } catch (e) {
+      setDetailError(e instanceof Error ? e.message : "문서를 불러오지 못했습니다.");
+      setOpenDocId(null);
+    } finally {
+      setLoadingDetailId(null);
+    }
+  }
+
+  function updateListItemFromDetail(updated: DocEditorData) {
+    setDocs((prev) =>
+      prev.map((d) =>
+        d.id === updated.id
+          ? {
+              ...d,
+              title: updated.title,
+              status: updated.status,
+              subjectId: updated.subjectId,
+              subjectName: updated.subjectName,
+              unitId: updated.unitId,
+              unitTitle: updated.unitTitle,
+              sectionCount: updated.sections.length,
+              hasPrimaryKeyword: Boolean(updated.primaryKeywordId),
+              archivedAt: d.archivedAt,
+              archivedReason: d.archivedReason,
+            }
+          : d
+      )
+    );
+  }
 
   function handleDocChanged(updated: DocEditorData) {
-    setDocs((prev) => prev.map((d) => (d.id === updated.id ? updated : d)));
+    setDetailCache((prev) => ({ ...prev, [updated.id]: updated }));
+    updateListItemFromDetail(updated);
   }
 
   function handleBackFromEditor(updated: DocEditorData) {
@@ -38,13 +121,49 @@ export default function CurriculumDocsTab({
 
   function handleDocDeleted(docId: string) {
     setDocs((prev) => prev.filter((d) => d.id !== docId));
+    setDetailCache((prev) => {
+      const next = { ...prev };
+      delete next[docId];
+      return next;
+    });
     setOpenDocId(null);
   }
 
   function handleCreated(doc: DocEditorData) {
-    setDocs((prev) => [...prev, doc].sort((a, b) => a.title.localeCompare(b.title)));
+    setDocs((prev) =>
+      [
+        ...prev,
+        {
+          id: doc.id,
+          title: doc.title,
+          subjectId: doc.subjectId,
+          subjectName: doc.subjectName,
+          unitId: doc.unitId,
+          unitTitle: doc.unitTitle,
+          status: doc.status,
+          sectionCount: doc.sections.length,
+          hasPrimaryKeyword: Boolean(doc.primaryKeywordId),
+          archivedAt: null,
+          archivedReason: null,
+        },
+      ].sort((a, b) => a.title.localeCompare(b.title))
+    );
+    setDetailCache((prev) => ({ ...prev, [doc.id]: doc }));
     setCreating(false);
     setOpenDocId(doc.id);
+  }
+
+  if (openDocId && loadingDetailId === openDocId) {
+    return (
+      <div className="max-w-[640px] px-8 py-8" data-testid="curriculum-doc-detail-skeleton">
+        <div className="h-5 w-48 bg-grey-200 rounded animate-pulse mb-4" />
+        <div className="space-y-2.5">
+          {[0, 1, 2].map((i) => (
+            <div key={i} className="h-16 border-[1.5px] border-grey-100 rounded-xl bg-grey-100 animate-pulse" />
+          ))}
+        </div>
+      </div>
+    );
   }
 
   if (open) {
@@ -68,39 +187,117 @@ export default function CurriculumDocsTab({
     );
   }
 
+  const visibleDocs = docs.slice(0, visibleCount);
+
   return (
     <div className="max-w-[640px] px-8 py-8">
       <h1 className="text-[20px] font-extrabold text-ink mb-1.5">교재 문서</h1>
       <p className="text-[13px] text-grey-500 mb-5">
         목차(섹션)와 본문을 작성하고, 배포하면 학생·선생님이 열람할 수 있습니다.
       </p>
+      {detailError && <p className="text-[12.5px] text-red mb-3">{detailError}</p>}
+      {archiveError && <p className="text-[12.5px] text-red mb-3">{archiveError}</p>}
+
+      <div className="flex gap-1 mb-3 border-b-[1.5px] border-grey-200">
+        {[
+          { archived: false, label: "현재" },
+          { archived: true, label: "보관됨" },
+        ].map((t) => (
+          <button
+            key={t.label}
+            onClick={() => setShowArchived(t.archived)}
+            className={
+              "text-[13px] font-bold px-3.5 py-2 -mb-[1.5px] border-b-[2px] " +
+              (showArchived === t.archived ? "border-ink text-ink" : "border-transparent text-grey-500")
+            }
+          >
+            {t.label}
+            <span className="text-grey-300 font-semibold ml-1">
+              {docs.filter((d) => (t.archived ? Boolean(d.archivedAt) : !d.archivedAt)).length}
+            </span>
+          </button>
+        ))}
+      </div>
+
+      <input
+        aria-label="교재 검색"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder={showArchived ? "보관된 교재에서 찾기" : "교재 제목으로 찾기"}
+        className="w-full text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 mb-3"
+      />
+
+      {showArchived && (
+        <p className="text-[12px] text-grey-500 mb-3">
+          보관된 교재는 신규 선택과 자동 구성 후보에 나오지 않습니다. 이미 담긴 회차와 과거 수업 기록은
+          그대로 남아 있습니다.
+        </p>
+      )}
+
+      <label className="flex items-center gap-2 text-[12.5px] text-grey-500 mb-3">
+        <input
+          type="checkbox"
+          checked={onlyMissingPrimary}
+          onChange={(e) => setOnlyMissingPrimary(e.target.checked)}
+        />
+        대표 키워드가 없는 교재만 보기
+        <span className="text-grey-300">({docs.filter((d) => !d.hasPrimaryKeyword).length}건)</span>
+      </label>
 
       {docs.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center mb-3">
           아직 만든 교재가 없습니다.
         </div>
       ) : (
-        docs.map((d) => (
-          <div
-            key={d.id}
-            className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5 flex items-center justify-between"
-          >
-            <div>
-              <div className="text-[13.5px] font-bold text-ink">{d.title}</div>
-              <div className="text-[12px] text-grey-500 mt-0.5">
-                {d.subjectName}
-                {d.unitTitle ? ` · ${d.unitTitle}` : ""} · 섹션 {d.sections.length}개 ·{" "}
-                {STATUS_LABEL[d.status] ?? d.status}
-              </div>
-            </div>
-            <button
-              onClick={() => setOpenDocId(d.id)}
-              className="text-[12px] font-bold px-3.5 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink shrink-0"
+        <>
+          {visibleDocs
+            .filter((d) => (showArchived ? Boolean(d.archivedAt) : !d.archivedAt))
+            .filter(
+              (d) =>
+                query.trim() === "" ||
+                d.title.toLowerCase().includes(query.trim().toLowerCase())
+            )
+            .filter((d) => !onlyMissingPrimary || !d.hasPrimaryKeyword)
+            .map((d) => (
+            <div
+              key={d.id}
+              className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5 flex items-center justify-between"
             >
-              편집
+              <div>
+                <div className="text-[13.5px] font-bold text-ink">{d.title}</div>
+                <div className="text-[12px] text-grey-500 mt-0.5">
+                  {d.subjectName}
+                  {d.unitTitle ? ` · ${d.unitTitle}` : ""} · 섹션 {d.sectionCount}개 ·{" "}
+                  {STATUS_LABEL[d.status] ?? d.status}
+                  {!d.hasPrimaryKeyword && " · 대표 키워드 없음"}
+                  {d.archivedAt && " · 보관됨"}
+                </div>
+              </div>
+              <span className="flex items-center gap-2 shrink-0">
+                <button
+                  onClick={() => void toggleArchived(d.id, !d.archivedAt)}
+                  className="text-[12px] font-bold text-grey-500 whitespace-nowrap"
+                >
+                  {d.archivedAt ? "보관 풀기" : "보관"}
+                </button>
+                <button
+                  onClick={() => openDoc(d.id)}
+                  className="text-[12px] font-bold px-3.5 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink whitespace-nowrap"
+                >
+                  편집
+                </button>
+              </span>
+            </div>
+          ))}
+          {visibleCount < docs.length && (
+            <button
+              onClick={() => setVisibleCount((v) => v + PAGE_SIZE)}
+              className="text-[12.5px] font-semibold text-ink underline w-full text-center mb-2.5"
+            >
+              더 보기({docs.length - visibleCount}개 남음)
             </button>
-          </div>
-        ))
+          )}
+        </>
       )}
 
       <button
@@ -139,10 +336,23 @@ function NewDocForm({
         title: title.trim(),
         subjectId,
         subjectName: selectedSubject?.subjectName ?? "",
+        // 새 교재는 대표 키워드가 없다 — 관리자가 편집 화면에서 고른다.
+        primaryKeywordId: null,
+        primaryKeywordPosition: null,
         unitId,
         unitTitle: selectedSubject?.units.find((u) => u.id === unitId)?.unitTitle ?? null,
         status: "draft",
         sections: [],
+        // 2026-09-12(UAT): 이 둘이 빠져 있어서 방금 만든 교재의 편집 화면에
+        // 대표 키워드 선택지가 비어 보였다("다시 들어가니까 나온다"의 원인 —
+        // 로딩이 느린 게 아니라 처음부터 없었다). 만든 직후에도 같은 화면을
+        // 보여주려면 여기서 함께 넘겨야 한다.
+        subjectKeywords: selectedSubject?.keywords ?? [],
+        subjectUnits: (selectedSubject?.units ?? []).map((u) => ({
+          id: u.id,
+          unitTitle: u.unitTitle,
+          position: u.position,
+        })),
       });
     } finally {
       setCreating(false);
@@ -166,7 +376,9 @@ function NewDocForm({
       <div className="mb-4">
         <label className="text-[12.5px] font-bold text-ink mb-1.5 block">과목</label>
         <div className="flex flex-wrap gap-2">
-          {subjects.map((s) => (
+          {/* 2026-09-09(UAT 지적, 제품 오너 승인): 보관된 과목은 새 교재의
+              연결 후보에서 제외한다. */}
+          {selectableSubjects(subjects).map((s) => (
             <button
               key={s.subjectId}
               onClick={() => {

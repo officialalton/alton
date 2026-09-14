@@ -1,0 +1,398 @@
+import { execFileSync } from "node:child_process";
+import { describe, expect, it } from "vitest";
+
+// 2026-09-06(제품 오너 최종 확정안) — 복수 자녀 온보딩의 DB 레이어를 로컬
+// Postgres에 직접 psql로 검증한다(app/consult/existing-guardian-reconsult.
+// integration.test.ts와 동일한 패턴). 앱 레이어(Auth 계정 생성 자체)는 Node의
+// admin.auth.admin.createUser()가 담당하므로 여기서는 그 결과로 이미 Auth
+// 계정이 존재한다고 가정하고 finalize_trial_onboarding_students()/
+// retry_trial_onboarding_student()가 올바르게 동작하는지만 검증한다.
+
+const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
+
+function psql(sql: string): string {
+  return execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-q", "-t", "-A", "-c", sql], {
+    encoding: "utf-8",
+  }).trim();
+}
+
+function createAuthUser(label: string): string {
+  return psql(
+    `insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at)
+     values ('00000000-0000-0000-0000-000000000000', gen_random_uuid(), 'authenticated', 'authenticated', '${label}-${Date.now()}-${Math.random().toString(36).slice(2)}@example.com', 'x', now(), '{}', '{}', now(), now())
+     returning id;`
+  );
+}
+
+function createConsultationWithProspect(label: string, guardianEmail: string): { consultationId: string; prospectContactId: string } {
+  const prospectContactId = psql(
+    `insert into prospect_contacts (full_name, primary_email) values ('${label}', '${guardianEmail}') returning id;`
+  );
+  const consultationId = psql(
+    `insert into consultations (source, status, outcome, contact_name, contact_email, starts_at, ends_at, prospect_contact_id, trial_intent_confirmed_at)
+     values ('homepage', 'completed', 'trial_recommended', '${label}', '${guardianEmail}', now(), now() + interval '30 minutes', '${prospectContactId}', now())
+     returning id;`
+  );
+  return { consultationId, prospectContactId };
+}
+
+function createLinkWithStudents(
+  consultationId: string,
+  prospectContactId: string,
+  guardianEmail: string,
+  guardianName: string,
+  students: { name: string; email: string; grade?: string }[]
+): { linkId: string; studentLinkIds: string[] } {
+  const linkId = psql(
+    `insert into trial_onboarding_links (consultation_id, prospect_contact_id, guardian_email, guardian_name, token_hash, expires_at)
+     values ('${consultationId}', '${prospectContactId}', '${guardianEmail}', '${guardianName}', 'unused-hash-${Date.now()}-${Math.random()}', now() + interval '72 hours')
+     returning id;`
+  );
+  const studentLinkIds = students.map((s) =>
+    psql(
+      `insert into trial_onboarding_link_students (link_id, student_name, student_email, student_grade)
+       values ('${linkId}', '${s.name}', '${s.email}', ${s.grade ? `'${s.grade}'` : "null"})
+       returning id;`
+    )
+  );
+  return { linkId, studentLinkIds };
+}
+
+describe("finalize_trial_onboarding_students() — 신규 보호자, 학생 1명(기존 단일 자녀 흐름 회귀 없음)", () => {
+  it("신규 보호자 계정·household를 1회 생성하고 학생 1명을 연결한다", () => {
+    const guardianAuthId = createAuthUser("new-guardian-single");
+    const guardianEmail = psql(`select email from auth.users where id = '${guardianAuthId}';`);
+    const { consultationId, prospectContactId } = createConsultationWithProspect("단일자녀상담", guardianEmail);
+    const childAuthId = createAuthUser("single-child");
+    const { linkId, studentLinkIds } = createLinkWithStudents(consultationId, prospectContactId, guardianEmail, "단일보호자", [
+      { name: "학생1", email: `s1-${Date.now()}@example.com`, grade: "9학년" },
+    ]);
+
+    const result = psql(
+      `select household_id, guardian_id, created_count, failed_count from finalize_trial_onboarding_students(
+         '${linkId}', true, '${guardianAuthId}', '단일보호자',
+         '[{"link_student_id":"${studentLinkIds[0]}","child_auth_user_id":"${childAuthId}"}]'::jsonb
+       );`
+    );
+    const [householdId, returnedGuardianId, createdCount, failedCount] = result.split("|");
+    expect(returnedGuardianId).toBe(guardianAuthId);
+    expect(createdCount).toBe("1");
+    expect(failedCount).toBe("0");
+
+    const householdCount = psql(`select count(*) from households where primary_guardian_id = '${guardianAuthId}';`);
+    expect(householdCount).toBe("1");
+    const childRole = psql(`select role from household_members where household_id = '${householdId}' and profile_id = '${childAuthId}';`);
+    expect(childRole).toBe("child");
+    const linkStatus = psql(`select status from trial_onboarding_links where id = '${linkId}';`);
+    expect(linkStatus).toBe("redeemed");
+    const studentStatus = psql(`select status from trial_onboarding_link_students where id = '${studentLinkIds[0]}';`);
+    expect(studentStatus).toBe("created");
+  });
+});
+
+describe("finalize_trial_onboarding_students() — 버그#1 회귀: 학생별 칸반 카드가 체험수업권 지급을 실제로 시도한다", () => {
+  it("동의·생년월일 확인이 끝난 학생은 카드 생성 즉시 체험수업권이 지급된다(entitlement_grants 생성, grant_status=granted)", () => {
+    const guardianAuthId = createAuthUser("new-guardian-grant-ok");
+    const guardianEmail = psql(`select email from auth.users where id = '${guardianAuthId}';`);
+    const { consultationId, prospectContactId } = createConsultationWithProspect("지급성공상담", guardianEmail);
+    const childAuthId = createAuthUser("grant-ok-child");
+    const { linkId, studentLinkIds } = createLinkWithStudents(consultationId, prospectContactId, guardianEmail, "지급성공보호자", [
+      { name: "지급성공학생", email: `grant-ok-${Date.now()}@example.com`, grade: "9학년" },
+    ]);
+
+    // 이 학생이 이미 Smart Notes 동의 + 관리자 생년월일 확인을 마쳤다고 가정
+    // (finalize 이전에도 학생 profiles 행은 존재할 수 있다 — on conflict do nothing).
+    psql(`insert into profiles (id, role, name) values ('${guardianAuthId}', 'parent', '지급성공보호자') on conflict (id) do nothing;`);
+    psql(`insert into parents (id) values ('${guardianAuthId}') on conflict (id) do nothing;`);
+    psql(`insert into profiles (id, role, name, date_of_birth) values ('${childAuthId}', 'student', '지급성공학생', '2010-01-01')
+          on conflict (id) do update set date_of_birth = excluded.date_of_birth;`);
+    psql(`insert into students (id, status) values ('${childAuthId}', 'pending') on conflict (id) do nothing;`);
+    psql(`update profiles set date_of_birth_verified_at = now() where id = '${childAuthId}';`);
+    psql(`insert into trial_smart_notes_consents (child_id, guardian_id, policy_version) values ('${childAuthId}', '${guardianAuthId}', 'v0');`);
+
+    psql(
+      `select household_id, guardian_id, created_count, failed_count from finalize_trial_onboarding_students(
+         '${linkId}', true, '${guardianAuthId}', '지급성공보호자',
+         '[{"link_student_id":"${studentLinkIds[0]}","child_auth_user_id":"${childAuthId}"}]'::jsonb
+       );`
+    );
+
+    const grantStatus = psql(
+      `select trial_entitlement_grant_status from consultations where source_link_child_id = '${studentLinkIds[0]}';`
+    );
+    expect(grantStatus).toBe("granted");
+    const grantCount = psql(`select count(*) from entitlement_grants where child_id = '${childAuthId}';`);
+    expect(grantCount).toBe("1");
+  });
+
+  it("동의·생년월일 확인이 안 끝난 학생은 카드가 grant_status=failed로 남아 관리자 재처리 버튼 대상이 된다(과거에는 not_applicable로 영원히 방치됨)", () => {
+    const guardianAuthId = createAuthUser("new-guardian-grant-fail");
+    const guardianEmail = psql(`select email from auth.users where id = '${guardianAuthId}';`);
+    const { consultationId, prospectContactId } = createConsultationWithProspect("지급실패상담", guardianEmail);
+    const childAuthId = createAuthUser("grant-fail-child");
+    const { linkId, studentLinkIds } = createLinkWithStudents(consultationId, prospectContactId, guardianEmail, "지급실패보호자", [
+      { name: "지급실패학생", email: `grant-fail-${Date.now()}@example.com`, grade: "9학년" },
+    ]);
+
+    psql(
+      `select household_id, guardian_id, created_count, failed_count from finalize_trial_onboarding_students(
+         '${linkId}', true, '${guardianAuthId}', '지급실패보호자',
+         '[{"link_student_id":"${studentLinkIds[0]}","child_auth_user_id":"${childAuthId}"}]'::jsonb
+       );`
+    );
+
+    const grantStatus = psql(
+      `select trial_entitlement_grant_status from consultations where source_link_child_id = '${studentLinkIds[0]}';`
+    );
+    expect(grantStatus).toBe("failed");
+    expect(grantStatus).not.toBe("not_applicable");
+    const grantCount = psql(`select count(*) from entitlement_grants where child_id = '${childAuthId}';`);
+    expect(grantCount).toBe("0");
+
+    // 관리자가 동의/생년월일 확인을 마친 뒤 admin_retry_trial_entitlement_grant()로
+    // 재처리하면 정상 지급된다.
+    psql(`insert into profiles (id, role, name, date_of_birth) values ('${childAuthId}', 'student', '지급실패학생', '2010-01-01')
+          on conflict (id) do update set date_of_birth = excluded.date_of_birth;`);
+    psql(`insert into students (id, status) values ('${childAuthId}', 'pending') on conflict (id) do nothing;`);
+    psql(`update profiles set date_of_birth_verified_at = now() where id = '${childAuthId}';`);
+    psql(`insert into trial_smart_notes_consents (child_id, guardian_id, policy_version) values ('${childAuthId}', '${guardianAuthId}', 'v0');`);
+
+    // admin_retry_trial_entitlement_grant()는 is_admin()(auth.uid() 기반)을
+    // 요구해 psql 직접 연결로는 호출할 수 없다 — 같은 내부 로직인
+    // grant_trial_entitlement_for_consultation()을 직접 호출해 재처리를 검증한다
+    // (admin_retry_trial_entitlement_grant는 이 함수를 그대로 감싸는 얇은 래퍼).
+    const cardId = psql(`select id from consultations where source_link_child_id = '${studentLinkIds[0]}';`);
+    const retriedGrantId = psql(`select grant_trial_entitlement_for_consultation('${cardId}');`);
+    expect(retriedGrantId.length).toBeGreaterThan(0);
+    const grantCountAfterRetry = psql(`select count(*) from entitlement_grants where child_id = '${childAuthId}';`);
+    expect(grantCountAfterRetry).toBe("1");
+  });
+});
+
+describe("finalize_trial_onboarding_students() — 신규 보호자, 학생 3명", () => {
+  it("household·보호자 profile은 1개만 생성하고 학생 3명 모두 같은 household에 연결한다", () => {
+    const guardianAuthId = createAuthUser("new-guardian-triple");
+    const guardianEmail = psql(`select email from auth.users where id = '${guardianAuthId}';`);
+    const { consultationId, prospectContactId } = createConsultationWithProspect("삼자녀상담", guardianEmail);
+    const childIds = [createAuthUser("triple-a"), createAuthUser("triple-b"), createAuthUser("triple-c")];
+    const { linkId, studentLinkIds } = createLinkWithStudents(consultationId, prospectContactId, guardianEmail, "삼자녀보호자", [
+      { name: "학생A", email: `ta-${Date.now()}@example.com` },
+      { name: "학생B", email: `tb-${Date.now()}@example.com` },
+      { name: "학생C", email: `tc-${Date.now()}@example.com` },
+    ]);
+    const studentsJson = JSON.stringify(
+      studentLinkIds.map((id, i) => ({ link_student_id: id, child_auth_user_id: childIds[i] }))
+    ).replace(/'/g, "''");
+
+    const result = psql(
+      `select household_id, created_count, failed_count from finalize_trial_onboarding_students(
+         '${linkId}', true, '${guardianAuthId}', '삼자녀보호자', '${studentsJson}'::jsonb
+       );`
+    );
+    const [householdId, createdCount, failedCount] = result.split("|");
+    expect(createdCount).toBe("3");
+    expect(failedCount).toBe("0");
+
+    const householdCount = psql(`select count(*) from households where primary_guardian_id = '${guardianAuthId}';`);
+    expect(householdCount).toBe("1");
+    const childCount = psql(`select count(*) from household_members where household_id = '${householdId}' and role = 'child';`);
+    expect(childCount).toBe("3");
+  });
+});
+
+describe("finalize_trial_onboarding_students() — 기존 보호자, 새 자녀 3명", () => {
+  it("기존 household를 재사용하고(새 household 미생성) 자녀 3명을 추가한다", () => {
+    const guardianAuthId = createAuthUser("existing-guardian-triple");
+    const guardianEmail = psql(`select email from auth.users where id = '${guardianAuthId}';`);
+    psql(`insert into profiles (id, role, name) values ('${guardianAuthId}', 'parent', '기존보호자');`);
+    psql(`insert into parents (id) values ('${guardianAuthId}');`);
+    const existingHouseholdId = psql(`insert into households (primary_guardian_id) values ('${guardianAuthId}') returning id;`);
+    psql(`insert into household_members (household_id, profile_id, role, is_primary) values ('${existingHouseholdId}', '${guardianAuthId}', 'guardian', true);`);
+
+    const { consultationId, prospectContactId } = createConsultationWithProspect("재상담삼자녀", guardianEmail);
+    const childIds = [createAuthUser("re-a"), createAuthUser("re-b"), createAuthUser("re-c")];
+    const { linkId, studentLinkIds } = createLinkWithStudents(consultationId, prospectContactId, guardianEmail, "재상담보호자", [
+      { name: "재학생A", email: `ra-${Date.now()}@example.com` },
+      { name: "재학생B", email: `rb-${Date.now()}@example.com` },
+      { name: "재학생C", email: `rc-${Date.now()}@example.com` },
+    ]);
+    const studentsJson = JSON.stringify(
+      studentLinkIds.map((id, i) => ({ link_student_id: id, child_auth_user_id: childIds[i] }))
+    ).replace(/'/g, "''");
+
+    const householdCountBefore = psql(`select count(*) from households where primary_guardian_id = '${guardianAuthId}';`);
+    expect(householdCountBefore).toBe("1");
+
+    const result = psql(
+      `select household_id, created_count, failed_count from finalize_trial_onboarding_students(
+         '${linkId}', false, '${guardianAuthId}', '재상담보호자', '${studentsJson}'::jsonb
+       );`
+    );
+    const [householdId, createdCount, failedCount] = result.split("|");
+    expect(householdId).toBe(existingHouseholdId);
+    expect(createdCount).toBe("3");
+    expect(failedCount).toBe("0");
+
+    const householdCountAfter = psql(`select count(*) from households where primary_guardian_id = '${guardianAuthId}';`);
+    expect(householdCountAfter).toBe("1");
+    const childCount = psql(`select count(*) from household_members where household_id = '${existingHouseholdId}' and role = 'child';`);
+    expect(childCount).toBe("3");
+  });
+});
+
+describe("finalize_trial_onboarding_students() — 부분 실패 후 해당 자녀만 재시도", () => {
+  it("학생 1명 처리가 실패해도 형제자매는 정상 처리되고, 실패한 학생만 재시도로 성공시킬 수 있다", () => {
+    const guardianAuthId = createAuthUser("partial-fail-guardian");
+    const guardianEmail = psql(`select email from auth.users where id = '${guardianAuthId}';`);
+    const { consultationId, prospectContactId } = createConsultationWithProspect("부분실패상담", guardianEmail);
+    const okChildId = createAuthUser("partial-ok-child");
+    // 일부러 잘못된(존재하지 않는) auth user id를 넘겨 students 테이블 FK 없이도
+    // profiles insert가 학생 이름 자체는 통과하지만, 두 번째 학생은 아예 실패하는
+    // 경우를 흉내내기 위해 이미 다른 곳에서 studetns 행으로 쓰인 child_auth_user_id를
+    // 중복 사용해 유니크 제약 위반을 일으킨다(현실적인 실패 시나리오 — 동시 처리
+    // 중 같은 auth id가 이미 다른 학생에 연결된 경우).
+    const alreadyUsedChildId = createAuthUser("partial-conflict-child");
+    const conflictConsultation = createConsultationWithProspect("선점용상담", `preholder-${Date.now()}@example.com`);
+    const preLink = createLinkWithStudents(
+      conflictConsultation.consultationId,
+      conflictConsultation.prospectContactId,
+      `preholder-${Date.now()}@example.com`,
+      "선점보호자",
+      [{ name: "선점학생", email: `pre-${Date.now()}@example.com` }]
+    );
+    psql(
+      `select finalize_trial_onboarding_students('${preLink.linkId}', true, '${createAuthUser("preholder-guardian")}', '선점보호자',
+        '[{"link_student_id":"${preLink.studentLinkIds[0]}","child_auth_user_id":"${alreadyUsedChildId}"}]'::jsonb);`
+    );
+
+    const { linkId, studentLinkIds } = createLinkWithStudents(consultationId, prospectContactId, guardianEmail, "부분실패보호자", [
+      { name: "성공학생", email: `ok-${Date.now()}@example.com` },
+      { name: "실패학생", email: `fail-${Date.now()}@example.com` },
+    ]);
+    const studentsJson = JSON.stringify([
+      { link_student_id: studentLinkIds[0], child_auth_user_id: okChildId },
+      { link_student_id: studentLinkIds[1], child_auth_user_id: alreadyUsedChildId }, // 유니크 제약 위반 유도
+    ]).replace(/'/g, "''");
+
+    const result = psql(
+      `select household_id, created_count, failed_count from finalize_trial_onboarding_students(
+         '${linkId}', true, '${guardianAuthId}', '부분실패보호자', '${studentsJson}'::jsonb
+       );`
+    );
+    const [householdId, createdCount, failedCount] = result.split("|");
+    expect(createdCount).toBe("1");
+    expect(failedCount).toBe("1");
+
+    // 성공한 형제(성공학생)는 롤백되지 않았어야 한다.
+    const okStatus = psql(`select status from trial_onboarding_link_students where id = '${studentLinkIds[0]}';`);
+    expect(okStatus).toBe("created");
+    const failStatus = psql(`select status from trial_onboarding_link_students where id = '${studentLinkIds[1]}';`);
+    expect(failStatus).toBe("failed");
+    const failError = psql(`select error from trial_onboarding_link_students where id = '${studentLinkIds[1]}';`);
+    expect(failError.length).toBeGreaterThan(0);
+    // 링크 자체는 household가 확정됐으므로 redeemed로 남는다(재시도 가능해야 함).
+    const linkStatus = psql(`select status from trial_onboarding_links where id = '${linkId}';`);
+    expect(linkStatus).toBe("redeemed");
+
+    // 이제 실패한 학생만 새 Auth id로 재시도한다(다른 형제 재처리 없음).
+    const retryChildId = createAuthUser("partial-retry-child");
+    const retryResult = psql(
+      `select child_id, status from retry_trial_onboarding_student('${linkId}', '${studentLinkIds[1]}', '${retryChildId}');`
+    );
+    const [retriedChildId, retriedStatus] = retryResult.split("|");
+    expect(retriedChildId).toBe(retryChildId);
+    expect(retriedStatus).toBe("created");
+
+    const childCount = psql(`select count(*) from household_members where household_id = '${householdId}' and role = 'child';`);
+    expect(childCount).toBe("2"); // 성공학생 + 재시도로 성공한 실패학생.
+
+    // 재시도 후 성공학생은 다시 처리되지 않는다(멱등) — 여전히 1건만 연결.
+    const okMemberCount = psql(`select count(*) from household_members where profile_id = '${okChildId}';`);
+    expect(okMemberCount).toBe("1");
+  });
+});
+
+describe("finalize_trial_onboarding_students() — 동시 재시도 시 중복 생성 안 됨", () => {
+  it("같은 링크·같은 학생에 finalize를 두 번 호출해도(멱등) 학생 계정 연결이 중복되지 않는다", () => {
+    const guardianAuthId = createAuthUser("concurrent-guardian");
+    const guardianEmail = psql(`select email from auth.users where id = '${guardianAuthId}';`);
+    const { consultationId, prospectContactId } = createConsultationWithProspect("동시성상담", guardianEmail);
+    const childId = createAuthUser("concurrent-child");
+    const { linkId, studentLinkIds } = createLinkWithStudents(consultationId, prospectContactId, guardianEmail, "동시성보호자", [
+      { name: "동시성학생", email: `conc-${Date.now()}@example.com` },
+    ]);
+    const studentsJson = JSON.stringify([{ link_student_id: studentLinkIds[0], child_auth_user_id: childId }]).replace(/'/g, "''");
+
+    // 첫 번째 호출(성공).
+    const first = psql(
+      `select created_count from finalize_trial_onboarding_students('${linkId}', true, '${guardianAuthId}', '동시성보호자', '${studentsJson}'::jsonb);`
+    );
+    expect(first).toBe("1");
+
+    // 재시도(같은 파라미터로 다시 호출 — 네트워크 재시도를 흉내) — status='created'
+    // 확인으로 재처리를 건너뛰므로 중복 household_members insert가 발생하지 않는다.
+    const second = psql(
+      `select created_count from finalize_trial_onboarding_students('${linkId}', true, '${guardianAuthId}', '동시성보호자', '${studentsJson}'::jsonb);`
+    );
+    expect(second).toBe("1");
+
+    const memberCount = psql(`select count(*) from household_members where profile_id = '${childId}';`);
+    expect(memberCount).toBe("1");
+
+    // DB 유니크 제약 자체도 이중 방어로 살아있는지 직접 확인 — 이미 created인
+    // child_auth_user_id를 다른 학생 항목에 억지로 연결하려 하면 거부돼야 한다.
+    const otherStudentLinkId = psql(
+      `insert into trial_onboarding_link_students (link_id, student_name, student_email)
+       values ('${linkId}', '다른학생', 'other-${Date.now()}@example.com') returning id;`
+    );
+    expect(() =>
+      psql(`update trial_onboarding_link_students set status = 'created', child_auth_user_id = '${childId}' where id = '${otherStudentLinkId}';`)
+    ).toThrow();
+  });
+});
+
+// 2026-09-06(실제 버그 회귀 고정) — 제품 오너가 Preview에서 재현: 관리자로
+// 로그인한 상태에서 칸반 카드의 "다음 단계 — 체험 온보딩" 폼으로 발송을
+// 시도하면 "관리자만 온보딩 링크를 발급할 수 있습니다."가 매번 떴다. 근본
+// 원인은 create_trial_onboarding_link_multi()가 SQL 안에서 is_admin()/
+// auth.uid()를 다시 확인했는데, 이 함수는 app 서버 액션이 service_role
+// 클라이언트(createAdminClient())로만 호출한다 — service_role 세션에는
+// auth.uid()가 없어(그 세션의 JWT 클레임 자체가 없으므로) is_admin()이
+// 항상 false였다. 이 테스트는 psql로 직접 이 RPC를 호출해(=현재 세션에
+// auth.uid()를 심을 방법이 전혀 없는, service_role 호출과 동일한 조건)
+// "정상 관리자 세션(앱 레이어에서 이미 requireAdminOrCapability()로 검증된
+// 관리자 id를 p_admin_id로 넘긴 경우)"에서 이 예외가 다시는 발생하지
+// 않음을 고정한다.
+describe("create_trial_onboarding_link_multi() — service_role 호출(auth.uid() 없음)에서도 관리자 발급이 성공한다", () => {
+  it("정상 관리자 id를 p_admin_id로 넘기면 '관리자만 온보딩 링크를 발급할 수 있습니다' 예외 없이 링크가 발급된다", () => {
+    const adminAuthId = createAuthUser("regression-admin");
+    psql(`insert into profiles (id, role, name) values ('${adminAuthId}', 'admin', '회귀테스트관리자');`);
+    const guardianEmail = `regression-guardian-${Date.now()}@example.com`;
+    const { consultationId, prospectContactId } = createConsultationWithProspect("회귀상담", guardianEmail);
+    void prospectContactId;
+
+    const studentsJson = JSON.stringify([
+      { name: "회귀학생1", email: `rg1-${Date.now()}@example.com`, grade: "9학년" },
+      { name: "회귀학생2", email: `rg2-${Date.now()}@example.com` },
+    ]).replace(/'/g, "''");
+
+    // 이 세션에는 auth.uid()를 만들 방법이 없다(psql은 순수 postgres 세션,
+    // service_role 호출과 동일한 조건) — 그럼에도 p_admin_id를 명시적으로
+    // 넘기면 실패하지 않아야 한다.
+    const result = psql(
+      `select link_id, raw_token from create_trial_onboarding_link_multi(
+         '${consultationId}', '${guardianEmail}', '회귀보호자', '${studentsJson}'::jsonb, '${adminAuthId}'
+       );`
+    );
+    const [linkId, rawToken] = result.split("|");
+    expect(linkId.length).toBeGreaterThan(0);
+    expect(rawToken.length).toBeGreaterThan(0);
+
+    const createdBy = psql(`select created_by from trial_onboarding_links where id = '${linkId}';`);
+    expect(createdBy).toBe(adminAuthId);
+    const studentCount = psql(`select count(*) from trial_onboarding_link_students where link_id = '${linkId}';`);
+    expect(studentCount).toBe("2");
+    const eventActor = psql(`select actor_id from trial_onboarding_link_events where link_id = '${linkId}' and event_type = 'created';`);
+    expect(eventActor).toBe(adminAuthId);
+  });
+});

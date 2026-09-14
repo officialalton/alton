@@ -12,6 +12,14 @@ vi.mock("next/navigation", () => ({
   redirect: redirectMock,
 }));
 
+vi.mock("next/headers", () => ({
+  headers: async () =>
+    new Map([
+      ["x-forwarded-proto", "https"],
+      ["x-forwarded-host", "alton-preview-test.vercel.app"],
+    ]),
+}));
+
 describe("signInWithGoogleForTeacher", () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -32,6 +40,7 @@ describe("signInWithGoogleForTeacher", () => {
       expect.objectContaining({
         provider: "google",
         options: expect.objectContaining({
+          redirectTo: "https://alton-preview-test.vercel.app/auth/teacher-callback",
           queryParams: expect.objectContaining({ hd: "alton.education" }),
         }),
       })

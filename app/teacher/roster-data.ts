@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { loadCurriculumOverlayProgressByEnrollment, getCurriculumOverlayProgress } from "@/lib/curriculum-overlay-progress";
 
 export type RosterSubject = {
   enrollmentId: string;
@@ -6,6 +7,13 @@ export type RosterSubject = {
   subjectName: string;
   currentSession: number;
   totalSessions: number;
+  // 2026-09-09(UAT 정정) — "학생별" 탭이 이 과목을 눌렀을 때 레거시 커리큘럼
+  // 뷰(`enrollmentId`가 legacy `enrollments.id`)로 갈지, v3 운영 커리큘럼 뷰
+  // (`enrollmentId`가 실제로는 `subject_enrollments.id`)로 갈지 구분하는 데 쓴다.
+  source: "legacy" | "v3";
+  // C-1(2026-09-10) — v3 과목의 출처 표시("교사 운영 커리큘럼 기준"/"공통
+  // 커리큘럼 기준"). legacy 과목은 이 개념이 없어 항상 null.
+  curriculumSourceLabel: string | null;
 };
 
 export type RosterStudent = {
@@ -24,17 +32,106 @@ export async function loadRoster(
   supabase: SupabaseClient,
   teacherId: string
 ): Promise<RosterStudent[]> {
-  const { data: enrollments } = await supabase
-    .from("enrollments")
-    .select(
-      "id, student_id, subject_id, current_session, total_sessions, subject:subjects(name)"
-    )
-    .eq("teacher_id", teacherId)
-    .eq("status", "active");
+  // 2026-09-09(UAT 지적): 레거시 1:1 enrollments만 조회하면 R5 매칭 모델
+  // (teacher_assignments + subject_enrollments)로 배정된 v3 담당 학생이
+  // "학생별" 탭에 전혀 보이지 않는다(mysubjects-data.ts::loadMySubjects()와
+  // 동일한 부류의 표시 버그). 두 소스를 함께 조회해 합친다.
+  const [{ data: enrollments }, { data: assignments }] = await Promise.all([
+    supabase
+      .from("enrollments")
+      .select("id, student_id, subject_id, subject:subjects(name)")
+      .eq("teacher_id", teacherId)
+      .eq("status", "active"),
+    supabase
+      .from("teacher_assignments")
+      .select(
+        "subject_enrollment:subject_enrollments!inner(id, subject_id, child_id, subject:subjects(name))"
+      )
+      .eq("teacher_id", teacherId)
+      .eq("status", "active"),
+  ]);
 
-  if (!enrollments || enrollments.length === 0) return [];
+  type LegacyRow = { id: string; student_id: string; subject_id: string; subject: unknown };
+  type V3Row = { id: string; subjectId: string; studentId: string; subject: unknown };
 
-  const studentIds = Array.from(new Set(enrollments.map((e) => e.student_id)));
+  const legacyRows: LegacyRow[] = enrollments ?? [];
+  const v3Rows: V3Row[] = (assignments ?? []).flatMap((a) => {
+    const se = Array.isArray(a.subject_enrollment) ? a.subject_enrollment[0] : a.subject_enrollment;
+    if (!se) return [];
+    return [{ id: se.id, subjectId: se.subject_id, studentId: se.child_id, subject: se.subject }];
+  });
+
+  if (legacyRows.length === 0 && v3Rows.length === 0) return [];
+
+  // C-1(2026-09-10, 제품 오너 지적) — 이전에는 legacy_sessions "행 수"를
+  // 그대로 totalSessions로 썼는데, 이는 "커리큘럼에 계획된 단원 수"가 아니라
+  // "그동안 실제로 만들어진 세션 레코드 수"라 세션이 아직 없으면 항상
+  // 0/0으로 보였다 — 정작 같은 학생의 커리큘럼 상세 화면(app/student/
+  // curriculum-data.ts::loadCurricula())은 teacher_curriculum_template_units
+  // 개수를 totalSessions로 쓰고 있어, 목록 카드("0/0회차")와 상세 화면
+  // ("1/3회차") 숫자가 서로 달라 보이는 불일치가 있었다. 두 화면이 정확히
+  // 같은 계산식을 쓰도록 이 목록도 template 단원 기준으로 바꾼다.
+  const legacyEnrollmentIds = legacyRows.map((e) => e.id);
+  const legacySubjectIds = Array.from(new Set(legacyRows.map((e) => e.subject_id)));
+  const [{ data: legacyTemplates }, { data: legacySessions }] = await Promise.all([
+    legacySubjectIds.length
+      ? supabase
+          .from("teacher_curriculum_templates")
+          .select("id, subject_id")
+          .eq("teacher_id", teacherId)
+          .in("subject_id", legacySubjectIds)
+      : Promise.resolve({ data: [] as { id: string; subject_id: string }[] }),
+    legacyEnrollmentIds.length
+      ? supabase
+          .from("legacy_sessions")
+          .select("enrollment_id, status, source_template_unit_id")
+          .in("enrollment_id", legacyEnrollmentIds)
+      : Promise.resolve({ data: [] as { enrollment_id: string; status: string; source_template_unit_id: string | null }[] }),
+  ]);
+
+  const templateIdBySubject = new Map((legacyTemplates ?? []).map((t) => [t.subject_id, t.id]));
+  const templateIds = Array.from(new Set((legacyTemplates ?? []).map((t) => t.id)));
+  const { data: legacyUnits } = templateIds.length
+    ? await supabase
+        .from("teacher_curriculum_template_units")
+        .select("id, template_id")
+        .in("template_id", templateIds)
+    : { data: [] as { id: string; template_id: string }[] };
+  const unitIdsByTemplate = new Map<string, string[]>();
+  for (const u of legacyUnits ?? []) {
+    const list = unitIdsByTemplate.get(u.template_id) ?? [];
+    list.push(u.id);
+    unitIdsByTemplate.set(u.template_id, list);
+  }
+  const completedUnitIdsByEnrollment = new Map<string, Set<string>>();
+  for (const s of legacySessions ?? []) {
+    if (s.status !== "completed" || !s.source_template_unit_id) continue;
+    const set = completedUnitIdsByEnrollment.get(s.enrollment_id) ?? new Set<string>();
+    set.add(s.source_template_unit_id);
+    completedUnitIdsByEnrollment.set(s.enrollment_id, set);
+  }
+
+  const totalByEnrollment = new Map<string, number>();
+  const doneByEnrollment = new Map<string, number>();
+  for (const e of legacyRows) {
+    const templateId = templateIdBySubject.get(e.subject_id);
+    const unitIds = templateId ? unitIdsByTemplate.get(templateId) ?? [] : [];
+    const completedUnitIds = completedUnitIdsByEnrollment.get(e.id) ?? new Set<string>();
+    const completedCount = unitIds.filter((id) => completedUnitIds.has(id)).length;
+    totalByEnrollment.set(e.id, unitIds.length);
+    doneByEnrollment.set(e.id, Math.min(completedCount + 1, Math.max(unitIds.length, 1)));
+  }
+
+  // C-1(2026-09-10) — v3 과목의 진도는 더 이상 세션 실적(0으로 고정되던 버그)이
+  // 아니라 curriculum_overlay_units 기준으로 계산한다.
+  const v3ProgressByEnrollment = await loadCurriculumOverlayProgressByEnrollment(
+    supabase,
+    v3Rows.map((r) => r.id)
+  );
+
+  const studentIds = Array.from(
+    new Set([...legacyRows.map((e) => e.student_id), ...v3Rows.map((r) => r.studentId)])
+  );
   const { data: studentRows } = await supabase
     .from("students")
     .select("id, grade, profile:profiles(name)")
@@ -48,23 +145,55 @@ export async function loadRoster(
   );
 
   const byStudent = new Map<string, RosterStudent>();
-  for (const e of enrollments) {
-    const info = studentById.get(e.student_id);
-    if (!info) continue;
-    if (!byStudent.has(e.student_id)) {
-      byStudent.set(e.student_id, {
-        studentId: e.student_id,
+  // 같은 (subject_id, student_id) 조합이 legacy/v3 양쪽에 있어도 과목이 중복
+  // 표시되지 않도록 조합 단위로도 방어한다.
+  const seenSubjectPerStudent = new Set<string>();
+
+  function ensureStudent(studentId: string): RosterStudent | null {
+    const info = studentById.get(studentId);
+    if (!info) return null;
+    if (!byStudent.has(studentId)) {
+      byStudent.set(studentId, {
+        studentId,
         studentName: info.name,
         grade: info.grade,
         subjects: [],
       });
     }
-    byStudent.get(e.student_id)!.subjects.push({
+    return byStudent.get(studentId)!;
+  }
+
+  for (const e of legacyRows) {
+    const student = ensureStudent(e.student_id);
+    if (!student) continue;
+    const key = `${e.student_id}:${e.subject_id}`;
+    if (seenSubjectPerStudent.has(key)) continue;
+    seenSubjectPerStudent.add(key);
+    student.subjects.push({
       enrollmentId: e.id,
       subjectId: e.subject_id,
       subjectName: extractName(e.subject),
-      currentSession: e.current_session,
-      totalSessions: e.total_sessions,
+      currentSession: doneByEnrollment.get(e.id) ?? 0,
+      totalSessions: totalByEnrollment.get(e.id) ?? 0,
+      source: "legacy",
+      curriculumSourceLabel: null,
+    });
+  }
+  for (const r of v3Rows) {
+    const student = ensureStudent(r.studentId);
+    if (!student) continue;
+    const key = `${r.studentId}:${r.subjectId}`;
+    if (seenSubjectPerStudent.has(key)) continue;
+    seenSubjectPerStudent.add(key);
+    const progress = getCurriculumOverlayProgress(v3ProgressByEnrollment, r.id);
+    student.subjects.push({
+      enrollmentId: r.id,
+      subjectId: r.subjectId,
+      subjectName: extractName(r.subject),
+      currentSession: progress.doneUnits,
+      totalSessions: progress.totalUnits,
+      source: "v3",
+      curriculumSourceLabel: progress.sourceLabel,
     });
   }
 

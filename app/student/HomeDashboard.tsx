@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { DashboardData } from "./dashboard-data";
+import { dateKeyInTimezone } from "@/lib/calendar-date-utils";
+import { DEFAULT_TIMEZONE } from "@/lib/timezone";
 
 const WEEKDAYS = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -11,13 +13,17 @@ export default function HomeDashboard({
   data,
   onShowLessons,
   onShowStats,
+  timezone,
 }: {
   studentName: string;
   data: DashboardData;
   onShowLessons: () => void;
   onShowStats: () => void;
+  /** R6 — 확정 일정 표시 기준 시간대(resolveUserTimezone() 결과). 미전달 시 전역 기본값. */
+  timezone?: string;
 }) {
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
+  const router = useRouter();
 
   return (
     <div className="px-8 py-8">
@@ -26,6 +32,12 @@ export default function HomeDashboard({
           {studentName}의 학습 현황
         </h1>
       </div>
+
+      <TodayLessonBanner
+        upcoming={data.upcoming}
+        timezone={timezone}
+        onEnter={(sessionId) => router.push(`/session/${sessionId}`)}
+      />
 
       <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-6">
         <div>
@@ -36,7 +48,7 @@ export default function HomeDashboard({
           />
         </div>
         <div className="flex flex-col gap-6">
-          <UpcomingWidget upcoming={data.upcoming} onShowAll={onShowLessons} />
+          <UpcomingWidget upcoming={data.upcoming} onShowAll={onShowLessons} timezone={timezone} />
           <StatsWidget
             attendanceRate={data.attendanceRate}
             onShowAll={onShowStats}
@@ -46,6 +58,60 @@ export default function HomeDashboard({
     </div>
   );
 }
+
+// 2026-09-10(UI/UX 정리 1차) — "오늘 수업"이 있으면 가장 먼저 보이게 한다.
+// 새 쿼리는 추가하지 않는다(이미 홈에 내려오는 upcoming 목록에서 오늘 날짜인
+// 항목을 골라 보여줄 뿐). 오늘 수업이 없으면 다음 수업까지 D-day만 안내한다.
+function TodayLessonBanner({
+  upcoming,
+  timezone,
+  onEnter,
+}: {
+  upcoming: DashboardData["upcoming"];
+  timezone?: string;
+  onEnter: (sessionId: string) => void;
+}) {
+  if (upcoming.length === 0) return null;
+
+  const tz = timezone ?? DEFAULT_TIMEZONE;
+  const sorted = [...upcoming].sort(
+    (a, b) => new Date(a.scheduledAt).getTime() - new Date(b.scheduledAt).getTime()
+  );
+  const todayKey = dateKeyInTimezone(new Date().toISOString(), tz);
+  const todayLesson = sorted.find((l) => dateKeyInTimezone(l.scheduledAt, tz) === todayKey);
+
+  if (todayLesson) {
+    return (
+      <div className="flex items-center justify-between gap-3 bg-ink text-white rounded-xl px-5 py-4 mb-6">
+        <div>
+          <div className="text-[12px] font-semibold text-white/70 mb-0.5">오늘 수업</div>
+          <div className="text-[14px] font-bold">
+            {formatKoreanDateTime(todayLesson.scheduledAt, timezone)} · {todayLesson.subjectName}
+          </div>
+        </div>
+        <button
+          onClick={() => onEnter(todayLesson.sessionId)}
+          className="text-[12.5px] font-bold bg-white text-ink px-4 py-2 rounded-lg shrink-0"
+        >
+          입장하기 →
+        </button>
+      </div>
+    );
+  }
+
+  const next = sorted[0];
+  const daysUntil = Math.max(
+    0,
+    Math.ceil((new Date(next.scheduledAt).getTime() - Date.now()) / (24 * 60 * 60 * 1000))
+  );
+  return (
+    <div className="bg-grey-100 rounded-xl px-5 py-4 mb-6 text-[13px] text-grey-500">
+      다음 수업까지 D-{daysUntil} · {formatKoreanDateTime(next.scheduledAt, timezone)}{" "}
+      {next.subjectName}
+    </div>
+  );
+}
+
 
 function CalendarCard({
   data,
@@ -125,7 +191,8 @@ function CalendarCard({
                 key={s.sessionId}
                 className="text-[12.5px] text-ink px-3 py-2 rounded-lg bg-grey-100 mb-1.5"
               >
-                {s.subjectName} · {s.sessionNumber}회차
+                {s.subjectName}
+                {s.sessionNumber !== null ? ` · ${s.sessionNumber}회차` : ""}
               </div>
             ))
           )}
@@ -138,9 +205,11 @@ function CalendarCard({
 function UpcomingWidget({
   upcoming,
   onShowAll,
+  timezone,
 }: {
   upcoming: DashboardData["upcoming"];
   onShowAll: () => void;
+  timezone?: string;
 }) {
   const router = useRouter();
 
@@ -167,10 +236,11 @@ function UpcomingWidget({
             className="w-full text-left border-[1.5px] border-grey-200 rounded-lg px-3.5 py-3 mb-2 last:mb-0"
           >
             <div className="text-[12px] text-grey-500 mb-1">
-              {formatKoreanDateTime(lesson.scheduledAt)}
+              {formatKoreanDateTime(lesson.scheduledAt, timezone)}
             </div>
             <div className="text-[13px] font-semibold text-ink">
-              {lesson.subjectName} · {lesson.sessionNumber}회차
+              {lesson.subjectName}
+              {lesson.sessionNumber !== null ? ` · ${lesson.sessionNumber}회차` : ""}
               {lesson.unitTitle ? ` · ${lesson.unitTitle}` : ""}
             </div>
             <div className="text-[11.5px] text-grey-500 mt-0.5">
@@ -213,8 +283,9 @@ function StatsWidget({
   );
 }
 
-function formatKoreanDateTime(iso: string) {
+function formatKoreanDateTime(iso: string, timezone?: string) {
   return new Intl.DateTimeFormat("ko-KR", {
+    timeZone: timezone,
     month: "long",
     day: "numeric",
     hour: "numeric",

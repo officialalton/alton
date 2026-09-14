@@ -2,10 +2,11 @@
 
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
+import { currentRequestOrigin } from "@/lib/request-origin";
 
 export async function requestReset(formData: FormData) {
   const email = formData.get("email") as string;
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3010";
+  const siteUrl = await currentRequestOrigin();
 
   const supabase = await createClient();
   await supabase.auth.resetPasswordForEmail(email, {

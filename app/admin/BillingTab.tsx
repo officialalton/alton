@@ -3,6 +3,7 @@
 import { useState } from "react";
 import StudentDetailPanel from "./StudentDetailPanel";
 import type { CreditTransaction, StudentListItem } from "./users-data";
+import type { AdminSubject } from "./subject-data";
 
 const PACKAGES = [
   { name: "10장", creditCount: 10, priceUsd: 1200 },
@@ -13,9 +14,11 @@ const PACKAGES = [
 export default function BillingTab({
   initialStudents,
   creditHistoryByStudent,
+  subjects,
 }: {
   initialStudents: StudentListItem[];
   creditHistoryByStudent: Record<string, CreditTransaction[]>;
+  subjects: AdminSubject[];
 }) {
   const [students, setStudents] = useState(initialStudents);
   const [history, setHistory] = useState(creditHistoryByStudent);
@@ -35,6 +38,7 @@ export default function BillingTab({
       <StudentDetailPanel
         student={openStudent}
         history={history[openStudent.id] ?? []}
+        subjects={subjects}
         onBack={() => setOpenStudentId(null)}
         onUpdated={(patch, newTx) => patchStudent(openStudent.id, patch, newTx)}
       />

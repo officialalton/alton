@@ -4,7 +4,7 @@ import StudentShell from "./StudentShell";
 import type { DashboardData } from "./dashboard-data";
 
 vi.mock("next/navigation", () => ({
-  useRouter: () => ({ push: vi.fn(), replace: vi.fn() }),
+  useRouter: () => ({ push: vi.fn(), replace: vi.fn(), refresh: vi.fn() }),
 }));
 
 vi.mock("@/app/login/actions", () => ({
@@ -77,17 +77,27 @@ const lessonsProps = {
   bookableEnrollments: [],
   homeworkTodo: [],
   homeworkDone: [],
+  homeworkV3: [],
   materialsLibrary: [],
-  credits: { balance: 0, guardianName: null },
+  credits: { balance: 0, guardianName: null, regularRemaining: 0, regularNearestExpiry: null, trialEntitlement: null },
   stats: { attendanceRate: null, satisfactionAvg: null, bySubject: [] },
   teacherList: [],
   teacherProfiles: {},
   teacherSessionHistory: {},
   chatThreads: {},
+  subjectEnrollments: [],
+  lessonBooking: {
+    bookableEnrollments: [],
+    upcomingBookings: [],
+    pastSessionsForReport: [],
+    regularLessonTypeId: null,
+    lessonDurationMinutes: 120,
+    timezone: "America/Los_Angeles",
+  },
 };
 
 describe("StudentShell", () => {
-  it("사이드바 9개 항목을 보여주고, 기본 탭은 홈이다", () => {
+  it("사이드바 10개 항목을 보여주고, 기본 탭은 홈이다", () => {
     render(
       <StudentShell
         studentName="지훈"
@@ -97,9 +107,11 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    ["홈", "레슨", "선생님", "과제", "문제", "단어장", "교재", "수업권", "통계"].forEach(
-      (label) => expect(screen.getByText(label)).toBeInTheDocument()
+    ["홈", "수강 과목", "수업", "선생님", "과제", "문제", "단어장", "교재", "수업권", "통계"].forEach(
+      (label) => expect(screen.getAllByText(label).length).toBeGreaterThan(0)
     );
+    expect(screen.queryByText("레슨")).toBeNull();
+    expect(screen.queryByText("예약")).toBeNull();
     expect(screen.getByText(/지훈의 학습 현황/)).toBeInTheDocument();
   });
 
@@ -161,7 +173,7 @@ describe("StudentShell", () => {
     expect(screen.getByText("조건에 맞는 문제 기록이 없습니다.")).toBeInTheDocument();
   });
 
-  it("레슨 탭을 누르면 LessonsTab이 렌더링된다", () => {
+  it("수업 탭을 누르면 ClassesTab이 렌더링되고, 딱 두 개의 서브탭('예정 수업'/'지난 수업')만 보인다(레거시 '레슨'/'예약' 탭 제거)", () => {
     render(
       <StudentShell
         studentName="지훈"
@@ -171,8 +183,12 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("레슨"));
-    expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
+    fireEvent.click(screen.getAllByText("수업")[0]);
+    expect(screen.getByText("예정 수업")).toBeInTheDocument();
+    expect(screen.getByText("지난 수업")).toBeInTheDocument();
+    expect(
+      screen.getByText("아직 선생님 배정이 완료되지 않았어요. 배정이 끝나면 이 화면에서 바로 예약할 수 있어요.")
+    ).toBeInTheDocument();
   });
 
   it("과제 탭을 누르면 StudentHomeworkTab이 렌더링된다", () => {
@@ -185,8 +201,10 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("과제"));
-    expect(screen.getByText("작성이 필요한 과제가 없습니다.")).toBeInTheDocument();
+    fireEvent.click(screen.getAllByText("과제")[0]);
+    expect(
+      screen.getByText("지금은 할 과제가 없어요. 새 과제가 오면 여기 보여드릴게요.")
+    ).toBeInTheDocument();
   });
 
   it("교재 탭을 누르면 MaterialsLibraryTab이 렌더링된다", () => {
@@ -199,8 +217,10 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("교재"));
-    expect(screen.getByText("열람할 수 있는 교재가 없습니다.")).toBeInTheDocument();
+    fireEvent.click(screen.getAllByText("교재")[0]);
+    expect(
+      screen.getByText("아직 배정된 교재가 없어요. 담당 선생님이 곧 준비해드릴 예정이에요.")
+    ).toBeInTheDocument();
   });
 
   it("통계 탭을 누르면 StatsTab이 렌더링된다", () => {

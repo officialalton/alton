@@ -1,5 +1,7 @@
 # 086-admin-payouts-tab: 관리자 정산 탭 — 설계
 
+> **문서 상태: 과거 설계 이력.** 신규 정산은 v3의 시급·통화·분 단위 payout item 및 batch 정책이 우선한다.
+
 ## 배경
 
 관리자 포털 "정산" 탭은 아직 "준비 중" 상태다. `teacher_payouts` 테이블(`teacher_id`, `amount_krw`, `period_start`, `period_end`, `status`(pending/approved/paid), `wise_transfer_id`, `approved_by`, `paid_at`)은 이미 스키마에 있지만 아무 코드도 이걸 쓰지 않는다.

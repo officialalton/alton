@@ -2,14 +2,19 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { SessionViewViewer } from "@/lib/session-view";
-import type { MaterialData, MaterialProblem } from "./material-data";
+import type { MaterialData, MaterialProblem, CanvasStroke } from "./material-data";
 import {
   submitEssayAttempt,
   submitMathAttempt,
   submitMcAttempt,
 } from "./actions";
+import {
+  markMaterialUsedInLesson,
+  markProblemUsedInLesson,
+} from "./session-content-use-actions";
 import MathCanvas from "./MathCanvas";
 import CanvasOverlay from "./CanvasOverlay";
+import MaterialAnnotationLayers from "./MaterialAnnotationLayers";
 import VocabClickLayer from "./VocabClickLayer";
 import AutoGrowTextarea from "./AutoGrowTextarea";
 
@@ -25,13 +30,38 @@ export default function MaterialTab({
   material,
   viewerRole,
   tipsVisible,
+  legacyPrivateStrokes = [],
+  teacherStrokes = [],
+  studentStrokes = [],
+  sessionSource = "legacy",
+  viewerUserId,
+  annotationViewerRole,
 }: {
   sessionId: string;
   studentId: string;
   material: MaterialData;
   viewerRole: SessionViewViewer;
   tipsVisible: boolean;
+  /** 정책 변경 전 본인이 남긴 비공개 교재 필기(보존 기록). */
+  legacyPrivateStrokes?: CanvasStroke[];
+  /** 교재의 선생님 필기 레이어. */
+  teacherStrokes?: CanvasStroke[];
+  /** 교재의 학생 필기 레이어. */
+  studentStrokes?: CanvasStroke[];
+  sessionSource?: "legacy" | "v3";
+  /** 지금 보고 있는 사람 — 미저장 필기를 계정별로 갈라 두는 데 쓴다. */
+  viewerUserId?: string;
+  /**
+   * 필기 가능 여부만 판단하는 역할. 다른 탭(단어장·과제)은 v3에서 아직 쓰기가
+   * 안 되지만 교재 필기는 이벤트 로그로 저장되므로, 그 제한을 여기까지
+   * 끌고 오지 않는다.
+   */
+  annotationViewerRole?: SessionViewViewer;
 }) {
+  // P3 7단계 — 교재 위에는 학생 필기·선생님 필기 두 레이어가 있다. 보는
+  // 사람은 각자 켜고 끄고, 쓰기는 자기 레이어에만 가능하다.
+  const drawRole = annotationViewerRole ?? viewerRole;
+  const layerRole = drawRole === "student" ? "student" : drawRole === "teacher" ? "teacher" : "reader";
   const [activeSectionId, setActiveSectionId] = useState<string | null>(
     material?.sections[0]?.id ?? null
   );
@@ -74,46 +104,8 @@ export default function MaterialTab({
       ?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
-  return (
-    <div className="grid grid-cols-[220px_1fr]">
-      <nav className="border-r border-grey-200 p-4 sticky top-0 self-start h-[calc(100vh-56px)] overflow-y-auto">
-        <div className="text-[10.5px] font-extrabold text-grey-300 uppercase tracking-wider px-2 mb-1">
-          교재 목차
-        </div>
-        {material.sections.map((s) => (
-          <button
-            key={s.id}
-            onClick={() => scrollToSection(s.id)}
-            className={
-              "w-full text-left flex items-center gap-2 px-2.5 py-2 rounded-lg text-[13px] mb-0.5 " +
-              (activeSectionId === s.id
-                ? "bg-red-bg text-red font-bold"
-                : "text-grey-500 hover:bg-grey-100")
-            }
-          >
-            <span
-              className={
-                "inline-block w-1.5 h-1.5 rounded-full flex-shrink-0 " +
-                (activeSectionId === s.id ? "bg-red" : "bg-grey-300")
-              }
-            />
-            {s.title}
-            {s.problems.length > 0 && (
-              <span className="ml-auto text-[10px] opacity-70" title="확인 문제 포함">
-                ✏️
-              </span>
-            )}
-          </button>
-        ))}
-      </nav>
-
-      <div className="max-w-[720px] px-8 py-8">
-        <CanvasOverlay
-          sessionId={sessionId}
-          curriculumDocId={material.docId}
-          initialStrokes={material.canvasStrokes}
-          canDraw={viewerRole === "student" || viewerRole === "teacher"}
-        >
+  const materialBody = (
+    <>
           <VocabClickLayer
             sessionId={sessionId}
             studentId={studentId}
@@ -121,11 +113,23 @@ export default function MaterialTab({
           >
             {material.sections.map((s) => (
               <div key={s.id} id={`sec-${s.id}`} className="mb-11 scroll-mt-[72px]">
-                <h2 className="text-[22px] font-extrabold text-[#0b2545] mb-3">
-                  {s.title}
-                </h2>
+                <div className="flex items-start justify-between gap-3 mb-3">
+                  <h2 className="text-[21px] sm:text-[23px] font-extrabold text-[#0b2545] leading-tight">
+                    {s.title}
+                  </h2>
+                  {viewerRole === "teacher" && (
+                    <MarkUsedButton
+                      sessionId={sessionId}
+                      contentType="material_section"
+                      contentId={s.id}
+                    />
+                  )}
+                </div>
+                {/* P2/P3 5단계 — 읽기 영역. learning-body가 그림·표·수식이
+                    잘리거나 겹치지 않도록 처리한다(app/globals.css). 본문 HTML은
+                    저장 시점에 이미 sanitize된 것이다(lib/sanitize-doc-html.ts). */}
                 <div
-                  className="text-[14px] leading-[1.75] text-ink [&_b]:font-bold"
+                  className="learning-body text-[15px] sm:text-[16px] leading-[1.85] text-ink [&_b]:font-bold"
                   dangerouslySetInnerHTML={{ __html: s.body }}
                 />
                 {s.teachingTip && tipsVisible && viewerRole === "teacher" && (
@@ -148,9 +152,118 @@ export default function MaterialTab({
             ))}
             <div className="h-[60vh]" aria-hidden />
           </VocabClickLayer>
-        </CanvasOverlay>
+    </>
+  );
+
+  return (
+    // 좁은 화면에서는 목차를 본문 위로 접어 올린다. 예전에는 220px 고정
+    // 사이드바가 그대로 남아 본문이 화면 밖으로 밀려 읽을 수 없었다.
+    <div className="md:grid md:grid-cols-[220px_1fr]">
+      <nav className="border-b md:border-b-0 md:border-r border-grey-200 p-4 md:sticky md:top-0 md:self-start md:h-[calc(100vh-56px)] md:overflow-y-auto flex md:block gap-1.5 overflow-x-auto">
+        <div className="hidden md:block text-[10.5px] font-extrabold text-grey-300 uppercase tracking-wider px-2 mb-1">
+          교재 목차
+        </div>
+        {material.sections.map((s) => (
+          <button
+            key={s.id}
+            onClick={() => scrollToSection(s.id)}
+            className={
+              "md:w-full text-left flex items-center gap-2 px-2.5 py-2 rounded-lg text-[13px] mb-0.5 whitespace-nowrap md:whitespace-normal flex-shrink-0 " +
+              (activeSectionId === s.id
+                ? "bg-red-bg text-red font-bold"
+                : "text-grey-500 hover:bg-grey-100")
+            }
+          >
+            <span
+              className={
+                "inline-block w-1.5 h-1.5 rounded-full flex-shrink-0 " +
+                (activeSectionId === s.id ? "bg-red" : "bg-grey-300")
+              }
+            />
+            {s.title}
+            {s.problems.length > 0 && (
+              <span className="ml-auto text-[10px] opacity-70" title="확인 문제 포함">
+                ✏️
+              </span>
+            )}
+          </button>
+        ))}
+      </nav>
+
+      <div className="max-w-[760px] mx-auto px-3 sm:px-10 py-8">
+        {sessionSource === "v3" ? (
+          <MaterialAnnotationLayers
+            sessionId={sessionId}
+            curriculumDocId={material.docId}
+            studentStrokes={studentStrokes}
+            teacherStrokes={teacherStrokes}
+            legacyPrivateStrokes={legacyPrivateStrokes}
+            role={layerRole}
+            viewerUserId={viewerUserId}
+          >
+            {materialBody}
+          </MaterialAnnotationLayers>
+        ) : (
+          // 레거시 수업은 예전 단일 캔버스 경로를 그대로 쓴다(저장 대상 테이블이
+          // legacy_sessions를 가리키므로 새 레이어 모델을 적용할 수 없다).
+          <CanvasOverlay
+            sessionId={sessionId}
+            curriculumDocId={material.docId}
+            initialStrokes={material.canvasStrokes}
+            canDraw={drawRole === "student" || drawRole === "teacher"}
+            viewerUserId={viewerUserId}
+          >
+            {materialBody}
+          </CanvasOverlay>
+        )}
       </div>
     </div>
+  );
+}
+
+// R9(레슨 준비 Task 3) — 명시적 "사용 처리" 버튼. 선생님이 실제로 클릭했을 때만
+// session_content_use_events에 한 행을 남긴다(session-content-use-actions.ts).
+// 탭을 열거나 스크롤하는 것만으로는 절대 호출되지 않는다 — onClick 핸들러 밖에서는
+// 이 액션들을 부르지 않는다.
+function MarkUsedButton({
+  sessionId,
+  contentType,
+  contentId,
+}: {
+  sessionId: string;
+  contentType: "material_section" | "problem";
+  contentId: string;
+}) {
+  const [state, setState] = useState<"idle" | "saving" | "done" | "error">("idle");
+
+  async function handleClick() {
+    if (state === "saving" || state === "done") return;
+    setState("saving");
+    try {
+      if (contentType === "material_section") {
+        await markMaterialUsedInLesson(sessionId, contentId);
+      } else {
+        await markProblemUsedInLesson(sessionId, contentId);
+      }
+      setState("done");
+    } catch {
+      setState("error");
+    }
+  }
+
+  return (
+    <button
+      onClick={handleClick}
+      disabled={state === "saving" || state === "done"}
+      className={
+        "flex-shrink-0 text-[11px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] " +
+        (state === "done"
+          ? "border-green bg-green-bg text-green"
+          : "border-grey-200 text-grey-500 hover:bg-grey-100")
+      }
+    >
+      {state === "done" ? "사용 처리됨" : state === "saving" ? "처리 중…" : "사용 처리"}
+    </button>
   );
 }
 
@@ -238,15 +351,20 @@ function ProblemCard({
 
   return (
     <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4.5 my-4">
-      <div className="flex flex-wrap gap-1.5 mb-2">
-        {tags.map((t) => (
-          <span
-            key={t}
-            className="text-[10.5px] font-bold px-2.5 py-1 rounded-lg bg-grey-100 text-grey-500"
-          >
-            {t}
-          </span>
-        ))}
+      <div className="flex flex-wrap items-center justify-between gap-1.5 mb-2">
+        <div className="flex flex-wrap gap-1.5">
+          {tags.map((t) => (
+            <span
+              key={t}
+              className="text-[10.5px] font-bold px-2.5 py-1 rounded-lg bg-grey-100 text-grey-500"
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+        {isTeacher && (
+          <MarkUsedButton sessionId={sessionId} contentType="problem" contentId={problem.id} />
+        )}
       </div>
 
       {isTeacher && problem.format === "mc" && problem.correctIndex !== null && (

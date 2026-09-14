@@ -25,12 +25,12 @@ export default async function AccountPendingPage() {
           ALTON <span className="text-red">EDUCATION</span>
         </div>
         <h1 className="text-[21px] font-extrabold text-ink mb-3">
-          계정 준비 중입니다
+          체험 배정 대기 중입니다
         </h1>
         <p className="text-[13.5px] text-grey-500 mb-8 leading-[1.6]">
-          계정이 아직 관리자 승인을 기다리고 있습니다.
-          <br />
-          승인이 완료되면 별도 안내 후 정상적으로 이용하실 수 있습니다.
+          관리자의 별도 승인 절차는 없습니다 — 담당 과목·선생님 배정이
+          완료되면 자동으로 다음 단계로 진행되며, 완료 즉시 별도 안내를
+          드립니다.
         </p>
         <form action={logout}>
           <button

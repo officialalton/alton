@@ -3,11 +3,17 @@ import { describe, expect, it, vi } from "vitest";
 import MaterialTab from "./MaterialTab";
 import type { MaterialData } from "./material-data";
 import * as actions from "./actions";
+import * as useActions from "./session-content-use-actions";
 
 vi.mock("./actions", () => ({
   submitMcAttempt: vi.fn(),
   submitEssayAttempt: vi.fn(),
   submitMathAttempt: vi.fn(),
+}));
+
+vi.mock("./session-content-use-actions", () => ({
+  markMaterialUsedInLesson: vi.fn().mockResolvedValue(undefined),
+  markProblemUsedInLesson: vi.fn().mockResolvedValue(undefined),
 }));
 
 vi.mock("./canvas-actions", () => ({
@@ -129,6 +135,55 @@ describe("MaterialTab", () => {
     );
     expect(screen.getByText("정답: A")).toBeInTheDocument();
     expect(screen.getByText(/학생이 헷갈려하면/)).toBeInTheDocument();
+  });
+
+  it("R9 Task 3: 선생님에게는 섹션/문제마다 '사용 처리' 버튼이 보이고, 탭을 여는 것만으로는 호출되지 않는다", () => {
+    render(
+      <MaterialTab
+        sessionId="s1"
+        studentId="student-1"
+        material={material}
+        viewerRole="teacher"
+        tipsVisible={true}
+      />
+    );
+    const buttons = screen.getAllByText("사용 처리");
+    // 섹션 1개 + 문제 1개 = 최소 2개의 명시적 버튼.
+    expect(buttons.length).toBeGreaterThanOrEqual(2);
+    // 렌더링(탭 열기) 자체는 어떤 mark-used 액션도 호출하지 않는다.
+    expect(useActions.markMaterialUsedInLesson).not.toHaveBeenCalled();
+    expect(useActions.markProblemUsedInLesson).not.toHaveBeenCalled();
+  });
+
+  it("R9 Task 3: '사용 처리' 버튼을 명시적으로 클릭해야만 markMaterialUsedInLesson이 호출된다", async () => {
+    render(
+      <MaterialTab
+        sessionId="s1"
+        studentId="student-1"
+        material={material}
+        viewerRole="teacher"
+        tipsVisible={true}
+      />
+    );
+    const [sectionButton] = screen.getAllByText("사용 처리");
+    fireEvent.click(sectionButton);
+    await waitFor(() =>
+      expect(useActions.markMaterialUsedInLesson).toHaveBeenCalledWith("s1", "sec-1")
+    );
+    await waitFor(() => expect(screen.getAllByText("사용 처리됨").length).toBeGreaterThan(0));
+  });
+
+  it("R9 Task 3: 학생에게는 '사용 처리' 버튼이 보이지 않는다", () => {
+    render(
+      <MaterialTab
+        sessionId="s1"
+        studentId="student-1"
+        material={material}
+        viewerRole="student"
+        tipsVisible={true}
+      />
+    );
+    expect(screen.queryByText("사용 처리")).not.toBeInTheDocument();
   });
 
   it("교재가 배정되지 않은 세션에서는 안내 문구를 보여준다", () => {

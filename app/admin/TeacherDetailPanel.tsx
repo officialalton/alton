@@ -2,9 +2,16 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { setTeacherStatus, setTeacherCalendlyUrl, setTeacherHourlyRate } from "./users-actions";
+import { setTeacherStatus, setTeacherHourlyRate } from "./users-actions";
 import { assignTeacherSubject, unassignTeacherSubject } from "./teacher-subjects-actions";
 import type { AdminSubject } from "./subject-data";
+
+// 2026-09-09(UAT 지적, 제품 오너 승인): 보관된 과목은 신규 담당 배정 후보에서
+// 제외하되, 이미 이 선생님에게 배정돼 있던 과목이면(보관 전에 배정된 경우)
+// 이력 조회를 위해 계속 보여준다.
+function selectableForTeacher(subjects: AdminSubject[], assignedSubjectIds: string[]): AdminSubject[] {
+  return subjects.filter((s) => !s.archivedAt || assignedSubjectIds.includes(s.subjectId));
+}
 import type { QcWarning, TeacherListItem } from "./users-data";
 
 const STATUS_LABEL: Record<string, string> = {
@@ -34,9 +41,6 @@ export default function TeacherDetailPanel({
   const [subjectError, setSubjectError] = useState<string | null>(null);
   const [togglingSubjectId, setTogglingSubjectId] = useState<string | null>(null);
   const [savedSubjectId, setSavedSubjectId] = useState<string | null>(null);
-  const [calendlyUrl, setCalendlyUrl] = useState(teacher.calendlySchedulingUrl ?? "");
-  const [savingUrl, setSavingUrl] = useState(false);
-  const [savedUrl, setSavedUrl] = useState(false);
   const [hourlyRate, setHourlyRate] = useState(
     teacher.hourlyRateKrw != null ? String(teacher.hourlyRateKrw) : ""
   );
@@ -49,23 +53,29 @@ export default function TeacherDetailPanel({
     setSavedSubjectId(null);
     setTogglingSubjectId(subjectId);
     try {
-      if (assignedSubjectIds.includes(subjectId)) {
-        await unassignTeacherSubject(teacher.id, subjectId);
-        const next = assignedSubjectIds.filter((id) => id !== subjectId);
-        setAssignedSubjectIds(next);
-        onUpdated({ assignedSubjectIds: next });
-      } else {
-        await assignTeacherSubject(teacher.id, subjectId);
-        const next = [...assignedSubjectIds, subjectId];
-        setAssignedSubjectIds(next);
-        onUpdated({ assignedSubjectIds: next });
+      // 실패하면 기존 선택을 그대로 둔다 — 화면만 바뀌고 서버는 안 바뀐 상태로
+      // 갈라지면, 새로고침했을 때 되돌아온 것처럼 보인다.
+      const assigned = assignedSubjectIds.includes(subjectId);
+      const result = assigned
+        ? await unassignTeacherSubject(teacher.id, subjectId)
+        : await assignTeacherSubject(teacher.id, subjectId);
+      if (!result.ok) {
+        setSubjectError(result.error);
+        return;
       }
+      const next = assigned
+        ? assignedSubjectIds.filter((id) => id !== subjectId)
+        : [...assignedSubjectIds, subjectId];
+      setAssignedSubjectIds(next);
+      onUpdated({ assignedSubjectIds: next });
       setSavedSubjectId(subjectId);
       // 매칭 탭의 과목별 선생님 후보 목록은 admin/page.tsx 로드 시점에 고정된
       // props라서, 여기서 서버 데이터를 갱신해줘야 다른 탭에도 반영된다.
       router.refresh();
-    } catch (e) {
-      setSubjectError(e instanceof Error ? e.message : "과목 배정 처리에 실패했습니다.");
+    } catch {
+      // 서버 액션이 예외를 던지면 Production에서는 내부 오류 코드로 마스킹된다.
+      // 그 값을 화면에 그대로 내보내지 않는다.
+      setSubjectError("과목 배정 처리에 실패했습니다. 잠시 후 다시 시도해주세요.");
     } finally {
       setTogglingSubjectId(null);
     }
@@ -85,18 +95,6 @@ export default function TeacherDetailPanel({
       setStatusError(
         e instanceof Error ? e.message : "상태 전환에 실패했습니다."
       );
-    }
-  }
-
-  async function handleSaveCalendlyUrl() {
-    setSavingUrl(true);
-    setSavedUrl(false);
-    try {
-      await setTeacherCalendlyUrl(teacher.id, calendlyUrl);
-      onUpdated({ calendlySchedulingUrl: calendlyUrl.trim() || null });
-      setSavedUrl(true);
-    } finally {
-      setSavingUrl(false);
     }
   }
 
@@ -148,7 +146,7 @@ export default function TeacherDetailPanel({
           담당 과목
         </div>
         <div className="flex flex-wrap gap-2 mb-2">
-          {subjects.map((s) => {
+          {selectableForTeacher(subjects, assignedSubjectIds).map((s) => {
             const assigned = assignedSubjectIds.includes(s.subjectId);
             return (
               <button
@@ -178,34 +176,6 @@ export default function TeacherDetailPanel({
         <p className="text-[13px] text-ink">
           {teacher.subjectNames.length ? teacher.subjectNames.join(", ") : "매칭된 학생 없음"}
         </p>
-      </div>
-
-      <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">
-        <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2">
-          개인 예약 링크 (Calendly)
-        </div>
-        <p className="text-[12px] text-grey-500 mb-2">
-          Calendly에서 이 선생님을 팀원으로 초대하고 개인 이벤트 타입을 만든 뒤,
-          그 예약 페이지 URL을 여기에 넣으면 학생 포털에서 이 선생님과 직접
-          회차를 예약할 수 있습니다. 이벤트 타입 만들 때 화상 회의 연동을
-          <b> Zoom으로 반드시 설정</b>해주세요(Calendly 기본값은 Google Meet).
-        </p>
-        <div className="flex gap-2">
-          <input
-            value={calendlyUrl}
-            onChange={(e) => setCalendlyUrl(e.target.value)}
-            placeholder="https://calendly.com/xxx-teacher/session"
-            className="flex-1 px-3 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12.5px]"
-          />
-          <button
-            disabled={savingUrl}
-            onClick={handleSaveCalendlyUrl}
-            className="text-[12px] font-bold px-3.5 py-2 rounded-lg bg-ink text-white disabled:opacity-50 shrink-0"
-          >
-            {savingUrl ? "저장 중..." : "저장"}
-          </button>
-        </div>
-        {savedUrl && <p className="text-[12px] text-green mt-1.5">✓ 저장되었습니다</p>}
       </div>
 
       <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">

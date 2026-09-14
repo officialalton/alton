@@ -10,7 +10,12 @@ import { createAdminClient } from "@/lib/supabase-admin";
 // DB에서 최종 검증). 일치하지 않으면 Supabase가 방금 만든 auth.users 행을
 // 즉시 삭제해 고아 계정·고아 세션을 남기지 않는다.
 export async function GET(request: NextRequest) {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3010";
+  // NEXT_PUBLIC_SITE_URL 대신 실제 요청 origin을 쓴다 — 고정 env 값을 쓰면
+  // 배포 환경(로컬/Preview/Production)마다 다른 실제 도메인과 어긋나서 세션
+  // 쿠키가 없는 엉뚱한 origin으로 리다이렉트되는 문제가 있다
+  // (app/auth/admin-google-callback/route.ts에서 이미 한 번 발견·수정된 것과
+  // 동일한 근본 원인 — 이 파일에는 그 수정이 누락돼 있었다, 2026-09-05 실사용 발견).
+  const siteUrl = request.nextUrl.origin;
   const code = request.nextUrl.searchParams.get("code");
 
   if (!code) {

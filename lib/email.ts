@@ -25,8 +25,10 @@ export async function sendEmail(params: {
 }): Promise<void> {
   const transport = createTransport();
   if (!transport) {
-    console.warn("SMTP_HOST가 설정되지 않아 이메일을 보내지 않았습니다:", params.subject);
-    return;
+    // SMTP 미설정 시 조용히 성공 반환하면 호출부의 try/catch가 "발송 성공"으로
+    // 착각해 notice_delivery_status를 'sent'로 기록하는 실제 버그로 이어졌다
+    // (2026-09-05 코드 점검 발견) — 반드시 실패로 처리되도록 throw한다.
+    throw new Error("SMTP_HOST가 설정되지 않아 이메일을 보낼 수 없습니다.");
   }
 
   await transport.sendMail({
@@ -35,4 +37,14 @@ export async function sendEmail(params: {
     subject: params.subject,
     html: params.html,
   });
+}
+
+/** 이메일 HTML 본문에 사용자 입력값을 넣기 전 escape한다(XSS/헤더 인젝션 방지). */
+export function escapeHtml(value: string): string {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
 }

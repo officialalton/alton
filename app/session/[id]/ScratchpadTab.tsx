@@ -5,6 +5,7 @@ import type { SessionViewViewer } from "@/lib/session-view";
 import { addDocLink, removeDocLink } from "./scratchpad-actions";
 import type { DocLink } from "./scratchpad-data";
 import type { CanvasStroke } from "./material-data";
+import type { StrokePayload } from "./annotation-events-types";
 import WhiteboardCanvas from "./WhiteboardCanvas";
 
 const SUBTABS = [
@@ -19,15 +20,36 @@ export default function ScratchpadTab({
   viewerRole,
   initialDocLinks,
   initialWhiteboardStrokes,
+  sessionSource,
+  whiteboardViewerRole,
+  initialAnnotationStrokes,
+  currentUserId,
 }: {
   sessionId: string;
   viewerRole: SessionViewViewer;
   initialDocLinks: DocLink[];
   initialWhiteboardStrokes: CanvasStroke[];
+  // R9 — 화이트보드는 다른 탭들과 달리 writesEnabled 읽기전용 강제(v3에서
+  // FK 문제로 도입됨)를 받지 않는다. 실제 viewerRole과 세션 원본을 별도로 받아
+  // v3에서는 session_annotation_events 이벤트 로그를 쓴다.
+  sessionSource: "legacy" | "v3";
+  whiteboardViewerRole: SessionViewViewer;
+  initialAnnotationStrokes: StrokePayload[];
+  currentUserId: string;
 }) {
   const [subtab, setSubtab] = useState<SubtabId>("docs");
   const isTeacher = viewerRole === "teacher";
-  const canDraw = viewerRole === "student" || viewerRole === "teacher";
+  // R9 corrective(Defect 2) — 정책은 "clear-all은 선생님 또는 관리자"인데 admin이
+  // 빠져 있었다. clear-all 버튼은 필기 모드 툴바(canDraw) 안에 중첩돼 있으므로,
+  // admin이 버튼을 보려면 canDraw도 admin을 포함해야 한다 — DB(RLS, b4fd788)도
+  // stroke/clear_all 모두 is_admin()을 이미 허용하므로 admin이 그리기 자체를
+  // 할 수 있게 하는 것과 정책상 모순이 없다.
+  const canDraw =
+    whiteboardViewerRole === "student" ||
+    whiteboardViewerRole === "teacher" ||
+    whiteboardViewerRole === "admin";
+  const canClearAll =
+    whiteboardViewerRole === "teacher" || whiteboardViewerRole === "admin";
 
   return (
     <div className="max-w-[720px] px-8 py-8">
@@ -64,6 +86,10 @@ export default function ScratchpadTab({
           sessionId={sessionId}
           initialStrokes={initialWhiteboardStrokes}
           canDraw={canDraw}
+          canClearAll={canClearAll}
+          isV3={sessionSource === "v3"}
+          initialAnnotationStrokes={initialAnnotationStrokes}
+          currentUserId={currentUserId}
         />
       )}
     </div>

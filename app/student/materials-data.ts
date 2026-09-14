@@ -45,14 +45,25 @@ export async function loadMaterialsLibrary(
   supabase: SupabaseClient,
   studentId: string
 ): Promise<LibrarySubject[]> {
-  const { data: enrollments } = await supabase
-    .from("enrollments")
-    .select("subject_id, subject:subjects(name)")
-    .eq("student_id", studentId)
-    .eq("status", "active");
+  // 2026-09-09(UAT 지적, 제품 오너 승인): 레거시 enrollments만 보면 v3
+  // subject_enrollments로만 수강 중인 학생은 공개된 교재가 있어도 라이브러리가
+  // 항상 비어 보인다. 두 소스를 함께 조회해 합친다(신규 v3 흐름의 권한 원본은
+  // subject_enrollments — RLS도 20261267000000에서 동일하게 확장됨).
+  const [{ data: enrollments }, { data: subjectEnrollments }] = await Promise.all([
+    supabase
+      .from("enrollments")
+      .select("subject_id, subject:subjects(name)")
+      .eq("student_id", studentId)
+      .eq("status", "active"),
+    supabase
+      .from("subject_enrollments")
+      .select("subject_id, subject:subjects(name)")
+      .eq("child_id", studentId)
+      .eq("status", "active"),
+  ]);
 
   const subjects = new Map<string, string>();
-  for (const e of enrollments ?? []) {
+  for (const e of [...(enrollments ?? []), ...(subjectEnrollments ?? [])]) {
     const row = Array.isArray(e.subject) ? e.subject[0] : e.subject;
     subjects.set(e.subject_id, (row as { name?: string } | null)?.name ?? "");
   }

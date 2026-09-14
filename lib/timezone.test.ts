@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { DEFAULT_TIMEZONE, resolveUserTimezone } from "./timezone";
+import { DEFAULT_TIMEZONE, resolveUserTimezone, TIMEZONE_OPTIONS } from "./timezone";
 
 describe("resolveUserTimezone", () => {
   it("개인 설정이 있으면 그걸 쓴다", () => {
@@ -25,5 +25,33 @@ describe("resolveUserTimezone", () => {
     expect(resolveUserTimezone({ profileTimezone: "", householdDefaultTimezone: "" })).toBe(
       DEFAULT_TIMEZONE
     );
+  });
+});
+
+describe("TIMEZONE_OPTIONS", () => {
+  // 제품 오너 지적사항 3 — 미국 전역 시간대(동부/중부/산악/산악-서머타임없음/
+  // 태평양/알래스카/하와이)가 모두 선택지에 있어야 한다.
+  const usValues = [
+    "America/New_York",
+    "America/Chicago",
+    "America/Denver",
+    "America/Phoenix",
+    "America/Los_Angeles",
+    "America/Anchorage",
+    "Pacific/Honolulu",
+  ];
+
+  it.each(usValues)("미국 시간대 %s가 선택지에 포함된다", (tz) => {
+    expect(TIMEZONE_OPTIONS.some((o) => o.value === tz)).toBe(true);
+  });
+
+  it("모든 선택지 value가 유효한 IANA 시간대다(Intl로 파싱 가능)", () => {
+    for (const option of TIMEZONE_OPTIONS) {
+      expect(() => new Intl.DateTimeFormat("en-US", { timeZone: option.value })).not.toThrow();
+    }
+  });
+
+  it("기본값(America/Los_Angeles)도 선택지 안에 있다", () => {
+    expect(TIMEZONE_OPTIONS.some((o) => o.value === DEFAULT_TIMEZONE)).toBe(true);
   });
 });

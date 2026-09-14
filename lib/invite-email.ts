@@ -1,4 +1,5 @@
 import { sendEmail } from "./email";
+import { currentRequestOrigin } from "./request-origin";
 
 const ROLE_LABEL: Record<"parent" | "student", string> = {
   parent: "보호자",
@@ -9,7 +10,7 @@ export async function sendWorkspaceProvisioningEmail(params: {
   to: string;
   workspaceEmail: string;
 }): Promise<void> {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3010";
+  const siteUrl = await currentRequestOrigin();
   const loginUrl = `${siteUrl}/login?role=teacher`;
 
   await sendEmail({
@@ -31,7 +32,7 @@ export async function sendInviteEmail(params: {
   token: string;
   role: "parent" | "student";
 }): Promise<void> {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3010";
+  const siteUrl = await currentRequestOrigin();
   const acceptUrl = `${siteUrl}/api/invite/accept?token=${encodeURIComponent(params.token)}`;
 
   await sendEmail({

@@ -29,7 +29,7 @@ async function requireSessionTeacher(sessionId: string) {
   if (profile?.role === "admin") return { supabase, user };
 
   const { data: session } = await supabase
-    .from("sessions")
+    .from("legacy_sessions")
     .select("enrollment:enrollments(teacher_id)")
     .eq("id", sessionId)
     .single();
@@ -199,7 +199,7 @@ async function notifyGuardiansOfReview(
   sessionId: string
 ): Promise<void> {
   const { data: session } = await supabase
-    .from("sessions")
+    .from("legacy_sessions")
     .select(
       "session_number, enrollment:enrollments(student_id, subject:subjects(name))"
     )

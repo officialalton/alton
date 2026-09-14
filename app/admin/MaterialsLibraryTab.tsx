@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { DocEditorData } from "./curriculum-doc-data";
+import type { CurriculumDocListItem } from "./curriculum-doc-data";
 
 const UNASSIGNED_UNIT = "(단원 미지정)";
 
@@ -10,7 +10,7 @@ type View =
   | { level: "units"; subjectName: string }
   | { level: "docs"; subjectName: string; unitLabel: string };
 
-export default function MaterialsLibraryTab({ docs }: { docs: DocEditorData[] }) {
+export default function MaterialsLibraryTab({ docs }: { docs: CurriculumDocListItem[] }) {
   const published = docs.filter((d) => d.status === "published");
   const [view, setView] = useState<View>({ level: "subjects" });
 

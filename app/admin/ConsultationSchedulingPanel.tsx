@@ -1,0 +1,789 @@
+"use client";
+
+// M1 — 관리자 상담 운영 화면: 승인 대기 신청 수락/거절/시간변경, 오늘·주간·월간
+// 예정 상담 캘린더, 공용 상담 가능시간(반복/예외) 관리, 상담 결과 기록.
+// booking-actions.ts의 BookingReconciliationPanel과 동일하게 클라이언트에서
+// 직접 서버 액션을 호출해 자체 데이터를 불러온다(page.tsx 데이터로더를 건드리지
+// 않는 최소 침습 방식).
+
+import { useEffect, useState } from "react";
+import { useToasts, ToastStack } from "./Toast";
+import {
+  listConsultationsForAdmin,
+  listPendingConsultationRequests,
+  acceptConsultationRequest,
+  rejectConsultationRequest,
+  rescheduleConsultationRequest,
+  cancelConsultationRequest,
+  recordConsultationOutcome,
+  retryTrialEntitlementGrant,
+  retryFailedConsultationCalendarSyncs,
+  retryConsultationSmartNotesConfig,
+  reprocessUnlinkedConsultationSmartNotesEvents,
+  listConsultAvailabilityRules,
+  addConsultAvailabilityRule,
+  deactivateConsultAvailabilityRule,
+  listConsultAvailabilityExceptions,
+  addConsultAvailabilityException,
+  removeConsultAvailabilityException,
+  type ConsultationListItem,
+  type ConsultAvailabilityRule,
+  type ConsultAvailabilityException,
+} from "./consultation-scheduling-actions";
+import {
+  listWorkspaceEventsSubscriptions,
+  retryExpiringWorkspaceEventsSubscriptions,
+  runSmartNotesReconciliation,
+  disableWorkspaceEventsSubscriptionForOrganizer,
+  type WorkspaceEventsSubscriptionRow,
+} from "./workspace-events-actions";
+import MonthCalendar from "@/app/components/MonthCalendar";
+import WeeklyAvailabilityGrid from "@/app/components/WeeklyAvailabilityGrid";
+import ConsultAvailabilityMonthView from "./ConsultAvailabilityMonthView";
+import { dateKeyInTimezone } from "@/lib/calendar-date-utils";
+import { getMyTimezoneSettings } from "@/lib/timezone-actions";
+import { DEFAULT_TIMEZONE } from "@/lib/timezone";
+
+const WEEKDAY_LABEL = ["일", "월", "화", "수", "목", "금", "토"];
+
+// 요구사항 5(2026-09-03 통합 보완) — Calendar 초대 실패는 다른 종류의 문제(단순 재시도
+// 대기 vs 관리자 개입 필요)와 구분되는 상태·문구로 보여준다.
+const SYNC_STATUS_LABEL: Record<string, string> = {
+  pending: "Calendar 초대 발송 대기",
+  synced: "Calendar 네이티브 초대 발송됨",
+  failed: "Calendar 초대 실패(자동 재시도 중)",
+  reconciliation_needed: "Calendar 초대 실패 — 관리자 확인 필요(이메일로 대체 안내됨)",
+};
+
+const SUBSCRIPTION_STATUS_LABEL: Record<string, string> = {
+  active: "정상",
+  expiring: "만료 임박",
+  expired: "만료됨",
+  error: "오류",
+  disabled: "관리자 정지",
+};
+
+const OUTCOME_LABEL: Record<string, string> = {
+  trial_recommended: "체험 진행 권장",
+  regular_recommended: "정규 진행 권장",
+  on_hold: "보류",
+  closed: "종료",
+};
+
+// M1 요구사항 3(2026-09-03 조건부 승인 보완) — "상담 진행 가능"과 "상담 완료 가능"은
+// 서로 다른 시점의 서로 다른 기준이라 별도로 표시한다.
+const CONSULT_READINESS_LABEL: Record<string, string> = {
+  ready: "상담 진행 준비 완료(동의 확인 + Smart Notes ON)",
+  consent_pending: "상담 진행 불가 — 동의 확인 대기",
+  smart_notes_pending: "상담 진행 불가 — Smart Notes 활성화 확인 필요",
+  not_applicable: "-",
+};
+// M2 — 체험수업권 지급 상태(요구사항 7). "체험 진행 권장"으로 결과가 기록된 순간
+// 시스템이 자동 지급을 시도하고, 여기 나오는 상태는 그 결과를 보여준다.
+const TRIAL_GRANT_STATUS_LABEL: Record<string, string> = {
+  not_applicable: "-",
+  pending: "체험수업권 지급 처리 중",
+  granted: "체험수업권 지급 완료",
+  failed: "체험수업권 지급 실패 — 재처리 필요",
+};
+
+const COMPLETION_READINESS_LABEL: Record<string, string> = {
+  ready: "상담 완료 처리 가능",
+  consult_not_ready: "완료 불가 — 상담 진행 조건(동의+Smart Notes) 미충족",
+  smart_notes_not_linked: "완료 불가 — Smart Notes 원본이 아직 자동 연결되지 않음(재처리 대상)",
+  summary_missing: "완료 불가 — 관리자 검토 요약 미작성",
+  not_applicable: "-",
+};
+
+function formatDateTime(iso: string | null): string {
+  if (!iso) return "-";
+  return new Intl.DateTimeFormat("ko-KR", {
+    year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit",
+  }).format(new Date(iso));
+}
+
+type CalendarView = "today" | "week" | "month";
+
+function rangeFor(view: CalendarView): { from: Date; to: Date } {
+  const now = new Date();
+  if (view === "today") {
+    const from = new Date(now); from.setHours(0, 0, 0, 0);
+    const to = new Date(from); to.setDate(to.getDate() + 1);
+    return { from, to };
+  }
+  if (view === "week") {
+    const from = new Date(now); from.setHours(0, 0, 0, 0);
+    const to = new Date(from); to.setDate(to.getDate() + 7);
+    return { from, to };
+  }
+  const from = new Date(now.getFullYear(), now.getMonth(), 1);
+  const to = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+  return { from, to };
+}
+
+export default function ConsultationSchedulingPanel() {
+  // R6 — 관리자 본인 시간대 설정(계정 드롭다운 "시간대 설정")을 따른다.
+  const [timezone, setTimezone] = useState<string>(DEFAULT_TIMEZONE);
+  useEffect(() => {
+    getMyTimezoneSettings().then((s) => setTimezone(s.resolvedTimezone));
+  }, []);
+  const [pending, setPending] = useState<ConsultationListItem[]>([]);
+  const [scheduled, setScheduled] = useState<ConsultationListItem[]>([]);
+  const [view, setView] = useState<CalendarView>("week");
+  const [rules, setRules] = useState<ConsultAvailabilityRule[]>([]);
+  const [exceptions, setExceptions] = useState<ConsultAvailabilityException[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [busyId, setBusyId] = useState<string | null>(null);
+  const [subscriptions, setSubscriptions] = useState<WorkspaceEventsSubscriptionRow[]>([]);
+  const [disableOpenOrganizer, setDisableOpenOrganizer] = useState<string | null>(null);
+  const [disableReason, setDisableReason] = useState("");
+
+  // 요구사항 5 — window.prompt 대신 검증 가능한 인라인 폼.
+  const [rescheduleOpenId, setRescheduleOpenId] = useState<string | null>(null);
+  const [rescheduleValue, setRescheduleValue] = useState("");
+  const [outcomeOpenId, setOutcomeOpenId] = useState<string | null>(null);
+  const [outcomeSummary, setOutcomeSummary] = useState("");
+  const [outcomeValue, setOutcomeValue] = useState<"trial_recommended" | "regular_recommended" | "on_hold" | "closed" | "">("");
+  const [selectedDateKey, setSelectedDateKey] = useState<string | null>(null);
+
+  // 요구사항 1 — window.prompt 대신 인라인 폼(요일 select + 시작/종료 시간 입력).
+  const [ruleFormOpen, setRuleFormOpen] = useState(false);
+  const [ruleWeekday, setRuleWeekday] = useState(1);
+  const [ruleStart, setRuleStart] = useState("09:00");
+  const [ruleEnd, setRuleEnd] = useState("18:00");
+  const [ruleError, setRuleError] = useState<string | null>(null);
+  const [exceptionFormOpen, setExceptionFormOpen] = useState(false);
+  const [exceptionDate, setExceptionDate] = useState("");
+  // 요구사항 3 — 반복 가능시간을 목록 대신 요일×시간 주간 그리드로 한눈에 보기.
+  const [rulesView, setRulesView] = useState<"grid" | "list">("grid");
+
+  async function reload() {
+    setLoading(true);
+    try {
+      const { from, to } = rangeFor(view);
+      const [pendingRows, scheduledRows, ruleRows, exceptionRows, subscriptionRows] = await Promise.all([
+        listPendingConsultationRequests(),
+        listConsultationsForAdmin({ from: from.toISOString(), to: to.toISOString() }),
+        listConsultAvailabilityRules(),
+        listConsultAvailabilityExceptions(),
+        listWorkspaceEventsSubscriptions(),
+      ]);
+      setPending(pendingRows);
+      setScheduled(scheduledRows.filter((r) => r.status === "scheduled" || r.status === "completed"));
+      setRules(ruleRows);
+      setExceptions(exceptionRows);
+      setSubscriptions(subscriptionRows);
+      setError(null);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "불러오기에 실패했습니다.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    reload();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [view]);
+
+  const { toasts, showToast, dismiss } = useToasts();
+
+  // 2026-09-06 — "Calendar 재처리 실행" 등 관리자 액션 버튼을 눌러도 성공/실패가
+  // 눈에 띄게 표시되지 않는다는 지적을 고친다. label을 넘기면 성공/실패 모두
+  // 토스트로 몇 초간 명확히 보여준다(기존처럼 상단 error 배너에도 실패 메시지는
+  // 계속 남긴다 — 토스트가 사라진 뒤에도 원인을 확인할 수 있게).
+  async function withBusy(id: string, fn: () => Promise<void>, label?: string) {
+    setBusyId(id);
+    try {
+      await fn();
+      await reload();
+      if (label) showToast("success", `${label} 완료`);
+    } catch (e) {
+      const message = e instanceof Error ? e.message : "처리에 실패했습니다.";
+      setError(message);
+      showToast("error", label ? `${label} 실패 — ${message}` : `처리 실패 — ${message}`);
+    } finally {
+      setBusyId(null);
+    }
+  }
+
+  return (
+    <div>
+      <ToastStack toasts={toasts} dismiss={dismiss} />
+      {error && <p className="text-[12px] text-red mb-3">{error}</p>}
+
+      <section className="mb-8">
+        <div className="flex items-center justify-between mb-2">
+          <h2 className="text-[14px] font-extrabold text-ink">승인 대기 상담 신청 ({pending.length})</h2>
+        </div>
+        {/* 2026-09-07 — 제품 오너 지적: 정상 운영 중 관리자가 수동으로 조작할 일이 거의
+            없는 실패 복구용 디버그/운영 도구다(Calendar·Smart Notes 동기화는 기본적으로
+            자동 재처리되고, 이 버튼들은 그 자동 재처리가 실패했을 때만 필요). 완전히
+            지우면 실제 장애 복구 시 쓸 수 없게 되므로 삭제 대신 기본 접힘 섹션으로
+            이동한다. */}
+        <details className="mb-3">
+          <summary className="text-[12px] font-bold text-grey-500 cursor-pointer select-none">고급/운영 도구</summary>
+          <div className="flex gap-2 mt-2">
+            <button
+              className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5"
+              onClick={() => withBusy("__retry", async () => { await retryFailedConsultationCalendarSyncs(); }, "Calendar 재처리")}
+            >
+              Calendar 재처리 실행
+            </button>
+            <button
+              className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5"
+              onClick={() => withBusy("__retry_smart_notes", async () => { await reprocessUnlinkedConsultationSmartNotesEvents(); }, "Smart Notes 미매칭 재처리")}
+            >
+              Smart Notes 미매칭 재처리
+            </button>
+          </div>
+        </details>
+        {loading ? (
+          <p className="text-[13px] text-grey-500">불러오는 중...</p>
+        ) : pending.length === 0 ? (
+          <p className="text-[13px] text-grey-500">승인 대기 중인 신청이 없습니다.</p>
+        ) : (
+          pending.map((c) => (
+            <div key={c.id} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3">
+              <p className="text-[13.5px] font-bold text-ink">
+                {c.contact_name} · {c.contact_email} {c.contact_phone ? `· ${c.contact_phone}` : ""}
+              </p>
+              <p className="text-[12.5px] text-grey-500 mt-1">
+                희망 시간: {formatDateTime(c.starts_at)} · 출처: {c.source}
+                {c.hold_expires_at && ` · hold 만료: ${formatDateTime(c.hold_expires_at)}`}
+              </p>
+              {c.concerns && <p className="text-[12.5px] text-grey-500 mt-1">문의: {c.concerns}</p>}
+              <div className="flex gap-2 mt-3">
+                <button
+                  disabled={busyId === c.id}
+                  className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
+                  onClick={() => withBusy(c.id, () => acceptConsultationRequest(c.id), "상담 수락")}
+                >
+                  수락(Calendar·Meet 생성)
+                </button>
+                <button
+                  disabled={busyId === c.id}
+                  className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50"
+                  onClick={() => withBusy(c.id, () => rejectConsultationRequest(c.id, "관리자 판단"), "상담 거절")}
+                >
+                  거절
+                </button>
+              </div>
+            </div>
+          ))
+        )}
+      </section>
+
+      <section className="mb-8">
+        <div className="flex items-center justify-between mb-2">
+          <h2 className="text-[14px] font-extrabold text-ink">예정 상담</h2>
+          <div className="flex gap-1">
+            {(["today", "week", "month"] as CalendarView[]).map((v) => (
+              <button
+                key={v}
+                onClick={() => setView(v)}
+                className={
+                  "text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] " +
+                  (view === v ? "bg-ink text-white border-ink" : "border-grey-200 text-ink")
+                }
+              >
+                {v === "today" ? "오늘" : v === "week" ? "주간" : "월간"}
+              </button>
+            ))}
+          </div>
+        </div>
+        {view === "month" && (
+          <div className="mb-4 max-w-[280px]" data-testid="consultation-month-calendar">
+            <MonthCalendar
+              timezone={timezone}
+              selectedDateKey={selectedDateKey}
+              onSelectDate={(dateKey) => setSelectedDateKey((prev) => (prev === dateKey ? null : dateKey))}
+              badgesByDate={scheduled.reduce<Record<string, { count: number }>>((acc, c) => {
+                if (!c.starts_at) return acc;
+                const key = dateKeyInTimezone(c.starts_at, timezone);
+                acc[key] = { count: (acc[key]?.count ?? 0) + 1 };
+                return acc;
+              }, {})}
+            />
+            {selectedDateKey && (
+              <button
+                className="text-[12px] font-semibold text-blue mt-2"
+                onClick={() => setSelectedDateKey(null)}
+              >
+                {selectedDateKey} 필터 해제
+              </button>
+            )}
+          </div>
+        )}
+        {(() => {
+          const visibleScheduled =
+            view === "month" && selectedDateKey
+              ? scheduled.filter((c) => c.starts_at && dateKeyInTimezone(c.starts_at, timezone) === selectedDateKey)
+              : scheduled;
+          if (visibleScheduled.length === 0) {
+            return <p className="text-[13px] text-grey-500">해당 기간에 예정된 상담이 없습니다.</p>;
+          }
+          return visibleScheduled.map((c) => (
+            <div key={c.id} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3">
+              <p className="text-[13.5px] font-bold text-ink">
+                {formatDateTime(c.starts_at)} · {c.contact_name}
+              </p>
+              <p className="text-[12.5px] text-grey-500 mt-1">
+                {SYNC_STATUS_LABEL[c.google_sync_status] ?? c.google_sync_status}
+                {c.google_meet_link && (
+                  <>
+                    {" · "}
+                    <a className="underline" href={c.google_meet_link} target="_blank" rel="noreferrer">
+                      Meet 링크
+                    </a>
+                  </>
+                )}
+                {c.outcome && ` · 결과: ${OUTCOME_LABEL[c.outcome] ?? c.outcome}`}
+              </p>
+              <p className="text-[12px] mt-1.5" style={{ color: c.consultReadiness === "ready" ? "#16a34a" : "#b91c1c" }}>
+                {CONSULT_READINESS_LABEL[c.consultReadiness]}
+              </p>
+              <p className="text-[12px] mt-0.5" style={{ color: c.completionReadiness === "ready" ? "#16a34a" : "#b91c1c" }}>
+                {COMPLETION_READINESS_LABEL[c.completionReadiness]}
+              </p>
+              {c.outcome === "trial_recommended" && (
+                <p className="text-[12px] mt-0.5" style={{ color: c.trial_entitlement_grant_status === "granted" ? "#16a34a" : "#b91c1c" }}>
+                  {TRIAL_GRANT_STATUS_LABEL[c.trial_entitlement_grant_status]}
+                  {c.trial_entitlement_grant_status === "failed" && c.trial_entitlement_grant_error && ` (${c.trial_entitlement_grant_error})`}
+                  {c.trial_entitlement_grant_status === "granted" && c.trial_entitlement_grant_expires_at &&
+                    ` · 만료: ${formatDateTime(c.trial_entitlement_grant_expires_at)}까지 체험수업이 시작해야 사용 가능`}
+                </p>
+              )}
+              <div className="flex flex-wrap gap-2 mt-3">
+                <button
+                  disabled={busyId === c.id}
+                  className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50"
+                  onClick={() => {
+                    setOutcomeOpenId(null);
+                    setRescheduleOpenId(rescheduleOpenId === c.id ? null : c.id);
+                    setRescheduleValue("");
+                  }}
+                >
+                  시간 변경
+                </button>
+                <button
+                  disabled={busyId === c.id}
+                  className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50"
+                  onClick={() => withBusy(c.id, () => cancelConsultationRequest(c.id, "관리자 취소"), "상담 취소")}
+                >
+                  취소
+                </button>
+                {/* 2026-09-06: Smart Notes 원본 연결 여부는 이제 결과 기록을 막지 않지만(비동기
+                    도착 산출물), 아직 연결 안 됐으면 수동 재처리 버튼은 그대로 노출한다 —
+                    completionReadiness가 아니라 원본 필드로 직접 판단(가능 여부와 무관). */}
+                {(c.status === "scheduled" || c.status === "completed") &&
+                  !c.smart_notes_drive_file_id &&
+                  c.smart_notes_config_status === "applied" && (
+                  <button
+                    disabled={busyId === c.id}
+                    className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50"
+                    onClick={() => withBusy(c.id, () => retryConsultationSmartNotesConfig(c.id), "Smart Notes 재처리")}
+                  >
+                    Smart Notes 재처리
+                  </button>
+                )}
+                {c.outcome === "trial_recommended" && c.trial_entitlement_grant_status === "failed" && (
+                  <button
+                    disabled={busyId === c.id}
+                    className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50"
+                    onClick={() => withBusy(c.id, () => retryTrialEntitlementGrant(c.id), "체험수업권 지급 재처리")}
+                  >
+                    체험수업권 지급 재처리
+                  </button>
+                )}
+                <button
+                  disabled={
+                    busyId === c.id || (c.completionReadiness !== "ready" && c.completionReadiness !== "summary_missing")
+                  }
+                  title={
+                    c.completionReadiness !== "ready" && c.completionReadiness !== "summary_missing"
+                      ? COMPLETION_READINESS_LABEL[c.completionReadiness]
+                      : undefined
+                  }
+                  className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50"
+                  onClick={() => {
+                    setRescheduleOpenId(null);
+                    setOutcomeOpenId(outcomeOpenId === c.id ? null : c.id);
+                    setOutcomeSummary("");
+                    setOutcomeValue("");
+                  }}
+                >
+                  상담 결과 기록
+                </button>
+              </div>
+
+              {rescheduleOpenId === c.id && (
+                <form
+                  className="mt-3 flex flex-wrap items-end gap-2 border-t border-grey-200 pt-3"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    if (!rescheduleValue) return;
+                    withBusy(c.id, () => rescheduleConsultationRequest(c.id, new Date(rescheduleValue).toISOString(), "관리자 시간 변경")).then(
+                      () => setRescheduleOpenId(null)
+                    );
+                  }}
+                >
+                  <label className="text-[12px] text-ink">
+                    새 상담 시간
+                    <input
+                      type="datetime-local"
+                      required
+                      value={rescheduleValue}
+                      onChange={(e) => setRescheduleValue(e.target.value)}
+                      className="block mt-1 px-2 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12px]"
+                    />
+                  </label>
+                  <button type="submit" disabled={busyId === c.id} className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50">
+                    변경 확정
+                  </button>
+                  <button type="button" className="text-[12px] text-grey-500" onClick={() => setRescheduleOpenId(null)}>
+                    취소
+                  </button>
+                </form>
+              )}
+
+              {outcomeOpenId === c.id && (
+                <form
+                  className="mt-3 flex flex-col gap-2 border-t border-grey-200 pt-3"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    if (!outcomeValue || outcomeSummary.trim() === "") return;
+                    withBusy(c.id, async () => {
+                      const result = await recordConsultationOutcome({
+                        consultationId: c.id,
+                        outcome: outcomeValue,
+                        notes: "",
+                        adminReviewSummary: outcomeSummary,
+                      });
+                      if (!result.ok) throw new Error(result.error);
+                    }).then(() => setOutcomeOpenId(null));
+                  }}
+                >
+                  <label className="text-[12px] text-ink">
+                    관리자 검토 요약(고객 노출 가능, Smart Notes 원본은 자동 공개되지 않습니다 — 공백 불가)
+                    <textarea
+                      required
+                      value={outcomeSummary}
+                      onChange={(e) => setOutcomeSummary(e.target.value)}
+                      className="block w-full mt-1 px-2 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12px] min-h-[60px]"
+                    />
+                  </label>
+                  <label className="text-[12px] text-ink">
+                    상담 결과
+                    <select
+                      required
+                      value={outcomeValue}
+                      onChange={(e) => setOutcomeValue(e.target.value as typeof outcomeValue)}
+                      className="block mt-1 px-2 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12px]"
+                    >
+                      <option value="">선택하세요</option>
+                      {Object.entries(OUTCOME_LABEL).map(([value, label]) => (
+                        <option key={value} value={value}>{label}</option>
+                      ))}
+                    </select>
+                  </label>
+                  <div className="flex gap-2">
+                    <button type="submit" disabled={busyId === c.id} className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50">
+                      기록 저장
+                    </button>
+                    <button type="button" className="text-[12px] text-grey-500" onClick={() => setOutcomeOpenId(null)}>
+                      취소
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
+          ));
+        })()}
+      </section>
+
+      {/* 2026-09-07 — 제품 오너 지적: 정상 운영 중에는 이 구독이 자동으로 생성·갱신되고
+          (수락/예약 확정 시점, docs/CURRENT.md "Workspace Events 구독 수명주기" 참고),
+          만료 임박 자동 재시도도 이미 있어 관리자가 평소에 볼 필요가 거의 없는
+          디버그 정보다. 다만 자동 갱신이 실패했을 때(예: 인증/쿼터 문제)는 실제로
+          여기서 수동 재시도해야 하는 운영 도구이므로 완전히 지우지 않고 기본 접힘
+          섹션으로만 옮긴다. */}
+      <details className="mb-8">
+        <summary className="text-[14px] font-extrabold text-ink cursor-pointer select-none">
+          고급/운영 도구 — Workspace Events 구독 상태
+        </summary>
+        <div className="flex gap-2 mt-2 mb-2">
+          <button
+            className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5"
+            onClick={() => withBusy("__renew_subscriptions", async () => { await retryExpiringWorkspaceEventsSubscriptions(); }, "만료 임박 구독 갱신")}
+          >
+            만료 임박 구독 갱신 실행
+          </button>
+          <button
+            className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5"
+            onClick={() => withBusy("__reconcile_smart_notes", async () => { await runSmartNotesReconciliation(); }, "Smart Notes 사후 대조")}
+          >
+            Smart Notes 사후 대조 실행
+          </button>
+        </div>
+        {subscriptions.length === 0 ? (
+          <p className="text-[13px] text-grey-500">등록된 구독이 없습니다(상담·수업이 아직 확정되지 않았거나 전부 신규).</p>
+        ) : (
+          subscriptions.map((s) => (
+            <div key={s.id} className="mb-2">
+              <p className="text-[12.5px] text-grey-700">
+                {s.organizer_email}({s.organizer_role === "consult_organizer" ? "상담 관리자" : "선생님"}) —{" "}
+                <span style={{ color: s.status === "active" ? "#16a34a" : "#b91c1c" }}>{SUBSCRIPTION_STATUS_LABEL[s.status] ?? s.status}</span>
+                {s.expires_at && ` · 만료: ${formatDateTime(s.expires_at)}`}
+                {s.last_error && ` · 최근 오류: ${s.last_error}`}
+              </p>
+              {s.status !== "disabled" && (
+                disableOpenOrganizer === s.organizer_email ? (
+                  <form
+                    className="flex items-center gap-2 mt-1"
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      if (!disableReason.trim()) return;
+                      withBusy(s.id, () => disableWorkspaceEventsSubscriptionForOrganizer(s.organizer_email, disableReason)).then(
+                        () => setDisableOpenOrganizer(null)
+                      );
+                    }}
+                  >
+                    <input
+                      required
+                      placeholder="정지·삭제 사유"
+                      value={disableReason}
+                      onChange={(e) => setDisableReason(e.target.value)}
+                      className="px-2 py-1 border-[1.5px] border-grey-200 rounded-lg text-[12px]"
+                    />
+                    <button type="submit" disabled={busyId === s.id} className="text-[12px] font-bold text-white bg-red rounded-lg px-3 py-1 disabled:opacity-50">
+                      정지·삭제 확정
+                    </button>
+                    <button type="button" className="text-[12px] text-grey-500" onClick={() => setDisableOpenOrganizer(null)}>
+                      취소
+                    </button>
+                  </form>
+                ) : (
+                  <button
+                    disabled={busyId === s.id}
+                    className="text-[12px] text-red underline mt-0.5 disabled:opacity-50"
+                    onClick={() => {
+                      setDisableOpenOrganizer(s.organizer_email);
+                      setDisableReason("");
+                    }}
+                  >
+                    구독 정지·삭제
+                  </button>
+                )
+              )}
+            </div>
+          ))
+        )}
+      </details>
+
+      <section>
+        <div className="flex items-center justify-between mb-2">
+          <h2 className="text-[14px] font-extrabold text-ink">공용 상담 가능시간</h2>
+          <div className="flex gap-1">
+            {(["grid", "list"] as const).map((v) => (
+              <button
+                key={v}
+                onClick={() => setRulesView(v)}
+                className={
+                  "text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] " +
+                  (rulesView === v ? "bg-ink text-white border-ink" : "border-grey-200 text-ink")
+                }
+              >
+                {v === "grid" ? "주간 그리드" : "목록"}
+              </button>
+            ))}
+          </div>
+        </div>
+        <ConsultAvailabilityMonthView
+          timezone={timezone}
+          rules={rules}
+          exceptions={exceptions}
+          busyId={busyId}
+          onAddFullDayException={({ date, isClosed }) =>
+            withBusy("__consult_exception_full", () => addConsultAvailabilityException({ date, isClosed, reason: "관리자 등록" }))
+          }
+          onAddPartialException={({ date, isClosed, startTime, endTime }) =>
+            withBusy("__consult_exception_partial", () =>
+              addConsultAvailabilityException({ date, isClosed, startTime, endTime, reason: "관리자 등록(부분 시간)" })
+            )
+          }
+          onRemoveException={(exceptionId) => withBusy(exceptionId, () => removeConsultAvailabilityException(exceptionId), "예외 삭제")}
+        />
+
+        <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">
+          <p className="text-[12.5px] font-bold text-ink mb-2">반복 주간 가능시간</p>
+
+          {rulesView === "grid" ? (
+            rules.filter((r) => r.active).length === 0 ? (
+              <p className="text-[12.5px] text-grey-500 mb-2">등록된 반복 가능시간이 없습니다.</p>
+            ) : (
+              <div className="mb-2">
+                <WeeklyAvailabilityGrid
+                  rules={rules
+                    .filter((r) => r.active)
+                    .map((r) => ({ id: r.id, weekday: r.weekday, startTime: r.start_time, endTime: r.end_time }))}
+                  onDeleteRule={(ruleId) => withBusy(ruleId, () => deactivateConsultAvailabilityRule(ruleId), "가능시간 삭제")}
+                />
+                <p className="text-[11px] text-grey-500 mt-1">블록을 클릭하면 해당 가능시간이 비활성화됩니다.</p>
+              </div>
+            )
+          ) : rules.length === 0 ? (
+            <p className="text-[12.5px] text-grey-500 mb-2">등록된 반복 가능시간이 없습니다.</p>
+          ) : (
+            rules.map((r) => (
+              <p key={r.id} className="text-[12.5px] text-grey-700 mb-1">
+                {WEEKDAY_LABEL[r.weekday]}요일 {r.start_time}~{r.end_time}
+                {r.active && (
+                  <button
+                    className="ml-2 underline text-red"
+                    onClick={() => withBusy(r.id, () => deactivateConsultAvailabilityRule(r.id), "가능시간 삭제")}
+                  >
+                    비활성화
+                  </button>
+                )}
+              </p>
+            ))
+          )}
+
+          {ruleFormOpen ? (
+            <form
+              className="mt-3 flex flex-wrap items-end gap-2 border-t border-grey-200 pt-3"
+              onSubmit={async (e) => {
+                e.preventDefault();
+                setRuleError(null);
+                setBusyId("__rule");
+                try {
+                  await addConsultAvailabilityRule({ weekday: ruleWeekday, startTime: ruleStart, endTime: ruleEnd });
+                  await reload();
+                  setRuleFormOpen(false);
+                } catch (err) {
+                  setRuleError(err instanceof Error ? err.message : String(err));
+                } finally {
+                  setBusyId(null);
+                }
+              }}
+            >
+              <label className="text-[12px] text-ink">
+                요일
+                <select
+                  className="block mt-1 border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[13px]"
+                  value={ruleWeekday}
+                  onChange={(e) => setRuleWeekday(Number(e.target.value))}
+                >
+                  {WEEKDAY_LABEL.map((label, idx) => (
+                    <option key={idx} value={idx}>{label}요일</option>
+                  ))}
+                </select>
+              </label>
+              <label className="text-[12px] text-ink">
+                시작
+                <input
+                  type="time"
+                  required
+                  className="block mt-1 border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[13px]"
+                  value={ruleStart}
+                  onChange={(e) => setRuleStart(e.target.value)}
+                />
+              </label>
+              <label className="text-[12px] text-ink">
+                종료
+                <input
+                  type="time"
+                  required
+                  className="block mt-1 border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[13px]"
+                  value={ruleEnd}
+                  onChange={(e) => setRuleEnd(e.target.value)}
+                />
+              </label>
+              <button type="submit" disabled={busyId === "__rule"} className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50">
+                추가
+              </button>
+              <button type="button" className="text-[12px] text-grey-500" onClick={() => setRuleFormOpen(false)}>
+                취소
+              </button>
+              {ruleError && <p className="w-full text-[12px] text-red">{ruleError}</p>}
+            </form>
+          ) : (
+            <button
+              className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 mt-2"
+              onClick={() => {
+                setRuleError(null);
+                setRuleFormOpen(true);
+              }}
+            >
+              반복 가능시간 추가
+            </button>
+          )}
+        </div>
+
+        <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4">
+          <p className="text-[12.5px] font-bold text-ink mb-2">날짜별 예외(휴무)</p>
+          {exceptions.length === 0 ? (
+            <p className="text-[12.5px] text-grey-500 mb-2">등록된 예외가 없습니다.</p>
+          ) : (
+            exceptions.map((ex) => (
+              <p key={ex.id} className="text-[12.5px] text-grey-700 mb-1">
+                {ex.exception_date} —{" "}
+                {ex.is_closed
+                  ? ex.start_time
+                    ? `${ex.start_time}~${ex.end_time} 부분 휴무`
+                    : "종일 휴무"
+                  : `${ex.start_time}~${ex.end_time} 임시 오픈`}
+                {ex.reason && ` (${ex.reason})`}
+                <button className="ml-2 underline text-red" onClick={() => withBusy(ex.id, () => removeConsultAvailabilityException(ex.id), "예외 삭제")}>
+                  삭제
+                </button>
+              </p>
+            ))
+          )}
+
+          {exceptionFormOpen ? (
+            <form
+              className="mt-3 flex flex-wrap items-end gap-2 border-t border-grey-200 pt-3"
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (!exceptionDate) return;
+                withBusy("__exception", () =>
+                  addConsultAvailabilityException({ date: exceptionDate, isClosed: true, reason: "관리자 등록 휴무" })
+                ).then(() => setExceptionFormOpen(false));
+              }}
+            >
+              <label className="text-[12px] text-ink">
+                휴무 날짜
+                <input
+                  type="date"
+                  required
+                  className="block mt-1 border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[13px]"
+                  value={exceptionDate}
+                  onChange={(e) => setExceptionDate(e.target.value)}
+                />
+              </label>
+              <button type="submit" disabled={busyId === "__exception"} className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50">
+                추가
+              </button>
+              <button type="button" className="text-[12px] text-grey-500" onClick={() => setExceptionFormOpen(false)}>
+                취소
+              </button>
+            </form>
+          ) : (
+            <button
+              className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 mt-2"
+              onClick={() => {
+                setExceptionDate("");
+                setExceptionFormOpen(true);
+              }}
+            >
+              휴무일 추가
+            </button>
+          )}
+        </div>
+      </section>
+    </div>
+  );
+}
