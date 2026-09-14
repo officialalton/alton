@@ -3,7 +3,13 @@
 import { requireUser } from "@/lib/auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import type { StrokePayload } from "./annotation-events-types";
-import { loadSessionProblems, type ProblemGrade, type SessionProblem } from "./session-problem-data";
+import {
+  loadHomeworkProblems,
+  loadSessionProblems,
+  type ProblemGrade,
+  type ProblemSource,
+  type SessionProblem,
+} from "./session-problem-data";
 
 // P3 4단계(제품 오너 피드백 5) — 문제별 풀이 화이트보드를 실제 학습 흐름에
 // 연결한다. 풀이판은 (수업, 학생, 문제, 재풀이 회차) 하나를 가리키고, 모든
@@ -346,7 +352,10 @@ export async function gradeProblemAttempt(params: {
 }
 
 /** 문제 목록을 지금 보는 사람 기준으로 다시 읽는다(채점 알림을 받은 학생 화면이 쓴다). */
-export async function refreshSessionProblems(sessionId: string): Promise<SessionProblem[]> {
+export async function refreshSessionProblems(
+  sessionId: string,
+  source: ProblemSource = "lesson"
+): Promise<SessionProblem[]> {
   const { user, supabase } = await requireUser();
   const admin = createAdminClient();
   const [{ data: session }, { data: profile }] = await Promise.all([
@@ -362,10 +371,10 @@ export async function refreshSessionProblems(sessionId: string): Promise<Session
     : session?.subject_enrollment;
   const studentId = (enrollment as { child_id?: string } | null)?.child_id ?? null;
   const role = (profile?.role as string | undefined) ?? "";
-  return loadSessionProblems(supabase, sessionId, {
-    canSeeAnswers: role === "teacher" || role === "admin",
-    studentId,
-  });
+  const viewer = { canSeeAnswers: role === "teacher" || role === "admin", studentId };
+  return source === "homework"
+    ? loadHomeworkProblems(supabase, sessionId, viewer)
+    : loadSessionProblems(supabase, sessionId, viewer);
 }
 
 function readable(message: string): string {

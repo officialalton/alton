@@ -5,6 +5,7 @@ import {
   createCurriculumDoc,
   getCurriculumDocDetailAction,
   setDocArchived,
+  updateDocTitle,
 } from "./curriculum-doc-actions";
 import CurriculumDocEditor from "./CurriculumDocEditor";
 import type { DocEditorData, CurriculumDocListItem } from "./curriculum-doc-data";
@@ -69,6 +70,17 @@ export default function CurriculumDocsTab({
     } finally {
       setPublishingAssetId(null);
     }
+  }
+
+  // 2026-09-14 UAT — Drive 파일명이 그대로 교재 이름이라 화면에서 잘렸다. 표시 이름을 따로 정한다.
+  // Drive 원본 이름(source_drive_name)은 그대로 남고, 다시 동기화해도 이 이름을 덮어쓰지 않는다.
+  async function renameDoc(docId: string, current: string) {
+    const next = typeof window !== "undefined" ? window.prompt("화면에 보일 교재 이름", current) : null;
+    if (next === null) return;
+    const title = next.trim();
+    if (!title || title === current) return;
+    await updateDocTitle(docId, title);
+    setDocs((prev) => prev.map((d) => (d.id === docId ? { ...d, title } : d)));
   }
 
   async function toggleArchived(docId: string, archived: boolean) {
@@ -318,6 +330,15 @@ export default function CurriculumDocsTab({
                 >
                   {d.archivedAt ? "보관 풀기" : "보관"}
                 </button>
+                {d.kind !== "html" && (
+                  <button
+                    onClick={() => void renameDoc(d.id, d.title)}
+                    title="Drive 파일명 대신 화면에 보일 이름을 정합니다"
+                    className="text-[12px] font-bold text-grey-500 whitespace-nowrap"
+                  >
+                    이름 바꾸기
+                  </button>
+                )}
                 {d.kind === "html" ? (
                   <button
                     onClick={() => openDoc(d.id)}

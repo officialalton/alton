@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { RealtimeChannel } from "@supabase/supabase-js";
 import { createClient } from "@/utils/supabase/client";
-import type { ProblemGrade, SessionProblem } from "./session-problem-data";
+import type { ProblemGrade, ProblemSource, SessionProblem } from "./session-problem-data";
 import type { ProblemWorkBoard as Board } from "./problem-work-actions";
 import {
   answerMcChoice,
@@ -55,6 +55,7 @@ export default function ProblemsPanel({
   problems: initialProblems,
   viewerRole,
   viewerUserId,
+  source = "lesson",
 }: {
   sessionId: string;
   studentId: string;
@@ -62,7 +63,10 @@ export default function ProblemsPanel({
   viewerRole: "student" | "teacher" | "parent" | "admin";
   /** 지금 보고 있는 사람 — 미저장 필기를 계정별로 갈라 두는 데 쓴다. */
   viewerUserId?: string;
+  /** 수업 문제 / 과제 문제(2026-09-14 과제 v3 통일) — 풀이·채점 흐름은 같고 말과 출처만 다르다. */
+  source?: ProblemSource;
 }) {
+  const noun = source === "homework" ? "과제" : "문제";
   const [problems, setProblems] = useState(initialProblems);
   // 서버가 새 목록을 내려주면(페이지 재렌더) 그것을 따른다 — 렌더 중 상태 맞추기.
   const [seenInitial, setSeenInitial] = useState(initialProblems);
@@ -95,7 +99,8 @@ export default function ProblemsPanel({
       else next.add(id);
       return next;
     });
-  const answerShown = (p: SessionProblem) => (isTeacherLike ? revealed.has(p.problemId) : p.graded);
+  // 채점이 끝난 문제는 누구에게나 정답이 초록으로 표시된다(2026-09-14 UAT). 교사는 채점 전에도 펼쳐 볼 수 있다.
+  const answerShown = (p: SessionProblem) => p.graded || (isTeacherLike && revealed.has(p.problemId));
 
   // 채점 초안(교사) — 문제마다.
   const [gradeDraft, setGradeDraft] = useState<Record<string, { grade: ProblemGrade | null; comment: string }>>({});
@@ -110,25 +115,25 @@ export default function ProblemsPanel({
   // 상대 화면의 변화(학생이 답함 / 교사가 채점함)를 받아 목록을 다시 읽는다.
   const refresh = useCallback(async () => {
     try {
-      const next = await refreshSessionProblems(sessionId);
+      const next = await refreshSessionProblems(sessionId, source);
       // 문제가 있던 수업이 비어서 돌아오면(권한·일시 오류) 지금 화면을 지우지 않는다.
       if (next.length > 0) setProblems(next);
     } catch {
       // 다시 읽기 실패 — 지금 화면을 그대로 둔다. 다음 알림에서 또 시도한다.
     }
-  }, [sessionId]);
+  }, [sessionId, source]);
 
   useEffect(() => {
     if (anyPlanned || problems.length === 0) return;
     const supabase = createClient();
-    const channel = supabase.channel(`session-problems:${sessionId}`);
+    const channel = supabase.channel(`session-problems:${sessionId}:${source}`);
     channel.on("broadcast", { event: "changed" }, () => void refresh()).subscribe();
     channelRef.current = channel;
     return () => {
       channelRef.current = null;
       supabase.removeChannel(channel);
     };
-  }, [sessionId, anyPlanned, problems.length, refresh]);
+  }, [sessionId, source, anyPlanned, problems.length, refresh]);
 
   const notifyChanged = () =>
     channelRef.current?.send({ type: "broadcast", event: "changed", payload: {} });
@@ -238,9 +243,13 @@ export default function ProblemsPanel({
   if (problems.length === 0) {
     return (
       <div className="max-w-[760px] mx-auto px-6 py-12 text-center">
-        <p className="text-[14px] font-bold text-ink mb-1">이 수업에는 문제가 없습니다</p>
+        <p className="text-[14px] font-bold text-ink mb-1">
+          {source === "homework" ? "아직 발급된 과제가 없습니다" : "이 수업에는 문제가 없습니다"}
+        </p>
         <p className="text-[12.5px] text-grey-500">
-          선생님이 준비한 문제가 수업 시작 시점에 여기에 담깁니다.
+          {source === "homework"
+            ? "선생님이 발급하면 여기에 나타납니다."
+            : "선생님이 준비한 문제가 수업 시작 시점에 여기에 담깁니다."}
         </p>
       </div>
     );
@@ -249,11 +258,11 @@ export default function ProblemsPanel({
   return (
     <div className="md:grid md:grid-cols-[200px_1fr]">
       <nav
-        aria-label="문제 목차"
+        aria-label={`${noun} 목차`}
         className="border-b md:border-b-0 md:border-r border-grey-200 p-4 md:sticky md:top-0 md:self-start md:h-[calc(100vh-56px)] md:overflow-y-auto flex md:block gap-1.5 overflow-x-auto"
       >
         <div className="hidden md:block text-[10.5px] font-extrabold text-grey-300 uppercase tracking-wider px-2 mb-1">
-          문제 목차
+          {noun} 목차
         </div>
         {problems.map((p, idx) => {
           const badge = tocBadge(p);
@@ -270,7 +279,7 @@ export default function ProblemsPanel({
                 (idx === safeCurrent ? "bg-red-bg text-red font-bold" : "text-ink hover:bg-grey-100")
               }
             >
-              <span>문제 {p.number}</span>
+              <span>{noun} {p.number}</span>
               {badge && <span className={"text-[10.5px] font-bold " + badge.className}>{badge.text}</span>}
             </button>
           );
@@ -294,7 +303,7 @@ export default function ProblemsPanel({
               }}
               className="text-[12px] font-bold px-3 py-1 rounded border border-grey-200 disabled:opacity-40"
             >
-              ← 이전 문제
+              ← 이전 {noun}
             </button>
             <button
               type="button"
@@ -305,7 +314,7 @@ export default function ProblemsPanel({
               }}
               className="text-[12px] font-bold px-3 py-1 rounded border border-grey-200 disabled:opacity-40"
             >
-              다음 문제 →
+              다음 {noun} →
             </button>
           </div>
         </div>
@@ -326,7 +335,7 @@ export default function ProblemsPanel({
               className="border-[1.5px] border-grey-200 rounded-2xl px-5 sm:px-7 py-6 mb-5 scroll-mt-[72px]"
             >
               <header className="flex flex-wrap items-center gap-2 mb-4">
-                <span className="text-[14px] font-extrabold text-ink">문제 {p.number}</span>
+                <span className="text-[14px] font-extrabold text-ink">{noun} {p.number}</span>
                 <span className="text-[10.5px] font-bold text-grey-500 border border-grey-200 rounded-full px-2 py-0.5">
                   {FORMAT_LABEL[p.format]}
                 </span>

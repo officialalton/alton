@@ -22,10 +22,7 @@ import VocabTab from "./VocabTab";
 import type { VocabEntry } from "./vocab-data";
 import HomeworkTab from "./HomeworkTab";
 import type { HomeworkItem } from "./homework-data";
-import type {
-  HomeworkKeywordOption,
-  SessionHomeworkStatusItem,
-} from "@/app/teacher/homework-composition-data";
+import type { IssuedHomeworkItem } from "./homework-v3-data";
 import type { StrokePayload } from "./annotation-events-types";
 import { finalizeMyLessonSession } from "@/app/teacher/lesson-schedule-actions";
 
@@ -90,8 +87,9 @@ export default function SessionShell({
   sessionProblems = [],
   lessonContext = { unitTitle: null, goal: null, supplementTitles: [], primaryUnitId: null },
   currentUserId,
-  homeworkKeywordOptions = [],
-  homeworkStatusItems = [],
+  homeworkProblems = [],
+  homeworkPool = [],
+  homeworkIssued = [],
 }: {
   sessionId: string;
   studentId: string;
@@ -147,13 +145,10 @@ export default function SessionShell({
   /** 이 수업이 커리큘럼의 어느 회차이고 그 목표가 무엇인지. */
   lessonContext?: SessionLessonContext;
   currentUserId: string;
-  // R9(레슨 준비 Task 4) — v3 세션에서 과제 구성(composeHomeworkFromSession) UI가
-  // 고를 수 있는 키워드 후보. legacy 세션에는 항상 빈 배열이 넘어온다(그 세션엔
-  // session_content_manifest 자체가 없다).
-  homeworkKeywordOptions?: HomeworkKeywordOption[];
-  // Gap 2 (2026-09-08) — v3 세션에서 발급된 과제의 학생 제출 현황(읽기전용).
-  // legacy 세션·student/parent 뷰어에는 항상 빈 배열이 넘어온다.
-  homeworkStatusItems?: SessionHomeworkStatusItem[];
+  // 2026-09-14 과제 v3 통일 — 과제 문제(수업 문제와 같은 패널), 교사 발급 풀·발급 목록.
+  homeworkProblems?: SessionProblem[];
+  homeworkPool?: KeywordProblem[];
+  homeworkIssued?: IssuedHomeworkItem[];
 }) {
   const router = useRouter();
   const isTeacher = viewerRole === "teacher";
@@ -513,12 +508,16 @@ export default function SessionShell({
       ) : activeTab === "homework" ? (
         <HomeworkTab
           sessionId={sessionId}
+          studentId={studentId}
+          viewerUserId={currentUserId}
           initialItems={homeworkList}
           viewerRole={contentViewerRole}
           sessionSource={sessionSource}
           realViewerRole={viewerRole}
-          keywordOptions={homeworkKeywordOptions}
-          homeworkStatusItems={homeworkStatusItems}
+          homeworkProblems={homeworkProblems}
+          pool={homeworkPool}
+          issued={homeworkIssued}
+          usedInLessonIds={sessionProblems.map((p) => p.problemId)}
         />
       ) : activeTab === "prep" ? (
         prep ? (

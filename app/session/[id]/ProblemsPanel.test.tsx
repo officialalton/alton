@@ -281,7 +281,7 @@ describe("ProblemsPanel — 교사", () => {
     expect(screen.getByText(/자동 채점\(정답\)대로 확정/)).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: "채점 완료" }));
     await waitFor(() => expect(gradeProblemAttempt).toHaveBeenCalledWith({ workId: "w1", grade: null, comment: "" }));
-    expect(refreshSessionProblems).toHaveBeenCalledWith("s1");
+    expect(refreshSessionProblems).toHaveBeenCalledWith("s1", "lesson");
     expect(sent.length).toBeGreaterThan(0);
   });
 

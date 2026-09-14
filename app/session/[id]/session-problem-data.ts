@@ -77,6 +77,8 @@ function toFormat(raw: string | null | undefined): ProblemFormat {
   return raw === "essay" || raw === "math" ? raw : "mc";
 }
 
+export type ProblemSource = "lesson" | "homework";
+
 export async function loadSessionProblems(
   supabase: SupabaseClient,
   sessionId: string,
@@ -90,17 +92,60 @@ export async function loadSessionProblems(
     .order("display_position", { ascending: true });
   if (error) throw new Error(error.message);
   if (!rows?.length) return [];
+  return buildSessionProblems(
+    supabase,
+    sessionId,
+    viewer,
+    rows.map((r) => ({ problemId: r.content_id as string, versionId: (r.problem_version_id as string | null) ?? null }))
+  );
+}
 
+/**
+ * 과제 문제(2026-09-14 과제 v3 통일) — 발급 원본은 session_homework_items, 답·채점은 수업 문제와 같은
+ * session_problem_work. 버전은 발급 시 고정한 것(없는 옛 항목은 현재 공개본).
+ */
+export async function loadHomeworkProblems(
+  supabase: SupabaseClient,
+  sessionId: string,
+  viewer: SessionProblemViewer
+): Promise<SessionProblem[]> {
+  const { data: rows, error } = await supabase
+    .from("session_homework_items")
+    .select("problem_id, problem_version_id, position")
+    .eq("session_id", sessionId)
+    .order("position", { ascending: true });
+  if (error) throw new Error(error.message);
+  if (!rows?.length) return [];
+  const missing = rows.filter((r) => !r.problem_version_id).map((r) => r.problem_id as string);
+  const publishedByProblem = new Map<string, string>();
+  if (missing.length) {
+    const { data } = await supabase.from("problems").select("id, published_version_id").in("id", missing);
+    for (const p of data ?? []) if (p.published_version_id) publishedByProblem.set(p.id as string, p.published_version_id as string);
+  }
+  return buildSessionProblems(
+    supabase,
+    sessionId,
+    viewer,
+    rows.map((r) => ({
+      problemId: r.problem_id as string,
+      versionId: (r.problem_version_id as string | null) ?? publishedByProblem.get(r.problem_id as string) ?? null,
+    }))
+  );
+}
+
+async function buildSessionProblems(
+  supabase: SupabaseClient,
+  sessionId: string,
+  viewer: SessionProblemViewer,
+  rows: { problemId: string; versionId: string | null }[]
+): Promise<SessionProblem[]> {
   // 고정된 버전만 읽는다.
   //
   // 2026-09-13 정정: 예전에는 problem_version_id 가 비어 있으면 **현재 공개 버전으로
   // 대체**했다. 그러면 그 수업이 실제로 낸 문제가 아닌 것을 그 수업의 문제처럼
   // 보여주게 되고, 이후 문제를 고칠 때마다 과거 수업이 달라진다. 복원할 근거가
   // 없으면 없다고 말한다.
-  const pinnedVersionIds = rows
-    .map((r) => r.problem_version_id as string | null)
-    .filter((v): v is string => Boolean(v));
-
+  const pinnedVersionIds = rows.map((r) => r.versionId).filter((v): v is string => Boolean(v));
   const versionById = new Map<string, Record<string, unknown>>();
   if (pinnedVersionIds.length) {
     const { data, error: versionError } = await supabase
@@ -168,10 +213,8 @@ export async function loadSessionProblems(
   }
 
   return rows.map((r, index) => {
-    const problemId = r.content_id as string;
-    const version = r.problem_version_id
-      ? versionById.get(r.problem_version_id as string)
-      : undefined;
+    const problemId = r.problemId;
+    const version = r.versionId ? versionById.get(r.versionId) : undefined;
     const state = attemptsByProblemId.get(problemId) ?? emptyState();
     // 버전이 없거나 그 버전 행이 사라졌다 — 당시 내용을 확인할 수 없다.
     const preservedUnavailable = !version;

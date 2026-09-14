@@ -89,3 +89,89 @@ export async function loadStudentHomeworkV3(
     };
   });
 }
+
+
+// 2026-09-14 과제 v3 통일 — 학생 포털은 회차별 과제 묶음만 보여주고, 풀이는 그 수업 화면의 과제 탭에서 한다.
+export type StudentHomeworkSet = {
+  sessionId: string;
+  subjectName: string;
+  /** 수업 예정/진행 시각 — 없으면 null. */
+  startsAt: string | null;
+  total: number;
+  answered: number;
+  graded: number;
+  /** 가장 최근 발급 시각. */
+  composedAt: string;
+};
+
+export async function loadStudentHomeworkSets(
+  supabase: SupabaseClient,
+  studentId: string
+): Promise<StudentHomeworkSet[]> {
+  const { data: items } = await supabase
+    .from("session_homework_items")
+    .select("session_id, problem_id, composed_at")
+    .eq("student_id", studentId)
+    .order("composed_at", { ascending: false });
+  if (!items?.length) return [];
+
+  const sessionIds = Array.from(new Set(items.map((i) => i.session_id as string)));
+  const [{ data: sessions }, { data: work }] = await Promise.all([
+    supabase
+      .from("sessions")
+      .select(
+        "id, reservation:reservations!sessions_reservation_id_fkey(starts_at), subject_enrollment:subject_enrollments!sessions_subject_enrollment_id_fkey(subject:subjects(name))"
+      )
+      .in("id", sessionIds),
+    supabase
+      .from("session_problem_work")
+      .select("session_id, problem_id, submitted_at, graded_at")
+      .eq("student_id", studentId)
+      .in("session_id", sessionIds),
+  ]);
+  const one = (rel: unknown) => (Array.isArray(rel) ? rel[0] : rel) as Record<string, unknown> | null | undefined;
+  const sessionById = new Map(
+    (sessions ?? []).map((s) => {
+      const enrollment = one(s.subject_enrollment);
+      const subject = one(enrollment?.subject);
+      return [
+        s.id as string,
+        {
+          startsAt: ((one(s.reservation)?.starts_at as string | undefined) ?? null) as string | null,
+          subjectName: ((subject?.name as string | undefined) ?? "") as string,
+        },
+      ];
+    })
+  );
+  const workKey = (sessionId: string, problemId: string) => `${sessionId}:${problemId}`;
+  const answered = new Set<string>();
+  const graded = new Set<string>();
+  for (const w of work ?? []) {
+    const key = workKey(w.session_id as string, w.problem_id as string);
+    if (w.submitted_at) answered.add(key);
+    if (w.graded_at) graded.add(key);
+  }
+
+  const sets = new Map<string, StudentHomeworkSet>();
+  for (const item of items) {
+    const sessionId = item.session_id as string;
+    const meta = sessionById.get(sessionId);
+    const set =
+      sets.get(sessionId) ??
+      {
+        sessionId,
+        subjectName: meta?.subjectName ?? "",
+        startsAt: meta?.startsAt ?? null,
+        total: 0,
+        answered: 0,
+        graded: 0,
+        composedAt: item.composed_at as string,
+      };
+    set.total += 1;
+    const key = workKey(sessionId, item.problem_id as string);
+    if (answered.has(key)) set.answered += 1;
+    if (graded.has(key)) set.graded += 1;
+    sets.set(sessionId, set);
+  }
+  return Array.from(sets.values());
+}

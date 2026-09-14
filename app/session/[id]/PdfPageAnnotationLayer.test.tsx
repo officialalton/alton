@@ -204,6 +204,7 @@ describe("PDF 페이지 필기 레이어", () => {
     await enableDrawing();
     fireEvent.click(screen.getByRole("button", { name: "T 텍스트" }));
     fireEvent.pointerDown(screen.getByTestId("pdf-input-layer"), { clientX: 120, clientY: 40 });
+    fireEvent.pointerUp(screen.getByTestId("pdf-input-layer"), { clientX: 120, clientY: 40 });
     const box = screen.getByTestId("pdf-text-input");
     fireEvent.change(box, { target: { value: "핵심 문장" } });
     fireEvent.keyDown(box, { key: "Enter" });
@@ -215,7 +216,7 @@ describe("PDF 페이지 필기 레이어", () => {
     expect(call.segments).toHaveLength(1);
     expect(call.segments[0]).toMatchObject({ tool: "text", text: "핵심 문장", x0: 120, y0: 40 });
     // 빈 글은 저장하지 않는다.
-    fireEvent.pointerDown(screen.getByTestId("pdf-input-layer"), { clientX: 10, clientY: 10 });
+    fireEvent.pointerUp(screen.getByTestId("pdf-input-layer"), { clientX: 10, clientY: 10 });
     fireEvent.keyDown(screen.getByTestId("pdf-text-input"), { key: "Escape" });
     expect(ref.current?.hasUnsaved()).toBe(false);
   });

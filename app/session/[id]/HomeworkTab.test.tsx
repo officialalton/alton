@@ -1,207 +1,126 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi, beforeEach } from "vitest";
 import HomeworkTab from "./HomeworkTab";
-import * as homeworkActions from "./homework-actions";
+import { issueHomework, withdrawHomework } from "./homework-v3-actions";
+import type { SessionProblem } from "./session-problem-data";
 
-vi.mock("./homework-actions", () => ({
-  saveHomeworkAnswer: vi.fn().mockResolvedValue(undefined),
-  addHomeworkItem: vi.fn(),
+vi.mock("./homework-v3-actions", () => ({
+  issueHomework: vi.fn(),
+  withdrawHomework: vi.fn(),
+}));
+// 과제 문제 패널은 수업 문제 패널 그대로다 — 여기서는 어떤 출처로 그려지는지만 본다.
+vi.mock("./ProblemsPanel", () => ({
+  default: ({ problems, source }: { problems: SessionProblem[]; source?: string }) => (
+    <div data-testid="problems-panel" data-source={source}>
+      {problems.length === 0 ? "아직 발급된 과제가 없습니다" : problems.map((p) => <div key={p.problemId}>과제 {p.number}</div>)}
+    </div>
+  ),
 }));
 
-vi.mock("@/app/teacher/homework-composition-actions", () => ({
-  composeHomeworkFromSession: vi.fn().mockResolvedValue([]),
-}));
-
-const items = [
-  {
-    id: "hw1",
-    title: "이차방정식 응용 문제 10선",
-    description: "다음 문제를 풀어보세요.",
-    studentAnswer: "",
-  },
+const pool = [
+  { problemId: "p1", label: "songbirds …", difficulty: "medium", format: "mc" },
+  { problemId: "p2", label: "coral reefs …", difficulty: null, format: "essay" },
+  { problemId: "p3", label: "수업에서 다룬 것", difficulty: "hard", format: "math" },
 ];
 
-describe("HomeworkTab", () => {
-  it("배정된 과제가 없으면 안내 문구를 보여준다", () => {
-    render(
-      <HomeworkTab sessionId="s1" initialItems={[]} viewerRole="student" />
-    );
-    expect(screen.getByText("배정된 과제가 없습니다.")).toBeInTheDocument();
-  });
+const homeworkProblem: SessionProblem = {
+  number: 1, problemId: "p1", format: "mc", passage: "x", options: ["a", "b"], difficulty: null, correctIndex: null,
+  explanation: null, attempts: 0, solved: false, graded: false, grade: null, gradeComment: null, myChoice: null,
+  autoCorrect: null, latestWorkId: null,
+};
 
-  it("학생은 답안을 입력하고 포커스를 벗어나면 저장된다", async () => {
-    render(
-      <HomeworkTab sessionId="s1" initialItems={items} viewerRole="student" />
-    );
-    const textarea = screen.getByPlaceholderText("답안을 작성하세요");
-    fireEvent.change(textarea, { target: { value: "2번, 5번이 헷갈렸어요" } });
-    fireEvent.blur(textarea);
-    await waitFor(() =>
-      expect(homeworkActions.saveHomeworkAnswer).toHaveBeenCalledWith(
-        "hw1",
-        "2번, 5번이 헷갈렸어요"
-      )
-    );
-  });
-
-  it("선생님은 학생 제출 답안을 읽기전용으로 보고, 미제출이면 안내문구를 본다", () => {
-    render(
-      <HomeworkTab sessionId="s1" initialItems={items} viewerRole="teacher" />
-    );
-    expect(screen.getByText("아직 제출하지 않았습니다.")).toBeInTheDocument();
-    expect(
-      screen.queryByPlaceholderText("답안을 작성하세요")
-    ).not.toBeInTheDocument();
-  });
-
-  it("선생님은 '+ 과제 추가'로 새 과제를 만들 수 있고, 학생에게는 그 버튼이 없다", async () => {
-    vi.mocked(homeworkActions.addHomeworkItem).mockResolvedValue({
-      id: "hw2",
-      title: "새 과제",
-      description: null,
-      studentAnswer: null,
-    });
-
-    render(
-      <HomeworkTab sessionId="s1" initialItems={[]} viewerRole="teacher" />
-    );
-    expect(screen.queryByText("이 세션에는")).not.toBeInTheDocument();
-
-    fireEvent.click(screen.getByText("+ 과제 추가"));
-    fireEvent.change(screen.getByPlaceholderText("과제 제목"), {
-      target: { value: "새 과제" },
-    });
-    fireEvent.click(screen.getByText("추가하기"));
-
-    await waitFor(() =>
-      expect(homeworkActions.addHomeworkItem).toHaveBeenCalledWith(
-        "s1",
-        "새 과제",
-        ""
-      )
-    );
-    await waitFor(() =>
-      expect(screen.getByText("새 과제")).toBeInTheDocument()
-    );
-  });
-
-  it("학생 화면에는 과제 추가 버튼이 없다", () => {
-    render(
-      <HomeworkTab sessionId="s1" initialItems={items} viewerRole="student" />
-    );
-    expect(screen.queryByText("+ 과제 추가")).not.toBeInTheDocument();
-  });
+beforeEach(() => {
+  vi.clearAllMocks();
+  vi.mocked(issueHomework).mockResolvedValue({ ok: true, count: 1 });
+  vi.mocked(withdrawHomework).mockResolvedValue({ ok: true });
+  Object.defineProperty(window, "location", { configurable: true, value: { ...window.location, reload: vi.fn() } });
 });
 
-// Gap 2 (2026-09-08, 제품 오너 리뷰) — 담당 선생님/관리자의 읽기전용 제출 현황 뷰.
-describe("HomeworkTab — v3 과제 제출 현황(Gap 2, 읽기전용)", () => {
-  const statusItems = [
-    {
-      id: "shi1",
-      problemId: "p1",
-      position: 1,
-      format: "mc",
-      passage: "다음 중 소수는?",
-      options: ["4", "7", "9"],
-      status: "submitted" as const,
-      response: { type: "mc", selected: 1 },
-    },
-    {
-      id: "shi2",
-      problemId: "p2",
-      position: 2,
-      format: "essay",
-      passage: "요약하시오.",
-      options: null,
-      status: "draft" as const,
-      response: { type: "text", text: "쓰다 만 답" },
-    },
-    {
-      id: "shi3",
-      problemId: "p3",
-      position: 3,
-      format: "essay",
-      passage: "다음을 논하시오.",
-      options: null,
-      status: "not_started" as const,
-      response: null,
-    },
-  ];
-
-  it("MC 제출 답안은 선택한 보기 텍스트와 함께 보여준다", () => {
+describe("HomeworkTab — 과제 v3 통일(2026-09-14)", () => {
+  it("교사: 발급 구역이 위, 과제 문제 패널이 아래. 수업에서 다룬 문제는 기본으로 숨긴다", () => {
     render(
-      <HomeworkTab
-        sessionId="s1"
-        initialItems={[]}
-        viewerRole="teacher"
-        sessionSource="v3"
-        realViewerRole="teacher"
-        homeworkStatusItems={statusItems}
-      />
+      <HomeworkTab sessionId="s1" studentId="stu" initialItems={[]} viewerRole="teacher" sessionSource="v3" realViewerRole="teacher"
+        pool={pool} issued={[]} usedInLessonIds={["p3"]} homeworkProblems={[]} />
     );
-    expect(screen.getByText(/선택한 답: B — 7/)).toBeInTheDocument();
-    expect(screen.getByText("제출완료")).toBeInTheDocument();
+    const issue = screen.getByTestId("homework-issue");
+    const panel = screen.getByTestId("problems-panel");
+    expect(issue.compareDocumentPosition(panel) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(panel).toHaveAttribute("data-source", "homework");
+    expect(screen.getByLabelText("songbirds …")).toBeInTheDocument();
+    expect(screen.queryByLabelText("수업에서 다룬 것")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByLabelText(/수업에서 다룬 문제 1개도 보기/));
+    expect(screen.getByLabelText("수업에서 다룬 것")).toBeInTheDocument();
   });
 
-  it("서술형 임시저장 답안도 텍스트 그대로 보여준다(제출 전이라도)", () => {
+  it("고른 문제를 발급하면 서버에 보내고 화면을 새로 읽는다", async () => {
     render(
-      <HomeworkTab
-        sessionId="s1"
-        initialItems={[]}
-        viewerRole="teacher"
-        sessionSource="v3"
-        realViewerRole="teacher"
-        homeworkStatusItems={statusItems}
-      />
+      <HomeworkTab sessionId="s1" studentId="stu" initialItems={[]} viewerRole="teacher" sessionSource="v3" realViewerRole="teacher"
+        pool={pool} issued={[]} homeworkProblems={[]} />
     );
-    expect(screen.getByText("쓰다 만 답")).toBeInTheDocument();
-    expect(screen.getByText("임시 저장됨")).toBeInTheDocument();
+    const button = screen.getByRole("button", { name: /과제로 발급/ });
+    expect(button).toBeDisabled();
+    fireEvent.click(screen.getByLabelText("songbirds …"));
+    fireEvent.click(screen.getByLabelText("coral reefs …"));
+    expect(button).toHaveTextContent("과제로 발급 (2)");
+    fireEvent.click(button);
+    await waitFor(() => expect(issueHomework).toHaveBeenCalledWith("s1", ["p1", "p2"]));
+    await waitFor(() => expect(window.location.reload).toHaveBeenCalled());
   });
 
-  it("작성 전 항목은 안내 문구만 보여준다", () => {
+  it("발급 실패 사유를 보여주고 새로 읽지 않는다", async () => {
+    vi.mocked(issueHomework).mockResolvedValue({ ok: false, error: "이 회차의 키워드 범위 밖 문제는 과제로 낼 수 없습니다." });
     render(
-      <HomeworkTab
-        sessionId="s1"
-        initialItems={[]}
-        viewerRole="teacher"
-        sessionSource="v3"
-        realViewerRole="teacher"
-        homeworkStatusItems={statusItems}
-      />
+      <HomeworkTab sessionId="s1" studentId="stu" initialItems={[]} viewerRole="teacher" sessionSource="v3" realViewerRole="teacher"
+        pool={pool} issued={[]} homeworkProblems={[]} />
     );
-    expect(screen.getByText("아직 답안이 없습니다.")).toBeInTheDocument();
+    fireEvent.click(screen.getByLabelText("songbirds …"));
+    fireEvent.click(screen.getByRole("button", { name: /과제로 발급/ }));
+    expect(await screen.findByText(/키워드 범위 밖/)).toBeInTheDocument();
+    expect(window.location.reload).not.toHaveBeenCalled();
   });
 
-  it("이 뷰에는 어떤 입력/저장 컨트롤도 없다(읽기전용 강제)", () => {
+  it("발급된 항목은 목록에 있고, 학생이 시작하기 전에만 회수할 수 있다", async () => {
     render(
-      <HomeworkTab
-        sessionId="s1"
-        initialItems={[]}
-        viewerRole="teacher"
-        sessionSource="v3"
-        realViewerRole="teacher"
-        homeworkStatusItems={statusItems}
-      />
+      <HomeworkTab sessionId="s1" studentId="stu" initialItems={[]} viewerRole="teacher" sessionSource="v3" realViewerRole="teacher"
+        pool={pool}
+        issued={[{ itemId: "h1", problemId: "p1", position: 1, started: false }, { itemId: "h2", problemId: "p2", position: 2, started: true }]}
+        homeworkProblems={[homeworkProblem]} />
     );
-    // 상태 목록 섹션 안에는 textarea/input이 없어야 한다(과제 구성 폼 자체는
-    // 별개 섹션이라 여기선 문항 수 입력 등이 존재할 수 있으므로, 상태 카드
-    // 텍스트 근처에 편집 가능한 컨트롤이 없음을 값으로 확인한다).
-    expect(screen.queryByDisplayValue("쓰다 만 답")).not.toBeInTheDocument();
+    // 이미 발급된 문제는 고르기 목록에서 빠진다.
+    fireEvent.click(screen.getByRole("button", { name: "문제 고르기" }));
+    expect(screen.queryByLabelText("songbirds …")).not.toBeInTheDocument();
+    expect(screen.getByText("풀이 시작함")).toBeDisabled();
+    fireEvent.click(screen.getByRole("button", { name: "회수" }));
+    await waitFor(() => expect(withdrawHomework).toHaveBeenCalledWith("h1"));
   });
 
-  it("학생 뷰어에는 제출 현황 섹션 자체가 없다", () => {
+  it("학생: 발급 구역이 없고 과제 문제 패널만 있다", () => {
     render(
-      <HomeworkTab
-        sessionId="s1"
-        initialItems={[]}
-        viewerRole="student"
-        sessionSource="v3"
-        realViewerRole="student"
-        homeworkStatusItems={statusItems}
-      />
+      <HomeworkTab sessionId="s1" studentId="stu" initialItems={[]} viewerRole="student" sessionSource="v3" realViewerRole="student"
+        homeworkProblems={[homeworkProblem]} />
     );
-    expect(
-      screen.queryByText("이 세션에서 발급한 과제 — 제출 현황")
-    ).not.toBeInTheDocument();
+    expect(screen.queryByTestId("homework-issue")).not.toBeInTheDocument();
+    expect(screen.getByText("과제 1")).toBeInTheDocument();
+  });
+
+  it("교사가 학생 시점으로 볼 때(데모션)는 발급할 수 없다", () => {
+    render(
+      <HomeworkTab sessionId="s1" studentId="stu" initialItems={[]} viewerRole="student" sessionSource="v3" realViewerRole="teacher"
+        pool={pool} homeworkProblems={[]} />
+    );
+    // 실제 역할이 교사면 발급 구역은 남는다 — 학생 화면을 함께 보며 낼 수 있어야 한다.
+    expect(screen.getByTestId("homework-issue")).toBeInTheDocument();
+    expect(screen.queryByText("+ 과제 추가")).not.toBeInTheDocument();
+  });
+
+  it("레거시 과제 기록은 읽기 전용으로만 보인다 — 입력·추가 버튼이 없다", () => {
+    render(
+      <HomeworkTab sessionId="s1" studentId="stu" viewerRole="student" sessionSource="legacy"
+        initialItems={[{ id: "l1", title: "옛 과제", description: "설명", studentAnswer: "내 답" }]} />
+    );
+    expect(screen.getByText("옛 과제")).toBeInTheDocument();
+    expect(screen.getByText("내 답")).toBeInTheDocument();
+    expect(screen.queryByRole("textbox")).not.toBeInTheDocument();
+    expect(screen.queryByText("+ 과제 추가")).not.toBeInTheDocument();
   });
 });

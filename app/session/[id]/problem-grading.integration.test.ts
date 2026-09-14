@@ -344,3 +344,49 @@ describe("repin_live_session_content — 진행 중 수업을 지금 구성으�
     expect(fails(() => psql(`select repin_live_session_content('${sessionId}', '${TEACHER_ID}');`))).toContain("진행 중인 수업만");
   });
 });
+
+// ------------------------------------------------------------ 과제 v3 통일 (2026-09-14)
+describe("issue_homework_items / withdraw_homework_item — 교사가 골라 발급, 학생은 수업 문제와 같은 흐름", () => {
+  it("범위 안 확정 문제만 발급되고 버전이 고정되며, 이미 발급된 건 건너뛴다", () => {
+    const { sessionId, mcId, essayId } = startedSession();
+    expect(asUser(TEACHER_ID, `select issue_homework_items('${sessionId}', array['${mcId}','${essayId}']::uuid[]);`)).toBe("2");
+    expect(asUser(TEACHER_ID, `select issue_homework_items('${sessionId}', array['${mcId}']::uuid[]);`)).toBe("0");
+    expect(
+      psql(`select count(*) from session_homework_items h join problem_versions v on v.id = h.problem_version_id where h.session_id = '${sessionId}';`)
+    ).toBe("2");
+    // 수업에서 다룬 문제라는 표시가 남는다(고정본에 있으므로).
+    expect(psql(`select bool_and(was_used_in_lesson) from session_homework_items where session_id = '${sessionId}';`)).toBe("t");
+    // 유형 조회가 과제 문제도 준다(같은 문제라 2개).
+    expect(asUser(STUDENT_ID, `select count(*) from session_problem_formats('${sessionId}');`)).toBe("2");
+  });
+
+  it("학생·범위 밖 문제는 거절한다", () => {
+    const { sessionId, mcId } = startedSession();
+    expect(fails(() => asUser(STUDENT_ID, `select issue_homework_items('${sessionId}', array['${mcId}']::uuid[]);`))).toContain("담당 학생의 수업에만");
+    const outside = psql(
+      `insert into problems (format, passage, subject_id, status, created_by) values ('mc', '범위 밖', '${SUBJECT_ID}', 'confirmed', '${TEACHER_ID}') returning id;`
+    );
+    expect(fails(() => asUser(TEACHER_ID, `select issue_homework_items('${sessionId}', array['${outside}']::uuid[]);`))).toContain("키워드 범위 밖");
+  });
+
+  it("학생이 풀이판을 열면 과제 발급본 버전으로 풀고, 그 뒤엔 회수할 수 없다", () => {
+    const { sessionId, mcId } = startedSession();
+    asUser(TEACHER_ID, `select issue_homework_items('${sessionId}', array['${mcId}']::uuid[]);`);
+    const itemId = psql(`select id from session_homework_items where session_id = '${sessionId}' and problem_id = '${mcId}';`);
+    // 수업 고정본이 있으면 그것을 우선 쓴다(같은 문제). 여기서는 둘이 같은 버전이다.
+    const workId = studentWork(sessionId, mcId);
+    expect(psql(`select problem_version_id from session_problem_work where id = '${workId}';`)).toBe(
+      psql(`select problem_version_id from session_homework_items where id = '${itemId}';`)
+    );
+    expect(fails(() => asUser(TEACHER_ID, `select withdraw_homework_item('${itemId}');`))).toContain("이미 풀기 시작한 과제");
+  });
+
+  it("시작 전 항목은 담당 교사가 회수할 수 있고, 학생은 못 한다", () => {
+    const { sessionId, essayId } = startedSession();
+    asUser(TEACHER_ID, `select issue_homework_items('${sessionId}', array['${essayId}']::uuid[]);`);
+    const itemId = psql(`select id from session_homework_items where session_id = '${sessionId}' and problem_id = '${essayId}';`);
+    expect(fails(() => asUser(STUDENT_ID, `select withdraw_homework_item('${itemId}');`))).toContain("담당 선생님만");
+    asUser(TEACHER_ID, `select withdraw_homework_item('${itemId}');`);
+    expect(psql(`select count(*) from session_homework_items where id = '${itemId}';`)).toBe("0");
+  });
+});

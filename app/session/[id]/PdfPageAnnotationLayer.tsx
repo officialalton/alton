@@ -367,10 +367,9 @@ export default forwardRef<
           onPointerDown={(e) => {
             if (!canDraw) return;
             if (tool === "text") {
-              // 입력 중이던 글이 있으면 먼저 확정하고 새 자리를 잡는다.
-              if (textDraft) commitText();
-              const p = pos(e);
-              setTextDraft({ x: p.x, y: p.y, value: "" });
+              // 글 상자는 pointerUp 에서 만든다 — pointerDown 에서 만들면 곧 이어지는 pointerUp/click 이
+              // 새 상자의 포커스를 빼앗아 blur → 빈 상자 제거로 사라졌다(2026-09-14 UAT: "클릭이 안 된다").
+              e.preventDefault();
               return;
             }
             drawingRef.current = true;
@@ -390,7 +389,13 @@ export default forwardRef<
             });
             lastPosRef.current = p;
           }}
-          onPointerUp={() => {
+          onPointerUp={(e) => {
+            if (canDraw && tool === "text") {
+              if (textDraft) commitText();
+              const p = pos(e);
+              setTextDraft({ x: p.x, y: p.y, value: "" });
+              return;
+            }
             if (!drawingRef.current) return;
             drawingRef.current = false;
             scheduleSave();
