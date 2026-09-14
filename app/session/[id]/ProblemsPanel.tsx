@@ -6,6 +6,7 @@ import type { ProblemWorkBoard as Board } from "./problem-work-actions";
 import { openProblemWork, submitProblemWork, loadProblemWorkBoard, listProblemAttempts } from "./problem-work-actions";
 import ProblemWorkBoardCanvas, { type ProblemBoardHandle } from "./ProblemWorkBoard";
 import LearningText from "./LearningText";
+import { stripInlineOptions } from "@/lib/problem-text";
 
 const DIFFICULTY_LABEL: Record<string, string> = {
   easy: "쉬움",
@@ -201,7 +202,7 @@ export default function ProblemsPanel({
 
             {p.passage ? (
               <LearningText
-                text={p.passage}
+                text={stripInlineOptions(p.passage, p.options)}
                 className="learning-body text-[15px] sm:text-[16px] leading-[1.8] text-ink mb-5"
               />
             ) : (

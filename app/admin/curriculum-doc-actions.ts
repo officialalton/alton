@@ -3,6 +3,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { createClient } from "@/utils/supabase/server";
 import { sanitizeDocHtml } from "@/lib/sanitize-doc-html";
+import { stripInlineOptions } from "@/lib/problem-text";
 import type { DocProblem, DocSection, DocEditorData } from "./curriculum-doc-data";
 import { loadCurriculumDocDetail } from "./curriculum-doc-data";
 import type { SubjectKeyword } from "./subject-data";
@@ -429,7 +430,7 @@ export async function generateSectionProblems(params: {
                     type: "string",
                     description:
                       format === "mc"
-                        ? "지문과 문제. 빈칸이 필요하면 ______로 표시."
+                        ? "지문과 문제. 빈칸이 필요하면 ______로 표시. 선택지(A~D)는 여기에 쓰지 말고 options 에만 넣는다."
                         : "문제 지문",
                   },
                   options: {
@@ -488,7 +489,8 @@ ${format === "mc" ? "객관식은 반드시 선택지 4개와 정답 인덱스�
 
   return raw.map((p) => ({
     format,
-    passage: p.passage,
+    // 모델이 지문 끝에 선택지를 또 써도 저장 전에 뗀다 — 화면에서 두 번 보였다(2026-09-14).
+    passage: stripInlineOptions(p.passage, p.options ?? null),
     options: format === "mc" ? p.options ?? null : null,
     correctIndex: format === "mc" ? p.correct_index ?? null : null,
     explanation: p.explanation,
@@ -518,7 +520,7 @@ export async function regenerateProblem(params: {
         input_schema: {
           type: "object",
           properties: {
-            passage: { type: "string", description: "문제 지문" },
+            passage: { type: "string", description: "문제 지문. 선택지(A~D)는 여기에 쓰지 말고 options 에만 넣는다." },
             options: {
               type: "array",
               items: { type: "string" },
@@ -576,7 +578,7 @@ ${current.correctIndex !== null ? `정답 인덱스: ${current.correctIndex}` : 
 
   return {
     format,
-    passage: raw.passage,
+    passage: stripInlineOptions(raw.passage, raw.options ?? null),
     options: format === "mc" ? raw.options ?? null : null,
     correctIndex: format === "mc" ? raw.correct_index ?? null : null,
     explanation: raw.explanation,

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import LearningText from "@/app/session/[id]/LearningText";
+import { stripInlineOptions } from "@/lib/problem-text";
 import type { UnitPreview } from "@/app/student/curriculum-overlay-actions";
 
 // 학생·보호자의 회차별 '수업 준비' — 예약이 없어도 회차 기준으로 열린다.
@@ -186,7 +187,7 @@ function ProblemList({ problems }: { problems: UnitPreview["problems"] }) {
           </header>
           {p.passage ? (
             <LearningText
-              text={p.passage}
+              text={stripInlineOptions(p.passage, p.options)}
               className="learning-body text-[15px] sm:text-[16px] leading-[1.8] text-ink mb-5"
             />
           ) : (

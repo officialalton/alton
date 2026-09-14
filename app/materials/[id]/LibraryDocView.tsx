@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { LibraryDocDetail, LibraryProblem } from "@/app/student/materials-data";
 import type { SessionViewViewer } from "@/lib/session-view";
+import { stripInlineOptions } from "@/lib/problem-text";
 import {
   retryEssayAttempt,
   retryMathAttempt,
@@ -300,7 +301,7 @@ function LibraryProblemCard({
       </div>
 
       <p className="text-[14.5px] leading-[1.75] text-ink mb-3.5 whitespace-pre-wrap">
-        {problem.passage}
+        {stripInlineOptions(problem.passage, problem.options)}
       </p>
 
       {!isStudent && !isTeacherLike && (
