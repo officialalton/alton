@@ -337,6 +337,7 @@ describe("SessionShell — 수업 준비 탭", () => {
   composed: true,
   hasUnappliedChanges: false,
   outdatedVersionCount: 0,
+  parentPendingCount: 0,
   problems: [],
       goal: null,
     },

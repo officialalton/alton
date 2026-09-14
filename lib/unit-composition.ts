@@ -172,6 +172,8 @@ export type UnitComposition = {
   hasUnappliedChanges: boolean;
   /** 담을 때의 버전과 지금 공개된 버전이 다른 항목 수. */
   outdatedVersionCount: number;
+  /** 상위 계층에 있는데 아직 이 회차에 없는 항목 수(교사가 뺀 것은 세지 않는다). */
+  parentPendingCount: number;
   /**
    * 이 회차에 **실제로 담긴** 문제. 세 계층이 같은 모양으로 다룬다 — 학생 층은
    * 준비안(curriculum_unit_prep_items), 위 두 층은 각자의 구성 표에 담긴다.
@@ -345,6 +347,16 @@ export async function loadComposition(
         .eq("unit_id", unitId),
     ]);
 
+  // 상위 계층에 아직 받지 않은 것이 있는지. 기준본 층은 위가 없다.
+  const { count: parentPending } =
+    layer === "teacher"
+      ? await supabase
+          .from("unit_parent_pending_updates")
+          .select("*", { count: "exact", head: true })
+          .eq("layer", layer)
+          .eq("unit_id", unitId)
+      : { count: 0 };
+
   const labelById = new Map(
     (subjectKeywordRows ?? []).map((k) => [k.id as string, k.label as string])
   );
@@ -383,6 +395,7 @@ export async function loadComposition(
     composed: scope.composed,
     hasUnappliedChanges: scope.dirty,
     outdatedVersionCount: driftCount ?? 0,
+    parentPendingCount: parentPending ?? 0,
     problems: await loadUnitProblems(supabase, layer, unitId),
   };
 }

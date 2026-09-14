@@ -46,6 +46,7 @@ function makeComposition(over: Partial<UnitComposition> = {}): UnitComposition {
   composed: true,
   hasUnappliedChanges: false,
   outdatedVersionCount: 0,
+  parentPendingCount: 0,
   problems: [],
     goal: null,
     ...over,

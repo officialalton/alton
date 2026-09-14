@@ -520,3 +520,79 @@ describe("수업 중 답안 저장 — v3 수업에 실제로 붙는다", () => 
     expect(kept).toBe("0");
   });
 });
+
+describe("업데이트 진입점은 하나다", () => {
+  it("상위 보충과 조건 반영을 한 번에 처리한다", () => {
+    const keywordId = newKeyword();
+    const { problemId } = publishedProblem(keywordId);
+    const { overlayUnitId, prepId } = makeUnitWithPrep(keywordId, problemId);
+
+    // 준비안을 비워 둔 상태에서 시작한다 — 상위에서 받아올 것이 있는 상황.
+    psql(`delete from curriculum_unit_prep_items where prep_id = '${prepId}';`);
+
+    const preview = JSON.parse(
+      psql(`select preview_unit_composition_update('student', '${overlayUnitId}')::text;`)
+    ) as Record<string, number | string | boolean>;
+    expect(preview.preview).toBe(true);
+    expect(typeof preview.fingerprint).toBe("string");
+
+    // 미리보기는 아무것도 바꾸지 않는다.
+    expect(psql(`select count(*) from curriculum_unit_prep_items where prep_id = '${prepId}';`)).toBe("0");
+
+    psql(
+      `select apply_unit_composition_update('student', '${overlayUnitId}', '${preview.fingerprint}');`
+    );
+    expect(
+      psql(`select composition_dirty from curriculum_overlay_units where id = '${overlayUnitId}';`)
+    ).toBe("f");
+  });
+
+  it("교사가 뺀 항목은 '업데이트 있음'에 계속 남지 않는다", () => {
+    const keywordId = newKeyword();
+    const { problemId } = publishedProblem(keywordId);
+
+    // 관리자 기준본 회차와 그것을 물려받은 교사 회차.
+    const catalogUnitId = psql(
+      `insert into subject_template_units (subject_id, position, unit_title)
+       values ('${SUBJECT_ID}', 950, '제외확인 ${uniq()}') returning id;`
+    );
+    psql(
+      `insert into subject_template_unit_problems (unit_id, problem_id, position, source)
+       values ('${catalogUnitId}', '${problemId}', 1, 'manual');`
+    );
+    const templateId = psql(
+      `insert into teacher_curriculum_templates (teacher_id, subject_id)
+       values ('${TEACHER_ID}', '${SUBJECT_ID}')
+       on conflict (teacher_id, subject_id) do update set subject_id = excluded.subject_id
+       returning id;`
+    );
+    const teacherUnitId = psql(
+      `insert into teacher_curriculum_template_units (template_id, source_unit_id, position, unit_title)
+       values ('${templateId}', '${catalogUnitId}', 950, '제외확인') returning id;`
+    );
+
+    // 교사가 그 문제를 뺀다.
+    psql(`select update_unit_composition('teacher', '${teacherUnitId}');`);
+    psql(`delete from teacher_curriculum_template_unit_problems
+          where unit_id = '${teacherUnitId}' and problem_id = '${problemId}';
+          insert into teacher_curriculum_template_unit_problem_exclusions (unit_id, problem_id)
+          values ('${teacherUnitId}', '${problemId}') on conflict do nothing;`);
+
+    // 뺐으니 '아직 받지 않은 것'으로 세지 않는다.
+    expect(
+      psql(`select count(*) from unit_parent_pending_updates
+            where unit_id = '${teacherUnitId}' and kind = 'problem';`)
+    ).toBe("0");
+
+    psql(`set session_replication_role = replica;
+          delete from teacher_curriculum_template_unit_problem_exclusions where unit_id = '${teacherUnitId}';
+          delete from teacher_curriculum_template_unit_problems where unit_id = '${teacherUnitId}';
+          delete from teacher_curriculum_template_unit_materials where unit_id = '${teacherUnitId}';
+          delete from teacher_curriculum_template_unit_keywords where unit_id = '${teacherUnitId}';
+          delete from teacher_curriculum_template_unit_problem_criteria where unit_id = '${teacherUnitId}';
+          delete from teacher_curriculum_template_units where id = '${teacherUnitId}';
+          delete from subject_template_unit_problems where unit_id = '${catalogUnitId}';
+          delete from subject_template_units where id = '${catalogUnitId}';
+          set session_replication_role = origin;`);
+  });
+});

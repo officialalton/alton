@@ -11,7 +11,6 @@ import {
   saveGoal,
   previewRecomposition,
   applyRecomposition,
-  inheritDefaults,
   addProblem,
   removeProblem,
   listLessonsForUnit,
@@ -59,7 +58,6 @@ export default function CompositionPanel({
   const [goalSaved, setGoalSaved] = useState(false);
   const [pending, setPending] = useState<RecompositionSummary | null>(null);
   const [busy, setBusy] = useState(false);
-  const [notice, setNotice] = useState<string | null>(null);
   const [composedProblems, setComposedProblems] = useState(composition.problems);
 
   // 후보에서 이미 담긴 것은 뺀다 — 같은 문제가 양쪽에 보이면 무엇을 눌러야 할지
@@ -135,24 +133,6 @@ export default function CompositionPanel({
       return;
     }
     setPending(result.value);
-  }
-
-  async function pullFromParent() {
-    setBusy(true);
-    setError(null);
-    setNotice(null);
-    const result = await inheritDefaults(layer, unitId);
-    setBusy(false);
-    if (!result.ok) {
-      setError(result.error);
-      return;
-    }
-    const { keywordsAdded, materialsAdded, problemsAdded } = result.value;
-    if (keywordsAdded + materialsAdded + problemsAdded === 0) {
-      setNotice("가져올 것이 없습니다 — 이미 다 물려받았거나 위 구성이 비어 있습니다.");
-      return;
-    }
-    window.location.reload();
   }
 
   async function applyChanges() {
@@ -254,46 +234,25 @@ export default function CompositionPanel({
           {error}
         </div>
       )}
-      {notice && <p className="text-[12.5px] text-grey-500 mb-4">{notice}</p>}
 
-      {/* 회차를 새로 만들면 상속이 자동으로 끝난다. 그 전에 만들어진 회차는 비어 있을
-          수 있으므로 여기서 부른다 — 소급해서 자동으로 채우면 선생님이 일부러 비워 둔
-          것과 구분할 수 없다. */}
-      {composition.hasInheritableDefaults && (
-        <div className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3.5 mb-5">
-          <div className="text-[13px] font-bold text-ink mb-1">위 구성 물려받기</div>
-          <p className="text-[12px] text-grey-500 mb-2.5">
-            {layer === "teacher"
-              ? "관리자 기준본의 키워드·교재·문제를 담을 때의 버전·순서 그대로 가져옵니다."
-              : "선생님 기본 구성(없으면 관리자 기준본)의 키워드·교재·문제를 담을 때의 버전·순서 그대로 가져옵니다."}{" "}
-            이미 담긴 것과 뺀 것은 건드리지 않습니다.
-          </p>
-          <button
-            disabled={busy}
-            onClick={() => void pullFromParent()}
-            className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
-          >
-            물려받기
-          </button>
-        </div>
-      )}
-
-      {/* 구성은 사람이 다시 구성을 누르기 전까지 그대로다. 달라진 것이 있으면
-          여기서 알리고, 무엇이 달라지는지 확인한 뒤 적용하게 한다. */}
-      {composition.composed &&
-        (composition.hasUnappliedChanges || composition.outdatedVersionCount > 0) && (
+      {/* 2026-09-13 확정 4번 — 업데이트 진입점은 **하나**다. 상위에서 보충되는 것과
+          지금 조건에 따른 변경을 한 자리에서 확인하고 한 번에 적용한다. */}
+      {(composition.hasUnappliedChanges ||
+        composition.outdatedVersionCount > 0 ||
+        composition.parentPendingCount > 0) && (
           <div className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3.5 mb-5">
-            <div className="text-[13px] font-bold text-ink mb-1">
-              구성에 반영되지 않은 변경 있음
-            </div>
+            <div className="text-[13px] font-bold text-ink mb-1">업데이트 있음</div>
             <p className="text-[12px] text-grey-500 mb-2.5">
+              {composition.parentPendingCount > 0
+                ? `위 계층에 아직 받지 않은 항목이 ${composition.parentPendingCount}개 있습니다. `
+                : ""}
               {composition.hasUnappliedChanges
                 ? "키워드·조건이나 교재가 바뀌었습니다. "
                 : ""}
               {composition.outdatedVersionCount > 0
                 ? `담긴 교재·문제 ${composition.outdatedVersionCount}개가 담을 때의 버전을 쓰고 있습니다. `
                 : ""}
-              지금 구성은 그대로 유지됩니다. 다시 구성해야 반영됩니다.
+              지금 구성은 그대로 유지됩니다. 확인하고 적용해야 반영됩니다.
             </p>
 
             {pending === null ? (
@@ -302,16 +261,24 @@ export default function CompositionPanel({
                 onClick={() => void showChanges()}
                 className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
               >
-                다시 구성
+                기본 구성 업데이트
               </button>
             ) : (
               <div>
                 <ul className="text-[12.5px] text-ink mb-2.5 space-y-0.5">
+                  {layer !== "catalog" && (
+                    <li>
+                      위 계층에서 받아올 것 — 키워드 {pending.inheritedKeywords}개 · 교재{" "}
+                      {pending.inheritedMaterials}개 · 문제 {pending.inheritedProblems}개
+                    </li>
+                  )}
                   <li>
-                    교재 — 들어옴 {pending.materialsAdded}개 · 빠짐 {pending.materialsRemoved}개
+                    조건에 따른 교재 — 들어옴 {pending.materialsAdded}개 · 빠짐{" "}
+                    {pending.materialsRemoved}개
                   </li>
                   <li>
-                    문제 — 들어옴 {pending.problemsAdded}개 · 빠짐 {pending.problemsRemoved}개
+                    조건에 따른 문제 — 들어옴 {pending.problemsAdded}개 · 빠짐{" "}
+                    {pending.problemsRemoved}개
                   </li>
                   <li>버전이 올라갈 항목 — {pending.versionsUpdated}개</li>
                   <li className="text-grey-500">

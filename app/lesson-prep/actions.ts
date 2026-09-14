@@ -266,6 +266,10 @@ export type RecompositionSummary = {
   problemsAvailable: number;
   /** 담을 때의 버전에서 지금 공개본으로 올라갈 항목 수. */
   versionsUpdated: number;
+  /** 상위 계층에서 보충될 항목 수. */
+  inheritedKeywords: number;
+  inheritedMaterials: number;
+  inheritedProblems: number;
   /**
    * 미리 본 시점의 입력 지문. 적용할 때 그대로 들고 간다 — 그 사이에 무언가
    * 바뀌었으면 서버가 적용을 거절한다(다른 결과를 조용히 넣지 않는다).
@@ -283,6 +287,9 @@ function asSummary(value: unknown): RecompositionSummary {
     problemsRemoved: n("problemsRemoved"),
     problemsAvailable: n("problemsAvailable"),
     versionsUpdated: n("versionsUpdated"),
+    inheritedKeywords: n("inheritedKeywords"),
+    inheritedMaterials: n("inheritedMaterials"),
+    inheritedProblems: n("inheritedProblems"),
     fingerprint: typeof v.fingerprint === "string" ? v.fingerprint : null,
   };
 }
@@ -295,7 +302,7 @@ export async function previewRecomposition(
   const { supabase, error: denied } = await gate(layer);
   if (!supabase) return { ok: false, error: denied };
 
-  const { data, error } = await supabase.rpc("preview_unit_recomposition", {
+  const { data, error } = await supabase.rpc("preview_unit_composition_update", {
     p_layer: layer,
     p_unit_id: unitId,
   });
@@ -319,7 +326,7 @@ export async function applyRecomposition(
   const { supabase, error: denied } = await gate(layer);
   if (!supabase) return { ok: false, error: denied };
 
-  const { data, error } = await supabase.rpc("recompose_unit", {
+  const { data, error } = await supabase.rpc("apply_unit_composition_update", {
     p_layer: layer,
     p_unit_id: unitId,
     p_expected_fingerprint: expectedFingerprint,
