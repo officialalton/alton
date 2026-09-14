@@ -45,15 +45,18 @@ export default function PdfPageCanvas({
   page,
   zoom,
   fitWidth,
+  fitHeight,
   onRendered,
   onError,
 }: {
   url: string;
   page: number;
-  /** 1 = 가로 맞춤. */
+  /** 1 = 한 페이지가 화면에 다 들어오는 배율(가로·세로 중 작은 쪽). */
   zoom: number;
-  /** 가로 맞춤 기준 너비(px). */
+  /** 맞춤 기준 너비(px). */
   fitWidth: number;
+  /** 맞춤 기준 높이(px). 0 이면 가로만 맞춘다. */
+  fitHeight?: number;
   onRendered: (size: { width: number; height: number }) => void;
   onError: (message: string) => void;
 }) {
@@ -73,18 +76,24 @@ export default function PdfPageCanvas({
         const pdfPage = await doc.getPage(page);
         if (disposed || generation !== generationRef.current) return;
         const base = pdfPage.getViewport({ scale: 1 });
-        const scale = (fitWidth > 0 ? fitWidth / base.width : 1) * zoom;
+        // 2026-09-14 UAT: 세로가 넘쳐 한 페이지가 다 안 보였다 → 가로·세로 중 작은 쪽에 맞춘다.
+        const fitW = fitWidth > 0 ? fitWidth / base.width : 1;
+        const fitH = fitHeight && fitHeight > 0 ? fitHeight / base.height : Infinity;
+        const scale = Math.min(fitW, fitH) * zoom;
         const viewport = pdfPage.getViewport({ scale });
         const canvas = canvasRef.current;
         const ctx = canvas?.getContext("2d");
         if (!canvas || !ctx) return;
         const width = Math.floor(viewport.width);
         const height = Math.floor(viewport.height);
-        canvas.width = width;
-        canvas.height = height;
+        // 레티나에서 흐리던 것: 그리는 픽셀은 devicePixelRatio 배로, 표시 크기는 논리 px 로.
+        const dpr = Math.min(3, Math.max(1, typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1));
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
         canvas.style.width = `${width}px`;
         canvas.style.height = `${height}px`;
-        const task = pdfPage.render({ canvasContext: ctx, viewport });
+        const renderViewport = pdfPage.getViewport({ scale: scale * dpr });
+        const task = pdfPage.render({ canvasContext: ctx, viewport: renderViewport });
         cancelRender = () => task.cancel();
         await task.promise;
         if (disposed || generation !== generationRef.current) return;
@@ -102,7 +111,7 @@ export default function PdfPageCanvas({
       disposed = true;
       cancelRender?.();
     };
-  }, [url, page, zoom, fitWidth, onRendered, onError]);
+  }, [url, page, zoom, fitWidth, fitHeight, onRendered, onError]);
 
   return (
     <canvas

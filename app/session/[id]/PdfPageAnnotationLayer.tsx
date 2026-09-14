@@ -325,7 +325,10 @@ export default forwardRef<
         />
       )}
 
-      <div className="absolute top-2 right-2 flex flex-wrap items-center gap-1.5 bg-white/90 border border-grey-200 rounded-lg px-2 py-1.5" style={{ zIndex: 8 }}>
+      <div
+        className="absolute top-2 right-2 flex flex-wrap items-center gap-1.5 bg-white/60 backdrop-blur-sm border border-white/60 shadow-sm rounded-lg px-2 py-1"
+        style={{ zIndex: 8 }}
+      >
         {myScope && (
           <>
             <button
@@ -335,7 +338,7 @@ export default forwardRef<
               aria-pressed={drawMode}
               className={"text-[11.5px] font-bold px-2 py-1 rounded disabled:opacity-60 " + (drawMode ? "bg-ink text-white" : "text-ink")}
             >
-              {!loaded ? "필기 준비 중…" : drawMode ? "필기 끄기" : "필기"}
+              {!loaded ? "필기 준비 중…" : drawMode ? "✏️ 필기 끄기" : "✏️ 필기 시작"}
             </button>
             {drawMode && (
               <>

@@ -100,16 +100,24 @@ export default function AssetMaterialViewer({
     };
   }, [asset, urls]);
 
-  // 가로 맞춤 기준 — 프레임 너비.
+  // 맞춤 기준 — 프레임 너비와, 프레임 위쪽부터 화면 아래까지의 높이(한 페이지가 다 들어오게).
+  const [fitHeight, setFitHeight] = useState(0);
   useEffect(() => {
     const el = frameRef.current;
     if (!el) return;
-    const measure = () => setFitWidth(Math.max(0, el.clientWidth - 2));
+    const measure = () => {
+      setFitWidth(Math.max(0, el.clientWidth - 2));
+      const top = el.getBoundingClientRect().top;
+      setFitHeight(Math.max(0, window.innerHeight - top - 16));
+    };
     measure();
-    if (typeof ResizeObserver === "undefined") return;
-    const ro = new ResizeObserver(measure);
-    ro.observe(el);
-    return () => ro.disconnect();
+    window.addEventListener("resize", measure);
+    const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(measure) : null;
+    ro?.observe(el);
+    return () => {
+      window.removeEventListener("resize", measure);
+      ro?.disconnect();
+    };
   }, []);
 
   const onRendered = useCallback((size: { width: number; height: number }) => {
@@ -248,7 +256,7 @@ export default function AssetMaterialViewer({
           <p className="text-[12.5px] text-grey-500 mb-2">이 자료의 고정 사본이 기록되지 않아 표시할 수 없습니다.</p>
         )}
 
-        <div ref={frameRef} className="relative w-full overflow-auto">
+        <div ref={frameRef} className="relative w-full overflow-auto flex justify-center">
           {asset.kind === "video" ? (
             signed ? <VideoMaterialPlayer url={signed.url} mimeType={signed.mimeType} title={asset.title} /> : <p className="text-[12.5px] text-grey-500">자료를 불러오는 중…</p>
           ) : signed ? (
@@ -258,6 +266,7 @@ export default function AssetMaterialViewer({
                 page={pos.page}
                 zoom={zoom}
                 fitWidth={fitWidth}
+                fitHeight={fitHeight}
                 onRendered={onRendered}
                 onError={onError}
               />

@@ -72,7 +72,7 @@ async function drawOne(x = 10) {
 
 async function enableDrawing() {
   await waitFor(() => expect(actions.loadPageStrokes).toHaveBeenCalled());
-  fireEvent.click(screen.getByRole("button", { name: "필기" }));
+  fireEvent.click(screen.getByRole("button", { name: "✏️ 필기 시작" }));
 }
 
 describe("PDF 페이지 필기 레이어", () => {
@@ -185,7 +185,7 @@ describe("PDF 페이지 필기 레이어", () => {
     render(<PdfPageAnnotationLayer target={target(1)} role="reader" width={600} height={800} />);
     await waitFor(() => expect(actions.loadPageStrokes).toHaveBeenCalledTimes(2));
     expect(screen.queryByTestId("pdf-input-layer")).not.toBeInTheDocument();
-    expect(screen.queryByRole("button", { name: "필기" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /필기 시작/ })).not.toBeInTheDocument();
     expect(screen.getByTestId("pdf-teacher-layer")).toBeInTheDocument();
     expect(screen.getByTestId("pdf-student-layer")).toBeInTheDocument();
   });
