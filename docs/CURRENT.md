@@ -2,7 +2,7 @@
 
 > **2026-09-14 야간 — P3 9차: 문제 템플릿 ① SPR(숫자 입력) / 문제은행 난이도·전체 공개·자동 확장 칸.**
 > 설계안 [`2026-09-14-problem-template-design.md`](2026-09-14-problem-template-design.md)(SAT Practice Test 5 분석). 승인 순서: ①SPR → ②KaTeX·표 → ③표준 SVG 도형 → ④이미지 첨부 → ⑤유형 코드·2지문·메모(RW 포함).
-> 공유 non-prod: **`20261360000000`까지 적용됨.** Preview `__PREVIEW_URL4__`.
+> 공유 non-prod: **`20261360000000`까지 적용됨.** Preview `https://alton-czrtormc2-alton7.vercel.app`.
 > - `problem_format` 에 **`spr`**(서술형 essay 는 AP용으로 별도 유지). `problem_versions.answers` 동치 정답 목록, `spr_answer_matches`(공백·쉼표·$·% 제거, 분수, 소수 4자리
 >   반올림·절사). `submit_problem_attempt` 텍스트 답 자동 채점·채점 전 재입력, 공개 검사(spr 정답 필수·mc 선택지/정답 필수). 초안 RPC 8인수(7인수 제거).
 > - 문제은행: 형식 `숫자 입력(SPR)`, 초안 편집 정답 목록 칸, AI 스키마 `answers`, **난이도 선택**, **전체 공개**(보이는 초안 일괄), 지문·해설 칸 자동 확장.
