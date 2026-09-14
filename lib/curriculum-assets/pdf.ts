@@ -18,6 +18,14 @@ export function sha256Hex(data: Uint8Array): string {
  */
 export async function probePdf(data: Uint8Array): Promise<PdfProbe> {
   const pdfjs = await import("pdfjs-dist/legacy/build/pdf.mjs");
+  // 워커 경로를 실제 파일로 고정한다. 기본값(자기 청크 옆 ./pdf.worker.mjs)은 번들된 서버에서
+  // 존재하지 않는다. serverExternalPackages 로 패키지가 node_modules 에 그대로 있으므로
+  // require.resolve 가 그 파일을 가리킨다.
+  if (!pdfjs.GlobalWorkerOptions.workerSrc) {
+    const { createRequire } = await import("node:module");
+    const req = createRequire(import.meta.url);
+    pdfjs.GlobalWorkerOptions.workerSrc = req.resolve("pdfjs-dist/legacy/build/pdf.worker.mjs");
+  }
   const task = pdfjs.getDocument({ data: new Uint8Array(data), disableFontFace: true, verbosity: 0 });
   try {
     const doc = await task.promise;
