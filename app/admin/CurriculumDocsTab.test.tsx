@@ -51,7 +51,7 @@ const subjects: AdminSubject[] = [
   {
     subjectId: "sub1",
     subjectName: "SAT Math",
-    units: [{ id: "u1", position: 1, unitTitle: "함수의 기초", note: null }],
+    units: [{ id: "u1", position: 1, unitTitle: "함수의 기초", note: null, keywordIds: ["kw1"] }],
     keywords: [{ id: "kw1", label: "이차방정식", status: "active" }],
   },
 ];
@@ -66,6 +66,7 @@ const existingDocListItem: CurriculumDocListItem = {
   status: "draft",
   sectionCount: 0,
   hasPrimaryKeyword: false,
+  primaryKeywordId: null,
   primaryKeywordLabel: null,
   kind: "html" as const,
   sourceDriveName: null,
@@ -98,32 +99,7 @@ describe("CurriculumDocsTab", () => {
 
   it("교재가 없으면 안내 문구를 보여준다", () => {
     render(<Wrapper initialDocs={[]} subjects={subjects} />);
-    expect(screen.getByText("아직 만든 교재가 없습니다.")).toBeInTheDocument();
-  });
-
-  it("새 교재 만들기 폼에서 제목/과목/단원을 골라 생성하면 바로 에디터로 이동한다", async () => {
-    vi.mocked(docActions.createCurriculumDoc).mockResolvedValue({ id: "doc2" });
-    render(<Wrapper initialDocs={[]} subjects={subjects} />);
-
-    fireEvent.click(screen.getByText("+ 새 교재 만들기"));
-    fireEvent.change(screen.getByPlaceholderText("예: 이차방정식 개념 정리"), {
-      target: { value: "새 교재" },
-    });
-    fireEvent.click(screen.getByText("SAT Math"));
-    fireEvent.click(screen.getByText("1회차 · 함수의 기초"));
-    fireEvent.click(screen.getByText("만들기"));
-
-    await waitFor(() =>
-      expect(docActions.createCurriculumDoc).toHaveBeenCalledWith({
-        title: "새 교재",
-        subjectId: "sub1",
-        unitId: "u1",
-      })
-    );
-    // 새로 만든 교재는 이미 전체 데이터를 들고 있으므로(빈 sections) 추가
-    // 조회 없이 바로 에디터로 진입한다 — getCurriculumDocDetailAction 호출 없음.
-    await waitFor(() => expect(screen.getByDisplayValue("새 교재")).toBeInTheDocument());
-    expect(docActions.getCurriculumDocDetailAction).not.toHaveBeenCalled();
+    expect(screen.getByText(/아직 교재가 없습니다/)).toBeInTheDocument();
   });
 
   it("편집 버튼을 누르면 상세를 지연 조회해 에디터로 진입하고 뒤로가기 시 목록에 상태가 반영된다", async () => {
@@ -236,24 +212,38 @@ describe("교재 현재/보관됨 분리", () => {
 // 보였다. 로딩이 느린 게 아니라 만들 때 넘기는 객체에 과목 키워드·단원이
 // 아예 없었다. "다시 들어가니까 나온다"가 그 증거다(그때는 상세를 조회한다).
 describe("새로 만든 교재도 과목 키워드·단원을 바로 쓴다", () => {
-  it("만든 직후 에디터에서 대표 키워드와 단원을 고를 수 있다", async () => {
-    vi.mocked(docActions.createCurriculumDoc).mockResolvedValue({ id: "doc2" });
-    render(<Wrapper initialDocs={[]} subjects={subjects} />);
 
-    fireEvent.click(screen.getByText("+ 새 교재 만들기"));
-    fireEvent.change(screen.getByPlaceholderText("예: 이차방정식 개념 정리"), {
-      target: { value: "새 교재" },
-    });
-    fireEvent.click(screen.getByText("SAT Math"));
-    fireEvent.click(screen.getByText("만들기"));
+  // 2026-09-14 — 라이브러리 탭을 합쳤다. 새 교재 만들기는 막았다.
+  it("새 교재 만들기 버튼이 없다", () => {
+    render(<Wrapper initialDocs={[existingDocListItem]} subjects={subjects} />);
+    expect(screen.queryByText("+ 새 교재 만들기")).not.toBeInTheDocument();
+  });
 
-    await waitFor(() => expect(screen.getByDisplayValue("새 교재")).toBeInTheDocument());
+  it("키워드별 보기(기본)는 과목 › 키워드로 접히고, 단원별 보기는 그 키워드가 붙은 단원마다 교재가 나온다", () => {
+    const pdf = {
+      ...existingDocListItem,
+      id: "pdf1",
+      title: "Words Core",
+      kind: "pdf" as const,
+      hasPrimaryKeyword: true,
+      primaryKeywordId: "kw1",
+      primaryKeywordLabel: "이차방정식",
+      hasDriveSource: true,
+      sourceDriveName: "SAT_..._Core_v1.pdf",
+    };
+    render(<Wrapper initialDocs={[existingDocListItem, pdf]} subjects={subjects} />);
+    const groups = screen.getAllByTestId("doc-group");
+    expect(groups.map((g) => g.textContent)).toEqual([
+      expect.stringContaining("SAT Math › 이차방정식"),
+      expect.stringContaining("SAT Math › (키워드 미지정)"),
+    ]);
+    // 원 파일명과 노출용 이름이 함께 보인다.
+    expect(screen.getByText("SAT_..._Core_v1.pdf")).toBeInTheDocument();
+    expect(screen.getByLabelText("SAT_..._Core_v1.pdf 노출용 이름")).toHaveValue("Words Core");
 
-    // 상세를 다시 조회하지 않고도(= 다시 들어가지 않아도) 선택지가 있어야 한다.
-    const unitSelect = screen.getByLabelText("단원") as HTMLSelectElement;
-    expect(unitSelect.querySelectorAll("option").length).toBeGreaterThan(1);
-
-    const keywordSelect = screen.getByLabelText("대표 키워드") as HTMLSelectElement;
-    expect(keywordSelect.querySelectorAll("option").length).toBeGreaterThan(1);
+    fireEvent.click(screen.getByRole("button", { name: "단원별 보기" }));
+    const unitGroups = screen.getAllByTestId("doc-group").map((g) => g.textContent ?? "");
+    expect(unitGroups.some((t) => t.includes("1. 함수의 기초") && t.includes("Words Core"))).toBe(true);
+    expect(unitGroups.some((t) => t.includes("(단원에 아직 안 들어감)"))).toBe(true);
   });
 });

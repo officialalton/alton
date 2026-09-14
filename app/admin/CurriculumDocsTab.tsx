@@ -2,7 +2,6 @@
 
 import { useState, type Dispatch, type SetStateAction } from "react";
 import {
-  createCurriculumDoc,
   getCurriculumDocDetailAction,
   setDocArchived,
   updateDocTitle,
@@ -10,7 +9,7 @@ import {
 import CurriculumDocEditor from "./CurriculumDocEditor";
 import type { DocEditorData, CurriculumDocListItem } from "./curriculum-doc-data";
 import { publishAssetDocAction } from "./curriculum-asset-actions";
-import { selectableSubjects, type AdminSubject } from "./subject-data";
+import type { AdminSubject } from "./subject-data";
 
 const STATUS_LABEL: Record<string, string> = {
   draft: "초안",
@@ -47,6 +46,8 @@ export default function CurriculumDocsTab({
   // 보관됨과 현재는 섞지 않는다. 기본 진입은 현재이고 검색도 그 안에서 돈다.
   const [showArchived, setShowArchived] = useState(false);
   const [query, setQuery] = useState("");
+  // 2026-09-14 — 라이브러리 탭을 여기로 합쳤다. 키워드별(기본) / 단원별 / 목록.
+  const [viewMode, setViewMode] = useState<"keyword" | "unit" | "list">("keyword");
   const [archiveError, setArchiveError] = useState<string | null>(null);
   const [assetNotice, setAssetNotice] = useState<string | null>(null);
   const [publishingAssetId, setPublishingAssetId] = useState<string | null>(null);
@@ -94,7 +95,6 @@ export default function CurriculumDocsTab({
     );
   }
   const [detailError, setDetailError] = useState<string | null>(null);
-  const [creating, setCreating] = useState(false);
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
   const open = openDocId ? (detailCache[openDocId] ?? null) : null;
@@ -162,35 +162,6 @@ export default function CurriculumDocsTab({
     setOpenDocId(null);
   }
 
-  function handleCreated(doc: DocEditorData) {
-    setDocs((prev) =>
-      [
-        ...prev,
-        {
-          id: doc.id,
-          title: doc.title,
-          subjectId: doc.subjectId,
-          subjectName: doc.subjectName,
-          primaryKeywordLabel: null,
-          unitId: doc.unitId,
-          unitTitle: doc.unitTitle,
-          status: doc.status,
-          sectionCount: doc.sections.length,
-          hasPrimaryKeyword: Boolean(doc.primaryKeywordId),
-          archivedAt: null,
-          archivedReason: null,
-          // 여기서 만드는 것은 본문 편집 교재다. 파일 자료는 Drive 자료 탭에서 들어온다.
-          kind: "html" as const,
-          sourceDriveName: null,
-          hasDriveSource: false,
-        },
-      ].sort((a, b) => a.title.localeCompare(b.title))
-    );
-    setDetailCache((prev) => ({ ...prev, [doc.id]: doc }));
-    setCreating(false);
-    setOpenDocId(doc.id);
-  }
-
   if (openDocId && loadingDetailId === openDocId) {
     return (
       <div className="max-w-[640px] px-8 py-8" data-testid="curriculum-doc-detail-skeleton">
@@ -215,89 +186,48 @@ export default function CurriculumDocsTab({
     );
   }
 
-  if (creating) {
-    return (
-      <NewDocForm
-        subjects={subjects}
-        onCreated={handleCreated}
-        onCancel={() => setCreating(false)}
-      />
-    );
-  }
+  const filteredDocs = docs
+    .filter((d) => (showArchived ? Boolean(d.archivedAt) : !d.archivedAt))
+    .filter((d) => query.trim() === "" || d.title.toLowerCase().includes(query.trim().toLowerCase()))
+    .filter((d) => !onlyMissingPrimary || !d.hasPrimaryKeyword);
 
-  const visibleDocs = docs.slice(0, visibleCount);
+  // 키워드별: 과목 › 대표 키워드. 단원별: 과목 › 단원(그 단원에 붙은 키워드를 대표 키워드로 가진 교재) — 교재 하나가
+  // 여러 단원에 들어갈 수 있으니 여러 묶음에 나온다. 대표 키워드 없는 교재는 "(키워드 미지정)".
+  type Group = { key: string; label: string; docs: CurriculumDocListItem[] };
+  const groups: Group[] = (() => {
+    const map = new Map<string, Group>();
+    const add = (key: string, label: string, d: CurriculumDocListItem) => {
+      const g = map.get(key) ?? { key, label, docs: [] };
+      g.docs.push(d);
+      map.set(key, g);
+    };
+    if (viewMode === "keyword") {
+      for (const d of filteredDocs) {
+        const kw = d.primaryKeywordLabel ?? "(키워드 미지정)";
+        add(`${d.subjectName}::${kw}`, `${d.subjectName} › ${kw}`, d);
+      }
+    } else {
+      for (const d of filteredDocs) {
+        const subject = subjects.find((sub) => sub.subjectId === d.subjectId);
+        const units = d.primaryKeywordId
+          ? (subject?.units ?? []).filter((u) => (u.keywordIds ?? []).includes(d.primaryKeywordId as string))
+          : [];
+        if (units.length === 0) {
+          add(`${d.subjectName}::__none`, `${d.subjectName} › (단원에 아직 안 들어감)`, d);
+          continue;
+        }
+        for (const u of units) add(`${d.subjectName}::${u.id}`, `${d.subjectName} › ${u.position}. ${u.unitTitle}`, d);
+      }
+    }
+    return Array.from(map.values()).sort((a, b) => {
+      const an = a.label.includes("(키워드 미지정)") || a.label.includes("(단원에 아직");
+      const bn = b.label.includes("(키워드 미지정)") || b.label.includes("(단원에 아직");
+      if (an !== bn) return an ? 1 : -1;
+      return a.label.localeCompare(b.label);
+    });
+  })();
 
-  return (
-    <div className="max-w-[640px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-1.5">교재 문서</h1>
-      <p className="text-[13px] text-grey-500 mb-5">
-        목차(섹션)와 본문을 작성하고, 배포하면 학생·선생님이 열람할 수 있습니다.
-      </p>
-      {detailError && <p className="text-[12.5px] text-red mb-3">{detailError}</p>}
-      {archiveError && <p className="text-[12.5px] text-red mb-3">{archiveError}</p>}
-      {assetNotice && <p className="text-[12.5px] text-ink bg-grey-100 rounded-lg px-3 py-2 mb-3">{assetNotice}</p>}
-
-      <div className="flex gap-1 mb-3 border-b-[1.5px] border-grey-200">
-        {[
-          { archived: false, label: "현재" },
-          { archived: true, label: "보관됨" },
-        ].map((t) => (
-          <button
-            key={t.label}
-            onClick={() => setShowArchived(t.archived)}
-            className={
-              "text-[13px] font-bold px-3.5 py-2 -mb-[1.5px] border-b-[2px] " +
-              (showArchived === t.archived ? "border-ink text-ink" : "border-transparent text-grey-500")
-            }
-          >
-            {t.label}
-            <span className="text-grey-300 font-semibold ml-1">
-              {docs.filter((d) => (t.archived ? Boolean(d.archivedAt) : !d.archivedAt)).length}
-            </span>
-          </button>
-        ))}
-      </div>
-
-      <input
-        aria-label="교재 검색"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder={showArchived ? "보관된 교재에서 찾기" : "교재 제목으로 찾기"}
-        className="w-full text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 mb-3"
-      />
-
-      {showArchived && (
-        <p className="text-[12px] text-grey-500 mb-3">
-          보관된 교재는 신규 선택과 자동 구성 후보에 나오지 않습니다. 이미 담긴 회차와 과거 수업 기록은
-          그대로 남아 있습니다.
-        </p>
-      )}
-
-      <label className="flex items-center gap-2 text-[12.5px] text-grey-500 mb-3">
-        <input
-          type="checkbox"
-          checked={onlyMissingPrimary}
-          onChange={(e) => setOnlyMissingPrimary(e.target.checked)}
-        />
-        대표 키워드가 없는 교재만 보기
-        <span className="text-grey-300">({docs.filter((d) => !d.hasPrimaryKeyword).length}건)</span>
-      </label>
-
-      {docs.length === 0 ? (
-        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center mb-3">
-          아직 만든 교재가 없습니다.
-        </div>
-      ) : (
-        <>
-          {visibleDocs
-            .filter((d) => (showArchived ? Boolean(d.archivedAt) : !d.archivedAt))
-            .filter(
-              (d) =>
-                query.trim() === "" ||
-                d.title.toLowerCase().includes(query.trim().toLowerCase())
-            )
-            .filter((d) => !onlyMissingPrimary || !d.hasPrimaryKeyword)
-            .map((d) => (
+  const renderRow = (d: CurriculumDocListItem) => (
             <div
               key={d.id}
               className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5 flex items-center justify-between"
@@ -367,158 +297,120 @@ export default function CurriculumDocsTab({
                 )}
               </span>
             </div>
-          ))}
-          {visibleCount < docs.length && (
-            <button
-              onClick={() => setVisibleCount((v) => v + PAGE_SIZE)}
-              className="text-[12.5px] font-semibold text-ink underline w-full text-center mb-2.5"
-            >
-              더 보기({docs.length - visibleCount}개 남음)
-            </button>
+  );
+
+  return (
+    <div className="max-w-[640px] px-8 py-8">
+      <h1 className="text-[20px] font-extrabold text-ink mb-1.5">교재</h1>
+      <p className="text-[13px] text-grey-500 mb-5">
+        Drive 자료 동기화로 들어온 PDF·영상과 예전 본문 교재입니다. 교재는 대표 키워드 하나에 속하고, 그 키워드가 붙은
+        여러 단원에 들어갑니다 — 키워드별 또는 단원별로 접어 봅니다.
+      </p>
+      {detailError && <p className="text-[12.5px] text-red mb-3">{detailError}</p>}
+      {archiveError && <p className="text-[12.5px] text-red mb-3">{archiveError}</p>}
+      {assetNotice && <p className="text-[12.5px] text-ink bg-grey-100 rounded-lg px-3 py-2 mb-3">{assetNotice}</p>}
+
+      <div className="flex gap-1 mb-3 border-b-[1.5px] border-grey-200">
+        {[
+          { archived: false, label: "현재" },
+          { archived: true, label: "보관됨" },
+        ].map((t) => (
+          <button
+            key={t.label}
+            onClick={() => setShowArchived(t.archived)}
+            className={
+              "text-[13px] font-bold px-3.5 py-2 -mb-[1.5px] border-b-[2px] " +
+              (showArchived === t.archived ? "border-ink text-ink" : "border-transparent text-grey-500")
+            }
+          >
+            {t.label}
+            <span className="text-grey-300 font-semibold ml-1">
+              {docs.filter((d) => (t.archived ? Boolean(d.archivedAt) : !d.archivedAt)).length}
+            </span>
+          </button>
+        ))}
+      </div>
+
+      <input
+        aria-label="교재 검색"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder={showArchived ? "보관된 교재에서 찾기" : "교재 제목으로 찾기"}
+        className="w-full text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 mb-3"
+      />
+
+      <div className="flex gap-1.5 mb-3" role="group" aria-label="보기 방식">
+        {(
+          [
+            { id: "keyword", label: "키워드별 보기" },
+            { id: "unit", label: "단원별 보기" },
+            { id: "list", label: "목록" },
+          ] as const
+        ).map((m) => (
+          <button
+            key={m.id}
+            type="button"
+            aria-pressed={viewMode === m.id}
+            onClick={() => setViewMode(m.id)}
+            className={
+              "text-[12px] font-bold px-3 py-1.5 rounded-full border-[1.5px] " +
+              (viewMode === m.id ? "bg-ink text-white border-ink" : "border-grey-200 text-ink")
+            }
+          >
+            {m.label}
+          </button>
+        ))}
+      </div>
+
+      {showArchived && (
+        <p className="text-[12px] text-grey-500 mb-3">
+          보관된 교재는 신규 선택과 자동 구성 후보에 나오지 않습니다. 이미 담긴 회차와 과거 수업 기록은
+          그대로 남아 있습니다.
+        </p>
+      )}
+
+      <label className="flex items-center gap-2 text-[12.5px] text-grey-500 mb-3">
+        <input
+          type="checkbox"
+          checked={onlyMissingPrimary}
+          onChange={(e) => setOnlyMissingPrimary(e.target.checked)}
+        />
+        대표 키워드가 없는 교재만 보기
+        <span className="text-grey-300">({docs.filter((d) => !d.hasPrimaryKeyword).length}건)</span>
+      </label>
+
+      {docs.length === 0 ? (
+        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center mb-3">
+          아직 교재가 없습니다. Drive 자료 탭에서 과목 자료 동기화를 실행하세요.
+        </div>
+      ) : (
+        <>
+          {viewMode === "list" ? (
+            <>
+              {filteredDocs.slice(0, visibleCount).map(renderRow)}
+              {visibleCount < filteredDocs.length && (
+                <button
+                  onClick={() => setVisibleCount((v) => v + PAGE_SIZE)}
+                  className="text-[12.5px] font-semibold text-ink underline w-full text-center mb-2.5"
+                >
+                  더 보기({filteredDocs.length - visibleCount}개 남음)
+                </button>
+              )}
+            </>
+          ) : (
+            groups.map((g) => (
+              <details key={g.key} open={groups.length <= 3} className="mb-2" data-testid="doc-group">
+                <summary className="cursor-pointer text-[13.5px] font-bold text-ink px-2 py-2 rounded-lg hover:bg-grey-100">
+                  📁 {g.label} <span className="text-[12px] text-grey-500 font-semibold">{g.docs.length}개</span>
+                </summary>
+                <div className="pl-2 pt-1">{g.docs.map(renderRow)}</div>
+              </details>
+            ))
           )}
         </>
       )}
 
-      <button
-        onClick={() => setCreating(true)}
-        className="text-[12.5px] font-bold px-4 py-2.5 rounded-lg border-[1.5px] border-grey-200 text-ink w-full mt-2"
-      >
-        + 새 교재 만들기
-      </button>
-    </div>
-  );
-}
-
-function NewDocForm({
-  subjects,
-  onCreated,
-  onCancel,
-}: {
-  subjects: AdminSubject[];
-  onCreated: (doc: DocEditorData) => void;
-  onCancel: () => void;
-}) {
-  const [title, setTitle] = useState("");
-  const [subjectId, setSubjectId] = useState<string | null>(null);
-  const [unitId, setUnitId] = useState<string | null>(null);
-  const [creating, setCreating] = useState(false);
-
-  const selectedSubject = subjects.find((s) => s.subjectId === subjectId);
-
-  async function handleCreate() {
-    if (!title.trim() || !subjectId || creating) return;
-    setCreating(true);
-    try {
-      const { id } = await createCurriculumDoc({ title: title.trim(), subjectId, unitId });
-      onCreated({
-        id,
-        title: title.trim(),
-        subjectId,
-        subjectName: selectedSubject?.subjectName ?? "",
-        // 새 교재는 대표 키워드가 없다 — 관리자가 편집 화면에서 고른다.
-        primaryKeywordId: null,
-        primaryKeywordPosition: null,
-        unitId,
-        unitTitle: selectedSubject?.units.find((u) => u.id === unitId)?.unitTitle ?? null,
-        status: "draft",
-        sections: [],
-        // 2026-09-12(UAT): 이 둘이 빠져 있어서 방금 만든 교재의 편집 화면에
-        // 대표 키워드 선택지가 비어 보였다("다시 들어가니까 나온다"의 원인 —
-        // 로딩이 느린 게 아니라 처음부터 없었다). 만든 직후에도 같은 화면을
-        // 보여주려면 여기서 함께 넘겨야 한다.
-        subjectKeywords: selectedSubject?.keywords ?? [],
-        subjectUnits: (selectedSubject?.units ?? []).map((u) => ({
-          id: u.id,
-          unitTitle: u.unitTitle,
-          position: u.position,
-        })),
-      });
-    } finally {
-      setCreating(false);
-    }
-  }
-
-  return (
-    <div className="max-w-[640px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-5">새 교재 만들기</h1>
-
-      <div className="mb-4">
-        <label className="text-[12.5px] font-bold text-ink mb-1.5 block">제목</label>
-        <input
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="예: 이차방정식 개념 정리"
-          className="w-full px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px]"
-        />
-      </div>
-
-      <div className="mb-4">
-        <label className="text-[12.5px] font-bold text-ink mb-1.5 block">과목</label>
-        <div className="flex flex-wrap gap-2">
-          {/* 2026-09-09(UAT 지적, 제품 오너 승인): 보관된 과목은 새 교재의
-              연결 후보에서 제외한다. */}
-          {selectableSubjects(subjects).map((s) => (
-            <button
-              key={s.subjectId}
-              onClick={() => {
-                setSubjectId(s.subjectId);
-                setUnitId(null);
-              }}
-              className={
-                "text-[12.5px] font-semibold px-3 py-1.5 rounded-full border-[1.5px] " +
-                (subjectId === s.subjectId
-                  ? "bg-ink text-white border-ink"
-                  : "border-grey-200 text-ink")
-              }
-            >
-              {s.subjectName}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {selectedSubject && (
-        <div className="mb-4">
-          <label className="text-[12.5px] font-bold text-ink mb-1.5 block">
-            단원 (선택)
-          </label>
-          {selectedSubject.units.length === 0 ? (
-            <p className="text-[12.5px] text-grey-500">
-              이 과목엔 아직 회차가 없습니다. 과목 템플릿 탭에서 먼저 회차를 추가해주세요.
-            </p>
-          ) : (
-            <div className="flex flex-wrap gap-2">
-              {selectedSubject.units.map((u) => (
-                <button
-                  key={u.id}
-                  onClick={() => setUnitId(unitId === u.id ? null : u.id)}
-                  className={
-                    "text-[12px] font-semibold px-3 py-1.5 rounded-full border-[1.5px] " +
-                    (unitId === u.id
-                      ? "bg-ink text-white border-ink"
-                      : "border-grey-200 text-ink")
-                  }
-                >
-                  {u.position}회차 · {u.unitTitle}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
-
-      <div className="flex gap-3 mt-6">
-        <button
-          disabled={!title.trim() || !subjectId || creating}
-          onClick={handleCreate}
-          className="text-[13px] font-bold px-4 py-2.5 rounded-lg bg-ink text-white disabled:opacity-50"
-        >
-          {creating ? "만드는 중..." : "만들기"}
-        </button>
-        <button onClick={onCancel} className="text-[13px] font-semibold text-grey-500">
-          취소
-        </button>
-      </div>
+      {/* 2026-09-14 제품 오너: 새 교재(HTML) 만들기는 막는다 — 교재는 Drive 자료 동기화로만 들어온다. */}
     </div>
   );
 }

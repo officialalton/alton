@@ -262,7 +262,8 @@ export type CurriculumDocListItem = {
   sectionCount: number;
   // P2 2차: 대표 키워드가 아직 없는 교재를 목록에서 찾아낼 수 있어야 한다.
   hasPrimaryKeyword: boolean;
-  /** 대표 키워드 이름 — 라이브러리는 이제 단원이 아니라 키워드로 접는다(2026-09-14). */
+  /** 대표 키워드 — 교재 탭이 키워드별·단원별로 접는 기준(2026-09-14). */
+  primaryKeywordId: string | null;
   primaryKeywordLabel: string | null;
   // 보관된 교재는 현재 목록에서 빠지고 '보관됨'에서만 보인다.
   archivedAt: string | null;
@@ -303,6 +304,7 @@ export async function loadCurriculumDocList(supabase: SupabaseClient): Promise<C
     status: d.status,
     sectionCount: sectionCountByDoc.get(d.id) ?? 0,
     hasPrimaryKeyword: Boolean(d.primary_keyword_id),
+    primaryKeywordId: (d.primary_keyword_id as string | null) ?? null,
     primaryKeywordLabel: extractLabel((d as { primary_keyword?: unknown }).primary_keyword),
     archivedAt: (d.archived_at as string | null) ?? null,
     archivedReason: (d.archived_reason as string | null) ?? null,

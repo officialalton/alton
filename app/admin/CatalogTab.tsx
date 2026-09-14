@@ -4,15 +4,13 @@ import { useCallback, useEffect, useState } from "react";
 import { listSubjectCatalogAction } from "./subject-actions";
 import SubjectTemplateTab from "./SubjectTemplateTab";
 import CurriculumDocsTab from "./CurriculumDocsTab";
-import MaterialsLibraryTab from "./MaterialsLibraryTab";
 import DriveMaterialsPanel from "./DriveMaterialsPanel";
 import type { AdminSubject } from "./subject-data";
 import type { CurriculumDocListItem } from "./curriculum-doc-data";
 
 const SUBTABS = [
   { id: "subjects", label: "과목 템플릿" },
-  { id: "docs", label: "교재 문서" },
-  { id: "materials", label: "교재 라이브러리" },
+  { id: "docs", label: "교재" },
   { id: "drive", label: "Drive 자료" },
 ] as const;
 
@@ -97,10 +95,8 @@ export default function CatalogTab({
         )
       ) : subtab === "docs" ? (
         <CurriculumDocsTab docs={docs} setDocs={setDocs} subjects={subjects} />
-      ) : subtab === "drive" ? (
-        <DriveMaterialsPanel subjects={subjects} />
       ) : (
-        <MaterialsLibraryTab docs={docs} />
+        <DriveMaterialsPanel subjects={subjects} />
       )}
     </div>
   );
