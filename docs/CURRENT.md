@@ -5,15 +5,14 @@
 > 커밋 `531e4bc` → `8dc0fdf` → `63d1189`(브랜치 `preview/m4-integration-verification`).
 > 전체 테스트 **2596 통과 / 1 skip**(`supabase db reset --local` 직후 `vitest run --no-file-parallelism`, 449s).
 >
-> **Preview `https://alton-ps9vbu4k4-alton7.vercel.app` = 커밋 `8dc0fdf`까지만.** `63d1189`(Drive
-> 자료)는 **배포하지 않았다** — 공유 non-prod 에 `20261348000000` 이 없으면 `kind` 컬럼 조회가
-> 실패해 교재 라이브러리·예정 교재 표시가 깨진다. 아래 "사용자가 할 조작" 순서대로.
+> **공유 non-prod: 46·47·48 전부 적용됨(2026-09-14 사용자 실행).** Preview
+> `https://alton-cwonwkrvj-alton7.vercel.app` = 커밋 `f51cef9`(Drive 자료 포함). 첫 배포
+> `ke46evn0y`는 `"use server"` 파일의 상수 export 로 빌드 실패 → `f51cef9`로 정정 재배포.
+> 배포 상태 확인(`vercel ls`)은 이 세션에서 권한에 막혀 **Ready 여부 미확인** — 사용자가 확인.
 >
-> **공유 non-prod 미적용 마이그레이션 3건**: `20261346000000`(구성 출처 표식), `20261347000000`
-> (상위 변경 내려보내기 + 학생 층 '뺀 문제' 기록), `20261348000000`(Drive 자료·키워드 단원·폴더 큐·
-> 고정 사본 버킷·페이지 필기). 이 세션에서 `npx supabase db push --linked` 가 도구 권한에 막혔다
-> (Production 배포로 분류됨). 46·47 없이도 지금 Preview(`8dc0fdf`)는 구버전 함수로 동작한다
-> (업데이트 미리보기의 새 항목이 0으로 보임, 학생 층 '뺀 문제' 기록 안 됨).
+> **교재 전용 Shared Drive 준비됨**: `ALTON Company Tutori…`, id `0AKnx7roQfcSaUk9PVA`,
+> `r3-drive-preview-verify@alton-integration-sandbox.iam.gserviceaccount.com` Manager 로 초대됨.
+> Preview 환경변수는 이 세션에서 쓰기가 막혀 **미설정** — 아래 조작 1.
 >
 > **완료한 것**
 > 1. `기본 구성 업데이트`가 상위에서 **빠진 것을 빼고**(내려온 행만), 없는 것을 받고, **순서·목표**를
@@ -46,14 +45,13 @@
 >   iPad·Apple Pencil, 원본 교체·재공개 후 유지(RPC 테스트만), 학생·보호자 계정의 브라우저 확인, Preview.
 >
 > **사용자가 할 조작(순서대로)**
-> 1. `npx supabase db push --linked` (46·47·48 적용) → `npx supabase migration list --linked` 로 확인.
-> 2. `npx vercel deploy --yes` (커밋 `63d1189`) → 새 Preview 주소로 UAT.
-> 3. 교재 전용 Shared Drive 1개 생성, Preview 검증 서비스 계정을 **그 드라이브에만** 초대(읽기 검증은
->    뷰어, 폴더 생성까지는 콘텐츠 관리자), Preview 환경변수 `CURRICULUM_DRIVE_ENABLED=true`,
->    `CURRICULUM_DRIVE_ID`, (선택) `CURRICULUM_DRIVE_ROOT_FOLDER_ID`; `CURRICULUM_DRIVE_ALLOW_REAL_WRITES`
->    는 폴더 동기화 '계획'을 본 뒤 `true`.
-> 4. Drive 없이도 관리자 > 과목 및 교재 > Drive 자료 > **로컬 표본**으로 PDF 를 올려 뷰어·필기 UAT 가능.
->
+> 1. Preview 환경변수: `CURRICULUM_DRIVE_ENABLED=true`, `CURRICULUM_DRIVE_ID=0AKnx7roQfcSaUk9PVA`,
+>    `CURRICULUM_DRIVE_ALLOW_REAL_WRITES=false` → `npx vercel deploy --yes`(환경변수는 새 배포부터).
+> 2. 관리자 > 과목 및 교재 > Drive 자료 > `폴더 동기화 실행` → 계획(만들 폴더 수) 확인 →
+>    `CURRICULUM_DRIVE_ALLOW_REAL_WRITES=true` 로 바꾸고 재배포 → 다시 실행(실제 폴더 생성).
+> 3. 키워드 폴더에 PDF 올리기 → `Drive 에서 불러오기` → 등록 → 공개(고정 사본). Drive 없이 바로
+>    보려면 같은 탭의 **로컬 표본**.
+> 4. Preview UAT: 교사 예정 수업 교재 탭에서 PDF 페이지·필기, 학생 계정 `수업 준비`·`/materials`.
 > **열린 결함·남은 것**: 기존 키워드 128개(로컬 기준) 단원 미지정 — 전환 대상, 사람이 정한다 /
 > `session_curriculum_units` 없는 회차(예약 미연결)의 필기는 수업이 없어 저장 대상이 없음(설계대로) /
 > 이전 항목(테스트 격리 `reservations_no_overlap`, `homework_items.session_id` 레거시, Google 이전
