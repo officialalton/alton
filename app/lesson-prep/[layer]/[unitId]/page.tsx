@@ -63,11 +63,15 @@ export default async function LessonPrepPage({
     );
   }
 
+  // 2026-09-14 — 단계별 소요를 서버 로그에 남긴다(Vercel 함수 로그에서 어디가 느린지 볼 수 있게).
+  const t0 = Date.now();
   const composition = await loadComposition(supabase, layer, unitId);
+  const tComposition = Date.now() - t0;
   // 없는 회차와 볼 수 없는 회차를 화면에서 구분하지 않는다 — 어느 쪽인지 알려주면
   // 남의 회차가 존재한다는 사실이 새어 나간다.
   if (!composition) notFound();
 
+  const t1 = Date.now();
   const [pickable, problems] = await Promise.all([
     loadPickableMaterials(
       supabase,
@@ -79,6 +83,16 @@ export default async function LessonPrepPage({
       composition.keywords.map((k) => k.id)
     ),
   ]);
+
+  console.log(
+    JSON.stringify({
+      event: "lesson_prep_timing",
+      layer,
+      compositionMs: tComposition,
+      candidatesMs: Date.now() - t1,
+      totalMs: Date.now() - t0,
+    })
+  );
 
   return (
     <CompositionPanel

@@ -273,11 +273,18 @@ export async function resolveUnitScope(
     .maybeSingle();
   if (!unitRow) return null;
 
-  const { data: overlayRow } = await supabase
-    .from("student_curriculum_overlays")
-    .select("subject_enrollment_id")
-    .eq("id", unitRow.overlay_id as string)
-    .maybeSingle();
+  // 2026-09-14 성능: 서로 기다릴 필요 없는 조회는 함께 보낸다. 수업 준비 화면이 15초 가까이
+  // 걸린 원인의 하나가 회차 하나를 여는 데 왕복 15번을 **차례로** 하던 것이다.
+  const [{ data: overlayRow }, { data: prepRow }] = await Promise.all([
+    supabase
+      .from("student_curriculum_overlays")
+      .select("subject_enrollment_id")
+      .eq("id", unitRow.overlay_id as string)
+      .maybeSingle(),
+    // 학생 층의 목표는 회차 준비에 있다(20261296000000). 준비 행이 없으면 아직
+    // 아무도 정하지 않은 것이므로 null 이다.
+    supabase.from("curriculum_unit_preps").select("goal").eq("overlay_unit_id", unitId).maybeSingle(),
+  ]);
 
   const { data: enrollmentRow } = overlayRow
     ? await supabase
@@ -286,14 +293,6 @@ export async function resolveUnitScope(
         .eq("id", overlayRow.subject_enrollment_id as string)
         .maybeSingle()
     : { data: null };
-
-  // 학생 층의 목표는 회차 준비에 있다(20261296000000). 준비 행이 없으면 아직
-  // 아무도 정하지 않은 것이므로 null 이다.
-  const { data: prepRow } = await supabase
-    .from("curriculum_unit_preps")
-    .select("goal")
-    .eq("overlay_unit_id", unitId)
-    .maybeSingle();
 
   const studentName = relName(enrollmentRow?.child);
   return {
@@ -325,7 +324,14 @@ export async function loadComposition(
   const scope = await resolveUnitScope(supabase, layer, unitId);
   if (!scope) return null;
 
-  const [{ data: linkRows }, { data: materialRows }, { data: subjectKeywordRows }, { count: driftCount }] =
+  const [
+    { data: linkRows },
+    { data: materialRows },
+    { data: subjectKeywordRows },
+    { count: driftCount },
+    { count: parentPending },
+    problems,
+  ] =
     await Promise.all([
       supabase.from(spec.keywordTable).select("keyword_id").eq(spec.unitFk, unitId),
       supabase
@@ -348,18 +354,17 @@ export async function loadComposition(
         .select("*", { count: "exact", head: true })
         .eq("layer", layer)
         .eq("unit_id", unitId),
+      // 상위와 어긋난 것이 있는지 — 아직 받지 않은 것과, 내려온 뒤 상위에서 없어진 것.
+      // 기준본 층은 위가 없다. 학생 층의 상위는 교사 회차(없으면 기준본)다(20261347000000).
+      layer !== "catalog"
+        ? supabase
+            .from("unit_parent_pending_updates")
+            .select("*", { count: "exact", head: true })
+            .eq("layer", layer)
+            .eq("unit_id", unitId)
+        : Promise.resolve({ count: 0 as number | null }),
+      loadUnitProblems(supabase, layer, unitId),
     ]);
-
-  // 상위와 어긋난 것이 있는지 — 아직 받지 않은 것과, 내려온 뒤 상위에서 없어진 것.
-  // 기준본 층은 위가 없다. 학생 층의 상위는 교사 회차(없으면 기준본)다(20261347000000).
-  const { count: parentPending } =
-    layer !== "catalog"
-      ? await supabase
-          .from("unit_parent_pending_updates")
-          .select("*", { count: "exact", head: true })
-          .eq("layer", layer)
-          .eq("unit_id", unitId)
-      : { count: 0 };
 
   const labelById = new Map(
     (subjectKeywordRows ?? []).map((k) => [k.id as string, k.label as string])
@@ -400,7 +405,7 @@ export async function loadComposition(
     hasUnappliedChanges: scope.dirty,
     outdatedVersionCount: driftCount ?? 0,
     parentPendingCount: parentPending ?? 0,
-    problems: await loadUnitProblems(supabase, layer, unitId),
+    problems,
   };
 }
 
