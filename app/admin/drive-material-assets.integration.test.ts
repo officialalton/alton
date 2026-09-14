@@ -309,3 +309,20 @@ describe("미리보기가 파일 자료를 구분해 안다", () => {
     expect(m.sections).toEqual([]);
   });
 });
+
+// 2026-09-14 Preview 재현 — 준비안에 PDF(교재 전체)가 담긴 수업의 시작이 "column d.id does not exist"로 막혔다.
+describe("수업 시작이 PDF 자료를 고정한다", () => {
+  it("material_doc 을 준비안 버전 그대로 매니페스트에 고정한다", () => {
+    const doc = makeAssetDoc("pdf", undefined, true);
+    const v = asUser(ADMIN_ID, `select publish_curriculum_asset_doc('${doc}', '${asset()}'::jsonb);`);
+    const { sessionId } = makeSessionWithPlannedDoc(doc, true);
+    const unitId = psql(`select overlay_unit_id from session_curriculum_units where session_id = '${sessionId}';`);
+    psql(`update curriculum_overlay_unit_materials set curriculum_doc_version_id = '${v}' where overlay_unit_id = '${unitId}';`);
+    psql(`insert into curriculum_unit_preps (overlay_unit_id) values ('${unitId}') on conflict do nothing;`);
+    psql(`select link_unit_prep_to_session('${unitId}', '${sessionId}', '${TEACHER_ID}');`);
+    psql(`select mark_lesson_session_started('${sessionId}', '${TEACHER_ID}');`);
+    expect(
+      psql(`select content_type::text || ':' || (curriculum_doc_version_id = '${v}')::text from session_content_manifest where session_id = '${sessionId}' and content_type = 'material_doc';`)
+    ).toBe("material_doc:true");
+  });
+});
