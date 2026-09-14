@@ -100,7 +100,7 @@ function startedSessionWithTwoProblems(): {
 
   const prepId = asUser(
     TEACHER_ID,
-    `insert into curriculum_unit_preps (overlay_unit_id, created_by) values ('${overlayUnitId}', '${TEACHER_ID}') returning id;`
+    `insert into curriculum_unit_preps (overlay_unit_id, created_by) values ('${overlayUnitId}', '${TEACHER_ID}') on conflict (overlay_unit_id) do update set created_by = excluded.created_by returning id;`
   );
   asUser(
     TEACHER_ID,

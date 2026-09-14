@@ -460,16 +460,26 @@ export async function removeUnitKeyword(
  * 선생님이 눌러야 돈다. 이미 고른 것은 덮어쓰지 않고 없는 것만 내려온다
  * (inherit_unit_defaults_from_template, 20261308000000).
  */
-export async function inheritUnitDefaults(
-  overlayUnitId: string
-): Promise<{ ok: true; keywordsAdded: number; materialsAdded: number } | { ok: false; error: string }> {
+export async function inheritUnitDefaults(overlayUnitId: string): Promise<
+  | { ok: true; keywordsAdded: number; materialsAdded: number; problemsAdded: number }
+  | { ok: false; error: string }
+> {
   const { supabase } = await requireTeacherOrAdmin();
   const { data, error } = await supabase
     .rpc("inherit_unit_defaults_from_template", { p_overlay_unit_id: overlayUnitId })
     .maybeSingle();
   if (error) return { ok: false, error: "기본 구성을 가져오지 못했습니다." };
-  const row = data as { keywords_added?: number; materials_added?: number } | null;
-  return { ok: true, keywordsAdded: row?.keywords_added ?? 0, materialsAdded: row?.materials_added ?? 0 };
+  const row = data as {
+    keywords_added?: number;
+    materials_added?: number;
+    problems_added?: number;
+  } | null;
+  return {
+    ok: true,
+    keywordsAdded: row?.keywords_added ?? 0,
+    materialsAdded: row?.materials_added ?? 0,
+    problemsAdded: row?.problems_added ?? 0,
+  };
 }
 
 /** 회차 교재 구성의 순서를 바꾼다. 인접한 둘을 맞바꾼다. */

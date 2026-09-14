@@ -318,3 +318,56 @@ export async function applyRecomposition(
   }
   return { ok: true, value: asSummary(data) };
 }
+
+// =========================================================================
+// 위 계층 구성 물려받기
+// =========================================================================
+// 2026-09-13 제품 오너: "초기 셋업 후 교사가 학생마다 교재·문제를 다시 담아야 하는
+// 상태는 최종 요구를 충족하지 못합니다."
+//
+// 회차가 **새로 만들어질 때는** 상속이 자동으로 끝난다(20261340000000). 그 전에
+// 만들어진 회차는 트리거가 돌지 않았으므로 여기서 부른다. 소급해서 자동으로 채우지
+// 않는 이유는, 선생님이 일부러 비워 둔 것과 구분할 수 없기 때문이다.
+
+export type InheritSummary = {
+  keywordsAdded: number;
+  materialsAdded: number;
+  problemsAdded: number;
+};
+
+export async function inheritDefaults(
+  layer: PrepLayer,
+  unitId: string
+): Promise<{ ok: true; value: InheritSummary } | { ok: false; error: string }> {
+  const { supabase, error: denied } = await gate(layer);
+  if (!supabase) return { ok: false, error: denied };
+
+  if (layer === "catalog") {
+    // 기준본이 곧 기준이다 — 위에서 물려받을 것이 없다.
+    return { ok: false, error: "관리자 기준본은 물려받을 상위 구성이 없습니다." };
+  }
+
+  const fn =
+    layer === "teacher"
+      ? "inherit_teacher_unit_defaults_from_template"
+      : "inherit_unit_defaults_from_template";
+  const arg =
+    layer === "teacher" ? { p_unit_id: unitId } : { p_overlay_unit_id: unitId };
+
+  const { data, error } = await supabase.rpc(fn, arg).maybeSingle();
+  if (error) {
+    console.error(
+      JSON.stringify({ event: "prep_inherit_failed", layer, message: error.message })
+    );
+    return { ok: false, error: "상위 구성을 가져오지 못했습니다." };
+  }
+  const row = (data ?? {}) as Record<string, number | undefined>;
+  return {
+    ok: true,
+    value: {
+      keywordsAdded: Number(row.keywords_added ?? 0),
+      materialsAdded: Number(row.materials_added ?? 0),
+      problemsAdded: Number(row.problems_added ?? 0),
+    },
+  };
+}

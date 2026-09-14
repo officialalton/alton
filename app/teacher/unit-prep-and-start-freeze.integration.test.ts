@@ -168,7 +168,8 @@ describe("1. 예약 없이 회차를 준비한다", () => {
     const prepId = asUser(
       TEACHER_ID,
       `insert into curriculum_unit_preps (overlay_unit_id, goal, created_by)
-       values ('${overlayUnitId}', '이차함수 그래프의 평행이동을 설명한다', '${TEACHER_ID}') returning id;`
+       values ('${overlayUnitId}', '이차함수 그래프의 평행이동을 설명한다', '${TEACHER_ID}')
+       on conflict (overlay_unit_id) do update set goal = excluded.goal returning id;`
     );
     const sectionId = makeSelectableSection(keywordId);
     const problemId = makeSelectableProblem(keywordId);
@@ -189,14 +190,14 @@ describe("1. 예약 없이 회차를 준비한다", () => {
     const { overlayUnitId } = makeUnitWithoutReservation();
     const prepId = asUser(
       TEACHER_ID,
-      `insert into curriculum_unit_preps (overlay_unit_id, created_by) values ('${overlayUnitId}', '${TEACHER_ID}') returning id;`
+      `insert into curriculum_unit_preps (overlay_unit_id, created_by) values ('${overlayUnitId}', '${TEACHER_ID}') on conflict (overlay_unit_id) do update set created_by = excluded.created_by returning id;`
     );
 
     expect(asUser(STUDENT_ID, `select count(*) from curriculum_unit_preps where id = '${prepId}';`)).toBe("0");
     expect(
       asUserExpectError(
         OTHER_TEACHER_ID,
-        `insert into curriculum_unit_preps (overlay_unit_id, created_by) values ('${overlayUnitId}', '${OTHER_TEACHER_ID}');`
+        `insert into curriculum_unit_preps (overlay_unit_id, created_by) values ('${overlayUnitId}', '${OTHER_TEACHER_ID}') on conflict (overlay_unit_id) do update set created_by = excluded.created_by;`
       )
     ).toMatch(/row-level security|policy/i);
     // 관리자는 커리큘럼 운영 정책대로 접근할 수 있다(피드백 6 — 전면 금지 철회).
@@ -207,7 +208,7 @@ describe("1. 예약 없이 회차를 준비한다", () => {
     const { overlayUnitId, keywordId, enrollmentId } = makeUnitWithoutReservation();
     const prepId = asUser(
       TEACHER_ID,
-      `insert into curriculum_unit_preps (overlay_unit_id, created_by) values ('${overlayUnitId}', '${TEACHER_ID}') returning id;`
+      `insert into curriculum_unit_preps (overlay_unit_id, created_by) values ('${overlayUnitId}', '${TEACHER_ID}') on conflict (overlay_unit_id) do update set created_by = excluded.created_by returning id;`
     );
     const sectionId = makeSelectableSection(keywordId);
     asUser(
@@ -231,7 +232,7 @@ describe("1. 예약 없이 회차를 준비한다", () => {
     const { overlayUnitId, enrollmentId } = makeUnitWithoutReservation();
     asUser(
       TEACHER_ID,
-      `insert into curriculum_unit_preps (overlay_unit_id, created_by) values ('${overlayUnitId}', '${TEACHER_ID}');`
+      `insert into curriculum_unit_preps (overlay_unit_id, created_by) values ('${overlayUnitId}', '${TEACHER_ID}') on conflict (overlay_unit_id) do update set created_by = excluded.created_by;`
     );
     const sessionId = addSessionFor(enrollmentId);
     expect(
@@ -241,7 +242,7 @@ describe("1. 예약 없이 회차를 준비한다", () => {
     const other = makeUnitWithoutReservation();
     asUser(
       TEACHER_ID,
-      `insert into curriculum_unit_preps (overlay_unit_id, created_by) values ('${other.overlayUnitId}', '${TEACHER_ID}');`
+      `insert into curriculum_unit_preps (overlay_unit_id, created_by) values ('${other.overlayUnitId}', '${TEACHER_ID}') on conflict (overlay_unit_id) do update set created_by = excluded.created_by;`
     );
     expect(
       psqlExpectError(`select link_unit_prep_to_session('${other.overlayUnitId}', '${sessionId}', '${TEACHER_ID}');`)
@@ -259,7 +260,8 @@ describe("1-b. 담은 자료는 재조회·수업 연결 뒤에도 그대로 남
     const prepId = asUser(
       TEACHER_ID,
       `insert into curriculum_unit_preps (overlay_unit_id, goal, created_by)
-       values ('${overlayUnitId}', '유지 확인', '${TEACHER_ID}') returning id;`
+       values ('${overlayUnitId}', '유지 확인', '${TEACHER_ID}')
+       on conflict (overlay_unit_id) do update set goal = excluded.goal returning id;`
     );
     const sectionId = makeSelectableSection(keywordId);
     const problemId = makeSelectableProblem(keywordId);
@@ -318,7 +320,7 @@ describe("2. 준비 저장과 수업 시작 시점의 고정은 다르다", () =
     const { overlayUnitId, keywordId, enrollmentId, contractId } = makeUnitWithoutReservation();
     const prepId = asUser(
       TEACHER_ID,
-      `insert into curriculum_unit_preps (overlay_unit_id, created_by) values ('${overlayUnitId}', '${TEACHER_ID}') returning id;`
+      `insert into curriculum_unit_preps (overlay_unit_id, created_by) values ('${overlayUnitId}', '${TEACHER_ID}') on conflict (overlay_unit_id) do update set created_by = excluded.created_by returning id;`
     );
     const problemId = makeSelectableProblem(keywordId);
     asUser(
@@ -408,7 +410,7 @@ describe("3·4. 시작 시점의 최신 준비가 고정되고, 시작과 고정
     const { overlayUnitId, keywordId, enrollmentId, contractId } = makeUnitWithoutReservation();
     const prepId = asUser(
       TEACHER_ID,
-      `insert into curriculum_unit_preps (overlay_unit_id, created_by) values ('${overlayUnitId}', '${TEACHER_ID}') returning id;`
+      `insert into curriculum_unit_preps (overlay_unit_id, created_by) values ('${overlayUnitId}', '${TEACHER_ID}') on conflict (overlay_unit_id) do update set created_by = excluded.created_by returning id;`
     );
     const first = makeSelectableProblem(keywordId);
     asUser(

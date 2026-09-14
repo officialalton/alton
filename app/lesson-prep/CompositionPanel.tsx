@@ -10,6 +10,7 @@ import {
   saveGoal,
   previewRecomposition,
   applyRecomposition,
+  inheritDefaults,
   type RecompositionSummary,
 } from "./actions";
 import type {
@@ -51,6 +52,7 @@ export default function CompositionPanel({
   const [goalSaved, setGoalSaved] = useState(false);
   const [pending, setPending] = useState<RecompositionSummary | null>(null);
   const [busy, setBusy] = useState(false);
+  const [notice, setNotice] = useState<string | null>(null);
 
   const { layer, unitId } = composition;
   const pickedIds = new Set(materials.map((m) => m.curriculumDocId));
@@ -84,6 +86,24 @@ export default function CompositionPanel({
       return;
     }
     setPending(result.value);
+  }
+
+  async function pullFromParent() {
+    setBusy(true);
+    setError(null);
+    setNotice(null);
+    const result = await inheritDefaults(layer, unitId);
+    setBusy(false);
+    if (!result.ok) {
+      setError(result.error);
+      return;
+    }
+    const { keywordsAdded, materialsAdded, problemsAdded } = result.value;
+    if (keywordsAdded + materialsAdded + problemsAdded === 0) {
+      setNotice("가져올 것이 없습니다 — 이미 다 물려받았거나 위 구성이 비어 있습니다.");
+      return;
+    }
+    window.location.reload();
   }
 
   async function applyChanges() {
@@ -177,6 +197,29 @@ export default function CompositionPanel({
       {error && (
         <div className="text-[12.5px] text-red bg-red/5 border-[1.5px] border-red/20 rounded-lg px-4 py-2.5 mb-4">
           {error}
+        </div>
+      )}
+      {notice && <p className="text-[12.5px] text-grey-500 mb-4">{notice}</p>}
+
+      {/* 회차를 새로 만들면 상속이 자동으로 끝난다. 그 전에 만들어진 회차는 비어 있을
+          수 있으므로 여기서 부른다 — 소급해서 자동으로 채우면 선생님이 일부러 비워 둔
+          것과 구분할 수 없다. */}
+      {composition.hasInheritableDefaults && (
+        <div className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3.5 mb-5">
+          <div className="text-[13px] font-bold text-ink mb-1">위 구성 물려받기</div>
+          <p className="text-[12px] text-grey-500 mb-2.5">
+            {layer === "teacher"
+              ? "관리자 기준본의 키워드·교재·문제를 담을 때의 버전·순서 그대로 가져옵니다."
+              : "선생님 기본 구성(없으면 관리자 기준본)의 키워드·교재·문제를 담을 때의 버전·순서 그대로 가져옵니다."}{" "}
+            이미 담긴 것과 뺀 것은 건드리지 않습니다.
+          </p>
+          <button
+            disabled={busy}
+            onClick={() => void pullFromParent()}
+            className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
+          >
+            물려받기
+          </button>
         </div>
       )}
 
