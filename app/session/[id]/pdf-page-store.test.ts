@@ -87,3 +87,14 @@ describe("PDF 페이지 필기 보관함", () => {
     expect(recover("k", storage)).toEqual([]);
   });
 });
+
+// 2026-09-14 UAT — 전체 지우기(tool:'clear')는 그 앞의 조각을 모두 무효로 한다.
+describe("reconstructPageStrokes", () => {
+  it("마지막 clear 이후의 조각만 남기고, clear 자체는 남기지 않는다", async () => {
+    const { reconstructPageStrokes } = await import("./pdf-page-store");
+    const seg = (x: number, tool: "pen" | "text" | "clear" = "pen") => ({ x0: x, y0: 0, x1: x, y1: 0, color: "#000", tool });
+    expect(reconstructPageStrokes([seg(1), seg(2), seg(0, "clear"), seg(3), seg(4, "text")])).toEqual([seg(3), seg(4, "text")]);
+    expect(reconstructPageStrokes([seg(1), seg(0, "clear")])).toEqual([]);
+    expect(reconstructPageStrokes([seg(1), seg(2)])).toEqual([seg(1), seg(2)]);
+  });
+});

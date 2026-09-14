@@ -35,6 +35,11 @@ const ProblemWorkBoard = forwardRef<
     problemId: string;
     workId: string;
     attemptNo: number;
+    /**
+     * 2026-09-14 UAT — 이 판이 무엇인지. work = 풀이형 풀이판(제출 있음), answer = 서술형 답안
+     * (쓰는 대로 저장, 제출 없음), scratch = 객관식 옆 연습장. 기록 방식은 같고 말만 다르다.
+     */
+    mode?: "work" | "answer" | "scratch";
     studentStrokes: StrokePayload[];
     /** 제출 뒤에 덧그린 획 — 채점 대상이 아니었던 부분. */
     strokesAfterSubmit?: StrokePayload[];
@@ -52,6 +57,7 @@ const ProblemWorkBoard = forwardRef<
     problemId,
     workId,
     attemptNo,
+    mode = "work",
     studentStrokes,
     strokesAfterSubmit = [],
     feedbackStrokes,
@@ -232,7 +238,9 @@ const ProblemWorkBoard = forwardRef<
   return (
     <div>
       <div className="flex flex-wrap items-center gap-2 mb-2">
-        <span className="text-[11px] font-bold text-grey-500">{attemptNo}번째 풀이</span>
+        <span className="text-[11px] font-bold text-grey-500">
+          {mode === "work" ? `${attemptNo}번째 풀이` : mode === "answer" ? "답안" : "연습장"}
+        </span>
         {canDraw ? (
           <>
             <div className="flex items-center gap-1">
@@ -263,7 +271,13 @@ const ProblemWorkBoard = forwardRef<
               지우개
             </button>
             <span className="text-[11px] font-semibold text-grey-500">
-              {drawAsFeedback ? "피드백으로 기록됩니다" : "내 풀이로 기록됩니다"}
+              {drawAsFeedback
+                ? "피드백으로 기록됩니다"
+                : mode === "work"
+                  ? "내 풀이로 기록됩니다"
+                  : mode === "answer"
+                    ? "내 답안으로 기록됩니다"
+                    : "연습장에 기록됩니다"}
             </span>
           </>
         ) : (

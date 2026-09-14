@@ -47,6 +47,9 @@ import type { MaterialLayerRole } from "./MaterialAnnotationLayers";
 
 const COLORS = ["#1A1A1A", "#C8102E", "#1B6FB0"];
 const SAVE_DELAY_MS = 600;
+// 텍스트 상자 글자 크기(캔버스 px, 그릴 때 너비 기준) — 2026-09-14 UAT: PC 수업 교사의 타이핑 필기.
+const TEXT_SIZE = 18;
+const TEXT_LINE_HEIGHT = 1.3;
 
 export type PdfPageAnnotationHandle = {
   /** 대기 중 획을 지금 저장한다. 성공(또는 저장할 것이 없음)이면 true. */
@@ -77,7 +80,9 @@ export default forwardRef<
   const studentStrokesRef = useRef<PageStrokePayload[]>([]);
 
   const [drawMode, setDrawMode] = useState(false);
-  const [tool, setTool] = useState<"pen" | "eraser">("pen");
+  const [tool, setTool] = useState<"pen" | "eraser" | "text">("pen");
+  /** 텍스트 도구로 클릭한 자리(캔버스 좌표). 입력 중이면 값이 있다. */
+  const [textDraft, setTextDraft] = useState<{ x: number; y: number; value: string } | null>(null);
   const [color, setColor] = useState(COLORS[0]);
   const [showTeacher, setShowTeacher] = useState(true);
   const [showStudent, setShowStudent] = useState(true);
@@ -113,6 +118,21 @@ export default forwardRef<
     const ctx = canvas?.getContext("2d");
     if (!canvas || !ctx) return;
     const scale = annotationScale(canvas.width, seg.w);
+    if (seg.tool === "clear") {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      return;
+    }
+    if (seg.tool === "text") {
+      ctx.globalCompositeOperation = "source-over";
+      ctx.fillStyle = seg.color;
+      const size = (seg.size ?? TEXT_SIZE) * scale;
+      ctx.font = `600 ${size}px system-ui, -apple-system, sans-serif`;
+      ctx.textBaseline = "top";
+      (seg.text ?? "").split("\n").forEach((line, i) => {
+        ctx.fillText(line, seg.x0 * scale, seg.y0 * scale + i * size * TEXT_LINE_HEIGHT);
+      });
+      return;
+    }
     ctx.lineCap = "round";
     if (seg.tool === "eraser") {
       ctx.globalCompositeOperation = "destination-out";
@@ -198,8 +218,14 @@ export default forwardRef<
         const incoming = payload as { scope: PageStrokeScope; seg: PageStrokePayload };
         if (!incoming?.seg || !incoming.scope) return;
         if (myScope && incoming.scope === myScope) return;
-        if (incoming.scope === "teacher_shared") teacherStrokesRef.current.push(incoming.seg);
-        else studentStrokesRef.current.push(incoming.seg);
+        const bucket = incoming.scope === "teacher_shared" ? teacherStrokesRef : studentStrokesRef;
+        if (incoming.seg.tool === "clear") {
+          // 상대가 자기 레이어를 전부 지웠다 — 그 레이어만 비운다.
+          bucket.current = [];
+          drawSegment(incoming.scope, incoming.seg);
+          return;
+        }
+        bucket.current.push(incoming.seg);
         const visible = incoming.scope === "teacher_shared" ? showTeacher : showStudent;
         if (visible) drawSegment(incoming.scope, incoming.seg);
       })
@@ -255,14 +281,59 @@ export default forwardRef<
     };
   }, [storeKey]);
 
+  const ownCanvas = myScope === "teacher_shared" ? teacherCanvasRef : studentCanvasRef;
+
+  /** 내 레이어에 조각 하나를 더한다 — 그리고, 보관하고, 상대에게 보내고, 저장을 예약한다. */
+  function commitSegment(seg: PageStrokePayload): void {
+    if (!myScope) return;
+    const withId: StrokeWithId = addStroke(storeRef.current, seg);
+    drawSegment(myScope, withId);
+    if (storeKey) persist(storeKey, storeRef.current);
+    channelRef.current?.send({ type: "broadcast", event: "stroke", payload: { scope: myScope, seg: withId } });
+  }
+
+  function commitText(): void {
+    const draft = textDraft;
+    setTextDraft(null);
+    if (!draft || !myScope) return;
+    const text = draft.value.replace(/\s+$/, "");
+    if (!text.trim()) return;
+    commitSegment({
+      x0: draft.x,
+      y0: draft.y,
+      x1: draft.x,
+      y1: draft.y,
+      color,
+      tool: "text",
+      text,
+      size: TEXT_SIZE,
+      w: ownCanvas.current?.width,
+    });
+    scheduleSave();
+  }
+
+  /**
+   * 이 페이지의 내 필기 전체 지우기(2026-09-14 UAT). 상대 레이어는 건드리지 않는다.
+   * 먼저 대기 중 획을 저장한 뒤 clear 를 남긴다 — 그래야 서버 순서가 "획 → 지우기"로 남아
+   * 다시 열었을 때 지운 획이 되살아나지 않는다.
+   */
+  async function clearMine(): Promise<void> {
+    if (!myScope) return;
+    if (typeof window !== "undefined" && !window.confirm("이 페이지의 내 필기를 모두 지울까요?")) return;
+    await flush();
+    if (myScope === "teacher_shared") teacherStrokesRef.current = [];
+    else studentStrokesRef.current = [];
+    commitSegment({ x0: 0, y0: 0, x1: 0, y1: 0, color, tool: "clear", w: ownCanvas.current?.width });
+    redraw();
+    await flush();
+  }
+
   const canDraw = myScope !== null && drawMode && loaded && width > 0 && (myScope === "teacher_shared" ? showTeacher : showStudent);
 
   function pos(e: React.PointerEvent<HTMLCanvasElement>) {
     const canvas = e.currentTarget;
     return pointerToCanvas(e.clientX, e.clientY, canvas.getBoundingClientRect(), canvas);
   }
-
-  const ownCanvas = myScope === "teacher_shared" ? teacherCanvasRef : studentCanvasRef;
 
   return (
     <div className="absolute inset-0" data-testid="pdf-page-annotation-layer">
@@ -291,13 +362,20 @@ export default forwardRef<
           style={{ zIndex: 7, touchAction: "none" }}
           onPointerDown={(e) => {
             if (!canDraw) return;
+            if (tool === "text") {
+              // 입력 중이던 글이 있으면 먼저 확정하고 새 자리를 잡는다.
+              if (textDraft) commitText();
+              const p = pos(e);
+              setTextDraft({ x: p.x, y: p.y, value: "" });
+              return;
+            }
             drawingRef.current = true;
             lastPosRef.current = pos(e);
           }}
           onPointerMove={(e) => {
-            if (!canDraw || !drawingRef.current || !lastPosRef.current) return;
+            if (!canDraw || !drawingRef.current || !lastPosRef.current || tool === "text") return;
             const p = pos(e);
-            const seg: PageStrokePayload = {
+            commitSegment({
               x0: lastPosRef.current.x,
               y0: lastPosRef.current.y,
               x1: p.x,
@@ -305,11 +383,7 @@ export default forwardRef<
               color,
               tool,
               w: ownCanvas.current?.width,
-            };
-            const withId: StrokeWithId = addStroke(storeRef.current, seg);
-            drawSegment(myScope, withId);
-            if (storeKey) persist(storeKey, storeRef.current);
-            channelRef.current?.send({ type: "broadcast", event: "stroke", payload: { scope: myScope, seg: withId } });
+            });
             lastPosRef.current = p;
           }}
           onPointerUp={() => {
@@ -322,6 +396,38 @@ export default forwardRef<
             drawingRef.current = false;
             scheduleSave();
           }}
+        />
+      )}
+
+      {textDraft && myScope && width > 0 && (
+        <textarea
+          autoFocus
+          aria-label="텍스트 필기"
+          data-testid="pdf-text-input"
+          value={textDraft.value}
+          onChange={(e) => setTextDraft((d) => (d ? { ...d, value: e.target.value } : d))}
+          onBlur={() => commitText()}
+          onKeyDown={(e) => {
+            if (e.key === "Escape") {
+              e.preventDefault();
+              setTextDraft(null);
+            } else if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              commitText();
+            }
+          }}
+          placeholder="입력 후 Enter (줄바꿈은 Shift+Enter)"
+          className="absolute bg-white/85 border border-ink/40 rounded px-1 py-0.5 outline-none resize-none font-semibold text-ink shadow-sm"
+          style={{
+            zIndex: 9,
+            left: `${(textDraft.x / width) * 100}%`,
+            top: `${(textDraft.y / height) * 100}%`,
+            fontSize: `${(TEXT_SIZE * (ownCanvas.current?.getBoundingClientRect().width ?? width)) / width}px`,
+            lineHeight: TEXT_LINE_HEIGHT,
+            minWidth: "12ch",
+            maxWidth: "60%",
+          }}
+          rows={1}
         />
       )}
 
@@ -344,6 +450,8 @@ export default forwardRef<
               <>
                 <button type="button" onClick={() => setTool("pen")} aria-pressed={tool === "pen"} className={"text-[11.5px] px-1.5 py-1 rounded " + (tool === "pen" ? "bg-grey-100 font-bold" : "")}>펜</button>
                 <button type="button" onClick={() => setTool("eraser")} aria-pressed={tool === "eraser"} className={"text-[11.5px] px-1.5 py-1 rounded " + (tool === "eraser" ? "bg-grey-100 font-bold" : "")}>지우개</button>
+                <button type="button" onClick={() => setTool("text")} aria-pressed={tool === "text"} title="클릭한 자리에 글을 쓴다" className={"text-[11.5px] px-1.5 py-1 rounded " + (tool === "text" ? "bg-grey-100 font-bold" : "")}>T 텍스트</button>
+                <button type="button" onClick={() => void clearMine()} title="이 페이지의 내 필기를 모두 지운다" className="text-[11.5px] px-1.5 py-1 rounded text-red">전체 지우기</button>
                 {COLORS.map((c) => (
                   <button
                     key={c}

@@ -2,6 +2,7 @@
 
 import { requireUser } from "@/lib/auth";
 import type { StrokePayload, AnnotationEvent } from "./annotation-events-types";
+import { reconstructPageStrokes } from "./pdf-page-store";
 
 // R8 follow-up (2026-09-07) — session_annotation_events(append-only 이벤트 로그,
 // supabase/migrations/20261223000000_r8_session_annotation_events.sql)에 대한
@@ -188,7 +189,19 @@ export type PageStrokeTarget = {
   pageNumber: number;
 };
 
-export type PageStrokePayload = StrokePayload & { eventId?: string };
+/**
+ * 페이지 필기 한 조각. 펜·지우개 획 외에(2026-09-14 UAT)
+ *   - `tool: "text"`  클릭한 자리(x0,y0)에 놓은 글 상자. `text`·`size` 를 싣는다. 타이핑으로 필기하는
+ *                     PC 수업용 — 교사·학생 각자 레이어에 기록된다.
+ *   - `tool: "clear"` 이 페이지의 내 레이어 전체 지우기. 서버는 clear_all 이벤트로 남긴다.
+ */
+export type PageStrokePayload = Omit<StrokePayload, "tool"> & {
+  tool: "pen" | "eraser" | "text" | "clear";
+  text?: string;
+  size?: number;
+  eventId?: string;
+};
+
 
 export async function appendPageStrokeEvents(params: {
   target: PageStrokeTarget;
@@ -213,7 +226,7 @@ export async function appendPageStrokeEvents(params: {
   };
 }
 
-/** 한 페이지의 한 범위 필기. clear_all 은 페이지 필기에 쓰지 않으므로 stroke 만 읽는다. */
+/** 한 페이지의 한 범위 필기 — 마지막 전체 지우기 이후의 것만. */
 export async function loadPageStrokes(
   target: PageStrokeTarget,
   scope: "teacher_shared" | "student_shared"
@@ -227,11 +240,13 @@ export async function loadPageStrokes(
     .eq("curriculum_doc_id", target.curriculumDocId)
     .eq("curriculum_doc_version_id", target.curriculumDocVersionId)
     .eq("page_number", target.pageNumber)
-    .eq("event_type", "stroke")
+    .in("event_type", ["stroke", "clear_all"])
     .order("seq", { ascending: true });
   if (error) throw new Error(error.message);
-  return (data ?? []).map((row) => ({
-    ...(row.payload as StrokePayload),
-    ...(row.client_event_id ? { eventId: row.client_event_id as string } : {}),
-  }));
+  return reconstructPageStrokes(
+    (data ?? []).map((row) => ({
+      ...(row.payload as PageStrokePayload),
+      ...(row.client_event_id ? { eventId: row.client_event_id as string } : {}),
+    }))
+  );
 }

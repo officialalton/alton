@@ -15,6 +15,16 @@ import type { PageStrokePayload } from "./annotation-events-actions";
 
 export type PageStrokeScope = "teacher_shared" | "student_shared";
 
+/** 마지막 전체 지우기(tool:'clear') 이후의 조각만 남긴다 — 저장 순서(seq)대로 들어온다고 본다. */
+export function reconstructPageStrokes(items: PageStrokePayload[]): PageStrokePayload[] {
+  let visible: PageStrokePayload[] = [];
+  for (const item of items) {
+    if (item.tool === "clear") visible = [];
+    else visible.push(item);
+  }
+  return visible;
+}
+
 export type PageStoreKey = {
   viewerUserId: string;
   sessionId: string;

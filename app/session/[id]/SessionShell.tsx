@@ -26,12 +26,7 @@ import type {
   HomeworkKeywordOption,
   SessionHomeworkStatusItem,
 } from "@/app/teacher/homework-composition-data";
-import ScratchpadTab from "./ScratchpadTab";
-import type { DocLink } from "./scratchpad-data";
-import type { CanvasStroke } from "./material-data";
 import type { StrokePayload } from "./annotation-events-types";
-import ProblemLogTab from "./ProblemLogTab";
-import type { ProblemLogEntry } from "./problemlog-data";
 import { finalizeMyLessonSession } from "@/app/teacher/lesson-schedule-actions";
 
 // R9(Task 4) — 세션 중 신규 문제 생성 탭("문제 생성")은 여기서 제거됐다.
@@ -46,9 +41,9 @@ const TABS = [
   { id: "material", label: "교재", teacherOnly: false },
   // P3 4단계 — 이 수업에 고정된 문제를 읽고 푸는 화면. 문제마다 풀이판이 붙는다.
   { id: "problems", label: "문제", teacherOnly: false },
-  { id: "docs", label: "연습장", teacherOnly: false },
+  // 2026-09-14 UAT — '연습장' 탭은 문제 아래 연습장으로 대체돼 없앴고, '문제 기록'은 학생
+  // 포털에서만 본다(수업 화면에서는 필요 없다).
   { id: "vocab", label: "단어장", teacherOnly: false },
-  { id: "log", label: "문제 기록", teacherOnly: false },
   { id: "homework", label: "과제", teacherOnly: false },
   // 4절 — 별도 준비 페이지를 없애고 준비를 수업 화면 안으로 넣는다. 선생님·관리자만
   // 보이고, 이 수업이 다루는 회차가 있을 때만 나타난다.
@@ -86,12 +81,8 @@ export default function SessionShell({
   material,
   vocabWords,
   homeworkItems,
-  docLinks,
-  whiteboardStrokes,
-  problemLog,
   writesEnabled = true,
   sessionSource,
-  initialAnnotationStrokes,
   legacyPrivateMaterialStrokes = [],
   teacherMaterialStrokes = [],
   studentMaterialStrokes = [],
@@ -131,9 +122,6 @@ export default function SessionShell({
   material: MaterialData;
   vocabWords: VocabEntry[];
   homeworkItems: HomeworkItem[];
-  docLinks: DocLink[];
-  whiteboardStrokes: CanvasStroke[];
-  problemLog: ProblemLogEntry[];
   // R8 1/N — v3(sessions_v3 cutover) 세션은 canvas_annotations/homework_items/
   // vocab_words 등 필기·과제·단어장 하위 테이블이 아직 legacy_sessions만 참조한다
   // (FK 마이그레이션은 이번 라운드 범위 밖, item 3 annotation event log 별도 작업에서
@@ -145,7 +133,6 @@ export default function SessionShell({
   // 가능해졌으므로(다른 탭과 달리 FK 문제 없음), writesEnabled/contentViewerRole
   // 읽기전용 강제를 우회해 실제 viewerRole·이벤트 로그 초기 상태를 별도로 넘긴다.
   sessionSource: "legacy" | "v3";
-  initialAnnotationStrokes: StrokePayload[];
   /** 정책 변경 전 본인이 남긴 비공개 교재 필기(보존 기록). */
   legacyPrivateMaterialStrokes?: StrokePayload[];
   /** 교재의 선생님 필기 레이어. */
@@ -548,20 +535,7 @@ export default function SessionShell({
             }
           />
         ) : null
-      ) : activeTab === "docs" ? (
-        <ScratchpadTab
-          sessionId={sessionId}
-          viewerRole={contentViewerRole}
-          initialDocLinks={docLinks}
-          initialWhiteboardStrokes={whiteboardStrokes}
-          sessionSource={sessionSource}
-          whiteboardViewerRole={viewerRole}
-          initialAnnotationStrokes={initialAnnotationStrokes}
-          currentUserId={currentUserId}
-        />
-      ) : (
-        <ProblemLogTab initialEntries={problemLog} viewerRole={contentViewerRole} />
-      )}
+      ) : null}
     </div>
   );
 }

@@ -8,10 +8,18 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 // 내부 ID·기술 상태값은 화면에 내보내지 않는다. 여기서 돌려주는 것은 사람이
 // 읽는 내용과 표시용 번호뿐이다.
 
+export type ProblemFormat = "mc" | "essay" | "math";
+export type ProblemGrade = "correct" | "partial" | "incorrect";
+
 export type SessionProblem = {
   /** 화면에 보이는 문제 번호 — 내부 id가 아니다. */
   number: number;
   problemId: string;
+  /**
+   * 객관식 / 서술형 / 풀이형. 2026-09-14 UAT: 유형마다 푸는 방식이 다르다 —
+   * 객관식은 선택지 클릭이 곧 답, 서술형은 아래 연습장, 풀이형만 풀이판·제출.
+   */
+  format: ProblemFormat;
   passage: string | null;
   options: string[];
   difficulty: string | null;
@@ -25,6 +33,19 @@ export type SessionProblem = {
   /** 이 학생이 이 수업에서 이 문제를 몇 번 풀었는지(0이면 아직 안 풀었다). */
   attempts: number;
   solved: boolean;
+  /**
+   * 채점 상태(가장 최근 풀이 기준). 2026-09-14 UAT: 정답·해설은 **교사가 채점을
+   * 끝낸 뒤**에만 학생에게 열린다 — 풀었다는 사실만으로는 열리지 않는다.
+   */
+  graded: boolean;
+  grade: ProblemGrade | null;
+  gradeComment: string | null;
+  /** 가장 최근 풀이의 객관식 선택(학생 본인 답). 없으면 null. */
+  myChoice: number | null;
+  /** 객관식 자동 채점 결과 — 정답을 볼 자격이 있을 때만 채운다(채점 전 학생에게 새면 정답이 드러난다). */
+  autoCorrect: boolean | null;
+  /** 가장 최근 풀이판 id — 교사 채점이 가리킬 대상. */
+  latestWorkId: string | null;
   /**
    * 이 수업이 쓴 문제 내용이 보존돼 있지 않다.
    *
@@ -51,6 +72,10 @@ export type SessionProblemViewer = {
   /** 학생 본인 시점이면 그 학생 id — 풀이 상태를 붙이는 데 쓴다. */
   studentId: string | null;
 };
+
+function toFormat(raw: string | null | undefined): ProblemFormat {
+  return raw === "essay" || raw === "math" ? raw : "mc";
+}
 
 export async function loadSessionProblems(
   supabase: SupabaseClient,
@@ -87,20 +112,57 @@ export async function loadSessionProblems(
   }
 
 
-  // 풀이 상태 — 이 학생이 이 수업에서 이 문제를 푼 기록.
-  const attemptsByProblemId = new Map<string, { attempts: number; solved: boolean }>();
+  // 문제 유형 — 학생은 problems 를 직접 읽지 못하므로 수업 관계자용 함수로 받는다.
+  const formatByProblemId = new Map<string, ProblemFormat>();
+  {
+    const { data: formats } = await supabase.rpc("session_problem_formats", { p_session_id: sessionId });
+    for (const f of (formats ?? []) as { problem_id: string; format: string }[]) {
+      formatByProblemId.set(f.problem_id, toFormat(f.format));
+    }
+  }
+
+  // 풀이 상태 — 이 학생이 이 수업에서 이 문제를 푼 기록. 채점·선택은 **가장 최근 풀이** 기준.
+  type WorkState = {
+    attempts: number;
+    solved: boolean;
+    latest: {
+      attemptNo: number;
+      workId: string;
+      choice: number | null;
+      autoCorrect: boolean | null;
+      grade: ProblemGrade | null;
+      gradeComment: string | null;
+      gradedAt: string | null;
+    } | null;
+  };
+  const emptyState = (): WorkState => ({ attempts: 0, solved: false, latest: null });
+  const attemptsByProblemId = new Map<string, WorkState>();
   if (viewer.studentId) {
     const { data: work } = await supabase
       .from("session_problem_work")
-      .select("problem_id, attempt_no, submitted_at")
+      .select("id, problem_id, attempt_no, submitted_at, submitted_choice_index, auto_correct, grade, grade_comment, graded_at")
       .eq("session_id", sessionId)
       .eq("student_id", viewer.studentId);
     for (const w of work ?? []) {
       const key = w.problem_id as string;
-      const prev = attemptsByProblemId.get(key) ?? { attempts: 0, solved: false };
+      const prev = attemptsByProblemId.get(key) ?? emptyState();
+      const attemptNo = (w.attempt_no as number) ?? 0;
+      const latest =
+        !prev.latest || attemptNo >= prev.latest.attemptNo
+          ? {
+              attemptNo,
+              workId: w.id as string,
+              choice: (w.submitted_choice_index as number | null) ?? null,
+              autoCorrect: (w.auto_correct as boolean | null) ?? null,
+              grade: (w.grade as ProblemGrade | null) ?? null,
+              gradeComment: (w.grade_comment as string | null) ?? null,
+              gradedAt: (w.graded_at as string | null) ?? null,
+            }
+          : prev.latest;
       attemptsByProblemId.set(key, {
-        attempts: Math.max(prev.attempts, (w.attempt_no as number) ?? 0),
+        attempts: Math.max(prev.attempts, attemptNo),
         solved: prev.solved || Boolean(w.submitted_at),
+        latest,
       });
     }
   }
@@ -110,22 +172,32 @@ export async function loadSessionProblems(
     const version = r.problem_version_id
       ? versionById.get(r.problem_version_id as string)
       : undefined;
-    const state = attemptsByProblemId.get(problemId) ?? { attempts: 0, solved: false };
+    const state = attemptsByProblemId.get(problemId) ?? emptyState();
     // 버전이 없거나 그 버전 행이 사라졌다 — 당시 내용을 확인할 수 없다.
     const preservedUnavailable = !version;
-    // 학생은 자기 풀이를 제출한 뒤에만 정답·해설을 본다.
-    const revealAnswers = viewer.canSeeAnswers || state.solved;
+    // 2026-09-14 UAT: 학생·보호자는 **교사가 채점을 끝낸** 문제만 정답·해설을 본다.
+    const graded = Boolean(state.latest?.gradedAt);
+    const revealAnswers = viewer.canSeeAnswers || graded;
     const rawOptions = version?.options;
+    const options = Array.isArray(rawOptions) ? (rawOptions as string[]) : [];
     return {
       number: index + 1,
       problemId,
+      format: formatByProblemId.get(problemId) ?? (options.length > 0 ? "mc" : "essay"),
       passage: (version?.passage as string | null) ?? null,
-      options: Array.isArray(rawOptions) ? (rawOptions as string[]) : [],
+      options,
       difficulty: (version?.difficulty as string | null) ?? null,
       correctIndex: revealAnswers ? ((version?.correct_index as number | null) ?? null) : null,
       explanation: revealAnswers ? ((version?.explanation as string | null) ?? null) : null,
       attempts: state.attempts,
       solved: state.solved,
+      graded,
+      grade: graded ? (state.latest?.grade ?? null) : null,
+      gradeComment: graded ? (state.latest?.gradeComment ?? null) : null,
+      myChoice: state.latest?.choice ?? null,
+      // 자동 채점 결과는 정답과 같은 정보다 — 정답을 볼 자격이 있을 때만.
+      autoCorrect: revealAnswers ? (state.latest?.autoCorrect ?? null) : null,
+      latestWorkId: state.latest?.workId ?? null,
       ...(preservedUnavailable ? { preservedUnavailable: true } : {}),
     };
   });
@@ -150,18 +222,29 @@ type PlannedPreviewProblem = {
 export function toPlannedSessionProblems(
   problems: PlannedPreviewProblem[] | null | undefined
 ): SessionProblem[] {
-  return (problems ?? []).map((p, index) => ({
-    number: index + 1,
-    problemId: p.problemId,
-    passage: p.passage ?? null,
-    options: Array.isArray(p.options) ? p.options.map(String) : [],
-    difficulty: null,
-    correctIndex: null,
-    explanation: null,
-    attempts: 0,
-    solved: false,
-    planned: true,
-  }));
+  return (problems ?? []).map((p, index) => {
+    const options = Array.isArray(p.options) ? p.options.map(String) : [];
+    return {
+      number: index + 1,
+      problemId: p.problemId,
+      // 미리보기 응답에는 유형이 없다 — 읽기만 하는 화면이라 선택지 유무로 갈라 보여준다.
+      format: options.length > 0 ? "mc" : "essay",
+      passage: p.passage ?? null,
+      options,
+      difficulty: null,
+      correctIndex: null,
+      explanation: null,
+      attempts: 0,
+      solved: false,
+      graded: false,
+      grade: null,
+      gradeComment: null,
+      myChoice: null,
+      autoCorrect: null,
+      latestWorkId: null,
+      planned: true,
+    };
+  });
 }
 
 export async function loadPlannedProblems(

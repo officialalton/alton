@@ -15,8 +15,6 @@ import {
 } from "./material-data";
 import { loadVocabWords } from "./vocab-data";
 import { loadHomeworkItems } from "./homework-data";
-import { loadDocLinks, parseWhiteboardStrokes } from "./scratchpad-data";
-import { loadProblemLog } from "./problemlog-data";
 import { loadNormalizedSession } from "./session-source-data";
 import { loadPlannedProblems, loadSessionProblems } from "./session-problem-data";
 import { loadSessionLessonContext } from "./session-context-data";
@@ -26,12 +24,10 @@ import {
   loadPickableMaterials,
 } from "@/lib/unit-composition";
 import {
-  replayAnnotationEvents,
   loadMyLegacyPrivateMaterialStrokes,
   loadTeacherMaterialStrokes,
   loadStudentMaterialStrokes,
 } from "./annotation-events-actions";
-import { reconstructVisibleStrokes } from "./annotation-events-types";
 import {
   loadSessionKeywordOptions,
   loadSessionHomeworkStatus,
@@ -89,18 +85,6 @@ export default async function SessionPage({
 
   const vocabWords = await loadVocabWords(supabase, session.studentId);
   const homeworkItems = await loadHomeworkItems(supabase, session.id);
-  const docLinks = await loadDocLinks(supabase, session.id);
-  const whiteboardStrokes = parseWhiteboardStrokes(session.whiteboardStrokesRaw);
-  const problemLog = await loadProblemLog(supabase, session.studentId);
-
-  // R9 — v3 세션은 legacy_sessions.whiteboard_strokes가 아예 없으므로(위
-  // session-source-data.ts 주석 참고) session_annotation_events를 replay해서
-  // 현재 보여야 할 stroke만 미리 재구성해 SSR로 내려준다. 레거시 세션은 이벤트
-  // 테이블을 아예 조회하지 않는다 — 정책상 레거시는 읽기 호환만 유지.
-  const initialAnnotationStrokes =
-    session.source === "v3"
-      ? reconstructVisibleStrokes(await replayAnnotationEvents(session.id))
-      : [];
 
   // R9(레슨 준비 Task 4) — v3 세션에서만 과제 구성 UI가 필요한 키워드 후보를
   // 미리 불러온다(legacy 세션엔 session_content_manifest가 없으므로 항상 빈
@@ -196,12 +180,8 @@ export default async function SessionPage({
       material={material}
       vocabWords={vocabWords}
       homeworkItems={homeworkItems}
-      docLinks={docLinks}
-      whiteboardStrokes={whiteboardStrokes}
-      problemLog={problemLog}
       writesEnabled={session.source === "legacy"}
       sessionSource={session.source}
-      initialAnnotationStrokes={initialAnnotationStrokes}
       legacyPrivateMaterialStrokes={legacyPrivateMaterialStrokes}
       teacherMaterialStrokes={teacherMaterialStrokes}
       studentMaterialStrokes={studentMaterialStrokes}

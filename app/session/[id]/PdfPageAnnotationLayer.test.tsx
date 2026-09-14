@@ -51,6 +51,10 @@ beforeEach(() => {
     lineTo: vi.fn(),
     stroke: vi.fn(),
     clearRect: vi.fn(),
+    fillText: vi.fn(),
+    fillStyle: "",
+    font: "",
+    textBaseline: "",
   })) as unknown as typeof HTMLCanvasElement.prototype.getContext;
   HTMLCanvasElement.prototype.getBoundingClientRect = () =>
     ({ left: 0, top: 0, width: 600, height: 800, right: 600, bottom: 800, x: 0, y: 0, toJSON: () => ({}) }) as DOMRect;
@@ -188,5 +192,62 @@ describe("PDF 페이지 필기 레이어", () => {
     expect(screen.queryByRole("button", { name: /필기 시작/ })).not.toBeInTheDocument();
     expect(screen.getByTestId("pdf-teacher-layer")).toBeInTheDocument();
     expect(screen.getByTestId("pdf-student-layer")).toBeInTheDocument();
+  });
+
+  // 2026-09-14 UAT — 타이핑 필기와 전체 지우기.
+  it("텍스트 도구: 클릭한 자리에 글을 쓰고 Enter 로 확정하면 text 조각으로 저장된다", async () => {
+    vi.mocked(actions.appendPageStrokeEvents).mockImplementation(async ({ segments }) => ({
+      savedEventIds: segments.map((s) => s.eventId!).filter(Boolean),
+    }));
+    const ref = createRef<PdfPageAnnotationHandle>();
+    render(<PdfPageAnnotationLayer ref={ref} target={target(1)} role="teacher" viewerUserId="t1" width={600} height={800} />);
+    await enableDrawing();
+    fireEvent.click(screen.getByRole("button", { name: "T 텍스트" }));
+    fireEvent.pointerDown(screen.getByTestId("pdf-input-layer"), { clientX: 120, clientY: 40 });
+    const box = screen.getByTestId("pdf-text-input");
+    fireEvent.change(box, { target: { value: "핵심 문장" } });
+    fireEvent.keyDown(box, { key: "Enter" });
+    expect(screen.queryByTestId("pdf-text-input")).not.toBeInTheDocument();
+    await act(async () => {
+      expect(await ref.current!.flush()).toBe(true);
+    });
+    const call = vi.mocked(actions.appendPageStrokeEvents).mock.calls[0][0];
+    expect(call.segments).toHaveLength(1);
+    expect(call.segments[0]).toMatchObject({ tool: "text", text: "핵심 문장", x0: 120, y0: 40 });
+    // 빈 글은 저장하지 않는다.
+    fireEvent.pointerDown(screen.getByTestId("pdf-input-layer"), { clientX: 10, clientY: 10 });
+    fireEvent.keyDown(screen.getByTestId("pdf-text-input"), { key: "Escape" });
+    expect(ref.current?.hasUnsaved()).toBe(false);
+  });
+
+  it("전체 지우기: 확인하면 미저장 획을 먼저 저장한 뒤 clear 조각을 남기고 상대에게도 알린다", async () => {
+    vi.mocked(actions.appendPageStrokeEvents).mockImplementation(async ({ segments }) => ({
+      savedEventIds: segments.map((s) => s.eventId!).filter(Boolean),
+    }));
+    window.confirm = vi.fn(() => true);
+    const ref = createRef<PdfPageAnnotationHandle>();
+    render(<PdfPageAnnotationLayer ref={ref} target={target(1)} role="student" viewerUserId="s1" width={600} height={800} />);
+    await enableDrawing();
+    await drawOne();
+    await act(async () => {
+      fireEvent.click(screen.getByRole("button", { name: "전체 지우기" }));
+    });
+    await waitFor(() => expect(actions.appendPageStrokeEvents).toHaveBeenCalledTimes(2));
+    const calls = vi.mocked(actions.appendPageStrokeEvents).mock.calls;
+    expect(calls[0][0].segments[0].tool).toBe("pen");
+    expect(calls[1][0].segments).toHaveLength(1);
+    expect(calls[1][0].segments[0].tool).toBe("clear");
+    expect(calls[1][0].scope).toBe("student_shared");
+    const last = sent[sent.length - 1] as { payload: { scope: string; seg: { tool: string } } };
+    expect(last.payload).toMatchObject({ scope: "student_shared", seg: { tool: "clear" } });
+    expect(ref.current?.hasUnsaved()).toBe(false);
+  });
+
+  it("전체 지우기를 취소하면 아무것도 남기지 않는다", async () => {
+    window.confirm = vi.fn(() => false);
+    render(<PdfPageAnnotationLayer target={target(1)} role="student" viewerUserId="s1" width={600} height={800} />);
+    await enableDrawing();
+    fireEvent.click(screen.getByRole("button", { name: "전체 지우기" }));
+    expect(actions.appendPageStrokeEvents).not.toHaveBeenCalled();
   });
 });

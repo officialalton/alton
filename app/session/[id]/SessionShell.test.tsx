@@ -77,11 +77,7 @@ const baseProps = {
   studentName: "지훈",
   sessionNumber: 7,
   backHref: "/student",
-  docLinks: [],
-  whiteboardStrokes: [],
-  problemLog: [],
   sessionSource: "legacy" as const,
-  initialAnnotationStrokes: [],
   currentUserId: "user-1",
 };
 
@@ -286,7 +282,7 @@ describe("SessionShell — 탭 노출", () => {
     expect(screen.queryByText("문제 생성")).not.toBeInTheDocument();
   });
 
-  it("교재/과제/단어장/연습장 탭은 역할별 노출이 그대로 유지된다", () => {
+  it("교재/과제/단어장 탭은 그대로고, 연습장·문제 기록 탭은 없다(2026-09-14 UAT)", () => {
     render(
       <SessionShell
         {...baseProps}
@@ -300,7 +296,8 @@ describe("SessionShell — 탭 노출", () => {
     expect(screen.getByText("교재")).toBeInTheDocument();
     expect(screen.getAllByText("과제").length).toBeGreaterThan(0);
     expect(screen.getByText(`${baseProps.studentName} 학생의 단어장`)).toBeInTheDocument();
-    expect(screen.getByText("연습장")).toBeInTheDocument();
+    expect(screen.queryByText("연습장")).not.toBeInTheDocument();
+    expect(screen.queryByText("문제 기록")).not.toBeInTheDocument();
   });
 
   it("2026-09-10(UI/UX 정리 1차): 기본 활성 탭은 교재다", () => {

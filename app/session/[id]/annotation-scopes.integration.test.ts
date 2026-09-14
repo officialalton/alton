@@ -479,16 +479,26 @@ describe("③ 문제 풀이 화이트보드 — 풀이판 단위로 분리된다
     ).toBe("1");
   });
 
-  it("제출한 답안은 바뀌지 않는다", () => {
+  it("제출한 서술 답안·필기 경계는 바뀌지 않고, 객관식 선택은 채점 전까지만 바뀐다(2026-09-14)", () => {
     const w = work(freshProblem("submit-immutable"));
     psql(`select submit_problem_attempt('${w}', '${STUDENT_ID}', 1, null);`);
     expect(
-      psqlExpectError(`update session_problem_work set submitted_choice_index = 3 where id = '${w}';`)
+      psqlExpectError(`update session_problem_work set submitted_text = '바꿈' where id = '${w}';`)
     ).toMatch(/이미 제출한 풀이입니다/);
-    expect(psql(`select submitted_choice_index from session_problem_work where id = '${w}';`)).toBe("1");
+    expect(
+      psqlExpectError(`update session_problem_work set submitted_at = now() where id = '${w}';`)
+    ).toMatch(/이미 제출한 풀이입니다/);
+    // 객관식 재선택 — 채점 전이면 된다.
+    psql(`update session_problem_work set submitted_choice_index = 3 where id = '${w}';`);
+    expect(psql(`select submitted_choice_index from session_problem_work where id = '${w}';`)).toBe("3");
+    // 채점 뒤에는 안 된다.
+    asUser(TEACHER_ID, `select grade_problem_attempt('${w}', 'incorrect', null);`);
+    expect(
+      psqlExpectError(`update session_problem_work set submitted_choice_index = 0 where id = '${w}';`)
+    ).toMatch(/채점이 끝난 문제의 답은 바꿀 수 없습니다/);
   });
 
-  it("본인 풀이만 제출할 수 있고, 두 번 눌러도 한 번만 처리된다", () => {
+  it("본인 풀이만 제출할 수 있고, 다시 눌러도 제출 시점은 한 번이다(객관식 답만 바뀐다)", () => {
     const w = work(freshProblem("submit-guard"));
     expect(psqlExpectError(`select submit_problem_attempt('${w}', '${TEACHER_ID}', 0, null);`)).toMatch(
       /본인 풀이만/
@@ -497,7 +507,8 @@ describe("③ 문제 풀이 화이트보드 — 풀이판 단위로 분리된다
     const at = psql(`select submitted_at from session_problem_work where id = '${w}';`);
     psql(`select submit_problem_attempt('${w}', '${STUDENT_ID}', 3, null);`);
     expect(psql(`select submitted_at from session_problem_work where id = '${w}';`)).toBe(at);
-    expect(psql(`select submitted_choice_index from session_problem_work where id = '${w}';`)).toBe("0");
+    // 2026-09-14: 객관식은 채점 전까지 선택을 바꿀 수 있다 — 클릭이 곧 답이라 다시 고를 수 있어야 한다.
+    expect(psql(`select submitted_choice_index from session_problem_work where id = '${w}';`)).toBe("3");
   });
 
   it("다시 풀면 새 시도가 생기고 이전 답안·풀이·피드백이 그대로 남는다", () => {

@@ -187,7 +187,7 @@ describe("고정된 문제 버전을 화면이 실제로 읽는다", () => {
     );
   });
 
-  it("학생은 자기 풀이를 제출하기 전에는 정답·해설을 받지 않는다", async () => {
+  it("학생은 교사가 채점을 끝내기 전에는 정답·해설을 받지 않는다(2026-09-14: 제출만으로는 열리지 않는다)", async () => {
     const { sessionId, firstProblemId } = startedSessionWithTwoProblems();
 
     const asStudent = await loadSessionProblems(admin, sessionId, {
@@ -199,17 +199,27 @@ describe("고정된 문제 버전을 화면이 실제로 읽는다", () => {
     expect(asStudent[0].explanation).toBeNull();
     expect(asStudent[0].solved).toBe(false);
 
-    // 풀이를 제출하면 그때 열린다.
+    // 풀이를 제출해도 아직 열리지 않는다.
     const workId = psql(
       `select start_problem_work('${sessionId}', '${STUDENT_ID}', '${firstProblemId}', false);`
     );
-    psql(`update session_problem_work set submitted_at = now() where id = '${workId}';`);
+    psql(`select submit_problem_attempt('${workId}', '${STUDENT_ID}', 1, null);`);
+    const submittedOnly = await loadSessionProblems(admin, sessionId, {
+      canSeeAnswers: false,
+      studentId: STUDENT_ID,
+    });
+    expect(submittedOnly[0].solved).toBe(true);
+    expect(submittedOnly[0].correctIndex).toBeNull();
+    expect(submittedOnly[0].explanation).toBeNull();
 
+    // 교사가 채점을 끝내면 그때 열린다.
+    asUser(TEACHER_ID, `select grade_problem_attempt('${workId}', null, null);`);
     const afterSubmit = await loadSessionProblems(admin, sessionId, {
       canSeeAnswers: false,
       studentId: STUDENT_ID,
     });
     expect(afterSubmit[0].solved).toBe(true);
+    expect(afterSubmit[0].graded).toBe(true);
     expect(afterSubmit[0].correctIndex).toBe(1);
     expect(afterSubmit[0].explanation).toBe("첫 번째 해설");
     // 아직 풀지 않은 두 번째 문제는 여전히 가려져 있다.
