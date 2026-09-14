@@ -513,3 +513,22 @@ describe("spr — 숫자 답 자동 채점·재입력·공개 검사", () => {
     expect(psql(`select answers::text from problem_versions where id = '${v}';`)).toBe('["7"]');
   });
 });
+
+// ------------------------------------------------------------ 그림 확인 게이트 (2026-09-14 ③)
+describe("figure — 그림이 있는 초안은 확인해야 공개된다", () => {
+  it("figure_checked 없이 공개 거절, 확인 뒤 공개, 그림을 바꾸면 확인이 풀린다", () => {
+    const id = psql(
+      `insert into problems (format, passage, subject_id, status, created_by) values ('mc', '그래프', '${SUBJECT_ID}', 'draft', '${TEACHER_ID}') returning id;`
+    );
+    const fig = `{"type":"coordinate_plane","xRange":[-2,8],"yRange":[-2,8],"items":[{"kind":"line","slope":1,"intercept":0}]}`;
+    const v = psql(`select save_problem_draft_version('${id}', '그래프', '["a","b","c","d"]'::jsonb, 1, '해설', 'medium', '${ADMIN_ID}', null, '${fig}'::jsonb, false);`);
+    expect(fails(() => psql(`select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`))).toContain("그림을 확인해야");
+    psql(`select mark_problem_figure_checked('${v}', true);`);
+    // 그림 데이터를 바꾸면 확인이 풀린다.
+    psql(`select save_problem_draft_version('${id}', '그래프', '["a","b","c","d"]'::jsonb, 1, '해설', 'medium', '${ADMIN_ID}', null, '{"type":"geometry","shapes":[{"kind":"circle","center":[0,0],"radius":1}]}'::jsonb, true);`);
+    expect(psql(`select figure_checked from problem_versions where id = '${v}';`)).toBe("f");
+    psql(`select mark_problem_figure_checked('${v}', true);`);
+    psql(`select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`);
+    expect(psql(`select status from problem_versions where id = '${v}';`)).toBe("published");
+  });
+});

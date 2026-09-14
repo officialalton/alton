@@ -9,6 +9,8 @@ export type DocProblem = {
   correctIndex: number | null;
   /** spr(숫자 입력) 동치 정답 목록. 다른 형식은 null. */
   answers?: string[] | null;
+  /** 도형·그래프 데이터(lib/problem-figures). */
+  figure?: unknown | null;
   explanation: string;
   difficulty: "easy" | "medium" | "hard";
   // R9(Task 2): 확정(confirmed)된 문제만 실제로 이 배열에 값이 들어간다(트리거가

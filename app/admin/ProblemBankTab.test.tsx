@@ -15,6 +15,7 @@ vi.mock("./problem-bank-actions", () => ({
   createDraftVersionAction: (...a: unknown[]) => createDraftVersionAction(...a),
   createDraftFromPublishedAction: (...a: unknown[]) => createDraftFromPublishedAction(...a),
   publishDraftAction: (...a: unknown[]) => publishDraftAction(...a),
+  markFigureCheckedAction: (...a: unknown[]) => markFigureCheckedAction(...a),
   setProblemArchivedAction: (...a: unknown[]) => setProblemArchivedAction(...a),
   setProblemKeywordAction: (...a: unknown[]) => setProblemKeywordAction(...a),
   updateProblemMetaAction: (...a: unknown[]) => updateProblemMetaAction(...a),
@@ -26,6 +27,7 @@ const createBankProblemAction = vi.fn();
 const createDraftVersionAction = vi.fn();
 const createDraftFromPublishedAction = vi.fn();
 const publishDraftAction = vi.fn();
+const markFigureCheckedAction = vi.fn(async (..._a: unknown[]) => ({ ok: true }));
 const setProblemArchivedAction = vi.fn();
 const setProblemKeywordAction = vi.fn();
 const updateProblemMetaAction = vi.fn();
@@ -457,5 +459,15 @@ describe("보관은 삭제가 아니다", () => {
     render(<ProblemBankTab subjects={subjects} />);
     fireEvent.click(await screen.findByRole("button", { name: /전체 공개/ }));
     expect(publishDraftAction).not.toHaveBeenCalled();
+  });
+
+  it("그림 데이터를 적으면 미리보기가 그려지고, 틀리면 사유가 보인다(2026-09-14 ③)", async () => {
+    await openFirstProblem();
+    const box = screen.getByLabelText("그림 데이터");
+    fireEvent.change(box, { target: { value: '{"type":"coordinate_plane","xRange":[-2,8],"yRange":[-2,8],"items":[{"kind":"points","points":[[1,3]],"labels":["A"]}]}' } });
+    expect(screen.getByTestId("problem-figure")).toBeInTheDocument();
+    expect(screen.getByLabelText("그림 확인함")).toBeDisabled(); // 저장 전엔 확인 못 한다
+    fireEvent.change(box, { target: { value: '{"type":"geometry","shapes":[]}' } });
+    expect(screen.getByText(/그림 데이터 오류/)).toBeInTheDocument();
   });
 });

@@ -60,6 +60,9 @@ export type ProblemContent = {
   explanation: string | null;
   /** spr 동치 정답 목록. */
   answers: string[] | null;
+  /** 도형·그래프 데이터(lib/problem-figures). */
+  figure: unknown | null;
+  figureChecked: boolean;
 };
 
 export type BankResult<T = undefined> =
@@ -146,7 +149,7 @@ export async function listBankProblemsAction(
   // 있다 — 그래서 공개된 문제가 "(아직 내용이 없는 문제)"로 보였다.
   const { data: contentRows } = await admin
     .from("problem_versions")
-    .select("id, problem_id, status, version_no, passage, options, correct_index, explanation, answers")
+    .select("id, problem_id, status, version_no, passage, options, correct_index, explanation, answers, figure, figure_checked")
     .in("problem_id", problemIds)
     .in("status", ["published", "draft", "in_review"])
     .order("version_no", { ascending: false });
@@ -158,6 +161,8 @@ export async function listBankProblemsAction(
     correctIndex: (v.correct_index as number | null) ?? null,
     explanation: (v.explanation as string | null) ?? null,
     answers: (v.answers as string[] | null) ?? null,
+    figure: v.figure ?? null,
+    figureChecked: Boolean(v.figure_checked),
   });
 
   const publishedByProblem = new Map<string, ProblemContent>();
@@ -296,6 +301,8 @@ export async function createDraftVersionAction(params: {
   explanation: string;
   difficulty: string;
   answers?: string[] | null;
+  figure?: unknown | null;
+  figureChecked?: boolean;
 }): Promise<BankResult<string>> {
   const { adminUserId } = await requireAdmin();
   const admin = createAdminClient();
@@ -308,9 +315,20 @@ export async function createDraftVersionAction(params: {
     p_difficulty: params.difficulty,
     p_actor_id: adminUserId,
     p_answers: params.answers ?? null,
+    p_figure: params.figure ?? null,
+    p_figure_checked: params.figureChecked ?? false,
   });
   if (error) return { ok: false, error: readable(error.message, "초안을 저장하지 못했습니다.") };
   return { ok: true, value: data as string };
+}
+
+/** 관리자가 미리보기의 그림을 확인했다(2026-09-14 ③). 그림이 있는 버전은 이것 없이 공개되지 않는다. */
+export async function markFigureCheckedAction(versionId: string, checked: boolean): Promise<BankResult> {
+  await requireAdmin();
+  const admin = createAdminClient();
+  const { error } = await admin.rpc("mark_problem_figure_checked", { p_version_id: versionId, p_checked: checked });
+  if (error) return { ok: false, error: readable(error.message, "그림 확인을 저장하지 못했습니다.") };
+  return { ok: true };
 }
 
 export async function submitVersionForReviewAction(versionId: string): Promise<BankResult> {
@@ -387,7 +405,7 @@ export async function createDraftFromPublishedAction(
 
   const { data: published } = await admin
     .from("problem_versions")
-    .select("passage, options, correct_index, explanation, difficulty, answers")
+    .select("passage, options, correct_index, explanation, difficulty, answers, figure")
     .eq("problem_id", problemId)
     .eq("status", "published")
     .maybeSingle();
@@ -402,6 +420,9 @@ export async function createDraftFromPublishedAction(
     explanation: (published.explanation as string | null) ?? "",
     difficulty: (published.difficulty as string | null) ?? "",
     answers: (published.answers as string[] | null) ?? null,
+    figure: published.figure ?? null,
+    // 공개본의 그림은 이미 확인된 것이다 — 데이터가 그대로면 확인도 이어진다.
+    figureChecked: published.figure != null,
   });
   if (!created.ok) return created;
   return { ok: true, value: { versionId: created.value, reused: false } };
@@ -533,6 +554,7 @@ export async function generateBankProblemsAction(params: {
       explanation: g.explanation,
       difficulty: params.difficulty,
       answers: g.answers ?? null,
+      figure: g.figure ?? null,
     });
     if (draft.ok) created += 1;
   }

@@ -7,6 +7,7 @@ import {
   createDraftVersionAction,
   createDraftFromPublishedAction,
   publishDraftAction,
+  markFigureCheckedAction,
   setProblemArchivedAction,
   setProblemKeywordAction,
   updateProblemMetaAction,
@@ -15,6 +16,8 @@ import {
   type ProblemBankFilter,
 } from "./problem-bank-actions";
 import { listSubjectCatalogAction } from "./subject-actions";
+import ProblemFigure from "@/app/session/[id]/ProblemFigure";
+import { validateFigureSpec } from "@/lib/problem-figures/spec";
 import type { AdminSubject, SubjectKeyword } from "./subject-data";
 
 // P2 3차·8차 — 관리자 문제은행. 교재와 독립된 진입점이다.
@@ -863,6 +866,20 @@ function DraftEditor({
   const answersPayload = isSpr
     ? answersText.split(/[,\n]/).map((a) => a.trim()).filter(Boolean)
     : null;
+  // 2026-09-14 ③ — 도형·그래프 데이터(JSON). 미리보기로 확인하고 '그림 확인함'을 켜야 공개된다.
+  const [figureText, setFigureText] = useState(source?.figure ? JSON.stringify(source.figure, null, 2) : "");
+  const [figureChecked, setFigureChecked] = useState(Boolean(source?.figureChecked));
+  const figureParsed: { spec: unknown | null; error: string | null } = (() => {
+    if (!figureText.trim()) return { spec: null, error: null };
+    try {
+      const parsed = JSON.parse(figureText) as unknown;
+      const v = validateFigureSpec(parsed);
+      return v.ok ? { spec: parsed, error: null } : { spec: null, error: v.error };
+    } catch {
+      return { spec: null, error: "JSON 을 읽을 수 없습니다." };
+    }
+  })();
+  const figureDirty = JSON.stringify(figureParsed.spec ?? null) !== JSON.stringify(source?.figure ?? null);
 
   const initialOptions = useMemo(() => {
     const existing = source?.options ?? [];
@@ -886,6 +903,8 @@ function DraftEditor({
   async function saveDraft(): Promise<{ ok: true; value: string } | { ok: false; error: string }> {
     return createDraftVersionAction({
       answers: answersPayload,
+      figure: figureParsed.spec,
+      figureChecked: figureChecked && !figureDirty,
       problemId: problem.id,
       passage: passage.trim(),
       options: optionsPayload,
@@ -964,6 +983,44 @@ function DraftEditor({
           />
         </div>
       )}
+
+      <div className="mb-2">
+        <div className="text-[11.5px] text-grey-500 mb-1.5">
+          그림(선택) — 그래프·도형 데이터(JSON). AI 가 만든 것도 여기 들어옵니다. 미리보기를 보고 <b>그림 확인함</b>을 켜야 공개됩니다.
+        </div>
+        <textarea
+          aria-label="그림 데이터"
+          value={figureText}
+          onChange={(e) => setFigureText(e.target.value)}
+          ref={autoGrow}
+          onInput={(e) => growToContent(e.currentTarget)}
+          rows={2}
+          placeholder='예: {"type":"coordinate_plane","xRange":[-2,8],"yRange":[-2,8],"items":[{"kind":"line","through":[[0,4],[4,0]]}]}'
+          className="w-full text-[12px] font-mono border-[1.5px] border-grey-200 rounded-lg px-3 py-2 mb-1.5 resize-none overflow-hidden"
+        />
+        {figureParsed.error && <p className="text-[11.5px] text-red mb-1.5">그림 데이터 오류 — {figureParsed.error}</p>}
+        {figureParsed.spec != null && (
+          <div className="border-[1.5px] border-grey-200 rounded-lg p-2 mb-1.5 inline-block bg-white">
+            <ProblemFigure spec={figureParsed.spec} />
+          </div>
+        )}
+        {figureParsed.spec != null && source?.versionId && (
+          <label className="flex items-center gap-2 text-[12.5px] text-ink">
+            <input
+              type="checkbox"
+              aria-label="그림 확인함"
+              checked={figureChecked && !figureDirty}
+              disabled={figureDirty || busy}
+              onChange={(e) => {
+                const next = e.target.checked;
+                setFigureChecked(next);
+                void onRun(() => markFigureCheckedAction(source.versionId, next), next ? "그림을 확인했다고 표시했습니다." : "그림 확인을 해제했습니다.");
+              }}
+            />
+            그림 확인함{figureDirty ? " — 먼저 초안을 저장하세요(그림이 바뀌었습니다)" : ""}
+          </label>
+        )}
+      </div>
 
       <textarea
         aria-label="해설"

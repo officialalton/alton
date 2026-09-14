@@ -4,6 +4,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { createClient } from "@/utils/supabase/server";
 import { sanitizeDocHtml } from "@/lib/sanitize-doc-html";
 import { stripInlineOptions } from "@/lib/problem-text";
+import { validateFigureSpec } from "@/lib/problem-figures/spec";
 import type { DocProblem, DocSection, DocEditorData } from "./curriculum-doc-data";
 import { loadCurriculumDocDetail } from "./curriculum-doc-data";
 import type { SubjectKeyword } from "./subject-data";
@@ -449,6 +450,14 @@ export async function generateSectionProblems(params: {
                     description:
                       "숫자 입력(SPR)일 때만. 동치 정답 목록(예: [\"7/2\",\"3.5\"]). 정수·소수·분수 문자열, 기호 없이.",
                   },
+                  figure: {
+                    type: "object",
+                    description:
+                      "그래프·도형이 꼭 필요한 수학 문항에만. 그림 파일이 아니라 데이터다. " +
+                      "좌표평면: {type:'coordinate_plane', xRange:[min,max], yRange:[min,max], items:[{kind:'line', through:[[x,y],[x,y]], label}, {kind:'line', slope, intercept}, {kind:'points', points:[[x,y]], labels:[]}, {kind:'function', fn:'linear'|'quadratic'|'exponential'|'abs'|'sqrt'|'cubic', params:[...]}, {kind:'segment', from, to}, {kind:'polyline', points}]}. " +
+                      "기하: {type:'geometry', shapes:[{kind:'polygon', points:[[x,y],...], vertexLabels:[], sideLabels:[], angleLabels:[{at:index, text:'63°'}], rightAngleAt:[index]}, {kind:'circle', center:[x,y], radius, centerLabel, radiusLabel}, {kind:'segment', from, to, label}, {kind:'parallel_lines', y1, y2, transversal:[[x,y],[x,y]], labels:['m','n','k'], angleLabels:[{at:[x,y], text:'x°'}]}, {kind:'label', at:[x,y], text}], notToScale:true}. " +
+                      "좌표는 문제의 수치와 정확히 일치해야 한다.",
+                  },
                   explanation: {
                     type: "string",
                     description: format === "mc" ? "정답 해설" : format === "spr" ? "풀이 과정과 정답" : "모범 답안 또는 풀이 과정",
@@ -474,7 +483,7 @@ export async function generateSectionProblems(params: {
 - 답안 형식: ${FORMAT_LABEL[format]}
 ${format === "mc" ? "객관식은 반드시 선택지 4개와 정답 인덱스를 포함해주세요." : ""}
 ${format === "spr" ? "숫자 입력(SPR)은 SAT Math 학생 직접 입력 문항입니다: 정답이 하나의 수(정수·소수·분수)로 정해져야 하고, answers 에 동치 표현을 모두 넣어주세요(예: 7/2 와 3.5). 선택지는 만들지 마세요. 양수는 5자, 음수는 6자 안에 쓸 수 있는 값이어야 합니다." : ""}
-표기 규칙: 수식은 LaTeX 로 $…$(인라인)·$$…$$(블록) 안에 쓴다. 표가 필요하면 마크다운 파이프 표(| x | f(x) | / |---|---| / | 0 | 17 |)로 쓴다. 그림·그래프가 꼭 필요한 문항은 만들지 않는다(도형 생성은 별도 단계).
+표기 규칙: 수식은 LaTeX 로 $…$(인라인)·$$…$$(블록) 안에 쓴다. 표가 필요하면 마크다운 파이프 표(| x | f(x) | / |---|---| / | 0 | 17 |)로 쓴다. 그래프·도형이 꼭 필요한 수학 문항은 figure 데이터로 넣는다(좌표는 문제 수치와 정확히 일치, 그림에 답이 그대로 드러나지 않게). 영어·독해 문항에는 figure 를 쓰지 않는다.
 이 문제들은 특정 학생이 아니라 이 교재를 배정받는 어떤 학생에게도 재사용될 문제
 은행에 들어갑니다. 실전 SAT/AP 시험에 나올 법한 퀄리티로 만들어주세요.`,
       },
@@ -492,6 +501,7 @@ ${format === "spr" ? "숫자 입력(SPR)은 SAT Math 학생 직접 입력 문항
         options?: string[];
         correct_index?: number;
         answers?: string[];
+        figure?: unknown;
         explanation: string;
       }[];
     }
@@ -499,6 +509,8 @@ ${format === "spr" ? "숫자 입력(SPR)은 SAT Math 학생 직접 입력 문항
 
   return raw.map((p) => ({
     format,
+    // 그림 데이터는 모양이 맞을 때만 받는다 — 틀리면 그림 없는 문제로 두고 사람이 붙인다.
+    figure: p.figure && validateFigureSpec(p.figure).ok ? p.figure : null,
     // 모델이 지문 끝에 선택지를 또 써도 저장 전에 뗀다 — 화면에서 두 번 보였다(2026-09-14).
     passage: stripInlineOptions(p.passage, p.options ?? null),
     options: format === "mc" ? p.options ?? null : null,
@@ -546,6 +558,7 @@ export async function regenerateProblem(params: {
               items: { type: "string" },
               description: "숫자 입력(SPR)일 때만. 동치 정답 목록(예: [\"7/2\",\"3.5\"]).",
             },
+            figure: { type: "object", description: "그래프·도형 데이터(generate_problems 의 figure 와 같은 모양). 필요할 때만." },
             explanation: {
               type: "string",
               description: format === "mc" ? "정답 해설" : format === "spr" ? "풀이 과정과 정답" : "모범 답안 또는 풀이 과정",
@@ -590,6 +603,7 @@ ${current.correctIndex !== null ? `정답 인덱스: ${current.correctIndex}` : 
     options?: string[];
     correct_index?: number;
     answers?: string[];
+    figure?: unknown;
     explanation: string;
   };
 
@@ -599,6 +613,7 @@ ${current.correctIndex !== null ? `정답 인덱스: ${current.correctIndex}` : 
     options: format === "mc" ? raw.options ?? null : null,
     correctIndex: format === "mc" ? raw.correct_index ?? null : null,
     answers: format === "spr" ? (raw.answers ?? []).map(String).filter(Boolean) : null,
+    figure: raw.figure && validateFigureSpec(raw.figure).ok ? raw.figure : null,
     explanation: raw.explanation,
     difficulty,
   };

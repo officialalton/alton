@@ -107,6 +107,7 @@ const mc: SessionProblem = {
   latestWorkId: null,
   myText: null,
   acceptedAnswers: null,
+  figure: null,
 };
 
 const essay: SessionProblem = { ...mc, number: 2, problemId: "p2", format: "essay", options: [], passage: "서술형 지문" };
@@ -420,5 +421,17 @@ describe("ProblemsPanel — 숫자 입력(SPR)", () => {
     expect(screen.getByText(/자동 채점\(정답\)대로 확정/)).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: "채점 완료" }));
     await waitFor(() => expect(gradeProblemAttempt).toHaveBeenCalledWith({ workId: "w5", grade: null, comment: "" }));
+  });
+
+});
+
+describe("ProblemsPanel — 도형·그래프(2026-09-14 ③)", () => {
+  it("figure 데이터가 있으면 지문 위에 그림이 그려진다", () => {
+    renderPanel([{ ...mc, figure: { type: "coordinate_plane", xRange: [-1, 5], yRange: [-1, 5], items: [{ kind: "line", slope: 1, intercept: 0 }] } }]);
+    expect(screen.getByTestId("problem-figure").querySelector("svg")).not.toBeNull();
+  });
+  it("틀린 데이터는 그림 대신 사유를 보인다", () => {
+    renderPanel([{ ...mc, figure: { type: "geometry", shapes: [] } }]);
+    expect(screen.getByTestId("problem-figure-error")).toBeInTheDocument();
   });
 });

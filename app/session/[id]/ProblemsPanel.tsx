@@ -19,6 +19,7 @@ import ProblemWorkBoardCanvas, { type ProblemBoardHandle } from "./ProblemWorkBo
 import LearningText from "./LearningText";
 import { stripInlineOptions } from "@/lib/problem-text";
 import PdfPageAnnotationLayer from "./PdfPageAnnotationLayer";
+import ProblemFigure from "./ProblemFigure";
 
 const DIFFICULTY_LABEL: Record<string, string> = {
   easy: "쉬움",
@@ -433,6 +434,8 @@ export default function ProblemsPanel({
                   <span className="text-[10.5px] font-semibold text-grey-500">{p.attempts}번 풀어봄</span>
                 )}
               </header>
+
+              {p.figure != null && <ProblemFigure spec={p.figure} className="mb-4" />}
 
               {p.passage ? (
                 <LearningText
