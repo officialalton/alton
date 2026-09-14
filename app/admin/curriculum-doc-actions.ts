@@ -465,8 +465,8 @@ export async function generateSectionProblems(params: {
                     type: "object",
                     description:
                       "그래프·도형이 꼭 필요한 수학 문항에만. 그림 파일이 아니라 데이터다. " +
-                      "좌표평면: {type:'coordinate_plane', xRange:[min,max], yRange:[min,max], items:[{kind:'line', through:[[x,y],[x,y]], label}, {kind:'line', slope, intercept}, {kind:'points', points:[[x,y]], labels:[]}, {kind:'function', fn:'linear'|'quadratic'|'exponential'|'abs'|'sqrt'|'cubic', params:[...]}, {kind:'segment', from, to}, {kind:'polyline', points}]}. " +
-                      "기하: {type:'geometry', shapes:[{kind:'polygon', points:[[x,y],...], vertexLabels:[], sideLabels:[], angleLabels:[{at:index, text:'63°'}], rightAngleAt:[index]}, {kind:'circle', center:[x,y], radius, centerLabel, radiusLabel}, {kind:'segment', from, to, label}, {kind:'parallel_lines', y1, y2, transversal:[[x,y],[x,y]], labels:['m','n','k'], angleLabels:[{at:[x,y], text:'x°'}]}, {kind:'label', at:[x,y], text}], notToScale:true}. " +
+                      "좌표평면: {type:'coordinate_plane', xRange:[min,max], yRange:[min,max], xTitle:'Time (seconds)', yTitle:'Height (meters)', items:[{kind:'line', through:[[x,y],[x,y]], label}, {kind:'line', slope, intercept}, {kind:'points', points:[[x,y]], labels:[]}, {kind:'function', fn:'linear'|'quadratic'|'exponential'|'abs'|'sqrt'|'cubic', params:[...]}, {kind:'segment', from, to}, {kind:'polyline', points}]}. " +
+                      "기하: {type:'geometry', shapes:[{kind:'polygon', points:[[x,y],...], vertexLabels:[], sideLabels:[], angleLabels:[{at:index, text:'63°'}], rightAngleAt:[index]}, {kind:'circle', center:[x,y], radius, centerLabel, radiusLabel}, {kind:'segment', from, to, label}, {kind:'parallel_lines', y1, y2, transversal:[[x,y],[x,y]], labels:['m','n','k'], angles:[{line:'y1'|'y2', quadrant:'NE'|'NW'|'SE'|'SW', text:'118°'}]}, {kind:'label', at:[x,y], text}], notToScale:true}. " +
                       "좌표는 문제의 수치와 정확히 일치해야 한다.",
                   },
                   explanation: {
@@ -741,7 +741,7 @@ export async function generateFigureForProblem(params: {
               description:
                 params.kind === "coordinate_plane"
                   ? "{type:'coordinate_plane', xRange:[min,max], yRange:[min,max], items:[{kind:'line', through:[[x,y],[x,y]], label}, {kind:'line', slope, intercept}, {kind:'points', points:[[x,y]], labels:[]}, {kind:'function', fn:'linear'|'quadratic'|'exponential'|'abs'|'sqrt'|'cubic', params:[...]}, {kind:'segment', from, to}, {kind:'polyline', points}]}"
-                  : "{type:'geometry', shapes:[{kind:'polygon', points:[[x,y],...], vertexLabels:[], sideLabels:[], angleLabels:[{at:index, text}], rightAngleAt:[index]}, {kind:'circle', center:[x,y], radius, centerLabel, radiusLabel}, {kind:'segment', from, to, label}, {kind:'parallel_lines', y1, y2, transversal:[[x,y],[x,y]], labels:['m','n','k'], angleLabels:[{at:[x,y], text}]}, {kind:'label', at:[x,y], text}], notToScale:true}",
+                  : "{type:'geometry', shapes:[{kind:'polygon', points:[[x,y],...], vertexLabels:[], sideLabels:[], angleLabels:[{at:index, text}], rightAngleAt:[index]}, {kind:'circle', center:[x,y], radius, centerLabel, radiusLabel}, {kind:'segment', from, to, label}, {kind:'parallel_lines', y1, y2, transversal:[[x,y],[x,y]], labels:['m','n','k'], angles:[{line:'y1'|'y2', quadrant:'NE'|'NW'|'SE'|'SW', text}]}, {kind:'label', at:[x,y], text}], notToScale:true}",
             },
           },
           required: ["figure"],

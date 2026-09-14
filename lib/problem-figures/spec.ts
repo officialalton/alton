@@ -18,16 +18,23 @@ export type CoordinatePlaneSpec = {
   yRange: [number, number];
   xStep?: number;
   yStep?: number;
+  /** 축 끝의 변수 이름(기본 x, y). */
   xLabel?: string;
   yLabel?: string;
+  /** 축 설명(SAT 스타일: 아래 "Time (seconds)", 왼쪽 세로 "Height (meters)"). */
+  xTitle?: string;
+  yTitle?: string;
   items: PlaneItem[];
 };
+
+/** 평행선·횡단선 교점의 각 — 어느 선(y1|y2)의 교점인지, 어느 사분면(NE·NW·SE·SW)인지로 자리를 정한다. 호(arc)를 그린다. */
+export type IntersectionAngle = { line: "y1" | "y2"; quadrant: "NE" | "NW" | "SE" | "SW"; text: string };
 
 export type GeometryShape =
   | { kind: "polygon"; points: Point[]; vertexLabels?: string[]; sideLabels?: string[]; angleLabels?: { at: number; text: string }[]; rightAngleAt?: number[] }
   | { kind: "circle"; center: Point; radius: number; centerLabel?: string; radiusLabel?: string }
   | { kind: "segment"; from: Point; to: Point; label?: string; dashed?: boolean }
-  | { kind: "parallel_lines"; y1: number; y2: number; transversal: [Point, Point]; labels?: [string, string, string]; angleLabels?: { at: Point; text: string }[] }
+  | { kind: "parallel_lines"; y1: number; y2: number; transversal: [Point, Point]; labels?: [string, string, string]; angleLabels?: { at: Point; text: string }[]; angles?: IntersectionAngle[] }
   | { kind: "label"; at: Point; text: string };
 
 export type GeometrySpec = {
@@ -97,6 +104,11 @@ export function validateFigureSpec(input: unknown): { ok: true; spec: FigureSpec
         if (!isPoint(sh.from) || !isPoint(sh.to)) return { ok: false, error: "segment 는 from/to 가 필요합니다." };
       } else if (sh.kind === "parallel_lines") {
         if (typeof sh.y1 !== "number" || typeof sh.y2 !== "number" || !Array.isArray(sh.transversal) || !sh.transversal.every(isPoint)) return { ok: false, error: "parallel_lines 는 y1, y2, transversal 두 점이 필요합니다." };
+        if (sh.angles !== undefined) {
+          if (!Array.isArray(sh.angles) || !(sh.angles as Record<string, unknown>[]).every((a) => a && ["y1", "y2"].includes(String(a.line)) && ["NE", "NW", "SE", "SW"].includes(String(a.quadrant)) && typeof a.text === "string")) {
+            return { ok: false, error: "parallel_lines.angles 는 {line:'y1'|'y2', quadrant:'NE'|'NW'|'SE'|'SW', text} 목록이어야 합니다." };
+          }
+        }
       } else if (sh.kind === "label") {
         if (!isPoint(sh.at) || typeof sh.text !== "string") return { ok: false, error: "label 은 at 과 text 가 필요합니다." };
       } else {

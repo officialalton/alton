@@ -55,4 +55,25 @@ describe("문제 도형 생성기(2026-09-14 문제 템플릿 ③)", () => {
     expect(validateFigureSpec({ type: "image", bucket: "problem-assets", path: "../x.png" })).toMatchObject({ ok: false });
     expect(renderFigureSvg({ type: "image", bucket: "b", path: "p" })).toBe("");
   });
+
+  it("평행선의 각은 교점·사분면으로 놓이고 호가 그려진다; 좌표평면은 축 설명·원점 O 를 그린다", () => {
+    const g = validateFigureSpec({
+      type: "geometry",
+      shapes: [{ kind: "parallel_lines", y1: 3, y2: 0, transversal: [[1, 4], [4, -1]], labels: ["m", "n", "k"], angles: [{ line: "y1", quadrant: "NE", text: "118°" }, { line: "y2", quadrant: "SW", text: "x°" }] }],
+    });
+    expect(g.ok).toBe(true);
+    if (!g.ok) return;
+    const svg = renderFigureSvg(g.spec);
+    expect((svg.match(/<path d="M[^"]*A/g) ?? []).length).toBe(2); // 호 2개
+    expect(svg).toContain(">118°<");
+    expect(validateFigureSpec({ type: "geometry", shapes: [{ kind: "parallel_lines", y1: 1, y2: 0, transversal: [[0, 0], [1, 1]], angles: [{ line: "y3", quadrant: "NE", text: "a" }] }] })).toMatchObject({ ok: false });
+
+    const pl = validateFigureSpec({ type: "coordinate_plane", xRange: [0, 3], yRange: [0, 12], xTitle: "Time (seconds)", yTitle: "Height (meters)", items: [{ kind: "function", fn: "quadratic", params: [-4, 0, 10] }] });
+    expect(pl.ok).toBe(true);
+    if (!pl.ok) return;
+    const p = renderFigureSvg(pl.spec);
+    expect(p).toContain("Time (seconds)");
+    expect(p).toContain("rotate(-90)");
+    expect(p).toContain(">O<");
+  });
 });
