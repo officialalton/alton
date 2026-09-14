@@ -24,7 +24,7 @@ import { extensionForKind, kindForMime, probePdf, sha256Hex } from "@/lib/curric
 // 실제 Drive 쓰기(폴더 생성·이름 변경)는 CURRICULUM_DRIVE_ALLOW_REAL_WRITES 가 켜졌을
 // 때만 한다. 읽기(목록·내려받기)는 CURRICULUM_DRIVE_ENABLED 만으로 된다.
 
-export const ASSET_BUCKET = "curriculum-assets";
+const ASSET_BUCKET = "curriculum-assets";
 
 async function requireAdmin() {
   const supabase = await createClient();
