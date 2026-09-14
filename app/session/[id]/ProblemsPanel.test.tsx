@@ -148,6 +148,21 @@ describe("ProblemsPanel — 공통", () => {
     expect(screen.getByText("첫 번째 지문")).toBeInTheDocument();
   });
 
+  it("왼쪽 목차에 채점 결과(정답/부분/오답)가 붙고, 아래에 정답만 센 점수가 나온다(2026-09-14)", () => {
+    renderPanel([
+      { ...mc, graded: true, grade: "correct", solved: true, attempts: 1, latestWorkId: "w1", myChoice: 0, correctIndex: 0 },
+      { ...essay, graded: true, grade: "partial", attempts: 1, latestWorkId: "w2" },
+      { ...math, graded: true, grade: "incorrect", solved: true, attempts: 1, latestWorkId: "w3" },
+      { ...mc, number: 4, problemId: "p4" },
+    ]);
+    const nav = screen.getByRole("navigation", { name: "문제 목차" });
+    expect(nav).toHaveTextContent("부분 정답");
+    expect(nav).toHaveTextContent("오답");
+    expect(nav.textContent).not.toContain("채점됨");
+    expect(screen.getByTestId("problem-score")).toHaveTextContent("맞은 문제 1 / 4");
+    expect(screen.getByTestId("problem-score")).toHaveTextContent("채점 3");
+  });
+
   it("시작 전 미리보기는 읽기만 한다 — 선택지 클릭·풀이판·정답이 없다", () => {
     renderPanel([{ ...mc, planned: true }]);
     expect(screen.getByText("수업 전 미리보기")).toBeInTheDocument();

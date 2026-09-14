@@ -251,6 +251,13 @@ export default function ProblemsPanel({
 
   function tocBadge(p: SessionProblem): { text: string; className: string } | null {
     if (p.planned) return null;
+    // 2026-09-14 UAT: '채점됨'이 아니라 결과(정답/부분/오답)를 바로 보여준다.
+    if (p.graded && p.grade) {
+      return {
+        text: GRADE_LABEL[p.grade],
+        className: p.grade === "correct" ? "text-green" : p.grade === "partial" ? "text-amber-600" : "text-red",
+      };
+    }
     if (p.graded) return { text: "채점됨", className: "text-green" };
     if (p.format === "mc" ? p.myChoice !== null : p.solved) return { text: "제출", className: "text-ink" };
     if (p.attempts > 0) return { text: "푸는 중", className: "text-grey-500" };
@@ -281,6 +288,16 @@ export default function ProblemsPanel({
         <div className="hidden md:block text-[10.5px] font-extrabold text-grey-300 uppercase tracking-wider px-2 mb-1">
           {noun} 목차
         </div>
+        {!anyPlanned && (
+          // 점수 — 정답만 센다(부분 정답은 세지 않는다). 2026-09-14 UAT.
+          <div
+            data-testid="problem-score"
+            className="hidden md:block text-[12px] font-bold text-ink px-2.5 py-2 mb-2 border-b border-grey-200"
+          >
+            맞은 {noun} <span className="text-green">{problems.filter((p) => p.graded && p.grade === "correct").length}</span> / {problems.length}
+            <span className="text-grey-500 font-semibold"> · 채점 {problems.filter((p) => p.graded).length}</span>
+          </div>
+        )}
         {problems.map((p, idx) => {
           const badge = tocBadge(p);
           return (
@@ -463,7 +480,7 @@ export default function ProblemsPanel({
                 </div>
               )}
 
-              {isTeacherLike && !p.planned && p.correctIndex !== null && (
+              {isTeacherLike && !p.planned && !p.graded && p.correctIndex !== null && (
                 <button
                   type="button"
                   onClick={() => toggleReveal(p.problemId)}
