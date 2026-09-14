@@ -1,5 +1,31 @@
 # ALTON — 현재 상태 (2026-09-14 기준)
 
+> **2026-09-14 야간 — P3 5차: 문제 풀이·채점 흐름 재정리 / PDF 텍스트 필기·전체 지우기 / 수업 화면 탭 정리.**
+> 커밋 `81055e7`. **Preview `https://alton-n31irfo0b-alton7.vercel.app` = `81055e7`.** 공유 non-prod: **`20261355000000`까지 적용됨.**
+> 1장 정리: [`2026-09-14-problem-answer-grading-and-pdf-text-notes.md`](2026-09-14-problem-answer-grading-and-pdf-text-notes.md).
+>
+> **확정 정책(제품 오너 2026-09-14 지시 그대로)**
+> 1. **객관식**은 선택지 클릭이 곧 답 — 즉시 저장, 서버 자동 채점, 채점 전엔 다른 선택지로 바꿀 수 있다. 풀이판·제출 없음(연습장은 선택).
+> 2. **서술형**은 문제 아래 연습장에 쓰는 대로 저장(제출 없음). **풀이형**만 풀이판·`풀이 제출`.
+> 3. **정답·해설은 교사가 채점을 끝낸 문제만** 학생에게 열린다(풀었다는 사실만으로는 안 열림). 객관식도 교사 `채점 완료`(자동 채점 그대로 확정 가능)가 필요.
+> 4. 채점은 담당 교사(·관리자)만: 정답/부분/오답 + 한마디, 다시 채점 가능. `grade_problem_attempt`.
+> 5. 수업 화면에서 **연습장 탭·문제 기록 탭 제거**(문제 기록은 학생 포털에서만). 연습장은 문제 아래로 흡수.
+> 6. PDF 필기: `T 텍스트`(클릭한 자리 글 상자, 교사·학생 각자 레이어) · `전체 지우기`(내 레이어·이 페이지만, `clear_all`).
+>
+> **구현**: `20261355` — `session_problem_work.auto_correct/grade/grade_comment/graded_at/graded_by`, `submit_problem_attempt` 자동 채점·채점 전
+> 재선택(고정 트리거 완화는 선택지만), `grade_problem_attempt`, `session_problem_formats`(학생은 problems 를 못 읽어 유형만 준다),
+> `append_page_stroke_events` 가 `tool:'clear'`→clear_all, `tool:'text'`(text·size) 수용. 앱: `ProblemsPanel` 유형별 흐름 + 교사 채점 구역,
+> `answerMcChoice/gradeProblemAttempt/refreshSessionProblems`, 채널 `session-problems:{id}` 로 상대 화면 갱신, `PdfPageAnnotationLayer` 텍스트·전체 지우기,
+> `loadPageStrokes` 가 clear 이후만 재구성(`reconstructPageStrokes`).
+>
+> **검증**: 통합 8(자동 채점·재선택·채점 후 거부·교사만 채점·학생 payload 가림·유형 조회·clear_all·빈 텍스트 거부) + 기존 통합 2건을 새 정책으로
+> 갱신 / 컴포넌트 30(ProblemsPanel 21·PDF 레이어 8·store) / `app/session/[id]` 스위트 245 중 244 통과 — 1건(`과거 비공개 기록은 보존되고…`)은
+> **append-only 테이블에 전역 count 를 재는 테스트라 db reset 직후에만 유효**(이번 변경과 무관, 첫 실행은 통과). **Preview UAT 미실시**(배포 직후 보고).
+>
+> **미결(제품 오너)**: "과제 쪽 셋업" — 현재 레거시 `homework_items`(session 귀속, 자유 답안+graded/score) 와 v3 `session_homework_items`
+> (`compose_homework_from_session` 키워드 풀에서 발급, 학생 포털 v3 항목 읽기·저장) 두 갈래가 공존. 방향 제안은 보고서 참조.
+> **다음 작업 단위**: Preview UAT(교사·학생 두 계정: 객관식 클릭 → 교사 채점 → 학생 정답 열림 / 서술형 연습장 / 텍스트·전체 지우기) → 과제 범위 확정 후 착수.
+
 > **2026-09-14 야간 — P2 14차: Drive PDF 실사용 UAT 반영(수업 준비 1.4초 / PDF 뷰어·필기·문제 슬라이드 / 객관식 선택지 중복).**
 > 커밋 `c9b1e20` → `a878678`(브랜치 `preview/m4-integration-verification`).
 > **Preview `https://alton-e2dj133fa-alton7.vercel.app` = `a878678`.** 공유 non-prod: **`20261354000000`까지 적용됨.**
