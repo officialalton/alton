@@ -342,7 +342,9 @@ export default forwardRef<
   const layerStyle = width > 0 && height > 0 ? { width: `${width}px`, height: `${height}px` } : undefined;
 
   return (
-    <div className="absolute inset-0" data-testid="pdf-page-annotation-layer">
+    // 2026-09-14 UAT: "화면에 클릭 자체가 안 된다" — 이 감싸는 div 가 문제 화면 전체를 덮고 있어서 선택지·버튼
+    // 클릭을 먹었다. 감싸는 쪽은 클릭을 통과시키고, 입력 캔버스(필기 중)·도구 막대·글 상자만 받는다.
+    <div className="absolute inset-0 pointer-events-none" data-testid="pdf-page-annotation-layer">
       <canvas
         ref={teacherCanvasRef}
         data-testid="pdf-teacher-layer"
@@ -428,7 +430,7 @@ export default forwardRef<
             }
           }}
           placeholder="입력 후 Enter (줄바꿈은 Shift+Enter)"
-          className="absolute bg-white/90 border-2 border-red rounded px-1.5 py-1 outline-none resize-none font-semibold text-ink shadow-md"
+          className="absolute pointer-events-auto bg-white/90 border-2 border-red rounded px-1.5 py-1 outline-none resize-none font-semibold text-ink shadow-md"
           style={{
             zIndex: 9,
             left: `${(textDraft.x / width) * 100}%`,
@@ -443,7 +445,7 @@ export default forwardRef<
       )}
 
       <div
-        className="absolute top-2 right-2 flex flex-wrap items-center gap-1.5 bg-white/60 backdrop-blur-sm border border-white/60 shadow-sm rounded-lg px-2 py-1"
+        className="absolute top-2 right-2 pointer-events-auto flex flex-wrap items-center gap-1.5 bg-white/60 backdrop-blur-sm border border-white/60 shadow-sm rounded-lg px-2 py-1"
         style={{ zIndex: 8 }}
       >
         {myScope && (

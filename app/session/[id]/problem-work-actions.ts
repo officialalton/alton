@@ -355,11 +355,38 @@ export async function answerSprText(params: {
   text: string;
   source?: ProblemSource;
 }): Promise<ActionResult> {
-  const { user } = await requireUser();
-  if (user.id !== params.studentId) return { ok: false, error: "본인 문제만 답할 수 있습니다." };
   const text = params.text.trim();
   if (!text) return { ok: false, error: "답을 입력하세요." };
   if (text.length > 12) return { ok: false, error: "답은 12자 안으로 적어 주세요(양수 5자·음수 6자 규칙)." };
+  return saveTextAnswer({ ...params, text });
+}
+
+/**
+ * 서술형 답 — 글 상자에 타이핑한 그대로 저장한다(2026-09-14 UAT: 화이트보드가 아니라 텍스트 입력).
+ * 쓰는 대로 저장되므로 빈 글도 받는다(지웠으면 지운 대로). 채점 전까지는 몇 번이든 고칠 수 있다.
+ * 정답 목록이 없는 형식이라 서버 자동 채점은 붙지 않는다 — 교사가 정답/부분/오답을 고른다.
+ */
+export async function answerEssayText(params: {
+  sessionId: string;
+  studentId: string;
+  problemId: string;
+  text: string;
+  source?: ProblemSource;
+}): Promise<ActionResult> {
+  if (params.text.length > 20000) return { ok: false, error: "답이 너무 깁니다(20,000자 안)." };
+  return saveTextAnswer(params);
+}
+
+async function saveTextAnswer(params: {
+  sessionId: string;
+  studentId: string;
+  problemId: string;
+  text: string;
+  source?: ProblemSource;
+}): Promise<ActionResult> {
+  const { user } = await requireUser();
+  if (user.id !== params.studentId) return { ok: false, error: "본인 문제만 답할 수 있습니다." };
+  const text = params.text;
   const admin = createAdminClient();
   const { data: session } = await admin
     .from("sessions")

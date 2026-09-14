@@ -5,6 +5,7 @@ import type { SessionProblem } from "./session-problem-data";
 import {
   answerMcChoice,
   answerSprText,
+  answerEssayText,
   gradeProblemAttempt,
   listProblemAttempts,
   loadProblemWorkBoard,
@@ -16,6 +17,7 @@ import {
 vi.mock("./problem-work-actions", () => ({
   openProblemWork: vi.fn(),
   answerSprText: vi.fn(),
+  answerEssayText: vi.fn(),
   submitProblemWork: vi.fn(),
   listProblemAttempts: vi.fn(),
   loadProblemWorkBoard: vi.fn(),
@@ -237,26 +239,40 @@ describe("ProblemsPanel — 객관식", () => {
     expect(screen.getByRole("button", { name: /가/ })).toBeDisabled();
   });
 
-  it("연습장은 선택이다 — 열면 풀이판이 연습장으로 붙고 제출은 없다", async () => {
+  it("연습장은 없다 — 문제 화면 필기가 그 자리를 대신한다(2026-09-14 UAT)", () => {
     renderPanel([mc]);
-    fireEvent.click(screen.getByRole("button", { name: /연습장 열기/ }));
-    await waitFor(() => expect(openProblemWork).toHaveBeenCalled());
-    expect(screen.getByText("연습장")).toBeInTheDocument();
-    expect(screen.getByText("연습장에 기록됩니다")).toBeInTheDocument();
+    expect(screen.queryByText(/연습장 열기/)).not.toBeInTheDocument();
     expect(screen.queryByText("풀이 제출")).not.toBeInTheDocument();
   });
 });
 
 describe("ProblemsPanel — 서술형", () => {
-  it("문제를 펼치면 연습장이 바로 열리고, 쓰는 대로 저장된다는 안내가 있다", async () => {
+  it("글 상자에 타이핑하면 잠깐 멈춘 뒤 쓴 그대로 저장된다 — 화이트보드·제출 버튼은 없다", async () => {
+    vi.mocked(answerEssayText).mockResolvedValue({ ok: true });
     renderPanel([essay]);
-    await waitFor(() =>
-      expect(openProblemWork).toHaveBeenCalledWith({ sessionId: "s1", studentId: "stu1", problemId: "p2", newAttempt: false, source: "lesson" })
-    );
-    expect(screen.getByText(/아래 연습장에 답을 쓰세요/)).toBeInTheDocument();
-    expect(screen.getByText("답안")).toBeInTheDocument();
+    expect(screen.getByText("쓰는 대로 저장됩니다")).toBeInTheDocument();
+    expect(openProblemWork).not.toHaveBeenCalled();
     expect(screen.queryByText("풀이 제출")).not.toBeInTheDocument();
     expect(screen.queryByText(/풀이판 열기/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/연습장/)).not.toBeInTheDocument();
+    fireEvent.change(screen.getByLabelText("서술형 답"), { target: { value: "Undeterred means persistent." } });
+    await waitFor(() =>
+      expect(answerEssayText).toHaveBeenCalledWith({
+        sessionId: "s1",
+        studentId: "stu1",
+        problemId: "p2",
+        text: "Undeterred means persistent.",
+        source: "lesson",
+      })
+    );
+    expect(await screen.findByText("저장됨")).toBeInTheDocument();
+    expect(screen.getByText("쓰는 중 · 채점 대기")).toBeInTheDocument();
+  });
+
+  it("채점 뒤에는 글 상자가 잠기고, 교사·보호자는 학생이 쓴 답을 읽기만 한다", () => {
+    renderPanel([{ ...essay, myText: "my answer", graded: true, grade: "correct" }]);
+    expect(screen.getByLabelText("서술형 답")).toHaveAttribute("readonly");
+    expect(screen.getByLabelText("서술형 답")).toHaveValue("my answer");
   });
 });
 
@@ -317,11 +333,10 @@ describe("ProblemsPanel — 교사", () => {
   });
 
   it("서술형·풀이형은 정답/부분/오답을 골라야 채점을 끝낼 수 있고 한마디를 붙인다", async () => {
-    renderPanel([{ ...essay, attempts: 1, latestWorkId: "w2" }], "teacher");
-    // 서술형은 연습장이 자동으로 열린다 — 그 사이 버튼이 잠깐 잠긴다.
-    await waitFor(() => expect(openProblemWork).toHaveBeenCalled());
+    renderPanel([{ ...essay, attempts: 1, myText: "student text", latestWorkId: "w2" }], "teacher");
     const done = screen.getByRole("button", { name: "채점 완료" });
-    await waitFor(() => expect(screen.getByText("답안")).toBeInTheDocument());
+    expect(screen.getByLabelText("서술형 답")).toHaveValue("student text");
+    expect(screen.getByLabelText("서술형 답")).toHaveAttribute("readonly");
     expect(done).toBeDisabled();
     fireEvent.click(screen.getByRole("button", { name: "부분 정답" }));
     fireEvent.change(screen.getByLabelText("선생님 한마디"), { target: { value: "근거를 더" } });

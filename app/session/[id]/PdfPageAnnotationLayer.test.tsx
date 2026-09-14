@@ -80,6 +80,14 @@ async function enableDrawing() {
 }
 
 describe("PDF 페이지 필기 레이어", () => {
+  it("필기를 켜기 전에는 아래 화면의 클릭을 가로막지 않는다 (2026-09-14 UAT: 선택지·버튼 클릭 안 됨)", () => {
+    render(<PdfPageAnnotationLayer target={target(1)} role="student" viewerUserId="u1" width={600} height={800} />);
+    expect(screen.getByTestId("pdf-page-annotation-layer").className).toContain("pointer-events-none");
+    expect(screen.getByTestId("pdf-input-layer").className).toContain("pointer-events-none");
+    // 도구 막대는 눌러야 하니 스스로는 클릭을 받는다.
+    expect(screen.getByRole("button", { name: /필기/ }).closest("div")!.className).toContain("pointer-events-auto");
+  });
+
   it("한 획은 eventId 를 달고 이 페이지의 대상으로만 저장된다", async () => {
     vi.mocked(actions.appendPageStrokeEvents).mockImplementation(async ({ segments }) => ({
       savedEventIds: segments.map((s) => s.eventId!).filter(Boolean),

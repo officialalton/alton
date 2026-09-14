@@ -8,6 +8,7 @@ import type { ProblemWorkBoard as Board } from "./problem-work-actions";
 import {
   answerMcChoice,
   answerSprText,
+  answerEssayText,
   gradeProblemAttempt,
   listProblemAttempts,
   loadProblemWorkBoard,
@@ -175,16 +176,39 @@ export default function ProblemsPanel({
     }
   }
 
-  // 서술형은 연습장이 곧 답안 — 문제를 펼치면 바로 연다(학생·교사·보호자 모두, 쓰기 권한은 따로).
   const currentProblem = visibleProblems[0];
+
+  // 서술형 답 — 글 상자에 타이핑, 쓰는 대로 저장(잠깐 멈추면). 2026-09-14 UAT: 화이트보드가 아니다.
+  const [essayDraft, setEssayDraft] = useState<Record<string, string>>({});
+  const [essaySaved, setEssaySaved] = useState<Record<string, "saving" | "saved" | "error">>({});
+  const essayTimerRef = useRef<Record<string, ReturnType<typeof setTimeout>>>({});
+  function editEssay(p: SessionProblem, text: string) {
+    if (!isStudent || p.planned || p.graded) return;
+    setEssayDraft((d) => ({ ...d, [p.problemId]: text }));
+    const timers = essayTimerRef.current;
+    if (timers[p.problemId]) clearTimeout(timers[p.problemId]);
+    timers[p.problemId] = setTimeout(() => void saveEssay(p, text), 700);
+  }
+  async function saveEssay(p: SessionProblem, text: string) {
+    setEssaySaved((m) => ({ ...m, [p.problemId]: "saving" }));
+    const res = await answerEssayText({ sessionId, studentId, problemId: p.problemId, text, source });
+    if (!res.ok) {
+      setEssaySaved((m) => ({ ...m, [p.problemId]: "error" }));
+      setError(res.error);
+      return;
+    }
+    setEssaySaved((m) => ({ ...m, [p.problemId]: "saved" }));
+    setProblems((ps) =>
+      ps.map((x) => (x.problemId === p.problemId ? { ...x, myText: text, attempts: Math.max(1, x.attempts) } : x))
+    );
+    notifyChanged();
+  }
   useEffect(() => {
-    if (!currentProblem || currentProblem.planned || currentProblem.format !== "essay") return;
-    if (openId === currentProblem.problemId) return;
-    const id = currentProblem.problemId;
-    const timer = setTimeout(() => void openBoard(id), 0);
-    return () => clearTimeout(timer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentProblem?.problemId, currentProblem?.format, currentProblem?.planned]);
+    const timers = essayTimerRef.current;
+    return () => {
+      for (const t of Object.values(timers)) clearTimeout(t);
+    };
+  }, []);
 
   async function showAttempt(workId: string) {
     setBoardBusy(true);
@@ -272,7 +296,7 @@ export default function ProblemsPanel({
     if (p.graded) return `채점 완료 · ${p.grade ? GRADE_LABEL[p.grade] : ""}`.trim();
     if (p.format === "mc") return p.myChoice !== null ? "답 저장됨 · 채점 대기" : "아직 풀지 않음";
     if (p.format === "spr") return p.myText ? "답 저장됨 · 채점 대기" : "아직 풀지 않음";
-    if (p.format === "essay") return p.attempts > 0 ? "쓰는 중 · 채점 대기" : "아직 풀지 않음";
+    if (p.format === "essay") return p.myText?.trim() ? "쓰는 중 · 채점 대기" : "아직 풀지 않음";
     return p.solved ? "제출함 · 채점 대기" : p.attempts > 0 ? "푸는 중" : "아직 풀지 않음";
   }
 
@@ -286,7 +310,8 @@ export default function ProblemsPanel({
       };
     }
     if (p.graded) return { text: "채점됨", className: "text-green" };
-    const answered = p.format === "mc" ? p.myChoice !== null : p.format === "spr" ? Boolean(p.myText) : p.solved;
+    const answered =
+      p.format === "mc" ? p.myChoice !== null : p.format === "spr" || p.format === "essay" ? Boolean(p.myText?.trim()) : p.solved;
     if (answered) return { text: "제출", className: "text-ink" };
     if (p.attempts > 0) return { text: "푸는 중", className: "text-grey-500" };
     return null;
@@ -538,10 +563,37 @@ export default function ProblemsPanel({
                   선생님이 채점하면 정답과 해설이 열립니다.
                 </p>
               )}
-              {isEssay && isStudent && !p.planned && !p.graded && (
-                <p className="text-[12px] text-grey-500 mb-4">
-                  아래 연습장에 답을 쓰세요 — 쓰는 대로 저장됩니다. 선생님이 채점하면 정답과 해설이 열립니다.
-                </p>
+              {isEssay && !p.planned && (
+                <div className="mb-4" data-testid="essay-answer">
+                  <label className="text-[12.5px] font-bold text-ink block mb-1" htmlFor={`essay-${p.problemId}`}>
+                    답안
+                    {isStudent && !p.graded && (
+                      <span className="ml-2 text-[11.5px] font-normal text-grey-500">
+                        {essaySaved[p.problemId] === "saving"
+                          ? "저장 중…"
+                          : essaySaved[p.problemId] === "error"
+                            ? "저장 실패 — 다시 입력하면 다시 저장합니다"
+                            : essaySaved[p.problemId] === "saved"
+                              ? "저장됨"
+                              : "쓰는 대로 저장됩니다"}
+                      </span>
+                    )}
+                    {!isStudent && <span className="ml-2 text-[11.5px] font-normal text-grey-500">학생이 쓴 답</span>}
+                  </label>
+                  <textarea
+                    id={`essay-${p.problemId}`}
+                    aria-label="서술형 답"
+                    value={essayDraft[p.problemId] ?? p.myText ?? ""}
+                    readOnly={!isStudent || p.graded}
+                    onChange={(e) => editEssay(p, e.target.value)}
+                    placeholder={isStudent ? "여기에 답을 쓰세요." : "학생이 아직 답을 쓰지 않았습니다."}
+                    rows={Math.min(24, Math.max(6, (essayDraft[p.problemId] ?? p.myText ?? "").split("\n").length + 2))}
+                    className="w-full text-[14px] leading-[1.7] border-[1.5px] border-grey-200 rounded-xl px-4 py-3 read-only:bg-grey-100 disabled:bg-grey-100"
+                  />
+                  {isStudent && !p.graded && (
+                    <p className="text-[12px] text-grey-500 mt-1.5">선생님이 채점하면 정답과 해설이 열립니다.</p>
+                  )}
+                </div>
               )}
               {isMath && isStudent && !p.planned && !p.graded && (
                 <p className="text-[12px] text-grey-500 mb-4">
@@ -582,17 +634,8 @@ export default function ProblemsPanel({
                 </p>
               ) : (
                 <>
-                  {/* 연습장 / 풀이판 */}
+                  {/* 풀이판 — 풀이형만. 연습장은 없다(2026-09-14 UAT: 문제 화면 필기가 그 자리를 대신한다). */}
                   <div className="flex flex-wrap gap-2">
-                    {(isMc || isSpr) && (
-                      <button
-                        disabled={boardBusy}
-                        onClick={() => (isOpen ? setOpenId(null) : void openBoard(p.problemId))}
-                        className="text-[12.5px] font-bold px-4 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
-                      >
-                        {isOpen ? "연습장 닫기" : "✏️ 연습장 열기"}
-                      </button>
-                    )}
                     {isMath && (
                       <button
                         disabled={boardBusy}
@@ -645,15 +688,13 @@ export default function ProblemsPanel({
                     )}
                   </div>
 
-                  {isOpen && board && board.workId === "" && (
+                  {isMath && isOpen && board && board.workId === "" && (
                     <p className="mt-4 text-[12.5px] text-grey-500">
-                      {isEssay
-                        ? "학생이 아직 이 문제의 답을 쓰지 않았습니다. 학생이 쓰기 시작하면 여기에서 볼 수 있고, 그때 피드백을 남길 수 있습니다."
-                        : "학생이 아직 이 문제를 풀기 시작하지 않았습니다. 학생이 풀이판을 열면 여기에서 볼 수 있고, 그때 피드백을 남길 수 있습니다."}
+                      학생이 아직 이 문제를 풀기 시작하지 않았습니다. 학생이 풀이판을 열면 여기에서 볼 수 있고, 그때 피드백을 남길 수 있습니다.
                     </p>
                   )}
 
-                  {isOpen && board && board.workId !== "" && (
+                  {isMath && isOpen && board && board.workId !== "" && (
                     <div className="mt-4">
                       {isMath && attempts.length > 1 && (
                         <div className="flex flex-wrap items-center gap-1.5 mb-2">
@@ -681,17 +722,17 @@ export default function ProblemsPanel({
                         problemId={p.problemId}
                         workId={board.workId}
                         attemptNo={board.attemptNo}
-                        mode={isMath ? "work" : isEssay ? "answer" : "scratch"}
+                        mode="work"
                         studentStrokes={board.studentStrokes}
                         strokesAfterSubmit={board.strokesAfterSubmit}
                         feedbackStrokes={board.feedbackStrokes}
-                        canDraw={canDraw && !(isStudent && (isMath ? board.submitted : p.graded))}
+                        canDraw={canDraw && !(isStudent && board.submitted)}
                         drawAsFeedback={isTeacher}
                         viewerUserId={viewerUserId}
                         readOnlyReason={
                           viewerRole === "parent"
                             ? "보호자는 읽기 전용입니다"
-                            : isStudent && isMath && board.submitted
+                            : isStudent && board.submitted
                               ? "제출한 풀이는 고칠 수 없습니다 — 다시 풀기로 새 풀이를 시작하세요"
                               : isStudent && p.graded
                                 ? "채점이 끝난 문제입니다"
@@ -733,10 +774,8 @@ export default function ProblemsPanel({
                               )}
                             </p>
                           )}
-                          {(isEssay || isMc) && !isOpen && (
-                            <p className="text-[12px] text-grey-500 mb-2">
-                              {isEssay ? "위 연습장에서 학생 답을 확인하세요." : "학생 연습장은 위 '연습장 열기'로 볼 수 있습니다."}
-                            </p>
+                          {isEssay && (
+                            <p className="text-[12px] text-grey-500 mb-2">학생 답은 위 답안 칸에 있습니다.</p>
                           )}
                           {isMath && !isOpen && (
                             <p className="text-[12px] text-grey-500 mb-2">풀이는 위 &apos;풀이판 열기&apos;로 볼 수 있습니다.</p>
