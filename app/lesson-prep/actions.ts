@@ -527,3 +527,61 @@ export async function removeProblem(
 function readableWriteError(message: string, fallback: string): string {
   return /[가-힣]/.test(message) ? message.replace(/^.*?:\s*/, "") : fallback;
 }
+
+// =========================================================================
+// 수업 연결과 수업 시작
+// =========================================================================
+// 2026-09-13 확정 1번: "수업 준비에 들어간 뒤 다시 '수업 열기'를 눌러 다른 화면으로
+// 이동하는 구조는 없앱니다. '수업 시작'만 별도 행동입니다."
+//
+// 그래서 연결과 시작을 이 화면에서 한다. 연결은 아무것도 고정하지 않고, 시작이
+// 그 시점의 준비안을 고정한다(mark_lesson_session_started → pin_session_selection).
+
+export type PrepLesson = {
+  sessionId: string;
+  startsAt: string | null;
+  linked: boolean;
+};
+
+export async function listLessonsForUnit(
+  layer: PrepLayer,
+  unitId: string
+): Promise<PrepLesson[]> {
+  if (layer !== "student") return [];
+  const { supabase } = await gate(layer);
+  if (!supabase) return [];
+
+  const { listBookedLessonsForUnit } = await import("@/app/teacher/unit-prep-actions");
+  const rows = await listBookedLessonsForUnit(unitId);
+  return rows.map((r) => ({
+    sessionId: r.sessionId,
+    startsAt: r.startsAt,
+    linked: r.alreadyLinked,
+  }));
+}
+
+export async function linkLesson(unitId: string, sessionId: string): Promise<PrepResult> {
+  const { supabase } = await gate("student");
+  if (!supabase) return { ok: false, error: "선생님·관리자만 수업을 준비할 수 있습니다." };
+
+  const { linkUnitPrepToLesson } = await import("@/app/teacher/unit-prep-actions");
+  const result = await linkUnitPrepToLesson(unitId, sessionId);
+  if (!result.ok) return { ok: false, error: result.error };
+  return { ok: true };
+}
+
+/**
+ * 수업을 시작한다 — **여기서만** 준비안이 고정된다.
+ *
+ * 화면 진입·저장·예약 연결은 아무것도 고정하지 않는다. 쓸 수 없는 항목이 있으면
+ * 서버가 사유를 붙여 거절하고, 매니페스트는 한 줄도 쓰이지 않는다.
+ */
+export async function startLesson(sessionId: string): Promise<PrepResult> {
+  const { supabase } = await gate("student");
+  if (!supabase) return { ok: false, error: "선생님·관리자만 수업을 시작할 수 있습니다." };
+
+  const { startMyLessonSession } = await import("@/app/teacher/lesson-schedule-actions");
+  const result = await startMyLessonSession(sessionId);
+  if (!result.ok) return { ok: false, error: result.error };
+  return { ok: true };
+}

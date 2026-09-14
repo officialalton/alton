@@ -4,6 +4,10 @@ import CompositionPanel from "./CompositionPanel";
 import * as actions from "./actions";
 import type { UnitComposition } from "@/lib/unit-composition";
 
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ push: vi.fn(), replace: vi.fn(), refresh: vi.fn() }),
+}));
+
 vi.mock("./actions", () => ({
   saveGoal: vi.fn(),
   addKeyword: vi.fn(),
@@ -11,6 +15,14 @@ vi.mock("./actions", () => ({
   addMaterial: vi.fn(),
   removeMaterial: vi.fn(),
   swapMaterialOrder: vi.fn(),
+  addProblem: vi.fn(),
+  removeProblem: vi.fn(),
+  inheritDefaults: vi.fn(),
+  previewRecomposition: vi.fn(),
+  applyRecomposition: vi.fn(),
+  listLessonsForUnit: vi.fn(async () => []),
+  linkLesson: vi.fn(),
+  startLesson: vi.fn(),
 }));
 
 function makeComposition(over: Partial<UnitComposition> = {}): UnitComposition {

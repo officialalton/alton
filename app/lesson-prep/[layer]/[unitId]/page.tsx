@@ -87,11 +87,9 @@ export default async function LessonPrepPage({
       problems={problems}
       scopeNotice={
         fromSessionId
-          ? "예약된 수업에서 들어왔습니다. 여기서 고치는 것은 이 회차의 준비안이며, 수업을 시작할 때 그 시점의 준비안이 고정됩니다."
+          ? "예약된 수업에서 들어왔습니다. 여기서 고치는 것이 그 수업의 준비안이며, 아래에서 수업을 시작할 때 지금 내용이 고정됩니다."
           : null
       }
-      backHref={fromSessionId ? `/session/${fromSessionId}` : null}
-      backLabel={fromSessionId ? "수업 열기" : null}
     />
   );
 }

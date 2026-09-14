@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   addKeyword,
   removeKeyword,
@@ -13,6 +14,10 @@ import {
   inheritDefaults,
   addProblem,
   removeProblem,
+  listLessonsForUnit,
+  linkLesson,
+  startLesson,
+  type PrepLesson,
   type RecompositionSummary,
 } from "./actions";
 import type {
@@ -35,8 +40,6 @@ export default function CompositionPanel({
   pickable,
   problems,
   scopeNotice = null,
-  backHref = null,
-  backLabel = null,
 }: {
   composition: UnitComposition;
   pickable: PickableMaterial[];
@@ -48,9 +51,6 @@ export default function CompositionPanel({
    * 콘텐츠를 여기서 고치는 것처럼 보이면 안 된다.
    */
   scopeNotice?: string | null;
-  /** 예약된 수업에서 들어왔을 때 그 수업으로 돌아가는 길. */
-  backHref?: string | null;
-  backLabel?: string | null;
 }) {
   const [keywordIds, setKeywordIds] = useState(composition.keywords.map((k) => k.id));
   const [materials, setMaterials] = useState<UnitMaterial[]>(composition.materials);
@@ -234,14 +234,6 @@ export default function CompositionPanel({
     <div className="max-w-[720px] px-8 py-8">
       {/* 무엇을 고치는 중인지 먼저 말한다 — 세 계층이 같은 화면이라 여기가 흐리면
           선생님이 학생 것을 고치는지 자기 기본을 고치는지 알 수 없다. */}
-      {backHref && backLabel && (
-        <a
-          href={backHref}
-          className="inline-block text-[12.5px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink mb-4"
-        >
-          {backLabel} →
-        </a>
-      )}
       <div className="text-[12px] font-bold text-grey-500 mb-1">{composition.scopeLabel}</div>
       <h1 className="text-[21px] font-extrabold text-ink leading-tight">
         {composition.unitTitle}
@@ -586,6 +578,108 @@ export default function CompositionPanel({
           </ul>
         )}
       </section>
+
+      {/* 2026-09-13 확정 1번 — 연결은 아무것도 고정하지 않는다. **시작만** 고정한다.
+          그래서 이 둘이 같은 화면에 있고, 다른 화면으로 건너뛰게 하지 않는다. */}
+      {layer === "student" && <LessonSection unitId={unitId} />}
     </div>
   );
+}
+
+function LessonSection({ unitId }: { unitId: string }) {
+  const router = useRouter();
+  const [lessons, setLessons] = useState<PrepLesson[] | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    listLessonsForUnit("student", unitId)
+      .then((rows) => {
+        if (!cancelled) setLessons(rows);
+      })
+      .catch(() => {
+        if (!cancelled) setLessons([]);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [unitId]);
+
+  async function run(job: () => Promise<{ ok: true } | { ok: false; error: string }>) {
+    setBusy(true);
+    setError(null);
+    const result = await job();
+    setBusy(false);
+    if (!result.ok) {
+      setError(result.error);
+      return false;
+    }
+    return true;
+  }
+
+  return (
+    <section className="mt-7">
+      <h2 className="text-[13px] font-bold text-ink mb-1">예정된 수업</h2>
+      <p className="text-[12px] text-grey-500 mb-2.5">
+        연결해도 아직 고정되지 않습니다. <strong className="text-ink">수업 시작</strong>을 누를 때
+        지금 준비안의 버전과 순서가 그대로 고정되고, 이후 내용이 바뀌어도 그 수업은 바뀌지 않습니다.
+      </p>
+
+      {error && <p className="text-[12.5px] text-red mb-2">{error}</p>}
+
+      {lessons === null ? (
+        <p className="text-[12.5px] text-grey-500">불러오는 중...</p>
+      ) : lessons.length === 0 ? (
+        <p className="text-[12.5px] text-grey-500 bg-grey-100 rounded-lg px-4 py-4">
+          아직 이 학생의 예정된 수업이 없습니다. 수업이 잡히면 여기에 나타납니다.
+        </p>
+      ) : (
+        <ul className="border-[1.5px] border-grey-200 rounded-xl divide-y divide-grey-100">
+          {lessons.map((l) => (
+            <li key={l.sessionId} className="px-4 py-2.5 flex items-center gap-3">
+              <span className="text-[12.5px] text-ink flex-1">{formatLessonDate(l.startsAt)}</span>
+              {l.linked ? (
+                <button
+                  disabled={busy}
+                  onClick={async () => {
+                    if (await run(() => startLesson(l.sessionId))) {
+                      router.push(`/session/${l.sessionId}`);
+                    }
+                  }}
+                  className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
+                >
+                  수업 시작
+                </button>
+              ) : (
+                <button
+                  disabled={busy}
+                  onClick={async () => {
+                    if (await run(() => linkLesson(unitId, l.sessionId))) {
+                      setLessons(await listLessonsForUnit("student", unitId));
+                    }
+                  }}
+                  className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
+                >
+                  이 수업에 연결
+                </button>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  );
+}
+
+function formatLessonDate(startsAt: string | null): string {
+  if (!startsAt) return "시간 미정";
+  const d = new Date(startsAt);
+  return d.toLocaleString("ko-KR", {
+    month: "long",
+    day: "numeric",
+    weekday: "short",
+    hour: "numeric",
+    minute: "2-digit",
+  });
 }

@@ -261,7 +261,9 @@ export async function resolveUnitScope(
   // 단계별로 나눠 읽는다 — 쿼리 수는 늘지만 무엇을 읽는지가 분명하다.
   const { data: unitRow } = await supabase
     .from("curriculum_overlay_units")
-    .select("unit_title, source_unit_id, overlay_id, composed_at, composition_dirty")
+    .select(
+      "unit_title, source_unit_id, source_teacher_template_unit_id, overlay_id, composed_at, composition_dirty"
+    )
     .eq("id", unitId)
     .maybeSingle();
   if (!unitRow) return null;
@@ -295,7 +297,13 @@ export async function resolveUnitScope(
     subjectName: relName(enrollmentRow?.subject),
     // 학생 층은 누구의 것인지가 제일 중요하다 — 이름을 그대로 쓴다.
     scopeLabel: studentName ? `${studentName} 학생` : LAYERS.student.label,
-    sourceUnitId: (unitRow.source_unit_id as string | null) ?? null,
+    // 물려받을 상위가 있는가 — 교사 회차를 직접 가리키는 경우도 포함한다.
+    // 매칭 시딩은 교사 회차만 적었고, 그래서 이 회차들이 상속 대상이 아닌 것처럼
+    // 보였다(20261344000000).
+    sourceUnitId:
+      (unitRow.source_unit_id as string | null) ??
+      (unitRow.source_teacher_template_unit_id as string | null) ??
+      null,
     goal: (prepRow?.goal as string | null) ?? null,
     composed: Boolean(unitRow.composed_at),
     dirty: Boolean(unitRow.composition_dirty),
