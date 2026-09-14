@@ -19,4 +19,12 @@ describe("splitLearningBlocks — 마크다운 파이프 표(2026-09-14 문제 �
   it("표가 없으면 한 덩어리", () => {
     expect(splitLearningBlocks("그냥 글")).toEqual([{ kind: "paragraph", text: "그냥 글" }]);
   });
+
+  it("'- ' 줄들은 목록 블록이 된다(메모 목록)", () => {
+    expect(splitLearningBlocks("notes:\n- a\n- b\nQ?")).toEqual([
+      { kind: "paragraph", text: "notes:" },
+      { kind: "list", items: ["a", "b"] },
+      { kind: "paragraph", text: "Q?" },
+    ]);
+  });
 });

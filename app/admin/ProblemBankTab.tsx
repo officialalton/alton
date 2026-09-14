@@ -18,6 +18,7 @@ import {
 } from "./problem-bank-actions";
 import { listSubjectCatalogAction } from "./subject-actions";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
+import { PROBLEM_SKILLS, findProblemSkill } from "@/lib/problem-skills";
 import { validateFigureSpec } from "@/lib/problem-figures/spec";
 import type { AdminSubject, SubjectKeyword } from "./subject-data";
 
@@ -474,10 +475,20 @@ function NewProblemRow({
         <input
           aria-label="문제 유형"
           value={skillType}
-          onChange={(e) => setSkillType(e.target.value)}
-          placeholder="유형 (선택 · 예: Words in Context)"
+          onChange={(e) => {
+            setSkillType(e.target.value);
+            const skill = findProblemSkill(e.target.value);
+            if (skill) setFormat(skill.defaultFormat);
+          }}
+          placeholder="유형 (선택 · 목록에서 고르거나 직접)"
+          list="problem-skill-list"
           className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 w-[220px]"
         />
+        <datalist id="problem-skill-list">
+          {PROBLEM_SKILLS.map((k) => (
+            <option key={k.code} value={k.label}>{`${k.family} · ${k.label}`}</option>
+          ))}
+        </datalist>
         <input
           aria-label="주제"
           value={topic}

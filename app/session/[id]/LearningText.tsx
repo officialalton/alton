@@ -40,6 +40,14 @@ export default function LearningText({ text, className }: { text: string; classN
               </tbody>
             </table>
           </div>
+        ) : block.kind === "list" ? (
+          <ul key={b} className="my-2 pl-5 list-disc">
+            {block.items.map((item, i) => (
+              <li key={i} className="mb-1">
+                <Inline parts={splitLearningContent(item)} />
+              </li>
+            ))}
+          </ul>
         ) : (
           <Inline key={b} parts={splitLearningContent(block.text)} />
         )
@@ -55,6 +63,13 @@ function Inline({ parts }: { parts: ContentPart[] }) {
         if (part.kind === "text") {
           return (
             <span key={i} className="whitespace-pre-wrap">
+              {part.value}
+            </span>
+          );
+        }
+        if (part.kind === "underline") {
+          return (
+            <span key={i} className="underline decoration-ink underline-offset-4 whitespace-pre-wrap">
               {part.value}
             </span>
           );

@@ -10,10 +10,12 @@ import katex from "katex";
 
 export type ContentPart =
   | { kind: "text"; value: string }
+  /** __밑줄__ — Text Structure 문항의 '밑줄 친 문장'(2026-09-14 ⑤). */
+  | { kind: "underline"; value: string }
   | { kind: "math"; html: string; display: boolean }
   | { kind: "math-error"; source: string };
 
-const TOKEN = /\$\$([\s\S]+?)\$\$|\$([^$\n]+?)\$/g;
+const TOKEN = /\$\$([\s\S]+?)\$\$|\$([^$\n]+?)\$|__([^_\n][^\n]*?)__/g;
 
 /**
  * 본문을 "글"과 "수식" 조각으로 나눈다. 수식이 하나도 없으면 글 한 조각만
@@ -31,6 +33,11 @@ export function splitLearningContent(source: string): ContentPart[] {
   while ((match = TOKEN.exec(source)) !== null) {
     if (match.index > lastIndex) {
       parts.push({ kind: "text", value: source.slice(lastIndex, match.index) });
+    }
+    if (match[3] !== undefined) {
+      parts.push({ kind: "underline", value: match[3] });
+      lastIndex = match.index + match[0].length;
+      continue;
     }
     const display = match[1] !== undefined;
     const expression = (match[1] ?? match[2] ?? "").trim();
@@ -76,7 +83,9 @@ export function hasMath(source: string): boolean {
 
 export type ContentBlock =
   | { kind: "paragraph"; text: string }
-  | { kind: "table"; header: string[]; rows: string[][] };
+  | { kind: "table"; header: string[]; rows: string[][] }
+  /** '- ' 로 시작하는 연속 줄 — Rhetorical Synthesis 의 메모 목록 등(2026-09-14 ⑤). */
+  | { kind: "list"; items: string[] };
 
 const TABLE_ROW = /^\s*\|.*\|\s*$/;
 const TABLE_SEP = /^\s*\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?\s*$/;
@@ -110,6 +119,16 @@ export function splitLearningBlocks(source: string): ContentBlock[] {
         i += 1;
       }
       blocks.push({ kind: "table", header, rows });
+      continue;
+    }
+    if (/^\s*[-•]\s+/.test(line)) {
+      flush();
+      const items: string[] = [];
+      while (i < lines.length && /^\s*[-•]\s+/.test(lines[i])) {
+        items.push(lines[i].replace(/^\s*[-•]\s+/, ""));
+        i += 1;
+      }
+      blocks.push({ kind: "list", items });
       continue;
     }
     buffer.push(line);

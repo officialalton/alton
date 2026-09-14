@@ -5,6 +5,7 @@ import { createClient } from "@/utils/supabase/server";
 import { sanitizeDocHtml } from "@/lib/sanitize-doc-html";
 import { stripInlineOptions } from "@/lib/problem-text";
 import { validateFigureSpec } from "@/lib/problem-figures/spec";
+import { findProblemSkill } from "@/lib/problem-skills";
 import type { DocProblem, DocSection, DocEditorData } from "./curriculum-doc-data";
 import { loadCurriculumDocDetail } from "./curriculum-doc-data";
 import type { SubjectKeyword } from "./subject-data";
@@ -478,9 +479,10 @@ export async function generateSectionProblems(params: {
         content: `다음 조건에 맞는 SAT/AP 교재용 문제 ${clampedCount}개를 생성해주세요.
 - 과목: ${subjectName}
 - 교재 섹션: ${sectionTitle}
-- 문제 유형(스킬): ${skillType}
+- 문제 유형(스킬): ${findProblemSkill(skillType)?.label ?? skillType}
 - 난이도: ${difficulty === "easy" ? "쉬움" : difficulty === "medium" ? "보통" : "어려움"}
 - 답안 형식: ${FORMAT_LABEL[format]}
+${findProblemSkill(skillType) ? `유형 규칙(실제 SAT/AP 문항 말투를 그대로 따른다): ${findProblemSkill(skillType)!.rule}` : ""}
 ${format === "mc" ? "객관식은 반드시 선택지 4개와 정답 인덱스를 포함해주세요." : ""}
 ${format === "spr" ? "숫자 입력(SPR)은 SAT Math 학생 직접 입력 문항입니다: 정답이 하나의 수(정수·소수·분수)로 정해져야 하고, answers 에 동치 표현을 모두 넣어주세요(예: 7/2 와 3.5). 선택지는 만들지 마세요. 양수는 5자, 음수는 6자 안에 쓸 수 있는 값이어야 합니다." : ""}
 표기 규칙: 수식은 LaTeX 로 $…$(인라인)·$$…$$(블록) 안에 쓴다. 표가 필요하면 마크다운 파이프 표(| x | f(x) | / |---|---| / | 0 | 17 |)로 쓴다. 그래프·도형이 꼭 필요한 수학 문항은 figure 데이터로 넣는다(좌표는 문제 수치와 정확히 일치, 그림에 답이 그대로 드러나지 않게). 영어·독해 문항에는 figure 를 쓰지 않는다.
