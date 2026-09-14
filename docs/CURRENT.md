@@ -1,11 +1,50 @@
 # ALTON — 현재 상태 (2026-09-14 기준)
 
+> **2026-09-14 야간 — P2 14차: Drive PDF 실사용 UAT 반영(수업 준비 1.4초 / PDF 뷰어·필기·문제 슬라이드 / 객관식 선택지 중복).**
+> 커밋 `c9b1e20` → `a878678`(브랜치 `preview/m4-integration-verification`).
+> **Preview `https://alton-e2dj133fa-alton7.vercel.app` = `a878678`.** 공유 non-prod: **`20261354000000`까지 적용됨.**
+> 파일별 스위트 전부 초록(전체 일괄 재실행은 미실시 — 마지막 전체 실행은 2596/1 skip, `63d1189`).
+>
+> **끝까지 확인한 흐름(실제 Drive · Preview · 제품 오너 계정)**: Drive 읽기 → 과목 → 키워드 폴더 생성 → PDF 불러오기 →
+> `공개 (고정 사본)`(15,343KB · 99쪽) → 관리자 기준본에 자동 편입(키워드 매칭) → 새 학생 커리큘럼 생성 → `기본 구성 업데이트`
+> → `수업 준비` → `수업 시작` → PDF 렌더·썸네일 네비게이션·필기 저장/복원(제품 오너 "필기 잘 됨") → 문제 슬라이드.
+>
+> **고친 것(순서대로, 전부 UAT 에서 막힌 것)**
+> 1. `20261350` 관리자 기준본 층 `기본 구성 업데이트` 실패(`record v_inherit not assigned`).
+> 2. `20261351` 새 학생의 커리큘럼이 비었다 — 빈 교사 템플릿에 매칭되면 카탈로그로 내려간다. 교사 상속이 키워드보다
+>    교재를 먼저 복사.
+> 3. `20261352` 상속이 보관된 교재를 건너뛴다(`보관된 교재는 새로 담을 수 없습니다`로 학생 회차 생성이 통째로 실패).
+>    오버레이 준비·인가 실패 사유는 값으로 돌려 화면에 보인다(Production 은 던진 오류를 가린다 — React #441).
+> 4. `20261353` `수업 시작` 실패 — `pin_session_selection` 열 이름(`d.curriculum_doc_id`).
+> 5. **성능** `수업 준비` 15~30초 → **약 1.4초**. 원인은 RLS 아래 `unit_parent_pending_updates`·drift 뷰 count(10~17초).
+>    `20261354` `unit_composition_counts(layer, unit)` 정의자 함수(접근 검사 포함) + `loadComposition` 병렬화 +
+>    Vercel 함수 지역 `pdx1`(`vercel.json`). 서버 로그 `lesson_prep_timing`·`composition_timing` 남김.
+> 6. **수업 화면(PDF)**: 왼쪽 목차가 페이지 썸네일(지연 렌더, "Page N"), 한 페이지가 화면에 다 들어오는 fit-page,
+>    레티나 DPR 렌더, 필기 도구는 우상단 반투명, 이전/다음 화살표는 하단 좌우, 페이지 입력·확대는 좌상단 떠 있는 컨트롤,
+>    서명 URL·마지막 위치 모듈 캐시. 머리말 구역(제목·목표)·노란 "필기만 저장됩니다" 안내줄 제거, 준비 중 표시는 상단 바
+>    `N회차` 옆 `🗓 수업 준비 중 · {일시} 예정`.
+> 7. **수업 화면(문제)**: 왼쪽 문제 목차 + 한 번에 한 문제(슬라이드), 교사 문제별 `정답·해설 보기/숨기기`(기본 숨김).
+> 8. **객관식 선택지 중복**(`a878678`): AI 지문 끝에 A)~D) 가 그대로 들어와 클릭용 선택지와 두 번 보였다. 생성·재생성
+>    스키마에 "선택지는 options 에만" 명시 + 파싱 후 `stripInlineOptions`(`lib/problem-text.ts`) 로 뗀다. 기존 문제는
+>    수업 화면·자료실·단원 미리보기에서 표시할 때 같은 규칙(options 와 맞는 끝의 연속 줄만; 본문 중간은 안 건드림).
+>
+> **검증 구분** — 자동 테스트: 통합 25(부모 변경 반영·카탈로그 업데이트·시딩 폴백·보관 건너뛰기·counts) + Drive 자료 15 +
+> 컴포넌트·순수 함수 / 실제 Drive·Preview·제품 오너 계정: 위 흐름 전체 / **미확인**: 두 계정 동시 필기·상대 레이어 지우개,
+> 학생·보호자 계정의 브라우저 열람, 영상 재생, 모바일, iPad·Pencil, 원본 교체·재공개 후 필기 유지(RPC 테스트만).
+>
+> **미결(제품 오너 판단 대기)**: 학생이 푼 것 실시간 표시(배지) / 문제 슬라이드가 넘칠 때 안쪽 스크롤 / 기존 HTML 시험
+> 교재 일괄 보관("해줘"라고 하면). **다듬을 것**: PDF 교재 행에 키워드 이름 없음 / `CompositionPanel` 이 변경마다
+> `window.location.reload()` / `TeacherLessonScheduleTab`(3)·`SessionShell`(7) 기존 lint 오류(이번 작업 아님).
+>
+> **다음 작업 단위**: 학생·보호자 계정 브라우저 UAT(`/unit-preview`, `/materials`, 수업 화면 읽기 전용) → 두 계정 동시 필기
+> → 미결 3건 결정 받기 → 전체 테스트 일괄 재실행(`supabase db reset --local` 후 `vitest run --no-file-parallelism`).
+
 > **2026-09-14 야간 — P2 12·13차: 상위 변경의 완전한 반영 / 학생·보호자 회차별 '수업 준비' /
 > Drive 기반 PDF·영상 자료 최소 구현.**
 > 커밋 `531e4bc` → `8dc0fdf` → `63d1189`(브랜치 `preview/m4-integration-verification`).
 > 전체 테스트 **2596 통과 / 1 skip**(`supabase db reset --local` 직후 `vitest run --no-file-parallelism`, 449s).
 >
-> **공유 non-prod: 46·47·48 적용됨.** Preview `https://alton-n2oaj70u1-alton7.vercel.app` = 커밋 `3bbda04`.
+> ~~공유 non-prod: 46·47·48 적용됨. Preview `alton-n2oaj70u1` = `3bbda04`~~ → 위 14차 블록 참조(54까지 적용, Preview `alton-e2dj133fa`).
 > Preview 환경변수 `CURRICULUM_DRIVE_ENABLED=true`, `CURRICULUM_DRIVE_ID=0AKnx7roQfcSaUk9PVA`,
 > `CURRICULUM_DRIVE_ALLOW_REAL_WRITES=true`(사용자 설정).
 >
