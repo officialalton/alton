@@ -441,4 +441,21 @@ describe("보관은 삭제가 아니다", () => {
       expect(generateBankProblemsAction).toHaveBeenCalledWith(expect.objectContaining({ difficulty: "hard" }))
     );
   });
+
+  it("생성 탭에서 '전체 공개'는 보이는 초안을 모두 공개하고 결과를 알린다(2026-09-14)", async () => {
+    window.confirm = vi.fn(() => true);
+    publishDraftAction.mockResolvedValue({ ok: true });
+    render(<ProblemBankTab subjects={subjects} />);
+    const button = await screen.findByRole("button", { name: /전체 공개 \(1\)/ });
+    fireEvent.click(button);
+    await waitFor(() => expect(publishDraftAction).toHaveBeenCalledWith("v1"));
+    await waitFor(() => expect(screen.getByText(/1개를 공개했습니다/)).toBeInTheDocument());
+  });
+
+  it("전체 공개 확인을 취소하면 아무것도 공개하지 않는다", async () => {
+    window.confirm = vi.fn(() => false);
+    render(<ProblemBankTab subjects={subjects} />);
+    fireEvent.click(await screen.findByRole("button", { name: /전체 공개/ }));
+    expect(publishDraftAction).not.toHaveBeenCalled();
+  });
 });

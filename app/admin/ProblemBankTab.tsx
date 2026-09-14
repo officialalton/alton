@@ -53,6 +53,16 @@ const READINESS_NOTE: Record<BankProblem["readiness"], string | null> = {
 
 type Job = () => Promise<{ ok: true } | { ok: false; error: string }>;
 
+// 2026-09-14 UAT: 지문·해설 칸이 작아 잘렸다 — 내용 길이에 맞춰 칸이 자란다.
+function growToContent(el: HTMLTextAreaElement | null) {
+  if (!el) return;
+  el.style.height = "auto";
+  el.style.height = `${el.scrollHeight + 2}px`;
+}
+function autoGrow(el: HTMLTextAreaElement | null) {
+  growToContent(el);
+}
+
 export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] }) {
   // SSR prop은 탭 조건부로 오기 때문에(app/admin/page.tsx의 need(...)) 목록에서
   // 빠지면 과목이 통째로 비어 버린다 — 실제로 그랬다. 화면이 그 목록에 기대지
@@ -140,6 +150,34 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
   });
 
   const bucketHint = BUCKETS.find((b) => b.key === bucket)?.hint ?? "";
+
+  const publishableDrafts = visible.filter((p) => p.draft?.versionId);
+
+  async function publishAllVisible() {
+    if (publishableDrafts.length === 0) return;
+    if (
+      typeof window !== "undefined" &&
+      !window.confirm(`지금 보이는 초안 ${publishableDrafts.length}개를 모두 공개할까요? 공개된 문제는 회차 구성 후보가 됩니다.`)
+    ) {
+      return;
+    }
+    setBusy(true);
+    setError(null);
+    setNotice(null);
+    const failed: string[] = [];
+    let done = 0;
+    for (const p of publishableDrafts) {
+      const versionId = p.draft?.versionId;
+      if (!versionId) continue;
+      const result = await publishDraftAction(versionId);
+      if (result.ok) done += 1;
+      else failed.push(`${(p.draft?.passage ?? "").slice(0, 30) || "(내용 없음)"} — ${result.error}`);
+    }
+    await reload();
+    setBusy(false);
+    setNotice(`${done}개를 공개했습니다.${failed.length ? ` ${failed.length}개는 공개하지 못해 초안으로 남았습니다.` : ""}`);
+    if (failed.length) setError(failed.join(" / "));
+  }
 
   return (
     <div className="max-w-[880px] px-8 py-8">
@@ -231,6 +269,25 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
 
       {error && <p className="text-[12.5px] text-red mb-3">{error}</p>}
       {notice && <p className="text-[12.5px] text-grey-500 mb-3">{notice}</p>}
+
+      {bucket === "working" && publishableDrafts.length > 0 && (
+        // 2026-09-14 제품 오너: 문제를 많이 만들 것이라 하나씩 공개하기가 번거롭다. 지금 보이는(필터 적용) 초안을 한 번에 공개한다.
+        // 각 문제는 같은 공개 검사를 거치고, 실패한 것은 그대로 초안으로 남아 사유가 보인다.
+        <div className="flex flex-wrap items-center gap-3 mb-3 border-[1.5px] border-grey-200 rounded-xl px-4 py-2.5">
+          <span className="text-[12.5px] text-ink">
+            지금 보이는 초안 <b>{publishableDrafts.length}</b>개
+          </span>
+          <button
+            type="button"
+            disabled={busy}
+            onClick={() => void publishAllVisible()}
+            className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
+          >
+            {busy ? "공개 중…" : `전체 공개 (${publishableDrafts.length})`}
+          </button>
+          <span className="text-[11.5px] text-grey-500">내용을 확인한 초안만 공개하세요 — 공개된 문제는 회차 구성 후보가 됩니다.</span>
+        </div>
+      )}
 
       {problems === null ? (
         <p className="text-[13px] text-grey-500">불러오는 중...</p>
@@ -847,9 +904,11 @@ function DraftEditor({
         aria-label="지문"
         value={passage}
         onChange={(e) => setPassage(e.target.value)}
+        ref={autoGrow}
+        onInput={(e) => growToContent(e.currentTarget)}
         rows={3}
         placeholder="문제 지문"
-        className="w-full text-[13px] border-[1.5px] border-grey-200 rounded-lg px-3 py-2 mb-2"
+        className="w-full text-[13px] border-[1.5px] border-grey-200 rounded-lg px-3 py-2 mb-2 resize-none overflow-hidden"
       />
 
       {isMc && (
@@ -887,9 +946,11 @@ function DraftEditor({
         aria-label="해설"
         value={explanation}
         onChange={(e) => setExplanation(e.target.value)}
+        ref={autoGrow}
+        onInput={(e) => growToContent(e.currentTarget)}
         rows={2}
         placeholder="해설"
-        className="w-full text-[13px] border-[1.5px] border-grey-200 rounded-lg px-3 py-2 mb-2"
+        className="w-full text-[13px] border-[1.5px] border-grey-200 rounded-lg px-3 py-2 mb-2 resize-none overflow-hidden"
       />
 
       <div className="flex flex-wrap items-center gap-2">
