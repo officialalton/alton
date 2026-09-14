@@ -9,8 +9,8 @@ import HomeDashboard from "./HomeDashboard";
 import type { DashboardData } from "./dashboard-data";
 import VocabTab from "@/app/session/[id]/VocabTab";
 import type { VocabEntry } from "@/app/session/[id]/vocab-data";
-import ProblemLogTab from "@/app/session/[id]/ProblemLogTab";
-import type { ProblemLogEntry } from "@/app/session/[id]/problemlog-data";
+import ProblemHistoryTab from "./ProblemHistoryTab";
+import type { ProblemHistoryEntry } from "./problem-history-data";
 import type { LessonItem } from "./lessons-data";
 import type { CurriculumData } from "./curriculum-data";
 import type { Memo } from "./memo-data";
@@ -66,7 +66,7 @@ export default function StudentShell({
   initialTab,
   dashboard,
   vocabWords,
-  problemLog,
+  problemHistory,
   upcoming,
   past,
   curricula,
@@ -89,7 +89,7 @@ export default function StudentShell({
   initialTab?: string;
   dashboard: DashboardData;
   vocabWords: VocabEntry[];
-  problemLog: ProblemLogEntry[];
+  problemHistory: ProblemHistoryEntry[];
   upcoming: LessonItem[];
   past: LessonItem[];
   curricula: CurriculumData[];
@@ -251,7 +251,7 @@ export default function StudentShell({
               studentName={studentName}
             />
           ) : activeTab === "problemlog" ? (
-            <ProblemLogTab initialEntries={problemLog} viewerRole="student" />
+            <ProblemHistoryTab entries={problemHistory} />
           ) : activeTab === "homework" ? (
             <StudentHomeworkTab
               studentId={studentId}

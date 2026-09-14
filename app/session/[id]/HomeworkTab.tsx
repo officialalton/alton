@@ -5,19 +5,18 @@ import type { SessionViewViewer } from "@/lib/session-view";
 import type { KeywordProblem } from "@/lib/unit-composition";
 import type { HomeworkItem } from "./homework-data";
 import type { SessionProblem } from "./session-problem-data";
-import type { IssuedHomeworkItem } from "./homework-v3-data";
-import { issueHomework, withdrawHomework } from "./homework-v3-actions";
+import type { HomeworkKeywordPool, IssuedHomeworkItem } from "./homework-v3-data";
+import { issueHomeworkByKeywords, withdrawHomework } from "./homework-v3-actions";
 import ProblemsPanel from "./ProblemsPanel";
 
 // 2026-09-14 과제 v3 통일(docs/2026-09-14-homework-v3-unification.md)
 //
-//   위: [교사만] 발급 구역 — 이 회차 키워드 풀의 문제를 직접 골라 과제로 낸다. 발급된 항목은 학생이
-//       시작하기 전까지 회수할 수 있다.
+//   위: [교사만] 발급 구역 — 회차 키워드별로 "문제 은행에서 담을 수 있는 수"를 보고 몇 개 낼지 적으면
+//       무작위로 뽑아 발급한다(2026-09-14 UAT: 개별 클릭 방식 폐기). 발급된 항목은 학생이 시작하기 전까지 회수.
 //   아래: 과제 문제 패널 — 수업 '문제' 탭과 **완전히 같은** 화면·풀이·채점(ProblemsPanel source="homework").
 //   레거시 homework_items 는 기록이 있을 때만 읽기 전용으로 보여준다. 신규 쓰기는 없다.
 
 const FORMAT_LABEL: Record<string, string> = { mc: "객관식", spr: "숫자 입력", essay: "서술형", math: "풀이형" };
-const DIFFICULTY_LABEL: Record<string, string> = { easy: "쉬움", medium: "보통", hard: "어려움" };
 
 export default function HomeworkTab({
   sessionId,
@@ -30,7 +29,7 @@ export default function HomeworkTab({
   homeworkProblems = [],
   pool = [],
   issued = [],
-  usedInLessonIds = [],
+  keywordPools = [],
 }: {
   sessionId: string;
   studentId: string;
@@ -42,10 +41,12 @@ export default function HomeworkTab({
   /** 데모션되지 않은 실제 역할 — 발급·회수는 실제 교사·관리자만. */
   realViewerRole?: SessionViewViewer;
   homeworkProblems?: SessionProblem[];
-  /** 이 회차 키워드 풀의 문제(교사에게만 내려온다). */
+  /** 이 회차 키워드 풀의 문제(교사에게만) — 발급 목록의 이름 표시용. */
   pool?: KeywordProblem[];
+  /** 회차 키워드별 담을 수 있는 수(교사에게만). */
+  keywordPools?: HomeworkKeywordPool[];
   issued?: IssuedHomeworkItem[];
-  /** 수업에서 다룬(고정된) 문제 — 기본으로 목록에서 숨긴다. */
+  /** 수업에서 다룬(고정된) 문제 — 키워드별 수 계산은 서버(keywordPools)에서 했으므로 여기서는 받지 않는다. */
   usedInLessonIds?: string[];
 }) {
   const canIssue = sessionSource === "v3" && (realViewerRole === "teacher" || realViewerRole === "admin");
@@ -57,7 +58,7 @@ export default function HomeworkTab({
   return (
     <div>
       {canIssue && (
-        <IssueBox sessionId={sessionId} pool={pool} issued={issued} usedInLessonIds={usedInLessonIds} />
+        <IssueBox sessionId={sessionId} pool={pool} issued={issued} keywordPools={keywordPools} />
       )}
 
       {sessionSource === "v3" ? (
@@ -93,41 +94,41 @@ function IssueBox({
   sessionId,
   pool,
   issued,
-  usedInLessonIds,
+  keywordPools,
 }: {
   sessionId: string;
   pool: KeywordProblem[];
   issued: IssuedHomeworkItem[];
-  usedInLessonIds: string[];
+  keywordPools: HomeworkKeywordPool[];
 }) {
   const [open, setOpen] = useState(issued.length === 0);
-  const [selected, setSelected] = useState<Set<string>>(new Set());
-  const [showUsed, setShowUsed] = useState(false);
+  const [counts, setCounts] = useState<Record<string, string>>({});
+  const [includeUsed, setIncludeUsed] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
 
-  const issuedIds = new Set(issued.map((i) => i.problemId));
-  const used = new Set(usedInLessonIds);
-  const candidates = pool.filter((p) => !issuedIds.has(p.problemId) && (showUsed || !used.has(p.problemId)));
-  const hiddenUsed = pool.filter((p) => !issuedIds.has(p.problemId) && used.has(p.problemId)).length;
   const labelById = new Map(pool.map((p) => [p.problemId, p]));
-
-  function toggle(id: string) {
-    setSelected((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
-  }
+  const capOf = (k: HomeworkKeywordPool) => (includeUsed ? k.availableWithUsed : k.available);
+  const requests = keywordPools
+    .map((k) => ({ keywordId: k.keywordId, count: Math.min(capOf(k), Math.max(0, parseInt(counts[k.keywordId] ?? "", 10) || 0)) }))
+    .filter((r) => r.count > 0);
+  const totalRequested = requests.reduce((n, r) => n + r.count, 0);
+  const usedTotal = keywordPools.reduce((n, k) => n + k.usedInLesson, 0);
 
   async function issue() {
-    if (selected.size === 0) return;
+    if (requests.length === 0) return;
     setBusy(true);
     setError(null);
-    const r = await issueHomework(sessionId, Array.from(selected));
+    setNotice(null);
+    const r = await issueHomeworkByKeywords(sessionId, requests, !includeUsed);
     if (!r.ok) {
       setError(r.error);
+      setBusy(false);
+      return;
+    }
+    if ((r.count ?? 0) === 0) {
+      setNotice("뽑을 수 있는 문제가 없어 발급된 것이 없습니다.");
       setBusy(false);
       return;
     }
@@ -152,18 +153,17 @@ function IssueBox({
       <div className="max-w-[760px] mx-auto">
         <div className="flex flex-wrap items-center gap-3 mb-2">
           <h2 className="text-[14px] font-extrabold text-ink">과제 발급</h2>
-          <span className="text-[12px] text-grey-500">
-            발급 {issued.length}개 · 풀에 {pool.length}개
-          </span>
+          <span className="text-[12px] text-grey-500">발급 {issued.length}개</span>
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
             className="ml-auto text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink"
           >
-            {open ? "접기" : "문제 고르기"}
+            {open ? "접기" : "과제 내기"}
           </button>
         </div>
         {error && <p className="text-[12.5px] text-red mb-2">{error}</p>}
+        {notice && <p className="text-[12.5px] text-grey-500 mb-2">{notice}</p>}
 
         {issued.length > 0 && (
           <ul className="mb-3">
@@ -194,50 +194,57 @@ function IssueBox({
           <div className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3">
             <div className="flex flex-wrap items-center gap-3 mb-2">
               <p className="text-[12px] text-grey-500">
-                이 회차 키워드의 문제입니다. 골라서 과제로 냅니다 — 학생은 수업 문제와 같은 방식으로 풀고, 채점 뒤 정답·해설이 열립니다.
+                이 회차 키워드별로 몇 개 낼지 적으면 문제 은행에서 무작위로 골라 발급합니다. 학생은 수업 문제와 같은 방식으로
+                풀고, 채점 뒤 정답·해설이 열립니다.
               </p>
-              {hiddenUsed > 0 && (
+              {usedTotal > 0 && (
                 <label className="text-[12px] text-ink flex items-center gap-1.5">
-                  <input type="checkbox" checked={showUsed} onChange={(e) => setShowUsed(e.target.checked)} />
-                  수업에서 다룬 문제 {hiddenUsed}개도 보기
+                  <input type="checkbox" checked={includeUsed} onChange={(e) => setIncludeUsed(e.target.checked)} />
+                  수업에서 다룬 문제 {usedTotal}개도 포함
                 </label>
               )}
             </div>
-            {candidates.length === 0 ? (
-              <p className="text-[12.5px] text-grey-500">낼 수 있는 문제가 없습니다.</p>
+            {keywordPools.length === 0 ? (
+              <p className="text-[12.5px] text-grey-500">이 회차에 키워드가 없어 낼 수 있는 문제가 없습니다.</p>
             ) : (
-              <ul className="max-h-[320px] overflow-y-auto">
-                {candidates.map((p) => (
-                  <li key={p.problemId}>
-                    <label className="flex items-start gap-2 py-1.5 text-[12.5px] cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={selected.has(p.problemId)}
-                        onChange={() => toggle(p.problemId)}
-                        aria-label={p.label}
-                      />
-                      <span className="text-[10.5px] font-bold text-grey-500 border border-grey-200 rounded-full px-1.5 py-0.5 shrink-0">
-                        {FORMAT_LABEL[p.format] ?? p.format}
+              <ul className="divide-y divide-grey-100">
+                {keywordPools.map((k) => {
+                  const cap = capOf(k);
+                  return (
+                    <li key={k.keywordId} className="flex flex-wrap items-center gap-3 py-2 text-[12.5px]">
+                      <span className="font-bold text-ink min-w-[120px]">{k.label}</span>
+                      <span className="text-grey-500 flex-1 min-w-[160px]">
+                        문제 은행 {k.total}개 · 담을 수 있는 {cap}개
+                        {k.issued > 0 && ` · 발급됨 ${k.issued}`}
+                        {!includeUsed && k.usedInLesson > 0 && ` · 수업에서 다룸 ${k.usedInLesson} 제외`}
                       </span>
-                      {p.difficulty && (
-                        <span className="text-[10.5px] font-bold text-grey-500 border border-grey-200 rounded-full px-1.5 py-0.5 shrink-0">
-                          {DIFFICULTY_LABEL[p.difficulty] ?? p.difficulty}
-                        </span>
-                      )}
-                      <span className="text-ink">{p.label}</span>
-                      {used.has(p.problemId) && <span className="text-[10.5px] text-grey-500 shrink-0">수업에서 다룸</span>}
-                    </label>
-                  </li>
-                ))}
+                      <label className="flex items-center gap-1.5">
+                        <input
+                          type="number"
+                          min={0}
+                          max={cap}
+                          inputMode="numeric"
+                          aria-label={`${k.label} 개수`}
+                          disabled={cap === 0}
+                          value={counts[k.keywordId] ?? ""}
+                          onChange={(e) => setCounts((c) => ({ ...c, [k.keywordId]: e.target.value }))}
+                          placeholder="0"
+                          className="w-[72px] text-[13px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1 disabled:bg-grey-100"
+                        />
+                        <span className="text-grey-500">개</span>
+                      </label>
+                    </li>
+                  );
+                })}
               </ul>
             )}
             <button
               type="button"
-              disabled={busy || selected.size === 0}
+              disabled={busy || totalRequested === 0}
               onClick={() => void issue()}
               className="mt-2 text-[12.5px] font-bold px-4 py-2 rounded-lg bg-ink text-white disabled:opacity-50"
             >
-              {busy ? "발급 중…" : `과제로 발급 (${selected.size})`}
+              {busy ? "발급 중…" : `무작위로 발급 (${totalRequested})`}
             </button>
           </div>
         )}

@@ -2,7 +2,7 @@ import { requireUser } from "@/lib/auth";
 import StudentShell from "./StudentShell";
 import { loadDashboardData } from "./dashboard-data";
 import { loadVocabWords } from "@/app/session/[id]/vocab-data";
-import { loadProblemLog } from "@/app/session/[id]/problemlog-data";
+import { loadProblemHistory } from "./problem-history-data";
 import { loadLessons } from "./lessons-data";
 import { loadCurricula } from "./curriculum-data";
 import { loadMemos } from "./memo-data";
@@ -46,7 +46,7 @@ export default async function StudentHomePage({
     dashboard,
     lessonBooking,
     vocabWords,
-    problemLog,
+    problemHistory,
     { upcoming, past },
     curricula,
     homeworkSets,
@@ -59,7 +59,7 @@ export default async function StudentHomePage({
     dashboardPromise,
     lessonBookingPromise,
     loadVocabWords(supabase, user.id),
-    loadProblemLog(supabase, user.id),
+    loadProblemHistory(user.id),
     lessonsPromise,
     loadCurricula(supabase, user.id),
     loadStudentHomeworkSets(supabase, user.id),
@@ -113,7 +113,7 @@ export default async function StudentHomePage({
       initialTab={tab}
       dashboard={dashboard}
       vocabWords={vocabWords}
-      problemLog={problemLog}
+      problemHistory={problemHistory}
       upcoming={upcoming}
       past={past}
       curricula={curricula}

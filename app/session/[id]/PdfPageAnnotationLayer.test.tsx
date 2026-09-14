@@ -75,8 +75,8 @@ async function drawOne(x = 10) {
 }
 
 async function enableDrawing() {
-  await waitFor(() => expect(actions.loadPageStrokes).toHaveBeenCalled());
-  fireEvent.click(screen.getByRole("button", { name: "✏️ 필기 시작" }));
+  // 저장된 획을 읽어 오기 전에는 '필기 준비 중…' — 버튼 글자가 바뀌기를 기다린다(호출 여부만 보면 레이스).
+  fireEvent.click(await screen.findByRole("button", { name: "✏️ 필기 시작" }));
 }
 
 describe("PDF 페이지 필기 레이어", () => {

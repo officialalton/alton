@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { renderFigureSvg } from "./render";
+import { plainLabel, renderFigureSvg } from "./render";
 import { validateFigureSpec } from "./spec";
 
 describe("문제 도형 생성기(2026-09-14 문제 템플릿 ③)", () => {
@@ -75,5 +75,17 @@ describe("문제 도형 생성기(2026-09-14 문제 템플릿 ③)", () => {
     expect(p).toContain("Time (seconds)");
     expect(p).toContain("rotate(-90)");
     expect(p).toContain(">O<");
+  });
+});
+
+describe("plainLabel — 그림 라벨의 LaTeX 흔적을 유니코드로", () => {
+  it("각도·분수·근호·기호를 바꾸고 $ 는 뗀다 (2026-09-14 UAT: '$x^\\circ$' 가 그대로 보였다)", () => {
+    expect(plainLabel("$x^\\circ$")).toBe("x°");
+    expect(plainLabel("$37^{\\circ}$")).toBe("37°");
+    expect(plainLabel("\\angle ABC")).toBe("∠ABC");
+    expect(plainLabel("$\\frac{1}{3}$")).toBe("1/3");
+    expect(plainLabel("$\\sqrt{2}$")).toBe("√2");
+    expect(plainLabel("$x^2$")).toBe("x²");
+    expect(plainLabel("m")).toBe("m");
   });
 });

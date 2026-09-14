@@ -22,7 +22,7 @@ import VocabTab from "./VocabTab";
 import type { VocabEntry } from "./vocab-data";
 import HomeworkTab from "./HomeworkTab";
 import type { HomeworkItem } from "./homework-data";
-import type { IssuedHomeworkItem } from "./homework-v3-data";
+import type { HomeworkKeywordPool, IssuedHomeworkItem } from "./homework-v3-data";
 import type { StrokePayload } from "./annotation-events-types";
 import { finalizeMyLessonSession } from "@/app/teacher/lesson-schedule-actions";
 
@@ -90,6 +90,7 @@ export default function SessionShell({
   homeworkProblems = [],
   homeworkPool = [],
   homeworkIssued = [],
+  homeworkKeywordPools = [],
 }: {
   sessionId: string;
   studentId: string;
@@ -149,6 +150,7 @@ export default function SessionShell({
   homeworkProblems?: SessionProblem[];
   homeworkPool?: KeywordProblem[];
   homeworkIssued?: IssuedHomeworkItem[];
+  homeworkKeywordPools?: HomeworkKeywordPool[];
 }) {
   const router = useRouter();
   const isTeacher = viewerRole === "teacher";
@@ -519,6 +521,7 @@ export default function SessionShell({
           homeworkProblems={homeworkProblems}
           pool={homeworkPool}
           issued={homeworkIssued}
+          keywordPools={homeworkKeywordPools}
           usedInLessonIds={sessionProblems.map((p) => p.problemId)}
         />
       ) : activeTab === "prep" ? (

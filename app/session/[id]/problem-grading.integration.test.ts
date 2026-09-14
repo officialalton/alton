@@ -391,6 +391,36 @@ describe("issue_homework_items / withdraw_homework_item — 교사가 골라 발
   });
 });
 
+describe("issue_homework_by_keywords — 키워드별 개수로 무작위 발급 (2026-09-14 UAT)", () => {
+  function keywordOf(sessionId: string): string {
+    return psql(
+      `select k.keyword_id from session_curriculum_units u
+       join curriculum_overlay_unit_keywords k on k.overlay_unit_id = u.overlay_unit_id
+       where u.session_id = '${sessionId}' and u.role = 'primary' limit 1;`
+    );
+  }
+  it("수업에서 다룬 문제는 기본으로 제외하고, 포함하면 요청 수만큼(있는 만큼만) 뽑는다. 중복 발급은 없다", () => {
+    const { sessionId } = startedSession();
+    const kw = keywordOf(sessionId);
+    // 고정본의 두 문제가 이 키워드의 후보 전부 → 기본(제외)에서는 0.
+    expect(asUser(TEACHER_ID, `select issue_homework_by_keywords('${sessionId}', '[{"keyword_id":"${kw}","count":5}]'::jsonb);`)).toBe("0");
+    expect(asUser(TEACHER_ID, `select issue_homework_by_keywords('${sessionId}', '[{"keyword_id":"${kw}","count":1}]'::jsonb, false);`)).toBe("1");
+    // 남은 1개만 더 — 5개를 청해도 있는 만큼.
+    expect(asUser(TEACHER_ID, `select issue_homework_by_keywords('${sessionId}', '[{"keyword_id":"${kw}","count":5}]'::jsonb, false);`)).toBe("1");
+    expect(psql(`select count(*) from session_homework_items where session_id = '${sessionId}';`)).toBe("2");
+    expect(psql(`select count(distinct problem_id) from session_homework_items where session_id = '${sessionId}';`)).toBe("2");
+  });
+
+  it("회차 밖 키워드·학생 호출·0개 요청은 각각 거절·0", () => {
+    const { sessionId } = startedSession();
+    const kw = keywordOf(sessionId);
+    const other = psql(`insert into subject_keywords (subject_id, label) values ('${SUBJECT_ID}', '밖 ${Date.now()}_${Math.random()}') returning id;`);
+    expect(fails(() => asUser(TEACHER_ID, `select issue_homework_by_keywords('${sessionId}', '[{"keyword_id":"${other}","count":1}]'::jsonb, false);`))).toContain("이 회차의 키워드가 아닙니다");
+    expect(fails(() => asUser(STUDENT_ID, `select issue_homework_by_keywords('${sessionId}', '[{"keyword_id":"${kw}","count":1}]'::jsonb, false);`))).toContain("담당 학생의 수업에만");
+    expect(asUser(TEACHER_ID, `select issue_homework_by_keywords('${sessionId}', '[{"keyword_id":"${kw}","count":0}]'::jsonb, false);`)).toBe("0");
+  });
+});
+
 // ------------------------------------------------------------ 문제 한 장 위 공유 필기 (2026-09-14)
 describe("append_problem_page_stroke_events — 문제 위 교사·학생 공유 필기(수업 문제·과제 모두)", () => {
   const seg = (o: Record<string, unknown>) =>

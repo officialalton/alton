@@ -17,7 +17,7 @@ import { loadVocabWords } from "./vocab-data";
 import { loadHomeworkItems } from "./homework-data";
 import { loadNormalizedSession } from "./session-source-data";
 import { loadHomeworkProblems, loadPlannedProblems, loadSessionProblems } from "./session-problem-data";
-import { loadIssuedHomework } from "./homework-v3-data";
+import { loadHomeworkKeywordPools, loadIssuedHomework } from "./homework-v3-data";
 import { loadSessionLessonContext } from "./session-context-data";
 import {
   loadComposition,
@@ -159,6 +159,16 @@ export default async function SessionPage({
           canPrepare ? loadIssuedHomework(supabase, session.id) : Promise.resolve([]),
         ])
       : [[], []];
+  // 2026-09-14 UAT — 발급은 키워드별 개수. 회차 키워드마다 문제 은행에서 담을 수 있는 수를 센다(교사에게만).
+  const homeworkKeywordPools =
+    session.source === "v3" && canPrepare && prepComposition
+      ? await loadHomeworkKeywordPools(
+          supabase,
+          prepComposition.keywords,
+          homeworkIssued.map((i) => i.problemId),
+          pinnedProblems.map((p) => p.problemId)
+        )
+      : [];
 
   return (
     <SessionShell
@@ -192,6 +202,7 @@ export default async function SessionPage({
       homeworkProblems={homeworkProblems}
       homeworkPool={prep?.problems ?? []}
       homeworkIssued={homeworkIssued}
+      homeworkKeywordPools={homeworkKeywordPools}
     />
   );
 }

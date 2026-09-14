@@ -102,7 +102,7 @@ describe("StudentShell", () => {
         studentName="지훈"
         dashboard={dashboard}
         vocabWords={[]}
-        problemLog={[]}
+        problemHistory={[]}
         {...lessonsProps}
       />
     );
@@ -120,7 +120,7 @@ describe("StudentShell", () => {
         studentName="지훈"
         dashboard={dashboard}
         vocabWords={[]}
-        problemLog={[]}
+        problemHistory={[]}
         {...lessonsProps}
       />
     );
@@ -134,7 +134,7 @@ describe("StudentShell", () => {
         studentName="지훈"
         dashboard={dashboard}
         vocabWords={[]}
-        problemLog={[]}
+        problemHistory={[]}
         {...lessonsProps}
       />
     );
@@ -148,7 +148,7 @@ describe("StudentShell", () => {
         studentName="지훈"
         dashboard={dashboard}
         vocabWords={[]}
-        problemLog={[]}
+        problemHistory={[]}
         {...lessonsProps}
       />
     );
@@ -158,13 +158,13 @@ describe("StudentShell", () => {
     ).toBeInTheDocument();
   });
 
-  it("문제 탭을 누르면 ProblemLogTab이 렌더링된다", () => {
+  it("문제 탭을 누르면 문제 기록(v3)이 렌더링된다", () => {
     render(
       <StudentShell
         studentName="지훈"
         dashboard={dashboard}
         vocabWords={[]}
-        problemLog={[]}
+        problemHistory={[]}
         {...lessonsProps}
       />
     );
@@ -178,7 +178,7 @@ describe("StudentShell", () => {
         studentName="지훈"
         dashboard={dashboard}
         vocabWords={[]}
-        problemLog={[]}
+        problemHistory={[]}
         {...lessonsProps}
       />
     );
@@ -196,7 +196,7 @@ describe("StudentShell", () => {
         studentName="지훈"
         dashboard={dashboard}
         vocabWords={[]}
-        problemLog={[]}
+        problemHistory={[]}
         {...lessonsProps}
       />
     );
@@ -212,7 +212,7 @@ describe("StudentShell", () => {
         studentName="지훈"
         dashboard={dashboard}
         vocabWords={[]}
-        problemLog={[]}
+        problemHistory={[]}
         {...lessonsProps}
       />
     );
@@ -228,7 +228,7 @@ describe("StudentShell", () => {
         studentName="지훈"
         dashboard={dashboard}
         vocabWords={[]}
-        problemLog={[]}
+        problemHistory={[]}
         {...lessonsProps}
       />
     );
@@ -242,7 +242,7 @@ describe("StudentShell", () => {
         studentName="지훈"
         dashboard={dashboard}
         vocabWords={[]}
-        problemLog={[]}
+        problemHistory={[]}
         {...lessonsProps}
       />
     );

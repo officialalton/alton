@@ -399,7 +399,7 @@ const FIGURE_POLICY_RULE: Record<FigurePolicy, string> = {
   none: "figure 를 만들지 않는다. 그림 없이 풀 수 있는 문항만 만든다.",
   optional: "그래프·도형이 꼭 필요한 문항에만 figure 데이터를 넣는다.",
   require_plane: "**모든 문항에 figure(type:'coordinate_plane') 데이터가 있어야 한다.** 그래프를 읽어야만 풀 수 있는 문항(절편·교점·기울기·해 읽기 등)으로 만든다. 좌표는 문제 수치와 정확히 일치하고, 답이 그림에 글자로 드러나지 않게 한다.",
-  require_geometry: "**모든 문항에 figure(type:'geometry') 데이터가 있어야 한다.** 도형(삼각형·원·평행선·각 라벨)을 보고 풀어야 하는 문항으로 만든다. 라벨은 문제의 기호와 정확히 같게, 각 라벨은 선과 겹치지 않는 자리에, notToScale 은 실제 비율이 아닐 때만.",
+  require_geometry: "**모든 문항에 figure(type:'geometry') 데이터가 있어야 한다.** 도형(삼각형·원·평행선·각 라벨)을 보고 풀어야 하는 문항으로 만든다. 라벨은 문제의 기호와 정확히 같게, 각 라벨은 선과 겹치지 않는 자리에, notToScale 은 실제 비율이 아닐 때만. **그림 라벨은 LaTeX 가 아니라 평문**(예: 'x°', '37°', 'AB', '∠ABC' — '$x^\\circ$' 금지). 한 그림에는 한 가지 상황만(평행선 문제면 평행선과 가로지르는 선만, 삼각형 문제면 삼각형만) — 여러 도형을 한 그림에 섞지 않는다.",
 };
 export type ProblemDifficulty = "easy" | "medium" | "hard";
 
@@ -752,7 +752,7 @@ export async function generateFigureForProblem(params: {
     messages: [
       {
         role: "user",
-        content: `다음 문제에 맞는 그림 데이터(${params.kind})를 만들어주세요. 좌표·길이·각은 문제의 수치와 정확히 일치해야 하고, 정답이 그림에 글자로 드러나면 안 됩니다. 라벨은 문제의 기호와 같게, 각 라벨은 선과 겹치지 않게.
+        content: `다음 문제에 맞는 그림 데이터(${params.kind})를 만들어주세요. 좌표·길이·각은 문제의 수치와 정확히 일치해야 하고, 정답이 그림에 글자로 드러나면 안 됩니다. 라벨은 문제의 기호와 같게, 각 라벨은 선과 겹치지 않게. 라벨은 LaTeX 가 아니라 평문으로(예: 'x°', '37°', 'AB' — '$x^\\circ$' 금지). 한 그림에는 문제에 필요한 한 가지 상황만 그리고 여러 도형을 섞지 않습니다.
 지문: ${params.passage}
 ${params.options ? `선택지: ${params.options.join(" / ")}` : ""}
 해설: ${params.explanation}`,

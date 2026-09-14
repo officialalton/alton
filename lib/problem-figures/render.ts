@@ -9,8 +9,29 @@ const PAD = 34;
 // SAT 지면과 같은 인상: 세리프 글꼴, 굵은 곡선, 굵은 축, 얇은 격자.
 const FONT = "Georgia, 'Times New Roman', serif";
 
+/**
+ * 그림 라벨은 SVG 글자라 LaTeX 를 그릴 수 없다 — AI 가 `$x^\\circ$` 처럼 써 보내면 그대로 보였다(2026-09-14 UAT).
+ * 자주 쓰는 표기만 유니코드로 바꾼다. 모르는 명령은 백슬래시만 떼고 남긴다(내용이 사라지는 것이 더 나쁘다).
+ */
+export function plainLabel(text: string): string {
+  let t = text.replace(/\$/g, "");
+  t = t.replace(/\^\{?\\circ\}?/g, "°").replace(/\\circ/g, "°").replace(/\\degree/g, "°");
+  t = t.replace(/\\frac\{([^{}]*)\}\{([^{}]*)\}/g, "$1/$2");
+  t = t.replace(/\\sqrt\{([^{}]*)\}/g, "√$1").replace(/\\sqrt(\w)/g, "√$1");
+  t = t.replace(/\\overline\{([^{}]*)\}/g, "$1").replace(/\\overrightarrow\{([^{}]*)\}/g, "$1→");
+  const words: Record<string, string> = {
+    angle: "∠", triangle: "△", pi: "π", theta: "θ", alpha: "α", beta: "β", gamma: "γ", cdot: "·", times: "×",
+    le: "≤", leq: "≤", ge: "≥", geq: "≥", ne: "≠", neq: "≠", approx: "≈", parallel: "∥", perp: "⊥", cong: "≅", sim: "∼",
+    infty: "∞", pm: "±", div: "÷",
+  };
+  t = t.replace(/\\([a-zA-Z]+)\s*/g, (_, w: string) => (words[w] ? words[w] : w + " "));
+  t = t.replace(/\^\{?2\}?/g, "²").replace(/\^\{?3\}?/g, "³").replace(/\^\{([^{}]*)\}/g, "^$1");
+  t = t.replace(/[{}]/g, "").replace(/\s+/g, " ").trim();
+  return t;
+}
+
 function esc(text: string): string {
-  return text.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c] as string);
+  return plainLabel(text).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c] as string);
 }
 const fmt = (n: number) => (Math.round(n * 100) / 100).toString();
 
