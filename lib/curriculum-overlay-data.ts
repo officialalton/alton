@@ -25,6 +25,8 @@ export type OverlayUnit = {
   status: "not_started" | "in_progress" | "completed" | "reinforcement_needed" | "skipped";
   statusChangedAt: string | null;
   keywordIds: string[];
+  /** 회차 키워드 이름 — 학생 커리큘럼 화면에 회차마다 보여준다(2026-09-14). */
+  keywordLabels: string[];
   materialDocIds: string[];
 };
 
@@ -79,6 +81,11 @@ export async function loadStudentCurriculum(
     list.push(row.keyword_id);
     keywordIdsByUnit.set(row.overlay_unit_id, list);
   }
+  const allKeywordIds = Array.from(new Set((keywordRows ?? []).map((r) => r.keyword_id)));
+  const { data: keywordLabelRows } = allKeywordIds.length
+    ? await supabase.from("subject_keywords").select("id, label").in("id", allKeywordIds)
+    : { data: [] as { id: string; label: string }[] };
+  const labelById = new Map((keywordLabelRows ?? []).map((k) => [k.id as string, k.label as string]));
   const materialIdsByUnit = new Map<string, string[]>();
   for (const row of materialRows ?? []) {
     const list = materialIdsByUnit.get(row.overlay_unit_id) ?? [];
@@ -98,6 +105,7 @@ export async function loadStudentCurriculum(
       status: u.status,
       statusChangedAt: u.status_changed_at,
       keywordIds: keywordIdsByUnit.get(u.id) ?? [],
+      keywordLabels: (keywordIdsByUnit.get(u.id) ?? []).map((id) => labelById.get(id)).filter((l): l is string => Boolean(l)),
       materialDocIds: materialIdsByUnit.get(u.id) ?? [],
     })),
   };

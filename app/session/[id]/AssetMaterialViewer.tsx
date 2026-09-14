@@ -267,7 +267,7 @@ export default function AssetMaterialViewer({
           {asset.kind === "video" ? (
             signed ? <VideoMaterialPlayer url={signed.url} mimeType={signed.mimeType} title={asset.title} /> : <p className="text-[12.5px] text-grey-500">자료를 불러오는 중…</p>
           ) : signed ? (
-            <div className="relative inline-block" style={{ minWidth: rendered.width || undefined }}>
+            <div className="relative inline-block">
               <PdfPageCanvas
                 url={signed.url}
                 page={pos.page}

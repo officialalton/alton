@@ -452,7 +452,7 @@ describe("SessionShell — 수업 준비 탭", () => {
   });
 
   // 2026-09-14 UAT — 예약 시각 전에 이미 시작한 수업은 '진행 중'이고, 교사는 지금 구성으로 다시 고정할 수 있다.
-  it("시작한(live) 수업은 예약 시각이 아직이어도 준비 중이 아니고, 수업 준비 탭에 '다시 고정' 버튼이 있다", () => {
+  it("시작한(live) 수업은 예약 시각이 아직이어도 준비 중이 아니고, 수업 준비 탭에 '수업 구성 변경' 버튼이 있다", () => {
     render(
       <SessionShell
         {...baseProps}
@@ -469,10 +469,10 @@ describe("SessionShell — 수업 준비 탭", () => {
     expect(screen.queryByText(/수업 준비 중/)).not.toBeInTheDocument();
     fireEvent.click(screen.getByText("수업 준비"));
     expect(screen.getByTestId("repin-live")).toHaveTextContent("시작 시점의 구성이 고정");
-    expect(screen.getByRole("button", { name: "지금 구성으로 이 수업에 다시 고정" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "수업 구성 변경" })).toBeInTheDocument();
   });
 
-  it("시작 전 수업의 수업 준비 탭에는 '다시 고정'이 없다", () => {
+  it("시작 전 수업의 수업 준비 탭에는 '수업 구성 변경'이 없다", () => {
     render(
       <SessionShell
         {...baseProps}

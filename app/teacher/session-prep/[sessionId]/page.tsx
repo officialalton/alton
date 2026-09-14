@@ -29,8 +29,10 @@ export default async function TeacherSessionPrepPage({
     );
   }
 
+  // 2026-09-14 제품 오너: 선생님 포털의 '수업 준비'는 어디서 들어와도 **수업 화면의 수업 준비 탭**이다.
+  // 준비 화면이 따로 있으면 두 곳이 다른 상태를 보여준다.
   if (context.linkedUnitId) {
-    redirect(`/lesson-prep/student/${context.linkedUnitId}?from=session&session=${sessionId}`);
+    redirect(`/session/${sessionId}?tab=prep`);
   }
 
   return <LessonPrepScreen context={context} />;

@@ -27,6 +27,7 @@ const initial: StudentCurriculum = {
       status: "not_started",
       statusChangedAt: null,
       keywordIds: ["kw1"],
+    keywordLabels: [],
       materialDocIds: [],
     },
   ],

@@ -503,7 +503,7 @@ export default function UnitPrepPanel({
                   <span>{formatLessonDate(l.startsAt)}</span>
                   {l.alreadyLinked ? (
                     <button
-                      onClick={() => router.push(`/teacher/session-prep/${l.sessionId}`)}
+                      onClick={() => router.push(`/session/${l.sessionId}?tab=prep`)}
                       className="text-[11.5px] font-bold text-ink"
                     >
                       연결됨 · 수업 준비 →

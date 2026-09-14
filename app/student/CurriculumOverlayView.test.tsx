@@ -21,6 +21,7 @@ const data: StudentCurriculum = {
       status: "completed",
       statusChangedAt: "2026-09-01T00:00:00Z",
       keywordIds: [],
+    keywordLabels: [],
       materialDocIds: [],
     },
     {
@@ -33,6 +34,7 @@ const data: StudentCurriculum = {
       status: "in_progress",
       statusChangedAt: null,
       keywordIds: [],
+    keywordLabels: [],
       materialDocIds: [],
     },
     {
@@ -45,6 +47,7 @@ const data: StudentCurriculum = {
       status: "not_started",
       statusChangedAt: null,
       keywordIds: [],
+    keywordLabels: [],
       materialDocIds: [],
     },
   ],
@@ -113,5 +116,15 @@ describe("CurriculumOverlayView — 학생·학부모 공용 읽기 전용 v3 �
     await waitFor(() =>
       expect(screen.getByText("로그인이 필요합니다.")).toBeInTheDocument()
     );
+  });
+
+  it("회차마다 붙은 키워드를 보여준다(2026-09-14)", async () => {
+    (loadMyCurriculumOverlay as ReturnType<typeof vi.fn>).mockResolvedValue({
+      ...data,
+      units: [{ ...data.units[0], keywordLabels: ["Words in Context", "Voca"] }, ...data.units.slice(1)],
+    });
+    render(<CurriculumOverlayView subjectEnrollmentId="se1" subjectName="SAT Math" onBack={() => {}} />);
+    expect(await screen.findByText("Words in Context")).toBeInTheDocument();
+    expect(screen.getByText("Voca")).toBeInTheDocument();
   });
 });

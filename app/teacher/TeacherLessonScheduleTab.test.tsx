@@ -110,13 +110,13 @@ describe("TeacherLessonScheduleTab", () => {
     expect(prepButtons).toHaveLength(2);
 
     fireEvent.click(prepButtons[1]);
-    expect(pushMock).toHaveBeenCalledWith(`/teacher/session-prep/${otherLesson.sessionId}`);
-    expect(pushMock).not.toHaveBeenCalledWith(`/teacher/session-prep/${lesson.sessionId}`);
+    expect(pushMock).toHaveBeenCalledWith(`/session/${otherLesson.sessionId}?tab=prep`);
+    expect(pushMock).not.toHaveBeenCalledWith(`/session/${lesson.sessionId}?tab=prep`);
 
     pushMock.mockClear();
     fireEvent.click(prepButtons[0]);
-    expect(pushMock).toHaveBeenCalledWith(`/teacher/session-prep/${lesson.sessionId}`);
-    expect(pushMock).not.toHaveBeenCalledWith(`/teacher/session-prep/${otherLesson.sessionId}`);
+    expect(pushMock).toHaveBeenCalledWith(`/session/${lesson.sessionId}?tab=prep`);
+    expect(pushMock).not.toHaveBeenCalledWith(`/session/${otherLesson.sessionId}?tab=prep`);
   });
 
   it("P2/P3 2단계: 예정 수업에서만 '수업 준비'가 보이고, 그 수업의 준비 화면으로 이동한다", () => {
@@ -147,8 +147,8 @@ describe("TeacherLessonScheduleTab", () => {
     expect(prepButtons).toHaveLength(1);
 
     fireEvent.click(prepButtons[0]);
-    expect(pushMock).toHaveBeenCalledWith(`/teacher/session-prep/${lesson.sessionId}`);
-    expect(pushMock).not.toHaveBeenCalledWith(`/teacher/session-prep/${pastLesson.sessionId}`);
+    expect(pushMock).toHaveBeenCalledWith(`/session/${lesson.sessionId}?tab=prep`);
+    expect(pushMock).not.toHaveBeenCalledWith(`/session/${pastLesson.sessionId}?tab=prep`);
   });
 
   it("M5-a: scheduled 상태 수업에는 수업 시작 버튼만 보이고 클릭 시 호출된다(2026-09-06: 완료/노쇼는 시작 전에는 노출되지 않음)", async () => {

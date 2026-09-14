@@ -528,7 +528,7 @@ export default function SessionShell({
               // 명시적으로 지금 구성으로 다시 고정할 수 있다. 자동으로는 바뀌지 않는다.
               <div className="mx-8 mt-6 border-[1.5px] border-grey-200 rounded-xl px-4 py-3 flex flex-wrap items-center gap-3" data-testid="repin-live">
                 <p className="text-[12.5px] text-ink flex-1 min-w-[240px]">
-                  이 수업은 <b>시작 시점의 구성이 고정</b>돼 있습니다. 아래에서 바꾼 교재·문제를 이 수업에도 쓰려면 지금 구성으로 다시 고정하세요.
+                  이 수업은 <b>시작 시점의 구성이 고정</b>돼 있습니다. 아래에서 바꾼 교재·문제를 이 수업에 적용하려면 <b>수업 구성 변경</b>을 누르세요.
                   학생이 이미 사용한 항목·필기·답안은 남습니다.
                 </p>
                 <button
@@ -543,7 +543,7 @@ export default function SessionShell({
                   }}
                   className="text-[12.5px] font-bold px-4 py-2 rounded-lg bg-ink text-white disabled:opacity-50"
                 >
-                  {repin === "running" ? "다시 고정하는 중…" : "지금 구성으로 이 수업에 다시 고정"}
+                  {repin === "running" ? "바꾸는 중…" : "수업 구성 변경"}
                 </button>
                 {typeof repin === "object" && <p className="text-[12px] text-red w-full">{repin.error}</p>}
               </div>

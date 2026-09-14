@@ -335,19 +335,23 @@ export default forwardRef<
     return pointerToCanvas(e.clientX, e.clientY, canvas.getBoundingClientRect(), canvas);
   }
 
+  // 2026-09-14 UAT: 창을 줄이면 페이지는 작아지는데 필기는 그대로였다 — 레이어가 부모 폭(w-full)을 따라
+  // 페이지보다 커질 수 있었다. 렌더된 페이지 크기(논리 px)에 **정확히** 맞춘다.
+  const layerStyle = width > 0 && height > 0 ? { width: `${width}px`, height: `${height}px` } : undefined;
+
   return (
     <div className="absolute inset-0" data-testid="pdf-page-annotation-layer">
       <canvas
         ref={teacherCanvasRef}
         data-testid="pdf-teacher-layer"
-        className="absolute top-0 left-0 w-full h-full pointer-events-none"
-        style={{ visibility: showTeacher ? "visible" : "hidden", zIndex: 6 }}
+        className="absolute top-0 left-0 pointer-events-none"
+        style={{ visibility: showTeacher ? "visible" : "hidden", zIndex: 6, ...layerStyle }}
       />
       <canvas
         ref={studentCanvasRef}
         data-testid="pdf-student-layer"
-        className="absolute top-0 left-0 w-full h-full pointer-events-none"
-        style={{ visibility: showStudent ? "visible" : "hidden", zIndex: 5 }}
+        className="absolute top-0 left-0 pointer-events-none"
+        style={{ visibility: showStudent ? "visible" : "hidden", zIndex: 5, ...layerStyle }}
       />
       {/* 입력은 자기 레이어 캔버스 위의 투명 캔버스가 받는다 — 어느 레이어가 위에 있든 상관없이. */}
       {myScope && (
@@ -356,10 +360,10 @@ export default forwardRef<
           width={width}
           height={height}
           className={
-            "absolute top-0 left-0 w-full h-full " +
+            "absolute top-0 left-0 " +
             (canDraw ? "pointer-events-auto cursor-crosshair" : "pointer-events-none")
           }
-          style={{ zIndex: 7, touchAction: "none" }}
+          style={{ zIndex: 7, touchAction: "none", ...layerStyle }}
           onPointerDown={(e) => {
             if (!canDraw) return;
             if (tool === "text") {

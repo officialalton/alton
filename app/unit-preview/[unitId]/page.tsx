@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { requireUser } from "@/lib/auth";
 import { getRoleHomePath } from "@/lib/session-view";
 import type { UnitPreview } from "@/app/student/curriculum-overlay-actions";
@@ -33,6 +33,10 @@ export default async function UnitPreviewPage({
   }
   const preview = (data as UnitPreview | null) ?? null;
   if (!preview) notFound();
+
+  // 2026-09-14 제품 오너: 예약된 수업이 있으면 '수업 준비'는 곧 그 수업 화면이다(교재·문제 뷰어가 거기 있다).
+  // 이 요약 화면은 아직 수업이 잡히지 않은 회차에만 쓴다.
+  if (preview.sessionId) redirect(`/session/${preview.sessionId}`);
 
   // 과목 이름과 (보호자일 때) 학생 이름. 회차 → 오버레이 → 수강으로 올라간다.
   // 여기서 못 읽어도 화면은 열린다 — 머리말이 비는 것뿐이다.

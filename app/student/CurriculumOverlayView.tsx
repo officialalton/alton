@@ -139,6 +139,15 @@ export default function CurriculumOverlayView({
                     </span>
                   </div>
                   {u.note && <p className="text-[12.5px] text-grey-500">{u.note}</p>}
+                  {u.keywordLabels.length > 0 && (
+                    <div className="flex flex-wrap gap-1 mt-1" aria-label="회차 키워드">
+                      {u.keywordLabels.map((k) => (
+                        <span key={k} className="text-[11px] font-semibold text-grey-500 border border-grey-200 rounded-full px-2 py-0.5">
+                          {k}
+                        </span>
+                      ))}
+                    </div>
+                  )}
 
                   {/* 2026-09-14 제품 오너 — 예정 수업과 같은 '수업 준비'로 회차마다
                       들어간다. 예약·시작 여부로 막지 않는다(예습 허용). 열람만 하고

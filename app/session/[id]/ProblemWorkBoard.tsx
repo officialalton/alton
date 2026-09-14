@@ -11,6 +11,8 @@ import {
 import type { StrokePayload } from "./annotation-events-types";
 import { annotationScale, pointerToCanvas } from "./annotation-scale";
 import { appendProblemWorkStrokes } from "./problem-work-actions";
+import type { RealtimeChannel } from "@supabase/supabase-js";
+import { createClient } from "@/utils/supabase/client";
 
 const COLORS = ["#1A1A1A", "#C8102E", "#1B6FB0"];
 const BOARD_HEIGHT = 420;
@@ -74,6 +76,10 @@ const ProblemWorkBoard = forwardRef<
   const lastPosRef = useRef<{ x: number; y: number } | null>(null);
   const pendingRef = useRef<StrokePayload[]>([]);
   const localRef = useRef<StrokePayload[]>([]);
+  // 2026-09-14 UAT: 연습장이 상대 화면에 실시간으로 안 보였다 — 같은 풀이판 채널로 획을 주고받는다.
+  const remoteStudentRef = useRef<StrokePayload[]>([]);
+  const remoteFeedbackRef = useRef<StrokePayload[]>([]);
+  const channelRef = useRef<RealtimeChannel | null>(null);
   const saveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const [tool, setTool] = useState<"pen" | "eraser">("pen");
@@ -138,9 +144,13 @@ const ProblemWorkBoard = forwardRef<
     if (showStudent) {
       studentStrokes.forEach((seg) => drawSegment(seg));
       strokesAfterSubmit.forEach((seg) => drawSegment(seg));
+      remoteStudentRef.current.forEach((seg) => drawSegment(seg));
     }
     localRef.current.forEach((seg) => drawSegment(seg, drawAsFeedback));
-    if (showFeedback) feedbackStrokes.forEach((seg) => drawSegment(seg, true));
+    if (showFeedback) {
+      feedbackStrokes.forEach((seg) => drawSegment(seg, true));
+      remoteFeedbackRef.current.forEach((seg) => drawSegment(seg, true));
+    }
   }, [
     studentStrokes,
     strokesAfterSubmit,
@@ -150,6 +160,28 @@ const ProblemWorkBoard = forwardRef<
     drawAsFeedback,
     drawSegment,
   ]);
+
+  // 실시간 — 이 풀이판 채널만. 상대 획은 상대 레이어에 그린다(내가 보낸 것은 무시).
+  useEffect(() => {
+    if (!workId) return;
+    const supabase = createClient();
+    const channel = supabase.channel(`session-problem-work:${workId}`);
+    channel
+      .on("broadcast", { event: "stroke" }, ({ payload }) => {
+        const incoming = payload as { layer: "student" | "feedback"; seg: StrokePayload; from?: string };
+        if (!incoming?.seg) return;
+        if (incoming.from && viewerUserId && incoming.from === viewerUserId) return;
+        const isFeedback = incoming.layer === "feedback";
+        (isFeedback ? remoteFeedbackRef : remoteStudentRef).current.push(incoming.seg);
+        if (isFeedback ? showFeedback : showStudent) drawSegment(incoming.seg, isFeedback);
+      })
+      .subscribe();
+    channelRef.current = channel;
+    return () => {
+      channelRef.current = null;
+      supabase.removeChannel(channel);
+    };
+  }, [workId, viewerUserId, showFeedback, showStudent, drawSegment]);
 
   const fit = useCallback(() => {
     const canvas = canvasRef.current;
@@ -352,6 +384,11 @@ const ProblemWorkBoard = forwardRef<
             pendingRef.current.push(seg);
             localRef.current.push(seg);
             rememberPending();
+            channelRef.current?.send({
+              type: "broadcast",
+              event: "stroke",
+              payload: { layer: drawAsFeedback ? "feedback" : "student", seg, from: viewerUserId },
+            });
             lastPosRef.current = p;
           }}
           onPointerUp={() => {

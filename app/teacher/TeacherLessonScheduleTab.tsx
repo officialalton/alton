@@ -297,7 +297,7 @@ export default function TeacherLessonScheduleTab({
               준비할 것이 없으므로 예정 수업에만 노출한다. */}
           {!isPast && (
             <button
-              onClick={() => router.push(`/teacher/session-prep/${lesson.sessionId}`)}
+              onClick={() => router.push(`/session/${lesson.sessionId}?tab=prep`)}
               className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-grey-100 text-ink"
             >
               수업 준비

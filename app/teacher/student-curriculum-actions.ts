@@ -60,6 +60,7 @@ function mapUnitRow(row: {
     status: row.status,
     statusChangedAt: row.status_changed_at,
     keywordIds: [],
+    keywordLabels: [],
     materialDocIds: [],
   };
 }
