@@ -1,12 +1,12 @@
 import { DRIVE_API } from "@/lib/drive/fetch";
 
-// ALTON 분류 → Drive 폴더 반영(단방향).
+// ALTON 분류 → Drive 폴더 반영(단방향). 구조는 **과목 → 키워드**(2026-09-14 정정).
 //
 // DB 큐(curriculum_drive_folders)에 pending / rename_pending 으로 쌓인 것을 순서대로
-// 처리한다. 과목 → 단원 → 키워드 순이어야 상위 폴더 id 가 먼저 생긴다. 실제 Drive
-// 쓰기는 allowRealWrites 가 켜졌을 때만 하고, 꺼져 있으면 **무엇을 할지 계획만**
-// 돌려준다(dry run). 실패는 행에 사유를 남기고 다음에 다시 시도한다. 삭제는 없다 —
-// 보관은 Drive 삭제로 이어지지 않는다.
+// 처리한다. 과목 → 키워드 순이어야 상위 폴더 id 가 먼저 생긴다. 단원·회차는 Drive 폴더를
+// 만들지 않는다(예전 구조의 unit 행은 retired). 실제 Drive 쓰기는 allowRealWrites 가
+// 켜졌을 때만 하고, 꺼져 있으면 **무엇을 할지 계획만** 돌려준다(dry run). 실패는 행에
+// 사유를 남기고 다음에 다시 시도한다. 삭제는 없다 — 보관은 Drive 삭제로 이어지지 않는다.
 //
 // 이 파일은 네트워크·DB 를 인자로 받는다(주입). 그래서 실제 Drive 없이 테스트한다.
 
@@ -17,14 +17,13 @@ export type FolderRow = {
   desired_name: string;
   applied_name: string | null;
   drive_folder_id: string | null;
-  sync_status: "pending" | "created" | "rename_pending" | "failed";
+  sync_status: "pending" | "created" | "rename_pending" | "failed" | "retired";
   attempts: number;
 };
 
-/** 상위를 찾기 위한 분류 관계. 키워드는 단원 하나, 단원은 과목 하나에 속한다. */
+/** 상위를 찾기 위한 분류 관계. 키워드는 과목 하나에 속한다(단원과는 N:M — 폴더와 무관). */
 export type ClassificationLinks = {
-  unitSubject: Map<string, string>; // unit_id → subject_id
-  keywordUnit: Map<string, string | null>; // keyword_id → unit_id (null = 아직 소속 없음)
+  keywordSubject: Map<string, string>; // keyword_id → subject_id
 };
 
 export type PlannedOp =
@@ -35,9 +34,8 @@ export type PlannedOp =
 const SCOPE_ORDER: Record<FolderRow["scope"], number> = { subject: 0, unit: 1, keyword: 2 };
 
 /**
- * 큐를 읽어 할 일을 정한다. 상위 폴더가 아직 없으면 그 행은 이번에 건너뛴다(사유 기록) —
- * 다음 실행에서 상위가 생긴 뒤 다시 잡힌다. 단원이 정해지지 않은 키워드는 폴더를 만들
- * 자리가 없으므로 건너뛴다(전환 대상).
+ * 큐를 읽어 할 일을 정한다. 상위(과목) 폴더가 아직 없으면 그 키워드는 이번에 건너뛴다(사유 기록) —
+ * 다음 실행에서 과목 폴더가 생긴 뒤 다시 잡힌다. retired(예전 단원 폴더) 행은 건드리지 않는다.
  */
 export function planFolderOps(
   rows: FolderRow[],
@@ -53,7 +51,8 @@ export function planFolderOps(
   const sorted = [...rows].sort((a, b) => SCOPE_ORDER[a.scope] - SCOPE_ORDER[b.scope]);
 
   for (const row of sorted) {
-    if (row.sync_status === "created") continue;
+    if (row.sync_status === "created" || row.sync_status === "retired") continue;
+    if (row.scope === "unit") continue; // 단원 폴더는 만들지 않는다
 
     if (row.sync_status === "rename_pending") {
       if (!row.drive_folder_id) {
@@ -68,22 +67,11 @@ export function planFolderOps(
     let parent: string | null = null;
     if (row.scope === "subject") {
       parent = rootFolderId;
-    } else if (row.scope === "unit") {
-      const subjectId = links.unitSubject.get(row.ref_id);
+    } else {
+      const subjectId = links.keywordSubject.get(row.ref_id);
       parent = subjectId ? driveIdOf("subject", subjectId) : null;
       if (!parent) {
         ops.push({ kind: "skip", row, reason: "과목 폴더가 아직 없습니다." });
-        continue;
-      }
-    } else {
-      const unitId = links.keywordUnit.get(row.ref_id);
-      if (!unitId) {
-        ops.push({ kind: "skip", row, reason: "키워드의 단원이 정해지지 않았습니다(전환 대상)." });
-        continue;
-      }
-      parent = driveIdOf("unit", unitId);
-      if (!parent) {
-        ops.push({ kind: "skip", row, reason: "단원 폴더가 아직 없습니다." });
         continue;
       }
     }
@@ -94,6 +82,8 @@ export function planFolderOps(
 }
 
 export type DriveFolderApi = {
+  /** 기록된 폴더가 아직 있는가(휴지통도 없음으로 본다). 사람이 Drive 에서 지웠으면 다시 만든다. */
+  folderExists(folderId: string): Promise<boolean>;
   /** 같은 상위 아래 같은 이름의 폴더가 이미 있으면 그 id — 중복 생성을 막는다. */
   findChildFolder(parentId: string, name: string): Promise<string | null>;
   createFolder(parentId: string, name: string): Promise<string>;
@@ -107,6 +97,13 @@ export function driveFolderApi(fetchImpl: typeof fetch, token: string, driveId: 
     throw new Error(`${what} 실패 (status ${res.status}): ${text.slice(0, 200)}`);
   };
   return {
+    async folderExists(folderId) {
+      const res = await fetchImpl(`${DRIVE_API}/files/${folderId}?supportsAllDrives=true&fields=id,trashed`, { headers });
+      if (res.status === 404) return false;
+      if (!res.ok) await fail(res, "폴더 확인");
+      const data = (await res.json()) as { id?: string; trashed?: boolean };
+      return Boolean(data.id) && !data.trashed;
+    },
     async findChildFolder(parentId, name) {
       const escaped = name.replace(/\\/g, "\\\\").replace(/'/g, "\\'");
       const q = encodeURIComponent(
@@ -142,6 +139,8 @@ export function driveFolderApi(fetchImpl: typeof fetch, token: string, driveId: 
 }
 
 export type FolderStore = {
+  /** 기록된 폴더가 Drive 에서 사라졌다 — id 를 잊고 다시 만들 대상으로 되돌린다. */
+  markMissing(rowId: string): Promise<void>;
   markCreated(rowId: string, driveFolderId: string, appliedName: string): Promise<void>;
   markRenamed(rowId: string, appliedName: string): Promise<void>;
   markFailed(rowId: string, error: string): Promise<void>;
@@ -192,4 +191,40 @@ export async function executeFolderOps(
     }
   }
   return out;
+}
+
+/**
+ * 기록된 폴더 id 가 아직 살아 있는지 확인한다(읽기만). 사라졌으면 행을 pending 으로 되돌린 목록을
+ * 돌려준다 — 그 자식(키워드 폴더)은 이번 계획에서 "과목 폴더가 아직 없습니다"로 건너뛰고 다음
+ * 실행에서 새 폴더 아래 만들어진다. 사람이 Drive 에서 폴더를 정리해도 연결이 스스로 회복된다.
+ */
+export async function reconcileRecordedFolders(
+  rows: FolderRow[],
+  api: DriveFolderApi,
+  store: FolderStore
+): Promise<{ checked: number; missing: string[]; rows: FolderRow[] }> {
+  const missing: string[] = [];
+  const next: FolderRow[] = [];
+  let checked = 0;
+  for (const row of rows) {
+    if (!row.drive_folder_id || row.sync_status === "retired") {
+      next.push(row);
+      continue;
+    }
+    checked += 1;
+    let exists = true;
+    try {
+      exists = await api.folderExists(row.drive_folder_id);
+    } catch {
+      exists = true; // 확인 실패는 "있다"로 둔다 — 잘못 다시 만드는 것보다 낫다.
+    }
+    if (exists) {
+      next.push(row);
+    } else {
+      missing.push(row.id);
+      await store.markMissing(row.id);
+      next.push({ ...row, drive_folder_id: null, applied_name: null, sync_status: "pending" });
+    }
+  }
+  return { checked, missing, rows: next };
 }

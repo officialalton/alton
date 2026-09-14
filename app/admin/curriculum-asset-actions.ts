@@ -8,6 +8,7 @@ import {
   driveFolderApi,
   executeFolderOps,
   planFolderOps,
+  reconcileRecordedFolders,
   type FolderRow,
   type SyncOutcome,
 } from "@/lib/curriculum-drive/folder-sync";
@@ -145,13 +146,10 @@ export async function importDriveFileAction(keywordId: string, fileId: string): 
 
   const { data: keyword } = await supabase
     .from("subject_keywords")
-    .select("id, subject_id, unit_id, label")
+    .select("id, subject_id, label")
     .eq("id", keywordId)
     .maybeSingle();
   if (!keyword) return { ok: false, error: "존재하지 않는 키워드입니다." };
-  if (!keyword.unit_id) {
-    return { ok: false, error: "이 키워드는 단원이 정해지지 않았습니다. 단원을 먼저 정하세요(전환 대상)." };
-  }
 
   let meta: { id: string; name: string; mimeType: string; modifiedTime?: string; driveId?: string };
   try {
@@ -184,7 +182,8 @@ export async function importDriveFileAction(keywordId: string, fileId: string): 
     .insert({
       title: meta.name.replace(/\.[^.]+$/, ""),
       subject_id: keyword.subject_id,
-      unit_id: keyword.unit_id,
+      // 자료는 키워드에 속한다. 단원·회차 배치는 커리큘럼(회차 구성)이 한다 — 여기서 단원을 정하지 않는다.
+      unit_id: null,
       owner_type: "admin",
       owner_teacher_id: null,
       status: "draft",
@@ -416,7 +415,7 @@ export async function registerLocalSampleAssetAction(
 export type FolderSyncResult =
   | { state: "not_configured" }
   | { state: "drive_unreachable"; reason: string }
-  | { state: "ok"; driveName: string; outcome: SyncOutcome; pendingAfter: number };
+  | { state: "ok"; driveName: string; outcome: SyncOutcome & { missingRecreated: number }; pendingAfter: number };
 
 /**
  * 큐에 쌓인 폴더 생성·이름 변경을 처리한다. 실제 쓰기 플래그가 꺼져 있으면 계획만
@@ -427,16 +426,13 @@ export async function runCurriculumDriveFolderSyncAction(): Promise<FolderSyncRe
   const config = curriculumDriveConfig();
   if (!config) return { state: "not_configured" };
 
-  const [{ data: rows }, { data: units }, { data: keywords }] = await Promise.all([
+  const [{ data: rows }, { data: keywords }] = await Promise.all([
     supabase.from("curriculum_drive_folders").select("*").order("created_at", { ascending: true }),
-    supabase.from("subject_template_units").select("id, subject_id"),
-    supabase.from("subject_keywords").select("id, unit_id").eq("status", "active"),
+    supabase.from("subject_keywords").select("id, subject_id").eq("status", "active"),
   ]);
   const links = {
-    unitSubject: new Map((units ?? []).map((u) => [u.id as string, u.subject_id as string])),
-    keywordUnit: new Map((keywords ?? []).map((k) => [k.id as string, (k.unit_id as string | null) ?? null])),
+    keywordSubject: new Map((keywords ?? []).map((k) => [k.id as string, k.subject_id as string])),
   };
-  const ops = planFolderOps((rows ?? []) as FolderRow[], links, config.rootFolderId);
 
   // 계획만 보는 경우에도 드라이브에 **읽기 한 번**은 한다 — 환경변수가 맞고 서비스 계정이
   // 그 드라이브에 들어갈 수 있는지를 실제 쓰기 전에 확인하기 위해서다. 쓰지는 않는다.
@@ -455,6 +451,12 @@ export async function runCurriculumDriveFolderSyncAction(): Promise<FolderSyncRe
   const api = driveFolderApi(fetch, token, config.driveId);
   const admin = createAdminClient();
   const store = {
+    async markMissing(rowId: string) {
+      await admin
+        .from("curriculum_drive_folders")
+        .update({ drive_folder_id: null, applied_name: null, sync_status: "pending", last_error: "Drive 에서 폴더가 사라져 다시 만들 대상으로 되돌렸습니다.", updated_at: new Date().toISOString() })
+        .eq("id", rowId);
+    },
     async markCreated(rowId: string, driveFolderId: string, appliedName: string) {
       await admin
         .from("curriculum_drive_folders")
@@ -475,62 +477,31 @@ export async function runCurriculumDriveFolderSyncAction(): Promise<FolderSyncRe
         .eq("id", rowId);
     },
   };
+
+  // 기록된 폴더가 Drive 에 아직 있는지 먼저 확인한다(읽기). 사람이 지운 폴더는 다시 만들 대상이 된다.
+  const reconciled = await reconcileRecordedFolders((rows ?? []) as FolderRow[], api, store);
+  const ops = planFolderOps(reconciled.rows, links, config.rootFolderId);
+
   const outcome = await executeFolderOps(ops, api, store, config.allowRealWrites);
   const { count } = await supabase
     .from("curriculum_drive_folders")
     .select("*", { count: "exact", head: true })
     .in("sync_status", ["pending", "rename_pending", "failed"]);
-  return { state: "ok", driveName, outcome, pendingAfter: count ?? 0 };
+  return { state: "ok", driveName, outcome: { ...outcome, missingRecreated: reconciled.missing.length }, pendingAfter: count ?? 0 };
 }
 
-// ---------------------------------------------------------------- 키워드 → 단원 지정
+// ---------------------------------------------------------------- 키워드 목록
 
-export type KeywordUnitRow = {
-  keywordId: string;
-  label: string;
-  unitId: string | null;
-  /** 지금 N:M 연결로 붙어 있는 단원 수(전환 힌트). */
-  linkedUnitCount: number;
-  candidateUnitId: string | null;
-};
+export type SubjectKeywordRow = { keywordId: string; label: string };
 
-/**
- * 이 과목의 활성 키워드와 단원 소속. 단원이 없는 것은 전환 대상이다
- * (subject_keywords_needing_unit) — 자동으로 옮기지 않고 사람이 정한다.
- */
-export async function listSubjectKeywordUnitsAction(subjectId: string): Promise<KeywordUnitRow[]> {
+/** 이 과목의 활성 키워드. 키워드는 과목 안에서 관리되고 여러 단원·회차에 연결된다(2026-09-14 정정). */
+export async function listSubjectKeywordsAction(subjectId: string): Promise<SubjectKeywordRow[]> {
   const { supabase } = await requireAdmin();
-  const [{ data: keywords }, { data: needing }] = await Promise.all([
-    supabase
-      .from("subject_keywords")
-      .select("id, label, unit_id")
-      .eq("subject_id", subjectId)
-      .eq("status", "active")
-      .order("label", { ascending: true }),
-    supabase
-      .from("subject_keywords_needing_unit")
-      .select("keyword_id, linked_unit_count, candidate_unit_id")
-      .eq("subject_id", subjectId),
-  ]);
-  const hint = new Map(
-    (needing ?? []).map((n) => [n.keyword_id as string, n as { linked_unit_count: number; candidate_unit_id: string | null }])
-  );
-  return (keywords ?? []).map((k) => ({
-    keywordId: k.id as string,
-    label: k.label as string,
-    unitId: (k.unit_id as string | null) ?? null,
-    linkedUnitCount: Number(hint.get(k.id as string)?.linked_unit_count ?? 0),
-    candidateUnitId: hint.get(k.id as string)?.candidate_unit_id ?? null,
-  }));
-}
-
-/** 키워드의 단원을 정한다(같은 과목 단원만 — DB 트리거가 확인). 폴더 큐에도 반영된다. */
-export async function setKeywordUnitAction(
-  keywordId: string,
-  unitId: string | null
-): Promise<{ ok: true } | { ok: false; error: string }> {
-  const { supabase } = await requireAdmin();
-  const { error } = await supabase.from("subject_keywords").update({ unit_id: unitId }).eq("id", keywordId);
-  if (error) return { ok: false, error: error.message.replace(/^.*?:\s*/, "") };
-  return { ok: true };
+  const { data } = await supabase
+    .from("subject_keywords")
+    .select("id, label")
+    .eq("subject_id", subjectId)
+    .eq("status", "active")
+    .order("label", { ascending: true });
+  return (data ?? []).map((k) => ({ keywordId: k.id as string, label: k.label as string }));
 }

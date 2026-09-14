@@ -5,6 +5,7 @@ import {
   driveFolderApi,
   executeFolderOps,
   planFolderOps,
+  reconcileRecordedFolders,
   type DriveFolderApi,
   type FolderRow,
   type FolderStore,
@@ -34,48 +35,36 @@ describe("교재 Drive 설정", () => {
   });
 });
 
-describe("폴더 계획 — 과목 → 단원 → 키워드, 상위가 있어야 만든다", () => {
-  const links = {
-    unitSubject: new Map([["u1", "s1"]]),
-    keywordUnit: new Map<string, string | null>([
-      ["k1", "u1"],
-      ["k_orphan", null],
-    ]),
-  };
+describe("폴더 계획 — 과목 → 키워드, 상위가 있어야 만든다", () => {
+  const links = { keywordSubject: new Map([["k1", "s1"], ["k2", "s1"]]) };
 
-  it("과목은 루트 아래에, 자식은 상위 폴더 id 가 있어야 만들고 없으면 사유와 함께 건너뛴다", () => {
+  it("과목은 루트 아래에, 키워드는 과목 폴더 id 가 있어야 만들고 없으면 사유와 함께 건너뛴다", () => {
     const ops = planFolderOps(
       [
         row({ scope: "keyword", ref_id: "k1", desired_name: "추론" }),
-        row({ scope: "unit", ref_id: "u1", desired_name: "단원1" }),
         row({ scope: "subject", ref_id: "s1", desired_name: "SAT Reading" }),
-        row({ scope: "keyword", ref_id: "k_orphan", desired_name: "소속없음" }),
       ],
       links,
       "root"
     );
-    expect(ops.map((o) => `${o.kind}:${o.row.ref_id}`)).toEqual([
-      "create:s1",
-      "skip:u1",
-      "skip:k1",
-      "skip:k_orphan",
-    ]);
+    expect(ops.map((o) => `${o.kind}:${o.row.ref_id}`)).toEqual(["create:s1", "skip:k1"]);
     expect(ops[0]).toMatchObject({ parentDriveFolderId: "root" });
-    expect(ops[3]).toMatchObject({ reason: expect.stringContaining("전환 대상") });
+    expect(ops[1]).toMatchObject({ reason: "과목 폴더가 아직 없습니다." });
   });
 
-  it("상위가 이미 만들어져 있으면 그 id 아래에 만들고, 만들어진 것은 건너뛴다", () => {
+  it("과목 폴더가 있으면 그 아래에 키워드 폴더를 만들고, 만들어진 것과 retired(예전 단원 폴더)는 건너뛴다", () => {
     const ops = planFolderOps(
       [
         row({ scope: "subject", ref_id: "s1", drive_folder_id: "F_S", sync_status: "created", applied_name: "SAT" }),
-        row({ scope: "unit", ref_id: "u1", drive_folder_id: "F_U", sync_status: "created", applied_name: "단원1" }),
+        row({ scope: "unit", ref_id: "u1", drive_folder_id: "F_U", sync_status: "retired" }),
+        row({ scope: "unit", ref_id: "u2", sync_status: "pending" }),
         row({ scope: "keyword", ref_id: "k1", desired_name: "추론" }),
       ],
       links,
       "root"
     );
     expect(ops).toHaveLength(1);
-    expect(ops[0]).toMatchObject({ kind: "create", parentDriveFolderId: "F_U" });
+    expect(ops[0]).toMatchObject({ kind: "create", row: { ref_id: "k1" }, parentDriveFolderId: "F_S" });
   });
 
   it("이름이 바뀐 폴더는 rename 이고, 폴더 id 가 없으면 건너뛴다", () => {
@@ -92,20 +81,53 @@ describe("폴더 계획 — 과목 → 단원 → 키워드, 상위가 있어야
   });
 });
 
+describe("기록된 폴더 재확인 — 사람이 Drive 에서 지웠으면 다시 만들 대상으로 되돌린다", () => {
+  it("사라진 폴더의 행은 id 를 잊고 pending 으로, 살아 있는 것과 retired 는 그대로", async () => {
+    const api: DriveFolderApi = {
+      folderExists: vi.fn(async (id: string) => id !== "GONE"),
+      findChildFolder: vi.fn(async () => null),
+      createFolder: vi.fn(async () => "NEW"),
+      renameFolder: vi.fn(async () => undefined),
+    };
+    const store: FolderStore = {
+      markMissing: vi.fn(async () => undefined),
+      markCreated: vi.fn(async () => undefined),
+      markRenamed: vi.fn(async () => undefined),
+      markFailed: vi.fn(async () => undefined),
+    };
+    const out = await reconcileRecordedFolders(
+      [
+        row({ scope: "subject", ref_id: "s1", drive_folder_id: "GONE", sync_status: "created", applied_name: "SAT" }),
+        row({ scope: "subject", ref_id: "s2", drive_folder_id: "ALIVE", sync_status: "created", applied_name: "AP" }),
+        row({ scope: "unit", ref_id: "u1", drive_folder_id: "GONE", sync_status: "retired" }),
+      ],
+      api,
+      store
+    );
+    expect(out.checked).toBe(2);
+    expect(out.missing).toEqual(["r_subject_s1"]);
+    expect(store.markMissing).toHaveBeenCalledWith("r_subject_s1");
+    expect(out.rows[0]).toMatchObject({ drive_folder_id: null, sync_status: "pending" });
+    expect(out.rows[1]).toMatchObject({ drive_folder_id: "ALIVE", sync_status: "created" });
+    expect(out.rows[2]).toMatchObject({ sync_status: "retired", drive_folder_id: "GONE" });
+  });
+});
+
 describe("실행 — 실제 쓰기 플래그가 꺼져 있으면 아무것도 쓰지 않는다", () => {
   const api: DriveFolderApi = {
+    folderExists: vi.fn(async () => true),
     findChildFolder: vi.fn(async () => null),
     createFolder: vi.fn(async () => "NEW"),
     renameFolder: vi.fn(async () => undefined),
   };
   const store: FolderStore = {
+    markMissing: vi.fn(async () => undefined),
     markCreated: vi.fn(async () => undefined),
     markRenamed: vi.fn(async () => undefined),
     markFailed: vi.fn(async () => undefined),
   };
   const ops = planFolderOps([row({ scope: "subject", ref_id: "s1", desired_name: "SAT" })], {
-    unitSubject: new Map(),
-    keywordUnit: new Map(),
+    keywordSubject: new Map(),
   }, "root");
 
   it("dry run 은 계획만 센다", async () => {
@@ -141,10 +163,16 @@ describe("Drive 폴더 API 래퍼", () => {
     const calls: { url: string; init?: RequestInit }[] = [];
     const fetchImpl = (async (url: string, init?: RequestInit) => {
       calls.push({ url, init });
+      if (url.includes("/files/MISSING")) return new Response("not found", { status: 404 });
+      if (url.includes("/files/TRASHED")) return new Response(JSON.stringify({ id: "TRASHED", trashed: true }), { status: 200 });
       if ((init?.method ?? "GET") === "GET") return new Response(JSON.stringify({ files: [] }), { status: 200 });
       return new Response(JSON.stringify({ id: "F1" }), { status: 200 });
     }) as unknown as typeof fetch;
     const api = driveFolderApi(fetchImpl, "tok", "drive1");
+
+    expect(await api.folderExists("MISSING")).toBe(false);
+    expect(await api.folderExists("TRASHED")).toBe(false);
+    calls.length = 0;
 
     expect(await api.findChildFolder("P", "단원 'A'")).toBeNull();
     expect(decodeURIComponent(calls[0].url)).toContain("'P' in parents and name = '단원 \\'A\\''");

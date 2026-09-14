@@ -8,9 +8,8 @@ import {
   publishAssetDocAction,
   registerLocalSampleAssetAction,
   runCurriculumDriveFolderSyncAction,
-  listSubjectKeywordUnitsAction,
-  setKeywordUnitAction,
-  type KeywordUnitRow,
+  listSubjectKeywordsAction,
+  type SubjectKeywordRow,
   type DriveMaterialCandidate,
   type DriveMaterialListResult,
   type FolderSyncResult,
@@ -26,20 +25,18 @@ import {
 
 export default function DriveMaterialsPanel({ subjects }: { subjects: AdminSubject[] }) {
   const [subjectId, setSubjectId] = useState("");
-  const [unitId, setUnitId] = useState("");
   const [keywordId, setKeywordId] = useState("");
   const [list, setList] = useState<DriveMaterialListResult | "loading" | null>(null);
   const [busyFile, setBusyFile] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
   const [sync, setSync] = useState<FolderSyncResult | "running" | null>(null);
-  const [keywordRows, setKeywordRows] = useState<KeywordUnitRow[]>([]);
-  const [unitError, setUnitError] = useState<string | null>(null);
+  const [keywordRows, setKeywordRows] = useState<SubjectKeywordRow[]>([]);
 
-  // 과목의 키워드와 단원 소속 — 단원 지정 표와 키워드 후보가 같은 원본을 본다.
+  // 과목의 키워드 — Drive 폴더는 과목 → 키워드다. 단원은 여기서 고르지 않는다(회차 구성의 일).
   useEffect(() => {
     if (!subjectId) return;
     let cancelled = false;
-    listSubjectKeywordUnitsAction(subjectId).then((rows) => {
+    listSubjectKeywordsAction(subjectId).then((rows) => {
       if (!cancelled) setKeywordRows(rows);
     });
     return () => {
@@ -47,26 +44,12 @@ export default function DriveMaterialsPanel({ subjects }: { subjects: AdminSubje
     };
   }, [subjectId]);
 
-  async function assignUnit(keywordId: string, nextUnitId: string) {
-    setUnitError(null);
-    const r = await setKeywordUnitAction(keywordId, nextUnitId || null);
-    if (!r.ok) {
-      setUnitError(r.error);
-      return;
-    }
-    setKeywordRows((prev) => prev.map((k) => (k.keywordId === keywordId ? { ...k, unitId: nextUnitId || null } : k)));
-  }
-
   const subject = subjects.find((s) => s.subjectId === subjectId);
-  const unit = subject?.units.find((u) => u.id === unitId);
-  // 키워드는 단원 하나에 속한다(unit_id). 단원을 고르면 그 단원 소속만, 아니면 단원이 있는 것 전부.
-  const keywords = keywordRows.filter((k) => k.unitId && (!unit || k.unitId === unit.id));
-  const needingUnit = keywordRows.filter((k) => !k.unitId);
+  const keywords = keywordRows;
 
   // 과목이 바뀌면 단원·키워드·목록을 비운다 — 이벤트에서 함께 바꾼다(효과 안 setState 금지).
   function changeSubject(next: string) {
     setSubjectId(next);
-    setUnitId("");
     setKeywordId("");
     setList(null);
     setKeywordRows([]);
@@ -116,15 +99,15 @@ export default function DriveMaterialsPanel({ subjects }: { subjects: AdminSubje
     <div className="max-w-[720px] px-8 py-8">
       <h1 className="text-[20px] font-extrabold text-ink mb-1.5">Drive 자료</h1>
       <p className="text-[13px] text-grey-500 mb-5">
-        Drive 의 키워드 폴더에 올린 PDF·영상을 자료로 가져옵니다. 업로드만으로는 공개되지 않고,
+        Drive 구조는 과목 → 키워드 → 파일입니다. 키워드 폴더에 올린 PDF·영상을 자료로 가져옵니다. 업로드만으로는 공개되지 않고,
         공개할 때 그 시점의 파일을 고정 사본으로 확보합니다. 원본이 바뀌어도 공개 버전과 과거 수업은 그대로입니다.
       </p>
 
       <section className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3.5 mb-5">
         <h2 className="text-[13px] font-bold text-ink mb-1">폴더 동기화</h2>
         <p className="text-[12px] text-grey-500 mb-2">
-          과목 → 단원 → 키워드 분류를 Drive 폴더로 반영합니다. 실제 쓰기 플래그가 꺼져 있으면 드라이브 접근만 확인하고 무엇을 만들지 계획만 보여줍니다.
-          한 번에 한 계층씩 만들어지므로 과목 → 단원 → 키워드까지 세 번 실행합니다.
+          과목 → 키워드 분류를 Drive 폴더로 반영합니다(단원·회차는 폴더를 만들지 않습니다). 실제 쓰기 플래그가 꺼져 있으면 드라이브 접근만 확인하고 계획만 보여줍니다.
+          한 번에 한 계층씩 만들어지므로 과목 → 키워드까지 두 번 실행합니다. Drive 에서 지운 폴더는 다음 실행에서 다시 만듭니다.
         </p>
         <button
           disabled={sync === "running"}
@@ -139,7 +122,7 @@ export default function DriveMaterialsPanel({ subjects }: { subjects: AdminSubje
               ? "교재 Drive 연결이 설정되지 않았습니다(CURRICULUM_DRIVE_ENABLED)."
               : sync.state === "drive_unreachable"
                 ? `드라이브에 접근하지 못했습니다 — ${sync.reason}`
-                : `연결됨: ${sync.driveName} · ${sync.outcome.dryRun ? "계획만(실제 쓰기 꺼짐)" : "반영"} — 만들 폴더 ${sync.outcome.created}개 · 이름 변경 ${sync.outcome.renamed}개 · 건너뜀 ${sync.outcome.skipped.length}개 · 실패 ${sync.outcome.failed.length}개 · 남은 대기 ${sync.pendingAfter}개`}
+                : `연결됨: ${sync.driveName} · ${sync.outcome.dryRun ? "계획만(실제 쓰기 꺼짐)" : "반영"} — 만들 폴더 ${sync.outcome.created}개 · 이름 변경 ${sync.outcome.renamed}개 · 건너뜀 ${sync.outcome.skipped.length}개 · 실패 ${sync.outcome.failed.length}개 · 남은 대기 ${sync.pendingAfter}개${sync.outcome.missingRecreated ? ` · Drive 에서 사라진 폴더 ${sync.outcome.missingRecreated}개는 다시 만들 대상` : ""}`}
           </p>
         )}
         {sync && sync !== "running" && sync.state === "ok" && sync.outcome.failed.length > 0 && (
@@ -151,40 +134,6 @@ export default function DriveMaterialsPanel({ subjects }: { subjects: AdminSubje
         )}
       </section>
 
-      {subject && needingUnit.length > 0 && (
-        <section className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3.5 mb-5" data-testid="keywords-needing-unit">
-          <h2 className="text-[13px] font-bold text-ink mb-1">단원이 정해지지 않은 키워드 {needingUnit.length}개</h2>
-          <p className="text-[12px] text-grey-500 mb-2">
-            키워드는 단원 하나에 속합니다. 단원을 정해야 키워드 폴더가 만들어지고 파일을 가져올 수 있습니다.
-            자동으로 옮기지 않습니다 — 여러 단원에 걸쳐 있던 키워드는 다른 이름의 키워드로 갈라야 합니다.
-          </p>
-          {unitError && <p className="text-[12px] text-red mb-2">{unitError}</p>}
-          <ul>
-            {needingUnit.map((k) => (
-              <li key={k.keywordId} className="flex items-center justify-between gap-3 py-1.5 border-t border-grey-100 first:border-t-0">
-                <span className="text-[12.5px] text-ink">
-                  {k.label}
-                  {k.linkedUnitCount > 1 && (
-                    <span className="text-[11px] text-grey-500 ml-2">단원 {k.linkedUnitCount}곳에 걸침 — 갈라야 함</span>
-                  )}
-                </span>
-                <select
-                  aria-label={`${k.label} 단원`}
-                  defaultValue={k.linkedUnitCount === 1 && k.candidateUnitId ? k.candidateUnitId : ""}
-                  onChange={(e) => void assignUnit(k.keywordId, e.target.value)}
-                  className="text-[12px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1"
-                >
-                  <option value="">단원 정하기…</option>
-                  {subject.units.map((u) => (
-                    <option key={u.id} value={u.id}>{u.position}. {u.unitTitle}</option>
-                  ))}
-                </select>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
       <section className="mb-5">
         <h2 className="text-[13px] font-bold text-ink mb-2">키워드 폴더에서 불러오기</h2>
         <div className="flex flex-wrap gap-2 mb-2">
@@ -192,12 +141,6 @@ export default function DriveMaterialsPanel({ subjects }: { subjects: AdminSubje
             <option value="">과목 고르기…</option>
             {subjects.filter((s) => !s.archivedAt).map((s) => (
               <option key={s.subjectId} value={s.subjectId}>{s.subjectName}</option>
-            ))}
-          </select>
-          <select aria-label="단원" value={unitId} onChange={(e) => { setUnitId(e.target.value); setKeywordId(""); setList(null); }} disabled={!subject} className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 disabled:bg-grey-100">
-            <option value="">단원 전체</option>
-            {(subject?.units ?? []).map((u) => (
-              <option key={u.id} value={u.id}>{u.position}. {u.unitTitle}</option>
             ))}
           </select>
           <select aria-label="키워드" value={keywordId} onChange={(e) => { setKeywordId(e.target.value); setList(null); }} disabled={!subject} className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 disabled:bg-grey-100">

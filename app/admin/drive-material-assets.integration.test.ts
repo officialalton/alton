@@ -103,59 +103,30 @@ const asset = (over: Record<string, unknown> = {}) =>
     ...over,
   }).replace(/'/g, "''");
 
-// ------------------------------------------------------------ 키워드 → 단원
-describe("키워드는 단원 하나에 속한다", () => {
-  it("같은 과목의 단원만 붙는다", () => {
-    const unitId = makeUnit();
-    const kw = psql(
-      `insert into subject_keywords (subject_id, label, unit_id) values ('${SUBJECT_ID}', 'kw ${uniq()}', '${unitId}') returning id;`
-    );
+// ------------------------------------------------------------ 폴더 큐 (과목 → 키워드)
+describe("Drive 폴더 큐 — 과목 → 키워드, 단원은 폴더를 만들지 않는다", () => {
+  it("키워드가 생기면 pending, 이름을 바꾸면 만든 폴더만 rename_pending", () => {
+    const kw = psql(`insert into subject_keywords (subject_id, label) values ('${SUBJECT_ID}', 'kw ${uniq()}') returning id;`);
     cleanupKeywordIds.push(kw);
-    expect(psql(`select unit_id from subject_keywords where id = '${kw}';`)).toBe(unitId);
+    expect(psql(`select sync_status from curriculum_drive_folders where scope = 'keyword' and ref_id = '${kw}';`)).toBe("pending");
 
-    const foreignUnit = makeUnit(OTHER_SUBJECT_ID);
-    const err = psqlExpectError(
-      `insert into subject_keywords (subject_id, label, unit_id) values ('${SUBJECT_ID}', 'kw ${uniq()}', '${foreignUnit}');`
-    );
-    expect(err).toMatch(/같은 과목/);
+    psql(`update curriculum_drive_folders set drive_folder_id = 'f_${uniq()}', sync_status = 'created', applied_name = desired_name where scope = 'keyword' and ref_id = '${kw}';`);
+    psql(`update subject_keywords set label = '새 이름 ${uniq()}' where id = '${kw}';`);
+    expect(psql(`select sync_status from curriculum_drive_folders where scope = 'keyword' and ref_id = '${kw}';`)).toBe("rename_pending");
   });
 
-  it("단원이 없는 기존 키워드는 전환 대상으로만 보이고 자동으로 옮기지 않는다", () => {
+  it("단원을 만들어도 폴더 큐에 들지 않고, 예전 단원 행은 retired 로 남아 있다", () => {
     const unitId = makeUnit();
-    const kw = psql(
-      `insert into subject_keywords (subject_id, label) values ('${SUBJECT_ID}', 'kw ${uniq()}') returning id;`
-    );
-    cleanupKeywordIds.push(kw);
-    psql(`insert into subject_template_unit_keywords (unit_id, keyword_id) values ('${unitId}', '${kw}');`);
-
-    expect(
-      psql(`select linked_unit_count || '/' || coalesce(candidate_unit_id::text, '-')
-            from subject_keywords_needing_unit where keyword_id = '${kw}';`)
-    ).toBe(`1/${unitId}`);
-    expect(psql(`select unit_id is null from subject_keywords where id = '${kw}';`)).toBe("t");
+    expect(psql(`select count(*) from curriculum_drive_folders where scope = 'unit' and ref_id = '${unitId}';`)).toBe("0");
+    expect(psql(`select count(*) from curriculum_drive_folders where scope = 'unit' and sync_status <> 'retired';`)).toBe("0");
   });
-});
 
-// ------------------------------------------------------------ 폴더 큐
-describe("Drive 폴더 큐 — ALTON 이 기준, Drive 는 건드리지 않는다", () => {
-  it("단원·키워드가 생기면 pending 으로, 이름을 바꾸면 만든 폴더만 rename_pending 으로", () => {
-    const unitId = makeUnit();
-    expect(
-      psql(`select sync_status || ':' || desired_name from curriculum_drive_folders where scope = 'unit' and ref_id = '${unitId}';`)
-    ).toMatch(/^pending:단원 /);
-
-    // 아직 안 만든 폴더의 이름 변경은 pending 그대로, 새 이름만 반영.
-    psql(`update subject_template_units set unit_title = '새 이름 ${uniq()}' where id = '${unitId}';`);
-    expect(
-      psql(`select sync_status || ':' || desired_name from curriculum_drive_folders where scope = 'unit' and ref_id = '${unitId}';`)
-    ).toMatch(/^pending:새 이름 /);
-
-    // 만들어진 것으로 표시된 뒤 이름이 바뀌면 rename_pending.
-    psql(`update curriculum_drive_folders set drive_folder_id = 'f_${uniq()}', sync_status = 'created', applied_name = desired_name where scope = 'unit' and ref_id = '${unitId}';`);
-    psql(`update subject_template_units set unit_title = '또 다른 이름' where id = '${unitId}';`);
-    expect(
-      psql(`select sync_status from curriculum_drive_folders where scope = 'unit' and ref_id = '${unitId}';`)
-    ).toBe("rename_pending");
+  it("키워드는 같은 과목의 여러 단원에 연결될 수 있다(N:M 그대로)", () => {
+    const kw = psql(`insert into subject_keywords (subject_id, label) values ('${SUBJECT_ID}', 'kw ${uniq()}') returning id;`);
+    cleanupKeywordIds.push(kw);
+    const u1 = makeUnit(); const u2 = makeUnit();
+    psql(`insert into subject_template_unit_keywords (unit_id, keyword_id) values ('${u1}', '${kw}'), ('${u2}', '${kw}');`);
+    expect(psql(`select count(*) from subject_template_unit_keywords where keyword_id = '${kw}';`)).toBe("2");
   });
 
   it("선생님은 큐를 볼 수 없다(관리자 전용)", () => {

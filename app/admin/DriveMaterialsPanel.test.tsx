@@ -10,8 +10,7 @@ vi.mock("./curriculum-asset-actions", () => ({
   publishAssetDocAction: vi.fn(),
   registerLocalSampleAssetAction: vi.fn(),
   runCurriculumDriveFolderSyncAction: vi.fn(),
-  listSubjectKeywordUnitsAction: vi.fn(),
-  setKeywordUnitAction: vi.fn(),
+  listSubjectKeywordsAction: vi.fn(),
 }));
 
 const subjects: AdminSubject[] = [
@@ -28,32 +27,26 @@ const subjects: AdminSubject[] = [
 
 beforeEach(() => {
   vi.clearAllMocks();
-  vi.mocked(actions.listSubjectKeywordUnitsAction).mockResolvedValue([
-    { keywordId: "k1", label: "추론", unitId: "u1", linkedUnitCount: 1, candidateUnitId: "u1" },
-    { keywordId: "k2", label: "어휘", unitId: null, linkedUnitCount: 1, candidateUnitId: "u1" },
+  vi.mocked(actions.listSubjectKeywordsAction).mockResolvedValue([
+    { keywordId: "k1", label: "추론" },
+    { keywordId: "k2", label: "어휘" },
   ]);
 });
 
 async function pickKeyword() {
   fireEvent.change(screen.getByLabelText("과목"), { target: { value: "s1" } });
-  await waitFor(() => expect(actions.listSubjectKeywordUnitsAction).toHaveBeenCalledWith("s1"));
-  fireEvent.change(screen.getByLabelText("단원"), { target: { value: "u1" } });
-  await waitFor(() => expect((screen.getByLabelText("키워드") as HTMLSelectElement).options.length).toBe(2));
+  await waitFor(() => expect(actions.listSubjectKeywordsAction).toHaveBeenCalledWith("s1"));
+  await waitFor(() => expect((screen.getByLabelText("키워드") as HTMLSelectElement).options.length).toBe(3));
   fireEvent.change(screen.getByLabelText("키워드"), { target: { value: "k1" } });
 }
 
 describe("Drive 자료 패널", () => {
-  it("단원을 고르면 그 단원의 키워드만 후보에 남고, 단원 없는 키워드는 지정 표에 뜬다", async () => {
-    vi.mocked(actions.setKeywordUnitAction).mockResolvedValue({ ok: true });
+  it("과목을 고르면 그 과목의 키워드가 전부 후보다 — 단원은 여기서 고르지 않는다", async () => {
     render(<DriveMaterialsPanel subjects={subjects} />);
     await pickKeyword();
-    expect(screen.getByTestId("keywords-needing-unit")).toHaveTextContent("단원이 정해지지 않은 키워드 1개");
-    fireEvent.change(screen.getByLabelText("어휘 단원"), { target: { value: "u1" } });
-    await waitFor(() => expect(actions.setKeywordUnitAction).toHaveBeenCalledWith("k2", "u1"));
-    await waitFor(() => expect(screen.queryByTestId("keywords-needing-unit")).not.toBeInTheDocument());
-    // 단원을 정한 키워드는 곧바로 그 단원의 후보에 들어온다.
     const options = Array.from((screen.getByLabelText("키워드") as HTMLSelectElement).options).map((o) => o.textContent);
     expect(options).toEqual(["키워드 고르기…", "추론", "어휘"]);
+    expect(screen.queryByLabelText("단원")).not.toBeInTheDocument();
   });
 
   it("불러오기는 키워드 폴더의 파일을 보여주고, 등록된 것은 공개 버튼·안 된 것은 등록 버튼", async () => {
@@ -114,11 +107,11 @@ describe("Drive 자료 패널", () => {
       state: "ok",
       driveName: "ALTON Curriculum",
       pendingAfter: 3,
-      outcome: { created: 2, renamed: 1, skipped: [{ rowId: "r", reason: "x" }], failed: [], dryRun: true },
+      outcome: { created: 2, renamed: 1, skipped: [{ rowId: "r", reason: "x" }], failed: [], dryRun: true, missingRecreated: 1 },
     });
     render(<DriveMaterialsPanel subjects={subjects} />);
     fireEvent.click(screen.getByRole("button", { name: "폴더 동기화 실행" }));
-    await waitFor(() => expect(screen.getByTestId("folder-sync-result")).toHaveTextContent("연결됨: ALTON Curriculum · 계획만(실제 쓰기 꺼짐) — 만들 폴더 2개 · 이름 변경 1개 · 건너뜀 1개 · 실패 0개 · 남은 대기 3개"));
+    await waitFor(() => expect(screen.getByTestId("folder-sync-result")).toHaveTextContent("연결됨: ALTON Curriculum · 계획만(실제 쓰기 꺼짐) — 만들 폴더 2개 · 이름 변경 1개 · 건너뜀 1개 · 실패 0개 · 남은 대기 3개 · Drive 에서 사라진 폴더 1개는 다시 만들 대상"));
   });
 
   it("드라이브에 접근하지 못하면 그 사유를 보여준다 — 쓰기를 켜기 전에 알 수 있어야 한다", async () => {
