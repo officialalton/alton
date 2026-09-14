@@ -34,6 +34,15 @@ export type SessionProblem = {
    * 그대로 남긴다** — 학생이 풀었다는 사실 자체는 사라지면 안 된다.
    */
   preservedUnavailable?: boolean;
+  /**
+   * 아직 고정되지 않은 **예정** 문제다(수업 시작 전 미리보기).
+   *
+   * 2026-09-14 제품 오너: "'수업 준비' 들어가면 배정된 교재는 보이는데 배정된 문제는
+   * 안 보임." 교재는 예정 구성으로 내려가는데(loadPlannedMaterialData) 문제는 매니페스트
+   * 만 읽어 시작 전엔 늘 비어 있었다. 예정 문제는 읽기만 한다 — 풀이·제출은 수업에서.
+   * 정답·해설은 unit_preview_for_viewer 응답에 담기지 않으므로 여기서도 없다.
+   */
+  planned?: boolean;
 };
 
 export type SessionProblemViewer = {
@@ -120,4 +129,61 @@ export async function loadSessionProblems(
       ...(preservedUnavailable ? { preservedUnavailable: true } : {}),
     };
   });
+}
+
+
+// -------------------------------------------------------------------------
+// 수업 시작 전 — 예정 문제 미리보기
+// -------------------------------------------------------------------------
+// 교재의 loadPlannedMaterialData 와 같은 자리다: 매니페스트가 비어 있는 **시작 전**
+// 수업에서만 쓰이고, 시작되면 고정본이 우선이라 쓰이지 않는다. 내용 고르기와 범위
+// 판단은 unit_preview_for_viewer 가 한다 — 학생·보호자 화면과 같은 함수라 두 곳이
+// 다른 것을 보여줄 수 없다.
+
+type PlannedPreviewProblem = {
+  problemId: string;
+  passage: string | null;
+  options: string[] | null;
+};
+
+/** unit_preview_for_viewer 의 문제 목록을 화면 모양으로 옮긴다. 정답·해설·풀이 상태는 없다. */
+export function toPlannedSessionProblems(
+  problems: PlannedPreviewProblem[] | null | undefined
+): SessionProblem[] {
+  return (problems ?? []).map((p, index) => ({
+    number: index + 1,
+    problemId: p.problemId,
+    passage: p.passage ?? null,
+    options: Array.isArray(p.options) ? p.options.map(String) : [],
+    difficulty: null,
+    correctIndex: null,
+    explanation: null,
+    attempts: 0,
+    solved: false,
+    planned: true,
+  }));
+}
+
+export async function loadPlannedProblems(
+  supabase: SupabaseClient,
+  sessionId: string
+): Promise<SessionProblem[]> {
+  const { data: link } = await supabase
+    .from("session_curriculum_units")
+    .select("overlay_unit_id")
+    .eq("session_id", sessionId)
+    .eq("role", "primary")
+    .maybeSingle();
+  const overlayUnitId = link?.overlay_unit_id as string | undefined;
+  if (!overlayUnitId) return [];
+
+  const { data, error } = await supabase.rpc("unit_preview_for_viewer", {
+    p_overlay_unit_id: overlayUnitId,
+  });
+  if (error) {
+    console.error(JSON.stringify({ event: "planned_problems_failed", message: error.message }));
+    return [];
+  }
+  const preview = data as { problems?: PlannedPreviewProblem[] } | null;
+  return toPlannedSessionProblems(preview?.problems);
 }

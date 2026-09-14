@@ -47,9 +47,15 @@ describe("수업에서 들어온 준비 화면", () => {
     expect(screen.getByText(/지훈 학생 · SAT Math/)).toBeInTheDocument();
   });
 
-  it("수업 열기로 세션뷰에 들어간다(고정과 무관하다)", () => {
+  it("시작 전에는 세션뷰로 건너뛰는 버튼이 없고, 시작한 수업이면 '수업 기록'으로 간다", () => {
     render(<LessonPrepScreen context={linked} />);
-    fireEvent.click(screen.getByText("수업 열기"));
+    expect(screen.queryByText("수업 열기")).not.toBeInTheDocument();
+    expect(screen.queryByText("수업 기록 →")).not.toBeInTheDocument();
+  });
+
+  it("이미 시작한 수업은 '수업 기록'으로 세션뷰에 들어간다", () => {
+    render(<LessonPrepScreen context={{ ...linked, frozen: true }} />);
+    fireEvent.click(screen.getByText("수업 기록 →"));
     expect(pushMock).toHaveBeenCalledWith("/session/sess-1");
   });
 

@@ -303,12 +303,18 @@ export default function TeacherLessonScheduleTab({
               수업 준비
             </button>
           )}
-          <button
-            onClick={() => router.push(`/session/${lesson.sessionId}`)}
-            className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-grey-100 text-ink"
-          >
-            수업 열기
-          </button>
+          {/* 2026-09-14 제품 오너 — '수업 열기 / 회차 준비 / 세션 준비'를 '수업 준비'
+              하나로 통일한다. 시작 전에는 위의 '수업 준비'만 있고(그 화면에서 내용을
+              보고 '수업 시작'을 누른다), 진행 중이면 '수업 입장', 지난 수업은 '수업
+              기록'으로 세션뷰에 들어간다. */}
+          {(lesson.finalStatus === "live" || isPast) && (
+            <button
+              onClick={() => router.push(`/session/${lesson.sessionId}`)}
+              className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-grey-100 text-ink"
+            >
+              {lesson.finalStatus === "live" ? "수업 입장" : "수업 기록"}
+            </button>
+          )}
           {lesson.googleMeetLink && (
             // 2026-09-09(UAT 지적): "수업 시작"은 이미 진행중(live)으로 전환된
             // 뒤에는 더 보이지 않고 "Meet 입장" 링크만 남는데, 지금까지 이

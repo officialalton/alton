@@ -82,7 +82,7 @@ describe("TeacherLessonScheduleTab", () => {
     expect(screen.getByText(/120분/)).toBeInTheDocument();
   });
 
-  it("2026-09-09(UAT 지적): '수업 열기'는 각 수업 카드의 정확한 sessionId로만 세션뷰에 진입하고, 다른 수업으로 이동하지 않는다", () => {
+  it("'수업 준비'는 각 수업 카드의 정확한 sessionId로만 진입하고, 다른 수업으로 이동하지 않는다", () => {
     const otherLesson: TeacherLessonScheduleItem = {
       ...lesson,
       reservationId: "r2",
@@ -104,17 +104,19 @@ describe("TeacherLessonScheduleTab", () => {
       />
     );
 
-    const prepButtons = screen.getAllByText("수업 열기");
+    // 2026-09-14 — 시작 전 수업에는 '수업 준비' 하나만 있다. '수업 열기'는 없다.
+    expect(screen.queryByText("수업 열기")).not.toBeInTheDocument();
+    const prepButtons = screen.getAllByText("수업 준비");
     expect(prepButtons).toHaveLength(2);
 
     fireEvent.click(prepButtons[1]);
-    expect(pushMock).toHaveBeenCalledWith(`/session/${otherLesson.sessionId}`);
-    expect(pushMock).not.toHaveBeenCalledWith(`/session/${lesson.sessionId}`);
+    expect(pushMock).toHaveBeenCalledWith(`/teacher/session-prep/${otherLesson.sessionId}`);
+    expect(pushMock).not.toHaveBeenCalledWith(`/teacher/session-prep/${lesson.sessionId}`);
 
     pushMock.mockClear();
     fireEvent.click(prepButtons[0]);
-    expect(pushMock).toHaveBeenCalledWith(`/session/${lesson.sessionId}`);
-    expect(pushMock).not.toHaveBeenCalledWith(`/session/${otherLesson.sessionId}`);
+    expect(pushMock).toHaveBeenCalledWith(`/teacher/session-prep/${lesson.sessionId}`);
+    expect(pushMock).not.toHaveBeenCalledWith(`/teacher/session-prep/${otherLesson.sessionId}`);
   });
 
   it("P2/P3 2단계: 예정 수업에서만 '수업 준비'가 보이고, 그 수업의 준비 화면으로 이동한다", () => {

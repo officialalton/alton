@@ -51,12 +51,16 @@ export default function LessonPrepScreen({ context }: { context: SessionPrepCont
             {when ? ` · ${when}` : ""}
           </div>
           <div className="flex flex-wrap items-center gap-2 mt-2">
-            <button
-              onClick={() => router.push(`/session/${context.sessionId}`)}
-              className="text-[12.5px] font-bold px-4 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink"
-            >
-              수업 열기
-            </button>
+            {/* 2026-09-14 — 시작 전에는 여기서 다른 화면으로 건너뛰지 않는다(확정 6번).
+                이미 시작한 수업이면 그 기록으로 간다. */}
+            {context.frozen && (
+              <button
+                onClick={() => router.push(`/session/${context.sessionId}`)}
+                className="text-[12.5px] font-bold px-4 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink"
+              >
+                수업 기록 →
+              </button>
+            )}
             {context.frozen && (
               <span className="text-[11.5px] text-grey-500">
                 이미 시작한 수업입니다 — 준비 내용은 시작 시점으로 고정되었습니다.

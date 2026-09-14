@@ -273,3 +273,22 @@ describe("ProblemsPanel — 문제를 보면서 풀이판을 연다", () => {
     expect(await screen.findByText("이 풀이판을 열 권한이 없습니다.")).toBeInTheDocument();
   });
 });
+
+
+// 2026-09-14 — 수업 시작 전 예정 문제는 읽기만 한다.
+describe("수업 전 예정 문제 미리보기", () => {
+  it("지문·선택지는 보이고 풀이판·제출·정답은 없다", () => {
+    const planned: SessionProblem = { ...unsolved, planned: true };
+    render(
+      <ProblemsPanel sessionId="s1" studentId="stu" problems={[planned]} viewerRole="student" />
+    );
+    expect(screen.getByText("첫 번째 지문")).toBeInTheDocument();
+    expect(screen.getByText("가")).toBeInTheDocument();
+    expect(screen.getByText("수업 전 미리보기")).toBeInTheDocument();
+    expect(screen.getByText(/풀이와 제출은 수업에서 합니다/)).toBeInTheDocument();
+    expect(screen.queryByText(/풀이판 열기/)).not.toBeInTheDocument();
+    expect(screen.queryByText("정답")).not.toBeInTheDocument();
+    expect(screen.queryByText(/풀이를 제출하면/)).not.toBeInTheDocument();
+    expect(openProblemWork).not.toHaveBeenCalled();
+  });
+});

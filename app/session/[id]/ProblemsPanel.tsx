@@ -111,7 +111,13 @@ export default function ProblemsPanel({
                   (p.solved ? "bg-green/10 text-green" : "bg-grey-100 text-grey-500")
                 }
               >
-                {p.solved ? "제출함" : p.attempts > 0 ? "푸는 중" : "아직 풀지 않음"}
+                {p.planned
+                  ? "수업 전 미리보기"
+                  : p.solved
+                    ? "제출함"
+                    : p.attempts > 0
+                      ? "푸는 중"
+                      : "아직 풀지 않음"}
               </span>
               {p.attempts > 1 && (
                 <span className="text-[10.5px] font-semibold text-grey-500">{p.attempts}번 풀어봄</span>
@@ -171,6 +177,13 @@ export default function ProblemsPanel({
               </div>
             )}
 
+            {p.planned ? (
+              // 2026-09-14 — 시작 전에는 읽기만 한다. 풀이판·제출은 수업에서 열린다.
+              <p className="text-[12px] text-grey-500">
+                수업 시작 전 미리보기입니다. 풀이와 제출은 수업에서 합니다.
+              </p>
+            ) : (
+              <>
             {!p.solved && p.correctIndex === null && isStudent && (
               <p className="text-[12px] text-grey-500 mb-4">
                 풀이를 제출하면 정답과 해설이 열립니다.
@@ -285,6 +298,8 @@ export default function ProblemsPanel({
                   }
                 />
               </div>
+            )}
+              </>
             )}
           </article>
         );

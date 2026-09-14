@@ -18,7 +18,7 @@ import { loadHomeworkItems } from "./homework-data";
 import { loadDocLinks, parseWhiteboardStrokes } from "./scratchpad-data";
 import { loadProblemLog } from "./problemlog-data";
 import { loadNormalizedSession } from "./session-source-data";
-import { loadSessionProblems } from "./session-problem-data";
+import { loadPlannedProblems, loadSessionProblems } from "./session-problem-data";
 import { loadSessionLessonContext } from "./session-context-data";
 import {
   loadComposition,
@@ -134,13 +134,19 @@ export default async function SessionPage({
 
   // P3 4단계 — 수업 시작 시 고정된 문제들. 정답·해설은 볼 자격이 있을 때만
   // 채워진다(학생은 자기 풀이 제출 뒤, 보호자는 자녀에게 열리는 시점과 동일).
-  const sessionProblems =
+  const pinnedProblems =
     session.source === "v3"
       ? await loadSessionProblems(supabase, session.id, {
           canSeeAnswers: profile?.role === "teacher" || profile?.role === "admin",
           studentId: session.studentId,
         })
       : [];
+  // 시작 전 수업에 고정된 문제가 없으면 **예정** 문제를 보여준다 — 교재와 같은 규칙
+  // (shouldFallBackToPlannedMaterial). 시작·완료된 수업에는 끼워 넣지 않는다.
+  const sessionProblems =
+    pinnedProblems.length === 0 && showPlannedInstead
+      ? await loadPlannedProblems(supabase, session.id)
+      : pinnedProblems;
 
   // P3 7단계 — 교재 위 두 레이어를 각각 따로 재구성한다. 화면에서 각자
   // 켜고 끌 수 있어야 하므로 섞어서 내려보내지 않는다.

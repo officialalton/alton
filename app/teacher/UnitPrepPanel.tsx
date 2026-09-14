@@ -501,7 +501,7 @@ export default function UnitPrepPanel({
                       onClick={() => router.push(`/teacher/session-prep/${l.sessionId}`)}
                       className="text-[11.5px] font-bold text-ink"
                     >
-                      연결됨 · 수업 열기 →
+                      연결됨 · 수업 준비 →
                     </button>
                   ) : (
                     <button
