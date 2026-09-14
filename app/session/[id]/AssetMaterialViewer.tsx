@@ -5,7 +5,7 @@ import type { MaterialAsset } from "./material-data";
 import type { MaterialLayerRole } from "./MaterialAnnotationLayers";
 import { getAssetVersionUrlAction } from "@/app/materials/asset-actions";
 import { nextPosition, pageCountOf, prevPosition, type AssetPosition } from "./asset-navigation";
-import PdfPageCanvas from "./PdfMaterialViewer";
+import PdfPageCanvas, { PdfPageThumbnail } from "./PdfMaterialViewer";
 import VideoMaterialPlayer from "./VideoMaterialPlayer";
 import PdfPageAnnotationLayer, { type PdfPageAnnotationHandle } from "./PdfPageAnnotationLayer";
 
@@ -152,23 +152,39 @@ export default function AssetMaterialViewer({
         </div>
         {assets.map((a, i) => {
           const active = i === pos.assetIndex;
+          const signedFor = urls[a.versionId];
           return (
-            <button
-              key={a.versionId}
-              onClick={() => void guardedGo({ assetIndex: i, page: 1 })}
-              className={
-                "md:w-full text-left px-2.5 py-2 rounded-lg text-[13px] mb-0.5 whitespace-nowrap md:whitespace-normal flex-shrink-0 " +
-                (active ? "bg-red-bg text-red font-bold" : "text-ink hover:bg-grey-100")
-              }
-            >
-              {a.kind === "video" ? "▶ " : "📄 "}
-              {a.title}
-              {a.kind === "pdf" && (
-                <span className="text-[11px] text-grey-500 ml-1.5">
-                  {active ? `${pos.page}/${pageCountOf(a)}쪽` : `${pageCountOf(a)}쪽`}
-                </span>
+            <div key={a.versionId} className="flex-shrink-0 md:block">
+              <button
+                onClick={() => void guardedGo({ assetIndex: i, page: 1 })}
+                className={
+                  "md:w-full text-left px-2.5 py-2 rounded-lg text-[13px] mb-0.5 whitespace-nowrap md:whitespace-normal " +
+                  (active ? "text-red font-bold" : "text-ink hover:bg-grey-100")
+                }
+              >
+                {a.kind === "video" ? "▶ " : "📄 "}
+                {a.title}
+                {a.kind === "pdf" && (
+                  <span className="text-[11px] text-grey-500 ml-1.5">{pageCountOf(a)} pages</span>
+                )}
+              </button>
+              {/* 현재 PDF 자료는 페이지 미리보기로 이동한다(보이는 것만 그린다). */}
+              {active && a.kind === "pdf" && signedFor && (
+                <div className="hidden md:block pl-1 pr-1 mb-2" data-testid="pdf-thumbnails">
+                  {Array.from({ length: pageCountOf(a) }, (_, k) => k + 1).map((n) => (
+                    <PdfPageThumbnail
+                      key={n}
+                      url={signedFor.url}
+                      page={n}
+                      width={150}
+                      active={n === pos.page}
+                      label={`Page ${n}`}
+                      onSelect={() => void guardedGo({ assetIndex: i, page: n })}
+                    />
+                  ))}
+                </div>
               )}
-            </button>
+            </div>
           );
         })}
       </nav>
@@ -195,7 +211,7 @@ export default function AssetMaterialViewer({
                   inputMode="numeric"
                   className="w-12 text-center text-[12px] border-[1.5px] border-grey-200 rounded px-1 py-0.5"
                 />
-                <span>/ {total}쪽</span>
+                <span>/ {total}</span>
               </form>
             )}
             {asset.kind === "video" && <span className="text-grey-500 font-semibold ml-2">영상</span>}

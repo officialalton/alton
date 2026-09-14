@@ -57,6 +57,10 @@ export default function ProblemsPanel({
       return next;
     });
   const answerShown = (p: SessionProblem) => !isTeacherLike || revealed.has(p.problemId);
+  // 2026-09-14 UAT — 문제는 한 번에 하나(슬라이드). 왼쪽 목차와 이전/다음으로 오간다.
+  const [current, setCurrent] = useState(0);
+  const safeCurrent = Math.min(current, Math.max(0, problems.length - 1));
+  const visibleProblems = problems.length ? [problems[safeCurrent]] : [];
 
   async function openBoard(problemId: string, newAttempt = false) {
     setBusy(true);
@@ -107,15 +111,17 @@ export default function ProblemsPanel({
         <div className="hidden md:block text-[10.5px] font-extrabold text-grey-300 uppercase tracking-wider px-2 mb-1">
           문제 목차
         </div>
-        {problems.map((p) => (
+        {problems.map((p, idx) => (
           <button
             key={p.problemId}
-            onClick={() =>
-              document.getElementById(`problem-${p.problemId}`)?.scrollIntoView({ behavior: "smooth", block: "start" })
-            }
+            onClick={() => {
+              setCurrent(idx);
+              setOpenId(null);
+            }}
+            aria-current={idx === safeCurrent ? "true" : undefined}
             className={
               "md:w-full text-left px-2.5 py-1.5 rounded-lg text-[13px] mb-0.5 whitespace-nowrap md:whitespace-normal flex-shrink-0 flex items-center gap-2 " +
-              (openId === p.problemId ? "bg-red-bg text-red font-bold" : "text-ink hover:bg-grey-100")
+              (idx === safeCurrent ? "bg-red-bg text-red font-bold" : "text-ink hover:bg-grey-100")
             }
           >
             <span>문제 {p.number}</span>
@@ -128,7 +134,37 @@ export default function ProblemsPanel({
     <div className="max-w-[760px] mx-auto px-5 sm:px-8 py-7 md:col-start-2">
       {error && <p className="text-[12.5px] text-red mb-3">{error}</p>}
 
-      {problems.map((p) => {
+      <div className="flex items-center justify-between mb-3">
+        <span className="text-[12.5px] text-grey-500">
+          {safeCurrent + 1} / {problems.length}
+        </span>
+        <div className="flex gap-1.5">
+          <button
+            type="button"
+            disabled={safeCurrent === 0}
+            onClick={() => {
+              setCurrent((c) => Math.max(0, c - 1));
+              setOpenId(null);
+            }}
+            className="text-[12px] font-bold px-3 py-1 rounded border border-grey-200 disabled:opacity-40"
+          >
+            ← 이전 문제
+          </button>
+          <button
+            type="button"
+            disabled={safeCurrent >= problems.length - 1}
+            onClick={() => {
+              setCurrent((c) => Math.min(problems.length - 1, c + 1));
+              setOpenId(null);
+            }}
+            className="text-[12px] font-bold px-3 py-1 rounded border border-grey-200 disabled:opacity-40"
+          >
+            다음 문제 →
+          </button>
+        </div>
+      </div>
+
+      {visibleProblems.map((p) => {
         const isOpen = openId === p.problemId;
         const pickedChoice = isOpen ? (board?.submitted ? board.submittedChoiceIndex : answerChoice) : null;
         return (

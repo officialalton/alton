@@ -488,13 +488,6 @@ export default function SessionShell({
         stateLabel={state === "live" ? "수업 중" : state === "completed" ? "지난 수업" : "수업 전"}
       />
 
-      {!writesEnabled && (
-        <div className="px-6 py-2 text-[12.5px] text-amber-800 bg-amber-50 border-b border-amber-200">
-          {/* 기술적 배경(레거시 테이블 참조)이 아니라 "지금 무엇을 할 수
-              있는가"로 쓴다. */}
-          이 수업에서는 필기만 저장됩니다. 교재·과제·단어장은 읽기만 할 수 있어요.
-        </div>
-      )}
       {activeTab === "material" && materialNotice && (
         <div className="px-6 py-2.5 text-[12.5px] text-grey-500 bg-grey-100 border-b-[1.5px] border-grey-200">
           {materialNotice}

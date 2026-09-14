@@ -126,7 +126,9 @@ describe("ProblemsPanel — 문제를 보면서 풀이판을 연다", () => {
 
   it("문제마다 자기 풀이판을 연다 — 다른 문제의 풀이판을 열지 않는다", async () => {
     renderPanel([unsolved, second]);
-    fireEvent.click(screen.getAllByText("✏️ 풀이판 열기")[1]);
+    // 슬라이드 — 한 번에 한 문제. 목차에서 2번으로 넘어간 뒤 그 풀이판을 연다.
+    fireEvent.click(screen.getByRole("button", { name: /문제 2/ }));
+    fireEvent.click(screen.getByText("✏️ 풀이판 열기"));
     await waitFor(() =>
       expect(openProblemWork).toHaveBeenCalledWith(
         expect.objectContaining({ problemId: "p2", sessionId: "s1", studentId: "stu1" })
@@ -308,10 +310,13 @@ describe("교사 화면의 정답·해설 토글과 문제 목차", () => {
     expect(screen.queryByText("정답")).not.toBeInTheDocument();
     expect(screen.queryByText("해설 A")).not.toBeInTheDocument();
 
-    fireEvent.click(screen.getAllByRole("button", { name: "정답·해설 보기" })[0]);
+    fireEvent.click(screen.getByRole("button", { name: "정답·해설 보기" }));
     expect(screen.getByText("정답")).toBeInTheDocument();
     expect(screen.getByText("해설 A")).toBeInTheDocument();
+    // 다음 문제로 넘어가면 그 문제는 아직 접혀 있다.
+    fireEvent.click(screen.getByRole("button", { name: "다음 문제 →" }));
     expect(screen.queryByText("해설 B")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "← 이전 문제" }));
 
     fireEvent.click(screen.getByRole("button", { name: "정답·해설 숨기기" }));
     expect(screen.queryByText("해설 A")).not.toBeInTheDocument();
@@ -332,5 +337,22 @@ describe("교사 화면의 정답·해설 토글과 문제 목차", () => {
     expect(nav).toHaveTextContent("문제 1");
     expect(nav).toHaveTextContent("문제 2");
     expect(nav).toHaveTextContent("제출");
+  });
+});
+
+describe("문제 슬라이드", () => {
+  it("한 번에 한 문제만 보이고, 이전/다음과 목차로 오간다", () => {
+    renderPanel([unsolved, second], "teacher");
+    expect(screen.getByText("첫 번째 지문")).toBeInTheDocument();
+    expect(screen.queryByText(second.passage!)).not.toBeInTheDocument();
+    expect(screen.getByText("1 / 2")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "다음 문제 →" }));
+    expect(screen.getByText(second.passage!)).toBeInTheDocument();
+    expect(screen.queryByText("첫 번째 지문")).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "다음 문제 →" })).toBeDisabled();
+
+    fireEvent.click(screen.getByRole("button", { name: /문제 1/ }));
+    expect(screen.getByText("첫 번째 지문")).toBeInTheDocument();
   });
 });
