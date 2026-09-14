@@ -167,6 +167,40 @@ describe("관리자 기준본 문제 자동 구성", () => {
     expect(countOf(unitId)).toBe("2");
   });
 
+  // 2026-09-14 UAT: "키워드 붙으면 커리에 다 담기게 되어 있는데, 기본 캡을 두면 좋을 듯 해. 20개로."
+  it("개수 조건이 없으면 자동분은 기본 20개까지만 들어온다 — 만든 순서대로", () => {
+    const kw = makeKeyword();
+    const ids: string[] = [];
+    for (let i = 0; i < 23; i++) ids.push(makeProblem(kw));
+    const unitId = makeCatalogUnit([kw]);
+    expect(countOf(unitId)).toBe("20");
+    // 뒤에 만든 3개가 밀린다.
+    const inUnit = psql(
+      `select string_agg(problem_id::text, ',' order by position)
+       from subject_template_unit_problems where unit_id = '${unitId}';`
+    );
+    expect(inUnit).toBe(ids.slice(0, 20).join(","));
+    // 고를 수 있는 수는 그대로 23 — 캡은 담는 것만 막는다.
+    expect(psql(`select available from sync_catalog_unit_auto_problems('${unitId}');`)).toBe("23");
+    // 사람이 직접 담은 것은 캡에 세지 않는다.
+    psql(
+      `insert into subject_template_unit_problems (unit_id, problem_id, position, source)
+       values ('${unitId}', '${ids[22]}', 999, 'manual');`
+    );
+    psql(`select recompose_unit('catalog', '${unitId}');`);
+    expect(countOf(unitId)).toBe("21");
+  });
+
+  it("개수 조건을 정하면 그 수가 상한이다 — 20보다 크게도 잡을 수 있다", () => {
+    const kw = makeKeyword();
+    for (let i = 0; i < 22; i++) makeProblem(kw);
+    const unitId = makeCatalogUnit([]);
+    setCriteria(unitId, `null, null, 21`);
+    psql(`insert into subject_template_unit_keywords (unit_id, keyword_id) values ('${unitId}', '${kw}');`);
+    psql(`select recompose_unit('catalog', '${unitId}');`);
+    expect(countOf(unitId)).toBe("21");
+  });
+
   it("고를 수 있는 수를 돌려준다 — 모자라도 채우지 않는다", () => {
     const kw = makeKeyword();
     makeProblem(kw);

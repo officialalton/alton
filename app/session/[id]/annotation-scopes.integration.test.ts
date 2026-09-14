@@ -412,15 +412,17 @@ describe("③ 문제 풀이 화이트보드 — 풀이판 단위로 분리된다
     });
 
     it("과거 비공개 기록은 보존되고, 자동으로 공개되지 않는다", () => {
+      // 실행마다 다른 표식 — 중단된 이전 실행의 잔여 행이 전역 count 를 흔들지 않게.
+      const legacyMark = `legacy-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
       // 정책 변경 전 기록을 직접 심는다(이제 앱은 이 범위로 쓰지 않는다).
       psql(
         `insert into session_annotation_events (session_id, author_id, event_type, payload, scope, curriculum_doc_id, owner_student_id)
-         values ('${sessionId}', '${STUDENT_ID}', 'stroke', '{"legacy":true}'::jsonb, 'student_private', '${docId}', '${STUDENT_ID}');`
+         values ('${sessionId}', '${STUDENT_ID}', 'stroke', '{"legacy":"${legacyMark}"}'::jsonb, 'student_private', '${docId}', '${STUDENT_ID}');`
       );
       const legacyCount = (who: string) =>
         asUser(
           who,
-          `select count(*) from session_annotation_events where scope = 'student_private' and payload->>'legacy' = 'true';`
+          `select count(*) from session_annotation_events where scope = 'student_private' and payload->>'legacy' = '${legacyMark}';`
         );
       // 쓴 본인은 계속 본다.
       expect(legacyCount(STUDENT_ID)).toBe("1");
@@ -432,7 +434,7 @@ describe("③ 문제 풀이 화이트보드 — 풀이판 단위로 분리된다
       if (guardianId) expect(legacyCount(guardianId)).toBe("0");
       // 삭제되지도 않는다.
       expect(
-        psql(`select count(*) from session_annotation_events where payload->>'legacy' = 'true';`)
+        psql(`select count(*) from session_annotation_events where payload->>'legacy' = '${legacyMark}';`)
       ).toBe("1");
     });
 
@@ -482,9 +484,10 @@ describe("③ 문제 풀이 화이트보드 — 풀이판 단위로 분리된다
   it("제출한 서술 답안·필기 경계는 바뀌지 않고, 객관식 선택은 채점 전까지만 바뀐다(2026-09-14)", () => {
     const w = work(freshProblem("submit-immutable"));
     psql(`select submit_problem_attempt('${w}', '${STUDENT_ID}', 1, null);`);
-    expect(
-      psqlExpectError(`update session_problem_work set submitted_text = '바꿈' where id = '${w}';`)
-    ).toMatch(/이미 제출한 풀이입니다/);
+    // 2026-09-14(20261360): 글 답(서술형·SPR)도 채점 전까지는 고칠 수 있다 — 쓰는 대로 저장되는 형식이다.
+    psql(`update session_problem_work set submitted_text = '바꿈' where id = '${w}';`);
+    expect(psql(`select submitted_text from session_problem_work where id = '${w}';`)).toBe("바꿈");
+    // 제출 시점은 한 번이다.
     expect(
       psqlExpectError(`update session_problem_work set submitted_at = now() where id = '${w}';`)
     ).toMatch(/이미 제출한 풀이입니다/);
@@ -495,6 +498,9 @@ describe("③ 문제 풀이 화이트보드 — 풀이판 단위로 분리된다
     asUser(TEACHER_ID, `select grade_problem_attempt('${w}', 'incorrect', null);`);
     expect(
       psqlExpectError(`update session_problem_work set submitted_choice_index = 0 where id = '${w}';`)
+    ).toMatch(/채점이 끝난 문제의 답은 바꿀 수 없습니다/);
+    expect(
+      psqlExpectError(`update session_problem_work set submitted_text = '또 바꿈' where id = '${w}';`)
     ).toMatch(/채점이 끝난 문제의 답은 바꿀 수 없습니다/);
   });
 

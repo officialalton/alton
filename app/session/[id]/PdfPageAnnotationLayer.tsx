@@ -437,10 +437,11 @@ export default forwardRef<
             top: `${(textDraft.y / height) * 100}%`,
             fontSize: `${(TEXT_SIZE * (ownCanvas.current?.getBoundingClientRect().width ?? width)) / width}px`,
             lineHeight: TEXT_LINE_HEIGHT,
-            minWidth: "12ch",
-            maxWidth: "60%",
+            // 2026-09-14 UAT: 기본 상자가 너무 작았다(가로 12ch·1줄) — 가로 두 배, 세로 최소 5줄.
+            minWidth: "24ch",
+            maxWidth: "70%",
           }}
-          rows={1}
+          rows={Math.max(5, textDraft.value.split("\n").length + 1)}
         />
       )}
 

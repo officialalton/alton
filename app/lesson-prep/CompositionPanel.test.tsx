@@ -4,6 +4,8 @@ import CompositionPanel from "./CompositionPanel";
 import * as actions from "./actions";
 import type { UnitComposition } from "@/lib/unit-composition";
 
+vi.mock("@/app/session/[id]/problem-image-actions", () => ({ getProblemImageUrlAction: vi.fn() }));
+
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: vi.fn(), replace: vi.fn(), refresh: vi.fn() }),
 }));
@@ -157,6 +159,37 @@ describe("수업 준비 구성 패널", () => {
     // 2026-09-13 지시 3번: 세 계층 모두 여기서 담고 뺀다 — 미리보기 전용이 아니다.
     expect(screen.getAllByText("담기").length).toBe(2);
     expect(screen.getByText(/아래 계층의 기본값이 됩니다/)).toBeInTheDocument();
+  });
+
+  // 2026-09-14 UAT: "문제를 클릭하면 문제를 볼 수 있어야 될 거 같아 간략하게라도"
+  it("문제를 누르면 지문·선택지 미리보기가 펼쳐지고, 다시 누르면 접힌다", () => {
+    render(
+      <CompositionPanel
+        composition={makeComposition()}
+        pickable={[]}
+        problems={[
+          {
+            problemId: "p1",
+            label: "지문 첫 줄…",
+            difficulty: "medium",
+            format: "mc",
+            preview: { passage: "지문 첫 줄 전체 내용입니다.", options: ["하나", "둘"], figure: null },
+          },
+          { problemId: "p2", label: "미리보기 없는 문제", difficulty: null, format: "mc" },
+        ]}
+      />
+    );
+    expect(screen.queryByTestId("problem-preview")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByText("지문 첫 줄…"));
+    expect(screen.getByText("지문 첫 줄 전체 내용입니다.")).toBeInTheDocument();
+    expect(screen.getByText("하나")).toBeInTheDocument();
+    expect(screen.getByText("둘")).toBeInTheDocument();
+    // 다른 문제를 누르면 그쪽으로 옮겨 간다 — 공개 버전이 없으면 이유를 말한다.
+    fireEvent.click(screen.getByText("미리보기 없는 문제"));
+    expect(screen.queryByText("지문 첫 줄 전체 내용입니다.")).not.toBeInTheDocument();
+    expect(screen.getByText(/미리보기를 보여줄 수 없습니다/)).toBeInTheDocument();
+    fireEvent.click(screen.getByText("미리보기 없는 문제"));
+    expect(screen.queryByTestId("problem-preview")).not.toBeInTheDocument();
   });
 
   it("키워드가 없으면 왜 문제가 비었는지 말해준다", () => {

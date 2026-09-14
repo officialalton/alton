@@ -488,6 +488,11 @@ export type KeywordProblem = {
   label: string;
   difficulty: string | null;
   format: string;
+  /**
+   * 간략 미리보기(2026-09-14 UAT: "문제를 클릭하면 문제를 볼 수 있어야") — 공개 버전의 지문·선택지·그림.
+   * 목록은 label 만 보이고, 누르면 이것을 펼친다. 정답·해설은 여기 담지 않는다.
+   */
+  preview?: { passage: string; options: string[]; figure: unknown | null };
 };
 
 /**
@@ -515,21 +520,39 @@ export async function loadKeywordProblems(
   const problemIds = Array.from(new Set((links ?? []).map((l) => l.problem_id as string)));
   if (problemIds.length === 0) return [];
 
-  const { data: problems } = await supabase
-    .from("problems")
-    .select("id, format, passage, skill_type, difficulty")
-    .in("id", problemIds)
-    .order("created_at", { ascending: true });
+  const [{ data: problems }, { data: versions }] = await Promise.all([
+    supabase
+      .from("problems")
+      .select("id, format, passage, skill_type, difficulty")
+      .in("id", problemIds)
+      .order("created_at", { ascending: true }),
+    // 미리보기는 **공개 버전** 기준 — 학생이 실제로 볼 내용이다(초안·검수본이 아니다).
+    supabase
+      .from("problem_versions")
+      .select("problem_id, passage, options, figure")
+      .in("problem_id", problemIds)
+      .eq("status", "published"),
+  ]);
+  const versionByProblem = new Map<string, { passage: string; options: string[]; figure: unknown | null }>();
+  for (const v of versions ?? []) {
+    versionByProblem.set(v.problem_id as string, {
+      passage: ((v.passage as string | null) ?? "").trim(),
+      options: Array.isArray(v.options) ? (v.options as unknown[]).map(String) : [],
+      figure: (v.figure as unknown) ?? null,
+    });
+  }
 
   return (problems ?? []).map((p) => {
     const passage = ((p.passage as string | null) ?? "").trim();
     const skill = ((p.skill_type as string | null) ?? "").trim();
     const snippet = passage.length > 60 ? `${passage.slice(0, 60)}…` : passage;
+    const preview = versionByProblem.get(p.id as string);
     return {
       problemId: p.id as string,
       label: snippet || skill || "(본문 없음)",
       difficulty: (p.difficulty as string | null) ?? null,
       format: p.format as string,
+      ...(preview ? { preview } : {}),
     };
   });
 }

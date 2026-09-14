@@ -25,6 +25,11 @@ import type {
   UnitComposition,
   UnitMaterial,
 } from "@/lib/unit-composition";
+import LearningText from "@/app/session/[id]/LearningText";
+import ProblemFigure from "@/app/session/[id]/ProblemFigure";
+import { stripInlineOptions } from "@/lib/problem-text";
+
+const OPTION_LABELS = ["A", "B", "C", "D", "E", "F"];
 
 // 세 계층이 같이 쓰는 수업 준비 구성 패널.
 //
@@ -59,6 +64,8 @@ export default function CompositionPanel({
   const [pending, setPending] = useState<RecompositionSummary | null>(null);
   const [busy, setBusy] = useState(false);
   const [composedProblems, setComposedProblems] = useState(composition.problems);
+  // 2026-09-14 UAT: "문제를 클릭하면 문제를 볼 수 있어야 될 거 같아 간략하게라도" — 한 번에 하나만 펼친다.
+  const [previewId, setPreviewId] = useState<string | null>(null);
 
   // 후보에서 이미 담긴 것은 뺀다 — 같은 문제가 양쪽에 보이면 무엇을 눌러야 할지
   // 알 수 없다.
@@ -545,7 +552,8 @@ export default function CompositionPanel({
 
         <h3 className="text-[12.5px] font-bold text-ink mt-5 mb-1">담을 수 있는 문제</h3>
         <p className="text-[12px] text-grey-500 mb-2">
-          이 회차의 키워드로 찾은, 공개된 문제입니다. 모자라도 자동으로 만들지 않습니다.
+          이 회차의 키워드로 찾은, 공개된 문제입니다. 모자라도 자동으로 만들지 않습니다. 키워드로 자동으로 들어오는 문제는
+          회차당 기본 20개까지이고(직접 담은 것은 세지 않음), 나머지는 여기서 골라 담습니다. 문제를 누르면 간략히 볼 수 있습니다.
         </p>
         {pickableProblems.length === 0 ? (
           <p className="text-[12.5px] text-grey-500 bg-grey-100 rounded-lg px-4 py-4">
@@ -555,23 +563,37 @@ export default function CompositionPanel({
           </p>
         ) : (
           <ul className="border-[1.5px] border-grey-200 rounded-xl divide-y divide-grey-100">
-            {pickableProblems.map((p) => (
-              <li key={p.problemId} className="px-4 py-2.5 flex items-center gap-3">
-                <span className="text-[12.5px] text-ink flex-1 min-w-0 truncate">{p.label}</span>
-                {p.difficulty && (
-                  <span className="text-[10.5px] font-bold px-1.5 py-0.5 rounded bg-grey-100 text-grey-500 shrink-0">
-                    {p.difficulty}
-                  </span>
-                )}
-                <button
-                  disabled={busy}
-                  onClick={() => void takeProblem(p.problemId)}
-                  className="text-[11.5px] font-bold text-ink shrink-0 disabled:opacity-50"
-                >
-                  담기
-                </button>
-              </li>
-            ))}
+            {pickableProblems.map((p) => {
+              const open = previewId === p.problemId;
+              return (
+                <li key={p.problemId} className="px-4 py-2.5">
+                  <div className="flex items-center gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setPreviewId(open ? null : p.problemId)}
+                      aria-expanded={open}
+                      title={open ? "미리보기 닫기" : "문제 미리보기"}
+                      className="text-[12.5px] text-ink flex-1 min-w-0 truncate text-left hover:underline"
+                    >
+                      {p.label}
+                    </button>
+                    {p.difficulty && (
+                      <span className="text-[10.5px] font-bold px-1.5 py-0.5 rounded bg-grey-100 text-grey-500 shrink-0">
+                        {p.difficulty}
+                      </span>
+                    )}
+                    <button
+                      disabled={busy}
+                      onClick={() => void takeProblem(p.problemId)}
+                      className="text-[11.5px] font-bold text-ink shrink-0 disabled:opacity-50"
+                    >
+                      담기
+                    </button>
+                  </div>
+                  {open && <ProblemPreview problem={p} />}
+                </li>
+              );
+            })}
           </ul>
         )}
       </section>
@@ -579,6 +601,37 @@ export default function CompositionPanel({
       {/* 2026-09-13 확정 1번 — 연결은 아무것도 고정하지 않는다. **시작만** 고정한다.
           그래서 이 둘이 같은 화면에 있고, 다른 화면으로 건너뛰게 하지 않는다. */}
       {layer === "student" && <LessonSection unitId={unitId} />}
+    </div>
+  );
+}
+
+/** 담기 전 간략 미리보기 — 학생이 볼 지문·그림·선택지만. 정답·해설은 문제은행에서 본다. */
+function ProblemPreview({ problem }: { problem: KeywordProblem }) {
+  const pv = problem.preview;
+  if (!pv) {
+    return (
+      <p className="mt-2 text-[12px] text-grey-500" data-testid="problem-preview">
+        공개된 버전을 읽을 수 없어 미리보기를 보여줄 수 없습니다.
+      </p>
+    );
+  }
+  return (
+    <div className="mt-2 rounded-lg bg-grey-100 px-4 py-3" data-testid="problem-preview">
+      <ProblemFigure spec={pv.figure} className="mb-2" />
+      <LearningText
+        text={stripInlineOptions(pv.passage, pv.options) || "(본문 없음)"}
+        className="learning-body text-[13px] leading-[1.7] text-ink"
+      />
+      {pv.options.length > 0 && (
+        <ol className="mt-2 space-y-1">
+          {pv.options.map((o, i) => (
+            <li key={i} className="flex gap-2 text-[12.5px] text-ink">
+              <span className="font-bold text-grey-500 shrink-0">{OPTION_LABELS[i] ?? i + 1}</span>
+              <LearningText text={o} className="learning-body" />
+            </li>
+          ))}
+        </ol>
+      )}
     </div>
   );
 }
