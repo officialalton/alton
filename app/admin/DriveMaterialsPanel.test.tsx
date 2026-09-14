@@ -96,11 +96,19 @@ describe("Drive 자료 패널", () => {
   it("폴더 동기화는 실제 쓰기가 꺼져 있으면 계획만 보여준다", async () => {
     vi.mocked(actions.runCurriculumDriveFolderSyncAction).mockResolvedValue({
       state: "ok",
+      driveName: "ALTON Curriculum",
       pendingAfter: 3,
       outcome: { created: 2, renamed: 1, skipped: [{ rowId: "r", reason: "x" }], failed: [], dryRun: true },
     });
     render(<DriveMaterialsPanel subjects={subjects} />);
     fireEvent.click(screen.getByRole("button", { name: "폴더 동기화 실행" }));
-    await waitFor(() => expect(screen.getByTestId("folder-sync-result")).toHaveTextContent("계획만(실제 쓰기 꺼짐) — 만들 폴더 2개 · 이름 변경 1개 · 건너뜀 1개 · 실패 0개 · 남은 대기 3개"));
+    await waitFor(() => expect(screen.getByTestId("folder-sync-result")).toHaveTextContent("연결됨: ALTON Curriculum · 계획만(실제 쓰기 꺼짐) — 만들 폴더 2개 · 이름 변경 1개 · 건너뜀 1개 · 실패 0개 · 남은 대기 3개"));
+  });
+
+  it("드라이브에 접근하지 못하면 그 사유를 보여준다 — 쓰기를 켜기 전에 알 수 있어야 한다", async () => {
+    vi.mocked(actions.runCurriculumDriveFolderSyncAction).mockResolvedValue({ state: "drive_unreachable", reason: "Drive API 요청 실패 (status 404)" });
+    render(<DriveMaterialsPanel subjects={subjects} />);
+    fireEvent.click(screen.getByRole("button", { name: "폴더 동기화 실행" }));
+    await waitFor(() => expect(screen.getByTestId("folder-sync-result")).toHaveTextContent("드라이브에 접근하지 못했습니다 — Drive API 요청 실패 (status 404)"));
   });
 });

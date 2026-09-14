@@ -94,7 +94,8 @@ export default function DriveMaterialsPanel({ subjects }: { subjects: AdminSubje
       <section className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3.5 mb-5">
         <h2 className="text-[13px] font-bold text-ink mb-1">폴더 동기화</h2>
         <p className="text-[12px] text-grey-500 mb-2">
-          과목 → 단원 → 키워드 분류를 Drive 폴더로 반영합니다. 실제 쓰기 플래그가 꺼져 있으면 무엇을 만들지 계획만 보여줍니다.
+          과목 → 단원 → 키워드 분류를 Drive 폴더로 반영합니다. 실제 쓰기 플래그가 꺼져 있으면 드라이브 접근만 확인하고 무엇을 만들지 계획만 보여줍니다.
+          한 번에 한 계층씩 만들어지므로 과목 → 단원 → 키워드까지 세 번 실행합니다.
         </p>
         <button
           disabled={sync === "running"}
@@ -107,7 +108,9 @@ export default function DriveMaterialsPanel({ subjects }: { subjects: AdminSubje
           <p className="text-[12px] text-ink mt-2" data-testid="folder-sync-result">
             {sync.state === "not_configured"
               ? "교재 Drive 연결이 설정되지 않았습니다(CURRICULUM_DRIVE_ENABLED)."
-              : `${sync.outcome.dryRun ? "계획만(실제 쓰기 꺼짐)" : "반영"} — 만들 폴더 ${sync.outcome.created}개 · 이름 변경 ${sync.outcome.renamed}개 · 건너뜀 ${sync.outcome.skipped.length}개 · 실패 ${sync.outcome.failed.length}개 · 남은 대기 ${sync.pendingAfter}개`}
+              : sync.state === "drive_unreachable"
+                ? `드라이브에 접근하지 못했습니다 — ${sync.reason}`
+                : `연결됨: ${sync.driveName} · ${sync.outcome.dryRun ? "계획만(실제 쓰기 꺼짐)" : "반영"} — 만들 폴더 ${sync.outcome.created}개 · 이름 변경 ${sync.outcome.renamed}개 · 건너뜀 ${sync.outcome.skipped.length}개 · 실패 ${sync.outcome.failed.length}개 · 남은 대기 ${sync.pendingAfter}개`}
           </p>
         )}
         {sync && sync !== "running" && sync.state === "ok" && sync.outcome.failed.length > 0 && (

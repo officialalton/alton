@@ -415,7 +415,8 @@ export async function registerLocalSampleAssetAction(
 
 export type FolderSyncResult =
   | { state: "not_configured" }
-  | { state: "ok"; outcome: SyncOutcome; pendingAfter: number };
+  | { state: "drive_unreachable"; reason: string }
+  | { state: "ok"; driveName: string; outcome: SyncOutcome; pendingAfter: number };
 
 /**
  * 큐에 쌓인 폴더 생성·이름 변경을 처리한다. 실제 쓰기 플래그가 꺼져 있으면 계획만
@@ -437,7 +438,20 @@ export async function runCurriculumDriveFolderSyncAction(): Promise<FolderSyncRe
   };
   const ops = planFolderOps((rows ?? []) as FolderRow[], links, config.rootFolderId);
 
-  const token = config.allowRealWrites ? await getDriveTokenForCurrentEnv() : "";
+  // 계획만 보는 경우에도 드라이브에 **읽기 한 번**은 한다 — 환경변수가 맞고 서비스 계정이
+  // 그 드라이브에 들어갈 수 있는지를 실제 쓰기 전에 확인하기 위해서다. 쓰지는 않는다.
+  let token: string;
+  let driveName: string;
+  try {
+    token = await getDriveTokenForCurrentEnv();
+    const res = await driveFetch(`${DRIVE_API}/drives/${config.driveId}?fields=id,name`, token);
+    const meta = (await res.json()) as { id?: string; name?: string };
+    driveName = meta.name ?? config.driveId;
+  } catch (e) {
+    const message = e instanceof Error ? e.message : String(e);
+    console.error(JSON.stringify({ event: "curriculum_drive_unreachable", message }));
+    return { state: "drive_unreachable", reason: message };
+  }
   const api = driveFolderApi(fetch, token, config.driveId);
   const admin = createAdminClient();
   const store = {
@@ -466,5 +480,5 @@ export async function runCurriculumDriveFolderSyncAction(): Promise<FolderSyncRe
     .from("curriculum_drive_folders")
     .select("*", { count: "exact", head: true })
     .in("sync_status", ["pending", "rename_pending", "failed"]);
-  return { state: "ok", outcome, pendingAfter: count ?? 0 };
+  return { state: "ok", driveName, outcome, pendingAfter: count ?? 0 };
 }
