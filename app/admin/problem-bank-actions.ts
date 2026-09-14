@@ -31,6 +31,21 @@ export type BankProblem = {
   workState: "draft" | "in_review" | "published" | "none";
   keywords: { id: string; label: string }[];
   updatedAt: string;
+  /** 이 문제가 다루는 주제. 유형(skillType)과 다른 축이고 둘 다 선택 항목이다. */
+  topic: string | null;
+  /**
+   * 회차 자동 구성 후보가 되는지, 안 된다면 어느 조건에 걸렸는지.
+   * "공개했는데 왜 안 나오지?"를 화면이 설명할 수 있어야 한다.
+   */
+  readiness: "ok" | "not_confirmed" | "archived" | "no_published_version" | "no_keyword";
+  /** 지금 공개돼 있는 내용. 없으면 아직 공개된 적이 없다. */
+  published: {
+    versionId: string;
+    passage: string | null;
+    options: string[] | null;
+    correctIndex: number | null;
+    explanation: string | null;
+  } | null;
 };
 
 export type BankResult<T = undefined> =
@@ -56,7 +71,9 @@ export async function listBankProblemsAction(
 
   let q = admin
     .from("problems")
-    .select("id, format, passage, skill_type, difficulty, subject_id, status, archived_at, created_at")
+    .select(
+      "id, format, passage, skill_type, topic, difficulty, subject_id, status, archived_at, created_at"
+    )
     .order("created_at", { ascending: false })
     .limit(200);
 
@@ -109,6 +126,36 @@ export async function listBankProblemsAction(
 
   const nameById = new Map((subjects ?? []).map((s) => [s.id as string, s.name as string]));
 
+  const problemIds = rows.map((r) => r.id as string);
+
+  // 지금 공개돼 있는 내용. 목록의 problems.passage 는 오래된 칸이라 비어 있을 수
+  // 있다 — 그래서 공개된 문제가 "(아직 내용이 없는 문제)"로 보였다.
+  const { data: publishedRows } = await admin
+    .from("problem_versions")
+    .select("id, problem_id, passage, options, correct_index, explanation")
+    .in("problem_id", problemIds)
+    .eq("status", "published");
+  const publishedByProblem = new Map(
+    (publishedRows ?? []).map((v) => [
+      v.problem_id as string,
+      {
+        versionId: v.id as string,
+        passage: (v.passage as string | null) ?? null,
+        options: (v.options as string[] | null) ?? null,
+        correctIndex: (v.correct_index as number | null) ?? null,
+        explanation: (v.explanation as string | null) ?? null,
+      },
+    ])
+  );
+
+  const { data: readinessRows } = await admin
+    .from("problem_composition_readiness")
+    .select("problem_id, readiness")
+    .in("problem_id", problemIds);
+  const readinessByProblem = new Map(
+    (readinessRows ?? []).map((r) => [r.problem_id as string, r.readiness as string])
+  );
+
   const mapped = rows.map((r) => ({
     id: r.id as string,
     format: r.format as string,
@@ -121,6 +168,10 @@ export async function listBankProblemsAction(
     workState: stateByProblem.get(r.id as string) ?? "none",
     keywords: keywordsByProblem.get(r.id as string) ?? [],
     updatedAt: r.created_at as string,
+    topic: (r.topic as string | null) ?? null,
+    readiness: (readinessByProblem.get(r.id as string) ??
+      "not_confirmed") as BankProblem["readiness"],
+    published: publishedByProblem.get(r.id as string) ?? null,
   }));
 
   return mapped.filter((p) => {
@@ -234,6 +285,57 @@ export async function publishVersionAction(versionId: string): Promise<BankResul
   });
   if (error) return { ok: false, error: readable(error.message, "공개하지 못했습니다.") };
   return { ok: true };
+}
+
+/**
+ * 초안을 공개한다 — 사용자에게는 한 동작이다.
+ *
+ * 2026-09-13 확정: 지금은 관리자 본인이 작성·확인·공개를 다 한다. 그런데 화면이
+ * "검수 요청"을 따로 누르게 해서, 자기 자신에게 검수를 요청하는 것처럼 보였다.
+ * 사용자 흐름은 **초안 저장 → 미리보기·내용 확인 → 공개**다.
+ *
+ * DB 는 draft → in_review → published 순서를 강제하므로(20261293000000) 그 상태는
+ * 그대로 유지하되, 두 단계를 여기서 이어 붙인다. 검수자 역할 분리는 후속 범위다.
+ */
+export async function publishDraftAction(versionId: string): Promise<BankResult> {
+  const submitted = await submitVersionForReviewAction(versionId);
+  // 이미 확인 중 상태였던 버전을 다시 공개하는 경우도 있으므로, 앞 단계 실패를
+  // 곧바로 실패로 보지 않고 공개를 시도한 뒤 그 결과로 판단한다.
+  const published = await publishVersionAction(versionId);
+  if (!published.ok) return submitted.ok ? published : submitted;
+  return published;
+}
+
+/**
+ * 공개본을 바탕으로 수정 초안을 만든다.
+ *
+ * 공개된 버전은 고치지 않는다. 지금 공개본의 내용을 복사해 새 초안으로 넣고,
+ * 그것을 고쳐 다시 공개하면 새 버전이 된다 — **기존 공개본은 그대로 쓰인다.**
+ * 이미 저장된 준비안과 시작한 수업은 자기가 가리키는 버전을 계속 본다.
+ */
+export async function createDraftFromPublishedAction(
+  problemId: string
+): Promise<BankResult<string>> {
+  await requireAdmin();
+  const admin = createAdminClient();
+
+  const { data: published } = await admin
+    .from("problem_versions")
+    .select("passage, options, correct_index, explanation, difficulty")
+    .eq("problem_id", problemId)
+    .eq("status", "published")
+    .maybeSingle();
+
+  if (!published) return { ok: false, error: "공개된 버전이 없습니다." };
+
+  return createDraftVersionAction({
+    problemId,
+    passage: (published.passage as string | null) ?? "",
+    options: (published.options as string[] | null) ?? null,
+    correctIndex: (published.correct_index as number | null) ?? null,
+    explanation: (published.explanation as string | null) ?? "",
+    difficulty: (published.difficulty as string | null) ?? "",
+  });
 }
 
 /** 문제 보관·해제. 삭제가 아니다 — 과거 기록은 그대로 남는다. */
