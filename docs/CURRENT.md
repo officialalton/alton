@@ -6,13 +6,14 @@
 > 전체 테스트 **2596 통과 / 1 skip**(`supabase db reset --local` 직후 `vitest run --no-file-parallelism`, 449s).
 >
 > **공유 non-prod: 46·47·48 전부 적용됨(2026-09-14 사용자 실행).** Preview
-> `https://alton-cwonwkrvj-alton7.vercel.app` = 커밋 `f51cef9`(Drive 자료 포함). 첫 배포
-> `ke46evn0y`는 `"use server"` 파일의 상수 export 로 빌드 실패 → `f51cef9`로 정정 재배포.
-> 배포 상태 확인(`vercel ls`)은 이 세션에서 권한에 막혀 **Ready 여부 미확인** — 사용자가 확인.
+> `https://alton-mcsbc18fd-alton7.vercel.app` = 커밋 `f51cef9` + Preview 환경변수
+> `CURRICULUM_DRIVE_ENABLED=true`, `CURRICULUM_DRIVE_ID=0AKnx7roQfcSaUk9PVA`,
+> `CURRICULUM_DRIVE_ALLOW_REAL_WRITES=false`(사용자 설정, Ready 33s). 첫 배포 `ke46evn0y`는
+> `"use server"` 파일의 상수 export 로 빌드 실패 → `f51cef9`로 정정.
 >
-> **교재 전용 Shared Drive 준비됨**: `ALTON Company Tutori…`, id `0AKnx7roQfcSaUk9PVA`,
-> `r3-drive-preview-verify@alton-integration-sandbox.iam.gserviceaccount.com` Manager 로 초대됨.
-> Preview 환경변수는 이 세션에서 쓰기가 막혀 **미설정** — 아래 조작 1.
+> **교재 전용 Shared Drive**: id `0AKnx7roQfcSaUk9PVA`(회사 문서 Drive 와 별개 — 사용자 확인),
+> `r3-drive-preview-verify@alton-integration-sandbox.iam.gserviceaccount.com` Manager.
+> 실제 Drive 호출(폴더 동기화 계획·파일 목록)은 **아직 한 번도 실행되지 않았다** — 아래 조작 1.
 >
 > **완료한 것**
 > 1. `기본 구성 업데이트`가 상위에서 **빠진 것을 빼고**(내려온 행만), 없는 것을 받고, **순서·목표**를
@@ -45,13 +46,12 @@
 >   iPad·Apple Pencil, 원본 교체·재공개 후 유지(RPC 테스트만), 학생·보호자 계정의 브라우저 확인, Preview.
 >
 > **사용자가 할 조작(순서대로)**
-> 1. Preview 환경변수: `CURRICULUM_DRIVE_ENABLED=true`, `CURRICULUM_DRIVE_ID=0AKnx7roQfcSaUk9PVA`,
->    `CURRICULUM_DRIVE_ALLOW_REAL_WRITES=false` → `npx vercel deploy --yes`(환경변수는 새 배포부터).
-> 2. 관리자 > 과목 및 교재 > Drive 자료 > `폴더 동기화 실행` → 계획(만들 폴더 수) 확인 →
->    `CURRICULUM_DRIVE_ALLOW_REAL_WRITES=true` 로 바꾸고 재배포 → 다시 실행(실제 폴더 생성).
-> 3. 키워드 폴더에 PDF 올리기 → `Drive 에서 불러오기` → 등록 → 공개(고정 사본). Drive 없이 바로
->    보려면 같은 탭의 **로컬 표본**.
-> 4. Preview UAT: 교사 예정 수업 교재 탭에서 PDF 페이지·필기, 학생 계정 `수업 준비`·`/materials`.
+> 1. Preview 관리자 > 과목 및 교재 > Drive 자료 > `폴더 동기화 실행` → "계획만 — 만들 폴더 N개"가
+>    나오면 연결 OK(첫 실제 Drive **읽기**). 건너뜀 = 단원 미지정 키워드.
+> 2. N 확인 뒤 `CURRICULUM_DRIVE_ALLOW_REAL_WRITES`를 `true`로(rm 후 add) → 재배포 → 다시 실행
+>    (첫 실제 Drive **쓰기**: 폴더 생성만, 삭제 없음).
+> 3. 키워드 폴더에 PDF 올리기 → `Drive 에서 불러오기` → 등록 → 공개(고정 사본). 또는 같은 탭 **로컬 표본**.
+> 4. Preview UAT: 교사 예정 수업 교재 탭 PDF 페이지·필기, 학생 계정 `수업 준비`·`/materials`.
 > **열린 결함·남은 것**: 기존 키워드 128개(로컬 기준) 단원 미지정 — 전환 대상, 사람이 정한다 /
 > `session_curriculum_units` 없는 회차(예약 미연결)의 필기는 수업이 없어 저장 대상이 없음(설계대로) /
 > 이전 항목(테스트 격리 `reservations_no_overlap`, `homework_items.session_id` 레거시, Google 이전
