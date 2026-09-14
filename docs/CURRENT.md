@@ -1,5 +1,28 @@
 # ALTON — 현재 상태 (2026-09-14 기준)
 
+> **2026-09-14 야간 — P3 7차: 과제 v3 한 갈래 통일 / UAT 잔손질 2차.**
+> 커밋 `4f26d06` → `9017783` → (이번). **Preview `https://alton-np1byefqo-alton7.vercel.app`.** 공유 non-prod: **`20261357000000`까지 적용됨.**
+> 1장 정리: [`2026-09-14-homework-v3-unification.md`](2026-09-14-homework-v3-unification.md).
+>
+> **과제(제품 오너 결정 그대로)**: 발급 원본 `session_homework_items`(+`problem_version_id` 발급 시 고정) / 답·채점 원본은 **수업 문제와 같은
+> `session_problem_work`**(자동 채점·grade·정답 공개 규칙 재사용). `issue_homework_items`(담당·확정·회차 키워드 범위·중복 검사),
+> `withdraw_homework_item`(학생 시작 전만), `session_problem_formats` 과제 포함, `start_problem_work` 발급본 버전 우선.
+> - 수업 화면 `과제` 탭 = [교사] 발급 구역(회차 풀에서 체크 → 발급, 수업에서 다룬 문제 기본 숨김, 시작 전 회수) **위** + `ProblemsPanel source="homework"`
+>   **아래**(슬라이드·연습장·채점·정답 공개 전부 문제 탭과 동일). 발급 뒤 자동 새로 읽음.
+> - 학생 포털 `과제` 탭 = "9월 15일 · SAT Reading 수업 과제" 탭 → 같은 패널로 바로 푼다. 레거시 `homework_items` UI(작성 필요/완료·추가·답안 입력) 제거,
+>   `session_homework_attempts` 쓰기 제거(옛 v3 아코디언 삭제). 레거시 기록은 수업 화면에서 읽기 전용 목록만.
+> - 옛 UI로 제출한 시험 답안(session_homework_attempts)은 새 흐름으로 옮기지 않았다(오픈 전 시험 데이터).
+>
+> **잔손질**: '수업 구성 변경' 문구 / 학생 `수업 준비` → 예약 수업 화면으로 / 커리큘럼 회차 키워드 칩 / 문제 연습장 실시간(풀이판 채널) /
+> PDF 필기 레이어를 페이지 크기(px)에 맞춤 + **저장 끝난 획을 저장 목록에 넣어 창 크기 변경 뒤에도 남음** / 교사 `수업 준비` 진입은 전부
+> `/session/[id]?tab=prep` / PDF 텍스트 도구는 pointerUp 에 글 상자(클릭 무반응 원인: 포커스 탈취) / 채점 뒤 정답 초록은 교사에게도 /
+> PDF·영상 교재 `이름 바꾸기`(표시 이름).
+>
+> **검증**: 통합 15(채점 8·재고정 3·과제 4) / 컴포넌트 HomeworkTab 7·StudentHomeworkTab 3·ProblemsPanel 22·PDF 레이어 9·셸 18 등 /
+> 병렬 일괄 실행에서 예약 fixture 충돌(incident-report)·append-only 전역 count 는 db reset 직후에만 통과(기존). Preview UAT 미실시.
+>
+> **남은 요청**: ② 문제 화면 전체(여백 포함) 필기 레이어 — 새 필기 범위 마이그레이션 필요, 미착수. **다음 작업 단위**: 그것 + Preview UAT 결과 반영.
+
 > **2026-09-14 야간 — P3 6차: 관리자 교재 정리(키워드 폴더·과목 전체 Drive 동기화) / 시작한 수업 재고정 / UAT 잔손질.**
 > 커밋 `2cd5849` → `0888733`. **Preview `https://alton-gfa3sfd8i-alton7.vercel.app` = `0888733`.** 공유 non-prod: **`20261356000000`까지 적용됨.**
 >
