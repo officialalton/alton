@@ -344,6 +344,50 @@ export async function answerMcChoice(params: {
   return { ok: true };
 }
 
+/**
+ * 숫자 입력(SPR) 답을 저장한다(학생 본인). 객관식 클릭과 같은 규칙 — 즉시 저장·서버 자동 채점(정답 목록 정규화 비교),
+ * 채점 전이면 바꿀 수 있다. 정답 여부는 돌려주지 않는다.
+ */
+export async function answerSprText(params: {
+  sessionId: string;
+  studentId: string;
+  problemId: string;
+  text: string;
+  source?: ProblemSource;
+}): Promise<ActionResult> {
+  const { user } = await requireUser();
+  if (user.id !== params.studentId) return { ok: false, error: "본인 문제만 답할 수 있습니다." };
+  const text = params.text.trim();
+  if (!text) return { ok: false, error: "답을 입력하세요." };
+  if (text.length > 12) return { ok: false, error: "답은 12자 안으로 적어 주세요(양수 5자·음수 6자 규칙)." };
+  const admin = createAdminClient();
+  const { data: session } = await admin
+    .from("sessions")
+    .select("subject_enrollment:subject_enrollments!sessions_subject_enrollment_id_fkey(child_id)")
+    .eq("id", params.sessionId)
+    .maybeSingle();
+  const enrollment = Array.isArray(session?.subject_enrollment) ? session?.subject_enrollment[0] : session?.subject_enrollment;
+  if ((enrollment as { child_id?: string } | null)?.child_id !== params.studentId) {
+    return { ok: false, error: "이 수업의 문제가 아닙니다." };
+  }
+  const { data: workId, error } = await admin.rpc("start_problem_work", {
+    p_session_id: params.sessionId,
+    p_student_id: params.studentId,
+    p_problem_id: params.problemId,
+    p_new_attempt: false,
+    p_source: params.source ?? "lesson",
+  });
+  if (error) return { ok: false, error: readable(error.message) };
+  const { error: submitError } = await admin.rpc("submit_problem_attempt", {
+    p_work_id: workId as string,
+    p_actor_id: user.id,
+    p_choice_index: null,
+    p_text: text,
+  });
+  if (submitError) return { ok: false, error: readable(submitError.message) };
+  return { ok: true };
+}
+
 /** 교사 채점. grade 를 비우면 객관식 자동 채점 결과를 그대로 확정한다. */
 export async function gradeProblemAttempt(params: {
   workId: string;

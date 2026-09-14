@@ -26,7 +26,7 @@ const pool = [
 const homeworkProblem: SessionProblem = {
   number: 1, problemId: "p1", format: "mc", passage: "x", options: ["a", "b"], difficulty: null, correctIndex: null,
   explanation: null, attempts: 0, solved: false, graded: false, grade: null, gradeComment: null, myChoice: null,
-  autoCorrect: null, latestWorkId: null,
+  autoCorrect: null, latestWorkId: null, myText: null, acceptedAnswers: null,
 };
 
 beforeEach(() => {

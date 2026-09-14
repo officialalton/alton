@@ -16,7 +16,7 @@ import ProblemsPanel from "./ProblemsPanel";
 //   아래: 과제 문제 패널 — 수업 '문제' 탭과 **완전히 같은** 화면·풀이·채점(ProblemsPanel source="homework").
 //   레거시 homework_items 는 기록이 있을 때만 읽기 전용으로 보여준다. 신규 쓰기는 없다.
 
-const FORMAT_LABEL: Record<string, string> = { mc: "객관식", essay: "서술형", math: "풀이형" };
+const FORMAT_LABEL: Record<string, string> = { mc: "객관식", spr: "숫자 입력", essay: "서술형", math: "풀이형" };
 const DIFFICULTY_LABEL: Record<string, string> = { easy: "쉬움", medium: "보통", hard: "어려움" };
 
 export default function HomeworkTab({

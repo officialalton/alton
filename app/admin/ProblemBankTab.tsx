@@ -40,7 +40,7 @@ const WORK_STATE_LABEL: Record<BankProblem["workState"], string> = {
   none: "내용 없음",
 };
 
-const FORMAT_LABEL: Record<string, string> = { mc: "객관식", essay: "서술형", math: "수식" };
+const FORMAT_LABEL: Record<string, string> = { mc: "객관식", spr: "숫자 입력(SPR)", essay: "서술형", math: "풀이형" };
 
 /** 왜 자동 구성 후보가 못 되는지. "공개했는데 왜 안 나오지?"를 설명 없이 남기지 않는다. */
 const READINESS_NOTE: Record<BankProblem["readiness"], string | null> = {
@@ -362,7 +362,8 @@ function Filters({
         <option value="">모든 형식</option>
         <option value="mc">객관식</option>
         <option value="essay">서술형</option>
-        <option value="math">수식</option>
+        <option value="spr">숫자 입력(SPR)</option>
+        <option value="math">풀이형</option>
       </select>
       {/* 키워드는 과목에 속한다 — 과목을 고르기 전에는 고를 목록 자체가 없다. */}
       <select
@@ -462,7 +463,8 @@ function NewProblemRow({
         >
           <option value="mc">객관식</option>
           <option value="essay">서술형</option>
-          <option value="math">수식</option>
+          <option value="spr">숫자 입력(SPR)</option>
+        <option value="math">풀이형</option>
         </select>
         {/* 유형과 주제는 다른 축이다 — 유형은 무엇을 묻는가, 주제는 무엇에 대한 글인가. */}
         <input
@@ -856,6 +858,11 @@ function DraftEditor({
 }) {
   const source = problem.draft;
   const isMc = problem.format === "mc";
+  const isSpr = problem.format === "spr";
+  const [answersText, setAnswersText] = useState((source?.answers ?? []).join(", "));
+  const answersPayload = isSpr
+    ? answersText.split(/[,\n]/).map((a) => a.trim()).filter(Boolean)
+    : null;
 
   const initialOptions = useMemo(() => {
     const existing = source?.options ?? [];
@@ -878,6 +885,7 @@ function DraftEditor({
   /** 지금 화면에 있는 내용을 초안으로 저장하고, 저장된 버전 id 를 돌려준다. */
   async function saveDraft(): Promise<{ ok: true; value: string } | { ok: false; error: string }> {
     return createDraftVersionAction({
+      answers: answersPayload,
       problemId: problem.id,
       passage: passage.trim(),
       options: optionsPayload,
@@ -939,6 +947,21 @@ function DraftEditor({
               />
             </div>
           ))}
+        </div>
+      )}
+
+      {isSpr && (
+        <div className="mb-2">
+          <div className="text-[11.5px] text-grey-500 mb-1.5">
+            정답(숫자 입력). 동치 답이 여럿이면 쉼표로 — 예: <code>7/2, 3.5</code>. 분수·소수·음수 가능, 기호($, %, 쉼표)는 빼고. 학생 답은 서버가 정규화해 비교합니다.
+          </div>
+          <input
+            aria-label="정답 목록"
+            value={answersText}
+            onChange={(e) => setAnswersText(e.target.value)}
+            placeholder="예: 7/2, 3.5"
+            className="w-full text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5"
+          />
         </div>
       )}
 

@@ -14,7 +14,7 @@ export type LibrarySubject = {
 
 export type LibraryProblem = {
   id: string;
-  format: "mc" | "essay" | "math";
+  format: "mc" | "spr" | "essay" | "math";
   passage: string;
   options: string[] | null;
   correctIndex: number | null;

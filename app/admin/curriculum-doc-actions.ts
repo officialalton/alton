@@ -390,11 +390,12 @@ export async function createSubjectKeywordForDoc(
   return { ok: true, value: { id: data.id, label: data.label, status: data.status } };
 }
 
-export type ProblemFormat = "mc" | "essay" | "math";
+export type ProblemFormat = "mc" | "spr" | "essay" | "math";
 export type ProblemDifficulty = "easy" | "medium" | "hard";
 
 const FORMAT_LABEL: Record<ProblemFormat, string> = {
   mc: "객관식",
+  spr: "숫자 입력(SPR)",
   essay: "서술형",
   math: "풀이형",
 };
@@ -442,9 +443,15 @@ export async function generateSectionProblems(params: {
                     type: "number",
                     description: "객관식일 때만, 정답 선택지의 0-based 인덱스",
                   },
+                  answers: {
+                    type: "array",
+                    items: { type: "string" },
+                    description:
+                      "숫자 입력(SPR)일 때만. 동치 정답 목록(예: [\"7/2\",\"3.5\"]). 정수·소수·분수 문자열, 기호 없이.",
+                  },
                   explanation: {
                     type: "string",
-                    description: format === "mc" ? "정답 해설" : "모범 답안 또는 풀이 과정",
+                    description: format === "mc" ? "정답 해설" : format === "spr" ? "풀이 과정과 정답" : "모범 답안 또는 풀이 과정",
                   },
                 },
                 required: ["passage", "explanation"],
@@ -466,6 +473,7 @@ export async function generateSectionProblems(params: {
 - 난이도: ${difficulty === "easy" ? "쉬움" : difficulty === "medium" ? "보통" : "어려움"}
 - 답안 형식: ${FORMAT_LABEL[format]}
 ${format === "mc" ? "객관식은 반드시 선택지 4개와 정답 인덱스를 포함해주세요." : ""}
+${format === "spr" ? "숫자 입력(SPR)은 SAT Math 학생 직접 입력 문항입니다: 정답이 하나의 수(정수·소수·분수)로 정해져야 하고, answers 에 동치 표현을 모두 넣어주세요(예: 7/2 와 3.5). 선택지는 만들지 마세요. 양수는 5자, 음수는 6자 안에 쓸 수 있는 값이어야 합니다." : ""}
 이 문제들은 특정 학생이 아니라 이 교재를 배정받는 어떤 학생에게도 재사용될 문제
 은행에 들어갑니다. 실전 SAT/AP 시험에 나올 법한 퀄리티로 만들어주세요.`,
       },
@@ -482,6 +490,7 @@ ${format === "mc" ? "객관식은 반드시 선택지 4개와 정답 인덱스�
         passage: string;
         options?: string[];
         correct_index?: number;
+        answers?: string[];
         explanation: string;
       }[];
     }
@@ -493,6 +502,7 @@ ${format === "mc" ? "객관식은 반드시 선택지 4개와 정답 인덱스�
     passage: stripInlineOptions(p.passage, p.options ?? null),
     options: format === "mc" ? p.options ?? null : null,
     correctIndex: format === "mc" ? p.correct_index ?? null : null,
+    answers: format === "spr" ? (p.answers ?? []).map(String).filter(Boolean) : null,
     explanation: p.explanation,
     difficulty,
   }));
@@ -530,9 +540,14 @@ export async function regenerateProblem(params: {
               type: "number",
               description: "객관식일 때만, 정답 선택지의 0-based 인덱스",
             },
+            answers: {
+              type: "array",
+              items: { type: "string" },
+              description: "숫자 입력(SPR)일 때만. 동치 정답 목록(예: [\"7/2\",\"3.5\"]).",
+            },
             explanation: {
               type: "string",
-              description: format === "mc" ? "정답 해설" : "모범 답안 또는 풀이 과정",
+              description: format === "mc" ? "정답 해설" : format === "spr" ? "풀이 과정과 정답" : "모범 답안 또는 풀이 과정",
             },
           },
           required: ["passage", "explanation"],
@@ -573,6 +588,7 @@ ${current.correctIndex !== null ? `정답 인덱스: ${current.correctIndex}` : 
     passage: string;
     options?: string[];
     correct_index?: number;
+    answers?: string[];
     explanation: string;
   };
 
@@ -581,6 +597,7 @@ ${current.correctIndex !== null ? `정답 인덱스: ${current.correctIndex}` : 
     passage: stripInlineOptions(raw.passage, raw.options ?? null),
     options: format === "mc" ? raw.options ?? null : null,
     correctIndex: format === "mc" ? raw.correct_index ?? null : null,
+    answers: format === "spr" ? (raw.answers ?? []).map(String).filter(Boolean) : null,
     explanation: raw.explanation,
     difficulty,
   };

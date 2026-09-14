@@ -58,6 +58,8 @@ export type ProblemContent = {
   options: string[] | null;
   correctIndex: number | null;
   explanation: string | null;
+  /** spr 동치 정답 목록. */
+  answers: string[] | null;
 };
 
 export type BankResult<T = undefined> =
@@ -144,7 +146,7 @@ export async function listBankProblemsAction(
   // 있다 — 그래서 공개된 문제가 "(아직 내용이 없는 문제)"로 보였다.
   const { data: contentRows } = await admin
     .from("problem_versions")
-    .select("id, problem_id, status, version_no, passage, options, correct_index, explanation")
+    .select("id, problem_id, status, version_no, passage, options, correct_index, explanation, answers")
     .in("problem_id", problemIds)
     .in("status", ["published", "draft", "in_review"])
     .order("version_no", { ascending: false });
@@ -155,6 +157,7 @@ export async function listBankProblemsAction(
     options: (v.options as string[] | null) ?? null,
     correctIndex: (v.correct_index as number | null) ?? null,
     explanation: (v.explanation as string | null) ?? null,
+    answers: (v.answers as string[] | null) ?? null,
   });
 
   const publishedByProblem = new Map<string, ProblemContent>();
@@ -292,6 +295,7 @@ export async function createDraftVersionAction(params: {
   correctIndex: number | null;
   explanation: string;
   difficulty: string;
+  answers?: string[] | null;
 }): Promise<BankResult<string>> {
   const { adminUserId } = await requireAdmin();
   const admin = createAdminClient();
@@ -303,6 +307,7 @@ export async function createDraftVersionAction(params: {
     p_explanation: params.explanation,
     p_difficulty: params.difficulty,
     p_actor_id: adminUserId,
+    p_answers: params.answers ?? null,
   });
   if (error) return { ok: false, error: readable(error.message, "초안을 저장하지 못했습니다.") };
   return { ok: true, value: data as string };
@@ -382,7 +387,7 @@ export async function createDraftFromPublishedAction(
 
   const { data: published } = await admin
     .from("problem_versions")
-    .select("passage, options, correct_index, explanation, difficulty")
+    .select("passage, options, correct_index, explanation, difficulty, answers")
     .eq("problem_id", problemId)
     .eq("status", "published")
     .maybeSingle();
@@ -396,6 +401,7 @@ export async function createDraftFromPublishedAction(
     correctIndex: (published.correct_index as number | null) ?? null,
     explanation: (published.explanation as string | null) ?? "",
     difficulty: (published.difficulty as string | null) ?? "",
+    answers: (published.answers as string[] | null) ?? null,
   });
   if (!created.ok) return created;
   return { ok: true, value: { versionId: created.value, reused: false } };
@@ -526,6 +532,7 @@ export async function generateBankProblemsAction(params: {
       correctIndex: g.correctIndex ?? null,
       explanation: g.explanation,
       difficulty: params.difficulty,
+      answers: g.answers ?? null,
     });
     if (draft.ok) created += 1;
   }

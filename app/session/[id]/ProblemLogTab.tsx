@@ -16,6 +16,7 @@ import MathCanvas from "./MathCanvas";
 const REASONS = ["단어", "로직", "해석", "기타"];
 const FORMAT_LABEL: Record<ProblemLogEntry["format"], string> = {
   mc: "객관식",
+  spr: "숫자 입력",
   essay: "서술형",
   math: "수학",
 };

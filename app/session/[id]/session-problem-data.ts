@@ -8,7 +8,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 // 내부 ID·기술 상태값은 화면에 내보내지 않는다. 여기서 돌려주는 것은 사람이
 // 읽는 내용과 표시용 번호뿐이다.
 
-export type ProblemFormat = "mc" | "essay" | "math";
+export type ProblemFormat = "mc" | "spr" | "essay" | "math";
 export type ProblemGrade = "correct" | "partial" | "incorrect";
 
 export type SessionProblem = {
@@ -42,6 +42,10 @@ export type SessionProblem = {
   gradeComment: string | null;
   /** 가장 최근 풀이의 객관식 선택(학생 본인 답). 없으면 null. */
   myChoice: number | null;
+  /** 가장 최근 풀이의 텍스트 답(spr 숫자 입력). */
+  myText: string | null;
+  /** spr 정답 목록 — 정답을 볼 자격이 있을 때만(채점 뒤 학생, 교사). */
+  acceptedAnswers: string[] | null;
   /** 객관식 자동 채점 결과 — 정답을 볼 자격이 있을 때만 채운다(채점 전 학생에게 새면 정답이 드러난다). */
   autoCorrect: boolean | null;
   /** 가장 최근 풀이판 id — 교사 채점이 가리킬 대상. */
@@ -74,7 +78,7 @@ export type SessionProblemViewer = {
 };
 
 function toFormat(raw: string | null | undefined): ProblemFormat {
-  return raw === "essay" || raw === "math" ? raw : "mc";
+  return raw === "essay" || raw === "math" || raw === "spr" ? raw : "mc";
 }
 
 export type ProblemSource = "lesson" | "homework";
@@ -153,7 +157,7 @@ async function buildSessionProblems(
   if (pinnedVersionIds.length) {
     const { data, error: versionError } = await supabase
       .from("problem_versions")
-      .select("id, problem_id, passage, options, correct_index, explanation, difficulty")
+      .select("id, problem_id, passage, options, correct_index, explanation, difficulty, answers")
       .in("id", pinnedVersionIds);
     if (versionError) throw new Error(versionError.message);
     for (const v of data ?? []) versionById.set(v.id as string, v);
@@ -167,6 +171,13 @@ async function buildSessionProblems(
     for (const f of (formats ?? []) as { problem_id: string; format: string }[]) {
       formatByProblemId.set(f.problem_id, toFormat(f.format));
     }
+    // 함수가 비워 돌려준 문제(예: 서비스 롤처럼 auth.uid 가 없는 호출)는 problems 를 직접 읽어 본다 —
+    // 학생은 RLS 로 비어 그대로 남고, 아래에서 선택지 유무로 추정한다.
+    const missing = rows.map((r) => r.problemId).filter((id) => !formatByProblemId.has(id));
+    if (missing.length) {
+      const { data: direct } = await supabase.from("problems").select("id, format").in("id", missing);
+      for (const p of direct ?? []) formatByProblemId.set(p.id as string, toFormat(p.format as string));
+    }
   }
 
   // 풀이 상태 — 이 학생이 이 수업에서 이 문제를 푼 기록. 채점·선택은 **가장 최근 풀이** 기준.
@@ -177,6 +188,7 @@ async function buildSessionProblems(
       attemptNo: number;
       workId: string;
       choice: number | null;
+      text: string | null;
       autoCorrect: boolean | null;
       grade: ProblemGrade | null;
       gradeComment: string | null;
@@ -188,7 +200,7 @@ async function buildSessionProblems(
   if (viewer.studentId) {
     const { data: work } = await supabase
       .from("session_problem_work")
-      .select("id, problem_id, attempt_no, submitted_at, submitted_choice_index, auto_correct, grade, grade_comment, graded_at")
+      .select("id, problem_id, attempt_no, submitted_at, submitted_choice_index, submitted_text, auto_correct, grade, grade_comment, graded_at")
       .eq("session_id", sessionId)
       .eq("student_id", viewer.studentId)
       // 과제 답안은 수업 답안과 따로 — 같은 문제라도 섞이지 않는다(2026-09-14).
@@ -203,6 +215,7 @@ async function buildSessionProblems(
               attemptNo,
               workId: w.id as string,
               choice: (w.submitted_choice_index as number | null) ?? null,
+              text: (w.submitted_text as string | null) ?? null,
               autoCorrect: (w.auto_correct as boolean | null) ?? null,
               grade: (w.grade as ProblemGrade | null) ?? null,
               gradeComment: (w.grade_comment as string | null) ?? null,
@@ -243,6 +256,8 @@ async function buildSessionProblems(
       grade: graded ? (state.latest?.grade ?? null) : null,
       gradeComment: graded ? (state.latest?.gradeComment ?? null) : null,
       myChoice: state.latest?.choice ?? null,
+      myText: state.latest?.text ?? null,
+      acceptedAnswers: revealAnswers && Array.isArray(version?.answers) ? (version?.answers as string[]) : null,
       // 자동 채점 결과는 정답과 같은 정보다 — 정답을 볼 자격이 있을 때만.
       autoCorrect: revealAnswers ? (state.latest?.autoCorrect ?? null) : null,
       latestWorkId: state.latest?.workId ?? null,
@@ -288,6 +303,8 @@ export function toPlannedSessionProblems(
       grade: null,
       gradeComment: null,
       myChoice: null,
+      myText: null,
+      acceptedAnswers: null,
       autoCorrect: null,
       latestWorkId: null,
       planned: true,

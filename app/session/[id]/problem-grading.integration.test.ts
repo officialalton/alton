@@ -457,3 +457,59 @@ describe("session_problem_work.source — 같은 문제라도 과제는 처음�
     expect(fails(() => asUser(TEACHER_ID, `select withdraw_homework_item('${itemId}');`))).toContain("이미 풀기 시작한");
   });
 });
+
+// ------------------------------------------------------------ SPR 숫자 입력 (2026-09-14)
+describe("spr — 숫자 답 자동 채점·재입력·공개 검사", () => {
+  function sprProblem(sessionId: string, answers: string[]): string {
+    const kw = psql(`select keyword_id from curriculum_overlay_unit_keywords k join session_curriculum_units s on s.overlay_unit_id = k.overlay_unit_id where s.session_id = '${sessionId}' limit 1;`);
+    const id = psql(
+      `insert into problems (format, passage, subject_id, status, created_by) values ('spr', 'x + 3 = 10', '${SUBJECT_ID}', 'confirmed', '${TEACHER_ID}') returning id;`
+    );
+    psql(`insert into problem_keywords (problem_id, keyword_id) values ('${id}', '${kw}');`);
+    psql(`update problem_versions set answers = '${JSON.stringify(answers)}'::jsonb, explanation = 'x = 7' where problem_id = '${id}';`);
+    return id;
+  }
+
+  it("정규화 비교: 분수·소수·쉼표·반올림을 같은 답으로 본다", () => {
+    expect(psql(`select spr_answer_matches('7/2', '["3.5"]');`)).toBe("t");
+    expect(psql(`select spr_answer_matches('1,440', '["1440"]');`)).toBe("t");
+    expect(psql(`select spr_answer_matches('.6667', '["2/3"]');`)).toBe("t");
+    expect(psql(`select spr_answer_matches(' -0.25 ', '["-1/4"]');`)).toBe("t");
+    expect(psql(`select spr_answer_matches('3.4', '["3.5"]');`)).toBe("f");
+    expect(psql(`select spr_answer_matches('abc', '["1"]');`)).toBe("f");
+  });
+
+  it("학생이 숫자 답을 저장하면 자동 채점되고, 채점 전엔 바꿀 수 있고, 채점 뒤엔 정답이 열린다", async () => {
+    const { sessionId } = startedSession();
+    const problemId = sprProblem(sessionId, ["7", "7.0"]);
+    asUser(TEACHER_ID, `select issue_homework_items('${sessionId}', array['${problemId}']::uuid[]);`);
+    const workId = psql(`select start_problem_work('${sessionId}', '${STUDENT_ID}', '${problemId}', false, 'homework');`);
+    psql(`select submit_problem_attempt('${workId}', '${STUDENT_ID}', null, '6');`);
+    expect(psql(`select submitted_text || ':' || auto_correct from session_problem_work where id = '${workId}';`)).toBe("6:false");
+    psql(`select submit_problem_attempt('${workId}', '${STUDENT_ID}', null, ' 7 ');`);
+    expect(psql(`select auto_correct from session_problem_work where id = '${workId}';`)).toBe("t");
+
+    const { loadHomeworkProblems } = await import("./session-problem-data");
+    let hw = await loadHomeworkProblems(admin, sessionId, { canSeeAnswers: false, studentId: STUDENT_ID });
+    let p = hw.find((x) => x.problemId === problemId)!;
+    expect(p.format).toBe("spr");
+    expect(p.myText).toBe(" 7 ");
+    expect(p.acceptedAnswers).toBeNull();
+    asUser(TEACHER_ID, `select grade_problem_attempt('${workId}', null, null);`);
+    expect(psql(`select grade from session_problem_work where id = '${workId}';`)).toBe("correct");
+    hw = await loadHomeworkProblems(admin, sessionId, { canSeeAnswers: false, studentId: STUDENT_ID });
+    p = hw.find((x) => x.problemId === problemId)!;
+    expect(p.acceptedAnswers).toEqual(["7", "7.0"]);
+    expect(fails(() => psql(`select submit_problem_attempt('${workId}', '${STUDENT_ID}', null, '8');`))).toContain("채점이 끝난 문제의 답은 바꿀 수 없습니다");
+  });
+
+  it("정답 목록이 없는 spr 초안은 공개할 수 없다", () => {
+    const id = psql(
+      `insert into problems (format, passage, subject_id, status, created_by) values ('spr', '빈 정답', '${SUBJECT_ID}', 'draft', '${TEACHER_ID}') returning id;`
+    );
+    const v = psql(`select id from problem_versions where problem_id = '${id}' order by version_no desc limit 1;`);
+    expect(fails(() => psql(`select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`))).toContain("정답을 하나 이상");
+    psql(`select save_problem_draft_version('${id}', '빈 정답', null, null, '풀이', 'medium', '${ADMIN_ID}', '["7"]'::jsonb);`);
+    expect(psql(`select answers::text from problem_versions where id = '${v}';`)).toBe('["7"]');
+  });
+});

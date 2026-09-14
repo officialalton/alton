@@ -7,6 +7,7 @@ import type { ProblemGrade, ProblemSource, SessionProblem } from "./session-prob
 import type { ProblemWorkBoard as Board } from "./problem-work-actions";
 import {
   answerMcChoice,
+  answerSprText,
   gradeProblemAttempt,
   listProblemAttempts,
   loadProblemWorkBoard,
@@ -27,6 +28,7 @@ const DIFFICULTY_LABEL: Record<string, string> = {
 
 const FORMAT_LABEL: Record<SessionProblem["format"], string> = {
   mc: "객관식",
+  spr: "숫자 입력",
   essay: "서술형",
   math: "풀이형",
 };
@@ -100,6 +102,8 @@ export default function ProblemsPanel({
   const [boardBusy, setBoardBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [savedChoiceId, setSavedChoiceId] = useState<string | null>(null);
+  // 숫자 입력(SPR) 초안 — 문제마다. 저장은 버튼/Enter.
+  const [sprDraft, setSprDraft] = useState<Record<string, string>>({});
   const boardRef = useRef<ProblemBoardHandle | null>(null);
   const channelRef = useRef<RealtimeChannel | null>(null);
 
@@ -214,6 +218,27 @@ export default function ProblemsPanel({
     void refresh();
   }
 
+  async function saveSpr(p: SessionProblem) {
+    if (!isStudent || p.planned || p.graded || busy) return;
+    const text = (sprDraft[p.problemId] ?? p.myText ?? "").trim();
+    if (!text) return;
+    setBusy(true);
+    setError(null);
+    setSavedChoiceId(null);
+    const res = await answerSprText({ sessionId, studentId, problemId: p.problemId, text, source });
+    setBusy(false);
+    if (!res.ok) {
+      setError(res.error);
+      return;
+    }
+    setProblems((ps) =>
+      ps.map((x) => (x.problemId === p.problemId ? { ...x, myText: text, solved: true, attempts: Math.max(1, x.attempts) } : x))
+    );
+    setSavedChoiceId(p.problemId);
+    notifyChanged();
+    void refresh();
+  }
+
   async function grade(p: SessionProblem) {
     if (!p.latestWorkId) return;
     const draft = gradeDraft[p.problemId] ?? { grade: null, comment: "" };
@@ -245,6 +270,7 @@ export default function ProblemsPanel({
     if (p.planned) return "수업 전 미리보기";
     if (p.graded) return `채점 완료 · ${p.grade ? GRADE_LABEL[p.grade] : ""}`.trim();
     if (p.format === "mc") return p.myChoice !== null ? "답 저장됨 · 채점 대기" : "아직 풀지 않음";
+    if (p.format === "spr") return p.myText ? "답 저장됨 · 채점 대기" : "아직 풀지 않음";
     if (p.format === "essay") return p.attempts > 0 ? "쓰는 중 · 채점 대기" : "아직 풀지 않음";
     return p.solved ? "제출함 · 채점 대기" : p.attempts > 0 ? "푸는 중" : "아직 풀지 않음";
   }
@@ -259,7 +285,8 @@ export default function ProblemsPanel({
       };
     }
     if (p.graded) return { text: "채점됨", className: "text-green" };
-    if (p.format === "mc" ? p.myChoice !== null : p.solved) return { text: "제출", className: "text-ink" };
+    const answered = p.format === "mc" ? p.myChoice !== null : p.format === "spr" ? Boolean(p.myText) : p.solved;
+    if (answered) return { text: "제출", className: "text-ink" };
     if (p.attempts > 0) return { text: "푸는 중", className: "text-grey-500" };
     return null;
   }
@@ -367,6 +394,7 @@ export default function ProblemsPanel({
         {visibleProblems.map((p) => {
           const isOpen = openId === p.problemId;
           const isMc = p.format === "mc";
+          const isSpr = p.format === "spr";
           const isEssay = p.format === "essay";
           const isMath = p.format === "math";
           const canPick = isStudent && !p.planned && !p.graded && isMc;
@@ -452,6 +480,53 @@ export default function ProblemsPanel({
                 </ol>
               )}
 
+              {isSpr && !p.planned && (
+                <div className="mb-4" data-testid="spr-answer">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <label className="text-[12.5px] font-bold text-ink" htmlFor={`spr-${p.problemId}`}>답</label>
+                    <input
+                      id={`spr-${p.problemId}`}
+                      aria-label="숫자 답"
+                      value={sprDraft[p.problemId] ?? p.myText ?? ""}
+                      disabled={!isStudent || p.graded || busy}
+                      onChange={(e) => setSprDraft((d) => ({ ...d, [p.problemId]: e.target.value }))}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") void saveSpr(p);
+                      }}
+                      placeholder="예: 7/2 또는 3.5"
+                      inputMode="decimal"
+                      className="text-[14px] border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 w-[160px] disabled:bg-grey-100"
+                    />
+                    {isStudent && !p.graded && (
+                      <button
+                        type="button"
+                        disabled={busy || !(sprDraft[p.problemId] ?? p.myText ?? "").trim()}
+                        onClick={() => void saveSpr(p)}
+                        className="text-[12.5px] font-bold px-3.5 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
+                      >
+                        답 저장
+                      </button>
+                    )}
+                    {p.myText && !isStudent && <span className="text-[12px] text-grey-500">학생 답</span>}
+                    {answerShown(p) && p.acceptedAnswers && p.acceptedAnswers.length > 0 && (
+                      <span className="text-[12.5px] font-bold text-green">정답: {p.acceptedAnswers.join(" 또는 ")}</span>
+                    )}
+                  </div>
+                  <p className="text-[11.5px] text-grey-500 mt-1.5">
+                    정수·소수·분수(7/2) 가능. 양수 5자, 음수 6자 안. 기호($, %, 쉼표)는 빼고. 대분수는 가분수나 소수로.
+                  </p>
+                </div>
+              )}
+
+              {isSpr && isStudent && !p.planned && !p.graded && (
+                <p className="text-[12px] text-grey-500 mb-4">
+                  {savedChoiceId === p.problemId
+                    ? "답이 저장되었습니다. 채점 전까지는 바꿀 수 있습니다."
+                    : "답을 적고 저장하세요."}{" "}
+                  선생님이 채점하면 정답과 해설이 열립니다.
+                </p>
+              )}
+
               {isMc && isStudent && !p.planned && !p.graded && (
                 <p className="text-[12px] text-grey-500 mb-4">
                   {savedChoiceId === p.problemId
@@ -506,7 +581,7 @@ export default function ProblemsPanel({
                 <>
                   {/* 연습장 / 풀이판 */}
                   <div className="flex flex-wrap gap-2">
-                    {isMc && (
+                    {(isMc || isSpr) && (
                       <button
                         disabled={boardBusy}
                         onClick={() => (isOpen ? setOpenId(null) : void openBoard(p.problemId))}
@@ -631,6 +706,18 @@ export default function ProblemsPanel({
                         <p className="text-[12.5px] text-grey-500">학생이 아직 이 문제를 풀지 않았습니다.</p>
                       ) : (
                         <>
+                          {isSpr && (
+                            <p className="text-[13px] text-ink mb-2">
+                              학생 답: <b>{p.myText ?? "없음"}</b>
+                              {p.autoCorrect !== null && (
+                                <>
+                                  {" "}
+                                  · 자동 채점:{" "}
+                                  <b className={p.autoCorrect ? "text-green" : "text-red"}>{p.autoCorrect ? "정답" : "오답"}</b>
+                                </>
+                              )}
+                            </p>
+                          )}
                           {isMc && (
                             <p className="text-[13px] text-ink mb-2">
                               학생 답: <b>{p.myChoice !== null ? p.myChoice + 1 : "없음"}</b>
@@ -694,7 +781,7 @@ export default function ProblemsPanel({
                                     </button>
                                   );
                                 })}
-                                {isMc && draft.grade === null && p.autoCorrect !== null && (
+                                {(isMc || isSpr) && draft.grade === null && p.autoCorrect !== null && (
                                   <span className="text-[11.5px] text-grey-500 self-center">
                                     고르지 않으면 자동 채점({p.autoCorrect ? "정답" : "오답"})대로 확정합니다.
                                   </span>
@@ -713,7 +800,11 @@ export default function ProblemsPanel({
                               <div className="flex gap-2">
                                 <button
                                   type="button"
-                                  disabled={busy || (!isMc && draft.grade === null) || (isMc && draft.grade === null && p.autoCorrect === null)}
+                                  disabled={
+                                    busy ||
+                                    (!(isMc || isSpr) && draft.grade === null) ||
+                                    ((isMc || isSpr) && draft.grade === null && p.autoCorrect === null)
+                                  }
                                   onClick={() => void grade(p)}
                                   className="text-[12.5px] font-bold px-4 py-2 rounded-lg bg-ink text-white disabled:opacity-50"
                                 >

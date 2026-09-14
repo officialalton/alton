@@ -3,10 +3,12 @@ import type { SubjectKeyword } from "./subject-data";
 
 export type DocProblem = {
   id: string;
-  format: "mc" | "essay" | "math";
+  format: "mc" | "spr" | "essay" | "math";
   passage: string;
   options: string[] | null;
   correctIndex: number | null;
+  /** spr(숫자 입력) 동치 정답 목록. 다른 형식은 null. */
+  answers?: string[] | null;
   explanation: string;
   difficulty: "easy" | "medium" | "hard";
   // R9(Task 2): 확정(confirmed)된 문제만 실제로 이 배열에 값이 들어간다(트리거가

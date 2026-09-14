@@ -28,6 +28,7 @@ import type { SubjectKeyword } from "./subject-data";
 
 const FORMAT_LABEL: Record<ProblemFormat, string> = {
   mc: "객관식",
+  spr: "숫자 입력(SPR)",
   essay: "서술형",
   math: "풀이형",
 };

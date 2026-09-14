@@ -4,6 +4,7 @@ import ProblemsPanel from "./ProblemsPanel";
 import type { SessionProblem } from "./session-problem-data";
 import {
   answerMcChoice,
+  answerSprText,
   gradeProblemAttempt,
   listProblemAttempts,
   loadProblemWorkBoard,
@@ -14,6 +15,7 @@ import {
 
 vi.mock("./problem-work-actions", () => ({
   openProblemWork: vi.fn(),
+  answerSprText: vi.fn(),
   submitProblemWork: vi.fn(),
   listProblemAttempts: vi.fn(),
   loadProblemWorkBoard: vi.fn(),
@@ -81,6 +83,7 @@ beforeEach(() => {
   vi.mocked(loadProblemWorkBoard).mockResolvedValue({ ...emptyBoard, submitted: true, submittedStrokeSeq: "10" });
   vi.mocked(listProblemAttempts).mockResolvedValue([{ workId: "w1", attemptNo: 1, submitted: false }]);
   vi.mocked(answerMcChoice).mockResolvedValue({ ok: true });
+  vi.mocked(answerSprText).mockResolvedValue({ ok: true });
   vi.mocked(gradeProblemAttempt).mockResolvedValue({ ok: true });
   vi.mocked(refreshSessionProblems).mockResolvedValue([]);
 });
@@ -102,6 +105,8 @@ const mc: SessionProblem = {
   myChoice: null,
   autoCorrect: null,
   latestWorkId: null,
+  myText: null,
+  acceptedAnswers: null,
 };
 
 const essay: SessionProblem = { ...mc, number: 2, problemId: "p2", format: "essay", options: [], passage: "서술형 지문" };
@@ -380,5 +385,40 @@ describe("ProblemsPanel — 문제 위 공유 필기 레이어", () => {
   it("시작 전 미리보기에는 필기 레이어가 없다", () => {
     renderPanel([{ ...mc, planned: true }]);
     expect(screen.queryByTestId("problem-annotation-layer")).not.toBeInTheDocument();
+  });
+
+});
+
+// 2026-09-14 — 숫자 입력(SPR): 서술형과 다른 유형. 학생이 숫자를 적어 저장하면 서버가 자동 채점, 교사가 확정.
+describe("ProblemsPanel — 숫자 입력(SPR)", () => {
+  const spr: SessionProblem = { ...mc, number: 5, problemId: "p5", format: "spr", options: [], passage: "x + 3 = 10. x?" };
+
+  it("학생은 숫자 답을 적어 저장하고, 선택지·제출 버튼은 없다", async () => {
+    renderPanel([spr]);
+    expect(screen.getByText("숫자 입력")).toBeInTheDocument();
+    expect(screen.queryByText("풀이 제출")).not.toBeInTheDocument();
+    const input = screen.getByLabelText("숫자 답");
+    fireEvent.change(input, { target: { value: "7" } });
+    fireEvent.click(screen.getByRole("button", { name: "답 저장" }));
+    await waitFor(() =>
+      expect(answerSprText).toHaveBeenCalledWith({ sessionId: "s1", studentId: "stu1", problemId: "p5", text: "7", source: "lesson" })
+    );
+    expect(await screen.findByText(/답이 저장되었습니다/)).toBeInTheDocument();
+    expect(screen.getByText("답 저장됨 · 채점 대기")).toBeInTheDocument();
+  });
+
+  it("채점 뒤에는 정답 목록이 초록으로 보이고 입력은 잠긴다", () => {
+    renderPanel([{ ...spr, myText: "6", graded: true, grade: "incorrect", acceptedAnswers: ["7"], explanation: "x = 7" }]);
+    expect(screen.getByText("정답: 7")).toBeInTheDocument();
+    expect(screen.getByLabelText("숫자 답")).toBeDisabled();
+    expect(screen.queryByRole("button", { name: "답 저장" })).not.toBeInTheDocument();
+  });
+
+  it("교사는 학생 답과 자동 채점을 보고 한 번에 확정한다", async () => {
+    renderPanel([{ ...spr, myText: "7", autoCorrect: true, acceptedAnswers: ["7"], solved: true, attempts: 1, latestWorkId: "w5" }], "teacher");
+    expect(screen.getByText(/학생 답:/)).toHaveTextContent("7");
+    expect(screen.getByText(/자동 채점\(정답\)대로 확정/)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "채점 완료" }));
+    await waitFor(() => expect(gradeProblemAttempt).toHaveBeenCalledWith({ workId: "w5", grade: null, comment: "" }));
   });
 });
