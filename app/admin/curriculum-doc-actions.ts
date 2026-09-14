@@ -435,7 +435,7 @@ export async function generateSectionProblems(params: {
                   options: {
                     type: "array",
                     items: { type: "string" },
-                    description: "객관식일 때만 정확히 5개의 선택지",
+                    description: "객관식일 때만 정확히 4개의 선택지",
                   },
                   correct_index: {
                     type: "number",
@@ -464,7 +464,7 @@ export async function generateSectionProblems(params: {
 - 문제 유형(스킬): ${skillType}
 - 난이도: ${difficulty === "easy" ? "쉬움" : difficulty === "medium" ? "보통" : "어려움"}
 - 답안 형식: ${FORMAT_LABEL[format]}
-${format === "mc" ? "객관식은 반드시 선택지 5개와 정답 인덱스를 포함해주세요." : ""}
+${format === "mc" ? "객관식은 반드시 선택지 4개와 정답 인덱스를 포함해주세요." : ""}
 이 문제들은 특정 학생이 아니라 이 교재를 배정받는 어떤 학생에게도 재사용될 문제
 은행에 들어갑니다. 실전 SAT/AP 시험에 나올 법한 퀄리티로 만들어주세요.`,
       },
@@ -522,7 +522,7 @@ export async function regenerateProblem(params: {
             options: {
               type: "array",
               items: { type: "string" },
-              description: "객관식일 때만 정확히 5개의 선택지",
+              description: "객관식일 때만 정확히 4개의 선택지",
             },
             correct_index: {
               type: "number",
@@ -557,7 +557,7 @@ ${current.correctIndex !== null ? `정답 인덱스: ${current.correctIndex}` : 
 선생님 피드백: ${feedback}
 
 이 피드백을 반영해 문제를 다시 작성해주세요.${
-          format === "mc" ? " 객관식은 반드시 선택지 5개와 정답 인덱스를 포함해주세요." : ""
+          format === "mc" ? " 객관식은 반드시 선택지 4개와 정답 인덱스를 포함해주세요." : ""
         }`,
       },
     ],
