@@ -1,7 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { loadMyCurriculumOverlay } from "./curriculum-overlay-actions";
+import {
+  loadMyCurriculumOverlay,
+  loadUnitPreview,
+  type UnitPreview,
+} from "./curriculum-overlay-actions";
 import type { OverlayUnit, StudentCurriculum } from "@/lib/curriculum-overlay-data";
 import { formatCurriculumProgressLabel } from "@/lib/curriculum-overlay-progress";
 
@@ -43,6 +47,7 @@ export default function CurriculumOverlayView({
     | { status: "error"; message: string }
     | { status: "ready"; data: StudentCurriculum }
   >({ status: "loading" });
+  const [openUnitId, setOpenUnitId] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -139,11 +144,130 @@ export default function CurriculumOverlayView({
                     </span>
                   </div>
                   {u.note && <p className="text-[12.5px] text-grey-500">{u.note}</p>}
+
+                  {/* 2026-09-13 확정 — 예습 허용. 예약이나 수업 시작 여부로 막지
+                      않는다. 열람만 하고 답을 제출하지는 않는다. */}
+                  <button
+                    onClick={() => setOpenUnitId(openUnitId === u.id ? null : u.id)}
+                    className="text-[12px] font-bold text-ink mt-1.5"
+                  >
+                    {openUnitId === u.id ? "미리보기 닫기" : "교재·문제 미리보기"}
+                  </button>
+                  {openUnitId === u.id && <UnitPreviewPanel unitId={u.id} />}
                 </div>
               ))}
             </div>
           )}
         </>
+      )}
+    </div>
+  );
+}
+
+/**
+ * 회차의 교재·문제를 수업 전에 보여준다.
+ *
+ * 정답·해설은 서버 응답에 아예 담기지 않는다(unit_preview_for_viewer) — 여기서
+ * 가리는 것이 아니다. 교사용 지도 노트(teaching_tip)도 마찬가지다.
+ */
+function UnitPreviewPanel({ unitId }: { unitId: string }) {
+  const [preview, setPreview] = useState<UnitPreview | null | "loading" | "error">("loading");
+
+  useEffect(() => {
+    let cancelled = false;
+    loadUnitPreview(unitId)
+      .then((p) => {
+        if (!cancelled) setPreview(p);
+      })
+      .catch(() => {
+        if (!cancelled) setPreview("error");
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [unitId]);
+
+  if (preview === "loading") {
+    return <p className="text-[12.5px] text-grey-500 mt-2">불러오는 중...</p>;
+  }
+  if (preview === "error") {
+    return <p className="text-[12.5px] text-red mt-2">미리보기를 불러오지 못했습니다.</p>;
+  }
+  if (!preview) {
+    return <p className="text-[12.5px] text-grey-500 mt-2">볼 수 있는 내용이 없습니다.</p>;
+  }
+
+  const empty = preview.materials.length === 0 && preview.problems.length === 0;
+
+  return (
+    <div className="mt-3 border-t-[1.5px] border-grey-200 pt-3">
+      <p className="text-[12px] text-grey-500 mb-3">
+        {preview.frozen
+          ? "이 회차는 이미 수업에서 다뤘습니다. 그때 쓴 내용을 그대로 보여줍니다."
+          : "수업 전까지 자료가 변경될 수 있습니다. 정답과 해설은 수업에서 확인합니다."}
+      </p>
+
+      {empty && (
+        <p className="text-[12.5px] text-grey-500">
+          아직 준비된 자료가 없습니다. 선생님이 담으면 여기에 나타납니다.
+        </p>
+      )}
+
+      {preview.materials.length > 0 && (
+        <section className="mb-4">
+          <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-1.5">
+            교재
+          </div>
+          {preview.materials.map((m) => (
+            <div key={m.curriculumDocId} className="mb-2.5">
+              <div className="text-[13px] font-bold text-ink">{m.title}</div>
+              {m.sections.length === 0 ? (
+                <p className="text-[12px] text-grey-500 mt-0.5">
+                  {m.versionId
+                    ? "본문이 비어 있습니다."
+                    : "이 교재는 아직 미리 볼 수 있는 내용이 저장되지 않았습니다."}
+                </p>
+              ) : (
+                m.sections.map((sec) => (
+                  <div key={sec.id} className="mt-1.5">
+                    <div className="text-[12.5px] font-bold text-grey-500">{sec.title}</div>
+                    <div
+                      className="text-[12.5px] text-ink leading-[1.65] prose-sm"
+                      dangerouslySetInnerHTML={{ __html: sec.body }}
+                    />
+                  </div>
+                ))
+              )}
+            </div>
+          ))}
+        </section>
+      )}
+
+      {preview.problems.length > 0 && (
+        <section>
+          <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-1.5">
+            문제
+          </div>
+          {preview.problems.map((p, i) => (
+            <div key={p.problemId} className="mb-2.5">
+              <div className="text-[12.5px] text-ink whitespace-pre-wrap leading-[1.6]">
+                {i + 1}. {p.passage ?? "(내용이 저장되지 않은 문제입니다)"}
+              </div>
+              {p.options && p.options.length > 0 && (
+                <ol className="mt-1 space-y-0.5">
+                  {p.options.map((o, j) => (
+                    <li key={j} className="text-[12px] text-grey-500">
+                      {j + 1}. {o}
+                    </li>
+                  ))}
+                </ol>
+              )}
+            </div>
+          ))}
+          <p className="text-[11.5px] text-grey-500 mt-2">
+            정답과 해설은 아직 보이지 않습니다.
+          </p>
+        </section>
       )}
     </div>
   );
