@@ -1,6 +1,6 @@
 "use client";
 
-import { splitLearningContent } from "@/lib/render-learning-content";
+import { splitLearningBlocks, splitLearningContent, type ContentPart } from "@/lib/render-learning-content";
 
 /**
  * 교재·문제 본문 한 덩어리를 읽기 좋게 그린다. 글 줄바꿈은 그대로 살리고,
@@ -10,9 +10,47 @@ import { splitLearningContent } from "@/lib/render-learning-content";
  * 가장 나쁘고, 교사가 오타를 발견할 수 있어야 한다.
  */
 export default function LearningText({ text, className }: { text: string; className?: string }) {
-  const parts = splitLearningContent(text);
+  // 2026-09-14 문제 템플릿 ②: 마크다운 파이프 표는 표로 그린다. 나머지 줄은 글·수식 조각.
+  const blocks = splitLearningBlocks(text);
   return (
     <div className={className}>
+      {blocks.map((block, b) =>
+        block.kind === "table" ? (
+          <div key={b} className="my-3 overflow-x-auto">
+            <table className="learning-table text-[13.5px] border-collapse">
+              <thead>
+                <tr>
+                  {block.header.map((h, i) => (
+                    <th key={i} className="border border-grey-200 bg-grey-100 px-3 py-1.5 text-left font-bold">
+                      <Inline parts={splitLearningContent(h)} />
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {block.rows.map((row, r) => (
+                  <tr key={r}>
+                    {row.map((cell, i) => (
+                      <td key={i} className="border border-grey-200 px-3 py-1.5">
+                        <Inline parts={splitLearningContent(cell)} />
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <Inline key={b} parts={splitLearningContent(block.text)} />
+        )
+      )}
+    </div>
+  );
+}
+
+function Inline({ parts }: { parts: ContentPart[] }) {
+  return (
+    <>
       {parts.map((part, i) => {
         if (part.kind === "text") {
           return (
@@ -46,6 +84,6 @@ export default function LearningText({ text, className }: { text: string; classN
           />
         );
       })}
-    </div>
+    </>
   );
 }

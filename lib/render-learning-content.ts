@@ -62,3 +62,60 @@ export function hasMath(source: string): boolean {
   TOKEN.lastIndex = 0;
   return TOKEN.test(source);
 }
+
+
+// -------------------------------------------------------------------------
+// 표 블록 (2026-09-14 문제 템플릿 ②) — 마크다운 파이프 표를 표로 그린다.
+//
+// SAT Math·RW 문항의 자극 상당수가 표다(x, f(x) / 데이터 집합 / 연구 결과). 별도 스키마 없이 본문에
+// | x | f(x) |
+// |---|------|
+// | 0 | 17   |
+// 처럼 쓰면 표가 된다. 표가 아닌 줄은 그대로 글(수식 포함) 조각으로 간다.
+// -------------------------------------------------------------------------
+
+export type ContentBlock =
+  | { kind: "paragraph"; text: string }
+  | { kind: "table"; header: string[]; rows: string[][] };
+
+const TABLE_ROW = /^\s*\|.*\|\s*$/;
+const TABLE_SEP = /^\s*\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?\s*$/;
+
+function splitCells(line: string): string[] {
+  const trimmed = line.trim().replace(/^\|/, "").replace(/\|$/, "");
+  return trimmed.split("|").map((c) => c.trim());
+}
+
+export function splitLearningBlocks(source: string): ContentBlock[] {
+  const lines = source.replace(/\r\n/g, "\n").split("\n");
+  const blocks: ContentBlock[] = [];
+  let buffer: string[] = [];
+  const flush = () => {
+    if (buffer.length) {
+      blocks.push({ kind: "paragraph", text: buffer.join("\n") });
+      buffer = [];
+    }
+  };
+  let i = 0;
+  while (i < lines.length) {
+    const line = lines[i];
+    // 표: 헤더 줄 + 구분 줄(---)로 시작하는 연속된 파이프 줄.
+    if (TABLE_ROW.test(line) && i + 1 < lines.length && TABLE_SEP.test(lines[i + 1])) {
+      flush();
+      const header = splitCells(line);
+      const rows: string[][] = [];
+      i += 2;
+      while (i < lines.length && TABLE_ROW.test(lines[i]) && !TABLE_SEP.test(lines[i])) {
+        rows.push(splitCells(lines[i]));
+        i += 1;
+      }
+      blocks.push({ kind: "table", header, rows });
+      continue;
+    }
+    buffer.push(line);
+    i += 1;
+  }
+  flush();
+  if (blocks.length === 0) blocks.push({ kind: "paragraph", text: source });
+  return blocks;
+}

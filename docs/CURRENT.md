@@ -1,5 +1,14 @@
 # ALTON — 현재 상태 (2026-09-14 기준)
 
+> **2026-09-14 야간 — P3 9차: 문제 템플릿 ① SPR(숫자 입력) / 문제은행 난이도·전체 공개·자동 확장 칸.**
+> 설계안 [`2026-09-14-problem-template-design.md`](2026-09-14-problem-template-design.md)(SAT Practice Test 5 분석). 승인 순서: ①SPR → ②KaTeX·표 → ③표준 SVG 도형 → ④이미지 첨부 → ⑤유형 코드·2지문·메모(RW 포함).
+> 공유 non-prod: **`20261360000000`까지 적용됨.** Preview `__PREVIEW_URL4__`.
+> - `problem_format` 에 **`spr`**(서술형 essay 는 AP용으로 별도 유지). `problem_versions.answers` 동치 정답 목록, `spr_answer_matches`(공백·쉼표·$·% 제거, 분수, 소수 4자리
+>   반올림·절사). `submit_problem_attempt` 텍스트 답 자동 채점·채점 전 재입력, 공개 검사(spr 정답 필수·mc 선택지/정답 필수). 초안 RPC 8인수(7인수 제거).
+> - 문제은행: 형식 `숫자 입력(SPR)`, 초안 편집 정답 목록 칸, AI 스키마 `answers`, **난이도 선택**, **전체 공개**(보이는 초안 일괄), 지문·해설 칸 자동 확장.
+> - 문제 패널(수업·과제): SPR 입력 + `답 저장`, 채점 뒤 정답 목록 초록, 교사 채점 구역에 학생 답·자동 채점.
+> - 검증: 통합 20(spr 정규화·자동 채점·재입력·공개 검사 포함), 컴포넌트 ProblemsPanel 29·ProblemBankTab 26·HomeworkTab 7.
+
 > **2026-09-14 야간 — P3 8차: 과제 답안·필기 분리 / 문제 화면 필기 / 채점 결과·점수 / 관리자 교재 탭 통합.**
 > 커밋 `424d0e1` → `(이번)`. **Preview `https://alton-riw673x9q-alton7.vercel.app`.** 공유 non-prod: **`20261359000000`까지 적용됨.**
 >
