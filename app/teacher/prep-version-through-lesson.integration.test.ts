@@ -412,3 +412,111 @@ describe("쓸 수 없는 항목은 사유를 붙여 시작을 막는다", () => 
     ).toBe("1");
   });
 });
+
+describe("미리 본 뒤에 바뀌면 조용히 적용하지 않는다", () => {
+  it("지문이 다르면 적용을 거절하고 구성은 그대로 남는다", () => {
+    const keywordId = newKeyword();
+    const { problemId, v1 } = publishedProblem(keywordId);
+    const { overlayUnitId, prepId } = makeUnitWithPrep(keywordId, problemId);
+    republish(problemId, `2판 ${uniq()}`);
+
+    const preview = JSON.parse(
+      psql(`select preview_unit_recomposition('student', '${overlayUnitId}')::text;`)
+    ) as { fingerprint: string };
+    expect(preview.fingerprint).toMatch(/^[0-9a-f]{32}$/);
+
+    // 미리 본 뒤에 또 한 번 공개된다 — 적용 결과가 달라질 상황이다.
+    republish(problemId, `3판 ${uniq()}`);
+
+    const err = psqlExpectError(
+      `select recompose_unit('student', '${overlayUnitId}', '${preview.fingerprint}');`
+    );
+    expect(err).toContain("변경분을 다시 확인");
+    // 아무것도 적용되지 않았다.
+    expect(
+      psql(`select problem_version_id from curriculum_unit_prep_items where prep_id = '${prepId}';`)
+    ).toBe(v1);
+  });
+
+  it("바뀌지 않았으면 그대로 적용된다", () => {
+    const keywordId = newKeyword();
+    const { problemId } = publishedProblem(keywordId);
+    const { overlayUnitId, prepId } = makeUnitWithPrep(keywordId, problemId);
+    const v2 = republish(problemId, `2판 ${uniq()}`);
+
+    const preview = JSON.parse(
+      psql(`select preview_unit_recomposition('student', '${overlayUnitId}')::text;`)
+    ) as { fingerprint: string };
+
+    psql(`select recompose_unit('student', '${overlayUnitId}', '${preview.fingerprint}');`);
+    expect(
+      psql(`select problem_version_id from curriculum_unit_prep_items where prep_id = '${prepId}';`)
+    ).toBe(v2);
+  });
+
+  it("미리보기는 아무 흔적도 남기지 않는다 — 구성도 표시도 그대로", () => {
+    const keywordId = newKeyword();
+    const { problemId } = publishedProblem(keywordId);
+    const { overlayUnitId } = makeUnitWithPrep(keywordId, problemId);
+    republish(problemId, `2판 ${uniq()}`);
+    psql(`update curriculum_overlay_units set composition_dirty = true where id = '${overlayUnitId}';`);
+
+    psql(`select preview_unit_recomposition('student', '${overlayUnitId}');`);
+
+    // 다시 구성을 부르지 않았으므로 '변경 있음' 표시도 내려가지 않는다.
+    expect(
+      psql(`select composition_dirty from curriculum_overlay_units where id = '${overlayUnitId}';`)
+    ).toBe("t");
+  });
+});
+
+describe("수업 중 답안 저장 — v3 수업에 실제로 붙는다", () => {
+  it("시작한 v3 수업에 답안을 남길 수 있다", () => {
+    const keywordId = newKeyword();
+    const { problemId } = publishedProblem(keywordId);
+    const { overlayUnitId, sessionId } = makeUnitWithPrep(keywordId, problemId);
+    psql(`select link_unit_prep_to_session('${overlayUnitId}', '${sessionId}', '${TEACHER_ID}');`);
+    startLesson(sessionId);
+
+    // 20261337000000 이전에는 session_id 가 legacy_sessions 를 가리켜 FK 위반으로
+    // 실패했다 — 수업 중 문제를 푸는 경로가 통째로 막혀 있었다.
+    psql(
+      `insert into session_problem_attempts (session_id, student_id, problem_id, response, correct)
+       values ('${sessionId}', '${STUDENT_ID}', '${problemId}', '0'::jsonb, true);`
+    );
+    expect(
+      psql(`select count(*) from session_problem_attempts where session_id = '${sessionId}';`)
+    ).toBe("1");
+  });
+
+  it("수업 밖 복습 기록(session_id = null)도 그대로 남는다", () => {
+    const keywordId = newKeyword();
+    const { problemId } = publishedProblem(keywordId);
+    psql(
+      `insert into session_problem_attempts (session_id, student_id, problem_id, response, correct)
+       values (null, '${STUDENT_ID}', '${problemId}', '1'::jsonb, false);`
+    );
+    expect(
+      psql(`select count(*) from session_problem_attempts
+            where session_id is null and problem_id = '${problemId}';`)
+    ).toBe("1");
+    psql(`delete from session_problem_attempts where problem_id = '${problemId}';`);
+  });
+
+  it("FK 를 옮기면서 기록을 지우거나 다른 수업에 붙이지 않았다", () => {
+    // 옮길 수 없었던 레거시 참조는 따로 보관돼 있고, 그 행의 session_id 만 비었다.
+    // 현재 보관 건수와 남은 답안 수가 어긋나지 않는지 본다.
+    const orphaned = psql(
+      `select count(*) from session_problem_attempts a
+       where a.session_id is not null
+         and not exists (select 1 from sessions s where s.id = a.session_id);`
+    );
+    expect(orphaned).toBe("0");
+
+    const kept = psql(
+      `select count(*) from session_problem_attempt_legacy_links l
+       where not exists (select 1 from session_problem_attempts a where a.id = l.attempt_id);`
+    );
+    expect(kept).toBe("0");
+  });
+});

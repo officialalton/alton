@@ -109,10 +109,16 @@ export default function CompositionPanel({
   async function applyChanges() {
     setBusy(true);
     setError(null);
-    const result = await applyRecomposition(layer, unitId);
+    // 미리 본 시점의 지문을 들고 간다. 그 사이에 바뀌었으면 서버가 거절하고,
+    // 화면은 변경분을 다시 보여준다 — 적힌 것과 다른 결과가 조용히 들어가지 않는다.
+    const result = await applyRecomposition(layer, unitId, pending?.fingerprint ?? null);
     setBusy(false);
     if (!result.ok) {
       setError(result.error);
+      if ("stale" in result && result.stale) {
+        setPending(null);
+        await showChanges();
+      }
       return;
     }
     window.location.reload();

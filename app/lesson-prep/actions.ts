@@ -266,6 +266,11 @@ export type RecompositionSummary = {
   problemsAvailable: number;
   /** 담을 때의 버전에서 지금 공개본으로 올라갈 항목 수. */
   versionsUpdated: number;
+  /**
+   * 미리 본 시점의 입력 지문. 적용할 때 그대로 들고 간다 — 그 사이에 무언가
+   * 바뀌었으면 서버가 적용을 거절한다(다른 결과를 조용히 넣지 않는다).
+   */
+  fingerprint: string | null;
 };
 
 function asSummary(value: unknown): RecompositionSummary {
@@ -278,6 +283,7 @@ function asSummary(value: unknown): RecompositionSummary {
     problemsRemoved: n("problemsRemoved"),
     problemsAvailable: n("problemsAvailable"),
     versionsUpdated: n("versionsUpdated"),
+    fingerprint: typeof v.fingerprint === "string" ? v.fingerprint : null,
   };
 }
 
@@ -303,17 +309,32 @@ export async function previewRecomposition(
 /** 실제로 적용한다. 수동 선택·제외·순서는 그대로 남는다. */
 export async function applyRecomposition(
   layer: PrepLayer,
-  unitId: string
-): Promise<{ ok: true; value: RecompositionSummary } | { ok: false; error: string }> {
+  unitId: string,
+  /** 미리 본 시점의 지문. 그 사이에 바뀌었으면 서버가 거절한다. */
+  expectedFingerprint: string | null
+): Promise<
+  | { ok: true; value: RecompositionSummary }
+  | { ok: false; error: string; stale?: true }
+> {
   const { supabase, error: denied } = await gate(layer);
   if (!supabase) return { ok: false, error: denied };
 
   const { data, error } = await supabase.rpc("recompose_unit", {
     p_layer: layer,
     p_unit_id: unitId,
+    p_expected_fingerprint: expectedFingerprint,
   });
   if (error) {
     console.error(JSON.stringify({ event: "prep_recompose_failed", layer, message: error.message }));
+    // ALT02 = 미리 본 뒤에 입력이 바뀌었다. 사용자가 다시 확인해야 하므로 일반
+    // 실패와 구분해 알린다.
+    if (error.code === "ALT02") {
+      return {
+        ok: false,
+        stale: true,
+        error: "미리 본 뒤에 구성이나 교재·문제가 바뀌었습니다. 변경분을 다시 확인해주세요.",
+      };
+    }
     return { ok: false, error: "다시 구성하지 못했습니다." };
   }
   return { ok: true, value: asSummary(data) };
