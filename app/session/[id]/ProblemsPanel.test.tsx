@@ -23,6 +23,12 @@ vi.mock("./problem-work-actions", () => ({
   refreshSessionProblems: vi.fn(),
 }));
 
+vi.mock("./PdfPageAnnotationLayer", () => ({
+  default: ({ target, role }: { target: { problemId?: string }; role: string }) => (
+    <div data-testid="problem-annotation-layer" data-problem={target.problemId} data-role={role} />
+  ),
+}));
+
 const sent: unknown[] = [];
 vi.mock("@/utils/supabase/client", () => ({
   createClient: () => ({
@@ -336,5 +342,28 @@ describe("ProblemsPanel — 보호자", () => {
     expect(screen.getByText("보호자는 읽기 전용입니다")).toBeInTheDocument();
     expect(screen.queryByText("풀이 제출")).not.toBeInTheDocument();
     expect(screen.queryByLabelText("채점 결과")).not.toBeInTheDocument();
+  });
+
+});
+
+// 2026-09-14 UAT — 문제 화면 전체 필기. 과제 탭도 같은 패널이라 같이 된다.
+describe("ProblemsPanel — 문제 위 공유 필기 레이어", () => {
+  it("보이는 문제마다 (수업, 문제) 대상으로 레이어가 얹히고, 역할이 넘어간다", () => {
+    renderPanel([mc, essay], "teacher");
+    const layer = screen.getByTestId("problem-annotation-layer");
+    expect(layer).toHaveAttribute("data-problem", "p1");
+    expect(layer).toHaveAttribute("data-role", "teacher");
+    fireEvent.click(screen.getByRole("button", { name: "다음 문제 →" }));
+    expect(screen.getByTestId("problem-annotation-layer")).toHaveAttribute("data-problem", "p2");
+  });
+
+  it("과제 패널에도 같은 레이어가 있고, 보호자는 읽기 전용(reader)이다", () => {
+    render(<ProblemsPanel sessionId="s1" studentId="stu1" problems={[mc]} viewerRole="parent" source="homework" />);
+    expect(screen.getByTestId("problem-annotation-layer")).toHaveAttribute("data-role", "reader");
+  });
+
+  it("시작 전 미리보기에는 필기 레이어가 없다", () => {
+    renderPanel([{ ...mc, planned: true }]);
+    expect(screen.queryByTestId("problem-annotation-layer")).not.toBeInTheDocument();
   });
 });

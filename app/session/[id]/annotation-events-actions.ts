@@ -3,6 +3,7 @@
 import { requireUser } from "@/lib/auth";
 import type { StrokePayload, AnnotationEvent } from "./annotation-events-types";
 import { reconstructPageStrokes } from "./pdf-page-store";
+import { isProblemPageTarget, type StrokeLayerTarget } from "./annotation-events-types";
 
 // R8 follow-up (2026-09-07) — session_annotation_events(append-only 이벤트 로그,
 // supabase/migrations/20261223000000_r8_session_annotation_events.sql)에 대한
@@ -182,19 +183,12 @@ export async function loadStudentMaterialStrokes(
 // eventId 로 재시도 중복을 막는다. 조회는 같은 다섯 값으로 좁힌다 — 다른 페이지·다른
 // 버전의 획은 섞이지 않는다.
 
-export type PageStrokeTarget = {
-  sessionId: string;
-  curriculumDocId: string;
-  curriculumDocVersionId: string;
-  pageNumber: number;
-};
+export type {
+  PageStrokeTarget,
+  ProblemPageStrokeTarget,
+  StrokeLayerTarget,
+} from "./annotation-events-types";
 
-/**
- * 페이지 필기 한 조각. 펜·지우개 획 외에(2026-09-14 UAT)
- *   - `tool: "text"`  클릭한 자리(x0,y0)에 놓은 글 상자. `text`·`size` 를 싣는다. 타이핑으로 필기하는
- *                     PC 수업용 — 교사·학생 각자 레이어에 기록된다.
- *   - `tool: "clear"` 이 페이지의 내 레이어 전체 지우기. 서버는 clear_all 이벤트로 남긴다.
- */
 export type PageStrokePayload = Omit<StrokePayload, "tool"> & {
   tool: "pen" | "eraser" | "text" | "clear";
   text?: string;
@@ -204,20 +198,27 @@ export type PageStrokePayload = Omit<StrokePayload, "tool"> & {
 
 
 export async function appendPageStrokeEvents(params: {
-  target: PageStrokeTarget;
+  target: StrokeLayerTarget;
   segments: PageStrokePayload[];
   scope: "teacher_shared" | "student_shared";
 }): Promise<{ savedEventIds: string[] }> {
   if (params.segments.length === 0) return { savedEventIds: [] };
   const { supabase } = await requireUser();
-  const { data, error } = await supabase.rpc("append_page_stroke_events", {
-    p_session_id: params.target.sessionId,
-    p_segments: params.segments,
-    p_scope: params.scope,
-    p_curriculum_doc_id: params.target.curriculumDocId,
-    p_curriculum_doc_version_id: params.target.curriculumDocVersionId,
-    p_page_number: params.target.pageNumber,
-  });
+  const { data, error } = isProblemPageTarget(params.target)
+    ? await supabase.rpc("append_problem_page_stroke_events", {
+        p_session_id: params.target.sessionId,
+        p_segments: params.segments,
+        p_scope: params.scope,
+        p_problem_id: params.target.problemId,
+      })
+    : await supabase.rpc("append_page_stroke_events", {
+        p_session_id: params.target.sessionId,
+        p_segments: params.segments,
+        p_scope: params.scope,
+        p_curriculum_doc_id: params.target.curriculumDocId,
+        p_curriculum_doc_version_id: params.target.curriculumDocVersionId,
+        p_page_number: params.target.pageNumber,
+      });
   if (error) throw new Error(error.message);
   return {
     savedEventIds: ((data ?? []) as { client_event_id: string | null }[])
@@ -228,20 +229,22 @@ export async function appendPageStrokeEvents(params: {
 
 /** 한 페이지의 한 범위 필기 — 마지막 전체 지우기 이후의 것만. */
 export async function loadPageStrokes(
-  target: PageStrokeTarget,
+  target: StrokeLayerTarget,
   scope: "teacher_shared" | "student_shared"
 ): Promise<PageStrokePayload[]> {
   const { supabase } = await requireUser();
-  const { data, error } = await supabase
+  let query = supabase
     .from("session_annotation_events")
     .select("payload, client_event_id, seq")
     .eq("session_id", target.sessionId)
-    .eq("scope", scope)
-    .eq("curriculum_doc_id", target.curriculumDocId)
-    .eq("curriculum_doc_version_id", target.curriculumDocVersionId)
-    .eq("page_number", target.pageNumber)
-    .in("event_type", ["stroke", "clear_all"])
-    .order("seq", { ascending: true });
+    .eq("scope", scope);
+  query = isProblemPageTarget(target)
+    ? query.eq("problem_id", target.problemId).is("problem_work_id", null)
+    : query
+        .eq("curriculum_doc_id", target.curriculumDocId)
+        .eq("curriculum_doc_version_id", target.curriculumDocVersionId)
+        .eq("page_number", target.pageNumber);
+  const { data, error } = await query.in("event_type", ["stroke", "clear_all"]).order("seq", { ascending: true });
   if (error) throw new Error(error.message);
   return reconstructPageStrokes(
     (data ?? []).map((row) => ({

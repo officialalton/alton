@@ -28,13 +28,19 @@ export function reconstructPageStrokes(items: PageStrokePayload[]): PageStrokePa
 export type PageStoreKey = {
   viewerUserId: string;
   sessionId: string;
-  curriculumDocVersionId: string;
-  pageNumber: number;
+  /** 대상 식별자 — PDF 는 `버전:페이지`, 문제 한 장은 `problem:문제id`(2026-09-14). */
+  targetKey: string;
   scope: PageStrokeScope;
 };
 
 export function pageStoreKey(k: PageStoreKey): string {
-  return `alton:unsaved-page-strokes:${k.viewerUserId}:${k.sessionId}:${k.curriculumDocVersionId}:${k.pageNumber}:${k.scope}`;
+  return `alton:unsaved-page-strokes:${k.viewerUserId}:${k.sessionId}:${k.targetKey}:${k.scope}`;
+}
+
+/** 레이어 대상 하나를 문자열로 — 보관함 키·실시간 채널 이름에 쓴다. */
+export function strokeTargetKey(target: { sessionId: string } & Record<string, unknown>): string {
+  if (typeof target.problemId === "string") return `problem:${target.problemId}`;
+  return `${String(target.curriculumDocVersionId)}:${String(target.pageNumber)}`;
 }
 
 export type StrokeWithId = PageStrokePayload & { eventId: string };

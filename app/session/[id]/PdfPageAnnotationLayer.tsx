@@ -15,7 +15,7 @@ import {
   appendPageStrokeEvents,
   loadPageStrokes,
   type PageStrokePayload,
-  type PageStrokeTarget,
+  type StrokeLayerTarget,
 } from "./annotation-events-actions";
 import {
   ackSaved,
@@ -26,6 +26,7 @@ import {
   pageStoreKey,
   persist,
   recover,
+  strokeTargetKey,
   takeBatch,
   type PageStrokeScope,
   type StrokeWithId,
@@ -60,7 +61,8 @@ export type PdfPageAnnotationHandle = {
 export default forwardRef<
   PdfPageAnnotationHandle,
   {
-    target: PageStrokeTarget;
+    /** PDF 페이지 또는 문제 한 장(2026-09-14) — 대상마다 다시 마운트된다(key). */
+    target: StrokeLayerTarget;
     role: MaterialLayerRole;
     viewerUserId?: string;
     /** 렌더된 페이지의 픽셀 크기. 0 이면 아직 렌더 전 — 입력을 열지 않는다. */
@@ -99,15 +101,10 @@ export default forwardRef<
 
   const myScope: PageStrokeScope | null =
     role === "teacher" ? "teacher_shared" : role === "student" ? "student_shared" : null;
+  const targetKey = strokeTargetKey(target);
   const storeKey =
     viewerUserId && myScope
-      ? pageStoreKey({
-          viewerUserId,
-          sessionId: target.sessionId,
-          curriculumDocVersionId: target.curriculumDocVersionId,
-          pageNumber: target.pageNumber,
-          scope: myScope,
-        })
+      ? pageStoreKey({ viewerUserId, sessionId: target.sessionId, targetKey, scope: myScope })
       : null;
 
   const canvasFor = (scope: PageStrokeScope) =>
@@ -205,14 +202,12 @@ export default forwardRef<
       cancelled = true;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [target.sessionId, target.curriculumDocVersionId, target.pageNumber, storeKey]);
+  }, [target.sessionId, targetKey, storeKey]);
 
   // 실시간 — 이 페이지 채널만. 상대 획은 상대 레이어에 그린다.
   useEffect(() => {
     const supabase = createClient();
-    const channel = supabase.channel(
-      `session-pdf-page:${target.sessionId}:${target.curriculumDocVersionId}:${target.pageNumber}`
-    );
+    const channel = supabase.channel(`session-pdf-page:${target.sessionId}:${targetKey}`);
     channel
       .on("broadcast", { event: "stroke" }, ({ payload }) => {
         const incoming = payload as { scope: PageStrokeScope; seg: PageStrokePayload };
@@ -234,7 +229,7 @@ export default forwardRef<
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [target.sessionId, target.curriculumDocVersionId, target.pageNumber, myScope, showTeacher, showStudent, drawSegment]);
+  }, [target.sessionId, targetKey, myScope, showTeacher, showStudent, drawSegment]);
 
   const flush = useCallback(async (): Promise<boolean> => {
     if (!myScope) return true;

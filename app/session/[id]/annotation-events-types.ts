@@ -44,3 +44,30 @@ export function reconstructVisibleStrokes(events: AnnotationEvent[]): StrokePayl
   }
   return visible.map((ev) => ev.payload as StrokePayload);
 }
+
+// PDF 페이지 / 문제 한 장 — 공유 필기 레이어의 대상(2026-09-14).
+export type PageStrokeTarget = {
+  sessionId: string;
+  curriculumDocId: string;
+  curriculumDocVersionId: string;
+  pageNumber: number;
+};
+
+/** 문제 한 장 위의 필기(2026-09-14) — 수업 문제든 과제든 (수업, 문제) 가 대상이다. */
+export type ProblemPageStrokeTarget = {
+  sessionId: string;
+  problemId: string;
+};
+
+export type StrokeLayerTarget = PageStrokeTarget | ProblemPageStrokeTarget;
+
+export function isProblemPageTarget(t: StrokeLayerTarget): t is ProblemPageStrokeTarget {
+  return "problemId" in t;
+}
+
+/**
+ * 페이지 필기 한 조각. 펜·지우개 획 외에(2026-09-14 UAT)
+ *   - `tool: "text"`  클릭한 자리(x0,y0)에 놓은 글 상자. `text`·`size` 를 싣는다. 타이핑으로 필기하는
+ *                     PC 수업용 — 교사·학생 각자 레이어에 기록된다.
+ *   - `tool: "clear"` 이 페이지의 내 레이어 전체 지우기. 서버는 clear_all 이벤트로 남긴다.
+ */

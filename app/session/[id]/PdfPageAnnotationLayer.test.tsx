@@ -127,7 +127,7 @@ describe("PDF 페이지 필기 레이어", () => {
     });
     const calls = vi.mocked(actions.appendPageStrokeEvents).mock.calls;
     expect(calls).toHaveLength(1);
-    expect(calls[0][0].target.pageNumber).toBe(2);
+    expect((calls[0][0].target as { pageNumber: number }).pageNumber).toBe(2);
     expect(calls[0][0].segments).toHaveLength(1);
     expect(calls[0][0].segments[0].x0).toBe(50);
     // 1쪽 획은 여전히 1쪽 보관함에 있다 — 1쪽으로 돌아오면 복구·저장된다.

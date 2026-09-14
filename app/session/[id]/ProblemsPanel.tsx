@@ -17,6 +17,7 @@ import {
 import ProblemWorkBoardCanvas, { type ProblemBoardHandle } from "./ProblemWorkBoard";
 import LearningText from "./LearningText";
 import { stripInlineOptions } from "@/lib/problem-text";
+import PdfPageAnnotationLayer from "./PdfPageAnnotationLayer";
 
 const DIFFICULTY_LABEL: Record<string, string> = {
   easy: "쉬움",
@@ -67,6 +68,22 @@ export default function ProblemsPanel({
   source?: ProblemSource;
 }) {
   const noun = source === "homework" ? "과제" : "문제";
+
+  // 2026-09-14 UAT — 문제 화면 전체(여백 포함)에 교사·학생 공유 필기를 얹는다. PDF 페이지 필기와 같은 레이어이며
+  // 대상만 (수업, 문제)다. 수업 문제와 과제 문제가 같은 패널이라 과제 탭에서도 그대로 된다.
+  const sheetRef = useRef<HTMLDivElement | null>(null);
+  const [sheetSize, setSheetSize] = useState({ width: 0, height: 0 });
+  useEffect(() => {
+    const el = sheetRef.current;
+    if (!el || typeof ResizeObserver === "undefined") return;
+    const ro = new ResizeObserver(() => {
+      setSheetSize({ width: Math.floor(el.clientWidth), height: Math.floor(el.clientHeight) });
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+  const layerRole: "teacher" | "student" | "reader" =
+    viewerRole === "teacher" ? "teacher" : viewerRole === "student" ? "student" : "reader";
   const [problems, setProblems] = useState(initialProblems);
   // 서버가 새 목록을 내려주면(페이지 재렌더) 그것을 따른다 — 렌더 중 상태 맞추기.
   const [seenInitial, setSeenInitial] = useState(initialProblems);
@@ -286,7 +303,18 @@ export default function ProblemsPanel({
         })}
       </nav>
 
-      <div className="max-w-[760px] mx-auto px-5 sm:px-8 py-7 md:col-start-2 w-full">
+      <div ref={sheetRef} className="relative md:col-start-2 w-full" data-testid="problem-sheet">
+      {currentProblem && !currentProblem.planned && (
+        <PdfPageAnnotationLayer
+          key={`${sessionId}:${currentProblem.problemId}`}
+          target={{ sessionId, problemId: currentProblem.problemId }}
+          role={layerRole}
+          viewerUserId={viewerUserId}
+          width={sheetSize.width}
+          height={sheetSize.height}
+        />
+      )}
+      <div className="max-w-[760px] mx-auto px-5 sm:px-8 py-7 w-full">
         {error && <p className="text-[12.5px] text-red mb-3">{error}</p>}
 
         <div className="flex items-center justify-between mb-3">
@@ -702,6 +730,7 @@ export default function ProblemsPanel({
             </article>
           );
         })}
+      </div>
       </div>
     </div>
   );

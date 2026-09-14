@@ -390,3 +390,40 @@ describe("issue_homework_items / withdraw_homework_item — 교사가 골라 발
     expect(psql(`select count(*) from session_homework_items where id = '${itemId}';`)).toBe("0");
   });
 });
+
+// ------------------------------------------------------------ 문제 한 장 위 공유 필기 (2026-09-14)
+describe("append_problem_page_stroke_events — 문제 위 교사·학생 공유 필기(수업 문제·과제 모두)", () => {
+  const seg = (o: Record<string, unknown>) =>
+    JSON.stringify({ x0: 1, y0: 1, x1: 2, y1: 2, color: "#000", tool: "pen", ...o }).replace(/'/g, "''");
+
+  it("수업 문제와 과제 문제 위에 쓰고, 이 수업 문제가 아니면 거절한다. clear·text 도 같은 규약", () => {
+    const { sessionId, mcId } = startedSession();
+    const call = (who: string, scope: string, problemId: string, segs: string[]) =>
+      asUser(who, `select count(*) from append_problem_page_stroke_events('${sessionId}', '[${segs.join(",")}]'::jsonb, '${scope}', '${problemId}');`);
+    expect(call(TEACHER_ID, "teacher_shared", mcId, [seg({ x0: 10 })])).toBe("1");
+    expect(call(STUDENT_ID, "student_shared", mcId, [seg({ x0: 20 }), seg({ tool: "text", text: "메모", size: 18 })])).toBe("2");
+    expect(call(TEACHER_ID, "teacher_shared", mcId, [seg({ tool: "clear" })])).toBe("1");
+    // 학생은 교사 레이어에 못 쓴다(RLS).
+    expect(fails(() => call(STUDENT_ID, "teacher_shared", mcId, [seg({})]))).not.toBe("");
+
+    // 과제로 낸 문제(고정본에는 없는)도 이 수업의 문제다.
+    const hw = psql(
+      `insert into problems (format, passage, subject_id, status, created_by) values ('essay', '과제 전용', '${SUBJECT_ID}', 'confirmed', '${TEACHER_ID}') returning id;`
+    );
+    const kw = psql(`select keyword_id from curriculum_overlay_unit_keywords k join session_curriculum_units s on s.overlay_unit_id = k.overlay_unit_id where s.session_id = '${sessionId}' limit 1;`);
+    psql(`insert into problem_keywords (problem_id, keyword_id) values ('${hw}', '${kw}');`);
+    asUser(TEACHER_ID, `select issue_homework_items('${sessionId}', array['${hw}']::uuid[]);`);
+    expect(call(TEACHER_ID, "teacher_shared", hw, [seg({ x0: 30 })])).toBe("1");
+
+    const stranger = psql(
+      `insert into problems (format, passage, subject_id, status, created_by) values ('mc', '남의 문제', '${SUBJECT_ID}', 'confirmed', '${TEACHER_ID}') returning id;`
+    );
+    expect(fails(() => call(TEACHER_ID, "teacher_shared", stranger, [seg({})]))).toContain("이 수업의 문제가 아닙니다");
+
+    const rows = psql(
+      `select scope || ':' || event_type from session_annotation_events
+       where session_id = '${sessionId}' and problem_id = '${mcId}' and problem_work_id is null order by seq;`
+    ).split("\n");
+    expect(rows).toEqual(["teacher_shared:stroke", "student_shared:stroke", "student_shared:stroke", "teacher_shared:clear_all"]);
+  });
+});

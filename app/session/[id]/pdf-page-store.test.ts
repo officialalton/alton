@@ -31,9 +31,9 @@ describe("PDF 페이지 필기 보관함", () => {
   beforeEach(() => { storage = memoryStorage(); });
 
   it("보관함 키에 버전·페이지·범위가 들어간다 — 대상이 다르면 섞이지 않는다", () => {
-    const a = pageStoreKey({ viewerUserId: "u", sessionId: "s", curriculumDocVersionId: "v1", pageNumber: 1, scope: "teacher_shared" });
-    const b = pageStoreKey({ viewerUserId: "u", sessionId: "s", curriculumDocVersionId: "v1", pageNumber: 2, scope: "teacher_shared" });
-    const c = pageStoreKey({ viewerUserId: "u", sessionId: "s", curriculumDocVersionId: "v2", pageNumber: 1, scope: "teacher_shared" });
+    const a = pageStoreKey({ viewerUserId: "u", sessionId: "s", targetKey: `${"v1"}:1`, scope: "teacher_shared" });
+    const b = pageStoreKey({ viewerUserId: "u", sessionId: "s", targetKey: `${"v1"}:2`, scope: "teacher_shared" });
+    const c = pageStoreKey({ viewerUserId: "u", sessionId: "s", targetKey: `${"v2"}:1`, scope: "teacher_shared" });
     expect(new Set([a, b, c]).size).toBe(3);
   });
 
