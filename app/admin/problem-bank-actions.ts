@@ -9,8 +9,13 @@ import { createAdminClient } from "@/lib/supabase-admin";
 // 있어서, 과목 전체의 문제를 모아 보고 검수·공개하는 자리가 없었다.
 //
 // **자동 공개는 없다.** 새 문제도 AI가 만든 문제도 전부 draft로 들어오고,
-// 공개는 draft → 검수 요청 → 공개 세 단계를 사람이 눌러야 한다. 그 흐름은
-// 20261293000000의 DB 함수가 강제한다(검수 중인 버전만 공개 가능).
+// 사람이 내용을 눈으로 확인한 뒤 공개를 눌러야 한다.
+//
+// 2026-09-13: 화면의 흐름은 **초안 저장 → 미리보기·내용 확인 → 공개**다. 관리자
+// 본인이 자기에게 검수를 요청하는 단계는 없앴다. DB의 draft → in_review →
+// published 전이는 그대로 두되 한 트랜잭션에서 처리하고
+// (confirm_and_publish_problem_version), 별도 검수자가 승인한 것처럼 기록하지
+// 않는다 — review_kind에 self_confirmed로 남는다.
 //
 // 오류는 던지지 않고 { ok, error }로 돌려준다 — 던진 예외는 Production에서
 // 내부 오류 코드로 마스킹된다(2026-09-12 teacher-subjects-actions와 같은 부류).
@@ -39,13 +44,20 @@ export type BankProblem = {
    */
   readiness: "ok" | "not_confirmed" | "archived" | "no_published_version" | "no_keyword";
   /** 지금 공개돼 있는 내용. 없으면 아직 공개된 적이 없다. */
-  published: {
-    versionId: string;
-    passage: string | null;
-    options: string[] | null;
-    correctIndex: number | null;
-    explanation: string | null;
-  } | null;
+  published: ProblemContent | null;
+  /**
+   * 지금 작업 중인 초안. 있으면 "수정 초안 만들기"가 새로 만들지 않고 이것을
+   * 이어서 고친다 — 반복 클릭으로 초안이 늘어나지 않게 한다.
+   */
+  draft: ProblemContent | null;
+};
+
+export type ProblemContent = {
+  versionId: string;
+  passage: string | null;
+  options: string[] | null;
+  correctIndex: number | null;
+  explanation: string | null;
 };
 
 export type BankResult<T = undefined> =
@@ -130,23 +142,32 @@ export async function listBankProblemsAction(
 
   // 지금 공개돼 있는 내용. 목록의 problems.passage 는 오래된 칸이라 비어 있을 수
   // 있다 — 그래서 공개된 문제가 "(아직 내용이 없는 문제)"로 보였다.
-  const { data: publishedRows } = await admin
+  const { data: contentRows } = await admin
     .from("problem_versions")
-    .select("id, problem_id, passage, options, correct_index, explanation")
+    .select("id, problem_id, status, version_no, passage, options, correct_index, explanation")
     .in("problem_id", problemIds)
-    .eq("status", "published");
-  const publishedByProblem = new Map(
-    (publishedRows ?? []).map((v) => [
-      v.problem_id as string,
-      {
-        versionId: v.id as string,
-        passage: (v.passage as string | null) ?? null,
-        options: (v.options as string[] | null) ?? null,
-        correctIndex: (v.correct_index as number | null) ?? null,
-        explanation: (v.explanation as string | null) ?? null,
-      },
-    ])
-  );
+    .in("status", ["published", "draft", "in_review"])
+    .order("version_no", { ascending: false });
+
+  const asContent = (v: Record<string, unknown>): ProblemContent => ({
+    versionId: v.id as string,
+    passage: (v.passage as string | null) ?? null,
+    options: (v.options as string[] | null) ?? null,
+    correctIndex: (v.correct_index as number | null) ?? null,
+    explanation: (v.explanation as string | null) ?? null,
+  });
+
+  const publishedByProblem = new Map<string, ProblemContent>();
+  const draftByProblem = new Map<string, ProblemContent>();
+  for (const v of contentRows ?? []) {
+    const pid = v.problem_id as string;
+    if (v.status === "published") {
+      if (!publishedByProblem.has(pid)) publishedByProblem.set(pid, asContent(v));
+    } else if (!draftByProblem.has(pid)) {
+      // version_no 내림차순이라 가장 최근 작업본이 먼저 온다.
+      draftByProblem.set(pid, asContent(v));
+    }
+  }
 
   const { data: readinessRows } = await admin
     .from("problem_composition_readiness")
@@ -172,6 +193,7 @@ export async function listBankProblemsAction(
     readiness: (readinessByProblem.get(r.id as string) ??
       "not_confirmed") as BankProblem["readiness"],
     published: publishedByProblem.get(r.id as string) ?? null,
+    draft: draftByProblem.get(r.id as string) ?? null,
   }));
 
   return mapped.filter((p) => {
@@ -220,7 +242,10 @@ export async function loadProblemVersionsAction(problemId: string): Promise<Prob
 export async function createBankProblemAction(params: {
   subjectId: string;
   format: string;
+  /** 무엇을 묻는가(예: Words in Context). 선택 항목이다. */
   skillType?: string;
+  /** 무엇에 대한 글인가. 유형과 다른 축이고 역시 선택 항목이다. */
+  topic?: string;
   difficulty?: string;
 }): Promise<BankResult<string>> {
   const { adminUserId } = await requireAdmin();
@@ -229,6 +254,7 @@ export async function createBankProblemAction(params: {
     p_subject_id: params.subjectId,
     p_format: params.format,
     p_skill_type: params.skillType ?? "",
+    p_topic: params.topic ?? "",
     p_difficulty: params.difficulty ?? "",
     p_actor_id: adminUserId,
   });
@@ -298,12 +324,14 @@ export async function publishVersionAction(versionId: string): Promise<BankResul
  * 그대로 유지하되, 두 단계를 여기서 이어 붙인다. 검수자 역할 분리는 후속 범위다.
  */
 export async function publishDraftAction(versionId: string): Promise<BankResult> {
-  const submitted = await submitVersionForReviewAction(versionId);
-  // 이미 확인 중 상태였던 버전을 다시 공개하는 경우도 있으므로, 앞 단계 실패를
-  // 곧바로 실패로 보지 않고 공개를 시도한 뒤 그 결과로 판단한다.
-  const published = await publishVersionAction(versionId);
-  if (!published.ok) return submitted.ok ? published : submitted;
-  return published;
+  const { adminUserId } = await requireAdmin();
+  const admin = createAdminClient();
+  const { error } = await admin.rpc("confirm_and_publish_problem_version", {
+    p_version_id: versionId,
+    p_actor_id: adminUserId,
+  });
+  if (error) return { ok: false, error: readable(error.message, "공개하지 못했습니다.") };
+  return { ok: true };
 }
 
 /**
@@ -315,9 +343,25 @@ export async function publishDraftAction(versionId: string): Promise<BankResult>
  */
 export async function createDraftFromPublishedAction(
   problemId: string
-): Promise<BankResult<string>> {
+): Promise<BankResult<{ versionId: string; reused: boolean }>> {
   await requireAdmin();
   const admin = createAdminClient();
+
+  // 이미 작업 중인 초안이 있으면 **공개본으로 덮어쓰지 않는다.** 쓰던 내용을
+  // 잃지 않도록 그것을 그대로 돌려주고, 화면이 "이어서 편집"임을 알린다.
+  // 반복 클릭으로 초안이 늘어나지도 않는다.
+  const { data: working } = await admin
+    .from("problem_versions")
+    .select("id, status")
+    .eq("problem_id", problemId)
+    .in("status", ["draft", "in_review"])
+    .order("version_no", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  if (working) {
+    return { ok: true, value: { versionId: working.id as string, reused: true } };
+  }
 
   const { data: published } = await admin
     .from("problem_versions")
@@ -328,7 +372,7 @@ export async function createDraftFromPublishedAction(
 
   if (!published) return { ok: false, error: "공개된 버전이 없습니다." };
 
-  return createDraftVersionAction({
+  const created = await createDraftVersionAction({
     problemId,
     passage: (published.passage as string | null) ?? "",
     options: (published.options as string[] | null) ?? null,
@@ -336,6 +380,30 @@ export async function createDraftFromPublishedAction(
     explanation: (published.explanation as string | null) ?? "",
     difficulty: (published.difficulty as string | null) ?? "",
   });
+  if (!created.ok) return created;
+  return { ok: true, value: { versionId: created.value, reused: false } };
+}
+
+/**
+ * 유형·주제를 고친다.
+ *
+ * 둘 다 문제의 정체성 쪽 정보라 버전 내용(지문·선택지·정답·해설)과 다른 축이다 —
+ * 고쳐도 공개본의 내용은 바뀌지 않고, 이미 고정된 준비안·수업도 그대로다.
+ * 공개된 문제에서도 바로 고칠 수 있어야 한다.
+ */
+export async function updateProblemMetaAction(
+  problemId: string,
+  meta: { skillType?: string | null; topic?: string | null }
+): Promise<BankResult> {
+  await requireAdmin();
+  const admin = createAdminClient();
+  const patch: Record<string, string | null> = {};
+  if (meta.skillType !== undefined) patch.skill_type = meta.skillType?.trim() || null;
+  if (meta.topic !== undefined) patch.topic = meta.topic?.trim() || null;
+  if (Object.keys(patch).length === 0) return { ok: true };
+  const { error } = await admin.from("problems").update(patch).eq("id", problemId);
+  if (error) return { ok: false, error: "유형·주제를 저장하지 못했습니다." };
+  return { ok: true };
 }
 
 /** 문제 보관·해제. 삭제가 아니다 — 과거 기록은 그대로 남는다. */
@@ -378,11 +446,12 @@ function readable(message: string, fallback: string): string {
 export async function generateBankProblemsAction(params: {
   subjectId: string;
   skillType: string;
+  topic?: string;
   difficulty: string;
   format: string;
   count: number;
 }): Promise<BankResult<number>> {
-  const { adminUserId } = await requireAdmin();
+  await requireAdmin();
   const admin = createAdminClient();
 
   const { data: subject } = await admin
@@ -408,7 +477,8 @@ export async function generateBankProblemsAction(params: {
   let generated: Awaited<ReturnType<typeof generateSectionProblems>>;
   try {
     generated = await generateSectionProblems({
-      sectionTitle: params.skillType,
+      // 생성기는 섹션 제목 자리를 맥락으로 쓴다 — 주제가 있으면 그것이 더 가깝다.
+      sectionTitle: params.topic?.trim() || params.skillType,
       subjectName: subject.name as string,
       skillType: params.skillType,
       difficulty: params.difficulty as never,
@@ -426,6 +496,7 @@ export async function generateBankProblemsAction(params: {
       subjectId: params.subjectId,
       format: params.format,
       skillType: params.skillType,
+      topic: params.topic,
       difficulty: params.difficulty,
     });
     if (!problem.ok) continue;

@@ -3,174 +3,391 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import ProblemBankTab from "./ProblemBankTab";
 import type { AdminSubject } from "./subject-data";
 
+// P2 8차 — 문제은행 화면.
+//
+// 2026-09-13 제품 오너 지시로 흐름이 바뀌었다: 관리자가 자기 자신에게 "검수 요청"을
+// 누르는 단계는 없애고, **초안 저장 → 미리보기·내용 확인 → 공개**로 정리했다.
+// 내용을 보지 않고 공개되는 길은 여전히 없다.
+
 vi.mock("./problem-bank-actions", () => ({
   listBankProblemsAction: (...a: unknown[]) => listBankProblemsAction(...a),
-  loadProblemVersionsAction: (...a: unknown[]) => loadProblemVersionsAction(...a),
   createBankProblemAction: (...a: unknown[]) => createBankProblemAction(...a),
   createDraftVersionAction: (...a: unknown[]) => createDraftVersionAction(...a),
-  submitVersionForReviewAction: (...a: unknown[]) => submitVersionForReviewAction(...a),
-  publishVersionAction: (...a: unknown[]) => publishVersionAction(...a),
+  createDraftFromPublishedAction: (...a: unknown[]) => createDraftFromPublishedAction(...a),
+  publishDraftAction: (...a: unknown[]) => publishDraftAction(...a),
   setProblemArchivedAction: (...a: unknown[]) => setProblemArchivedAction(...a),
+  setProblemKeywordAction: (...a: unknown[]) => setProblemKeywordAction(...a),
+  updateProblemMetaAction: (...a: unknown[]) => updateProblemMetaAction(...a),
   generateBankProblemsAction: (...a: unknown[]) => generateBankProblemsAction(...a),
 }));
 
 const listBankProblemsAction = vi.fn();
-const loadProblemVersionsAction = vi.fn();
 const createBankProblemAction = vi.fn();
 const createDraftVersionAction = vi.fn();
-const submitVersionForReviewAction = vi.fn();
-const publishVersionAction = vi.fn();
+const createDraftFromPublishedAction = vi.fn();
+const publishDraftAction = vi.fn();
 const setProblemArchivedAction = vi.fn();
+const setProblemKeywordAction = vi.fn();
+const updateProblemMetaAction = vi.fn();
 const generateBankProblemsAction = vi.fn();
 
 const subjects: AdminSubject[] = [
-  { subjectId: "sub1", subjectName: "SAT Math", units: [] },
+  {
+    subjectId: "sub1",
+    subjectName: "SAT Math",
+    units: [],
+    keywords: [
+      { id: "kw1", label: "이차방정식", status: "active" },
+      { id: "kw2", label: "판별식", status: "active" },
+    ],
+  },
   { subjectId: "sub9", subjectName: "보관 과목", units: [], archivedAt: "2026-09-11T00:00:00Z" },
 ];
 
-const problem = {
+const base = {
   id: "p1",
   format: "mc",
-  passage: "판별식이 0일 때",
-  skillType: "판별식",
+  passage: null,
+  skillType: "Words in Context",
+  topic: "생태계",
   difficulty: "medium",
   subjectId: "sub1",
   subjectName: "SAT Math",
   archived: false,
+  updatedAt: "2026-09-12T00:00:00Z",
+  readiness: "ok" as const,
+};
+
+const draftProblem = {
+  ...base,
   workState: "draft" as const,
   keywords: [{ id: "kw1", label: "이차방정식" }],
-  updatedAt: "2026-09-12T00:00:00Z",
+  published: null,
+  draft: {
+    versionId: "v1",
+    passage: "판별식이 0일 때",
+    options: ["가", "나", "다", "라"],
+    correctIndex: 1,
+    explanation: "중근입니다",
+  },
+};
+
+const publishedProblem = {
+  ...base,
+  workState: "published" as const,
+  keywords: [{ id: "kw1", label: "이차방정식" }],
+  published: {
+    versionId: "pv1",
+    passage: "공개된 지문입니다",
+    options: ["하나", "둘", "셋", "넷"],
+    correctIndex: 2,
+    explanation: "공개된 해설입니다",
+  },
+  draft: null,
 };
 
 beforeEach(() => {
   vi.clearAllMocks();
-  listBankProblemsAction.mockResolvedValue([problem]);
-  loadProblemVersionsAction.mockResolvedValue([
-    { id: "v1", versionNo: 1, status: "draft", passage: "판별식이 0일 때", options: null, correctIndex: null, explanation: null, difficulty: "medium", createdAt: "", publishedAt: null },
-  ]);
+  listBankProblemsAction.mockResolvedValue([draftProblem]);
   createBankProblemAction.mockResolvedValue({ ok: true, value: "p2" });
   createDraftVersionAction.mockResolvedValue({ ok: true, value: "v2" });
-  submitVersionForReviewAction.mockResolvedValue({ ok: true });
-  publishVersionAction.mockResolvedValue({ ok: true });
+  createDraftFromPublishedAction.mockResolvedValue({
+    ok: true,
+    value: { versionId: "v9", reused: false },
+  });
+  publishDraftAction.mockResolvedValue({ ok: true });
   setProblemArchivedAction.mockResolvedValue({ ok: true });
+  setProblemKeywordAction.mockResolvedValue({ ok: true });
+  updateProblemMetaAction.mockResolvedValue({ ok: true });
   generateBankProblemsAction.mockResolvedValue({ ok: true, value: 3 });
 });
 
-describe("ProblemBankTab — 독립 진입점", () => {
-  it("과목·상태·형식·검색으로 좁힐 수 있다", async () => {
+/** 공개 탭으로 옮겨 첫 문제를 편다. 공개된 문제는 생성 탭에 없다. */
+async function openPublishedProblem() {
+  render(<ProblemBankTab subjects={subjects} />);
+  await waitFor(() => expect(screen.getByText("공개")).toBeInTheDocument());
+  fireEvent.click(screen.getByText("공개"));
+  await waitFor(() => expect(screen.getByText("공개된 지문입니다")).toBeInTheDocument());
+  fireEvent.click(screen.getByText("공개된 지문입니다"));
+}
+
+async function openFirstProblem() {
+  render(<ProblemBankTab subjects={subjects} />);
+  await waitFor(() => expect(screen.getByText("판별식이 0일 때")).toBeInTheDocument());
+  fireEvent.click(screen.getByText("판별식이 0일 때"));
+  await waitFor(() => expect(screen.getByLabelText("지문")).toBeInTheDocument());
+}
+
+describe("목록 — 생성 · 공개 · 보관", () => {
+  it("기본은 생성이고, 보관은 서버에서 따로 불러온다", async () => {
+    render(<ProblemBankTab subjects={subjects} />);
+    await waitFor(() =>
+      expect(listBankProblemsAction).toHaveBeenCalledWith(
+        expect.objectContaining({ archived: undefined })
+      )
+    );
+
+    fireEvent.click(screen.getByText("보관"));
+    await waitFor(() =>
+      expect(listBankProblemsAction).toHaveBeenCalledWith(
+        expect.objectContaining({ archived: true })
+      )
+    );
+  });
+
+  it("공개 탭에는 공개된 문제만 남는다", async () => {
+    listBankProblemsAction.mockResolvedValue([draftProblem, publishedProblem]);
+    render(<ProblemBankTab subjects={subjects} />);
+    // 생성 탭에는 작업 중인 것만.
+    await waitFor(() => expect(screen.getByText("판별식이 0일 때")).toBeInTheDocument());
+    expect(screen.queryByText("공개된 지문입니다")).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByText("공개"));
+    await waitFor(() => expect(screen.getByText("공개된 지문입니다")).toBeInTheDocument());
+    expect(screen.queryByText("판별식이 0일 때")).not.toBeInTheDocument();
+  });
+
+  it("과목·형식·키워드·검색으로 좁힌다. 키워드는 과목을 고른 뒤에 고른다", async () => {
     render(<ProblemBankTab subjects={subjects} />);
     await waitFor(() => expect(screen.getByText("판별식이 0일 때")).toBeInTheDocument());
 
-    fireEvent.change(screen.getByLabelText("과목"), { target: { value: "sub1" } });
-    await waitFor(() =>
-      expect(listBankProblemsAction).toHaveBeenCalledWith(expect.objectContaining({ subjectId: "sub1" }))
-    );
+    expect(screen.getByLabelText("키워드")).toBeDisabled();
 
-    fireEvent.change(screen.getByLabelText("상태"), { target: { value: "in_review" } });
+    fireEvent.change(screen.getByLabelText("과목"), { target: { value: "sub1" } });
+    await waitFor(() => expect(screen.getByLabelText("키워드")).not.toBeDisabled());
+    expect(screen.getByRole("option", { name: "이차방정식" })).toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText("키워드"), { target: { value: "kw2" } });
     await waitFor(() =>
-      expect(listBankProblemsAction).toHaveBeenCalledWith(expect.objectContaining({ workState: "in_review" }))
+      expect(listBankProblemsAction).toHaveBeenCalledWith(
+        expect.objectContaining({ subjectId: "sub1", keywordId: "kw2" })
+      )
     );
 
     fireEvent.change(screen.getByLabelText("문제 검색"), { target: { value: "판별" } });
     await waitFor(() =>
-      expect(listBankProblemsAction).toHaveBeenCalledWith(expect.objectContaining({ query: "판별" }))
+      expect(listBankProblemsAction).toHaveBeenCalledWith(
+        expect.objectContaining({ query: "판별" })
+      )
     );
   });
 
   it("보관 과목은 새 문제 대상으로 고를 수 없다", async () => {
     render(<ProblemBankTab subjects={subjects} />);
     await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());
-    const select = screen.getByLabelText("새 문제 과목");
-    expect(select.querySelectorAll("option")).toHaveLength(2); // 안내 + SAT Math
+    expect(screen.getByLabelText("새 문제 과목").querySelectorAll("option")).toHaveLength(2);
     expect(screen.queryByRole("option", { name: "보관 과목" })).not.toBeInTheDocument();
-  });
-
-  it("현재와 보관됨을 섞지 않고, 기본 진입은 현재다", async () => {
-    render(<ProblemBankTab subjects={subjects} />);
-    await waitFor(() => expect(listBankProblemsAction).toHaveBeenCalledWith({}));
-
-    fireEvent.click(screen.getByText("보관됨"));
-    await waitFor(() =>
-      expect(listBankProblemsAction).toHaveBeenCalledWith(expect.objectContaining({ archived: true }))
-    );
   });
 });
 
-describe("ProblemBankTab — 자동 공개는 없다", () => {
-  it("AI로 만들어도 초안으로만 들어간다고 알려준다", async () => {
+describe("유형과 주제는 별도 항목이다", () => {
+  it("새 문제에서 둘을 따로 받는다", async () => {
     render(<ProblemBankTab subjects={subjects} />);
     await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());
 
     fireEvent.change(screen.getByLabelText("새 문제 과목"), { target: { value: "sub1" } });
-    fireEvent.change(screen.getByLabelText("주제"), { target: { value: "판별식" } });
-    fireEvent.click(screen.getByText("AI로 만들기"));
+    fireEvent.change(screen.getByLabelText("문제 유형"), {
+      target: { value: "Words in Context" },
+    });
+    fireEvent.change(screen.getByLabelText("주제"), { target: { value: "생태계" } });
+    fireEvent.click(screen.getByText("직접 쓰기"));
 
     await waitFor(() =>
-      expect(screen.getByText(/3개를 초안으로 만들었습니다. 검수 후 공개하세요./)).toBeInTheDocument()
-    );
-    // 생성 경로에 공개가 섞여 있지 않다.
-    expect(publishVersionAction).not.toHaveBeenCalled();
-  });
-
-  it("초안에는 검수 요청만, 공개 버튼은 없다", async () => {
-    render(<ProblemBankTab subjects={subjects} />);
-    await waitFor(() => expect(screen.getByText("판별식이 0일 때")).toBeInTheDocument());
-    fireEvent.click(screen.getByText("판별식이 0일 때"));
-
-    await waitFor(() => expect(screen.getByText("검수 요청")).toBeInTheDocument());
-    expect(screen.queryByText("공개")).not.toBeInTheDocument();
-
-    fireEvent.click(screen.getByText("검수 요청"));
-    await waitFor(() => expect(submitVersionForReviewAction).toHaveBeenCalledWith("v1"));
-  });
-
-  it("검수 중인 버전에만 공개 버튼이 나온다", async () => {
-    loadProblemVersionsAction.mockResolvedValue([
-      { id: "v1", versionNo: 1, status: "in_review", passage: "x", options: null, correctIndex: null, explanation: null, difficulty: null, createdAt: "", publishedAt: null },
-    ]);
-    render(<ProblemBankTab subjects={subjects} />);
-    await waitFor(() => expect(screen.getByText("판별식이 0일 때")).toBeInTheDocument());
-    fireEvent.click(screen.getByText("판별식이 0일 때"));
-
-    await waitFor(() => expect(screen.getByText("공개")).toBeInTheDocument());
-    expect(screen.queryByText("검수 요청")).not.toBeInTheDocument();
-  });
-
-  it("객관식 정답 번호는 화면의 1부터를 0부터로 바꿔 저장한다", async () => {
-    render(<ProblemBankTab subjects={subjects} />);
-    await waitFor(() => expect(screen.getByText("판별식이 0일 때")).toBeInTheDocument());
-    fireEvent.click(screen.getByText("판별식이 0일 때"));
-    await waitFor(() => expect(screen.getByLabelText("지문")).toBeInTheDocument());
-
-    fireEvent.change(screen.getByLabelText("지문"), { target: { value: "새 지문" } });
-    fireEvent.change(screen.getByLabelText("선택지"), { target: { value: "가|나|다" } });
-    fireEvent.change(screen.getByLabelText("정답 번호"), { target: { value: "2" } });
-    fireEvent.click(screen.getByText("초안 저장"));
-
-    await waitFor(() =>
-      expect(createDraftVersionAction).toHaveBeenCalledWith(
-        expect.objectContaining({ correctIndex: 1, options: ["가", "나", "다"] })
+      expect(createBankProblemAction).toHaveBeenCalledWith(
+        expect.objectContaining({ skillType: "Words in Context", topic: "생태계" })
       )
     );
   });
 
-  it("보관은 삭제가 아니라고 알려준다", async () => {
-    render(<ProblemBankTab subjects={subjects} />);
-    await waitFor(() => expect(screen.getByText("보관")).toBeInTheDocument());
-    fireEvent.click(screen.getByText("보관"));
+  it("이미 만든 문제에서도 유형·주제를 고칠 수 있다", async () => {
+    await openFirstProblem();
+    fireEvent.change(screen.getByLabelText("주제 수정"), { target: { value: "기후" } });
+    fireEvent.click(screen.getByText("저장"));
     await waitFor(() =>
-      expect(screen.getByText(/보관했습니다. 과거 기록은 그대로 남습니다./)).toBeInTheDocument()
+      expect(updateProblemMetaAction).toHaveBeenCalledWith(
+        "p1",
+        expect.objectContaining({ topic: "기후" })
+      )
+    );
+  });
+});
+
+describe("객관식은 4칸과 정답 라디오다", () => {
+  it("칸 네 개가 나오고 기존 초안 내용이 채워진다", async () => {
+    await openFirstProblem();
+    expect(screen.getByLabelText("선택지 1")).toHaveValue("가");
+    expect(screen.getByLabelText("선택지 4")).toHaveValue("라");
+    expect(screen.queryByLabelText("선택지 5")).not.toBeInTheDocument();
+    // 정답은 하나만 체크된다.
+    expect(screen.getByLabelText("2번이 정답")).toBeChecked();
+    expect(screen.getByLabelText("1번이 정답")).not.toBeChecked();
+  });
+
+  it("화면의 1부터를 0부터로 바꿔 저장한다", async () => {
+    await openFirstProblem();
+    fireEvent.click(screen.getByLabelText("3번이 정답"));
+    fireEvent.click(screen.getByText("초안 저장"));
+    await waitFor(() =>
+      expect(createDraftVersionAction).toHaveBeenCalledWith(
+        expect.objectContaining({ correctIndex: 2, options: ["가", "나", "다", "라"] })
+      )
     );
   });
 
-  it("실패 사유를 화면에 보여준다", async () => {
-    submitVersionForReviewAction.mockResolvedValue({ ok: false, error: "검수 요청에 실패했습니다." });
-    render(<ProblemBankTab subjects={subjects} />);
-    await waitFor(() => expect(screen.getByText("판별식이 0일 때")).toBeInTheDocument());
-    fireEvent.click(screen.getByText("판별식이 0일 때"));
-    await waitFor(() => expect(screen.getByText("검수 요청")).toBeInTheDocument());
+  it("선택지가 4개가 아닌 기존 문제는 잘라내지 않고 그대로 보여준다", async () => {
+    listBankProblemsAction.mockResolvedValue([
+      {
+        ...draftProblem,
+        draft: { ...draftProblem.draft, options: ["가", "나", "다", "라", "마"] },
+      },
+    ]);
+    await openFirstProblem();
+    expect(screen.getByLabelText("선택지 5")).toHaveValue("마");
+    expect(screen.getByText(/선택지가 5개입니다/)).toBeInTheDocument();
+  });
+});
 
-    fireEvent.click(screen.getByText("검수 요청"));
-    await waitFor(() => expect(screen.getByText("검수 요청에 실패했습니다.")).toBeInTheDocument());
+describe("공개는 내용을 본 뒤에만 — 검수 요청 단계는 없다", () => {
+  it("초안 화면에 검수 요청 버튼이 없다", async () => {
+    await openFirstProblem();
+    expect(screen.queryByText("검수 요청")).not.toBeInTheDocument();
+  });
+
+  it("미리보기에서 지문·선택지·정답·해설을 확인하고 공개한다", async () => {
+    await openFirstProblem();
+    fireEvent.click(screen.getByText("미리보기"));
+
+    await waitFor(() => expect(screen.getByText("공개될 내용")).toBeInTheDocument());
+    expect(screen.getByText("2. 나 · 정답")).toBeInTheDocument();
+    expect(screen.getByText("해설 · 중근입니다")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText("이 내용으로 공개"));
+    // 보고 있는 내용을 그대로 공개한다 — 저장하지 않은 수정이 남지 않게 저장부터.
+    await waitFor(() => expect(createDraftVersionAction).toHaveBeenCalled());
+    await waitFor(() => expect(publishDraftAction).toHaveBeenCalledWith("v1"));
+  });
+
+  it("AI로 만들어도 초안으로만 들어간다", async () => {
+    render(<ProblemBankTab subjects={subjects} />);
+    await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());
+
+    fireEvent.change(screen.getByLabelText("새 문제 과목"), { target: { value: "sub1" } });
+    fireEvent.change(screen.getByLabelText("문제 유형"), { target: { value: "판별식" } });
+    fireEvent.click(screen.getByText("AI로 만들기"));
+
+    await waitFor(() =>
+      expect(screen.getByText(/3개를 초안으로 만들었습니다/)).toBeInTheDocument()
+    );
+    expect(publishDraftAction).not.toHaveBeenCalled();
+  });
+
+  it("실패 사유를 화면에 보여준다", async () => {
+    publishDraftAction.mockResolvedValue({ ok: false, error: "공개하지 못했습니다." });
+    await openFirstProblem();
+    fireEvent.click(screen.getByText("미리보기"));
+    await waitFor(() => expect(screen.getByText("이 내용으로 공개")).toBeInTheDocument());
+    fireEvent.click(screen.getByText("이 내용으로 공개"));
+    await waitFor(() =>
+      expect(screen.getByText("공개하지 못했습니다.")).toBeInTheDocument()
+    );
+  });
+});
+
+describe("공개본 조회와 수정 초안", () => {
+  it("공개된 문제의 현재 내용을 볼 수 있다", async () => {
+    listBankProblemsAction.mockResolvedValue([publishedProblem]);
+    await openPublishedProblem();
+
+    await waitFor(() => expect(screen.getByText("지금 공개된 내용")).toBeInTheDocument());
+    expect(screen.getByText("3. 셋 · 정답")).toBeInTheDocument();
+    expect(screen.getByText(/공개된 해설입니다/)).toBeInTheDocument();
+  });
+
+  it("수정 초안을 만들면 공개본은 그대로 둔다고 알려준다", async () => {
+    listBankProblemsAction.mockResolvedValue([publishedProblem]);
+    await openPublishedProblem();
+    await waitFor(() => expect(screen.getByText("수정 초안 만들기")).toBeInTheDocument());
+
+    fireEvent.click(screen.getByText("수정 초안 만들기"));
+    await waitFor(() => expect(createDraftFromPublishedAction).toHaveBeenCalledWith("p1"));
+    await waitFor(() =>
+      expect(screen.getByText(/공개본을 복사해 수정 초안을 만들었습니다/)).toBeInTheDocument()
+    );
+  });
+
+  it("이미 초안이 있으면 새로 만들지 않고 이어서 편집하라고 알린다", async () => {
+    listBankProblemsAction.mockResolvedValue([
+      { ...publishedProblem, draft: { ...draftProblem.draft, versionId: "v7" } },
+    ]);
+    createDraftFromPublishedAction.mockResolvedValue({
+      ok: true,
+      value: { versionId: "v7", reused: true },
+    });
+    await openPublishedProblem();
+
+    await waitFor(() => expect(screen.getByText("수정 초안 이어서 편집")).toBeInTheDocument());
+    fireEvent.click(screen.getByText("수정 초안 이어서 편집"));
+    await waitFor(() =>
+      expect(screen.getByText(/이미 작업 중인 수정 초안이 있어/)).toBeInTheDocument()
+    );
+  });
+});
+
+describe("키워드 — 공개는 막지 않되 사유는 알린다", () => {
+  it("과목 키워드를 눌러 붙이고 뗀다", async () => {
+    await openFirstProblem();
+    fireEvent.click(screen.getByRole("button", { name: "판별식" }));
+    await waitFor(() =>
+      expect(setProblemKeywordAction).toHaveBeenCalledWith("p1", "kw2", true)
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "이차방정식" }));
+    await waitFor(() =>
+      expect(setProblemKeywordAction).toHaveBeenCalledWith("p1", "kw1", false)
+    );
+  });
+
+  it("키워드가 없으면 공개 전에 자동 구성에서 빠진다고 안내한다", async () => {
+    listBankProblemsAction.mockResolvedValue([
+      { ...draftProblem, keywords: [], readiness: "no_keyword" as const },
+    ]);
+    await openFirstProblem();
+    expect(screen.getByText(/키워드 없이도 저장하고 공개할 수 있습니다/)).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText("미리보기"));
+    await waitFor(() =>
+      expect(
+        screen.getByText(/키워드가 없어 자동 구성에 포함되지 않습니다. 공개는 할 수 있습니다./)
+      ).toBeInTheDocument()
+    );
+  });
+
+  it("공개된 뒤에도 목록에서 사유를 보고 키워드를 붙일 수 있다", async () => {
+    listBankProblemsAction.mockResolvedValue([
+      { ...publishedProblem, keywords: [], readiness: "no_keyword" as const },
+    ]);
+    await openPublishedProblem();
+    expect(
+      screen.getByText("키워드가 없어 자동 구성에 포함되지 않습니다. 키워드는 아래에서 붙일 수 있습니다.")
+    ).toBeInTheDocument();
+
+    await waitFor(() =>
+      expect(screen.getByRole("button", { name: "이차방정식" })).toBeInTheDocument()
+    );
+    fireEvent.click(screen.getByRole("button", { name: "이차방정식" }));
+    await waitFor(() =>
+      expect(setProblemKeywordAction).toHaveBeenCalledWith("p1", "kw1", true)
+    );
+  });
+});
+
+describe("보관은 삭제가 아니다", () => {
+  it("보관하면 과거 기록이 남는다고 알린다", async () => {
+    render(<ProblemBankTab subjects={subjects} />);
+    await waitFor(() => expect(screen.getByText("보관하기")).toBeInTheDocument());
+    fireEvent.click(screen.getByText("보관하기"));
+    await waitFor(() =>
+      expect(screen.getByText(/보관했습니다. 과거 기록은 그대로 남습니다./)).toBeInTheDocument()
+    );
   });
 });
