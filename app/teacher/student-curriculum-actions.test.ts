@@ -79,20 +79,21 @@ describe("ensureActiveOverlay — corrective 1: 단일 RPC로 생성+베이스�
     state.assignment = { id: "assign1" };
     state.rpcResult = { data: "overlay-123" as unknown as unknown[], error: null };
     mockSupabase.rpc.mockClear();
-    const overlayId = await ensureActiveOverlay("enr1");
+    const result = await ensureActiveOverlay("enr1");
     expect(mockSupabase.rpc).toHaveBeenCalledTimes(1);
     expect(mockSupabase.rpc).toHaveBeenCalledWith("ensure_active_curriculum_overlay", {
       p_subject_enrollment_id: "enr1",
     });
-    expect(overlayId).toBe("overlay-123");
+    expect(result).toEqual({ ok: true, overlayId: "overlay-123" });
   });
 
-  it("담당이 아닌 선생님이면 RPC를 호출하지 않고 거부한다", async () => {
+  it("담당이 아닌 선생님이면 RPC를 호출하지 않고 사유를 값으로 돌려준다(Production 은 던진 예외를 가린다)", async () => {
     state.assignment = null;
     mockSupabase.rpc.mockClear();
-    await expect(ensureActiveOverlay("enr-not-mine")).rejects.toThrow(
-      "담당 학생의 커리큘럼만 조정할 수 있습니다."
-    );
+    await expect(ensureActiveOverlay("enr-not-mine")).resolves.toEqual({
+      ok: false,
+      error: "담당 학생의 커리큘럼만 조정할 수 있습니다.",
+    });
     expect(mockSupabase.rpc).not.toHaveBeenCalled();
   });
 });

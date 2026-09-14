@@ -87,14 +87,26 @@ export async function loadStudentCurriculumPanelData(
 // (supabase/migrations/20261230000000_r9_corrective_overlay_baseline_seed.sql
 // ensure_active_curriculum_overlay 참고). 이 함수 호출 전 인가 선검사는 여전히
 // 여기서 하고, RLS가 실제 방어선인 것도 기존과 동일하다.
-export async function ensureActiveOverlay(subjectEnrollmentId: string): Promise<string> {
-  const { supabase } = await requireAssignedTeacherOrAdmin(subjectEnrollmentId);
+export type EnsureOverlayResult = { ok: true; overlayId: string } | { ok: false; error: string };
+
+// 2026-09-14: 던지지 않는다 — Production 은 서버 액션 예외 메시지를 통째로 가린다(React #441).
+// 인가 실패·DB 사유를 값으로 돌려 화면이 보여준다.
+export async function ensureActiveOverlay(subjectEnrollmentId: string): Promise<EnsureOverlayResult> {
+  let supabase: Awaited<ReturnType<typeof createClient>>;
+  try {
+    ({ supabase } = await requireAssignedTeacherOrAdmin(subjectEnrollmentId));
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "이 학생의 커리큘럼을 열 권한이 없습니다." };
+  }
 
   const { data, error } = await supabase.rpc("ensure_active_curriculum_overlay", {
     p_subject_enrollment_id: subjectEnrollmentId,
   });
-  if (error) throw new Error(error.message);
-  return data as string;
+  if (error) {
+    console.error(JSON.stringify({ event: "ensure_overlay_failed", subjectEnrollmentId, message: error.message }));
+    return { ok: false, error: readableDbError(error.message, "학생 커리큘럼을 준비하지 못했습니다.") };
+  }
+  return { ok: true, overlayId: data as string };
 }
 
 async function nextPosition(supabase: Awaited<ReturnType<typeof createClient>>, overlayId: string) {

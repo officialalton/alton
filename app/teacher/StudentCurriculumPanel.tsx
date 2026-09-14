@@ -54,9 +54,12 @@ export default function StudentCurriculumPanel({
 
   async function withOverlayId(): Promise<string> {
     if (overlayId) return overlayId;
-    const id = await ensureActiveOverlay(subjectEnrollmentId);
-    setOverlayId(id);
-    return id;
+    const result = await ensureActiveOverlay(subjectEnrollmentId);
+    // 서버가 사유를 값으로 돌려준다(Production 은 던진 예외를 가린다). 여기서 던지는 것은
+    // 클라이언트 안이라 그대로 화면의 오류 문구가 된다.
+    if (!result.ok) throw new Error(result.error);
+    setOverlayId(result.overlayId);
+    return result.overlayId;
   }
 
   async function handleAddCanonical(sourceUnitId: string, unitTitle: string) {
