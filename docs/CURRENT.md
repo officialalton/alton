@@ -1,5 +1,22 @@
 # ALTON — 현재 상태 (2026-09-14 기준)
 
+> **2026-09-14 야간 — P3 8차: 과제 답안·필기 분리 / 문제 화면 필기 / 채점 결과·점수 / 관리자 교재 탭 통합.**
+> 커밋 `424d0e1` → `(이번)`. **Preview `https://alton-riw673x9q-alton7.vercel.app`.** 공유 non-prod: **`20261359000000`까지 적용됨.**
+>
+> **정책(제품 오너 2026-09-14)**
+> 1. **과제 답안·채점·문제 위 필기는 수업 문제와 따로**(같은 문제라도). `session_problem_work.source`(lesson|homework) + 고유키에 포함,
+>    `start_problem_work(…, p_source)` 하나로 통일(4인수 오버로드 제거), `session_annotation_events.problem_context`.
+>    원인이었던 현상: 수업에서 채점한 문제를 과제로 내니 같은 풀이판 행을 봐서 "채점한 적 없는 과제가 채점돼" 보였다.
+> 2. 문제 화면 전체(여백 포함) 교사·학생 공유 필기(`20261358` `append_problem_page_stroke_events`, 문맥별) — 수업 문제·과제 공통 패널.
+> 3. 문제 목차: '채점됨' → 정답/부분 정답/오답, 위에 "맞은 문제 N / 전체 · 채점 M"(부분은 세지 않음). 채점 끝난 문제의 정답·해설 토글 숨김.
+> 4. 관리자: 교재 라이브러리 탭을 **교재 탭에 통합**(과목 › 키워드 / 과목 › 단원 / 목록). **새 교재(HTML) 만들기 차단** — 교재는 Drive 동기화로만.
+>    PDF·영상 교재 행에 `원 파일명`(그대로) + `노출용 이름:` 입력칸(title). `Drive 원본 없는 교재 보관`은 과목 미선택 시 전체.
+> 5. 교재 목차: 열린 자료 제목을 다시 누르면 페이지 목록 접힘.
+>
+> **검증**: 통합(채점 8·재고정 3·과제 5·문제 필기 1·출처 분리 1) / 컴포넌트 CurriculumDocsTab 13·ProblemsPanel 26·PDF 레이어 9·HomeworkTab 7 등,
+> 관리자 스위트 817 통과 / tsc·lint 깨끗. 병렬 일괄 실행의 예약 fixture 충돌은 기존. Preview UAT 미실시.
+> **다음 작업 단위**: Preview UAT 결과 반영. 옛 UI 시험 답안(session_homework_attempts)은 옮기지 않음.
+
 > **2026-09-14 야간 — P3 7차: 과제 v3 한 갈래 통일 / UAT 잔손질 2차.**
 > 커밋 `4f26d06` → `9017783` → (이번). **Preview `https://alton-np1byefqo-alton7.vercel.app`.** 공유 non-prod: **`20261357000000`까지 적용됨.**
 > 1장 정리: [`2026-09-14-homework-v3-unification.md`](2026-09-14-homework-v3-unification.md).
@@ -21,7 +38,9 @@
 > **검증**: 통합 15(채점 8·재고정 3·과제 4) / 컴포넌트 HomeworkTab 7·StudentHomeworkTab 3·ProblemsPanel 22·PDF 레이어 9·셸 18 등 /
 > 병렬 일괄 실행에서 예약 fixture 충돌(incident-report)·append-only 전역 count 는 db reset 직후에만 통과(기존). Preview UAT 미실시.
 >
-> **남은 요청**: ② 문제 화면 전체(여백 포함) 필기 레이어 — 새 필기 범위 마이그레이션 필요, 미착수. **다음 작업 단위**: 그것 + Preview UAT 결과 반영.
+> **문제 화면 전체 필기(완료, `20261358`)**: 문제 오른쪽 칸 전체(여백 포함)에 교사·학생 공유 레이어. 대상 (수업, 문제) — 수업 문제·과제 문제 공통
+> (`append_problem_page_stroke_events`, 모양 제약 완화: teacher_shared/student_shared + problem_id). PDF 페이지 레이어와 같은 컴포넌트·규약
+> (`StrokeLayerTarget` 합집합, 보관함 키·채널 `strokeTargetKey`). Preview `https://alton-43lisdk1y-alton7.vercel.app`. **다음 작업 단위**: Preview UAT 결과 반영.
 
 > **2026-09-14 야간 — P3 6차: 관리자 교재 정리(키워드 폴더·과목 전체 Drive 동기화) / 시작한 수업 재고정 / UAT 잔손질.**
 > 커밋 `2cd5849` → `0888733`. **Preview `https://alton-gfa3sfd8i-alton7.vercel.app` = `0888733`.** 공유 non-prod: **`20261356000000`까지 적용됨.**
