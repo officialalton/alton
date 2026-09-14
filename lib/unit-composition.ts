@@ -14,6 +14,17 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 
 export type PrepLayer = "catalog" | "teacher" | "student";
 
+// 2026-09-14 성능 추적 — 수업 준비 조회가 원격에서 16~72초. 어느 쿼리인지 서버 로그로 가른다.
+// 값이 아니라 소요(ms)만 남긴다. 원인이 잡히면 뺀다.
+async function timed<T>(label: string, sink: Record<string, number>, run: () => PromiseLike<T>): Promise<T> {
+  const t = Date.now();
+  try {
+    return await run();
+  } finally {
+    sink[label] = Date.now() - t;
+  }
+}
+
 export type LayerSpec = {
   /** 회차 테이블. */
   unitTable: string;
@@ -321,7 +332,8 @@ export async function loadComposition(
   unitId: string
 ): Promise<UnitComposition | null> {
   const spec = LAYERS[layer];
-  const scope = await resolveUnitScope(supabase, layer, unitId);
+  const timing: Record<string, number> = {};
+  const scope = await timed("scope", timing, () => resolveUnitScope(supabase, layer, unitId));
   if (!scope) return null;
 
   const [
@@ -333,37 +345,45 @@ export async function loadComposition(
     problems,
   ] =
     await Promise.all([
-      supabase.from(spec.keywordTable).select("keyword_id").eq(spec.unitFk, unitId),
-      supabase
-        .from(spec.materialTable)
-        .select("curriculum_doc_id, position, source")
-        .eq(spec.unitFk, unitId)
-        .order("position", { ascending: true }),
-      scope.subjectId
-        ? supabase
-            .from("subject_keywords")
-            .select("id, label")
-            .eq("subject_id", scope.subjectId)
-            .eq("status", "active")
-            .order("label", { ascending: true })
-        : Promise.resolve({ data: [] as { id: string; label: string }[] }),
+      timed("keywords", timing, () => supabase.from(spec.keywordTable).select("keyword_id").eq(spec.unitFk, unitId)),
+      timed("materials", timing, () =>
+        supabase
+          .from(spec.materialTable)
+          .select("curriculum_doc_id, position, source")
+          .eq(spec.unitFk, unitId)
+          .order("position", { ascending: true })
+      ),
+      timed("subjectKeywords", timing, async () =>
+        scope.subjectId
+          ? await supabase
+              .from("subject_keywords")
+              .select("id, label")
+              .eq("subject_id", scope.subjectId)
+              .eq("status", "active")
+              .order("label", { ascending: true })
+          : { data: [] as { id: string; label: string }[] }
+      ),
       // 담을 때의 버전과 지금 공개된 버전이 다른 항목. 준비안이 옛 버전을 '유지하고
       // 있다'는 사실이지, 바뀌었다는 뜻이 아니다.
-      supabase
-        .from("unit_composition_drift")
-        .select("*", { count: "exact", head: true })
-        .eq("layer", layer)
-        .eq("unit_id", unitId),
+      timed("drift", timing, () =>
+        supabase
+          .from("unit_composition_drift")
+          .select("*", { count: "exact", head: true })
+          .eq("layer", layer)
+          .eq("unit_id", unitId)
+      ),
       // 상위와 어긋난 것이 있는지 — 아직 받지 않은 것과, 내려온 뒤 상위에서 없어진 것.
       // 기준본 층은 위가 없다. 학생 층의 상위는 교사 회차(없으면 기준본)다(20261347000000).
-      layer !== "catalog"
-        ? supabase
-            .from("unit_parent_pending_updates")
-            .select("*", { count: "exact", head: true })
-            .eq("layer", layer)
-            .eq("unit_id", unitId)
-        : Promise.resolve({ count: 0 as number | null }),
-      loadUnitProblems(supabase, layer, unitId),
+      timed("parentPending", timing, async () =>
+        layer !== "catalog"
+          ? await supabase
+              .from("unit_parent_pending_updates")
+              .select("*", { count: "exact", head: true })
+              .eq("layer", layer)
+              .eq("unit_id", unitId)
+          : { count: 0 as number | null }
+      ),
+      timed("problems", timing, () => loadUnitProblems(supabase, layer, unitId)),
     ]);
 
   const labelById = new Map(
@@ -371,10 +391,13 @@ export async function loadComposition(
   );
 
   const docIds = (materialRows ?? []).map((m) => m.curriculum_doc_id as string);
-  const { data: docs } = docIds.length
-    ? await supabase.from("curriculum_docs").select("id, title").in("id", docIds)
-    : { data: [] as { id: string; title: string }[] };
+  const { data: docs } = await timed("docTitles", timing, async () =>
+    docIds.length
+      ? await supabase.from("curriculum_docs").select("id, title").in("id", docIds)
+      : { data: [] as { id: string; title: string }[] }
+  );
   const titleById = new Map((docs ?? []).map((d) => [d.id as string, d.title as string]));
+  console.log(JSON.stringify({ event: "composition_timing", layer, unitId, ...timing }));
 
   return {
     layer,
