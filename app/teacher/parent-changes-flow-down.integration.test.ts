@@ -539,3 +539,24 @@ describe("미리보기는 같은 것을 보여주되 아무것도 바꾸지 않�
     expect(teacherGoal(tu)).toBe("바뀐 목표");
   });
 });
+
+// 2026-09-14 Preview 재현 — 관리자 기준본 층에서 업데이트가 "record is not assigned yet" 로 깨졌다.
+describe("관리자 기준본 층의 업데이트", () => {
+  it("상위가 없어도 미리보기·적용이 돌고, 키워드 기본 교재가 들어온다", () => {
+    const cat = makeCatalogUnit();
+    const kw = makeKeyword();
+    const doc = makeDoc("키워드 기본");
+    psql(`update curriculum_docs set primary_keyword_id = '${kw}', primary_keyword_position = 1 where id = '${doc}';`);
+    psql(`insert into subject_template_unit_keywords (unit_id, keyword_id) values ('${cat.unitId}', '${kw}');`);
+
+    const admin = "aaaaaaaa-0000-0000-0000-000000000001";
+    const p = JSON.parse(asUser(admin, `select preview_unit_composition_update('catalog', '${cat.unitId}');`));
+    expect(p.materialsAdded).toBe(1);
+    expect(p.inheritedMaterials).toBe(0);
+    const r = JSON.parse(asUser(admin, `select apply_unit_composition_update('catalog', '${cat.unitId}', '${p.fingerprint}');`));
+    expect(r.materialsAdded).toBe(1);
+    expect(
+      psql(`select source from subject_template_unit_materials where unit_id = '${cat.unitId}' and curriculum_doc_id = '${doc}';`)
+    ).toBe("auto");
+  });
+});
