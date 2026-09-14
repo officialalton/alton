@@ -167,8 +167,9 @@ function renderGeometry(spec: GeometrySpec): string {
   const sy = (y: number) => H - oy - (y - y0) * scale;
   const out: string[] = [];
   out.push(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="figure" font-family="system-ui, sans-serif" font-size="12">`);
+  // 라벨은 선 위에 놓여도 읽히게 흰 테두리(halo)를 준다.
   const text = (x: number, y: number, t: string, anchor = "middle", italic = true) =>
-    `<text x="${fmt(x)}" y="${fmt(y)}" text-anchor="${anchor}" fill="#111"${italic ? ' font-style="italic"' : ""}>${esc(t)}</text>`;
+    `<text x="${fmt(x)}" y="${fmt(y)}" text-anchor="${anchor}" fill="#111" stroke="#fff" stroke-width="3" paint-order="stroke"${italic ? ' font-style="italic"' : ""}>${esc(t)}</text>`;
   for (const sh of spec.shapes) {
     if (sh.kind === "polygon") {
       const d = sh.points.map(([x, y], i) => `${i ? "L" : "M"}${fmt(sx(x))},${fmt(sy(y))}`).join(" ") + " Z";
@@ -220,7 +221,11 @@ function renderGeometry(spec: GeometrySpec): string {
         out.push(text(sx(xb) - 8, sy(sh.y2) - 6, sh.labels[1], "end"));
         out.push(text(sx(t1[0]) + 8, sy(t1[1]) + 4, sh.labels[2], "start"));
       }
-      for (const a of sh.angleLabels ?? []) out.push(text(sx(a.at[0]), sy(a.at[1]) + 4, a.text, "middle", false));
+      for (const a of sh.angleLabels ?? []) {
+        // AI 가 각 라벨을 선 위 좌표에 그대로 두는 일이 많다 — 평행선과 겹치면 조금 위로 올린다.
+        const onLine = Math.abs(a.at[1] - sh.y1) < 1e-6 || Math.abs(a.at[1] - sh.y2) < 1e-6;
+        out.push(text(sx(a.at[0]), sy(a.at[1]) + (onLine ? -8 : 4), a.text, "middle", false));
+      }
     } else {
       out.push(text(sx(sh.at[0]), sy(sh.at[1]) + 4, sh.text));
     }
