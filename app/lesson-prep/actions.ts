@@ -249,3 +249,72 @@ export async function saveGoal(
   }
   return { ok: true };
 }
+
+// =========================================================================
+// 다시 구성 — 사람이 눌렀을 때만
+// =========================================================================
+// 2026-09-13 확정(A안): 키워드·조건이 바뀌어도 자동으로 재계산하지 않는다. 화면이
+// "구성에 반영되지 않은 변경 있음"을 띄우고, 여기서 무엇이 달라지는지 먼저 보여준 뒤
+// 사람이 적용을 누른다. 취소하면 기존 구성이 그대로 남는다.
+
+export type RecompositionSummary = {
+  materialsAdded: number;
+  materialsRemoved: number;
+  problemsAdded: number;
+  problemsRemoved: number;
+  /** 조건에 맞는 문제가 몇 개 있는가. 모자라도 채우지 않는다 — 숫자로만 알린다. */
+  problemsAvailable: number;
+  /** 담을 때의 버전에서 지금 공개본으로 올라갈 항목 수. */
+  versionsUpdated: number;
+};
+
+function asSummary(value: unknown): RecompositionSummary {
+  const v = (value ?? {}) as Record<string, unknown>;
+  const n = (k: string) => Number(v[k] ?? 0);
+  return {
+    materialsAdded: n("materialsAdded"),
+    materialsRemoved: n("materialsRemoved"),
+    problemsAdded: n("problemsAdded"),
+    problemsRemoved: n("problemsRemoved"),
+    problemsAvailable: n("problemsAvailable"),
+    versionsUpdated: n("versionsUpdated"),
+  };
+}
+
+/** 다시 구성하면 무엇이 달라지는지. 아무것도 바꾸지 않는다. */
+export async function previewRecomposition(
+  layer: PrepLayer,
+  unitId: string
+): Promise<{ ok: true; value: RecompositionSummary } | { ok: false; error: string }> {
+  const { supabase, error: denied } = await gate(layer);
+  if (!supabase) return { ok: false, error: denied };
+
+  const { data, error } = await supabase.rpc("preview_unit_recomposition", {
+    p_layer: layer,
+    p_unit_id: unitId,
+  });
+  if (error) {
+    console.error(JSON.stringify({ event: "prep_recompose_preview_failed", layer, message: error.message }));
+    return { ok: false, error: "변경 내용을 확인하지 못했습니다." };
+  }
+  return { ok: true, value: asSummary(data) };
+}
+
+/** 실제로 적용한다. 수동 선택·제외·순서는 그대로 남는다. */
+export async function applyRecomposition(
+  layer: PrepLayer,
+  unitId: string
+): Promise<{ ok: true; value: RecompositionSummary } | { ok: false; error: string }> {
+  const { supabase, error: denied } = await gate(layer);
+  if (!supabase) return { ok: false, error: denied };
+
+  const { data, error } = await supabase.rpc("recompose_unit", {
+    p_layer: layer,
+    p_unit_id: unitId,
+  });
+  if (error) {
+    console.error(JSON.stringify({ event: "prep_recompose_failed", layer, message: error.message }));
+    return { ok: false, error: "다시 구성하지 못했습니다." };
+  }
+  return { ok: true, value: asSummary(data) };
+}

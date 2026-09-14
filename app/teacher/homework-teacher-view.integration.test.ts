@@ -130,13 +130,38 @@ describe("Gap 2 — 담당 선생님/관리자는 발급한 과제의 문제 내
     void contractId;
   });
 
-  it("담당이 아닌 다른 선생님은 발급되지 않은 문제를 읽을 수 없다(RLS 그대로 유지)", () => {
+  // 2026-09-13(P2 9차) 정책 변경: 문제은행의 **공개된 문제 본문**은 모든 선생님이
+  // 읽는다 — 수업 준비에서 그것으로 회차를 구성해야 하기 때문이다(그 전에는 어느
+  // 분기에도 걸리지 않아 선생님 화면의 문제 후보가 늘 비어 있었다). 닫아 두는 것은
+  // **누구에게 무엇이 발급됐고 무엇을 제출했는가**다.
+  it("담당이 아닌 다른 선생님은 발급 사실과 제출을 읽을 수 없다", () => {
     const { sessionId, contractId } = makeEnrollmentWithSession();
     const problemId = makeInvisibleConfirmedProblem("mc");
+    const itemId = makeHomeworkItem(sessionId, problemId);
+
+    expect(
+      asUser(OTHER_TEACHER_ID, `select count(*) from session_homework_items where id = '${itemId}';`)
+    ).toBe("0");
+    expect(
+      asUser(
+        OTHER_TEACHER_ID,
+        `select count(*) from session_homework_attempts where homework_item_id = '${itemId}';`
+      )
+    ).toBe("0");
+    void contractId;
+  });
+
+  it("남의 수업에서 만들어진 문제는 여전히 읽을 수 없다", () => {
+    const { sessionId, contractId } = makeEnrollmentWithSession();
+    const problemId = makeInvisibleConfirmedProblem("mc");
+    // 문제은행 문제가 아니라 그 수업의 맥락에서 만들어진 문제로 표시한다.
+    psql(`update problems set origin_session_id = (select id from legacy_sessions limit 1)
+          where id = '${problemId}';`);
     makeHomeworkItem(sessionId, problemId);
 
-    const count = asUser(OTHER_TEACHER_ID, `select count(*) from problems where id = '${problemId}';`);
-    expect(count).toBe("0");
+    expect(
+      asUser(OTHER_TEACHER_ID, `select count(*) from problems where id = '${problemId}';`)
+    ).toBe("0");
     void contractId;
   });
 });
@@ -184,7 +209,7 @@ describe("Gap 2 — 담당 선생님/관리자가 학생 제출 답안을 조회
 });
 
 describe("Gap 2 — 무관한 다른 선생님은 조회할 수 없다(요구사항 5, 데이터 유출 없음 증명)", () => {
-  it("session_homework_items, problems, session_homework_attempts 세 테이블 모두 0행 — '거부'와 '제출 없음'을 구분", () => {
+  it("발급·제출은 0행 — '거부'와 '제출 없음'을 구분", () => {
     const { sessionId, contractId } = makeEnrollmentWithSession();
     const problemId = makeInvisibleConfirmedProblem("mc");
     const itemId = makeHomeworkItem(sessionId, problemId);
@@ -208,12 +233,9 @@ describe("Gap 2 — 무관한 다른 선생님은 조회할 수 없다(요구사
     );
     expect(itemsForOther).toBe("0");
 
-    const problemsForOther = asUser(
-      OTHER_TEACHER_ID,
-      `select count(*) from problems where id = '${problemId}';`
-    );
-    expect(problemsForOther).toBe("0");
-
+    // 문제 본문 자체는 2026-09-13(P2 9차)부터 선생님에게 열려 있다 — 수업 준비에서
+    // 그것으로 회차를 구성해야 하기 때문이다. 여기서 증명하는 유출 없음은 **누구에게
+    // 무엇이 발급됐고 무엇을 제출했는가**이며, 그 둘은 그대로 0행이다.
     const attemptsForOther = asUser(
       OTHER_TEACHER_ID,
       `select count(*) from session_homework_attempts where homework_item_id = '${itemId}';`

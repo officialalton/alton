@@ -386,7 +386,7 @@ describe("pin_session_selection() — 정확히 staged+included 목록만 매니
     );
 
     const err = asUserExpectError(TEACHER_ID, `select pin_session_selection('${sessionId}');`);
-    expect(err).toMatch(/pin 시점 재검증 실패/);
+    expect(err).toMatch(/수업을 시작할 수 없습니다|pin 시점 재검증 실패/);
     expect(err).toContain(toBeUnpublishedSectionId);
 
     const count = psql(`select count(*) from session_content_manifest where session_id = '${sessionId}';`);

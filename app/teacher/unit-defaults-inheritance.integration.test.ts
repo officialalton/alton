@@ -147,6 +147,14 @@ function makeOverlayUnit(sourceUnitId: string | null): string {
   );
 }
 
+// 2026-09-13 확정(A안): 키워드·조건·교재가 바뀌어도 구성을 **자동으로 다시 계산하지
+// 않는다.** 화면이 '구성에 반영되지 않은 변경 있음'만 띄우고, 사람이 '다시 구성'을
+// 눌렀을 때 반영된다. 최초 구성(신규 생성·최초 상속)만 자동이다.
+const recompose = (u: string) =>
+  asUser(TEACHER_ID, `select recompose_unit('student', '${u}');`);
+const dirtyOf = (u: string) =>
+  asUser(TEACHER_ID, `select composition_dirty from curriculum_overlay_units where id = '${u}';`);
+
 const keywordsOf = (u: string) =>
   asUser(TEACHER_ID, `select count(*) from curriculum_overlay_unit_keywords where overlay_unit_id = '${u}';`);
 const materialsOf = (u: string) =>
@@ -390,7 +398,13 @@ describe("키워드 → 교재 자동 구성", () => {
       `delete from curriculum_overlay_unit_keywords
        where overlay_unit_id = '${overlayUnitId}' and keyword_id = '${keywordId}';`
     );
+    // 키워드를 떼도 구성은 그대로다 — 표시만 켜진다.
+    expect(materialsOf(overlayUnitId)).toBe(`${autoDoc},${ownDoc}`);
+    expect(dirtyOf(overlayUnitId)).toBe("t");
+
+    recompose(overlayUnitId);
     expect(materialsOf(overlayUnitId)).toBe(ownDoc);
+    expect(dirtyOf(overlayUnitId)).toBe("f");
   });
 
   it("선생님이 뺀 자동 자료는 다시 들어오지 않는다", () => {
@@ -454,6 +468,7 @@ describe("키워드 → 교재 자동 구성", () => {
       `insert into curriculum_overlay_unit_keywords (overlay_unit_id, keyword_id)
        values ('${overlayUnitId}', '${secondKeywordId}');`
     );
+    recompose(overlayUnitId);
     expect(materialsOf(overlayUnitId)).toBe(`${ownDoc},${firstDoc},${lateDoc}`);
   });
 
@@ -468,7 +483,7 @@ describe("키워드 → 교재 자동 구성", () => {
 
 // 키워드는 그대로인데 교재 쪽이 바뀌는 경우. 키워드를 붙이는 순간에만 동작하면
 // 이후에 배포된 교재가 영원히 누락된다.
-describe("교재 쪽이 바뀌어도 자동 구성이 따라온다", () => {
+describe("교재 쪽이 바뀌면 표시되고, 다시 구성할 때 따라온다", () => {
   function unitWithKeyword(): { overlayUnitId: string; keywordId: string } {
     const overlayUnitId = makeOverlayUnit(null);
     const keywordId = psql(
@@ -493,8 +508,12 @@ describe("교재 쪽이 바뀌어도 자동 구성이 따라온다", () => {
     );
     expect(materialsOf(overlayUnitId)).toBe("");
 
-    // 배포하는 순간 들어온다.
+    // 배포해도 구성은 그대로다. '반영되지 않은 변경 있음'만 켜진다.
     psql(`update curriculum_docs set status = 'published' where id = '${docId}';`);
+    expect(materialsOf(overlayUnitId)).toBe("");
+    expect(dirtyOf(overlayUnitId)).toBe("t");
+
+    recompose(overlayUnitId);
     expect(materialsOf(overlayUnitId)).toBe(docId);
   });
 
@@ -504,9 +523,14 @@ describe("교재 쪽이 바뀌어도 자동 구성이 따라온다", () => {
       `insert into curriculum_docs (title, subject_id, owner_type, status, primary_keyword_id)
        values ('내릴 교재 ${uniq()}', '${SUBJECT_ID}', 'admin', 'published', '${keywordId}') returning id;`
     );
+    recompose(overlayUnitId);
     expect(materialsOf(overlayUnitId)).toBe(docId);
 
     psql(`update curriculum_docs set status = 'draft' where id = '${docId}';`);
+    expect(materialsOf(overlayUnitId)).toBe(docId);
+    expect(dirtyOf(overlayUnitId)).toBe("t");
+
+    recompose(overlayUnitId);
     expect(materialsOf(overlayUnitId)).toBe("");
   });
 
@@ -517,10 +541,16 @@ describe("교재 쪽이 바뀌어도 자동 구성이 따라온다", () => {
       `insert into curriculum_docs (title, subject_id, owner_type, status, primary_keyword_id)
        values ('옮길 교재 ${uniq()}', '${SUBJECT_ID}', 'admin', 'published', '${a.keywordId}') returning id;`
     );
+    recompose(a.overlayUnitId);
     expect(materialsOf(a.overlayUnitId)).toBe(docId);
     expect(materialsOf(b.overlayUnitId)).toBe("");
 
     psql(`update curriculum_docs set primary_keyword_id = '${b.keywordId}' where id = '${docId}';`);
+    // 양쪽 모두 표시만 켜지고, 각자 다시 구성할 때 옮겨진다.
+    expect(dirtyOf(a.overlayUnitId)).toBe("t");
+    expect(dirtyOf(b.overlayUnitId)).toBe("t");
+    recompose(a.overlayUnitId);
+    recompose(b.overlayUnitId);
     expect(materialsOf(a.overlayUnitId)).toBe("");
     expect(materialsOf(b.overlayUnitId)).toBe(docId);
   });
@@ -559,6 +589,7 @@ describe("교재 쪽이 바뀌어도 자동 구성이 따라온다", () => {
     );
 
     // 수동분은 맨 앞 그대로, 뺀 것은 돌아오지 않고, 새 것만 뒤에 붙는다.
+    recompose(overlayUnitId);
     expect(materialsOf(overlayUnitId)).toBe(`${ownDoc},${lateDoc}`);
   });
 
@@ -568,12 +599,14 @@ describe("교재 쪽이 바뀌어도 자동 구성이 따라온다", () => {
       `insert into curriculum_docs (title, subject_id, owner_type, status, primary_keyword_id)
        values ('고정 확인 ${uniq()}', '${SUBJECT_ID}', 'admin', 'published', '${keywordId}') returning id;`
     );
+    recompose(overlayUnitId);
     expect(materialsOf(overlayUnitId)).toBe(docId);
 
     // 과거 수업이 읽는 것은 session_content_manifest 스냅샷이지 회차 구성이
     // 아니다 — 회차 구성이 바뀌어도 고정된 매니페스트 행은 그대로다.
     const before = psql(`select count(*) from session_content_manifest;`);
     psql(`update curriculum_docs set status = 'draft' where id = '${docId}';`);
+    recompose(overlayUnitId);
     expect(materialsOf(overlayUnitId)).toBe("");
     expect(psql(`select count(*) from session_content_manifest;`)).toBe(before);
   });

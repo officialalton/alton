@@ -148,7 +148,10 @@ describe("관리자 기준본 문제 자동 구성", () => {
     const unitId = makeCatalogUnit([kw]);
     expect(countOf(unitId)).toBe("2");
 
+    // 2026-09-13 확정(A안): 조건을 바꿔도 자동으로 다시 뽑지 않는다. 다시 구성할 때다.
     setCriteria(unitId, `array['mc'], array['easy'], null`);
+    expect(countOf(unitId)).toBe("2");
+    psql(`select recompose_unit('catalog', '${unitId}');`);
     expect(problemsOf(unitId)).toBe(`${mc}:auto`);
   });
 
@@ -160,6 +163,7 @@ describe("관리자 기준본 문제 자동 구성", () => {
     const unitId = makeCatalogUnit([]);
     setCriteria(unitId, `null, null, 2`);
     psql(`insert into subject_template_unit_keywords (unit_id, keyword_id) values ('${unitId}', '${kw}');`);
+    psql(`select recompose_unit('catalog', '${unitId}');`);
     expect(countOf(unitId)).toBe("2");
   });
 

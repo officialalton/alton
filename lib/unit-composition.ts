@@ -85,6 +85,15 @@ export type UnitComposition = {
    * 되살아난다.
    */
   goal: string | null;
+  /**
+   * 구성이 한 번이라도 만들어졌는가. false 면 키워드를 붙이는 순간 자동으로
+   * 구성된다(신규 생성·최초 상속). true 면 이후 변경은 '다시 구성'을 눌러야 반영된다.
+   */
+  composed: boolean;
+  /** 구성에 반영되지 않은 변경이 있는가(키워드·조건·교재 공개 등). */
+  hasUnappliedChanges: boolean;
+  /** 담을 때의 버전과 지금 공개된 버전이 다른 항목 수. */
+  outdatedVersionCount: number;
 };
 
 /**
@@ -105,11 +114,13 @@ export async function resolveUnitScope(
   scopeLabel: string;
   sourceUnitId: string | null;
   goal: string | null;
+  composed: boolean;
+  dirty: boolean;
 } | null> {
   if (layer === "catalog") {
     const { data } = await supabase
       .from("subject_template_units")
-      .select("unit_title, goal, subject_id, subject:subjects(name)")
+      .select("unit_title, goal, subject_id, composed_at, composition_dirty, subject:subjects(name)")
       .eq("id", unitId)
       .maybeSingle();
     if (!data) return null;
@@ -121,6 +132,8 @@ export async function resolveUnitScope(
       // 기준본이 곧 기준이다 — 위에서 물려받을 것이 없다.
       sourceUnitId: null,
       goal: (data.goal as string | null) ?? null,
+      composed: Boolean(data.composed_at),
+      dirty: Boolean(data.composition_dirty),
     };
   }
 
@@ -128,7 +141,7 @@ export async function resolveUnitScope(
     const { data } = await supabase
       .from("teacher_curriculum_template_units")
       .select(
-        "unit_title, goal, source_unit_id, template:teacher_curriculum_templates!inner(subject_id, subject:subjects(name))"
+        "unit_title, goal, source_unit_id, composed_at, composition_dirty, template:teacher_curriculum_templates!inner(subject_id, subject:subjects(name))"
       )
       .eq("id", unitId)
       .maybeSingle();
@@ -143,6 +156,8 @@ export async function resolveUnitScope(
       scopeLabel: LAYERS.teacher.label,
       sourceUnitId: (data.source_unit_id as string | null) ?? null,
       goal: (data.goal as string | null) ?? null,
+      composed: Boolean(data.composed_at),
+      dirty: Boolean(data.composition_dirty),
     };
   }
 
@@ -151,7 +166,7 @@ export async function resolveUnitScope(
   // 단계별로 나눠 읽는다 — 쿼리 수는 늘지만 무엇을 읽는지가 분명하다.
   const { data: unitRow } = await supabase
     .from("curriculum_overlay_units")
-    .select("unit_title, source_unit_id, overlay_id")
+    .select("unit_title, source_unit_id, overlay_id, composed_at, composition_dirty")
     .eq("id", unitId)
     .maybeSingle();
   if (!unitRow) return null;
@@ -187,6 +202,8 @@ export async function resolveUnitScope(
     scopeLabel: studentName ? `${studentName} 학생` : LAYERS.student.label,
     sourceUnitId: (unitRow.source_unit_id as string | null) ?? null,
     goal: (prepRow?.goal as string | null) ?? null,
+    composed: Boolean(unitRow.composed_at),
+    dirty: Boolean(unitRow.composition_dirty),
   };
 }
 
@@ -200,7 +217,7 @@ export async function loadComposition(
   const scope = await resolveUnitScope(supabase, layer, unitId);
   if (!scope) return null;
 
-  const [{ data: linkRows }, { data: materialRows }, { data: subjectKeywordRows }] =
+  const [{ data: linkRows }, { data: materialRows }, { data: subjectKeywordRows }, { count: driftCount }] =
     await Promise.all([
       supabase.from(spec.keywordTable).select("keyword_id").eq(spec.unitFk, unitId),
       supabase
@@ -216,6 +233,13 @@ export async function loadComposition(
             .eq("status", "active")
             .order("label", { ascending: true })
         : Promise.resolve({ data: [] as { id: string; label: string }[] }),
+      // 담을 때의 버전과 지금 공개된 버전이 다른 항목. 준비안이 옛 버전을 '유지하고
+      // 있다'는 사실이지, 바뀌었다는 뜻이 아니다.
+      supabase
+        .from("unit_composition_drift")
+        .select("*", { count: "exact", head: true })
+        .eq("layer", layer)
+        .eq("unit_id", unitId),
     ]);
 
   const labelById = new Map(
@@ -253,6 +277,9 @@ export async function loadComposition(
     })),
     hasInheritableDefaults: Boolean(scope.sourceUnitId),
     goal: scope.goal,
+    composed: scope.composed,
+    hasUnappliedChanges: scope.dirty,
+    outdatedVersionCount: driftCount ?? 0,
   };
 }
 

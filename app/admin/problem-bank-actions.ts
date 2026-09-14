@@ -247,6 +247,11 @@ export async function createBankProblemAction(params: {
   /** 무엇에 대한 글인가. 유형과 다른 축이고 역시 선택 항목이다. */
   topic?: string;
   difficulty?: string;
+  /**
+   * 만들면서 바로 붙일 키워드. 선택 항목이다 — 키워드 없이도 초안은 만들어진다.
+   * 만든 뒤 편집 화면에서도 붙일 수 있지만, 이미 아는 것을 다시 찾아 들어가게 하지 않는다.
+   */
+  keywordIds?: string[];
 }): Promise<BankResult<string>> {
   const { adminUserId } = await requireAdmin();
   const admin = createAdminClient();
@@ -259,7 +264,19 @@ export async function createBankProblemAction(params: {
     p_actor_id: adminUserId,
   });
   if (error) return { ok: false, error: readable(error.message, "문제를 만들지 못했습니다.") };
-  return { ok: true, value: data as string };
+
+  const problemId = data as string;
+  if (params.keywordIds?.length) {
+    // 키워드를 붙이지 못해도 문제 자체는 만들어졌다. 만들기를 실패로 돌리면
+    // 화면에 없는 문제가 DB 에 남는다 — 붙이기 실패만 따로 알린다.
+    const { error: linkError } = await admin
+      .from("problem_keywords")
+      .insert(params.keywordIds.map((keywordId) => ({ problem_id: problemId, keyword_id: keywordId })));
+    if (linkError && linkError.code !== "23505") {
+      return { ok: false, error: "문제는 만들었지만 키워드를 붙이지 못했습니다. 편집 화면에서 붙여주세요." };
+    }
+  }
+  return { ok: true, value: problemId };
 }
 
 /**
@@ -450,6 +467,7 @@ export async function generateBankProblemsAction(params: {
   difficulty: string;
   format: string;
   count: number;
+  keywordIds?: string[];
 }): Promise<BankResult<number>> {
   await requireAdmin();
   const admin = createAdminClient();
@@ -498,6 +516,7 @@ export async function generateBankProblemsAction(params: {
       skillType: params.skillType,
       topic: params.topic,
       difficulty: params.difficulty,
+      keywordIds: params.keywordIds,
     });
     if (!problem.ok) continue;
     const draft = await createDraftVersionAction({

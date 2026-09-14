@@ -31,6 +31,9 @@ function makeComposition(over: Partial<UnitComposition> = {}): UnitComposition {
       { id: "k2", label: "Voca" },
     ],
     hasInheritableDefaults: true,
+  composed: true,
+  hasUnappliedChanges: false,
+  outdatedVersionCount: 0,
     goal: null,
     ...over,
   };

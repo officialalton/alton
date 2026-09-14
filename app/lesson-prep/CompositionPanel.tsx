@@ -8,6 +8,9 @@ import {
   removeMaterial,
   swapMaterialOrder,
   saveGoal,
+  previewRecomposition,
+  applyRecomposition,
+  type RecompositionSummary,
 } from "./actions";
 import type {
   KeywordProblem,
@@ -46,6 +49,8 @@ export default function CompositionPanel({
   const [error, setError] = useState<string | null>(null);
   const [showPicker, setShowPicker] = useState(false);
   const [goalSaved, setGoalSaved] = useState(false);
+  const [pending, setPending] = useState<RecompositionSummary | null>(null);
+  const [busy, setBusy] = useState(false);
 
   const { layer, unitId } = composition;
   const pickedIds = new Set(materials.map((m) => m.curriculumDocId));
@@ -63,8 +68,33 @@ export default function CompositionPanel({
     setKeywordIds((prev) =>
       attached ? prev.filter((k) => k !== keywordId) : [...prev, keywordId]
     );
-    // 키워드가 바뀌면 자동 구성이 DB에서 다시 계산된다. 화면이 그 결과를 추측하면
-    // 실제와 어긋나므로 서버가 그린 상태를 다시 받는다.
+    // 2026-09-13 확정(A안): 키워드를 바꿔도 구성을 자동으로 다시 계산하지 않는다.
+    // 최초 구성일 때만 서버가 한 번에 채우므로 그때는 다시 받아 그린다. 이미
+    // 구성된 회차라면 '구성에 반영되지 않은 변경 있음'만 뜨고 구성은 그대로다.
+    window.location.reload();
+  }
+
+  async function showChanges() {
+    setBusy(true);
+    setError(null);
+    const result = await previewRecomposition(layer, unitId);
+    setBusy(false);
+    if (!result.ok) {
+      setError(result.error);
+      return;
+    }
+    setPending(result.value);
+  }
+
+  async function applyChanges() {
+    setBusy(true);
+    setError(null);
+    const result = await applyRecomposition(layer, unitId);
+    setBusy(false);
+    if (!result.ok) {
+      setError(result.error);
+      return;
+    }
     window.location.reload();
   }
 
@@ -149,6 +179,72 @@ export default function CompositionPanel({
           {error}
         </div>
       )}
+
+      {/* 구성은 사람이 다시 구성을 누르기 전까지 그대로다. 달라진 것이 있으면
+          여기서 알리고, 무엇이 달라지는지 확인한 뒤 적용하게 한다. */}
+      {composition.composed &&
+        (composition.hasUnappliedChanges || composition.outdatedVersionCount > 0) && (
+          <div className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3.5 mb-5">
+            <div className="text-[13px] font-bold text-ink mb-1">
+              구성에 반영되지 않은 변경 있음
+            </div>
+            <p className="text-[12px] text-grey-500 mb-2.5">
+              {composition.hasUnappliedChanges
+                ? "키워드·조건이나 교재가 바뀌었습니다. "
+                : ""}
+              {composition.outdatedVersionCount > 0
+                ? `담긴 교재·문제 ${composition.outdatedVersionCount}개가 담을 때의 버전을 쓰고 있습니다. `
+                : ""}
+              지금 구성은 그대로 유지됩니다. 다시 구성해야 반영됩니다.
+            </p>
+
+            {pending === null ? (
+              <button
+                disabled={busy}
+                onClick={() => void showChanges()}
+                className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
+              >
+                다시 구성
+              </button>
+            ) : (
+              <div>
+                <ul className="text-[12.5px] text-ink mb-2.5 space-y-0.5">
+                  <li>
+                    교재 — 들어옴 {pending.materialsAdded}개 · 빠짐 {pending.materialsRemoved}개
+                  </li>
+                  <li>
+                    문제 — 들어옴 {pending.problemsAdded}개 · 빠짐 {pending.problemsRemoved}개
+                  </li>
+                  <li>버전이 올라갈 항목 — {pending.versionsUpdated}개</li>
+                  <li className="text-grey-500">
+                    조건에 맞는 문제는 모두 {pending.problemsAvailable}개입니다. 모자라도
+                    자동으로 채우지 않습니다.
+                  </li>
+                </ul>
+                <p className="text-[11.5px] text-grey-500 mb-2.5">
+                  직접 담은 것·뺀 것·맞춰 둔 순서는 그대로 남습니다. 이미 시작한 수업은
+                  당시 버전을 그대로 씁니다.
+                </p>
+                <div className="flex gap-2">
+                  <button
+                    disabled={busy}
+                    onClick={() => void applyChanges()}
+                    className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
+                  >
+                    적용
+                  </button>
+                  <button
+                    disabled={busy}
+                    onClick={() => setPending(null)}
+                    className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
+                  >
+                    취소
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
 
       <section className="mb-7">
         <h2 className="text-[13px] font-bold text-ink mb-1">

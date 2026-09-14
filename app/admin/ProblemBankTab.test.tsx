@@ -172,6 +172,18 @@ describe("목록 — 생성 · 공개 · 보관", () => {
     );
   });
 
+  it("새 문제 상자는 생성 탭에만 있고, 검색은 지금 탭 안에서 찾는다", async () => {
+    render(<ProblemBankTab subjects={subjects} />);
+    await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());
+    expect(screen.getByPlaceholderText("작성 중인 문제에서 찾기")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText("공개"));
+    await waitFor(() =>
+      expect(screen.queryByLabelText("새 문제 과목")).not.toBeInTheDocument()
+    );
+    expect(screen.getByPlaceholderText("공개된 문제에서 찾기")).toBeInTheDocument();
+  });
+
   it("보관 과목은 새 문제 대상으로 고를 수 없다", async () => {
     render(<ProblemBankTab subjects={subjects} />);
     await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());
@@ -195,6 +207,40 @@ describe("유형과 주제는 별도 항목이다", () => {
     await waitFor(() =>
       expect(createBankProblemAction).toHaveBeenCalledWith(
         expect.objectContaining({ skillType: "Words in Context", topic: "생태계" })
+      )
+    );
+  });
+
+  it("만들 때 키워드도 함께 고를 수 있다 — 선택 항목이다", async () => {
+    render(<ProblemBankTab subjects={subjects} />);
+    await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());
+
+    // 과목을 고르기 전에는 고를 키워드가 없다.
+    expect(screen.queryByRole("button", { name: "판별식" })).not.toBeInTheDocument();
+    fireEvent.change(screen.getByLabelText("새 문제 과목"), { target: { value: "sub1" } });
+
+    await waitFor(() =>
+      expect(screen.getByRole("button", { name: "판별식" })).toBeInTheDocument()
+    );
+    fireEvent.click(screen.getByRole("button", { name: "판별식" }));
+    fireEvent.click(screen.getByText("직접 쓰기"));
+
+    await waitFor(() =>
+      expect(createBankProblemAction).toHaveBeenCalledWith(
+        expect.objectContaining({ keywordIds: ["kw2"] })
+      )
+    );
+  });
+
+  it("키워드를 고르지 않아도 만들 수 있다", async () => {
+    render(<ProblemBankTab subjects={subjects} />);
+    await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());
+    fireEvent.change(screen.getByLabelText("새 문제 과목"), { target: { value: "sub1" } });
+    fireEvent.click(screen.getByText("직접 쓰기"));
+
+    await waitFor(() =>
+      expect(createBankProblemAction).toHaveBeenCalledWith(
+        expect.objectContaining({ keywordIds: undefined })
       )
     );
   });
@@ -253,18 +299,17 @@ describe("공개는 내용을 본 뒤에만 — 검수 요청 단계는 없다",
     expect(screen.queryByText("검수 요청")).not.toBeInTheDocument();
   });
 
-  it("미리보기에서 지문·선택지·정답·해설을 확인하고 공개한다", async () => {
+  it("편집 화면에 지문·선택지·정답·해설이 그대로 있고, 공개는 저장한 버전을 공개한다", async () => {
     await openFirstProblem();
-    fireEvent.click(screen.getByText("미리보기"));
+    expect(screen.getByLabelText("지문")).toHaveValue("판별식이 0일 때");
+    expect(screen.getByLabelText("선택지 2")).toHaveValue("나");
+    expect(screen.getByLabelText("2번이 정답")).toBeChecked();
+    expect(screen.getByLabelText("해설")).toHaveValue("중근입니다");
 
-    await waitFor(() => expect(screen.getByText("공개될 내용")).toBeInTheDocument());
-    expect(screen.getByText("2. 나 · 정답")).toBeInTheDocument();
-    expect(screen.getByText("해설 · 중근입니다")).toBeInTheDocument();
-
-    fireEvent.click(screen.getByText("이 내용으로 공개"));
-    // 보고 있는 내용을 그대로 공개한다 — 저장하지 않은 수정이 남지 않게 저장부터.
+    fireEvent.click(screen.getByText("공개하기"));
+    // 화면에 있는 것을 먼저 저장하고, **저장이 돌려준 버전**을 공개한다.
     await waitFor(() => expect(createDraftVersionAction).toHaveBeenCalled());
-    await waitFor(() => expect(publishDraftAction).toHaveBeenCalledWith("v1"));
+    await waitFor(() => expect(publishDraftAction).toHaveBeenCalledWith("v2"));
   });
 
   it("AI로 만들어도 초안으로만 들어간다", async () => {
@@ -284,9 +329,7 @@ describe("공개는 내용을 본 뒤에만 — 검수 요청 단계는 없다",
   it("실패 사유를 화면에 보여준다", async () => {
     publishDraftAction.mockResolvedValue({ ok: false, error: "공개하지 못했습니다." });
     await openFirstProblem();
-    fireEvent.click(screen.getByText("미리보기"));
-    await waitFor(() => expect(screen.getByText("이 내용으로 공개")).toBeInTheDocument());
-    fireEvent.click(screen.getByText("이 내용으로 공개"));
+    fireEvent.click(screen.getByText("공개하기"));
     await waitFor(() =>
       expect(screen.getByText("공개하지 못했습니다.")).toBeInTheDocument()
     );
@@ -353,13 +396,9 @@ describe("키워드 — 공개는 막지 않되 사유는 알린다", () => {
     ]);
     await openFirstProblem();
     expect(screen.getByText(/키워드 없이도 저장하고 공개할 수 있습니다/)).toBeInTheDocument();
-
-    fireEvent.click(screen.getByText("미리보기"));
-    await waitFor(() =>
-      expect(
-        screen.getByText(/키워드가 없어 자동 구성에 포함되지 않습니다. 공개는 할 수 있습니다./)
-      ).toBeInTheDocument()
-    );
+    expect(
+      screen.getByText("키워드가 없어 자동 구성에는 포함되지 않습니다. 공개는 됩니다.")
+    ).toBeInTheDocument();
   });
 
   it("공개된 뒤에도 목록에서 사유를 보고 키워드를 붙일 수 있다", async () => {

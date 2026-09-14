@@ -378,9 +378,18 @@ describe("키워드 → 기본 교재 자동 구성은 세 계층에서 같게 �
       )
     ).toBe("auto");
 
+    // 2026-09-13 확정(A안): 키워드를 떼도 구성은 그대로다. 다시 구성해야 빠진다.
     psql(
       `delete from subject_template_unit_keywords where unit_id = '${admin.unitId}' and keyword_id = '${kw}';`
     );
+    expect(
+      psql(`select count(*) from subject_template_unit_materials where unit_id = '${admin.unitId}';`)
+    ).toBe("1");
+    expect(
+      psql(`select composition_dirty from subject_template_units where id = '${admin.unitId}';`)
+    ).toBe("t");
+
+    psql(`select recompose_unit('catalog', '${admin.unitId}');`);
     expect(
       psql(`select count(*) from subject_template_unit_materials where unit_id = '${admin.unitId}';`)
     ).toBe("0");
@@ -418,9 +427,16 @@ describe("키워드 → 기본 교재 자동 구성은 세 계층에서 같게 �
     const templateId = makeTeacherTemplate();
     const unitId = makeTeacherUnit(templateId, admin.unitId, 981);
 
+    // 상속으로 이미 한 번 구성된 회차다 — 키워드를 더해도 자동으로 들어오지 않고,
+    // 다시 구성할 때 들어온다.
     psql(
       `insert into teacher_curriculum_template_unit_keywords (unit_id, keyword_id) values ('${unitId}', '${kw}');`
     );
+    expect(
+      psql(`select composition_dirty from teacher_curriculum_template_units where id = '${unitId}';`)
+    ).toBe("t");
+
+    psql(`select recompose_unit('teacher', '${unitId}');`);
     expect(
       psql(
         `select source from teacher_curriculum_template_unit_materials

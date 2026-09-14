@@ -156,6 +156,9 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
             onClick={() => {
               setBucket(t.key);
               setOpenId(null);
+              // 탭을 옮길 때마다 다시 읽는다. 방금 공개한 문제가 공개 탭에 바로
+              // 보여야 한다 — 나갔다 들어오게 만들지 않는다.
+              void reload();
             }}
             className={
               "text-[13px] font-bold px-3.5 py-2 -mb-[1.5px] border-b-[2px] " +
@@ -182,16 +185,27 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
         </p>
       )}
 
+      {/* 검색은 지금 보고 있는 탭 안에서만 찾는다 — 생성 탭에서 찾으면 초안만,
+          공개 탭에서 찾으면 공개된 것만 나온다. 자리표시자로 그것을 밝힌다. */}
       <Filters
         subjects={activeSubjects}
         keywords={filter.subjectId ? keywordsBySubject.get(filter.subjectId) ?? [] : []}
         filter={filter}
+        searchLabel={
+          bucket === "working"
+            ? "작성 중인 문제에서 찾기"
+            : bucket === "published"
+              ? "공개된 문제에서 찾기"
+              : "보관된 문제에서 찾기"
+        }
         onChange={(next) => setFilter((f) => ({ ...f, ...next }))}
       />
 
-      {bucket !== "archived" && (
+      {/* 새 문제는 '생성'에서만 만든다. 공개·보관 목록에 만들기 상자가 있을 이유가 없다. */}
+      {bucket === "working" && (
         <NewProblemRow
           subjects={activeSubjects}
+          keywordsBySubject={keywordsBySubject}
           busy={busy}
           onCreate={(p) => void run(() => createBankProblemAction(p), "초안 문제를 만들었습니다.")}
           onGenerate={async (p) => {
@@ -256,11 +270,13 @@ function Filters({
   subjects,
   keywords,
   filter,
+  searchLabel,
   onChange,
 }: {
   subjects: AdminSubject[];
   keywords: SubjectKeyword[];
   filter: ProblemBankFilter;
+  searchLabel: string;
   onChange: (next: Partial<ProblemBankFilter>) => void;
 }) {
   return (
@@ -310,7 +326,7 @@ function Filters({
         aria-label="문제 검색"
         value={filter.query ?? ""}
         onChange={(e) => onChange({ query: e.target.value || undefined })}
-        placeholder="지문으로 찾기"
+        placeholder={searchLabel}
         className="flex-1 min-w-[180px] text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5"
       />
     </div>
@@ -319,13 +335,21 @@ function Filters({
 
 function NewProblemRow({
   subjects,
+  keywordsBySubject,
   busy,
   onCreate,
   onGenerate,
 }: {
   subjects: AdminSubject[];
+  keywordsBySubject: Map<string, SubjectKeyword[]>;
   busy: boolean;
-  onCreate: (p: { subjectId: string; format: string; skillType?: string; topic?: string }) => void;
+  onCreate: (p: {
+    subjectId: string;
+    format: string;
+    skillType?: string;
+    topic?: string;
+    keywordIds?: string[];
+  }) => void;
   onGenerate: (p: {
     subjectId: string;
     skillType: string;
@@ -333,6 +357,7 @@ function NewProblemRow({
     difficulty: string;
     format: string;
     count: number;
+    keywordIds?: string[];
   }) => void;
 }) {
   const [subjectId, setSubjectId] = useState("");
@@ -340,6 +365,15 @@ function NewProblemRow({
   const [skillType, setSkillType] = useState("");
   const [topic, setTopic] = useState("");
   const [count, setCount] = useState("3");
+  const [keywordIds, setKeywordIds] = useState<string[]>([]);
+
+  const keywords = subjectId ? keywordsBySubject.get(subjectId) ?? [] : [];
+
+  function pickSubject(next: string) {
+    setSubjectId(next);
+    // 키워드는 과목에 속한다. 과목을 바꾸면 고른 키워드는 더 이상 그 과목 것이 아니다.
+    setKeywordIds([]);
+  }
 
   return (
     <div className="border-[1.5px] border-grey-200 rounded-xl p-3.5 mb-5">
@@ -350,7 +384,7 @@ function NewProblemRow({
         <select
           aria-label="새 문제 과목"
           value={subjectId}
-          onChange={(e) => setSubjectId(e.target.value)}
+          onChange={(e) => pickSubject(e.target.value)}
           className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5"
         >
           <option value="">과목 고르기…</option>
@@ -385,6 +419,49 @@ function NewProblemRow({
           placeholder="주제 (선택 · 예: 생태계)"
           className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 w-[180px]"
         />
+      </div>
+
+      {/* 만들면서 바로 키워드를 붙인다. 선택 항목이고, 만든 뒤에도 고칠 수 있다. */}
+      {subjectId && (
+        <div className="mt-2.5">
+          <div className="text-[11.5px] text-grey-500 mb-1.5">
+            키워드 (선택) — 붙여 두면 회차 자동 구성 후보가 됩니다.
+          </div>
+          {keywords.length === 0 ? (
+            <p className="text-[12px] text-grey-500">
+              이 과목에 등록된 키워드가 없습니다. 커리큘럼에서 먼저 만드세요.
+            </p>
+          ) : (
+            <div className="flex flex-wrap gap-1.5">
+              {keywords.map((k) => {
+                const on = keywordIds.includes(k.id);
+                return (
+                  <button
+                    key={k.id}
+                    type="button"
+                    aria-pressed={on}
+                    onClick={() =>
+                      setKeywordIds((prev) =>
+                        on ? prev.filter((id) => id !== k.id) : [...prev, k.id]
+                      )
+                    }
+                    className={
+                      "text-[12px] font-bold px-2.5 py-1 rounded-full border-[1.5px] " +
+                      (on
+                        ? "bg-ink text-white border-ink"
+                        : "bg-white text-grey-500 border-grey-200")
+                    }
+                  >
+                    {k.label}
+                  </button>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      )}
+
+      <div className="flex flex-wrap gap-2 items-center mt-3">
         <button
           disabled={!subjectId || busy}
           onClick={() =>
@@ -393,6 +470,7 @@ function NewProblemRow({
               format,
               skillType: skillType.trim() || undefined,
               topic: topic.trim() || undefined,
+              keywordIds: keywordIds.length ? keywordIds : undefined,
             })
           }
           className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
@@ -416,6 +494,7 @@ function NewProblemRow({
               difficulty: "medium",
               format,
               count: Number(count) || 1,
+              keywordIds: keywordIds.length ? keywordIds : undefined,
             })
           }
           className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
@@ -500,15 +579,19 @@ function ProblemRow({
             busy={busy}
             onRun={onRun}
           />
-          {/* 초안이 새로 생기거나 공개돼 사라지면 편집기를 다시 띄운다 — 그래야
-              서버의 현재 초안 내용에서 시작한다. 화면에 쓰던 값이 뒤늦게 덮이지
-              않도록 effect 로 맞추지 않고 key 로 갈아 끼운다. */}
-          <DraftEditor
-            key={problem.draft?.versionId ?? "none"}
-            problem={problem}
-            busy={busy}
-            onRun={onRun}
-          />
+          {/* 공개된 문제에 빈 초안 상자를 열어 두지 않는다 — 고치는 길은 위의
+              '수정 초안 만들기'이고, 빈 상자가 같이 있으면 어느 쪽으로 고쳐야 하는지
+              알 수 없다. 초안이 있거나 아직 공개된 적이 없을 때만 편집기를 연다.
+              key 를 두는 이유: 초안이 새로 생기거나 공개돼 사라지면 편집기를 다시
+              띄워 서버의 현재 내용에서 시작하게 한다. */}
+          {(problem.draft || !problem.published) && (
+            <DraftEditor
+              key={problem.draft?.versionId ?? "none"}
+              problem={problem}
+              busy={busy}
+              onRun={onRun}
+            />
+          )}
         </div>
       )}
     </div>
@@ -714,7 +797,6 @@ function DraftEditor({
     source?.correctIndex ?? null
   );
   const [explanation, setExplanation] = useState(source?.explanation ?? "");
-  const [preview, setPreview] = useState(false);
 
   const filledOptions = options.map((o) => o.trim());
   const optionsPayload = isMc && filledOptions.some(Boolean) ? filledOptions : null;
@@ -722,19 +804,17 @@ function DraftEditor({
   const canSave = passage.trim().length > 0;
   const missingAnswer = isMc && optionsPayload !== null && correctIndex === null;
 
-  const save = (done: string) =>
-    onRun(
-      () =>
-        createDraftVersionAction({
-          problemId: problem.id,
-          passage: passage.trim(),
-          options: optionsPayload,
-          correctIndex: optionsPayload ? correctIndex : null,
-          explanation: explanation.trim(),
-          difficulty: problem.difficulty ?? "medium",
-        }),
-      done
-    );
+  /** 지금 화면에 있는 내용을 초안으로 저장하고, 저장된 버전 id 를 돌려준다. */
+  async function saveDraft(): Promise<{ ok: true; value: string } | { ok: false; error: string }> {
+    return createDraftVersionAction({
+      problemId: problem.id,
+      passage: passage.trim(),
+      options: optionsPayload,
+      correctIndex: optionsPayload ? correctIndex : null,
+      explanation: explanation.trim(),
+      difficulty: problem.difficulty ?? "medium",
+    });
+  }
 
   return (
     <div>
@@ -801,62 +881,38 @@ function DraftEditor({
       <div className="flex flex-wrap items-center gap-2">
         <button
           disabled={!canSave || busy}
-          onClick={() => void save("초안을 저장했습니다. 내용을 확인한 뒤 공개하세요.")}
-          className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
+          onClick={() =>
+            void onRun(saveDraft, "초안을 저장했습니다. 아직 수업에 쓰이지 않습니다.")
+          }
+          className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
         >
           초안 저장
         </button>
         <button
-          disabled={!canSave || busy}
-          onClick={() => setPreview((v) => !v)}
-          className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
+          disabled={!canSave || busy || missingAnswer}
+          onClick={() =>
+            // 화면에 있는 내용을 그대로 공개한다. 저장하지 않은 수정이 남은 채 옛
+            // 내용이 공개되지 않도록 저장부터 하고, **저장이 돌려준 버전**을 공개한다
+            // — 화면이 들고 있던 옛 버전 id 를 쓰면 엉뚱한 것을 공개하게 된다.
+            void onRun(async () => {
+              const saved = await saveDraft();
+              if (!saved.ok) return saved;
+              return publishDraftAction(saved.value);
+            }, "공개했습니다. 공개 탭에서 볼 수 있습니다.")
+          }
+          className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
         >
-          {preview ? "미리보기 닫기" : "미리보기"}
+          공개하기
         </button>
+        {problem.keywords.length === 0 && (
+          <span className="text-[11.5px] text-grey-500">
+            키워드가 없어 자동 구성에는 포함되지 않습니다. 공개는 됩니다.
+          </span>
+        )}
       </div>
 
       {missingAnswer && (
         <p className="text-[11.5px] text-red mt-2">정답을 하나 골라주세요.</p>
-      )}
-
-      {preview && (
-        <div className="mt-3 bg-grey-100 rounded-lg px-4 py-3">
-          <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-1.5">
-            공개될 내용
-          </div>
-          <ContentPreview
-            format={problem.format}
-            passage={passage.trim()}
-            options={optionsPayload}
-            correctIndex={correctIndex}
-            explanation={explanation.trim()}
-          />
-          {problem.keywords.length === 0 && (
-            <p className="text-[11.5px] text-red mt-2">
-              키워드가 없어 자동 구성에 포함되지 않습니다. 공개는 할 수 있습니다.
-            </p>
-          )}
-          <button
-            disabled={busy || missingAnswer || !source}
-            onClick={async () => {
-              // 화면에서 보고 있는 내용을 그대로 공개한다 — 저장하지 않은 수정이
-              // 남은 채 옛 내용이 공개되는 일이 없도록 저장부터 한다.
-              await save("");
-              await onRun(
-                () => publishDraftAction(source!.versionId),
-                "공개했습니다. 이제 회차 구성 후보가 됩니다."
-              );
-            }}
-            className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50 mt-3"
-          >
-            이 내용으로 공개
-          </button>
-          {!source && (
-            <p className="text-[11.5px] text-grey-500 mt-1.5">
-              먼저 초안을 저장하면 공개할 수 있습니다.
-            </p>
-          )}
-        </div>
       )}
     </div>
   );

@@ -357,15 +357,18 @@ describe("compose_homework_from_session — Gap 1: v3 제출 완료(submitted=tr
     void contractId;
   });
 
-  it("legacy session_problem_attempts로 '이미 풀어봄'인 문제도 여전히 정상적으로 제외/포함된다(회귀)", () => {
+  it("수업 밖에서 푼 기록(session_problem_attempts)도 '이미 풀어봄'으로 친다(회귀)", () => {
     const { sessionId: sessionA, contractId } = makeEnrollmentWithSession();
     const keywordId = makeKeyword();
     const problemId = makeProblem("confirmed");
     tagProblemWithKeyword(problemId, keywordId);
-    // legacy 경로: session_problem_attempts에 학생의 시도 기록을 직접 남긴다.
+    // 2026-09-13(P2 9차): session_problem_attempts.session_id 의 참조 대상을
+    // legacy_sessions 에서 v3 sessions 로 옮겼다(20261337000000). 레거시 세션 id 를
+    // 넣는 옛 경로는 더 이상 쓰지 않는다 — 세션 밖 복습 기록(session_id = null)으로
+    // 같은 회귀를 지킨다.
     psql(
       `insert into session_problem_attempts (session_id, student_id, problem_id, response, saved)
-       values ((select id from legacy_sessions limit 1), '${STUDENT_ID}', '${problemId}', '{}'::jsonb, true);`
+       values (null, '${STUDENT_ID}', '${problemId}', '{}'::jsonb, true);`
     );
 
     const excluded = compose(TEACHER_ID, sessionA, [keywordId], 10, false, false);
