@@ -210,6 +210,7 @@ export async function appendPageStrokeEvents(params: {
         p_segments: params.segments,
         p_scope: params.scope,
         p_problem_id: params.target.problemId,
+        p_context: params.target.context,
       })
     : await supabase.rpc("append_page_stroke_events", {
         p_session_id: params.target.sessionId,
@@ -239,7 +240,7 @@ export async function loadPageStrokes(
     .eq("session_id", target.sessionId)
     .eq("scope", scope);
   query = isProblemPageTarget(target)
-    ? query.eq("problem_id", target.problemId).is("problem_work_id", null)
+    ? query.eq("problem_id", target.problemId).eq("problem_context", target.context).is("problem_work_id", null)
     : query
         .eq("curriculum_doc_id", target.curriculumDocId)
         .eq("curriculum_doc_version_id", target.curriculumDocVersionId)

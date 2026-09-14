@@ -70,6 +70,7 @@ export default function AssetMaterialViewer({
   const [navError, setNavError] = useState<string | null>(null);
   const [saveState, setSaveState] = useState<"idle" | "saving" | "saved" | "error">("idle");
   const [pageInput, setPageInput] = useState("");
+  const [collapsedAssets, setCollapsedAssets] = useState<Set<string>>(new Set());
   const layerRef = useRef<PdfPageAnnotationHandle | null>(null);
   const frameRef = useRef<HTMLDivElement | null>(null);
 
@@ -161,10 +162,29 @@ export default function AssetMaterialViewer({
         {assets.map((a, i) => {
           const active = i === pos.assetIndex;
           const signedFor = urls[a.versionId];
+          const collapsed = collapsedAssets.has(a.versionId);
           return (
             <div key={a.versionId} className="flex-shrink-0 md:block">
               <button
-                onClick={() => void guardedGo({ assetIndex: i, page: 1 })}
+                // 2026-09-14 UAT: 열려 있는 자료를 다시 누르면 페이지 목록을 접는다 — 다른 자료를 빨리 고를 수 있게.
+                aria-expanded={active ? !collapsed : undefined}
+                onClick={() => {
+                  if (active) {
+                    setCollapsedAssets((prev) => {
+                      const next = new Set(prev);
+                      if (next.has(a.versionId)) next.delete(a.versionId);
+                      else next.add(a.versionId);
+                      return next;
+                    });
+                    return;
+                  }
+                  setCollapsedAssets((prev) => {
+                    const next = new Set(prev);
+                    next.delete(a.versionId);
+                    return next;
+                  });
+                  void guardedGo({ assetIndex: i, page: 1 });
+                }}
                 className={
                   "md:w-full text-left px-2.5 py-2 rounded-lg text-[13px] mb-0.5 whitespace-nowrap md:whitespace-normal " +
                   (active ? "text-red font-bold" : "text-ink hover:bg-grey-100")
@@ -177,7 +197,7 @@ export default function AssetMaterialViewer({
                 )}
               </button>
               {/* 현재 PDF 자료는 페이지 미리보기로 이동한다(보이는 것만 그린다). */}
-              {active && a.kind === "pdf" && signedFor && (
+              {active && !collapsed && a.kind === "pdf" && signedFor && (
                 <div className="hidden md:block pl-1 pr-1 mb-2" data-testid="pdf-thumbnails">
                   {Array.from({ length: pageCountOf(a) }, (_, k) => k + 1).map((n) => (
                     <PdfPageThumbnail

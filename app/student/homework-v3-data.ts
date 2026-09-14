@@ -127,6 +127,7 @@ export async function loadStudentHomeworkSets(
       .from("session_problem_work")
       .select("session_id, problem_id, submitted_at, graded_at")
       .eq("student_id", studentId)
+      .eq("source", "homework")
       .in("session_id", sessionIds),
   ]);
   const one = (rel: unknown) => (Array.isArray(rel) ? rel[0] : rel) as Record<string, unknown> | null | undefined;

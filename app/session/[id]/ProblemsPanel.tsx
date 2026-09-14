@@ -159,10 +159,10 @@ export default function ProblemsPanel({
     setBoardBusy(true);
     setError(null);
     try {
-      const next = await openProblemWork({ sessionId, studentId, problemId, newAttempt });
+      const next = await openProblemWork({ sessionId, studentId, problemId, newAttempt, source });
       setBoard(next);
       setOpenId(problemId);
-      setAttempts(await listProblemAttempts({ sessionId, studentId, problemId }));
+      setAttempts(await listProblemAttempts({ sessionId, studentId, problemId, source }));
     } catch (e) {
       setError(e instanceof Error ? e.message : "풀이판을 열지 못했습니다.");
     } finally {
@@ -203,7 +203,7 @@ export default function ProblemsPanel({
     );
     setError(null);
     setSavedChoiceId(null);
-    const res = await answerMcChoice({ sessionId, studentId, problemId: p.problemId, choiceIndex: index });
+    const res = await answerMcChoice({ sessionId, studentId, problemId: p.problemId, choiceIndex: index, source });
     if (!res.ok) {
       setProblems(before);
       setError(res.error);
@@ -323,8 +323,8 @@ export default function ProblemsPanel({
       <div ref={sheetRef} className="relative md:col-start-2 w-full" data-testid="problem-sheet">
       {currentProblem && !currentProblem.planned && (
         <PdfPageAnnotationLayer
-          key={`${sessionId}:${currentProblem.problemId}`}
-          target={{ sessionId, problemId: currentProblem.problemId }}
+          key={`${sessionId}:${source}:${currentProblem.problemId}`}
+          target={{ sessionId, problemId: currentProblem.problemId, context: source }}
           role={layerRole}
           viewerUserId={viewerUserId}
           width={sheetSize.width}

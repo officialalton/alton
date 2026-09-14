@@ -40,10 +40,10 @@ export default function DriveMaterialsPanel({ subjects }: { subjects: AdminSubje
   }
 
   async function runArchive() {
-    if (!subjectId) return;
-    if (typeof window !== "undefined" && !window.confirm(`${subject?.subjectName ?? "이 과목"}에서 Drive 원본이 없는 공개 교재를 모두 보관할까요? 과거 수업 기록은 남고, 새로 담는 목록에서만 빠집니다.`)) return;
+    const scopeLabel = subjectId ? `${subject?.subjectName ?? "이 과목"}에서` : "모든 과목에서";
+    if (typeof window !== "undefined" && !window.confirm(`${scopeLabel} Drive 원본이 없는 공개 교재를 모두 보관할까요? 과거 수업 기록은 남고, 새로 담는 목록에서만 빠집니다.`)) return;
     setArchive("running");
-    setArchive(await archiveNonDriveDocsAction(subjectId));
+    setArchive(await archiveNonDriveDocsAction(subjectId || null));
   }
 
   return (
@@ -102,8 +102,8 @@ export default function DriveMaterialsPanel({ subjects }: { subjects: AdminSubje
           <button disabled={!subjectId || materialSync === "running"} onClick={() => void runMaterialSync()} className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50">
             {materialSync === "running" ? "Drive 를 읽고 공개하는 중…" : "과목 자료 동기화 실행"}
           </button>
-          <button disabled={!subjectId || archive === "running"} onClick={() => void runArchive()} title="HTML 교재·로컬 표본처럼 Drive 원본이 없는 공개 교재를 보관합니다" className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-red disabled:opacity-50">
-            {archive === "running" ? "보관 중…" : "Drive 원본 없는 교재 보관"}
+          <button disabled={archive === "running"} onClick={() => void runArchive()} title="HTML 교재·로컬 표본처럼 Drive 원본이 없는 공개 교재를 보관합니다. 과목을 고르지 않으면 전체." className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-red disabled:opacity-50">
+            {archive === "running" ? "보관 중…" : subjectId ? "Drive 원본 없는 교재 보관" : "Drive 원본 없는 교재 보관 (전체)"}
           </button>
         </div>
 

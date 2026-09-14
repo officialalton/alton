@@ -96,7 +96,8 @@ export async function loadSessionProblems(
     supabase,
     sessionId,
     viewer,
-    rows.map((r) => ({ problemId: r.content_id as string, versionId: (r.problem_version_id as string | null) ?? null }))
+    rows.map((r) => ({ problemId: r.content_id as string, versionId: (r.problem_version_id as string | null) ?? null })),
+    "lesson"
   );
 }
 
@@ -129,7 +130,8 @@ export async function loadHomeworkProblems(
     rows.map((r) => ({
       problemId: r.problem_id as string,
       versionId: (r.problem_version_id as string | null) ?? publishedByProblem.get(r.problem_id as string) ?? null,
-    }))
+    })),
+    "homework"
   );
 }
 
@@ -137,7 +139,8 @@ async function buildSessionProblems(
   supabase: SupabaseClient,
   sessionId: string,
   viewer: SessionProblemViewer,
-  rows: { problemId: string; versionId: string | null }[]
+  rows: { problemId: string; versionId: string | null }[],
+  source: ProblemSource
 ): Promise<SessionProblem[]> {
   // 고정된 버전만 읽는다.
   //
@@ -187,7 +190,9 @@ async function buildSessionProblems(
       .from("session_problem_work")
       .select("id, problem_id, attempt_no, submitted_at, submitted_choice_index, auto_correct, grade, grade_comment, graded_at")
       .eq("session_id", sessionId)
-      .eq("student_id", viewer.studentId);
+      .eq("student_id", viewer.studentId)
+      // 과제 답안은 수업 답안과 따로 — 같은 문제라도 섞이지 않는다(2026-09-14).
+      .eq("source", source);
     for (const w of work ?? []) {
       const key = w.problem_id as string;
       const prev = attemptsByProblemId.get(key) ?? emptyState();

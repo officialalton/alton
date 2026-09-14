@@ -39,7 +39,7 @@ export function pageStoreKey(k: PageStoreKey): string {
 
 /** 레이어 대상 하나를 문자열로 — 보관함 키·실시간 채널 이름에 쓴다. */
 export function strokeTargetKey(target: { sessionId: string } & Record<string, unknown>): string {
-  if (typeof target.problemId === "string") return `problem:${target.problemId}`;
+  if (typeof target.problemId === "string") return `problem:${String(target.context ?? "lesson")}:${target.problemId}`;
   return `${String(target.curriculumDocVersionId)}:${String(target.pageNumber)}`;
 }
 

@@ -630,15 +630,17 @@ export type ArchiveNonDriveResult = { ok: true; archived: { id: string; title: s
  * 이 과목에서 Drive 원본이 없는 **공개** 교재(HTML 교재·로컬 표본)를 한 번에 보관한다.
  * 제품 오너 지시: 교재는 이제 Drive 에서만 온다. 지우지 않고 보관한다 — 과거 수업이 그 교재를 참조한다.
  */
-export async function archiveNonDriveDocsAction(subjectId: string): Promise<ArchiveNonDriveResult> {
+export async function archiveNonDriveDocsAction(subjectId?: string | null): Promise<ArchiveNonDriveResult> {
   const { supabase } = await requireAdmin();
-  const { data: docs, error } = await supabase
+  // 2026-09-14 UAT: 과목을 골라야만 되게 했더니 다른 과목의 옛 교재가 잡히지 않았다 — 과목 없이 누르면 전체.
+  let query = supabase
     .from("curriculum_docs")
     .select("id, title")
-    .eq("subject_id", subjectId)
     .eq("status", "published")
     .is("archived_at", null)
     .is("source_drive_file_id", null);
+  if (subjectId) query = query.eq("subject_id", subjectId);
+  const { data: docs, error } = await query;
   if (error) return { ok: false, error: error.message };
   const targets = (docs ?? []) as { id: string; title: string }[];
   if (targets.length === 0) return { ok: true, archived: [] };

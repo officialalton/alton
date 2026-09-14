@@ -22,6 +22,7 @@ export async function loadIssuedHomework(supabase: SupabaseClient, sessionId: st
     .from("session_problem_work")
     .select("problem_id")
     .eq("session_id", sessionId)
+    .eq("source", "homework")
     .in("problem_id", items.map((i) => i.problem_id as string));
   const started = new Set((work ?? []).map((w) => w.problem_id as string));
   return items.map((i) => ({

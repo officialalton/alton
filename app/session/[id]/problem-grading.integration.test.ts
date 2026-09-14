@@ -373,8 +373,8 @@ describe("issue_homework_items / withdraw_homework_item — 교사가 골라 발
     const { sessionId, mcId } = startedSession();
     asUser(TEACHER_ID, `select issue_homework_items('${sessionId}', array['${mcId}']::uuid[]);`);
     const itemId = psql(`select id from session_homework_items where session_id = '${sessionId}' and problem_id = '${mcId}';`);
-    // 수업 고정본이 있으면 그것을 우선 쓴다(같은 문제). 여기서는 둘이 같은 버전이다.
-    const workId = studentWork(sessionId, mcId);
+    // 과제 풀이판은 과제 발급본 버전을 쓴다(2026-09-14: 수업 풀이판과 따로).
+    const workId = psql(`select start_problem_work('${sessionId}', '${STUDENT_ID}', '${mcId}', false, 'homework');`);
     expect(psql(`select problem_version_id from session_problem_work where id = '${workId}';`)).toBe(
       psql(`select problem_version_id from session_homework_items where id = '${itemId}';`)
     );
@@ -398,8 +398,8 @@ describe("append_problem_page_stroke_events — 문제 위 교사·학생 공유
 
   it("수업 문제와 과제 문제 위에 쓰고, 이 수업 문제가 아니면 거절한다. clear·text 도 같은 규약", () => {
     const { sessionId, mcId } = startedSession();
-    const call = (who: string, scope: string, problemId: string, segs: string[]) =>
-      asUser(who, `select count(*) from append_problem_page_stroke_events('${sessionId}', '[${segs.join(",")}]'::jsonb, '${scope}', '${problemId}');`);
+    const call = (who: string, scope: string, problemId: string, segs: string[], context = "lesson") =>
+      asUser(who, `select count(*) from append_problem_page_stroke_events('${sessionId}', '[${segs.join(",")}]'::jsonb, '${scope}', '${problemId}', '${context}');`);
     expect(call(TEACHER_ID, "teacher_shared", mcId, [seg({ x0: 10 })])).toBe("1");
     expect(call(STUDENT_ID, "student_shared", mcId, [seg({ x0: 20 }), seg({ tool: "text", text: "메모", size: 18 })])).toBe("2");
     expect(call(TEACHER_ID, "teacher_shared", mcId, [seg({ tool: "clear" })])).toBe("1");
@@ -413,7 +413,11 @@ describe("append_problem_page_stroke_events — 문제 위 교사·학생 공유
     const kw = psql(`select keyword_id from curriculum_overlay_unit_keywords k join session_curriculum_units s on s.overlay_unit_id = k.overlay_unit_id where s.session_id = '${sessionId}' limit 1;`);
     psql(`insert into problem_keywords (problem_id, keyword_id) values ('${hw}', '${kw}');`);
     asUser(TEACHER_ID, `select issue_homework_items('${sessionId}', array['${hw}']::uuid[]);`);
-    expect(call(TEACHER_ID, "teacher_shared", hw, [seg({ x0: 30 })])).toBe("1");
+    expect(call(TEACHER_ID, "teacher_shared", hw, [seg({ x0: 30 })], "homework")).toBe("1");
+    // 과제 전용 문제는 수업 문맥으로는 못 쓴다 — 수업 문제 필기와 과제 필기는 따로다.
+    expect(fails(() => call(TEACHER_ID, "teacher_shared", hw, [seg({ x0: 31 })], "lesson"))).toContain("이 수업의 문제가 아닙니다");
+    // 같은 수업 문제도 과제 문맥이면 과제 발급이 있어야 한다.
+    expect(fails(() => call(TEACHER_ID, "teacher_shared", mcId, [seg({ x0: 32 })], "homework"))).toContain("이 수업의 과제가 아닙니다");
 
     const stranger = psql(
       `insert into problems (format, passage, subject_id, status, created_by) values ('mc', '남의 문제', '${SUBJECT_ID}', 'confirmed', '${TEACHER_ID}') returning id;`
@@ -425,5 +429,31 @@ describe("append_problem_page_stroke_events — 문제 위 교사·학생 공유
        where session_id = '${sessionId}' and problem_id = '${mcId}' and problem_work_id is null order by seq;`
     ).split("\n");
     expect(rows).toEqual(["teacher_shared:stroke", "student_shared:stroke", "student_shared:stroke", "teacher_shared:clear_all"]);
+    expect(psql(`select count(distinct problem_context) from session_annotation_events where session_id = '${sessionId}' and problem_id = '${mcId}' and problem_work_id is null;`)).toBe("1");
+  });
+});
+
+// ------------------------------------------------------------ 과제 답안은 수업 답안과 따로 (2026-09-14)
+describe("session_problem_work.source — 같은 문제라도 과제는 처음부터, 채점도 따로", () => {
+  it("수업에서 채점한 문제를 과제로 내도 과제 쪽은 채점 전이다", async () => {
+    const { sessionId, mcId } = startedSession();
+    const lessonWork = studentWork(sessionId, mcId);
+    psql(`select submit_problem_attempt('${lessonWork}', '${STUDENT_ID}', 1, null);`);
+    asUser(TEACHER_ID, `select grade_problem_attempt('${lessonWork}', null, null);`);
+
+    asUser(TEACHER_ID, `select issue_homework_items('${sessionId}', array['${mcId}']::uuid[]);`);
+    const homeworkWork = psql(`select start_problem_work('${sessionId}', '${STUDENT_ID}', '${mcId}', false, 'homework');`);
+    expect(homeworkWork).not.toBe(lessonWork);
+    expect(psql(`select source || ':' || coalesce(graded_at::text, 'none') from session_problem_work where id = '${homeworkWork}';`)).toBe("homework:none");
+
+    const lesson = await loadSessionProblems(admin, sessionId, { canSeeAnswers: false, studentId: STUDENT_ID });
+    const { loadHomeworkProblems } = await import("./session-problem-data");
+    const homework = await loadHomeworkProblems(admin, sessionId, { canSeeAnswers: false, studentId: STUDENT_ID });
+    expect(lesson.find((p) => p.problemId === mcId)?.graded).toBe(true);
+    expect(homework.find((p) => p.problemId === mcId)?.graded).toBe(false);
+    expect(homework.find((p) => p.problemId === mcId)?.correctIndex).toBeNull();
+    // 과제 쪽 회수는 과제 풀이판이 있으니 거절, 수업 풀이판만 있었다면 가능했을 것.
+    const itemId = psql(`select id from session_homework_items where session_id = '${sessionId}' and problem_id = '${mcId}';`);
+    expect(fails(() => asUser(TEACHER_ID, `select withdraw_homework_item('${itemId}');`))).toContain("이미 풀기 시작한");
   });
 });

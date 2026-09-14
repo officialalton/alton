@@ -72,17 +72,14 @@ export default function CurriculumDocsTab({
     }
   }
 
-  // 2026-09-14 UAT — Drive 파일명이 그대로 교재 이름이라 화면에서 잘렸다. 표시 이름을 따로 정한다.
-  // Drive 원본 이름(source_drive_name)은 그대로 남고, 다시 동기화해도 이 이름을 덮어쓰지 않는다.
-  async function renameDoc(docId: string, current: string) {
-    const next = typeof window !== "undefined" ? window.prompt("화면에 보일 교재 이름", current) : null;
-    if (next === null) return;
+  // 2026-09-14 UAT — 원 파일명(source_drive_name)은 그대로 두고, 화면에 보일 이름(title)만 따로 적는다.
+  // 다시 동기화해도 title 은 덮어쓰지 않는다. 관리자 화면에는 둘 다 보인다.
+  async function saveDisplayTitle(docId: string, current: string, next: string) {
     const title = next.trim();
     if (!title || title === current) return;
     await updateDocTitle(docId, title);
     setDocs((prev) => prev.map((d) => (d.id === docId ? { ...d, title } : d)));
   }
-
   async function toggleArchived(docId: string, archived: boolean) {
     setArchiveError(null);
     const result = await setDocArchived(docId, archived);
@@ -322,6 +319,27 @@ export default function CurriculumDocsTab({
                   {!d.hasPrimaryKeyword && " · 대표 키워드 없음"}
                   {d.archivedAt && " · 보관됨"}
                 </div>
+                {d.kind !== "html" && (
+                  <div className="mt-1.5 text-[12px] text-grey-500">
+                    {d.sourceDriveName && (
+                      <div className="truncate max-w-[520px]" title={d.sourceDriveName}>
+                        원 파일명: <span className="text-ink">{d.sourceDriveName}</span>
+                      </div>
+                    )}
+                    <label className="flex items-center gap-1.5 mt-1">
+                      <span className="whitespace-nowrap">노출용 이름:</span>
+                      <input
+                        aria-label={`${d.sourceDriveName ?? d.title} 노출용 이름`}
+                        defaultValue={d.title}
+                        onBlur={(e) => void saveDisplayTitle(d.id, d.title, e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") (e.target as HTMLInputElement).blur();
+                        }}
+                        className="text-[12.5px] text-ink border-[1.5px] border-grey-200 rounded-lg px-2 py-1 w-[320px] max-w-full"
+                      />
+                    </label>
+                  </div>
+                )}
               </div>
               <span className="flex items-center gap-2 shrink-0">
                 <button
@@ -330,15 +348,6 @@ export default function CurriculumDocsTab({
                 >
                   {d.archivedAt ? "보관 풀기" : "보관"}
                 </button>
-                {d.kind !== "html" && (
-                  <button
-                    onClick={() => void renameDoc(d.id, d.title)}
-                    title="Drive 파일명 대신 화면에 보일 이름을 정합니다"
-                    className="text-[12px] font-bold text-grey-500 whitespace-nowrap"
-                  >
-                    이름 바꾸기
-                  </button>
-                )}
                 {d.kind === "html" ? (
                   <button
                     onClick={() => openDoc(d.id)}

@@ -95,7 +95,10 @@ export async function openProblemWork(params: {
   studentId: string;
   problemId: string;
   newAttempt?: boolean;
+  /** 수업 문제 / 과제 문제 — 풀이판이 따로다(2026-09-14). */
+  source?: ProblemSource;
 }): Promise<ProblemWorkBoard> {
+  const source: ProblemSource = params.source ?? "lesson";
   const { user, supabase } = await requireUser();
 
   // 풀이판을 여는 주체는 학생 본인 또는 그 수업의 담당 교사뿐이다. 교사는
@@ -136,6 +139,7 @@ export async function openProblemWork(params: {
       .eq("session_id", params.sessionId)
       .eq("student_id", params.studentId)
       .eq("problem_id", params.problemId)
+      .eq("source", source)
       .order("attempt_no", { ascending: false })
       .limit(1)
       .maybeSingle();
@@ -152,6 +156,7 @@ export async function openProblemWork(params: {
     p_student_id: params.studentId,
     p_problem_id: params.problemId,
     p_new_attempt: newAttempt,
+    p_source: source,
   });
   if (error) throw new Error(error.message);
 
@@ -210,6 +215,7 @@ export async function listProblemAttempts(params: {
   sessionId: string;
   studentId: string;
   problemId: string;
+  source?: ProblemSource;
 }): Promise<{ workId: string; attemptNo: number; submitted: boolean }[]> {
   const { supabase } = await requireUser();
   const { data } = await supabase
@@ -218,6 +224,7 @@ export async function listProblemAttempts(params: {
     .eq("session_id", params.sessionId)
     .eq("student_id", params.studentId)
     .eq("problem_id", params.problemId)
+    .eq("source", params.source ?? "lesson")
     .order("attempt_no", { ascending: true });
   return (data ?? []).map((w) => ({
     workId: w.id as string,
@@ -299,6 +306,7 @@ export async function answerMcChoice(params: {
   studentId: string;
   problemId: string;
   choiceIndex: number;
+  source?: ProblemSource;
 }): Promise<ActionResult> {
   const { user } = await requireUser();
   if (user.id !== params.studentId) return { ok: false, error: "본인 문제만 답할 수 있습니다." };
@@ -323,6 +331,7 @@ export async function answerMcChoice(params: {
     p_student_id: params.studentId,
     p_problem_id: params.problemId,
     p_new_attempt: false,
+    p_source: params.source ?? "lesson",
   });
   if (error) return { ok: false, error: readable(error.message) };
   const { error: submitError } = await admin.rpc("submit_problem_attempt", {

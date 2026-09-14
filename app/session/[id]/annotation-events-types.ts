@@ -57,6 +57,8 @@ export type PageStrokeTarget = {
 export type ProblemPageStrokeTarget = {
   sessionId: string;
   problemId: string;
+  /** 수업 문제 화면 / 과제 화면 — 같은 문제라도 필기는 따로다(2026-09-14). */
+  context: "lesson" | "homework";
 };
 
 export type StrokeLayerTarget = PageStrokeTarget | ProblemPageStrokeTarget;

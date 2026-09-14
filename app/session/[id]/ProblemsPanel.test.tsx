@@ -182,7 +182,7 @@ describe("ProblemsPanel — 객관식", () => {
     expect(screen.queryByText(/풀이판 열기/)).not.toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: /나/ }));
     await waitFor(() =>
-      expect(answerMcChoice).toHaveBeenCalledWith({ sessionId: "s1", studentId: "stu1", problemId: "p1", choiceIndex: 1 })
+      expect(answerMcChoice).toHaveBeenCalledWith({ sessionId: "s1", studentId: "stu1", problemId: "p1", choiceIndex: 1, source: "lesson" })
     );
     expect(screen.getByText("내 답")).toBeInTheDocument();
     expect(screen.getByText("답 저장됨 · 채점 대기")).toBeInTheDocument();
@@ -241,7 +241,7 @@ describe("ProblemsPanel — 서술형", () => {
   it("문제를 펼치면 연습장이 바로 열리고, 쓰는 대로 저장된다는 안내가 있다", async () => {
     renderPanel([essay]);
     await waitFor(() =>
-      expect(openProblemWork).toHaveBeenCalledWith({ sessionId: "s1", studentId: "stu1", problemId: "p2", newAttempt: false })
+      expect(openProblemWork).toHaveBeenCalledWith({ sessionId: "s1", studentId: "stu1", problemId: "p2", newAttempt: false, source: "lesson" })
     );
     expect(screen.getByText(/아래 연습장에 답을 쓰세요/)).toBeInTheDocument();
     expect(screen.getByText("답안")).toBeInTheDocument();
@@ -267,7 +267,7 @@ describe("ProblemsPanel — 풀이형", () => {
     await waitFor(() => expect(openProblemWork).toHaveBeenCalled());
     fireEvent.click(screen.getByRole("button", { name: "다시 풀기" }));
     await waitFor(() =>
-      expect(openProblemWork).toHaveBeenLastCalledWith({ sessionId: "s1", studentId: "stu1", problemId: "p3", newAttempt: true })
+      expect(openProblemWork).toHaveBeenLastCalledWith({ sessionId: "s1", studentId: "stu1", problemId: "p3", newAttempt: true, source: "lesson" })
     );
   });
 
