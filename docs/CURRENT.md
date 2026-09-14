@@ -62,9 +62,10 @@
 7. **P3 8차** — 과제 답안·채점·문제 위 필기를 수업과 **분리**(source/context), **문제 화면 전체 필기 레이어**(수업·과제 공통), 채점 결과·점수 표시, 관리자 교재 탭 통합·새 교재 차단·노출용 이름·목차 접기.
 8. **P3 9차** — 문제 템플릿 ①~⑤(SPR / 표·수식 / 도형·그래프 데이터 렌더 + 그림 확인 게이트 / 그림 파일 첨부 / 유형 코드·문항 말투·메모·밑줄), 문제은행 난이도·`전체 공개`·자동 확장 칸. **실제 모델 호출 표본 10문항** 렌더 확인 → 영어 규칙·응답 정규화·라벨 위치 수정. AI 내용 오류(변 라벨 오기) 실례 확인 — 그림 확인 게이트가 필요한 이유.
 
+10. **P3 11차** — 과제 발급 = 키워드별 개수·무작위(`20261364`), 학생 포털 문제 기록 v3 재구성, v3 과제 탭 역할 수정(답 선택·필기 불가 결함), 교재 목차 이름 = 현재 노출용 이름, 교사 해설 보기 전 형식, 그림 라벨 평문화, 렌더링 엔진 설계안.
 9. **P3 10차** — 그림 SAT 지면 스타일(격자·화살표 축·원점 O·축 설명·각 호 표시), UAT 수정: 문제 화면 필기 레이어가 **클릭을 먹던 결함**(선택지·버튼 클릭 불가) 수정, 서술형 = 글 상자 타이핑, 연습장 제거, PDF T 상자 기본 크기(가로 2배·5줄), 수업 준비 `담을 수 있는 문제` 클릭 미리보기(지문·선택지·그림), **키워드 자동 문제 기본 캡 20**(`20261363`).
 
-마이그레이션: `20261346`~`20261363`(전부 additive, 공유 non-prod 적용). 배치별 상세는 아카이브의 각 블록.
+마이그레이션: `20261346`~`20261364`(전부 additive, 공유 non-prod 적용). 배치별 상세는 아카이브의 각 블록.
 
 ## 5. 검증 구분
 
@@ -81,6 +82,7 @@
 - 오픈 전 blocker(변화 없음, 아카이브 참고): 실제 세금 계산, 실제 이메일 발송, Workspace 위임 계정 분리, SECURITY DEFINER anon 권한 감사, E2E 전용 fixture, `mark_expired_invites` cron.
 
 ## 7. 관련 문서
+- **표준 렌더링 엔진 설계안(2026-09-14 저녁 지시, 구현 전 검토용)**: `docs/2026-09-14-standard-rendering-engine-design.md` + 표본 `docs/assets/2026-09-14-render-samples/`. AI=의미 데이터만, ALTON 렌더러=조판, 검증 계층=거부. 좌표 자유 입력 `geometry` 스펙은 중단 예정(레거시 읽기만).
 
 - **남은 작업 전체 목록**: [`2026-09-14-remaining-work.md`](2026-09-14-remaining-work.md)(A 지금 UAT → B 콘텐츠·수업 → C 상담·결제·정산·문서 → D 운영·소통 → E 보안·데이터 수명 → F 출시 게이트).
 - 문제 템플릿 설계: [`2026-09-14-problem-template-design.md`](2026-09-14-problem-template-design.md) · 과제 통일: [`2026-09-14-homework-v3-unification.md`](2026-09-14-homework-v3-unification.md) · 문제 풀이·채점·PDF 텍스트: [`2026-09-14-problem-answer-grading-and-pdf-text-notes.md`](2026-09-14-problem-answer-grading-and-pdf-text-notes.md) · Drive 자료 설계: [`2026-09-14-drive-material-assets-design.md`](2026-09-14-drive-material-assets-design.md) · PDF 규격: [`2026-09-14-lesson-pdf-spec.md`](2026-09-14-lesson-pdf-spec.md) · 로드맵: [`2026-08-29-master-roadmap-v3.md`](2026-08-29-master-roadmap-v3.md) · 이전 이력 전체: [`history/CURRENT-archive-until-2026-09-14.md`](history/CURRENT-archive-until-2026-09-14.md).
