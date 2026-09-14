@@ -95,6 +95,26 @@ export async function startMyLessonSession(sessionId: string): Promise<ActionRes
   }
 }
 
+/** 2026-09-14 — 진행 중 수업을 지금 구성으로 다시 고정(repin_live_session_content). 담당 교사·관리자. */
+export async function repinMyLiveLesson(sessionId: string): Promise<ActionResult> {
+  try {
+    const { user } = await requireUser();
+    const admin = createAdminClient();
+    const [{ data: session }, { data: profile }] = await Promise.all([
+      admin.from("sessions").select("teacher_id").eq("id", sessionId).maybeSingle(),
+      admin.from("profiles").select("role").eq("id", user.id).maybeSingle(),
+    ]);
+    if (!session || (session.teacher_id !== user.id && profile?.role !== "admin")) {
+      return { ok: false, error: "본인 수업만 다시 고정할 수 있습니다." };
+    }
+    const { error } = await admin.rpc("repin_live_session_content", { p_session_id: sessionId, p_actor_id: user.id });
+    if (error) return { ok: false, error: error.message.replace(/^[A-Z0-9]{5}:\s*/, "") };
+    return { ok: true };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : String(e) };
+  }
+}
+
 export type TeacherLessonOutcome = "completed" | "student_no_show";
 
 /**

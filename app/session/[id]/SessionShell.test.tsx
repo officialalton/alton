@@ -318,6 +318,29 @@ describe("SessionShell — 탭 노출", () => {
 // 4절 — 준비를 수업 화면 안에서 한다. 다만 **보이는 것과 적용 범위가 다르다**:
 // 시작한 수업의 내용은 시작 시점에 고정됐고, 이 탭이 보여주는 것은 회차의 현재
 // 구성이다. 말해주지 않으면 고정된 수업을 여기서 고치는 것처럼 보인다.
+const livePrep = {
+  composition: {
+    layer: "student" as const,
+    unitId: "u1",
+    unitTitle: "이차방정식 응용 문제 (1)",
+    subjectId: "sub1",
+    subjectName: "SAT Math",
+    scopeLabel: "지훈 학생",
+    keywords: [],
+    materials: [],
+    subjectKeywords: [],
+    hasInheritableDefaults: false,
+    composed: true,
+    hasUnappliedChanges: false,
+    outdatedVersionCount: 0,
+    parentPendingCount: 0,
+    problems: [],
+    goal: null,
+  },
+  pickable: [],
+  problems: [],
+};
+
 describe("SessionShell — 수업 준비 탭", () => {
   const prep = {
     composition: {
@@ -426,5 +449,43 @@ describe("SessionShell — 수업 준비 탭", () => {
     expect(
       screen.getByText(/이 회차를 쓰는 아직 시작하지 않은 수업에 적용됩니다/)
     ).toBeInTheDocument();
+  });
+
+  // 2026-09-14 UAT — 예약 시각 전에 이미 시작한 수업은 '진행 중'이고, 교사는 지금 구성으로 다시 고정할 수 있다.
+  it("시작한(live) 수업은 예약 시각이 아직이어도 준비 중이 아니고, 수업 준비 탭에 '다시 고정' 버튼이 있다", () => {
+    render(
+      <SessionShell
+        {...baseProps}
+        viewerRole="teacher"
+        initialState="live"
+        startedLive
+        status="upcoming"
+        scheduledAt="2099-01-01T00:00:00.000Z"
+        durationMinutes={60}
+        sessionSource="v3"
+        prep={livePrep}
+      />
+    );
+    expect(screen.queryByText(/수업 준비 중/)).not.toBeInTheDocument();
+    fireEvent.click(screen.getByText("수업 준비"));
+    expect(screen.getByTestId("repin-live")).toHaveTextContent("시작 시점의 구성이 고정");
+    expect(screen.getByRole("button", { name: "지금 구성으로 이 수업에 다시 고정" })).toBeInTheDocument();
+  });
+
+  it("시작 전 수업의 수업 준비 탭에는 '다시 고정'이 없다", () => {
+    render(
+      <SessionShell
+        {...baseProps}
+        viewerRole="teacher"
+        initialState="prep"
+        status="upcoming"
+        scheduledAt="2099-01-01T00:00:00.000Z"
+        durationMinutes={60}
+        sessionSource="v3"
+        prep={livePrep}
+      />
+    );
+    fireEvent.click(screen.getByText("수업 준비"));
+    expect(screen.queryByTestId("repin-live")).not.toBeInTheDocument();
   });
 });

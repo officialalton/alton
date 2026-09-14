@@ -75,6 +75,8 @@ export default function ProblemsPanel({
   const [board, setBoard] = useState<Board | null>(null);
   const [attempts, setAttempts] = useState<{ workId: string; attemptNo: number; submitted: boolean }[]>([]);
   const [busy, setBusy] = useState(false);
+  /** 연습장·풀이판 여닫기만 잠근다 — 채점·답 저장과 얽히지 않는다(2026-09-14 UAT: 버튼이 잠긴 채 남았다). */
+  const [boardBusy, setBoardBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [savedChoiceId, setSavedChoiceId] = useState<string | null>(null);
   const boardRef = useRef<ProblemBoardHandle | null>(null);
@@ -132,7 +134,7 @@ export default function ProblemsPanel({
     channelRef.current?.send({ type: "broadcast", event: "changed", payload: {} });
 
   async function openBoard(problemId: string, newAttempt = false) {
-    setBusy(true);
+    setBoardBusy(true);
     setError(null);
     try {
       const next = await openProblemWork({ sessionId, studentId, problemId, newAttempt });
@@ -142,7 +144,7 @@ export default function ProblemsPanel({
     } catch (e) {
       setError(e instanceof Error ? e.message : "풀이판을 열지 못했습니다.");
     } finally {
-      setBusy(false);
+      setBoardBusy(false);
     }
   }
 
@@ -158,12 +160,12 @@ export default function ProblemsPanel({
   }, [currentProblem?.problemId, currentProblem?.format, currentProblem?.planned]);
 
   async function showAttempt(workId: string) {
-    setBusy(true);
+    setBoardBusy(true);
     try {
       const next = await loadProblemWorkBoard(workId);
       if (next) setBoard(next);
     } finally {
-      setBusy(false);
+      setBoardBusy(false);
     }
   }
 
@@ -452,7 +454,7 @@ export default function ProblemsPanel({
                   <div className="flex flex-wrap gap-2">
                     {isMc && (
                       <button
-                        disabled={busy}
+                        disabled={boardBusy}
                         onClick={() => (isOpen ? setOpenId(null) : void openBoard(p.problemId))}
                         className="text-[12.5px] font-bold px-4 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
                       >
@@ -461,7 +463,7 @@ export default function ProblemsPanel({
                     )}
                     {isMath && (
                       <button
-                        disabled={busy}
+                        disabled={boardBusy}
                         onClick={() => (isOpen ? setOpenId(null) : void openBoard(p.problemId))}
                         className="text-[12.5px] font-bold px-4 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
                       >
@@ -471,7 +473,7 @@ export default function ProblemsPanel({
                     {isMath && isOpen && isStudent && (
                       <>
                         <button
-                          disabled={busy}
+                          disabled={boardBusy}
                           onClick={() => void openBoard(p.problemId, true)}
                           className="text-[12.5px] font-bold px-4 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
                         >

@@ -21,6 +21,11 @@ export type NormalizedSession = {
   sessionNumber: number;
   viewerRole: SessionViewViewer;
   status: string; // computeSessionViewState가 받는 "upcoming"/그 외
+  /**
+   * v3 final_status 원값. 2026-09-14: 예약 시각이 아직인데 이미 '수업 시작'을 누른(live) 수업을
+   * 시간 기준 판정이 '준비 중'으로 보여 주었다 — live 면 화면도 진행 중이어야 한다.
+   */
+  finalStatus: string | null;
   scheduledAt: string | null;
   durationMinutes: number;
   curriculumDocId: string | null;
@@ -98,6 +103,7 @@ export async function loadLegacySession(
     sessionNumber: session.session_number,
     viewerRole,
     status: session.status,
+    finalStatus: null,
     scheduledAt: session.scheduled_at,
     durationMinutes: session.duration_minutes,
     curriculumDocId: session.curriculum_doc_id,
@@ -167,6 +173,7 @@ export async function loadV3Session(
     status: V3_ACTIVE_FINAL_STATUSES.has(session.final_status as string)
       ? "upcoming"
       : "completed",
+    finalStatus: (session.final_status as string | null) ?? null,
     scheduledAt: (reservation as { starts_at?: string } | null)?.starts_at ?? null,
     durationMinutes: session.scheduled_duration_minutes as number,
     // material_version_id 배정 메커니즘은 R9 범위(과목 템플릿 기반) — 아직 없으므로

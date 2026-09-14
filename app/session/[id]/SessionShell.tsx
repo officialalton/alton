@@ -75,6 +75,7 @@ export default function SessionShell({
   initialTab,
   initialState,
   status,
+  startedLive = false,
   scheduledAt,
   durationMinutes,
   backHref,
@@ -116,6 +117,8 @@ export default function SessionShell({
   initialTab?: string;
   initialState: SessionViewState;
   status: string;
+  /** v3 수업이 이미 시작(live)됐다 — 시간 기준 판정보다 우선해 '진행 중'으로 둔다(2026-09-14). */
+  startedLive?: boolean;
   scheduledAt: string | null;
   durationMinutes: number;
   backHref: string;
@@ -172,6 +175,7 @@ export default function SessionShell({
   );
 
   const [state, setState] = useState(initialState);
+  const [repin, setRepin] = useState<"idle" | "running" | { error: string }>("idle");
   const [tipsVisible, setTipsVisible] = useState(true);
   const [homeworkList, setHomeworkList] = useState(homeworkItems);
   const [showEndLessonConfirm, setShowEndLessonConfirm] = useState(false);
@@ -189,12 +193,12 @@ export default function SessionShell({
   // 상태(prep/live/completed)를 주기적으로 재계산 — 시작/종료 시각이 지나면
   // 새로고침 없이도 상태바가 자동으로 전환되게 한다.
   useEffect(() => {
-    if (status !== "upcoming") return;
+    if (status !== "upcoming" || startedLive) return;
     const timer = setInterval(() => {
       setState(computeSessionViewState(status, scheduledAt, durationMinutes));
     }, 30_000);
     return () => clearInterval(timer);
-  }, [status, scheduledAt, durationMinutes]);
+  }, [status, scheduledAt, durationMinutes, startedLive]);
 
   function selectTab(tabId: TabId) {
     setActiveTab(tabId);
@@ -518,6 +522,32 @@ export default function SessionShell({
         />
       ) : activeTab === "prep" ? (
         prep ? (
+          <>
+            {startedLive && (viewerRole === "teacher" || viewerRole === "admin") && (
+              // 2026-09-14 UAT — 시작한 수업은 시작 시점 구성이 고정돼 있다(정책). 진행 중이면 선생님이
+              // 명시적으로 지금 구성으로 다시 고정할 수 있다. 자동으로는 바뀌지 않는다.
+              <div className="mx-8 mt-6 border-[1.5px] border-grey-200 rounded-xl px-4 py-3 flex flex-wrap items-center gap-3" data-testid="repin-live">
+                <p className="text-[12.5px] text-ink flex-1 min-w-[240px]">
+                  이 수업은 <b>시작 시점의 구성이 고정</b>돼 있습니다. 아래에서 바꾼 교재·문제를 이 수업에도 쓰려면 지금 구성으로 다시 고정하세요.
+                  학생이 이미 사용한 항목·필기·답안은 남습니다.
+                </p>
+                <button
+                  type="button"
+                  disabled={repin === "running"}
+                  onClick={async () => {
+                    setRepin("running");
+                    const { repinLiveLesson } = await import("@/app/lesson-prep/actions");
+                    const r = await repinLiveLesson(sessionId);
+                    if (r.ok) window.location.reload();
+                    else setRepin({ error: r.error });
+                  }}
+                  className="text-[12.5px] font-bold px-4 py-2 rounded-lg bg-ink text-white disabled:opacity-50"
+                >
+                  {repin === "running" ? "다시 고정하는 중…" : "지금 구성으로 이 수업에 다시 고정"}
+                </button>
+                {typeof repin === "object" && <p className="text-[12px] text-red w-full">{repin.error}</p>}
+              </div>
+            )}
           <CompositionPanel
             composition={prep.composition}
             pickable={prep.pickable}
@@ -534,6 +564,7 @@ export default function SessionShell({
                 : "이 수업은 시작 당시의 교재·문제 구성을 사용합니다. 여기서 수정하는 회차 구성은 이 수업의 콘텐츠와 필기·답안·피드백을 바꾸지 않으며, 이 회차를 쓰는 아직 시작하지 않은 수업에 적용됩니다."
             }
           />
+          </>
         ) : null
       ) : null}
     </div>

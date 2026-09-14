@@ -57,11 +57,12 @@ export default async function SessionPage({
   );
   if (!session) notFound();
 
-  const initialState = computeSessionViewState(
-    session.status,
-    session.scheduledAt,
-    session.durationMinutes
-  );
+  // 2026-09-14: 이미 시작한(live) 수업은 예약 시각이 아직이어도 '진행 중'이다. 시작이 곧 고정이라,
+  // 준비 중으로 보이면 "수업 준비에서 바꿨는데 반영이 안 된다"가 된다.
+  const startedLive = session.source === "v3" && session.finalStatus === "live";
+  const initialState = startedLive
+    ? "live"
+    : computeSessionViewState(session.status, session.scheduledAt, session.durationMinutes);
 
   // P2/P3 5단계 — v3 수업은 "준비해서 고정한 교재"를 먼저 보여준다. 고정된
   // 교재가 없는 수업(준비 없이 시작했거나 레거시)만 기존 경로로 내려간다.
@@ -173,6 +174,7 @@ export default async function SessionPage({
       viewerRole={session.viewerRole}
       initialTab={tab}
       initialState={initialState}
+      startedLive={startedLive}
       status={session.status}
       scheduledAt={session.scheduledAt}
       durationMinutes={session.durationMinutes}

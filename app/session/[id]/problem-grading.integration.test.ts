@@ -293,3 +293,54 @@ describe("PDF 페이지 필기 — 전체 지우기(clear_all)와 텍스트 조�
     expect(err).toContain("텍스트 필기에 글이 없습니다");
   });
 });
+
+// ------------------------------------------------------------ 진행 중 수업 다시 고정 (2026-09-14)
+describe("repin_live_session_content — 진행 중 수업을 지금 구성으로 다시 고정", () => {
+  function publishedPdfDoc(): string {
+    const docId = asUser(
+      ADMIN_ID,
+      `insert into curriculum_docs (title, subject_id, owner_type, status, kind, source_drive_file_id, source_mime_type)
+       values ('재고정 PDF ${Math.random()}', '${SUBJECT_ID}', 'admin', 'draft', 'pdf', 'drive_${Math.random()}', 'application/pdf') returning id;`
+    );
+    const asset = JSON.stringify({ bucket: "curriculum-assets", path: "x/y.pdf", bytes: 1, sha256: "a".repeat(64), mimeType: "application/pdf", pageCount: 1 });
+    asUser(ADMIN_ID, `select publish_curriculum_asset_doc('${docId}', '${asset}'::jsonb);`);
+    return docId;
+  }
+  const manifest = (sessionId: string) =>
+    psql(`select string_agg(content_type || ':' || content_id, ',' order by display_position) from session_content_manifest where session_id = '${sessionId}';`);
+
+  it("시작 뒤 구성에서 뺀 교재는 사라지고 새로 담은 교재가 들어온다. 사용 기록이 있는 항목은 남는다", () => {
+    const { sessionId, mcId, essayId } = startedSession();
+    const unit = psql(`select overlay_unit_id from session_curriculum_units where session_id = '${sessionId}' and role = 'primary';`);
+    expect(manifest(sessionId)).toBe(`problem:${mcId},problem:${essayId}`);
+
+    // 수업 중: 준비안에서 서술형을 빼고, 교재를 하나 담는다.
+    asUser(TEACHER_ID, `delete from curriculum_unit_prep_items where content_type = 'problem' and content_id = '${essayId}';`);
+    const docId = publishedPdfDoc();
+    asUser(TEACHER_ID, `insert into curriculum_overlay_unit_materials (overlay_unit_id, curriculum_doc_id, position, source, created_by) values ('${unit}', '${docId}', 1, 'manual', '${TEACHER_ID}');`);
+    // 매니페스트는 아직 시작 시점 그대로다(정책).
+    expect(manifest(sessionId)).toBe(`problem:${mcId},problem:${essayId}`);
+
+    // 학생·다른 사람은 못 한다.
+    expect(fails(() => psql(`select repin_live_session_content('${sessionId}', '${STUDENT_ID}');`))).toContain("담당 선생님만");
+
+    expect(psql(`select repin_live_session_content('${sessionId}', '${TEACHER_ID}');`)).toBe("2");
+    expect(manifest(sessionId)).toBe(`material_doc:${docId},problem:${mcId}`);
+    // 교재 고정 버전이 채워졌다(fill 트리거).
+    expect(psql(`select count(*) from session_content_manifest where session_id = '${sessionId}' and content_type = 'material_doc' and curriculum_doc_version_id is not null;`)).toBe("1");
+  });
+
+  it("학생이 이미 사용한 항목은 구성에서 빠져도 지우지 않고 뒤로 보낸다", () => {
+    const { sessionId, mcId, essayId } = startedSession();
+    psql(`insert into session_content_use_events (session_id, content_type, content_id, recorded_by) values ('${sessionId}', 'problem', '${essayId}', '${STUDENT_ID}');`);
+    asUser(TEACHER_ID, `delete from curriculum_unit_prep_items where content_type = 'problem' and content_id = '${essayId}';`);
+    expect(psql(`select repin_live_session_content('${sessionId}', '${TEACHER_ID}');`)).toBe("2");
+    expect(manifest(sessionId)).toBe(`problem:${mcId},problem:${essayId}`);
+  });
+
+  it("진행 중이 아닌 수업·빈 구성은 거절한다", () => {
+    const { sessionId } = startedSession();
+    psql(`update sessions set final_status = 'completed' where id = '${sessionId}';`);
+    expect(fails(() => psql(`select repin_live_session_content('${sessionId}', '${TEACHER_ID}');`))).toContain("진행 중인 수업만");
+  });
+});

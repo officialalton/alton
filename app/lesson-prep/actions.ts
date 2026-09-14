@@ -626,6 +626,20 @@ export async function linkLesson(unitId: string, sessionId: string): Promise<Pre
  * 화면 진입·저장·예약 연결은 아무것도 고정하지 않는다. 쓸 수 없는 항목이 있으면
  * 서버가 사유를 붙여 거절하고, 매니페스트는 한 줄도 쓰이지 않는다.
  */
+/**
+ * 2026-09-14 — 진행 중(live) 수업을 회차의 지금 구성으로 다시 고정한다. 시작 고정은 정책이지만,
+ * 선생님이 수업 중 구성을 고치고 명시적으로 누를 때만 이 수업에 반영된다. 서버가 상태·권한·
+ * 항목 사용 가능 여부를 검사하고, 하나라도 못 쓰면 매니페스트를 바꾸지 않는다.
+ */
+export async function repinLiveLesson(sessionId: string): Promise<PrepResult> {
+  const { supabase } = await gate("student");
+  if (!supabase) return { ok: false, error: "선생님·관리자만 다시 고정할 수 있습니다." };
+  const { repinMyLiveLesson } = await import("@/app/teacher/lesson-schedule-actions");
+  const result = await repinMyLiveLesson(sessionId);
+  if (!result.ok) return { ok: false, error: result.error };
+  return { ok: true };
+}
+
 export async function startLesson(sessionId: string): Promise<PrepResult> {
   const { supabase } = await gate("student");
   if (!supabase) return { ok: false, error: "선생님·관리자만 수업을 시작할 수 있습니다." };

@@ -417,7 +417,7 @@ export default forwardRef<
             }
           }}
           placeholder="입력 후 Enter (줄바꿈은 Shift+Enter)"
-          className="absolute bg-white/85 border border-ink/40 rounded px-1 py-0.5 outline-none resize-none font-semibold text-ink shadow-sm"
+          className="absolute bg-white/90 border-2 border-red rounded px-1.5 py-1 outline-none resize-none font-semibold text-ink shadow-md"
           style={{
             zIndex: 9,
             left: `${(textDraft.x / width) * 100}%`,
@@ -466,6 +466,11 @@ export default forwardRef<
               </>
             )}
           </>
+        )}
+        {myScope && drawMode && tool === "text" && !textDraft && (
+          <span className="text-[11px] font-semibold text-ink bg-yellow-50 border border-yellow-200 rounded px-1.5 py-0.5" data-testid="pdf-text-hint">
+            페이지에서 글을 놓을 자리를 클릭하세요
+          </span>
         )}
         <label className="text-[11px] text-grey-500 flex items-center gap-1">
           <input type="checkbox" checked={showTeacher} onChange={(e) => setShowTeacher(e.target.checked)} /> 선생님
