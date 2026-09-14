@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { MaterialAsset } from "./material-data";
 import type { MaterialLayerRole } from "./MaterialAnnotationLayers";
 import { getAssetVersionUrlAction } from "@/app/materials/asset-actions";
-import { nextPosition, pageCountOf, prevPosition, tableOfContents, type AssetPosition } from "./asset-navigation";
+import { nextPosition, pageCountOf, prevPosition, type AssetPosition } from "./asset-navigation";
 import PdfPageCanvas from "./PdfMaterialViewer";
 import VideoMaterialPlayer from "./VideoMaterialPlayer";
 import PdfPageAnnotationLayer, { type PdfPageAnnotationHandle } from "./PdfPageAnnotationLayer";
@@ -17,6 +17,14 @@ import PdfPageAnnotationLayer, { type PdfPageAnnotationHandle } from "./PdfPageA
 //         잠깐 막는다** — 저장 실패면 미저장 상태와 다시 시도를 보여주고 이동하지 않는다.
 //
 // 자료 주소는 공개 버전(versionId)으로 받는 짧은 서명 URL 이다. 자료마다 한 번 받아 둔다.
+//
+// 2026-09-14 UAT: 탭을 오갈 때마다 PDF 를 다시 받았다(컴포넌트가 내려가며 URL·위치를 잃음).
+// 서명 URL 과 보던 위치는 모듈 수준에 두어 다시 마운트돼도 그대로 쓴다 — URL 이 같으면
+// pdf.js 문서 캐시(PdfMaterialViewer)도 그대로 맞는다. 99쪽짜리 목차 대신 자료 목록 + 페이지
+// 번호 입력으로 이동한다.
+
+const signedUrlCache = new Map<string, { url: string; mimeType: string; expiresAt: number }>();
+const positionMemory = new Map<string, AssetPosition>();
 
 export default function AssetMaterialViewer({
   assets,
@@ -34,15 +42,34 @@ export default function AssetMaterialViewer({
   viewerUserId?: string;
   initialPosition?: AssetPosition;
 }) {
-  const [pos, setPos] = useState<AssetPosition>(initialPosition ?? { assetIndex: 0, page: 1 });
+  const memoryKey = `${sessionId ?? "library"}:${assets.map((a) => a.versionId).join(",")}`;
+  const [pos, setPosState] = useState<AssetPosition>(
+    initialPosition ?? positionMemory.get(memoryKey) ?? { assetIndex: 0, page: 1 }
+  );
+  const setPos = useCallback(
+    (next: AssetPosition) => {
+      positionMemory.set(memoryKey, next);
+      setPosState(next);
+    },
+    [memoryKey]
+  );
   const [zoom, setZoom] = useState(1);
-  const [urls, setUrls] = useState<Record<string, { url: string; mimeType: string }>>({});
+  const [urls, setUrls] = useState<Record<string, { url: string; mimeType: string }>>(() => {
+    const now = Date.now();
+    const initial: Record<string, { url: string; mimeType: string }> = {};
+    for (const a of assets) {
+      const hit = signedUrlCache.get(a.versionId);
+      if (hit && hit.expiresAt > now) initial[a.versionId] = { url: hit.url, mimeType: hit.mimeType };
+    }
+    return initial;
+  });
   const [urlError, setUrlError] = useState<string | null>(null);
   const [renderError, setRenderError] = useState<string | null>(null);
   const [rendered, setRendered] = useState<{ width: number; height: number }>({ width: 0, height: 0 });
   const [fitWidth, setFitWidth] = useState(0);
   const [navError, setNavError] = useState<string | null>(null);
   const [saveState, setSaveState] = useState<"idle" | "saving" | "saved" | "error">("idle");
+  const [pageInput, setPageInput] = useState("");
   const layerRef = useRef<PdfPageAnnotationHandle | null>(null);
   const frameRef = useRef<HTMLDivElement | null>(null);
 
@@ -56,6 +83,12 @@ export default function AssetMaterialViewer({
       const result = await getAssetVersionUrlAction(asset.versionId);
       if (cancelled) return;
       if (result.ok) {
+        // 만료 1분 전까지만 재사용한다.
+        signedUrlCache.set(asset.versionId, {
+          url: result.url,
+          mimeType: result.mimeType,
+          expiresAt: Date.now() + Math.max(0, result.expiresInSeconds - 60) * 1000,
+        });
         setUrls((prev) => ({ ...prev, [asset.versionId]: { url: result.url, mimeType: result.mimeType } }));
         setUrlError(null);
       } else {
@@ -106,7 +139,6 @@ export default function AssetMaterialViewer({
 
   if (!asset) return null;
 
-  const toc = tableOfContents(assets);
   const signed = urls[asset.versionId];
   const total = pageCountOf(asset);
   const docId = curriculumDocIdOf ? curriculumDocIdOf(asset) : asset.docId;
@@ -118,20 +150,24 @@ export default function AssetMaterialViewer({
         <div className="hidden md:block text-[10.5px] font-extrabold text-grey-300 uppercase tracking-wider px-2 mb-1">
           자료 목차
         </div>
-        {toc.map((entry, i) => {
-          const active =
-            entry.position.assetIndex === pos.assetIndex && (entry.isPage ? entry.position.page === pos.page : false);
+        {assets.map((a, i) => {
+          const active = i === pos.assetIndex;
           return (
             <button
-              key={i}
-              onClick={() => void guardedGo(entry.position)}
+              key={a.versionId}
+              onClick={() => void guardedGo({ assetIndex: i, page: 1 })}
               className={
-                "md:w-full text-left px-2.5 py-1.5 rounded-lg text-[13px] mb-0.5 whitespace-nowrap md:whitespace-normal flex-shrink-0 " +
-                (entry.isPage ? "md:pl-6 " : "font-bold ") +
-                (active ? "bg-red-bg text-red font-bold" : entry.isPage ? "text-grey-500 hover:bg-grey-100" : "text-ink")
+                "md:w-full text-left px-2.5 py-2 rounded-lg text-[13px] mb-0.5 whitespace-nowrap md:whitespace-normal flex-shrink-0 " +
+                (active ? "bg-red-bg text-red font-bold" : "text-ink hover:bg-grey-100")
               }
             >
-              {entry.isPage ? entry.label : `${assets[entry.position.assetIndex].kind === "video" ? "▶ " : "📄 "}${entry.label}`}
+              {a.kind === "video" ? "▶ " : "📄 "}
+              {a.title}
+              {a.kind === "pdf" && (
+                <span className="text-[11px] text-grey-500 ml-1.5">
+                  {active ? `${pos.page}/${pageCountOf(a)}쪽` : `${pageCountOf(a)}쪽`}
+                </span>
+              )}
             </button>
           );
         })}
@@ -139,9 +175,29 @@ export default function AssetMaterialViewer({
 
       <div className="px-3 sm:px-8 py-6">
         <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-          <div className="text-[13px] font-bold text-ink">
+          <div className="text-[13px] font-bold text-ink flex items-center gap-2">
             {asset.title}
-            {asset.kind === "pdf" && <span className="text-grey-500 font-semibold ml-2">{pos.page} / {total}쪽</span>}
+            {asset.kind === "pdf" && (
+              <form
+                className="flex items-center gap-1 text-grey-500 font-semibold"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const n = Number(pageInput);
+                  if (Number.isInteger(n) && n >= 1 && n <= total) void guardedGo({ assetIndex: pos.assetIndex, page: n });
+                  setPageInput("");
+                }}
+              >
+                <input
+                  aria-label="페이지 번호"
+                  value={pageInput}
+                  onChange={(e) => setPageInput(e.target.value)}
+                  placeholder={String(pos.page)}
+                  inputMode="numeric"
+                  className="w-12 text-center text-[12px] border-[1.5px] border-grey-200 rounded px-1 py-0.5"
+                />
+                <span>/ {total}쪽</span>
+              </form>
+            )}
             {asset.kind === "video" && <span className="text-grey-500 font-semibold ml-2">영상</span>}
           </div>
           <div className="flex items-center gap-1.5">

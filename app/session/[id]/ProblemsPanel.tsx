@@ -45,6 +45,18 @@ export default function ProblemsPanel({
   const isStudent = viewerRole === "student";
   const isTeacher = viewerRole === "teacher";
   const canDraw = isStudent || isTeacher;
+  // 2026-09-14 UAT — 교사·관리자의 정답·해설은 기본 **접힘**. 화면을 학생과 함께 보며 풀 때
+  // 답이 먼저 보이면 안 된다. 문제마다 펼친다. 학생은 서버가 정한 대로(제출 뒤에만 옴).
+  const isTeacherLike = viewerRole === "teacher" || viewerRole === "admin";
+  const [revealed, setRevealed] = useState<Set<string>>(new Set());
+  const toggleReveal = (id: string) =>
+    setRevealed((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  const answerShown = (p: SessionProblem) => !isTeacherLike || revealed.has(p.problemId);
 
   async function openBoard(problemId: string, newAttempt = false) {
     setBusy(true);
@@ -87,7 +99,33 @@ export default function ProblemsPanel({
   }
 
   return (
-    <div className="max-w-[760px] mx-auto px-5 sm:px-8 py-7">
+    <div className="md:grid md:grid-cols-[200px_1fr]">
+      <nav
+        aria-label="문제 목차"
+        className="border-b md:border-b-0 md:border-r border-grey-200 p-4 md:sticky md:top-0 md:self-start md:h-[calc(100vh-56px)] md:overflow-y-auto flex md:block gap-1.5 overflow-x-auto"
+      >
+        <div className="hidden md:block text-[10.5px] font-extrabold text-grey-300 uppercase tracking-wider px-2 mb-1">
+          문제 목차
+        </div>
+        {problems.map((p) => (
+          <button
+            key={p.problemId}
+            onClick={() =>
+              document.getElementById(`problem-${p.problemId}`)?.scrollIntoView({ behavior: "smooth", block: "start" })
+            }
+            className={
+              "md:w-full text-left px-2.5 py-1.5 rounded-lg text-[13px] mb-0.5 whitespace-nowrap md:whitespace-normal flex-shrink-0 flex items-center gap-2 " +
+              (openId === p.problemId ? "bg-red-bg text-red font-bold" : "text-ink hover:bg-grey-100")
+            }
+          >
+            <span>문제 {p.number}</span>
+            {p.solved && <span className="text-[10.5px] font-bold text-green">제출</span>}
+            {!p.solved && p.attempts > 0 && <span className="text-[10.5px] font-bold text-grey-500">푸는 중</span>}
+          </button>
+        ))}
+      </nav>
+
+    <div className="max-w-[760px] mx-auto px-5 sm:px-8 py-7 md:col-start-2">
       {error && <p className="text-[12.5px] text-red mb-3">{error}</p>}
 
       {problems.map((p) => {
@@ -96,7 +134,8 @@ export default function ProblemsPanel({
         return (
           <article
             key={p.problemId}
-            className="border-[1.5px] border-grey-200 rounded-2xl px-5 sm:px-7 py-6 mb-5"
+            id={`problem-${p.problemId}`}
+            className="border-[1.5px] border-grey-200 rounded-2xl px-5 sm:px-7 py-6 mb-5 scroll-mt-[72px]"
           >
             <header className="flex flex-wrap items-center gap-2 mb-4">
               <span className="text-[14px] font-extrabold text-ink">문제 {p.number}</span>
@@ -144,7 +183,7 @@ export default function ProblemsPanel({
                       aria-pressed={pickedChoice === i}
                       className={
                         "w-full text-left text-[14.5px] leading-[1.75] py-2 px-3.5 rounded-lg mb-1.5 border-[1.5px] " +
-                        (p.correctIndex === i
+                        (answerShown(p) && p.correctIndex === i
                           ? "bg-green/10 font-bold text-ink border-green/30"
                           : pickedChoice === i
                             ? "border-ink text-ink"
@@ -153,7 +192,7 @@ export default function ProblemsPanel({
                     >
                       <span className="text-grey-500 mr-2">{i + 1}</span>
                       <LearningText text={opt} className="learning-body inline" />
-                      {p.correctIndex === i && (
+                      {answerShown(p) && p.correctIndex === i && (
                         <span className="ml-2 text-[11px] font-bold text-green">정답</span>
                       )}
                       {pickedChoice === i && board?.submitted && (
@@ -165,7 +204,18 @@ export default function ProblemsPanel({
               </ol>
             )}
 
-            {p.explanation && (
+            {isTeacherLike && !p.planned && p.correctIndex !== null && (
+              <button
+                type="button"
+                onClick={() => toggleReveal(p.problemId)}
+                aria-pressed={revealed.has(p.problemId)}
+                className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink mb-4"
+              >
+                {revealed.has(p.problemId) ? "정답·해설 숨기기" : "정답·해설 보기"}
+              </button>
+            )}
+
+            {answerShown(p) && p.explanation && (
               <div className="bg-grey-100 rounded-xl px-4 py-3 mb-4">
                 <div className="text-[10.5px] font-bold text-grey-300 uppercase tracking-wide mb-1">
                   해설
@@ -304,6 +354,7 @@ export default function ProblemsPanel({
           </article>
         );
       })}
+    </div>
     </div>
   );
 }

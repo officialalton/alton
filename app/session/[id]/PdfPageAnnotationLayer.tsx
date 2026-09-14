@@ -330,11 +330,12 @@ export default forwardRef<
           <>
             <button
               type="button"
+              disabled={!loaded}
               onClick={() => setDrawMode((v) => !v)}
               aria-pressed={drawMode}
-              className={"text-[11.5px] font-bold px-2 py-1 rounded " + (drawMode ? "bg-ink text-white" : "text-ink")}
+              className={"text-[11.5px] font-bold px-2 py-1 rounded disabled:opacity-60 " + (drawMode ? "bg-ink text-white" : "text-ink")}
             >
-              {drawMode ? "필기 끄기" : "필기"}
+              {!loaded ? "필기 준비 중…" : drawMode ? "필기 끄기" : "필기"}
             </button>
             {drawMode && (
               <>

@@ -96,7 +96,8 @@ describe("ProblemsPanel — 문제를 보면서 풀이판을 연다", () => {
 
   it("문제 번호·난이도·풀이 상태를 사람이 읽는 말로 보여준다", () => {
     renderPanel([unsolved]);
-    expect(screen.getByText("문제 1")).toBeInTheDocument();
+    // 왼콽 목차에도 같은 번호가 있다 — 본문 머리말을 본다.
+    expect(screen.getByText("문제 1", { selector: "article header span" })).toBeInTheDocument();
     expect(screen.getByText("어려움")).toBeInTheDocument();
     expect(screen.getByText("아직 풀지 않음")).toBeInTheDocument();
   });
@@ -290,5 +291,46 @@ describe("수업 전 예정 문제 미리보기", () => {
     expect(screen.queryByText("정답")).not.toBeInTheDocument();
     expect(screen.queryByText(/풀이를 제출하면/)).not.toBeInTheDocument();
     expect(openProblemWork).not.toHaveBeenCalled();
+  });
+});
+
+
+// 2026-09-14 UAT — 교사·관리자의 정답·해설은 문제마다 접었다 펼친다. 왼쪽 목차로 문제를 오간다.
+describe("교사 화면의 정답·해설 토글과 문제 목차", () => {
+  it("교사는 기본으로 정답·해설이 접혀 있고, 문제마다 펼칠 수 있다", () => {
+    renderPanel(
+      [
+        { ...unsolved, correctIndex: 1, explanation: "해설 A" },
+        { ...unsolved, problemId: "p2", number: 2, correctIndex: 0, explanation: "해설 B" },
+      ],
+      "teacher"
+    );
+    expect(screen.queryByText("정답")).not.toBeInTheDocument();
+    expect(screen.queryByText("해설 A")).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getAllByRole("button", { name: "정답·해설 보기" })[0]);
+    expect(screen.getByText("정답")).toBeInTheDocument();
+    expect(screen.getByText("해설 A")).toBeInTheDocument();
+    expect(screen.queryByText("해설 B")).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "정답·해설 숨기기" }));
+    expect(screen.queryByText("해설 A")).not.toBeInTheDocument();
+  });
+
+  it("학생은 토글이 없고 제출 뒤 서버가 준 정답을 그대로 본다", () => {
+    renderPanel([{ ...unsolved, solved: true, attempts: 1, correctIndex: 1, explanation: "이래서" }]);
+    expect(screen.queryByRole("button", { name: /정답·해설/ })).not.toBeInTheDocument();
+    expect(screen.getByText("정답")).toBeInTheDocument();
+  });
+
+  it("왼쪽 목차에 문제 번호와 제출 상태가 붙는다", () => {
+    renderPanel(
+      [unsolved, { ...unsolved, problemId: "p2", number: 2, solved: true, attempts: 1 }],
+      "teacher"
+    );
+    const nav = screen.getByRole("navigation", { name: "문제 목차" });
+    expect(nav).toHaveTextContent("문제 1");
+    expect(nav).toHaveTextContent("문제 2");
+    expect(nav).toHaveTextContent("제출");
   });
 });
