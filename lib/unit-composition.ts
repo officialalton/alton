@@ -340,8 +340,7 @@ export async function loadComposition(
     { data: linkRows },
     { data: materialRows },
     { data: subjectKeywordRows },
-    { count: driftCount },
-    { count: parentPending },
+    { data: countsRow },
     problems,
   ] =
     await Promise.all([
@@ -363,25 +362,10 @@ export async function loadComposition(
               .order("label", { ascending: true })
           : { data: [] as { id: string; label: string }[] }
       ),
-      // 담을 때의 버전과 지금 공개된 버전이 다른 항목. 준비안이 옛 버전을 '유지하고
-      // 있다'는 사실이지, 바뀌었다는 뜻이 아니다.
-      timed("drift", timing, () =>
-        supabase
-          .from("unit_composition_drift")
-          .select("*", { count: "exact", head: true })
-          .eq("layer", layer)
-          .eq("unit_id", unitId)
-      ),
-      // 상위와 어긋난 것이 있는지 — 아직 받지 않은 것과, 내려온 뒤 상위에서 없어진 것.
-      // 기준본 층은 위가 없다. 학생 층의 상위는 교사 회차(없으면 기준본)다(20261347000000).
-      timed("parentPending", timing, async () =>
-        layer !== "catalog"
-          ? await supabase
-              .from("unit_parent_pending_updates")
-              .select("*", { count: "exact", head: true })
-              .eq("layer", layer)
-              .eq("unit_id", unitId)
-          : { count: 0 as number | null }
+      // 버전이 낡은 항목 수 + 상위와 어긋난 항목 수 — 회차 하나짜리 함수 한 번(20261354000000).
+      // 두 뷰를 직접 세면 원격에서 RLS 가 행마다 붙어 10~17초가 걸렸다.
+      timed("counts", timing, () =>
+        supabase.rpc("unit_composition_counts", { p_layer: layer, p_unit_id: unitId }).maybeSingle()
       ),
       timed("problems", timing, () => loadUnitProblems(supabase, layer, unitId)),
     ]);
@@ -426,8 +410,8 @@ export async function loadComposition(
     goal: scope.goal,
     composed: scope.composed,
     hasUnappliedChanges: scope.dirty,
-    outdatedVersionCount: driftCount ?? 0,
-    parentPendingCount: parentPending ?? 0,
+    outdatedVersionCount: Number((countsRow as { drift_count?: number } | null)?.drift_count ?? 0),
+    parentPendingCount: Number((countsRow as { parent_pending_count?: number } | null)?.parent_pending_count ?? 0),
     problems,
   };
 }

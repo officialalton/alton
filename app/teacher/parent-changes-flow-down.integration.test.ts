@@ -11,6 +11,7 @@ import { afterEach, describe, expect, it } from "vitest";
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
 
 const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001";
+const OTHER_TEACHER_ID = "dddddddd-0000-0000-0000-000000000002";
 const STUDENT_ID = "cccccccc-0000-0000-0000-000000000001";
 const HOUSEHOLD_ID = "aabbccdd-0000-0000-0000-000000000001";
 const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001";
@@ -619,5 +620,35 @@ describe("상속은 보관된 교재를 건너뛴다", () => {
 
     const su = makeStudentUnit(tu);
     expect(studentMaterials(su)).toBe(cat.docs[0]);
+  });
+});
+
+// 2026-09-14 성능 — '업데이트 있음' 계산을 회차 하나짜리 정의자 함수로.
+describe("unit_composition_counts", () => {
+  it("담당 선생님은 자기 학생 회차의 어긋난 항목 수를 받고, 남은 0/0 을 받는다", () => {
+    const cat = makeCatalogUnit();
+    const tu = makeTeacherUnit(cat.unitId);
+    const su = makeStudentUnit(tu);
+    // 교사 기본 구성에서 교재 하나를 빼면 학생 회차에 '빠질 것' 1개
+    asUser(TEACHER_ID, `delete from teacher_curriculum_template_unit_materials where unit_id = '${tu}' and curriculum_doc_id = '${cat.docs[0]}';`);
+
+    expect(
+      asUser(TEACHER_ID, `select drift_count || '/' || parent_pending_count from unit_composition_counts('student', '${su}');`)
+    ).toBe("0/1");
+    expect(
+      asUser(OTHER_TEACHER_ID, `select drift_count || '/' || parent_pending_count from unit_composition_counts('student', '${su}');`)
+    ).toBe("0/0");
+    // 뷰를 직접 센 값과 같다(관리자 권한으로 대조).
+    expect(
+      asUser("aaaaaaaa-0000-0000-0000-000000000001", `select count(*) from unit_parent_pending_updates where layer = 'student' and unit_id = '${su}';`)
+    ).toBe("1");
+  });
+
+  it("교사 층은 템플릿 주인만, 기준본 층은 선생님이면 읽는다", () => {
+    const cat = makeCatalogUnit();
+    const tu = makeTeacherUnit(cat.unitId);
+    expect(asUser(TEACHER_ID, `select parent_pending_count from unit_composition_counts('teacher', '${tu}');`)).toBe("0");
+    expect(asUser(OTHER_TEACHER_ID, `select drift_count || '/' || parent_pending_count from unit_composition_counts('teacher', '${tu}');`)).toBe("0/0");
+    expect(asUser(TEACHER_ID, `select drift_count || '/' || parent_pending_count from unit_composition_counts('catalog', '${cat.unitId}');`)).toBe("0/0");
   });
 });
