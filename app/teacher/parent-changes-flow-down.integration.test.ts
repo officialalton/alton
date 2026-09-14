@@ -607,3 +607,17 @@ describe("매칭 시딩 — 교사 템플릿이 비어 있으면 기준본에서
     ).toBe("t");
   });
 });
+
+// 2026-09-14 Preview 재현 — 기준본에 보관 교재가 담겨 있으면 학생 회차 생성이 통째로 실패했다.
+describe("상속은 보관된 교재를 건너뛴다", () => {
+  it("보관 교재가 담긴 기준본에서도 학생 회차·교사 회차가 만들어지고, 보관 교재만 빠진다", () => {
+    const cat = makeCatalogUnit();
+    psql(`update curriculum_docs set archived_at = now(), archived_reason = '검증' where id = '${cat.docs[1]}';`);
+
+    const tu = makeTeacherUnit(cat.unitId);
+    expect(teacherMaterials(tu)).toBe(cat.docs[0]);
+
+    const su = makeStudentUnit(tu);
+    expect(studentMaterials(su)).toBe(cat.docs[0]);
+  });
+});
