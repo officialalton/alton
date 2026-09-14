@@ -119,8 +119,8 @@ describe("수업 준비 구성 패널", () => {
       <CompositionPanel
         composition={makeComposition()}
         pickable={[
-          { curriculumDocId: "d1", title: "자동 교재", primaryKeywordLabel: "Speaking", picked: true },
-          { curriculumDocId: "d9", title: "새 교재", primaryKeywordLabel: null, picked: false },
+          { curriculumDocId: "d1", title: "자동 교재", primaryKeywordLabel: "Speaking", kind: "html", picked: true },
+          { curriculumDocId: "d9", title: "새 교재", primaryKeywordLabel: null, kind: "pdf", picked: false },
         ]}
         problems={[]}
       />

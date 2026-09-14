@@ -66,6 +66,7 @@ const existingDocListItem: CurriculumDocListItem = {
   status: "draft",
   sectionCount: 0,
   hasPrimaryKeyword: false,
+  primaryKeywordLabel: null,
   kind: "html" as const,
   sourceDriveName: null,
   hasDriveSource: false,

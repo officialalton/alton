@@ -262,6 +262,8 @@ export type CurriculumDocListItem = {
   sectionCount: number;
   // P2 2차: 대표 키워드가 아직 없는 교재를 목록에서 찾아낼 수 있어야 한다.
   hasPrimaryKeyword: boolean;
+  /** 대표 키워드 이름 — 라이브러리는 이제 단원이 아니라 키워드로 접는다(2026-09-14). */
+  primaryKeywordLabel: string | null;
   // 보관된 교재는 현재 목록에서 빠지고 '보관됨'에서만 보인다.
   archivedAt: string | null;
   archivedReason: string | null;
@@ -275,7 +277,7 @@ export async function loadCurriculumDocList(supabase: SupabaseClient): Promise<C
   const { data: docs } = await supabase
     .from("curriculum_docs")
     .select(
-      "id, title, status, subject_id, unit_id, primary_keyword_id, archived_at, archived_reason, kind, source_drive_name, source_drive_file_id, subject:subjects(name), unit:subject_template_units!curriculum_docs_unit_id_fkey(unit_title)"
+      "id, title, status, subject_id, unit_id, primary_keyword_id, archived_at, archived_reason, kind, source_drive_name, source_drive_file_id, subject:subjects(name), unit:subject_template_units!curriculum_docs_unit_id_fkey(unit_title), primary_keyword:subject_keywords!curriculum_docs_primary_keyword_id_fkey(label)"
     )
     .order("title", { ascending: true });
   if (!docs || docs.length === 0) return [];
@@ -301,6 +303,7 @@ export async function loadCurriculumDocList(supabase: SupabaseClient): Promise<C
     status: d.status,
     sectionCount: sectionCountByDoc.get(d.id) ?? 0,
     hasPrimaryKeyword: Boolean(d.primary_keyword_id),
+    primaryKeywordLabel: extractLabel((d as { primary_keyword?: unknown }).primary_keyword),
     archivedAt: (d.archived_at as string | null) ?? null,
     archivedReason: (d.archived_reason as string | null) ?? null,
     kind: ((d as { kind?: string }).kind === "pdf" || (d as { kind?: string }).kind === "video"
@@ -309,4 +312,10 @@ export async function loadCurriculumDocList(supabase: SupabaseClient): Promise<C
     sourceDriveName: ((d as { source_drive_name?: string | null }).source_drive_name as string | null) ?? null,
     hasDriveSource: Boolean((d as { source_drive_file_id?: string | null }).source_drive_file_id),
   }));
+}
+
+function extractLabel(rel: unknown): string | null {
+  const one = Array.isArray(rel) ? rel[0] : rel;
+  const label = (one as { label?: string } | null | undefined)?.label;
+  return typeof label === "string" ? label : null;
 }

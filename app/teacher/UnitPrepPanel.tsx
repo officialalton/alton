@@ -355,6 +355,11 @@ export default function UnitPrepPanel({
                         className="flex items-center justify-between text-[12.5px] py-1.5"
                       >
                         <span className="truncate max-w-[380px]">
+                          {c.kind !== "html" && (
+                            <span className="text-[10px] font-bold text-grey-500 border border-grey-200 rounded-full px-1.5 py-0.5 mr-1.5">
+                              {c.kind === "pdf" ? "PDF" : "영상"}
+                            </span>
+                          )}
                           {c.title}
                           <span className="text-[10.5px] text-grey-500 ml-1.5">
                             {c.primaryKeywordLabel ?? "대표 키워드 없음"}

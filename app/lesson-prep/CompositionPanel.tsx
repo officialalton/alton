@@ -465,7 +465,14 @@ export default function CompositionPanel({
               pickable.map((p) => (
                 <div key={p.curriculumDocId} className="flex items-center gap-3 py-1.5">
                   <div className="flex-1 min-w-0">
-                    <div className="text-[12.5px] text-ink truncate">{p.title}</div>
+                    <div className="text-[12.5px] text-ink truncate">
+                      {p.kind !== "html" && (
+                        <span className="text-[10px] font-bold text-grey-500 border border-grey-200 rounded-full px-1.5 py-0.5 mr-1.5 align-middle">
+                          {p.kind === "pdf" ? "PDF" : "영상"}
+                        </span>
+                      )}
+                      {p.title}
+                    </div>
                     {p.primaryKeywordLabel && (
                       <div className="text-[11px] text-grey-500">{p.primaryKeywordLabel}</div>
                     )}

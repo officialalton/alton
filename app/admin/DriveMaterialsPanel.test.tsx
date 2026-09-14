@@ -5,12 +5,10 @@ import * as actions from "./curriculum-asset-actions";
 import type { AdminSubject } from "./subject-data";
 
 vi.mock("./curriculum-asset-actions", () => ({
-  listKeywordDriveFilesAction: vi.fn(),
-  importDriveFileAction: vi.fn(),
-  publishAssetDocAction: vi.fn(),
+  syncSubjectDriveMaterialsAction: vi.fn(),
+  archiveNonDriveDocsAction: vi.fn(),
   registerLocalSampleAssetAction: vi.fn(),
   runCurriculumDriveFolderSyncAction: vi.fn(),
-  listSubjectKeywordsAction: vi.fn(),
 }));
 
 const subjects: AdminSubject[] = [
@@ -27,79 +25,64 @@ const subjects: AdminSubject[] = [
 
 beforeEach(() => {
   vi.clearAllMocks();
-  vi.mocked(actions.listSubjectKeywordsAction).mockResolvedValue([
-    { keywordId: "k1", label: "추론" },
-    { keywordId: "k2", label: "어휘" },
-  ]);
 });
 
-async function pickKeyword() {
-  fireEvent.change(screen.getByLabelText("과목"), { target: { value: "s1" } });
-  await waitFor(() => expect(actions.listSubjectKeywordsAction).toHaveBeenCalledWith("s1"));
-  await waitFor(() => expect((screen.getByLabelText("키워드") as HTMLSelectElement).options.length).toBe(3));
-  fireEvent.change(screen.getByLabelText("키워드"), { target: { value: "k1" } });
-}
-
 describe("Drive 자료 패널", () => {
-  it("과목을 고르면 그 과목의 키워드가 전부 후보다 — 단원은 여기서 고르지 않는다", async () => {
-    render(<DriveMaterialsPanel subjects={subjects} />);
-    await pickKeyword();
-    const options = Array.from((screen.getByLabelText("키워드") as HTMLSelectElement).options).map((o) => o.textContent);
-    expect(options).toEqual(["키워드 고르기…", "추론", "어휘"]);
-    expect(screen.queryByLabelText("단원")).not.toBeInTheDocument();
-  });
-
-  it("불러오기는 키워드 폴더의 파일을 보여주고, 등록된 것은 공개 버튼·안 된 것은 등록 버튼", async () => {
-    vi.mocked(actions.listKeywordDriveFilesAction).mockResolvedValue({
+  it("키워드를 고르는 단계가 없다 — 과목 하나로 자료 동기화를 실행한다(2026-09-14)", async () => {
+    vi.mocked(actions.syncSubjectDriveMaterialsAction).mockResolvedValue({
       state: "ok",
-      folderId: "F",
-      files: [
-        { fileId: "f1", name: "개념 설명.pdf", mimeType: "application/pdf", kind: "pdf", sizeBytes: 2048, modifiedAt: null, registeredDocId: null },
-        { fileId: "f2", name: "설명 영상.mp4", mimeType: "video/mp4", kind: "video", sizeBytes: null, modifiedAt: null, registeredDocId: "doc2" },
-        { fileId: "f3", name: "메모.txt", mimeType: "text/plain", kind: null, sizeBytes: null, modifiedAt: null, registeredDocId: null },
+      keywordFolders: 2,
+      published: 1,
+      alreadyPublished: 1,
+      failed: 1,
+      skipped: 1,
+      items: [
+        { keywordLabel: "추론", name: "개념.pdf", kind: "pdf", outcome: "published", detail: "120KB · 3쪽", docId: "d1" },
+        { keywordLabel: "추론", name: "강의.mp4", kind: "video", outcome: "already_published", detail: null, docId: "d2" },
+        { keywordLabel: "어휘", name: "메모.txt", kind: null, outcome: "skipped_unsupported", detail: "text/plain", docId: null },
+        { keywordLabel: "어휘", name: "깨진.pdf", kind: "pdf", outcome: "failed", detail: "원본을 내려받지 못해 공개하지 않았습니다", docId: "d3" },
       ],
     });
     render(<DriveMaterialsPanel subjects={subjects} />);
-    await pickKeyword();
-    fireEvent.click(screen.getByRole("button", { name: /Drive 에서 불러오기/ }));
-    await waitFor(() => expect(screen.getByText("개념 설명.pdf")).toBeInTheDocument());
-    expect(actions.listKeywordDriveFilesAction).toHaveBeenCalledWith("k1");
-    expect(screen.getAllByRole("button", { name: "자료로 등록" })).toHaveLength(1);
-    expect(screen.getAllByRole("button", { name: "공개 (고정 사본)" })).toHaveLength(1);
-    expect(screen.getByText("지원 안 함")).toBeInTheDocument();
+    expect(screen.queryByLabelText("키워드")).not.toBeInTheDocument();
+    const run = screen.getByRole("button", { name: "과목 자료 동기화 실행" });
+    expect(run).toBeDisabled();
+    fireEvent.change(screen.getByLabelText("과목"), { target: { value: "s1" } });
+    fireEvent.click(run);
+    await waitFor(() => expect(actions.syncSubjectDriveMaterialsAction).toHaveBeenCalledWith("s1"));
+    const result = await screen.findByTestId("material-sync-result");
+    expect(result).toHaveTextContent("키워드 폴더 2개 — 새로 공개 1개 · 이미 공개 1개 · 건너뜀 1개 · 실패 1개");
+    expect(result).toHaveTextContent("개념.pdf");
+    expect(result).toHaveTextContent("공개됨 · 120KB · 3쪽");
+    expect(result).toHaveTextContent("이미 공개");
+    expect(result).toHaveTextContent("지원 안 함");
+    expect(result).toHaveTextContent("실패 — 원본을 내려받지 못해");
   });
 
-  it("등록은 초안이라고 알리고, 공개 실패는 공개하지 않았다고 말한다", async () => {
-    vi.mocked(actions.listKeywordDriveFilesAction).mockResolvedValue({
-      state: "ok",
-      folderId: "F",
-      files: [
-        { fileId: "f1", name: "a.pdf", mimeType: "application/pdf", kind: "pdf", sizeBytes: null, modifiedAt: null, registeredDocId: null },
-        { fileId: "f2", name: "b.pdf", mimeType: "application/pdf", kind: "pdf", sizeBytes: null, modifiedAt: null, registeredDocId: "doc-b" },
-      ],
-    });
-    vi.mocked(actions.importDriveFileAction).mockResolvedValue({ ok: true, docId: "doc-a" });
-    vi.mocked(actions.publishAssetDocAction).mockResolvedValue({ ok: false, error: "고정 사본을 저장하지 못해 공개하지 않았습니다." });
+  it("키워드 폴더가 아직 없으면 그 사유를 보여준다", async () => {
+    vi.mocked(actions.syncSubjectDriveMaterialsAction).mockResolvedValue({ state: "no_folders", reason: "이 과목의 키워드 폴더가 아직 Drive 에 없습니다. 폴더 동기화를 먼저 실행하세요." });
     render(<DriveMaterialsPanel subjects={subjects} />);
-    await pickKeyword();
-    fireEvent.click(screen.getByRole("button", { name: /Drive 에서 불러오기/ }));
-    await waitFor(() => expect(screen.getByText("a.pdf")).toBeInTheDocument());
-
-    fireEvent.click(screen.getByRole("button", { name: "자료로 등록" }));
-    await waitFor(() => expect(screen.getByTestId("drive-notice")).toHaveTextContent("등록했습니다(초안): a.pdf"));
-    expect(actions.importDriveFileAction).toHaveBeenCalledWith("k1", "f1");
-
-    fireEvent.click(screen.getByRole("button", { name: "공개 (고정 사본)" }));
-    await waitFor(() => expect(screen.getByTestId("drive-notice")).toHaveTextContent("공개하지 않았습니다 — 고정 사본을 저장하지 못해"));
-    expect(actions.publishAssetDocAction).toHaveBeenCalledWith("doc-b");
-  });
-
-  it("폴더가 아직 없으면 그 사유를 보여준다", async () => {
-    vi.mocked(actions.listKeywordDriveFilesAction).mockResolvedValue({ state: "folder_not_linked", reason: "키워드 폴더가 아직 Drive 에 만들어지지 않았습니다. 폴더 동기화를 먼저 실행하세요." });
-    render(<DriveMaterialsPanel subjects={subjects} />);
-    await pickKeyword();
-    fireEvent.click(screen.getByRole("button", { name: /Drive 에서 불러오기/ }));
+    fireEvent.change(screen.getByLabelText("과목"), { target: { value: "s1" } });
+    fireEvent.click(screen.getByRole("button", { name: "과목 자료 동기화 실행" }));
     await waitFor(() => expect(screen.getByText(/폴더 동기화를 먼저/)).toBeInTheDocument());
+  });
+
+  it("Drive 원본 없는 교재 보관은 확인을 거쳐 보관한 제목을 보여준다", async () => {
+    window.confirm = vi.fn(() => true);
+    vi.mocked(actions.archiveNonDriveDocsAction).mockResolvedValue({ ok: true, archived: [{ id: "a", title: "옛 HTML 교재" }, { id: "b", title: "로컬 표본" }] });
+    render(<DriveMaterialsPanel subjects={subjects} />);
+    fireEvent.change(screen.getByLabelText("과목"), { target: { value: "s1" } });
+    fireEvent.click(screen.getByRole("button", { name: "Drive 원본 없는 교재 보관" }));
+    await waitFor(() => expect(actions.archiveNonDriveDocsAction).toHaveBeenCalledWith("s1"));
+    expect(await screen.findByTestId("archive-result")).toHaveTextContent("보관했습니다 (2개): 옛 HTML 교재, 로컬 표본");
+  });
+
+  it("보관 확인을 취소하면 아무것도 하지 않는다", () => {
+    window.confirm = vi.fn(() => false);
+    render(<DriveMaterialsPanel subjects={subjects} />);
+    fireEvent.change(screen.getByLabelText("과목"), { target: { value: "s1" } });
+    fireEvent.click(screen.getByRole("button", { name: "Drive 원본 없는 교재 보관" }));
+    expect(actions.archiveNonDriveDocsAction).not.toHaveBeenCalled();
   });
 
   it("폴더 동기화는 실제 쓰기가 꺼져 있으면 계획만 보여준다", async () => {

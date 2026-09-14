@@ -162,6 +162,7 @@ export default function CurriculumDocsTab({
           title: doc.title,
           subjectId: doc.subjectId,
           subjectName: doc.subjectName,
+          primaryKeywordLabel: null,
           unitId: doc.unitId,
           unitTitle: doc.unitTitle,
           status: doc.status,

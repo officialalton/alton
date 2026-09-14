@@ -428,6 +428,8 @@ export type PickableMaterial = {
   curriculumDocId: string;
   title: string;
   primaryKeywordLabel: string | null;
+  /** html 교재 / pdf·video 파일 자료 — 영상도 교재와 같은 목록에서 같은 방식으로 담는다(2026-09-14). */
+  kind: "html" | "pdf" | "video";
   /** 이미 이 회차 구성에 들어 있는가. */
   picked: boolean;
 };
@@ -448,7 +450,7 @@ export async function loadPickableMaterials(
 
   const { data: docs } = await supabase
     .from("curriculum_docs")
-    .select("id, title, primary_keyword_id")
+    .select("id, title, primary_keyword_id, kind")
     .eq("subject_id", subjectId)
     .eq("status", "published")
     .is("archived_at", null)
@@ -469,9 +471,16 @@ export async function loadPickableMaterials(
     primaryKeywordLabel: d.primary_keyword_id
       ? labelById.get(d.primary_keyword_id as string) ?? null
       : null,
+    kind: toDocKind((d as { kind?: string | null }).kind),
     picked: picked.has(d.id as string),
   }));
 }
+
+export function toDocKind(raw: string | null | undefined): "html" | "pdf" | "video" {
+  return raw === "pdf" || raw === "video" ? raw : "html";
+}
+
+export const DOC_KIND_LABEL: Record<"html" | "pdf" | "video", string> = { html: "교재", pdf: "PDF", video: "영상" };
 
 export type KeywordProblem = {
   problemId: string;

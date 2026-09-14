@@ -1,5 +1,7 @@
 "use server";
 
+import { toDocKind } from "@/lib/unit-composition";
+
 import { createClient } from "@/utils/supabase/server";
 import { createAdminClient } from "@/lib/supabase-admin";
 import type { EligibleSelectionContent } from "./session-prep-data";
@@ -355,6 +357,7 @@ export type CatalogMaterial = {
   curriculumDocId: string;
   title: string;
   primaryKeywordLabel: string | null;
+  kind: "html" | "pdf" | "video";
   /** 이미 이 회차 구성에 들어 있는가. */
   picked: boolean;
 };
@@ -567,9 +570,10 @@ export async function loadUnitMaterialCatalog(overlayUnitId: string): Promise<Ca
   const [{ data: docs }, { data: picked }] = await Promise.all([
     supabase
       .from("curriculum_docs")
-      .select("id, title, primary_keyword_id")
+      .select("id, title, primary_keyword_id, kind")
       .eq("subject_id", enrollment.subject_id)
       .eq("status", "published")
+      .is("archived_at", null)
       .order("title", { ascending: true }),
     supabase
       .from("curriculum_overlay_unit_materials")
@@ -590,6 +594,7 @@ export async function loadUnitMaterialCatalog(overlayUnitId: string): Promise<Ca
     curriculumDocId: d.id as string,
     title: d.title as string,
     primaryKeywordLabel: d.primary_keyword_id ? labelById.get(d.primary_keyword_id as string) ?? null : null,
+    kind: toDocKind((d as { kind?: string | null }).kind),
     picked: pickedIds.has(d.id as string),
   }));
 }

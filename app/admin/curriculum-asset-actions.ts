@@ -505,3 +505,147 @@ export async function listSubjectKeywordsAction(subjectId: string): Promise<Subj
     .order("label", { ascending: true });
   return (data ?? []).map((k) => ({ keywordId: k.id as string, label: k.label as string }));
 }
+
+// ---------------------------------------------------------------- 과목 전체 동기화 (2026-09-14)
+//
+// 제품 오너: "키워드를 골라 파일을 하나씩 등록·공개하는 건 불필요하다. 폴더에 들어가면 다 공개하는
+// 개념이니 과목 폴더 하위를 전부 조회해 미공개만 올려라." 그래서 한 번의 실행이
+//   과목의 모든 키워드 폴더 → 파일 목록 → (미등록이면 등록) → (미공개면 고정 사본 공개)
+// 를 한다. 이미 공개된 자료는 건드리지 않는다(원본이 바뀌어도 자동 재공개하지 않는다 — 공개
+// 버전은 고정이라는 규칙 그대로). 영상도 PDF 와 같은 길을 탄다.
+
+export type SubjectDriveSyncItem = {
+  keywordLabel: string;
+  name: string;
+  kind: "pdf" | "video" | null;
+  outcome: "published" | "already_published" | "skipped_unsupported" | "failed";
+  detail: string | null;
+  docId: string | null;
+};
+
+export type SubjectDriveSyncResult =
+  | { state: "not_configured" }
+  | { state: "no_folders"; reason: string }
+  | {
+      state: "ok";
+      keywordFolders: number;
+      items: SubjectDriveSyncItem[];
+      published: number;
+      alreadyPublished: number;
+      failed: number;
+      skipped: number;
+    };
+
+export async function syncSubjectDriveMaterialsAction(subjectId: string): Promise<SubjectDriveSyncResult> {
+  const { supabase } = await requireAdmin();
+  const config = curriculumDriveConfig();
+  if (!config) return { state: "not_configured" };
+
+  const { data: keywords } = await supabase
+    .from("subject_keywords")
+    .select("id, label")
+    .eq("subject_id", subjectId)
+    .order("label", { ascending: true });
+  const keywordRows = (keywords ?? []) as { id: string; label: string }[];
+  if (keywordRows.length === 0) return { state: "no_folders", reason: "이 과목에 키워드가 없습니다." };
+
+  const { data: folders } = await supabase
+    .from("curriculum_drive_folders")
+    .select("ref_id, drive_folder_id")
+    .eq("scope", "keyword")
+    .in("ref_id", keywordRows.map((k) => k.id))
+    .not("drive_folder_id", "is", null);
+  const folderByKeyword = new Map(
+    ((folders ?? []) as { ref_id: string; drive_folder_id: string }[]).map((f) => [f.ref_id, f.drive_folder_id])
+  );
+  if (folderByKeyword.size === 0) {
+    return { state: "no_folders", reason: "이 과목의 키워드 폴더가 아직 Drive 에 없습니다. 폴더 동기화를 먼저 실행하세요." };
+  }
+
+  const items: SubjectDriveSyncItem[] = [];
+  for (const keyword of keywordRows) {
+    if (!folderByKeyword.has(keyword.id)) continue;
+    const listed = await listKeywordDriveFilesAction(keyword.id);
+    if (listed.state !== "ok") {
+      items.push({
+        keywordLabel: keyword.label,
+        name: "(폴더)",
+        kind: null,
+        outcome: "failed",
+        detail: listed.state === "fetch_failed" || listed.state === "folder_not_linked" ? listed.reason : listed.state,
+        docId: null,
+      });
+      continue;
+    }
+    for (const f of listed.files) {
+      if (!f.kind) {
+        items.push({ keywordLabel: keyword.label, name: f.name, kind: null, outcome: "skipped_unsupported", detail: f.mimeType, docId: null });
+        continue;
+      }
+      let docId = f.registeredDocId;
+      if (!docId) {
+        const imported = await importDriveFileAction(keyword.id, f.fileId);
+        if (!imported.ok) {
+          items.push({ keywordLabel: keyword.label, name: f.name, kind: f.kind, outcome: "failed", detail: imported.error, docId: null });
+          continue;
+        }
+        docId = imported.docId;
+      } else {
+        const { data: doc } = await supabase.from("curriculum_docs").select("status, archived_at").eq("id", docId).maybeSingle();
+        if (doc?.status === "published" && !doc.archived_at) {
+          items.push({ keywordLabel: keyword.label, name: f.name, kind: f.kind, outcome: "already_published", detail: null, docId });
+          continue;
+        }
+      }
+      const published = await publishAssetDocAction(docId);
+      items.push({
+        keywordLabel: keyword.label,
+        name: f.name,
+        kind: f.kind,
+        outcome: published.ok ? "published" : "failed",
+        detail: published.ok
+          ? `${Math.round(published.bytes / 1024)}KB${published.pageCount ? ` · ${published.pageCount}쪽` : ""}`
+          : published.error,
+        docId,
+      });
+    }
+  }
+  const count = (o: SubjectDriveSyncItem["outcome"]) => items.filter((i) => i.outcome === o).length;
+  return {
+    state: "ok",
+    keywordFolders: folderByKeyword.size,
+    items,
+    published: count("published"),
+    alreadyPublished: count("already_published"),
+    failed: count("failed"),
+    skipped: count("skipped_unsupported"),
+  };
+}
+
+// ---------------------------------------------------------------- Drive 원본 없는 교재 일괄 보관 (2026-09-14)
+
+export type ArchiveNonDriveResult = { ok: true; archived: { id: string; title: string }[] } | { ok: false; error: string };
+
+/**
+ * 이 과목에서 Drive 원본이 없는 **공개** 교재(HTML 교재·로컬 표본)를 한 번에 보관한다.
+ * 제품 오너 지시: 교재는 이제 Drive 에서만 온다. 지우지 않고 보관한다 — 과거 수업이 그 교재를 참조한다.
+ */
+export async function archiveNonDriveDocsAction(subjectId: string): Promise<ArchiveNonDriveResult> {
+  const { supabase } = await requireAdmin();
+  const { data: docs, error } = await supabase
+    .from("curriculum_docs")
+    .select("id, title")
+    .eq("subject_id", subjectId)
+    .eq("status", "published")
+    .is("archived_at", null)
+    .is("source_drive_file_id", null);
+  if (error) return { ok: false, error: error.message };
+  const targets = (docs ?? []) as { id: string; title: string }[];
+  if (targets.length === 0) return { ok: true, archived: [] };
+  const { error: updateError } = await supabase
+    .from("curriculum_docs")
+    .update({ archived_at: new Date().toISOString(), archived_reason: "Drive 원본 없음 — 2026-09-14 교재 정리" })
+    .in("id", targets.map((t) => t.id));
+  if (updateError) return { ok: false, error: updateError.message };
+  return { ok: true, archived: targets };
+}
