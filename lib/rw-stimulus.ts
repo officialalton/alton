@@ -265,7 +265,10 @@ export function describeRwStructure(s: RwStimulus): string {
   const parts: string[] = [];
   parts.push(s.texts.length ? s.texts.join("·") : "지문 1개");
   if (s.notes) parts.push(`메모 ${s.notes.items.length}`);
-  parts.push(`빈칸 ${s.blanks}`);
+  // Words in Context 인용 단어형("As used in the text, what does the word “…” most nearly mean?")은 빈칸이 없는 것이 정상이다 — 그렇게 말해준다.
+  const quoted = s.question?.match(/[“"]([^”"]+)[”"]/)?.[1]?.trim();
+  if (quoted && s.blanks === 0 && /as used in the text|most nearly mean/i.test(s.question ?? "")) parts.push(`인용 단어형(“${quoted}”) · 빈칸 없음이 정상`);
+  else parts.push(`빈칸 ${s.blanks}`);
   parts.push(`밑줄 ${s.underlines}`);
   if (s.hasTable) parts.push("마크다운 표");
   parts.push(s.question ? "질문 인식됨" : "질문 미인식");

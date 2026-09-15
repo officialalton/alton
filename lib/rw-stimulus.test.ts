@@ -74,8 +74,10 @@ describe("RW 구조화 자료 블록 — 해석", () => {
     expect(s.structured).toBe(false);
     expect(s.texts).toEqual([]);
   });
-  it("요약 문장", () => {
+  it("요약 문장 — 인용 단어형은 빈칸 없음이 정상이라고 말한다", () => {
     expect(describeRwStructure(parseRwStimulus(CROSS))).toBe("Text 1·Text 2 · 빈칸 0 · 밑줄 0 · 질문 인식됨");
+    expect(describeRwStructure(parseRwStimulus(WIC_QUOTE))).toBe("지문 1개 · 인용 단어형(“loose”) · 빈칸 없음이 정상 · 밑줄 0 · 질문 인식됨");
+    expect(describeRwStructure(parseRwStimulus(WIC))).toBe("지문 1개 · 빈칸 1 · 밑줄 0 · 질문 인식됨");
   });
   it("옛 rw.* 코드도 표준 코드로 읽고, 수학 코드는 null", () => {
     expect(rwSkillCode("rw.cross_text")).toBe("cross_text_connections");
