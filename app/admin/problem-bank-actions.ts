@@ -330,11 +330,13 @@ export async function createDraftVersionAction(params: {
   const admin = createAdminClient();
   // 2026-09-14 표준 렌더링 검증 — 스키마에 안 맞는 그림·조판할 수 없는 수식은 저장하지 않는다. 그 외 문제(참조 불일치·
   // 충돌·잘림·레거시·선택지 정합)는 저장은 되지만 render_check 에 남고 공개가 막힌다(관리자가 사유를 보고 고친다).
-  const { data: problemRow } = await admin.from("problems").select("format").eq("id", params.problemId).maybeSingle();
+  const { data: problemRow } = await admin.from("problems").select("format, skill_code").eq("id", params.problemId).maybeSingle();
   const contentIssues = checkContent({
     format: (problemRow?.format as string | undefined) ?? (params.options ? "mc" : "essay"),
     passage: params.passage, options: params.options, correctIndex: params.correctIndex, explanation: params.explanation,
     answers: params.answers ?? null, statements: params.statements ?? null,
+    // RW 구조화 자료 블록(2026-09-14): 세부 기술이 RW 코드인 문제만 — 옛 문제(코드 없음)는 의미를 확정할 수 없어 검사하지 않는다.
+    skillCode: (problemRow?.skill_code as string | null | undefined) ?? null, figure: params.figure ?? null,
   });
   const fatal = contentIssues.find((i) => ["math_parse", "math_unclosed", "latex_leak"].includes(i.code));
   if (fatal) return { ok: false, error: `수식을 조판할 수 없어 저장하지 않았습니다 — ${fatal.message}` };
@@ -626,13 +628,16 @@ export async function generateBankProblemsAction(params: {
       skillCode: params.skillCode,
     });
   } catch (e) {
-    // 그림 요구를 못 채운 경우는 사람이 조치할 수 있는 사실이라 그대로 알린다. 그 외 원문은 넘기지 않는다.
+    // 그림 요구를 못 채운 경우는 사람이 조치할 수 있는 사실이라 그대로 알린다. 그 외 원문은 넘기지 않는다(서버 로그에만).
     const message = e instanceof Error ? e.message : "";
+    console.error("[problem-bank] AI 생성 실패:", message);
     if (message.includes("그림이 있는 문항")) return { ok: false, error: message };
     return { ok: false, error: "문제를 생성하지 못했습니다. 잠시 후 다시 시도해주세요." };
   }
 
   let created = 0;
+  // 만들지 못한 사유를 모아 둔다 — 전부 실패했을 때 "생성하지 못했습니다"만 보이면 관리자가 조치할 수 없다(2026-09-14 RW E2E).
+  const failures: string[] = [];
   for (const g of generated) {
     const problem = await createBankProblemAction({
       subjectId: params.subjectId,
@@ -643,7 +648,7 @@ export async function generateBankProblemsAction(params: {
       difficulty: params.difficulty,
       keywordIds: params.keywordIds,
     });
-    if (!problem.ok) continue;
+    if (!problem.ok) { failures.push(problem.error); continue; }
     const draft = await createDraftVersionAction({
       problemId: problem.value,
       passage: g.passage,
@@ -656,9 +661,13 @@ export async function generateBankProblemsAction(params: {
       statements: g.statements ?? null,
     });
     if (draft.ok) created += 1;
+    else failures.push(draft.error);
   }
 
-  if (created === 0) return { ok: false, error: "문제를 생성하지 못했습니다." };
+  if (created === 0) {
+    console.error("[problem-bank] AI 생성 결과를 저장하지 못했습니다:", failures);
+    return { ok: false, error: `문제를 생성하지 못했습니다.${failures.length ? ` ${failures[0]}` : ""}` };
+  }
   return { ok: true, value: created };
 }
 

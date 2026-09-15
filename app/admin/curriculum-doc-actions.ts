@@ -494,7 +494,7 @@ export async function generateSectionProblems(params: {
                   figure: {
                     type: "object",
                     description:
-                      "그래프·도형이 꼭 필요한 수학 문항에만. 그림 파일이 아니라 데이터다. " +
+                      "그래프·도형·표 자료가 꼭 필요한 문항에만(수학, 그리고 Reading & Writing 의 Command of Evidence (Quantitative)). 그림 파일이 아니라 데이터다. " +
                       PLANE_DESC + " " +
                       "기하(하나): " + PARALLEL_TRANSVERSAL_DESC + " " + TRIANGLE_DESC + " " + CIRCLE_DESC + " " + POLYGON_DESC + " " + SOLID_DESC + " " + COMPOSITE_DESC + " " + DATA_DESC + " " + FIGURE_CHOICE_DESC + " " + FIGURE_SET_DESC + " " +
                       "좌표평면의 좌표는 문제의 수치와 정확히 일치해야 한다. 좌표를 직접 찍는 옛 기하 형식(type:'geometry')은 쓰지 않는다.",
@@ -534,7 +534,8 @@ ${format === "mc" ? "객관식은 반드시 선택지 4개와 정답 인덱스�
 수식은 항상 $…$ 안에(인라인) 또는 $$…$$(블록) 안에 씁니다. 연립방정식은 $$\\begin{cases} … \\\\ … \\end{cases}$$, 분수는 \\frac{a}{b}, 근호는 \\sqrt{…}, 부등식 연쇄는 $1 < x \\le 5$, 구간은 $[a, b)$. 수식 밖에 \\frac 같은 LaTeX 명령을 두지 않습니다(그대로 노출됩니다).
 ${format === "spr" ? "숫자 입력(SPR)은 SAT Math 학생 직접 입력 문항입니다: 정답이 하나의 수(정수·소수·분수)로 정해져야 하고, answers 에 동치 표현을 모두 넣어주세요(예: 7/2 와 3.5). 선택지는 만들지 마세요. 양수는 5자, 음수는 6자 안에 쓸 수 있는 값이어야 합니다." : ""}
 언어: 문항(지문·질문·선택지·SPR 정답)은 실제 SAT/AP 시험과 같이 **영어**로 쓴다. 해설(explanation)만 한국어로 쓴다.
-표기 규칙: 수식은 LaTeX 로 $…$(인라인)·$$…$$(블록) 안에 쓴다. 표가 필요하면 마크다운 파이프 표(| x | f(x) | / |---|---| / | 0 | 17 |)로 쓴다.
+표기 규칙: 수식은 LaTeX 로 $…$(인라인)·$$…$$(블록) 안에 쓴다. 표·그래프 자료는 마크다운 표가 아니라 figure(type:'data') 데이터로 낸다.
+Reading & Writing 구조 규칙: 지문 본문과 질문 단락은 빈 줄로 나누고 질문은 물음표로 끝난다. 빈칸은 ______ 로 **정확히 한 곳**, 밑줄 친 문장은 __문장__ 으로 **정확히 한 문장**(Text Structure 의 'underlined' 문항에서만). Cross-Text 는 'Text 1' / 'Text 2' 제목 줄, Rhetorical Synthesis 는 "…the following notes:" 줄 + '- ' 메모 목록 + "The student wants to …" 질문. 선택지에는 빈칸을 두지 않는다.
 그림 규칙: ${FIGURE_POLICY_RULE[figurePolicy]}
 선택지 규칙: 값이 숫자·식이면 선택지에 "x =" 같은 변수 이름을 붙이지 않고 값만 쓴다(예: "118", "$\\frac{3}{2}$", "$4x^2 - 1$"). 단위·기호(°, $, %)는 문제 문장에 두고 선택지에는 붙이지 않는다(SAT 관례). 각도는 LaTeX 로 $118^\\circ$ 로 쓴다.
 이 문제들은 특정 학생이 아니라 이 교재를 배정받는 어떤 학생에게도 재사용될 문제
@@ -576,7 +577,11 @@ ${format === "spr" ? "숫자 입력(SPR)은 SAT Math 학생 직접 입력 문항
         return Boolean(v && v.ok && requiredTypes.includes(v.spec.type));
       })
     : raw;
-  if (kept.length === 0) throw new Error("요구한 그림이 있는 문항이 하나도 만들어지지 않았습니다. 유형·개수를 바꿔 다시 시도하세요.");
+  if (kept.length === 0) {
+    // 어떤 모양으로 왔는지 서버 로그에 남긴다 — 스키마 설명을 고칠 근거(2026-09-14).
+    console.error("[generateSectionProblems] 요구한 그림이 없어 버림:", figurePolicy, raw.map((p) => (p.figure ? `${JSON.stringify(p.figure).slice(0, 400)} → ${validateFigureSpec(p.figure).ok ? "ok" : (validateFigureSpec(p.figure) as { error?: string }).error}` : "figure 없음")));
+    throw new Error("요구한 그림이 있는 문항이 하나도 만들어지지 않았습니다. 유형·개수를 바꿔 다시 시도하세요.");
+  }
 
   return kept.map((p) => ({
     format,

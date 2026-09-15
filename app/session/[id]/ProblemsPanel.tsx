@@ -18,6 +18,7 @@ import {
 } from "./problem-work-actions";
 import ProblemWorkBoardCanvas, { type ProblemBoardHandle } from "./ProblemWorkBoard";
 import LearningText from "./LearningText";
+import RwStimulusView from "./RwStimulusView";
 import { stripInlineOptions } from "@/lib/problem-text";
 import PdfPageAnnotationLayer from "./PdfPageAnnotationLayer";
 import { renderFigureSvg } from "@/lib/problem-figures/render";
@@ -466,8 +467,8 @@ export default function ProblemsPanel({
               {p.figure != null && (p.figure as { type?: string }).type !== "figure_choice" && <ProblemFigure spec={p.figure} className="mb-4" />}
 
               {p.passage ? (
-                <LearningText
-                  text={stripInlineOptions(p.passage, p.options)}
+                <RwStimulusView
+                  passage={stripInlineOptions(p.passage, p.options)}
                   className="learning-body text-[15px] sm:text-[16px] leading-[1.8] text-ink mb-5"
                 />
               ) : (

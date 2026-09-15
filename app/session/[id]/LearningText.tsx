@@ -67,6 +67,18 @@ function Inline({ parts }: { parts: ContentPart[] }) {
             </span>
           );
         }
+        if (part.kind === "blank") {
+          return (
+            <span
+              key={i}
+              data-testid="rw-blank"
+              aria-label="빈칸"
+              className="inline-block min-w-[7ch] border-b-[1.5px] border-ink align-baseline mx-0.5"
+            >
+              &nbsp;
+            </span>
+          );
+        }
         if (part.kind === "underline") {
           return (
             <span key={i} className="underline decoration-ink underline-offset-4 whitespace-pre-wrap">

@@ -4,6 +4,7 @@
 //   * 선택지 수·중복·정답 인덱스 범위, 로마숫자 진술(statements)과 선택지 조합의 정합.
 import { splitLearningContent } from "./render-learning-content";
 import type { FigureIssue } from "./problem-figures/templates/_layout";
+import { checkRwStructure } from "./rw-stimulus";
 
 export type ContentInput = {
   format: string;
@@ -14,6 +15,10 @@ export type ContentInput = {
   answers?: string[] | null;
   /** 로마숫자 진술 I, II, III … (선택지가 'I only', 'I and II' 같은 조합일 때). */
   statements?: string[] | null;
+  /** 세부 기술 코드 — RW 코드면 구조화 자료 블록(Text 1/2·메모·빈칸·밑줄·정량 자료)을 검사한다. 없으면(옛 문제) 건너뛴다. */
+  skillCode?: string | null;
+  /** 그림 데이터 — RW 정량 근거 문항의 figure(type:'data') 요구 확인용. */
+  figure?: unknown | null;
 };
 
 const ROMAN = ["I", "II", "III", "IV", "V"];
@@ -43,6 +48,7 @@ export function parseRomanOption(option: string): number[] | null | "none" {
 
 export function checkContent(input: ContentInput): FigureIssue[] {
   const issues: FigureIssue[] = [];
+  issues.push(...checkRwStructure({ skillCode: input.skillCode ?? null, passage: input.passage, options: input.options, figure: input.figure ?? null }));
   issues.push(...mathErrors("지문", input.passage));
   issues.push(...mathErrors("해설", input.explanation ?? ""));
   (input.options ?? []).forEach((o, i) => issues.push(...mathErrors(`선택지 ${i + 1}`, o)));

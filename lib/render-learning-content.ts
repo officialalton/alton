@@ -12,10 +12,12 @@ export type ContentPart =
   | { kind: "text"; value: string }
   /** __밑줄__ — Text Structure 문항의 '밑줄 친 문장'(2026-09-14 ⑤). */
   | { kind: "underline"; value: string }
+  /** ______ 빈칸 — RW 빈칸 문항의 대상(2026-09-14 RW 구조화 블록). 학생 화면에서 밑줄 칸으로 그린다. */
+  | { kind: "blank" }
   | { kind: "math"; html: string; display: boolean }
   | { kind: "math-error"; source: string };
 
-const TOKEN = /\$\$([\s\S]+?)\$\$|\$([^$\n]+?)\$|__([^_\n][^\n]*?)__/g;
+const TOKEN = /\$\$([\s\S]+?)\$\$|\$([^$\n]+?)\$|__([^_\n][^\n]*?)__|(_{3,})/g;
 
 /**
  * 본문을 "글"과 "수식" 조각으로 나눈다. 수식이 하나도 없으면 글 한 조각만
@@ -36,6 +38,11 @@ export function splitLearningContent(source: string): ContentPart[] {
     }
     if (match[3] !== undefined) {
       parts.push({ kind: "underline", value: match[3] });
+      lastIndex = match.index + match[0].length;
+      continue;
+    }
+    if (match[4] !== undefined) {
+      parts.push({ kind: "blank" });
       lastIndex = match.index + match[0].length;
       continue;
     }

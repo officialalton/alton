@@ -20,6 +20,8 @@ import {
 import { listSubjectCatalogAction } from "./subject-actions";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import LearningText from "@/app/session/[id]/LearningText";
+import RwStimulusView from "@/app/session/[id]/RwStimulusView";
+import { describeRwStructure, parseRwStimulus, rwSkillCode } from "@/lib/rw-stimulus";
 import { PROBLEM_SKILLS, findProblemSkill } from "@/lib/problem-skills";
 import { SAT_DOMAINS, SKILL_BY_CODE, SKILL_CODES, domainShort, skillLabel, skillsForDomain } from "@/lib/problem-taxonomy";
 import { LEGACY_FIGURE_TYPES, validateFigureSpec } from "@/lib/problem-figures/spec";
@@ -1106,7 +1108,11 @@ function DraftEditor({
   const contentIssues = checkContent({
     format: problem.format, passage, options: isMc ? options.map((o) => o.trim()).filter(Boolean) : null,
     correctIndex, explanation, answers: answersPayload, statements: statementsPayload.length ? statementsPayload : null,
+    skillCode: problem.skillCode ?? null, figure: figureForSave,
   });
+  // RW 구조화 자료 블록(2026-09-14): 세부 기술이 RW 이면 인식된 구조를 한 줄로 보여준다(Text 1·2 / 메모 / 빈칸 / 밑줄 / 질문).
+  const rwCode = rwSkillCode(problem.skillCode ?? null);
+  const rwStructure = rwCode ? describeRwStructure(parseRwStimulus(passage)) : null;
 
   const filledOptions = options.map((o) => o.trim());
   const optionsPayload = isMc && filledOptions.some(Boolean) ? filledOptions : null;
@@ -1155,10 +1161,13 @@ function DraftEditor({
       />
       {/* 2026-09-14 UAT: 편집 칸엔 마크다운 원문(| 표 |, $수식$)이 그대로 보여 "허접해" 보였다 —
           학생·교사 화면과 같은 렌더를 바로 아래에 보여준다. */}
-      {(passage.includes("|") || passage.includes("$") || passage.includes("__") || /^\s*[-•]\s/m.test(passage) || options.some((o) => o.includes("$"))) && (
+      {rwStructure && (
+        <p className="text-[11.5px] text-grey-500 mb-2" data-testid="rw-structure">구조: {rwStructure}</p>
+      )}
+      {(rwCode || passage.includes("|") || passage.includes("$") || passage.includes("__") || /^\s*[-•]\s/m.test(passage) || /^\s*Text [12]\s*:?\s*$/m.test(passage) || options.some((o) => o.includes("$"))) && (
         <div className="mb-3 border-[1.5px] border-dashed border-grey-200 rounded-lg px-4 py-3" data-testid="passage-preview">
           <div className="text-[10.5px] font-bold text-grey-300 uppercase tracking-wide mb-1">학생 화면 미리보기</div>
-          <LearningText text={passage} className="learning-body text-[14px] leading-[1.75] text-ink" />
+          <RwStimulusView passage={passage} className="learning-body text-[14px] leading-[1.75] text-ink" />
           {isMc && options.some((o) => o.trim()) && (
             <ol className="mt-2">
               {options.map((o, i) =>
