@@ -76,14 +76,19 @@ describe("독립 품질 검사 판정", () => {
   it("정답 일치·오답 정상이면 통과", () => {
     expect(judgeReview(base, "medium", "mc")).toEqual([]);
   });
-  it("정답 불일치, 무관 오답, 명백한 오답 2개, 어려움인데 easy 는 실패 사유", () => {
+  it("정답 불일치는 실패; 보통은 무관 2개 또는 전부 명백일 때만 실패; 어려움은 무관·명백 하나도 불허; 어려움인데 easy 실패", () => {
     expect(judgeReview({ ...base, agrees: false, pickedIndex: 2 }, "medium", "mc")[0]).toMatch(/독립 검사는 C\)/);
-    expect(judgeReview({ ...base, distractors: [{ ...base.distractors[0], kind: "irrelevant" }, base.distractors[1], base.distractors[2]] }, "medium", "mc")[0]).toMatch(/무관/);
-    expect(judgeReview({ ...base, distractors: base.distractors.map((d, i) => ({ ...d, obvious: i < 2 })) }, "medium", "mc")[0]).toMatch(/너무 명백/);
-    expect(judgeReview({ ...base, distractors: [{ ...base.distractors[0], obvious: true }, base.distractors[1], base.distractors[2]] }, "hard", "mc")[0]).toMatch(/어려움 문제인데/);
+    const oneIrrelevant = { ...base, distractors: [{ ...base.distractors[0], kind: "irrelevant" as const }, base.distractors[1], base.distractors[2]] };
+    expect(judgeReview(oneIrrelevant, "medium", "mc")).toEqual([]);
+    expect(judgeReview(oneIrrelevant, "hard", "mc")[0]).toMatch(/어려움 문제인데.*무관/);
+    const twoIrrelevant = { ...base, distractors: [{ ...base.distractors[0], kind: "irrelevant" as const }, { ...base.distractors[1], kind: "irrelevant" as const }, base.distractors[2]] };
+    expect(judgeReview(twoIrrelevant, "medium", "mc")[0]).toMatch(/무관/);
+    const allObvious = { ...base, distractors: base.distractors.map((d) => ({ ...d, obvious: true })) };
+    expect(judgeReview(allObvious, "medium", "mc")[0]).toMatch(/모두 너무 명백/);
+    const twoObvious = { ...base, distractors: base.distractors.map((d, i) => ({ ...d, obvious: i < 2 })) };
+    expect(judgeReview(twoObvious, "medium", "mc")).toEqual([]);
+    expect(judgeReview({ ...base, distractors: [{ ...base.distractors[0], obvious: true }, base.distractors[1], base.distractors[2]] }, "hard", "mc")[0]).toMatch(/어려움 문제인데.*명백/);
     expect(judgeReview({ ...base, estimatedDifficulty: "easy" }, "hard", "mc")[0]).toMatch(/추정 난이도가 easy/);
-    // 보통 난이도에서 명백한 오답 1개는 허용(정보 기록만).
-    expect(judgeReview({ ...base, distractors: [{ ...base.distractors[0], obvious: true }, base.distractors[1], base.distractors[2]] }, "medium", "mc")).toEqual([]);
   });
   it("SPR 정답 정규화 — 7/2 와 3.5, 1,200 과 1200", () => {
     expect(normalizeSprAnswer("7/2")).toBe(normalizeSprAnswer("3.5"));

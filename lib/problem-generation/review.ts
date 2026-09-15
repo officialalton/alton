@@ -178,10 +178,17 @@ export function judgeReview(review: IndependentReview, requestedDifficulty: stri
   }
   if (format === "mc") {
     const irrelevant = review.distractors.filter((d) => d.kind === "irrelevant");
-    const obvious = review.distractors.filter((d) => d.obvious);
-    if (irrelevant.length) reasons.push(`오답 ${irrelevant.map((d) => String.fromCharCode(65 + d.index) + ")").join(", ")}이 지문·자료와 무관합니다`);
-    if (obvious.length >= 2) reasons.push(`오답 ${obvious.map((d) => String.fromCharCode(65 + d.index) + ")").join(", ")}이 너무 명백해 정답을 쉽게 고를 수 있습니다`);
-    else if (requestedDifficulty === "hard" && obvious.length >= 1) reasons.push(`어려움 문제인데 오답 ${String.fromCharCode(65 + obvious[0].index)})이 너무 명백합니다`);
+    const obvious = review.distractors.filter((d) => d.obvious || d.kind === "irrelevant");
+    const letters = (ds: typeof review.distractors) => ds.map((d) => String.fromCharCode(65 + d.index) + ")").join(", ");
+    if (requestedDifficulty === "hard") {
+      // 어려움: 무관·명백한 오답을 하나도 허용하지 않는다(제품 오너 기준).
+      if (irrelevant.length) reasons.push(`어려움 문제인데 오답 ${letters(irrelevant)}이 지문·자료와 무관합니다`);
+      else if (obvious.length) reasons.push(`어려움 문제인데 오답 ${letters(obvious)}이 너무 명백합니다`);
+    } else {
+      // 보통·쉬움: 실제 시험도 쉽게 지워지는 오답이 하나쯤 있다. 오답 셋이 전부 명백/무관하거나 둘 이상이 무관하면 정답이 사실상 노출된 문항 → 재생성.
+      if (irrelevant.length >= 2) reasons.push(`오답 ${letters(irrelevant)}이 지문·자료와 무관합니다`);
+      else if (obvious.length >= 3) reasons.push(`오답 ${letters(obvious)}이 모두 너무 명백해 정답이 노출됩니다`);
+    }
   }
   if (requestedDifficulty === "hard" && review.estimatedDifficulty === "easy") reasons.push("어려움으로 요청했지만 독립 검사 추정 난이도가 easy 입니다 — 핵심 관계를 종합해야 풀리는 문항으로");
   for (const f of review.flags) if (/정답이 둘|두 개 이상|둘 이상|모호|노출|불일치|ambiguous|two correct|exposed|mismatch/i.test(f)) reasons.push(`독립 검사 지적: ${f}`);

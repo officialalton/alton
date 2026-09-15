@@ -125,6 +125,7 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
 
     // 3) 독립 품질 검사.
     let review: IndependentReview | null = null;
+    let secondReviewDisagreedFirst = false;
     if (!params.skipReview) {
       try {
         review = await reviewProblemIndependently({
@@ -133,6 +134,18 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
         });
       } catch (e) {
         console.error("[pipeline] 독립 검사 오류:", e instanceof Error ? e.message : e);
+      }
+      if (review && !review.agrees) {
+        // 독립 검사도 틀릴 수 있다 — 한 번 더 묻고, 2차가 지정 정답과 일치하면 '검토 필요'로 통과시킨다. 둘 다 불일치면 저장하지 않는다.
+        try {
+          const second = await reviewProblemIndependently({
+            skillLabel: label, examSystem: params.examSystem ?? null, format: params.format, stimulus, question: question ?? "", options: g.options ?? null,
+            statements: g.statements ?? null, figure: g.figure ?? null, correctIndex: g.correctIndex ?? null, answers: g.answers ?? null, requestedDifficulty: params.difficulty,
+          });
+          if (second.agrees) { secondReviewDisagreedFirst = true; review = { ...second, confidence: "low" }; }
+        } catch (e) {
+          console.error("[pipeline] 2차 독립 검사 오류:", e instanceof Error ? e.message : e);
+        }
       }
       if (review) {
         const reasons = judgeReview(review, params.difficulty, params.format);
@@ -146,6 +159,11 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
     const needsReviewReasons: string[] = [];
     if (!review) needsReviewReasons.push("독립 검사를 실행하지 못했습니다");
     if (review && review.confidence === "low") needsReviewReasons.push("독립 검사 확신이 낮습니다");
+    if (secondReviewDisagreedFirst) needsReviewReasons.push("독립 검사 1차는 다른 답을 골랐고 2차만 일치했습니다 — 정답·오답을 사람이 확인하세요");
+    if (review && params.format === "mc") {
+      const weak = review.distractors.filter((d) => d.obvious || d.kind === "irrelevant");
+      if (weak.length) needsReviewReasons.push(`쉽게 지워지는 오답 ${weak.map((d) => String.fromCharCode(65 + d.index) + ")").join(", ")}`);
+    }
     if (review && review.estimatedDifficulty !== params.difficulty) needsReviewReasons.push(`요청 난이도(${params.difficulty})와 추정 난이도(${review.estimatedDifficulty})가 다릅니다`);
     if (params.format === "mc" && distractors.length < 3) needsReviewReasons.push("오답 근거가 셋 미만입니다");
     const quality: QualityRecord = {
