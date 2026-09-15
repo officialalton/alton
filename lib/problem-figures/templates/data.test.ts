@@ -80,3 +80,13 @@ describe("템플릿 4 — 거부", () => {
     expect(r2.issues.some((i) => i.code === "label_collision")).toBe(true);
   });
 });
+
+describe("표 참조 검사 오탐 수정(2026-09-15)", () => {
+  it("한 절이 두 행을 함께 부르면 값 대조를 하지 않고, 행 이름의 숫자는 값 후보가 아니다", () => {
+    const spec = { type: "data", kind: "table", columns: ["Month", "Price (dollars)"], rows: [["Month 1", 80], ["Month 2", 92], ["Month 3", 100]] };
+    const r = checkFigure(spec, "From Month 2 to Month 3, the price increased by about 9 percent. What is the price in Month 2?");
+    expect(r.issues.filter((i) => i.code === "ref_mismatch")).toEqual([]);
+    const bad = checkFigure(spec, "In Month 2 the price was 95 dollars. What is x?");
+    expect(bad.issues.some((i) => i.code === "ref_mismatch")).toBe(true);
+  });
+});

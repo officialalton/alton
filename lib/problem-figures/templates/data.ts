@@ -480,8 +480,10 @@ export function lintDataAgainstText(spec: DataSpec, passage: string): FigureIssu
     const cols = spec.columns.map((c) => c.toLowerCase());
     for (const cl of clauses) {
       const low = cl.toLowerCase();
-      const rowIdx = spec.rows.findIndex((r) => nameInClause(cl, String(r[0]), spec.columns![0]));
-      if (rowIdx < 0) continue;
+      const rowMatches = spec.rows.map((r, i) => (nameInClause(cl, String(r[0]), spec.columns![0]) ? i : -1)).filter((i) => i >= 0);
+      // 한 절이 두 행을 함께 부르면("from Month 2 to Month 3, …") 어느 값을 말하는지 정할 수 없다 — 판단하지 않는다(2026-09-15 오탐 수정).
+      if (rowMatches.length !== 1) continue;
+      const rowIdx = rowMatches[0];
       // 열은 절에 나온 낱말이 가장 많이 겹치는 것 하나 — 비기면(둘 다 'bottles') 판단하지 않는다.
       const scores = cols.map((c, i) => (i === 0 ? -1 : c.split(/\s+/).filter((w) => w.length > 3 && new RegExp(`\\b${escapeRe(w)}`, "i").test(low)).length));
       const best = Math.max(...scores);
@@ -492,7 +494,8 @@ export function lintDataAgainstText(spec: DataSpec, passage: string): FigureIssu
       const nums = numbersIn(cl);
       const target = isNum(cellV) ? cellV : num(String(cellV));
       const rowName = String(spec.rows[rowIdx][0]);
-      const rowNameNums = Array.from(rowName.matchAll(/\d+/g)).map((m) => Number(m[0]));
+      // 어느 행 이름에든 들어 있는 숫자("Month 2", "Shift 4")는 값 후보가 아니다.
+      const rowNameNums = spec.rows.flatMap((r) => Array.from(String(r[0]).matchAll(/\d+/g)).map((m) => Number(m[0])));
       const candidates = nums.filter((n) => !rowNameNums.includes(n));
       if (candidates.length && !candidates.some((n) => Math.abs(n - target) < 1e-9)) issues.push({ code: "ref_mismatch", message: `지문은 '${rowName}' 의 '${spec.columns[colIdx]}' 를 ${candidates.join("/")} 로 말하지만 표의 값은 ${fmtNum(target)} 입니다.` });
     }
