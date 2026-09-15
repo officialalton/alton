@@ -107,8 +107,12 @@ describe("RW 구조화 자료 블록 — 검증", () => {
     expect(checkRwStructure({ skillCode: "boundaries", passage: TRANS, options: ["a ______", "b", "c", "d"] }).map((i) => i.code)).toContain("rw_target");
     expect(ok("boundaries", TRANS).map((i) => i.code)).toContain("rw_question");
   });
-  it("인용 단어형은 그 단어가 지문에 있어야 한다", () => {
+  it("인용 단어형은 그 단어가 지문에 있어야 하고, 지문에 다른 인용 표시가 있으면 대상이 모호해 거부한다", () => {
     expect(ok("words_in_context", WIC_QUOTE.replace('"loose,"', '"tight,"')).map((i) => i.code)).toContain("rw_target");
+    // 지문 자체에 "loose," 라고 따옴표가 있는 WIC_QUOTE 는 대상 단어라 통과(위 대표 유형 테스트). 다른 낱말이 따옴표면 거부.
+    const other = WIC_QUOTE.replace("allowing digressions", 'praising "progress" and allowing digressions');
+    const issues = ok("words_in_context", other);
+    expect(issues.some((i) => i.code === "rw_target" && /progress/.test(i.message))).toBe(true);
   });
   it("밑줄: 질문이 underlined 를 가리키면 정확히 하나, 아니면 없어야 한다; 다른 유형의 밑줄 거부", () => {
     expect(ok("text_structure_purpose", TSP.replace(/__/g, "")).map((i) => i.code)).toContain("rw_target");

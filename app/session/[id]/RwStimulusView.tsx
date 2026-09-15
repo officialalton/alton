@@ -1,7 +1,7 @@
 "use client";
 
 import LearningText from "./LearningText";
-import { parseRwStimulus } from "@/lib/rw-stimulus";
+import { parseRwStimulus, quotedTargetWord } from "@/lib/rw-stimulus";
 
 /**
  * 문제 지문을 RW 구조화 자료 블록으로 그린다(2026-09-14 제품 오너 지시).
@@ -11,6 +11,13 @@ import { parseRwStimulus } from "@/lib/rw-stimulus";
  */
 export default function RwStimulusView({ passage, className }: { passage: string; className?: string }) {
   const s = parseRwStimulus(passage);
+  // Words in Context 인용 단어형 — 실제 시험처럼 지문의 대상 단어(첫 번째 등장)를 밑줄로 표시한다. 데이터는 바꾸지 않고 그릴 때만.
+  const target = quotedTargetWord(s.question);
+  const underlineTarget = (text: string) => {
+    if (!target || text.includes("__")) return text;
+    const re = new RegExp(`\\b(${target.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})\\b`, "i");
+    return text.replace(re, "__$1__");
+  };
   if (!s.structured) return <LearningText text={passage} className={className} />;
   return (
     <div className={className} data-testid="rw-stimulus">
@@ -59,7 +66,7 @@ export default function RwStimulusView({ passage, className }: { passage: string
             </ul>
           );
         }
-        return <LearningText key={i} text={b.text} className="mb-3" />;
+        return <LearningText key={i} text={underlineTarget(b.text)} className="mb-3" />;
       })}
     </div>
   );

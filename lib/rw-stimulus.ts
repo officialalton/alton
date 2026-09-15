@@ -215,6 +215,9 @@ export function checkRwStructure(input: { skillCode: string | null | undefined; 
       const word = quoted[1].trim();
       const body = s.blocks.filter((b) => b.kind !== "question").map((b) => (b.kind === "paragraph" ? b.text : b.kind === "text" ? b.body : "")).join("\n");
       if (!new RegExp(`\\b${word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "i").test(body)) issues.push({ code: "rw_target", message: `질문이 인용한 단어 “${word}” 가 지문에 없습니다.` });
+      // 실제 시험은 대상 단어를 지문에서 밑줄로 표시한다(렌더러가 자동으로 친다). 지문에 **다른** 인용 표시("progress")가 있으면 학생이 그것을 대상으로 오해한다 — 모호한 대상은 거부.
+      const otherQuotes = Array.from(body.matchAll(/[“"]([^”"\n]{1,40})[”"]/g)).map((m) => m[1].trim().replace(/[,.;:!?]+$/, "")).filter((w) => w.toLowerCase() !== word.toLowerCase());
+      if (otherQuotes.length) issues.push({ code: "rw_target", message: `인용 단어형 문항의 지문에 대상이 아닌 인용 표시가 있습니다(“${otherQuotes[0]}”) — 학생이 대상을 오해합니다. 지문에서 따옴표를 빼세요(대상 단어는 렌더러가 밑줄로 표시합니다).` });
     } else {
       if (s.blanks !== 1) issues.push({ code: "rw_target", message: `빈칸(______)은 정확히 하나여야 합니다(지금 ${s.blanks}개).` });
       if (q && !blankRule.test(q)) issues.push({ code: "rw_question", message: `질문이 빈칸을 가리키는 표준 문구가 아닙니다 — ${skillQuestionHint(code)}` });
@@ -258,6 +261,13 @@ function skillQuestionHint(code: string): string {
     case "transitions": return "\"Which choice completes the text with the most logical transition?\"";
     default: return "\"Which choice completes the text so that it conforms to the conventions of Standard English?\"";
   }
+}
+
+/** Words in Context 인용 단어형의 대상 단어(질문의 “…”). 아니면 null. */
+export function quotedTargetWord(question: string | null | undefined): string | null {
+  const q = question ?? "";
+  if (!/as used in the text|most nearly mean/i.test(q)) return null;
+  return q.match(/[“"]([^”"]+)[”"]/)?.[1]?.trim() ?? null;
 }
 
 /** 관리자 화면 한 줄 요약. */

@@ -15,7 +15,7 @@ export type ProblemSkill = {
 export const PROBLEM_SKILLS: ProblemSkill[] = [
   // ---------------- SAT Reading and Writing (전부 4지선다)
   { code: "rw.words_in_context", label: "Words in Context", family: "SAT RW", defaultFormat: "mc",
-    rule: "지문 1단락(50~120단어). 빈칸이면 ______ 를 **정확히 한 곳**에 두고 문항은 정확히 \"Which choice completes the text with the most logical and precise word or phrase?\". 인용 단어형이면 \"As used in the text, what does the word “…” most nearly mean?\". 선택지는 단어/짧은 구 4개." },
+    rule: "지문 1단락(50~120단어). 빈칸이면 ______ 를 **정확히 한 곳**에 두고 문항은 정확히 \"Which choice completes the text with the most logical and precise word or phrase?\". 인용 단어형이면 \"As used in the text, what does the word “…” most nearly mean?\" — 이때 지문에는 대상 단어 외에 따옴표로 묶은 낱말을 두지 않는다(대상 단어는 ALTON 이 밑줄로 표시한다). 선택지는 단어/짧은 구 4개." },
   { code: "rw.text_structure_purpose", label: "Text Structure and Purpose", family: "SAT RW", defaultFormat: "mc",
     rule: "지문 1단락. 문항은 \"Which choice best states the main purpose of the text?\" 또는 \"Which choice best describes the function of the underlined sentence in the text as a whole?\"(밑줄 문장은 지문 안에서 **정확히 한 문장**만 __문장__ 으로 표시하고, 밑줄이 없으면 'underlined' 를 묻지 않는다). 지문에 빈칸은 두지 않는다. 선택지는 To + 동사 구문." },
   { code: "rw.cross_text", label: "Cross-Text Connections", family: "SAT RW", defaultFormat: "mc",
