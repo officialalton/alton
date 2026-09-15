@@ -199,6 +199,39 @@ export default function ProblemDraftEditor({
         <p className="text-[11.5px] text-grey-500 mb-1">위 &apos;문항 체계 · 시험 분류&apos;에서 체계를 정하면 이 유형에 필요한 항목만 보입니다.</p>
       )}
 
+      {/* 0. 학생 화면 미리보기 — 어떤 체계·유형이든 맨 위. 학생이 보는 그대로(자료 포함) 그린다. */}
+      <FieldTitle hint="학생·교사 수업 화면과 같은 렌더입니다. 아래 칸을 고치면 바로 바뀝니다.">학생 화면 미리보기</FieldTitle>
+      <div className="border-[1.5px] border-dashed border-grey-200 rounded-lg px-4 py-3" data-testid="passage-preview">
+        {figureParsed.spec != null && (figureParsed.spec as { type?: string }).type !== "figure_choice" && (
+          <div className="max-w-[520px] mb-3"><ProblemFigure spec={figureParsed.spec} /></div>
+        )}
+        {fullText.trim() ? (
+          <RwStimulusView passage={fullText} className="learning-body text-[14px] leading-[1.75] text-ink" />
+        ) : (
+          <p className="text-[12.5px] text-grey-500">지문·질문을 쓰면 여기에 보입니다.</p>
+        )}
+        {(source?.statements?.length || statementsPayload.length) && (vis.statements || vis.legacyAll) ? (
+          <ol className="mt-2">
+            {statementsPayload.map((st, i) => (
+              <li key={i} className="text-[13.5px] text-ink py-0.5"><b className="mr-2">{["I", "II", "III", "IV", "V"][i]}.</b><LearningText text={st} className="inline" /></li>
+            ))}
+          </ol>
+        ) : null}
+        {isMc && options.some((o) => o.trim()) && (
+          <ol className="mt-2">
+            {options.map((o, i) =>
+              o.trim() ? (
+                <li key={i} className="text-[13.5px] text-ink py-0.5">
+                  <span className="text-grey-500 mr-2">{i + 1}</span>
+                  <LearningText text={o} className="learning-body inline" />
+                  {correctIndex === i && <span className="text-[11px] text-grey-500 ml-2">정답</span>}
+                </li>
+              ) : null
+            )}
+          </ol>
+        )}
+      </div>
+
       {/* 1. 지문 / 자료 */}
       <FieldTitle hint={rwCode && vis.rwHints ? RW_HINT[rwCode] : examSystem === "sat_math" ? "조건·상황 설명. 수식은 $…$ 안에. 묻는 문장은 아래 '질문'에 따로." : "본문·자료 설명. 질문은 아래 칸에 따로 씁니다."}>지문 / 자료</FieldTitle>
       <textarea
@@ -358,40 +391,6 @@ export default function ProblemDraftEditor({
         placeholder="해설"
         className="w-full text-[13px] border-[1.5px] border-grey-200 rounded-lg px-3 py-2 resize-none overflow-hidden"
       />
-
-      {/* 5. 학생 화면 미리보기 */}
-      <FieldTitle hint="학생·교사 수업 화면과 같은 렌더입니다.">학생 화면 미리보기</FieldTitle>
-      <div className="border-[1.5px] border-dashed border-grey-200 rounded-lg px-4 py-3" data-testid="passage-preview">
-        {/* 자료 구역이 보일 때는 그 미리보기가 위에 있으므로 여기서 다시 그리지 않는다. */}
-        {!vis.material && figureParsed.spec != null && (figureParsed.spec as { type?: string }).type !== "figure_choice" && (
-          <div className="max-w-[520px] mb-3"><ProblemFigure spec={figureParsed.spec} /></div>
-        )}
-        {fullText.trim() ? (
-          <RwStimulusView passage={fullText} className="learning-body text-[14px] leading-[1.75] text-ink" />
-        ) : (
-          <p className="text-[12.5px] text-grey-500">지문·질문을 쓰면 여기에 보입니다.</p>
-        )}
-        {(source?.statements?.length || statementsPayload.length) && (vis.statements || vis.legacyAll) ? (
-          <ol className="mt-2">
-            {statementsPayload.map((st, i) => (
-              <li key={i} className="text-[13.5px] text-ink py-0.5"><b className="mr-2">{["I", "II", "III", "IV", "V"][i]}.</b><LearningText text={st} className="inline" /></li>
-            ))}
-          </ol>
-        ) : null}
-        {isMc && options.some((o) => o.trim()) && (
-          <ol className="mt-2">
-            {options.map((o, i) =>
-              o.trim() ? (
-                <li key={i} className="text-[13.5px] text-ink py-0.5">
-                  <span className="text-grey-500 mr-2">{i + 1}</span>
-                  <LearningText text={o} className="learning-body inline" />
-                  {correctIndex === i && <span className="text-[11px] text-grey-500 ml-2">정답</span>}
-                </li>
-              ) : null
-            )}
-          </ol>
-        )}
-      </div>
 
       {/* 6. 초안 저장 / 공개 */}
       <div className="flex flex-wrap items-center gap-2 mt-3">

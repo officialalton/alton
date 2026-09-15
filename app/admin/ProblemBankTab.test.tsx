@@ -476,7 +476,7 @@ describe("보관은 삭제가 아니다", () => {
     await openFirstProblem();
     const box = screen.getByLabelText("그림 데이터");
     fireEvent.change(box, { target: { value: '{"type":"plane","axes":{"x":{"min":-2,"max":8},"y":{"min":-2,"max":8}},"objects":[{"id":"A","kind":"point","at":[1,3],"label":"A"}]}' } });
-    expect(screen.getByTestId("problem-figure")).toBeInTheDocument();
+    expect(screen.getAllByTestId("problem-figure").length).toBeGreaterThan(0);
     expect(screen.getByLabelText("그림 확인함")).toBeDisabled(); // 저장 전엔 확인 못 한다
     fireEvent.change(box, { target: { value: '{"type":"geometry","shapes":[]}' } });
     expect(screen.getByText(/자료 데이터 오류|그림 데이터 오류/)).toBeInTheDocument();
@@ -540,7 +540,7 @@ describe("보관은 삭제가 아니다", () => {
     await openFirstProblem();
     fireEvent.click(screen.getByRole("button", { name: "AI로 좌표평면 데이터 만들기" }));
     await waitFor(() => expect(generateFigureForProblemAction).toHaveBeenCalledWith(expect.objectContaining({ kind: "plane" })));
-    await waitFor(() => expect(screen.getByTestId("problem-figure")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getAllByTestId("problem-figure").length).toBeGreaterThan(0));
     expect((screen.getByLabelText("그림 데이터") as HTMLTextAreaElement).value).toContain('"plane"');
   });
 
