@@ -10,8 +10,8 @@ export type ParallelTransversalSpec = {
   type: "parallel_transversal";
   /** 평행선 이름, 위→아래. 정확히 2개. */
   parallel: [string, string];
-  /** 횡단선 1~2개. slant: 좌상→우하(right, 기본) 또는 우상→좌하(left). */
-  transversals: { id: string; slant?: "left" | "right" }[];
+  /** 횡단선 1~2개. slant: 좌상→우하(right, 기본) 또는 우상→좌하(left). perpendicular: 평행선에 수직(2026-09-15 — 이때 네 각이 모두 직각, right:true 로 표시). */
+  transversals: { id: string; slant?: "left" | "right"; perpendicular?: boolean }[];
   /** 교점 이름 — 두 선의 교점: 평행선 하나 + 횡단선 하나, 또는(횡단선이 2개일 때) 횡단선 두 개가 만나는 점. */
   points?: { id: string; on: [string, string] }[];
   /**
@@ -104,8 +104,11 @@ export function validateParallelTransversal(rawInput: unknown): { ok: true; spec
   }
   for (const t of s.transversals as Record<string, unknown>[]) {
     if (!t || !isName(t.id)) return { ok: false, error: "transversals[].id 가 필요합니다." };
-    if (t.slant !== undefined && t.slant !== "left" && t.slant !== "right") return { ok: false, error: "transversals[].slant 는 left|right 입니다." };
+    if (t.slant === "vertical" || t.slant === "perpendicular") { t.perpendicular = true; delete t.slant; }
+    if (t.slant !== undefined && t.slant !== "left" && t.slant !== "right") return { ok: false, error: "transversals[].slant 는 left|right 입니다(수직이면 perpendicular:true)." };
+    if (t.perpendicular !== undefined && typeof t.perpendicular !== "boolean") return { ok: false, error: "transversals[].perpendicular 는 true|false 입니다." };
   }
+  if ((s.transversals as Record<string, unknown>[]).filter((t) => t.perpendicular).length === 2) return { ok: false, error: "수직 횡단선이 둘이면 서로 나란해 만나지 않습니다 — 하나만 수직으로 두세요." };
   const lineIds = new Set<string>([...(s.parallel as string[]), ...(s.transversals as { id: string }[]).map((t) => t.id)]);
   if (lineIds.size !== 2 + (s.transversals as unknown[]).length) return { ok: false, error: "선 이름이 중복됩니다." };
   const isPair = (p: unknown): p is [string, string] => Array.isArray(p) && p.length === 2 && p.every(isName);
@@ -168,7 +171,7 @@ export function renderParallelTransversal(spec: ParallelTransversalSpec): { svg:
     const t = spec.transversals.find((tr) => a.at.includes(tr.id))!;
     const idx = spec.transversals.indexOf(t);
     const rightSlant = (t.slant ?? (idx === 0 ? "right" : (spec.transversals[0].slant ?? "right"))) === "right";
-    const half = wedgeHalfOf(a.region as Region, rightSlant);
+    const half = t.perpendicular ? Math.PI / 4 : wedgeHalfOf(a.region as Region, rightSlant);
     const r = labelRadius(a.label, half, a.right);
     const vertical = r * Math.sin(half) + (LABEL_SIZE + 2) / 2; // 라벨 상자의 세로 도달 거리(대략)
     const onTop = a.at.includes(spec.parallel[0]);
@@ -201,7 +204,8 @@ export function renderParallelTransversal(spec: ParallelTransversalSpec): { svg:
       ? (crossing.side === "below") === (i === 0)
       : (t.slant ?? (i === 0 ? "right" : slantMain ? "right" : "left")) === "right";
     const xMid = crossing ? CROSS_X[i] : spec.transversals.length === 1 ? 190 : i === 0 ? 150 : 230;
-    const dx = (LINE_Y[1] - LINE_Y[0]) / 2 / Math.tan(slant);
+    // 수직 횡단선은 곧게 내려간다(2026-09-15) — 네 각이 직각.
+    const dx = t.perpendicular ? 0 : (LINE_Y[1] - LINE_Y[0]) / 2 / Math.tan(slant);
     const top: Pt = [right ? xMid - dx : xMid + dx, LINE_Y[0]];
     const bottom: Pt = [right ? xMid + dx : xMid - dx, LINE_Y[1]];
     const dir: Pt = [(bottom[0] - top[0]) / Math.hypot(bottom[0] - top[0], bottom[1] - top[1]), (bottom[1] - top[1]) / Math.hypot(bottom[0] - top[0], bottom[1] - top[1])];
@@ -218,7 +222,9 @@ export function renderParallelTransversal(spec: ParallelTransversalSpec): { svg:
     transDir.set(t.id, dir);
     // 이름은 선 끝을 **지나서**(선 방향으로) 놓는다 — 선 옆에 붙이면 기울어진 선과 겹친다.
     const nameOff = 12 + labelWidth(t.id) / 2;
-    putLabel(k1[0] + dir[0] * nameOff, k1[1] + dir[1] * nameOff, t.id, "횡단선 이름", true);
+    // 수직 횡단선은 아래로 내리면 각주(Note)와 겹친다 — 위 끝 너머에 놓는다.
+    if (t.perpendicular) putLabel(k0[0] - dir[0] * nameOff, k0[1] - dir[1] * nameOff, t.id, "횡단선 이름", true);
+    else putLabel(k1[0] + dir[0] * nameOff, k1[1] + dir[1] * nameOff, t.id, "횡단선 이름", true);
   });
   // 평행선 이름(오른쪽 끝 바깥)
   LINE_Y.forEach((y, i) => putLabel(W - PAD + 14, y, spec.parallel[i], "평행선 이름", true));
@@ -290,7 +296,7 @@ export function renderParallelTransversal(spec: ParallelTransversalSpec): { svg:
     const mid = (a1 + a2) / 2;
     if (a.right) {
       sheet.rightAngle(c, a1, a2, RIGHT_R);
-      if (Math.abs(a2 - a1 - Math.PI / 2) > 0.02) issues.push({ code: "impossible", message: `교점 (${a.at.join(", ")}) ${a.region} 은 직각이 아닙니다 — 평행선과 횡단선은 이 템플릿에서 ${SLANT_DEG}° 로 만납니다. 수직인 횡단선은 지원하지 않습니다.` });
+      if (Math.abs(a2 - a1 - Math.PI / 2) > 0.02) issues.push({ code: "impossible", message: `교점 (${a.at.join(", ")}) ${a.region} 은 직각이 아닙니다 — 직각이면 그 횡단선을 perpendicular:true 로 두세요(기울어진 횡단선은 ${SLANT_DEG}° 로 만납니다).` });
     } else {
       sheet.arc(c, ARC_R, a1, a2);
     }
@@ -331,7 +337,7 @@ export function renderParallelTransversal(spec: ParallelTransversalSpec): { svg:
 
   const regionKo: Record<string, string> = { NE: "위 오른쪽", NW: "위 왼쪽", SE: "아래 오른쪽", SW: "아래 왼쪽", N: "평행선 쪽(삼각형 안)", S: "바깥쪽", E: "오른쪽", W: "왼쪽" };
   const alt =
-    `평행선 ${spec.parallel[0]}과 ${spec.parallel[1]}을 횡단선 ${spec.transversals.map((t) => t.id).join(", ")}이(가) 가로지른다.` +
+    `평행선 ${spec.parallel[0]}과 ${spec.parallel[1]}을 횡단선 ${spec.transversals.map((t) => t.id + (t.perpendicular ? "(수직)" : "")).join(", ")}이(가) 가로지른다.` +
     (crossing ? ` 두 횡단선은 ${crossing.side === "below" ? `${spec.parallel[1]} 아래` : `${spec.parallel[0]} 위`}에서 만난다.` : "") +
     (spec.points?.length ? ` 교점: ${spec.points.map((p) => `${p.id}(${p.on.join("과 ")})`).join(", ")}.` : "") +
     (spec.angles.length ? ` 각: ${spec.angles.map((a) => `${a.at.join("과 ")}의 교점 ${regionKo[a.region]}은 ${a.right ? "직각" : a.label}`).join(", ")}.` : "");
@@ -365,6 +371,10 @@ export function lintParallelTransversalAgainstText(spec: ParallelTransversalSpec
     const has = Array.from(angleLabels).some((l) => l.replace(/−/g, "-") === lbl);
     if (!has) issues.push({ code: "ref_missing", message: `지문의 각 '${m[1].trim()}°' 가 도형의 각 라벨에 없습니다.` });
   }
+  // 지문이 "perpendicular" 라 하면 수직 횡단선이 데이터에 있어야 한다(반대도 마찬가지).
+  const saysPerp = /\bperpendicular\b/i.test(text);
+  const hasPerp = spec.transversals.some((t) => t.perpendicular);
+  if (saysPerp && !hasPerp) issues.push({ code: "ref_mismatch", message: "지문은 수직(perpendicular)이라 하는데 수직 횡단선(perpendicular:true)이 데이터에 없습니다." });
   // 시험 문제는 각을 라벨·점 이름으로 부른다. "northeast region", "north side of line m" 같은 배치 용어가 지문에 새면 거부.
   if (/\b(north|south|east|west|northeast|northwest|southeast|southwest|quadrant|region)\b/i.test(text)) {
     issues.push({ code: "wording", message: "지문에 방위·사분면 표현(north/south/east/west, region, quadrant)이 있습니다 — 각은 'the angle marked 37°', 'the angle at A' 처럼 라벨·점 이름으로 부릅니다." });

@@ -698,7 +698,26 @@ export async function generateBankProblemsAction(params: {
    *   자료 필수·판정 → 자료 없으면 2차 자료 생성 → 데이터 계약(질문·답안·해설·RW 구조) → 자료 참조·렌더 검증(checkFigure) → 내용 검증(checkContent)
    *   자료 검증에 걸리면 자료를 한 번 더 만들어 재검사하고, 그래도 안 되면 그 결과는 저장하지 않는다.
    */
-  const gateAndSave = async (g: (typeof generated)[number]): Promise<boolean> => {
+  const { regenerateProblem } = await import("./curriculum-doc-actions");
+  /** 게이트에 걸린 결과를 그 사유를 피드백으로 넣어 한 번 다시 만든다(2026-09-15 제품 오너: 관리자에게 넘기지 말고 자동 보완). */
+  const retryWith = async (g: (typeof generated)[number], reason: string): Promise<boolean> => {
+    try {
+      const revised = await regenerateProblem({
+        sectionTitle: params.topic?.trim() || params.skillType, subjectName: subject.name as string, skillType: params.skillType,
+        difficulty: params.difficulty as never, format: params.format as never,
+        current: { ...g, passage: composeProblemText(g.stimulus ?? g.passage, g.question ?? null) },
+        feedback: `검증에 걸렸습니다: ${reason}. 이 사유가 해소되도록 지문·자료·질문·선택지를 서로 맞게 다시 쓰세요. 자료(figure)는 지문이 부르는 이름·값과 정확히 같아야 하고 정답이 드러나면 안 됩니다.`,
+      });
+      return gateAndSave({ ...revised, needsFigure: false }, 1);
+    } catch (e) {
+      console.error("[problem-bank] 재생성 실패:", e instanceof Error ? e.message : e);
+      failures.push(`${(g.question ?? g.passage).slice(0, 40)}… — ${reason} (재생성도 실패)`);
+      return false;
+    }
+  };
+  const gateAndSave = async (g: (typeof generated)[number], depth = 0): Promise<boolean> => {
+    // 실패 시 한 번은 자동 재생성으로 보완하고(depth 0 → 1), 그래도 안 되면 사유와 함께 분리한다.
+    const fail = async (reason: string) => (depth === 0 ? retryWith(g, reason) : (failures.push(`${(g.question ?? g.passage).slice(0, 40)}… — ${reason}`), false));
     const text = composeProblemText(g.stimulus ?? g.passage, g.question ?? null);
     const need = judgeMaterialNeed({ examSystem: params.examSystem ?? null, skillCode: params.skillCode ?? null, text });
     const kind = pickFigureKind(need, text, params.skillCode ?? null, params.figurePolicy);
@@ -717,21 +736,21 @@ export async function generateBankProblemsAction(params: {
     if (g.needsFigure || missingRequired || (g.figure == null && params.figurePolicy?.startsWith("require"))) await makeFigure();
     // 2) 데이터 계약.
     const reject = validateGeneratedProblem({ ...g, stimulus: g.stimulus ?? g.passage, question: g.question ?? null }, params.format, params.skillCode ?? null);
-    if (reject) { failures.push(`${(g.question ?? g.passage).slice(0, 40)}… — ${reject}`); return false; }
-    if (need.level === "required" && materialBlocker(need, g.figure ?? null)) { failures.push(`${(g.question ?? g.passage).slice(0, 40)}… — 자료 필수인데 자료를 만들지 못했습니다.`); return false; }
+    if (reject) return fail(reject);
+    if (need.level === "required" && materialBlocker(need, g.figure ?? null)) return fail("자료 필수인데 자료를 만들지 못했습니다.");
     // 3) 자료 참조·렌더 검증 — 공개 게이트와 같은 검사. 걸리면 자료를 한 번 더 만들어 본다(지문이 템플릿으로 그릴 수 없는 모양이면 여기서 걸러진다).
     let fc = checkFigure(g.figure ?? null, text, g.options ?? null, g.correctIndex ?? null);
     if (!fc.ok && g.figure != null) {
       await makeFigure();
       fc = checkFigure(g.figure ?? null, text, g.options ?? null, g.correctIndex ?? null);
     }
-    if (!fc.ok) { failures.push(`${(g.question ?? g.passage).slice(0, 40)}… — 자료 검증: ${fc.issues[0]?.message ?? "실패"}`); return false; }
+    if (!fc.ok) return fail(`자료 검증: ${fc.issues[0]?.message ?? "실패"}`);
     // 4) 내용 검증(수식 조판·선택지·진술·RW 구조) — 하나라도 남으면 공개가 막히므로 저장하지 않는다.
     const content = checkContent({
       format: params.format, passage: text, options: g.options ?? null, correctIndex: g.correctIndex ?? null, explanation: g.explanation,
       answers: g.answers ?? null, statements: g.statements ?? null, skillCode: params.skillCode ?? null, figure: g.figure ?? null,
     });
-    if (content.length) { failures.push(`${(g.question ?? g.passage).slice(0, 40)}… — 내용 검증: ${content[0].message}`); return false; }
+    if (content.length) return fail(`내용 검증: ${content[0].message}`);
     // 5) 저장.
     const problem = await createBankProblemAction({
       subjectId: params.subjectId,

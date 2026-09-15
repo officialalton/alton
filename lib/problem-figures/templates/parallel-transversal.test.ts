@@ -153,3 +153,27 @@ describe("횡단선끼리의 교점·삼각형(2026-09-15 확장)", () => {
     expect(validateParallelTransversal({ ...below, angles: [{ at: ["k", "j"], region: "NE", label: "x°" }] }).ok).toBe(false);
   });
 });
+
+describe("수직 횡단선·직각 표시(2026-09-15)", () => {
+  const spec = {
+    type: "parallel_transversal", parallel: ["m", "n"], transversals: [{ id: "k", perpendicular: true }, { id: "j" }],
+    points: [{ id: "A", on: ["m", "k"] }, { id: "B", on: ["n", "k"] }, { id: "C", on: ["n", "j"] }],
+    angles: [{ at: ["m", "k"], region: "NE", right: true }, { at: ["n", "j"], region: "NE", label: "x°" }, { at: ["m", "j"], region: "SW", label: "48°" }],
+    notToScale: true,
+  };
+  it("수직 횡단선을 그리고 그 교점의 직각 표시가 통과한다; 지문의 perpendicular 참조도 맞는다", () => {
+    const r = checkFigure(spec, "In the figure, lines m and n are parallel. Line k is perpendicular to line m at point A and meets line n at point B. Line j meets n at point C. The angle marked 48° … What is the value of x?");
+    expect(r.issues).toEqual([]);
+    expect(r.alt).toMatch(/k\(수직\)/);
+  });
+  it("기울어진 횡단선에 직각 표시를 두면 거부하고, 지문이 perpendicular 인데 수직 횡단선이 없으면 불일치", () => {
+    const slanted = { ...spec, transversals: [{ id: "k" }, { id: "j" }] };
+    expect(checkFigure(slanted, "Lines m and n are parallel. What is x?").issues.some((i) => i.code === "impossible")).toBe(true);
+    expect(checkFigure({ ...slanted, angles: [{ at: ["n", "j"], region: "NE", label: "x°" }] }, "Line k is perpendicular to m. What is x?").issues.some((i) => i.code === "ref_mismatch")).toBe(true);
+  });
+  it("slant:'vertical' 옛 표기는 perpendicular 로 읽고, 수직 횡단선 둘은 거부", () => {
+    const v = validateParallelTransversal({ ...spec, transversals: [{ id: "k", slant: "vertical" }, { id: "j" }] });
+    expect(v.ok && v.spec.transversals[0].perpendicular).toBe(true);
+    expect(validateParallelTransversal({ ...spec, transversals: [{ id: "k", perpendicular: true }, { id: "j", perpendicular: true }] }).ok).toBe(false);
+  });
+});
