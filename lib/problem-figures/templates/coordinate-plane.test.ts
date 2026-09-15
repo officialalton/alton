@@ -27,6 +27,15 @@ export const SAMPLES: { name: string; spec: PlaneSpec; passage: string }[] = [
   { name: "부등식 두 개(공통 영역)", spec: P([{ id: "a", kind: "inequality", op: "<=", slope: 1, intercept: 2, label: "y ≤ x + 2" }, { id: "b", kind: "inequality", op: ">", slope: -1, intercept: -1, label: "y > -x - 1" }]), passage: "The system y ≤ x + 2 and y > -x - 1 is graphed in the xy-plane. Which point is a solution to the system?" },
   { name: "조각함수(열린/닫힌 점)", spec: P([{ id: "g", kind: "piecewise", pieces: [{ from: -4, to: 0, slope: 1, intercept: 2, openTo: true }, { from: 0, to: 4, slope: -0.5, intercept: 3 }], label: "g" }]), passage: "The graph of the piecewise function g is shown. What is g(0)?" },
   { name: "유리함수(점근선)", spec: P([{ id: "r", kind: "function", fn: "rational", params: [1, 0, 1, -2], label: "f" }], { x: { min: -6, max: 8 }, y: { min: -6, max: 8 } }), passage: "The graph of f(x) = x / (x − 2) is shown. What is the equation of the vertical asymptote?" },
+  // 2026-09-14 좌표기하·복합 도형
+  { name: "좌표 위 삼각형 넓이", spec: P([{ id: "A", kind: "point", at: [-2, 1], label: "A" }, { id: "B", kind: "point", at: [4, 1], label: "B" }, { id: "C", kind: "point", at: [1, 5], label: "C" }, { id: "T", kind: "polygon", vertices: ["A", "B", "C"], fill: true }]), passage: "Triangle ABC has vertices A(-2, 1), B(4, 1), and C(1, 5). The area of triangle ABC is 12. What is the length of the altitude from C?" },
+  { name: "선분 중점과 길이", spec: P([{ id: "P", kind: "point", at: [-3, -1], label: "P" }, { id: "Q", kind: "point", at: [3, 7], label: "Q" }, { id: "s", kind: "segment", from: "P", to: "Q" }, { id: "M", kind: "midpoint", of: ["P", "Q"], label: "M" }], { x: { min: -6, max: 6 }, y: { min: -4, max: 8 } }), passage: "Segment PQ has endpoints P(-3, -1) and Q(3, 7). The midpoint of PQ is (0, 3) and PQ = 10. What is the slope of PQ?" },
+  { name: "두 직선 교점", spec: P([{ id: "l1", kind: "line", slope: 2, intercept: -1, label: "ℓ" }, { id: "l2", kind: "line", slope: -1, intercept: 5, label: "m" }, { id: "X", kind: "intersection", of: ["l1", "l2"], label: "X" }]), passage: "Lines ℓ and m intersect at point X. The slope of ℓ is 2. What are the coordinates of X?" },
+  { name: "평행이동 상", spec: P([{ id: "A", kind: "point", at: [-4, 1] }, { id: "B", kind: "point", at: [-1, 1] }, { id: "C", kind: "point", at: [-1, 3] }, { id: "T", kind: "polygon", vertices: ["A", "B", "C"] }, { id: "T2", kind: "transform", of: "T", op: { type: "translate", dx: 5, dy: 2 } }]), passage: "Triangle ABC is translated 5 units to the right and 2 units up to form triangle A′B′C′. What are the coordinates of C′?" },
+  { name: "x축 대칭", spec: P([{ id: "A", kind: "point", at: [1, 1] }, { id: "B", kind: "point", at: [4, 1] }, { id: "C", kind: "point", at: [4, 3] }, { id: "D", kind: "point", at: [1, 3] }, { id: "R", kind: "polygon", vertices: ["A", "B", "C", "D"] }, { id: "R2", kind: "transform", of: "R", op: { type: "reflect", over: "x-axis" } }]), passage: "Rectangle ABCD is reflected across the x-axis. What are the coordinates of the image of D?" },
+  { name: "원과 직선(원의 방정식)", spec: P([{ id: "O", kind: "point", at: [2, -1], label: "(2, -1)" }, { id: "c", kind: "circle", center: "O", radius: 3 }, { id: "l", kind: "line", slope: 0, intercept: 2, label: "y = 2", style: "dashed" }], { x: { min: -3, max: 7 }, y: { min: -5, max: 5 } }), passage: "The circle has center (2, -1) and radius 3, and the line y = 2 is tangent to it. What is the equation of the circle?" },
+  { name: "평행·수직 관계", spec: P([{ id: "A", kind: "point", at: [0, 0], label: "A" }, { id: "B", kind: "point", at: [4, 2], label: "B" }, { id: "C", kind: "point", at: [2, 6], label: "C" }, { id: "D", kind: "point", at: [-2, 4], label: "D" }, { id: "Q", kind: "polygon", vertices: ["A", "B", "C", "D"] }]), passage: "Quadrilateral ABCD is shown. AB is parallel to DC and AB is perpendicular to AD. AB = √20. What is the area of ABCD?".replace("√20", "√20") },
+  { name: "확대 변환", spec: P([{ id: "A", kind: "point", at: [1, 1] }, { id: "B", kind: "point", at: [2, 1] }, { id: "C", kind: "point", at: [1, 2] }, { id: "T", kind: "polygon", vertices: ["A", "B", "C"] }, { id: "T2", kind: "transform", of: "T", op: { type: "dilate", k: 2 } }]), passage: "Triangle ABC is dilated by a scale factor of 2 with center at the origin. What is the area of the image?" },
 ];
 
 describe("템플릿 3 — 대표 문제 10개는 검증을 통과한다", () => {
@@ -82,6 +91,24 @@ describe("템플릿 3 — 거부", () => {
     const r = renderPlane(sp);
     expect(r.svg).toContain("fill-opacity");
     expect(r.svg).toContain("stroke-dasharray");
+  });
+  it("좌표기하: 넓이·길이·중점·기울기·평행/수직·변환의 지문 값이 계산과 다르면 거부", () => {
+    const tri = SAMPLES.find((x) => x.name.startsWith("좌표 위 삼각형"))!.spec;
+    expect(lintPlaneAgainstText(tri, "The area of triangle ABC is 15.").some((i) => i.code === "ref_mismatch")).toBe(true);
+    const seg = SAMPLES.find((x) => x.name.startsWith("선분 중점"))!.spec;
+    const m = lintPlaneAgainstText(seg, "The midpoint of PQ is (1, 3) and PQ = 8. The slope of PQ is 2.").map((i) => i.message).join("\n");
+    expect(m).toContain("중점");
+    expect(m).toContain("길이");
+    expect(m).toContain("기울기");
+    const quad = SAMPLES.find((x) => x.name.startsWith("평행·수직"))!.spec;
+    expect(lintPlaneAgainstText(quad, "AB is perpendicular to DC.").some((i) => i.code === "ref_mismatch")).toBe(true);
+    const tr = SAMPLES.find((x) => x.name.startsWith("평행이동"))!.spec;
+    expect(lintPlaneAgainstText(tr, "Triangle ABC is translated 3 units to the right and 2 units up.").some((i) => i.code === "ref_mismatch")).toBe(true);
+    expect(validatePlane(P([{ id: "X", kind: "intersection", of: ["a", "b"] }])).ok).toBe(false);
+    expect(validatePlane(P([{ id: "T2", kind: "transform", of: "nope", op: { type: "translate", dx: 1, dy: 1 } }])).ok).toBe(false);
+    // 평행한 두 직선의 교점은 만들 수 없다.
+    const r = renderPlane(P([{ id: "a", kind: "line", slope: 1, intercept: 0 }, { id: "b", kind: "line", slope: 1, intercept: 2 }, { id: "X", kind: "intersection", of: ["a", "b"], label: "X" }]));
+    expect(r.issues.some((i) => i.code === "impossible")).toBe(true);
   });
   it("선택지의 좌표를 그림에 점으로 찍으면 정답 노출로 거부한다(E2E 실례)", () => {
     const sp = P([{ id: "a", kind: "inequality", op: "<=", slope: 1, intercept: 2 }, { id: "p", kind: "point", at: [1, 1], label: "(1, 1)" }]);
