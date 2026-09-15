@@ -5,6 +5,7 @@ import { createHash } from "node:crypto";
 import { LEGACY_FIGURE_TYPES, validateFigureSpec } from "./spec";
 import { lintParallelTransversalAgainstText, renderParallelTransversal, type FigureIssue } from "./templates/parallel-transversal";
 import { lintTriangleAgainstText, renderTriangle } from "./templates/triangle";
+import { lintPlaneAgainstText, renderPlane } from "./templates/coordinate-plane";
 
 export const RENDERER_VERSION = "std-1";
 
@@ -39,7 +40,7 @@ export function checkFigure(figure: unknown, passage: string): RenderCheck {
   if (LEGACY_FIGURE_TYPES.includes(spec.type)) {
     return {
       ok: false, renderer: RENDERER_VERSION, checkedAt,
-      issues: [{ code: "legacy", message: "좌표형 그림(geometry)은 지원이 끝났습니다 — 재생성 필요. 표준 템플릿(평행선·횡단선 등)으로 다시 만드세요." }],
+      issues: [{ code: "legacy", message: `옛 형식 그림(${spec.type})은 지원이 끝났습니다 — 재생성 필요. 표준 템플릿(평행선·삼각형·좌표평면)으로 다시 만드세요.` }],
     };
   }
   if (spec.type === "image") {
@@ -56,6 +57,10 @@ export function checkFigure(figure: unknown, passage: string): RenderCheck {
     issues.push(...r.issues, ...lintTriangleAgainstText(spec, passage));
     return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
   }
-  // coordinate_plane — 현행 렌더러(템플릿 3 재정의 전). 스키마 검사만.
-  return { ok: true, renderer: RENDERER_VERSION, checkedAt, issues, alt: undefined };
+  if (spec.type === "plane") {
+    const r = renderPlane(spec);
+    issues.push(...r.issues, ...lintPlaneAgainstText(spec, passage));
+    return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
+  }
+  return { ok: false, renderer: RENDERER_VERSION, checkedAt, issues: [{ code: "schema", message: `지원하지 않는 그림 type: ${(spec as { type: string }).type}` }] };
 }

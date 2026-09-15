@@ -60,15 +60,18 @@ import type { ParallelTransversalSpec } from "./templates/parallel-transversal";
 import { validateParallelTransversal } from "./templates/parallel-transversal";
 import type { TriangleSpec } from "./templates/triangle";
 import { validateTriangle } from "./templates/triangle";
+import type { PlaneSpec } from "./templates/coordinate-plane";
+import { validatePlane } from "./templates/coordinate-plane";
 
 /**
  * 2026-09-14 표준 렌더링 엔진: `geometry`(좌표 자유 입력)는 **레거시** — 읽기·표시만 하고 새 저장·공개는 막는다(재생성 필요).
  * 새 도형은 템플릿(`parallel_transversal`, …)으로 관계만 받는다.
  */
-export type FigureSpec = CoordinatePlaneSpec | GeometrySpec | ImageFigureSpec | ParallelTransversalSpec | TriangleSpec;
+export type FigureSpec = CoordinatePlaneSpec | GeometrySpec | ImageFigureSpec | ParallelTransversalSpec | TriangleSpec | PlaneSpec;
 /** 표준 템플릿 — AI 가 낼 수 있는 도형 데이터 type. */
-export const TEMPLATE_FIGURE_TYPES: readonly string[] = ["parallel_transversal", "triangle"];
-export const LEGACY_FIGURE_TYPES: readonly string[] = ["geometry"];
+export const TEMPLATE_FIGURE_TYPES: readonly string[] = ["parallel_transversal", "triangle", "plane"];
+/** 레거시(좌표 자유 입력) — 표시만, 새 공개 불가(2026-09-14 템플릿 3 이후 coordinate_plane 도 레거시). */
+export const LEGACY_FIGURE_TYPES: readonly string[] = ["geometry", "coordinate_plane"];
 
 /** 최소한의 모양 검사 — 렌더러가 던지지 않게, 그리고 AI 출력이 이상하면 초안에 경고를 남기게. */
 export function validateFigureSpec(input: unknown): { ok: true; spec: FigureSpec } | { ok: false; error: string } {
@@ -107,6 +110,7 @@ export function validateFigureSpec(input: unknown): { ok: true; spec: FigureSpec
   }
   if (s.type === "parallel_transversal") return validateParallelTransversal(s);
   if (s.type === "triangle") return validateTriangle(s);
+  if (s.type === "plane") return validatePlane(s);
   if (s.type === "geometry") {
     if (!Array.isArray(s.shapes) || s.shapes.length === 0) return { ok: false, error: "shapes 배열이 없습니다." };
     for (const sh of s.shapes as Record<string, unknown>[]) {

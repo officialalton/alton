@@ -21,9 +21,10 @@ import { listSubjectCatalogAction } from "./subject-actions";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import LearningText from "@/app/session/[id]/LearningText";
 import { PROBLEM_SKILLS, findProblemSkill } from "@/lib/problem-skills";
-import { validateFigureSpec } from "@/lib/problem-figures/spec";
+import { LEGACY_FIGURE_TYPES, validateFigureSpec } from "@/lib/problem-figures/spec";
 import { lintParallelTransversalAgainstText, renderParallelTransversal } from "@/lib/problem-figures/templates/parallel-transversal";
 import { lintTriangleAgainstText, renderTriangle } from "@/lib/problem-figures/templates/triangle";
+import { lintPlaneAgainstText, renderPlane } from "@/lib/problem-figures/templates/coordinate-plane";
 import type { AdminSubject, SubjectKeyword } from "./subject-data";
 
 // P2 3차·8차 — 관리자 문제은행. 교재와 독립된 진입점이다.
@@ -928,7 +929,7 @@ function DraftEditor({
   const figureDirty = canonical(figureParsed.spec ?? null) !== canonical(source?.figure ?? null);
   const [passage, setPassage] = useState(source?.passage ?? "");
   // 표준 렌더링 검증(클라이언트에서도 같은 규칙으로 즉시) — 저장하면 서버가 같은 검사를 해 render_check 에 남긴다.
-  const figureIsLegacy = figureParsed.spec != null && (figureParsed.spec as { type?: string }).type === "geometry";
+  const figureIsLegacy = figureParsed.spec != null && LEGACY_FIGURE_TYPES.includes((figureParsed.spec as { type?: string }).type ?? "");
   const figureIsImage = figureParsed.spec != null && (figureParsed.spec as { type?: string }).type === "image";
   const [imageAlt, setImageAlt] = useState<string>(figureIsImage ? String((figureParsed.spec as { alt?: string }).alt ?? "") : "");
   const figureForSave: unknown | null = figureIsImage && figureParsed.spec ? { ...(figureParsed.spec as object), alt: imageAlt.trim() } : figureParsed.spec;
@@ -943,6 +944,10 @@ function DraftEditor({
       const r = renderTriangle(spec as never);
       return [...r.issues, ...lintTriangleAgainstText(spec as never, passage)];
     }
+    if (spec.type === "plane") {
+      const r = renderPlane(spec as never);
+      return [...r.issues, ...lintPlaneAgainstText(spec as never, passage)];
+    }
     if (spec.type === "image" && !imageAlt.trim()) return [{ code: "alt_required", message: "올린 그림에는 대체 설명이 필요합니다." }];
     return [];
   })();
@@ -950,6 +955,7 @@ function DraftEditor({
     const t = (figureForSave as { type?: string } | null)?.type;
     if (t === "parallel_transversal") return renderParallelTransversal(figureForSave as never).alt;
     if (t === "triangle") return renderTriangle(figureForSave as never).alt;
+    if (t === "plane") return renderPlane(figureForSave as never).alt;
     return figureIsImage ? imageAlt : null;
   })();
   const [figureNotice, setFigureNotice] = useState<string | null>(null);
@@ -1094,7 +1100,7 @@ function DraftEditor({
         )}
         {figureIsLegacy && (
           <p className="text-[12px] font-bold text-red mb-1.5" data-testid="figure-legacy">
-            재생성 필요 — 좌표형 그림(geometry)은 지원이 끝나 공개할 수 없습니다. 아래 &apos;AI로 도형 데이터 만들기(평행선·횡단선)&apos;로 다시 만들거나 그림 파일을 올리세요.
+            재생성 필요 — 옛 형식 그림(좌표 자유 입력)은 지원이 끝나 공개할 수 없습니다. 아래 &apos;AI로 … 데이터 만들기&apos;로 표준 템플릿으로 다시 만들거나 그림 파일을 올리세요.
           </p>
         )}
         {figureIssues.length > 0 && !figureIsLegacy && (
@@ -1121,7 +1127,7 @@ function DraftEditor({
         )}
 
         <div className="flex flex-wrap items-center gap-2 mb-1.5">
-          {(["parallel_transversal", "triangle", "coordinate_plane"] as const).map((kind) => (
+          {(["parallel_transversal", "triangle", "plane"] as const).map((kind) => (
             <button
               key={kind}
               type="button"
@@ -1140,7 +1146,7 @@ function DraftEditor({
               }}
               className="text-[12px] font-bold px-2.5 py-1 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
             >
-              {figureBusy ? "만드는 중…" : kind === "coordinate_plane" ? "AI로 좌표평면 그림 만들기" : kind === "triangle" ? "AI로 도형 데이터 만들기(삼각형)" : "AI로 도형 데이터 만들기(평행선·횡단선)"}
+              {figureBusy ? "만드는 중…" : kind === "plane" ? "AI로 좌표평면 데이터 만들기" : kind === "triangle" ? "AI로 도형 데이터 만들기(삼각형)" : "AI로 도형 데이터 만들기(평행선·횡단선)"}
             </button>
           ))}
           <label className="inline-flex items-center gap-2 text-[12px] text-ink">

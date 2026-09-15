@@ -19,23 +19,15 @@ export type ParallelTransversalSpec = {
   notToScale?: boolean;
 };
 
-export type FigureIssue = { code: string; message: string };
+import { ARC_R, dedupe, LABEL_SIZE, labelWidth, RIGHT_R, Sheet, type FigureIssue, type Pt } from "./_layout";
+export type { FigureIssue } from "./_layout";
 
-const FONT = "Georgia, 'Times New Roman', serif";
 const W = 360;
 const PAD = 36;
 const TOP_Y = 78;
 const MIN_GAP = 94; // 평행선 기본 간격 — 사이에 놓이는 라벨이 크면 늘린다(규칙, 보정 아님)
 const SLANT_DEG = 55;
-const LABEL_SIZE = 15;
-const ARC_R = 15;
-const RIGHT_R = 11;
 const LABEL_R = 30;
-
-type Pt = [number, number];
-const f = (n: number) => (Math.round(n * 100) / 100).toString();
-// 하이픈은 수식의 빼기가 아니다 — "(5x - 25)°" 처럼 오면 빼기 기호(−)로 조판한다.
-const esc = (t: string) => t.replace(/ - /g, " − ").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c] as string);
 
 export function validateParallelTransversal(input: unknown): { ok: true; spec: ParallelTransversalSpec } | { ok: false; error: string } {
   if (!input || typeof input !== "object") return { ok: false, error: "그림 데이터가 객체가 아닙니다." };
@@ -79,70 +71,11 @@ export function validateParallelTransversal(input: unknown): { ok: true; spec: P
   return { ok: true, spec: s as unknown as ParallelTransversalSpec };
 }
 
-type Placed = { kind: "label"; text: string; x: number; y: number; w: number; h: number } | { kind: "arc"; c: Pt; r: number; a1: number; a2: number };
-
-/** 라벨 폭 추정(세리프 15px 기준). */
-function labelWidth(text: string, size = LABEL_SIZE): number {
-  let w = 0;
-  for (const ch of text) w += /[°'"|.,]/.test(ch) ? 0.35 : /[A-Z]/.test(ch) ? 0.68 : /[()]/.test(ch) ? 0.4 : 0.55;
-  return w * size + 6;
-}
-function box(x: number, y: number, w: number, h: number) {
-  return { x1: x - w / 2, y1: y - h / 2, x2: x + w / 2, y2: y + h / 2 };
-}
-function boxesOverlap(a: ReturnType<typeof box>, b: ReturnType<typeof box>, gap = 2) {
-  return a.x1 < b.x2 + gap && b.x1 < a.x2 + gap && a.y1 < b.y2 + gap && b.y1 < a.y2 + gap;
-}
-function segDist(p: Pt, a: Pt, b: Pt): number {
-  const vx = b[0] - a[0], vy = b[1] - a[1];
-  const t = Math.max(0, Math.min(1, ((p[0] - a[0]) * vx + (p[1] - a[1]) * vy) / (vx * vx + vy * vy)));
-  return Math.hypot(p[0] - (a[0] + t * vx), p[1] - (a[1] + t * vy));
-}
-function boxHitsSegment(b: ReturnType<typeof box>, a: Pt, c: Pt, pad = 3): boolean {
-  const cx = (b.x1 + b.x2) / 2, cy = (b.y1 + b.y2) / 2;
-  const half = Math.min(b.x2 - b.x1, b.y2 - b.y1) / 2;
-  // 상자 중심에서 선분까지 거리가 짧은 반지름보다 작으면 겹침(근사). 모서리도 본다.
-  if (segDist([cx, cy], a, c) < half + pad) return true;
-  const corners: Pt[] = [[b.x1, b.y1], [b.x2, b.y1], [b.x1, b.y2], [b.x2, b.y2]];
-  return corners.some((p) => segDist(p, a, c) < pad);
-}
-
 export function renderParallelTransversal(spec: ParallelTransversalSpec): { svg: string; alt: string; issues: FigureIssue[] } {
-  const issues: FigureIssue[] = [];
-  const out: string[] = [];
-  const placed: Placed[] = [];
-  const heightRef = { value: 250 };
-  const segments: [Pt, Pt][] = [];
-  const text = (x: number, y: number, t: string, o: { size?: number; italic?: boolean; anchor?: "start" | "middle" | "end" } = {}) =>
-    `<text x="${f(x)}" y="${f(y)}" font-family="${FONT}" font-size="${o.size ?? LABEL_SIZE}" font-style="${o.italic ? "italic" : "normal"}" text-anchor="${o.anchor ?? "middle"}" dominant-baseline="middle" fill="#111" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round">${esc(t)}</text>`;
-  const line = (a: Pt, b: Pt, w = 2) => {
-    segments.push([a, b]);
-    return `<line x1="${f(a[0])}" y1="${f(a[1])}" x2="${f(b[0])}" y2="${f(b[1])}" stroke="#111" stroke-width="${w}" stroke-linecap="round"/>`;
-  };
-  const arcPath = (c: Pt, r: number, a1: number, a2: number) => {
-    const p = (a: number): Pt => [c[0] + r * Math.cos(a), c[1] - r * Math.sin(a)];
-    const [x1, y1] = p(a1), [x2, y2] = p(a2);
-    const large = Math.abs(a2 - a1) > Math.PI ? 1 : 0;
-    return `<path d="M ${f(x1)} ${f(y1)} A ${r} ${r} 0 ${large} 0 ${f(x2)} ${f(y2)}" fill="none" stroke="#111" stroke-width="1.6"/>`;
-  };
-  /** 라벨을 놓되 충돌하면 문제로 기록한다(자동 보정 없음). */
-  const putLabel = (x: number, y: number, t: string, what: string, italic = false) => {
-    const w = labelWidth(t), h = LABEL_SIZE + 2;
-    const b = box(x, y, w, h);
-    if (b.x1 < 4 || b.y1 < 4 || b.x2 > W - 4 || b.y2 > heightRef.value - 4) issues.push({ code: "clipped", message: `${what} '${t}' 가 그림 밖으로 나갑니다.` });
-    for (const p of placed) {
-      if (p.kind === "label" && boxesOverlap(b, box(p.x, p.y, p.w, p.h))) issues.push({ code: "label_collision", message: `${what} '${t}' 가 '${p.text}' 와 겹칩니다.` });
-      if (p.kind === "arc") {
-        // 호는 자기 사분면(부채꼴)만 차지한다 — 그 안에 있고 가까울 때만 겹침.
-        const ang = ((Math.atan2(-(y - p.c[1]), x - p.c[0]) % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
-        const inWedge = (ang >= p.a1 && ang <= p.a2) || (ang + 2 * Math.PI >= p.a1 && ang + 2 * Math.PI <= p.a2);
-        if (inWedge && Math.hypot(x - p.c[0], y - p.c[1]) < p.r + Math.hypot(w, h) / 2) issues.push({ code: "label_collision", message: `${what} '${t}' 가 각 표시와 겹칩니다.` });
-      }
-    }
-    for (const [a, c] of segments) if (boxHitsSegment(b, a, c)) issues.push({ code: "label_collision", message: `${what} '${t}' 가 선과 겹칩니다.` });
-    placed.push({ kind: "label", text: t, x, y, w, h });
-    out.push(text(x, y, t, { italic }));
-  };
+  const sheet = new Sheet(W, 250);
+  const issues = sheet.issues;
+  const line = (a: Pt, b: Pt) => sheet.line(a, b);
+  const putLabel = (x: number, y: number, t: string, what: string, italic = false) => sheet.label(x, y, t, what, { italic });
 
   // ---- 배치 계산: 라벨이 필요한 반지름과 두 평행선 사이 간격(사이에 놓이는 라벨 높이에 맞춰 늘린다)
   const slant = (SLANT_DEG * Math.PI) / 180;
@@ -172,11 +105,11 @@ export function renderParallelTransversal(spec: ParallelTransversalSpec): { svg:
   const gap = Math.max(MIN_GAP, Math.ceil(innerTop + innerBottom + 12));
   const LINE_Y: [number, number] = [TOP_Y, TOP_Y + gap];
   const H = LINE_Y[1] + 78;
-  heightRef.value = H;
+  sheet.height = H;
 
   // ---- 평행선
   const slantMain = (spec.transversals[0].slant ?? "right") === "right";
-  LINE_Y.forEach((y) => out.push(line([PAD, y], [W - PAD, y])));
+  LINE_Y.forEach((y) => line([PAD, y], [W - PAD, y]));
   // ---- 횡단선(1~2) — 두 번째는 반대 기울기·중심 오프셋
   const inter = new Map<string, Pt>(); // key `${parallel}|${transversal}`
   const transDir = new Map<string, Pt>(); // 아래쪽으로 향하는 단위 방향
@@ -191,7 +124,7 @@ export function renderParallelTransversal(spec: ParallelTransversalSpec): { svg:
     const ext = 46;
     const k0: Pt = [top[0] - dir[0] * ext, top[1] - dir[1] * ext];
     const k1: Pt = [bottom[0] + dir[0] * ext, bottom[1] + dir[1] * ext];
-    out.push(line(k0, k1));
+    line(k0, k1);
     inter.set(`${spec.parallel[0]}|${t.id}`, top);
     inter.set(`${spec.parallel[1]}|${t.id}`, bottom);
     transDir.set(t.id, dir);
@@ -235,15 +168,10 @@ export function renderParallelTransversal(spec: ParallelTransversalSpec): { svg:
     if (a2 < a1) a2 += 2 * Math.PI;
     const mid = (a1 + a2) / 2;
     if (a.right) {
-      const r = RIGHT_R;
-      const p1: Pt = [c[0] + r * Math.cos(a1), c[1] - r * Math.sin(a1)];
-      const p2: Pt = [c[0] + r * Math.cos(a2), c[1] - r * Math.sin(a2)];
-      const pm: Pt = [c[0] + r * Math.SQRT2 * Math.cos(mid), c[1] - r * Math.SQRT2 * Math.sin(mid)];
-      out.push(`<polyline points="${f(p1[0])},${f(p1[1])} ${f(pm[0])},${f(pm[1])} ${f(p2[0])},${f(p2[1])}" fill="none" stroke="#111" stroke-width="1.6"/>`);
+      sheet.rightAngle(c, a1, a2, RIGHT_R);
       if (Math.abs(a2 - a1 - Math.PI / 2) > 0.02) issues.push({ code: "impossible", message: `교점 (${a.at.join(", ")}) ${a.region} 은 직각이 아닙니다 — 평행선과 횡단선은 이 템플릿에서 ${SLANT_DEG}° 로 만납니다. 수직인 횡단선은 지원하지 않습니다.` });
     } else {
-      out.push(arcPath(c, ARC_R, a1, a2));
-      placed.push({ kind: "arc", c, r: ARC_R, a1, a2 });
+      sheet.arc(c, ARC_R, a1, a2);
     }
     if (a.label && a.label.trim()) {
       // 배치 규칙: 상자(반대각선)가 두 반직선과 자기 호를 모두 벗어나는 최소 반지름. 좁은 각(55°)일수록 멀리.
@@ -260,7 +188,7 @@ export function renderParallelTransversal(spec: ParallelTransversalSpec): { svg:
     pointNames.add(p.id);
     const { key, t } = keyOf(p.on);
     const c = inter.get(key)!;
-    out.push(`<circle cx="${f(c[0])}" cy="${f(c[1])}" r="2.8" fill="#111"/>`);
+    sheet.dot(c);
     const used = new Set(spec.angles.filter((a) => keyOf(a.at).key === key).map((a) => a.region));
     const order: Region[] = ["NW", "NE", "SW", "SE"];
     const free = order.find((r) => !used.has(r)) ?? "NW";
@@ -277,7 +205,7 @@ export function renderParallelTransversal(spec: ParallelTransversalSpec): { svg:
   const dup = labels.filter((l, i) => labels.indexOf(l) !== i);
   for (const d of new Set(dup)) issues.push({ code: "duplicate_label", message: `이름 '${d}' 가 선과 점에 중복으로 쓰였습니다.` });
 
-  if (spec.notToScale) out.push(text(24, H - 14, "Note: Figure not drawn to scale.", { size: 12.5, italic: true, anchor: "start" }));
+  if (spec.notToScale) sheet.note("Note: Figure not drawn to scale.");
 
   const regionKo: Record<Region, string> = { NE: "위 오른쪽", NW: "위 왼쪽", SE: "아래 오른쪽", SW: "아래 왼쪽" };
   const alt =
@@ -285,11 +213,7 @@ export function renderParallelTransversal(spec: ParallelTransversalSpec): { svg:
     (spec.points?.length ? ` 교점: ${spec.points.map((p) => `${p.id}(${p.on.join("과 ")})`).join(", ")}.` : "") +
     (spec.angles.length ? ` 각: ${spec.angles.map((a) => `${a.at.join("과 ")}의 교점 ${regionKo[a.region]}은 ${a.right ? "직각" : a.label}`).join(", ")}.` : "");
 
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${esc(alt)}" style="max-width:100%;height:auto"><title>${esc(alt)}</title>${out.join("")}</svg>`;
-  // 같은 문제를 여러 번 적지 않는다.
-  const seen = new Set<string>();
-  const unique = issues.filter((i) => (seen.has(i.message) ? false : (seen.add(i.message), true)));
-  return { svg, alt, issues: unique };
+  return { svg: sheet.svg(alt), alt, issues: sheet.uniqueIssues() };
 }
 
 /**
@@ -325,6 +249,5 @@ export function lintParallelTransversalAgainstText(spec: ParallelTransversalSpec
   for (const m of text.matchAll(/∠\s*([A-Z]{1,3})/g)) {
     for (const ch of m[1]) if (!pointIds.has(ch)) issues.push({ code: "ref_missing", message: `지문의 ∠${m[1]} 의 점 '${ch}' 가 도형 데이터에 없습니다.` });
   }
-  const seen = new Set<string>();
-  return issues.filter((i) => (seen.has(i.message) ? false : (seen.add(i.message), true)));
+  return dedupe(issues);
 }

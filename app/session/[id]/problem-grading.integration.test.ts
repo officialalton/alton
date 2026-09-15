@@ -459,6 +459,10 @@ describe("표준 렌더링 검증 공개 게이트 (20261365) — 검증 통과 
     psql(`select set_problem_render_check('${legacy}', '{"ok":true,"renderer":"std-1","issues":[]}'::jsonb);`);
     psql(`select mark_problem_figure_checked('${legacy}', true);`);
     expect(fails(() => psql(`select confirm_and_publish_problem_version('${legacy}', '${ADMIN_ID}');`))).toContain("재생성 필요");
+    const legacyPlane = draftWithFigure(`'{"type":"coordinate_plane","xRange":[-2,8],"yRange":[-2,8],"items":[{"kind":"line","slope":1,"intercept":0}]}'`);
+    psql(`select set_problem_render_check('${legacyPlane}', '{"ok":true,"renderer":"std-1","issues":[]}'::jsonb);`);
+    psql(`select mark_problem_figure_checked('${legacyPlane}', true);`);
+    expect(fails(() => psql(`select confirm_and_publish_problem_version('${legacyPlane}', '${ADMIN_ID}');`))).toContain("재생성 필요");
     const img = draftWithFigure(`'{"type":"image","bucket":"problem-assets","path":"p/a.png"}'`);
     psql(`select set_problem_render_check('${img}', '{"ok":true,"renderer":"std-1","issues":[]}'::jsonb);`);
     psql(`select mark_problem_figure_checked('${img}', true);`);
@@ -601,14 +605,14 @@ describe("figure — 그림이 있는 초안은 확인해야 공개된다", () =
     const id = psql(
       `insert into problems (format, passage, subject_id, status, created_by) values ('mc', '그래프', '${SUBJECT_ID}', 'draft', '${TEACHER_ID}') returning id;`
     );
-    const fig = `{"type":"coordinate_plane","xRange":[-2,8],"yRange":[-2,8],"items":[{"kind":"line","slope":1,"intercept":0}]}`;
+    const fig = `{"type":"plane","axes":{"x":{"min":-2,"max":8},"y":{"min":-2,"max":8}},"objects":[{"id":"l","kind":"line","slope":1,"intercept":0}]}`;
     const v = psql(`select save_problem_draft_version('${id}', '그래프', '["a","b","c","d"]'::jsonb, 1, '해설', 'medium', '${ADMIN_ID}', null, '${fig}'::jsonb, false);`);
     // 2026-09-14 표준 렌더링 검증(20261365): 검증 기록이 먼저다. 그 다음 미리보기 확인.
     psql(`select set_problem_render_check('${v}', '{"ok":true,"renderer":"std-1","issues":[]}'::jsonb);`);
     expect(fails(() => psql(`select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`))).toContain("그림을 확인해야");
     psql(`select mark_problem_figure_checked('${v}', true);`);
     // 그림 데이터를 바꾸면 확인이 풀리고, 검증 해시도 어긋난다.
-    const fig2 = `{"type":"coordinate_plane","xRange":[-2,8],"yRange":[-2,8],"items":[{"kind":"line","slope":2,"intercept":1}]}`;
+    const fig2 = `{"type":"plane","axes":{"x":{"min":-2,"max":8},"y":{"min":-2,"max":8}},"objects":[{"id":"l","kind":"line","slope":2,"intercept":1}]}`;
     psql(`select save_problem_draft_version('${id}', '그래프', '["a","b","c","d"]'::jsonb, 1, '해설', 'medium', '${ADMIN_ID}', null, '${fig2}'::jsonb, true);`);
     expect(psql(`select figure_checked from problem_versions where id = '${v}';`)).toBe("f");
     psql(`select mark_problem_figure_checked('${v}', true);`);

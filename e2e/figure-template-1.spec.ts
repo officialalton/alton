@@ -173,3 +173,57 @@ test("템플릿 2: 지문(직각삼각형) → AI 관계 데이터 → 검증 �
   expect(box && box.x >= 0 && box.x + box.width <= 375).toBeTruthy();
   await page.screenshot({ path: `${OUT}/06-t2-student-mobile.png`, fullPage: true });
 });
+
+// ------------------------------------------------------------ 템플릿 3 — 좌표평면(객체 id)
+test("템플릿 3: 지문(직선과 점) → AI 객체 데이터 → 검증 → 표준 렌더 → 공개 → 학생 화면", async ({ page }, testInfo) => {
+  test.skip(!process.env.ANTHROPIC_API_KEY, "ANTHROPIC_API_KEY 없음 — 실제 모델 호출이 필요한 검증");
+  const passage = `The graph of line ℓ, y = 2x − 3, is shown in the xy-plane. Point P (2, 1) lies on line ℓ. What is the y-coordinate of the y-intercept of line ℓ? [E2E T3 ${Date.now()}]`;
+  const problemId = psql(
+    `insert into problems (format, passage, subject_id, status, created_by, skill_type) values ('mc', '${passage.replace(/'/g, "''")}', '${SUBJECT_ID}', 'draft', 'aaaaaaaa-0000-0000-0000-000000000001', 'Algebra') returning id;`
+  );
+  psql(`update problem_versions set options = '["-3","-1.5","2","3"]'::jsonb, correct_index = 0, explanation = 'At x = 0, y = −3.' where problem_id = '${problemId}' and version_no = 1;`);
+
+  await loginAs(page, ACCOUNTS.admin);
+  await page.goto("/admin?tab=problem-bank");
+  await page.getByLabel("새 문제 과목").selectOption(SUBJECT_ID);
+  const head = passage.slice(0, 60);
+  await expect.poll(async () => (await rowTitles(page)).some((t) => t.startsWith(head)), { timeout: 30_000 }).toBe(true);
+  await page.getByTestId("bank-row-title").filter({ hasText: head }).first().click();
+  await expect(page.getByLabel("지문")).toHaveValue(passage);
+
+  await page.getByRole("button", { name: "AI로 좌표평면 데이터 만들기" }).click();
+  await expect(page.getByTestId("figure-preview")).toBeVisible({ timeout: 120_000 });
+  await page.getByTestId("figure-section").screenshot({ path: `${OUT}/07-t3-admin-preview.png` });
+  const issues = page.getByTestId("figure-issues");
+  if ((await issues.count()) > 0) {
+    testInfo.annotations.push({ type: "blocked-by-validation", description: await issues.innerText() });
+    await page.getByRole("button", { name: "초안 저장" }).click();
+    await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible();
+    await expect(page.getByLabel("그림 확인함")).toBeDisabled();
+    return;
+  }
+  await expect(page.getByText(/표준 렌더링 검증 통과/)).toBeVisible();
+  testInfo.annotations.push({ type: "figure", description: await page.getByLabel("그림 데이터").inputValue() });
+  await page.getByRole("button", { name: "초안 저장" }).click();
+  await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible();
+  const check = page.getByLabel("그림 확인함");
+  await expect(check).toBeEnabled();
+  await check.check();
+  await expect(page.getByText(/미리보기로 확인했다고 표시했습니다/)).toBeVisible();
+  await page.getByRole("button", { name: "공개하기" }).click();
+  await expect(page.getByText(/공개했습니다|공개됐습니다|공개되었습니다/)).toBeVisible({ timeout: 20_000 });
+  expect(psql(`select v.status || '|' || (v.figure->>'type') || '|' || (v.render_check->>'ok') from problem_versions v where v.problem_id = '${problemId}' order by v.version_no desc limit 1;`)).toBe("published|plane|true");
+
+  const sessionId = startedSessionWith(problemId);
+  await page.context().clearCookies();
+  await loginAs(page, ACCOUNTS.student);
+  await page.goto(`/session/${sessionId}?tab=problems`);
+  await expect(page.getByTestId("problem-figure")).toBeVisible({ timeout: 30_000 });
+  await page.getByTestId("problem-sheet").screenshot({ path: `${OUT}/08-t3-student-desktop.png` });
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.reload();
+  await expect(page.getByTestId("problem-figure")).toBeVisible({ timeout: 30_000 });
+  const box = await page.getByTestId("problem-figure").locator("svg").boundingBox();
+  expect(box && box.x >= 0 && box.x + box.width <= 375).toBeTruthy();
+  await page.screenshot({ path: `${OUT}/09-t3-student-mobile.png`, fullPage: true });
+});

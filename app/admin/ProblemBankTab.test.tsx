@@ -32,7 +32,7 @@ const publishDraftAction = vi.fn();
 const markFigureCheckedAction = vi.fn(async (..._a: unknown[]) => ({ ok: true }));
 const generateFigureForProblemAction = vi.fn(async (..._a: unknown[]) => ({
   ok: true,
-  value: { type: "coordinate_plane", xRange: [-2, 8], yRange: [-2, 8], items: [{ kind: "points", points: [[1, 3]] }] },
+  value: { type: "plane", axes: { x: { min: -2, max: 8 }, y: { min: -2, max: 8 } }, objects: [{ id: "A", kind: "point", at: [1, 3], label: "A" }] },
 }));
 const uploadProblemImageAction = vi.fn(async (..._a: unknown[]) => ({ ok: true, value: { type: "image", bucket: "problem-assets", path: "p1/abc.png", alt: "fig" } }));
 const setProblemArchivedAction = vi.fn();
@@ -471,7 +471,7 @@ describe("보관은 삭제가 아니다", () => {
   it("그림 데이터를 적으면 미리보기가 그려지고, 틀리면 사유가 보인다(2026-09-14 ③)", async () => {
     await openFirstProblem();
     const box = screen.getByLabelText("그림 데이터");
-    fireEvent.change(box, { target: { value: '{"type":"coordinate_plane","xRange":[-2,8],"yRange":[-2,8],"items":[{"kind":"points","points":[[1,3]],"labels":["A"]}]}' } });
+    fireEvent.change(box, { target: { value: '{"type":"plane","axes":{"x":{"min":-2,"max":8},"y":{"min":-2,"max":8}},"objects":[{"id":"A","kind":"point","at":[1,3],"label":"A"}]}' } });
     expect(screen.getByTestId("problem-figure")).toBeInTheDocument();
     expect(screen.getByLabelText("그림 확인함")).toBeDisabled(); // 저장 전엔 확인 못 한다
     fireEvent.change(box, { target: { value: '{"type":"geometry","shapes":[]}' } });
@@ -491,12 +491,12 @@ describe("보관은 삭제가 아니다", () => {
     );
   });
 
-  it("초안에서 'AI로 좌표평면 그림 만들기'를 누르면 그림 칸이 채워지고 미리보기가 뜬다", async () => {
+  it("초안에서 'AI로 좌표평면 데이터 만들기'를 누르면 그림 칸이 채워지고 미리보기가 뜬다", async () => {
     await openFirstProblem();
-    fireEvent.click(screen.getByRole("button", { name: "AI로 좌표평면 그림 만들기" }));
-    await waitFor(() => expect(generateFigureForProblemAction).toHaveBeenCalledWith(expect.objectContaining({ kind: "coordinate_plane" })));
+    fireEvent.click(screen.getByRole("button", { name: "AI로 좌표평면 데이터 만들기" }));
+    await waitFor(() => expect(generateFigureForProblemAction).toHaveBeenCalledWith(expect.objectContaining({ kind: "plane" })));
     await waitFor(() => expect(screen.getByTestId("problem-figure")).toBeInTheDocument());
-    expect((screen.getByLabelText("그림 데이터") as HTMLTextAreaElement).value).toContain("coordinate_plane");
+    expect((screen.getByLabelText("그림 데이터") as HTMLTextAreaElement).value).toContain('"plane"');
   });
 
   it("지문에 표·수식이 있으면 편집 칸 아래에 학생 화면과 같은 미리보기(표 렌더)가 붙는다", async () => {

@@ -53,9 +53,9 @@ export class Sheet {
   private readonly segments: [Pt, Pt][] = [];
   constructor(public width: number, public height: number) {}
 
-  text(x: number, y: number, t: string, o: { size?: number; italic?: boolean; anchor?: "start" | "middle" | "end" } = {}) {
+  text(x: number, y: number, t: string, o: { size?: number; italic?: boolean; anchor?: "start" | "middle" | "end"; color?: string } = {}) {
     this.out.push(
-      `<text x="${f(x)}" y="${f(y)}" font-family="${FONT}" font-size="${o.size ?? LABEL_SIZE}" font-style="${o.italic ? "italic" : "normal"}" text-anchor="${o.anchor ?? "middle"}" dominant-baseline="middle" fill="#111" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round">${esc(t)}</text>`
+      `<text x="${f(x)}" y="${f(y)}" font-family="${FONT}" font-size="${o.size ?? LABEL_SIZE}" font-style="${o.italic ? "italic" : "normal"}" text-anchor="${o.anchor ?? "middle"}" dominant-baseline="middle" fill="${o.color ?? "#111"}" stroke="#fff" stroke-width="4" paint-order="stroke" stroke-linejoin="round">${esc(t)}</text>`
     );
   }
   line(a: Pt, b: Pt, o: { w?: number; dashed?: boolean } = {}) {
@@ -92,11 +92,39 @@ export class Sheet {
       this.out.push(`<line x1="${f(cx - uy * 5)}" y1="${f(cy + ux * 5)}" x2="${f(cx + uy * 5)}" y2="${f(cy - ux * 5)}" stroke="#111" stroke-width="1.6"/>`);
     }
   }
+  /** 원시 SVG 조각(격자·축 등 — 충돌 검사 대상이 아닌 배경). */
+  raw(svg: string) {
+    this.out.push(svg);
+  }
+  /** 곡선 — 표본점을 잇는다. 각 조각을 선분으로 등록해 라벨 충돌을 본다. */
+  polyline(points: Pt[], o: { w?: number; dashed?: boolean; color?: string } = {}) {
+    if (points.length < 2) return;
+    for (let i = 1; i < points.length; i++) this.segments.push([points[i - 1], points[i]]);
+    this.out.push(
+      `<polyline points="${points.map((p) => `${f(p[0])},${f(p[1])}`).join(" ")}" fill="none" stroke="${o.color ?? "#111"}" stroke-width="${o.w ?? LINE_W}" stroke-linejoin="round" stroke-linecap="round"${o.dashed ? ' stroke-dasharray="6 4"' : ""}/>`
+    );
+  }
+  /** 선분을 충돌 검사 대상으로만 등록(그리지 않음). */
+  registerSegment(a: Pt, b: Pt) {
+    this.segments.push([a, b]);
+  }
+  /** 라벨 후보 자리 중 겹치지 않는 첫 자리를 고른다 — 규칙(후보 순서)은 호출자가 정한다. 없으면 null. */
+  firstFree(cands: Pt[], t: string, size = LABEL_SIZE): Pt | null {
+    const w = labelWidth(t, size), h = size + 2;
+    for (const [x, y] of cands) {
+      const b = box(x, y, w, h);
+      if (b.x1 < 4 || b.y1 < 4 || b.x2 > this.width - 4 || b.y2 > this.height - 4) continue;
+      if (this.placed.some((p) => p.kind === "label" && overlap(b, box(p.x, p.y, p.w, p.h)))) continue;
+      if (this.segments.some(([a, c]) => boxHitsSegment(b, a, c))) continue;
+      return [x, y];
+    }
+    return null;
+  }
   dot(c: Pt) {
     this.out.push(`<circle cx="${f(c[0])}" cy="${f(c[1])}" r="2.8" fill="#111"/>`);
   }
   /** 라벨을 놓되 충돌·잘림은 문제로 기록한다. */
-  label(x: number, y: number, t: string, what: string, o: { italic?: boolean; size?: number } = {}) {
+  label(x: number, y: number, t: string, what: string, o: { italic?: boolean; size?: number; color?: string } = {}) {
     const size = o.size ?? LABEL_SIZE;
     const w = labelWidth(t, size), h = size + 2;
     const b = box(x, y, w, h);
@@ -111,7 +139,7 @@ export class Sheet {
     }
     for (const [a, c] of this.segments) if (boxHitsSegment(b, a, c)) this.issues.push({ code: "label_collision", message: `${what} '${t}' 가 선과 겹칩니다.` });
     this.placed.push({ kind: "label", text: t, x, y, w, h });
-    this.text(x, y, t, { italic: o.italic, size });
+    this.text(x, y, t, { italic: o.italic, size, color: o.color });
   }
   note(text: string) {
     this.text(24, this.height - 14, text, { size: 12.5, italic: true, anchor: "start" });
