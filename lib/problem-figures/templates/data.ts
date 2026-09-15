@@ -5,7 +5,7 @@
 
 import { dedupe, esc, f, FONT, labelWidth, Sheet, type FigureIssue, type Pt } from "./_layout";
 
-export type DataKind = "table" | "number_list" | "bar" | "line" | "histogram" | "scatter" | "boxplot";
+export type DataKind = "table" | "two_way" | "number_list" | "bar" | "line" | "histogram" | "scatter" | "boxplot" | "dot_plot" | "statement";
 export type Cell = string | number;
 
 export type DataSpec = {
@@ -34,6 +34,17 @@ export type DataSpec = {
   fitLine?: { slope: number; intercept: number };
   /** boxplot */
   boxes?: { name: string; min: number; q1: number; median: number; q3: number; max: number }[];
+  /** dot_plot — 값과 개수. 값은 정수·소수. */
+  dots?: { value: number; count: number }[];
+  /** two_way — 행·열 범주와 칸 값. 합계 행·열은 렌더러가 계산해 붙인다(totals !== false). */
+  rowHeader?: string;
+  rowLabels?: string[];
+  colLabels?: string[];
+  cells?: number[][];
+  totals?: boolean;
+  /** statement — 문장형 자료(표본 추정·오차범위·연구 설계). 값은 지문 참조 검증 대상. */
+  facts?: { label: string; value: string | number; unit?: string }[];
+  note?: string;
 };
 
 const isNum = (n: unknown): n is number => typeof n === "number" && Number.isFinite(n);
@@ -60,8 +71,8 @@ export function validateData(input: unknown): { ok: true; spec: DataSpec } | { o
   if (!input || typeof input !== "object") return { ok: false, error: "그림 데이터가 객체가 아닙니다." };
   const s = normalizeDataInput(input) as Record<string, unknown>;
   if (s.type !== "data") return { ok: false, error: "type 이 data 가 아닙니다." };
-  const kinds: DataKind[] = ["table", "number_list", "bar", "line", "histogram", "scatter", "boxplot"];
-  if (!kinds.includes(s.kind as DataKind)) return { ok: false, error: `지원하지 않는 자료 유형: ${String(s.kind)} (table|number_list|bar|line|histogram|scatter|boxplot)` };
+  const kinds: DataKind[] = ["table", "two_way", "number_list", "bar", "line", "histogram", "scatter", "boxplot", "dot_plot", "statement"];
+  if (!kinds.includes(s.kind as DataKind)) return { ok: false, error: `지원하지 않는 자료 유형: ${String(s.kind)} (table|two_way|number_list|bar|line|histogram|scatter|boxplot|dot_plot|statement)` };
   if (s.title !== undefined && !isName(s.title)) return { ok: false, error: "title 은 40자 이내 문자열입니다." };
   switch (s.kind) {
     case "table": {
@@ -100,6 +111,25 @@ export function validateData(input: unknown): { ok: true; spec: DataSpec } | { o
     case "scatter": {
       if (!Array.isArray(s.points) || s.points.length < 3 || s.points.length > 60 || !s.points.every((p) => Array.isArray(p) && p.length === 2 && p.every(isNum))) return { ok: false, error: "scatter 는 points(3~60개 [x,y]) 가 필요합니다." };
       if (s.fitLine !== undefined) { const fl = s.fitLine as Record<string, unknown>; if (!fl || !isNum(fl.slope) || !isNum(fl.intercept)) return { ok: false, error: "fitLine 은 slope/intercept 가 필요합니다." }; }
+      break;
+    }
+    case "dot_plot": {
+      if (!Array.isArray(s.dots) || s.dots.length < 2 || s.dots.length > 20) return { ok: false, error: "dot_plot 은 dots(값·개수 2~20개) 가 필요합니다." };
+      for (const d of s.dots as Record<string, unknown>[]) if (!d || !isNum(d.value) || !isNum(d.count) || d.count < 0 || d.count > 15 || !Number.isInteger(d.count)) return { ok: false, error: "dots[] 는 value(숫자)와 count(0~15 정수)가 필요합니다." };
+      if (new Set((s.dots as { value: number }[]).map((d) => d.value)).size !== (s.dots as unknown[]).length) return { ok: false, error: "dot_plot 의 값이 중복됩니다." };
+      break;
+    }
+    case "two_way": {
+      if (!Array.isArray(s.rowLabels) || s.rowLabels.length < 2 || s.rowLabels.length > 6 || !s.rowLabels.every(isName)) return { ok: false, error: "two_way 는 rowLabels(2~6개) 가 필요합니다." };
+      if (!Array.isArray(s.colLabels) || s.colLabels.length < 2 || s.colLabels.length > 6 || !s.colLabels.every(isName)) return { ok: false, error: "two_way 는 colLabels(2~6개) 가 필요합니다." };
+      if (!Array.isArray(s.cells) || s.cells.length !== (s.rowLabels as unknown[]).length || !s.cells.every((r) => Array.isArray(r) && r.length === (s.colLabels as unknown[]).length && r.every((v) => isNum(v) && v >= 0))) return { ok: false, error: "two_way 의 cells 는 rowLabels × colLabels 크기의 0 이상 숫자 표여야 합니다." };
+      if ((s.rowLabels as string[]).some((l) => /^total$/i.test(l)) || (s.colLabels as string[]).some((l) => /^total$/i.test(l))) return { ok: false, error: "two_way 의 합계(Total)는 넣지 않습니다 — 렌더러가 계산합니다." };
+      break;
+    }
+    case "statement": {
+      if (!Array.isArray(s.facts) || s.facts.length < 1 || s.facts.length > 8) return { ok: false, error: "statement 는 facts(1~8개) 가 필요합니다." };
+      for (const fct of s.facts as Record<string, unknown>[]) if (!fct || !isName(fct.label) || !isCell(fct.value) || (fct.unit !== undefined && !isName(fct.unit))) return { ok: false, error: "facts[] 는 label 과 value(숫자 또는 짧은 글), 선택 unit 이 필요합니다." };
+      if (s.note !== undefined && (typeof s.note !== "string" || s.note.length > 300)) return { ok: false, error: "statement.note 는 300자 이내입니다." };
       break;
     }
     case "boxplot": {
@@ -324,6 +354,65 @@ function renderBoxplot(spec: DataSpec): { svg: string; alt: string; issues: Figu
   return { svg: sheet.svg(alt), alt, issues: dedupe([...issues, ...sheet.uniqueIssues()]) };
 }
 
+/** 양방향 표 — 합계 행·열을 렌더러가 계산해 붙인다(조건부확률 문항의 표준 모양). */
+function renderTwoWay(spec: DataSpec): { html: string; alt: string; issues: FigureIssue[] } {
+  const rows = spec.rowLabels!, cols = spec.colLabels!, cells = spec.cells!;
+  const totals = spec.totals !== false;
+  const rowSums = cells.map((r) => r.reduce((a, b) => a + b, 0));
+  const colSums = cols.map((_, j) => cells.reduce((a, r) => a + r[j], 0));
+  const grand = rowSums.reduce((a, b) => a + b, 0);
+  const td = (v: number | string, bold = false) => `<td style="text-align:${typeof v === "number" ? "right" : "left"};padding:6px 12px;border-bottom:1px solid #ddd;white-space:nowrap${bold ? ";font-weight:700;background:#f7f7f8" : ""}">${esc(typeof v === "number" ? fmtNum(v) : v)}</td>`;
+  const th = (v: string) => `<th scope="col" style="text-align:right;padding:6px 12px;border-bottom:1.5px solid #111;font-weight:700;background:#f7f7f8;white-space:nowrap">${esc(v)}</th>`;
+  const head = `<tr><th scope="col" style="text-align:left;padding:6px 12px;border-bottom:1.5px solid #111;background:#f7f7f8">${esc(spec.rowHeader ?? "")}</th>${cols.map(th).join("")}${totals ? th("Total") : ""}</tr>`;
+  const body = rows.map((r, i) => `<tr><th scope="row" style="text-align:left;padding:6px 12px;border-bottom:1px solid #ddd;font-weight:700;white-space:nowrap">${esc(r)}</th>${cells[i].map((v) => td(v)).join("")}${totals ? td(rowSums[i], true) : ""}</tr>`).join("");
+  const foot = totals ? `<tr><th scope="row" style="text-align:left;padding:6px 12px;font-weight:700;background:#f7f7f8">Total</th>${colSums.map((v) => td(v, true)).join("")}${td(grand, true)}</tr>` : "";
+  const caption = spec.title ? `<caption style="caption-side:top;text-align:left;font-weight:700;padding:0 0 6px;font-family:${FONT}">${esc(spec.title)}</caption>` : "";
+  const html = `<div class="figure-table" style="overflow-x:auto;max-width:100%"><table role="table" style="border-collapse:collapse;font-family:${FONT};font-size:14px;color:#111;min-width:240px;border-top:2px solid #111">${caption}<thead>${head}</thead><tbody>${body}${foot}</tbody></table></div>`;
+  const alt = `${spec.title ? spec.title + " — " : ""}양방향 표(${rows.length}행 × ${cols.length}열${totals ? ", 합계 포함" : ""}). ${rows.map((r, i) => `${r}: ${cols.map((c, j) => `${c} ${fmtNum(cells[i][j])}`).join(", ")}${totals ? `, 합계 ${fmtNum(rowSums[i])}` : ""}`).join("; ")}${totals ? `; 전체 ${fmtNum(grand)}` : ""}.`;
+  return { html, alt, issues: [] };
+}
+
+/** 점도표 — 값마다 세로로 점을 쌓는다. */
+function renderDotPlot(spec: DataSpec): { svg: string; alt: string; issues: FigureIssue[] } {
+  const dots = [...spec.dots!].sort((a, b) => a.value - b.value);
+  const W = 440, maxCount = Math.max(1, ...dots.map((d) => d.count));
+  const H = 60 + maxCount * 16 + (spec.title ? 22 : 0) + (spec.xTitle ? 16 : 0);
+  const sheet = new Sheet(W, H);
+  const issues: FigureIssue[] = [];
+  const fr: Frame = { x0: 40, y0: 16 + (spec.title ? 22 : 0), x1: W - 40, y1: H - 36 - (spec.xTitle ? 16 : 0) };
+  if (spec.title) sheet.text(W / 2, 14, spec.title, { size: 14, anchor: "middle" });
+  const vals = dots.map((d) => d.value);
+  const lo = Math.min(...vals), hi = Math.max(...vals);
+  const step = niceStep((hi - lo) || 1, 10);
+  const min = Math.floor(lo / step) * step, max = Math.ceil(hi / step) * step;
+  const sx = (v: number) => fr.x0 + ((v - min) / ((max - min) || 1)) * (fr.x1 - fr.x0);
+  sheet.raw(`<line x1="${f(fr.x0)}" y1="${f(fr.y1)}" x2="${f(fr.x1)}" y2="${f(fr.y1)}" stroke="#111" stroke-width="1.6"/>`);
+  const ticks: number[] = [];
+  for (let v = min; v <= max + 1e-9; v += step) ticks.push(Math.round(v * 1e6) / 1e6);
+  const every = labelWidth(fmtNum(max), 12) > (fr.x1 - fr.x0) / ticks.length - 4 ? 2 : 1;
+  ticks.forEach((v, i) => {
+    sheet.raw(`<line x1="${f(sx(v))}" y1="${f(fr.y1)}" x2="${f(sx(v))}" y2="${f(fr.y1 + 5)}" stroke="#111" stroke-width="1.2"/>`);
+    if (i % every === 0) sheet.raw(`<text x="${f(sx(v))}" y="${f(fr.y1 + 17)}" font-family="${FONT}" font-size="12" text-anchor="middle" fill="#111">${fmtNum(v)}</text>`);
+  });
+  const slot = (fr.x1 - fr.x0) / Math.max(1, (max - min) / step);
+  const r = Math.min(6, slot / 3);
+  for (const d of dots) for (let k = 0; k < d.count; k++) sheet.raw(`<circle cx="${f(sx(d.value))}" cy="${f(fr.y1 - 8 - k * (r * 2 + 3))}" r="${f(r)}" fill="#111"/>`);
+  if (dots.some((d) => Math.abs(d.value - Math.round(d.value / step) * step) > 1e-9 && slot < 14)) issues.push({ code: "label_collision", message: "점도표의 값이 너무 촘촘합니다 — 눈금 간격에 맞는 값을 쓰거나 값 수를 줄이세요." });
+  if (spec.xTitle) sheet.raw(`<text x="${f((fr.x0 + fr.x1) / 2)}" y="${f(H - 8)}" font-family="${FONT}" font-size="12.5" text-anchor="middle" fill="#111">${esc(spec.xTitle)}</text>`);
+  const alt = `${spec.title ? spec.title + " — " : ""}점도표${spec.xTitle ? `(${spec.xTitle})` : ""}. ${dots.map((d) => `${fmtNum(d.value)}: ${d.count}개`).join(", ")}.`;
+  return { svg: sheet.svg(alt), alt, issues: dedupe([...issues, ...sheet.uniqueIssues()]) };
+}
+
+/** 문장형 자료 블록 — 표본 추정·오차범위·연구 설계의 값을 구조화해 보여준다(값은 지문 참조 검증 대상). */
+function renderStatement(spec: DataSpec): { html: string; alt: string; issues: FigureIssue[] } {
+  const facts = spec.facts!;
+  const row = (fct: { label: string; value: string | number; unit?: string }) =>
+    `<div style="display:flex;justify-content:space-between;gap:16px;padding:5px 0;border-bottom:1px solid #eee"><span style="color:#444">${esc(fct.label)}</span><span style="font-weight:700;white-space:nowrap">${esc(typeof fct.value === "number" ? fmtNum(fct.value) : String(fct.value))}${fct.unit ? ` ${esc(fct.unit)}` : ""}</span></div>`;
+  const html = `<div class="figure-statement" style="font-family:${FONT};font-size:14px;color:#111;border:1.5px solid #ddd;border-radius:10px;padding:10px 14px;max-width:520px">${spec.title ? `<div style="font-weight:700;margin-bottom:6px">${esc(spec.title)}</div>` : ""}${facts.map(row).join("")}${spec.note ? `<div style="font-size:12.5px;color:#555;margin-top:8px">${esc(spec.note)}</div>` : ""}</div>`;
+  const alt = `${spec.title ? spec.title + " — " : ""}자료: ${facts.map((fct) => `${fct.label} ${typeof fct.value === "number" ? fmtNum(fct.value) : fct.value}${fct.unit ? " " + fct.unit : ""}`).join(", ")}${spec.note ? `. ${spec.note}` : ""}.`;
+  return { html, alt, issues: [] };
+}
+
 /** 렌더 — 표·숫자 목록은 HTML, 그래프는 SVG 문자열. 둘 다 우리가 만든 마크업이라 그대로 넣는다. */
 export function renderData(spec: DataSpec): { markup: string; alt: string; issues: FigureIssue[] } {
   switch (spec.kind) {
@@ -334,6 +423,9 @@ export function renderData(spec: DataSpec): { markup: string; alt: string; issue
     case "histogram": { const r = renderHistogram(spec); return { markup: r.svg, alt: r.alt, issues: r.issues }; }
     case "scatter": { const r = renderScatter(spec); return { markup: r.svg, alt: r.alt, issues: r.issues }; }
     case "boxplot": { const r = renderBoxplot(spec); return { markup: r.svg, alt: r.alt, issues: r.issues }; }
+    case "two_way": { const r = renderTwoWay(spec); return { markup: r.html, alt: r.alt, issues: r.issues }; }
+    case "dot_plot": { const r = renderDotPlot(spec); return { markup: r.svg, alt: r.alt, issues: r.issues }; }
+    case "statement": { const r = renderStatement(spec); return { markup: r.html, alt: r.alt, issues: r.issues }; }
   }
 }
 
@@ -348,6 +440,8 @@ export function lintDataAgainstText(spec: DataSpec, passage: string): FigureIssu
   const add = (v?: string) => { if (v) names.add(v.trim().toLowerCase()); };
   spec.columns?.forEach(add); spec.categories?.forEach(add); spec.series?.forEach((s) => add(s.name)); spec.boxes?.forEach((b) => add(b.name)); add(spec.title); add(spec.xTitle); add(spec.yTitle);
   spec.rows?.forEach((r) => { if (typeof r[0] === "string") add(r[0]); });
+  spec.rowLabels?.forEach(add); spec.colLabels?.forEach(add); add(spec.rowHeader); spec.facts?.forEach((fct) => add(fct.label));
+  if (spec.kind === "two_way") add("total");
   // 따옴표로 부른 이름은 데이터 어딘가에 있어야 한다.
   for (const m of text.matchAll(/["“]([^"”]{1,40})["”]/g)) {
     const q = m[1].trim().toLowerCase();
@@ -361,9 +455,9 @@ export function lintDataAgainstText(spec: DataSpec, passage: string): FigureIssu
   // 값 일치: 절(clause) 안에 [행 이름 + 열 이름 + 숫자] 또는 [범주 + 계열 이름 + 숫자]
   const clauses = text.split(/[.;?!](?=\s|$)|\n/);
   const num = (t: string) => Number(t.replace(/,/g, ""));
-  /** 절 안의 숫자(천 단위 쉼표 포함). 백분율(…%)은 데이터 값이 아니라 답의 형태라 뺀다. */
+  /** 절 안의 숫자(천 단위 쉼표 포함). "10th" 같은 서수와 "…%" 는 데이터 값이 아니라 뺀다. */
   const numbersIn = (cl: string): number[] =>
-    Array.from(cl.matchAll(/(?<![\w.])(-?\d{1,3}(?:,\d{3})+(?:\.\d+)?|-?\d+(?:\.\d+)?)(?!\d)(\s*%|\s*percent)?/gi))
+    Array.from(cl.matchAll(/(?<![\w.])(-?\d{1,3}(?:,\d{3})+(?:\.\d+)?|-?\d+(?:\.\d+)?)(?![\dA-Za-z])(\s*%)?/g))
       .filter((m) => !m[2])
       .map((m) => num(m[1]));
   const escapeRe = (t: string) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -398,6 +492,33 @@ export function lintDataAgainstText(spec: DataSpec, passage: string): FigureIssu
       if (candidates.length && !candidates.some((n) => Math.abs(n - target) < 1e-9)) issues.push({ code: "ref_mismatch", message: `지문은 '${rowName}' 의 '${spec.columns[colIdx]}' 를 ${candidates.join("/")} 로 말하지만 표의 값은 ${fmtNum(target)} 입니다.` });
     }
   }
+  // 양방향 표: 절 안에 [행 이름 + 열 이름 + 숫자] 이면 그 칸과 같아야 한다.
+  if (spec.kind === "two_way" && spec.rowLabels && spec.colLabels && spec.cells) {
+    for (const cl of clauses) {
+      const low = cl.toLowerCase();
+      const ri = spec.rowLabels.findIndex((r) => low.includes(r.toLowerCase()));
+      const ci = spec.colLabels.findIndex((c) => low.includes(c.toLowerCase()));
+      if (ri < 0 || ci < 0) continue;
+      const target = spec.cells[ri][ci];
+      const labelNums = [...spec.rowLabels[ri].matchAll(/\d+/g), ...spec.colLabels[ci].matchAll(/\d+/g)].map((m) => Number(m[0]));
+      const nums = numbersIn(cl).filter((n) => !labelNums.includes(n));
+      if (nums.length && !nums.some((n) => Math.abs(n - target) < 1e-9)) issues.push({ code: "ref_mismatch", message: `지문은 '${spec.rowLabels[ri]} · ${spec.colLabels[ci]}' 를 ${nums.join("/")} 로 말하지만 표의 칸은 ${fmtNum(target)} 입니다.` });
+    }
+  }
+  // 문장형 자료: 절 안에 [항목 이름 + 숫자] 이면 그 값과 같아야 한다.
+  if (spec.kind === "statement" && spec.facts) {
+    for (const cl of clauses) {
+      const low = cl.toLowerCase();
+      for (const fct of spec.facts) {
+        if (typeof fct.value !== "number") continue;
+        const target: number = fct.value;
+        const key = fct.label.toLowerCase().split(/\s+/).filter((w) => w.length > 3);
+        if (!key.length || !key.every((w) => low.includes(w))) continue;
+        const nums = numbersIn(cl);
+        if (nums.length && !nums.some((n) => Math.abs(n - target) < 1e-9)) issues.push({ code: "ref_mismatch", message: `지문은 '${fct.label}' 을 ${nums.join("/")} 로 말하지만 자료의 값은 ${fmtNum(target)} 입니다.` });
+      }
+    }
+  }
   if ((spec.kind === "bar" || spec.kind === "line") && spec.categories && spec.series) {
     for (const cl of clauses) {
       const low = cl.toLowerCase();
@@ -416,7 +537,7 @@ export function lintDataAgainstText(spec: DataSpec, passage: string): FigureIssu
   const UNITS = ["dollars", "hours", "minutes", "seconds", "meters", "kilometers", "miles", "feet", "inches", "grams", "kilograms", "pounds", "liters", "gallons"];
   const joined = Array.from(names).join(" ");
   for (const u of UNITS) if (new RegExp(`\\b${u}\\b`, "i").test(text) && spec.kind !== "number_list" && !new RegExp(u.slice(0, 4), "i").test(joined) && !new RegExp(`\\(${u.slice(0, 3)}`, "i").test(joined)) {
-    if (spec.kind === "table" || spec.kind === "bar" || spec.kind === "line" || spec.kind === "scatter" || spec.kind === "histogram") issues.push({ code: "unit_missing", message: `지문은 '${u}' 단위를 쓰지만 표·그래프의 열 이름이나 축 제목에 단위가 없습니다(예: 'Cost (dollars)').` });
+    if (spec.kind === "table" || spec.kind === "bar" || spec.kind === "line" || spec.kind === "scatter" || spec.kind === "histogram" || spec.kind === "dot_plot") issues.push({ code: "unit_missing", message: `지문은 '${u}' 단위를 쓰지만 표·그래프의 열 이름이나 축 제목에 단위가 없습니다(예: 'Cost (dollars)').` });
   }
   if (/\b(northeast|northwest|southeast|southwest|region)\b/i.test(text)) issues.push({ code: "wording", message: "지문에 배치 용어(region 등)가 있습니다." });
   return dedupe(issues);

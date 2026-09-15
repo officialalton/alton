@@ -3,6 +3,7 @@ import { renderParallelTransversal } from "./templates/parallel-transversal";
 import { renderTriangle } from "./templates/triangle";
 import { renderPlane as renderPlaneTemplate } from "./templates/coordinate-plane";
 import { renderData } from "./templates/data";
+import { renderCircle } from "./templates/circle";
 
 // 순수 함수 — 서버·클라이언트 어디서든 같은 SVG 문자열을 만든다. 외부 입력은 숫자와 짧은 라벨뿐이고
 // 라벨은 이스케이프하므로 그대로 innerHTML 로 넣어도 안전하다.
@@ -44,7 +45,8 @@ export function renderFigureSvg(spec: FigureSpec): string {
   if (spec.type === "parallel_transversal") return renderParallelTransversal(spec).svg;
   if (spec.type === "triangle") return renderTriangle(spec).svg;
   if (spec.type === "plane") return renderPlaneTemplate(spec).svg;
-  if (spec.type === "data") return renderData(spec).markup; // 표·숫자 목록은 HTML, 그래프는 SVG — 모두 우리 마크업
+  if (spec.type === "data") return renderData(spec).markup;
+  if (spec.type === "circle") return renderCircle(spec).svg; // 표·숫자 목록은 HTML, 그래프는 SVG — 모두 우리 마크업
   return spec.type === "coordinate_plane" ? renderPlane(spec) : renderGeometry(spec);
 }
 

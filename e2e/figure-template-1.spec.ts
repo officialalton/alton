@@ -282,3 +282,79 @@ test("템플릿 4: 지문(표 자료) → AI 값 데이터 → 검증 → 표준
   expect(box && box.x >= 0 && box.x + box.width <= 375).toBeTruthy();
   await page.screenshot({ path: `${OUT}/12-t4-student-mobile.png`, fullPage: true });
 });
+
+/** 초안(지문·선택지·해설)이 있는 문제를 열어 AI 도형 버튼 → 검증 → 저장 → 확인 → 공개 → 학생 화면까지 한 경로로 돈다. */
+async function runDraftFigureFlow(page: Page, testInfo: import("@playwright/test").TestInfo, opts: { passage: string; options: string[]; correctIndex: number; explanation: string; skill: string; button: string; expectType: string; shots: [string, string, string] }) {
+  const problemId = psql(
+    `insert into problems (format, passage, subject_id, status, created_by, skill_type) values ('mc', '${opts.passage.replace(/'/g, "''")}', '${SUBJECT_ID}', 'draft', 'aaaaaaaa-0000-0000-0000-000000000001', '${opts.skill}') returning id;`
+  );
+  psql(`update problem_versions set options = '${JSON.stringify(opts.options).replace(/'/g, "''")}'::jsonb, correct_index = ${opts.correctIndex}, explanation = '${opts.explanation.replace(/'/g, "''")}' where problem_id = '${problemId}' and version_no = 1;`);
+  await loginAs(page, ACCOUNTS.admin);
+  await page.goto("/admin?tab=problem-bank");
+  await page.getByLabel("새 문제 과목").selectOption(SUBJECT_ID);
+  const head = opts.passage.slice(0, 60);
+  await expect.poll(async () => (await rowTitles(page)).some((t) => t.startsWith(head)), { timeout: 30_000 }).toBe(true);
+  await page.getByTestId("bank-row-title").filter({ hasText: head }).first().click();
+  await expect(page.getByLabel("지문")).toHaveValue(opts.passage);
+  await page.getByRole("button", { name: opts.button }).click();
+  await expect(page.getByTestId("figure-preview").or(page.getByText(/그림을 만들지 못했습니다/))).toBeVisible({ timeout: 120_000 });
+  if (await page.getByText(/그림을 만들지 못했습니다/).count()) {
+    testInfo.annotations.push({ type: "generation-rejected", description: await page.getByText(/그림을 만들지 못했습니다/).innerText() });
+    return "generation-rejected";
+  }
+  await page.getByTestId("figure-section").screenshot({ path: `${OUT}/${opts.shots[0]}` });
+  const issues = page.getByTestId("figure-issues");
+  if ((await issues.count()) > 0) {
+    testInfo.annotations.push({ type: "blocked-by-validation", description: await issues.innerText() });
+    await page.getByRole("button", { name: "초안 저장" }).click();
+    await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible();
+    await expect(page.getByLabel("그림 확인함")).toBeDisabled();
+    return "blocked";
+  }
+  await expect(page.getByText(/표준 렌더링 검증 통과/)).toBeVisible();
+  testInfo.annotations.push({ type: "figure", description: await page.getByLabel("그림 데이터").inputValue() });
+  await page.getByRole("button", { name: "초안 저장" }).click();
+  await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible();
+  const check = page.getByLabel("그림 확인함");
+  await expect(check).toBeEnabled();
+  await check.check();
+  await expect(page.getByText(/미리보기로 확인했다고 표시했습니다/)).toBeVisible();
+  await page.getByRole("button", { name: "공개하기" }).click();
+  await expect(page.getByText(/공개했습니다|공개됐습니다|공개되었습니다/)).toBeVisible({ timeout: 20_000 });
+  expect(psql(`select v.status || '|' || (v.figure->>'type') || '|' || (v.render_check->>'ok') from problem_versions v where v.problem_id = '${problemId}' order by v.version_no desc limit 1;`)).toBe(`published|${opts.expectType}|true`);
+  const sessionId = startedSessionWith(problemId);
+  await page.context().clearCookies();
+  await loginAs(page, ACCOUNTS.student);
+  await page.goto(`/session/${sessionId}?tab=problems`);
+  await expect(page.getByTestId("problem-figure")).toBeVisible({ timeout: 30_000 });
+  await page.getByTestId("problem-sheet").screenshot({ path: `${OUT}/${opts.shots[1]}` });
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.reload();
+  await expect(page.getByTestId("problem-figure")).toBeVisible({ timeout: 30_000 });
+  const box = await page.getByTestId("problem-figure").boundingBox();
+  expect(box && box.x >= 0 && box.x + box.width <= 375).toBeTruthy();
+  await page.screenshot({ path: `${OUT}/${opts.shots[2]}`, fullPage: true });
+  return "published";
+}
+
+// ------------------------------------------------------------ 템플릿 5 — 원
+test("템플릿 5: 지문(원·접선) → AI 관계 데이터 → 검증 → 표준 렌더 → 공개 → 학생 화면", async ({ page }, testInfo) => {
+  test.skip(!process.env.ANTHROPIC_API_KEY, "ANTHROPIC_API_KEY 없음");
+  const result = await runDraftFigureFlow(page, testInfo, {
+    passage: `In the figure, the circle has center O, and line PT is tangent to the circle at point T. OT = 5 and PT = 12. What is the length of segment OP? [E2E T5 ${Date.now()}]`,
+    options: ["7", "13", "17", "√119"], correctIndex: 1, explanation: "OT ⟂ PT, so OP² = 5² + 12² = 169 and OP = 13.", skill: "Geometry and Trigonometry",
+    button: "AI로 도형 데이터 만들기(원)", expectType: "circle", shots: ["13-t5-admin-preview.png", "14-t5-student-desktop.png", "15-t5-student-mobile.png"],
+  });
+  expect(["published", "blocked"]).toContain(result);
+});
+
+// ------------------------------------------------------------ 템플릿 3 보완 — 음영 부등식
+test("템플릿 3 보완: 지문(연립 부등식) → AI 객체 데이터(음영) → 검증 → 공개 → 학생 화면", async ({ page }, testInfo) => {
+  test.skip(!process.env.ANTHROPIC_API_KEY, "ANTHROPIC_API_KEY 없음");
+  const result = await runDraftFigureFlow(page, testInfo, {
+    passage: `The system of inequalities y ≤ x + 2 and y > -x - 1 is graphed in the xy-plane. Which of the following points is a solution to the system? [E2E T3b ${Date.now()}]`,
+    options: ["(0, 3)", "(1, 1)", "(-3, 1)", "(4, -6)"], correctIndex: 1, explanation: "(1, 1): 1 ≤ 3 and 1 > -2.", skill: "Algebra",
+    button: "AI로 좌표평면 데이터 만들기", expectType: "plane", shots: ["16-t3b-admin-preview.png", "17-t3b-student-desktop.png", "18-t3b-student-mobile.png"],
+  });
+  expect(["published", "blocked"]).toContain(result);
+});

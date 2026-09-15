@@ -7,6 +7,7 @@ import { lintParallelTransversalAgainstText, renderParallelTransversal, type Fig
 import { lintTriangleAgainstText, renderTriangle } from "./templates/triangle";
 import { lintPlaneAgainstText, renderPlane } from "./templates/coordinate-plane";
 import { lintDataAgainstText, renderData } from "./templates/data";
+import { lintCircleAgainstText, renderCircle } from "./templates/circle";
 
 export const RENDERER_VERSION = "std-1";
 
@@ -28,7 +29,7 @@ export function passageRequiresFigure(passage: string): boolean {
   return /\b(as shown|in the figure|the figure|the diagram|shown below|shown above|the graph (?:above|below|shown))\b/i.test(passage);
 }
 
-export function checkFigure(figure: unknown, passage: string): RenderCheck {
+export function checkFigure(figure: unknown, passage: string, options?: string[] | null): RenderCheck {
   const checkedAt = new Date().toISOString();
   const issues: FigureIssue[] = [];
   if (figure === null || figure === undefined) {
@@ -60,7 +61,12 @@ export function checkFigure(figure: unknown, passage: string): RenderCheck {
   }
   if (spec.type === "plane") {
     const r = renderPlane(spec);
-    issues.push(...r.issues, ...lintPlaneAgainstText(spec, passage));
+    issues.push(...r.issues, ...lintPlaneAgainstText(spec, passage, options));
+    return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
+  }
+  if (spec.type === "circle") {
+    const r = renderCircle(spec);
+    issues.push(...r.issues, ...lintCircleAgainstText(spec, passage));
     return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
   }
   if (spec.type === "data") {

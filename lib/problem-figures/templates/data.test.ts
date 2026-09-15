@@ -16,6 +16,10 @@ export const SAMPLES: { name: string; spec: DataSpec; passage: string }[] = [
   { name: "산점도·추세선", spec: { type: "data", kind: "scatter", points: [[1, 2.1], [2, 2.9], [3, 4.2], [4, 4.8], [5, 6.1], [6, 6.8], [7, 7.9]], fitLine: { slope: 0.95, intercept: 1.1 }, xTitle: "Hours studied", yTitle: "Score (points)" }, passage: "The scatterplot shows hours studied and score, in points, for 7 students, with the line of best fit. For a student who studied 4 hours, how much greater is the actual score than the predicted score?" },
   { name: "상자그림 두 개", spec: { type: "data", kind: "boxplot", boxes: [{ name: "Class A", min: 55, q1: 65, median: 72, q3: 80, max: 95 }, { name: "Class B", min: 60, q1: 70, median: 75, q3: 85, max: 90 }], xTitle: "Test score" }, passage: "The box plots summarize test scores for Class A and Class B. Which statement about the interquartile ranges is true?" },
   { name: "확률 2×2 표", spec: { type: "data", kind: "table", columns: ["", "Passed", "Failed", "Total"], rows: [["Studied", 36, 4, 40], ["Did not study", 14, 16, 30], ["Total", 50, 20, 70]] }, passage: "The table shows study habits and results for 70 students. If a student who passed is chosen at random, what is the probability that the student studied?" },
+  // 2026-09-14 보완(SAT Test 6~11 대조): 점도표·양방향 표·문장형 자료
+  { name: "점도표", spec: { type: "data", kind: "dot_plot", dots: [{ value: 1, count: 2 }, { value: 2, count: 4 }, { value: 3, count: 5 }, { value: 4, count: 3 }, { value: 5, count: 1 }], xTitle: "Number of pets" }, passage: "The dot plot shows the number of pets for 15 households. What is the median number of pets?" },
+  { name: "양방향 표(합계 자동)", spec: { type: "data", kind: "two_way", rowHeader: "Grade", rowLabels: ["9th", "10th"], colLabels: ["Bus", "Walk", "Car"], cells: [[42, 18, 30], [36, 24, 40]] }, passage: "The two-way table shows how students in 9th and 10th grade travel to school. 10th grade students who take the bus number 36. If a 9th grade student is selected at random, what is the probability the student walks?" },
+  { name: "문장형 자료(표본·오차범위)", spec: { type: "data", kind: "statement", title: "Survey summary", facts: [{ label: "Sample size", value: 400 }, { label: "Estimated proportion", value: 0.62 }, { label: "Margin of error", value: 4, unit: "percentage points" }], note: "The sample was selected at random from all adults in the city." }, passage: "A random sample of 400 adults in a city found an estimated proportion of 0.62 who support the plan, with a margin of error of 4 percentage points. Which is the most appropriate conclusion?" },
 ];
 
 describe("템플릿 4 — 대표 문제 10개는 검증을 통과한다", () => {
@@ -58,6 +62,14 @@ describe("템플릿 4 — 거부", () => {
     expect(validateData({ type: "data", kind: "bar", categories: ["a", "b"], series: [{ values: [1, 2] }, { values: [3, 4] }] }).ok).toBe(false);
     expect(validateData({ type: "data", kind: "histogram", bins: [{ from: 0, to: 10, count: 1 }, { from: 20, to: 30, count: 2 }] }).ok).toBe(false);
     expect(validateData({ type: "data", kind: "boxplot", boxes: [{ name: "A", min: 5, q1: 3, median: 4, q3: 6, max: 9 }] }).ok).toBe(false);
+  });
+  it("양방향 표·문장형 자료의 값이 지문과 다르면 값 불일치, 합계 행을 직접 넣으면 거부", () => {
+    const tw = SAMPLES.find((x) => x.name.startsWith("양방향"))!.spec;
+    expect(lintDataAgainstText(tw, "10th grade students who take the bus number 40.").some((i) => i.code === "ref_mismatch")).toBe(true);
+    expect(validateData({ ...tw, rowLabels: ["9th", "Total"] }).ok).toBe(false);
+    const st = SAMPLES.find((x) => x.name.startsWith("문장형"))!.spec;
+    expect(lintDataAgainstText(st, "The margin of error was 6 percentage points.").some((i) => i.code === "ref_mismatch")).toBe(true);
+    expect(validateData({ type: "data", kind: "dot_plot", dots: [{ value: 1, count: 2 }, { value: 1, count: 3 }] }).ok).toBe(false);
   });
   it("세로축 범위를 좁게 정하면 값이 범위 밖으로 잡히고, 긴 범주 이름은 라벨 문제로 잡힌다", () => {
     const r = renderData({ type: "data", kind: "bar", categories: ["A", "B"], series: [{ values: [10, 50] }], yMin: 0, yMax: 20 });

@@ -27,6 +27,7 @@ import { lintParallelTransversalAgainstText, renderParallelTransversal } from "@
 import { lintTriangleAgainstText, renderTriangle } from "@/lib/problem-figures/templates/triangle";
 import { lintPlaneAgainstText, renderPlane } from "@/lib/problem-figures/templates/coordinate-plane";
 import { lintDataAgainstText, renderData } from "@/lib/problem-figures/templates/data";
+import { lintCircleAgainstText, renderCircle } from "@/lib/problem-figures/templates/circle";
 import type { AdminSubject, SubjectKeyword } from "./subject-data";
 
 // P2 3차·8차 — 관리자 문제은행. 교재와 독립된 진입점이다.
@@ -1029,6 +1030,11 @@ function DraftEditor({
   // jsonb 는 키 순서를 바꿔 돌려주므로 정렬해 비교한다 — 같은 그림을 '바뀐 것'으로 보면 확인 체크가 잠긴 채 남는다.
   const figureDirty = canonical(figureParsed.spec ?? null) !== canonical(source?.figure ?? null);
   const [passage, setPassage] = useState(source?.passage ?? "");
+  const initialOptions = useMemo(() => {
+    const existing = source?.options ?? [];
+    return existing.length > 4 ? [...existing] : [0, 1, 2, 3].map((i) => existing[i] ?? "");
+  }, [source]);
+  const [options, setOptions] = useState<string[]>(initialOptions);
   // 표준 렌더링 검증(클라이언트에서도 같은 규칙으로 즉시) — 저장하면 서버가 같은 검사를 해 render_check 에 남긴다.
   const figureIsLegacy = figureParsed.spec != null && LEGACY_FIGURE_TYPES.includes((figureParsed.spec as { type?: string }).type ?? "");
   const figureIsImage = figureParsed.spec != null && (figureParsed.spec as { type?: string }).type === "image";
@@ -1047,11 +1053,15 @@ function DraftEditor({
     }
     if (spec.type === "plane") {
       const r = renderPlane(spec as never);
-      return [...r.issues, ...lintPlaneAgainstText(spec as never, passage)];
+      return [...r.issues, ...lintPlaneAgainstText(spec as never, passage, isMc ? options : null)];
     }
     if (spec.type === "data") {
       const r = renderData(spec as never);
       return [...r.issues, ...lintDataAgainstText(spec as never, passage)];
+    }
+    if (spec.type === "circle") {
+      const r = renderCircle(spec as never);
+      return [...r.issues, ...lintCircleAgainstText(spec as never, passage)];
     }
     if (spec.type === "image" && !imageAlt.trim()) return [{ code: "alt_required", message: "올린 그림에는 대체 설명이 필요합니다." }];
     return [];
@@ -1062,17 +1072,13 @@ function DraftEditor({
     if (t === "triangle") return renderTriangle(figureForSave as never).alt;
     if (t === "plane") return renderPlane(figureForSave as never).alt;
     if (t === "data") return renderData(figureForSave as never).alt;
+    if (t === "circle") return renderCircle(figureForSave as never).alt;
     return figureIsImage ? imageAlt : null;
   })();
   const [figureNotice, setFigureNotice] = useState<string | null>(null);
   const [figureBusy, setFigureBusy] = useState(false);
 
-  const initialOptions = useMemo(() => {
-    const existing = source?.options ?? [];
-    return existing.length > 4 ? [...existing] : [0, 1, 2, 3].map((i) => existing[i] ?? "");
-  }, [source]);
 
-  const [options, setOptions] = useState<string[]>(initialOptions);
   const [correctIndex, setCorrectIndex] = useState<number | null>(
     source?.correctIndex ?? null
   );
@@ -1233,7 +1239,7 @@ function DraftEditor({
         )}
 
         <div className="flex flex-wrap items-center gap-2 mb-1.5">
-          {(["parallel_transversal", "triangle", "plane", "data"] as const).map((kind) => (
+          {(["parallel_transversal", "triangle", "circle", "plane", "data"] as const).map((kind) => (
             <button
               key={kind}
               type="button"
@@ -1252,7 +1258,7 @@ function DraftEditor({
               }}
               className="text-[12px] font-bold px-2.5 py-1 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
             >
-              {figureBusy ? "만드는 중…" : kind === "plane" ? "AI로 좌표평면 데이터 만들기" : kind === "data" ? "AI로 표·그래프 데이터 만들기" : kind === "triangle" ? "AI로 도형 데이터 만들기(삼각형)" : "AI로 도형 데이터 만들기(평행선·횡단선)"}
+              {figureBusy ? "만드는 중…" : kind === "plane" ? "AI로 좌표평면 데이터 만들기" : kind === "data" ? "AI로 표·그래프 데이터 만들기" : kind === "triangle" ? "AI로 도형 데이터 만들기(삼각형)" : kind === "circle" ? "AI로 도형 데이터 만들기(원)" : "AI로 도형 데이터 만들기(평행선·횡단선)"}
             </button>
           ))}
           <label className="inline-flex items-center gap-2 text-[12px] text-ink">

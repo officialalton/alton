@@ -5,7 +5,7 @@
 
 import { dedupe, f, FONT, halfDiag, Sheet, type FigureIssue, type Pt } from "./_layout";
 
-export type FnKind = "linear" | "quadratic" | "exponential" | "abs" | "sqrt" | "cubic";
+export type FnKind = "linear" | "quadratic" | "exponential" | "abs" | "sqrt" | "cubic" | "rational";
 export type PointRef = string | Pt; // 점 객체 id 또는 좌표
 
 export type PlaneObject =
@@ -13,7 +13,11 @@ export type PlaneObject =
   | { id: string; kind: "line"; through?: [PointRef, PointRef]; slope?: number; intercept?: number; label?: string; style?: "solid" | "dashed" }
   | { id: string; kind: "function"; fn: FnKind; params: number[]; label?: string; domain?: [number, number]; style?: "solid" | "dashed" }
   | { id: string; kind: "segment"; from: PointRef; to: PointRef; label?: string; style?: "solid" | "dashed" }
-  | { id: string; kind: "scatter"; points: Pt[]; fitLine?: { slope: number; intercept: number; label?: string } };
+  | { id: string; kind: "scatter"; points: Pt[]; fitLine?: { slope: number; intercept: number; label?: string } }
+  /** 부등식 y (≤|<|≥|>) mx + b — 경계는 실선(≤,≥)/점선(<,>), 음영은 부등호 방향. 여러 개면 공통 영역이 겹쳐 진해진다. */
+  | { id: string; kind: "inequality"; op: "<=" | "<" | ">=" | ">"; slope: number; intercept: number; label?: string }
+  /** 조각함수 — 구간별 일차식, 끝점은 열림(open)/닫힘. */
+  | { id: string; kind: "piecewise"; pieces: { from: number; to: number; slope: number; intercept: number; openFrom?: boolean; openTo?: boolean }[]; label?: string };
 
 export type PlaneAxis = { min: number; max: number; step?: number; label?: string; title?: string };
 export type PlaneSpec = {
@@ -68,9 +72,23 @@ export function validatePlane(input: unknown): { ok: true; spec: PlaneSpec } | {
           if (!Array.isArray(o.through) || o.through.length !== 2 || !o.through.every(refOk)) return { ok: false, error: `직선 ${o.id} 의 through 는 점 id 또는 좌표 2개여야 합니다.` };
         } else if (!isNum(o.slope) || !isNum(o.intercept)) return { ok: false, error: `직선 ${o.id} 는 through 두 점 또는 slope/intercept 가 필요합니다.` };
         break;
+      case "inequality":
+        if (!["<=", "<", ">=", ">"].includes(String(o.op)) || !isNum(o.slope) || !isNum(o.intercept)) return { ok: false, error: `부등식 ${o.id} 는 op(<=|<|>=|>) 와 slope/intercept 가 필요합니다.` };
+        break;
+      case "piecewise": {
+        if (!Array.isArray(o.pieces) || o.pieces.length < 2 || o.pieces.length > 5) return { ok: false, error: `조각함수 ${o.id} 는 pieces 2~5개가 필요합니다.` };
+        let prevTo: number | null = null;
+        for (const pc of o.pieces as Record<string, unknown>[]) {
+          if (!pc || !isNum(pc.from) || !isNum(pc.to) || pc.from >= pc.to || !isNum(pc.slope) || !isNum(pc.intercept)) return { ok: false, error: `조각함수 ${o.id} 의 각 조각은 from < to, slope, intercept 가 필요합니다.` };
+          if (prevTo !== null && (pc.from as number) < prevTo - 1e-9) return { ok: false, error: `조각함수 ${o.id} 의 구간이 겹칩니다.` };
+          prevTo = pc.to as number;
+        }
+        break;
+      }
       case "function": {
-        const need: Record<FnKind, number> = { linear: 2, quadratic: 3, cubic: 4, exponential: 3, abs: 3, sqrt: 3 };
-        if (!(String(o.fn) in need)) return { ok: false, error: `함수 ${o.id} 의 fn 은 linear|quadratic|exponential|abs|sqrt|cubic 입니다.` };
+        const need: Record<FnKind, number> = { linear: 2, quadratic: 3, cubic: 4, exponential: 3, abs: 3, sqrt: 3, rational: 4 };
+        if (!(String(o.fn) in need)) return { ok: false, error: `함수 ${o.id} 의 fn 은 linear|quadratic|exponential|abs|sqrt|cubic|rational 입니다.` };
+        if (o.fn === "rational" && Math.abs((o.params as number[])[2] ?? 0) < 1e-12) return { ok: false, error: `유리함수 ${o.id} 의 분모 계수 c 는 0 이 아니어야 합니다((ax+b)/(cx+d)).` };
         if (!Array.isArray(o.params) || !o.params.every(isNum) || o.params.length !== need[o.fn as FnKind]) return { ok: false, error: `함수 ${o.id}(${String(o.fn)}) 의 params 는 숫자 ${need[o.fn as FnKind]}개입니다.` };
         if (o.domain !== undefined && (!isPt(o.domain) || o.domain[0] >= o.domain[1])) return { ok: false, error: `함수 ${o.id} 의 domain 은 [min, max] 입니다.` };
         break;
@@ -101,6 +119,7 @@ export function evalFn(fn: FnKind, p: number[], x: number): number {
     case "exponential": return p[0] * Math.pow(p[1], x) + p[2];
     case "abs": return p[0] * Math.abs(x - p[1]) + p[2];
     case "sqrt": return p[0] * Math.sqrt(Math.max(0, x - p[1])) + p[2];
+    case "rational": return (p[0] * x + p[1]) / (p[2] * x + p[3]);
   }
 }
 
@@ -136,6 +155,7 @@ export function formatFn(fn: FnKind, p: number[]): string {
     case "exponential": return `y = ${Math.abs(p[0] - 1) < 1e-12 ? "" : `${f(p[0])}·`}${f(p[1])}^x${poly([[p[2], ""]]) === "0" ? "" : ` ${p[2] < 0 ? "−" : "+"} ${f(Math.abs(p[2]))}`}`;
     case "abs": return `y = ${Math.abs(p[0] - 1) < 1e-12 ? "" : f(p[0])}|x${p[1] === 0 ? "" : ` ${p[1] < 0 ? "+" : "−"} ${f(Math.abs(p[1]))}`}|${p[2] === 0 ? "" : ` ${p[2] < 0 ? "−" : "+"} ${f(Math.abs(p[2]))}`}`;
     case "sqrt": return `y = ${Math.abs(p[0] - 1) < 1e-12 ? "" : f(p[0])}√(x${p[1] === 0 ? "" : ` ${p[1] < 0 ? "+" : "−"} ${f(Math.abs(p[1]))}`})${p[2] === 0 ? "" : ` ${p[2] < 0 ? "−" : "+"} ${f(Math.abs(p[2]))}`}`;
+    case "rational": return `y = (${poly([[p[0], "x"], [p[1], ""]])}) / (${poly([[p[2], "x"], [p[3], ""]])})`;
   }
 }
 
@@ -170,8 +190,10 @@ export function renderPlane(spec: PlaneSpec): { svg: string; alt: string; issues
   sheet.registerSegment([sx(axX), H - padB], [sx(axX), PAD]);
   const every = (n: number) => (n > 12 ? 3 : n > 8 ? 2 : 1);
   const ex = every(xs.length), ey = every(ys.length);
-  xs.forEach((x, i) => { if (Math.abs(x - axX) > 1e-9 && i % ex === 0) sheet.raw(`<text x="${f(sx(x))}" y="${f(sy(axY) + 15)}" font-family="${FONT}" font-size="12" text-anchor="middle" fill="#111">${f(x)}</text>`); });
-  ys.forEach((y, i) => { if (Math.abs(y - axY) > 1e-9 && i % ey === 0) sheet.raw(`<text x="${f(sx(axX) - 6)}" y="${f(sy(y) + 4)}" font-family="${FONT}" font-size="12" text-anchor="end" fill="#111">${f(y)}</text>`); });
+  // 눈금 숫자는 (간격 × 건너뛰기) 의 배수에만 — 인덱스 기준이면 -8, -5, -2, 1 … 처럼 0 을 지나지 않는 숫자가 나온다(E2E 실례).
+  const onGrid = (v: number, unit: number) => Math.abs(v / unit - Math.round(v / unit)) < 1e-9;
+  xs.forEach((x) => { if (Math.abs(x - axX) > 1e-9 && onGrid(x, xStep * ex)) sheet.raw(`<text x="${f(sx(x))}" y="${f(sy(axY) + 15)}" font-family="${FONT}" font-size="12" text-anchor="middle" fill="#111">${f(x)}</text>`); });
+  ys.forEach((y) => { if (Math.abs(y - axY) > 1e-9 && onGrid(y, yStep * ey)) sheet.raw(`<text x="${f(sx(axX) - 6)}" y="${f(sy(y) + 4)}" font-family="${FONT}" font-size="12" text-anchor="end" fill="#111">${f(y)}</text>`); });
   if (axX === 0 && axY === 0) sheet.raw(`<text x="${f(sx(0) - 5)}" y="${f(sy(0) + 14)}" font-family="${FONT}" font-size="12" text-anchor="end" fill="#111" font-style="italic">O</text>`);
   sheet.raw(`<text x="${W - PAD + 2}" y="${f(sy(axY) + 4)}" font-family="${FONT}" font-size="12" fill="#111" font-style="italic">${ax.label ?? "x"}</text>`);
   sheet.raw(`<text x="${f(sx(axX))}" y="${PAD - 6}" font-family="${FONT}" font-size="12" text-anchor="middle" fill="#111" font-style="italic">${ay.label ?? "y"}</text>`);
@@ -210,6 +232,12 @@ export function renderPlane(spec: PlaneSpec): { svg: string; alt: string; issues
         altParts.push(`직선 ${o.label ?? o.id}: ${formatFn("linear", [lp.m, lp.b])}`);
       }
     } else if (o.kind === "function") {
+      if (o.fn === "rational") {
+        // 점근선(수직 x = −d/c, 수평 y = a/c)은 점선으로 — 표준 표현.
+        const xv = -o.params[3] / o.params[2], yh = o.params[0] / o.params[2];
+        if (xv > ax.min && xv < ax.max) sheet.raw(`<line x1="${f(sx(xv))}" y1="${f(sy(ay.max))}" x2="${f(sx(xv))}" y2="${f(sy(ay.min))}" stroke="${color}" stroke-width="1.2" stroke-dasharray="4 4"/>`);
+        if (yh > ay.min && yh < ay.max) sheet.raw(`<line x1="${f(sx(ax.min))}" y1="${f(sy(yh))}" x2="${f(sx(ax.max))}" y2="${f(sy(yh))}" stroke="${color}" stroke-width="1.2" stroke-dasharray="4 4"/>`);
+      }
       const [d0, d1] = o.domain ?? [ax.min, ax.max];
       const pts: Pt[] = [];
       let visible = 0;
@@ -247,6 +275,38 @@ export function renderPlane(spec: PlaneSpec): { svg: string; alt: string; issues
         labelJobs.push({ text: o.label, anchor: at(1), color, what: `함수 ${o.id} 라벨`, prefer: [...around(at(1), 18), ...around(at(0.75), 20), ...around(at(0.5), 20)] });
       }
       altParts.push(`${o.label ?? o.id}: ${formatFn(o.fn, o.params)}`);
+    } else if (o.kind === "inequality") {
+      // 경계선 + 음영. 음영은 반투명이라 여러 부등식이 겹치는 공통 영역이 더 진하다.
+      const m = o.slope, b = o.intercept;
+      const ends = clipLine(m, b);
+      const dashed = o.op === "<" || o.op === ">";
+      const above = o.op === ">=" || o.op === ">";
+      // 음영 다각형 = 경계선의 잘린 두 끝점 + 부등호 쪽에 있는 프레임 모서리. 각으로 정렬해 볼록 다각형을 만든다.
+      const corners: Pt[] = [[ax.min, ay.min], [ax.max, ay.min], [ax.max, ay.max], [ax.min, ay.max]];
+      const side = corners.filter(([x, y]) => (above ? y - (m * x + b) >= -1e-9 : y - (m * x + b) <= 1e-9));
+      const poly = [...ends, ...side];
+      if (poly.length >= 3) {
+        const cx0 = poly.reduce((a, q) => a + q[0], 0) / poly.length, cy0 = poly.reduce((a, q) => a + q[1], 0) / poly.length;
+        poly.sort((p1, p2) => Math.atan2(p1[1] - cy0, p1[0] - cx0) - Math.atan2(p2[1] - cy0, p2[0] - cx0));
+        sheet.raw(`<polygon points="${poly.map(([x, y]) => `${f(sx(x))},${f(sy(y))}`).join(" ")}" fill="${color}" fill-opacity="0.16"/>`);
+      }
+      if (ends.length < 2) issues.push({ code: "out_of_range", message: `부등식 ${o.id} 의 경계선이 축 범위 안에 보이지 않습니다.` });
+      else {
+        sheet.polyline(ends.map(([x, y]) => [sx(x), sy(y)] as Pt), { color, dashed });
+        if (o.label) { const end: Pt = [sx(ends[1][0]), sy(ends[1][1])]; labelJobs.push({ text: o.label, anchor: end, color, what: `부등식 ${o.id} 라벨`, prefer: [[end[0] - halfDiag(o.label) - 4, end[1] - 12], [end[0] - halfDiag(o.label) - 4, end[1] + 12], ...around(end, 18)] }); }
+      }
+      altParts.push(`부등식 ${o.label ?? o.id}: y ${o.op === "<=" ? "≤" : o.op === ">=" ? "≥" : o.op} ${formatFn("linear", [m, b]).slice(4)} (${dashed ? "점선" : "실선"} 경계, ${above ? "위쪽" : "아래쪽"} 음영)`);
+    } else if (o.kind === "piecewise") {
+      for (const pc of o.pieces) {
+        const y0 = pc.slope * pc.from + pc.intercept, y1 = pc.slope * pc.to + pc.intercept;
+        if (!inRange(pc.from, y0) || !inRange(pc.to, y1)) issues.push({ code: "out_of_range", message: `조각함수 ${o.id} 의 구간 [${pc.from}, ${pc.to}] 끝점이 축 범위 밖입니다.` });
+        sheet.polyline([[sx(pc.from), sy(y0)], [sx(pc.to), sy(y1)]], { color });
+        // 끝점: 열림은 흰 속, 닫힘은 채움. 이웃 조각과 같은 점이면 닫힘 하나로.
+        const dot = (x: number, y: number, open: boolean | undefined) => sheet.raw(`<circle cx="${f(sx(x))}" cy="${f(sy(y))}" r="4" fill="${open ? "#fff" : color}" stroke="${color}" stroke-width="2"/>`);
+        dot(pc.from, y0, pc.openFrom); dot(pc.to, y1, pc.openTo);
+      }
+      if (o.label) { const last = o.pieces[o.pieces.length - 1]; const end: Pt = [sx(last.to), sy(last.slope * last.to + last.intercept)]; labelJobs.push({ text: o.label, anchor: end, color, what: `조각함수 ${o.id} 라벨`, prefer: around(end, 18) }); }
+      altParts.push(`조각함수 ${o.label ?? o.id}: ${o.pieces.map((pc) => `${pc.openFrom ? "(" : "["}${pc.from}, ${pc.to}${pc.openTo ? ")" : "]"} 에서 ${formatFn("linear", [pc.slope, pc.intercept]).slice(4)}`).join("; ")}`);
     } else if (o.kind === "segment") {
       const a = resolve(o.from), c = resolve(o.to);
       if (!inRange(a[0], a[1]) || !inRange(c[0], c[1])) issues.push({ code: "out_of_range", message: `선분 ${o.id} 의 끝점이 축 범위 밖입니다.` });
@@ -289,9 +349,28 @@ export function renderPlane(spec: PlaneSpec): { svg: string; alt: string; issues
 }
 
 /** 지문 참조 검사 — "point P", "(2, 1)" 좌표, "line ℓ", "f(x)/g(x)", "y = 2x − 3" 식, 축 제목·범위. */
-export function lintPlaneAgainstText(spec: PlaneSpec, passage: string): FigureIssue[] {
+export function lintPlaneAgainstText(spec: PlaneSpec, passage: string, options?: string[] | null): FigureIssue[] {
   const issues: FigureIssue[] = [];
   const text = passage.replace(/\$/g, "").replace(/−/g, "-").replace(/\\frac\{(-?\d+)\}\{(\d+)\}/g, "$1/$2");
+  // 선택지(부등식 문항은 선택지가 부등식인 경우가 많다)에서는 **부등호·경계 포함 여부만** 대조한다. 좌표는 지문에서만.
+  const optionText = (options ?? []).join("\n").replace(/\$/g, "").replace(/−/g, "-");
+  // 선택지의 좌표가 그림에 점으로 찍혀 있으면 정답이 드러난다(E2E 실례: 네 선택지 점을 모두 그림에 찍음).
+  if (optionText) {
+    for (const m of optionText.matchAll(/\((-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)\)/g)) {
+      const x = Number(m[1]), y = Number(m[2]);
+      if (spec.objects.some((o) => o.kind === "point" && Math.abs(o.at[0] - x) < 1e-9 && Math.abs(o.at[1] - y) < 1e-9)) issues.push({ code: "option_leak", message: `선택지의 점 (${m[1]}, ${m[2]}) 이 그림에 찍혀 있습니다 — 선택지 좌표는 그림에 넣지 않습니다(정답 노출).` });
+    }
+  }
+  if (optionText && spec.objects.some((o) => o.kind === "inequality")) {
+    for (const m of optionText.matchAll(/y\s*(<=|>=|<|>|≤|≥)\s*(-?\d+(?:\.\d+)?(?:\/\d+)?)?\s*x\s*([+-])\s*(\d+(?:\.\d+)?(?:\/\d+)?)(?![\d.x²^])/g)) {
+      const op = m[1] === "≤" ? "<=" : m[1] === "≥" ? ">=" : m[1];
+      const slope = m[2] === undefined ? 1 : Number(m[2].includes("/") ? m[2].split("/").map(Number).reduce((a, b) => a / b) : m[2]);
+      const intercept = (m[3] === "-" ? -1 : 1) * Number(m[4].includes("/") ? m[4].split("/").map(Number).reduce((a, b) => a / b) : m[4]);
+      const sameLine = spec.objects.filter((o) => o.kind === "inequality" && Math.abs(o.slope - slope) < 1e-6 && Math.abs(o.intercept - intercept) < 1e-6) as Extract<PlaneObject, { kind: "inequality" }>[];
+      // 같은 경계선의 부등식이 그림에 있는데 부등호(방향·경계 포함)가 다르면 — 정답 선택지가 그림과 어긋날 수 있으니 확인 대상.
+      if (sameLine.length && !sameLine.some((o) => o.op === op)) issues.push({ code: "option_mismatch", message: `선택지의 'y ${m[1]} ${m[2] ?? ""}x ${m[3]} ${m[4]}' 는 그림의 같은 경계선 부등식(${sameLine.map((o) => o.op).join(", ")})과 부등호·경계 포함이 다릅니다 — 정답 선택지가 그림과 맞는지 확인하세요.` });
+    }
+  }
   const points = new Map<string, Pt>();
   const labels = new Set<string>();
   for (const o of spec.objects) {
@@ -341,6 +420,14 @@ export function lintPlaneAgainstText(spec: PlaneSpec, passage: string): FigureIs
       return false;
     });
     if (!has) issues.push({ code: "ref_mismatch", message: `지문의 식 y = ${m[1] ?? ""}x ${m[2]} ${m[3]} 과 같은 직선이 그림에 없습니다.` });
+  }
+  // y ≤ mx + b / y > mx + b — 같은 부등식 객체가 있어야 한다.
+  for (const m of text.matchAll(/y\s*(<=|>=|<|>|≤|≥)\s*(-?\d+(?:\.\d+)?(?:\/\d+)?)?\s*x\s*([+-])\s*(\d+(?:\.\d+)?(?:\/\d+)?)(?![\d.x²^])/g)) {
+    const op = m[1] === "≤" ? "<=" : m[1] === "≥" ? ">=" : m[1];
+    const slope = m[2] === undefined ? 1 : num(m[2]);
+    const intercept = (m[3] === "-" ? -1 : 1) * num(m[4]);
+    const has = spec.objects.some((o) => o.kind === "inequality" && o.op === op && Math.abs(o.slope - slope) < 1e-6 && Math.abs(o.intercept - intercept) < 1e-6);
+    if (!has) issues.push({ code: "ref_mismatch", message: `지문의 부등식 y ${m[1]} ${m[2] ?? ""}x ${m[3]} ${m[4]} 과 같은 음영 영역이 그림에 없습니다.` });
   }
   // y = ax² + bx + c
   for (const m of text.matchAll(/y\s*=\s*(-?\d+(?:\.\d+)?)?\s*x(?:\^2|²)\s*(?:([+-])\s*(\d+(?:\.\d+)?)\s*x)?\s*(?:([+-])\s*(\d+(?:\.\d+)?))?(?![\d.x])/g)) {

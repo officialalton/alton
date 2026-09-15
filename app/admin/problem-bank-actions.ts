@@ -325,7 +325,7 @@ export async function createDraftVersionAction(params: {
   const admin = createAdminClient();
   // 2026-09-14 표준 렌더링 검증 — 스키마에 안 맞는 그림은 저장하지 않는다. 그 외 문제(참조 불일치·충돌·잘림·레거시)는
   // 저장은 되지만 render_check 에 남고 공개가 막힌다(관리자가 사유를 보고 고친다).
-  const check = checkFigure(params.figure ?? null, params.passage);
+  const check = checkFigure(params.figure ?? null, params.passage, params.options);
   if (check.issues.some((i) => i.code === "schema")) {
     return { ok: false, error: `그림 데이터가 규격에 맞지 않아 저장하지 않았습니다 — ${check.issues[0].message}` };
   }
@@ -379,7 +379,7 @@ export async function generateFigureForProblemAction(params: {
   passage: string;
   options: string[] | null;
   explanation: string;
-  kind: "plane" | "parallel_transversal" | "triangle" | "data";
+  kind: "plane" | "parallel_transversal" | "triangle" | "circle" | "data";
 }): Promise<BankResult<unknown>> {
   await requireAdmin();
   const { generateFigureForProblem } = await import("./curriculum-doc-actions");

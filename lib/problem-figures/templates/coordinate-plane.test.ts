@@ -23,6 +23,10 @@ export const SAMPLES: { name: string; spec: PlaneSpec; passage: string }[] = [
   { name: "제1사분면 응용(축 제목)", spec: P([{ id: "c", kind: "function", fn: "linear", params: [15, 20], label: "C" }], { x: { min: 0, max: 10, step: 2, title: "Time (hours)" }, y: { min: 0, max: 200, step: 40, title: "Cost (dollars)" } }), passage: "The graph shows the cost C, in dollars, of renting a boat for x hours. What is the meaning of the y-intercept?" },
   { name: "수직선과 수평선", spec: P([{ id: "v", kind: "line", through: [[2, -6], [2, 6]], label: "x = 2" }, { id: "w", kind: "line", slope: 0, intercept: -1, label: "y = -1" }]), passage: "Lines x = 2 and y = -1 are graphed. At what point do they intersect?" },
   { name: "제곱근 함수", spec: P([{ id: "r", kind: "function", fn: "sqrt", params: [2, 1, 0], label: "y = 2√(x − 1)" }], { x: { min: -1, max: 10 }, y: { min: -1, max: 7 } }), passage: "The graph of y = 2√(x − 1) is shown. For what value of x is y = 4?" },
+  // 2026-09-14 보완(SAT Test 6~11 대조): 부등식·조각함수·유리함수
+  { name: "부등식 두 개(공통 영역)", spec: P([{ id: "a", kind: "inequality", op: "<=", slope: 1, intercept: 2, label: "y ≤ x + 2" }, { id: "b", kind: "inequality", op: ">", slope: -1, intercept: -1, label: "y > -x - 1" }]), passage: "The system y ≤ x + 2 and y > -x - 1 is graphed in the xy-plane. Which point is a solution to the system?" },
+  { name: "조각함수(열린/닫힌 점)", spec: P([{ id: "g", kind: "piecewise", pieces: [{ from: -4, to: 0, slope: 1, intercept: 2, openTo: true }, { from: 0, to: 4, slope: -0.5, intercept: 3 }], label: "g" }]), passage: "The graph of the piecewise function g is shown. What is g(0)?" },
+  { name: "유리함수(점근선)", spec: P([{ id: "r", kind: "function", fn: "rational", params: [1, 0, 1, -2], label: "f" }], { x: { min: -6, max: 8 }, y: { min: -6, max: 8 } }), passage: "The graph of f(x) = x / (x − 2) is shown. What is the equation of the vertical asymptote?" },
 ];
 
 describe("템플릿 3 — 대표 문제 10개는 검증을 통과한다", () => {
@@ -32,7 +36,7 @@ describe("템플릿 3 — 대표 문제 10개는 검증을 통과한다", () => 
       expect(r.issues).toEqual([]);
       expect(r.svg).toContain('role="img"');
       expect(r.alt).toContain("좌표평면");
-      for (const o of s.spec.objects) if ("label" in o && o.label) expect(r.svg).toContain(">" + o.label.replace(/ - /g, " − ").replace(/</g, "&lt;") + "<");
+      for (const o of s.spec.objects) if ("label" in o && o.label) expect(r.svg).toContain(">" + o.label.replace(/ - /g, " − ").replace(/</g, "&lt;").replace(/>/g, "&gt;") + "<");
       expect(lintPlaneAgainstText(s.spec, s.passage)).toEqual([]);
       expect(checkFigure(s.spec, s.passage).ok).toBe(true);
     });
@@ -69,6 +73,25 @@ describe("템플릿 3 — 거부", () => {
     for (let i = 0; i < 6; i++) objs.push({ id: `p${i}`, kind: "point", at: [0.2 * i, 0.2 * i], label: `Point number ${i} with a very long label` });
     const r = renderPlane(P(objs, { x: { min: -1, max: 2 }, y: { min: -1, max: 2 } }));
     expect(r.issues.some((i) => i.code === "label_collision")).toBe(true);
+  });
+  it("지문의 부등식이 그림의 음영과 다르면 참조 불일치, 겹치는 조각·분모 0 유리함수는 스키마 거부", () => {
+    const sp = SAMPLES.find((x) => x.name.startsWith("부등식"))!.spec;
+    expect(lintPlaneAgainstText(sp, "The inequality y ≥ x + 2 is shown.").some((i) => i.code === "ref_mismatch")).toBe(true);
+    expect(validatePlane(P([{ id: "g", kind: "piecewise", pieces: [{ from: 0, to: 3, slope: 1, intercept: 0 }, { from: 2, to: 5, slope: 1, intercept: 0 }] }])).ok).toBe(false);
+    expect(validatePlane(P([{ id: "r", kind: "function", fn: "rational", params: [1, 0, 0, 2] }])).ok).toBe(false);
+    const r = renderPlane(sp);
+    expect(r.svg).toContain("fill-opacity");
+    expect(r.svg).toContain("stroke-dasharray");
+  });
+  it("선택지의 좌표를 그림에 점으로 찍으면 정답 노출로 거부한다(E2E 실례)", () => {
+    const sp = P([{ id: "a", kind: "inequality", op: "<=", slope: 1, intercept: 2 }, { id: "p", kind: "point", at: [1, 1], label: "(1, 1)" }]);
+    expect(lintPlaneAgainstText(sp, "Which point is a solution?", ["(0, 3)", "(1, 1)"]).some((i) => i.code === "option_leak")).toBe(true);
+    expect(lintPlaneAgainstText(sp, "Which point is a solution?", ["(0, 3)", "(2, 2)"]).some((i) => i.code === "option_leak")).toBe(false);
+  });
+  it("눈금 숫자는 간격의 배수에만 붙는다 — step 1 에 -8~8 이면 -6, -3, 3, 6 (E2E 실례: -8, -5, -2 …)", () => {
+    const r = renderPlane(P([{ id: "l", kind: "line", slope: 1, intercept: 0 }], { x: { min: -8, max: 8, step: 1 }, y: { min: -8, max: 8, step: 1 } }));
+    const nums = Array.from(r.svg.matchAll(/font-size="12" text-anchor="middle" fill="#111">(-?\d+)<\/text>/g)).map((m) => Number(m[1]));
+    expect(nums).toEqual([-6, -3, 3, 6]);
   });
   it("축 제목에 변수 글자('x', 'y,')만 오면 무시한다 — 축 끝 라벨과 겹친다(E2E 실례)", () => {
     const r = renderPlane(P([{ id: "l", kind: "line", slope: 1, intercept: 0 }], { x: { min: -5, max: 5, title: "x" }, y: { min: -5, max: 5, title: "y," } }));
