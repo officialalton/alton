@@ -386,10 +386,14 @@ function NewProblemPanel({
   const apMeta = AP_SUBJECTS.find((a) => a.code === apSubject) ?? null;
   const apReady = system !== "ap" || Boolean(apMeta?.supported);
   const need = judgeMaterialNeed({ examSystem: system, skillCode: skillCode || null, text: "" });
-  const figurePolicy =
-    need.level === "required"
-      ? need.kind === "plane" ? "require_plane" : need.kind === "geometry" ? "require_geometry" : need.kind === "figure_choice" ? "require_figure_choice" : "require_data"
-      : need.level === "recommended" ? "optional" : "none";
+  // 자료를 넣을지는 생성 **전에** 정한다 — 그래프를 읽는 문항과 식만 있는 문항은 다른 문제다(2026-09-15 제품 오너).
+  //   필수 → 자료 포함 고정, 권장 → 관리자가 '자료 포함(권장)' / '텍스트형' 중 선택(기본 자료 포함), 불필요 → 텍스트형 고정.
+  //   자료 유형이 둘 이상 나오는 기술(예: Linear functions 는 좌표평면 그래프도 함수표도)은 유형까지 고른다. 세부 형태(막대/산점도, 삼각형/원)는 AI 가 문항 내용에 맞춰 정한다.
+  const [materialChoice, setMaterialChoice] = useState<string>("with");
+  const requireFor = (kind: string | null) => (kind === "plane" ? "require_plane" : kind === "geometry" ? "require_geometry" : kind === "figure_choice" ? "require_figure_choice" : "require_data");
+  const chosenKind = materialChoice === "text" ? null : materialChoice === "with" ? need.kind : (materialChoice as typeof need.kind);
+  const withMaterial = need.level !== "none" && chosenKind !== null;
+  const figurePolicy = withMaterial ? requireFor(chosenKind) : "none";
 
   function switchSystem(next: ExamSystem) {
     setSystem(next);
@@ -474,6 +478,7 @@ function NewProblemPanel({
             onChange={(e) => {
               const code = e.target.value;
               setSkillCode(code);
+              setMaterialChoice("with");
               const meta = SKILL_BY_CODE.get(code);
               if (meta) {
                 const legacy = findProblemSkill(meta.legacySkill);
@@ -507,10 +512,27 @@ function NewProblemPanel({
         </div>
       )}
       {system !== "ap" && skillCode && (
-        <p className="text-[12px] mt-2 text-grey-500" data-testid="new-material-need" data-level={need.level}>
-          자료 판정: <b className="text-ink">{MATERIAL_LEVEL_LABEL[need.level]}</b>{need.kind ? ` · ${MATERIAL_KIND_LABEL[need.kind]}` : ""} — {need.reason}
+        <div className="text-[12px] mt-2 text-grey-500" data-testid="new-material-need" data-level={need.level} data-choice={withMaterial ? "with" : "text"} data-kind={chosenKind ?? ""}>
+          자료 판정: <b className="text-ink">{MATERIAL_LEVEL_LABEL[need.level]}</b>{chosenKind ? ` · ${MATERIAL_KIND_LABEL[chosenKind]}` : ""} — {need.reason}
           {need.level === "required" && " AI 생성은 이 자료를 함께 만들고, 자료 없는 초안은 저장·공개되지 않습니다."}
-        </p>
+          {(need.level === "recommended" || (need.level === "required" && need.alternatives.length > 1)) && need.kind && (
+            <div className="flex flex-wrap gap-3 mt-1.5 text-ink" role="radiogroup" aria-label="자료 유형 선택">
+              {need.alternatives.map((k, i) => (
+                <label key={k} className="flex items-center gap-1.5">
+                  <input type="radio" name="material-choice" checked={chosenKind === k} onChange={() => setMaterialChoice(i === 0 ? "with" : k)} />
+                  자료 포함 · {MATERIAL_KIND_LABEL[k]}{i === 0 ? <span className="text-grey-500">(기본)</span> : null}
+                </label>
+              ))}
+              {need.level === "recommended" && (
+                <label className="flex items-center gap-1.5">
+                  <input type="radio" name="material-choice" checked={materialChoice === "text"} onChange={() => setMaterialChoice("text")} />
+                  텍스트형 <span className="text-grey-500">(자료 없이 식·조건만으로 성립하는 문항)</span>
+                </label>
+              )}
+              <span className="text-grey-500 basis-full">자료의 세부 형태(표·막대·산점도 / 삼각형·원 등)는 문항 내용에 맞춰 AI 가 정하고 검증합니다. 복수 생성이면 문항마다 다를 수 있습니다.</span>
+            </div>
+          )}
+        </div>
       )}
 
       <div className="flex flex-wrap gap-2 items-center mt-3">

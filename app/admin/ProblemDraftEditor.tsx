@@ -218,7 +218,9 @@ export default function ProblemDraftEditor({
       {/* 자료 판정 + 자료 구역 */}
       <div className={"mt-2 rounded-lg px-3 py-2 text-[12px] " + (need.level === "required" ? "bg-red/5 text-ink border-[1.5px] border-red/30" : need.level === "recommended" ? "bg-grey-100 text-ink" : "bg-grey-100 text-grey-500")} data-testid="material-need" data-level={need.level}>
         <b>{MATERIAL_LEVEL_LABEL[need.level]}</b>{need.kind ? ` · ${MATERIAL_KIND_LABEL[need.kind]}` : ""} — {need.reason}
-        {need.level === "recommended" && <span className="text-grey-500"> 자료 없이 텍스트형으로 진행할 수 있습니다.</span>}
+        {need.level === "recommended" && !figureForSave && (
+          <span className="text-grey-500"> 텍스트형 문항입니다. 자료를 붙이면 자료를 읽어야 풀리는 문항이 되므로 지문·질문도 함께 고쳐야 합니다.</span>
+        )}
       </div>
       {vis.material && (
         <MaterialSection

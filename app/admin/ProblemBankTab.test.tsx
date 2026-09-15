@@ -500,6 +500,30 @@ describe("보관은 삭제가 아니다", () => {
     );
   });
 
+  it("자료 권장이면 생성 전에 '자료 포함 / 텍스트형'을 고르고, 그 선택이 그림 요구로 들어간다(기본은 자료 포함)", async () => {
+    render(<ProblemBankTab subjects={subjects} />);
+    await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());
+    fireEvent.click(screen.getByRole("tab", { name: "SAT Math" }));
+    fireEvent.change(screen.getByLabelText("새 문제 과목"), { target: { value: "sub1" } });
+    fireEvent.change(screen.getAllByLabelText("SAT 영역")[1], { target: { value: "algebra" } });
+    fireEvent.change(screen.getAllByLabelText("세부 기술")[1], { target: { value: "linear_equations_two_var" } });
+    expect(screen.getByTestId("new-material-need")).toHaveAttribute("data-level", "recommended");
+    expect(screen.getByTestId("new-material-need")).toHaveAttribute("data-choice", "with");
+    fireEvent.click(screen.getByText("AI로 만들기"));
+    await waitFor(() => expect(generateBankProblemsAction).toHaveBeenCalledWith(expect.objectContaining({ figurePolicy: "require_plane" })));
+    fireEvent.click(screen.getByLabelText(/^텍스트형/));
+    expect(screen.getByTestId("new-material-need")).toHaveAttribute("data-choice", "text");
+    fireEvent.click(screen.getByText("AI로 만들기"));
+    await waitFor(() => expect(generateBankProblemsAction).toHaveBeenLastCalledWith(expect.objectContaining({ figurePolicy: "none" })));
+    // 자료 유형이 둘 이상인 기술(Linear functions: 좌표평면 / 함수표)은 유형까지 고른다.
+    fireEvent.change(screen.getAllByLabelText("세부 기술")[1], { target: { value: "linear_functions" } });
+    expect(screen.getByTestId("new-material-need")).toHaveAttribute("data-kind", "plane");
+    fireEvent.click(screen.getByLabelText(/자료 포함 · 표·그래프/));
+    expect(screen.getByTestId("new-material-need")).toHaveAttribute("data-kind", "data");
+    fireEvent.click(screen.getByText("AI로 만들기"));
+    await waitFor(() => expect(generateBankProblemsAction).toHaveBeenLastCalledWith(expect.objectContaining({ figurePolicy: "require_data" })));
+  });
+
   it("R&W 탭은 답안 형식이 객관식으로 고정되고 Math 전용 항목이 없다; AP 탭은 과목을 고르면 '준비 중'만 보인다", async () => {
     render(<ProblemBankTab subjects={subjects} />);
     await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());

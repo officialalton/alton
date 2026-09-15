@@ -19,6 +19,11 @@ export type MaterialNeed = {
   kind: MaterialKind | null;
   /** 기하일 때 어떤 도형 템플릿이 맞는지(질문 문장에서 읽은 것). 비어 있으면 관리자가 고른다. */
   geometry: GeometryTemplate[];
+  /**
+   * 이 세부 기술에서 실제로 나오는 자료 유형들(첫 번째가 기본 kind). 둘 이상이면 새 문제 패널이 유형을 고르게 한다 —
+   * 예: Linear functions 는 좌표평면 그래프도, 함수표도 나온다. 세부 형태(막대/산점도, 삼각형/원)는 문항 내용에 따라 AI 가 정한다.
+   */
+  alternatives: MaterialKind[];
   reason: string;
 };
 
@@ -50,12 +55,12 @@ const GEOMETRY_CUE: [RegExp, GeometryTemplate][] = [
 ];
 
 /** 세부 기술의 기본 자료 유형(질문 문장에 단서가 없을 때). */
-const SKILL_DEFAULT: Record<string, { kind: MaterialKind; level: MaterialLevel; why: string }> = {
-  linear_functions: { kind: "plane", level: "recommended", why: "기울기·절편은 좌표평면 그래프로 묻는 문항이 많습니다" },
+const SKILL_DEFAULT: Record<string, { kind: MaterialKind; level: MaterialLevel; why: string; alternatives?: MaterialKind[] }> = {
+  linear_functions: { kind: "plane", level: "recommended", why: "기울기·절편은 좌표평면 그래프로 묻는 문항이 많고, 함수표(x, f(x))로 주어지는 문항도 있습니다", alternatives: ["plane", "data"] },
   linear_equations_two_var: { kind: "plane", level: "recommended", why: "두 변수 일차방정식은 직선 그래프로 묻는 문항이 많습니다" },
-  systems_linear: { kind: "plane", level: "recommended", why: "연립방정식의 해는 두 직선의 교점으로 묻는 문항이 많습니다" },
+  systems_linear: { kind: "plane", level: "recommended", why: "연립방정식의 해는 두 직선의 교점 그래프로도, 그래프 선택지로도 나옵니다", alternatives: ["plane", "figure_choice"] },
   linear_inequalities: { kind: "plane", level: "recommended", why: "부등식의 해 영역은 음영 그래프로 묻는 문항이 있습니다" },
-  nonlinear_functions: { kind: "plane", level: "recommended", why: "비선형 함수는 그래프(포물선·지수)로 묻는 문항이 많습니다" },
+  nonlinear_functions: { kind: "plane", level: "recommended", why: "비선형 함수는 그래프(포물선·지수)를 읽는 문항과 '어느 그래프인가'를 고르는 문항이 많습니다", alternatives: ["plane", "figure_choice"] },
   nonlinear_equations_systems: { kind: "plane", level: "recommended", why: "비선형 연립은 교점 그래프로 묻는 문항이 있습니다" },
   ratios_rates_units: { kind: "data", level: "recommended", why: "비율·속도 문항은 표 자료로 주어지는 경우가 있습니다" },
   percentages: { kind: "data", level: "recommended", why: "백분율 문항은 표·막대그래프 자료로 주어지는 경우가 많습니다" },
@@ -67,7 +72,7 @@ const SKILL_DEFAULT: Record<string, { kind: MaterialKind; level: MaterialLevel; 
   area_volume: { kind: "geometry", level: "recommended", why: "넓이·부피는 도형 그림이 있으면 더 적절하지만 치수만으로도 성립합니다" },
   lines_angles_triangles: { kind: "geometry", level: "required", why: "각·평행선·삼각형 문항은 도형 없이 성립하지 않습니다" },
   right_triangles_trigonometry: { kind: "geometry", level: "required", why: "직각삼각형·삼각비 문항은 도형 없이 성립하지 않습니다" },
-  circles: { kind: "geometry", level: "recommended", why: "원 문항은 그림이 있으면 더 적절하지만 식(원의 방정식)만으로도 성립합니다" },
+  circles: { kind: "geometry", level: "recommended", why: "원 문항은 도형(현·호·접선)으로도, 좌표평면의 원의 방정식으로도 나옵니다", alternatives: ["geometry", "plane"] },
   command_of_evidence_quant: { kind: "data", level: "required", why: "정량 근거 문항은 표·그래프 자료 없이 성립하지 않습니다" },
 };
 
@@ -83,7 +88,7 @@ export function judgeMaterialNeed(input: {
   const subject = label ? `${label} 문항` : "이 문항";
 
   if (input.examSystem === "ap") {
-    return { level: "none", kind: null, geometry: [], reason: "AP 문항 작성은 준비 중입니다 — 자료 판정을 하지 않습니다." };
+    return { level: "none", kind: null, geometry: [], alternatives: [], reason: "AP 문항 작성은 준비 중입니다 — 자료 판정을 하지 않습니다." };
   }
 
   const geometryHits = GEOMETRY_CUE.filter(([re]) => re.test(text)).map(([, t]) => t);
@@ -94,40 +99,40 @@ export function judgeMaterialNeed(input: {
   const skillDefaultKind = input.skillCode ? SKILL_DEFAULT[input.skillCode]?.kind ?? null : null;
   if (CUE.graphAmbiguous.test(text) && !CUE.data.test(text) && !CUE.figureChoice.test(text)) {
     const m = text.match(CUE.graphAmbiguous)?.[0] ?? "graph";
-    if (skillDefaultKind === "data" || isRw) return { level: "required", kind: "data", geometry: [], reason: `${subject}이 자료 그래프(${m})를 읽어야 풀 수 있으므로 표·그래프 자료가 필요합니다.` };
-    return { level: "required", kind: "plane", geometry: [], reason: `${subject}이 함수 그래프(${m})를 가리키므로 좌표평면 자료가 필요합니다.` };
+    if (skillDefaultKind === "data" || isRw) return { level: "required", kind: "data", geometry: [], alternatives: ["data"], reason: `${subject}이 자료 그래프(${m})를 읽어야 풀 수 있으므로 표·그래프 자료가 필요합니다.` };
+    return { level: "required", kind: "plane", geometry: [], alternatives: ["plane"], reason: `${subject}이 함수 그래프(${m})를 가리키므로 좌표평면 자료가 필요합니다.` };
   }
   if (CUE.figureChoice.test(text) && !isRw) {
-    return { level: "required", kind: "figure_choice", geometry: [], reason: `${subject}이 "어느 그래프인가"를 묻으므로 그래프/도형 선택지 4개가 필요합니다.` };
+    return { level: "required", kind: "figure_choice", geometry: [], alternatives: ["figure_choice"], reason: `${subject}이 "어느 그래프인가"를 묻으므로 그래프/도형 선택지 4개가 필요합니다.` };
   }
   if (CUE.data.test(text)) {
     const m = text.match(CUE.data)?.[0] ?? "table";
-    return { level: "required", kind: "data", geometry: [], reason: `${subject}이 자료(${m})를 읽어야 풀 수 있으므로 표·그래프 자료가 필요합니다.` };
+    return { level: "required", kind: "data", geometry: [], alternatives: ["data"], reason: `${subject}이 자료(${m})를 읽어야 풀 수 있으므로 표·그래프 자료가 필요합니다.` };
   }
   if (!isRw && CUE.plane.test(text)) {
     const m = text.match(CUE.plane)?.[0] ?? "graph";
-    return { level: "required", kind: "plane", geometry: [], reason: `${subject}이 그래프(${m})를 가리키므로 좌표평면 자료가 필요합니다.` };
+    return { level: "required", kind: "plane", geometry: [], alternatives: ["plane"], reason: `${subject}이 그래프(${m})를 가리키므로 좌표평면 자료가 필요합니다.` };
   }
   if (!isRw && CUE.geometry.test(text)) {
     const m = text.match(CUE.geometry)?.[0] ?? "figure";
-    return { level: "required", kind: "geometry", geometry: geometryHits, reason: `${subject}이 도형(${m})을 가리키므로 도형 자료가 필요합니다.` };
+    return { level: "required", kind: "geometry", geometry: geometryHits, alternatives: ["geometry"], reason: `${subject}이 도형(${m})을 가리키므로 도형 자료가 필요합니다.` };
   }
 
   // 2) 단서가 없으면 세부 기술의 기본 판정.
   const d = input.skillCode ? SKILL_DEFAULT[input.skillCode] : undefined;
   if (d) {
     if (d.level === "required") {
-      return { level: "required", kind: d.kind, geometry: geometryHits, reason: `${d.why}. ${MATERIAL_KIND_LABEL[d.kind]} 자료가 필요합니다.` };
+      return { level: "required", kind: d.kind, geometry: geometryHits, alternatives: d.alternatives ?? [d.kind], reason: `${d.why}. ${MATERIAL_KIND_LABEL[d.kind]} 자료가 필요합니다.` };
     }
-    return { level: "recommended", kind: d.kind, geometry: geometryHits, reason: `${d.why}. ${MATERIAL_KIND_LABEL[d.kind]} 자료를 권장하지만 텍스트형으로도 만들 수 있습니다.` };
+    return { level: "recommended", kind: d.kind, geometry: geometryHits, alternatives: d.alternatives ?? [d.kind], reason: `${d.why}. ${MATERIAL_KIND_LABEL[d.kind]} 자료를 권장하지만 텍스트형으로도 만들 수 있습니다.` };
   }
   if (isRw) {
-    return { level: "none", kind: null, geometry: [], reason: `${subject}은 지문·질문·선택지만으로 충분합니다.` };
+    return { level: "none", kind: null, geometry: [], alternatives: [], reason: `${subject}은 지문·질문·선택지만으로 충분합니다.` };
   }
   if (!input.skillCode) {
-    return { level: "none", kind: null, geometry: [], reason: "세부 기술을 고르면 자료 필요성을 판정합니다. 지금은 텍스트·수식만으로 진행합니다." };
+    return { level: "none", kind: null, geometry: [], alternatives: [], reason: "세부 기술을 고르면 자료 필요성을 판정합니다. 지금은 텍스트·수식만으로 진행합니다." };
   }
-  return { level: "none", kind: null, geometry: [], reason: `${subject}은 텍스트·수식·선택지만으로 충분합니다.` };
+  return { level: "none", kind: null, geometry: [], alternatives: [], reason: `${subject}은 텍스트·수식·선택지만으로 충분합니다.` };
 }
 
 /** 저장된 그림 데이터가 판정한 자료 유형을 채우는가. */
