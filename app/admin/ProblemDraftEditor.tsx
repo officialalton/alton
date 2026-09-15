@@ -222,7 +222,7 @@ export default function ProblemDraftEditor({
             {options.map((o, i) =>
               o.trim() ? (
                 <li key={i} className="text-[13.5px] text-ink py-0.5">
-                  <span className="text-grey-500 mr-2">{i + 1}</span>
+                  <span className="text-grey-500 mr-2 font-semibold">{String.fromCharCode(65 + i)})</span>
                   <LearningText text={o} className="learning-body inline" />
                   {correctIndex === i && <span className="text-[11px] text-grey-500 ml-2">정답</span>}
                 </li>
@@ -231,6 +231,22 @@ export default function ProblemDraftEditor({
           </ol>
         )}
       </div>
+
+      {source?.quality && (
+        <details className="text-[12px] mt-1 mb-1 border-[1.5px] border-grey-200 rounded-lg px-3 py-2" data-testid="quality-details">
+          <summary className="cursor-pointer text-ink">
+            추정 난이도 <b>{source.quality.estimatedDifficulty}</b>{source.quality.requestedDifficulty !== source.quality.estimatedDifficulty ? ` (요청 ${source.quality.requestedDifficulty})` : ""} · {source.quality.calibrated ? "학생 응답으로 보정됨" : "추정치 — 학생 응답이 쌓이면 보정"}
+            {source.quality.needsReview && <span className="ml-2 font-bold text-red">검토 필요</span>}
+          </summary>
+          {source.quality.difficultyReasons.length > 0 && (
+            <ul className="list-disc pl-5 mt-1 text-grey-500">{source.quality.difficultyReasons.map((r, i) => <li key={i}>{r}</li>)}</ul>
+          )}
+          {source.quality.needsReviewReasons.length > 0 && (
+            <p className="mt-1 text-red">{source.quality.needsReviewReasons.join(" · ")}</p>
+          )}
+          <p className="mt-1 text-grey-500">독립 검사: {source.quality.independentReview.agrees ? "지정 정답과 일치" : "불일치 또는 미실행"} · 확신 {source.quality.independentReview.confidence}</p>
+        </details>
+      )}
 
       {/* 1. 지문 / 자료 */}
       <FieldTitle hint={rwCode && vis.rwHints ? RW_HINT[rwCode] : examSystem === "sat_math" ? "조건·상황 설명. 수식은 $…$ 안에. 묻는 문장은 아래 '질문'에 따로." : "본문·자료 설명. 질문은 아래 칸에 따로 씁니다."}>지문 / 자료</FieldTitle>
@@ -334,7 +350,7 @@ export default function ProblemDraftEditor({
             <div key={i} className="flex items-center gap-2 mb-1.5">
               <label className="flex items-center gap-1.5 shrink-0">
                 <input type="radio" name={`correct-${problem.id}`} aria-label={`${i + 1}번이 정답`} checked={correctIndex === i} onChange={() => setCorrectIndex(i)} />
-                <span className="text-[12px] font-bold text-grey-500 w-[14px]">{i + 1}</span>
+                <span className="text-[12px] font-bold text-grey-500 w-[18px]">{String.fromCharCode(65 + i)})</span>
               </label>
               <input
                 aria-label={`선택지 ${i + 1}`}
@@ -583,7 +599,7 @@ export function PublishedContentView({ problem }: { problem: BankProblem }) {
           <ol className="space-y-0.5">
             {p.options.map((o, i) => (
               <li key={i} className={"text-[12.5px] " + (p.correctIndex === i ? "font-bold text-ink" : "text-grey-500")}>
-                {i + 1}. <LearningText text={o || "(비어 있음)"} className="inline" />{p.correctIndex === i ? " · 정답" : ""}
+                {String.fromCharCode(65 + i)}) <LearningText text={o || "(비어 있음)"} className="inline" />{p.correctIndex === i ? " · 정답" : ""}
               </li>
             ))}
           </ol>

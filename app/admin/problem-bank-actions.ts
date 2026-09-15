@@ -5,7 +5,7 @@ import { validateFigureSpec } from "@/lib/problem-figures/spec";
 import { checkContent } from "@/lib/problem-content-check";
 import { composeProblemText, hasQuestion, splitLegacyQuestion } from "@/lib/problem-question";
 import { judgeMaterialNeed, materialBlocker } from "@/lib/problem-material-need";
-import { checkRwStructure } from "@/lib/rw-stimulus";
+import type { QualityRecord } from "@/lib/problem-generation/review";
 
 import { requireAdmin } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
@@ -43,6 +43,8 @@ export type BankProblem = {
   apSubject: string | null;
   /** 최신 내용(공개본 우선)에 질문이 있는가 — 없으면 '질문 보완 필요', 자동 구성 후보에서 빠진다. */
   hasQuestion: boolean;
+  /** 학생 응답 통계(공개본 기준, 개인 식별 없음) — 추정 난이도 보정의 재료. */
+  responseStats: { responses: number; correctPct: number | null } | null;
   difficulty: string | null;
   subjectId: string | null;
   subjectName: string;
@@ -85,6 +87,8 @@ export type ProblemContent = {
   renderCheck: RenderCheck | null;
   /** 로마숫자 진술 I, II, III … */
   statements: string[] | null;
+  /** 품질 기록(추정 난이도·근거·오답 근거·독립 검사·검토 필요). 관리자에게는 난이도 근거와 검토 필요만 보인다. */
+  quality: QualityRecord | null;
 };
 
 export type BankResult<T = undefined> =
@@ -177,7 +181,7 @@ export async function listBankProblemsAction(
   // 있다 — 그래서 공개된 문제가 "(아직 내용이 없는 문제)"로 보였다.
   const { data: contentRows } = await admin
     .from("problem_versions")
-    .select("id, problem_id, status, version_no, passage, question, options, correct_index, explanation, answers, figure, figure_checked, render_check, statements")
+    .select("id, problem_id, status, version_no, passage, question, options, correct_index, explanation, answers, figure, figure_checked, render_check, statements, quality")
     .in("problem_id", problemIds)
     .in("status", ["published", "draft", "in_review"])
     .order("version_no", { ascending: false });
@@ -194,6 +198,7 @@ export async function listBankProblemsAction(
     figureChecked: Boolean(v.figure_checked),
     renderCheck: (v.render_check as RenderCheck | null) ?? null,
     statements: Array.isArray(v.statements) ? (v.statements as string[]) : null,
+    quality: (v.quality as QualityRecord | null) ?? null,
   });
 
   const publishedByProblem = new Map<string, ProblemContent>();
@@ -208,6 +213,8 @@ export async function listBankProblemsAction(
     }
   }
 
+  const { data: statRows } = await admin.from("problem_response_stats").select("problem_id, problem_version_id, responses, correct_pct").in("problem_id", problemIds);
+  const statsByVersion = new Map((statRows ?? []).map((r) => [r.problem_version_id as string, { responses: Number(r.responses ?? 0), correctPct: r.correct_pct === null || r.correct_pct === undefined ? null : Number(r.correct_pct) }]));
   const { data: readinessRows } = await admin
     .from("problem_composition_readiness")
     .select("problem_id, readiness")
@@ -228,6 +235,10 @@ export async function listBankProblemsAction(
     hasQuestion: (() => {
       const c = publishedByProblem.get(r.id as string) ?? draftByProblem.get(r.id as string);
       return c ? hasQuestion(c.passage, c.question) : false;
+    })(),
+    responseStats: (() => {
+      const pub = publishedByProblem.get(r.id as string);
+      return pub ? statsByVersion.get(pub.versionId) ?? null : null;
     })(),
     difficulty: (r.difficulty as string | null) ?? null,
     subjectId: (r.subject_id as string | null) ?? null,
@@ -663,195 +674,46 @@ export async function generateBankProblemsAction(params: {
     };
   }
 
-  const { generateSectionProblems } = await import("./curriculum-doc-actions");
-
-  let generated: Awaited<ReturnType<typeof generateSectionProblems>>;
-  try {
-    generated = await generateSectionProblems({
-      // 생성기는 섹션 제목 자리를 맥락으로 쓴다 — 주제가 있으면 그것이 더 가깝다.
-      sectionTitle: params.topic?.trim() || params.skillType,
-      subjectName: subject.name as string,
-      skillType: params.skillType,
-      difficulty: params.difficulty as never,
-      format: params.format as never,
-      count: params.count,
-      figurePolicy: (params.figurePolicy as never) ?? "optional",
-      skillCode: params.skillCode,
-      keepFigureless: true,
-    });
-  } catch (e) {
-    // 그림 요구를 못 채운 경우는 사람이 조치할 수 있는 사실이라 그대로 알린다. 그 외 원문은 넘기지 않는다(서버 로그에만).
-    const message = e instanceof Error ? e.message : "";
-    console.error("[problem-bank] AI 생성 실패:", message);
-    if (message.includes("그림이 있는 문항")) return { ok: false, error: message };
-    return { ok: false, error: "문제를 생성하지 못했습니다. 잠시 후 다시 시도해주세요." };
-  }
-
+  // 생성 → 자료 → 유형별 품질 계약 → 독립 품질 검사 → 통과분만(2026-09-15). 걸린 결과는 사유 피드백으로 1회 재생성. 저장은 여기서.
+  const { runGenerationPipeline } = await import("@/lib/problem-generation/pipeline");
+  const result = await runGenerationPipeline({
+    subjectName: subject.name as string,
+    skillType: params.skillType,
+    skillCode: params.skillCode ?? null,
+    examSystem: params.examSystem ?? null,
+    topic: params.topic,
+    difficulty: params.difficulty as never,
+    format: params.format as never,
+    count: params.count,
+    figurePolicy: (params.figurePolicy as never) ?? "optional",
+  });
+  const failures: string[] = result.failures.filter((f) => !f.resolved).map((f) => `${f.snippet} — ${f.reason}`);
   let created = 0;
-  // 만들지 못한 사유를 모아 둔다 — 실패한 결과는 초안으로 저장하지 않고 사유와 함께 분리한다(2026-09-14 제품 오너: 복수 생성 질문 누락).
-  const failures: string[] = [];
-  const requested = Math.max(1, Math.min(10, params.count));
-  const { generateFigureForProblem } = await import("./curriculum-doc-actions");
-
-  /**
-   * 생성 결과 하나를 **공개 게이트와 같은 검사**에 통과시킨 뒤에만 초안으로 저장한다(2026-09-15 제품 오너: 게이트에 걸린 초안이 남는 상황 자체가 없어야 한다).
-   *   자료 필수·판정 → 자료 없으면 2차 자료 생성 → 데이터 계약(질문·답안·해설·RW 구조) → 자료 참조·렌더 검증(checkFigure) → 내용 검증(checkContent)
-   *   자료 검증에 걸리면 자료를 한 번 더 만들어 재검사하고, 그래도 안 되면 그 결과는 저장하지 않는다.
-   */
-  const { regenerateProblem } = await import("./curriculum-doc-actions");
-  /** 게이트에 걸린 결과를 그 사유를 피드백으로 넣어 한 번 다시 만든다(2026-09-15 제품 오너: 관리자에게 넘기지 말고 자동 보완). */
-  const retryWith = async (g: (typeof generated)[number], reason: string): Promise<boolean> => {
-    try {
-      const revised = await regenerateProblem({
-        sectionTitle: params.topic?.trim() || params.skillType, subjectName: subject.name as string, skillType: params.skillType,
-        difficulty: params.difficulty as never, format: params.format as never,
-        current: { ...g, passage: composeProblemText(g.stimulus ?? g.passage, g.question ?? null) },
-        feedback: `검증에 걸렸습니다: ${reason}. 이 사유가 해소되도록 지문·자료·질문·선택지를 서로 맞게 다시 쓰세요. 자료(figure)는 지문이 부르는 이름·값과 정확히 같아야 하고 정답이 드러나면 안 됩니다.`,
-      });
-      return gateAndSave({ ...revised, needsFigure: false }, 1);
-    } catch (e) {
-      console.error("[problem-bank] 재생성 실패:", e instanceof Error ? e.message : e);
-      failures.push(`${(g.question ?? g.passage).slice(0, 40)}… — ${reason} (재생성도 실패)`);
-      return false;
-    }
-  };
-  const gateAndSave = async (g: (typeof generated)[number], depth = 0): Promise<boolean> => {
-    // 실패 시 한 번은 자동 재생성으로 보완하고(depth 0 → 1), 그래도 안 되면 사유와 함께 분리한다.
-    const fail = async (reason: string) => (depth === 0 ? retryWith(g, reason) : (failures.push(`${(g.question ?? g.passage).slice(0, 40)}… — ${reason}`), false));
-    const text = composeProblemText(g.stimulus ?? g.passage, g.question ?? null);
-    const need = judgeMaterialNeed({ examSystem: params.examSystem ?? null, skillCode: params.skillCode ?? null, text });
-    const kind = pickFigureKind(need, text, params.skillCode ?? null, params.figurePolicy);
-    const makeFigure = async () => {
-      if (!kind) return;
-      try {
-        const r = await generateFigureForProblem({ passage: text, options: g.options ?? null, explanation: g.explanation, kind, correctIndex: g.correctIndex ?? null });
-        if (r.ok) g.figure = r.figure;
-        else console.error("[problem-bank] 자료 생성 실패:", kind, r.error);
-      } catch (e) {
-        console.error("[problem-bank] 자료 생성 오류:", kind, e instanceof Error ? e.message : e);
-      }
-    };
-    // 1) 자료 필수인데 없다/규격 밖이다 → 자료 생성.
-    const missingRequired = need.level === "required" && materialBlocker(need, g.figure ?? null) !== null;
-    if (g.needsFigure || missingRequired || (g.figure == null && params.figurePolicy?.startsWith("require"))) await makeFigure();
-    // 2) 데이터 계약.
-    const reject = validateGeneratedProblem({ ...g, stimulus: g.stimulus ?? g.passage, question: g.question ?? null }, params.format, params.skillCode ?? null);
-    if (reject) return fail(reject);
-    if (need.level === "required" && materialBlocker(need, g.figure ?? null)) return fail("자료 필수인데 자료를 만들지 못했습니다.");
-    // 3) 자료 참조·렌더 검증 — 공개 게이트와 같은 검사. 걸리면 자료를 한 번 더 만들어 본다(지문이 템플릿으로 그릴 수 없는 모양이면 여기서 걸러진다).
-    let fc = checkFigure(g.figure ?? null, text, g.options ?? null, g.correctIndex ?? null);
-    if (!fc.ok && g.figure != null) {
-      await makeFigure();
-      fc = checkFigure(g.figure ?? null, text, g.options ?? null, g.correctIndex ?? null);
-    }
-    if (!fc.ok) return fail(`자료 검증: ${fc.issues[0]?.message ?? "실패"}`);
-    // 4) 내용 검증(수식 조판·선택지·진술·RW 구조) — 하나라도 남으면 공개가 막히므로 저장하지 않는다.
-    const content = checkContent({
-      format: params.format, passage: text, options: g.options ?? null, correctIndex: g.correctIndex ?? null, explanation: g.explanation,
-      answers: g.answers ?? null, statements: g.statements ?? null, skillCode: params.skillCode ?? null, figure: g.figure ?? null,
-    });
-    if (content.length) return fail(`내용 검증: ${content[0].message}`);
-    // 5) 저장.
+  for (const { problem: g, quality } of result.accepted) {
     const problem = await createBankProblemAction({
-      subjectId: params.subjectId,
-      format: params.format,
-      skillType: params.skillType,
-      skillCode: params.skillCode,
-      examSystem: params.examSystem,
-      apSubject: params.apSubject,
-      topic: params.topic,
-      difficulty: params.difficulty,
-      keywordIds: params.keywordIds,
+      subjectId: params.subjectId, format: params.format, skillType: params.skillType, skillCode: params.skillCode,
+      examSystem: params.examSystem, apSubject: params.apSubject, topic: params.topic, difficulty: params.difficulty, keywordIds: params.keywordIds,
     });
-    if (!problem.ok) { failures.push(problem.error); return false; }
+    if (!problem.ok) { failures.push(problem.error); continue; }
     const draft = await createDraftVersionAction({
-      problemId: problem.value,
-      passage: g.stimulus ?? g.passage,
-      question: g.question ?? null,
-      options: g.options ?? null,
-      correctIndex: g.correctIndex ?? null,
-      explanation: g.explanation,
-      difficulty: params.difficulty,
-      answers: g.answers ?? null,
-      figure: g.figure ?? null,
-      statements: g.statements ?? null,
+      problemId: problem.value, passage: g.stimulus ?? g.passage, question: g.question ?? null, options: g.options ?? null, correctIndex: g.correctIndex ?? null,
+      explanation: g.explanation, difficulty: params.difficulty, answers: g.answers ?? null, figure: g.figure ?? null, statements: g.statements ?? null,
     });
     if (!draft.ok) {
       // 초안을 저장하지 못한 결과는 분리한다 — 빈 문제가 '질문 없는 초안'으로 남지 않게 바로 보관한다(삭제 아님).
       failures.push(draft.error);
       await admin.from("problems").update({ archived_at: new Date().toISOString() }).eq("id", problem.value);
-      return false;
+      continue;
     }
-    return true;
-  };
-
-  for (const g of generated) if (await gateAndSave(g)) created += 1;
-
-  // 통과한 결과가 요청 개수에 못 미치면 부족분만 한 번 더 만든다(모델 호출 1회 추가). 그래도 모자라면 사유와 함께 그대로 보고한다.
-  if (created < requested) {
-    try {
-      const refill = await generateSectionProblems({
-        sectionTitle: params.topic?.trim() || params.skillType,
-        subjectName: subject.name as string,
-        skillType: params.skillType,
-        difficulty: params.difficulty as never,
-        format: params.format as never,
-        count: requested - created,
-        figurePolicy: (params.figurePolicy as never) ?? "optional",
-        skillCode: params.skillCode,
-        keepFigureless: true,
-      });
-      for (const g of refill) if (created < requested && (await gateAndSave(g))) created += 1;
-    } catch (e) {
-      console.error("[problem-bank] 부족분 재생성 실패:", e instanceof Error ? e.message : e);
-    }
+    const { error: qErr } = await admin.rpc("set_problem_quality", { p_version_id: draft.value, p_quality: quality });
+    if (qErr) console.error("[problem-bank] 품질 기록 실패:", qErr.message);
+    created += 1;
   }
-
   if (created === 0) {
-    console.error("[problem-bank] AI 생성 결과를 저장하지 못했습니다:", failures);
+    console.error("[problem-bank] AI 생성 결과를 저장하지 못했습니다:", failures, result.stats);
     return { ok: false, error: `문제를 생성하지 못했습니다.${failures.length ? ` ${failures[0]}` : ""}` };
   }
   return { ok: true, value: { created, failures } };
-}
-
-/** 자료 판정 → 자료 생성기에 넘길 표준 유형. 도형은 본문에서 읽은 템플릿이 우선, 없으면 세부 기술로 고른다. */
-function pickFigureKind(
-  need: ReturnType<typeof judgeMaterialNeed>,
-  text: string,
-  skillCode: string | null,
-  figurePolicy?: string
-): "plane" | "parallel_transversal" | "triangle" | "circle" | "polygon" | "solid" | "composite" | "data" | "figure_choice" | "figure_set" | null {
-  const kind = need.kind ?? (figurePolicy === "require_plane" ? "plane" : figurePolicy === "require_data" ? "data" : figurePolicy === "require_figure_choice" ? "figure_choice" : figurePolicy === "require_geometry" ? "geometry" : null);
-  if (!kind) return null;
-  if (kind !== "geometry") return kind;
-  if (need.geometry.length) return need.geometry[0];
-  if (/\bparallel\b/i.test(text)) return "parallel_transversal";
-  if (skillCode === "circles") return "circle";
-  if (skillCode === "area_volume") return /\b(volume|cylinder|cone|sphere|prism|cube|pyramid)\b/i.test(text) ? "solid" : "polygon";
-  return "triangle";
-}
-
-/** 생성 결과 하나가 데이터 계약을 만족하는가. 어기면 사유(초안으로 저장하지 않는다). */
-function validateGeneratedProblem(
-  g: { stimulus: string; question: string | null; passage: string; options?: string[] | null; correctIndex?: number | null; answers?: string[] | null; explanation: string; figure?: unknown | null },
-  format: string,
-  skillCode: string | null
-): string | null {
-  if (!g.stimulus.trim() && !g.figure) return "자료 또는 지문이 없습니다.";
-  if (!g.question?.trim()) return "질문이 없습니다.";
-  if (!/\?/.test(g.question) && !/^(Which|What|Find|Determine|Solve)/i.test(g.question.trim())) return "질문이 물음 문장이 아닙니다.";
-  if (format === "mc") {
-    if (!g.options || g.options.length !== 4) return `객관식 선택지가 4개가 아닙니다(${g.options?.length ?? 0}개).`;
-    if (g.correctIndex === null || g.correctIndex === undefined || g.correctIndex < 0 || g.correctIndex > 3) return "정답 인덱스가 없거나 범위 밖입니다.";
-  } else if (format === "spr") {
-    if (!g.answers?.length) return "SPR 정답이 없습니다.";
-  }
-  if (!g.explanation?.trim()) return "해설이 없습니다.";
-  // 유형과 질문이 맞는가 — RW 는 구조 검사(빈칸·Text 1/2·메모·표준 문구)를 그대로 쓴다.
-  const rw = checkRwStructure({ skillCode, passage: composeProblemText(g.stimulus, g.question), options: g.options ?? null, figure: g.figure ?? null });
-  const bad = rw.find((i) => i.code === "rw_question" || i.code === "rw_texts" || i.code === "rw_notes" || i.code === "rw_target");
-  if (bad) return `유형과 맞지 않습니다 — ${bad.message}`;
-  return null;
 }
 
 /**

@@ -598,6 +598,17 @@ function ProblemRow({
             {problem.topic ? ` · 주제 ${problem.topic}` : ""}
             {problem.keywords.length ? ` · ${problem.keywords.map((k) => k.label).join(", ")}` : " · 키워드 없음"}
           </div>
+          {(() => {
+            const q = (problem.draft ?? problem.published)?.quality ?? null;
+            if (!q && !problem.responseStats) return null;
+            return (
+              <div className="text-[11.5px] text-grey-500 mt-1" data-testid="quality-line">
+                {q && <>추정 난이도 <b className="text-ink">{q.estimatedDifficulty}</b>{q.requestedDifficulty !== q.estimatedDifficulty ? `(요청 ${q.requestedDifficulty})` : ""}{q.calibrated ? " · 보정됨" : " · 추정치"}</>}
+                {problem.responseStats && problem.responseStats.responses > 0 && <> · 응답 {problem.responseStats.responses}{problem.responseStats.correctPct !== null ? ` · 정답률 ${problem.responseStats.correctPct}%` : ""}</>}
+                {q?.needsReview && <span className="ml-1.5 font-bold text-red" data-testid="needs-review">검토 필요</span>}
+              </div>
+            );
+          })()}
           {!problem.hasQuestion && content && (
             <div className="text-[11.5px] font-bold text-red mt-1" data-testid="question-needed">질문 보완 필요 — 질문이 없어 자동 구성 후보에서 빠집니다.</div>
           )}

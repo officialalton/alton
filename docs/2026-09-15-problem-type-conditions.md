@@ -1,57 +1,74 @@
-# 문제 유형별 조건 정리 — 세부 기술 코드 30개 (2026-09-15)
+# 유형별 문제 품질 계약 — 세부 기술 30개 (2026-09-15)
 
-코드에서 실제로 적용되는 조건을 유형별로 한 곳에 모았다. 출처: 생성 규칙(`lib/problem-skills.ts`, `curriculum-doc-actions.ts` 스키마 설명), 자료 판정(`lib/problem-material-need.ts`), RW 구조 검사(`lib/rw-stimulus.ts`), 내용 검증(`lib/problem-content-check.ts`), 자료 검증(`lib/problem-figures/check.ts`), 학생 렌더(`RwStimulusView`, `ProblemFigure`).
+목적은 정상 문제를 제한하는 것이 아니라 **질문·자료·정답·학생 화면의 연결 오류를 생성 단계에서 없애는 것**이다. 코드: `lib/problem-quality-contract.ts`(계약·검사), `lib/problem-generation/review.ts`(독립 품질 검사), `lib/problem-generation/pipeline.ts`(생성 → 자료 → 계약 → 독립 검사 → 재생성), `lib/problem-generation/core.ts`(생성기, 인증 없음 — 서버 액션과 표본 배치가 같은 경로).
 
-공통(모든 유형): 질문은 `question` 에 따로 저장하고 지문/자료는 `passage`. 생성 결과는 공개 게이트와 같은 검사(자료 참조·렌더 충돌·잘림·내용)를 통과해야 초안이 되고, 걸리면 사유 피드백으로 1회 자동 재생성. 정답 노출·수학 오류·참조 불일치·읽을 수 없음/접근성 부재만 차단 기준.
+## 0. 공통 계약
 
-## A. SAT Reading & Writing (11) — 전부 객관식 4지, 지문 영어·해설 한국어, 자료는 정량 근거만
+| 연결 | 정의 | 검사 | 실패 시 |
+|---|---|---|---|
+| 1 질문 대상 | 학생이 무엇을 판단·계산·선택해야 하는가 | `question` 이 따로 있고 유형별 표준 문구/물음 문장 | 저장 안 함 → 사유 피드백 재생성 |
+| 2 자료 안의 근거 | 대상이 지문 / Text 1·2 / 메모 / 표 / 그래프 / 도형 / 수식 중 어디에 있는가 | 자료 판정(필수/권장/불필요)·RW 구조 검사·자료 참조 검사(`ref_missing/mismatch`, `unit_missing`) | 자료 재생성 → 재검사 → 재생성 |
+| 3 학생 화면 표시 | 빈칸·밑줄·인용 단어 밑줄·Text 구역·메모 목록·자료 렌더·도형 라벨·그래프 객체·선택지 그림 | 대상이 정확히 하나로 식별되는가(빈칸 1, 밑줄 1, 인용 단어 1회, 라벨 충돌·잘림 없음) | 재생성 |
+| 4 정답 근거 | 정답이 자료·질문과 실제로 맞고 자료에서 노출되지 않는가 | 유형별 연결(정답 수치 ↔ 자료 값, 정답 ↔ 메모, 정답 문장이 지문에 그대로 없음, 선택지 좌표 점 금지) + **독립 품질 검사**(정답 표시 없이 풀어 지정 정답과 대조) | 불일치면 저장 안 함 |
+| 5 답안 형식 | 객관식 A)~D) 4개 / SPR 정규화 가능한 정답 집합 / 로마숫자 조합 | 선택지 4·정답 자리·중복·`x =` 표기·단위 기호, SPR 정수·소수·분수 5/6자, 진술 ↔ 조합 정합 | 저장 안 함 |
+| 난이도 | 추론 단계 수·종합 정도·핵심 관계의 미묘함·오답이 정답과 공유하는 정보·자료 해석 부담 (지문 길이·어휘 아님) | 생성기 `difficulty_rationale` + 독립 검사 `estimated_difficulty` → `추정 난이도`. 요청 hard 인데 추정 easy 면 재생성. 학생 응답(`problem_response_stats`)이 쌓이면 `보정 난이도` | 검토 필요 표시 |
+| 오답 품질 | 정답 외 각 선택지에 학생에게 보이지 않는 오답 근거(그럴듯한 이유·일부 일치 정보·정답 아닌 이유·유형) | 생성기 `distractor_rationales` + 독립 검사가 obvious/irrelevant 판정. 무관 1개, 명백 2개(hard 는 1개) 이상이면 재생성 | 재생성 |
 
-| 세부 기술 | 지문 구조 | 질문 문구(표준) | 선택지 | 자료 판정 | 구조 검증(거부 조건) | 학생 화면 |
+학생 화면은 선택지를 **A) B) C) D)** 로 표시한다.
+
+## A. Reading & Writing (11)
+
+| 세부 기술 | 1 질문 대상 | 2 자료 근거 | 3 표시 방식 | 4 정답 검증 | 5 답안 형식 | 실패 사유(예) |
 |---|---|---|---|---|---|---|
-| Words in Context | (a) 빈칸형: 1단락 50~120단어, `______` 정확히 1 (b) 인용 단어형: 빈칸 없음, 대상 단어가 지문에 있음, 지문에 다른 따옴표 낱말 없음 | (a) "Which choice completes the text with the most logical and precise word or phrase?" (b) "As used in the text, what does the word “…” most nearly mean?" | 단어/짧은 구 4 | 불필요 | 빈칸 0·2개, 질문 문구 불일치, 인용 단어 지문에 없음, 다른 인용 표시(대상 모호), 선택지 안 빈칸 | 빈칸은 밑줄 칸, 인용형은 대상 단어 자동 밑줄, 질문 굵게 분리 |
-| Text Structure and Purpose | 1단락. '밑줄 문장' 문항이면 `__문장__` 정확히 1 | "Which choice best states the main purpose of the text?" / "…function of the underlined sentence in the text as a whole?" | To + 동사구 4 | 불필요 | underlined 질문인데 밑줄 0·2, 밑줄 있는데 질문이 underlined 아님, 빈칸 있음 | 밑줄 렌더 |
-| Cross-Text Connections | `Text 1` / `Text 2` 제목 줄, 각 60~110단어(최소 20), 순서 | "Based on the texts, how would the author of Text 2 most likely respond to …?" 류(Text 1/2·both texts 참조) | 완결 문장 4 | 불필요 | Text 1·2 둘이 순서대로 없음, 본문 20단어 미만, 질문이 텍스트 미참조 | 제목이 있는 두 구역 |
-| Central Ideas and Details | 1단락 | "Which choice best states the main idea of the text?" / "According to the text, …?" | 완결 문장 4 | 불필요 | 빈칸·밑줄·Text 구조·메모 있으면 거부, 질문 미인식 | 본문+질문 |
-| Inferences | 미완성 문장으로 끝남(`______` 1) | "Which choice most logically completes the text?" | 절 4 | 불필요 | 빈칸 ≠1, 질문 문구 불일치 | 빈칸 칸 |
-| Command of Evidence (Textual) | 연구·주장 요약 지문, 빈칸 ≤1 | "Which finding, if true, would most directly support …?" / "Which quotation … most effectively illustrates …?" | 문장·인용 4 | 불필요 | 빈칸 2+, 질문 미인식 | 본문+질문 |
-| Command of Evidence (Quantitative) | 자료(figure type:'data')를 설명하는 단락, 마크다운 표 금지, 빈칸 ≤1 | "Which choice most effectively uses data from the table/graph to complete the statement?" 류 | 자료 수치 인용 문장 4 | **필수 · 표·그래프** | data 자료 없음, 마크다운 표, 지문 단위·값 ↔ 자료 불일치(`unit_missing`·`ref_missing`) | 표준 표/그래프 위, 본문, 질문 |
-| Rhetorical Synthesis | 첫 줄 "While researching a topic, a student has taken the following notes:" + `- ` 메모 3~6 | "The student wants to …. Which choice most effectively uses relevant information from the notes to accomplish this goal?" | 완결 문장 4 | 불필요 | 메모 목록 없음·개수 밖, 목표 문장 없음, notes 미참조 | 소개 줄 + 불릿 목록 + 질문 |
-| Transitions | 두 문장 사이 `______` 1 | "Which choice completes the text with the most logical transition?" | 접속 표현 4 | 불필요 | 빈칸 ≠1, 문구 불일치 | 빈칸 칸 |
-| Boundaries | 한 문장 안 `______` 1 | "Which choice completes the text so that it conforms to the conventions of Standard English?" | 문장부호·수일치만 다른 어구 4 | 불필요 | 빈칸 ≠1, 문구 불일치 | 빈칸 칸 |
-| Form, Structure, and Sense | Boundaries 와 같음 | 같음 | 동사형·대명사·수 일치가 다른 어구 4 | 불필요 | 같음 | 같음 |
+| Words in Context | 빈칸에 맞는 단어, 또는 인용 단어의 문맥 의미 | 지문 1단락 | 빈칸 밑줄 칸 / 인용 단어 자동 밑줄(정확히 1회) | 인용 단어가 지문에 있음, 다른 따옴표 낱말 없음 | MC 단어 4 | 빈칸 0·2, 인용 단어 2회, 다른 인용 표시 |
+| Text Structure and Purpose | 지문 목적 또는 밑줄 문장 기능 | 지문 | 밑줄 정확히 1(underlined 질문) | 밑줄 ↔ 질문 일치 | MC To-구문 4 | 밑줄 0·2, 질문 불일치 |
+| Cross-Text Connections | Text 2 저자의 반응 | Text 1·Text 2 | 제목 구역 둘 | 질문이 Text 1/2 참조 | MC 완결 문장 4 | Text 2 없음 |
+| Central Ideas and Details | 중심 생각·세부 정보 | 지문 | 본문+질문 | 정답 문장이 지문에 그대로 없음(노출), 독립 검사 일치 | MC 4 | 정답 노출, 구조 혼입 |
+| Inferences | 논리를 완성하는 절 | 지문 끝 빈칸 | 빈칸 1 | 독립 검사 일치 | MC 절 4 | 빈칸 ≠1 |
+| Command of Evidence (Textual) | 주장을 뒷받침하는 발견·인용 | 지문 주장 | 본문+질문(빈칸 ≤1) | 독립 검사 일치 | MC 4 | 빈칸 2+ |
+| Command of Evidence (Quantitative) | 자료 값으로 문장 완성 | 표·그래프(`data`) | 표준 자료 렌더 + 본문 | **정답 선택지 수치가 자료에 있음**, 단위 일치 | MC 4 | 자료 없음, 단위 누락, 정답 수치 부재 |
+| Rhetorical Synthesis | 목표를 이루는 메모 종합 | 메모 3~6 | 소개 줄 + 불릿 목록 | **정답이 메모 정보 사용** | MC 4 | 메모 없음, 목표 문장 없음, 정답 메모 무관 |
+| Transitions | 접속 표현 | 두 문장 사이 | 빈칸 1 | 독립 검사 일치 | MC 접속어 4 | 빈칸 ≠1 |
+| Boundaries | 문장부호·경계 | 한 문장 | 빈칸 1 | 독립 검사 일치 | MC 어구 4 | 빈칸 ≠1 |
+| Form, Structure, and Sense | 동사형·대명사·수 일치 | 한 문장 | 빈칸 1 | 독립 검사 일치 | MC 어구 4 | 빈칸 ≠1 |
 
-RW 공통 거부: 질문 문장 미인식, 선택지 4개 아님, 다른 유형의 Text/메모/밑줄 구조 혼입, 수식 조판 실패·`$` 미닫힘.
+R&W 난이도·오답 기준(Central Ideas·Inferences·Text Structure·Command of Evidence 특히): 정답은 지문의 핵심 관계를 정확히 종합, 각 오답은 지문 일부를 맞게 반영하되 핵심 관계 하나를 빠뜨리거나 잘못 해석. 무관·명백한 반대·과장만의 오답은 생성 실패. hard 는 여러 문장·자료 관계를 종합해야 하고 오답은 각각 일부만 포착.
 
-## B. SAT Math (19) — 객관식 4지 또는 SPR(숫자 입력), 수식 `$…$`, 선택지 값만·단위 없음
+## B. Math (19)
 
-자료 판정 규칙: 질문·지문 단서(graph/xy-plane → 좌표평면, table/histogram/scatterplot… → 표·그래프, figure/triangle ABC/circle… → 도형, "Which of the following graphs" → 그래프 선택지)가 우선. 단서가 없으면 아래 기본값. "the graph shows" 는 자료 기술이면 표·그래프, 함수 기술이면 좌표평면. 자료 포함 여부·유형은 **생성 전** 패널에서 정한다(필수=고정, 권장=자료 포함 기본/텍스트형, 대안 유형이 있으면 선택).
+| 세부 기술 | 1 질문 대상 | 2 자료 근거 | 3 표시 방식 | 4 정답 검증 | 5 답안 형식 | 실패 사유(예) |
+|---|---|---|---|---|---|---|
+| Linear equations in one variable | 해·해석 | 수식 | 수식 | 독립 검사(풀이) 일치 | MC/SPR/로마 | 조판 실패 |
+| Linear functions | 기울기·절편·함숫값 | 수식·좌표평면·함수표 | 직선·점 객체 / 함수표 | 객체 ↔ 지문 좌표·식 일치, 선택지 좌표 점 금지, 독립 검사 | MC/SPR | 기울기 불일치, 좌표 노출 |
+| Linear equations in two variables | 직선 관계 | 수식·좌표평면 | 직선 객체 | 같음 | MC/SPR | 절편 불일치 |
+| Systems of two linear equations | 교점·해의 개수 | 수식·좌표평면·그래프 선택지 | 두 직선 / 선택지 그림 4 | 교점 좌표 대조, 정답 자리·편향 없음 | MC/SPR | 교점 불일치, 편향 |
+| Linear inequalities | 해 영역 | 수식·좌표평면(음영) | 경계 실선/점선·음영 | 부등호 대조 | MC/SPR | 부등호 불일치 |
+| Equivalent expressions | 동치 식 | 수식 | 수식 | 독립 검사 | MC/SPR | 조판 실패 |
+| Nonlinear equations & systems | 해·교점 | 수식·좌표평면 | 곡선+직선 | 교점 대조 | MC/SPR | 교점 불일치 |
+| Nonlinear functions | 꼭짓점·절편·그래프 식별 | 수식·좌표평면·그래프 선택지 | 포물선 등 / 선택지 그림 4 | 꼭짓점 대조, 정답 자리 | MC/SPR | 꼭짓점 불일치 |
+| Ratios, rates, units | 비율·속도·단위 값 | 표·수식 | 표 | **지문 수치 ↔ 자료 값 겹침**, 단위 | MC/SPR | 단위 누락 |
+| Percentages | 백분율·증감률 | 표·막대 | 표·막대 | 같음 | MC/SPR | 항목 불일치 |
+| One-variable data | 평균·중앙값·분포 | 숫자 목록·점도표·히스토그램·상자그림 | 자료 렌더 | 자료 필수, 값 겹침 | MC/SPR | 자료 없음 |
+| Two-variable data | 두 변수 관계 | 산점도·표 | 자료 렌더 | 자료 필수, 추세선·점 | MC/SPR | 자료 없음 |
+| Probability | 확률·조건부확률 | 양방향표 | 표(합계는 렌더러) | 자료 필수, 값 겹침 | MC/SPR | 자료 없음 |
+| Inference & margin of error | 표본 추론 | 문장형 자료·표 | 자료 렌더 | 표본 수·오차범위 일치 | MC/SPR | 값 불일치 |
+| Evaluating statistical claims | 타당한 결론 | 문장형 자료 | 자료 렌더 | 설계 항목 일치 | MC | 항목 불일치 |
+| Area and volume | 넓이·부피·음영 | 도형(다각형·입체·복합) | 치수 라벨 | 라벨 ↔ 지문, 구하는 값 미지수 | MC/SPR | 라벨 노출 |
+| Lines, angles, triangles | 각·길이 | 도형(평행선·횡단선 — 수직·교점·삼각형, 삼각형) | 점·각·변 라벨, 직각 표시 | 이름 ↔ 지문, 방위 표현 금지, 직각은 수직 교점 | MC/SPR | 점 누락, 방위 표현 |
+| Right triangles & trigonometry | 변·각·삼각비 | 도형 | 변·각 라벨 | 라벨 ↔ 지문 | MC/SPR | 라벨 불일치 |
+| Circles | 현·호·접선·방정식 | 도형·좌표평면 | 중심·점·현 라벨 / 등축 원 | 이름 ↔ 지문, 등축 | MC/SPR | 찌그러진 원 |
 
-| 영역 | 세부 기술 | 기본 자료 판정(대안) | 자료 검증 핵심 | 답안 |
-|---|---|---|---|---|
-| Algebra | Linear equations in one variable | 불필요 | — | MC/SPR |
-| Algebra | Linear functions | 권장 · 좌표평면 (대안: 함수표) | 기울기·절편·점 좌표 ↔ 지문 대조, 선택지 좌표 점 금지 | MC/SPR |
-| Algebra | Linear equations in two variables | 권장 · 좌표평면 | 같음 | MC/SPR |
-| Algebra | Systems of two linear equations | 권장 · 좌표평면 (대안: 그래프 선택지) | 교점 좌표 대조, 선택지 4개 같은 축·정답 자리 | MC/SPR |
-| Algebra | Linear inequalities | 권장 · 좌표평면(음영) | 부등호·경계 실선/점선 대조 | MC/SPR |
-| Advanced Math | Equivalent expressions | 불필요 | — | MC/SPR |
-| Advanced Math | Nonlinear equations & systems | 권장 · 좌표평면 | 교점 좌표 대조 | MC/SPR |
-| Advanced Math | Nonlinear functions | 권장 · 좌표평면 (대안: 그래프 선택지) | 꼭짓점·절편 대조, 포물선 선택지 정답 자리 | MC/SPR |
-| PSDA | Ratios, rates, proportional relationships, units | 권장 · 표·그래프 | 항목·값·단위 대조 | MC/SPR |
-| PSDA | Percentages | 권장 · 표·그래프 | 같음 | MC/SPR |
-| PSDA | One-variable data | **필수 · 표·그래프**(숫자 목록·점도표·히스토그램·상자그림) | 값 대조·단위 | MC/SPR |
-| PSDA | Two-variable data | **필수 · 표·그래프**(산점도·표) | 추세선·값 대조 | MC/SPR |
-| PSDA | Probability & conditional probability | **필수 · 표·그래프**(양방향표) | 합계는 렌더러 계산, 값 대조 | MC/SPR |
-| PSDA | Inference from sample statistics & margin of error | 권장 · 표·그래프(문장형) | 표본 수·오차범위 대조 | MC/SPR |
-| PSDA | Evaluating statistical claims | 권장 · 표·그래프(문장형) | 연구 설계 항목 대조 | MC |
-| Geometry & Trig | Area and volume | 권장 · 도형(다각형·입체·복합) | 치수 라벨 대조, 구하는 값은 미지수 | MC/SPR |
-| Geometry & Trig | Lines, angles, and triangles | **필수 · 도형**(평행선·횡단선 — 수직·교점·삼각형 포함, 삼각형, 다각형 각) | 선·점·각 이름 대조, 방위 표현 거부, 직각은 수직 교점에서만 | MC/SPR |
-| Geometry & Trig | Right triangles and trigonometry | **필수 · 도형**(직각삼각형) | 변·각 라벨 대조 | MC/SPR |
-| Geometry & Trig | Circles | 권장 · 도형 (대안: 좌표평면의 원의 방정식) | 중심·현·호·접선 대조, 등축 | MC/SPR |
+Math 오답 기준: 무작위 숫자가 아니라 실제 풀이 오류 모델(부호·단위 변환·한 단계 누락·축/눈금 오독·조건 무시·평균/비율/확률 계산 오류·도형 관계 오적용). 정답·오답 모두 질문의 조건을 다 고려한 값. SPR 은 독립 검사가 계산한 답을 정규화(7/2 = 3.5, 1,200 = 1200)해 정답 집합과 대조.
 
-Math 공통 거부: 수식 조판 실패·LaTeX 노출·`$` 미닫힘, 선택지 `x =` 표기·단위 기호, 로마숫자 진술 ↔ 조합 선택지 불일치, SPR 정답 형식(정수·소수·분수, 5/6자), 자료 참조 불일치·라벨 충돌·잘림·정답 노출, 자료 필수인데 없음.
+## C. 독립 품질 검사와 난이도 보정
 
-## C. AP — 과목 선택 자리만(전부 준비 중). 문제 형식·자료 블록은 과목별 결정 뒤.
+- 생성 모델과 별도 호출. 입력: 지문/자료(대체 설명)·진술·질문·선택지(정답 표시 없음), 유형, 요청 난이도. 출력: 고른 정답, 확신, 오답별 근거·유형·obvious, 추정 난이도·근거, 문제 성립을 해치는 지적.
+- 저장 조건: 정답 일치 · 무관 오답 0 · 명백 오답 ≤1(hard 는 0) · hard 요청이면 추정 easy 아님 · 성립 지적 없음. 아니면 사유 피드백으로 재생성.
+- 기록: `problem_versions.quality`(계약·추정 난이도·근거·오답 근거·독립 검사·검토 필요). 관리자에게는 **난이도 추정 근거**와 **검토 필요**만 보인다(목록 줄·편집 화면 접힘).
+- 보정: `problem_response_stats` 뷰(버전별 응답 수·정답률·선택지별 선택 수, 개인 식별 없음)가 관리자 목록에 응답·정답률로 보인다. 응답이 충분히 쌓인 뒤(기준 30건, 별도 결정) 기술 코드·난이도별 정답률·선택지 비율·변별력으로 `보정 난이도` 로 바꾸고 `calibrated=true` 를 켠다. 그 전까지는 모두 `추정치`.
 
-## D. 유형 무관 학생 화면 규칙
+## D. 표본 검증
 
-자료가 있으면 본문 위에 표준 렌더(그래프 선택지는 선택지 칸 안), 본문(Text 1/2·메모·빈칸·밑줄 블록), 질문 굵게, 선택지 또는 SPR 입력, 채점 뒤 정답·해설. 관리자 편집 화면의 '학생 화면 미리보기'는 같은 렌더를 맨 위에 보인다.
+`scripts/problem-quality-batch.ts` — 30개 유형 × (단건 1 + 복수 2)를 실제 파이프라인으로 생성해 유형·단계·실패 사유·재생성 결과를 집계한다(DB 저장 없음). 결과: `docs/2026-09-15-problem-quality-batch-medium.md`(보통), `…-hard.md`(어려움 부분). 아래 요약은 실행 뒤 갱신.
+
+(실행 뒤 갱신)

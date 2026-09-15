@@ -508,7 +508,7 @@ export default function ProblemsPanel({
                             (canPick ? " hover:bg-grey-100" : "")
                           }
                         >
-                          <span className="text-grey-500 mr-2">{i + 1}</span>
+                          <span className="text-grey-500 mr-2 font-semibold">{String.fromCharCode(65 + i)})</span>
                           {(p.figure as { type?: string } | null)?.type === "figure_choice" && Array.isArray((p.figure as { choices?: unknown[] }).choices) && (p.figure as { choices: unknown[] }).choices[i] ? (
                             <span
                               className="block max-w-[320px] mt-1 [&_svg]:w-full [&_svg]:h-auto"
