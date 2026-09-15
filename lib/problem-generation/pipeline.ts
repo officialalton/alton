@@ -91,12 +91,30 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
   const skillCode = params.skillCode ?? null;
   const label = skillCode ? skillLabel(skillCode) ?? params.skillType : params.skillType;
 
-  const generate = async (count: number) => {
-    countCall();
-    return generateSectionProblemsCore({
-      sectionTitle: params.topic?.trim() || params.skillType, subjectName: params.subjectName, skillType: params.skillType,
-      difficulty: params.difficulty, format: params.format, count, figurePolicy: params.figurePolicy ?? "optional", skillCode: skillCode ?? undefined, keepFigureless: true,
-    });
+  // 어려움은 문항당 응답이 길다(design·distractor_rationales 포함) — 한 호출에 너무 많이 요청하면 토큰 예산을 넘겨
+  // 도구 호출이 잘리고 배열이 통째로 비어 돌아온다(2026-09-15 재확인: count=10 요청 시 재현). 호출당 개수를 제한하고
+  // 여러 번 나눠 불러 모은다. 청크 하나가 비면 그 청크만 실패로 기록하고 나머지 청크는 계속 시도한다.
+  const CHUNK = params.difficulty === "hard" ? 3 : 6;
+  const generate = async (count: number): Promise<GeneratedProblem[]> => {
+    const out: GeneratedProblem[] = [];
+    let remaining = count;
+    while (remaining > 0) {
+      const n = Math.min(CHUNK, remaining);
+      remaining -= n;
+      countCall();
+      try {
+        const chunk = await generateSectionProblemsCore({
+          sectionTitle: params.topic?.trim() || params.skillType, subjectName: params.subjectName, skillType: params.skillType,
+          difficulty: params.difficulty, format: params.format, count: n, figurePolicy: params.figurePolicy ?? "optional", skillCode: skillCode ?? undefined, keepFigureless: true,
+        });
+        if (chunk.length === 0) stats.emptyResponses.push({ cause: `생성 청크(${n}개 요청)가 빈 배열을 반환`, retried: false, resolved: false });
+        else if (chunk.length < n) stats.underReturned.push({ requested: n, returned: chunk.length, reason: "생성 청크가 요청보다 적게 반환" });
+        out.push(...chunk);
+      } catch (e) {
+        stats.emptyResponses.push({ cause: `생성 청크(${n}개 요청) 예외: ${e instanceof Error ? e.message : "오류"}`, retried: false, resolved: false });
+      }
+    }
+    return out;
   };
 
   const makeFigure = async (g: GeneratedProblem, text: string, need: ReturnType<typeof judgeMaterialNeed>) => {
@@ -295,17 +313,6 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
 
   // 어려움은 오답·정답 기준이 엄격해 통과율이 낮다 — 요청보다 넉넉히 만들어 통과분만 채택한다(2026-09-15 제품 오너: "생성 수가 적으면 안 된다").
   const initialCount = params.difficulty === "hard" ? Math.min(10, requested + Math.min(2, requested)) : requested;
-  let generated: GeneratedProblem[] = [];
-  try {
-    generated = await generate(initialCount);
-  } catch (e) {
-    const message = e instanceof Error ? e.message : "생성 실패";
-    failures.push({ skillCode, stage: "generate", reason: message, resolved: false, snippet: "" });
-    return { accepted, held, failures, stats };
-  }
-  stats.generated += generated.length;
-  if (generated.length === 0) stats.emptyResponses.push({ cause: "generate 단계가 빈 배열을 반환", retried: false, resolved: false });
-  else if (generated.length < initialCount) stats.underReturned.push({ requested: initialCount, returned: generated.length, reason: "1차 생성이 요청보다 적게 반환" });
   const record = (g: GeneratedProblem, outcome: GateOutcome) => {
     stats.candidatesEvaluated += 1;
     if (outcome.kind === "accepted") { accepted.push({ problem: g, quality: outcome.quality }); stats.accepted += 1; }
@@ -315,25 +322,21 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
       held.push({ problem: g, quality: outcome.quality, reasons: outcome.reasons }); stats.held += 1;
     }
   };
+
+  const generated = await generate(initialCount);
+  stats.generated += generated.length;
   for (const g of generated) {
     if (stats.accepted >= requested) break;
     record(g, await gate(g, 0));
   }
 
-  if (stats.accepted < requested) {
+  // 부족하면 최대 두 번 더 채운다(각 청크가 개별적으로 빈 응답을 견디므로 재시도가 안전하다).
+  for (let round = 0; stats.accepted < requested && round < 2; round += 1) {
     const refillCount = Math.min(10, requested - stats.accepted + (params.difficulty === "hard" ? 1 : 0));
-    try {
-      const refill = await generate(refillCount);
-      stats.generated += refill.length;
-      stats.refilled += refill.length;
-      if (refill.length === 0) stats.emptyResponses.push({ cause: "부족분 재생성이 빈 배열을 반환", retried: false, resolved: false });
-      else if (refill.length < refillCount) stats.underReturned.push({ requested: refillCount, returned: refill.length, reason: "부족분 재생성이 요청보다 적게 반환" });
-      for (const g of refill) { if (stats.accepted >= requested) break; record(g, await gate(g, 0)); }
-    } catch (e) {
-      const message = e instanceof Error ? e.message : "오류";
-      stats.emptyResponses.push({ cause: `부족분 재생성 실패: ${message}`, retried: true, resolved: false });
-      failures.push({ skillCode, stage: "generate", reason: `부족분 재생성 실패: ${message}`, resolved: false, snippet: "" });
-    }
+    const refill = await generate(refillCount);
+    stats.generated += refill.length;
+    stats.refilled += refill.length;
+    for (const g of refill) { if (stats.accepted >= requested) break; record(g, await gate(g, 0)); }
   }
   if (stats.accepted < requested) stats.underReturned.push({ requested, returned: stats.accepted, reason: "게이트 통과분이 요청 수 미달" });
   // 평균 모델 호출 수 — 생성·자료·재생성·부분수정·독립검사를 통틀어, 실제로 뭔가를 얻은 문항(통과+대기) 하나당.
