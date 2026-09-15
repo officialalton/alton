@@ -87,8 +87,10 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
     const stimulus = g.stimulus ?? g.passage;
     const question = g.question ?? null;
     const text = composeProblemText(stimulus, question);
+    // 어려움 문항은 오답 기준이 엄격해 한 번의 보완으로 부족한 경우가 많다 — 재생성을 2회까지 허용한다.
+    const maxDepth = params.difficulty === "hard" ? 2 : 1;
     const fail = async (stage: Failure["stage"], reason: string): Promise<boolean> => {
-      if (depth === 0) {
+      if (depth < maxDepth) {
         stats.regenerated += 1;
         try {
           const revised = await regenerateProblemCore({
@@ -96,7 +98,7 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
             difficulty: params.difficulty, format: params.format, current: { ...g, passage: text },
             feedback: `검증에 걸렸습니다: ${reason}. 이 사유가 해소되도록 지문·자료·질문·선택지·정답·해설을 서로 맞게 다시 쓰세요. 자료(figure)는 지문이 부르는 이름·값과 정확히 같아야 하고 정답이 드러나면 안 됩니다. 오답은 지문·자료의 일부를 맞게 반영하되 핵심 관계 하나를 놓친 것이어야 합니다.`,
           });
-          const ok = await gate({ ...revised, needsFigure: false } as GeneratedProblem, 1);
+          const ok = await gate({ ...revised, needsFigure: false } as GeneratedProblem, depth + 1);
           if (ok) stats.regenerationResolved += 1;
           failures.push({ skillCode, stage, reason, resolved: ok, snippet: snippetOf(g) });
           return ok;

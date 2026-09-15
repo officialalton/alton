@@ -104,7 +104,8 @@ export async function generateSectionProblemsCore(params: {
                   options: {
                     type: "array",
                     items: { type: "string" },
-                    description: "객관식일 때만 정확히 4개의 선택지",
+                    ...(format === "mc" ? { minItems: 4, maxItems: 4 } : {}),
+                    description: "객관식일 때만 정확히 4개의 선택지(A~D). 5개 이상 금지.",
                   },
                   correct_index: {
                     type: "number",
