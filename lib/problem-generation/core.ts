@@ -76,9 +76,12 @@ export async function generateSectionProblemsCore(params: {
   const figurePolicy: FigurePolicy = params.figurePolicy ?? "optional";
   const clampedCount = Math.max(1, Math.min(10, count));
 
+  // 어려움(hard)은 design 이 필수라 항목당 응답이 훨씬 길다 — 개수·난이도에 맞춰 토큰 예산을 늘린다.
+  // 예산이 부족하면 도구 호출이 중간에 잘려 problems 배열이 아예 비게 나온다("AI 응답에 문제가 없습니다").
+  const tokenBudget = Math.min(8000, (difficulty === "hard" ? 2200 : 1400) * clampedCount + 800);
   const message = await getAnthropic().messages.create({
     model: "claude-sonnet-5",
-    max_tokens: 4000,
+    max_tokens: tokenBudget,
     tools: [
       {
         name: "generate_problems",
