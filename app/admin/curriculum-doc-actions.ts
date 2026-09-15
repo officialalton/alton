@@ -4,6 +4,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { createClient } from "@/utils/supabase/server";
 import { sanitizeDocHtml } from "@/lib/sanitize-doc-html";
 import { stripInlineOptions } from "@/lib/problem-text";
+import { composeProblemText, splitLegacyQuestion } from "@/lib/problem-question";
 import { GEOMETRY_TEMPLATE_TYPES, validateFigureSpec } from "@/lib/problem-figures/spec";
 import { placeCorrectChoice } from "@/lib/problem-figures/templates/figure-choice";
 import { findProblemSkill } from "@/lib/problem-skills";
@@ -446,7 +447,9 @@ export async function generateSectionProblems(params: {
   figurePolicy?: FigurePolicy;
   /** 세부 기술 코드(lib/problem-taxonomy) — 영역·기술 힌트를 프롬프트에 넣는다. */
   skillCode?: string;
-}): Promise<Omit<DocProblem, "id" | "keywords">[]> {
+  /** 자료가 빠진(또는 규격에 안 맞는) 결과를 버리지 않고 figure:null 로 돌려준다 — 호출자가 2차 자료 생성으로 채운다(문제은행, 2026-09-15). */
+  keepFigureless?: boolean;
+}): Promise<(Omit<DocProblem, "id" | "keywords"> & { stimulus?: string; question?: string | null; needsFigure?: boolean })[]> {
   await requireAdmin();
   const { sectionTitle, subjectName, skillType, difficulty, format, count } = params;
   const skillMeta = params.skillCode ? SKILL_BY_CODE.get(params.skillCode) ?? null : null;
@@ -472,9 +475,12 @@ export async function generateSectionProblems(params: {
                   passage: {
                     type: "string",
                     description:
-                      format === "mc"
-                        ? "지문과 문제. 빈칸이 필요하면 ______로 표시. 선택지(A~D)는 여기에 쓰지 말고 options 에만 넣는다."
-                        : "문제 지문",
+                      "지문/자료 본문만(질문 문장은 question 에 따로). 빈칸이 필요하면 ______로 표시. 선택지(A~D)는 여기에 쓰지 말고 options 에만 넣는다. 수학 문항처럼 조건과 질문이 한 문장이면 조건만 여기에, 묻는 문장은 question 에. 지문이 따로 없으면 빈 문자열.",
+                  },
+                  question: {
+                    type: "string",
+                    description:
+                      "질문 문장(필수). 실제 SAT 문항 말투 그대로, 물음표로 끝난다. 예: \"Which choice completes the text with the most logical and precise word or phrase?\", \"What is the value of x?\". Rhetorical Synthesis 는 \"The student wants to … Which choice …?\" 두 문장.",
                   },
                   options: {
                     type: "array",
@@ -510,7 +516,7 @@ export async function generateSectionProblems(params: {
                     description: format === "mc" ? "정답 해설" : format === "spr" ? "풀이 과정과 정답" : "모범 답안 또는 풀이 과정",
                   },
                 },
-                required: ["passage", "explanation"],
+                required: ["passage", "question", "explanation"],
               },
             },
           },
@@ -550,6 +556,7 @@ Reading & Writing 구조 규칙: 지문 본문과 질문 단락은 빈 줄로 �
   }
   type RawProblem = {
     passage: string;
+    question?: string;
     options?: string[];
     correct_index?: number;
     answers?: string[];
@@ -566,36 +573,49 @@ Reading & Writing 구조 규칙: 지문 본문과 질문 단락은 빈 줄로 �
           ? [input.problems as RawProblem]
           : (Object.values(input.problems as Record<string, RawProblem>) as RawProblem[]))
       : [];
-  const raw = rawList.filter((p) => p && typeof p.passage === "string");
+  const raw = rawList.filter((p) => p && (typeof p.passage === "string" || typeof p.question === "string"));
   if (raw.length === 0) throw new Error("AI 응답에 문제가 없습니다.");
 
   const requiredTypes: readonly string[] | null =
     figurePolicy === "require_plane" ? ["plane"] : figurePolicy === "require_data" ? ["data"] : figurePolicy === "require_figure_choice" ? ["figure_choice"] : figurePolicy === "require_geometry" ? GEOMETRY_TEMPLATE_TYPES : null;
-  const kept = requiredTypes
-    ? raw.filter((p) => {
-        const v = p.figure ? validateFigureSpec(p.figure) : null;
-        return Boolean(v && v.ok && requiredTypes.includes(v.spec.type));
-      })
-    : raw;
+  const hasRequiredFigure = (p: RawProblem) => {
+    if (!requiredTypes) return true;
+    const v = p.figure ? validateFigureSpec(p.figure) : null;
+    return Boolean(v && v.ok && requiredTypes.includes(v.spec.type));
+  };
+  const kept = requiredTypes && !params.keepFigureless ? raw.filter(hasRequiredFigure) : raw;
   if (kept.length === 0) {
     // 어떤 모양으로 왔는지 서버 로그에 남긴다 — 스키마 설명을 고칠 근거(2026-09-14).
     console.error("[generateSectionProblems] 요구한 그림이 없어 버림:", figurePolicy, raw.map((p) => (p.figure ? `${JSON.stringify(p.figure).slice(0, 400)} → ${validateFigureSpec(p.figure).ok ? "ok" : (validateFigureSpec(p.figure) as { error?: string }).error}` : "figure 없음")));
     throw new Error("요구한 그림이 있는 문항이 하나도 만들어지지 않았습니다. 유형·개수를 바꿔 다시 시도하세요.");
   }
 
-  return kept.map((p) => ({
+  return kept.map((p) => {
+    // 질문은 따로 받는다(2026-09-14 복수 생성 질문 누락 수정). 모델이 question 을 비우고 지문 끝에 질문을 썼으면 갈라낸다.
+    const stimulusRaw = stripInlineOptions(typeof p.passage === "string" ? p.passage : "", p.options ?? null);
+    let question = typeof p.question === "string" ? p.question.trim() : "";
+    let stimulus = stimulusRaw;
+    if (!question) {
+      const split = splitLegacyQuestion(stimulusRaw);
+      if (split.question) { question = split.question; stimulus = split.passage; }
+    }
+    return {
     format,
     // 그림 데이터는 모양이 맞을 때만 받는다 — 틀리면 그림 없는 문제로 두고 사람이 붙인다.
-    figure: p.figure && validateFigureSpec(p.figure).ok ? p.figure : null,
-    // 모델이 지문 끝에 선택지를 또 써도 저장 전에 뗀다 — 화면에서 두 번 보였다(2026-09-14).
-    passage: stripInlineOptions(p.passage, p.options ?? null),
+    figure: (() => { const fv = p.figure ? validateFigureSpec(p.figure) : null; return fv && fv.ok ? fv.spec : null; })(),
+    // passage 는 옛 소비자(교재 편집기)용 "지문 + 질문" 한 덩어리. 문제은행은 stimulus / question 을 따로 저장한다.
+    passage: composeProblemText(stimulus, question),
+    stimulus,
+    question: question || null,
+    needsFigure: Boolean(requiredTypes) && !hasRequiredFigure(p),
     options: format === "mc" ? p.options ?? null : null,
     correctIndex: format === "mc" ? p.correct_index ?? null : null,
     answers: format === "spr" ? (p.answers ?? []).map(String).filter(Boolean) : null,
     statements: Array.isArray(p.statements) && p.statements.length ? (p.statements as unknown[]).map(String).filter(Boolean) : null,
     explanation: p.explanation,
     difficulty,
-  }));
+    };
+  });
 }
 
 export async function regenerateProblem(params: {
@@ -620,7 +640,8 @@ export async function regenerateProblem(params: {
         input_schema: {
           type: "object",
           properties: {
-            passage: { type: "string", description: "문제 지문. 선택지(A~D)는 여기에 쓰지 말고 options 에만 넣는다." },
+            passage: { type: "string", description: "지문/자료 본문만(질문 문장은 question 에). 선택지(A~D)는 여기에 쓰지 말고 options 에만 넣는다." },
+            question: { type: "string", description: "질문 문장(필수). 실제 SAT 문항 말투, 물음표로 끝난다." },
             options: {
               type: "array",
               items: { type: "string" },
@@ -641,7 +662,7 @@ export async function regenerateProblem(params: {
               description: format === "mc" ? "정답 해설" : format === "spr" ? "풀이 과정과 정답" : "모범 답안 또는 풀이 과정",
             },
           },
-          required: ["passage", "explanation"],
+          required: ["passage", "question", "explanation"],
         },
       },
     ],
@@ -677,6 +698,7 @@ ${current.correctIndex !== null ? `정답 인덱스: ${current.correctIndex}` : 
   }
   const raw = toolUse.input as {
     passage: string;
+    question?: string;
     options?: string[];
     correct_index?: number;
     answers?: string[];
@@ -686,11 +708,11 @@ ${current.correctIndex !== null ? `정답 인덱스: ${current.correctIndex}` : 
 
   return {
     format,
-    passage: stripInlineOptions(raw.passage, raw.options ?? null),
+    passage: composeProblemText(stripInlineOptions(raw.passage ?? "", raw.options ?? null), raw.question ?? null),
     options: format === "mc" ? raw.options ?? null : null,
     correctIndex: format === "mc" ? raw.correct_index ?? null : null,
     answers: format === "spr" ? (raw.answers ?? []).map(String).filter(Boolean) : null,
-    figure: raw.figure && validateFigureSpec(raw.figure).ok ? raw.figure : null,
+    figure: (() => { const fv = raw.figure ? validateFigureSpec(raw.figure) : null; return fv && fv.ok ? fv.spec : null; })(),
     explanation: raw.explanation,
     difficulty,
   };
@@ -837,5 +859,6 @@ ${params.options ? `선택지: ${params.options.join(" / ")}` : ""}
     return { ok: false, error: `AI 가 만든 그림 데이터가 규격에 맞지 않습니다 — ${v.error} (받은 데이터: ${raw.length > 400 ? raw.slice(0, 400) + "…" : raw})` };
   }
   if (v.spec.type !== params.kind) return { ok: false, error: "요구한 종류의 그림이 아닙니다. 다시 시도하세요." };
-  return { ok: true, figure };
+  // 정규화된 spec 을 돌려준다 — 원문(옛 표기·교점 아닌 점)이 그대로 저장되면 렌더·alt 가 깨진다(2026-09-15).
+  return { ok: true, figure: v.spec };
 }

@@ -29,6 +29,7 @@ import LearningText from "@/app/session/[id]/LearningText";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import { stripInlineOptions } from "@/lib/problem-text";
 import { SKILL_CODES, domainShort, skillLabel } from "@/lib/problem-taxonomy";
+import { materialStatusLines } from "@/lib/problem-material-need";
 
 const OPTION_LABELS = ["A", "B", "C", "D", "E", "F"];
 
@@ -76,6 +77,8 @@ export default function CompositionPanel({
   const pickableAll = problems.filter((p) => !composedIds.has(p.problemId));
   const pickableProblems = skillFilter ? pickableAll.filter((p) => p.skillCode === skillFilter) : pickableAll;
   const skillsInPool = SKILL_CODES.filter((k) => pickableAll.some((p) => p.skillCode === k.code));
+  // 기술 코드별 자료 현황 안내(2026-09-14) — 자동으로 문제를 넣고 빼는 기준이 아니다. 보여주기만 한다.
+  const materialLines = materialStatusLines(pickableAll.map((p) => ({ skillCode: p.skillCode ?? null, examSystem: p.examSystem ?? null, text: p.preview?.passage ?? p.label, figure: p.preview?.figure ?? null })));
 
   async function takeProblem(problemId: string) {
     setBusy(true);
@@ -560,6 +563,12 @@ export default function CompositionPanel({
           이 회차의 키워드로 찾은, 공개된 문제입니다. 모자라도 자동으로 만들지 않습니다. 키워드로 자동으로 들어오는 문제는
           회차당 기본 20개까지이고(직접 담은 것은 세지 않음), 나머지는 여기서 골라 담습니다. 문제를 누르면 간략히 볼 수 있습니다.
         </p>
+        {materialLines.length > 0 && (
+          <ul className="text-[12px] text-grey-500 mb-2 list-disc pl-5" data-testid="material-status">
+            {materialLines.map((l) => <li key={l}>{l}</li>)}
+            <li className="list-none -ml-5 text-[11.5px]">안내일 뿐 자동으로 문제를 넣거나 빼지 않습니다.</li>
+          </ul>
+        )}
         {skillsInPool.length > 0 && (
           <label className="flex flex-wrap items-center gap-2 text-[12px] text-ink mb-2">
             <span className="text-grey-500">세부 기술</span>

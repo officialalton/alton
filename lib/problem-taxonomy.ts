@@ -93,3 +93,55 @@ export function inferDomainFromLegacy(skillType: string | null | undefined): Sat
   const direct = SKILL_CODES.find((s) => s.label.toLowerCase() === q || s.code === q);
   return direct?.domain ?? null;
 }
+
+
+// ---------------------------------------------------------------------------------- 문항 체계(2026-09-14)
+// 관리 과목(subjects)은 라이브러리 단위고, 문항 체계는 "어느 시험의 어떤 문항인가"다. 시험 분류(영역·세부 기술)는 이 체계의 하위.
+export type ExamSystem = "sat_rw" | "sat_math" | "ap";
+
+export const EXAM_SYSTEMS: { code: ExamSystem; label: string; short: string }[] = [
+  { code: "sat_rw", label: "SAT Reading & Writing", short: "SAT R&W" },
+  { code: "sat_math", label: "SAT Math", short: "SAT Math" },
+  { code: "ap", label: "AP", short: "AP" },
+];
+
+export function examSystemLabel(code: string | null | undefined): string {
+  return EXAM_SYSTEMS.find((e) => e.code === code)?.label ?? "문항 체계 미지정";
+}
+
+/** SAT 영역 → 문항 체계. AP·미지정은 null. */
+export function examSystemOfDomain(domain: string | null | undefined): ExamSystem | null {
+  if (!domain) return null;
+  if (!SAT_DOMAINS.some((d) => d.code === domain)) return null;
+  return domain.startsWith("rw_") ? "sat_rw" : "sat_math";
+}
+
+/** 문항 체계에 속한 SAT 영역. */
+export function domainsForExamSystem(system: ExamSystem | null | undefined): SatDomain[] {
+  if (system === "sat_rw") return SAT_DOMAINS.filter((d) => d.code.startsWith("rw_"));
+  if (system === "sat_math") return SAT_DOMAINS.filter((d) => !d.code.startsWith("rw_"));
+  return [];
+}
+
+/**
+ * AP 과목 자리(2026-09-14 제품 오너: 본격 구현은 아직 — 데이터 구조와 UI 자리만).
+ * supported=false 는 '준비 중' — SAT Math 입력을 임시로 재사용해 노출하지 않는다.
+ */
+export type ApSubjectMeta = { code: string; label: string; supported: boolean; formats: ("mc" | "essay" | "math")[] };
+export const AP_SUBJECTS: ApSubjectMeta[] = [
+  { code: "ap_calculus_ab", label: "AP Calculus AB", supported: false, formats: [] },
+  { code: "ap_calculus_bc", label: "AP Calculus BC", supported: false, formats: [] },
+  { code: "ap_statistics", label: "AP Statistics", supported: false, formats: [] },
+  { code: "ap_physics_1", label: "AP Physics 1", supported: false, formats: [] },
+  { code: "ap_chemistry", label: "AP Chemistry", supported: false, formats: [] },
+  { code: "ap_biology", label: "AP Biology", supported: false, formats: [] },
+  { code: "ap_english_language", label: "AP English Language and Composition", supported: false, formats: [] },
+  { code: "ap_english_literature", label: "AP English Literature and Composition", supported: false, formats: [] },
+  { code: "ap_us_history", label: "AP United States History", supported: false, formats: [] },
+  { code: "ap_world_history", label: "AP World History: Modern", supported: false, formats: [] },
+  { code: "ap_microeconomics", label: "AP Microeconomics", supported: false, formats: [] },
+  { code: "ap_macroeconomics", label: "AP Macroeconomics", supported: false, formats: [] },
+  { code: "ap_psychology", label: "AP Psychology", supported: false, formats: [] },
+  { code: "ap_computer_science_a", label: "AP Computer Science A", supported: false, formats: [] },
+];
+export const AP_SUBJECT_BY_CODE = new Map(AP_SUBJECTS.map((a) => [a.code, a]));

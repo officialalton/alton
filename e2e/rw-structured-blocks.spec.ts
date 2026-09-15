@@ -70,7 +70,7 @@ async function adminSaveAndPublish(page: Page, passage: string, problemId: strin
   for (let i = 0; i < n; i++) {
     if (collapse(await rows.nth(i).innerText()).startsWith(head)) { await rows.nth(i).click(); break; }
   }
-  await expect(page.getByLabel("지문")).toHaveValue(passage);
+  await expect(page.getByLabel("지문 / 자료")).toHaveValue(passage);
   await expect(page.getByTestId("rw-structure")).toBeVisible();
   const structure = await page.getByTestId("rw-structure").innerText();
   await expect(page.getByTestId("passage-preview")).toBeVisible();
@@ -212,8 +212,8 @@ for (const c of AI_CASES) {
     await loginAs(page, ACCOUNTS.admin);
     await page.goto("/admin?tab=problem-bank");
     await page.getByLabel("새 문제 과목").selectOption(SUBJECT_ID);
-    await page.getByLabel("새 문제 형식").selectOption("mc");
-    // 필터 줄(첫 번째)과 새 문제 줄(두 번째)에 같은 라벨의 선택이 있다 — 새 문제 줄을 쓴다.
+    // 문항 체계 탭 SAT Reading & Writing(기본). 필터 줄(첫 번째)과 새 문제 줄(두 번째)에 같은 라벨의 선택이 있다 — 새 문제 줄을 쓴다.
+    await page.getByRole("tab", { name: "SAT Reading & Writing" }).click();
     await page.getByLabel("SAT 영역", { exact: true }).nth(1).selectOption(c.domain);
     await page.getByLabel("세부 기술", { exact: true }).nth(1).selectOption(c.skillCode);
     await page.getByLabel("생성 개수").fill("1");
@@ -233,7 +233,8 @@ for (const c of AI_CASES) {
     for (let i = 0; i < n; i++) {
       if (collapse(await rows.nth(i).innerText()).startsWith(head)) { await rows.nth(i).click(); break; }
     }
-    await expect(page.getByLabel("지문")).toBeVisible();
+    await expect(page.getByLabel("지문 / 자료")).toBeVisible();
+    await expect(page.getByLabel("질문")).not.toHaveValue("");
     const structure = await page.getByTestId("rw-structure").innerText();
     testInfo.annotations.push({ type: "structure", description: structure });
     await page.getByTestId("passage-preview").screenshot({ path: `${OUT}/${c.prefix}-admin.png` });

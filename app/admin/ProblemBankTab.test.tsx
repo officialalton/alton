@@ -22,6 +22,7 @@ vi.mock("./problem-bank-actions", () => ({
   setProblemKeywordAction: (...a: unknown[]) => setProblemKeywordAction(...a),
   updateProblemMetaAction: (...a: unknown[]) => updateProblemMetaAction(...a),
   generateBankProblemsAction: (...a: unknown[]) => generateBankProblemsAction(...a),
+  problemQuestionAuditAction: (...a: unknown[]) => problemQuestionAuditAction(...a),
 }));
 
 const listBankProblemsAction = vi.fn();
@@ -39,6 +40,7 @@ const setProblemArchivedAction = vi.fn();
 const setProblemKeywordAction = vi.fn();
 const updateProblemMetaAction = vi.fn();
 const generateBankProblemsAction = vi.fn();
+const problemQuestionAuditAction = vi.fn(async (..._a: unknown[]) => ({ ok: true, value: { withQuestion: 1, draftWithout: 0, publishedWithout: 0 } }));
 
 const subjects: AdminSubject[] = [
   {
@@ -108,7 +110,7 @@ beforeEach(() => {
   setProblemArchivedAction.mockResolvedValue({ ok: true });
   setProblemKeywordAction.mockResolvedValue({ ok: true });
   updateProblemMetaAction.mockResolvedValue({ ok: true });
-  generateBankProblemsAction.mockResolvedValue({ ok: true, value: 3 });
+  generateBankProblemsAction.mockResolvedValue({ ok: true, value: { created: 3, failures: [] } });
 });
 
 /** 공개 탭으로 옮겨 첫 문제를 편다. 공개된 문제는 생성 탭에 없다. */
@@ -124,7 +126,7 @@ async function openFirstProblem() {
   render(<ProblemBankTab subjects={subjects} />);
   await waitFor(() => expect(screen.getByText("판별식이 0일 때")).toBeInTheDocument());
   fireEvent.click(screen.getByText("판별식이 0일 때"));
-  await waitFor(() => expect(screen.getByLabelText("지문")).toBeInTheDocument());
+  await waitFor(() => expect(screen.getByLabelText("지문 / 자료")).toBeInTheDocument());
 }
 
 describe("목록 — 생성 · 공개 · 보관", () => {
@@ -310,7 +312,7 @@ describe("공개는 내용을 본 뒤에만 — 검수 요청 단계는 없다",
 
   it("편집 화면에 지문·선택지·정답·해설이 그대로 있고, 공개는 저장한 버전을 공개한다", async () => {
     await openFirstProblem();
-    expect(screen.getByLabelText("지문")).toHaveValue("판별식이 0일 때");
+    expect(screen.getByLabelText("지문 / 자료")).toHaveValue("판별식이 0일 때");
     expect(screen.getByLabelText("선택지 2")).toHaveValue("나");
     expect(screen.getByLabelText("2번이 정답")).toBeChecked();
     expect(screen.getByLabelText("해설")).toHaveValue("중근입니다");
@@ -351,7 +353,9 @@ describe("공개본 조회와 수정 초안", () => {
     await openPublishedProblem();
 
     await waitFor(() => expect(screen.getByText("지금 공개된 내용")).toBeInTheDocument());
-    expect(screen.getByText("3. 셋 · 정답")).toBeInTheDocument();
+    // 선택지는 수식 렌더(LearningText)라 글자가 나뉜다 — 정답 표시가 붙은 항목을 본다.
+    const correct = screen.getByText("셋").closest("li");
+    expect(correct).toHaveTextContent("정답");
     expect(screen.getByText(/공개된 해설입니다/)).toBeInTheDocument();
   });
 
@@ -475,20 +479,37 @@ describe("보관은 삭제가 아니다", () => {
     expect(screen.getByTestId("problem-figure")).toBeInTheDocument();
     expect(screen.getByLabelText("그림 확인함")).toBeDisabled(); // 저장 전엔 확인 못 한다
     fireEvent.change(box, { target: { value: '{"type":"geometry","shapes":[]}' } });
-    expect(screen.getByText(/그림 데이터 오류/)).toBeInTheDocument();
+    expect(screen.getByText(/자료 데이터 오류|그림 데이터 오류/)).toBeInTheDocument();
   });
 
-  it("그림 옵션을 고르면 AI 생성에 그 요구가 가고, Geometry 유형을 고르면 '도형 필수'가 기본이다(2026-09-14)", async () => {
+  it("문항 체계 탭에서 세부 기술을 고르면 자료 판정이 보이고, 그 판정이 AI 생성의 그림 요구가 된다(2026-09-14 재구성)", async () => {
     render(<ProblemBankTab subjects={subjects} />);
     await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());
+    fireEvent.click(screen.getByRole("tab", { name: "SAT Math" }));
     fireEvent.change(screen.getByLabelText("새 문제 과목"), { target: { value: "sub1" } });
-    fireEvent.change(screen.getByLabelText("문제 유형"), { target: { value: "Geometry and Trigonometry" } });
-    expect(screen.getByLabelText("그림")).toHaveValue("require_geometry");
-    fireEvent.change(screen.getByLabelText("그림"), { target: { value: "require_plane" } });
+    // 필터 줄과 새 문제 줄에 같은 라벨이 있다 — 새 문제 줄은 두 번째.
+    fireEvent.change(screen.getAllByLabelText("SAT 영역")[1], { target: { value: "geometry_trig" } });
+    fireEvent.change(screen.getAllByLabelText("세부 기술")[1], { target: { value: "lines_angles_triangles" } });
+    expect(screen.getByTestId("new-material-need")).toHaveAttribute("data-level", "required");
+    expect(screen.getByTestId("new-material-need")).toHaveTextContent(/도형/);
+    // 관리자가 고르는 '그림' 선택은 없다.
+    expect(screen.queryByLabelText("그림")).toBeNull();
     fireEvent.click(screen.getByText("AI로 만들기"));
     await waitFor(() =>
-      expect(generateBankProblemsAction).toHaveBeenCalledWith(expect.objectContaining({ figurePolicy: "require_plane" }))
+      expect(generateBankProblemsAction).toHaveBeenCalledWith(expect.objectContaining({ figurePolicy: "require_geometry", examSystem: "sat_math", skillCode: "lines_angles_triangles" }))
     );
+  });
+
+  it("R&W 탭은 답안 형식이 객관식으로 고정되고 Math 전용 항목이 없다; AP 탭은 과목을 고르면 '준비 중'만 보인다", async () => {
+    render(<ProblemBankTab subjects={subjects} />);
+    await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());
+    fireEvent.click(screen.getByRole("tab", { name: "SAT Reading & Writing" }));
+    expect(screen.getByLabelText("새 문제 형식")).toHaveTextContent("객관식");
+    expect(screen.queryByLabelText("그림")).toBeNull();
+    fireEvent.click(screen.getByRole("tab", { name: "AP" }));
+    fireEvent.change(screen.getByLabelText("AP 과목"), { target: { value: "ap_calculus_ab" } });
+    expect(screen.getByTestId("ap-pending-note")).toHaveTextContent("준비 중");
+    expect(screen.queryByText("AI로 만들기")).toBeNull();
   });
 
   it("초안에서 'AI로 좌표평면 데이터 만들기'를 누르면 그림 칸이 채워지고 미리보기가 뜬다", async () => {
@@ -501,7 +522,7 @@ describe("보관은 삭제가 아니다", () => {
 
   it("지문에 표·수식이 있으면 편집 칸 아래에 학생 화면과 같은 미리보기(표 렌더)가 붙는다", async () => {
     await openFirstProblem();
-    fireEvent.change(screen.getByLabelText("지문"), { target: { value: "Data:\n| Shift | Defective |\n|---|---|\n| 1 | 6 |\nQ?" } });
+    fireEvent.change(screen.getByLabelText("지문 / 자료"), { target: { value: "Data:\n| Shift | Defective |\n|---|---|\n| 1 | 6 |\nQ?" } });
     const preview = screen.getByTestId("passage-preview");
     expect(preview.querySelector("table")).not.toBeNull();
     expect(preview).toHaveTextContent("Defective");

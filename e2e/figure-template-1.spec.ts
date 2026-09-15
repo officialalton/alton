@@ -54,10 +54,12 @@ test("템플릿 1: AI 의미 데이터 → 검증 → 표준 렌더 → 공개 �
 
   await loginAs(page, ACCOUNTS.admin);
   await page.goto("/admin?tab=problem-bank");
+  // 2026-09-14 재구성: 문항 체계 탭(SAT Math) → 영역 → 세부 기술. 그림 요구는 관리자가 고르지 않고 자료 판정이 정한다.
+  await page.getByRole("tab", { name: "SAT Math" }).click();
   await page.getByLabel("새 문제 과목").selectOption(SUBJECT_ID);
-  await page.getByLabel("새 문제 형식").selectOption("mc");
-  await page.getByLabel("문제 유형").fill("Geometry and Trigonometry");
-  await expect(page.getByLabel("그림")).toHaveValue("require_geometry");
+  await page.getByLabel("SAT 영역", { exact: true }).nth(1).selectOption("geometry_trig");
+  await page.getByLabel("세부 기술", { exact: true }).nth(1).selectOption("lines_angles_triangles");
+  await expect(page.getByTestId("new-material-need")).toHaveAttribute("data-level", "required");
   await page.getByLabel("생성 개수").fill("1");
 
   const startedAt = psql(`select now()::text;`);
@@ -72,8 +74,10 @@ test("템플릿 1: AI 의미 데이터 → 검증 → 표준 렌더 → 공개 �
   const head = passage.replace(/\s+/g, " ").slice(0, 140);
   await expect.poll(async () => (await rowTitles(page)).some((t) => t.replace(/\s+/g, " ").startsWith(head)), { timeout: 30_000 }).toBe(true);
   await page.getByTestId("bank-row-title").filter({ hasText: head }).first().click();
-  await expect(page.getByLabel("지문")).toBeVisible();
-  await expect(page.getByLabel("지문")).toHaveValue(passage);
+  await expect(page.getByLabel("지문 / 자료")).toBeVisible();
+  // 질문은 따로 저장된다(2026-09-14) — 지문 칸 + 질문 칸을 합치면 생성된 본문이다.
+  await expect(page.getByLabel("지문 / 자료")).toHaveValue(passage);
+  await expect(page.getByLabel("질문")).not.toHaveValue("");
 
   // 표준 렌더러 미리보기 + 검증 결과. AI 가 지문과 어긋난 데이터를 내면 여기서 사유가 보이고 공개가 막힌다 — 그것도 기록한다.
   await expect(page.getByTestId("figure-preview")).toBeVisible();
@@ -295,7 +299,7 @@ async function runDraftFigureFlow(page: Page, testInfo: import("@playwright/test
   const head = opts.passage.slice(0, 60);
   await expect.poll(async () => (await rowTitles(page)).some((t) => t.startsWith(head)), { timeout: 30_000 }).toBe(true);
   await page.getByTestId("bank-row-title").filter({ hasText: head }).first().click();
-  await expect(page.getByLabel("지문")).toHaveValue(opts.passage);
+  await expect(page.getByLabel("지문 / 자료")).toHaveValue(opts.passage);
   await page.getByRole("button", { name: opts.button }).click();
   await expect(page.getByTestId("figure-preview").or(page.getByText(/그림을 만들지 못했습니다/))).toBeVisible({ timeout: 120_000 });
   if (await page.getByText(/그림을 만들지 못했습니다/).count()) {

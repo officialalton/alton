@@ -29,7 +29,52 @@ const MIN_GAP = 94; // 평행선 기본 간격 — 사이에 놓이는 라벨이
 const SLANT_DEG = 55;
 const LABEL_R = 30;
 
-export function validateParallelTransversal(input: unknown): { ok: true; spec: ParallelTransversalSpec } | { ok: false; error: string } {
+/**
+ * 모델이 자주 내는 옛 각 표기를 표준 모양으로 옮긴다(2026-09-15): {line, quadrant, text, at:'A'} → {at:[평행선, 횡단선], region, label}.
+ * 점 이름(at:'A')이 있으면 points 에서 교점을 찾고, 없으면 line 이 평행선이고 횡단선이 하나일 때만 짝을 만든다. 못 옮기면 그대로 두어 검증이 사유를 말한다.
+ */
+export function normalizeParallelTransversalInput(input: unknown): unknown {
+  if (!input || typeof input !== "object") return input;
+  const s = { ...(input as Record<string, unknown>) };
+  if (!Array.isArray(s.angles)) return s;
+  const parallel = Array.isArray(s.parallel) ? (s.parallel as unknown[]).map(String) : [];
+  const transversals = Array.isArray(s.transversals) ? (s.transversals as { id?: unknown }[]).map((t) => String(t?.id ?? "")) : [];
+  // points: 교점이 아닌 점(선 하나 위) 은 이 템플릿에 자리가 없어 뺀다. 선 3개가 만난다고 쓴 점은 평행선 하나 + 첫 횡단선로 줄인다.
+  if (Array.isArray(s.points)) {
+    s.points = (s.points as unknown[])
+      .map((raw) => {
+        if (!raw || typeof raw !== "object") return raw;
+        const pt = { ...(raw as Record<string, unknown>) };
+        const on = Array.isArray(pt.on) ? (pt.on as unknown[]).map(String) : typeof pt.on === "string" ? pt.on.split(/[^\w]+/).filter(Boolean) : Array.isArray(pt.lines) ? (pt.lines as unknown[]).map(String) : [];
+        const par = on.find((x) => parallel.includes(x));
+        const tr = on.find((x) => transversals.includes(x));
+        if (par && tr) pt.on = [par, tr];
+        delete pt.lines;
+        return pt;
+      })
+      .filter((pt) => pt && typeof pt === "object" && Array.isArray((pt as { on?: unknown }).on) && ((pt as { on: unknown[] }).on).length === 2);
+  }
+  const points = Array.isArray(s.points) ? (s.points as { id?: unknown; on?: unknown }[]) : [];
+  s.angles = (s.angles as unknown[]).map((raw) => {
+    if (!raw || typeof raw !== "object") return raw;
+    const a = { ...(raw as Record<string, unknown>) };
+    if (a.label === undefined && typeof a.text === "string") { a.label = a.text; delete a.text; }
+    if (a.region === undefined && typeof a.quadrant === "string") { a.region = String(a.quadrant).toUpperCase(); delete a.quadrant; }
+    if (!Array.isArray(a.at)) {
+      const pointId = typeof a.at === "string" ? a.at : typeof a.point === "string" ? a.point : null;
+      const pt = pointId ? points.find((p) => String(p.id) === pointId) : undefined;
+      if (pt && Array.isArray(pt.on) && pt.on.length === 2) a.at = [String(pt.on[0]), String(pt.on[1])];
+      else if (typeof a.line === "string" && parallel.includes(a.line) && transversals.length === 1) a.at = [a.line, transversals[0]];
+      else if (typeof a.line === "string" && transversals.includes(a.line) && parallel.length === 2 && typeof a.parallel === "string") a.at = [String(a.parallel), a.line];
+    }
+    delete a.line; delete a.point;
+    return a;
+  });
+  return s;
+}
+
+export function validateParallelTransversal(rawInput: unknown): { ok: true; spec: ParallelTransversalSpec } | { ok: false; error: string } {
+  const input = normalizeParallelTransversalInput(rawInput);
   if (!input || typeof input !== "object") return { ok: false, error: "그림 데이터가 객체가 아닙니다." };
   const s = input as Record<string, unknown>;
   if (s.type !== "parallel_transversal") return { ok: false, error: "type 이 parallel_transversal 이 아닙니다." };

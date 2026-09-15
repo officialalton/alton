@@ -39,9 +39,9 @@ export default function RwStimulusView({ passage, className }: { passage: string
         }
         if (b.kind === "question") {
           return (
-            <p key={i} className="mt-4 font-semibold" data-testid="rw-question">
+            <div key={i} className="mt-4 font-semibold" data-testid="rw-question">
               <LearningText text={b.text} />
-            </p>
+            </div>
           );
         }
         if (b.kind === "table") {

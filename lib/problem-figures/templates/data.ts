@@ -73,7 +73,10 @@ export function validateData(input: unknown): { ok: true; spec: DataSpec } | { o
   if (s.type !== "data") return { ok: false, error: "type 이 data 가 아닙니다." };
   const kinds: DataKind[] = ["table", "two_way", "number_list", "bar", "line", "histogram", "scatter", "boxplot", "dot_plot", "statement"];
   if (!kinds.includes(s.kind as DataKind)) return { ok: false, error: `지원하지 않는 자료 유형: ${String(s.kind)} (table|two_way|number_list|bar|line|histogram|scatter|boxplot|dot_plot|statement)` };
-  if (s.title !== undefined && !isName(s.title)) return { ok: false, error: "title 은 40자 이내 문자열입니다." };
+  // 제목: 표·목록·문장형(HTML, 줄바꿈됨)은 90자, SVG 그래프는 70자까지(40자 넘으면 글자를 줄여 그린다). 실제 시험 표 제목은 40자를 넘는 경우가 흔하다(2026-09-15).
+  if (s.title !== undefined && (typeof s.title !== "string" || s.title.trim().length === 0 || s.title.length > (["table", "two_way", "number_list", "statement"].includes(String(s.kind)) ? 90 : 70))) {
+    return { ok: false, error: `title 은 ${["table", "two_way", "number_list", "statement"].includes(String(s.kind)) ? 90 : 70}자 이내 문자열입니다.` };
+  }
   switch (s.kind) {
     case "table": {
       // 첫 열 이름은 비울 수 있다(2×2 표의 모서리 칸).
@@ -237,7 +240,7 @@ function renderBarOrLine(spec: DataSpec): { svg: string; alt: string; issues: Fi
   const issues: FigureIssue[] = [];
   const top = 20 + (spec.title ? 22 : 0) + (legend ? 22 : 0);
   const fr: Frame = { x0: 64 + (spec.yTitle ? 14 : 0), y0: top, x1: W - 24, y1: H - 40 - (rotate ? 40 : 0) - (spec.xTitle ? 16 : 0) };
-  if (spec.title) sheet.text(W / 2, 14, spec.title, { size: 14, anchor: "middle" });
+  if (spec.title) sheet.text(W / 2, 14, spec.title, { size: spec.title.length > 40 ? 11 : 14, anchor: "middle" });
   if (legend) drawLegend(sheet, series.map((s) => s.name!), fr.x0, top - 12);
   const allValues = series.flatMap((s) => s.values);
   const dom = yDomain(allValues, spec);
@@ -274,7 +277,7 @@ function renderHistogram(spec: DataSpec): { svg: string; alt: string; issues: Fi
   const sheet = new Sheet(W, H);
   const issues: FigureIssue[] = [];
   const fr: Frame = { x0: 64 + (spec.yTitle ? 14 : 0), y0: 20 + (spec.title ? 22 : 0), x1: W - 24, y1: H - 40 - (spec.xTitle ? 16 : 0) };
-  if (spec.title) sheet.text(W / 2, 14, spec.title, { size: 14, anchor: "middle" });
+  if (spec.title) sheet.text(W / 2, 14, spec.title, { size: spec.title.length > 40 ? 11 : 14, anchor: "middle" });
   const dom = yDomain(bins.map((b) => b.count), spec);
   const sy = drawYAxis(sheet, fr, dom.min, dom.max, dom.step, spec.yTitle ?? "Frequency");
   const lo = bins[0].from, hi = bins[bins.length - 1].to;
@@ -299,7 +302,7 @@ function renderScatter(spec: DataSpec): { svg: string; alt: string; issues: Figu
   const sheet = new Sheet(W, H);
   const issues: FigureIssue[] = [];
   const fr: Frame = { x0: 64 + (spec.yTitle ? 14 : 0), y0: 20 + (spec.title ? 22 : 0), x1: W - 24, y1: H - 40 - (spec.xTitle ? 16 : 0) };
-  if (spec.title) sheet.text(W / 2, 14, spec.title, { size: 14, anchor: "middle" });
+  if (spec.title) sheet.text(W / 2, 14, spec.title, { size: spec.title.length > 40 ? 11 : 14, anchor: "middle" });
   const xs = pts.map((p) => p[0]), ys = pts.map((p) => p[1]);
   const xStep = niceStep((Math.max(...xs) - Math.min(0, ...xs)) || 1), xMin = Math.floor(Math.min(0, ...xs) / xStep) * xStep, xMax = Math.ceil(Math.max(...xs) / xStep) * xStep + (Math.max(...xs) % xStep === 0 ? xStep : 0);
   const dom = yDomain(ys, spec);
@@ -331,7 +334,7 @@ function renderBoxplot(spec: DataSpec): { svg: string; alt: string; issues: Figu
   const issues: FigureIssue[] = [];
   const nameW = Math.max(...boxes.map((b) => labelWidth(b.name, 12))) + 12;
   const fr: Frame = { x0: 24 + nameW, y0: 16 + (spec.title ? 22 : 0), x1: W - 24, y1: H - 36 - (spec.xTitle ? 16 : 0) };
-  if (spec.title) sheet.text(W / 2, 14, spec.title, { size: 14, anchor: "middle" });
+  if (spec.title) sheet.text(W / 2, 14, spec.title, { size: spec.title.length > 40 ? 11 : 14, anchor: "middle" });
   const lo = Math.min(...boxes.map((b) => b.min)), hi = Math.max(...boxes.map((b) => b.max));
   const step = niceStep((hi - lo) || 1, 8), min = Math.floor(lo / step) * step, max = Math.ceil(hi / step) * step + (hi === Math.ceil(hi / step) * step ? 0 : 0);
   const sx = (v: number) => fr.x0 + ((v - min) / ((max - min) || 1)) * (fr.x1 - fr.x0);
@@ -380,7 +383,7 @@ function renderDotPlot(spec: DataSpec): { svg: string; alt: string; issues: Figu
   const sheet = new Sheet(W, H);
   const issues: FigureIssue[] = [];
   const fr: Frame = { x0: 40, y0: 16 + (spec.title ? 22 : 0), x1: W - 40, y1: H - 36 - (spec.xTitle ? 16 : 0) };
-  if (spec.title) sheet.text(W / 2, 14, spec.title, { size: 14, anchor: "middle" });
+  if (spec.title) sheet.text(W / 2, 14, spec.title, { size: spec.title.length > 40 ? 11 : 14, anchor: "middle" });
   const vals = dots.map((d) => d.value);
   const lo = Math.min(...vals), hi = Math.max(...vals);
   const step = niceStep((hi - lo) || 1, 10);

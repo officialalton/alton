@@ -1,7 +1,11 @@
 "use server";
 
 import { checkFigure, type RenderCheck } from "@/lib/problem-figures/check";
+import { validateFigureSpec } from "@/lib/problem-figures/spec";
 import { checkContent } from "@/lib/problem-content-check";
+import { composeProblemText, hasQuestion, splitLegacyQuestion } from "@/lib/problem-question";
+import { judgeMaterialNeed, materialBlocker } from "@/lib/problem-material-need";
+import { checkRwStructure } from "@/lib/rw-stimulus";
 
 import { requireAdmin } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
@@ -33,6 +37,12 @@ export type BankProblem = {
   /** SAT 영역·세부 기술 코드(lib/problem-taxonomy, DB problem_skill_codes). 만들기·찾기·배정·성취의 공통 기준. */
   satDomain: string | null;
   skillCode: string | null;
+  /** 문항 체계(2026-09-14): sat_rw | sat_math | ap. 관리 과목과 독립. */
+  examSystem: string | null;
+  /** AP 과목 코드(exam_system = ap). */
+  apSubject: string | null;
+  /** 최신 내용(공개본 우선)에 질문이 있는가 — 없으면 '질문 보완 필요', 자동 구성 후보에서 빠진다. */
+  hasQuestion: boolean;
   difficulty: string | null;
   subjectId: string | null;
   subjectName: string;
@@ -61,6 +71,8 @@ export type BankProblem = {
 export type ProblemContent = {
   versionId: string;
   passage: string | null;
+  /** 질문(지문과 분리 저장, 2026-09-14). 옛 버전은 null — 지문 안의 질문 문장을 그대로 읽는다. */
+  question: string | null;
   options: string[] | null;
   correctIndex: number | null;
   explanation: string | null;
@@ -90,6 +102,7 @@ export type ProblemBankFilter = {
   query?: string;
   satDomain?: string;
   skillCode?: string;
+  examSystem?: string;
 };
 
 export async function listBankProblemsAction(
@@ -101,7 +114,7 @@ export async function listBankProblemsAction(
   let q = admin
     .from("problems")
     .select(
-      "id, format, passage, skill_type, topic, difficulty, subject_id, status, archived_at, created_at, sat_domain, skill_code"
+      "id, format, passage, skill_type, topic, difficulty, subject_id, status, archived_at, created_at, sat_domain, skill_code, exam_system, ap_subject"
     )
     .order("created_at", { ascending: false })
     .limit(200);
@@ -112,6 +125,7 @@ export async function listBankProblemsAction(
   if (filter.format) q = q.eq("format", filter.format);
   if (filter.satDomain) q = q.eq("sat_domain", filter.satDomain);
   if (filter.skillCode) q = q.eq("skill_code", filter.skillCode);
+  if (filter.examSystem) q = q.eq("exam_system", filter.examSystem);
   if (filter.query?.trim()) q = q.ilike("passage", `%${filter.query.trim()}%`);
 
   const { data: rows, error } = await q;
@@ -163,7 +177,7 @@ export async function listBankProblemsAction(
   // 있다 — 그래서 공개된 문제가 "(아직 내용이 없는 문제)"로 보였다.
   const { data: contentRows } = await admin
     .from("problem_versions")
-    .select("id, problem_id, status, version_no, passage, options, correct_index, explanation, answers, figure, figure_checked, render_check, statements")
+    .select("id, problem_id, status, version_no, passage, question, options, correct_index, explanation, answers, figure, figure_checked, render_check, statements")
     .in("problem_id", problemIds)
     .in("status", ["published", "draft", "in_review"])
     .order("version_no", { ascending: false });
@@ -171,6 +185,7 @@ export async function listBankProblemsAction(
   const asContent = (v: Record<string, unknown>): ProblemContent => ({
     versionId: v.id as string,
     passage: (v.passage as string | null) ?? null,
+    question: (v.question as string | null) ?? null,
     options: (v.options as string[] | null) ?? null,
     correctIndex: (v.correct_index as number | null) ?? null,
     explanation: (v.explanation as string | null) ?? null,
@@ -208,6 +223,12 @@ export async function listBankProblemsAction(
     skillType: (r.skill_type as string | null) ?? null,
     satDomain: (r.sat_domain as string | null) ?? null,
     skillCode: (r.skill_code as string | null) ?? null,
+    examSystem: (r.exam_system as string | null) ?? null,
+    apSubject: (r.ap_subject as string | null) ?? null,
+    hasQuestion: (() => {
+      const c = publishedByProblem.get(r.id as string) ?? draftByProblem.get(r.id as string);
+      return c ? hasQuestion(c.passage, c.question) : false;
+    })(),
     difficulty: (r.difficulty as string | null) ?? null,
     subjectId: (r.subject_id as string | null) ?? null,
     subjectName: r.subject_id ? nameById.get(r.subject_id as string) ?? "(과목 없음)" : "(과목 없음)",
@@ -270,8 +291,12 @@ export async function createBankProblemAction(params: {
   format: string;
   /** 무엇을 묻는가(예: Words in Context). 선택 항목이다. */
   skillType?: string;
-  /** 세부 기술 코드 — 정하면 SAT 영역은 DB 트리거가 맞춘다. */
+  /** 세부 기술 코드 — 정하면 SAT 영역·문항 체계는 DB 트리거가 맞춘다. */
   skillCode?: string;
+  /** 문항 체계(sat_rw | sat_math | ap). 관리 과목과 독립. */
+  examSystem?: string;
+  /** AP 과목 코드(문항 체계가 ap 일 때). */
+  apSubject?: string;
   /** 무엇에 대한 글인가. 유형과 다른 축이고 역시 선택 항목이다. */
   topic?: string;
   difficulty?: string;
@@ -289,6 +314,8 @@ export async function createBankProblemAction(params: {
     p_skill_type: params.skillType ?? "",
     p_topic: params.topic ?? "",
     p_skill_code: params.skillCode ?? null,
+    p_exam_system: params.examSystem ?? null,
+    p_ap_subject: params.apSubject ?? null,
     p_difficulty: params.difficulty ?? "",
     p_actor_id: adminUserId,
   });
@@ -316,7 +343,10 @@ export async function createBankProblemAction(params: {
  */
 export async function createDraftVersionAction(params: {
   problemId: string;
+  /** 지문/자료 본문(질문 제외). 옛 문제는 질문이 섞여 있을 수 있다 — 그대로 둔다. */
   passage: string;
+  /** 질문 문장(2026-09-14 분리). 비우면 지문 안의 질문 문장을 그대로 읽는다(레거시). */
+  question?: string | null;
   options: string[] | null;
   correctIndex: number | null;
   explanation: string;
@@ -328,22 +358,34 @@ export async function createDraftVersionAction(params: {
 }): Promise<BankResult<string>> {
   const { adminUserId } = await requireAdmin();
   const admin = createAdminClient();
+  // 렌더·검증은 "지문 + 질문" 한 덩어리를 본다.
+  const fullText = composeProblemText(params.passage, params.question ?? null);
   // 2026-09-14 표준 렌더링 검증 — 스키마에 안 맞는 그림·조판할 수 없는 수식은 저장하지 않는다. 그 외 문제(참조 불일치·
   // 충돌·잘림·레거시·선택지 정합)는 저장은 되지만 render_check 에 남고 공개가 막힌다(관리자가 사유를 보고 고친다).
-  const { data: problemRow } = await admin.from("problems").select("format, skill_code").eq("id", params.problemId).maybeSingle();
+  const { data: problemRow } = await admin.from("problems").select("format, skill_code, exam_system").eq("id", params.problemId).maybeSingle();
+  // 자료 필수 문항(세부 기술·질문 문장으로 판정)은 자료 없이 저장하지 않는다(2026-09-14 제품 오너).
+  const need = judgeMaterialNeed({ examSystem: (problemRow?.exam_system as string | null) ?? null, skillCode: (problemRow?.skill_code as string | null) ?? null, text: fullText });
+  const blocker = materialBlocker(need, params.figure ?? null);
+  if (blocker && fullText.trim()) return { ok: false, error: blocker };
   const contentIssues = checkContent({
     format: (problemRow?.format as string | undefined) ?? (params.options ? "mc" : "essay"),
-    passage: params.passage, options: params.options, correctIndex: params.correctIndex, explanation: params.explanation,
+    passage: fullText, options: params.options, correctIndex: params.correctIndex, explanation: params.explanation,
     answers: params.answers ?? null, statements: params.statements ?? null,
     // RW 구조화 자료 블록(2026-09-14): 세부 기술이 RW 코드인 문제만 — 옛 문제(코드 없음)는 의미를 확정할 수 없어 검사하지 않는다.
     skillCode: (problemRow?.skill_code as string | null | undefined) ?? null, figure: params.figure ?? null,
   });
   const fatal = contentIssues.find((i) => ["math_parse", "math_unclosed", "latex_leak"].includes(i.code));
   if (fatal) return { ok: false, error: `수식을 조판할 수 없어 저장하지 않았습니다 — ${fatal.message}` };
-  const figureCheck = checkFigure(params.figure ?? null, params.passage, params.options, params.correctIndex);
+  const figureCheck = checkFigure(params.figure ?? null, fullText, params.options, params.correctIndex);
   if (figureCheck.issues.some((i) => i.code === "schema")) {
     return { ok: false, error: `그림 데이터가 규격에 맞지 않아 저장하지 않았습니다 — ${figureCheck.issues[0].message}` };
   }
+  // 저장은 정규화된 spec 으로 — 옛 표기·교점 아닌 점이 원문에 남아 있으면 렌더·alt 가 깨진다(2026-09-15).
+  const figureToSave: unknown | null = (() => {
+    if (params.figure == null) return null;
+    const fv = validateFigureSpec(params.figure);
+    return fv.ok ? fv.spec : params.figure;
+  })();
   const check: RenderCheck = { ...figureCheck, issues: [...figureCheck.issues, ...contentIssues], ok: figureCheck.ok && contentIssues.length === 0 };
   const { data, error } = await admin.rpc("save_problem_draft_version", {
     p_problem_id: params.problemId,
@@ -354,9 +396,10 @@ export async function createDraftVersionAction(params: {
     p_difficulty: params.difficulty,
     p_actor_id: adminUserId,
     p_answers: params.answers ?? null,
-    p_figure: params.figure ?? null,
+    p_figure: figureToSave,
     p_figure_checked: params.figureChecked ?? false,
     p_statements: params.statements && params.statements.length ? params.statements : null,
+    p_question: params.question?.trim() || null,
   });
   if (error) return { ok: false, error: readable(error.message, "초안을 저장하지 못했습니다.") };
   const { error: checkError } = await admin.rpc("set_problem_render_check", { p_version_id: data as string, p_check: check });
@@ -492,7 +535,7 @@ export async function createDraftFromPublishedAction(
 
   const { data: published } = await admin
     .from("problem_versions")
-    .select("passage, options, correct_index, explanation, difficulty, answers, figure, statements")
+    .select("passage, question, options, correct_index, explanation, difficulty, answers, figure, statements")
     .eq("problem_id", problemId)
     .eq("status", "published")
     .maybeSingle();
@@ -502,6 +545,7 @@ export async function createDraftFromPublishedAction(
   const created = await createDraftVersionAction({
     problemId,
     passage: (published.passage as string | null) ?? "",
+    question: (published.question as string | null) ?? null,
     options: (published.options as string[] | null) ?? null,
     correctIndex: (published.correct_index as number | null) ?? null,
     explanation: (published.explanation as string | null) ?? "",
@@ -525,11 +569,16 @@ export async function createDraftFromPublishedAction(
  */
 export async function updateProblemMetaAction(
   problemId: string,
-  meta: { skillType?: string | null; topic?: string | null; skillCode?: string | null; satDomain?: string | null }
+  meta: { skillType?: string | null; topic?: string | null; skillCode?: string | null; satDomain?: string | null; examSystem?: string | null; apSubject?: string | null; format?: string }
 ): Promise<BankResult> {
   await requireAdmin();
   const admin = createAdminClient();
   const patch: Record<string, string | null> = {};
+  // 답안 형식 변경(2026-09-14): 공개본만 있는 문제는 화면이 막는다(수정 초안에서만). 숨겨지는 값(선택지·SPR 정답)은 버전에 그대로 남는다.
+  if (meta.format !== undefined && ["mc", "spr", "essay", "math"].includes(meta.format)) patch.format = meta.format;
+  // 문항 체계는 관리 과목·키워드와 독립이다 — 여기서 바꿔도 subject_id·problem_keywords 는 건드리지 않는다.
+  if (meta.examSystem !== undefined) patch.exam_system = meta.examSystem?.trim() || null;
+  if (meta.apSubject !== undefined) patch.ap_subject = meta.apSubject?.trim() || null;
   if (meta.skillType !== undefined) patch.skill_type = meta.skillType?.trim() || null;
   if (meta.topic !== undefined) patch.topic = meta.topic?.trim() || null;
   // 기술 코드를 정하면 영역은 트리거가 맞춘다. 코드를 비우고 영역만 둘 수도 있다.
@@ -590,7 +639,9 @@ export async function generateBankProblemsAction(params: {
   keywordIds?: string[];
   /** 그림 요구: none | optional | require_plane | require_geometry (2026-09-14). */
   figurePolicy?: string;
-}): Promise<BankResult<number>> {
+  examSystem?: string;
+  apSubject?: string;
+}): Promise<BankResult<{ created: number; failures: string[] }>> {
   await requireAdmin();
   const admin = createAdminClient();
 
@@ -626,6 +677,7 @@ export async function generateBankProblemsAction(params: {
       count: params.count,
       figurePolicy: (params.figurePolicy as never) ?? "optional",
       skillCode: params.skillCode,
+      keepFigureless: true,
     });
   } catch (e) {
     // 그림 요구를 못 채운 경우는 사람이 조치할 수 있는 사실이라 그대로 알린다. 그 외 원문은 넘기지 않는다(서버 로그에만).
@@ -636,14 +688,36 @@ export async function generateBankProblemsAction(params: {
   }
 
   let created = 0;
-  // 만들지 못한 사유를 모아 둔다 — 전부 실패했을 때 "생성하지 못했습니다"만 보이면 관리자가 조치할 수 없다(2026-09-14 RW E2E).
+  // 만들지 못한 사유를 모아 둔다 — 실패한 결과는 초안으로 저장하지 않고 사유와 함께 분리한다(2026-09-14 제품 오너: 복수 생성 질문 누락).
   const failures: string[] = [];
   for (const g of generated) {
+    // 자료 필수인데 모델이 자료를 빼먹었거나 규격에 안 맞으면, 관리자 버튼과 같은 자료 생성기로 한 번 더 만든다(2026-09-15).
+    // 문항 본문에서 자료 유형을 판정하므로 관리자가 고를 일이 없다. 그래도 없으면 그 결과만 사유와 함께 분리된다.
+    if (g.needsFigure || (g.figure == null && params.figurePolicy?.startsWith("require"))) {
+      const text = composeProblemText(g.stimulus ?? g.passage, g.question ?? null);
+      const need = judgeMaterialNeed({ examSystem: params.examSystem ?? null, skillCode: params.skillCode ?? null, text });
+      const kind = pickFigureKind(need, text, params.skillCode ?? null, params.figurePolicy);
+      if (kind) {
+        const { generateFigureForProblem } = await import("./curriculum-doc-actions");
+        try {
+          const r = await generateFigureForProblem({ passage: text, options: g.options ?? null, explanation: g.explanation, kind, correctIndex: g.correctIndex ?? null });
+          if (r.ok) g.figure = r.figure;
+          else console.error("[problem-bank] 2차 자료 생성 실패:", kind, r.error);
+        } catch (e) {
+          console.error("[problem-bank] 2차 자료 생성 오류:", kind, e instanceof Error ? e.message : e);
+        }
+      }
+    }
+    // 단건·복수 같은 계약: 자료 또는 지문 / 질문 / 선택지 또는 답안 형식 / 정답 / 해설.
+    const reject = validateGeneratedProblem({ ...g, stimulus: g.stimulus ?? g.passage, question: g.question ?? null }, params.format, params.skillCode ?? null);
+    if (reject) { failures.push(`${(g.question ?? g.passage).slice(0, 40)}… — ${reject}`); continue; }
     const problem = await createBankProblemAction({
       subjectId: params.subjectId,
       format: params.format,
       skillType: params.skillType,
       skillCode: params.skillCode,
+      examSystem: params.examSystem,
+      apSubject: params.apSubject,
       topic: params.topic,
       difficulty: params.difficulty,
       keywordIds: params.keywordIds,
@@ -651,7 +725,8 @@ export async function generateBankProblemsAction(params: {
     if (!problem.ok) { failures.push(problem.error); continue; }
     const draft = await createDraftVersionAction({
       problemId: problem.value,
-      passage: g.passage,
+      passage: g.stimulus ?? g.passage,
+      question: g.question ?? null,
       options: g.options ?? null,
       correctIndex: g.correctIndex ?? null,
       explanation: g.explanation,
@@ -661,14 +736,100 @@ export async function generateBankProblemsAction(params: {
       statements: g.statements ?? null,
     });
     if (draft.ok) created += 1;
-    else failures.push(draft.error);
+    else {
+      // 초안을 저장하지 못한 결과는 분리한다 — 빈 문제가 '질문 없는 초안'으로 남지 않게 바로 보관한다(삭제 아님).
+      failures.push(draft.error);
+      await admin.from("problems").update({ archived_at: new Date().toISOString() }).eq("id", problem.value);
+    }
   }
 
   if (created === 0) {
     console.error("[problem-bank] AI 생성 결과를 저장하지 못했습니다:", failures);
     return { ok: false, error: `문제를 생성하지 못했습니다.${failures.length ? ` ${failures[0]}` : ""}` };
   }
-  return { ok: true, value: created };
+  return { ok: true, value: { created, failures } };
+}
+
+/** 자료 판정 → 자료 생성기에 넘길 표준 유형. 도형은 본문에서 읽은 템플릿이 우선, 없으면 세부 기술로 고른다. */
+function pickFigureKind(
+  need: ReturnType<typeof judgeMaterialNeed>,
+  text: string,
+  skillCode: string | null,
+  figurePolicy?: string
+): "plane" | "parallel_transversal" | "triangle" | "circle" | "polygon" | "solid" | "composite" | "data" | "figure_choice" | "figure_set" | null {
+  const kind = need.kind ?? (figurePolicy === "require_plane" ? "plane" : figurePolicy === "require_data" ? "data" : figurePolicy === "require_figure_choice" ? "figure_choice" : figurePolicy === "require_geometry" ? "geometry" : null);
+  if (!kind) return null;
+  if (kind !== "geometry") return kind;
+  if (need.geometry.length) return need.geometry[0];
+  if (/\bparallel\b/i.test(text)) return "parallel_transversal";
+  if (skillCode === "circles") return "circle";
+  if (skillCode === "area_volume") return /\b(volume|cylinder|cone|sphere|prism|cube|pyramid)\b/i.test(text) ? "solid" : "polygon";
+  return "triangle";
+}
+
+/** 생성 결과 하나가 데이터 계약을 만족하는가. 어기면 사유(초안으로 저장하지 않는다). */
+function validateGeneratedProblem(
+  g: { stimulus: string; question: string | null; passage: string; options?: string[] | null; correctIndex?: number | null; answers?: string[] | null; explanation: string; figure?: unknown | null },
+  format: string,
+  skillCode: string | null
+): string | null {
+  if (!g.stimulus.trim() && !g.figure) return "자료 또는 지문이 없습니다.";
+  if (!g.question?.trim()) return "질문이 없습니다.";
+  if (!/\?/.test(g.question) && !/^(Which|What|Find|Determine|Solve)/i.test(g.question.trim())) return "질문이 물음 문장이 아닙니다.";
+  if (format === "mc") {
+    if (!g.options || g.options.length !== 4) return `객관식 선택지가 4개가 아닙니다(${g.options?.length ?? 0}개).`;
+    if (g.correctIndex === null || g.correctIndex === undefined || g.correctIndex < 0 || g.correctIndex > 3) return "정답 인덱스가 없거나 범위 밖입니다.";
+  } else if (format === "spr") {
+    if (!g.answers?.length) return "SPR 정답이 없습니다.";
+  }
+  if (!g.explanation?.trim()) return "해설이 없습니다.";
+  // 유형과 질문이 맞는가 — RW 는 구조 검사(빈칸·Text 1/2·메모·표준 문구)를 그대로 쓴다.
+  const rw = checkRwStructure({ skillCode, passage: composeProblemText(g.stimulus, g.question), options: g.options ?? null, figure: g.figure ?? null });
+  const bad = rw.find((i) => i.code === "rw_question" || i.code === "rw_texts" || i.code === "rw_notes" || i.code === "rw_target");
+  if (bad) return `유형과 맞지 않습니다 — ${bad.message}`;
+  return null;
+}
+
+/**
+ * 기존 생성분 질문 집계(2026-09-14): 질문 있음 / 질문 없는 초안 / 질문 없는 공개본.
+ * 공개본은 자동으로 고치지 않는다 — 관리자가 '질문 보완 필요' 표시를 보고 수정 초안 또는 재생성으로 처리한다.
+ */
+export async function problemQuestionAuditAction(subjectId?: string): Promise<BankResult<{ withQuestion: number; draftWithout: number; publishedWithout: number }>> {
+  await requireAdmin();
+  const admin = createAdminClient();
+  let q = admin.from("problems").select("id").is("archived_at", null).limit(2000);
+  if (subjectId) q = q.eq("subject_id", subjectId);
+  const { data: rows, error } = await q;
+  if (error) return { ok: false, error: "문제 목록을 읽지 못했습니다." };
+  const ids = (rows ?? []).map((r) => r.id as string);
+  if (!ids.length) return { ok: true, value: { withQuestion: 0, draftWithout: 0, publishedWithout: 0 } };
+  const { data: versions } = await admin
+    .from("problem_versions")
+    .select("problem_id, status, version_no, passage, question")
+    .in("problem_id", ids)
+    .in("status", ["published", "draft", "in_review"])
+    .order("version_no", { ascending: false });
+  const latest = new Map<string, { status: string; has: boolean }>();
+  for (const v of versions ?? []) {
+    const pid = v.problem_id as string;
+    const has = hasQuestion(v.passage as string | null, v.question as string | null);
+    const cur = latest.get(pid);
+    // 공개본 우선, 없으면 최신 작업본.
+    if (!cur || (cur.status !== "published" && v.status === "published")) latest.set(pid, { status: v.status as string, has });
+  }
+  let withQuestion = 0, draftWithout = 0, publishedWithout = 0;
+  for (const { status, has } of latest.values()) {
+    if (has) withQuestion += 1;
+    else if (status === "published") publishedWithout += 1;
+    else draftWithout += 1;
+  }
+  return { ok: true, value: { withQuestion, draftWithout, publishedWithout } };
+}
+
+/** 옛 지문에서 질문을 갈라 초안에 넣을 때 쓴다(관리자가 '질문 보완' 을 눌렀을 때 — 자동 적용 없음). */
+export async function suggestQuestionSplitAction(passage: string): Promise<BankResult<{ passage: string; question: string | null }>> {
+  await requireAdmin();
+  return { ok: true, value: splitLegacyQuestion(passage) };
 }
 
 /** 문제에 키워드를 붙이고 뗀다 — 자동 구성 후보가 되려면 키워드가 있어야 한다. */

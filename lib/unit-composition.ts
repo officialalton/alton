@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { composeProblemText } from "./problem-question";
 
 // 세 계층의 회차 구성을 같은 모양으로 다룬다.
 //
@@ -496,6 +497,8 @@ export type KeywordProblem = {
    * 목록은 label 만 보이고, 누르면 이것을 펼친다. 정답·해설은 여기 담지 않는다.
    */
   preview?: { passage: string; options: string[]; figure: unknown | null };
+  /** 문항 체계(sat_rw | sat_math | ap) — 회차 구성 화면의 자료 현황 안내에 쓴다. */
+  examSystem?: string | null;
 };
 
 /**
@@ -526,20 +529,20 @@ export async function loadKeywordProblems(
   const [{ data: problems }, { data: versions }] = await Promise.all([
     supabase
       .from("problems")
-      .select("id, format, passage, skill_type, difficulty, sat_domain, skill_code")
+      .select("id, format, passage, skill_type, difficulty, sat_domain, skill_code, exam_system")
       .in("id", problemIds)
       .order("created_at", { ascending: true }),
     // 미리보기는 **공개 버전** 기준 — 학생이 실제로 볼 내용이다(초안·검수본이 아니다).
     supabase
       .from("problem_versions")
-      .select("problem_id, passage, options, figure")
+      .select("problem_id, passage, question, options, figure")
       .in("problem_id", problemIds)
       .eq("status", "published"),
   ]);
   const versionByProblem = new Map<string, { passage: string; options: string[]; figure: unknown | null }>();
   for (const v of versions ?? []) {
     versionByProblem.set(v.problem_id as string, {
-      passage: ((v.passage as string | null) ?? "").trim(),
+      passage: composeProblemText(v.passage as string | null, v.question as string | null),
       options: Array.isArray(v.options) ? (v.options as unknown[]).map(String) : [],
       figure: (v.figure as unknown) ?? null,
     });
@@ -557,6 +560,7 @@ export async function loadKeywordProblems(
       format: p.format as string,
       satDomain: (p.sat_domain as string | null) ?? null,
       skillCode: (p.skill_code as string | null) ?? null,
+      examSystem: (p.exam_system as string | null) ?? null,
       ...(preview ? { preview } : {}),
     };
   });

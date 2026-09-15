@@ -105,3 +105,28 @@ describe("검증 계층 checkFigure", () => {
     expect(checkFigure(null, "What is 2 + 2?").ok).toBe(true);
   });
 });
+
+describe("옛 각 표기 정규화(2026-09-15)", () => {
+  it("{line, quadrant, text, at:'A'} 를 points 로 풀어 표준 모양으로 옮긴다", () => {
+    const v = validateParallelTransversal({
+      type: "parallel_transversal", parallel: ["m", "n"], transversals: [{ id: "k" }],
+      points: [{ id: "A", on: ["m", "k"] }, { id: "B", on: ["n", "k"] }],
+      angles: [{ line: "k", quadrant: "SE", text: "(3x + 10)°", at: "A" }, { line: "k", quadrant: "NE", text: "(5x - 30)°", at: "B" }],
+      notToScale: true,
+    });
+    expect(v.ok).toBe(true);
+    if (v.ok) expect(v.spec.angles).toEqual([{ at: ["m", "k"], region: "SE", label: "(3x + 10)°" }, { at: ["n", "k"], region: "NE", label: "(5x - 30)°" }]);
+  });
+});
+
+describe("점 정규화(2026-09-15)", () => {
+  it("교점이 아닌 점은 빼고, 선 3개에 걸친 점은 평행선+첫 횡단선으로 줄인다", () => {
+    const v = validateParallelTransversal({
+      type: "parallel_transversal", parallel: ["m", "n"], transversals: [{ id: "k" }, { id: "AC" }],
+      points: [{ id: "A", on: ["m", "k", "AC"] }, { id: "B", on: ["n", "k"] }, { id: "C", on: ["n"] }],
+      angles: [{ at: ["m", "AC"], region: "NE", label: "128°" }, { at: ["n", "AC"], region: "SW", label: "x°" }],
+    });
+    expect(v.ok).toBe(true);
+    if (v.ok) expect(v.spec.points).toEqual([{ id: "A", on: ["m", "k"] }, { id: "B", on: ["n", "k"] }]);
+  });
+});

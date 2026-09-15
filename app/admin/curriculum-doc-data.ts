@@ -5,6 +5,8 @@ export type DocProblem = {
   id: string;
   format: "mc" | "spr" | "essay" | "math";
   passage: string;
+  /** 질문(지문과 분리, 2026-09-14). 교재 편집기 경로에서는 passage 에 합쳐진 채로도 온다. */
+  question?: string | null;
   options: string[] | null;
   correctIndex: number | null;
   /** spr(숫자 입력) 동치 정답 목록. 다른 형식은 null. */

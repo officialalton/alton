@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { composeProblemText } from "@/lib/problem-question";
 
 // P2 3단계 — 수업·복습 화면이 "고정된 문제 버전"을 실제로 읽는 경로.
 // session_content_manifest는 어떤 문제를 썼는지와 그 시점의 버전만 담는다.
@@ -20,6 +21,7 @@ export type SessionProblem = {
    * 객관식은 선택지 클릭이 곧 답, 서술형은 아래 연습장, 풀이형만 풀이판·제출.
    */
   format: ProblemFormat;
+  /** 지문/자료 + 질문을 합친 화면용 본문(2026-09-14: 질문은 버전에 따로 저장되지만 화면은 한 덩어리로 본다). */
   passage: string | null;
   options: string[];
   difficulty: string | null;
@@ -161,7 +163,7 @@ async function buildSessionProblems(
   if (pinnedVersionIds.length) {
     const { data, error: versionError } = await supabase
       .from("problem_versions")
-      .select("id, problem_id, passage, options, correct_index, explanation, difficulty, answers, figure, statements")
+      .select("id, problem_id, passage, question, options, correct_index, explanation, difficulty, answers, figure, statements")
       .in("id", pinnedVersionIds);
     if (versionError) throw new Error(versionError.message);
     for (const v of data ?? []) versionById.set(v.id as string, v);
@@ -249,7 +251,7 @@ async function buildSessionProblems(
       number: index + 1,
       problemId,
       format: formatByProblemId.get(problemId) ?? (options.length > 0 ? "mc" : "essay"),
-      passage: (version?.passage as string | null) ?? null,
+      passage: version ? composeProblemText(version.passage as string | null, version.question as string | null) || null : null,
       options,
       difficulty: (version?.difficulty as string | null) ?? null,
       correctIndex: revealAnswers ? ((version?.correct_index as number | null) ?? null) : null,

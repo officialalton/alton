@@ -7,7 +7,14 @@ export function checkFigureClient(spec: unknown, passage: string, options?: stri
 }
 
 import { figureAlt } from "./alt";
-import type { FigureSpec } from "./spec";
+import { validateFigureSpec } from "./spec";
+/** 대체 설명 — 정규화·검증을 통과한 spec 으로만 만든다(원문에 옛 표기가 남아 있어도 화면이 깨지지 않게, 2026-09-15). */
 export function figureAltClient(spec: unknown): string | null {
-  return figureAlt(spec as FigureSpec) ?? null;
+  const v = validateFigureSpec(spec);
+  if (!v.ok) return null;
+  try {
+    return figureAlt(v.spec) ?? null;
+  } catch {
+    return null;
+  }
 }
