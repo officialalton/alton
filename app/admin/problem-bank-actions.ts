@@ -693,9 +693,13 @@ export async function generateBankProblemsAction(params: {
   for (const g of generated) {
     // 자료 필수인데 모델이 자료를 빼먹었거나 규격에 안 맞으면, 관리자 버튼과 같은 자료 생성기로 한 번 더 만든다(2026-09-15).
     // 문항 본문에서 자료 유형을 판정하므로 관리자가 고를 일이 없다. 그래도 없으면 그 결과만 사유와 함께 분리된다.
-    if (g.needsFigure || (g.figure == null && params.figurePolicy?.startsWith("require"))) {
-      const text = composeProblemText(g.stimulus ?? g.passage, g.question ?? null);
-      const need = judgeMaterialNeed({ examSystem: params.examSystem ?? null, skillCode: params.skillCode ?? null, text });
+    // 권장 유형으로 만들었더라도 모델이 그래프·표를 가리키는 문장을 쓰면 저장 시점 판정은 필수가 된다 — 그때도 같은 2차 생성이 돈다.
+    const textForNeed = composeProblemText(g.stimulus ?? g.passage, g.question ?? null);
+    const needForText = judgeMaterialNeed({ examSystem: params.examSystem ?? null, skillCode: params.skillCode ?? null, text: textForNeed });
+    const missingRequired = needForText.level === "required" && materialBlocker(needForText, g.figure ?? null) !== null;
+    if (g.needsFigure || missingRequired || (g.figure == null && params.figurePolicy?.startsWith("require"))) {
+      const text = textForNeed;
+      const need = needForText;
       const kind = pickFigureKind(need, text, params.skillCode ?? null, params.figurePolicy);
       if (kind) {
         const { generateFigureForProblem } = await import("./curriculum-doc-actions");
