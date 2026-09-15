@@ -48,6 +48,8 @@ export type SessionProblem = {
   acceptedAnswers: string[] | null;
   /** 도형·그래프 데이터(lib/problem-figures). 없으면 null. */
   figure: unknown | null;
+  /** 로마숫자 진술 I, II, III … (선택지가 조합일 때). */
+  statements: string[] | null;
   /** 객관식 자동 채점 결과 — 정답을 볼 자격이 있을 때만 채운다(채점 전 학생에게 새면 정답이 드러난다). */
   autoCorrect: boolean | null;
   /** 가장 최근 풀이판 id — 교사 채점이 가리킬 대상. */
@@ -159,7 +161,7 @@ async function buildSessionProblems(
   if (pinnedVersionIds.length) {
     const { data, error: versionError } = await supabase
       .from("problem_versions")
-      .select("id, problem_id, passage, options, correct_index, explanation, difficulty, answers, figure")
+      .select("id, problem_id, passage, options, correct_index, explanation, difficulty, answers, figure, statements")
       .in("id", pinnedVersionIds);
     if (versionError) throw new Error(versionError.message);
     for (const v of data ?? []) versionById.set(v.id as string, v);
@@ -261,6 +263,7 @@ async function buildSessionProblems(
       myText: state.latest?.text ?? null,
       acceptedAnswers: revealAnswers && Array.isArray(version?.answers) ? (version?.answers as string[]) : null,
       figure: version?.figure ?? null,
+      statements: Array.isArray(version?.statements) ? (version?.statements as string[]) : null,
       // 자동 채점 결과는 정답과 같은 정보다 — 정답을 볼 자격이 있을 때만.
       autoCorrect: revealAnswers ? (state.latest?.autoCorrect ?? null) : null,
       latestWorkId: state.latest?.workId ?? null,
@@ -309,6 +312,7 @@ export function toPlannedSessionProblems(
       myText: null,
       acceptedAnswers: null,
       figure: null,
+      statements: null,
       autoCorrect: null,
       latestWorkId: null,
       planned: true,

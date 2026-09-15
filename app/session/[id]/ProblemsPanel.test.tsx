@@ -114,6 +114,7 @@ const mc: SessionProblem = {
   myText: null,
   acceptedAnswers: null,
   figure: null,
+statements: null,
 };
 
 const essay: SessionProblem = { ...mc, number: 2, problemId: "p2", format: "essay", options: [], passage: "서술형 지문" };
@@ -427,6 +428,18 @@ describe("ProblemsPanel — 그래프 선택지", () => {
     expect(screen.queryByTestId("figure-choice")).not.toBeInTheDocument(); // 위쪽 격자 없음
     fireEvent.click(screen.getByTestId("choice-figure-2").closest("button")!);
     await waitFor(() => expect(answerMcChoice).toHaveBeenCalledWith(expect.objectContaining({ problemId: "pf", choiceIndex: 2 })));
+  });
+});
+
+// 2026-09-14 — 로마숫자 진술 블록
+describe("ProblemsPanel — 진술(I, II, III)", () => {
+  it("진술이 지문 아래·선택지 위에 번호와 함께 그려진다", () => {
+    renderPanel([{ ...mc, problemId: "ps", statements: ["$a > 0$", "$b < 0$"], options: ["I only", "II only", "I and II", "Neither"] }]);
+    const st = screen.getByTestId("statements");
+    expect(st).toHaveTextContent("I.");
+    expect(st).toHaveTextContent("II.");
+    expect(st.querySelectorAll(".katex").length).toBe(2);
+    expect(screen.getByText("I and II")).toBeInTheDocument();
   });
 });
 

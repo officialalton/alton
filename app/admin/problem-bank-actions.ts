@@ -1,6 +1,7 @@
 "use server";
 
 import { checkFigure, type RenderCheck } from "@/lib/problem-figures/check";
+import { checkContent } from "@/lib/problem-content-check";
 
 import { requireAdmin } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
@@ -70,6 +71,8 @@ export type ProblemContent = {
   figureChecked: boolean;
   /** 표준 렌더링 검증 결과(초안 저장 때 서버가 기록). null 이면 아직 검증 전. */
   renderCheck: RenderCheck | null;
+  /** 로마숫자 진술 I, II, III … */
+  statements: string[] | null;
 };
 
 export type BankResult<T = undefined> =
@@ -160,7 +163,7 @@ export async function listBankProblemsAction(
   // 있다 — 그래서 공개된 문제가 "(아직 내용이 없는 문제)"로 보였다.
   const { data: contentRows } = await admin
     .from("problem_versions")
-    .select("id, problem_id, status, version_no, passage, options, correct_index, explanation, answers, figure, figure_checked, render_check")
+    .select("id, problem_id, status, version_no, passage, options, correct_index, explanation, answers, figure, figure_checked, render_check, statements")
     .in("problem_id", problemIds)
     .in("status", ["published", "draft", "in_review"])
     .order("version_no", { ascending: false });
@@ -175,6 +178,7 @@ export async function listBankProblemsAction(
     figure: v.figure ?? null,
     figureChecked: Boolean(v.figure_checked),
     renderCheck: (v.render_check as RenderCheck | null) ?? null,
+    statements: Array.isArray(v.statements) ? (v.statements as string[]) : null,
   });
 
   const publishedByProblem = new Map<string, ProblemContent>();
@@ -320,15 +324,25 @@ export async function createDraftVersionAction(params: {
   answers?: string[] | null;
   figure?: unknown | null;
   figureChecked?: boolean;
+  statements?: string[] | null;
 }): Promise<BankResult<string>> {
   const { adminUserId } = await requireAdmin();
   const admin = createAdminClient();
-  // 2026-09-14 표준 렌더링 검증 — 스키마에 안 맞는 그림은 저장하지 않는다. 그 외 문제(참조 불일치·충돌·잘림·레거시)는
-  // 저장은 되지만 render_check 에 남고 공개가 막힌다(관리자가 사유를 보고 고친다).
-  const check = checkFigure(params.figure ?? null, params.passage, params.options);
-  if (check.issues.some((i) => i.code === "schema")) {
-    return { ok: false, error: `그림 데이터가 규격에 맞지 않아 저장하지 않았습니다 — ${check.issues[0].message}` };
+  // 2026-09-14 표준 렌더링 검증 — 스키마에 안 맞는 그림·조판할 수 없는 수식은 저장하지 않는다. 그 외 문제(참조 불일치·
+  // 충돌·잘림·레거시·선택지 정합)는 저장은 되지만 render_check 에 남고 공개가 막힌다(관리자가 사유를 보고 고친다).
+  const { data: problemRow } = await admin.from("problems").select("format").eq("id", params.problemId).maybeSingle();
+  const contentIssues = checkContent({
+    format: (problemRow?.format as string | undefined) ?? (params.options ? "mc" : "essay"),
+    passage: params.passage, options: params.options, correctIndex: params.correctIndex, explanation: params.explanation,
+    answers: params.answers ?? null, statements: params.statements ?? null,
+  });
+  const fatal = contentIssues.find((i) => ["math_parse", "math_unclosed", "latex_leak"].includes(i.code));
+  if (fatal) return { ok: false, error: `수식을 조판할 수 없어 저장하지 않았습니다 — ${fatal.message}` };
+  const figureCheck = checkFigure(params.figure ?? null, params.passage, params.options);
+  if (figureCheck.issues.some((i) => i.code === "schema")) {
+    return { ok: false, error: `그림 데이터가 규격에 맞지 않아 저장하지 않았습니다 — ${figureCheck.issues[0].message}` };
   }
+  const check: RenderCheck = { ...figureCheck, issues: [...figureCheck.issues, ...contentIssues], ok: figureCheck.ok && contentIssues.length === 0 };
   const { data, error } = await admin.rpc("save_problem_draft_version", {
     p_problem_id: params.problemId,
     p_passage: params.passage,
@@ -340,6 +354,7 @@ export async function createDraftVersionAction(params: {
     p_answers: params.answers ?? null,
     p_figure: params.figure ?? null,
     p_figure_checked: params.figureChecked ?? false,
+    p_statements: params.statements && params.statements.length ? params.statements : null,
   });
   if (error) return { ok: false, error: readable(error.message, "초안을 저장하지 못했습니다.") };
   const { error: checkError } = await admin.rpc("set_problem_render_check", { p_version_id: data as string, p_check: check });
@@ -474,7 +489,7 @@ export async function createDraftFromPublishedAction(
 
   const { data: published } = await admin
     .from("problem_versions")
-    .select("passage, options, correct_index, explanation, difficulty, answers, figure")
+    .select("passage, options, correct_index, explanation, difficulty, answers, figure, statements")
     .eq("problem_id", problemId)
     .eq("status", "published")
     .maybeSingle();
@@ -490,6 +505,7 @@ export async function createDraftFromPublishedAction(
     difficulty: (published.difficulty as string | null) ?? "",
     answers: (published.answers as string[] | null) ?? null,
     figure: published.figure ?? null,
+    statements: Array.isArray(published.statements) ? (published.statements as string[]) : null,
     // 공개본의 그림은 이미 확인된 것이다 — 데이터가 그대로면 확인도 이어진다.
     figureChecked: published.figure != null,
   });
@@ -636,6 +652,7 @@ export async function generateBankProblemsAction(params: {
       difficulty: params.difficulty,
       answers: g.answers ?? null,
       figure: g.figure ?? null,
+      statements: g.statements ?? null,
     });
     if (draft.ok) created += 1;
   }

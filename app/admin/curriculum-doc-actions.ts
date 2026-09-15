@@ -396,7 +396,7 @@ export async function createSubjectKeywordForDoc(
 export type ProblemFormat = "mc" | "spr" | "essay" | "math";
 /** 그림 요구(2026-09-14): 모델 재량에 맡기면 도형이 거의 안 나온다 — 필수면 그림 없는 문항은 버린다. */
 export type FigurePolicy = "none" | "optional" | "require_plane" | "require_geometry" | "require_data" | "require_figure_choice";
-const FIGURE_CHOICE_DESC = "그래프/도형 선택지(figure_choice): 선택지 4개가 그림인 문항. {type:'figure_choice', choices:[그림 데이터 4개 — 모두 같은 type(보통 'plane'), 같은 axes(범위·눈금 완전히 동일), 같은 객체 수, 라벨·점 없음], notToScale?}. options 는 ['A','B','C','D'] 로 두고 correct_index 로 정답을 가리킨다(선택지 i 와 그림 i 가 같은 자리). 정답을 암시하는 보조 점·라벨·색 차이를 두지 않는다.";
+const FIGURE_CHOICE_DESC = "그래프/도형 선택지(figure_choice): 선택지 4개가 그림인 문항. 각 선택지는 아래 좌표평면 스키마를 **그대로** 쓴다(다른 키 이름 금지). 예: {\"type\":\"figure_choice\",\"choices\":[{\"type\":\"plane\",\"axes\":{\"x\":{\"min\":-5,\"max\":5},\"y\":{\"min\":-5,\"max\":5}},\"objects\":[{\"id\":\"l\",\"kind\":\"line\",\"slope\":-2,\"intercept\":3}]},{\"type\":\"plane\",\"axes\":{\"x\":{\"min\":-5,\"max\":5},\"y\":{\"min\":-5,\"max\":5}},\"objects\":[{\"id\":\"l\",\"kind\":\"line\",\"slope\":2,\"intercept\":3}]},…4개]}. 모든 선택지는 같은 axes(범위·눈금 완전히 동일)·같은 객체 수·같은 kind, 라벨(label)과 점(point) 없음. 곡선은 {\"kind\":\"function\",\"fn\":\"quadratic\",\"params\":[a,b,c]} 로. options 는 ['A','B','C','D'], correct_index 가 정답 그래프의 자리(선택지 i ↔ 그림 i). 정답을 암시하는 보조 점·라벨·색 차이를 두지 않는다.";
 const FIGURE_SET_DESC = "복수 자료(figure_set): 그림·표가 둘 이상 필요한 문항. {type:'figure_set', figures:[{id:'A', title:'Figure A', spec:그림 데이터}, {id:'B', title:'Table B', spec:…}]}. 지문은 'Figure A', 'Table B' 로 자료를 가리킨다.";
 
 /** 표준 렌더링 엔진 템플릿 4 — 표·데이터 그래프(값만). */
@@ -497,6 +497,12 @@ export async function generateSectionProblems(params: {
                       "기하(하나): " + PARALLEL_TRANSVERSAL_DESC + " " + TRIANGLE_DESC + " " + CIRCLE_DESC + " " + POLYGON_DESC + " " + SOLID_DESC + " " + DATA_DESC + " " + FIGURE_CHOICE_DESC + " " + FIGURE_SET_DESC + " " +
                       "좌표평면의 좌표는 문제의 수치와 정확히 일치해야 한다. 좌표를 직접 찍는 옛 기하 형식(type:'geometry')은 쓰지 않는다.",
                   },
+                  statements: {
+                    type: "array",
+                    items: { type: "string" },
+                    description:
+                      "로마숫자 진술 문항일 때만: 진술 I, II, III 의 내용(수식은 $…$). 이때 options 는 'I only', 'II only', 'I and II', 'I, II, and III', 'Neither' 같은 조합만. 진술이 없으면 비워 둔다.",
+                  },
                   explanation: {
                     type: "string",
                     description: format === "mc" ? "정답 해설" : format === "spr" ? "풀이 과정과 정답" : "모범 답안 또는 풀이 과정",
@@ -522,7 +528,8 @@ ${skillMeta ? `- SAT 영역: ${domainLabel(skillMeta.domain)} / 세부 기술: $
 - 난이도: ${difficulty === "easy" ? "쉬움" : difficulty === "medium" ? "보통" : "어려움"}
 - 답안 형식: ${FORMAT_LABEL[format]}
 ${ruleSkill ? `유형 규칙(실제 SAT/AP 문항 말투를 그대로 따른다): ${ruleSkill.rule}` : ""}
-${format === "mc" ? "객관식은 반드시 선택지 4개와 정답 인덱스를 포함해주세요." : ""}
+${format === "mc" ? "객관식은 반드시 선택지 4개와 정답 인덱스를 포함해주세요. 선택지는 값만(\"x = 3\" 금지)." : ""}
+수식은 항상 $…$ 안에(인라인) 또는 $$…$$(블록) 안에 씁니다. 연립방정식은 $$\\begin{cases} … \\\\ … \\end{cases}$$, 분수는 \\frac{a}{b}, 근호는 \\sqrt{…}, 부등식 연쇄는 $1 < x \\le 5$, 구간은 $[a, b)$. 수식 밖에 \\frac 같은 LaTeX 명령을 두지 않습니다(그대로 노출됩니다).
 ${format === "spr" ? "숫자 입력(SPR)은 SAT Math 학생 직접 입력 문항입니다: 정답이 하나의 수(정수·소수·분수)로 정해져야 하고, answers 에 동치 표현을 모두 넣어주세요(예: 7/2 와 3.5). 선택지는 만들지 마세요. 양수는 5자, 음수는 6자 안에 쓸 수 있는 값이어야 합니다." : ""}
 언어: 문항(지문·질문·선택지·SPR 정답)은 실제 SAT/AP 시험과 같이 **영어**로 쓴다. 해설(explanation)만 한국어로 쓴다.
 표기 규칙: 수식은 LaTeX 로 $…$(인라인)·$$…$$(블록) 안에 쓴다. 표가 필요하면 마크다운 파이프 표(| x | f(x) | / |---|---| / | 0 | 17 |)로 쓴다.
@@ -545,7 +552,8 @@ ${format === "spr" ? "숫자 입력(SPR)은 SAT Math 학생 직접 입력 문항
     answers?: string[];
     figure?: unknown;
     explanation: string;
-  };
+    statements?: unknown;
+};
   const input = toolUse.input as { problems?: unknown };
   // 모델이 배열 대신 객체({"0": {...}} 또는 문제 하나)를 주는 경우가 있다 — 배열로 정규화한다.
   const rawList: RawProblem[] = Array.isArray(input.problems)
@@ -577,6 +585,7 @@ ${format === "spr" ? "숫자 입력(SPR)은 SAT Math 학생 직접 입력 문항
     options: format === "mc" ? p.options ?? null : null,
     correctIndex: format === "mc" ? p.correct_index ?? null : null,
     answers: format === "spr" ? (p.answers ?? []).map(String).filter(Boolean) : null,
+    statements: Array.isArray(p.statements) && p.statements.length ? (p.statements as unknown[]).map(String).filter(Boolean) : null,
     explanation: p.explanation,
     difficulty,
   }));

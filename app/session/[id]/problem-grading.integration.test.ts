@@ -469,6 +469,20 @@ describe("표준 렌더링 검증 공개 게이트 (20261365) — 검증 통과 
     expect(fails(() => psql(`select confirm_and_publish_problem_version('${img}', '${ADMIN_ID}');`))).toContain("대체 설명");
   });
 
+  it("그림이 없어도 내용 검증(render_check ok=false)이 남아 있으면 공개되지 않는다 — 수식·선택지 블록 게이트(20261368)", () => {
+    const v = draftWithFigure("null", "Which must be true?");
+    psql(`update problem_versions set statements = '["$a > 0$"]'::jsonb, options = '["I only","3","4","5"]'::jsonb where id = '${v}';`);
+    psql(`select set_problem_render_check('${v}', '{"ok":false,"renderer":"std-1","issues":[{"code":"statements","message":"진술이 있으면 모든 선택지는 조합이어야 합니다."}]}'::jsonb);`);
+    expect(fails(() => psql(`select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`))).toContain("조합이어야");
+    psql(`select set_problem_render_check('${v}', '{"ok":true,"renderer":"std-1","issues":[]}'::jsonb);`);
+    psql(`select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`);
+    expect(psql(`select status from problem_versions where id = '${v}';`)).toBe("published");
+    // 11-인자 초안 RPC 가 statements 를 저장한다.
+    const pid2 = psql(`insert into problems (format, passage, subject_id, status, created_by) values ('mc', 'st', '${SUBJECT_ID}', 'draft', '${ADMIN_ID}') returning id;`);
+    const v2 = psql(`select save_problem_draft_version('${pid2}', 'Which must be true?', '["I only","II only","I and II","Neither"]'::jsonb, 2, 'e', 'medium', '${ADMIN_ID}', null, null, false, '["$a>0$","$b<0$"]'::jsonb);`);
+    expect(psql(`select jsonb_array_length(statements) from problem_versions where id = '${v2}';`)).toBe("2");
+  });
+
   it("그림이 없는 문제는 검증 기록 없이도 공개된다(기존 흐름 유지)", () => {
     const v = draftWithFigure("null", "What is 2 + 2?");
     psql(`select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`);

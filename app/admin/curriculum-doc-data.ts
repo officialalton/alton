@@ -11,6 +11,8 @@ export type DocProblem = {
   answers?: string[] | null;
   /** 도형·그래프 데이터(lib/problem-figures). */
   figure?: unknown | null;
+  /** 로마숫자 진술(I, II, III) — 선택지가 조합("I only")인 문항. */
+  statements?: string[] | null;
   explanation: string;
   difficulty: "easy" | "medium" | "hard";
   // R9(Task 2): 확정(confirmed)된 문제만 실제로 이 배열에 값이 들어간다(트리거가

@@ -378,3 +378,45 @@ test("템플릿 7: 지문(원기둥 부피) → AI 치수 데이터 → 검증 �
   });
   expect(["published", "blocked"]).toContain(result);
 });
+
+// ------------------------------------------------------------ 수식·선택지 블록 — 로마숫자 진술(AI 없이 관리자 저장 → 공개 → 학생)
+test("진술 블록: 로마숫자 진술 + 조합 선택지 → 내용 검증 → 공개 → 학생 화면(KaTeX)", async ({ page }) => {
+  const passage = `If $a$ and $b$ are real numbers such that $a + b > 0$ and $ab < 0$, which of the following must be true? [E2E ST ${Date.now()}]`;
+  const problemId = psql(
+    `insert into problems (format, passage, subject_id, status, created_by, skill_type) values ('mc', '${passage.replace(/'/g, "''")}', '${SUBJECT_ID}', 'draft', 'aaaaaaaa-0000-0000-0000-000000000001', 'Algebra') returning id;`
+  );
+  psql(`update problem_versions set options = '["I only","II only","I and II","Neither"]'::jsonb, correct_index = 0, explanation = 'Since $ab < 0$, exactly one is negative; $a + b > 0$ makes the positive one larger in magnitude — so I must be true.', statements = '["$|a| \\\\neq |b|$","$a > b$"]'::jsonb where problem_id = '${problemId}' and version_no = 1;`);
+  await loginAs(page, ACCOUNTS.admin);
+  await page.goto("/admin?tab=problem-bank");
+  await page.getByLabel("새 문제 과목").selectOption(SUBJECT_ID);
+  const head = passage.slice(0, 50);
+  await expect.poll(async () => (await rowTitles(page)).some((t) => t.startsWith(head)), { timeout: 30_000 }).toBe(true);
+  await page.getByTestId("bank-row-title").filter({ hasText: head }).first().click();
+  await expect(page.getByLabel("진술 목록")).toHaveValue(/neq/);
+  await expect(page.locator('[data-testid="content-issues"]')).toHaveCount(0);
+  await page.getByRole("button", { name: "초안 저장" }).click();
+  await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible();
+  await page.getByRole("button", { name: "공개하기" }).click();
+  await expect(page.getByText(/공개했습니다|공개됐습니다|공개되었습니다/)).toBeVisible({ timeout: 20_000 });
+  expect(psql(`select v.status || '|' || (v.render_check->>'ok') || '|' || jsonb_array_length(v.statements) from problem_versions v where v.problem_id = '${problemId}' order by v.version_no desc limit 1;`)).toBe("published|true|2");
+  const sessionId = startedSessionWith(problemId);
+  await page.context().clearCookies();
+  await loginAs(page, ACCOUNTS.student);
+  await page.goto(`/session/${sessionId}?tab=problems`);
+  await expect(page.getByTestId("statements")).toBeVisible({ timeout: 30_000 });
+  expect(await page.getByTestId("statements").locator(".katex").count()).toBe(2);
+  await expect(page.getByText("I and II")).toBeVisible();
+  await page.getByTestId("problem-sheet").screenshot({ path: `${OUT}/25-st-student-desktop.png` });
+});
+
+// ------------------------------------------------------------ 그래프 선택지(figure_choice, AI)
+test("그래프 선택지: 지문 → AI 그래프 4개 → 편향 검증 → 공개 → 학생 화면(선택지 안 그림)", async ({ page }, testInfo) => {
+  test.skip(!process.env.ANTHROPIC_API_KEY, "ANTHROPIC_API_KEY 없음");
+  const result = await runDraftFigureFlow(page, testInfo, {
+    passage: `Which of the following graphs in the xy-plane represents the equation y = -2x + 3? [E2E FC ${Date.now()}]`,
+    options: ["A", "B", "C", "D"], correctIndex: 1, explanation: "Slope −2 and y-intercept 3.", skill: "Algebra",
+    button: "AI로 그래프 선택지 4개 만들기", expectType: "figure_choice", shots: ["26-fc-admin-preview.png", "27-fc-student-desktop.png", "28-fc-student-mobile.png"],
+  });
+  expect(["published", "blocked"]).toContain(result);
+  if (result === "published") expect(await page.getByTestId("choice-figure-0").count()).toBe(1);
+});

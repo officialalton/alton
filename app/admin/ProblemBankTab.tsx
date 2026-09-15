@@ -31,6 +31,7 @@ import { lintCircleAgainstText, renderCircle } from "@/lib/problem-figures/templ
 import { lintPolygonAgainstText, renderPolygon } from "@/lib/problem-figures/templates/polygon";
 import { lintSolidAgainstText, renderSolid } from "@/lib/problem-figures/templates/solid";
 import { checkFigureClient as figureCheckClient } from "@/lib/problem-figures/check-client";
+import { checkContent } from "@/lib/problem-content-check";
 import type { AdminSubject, SubjectKeyword } from "./subject-data";
 
 // P2 3차·8차 — 관리자 문제은행. 교재와 독립된 진입점이다.
@@ -1015,6 +1016,9 @@ function DraftEditor({
   const isMc = problem.format === "mc";
   const isSpr = problem.format === "spr";
   const [answersText, setAnswersText] = useState((source?.answers ?? []).join(", "));
+  // 로마숫자 진술(I, II, III) — 한 줄에 하나. 선택지는 'I only' 같은 조합이어야 한다(검증).
+  const [statementsText, setStatementsText] = useState((source?.statements ?? []).join("\n"));
+  const statementsPayload = statementsText.split("\n").map((x) => x.replace(/^\s*(?:I{1,3}|IV|V)[.)]\s*/, "").trim()).filter(Boolean);
   const answersPayload = isSpr
     ? answersText.split(/[,\n]/).map((a) => a.trim()).filter(Boolean)
     : null;
@@ -1098,6 +1102,10 @@ function DraftEditor({
     source?.correctIndex ?? null
   );
   const [explanation, setExplanation] = useState(source?.explanation ?? "");
+  const contentIssues = checkContent({
+    format: problem.format, passage, options: isMc ? options.map((o) => o.trim()).filter(Boolean) : null,
+    correctIndex, explanation, answers: answersPayload, statements: statementsPayload.length ? statementsPayload : null,
+  });
 
   const filledOptions = options.map((o) => o.trim());
   const optionsPayload = isMc && filledOptions.some(Boolean) ? filledOptions : null;
@@ -1109,6 +1117,7 @@ function DraftEditor({
   async function saveDraft(): Promise<{ ok: true; value: string } | { ok: false; error: string }> {
     return createDraftVersionAction({
       answers: answersPayload,
+      statements: statementsPayload.length ? statementsPayload : null,
       figure: figureForSave,
       figureChecked: figureChecked && !figureDirty,
       problemId: problem.id,
@@ -1210,6 +1219,23 @@ function DraftEditor({
         </div>
       )}
 
+      {isMc && (
+        <div className="mb-2">
+          <textarea
+            aria-label="진술 목록"
+            value={statementsText}
+            onChange={(e) => setStatementsText(e.target.value)}
+            rows={2}
+            placeholder={"로마숫자 진술 문항일 때만 — 한 줄에 하나 (I, II, III). 예:\n$a > 0$\n$b < 0$"}
+            className="w-full text-[13px] border-[1.5px] border-grey-200 rounded-lg px-3 py-2 mb-1"
+          />
+          {contentIssues.length > 0 && (
+            <ul className="text-[12px] text-red list-disc pl-5" data-testid="content-issues">
+              {contentIssues.map((i) => <li key={i.code + i.message}>{i.message}</li>)}
+            </ul>
+          )}
+        </div>
+      )}
       <div className="mb-2" data-testid="figure-section">
         <div className="text-[11.5px] text-grey-500 mb-1.5">
           그림(선택) — 표준 렌더러가 그립니다. AI 는 관계(평행선·횡단선·각의 자리)만 내고 좌표·라벨 자리는 ALTON 이 정합니다.

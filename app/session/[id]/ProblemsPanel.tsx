@@ -474,6 +474,17 @@ export default function ProblemsPanel({
                 <p className="text-[13px] text-grey-500 mb-4">지문이 없는 문제입니다.</p>
               )}
 
+              {p.statements && p.statements.length > 0 && (
+                <ol className="mb-4 pl-1" data-testid="statements">
+                  {p.statements.map((st, i) => (
+                    <li key={i} className="flex gap-3 text-[15px] leading-[1.75] text-ink py-0.5">
+                      <span className="font-bold w-7 shrink-0">{["I", "II", "III", "IV", "V"][i] ?? i + 1}.</span>
+                      <LearningText text={st} className="learning-body" />
+                    </li>
+                  ))}
+                </ol>
+              )}
+
               {p.options.length > 0 && (
                 <ol className="mb-3">
                   {p.options.map((opt, i) => {
