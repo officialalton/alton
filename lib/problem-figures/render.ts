@@ -1,4 +1,5 @@
 import type { CoordinatePlaneSpec, FigureSpec, GeometrySpec, PlaneItem, Point } from "./spec";
+import { renderParallelTransversal } from "./templates/parallel-transversal";
 
 // 순수 함수 — 서버·클라이언트 어디서든 같은 SVG 문자열을 만든다. 외부 입력은 숫자와 짧은 라벨뿐이고
 // 라벨은 이스케이프하므로 그대로 innerHTML 로 넣어도 안전하다.
@@ -37,6 +38,7 @@ const fmt = (n: number) => (Math.round(n * 100) / 100).toString();
 
 export function renderFigureSvg(spec: FigureSpec): string {
   if (spec.type === "image") return ""; // 그림 파일은 컴포넌트가 서명 URL 로 그린다.
+  if (spec.type === "parallel_transversal") return renderParallelTransversal(spec).svg;
   return spec.type === "coordinate_plane" ? renderPlane(spec) : renderGeometry(spec);
 }
 

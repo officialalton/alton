@@ -1,5 +1,7 @@
 "use server";
 
+import { checkFigure, type RenderCheck } from "@/lib/problem-figures/check";
+
 import { requireAdmin } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 
@@ -63,6 +65,8 @@ export type ProblemContent = {
   /** 도형·그래프 데이터(lib/problem-figures). */
   figure: unknown | null;
   figureChecked: boolean;
+  /** 표준 렌더링 검증 결과(초안 저장 때 서버가 기록). null 이면 아직 검증 전. */
+  renderCheck: RenderCheck | null;
 };
 
 export type BankResult<T = undefined> =
@@ -149,7 +153,7 @@ export async function listBankProblemsAction(
   // 있다 — 그래서 공개된 문제가 "(아직 내용이 없는 문제)"로 보였다.
   const { data: contentRows } = await admin
     .from("problem_versions")
-    .select("id, problem_id, status, version_no, passage, options, correct_index, explanation, answers, figure, figure_checked")
+    .select("id, problem_id, status, version_no, passage, options, correct_index, explanation, answers, figure, figure_checked, render_check")
     .in("problem_id", problemIds)
     .in("status", ["published", "draft", "in_review"])
     .order("version_no", { ascending: false });
@@ -163,6 +167,7 @@ export async function listBankProblemsAction(
     answers: (v.answers as string[] | null) ?? null,
     figure: v.figure ?? null,
     figureChecked: Boolean(v.figure_checked),
+    renderCheck: (v.render_check as RenderCheck | null) ?? null,
   });
 
   const publishedByProblem = new Map<string, ProblemContent>();
@@ -306,6 +311,12 @@ export async function createDraftVersionAction(params: {
 }): Promise<BankResult<string>> {
   const { adminUserId } = await requireAdmin();
   const admin = createAdminClient();
+  // 2026-09-14 표준 렌더링 검증 — 스키마에 안 맞는 그림은 저장하지 않는다. 그 외 문제(참조 불일치·충돌·잘림·레거시)는
+  // 저장은 되지만 render_check 에 남고 공개가 막힌다(관리자가 사유를 보고 고친다).
+  const check = checkFigure(params.figure ?? null, params.passage);
+  if (check.issues.some((i) => i.code === "schema")) {
+    return { ok: false, error: `그림 데이터가 규격에 맞지 않아 저장하지 않았습니다 — ${check.issues[0].message}` };
+  }
   const { data, error } = await admin.rpc("save_problem_draft_version", {
     p_problem_id: params.problemId,
     p_passage: params.passage,
@@ -319,6 +330,8 @@ export async function createDraftVersionAction(params: {
     p_figure_checked: params.figureChecked ?? false,
   });
   if (error) return { ok: false, error: readable(error.message, "초안을 저장하지 못했습니다.") };
+  const { error: checkError } = await admin.rpc("set_problem_render_check", { p_version_id: data as string, p_check: check });
+  if (checkError) return { ok: false, error: readable(checkError.message, "그림 검증 결과를 저장하지 못했습니다.") };
   return { ok: true, value: data as string };
 }
 
@@ -326,6 +339,7 @@ export async function createDraftVersionAction(params: {
  * 문제 그림 파일 올리기(2026-09-14 ④). PNG·JPG·WEBP·SVG, 5MB 까지. 비공개 버킷에 두고 figure 데이터로 돌려준다 —
  * 편집 칸이 그 데이터를 그림 데이터에 넣는다. 공개는 여전히 '그림 확인함' 뒤.
  */
+/** 올린 그림의 대체 설명(alt) — 공개에 필수(2026-09-14 결정 2). 편집 칸에서 figure 데이터에 넣는다. */
 export async function uploadProblemImageAction(
   formData: FormData
 ): Promise<BankResult<{ type: "image"; bucket: string; path: string; alt: string }>> {
@@ -353,7 +367,7 @@ export async function generateFigureForProblemAction(params: {
   passage: string;
   options: string[] | null;
   explanation: string;
-  kind: "coordinate_plane" | "geometry";
+  kind: "coordinate_plane" | "parallel_transversal";
 }): Promise<BankResult<unknown>> {
   await requireAdmin();
   const { generateFigureForProblem } = await import("./curriculum-doc-actions");

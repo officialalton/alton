@@ -56,7 +56,15 @@ export type ImageFigureSpec = {
   width?: number;
 };
 
-export type FigureSpec = CoordinatePlaneSpec | GeometrySpec | ImageFigureSpec;
+import type { ParallelTransversalSpec } from "./templates/parallel-transversal";
+import { validateParallelTransversal } from "./templates/parallel-transversal";
+
+/**
+ * 2026-09-14 표준 렌더링 엔진: `geometry`(좌표 자유 입력)는 **레거시** — 읽기·표시만 하고 새 저장·공개는 막는다(재생성 필요).
+ * 새 도형은 템플릿(`parallel_transversal`, …)으로 관계만 받는다.
+ */
+export type FigureSpec = CoordinatePlaneSpec | GeometrySpec | ImageFigureSpec | ParallelTransversalSpec;
+export const LEGACY_FIGURE_TYPES: readonly string[] = ["geometry"];
 
 /** 최소한의 모양 검사 — 렌더러가 던지지 않게, 그리고 AI 출력이 이상하면 초안에 경고를 남기게. */
 export function validateFigureSpec(input: unknown): { ok: true; spec: FigureSpec } | { ok: false; error: string } {
@@ -93,6 +101,7 @@ export function validateFigureSpec(input: unknown): { ok: true; spec: FigureSpec
     }
     return { ok: true, spec: s as unknown as ImageFigureSpec };
   }
+  if (s.type === "parallel_transversal") return validateParallelTransversal(s);
   if (s.type === "geometry") {
     if (!Array.isArray(s.shapes) || s.shapes.length === 0) return { ok: false, error: "shapes 배열이 없습니다." };
     for (const sh of s.shapes as Record<string, unknown>[]) {

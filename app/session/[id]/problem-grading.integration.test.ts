@@ -421,6 +421,57 @@ describe("issue_homework_by_keywords — 키워드별 개수로 무작위 발급
   });
 });
 
+describe("표준 렌더링 검증 공개 게이트 (20261365) — 검증 통과 + 미리보기 확인 없이는 공개되지 않는다", () => {
+  function draftWithFigure(figure: string, passage = "Lines m and n are parallel. What is x?"): string {
+    // status 'confirmed' 로 만들면 1번 버전이 곧바로 공개된다 — 초안 게이트를 보려면 'draft' 로 만든다.
+    const pid = psql(
+      `insert into problems (format, passage, subject_id, status, created_by) values ('mc', ${quote(passage)}, '${SUBJECT_ID}', 'draft', '${ADMIN_ID}') returning id;`
+    );
+    return psql(
+      `update problem_versions set options = '["1","2","3","4"]'::jsonb, correct_index = 0, explanation = 'e', passage = ${quote(passage)}, figure = ${figure}::jsonb
+       where problem_id = '${pid}' and version_no = 1 returning id;`
+    );
+  }
+  const PT = `'{"type":"parallel_transversal","parallel":["m","n"],"transversals":[{"id":"k"}],"angles":[{"at":["m","k"],"region":"NW","label":"x°"},{"at":["n","k"],"region":"SE","label":"37°"}],"notToScale":true}'`;
+
+  it("검증 기록 없음 → 거절, 검증 실패 → 사유와 함께 거절, 통과 + 확인 → 공개", () => {
+    const v = draftWithFigure(PT);
+    expect(fails(() => psql(`select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`))).toContain("검증 기록이 없습니다");
+    psql(`select set_problem_render_check('${v}', '{"ok":false,"renderer":"std-1","issues":[{"code":"ref_missing","message":"지문의 선 q 가 도형 데이터에 없습니다."}]}'::jsonb);`);
+    expect(fails(() => psql(`select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`))).toContain("지문의 선 q");
+    psql(`select set_problem_render_check('${v}', '{"ok":true,"renderer":"std-1","issues":[]}'::jsonb);`);
+    expect(fails(() => psql(`select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`))).toContain("미리보기에서 그림을 확인");
+    psql(`select mark_problem_figure_checked('${v}', true);`);
+    psql(`select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`);
+    expect(psql(`select status from problem_versions where id = '${v}';`)).toBe("published");
+  });
+
+  it("검증 뒤 그림이 바뀌면 해시가 달라 거절한다", () => {
+    const v = draftWithFigure(PT);
+    psql(`select set_problem_render_check('${v}', '{"ok":true,"renderer":"std-1","issues":[]}'::jsonb);`);
+    psql(`select mark_problem_figure_checked('${v}', true);`);
+    psql(`update problem_versions set figure = jsonb_set(figure, '{notToScale}', 'false') where id = '${v}';`);
+    expect(fails(() => psql(`select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`))).toContain("검증 뒤 그림이 바뀌었습니다");
+  });
+
+  it("좌표형 geometry 는 재생성 필요로 공개 불가, 올린 그림은 alt 없이는 공개 불가", () => {
+    const legacy = draftWithFigure(`'{"type":"geometry","shapes":[{"kind":"segment","from":[0,0],"to":[1,1]}]}'`);
+    psql(`select set_problem_render_check('${legacy}', '{"ok":true,"renderer":"std-1","issues":[]}'::jsonb);`);
+    psql(`select mark_problem_figure_checked('${legacy}', true);`);
+    expect(fails(() => psql(`select confirm_and_publish_problem_version('${legacy}', '${ADMIN_ID}');`))).toContain("재생성 필요");
+    const img = draftWithFigure(`'{"type":"image","bucket":"problem-assets","path":"p/a.png"}'`);
+    psql(`select set_problem_render_check('${img}', '{"ok":true,"renderer":"std-1","issues":[]}'::jsonb);`);
+    psql(`select mark_problem_figure_checked('${img}', true);`);
+    expect(fails(() => psql(`select confirm_and_publish_problem_version('${img}', '${ADMIN_ID}');`))).toContain("대체 설명");
+  });
+
+  it("그림이 없는 문제는 검증 기록 없이도 공개된다(기존 흐름 유지)", () => {
+    const v = draftWithFigure("null", "What is 2 + 2?");
+    psql(`select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`);
+    expect(psql(`select status from problem_versions where id = '${v}';`)).toBe("published");
+  });
+});
+
 // ------------------------------------------------------------ 문제 한 장 위 공유 필기 (2026-09-14)
 describe("append_problem_page_stroke_events — 문제 위 교사·학생 공유 필기(수업 문제·과제 모두)", () => {
   const seg = (o: Record<string, unknown>) =>
@@ -552,12 +603,17 @@ describe("figure — 그림이 있는 초안은 확인해야 공개된다", () =
     );
     const fig = `{"type":"coordinate_plane","xRange":[-2,8],"yRange":[-2,8],"items":[{"kind":"line","slope":1,"intercept":0}]}`;
     const v = psql(`select save_problem_draft_version('${id}', '그래프', '["a","b","c","d"]'::jsonb, 1, '해설', 'medium', '${ADMIN_ID}', null, '${fig}'::jsonb, false);`);
+    // 2026-09-14 표준 렌더링 검증(20261365): 검증 기록이 먼저다. 그 다음 미리보기 확인.
+    psql(`select set_problem_render_check('${v}', '{"ok":true,"renderer":"std-1","issues":[]}'::jsonb);`);
     expect(fails(() => psql(`select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`))).toContain("그림을 확인해야");
     psql(`select mark_problem_figure_checked('${v}', true);`);
-    // 그림 데이터를 바꾸면 확인이 풀린다.
-    psql(`select save_problem_draft_version('${id}', '그래프', '["a","b","c","d"]'::jsonb, 1, '해설', 'medium', '${ADMIN_ID}', null, '{"type":"geometry","shapes":[{"kind":"circle","center":[0,0],"radius":1}]}'::jsonb, true);`);
+    // 그림 데이터를 바꾸면 확인이 풀리고, 검증 해시도 어긋난다.
+    const fig2 = `{"type":"coordinate_plane","xRange":[-2,8],"yRange":[-2,8],"items":[{"kind":"line","slope":2,"intercept":1}]}`;
+    psql(`select save_problem_draft_version('${id}', '그래프', '["a","b","c","d"]'::jsonb, 1, '해설', 'medium', '${ADMIN_ID}', null, '${fig2}'::jsonb, true);`);
     expect(psql(`select figure_checked from problem_versions where id = '${v}';`)).toBe("f");
     psql(`select mark_problem_figure_checked('${v}', true);`);
+    expect(fails(() => psql(`select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`))).toContain("검증 뒤 그림이 바뀌었습니다");
+    psql(`select set_problem_render_check('${v}', '{"ok":true,"renderer":"std-1","issues":[]}'::jsonb);`);
     psql(`select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`);
     expect(psql(`select status from problem_versions where id = '${v}';`)).toBe("published");
   });

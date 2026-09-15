@@ -22,6 +22,7 @@ import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import LearningText from "@/app/session/[id]/LearningText";
 import { PROBLEM_SKILLS, findProblemSkill } from "@/lib/problem-skills";
 import { validateFigureSpec } from "@/lib/problem-figures/spec";
+import { lintParallelTransversalAgainstText, renderParallelTransversal } from "@/lib/problem-figures/templates/parallel-transversal";
 import type { AdminSubject, SubjectKeyword } from "./subject-data";
 
 // P2 3차·8차 — 관리자 문제은행. 교재와 독립된 진입점이다.
@@ -650,7 +651,7 @@ function ProblemRow({
     <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5">
       <div className="flex items-start justify-between gap-3">
         <button onClick={onToggle} className="text-left min-w-0 flex-1">
-          <div className="text-[13.5px] font-bold text-ink truncate">{title}</div>
+          <div className="text-[13.5px] font-bold text-ink truncate" data-testid="bank-row-title">{title}</div>
           <div className="text-[12px] text-grey-500 mt-0.5">
             {problem.subjectName} · {FORMAT_LABEL[problem.format] ?? problem.format} ·{" "}
             {WORK_STATE_LABEL[problem.workState]}
@@ -915,6 +916,23 @@ function DraftEditor({
     }
   })();
   const figureDirty = JSON.stringify(figureParsed.spec ?? null) !== JSON.stringify(source?.figure ?? null);
+  const [passage, setPassage] = useState(source?.passage ?? "");
+  // 표준 렌더링 검증(클라이언트에서도 같은 규칙으로 즉시) — 저장하면 서버가 같은 검사를 해 render_check 에 남긴다.
+  const figureIsLegacy = figureParsed.spec != null && (figureParsed.spec as { type?: string }).type === "geometry";
+  const figureIsImage = figureParsed.spec != null && (figureParsed.spec as { type?: string }).type === "image";
+  const [imageAlt, setImageAlt] = useState<string>(figureIsImage ? String((figureParsed.spec as { alt?: string }).alt ?? "") : "");
+  const figureForSave: unknown | null = figureIsImage && figureParsed.spec ? { ...(figureParsed.spec as object), alt: imageAlt.trim() } : figureParsed.spec;
+  const figureIssues: { code: string; message: string }[] = (() => {
+    const spec = figureForSave as { type?: string } | null;
+    if (!spec) return [];
+    if (spec.type === "parallel_transversal") {
+      const r = renderParallelTransversal(spec as never);
+      return [...r.issues, ...lintParallelTransversalAgainstText(spec as never, passage)];
+    }
+    if (spec.type === "image" && !imageAlt.trim()) return [{ code: "alt_required", message: "올린 그림에는 대체 설명이 필요합니다." }];
+    return [];
+  })();
+  const figureAlt = figureForSave && (figureForSave as { type?: string }).type === "parallel_transversal" ? renderParallelTransversal(figureForSave as never).alt : figureIsImage ? imageAlt : null;
   const [figureNotice, setFigureNotice] = useState<string | null>(null);
   const [figureBusy, setFigureBusy] = useState(false);
 
@@ -923,7 +941,6 @@ function DraftEditor({
     return existing.length > 4 ? [...existing] : [0, 1, 2, 3].map((i) => existing[i] ?? "");
   }, [source]);
 
-  const [passage, setPassage] = useState(source?.passage ?? "");
   const [options, setOptions] = useState<string[]>(initialOptions);
   const [correctIndex, setCorrectIndex] = useState<number | null>(
     source?.correctIndex ?? null
@@ -940,7 +957,7 @@ function DraftEditor({
   async function saveDraft(): Promise<{ ok: true; value: string } | { ok: false; error: string }> {
     return createDraftVersionAction({
       answers: answersPayload,
-      figure: figureParsed.spec,
+      figure: figureForSave,
       figureChecked: figureChecked && !figureDirty,
       problemId: problem.id,
       passage: passage.trim(),
@@ -1041,48 +1058,51 @@ function DraftEditor({
         </div>
       )}
 
-      <div className="mb-2">
+      <div className="mb-2" data-testid="figure-section">
         <div className="text-[11.5px] text-grey-500 mb-1.5">
-          그림(선택) — 그래프·도형 데이터(JSON). AI 가 만든 것도 여기 들어옵니다. 미리보기를 보고 <b>그림 확인함</b>을 켜야 공개됩니다.
+          그림(선택) — 표준 렌더러가 그립니다. AI 는 관계(평행선·횡단선·각의 자리)만 내고 좌표·라벨 자리는 ALTON 이 정합니다.
+          렌더된 미리보기를 보고 <b>미리보기로 확인함</b>을 켜야 공개됩니다. 검증에 걸린 그림은 공개되지 않습니다.
         </div>
-        <textarea
-          aria-label="그림 데이터"
-          value={figureText}
-          onChange={(e) => setFigureText(e.target.value)}
-          ref={autoGrow}
-          onInput={(e) => growToContent(e.currentTarget)}
-          rows={2}
-          placeholder='예: {"type":"coordinate_plane","xRange":[-2,8],"yRange":[-2,8],"items":[{"kind":"line","through":[[0,4],[4,0]]}]}'
-          className="w-full text-[12px] font-mono border-[1.5px] border-grey-200 rounded-lg px-3 py-2 mb-1.5 resize-none overflow-hidden"
-        />
-        <label className="inline-flex items-center gap-2 text-[12px] text-ink mb-1.5">
-          <span className="font-bold px-2.5 py-1 rounded-lg border-[1.5px] border-grey-200 cursor-pointer">그림 파일 올리기</span>
-          <input
-            type="file"
-            aria-label="그림 파일"
-            accept="image/png,image/jpeg,image/webp,image/svg+xml"
-            className="hidden"
-            disabled={busy}
-            onChange={async (e) => {
-              const file = e.target.files?.[0];
-              e.target.value = "";
-              if (!file) return;
-              const fd = new FormData();
-              fd.set("file", file);
-              fd.set("problemId", problem.id);
-              const r = await uploadProblemImageAction(fd);
-              if (!r.ok) {
-                setFigureNotice(`그림을 올리지 못했습니다 — ${r.error}`);
-                return;
-              }
-              setFigureText(JSON.stringify(r.value, null, 2));
-              setFigureNotice("그림을 올렸습니다. 미리보기를 확인하고 초안을 저장한 뒤 '그림 확인함'을 켜세요.");
-            }}
-          />
-          <span className="text-grey-500">PNG·JPG·WEBP·SVG, 5MB 이하 — 기출 도형·직접 그린 그림</span>
-        </label>
+
+        {figureParsed.spec != null && (
+          <div className="border-[1.5px] border-grey-200 rounded-xl p-4 mb-2 bg-white" data-testid="figure-preview">
+            <div className="text-[10.5px] font-bold text-grey-300 uppercase tracking-wide mb-2">학생 화면 미리보기 (표준 렌더러)</div>
+            <div className="max-w-[520px]">
+              <ProblemFigure spec={figureParsed.spec} />
+            </div>
+            {figureAlt && <p className="text-[11.5px] text-grey-500 mt-2">대체 설명: {figureAlt}</p>}
+          </div>
+        )}
+        {figureIsLegacy && (
+          <p className="text-[12px] font-bold text-red mb-1.5" data-testid="figure-legacy">
+            재생성 필요 — 좌표형 그림(geometry)은 지원이 끝나 공개할 수 없습니다. 아래 &apos;AI로 도형 데이터 만들기(평행선·횡단선)&apos;로 다시 만들거나 그림 파일을 올리세요.
+          </p>
+        )}
+        {figureIssues.length > 0 && !figureIsLegacy && (
+          <ul className="text-[12px] text-red mb-1.5 list-disc pl-5" data-testid="figure-issues">
+            {figureIssues.map((i) => (
+              <li key={i.code + i.message}>{i.message}</li>
+            ))}
+          </ul>
+        )}
+        {figureParsed.spec != null && figureIssues.length === 0 && !figureIsLegacy && (
+          <p className="text-[11.5px] text-green mb-1.5">표준 렌더링 검증 통과 — 지문 참조·라벨 중복·겹침·잘림 없음.</p>
+        )}
+        {figureIsImage && (
+          <label className="flex flex-wrap items-center gap-2 text-[12px] text-ink mb-1.5">
+            <span className="font-bold">대체 설명(필수)</span>
+            <input
+              aria-label="그림 대체 설명"
+              value={imageAlt}
+              onChange={(e) => setImageAlt(e.target.value)}
+              placeholder="예: 삼각형 ABC, 변 AB = 6, 각 B 는 직각"
+              className="flex-1 min-w-[240px] text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1"
+            />
+          </label>
+        )}
+
         <div className="flex flex-wrap items-center gap-2 mb-1.5">
-          {(["coordinate_plane", "geometry"] as const).map((kind) => (
+          {(["parallel_transversal", "coordinate_plane"] as const).map((kind) => (
             <button
               key={kind}
               type="button"
@@ -1097,37 +1117,74 @@ function DraftEditor({
                   return;
                 }
                 setFigureText(JSON.stringify(r.value, null, 2));
-                setFigureNotice("AI 가 그림 데이터를 만들었습니다. 미리보기를 확인하고 초안을 저장한 뒤 '그림 확인함'을 켜세요. 수치·라벨이 문제와 맞는지 꼭 보세요.");
+                setFigureNotice("AI 가 도형 데이터를 만들었습니다. 미리보기와 검증 결과를 보고 초안을 저장한 뒤 '미리보기로 확인함'을 켜세요.");
               }}
               className="text-[12px] font-bold px-2.5 py-1 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
             >
-              {figureBusy ? "만드는 중…" : kind === "coordinate_plane" ? "AI로 좌표평면 그림 만들기" : "AI로 도형 그림 만들기"}
+              {figureBusy ? "만드는 중…" : kind === "coordinate_plane" ? "AI로 좌표평면 그림 만들기" : "AI로 도형 데이터 만들기(평행선·횡단선)"}
             </button>
           ))}
+          <label className="inline-flex items-center gap-2 text-[12px] text-ink">
+            <span className="font-bold px-2.5 py-1 rounded-lg border-[1.5px] border-grey-200 cursor-pointer">그림 파일 올리기</span>
+            <input
+              type="file"
+              aria-label="그림 파일"
+              accept="image/png,image/jpeg,image/webp,image/svg+xml"
+              className="hidden"
+              disabled={busy}
+              onChange={async (e) => {
+                const file = e.target.files?.[0];
+                e.target.value = "";
+                if (!file) return;
+                const fd = new FormData();
+                fd.set("file", file);
+                fd.set("problemId", problem.id);
+                const r = await uploadProblemImageAction(fd);
+                if (!r.ok) {
+                  setFigureNotice(`그림을 올리지 못했습니다 — ${r.error}`);
+                  return;
+                }
+                setFigureText(JSON.stringify(r.value, null, 2));
+                setFigureNotice("그림을 올렸습니다. 대체 설명을 적고 미리보기를 확인한 뒤 초안을 저장하세요.");
+              }}
+            />
+            <span className="text-grey-500">지원 밖 도형(삼각형·원 등)은 직접 만든 PNG·SVG 로 — 5MB 이하</span>
+          </label>
         </div>
         {figureNotice && <p className="text-[11.5px] text-ink mb-1.5">{figureNotice}</p>}
         {figureParsed.error && <p className="text-[11.5px] text-red mb-1.5">그림 데이터 오류 — {figureParsed.error}</p>}
-        {figureParsed.spec != null && (
-          <div className="border-[1.5px] border-grey-200 rounded-lg p-2 mb-1.5 inline-block bg-white">
-            <ProblemFigure spec={figureParsed.spec} />
-          </div>
-        )}
+
         {figureParsed.spec != null && source?.versionId && (
-          <label className="flex items-center gap-2 text-[12.5px] text-ink">
+          <label className="flex items-center gap-2 text-[12.5px] text-ink mb-1.5">
             <input
               type="checkbox"
               aria-label="그림 확인함"
               checked={figureChecked && !figureDirty}
-              disabled={figureDirty || busy}
+              disabled={figureDirty || busy || figureIssues.length > 0 || figureIsLegacy}
               onChange={(e) => {
                 const next = e.target.checked;
                 setFigureChecked(next);
-                void onRun(() => markFigureCheckedAction(source.versionId, next), next ? "그림을 확인했다고 표시했습니다." : "그림 확인을 해제했습니다.");
+                void onRun(() => markFigureCheckedAction(source.versionId, next), next ? "미리보기로 확인했다고 표시했습니다." : "확인을 해제했습니다.");
               }}
             />
-            그림 확인함{figureDirty ? " — 먼저 초안을 저장하세요(그림이 바뀌었습니다)" : ""}
+            미리보기로 확인함
+            {figureDirty ? " — 먼저 초안을 저장하세요(그림이 바뀌었습니다)" : figureIssues.length > 0 ? " — 검증 문제를 먼저 해결하세요" : ""}
           </label>
         )}
+
+        <details className="text-[12px]">
+          <summary className="cursor-pointer text-grey-500">도형 데이터 편집(고급)</summary>
+          <textarea
+            aria-label="그림 데이터"
+            value={figureText}
+            onChange={(e) => setFigureText(e.target.value)}
+            ref={autoGrow}
+            onInput={(e) => growToContent(e.currentTarget)}
+            rows={2}
+            placeholder='예: {"type":"parallel_transversal","parallel":["m","n"],"transversals":[{"id":"k"}],"angles":[{"at":["m","k"],"region":"NW","label":"x°"}]}'
+            className="w-full text-[12px] font-mono border-[1.5px] border-grey-200 rounded-lg px-3 py-2 mt-1.5 mb-1.5 resize-none overflow-hidden"
+          />
+        </details>
       </div>
 
       <textarea
