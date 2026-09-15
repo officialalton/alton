@@ -488,6 +488,9 @@ export type KeywordProblem = {
   label: string;
   difficulty: string | null;
   format: string;
+  /** 분류(2026-09-14) — 배정할 때 기술별로 찾는 기준. */
+  satDomain?: string | null;
+  skillCode?: string | null;
   /**
    * 간략 미리보기(2026-09-14 UAT: "문제를 클릭하면 문제를 볼 수 있어야") — 공개 버전의 지문·선택지·그림.
    * 목록은 label 만 보이고, 누르면 이것을 펼친다. 정답·해설은 여기 담지 않는다.
@@ -523,7 +526,7 @@ export async function loadKeywordProblems(
   const [{ data: problems }, { data: versions }] = await Promise.all([
     supabase
       .from("problems")
-      .select("id, format, passage, skill_type, difficulty")
+      .select("id, format, passage, skill_type, difficulty, sat_domain, skill_code")
       .in("id", problemIds)
       .order("created_at", { ascending: true }),
     // 미리보기는 **공개 버전** 기준 — 학생이 실제로 볼 내용이다(초안·검수본이 아니다).
@@ -552,6 +555,8 @@ export async function loadKeywordProblems(
       label: snippet || skill || "(본문 없음)",
       difficulty: (p.difficulty as string | null) ?? null,
       format: p.format as string,
+      satDomain: (p.sat_domain as string | null) ?? null,
+      skillCode: (p.skill_code as string | null) ?? null,
       ...(preview ? { preview } : {}),
     };
   });

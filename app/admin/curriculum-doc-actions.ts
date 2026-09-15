@@ -6,6 +6,7 @@ import { sanitizeDocHtml } from "@/lib/sanitize-doc-html";
 import { stripInlineOptions } from "@/lib/problem-text";
 import { TEMPLATE_FIGURE_TYPES, validateFigureSpec } from "@/lib/problem-figures/spec";
 import { findProblemSkill } from "@/lib/problem-skills";
+import { SKILL_BY_CODE, domainLabel } from "@/lib/problem-taxonomy";
 import type { DocProblem, DocSection, DocEditorData } from "./curriculum-doc-data";
 import { loadCurriculumDocDetail } from "./curriculum-doc-data";
 import type { SubjectKeyword } from "./subject-data";
@@ -433,9 +434,13 @@ export async function generateSectionProblems(params: {
   format: ProblemFormat;
   count: number;
   figurePolicy?: FigurePolicy;
+  /** 세부 기술 코드(lib/problem-taxonomy) — 영역·기술 힌트를 프롬프트에 넣는다. */
+  skillCode?: string;
 }): Promise<Omit<DocProblem, "id" | "keywords">[]> {
   await requireAdmin();
   const { sectionTitle, subjectName, skillType, difficulty, format, count } = params;
+  const skillMeta = params.skillCode ? SKILL_BY_CODE.get(params.skillCode) ?? null : null;
+  const ruleSkill = findProblemSkill(skillType) ?? (skillMeta ? findProblemSkill(skillMeta.legacySkill) : null);
   const figurePolicy: FigurePolicy = params.figurePolicy ?? "optional";
   const clampedCount = Math.max(1, Math.min(10, count));
 
@@ -504,10 +509,11 @@ export async function generateSectionProblems(params: {
         content: `다음 조건에 맞는 SAT/AP 교재용 문제 ${clampedCount}개를 생성해주세요.
 - 과목: ${subjectName}
 - 교재 섹션: ${sectionTitle}
-- 문제 유형(스킬): ${findProblemSkill(skillType)?.label ?? skillType}
+- 문제 유형(스킬): ${ruleSkill?.label ?? skillType}
+${skillMeta ? `- SAT 영역: ${domainLabel(skillMeta.domain)} / 세부 기술: ${skillMeta.label}${skillMeta.hint ? ` — ${skillMeta.hint}` : ""}. 모든 문항이 이 세부 기술을 묻는 문항이어야 한다(다른 기술로 새지 않는다).` : ""}
 - 난이도: ${difficulty === "easy" ? "쉬움" : difficulty === "medium" ? "보통" : "어려움"}
 - 답안 형식: ${FORMAT_LABEL[format]}
-${findProblemSkill(skillType) ? `유형 규칙(실제 SAT/AP 문항 말투를 그대로 따른다): ${findProblemSkill(skillType)!.rule}` : ""}
+${ruleSkill ? `유형 규칙(실제 SAT/AP 문항 말투를 그대로 따른다): ${ruleSkill.rule}` : ""}
 ${format === "mc" ? "객관식은 반드시 선택지 4개와 정답 인덱스를 포함해주세요." : ""}
 ${format === "spr" ? "숫자 입력(SPR)은 SAT Math 학생 직접 입력 문항입니다: 정답이 하나의 수(정수·소수·분수)로 정해져야 하고, answers 에 동치 표현을 모두 넣어주세요(예: 7/2 와 3.5). 선택지는 만들지 마세요. 양수는 5자, 음수는 6자 안에 쓸 수 있는 값이어야 합니다." : ""}
 언어: 문항(지문·질문·선택지·SPR 정답)은 실제 SAT/AP 시험과 같이 **영어**로 쓴다. 해설(explanation)만 한국어로 쓴다.

@@ -21,6 +21,7 @@ import { listSubjectCatalogAction } from "./subject-actions";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import LearningText from "@/app/session/[id]/LearningText";
 import { PROBLEM_SKILLS, findProblemSkill } from "@/lib/problem-skills";
+import { SAT_DOMAINS, SKILL_BY_CODE, SKILL_CODES, domainShort, skillLabel, skillsForDomain } from "@/lib/problem-taxonomy";
 import { LEGACY_FIGURE_TYPES, validateFigureSpec } from "@/lib/problem-figures/spec";
 import { lintParallelTransversalAgainstText, renderParallelTransversal } from "@/lib/problem-figures/templates/parallel-transversal";
 import { lintTriangleAgainstText, renderTriangle } from "@/lib/problem-figures/templates/triangle";
@@ -376,6 +377,29 @@ function Filters({
         <option value="spr">숫자 입력(SPR)</option>
         <option value="math">풀이형</option>
       </select>
+      {/* 분류(2026-09-14): SAT 영역 → 세부 기술. 문제은행·자동 구성·성취 기록이 같은 기준을 쓴다. */}
+      <select
+        aria-label="SAT 영역"
+        value={filter.satDomain ?? ""}
+        onChange={(e) => onChange({ satDomain: e.target.value || undefined, skillCode: undefined })}
+        className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5"
+      >
+        <option value="">모든 영역</option>
+        {SAT_DOMAINS.map((d) => (
+          <option key={d.code} value={d.code}>{d.label}</option>
+        ))}
+      </select>
+      <select
+        aria-label="세부 기술"
+        value={filter.skillCode ?? ""}
+        onChange={(e) => onChange({ skillCode: e.target.value || undefined })}
+        className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 max-w-[260px]"
+      >
+        <option value="">{filter.satDomain ? "모든 기술" : "모든 기술(영역 먼저 고르면 좁혀짐)"}</option>
+        {(filter.satDomain ? skillsForDomain(filter.satDomain) : SKILL_CODES).map((k) => (
+          <option key={k.code} value={k.code}>{k.label}</option>
+        ))}
+      </select>
       {/* 키워드는 과목에 속한다 — 과목을 고르기 전에는 고를 목록 자체가 없다. */}
       <select
         aria-label="키워드"
@@ -416,6 +440,7 @@ function NewProblemRow({
     subjectId: string;
     format: string;
     skillType?: string;
+    skillCode?: string;
     topic?: string;
     difficulty?: string;
     keywordIds?: string[];
@@ -423,6 +448,7 @@ function NewProblemRow({
   onGenerate: (p: {
     subjectId: string;
     skillType: string;
+    skillCode?: string;
     topic?: string;
     difficulty: string;
     format: string;
@@ -434,6 +460,9 @@ function NewProblemRow({
   const [subjectId, setSubjectId] = useState("");
   const [format, setFormat] = useState("mc");
   const [skillType, setSkillType] = useState("");
+  // 2026-09-14 분류 — SAT 영역 → 세부 기술. 기술을 고르면 유형(생성 규칙)·형식·그림 요구 기본값이 따라온다.
+  const [satDomain, setSatDomain] = useState("");
+  const [skillCode, setSkillCode] = useState("");
   const [topic, setTopic] = useState("");
   // 2026-09-14 제품 오너: 만들 때 난이도를 고른다 — 직접 쓰기·AI 둘 다 같은 값.
   const [difficulty, setDifficulty] = useState<"easy" | "medium" | "hard">("medium");
@@ -480,7 +509,45 @@ function NewProblemRow({
           <option value="spr">숫자 입력(SPR)</option>
         <option value="math">풀이형</option>
         </select>
-        {/* 유형과 주제는 다른 축이다 — 유형은 무엇을 묻는가, 주제는 무엇에 대한 글인가. */}
+        <select
+          aria-label="SAT 영역"
+          value={satDomain}
+          onChange={(e) => {
+            setSatDomain(e.target.value);
+            setSkillCode("");
+          }}
+          className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5"
+        >
+          <option value="">SAT 영역…</option>
+          {SAT_DOMAINS.map((d) => (
+            <option key={d.code} value={d.code}>{d.label}</option>
+          ))}
+        </select>
+        <select
+          aria-label="세부 기술"
+          value={skillCode}
+          disabled={!satDomain}
+          onChange={(e) => {
+            const code = e.target.value;
+            setSkillCode(code);
+            const meta = SKILL_BY_CODE.get(code);
+            if (meta) {
+              const legacy = findProblemSkill(meta.legacySkill);
+              if (legacy) {
+                setSkillType(legacy.label);
+                setFormat(legacy.defaultFormat);
+              }
+              setFigurePolicy(meta.figurePolicy);
+            }
+          }}
+          className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 max-w-[280px] disabled:opacity-50"
+        >
+          <option value="">{satDomain ? "세부 기술…" : "영역을 먼저 고르세요"}</option>
+          {skillsForDomain(satDomain).map((k) => (
+            <option key={k.code} value={k.code}>{k.label}</option>
+          ))}
+        </select>
+        {/* 유형과 주제는 다른 축이다 — 유형은 무엇을 묻는가(생성 규칙), 주제는 무엇에 대한 글인가. 기술을 고르면 유형은 자동. */}
         <input
           aria-label="문제 유형"
           value={skillType}
@@ -583,6 +650,7 @@ function NewProblemRow({
               subjectId,
               format,
               skillType: skillType.trim() || undefined,
+              skillCode: skillCode || undefined,
               topic: topic.trim() || undefined,
               difficulty,
               keywordIds: keywordIds.length ? keywordIds : undefined,
@@ -605,6 +673,7 @@ function NewProblemRow({
             onGenerate({
               subjectId,
               skillType: skillType.trim(),
+              skillCode: skillCode || undefined,
               topic: topic.trim() || undefined,
               difficulty,
               format,
@@ -659,6 +728,7 @@ function ProblemRow({
           <div className="text-[12px] text-grey-500 mt-0.5">
             {problem.subjectName} · {FORMAT_LABEL[problem.format] ?? problem.format} ·{" "}
             {WORK_STATE_LABEL[problem.workState]}
+            {problem.skillCode ? ` · ${domainShort(problem.satDomain)} › ${skillLabel(problem.skillCode)}` : problem.satDomain ? ` · ${domainShort(problem.satDomain)} › 기술 미지정` : " · 분류 없음"}
             {problem.skillType ? ` · 유형 ${problem.skillType}` : ""}
             {problem.topic ? ` · 주제 ${problem.topic}` : ""}
             {problem.keywords.length
@@ -783,16 +853,45 @@ function MetaEditor({
 }) {
   const [skillType, setSkillType] = useState(problem.skillType ?? "");
   const [topic, setTopic] = useState(problem.topic ?? "");
+  const [satDomain, setSatDomain] = useState(problem.satDomain ?? "");
+  const [skillCode, setSkillCode] = useState(problem.skillCode ?? "");
 
   const dirty =
-    skillType !== (problem.skillType ?? "") || topic !== (problem.topic ?? "");
+    skillType !== (problem.skillType ?? "") || topic !== (problem.topic ?? "") ||
+    satDomain !== (problem.satDomain ?? "") || skillCode !== (problem.skillCode ?? "");
 
   return (
     <div className="mb-4">
       <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-1.5">
-        유형 · 주제
+        분류 · 유형 · 주제
       </div>
       <div className="flex flex-wrap gap-2 items-center">
+        <select
+          aria-label="SAT 영역 수정"
+          value={satDomain}
+          onChange={(e) => {
+            setSatDomain(e.target.value);
+            setSkillCode("");
+          }}
+          className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5"
+        >
+          <option value="">SAT 영역 없음</option>
+          {SAT_DOMAINS.map((d) => (
+            <option key={d.code} value={d.code}>{d.label}</option>
+          ))}
+        </select>
+        <select
+          aria-label="세부 기술 수정"
+          value={skillCode}
+          disabled={!satDomain}
+          onChange={(e) => setSkillCode(e.target.value)}
+          className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 max-w-[280px] disabled:opacity-50"
+        >
+          <option value="">{satDomain ? "세부 기술 미지정" : "영역을 먼저 고르세요"}</option>
+          {skillsForDomain(satDomain).map((k) => (
+            <option key={k.code} value={k.code}>{k.label}</option>
+          ))}
+        </select>
         <input
           aria-label="문제 유형 수정"
           value={skillType}
@@ -811,8 +910,8 @@ function MetaEditor({
           disabled={!dirty || busy}
           onClick={() =>
             void onRun(
-              () => updateProblemMetaAction(problem.id, { skillType, topic }),
-              "유형·주제를 저장했습니다."
+              () => updateProblemMetaAction(problem.id, { skillType, topic, skillCode: skillCode || null, satDomain: satDomain || null }),
+              "분류·유형·주제를 저장했습니다."
             )
           }
           className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"

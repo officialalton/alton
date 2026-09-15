@@ -42,7 +42,7 @@ export const PROBLEM_SKILLS: ProblemSkill[] = [
   { code: "math.advanced", label: "Advanced Math (이차·지수·다항)", family: "SAT Math", defaultFormat: "mc",
     rule: "이차·지수·다항·유리식·절댓값·함수 표기. 수식은 $…$. 함수 그래프가 필요하면 figure(function 항목)." },
   { code: "math.problem_solving_data", label: "Problem-Solving and Data Analysis", family: "SAT Math", defaultFormat: "mc",
-    rule: "비율·백분율·단위·확률·표본·평균/중앙값·산점도. 데이터는 마크다운 표 또는 figure(points/polyline). 문맥 해석 문항 포함." },
+    rule: "비율·비례·속도·단위 변환·백분율·확률·조건부확률·표본 통계·오차범위·평균/중앙값·관찰 연구와 실험의 주장 판단. 자료는 마크다운 표가 아니라 figure(type:'data' — 표·숫자 목록·막대/선·히스토그램·산점도·상자그림)로 낸다. 문맥 해석 문항 포함." },
   { code: "math.geometry_trig", label: "Geometry and Trigonometry", family: "SAT Math", defaultFormat: "mc",
     rule: "각·삼각형·원·부피·삼각비. 도형이 필요하면 figure(geometry). 평행선·횡단선의 각은 반드시 angles:[{line, quadrant, text}] 로 교점·사분면을 지정한다(호가 그려진다). 다각형의 각은 angleLabels:[{at: 꼭짓점 인덱스, text}]. 변 라벨은 sideLabels(변 i = 점 i→i+1). 그림에 답이 그대로 보이지 않게, notToScale 은 실제 비율이 아닐 때만." },
   { code: "math.spr", label: "Student-Produced Response (숫자 입력)", family: "SAT Math", defaultFormat: "spr",

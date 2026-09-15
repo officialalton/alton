@@ -29,6 +29,9 @@ export type BankProblem = {
   format: string;
   passage: string | null;
   skillType: string | null;
+  /** SAT 영역·세부 기술 코드(lib/problem-taxonomy, DB problem_skill_codes). 만들기·찾기·배정·성취의 공통 기준. */
+  satDomain: string | null;
+  skillCode: string | null;
   difficulty: string | null;
   subjectId: string | null;
   subjectName: string;
@@ -82,6 +85,8 @@ export type ProblemBankFilter = {
   keywordId?: string;
   /** 지문·해설에서 찾는다. */
   query?: string;
+  satDomain?: string;
+  skillCode?: string;
 };
 
 export async function listBankProblemsAction(
@@ -93,7 +98,7 @@ export async function listBankProblemsAction(
   let q = admin
     .from("problems")
     .select(
-      "id, format, passage, skill_type, topic, difficulty, subject_id, status, archived_at, created_at"
+      "id, format, passage, skill_type, topic, difficulty, subject_id, status, archived_at, created_at, sat_domain, skill_code"
     )
     .order("created_at", { ascending: false })
     .limit(200);
@@ -102,6 +107,8 @@ export async function listBankProblemsAction(
   q = filter.archived ? q.not("archived_at", "is", null) : q.is("archived_at", null);
   if (filter.subjectId) q = q.eq("subject_id", filter.subjectId);
   if (filter.format) q = q.eq("format", filter.format);
+  if (filter.satDomain) q = q.eq("sat_domain", filter.satDomain);
+  if (filter.skillCode) q = q.eq("skill_code", filter.skillCode);
   if (filter.query?.trim()) q = q.ilike("passage", `%${filter.query.trim()}%`);
 
   const { data: rows, error } = await q;
@@ -195,6 +202,8 @@ export async function listBankProblemsAction(
     format: r.format as string,
     passage: (r.passage as string | null) ?? null,
     skillType: (r.skill_type as string | null) ?? null,
+    satDomain: (r.sat_domain as string | null) ?? null,
+    skillCode: (r.skill_code as string | null) ?? null,
     difficulty: (r.difficulty as string | null) ?? null,
     subjectId: (r.subject_id as string | null) ?? null,
     subjectName: r.subject_id ? nameById.get(r.subject_id as string) ?? "(과목 없음)" : "(과목 없음)",
@@ -257,6 +266,8 @@ export async function createBankProblemAction(params: {
   format: string;
   /** 무엇을 묻는가(예: Words in Context). 선택 항목이다. */
   skillType?: string;
+  /** 세부 기술 코드 — 정하면 SAT 영역은 DB 트리거가 맞춘다. */
+  skillCode?: string;
   /** 무엇에 대한 글인가. 유형과 다른 축이고 역시 선택 항목이다. */
   topic?: string;
   difficulty?: string;
@@ -273,6 +284,7 @@ export async function createBankProblemAction(params: {
     p_format: params.format,
     p_skill_type: params.skillType ?? "",
     p_topic: params.topic ?? "",
+    p_skill_code: params.skillCode ?? null,
     p_difficulty: params.difficulty ?? "",
     p_actor_id: adminUserId,
   });
@@ -494,16 +506,19 @@ export async function createDraftFromPublishedAction(
  */
 export async function updateProblemMetaAction(
   problemId: string,
-  meta: { skillType?: string | null; topic?: string | null }
+  meta: { skillType?: string | null; topic?: string | null; skillCode?: string | null; satDomain?: string | null }
 ): Promise<BankResult> {
   await requireAdmin();
   const admin = createAdminClient();
   const patch: Record<string, string | null> = {};
   if (meta.skillType !== undefined) patch.skill_type = meta.skillType?.trim() || null;
   if (meta.topic !== undefined) patch.topic = meta.topic?.trim() || null;
+  // 기술 코드를 정하면 영역은 트리거가 맞춘다. 코드를 비우고 영역만 둘 수도 있다.
+  if (meta.skillCode !== undefined) patch.skill_code = meta.skillCode?.trim() || null;
+  if (meta.satDomain !== undefined && !meta.skillCode) patch.sat_domain = meta.satDomain?.trim() || null;
   if (Object.keys(patch).length === 0) return { ok: true };
   const { error } = await admin.from("problems").update(patch).eq("id", problemId);
-  if (error) return { ok: false, error: "유형·주제를 저장하지 못했습니다." };
+  if (error) return { ok: false, error: readable(error.message, "분류·주제를 저장하지 못했습니다.") };
   return { ok: true };
 }
 
@@ -547,6 +562,8 @@ function readable(message: string, fallback: string): string {
 export async function generateBankProblemsAction(params: {
   subjectId: string;
   skillType: string;
+  /** 세부 기술 코드 — 프롬프트에 영역·기술 힌트가 들어가고, 만들어진 문제에 그대로 기록된다. */
+  skillCode?: string;
   topic?: string;
   difficulty: string;
   format: string;
@@ -589,6 +606,7 @@ export async function generateBankProblemsAction(params: {
       format: params.format as never,
       count: params.count,
       figurePolicy: (params.figurePolicy as never) ?? "optional",
+      skillCode: params.skillCode,
     });
   } catch (e) {
     // 그림 요구를 못 채운 경우는 사람이 조치할 수 있는 사실이라 그대로 알린다. 그 외 원문은 넘기지 않는다.
@@ -603,6 +621,7 @@ export async function generateBankProblemsAction(params: {
       subjectId: params.subjectId,
       format: params.format,
       skillType: params.skillType,
+      skillCode: params.skillCode,
       topic: params.topic,
       difficulty: params.difficulty,
       keywordIds: params.keywordIds,

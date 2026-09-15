@@ -5,6 +5,7 @@ import LearningText from "@/app/session/[id]/LearningText";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import { stripInlineOptions } from "@/lib/problem-text";
 import type { ProblemHistoryEntry } from "./problem-history-data";
+import { SKILL_CODES, domainLabel, domainShort, skillLabel } from "@/lib/problem-taxonomy";
 
 // 2026-09-14 — 학생 포털 문제 기록(v3). 수업·과제에서 답한 문제를 한 줄씩. 펼치면 지문·내 답·채점 결과, 채점 뒤엔 정답·해설.
 
@@ -20,6 +21,21 @@ export default function ProblemHistoryTab({ entries }: { entries: ProblemHistory
   const [gradeFilter, setGradeFilter] = useState<GradeFilter>("all");
   const [formatFilter, setFormatFilter] = useState<"all" | ProblemHistoryEntry["format"]>("all");
   const [sourceFilter, setSourceFilter] = useState<"all" | "lesson" | "homework">("all");
+  const [skillFilter, setSkillFilter] = useState("");
+  // 기술별 성취(2026-09-14) — 채점된 문제만 센다. 문제은행·자동 구성과 같은 분류.
+  const skillSummary = useMemo(() => {
+    const m = new Map<string, { graded: number; correct: number; total: number }>();
+    for (const e of entries) {
+      const key = e.skillCode ?? "";
+      if (!key) continue;
+      const cur = m.get(key) ?? { graded: 0, correct: 0, total: 0 };
+      cur.total += 1;
+      if (e.graded) cur.graded += 1;
+      if (e.grade === "correct") cur.correct += 1;
+      m.set(key, cur);
+    }
+    return SKILL_CODES.filter((k) => m.has(k.code)).map((k) => ({ ...k, ...m.get(k.code)! }));
+  }, [entries]);
   const [openId, setOpenId] = useState<string | null>(null);
 
   const subjects = useMemo(() => Array.from(new Set(entries.map((e) => e.subjectName).filter(Boolean))), [entries]);
@@ -29,6 +45,7 @@ export default function ProblemHistoryTab({ entries }: { entries: ProblemHistory
     if (gradeFilter !== "all" && gradeFilter !== "pending" && e.grade !== gradeFilter) return false;
     if (formatFilter !== "all" && e.format !== formatFilter) return false;
     if (sourceFilter !== "all" && e.source !== sourceFilter) return false;
+    if (skillFilter && e.skillCode !== skillFilter) return false;
     return true;
   });
   const correctCount = entries.filter((e) => e.grade === "correct").length;
@@ -71,6 +88,31 @@ export default function ProblemHistoryTab({ entries }: { entries: ProblemHistory
         />
       </div>
 
+      {skillSummary.length > 0 && (
+        <section className="mb-4 border-[1.5px] border-grey-200 rounded-xl px-4 py-3" data-testid="skill-summary">
+          <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2">기술별 성취 (채점된 문제 기준)</div>
+          <ul className="grid gap-1.5 sm:grid-cols-2">
+            {skillSummary.map((k) => (
+              <li key={k.code}>
+                <button
+                  type="button"
+                  onClick={() => setSkillFilter(skillFilter === k.code ? "" : k.code)}
+                  aria-pressed={skillFilter === k.code}
+                  className={"w-full text-left text-[12.5px] rounded-lg px-3 py-1.5 border-[1.5px] " + (skillFilter === k.code ? "border-ink bg-grey-100" : "border-grey-100")}
+                >
+                  <span className="text-grey-500">{domainShort(k.domain)} › </span>
+                  <span className="font-bold text-ink">{k.label}</span>
+                  <span className="float-right">
+                    <b className="text-green">{k.correct}</b> / {k.graded}
+                    {k.total > k.graded && <span className="text-grey-500"> (+{k.total - k.graded} 대기)</span>}
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       {filtered.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">조건에 맞는 문제 기록이 없습니다.</div>
       ) : (
@@ -89,6 +131,11 @@ export default function ProblemHistoryTab({ entries }: { entries: ProblemHistory
                   <span className="text-[10.5px] font-bold text-grey-500 border border-grey-200 rounded-full px-1.5 py-0.5">{FORMAT_LABEL[e.format]}</span>
                   <span className="text-[10.5px] font-bold text-grey-500 border border-grey-200 rounded-full px-1.5 py-0.5">{e.source === "homework" ? "과제" : "수업"}</span>
                   <GradeBadge entry={e} />
+                  {e.skillCode && (
+                    <span className="text-[10.5px] font-bold text-grey-500 border border-grey-200 rounded-full px-1.5 py-0.5" title={domainLabel(e.satDomain) ?? undefined}>
+                      {domainShort(e.satDomain)} › {skillLabel(e.skillCode)}
+                    </span>
+                  )}
                   <span className="text-[13px] text-ink flex-1 min-w-[200px] truncate">{snippet || "(본문 없음)"}</span>
                   <span className="text-[11.5px] text-grey-500 shrink-0">
                     {[e.subjectName, e.unitTitle, e.startsAt ? new Date(e.startsAt).toLocaleDateString("ko-KR") : null].filter(Boolean).join(" · ")}

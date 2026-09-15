@@ -28,6 +28,7 @@ import type {
 import LearningText from "@/app/session/[id]/LearningText";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import { stripInlineOptions } from "@/lib/problem-text";
+import { SKILL_CODES, domainShort, skillLabel } from "@/lib/problem-taxonomy";
 
 const OPTION_LABELS = ["A", "B", "C", "D", "E", "F"];
 
@@ -66,11 +67,15 @@ export default function CompositionPanel({
   const [composedProblems, setComposedProblems] = useState(composition.problems);
   // 2026-09-14 UAT: "문제를 클릭하면 문제를 볼 수 있어야 될 거 같아 간략하게라도" — 한 번에 하나만 펼친다.
   const [previewId, setPreviewId] = useState<string | null>(null);
+  // 분류로 좁혀 담기(2026-09-14) — 기술 코드 기준.
+  const [skillFilter, setSkillFilter] = useState("");
 
   // 후보에서 이미 담긴 것은 뺀다 — 같은 문제가 양쪽에 보이면 무엇을 눌러야 할지
   // 알 수 없다.
   const composedIds = new Set(composedProblems.map((p) => p.problemId));
-  const pickableProblems = problems.filter((p) => !composedIds.has(p.problemId));
+  const pickableAll = problems.filter((p) => !composedIds.has(p.problemId));
+  const pickableProblems = skillFilter ? pickableAll.filter((p) => p.skillCode === skillFilter) : pickableAll;
+  const skillsInPool = SKILL_CODES.filter((k) => pickableAll.some((p) => p.skillCode === k.code));
 
   async function takeProblem(problemId: string) {
     setBusy(true);
@@ -555,11 +560,31 @@ export default function CompositionPanel({
           이 회차의 키워드로 찾은, 공개된 문제입니다. 모자라도 자동으로 만들지 않습니다. 키워드로 자동으로 들어오는 문제는
           회차당 기본 20개까지이고(직접 담은 것은 세지 않음), 나머지는 여기서 골라 담습니다. 문제를 누르면 간략히 볼 수 있습니다.
         </p>
+        {skillsInPool.length > 0 && (
+          <label className="flex flex-wrap items-center gap-2 text-[12px] text-ink mb-2">
+            <span className="text-grey-500">세부 기술</span>
+            <select
+              aria-label="세부 기술로 좁히기"
+              value={skillFilter}
+              onChange={(e) => setSkillFilter(e.target.value)}
+              className="text-[12px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1 max-w-[320px]"
+            >
+              <option value="">모두 ({pickableAll.length})</option>
+              {skillsInPool.map((k) => (
+                <option key={k.code} value={k.code}>
+                  {k.label} ({pickableAll.filter((p) => p.skillCode === k.code).length})
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
         {pickableProblems.length === 0 ? (
           <p className="text-[12.5px] text-grey-500 bg-grey-100 rounded-lg px-4 py-4">
             {keywordIds.length === 0
               ? "키워드를 붙이면 해당하는 문제가 여기에 모입니다."
-              : "더 담을 문제가 없습니다."}
+              : skillFilter
+                ? "이 기술의 문제는 더 없습니다."
+                : "더 담을 문제가 없습니다."}
           </p>
         ) : (
           <ul className="border-[1.5px] border-grey-200 rounded-xl divide-y divide-grey-100">
@@ -577,6 +602,11 @@ export default function CompositionPanel({
                     >
                       {p.label}
                     </button>
+                    {p.skillCode && (
+                      <span className="text-[10.5px] font-bold px-1.5 py-0.5 rounded bg-grey-100 text-grey-500 shrink-0" title={skillLabel(p.skillCode) ?? undefined}>
+                        {domainShort(p.satDomain)} › {skillLabel(p.skillCode)}
+                      </span>
+                    )}
                     {p.difficulty && (
                       <span className="text-[10.5px] font-bold px-1.5 py-0.5 rounded bg-grey-100 text-grey-500 shrink-0">
                         {p.difficulty}

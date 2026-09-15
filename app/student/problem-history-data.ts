@@ -28,6 +28,9 @@ export type ProblemHistoryEntry = {
   correctIndex: number | null;
   acceptedAnswers: string[] | null;
   explanation: string | null;
+  /** 분류(2026-09-14) — 성취 기록의 기준. */
+  satDomain: string | null;
+  skillCode: string | null;
 };
 
 const one = (rel: unknown) => (Array.isArray(rel) ? rel[0] : rel) as Record<string, unknown> | null | undefined;
@@ -71,7 +74,7 @@ export async function loadProblemHistory(studentId: string): Promise<ProblemHist
     versionIds.length
       ? admin.from("problem_versions").select("id, passage, options, correct_index, explanation, answers, figure").in("id", versionIds)
       : Promise.resolve({ data: [] as Record<string, unknown>[] }),
-    admin.from("problems").select("id, format").in("id", problemIds),
+    admin.from("problems").select("id, format, sat_domain, skill_code").in("id", problemIds),
   ]);
 
   const sessionById = new Map(
@@ -83,6 +86,7 @@ export async function loadProblemHistory(studentId: string): Promise<ProblemHist
   const unitBySession = new Map((units ?? []).map((u) => [u.session_id as string, (one(u.unit)?.unit_title as string | undefined) ?? null]));
   const versionById = new Map((versions ?? []).map((v) => [v.id as string, v]));
   const formatById = new Map((problems ?? []).map((p) => [p.id as string, p.format as string]));
+  const classById = new Map((problems ?? []).map((p) => [p.id as string, { satDomain: (p.sat_domain as string | null) ?? null, skillCode: (p.skill_code as string | null) ?? null }]));
   const toFormat = (f: string | undefined, options: string[], answers: unknown): ProblemHistoryEntry["format"] => {
     if (f === "mc" || f === "spr" || f === "essay" || f === "math") return f;
     if (options.length > 0) return "mc";
@@ -116,6 +120,8 @@ export async function loadProblemHistory(studentId: string): Promise<ProblemHist
       correctIndex: graded ? ((v?.correct_index as number | null) ?? null) : null,
       acceptedAnswers: graded ? answers : null,
       explanation: graded ? ((v?.explanation as string | null) ?? null) : null,
+      satDomain: classById.get(r.problem_id as string)?.satDomain ?? null,
+      skillCode: classById.get(r.problem_id as string)?.skillCode ?? null,
     };
   });
 }

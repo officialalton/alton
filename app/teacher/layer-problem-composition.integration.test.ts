@@ -191,6 +191,28 @@ describe("관리자 기준본 문제 자동 구성", () => {
     expect(countOf(unitId)).toBe("21");
   });
 
+  // 2026-09-14 분류 — 회차 조건에 세부 기술 코드를 두면 그 기술의 문제만 자동으로 들어온다.
+  it("기술 코드 조건은 그 기술의 문제만 자동으로 담는다", () => {
+    const kw = makeKeyword();
+    const a = makeProblem(kw);
+    const b = makeProblem(kw);
+    psql(`update problems set skill_code = 'percentages' where id = '${a}';`);
+    psql(`update problems set skill_code = 'circles' where id = '${b}';`);
+    // 기술을 정하면 영역이 따라온다.
+    expect(psql(`select sat_domain from problems where id = '${a}';`)).toBe("problem_solving_data");
+    const unitId = makeCatalogUnit([]);
+    psql(
+      `insert into subject_template_unit_problem_criteria (unit_id, formats, difficulties, target_count, skill_codes)
+       values ('${unitId}', null, null, null, array['percentages'])
+       on conflict (unit_id) do update set skill_codes = excluded.skill_codes;`
+    );
+    psql(`insert into subject_template_unit_keywords (unit_id, keyword_id) values ('${unitId}', '${kw}');`);
+    psql(`select recompose_unit('catalog', '${unitId}');`);
+    expect(problemsOf(unitId)).toBe(`${a}:auto`);
+    // 자동 구성 후보 뷰에도 분류가 실린다.
+    expect(psql(`select skill_code from problem_auto_composition_candidates where problem_id = '${b}' limit 1;`)).toBe("circles");
+  });
+
   it("개수 조건을 정하면 그 수가 상한이다 — 20보다 크게도 잡을 수 있다", () => {
     const kw = makeKeyword();
     for (let i = 0; i < 22; i++) makeProblem(kw);
