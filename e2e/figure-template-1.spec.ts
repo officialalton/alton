@@ -227,3 +227,58 @@ test("템플릿 3: 지문(직선과 점) → AI 객체 데이터 → 검증 → 
   expect(box && box.x >= 0 && box.x + box.width <= 375).toBeTruthy();
   await page.screenshot({ path: `${OUT}/09-t3-student-mobile.png`, fullPage: true });
 });
+
+// ------------------------------------------------------------ 템플릿 4 — 표·데이터 그래프
+test("템플릿 4: 지문(표 자료) → AI 값 데이터 → 검증 → 표준 렌더(표) → 공개 → 학생 화면", async ({ page }, testInfo) => {
+  test.skip(!process.env.ANTHROPIC_API_KEY, "ANTHROPIC_API_KEY 없음 — 실제 모델 호출이 필요한 검증");
+  const passage = `The table shows the number of bottles inspected and the number of defective bottles for five production shifts. Shift 4 had 14 defective bottles out of 350 inspected. Based on the shift with the highest defect rate, which of the following is the closest estimate of the number of defective bottles in a day when 42,000 bottles are produced? [E2E T4 ${Date.now()}]`;
+  const problemId = psql(
+    `insert into problems (format, passage, subject_id, status, created_by, skill_type) values ('mc', '${passage.replace(/'/g, "''")}', '${SUBJECT_ID}', 'draft', 'aaaaaaaa-0000-0000-0000-000000000001', 'Problem-Solving and Data Analysis') returning id;`
+  );
+  psql(`update problem_versions set options = '["1,050","1,260","1,680","2,100"]'::jsonb, correct_index = 2, explanation = 'Shift 4: 14/350 = 4%. 4% of 42,000 = 1,680.' where problem_id = '${problemId}' and version_no = 1;`);
+
+  await loginAs(page, ACCOUNTS.admin);
+  await page.goto("/admin?tab=problem-bank");
+  await page.getByLabel("새 문제 과목").selectOption(SUBJECT_ID);
+  const head = passage.slice(0, 60);
+  await expect.poll(async () => (await rowTitles(page)).some((t) => t.startsWith(head)), { timeout: 30_000 }).toBe(true);
+  await page.getByTestId("bank-row-title").filter({ hasText: head }).first().click();
+  await expect(page.getByLabel("지문")).toHaveValue(passage);
+
+  await page.getByRole("button", { name: "AI로 표·그래프 데이터 만들기" }).click();
+  await expect(page.getByTestId("figure-preview")).toBeVisible({ timeout: 120_000 });
+  await page.getByTestId("figure-section").screenshot({ path: `${OUT}/10-t4-admin-preview.png` });
+  const issues = page.getByTestId("figure-issues");
+  if ((await issues.count()) > 0) {
+    testInfo.annotations.push({ type: "blocked-by-validation", description: await issues.innerText() });
+    await page.getByRole("button", { name: "초안 저장" }).click();
+    await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible();
+    await expect(page.getByLabel("그림 확인함")).toBeDisabled();
+    return;
+  }
+  await expect(page.getByText(/표준 렌더링 검증 통과/)).toBeVisible();
+  testInfo.annotations.push({ type: "figure", description: await page.getByLabel("그림 데이터").inputValue() });
+  await page.getByRole("button", { name: "초안 저장" }).click();
+  await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible();
+  const check = page.getByLabel("그림 확인함");
+  await expect(check).toBeEnabled();
+  await check.check();
+  await expect(page.getByText(/미리보기로 확인했다고 표시했습니다/)).toBeVisible();
+  await page.getByRole("button", { name: "공개하기" }).click();
+  await expect(page.getByText(/공개했습니다|공개됐습니다|공개되었습니다/)).toBeVisible({ timeout: 20_000 });
+  expect(psql(`select v.status || '|' || (v.figure->>'type') || '|' || (v.render_check->>'ok') from problem_versions v where v.problem_id = '${problemId}' order by v.version_no desc limit 1;`)).toBe("published|data|true");
+
+  const sessionId = startedSessionWith(problemId);
+  await page.context().clearCookies();
+  await loginAs(page, ACCOUNTS.student);
+  await page.goto(`/session/${sessionId}?tab=problems`);
+  await expect(page.getByTestId("problem-figure")).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByTestId("problem-figure").locator("table, svg")).toHaveCount(1);
+  await page.getByTestId("problem-sheet").screenshot({ path: `${OUT}/11-t4-student-desktop.png` });
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.reload();
+  await expect(page.getByTestId("problem-figure")).toBeVisible({ timeout: 30_000 });
+  const box = await page.getByTestId("problem-figure").boundingBox();
+  expect(box && box.x >= 0 && box.x + box.width <= 375).toBeTruthy();
+  await page.screenshot({ path: `${OUT}/12-t4-student-mobile.png`, fullPage: true });
+});

@@ -62,6 +62,7 @@
 7. **P3 8차** — 과제 답안·채점·문제 위 필기를 수업과 **분리**(source/context), **문제 화면 전체 필기 레이어**(수업·과제 공통), 채점 결과·점수 표시, 관리자 교재 탭 통합·새 교재 차단·노출용 이름·목차 접기.
 8. **P3 9차** — 문제 템플릿 ①~⑤(SPR / 표·수식 / 도형·그래프 데이터 렌더 + 그림 확인 게이트 / 그림 파일 첨부 / 유형 코드·문항 말투·메모·밑줄), 문제은행 난이도·`전체 공개`·자동 확장 칸. **실제 모델 호출 표본 10문항** 렌더 확인 → 영어 규칙·응답 정규화·라벨 위치 수정. AI 내용 오류(변 라벨 오기) 실례 확인 — 그림 확인 게이트가 필요한 이유.
 
+14. **P3 15차 — 템플릿 4 표·데이터 그래프**(표·숫자 목록·막대·선·히스토그램·산점도+추세선·상자그림, 한 원본 데이터, 값·항목·단위 참조 lint, `require_data`). 로컬 E2E 통과, Preview DB 게이트 실측. 다음: SAT 영역·세부 기술 코드 분류 모델(문제은행·자동 구성·성취 기록 공통) → 원 → 사각형·다각형·입체 → 좌표기하·복합 → 그래프/도형 선택지 → 수식·로마숫자 선택지 Block.
 13. **P3 14차 — 템플릿 3 좌표평면(객체 id)**: 점·직선·함수·선분·산점도+추세선, 라벨 후보 자리 배치(없으면 거부), 지문 좌표·이름·식 일치 lint, 옛 `coordinate_plane` 레거시화(`20261366`), 템플릿 1 → 공통 `Sheet` 이관. 로컬 E2E 통과. 제품 오너 확정: 수학 템플릿 전 범위(표·데이터 그래프, 원·사각형·좌표기하, 그래프/도형 선택지·복합 도형)를 이 로드맵에서 완결.
 12. **P3 13차 — 템플릿 2 삼각형·직각삼각형·합동/닮음**(관계형 스키마·표준형 배치·변/각/직각/높이/두 번째 삼각형·참조 lint·라벨 충돌), 공통 조판 `_layout.ts`. 로컬 E2E 통과. Preview 는 DB 게이트만 실측(UI 는 UAT 계정 필요).
 11. **P3 12차 — 표준 렌더링 엔진 템플릿 1(평행선·횡단선·각)** 끝까지: AI 는 관계만(`parallel_transversal`), 렌더러가 좌표·호·라벨 자리(충돌 시 거부), 검증 계층 `checkFigure`(지문 참조·중복·충돌·잘림·방위 표현·레거시·alt) → `render_check` 저장, 공개 게이트(`20261365`: ok + 그림 해시 일치 + 미리보기 확인, 좌표형 geometry 공개 불가=재생성 필요, 업로드 alt 필수). 관리자 편집기: 렌더 미리보기 우선, JSON 접힘. 로컬 E2E(실제 모델) 통과.
@@ -85,7 +86,7 @@
 - 오픈 전 blocker(변화 없음, 아카이브 참고): 실제 세금 계산, 실제 이메일 발송, Workspace 위임 계정 분리, SECURITY DEFINER anon 권한 감사, E2E 전용 fixture, `mark_expired_invites` cron.
 
 ## 7. 관련 문서
-- **표준 렌더링 엔진**(승인됨, 템플릿 1 구현): `docs/2026-09-14-standard-rendering-engine-design.md` + 표본 `docs/assets/2026-09-14-render-samples/`. AI=의미 데이터만, ALTON 렌더러=조판, 검증 계층=거부. 좌표형 `geometry` 는 레거시(표시만, 공개 불가). 템플릿 1·2·3 완료. 다음: 표·데이터 그래프 → 원·사각형·다각형·좌표기하 → 그래프/도형 선택지·복합 도형(전부 이 로드맵 범위).
+- **표준 렌더링 엔진**(승인됨, 템플릿 1 구현): `docs/2026-09-14-standard-rendering-engine-design.md` + 표본 `docs/assets/2026-09-14-render-samples/`. AI=의미 데이터만, ALTON 렌더러=조판, 검증 계층=거부. 좌표형 `geometry` 는 레거시(표시만, 공개 불가). 템플릿 1~4 완료(평행선·삼각형·좌표평면·표/데이터 그래프). 다음: 분류 모델(SAT 영역·기술 코드) → 원 → 사각형·다각형·입체 → 좌표기하·복합 → 그래프/도형 선택지 → 수식·로마숫자 선택지 Block(전부 이 로드맵 범위).
 
 - **남은 작업 전체 목록**: [`2026-09-14-remaining-work.md`](2026-09-14-remaining-work.md)(A 지금 UAT → B 콘텐츠·수업 → C 상담·결제·정산·문서 → D 운영·소통 → E 보안·데이터 수명 → F 출시 게이트).
 - 문제 템플릿 설계: [`2026-09-14-problem-template-design.md`](2026-09-14-problem-template-design.md) · 과제 통일: [`2026-09-14-homework-v3-unification.md`](2026-09-14-homework-v3-unification.md) · 문제 풀이·채점·PDF 텍스트: [`2026-09-14-problem-answer-grading-and-pdf-text-notes.md`](2026-09-14-problem-answer-grading-and-pdf-text-notes.md) · Drive 자료 설계: [`2026-09-14-drive-material-assets-design.md`](2026-09-14-drive-material-assets-design.md) · PDF 규격: [`2026-09-14-lesson-pdf-spec.md`](2026-09-14-lesson-pdf-spec.md) · 로드맵: [`2026-08-29-master-roadmap-v3.md`](2026-08-29-master-roadmap-v3.md) · 이전 이력 전체: [`history/CURRENT-archive-until-2026-09-14.md`](history/CURRENT-archive-until-2026-09-14.md).

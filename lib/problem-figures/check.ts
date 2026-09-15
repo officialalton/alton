@@ -6,6 +6,7 @@ import { LEGACY_FIGURE_TYPES, validateFigureSpec } from "./spec";
 import { lintParallelTransversalAgainstText, renderParallelTransversal, type FigureIssue } from "./templates/parallel-transversal";
 import { lintTriangleAgainstText, renderTriangle } from "./templates/triangle";
 import { lintPlaneAgainstText, renderPlane } from "./templates/coordinate-plane";
+import { lintDataAgainstText, renderData } from "./templates/data";
 
 export const RENDERER_VERSION = "std-1";
 
@@ -60,6 +61,11 @@ export function checkFigure(figure: unknown, passage: string): RenderCheck {
   if (spec.type === "plane") {
     const r = renderPlane(spec);
     issues.push(...r.issues, ...lintPlaneAgainstText(spec, passage));
+    return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
+  }
+  if (spec.type === "data") {
+    const r = renderData(spec);
+    issues.push(...r.issues, ...lintDataAgainstText(spec, passage));
     return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
   }
   return { ok: false, renderer: RENDERER_VERSION, checkedAt, issues: [{ code: "schema", message: `지원하지 않는 그림 type: ${(spec as { type: string }).type}` }] };
