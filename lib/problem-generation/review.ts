@@ -57,7 +57,7 @@ const DIFFICULTY_RUBRIC = `추정 난이도는 지문 길이·낯선 고유명�
 - 오답이 정답과 공유하는 핵심 정보의 정도(공유가 클수록 어렵다)
 - 자료·수식·도형을 올바르게 해석해야 하는 정도`;
 
-const DISTRACTOR_RUBRIC = `각 오답에 대해: 피상적으로 읽은 학생에게 왜 그럴듯한가(plausible_because), 지문·자료의 어느 정보와 일부 일치하는가(matches), 정답이 될 수 없는 정확한 이유(why_wrong), 오답 유형(kind: partial | scope | relation_distortion | speaker_confusion | evidence_off_question | opposite | irrelevant | sign_error | unit_error | step_missing | axis_misread | condition_ignored | formula_misuse | geometry_misapplied | other), 그리고 obvious(정반대 말·무관·all/never/only 같은 과장어만으로 바로 지워지는가).
+const DISTRACTOR_RUBRIC = `각 오답에 대해: 피상적으로 읽은 학생에게 왜 그럴듯한가(plausible_because), 지문·자료의 어느 정보와 일부 일치하는가(matches), 정답이 될 수 없는 정확한 이유(why_wrong), 오답 유형(kind: partial | scope | relation_distortion | speaker_confusion | evidence_off_question | opposite | irrelevant | sign_error | unit_error | step_missing | axis_misread | condition_ignored | formula_misuse | geometry_misapplied | other), 그리고 obvious. obvious 는 **지문을 한 번 읽은 학생이 근거를 따지지 않고도 지울 수 있을 때만** true 다(정반대 말, 지문과 무관한 내용, all/never/only 같은 과장만으로 이루어진 선택지). 정답이 아니라는 이유만으로, 또는 꼼꼼히 읽으면 틀렸음을 알 수 있다는 이유로 obvious 를 true 로 두지 않는다 — 그런 오답은 정상이다.
 Math 오답은 실제 풀이 오류(부호·단위 변환·한 단계 누락·축/눈금 오독·조건 무시·평균/비율/확률 계산 오류·도형 관계 오적용)에서 나와야 한다.`;
 
 export function normalizeSprAnswer(s: string): string {
