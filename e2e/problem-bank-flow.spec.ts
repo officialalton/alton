@@ -120,7 +120,9 @@ async function assertEditorShape(page: Page, c: Case) {
   await expect(editor.getByText("해설", { exact: true })).toBeVisible();
   await expect(editor.getByText("학생 화면 미리보기", { exact: true })).toBeVisible();
   await expect(page.getByLabel("질문")).not.toHaveValue("");
-  await expect(page.getByTestId("material-need")).toHaveAttribute("data-level", c.need);
+  // 패널 판정이 '권장'이던 기술은 생성된 본문이 그래프를 가리키면 편집 화면에서 '필수'로 올라간다(자료 포함으로 만들었으므로) — 둘 다 정상.
+  if (c.need === "recommended") await expect(page.getByTestId("material-need")).toHaveAttribute("data-level", /recommended|required/);
+  else await expect(page.getByTestId("material-need")).toHaveAttribute("data-level", c.need);
   if (c.system === "sat_rw") {
     await expect(page.getByLabel("정답 목록")).toHaveCount(0); // SPR 없음
     await expect(page.getByLabel("진술 목록")).toHaveCount(0); // 로마숫자 진술 없음

@@ -50,6 +50,8 @@ export type DataSpec = {
 const isNum = (n: unknown): n is number => typeof n === "number" && Number.isFinite(n);
 const isCell = (c: unknown): c is Cell => typeof c === "string" || isNum(c);
 const isName = (v: unknown): v is string => typeof v === "string" && v.trim().length > 0 && v.trim().length <= 40;
+// HTML 로 그리는 이름(표 열·양방향표 라벨·문장형 라벨)은 줄바꿈되므로 길어도 된다 — 실제 시험 표 열 이름은 40자를 넘는다(2026-09-15).
+const isText = (v: unknown, max: number): v is string => typeof v === "string" && v.trim().length > 0 && v.trim().length <= max;
 
 /** AI 가 `{kind:'table', table:{columns,rows}}` 처럼 종류 이름 아래에 필드를 넣어 보내면 위로 올린다(같은 뜻, 다른 모양). */
 export function normalizeDataInput(input: unknown): unknown {
@@ -80,7 +82,7 @@ export function validateData(input: unknown): { ok: true; spec: DataSpec } | { o
   switch (s.kind) {
     case "table": {
       // 첫 열 이름은 비울 수 있다(2×2 표의 모서리 칸).
-      if (!Array.isArray(s.columns) || s.columns.length < 2 || s.columns.length > 8 || !s.columns.every((c, i) => isName(c) || (i === 0 && c === ""))) return { ok: false, error: "table 은 columns(2~8개 이름) 가 필요합니다." };
+      if (!Array.isArray(s.columns) || s.columns.length < 2 || s.columns.length > 8 || !s.columns.every((c, i) => isText(c, 90) || (i === 0 && c === ""))) return { ok: false, error: "table 은 columns(2~8개, 각 90자 이내 이름) 가 필요합니다." };
       if (!Array.isArray(s.rows) || s.rows.length < 1 || s.rows.length > 20) return { ok: false, error: "table 은 rows(1~20행) 가 필요합니다." };
       for (const r of s.rows as unknown[]) if (!Array.isArray(r) || r.length !== (s.columns as unknown[]).length || !r.every(isCell)) return { ok: false, error: "table 의 각 행은 columns 와 같은 길이의 값 목록이어야 합니다." };
       if (new Set((s.columns as string[]).map((c) => c.trim().toLowerCase())).size !== (s.columns as string[]).length) return { ok: false, error: "table 의 열 이름이 중복됩니다." };
@@ -95,7 +97,7 @@ export function validateData(input: unknown): { ok: true; spec: DataSpec } | { o
       if (!Array.isArray(s.series) || s.series.length < 1 || s.series.length > 4) return { ok: false, error: `${s.kind} 는 series(1~4개) 가 필요합니다.` };
       for (const se of s.series as Record<string, unknown>[]) {
         if (!se || !Array.isArray(se.values) || se.values.length !== (s.categories as unknown[]).length || !se.values.every(isNum)) return { ok: false, error: "series[].values 는 categories 와 같은 개수의 숫자여야 합니다." };
-        if (se.name !== undefined && !isName(se.name)) return { ok: false, error: "series[].name 은 40자 이내 문자열입니다." };
+        if (se.name !== undefined && !isText(se.name, 60)) return { ok: false, error: "series[].name 은 60자 이내 문자열입니다." };
       }
       if ((s.series as unknown[]).length > 1 && (s.series as Record<string, unknown>[]).some((se) => !se.name)) return { ok: false, error: "계열이 둘 이상이면 범례를 위해 모든 series 에 name 이 필요합니다." };
       if (new Set((s.categories as string[]).map((c) => c.trim().toLowerCase())).size !== (s.categories as string[]).length) return { ok: false, error: "categories 가 중복됩니다." };
@@ -123,15 +125,15 @@ export function validateData(input: unknown): { ok: true; spec: DataSpec } | { o
       break;
     }
     case "two_way": {
-      if (!Array.isArray(s.rowLabels) || s.rowLabels.length < 2 || s.rowLabels.length > 6 || !s.rowLabels.every(isName)) return { ok: false, error: "two_way 는 rowLabels(2~6개) 가 필요합니다." };
-      if (!Array.isArray(s.colLabels) || s.colLabels.length < 2 || s.colLabels.length > 6 || !s.colLabels.every(isName)) return { ok: false, error: "two_way 는 colLabels(2~6개) 가 필요합니다." };
+      if (!Array.isArray(s.rowLabels) || s.rowLabels.length < 2 || s.rowLabels.length > 6 || !s.rowLabels.every((x) => isText(x, 90))) return { ok: false, error: "two_way 는 rowLabels(2~6개) 가 필요합니다." };
+      if (!Array.isArray(s.colLabels) || s.colLabels.length < 2 || s.colLabels.length > 6 || !s.colLabels.every((x) => isText(x, 90))) return { ok: false, error: "two_way 는 colLabels(2~6개) 가 필요합니다." };
       if (!Array.isArray(s.cells) || s.cells.length !== (s.rowLabels as unknown[]).length || !s.cells.every((r) => Array.isArray(r) && r.length === (s.colLabels as unknown[]).length && r.every((v) => isNum(v) && v >= 0))) return { ok: false, error: "two_way 의 cells 는 rowLabels × colLabels 크기의 0 이상 숫자 표여야 합니다." };
       if ((s.rowLabels as string[]).some((l) => /^total$/i.test(l)) || (s.colLabels as string[]).some((l) => /^total$/i.test(l))) return { ok: false, error: "two_way 의 합계(Total)는 넣지 않습니다 — 렌더러가 계산합니다." };
       break;
     }
     case "statement": {
       if (!Array.isArray(s.facts) || s.facts.length < 1 || s.facts.length > 8) return { ok: false, error: "statement 는 facts(1~8개) 가 필요합니다." };
-      for (const fct of s.facts as Record<string, unknown>[]) if (!fct || !isName(fct.label) || !isCell(fct.value) || (fct.unit !== undefined && !isName(fct.unit))) return { ok: false, error: "facts[] 는 label 과 value(숫자 또는 짧은 글), 선택 unit 이 필요합니다." };
+      for (const fct of s.facts as Record<string, unknown>[]) if (!fct || !isText(fct.label, 90) || !isCell(fct.value) || (fct.unit !== undefined && !isText(fct.unit, 40))) return { ok: false, error: "facts[] 는 label 과 value(숫자 또는 짧은 글), 선택 unit 이 필요합니다." };
       if (s.note !== undefined && (typeof s.note !== "string" || s.note.length > 300)) return { ok: false, error: "statement.note 는 300자 이내입니다." };
       break;
     }
