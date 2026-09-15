@@ -279,7 +279,7 @@ export function lintParallelTransversalAgainstText(spec: ParallelTransversalSpec
     if (!lineIds.has(id)) issues.push({ code: "ref_missing", message: `지문의 횡단선 '${id}' 가 도형 데이터에 없습니다.` });
   }
   for (const id of named(/\bpoints?\s+([A-Z])\b(?:\s*(?:and|,)\s*([A-Z])\b)?/g)) {
-    if (!pointIds.has(id)) issues.push({ code: "ref_missing", message: `지문의 점 '${id}' 가 도형 데이터에 없습니다(points 에 넣으세요).` });
+    if (!pointIds.has(id)) issues.push({ code: "ref_missing", message: `지문의 점 '${id}' 가 도형 데이터에 없습니다(points 에 넣으세요). 횡단선끼리 만나는 점·삼각형은 이 템플릿이 그리지 못합니다 — 그런 문항이면 재생성하거나 그림을 올리세요.` });
   }
   // 각: 숫자("118°"), 한 글자 변수("x°"), 괄호식("(2x + 10)°"). 문장을 통째로 잡지 않는다.
   for (const m of text.matchAll(/(\([^()]{1,24}\)|\b\d+(?:\.\d+)?|\b[a-z])\s*(?:°|degrees|\^\\?circ)/g)) {
