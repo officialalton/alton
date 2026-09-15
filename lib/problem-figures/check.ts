@@ -9,6 +9,7 @@ import { lintDataAgainstText, renderData } from "./templates/data";
 import { lintCircleAgainstText, renderCircle } from "./templates/circle";
 import { lintPolygonAgainstText, renderPolygon } from "./templates/polygon";
 import { lintSolidAgainstText, renderSolid } from "./templates/solid";
+import { lintCompositeAgainstText, renderComposite } from "./templates/composite";
 import { lintFigureChoice, lintFigureSet, renderFigureChoice, renderFigureSet } from "./templates/figure-choice";
 import { renderFigureSvg } from "./render";
 import { figureAlt } from "./alt";
@@ -78,6 +79,11 @@ export function checkFigure(figure: unknown, passage: string, options?: string[]
   if (spec.type === "polygon") {
     const r = renderPolygon(spec);
     issues.push(...r.issues, ...lintPolygonAgainstText(spec, passage));
+    return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
+  }
+  if (spec.type === "composite") {
+    const r = renderComposite(spec);
+    issues.push(...r.issues, ...lintCompositeAgainstText(spec, passage));
     return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
   }
   if (spec.type === "solid") {

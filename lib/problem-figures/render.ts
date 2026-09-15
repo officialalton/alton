@@ -6,6 +6,7 @@ import { renderData } from "./templates/data";
 import { renderCircle } from "./templates/circle";
 import { renderPolygon } from "./templates/polygon";
 import { renderSolid } from "./templates/solid";
+import { renderComposite } from "./templates/composite";
 import { renderFigureChoice, renderFigureSet } from "./templates/figure-choice";
 import { figureAlt } from "./alt";
 
@@ -53,6 +54,7 @@ export function renderFigureSvg(spec: FigureSpec): string {
   if (spec.type === "circle") return renderCircle(spec).svg;
   if (spec.type === "polygon") return renderPolygon(spec).svg;
   if (spec.type === "solid") return renderSolid(spec).svg;
+  if (spec.type === "composite") return renderComposite(spec).svg;
   if (spec.type === "figure_choice") return renderFigureChoice(spec, (c) => renderFigureSvg(c as FigureSpec)).markup;
   if (spec.type === "figure_set") return renderFigureSet(spec, (c) => renderFigureSvg(c as FigureSpec), (c) => figureAlt(c as FigureSpec)).markup; // 표·숫자 목록은 HTML, 그래프는 SVG — 모두 우리 마크업
   return spec.type === "coordinate_plane" ? renderPlane(spec) : renderGeometry(spec);

@@ -7,6 +7,7 @@ import { renderData } from "./templates/data";
 import { renderCircle } from "./templates/circle";
 import { renderPolygon } from "./templates/polygon";
 import { renderSolid } from "./templates/solid";
+import { renderComposite } from "./templates/composite";
 
 export function figureAlt(spec: FigureSpec): string | undefined {
   switch (spec.type) {
@@ -17,6 +18,7 @@ export function figureAlt(spec: FigureSpec): string | undefined {
     case "circle": return renderCircle(spec).alt;
     case "polygon": return renderPolygon(spec).alt;
     case "solid": return renderSolid(spec).alt;
+    case "composite": return renderComposite(spec).alt;
     case "image": return spec.alt;
     default: return undefined;
   }

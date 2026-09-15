@@ -417,8 +417,58 @@ test("그래프 선택지: 지문 → AI 그래프 4개 → 편향 검증 → �
   const result = await runDraftFigureFlow(page, testInfo, {
     passage: `Which of the following graphs in the xy-plane represents the equation y = -2x + 3? [E2E FC ${Date.now()}]`,
     options: ["A", "B", "C", "D"], correctIndex: 1, explanation: "Slope −2 and y-intercept 3.", skill: "Algebra",
-    button: "AI로 그래프 선택지 4개 만들기", expectType: "figure_choice", shots: ["26-fc-admin-preview.png", "27-fc-student-desktop.png", "28-fc-student-mobile.png"],
+    button: "AI로 그래프/도형 선택지 4개 만들기", expectType: "figure_choice", shots: ["26-fc-admin-preview.png", "27-fc-student-desktop.png", "28-fc-student-mobile.png"],
   });
   expect(["published", "blocked"]).toContain(result);
   if (result === "published") expect(await page.getByTestId("choice-figure-0").count()).toBe(1);
+});
+
+// ------------------------------------------------------------ 매트릭스 '부분' 3건 + E2E 없던 표현들
+const runAI = (name: string, opts: Parameters<typeof runDraftFigureFlow>[2]) =>
+  test(name, async ({ page }, testInfo) => {
+    test.skip(!process.env.ANTHROPIC_API_KEY, "ANTHROPIC_API_KEY 없음");
+    const result = await runDraftFigureFlow(page, testInfo, opts);
+    expect(["published", "blocked"]).toContain(result);
+    testInfo.annotations.push({ type: "result", description: result });
+  });
+
+runAI("부분1 비선형 연립 교점: 포물선+직선 → 공개 → 학생", {
+  passage: `The graphs of y = x² − 1 and y = x + 1 are shown in the xy-plane. The graphs intersect at the points (-1, 0) and (2, 3). What is the sum of the x-coordinates of the intersection points? [E2E NL ${Date.now()}]`,
+  options: ["-1", "1", "2", "3"], correctIndex: 1, explanation: "x² − 1 = x + 1 → x² − x − 2 = 0 → x = −1, 2; sum 1.", skill: "Advanced Math",
+  button: "AI로 좌표평면 데이터 만들기", expectType: "plane", shots: ["29-nl-admin.png", "30-nl-student.png", "31-nl-mobile.png"],
+});
+runAI("부분2 통계적 주장 판단: 연구 설계 자료 → 공개 → 학생", {
+  passage: `A researcher randomly assigned 200 plants from one greenhouse to two groups. Group A received a new fertilizer and Group B received the standard fertilizer. After 6 weeks, plants in Group A were taller on average. Which conclusion is best supported by the study design? [E2E SC ${Date.now()}]`,
+  options: ["The new fertilizer causes taller growth for plants in this greenhouse.", "The new fertilizer causes taller growth for all plants.", "No conclusion about cause can be drawn.", "Taller plants prefer the new fertilizer."], correctIndex: 0, explanation: "Random assignment supports a causal conclusion, but only for the population sampled (this greenhouse).", skill: "Problem-Solving and Data Analysis",
+  button: "AI로 표·그래프 데이터 만들기", expectType: "data", shots: ["32-sc-admin.png", "33-sc-student.png", "34-sc-mobile.png"],
+});
+runAI("부분3 포물선 그래프 선택지 → 정답 자리 → 공개 → 학생", {
+  passage: `Which of the following graphs in the xy-plane represents the equation y = x² − 2x − 3? [E2E PC ${Date.now()}]`,
+  options: ["A", "B", "C", "D"], correctIndex: 2, explanation: "Opens upward with vertex (1, −4) and x-intercepts −1 and 3.", skill: "Advanced Math",
+  button: "AI로 그래프/도형 선택지 4개 만들기", expectType: "figure_choice", shots: ["35-pc-admin.png", "36-pc-student.png", "37-pc-mobile.png"],
+});
+runAI("도형 선택지: 직각삼각형 고르기 → 공개 → 학생", {
+  passage: `Which of the following triangles is a right triangle? (Side lengths are shown.) [E2E TC ${Date.now()}]`,
+  options: ["A", "B", "C", "D"], correctIndex: 0, explanation: "3² + 4² = 5².", skill: "Geometry and Trigonometry",
+  button: "AI로 그래프/도형 선택지 4개 만들기", expectType: "figure_choice", shots: ["38-tc-admin.png", "39-tc-student.png", "40-tc-mobile.png"],
+});
+runAI("복수 자료 Figure A / Table B → 공개 → 학생", {
+  passage: `Figure A shows the graph of the line y = 2x − 1 in the xy-plane, and Table B lists four ordered pairs. Which ordered pair in Table B is NOT on the line in Figure A? [E2E FS ${Date.now()}]`,
+  options: ["(0, -1)", "(1, 1)", "(2, 4)", "(3, 5)"], correctIndex: 2, explanation: "2·2 − 1 = 3 ≠ 4.", skill: "Algebra",
+  button: "AI로 복수 자료(A/B) 만들기", expectType: "figure_set", shots: ["41-fs-admin.png", "42-fs-student.png", "43-fs-mobile.png"],
+});
+runAI("좌표기하·변환: 삼각형 평행이동 → 공개 → 학생", {
+  passage: `Triangle ABC has vertices A(-4, 1), B(-1, 1), and C(-1, 3). Triangle ABC is translated 5 units to the right and 2 units up to form triangle A′B′C′. What are the coordinates of C′? [E2E CG ${Date.now()}]`,
+  options: ["(4, 5)", "(4, 1)", "(-6, 5)", "(6, 4)"], correctIndex: 0, explanation: "(-1 + 5, 3 + 2) = (4, 5).", skill: "Geometry and Trigonometry",
+  button: "AI로 좌표평면 데이터 만들기", expectType: "plane", shots: ["44-cg-admin.png", "45-cg-student.png", "46-cg-mobile.png"],
+});
+runAI("데이터 그래프(막대) → 공개 → 학생", {
+  passage: `The bar graph shows the monthly sales, in dollars, for Store A and Store B from January to April. In March, Store B had sales of 1,600 dollars. By what percent did Store A's sales increase from March (1,100) to April (1,800)? [E2E BAR ${Date.now()}]`,
+  options: ["about 39%", "about 64%", "about 70%", "about 164%"], correctIndex: 1, explanation: "(1800 − 1100)/1100 ≈ 63.6%.", skill: "Problem-Solving and Data Analysis",
+  button: "AI로 표·그래프 데이터 만들기", expectType: "data", shots: ["47-bar-admin.png", "48-bar-student.png", "49-bar-mobile.png"],
+});
+runAI("복합 도형(정사각형 안 원, 음영) → 공개 → 학생", {
+  passage: `A circle with radius 5 is inscribed in a square with side length 10, as shown. What is the area of the shaded region between the square and the circle? [E2E CP ${Date.now()}]`,
+  options: ["100 − 25π", "100 − 10π", "25π − 100", "50 − 25π"], correctIndex: 0, explanation: "10² − π·5² = 100 − 25π.", skill: "Geometry and Trigonometry",
+  button: "AI로 도형 데이터 만들기(복합·음영)", expectType: "composite", shots: ["50-cp-admin.png", "51-cp-student.png", "52-cp-mobile.png"],
 });

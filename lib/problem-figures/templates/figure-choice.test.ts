@@ -45,6 +45,21 @@ describe("figure_choice — 그래프 선택지 4개", () => {
     const alt = { type: "plane", axes: { xmin: -5, xmax: 5, ymin: -5, ymax: 5, xstep: 1, ystep: 1 }, objects: [{ type: "line", points: [[-1, 5], [3, -3]] }] };
     expect(validateFigureSpec(alt).ok).toBe(true);
   });
+  it("포물선 그래프 선택지: 지문의 y = ax² + bx + c(꼭짓점형 포함)와 같은 그래프가 정답 자리에만 있어야 한다", () => {
+    const quad = (a: number, b: number, c: number): PlaneSpec => ({ type: "plane", axes: { x: { min: -5, max: 5 }, y: { min: -6, max: 8 } }, objects: [{ id: "f", kind: "function", fn: "quadratic", params: [a, b, c] }] });
+    const fc = { type: "figure_choice", choices: [quad(1, -2, -3), quad(-1, -2, -3), quad(1, 2, -3), quad(1, -2, 3)] };
+    expect(checkFigure(fc, "Which graph represents y = x² − 2x − 3?", ["A", "B", "C", "D"], 0).ok).toBe(true);
+    expect(checkFigure(fc, "Which graph represents y = x^2 - 2x - 3?", ["A", "B", "C", "D"], 2).issues.some((i) => i.code === "answer_mismatch")).toBe(true);
+    // 꼭짓점형 y = (x − 1)² − 4 = x² − 2x − 3
+    expect(checkFigure(fc, "Which graph represents y = (x - 1)^2 - 4?", ["A", "B", "C", "D"], 0).ok).toBe(true);
+    expect(placeCorrectChoice(fc as never, "y = x² − 2x − 3", 3).choices[3]).toEqual(quad(1, -2, -3));
+  });
+  it("도형 선택지: 삼각형 4개 — 같은 type·꼭짓점 수면 통과, 라벨은 허용", () => {
+    const tri = (labels: [string, string, string], right?: string) => ({ type: "triangle", vertices: ["A", "B", "C"], ...(right ? { kind: "right", rightAngleAt: right } : {}), sides: [{ between: ["A", "B"], label: labels[0] }, { between: ["B", "C"], label: labels[1] }, { between: ["C", "A"], label: labels[2] }], notToScale: true });
+    const fc = { type: "figure_choice", choices: [tri(["3", "4", "5"], "B"), tri(["3", "4", "6"]), tri(["5", "5", "5"]), tri(["2", "3", "4"])] };
+    expect(checkFigure(fc, "Which of the following triangles is a right triangle?", ["A", "B", "C", "D"], 0).ok).toBe(true);
+    expect(renderFigureSvg(fc as never)).toContain('data-choice="D"');
+  });
   it("스키마: 선택지 type 이 섞이거나 중첩 선택지·이미지는 거부", () => {
     expect(validateFigureSpec({ type: "figure_choice", choices: [line("a", 1, 0), { type: "triangle", vertices: ["A", "B", "C"] }] }).ok).toBe(false);
     expect(validateFigureSpec({ type: "figure_choice", choices: [choice(), choice()] }).ok).toBe(false);

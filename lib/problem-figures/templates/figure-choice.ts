@@ -15,18 +15,37 @@ export type FigureChoiceSpec = { type: "figure_choice"; choices: unknown[]; notT
 export type FigureSetSpec = { type: "figure_set"; figures: { id: string; title?: string; spec: unknown }[] };
 
 const LETTERS = ["A", "B", "C", "D", "E"];
-const CHILD_TYPES_ALLOWED = ["plane", "parallel_transversal", "triangle", "circle", "polygon", "solid", "data"];
+const CHILD_TYPES_ALLOWED = ["plane", "parallel_transversal", "triangle", "circle", "polygon", "solid", "composite", "data"];
 
 /** 지문의 일차식과 같은 그래프가 든 선택지 번호(정확히 하나일 때). */
+/** 지문의 식(일차 y = mx + b, 이차 y = ax² + bx + c, 절댓값 y = a|x − h| + k)과 같은 그래프가 든 선택지 번호들. */
+export function equationChoices(spec: FigureChoiceSpec, passage: string): number[] | null {
+  const text = passage.replace(/\$/g, "").replace(/−/g, "-").replace(/\^2/g, "²").replace(/\\left|\\right/g, "");
+  const num = (t: string | undefined, dflt: number) => (t === undefined || t === "" ? dflt : t === "-" ? -1 : t === "+" ? 1 : t.includes("/") ? t.split("/").map(Number).reduce((a, b) => a / b) : Number(t));
+  const objs = (c: unknown) => ((c as { objects?: Record<string, unknown>[] }).objects ?? []);
+  const eq = (a: unknown, b: number) => Math.abs(Number(a) - b) < 1e-6;
+  const quad = text.match(/y\s*=\s*(-?\d*(?:\.\d+)?(?:\/\d+)?)\s*x²\s*(?:([+-])\s*(\d+(?:\.\d+)?(?:\/\d+)?)\s*x)?\s*(?:([+-])\s*(\d+(?:\.\d+)?(?:\/\d+)?))?(?![\d.x])/);
+  if (quad) {
+    const a = num(quad[1], 1), b = quad[2] ? num(quad[2] + quad[3], 0) : 0, c = quad[4] ? num(quad[4] + quad[5], 0) : 0;
+    return spec.choices.map((ch, i) => (objs(ch).some((o) => o.kind === "function" && o.fn === "quadratic" && Array.isArray(o.params) && eq(o.params[0], a) && eq(o.params[1], b) && eq(o.params[2], c)) ? i : -1)).filter((i) => i >= 0);
+  }
+  const vertex = text.match(/y\s*=\s*(-?\d*(?:\.\d+)?)\s*\(\s*x\s*([+-])\s*(\d+(?:\.\d+)?)\s*\)²\s*(?:([+-])\s*(\d+(?:\.\d+)?))?/);
+  if (vertex) {
+    const a = num(vertex[1], 1), h = (vertex[2] === "-" ? 1 : -1) * Number(vertex[3]), k = vertex[4] ? num(vertex[4] + vertex[5], 0) : 0;
+    // a(x−h)²+k = ax² − 2ahx + (ah² + k)
+    const b = -2 * a * h, c = a * h * h + k;
+    return spec.choices.map((ch, i) => (objs(ch).some((o) => o.kind === "function" && o.fn === "quadratic" && Array.isArray(o.params) && eq(o.params[0], a) && eq(o.params[1], b) && eq(o.params[2], c)) ? i : -1)).filter((i) => i >= 0);
+  }
+  const lin = text.match(/y\s*=\s*(-?\d*(?:\.\d+)?(?:\/\d+)?)\s*x\s*(?:([+-])\s*(\d+(?:\.\d+)?(?:\/\d+)?))?(?![\d.x²^])/);
+  if (lin) {
+    const m = num(lin[1], 1), b = lin[2] ? num(lin[2] + lin[3], 0) : 0;
+    return spec.choices.map((ch, i) => (objs(ch).some((o) => (o.kind === "line" && eq(o.slope, m) && eq(o.intercept, b)) || (o.kind === "function" && o.fn === "linear" && Array.isArray(o.params) && eq(o.params[0], m) && eq(o.params[1], b))) ? i : -1)).filter((i) => i >= 0);
+  }
+  return null;
+}
 export function findEquationChoice(spec: FigureChoiceSpec, passage: string): number | null {
-  const text = passage.replace(/\$/g, "").replace(/−/g, "-");
-  const lin = text.match(/y\s*=\s*(-?\d+(?:\.\d+)?(?:\/\d+)?)?\s*x\s*(?:([+-])\s*(\d+(?:\.\d+)?(?:\/\d+)?))?(?![\d.x²^])/);
-  if (!lin) return null;
-  const num = (t: string) => (t.includes("/") ? t.split("/").map(Number).reduce((a, b) => a / b) : Number(t));
-  const m = lin[1] === undefined ? 1 : lin[1] === "-" ? -1 : num(lin[1]);
-  const b = lin[2] ? (lin[2] === "-" ? -1 : 1) * num(lin[3]) : 0;
-  const hits = spec.choices.map((c, i) => (((c as { objects?: Record<string, unknown>[] }).objects ?? []).some((o) => (o.kind === "line" && Math.abs(Number(o.slope) - m) < 1e-6 && Math.abs(Number(o.intercept) - b) < 1e-6) || (o.kind === "function" && o.fn === "linear" && Array.isArray(o.params) && Math.abs(Number(o.params[0]) - m) < 1e-6 && Math.abs(Number(o.params[1]) - b) < 1e-6)) ? i : -1)).filter((i) => i >= 0);
-  return hits.length === 1 ? hits[0] : null;
+  const hits = equationChoices(spec, passage);
+  return hits && hits.length === 1 ? hits[0] : null;
 }
 
 /** 정답 그래프를 correct_index 자리로 옮긴다(선택지 글은 'A~D' 같은 자리표라 그림만 옮겨도 뜻이 같다). */
@@ -61,21 +80,25 @@ export function validateFigureChoice(input: unknown, validateChild: ChildValidat
 export function lintFigureChoice(spec: FigureChoiceSpec, options: string[] | null | undefined, childCheck: ChildCheck, ctx?: { passage?: string; correctIndex?: number | null }): FigureIssue[] {
   const issues: FigureIssue[] = [];
   const n = spec.choices.length;
+  const first = spec.choices[0] as Record<string, unknown>;
   // 정답 그래프 일치: 지문의 y = mx + b (또는 y = ax² + bx + c) 는 정답 자리의 그림에만 있어야 한다.
   if (ctx?.passage && ctx.correctIndex !== null && ctx.correctIndex !== undefined && (spec.choices[0] as Record<string, unknown>).type === "plane") {
-    const text = ctx.passage.replace(/\$/g, "").replace(/−/g, "-");
-    const lin = text.match(/y\s*=\s*(-?\d+(?:\.\d+)?(?:\/\d+)?)?\s*x\s*(?:([+-])\s*(\d+(?:\.\d+)?(?:\/\d+)?))?(?![\d.x²^])/);
-    const num = (t: string) => (t.includes("/") ? t.split("/").map(Number).reduce((a, b) => a / b) : Number(t));
-    if (lin) {
-      const m = lin[1] === undefined ? 1 : lin[1] === "-" ? -1 : num(lin[1]);
-      const b = lin[2] ? (lin[2] === "-" ? -1 : 1) * num(lin[3]) : 0;
-      const has = spec.choices.map((c) => ((c as { objects?: Record<string, unknown>[] }).objects ?? []).some((o) => (o.kind === "line" && Math.abs(Number(o.slope) - m) < 1e-6 && Math.abs(Number(o.intercept) - b) < 1e-6) || (o.kind === "function" && o.fn === "linear" && Array.isArray(o.params) && Math.abs(Number(o.params[0]) - m) < 1e-6 && Math.abs(Number(o.params[1]) - b) < 1e-6)));
-      if (!has[ctx.correctIndex]) issues.push({ code: "answer_mismatch", message: `정답 자리 ${LETTERS[ctx.correctIndex]} 의 그림에 지문의 식 y = ${lin[1] ?? ""}x ${lin[2] ?? "+"} ${lin[3] ?? "0"} 이 없습니다 — 정답 인덱스와 그림 자리가 어긋났습니다.` });
-      has.forEach((h, i) => { if (h && i !== ctx.correctIndex) issues.push({ code: "answer_mismatch", message: `선택지 ${LETTERS[i]} 에도 정답 식의 그래프가 있습니다 — 정답이 둘이 됩니다.` }); });
+    const hits = equationChoices(spec, ctx.passage);
+    if (hits) {
+      if (!hits.includes(ctx.correctIndex)) issues.push({ code: "answer_mismatch", message: `정답 자리 ${LETTERS[ctx.correctIndex]} 의 그림에 지문의 식과 같은 그래프가 없습니다 — 정답 인덱스와 그림 자리가 어긋났습니다.` });
+      for (const i of hits) if (i !== ctx.correctIndex) issues.push({ code: "answer_mismatch", message: `선택지 ${LETTERS[i]} 에도 정답 식의 그래프가 있습니다 — 정답이 둘이 됩니다.` });
+    }
+  }
+  // 도형 선택지(삼각형·다각형·원·입체): 같은 종류, 같은 꼭짓점 수, 비율 표기 동일. 라벨은 문제의 조건이라 허용한다.
+  if (["triangle", "polygon", "circle", "solid", "parallel_transversal"].includes(String(first.type))) {
+    for (let i = 1; i < n; i++) {
+      const c = spec.choices[i] as Record<string, unknown>;
+      if (Array.isArray(first.vertices) && Array.isArray(c.vertices) && first.vertices.length !== c.vertices.length) issues.push({ code: "choice_bias", message: `선택지 ${LETTERS[i]} 의 꼭짓점 수가 선택지 A 와 다릅니다.` });
+      if (Boolean(first.notToScale) !== Boolean(c.notToScale)) issues.push({ code: "choice_bias", message: `선택지 ${LETTERS[i]} 의 'not drawn to scale' 표기가 선택지 A 와 다릅니다.` });
+      if (first.type === "polygon" && first.kind !== c.kind) { /* 사각형 종류가 다른 것은 문항의 요지일 수 있어 허용 */ }
     }
   }
   if (options && options.length !== n) issues.push({ code: "choice_count", message: `선택지 글 ${options.length}개와 선택지 그림 ${n}개의 수가 다릅니다.` });
-  const first = spec.choices[0] as Record<string, unknown>;
   for (let i = 0; i < n; i++) {
     const c = spec.choices[i] as Record<string, unknown>;
     if (c.type === "plane") {

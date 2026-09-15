@@ -394,7 +394,7 @@ export async function generateFigureForProblemAction(params: {
   passage: string;
   options: string[] | null;
   explanation: string;
-  kind: "plane" | "parallel_transversal" | "triangle" | "circle" | "polygon" | "solid" | "data" | "figure_choice";
+  kind: "plane" | "parallel_transversal" | "triangle" | "circle" | "polygon" | "solid" | "composite" | "data" | "figure_choice" | "figure_set";
   correctIndex?: number | null;
 }): Promise<BankResult<unknown>> {
   await requireAdmin();

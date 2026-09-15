@@ -5,3 +5,9 @@ import type { FigureIssue } from "./templates/_layout";
 export function checkFigureClient(spec: unknown, passage: string, options?: string[] | null, correctIndex?: number | null): FigureIssue[] {
   return checkFigure(spec, passage, options, correctIndex).issues;
 }
+
+import { figureAlt } from "./alt";
+import type { FigureSpec } from "./spec";
+export function figureAltClient(spec: unknown): string | null {
+  return figureAlt(spec as FigureSpec) ?? null;
+}

@@ -425,7 +425,9 @@ export function renderPlane(spec: PlaneSpec): { svg: string; alt: string; issues
         sheet.raw(`<circle cx="${f(p[0])}" cy="${f(p[1])}" r="3.5" fill="${color}"/>`);
         labelJobs.push({ text: name, anchor: p, color, what: `꼭짓점 ${name}`, prefer: [[p[0] + (dx / L) * 14, p[1] + (dy / L) * 14], ...around(p, 14)] });
       });
-      if (o.label) labelJobs.push({ text: o.label, anchor: [cxp, cyp], color, what: `도형 ${o.id} 라벨`, prefer: [[cxp, cyp], ...around([cxp, cyp], 16)] });
+      // 꼭짓점이 모두 이름 붙은 점이면 도형 이름 라벨(ABC)은 중복이라 두지 않는다(작은 삼각형 안에서 변과 겹친다 — E2E 실례).
+      const allNamed = src.vertices.every((v) => typeof v === "string");
+      if (o.label && !allNamed) labelJobs.push({ text: o.label, anchor: [cxp, cyp], color, what: `도형 ${o.id} 라벨`, prefer: [[cxp, cyp], ...around([cxp, cyp], 16)] });
       const opKo = o.kind === "transform" ? (o.op.type === "translate" ? `(${o.op.dx}, ${o.op.dy}) 평행이동` : o.op.type === "reflect" ? `${o.op.over} 대칭` : o.op.type === "dilate" ? `${o.op.k}배 확대` : `${o.op.deg}° 회전`) : "";
       altParts.push(o.kind === "polygon" ? `다각형 ${o.label ?? o.id}: ${src.vertices.map((v, i) => `${typeof v === "string" ? v : ""}(${f(verts[i][0])}, ${f(verts[i][1])})`).join(", ")}` : `${o.of} 의 ${opKo} 상 ${o.id}: ${verts.map(([x, y]) => `(${f(x)}, ${f(y)})`).join(", ")}`);
     } else if (o.kind === "circle") {

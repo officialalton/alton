@@ -70,6 +70,8 @@ import type { PolygonSpec } from "./templates/polygon";
 import { validatePolygon } from "./templates/polygon";
 import type { SolidSpec } from "./templates/solid";
 import { validateSolid } from "./templates/solid";
+import type { CompositeSpec } from "./templates/composite";
+import { validateComposite } from "./templates/composite";
 import type { FigureChoiceSpec, FigureSetSpec } from "./templates/figure-choice";
 import { validateFigureChoice, validateFigureSet } from "./templates/figure-choice";
 
@@ -77,10 +79,10 @@ import { validateFigureChoice, validateFigureSet } from "./templates/figure-choi
  * 2026-09-14 표준 렌더링 엔진: `geometry`(좌표 자유 입력)는 **레거시** — 읽기·표시만 하고 새 저장·공개는 막는다(재생성 필요).
  * 새 도형은 템플릿(`parallel_transversal`, …)으로 관계만 받는다.
  */
-export type FigureSpec = CoordinatePlaneSpec | GeometrySpec | ImageFigureSpec | ParallelTransversalSpec | TriangleSpec | PlaneSpec | DataSpec | CircleSpec | PolygonSpec | SolidSpec | FigureChoiceSpec | FigureSetSpec;
+export type FigureSpec = CoordinatePlaneSpec | GeometrySpec | ImageFigureSpec | ParallelTransversalSpec | TriangleSpec | PlaneSpec | DataSpec | CircleSpec | PolygonSpec | SolidSpec | CompositeSpec | FigureChoiceSpec | FigureSetSpec;
 /** 표준 템플릿 — AI 가 낼 수 있는 도형·자료 데이터 type. */
-export const TEMPLATE_FIGURE_TYPES: readonly string[] = ["parallel_transversal", "triangle", "circle", "polygon", "solid", "plane", "data"];
-export const GEOMETRY_TEMPLATE_TYPES: readonly string[] = ["parallel_transversal", "triangle", "circle", "polygon", "solid"];
+export const TEMPLATE_FIGURE_TYPES: readonly string[] = ["parallel_transversal", "triangle", "circle", "polygon", "solid", "composite", "plane", "data"];
+export const GEOMETRY_TEMPLATE_TYPES: readonly string[] = ["parallel_transversal", "triangle", "circle", "polygon", "solid", "composite"];
 /** 레거시(좌표 자유 입력) — 표시만, 새 공개 불가(2026-09-14 템플릿 3 이후 coordinate_plane 도 레거시). */
 export const LEGACY_FIGURE_TYPES: readonly string[] = ["geometry", "coordinate_plane"];
 
@@ -126,6 +128,7 @@ export function validateFigureSpec(input: unknown): { ok: true; spec: FigureSpec
   if (s.type === "circle") return validateCircle(s);
   if (s.type === "polygon") return validatePolygon(s);
   if (s.type === "solid") return validateSolid(s);
+  if (s.type === "composite") return validateComposite(s);
   if (s.type === "figure_choice") return validateFigureChoice(s, validateFigureSpec);
   if (s.type === "figure_set") return validateFigureSet(s, validateFigureSpec);
   if (s.type === "geometry") {
