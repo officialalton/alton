@@ -545,6 +545,91 @@ ${params.targets.map((t) => `${String.fromCharCode(65 + t.index)}) — ${t.reaso
 }
 
 /**
+ * 오답 자리 하나만 고친다(2026-09-15 제품 오너 재지시: "한 오답을 고쳐라"라는 자유 지시 대신, 먼저 구조화된 계획을
+ * 세우고 그 계획에 맞는 선택지 하나만 생성한다). 한 번의 호출로 계획(유지할 근거·오개념·왜 그럴듯한지·실제 틀리는
+ * 지점·오류 유형)과 새 선택지 텍스트를 함께 받는다 — 절대 다른 오답이나 정답을 함께 고치지 않는다.
+ * 호출자가 정답·다른 선택지와의 중복 및 오류 유형 충족 여부를 결정적으로 검사한다.
+ */
+export async function repairOneDistractorCore(params: {
+  skillType: string;
+  subjectName: string;
+  difficulty: ProblemDifficulty;
+  stimulus: string;
+  question: string;
+  options: string[];
+  correctIndex: number;
+  explanation: string;
+  index: number;
+  reason: string;
+  /** 이미 시도했다가 실패한 이전 텍스트(있으면 같은 결과를 피하도록 안내). */
+  avoid?: string[];
+}): Promise<
+  | { ok: true; text: string; plan: { evidenceKept: string; misconception: string; whyPlausible: string; actualFlaw: string; errorType: string } }
+  | { ok: false; error: string }
+> {
+  const otherOptions = params.options.map((o, i) => (i === params.index ? null : o)).filter((o): o is string => o !== null);
+  const message = await getAnthropic().messages.create({
+    model: "claude-sonnet-5",
+    max_tokens: 700,
+    tools: [
+      {
+        name: "repair_one_distractor",
+        description: "오답 선택지 딱 하나만 계획을 세운 뒤 다시 쓴다. 지문·질문·정답·다른 선택지는 건드리지 않는다.",
+        input_schema: {
+          type: "object",
+          properties: {
+            evidence_kept: { type: "string", description: "이 오답이 유지해야 할 지문 근거 또는 자료 값." },
+            misconception: { type: "string", description: "학생이 빠질 수 있는 구체적 오개념 하나." },
+            why_plausible: { type: "string", description: "그 오개념이 정답처럼 보이는 이유." },
+            actual_flaw: { type: "string", description: "실제로 틀리는 지점(정답과 갈라지는 지점)." },
+            error_type: { type: "string", description: "다른 세 선택지와 겹치지 않는 오류 유형(예: 범위·인과·강도·시간·화자·조건·부분계산·단위·부호)." },
+            text: { type: "string", description: "위 계획을 반영한 새 선택지 문장." },
+          },
+          required: ["evidence_kept", "misconception", "why_plausible", "actual_flaw", "error_type", "text"],
+        },
+      },
+    ],
+    tool_choice: { type: "tool", name: "repair_one_distractor" },
+    messages: [
+      {
+        role: "user",
+        content: `아래 SAT/AP 문항의 오답 선택지 ${String.fromCharCode(65 + params.index)}) 하나만 고칩니다. 지문·질문·정답·다른 선택지·해설은 그대로 둡니다.
+- 과목: ${params.subjectName} · 유형: ${params.skillType} · 난이도: ${params.difficulty}
+
+지문/자료: ${params.stimulus}
+질문: ${params.question}
+선택지:
+${params.options.map((o, i) => `${String.fromCharCode(65 + i)}) ${o}${i === params.correctIndex ? " (정답)" : i === params.index ? " ← 이 자리만 고친다" : ""}`).join("\n")}
+해설: ${params.explanation}
+
+고칠 사유: ${params.reason}
+${params.avoid?.length ? `이전 시도가 실패했습니다(중복 또는 오류 유형 불충족) — 다음과 다르게 쓰세요: ${params.avoid.join(" / ")}` : ""}
+
+먼저 계획(유지할 근거, 오개념, 왜 그럴듯한지, 실제 틀리는 지점, 다른 선택지와 겹치지 않는 오류 유형)을 세운 뒤, 그 계획을 반영한 선택지 문장 하나만 쓰세요. 정답이나 다른 선택지와 문구·의미가 겹치면 안 됩니다.`,
+      },
+    ],
+  });
+  const toolUse = message.content.find((c) => c.type === "tool_use");
+  if (!toolUse || toolUse.type !== "tool_use") return { ok: false, error: "오답 수정 응답을 처리할 수 없습니다." };
+  const input = toolUse.input as { evidence_kept?: string; misconception?: string; why_plausible?: string; actual_flaw?: string; error_type?: string; text?: string };
+  const text = (input.text ?? "").trim();
+  if (!text) return { ok: false, error: "새 선택지가 비어 있습니다." };
+  const normalize = (s: string) => s.trim().toLowerCase().replace(/\s+/g, " ");
+  if (otherOptions.some((o) => normalize(o) === normalize(text))) return { ok: false, error: "정답 또는 다른 선택지와 중복됩니다." };
+  return {
+    ok: true,
+    text,
+    plan: {
+      evidenceKept: input.evidence_kept ?? "",
+      misconception: input.misconception ?? "",
+      whyPlausible: input.why_plausible ?? "",
+      actualFlaw: input.actual_flaw ?? "",
+      errorType: input.error_type ?? "",
+    },
+  };
+}
+
+/**
  * 범위가 명확한 부분 수정(2026-09-15 제품 오너: "부분 수정이 기본 경로"). 빈칸 개수·수식 미닫힘·선택지 개수처럼
  * 지문/질문/선택지/진술/해설 중 **일부 필드만** 고치면 되는 계약 실패에 쓴다. 자료(figure)·정답의 타당성 자체가
  * 걸린 문제는 이 경로로 다루지 않는다(구조적 실패로 분류되어 전체 재생성으로 간다).

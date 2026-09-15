@@ -3,7 +3,7 @@
 //   생성(core) → 자료 필요하면 자료 생성 → 유형별 품질 계약(다섯 연결) → 독립 품질 검사(정답·오답 품질·추정 난이도)
 //   → 통과한 것만 accepted. 걸리면 사유를 피드백으로 1회 재생성 → 재검사. 부족분은 1회 재생성.
 // 저장은 호출자가 한다(서버 액션은 DB 에, 스크립트는 보고서에).
-import { generateSectionProblemsCore, regenerateProblemCore, generateFigureForProblemCore, repairDistractorsCore, repairFieldsCore, type FigurePolicy, type ProblemDifficulty, type ProblemFormat } from "./core";
+import { generateSectionProblemsCore, regenerateProblemCore, generateFigureForProblemCore, repairOneDistractorCore, repairFieldsCore, type FigurePolicy, type ProblemDifficulty, type ProblemFormat } from "./core";
 import { reviewProblemIndependently, classifyReviewIssues, type IndependentReview, type QualityRecord, type DistractorRationale, type DistractorKind } from "./review";
 import { checkQualityContract } from "@/lib/problem-quality-contract";
 import { judgeMaterialNeed, materialBlocker } from "@/lib/problem-material-need";
@@ -48,6 +48,16 @@ export type PipelineResult = {
     distractorRepairs: number; distractorRepairsResolved: number; fieldRepairs: number; fieldRepairsResolved: number; held: number;
     /** 문항 하나당 평균 모델 호출 수(생성 1 + 자료·재생성·부분수정·독립검사 전부 포함) — 보고용. */
     modelCalls: number;
+    /** 계약·독립검사 모두 한 번에 통과해 어떤 보정도 필요 없었던 문항 수(2026-09-15: 첫 생성 통과율 분리 보고). */
+    firstPassCount: number;
+    /** 게이트를 거친 후보(생성+재생성으로 얻은 모든 시도) 총 수 — 통과율 분모. */
+    candidatesEvaluated: number;
+    /** 생성 단계가 빈 배열/무응답을 반환한 횟수와 재시도 결과(원인 텍스트 포함, 2026-09-15). */
+    emptyResponses: { cause: string; retried: boolean; resolved: boolean }[];
+    /** 요청 수보다 적게 반환된 경우 유형·사유 기록(2026-09-15). */
+    underReturned: { requested: number; returned: number; reason: string }[];
+    /** 보강 대기 한도(요청 수) 초과로 폐기된 후보 수. */
+    heldOverflowDiscarded: number;
   };
 };
 
@@ -69,7 +79,13 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
   const requested = Math.max(1, Math.min(10, params.count));
   const accepted: Accepted[] = [];
   const failures: Failure[] = [];
-  const stats = { requested, generated: 0, accepted: 0, regenerated: 0, regenerationResolved: 0, refilled: 0, distractorRepairs: 0, distractorRepairsResolved: 0, fieldRepairs: 0, fieldRepairsResolved: 0, held: 0, modelCalls: 0 };
+  const stats = {
+    requested, generated: 0, accepted: 0, regenerated: 0, regenerationResolved: 0, refilled: 0, distractorRepairs: 0, distractorRepairsResolved: 0,
+    fieldRepairs: 0, fieldRepairsResolved: 0, held: 0, modelCalls: 0, firstPassCount: 0, candidatesEvaluated: 0,
+    emptyResponses: [] as { cause: string; retried: boolean; resolved: boolean }[],
+    underReturned: [] as { requested: number; returned: number; reason: string }[],
+    heldOverflowDiscarded: 0,
+  };
   const held: Held[] = [];
   const countCall = () => { stats.modelCalls += 1; };
   const skillCode = params.skillCode ?? null;
@@ -111,6 +127,7 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
     let stimulus = g.stimulus ?? g.passage;
     let question = g.question ?? null;
     let text = composeProblemText(stimulus, question);
+    let usedCorrection = depth > 0;
     // 어려움 문항은 오답 기준이 엄격해 한 번의 보완으로 부족한 경우가 많다 — 재생성을 2회까지 허용한다.
     const maxDepth = params.difficulty === "hard" ? 2 : 1;
     const fail = async (stage: Failure["stage"], reason: string): Promise<GateOutcome> => {
@@ -155,6 +172,7 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
       if (!contract.ok && !Array.from(new Set(contract.issues.map((i) => classifyContractIssue(i.code)))).some((k) => k === "structural" || k === "figure")) {
         // 범위가 명확한 문제(빈칸·수식·선택지 개수 등)만 남았으면 그 필드만 고친다(2026-09-15: "부분 수정이 기본 경로").
         stats.fieldRepairs += 1;
+        usedCorrection = true;
         countCall();
         try {
           const repaired = await repairFieldsCore({
@@ -204,30 +222,38 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
       }
       if (review) {
         let issues = classifyReviewIssues(review, params.difficulty, params.format);
-        // 오답 품질**만** 걸렸으면(정답·난이도·기타 지적은 문제없음) 문항 전체를 다시 만들지 않고 그 자리만 고쳐 재검사한다
-        // (2026-09-15 제품 오너: "부분 수정이 기본 경로" — 해소율이 전체 재생성보다 훨씬 높다).
+        // 오답 품질**만** 걸렸으면(정답·난이도·기타 지적은 문제없음) 문항 전체를 다시 만들지 않고 자리별로 고쳐 재검사한다
+        // (2026-09-15 제품 오너 재지시: 한 번의 호출에서 네 오답을 통째로 고치지 않는다 — 실패한 선택지 하나당
+        //  구조화된 계획을 세운 뒤 그 자리 하나만 생성하는 별도 호출을 보내며, 상한은 자리당 최대 두 번이다).
         if (issues.reasons.length && !issues.hasStructuralIssue && issues.distractorTargets.length && params.format === "mc" && g.options && g.correctIndex !== null) {
-          stats.distractorRepairs += 1;
-          countCall();
-          try {
-            const repaired = await repairDistractorsCore({
-              skillType: params.skillType, subjectName: params.subjectName, difficulty: params.difficulty, stimulus: text, question: question ?? "",
-              options: g.options, correctIndex: g.correctIndex, explanation: g.explanation, targets: issues.distractorTargets,
-            });
-            if (repaired.ok) {
-              g.options = repaired.options;
-              const reReview = await runReview();
-              const reIssues = classifyReviewIssues(reReview, params.difficulty, params.format);
-              if (!reIssues.reasons.length) { stats.distractorRepairsResolved += 1; review = reReview; issues = reIssues; }
-              else { review = reReview; issues = reIssues; }
+          usedCorrection = true;
+          for (const target of issues.distractorTargets) {
+            const attemptsAvoid: string[] = [];
+            for (let attempt = 0; attempt < 2; attempt += 1) {
+              stats.distractorRepairs += 1;
+              countCall();
+              try {
+                const repaired = await repairOneDistractorCore({
+                  skillType: params.skillType, subjectName: params.subjectName, difficulty: params.difficulty, stimulus: text, question: question ?? "",
+                  options: g.options!, correctIndex: g.correctIndex!, explanation: g.explanation, index: target.index, reason: target.reason, avoid: attemptsAvoid,
+                });
+                if (repaired.ok) { g.options![target.index] = repaired.text; stats.distractorRepairsResolved += 1; break; }
+                attemptsAvoid.push(repaired.error);
+              } catch (e) {
+                console.error("[pipeline] 오답 부분 수정 오류:", target.index, e instanceof Error ? e.message : e);
+                break;
+              }
             }
-          } catch (e) {
-            console.error("[pipeline] 오답 부분 수정 오류:", e instanceof Error ? e.message : e);
           }
+          countCall();
+          const reReview = await runReview();
+          review = reReview;
+          issues = classifyReviewIssues(reReview, params.difficulty, params.format);
         }
         if (issues.reasons.length) {
-          if (!issues.hasStructuralIssue && issues.distractorTargets.length) {
-            // 부분 수정으로도 안 남은 문제가 오답 품질뿐이다 — 문항 전체를 다시 만들지 않고 별도 대기함으로 보낸다(2026-09-15: "전체 문항 재생성은 중단").
+          // 보강 대기는 좁게 운영한다(2026-09-15): 지문·질문·정답·자료 계약과 독립 풀이 검사는 통과했고,
+          // 남은 실패가 정확히 오답 하나 또는 둘뿐일 때만 대기함으로 보낸다. 그 밖은 전부 폐기(사유만 집계, 저장 안 함).
+          if (!issues.hasStructuralIssue && issues.distractorTargets.length >= 1 && issues.distractorTargets.length <= 2) {
             heldReasons = issues.reasons;
           } else {
             return fail("review", issues.reasons.join(" / "));
@@ -263,6 +289,7 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
       reviewedAt: new Date().toISOString(),
     };
     if (heldReasons) return { kind: "held", quality, reasons: heldReasons };
+    if (!usedCorrection) stats.firstPassCount += 1;
     return { kind: "accepted", quality };
   };
 
@@ -277,9 +304,16 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
     return { accepted, held, failures, stats };
   }
   stats.generated += generated.length;
+  if (generated.length === 0) stats.emptyResponses.push({ cause: "generate 단계가 빈 배열을 반환", retried: false, resolved: false });
+  else if (generated.length < initialCount) stats.underReturned.push({ requested: initialCount, returned: generated.length, reason: "1차 생성이 요청보다 적게 반환" });
   const record = (g: GeneratedProblem, outcome: GateOutcome) => {
+    stats.candidatesEvaluated += 1;
     if (outcome.kind === "accepted") { accepted.push({ problem: g, quality: outcome.quality }); stats.accepted += 1; }
-    else if (outcome.kind === "held") { held.push({ problem: g, quality: outcome.quality, reasons: outcome.reasons }); stats.held += 1; }
+    else if (outcome.kind === "held") {
+      // 보강 대기는 한 번의 요청에서 요청 수를 넘길 수 없다(2026-09-15: 목표는 대기함이 요청 수의 10% 이하).
+      if (held.length >= requested) { stats.heldOverflowDiscarded += 1; return; }
+      held.push({ problem: g, quality: outcome.quality, reasons: outcome.reasons }); stats.held += 1;
+    }
   };
   for (const g of generated) {
     if (stats.accepted >= requested) break;
@@ -287,15 +321,21 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
   }
 
   if (stats.accepted < requested) {
+    const refillCount = Math.min(10, requested - stats.accepted + (params.difficulty === "hard" ? 1 : 0));
     try {
-      const refill = await generate(Math.min(10, requested - stats.accepted + (params.difficulty === "hard" ? 1 : 0)));
+      const refill = await generate(refillCount);
       stats.generated += refill.length;
       stats.refilled += refill.length;
+      if (refill.length === 0) stats.emptyResponses.push({ cause: "부족분 재생성이 빈 배열을 반환", retried: false, resolved: false });
+      else if (refill.length < refillCount) stats.underReturned.push({ requested: refillCount, returned: refill.length, reason: "부족분 재생성이 요청보다 적게 반환" });
       for (const g of refill) { if (stats.accepted >= requested) break; record(g, await gate(g, 0)); }
     } catch (e) {
-      failures.push({ skillCode, stage: "generate", reason: `부족분 재생성 실패: ${e instanceof Error ? e.message : "오류"}`, resolved: false, snippet: "" });
+      const message = e instanceof Error ? e.message : "오류";
+      stats.emptyResponses.push({ cause: `부족분 재생성 실패: ${message}`, retried: true, resolved: false });
+      failures.push({ skillCode, stage: "generate", reason: `부족분 재생성 실패: ${message}`, resolved: false, snippet: "" });
     }
   }
+  if (stats.accepted < requested) stats.underReturned.push({ requested, returned: stats.accepted, reason: "게이트 통과분이 요청 수 미달" });
   // 평균 모델 호출 수 — 생성·자료·재생성·부분수정·독립검사를 통틀어, 실제로 뭔가를 얻은 문항(통과+대기) 하나당.
   const totalOutputs = stats.accepted + stats.held;
   const avgModelCalls = totalOutputs > 0 ? Math.round((stats.modelCalls / totalOutputs) * 100) / 100 : stats.modelCalls;
