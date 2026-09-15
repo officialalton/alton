@@ -41,10 +41,11 @@ import type { AdminSubject, SubjectKeyword } from "./subject-data";
 //   * 관리자가 데이터 구조를 판단하지 않는다 — 자료 필요성은 시스템이 판정해 이유와 함께 보인다.
 //   * 복수 AI 생성도 단건과 같은 계약(자료/지문·질문·답안·정답·해설)이고, 어긴 결과는 저장하지 않고 사유와 함께 분리한다.
 
-type Bucket = "working" | "published" | "archived";
+type Bucket = "working" | "review" | "published" | "archived";
 
 const BUCKETS: { key: Bucket; label: string; hint: string }[] = [
   { key: "working", label: "생성", hint: "초안과 확인 중인 문제입니다. 아직 수업에 쓰이지 않습니다." },
+  { key: "review", label: "오답 보강 대기", hint: "지문·질문·정답·자료는 검증을 통과했고 오답만 보강하면 되는 초안입니다. 공개·자동 구성·학생 화면에 들어가지 않습니다. 오답을 고쳐 저장한 뒤 '다시 검사'를 눌러 통과하면 일반 초안으로 바뀝니다." },
   { key: "published", label: "공개", hint: "지금 공개된 내용입니다. 회차 구성 후보가 됩니다." },
   { key: "archived", label: "보관", hint: "보관된 문제입니다. 과거 기록은 그대로 남습니다." },
 ];
@@ -94,12 +95,13 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
   const [busy, setBusy] = useState(false);
 
   const archived = bucket === "archived";
+  const reviewOnly = bucket === "review";
 
   const reload = useCallback(async () => {
     setError(null);
     try {
       const [rows, a] = await Promise.all([
-        listBankProblemsAction({ ...filter, archived: archived || undefined }),
+        listBankProblemsAction({ ...filter, archived: archived || undefined, repairStatus: reviewOnly ? "needs_distractor_repair" : undefined }),
         problemQuestionAuditAction(filter.subjectId),
       ]);
       setProblems(rows);
@@ -108,7 +110,7 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
       setProblems(null);
       setError("문제 목록을 불러오지 못했습니다.");
     }
-  }, [filter, archived]);
+  }, [filter, archived, reviewOnly]);
 
   useEffect(() => {
     void reload();
@@ -146,6 +148,7 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
   const visible = (problems ?? []).filter((p) => {
     if (bucket === "archived") return true;
     if (bucket === "published") return p.workState === "published";
+    if (bucket === "review") return p.draft?.repairStatus === "needs_distractor_repair";
     return p.workState === "draft" || p.workState === "in_review" || p.workState === "none";
   });
   const bucketHint = BUCKETS.find((b) => b.key === bucket)?.hint ?? "";
@@ -240,7 +243,7 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
               await reload();
               if (!result.ok) setError(result.error);
               else {
-                setNotice(`${result.value.created}개를 초안으로 만들었습니다. 내용을 확인한 뒤 공개하세요.${result.value.failures.length ? ` ${result.value.failures.length}개는 계약(자료/지문·질문·답안·정답·해설)을 어겨 저장하지 않았습니다.` : ""}`);
+                setNotice(`${result.value.created}개를 초안으로 만들었습니다. 내용을 확인한 뒤 공개하세요.${result.value.held ? ` ${result.value.held}개는 지문·질문·정답·자료는 통과했지만 오답 보강이 필요해 '오답 보강 대기'에 넣었습니다.` : ""}${result.value.failures.length ? ` ${result.value.failures.length}개는 계약(자료/지문·질문·답안·정답·해설)을 어겨 저장하지 않았습니다.` : ""}`);
                 if (result.value.failures.length) setError(`저장하지 않은 결과: ${result.value.failures.join(" / ")}`);
               }
             } catch {

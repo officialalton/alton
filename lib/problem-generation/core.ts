@@ -69,7 +69,7 @@ export async function generateSectionProblemsCore(params: {
   skillCode?: string;
   /** 자료가 빠진(또는 규격에 안 맞는) 결과를 버리지 않고 figure:null 로 돌려준다 — 호출자가 2차 자료 생성으로 채운다(문제은행, 2026-09-15). */
   keepFigureless?: boolean;
-}): Promise<(Omit<DocProblem, "id" | "keywords"> & { stimulus?: string; question?: string | null; needsFigure?: boolean; distractorRationales?: { index: number; plausible_because: string; matches: string; why_wrong: string; kind: string }[]; difficultyRationale?: string })[]> {
+}): Promise<(Omit<DocProblem, "id" | "keywords"> & { stimulus?: string; question?: string | null; needsFigure?: boolean; distractorRationales?: { index: number; plausible_because: string; matches: string; why_wrong: string; kind: string }[]; difficultyRationale?: string; design?: { key_relations?: string[]; answer_uses_relations?: string; distractor_design?: { index: number; relation: string; error_type: string }[]; target_difficulty_note?: string } | null })[]> {
   const { sectionTitle, subjectName, skillType, difficulty, format, count } = params;
   const skillMeta = params.skillCode ? SKILL_BY_CODE.get(params.skillCode) ?? null : null;
   const ruleSkill = findProblemSkill(skillType) ?? (skillMeta ? findProblemSkill(skillMeta.legacySkill) : null);
@@ -154,8 +154,30 @@ export async function generateSectionProblemsCore(params: {
                     type: "string",
                     description: "이 문항이 요청 난이도인 이유 — 추론 단계 수, 종합해야 하는 문장·자료 수, 핵심 관계(원인/결과·조건·범위·비교·화자·시간)의 미묘함, 오답이 정답과 공유하는 정보, 자료 해석 부담. 지문 길이·어휘 난도는 근거가 아니다.",
                   },
+                  design: {
+                    type: "object",
+                    description: "어려움(hard) 문항 전용 설계 — 지문을 쓰기 **전에** 먼저 정한다(2026-09-15). 이 설계에 맞춰 지문·질문·선택지를 쓴다.",
+                    properties: {
+                      key_relations: { type: "array", items: { type: "string" }, description: "학생이 종합해야 하는 핵심 관계 2~3개(원인/결과·조건·범위·비교·화자 관점·시간 관계 등). 한국어로 간단히." },
+                      answer_uses_relations: { type: "string", description: "정답이 이 관계들을 어떻게 함께 만족하는지." },
+                      distractor_design: {
+                        type: "array",
+                        items: {
+                          type: "object",
+                          properties: {
+                            index: { type: "number" },
+                            relation: { type: "string", description: "이 오답이 부분적으로 맞춘 관계(key_relations 중 하나 또는 그 일부)." },
+                            error_type: { type: "string", description: "어디서 틀렸는가: scope(범위 과장/축소) | causal(인과 왜곡) | intensity(강도 왜곡) | temporal(시간 관계 왜곡) | speaker(화자 혼동) | condition(조건 무시) | partial_computation(부분 계산) | unit(단위 오류) | sign(부호 오류) | other." },
+                          },
+                          required: ["index", "relation", "error_type"],
+                        },
+                      },
+                      target_difficulty_note: { type: "string", description: "목표 난이도(hard)와 그 근거 — difficulty_rationale 과 같은 기준." },
+                    },
+                    required: ["key_relations", "answer_uses_relations", "distractor_design"],
+                  },
                 },
-                required: ["passage", "question", "explanation"],
+                required: difficulty === "hard" ? ["passage", "question", "explanation", "design"] : ["passage", "question", "explanation"],
               },
             },
           },
@@ -185,6 +207,7 @@ Reading & Writing 구조 규칙: 지문 본문과 질문 단락은 빈 줄로 �
 선택지 규칙: 값이 숫자·식이면 선택지에 "x =" 같은 변수 이름을 붙이지 않고 값만 쓴다(예: "118", "$\\frac{3}{2}$", "$4x^2 - 1$"). 단위·기호(°, $, %)는 문제 문장에 두고 선택지에는 붙이지 않는다(SAT 관례). 각도는 LaTeX 로 $118^\\circ$ 로 쓴다.
 난이도 규칙: 난이도는 지문 길이·낯선 고유명사·어려운 어휘로 만들지 않는다. 학생이 지문·자료의 핵심 관계(원인/결과·조건·범위·비교·화자 관점·시간 관계)를 얼마나 정확히 구분해야 하는지로 설계한다. 어려움(hard)이면 정답은 여러 문장 또는 자료의 관계를 종합해야 하고, 오답은 각각 그중 일부만 포착해야 한다.
 오답 규칙(객관식): 각 오답은 지문·자료의 일부를 맞게 반영하되 핵심 관계 하나를 빠뜨리거나 잘못 해석해야 한다. 어휘 문항의 오답은 그 단어의 다른 뜻이나 문맥에 그럴듯한 다른 단어여야 하고, 지문과 무관한 낱말·문장은 쓰지 않는다. 독해 문항(중심 생각·추론·근거·구조·비교)의 오답 셋은 서로 다른 오류 유형이어야 한다 — 예: 하나는 지문의 세부는 맞지만 범위를 과장/축소, 하나는 인과·비교·시간 관계를 뒤바꿈, 하나는 화자·대상을 혼동하거나 증거는 맞지만 질문에 답하지 않음. 지문에 없는 내용의 선택지는 오답으로 쓰지 않는다. 지문과 무관한 선택지, 명백한 반대말, 불필요한 과장(all/never/only)만으로 지워지는 오답은 만들지 않는다(내용상 그 표현이 정답이거나 필요한 오답이면 예외). Math 오답은 실제 풀이 오류 모델(부호·단위 변환·한 단계 누락·축/눈금 오독·조건 무시·평균/비율/확률 계산 오류·도형 관계 오적용)에서 나와야 하고, 정답과 오답 모두 질문의 조건을 다 고려한 값이어야 한다. distractor_rationales 에 오답 셋의 근거를 적는다.
+${difficulty === "hard" ? `어려움(hard) 전용 절차 — **지문을 쓰기 전에** design 을 먼저 채운다: (1) key_relations 에 학생이 종합해야 하는 핵심 관계 2~3개를 정한다. (2) answer_uses_relations 에 정답이 그 관계들을 어떻게 함께 만족하는지 적는다. (3) distractor_design 에 각 오답이 어느 관계를 부분적으로 맞추는지와 정확히 어디서 틀리는지(scope·causal·intensity·temporal·speaker·condition·partial_computation·unit·sign 중 하나)를 적는다. 그 다음에만 이 설계에 맞춰 지문·질문·선택지·해설을 쓴다. 설계와 실제 문항이 어긋나면(예: distractor_design 에 적은 오류가 실제 선택지 문장에 드러나지 않음) 안 된다.` : ""}
 이 문제들은 특정 학생이 아니라 이 교재를 배정받는 어떤 학생에게도 재사용될 문제
 은행에 들어갑니다. 실전 SAT/AP 시험에 나올 법한 퀄리티로 만들어주세요.`,
       },
@@ -206,6 +229,7 @@ Reading & Writing 구조 규칙: 지문 본문과 질문 단락은 빈 줄로 �
     statements?: unknown;
     distractor_rationales?: { index: number; plausible_because: string; matches: string; why_wrong: string; kind: string }[];
     difficulty_rationale?: string;
+    design?: { key_relations?: string[]; answer_uses_relations?: string; distractor_design?: { index: number; relation: string; error_type: string }[]; target_difficulty_note?: string };
 };
   const input = toolUse.input as { problems?: unknown };
   // 모델이 배열 대신 객체({"0": {...}} 또는 문제 하나)를 주는 경우가 있다 — 배열로 정규화한다.
@@ -259,6 +283,7 @@ Reading & Writing 구조 규칙: 지문 본문과 질문 단락은 빈 줄로 �
     difficulty,
     distractorRationales: Array.isArray(p.distractor_rationales) ? p.distractor_rationales : [],
     difficultyRationale: typeof p.difficulty_rationale === "string" ? p.difficulty_rationale : "",
+    design: p.design && typeof p.design === "object" ? p.design : null,
     };
   });
 }
@@ -514,4 +539,79 @@ ${params.targets.map((t) => `${String.fromCharCode(65 + t.index)}) — ${t.reaso
   const changed = params.targets.some((t) => options[t.index] !== params.options[t.index]);
   if (!changed) return { ok: false, error: "오답을 바꾸지 못했습니다." };
   return { ok: true, options };
+}
+
+/**
+ * 범위가 명확한 부분 수정(2026-09-15 제품 오너: "부분 수정이 기본 경로"). 빈칸 개수·수식 미닫힘·선택지 개수처럼
+ * 지문/질문/선택지/진술/해설 중 **일부 필드만** 고치면 되는 계약 실패에 쓴다. 자료(figure)·정답의 타당성 자체가
+ * 걸린 문제는 이 경로로 다루지 않는다(구조적 실패로 분류되어 전체 재생성으로 간다).
+ *
+ * 모델은 바꿀 필드만 돌려준다 — 응답에 없는 필드는 호출자가 원래 값을 그대로 유지한다(결정적 보존).
+ */
+export async function repairFieldsCore(params: {
+  skillType: string;
+  subjectName: string;
+  difficulty: ProblemDifficulty;
+  format: ProblemFormat;
+  passage: string;
+  question: string;
+  options: string[] | null;
+  correctIndex: number | null;
+  statements: string[] | null;
+  explanation: string;
+  /** 걸린 사유 문장들. */
+  issues: string[];
+}): Promise<{ ok: true; passage: string; question: string; options: string[] | null; correctIndex: number | null; statements: string[] | null; explanation: string; changedFields: string[] } | { ok: false; error: string }> {
+  const message = await getAnthropic().messages.create({
+    model: "claude-sonnet-5",
+    max_tokens: 2000,
+    tools: [
+      {
+        name: "repair_fields",
+        description: "검증에 걸린 부분만 고친다. 문제없는 필드는 응답에 넣지 않는다(그대로 유지된다).",
+        input_schema: {
+          type: "object",
+          properties: {
+            passage: { type: "string", description: "지문/자료를 고쳐야 할 때만." },
+            question: { type: "string", description: "질문을 고쳐야 할 때만." },
+            options: { type: "array", items: { type: "string" }, description: "선택지를 고쳐야 할 때만(개수·중복·형식). 바꾸면 correct_index 도 함께 준다." },
+            correct_index: { type: "number", description: "options 를 바꿨다면 새 정답 자리(0-based)." },
+            statements: { type: "array", items: { type: "string" }, description: "로마숫자 진술을 고쳐야 할 때만." },
+            explanation: { type: "string", description: "해설을 고쳐야 할 때만(예: 수식 표기)." },
+          },
+        },
+      },
+    ],
+    tool_choice: { type: "tool", name: "repair_fields" },
+    messages: [
+      {
+        role: "user",
+        content: `아래 SAT/AP 문항이 검증에 걸렸습니다. 걸린 사유를 해소하도록 **필요한 필드만** 고쳐 돌려주세요. 문제없는 필드는 응답에 넣지 마세요(원본이 그대로 유지됩니다).
+- 과목: ${params.subjectName} · 유형: ${params.skillType} · 난이도: ${params.difficulty} · 답안 형식: ${params.format}
+
+지문/자료: ${params.passage || "(없음)"}
+질문: ${params.question}
+${params.options ? `선택지: ${params.options.map((o, i) => `${String.fromCharCode(65 + i)}) ${o}`).join(" / ")} (정답 ${params.correctIndex !== null ? String.fromCharCode(65 + params.correctIndex) : "?"})` : ""}
+${params.statements?.length ? `진술: ${params.statements.join(" / ")}` : ""}
+해설: ${params.explanation}
+
+걸린 사유:
+${params.issues.map((r) => `- ${r}`).join("\n")}
+
+지문/질문/선택지/진술/해설이 서로 계속 맞아야 합니다(빈칸이면 지문에 정확히 하나, 선택지를 4개로 맞추면 정답 자리도 같이, 수식은 $…$ 로 닫기 등).`,
+      },
+    ],
+  });
+  const toolUse = message.content.find((c) => c.type === "tool_use");
+  if (!toolUse || toolUse.type !== "tool_use") return { ok: false, error: "부분 수정 응답을 처리할 수 없습니다." };
+  const raw = toolUse.input as { passage?: string; question?: string; options?: string[]; correct_index?: number; statements?: string[]; explanation?: string };
+  const changedFields: string[] = [];
+  const passage = typeof raw.passage === "string" && raw.passage.trim() ? (changedFields.push("passage"), raw.passage) : params.passage;
+  const question = typeof raw.question === "string" && raw.question.trim() ? (changedFields.push("question"), raw.question) : params.question;
+  const options = Array.isArray(raw.options) && raw.options.length ? (changedFields.push("options"), raw.options) : params.options;
+  const correctIndex = Array.isArray(raw.options) && typeof raw.correct_index === "number" ? raw.correct_index : params.correctIndex;
+  const statements = Array.isArray(raw.statements) ? (changedFields.push("statements"), raw.statements) : params.statements;
+  const explanation = typeof raw.explanation === "string" && raw.explanation.trim() ? (changedFields.push("explanation"), raw.explanation) : params.explanation;
+  if (!changedFields.length) return { ok: false, error: "고친 필드가 없습니다." };
+  return { ok: true, passage, question, options, correctIndex, statements, explanation, changedFields };
 }

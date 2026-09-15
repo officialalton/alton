@@ -89,6 +89,8 @@ export type ProblemContent = {
   statements: string[] | null;
   /** 품질 기록(추정 난이도·근거·오답 근거·독립 검사·검토 필요). 관리자에게는 난이도 근거와 검토 필요만 보인다. */
   quality: QualityRecord | null;
+  /** 2026-09-15: 'needs_distractor_repair' 면 지문·질문·정답·자료는 통과했고 오답만 보강이 필요 — 일반 초안 목록에서 숨는다. */
+  repairStatus: "none" | "needs_distractor_repair";
 };
 
 export type BankResult<T = undefined> =
@@ -107,6 +109,8 @@ export type ProblemBankFilter = {
   satDomain?: string;
   skillCode?: string;
   examSystem?: string;
+  /** 2026-09-15: 지정하지 않으면 'needs_distractor_repair' 초안은 기본 목록에서 숨는다. */
+  repairStatus?: "none" | "needs_distractor_repair";
 };
 
 export async function listBankProblemsAction(
@@ -181,7 +185,7 @@ export async function listBankProblemsAction(
   // 있다 — 그래서 공개된 문제가 "(아직 내용이 없는 문제)"로 보였다.
   const { data: contentRows } = await admin
     .from("problem_versions")
-    .select("id, problem_id, status, version_no, passage, question, options, correct_index, explanation, answers, figure, figure_checked, render_check, statements, quality")
+    .select("id, problem_id, status, version_no, passage, question, options, correct_index, explanation, answers, figure, figure_checked, render_check, statements, quality, repair_status")
     .in("problem_id", problemIds)
     .in("status", ["published", "draft", "in_review"])
     .order("version_no", { ascending: false });
@@ -199,6 +203,7 @@ export async function listBankProblemsAction(
     renderCheck: (v.render_check as RenderCheck | null) ?? null,
     statements: Array.isArray(v.statements) ? (v.statements as string[]) : null,
     quality: (v.quality as QualityRecord | null) ?? null,
+    repairStatus: (v.repair_status as "none" | "needs_distractor_repair" | undefined) ?? "none",
   });
 
   const publishedByProblem = new Map<string, ProblemContent>();
@@ -257,6 +262,10 @@ export async function listBankProblemsAction(
   return mapped.filter((p) => {
     if (filter.workState && p.workState !== filter.workState) return false;
     if (filter.keywordId && !p.keywords.some((k) => k.id === filter.keywordId)) return false;
+    // 2026-09-15: 오답 보강 대기 초안은 명시적으로 요청했을 때만 보인다 — 기본 화면·자동 구성에서 숨긴다.
+    const currentRepairStatus = p.draft?.repairStatus ?? "none";
+    if (filter.repairStatus) { if (currentRepairStatus !== filter.repairStatus) return false; }
+    else if (currentRepairStatus !== "none") return false;
     return true;
   });
 }
@@ -366,6 +375,8 @@ export async function createDraftVersionAction(params: {
   figure?: unknown | null;
   figureChecked?: boolean;
   statements?: string[] | null;
+  /** 2026-09-15: 'needs_distractor_repair' 로 저장하면 지문·질문·정답·자료는 통과했지만 오답 보강 대기 상태로 들어간다(일반 초안 목록에서 숨음). */
+  repairStatus?: "none" | "needs_distractor_repair";
 }): Promise<BankResult<string>> {
   const { adminUserId } = await requireAdmin();
   const admin = createAdminClient();
@@ -411,6 +422,7 @@ export async function createDraftVersionAction(params: {
     p_figure_checked: params.figureChecked ?? false,
     p_statements: params.statements && params.statements.length ? params.statements : null,
     p_question: params.question?.trim() || null,
+    p_repair_status: params.repairStatus ?? null,
   });
   if (error) return { ok: false, error: readable(error.message, "초안을 저장하지 못했습니다.") };
   const { error: checkError } = await admin.rpc("set_problem_render_check", { p_version_id: data as string, p_check: check });
@@ -652,7 +664,7 @@ export async function generateBankProblemsAction(params: {
   figurePolicy?: string;
   examSystem?: string;
   apSubject?: string;
-}): Promise<BankResult<{ created: number; failures: string[] }>> {
+}): Promise<BankResult<{ created: number; failures: string[]; held: number }>> {
   await requireAdmin();
   const admin = createAdminClient();
 
@@ -709,11 +721,31 @@ export async function generateBankProblemsAction(params: {
     if (qErr) console.error("[problem-bank] 품질 기록 실패:", qErr.message);
     created += 1;
   }
-  if (created === 0) {
+
+  // 오답만 걸린 결과 — 지문·질문·정답·자료는 통과했다. 일반 초안이 아니라 '오답 보강 대기'로 저장한다(2026-09-15 제품 오너).
+  let held = 0;
+  for (const { problem: g, quality } of result.held) {
+    const problem = await createBankProblemAction({
+      subjectId: params.subjectId, format: params.format, skillType: params.skillType, skillCode: params.skillCode,
+      examSystem: params.examSystem, apSubject: params.apSubject, topic: params.topic, difficulty: params.difficulty, keywordIds: params.keywordIds,
+    });
+    if (!problem.ok) { failures.push(problem.error); continue; }
+    const draft = await createDraftVersionAction({
+      problemId: problem.value, passage: g.stimulus ?? g.passage, question: g.question ?? null, options: g.options ?? null, correctIndex: g.correctIndex ?? null,
+      explanation: g.explanation, difficulty: params.difficulty, answers: g.answers ?? null, figure: g.figure ?? null, statements: g.statements ?? null,
+      repairStatus: "needs_distractor_repair",
+    });
+    if (!draft.ok) { failures.push(draft.error); await admin.from("problems").update({ archived_at: new Date().toISOString() }).eq("id", problem.value); continue; }
+    const { error: qErr } = await admin.rpc("set_problem_quality", { p_version_id: draft.value, p_quality: quality });
+    if (qErr) console.error("[problem-bank] 품질 기록 실패(대기):", qErr.message);
+    held += 1;
+  }
+
+  if (created === 0 && held === 0) {
     console.error("[problem-bank] AI 생성 결과를 저장하지 못했습니다:", failures, result.stats);
     return { ok: false, error: `문제를 생성하지 못했습니다.${failures.length ? ` ${failures[0]}` : ""}` };
   }
-  return { ok: true, value: { created, failures } };
+  return { ok: true, value: { created, failures, held } };
 }
 
 /**
@@ -778,4 +810,60 @@ export async function setProblemKeywordAction(
   const { error } = await admin.from("problem_keywords").insert({ problem_id: problemId, keyword_id: keywordId });
   if (error && error.code !== "23505") return { ok: false, error: "키워드를 붙이지 못했습니다." };
   return { ok: true };
+}
+
+/**
+ * 오답 보강 대기 문항을 다시 검사한다(2026-09-15). 관리자가 지목된 오답을 고쳐 초안 저장(createDraftVersionAction)한 뒤 누른다.
+ * 독립 검사를 다시 돌려 오답 품질이 통과하면 repair_status 를 'none' 으로 바꿔 일반 초안으로 전환한다(그 뒤부터 정상 공개 흐름).
+ * 통과하지 못하면 draft 는 그대로 'needs_distractor_repair' 로 남고 새 사유를 보여준다 — 공개·자동 구성·학생 화면에는 들어가지 않는다.
+ */
+export async function recheckDistractorRepairAction(problemId: string): Promise<BankResult<{ passed: boolean; reasons: string[] }>> {
+  await requireAdmin();
+  const admin = createAdminClient();
+  const [{ data: problemRow }, { data: versionRow }] = await Promise.all([
+    admin.from("problems").select("format, skill_type, skill_code, exam_system, difficulty").eq("id", problemId).maybeSingle(),
+    admin.from("problem_versions").select("id, passage, question, options, correct_index, answers, statements, figure, explanation, repair_status").eq("problem_id", problemId).in("status", ["draft", "in_review"]).order("version_no", { ascending: false }).limit(1).maybeSingle(),
+  ]);
+  if (!problemRow || !versionRow) return { ok: false, error: "오답 보강 대기 초안을 찾을 수 없습니다." };
+  if (versionRow.repair_status !== "needs_distractor_repair") return { ok: false, error: "이미 일반 초안입니다." };
+  if (problemRow.format !== "mc") return { ok: false, error: "객관식 문항만 다시 검사할 수 있습니다." };
+
+  const { reviewProblemIndependently, classifyReviewIssues } = await import("@/lib/problem-generation/review");
+  const { skillLabel } = await import("@/lib/problem-taxonomy");
+  const stimulus = (versionRow.passage as string | null) ?? "";
+  const question = (versionRow.question as string | null) ?? "";
+  const options = (versionRow.options as string[] | null) ?? [];
+  const correctIndex = (versionRow.correct_index as number | null) ?? null;
+  const difficulty = (problemRow.difficulty as string | null) ?? "medium";
+  let review;
+  try {
+    review = await reviewProblemIndependently({
+      skillLabel: (problemRow.skill_code ? skillLabel(problemRow.skill_code as string) : null) ?? (problemRow.skill_type as string | null) ?? "",
+      examSystem: (problemRow.exam_system as string | null) ?? null,
+      format: "mc", stimulus, question, options, statements: (versionRow.statements as string[] | null) ?? null,
+      figure: versionRow.figure ?? null, correctIndex, answers: (versionRow.answers as string[] | null) ?? null, requestedDifficulty: difficulty,
+    });
+  } catch (e) {
+    return { ok: false, error: `다시 검사하지 못했습니다 — ${e instanceof Error ? e.message : "오류"}` };
+  }
+  const issues = classifyReviewIssues(review, difficulty, "mc");
+  const passed = issues.reasons.length === 0;
+  const quality: QualityRecord = {
+    contract: { ok: true, issues: [] },
+    estimatedDifficulty: review.estimatedDifficulty,
+    requestedDifficulty: difficulty,
+    difficultyReasons: review.difficultyReasons,
+    distractors: review.distractors,
+    independentReview: { pickedIndex: review.pickedIndex, pickedAnswer: review.pickedAnswer, agrees: review.agrees, confidence: review.confidence, flags: review.flags },
+    needsReview: !passed,
+    needsReviewReasons: issues.reasons,
+    calibrated: false,
+    reviewedAt: new Date().toISOString(),
+  };
+  await admin.rpc("set_problem_quality", { p_version_id: versionRow.id, p_quality: quality });
+  if (passed) {
+    const { error } = await admin.from("problem_versions").update({ repair_status: "none" }).eq("id", versionRow.id);
+    if (error) return { ok: false, error: "통과했지만 상태를 바꾸지 못했습니다." };
+  }
+  return { ok: true, value: { passed, reasons: issues.reasons } };
 }

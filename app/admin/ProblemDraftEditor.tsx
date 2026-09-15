@@ -7,6 +7,7 @@ import {
   markFigureCheckedAction,
   uploadProblemImageAction,
   generateFigureForProblemAction,
+  recheckDistractorRepairAction,
   type BankProblem,
 } from "./problem-bank-actions";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
@@ -232,8 +233,13 @@ export default function ProblemDraftEditor({
         )}
       </div>
 
+      {source?.repairStatus === "needs_distractor_repair" && (
+        <div className="text-[12px] mb-2 border-[1.5px] border-red/40 bg-red/5 rounded-lg px-3 py-2" data-testid="repair-queue-notice">
+          <b className="text-ink">오답 보강 대기</b> — 지문·질문·정답·자료는 검증을 통과했습니다. 아래 표시된 오답만 고쳐 초안 저장한 뒤 &apos;다시 검사&apos;를 누르세요. 통과해야 일반 초안이 되고, 공개·자동 구성·학생 화면에는 들어가지 않습니다.
+        </div>
+      )}
       {source?.quality && (
-        <details className="text-[12px] mt-1 mb-1 border-[1.5px] border-grey-200 rounded-lg px-3 py-2" data-testid="quality-details">
+        <details className="text-[12px] mt-1 mb-1 border-[1.5px] border-grey-200 rounded-lg px-3 py-2" data-testid="quality-details" open={source.repairStatus === "needs_distractor_repair"}>
           <summary className="cursor-pointer text-ink">
             추정 난이도 <b>{source.quality.estimatedDifficulty}</b>{source.quality.requestedDifficulty !== source.quality.estimatedDifficulty ? ` (요청 ${source.quality.requestedDifficulty})` : ""} · {source.quality.calibrated ? "학생 응답으로 보정됨" : "추정치 — 학생 응답이 쌓이면 보정"}
             {source.quality.needsReview && <span className="ml-2 font-bold text-red">검토 필요</span>}
@@ -245,6 +251,18 @@ export default function ProblemDraftEditor({
             <p className="mt-1 text-red">{source.quality.needsReviewReasons.join(" · ")}</p>
           )}
           <p className="mt-1 text-grey-500">독립 검사: {source.quality.independentReview.agrees ? "지정 정답과 일치" : "불일치 또는 미실행"} · 확신 {source.quality.independentReview.confidence}</p>
+          {isMc && source.quality.distractors.length > 0 && (
+            <ul className="mt-2 space-y-1">
+              {source.quality.distractors.map((d) => (
+                <li key={d.index} className={d.obvious || d.kind === "irrelevant" ? "text-red" : "text-grey-500"}>
+                  <b>{String.fromCharCode(65 + d.index)})</b> {d.kind}{d.obvious ? " · 명백함" : ""} — 그럴듯한 이유: {d.plausibleBecause || "—"} / 일부 일치: {d.matches || "—"} / 틀린 이유: {d.whyWrong || "—"}
+                </li>
+              ))}
+            </ul>
+          )}
+          {source.repairStatus === "needs_distractor_repair" && (
+            <RecheckButton problemId={problem.id} onDone={() => void onRun(() => Promise.resolve({ ok: true }), undefined)} />
+          )}
         </details>
       )}
 
@@ -574,6 +592,36 @@ function MaterialSection(props: {
 }
 
 /** 공개본 조회 — 그 문제의 체계·유형에 필요한 항목만. */
+/** 오답 보강 대기 초안을 다시 검사한다 — 통과하면 일반 초안으로 바뀐다(2026-09-15). */
+function RecheckButton({ problemId, onDone }: { problemId: string; onDone: () => void }) {
+  const [busy, setBusy] = useState(false);
+  const [result, setResult] = useState<{ passed: boolean; reasons: string[] } | null>(null);
+  return (
+    <div className="mt-2">
+      <button
+        type="button"
+        disabled={busy}
+        onClick={async () => {
+          setBusy(true);
+          setResult(null);
+          const r = await recheckDistractorRepairAction(problemId);
+          setBusy(false);
+          if (r.ok) { setResult(r.value); onDone(); }
+          else setResult({ passed: false, reasons: [r.error] });
+        }}
+        className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
+      >
+        {busy ? "다시 검사하는 중…" : "다시 검사"}
+      </button>
+      {result && (
+        <p className={"mt-1.5 " + (result.passed ? "text-green" : "text-red")}>
+          {result.passed ? "통과했습니다 — 일반 초안으로 바뀌었습니다." : `아직 통과하지 못했습니다 — ${result.reasons.join(" / ")}`}
+        </p>
+      )}
+    </div>
+  );
+}
+
 export function PublishedContentView({ problem }: { problem: BankProblem }) {
   const p = problem.published!;
   const fullText = composeProblemText(p.passage, p.question);

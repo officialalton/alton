@@ -80,6 +80,8 @@ export async function reviewProblemIndependently(input: {
   correctIndex: number | null;
   answers: string[] | null;
   requestedDifficulty: string;
+  /** 어려움 문항의 설계(생성기가 지문을 쓰기 전에 낸 핵심 관계·오답 설계) — 있으면 실제 문항과의 정합도까지 확인한다. */
+  design?: { key_relations?: string[]; answer_uses_relations?: string; distractor_design?: { index: number; relation: string; error_type: string }[] } | null;
 }): Promise<IndependentReview> {
   const alt = input.figure ? (() => { try { return figureAlt(input.figure as FigureSpec) ?? ""; } catch { return ""; } })() : "";
   const isMc = input.format === "mc";
@@ -134,7 +136,12 @@ ${isMc ? `\n[선택지]\n${(input.options ?? []).map((o, i) => `${String.fromCha
 
 ${DIFFICULTY_RUBRIC}
 
-${DISTRACTOR_RUBRIC}`,
+${DISTRACTOR_RUBRIC}
+${input.design ? `
+[생성기가 미리 낸 설계 — 실제 문항이 이 설계와 맞는지도 확인하세요. 안 맞으면(예: distractor_design 의 오류가 실제 선택지에 드러나지 않음) flags 에 적으세요.]
+핵심 관계: ${(input.design.key_relations ?? []).join(" / ")}
+정답 근거: ${input.design.answer_uses_relations ?? ""}
+오답 설계: ${(input.design.distractor_design ?? []).map((d) => `${String.fromCharCode(65 + d.index)}) ${d.relation} — ${d.error_type}`).join(" / ")}` : ""}`,
       },
     ],
   });
