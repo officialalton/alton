@@ -690,31 +690,49 @@ export async function generateBankProblemsAction(params: {
   let created = 0;
   // 만들지 못한 사유를 모아 둔다 — 실패한 결과는 초안으로 저장하지 않고 사유와 함께 분리한다(2026-09-14 제품 오너: 복수 생성 질문 누락).
   const failures: string[] = [];
-  for (const g of generated) {
-    // 자료 필수인데 모델이 자료를 빼먹었거나 규격에 안 맞으면, 관리자 버튼과 같은 자료 생성기로 한 번 더 만든다(2026-09-15).
-    // 문항 본문에서 자료 유형을 판정하므로 관리자가 고를 일이 없다. 그래도 없으면 그 결과만 사유와 함께 분리된다.
-    // 권장 유형으로 만들었더라도 모델이 그래프·표를 가리키는 문장을 쓰면 저장 시점 판정은 필수가 된다 — 그때도 같은 2차 생성이 돈다.
-    const textForNeed = composeProblemText(g.stimulus ?? g.passage, g.question ?? null);
-    const needForText = judgeMaterialNeed({ examSystem: params.examSystem ?? null, skillCode: params.skillCode ?? null, text: textForNeed });
-    const missingRequired = needForText.level === "required" && materialBlocker(needForText, g.figure ?? null) !== null;
-    if (g.needsFigure || missingRequired || (g.figure == null && params.figurePolicy?.startsWith("require"))) {
-      const text = textForNeed;
-      const need = needForText;
-      const kind = pickFigureKind(need, text, params.skillCode ?? null, params.figurePolicy);
-      if (kind) {
-        const { generateFigureForProblem } = await import("./curriculum-doc-actions");
-        try {
-          const r = await generateFigureForProblem({ passage: text, options: g.options ?? null, explanation: g.explanation, kind, correctIndex: g.correctIndex ?? null });
-          if (r.ok) g.figure = r.figure;
-          else console.error("[problem-bank] 2차 자료 생성 실패:", kind, r.error);
-        } catch (e) {
-          console.error("[problem-bank] 2차 자료 생성 오류:", kind, e instanceof Error ? e.message : e);
-        }
+  const requested = Math.max(1, Math.min(10, params.count));
+  const { generateFigureForProblem } = await import("./curriculum-doc-actions");
+
+  /**
+   * 생성 결과 하나를 **공개 게이트와 같은 검사**에 통과시킨 뒤에만 초안으로 저장한다(2026-09-15 제품 오너: 게이트에 걸린 초안이 남는 상황 자체가 없어야 한다).
+   *   자료 필수·판정 → 자료 없으면 2차 자료 생성 → 데이터 계약(질문·답안·해설·RW 구조) → 자료 참조·렌더 검증(checkFigure) → 내용 검증(checkContent)
+   *   자료 검증에 걸리면 자료를 한 번 더 만들어 재검사하고, 그래도 안 되면 그 결과는 저장하지 않는다.
+   */
+  const gateAndSave = async (g: (typeof generated)[number]): Promise<boolean> => {
+    const text = composeProblemText(g.stimulus ?? g.passage, g.question ?? null);
+    const need = judgeMaterialNeed({ examSystem: params.examSystem ?? null, skillCode: params.skillCode ?? null, text });
+    const kind = pickFigureKind(need, text, params.skillCode ?? null, params.figurePolicy);
+    const makeFigure = async () => {
+      if (!kind) return;
+      try {
+        const r = await generateFigureForProblem({ passage: text, options: g.options ?? null, explanation: g.explanation, kind, correctIndex: g.correctIndex ?? null });
+        if (r.ok) g.figure = r.figure;
+        else console.error("[problem-bank] 자료 생성 실패:", kind, r.error);
+      } catch (e) {
+        console.error("[problem-bank] 자료 생성 오류:", kind, e instanceof Error ? e.message : e);
       }
-    }
-    // 단건·복수 같은 계약: 자료 또는 지문 / 질문 / 선택지 또는 답안 형식 / 정답 / 해설.
+    };
+    // 1) 자료 필수인데 없다/규격 밖이다 → 자료 생성.
+    const missingRequired = need.level === "required" && materialBlocker(need, g.figure ?? null) !== null;
+    if (g.needsFigure || missingRequired || (g.figure == null && params.figurePolicy?.startsWith("require"))) await makeFigure();
+    // 2) 데이터 계약.
     const reject = validateGeneratedProblem({ ...g, stimulus: g.stimulus ?? g.passage, question: g.question ?? null }, params.format, params.skillCode ?? null);
-    if (reject) { failures.push(`${(g.question ?? g.passage).slice(0, 40)}… — ${reject}`); continue; }
+    if (reject) { failures.push(`${(g.question ?? g.passage).slice(0, 40)}… — ${reject}`); return false; }
+    if (need.level === "required" && materialBlocker(need, g.figure ?? null)) { failures.push(`${(g.question ?? g.passage).slice(0, 40)}… — 자료 필수인데 자료를 만들지 못했습니다.`); return false; }
+    // 3) 자료 참조·렌더 검증 — 공개 게이트와 같은 검사. 걸리면 자료를 한 번 더 만들어 본다(지문이 템플릿으로 그릴 수 없는 모양이면 여기서 걸러진다).
+    let fc = checkFigure(g.figure ?? null, text, g.options ?? null, g.correctIndex ?? null);
+    if (!fc.ok && g.figure != null) {
+      await makeFigure();
+      fc = checkFigure(g.figure ?? null, text, g.options ?? null, g.correctIndex ?? null);
+    }
+    if (!fc.ok) { failures.push(`${(g.question ?? g.passage).slice(0, 40)}… — 자료 검증: ${fc.issues[0]?.message ?? "실패"}`); return false; }
+    // 4) 내용 검증(수식 조판·선택지·진술·RW 구조) — 하나라도 남으면 공개가 막히므로 저장하지 않는다.
+    const content = checkContent({
+      format: params.format, passage: text, options: g.options ?? null, correctIndex: g.correctIndex ?? null, explanation: g.explanation,
+      answers: g.answers ?? null, statements: g.statements ?? null, skillCode: params.skillCode ?? null, figure: g.figure ?? null,
+    });
+    if (content.length) { failures.push(`${(g.question ?? g.passage).slice(0, 40)}… — 내용 검증: ${content[0].message}`); return false; }
+    // 5) 저장.
     const problem = await createBankProblemAction({
       subjectId: params.subjectId,
       format: params.format,
@@ -726,7 +744,7 @@ export async function generateBankProblemsAction(params: {
       difficulty: params.difficulty,
       keywordIds: params.keywordIds,
     });
-    if (!problem.ok) { failures.push(problem.error); continue; }
+    if (!problem.ok) { failures.push(problem.error); return false; }
     const draft = await createDraftVersionAction({
       problemId: problem.value,
       passage: g.stimulus ?? g.passage,
@@ -739,11 +757,34 @@ export async function generateBankProblemsAction(params: {
       figure: g.figure ?? null,
       statements: g.statements ?? null,
     });
-    if (draft.ok) created += 1;
-    else {
+    if (!draft.ok) {
       // 초안을 저장하지 못한 결과는 분리한다 — 빈 문제가 '질문 없는 초안'으로 남지 않게 바로 보관한다(삭제 아님).
       failures.push(draft.error);
       await admin.from("problems").update({ archived_at: new Date().toISOString() }).eq("id", problem.value);
+      return false;
+    }
+    return true;
+  };
+
+  for (const g of generated) if (await gateAndSave(g)) created += 1;
+
+  // 통과한 결과가 요청 개수에 못 미치면 부족분만 한 번 더 만든다(모델 호출 1회 추가). 그래도 모자라면 사유와 함께 그대로 보고한다.
+  if (created < requested) {
+    try {
+      const refill = await generateSectionProblems({
+        sectionTitle: params.topic?.trim() || params.skillType,
+        subjectName: subject.name as string,
+        skillType: params.skillType,
+        difficulty: params.difficulty as never,
+        format: params.format as never,
+        count: requested - created,
+        figurePolicy: (params.figurePolicy as never) ?? "optional",
+        skillCode: params.skillCode,
+        keepFigureless: true,
+      });
+      for (const g of refill) if (created < requested && (await gateAndSave(g))) created += 1;
+    } catch (e) {
+      console.error("[problem-bank] 부족분 재생성 실패:", e instanceof Error ? e.message : e);
     }
   }
 

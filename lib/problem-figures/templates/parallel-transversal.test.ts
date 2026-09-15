@@ -130,3 +130,26 @@ describe("점 정규화(2026-09-15)", () => {
     if (v.ok) expect(v.spec.points).toEqual([{ id: "A", on: ["m", "k"] }, { id: "B", on: ["n", "k"] }]);
   });
 });
+
+describe("횡단선끼리의 교점·삼각형(2026-09-15 확장)", () => {
+  const below = {
+    type: "parallel_transversal", parallel: ["m", "n"], transversals: [{ id: "k" }, { id: "j" }],
+    points: [{ id: "A", on: ["m", "k"] }, { id: "B", on: ["n", "k"] }, { id: "C", on: ["m", "j"] }, { id: "D", on: ["n", "j"] }, { id: "E", on: ["k", "j"] }],
+    angles: [{ at: ["m", "k"], region: "SE", label: "128°" }, { at: ["k", "j"], region: "N", label: "x°" }, { at: ["n", "j"], region: "SW", label: "70°" }],
+    notToScale: true,
+  };
+  it("교점 E 와 삼각형 안의 각을 그리고, 지문의 점 E·삼각형 참조가 통과한다", () => {
+    const r = checkFigure(below, "In the figure, lines m and n are parallel. Line k intersects m at point A and n at point B; line j intersects m at point C and n at point D. Lines k and j meet at point E below line n, forming triangle BDE. The angle marked 128° is at A and the angle at D is 70°. What is the value of x?");
+    expect(r.issues).toEqual([]);
+    expect(r.alt).toMatch(/두 횡단선은 n 아래에서 만난다/);
+    expect(renderFigureSvg(below as never)).toContain("<svg");
+  });
+  it("위에서 만나는 경우도 그린다(crossing above)", () => {
+    const above = { ...below, crossing: { side: "above" }, angles: [{ at: ["k", "j"], region: "N", label: "y°" }, { at: ["n", "k"], region: "NE", label: "35°" }, { at: ["m", "j"], region: "NW", label: "(2y)°" }] };
+    expect(checkFigure(above, "Lines m and n are parallel; lines k and j meet at point E above line m. What is y?").issues).toEqual([]);
+  });
+  it("횡단선이 하나면 crossing 을 거부하고, 교점 각의 region 은 N|S|E|W 여야 한다", () => {
+    expect(validateParallelTransversal({ ...below, transversals: [{ id: "k" }], points: [], angles: [], crossing: { side: "below" } }).ok).toBe(false);
+    expect(validateParallelTransversal({ ...below, angles: [{ at: ["k", "j"], region: "NE", label: "x°" }] }).ok).toBe(false);
+  });
+});

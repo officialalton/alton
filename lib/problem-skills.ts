@@ -38,9 +38,9 @@ export const PROBLEM_SKILLS: ProblemSkill[] = [
     rule: "첫 줄은 정확히 'While researching a topic, a student has taken the following notes:' 이고, 그 다음 줄부터 메모를 '- ' 로 시작하는 4~6줄 목록으로 쓴다(빈 줄 없이 이어서). 그 뒤 빈 줄 한 줄, 그리고 질문 단락. 문항은 \"The student wants to … Which choice most effectively uses relevant information from the notes to accomplish this goal?\". 선택지는 완결된 문장." },
   // ---------------- SAT Math
   { code: "math.algebra", label: "Algebra (선형식·연립·부등식)", family: "SAT Math", defaultFormat: "mc",
-    rule: "일차식·연립방정식·부등식·선형 함수 해석. 수식은 $…$. 연립방정식은 $$…$$ 블록에 한 줄씩. 그래프가 꼭 필요하면 figure(coordinate_plane)." },
+    rule: "일차식·연립방정식·부등식·선형 함수 해석. 수식은 $…$. 연립방정식은 $$…$$ 블록에 한 줄씩. 그래프가 필요하면 표준 좌표평면 figure(type:'plane')." },
   { code: "math.advanced", label: "Advanced Math (이차·지수·다항)", family: "SAT Math", defaultFormat: "mc",
-    rule: "이차·지수·다항·유리식·절댓값·함수 표기. 수식은 $…$. 함수 그래프가 필요하면 figure(function 항목)." },
+    rule: "이차·지수·다항·유리식·절댓값·함수 표기. 수식은 $…$. 함수 그래프가 필요하면 표준 좌표평면 figure(type:'plane', objects 에 kind:'function')." },
   { code: "math.problem_solving_data", label: "Problem-Solving and Data Analysis", family: "SAT Math", defaultFormat: "mc",
     rule: "비율·비례·속도·단위 변환·백분율·확률·조건부확률·표본 통계·오차범위·평균/중앙값·관찰 연구와 실험의 주장 판단. 자료는 마크다운 표가 아니라 figure(type:'data' — 표·숫자 목록·막대/선·히스토그램·산점도·상자그림)로 낸다. 문맥 해석 문항 포함." },
   { code: "math.geometry_trig", label: "Geometry and Trigonometry", family: "SAT Math", defaultFormat: "mc",
