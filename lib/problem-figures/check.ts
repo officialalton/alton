@@ -8,6 +8,8 @@ import { lintTriangleAgainstText, renderTriangle } from "./templates/triangle";
 import { lintPlaneAgainstText, renderPlane } from "./templates/coordinate-plane";
 import { lintDataAgainstText, renderData } from "./templates/data";
 import { lintCircleAgainstText, renderCircle } from "./templates/circle";
+import { lintPolygonAgainstText, renderPolygon } from "./templates/polygon";
+import { lintSolidAgainstText, renderSolid } from "./templates/solid";
 
 export const RENDERER_VERSION = "std-1";
 
@@ -62,6 +64,16 @@ export function checkFigure(figure: unknown, passage: string, options?: string[]
   if (spec.type === "plane") {
     const r = renderPlane(spec);
     issues.push(...r.issues, ...lintPlaneAgainstText(spec, passage, options));
+    return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
+  }
+  if (spec.type === "polygon") {
+    const r = renderPolygon(spec);
+    issues.push(...r.issues, ...lintPolygonAgainstText(spec, passage));
+    return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
+  }
+  if (spec.type === "solid") {
+    const r = renderSolid(spec);
+    issues.push(...r.issues, ...lintSolidAgainstText(spec, passage));
     return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
   }
   if (spec.type === "circle") {

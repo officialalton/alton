@@ -63,6 +63,7 @@
 7. **P3 8차** — 과제 답안·채점·문제 위 필기를 수업과 **분리**(source/context), **문제 화면 전체 필기 레이어**(수업·과제 공통), 채점 결과·점수 표시, 관리자 교재 탭 통합·새 교재 차단·노출용 이름·목차 접기.
 8. **P3 9차** — 문제 템플릿 ①~⑤(SPR / 표·수식 / 도형·그래프 데이터 렌더 + 그림 확인 게이트 / 그림 파일 첨부 / 유형 코드·문항 말투·메모·밑줄), 문제은행 난이도·`전체 공개`·자동 확장 칸. **실제 모델 호출 표본 10문항** 렌더 확인 → 영어 규칙·응답 정규화·라벨 위치 수정. AI 내용 오류(변 라벨 오기) 실례 확인 — 그림 확인 게이트가 필요한 이유.
 
+17. **P3 18차 — 템플릿 6 사각형·다각형, 템플릿 7 입체 2.5D**(직육면체·정육면체·원기둥·원뿔·구·사각뿔). 대표 10문항씩·거부 사례·로컬 E2E(사다리꼴·원기둥) 통과. 다음: 좌표기하·복합 도형 → 그래프/도형 선택지(figure choice) → 수식·로마숫자 선택지 Block.
 16. **P3 17차 — SAT 6~11 대조 보완 + 템플릿 5 원**: 점도표·양방향 표·문장형 자료, 음영 부등식·조각함수·유리함수·점근선, 선택지 부등호 대조·좌표 노출 거부, 원 템플릿(중심·반지름·현·호·부채꼴·접선·중심각·원주각). 로컬 E2E(원·부등식) 통과.
 15. **P3 16차 — 문제 분류 모델**(`20261367`): `problem_skill_codes`(SAT 영역 8 · 세부 기술 30, College Board 분류), `problems.sat_domain/skill_code`(코드→영역 트리거, 옛 유형에서 영역 백필), 문제은행 필터·새 문제(영역→기술 선택 시 유형·형식·그림 요구 자동)·분류 편집, AI 생성 프롬프트에 영역·기술 힌트, 자동 구성 후보 뷰·회차 조건 `skill_codes` 필터, 수업 준비 후보 기술 필터·배지, 학생 문제 기록 기술별 성취(채점 기준). 로컬 통합·컴포넌트 테스트 통과.
 14. **P3 15차 — 템플릿 4 표·데이터 그래프**(표·숫자 목록·막대·선·히스토그램·산점도+추세선·상자그림, 한 원본 데이터, 값·항목·단위 참조 lint, `require_data`). 로컬 E2E 통과, Preview DB 게이트 실측. 다음: SAT 영역·세부 기술 코드 분류 모델(문제은행·자동 구성·성취 기록 공통) → 원 → 사각형·다각형·입체 → 좌표기하·복합 → 그래프/도형 선택지 → 수식·로마숫자 선택지 Block.
@@ -89,7 +90,7 @@
 - 오픈 전 blocker(변화 없음, 아카이브 참고): 실제 세금 계산, 실제 이메일 발송, Workspace 위임 계정 분리, SECURITY DEFINER anon 권한 감사, E2E 전용 fixture, `mark_expired_invites` cron.
 
 ## 7. 관련 문서
-- **표준 렌더링 엔진**(승인됨, 템플릿 1 구현): `docs/2026-09-14-standard-rendering-engine-design.md` + 표본 `docs/assets/2026-09-14-render-samples/`. AI=의미 데이터만, ALTON 렌더러=조판, 검증 계층=거부. 좌표형 `geometry` 는 레거시(표시만, 공개 불가). 템플릿 1~5 완료(평행선·삼각형·좌표평면(+부등식·조각·유리)·표/데이터 그래프(+점도표·양방향·문장형)·원) + 분류 모델. 다음: 사각형·다각형·입체(2.5D) → 좌표기하·복합 도형 → 그래프/도형 선택지 → 수식·로마숫자 선택지 Block.
+- **표준 렌더링 엔진**(승인됨, 템플릿 1 구현): `docs/2026-09-14-standard-rendering-engine-design.md` + 표본 `docs/assets/2026-09-14-render-samples/`. AI=의미 데이터만, ALTON 렌더러=조판, 검증 계층=거부. 좌표형 `geometry` 는 레거시(표시만, 공개 불가). 템플릿 1~7 완료(평행선·삼각형·좌표평면·표/데이터·원·사각형/다각형·입체) + 분류 모델. 다음: 좌표기하·복합 도형 → 그래프/도형 선택지 → 수식·로마숫자 선택지 Block.
 
 - **남은 작업 전체 목록**: [`2026-09-14-remaining-work.md`](2026-09-14-remaining-work.md)(A 지금 UAT → B 콘텐츠·수업 → C 상담·결제·정산·문서 → D 운영·소통 → E 보안·데이터 수명 → F 출시 게이트).
 - 문제 템플릿 설계: [`2026-09-14-problem-template-design.md`](2026-09-14-problem-template-design.md) · 과제 통일: [`2026-09-14-homework-v3-unification.md`](2026-09-14-homework-v3-unification.md) · 문제 풀이·채점·PDF 텍스트: [`2026-09-14-problem-answer-grading-and-pdf-text-notes.md`](2026-09-14-problem-answer-grading-and-pdf-text-notes.md) · Drive 자료 설계: [`2026-09-14-drive-material-assets-design.md`](2026-09-14-drive-material-assets-design.md) · PDF 규격: [`2026-09-14-lesson-pdf-spec.md`](2026-09-14-lesson-pdf-spec.md) · 로드맵: [`2026-08-29-master-roadmap-v3.md`](2026-08-29-master-roadmap-v3.md) · 이전 이력 전체: [`history/CURRENT-archive-until-2026-09-14.md`](history/CURRENT-archive-until-2026-09-14.md).

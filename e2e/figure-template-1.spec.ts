@@ -358,3 +358,23 @@ test("템플릿 3 보완: 지문(연립 부등식) → AI 객체 데이터(음�
   });
   expect(["published", "blocked"]).toContain(result);
 });
+
+// ------------------------------------------------------------ 템플릿 6·7 — 사각형·다각형 / 입체
+test("템플릿 6: 지문(사다리꼴 넓이) → AI 관계 데이터 → 검증 → 공개 → 학생 화면", async ({ page }, testInfo) => {
+  test.skip(!process.env.ANTHROPIC_API_KEY, "ANTHROPIC_API_KEY 없음");
+  const result = await runDraftFigureFlow(page, testInfo, {
+    passage: `Trapezoid ABCD has parallel bases AB = 14 and CD = 8, and the height from C to base AB is 5. What is the area of the trapezoid? [E2E T6 ${Date.now()}]`,
+    options: ["40", "55", "70", "110"], correctIndex: 1, explanation: "Area = (14 + 8)/2 × 5 = 55.", skill: "Geometry and Trigonometry",
+    button: "AI로 도형 데이터 만들기(사각형·다각형)", expectType: "polygon", shots: ["19-t6-admin-preview.png", "20-t6-student-desktop.png", "21-t6-student-mobile.png"],
+  });
+  expect(["published", "blocked"]).toContain(result);
+});
+test("템플릿 7: 지문(원기둥 부피) → AI 치수 데이터 → 검증 → 공개 → 학생 화면", async ({ page }, testInfo) => {
+  test.skip(!process.env.ANTHROPIC_API_KEY, "ANTHROPIC_API_KEY 없음");
+  const result = await runDraftFigureFlow(page, testInfo, {
+    passage: `A right circular cylinder has a radius of 3 inches and a height of 10 inches. What is the volume of the cylinder, in cubic inches? [E2E T7 ${Date.now()}]`,
+    options: ["30π", "60π", "90π", "180π"], correctIndex: 2, explanation: "V = πr²h = π·9·10 = 90π.", skill: "Geometry and Trigonometry",
+    button: "AI로 도형 데이터 만들기(입체)", expectType: "solid", shots: ["22-t7-admin-preview.png", "23-t7-student-desktop.png", "24-t7-student-mobile.png"],
+  });
+  expect(["published", "blocked"]).toContain(result);
+});
