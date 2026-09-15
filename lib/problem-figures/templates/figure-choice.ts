@@ -139,7 +139,7 @@ export function validateFigureSet(input: unknown, validateChild: ChildValidate):
     if (!fg || typeof fg.id !== "string" || !/^[A-Z]$/.test(fg.id)) return { ok: false, error: "figures[].id 는 대문자 한 글자(A, B …)여야 합니다." };
     if (ids.has(fg.id)) return { ok: false, error: `자료 id '${fg.id}' 가 중복됩니다.` };
     ids.add(fg.id);
-    if (fg.title !== undefined && (typeof fg.title !== "string" || fg.title.length > 40)) return { ok: false, error: "figures[].title 은 40자 이내입니다." };
+    if (fg.title !== undefined && (typeof fg.title !== "string" || fg.title.length > 90)) return { ok: false, error: "figures[].title 은 90자 이내입니다." };
     const c = fg.spec as Record<string, unknown> | null;
     if (!c || !CHILD_TYPES_ALLOWED.includes(String(c.type))) return { ok: false, error: `자료 ${fg.id} 의 spec type 이 지원 밖입니다.` };
     const v = validateChild(c);
