@@ -26,7 +26,7 @@ async function main() {
   const out = String(args.out || `docs/2026-09-15-problem-quality-batch-${difficulty}.md`);
   const skills = SKILL_CODES.filter((k) => !only || only.includes(k.code));
 
-  type Row = { code: string; label: string; system: string; format: string; single: { requested: number; accepted: number }; bulk: { requested: number; accepted: number }; regenerated: number; resolved: number; failures: { stage: string; reason: string; resolved: boolean }[]; difficulties: string[]; needsReview: number; seconds: number };
+  type Row = { code: string; label: string; system: string; format: string; single: { requested: number; accepted: number }; bulk: { requested: number; accepted: number }; regenerated: number; resolved: number; repairs: number; repairsResolved: number; failures: { stage: string; reason: string; resolved: boolean }[]; difficulties: string[]; needsReview: number; seconds: number };
   const rows: Row[] = [];
   const startedAll = Date.now();
   for (const k of skills) {
@@ -38,13 +38,15 @@ async function main() {
     const base = { subjectName: system === "sat_rw" ? "SAT Reading & Writing" : "SAT Math", skillType: legacy?.label ?? k.label, skillCode: k.code, examSystem: system, difficulty, format, figurePolicy: figurePolicy as never };
     const t0 = Date.now();
     process.stderr.write(`▶ ${k.code} (${system}, ${format}, ${figurePolicy}) …\n`);
-    const row: Row = { code: k.code, label: k.label, system, format, single: { requested: 1, accepted: 0 }, bulk: { requested: 2, accepted: 0 }, regenerated: 0, resolved: 0, failures: [], difficulties: [], needsReview: 0, seconds: 0 };
+    const row: Row = { code: k.code, label: k.label, system, format, single: { requested: 1, accepted: 0 }, bulk: { requested: 2, accepted: 0 }, regenerated: 0, resolved: 0, repairs: 0, repairsResolved: 0, failures: [], difficulties: [], needsReview: 0, seconds: 0 };
     for (const [key, count] of [["single", 1], ["bulk", 2]] as const) {
       try {
         const r = await runGenerationPipeline({ ...base, count });
         row[key].accepted = r.accepted.length;
         row.regenerated += r.stats.regenerated;
         row.resolved += r.stats.regenerationResolved;
+        row.repairs += r.stats.distractorRepairs;
+        row.repairsResolved += r.stats.distractorRepairsResolved;
         row.failures.push(...r.failures.map((f) => ({ stage: f.stage, reason: f.reason.slice(0, 160), resolved: f.resolved })));
         row.difficulties.push(...r.accepted.map((a) => a.quality.estimatedDifficulty));
         row.needsReview += r.accepted.filter((a) => a.quality.needsReview).length;
@@ -54,7 +56,7 @@ async function main() {
     }
     row.seconds = Math.round((Date.now() - t0) / 1000);
     rows.push(row);
-    process.stderr.write(`   단건 ${row.single.accepted}/1 · 복수 ${row.bulk.accepted}/2 · 재생성 ${row.regenerated}(해소 ${row.resolved}) · ${row.seconds}s\n`);
+    process.stderr.write(`   단건 ${row.single.accepted}/1 · 복수 ${row.bulk.accepted}/2 · 재생성 ${row.regenerated}(해소 ${row.resolved}) · 오답 부분수정 ${row.repairs}(해소 ${row.repairsResolved}) · ${row.seconds}s\n`);
   }
 
   // 집계
@@ -69,12 +71,12 @@ async function main() {
   const lines: string[] = [];
   lines.push(`# 유형별 표본 생성·품질 계약 검증 — 난이도 ${difficulty} (${new Date().toISOString().slice(0, 16).replace("T", " ")})`, "");
   lines.push(`파이프라인: 생성 → 자료 필요 시 자료 생성 → 유형별 품질 계약(질문 대상·자료 근거·표시·정답·답안 형식) → 독립 품질 검사(정답 일치·오답 품질·추정 난이도) → 실패 시 사유 피드백 1회 재생성 → 부족분 1회 재생성. DB 저장 없음(보고서만). 총 소요 ${Math.round((Date.now() - startedAll) / 60000)}분.`, "");
-  lines.push(`**요청 ${totalReq} · 통과 ${totalAcc} (${Math.round((100 * totalAcc) / Math.max(1, totalReq))}%) · 재생성 ${rows.reduce((n, r) => n + r.regenerated, 0)}회(해소 ${rows.reduce((n, r) => n + r.resolved, 0)}) · 검토 필요 ${rows.reduce((n, r) => n + r.needsReview, 0)}**`, "");
-  lines.push("## 유형별", "", "| 세부 기술 | 체계·형식 | 단건 | 복수 | 재생성(해소) | 추정 난이도 분포 | 검토 필요 | 미해소 실패 사유 | 초 |", "|---|---|---|---|---|---|---|---|---|");
+  lines.push(`**요청 ${totalReq} · 통과 ${totalAcc} (${Math.round((100 * totalAcc) / Math.max(1, totalReq))}%) · 재생성 ${rows.reduce((n, r) => n + r.regenerated, 0)}회(해소 ${rows.reduce((n, r) => n + r.resolved, 0)}) · 오답 부분수정 ${rows.reduce((n, r) => n + r.repairs, 0)}회(해소 ${rows.reduce((n, r) => n + r.repairsResolved, 0)}) · 검토 필요 ${rows.reduce((n, r) => n + r.needsReview, 0)}**`, "");
+  lines.push("## 유형별", "", "| 세부 기술 | 체계·형식 | 단건 | 복수 | 재생성(해소) | 오답 부분수정(해소) | 추정 난이도 분포 | 검토 필요 | 미해소 실패 사유 | 초 |", "|---|---|---|---|---|---|---|---|---|---|");
   for (const r of rows) {
     const dist = ["easy", "medium", "hard"].map((d) => `${d[0]}${r.difficulties.filter((x) => x === d).length}`).join(" ");
     const unresolved = r.failures.filter((f) => !f.resolved).map((f) => `[${f.stage}] ${f.reason.slice(0, 70)}`).join("<br>");
-    lines.push(`| ${r.label} (\`${r.code}\`) | ${r.system} · ${r.format} | ${r.single.accepted}/1 | ${r.bulk.accepted}/2 | ${r.regenerated}(${r.resolved}) | ${dist} | ${r.needsReview} | ${unresolved || "—"} | ${r.seconds} |`);
+    lines.push(`| ${r.label} (\`${r.code}\`) | ${r.system} · ${r.format} | ${r.single.accepted}/1 | ${r.bulk.accepted}/2 | ${r.regenerated}(${r.resolved}) | ${r.repairs}(${r.repairsResolved}) | ${dist} | ${r.needsReview} | ${unresolved || "—"} | ${r.seconds} |`);
   }
   lines.push("", "## 실패 단계별", "", "| 단계 | 건수 | 재생성으로 해소 |", "|---|---|---|");
   for (const [stage, s] of byStage) lines.push(`| ${stage} | ${s.total} | ${s.resolved} |`);

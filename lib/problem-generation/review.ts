@@ -169,9 +169,20 @@ ${DISTRACTOR_RUBRIC}`,
  *   * 어려움 문제인데 obvious 오답이 하나라도 있거나, 추정 난이도가 easy → 재생성(난이도 미달)
  *   * 검사 모델이 문제 성립을 해치는 flag 를 냈으면 → 재생성
  */
-export function judgeReview(review: IndependentReview, requestedDifficulty: string, format: string): string[] {
+export type ReviewIssues = {
+  reasons: string[];
+  /** 오답 자리별 사유 — 정답 불일치·난이도 불일치·기타 지적이 없고 이 배열만 있으면 문항 전체를 다시 만들지 않고 이 자리만 고친다(2026-09-15). */
+  distractorTargets: { index: number; reason: string }[];
+  /** 정답 불일치·난이도 미달·기타 지적처럼 부분 수정으로 해소할 수 없는 문제가 있는가. */
+  hasStructuralIssue: boolean;
+};
+
+export function classifyReviewIssues(review: IndependentReview, requestedDifficulty: string, format: string): ReviewIssues {
   const reasons: string[] = [];
+  const distractorTargets: { index: number; reason: string }[] = [];
+  let hasStructuralIssue = false;
   if (!review.agrees) {
+    hasStructuralIssue = true;
     reasons.push(format === "mc"
       ? `독립 검사는 ${review.pickedIndex !== null ? String.fromCharCode(65 + review.pickedIndex) + ")" : "다른 답"}을 정답으로 골랐습니다 — 지정 정답과 다릅니다(정답이 둘이거나 지정 정답이 틀렸을 수 있음)`
       : `독립 검사가 계산한 답(${review.pickedAnswer ?? "?"})이 지정 정답과 다릅니다`);
@@ -180,17 +191,28 @@ export function judgeReview(review: IndependentReview, requestedDifficulty: stri
     const irrelevant = review.distractors.filter((d) => d.kind === "irrelevant");
     const obvious = review.distractors.filter((d) => d.obvious || d.kind === "irrelevant");
     const letters = (ds: typeof review.distractors) => ds.map((d) => String.fromCharCode(65 + d.index) + ")").join(", ");
+    const flagWeak = (ds: typeof review.distractors, note: string) => {
+      for (const d of ds) distractorTargets.push({ index: d.index, reason: `${d.kind === "irrelevant" ? "지문·자료와 무관합니다" : "너무 명백해 정답을 쉽게 고를 수 있습니다"} — ${note}` });
+    };
     if (requestedDifficulty === "hard") {
-      // 어려움: 무관·명백한 오답을 하나도 허용하지 않는다(제품 오너 기준).
-      if (irrelevant.length) reasons.push(`어려움 문제인데 오답 ${letters(irrelevant)}이 지문·자료와 무관합니다`);
-      else if (obvious.length) reasons.push(`어려움 문제인데 오답 ${letters(obvious)}이 너무 명백합니다`);
+      // 어려움: 무관·명백한 오답을 하나도 허용하지 않는다(제품 오너 기준). 정답·난이도는 맞는데 오답만 약하면 그 자리만 고친다.
+      if (irrelevant.length) { reasons.push(`어려움 문제인데 오답 ${letters(irrelevant)}이 지문·자료와 무관합니다`); flagWeak(irrelevant, "어려움 문제는 무관한 오답을 허용하지 않습니다"); }
+      else if (obvious.length) { reasons.push(`어려움 문제인데 오답 ${letters(obvious)}이 너무 명백합니다`); flagWeak(obvious, "어려움 문제는 명백한 오답을 허용하지 않습니다"); }
     } else {
-      // 보통·쉬움: 실제 시험도 쉽게 지워지는 오답이 하나쯤 있다. 오답 셋이 전부 명백/무관하거나 둘 이상이 무관하면 정답이 사실상 노출된 문항 → 재생성.
-      if (irrelevant.length >= 2) reasons.push(`오답 ${letters(irrelevant)}이 지문·자료와 무관합니다`);
-      else if (obvious.length >= 3) reasons.push(`오답 ${letters(obvious)}이 모두 너무 명백해 정답이 노출됩니다`);
+      // 보통·쉬움: 실제 시험도 쉽게 지워지는 오답이 하나쯤 있다. 오답 셋이 전부 명백/무관하거나 둘 이상이 무관하면 정답이 사실상 노출된 문항 → 그 자리들만 고친다.
+      if (irrelevant.length >= 2) { reasons.push(`오답 ${letters(irrelevant)}이 지문·자료와 무관합니다`); flagWeak(irrelevant, "정답이 사실상 노출됩니다"); }
+      else if (obvious.length >= 3) { reasons.push(`오답 ${letters(obvious)}이 모두 너무 명백해 정답이 노출됩니다`); flagWeak(obvious.slice(1), "정답이 사실상 노출됩니다"); }
     }
   }
-  if (requestedDifficulty === "hard" && review.estimatedDifficulty === "easy") reasons.push("어려움으로 요청했지만 독립 검사 추정 난이도가 easy 입니다 — 핵심 관계를 종합해야 풀리는 문항으로");
-  for (const f of review.flags) if (/정답이 둘|두 개 이상|둘 이상|모호|노출|불일치|ambiguous|two correct|exposed|mismatch/i.test(f)) reasons.push(`독립 검사 지적: ${f}`);
-  return reasons;
+  if (requestedDifficulty === "hard" && review.estimatedDifficulty === "easy") {
+    hasStructuralIssue = true;
+    reasons.push("어려움으로 요청했지만 독립 검사 추정 난이도가 easy 입니다 — 핵심 관계를 종합해야 풀리는 문항으로");
+  }
+  for (const f of review.flags) if (/정답이 둘|두 개 이상|둘 이상|모호|노출|불일치|ambiguous|two correct|exposed|mismatch/i.test(f)) { hasStructuralIssue = true; reasons.push(`독립 검사 지적: ${f}`); }
+  return { reasons, distractorTargets, hasStructuralIssue };
+}
+
+/** 기존 호출부(테스트 포함) 호환 — 사유 문자열만 필요할 때. */
+export function judgeReview(review: IndependentReview, requestedDifficulty: string, format: string): string[] {
+  return classifyReviewIssues(review, requestedDifficulty, format).reasons;
 }

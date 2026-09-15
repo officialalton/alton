@@ -444,3 +444,74 @@ ${params.options ? `선택지: ${params.options.join(" / ")}` : ""}
   // 정규화된 spec 을 돌려준다 — 원문(옛 표기·교점 아닌 점)이 그대로 저장되면 렌더·alt 가 깨진다(2026-09-15).
   return { ok: true, figure: v.spec };
 }
+
+/**
+ * 오답 부분 수정(2026-09-15 제품 오너: "문제를 검수해서 수정하는 방향").
+ *
+ * 지문·질문·정답·해설은 이미 계약·독립 검사를 통과했고, **오답 근거만** 걸렸을 때 문항 전체를 다시 만들지 않고
+ * 지목된 오답 자리만 고친다. 정답 자리와 다른 오답은 그대로 둔다 — 전체 재생성보다 해소율이 훨씬 높다(2026-09-15 표본 배치 확인).
+ */
+export async function repairDistractorsCore(params: {
+  skillType: string;
+  subjectName: string;
+  difficulty: ProblemDifficulty;
+  stimulus: string;
+  question: string;
+  options: string[];
+  correctIndex: number;
+  explanation: string;
+  /** 고칠 자리와 그 사유(독립 검사가 낸 오답 근거 문장). */
+  targets: { index: number; reason: string }[];
+}): Promise<{ ok: true; options: string[] } | { ok: false; error: string }> {
+  const message = await getAnthropic().messages.create({
+    model: "claude-sonnet-5",
+    max_tokens: 1200,
+    tools: [
+      {
+        name: "repair_distractors",
+        description: "지정된 오답 선택지만 다시 쓴다. 지문·질문·정답·다른 선택지는 바꾸지 않는다.",
+        input_schema: {
+          type: "object",
+          properties: {
+            replacements: {
+              type: "array",
+              items: { type: "object", properties: { index: { type: "number" }, text: { type: "string" } }, required: ["index", "text"] },
+              description: "고친 선택지만, {index, text} 쌍으로. 요청받지 않은 자리는 넣지 않는다.",
+            },
+          },
+          required: ["replacements"],
+        },
+      },
+    ],
+    tool_choice: { type: "tool", name: "repair_distractors" },
+    messages: [
+      {
+        role: "user",
+        content: `아래 SAT/AP 문항의 오답 선택지 중 지목된 자리만 다시 씁니다. 지문·질문·정답·다른 선택지·해설은 그대로 둡니다.
+- 과목: ${params.subjectName} · 유형: ${params.skillType} · 난이도: ${params.difficulty}
+
+지문/자료: ${params.stimulus}
+질문: ${params.question}
+선택지: ${params.options.map((o, i) => `${String.fromCharCode(65 + i)}) ${o}${i === params.correctIndex ? " (정답 — 바꾸지 않음)" : ""}`).join("\n")}
+해설: ${params.explanation}
+
+고칠 자리와 사유:
+${params.targets.map((t) => `${String.fromCharCode(65 + t.index)}) — ${t.reason}`).join("\n")}
+
+새 오답 규칙: 지문·자료의 일부를 맞게 반영하되 핵심 관계(원인/결과·조건·범위·비교·화자·시간, 또는 Math 라면 부호·단위·한 단계 누락·축 오독·조건 무시·계산 오류) 하나를 놓치거나 잘못 해석해야 한다. 지문과 무관한 내용, 명백한 반대말, all/never/only 같은 과장만으로 이루어진 선택지는 쓰지 않는다(어려움 난이도에서는 특히). 다른 선택지·정답과 겹치지 않게 한다.`,
+      },
+    ],
+  });
+  const toolUse = message.content.find((c) => c.type === "tool_use");
+  if (!toolUse || toolUse.type !== "tool_use") return { ok: false, error: "오답 수정 응답을 처리할 수 없습니다." };
+  const raw = (toolUse.input as { replacements?: { index: number; text: string }[] }).replacements ?? [];
+  const options = [...params.options];
+  for (const r of raw) {
+    if (typeof r.index === "number" && r.index >= 0 && r.index < options.length && r.index !== params.correctIndex && typeof r.text === "string" && r.text.trim()) {
+      options[r.index] = r.text.trim();
+    }
+  }
+  const changed = params.targets.some((t) => options[t.index] !== params.options[t.index]);
+  if (!changed) return { ok: false, error: "오답을 바꾸지 못했습니다." };
+  return { ok: true, options };
+}

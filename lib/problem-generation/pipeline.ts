@@ -3,8 +3,8 @@
 //   생성(core) → 자료 필요하면 자료 생성 → 유형별 품질 계약(다섯 연결) → 독립 품질 검사(정답·오답 품질·추정 난이도)
 //   → 통과한 것만 accepted. 걸리면 사유를 피드백으로 1회 재생성 → 재검사. 부족분은 1회 재생성.
 // 저장은 호출자가 한다(서버 액션은 DB 에, 스크립트는 보고서에).
-import { generateSectionProblemsCore, regenerateProblemCore, generateFigureForProblemCore, type FigurePolicy, type ProblemDifficulty, type ProblemFormat } from "./core";
-import { reviewProblemIndependently, judgeReview, type IndependentReview, type QualityRecord, type DistractorRationale, type DistractorKind } from "./review";
+import { generateSectionProblemsCore, regenerateProblemCore, generateFigureForProblemCore, repairDistractorsCore, type FigurePolicy, type ProblemDifficulty, type ProblemFormat } from "./core";
+import { reviewProblemIndependently, classifyReviewIssues, type IndependentReview, type QualityRecord, type DistractorRationale, type DistractorKind } from "./review";
 import { checkQualityContract } from "@/lib/problem-quality-contract";
 import { judgeMaterialNeed, materialBlocker } from "@/lib/problem-material-need";
 import { composeProblemText } from "@/lib/problem-question";
@@ -39,7 +39,7 @@ export type Failure = {
 export type PipelineResult = {
   accepted: Accepted[];
   failures: Failure[];
-  stats: { requested: number; generated: number; accepted: number; regenerated: number; regenerationResolved: number; refilled: number };
+  stats: { requested: number; generated: number; accepted: number; regenerated: number; regenerationResolved: number; refilled: number; distractorRepairs: number; distractorRepairsResolved: number };
 };
 
 /** 자료 판정 → 자료 생성기에 넘길 표준 유형. 도형은 본문에서 읽은 템플릿이 우선, 없으면 세부 기술로 고른다. */
@@ -60,7 +60,7 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
   const requested = Math.max(1, Math.min(10, params.count));
   const accepted: Accepted[] = [];
   const failures: Failure[] = [];
-  const stats = { requested, generated: 0, accepted: 0, regenerated: 0, regenerationResolved: 0, refilled: 0 };
+  const stats = { requested, generated: 0, accepted: 0, regenerated: 0, regenerationResolved: 0, refilled: 0, distractorRepairs: 0, distractorRepairsResolved: 0 };
   const skillCode = params.skillCode ?? null;
   const label = skillCode ? skillLabel(skillCode) ?? params.skillType : params.skillType;
 
@@ -126,32 +126,50 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
     if (!contract.ok) return fail(contract.issues[0].code.startsWith("contract_rw_") || contract.issues[0].code === "contract_evidence" ? "contract" : "contract", contract.issues.map((i) => i.message).slice(0, 2).join(" / "));
 
     // 3) 독립 품질 검사.
+    const runReview = () => reviewProblemIndependently({
+      skillLabel: label, examSystem: params.examSystem ?? null, format: params.format, stimulus, question: question ?? "", options: g.options ?? null,
+      statements: g.statements ?? null, figure: g.figure ?? null, correctIndex: g.correctIndex ?? null, answers: g.answers ?? null, requestedDifficulty: params.difficulty,
+    });
     let review: IndependentReview | null = null;
     let secondReviewDisagreedFirst = false;
     if (!params.skipReview) {
       try {
-        review = await reviewProblemIndependently({
-          skillLabel: label, examSystem: params.examSystem ?? null, format: params.format, stimulus, question: question ?? "", options: g.options ?? null,
-          statements: g.statements ?? null, figure: g.figure ?? null, correctIndex: g.correctIndex ?? null, answers: g.answers ?? null, requestedDifficulty: params.difficulty,
-        });
+        review = await runReview();
       } catch (e) {
         console.error("[pipeline] 독립 검사 오류:", e instanceof Error ? e.message : e);
       }
       if (review && !review.agrees) {
         // 독립 검사도 틀릴 수 있다 — 한 번 더 묻고, 2차가 지정 정답과 일치하면 '검토 필요'로 통과시킨다. 둘 다 불일치면 저장하지 않는다.
         try {
-          const second = await reviewProblemIndependently({
-            skillLabel: label, examSystem: params.examSystem ?? null, format: params.format, stimulus, question: question ?? "", options: g.options ?? null,
-            statements: g.statements ?? null, figure: g.figure ?? null, correctIndex: g.correctIndex ?? null, answers: g.answers ?? null, requestedDifficulty: params.difficulty,
-          });
+          const second = await runReview();
           if (second.agrees) { secondReviewDisagreedFirst = true; review = { ...second, confidence: "low" }; }
         } catch (e) {
           console.error("[pipeline] 2차 독립 검사 오류:", e instanceof Error ? e.message : e);
         }
       }
       if (review) {
-        const reasons = judgeReview(review, params.difficulty, params.format);
-        if (reasons.length) return fail("review", reasons.join(" / "));
+        let issues = classifyReviewIssues(review, params.difficulty, params.format);
+        // 오답 품질**만** 걸렸으면(정답·난이도·기타 지적은 문제없음) 문항 전체를 다시 만들지 않고 그 자리만 고쳐 재검사한다
+        // (2026-09-15 제품 오너: "생성 후에 문제를 검수해서 수정하는 방향" — 해소율이 전체 재생성보다 훨씬 높다).
+        if (issues.reasons.length && !issues.hasStructuralIssue && issues.distractorTargets.length && params.format === "mc" && g.options && g.correctIndex !== null) {
+          stats.distractorRepairs += 1;
+          try {
+            const repaired = await repairDistractorsCore({
+              skillType: params.skillType, subjectName: params.subjectName, difficulty: params.difficulty, stimulus: text, question: question ?? "",
+              options: g.options, correctIndex: g.correctIndex, explanation: g.explanation, targets: issues.distractorTargets,
+            });
+            if (repaired.ok) {
+              g.options = repaired.options;
+              const reReview = await runReview();
+              const reIssues = classifyReviewIssues(reReview, params.difficulty, params.format);
+              if (!reIssues.reasons.length) { stats.distractorRepairsResolved += 1; review = reReview; issues = reIssues; }
+              else { review = reReview; issues = reIssues; } // 부분 수정으로도 안 되면 아래에서 이 사유로 전체 재생성으로 넘어간다.
+            }
+          } catch (e) {
+            console.error("[pipeline] 오답 부분 수정 오류:", e instanceof Error ? e.message : e);
+          }
+        }
+        if (issues.reasons.length) return fail("review", issues.reasons.join(" / "));
       }
     }
 
@@ -184,20 +202,25 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
     return true;
   };
 
+  // 어려움은 오답·정답 기준이 엄격해 통과율이 낮다 — 요청보다 넉넉히 만들어 통과분만 채택한다(2026-09-15 제품 오너: "생성 수가 적으면 안 된다").
+  const initialCount = params.difficulty === "hard" ? Math.min(10, requested + Math.min(2, requested)) : requested;
   let generated: GeneratedProblem[] = [];
   try {
-    generated = await generate(requested);
+    generated = await generate(initialCount);
   } catch (e) {
     const message = e instanceof Error ? e.message : "생성 실패";
     failures.push({ skillCode, stage: "generate", reason: message, resolved: false, snippet: "" });
     return { accepted, failures, stats };
   }
   stats.generated += generated.length;
-  for (const g of generated) if (await gate(g, 0)) stats.accepted += 1;
+  for (const g of generated) {
+    if (stats.accepted >= requested) break;
+    if (await gate(g, 0)) stats.accepted += 1;
+  }
 
   if (stats.accepted < requested) {
     try {
-      const refill = await generate(requested - stats.accepted);
+      const refill = await generate(Math.min(10, requested - stats.accepted + (params.difficulty === "hard" ? 1 : 0)));
       stats.generated += refill.length;
       stats.refilled += refill.length;
       for (const g of refill) if (stats.accepted < requested && (await gate(g, 0))) stats.accepted += 1;

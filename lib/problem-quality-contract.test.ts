@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { checkQualityContract, contractCoverageGaps, QUALITY_CONTRACTS } from "./problem-quality-contract";
-import { judgeReview, normalizeSprAnswer, type IndependentReview } from "./problem-generation/review";
+import { classifyReviewIssues, judgeReview, normalizeSprAnswer, type IndependentReview } from "./problem-generation/review";
 
 const wic = {
   skillCode: "words_in_context", examSystem: "sat_rw", format: "mc",
@@ -94,5 +94,36 @@ describe("독립 품질 검사 판정", () => {
     expect(normalizeSprAnswer("7/2")).toBe(normalizeSprAnswer("3.5"));
     expect(normalizeSprAnswer("1,200")).toBe("1200");
     expect(normalizeSprAnswer(" 0.50 ")).toBe("0.5");
+  });
+});
+
+describe("오답 부분 수정 대상 분류(2026-09-15)", () => {
+  const base: IndependentReview = {
+    pickedIndex: 0, pickedAnswer: null, agrees: true, confidence: "high", estimatedDifficulty: "medium", difficultyReasons: [], flags: [],
+    distractors: [
+      { index: 1, plausibleBecause: "a", matches: "b", whyWrong: "c", kind: "partial", obvious: false },
+      { index: 2, plausibleBecause: "a", matches: "b", whyWrong: "c", kind: "scope", obvious: false },
+      { index: 3, plausibleBecause: "a", matches: "b", whyWrong: "c", kind: "relation_distortion", obvious: false },
+    ],
+  };
+  it("정답 불일치는 구조적 문제 — 부분 수정 대상이 아니다", () => {
+    const issues = classifyReviewIssues({ ...base, agrees: false, pickedIndex: 2 }, "medium", "mc");
+    expect(issues.hasStructuralIssue).toBe(true);
+    expect(issues.distractorTargets).toEqual([]);
+  });
+  it("보통 난이도에서 오답 하나만 명백하면 통과(구조 문제 없음, 대상도 없음)", () => {
+    const issues = classifyReviewIssues({ ...base, distractors: [{ ...base.distractors[0], obvious: true }, base.distractors[1], base.distractors[2]] }, "medium", "mc");
+    expect(issues.reasons).toEqual([]);
+    expect(issues.hasStructuralIssue).toBe(false);
+  });
+  it("어려움에서 오답 하나가 무관하면 구조 문제 없이 그 자리만 부분 수정 대상", () => {
+    const issues = classifyReviewIssues({ ...base, distractors: [{ ...base.distractors[0], kind: "irrelevant" }, base.distractors[1], base.distractors[2]] }, "hard", "mc");
+    expect(issues.hasStructuralIssue).toBe(false);
+    expect(issues.distractorTargets.map((t) => t.index)).toEqual([1]);
+    expect(issues.reasons.length).toBeGreaterThan(0);
+  });
+  it("정답 불일치와 오답 문제가 함께 있으면 구조 문제로 분류(부분 수정으로 끝내지 않음)", () => {
+    const issues = classifyReviewIssues({ ...base, agrees: false, distractors: [{ ...base.distractors[0], kind: "irrelevant" }, base.distractors[1], base.distractors[2]] }, "hard", "mc");
+    expect(issues.hasStructuralIssue).toBe(true);
   });
 });
