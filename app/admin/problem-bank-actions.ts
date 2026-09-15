@@ -367,7 +367,7 @@ export async function generateFigureForProblemAction(params: {
   passage: string;
   options: string[] | null;
   explanation: string;
-  kind: "coordinate_plane" | "parallel_transversal";
+  kind: "coordinate_plane" | "parallel_transversal" | "triangle";
 }): Promise<BankResult<unknown>> {
   await requireAdmin();
   const { generateFigureForProblem } = await import("./curriculum-doc-actions");

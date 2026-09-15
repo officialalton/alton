@@ -23,6 +23,7 @@ import LearningText from "@/app/session/[id]/LearningText";
 import { PROBLEM_SKILLS, findProblemSkill } from "@/lib/problem-skills";
 import { validateFigureSpec } from "@/lib/problem-figures/spec";
 import { lintParallelTransversalAgainstText, renderParallelTransversal } from "@/lib/problem-figures/templates/parallel-transversal";
+import { lintTriangleAgainstText, renderTriangle } from "@/lib/problem-figures/templates/triangle";
 import type { AdminSubject, SubjectKeyword } from "./subject-data";
 
 // P2 3차·8차 — 관리자 문제은행. 교재와 독립된 진입점이다.
@@ -880,6 +881,14 @@ function KeywordPicker({
   );
 }
 
+function canonical(v: unknown): string {
+  if (Array.isArray(v)) return `[${v.map(canonical).join(",")}]`;
+  if (v && typeof v === "object") {
+    return `{${Object.keys(v as object).sort().map((k) => `${JSON.stringify(k)}:${canonical((v as Record<string, unknown>)[k])}`).join(",")}}`;
+  }
+  return JSON.stringify(v);
+}
+
 /**
  * 초안을 쓰고, 미리 본 뒤 공개한다.
  *
@@ -915,7 +924,8 @@ function DraftEditor({
       return { spec: null, error: "JSON 을 읽을 수 없습니다." };
     }
   })();
-  const figureDirty = JSON.stringify(figureParsed.spec ?? null) !== JSON.stringify(source?.figure ?? null);
+  // jsonb 는 키 순서를 바꿔 돌려주므로 정렬해 비교한다 — 같은 그림을 '바뀐 것'으로 보면 확인 체크가 잠긴 채 남는다.
+  const figureDirty = canonical(figureParsed.spec ?? null) !== canonical(source?.figure ?? null);
   const [passage, setPassage] = useState(source?.passage ?? "");
   // 표준 렌더링 검증(클라이언트에서도 같은 규칙으로 즉시) — 저장하면 서버가 같은 검사를 해 render_check 에 남긴다.
   const figureIsLegacy = figureParsed.spec != null && (figureParsed.spec as { type?: string }).type === "geometry";
@@ -929,10 +939,19 @@ function DraftEditor({
       const r = renderParallelTransversal(spec as never);
       return [...r.issues, ...lintParallelTransversalAgainstText(spec as never, passage)];
     }
+    if (spec.type === "triangle") {
+      const r = renderTriangle(spec as never);
+      return [...r.issues, ...lintTriangleAgainstText(spec as never, passage)];
+    }
     if (spec.type === "image" && !imageAlt.trim()) return [{ code: "alt_required", message: "올린 그림에는 대체 설명이 필요합니다." }];
     return [];
   })();
-  const figureAlt = figureForSave && (figureForSave as { type?: string }).type === "parallel_transversal" ? renderParallelTransversal(figureForSave as never).alt : figureIsImage ? imageAlt : null;
+  const figureAlt = (() => {
+    const t = (figureForSave as { type?: string } | null)?.type;
+    if (t === "parallel_transversal") return renderParallelTransversal(figureForSave as never).alt;
+    if (t === "triangle") return renderTriangle(figureForSave as never).alt;
+    return figureIsImage ? imageAlt : null;
+  })();
   const [figureNotice, setFigureNotice] = useState<string | null>(null);
   const [figureBusy, setFigureBusy] = useState(false);
 
@@ -1102,7 +1121,7 @@ function DraftEditor({
         )}
 
         <div className="flex flex-wrap items-center gap-2 mb-1.5">
-          {(["parallel_transversal", "coordinate_plane"] as const).map((kind) => (
+          {(["parallel_transversal", "triangle", "coordinate_plane"] as const).map((kind) => (
             <button
               key={kind}
               type="button"
@@ -1121,7 +1140,7 @@ function DraftEditor({
               }}
               className="text-[12px] font-bold px-2.5 py-1 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
             >
-              {figureBusy ? "만드는 중…" : kind === "coordinate_plane" ? "AI로 좌표평면 그림 만들기" : "AI로 도형 데이터 만들기(평행선·횡단선)"}
+              {figureBusy ? "만드는 중…" : kind === "coordinate_plane" ? "AI로 좌표평면 그림 만들기" : kind === "triangle" ? "AI로 도형 데이터 만들기(삼각형)" : "AI로 도형 데이터 만들기(평행선·횡단선)"}
             </button>
           ))}
           <label className="inline-flex items-center gap-2 text-[12px] text-ink">

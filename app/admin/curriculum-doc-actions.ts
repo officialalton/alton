@@ -4,7 +4,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { createClient } from "@/utils/supabase/server";
 import { sanitizeDocHtml } from "@/lib/sanitize-doc-html";
 import { stripInlineOptions } from "@/lib/problem-text";
-import { validateFigureSpec } from "@/lib/problem-figures/spec";
+import { TEMPLATE_FIGURE_TYPES, validateFigureSpec } from "@/lib/problem-figures/spec";
 import { findProblemSkill } from "@/lib/problem-skills";
 import type { DocProblem, DocSection, DocEditorData } from "./curriculum-doc-data";
 import { loadCurriculumDocDetail } from "./curriculum-doc-data";
@@ -399,11 +399,15 @@ export type FigurePolicy = "none" | "optional" | "require_plane" | "require_geom
 /** 표준 렌더링 엔진 템플릿 1 — AI 도구 스키마 설명(2026-09-14). 좌표 없이 관계만. */
 const PARALLEL_TRANSVERSAL_DESC =
   "평행선·횡단선·각(표준 템플릿, 좌표 없음 — 관계만): {type:'parallel_transversal', parallel:['m','n'](위,아래 평행선 이름 2개), transversals:[{id:'k'}](1~2개), points:[{id:'A', on:['m','k']}](교점 이름, 선택), angles:[{at:['m','k'], region:'NE'|'NW'|'SE'|'SW', label:'x°'}](어느 교점·어느 사분면·라벨; 라벨은 평문 'x°','37°','(2x + 10)°'), notToScale:true}. 지문이 말하는 선·점·각 이름은 여기 반드시 있어야 하고, 지문에 없는 것을 넣지 않는다. region 은 그림 배치용 내부 값이다 — **지문에는 north/south/east/west, region, quadrant 같은 방위 표현을 절대 쓰지 말고**(쓰면 검증에서 거부된다) 예: 'In the figure, lines m and n are parallel and line k is a transversal. If the angle marked 37° ... , what is the value of x?' 처럼 시험 문제처럼 \"the angle marked (3x + 25)°\", \"the angle at A\" 로 부른다. 평행선 3개·수직 횡단선·삼각형이 섞인 그림은 이 템플릿으로 만들 수 없다 — 그런 문항은 만들지 않는다.";
+/** 표준 렌더링 엔진 템플릿 2 — 삼각형·직각삼각형·합동/닮음. 좌표 없이 관계만. */
+const TRIANGLE_DESC =
+  "삼각형(표준 템플릿, 좌표 없음 — 관계만): {type:'triangle', vertices:['A','B','C'](꼭짓점 3개; 표준 배치는 첫째 위, 둘째 왼쪽 아래, 셋째 오른쪽 아래), kind:'right'|'isosceles'|'equilateral'|'scalene', rightAngleAt:'B'(직각 꼭짓점; kind 'right' 면 필수), sides:[{between:['A','B'], label:'6', tick:1}](변 길이 라벨·등변 눗금 1~3), angles:[{at:'C', label:'37°', tick:1}](각 라벨·등각 호 1~2; 직각 꼭짓점엔 라벨 없음), altitude:{from:'A', foot:'D', label:'h'}(높이, 선택), second:{vertices:['D','E','F'], scale:0.6, sides, angles}(합동·닮음용 두 번째 삼각형, 다른 이름), notToScale:true}. " +
+  "지문이 부르는 점·변·각·길이·직각은 데이터에 반드시 있고 값이 같아야 한다(지문 AB = 6 이면 sides 에 AB 라벨 '6'). 지문에 없는 라벨을 넣지 않는다. 라벨은 평문('6', 'x', '37°', 'θ', '√2').";
 const FIGURE_POLICY_RULE: Record<FigurePolicy, string> = {
   none: "figure 를 만들지 않는다. 그림 없이 풀 수 있는 문항만 만든다.",
   optional: "그래프·도형이 꼭 필요한 문항에만 figure 데이터를 넣는다.",
   require_plane: "**모든 문항에 figure(type:'coordinate_plane') 데이터가 있어야 한다.** 그래프를 읽어야만 풀 수 있는 문항(절편·교점·기울기·해 읽기 등)으로 만든다. 좌표는 문제 수치와 정확히 일치하고, 답이 그림에 글자로 드러나지 않게 한다.",
-  require_geometry: "**모든 문항에 figure(type:'parallel_transversal') 데이터가 있어야 한다.** 평행선 2개를 횡단선이 가로지르는 각 문제(대응각·엇각·동측내각)로 만든다. AI 는 좌표나 그림을 그리지 않고 **관계만** 낸다: 평행선 이름, 횡단선 이름, (필요하면) 교점 이름, 각의 자리(어느 교점·어느 사분면)와 라벨. 지문에서 부르는 선·점·각 이름과 데이터가 정확히 같아야 한다(예: 지문이 lines m and n, transversal k, 37° 라면 데이터도 m, n, k, '37°'). 라벨은 평문('x°', '37°', '(2x + 10)°'). 삼각형·원·수직선은 이 템플릿에 넣지 않는다.",
+  require_geometry: "**모든 문항에 표준 도형 템플릿 figure 데이터가 있어야 한다** — type 'parallel_transversal'(평행선 2개를 횡단선이 가로지르는 각 문제) 또는 'triangle'(삼각형·직각삼각형·합동/닮음). AI 는 좌표나 그림을 그리지 않고 **관계만** 낸다. 지문에서 부르는 선·점·변·각 이름과 값이 데이터와 정확히 같아야 한다. 라벨은 평문. 지문에는 north/south/east/west, region, quadrant 같은 방위 표현을 절대 쓰지 말고(검증에서 거부된다) 시험 문제처럼 \"the angle marked 37°\", \"the angle at A\", \"AB = 6\" 으로 부른다. 원·사각형·평행선 3개 등 두 템플릿으로 그릴 수 없는 문항은 만들지 않는다.",
 };
 export type ProblemDifficulty = "easy" | "medium" | "hard";
 
@@ -470,7 +474,7 @@ export async function generateSectionProblems(params: {
                     description:
                       "그래프·도형이 꼭 필요한 수학 문항에만. 그림 파일이 아니라 데이터다. " +
                       "좌표평면: {type:'coordinate_plane', xRange:[min,max], yRange:[min,max], xTitle:'Time (seconds)', yTitle:'Height (meters)', items:[{kind:'line', through:[[x,y],[x,y]], label}, {kind:'line', slope, intercept}, {kind:'points', points:[[x,y]], labels:[]}, {kind:'function', fn:'linear'|'quadratic'|'exponential'|'abs'|'sqrt'|'cubic', params:[...]}, {kind:'segment', from, to}, {kind:'polyline', points}]}. " +
-                      "기하: " + PARALLEL_TRANSVERSAL_DESC + " " +
+                      "기하(둘 중 하나): " + PARALLEL_TRANSVERSAL_DESC + " " + TRIANGLE_DESC + " " +
                       "좌표평면의 좌표는 문제의 수치와 정확히 일치해야 한다. 좌표를 직접 찍는 옛 기하 형식(type:'geometry')은 쓰지 않는다.",
                   },
                   explanation: {
@@ -533,12 +537,12 @@ ${format === "spr" ? "숫자 입력(SPR)은 SAT Math 학생 직접 입력 문항
   const raw = rawList.filter((p) => p && typeof p.passage === "string");
   if (raw.length === 0) throw new Error("AI 응답에 문제가 없습니다.");
 
-  const requiredType =
-    figurePolicy === "require_plane" ? "coordinate_plane" : figurePolicy === "require_geometry" ? "parallel_transversal" : null;
-  const kept = requiredType
+  const requiredTypes: readonly string[] | null =
+    figurePolicy === "require_plane" ? ["coordinate_plane"] : figurePolicy === "require_geometry" ? TEMPLATE_FIGURE_TYPES : null;
+  const kept = requiredTypes
     ? raw.filter((p) => {
         const v = p.figure ? validateFigureSpec(p.figure) : null;
-        return Boolean(v && v.ok && v.spec.type === requiredType);
+        return Boolean(v && v.ok && requiredTypes.includes(v.spec.type));
       })
     : raw;
   if (kept.length === 0) throw new Error("요구한 그림이 있는 문항이 하나도 만들어지지 않았습니다. 유형·개수를 바꿔 다시 시도하세요.");
@@ -726,7 +730,7 @@ export async function generateFigureForProblem(params: {
   passage: string;
   options: string[] | null;
   explanation: string;
-  kind: "coordinate_plane" | "parallel_transversal";
+  kind: "coordinate_plane" | "parallel_transversal" | "triangle";
 }): Promise<{ ok: true; figure: unknown } | { ok: false; error: string }> {
   await requireAdmin();
   if (!process.env.ANTHROPIC_API_KEY) return { ok: false, error: "이 환경에는 AI 생성이 설정되어 있지 않습니다." };
@@ -745,7 +749,9 @@ export async function generateFigureForProblem(params: {
               description:
                 params.kind === "coordinate_plane"
                   ? "{type:'coordinate_plane', xRange:[min,max], yRange:[min,max], items:[{kind:'line', through:[[x,y],[x,y]], label}, {kind:'line', slope, intercept}, {kind:'points', points:[[x,y]], labels:[]}, {kind:'function', fn:'linear'|'quadratic'|'exponential'|'abs'|'sqrt'|'cubic', params:[...]}, {kind:'segment', from, to}, {kind:'polyline', points}]}"
-                  : PARALLEL_TRANSVERSAL_DESC,
+                  : params.kind === "triangle"
+                    ? TRIANGLE_DESC
+                    : PARALLEL_TRANSVERSAL_DESC,
             },
           },
           required: ["figure"],
@@ -756,7 +762,7 @@ export async function generateFigureForProblem(params: {
     messages: [
       {
         role: "user",
-        content: `다음 문제에 맞는 그림 데이터(${params.kind})를 만들어주세요. ${params.kind === "parallel_transversal" ? "좌표나 그림을 그리지 말고 관계만 적으세요 — 평행선·횡단선·교점 이름과 각의 자리(어느 교점, 어느 사분면)·라벨. 지문이 부르는 이름과 정확히 같게, 지문에 없는 이름은 넣지 마세요. 정답 각의 크기가 라벨로 드러나면 안 됩니다." : "좌표·길이·각은 문제의 수치와 정확히 일치해야 하고, 정답이 그림에 글자로 드러나면 안 됩니다."} 라벨은 문제의 기호와 같게, 각 라벨은 선과 겹치지 않게. 라벨은 LaTeX 가 아니라 평문으로(예: 'x°', '37°', 'AB' — '$x^\\circ$' 금지). 한 그림에는 문제에 필요한 한 가지 상황만 그리고 여러 도형을 섞지 않습니다.
+        content: `다음 문제에 맞는 그림 데이터(${params.kind})를 만들어주세요. ${params.kind === "parallel_transversal" ? "좌표나 그림을 그리지 말고 관계만 적으세요 — 평행선·횡단선·교점 이름과 각의 자리(어느 교점, 어느 사분면)·라벨. 지문이 부르는 이름과 정확히 같게, 지문에 없는 이름은 넣지 마세요. 정답 각의 크기가 라벨로 드러나면 안 됩니다." : params.kind === "triangle" ? "좌표나 그림을 그리지 말고 관계만 적으세요 — 꼭짓점 이름, 종류(직각·이등변·정삼각형·일반), 직각 위치, 지문이 준 변 길이·각 라벨(값 그대로), 등변·등각 표시, 높이, 닮음·합동이면 두 번째 삼각형. 지문에 없는 라벨은 넣지 말고, 구하라는 값(정답)은 라벨에 쓰지 마세요(미지수 문자면 됩니다)." : "좌표·길이·각은 문제의 수치와 정확히 일치해야 하고, 정답이 그림에 글자로 드러나면 안 됩니다."} 라벨은 문제의 기호와 같게, 각 라벨은 선과 겹치지 않게. 라벨은 LaTeX 가 아니라 평문으로(예: 'x°', '37°', 'AB' — '$x^\\circ$' 금지). 한 그림에는 문제에 필요한 한 가지 상황만 그리고 여러 도형을 섞지 않습니다.
 지문: ${params.passage}
 ${params.options ? `선택지: ${params.options.join(" / ")}` : ""}
 해설: ${params.explanation}`,

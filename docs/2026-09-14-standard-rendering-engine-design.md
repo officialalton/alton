@@ -15,6 +15,8 @@ transversal 좌표, angleLabels at [x,y])를 내는 구조다. 그래서 지문(
 > `lib/problem-figures/check.ts`(검증 계층), `20261365`(render_check + 공개 게이트), 관리자 편집기(렌더 미리보기 우선·사유 목록·JSON 접힘),
 > AI 도구 스키마(관계만). 로컬 E2E `e2e/figure-template-1.spec.ts`: 실제 모델 생성 → 검증 → 공개 → 학생 화면(데스크톱·375px)까지 통과.
 > 표본: `docs/assets/2026-09-14-render-samples/t1-*.png`(대표 10문항), `e2e/*.png`(실제 생성본).
+> **템플릿 2(삼각형·직각삼각형·합동/닮음) 구현 완료** — `templates/triangle.ts`(관계형 스키마: 꼭짓점·종류·직각·변 라벨/눗금·각 라벨/호·높이·두 번째 삼각형; 표준형 배치; 참조 lint: △ABC, side AB, AB = 6 값 일치, ∠/angle, right angle at, 직각삼각형, 각도 라벨), 공통 조판 `templates/_layout.ts`(Sheet: 선·호·직각·눗금·라벨 충돌 검사). 표본 `t2-desktop.png`, E2E `e2e/04~06-*.png`.
+> **검증 구분**: 로컬 E2E(로컬 Supabase+dev, 실제 모델) = 템플릿 1·2 통과. **Preview**: 공유 non-prod DB 에서 공개 게이트 4단계(검증 기록 없음 거절 → 실패 사유 거절 → 확인 없이 거절 → 공개)를 실제로 실행해 확인(`[PREVIEW GATE LOG 2026-09-14]` 보관 문제). Preview **UI**(관리자 생성→학생 화면)는 시드 계정이 non-prod 에 없어 미실행 — 제품 오너 UAT 계정으로 확인 필요.
 
 ## 0. 역할 분리 (모든 자료 유형 공통)
 

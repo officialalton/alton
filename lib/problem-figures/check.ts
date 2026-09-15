@@ -4,6 +4,7 @@
 import { createHash } from "node:crypto";
 import { LEGACY_FIGURE_TYPES, validateFigureSpec } from "./spec";
 import { lintParallelTransversalAgainstText, renderParallelTransversal, type FigureIssue } from "./templates/parallel-transversal";
+import { lintTriangleAgainstText, renderTriangle } from "./templates/triangle";
 
 export const RENDERER_VERSION = "std-1";
 
@@ -48,6 +49,11 @@ export function checkFigure(figure: unknown, passage: string): RenderCheck {
   if (spec.type === "parallel_transversal") {
     const r = renderParallelTransversal(spec);
     issues.push(...r.issues, ...lintParallelTransversalAgainstText(spec, passage));
+    return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
+  }
+  if (spec.type === "triangle") {
+    const r = renderTriangle(spec);
+    issues.push(...r.issues, ...lintTriangleAgainstText(spec, passage));
     return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
   }
   // coordinate_plane — 현행 렌더러(템플릿 3 재정의 전). 스키마 검사만.
