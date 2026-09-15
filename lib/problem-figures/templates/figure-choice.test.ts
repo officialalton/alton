@@ -3,6 +3,7 @@ import { checkFigure } from "../check";
 import { renderFigureSvg } from "../render";
 import { validateFigureSpec } from "../spec";
 import type { PlaneSpec } from "./coordinate-plane";
+import { placeCorrectChoice } from "./figure-choice";
 
 const axes = { x: { min: -5, max: 5 }, y: { min: -5, max: 5 } };
 const line = (id: string, m: number, b: number): PlaneSpec => ({ type: "plane", axes, objects: [{ id, kind: "line", slope: m, intercept: b }] });
@@ -25,6 +26,24 @@ describe("figure_choice — 그래프 선택지 4개", () => {
     const codes = c.issues.map((i) => i.code);
     expect(codes.filter((x) => x === "choice_bias").length).toBeGreaterThanOrEqual(3);
     expect(checkFigure(choice(), "Which graph?", ["A", "B", "C"]).issues.some((i) => i.code === "choice_count")).toBe(true);
+  });
+  it("정답 자리의 그림에 지문의 식이 없거나 다른 선택지에도 있으면 정답 불일치로 거부", () => {
+    const passage = "Which of the following graphs represents y = -2x + 3?";
+    const fc = { type: "figure_choice", choices: [line("a", -2, 3), line("b", 2, 3), line("c", -2, -3), line("d", 0.5, 3)] };
+    expect(checkFigure(fc, passage, ["A", "B", "C", "D"], 0).ok).toBe(true);
+    expect(checkFigure(fc, passage, ["A", "B", "C", "D"], 1).issues.some((i) => i.code === "answer_mismatch")).toBe(true);
+    const dup = { ...fc, choices: [line("a", -2, 3), line("b", -2, 3), line("c", 1, 1), line("d", 0.5, 3)] };
+    expect(checkFigure(dup, passage, ["A", "B", "C", "D"], 0).issues.some((i) => i.message.includes("정답이 둘"))).toBe(true);
+  });
+  it("정답 그래프를 correct_index 자리로 옮기고, 그림 데이터에 실린 options/correct_index 는 버린다", () => {
+    const fc = { type: "figure_choice", choices: [line("a", -2, 3), line("b", 2, 3), line("c", -2, -3), line("d", 0.5, 3)], options: ["A", "B", "C", "D"], correct_index: 0 };
+    const v = validateFigureSpec(fc);
+    expect(v.ok && !("options" in v.spec)).toBe(true);
+    const moved = placeCorrectChoice(fc as never, "Which graph represents y = -2x + 3?", 1);
+    expect(checkFigure(moved, "Which graph represents y = -2x + 3?", ["A", "B", "C", "D"], 1).ok).toBe(true);
+    // AI 변형 모양(xmin/xmax, type, points)도 표준으로 받아들인다.
+    const alt = { type: "plane", axes: { xmin: -5, xmax: 5, ymin: -5, ymax: 5, xstep: 1, ystep: 1 }, objects: [{ type: "line", points: [[-1, 5], [3, -3]] }] };
+    expect(validateFigureSpec(alt).ok).toBe(true);
   });
   it("스키마: 선택지 type 이 섞이거나 중첩 선택지·이미지는 거부", () => {
     expect(validateFigureSpec({ type: "figure_choice", choices: [line("a", 1, 0), { type: "triangle", vertices: ["A", "B", "C"] }] }).ok).toBe(false);

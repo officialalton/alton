@@ -486,7 +486,7 @@ export default function ProblemsPanel({
               )}
 
               {p.options.length > 0 && (
-                <ol className="mb-3">
+                <ol className={"mb-3 " + ((p.figure as { type?: string } | null)?.type === "figure_choice" ? "grid sm:grid-cols-2 gap-x-3" : "")} data-testid="options">
                   {p.options.map((opt, i) => {
                     const mine = p.myChoice === i;
                     const correct = answerShown(p) && p.correctIndex === i;

@@ -2,6 +2,6 @@
 import { checkFigure } from "./check";
 import type { FigureIssue } from "./templates/_layout";
 
-export function checkFigureClient(spec: unknown, passage: string, options?: string[] | null): FigureIssue[] {
-  return checkFigure(spec, passage, options).issues;
+export function checkFigureClient(spec: unknown, passage: string, options?: string[] | null, correctIndex?: number | null): FigureIssue[] {
+  return checkFigure(spec, passage, options, correctIndex).issues;
 }

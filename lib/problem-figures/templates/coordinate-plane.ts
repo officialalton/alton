@@ -49,9 +49,36 @@ function niceStep(range: number): number {
   return cands.find((c) => c >= raw) ?? cands[cands.length - 1];
 }
 
+/** AI 가 같은 뜻을 다른 모양으로 보내는 흔한 변형을 표준 모양으로 — axes:{xmin,xmax,…}, objects[].type→kind, line.points→through. 의미는 바꾸지 않는다. */
+export function normalizePlaneInput(input: unknown): unknown {
+  if (!input || typeof input !== "object") return input;
+  const s = { ...(input as Record<string, unknown>) };
+  const ax = s.axes as Record<string, unknown> | undefined;
+  if (ax && (ax.xmin !== undefined || ax.xMin !== undefined) && ax.x === undefined) {
+    const g = (a: string, b: string) => (ax[a] !== undefined ? ax[a] : ax[b]);
+    s.axes = {
+      x: { min: g("xmin", "xMin"), max: g("xmax", "xMax"), ...(g("xstep", "xStep") !== undefined ? { step: g("xstep", "xStep") } : {}), ...(g("xtitle", "xTitle") !== undefined ? { title: g("xtitle", "xTitle") } : {}) },
+      y: { min: g("ymin", "yMin"), max: g("ymax", "yMax"), ...(g("ystep", "yStep") !== undefined ? { step: g("ystep", "yStep") } : {}), ...(g("ytitle", "yTitle") !== undefined ? { title: g("ytitle", "yTitle") } : {}) },
+    };
+  }
+  if (Array.isArray(s.objects)) {
+    s.objects = (s.objects as Record<string, unknown>[]).map((o, i) => {
+      if (!o || typeof o !== "object") return o;
+      const n = { ...o };
+      if (n.kind === undefined && typeof n.type === "string") { n.kind = n.type; delete n.type; }
+      if (n.id === undefined) n.id = `${String(n.kind ?? "obj")}${i + 1}`;
+      if (n.kind === "line" && Array.isArray(n.points) && n.through === undefined && n.slope === undefined) { n.through = n.points; delete n.points; }
+      if (n.kind === "point" && Array.isArray(n.position) && n.at === undefined) { n.at = n.position; delete n.position; }
+      return n;
+    });
+  }
+  for (const k of ["options", "correct_index", "correctIndex"]) delete s[k];
+  return s;
+}
+
 export function validatePlane(input: unknown): { ok: true; spec: PlaneSpec } | { ok: false; error: string } {
   if (!input || typeof input !== "object") return { ok: false, error: "그림 데이터가 객체가 아닙니다." };
-  const s = input as Record<string, unknown>;
+  const s = normalizePlaneInput(input) as Record<string, unknown>;
   if (s.type !== "plane") return { ok: false, error: "type 이 plane 이 아닙니다." };
   const axes = s.axes as Record<string, Record<string, unknown>> | undefined;
   for (const k of ["x", "y"] as const) {

@@ -28,7 +28,7 @@ export function passageRequiresFigure(passage: string): boolean {
   return /\b(as shown|in the figure|the figure|the diagram|shown below|shown above|the graph (?:above|below|shown))\b/i.test(passage);
 }
 
-export function checkFigure(figure: unknown, passage: string, options?: string[] | null): RenderCheck {
+export function checkFigure(figure: unknown, passage: string, options?: string[] | null, correctIndex?: number | null): RenderCheck {
   const checkedAt = new Date().toISOString();
   const issues: FigureIssue[] = [];
   if (figure === null || figure === undefined) {
@@ -65,7 +65,7 @@ export function checkFigure(figure: unknown, passage: string, options?: string[]
   }
   if (spec.type === "figure_choice") {
     const childCheck = (c: unknown, text: string) => { const r = checkFigure(c, text); return { issues: r.issues, alt: r.alt }; };
-    issues.push(...lintFigureChoice(spec, options, childCheck));
+    issues.push(...lintFigureChoice(spec, options, childCheck, { passage, correctIndex }));
     const r = renderFigureChoice(spec, (c) => renderFigureSvg(c as typeof spec));
     return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
   }

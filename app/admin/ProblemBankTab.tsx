@@ -1043,6 +1043,9 @@ function DraftEditor({
     return existing.length > 4 ? [...existing] : [0, 1, 2, 3].map((i) => existing[i] ?? "");
   }, [source]);
   const [options, setOptions] = useState<string[]>(initialOptions);
+  const [correctIndex, setCorrectIndex] = useState<number | null>(
+    source?.correctIndex ?? null
+  );
   // 표준 렌더링 검증(클라이언트에서도 같은 규칙으로 즉시) — 저장하면 서버가 같은 검사를 해 render_check 에 남긴다.
   const figureIsLegacy = figureParsed.spec != null && LEGACY_FIGURE_TYPES.includes((figureParsed.spec as { type?: string }).type ?? "");
   const figureIsImage = figureParsed.spec != null && (figureParsed.spec as { type?: string }).type === "image";
@@ -1080,7 +1083,7 @@ function DraftEditor({
       return [...r.issues, ...lintSolidAgainstText(spec as never, passage)];
     }
     if (spec.type === "image" && !imageAlt.trim()) return [{ code: "alt_required", message: "올린 그림에는 대체 설명이 필요합니다." }];
-    if (spec.type === "figure_choice" || spec.type === "figure_set") return figureCheckClient(spec, passage, isMc ? options : null);
+    if (spec.type === "figure_choice" || spec.type === "figure_set") return figureCheckClient(spec, passage, isMc ? options : null, correctIndex);
     return [];
   })();
   const figureAlt = (() => {
@@ -1098,9 +1101,6 @@ function DraftEditor({
   const [figureBusy, setFigureBusy] = useState(false);
 
 
-  const [correctIndex, setCorrectIndex] = useState<number | null>(
-    source?.correctIndex ?? null
-  );
   const [explanation, setExplanation] = useState(source?.explanation ?? "");
   const contentIssues = checkContent({
     format: problem.format, passage, options: isMc ? options.map((o) => o.trim()).filter(Boolean) : null,
@@ -1288,7 +1288,7 @@ function DraftEditor({
               onClick={async () => {
                 setFigureBusy(true);
                 setFigureNotice(null);
-                const r = await generateFigureForProblemAction({ passage, options: isMc ? options : null, explanation, kind });
+                const r = await generateFigureForProblemAction({ passage, options: isMc ? options : null, explanation, kind, correctIndex: isMc ? correctIndex : null });
                 setFigureBusy(false);
                 if (!r.ok) {
                   setFigureNotice(`그림을 만들지 못했습니다 — ${r.error}`);

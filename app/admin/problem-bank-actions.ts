@@ -338,7 +338,7 @@ export async function createDraftVersionAction(params: {
   });
   const fatal = contentIssues.find((i) => ["math_parse", "math_unclosed", "latex_leak"].includes(i.code));
   if (fatal) return { ok: false, error: `수식을 조판할 수 없어 저장하지 않았습니다 — ${fatal.message}` };
-  const figureCheck = checkFigure(params.figure ?? null, params.passage, params.options);
+  const figureCheck = checkFigure(params.figure ?? null, params.passage, params.options, params.correctIndex);
   if (figureCheck.issues.some((i) => i.code === "schema")) {
     return { ok: false, error: `그림 데이터가 규격에 맞지 않아 저장하지 않았습니다 — ${figureCheck.issues[0].message}` };
   }
@@ -395,6 +395,7 @@ export async function generateFigureForProblemAction(params: {
   options: string[] | null;
   explanation: string;
   kind: "plane" | "parallel_transversal" | "triangle" | "circle" | "polygon" | "solid" | "data" | "figure_choice";
+  correctIndex?: number | null;
 }): Promise<BankResult<unknown>> {
   await requireAdmin();
   const { generateFigureForProblem } = await import("./curriculum-doc-actions");

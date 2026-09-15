@@ -5,6 +5,7 @@ import { createClient } from "@/utils/supabase/server";
 import { sanitizeDocHtml } from "@/lib/sanitize-doc-html";
 import { stripInlineOptions } from "@/lib/problem-text";
 import { GEOMETRY_TEMPLATE_TYPES, validateFigureSpec } from "@/lib/problem-figures/spec";
+import { placeCorrectChoice } from "@/lib/problem-figures/templates/figure-choice";
 import { findProblemSkill } from "@/lib/problem-skills";
 import { SKILL_BY_CODE, domainLabel } from "@/lib/problem-taxonomy";
 import type { DocProblem, DocSection, DocEditorData } from "./curriculum-doc-data";
@@ -761,6 +762,8 @@ export async function generateFigureForProblem(params: {
   options: string[] | null;
   explanation: string;
   kind: "plane" | "parallel_transversal" | "triangle" | "circle" | "polygon" | "solid" | "data" | "figure_choice";
+  /** 그래프 선택지일 때 정답 자리(0-based) — 정답 그래프를 그 자리에 두게 한다. */
+  correctIndex?: number | null;
 }): Promise<{ ok: true; figure: unknown } | { ok: false; error: string }> {
   await requireAdmin();
   if (!process.env.ANTHROPIC_API_KEY) return { ok: false, error: "이 환경에는 AI 생성이 설정되어 있지 않습니다." };
@@ -811,7 +814,12 @@ ${params.options ? `선택지: ${params.options.join(" / ")}` : ""}
   });
   const toolUse = message.content.find((c) => c.type === "tool_use");
   if (!toolUse || toolUse.type !== "tool_use") return { ok: false, error: "AI 응답을 처리할 수 없습니다." };
-  const figure = (toolUse.input as { figure?: unknown }).figure;
+  let figure = (toolUse.input as { figure?: unknown }).figure;
+  // 그래프 선택지: 모델이 정답 자리를 안 지키는 일이 잦다 — 지문의 식과 같은 그래프를 correct_index 자리로 옮긴다(그림만 옮기면 뜻이 같다).
+  if (params.kind === "figure_choice" && figure && typeof figure === "object" && params.correctIndex !== null && params.correctIndex !== undefined) {
+    const v0 = validateFigureSpec(figure);
+    if (v0.ok && v0.spec.type === "figure_choice") figure = placeCorrectChoice(v0.spec, params.passage, params.correctIndex);
+  }
   const v = validateFigureSpec(figure);
   if (!v.ok) {
     // 관리자가 무엇이 왔는지 볼 수 있게 원문 일부를 붙인다(고칠 수 있어야 한다).

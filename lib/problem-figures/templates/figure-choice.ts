@@ -17,9 +17,31 @@ export type FigureSetSpec = { type: "figure_set"; figures: { id: string; title?:
 const LETTERS = ["A", "B", "C", "D", "E"];
 const CHILD_TYPES_ALLOWED = ["plane", "parallel_transversal", "triangle", "circle", "polygon", "solid", "data"];
 
+/** 지문의 일차식과 같은 그래프가 든 선택지 번호(정확히 하나일 때). */
+export function findEquationChoice(spec: FigureChoiceSpec, passage: string): number | null {
+  const text = passage.replace(/\$/g, "").replace(/−/g, "-");
+  const lin = text.match(/y\s*=\s*(-?\d+(?:\.\d+)?(?:\/\d+)?)?\s*x\s*(?:([+-])\s*(\d+(?:\.\d+)?(?:\/\d+)?))?(?![\d.x²^])/);
+  if (!lin) return null;
+  const num = (t: string) => (t.includes("/") ? t.split("/").map(Number).reduce((a, b) => a / b) : Number(t));
+  const m = lin[1] === undefined ? 1 : lin[1] === "-" ? -1 : num(lin[1]);
+  const b = lin[2] ? (lin[2] === "-" ? -1 : 1) * num(lin[3]) : 0;
+  const hits = spec.choices.map((c, i) => (((c as { objects?: Record<string, unknown>[] }).objects ?? []).some((o) => (o.kind === "line" && Math.abs(Number(o.slope) - m) < 1e-6 && Math.abs(Number(o.intercept) - b) < 1e-6) || (o.kind === "function" && o.fn === "linear" && Array.isArray(o.params) && Math.abs(Number(o.params[0]) - m) < 1e-6 && Math.abs(Number(o.params[1]) - b) < 1e-6)) ? i : -1)).filter((i) => i >= 0);
+  return hits.length === 1 ? hits[0] : null;
+}
+
+/** 정답 그래프를 correct_index 자리로 옮긴다(선택지 글은 'A~D' 같은 자리표라 그림만 옮겨도 뜻이 같다). */
+export function placeCorrectChoice(spec: FigureChoiceSpec, passage: string, correctIndex: number): FigureChoiceSpec {
+  const at = findEquationChoice(spec, passage);
+  if (at === null || at === correctIndex || correctIndex < 0 || correctIndex >= spec.choices.length) return spec;
+  const choices = [...spec.choices];
+  [choices[at], choices[correctIndex]] = [choices[correctIndex], choices[at]];
+  return { ...spec, choices };
+}
+
 export function validateFigureChoice(input: unknown, validateChild: ChildValidate): { ok: true; spec: FigureChoiceSpec } | { ok: false; error: string } {
   if (!input || typeof input !== "object") return { ok: false, error: "그림 데이터가 객체가 아닙니다." };
-  const s = input as Record<string, unknown>;
+  const s = { ...(input as Record<string, unknown>) };
+  for (const k of ["options", "correct_index", "correctIndex"]) delete s[k]; // 그림 데이터에 답을 싣지 않는다
   if (s.type !== "figure_choice") return { ok: false, error: "type 이 figure_choice 가 아닙니다." };
   if (!Array.isArray(s.choices) || s.choices.length < 2 || s.choices.length > 5) return { ok: false, error: "figure_choice 는 choices 2~5개(보통 4개) 가 필요합니다." };
   let type: string | null = null;
@@ -36,9 +58,22 @@ export function validateFigureChoice(input: unknown, validateChild: ChildValidat
 }
 
 /** 정답 암시·불공정 검사: 같은 축, 같은 객체 수, 라벨·이름 붙은 점 없음. */
-export function lintFigureChoice(spec: FigureChoiceSpec, options: string[] | null | undefined, childCheck: ChildCheck): FigureIssue[] {
+export function lintFigureChoice(spec: FigureChoiceSpec, options: string[] | null | undefined, childCheck: ChildCheck, ctx?: { passage?: string; correctIndex?: number | null }): FigureIssue[] {
   const issues: FigureIssue[] = [];
   const n = spec.choices.length;
+  // 정답 그래프 일치: 지문의 y = mx + b (또는 y = ax² + bx + c) 는 정답 자리의 그림에만 있어야 한다.
+  if (ctx?.passage && ctx.correctIndex !== null && ctx.correctIndex !== undefined && (spec.choices[0] as Record<string, unknown>).type === "plane") {
+    const text = ctx.passage.replace(/\$/g, "").replace(/−/g, "-");
+    const lin = text.match(/y\s*=\s*(-?\d+(?:\.\d+)?(?:\/\d+)?)?\s*x\s*(?:([+-])\s*(\d+(?:\.\d+)?(?:\/\d+)?))?(?![\d.x²^])/);
+    const num = (t: string) => (t.includes("/") ? t.split("/").map(Number).reduce((a, b) => a / b) : Number(t));
+    if (lin) {
+      const m = lin[1] === undefined ? 1 : lin[1] === "-" ? -1 : num(lin[1]);
+      const b = lin[2] ? (lin[2] === "-" ? -1 : 1) * num(lin[3]) : 0;
+      const has = spec.choices.map((c) => ((c as { objects?: Record<string, unknown>[] }).objects ?? []).some((o) => (o.kind === "line" && Math.abs(Number(o.slope) - m) < 1e-6 && Math.abs(Number(o.intercept) - b) < 1e-6) || (o.kind === "function" && o.fn === "linear" && Array.isArray(o.params) && Math.abs(Number(o.params[0]) - m) < 1e-6 && Math.abs(Number(o.params[1]) - b) < 1e-6)));
+      if (!has[ctx.correctIndex]) issues.push({ code: "answer_mismatch", message: `정답 자리 ${LETTERS[ctx.correctIndex]} 의 그림에 지문의 식 y = ${lin[1] ?? ""}x ${lin[2] ?? "+"} ${lin[3] ?? "0"} 이 없습니다 — 정답 인덱스와 그림 자리가 어긋났습니다.` });
+      has.forEach((h, i) => { if (h && i !== ctx.correctIndex) issues.push({ code: "answer_mismatch", message: `선택지 ${LETTERS[i]} 에도 정답 식의 그래프가 있습니다 — 정답이 둘이 됩니다.` }); });
+    }
+  }
   if (options && options.length !== n) issues.push({ code: "choice_count", message: `선택지 글 ${options.length}개와 선택지 그림 ${n}개의 수가 다릅니다.` });
   const first = spec.choices[0] as Record<string, unknown>;
   for (let i = 0; i < n; i++) {

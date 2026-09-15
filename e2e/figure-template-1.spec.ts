@@ -326,12 +326,14 @@ async function runDraftFigureFlow(page: Page, testInfo: import("@playwright/test
   await page.context().clearCookies();
   await loginAs(page, ACCOUNTS.student);
   await page.goto(`/session/${sessionId}?tab=problems`);
-  await expect(page.getByTestId("problem-figure")).toBeVisible({ timeout: 30_000 });
+  // 그래프 선택지(figure_choice)는 선택지 칸 안에 그림이 들어가므로 problem-figure 대신 choice-figure-0 을 본다.
+  const figureEl = page.getByTestId("problem-figure").or(page.getByTestId("choice-figure-0")).first();
+  await expect(figureEl).toBeVisible({ timeout: 30_000 });
   await page.getByTestId("problem-sheet").screenshot({ path: `${OUT}/${opts.shots[1]}` });
   await page.setViewportSize({ width: 375, height: 812 });
   await page.reload();
-  await expect(page.getByTestId("problem-figure")).toBeVisible({ timeout: 30_000 });
-  const box = await page.getByTestId("problem-figure").boundingBox();
+  await expect(figureEl).toBeVisible({ timeout: 30_000 });
+  const box = await figureEl.boundingBox();
   expect(box && box.x >= 0 && box.x + box.width <= 375).toBeTruthy();
   await page.screenshot({ path: `${OUT}/${opts.shots[2]}`, fullPage: true });
   return "published";
