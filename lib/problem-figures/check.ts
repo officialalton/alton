@@ -1,7 +1,6 @@
 // 표준 렌더링 엔진 — 검증 계층(docs/2026-09-14-standard-rendering-engine-design.md 3절).
 // 초안 저장 시 서버가 돌리고 결과(render_check)를 버전에 남긴다. 공개 게이트는 ok=true + 그림 해시 일치를 요구한다.
 
-import { createHash } from "node:crypto";
 import { LEGACY_FIGURE_TYPES, validateFigureSpec } from "./spec";
 import { lintParallelTransversalAgainstText, renderParallelTransversal, type FigureIssue } from "./templates/parallel-transversal";
 import { lintTriangleAgainstText, renderTriangle } from "./templates/triangle";
@@ -10,6 +9,9 @@ import { lintDataAgainstText, renderData } from "./templates/data";
 import { lintCircleAgainstText, renderCircle } from "./templates/circle";
 import { lintPolygonAgainstText, renderPolygon } from "./templates/polygon";
 import { lintSolidAgainstText, renderSolid } from "./templates/solid";
+import { lintFigureChoice, lintFigureSet, renderFigureChoice, renderFigureSet } from "./templates/figure-choice";
+import { renderFigureSvg } from "./render";
+import { figureAlt } from "./alt";
 
 export const RENDERER_VERSION = "std-1";
 
@@ -20,11 +22,6 @@ export type RenderCheck = {
   issues: FigureIssue[];
   alt?: string;
 };
-
-/** Postgres `md5(figure::text)` 와 같게 — jsonb 정규화 텍스트는 서버에서 만들므로 여기서는 참고용. */
-export function hashFigure(figure: unknown): string {
-  return createHash("md5").update(JSON.stringify(figure)).digest("hex");
-}
 
 /** 지문이 그림을 요구하는가("as shown", "in the figure", "the graph", "in the diagram"). */
 export function passageRequiresFigure(passage: string): boolean {
@@ -64,6 +61,18 @@ export function checkFigure(figure: unknown, passage: string, options?: string[]
   if (spec.type === "plane") {
     const r = renderPlane(spec);
     issues.push(...r.issues, ...lintPlaneAgainstText(spec, passage, options));
+    return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
+  }
+  if (spec.type === "figure_choice") {
+    const childCheck = (c: unknown, text: string) => { const r = checkFigure(c, text); return { issues: r.issues, alt: r.alt }; };
+    issues.push(...lintFigureChoice(spec, options, childCheck));
+    const r = renderFigureChoice(spec, (c) => renderFigureSvg(c as typeof spec));
+    return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
+  }
+  if (spec.type === "figure_set") {
+    const childCheck = (c: unknown, text: string) => { const r = checkFigure(c, text); return { issues: r.issues, alt: r.alt }; };
+    issues.push(...lintFigureSet(spec, passage, childCheck));
+    const r = renderFigureSet(spec, (c) => renderFigureSvg(c as typeof spec), (c) => figureAlt(c as typeof spec));
     return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
   }
   if (spec.type === "polygon") {

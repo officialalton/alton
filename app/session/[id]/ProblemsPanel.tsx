@@ -20,6 +20,8 @@ import ProblemWorkBoardCanvas, { type ProblemBoardHandle } from "./ProblemWorkBo
 import LearningText from "./LearningText";
 import { stripInlineOptions } from "@/lib/problem-text";
 import PdfPageAnnotationLayer from "./PdfPageAnnotationLayer";
+import { renderFigureSvg } from "@/lib/problem-figures/render";
+import type { FigureSpec } from "@/lib/problem-figures/spec";
 import ProblemFigure from "./ProblemFigure";
 
 const DIFFICULTY_LABEL: Record<string, string> = {
@@ -460,7 +462,8 @@ export default function ProblemsPanel({
                 )}
               </header>
 
-              {p.figure != null && <ProblemFigure spec={p.figure} className="mb-4" />}
+              {/* 그래프/도형 선택지(figure_choice)는 선택지 칸 안에 그림을 그린다 — 위에 따로 그리지 않는다. */}
+              {p.figure != null && (p.figure as { type?: string }).type !== "figure_choice" && <ProblemFigure spec={p.figure} className="mb-4" />}
 
               {p.passage ? (
                 <LearningText
@@ -494,7 +497,15 @@ export default function ProblemsPanel({
                           }
                         >
                           <span className="text-grey-500 mr-2">{i + 1}</span>
-                          <LearningText text={opt} className="learning-body inline" />
+                          {(p.figure as { type?: string } | null)?.type === "figure_choice" && Array.isArray((p.figure as { choices?: unknown[] }).choices) && (p.figure as { choices: unknown[] }).choices[i] ? (
+                            <span
+                              className="block max-w-[320px] mt-1 [&_svg]:w-full [&_svg]:h-auto"
+                              data-testid={`choice-figure-${i}`}
+                              dangerouslySetInnerHTML={{ __html: renderFigureSvg((p.figure as { choices: FigureSpec[] }).choices[i]) }}
+                            />
+                          ) : (
+                            <LearningText text={opt} className="learning-body inline" />
+                          )}
                           {correct && <span className="ml-2 text-[11px] font-bold text-green">정답</span>}
                           {mine && (
                             <span className="ml-2 text-[11px] font-bold text-grey-500">

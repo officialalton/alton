@@ -416,6 +416,20 @@ describe("ProblemsPanel — 문제 위 공유 필기 레이어", () => {
 
 });
 
+// 2026-09-14 — 그래프 선택지(figure_choice): 선택지 칸 안에 그림이 들어가고 위에는 따로 그리지 않는다.
+describe("ProblemsPanel — 그래프 선택지", () => {
+  it("선택지마다 그림이 그려지고, 고르면 그 번호가 답으로 저장된다", async () => {
+    const axes = { x: { min: -5, max: 5 }, y: { min: -5, max: 5 } };
+    const fig = { type: "figure_choice", choices: [1, 2, 3, 4].map((m) => ({ type: "plane", axes, objects: [{ id: "l", kind: "line", slope: m, intercept: 0 }] })) };
+    renderPanel([{ ...mc, problemId: "pf", options: ["A", "B", "C", "D"], figure: fig }]);
+    expect(screen.getByTestId("choice-figure-0").querySelector("svg")).not.toBeNull();
+    expect(screen.getByTestId("choice-figure-3").querySelector("svg")).not.toBeNull();
+    expect(screen.queryByTestId("figure-choice")).not.toBeInTheDocument(); // 위쪽 격자 없음
+    fireEvent.click(screen.getByTestId("choice-figure-2").closest("button")!);
+    await waitFor(() => expect(answerMcChoice).toHaveBeenCalledWith(expect.objectContaining({ problemId: "pf", choiceIndex: 2 })));
+  });
+});
+
 // 2026-09-14 — 숫자 입력(SPR): 서술형과 다른 유형. 학생이 숫자를 적어 저장하면 서버가 자동 채점, 교사가 확정.
 describe("ProblemsPanel — 숫자 입력(SPR)", () => {
   const spr: SessionProblem = { ...mc, number: 5, problemId: "p5", format: "spr", options: [], passage: "x + 3 = 10. x?" };

@@ -6,6 +6,8 @@ import { renderData } from "./templates/data";
 import { renderCircle } from "./templates/circle";
 import { renderPolygon } from "./templates/polygon";
 import { renderSolid } from "./templates/solid";
+import { renderFigureChoice, renderFigureSet } from "./templates/figure-choice";
+import { figureAlt } from "./alt";
 
 // 순수 함수 — 서버·클라이언트 어디서든 같은 SVG 문자열을 만든다. 외부 입력은 숫자와 짧은 라벨뿐이고
 // 라벨은 이스케이프하므로 그대로 innerHTML 로 넣어도 안전하다.
@@ -50,7 +52,9 @@ export function renderFigureSvg(spec: FigureSpec): string {
   if (spec.type === "data") return renderData(spec).markup;
   if (spec.type === "circle") return renderCircle(spec).svg;
   if (spec.type === "polygon") return renderPolygon(spec).svg;
-  if (spec.type === "solid") return renderSolid(spec).svg; // 표·숫자 목록은 HTML, 그래프는 SVG — 모두 우리 마크업
+  if (spec.type === "solid") return renderSolid(spec).svg;
+  if (spec.type === "figure_choice") return renderFigureChoice(spec, (c) => renderFigureSvg(c as FigureSpec)).markup;
+  if (spec.type === "figure_set") return renderFigureSet(spec, (c) => renderFigureSvg(c as FigureSpec), (c) => figureAlt(c as FigureSpec)).markup; // 표·숫자 목록은 HTML, 그래프는 SVG — 모두 우리 마크업
   return spec.type === "coordinate_plane" ? renderPlane(spec) : renderGeometry(spec);
 }
 

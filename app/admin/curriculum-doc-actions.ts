@@ -395,7 +395,9 @@ export async function createSubjectKeywordForDoc(
 
 export type ProblemFormat = "mc" | "spr" | "essay" | "math";
 /** 그림 요구(2026-09-14): 모델 재량에 맡기면 도형이 거의 안 나온다 — 필수면 그림 없는 문항은 버린다. */
-export type FigurePolicy = "none" | "optional" | "require_plane" | "require_geometry" | "require_data";
+export type FigurePolicy = "none" | "optional" | "require_plane" | "require_geometry" | "require_data" | "require_figure_choice";
+const FIGURE_CHOICE_DESC = "그래프/도형 선택지(figure_choice): 선택지 4개가 그림인 문항. {type:'figure_choice', choices:[그림 데이터 4개 — 모두 같은 type(보통 'plane'), 같은 axes(범위·눈금 완전히 동일), 같은 객체 수, 라벨·점 없음], notToScale?}. options 는 ['A','B','C','D'] 로 두고 correct_index 로 정답을 가리킨다(선택지 i 와 그림 i 가 같은 자리). 정답을 암시하는 보조 점·라벨·색 차이를 두지 않는다.";
+const FIGURE_SET_DESC = "복수 자료(figure_set): 그림·표가 둘 이상 필요한 문항. {type:'figure_set', figures:[{id:'A', title:'Figure A', spec:그림 데이터}, {id:'B', title:'Table B', spec:…}]}. 지문은 'Figure A', 'Table B' 로 자료를 가리킨다.";
 
 /** 표준 렌더링 엔진 템플릿 4 — 표·데이터 그래프(값만). */
 const DATA_DESC = "표·데이터 그래프(표준 템플릿, 값만). 모든 필드는 객체 최상위에 둔다(kind 이름 아래에 넣지 않는다). 예: {\"type\":\"data\",\"kind\":\"table\",\"title\":\"Bottle Inspection by Shift\",\"columns\":[\"Shift\",\"Bottles Inspected\",\"Defective Bottles\"],\"rows\":[[\"1\",240,6],[\"4\",350,14]]} / {\"type\":\"data\",\"kind\":\"bar\",\"categories\":[\"Jan\",\"Feb\"],\"series\":[{\"name\":\"Store A\",\"values\":[1200,1500]}],\"yTitle\":\"Sales (dollars)\"} / {\"type\":\"data\",\"kind\":\"line\",\"categories\":[\"0\",\"1\",\"2\"],\"series\":[{\"values\":[0,40,80]}],\"xTitle\":\"Time (hours)\",\"yTitle\":\"Distance (miles)\"} / {\"type\":\"data\",\"kind\":\"histogram\",\"bins\":[{\"from\":0,\"to\":10,\"count\":3},{\"from\":10,\"to\":20,\"count\":7}],\"xTitle\":\"Minutes\",\"yTitle\":\"Number of students\"} / {\"type\":\"data\",\"kind\":\"scatter\",\"points\":[[1,2.1],[2,2.9],[3,4.2]],\"fitLine\":{\"slope\":0.95,\"intercept\":1.1},\"xTitle\":\"Hours studied\",\"yTitle\":\"Score (points)\"} / {\"type\":\"data\",\"kind\":\"boxplot\",\"boxes\":[{\"name\":\"Class A\",\"min\":55,\"q1\":65,\"median\":72,\"q3\":80,\"max\":95}],\"xTitle\":\"Test score\"} / {\"type\":\"data\",\"kind\":\"number_list\",\"values\":[3,5,5,8,12],\"label\":\"Data set A\"}. 추가 종류: {\"type\":\"data\",\"kind\":\"dot_plot\",\"dots\":[{\"value\":1,\"count\":2},{\"value\":2,\"count\":4}],\"xTitle\":\"Number of pets\"} / {\"type\":\"data\",\"kind\":\"two_way\",\"rowHeader\":\"Grade\",\"rowLabels\":[\"9th\",\"10th\"],\"colLabels\":[\"Bus\",\"Walk\"],\"cells\":[[42,18],[36,24]]}(합계 행·열은 넣지 않는다 — 렌더러가 계산) / {\"type\":\"data\",\"kind\":\"statement\",\"title\":\"Survey summary\",\"facts\":[{\"label\":\"Sample size\",\"value\":400},{\"label\":\"Margin of error\",\"value\":4,\"unit\":\"percentage points\"}],\"note\":\"random sample\"}(표본 추정·오차범위·연구 설계의 문장형 자료). kind 는 table|two_way|number_list|bar|line|histogram|scatter|boxplot|dot_plot|statement 중 하나(원그래프 등 다른 것은 만들지 않는다). 축 범위·눈금·막대 폭·범례·라벨 자리는 렌더러가 정한다. 지문이 부르는 항목 이름·값·단위는 데이터와 정확히 같아야 하고(지문 'Shift 4 had 14 defective' 이면 표의 그 칸이 14), 단위는 열 이름·축 제목에 괄호로 쓴다('Cost (dollars)'). 지문에 없는 항목을 만들지 않는다.";
@@ -421,6 +423,7 @@ const FIGURE_POLICY_RULE: Record<FigurePolicy, string> = {
   require_plane: "**모든 문항에 figure(type:'plane') 데이터가 있어야 한다.** 그래프를 읽어야만 풀 수 있는 문항(절편·교점·기울기·해 읽기·최솟값 등)으로 만든다. AI 는 좌표와 식만 정확히 내고 그림은 그리지 않는다. 지문의 좌표·점·직선 이름·식이 데이터와 정확히 같아야 하고, 답이 그림에 글자로 드러나지 않게 한다. 좌표를 자유롭게 찍는 옛 형식(type:'coordinate_plane')은 쓰지 않는다.",
   require_geometry: "**모든 문항에 표준 도형 템플릿 figure 데이터가 있어야 한다** — type 'parallel_transversal'(평행선·횡단선 각), 'triangle'(삼각형·직각삼각형·합동/닮음), 'circle'(원·현·호·부채꼴·접선·중심각·원주각), 'polygon'(직사각형·정사각형·평행사변형·마름모·사다리꼴·정n각형), 'solid'(직육면체·정육면체·원기둥·원뿔·구·사각뿔 2.5D) 중 하나. AI 는 좌표나 그림을 그리지 않고 **관계만** 낸다. 지문에서 부르는 선·점·변·각 이름과 값이 데이터와 정확히 같아야 한다. 라벨은 평문. 지문에는 north/south/east/west, region, quadrant 같은 방위 표현을 절대 쓰지 말고(검증에서 거부된다) 시험 문제처럼 \"the angle marked 37°\", \"the angle at A\", \"AB = 6\" 으로 부른다. 평행선 3개·복합 도형 등 이 템플릿들로 그릴 수 없는 문항은 만들지 않는다.",
   require_data: "**모든 문항에 figure(type:'data') 자료가 있어야 한다** — 표(함수표·값 표·빈도/비율표)·숫자 목록·막대/선그래프·히스토그램·산점도(추세선)·상자그림 중 문항에 맞는 하나. AI 는 값·이름·단위만 내고 그림은 그리지 않는다. 지문은 자료를 읽어야 풀 수 있게(비율·백분율·단위 변환·확률·조건부확률·표본 통계·오차범위·관찰 연구/실험 판단 등) 쓰고, 지문의 항목 이름·값·단위가 데이터와 정확히 같아야 한다. 마크다운 표는 쓰지 않고 이 figure 로 낸다.",
+  require_figure_choice: "**모든 문항이 그래프 선택지 문항이어야 한다** — figure(type:'figure_choice') 에 같은 축·같은 객체 수의 그래프 4개, options 는 ['A','B','C','D'], correct_index 가 정답 그래프. 지문은 식·조건을 주고 \"Which of the following graphs …?\" 로 묻는다. 그림에 라벨·보조 점을 두지 않는다.",
 };
 export type ProblemDifficulty = "easy" | "medium" | "hard";
 
@@ -491,7 +494,7 @@ export async function generateSectionProblems(params: {
                     description:
                       "그래프·도형이 꼭 필요한 수학 문항에만. 그림 파일이 아니라 데이터다. " +
                       PLANE_DESC + " " +
-                      "기하(하나): " + PARALLEL_TRANSVERSAL_DESC + " " + TRIANGLE_DESC + " " + CIRCLE_DESC + " " + POLYGON_DESC + " " + SOLID_DESC + " " + DATA_DESC + " " +
+                      "기하(하나): " + PARALLEL_TRANSVERSAL_DESC + " " + TRIANGLE_DESC + " " + CIRCLE_DESC + " " + POLYGON_DESC + " " + SOLID_DESC + " " + DATA_DESC + " " + FIGURE_CHOICE_DESC + " " + FIGURE_SET_DESC + " " +
                       "좌표평면의 좌표는 문제의 수치와 정확히 일치해야 한다. 좌표를 직접 찍는 옛 기하 형식(type:'geometry')은 쓰지 않는다.",
                   },
                   explanation: {
@@ -556,7 +559,7 @@ ${format === "spr" ? "숫자 입력(SPR)은 SAT Math 학생 직접 입력 문항
   if (raw.length === 0) throw new Error("AI 응답에 문제가 없습니다.");
 
   const requiredTypes: readonly string[] | null =
-    figurePolicy === "require_plane" ? ["plane"] : figurePolicy === "require_data" ? ["data"] : figurePolicy === "require_geometry" ? GEOMETRY_TEMPLATE_TYPES : null;
+    figurePolicy === "require_plane" ? ["plane"] : figurePolicy === "require_data" ? ["data"] : figurePolicy === "require_figure_choice" ? ["figure_choice"] : figurePolicy === "require_geometry" ? GEOMETRY_TEMPLATE_TYPES : null;
   const kept = requiredTypes
     ? raw.filter((p) => {
         const v = p.figure ? validateFigureSpec(p.figure) : null;
@@ -748,7 +751,7 @@ export async function generateFigureForProblem(params: {
   passage: string;
   options: string[] | null;
   explanation: string;
-  kind: "plane" | "parallel_transversal" | "triangle" | "circle" | "polygon" | "solid" | "data";
+  kind: "plane" | "parallel_transversal" | "triangle" | "circle" | "polygon" | "solid" | "data" | "figure_choice";
 }): Promise<{ ok: true; figure: unknown } | { ok: false; error: string }> {
   await requireAdmin();
   if (!process.env.ANTHROPIC_API_KEY) return { ok: false, error: "이 환경에는 AI 생성이 설정되어 있지 않습니다." };
@@ -769,7 +772,9 @@ export async function generateFigureForProblem(params: {
                   ? PLANE_DESC
                   : params.kind === "triangle"
                     ? TRIANGLE_DESC
-                    : params.kind === "data"
+                    : params.kind === "figure_choice"
+                      ? FIGURE_CHOICE_DESC
+                      : params.kind === "data"
                       ? DATA_DESC
                       : params.kind === "circle"
                         ? CIRCLE_DESC
