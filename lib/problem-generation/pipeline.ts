@@ -75,6 +75,25 @@ export function pickFigureKind(need: ReturnType<typeof judgeMaterialNeed>, text:
 
 const snippetOf = (g: GeneratedProblem) => `${(g.question ?? g.passage ?? "").slice(0, 40)}…`;
 
+/**
+ * 문항마다 자료·계약·독립검사·오답보정이 서로 독립인데 순서대로 처리하면 벽시계 시간이 문항 수만큼 그대로 늘어난다
+ * (2026-09-15 제품 오너: "1문제에 1분, 10문제 기준 10분이 맥시멈" — 유형당 초 단위 시간 목표 확정).
+ * 최대 CONCURRENCY 개 문항을 동시에 게이트에 태워 벽시계 시간을 병렬도만큼 줄인다.
+ */
+const GATE_CONCURRENCY = 4;
+async function mapWithConcurrency<T, R>(items: T[], limit: number, fn: (item: T) => Promise<R>): Promise<R[]> {
+  const results: R[] = new Array(items.length);
+  let next = 0;
+  const workers = Array.from({ length: Math.min(limit, items.length) }, async () => {
+    while (next < items.length) {
+      const i = next++;
+      results[i] = await fn(items[i]);
+    }
+  });
+  await Promise.all(workers);
+  return results;
+}
+
 export async function runGenerationPipeline(params: PipelineParams): Promise<PipelineResult> {
   const requested = Math.max(1, Math.min(10, params.count));
   const accepted: Accepted[] = [];
@@ -96,11 +115,11 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
   // 여러 번 나눠 불러 모은다. 청크 하나가 비면 그 청크만 실패로 기록하고 나머지 청크는 계속 시도한다.
   const CHUNK = params.difficulty === "hard" ? 3 : 6;
   const generate = async (count: number): Promise<GeneratedProblem[]> => {
-    const out: GeneratedProblem[] = [];
+    const chunkSizes: number[] = [];
     let remaining = count;
-    while (remaining > 0) {
-      const n = Math.min(CHUNK, remaining);
-      remaining -= n;
+    while (remaining > 0) { const n = Math.min(CHUNK, remaining); remaining -= n; chunkSizes.push(n); }
+    // 청크끼리는 서로 독립적인 생성 호출이다 — 순서대로 기다리지 않고 동시에 보낸다(벽시계 시간 단축).
+    const chunks = await mapWithConcurrency(chunkSizes, GATE_CONCURRENCY, async (n) => {
       countCall();
       try {
         const chunk = await generateSectionProblemsCore({
@@ -109,12 +128,13 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
         });
         if (chunk.length === 0) stats.emptyResponses.push({ cause: `생성 청크(${n}개 요청)가 빈 배열을 반환`, retried: false, resolved: false });
         else if (chunk.length < n) stats.underReturned.push({ requested: n, returned: chunk.length, reason: "생성 청크가 요청보다 적게 반환" });
-        out.push(...chunk);
+        return chunk;
       } catch (e) {
         stats.emptyResponses.push({ cause: `생성 청크(${n}개 요청) 예외: ${e instanceof Error ? e.message : "오류"}`, retried: false, resolved: false });
+        return [] as GeneratedProblem[];
       }
-    }
-    return out;
+    });
+    return chunks.flat();
   };
 
   const makeFigure = async (g: GeneratedProblem, text: string, need: ReturnType<typeof judgeMaterialNeed>) => {
@@ -339,19 +359,21 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
 
   const generated = await generate(initialCount);
   stats.generated += generated.length;
-  for (const g of generated) {
-    if (stats.accepted >= requested) break;
-    record(g, await gate(g, 0));
-  }
+  const initialOutcomes = await mapWithConcurrency(generated, GATE_CONCURRENCY, (g) => gate(g, 0));
+  generated.forEach((g, i) => record(g, initialOutcomes[i]));
 
-  // 부족하면 최대 두 번 더 채운다(각 청크가 개별적으로 빈 응답을 견디므로 재시도가 안전하다).
+  // 부족하면 최대 두 번 더 채운다(각 청크가 개별적으로 빈 응답을 견디므로 재시도가 안전하다). 라운드 안에서는 병렬 처리.
   for (let round = 0; stats.accepted < requested && round < 2; round += 1) {
     const refillCount = Math.min(10, requested - stats.accepted + (params.difficulty === "hard" ? 1 : 0));
     const refill = await generate(refillCount);
     stats.generated += refill.length;
     stats.refilled += refill.length;
-    for (const g of refill) { if (stats.accepted >= requested) break; record(g, await gate(g, 0)); }
+    const outcomes = await mapWithConcurrency(refill, GATE_CONCURRENCY, (g) => gate(g, 0));
+    refill.forEach((g, i) => record(g, outcomes[i]));
   }
+  // 오버샘플링·병렬 처리로 요청보다 많이 통과할 수 있다 — 초과분은 잘라내되(요청 수만 채택), 후보 수엔 그대로 반영한다.
+  if (accepted.length > requested) accepted.length = requested;
+  stats.accepted = accepted.length;
   if (stats.accepted < requested) stats.underReturned.push({ requested, returned: stats.accepted, reason: "게이트 통과분이 요청 수 미달" });
   // 평균 모델 호출 수 — 생성·자료·재생성·부분수정·독립검사를 통틀어, 실제로 뭔가를 얻은 문항(통과+대기) 하나당.
   const totalOutputs = stats.accepted + stats.held;
