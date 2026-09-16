@@ -16,8 +16,8 @@ import {
 import { loadSessionVocabData } from "./vocab-data";
 import { loadHomeworkItems } from "./homework-data";
 import { loadNormalizedSession } from "./session-source-data";
-import { loadHomeworkProblems, loadPlannedProblems, loadSessionProblems } from "./session-problem-data";
-import { loadIssuedHomework } from "./homework-v3-data";
+import { loadPlannedProblems, loadSessionProblems } from "./session-problem-data";
+import { loadStudentHomeworkBatches, loadTeacherHomeworkBatchesForStudent } from "@/lib/homework-batch-data";
 import { loadSessionLessonContext } from "./session-context-data";
 import {
   loadComposition,
@@ -147,18 +147,12 @@ export default async function SessionPage({
       ? await loadMyLegacyPrivateMaterialStrokes(session.id, material.docId)
       : [];
 
-  // 2026-09-14 과제 v3 통일 — 과제 문제는 수업 문제와 같은 로더·패널. 발급 풀은 회차 준비 문제(교사에게만).
-  const viewerForProblems = {
-    canSeeAnswers: profile?.role === "teacher" || profile?.role === "admin",
-    studentId: session.studentId,
-  };
-  const [homeworkProblems, homeworkIssued] =
-    session.source === "v3"
-      ? await Promise.all([
-          loadHomeworkProblems(supabase, session.id, viewerForProblems),
-          canPrepare ? loadIssuedHomework(supabase, session.id) : Promise.resolve([]),
-        ])
-      : [[], []];
+  // 2026-09-16(제품 오너 2차 정정) — 과제는 수업(세션)과 무관하다. 세션뷰의 과제 탭은 이 학생의
+  // 과제 배치 전체(어느 교사가 냈든, 이 교사가 낸 것만 — RLS/로더가 각 역할에 맞게 가른다)를 그대로 보여준다.
+  const homeworkBatches =
+    profile?.role === "teacher"
+      ? await loadTeacherHomeworkBatchesForStudent(supabase, user.id, session.studentId)
+      : await loadStudentHomeworkBatches(supabase, session.studentId);
   return (
     <SessionShell
       sessionId={session.id}
@@ -188,9 +182,7 @@ export default async function SessionPage({
       prep={prep}
       materialNotice={materialNotice}
       currentUserId={user.id}
-      homeworkProblems={homeworkProblems}
-      homeworkPool={prep?.problems ?? []}
-      homeworkIssued={homeworkIssued}
+      homeworkBatches={homeworkBatches}
     />
   );
 }

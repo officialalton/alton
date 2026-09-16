@@ -1,57 +1,60 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi, beforeEach } from "vitest";
 import StudentHomeworkTab from "./StudentHomeworkTab";
-import type { StudentHomeworkSet } from "./homework-v3-data";
-import { refreshSessionProblems } from "@/app/session/[id]/problem-work-actions";
+import type { HomeworkBatch } from "@/lib/homework-batch-data";
+import { submitHomeworkAnswerAction } from "@/lib/homework-batch-actions";
 
-vi.mock("@/app/session/[id]/problem-work-actions", () => ({
-  refreshSessionProblems: vi.fn(),
-}));
-vi.mock("@/app/session/[id]/ProblemsPanel", () => ({
-  default: ({ sessionId, source, problems }: { sessionId: string; source?: string; problems: { number: number }[] }) => (
-    <div data-testid="problems-panel" data-session={sessionId} data-source={source}>
-      {problems.map((p) => `과제 ${p.number}`).join(",")}
-    </div>
-  ),
+// 2026-09-16(제품 오너 2차 정정) — 과제는 수업(세션)과 무관하다. 배치는 발급 날짜로 이름 붙고,
+// 학생 포털·교사 포털·세션뷰가 전부 같은 화면(HomeworkBatchPanel)을 쓴다.
+vi.mock("@/lib/homework-batch-actions", () => ({
+  submitHomeworkAnswerAction: vi.fn(),
+  gradeHomeworkBatchAction: vi.fn(),
 }));
 
-const sets: StudentHomeworkSet[] = [
-  { sessionId: "sess-1", subjectName: "SAT Reading", startsAt: "2026-09-15T11:30:00.000Z", total: 3, answered: 1, graded: 0, composedAt: "2026-09-14T00:00:00Z" },
-  { sessionId: "sess-2", subjectName: "SAT Math", startsAt: null, total: 2, answered: 2, graded: 2, composedAt: "2026-09-13T00:00:00Z" },
+function mcItem(problemId: string, position: number, overrides: Partial<HomeworkBatch["items"][number]> = {}): HomeworkBatch["items"][number] {
+  return {
+    problemId, position, format: "mc", passage: "지문", question: "값은?", options: ["1", "2", "3", "4"],
+    correctIndex: 0, answers: null, explanation: "해설", statements: null, figure: null,
+    response: null, submittedAt: null, autoCorrect: null, graded: false, gradedAt: null, grade: null, gradeComment: null,
+    ...overrides,
+  };
+}
+
+const batches: HomeworkBatch[] = [
+  { id: "b1", teacherId: "t1", studentId: "stu", label: "9월 15일 과제", createdAt: "2026-09-15T00:00:00Z", items: [mcItem("p1", 1), mcItem("p2", 2, { submittedAt: "2026-09-15T01:00:00Z", response: "0" })] },
+  { id: "b2", teacherId: "t1", studentId: "stu", label: "9월 14일 과제", createdAt: "2026-09-14T00:00:00Z", items: [mcItem("p3", 1, { submittedAt: "x", response: "0", graded: true, grade: "correct" })] },
 ];
 
 beforeEach(() => {
   vi.clearAllMocks();
-  vi.mocked(refreshSessionProblems).mockImplementation(async (sessionId: string) => [
-    { number: 1, problemId: `${sessionId}-p1` } as never,
-  ]);
 });
 
-describe("StudentHomeworkTab — 수업별 과제 탭 + 수업 문제와 같은 패널(2026-09-14 과제 v3 통일)", () => {
-  it("수업별 과제가 상단 탭으로 뜨고, 첫 탭의 과제가 수업 문제 패널로 열린다", async () => {
-    render(<StudentHomeworkTab studentId="stu" homeworkSets={sets} />);
-    expect(screen.getByRole("tab", { name: /SAT Reading 수업 과제/ })).toHaveAttribute("aria-selected", "true");
-    expect(screen.getByText("2문제 남음")).toBeInTheDocument();
-    expect(screen.getByText("채점 완료")).toBeInTheDocument();
-    await waitFor(() => expect(refreshSessionProblems).toHaveBeenCalledWith("sess-1", "homework"));
-    const panel = await screen.findByTestId("problems-panel");
-    expect(panel).toHaveAttribute("data-session", "sess-1");
-    expect(panel).toHaveAttribute("data-source", "homework");
-    expect(panel).toHaveTextContent("과제 1");
+describe("StudentHomeworkTab — 배치 단위 과제(2026-09-16)", () => {
+  it("배치가 발급 날짜 라벨로 상단 탭에 뜨고, 첫 배치가 목차·본문으로 열린다", () => {
+    render(<StudentHomeworkTab batches={batches} />);
+    expect(screen.getByRole("tab", { name: /9월 15일 과제/ })).toHaveAttribute("aria-selected", "true");
+    expect(screen.getByText("1문제 남음")).toBeInTheDocument();
+    expect(screen.getByText("과제 1")).toBeInTheDocument();
+    expect(screen.getByText("과제 2")).toBeInTheDocument();
+    expect(screen.getByText("값은?")).toBeInTheDocument();
   });
 
-  it("다른 수업 탭을 누르면 그 수업의 과제를 불러온다", async () => {
-    render(<StudentHomeworkTab studentId="stu" homeworkSets={sets} />);
-    await screen.findByTestId("problems-panel");
-    fireEvent.click(screen.getByRole("tab", { name: /SAT Math 수업 과제/ }));
-    await waitFor(() => expect(refreshSessionProblems).toHaveBeenCalledWith("sess-2", "homework"));
-    await waitFor(() => expect(screen.getByTestId("problems-panel")).toHaveAttribute("data-session", "sess-2"));
+  it("다른 배치 탭을 누르면 그 배치가 열리고, 채점된 항목은 정답 여부를 보여준다", () => {
+    render(<StudentHomeworkTab batches={batches} />);
+    fireEvent.click(screen.getByRole("tab", { name: /9월 14일 과제/ }));
+    expect(screen.getByText("정답")).toBeInTheDocument();
   });
 
-  it("발급된 과제가 없으면 안내만 있고 레거시 '작성 필요/작성 완료'는 없다", () => {
-    render(<StudentHomeworkTab studentId="stu" homeworkSets={[]} />);
+  it("객관식을 클릭하고 제출하면 답을 저장한다", async () => {
+    vi.mocked(submitHomeworkAnswerAction).mockResolvedValue({ ok: true, value: undefined });
+    render(<StudentHomeworkTab batches={batches} />);
+    fireEvent.click(screen.getByText("2"));
+    fireEvent.click(screen.getByText("답 제출"));
+    await waitFor(() => expect(submitHomeworkAnswerAction).toHaveBeenCalledWith("b1", "p1", "1"));
+  });
+
+  it("배치가 없으면 안내만 보인다", () => {
+    render(<StudentHomeworkTab batches={[]} />);
     expect(screen.getByText(/아직 발급된 과제가 없습니다/)).toBeInTheDocument();
-    expect(screen.queryByText("작성 필요")).not.toBeInTheDocument();
-    expect(screen.queryByText("작성 완료")).not.toBeInTheDocument();
   });
 });

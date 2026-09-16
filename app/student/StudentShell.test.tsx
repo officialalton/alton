@@ -76,7 +76,7 @@ const lessonsProps = {
   myFeedback: {},
   bookableEnrollments: [],
   studentId: "student-1",
-  homeworkSets: [],
+  homeworkBatches: [],
   materialsLibraryTree: [],
   myVocabWords: [],
   vocabLibraryBooks: [],

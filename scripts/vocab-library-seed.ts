@@ -83,6 +83,8 @@ async function generateBatch(plan: VolumePlan, exclude: string[], need: number) 
   // 권이 쌓일수록(전체 2,000단어) 이미 나온 단어와 겹칠 확률이 올라간다 — 프롬프트에 최근 1,200개까지
   // 보여줘 모델이 스스로 피하게 하고, 그래도 겹치면 검증 단계에서 확정적으로 거른다.
   const excludeList = exclude.slice(-1200).join(", ");
+  // 네트워크 호출이 응답 없이 걸리면(2026-09-16 실측: 45분 이상 CPU 0%로 멈춤) 배치 전체가
+  // 무한정 멈춘다 — 명시적 타임아웃으로 그 자리에서 실패시키고 재시도 루프가 다음 배치로 넘어가게 한다.
   const message = await getAnthropic().messages.create({
     model: "claude-sonnet-5",
     max_tokens: 4000,
@@ -125,7 +127,7 @@ async function generateBatch(plan: VolumePlan, exclude: string[], need: number) 
           `College Board 같은 특정 공식 단어장 이름을 표기하지 마라(선정 기준은 지문 유형·빈도로만 서술).`,
       },
     ],
-  });
+  }, { timeout: 60_000 });
   const toolUse = message.content.find((b) => b.type === "tool_use");
   const words = (toolUse as { input?: { words?: unknown[] } } | undefined)?.input?.words;
   return Array.isArray(words) ? words : [];
@@ -141,7 +143,15 @@ async function fillBook(admin: import("@supabase/supabase-js").SupabaseClient, p
   while (accepted.length < WORDS_PER_BOOK && attempts < maxAttempts) {
     attempts++;
     const need = Math.min(BATCH_SIZE, WORDS_PER_BOOK - accepted.length + 5);
-    const raw = await generateBatch(plan, [...globalSeen, ...seenThisBook], need);
+    let raw: unknown[];
+    try {
+      raw = await generateBatch(plan, [...globalSeen, ...seenThisBook], need);
+    } catch (e) {
+      // 타임아웃·네트워크 오류 한 번으로 전체 실행(다음 권들)까지 멈추지 않는다 — 이 배치만 건너뛴다.
+      rejectCounts["batch_error"] = (rejectCounts["batch_error"] ?? 0) + 1;
+      console.error(`  (배치 ${attempts} 오류, 건너뜀: ${e instanceof Error ? e.message : e})`);
+      continue;
+    }
     for (const w of raw) {
       const result = validateWord(w, globalSeen, seenThisBook, plan);
       if (!result.ok) {

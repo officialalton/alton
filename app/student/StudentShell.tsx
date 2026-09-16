@@ -16,7 +16,7 @@ import type { CurriculumData } from "./curriculum-data";
 import type { Memo } from "./memo-data";
 import type { ReviewData, StudentFeedback } from "./review-data";
 import StudentHomeworkTab from "./StudentHomeworkTab";
-import type { StudentHomeworkSet } from "./homework-v3-data";
+import type { HomeworkBatch } from "@/lib/homework-batch-data";
 import MaterialsLibraryTab from "./MaterialsLibraryTab";
 import type { LibrarySubjectTree } from "@/lib/subject-material-library";
 import CreditsTab from "./CreditsTab";
@@ -77,7 +77,7 @@ export default function StudentShell({
   reviews,
   myFeedback,
   studentId,
-  homeworkSets,
+  homeworkBatches,
   materialsLibraryTree,
   credits,
   stats,
@@ -104,7 +104,7 @@ export default function StudentShell({
   myFeedback: Record<string, StudentFeedback>;
   /** 학생 본인 id(2026-09-14 과제 v3 통일 — 과제 패널이 쓴다). */
   studentId: string;
-  homeworkSets: StudentHomeworkSet[];
+  homeworkBatches: HomeworkBatch[];
   materialsLibraryTree: LibrarySubjectTree[];
   credits: CreditsData;
   stats: StatsData;
@@ -254,10 +254,7 @@ export default function StudentShell({
           ) : activeTab === "problemlog" ? (
             <ProblemHistoryTab entries={problemHistory} />
           ) : activeTab === "homework" ? (
-            <StudentHomeworkTab
-              studentId={studentId}
-              homeworkSets={homeworkSets}
-            />
+            <StudentHomeworkTab batches={homeworkBatches} />
           ) : activeTab === "materials" ? (
             <MaterialsLibraryTab tree={materialsLibraryTree} />
           ) : activeTab === "credits" ? (
