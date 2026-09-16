@@ -243,6 +243,7 @@ export default function CurriculumDocsTab({
                 </div>
                 <div className="text-[12px] text-grey-500 mt-0.5">
                   {d.subjectName}
+                  {d.primaryKeywordLabel ? ` · ${d.primaryKeywordLabel}` : ""}
                   {d.unitTitle ? ` · ${d.unitTitle}` : ""}
                   {d.kind === "html" ? ` · 섹션 ${d.sectionCount}개` : d.hasDriveSource ? " · Drive 원본" : " · 로컬 표본"} ·{" "}
                   {STATUS_LABEL[d.status] ?? d.status}
