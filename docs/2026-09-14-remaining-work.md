@@ -38,7 +38,9 @@
 - 회사 Shared Drive 학생→과목→연도→세션 폴더 자동 생성, 교사 배정 이벤트 기반 폴더 권한 부여·회수, Smart Notes 원본 세션 폴더 이동·file ID·Calendar 첨부 검증, Drive/Meet 실패 재처리(`manual_review`/`reconciliation_needed` 큐 적재·재처리 — **Gate C GW-12 인수 기준, blocker**)와 정기 대조.
 - 교재 승인·버전·저작권/AI 관여 기록, Gemini 초안→교사 검토→확정 리뷰 상태, 리뷰 18h 알림·24h 관리자 목록·36h QC.
 ### 다듬을 것 (작음)
-- `CompositionPanel` 변경마다 전체 새로고침 → 부분 갱신 / PDF 교재 행에 키워드 이름 / `SessionShell`(7)·`ProblemBankTab`(1) 기존 lint 오류 / 통합 테스트 병렬 격리(예약 fixture·append-only 전역 count) / 옛 과제 UI 시험 답안(`session_homework_attempts`) 정리 여부.
+- ~~`CompositionPanel` 변경마다 전체 새로고침 → 부분 갱신~~ ~~PDF 교재 행에 키워드 이름~~ ~~`SessionShell`(7)·`ProblemBankTab`(1) 기존 lint 오류~~(완료 2026-09-15).
+- **통합 테스트 병렬 격리**(예약 fixture 충돌·append-only 전역 count) — 제품 기능 결함은 아니지만 반복 실행 안정성에 영향을 주는 테스트 인프라 결함이다. 열린 항목으로 유지(이번 라운드 범위 아님).
+- **`session_homework_attempts`**: 삭제·마이그레이션하지 않는다. 지금은 읽기 전용으로 보존만 하고, v3 과제 흐름의 실제 사용이 안정화된 뒤 보존·삭제 정책을 별도로 결정한다.
 
 ### 단어장 재구성 (미착수, 문제은행 다음 우선순위 — 2026-09-15 제품 오너 지시)
 문제은행 품질 검증(C 상담·결제·정산·문서로 넘어가기 전) 다음 순서로 진행한다. 기존 "지문에서 단어 클릭해서 저장" 기능(`VocabClickLayer.tsx`)은 지금 단계에서 구현하지 않는다 — 손대지 않고 그대로 둔다.
