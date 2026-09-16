@@ -197,6 +197,17 @@ export default function SessionShell({
     return () => clearInterval(timer);
   }, [status, scheduledAt, durationMinutes, startedLive]);
 
+  // 조기 종료 판정은 렌더 중 Date.now()를 직접 부르지 않는다(순수성 규칙) — 위 상태 재계산과
+  // 같은 주기로 "지금" 값을 상태에 담아 그걸로 비교한다.
+  const [nowMs, setNowMs] = useState(0);
+  useEffect(() => {
+    // 마운트 시 "지금"을 한 번 읽어와 렌더 중 Date.now() 직접 호출을 피하는 정상적인 effect다.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setNowMs(Date.now());
+    const timer = setInterval(() => setNowMs(Date.now()), 30_000);
+    return () => clearInterval(timer);
+  }, []);
+
   function selectTab(tabId: TabId) {
     setActiveTab(tabId);
     router.replace(`?tab=${tabId}`, { scroll: false });
@@ -212,7 +223,7 @@ export default function SessionShell({
   function isEarlyEnd(): boolean {
     if (!scheduledAt) return false;
     const end = new Date(scheduledAt).getTime() + durationMinutes * 60_000;
-    return Date.now() < end;
+    return nowMs < end;
   }
 
   async function handleConfirmEndLesson() {
@@ -401,7 +412,7 @@ export default function SessionShell({
                 <p className="text-[13px] text-grey-500 mb-4">
                   {studentName} 학생과의 수업을 학생 사유(조퇴 등)로 지금(
                   {formatKoreanTime(new Date())}) 종료 처리합니다. 원장에 조기 종료
-                  사유가 "학생 사유"로 기록됩니다.
+                  사유가 &quot;학생 사유&quot;로 기록됩니다.
                 </p>
                 {endLessonError && <p className="text-[12px] text-red mb-3">{endLessonError}</p>}
                 <div className="flex justify-end gap-2">
@@ -426,7 +437,7 @@ export default function SessionShell({
                 <div className="text-[15px] font-bold text-ink mb-2">이 화면에서는 종료할 수 없어요</div>
                 <p className="text-[13px] text-grey-500 mb-4">
                   선생님 귀책(지각 등)으로 일찍 끝난 경우, 이 화면이 아니라
-                  "수업 일정" 탭의 "지각 당일 연장"에서 처리해주세요. 여기서는
+                  &quot;수업 일정&quot; 탭의 &quot;지각 당일 연장&quot;에서 처리해주세요. 여기서는
                   수업이 종료 처리되지 않습니다.
                 </p>
                 <div className="flex justify-end gap-2">

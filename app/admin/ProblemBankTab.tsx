@@ -113,6 +113,9 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
   }, [filter, archived, reviewOnly]);
 
   useEffect(() => {
+    // 마운트·필터 변경 시 목록을 서버에서 읽어오는 정상적인 데이터 로딩 effect다 —
+    // react-hooks/set-state-in-effect 는 이 패턴 자체를 "effect 안 setState"로 잡아낸다.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     void reload();
   }, [reload]);
 
