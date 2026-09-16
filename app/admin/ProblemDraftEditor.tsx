@@ -204,7 +204,7 @@ export default function ProblemDraftEditor({
       <FieldTitle hint="학생·교사 수업 화면과 같은 렌더입니다. 아래 칸을 고치면 바로 바뀝니다.">학생 화면 미리보기</FieldTitle>
       <div className="border-[1.5px] border-dashed border-grey-200 rounded-lg px-4 py-3" data-testid="passage-preview">
         {figureParsed.spec != null && (figureParsed.spec as { type?: string }).type !== "figure_choice" && (
-          <div className="max-w-[520px] mb-3"><ProblemFigure spec={figureParsed.spec} /></div>
+          <div className="max-w-full mb-3"><ProblemFigure spec={figureParsed.spec} /></div>
         )}
         {fullText.trim() ? (
           <RwStimulusView passage={fullText} className="learning-body text-[14px] leading-[1.75] text-ink" />
@@ -488,7 +488,7 @@ function MaterialSection(props: {
       {figureParsed.spec != null && (
         <div className="border-[1.5px] border-grey-200 rounded-xl p-4 mb-2 bg-white" data-testid="figure-preview">
           <div className="text-[10.5px] font-bold text-grey-300 uppercase tracking-wide mb-2">자료 미리보기 (표준 렌더러)</div>
-          <div className="max-w-[520px]"><ProblemFigure spec={figureParsed.spec} /></div>
+          <div className="max-w-full"><ProblemFigure spec={figureParsed.spec} /></div>
           {props.figureAlt && <p className="text-[11.5px] text-grey-500 mt-2">대체 설명: {props.figureAlt}</p>}
         </div>
       )}
@@ -630,7 +630,7 @@ export function PublishedContentView({ problem }: { problem: BankProblem }) {
   return (
     <div className="text-[13px] text-ink">
       {p.figure != null && (p.figure as { type?: string }).type !== "figure_choice" && (vis.material || vis.legacyAll) && (
-        <div className="max-w-[520px] mb-2"><ProblemFigure spec={p.figure} /></div>
+        <div className="max-w-full mb-2"><ProblemFigure spec={p.figure} /></div>
       )}
       <FieldTitle>지문 / 자료 · 질문</FieldTitle>
       {fullText ? <RwStimulusView passage={fullText} className="learning-body text-[13.5px] leading-[1.7]" /> : <span className="text-grey-500">(지문이 비어 있습니다)</span>}
