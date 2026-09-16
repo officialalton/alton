@@ -58,6 +58,7 @@ export default function CompositionPanel({
    */
   scopeNotice?: string | null;
 }) {
+  const router = useRouter();
   const [keywordIds, setKeywordIds] = useState(composition.keywords.map((k) => k.id));
   const [materials, setMaterials] = useState<UnitMaterial[]>(composition.materials);
   const [error, setError] = useState<string | null>(null);
@@ -66,6 +67,18 @@ export default function CompositionPanel({
   const [pending, setPending] = useState<RecompositionSummary | null>(null);
   const [busy, setBusy] = useState(false);
   const [composedProblems, setComposedProblems] = useState(composition.problems);
+  // window.location.reload() 대신 router.refresh() 로 서버 데이터만 다시 받는다(전체 새로고침 제거).
+  // composition prop 이 새 참조로 들어오면(서버가 다시 내려준 것) 위 파생 상태를 그 값으로 맞춘다 —
+  // 그렇지 않으면 router.refresh() 뒤에도 마운트 시점 값이 그대로 남는다(컴포넌트가 재마운트되지 않으므로).
+  useEffect(() => {
+    // 낙관적 업데이트(토글 직후)와 서버 재조회 결과를 같은 state 로 합친다 — React 공식 가이드가
+    // 인정하는 "prop 변경에 맞춰 state 를 조정" 패턴이다(단순 파생이면 렌더 중 계산하겠지만, 이 값은
+    // 그 사이 낙관적으로도 바뀐다).
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setKeywordIds(composition.keywords.map((k) => k.id));
+    setMaterials(composition.materials);
+    setComposedProblems(composition.problems);
+  }, [composition]);
   // 2026-09-14 UAT: "문제를 클릭하면 문제를 볼 수 있어야 될 거 같아 간략하게라도" — 한 번에 하나만 펼친다.
   const [previewId, setPreviewId] = useState<string | null>(null);
   // 분류로 좁혀 담기(2026-09-14) — 기술 코드 기준.
@@ -135,7 +148,7 @@ export default function CompositionPanel({
     // 2026-09-13 확정(A안): 키워드를 바꿔도 구성을 자동으로 다시 계산하지 않는다.
     // 최초 구성일 때만 서버가 한 번에 채우므로 그때는 다시 받아 그린다. 이미
     // 구성된 회차라면 '구성에 반영되지 않은 변경 있음'만 뜨고 구성은 그대로다.
-    window.location.reload();
+    router.refresh();
   }
 
   async function showChanges() {
@@ -165,7 +178,7 @@ export default function CompositionPanel({
       }
       return;
     }
-    window.location.reload();
+    router.refresh();
   }
 
   async function handleGoalBlur(value: string) {
