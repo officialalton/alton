@@ -59,7 +59,7 @@ export default function ClosedConsultationsSection() {
         </button>
       )}
 
-      {visible.length === 0 && <p className="text-[13px] text-grey-500">해당하는 지난 상담이 없습니다.</p>}
+      {visible.length === 0 && <p className="text-[13px] text-grey-500">해당하는 신규 내역이 없습니다.</p>}
 
       {visible.map((i) => (
         <div key={i.id} className={card} data-testid={`closed-consultation-${i.id}`}>

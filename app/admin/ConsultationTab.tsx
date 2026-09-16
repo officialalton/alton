@@ -52,7 +52,7 @@ const SUB_NAV: { id: SubTab; label: string }[] = [
   { id: "accounts", label: "계정 생성" },
   { id: "scheduling", label: "상담 운영(신청·수락·캘린더)" },
   { id: "trial", label: "체험 관리" },
-  { id: "past", label: "지난 상담" },
+  { id: "past", label: "신규 내역" },
   { id: "errors", label: "오류/재처리 현황판" },
 ];
 

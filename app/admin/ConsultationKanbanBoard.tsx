@@ -355,6 +355,12 @@ function ConsultationCardDetailPanel({
   }
 
   const c = detail.consultation;
+  // 2026-09-16(실사용 중 발견 → 재설계) — 계정 생성 카드는 상담이 아니다.
+  // outcome/status를 completed·trial_recommended로 채워 목록 재사용
+  // (classifyStage 등)에만 쓰는 값이라, 상담 결과 기록·보호자 동의 안내·체험
+  // 온보딩 발송처럼 "실제 상담을 거쳤다"는 전제의 화면 요소는 이 값만 보고
+  // 띄우면 안 된다. 계정은 이미 있으므로 온보딩 안내를 다시 보낼 대상도 없다.
+  const isAccountCreation = detail.intakeSource === "account_creation";
 
   return (
     <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-40" onClick={onClose}>
@@ -368,8 +374,11 @@ function ConsultationCardDetailPanel({
           <button onClick={onClose} className="text-[12px] text-grey-500">닫기</button>
         </div>
         <div className="text-[12px] text-grey-500 mb-3">
-          {c.contact_email} {c.contact_phone ? `· ${c.contact_phone}` : ""} · 상태: {c.status}
-          {c.outcome ? ` · 결과: ${c.outcome}` : ""}
+          {c.contact_email} {c.contact_phone ? `· ${c.contact_phone}` : ""}
+          {/* 2026-09-16 — 계정 생성 카드는 status/outcome이 목록 재사용을 위한
+              합성값(completed/trial_recommended)일 뿐 실제 상담 상태가 아니다.
+              혼동을 없애기 위해 계약 상태로 대체해 보여준다. */}
+          {isAccountCreation ? ` · 계정 생성됨 · 계약: ${detail.contractStatus ?? "미발송"}` : ` · 상태: ${c.status}${c.outcome ? ` · 결과: ${c.outcome}` : ""}`}
           {(c.scheduled_at ?? c.starts_at) && (
             <>
               <br />
@@ -442,14 +451,15 @@ function ConsultationCardDetailPanel({
             calendar-sync.ts) 동의 요청 메일이 Calendar 초대와 별개 채널로
             무조건 나가도록 정책을 바꿨다 — 이 화면에는 더 이상 별도 UI가
             없다. 동의 미확인 카드는 상태 뱃지로만 안내한다. */}
-        {!c.consent_confirmed_at && (c.status === "scheduled" || c.status === "completed") && (
+        {!isAccountCreation && !c.consent_confirmed_at && (c.status === "scheduled" || c.status === "completed") && (
           <div className="mb-3 text-[11.5px] font-bold text-grey-500 border border-grey-200 rounded-lg p-3">
             보호자 동의 확인 대기 중 — 상담 결과 기록 전에 필요합니다 (동의 요청 메일은 상담 확정 시 자동 발송됨)
           </div>
         )}
 
-        {/* 2. 상담 일정 확정 단계 — 결과 기록 */}
-        {(c.status === "scheduled" || (c.status === "completed" && (!c.outcome || c.outcome === "on_hold"))) && (
+        {/* 2. 상담 일정 확정 단계 — 결과 기록 (실제 상담 카드만 — 계정 생성 카드는
+            상담 자체가 없어 "결과"라는 개념이 없다) */}
+        {!isAccountCreation && (c.status === "scheduled" || (c.status === "completed" && (!c.outcome || c.outcome === "on_hold"))) && (
           <OutcomeForm consultationId={c.id} onDone={() => run(async () => {})} />
         )}
 
@@ -462,7 +472,7 @@ function ConsultationCardDetailPanel({
             household 연결, 학생별 카드 생성)는 체험/정규 여부와 무관한 범용
             절차라 TrialOnboardingStudentsForm/발송 액션을 그대로 재사용한다
             (이름에 "trial"이 있어도 실질은 온보딩 범용 로직 — 리네임은 범위 밖). */}
-        {(c.outcome === "trial_recommended" || c.outcome === "regular_recommended") && (
+        {!isAccountCreation && (c.outcome === "trial_recommended" || c.outcome === "regular_recommended") && (
           <div className="mb-3 space-y-2 border-[1.5px] border-ink rounded-lg px-3 py-2.5 bg-grey-100/50">
             <div className="text-[11.5px] font-bold text-ink">
               다음 단계 — {c.outcome === "regular_recommended" ? "정규 등록" : "체험"} 온보딩

@@ -34,6 +34,12 @@ export async function listKanbanBoardAction(): Promise<KanbanCard[]> {
 }
 
 export type ConsultationCardDetail = {
+  // 2026-09-16(실사용 중 발견 → 재설계) — 계정 생성(consultation_id null)
+  // 카드는 상담 라이프사이클(상담 결과 기록 전제의 보호자 동의 안내, 체험
+  // 온보딩 안내 발송 등)을 흉내 내면 안 된다. 이 카드가 실제 상담인지
+  // 계정 생성 유입인지는 상세 패널 렌더링에서도 구분이 필요해 목록(KanbanCard)
+  // 과 동일한 방식(id가 "link:"로 시작하는지)으로 여기도 내려준다.
+  intakeSource: "consultation" | "account_creation";
   consultation: ConsultationListItem;
   pipeline: TrialOnboardingPipeline | null;
   childName: string | null;
@@ -165,6 +171,7 @@ async function getAccountCreationCardDetail(
   }
 
   return {
+    intakeSource: "account_creation",
     consultation,
     pipeline,
     childName: studentRow.student_name,
@@ -304,6 +311,7 @@ export async function getConsultationCardDetailAction(consultationId: string): P
   }
 
   return {
+    intakeSource: "consultation",
     consultation,
     pipeline,
     childName,
@@ -395,6 +403,47 @@ export async function listClosedConsultationsAction(): Promise<{
     closedAt: r.closed_at as string,
     closureReviewText: r.closure_review_text as string | null,
   }));
+
+  // 2026-09-16(제품 오너 지시) — 계정 생성(consultation_id null) 카드는 상담이
+  // 아니므로 "지난 상담"(신규 내역)에 넣을 때도 admin_close_consultation() 같은
+  // 상담 전용 종료 경로를 타지 않는다. 완료 기준은 loadAccountCreationCards()가
+  // "신규 현황"에서 뺄 때 쓰는 것과 정확히 같은 정본(contracts.status='active')
+  // 이다 — 그래야 어느 목록에도 없거나 양쪽에 동시에 있는 카드가 생기지 않는다.
+  const { data: linkRows } = await admin
+    .from("trial_onboarding_links")
+    .select("id, guardian_name, guardian_email")
+    .is("consultation_id", null);
+  if (linkRows && linkRows.length > 0) {
+    const linkById = new Map(linkRows.map((l) => [l.id, l]));
+    const { data: studentRows } = await admin
+      .from("trial_onboarding_link_students")
+      .select("id, link_id, student_name, child_auth_user_id")
+      .in("link_id", linkRows.map((l) => l.id))
+      .eq("status", "created");
+    const childIds = (studentRows ?? [])
+      .map((s) => s.child_auth_user_id)
+      .filter((id): id is string => !!id);
+    const { data: activeContracts } = childIds.length
+      ? await admin.from("contracts").select("child_id, updated_at").eq("status", "active").in("child_id", childIds)
+      : { data: [] as { child_id: string; updated_at: string }[] };
+    const activeContractByChildId = new Map((activeContracts ?? []).map((c) => [c.child_id, c.updated_at]));
+
+    for (const s of studentRows ?? []) {
+      if (!s.child_auth_user_id) continue;
+      const contractUpdatedAt = activeContractByChildId.get(s.child_auth_user_id);
+      if (!contractUpdatedAt) continue;
+      const link = linkById.get(s.link_id)!;
+      items.push({
+        id: `link:${s.id}`,
+        contactName: link.guardian_name,
+        contactEmail: link.guardian_email,
+        closureType: "contract_signed",
+        closedAt: contractUpdatedAt,
+        closureReviewText: null,
+      });
+    }
+    items.sort((a, b) => new Date(b.closedAt).getTime() - new Date(a.closedAt).getTime());
+  }
 
   const countsByType: Record<ConsultationClosureType, number> = {
     no_trial: 0,

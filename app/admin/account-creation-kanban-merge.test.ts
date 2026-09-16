@@ -205,4 +205,41 @@ describe("loadKanbanBoard — 계정 생성 유입 통합", () => {
 
     expect(cards[0].consent_confirmed_at).toBeNull();
   });
+
+  // 2026-09-16(제품 오너 지시 — 재설계) — 계정 생성 카드의 "완료" 판정은 상담의
+  // closure_type이 아니라 contracts.status='active' 단독 기준이어야 한다(상담
+  // 라이프사이클을 흉내 내지 않음). 완료 전에는 "신규 현황"에 남고, 완료되면
+  // 반드시 빠져야 한다 — listClosedConsultationsAction()이 같은 기준으로
+  // "신규 내역"에 합성해 넣는지는 별도 테스트(consultation-kanban-actions)에서 확인한다.
+  it("계약이 아직 active가 아니면(draft 등) '신규 현황'에 남는다", async () => {
+    listConsultationsMock.mockResolvedValue([]);
+    const admin = makeAdminMock({
+      trial_onboarding_links: [{ id: "link1", guardian_name: "박보호자", guardian_email: "jiman@bulqot.co" }],
+      trial_onboarding_link_students: [
+        { id: "student-row-1", link_id: "link1", student_name: "matchbox", child_auth_user_id: "child1", created_at: "2026-01-01" },
+      ],
+      contracts: [],
+    });
+
+    const { loadKanbanBoard } = await import("./consultation-kanban-data");
+    const cards = await loadKanbanBoard(admin as never);
+
+    expect(cards).toHaveLength(1);
+  });
+
+  it("계약이 active가 되면 '신규 현황'에서 빠진다(등록 완료 — 상담 라이프사이클로 옮기지 않음)", async () => {
+    listConsultationsMock.mockResolvedValue([]);
+    const admin = makeAdminMock({
+      trial_onboarding_links: [{ id: "link1", guardian_name: "박보호자", guardian_email: "jiman@bulqot.co" }],
+      trial_onboarding_link_students: [
+        { id: "student-row-1", link_id: "link1", student_name: "matchbox", child_auth_user_id: "child1", created_at: "2026-01-01" },
+      ],
+      contracts: [{ child_id: "child1" }],
+    });
+
+    const { loadKanbanBoard } = await import("./consultation-kanban-data");
+    const cards = await loadKanbanBoard(admin as never);
+
+    expect(cards).toHaveLength(0);
+  });
 });

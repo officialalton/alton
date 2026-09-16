@@ -180,12 +180,36 @@ async function loadAccountCreationCards(admin: ReturnType<typeof createAdminClie
     : { data: [] as { child_id: string; confirmed_at: string }[] };
   const consentByChildId = new Map((consentRows ?? []).map((c) => [c.child_id, c.confirmed_at]));
 
+  // 2026-09-16(재설계, 제품 오너 지시) — 계정 생성 카드는 상담 라이프사이클을
+  // 흉내 내면 안 되고, "완료" 판정도 상담의 closure_type이 아니라 이 유입
+  // 경로 고유의 기준이어야 한다. 유일한 정본 신호는 contracts.status다: 계약이
+  // active가 되는 시점은 실제 상담 경로에서도 admin_close_consultation()이
+  // closure_type='contract_signed'로 "지난 상담"에 넘기는 바로 그 기준
+  // (app/api/webhooks/docusign/route.ts)과 같다. 계정 생성 경로는 그 웹훅이
+  // 어떤 consultations 행도 닫지 않으므로, 여기서 "신규 현황"에 남길지를
+  // active 계약 존재 여부로 직접 판정한다 — 완료된 건은 listClosedConsultationsAction()
+  // 이 같은 기준으로 "신규 내역"에 합성해 넣는다(중복 없이 정확히 한 곳에만 있게).
+  const activeContractChildIds = await loadChildIdsWithActiveContract(admin, childIds);
+
   return (studentRows ?? [])
     .filter((s): s is typeof s & { child_auth_user_id: string } => !!s.child_auth_user_id)
+    .filter((s) => !activeContractChildIds.has(s.child_auth_user_id))
     .map((s) => {
       const link = linkById.get(s.link_id)!;
       return buildAccountCreationCard(s, link, consentByChildId.get(s.child_auth_user_id) ?? null);
     });
+}
+
+/** 계정 생성 카드의 "등록 완료" 판정 — child_id별로 active 계약이 있는지.
+ * 실제 상담 경로의 완료 기준(contract active)과 동일한 정본을 그대로 재사용한다
+ * (별도 상태 컬럼을 새로 만들지 않는다 — contracts.status가 이미 정본). */
+export async function loadChildIdsWithActiveContract(
+  admin: ReturnType<typeof createAdminClient>,
+  childIds: string[]
+): Promise<Set<string>> {
+  if (childIds.length === 0) return new Set();
+  const { data } = await admin.from("contracts").select("child_id").eq("status", "active").in("child_id", childIds);
+  return new Set((data ?? []).map((r) => r.child_id as string));
 }
 
 /** 개별 상담을 5단계 중 하나로 분류한다. 기존 상태값은 전혀 바꾸지 않고

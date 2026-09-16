@@ -728,3 +728,114 @@ describe("ConsultationKanbanBoard — initialCards(2026-09-10, P1-3 상담 SSR �
     await waitFor(() => expect(listKanbanBoardActionMock).not.toHaveBeenCalled());
   });
 });
+
+// 2026-09-16(제품 오너 지시 — 실사용 중 발견 재설계) — 계정 생성(consultation_id
+// null) 카드는 상담 라이프사이클을 흉내 내면 안 된다. 상담 결과 기록 전제의
+// 보호자 동의 안내, 체험 온보딩 안내 발송 폼은 계정 생성 카드 상세에 절대
+// 뜨면 안 되고, 실제 상담 카드는 종전 그대로 동작해야 한다.
+describe("ConsultationKanbanBoard — 계정 생성 카드는 상담 라이프사이클을 흉내 내지 않는다", () => {
+  function accountCreationCardRow() {
+    return {
+      id: "link:student-row-1",
+      contact_name: "박보호자",
+      contact_email: "jiman@bulqot.co",
+      contact_phone: null,
+      student_grade: null,
+      status: "completed",
+      outcome: "trial_recommended",
+      stage: "trial_requested" as const,
+    };
+  }
+
+  function accountCreationCardDetail(overrides: Record<string, unknown> = {}) {
+    return {
+      intakeSource: "account_creation" as const,
+      consultation: {
+        id: "link:student-row-1",
+        contact_name: "박보호자",
+        contact_email: "jiman@bulqot.co",
+        contact_phone: null,
+        student_grade: null,
+        status: "completed",
+        outcome: "trial_recommended",
+        child_id: "child1",
+        trial_intent_confirmed_at: "2026-09-16T17:58:38.000Z",
+        consent_confirmed_at: "2026-09-16T18:05:28.980Z",
+      },
+      pipeline: {
+        consultationId: "link:student-row-1",
+        subjectEnrollmentId: null,
+        trialEntitlementGrantStatus: null,
+        trialEntitlementGrantError: null,
+        steps: [
+          { key: "account_linked", done: true, label: "보호자·학생 계정 연결" },
+          { key: "assignment", done: false, label: "과목·선생님 배정" },
+        ],
+      },
+      childName: "matchbox",
+      guardianEmail: "jiman@bulqot.co",
+      guardianName: "박보호자",
+      contractId: "contract1",
+      contractStatus: "draft",
+      latestContractVersionHasEnvelope: false,
+      noticeDeliveryStatus: null as "pending" | "sent" | "failed" | null,
+      noticeSendError: null as string | null,
+      noticeSentAt: null as string | null,
+      childCards: [] as { consultationId: string; childName: string | null }[],
+      ...overrides,
+    };
+  }
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    findDuplicateConsultationCandidatesMock.mockResolvedValue([]);
+    listKanbanBoardActionMock.mockResolvedValue([accountCreationCardRow()]);
+  });
+
+  it("실제로 동의를 마쳤어도(consent_confirmed_at 있음) '보호자 동의 확인 대기 중' 안내를 띄우지 않는다", async () => {
+    getConsultationCardDetailActionMock.mockResolvedValue(accountCreationCardDetail());
+
+    render(<ConsultationKanbanBoard subjects={subjects} teacherCandidatesBySubject={teacherCandidatesBySubject} />);
+
+    fireEvent.click(await screen.findByText("박보호자"));
+    await screen.findByTestId("consultation-card-detail");
+
+    expect(screen.queryByText(/보호자 동의 확인 대기 중/)).not.toBeInTheDocument();
+  });
+
+  it("'상담 결과' 기록 폼과 '체험 온보딩 안내' 발송 폼을 띄우지 않는다(계정은 이미 있음)", async () => {
+    getConsultationCardDetailActionMock.mockResolvedValue(accountCreationCardDetail());
+
+    render(<ConsultationKanbanBoard subjects={subjects} teacherCandidatesBySubject={teacherCandidatesBySubject} />);
+
+    fireEvent.click(await screen.findByText("박보호자"));
+    await screen.findByTestId("consultation-card-detail");
+
+    expect(screen.queryByText(/다음 단계 —/)).not.toBeInTheDocument();
+    expect(screen.queryByText("체험 온보딩 안내 발송")).not.toBeInTheDocument();
+  });
+
+  it("상태/결과 대신 계정 생성·계약 상태를 보여준다", async () => {
+    getConsultationCardDetailActionMock.mockResolvedValue(accountCreationCardDetail({ contractStatus: "active" }));
+
+    render(<ConsultationKanbanBoard subjects={subjects} teacherCandidatesBySubject={teacherCandidatesBySubject} />);
+
+    fireEvent.click(await screen.findByText("박보호자"));
+    await screen.findByTestId("consultation-card-detail");
+
+    expect(screen.getByText(/계정 생성됨 · 계약: active/)).toBeInTheDocument();
+    expect(screen.queryByText(/상태: completed/)).not.toBeInTheDocument();
+  });
+
+  it("실제 상담 카드는 기존처럼 상담 결과 기록·동의 안내가 그대로 동작한다(회귀 방지)", async () => {
+    listKanbanBoardActionMock.mockResolvedValue([cardRow()]);
+    getConsultationCardDetailActionMock.mockResolvedValue(cardDetail());
+
+    render(<ConsultationKanbanBoard subjects={subjects} teacherCandidatesBySubject={teacherCandidatesBySubject} />);
+
+    fireEvent.click(await screen.findByText("김민지"));
+    await screen.findByTestId("consultation-card-detail");
+
+    expect(screen.getByText(/보호자 동의 확인 대기 중/)).toBeInTheDocument();
+  });
+});
