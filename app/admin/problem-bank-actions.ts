@@ -377,7 +377,7 @@ export async function createDraftVersionAction(params: {
   statements?: string[] | null;
   /** 2026-09-15: 'needs_distractor_repair' 로 저장하면 지문·질문·정답·자료는 통과했지만 오답 보강 대기 상태로 들어간다(일반 초안 목록에서 숨음). */
   repairStatus?: "none" | "needs_distractor_repair";
-}): Promise<BankResult<string>> {
+}): Promise<BankResult<{ versionId: string; answerFixed: boolean }>> {
   const { adminUserId } = await requireAdmin();
   const admin = createAdminClient();
   // 렌더·검증은 "지문 + 질문" 한 덩어리를 본다.
@@ -385,20 +385,48 @@ export async function createDraftVersionAction(params: {
   // 2026-09-14 표준 렌더링 검증 — 스키마에 안 맞는 그림·조판할 수 없는 수식은 저장하지 않는다. 그 외 문제(참조 불일치·
   // 충돌·잘림·레거시·선택지 정합)는 저장은 되지만 render_check 에 남고 공개가 막힌다(관리자가 사유를 보고 고친다).
   const { data: problemRow } = await admin.from("problems").select("format, skill_code, exam_system").eq("id", params.problemId).maybeSingle();
+  const format = (problemRow?.format as string | undefined) ?? (params.options ? "mc" : "essay");
+
+  // 2026-09-15 제품 오너 — "정답이 정정되어야 초안으로 들어와야지, 공개할 때 정정되면 안 된다."
+  // 저장(초안 생성/수정) 시점에 정답-해설을 대조한다 — 이 초안을 만든 경로(배치 생성/관리자 직접 작성)와
+  // 무관하게, 초안이 존재하는 순간부터 이미 정답이 맞아야 한다. 공개 시점에는 더 이상 손대지 않는다.
+  let correctIndex = params.correctIndex;
+  let explanation = params.explanation;
+  let answerFixed = false;
+  let answerUnresolved: string | null = null;
+  if (format === "mc" && params.options && params.options.length >= 2 && correctIndex !== null && explanation.trim()) {
+    try {
+      const { resolveAnswerFromExplanationCore } = await import("@/lib/problem-generation/core");
+      const resolved = await resolveAnswerFromExplanationCore({
+        stimulus: fullText, question: params.question ?? "", options: params.options, explanation,
+      });
+      if (resolved.ok && resolved.confidence === "high" && resolved.concludedIndex !== correctIndex) {
+        correctIndex = resolved.concludedIndex;
+        explanation = resolved.cleanExplanation;
+        answerFixed = true;
+      } else if (!resolved.ok) {
+        // 해설이 어떤 선택지도 명확히 지지하지 않는다 — 정답이 선택지 중에 아예 없을 수 있다(실제 사례).
+        // 저장은 막지 않되(관리자가 보고 고칠 수 있어야 하니) 공개는 막는다.
+        answerUnresolved = "정답-해설 대조: 해설이 어느 선택지도 명확히 뒷받침하지 않습니다 — 계산이나 선택지를 다시 확인하세요.";
+      }
+    } catch (e) {
+      console.error("[problem-bank] 저장 시 정답-해설 대조 오류:", e instanceof Error ? e.message : e);
+    }
+  }
+
   // 자료 필수 문항(세부 기술·질문 문장으로 판정)은 자료 없이 저장하지 않는다(2026-09-14 제품 오너).
   const need = judgeMaterialNeed({ examSystem: (problemRow?.exam_system as string | null) ?? null, skillCode: (problemRow?.skill_code as string | null) ?? null, text: fullText });
   const blocker = materialBlocker(need, params.figure ?? null);
   if (blocker && fullText.trim()) return { ok: false, error: blocker };
   const contentIssues = checkContent({
-    format: (problemRow?.format as string | undefined) ?? (params.options ? "mc" : "essay"),
-    passage: fullText, options: params.options, correctIndex: params.correctIndex, explanation: params.explanation,
+    format, passage: fullText, options: params.options, correctIndex, explanation,
     answers: params.answers ?? null, statements: params.statements ?? null,
     // RW 구조화 자료 블록(2026-09-14): 세부 기술이 RW 코드인 문제만 — 옛 문제(코드 없음)는 의미를 확정할 수 없어 검사하지 않는다.
     skillCode: (problemRow?.skill_code as string | null | undefined) ?? null, figure: params.figure ?? null,
   });
   const fatal = contentIssues.find((i) => ["math_parse", "math_unclosed", "latex_leak"].includes(i.code));
   if (fatal) return { ok: false, error: `수식을 조판할 수 없어 저장하지 않았습니다 — ${fatal.message}` };
-  const figureCheck = checkFigure(params.figure ?? null, fullText, params.options, params.correctIndex);
+  const figureCheck = checkFigure(params.figure ?? null, fullText, params.options, correctIndex);
   if (figureCheck.issues.some((i) => i.code === "schema")) {
     return { ok: false, error: `그림 데이터가 규격에 맞지 않아 저장하지 않았습니다 — ${figureCheck.issues[0].message}` };
   }
@@ -408,13 +436,18 @@ export async function createDraftVersionAction(params: {
     const fv = validateFigureSpec(params.figure);
     return fv.ok ? fv.spec : params.figure;
   })();
-  const check: RenderCheck = { ...figureCheck, issues: [...figureCheck.issues, ...contentIssues], ok: figureCheck.ok && contentIssues.length === 0 };
+  const answerCheckIssues = answerUnresolved ? [{ code: "answer_explanation_unresolved", message: answerUnresolved }] : [];
+  const check: RenderCheck = {
+    ...figureCheck,
+    issues: [...figureCheck.issues, ...contentIssues, ...answerCheckIssues],
+    ok: figureCheck.ok && contentIssues.length === 0 && answerCheckIssues.length === 0,
+  };
   const { data, error } = await admin.rpc("save_problem_draft_version", {
     p_problem_id: params.problemId,
     p_passage: params.passage,
     p_options: params.options,
-    p_correct_index: params.correctIndex,
-    p_explanation: params.explanation,
+    p_correct_index: correctIndex,
+    p_explanation: explanation,
     p_difficulty: params.difficulty,
     p_actor_id: adminUserId,
     p_answers: params.answers ?? null,
@@ -427,7 +460,7 @@ export async function createDraftVersionAction(params: {
   if (error) return { ok: false, error: readable(error.message, "초안을 저장하지 못했습니다.") };
   const { error: checkError } = await admin.rpc("set_problem_render_check", { p_version_id: data as string, p_check: check });
   if (checkError) return { ok: false, error: readable(checkError.message, "그림 검증 결과를 저장하지 못했습니다.") };
-  return { ok: true, value: data as string };
+  return { ok: true, value: { versionId: data as string, answerFixed } };
 }
 
 /**
@@ -516,49 +549,17 @@ export async function publishVersionAction(versionId: string): Promise<BankResul
  * DB 는 draft → in_review → published 순서를 강제하므로(20261293000000) 그 상태는
  * 그대로 유지하되, 두 단계를 여기서 이어 붙인다. 검수자 역할 분리는 후속 범위다.
  */
-export async function publishDraftAction(versionId: string): Promise<BankResult<{ answerFixed: boolean }>> {
+export async function publishDraftAction(versionId: string): Promise<BankResult> {
   const { adminUserId } = await requireAdmin();
   const admin = createAdminClient();
-
-  // 2026-09-15 제품 오너 확인 — 직접 작성/편집한 초안은 배치 생성 파이프라인의 독립 검사·정답-해설
-  // 대조를 거치지 않는다. 공개는 드물게(문항당 한 번) 일어나니, 공개 직전에 한 번 더 대조해
-  // 어느 경로로 만들어졌든 같은 안전망을 통과시킨다.
-  const { data: v } = await admin
-    .from("problem_versions")
-    .select("problem_id, passage, question, options, correct_index, explanation")
-    .eq("id", versionId)
-    .maybeSingle();
-  let answerFixed = false;
-  if (v?.options && Array.isArray(v.options) && v.options.length >= 2 && v.correct_index !== null && v.explanation?.trim()) {
-    const { data: problem } = await admin.from("problems").select("format, difficulty").eq("id", v.problem_id).maybeSingle();
-    if (problem?.format === "mc") {
-      try {
-        const { resolveAnswerFromExplanationCore } = await import("@/lib/problem-generation/core");
-        const resolved = await resolveAnswerFromExplanationCore({
-          stimulus: composeProblemText(v.passage, v.question ?? null),
-          question: v.question ?? "",
-          options: v.options as string[],
-          explanation: v.explanation,
-        });
-        if (resolved.ok && resolved.confidence === "high" && resolved.concludedIndex !== v.correct_index) {
-          const { error: saveErr } = await admin.rpc("save_problem_draft_version", {
-            p_problem_id: v.problem_id, p_passage: v.passage, p_options: v.options, p_correct_index: resolved.concludedIndex,
-            p_explanation: resolved.cleanExplanation, p_difficulty: problem.difficulty ?? "medium", p_actor_id: adminUserId, p_question: v.question,
-          });
-          if (!saveErr) answerFixed = true;
-        }
-      } catch (e) {
-        console.error("[problem-bank] 공개 전 정답-해설 대조 오류:", e instanceof Error ? e.message : e);
-      }
-    }
-  }
-
+  // 2026-09-15 제품 오너 — 정답-해설 대조는 여기서 하지 않는다. 초안이 저장되는 시점(createDraftVersionAction)에
+  // 이미 끝났어야 한다 — "정답이 정정되어야 초안으로 들어와야지, 공개할 때 정정되면 안 된다." 공개는 순수한 게이트다.
   const { error } = await admin.rpc("confirm_and_publish_problem_version", {
     p_version_id: versionId,
     p_actor_id: adminUserId,
   });
   if (error) return { ok: false, error: readable(error.message, "공개하지 못했습니다.") };
-  return { ok: true, value: { answerFixed } };
+  return { ok: true };
 }
 
 /**
@@ -614,7 +615,7 @@ export async function createDraftFromPublishedAction(
     figureChecked: published.figure != null,
   });
   if (!created.ok) return created;
-  return { ok: true, value: { versionId: created.value, reused: false } };
+  return { ok: true, value: { versionId: created.value.versionId, reused: false } };
 }
 
 /**
@@ -751,7 +752,7 @@ export async function generateBankProblemsAction(params: {
       await admin.from("problems").update({ archived_at: new Date().toISOString() }).eq("id", problem.value);
       continue;
     }
-    const { error: qErr } = await admin.rpc("set_problem_quality", { p_version_id: draft.value, p_quality: quality });
+    const { error: qErr } = await admin.rpc("set_problem_quality", { p_version_id: draft.value.versionId, p_quality: quality });
     if (qErr) console.error("[problem-bank] 품질 기록 실패:", qErr.message);
     created += 1;
   }
@@ -770,7 +771,7 @@ export async function generateBankProblemsAction(params: {
       repairStatus: "needs_distractor_repair",
     });
     if (!draft.ok) { failures.push(draft.error); await admin.from("problems").update({ archived_at: new Date().toISOString() }).eq("id", problem.value); continue; }
-    const { error: qErr } = await admin.rpc("set_problem_quality", { p_version_id: draft.value, p_quality: quality });
+    const { error: qErr } = await admin.rpc("set_problem_quality", { p_version_id: draft.value.versionId, p_quality: quality });
     if (qErr) console.error("[problem-bank] 품질 기록 실패(대기):", qErr.message);
     held += 1;
   }

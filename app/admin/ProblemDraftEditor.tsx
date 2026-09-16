@@ -147,7 +147,7 @@ export default function ProblemDraftEditor({
   const missingAnswer = isMc && optionsPayload !== null && correctIndex === null;
   const apBlocked = examSystem === "ap";
 
-  async function saveDraft(): Promise<{ ok: true; value: string } | { ok: false; error: string }> {
+  async function saveDraft(): Promise<{ ok: true; value: { versionId: string; answerFixed: boolean } } | { ok: false; error: string }> {
     return createDraftVersionAction({
       problemId: problem.id,
       passage: passage.trim(),
@@ -435,7 +435,7 @@ export default function ProblemDraftEditor({
             void onRun(async () => {
               const saved = await saveDraft();
               if (!saved.ok) return saved;
-              return publishDraftAction(saved.value);
+              return publishDraftAction(saved.value.versionId);
             }, "공개했습니다. 공개 탭에서 볼 수 있습니다.")
           }
           className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"

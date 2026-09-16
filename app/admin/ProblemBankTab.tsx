@@ -169,17 +169,16 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
     setNotice(null);
     const failed: string[] = [];
     let done = 0;
-    let answerFixedCount = 0;
     for (const p of publishableDrafts) {
       const versionId = p.draft?.versionId;
       if (!versionId) continue;
       const result = await publishDraftAction(versionId);
-      if (result.ok) { done += 1; if (result.value?.answerFixed) answerFixedCount += 1; }
+      if (result.ok) done += 1;
       else failed.push(`${(p.draft?.passage ?? p.draft?.question ?? "").slice(0, 30) || "(내용 없음)"} — ${result.error}`);
     }
     await reload();
     setPublishingAll(false);
-    setNotice(`${done}개를 공개했습니다.${answerFixedCount ? ` (${answerFixedCount}개는 공개 전 정답-해설 대조에서 정답을 자동 정정했습니다)` : ""}${failed.length ? ` ${failed.length}개는 공개하지 못해 초안으로 남았습니다.` : ""}`);
+    setNotice(`${done}개를 공개했습니다.${failed.length ? ` ${failed.length}개는 공개하지 못해 초안으로 남았습니다.` : ""}`);
     if (failed.length) setError(failed.join(" / "));
   }
 

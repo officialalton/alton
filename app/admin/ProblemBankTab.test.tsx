@@ -101,7 +101,7 @@ beforeEach(() => {
   vi.clearAllMocks();
   listBankProblemsAction.mockResolvedValue([draftProblem]);
   createBankProblemAction.mockResolvedValue({ ok: true, value: "p2" });
-  createDraftVersionAction.mockResolvedValue({ ok: true, value: "v2" });
+  createDraftVersionAction.mockResolvedValue({ ok: true, value: { versionId: "v2", answerFixed: false } });
   createDraftFromPublishedAction.mockResolvedValue({
     ok: true,
     value: { versionId: "v9", reused: false },
