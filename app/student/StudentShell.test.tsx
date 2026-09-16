@@ -78,6 +78,9 @@ const lessonsProps = {
   studentId: "student-1",
   homeworkSets: [],
   materialsLibraryTree: [],
+  myVocabWords: [],
+  vocabLibraryBooks: [],
+  vocabQuizzes: [],
   credits: { balance: 0, guardianName: null, regularRemaining: 0, regularNearestExpiry: null, trialEntitlement: null },
   stats: { attendanceRate: null, satisfactionAvg: null, bySubject: [] },
   teacherList: [],
@@ -101,7 +104,6 @@ describe("StudentShell", () => {
       <StudentShell
         studentName="지훈"
         dashboard={dashboard}
-        vocabWords={[]}
         problemHistory={[]}
         {...lessonsProps}
       />
@@ -119,7 +121,6 @@ describe("StudentShell", () => {
       <StudentShell
         studentName="지훈"
         dashboard={dashboard}
-        vocabWords={[]}
         problemHistory={[]}
         {...lessonsProps}
       />
@@ -133,7 +134,6 @@ describe("StudentShell", () => {
       <StudentShell
         studentName="지훈"
         dashboard={dashboard}
-        vocabWords={[]}
         problemHistory={[]}
         {...lessonsProps}
       />
@@ -142,19 +142,18 @@ describe("StudentShell", () => {
     expect(screen.getByText("장 보유")).toBeInTheDocument();
   });
 
-  it("단어장 탭을 누르면 VocabTab이 렌더링된다", () => {
+  it("단어장 탭을 누르면 VocabLibraryTab이 렌더링된다", () => {
     render(
       <StudentShell
         studentName="지훈"
         dashboard={dashboard}
-        vocabWords={[]}
         problemHistory={[]}
         {...lessonsProps}
       />
     );
     fireEvent.click(screen.getByText("단어장"));
     expect(
-      screen.getByText("아직 저장한 단어가 없습니다. 교재에서 모르는 단어를 클릭해보세요.")
+      screen.getByText("아직 추가한 단어가 없어요. '+ 단어 추가'를 눌러보세요.")
     ).toBeInTheDocument();
   });
 
@@ -163,7 +162,6 @@ describe("StudentShell", () => {
       <StudentShell
         studentName="지훈"
         dashboard={dashboard}
-        vocabWords={[]}
         problemHistory={[]}
         {...lessonsProps}
       />
@@ -177,7 +175,6 @@ describe("StudentShell", () => {
       <StudentShell
         studentName="지훈"
         dashboard={dashboard}
-        vocabWords={[]}
         problemHistory={[]}
         {...lessonsProps}
       />
@@ -195,7 +192,6 @@ describe("StudentShell", () => {
       <StudentShell
         studentName="지훈"
         dashboard={dashboard}
-        vocabWords={[]}
         problemHistory={[]}
         {...lessonsProps}
       />
@@ -211,7 +207,6 @@ describe("StudentShell", () => {
       <StudentShell
         studentName="지훈"
         dashboard={dashboard}
-        vocabWords={[]}
         problemHistory={[]}
         {...lessonsProps}
       />
@@ -227,7 +222,6 @@ describe("StudentShell", () => {
       <StudentShell
         studentName="지훈"
         dashboard={dashboard}
-        vocabWords={[]}
         problemHistory={[]}
         {...lessonsProps}
       />
@@ -241,7 +235,6 @@ describe("StudentShell", () => {
       <StudentShell
         studentName="지훈"
         dashboard={dashboard}
-        vocabWords={[]}
         problemHistory={[]}
         {...lessonsProps}
       />

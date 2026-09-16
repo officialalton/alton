@@ -7,8 +7,8 @@ import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
 import HomeDashboard from "./HomeDashboard";
 import type { DashboardData } from "./dashboard-data";
-import VocabTab from "@/app/session/[id]/VocabTab";
-import type { VocabEntry } from "@/app/session/[id]/vocab-data";
+import VocabLibraryTab from "./VocabLibraryTab";
+import type { MyVocabWord, LibraryBook, VocabQuiz } from "./vocab-library-data";
 import ProblemHistoryTab from "./ProblemHistoryTab";
 import type { ProblemHistoryEntry } from "./problem-history-data";
 import type { LessonItem } from "./lessons-data";
@@ -65,7 +65,9 @@ export default function StudentShell({
   studentName,
   initialTab,
   dashboard,
-  vocabWords,
+  myVocabWords,
+  vocabLibraryBooks,
+  vocabQuizzes,
   problemHistory,
   upcoming,
   past,
@@ -88,7 +90,9 @@ export default function StudentShell({
   studentName: string;
   initialTab?: string;
   dashboard: DashboardData;
-  vocabWords: VocabEntry[];
+  myVocabWords: MyVocabWord[];
+  vocabLibraryBooks: LibraryBook[];
+  vocabQuizzes: VocabQuiz[];
   problemHistory: ProblemHistoryEntry[];
   upcoming: LessonItem[];
   past: LessonItem[];
@@ -244,12 +248,7 @@ export default function StudentShell({
               onReportTeacherIssue={reportTeacherIssue}
             />
           ) : activeTab === "vocab" ? (
-            <VocabTab
-              initialWords={vocabWords}
-              isTeacher={false}
-              canManage={true}
-              studentName={studentName}
-            />
+            <VocabLibraryTab myWords={myVocabWords} books={vocabLibraryBooks} quizzes={vocabQuizzes} />
           ) : activeTab === "problemlog" ? (
             <ProblemHistoryTab entries={problemHistory} />
           ) : activeTab === "homework" ? (

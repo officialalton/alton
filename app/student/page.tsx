@@ -1,7 +1,7 @@
 import { requireUser } from "@/lib/auth";
 import StudentShell from "./StudentShell";
 import { loadDashboardData } from "./dashboard-data";
-import { loadVocabWords } from "@/app/session/[id]/vocab-data";
+import { loadMyVocabWords, loadLibraryBooks, loadVocabQuizzes } from "./vocab-library-data";
 import { loadProblemHistory } from "./problem-history-data";
 import { loadLessons } from "./lessons-data";
 import { loadCurricula } from "./curriculum-data";
@@ -45,7 +45,9 @@ export default async function StudentHomePage({
   const [
     dashboard,
     lessonBooking,
-    vocabWords,
+    myVocabWords,
+    vocabLibraryBooks,
+    vocabQuizzes,
     problemHistory,
     { upcoming, past },
     curricula,
@@ -58,7 +60,9 @@ export default async function StudentHomePage({
   ] = await Promise.all([
     dashboardPromise,
     lessonBookingPromise,
-    loadVocabWords(supabase, user.id),
+    loadMyVocabWords(supabase, user.id),
+    loadLibraryBooks(supabase),
+    loadVocabQuizzes(supabase, user.id),
     loadProblemHistory(user.id),
     lessonsPromise,
     loadCurricula(supabase, user.id),
@@ -112,7 +116,9 @@ export default async function StudentHomePage({
       studentName={dashboard.studentName}
       initialTab={tab}
       dashboard={dashboard}
-      vocabWords={vocabWords}
+      myVocabWords={myVocabWords}
+      vocabLibraryBooks={vocabLibraryBooks}
+      vocabQuizzes={vocabQuizzes}
       problemHistory={problemHistory}
       upcoming={upcoming}
       past={past}
