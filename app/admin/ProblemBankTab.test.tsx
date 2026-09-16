@@ -472,12 +472,12 @@ describe("보관은 삭제가 아니다", () => {
     expect(publishDraftAction).not.toHaveBeenCalled();
   });
 
-  it("그림 데이터를 적으면 미리보기가 그려지고, 틀리면 사유가 보인다(2026-09-14 ③)", async () => {
+  it("그림 데이터를 적으면 미리보기가 그려지고, 틀리면 사유가 보인다(2026-09-14 ③, 2026-09-15: 확인 체크 없이 미리보기가 항상 뜬다)", async () => {
     await openFirstProblem();
     const box = screen.getByLabelText("그림 데이터");
     fireEvent.change(box, { target: { value: '{"type":"plane","axes":{"x":{"min":-2,"max":8},"y":{"min":-2,"max":8}},"objects":[{"id":"A","kind":"point","at":[1,3],"label":"A"}]}' } });
     expect(screen.getAllByTestId("problem-figure").length).toBeGreaterThan(0);
-    expect(screen.getByLabelText("그림 확인함")).toBeDisabled(); // 저장 전엔 확인 못 한다
+    expect(screen.queryByLabelText("그림 확인함")).not.toBeInTheDocument();
     fireEvent.change(box, { target: { value: '{"type":"geometry","shapes":[]}' } });
     expect(screen.getByText(/자료 데이터 오류|그림 데이터 오류/)).toBeInTheDocument();
   });

@@ -13,6 +13,15 @@ function normalize(text: string): string {
   return text.replace(/\s+/g, " ").trim().toLowerCase();
 }
 
+/**
+ * 2026-09-15 — AI가 지시를 어기고 선택지 문자열 안에 "B) …", "(D) …" 같은 자기 라벨을
+ * 그대로 남길 때가 있다. 화면은 앞에 A)~D)를 따로 붙이므로 그대로 두면 "B)  B) …"처럼
+ * 겹쳐 보인다. 각 선택지 맨 앞의 라벨만 떼고 내용은 그대로 둔다(라벨이 없으면 그대로).
+ */
+export function stripOptionSelfLabels(options: string[]): string[] {
+  return options.map((o) => o.replace(/^\s*(?:\(?[A-Da-d][).]|[①②③④])\s*/, "").trim());
+}
+
 export function stripInlineOptions(passage: string | null | undefined, options?: string[] | null): string {
   if (!passage) return "";
   const lines = passage.replace(/\r\n/g, "\n").split("\n");

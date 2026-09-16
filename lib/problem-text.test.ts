@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { stripInlineOptions } from "./problem-text";
+import { stripInlineOptions, stripOptionSelfLabels } from "./problem-text";
 
 describe("stripInlineOptions — 지문 끝의 선택지 줄을 뗀다", () => {
   const options = ["harsh and unadorned", "sudden and violent", "generous and abundant", "faint and barely visible"];
@@ -31,5 +31,21 @@ describe("stripInlineOptions — 지문 끝의 선택지 줄을 뗀다", () => {
 
   it("빈 값은 빈 문자열", () => {
     expect(stripInlineOptions(null, options)).toBe("");
+  });
+});
+
+describe("stripOptionSelfLabels — 선택지 문자열 안의 자기 라벨을 뗀다(2026-09-15)", () => {
+  it("B), (D), D. 처럼 앞에 붙은 라벨을 뗀다", () => {
+    expect(stripOptionSelfLabels(["B) the decrease was substantial", "(D) something else", "D. another one"])).toEqual([
+      "the decrease was substantial",
+      "something else",
+      "another one",
+    ]);
+  });
+  it("라벨이 없으면 그대로 둔다", () => {
+    expect(stripOptionSelfLabels(["expand, lengthen"])).toEqual(["expand, lengthen"]);
+  });
+  it("본문 중간의 A) 는 건드리지 않는다(맨 앞만 뗀다)", () => {
+    expect(stripOptionSelfLabels(["Part A) of the plan failed"])).toEqual(["Part A) of the plan failed"]);
   });
 });

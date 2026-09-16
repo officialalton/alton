@@ -4,7 +4,6 @@ import { useMemo, useState } from "react";
 import {
   createDraftVersionAction,
   publishDraftAction,
-  markFigureCheckedAction,
   uploadProblemImageAction,
   generateFigureForProblemAction,
   recheckDistractorRepairAction,
@@ -109,7 +108,6 @@ export default function ProblemDraftEditor({
 
   // 자료(그림) 데이터 — JSON 은 고급 편집에서만.
   const [figureText, setFigureText] = useState(source?.figure ? JSON.stringify(source.figure, null, 2) : "");
-  const [figureChecked, setFigureChecked] = useState(Boolean(source?.figureChecked));
   const figureParsed: { spec: unknown | null; error: string | null } = (() => {
     if (!figureText.trim()) return { spec: null, error: null };
     try {
@@ -162,7 +160,9 @@ export default function ProblemDraftEditor({
       answers: vis.spr ? answersText.split(/[,\n]/).map((a) => a.trim()).filter(Boolean) : (source?.answers ?? null),
       statements: vis.statements || vis.legacyAll ? (statementsPayload.length ? statementsPayload : null) : (source?.statements ?? null),
       figure: figureForSave,
-      figureChecked: figureChecked && !figureDirty,
+      // 2026-09-15 제품 오너 — 미리보기가 이제 자료를 항상 그려 보여주므로 별도 "확인함" 클릭을
+      // 요구하지 않는다(공개 게이트도 이 값을 더 이상 보지 않는다, 20261374 참고).
+      figureChecked: figureForSave != null,
     });
   }
 
@@ -318,12 +318,6 @@ export default function ProblemDraftEditor({
           }}
           figureText={figureText}
           setFigureText={setFigureText}
-          checked={figureChecked && !figureDirty}
-          checkDisabled={figureDirty || busy || figureIssues.length > 0 || figureIsLegacy || !source?.versionId}
-          onCheck={(next) => {
-            setFigureChecked(next);
-            if (source?.versionId) void onRun(() => markFigureCheckedAction(source.versionId, next), next ? "미리보기로 확인했다고 표시했습니다." : "확인을 해제했습니다.");
-          }}
           figureDirty={figureDirty}
           isRw={examSystem === "sat_rw"}
         />
@@ -473,9 +467,6 @@ function MaterialSection(props: {
   onUpload: (file: File) => Promise<void>;
   figureText: string;
   setFigureText: (v: string) => void;
-  checked: boolean;
-  checkDisabled: boolean;
-  onCheck: (next: boolean) => void;
   figureDirty: boolean;
   isRw: boolean;
 }) {
@@ -561,12 +552,10 @@ function MaterialSection(props: {
       {props.figureNotice && <p className="text-[11.5px] text-ink mb-1.5">{props.figureNotice}</p>}
       {figureParsed.error && <p className="text-[11.5px] text-red mb-1.5">자료 데이터 오류 — {figureParsed.error}</p>}
 
-      {figureParsed.spec != null && (
-        <label className="flex items-center gap-2 text-[12.5px] text-ink mb-1.5">
-          <input type="checkbox" aria-label="그림 확인함" checked={props.checked} disabled={props.checkDisabled} onChange={(e) => props.onCheck(e.target.checked)} />
-          미리보기로 확인함
-          {props.figureDirty ? " — 먼저 초안을 저장하세요(자료가 바뀌었습니다)" : figureIssues.length > 0 ? " — 검증 문제를 먼저 해결하세요" : ""}
-        </label>
+      {figureParsed.spec != null && (props.figureDirty || figureIssues.length > 0) && (
+        <p className="text-[12.5px] text-grey-500 mb-1.5">
+          {props.figureDirty ? "자료가 바뀌었습니다 — 먼저 초안을 저장하세요." : "검증 문제를 먼저 해결하세요."}
+        </p>
       )}
 
       {(vis.advancedJson || vis.legacyAll) && (

@@ -2,7 +2,7 @@
 // 인증은 여기서 하지 않는다: 서버 액션이 requireAdmin 을 거친 뒤 호출하고, 표본 검증 스크립트(scripts/)도 같은 경로를 쓴다.
 // 내용은 그대로 옮겼다 — AI 는 관계·의미만 내고 좌표·라벨 자리는 표준 렌더러가 정한다.
 import Anthropic from "@anthropic-ai/sdk";
-import { stripInlineOptions } from "@/lib/problem-text";
+import { stripInlineOptions, stripOptionSelfLabels } from "@/lib/problem-text";
 import { composeProblemText, splitLegacyQuestion } from "@/lib/problem-question";
 import { GEOMETRY_TEMPLATE_TYPES, validateFigureSpec } from "@/lib/problem-figures/spec";
 import { placeCorrectChoice } from "@/lib/problem-figures/templates/figure-choice";
@@ -278,7 +278,7 @@ ${difficulty === "hard" ? `어려움(hard) 전용 절차 — **지문을 쓰기 
     stimulus,
     question: question || null,
     needsFigure: Boolean(requiredTypes) && !hasRequiredFigure(p),
-    options: format === "mc" ? p.options ?? null : null,
+    options: format === "mc" && p.options ? stripOptionSelfLabels(p.options) : null,
     correctIndex: format === "mc" ? p.correct_index ?? null : null,
     answers: format === "spr" ? (p.answers ?? []).map(String).filter(Boolean) : null,
     statements: Array.isArray(p.statements) && p.statements.length ? (p.statements as unknown[]).map(String).filter(Boolean) : null,
@@ -387,7 +387,7 @@ ${current.correctIndex !== null ? `정답 인덱스: ${current.correctIndex}` : 
     passage: composeProblemText(stimulus, question),
     stimulus,
     question: question || null,
-    options: format === "mc" ? raw.options ?? null : null,
+    options: format === "mc" && raw.options ? stripOptionSelfLabels(raw.options) : null,
     correctIndex: format === "mc" ? raw.correct_index ?? null : null,
     answers: format === "spr" ? (raw.answers ?? []).map(String).filter(Boolean) : null,
     figure: (() => { const fv = raw.figure ? validateFigureSpec(raw.figure) : null; return fv && fv.ok ? fv.spec : null; })(),
@@ -615,7 +615,7 @@ ${params.avoid?.length ? `이전 시도가 실패했습니다(중복 또는 오�
   const toolUse = message.content.find((c) => c.type === "tool_use");
   if (!toolUse || toolUse.type !== "tool_use") return { ok: false, error: "오답 수정 응답을 처리할 수 없습니다." };
   const input = toolUse.input as { evidence_kept?: string; misconception?: string; why_plausible?: string; actual_flaw?: string; error_type?: string; text?: string };
-  const text = (input.text ?? "").trim();
+  const text = stripOptionSelfLabels([(input.text ?? "").trim()])[0];
   if (!text) return { ok: false, error: "새 선택지가 비어 있습니다." };
   const normalize = (s: string) => s.trim().toLowerCase().replace(/\s+/g, " ");
   if (otherOptions.some((o) => normalize(o) === normalize(text))) return { ok: false, error: "정답 또는 다른 선택지와 중복됩니다." };
@@ -699,7 +699,7 @@ ${params.issues.map((r) => `- ${r}`).join("\n")}
   const changedFields: string[] = [];
   const passage = typeof raw.passage === "string" && raw.passage.trim() ? (changedFields.push("passage"), raw.passage) : params.passage;
   const question = typeof raw.question === "string" && raw.question.trim() ? (changedFields.push("question"), raw.question) : params.question;
-  const options = Array.isArray(raw.options) && raw.options.length ? (changedFields.push("options"), raw.options) : params.options;
+  const options = Array.isArray(raw.options) && raw.options.length ? (changedFields.push("options"), stripOptionSelfLabels(raw.options)) : params.options;
   const correctIndex = Array.isArray(raw.options) && typeof raw.correct_index === "number" ? raw.correct_index : params.correctIndex;
   const statements = Array.isArray(raw.statements) ? (changedFields.push("statements"), raw.statements) : params.statements;
   const explanation = typeof raw.explanation === "string" && raw.explanation.trim() ? (changedFields.push("explanation"), raw.explanation) : params.explanation;
