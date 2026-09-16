@@ -78,21 +78,21 @@ export default function VocabQuizIssueForm({
         </div>
       )}
 
-      {folders.length > 0 && (
-        <div className="mb-3">
-          <p className="text-[12px] font-bold text-grey-500 mb-1.5">학생의 “내 단어장” 폴더</p>
-          <div className="flex flex-wrap gap-2">
-            <label className="text-[12.5px] flex items-center gap-1.5">
-              <input type="checkbox" checked={customWords} onChange={() => setCustomWords((v) => !v)} /> 내 단어장 전체
+      <div className="mb-3">
+        <p className="text-[12px] font-bold text-grey-500 mb-1.5">학생 개인 단어장</p>
+        <div className="flex flex-wrap gap-2">
+          <label className="text-[12.5px] flex items-center gap-1.5">
+            <input type="checkbox" checked={customWords} onChange={() => setCustomWords((v) => !v)} /> 내 단어장 전체(학생별로 각자의 단어장에서 낸다)
+          </label>
+          {/* 폴더별 세분화는 학생이 하나로 고정된 화면(수업 화면)에서만 의미가 있다 — 여러 학생을
+              한꺼번에 고르는 교사 포털에서는 폴더 목록 자체를 안 받는다(fixedStudentId 없음). */}
+          {folders.map((f) => (
+            <label key={f.id} className="text-[12.5px] flex items-center gap-1.5">
+              <input type="checkbox" checked={folderIds.has(f.id)} onChange={() => toggle(folderIds, setFolderIds, f.id)} /> {f.name}
             </label>
-            {folders.map((f) => (
-              <label key={f.id} className="text-[12.5px] flex items-center gap-1.5">
-                <input type="checkbox" checked={folderIds.has(f.id)} onChange={() => toggle(folderIds, setFolderIds, f.id)} /> {f.name}
-              </label>
-            ))}
-          </div>
+          ))}
         </div>
-      )}
+      </div>
 
       <div className="mb-3">
         <p className="text-[12px] font-bold text-grey-500 mb-1.5">ALTON SAT 공용 단어장(권)</p>
