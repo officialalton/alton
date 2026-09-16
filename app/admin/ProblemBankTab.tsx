@@ -499,7 +499,6 @@ function NewProblemPanel({
           <input aria-label="문제 유형" value={skillType} onChange={(e) => setSkillType(e.target.value)} placeholder="유형 (세부 기술을 고르면 자동)" className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 w-[220px]" />
           <input aria-label="주제" value={topic} onChange={(e) => setTopic(e.target.value)} placeholder="주제 (선택 · 예: 생태계)" className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 w-[170px]" />
           <select aria-label="난이도" value={difficulty} onChange={(e) => setDifficulty(e.target.value as "easy" | "medium" | "hard")} className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5">
-            <option value="easy">쉬움</option>
             <option value="medium">보통</option>
             <option value="hard">어려움</option>
           </select>

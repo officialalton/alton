@@ -719,7 +719,6 @@ function ProblemGenPanel({
           onChange={(e) => setDifficulty(e.target.value as ProblemDifficulty)}
           className="px-3 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12.5px]"
         >
-          <option value="easy">쉬움</option>
           <option value="medium">보통</option>
           <option value="hard">어려움</option>
         </select>
