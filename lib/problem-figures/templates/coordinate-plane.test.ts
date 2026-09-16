@@ -133,4 +133,32 @@ describe("템플릿 3 — 거부", () => {
     expect(c.ok).toBe(false);
     expect(c.issues[0].code).toBe("legacy");
   });
+  it("두 직선 교점(연립방정식 해)을 실제로 계산해 정답 선택지와 맞지 않으면 거부한다(2026-09-15 실제 사례)", () => {
+    // 직선 ℓ: (-4,5),(4,-3) → y = -x+1. 직선 m: (-4,-3),(2,3) → y = x+1. 교점 (0,1), x+y=1.
+    const spec = P([
+      { id: "l", kind: "line", through: [[-4, 5], [4, -3]], label: "ℓ" },
+      { id: "m", kind: "line", through: [[-4, -3], [2, 3]], label: "m" },
+    ]);
+    const passage = "Line ℓ passes through the points (-4, 5) and (4, -3). Line m passes through the points (-4, -3) and (2, 3). The system of equations represented by lines ℓ and m has solution (x, y). What is the value of x + y?";
+    const options = ["-4", "-2", "0", "2"];
+    // 실제 사례처럼 -2(인덱스 1)가 정답으로 잘못 표시된 경우 — 실제 계산값 1과 다르므로 거부.
+    const issues = lintPlaneAgainstText(spec, passage, options, 1);
+    expect(issues.some((i) => i.code === "system_solution_mismatch")).toBe(true);
+    // 선택지에 정답(1)이 아예 없어도(이 사례처럼) 최소한 잘못 표시된 정답은 걸러낸다.
+  });
+  it("정답이 실제 교점과 맞으면 통과한다", () => {
+    const spec = P([
+      { id: "a", kind: "line", slope: 1, intercept: 1 },
+      { id: "b", kind: "line", slope: -1, intercept: 3 },
+    ]);
+    // 교점: x+1 = -x+3 → x=1, y=2. x+y=3.
+    const issues = lintPlaneAgainstText(spec, "What is the value of x + y?", ["1", "2", "3", "4"], 2);
+    expect(issues.some((i) => i.code === "system_solution_mismatch")).toBe(false);
+  });
+  it("라벨에 LaTeX 제어문이 그대로 남아 있으면 거부한다(2026-09-15 — 그림 라벨은 KaTeX를 안 거친다)", () => {
+    const spec = P([{ id: "L", kind: "line", slope: -1, intercept: 1, label: "\\ell" }]);
+    const c = checkFigure(spec, "Line \\ell is graphed.");
+    expect(c.ok).toBe(false);
+    expect(c.issues.some((i) => i.code === "figure_label_latex_leak")).toBe(true);
+  });
 });

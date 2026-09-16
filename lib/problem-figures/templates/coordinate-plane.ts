@@ -486,7 +486,7 @@ export function renderPlane(spec: PlaneSpec): { svg: string; alt: string; issues
 }
 
 /** 지문 참조 검사 — "point P", "(2, 1)" 좌표, "line ℓ", "f(x)/g(x)", "y = 2x − 3" 식, 축 제목·범위. */
-export function lintPlaneAgainstText(spec: PlaneSpec, passage: string, options?: string[] | null): FigureIssue[] {
+export function lintPlaneAgainstText(spec: PlaneSpec, passage: string, options?: string[] | null, correctIndex?: number | null): FigureIssue[] {
   const issues: FigureIssue[] = [];
   const text = passage.replace(/\$/g, "").replace(/−/g, "-").replace(/\\frac\{(-?\d+)\}\{(\d+)\}/g, "$1/$2");
   // 선택지(부등식 문항은 선택지가 부등식인 경우가 많다)에서는 **부등호·경계 포함 여부만** 대조한다. 좌표는 지문에서만.
@@ -629,6 +629,32 @@ export function lintPlaneAgainstText(spec: PlaneSpec, passage: string, options?:
   // 좌표평면 문제에서 quadrant I~IV 는 정당한 수학 용어다. 배치 용어(region, northeast 등)만 막는다.
   if (/\b(northeast|northwest|southeast|southwest|region)\b/i.test(text)) {
     issues.push({ code: "wording", message: "지문에 배치 용어(region, northeast 등)가 있습니다 — 좌표·점 이름·직선 이름으로 부릅니다." });
+  }
+  // 2026-09-15 제품 오너 확인 — 직선 두 개(교점=연립방정식 해)를 묻는 문항에서 해설은 맞는데 정답 표시가
+  // 실제 교점과 다른 사례 발견. 그림 데이터로 교점을 직접 계산해 정답 선택지 값과 대조한다(결정적, AI 불필요).
+  {
+    const lines = spec.objects.filter((o) => o.kind === "line") as Extract<PlaneObject, { kind: "line" }>[];
+    if (lines.length === 2 && options?.length && correctIndex !== null && correctIndex !== undefined && correctIndex >= 0 && correctIndex < options.length) {
+      const p1 = lineParams(lines[0], resolve), p2 = lineParams(lines[1], resolve);
+      if (!("vertical" in p1) && !("vertical" in p2) && Math.abs(p1.m - p2.m) > 1e-9) {
+        const x0 = (p2.b - p1.b) / (p1.m - p2.m);
+        const y0 = p1.m * x0 + p1.b;
+        const fmt = (v: number) => Math.round(v * 1e6) / 1e6;
+        let target: number | null = null;
+        if (/value of\s*x\s*\+\s*y/i.test(text)) target = fmt(x0 + y0);
+        else if (/value of\s*x\s*-\s*y/i.test(text)) target = fmt(x0 - y0);
+        else if (/value of\s*y\s*-\s*x/i.test(text)) target = fmt(y0 - x0);
+        else if (/value of\s*x\s*(?:\*|·|times)\s*y|value of\s*xy/i.test(text)) target = fmt(x0 * y0);
+        else if (/value of\s*y\b/i.test(text) && !/value of\s*x\b/i.test(text)) target = fmt(y0);
+        else if (/value of\s*x\b/i.test(text) && !/value of\s*y\b/i.test(text)) target = fmt(x0);
+        if (target !== null) {
+          const optVal = numTok(options[correctIndex].trim());
+          if (!Number.isNaN(optVal) && Math.abs(optVal - target) > 1e-6) {
+            issues.push({ code: "system_solution_mismatch", message: `두 직선의 교점을 계산하면 (${fmt(x0)}, ${fmt(y0)})인데, 정답으로 표시된 선택지(${options[correctIndex]})는 실제 계산값 ${target}과 다릅니다.` });
+          }
+        }
+      }
+    }
   }
   return dedupe(issues);
 }

@@ -159,7 +159,7 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
    */
   const classifyContractIssue = (code: string): "figure" | "structural" | "text" => {
     if (/^contract_(ref_|label_|clipped|impossible|unit_|option_leak|choice_bias|answer_mismatch)/.test(code)) return "figure";
-    if (code === "contract_target" || code === "contract_answer" || code === "contract_evidence" || code === "contract_figure_choice_placeholder") return "structural";
+    if (code === "contract_target" || code === "contract_answer" || code === "contract_evidence" || code === "contract_figure_choice_placeholder" || code === "contract_system_solution_mismatch") return "structural";
     return "text";
   };
 

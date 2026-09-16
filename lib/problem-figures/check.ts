@@ -29,6 +29,24 @@ export function passageRequiresFigure(passage: string): boolean {
   return /\b(as shown|in the figure|the figure|the diagram|shown below|shown above|the graph (?:above|below|shown))\b/i.test(passage);
 }
 
+/**
+ * 그림 라벨은 KaTeX 를 안 거치고 SVG 텍스트로 그대로 찍힌다(2026-09-15 확인 — 지문에는 "$\ell$" 로 쓰고
+ * 그림 라벨에도 그 그대로 "\ell" 을 넣어 화면에 백슬래시가 그대로 노출된 사례). 그림 데이터 전체를 훑어
+ * 라벨류 문자열에 남은 LaTeX 제어문을 전부 거부한다 — 그림 라벨엔 수식 모드가 없으니 한 글자도 허용 안 한다.
+ */
+function figureLabelLatexLeaks(value: unknown, path = ""): FigureIssue[] {
+  if (typeof value === "string") {
+    const m = value.match(/\\[a-zA-Z]+/);
+    if (m) return [{ code: "figure_label_latex_leak", message: `그림 라벨${path ? `(${path})` : ""}에 LaTeX 제어문이 그대로 남아 있습니다 — 화면에 "${m[0]}"이 그대로 보입니다. 그림 라벨은 일반 텍스트(예: "\\ell" 대신 "ℓ")로 씁니다.` }];
+    return [];
+  }
+  if (Array.isArray(value)) return value.flatMap((v, i) => figureLabelLatexLeaks(v, path ? `${path}[${i}]` : `[${i}]`));
+  if (value && typeof value === "object") {
+    return Object.entries(value as Record<string, unknown>).flatMap(([k, v]) => figureLabelLatexLeaks(v, path ? `${path}.${k}` : k));
+  }
+  return [];
+}
+
 export function checkFigure(figure: unknown, passage: string, options?: string[] | null, correctIndex?: number | null): RenderCheck {
   const checkedAt = new Date().toISOString();
   const issues: FigureIssue[] = [];
@@ -39,6 +57,7 @@ export function checkFigure(figure: unknown, passage: string, options?: string[]
   const v = validateFigureSpec(figure);
   if (!v.ok) return { ok: false, renderer: RENDERER_VERSION, checkedAt, issues: [{ code: "schema", message: v.error }] };
   const spec = v.spec;
+  issues.push(...figureLabelLatexLeaks(spec));
   if (LEGACY_FIGURE_TYPES.includes(spec.type)) {
     return {
       ok: false, renderer: RENDERER_VERSION, checkedAt,
@@ -61,7 +80,7 @@ export function checkFigure(figure: unknown, passage: string, options?: string[]
   }
   if (spec.type === "plane") {
     const r = renderPlane(spec);
-    issues.push(...r.issues, ...lintPlaneAgainstText(spec, passage, options));
+    issues.push(...r.issues, ...lintPlaneAgainstText(spec, passage, options, correctIndex));
     return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
   }
   if (spec.type === "figure_choice") {
