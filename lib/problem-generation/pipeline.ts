@@ -385,19 +385,86 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
     }
   };
 
-  const generated = await generate(initialCount);
-  stats.generated += generated.length;
-  const initialOutcomes = await mapWithConcurrency(generated, GATE_CONCURRENCY, (g) => gate(g, 0));
-  generated.forEach((g, i) => record(g, initialOutcomes[i]));
+  // 2026-09-15 제품 오너 지시 — 어려움 + 자료 필요 수학은 4단계(자료+문항 → 정답 확정 → 오답 → 최종 검수)로
+  // 만든다. 정답을 생성 단계가 지어내지 않고 별도로 확정해 "정답이 선택지에 없다/틀렸다" 류를 구조적으로 줄인다.
+  // 최종 검수 통과분은 기존 gate() 로 넘겨 독립 검사·오답 보강·대기 판정을 그대로 재사용한다.
+  //
+  // **2026-09-15 실측 후 잠정 비활성화**: 표본 5개로 실제 돌려보니 0/5 통과(문항당 평균 295회 호출) —
+  // (1) 1단계 자료 스키마에 type 필드가 자꾸 빠짐 (2) 2단계 정답이 "k = 6"처럼 변수명을 붙여 계약의
+  // 선택지 표기 규칙과 계속 충돌 (3) 두 직선 교점 검사(system_solution_mismatch)가 "교점을 묻지 않는"
+  // 문항(예: 기울기 k를 구하는데 비교용 직선이 하나 더 있는 경우)에도 오탐. 셋 다 고쳐질 때까지 이 경로를
+  // 켜지 않는다 — 지금 있는 기존 경로(오늘 낮에 44~70%까지 올린)가 더 낫다. 코드는 남겨 다음에 고친다.
+  const isRiskyMath = false && (
+    (params.examSystem ?? "").startsWith("sat_math") && params.difficulty === "hard" && params.format === "mc" &&
+    (params.figurePolicy === "require_plane" || params.figurePolicy === "require_geometry")
+  );
 
-  // 부족하면 최대 두 번 더 채운다(각 청크가 개별적으로 빈 응답을 견디므로 재시도가 안전하다). 라운드 안에서는 병렬 처리.
-  for (let round = 0; stats.accepted < requested && round < 2; round += 1) {
-    const refillCount = Math.min(10, requested - stats.accepted + (params.difficulty === "hard" ? 1 : 0));
-    const refill = await generate(refillCount);
-    stats.generated += refill.length;
-    stats.refilled += refill.length;
-    const outcomes = await mapWithConcurrency(refill, GATE_CONCURRENCY, (g) => gate(g, 0));
-    refill.forEach((g, i) => record(g, outcomes[i]));
+  const attemptStagedOne = async (): Promise<{ problem: GeneratedProblem; outcome: GateOutcome } | null> => {
+    const need = judgeMaterialNeed({ examSystem: params.examSystem ?? null, skillCode, text: "" });
+    const figureKind = (pickFigureKind(need, "", skillCode, params.figurePolicy) ?? "plane") as import("./math-staged").MathFigureKind;
+    const { generateStagedHardMathItem } = await import("./math-staged");
+    for (let stemRetry = 0; stemRetry < 2; stemRetry++) {
+      let staged;
+      try {
+        staged = await generateStagedHardMathItem({
+          subjectName: params.subjectName, skillType: params.skillType, skillCode, examSystem: params.examSystem ?? null,
+          difficulty: params.difficulty, figureKind, topic: params.topic, onModelCall: countCall,
+        });
+      } catch (e) {
+        failures.push({ skillCode, stage: "generate", reason: `단계형 생성 오류: ${e instanceof Error ? e.message : "알 수 없음"}`, resolved: false, snippet: "" });
+        continue;
+      }
+      if (!staged.ok) {
+        failures.push({ skillCode, stage: "generate", reason: staged.failures.map((f) => `[${f.stage}] ${f.reason}`).slice(0, 3).join(" / "), resolved: false, snippet: "" });
+        continue;
+      }
+      stats.generated += 1;
+      const g: GeneratedProblem = {
+        format: "mc",
+        figure: staged.item.figure,
+        passage: composeProblemText(staged.item.stimulus, staged.item.question),
+        stimulus: staged.item.stimulus,
+        question: staged.item.question,
+        needsFigure: false,
+        options: staged.item.options,
+        correctIndex: staged.item.correctIndex,
+        answers: null,
+        statements: null,
+        explanation: staged.item.explanation,
+        difficulty: params.difficulty,
+        distractorRationales: [],
+        difficultyRationale: "",
+        design: (staged.item.design || null) as unknown as GeneratedProblem["design"],
+      };
+      return { problem: g, outcome: await gate(g, 0) };
+    }
+    return null;
+  };
+
+  if (isRiskyMath) {
+    const outcomes1 = await mapWithConcurrency(Array.from({ length: initialCount }), GATE_CONCURRENCY, attemptStagedOne);
+    for (const o of outcomes1) if (o) record(o.problem, o.outcome);
+    for (let round = 0; stats.accepted < requested && round < 2; round += 1) {
+      const refillCount = Math.min(10, requested - stats.accepted + 1);
+      const outcomes2 = await mapWithConcurrency(Array.from({ length: refillCount }), GATE_CONCURRENCY, attemptStagedOne);
+      for (const o of outcomes2) if (o) record(o.problem, o.outcome);
+      stats.refilled += refillCount;
+    }
+  } else {
+    const generated = await generate(initialCount);
+    stats.generated += generated.length;
+    const initialOutcomes = await mapWithConcurrency(generated, GATE_CONCURRENCY, (g) => gate(g, 0));
+    generated.forEach((g, i) => record(g, initialOutcomes[i]));
+
+    // 부족하면 최대 두 번 더 채운다(각 청크가 개별적으로 빈 응답을 견디므로 재시도가 안전하다). 라운드 안에서는 병렬 처리.
+    for (let round = 0; stats.accepted < requested && round < 2; round += 1) {
+      const refillCount = Math.min(10, requested - stats.accepted + (params.difficulty === "hard" ? 1 : 0));
+      const refill = await generate(refillCount);
+      stats.generated += refill.length;
+      stats.refilled += refill.length;
+      const outcomes = await mapWithConcurrency(refill, GATE_CONCURRENCY, (g) => gate(g, 0));
+      refill.forEach((g, i) => record(g, outcomes[i]));
+    }
   }
   // 오버샘플링·병렬 처리로 요청보다 많이 통과할 수 있다 — 초과분은 잘라내되(요청 수만 채택), 후보 수엔 그대로 반영한다.
   if (accepted.length > requested) accepted.length = requested;
