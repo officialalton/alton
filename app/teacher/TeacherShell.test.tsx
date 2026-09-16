@@ -57,6 +57,7 @@ const baseProps = {
   availabilityTimezone: "America/Los_Angeles",
   lessonSchedule: [],
   materialsLibraryTree: [],
+  vocabOverview: { students: [], books: [], recentQuizzes: [] },
 };
 
 describe("TeacherShell", () => {

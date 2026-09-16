@@ -70,7 +70,7 @@ const baseProps = {
   sessionId: "session-1",
   studentId: "student-1",
   material: null,
-  vocabWords: [],
+  sessionVocab: { myWords: [], books: [], quizzes: [], reviewItems: [] },
   homeworkItems: [],
   unitTitle: "이차방정식 응용 문제 (1)",
   subjectName: "SAT Math",

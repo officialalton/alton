@@ -13,11 +13,12 @@ import {
   loadSessionFreezeState,
   frozenMaterialNotice,
 } from "./material-data";
-import { loadVocabWords } from "./vocab-data";
+import { loadSessionVocabData } from "./vocab-data";
 import { loadHomeworkItems } from "./homework-data";
 import { loadNormalizedSession } from "./session-source-data";
 import { loadHomeworkProblems, loadPlannedProblems, loadSessionProblems } from "./session-problem-data";
-import { loadHomeworkKeywordPools, loadIssuedHomework } from "./homework-v3-data";
+import { loadIssuedHomework } from "./homework-v3-data";
+import { loadHomeworkDraftBatches } from "@/app/teacher/homework-direct-data";
 import { loadSessionLessonContext } from "./session-context-data";
 import {
   loadComposition,
@@ -81,7 +82,7 @@ export default async function SessionPage({
       ? frozenMaterialNotice(initialState, await loadSessionFreezeState(supabase, session.id))
       : null;
 
-  const vocabWords = await loadVocabWords(supabase, session.studentId);
+  const sessionVocab = await loadSessionVocabData(supabase, session.studentId);
   const homeworkItems = await loadHomeworkItems(supabase, session.id);
 
   // R9(레슨 준비 Task 4) — v3 세션에서만 과제 구성 UI가 필요한 키워드 후보를
@@ -159,16 +160,10 @@ export default async function SessionPage({
           canPrepare ? loadIssuedHomework(supabase, session.id) : Promise.resolve([]),
         ])
       : [[], []];
-  // 2026-09-14 UAT — 발급은 키워드별 개수. 회차 키워드마다 문제 은행에서 담을 수 있는 수를 센다(교사에게만).
-  const homeworkKeywordPools =
-    session.source === "v3" && canPrepare && prepComposition
-      ? await loadHomeworkKeywordPools(
-          supabase,
-          prepComposition.keywords,
-          homeworkIssued.map((i) => i.problemId),
-          pinnedProblems.map((p) => p.problemId)
-        )
-      : [];
+  // 2026-09-16 — 과제는 더 이상 회차 키워드 풀에 묶이지 않는다. 교사 포털에서 미리 만든
+  // 배치 중 최근 것을 이 수업에 불러오기만 한다(교사에게만).
+  const homeworkBatches =
+    session.source === "v3" && canPrepare ? await loadHomeworkDraftBatches(supabase, session.studentId) : [];
 
   return (
     <SessionShell
@@ -187,7 +182,7 @@ export default async function SessionPage({
       durationMinutes={session.durationMinutes}
       backHref={getRoleHomePath(profile?.role)}
       material={material}
-      vocabWords={vocabWords}
+      sessionVocab={sessionVocab}
       homeworkItems={homeworkItems}
       writesEnabled={session.source === "legacy"}
       sessionSource={session.source}
@@ -202,7 +197,7 @@ export default async function SessionPage({
       homeworkProblems={homeworkProblems}
       homeworkPool={prep?.problems ?? []}
       homeworkIssued={homeworkIssued}
-      homeworkKeywordPools={homeworkKeywordPools}
+      homeworkBatches={homeworkBatches}
     />
   );
 }

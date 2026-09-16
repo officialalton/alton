@@ -59,6 +59,7 @@ const lessonsProps = {
   pendingRegularIntentChoices: [],
   childrenSubjectEnrollments: [],
   materialsLibrary: [],
+  vocabByChild: [],
   progressedTrialEnrollmentIds: [],
   lessonBooking: {
     bookableEnrollments: [],

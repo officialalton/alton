@@ -23,6 +23,9 @@ import {
 import { reportSessionIssue } from "./incident-report-actions";
 import TeacherLessonScheduleTab from "./TeacherLessonScheduleTab";
 import TeacherMaterialsLibraryTab from "./MaterialsLibraryTab";
+import VocabAssignTab from "./VocabAssignTab";
+import type { TeacherVocabOverview } from "./vocab-assign-data";
+import HomeworkAssignTab from "./HomeworkAssignTab";
 import SettlementTab from "./SettlementTab";
 import type { LibrarySubjectTree } from "@/lib/subject-material-library";
 import {
@@ -38,10 +41,12 @@ import {
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
   { id: "assignments", label: "담당 학생", icon: "🎯" },
+  { id: "homework", label: "과제", icon: "📝" },
   { id: "lesson-schedule", label: "수업", icon: "📆" },
   { id: "availability", label: "가능시간", icon: "🗓" },
   { id: "curriculum", label: "커리큘럼", icon: "📘" },
   { id: "materials", label: "교재", icon: "📚" },
+  { id: "vocab", label: "단어장", icon: "🔤" },
   // P4-2(2026-09-12) — 교사가 본인 정산 내역·지급 예정액·수취 계좌·제출 서류를
   // 한 곳에서 찾을 수 있게 하는 진입점.
   { id: "settlement", label: "정산", icon: "💸" },
@@ -61,6 +66,8 @@ export default function TeacherShell({
   availabilityTimezone,
   lessonSchedule,
   materialsLibraryTree,
+  vocabOverview,
+  initialHomeworkStudentId,
 }: {
   initialTab?: string;
   dashboard: TeacherDashboardData;
@@ -73,6 +80,8 @@ export default function TeacherShell({
   availabilityTimezone: string;
   lessonSchedule: TeacherLessonScheduleItem[];
   materialsLibraryTree: LibrarySubjectTree[];
+  vocabOverview: TeacherVocabOverview;
+  initialHomeworkStudentId?: string;
 }) {
   const router = useRouter();
   const [lessons, setLessons] = useState<TeacherLessonScheduleItem[]>(lessonSchedule);
@@ -263,6 +272,13 @@ export default function TeacherShell({
             />
           ) : activeTab === "materials" ? (
             <TeacherMaterialsLibraryTab tree={materialsLibraryTree} />
+          ) : activeTab === "vocab" ? (
+            <VocabAssignTab overview={vocabOverview} />
+          ) : activeTab === "homework" ? (
+            <HomeworkAssignTab
+              students={Array.from(new Map(currentAssignments.map((a) => [a.studentId, a.studentName])).entries()).map(([id, name]) => ({ id, name }))}
+              initialStudentId={initialHomeworkStudentId}
+            />
           ) : activeTab === "settlement" ? (
             <SettlementTab />
           ) : (

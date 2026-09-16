@@ -28,6 +28,8 @@ import type { ChildSubjectEnrollments } from "./enrollment-data";
 import LessonBookingTab from "@/app/student/LessonBookingTab";
 import ParentMaterialsLibraryTab from "./MaterialsLibraryTab";
 import type { ParentChildLibrary } from "./materials-data";
+import ParentVocabTab from "./ParentVocabTab";
+import type { ParentChildVocab } from "./vocab-data";
 import type { LessonBookingData } from "@/app/student/lesson-booking-data";
 import {
   listAvailableSlotsForBooking,
@@ -42,6 +44,7 @@ const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
   { id: "enrollment", label: "수강 과목", icon: "🎓" },
   { id: "materials", label: "교재", icon: "📖" },
+  { id: "vocab", label: "단어장", icon: "🔤" },
   { id: "booking", label: "예약", icon: "🗓️" },
   { id: "lessons", label: "레슨", icon: "📅" },
   { id: "credits", label: "지인 추천", icon: "💳" },
@@ -76,6 +79,7 @@ export default function ParentShell({
   pendingRegularIntentChoices,
   childrenSubjectEnrollments,
   materialsLibrary,
+  vocabByChild,
   progressedTrialEnrollmentIds,
   lessonBooking,
   focusSubjectEnrollmentId,
@@ -105,6 +109,7 @@ export default function ParentShell({
   pendingRegularIntentChoices: PendingRegularIntentChoice[];
   childrenSubjectEnrollments: ChildSubjectEnrollments[];
   materialsLibrary: ParentChildLibrary[];
+  vocabByChild: ParentChildVocab[];
   progressedTrialEnrollmentIds: string[];
   lessonBooking: LessonBookingData;
 }) {
@@ -309,6 +314,8 @@ export default function ParentShell({
             />
           ) : activeTab === "materials" ? (
             <ParentMaterialsLibraryTab childLibraries={materialsLibrary} />
+          ) : activeTab === "vocab" ? (
+            <ParentVocabTab childrenVocab={vocabByChild} />
           ) : activeTab === "family" ? (
             <FamilyTab onGoToConsultRequest={() => selectTab("consultRequest")} />
           ) : activeTab === "consultRequest" ? (

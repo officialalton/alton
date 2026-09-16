@@ -1,7 +1,7 @@
 import { requireUser } from "@/lib/auth";
 import StudentShell from "./StudentShell";
 import { loadDashboardData } from "./dashboard-data";
-import { loadMyVocabWords, loadLibraryBooks, loadVocabQuizzes } from "./vocab-library-data";
+import { loadMyVocabWords, loadLibraryBooks, loadVocabQuizzes, loadVocabReviewItems } from "./vocab-library-data";
 import { loadProblemHistory } from "./problem-history-data";
 import { loadLessons } from "./lessons-data";
 import { loadCurricula } from "./curriculum-data";
@@ -48,6 +48,7 @@ export default async function StudentHomePage({
     myVocabWords,
     vocabLibraryBooks,
     vocabQuizzes,
+    vocabReviewItems,
     problemHistory,
     { upcoming, past },
     curricula,
@@ -63,6 +64,7 @@ export default async function StudentHomePage({
     loadMyVocabWords(supabase, user.id),
     loadLibraryBooks(supabase),
     loadVocabQuizzes(supabase, user.id),
+    loadVocabReviewItems(supabase, user.id),
     loadProblemHistory(user.id),
     lessonsPromise,
     loadCurricula(supabase, user.id),
@@ -119,6 +121,7 @@ export default async function StudentHomePage({
       myVocabWords={myVocabWords}
       vocabLibraryBooks={vocabLibraryBooks}
       vocabQuizzes={vocabQuizzes}
+      vocabReviewItems={vocabReviewItems}
       problemHistory={problemHistory}
       upcoming={upcoming}
       past={past}

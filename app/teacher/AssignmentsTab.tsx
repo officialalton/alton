@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import type { TeacherAssignedSubject } from "./assignments-data";
 import {
   requestOwnTerminationAsTeacher,
@@ -229,6 +230,12 @@ export default function AssignmentsTab({
                 >
                   운영 커리큘럼 관리
                 </button>
+                <Link
+                  href={`/teacher?tab=homework&student=${a.studentId}`}
+                  className="text-[12px] font-semibold px-3 py-1.5 rounded-full bg-grey-100 text-ink"
+                >
+                  과제 관리
+                </Link>
               </div>
             )}
             <StudentProfileDisclosure a={a} />

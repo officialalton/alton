@@ -18,11 +18,12 @@ import type {
 import type { SessionLessonContext } from "./session-context-data";
 import type { MaterialData } from "./material-data";
 import type { SessionProblem } from "./session-problem-data";
-import VocabTab from "./VocabTab";
-import type { VocabEntry } from "./vocab-data";
+import SessionVocabTab from "./SessionVocabTab";
+import type { SessionVocabData } from "./vocab-data";
 import HomeworkTab from "./HomeworkTab";
 import type { HomeworkItem } from "./homework-data";
-import type { HomeworkKeywordPool, IssuedHomeworkItem } from "./homework-v3-data";
+import type { IssuedHomeworkItem } from "./homework-v3-data";
+import type { HomeworkDraftBatch } from "@/app/teacher/homework-direct-data";
 import type { StrokePayload } from "./annotation-events-types";
 import { finalizeMyLessonSession } from "@/app/teacher/lesson-schedule-actions";
 
@@ -77,7 +78,7 @@ export default function SessionShell({
   durationMinutes,
   backHref,
   material,
-  vocabWords,
+  sessionVocab,
   homeworkItems,
   writesEnabled = true,
   sessionSource,
@@ -90,7 +91,7 @@ export default function SessionShell({
   homeworkProblems = [],
   homeworkPool = [],
   homeworkIssued = [],
-  homeworkKeywordPools = [],
+  homeworkBatches = [],
 }: {
   sessionId: string;
   studentId: string;
@@ -122,7 +123,7 @@ export default function SessionShell({
   durationMinutes: number;
   backHref: string;
   material: MaterialData;
-  vocabWords: VocabEntry[];
+  sessionVocab: SessionVocabData;
   homeworkItems: HomeworkItem[];
   // R8 1/N — v3(sessions_v3 cutover) 세션은 canvas_annotations/homework_items/
   // vocab_words 등 필기·과제·단어장 하위 테이블이 아직 legacy_sessions만 참조한다
@@ -150,7 +151,7 @@ export default function SessionShell({
   homeworkProblems?: SessionProblem[];
   homeworkPool?: KeywordProblem[];
   homeworkIssued?: IssuedHomeworkItem[];
-  homeworkKeywordPools?: HomeworkKeywordPool[];
+  homeworkBatches?: HomeworkDraftBatch[];
 }) {
   const router = useRouter();
   const isTeacher = viewerRole === "teacher";
@@ -512,11 +513,12 @@ export default function SessionShell({
           viewerUserId={currentUserId}
         />
       ) : activeTab === "vocab" ? (
-        <VocabTab
-          initialWords={vocabWords}
-          isTeacher={isTeacher}
-          canManage={viewerRole === "student" && writesEnabled}
+        <SessionVocabTab
+          studentId={studentId}
           studentName={studentName}
+          isTeacher={isTeacher}
+          canManage={writesEnabled}
+          data={sessionVocab}
         />
       ) : activeTab === "homework" ? (
         <HomeworkTab
@@ -532,8 +534,7 @@ export default function SessionShell({
           homeworkProblems={homeworkProblems}
           pool={homeworkPool}
           issued={homeworkIssued}
-          keywordPools={homeworkKeywordPools}
-          usedInLessonIds={sessionProblems.map((p) => p.problemId)}
+          batches={homeworkBatches}
         />
       ) : activeTab === "prep" ? (
         prep ? (

@@ -8,14 +8,15 @@ import { listMyAvailabilityRules, listTeacherAvailabilityExceptions } from "./av
 import { listMyLessonSchedule } from "./lesson-schedule-actions";
 import { resolveUserTimezone } from "@/lib/timezone";
 import { loadTeacherMaterialsLibraryTree } from "./materials-data";
+import { loadTeacherVocabOverview } from "./vocab-assign-data";
 
 export default async function TeacherHomePage({
   searchParams,
 }: {
-  searchParams: Promise<{ tab?: string }>;
+  searchParams: Promise<{ tab?: string; student?: string }>;
 }) {
   const { user, supabase } = await requireUser();
-  const { tab } = await searchParams;
+  const { tab, student } = await searchParams;
 
   // 2026-09-10(P0-4) — 교사 홈 대시보드가 "수업" 탭과 같은 v3 예약을 보게
   // 하려면 loadTeacherLessonSchedule() 결과(+이 교사의 timezone)가 먼저 있어야
@@ -58,6 +59,7 @@ export default async function TeacherHomePage({
     lessonSchedule,
     { data: teacherProfile },
     materialsLibraryTree,
+    vocabOverview,
   ] = await Promise.all([
     dashboardPromise,
     loadRoster(supabase, user.id),
@@ -68,6 +70,7 @@ export default async function TeacherHomePage({
     lessonSchedulePromise,
     teacherProfilePromise,
     loadTeacherMaterialsLibraryTree(supabase, user.id),
+    loadTeacherVocabOverview(supabase, user.id),
   ]);
   const availabilityTimezone = resolveUserTimezone({
     profileTimezone: (teacherProfile?.timezone as string) ?? null,
@@ -77,6 +80,7 @@ export default async function TeacherHomePage({
   return (
     <TeacherShell
       initialTab={tab}
+      initialHomeworkStudentId={student}
       dashboard={dashboard}
       roster={roster}
       mySubjects={mySubjects}
@@ -87,6 +91,7 @@ export default async function TeacherHomePage({
       availabilityTimezone={availabilityTimezone}
       lessonSchedule={lessonSchedule}
       materialsLibraryTree={materialsLibraryTree}
+      vocabOverview={vocabOverview}
     />
   );
 }

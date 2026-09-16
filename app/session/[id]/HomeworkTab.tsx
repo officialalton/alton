@@ -5,14 +5,16 @@ import type { SessionViewViewer } from "@/lib/session-view";
 import type { KeywordProblem } from "@/lib/unit-composition";
 import type { HomeworkItem } from "./homework-data";
 import type { SessionProblem } from "./session-problem-data";
-import type { HomeworkKeywordPool, IssuedHomeworkItem } from "./homework-v3-data";
-import { issueHomeworkByKeywords, withdrawHomework } from "./homework-v3-actions";
+import type { IssuedHomeworkItem } from "./homework-v3-data";
+import type { HomeworkDraftBatch } from "@/app/teacher/homework-direct-data";
+import { loadHomeworkBatchIntoSession, withdrawHomework } from "./homework-v3-actions";
 import ProblemsPanel from "./ProblemsPanel";
 
-// 2026-09-14 과제 v3 통일(docs/2026-09-14-homework-v3-unification.md)
-//
-//   위: [교사만] 발급 구역 — 회차 키워드별로 "문제 은행에서 담을 수 있는 수"를 보고 몇 개 낼지 적으면
-//       무작위로 뽑아 발급한다(2026-09-14 UAT: 개별 클릭 방식 폐기). 발급된 항목은 학생이 시작하기 전까지 회수.
+// 2026-09-16 제품 오너 지시 — 과제를 회차 키워드 풀에 묶지 않는다. 교사 포털("과제" 탭)에서
+// 학생별로 키워드를 골라 미리 만든 배치 중 최근 것을 여기서 "불러오기"만 하면 발급된다.
+// docs/2026-09-16-homework-direct-issue-plan.md 참고(2026-09-14 과제 v3 통일 문서의
+// "회차 키워드별 개수 입력" UI를 대체한다 — 문제 풀이·채점 흐름은 그대로).
+//   위: [교사만] 배치 불러오기 구역. 발급된 항목은 학생이 시작하기 전까지 회수.
 //   아래: 과제 문제 패널 — 수업 '문제' 탭과 **완전히 같은** 화면·풀이·채점(ProblemsPanel source="homework").
 //   레거시 homework_items 는 기록이 있을 때만 읽기 전용으로 보여준다. 신규 쓰기는 없다.
 
@@ -29,7 +31,7 @@ export default function HomeworkTab({
   homeworkProblems = [],
   pool = [],
   issued = [],
-  keywordPools = [],
+  batches = [],
 }: {
   sessionId: string;
   studentId: string;
@@ -41,13 +43,11 @@ export default function HomeworkTab({
   /** 데모션되지 않은 실제 역할 — 발급·회수는 실제 교사·관리자만. */
   realViewerRole?: SessionViewViewer;
   homeworkProblems?: SessionProblem[];
-  /** 이 회차 키워드 풀의 문제(교사에게만) — 발급 목록의 이름 표시용. */
+  /** 발급된 목록의 이름 표시용. */
   pool?: KeywordProblem[];
-  /** 회차 키워드별 담을 수 있는 수(교사에게만). */
-  keywordPools?: HomeworkKeywordPool[];
+  /** 교사 포털에서 미리 만든 이 학생의 최근 과제 배치(교사에게만) — 여기서 "불러오기"로 발급한다. */
+  batches?: HomeworkDraftBatch[];
   issued?: IssuedHomeworkItem[];
-  /** 수업에서 다룬(고정된) 문제 — 키워드별 수 계산은 서버(keywordPools)에서 했으므로 여기서는 받지 않는다. */
-  usedInLessonIds?: string[];
 }) {
   const canIssue = sessionSource === "v3" && (realViewerRole === "teacher" || realViewerRole === "admin");
   const panelRole: "student" | "teacher" | "parent" | "admin" =
@@ -58,7 +58,7 @@ export default function HomeworkTab({
   return (
     <div>
       {canIssue && (
-        <IssueBox sessionId={sessionId} pool={pool} issued={issued} keywordPools={keywordPools} />
+        <IssueBox sessionId={sessionId} pool={pool} issued={issued} batches={batches} />
       )}
 
       {sessionSource === "v3" ? (
@@ -94,45 +94,35 @@ function IssueBox({
   sessionId,
   pool,
   issued,
-  keywordPools,
+  batches,
 }: {
   sessionId: string;
   pool: KeywordProblem[];
   issued: IssuedHomeworkItem[];
-  keywordPools: HomeworkKeywordPool[];
+  batches: HomeworkDraftBatch[];
 }) {
   const [open, setOpen] = useState(issued.length === 0);
-  const [counts, setCounts] = useState<Record<string, string>>({});
-  const [includeUsed, setIncludeUsed] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
 
   const labelById = new Map(pool.map((p) => [p.problemId, p]));
-  const capOf = (k: HomeworkKeywordPool) => (includeUsed ? k.availableWithUsed : k.available);
-  const requests = keywordPools
-    .map((k) => ({ keywordId: k.keywordId, count: Math.min(capOf(k), Math.max(0, parseInt(counts[k.keywordId] ?? "", 10) || 0)) }))
-    .filter((r) => r.count > 0);
-  const totalRequested = requests.reduce((n, r) => n + r.count, 0);
-  const usedTotal = keywordPools.reduce((n, k) => n + k.usedInLesson, 0);
 
-  async function issue() {
-    if (requests.length === 0) return;
+  async function loadBatch(batchId: string) {
     setBusy(true);
     setError(null);
     setNotice(null);
-    const r = await issueHomeworkByKeywords(sessionId, requests, !includeUsed);
+    const r = await loadHomeworkBatchIntoSession(batchId, sessionId);
     if (!r.ok) {
       setError(r.error);
       setBusy(false);
       return;
     }
     if ((r.count ?? 0) === 0) {
-      setNotice("뽑을 수 있는 문제가 없어 발급된 것이 없습니다.");
+      setNotice("이미 전부 발급된 배치라 새로 발급된 것이 없습니다.");
       setBusy(false);
       return;
     }
-    // 발급 결과(과제 문제 패널·목록)는 서버 데이터라 한 번 다시 읽는다.
     window.location.reload();
   }
 
@@ -159,7 +149,7 @@ function IssueBox({
             onClick={() => setOpen((v) => !v)}
             className="ml-auto text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink"
           >
-            {open ? "접기" : "과제 내기"}
+            {open ? "접기" : "배치 불러오기"}
           </button>
         </div>
         {error && <p className="text-[12.5px] text-red mb-2">{error}</p>}
@@ -192,60 +182,35 @@ function IssueBox({
 
         {open && (
           <div className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3">
-            <div className="flex flex-wrap items-center gap-3 mb-2">
-              <p className="text-[12px] text-grey-500">
-                이 회차 키워드별로 몇 개 낼지 적으면 문제 은행에서 무작위로 골라 발급합니다. 학생은 수업 문제와 같은 방식으로
-                풀고, 채점 뒤 정답·해설이 열립니다.
+            <p className="text-[12px] text-grey-500 mb-2">
+              교사 포털 “과제” 탭에서 미리 만든 이 학생의 과제 배치입니다. 원하는 배치를 이 수업에 불러오면 학생이
+              수업 문제와 같은 방식으로 풀고, 채점 뒤 정답·해설이 열립니다.
+            </p>
+            {batches.length === 0 ? (
+              <p className="text-[12.5px] text-grey-500">
+                아직 만든 과제 배치가 없습니다. 교사 포털 “과제” 탭에서 먼저 만들어 주세요.
               </p>
-              {usedTotal > 0 && (
-                <label className="text-[12px] text-ink flex items-center gap-1.5">
-                  <input type="checkbox" checked={includeUsed} onChange={(e) => setIncludeUsed(e.target.checked)} />
-                  수업에서 다룬 문제 {usedTotal}개도 포함
-                </label>
-              )}
-            </div>
-            {keywordPools.length === 0 ? (
-              <p className="text-[12.5px] text-grey-500">이 회차에 키워드가 없어 낼 수 있는 문제가 없습니다.</p>
             ) : (
               <ul className="divide-y divide-grey-100">
-                {keywordPools.map((k) => {
-                  const cap = capOf(k);
-                  return (
-                    <li key={k.keywordId} className="flex flex-wrap items-center gap-3 py-2 text-[12.5px]">
-                      <span className="font-bold text-ink min-w-[120px]">{k.label}</span>
-                      <span className="text-grey-500 flex-1 min-w-[160px]">
-                        문제 은행 {k.total}개 · 담을 수 있는 {cap}개
-                        {k.issued > 0 && ` · 발급됨 ${k.issued}`}
-                        {!includeUsed && k.usedInLesson > 0 && ` · 수업에서 다룸 ${k.usedInLesson} 제외`}
-                      </span>
-                      <label className="flex items-center gap-1.5">
-                        <input
-                          type="number"
-                          min={0}
-                          max={cap}
-                          inputMode="numeric"
-                          aria-label={`${k.label} 개수`}
-                          disabled={cap === 0}
-                          value={counts[k.keywordId] ?? ""}
-                          onChange={(e) => setCounts((c) => ({ ...c, [k.keywordId]: e.target.value }))}
-                          placeholder="0"
-                          className="w-[72px] text-[13px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1 disabled:bg-grey-100"
-                        />
-                        <span className="text-grey-500">개</span>
-                      </label>
-                    </li>
-                  );
-                })}
+                {batches.map((b) => (
+                  <li key={b.id} className="flex flex-wrap items-center gap-3 py-2 text-[12.5px]">
+                    <span className="text-grey-500 flex-1 min-w-[200px]">
+                      {b.problemCount}문항 · {b.requests.map((r) => `${r.label} ${r.count}`).join(", ") || "키워드 정보 없음"}
+                      {b.loadedAt && <span className="text-grey-400"> · 불러온 적 있음</span>}
+                    </span>
+                    <span className="text-[11px] text-grey-400">{new Date(b.createdAt).toLocaleDateString("ko-KR")}</span>
+                    <button
+                      type="button"
+                      disabled={busy}
+                      onClick={() => void loadBatch(b.id)}
+                      className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
+                    >
+                      이 수업에 불러오기
+                    </button>
+                  </li>
+                ))}
               </ul>
             )}
-            <button
-              type="button"
-              disabled={busy || totalRequested === 0}
-              onClick={() => void issue()}
-              className="mt-2 text-[12.5px] font-bold px-4 py-2 rounded-lg bg-ink text-white disabled:opacity-50"
-            >
-              {busy ? "발급 중…" : `무작위로 발급 (${totalRequested})`}
-            </button>
           </div>
         )}
       </div>

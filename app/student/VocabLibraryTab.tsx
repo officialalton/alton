@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { MyVocabWord, LibraryBook, LibraryWord, VocabQuiz, VocabQuizItem } from "./vocab-library-data";
+import type { MyVocabWord, LibraryBook, LibraryWord, VocabQuiz, VocabQuizItem, VocabReviewItem } from "./vocab-library-data";
 import {
   addMyVocabWordAction, updateMyVocabWordAction, deleteMyVocabWordAction,
   createVocabQuizAction, submitVocabQuizAction,
@@ -10,11 +10,12 @@ import {
 type SourceKey = "custom" | `book:${string}`;
 
 export default function VocabLibraryTab({
-  myWords: initialMyWords, books, quizzes: initialQuizzes,
+  myWords: initialMyWords, books, quizzes: initialQuizzes, reviewItems: initialReviewItems,
 }: {
-  myWords: MyVocabWord[]; books: LibraryBook[]; quizzes: VocabQuiz[];
+  myWords: MyVocabWord[]; books: LibraryBook[]; quizzes: VocabQuiz[]; reviewItems: VocabReviewItem[];
 }) {
   const [tab, setTab] = useState<"words" | "quiz">("words");
+  const [reviewItems, setReviewItems] = useState(initialReviewItems);
   return (
     <div className="max-w-[720px] px-8 py-8">
       <h1 className="text-[20px] font-extrabold text-ink mb-1.5">단어장</h1>
@@ -29,7 +30,11 @@ export default function VocabLibraryTab({
           </button>
         ))}
       </div>
-      {tab === "words" ? <WordsPanel initialMyWords={initialMyWords} books={books} /> : <QuizPanel books={books} initialQuizzes={initialQuizzes} />}
+      {tab === "words" ? (
+        <WordsPanel initialMyWords={initialMyWords} books={books} />
+      ) : (
+        <QuizPanel books={books} initialQuizzes={initialQuizzes} reviewItems={reviewItems} onReviewItemsChange={setReviewItems} />
+      )}
     </div>
   );
 }
@@ -236,7 +241,11 @@ function AddWordForm({ onCancel, onAdded }: { onCancel: () => void; onAdded: (w:
   );
 }
 
-function QuizPanel({ books, initialQuizzes }: { books: LibraryBook[]; initialQuizzes: VocabQuiz[] }) {
+function QuizPanel({
+  books, initialQuizzes, reviewItems, onReviewItemsChange,
+}: {
+  books: LibraryBook[]; initialQuizzes: VocabQuiz[]; reviewItems: VocabReviewItem[]; onReviewItemsChange: (items: VocabReviewItem[]) => void;
+}) {
   const [quizzes, setQuizzes] = useState(initialQuizzes);
   const [creating, setCreating] = useState(false);
   const [sources, setSources] = useState<Set<SourceKey>>(new Set(["custom"]));
@@ -248,21 +257,57 @@ function QuizPanel({ books, initialQuizzes }: { books: LibraryBook[]; initialQui
     setSources((prev) => { const next = new Set(prev); if (next.has(key)) next.delete(key); else next.add(key); return next; });
   }
 
-  async function makeQuiz() {
+  async function makeQuiz(reviewOnly = false) {
     setError(null);
     const bookIds = [...sources].filter((s) => s.startsWith("book:")).map((s) => s.slice(5));
-    const r = await createVocabQuizAction({ customWords: sources.has("custom"), bookIds, count });
+    const r = await createVocabQuizAction(
+      reviewOnly ? { customWords: false, bookIds: [], count: reviewItems.length, reviewOnly: true } : { customWords: sources.has("custom"), bookIds, count }
+    );
     if (!r.ok) { setError(r.error); return; }
-    const quiz: VocabQuiz = { id: r.value.id, status: "pending", wordCount: r.value.items.length, items: r.value.items, score: null, total: null, answers: null, createdAt: new Date().toISOString(), assignedByTeacher: false };
+    const quiz: VocabQuiz = { id: r.value.id, status: "pending", wordCount: r.value.items.length, items: r.value.items, score: null, total: null, answers: null, createdAt: new Date().toISOString(), dueAt: null, sessionId: null, assignedByTeacher: false };
     setQuizzes((prev) => [quiz, ...prev]);
     setCreating(false);
     setActive(quiz);
   }
 
-  if (active) return <QuizRunner quiz={active} onDone={(updated) => { setQuizzes((prev) => prev.map((q) => (q.id === updated.id ? updated : q))); setActive(null); }} onExit={() => setActive(null)} />;
+  function handleQuizDone(updated: VocabQuiz, wrongWords: Set<string>) {
+    setQuizzes((prev) => prev.map((q) => (q.id === updated.id ? updated : q)));
+    // 이번에 맞춘 단어는 복습 목록에서 내려가고, 틀린 단어는 새로 올라간다(서버 처리와 낙관적으로 맞춘다).
+    const correctedWords = new Set(updated.items.filter((it, idx) => (updated.answers?.[idx] ?? -1) === it.correctIndex).map((it) => it.word));
+    const kept = reviewItems.filter((r) => !correctedWords.has(r.word));
+    const now = new Date().toISOString();
+    const added = [...wrongWords].filter((w) => !kept.some((r) => r.word === w)).map((w) => {
+      const it = updated.items.find((x) => x.word === w)!;
+      return { id: `local-${w}`, word: w, definition: it.options[it.correctIndex], example1: it.example1 ?? null, example2: it.example2 ?? null, synonymWords: it.synonymWords ?? null, antonymWords: it.antonymWords ?? null, addedAt: now };
+    });
+    onReviewItemsChange([...added, ...kept]);
+    setActive(null);
+  }
+
+  if (active) return <QuizRunner quiz={active} onDone={handleQuizDone} onExit={() => setActive(null)} />;
 
   return (
     <div>
+      {reviewItems.length > 0 && (
+        <div className="border-[1.5px] border-red rounded-xl px-4 py-3.5 mb-4 bg-red-bg">
+          <p className="text-[13px] font-bold text-ink mb-1">복습 대상 단어 {reviewItems.length}개</p>
+          <p className="text-[12px] text-grey-500 mb-2">시험에서 틀렸던 단어입니다. 다시 맞히면 목록에서 사라집니다.</p>
+          <div className="flex flex-wrap gap-1.5 mb-2">
+            {reviewItems.slice(0, 12).map((r) => (
+              <span key={r.id} className="text-[11px] font-bold px-2 py-1 rounded-lg bg-white text-red border border-red">{r.word}</span>
+            ))}
+            {reviewItems.length > 12 && <span className="text-[11px] text-grey-500">외 {reviewItems.length - 12}개</span>}
+          </div>
+          <button
+            disabled={reviewItems.length < 4}
+            onClick={() => void makeQuiz(true)}
+            className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-red text-white disabled:opacity-40"
+          >
+            복습 시험 만들기{reviewItems.length < 4 ? " (4개 이상 필요)" : ""}
+          </button>
+        </div>
+      )}
+
       {!creating ? (
         <button onClick={() => setCreating(true)} className="text-[12.5px] font-bold px-3.5 py-2 rounded-lg bg-ink text-white mb-4">시험 만들기</button>
       ) : (
@@ -298,6 +343,9 @@ function QuizPanel({ books, initialQuizzes }: { books: LibraryBook[]; initialQui
           <div key={q.id} className="border border-grey-200 rounded-xl px-4 py-3 mb-2 flex items-center justify-between">
             <span className="text-[13px] text-ink">
               {q.wordCount}문항 {q.assignedByTeacher && <span className="text-[11px] text-grey-500">(선생님이 냄)</span>}
+              {q.dueAt && q.status !== "completed" && (
+                <span className="text-[11px] text-red ml-1">마감 {new Date(q.dueAt).toLocaleString("ko-KR", { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" })}</span>
+              )}
             </span>
             {q.status === "completed" ? (
               <span className="text-[12.5px] font-bold text-ink">{q.score}/{q.total}점</span>
@@ -311,18 +359,56 @@ function QuizPanel({ books, initialQuizzes }: { books: LibraryBook[]; initialQui
   );
 }
 
-function QuizRunner({ quiz, onDone, onExit }: { quiz: VocabQuiz; onDone: (q: VocabQuiz) => void; onExit: () => void }) {
+function QuizRunner({ quiz, onDone, onExit }: { quiz: VocabQuiz; onDone: (q: VocabQuiz, wrongWords: Set<string>) => void; onExit: () => void }) {
   const [answers, setAnswers] = useState<(number | null)[]>(() => quiz.items.map(() => null));
   const [i, setI] = useState(0);
   const [submitting, setSubmitting] = useState(false);
+  const [result, setResult] = useState<{ score: number; total: number; finalAnswers: number[] } | null>(null);
   const item: VocabQuizItem | undefined = quiz.items[i];
   const allAnswered = useMemo(() => answers.every((a) => a !== null), [answers]);
 
   async function submit() {
     setSubmitting(true);
-    const r = await submitVocabQuizAction(quiz.id, answers.map((a) => a ?? -1));
+    const finalAnswers = answers.map((a) => a ?? -1);
+    const r = await submitVocabQuizAction(quiz.id, finalAnswers);
     setSubmitting(false);
-    if (r.ok) onDone({ ...quiz, status: "completed", score: r.value.score, total: r.value.total, answers: answers.map((a) => a ?? -1) });
+    if (r.ok) setResult({ score: r.value.score, total: r.value.total, finalAnswers });
+  }
+
+  if (result) {
+    const wrongItems = quiz.items.filter((it, idx) => result.finalAnswers[idx] !== it.correctIndex);
+    return (
+      <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-5">
+        <h3 className="text-[18px] font-extrabold text-ink mb-1">결과: {result.score} / {result.total}</h3>
+        {wrongItems.length === 0 ? (
+          <p className="text-[13px] text-green font-bold mt-2">전부 맞혔습니다.</p>
+        ) : (
+          <>
+            <p className="text-[12.5px] text-grey-500 mt-1 mb-3">틀린 단어는 복습 대상에 추가됐습니다. 다시 맞히면 목록에서 사라집니다.</p>
+            {wrongItems.map((it) => (
+              <div key={it.word} className="border border-grey-200 rounded-lg px-3.5 py-3 mb-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-[14px] font-bold text-ink">{it.word}</span>
+                  <span className="text-[12.5px] text-ink">{it.options[it.correctIndex]}</span>
+                </div>
+                {(it.example1 || it.example2) && (
+                  <div className="text-[12px] text-grey-500 mt-1.5 space-y-0.5">
+                    {it.example1 && <p>· {it.example1}</p>}
+                    {it.example2 && <p>· {it.example2}</p>}
+                  </div>
+                )}
+              </div>
+            ))}
+          </>
+        )}
+        <button
+          onClick={() => onDone({ ...quiz, status: "completed", score: result.score, total: result.total, answers: result.finalAnswers }, new Set(wrongItems.map((it) => it.word)))}
+          className="text-[12.5px] font-bold px-3.5 py-2 rounded-lg bg-ink text-white mt-3"
+        >
+          확인
+        </button>
+      </div>
+    );
   }
 
   if (!item) return null;
