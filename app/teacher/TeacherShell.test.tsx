@@ -56,7 +56,7 @@ const baseProps = {
   availabilityExceptions: [],
   availabilityTimezone: "America/Los_Angeles",
   lessonSchedule: [],
-  materialsSubjects: [],
+  materialsLibraryTree: [],
 };
 
 describe("TeacherShell", () => {
@@ -116,8 +116,21 @@ describe("TeacherShell", () => {
     render(
       <TeacherShell
         {...baseProps}
-        materialsSubjects={[
-          { subjectId: "sub1", subjectName: "SAT Math", docs: [{ id: "doc1", title: "이차방정식 개념", unitTitle: "2회차" }] },
+        materialsLibraryTree={[
+          {
+            subjectId: "sub1",
+            subjectName: "SAT Math",
+            flatDocIds: ["doc1"],
+            units: [
+              {
+                unitId: "u1",
+                unitTitle: "2회차",
+                keywordGroups: [
+                  { keywordId: "k1", label: "Quadratics", docs: [{ id: "doc1", title: "이차방정식 개념", kind: "html" }] },
+                ],
+              },
+            ],
+          },
         ]}
       />
     );

@@ -18,7 +18,7 @@ import type { ReviewData, StudentFeedback } from "./review-data";
 import StudentHomeworkTab from "./StudentHomeworkTab";
 import type { StudentHomeworkSet } from "./homework-v3-data";
 import MaterialsLibraryTab from "./MaterialsLibraryTab";
-import type { LibrarySubject } from "./materials-data";
+import type { LibrarySubjectTree } from "@/lib/subject-material-library";
 import CreditsTab from "./CreditsTab";
 import type { CreditsData } from "./credits-data";
 import StatsTab from "./StatsTab";
@@ -75,7 +75,7 @@ export default function StudentShell({
   myFeedback,
   studentId,
   homeworkSets,
-  materialsLibrary,
+  materialsLibraryTree,
   credits,
   stats,
   teacherList,
@@ -99,7 +99,7 @@ export default function StudentShell({
   /** 학생 본인 id(2026-09-14 과제 v3 통일 — 과제 패널이 쓴다). */
   studentId: string;
   homeworkSets: StudentHomeworkSet[];
-  materialsLibrary: LibrarySubject[];
+  materialsLibraryTree: LibrarySubjectTree[];
   credits: CreditsData;
   stats: StatsData;
   teacherList: TeacherListItem[];
@@ -258,7 +258,7 @@ export default function StudentShell({
               homeworkSets={homeworkSets}
             />
           ) : activeTab === "materials" ? (
-            <MaterialsLibraryTab subjects={materialsLibrary} />
+            <MaterialsLibraryTab tree={materialsLibraryTree} />
           ) : activeTab === "credits" ? (
             <CreditsTab data={credits} />
           ) : activeTab === "stats" ? (

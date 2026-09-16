@@ -7,7 +7,7 @@ import TeacherShell from "./TeacherShell";
 import { listMyAvailabilityRules, listTeacherAvailabilityExceptions } from "./availability-actions";
 import { listMyLessonSchedule } from "./lesson-schedule-actions";
 import { resolveUserTimezone } from "@/lib/timezone";
-import { loadTeacherMaterialsLibrary } from "./materials-data";
+import { loadTeacherMaterialsLibraryTree } from "./materials-data";
 
 export default async function TeacherHomePage({
   searchParams,
@@ -57,7 +57,7 @@ export default async function TeacherHomePage({
     availabilityExceptions,
     lessonSchedule,
     { data: teacherProfile },
-    materialsSubjects,
+    materialsLibraryTree,
   ] = await Promise.all([
     dashboardPromise,
     loadRoster(supabase, user.id),
@@ -67,7 +67,7 @@ export default async function TeacherHomePage({
     listTeacherAvailabilityExceptions(),
     lessonSchedulePromise,
     teacherProfilePromise,
-    loadTeacherMaterialsLibrary(supabase, user.id),
+    loadTeacherMaterialsLibraryTree(supabase, user.id),
   ]);
   const availabilityTimezone = resolveUserTimezone({
     profileTimezone: (teacherProfile?.timezone as string) ?? null,
@@ -86,7 +86,7 @@ export default async function TeacherHomePage({
       availabilityExceptions={availabilityExceptions}
       availabilityTimezone={availabilityTimezone}
       lessonSchedule={lessonSchedule}
-      materialsSubjects={materialsSubjects}
+      materialsLibraryTree={materialsLibraryTree}
     />
   );
 }

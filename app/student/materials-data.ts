@@ -48,10 +48,11 @@ export type LibraryDocDetail = {
   } | null;
 };
 
-export async function loadMaterialsLibrary(
+/** 학생이 수강 중인(active) 과목 id 집합 — 레거시 enrollments + v3 subject_enrollments 합. */
+export async function studentEnrolledSubjectIds(
   supabase: SupabaseClient,
   studentId: string
-): Promise<LibrarySubject[]> {
+): Promise<Map<string, string>> {
   // 2026-09-09(UAT 지적, 제품 오너 승인): 레거시 enrollments만 보면 v3
   // subject_enrollments로만 수강 중인 학생은 공개된 교재가 있어도 라이브러리가
   // 항상 비어 보인다. 두 소스를 함께 조회해 합친다(신규 v3 흐름의 권한 원본은
@@ -74,7 +75,20 @@ export async function loadMaterialsLibrary(
     const row = Array.isArray(e.subject) ? e.subject[0] : e.subject;
     subjects.set(e.subject_id, (row as { name?: string } | null)?.name ?? "");
   }
+  return subjects;
+}
 
+export async function loadMaterialsLibraryTree(supabase: SupabaseClient, studentId: string) {
+  const subjects = await studentEnrolledSubjectIds(supabase, studentId);
+  const { buildSubjectMaterialTree } = await import("@/lib/subject-material-library");
+  return buildSubjectMaterialTree(supabase, Array.from(subjects.keys()));
+}
+
+export async function loadMaterialsLibrary(
+  supabase: SupabaseClient,
+  studentId: string
+): Promise<LibrarySubject[]> {
+  const subjects = await studentEnrolledSubjectIds(supabase, studentId);
   const subjectIds = Array.from(subjects.keys());
   if (subjectIds.length === 0) return [];
 

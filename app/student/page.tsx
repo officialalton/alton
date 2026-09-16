@@ -8,7 +8,7 @@ import { loadCurricula } from "./curriculum-data";
 import { loadMemos } from "./memo-data";
 import { loadReviews, loadStudentFeedback } from "./review-data";
 import { loadStudentHomeworkSets } from "./homework-v3-data";
-import { loadMaterialsLibrary } from "./materials-data";
+import { loadMaterialsLibraryTree } from "./materials-data";
 import { loadCreditsData } from "./credits-data";
 import { loadStats } from "./stats-data";
 import {
@@ -50,7 +50,7 @@ export default async function StudentHomePage({
     { upcoming, past },
     curricula,
     homeworkSets,
-    materialsLibrary,
+    materialsLibraryTree,
     credits,
     stats,
     subjectEnrollments,
@@ -63,7 +63,7 @@ export default async function StudentHomePage({
     lessonsPromise,
     loadCurricula(supabase, user.id),
     loadStudentHomeworkSets(supabase, user.id),
-    loadMaterialsLibrary(supabase, user.id),
+    loadMaterialsLibraryTree(supabase, user.id),
     loadCreditsData(supabase, user.id),
     loadStats(supabase, user.id),
     loadStudentSubjectEnrollments(supabase, user.id),
@@ -122,7 +122,7 @@ export default async function StudentHomePage({
       myFeedback={myFeedback}
       studentId={user.id}
       homeworkSets={homeworkSets}
-      materialsLibrary={materialsLibrary}
+      materialsLibraryTree={materialsLibraryTree}
       credits={credits}
       stats={stats}
       teacherList={teacherList}

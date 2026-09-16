@@ -77,7 +77,7 @@ const lessonsProps = {
   bookableEnrollments: [],
   studentId: "student-1",
   homeworkSets: [],
-  materialsLibrary: [],
+  materialsLibraryTree: [],
   credits: { balance: 0, guardianName: null, regularRemaining: 0, regularNearestExpiry: null, trialEntitlement: null },
   stats: { attendanceRate: null, satisfactionAvg: null, bySubject: [] },
   teacherList: [],

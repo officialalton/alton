@@ -24,7 +24,7 @@ import { reportSessionIssue } from "./incident-report-actions";
 import TeacherLessonScheduleTab from "./TeacherLessonScheduleTab";
 import TeacherMaterialsLibraryTab from "./MaterialsLibraryTab";
 import SettlementTab from "./SettlementTab";
-import type { LibrarySubject } from "@/app/student/materials-data";
+import type { LibrarySubjectTree } from "@/lib/subject-material-library";
 import {
   listMyLessonSchedule,
   cancelMyLessonScheduleBooking,
@@ -60,7 +60,7 @@ export default function TeacherShell({
   availabilityExceptions,
   availabilityTimezone,
   lessonSchedule,
-  materialsSubjects,
+  materialsLibraryTree,
 }: {
   initialTab?: string;
   dashboard: TeacherDashboardData;
@@ -72,7 +72,7 @@ export default function TeacherShell({
   availabilityExceptions: AvailabilityExceptionRow[];
   availabilityTimezone: string;
   lessonSchedule: TeacherLessonScheduleItem[];
-  materialsSubjects: LibrarySubject[];
+  materialsLibraryTree: LibrarySubjectTree[];
 }) {
   const router = useRouter();
   const [lessons, setLessons] = useState<TeacherLessonScheduleItem[]>(lessonSchedule);
@@ -262,7 +262,7 @@ export default function TeacherShell({
               onOperatingCurriculumJumpConsumed={() => setOperatingCurriculumJump(null)}
             />
           ) : activeTab === "materials" ? (
-            <TeacherMaterialsLibraryTab subjects={materialsSubjects} />
+            <TeacherMaterialsLibraryTab tree={materialsLibraryTree} />
           ) : activeTab === "settlement" ? (
             <SettlementTab />
           ) : (

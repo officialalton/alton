@@ -12,10 +12,11 @@ function extractName(rel: unknown): string {
 // 담당 과목만)으로 교사 전용 로더를 추가한다 — 레거시 enrollments와 v3
 // teacher_assignments를 모두 확인한다(둘 다 20261267000000에서 RLS도 함께
 // 확장됨).
-export async function loadTeacherMaterialsLibrary(
+/** 교사가 담당하는(active) 과목 id 집합 — 레거시 enrollments + v3 assignments + 템플릿 배정 합. */
+export async function teacherAssignedSubjectIds(
   supabase: SupabaseClient,
   teacherId: string
-): Promise<LibrarySubject[]> {
+): Promise<Map<string, string>> {
   // 2026-09-12(UAT 지적) — mysubjects-data.ts와 같은 누락. 관리자가 배정한
   // 담당 과목(teacher_curriculum_templates)을 읽지 않아, 학생 매칭이 없으면
   // 라이브러리가 통째로 비었다. 회차 키워드나 수업 연결과는 무관한 층이다.
@@ -51,7 +52,20 @@ export async function loadTeacherMaterialsLibrary(
     if ((subject as { archived_at?: string | null } | null)?.archived_at) continue;
     subjects.set(a.subject_id as string, extractName(a.subject));
   }
+  return subjects;
+}
 
+export async function loadTeacherMaterialsLibraryTree(supabase: SupabaseClient, teacherId: string) {
+  const subjects = await teacherAssignedSubjectIds(supabase, teacherId);
+  const { buildSubjectMaterialTree } = await import("@/lib/subject-material-library");
+  return buildSubjectMaterialTree(supabase, Array.from(subjects.keys()));
+}
+
+export async function loadTeacherMaterialsLibrary(
+  supabase: SupabaseClient,
+  teacherId: string
+): Promise<LibrarySubject[]> {
+  const subjects = await teacherAssignedSubjectIds(supabase, teacherId);
   const subjectIds = Array.from(subjects.keys());
   if (subjectIds.length === 0) return [];
 
