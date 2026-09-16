@@ -3,6 +3,7 @@ import { OAuth2Client } from "google-auth-library";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { parseWorkspaceEventPayload } from "@/lib/google-workspace-events";
 import { fetchSmartNoteDriveFileId, resolveMeetingCodeFromConferenceRecord } from "@/lib/google-meet";
+import { resolveVerifiedStudentEmail } from "@/lib/booking/calendar-sync";
 
 // R6 10/N — Google Workspace Events API 알림 수신 엔드포인트. Workspace Events는 Google
 // Cloud Pub/Sub push 구독으로 배달된다(공식 문서 기준) — 이 라우트는 Pub/Sub push
@@ -237,13 +238,32 @@ export async function POST(req: NextRequest) {
       // drive_file_id를 확보한 시점이 이 파이프라인의 완료 시점이다.
       //
       // 원본 식별자(drive_file_id) 자체는 sessions가 아니라 session_smart_notes에
-      // 저장한다(20261025000000) — sessions는 학생·보호자도 select 가능한 행
-      // 정책이라 원본을 학생·보호자에게 직접 노출하지 않는다는 정책(docs/CURRENT.md)을
-      // 어기고 있었다. sessions에는 상태 문자열만 남긴다.
+      // 저장한다(20261025000000). sessions에는 상태 문자열만 남긴다.
       await admin.from("sessions").update({ smart_notes_status: "completed" }).eq("id", sessionId);
       await admin
         .from("session_smart_notes")
         .upsert({ session_id: sessionId, drive_file_id: driveFileId }, { onConflict: "session_id" });
+
+      // 2026-09-16(제품 오너 정정) — 정규 수업(계정 생성 이후)에 한해 학생에게 원본
+      // 문서 열람(view-only) 권한을 준다. 첫 상담은 제외(consultations 분기는 그대로
+      // 관리자 전용 — 아래로 이어진다). 실제 Drive 호출은 기존 큐/워커가 처리한다
+      // (session_drive_tasks, DRIVE_ARTIFACTS_ALLOW_REAL_WRITES 게이트 재사용) — 여기서
+      // 동기 호출하지 않아 이 웹훅의 성공/실패가 Drive API 가용성에 얽매이지 않는다.
+      const { data: sessionRow } = await admin.from("sessions").select("subject_enrollment_id").eq("id", sessionId).maybeSingle();
+      if (sessionRow?.subject_enrollment_id) {
+        try {
+          const studentEmail = await resolveVerifiedStudentEmail(admin, sessionRow.subject_enrollment_id as string);
+          await admin.from("session_drive_tasks").insert({
+            session_id: sessionId,
+            task_type: "smart_notes_reader_grant",
+            payload: { fileId: driveFileId, studentEmail },
+          });
+        } catch (e) {
+          // 학생 이메일 미검증 등은 관리자가 조치할 사실이지 웹훅 처리 실패가 아니다 —
+          // Smart Notes 원본 연결(위) 자체는 이미 끝났으므로 로그만 남기고 200으로 진행한다.
+          console.error(JSON.stringify({ type: "smart_notes_reader_grant_enqueue_failed", sessionId, error: e instanceof Error ? e.message : String(e) }));
+        }
+      }
     }
     if (consultationId && driveFileId) {
       // 잠재고객에게 원본을 자동 공개하지 않는다(요구사항 4) — 이 컬럼은 관리자 전용

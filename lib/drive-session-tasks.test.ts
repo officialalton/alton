@@ -146,6 +146,37 @@ describe("processQueuedSessionDriveTasks", () => {
     expect(result.retryableFailed).toBe(1);
     expect(fetchMock).not.toHaveBeenCalled();
   });
+
+  it("smart_notes_reader_grant는 학생에게 role=reader 권한을 부여한다(2026-09-16, 정규 수업 원본 열람 허용)", async () => {
+    selectEqMock.mockResolvedValue({
+      data: [
+        {
+          id: "task5",
+          session_id: "s1",
+          task_type: "smart_notes_reader_grant",
+          payload: { fileId: "file-1", studentEmail: "student@example.com" },
+          retry_count: 0,
+        },
+      ],
+      error: null,
+    });
+    claimEqEqSelectMock.mockResolvedValue({ data: [{ id: "task5" }], error: null });
+    process.env.DRIVE_ARTIFACTS_ALLOW_REAL_WRITES = "true";
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true, json: async () => ({ id: "perm-1" }) });
+    vi.stubGlobal("fetch", fetchMock);
+
+    const { processQueuedSessionDriveTasks } = await import("./drive-session-tasks");
+    const result = await processQueuedSessionDriveTasks();
+
+    expect(result.succeeded).toBe(1);
+    expect(fetchMock).toHaveBeenCalledWith(
+      expect.stringContaining("/files/file-1/permissions"),
+      expect.objectContaining({
+        method: "POST",
+        body: JSON.stringify({ role: "reader", type: "user", emailAddress: "student@example.com" }),
+      })
+    );
+  });
 });
 
 describe("requeueSessionDriveTasks — 재처리 배치", () => {

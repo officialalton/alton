@@ -111,6 +111,24 @@ export async function grantSessionFolderPermission(
   );
 }
 
+/** 2026-09-16(제품 오너 정정) — 정규 수업 Smart Notes 원본 문서에 학생을 열람 전용(reader)으로
+ * 추가한다. 첫 상담(consultations)은 이 범위 밖 — sessions(계정 생성 이후)에서만 호출된다. */
+export async function grantSmartNotesReaderPermission(
+  token: string,
+  fileId: string,
+  studentEmail: string
+): Promise<void> {
+  await driveFetch(
+    `${DRIVE_API}/files/${fileId}/permissions?supportsAllDrives=true&sendNotificationEmail=false`,
+    token,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ role: "reader", type: "user", emailAddress: studentEmail }),
+    }
+  );
+}
+
 /** 선생님 배정 종료 이벤트에 따른 폴더 권한 회수. */
 export async function revokeSessionFolderPermission(
   token: string,
@@ -124,7 +142,7 @@ export async function revokeSessionFolderPermission(
   );
 }
 
-export type SessionDriveTaskType = "folder_provision" | "permission_grant" | "permission_revoke";
+export type SessionDriveTaskType = "folder_provision" | "permission_grant" | "permission_revoke" | "smart_notes_reader_grant";
 export type SessionDriveTaskRow = {
   id: string;
   session_id: string;
@@ -172,6 +190,11 @@ async function performSessionDriveTask(token: string, row: SessionDriveTaskRow):
   if (row.task_type === "permission_grant") {
     const p = row.payload as { folderId: string; teacherEmail: string };
     await grantSessionFolderPermission(token, p.folderId, p.teacherEmail);
+    return;
+  }
+  if (row.task_type === "smart_notes_reader_grant") {
+    const p = row.payload as { fileId: string; studentEmail: string };
+    await grantSmartNotesReaderPermission(token, p.fileId, p.studentEmail);
     return;
   }
   const p = row.payload as { folderId: string; permissionId: string };

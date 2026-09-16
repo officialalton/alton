@@ -26,6 +26,13 @@ const sessionSmartNotesUpsertMock = vi.fn().mockResolvedValue({ error: null });
 const consultationsUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
 const accessEventsInsertMock = vi.fn();
 const subscriptionMaybeSingleMock = vi.fn().mockResolvedValue({ data: null });
+const sessionMaybeSingleMock = vi.fn().mockResolvedValue({ data: null });
+const driveTasksInsertMock = vi.fn().mockResolvedValue({ error: null });
+const resolveVerifiedStudentEmailMock = vi.fn().mockResolvedValue("student@example.com");
+
+vi.mock("@/lib/booking/calendar-sync", () => ({
+  resolveVerifiedStudentEmail: (...args: unknown[]) => resolveVerifiedStudentEmailMock(...args),
+}));
 
 const fromMock = vi.fn((table: string) => {
   if (table === "reservations") {
@@ -47,10 +54,16 @@ const fromMock = vi.fn((table: string) => {
     };
   }
   if (table === "sessions") {
-    return { update: (payload: unknown) => ({ eq: (...args: unknown[]) => sessionsUpdateEqMock(payload, ...args) }) };
+    return {
+      update: (payload: unknown) => ({ eq: (...args: unknown[]) => sessionsUpdateEqMock(payload, ...args) }),
+      select: () => ({ eq: () => ({ maybeSingle: sessionMaybeSingleMock }) }),
+    };
   }
   if (table === "session_smart_notes") {
     return { upsert: (payload: unknown, opts: unknown) => sessionSmartNotesUpsertMock(payload, opts) };
+  }
+  if (table === "session_drive_tasks") {
+    return { insert: (payload: unknown) => driveTasksInsertMock(payload) };
   }
   if (table === "session_access_events") {
     return { insert: (payload: unknown) => accessEventsInsertMock(payload) };
@@ -165,6 +178,32 @@ describe("POST /api/webhooks/workspace-events", () => {
       { session_id: "s1", drive_file_id: "drive-file-1" },
       { onConflict: "session_id" }
     );
+  });
+
+  it("정규 수업(sessions)에 연결되면 학생 열람 권한 부여 작업을 큐에 넣는다(첫 상담은 별개 분기)", async () => {
+    sessionMaybeSingleMock.mockResolvedValueOnce({ data: { subject_enrollment_id: "se1" } });
+    const { POST } = await import("./route");
+    const res = await POST(
+      makeRequest({ smartNote: { name: "conferenceRecords/abc/smartNotes/note1" } }, SMART_NOTE_TYPE) as never
+    );
+    expect(res.status).toBe(200);
+    expect(resolveVerifiedStudentEmailMock).toHaveBeenCalledWith(expect.anything(), "se1");
+    expect(driveTasksInsertMock).toHaveBeenCalledWith({
+      session_id: "s1",
+      task_type: "smart_notes_reader_grant",
+      payload: { fileId: "drive-file-1", studentEmail: "student@example.com" },
+    });
+  });
+
+  it("학생 이메일이 아직 검증되지 않았으면 큐에 넣지 않고도 웹훅은 200으로 끝난다(관리자 조치 대상일 뿐 웹훅 실패 아님)", async () => {
+    sessionMaybeSingleMock.mockResolvedValueOnce({ data: { subject_enrollment_id: "se1" } });
+    resolveVerifiedStudentEmailMock.mockRejectedValueOnce(new Error("학생 계정 이메일이 아직 검증되지 않았습니다."));
+    const { POST } = await import("./route");
+    const res = await POST(
+      makeRequest({ smartNote: { name: "conferenceRecords/abc/smartNotes/note1" } }, SMART_NOTE_TYPE) as never
+    );
+    expect(res.status).toBe(200);
+    expect(driveTasksInsertMock).not.toHaveBeenCalled();
   });
 
   it("ce-subject가 등록된 선생님 구독과 일치하면 admin이 아니라 그 선생님을 subject로 조회한다(실사용 403 버그 수정)", async () => {

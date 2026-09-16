@@ -51,7 +51,7 @@ async function resolveTeacherWorkspaceEmail(
  * 던진다 — 기존 재시도/`reconciliation_needed` 경로를 그대로 타서 관리자 조치 필요
  * 상태로 표시된다(새 상태값을 만들지 않고 기존 노출 경로 재사용).
  */
-async function resolveVerifiedStudentEmail(
+export async function resolveVerifiedStudentEmail(
   admin: ReturnType<typeof createAdminClient>,
   subjectEnrollmentId: string
 ): Promise<string> {
