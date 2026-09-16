@@ -46,6 +46,73 @@ export function parseRomanOption(option: string): number[] | null | "none" {
   return nums;
 }
 
+type Cond = { op: ">" | ">=" | "<" | "<=" | "=="; value: number; targetsOutput: boolean };
+
+/** "greater than $40" 류 임계값 조건 문장에서 부등호·값·대상(계산값 vs 입력 변수)을 뽑는다. */
+function parseNumericConditions(text: string, outWord: RegExp, inWord: RegExp): Cond[] {
+  const conds: Cond[] = [];
+  const patterns: { re: RegExp; op: Cond["op"] }[] = [
+    { re: /\bgreater than\s*\$?(\d+(?:\.\d+)?)/gi, op: ">" },
+    { re: /\bmore than\s*\$?(\d+(?:\.\d+)?)/gi, op: ">" },
+    { re: /\bat least\s*\$?(\d+(?:\.\d+)?)/gi, op: ">=" },
+    { re: /\bat most\s*\$?(\d+(?:\.\d+)?)/gi, op: "<=" },
+    { re: /\bno more than\s*\$?(\d+(?:\.\d+)?)/gi, op: "<=" },
+    { re: /\bless than\s*\$?(\d+(?:\.\d+)?)/gi, op: "<" },
+  ];
+  for (const { re, op } of patterns) {
+    for (const m of text.matchAll(re)) {
+      // 조건 하나당 좁은 국소 문맥만 본다 — 한 문장에 두 조건이 같이 있으면(흔한 형태) 문장 전체를 보면
+      // 두 키워드가 다 걸려 대상을 못 정하니, 그 임계값 바로 앞뒤 구간만 잘라 판정한다.
+      const idx = m.index ?? 0;
+      const clause = text.slice(Math.max(0, idx - 60), idx + m[0].length + 15);
+      const isOutput = outWord.test(clause);
+      const isInput = inWord.test(clause);
+      if (isOutput === isInput) continue; // 둘 다거나 둘 다 아니면 판정 못 함 — 건너뛴다(오탐 방지).
+      conds.push({ op, value: Number(m[1]), targetsOutput: isOutput });
+    }
+  }
+  return conds;
+}
+
+function evalCond(c: Cond, v: number): boolean {
+  if (c.op === ">") return v > c.value;
+  if (c.op === ">=") return v >= c.value;
+  if (c.op === "<") return v < c.value;
+  if (c.op === "<=") return v <= c.value;
+  return Math.abs(v - c.value) < 1e-9;
+}
+
+/**
+ * 2026-09-15 제품 오너 확인 — "식 + 조건 두 개(계산값 조건·입력값 조건)를 모두 만족하는 값은?" 형태 문항에서
+ * 지문에 없는 조건(예: "정수만")을 해설이 지어내 정답을 하나로 억지로 맞춘 사례 발견(실제로는 선택지 두 개가
+ * 조건을 만족). 식 하나 + 임계값 조건 두 개 + 선택지가 전부 순수 숫자일 때만, 각 선택지를 직접 대입해
+ * 조건을 만족하는 선택지가 정확히 하나이고 그것이 정답과 같은지 결정적으로 확인한다. 패턴이 깔끔하지
+ * 않으면(변수 이름 모호 등) 그냥 건너뛴다 — 오탐보다 누락이 안전하다.
+ */
+function checkNumericConditionAmbiguity(passage: string, options: string[] | null, correctIndex: number | null): FigureIssue[] {
+  if (!options || options.length < 2 || correctIndex === null) return [];
+  const optionValues = options.map((o) => Number(o.trim()));
+  if (optionValues.some((v) => !Number.isFinite(v))) return [];
+  const text = passage.replace(/\$/g, "");
+  const formulaMatch = text.match(/\b([A-Za-z])\s*=\s*(-?\d+(?:\.\d+)?)\s*([a-zA-Z])\s*([+-])\s*(\d+(?:\.\d+)?)/);
+  if (!formulaMatch) return [];
+  const [, outVar, slopeS, inVar, signS, interceptS] = formulaMatch;
+  if (outVar.toLowerCase() === inVar.toLowerCase()) return [];
+  const slope = Number(slopeS), intercept = (signS === "-" ? -1 : 1) * Number(interceptS);
+  const outWord = new RegExp(`\\b(${outVar}|total|cost|amount|price)\\b`, "i");
+  const inWord = new RegExp(`\\b(${inVar}|hours?|time)\\b`, "i");
+  const conds = parseNumericConditions(text, outWord, inWord);
+  if (conds.length < 2 || !conds.some((c) => c.targetsOutput) || !conds.some((c) => !c.targetsOutput)) return [];
+  const satisfies = (h: number) => conds.every((c) => evalCond(c, c.targetsOutput ? slope * h + intercept : h));
+  const passing = optionValues.map((v, i) => ({ i, ok: satisfies(v) })).filter((x) => x.ok);
+  if (passing.length === 1 && passing[0].i === correctIndex) return [];
+  if (passing.length === 0) return [{ code: "condition_no_match", message: "지문의 식과 조건을 만족하는 선택지가 하나도 없습니다 — 값이나 조건을 다시 확인하세요." }];
+  return [{
+    code: "condition_ambiguous",
+    message: `지문의 식과 조건을 만족하는 선택지가 ${passing.map((p) => options[p.i]).join(", ")}로 ${passing.length}개입니다(정답 표시: ${options[correctIndex]}) — 조건 하나가 지문에 없는데 암묵적으로 쓰였거나(예: "정수만"), 조건 자체가 정답을 하나로 좁히지 못합니다.`,
+  }];
+}
+
 export function checkContent(input: ContentInput): FigureIssue[] {
   const issues: FigureIssue[] = [];
   issues.push(...checkRwStructure({ skillCode: input.skillCode ?? null, passage: input.passage, options: input.options, figure: input.figure ?? null }));
@@ -68,6 +135,7 @@ export function checkContent(input: ContentInput): FigureIssue[] {
     if (opts.length >= 2 && opts.every((o) => /^(graph|figure|diagram|option)\s*[a-d1-4]$/i.test(o.trim()))) {
       issues.push({ code: "figure_choice_placeholder", message: "선택지가 실제 그래프/도형이 아니라 'Graph A' 같은 이름표뿐입니다 — 그래프 선택형(선택지 자체가 이미지 4개)은 아직 지원하지 않으니, 값을 직접 비교하는 형태로 다시 쓰세요." });
     }
+    issues.push(...checkNumericConditionAmbiguity(input.passage, input.options, input.correctIndex));
   }
   const statements = (input.statements ?? []).map((s) => s.trim()).filter(Boolean);
   const opts = input.options ?? [];

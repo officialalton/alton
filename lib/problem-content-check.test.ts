@@ -17,6 +17,20 @@ describe("수식·선택지 블록 검증", () => {
     expect(m).toEqual(expect.arrayContaining(["option_duplicate", "correct_index", "option_style"]));
     expect(checkContent({ ...base, options: ["1"] }).some((i) => i.code === "option_count")).toBe(true);
   });
+  it("식+조건 두 개를 만족하는 선택지가 실제로는 둘인데 하나만 정답으로 표시되면 거부(2026-09-15 실제 사례)", () => {
+    const passage =
+      "A rental company charges customers based on the number of hours, h, a kayak is rented. The graph shows line p, which represents the equation C = 6h + 10, where C is the total cost in dollars. The company also offers a promotional rule: a customer qualifies for a discount only if the total cost without the discount would be greater than 40 dollars and the number of hours rented is at most 8. Based on the graph and the promotional rule, which of the following numbers of hours h satisfies both the condition for qualifying for the discount and the constraint h <= 8?";
+    // 실제 사례: 6과 5.5 둘 다 만족하는데 6(인덱스 1)만 정답으로 표시됨.
+    const issues = checkContent({ ...base, passage, options: ["4", "6", "9", "5.5"], correctIndex: 1 });
+    expect(issues.some((i) => i.code === "condition_ambiguous")).toBe(true);
+  });
+  it("조건을 만족하는 선택지가 정확히 하나면 통과한다", () => {
+    const passage =
+      "A rental company charges customers based on the number of hours, h, a kayak is rented. The equation C = 6h + 10 gives the total cost in dollars. A customer qualifies for a discount only if the total cost would be greater than 40 dollars and the number of hours rented is at most 8. Which number of hours h satisfies both conditions?";
+    // 오직 6만 만족: 4는 34<40 실패, 9는 h<=8 실패, 5는 40에 걸쳐 40 초과가 아니라 실패(6*5+10=40).
+    const issues = checkContent({ ...base, passage, options: ["4", "5", "6", "9"], correctIndex: 2 });
+    expect(issues.some((i) => i.code === "condition_ambiguous" || i.code === "condition_no_match")).toBe(false);
+  });
   it("선택지가 실제 그래프 없이 'Graph A' 같은 이름표뿐이면 거부(2026-09-15 — 그래프 선택형 미구현)", () => {
     expect(checkContent({ ...base, options: ["Graph A", "Graph B", "Graph C", "Graph D"] }).some((i) => i.code === "figure_choice_placeholder")).toBe(true);
     expect(checkContent({ ...base, options: ["2", "4", "5", "7"] }).some((i) => i.code === "figure_choice_placeholder")).toBe(false);
