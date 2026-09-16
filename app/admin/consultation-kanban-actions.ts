@@ -87,6 +87,14 @@ async function getAccountCreationCardDetail(
   if (!link) throw new Error("계정 생성 링크를 찾을 수 없습니다.");
 
   const childId = studentRow.child_auth_user_id;
+  // 2026-09-16(실사용 중 발견) — 계정 생성 경로는 consultations.consent_confirmed_at을
+  // 애초에 안 쓰고 record_trial_smart_notes_consent()가 trial_smart_notes_consents에
+  // 실제 동의를 남긴다(20261272000000). 이 카드 상세도(목록과 별개로) 그 값을
+  // 확인하지 않고 항상 null로 합성해, 보호자가 실제로 동의를 마쳐도 카드 상세
+  // 패널의 "보호자 동의 확인 대기 중" 배지가 절대 안 풀리는 결함이 있었다.
+  const { data: consentRow } = childId
+    ? await admin.from("trial_smart_notes_consents").select("confirmed_at").eq("child_id", childId).maybeSingle()
+    : { data: null };
   const consultation: ConsultationListItem = {
     id: cardId,
     contact_name: link.guardian_name,
@@ -113,7 +121,7 @@ async function getAccountCreationCardDetail(
     outcome_notes: null,
     prospect_contact_id: null,
     consent_version_id: null,
-    consent_confirmed_at: null,
+    consent_confirmed_at: consentRow?.confirmed_at ?? null,
     child_id: childId,
     trial_intent_confirmed_at: studentRow.created_at,
     trial_entitlement_grant_id: null,
