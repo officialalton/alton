@@ -162,7 +162,7 @@ ${input.design ? `
     pickedAnswer,
     agrees,
     confidence: (["high", "medium", "low"].includes(String(raw.confidence)) ? raw.confidence : "low") as "high" | "medium" | "low",
-    distractors: (raw.distractors ?? []).map((d) => ({ index: d.index, plausibleBecause: String(d.plausible_because ?? ""), matches: String(d.matches ?? ""), whyWrong: String(d.why_wrong ?? ""), kind: (d.kind as DistractorKind) ?? "other", obvious: Boolean(d.obvious) })),
+    distractors: (Array.isArray(raw.distractors) ? raw.distractors : []).map((d) => ({ index: d.index, plausibleBecause: String(d.plausible_because ?? ""), matches: String(d.matches ?? ""), whyWrong: String(d.why_wrong ?? ""), kind: (d.kind as DistractorKind) ?? "other", obvious: Boolean(d.obvious) })),
     estimatedDifficulty: level,
     difficultyReasons: (raw.difficulty_reasons ?? []).map(String),
     flags: (raw.flags ?? []).map(String),

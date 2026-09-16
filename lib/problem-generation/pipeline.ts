@@ -245,7 +245,9 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
         //  구조화된 계획을 세운 뒤 그 자리 하나만 생성하는 별도 호출을 보내며, 상한은 자리당 최대 두 번이다).
         if (issues.reasons.length && !issues.hasStructuralIssue && issues.distractorTargets.length && params.format === "mc" && g.options && g.correctIndex !== null) {
           usedCorrection = true;
-          for (const target of issues.distractorTargets) {
+          // 자리마다 독립적인 수정이므로 병렬로 시도한다(원본 선택지 스냅샷 기준 — 서로의 새 값과는 겹치지 않는지 아래서 별도 확인).
+          const originalOptions = [...g.options!];
+          const fixOne = async (target: { index: number; reason: string }) => {
             const attemptsAvoid: string[] = [];
             for (let attempt = 0; attempt < 2; attempt += 1) {
               stats.distractorRepairs += 1;
@@ -253,15 +255,27 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
               try {
                 const repaired = await repairOneDistractorCore({
                   skillType: params.skillType, subjectName: params.subjectName, difficulty: params.difficulty, stimulus: text, question: question ?? "",
-                  options: g.options!, correctIndex: g.correctIndex!, explanation: g.explanation, index: target.index, reason: target.reason, avoid: attemptsAvoid,
+                  options: originalOptions, correctIndex: g.correctIndex!, explanation: g.explanation, index: target.index, reason: target.reason, avoid: attemptsAvoid,
                 });
-                if (repaired.ok) { g.options![target.index] = repaired.text; stats.distractorRepairsResolved += 1; break; }
+                if (repaired.ok) return { index: target.index, text: repaired.text };
                 attemptsAvoid.push(repaired.error);
               } catch (e) {
                 console.error("[pipeline] 오답 부분 수정 오류:", target.index, e instanceof Error ? e.message : e);
-                break;
+                return null;
               }
             }
+            return null;
+          };
+          const fixed = await Promise.all(issues.distractorTargets.map(fixOne));
+          const normalize = (s: string) => s.trim().toLowerCase().replace(/\s+/g, " ");
+          const seen = new Set<string>();
+          for (const f of fixed) {
+            if (!f) continue;
+            const key = normalize(f.text);
+            if (seen.has(key)) continue; // 병렬로 고친 두 자리가 서로 겹치면 뒤엣것은 버리고 다음 재검사에서 다시 지적되게 둔다.
+            seen.add(key);
+            g.options![f.index] = f.text;
+            stats.distractorRepairsResolved += 1;
           }
           countCall();
           const reReview = await runReview();
