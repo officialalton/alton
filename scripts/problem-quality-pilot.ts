@@ -15,12 +15,24 @@ if (existsSync(envPath)) {
 }
 
 const SAT_MATH_SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001";
+// 2026-09-16 2차 실행 — 1차(linear_equations_one_var/systems_linear/nonlinear_equations_systems/
+// one_variable_data/lines_angles_triangles)에 이어 나머지 14개 유형을 마저 돈다(승인 예산 $30 중
+// 1차 $1.55 사용 — 100문항까지 확대 승인).
 const PLAN: { code: string; count: number }[] = [
-  { code: "linear_equations_one_var", count: 5 },
-  { code: "systems_linear", count: 5 },
-  { code: "nonlinear_equations_systems", count: 5 },
-  { code: "one_variable_data", count: 5 },
-  { code: "lines_angles_triangles", count: 5 },
+  { code: "linear_functions", count: 5 },
+  { code: "linear_equations_two_var", count: 5 },
+  { code: "linear_inequalities", count: 5 },
+  { code: "equivalent_expressions", count: 5 },
+  { code: "nonlinear_functions", count: 5 },
+  { code: "ratios_rates_units", count: 5 },
+  { code: "percentages", count: 5 },
+  { code: "two_variable_data", count: 5 },
+  { code: "probability", count: 5 },
+  { code: "inference_margin_error", count: 5 },
+  { code: "evaluating_statistical_claims", count: 5 },
+  { code: "area_volume", count: 5 },
+  { code: "right_triangles_trigonometry", count: 5 },
+  { code: "circles", count: 5 },
 ];
 
 let totalInputTokens = 0;
