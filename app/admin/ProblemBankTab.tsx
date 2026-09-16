@@ -93,6 +93,10 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
   const [notice, setNotice] = useState<string | null>(null);
   const [openId, setOpenId] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  // 2026-09-15 — "전체 공개" 버튼의 "공개 중…" 표시는 이 액션 자체가 도는 동안만 켠다.
+  // 예전엔 공용 busy(다른 액션, 예: AI 생성이 도는 동안도 true)를 그대로 써서 생성 중에도
+  // 이 버튼이 "공개 중…"으로 보였다.
+  const [publishingAll, setPublishingAll] = useState(false);
 
   const archived = bucket === "archived";
   const reviewOnly = bucket === "review";
@@ -160,7 +164,7 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
   async function publishAllVisible() {
     if (publishableDrafts.length === 0) return;
     if (typeof window !== "undefined" && !window.confirm(`지금 보이는 초안 ${publishableDrafts.length}개를 모두 공개할까요? 공개된 문제는 회차 구성 후보가 됩니다.`)) return;
-    setBusy(true);
+    setPublishingAll(true);
     setError(null);
     setNotice(null);
     const failed: string[] = [];
@@ -173,7 +177,7 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
       else failed.push(`${(p.draft?.passage ?? p.draft?.question ?? "").slice(0, 30) || "(내용 없음)"} — ${result.error}`);
     }
     await reload();
-    setBusy(false);
+    setPublishingAll(false);
     setNotice(`${done}개를 공개했습니다.${failed.length ? ` ${failed.length}개는 공개하지 못해 초안으로 남았습니다.` : ""}`);
     if (failed.length) setError(failed.join(" / "));
   }
@@ -264,8 +268,8 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
       {bucket === "working" && publishableDrafts.length > 0 && (
         <div className="flex flex-wrap items-center gap-3 mb-3 border-[1.5px] border-grey-200 rounded-xl px-4 py-2.5">
           <span className="text-[12.5px] text-ink">지금 보이는 초안 <b>{publishableDrafts.length}</b>개</span>
-          <button type="button" disabled={busy} onClick={() => void publishAllVisible()} className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50">
-            {busy ? "공개 중…" : `전체 공개 (${publishableDrafts.length})`}
+          <button type="button" disabled={busy || publishingAll} onClick={() => void publishAllVisible()} className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50">
+            {publishingAll ? "공개 중…" : `전체 공개 (${publishableDrafts.length})`}
           </button>
           <span className="text-[11.5px] text-grey-500">내용을 확인한 초안만 공개하세요 — 공개된 문제는 회차 구성 후보가 됩니다.</span>
         </div>
