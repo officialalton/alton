@@ -516,15 +516,49 @@ export async function publishVersionAction(versionId: string): Promise<BankResul
  * DB 는 draft → in_review → published 순서를 강제하므로(20261293000000) 그 상태는
  * 그대로 유지하되, 두 단계를 여기서 이어 붙인다. 검수자 역할 분리는 후속 범위다.
  */
-export async function publishDraftAction(versionId: string): Promise<BankResult> {
+export async function publishDraftAction(versionId: string): Promise<BankResult<{ answerFixed: boolean }>> {
   const { adminUserId } = await requireAdmin();
   const admin = createAdminClient();
+
+  // 2026-09-15 제품 오너 확인 — 직접 작성/편집한 초안은 배치 생성 파이프라인의 독립 검사·정답-해설
+  // 대조를 거치지 않는다. 공개는 드물게(문항당 한 번) 일어나니, 공개 직전에 한 번 더 대조해
+  // 어느 경로로 만들어졌든 같은 안전망을 통과시킨다.
+  const { data: v } = await admin
+    .from("problem_versions")
+    .select("problem_id, passage, question, options, correct_index, explanation")
+    .eq("id", versionId)
+    .maybeSingle();
+  let answerFixed = false;
+  if (v?.options && Array.isArray(v.options) && v.options.length >= 2 && v.correct_index !== null && v.explanation?.trim()) {
+    const { data: problem } = await admin.from("problems").select("format, difficulty").eq("id", v.problem_id).maybeSingle();
+    if (problem?.format === "mc") {
+      try {
+        const { resolveAnswerFromExplanationCore } = await import("@/lib/problem-generation/core");
+        const resolved = await resolveAnswerFromExplanationCore({
+          stimulus: composeProblemText(v.passage, v.question ?? null),
+          question: v.question ?? "",
+          options: v.options as string[],
+          explanation: v.explanation,
+        });
+        if (resolved.ok && resolved.confidence === "high" && resolved.concludedIndex !== v.correct_index) {
+          const { error: saveErr } = await admin.rpc("save_problem_draft_version", {
+            p_problem_id: v.problem_id, p_passage: v.passage, p_options: v.options, p_correct_index: resolved.concludedIndex,
+            p_explanation: resolved.cleanExplanation, p_difficulty: problem.difficulty ?? "medium", p_actor_id: adminUserId, p_question: v.question,
+          });
+          if (!saveErr) answerFixed = true;
+        }
+      } catch (e) {
+        console.error("[problem-bank] 공개 전 정답-해설 대조 오류:", e instanceof Error ? e.message : e);
+      }
+    }
+  }
+
   const { error } = await admin.rpc("confirm_and_publish_problem_version", {
     p_version_id: versionId,
     p_actor_id: adminUserId,
   });
   if (error) return { ok: false, error: readable(error.message, "공개하지 못했습니다.") };
-  return { ok: true };
+  return { ok: true, value: { answerFixed } };
 }
 
 /**
