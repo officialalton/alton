@@ -7,7 +7,7 @@ export type ReviewData = {
   improve: string | null;
   nextPlan: string | null;
   submittedAt: string;
-  categories: { category: string; finalText: string | null }[];
+  categories: { category: string; finalText: string | null; rating: string | null }[];
 };
 
 export type StudentFeedback = {
@@ -33,17 +33,17 @@ export async function loadReviews(
   const { data: categories } = reviewIds.length
     ? await supabase
         .from("session_review_categories")
-        .select("review_id, category, final_text")
+        .select("review_id, category, final_text, rating")
         .in("review_id", reviewIds)
     : { data: [] as never[] };
 
   const categoriesByReview = new Map<
     string,
-    { category: string; finalText: string | null }[]
+    { category: string; finalText: string | null; rating: string | null }[]
   >();
   for (const c of categories ?? []) {
     const list = categoriesByReview.get(c.review_id) ?? [];
-    list.push({ category: c.category, finalText: c.final_text });
+    list.push({ category: c.category, finalText: c.final_text, rating: c.rating });
     categoriesByReview.set(c.review_id, list);
   }
 

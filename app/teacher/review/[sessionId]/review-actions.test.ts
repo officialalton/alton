@@ -78,12 +78,6 @@ vi.mock("@/lib/email", () => ({
   sendEmail: sendEmailMock,
 }));
 
-vi.mock("@anthropic-ai/sdk", () => ({
-  default: class {
-    messages = { create: vi.fn() };
-  },
-}));
-
 describe("submitReview -> notifyGuardiansOfReview", () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -116,14 +110,12 @@ describe("submitReview -> notifyGuardiansOfReview", () => {
     const { submitReview } = await import("./review-actions");
     await submitReview("session1", {
       teacherSummary: "요약",
-      strength: "강점",
-      improve: "개선",
       nextPlan: "다음 계획",
       categories: {
-        concept: { text: "", reviewed: true },
-        problemsolving: { text: "", reviewed: true },
-        participation: { text: "", reviewed: true },
-        homework: { text: "", reviewed: true },
+        concept: { text: "", reviewed: true, rating: "average" },
+        problemsolving: { text: "", reviewed: true, rating: "average" },
+        participation: { text: "", reviewed: true, rating: "average" },
+        homework: { text: "", reviewed: true, rating: "average" },
       },
     });
 
@@ -144,14 +136,12 @@ describe("submitReview -> notifyGuardiansOfReview", () => {
     const { submitReview } = await import("./review-actions");
     await submitReview("session1", {
       teacherSummary: "요약",
-      strength: "강점",
-      improve: "개선",
       nextPlan: "다음 계획",
       categories: {
-        concept: { text: "", reviewed: true },
-        problemsolving: { text: "", reviewed: true },
-        participation: { text: "", reviewed: true },
-        homework: { text: "", reviewed: true },
+        concept: { text: "", reviewed: true, rating: "average" },
+        problemsolving: { text: "", reviewed: true, rating: "average" },
+        participation: { text: "", reviewed: true, rating: "average" },
+        homework: { text: "", reviewed: true, rating: "average" },
       },
     });
 
@@ -167,14 +157,12 @@ describe("submitReview -> notifyGuardiansOfReview", () => {
     const { submitReview } = await import("./review-actions");
     await submitReview("session1", {
       teacherSummary: "요약",
-      strength: "강점",
-      improve: "개선",
       nextPlan: "다음 계획",
       categories: {
-        concept: { text: "", reviewed: true },
-        problemsolving: { text: "", reviewed: true },
-        participation: { text: "", reviewed: true },
-        homework: { text: "", reviewed: true },
+        concept: { text: "", reviewed: true, rating: "average" },
+        problemsolving: { text: "", reviewed: true, rating: "average" },
+        participation: { text: "", reviewed: true, rating: "average" },
+        homework: { text: "", reviewed: true, rating: "average" },
       },
     });
 

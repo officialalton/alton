@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { generateReviewDraft, submitReview } from "./review-actions";
-import type { ExistingReview, ReviewCategoryId, SessionReviewContext } from "./review-data";
+import { submitReview } from "./review-actions";
+import type { ExistingReview, ReviewCategoryId, ReviewRating, SessionReviewContext } from "./review-data";
 
 const CATEGORY_LABEL: Record<ReviewCategoryId, string> = {
   concept: "개념 이해도",
@@ -14,8 +14,21 @@ const CATEGORY_LABEL: Record<ReviewCategoryId, string> = {
 
 const CATEGORY_IDS = Object.keys(CATEGORY_LABEL) as ReviewCategoryId[];
 
-type CategoryState = Record<ReviewCategoryId, { text: string; reviewed: boolean }>;
+const RATING_LABEL: Record<ReviewRating, string> = {
+  below: "Below",
+  partial: "Partial",
+  average: "Average",
+  excellent: "Excellent",
+  outstanding: "Outstanding",
+};
+const RATING_IDS = Object.keys(RATING_LABEL) as ReviewRating[];
 
+type CategoryState = Record<ReviewCategoryId, { text: string; reviewed: boolean; rating: ReviewRating | null }>;
+
+/** 2026-09-16(제품 오너 지시) — 카테고리별 5단계 버튼 평가 중심으로 재구성. 텍스트는 선택,
+ * "오늘 배운 것"·"최종 정리"만 필수 — 리뷰 작성 자체를 빠르게 남길 수 있게 한다. AI 초안
+ * 자동 생성(기존 "✨ AI 초안 전체 생성")은 리뷰에 AI 문장을 그대로 넣는 게 무겁다는 지적으로
+ * 제거했다. */
 export default function TeacherReviewPanel({
   context,
   existingReview,
@@ -25,8 +38,6 @@ export default function TeacherReviewPanel({
 }) {
   const router = useRouter();
   const [teacherSummary, setTeacherSummary] = useState(existingReview?.teacherSummary ?? "");
-  const [strength, setStrength] = useState(existingReview?.strength ?? "");
-  const [improve, setImprove] = useState(existingReview?.improve ?? "");
   const [nextPlan, setNextPlan] = useState(existingReview?.nextPlan ?? "");
   const [categories, setCategories] = useState<CategoryState>(
     Object.fromEntries(
@@ -35,74 +46,31 @@ export default function TeacherReviewPanel({
         {
           text: existingReview?.categories[id]?.finalText ?? "",
           reviewed: existingReview?.categories[id]?.reviewed ?? false,
+          rating: existingReview?.categories[id]?.rating ?? null,
         },
       ])
     ) as CategoryState
   );
-  const [generating, setGenerating] = useState<"all" | ReviewCategoryId | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  async function handleGenerateAll() {
-    setGenerating("all");
-    try {
-      const draft = await generateReviewDraft({
-        sessionId: context.sessionId,
-        subjectName: context.subjectName,
-        unitTitle: context.unitTitle,
-        sessionNumber: context.sessionNumber,
-        note: context.note,
-        teacherComment: context.teacherComment,
-        homeworkItems: context.homeworkItems,
-      });
-      setTeacherSummary(draft.teacherSummary);
-      setStrength(draft.strength);
-      setImprove(draft.improve);
-      setNextPlan(draft.nextPlan);
-      setCategories((prev) => {
-        const next = { ...prev };
-        for (const id of CATEGORY_IDS) {
-          next[id] = { ...next[id], text: draft.categories[id] };
-        }
-        return next;
-      });
-    } finally {
-      setGenerating(null);
-    }
-  }
+  const allRated = CATEGORY_IDS.every((id) => categories[id].rating !== null);
+  const canSubmit = allRated && teacherSummary.trim().length > 0 && nextPlan.trim().length > 0;
 
-  async function handleRegenerateCategory(id: ReviewCategoryId) {
-    setGenerating(id);
-    try {
-      const draft = await generateReviewDraft({
-        sessionId: context.sessionId,
-        subjectName: context.subjectName,
-        unitTitle: context.unitTitle,
-        sessionNumber: context.sessionNumber,
-        note: context.note,
-        teacherComment: context.teacherComment,
-        homeworkItems: context.homeworkItems,
-      });
-      setCategories((prev) => ({
-        ...prev,
-        [id]: { ...prev[id], text: draft.categories[id], reviewed: false },
-      }));
-    } finally {
-      setGenerating(null);
-    }
+  function setRating(id: ReviewCategoryId, rating: ReviewRating) {
+    setCategories((prev) => ({ ...prev, [id]: { ...prev[id], rating } }));
   }
 
   async function handleSubmit() {
+    if (!canSubmit) return;
     setSubmitting(true);
+    setError(null);
     try {
-      await submitReview(context.sessionId, {
-        teacherSummary,
-        strength,
-        improve,
-        nextPlan,
-        categories,
-      });
+      await submitReview(context.sessionId, { teacherSummary, nextPlan, categories });
       setSubmitted(true);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
     } finally {
       setSubmitting(false);
     }
@@ -118,18 +86,10 @@ export default function TeacherReviewPanel({
       </button>
 
       <h1 className="text-[20px] font-extrabold text-ink mb-1.5">수업 리뷰 작성</h1>
-      <p className="text-[13px] text-grey-500 mb-5">
+      <p className="text-[13px] text-grey-500 mb-6">
         {context.studentName} · {context.subjectName} · {context.sessionNumber}회차
         {context.unitTitle ? ` · ${context.unitTitle}` : ""}
       </p>
-
-      <button
-        disabled={generating !== null}
-        onClick={handleGenerateAll}
-        className="text-[12.5px] font-bold px-4 py-2.5 rounded-lg bg-ink text-white disabled:opacity-50 mb-6"
-      >
-        {generating === "all" ? "AI 초안 생성 중..." : "✨ AI 초안 전체 생성"}
-      </button>
 
       <div className="mb-6">
         <h2 className="text-[14px] font-bold text-ink mb-3">카테고리별 평가</h2>
@@ -138,15 +98,20 @@ export default function TeacherReviewPanel({
             key={id}
             className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5"
           >
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[13px] font-bold text-ink">{CATEGORY_LABEL[id]}</span>
-              <button
-                disabled={generating !== null}
-                onClick={() => handleRegenerateCategory(id)}
-                className="text-[11.5px] font-semibold text-grey-500 disabled:opacity-50"
-              >
-                {generating === id ? "생성 중..." : "🔄 AI 다시 생성"}
-              </button>
+            <div className="text-[13px] font-bold text-ink mb-2">{CATEGORY_LABEL[id]}</div>
+            <div className="flex flex-wrap gap-1.5 mb-2.5">
+              {RATING_IDS.map((r) => (
+                <button
+                  key={r}
+                  onClick={() => setRating(id, r)}
+                  className={
+                    "text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] " +
+                    (categories[id].rating === r ? "border-ink bg-ink text-white" : "border-grey-200 text-ink")
+                  }
+                >
+                  {RATING_LABEL[r]}
+                </button>
+              ))}
             </div>
             <textarea
               value={categories[id].text}
@@ -156,40 +121,32 @@ export default function TeacherReviewPanel({
                   [id]: { ...prev[id], text: e.target.value },
                 }))
               }
-              className="w-full min-h-[70px] px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px] mb-2"
+              placeholder="코멘트(선택)"
+              className="w-full min-h-[56px] px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px]"
             />
-            <label className="flex items-center gap-1.5 text-[12px] text-grey-500 font-semibold">
-              <input
-                type="checkbox"
-                checked={categories[id].reviewed}
-                onChange={(e) =>
-                  setCategories((prev) => ({
-                    ...prev,
-                    [id]: { ...prev[id], reviewed: e.target.checked },
-                  }))
-                }
-              />
-              검토완료
-            </label>
           </div>
         ))}
       </div>
 
       <div className="mb-6">
-        <h2 className="text-[14px] font-bold text-ink mb-3">종합 리뷰</h2>
-        <Field label="선생님 총평" value={teacherSummary} onChange={setTeacherSummary} />
-        <Field label="잘한 점" value={strength} onChange={setStrength} />
-        <Field label="보완할 점" value={improve} onChange={setImprove} />
-        <Field label="다음 계획" value={nextPlan} onChange={setNextPlan} />
+        <h2 className="text-[14px] font-bold text-ink mb-3">종합 정리</h2>
+        <Field label="오늘 배운 것" value={teacherSummary} onChange={setTeacherSummary} required />
+        <Field label="최종 정리" value={nextPlan} onChange={setNextPlan} required />
       </div>
 
+      {error && <p className="text-[12.5px] text-red mb-3">{error}</p>}
       <button
-        disabled={submitting}
-        onClick={handleSubmit}
+        disabled={submitting || !canSubmit}
+        onClick={() => void handleSubmit()}
         className="text-[13px] font-bold px-5 py-2.5 rounded-lg bg-green text-white disabled:opacity-50"
       >
         {submitting ? "제출 중..." : "리뷰 제출"}
       </button>
+      {!canSubmit && !submitted && (
+        <p className="text-[12px] text-grey-500 mt-2">
+          모든 카테고리 평가 선택, "오늘 배운 것"·"최종 정리" 작성 후 제출할 수 있습니다.
+        </p>
+      )}
       {submitted && (
         <span className="ml-3 text-[12.5px] font-semibold text-green">
           ✓ 제출되었습니다
@@ -200,18 +157,14 @@ export default function TeacherReviewPanel({
 }
 
 function Field({
-  label,
-  value,
-  onChange,
+  label, value, onChange, required,
 }: {
-  label: string;
-  value: string;
-  onChange: (value: string) => void;
+  label: string; value: string; onChange: (value: string) => void; required?: boolean;
 }) {
   return (
     <div className="mb-3">
       <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-1">
-        {label}
+        {label}{required && <span className="text-red"> *</span>}
       </div>
       <textarea
         value={value}
