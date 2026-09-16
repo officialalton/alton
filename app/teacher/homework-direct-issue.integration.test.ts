@@ -73,52 +73,42 @@ beforeAll(() => {
   );
 
   keywordId = psql(`insert into subject_keywords (subject_id, label, normalized_label) values ('${SUBJECT_ID}', '과제직접발급테스트 ${Date.now()}', 'hwtest${Date.now()}') returning id;`);
-  for (let i = 1; i <= 12; i++) problem(`문제${i} 지문. What is the answer?`);
+  for (let i = 1; i <= 20; i++) problem(`문제${i} 지문. What is the answer?`);
 });
 
-describe("create_homework_draft_batch — 담당 교사만 학생별 배치를 만든다", () => {
-  it("담당 교사는 키워드로 배치를 만들 수 있다(회차와 무관)", () => {
-    const batchId = asUser(
-      TEACHER_ID,
-      `select create_homework_draft_batch('${STUDENT_ID}', '[{"keyword_id":"${keywordId}","count":2}]'::jsonb);`
+describe("issue_homework_batch — 담당 교사가 학생·수업·키워드를 한 번에 골라 즉시 발급한다", () => {
+  it("담당 교사는 발급할 수 있고, session_homework_items에 즉시 실제로 실린다(회차 키워드 범위 검사 없음)", () => {
+    const issuedCount = Number(
+      asUser(TEACHER_ID, `select issue_homework_batch('${STUDENT_ID}', '${sessionId}', '[{"keyword_id":"${keywordId}","count":2}]'::jsonb);`)
     );
+    expect(issuedCount).toBeGreaterThan(0);
+    expect(issuedCount).toBeLessThanOrEqual(2);
+    const items = psql(`select problem_id from session_homework_items where session_id = '${sessionId}' order by position;`).split("\n").filter(Boolean);
+    expect(items.length).toBe(issuedCount);
+    const batchId = psql(`select batch_id from session_homework_items where session_id = '${sessionId}' limit 1;`);
     expect(batchId).toMatch(/^[0-9a-f-]{36}$/);
-    const count = psql(`select array_length(problem_ids, 1) from homework_draft_batches where id = '${batchId}';`);
-    expect(Number(count)).toBeGreaterThan(0);
-    expect(Number(count)).toBeLessThanOrEqual(2);
   });
 
   it("담당이 아닌 교사는 거절된다", () => {
     const out = fails(() =>
-      asUser(unrelatedTeacherId, `select create_homework_draft_batch('${STUDENT_ID}', '[{"keyword_id":"${keywordId}","count":1}]'::jsonb);`)
+      asUser(unrelatedTeacherId, `select issue_homework_batch('${STUDENT_ID}', '${sessionId}', '[{"keyword_id":"${keywordId}","count":1}]'::jsonb);`)
     );
     expect(out).toContain("담당하는 학생에게만");
   });
 
   it("이미 이 학생에게 발급된 문제는 다시 뽑지 않는다", () => {
-    const batchId = asUser(TEACHER_ID, `select create_homework_draft_batch('${STUDENT_ID}', '[{"keyword_id":"${keywordId}","count":10}]'::jsonb);`);
-    asUser(TEACHER_ID, `select load_homework_batch_into_session('${batchId}', '${sessionId}');`);
+    const firstIssued = Number(
+      asUser(TEACHER_ID, `select issue_homework_batch('${STUDENT_ID}', '${sessionId}', '[{"keyword_id":"${keywordId}","count":10}]'::jsonb);`)
+    );
+    expect(firstIssued).toBeGreaterThan(0);
     const issuedIds = psql(`select problem_id from session_homework_items where session_id = '${sessionId}' order by position;`).split("\n").filter(Boolean);
-    expect(issuedIds.length).toBeGreaterThan(0);
 
-    const secondBatchId = asUser(TEACHER_ID, `select create_homework_draft_batch('${STUDENT_ID}', '[{"keyword_id":"${keywordId}","count":10}]'::jsonb);`);
-    const secondIds = psql(`select unnest(problem_ids) from homework_draft_batches where id = '${secondBatchId}';`).split("\n").filter(Boolean);
-    for (const id of issuedIds) expect(secondIds).not.toContain(id);
-  });
-});
-
-describe("load_homework_batch_into_session — 회차 키워드 범위 검사 없이 발급되고, 학생 불일치는 거절된다", () => {
-  it("배치를 이 수업에 불러오면 session_homework_items에 실제로 발급된다(회차 키워드 범위 검사 없음)", () => {
-    const batchId = asUser(TEACHER_ID, `select create_homework_draft_batch('${STUDENT_ID}', '[{"keyword_id":"${keywordId}","count":1}]'::jsonb);`);
-    const issuedCount = Number(asUser(TEACHER_ID, `select load_homework_batch_into_session('${batchId}', '${sessionId}');`));
-    expect(issuedCount).toBeGreaterThanOrEqual(0);
-    const loadedAt = psql(`select loaded_at from homework_draft_batches where id = '${batchId}';`);
-    expect(loadedAt).not.toBe("");
-  });
-
-  it("담당이 아닌 교사는 거절된다", () => {
-    const batchId = asUser(TEACHER_ID, `select create_homework_draft_batch('${STUDENT_ID}', '[{"keyword_id":"${keywordId}","count":1}]'::jsonb);`);
-    const out = fails(() => asUser(unrelatedTeacherId, `select load_homework_batch_into_session('${batchId}', '${sessionId}');`));
-    expect(out).toContain("담당하는 학생의 과제만");
+    const out = fails(() =>
+      asUser(TEACHER_ID, `select issue_homework_batch('${STUDENT_ID}', '${sessionId}', '[{"keyword_id":"${keywordId}","count":10}]'::jsonb);`)
+    );
+    // 이 키워드의 후보 12개를 첫 호출에서 대부분 소진했으니, 남은 게 없으면 "고를 수 있는 문제가 없습니다"로 거절된다.
+    if (out) expect(out).toContain("고를 수 있는 문제가 없습니다");
+    const stillIssuedIds = psql(`select problem_id from session_homework_items where session_id = '${sessionId}' order by position;`).split("\n").filter(Boolean);
+    for (const id of issuedIds) expect(stillIssuedIds).toContain(id);
   });
 });

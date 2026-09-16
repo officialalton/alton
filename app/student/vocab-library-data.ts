@@ -12,6 +12,7 @@ export type MyVocabWord = {
   synonymWords: string[] | null;
   antonymWords: string[] | null;
   createdAt: string;
+  folderId: string | null;
 };
 
 export type LibraryBook = { id: string; volumeNo: number; title: string; wordCount: number };
@@ -29,7 +30,7 @@ export type LibraryWord = {
 export async function loadMyVocabWords(supabase: SupabaseClient, studentId: string): Promise<MyVocabWord[]> {
   const { data } = await supabase
     .from("vocab_words")
-    .select("id, word, definition, example, example2, similar_words, antonym_words, created_at")
+    .select("id, word, definition, example, example2, similar_words, antonym_words, created_at, folder_id")
     .eq("student_id", studentId)
     .order("created_at", { ascending: false });
   return (data ?? []).map((v) => ({
@@ -41,6 +42,7 @@ export async function loadMyVocabWords(supabase: SupabaseClient, studentId: stri
     synonymWords: v.similar_words as string[] | null,
     antonymWords: v.antonym_words as string[] | null,
     createdAt: v.created_at as string,
+    folderId: v.folder_id as string | null,
   }));
 }
 
@@ -118,105 +120,16 @@ export async function loadVocabQuizzes(supabase: SupabaseClient, studentId: stri
   }));
 }
 
-export type VocabReviewItem = {
-  id: string;
-  word: string;
-  definition: string | null;
-  example1: string | null;
-  example2: string | null;
-  synonymWords: string[] | null;
-  antonymWords: string[] | null;
-  addedAt: string;
-};
+export type VocabFolder = { id: string; name: string; isDefault: boolean };
 
-/** 학생별 오답 복습 큐(상시 누적 — 세션과 무관, 클리어될 때까지 유지). */
-export async function loadVocabReviewItems(supabase: SupabaseClient, studentId: string): Promise<VocabReviewItem[]> {
+/** 학생별 "내 단어장" 폴더 목록. 처음 호출이면 기본 폴더("오답 노트")를 만들어 함께 반환한다. */
+export async function loadVocabFolders(supabase: SupabaseClient, studentId: string): Promise<VocabFolder[]> {
+  await supabase.rpc("ensure_default_vocab_folder", { p_student_id: studentId });
   const { data } = await supabase
-    .from("vocab_review_items")
-    .select("id, word, definition, example1, example2, synonym_words, antonym_words, added_at")
+    .from("vocab_word_folders")
+    .select("id, name, is_default")
     .eq("student_id", studentId)
-    .is("cleared_at", null)
-    .order("added_at", { ascending: false });
-  return (data ?? []).map((r) => ({
-    id: r.id as string,
-    word: r.word as string,
-    definition: r.definition as string | null,
-    example1: r.example1 as string | null,
-    example2: r.example2 as string | null,
-    synonymWords: r.synonym_words as string[] | null,
-    antonymWords: r.antonym_words as string[] | null,
-    addedAt: r.added_at as string,
-  }));
-}
-
-export type SessionVocabWord = {
-  linkId: string;
-  word: string;
-  definition: string | null;
-  example1: string | null;
-  example2: string | null;
-  synonymWords: string[] | null;
-  antonymWords: string[] | null;
-  isCustom: boolean;
-};
-
-/** 세션 화면 전용 — 단어장 전체가 아니라 이 수업에서 교사가 연결(배정)했거나
- * 학생이 이 수업 중 지문에서 클릭 저장한 단어만 반환한다. */
-export async function loadSessionVocab(supabase: SupabaseClient, sessionId: string, studentId: string): Promise<SessionVocabWord[]> {
-  const { data: links } = await supabase
-    .from("vocab_session_links")
-    .select("id, library_word_id, custom_word_id")
-    .eq("session_id", sessionId)
-    .eq("student_id", studentId);
-
-  const libraryIds = (links ?? []).filter((l) => l.library_word_id).map((l) => l.library_word_id as string);
-  const linkedCustomIds = (links ?? []).filter((l) => l.custom_word_id).map((l) => l.custom_word_id as string);
-  const linkIdByWordId = new Map((links ?? []).map((l) => [(l.library_word_id ?? l.custom_word_id) as string, l.id as string]));
-
-  const result: SessionVocabWord[] = [];
-
-  if (libraryIds.length) {
-    const { data: libWords } = await supabase
-      .from("vocab_library_words")
-      .select("id, word, definition_ko, example1, example2, synonym_words, antonym_words")
-      .in("id", libraryIds);
-    for (const w of libWords ?? []) {
-      result.push({
-        linkId: linkIdByWordId.get(w.id as string) ?? (w.id as string),
-        word: w.word as string, definition: w.definition_ko as string | null,
-        example1: w.example1 as string | null, example2: w.example2 as string | null,
-        synonymWords: w.synonym_words as string[] | null, antonymWords: w.antonym_words as string[] | null,
-        isCustom: false,
-      });
-    }
-  }
-
-  // 이 수업 중 지문에서 클릭 저장한 단어(source_session_id) + 교사가 이 세션에 명시적으로 연결한 커스텀 단어.
-  const { data: sourcedWords } = await supabase
-    .from("vocab_words")
-    .select("id, word, definition, example, example2, similar_words, antonym_words")
-    .eq("student_id", studentId)
-    .eq("source_session_id", sessionId);
-  const customIds = new Set([...linkedCustomIds, ...((sourcedWords ?? []).map((w) => w.id as string))]);
-  let extraCustom: typeof sourcedWords = [];
-  const missingIds = linkedCustomIds.filter((id) => !(sourcedWords ?? []).some((w) => w.id === id));
-  if (missingIds.length) {
-    const { data } = await supabase
-      .from("vocab_words")
-      .select("id, word, definition, example, example2, similar_words, antonym_words")
-      .in("id", missingIds);
-    extraCustom = data ?? [];
-  }
-  for (const w of [...(sourcedWords ?? []), ...extraCustom]) {
-    if (!customIds.has(w.id as string)) continue;
-    result.push({
-      linkId: linkIdByWordId.get(w.id as string) ?? (w.id as string),
-      word: w.word as string, definition: w.definition as string | null,
-      example1: w.example as string | null, example2: w.example2 as string | null,
-      synonymWords: w.similar_words as string[] | null, antonymWords: w.antonym_words as string[] | null,
-      isCustom: true,
-    });
-  }
-
-  return result;
+    .order("is_default", { ascending: false })
+    .order("position", { ascending: true });
+  return (data ?? []).map((f) => ({ id: f.id as string, name: f.name as string, isDefault: f.is_default as boolean }));
 }

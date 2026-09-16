@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import VocabLibraryTab from "./VocabLibraryTab";
-import type { VocabQuiz, VocabReviewItem } from "./vocab-library-data";
+import type { VocabQuiz, VocabFolder } from "./vocab-library-data";
 
 const createVocabQuizAction = vi.fn();
 const submitVocabQuizAction = vi.fn();
@@ -10,46 +10,39 @@ vi.mock("./vocab-library-actions", () => ({
   addMyVocabWordAction: vi.fn(),
   updateMyVocabWordAction: vi.fn(),
   deleteMyVocabWordAction: vi.fn(),
+  createVocabFolderAction: vi.fn(),
+  setMyVocabWordFolderAction: vi.fn(),
+  toggleLibraryWordInMyVocabAction: vi.fn(),
   createVocabQuizAction: (...args: unknown[]) => createVocabQuizAction(...args),
   submitVocabQuizAction: (...args: unknown[]) => submitVocabQuizAction(...args),
 }));
 
-const reviewItems: VocabReviewItem[] = [
-  { id: "r1", word: "abate", definition: "줄어들다", example1: "The storm began to abate.", example2: null, synonymWords: null, antonymWords: null, addedAt: "2026-09-15T00:00:00Z" },
-  { id: "r2", word: "candid", definition: "솔직한", example1: "She gave a candid answer.", example2: null, synonymWords: null, antonymWords: null, addedAt: "2026-09-15T00:00:00Z" },
-  { id: "r3", word: "diligent", definition: "근면한", example1: null, example2: null, synonymWords: null, antonymWords: null, addedAt: "2026-09-15T00:00:00Z" },
-  { id: "r4", word: "eloquent", definition: "유창한", example1: null, example2: null, synonymWords: null, antonymWords: null, addedAt: "2026-09-15T00:00:00Z" },
-];
+const folders: VocabFolder[] = [{ id: "f1", name: "오답 노트", isDefault: true }];
 
-describe("VocabLibraryTab — 복습 대상·오답 흐름", () => {
-  it("복습 대상이 4개 미만이면 복습 시험 만들기가 비활성화된다", () => {
-    render(<VocabLibraryTab myWords={[]} books={[]} quizzes={[]} reviewItems={reviewItems.slice(0, 2)} />);
-    fireEvent.click(screen.getByText("시험"));
-    const btn = screen.getByText(/복습 시험 만들기/);
-    expect(btn).toBeDisabled();
-  });
-
-  it("복습 대상이 4개 이상이면 복습 시험을 만들 수 있고, reviewOnly로 요청한다", async () => {
+describe("VocabLibraryTab — 시험 만들기·채점 흐름", () => {
+  it("폴더를 선택해 시험을 만들면 folderIds로 요청한다", async () => {
     createVocabQuizAction.mockResolvedValueOnce({
       ok: true,
       value: {
         id: "quiz-1",
-        items: [{ word: "abate", definitionShown: "abate", options: ["줄어들다", "다른뜻1", "다른뜻2", "다른뜻3"], correctIndex: 0, example1: "ex1", example2: null }],
+        items: [{ word: "abate", definitionShown: "abate", options: ["diminish", "다른1", "다른2", "다른3"], correctIndex: 0, example1: "ex1", example2: null }],
       },
     });
-    render(<VocabLibraryTab myWords={[]} books={[]} quizzes={[]} reviewItems={reviewItems} />);
+    render(<VocabLibraryTab myWords={[]} books={[]} quizzes={[]} folders={folders} />);
     fireEvent.click(screen.getByText("시험"));
-    fireEvent.click(screen.getByText(/복습 시험 만들기/));
-    await waitFor(() => expect(createVocabQuizAction).toHaveBeenCalledWith(expect.objectContaining({ reviewOnly: true })));
+    fireEvent.click(screen.getByText("시험 만들기"));
+    fireEvent.click(screen.getByLabelText("오답 노트"));
+    fireEvent.click(screen.getByText("만들기"));
+    await waitFor(() => expect(createVocabQuizAction).toHaveBeenCalledWith(expect.objectContaining({ folderIds: ["f1"] })));
     expect(screen.getByText("abate")).toBeInTheDocument();
   });
 
-  it("시험 응시 후 오답이 있으면 결과 화면에 뜻·예문과 함께 보여준다", async () => {
+  it("시험 응시 중 클릭하면 즉시 정답/오답이 표시되고, 제출 후 결과 화면에 뜻·예문과 함께 보여준다", async () => {
     const quiz: VocabQuiz = {
       id: "quiz-2",
       status: "pending",
       wordCount: 1,
-      items: [{ word: "abate", definitionShown: "abate", options: ["줄어들다", "다른뜻1", "다른뜻2", "다른뜻3"], correctIndex: 0, example1: "The storm began to abate.", example2: null }],
+      items: [{ word: "abate", definitionShown: "abate", options: ["diminish", "다른1", "다른2", "다른3"], correctIndex: 0, example1: "The storm began to abate.", example2: null }],
       score: null,
       total: null,
       answers: null,
@@ -59,13 +52,15 @@ describe("VocabLibraryTab — 복습 대상·오답 흐름", () => {
       assignedByTeacher: false,
     };
     submitVocabQuizAction.mockResolvedValueOnce({ ok: true, value: { score: 0, total: 1 } });
-    render(<VocabLibraryTab myWords={[]} books={[]} quizzes={[quiz]} reviewItems={[]} />);
+    render(<VocabLibraryTab myWords={[]} books={[]} quizzes={[quiz]} folders={folders} />);
     fireEvent.click(screen.getByText("시험"));
     fireEvent.click(screen.getByText("응시하기"));
-    fireEvent.click(screen.getByText("다른뜻1"));
+    fireEvent.click(screen.getByText("다른1"));
+    expect(screen.getByText(/✗ 오답/)).toBeInTheDocument();
+    expect(screen.getByText(/✓ 정답/)).toBeInTheDocument();
     fireEvent.click(screen.getByText("제출"));
     await waitFor(() => expect(screen.getByText("결과: 0 / 1")).toBeInTheDocument());
     expect(screen.getByText(/The storm began to abate\./)).toBeInTheDocument();
-    expect(screen.getByText(/복습 대상에 추가/)).toBeInTheDocument();
+    expect(screen.getByText(/오답 노트/)).toBeInTheDocument();
   });
 });

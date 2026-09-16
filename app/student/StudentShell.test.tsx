@@ -81,7 +81,7 @@ const lessonsProps = {
   myVocabWords: [],
   vocabLibraryBooks: [],
   vocabQuizzes: [],
-  vocabReviewItems: [],
+  vocabFolders: [],
   credits: { balance: 0, guardianName: null, regularRemaining: 0, regularNearestExpiry: null, trialEntitlement: null },
   stats: { attendanceRate: null, satisfactionAvg: null, bySubject: [] },
   teacherList: [],

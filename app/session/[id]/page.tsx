@@ -18,7 +18,6 @@ import { loadHomeworkItems } from "./homework-data";
 import { loadNormalizedSession } from "./session-source-data";
 import { loadHomeworkProblems, loadPlannedProblems, loadSessionProblems } from "./session-problem-data";
 import { loadIssuedHomework } from "./homework-v3-data";
-import { loadHomeworkDraftBatches } from "@/app/teacher/homework-direct-data";
 import { loadSessionLessonContext } from "./session-context-data";
 import {
   loadComposition,
@@ -160,11 +159,6 @@ export default async function SessionPage({
           canPrepare ? loadIssuedHomework(supabase, session.id) : Promise.resolve([]),
         ])
       : [[], []];
-  // 2026-09-16 — 과제는 더 이상 회차 키워드 풀에 묶이지 않는다. 교사 포털에서 미리 만든
-  // 배치 중 최근 것을 이 수업에 불러오기만 한다(교사에게만).
-  const homeworkBatches =
-    session.source === "v3" && canPrepare ? await loadHomeworkDraftBatches(supabase, session.studentId) : [];
-
   return (
     <SessionShell
       sessionId={session.id}
@@ -197,7 +191,6 @@ export default async function SessionPage({
       homeworkProblems={homeworkProblems}
       homeworkPool={prep?.problems ?? []}
       homeworkIssued={homeworkIssued}
-      homeworkBatches={homeworkBatches}
     />
   );
 }

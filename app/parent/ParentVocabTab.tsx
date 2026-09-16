@@ -29,17 +29,22 @@ export default function ParentVocabTab({ childrenVocab }: { childrenVocab: Paren
         </div>
       )}
 
-      {current.reviewItems.length > 0 && (
-        <div className="border-[1.5px] border-red rounded-xl px-4 py-3.5 mb-5 bg-red-bg">
-          <p className="text-[13px] font-bold text-ink mb-1">복습 대상 단어 {current.reviewItems.length}개</p>
-          <div className="flex flex-wrap gap-1.5">
-            {current.reviewItems.slice(0, 15).map((r) => (
-              <span key={r.id} className="text-[11px] font-bold px-2 py-1 rounded-lg bg-white text-red border border-red">{r.word}</span>
-            ))}
-            {current.reviewItems.length > 15 && <span className="text-[11px] text-grey-500">외 {current.reviewItems.length - 15}개</span>}
+      {(() => {
+        const defaultFolder = current.folders.find((f) => f.isDefault);
+        const wrongWords = defaultFolder ? current.myWords.filter((w) => w.folderId === defaultFolder.id) : [];
+        if (wrongWords.length === 0) return null;
+        return (
+          <div className="border-[1.5px] border-red rounded-xl px-4 py-3.5 mb-5 bg-red-bg">
+            <p className="text-[13px] font-bold text-ink mb-1">오답 노트 {wrongWords.length}개</p>
+            <div className="flex flex-wrap gap-1.5">
+              {wrongWords.slice(0, 15).map((w) => (
+                <span key={w.id} className="text-[11px] font-bold px-2 py-1 rounded-lg bg-white text-red border border-red">{w.word}</span>
+              ))}
+              {wrongWords.length > 15 && <span className="text-[11px] text-grey-500">외 {wrongWords.length - 15}개</span>}
+            </div>
           </div>
-        </div>
-      )}
+        );
+      })()}
 
       <p className="text-[12px] font-bold text-grey-500 mb-2">내 단어장 ({current.myWords.length})</p>
       {current.myWords.length === 0 ? (

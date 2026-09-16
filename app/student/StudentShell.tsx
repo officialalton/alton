@@ -8,7 +8,7 @@ import MobileBottomNav from "@/app/components/MobileBottomNav";
 import HomeDashboard from "./HomeDashboard";
 import type { DashboardData } from "./dashboard-data";
 import VocabLibraryTab from "./VocabLibraryTab";
-import type { MyVocabWord, LibraryBook, VocabQuiz, VocabReviewItem } from "./vocab-library-data";
+import type { MyVocabWord, LibraryBook, VocabQuiz, VocabFolder } from "./vocab-library-data";
 import ProblemHistoryTab from "./ProblemHistoryTab";
 import type { ProblemHistoryEntry } from "./problem-history-data";
 import type { LessonItem } from "./lessons-data";
@@ -68,7 +68,7 @@ export default function StudentShell({
   myVocabWords,
   vocabLibraryBooks,
   vocabQuizzes,
-  vocabReviewItems,
+  vocabFolders,
   problemHistory,
   upcoming,
   past,
@@ -94,7 +94,7 @@ export default function StudentShell({
   myVocabWords: MyVocabWord[];
   vocabLibraryBooks: LibraryBook[];
   vocabQuizzes: VocabQuiz[];
-  vocabReviewItems: VocabReviewItem[];
+  vocabFolders: VocabFolder[];
   problemHistory: ProblemHistoryEntry[];
   upcoming: LessonItem[];
   past: LessonItem[];
@@ -250,7 +250,7 @@ export default function StudentShell({
               onReportTeacherIssue={reportTeacherIssue}
             />
           ) : activeTab === "vocab" ? (
-            <VocabLibraryTab myWords={myVocabWords} books={vocabLibraryBooks} quizzes={vocabQuizzes} reviewItems={vocabReviewItems} />
+            <VocabLibraryTab myWords={myVocabWords} books={vocabLibraryBooks} quizzes={vocabQuizzes} folders={vocabFolders} />
           ) : activeTab === "problemlog" ? (
             <ProblemHistoryTab entries={problemHistory} />
           ) : activeTab === "homework" ? (

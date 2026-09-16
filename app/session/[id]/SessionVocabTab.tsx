@@ -4,9 +4,10 @@ import { useState } from "react";
 import { removeVocabWord } from "./vocab-actions";
 import type { SessionVocabData } from "./vocab-data";
 import type { LibraryWord } from "@/app/student/vocab-library-data";
-import { assignLibraryWordsToStudentAction, searchLibraryWordsAction, submitVocabQuizAction } from "@/app/student/vocab-library-actions";
+import { assignLibraryWordsToStudentAction, searchLibraryWordsAction } from "@/app/student/vocab-library-actions";
 import { loadLibraryBookWordsAction } from "@/app/student/vocab-library-client-data";
 import VocabQuizIssueForm from "@/app/teacher/VocabQuizIssueForm";
+import { QuizRunner } from "@/app/student/VocabLibraryTab";
 
 /** 2026-09-15(제품 오너 정정) — 수업 화면 단어장 탭. 이 수업에 연결된 일부만 보여주는 게
  * 아니라 학생 단어장을 그대로 보여준다(따로 복제·저장하지 않고 그대로 참조). 교사는 여기서
@@ -43,7 +44,7 @@ export default function SessionVocabTab({
   if (active) {
     return (
       <div className="max-w-[640px] px-8 py-8">
-        <QuizRunnerInline
+        <QuizRunner
           quiz={active}
           onDone={(updated) => { setQuizzes((prev) => prev.map((q) => (q.id === updated.id ? updated : q))); setActive(null); }}
           onExit={() => setActive(null)}
@@ -83,7 +84,10 @@ export default function SessionVocabTab({
 
       {showQuizForm && (
         <div className="mb-5">
-          <VocabQuizIssueForm students={[{ id: studentId, name: studentName }]} books={data.books} sessionId={null} fixedStudentId={studentId} onIssued={() => window.location.reload()} />
+          <VocabQuizIssueForm
+            students={[{ id: studentId, name: studentName }]} books={data.books} folders={data.folders}
+            sessionId={null} fixedStudentId={studentId} onIssued={() => window.location.reload()}
+          />
         </div>
       )}
 
@@ -165,7 +169,7 @@ export default function SessionVocabTab({
   );
 }
 
-function LibraryAssign({ studentId, onAssigned }: { studentId: string; onAssigned: (words: { id: string; word: string; definition: string | null; example: string | null; example2: string | null; synonymWords: string[] | null; antonymWords: string[] | null; createdAt: string }[]) => void }) {
+function LibraryAssign({ studentId, onAssigned }: { studentId: string; onAssigned: (words: { id: string; word: string; definition: string | null; example: string | null; example2: string | null; synonymWords: string[] | null; antonymWords: string[] | null; createdAt: string; folderId: string | null }[]) => void }) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<Awaited<ReturnType<typeof searchLibraryWordsAction>>>([]);
   const [selected, setSelected] = useState<Set<string>>(new Set());
@@ -177,13 +181,13 @@ function LibraryAssign({ studentId, onAssigned }: { studentId: string; onAssigne
 
   async function assign() {
     setBusy(true);
-    const ok = await assignLibraryWordsToStudentAction(studentId, [...selected]);
+    const ok = await assignLibraryWordsToStudentAction(studentId, [...selected], null);
     setBusy(false);
     if (ok.ok) {
       const now = new Date().toISOString();
       onAssigned(
         results.filter((r) => selected.has(r.id)).map((r) => ({
-          id: r.id, word: r.word, definition: r.definitionKo, example: null, example2: null, synonymWords: null, antonymWords: null, createdAt: now,
+          id: r.id, word: r.word, definition: r.definitionKo, example: null, example2: null, synonymWords: null, antonymWords: null, createdAt: now, folderId: null,
         }))
       );
     }
@@ -219,50 +223,3 @@ function LibraryAssign({ studentId, onAssigned }: { studentId: string; onAssigne
   );
 }
 
-type SessionQuiz = SessionVocabData["quizzes"][number];
-
-function QuizRunnerInline({ quiz, onDone, onExit }: { quiz: SessionQuiz; onDone: (q: SessionQuiz) => void; onExit: () => void }) {
-  const [answers, setAnswers] = useState<(number | null)[]>(() => quiz.items.map(() => null));
-  const [i, setI] = useState(0);
-  const [submitting, setSubmitting] = useState(false);
-  const item = quiz.items[i];
-  const allAnswered = answers.every((a) => a !== null);
-
-  async function submit() {
-    setSubmitting(true);
-    const finalAnswers = answers.map((a) => a ?? -1);
-    const r = await submitVocabQuizAction(quiz.id, finalAnswers);
-    setSubmitting(false);
-    if (r.ok) onDone({ ...quiz, status: "completed", score: r.value.score, total: r.value.total, answers: finalAnswers });
-  }
-
-  if (!item) return null;
-  return (
-    <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-5">
-      <div className="flex items-center justify-between mb-4">
-        <span className="text-[12px] font-bold text-grey-500">{i + 1} / {quiz.items.length}</span>
-        <button onClick={onExit} className="text-[12px] text-grey-500">나가기</button>
-      </div>
-      <h3 className="text-[18px] font-extrabold text-ink mb-4">{item.definitionShown}</h3>
-      <div className="flex flex-col gap-2 mb-4">
-        {item.options.map((opt, idx) => (
-          <button
-            key={idx}
-            onClick={() => setAnswers((prev) => prev.map((a, j) => (j === i ? idx : a)))}
-            className={"text-left text-[13.5px] px-3.5 py-2.5 rounded-[10px] border-[1.5px] " + (answers[i] === idx ? "border-ink bg-grey-100" : "border-grey-200")}
-          >
-            {opt}
-          </button>
-        ))}
-      </div>
-      <div className="flex justify-between">
-        <button disabled={i === 0} onClick={() => setI((v) => v - 1)} className="text-[12px] font-semibold text-grey-500 disabled:opacity-30">이전</button>
-        {i < quiz.items.length - 1 ? (
-          <button onClick={() => setI((v) => v + 1)} className="text-[12px] font-bold text-ink">다음</button>
-        ) : (
-          <button disabled={!allAnswered || submitting} onClick={() => void submit()} className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-green text-white disabled:opacity-50">제출</button>
-        )}
-      </div>
-    </div>
-  );
-}

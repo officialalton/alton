@@ -23,7 +23,6 @@ import type { SessionVocabData } from "./vocab-data";
 import HomeworkTab from "./HomeworkTab";
 import type { HomeworkItem } from "./homework-data";
 import type { IssuedHomeworkItem } from "./homework-v3-data";
-import type { HomeworkDraftBatch } from "@/app/teacher/homework-direct-data";
 import type { StrokePayload } from "./annotation-events-types";
 import { finalizeMyLessonSession } from "@/app/teacher/lesson-schedule-actions";
 
@@ -91,7 +90,6 @@ export default function SessionShell({
   homeworkProblems = [],
   homeworkPool = [],
   homeworkIssued = [],
-  homeworkBatches = [],
 }: {
   sessionId: string;
   studentId: string;
@@ -151,7 +149,6 @@ export default function SessionShell({
   homeworkProblems?: SessionProblem[];
   homeworkPool?: KeywordProblem[];
   homeworkIssued?: IssuedHomeworkItem[];
-  homeworkBatches?: HomeworkDraftBatch[];
 }) {
   const router = useRouter();
   const isTeacher = viewerRole === "teacher";
@@ -513,11 +510,14 @@ export default function SessionShell({
           viewerUserId={currentUserId}
         />
       ) : activeTab === "vocab" ? (
+        // writesEnabled 는 레거시/v3 콘텐츠 FK 차이를 가리는 플래그(자료·필기 전용)라 단어장에는
+        // 안 맞는다 — v3 세션에서까지 꺼지면 교사가 단어 배정·즉석 시험을 낼 수 없다. 단어장 쓰기는
+        // 항상 서버(RLS/teaches_student)가 실제로 막으므로 여기서는 역할만 넘긴다.
         <SessionVocabTab
           studentId={studentId}
           studentName={studentName}
           isTeacher={isTeacher}
-          canManage={writesEnabled}
+          canManage={viewerRole === "teacher" || viewerRole === "admin" || viewerRole === "student"}
           data={sessionVocab}
         />
       ) : activeTab === "homework" ? (
@@ -534,7 +534,6 @@ export default function SessionShell({
           homeworkProblems={homeworkProblems}
           pool={homeworkPool}
           issued={homeworkIssued}
-          batches={homeworkBatches}
         />
       ) : activeTab === "prep" ? (
         prep ? (

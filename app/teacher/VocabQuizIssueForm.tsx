@@ -5,21 +5,26 @@ import type { LibraryBook } from "@/app/student/vocab-library-data";
 import { assignVocabQuizAction } from "@/app/student/vocab-library-actions";
 
 export type VocabStudentOption = { id: string; name: string };
+export type VocabFolderOption = { id: string; name: string };
 
 /** 교사가 학생(들)에게 즉석으로 단어 시험을 발급하는 공통 폼 — 교사 포털(다중 학생 선택)과
- * 수업 화면(그 세션의 학생 하나로 고정) 양쪽에서 쓴다. */
+ * 수업 화면(그 세션의 학생 하나로 고정, 그 학생의 "내 단어장" 폴더도 범위로 고를 수 있음) 양쪽에서 쓴다. */
 export default function VocabQuizIssueForm({
-  students, books, sessionId = null, fixedStudentId, onIssued,
+  students, books, folders = [], sessionId = null, fixedStudentId, onIssued,
 }: {
   students: VocabStudentOption[];
   books: LibraryBook[];
+  /** 이 학생의 "내 단어장" 폴더 — fixedStudentId(수업 화면)로 학생이 하나로 고정될 때만 의미가 있다. */
+  folders?: VocabFolderOption[];
   sessionId?: string | null;
   /** 수업 화면에서 호출할 때 — 학생 선택 UI 없이 이 학생으로 고정. */
   fixedStudentId?: string;
   onIssued?: () => void;
 }) {
   const [selectedStudents, setSelectedStudents] = useState<Set<string>>(new Set(fixedStudentId ? [fixedStudentId] : []));
+  const [customWords, setCustomWords] = useState(false);
   const [bookIds, setBookIds] = useState<Set<string>>(new Set());
+  const [folderIds, setFolderIds] = useState<Set<string>>(new Set());
   const [difficultyMin, setDifficultyMin] = useState(1);
   const [difficultyMax, setDifficultyMax] = useState(5);
   const [count, setCount] = useState(10);
@@ -41,7 +46,7 @@ export default function VocabQuizIssueForm({
     const outcomes = await Promise.all(
       targets.map(async (studentId) => {
         const r = await assignVocabQuizAction({
-          sessionId, studentId, customWords: false, bookIds: [...bookIds], count,
+          sessionId, studentId, customWords, bookIds: [...bookIds], folderIds: [...folderIds], count,
           difficultyMin, difficultyMax, dueAt: dueAt ? new Date(dueAt).toISOString() : null,
         });
         return { studentId, ok: r.ok, error: r.ok ? undefined : r.error };
@@ -53,11 +58,11 @@ export default function VocabQuizIssueForm({
   }
 
   const nameOf = (id: string) => students.find((s) => s.id === id)?.name ?? id;
-  const canSubmit = (fixedStudentId ? true : selectedStudents.size > 0) && bookIds.size > 0 && count > 0;
+  const canSubmit = (fixedStudentId ? true : selectedStudents.size > 0) && (bookIds.size > 0 || folderIds.size > 0 || customWords) && count > 0;
 
   return (
     <div className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3.5">
-      <p className="text-[13px] font-bold text-ink mb-3">즉석 단어 시험 발급</p>
+      <p className="text-[13px] font-bold text-ink mb-3">즉석 단어 시험 발급(선택지는 영어입니다)</p>
 
       {!fixedStudentId && (
         <div className="mb-3">
@@ -73,8 +78,24 @@ export default function VocabQuizIssueForm({
         </div>
       )}
 
+      {folders.length > 0 && (
+        <div className="mb-3">
+          <p className="text-[12px] font-bold text-grey-500 mb-1.5">학생의 “내 단어장” 폴더</p>
+          <div className="flex flex-wrap gap-2">
+            <label className="text-[12.5px] flex items-center gap-1.5">
+              <input type="checkbox" checked={customWords} onChange={() => setCustomWords((v) => !v)} /> 내 단어장 전체
+            </label>
+            {folders.map((f) => (
+              <label key={f.id} className="text-[12.5px] flex items-center gap-1.5">
+                <input type="checkbox" checked={folderIds.has(f.id)} onChange={() => toggle(folderIds, setFolderIds, f.id)} /> {f.name}
+              </label>
+            ))}
+          </div>
+        </div>
+      )}
+
       <div className="mb-3">
-        <p className="text-[12px] font-bold text-grey-500 mb-1.5">단어 범위(권)</p>
+        <p className="text-[12px] font-bold text-grey-500 mb-1.5">ALTON SAT 공용 단어장(권)</p>
         <div className="flex flex-wrap gap-2">
           {books.map((b) => (
             <label key={b.id} className="text-[12.5px] flex items-center gap-1.5">
@@ -84,17 +105,21 @@ export default function VocabQuizIssueForm({
         </div>
       </div>
 
+      {bookIds.size > 0 && (
+        <div className="flex flex-wrap gap-4 mb-3">
+          <label className="text-[12.5px] flex items-center gap-2">
+            난이도
+            <select value={difficultyMin} onChange={(e) => setDifficultyMin(Number(e.target.value))} className="border-[1.5px] border-grey-200 rounded-lg px-1.5 py-1">
+              {[1, 2, 3, 4, 5].map((d) => <option key={d} value={d}>{d}</option>)}
+            </select>
+            ~
+            <select value={difficultyMax} onChange={(e) => setDifficultyMax(Number(e.target.value))} className="border-[1.5px] border-grey-200 rounded-lg px-1.5 py-1">
+              {[1, 2, 3, 4, 5].map((d) => <option key={d} value={d}>{d}</option>)}
+            </select>
+          </label>
+        </div>
+      )}
       <div className="flex flex-wrap gap-4 mb-3">
-        <label className="text-[12.5px] flex items-center gap-2">
-          난이도
-          <select value={difficultyMin} onChange={(e) => setDifficultyMin(Number(e.target.value))} className="border-[1.5px] border-grey-200 rounded-lg px-1.5 py-1">
-            {[1, 2, 3, 4, 5].map((d) => <option key={d} value={d}>{d}</option>)}
-          </select>
-          ~
-          <select value={difficultyMax} onChange={(e) => setDifficultyMax(Number(e.target.value))} className="border-[1.5px] border-grey-200 rounded-lg px-1.5 py-1">
-            {[1, 2, 3, 4, 5].map((d) => <option key={d} value={d}>{d}</option>)}
-          </select>
-        </label>
         <label className="text-[12.5px] flex items-center gap-2">
           문항 수
           <input type="number" min={1} max={50} value={count} onChange={(e) => setCount(Number(e.target.value) || 10)} className="w-16 border-[1.5px] border-grey-200 rounded-lg px-2 py-1" />

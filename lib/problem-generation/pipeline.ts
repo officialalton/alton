@@ -38,7 +38,12 @@ export type Failure = {
   resolved: boolean;
   snippet: string;
 };
-type GateOutcome = { kind: "accepted"; quality: QualityRecord } | { kind: "held"; quality: QualityRecord; reasons: string[] } | { kind: "rejected" };
+// 2026-09-16(코드 검토 A) — accepted/held 는 검사한 최종 문항 객체를 함께 들고 다닌다.
+// 재생성이 일어나면 그 최종본이 저장 후보가 되어야 하고, 호출부가 원본 g를 다시 쓰면 안 된다.
+type GateOutcome =
+  | { kind: "accepted"; quality: QualityRecord; problem: GeneratedProblem }
+  | { kind: "held"; quality: QualityRecord; reasons: string[]; problem: GeneratedProblem }
+  | { kind: "rejected" };
 export type PipelineResult = {
   accepted: Accepted[];
   held: Held[];
@@ -112,6 +117,9 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
   const countCall = () => { stats.modelCalls += 1; };
   const skillCode = params.skillCode ?? null;
   const label = skillCode ? skillLabel(skillCode) ?? params.skillType : params.skillType;
+  // 2026-09-16 — 이번 라운드 변경(정답 자동 변경 금지, 독립 검사 실행 실패 시 통과 금지)은 Math 한정이다.
+  // R&W는 기존 승인된 동작을 그대로 유지한다.
+  const isMathSystem = (params.examSystem ?? "").startsWith("sat_math");
 
   // 어려움은 문항당 응답이 길다(design·distractor_rationales 포함) — 한 호출에 너무 많이 요청하면 토큰 예산을 넘겨
   // 도구 호출이 잘리고 배열이 통째로 비어 돌아온다(2026-09-15 재확인: count=10 요청 시 재현). 호출당 개수를 제한하고
@@ -248,13 +256,24 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
         // 2026-09-15 제품 오너 — 해설이 선택지 중 어느 것도 뒷받침하지 못하면(정답이 선택지에 아예 없을
         // 수 있다는 뜻) 관리자에게 넘기지 않는다 — 구조적 실패로 전체 재생성한다.
         if (!resolved.ok) return fail("contract", "정답-해설 대조: 해설이 어느 선택지도 명확히 뒷받침하지 않습니다(정답이 선택지에 없을 수 있음).");
-        if (resolved.confidence === "high" && resolved.concludedIndex !== g.correctIndex) {
-          stats.answerExplanationFixes += 1;
-          usedCorrection = true;
-          g.correctIndex = resolved.concludedIndex;
-          g.explanation = resolved.cleanExplanation;
-          contract = checkQualityContract(contractInputOf());
-          if (!contract.ok) return fail("contract", `정답을 해설에 맞춰 고친 뒤에도 계약 실패: ${contract.issues.map((i) => i.message).slice(0, 2).join(" / ")}`);
+        if (resolved.concludedIndex !== g.correctIndex) {
+          // 2026-09-16(코드 검토 C, Math 한정) — 해설이 추론한 답을 따라 정답 키를 자동으로 바꾸지 않는다.
+          // Math는 정답이 계산으로 결정돼야 하므로, 해설과 지정 정답이 어긋나면 어느 쪽이 맞는지 이 자리에서
+          // 판단하지 않고 구조적 실패로 처리해 전체를 다시 만든다(R&W는 기존 동작 그대로 유지).
+          if (isMathSystem) {
+            return fail(
+              "contract",
+              `정답-해설 불일치: 해설은 ${String.fromCharCode(65 + resolved.concludedIndex)}를 뒷받침하지만 지정 정답은 ${String.fromCharCode(65 + g.correctIndex)}입니다(Math는 정답을 자동으로 바꾸지 않습니다).`
+            );
+          }
+          if (resolved.confidence === "high") {
+            stats.answerExplanationFixes += 1;
+            usedCorrection = true;
+            g.correctIndex = resolved.concludedIndex;
+            g.explanation = resolved.cleanExplanation;
+            contract = checkQualityContract(contractInputOf());
+            if (!contract.ok) return fail("contract", `정답을 해설에 맞춰 고친 뒤에도 계약 실패: ${contract.issues.map((i) => i.message).slice(0, 2).join(" / ")}`);
+          }
         }
       } catch (e) {
         console.error("[pipeline] 정답-해설 대조 오류:", e instanceof Error ? e.message : e);
@@ -284,6 +303,12 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
         } catch (e) {
           console.error("[pipeline] 2차 독립 검사 오류:", e instanceof Error ? e.message : e);
         }
+      }
+      // 2026-09-16(코드 검토 B, Math 한정) — 독립 검사가 예외로 실행되지 못하면(판정 불가) 그 사실을
+      // needsReview 플래그로만 남기고 통과시키던 경로를 막는다. 필수 검사가 안 돌았으면 통과가 아니다.
+      // R&W는 기존 승인된 동작(플래그만 남기고 통과)을 그대로 유지한다.
+      if (isMathSystem && !review) {
+        return fail("review", "독립 검사를 실행하지 못했습니다(판정 불가 — Math는 필수 검사이므로 통과시키지 않습니다).");
       }
       if (review) {
         let issues = classifyReviewIssues(review, params.difficulty, params.format);
@@ -324,6 +349,13 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
             seen.add(key);
             g.options![f.index] = f.text;
             stats.distractorRepairsResolved += 1;
+          }
+          // 2026-09-16(코드 검토 G) — 오답 자리를 바꿨으면 그 변경이 반영된 최종 객체 전체에 값싼 결정적
+          // 검사(계약)를 다시 돌린다. 독립 검사 재실행만으로는 렌더링·수식·선택지 형식 같은 계약 위반을
+          // 놓칠 수 있다. Math는 실패 시 구조적으로 처리해 전체를 다시 만든다(R&W는 대기함 판단으로 이어감).
+          contract = checkQualityContract(contractInputOf());
+          if (!contract.ok) {
+            if (isMathSystem) return fail("contract", `오답 수정 후 계약 실패: ${contract.issues.map((i) => i.message).slice(0, 2).join(" / ")}`);
           }
           countCall();
           const reReview = await runReview();
@@ -368,20 +400,22 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
       calibrated: false,
       reviewedAt: new Date().toISOString(),
     };
-    if (heldReasons) return { kind: "held", quality, reasons: heldReasons };
+    if (heldReasons) return { kind: "held", quality, reasons: heldReasons, problem: g };
     if (!usedCorrection) stats.firstPassCount += 1;
-    return { kind: "accepted", quality };
+    return { kind: "accepted", quality, problem: g };
   };
 
   // 어려움은 오답·정답 기준이 엄격해 통과율이 낮다 — 요청보다 넉넉히 만들어 통과분만 채택한다(2026-09-15 제품 오너: "생성 수가 적으면 안 된다").
   const initialCount = params.difficulty === "hard" ? Math.min(10, requested + Math.min(2, requested)) : requested;
-  const record = (g: GeneratedProblem, outcome: GateOutcome) => {
+  const record = (outcome: GateOutcome) => {
     stats.candidatesEvaluated += 1;
-    if (outcome.kind === "accepted") { accepted.push({ problem: g, quality: outcome.quality }); stats.accepted += 1; }
+    // 2026-09-16(코드 검토 A) — outcome.problem 은 재생성·부분 수정을 거친 뒤 실제로 검사한 최종 객체다.
+    // 원본 후보(g)를 다시 쓰면 "검사한 문항과 저장되는 문항이 다를 수 있다"는 결함이 재발한다.
+    if (outcome.kind === "accepted") { accepted.push({ problem: outcome.problem, quality: outcome.quality }); stats.accepted += 1; }
     else if (outcome.kind === "held") {
       // 보강 대기는 한 번의 요청에서 요청 수를 넘길 수 없다(2026-09-15: 목표는 대기함이 요청 수의 10% 이하).
       if (held.length >= requested) { stats.heldOverflowDiscarded += 1; return; }
-      held.push({ problem: g, quality: outcome.quality, reasons: outcome.reasons }); stats.held += 1;
+      held.push({ problem: outcome.problem, quality: outcome.quality, reasons: outcome.reasons }); stats.held += 1;
     }
   };
 
@@ -443,18 +477,18 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
 
   if (isRiskyMath) {
     const outcomes1 = await mapWithConcurrency(Array.from({ length: initialCount }), GATE_CONCURRENCY, attemptStagedOne);
-    for (const o of outcomes1) if (o) record(o.problem, o.outcome);
+    for (const o of outcomes1) if (o) record(o.outcome);
     for (let round = 0; stats.accepted < requested && round < 2; round += 1) {
       const refillCount = Math.min(10, requested - stats.accepted + 1);
       const outcomes2 = await mapWithConcurrency(Array.from({ length: refillCount }), GATE_CONCURRENCY, attemptStagedOne);
-      for (const o of outcomes2) if (o) record(o.problem, o.outcome);
+      for (const o of outcomes2) if (o) record(o.outcome);
       stats.refilled += refillCount;
     }
   } else {
     const generated = await generate(initialCount);
     stats.generated += generated.length;
     const initialOutcomes = await mapWithConcurrency(generated, GATE_CONCURRENCY, (g) => gate(g, 0));
-    generated.forEach((g, i) => record(g, initialOutcomes[i]));
+    initialOutcomes.forEach((outcome) => record(outcome));
 
     // 부족하면 최대 두 번 더 채운다(각 청크가 개별적으로 빈 응답을 견디므로 재시도가 안전하다). 라운드 안에서는 병렬 처리.
     for (let round = 0; stats.accepted < requested && round < 2; round += 1) {
@@ -463,7 +497,7 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
       stats.generated += refill.length;
       stats.refilled += refill.length;
       const outcomes = await mapWithConcurrency(refill, GATE_CONCURRENCY, (g) => gate(g, 0));
-      refill.forEach((g, i) => record(g, outcomes[i]));
+      outcomes.forEach((outcome) => record(outcome));
     }
   }
   // 오버샘플링·병렬 처리로 요청보다 많이 통과할 수 있다 — 초과분은 잘라내되(요청 수만 채택), 후보 수엔 그대로 반영한다.

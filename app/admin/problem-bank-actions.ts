@@ -405,10 +405,22 @@ export async function createDraftVersionAction(params: {
       if (!resolved.ok) {
         return { ok: false, error: "정답-해설이 서로 맞지 않습니다 — 해설이 어느 선택지도 명확히 뒷받침하지 않습니다. 계산이나 선택지를 다시 확인한 뒤 저장하세요." };
       }
-      if (resolved.confidence === "high" && resolved.concludedIndex !== correctIndex) {
-        correctIndex = resolved.concludedIndex;
-        explanation = resolved.cleanExplanation;
-        answerFixed = true;
+      const isMathSystem = ((problemRow?.exam_system as string | null) ?? "").startsWith("sat_math");
+      if (resolved.concludedIndex !== correctIndex) {
+        // 2026-09-16(코드 검토 C, Math 한정) — 해설이 추론한 답으로 정답 키를 조용히 바꾸지 않는다. Math는
+        // 정답이 계산으로 결정돼야 하므로 불일치 자체를 저장 거부 사유로 삼는다(직접 작성 편집 기능은 유지 —
+        // 관리자가 정답이나 해설을 다시 고쳐 저장하면 된다). R&W는 기존 승인된 자동 반영 동작을 유지한다.
+        if (isMathSystem) {
+          return {
+            ok: false,
+            error: `정답-해설이 서로 맞지 않습니다 — 해설은 ${String.fromCharCode(65 + resolved.concludedIndex)}를 뒷받침하지만 지정 정답은 ${String.fromCharCode(65 + correctIndex)}입니다. Math는 정답을 자동으로 바꾸지 않으니 계산을 다시 확인해 정답 또는 해설을 고친 뒤 저장하세요.`,
+          };
+        }
+        if (resolved.confidence === "high") {
+          correctIndex = resolved.concludedIndex;
+          explanation = resolved.cleanExplanation;
+          answerFixed = true;
+        }
       }
     } catch (e) {
       console.error("[problem-bank] 저장 시 정답-해설 대조 오류:", e instanceof Error ? e.message : e);

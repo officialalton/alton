@@ -107,39 +107,38 @@ describe("assign_vocab_quiz — teaches_student() 로만 권한 확인, due_at �
   });
 });
 
-describe("assign_library_words_to_student — 공용 단어를 학생 개인 단어장에 배정 복사", () => {
-  it("담당 교사가 배정하면 학생 vocab_words에 assigned_by와 함께 들어가고, 같은 단어 재배정은 중복되지 않는다", () => {
-    asUser(TEACHER_ID, `select assign_library_words_to_student('${STUDENT_ID}', array['${libraryWordId2}']::uuid[]);`);
-    asUser(TEACHER_ID, `select assign_library_words_to_student('${STUDENT_ID}', array['${libraryWordId2}']::uuid[]);`);
+describe("assign_library_words_to_student — 공용 단어를 학생 개인 단어장에 배정 복사(폴더 지정)", () => {
+  it("담당 교사가 배정하면 학생 vocab_words에 assigned_by·folder_id와 함께 들어가고, 같은 단어 재배정은 폴더만 옮긴다", () => {
+    const folderId = asUser(STUDENT_ID, `select ensure_default_vocab_folder('${STUDENT_ID}');`);
+    asUser(TEACHER_ID, `select assign_library_words_to_student('${STUDENT_ID}', array['${libraryWordId2}']::uuid[], '${folderId}');`);
+    asUser(TEACHER_ID, `select assign_library_words_to_student('${STUDENT_ID}', array['${libraryWordId2}']::uuid[], null);`);
     const word = psql(`select word from vocab_library_words where id = '${libraryWordId2}';`);
     const count = psql(`select count(*) from vocab_words where student_id = '${STUDENT_ID}' and word = '${word}';`);
     expect(count).toBe("1");
     const assignedBy = psql(`select assigned_by from vocab_words where student_id = '${STUDENT_ID}' and word = '${word}';`);
     expect(assignedBy).toBe(TEACHER_ID);
+    const folderAfter = psql(`select coalesce(folder_id::text, '') from vocab_words where student_id = '${STUDENT_ID}' and word = '${word}';`);
+    expect(folderAfter).toBe("");
   });
 
   it("담당이 아닌 교사는 거절된다", () => {
-    const out = fails(() => asUser(unrelatedTeacherId, `select assign_library_words_to_student('${STUDENT_ID}', array['${libraryWordId}']::uuid[]);`));
+    const out = fails(() => asUser(unrelatedTeacherId, `select assign_library_words_to_student('${STUDENT_ID}', array['${libraryWordId}']::uuid[], null);`));
     expect(out).toContain("담당하는 학생에게만");
   });
 });
 
-describe("vocab_review_items — 열린 오답 항목은 학생·단어당 하나만 유지된다", () => {
-  it("같은 단어를 다시 틀려도 열린 행이 하나로 유지되고(upsert), 클리어 후 새로 틀리면 새 열린 행이 생긴다", () => {
-    const word = `reviewtest_${Date.now()}`;
-    asUser(STUDENT_ID, `insert into vocab_review_items (student_id, word, definition) values ('${STUDENT_ID}', '${word}', '뜻1') on conflict (student_id, word) where cleared_at is null do update set definition = excluded.definition;`);
-    asUser(STUDENT_ID, `insert into vocab_review_items (student_id, word, definition) values ('${STUDENT_ID}', '${word}', '뜻2') on conflict (student_id, word) where cleared_at is null do update set definition = excluded.definition;`);
-    const openCount = psql(`select count(*) from vocab_review_items where student_id = '${STUDENT_ID}' and word = '${word}' and cleared_at is null;`);
-    expect(openCount).toBe("1");
-    const def = psql(`select definition from vocab_review_items where student_id = '${STUDENT_ID}' and word = '${word}' and cleared_at is null;`);
-    expect(def).toBe("뜻2");
+describe("ensure_default_vocab_folder — 학생·담당 교사만 부를 수 있고, 멱등이다", () => {
+  it("두 번 불러도 같은 '오답 노트' 폴더 id를 돌려준다", () => {
+    const first = asUser(STUDENT_ID, `select ensure_default_vocab_folder('${STUDENT_ID}');`);
+    const second = asUser(STUDENT_ID, `select ensure_default_vocab_folder('${STUDENT_ID}');`);
+    expect(second).toBe(first);
+    const name = psql(`select name from vocab_word_folders where id = '${first}';`);
+    expect(name).toBe("오답 노트");
+  });
 
-    asUser(STUDENT_ID, `update vocab_review_items set cleared_at = now() where student_id = '${STUDENT_ID}' and word = '${word}' and cleared_at is null;`);
-    asUser(STUDENT_ID, `insert into vocab_review_items (student_id, word, definition) values ('${STUDENT_ID}', '${word}', '뜻3') on conflict (student_id, word) where cleared_at is null do update set definition = excluded.definition;`);
-    const totalRows = psql(`select count(*) from vocab_review_items where student_id = '${STUDENT_ID}' and word = '${word}';`);
-    expect(totalRows).toBe("2");
-    const openAgain = psql(`select count(*) from vocab_review_items where student_id = '${STUDENT_ID}' and word = '${word}' and cleared_at is null;`);
-    expect(openAgain).toBe("1");
+  it("담당이 아닌 교사는 거절된다", () => {
+    const out = fails(() => asUser(unrelatedTeacherId, `select ensure_default_vocab_folder('${STUDENT_ID}');`));
+    expect(out).toContain("본인 또는 담당 학생만");
   });
 });
 
