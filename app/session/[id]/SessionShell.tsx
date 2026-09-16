@@ -88,6 +88,7 @@ export default function SessionShell({
   lessonContext = { unitTitle: null, goal: null, supplementTitles: [], primaryUnitId: null },
   currentUserId,
   homeworkBatches = [],
+  smartNotesUrl = null,
 }: {
   sessionId: string;
   studentId: string;
@@ -145,6 +146,8 @@ export default function SessionShell({
   currentUserId: string;
   // 2026-09-14 과제 v3 통일 — 과제 문제(수업 문제와 같은 패널), 교사 발급 풀·발급 목록.
   homeworkBatches?: HomeworkBatch[];
+  /** 2026-09-16 — 정규 수업 Smart Notes 회의록 열람 링크(학생·보호자 view-only). 없으면 표시 안 함. */
+  smartNotesUrl?: string | null;
 }) {
   const router = useRouter();
   const isTeacher = viewerRole === "teacher";
@@ -315,6 +318,16 @@ export default function SessionShell({
             >
               💡 티칭 팁 {tipsVisible ? "숨기기" : "보기"}
             </button>
+          )}
+          {smartNotesUrl && (viewerRole === "student" || viewerRole === "parent") && (
+            <a
+              href={smartNotesUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[12px] font-semibold text-grey-500 whitespace-nowrap"
+            >
+              📄 미팅록 보기
+            </a>
           )}
           <span className="text-[12px] font-bold px-3.5 py-1.5 rounded-full bg-ink text-white whitespace-nowrap">
             {VIEWER_LABEL[viewerRole]}
@@ -519,6 +532,7 @@ export default function SessionShell({
       ) : activeTab === "homework" ? (
         <HomeworkTab
           initialItems={homeworkList}
+          studentId={studentId}
           viewerRole={sessionSource === "v3" ? viewerRole : contentViewerRole}
           realViewerRole={viewerRole}
           homeworkBatches={homeworkBatches}

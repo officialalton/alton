@@ -18,6 +18,7 @@ import { loadHomeworkItems } from "./homework-data";
 import { loadNormalizedSession } from "./session-source-data";
 import { loadPlannedProblems, loadSessionProblems } from "./session-problem-data";
 import { loadStudentHomeworkBatches, loadTeacherHomeworkBatchesForStudent } from "@/lib/homework-batch-data";
+import { loadSmartNotesViewUrl } from "@/lib/smart-notes-data";
 import { loadSessionLessonContext } from "./session-context-data";
 import {
   loadComposition,
@@ -153,6 +154,11 @@ export default async function SessionPage({
     profile?.role === "teacher"
       ? await loadTeacherHomeworkBatchesForStudent(supabase, user.id, session.studentId)
       : await loadStudentHomeworkBatches(supabase, session.studentId);
+
+  // 2026-09-16(제품 오너 정정) — 정규 수업(v3)에 한해 학생·보호자에게 Smart Notes 회의록
+  // 열람 링크를 보여준다(첫 상담은 대상 아님, RLS가 v3 sessions에 한정해 접근을 걸러준다).
+  const smartNotesUrl = session.source === "v3" ? await loadSmartNotesViewUrl(supabase, session.id) : null;
+
   return (
     <SessionShell
       sessionId={session.id}
@@ -183,6 +189,7 @@ export default async function SessionPage({
       materialNotice={materialNotice}
       currentUserId={user.id}
       homeworkBatches={homeworkBatches}
+      smartNotesUrl={smartNotesUrl}
     />
   );
 }

@@ -1,11 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { HomeworkKeywordOption } from "./homework-direct-data";
-import { loadStudentHomeworkCreatePanelAction, loadStudentHomeworkBatchesAction } from "./homework-direct-client-data";
-import { issueHomeworkBatchAction } from "@/lib/homework-batch-actions";
+import { loadStudentHomeworkBatchesAction } from "./homework-direct-client-data";
 import type { HomeworkBatch } from "@/lib/homework-batch-data";
 import HomeworkBatchPanel from "@/app/components/HomeworkBatchPanel";
+import HomeworkIssueForm from "@/app/components/HomeworkIssueForm";
 
 export type HomeworkStudentOption = { id: string; name: string };
 
@@ -20,41 +19,14 @@ export default function HomeworkAssignTab({
 }) {
   const [subtab, setSubtab] = useState<"create" | "history">("create");
   const [studentId, setStudentId] = useState(initialStudentId ?? students[0]?.id ?? "");
-  const [keywords, setKeywords] = useState<HomeworkKeywordOption[]>([]);
   const [batches, setBatches] = useState<HomeworkBatch[]>([]);
   const [loading, setLoading] = useState(false);
-  const [counts, setCounts] = useState<Record<string, string>>({});
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [notice, setNotice] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!studentId) return;
+    if (!studentId || subtab !== "history") return;
     setLoading(true);
-    setCounts({});
-    setNotice(null);
-    if (subtab === "create") {
-      loadStudentHomeworkCreatePanelAction(studentId).then((panel) => setKeywords(panel.keywords)).finally(() => setLoading(false));
-    } else {
-      loadStudentHomeworkBatchesAction(studentId).then(setBatches).finally(() => setLoading(false));
-    }
+    loadStudentHomeworkBatchesAction(studentId).then(setBatches).finally(() => setLoading(false));
   }, [studentId, subtab]);
-
-  const requests = keywords
-    .map((k) => ({ keywordId: k.id, count: Math.max(0, parseInt(counts[k.id] ?? "", 10) || 0) }))
-    .filter((r) => r.count > 0);
-  const totalRequested = requests.reduce((n, r) => n + r.count, 0);
-
-  async function issue() {
-    setBusy(true);
-    setError(null);
-    setNotice(null);
-    const r = await issueHomeworkBatchAction(studentId, requests);
-    setBusy(false);
-    if (!r.ok) { setError(r.error); return; }
-    setCounts({});
-    setNotice(`과제 ${r.value.problemCount}문항을 발급했습니다. 학생 포털에서 바로 보입니다.`);
-  }
 
   return (
     <div className="max-w-[720px] px-8 py-8">
@@ -84,42 +56,10 @@ export default function HomeworkAssignTab({
         {students.length === 0 && <p className="text-[13px] text-grey-500">담당 학생이 없습니다.</p>}
       </div>
 
-      {!studentId ? null : loading ? (
-        <p className="text-[13px] text-grey-500">불러오는 중…</p>
-      ) : subtab === "history" ? (
-        <HomeworkBatchPanel batches={batches} viewerRole="teacher" />
+      {!studentId ? null : subtab === "history" ? (
+        loading ? <p className="text-[13px] text-grey-500">불러오는 중…</p> : <HomeworkBatchPanel batches={batches} viewerRole="teacher" />
       ) : (
-        <div className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3.5">
-          <p className="text-[12.5px] font-bold text-grey-500 mb-2">키워드별 개수</p>
-          {keywords.length === 0 ? (
-            <p className="text-[12.5px] text-grey-500">이 학생이 수강 중인 과목에 키워드가 없습니다.</p>
-          ) : (
-            <ul className="divide-y divide-grey-100 mb-3">
-              {keywords.map((k) => (
-                <li key={k.id} className="flex items-center gap-3 py-2 text-[12.5px]">
-                  <span className="font-bold text-ink flex-1">{k.label}</span>
-                  <input
-                    type="number" min={0} inputMode="numeric"
-                    value={counts[k.id] ?? ""}
-                    onChange={(e) => setCounts((c) => ({ ...c, [k.id]: e.target.value }))}
-                    placeholder="0"
-                    className="w-[64px] text-[13px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1"
-                  />
-                  <span className="text-grey-500">개</span>
-                </li>
-              ))}
-            </ul>
-          )}
-          {error && <p className="text-[12.5px] text-red mb-2">{error}</p>}
-          {notice && <p className="text-[12.5px] text-green mb-2">{notice}</p>}
-          <button
-            disabled={busy || totalRequested === 0}
-            onClick={() => void issue()}
-            className="text-[12.5px] font-bold px-3.5 py-2 rounded-lg bg-ink text-white disabled:opacity-40"
-          >
-            {busy ? "발급 중…" : `과제 발급 (${totalRequested})`}
-          </button>
-        </div>
+        <HomeworkIssueForm studentId={studentId} />
       )}
     </div>
   );

@@ -1,17 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { removeVocabWord } from "./vocab-actions";
 import type { SessionVocabData } from "./vocab-data";
-import type { LibraryWord } from "@/app/student/vocab-library-data";
 import { assignLibraryWordsToStudentAction, searchLibraryWordsAction } from "@/app/student/vocab-library-actions";
-import { loadLibraryBookWordsAction } from "@/app/student/vocab-library-client-data";
 import VocabQuizIssueForm from "@/app/teacher/VocabQuizIssueForm";
-import { QuizRunner } from "@/app/student/VocabLibraryTab";
+import VocabLibraryTab from "@/app/student/VocabLibraryTab";
 
-/** 2026-09-15(제품 오너 정정) — 수업 화면 단어장 탭. 이 수업에 연결된 일부만 보여주는 게
- * 아니라 학생 단어장을 그대로 보여준다(따로 복제·저장하지 않고 그대로 참조). 교사는 여기서
- * 바로 "즉석 시험"으로 시험보기를 선택할 수 있다. */
+/** 2026-09-16(제품 오너 지적) — 단어 배정/즉석 시험 버튼이 서로 독립된 토글이라 둘 다 동시에
+ * 열려 있을 수 있었다(버그) — 하나만 열리는 탭으로 바꾼다. 또한 단어 목록·시험 이력·응시
+ * 화면은 임의로 다시 만들지 않고 학생 포털과 완전히 같은 VocabLibraryTab을 그대로 쓴다
+ * (교사는 읽기 전용 — 개인 단어 직접 수정은 지원하지 않고, 배정·즉석 시험 발급은 위 전용
+ * 도구로 한다). 이 수업에 연결된 일부만 보여주는 게 아니라 학생 단어장을 그대로 보여준다. */
 export default function SessionVocabTab({
   studentId, studentName, isTeacher, canManage, data,
 }: {
@@ -22,37 +21,7 @@ export default function SessionVocabTab({
   data: SessionVocabData;
 }) {
   const [myWords, setMyWords] = useState(data.myWords);
-  const [quizzes, setQuizzes] = useState(data.quizzes);
-  const [selectedBook, setSelectedBook] = useState<string | null>(null);
-  const [libWords, setLibWords] = useState<Record<string, LibraryWord[]>>({});
-  const [showAssign, setShowAssign] = useState(false);
-  const [showQuizForm, setShowQuizForm] = useState(false);
-  const [active, setActive] = useState<(typeof quizzes)[number] | null>(null);
-
-  async function handleRemove(id: string) {
-    setMyWords((prev) => prev.filter((w) => w.id !== id));
-    await removeVocabWord(id);
-  }
-
-  async function openBook(bookId: string) {
-    setSelectedBook(bookId);
-    if (libWords[bookId]) return;
-    const words = await loadLibraryBookWordsAction(bookId);
-    setLibWords((prev) => ({ ...prev, [bookId]: words }));
-  }
-
-  if (active) {
-    return (
-      <div className="max-w-[640px] px-8 py-8">
-        <QuizRunner
-          quiz={active}
-          onDone={(updated) => { setQuizzes((prev) => prev.map((q) => (q.id === updated.id ? updated : q))); setActive(null); }}
-          onProgress={(updated) => setQuizzes((prev) => prev.map((q) => (q.id === updated.id ? updated : q)))}
-          onExit={() => setActive(null)}
-        />
-      </div>
-    );
-  }
+  const [tool, setTool] = useState<"assign" | "quiz" | null>(null);
 
   return (
     <div className="max-w-[640px] px-8 py-8">
@@ -64,106 +33,47 @@ export default function SessionVocabTab({
       </p>
 
       {isTeacher && canManage && (
-        <div className="flex gap-2 mb-5">
-          <button onClick={() => setShowAssign((v) => !v)} className="text-[12.5px] font-bold px-3.5 py-2 rounded-lg border-[1.5px] border-ink text-ink">
-            단어 배정
-          </button>
-          <button onClick={() => setShowQuizForm((v) => !v)} className="text-[12.5px] font-bold px-3.5 py-2 rounded-lg bg-ink text-white">
-            즉석 시험(시험보기)
-          </button>
-        </div>
-      )}
-
-      {showAssign && (
-        <LibraryAssign
-          studentId={studentId}
-          onAssigned={(words) => { setMyWords((prev) => [...words, ...prev]); setShowAssign(false); }}
-        />
-      )}
-
-      {showQuizForm && (
-        <div className="mb-5">
-          <VocabQuizIssueForm
-            students={[{ id: studentId, name: studentName }]} books={data.books} folders={data.folders}
-            sessionId={null} fixedStudentId={studentId} onIssued={() => window.location.reload()}
-          />
-        </div>
-      )}
-
-      {quizzes.length > 0 && (
-        <div className="mb-5">
-          <p className="text-[12px] font-bold text-grey-500 mb-2">시험 이력</p>
-          {quizzes.map((q) => (
-            <div key={q.id} className="border border-grey-200 rounded-xl px-4 py-3 mb-2 flex items-center justify-between">
-              <span className="text-[13px] text-ink">{q.wordCount}문항</span>
-              {q.status === "completed" ? (
-                <span className="text-[12.5px] font-bold text-ink">{q.score}/{q.total}점</span>
-              ) : !isTeacher ? (
-                <button onClick={() => setActive(q)} className="text-[12px] font-bold text-green">응시하기</button>
-              ) : (
-                <span className="text-[12px] text-grey-500">응시 대기</span>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
-
-      <p className="text-[12px] font-bold text-grey-500 mb-2">내 단어장 ({myWords.length})</p>
-      {myWords.length === 0 ? (
-        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center mb-6">
-          아직 저장한 단어가 없습니다.
-        </div>
-      ) : (
-        myWords.map((v) => (
-          <div key={v.id} className="border border-grey-200 rounded-xl px-4 py-3.5 mb-3">
-            <div className="flex items-center justify-between">
-              <h3 className="text-[15px] font-bold text-ink">{v.word}</h3>
-              {!isTeacher && canManage && (
-                <button onClick={() => handleRemove(v.id)} className="text-[12px] font-semibold text-red">삭제</button>
-              )}
-            </div>
-            <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mt-2.5">뜻</div>
-            <div className="text-[13px] text-ink">{v.definition}</div>
-            {(v.example || v.example2) && (
-              <div className="text-[12.5px] text-grey-500 mt-2 space-y-0.5">
-                {v.example && <p>· {v.example}</p>}
-                {v.example2 && <p>· {v.example2}</p>}
-              </div>
-            )}
-          </div>
-        ))
-      )}
-
-      {data.books.length > 0 && (
         <>
-          <p className="text-[12px] font-bold text-grey-500 mb-2 mt-6">ALTON SAT 공용 단어장</p>
-          <div className="flex flex-wrap gap-2 mb-4">
-            {data.books.map((b) => (
-              <button
-                key={b.id}
-                onClick={() => void openBook(b.id)}
-                className={"text-[12.5px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] " + (selectedBook === b.id ? "border-ink bg-ink text-white" : "border-grey-200 text-ink")}
-              >
-                {b.title} ({b.wordCount})
-              </button>
-            ))}
+          <div className="flex gap-2 mb-3">
+            <button
+              onClick={() => setTool((v) => (v === "assign" ? null : "assign"))}
+              className={"text-[12.5px] font-bold px-3.5 py-2 rounded-lg border-[1.5px] " + (tool === "assign" ? "border-ink bg-ink text-white" : "border-ink text-ink")}
+            >
+              단어 배정
+            </button>
+            <button
+              onClick={() => setTool((v) => (v === "quiz" ? null : "quiz"))}
+              className={"text-[12.5px] font-bold px-3.5 py-2 rounded-lg border-[1.5px] " + (tool === "quiz" ? "border-ink bg-ink text-white" : "border-grey-200 text-ink")}
+            >
+              즉석 시험(시험보기)
+            </button>
           </div>
-          {selectedBook && (
-            (libWords[selectedBook] ?? []).map((w) => (
-              <div key={w.id} className="border border-grey-200 rounded-xl px-4 py-3.5 mb-3">
-                <h3 className="text-[15px] font-bold text-ink">{w.word}</h3>
-                <div className="text-[13px] text-ink mt-1">{w.definitionKo}</div>
-                {(w.example1 || w.example2) && (
-                  <div className="text-[12.5px] text-grey-500 mt-2 space-y-0.5">
-                    {w.example1 && <p>· {w.example1}</p>}
-                    {w.example2 && <p>· {w.example2}</p>}
-                  </div>
-                )}
-              </div>
-            ))
+
+          {tool === "assign" && (
+            <LibraryAssign
+              studentId={studentId}
+              onAssigned={(words) => { setMyWords((prev) => [...words, ...prev]); setTool(null); }}
+            />
+          )}
+
+          {tool === "quiz" && (
+            <div className="mb-5">
+              <VocabQuizIssueForm
+                students={[{ id: studentId, name: studentName }]} books={data.books} folders={data.folders}
+                sessionId={null} fixedStudentId={studentId} onIssued={() => window.location.reload()}
+              />
+            </div>
           )}
         </>
       )}
+
+      <VocabLibraryTab
+        myWords={myWords}
+        books={data.books}
+        quizzes={data.quizzes}
+        folders={data.folders}
+        readOnly={isTeacher}
+      />
     </div>
   );
 }
@@ -221,4 +131,3 @@ function LibraryAssign({ studentId, onAssigned }: { studentId: string; onAssigne
     </div>
   );
 }
-

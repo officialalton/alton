@@ -17,24 +17,25 @@ const batch: HomeworkBatch = {
 
 describe("HomeworkTab — 배치 단위 과제(2026-09-16, 세션과 무관)", () => {
   it("교사 실제 역할이면 채점 모드(HomeworkBatchPanel viewerRole=teacher)로 보여준다", () => {
-    render(<HomeworkTab initialItems={[]} viewerRole="teacher" realViewerRole="teacher" homeworkBatches={[batch]} />);
+    render(<HomeworkTab studentId="stu" initialItems={[]} viewerRole="teacher" realViewerRole="teacher" homeworkBatches={[batch]} />);
     expect(screen.getByRole("tab", { name: /9월 16일 과제/ })).toBeInTheDocument();
     expect(screen.getByText("학생 답")).toBeInTheDocument(); // 교사 채점 화면 전용 라벨
   });
 
   it("학생 역할이면 응시 화면으로 보여준다", () => {
-    render(<HomeworkTab initialItems={[]} viewerRole="student" realViewerRole="student" homeworkBatches={[batch]} />);
+    render(<HomeworkTab studentId="stu" initialItems={[]} viewerRole="student" realViewerRole="student" homeworkBatches={[batch]} />);
     expect(screen.getByText("답 제출")).toBeInTheDocument();
   });
 
   it("배치가 없으면 안내만 보인다", () => {
-    render(<HomeworkTab initialItems={[]} viewerRole="student" realViewerRole="student" homeworkBatches={[]} />);
+    render(<HomeworkTab studentId="stu" initialItems={[]} viewerRole="student" realViewerRole="student" homeworkBatches={[]} />);
     expect(screen.getByText(/아직 발급된 과제가 없습니다/)).toBeInTheDocument();
   });
 
   it("레거시 과제 기록은 읽기 전용으로만 보인다", () => {
     render(
       <HomeworkTab
+        studentId="stu"
         initialItems={[{ id: "l1", title: "옛 과제", description: "설명", studentAnswer: "내 답" }]}
         viewerRole="student"
         realViewerRole="student"
