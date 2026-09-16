@@ -6,21 +6,34 @@ import { loadHomeworkBatch, type HomeworkBatchItem } from "./homework-batch-data
 type ActionResult<T = undefined> = { ok: true; value: T } | { ok: false; error: string };
 
 /** 교사가 학생에게 즉시 과제를 발급한다(수업과 무관 — 단어장 즉석 시험과 같은 구조). 발급마다 새
- * 배치가 생기고, 이름은 발급 날짜로 자동으로 붙는다. */
+ * 배치가 생기고, 이름은 "발급 날짜 과목 선생님명"으로 자동으로 붙는다(2026-09-16 제품 오너 지시).
+ * 과목은 고른 키워드들이 속한 과목에서 가져온다 — 키워드가 여러 과목에 걸쳐 있으면 첫 키워드의
+ * 과목을 대표로 쓴다(교사가 한 번에 한 과목 위주로 키워드를 고르는 게 일반적인 사용 형태). */
 export async function issueHomeworkBatchAction(
   studentId: string,
   requests: { keywordId: string; count: number }[]
 ): Promise<ActionResult<{ id: string; problemCount: number }>> {
   const wanted = requests.filter((r) => Number.isFinite(r.count) && r.count > 0);
   if (wanted.length === 0) return { ok: false, error: "키워드별로 낼 개수를 적으세요." };
-  const { supabase } = await requireUser();
-  const label = `${new Date().toLocaleDateString("ko-KR", { month: "long", day: "numeric" })} 과제`;
+  const { user, supabase } = await requireUser();
+
+  const [{ data: teacherProfile }, { data: keywordRow }] = await Promise.all([
+    supabase.from("profiles").select("name").eq("id", user.id).maybeSingle(),
+    supabase.from("subject_keywords").select("subject_id, subjects(name)").eq("id", wanted[0].keywordId).maybeSingle(),
+  ]);
+  const subjectId = (keywordRow?.subject_id as string | undefined) ?? null;
+  const subjectsField = keywordRow?.subjects as unknown as { name: string } | { name: string }[] | null | undefined;
+  const subjectName = (Array.isArray(subjectsField) ? subjectsField[0]?.name : subjectsField?.name) ?? null;
+  const dateLabel = new Date().toLocaleDateString("ko-KR", { month: "long", day: "numeric" });
+  const label = [dateLabel, subjectName, teacherProfile?.name].filter(Boolean).join(" ") || `${dateLabel} 과제`;
+
   const { data, error } = await supabase.rpc("issue_homework_batch_v2", {
     p_student_id: studentId, p_label: label,
     p_requests: wanted.map((r) => ({ keyword_id: r.keywordId, count: Math.floor(r.count) })),
   });
   if (error) return { ok: false, error: error.message.replace(/^[A-Z0-9]{5}:\s*/, "") };
   const batchId = data as string;
+  if (subjectId) await supabase.from("homework_batches").update({ subject_id: subjectId }).eq("id", batchId);
   const { data: row } = await supabase.from("homework_batches").select("items").eq("id", batchId).maybeSingle();
   const problemCount = Array.isArray(row?.items) ? row.items.length : 0;
   return { ok: true, value: { id: batchId, problemCount } };

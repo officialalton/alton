@@ -47,6 +47,7 @@ export default function SessionVocabTab({
         <QuizRunner
           quiz={active}
           onDone={(updated) => { setQuizzes((prev) => prev.map((q) => (q.id === updated.id ? updated : q))); setActive(null); }}
+          onProgress={(updated) => setQuizzes((prev) => prev.map((q) => (q.id === updated.id ? updated : q)))}
           onExit={() => setActive(null)}
         />
       </div>

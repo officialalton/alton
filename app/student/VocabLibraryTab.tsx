@@ -6,6 +6,7 @@ import {
   addMyVocabWordAction, deleteMyVocabWordAction,
   createVocabQuizAction, submitVocabQuizAction, createVocabFolderAction,
   setMyVocabWordFolderAction, toggleLibraryWordInMyVocabAction,
+  saveVocabQuizProgressAction, retakeVocabQuizAction,
 } from "./vocab-library-actions";
 
 type SourceKey = "custom" | `book:${string}`;
@@ -13,9 +14,11 @@ const ALPHA_RANGES: [string, string][] = [["A", "C"], ["D", "F"], ["G", "I"], ["
 const PAGE_SIZES = [10, 20] as const;
 
 export default function VocabLibraryTab({
-  myWords: initialMyWords, books, quizzes: initialQuizzes, folders: initialFolders,
+  myWords: initialMyWords, books, quizzes: initialQuizzes, folders: initialFolders, readOnly,
 }: {
   myWords: MyVocabWord[]; books: LibraryBook[]; quizzes: VocabQuiz[]; folders: VocabFolder[];
+  /** 보호자 등 읽기 전용 뷰어 — 단어 CRUD·폴더 생성·시험 만들기/응시 버튼이 전부 숨는다. */
+  readOnly?: boolean;
 }) {
   const [tab, setTab] = useState<"words" | "quiz">("words");
   const [myWords, setMyWords] = useState(initialMyWords);
@@ -35,9 +38,9 @@ export default function VocabLibraryTab({
         ))}
       </div>
       {tab === "words" ? (
-        <WordsPanel myWords={myWords} setMyWords={setMyWords} folders={folders} setFolders={setFolders} books={books} />
+        <WordsPanel myWords={myWords} setMyWords={setMyWords} folders={folders} setFolders={setFolders} books={books} readOnly={readOnly} />
       ) : (
-        <QuizPanel books={books} folders={folders} initialQuizzes={initialQuizzes} />
+        <QuizPanel books={books} folders={folders} initialQuizzes={initialQuizzes} readOnly={readOnly} />
       )}
     </div>
   );
@@ -68,11 +71,12 @@ function englishGloss(synonymWords: string[] | null): string {
 }
 
 function WordsPanel({
-  myWords, setMyWords, folders, setFolders, books,
+  myWords, setMyWords, folders, setFolders, books, readOnly,
 }: {
   myWords: MyVocabWord[]; setMyWords: (fn: (prev: MyVocabWord[]) => MyVocabWord[]) => void;
   folders: VocabFolder[]; setFolders: (fn: (prev: VocabFolder[]) => VocabFolder[]) => void;
   books: LibraryBook[];
+  readOnly?: boolean;
 }) {
   const [selected, setSelected] = useState<"custom" | string>("custom");
   const [folderFilter, setFolderFilter] = useState<"all" | string>("all");
@@ -205,9 +209,11 @@ function WordsPanel({
               {f.name}
             </button>
           ))}
-          <button onClick={() => void makeFolder()} disabled={addingFolder} className="text-[12px] font-bold px-2.5 py-1 rounded-lg border-[1.5px] border-dashed border-grey-300 text-grey-500">
-            + 새 폴더
-          </button>
+          {!readOnly && (
+            <button onClick={() => void makeFolder()} disabled={addingFolder} className="text-[12px] font-bold px-2.5 py-1 rounded-lg border-[1.5px] border-dashed border-grey-300 text-grey-500">
+              + 새 폴더
+            </button>
+          )}
         </div>
       )}
 
@@ -216,13 +222,13 @@ function WordsPanel({
           {showKorean ? "한글 뜻 숨기기" : "한글 뜻 보기"}
         </button>
         <button
-          onClick={() => setHideMode((m) => (m === "definition" ? "none" : "definition"))}
+          onClick={() => setHideMode((m) => { const next = m === "definition" ? "none" : "definition"; if (next !== "none") setRevealedKeys(new Set()); return next; })}
           className={"text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] " + (hideMode === "definition" ? "border-ink bg-ink text-white" : "border-grey-200 text-ink")}
         >
           뜻 가리기
         </button>
         <button
-          onClick={() => setHideMode((m) => (m === "word" ? "none" : "word"))}
+          onClick={() => setHideMode((m) => { const next = m === "word" ? "none" : "word"; if (next !== "none") setRevealedKeys(new Set()); return next; })}
           className={"text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] " + (hideMode === "word" ? "border-ink bg-ink text-white" : "border-grey-200 text-ink")}
         >
           단어 가리기
@@ -236,7 +242,7 @@ function WordsPanel({
         {randomOrder && (
           <button onClick={reshuffle} className="text-[12px] font-semibold text-grey-500">다시 섞기</button>
         )}
-        {selected === "custom" && (
+        {selected === "custom" && !readOnly && (
           <button onClick={() => setAdding(true)} className="ml-auto text-[12px] font-bold px-3 py-1.5 rounded-lg bg-green text-white">
             + 단어 추가
           </button>
@@ -256,7 +262,7 @@ function WordsPanel({
         ))}
       </div>
 
-      {adding && selected === "custom" && (
+      {adding && selected === "custom" && !readOnly && (
         <AddWordForm
           folders={folders}
           onCancel={() => setAdding(false)}
@@ -278,8 +284,9 @@ function WordsPanel({
             <WordRow
               key={w.key} w={w} showKorean={showKorean} hideMode={hideMode}
               revealed={revealedKeys.has(w.key)} onToggleReveal={() => toggleReveal(w.key)}
-              folders={folders}
+              folders={folders} readOnly={readOnly}
               onSetFolder={async (folderId) => {
+                if (readOnly) return;
                 if (w.myWordId) {
                   await setMyVocabWordFolderAction(w.myWordId, folderId);
                   setMyWords((prev) => prev.map((x) => (x.id === w.myWordId ? { ...x, folderId } : x)));
@@ -301,7 +308,7 @@ function WordsPanel({
                   }
                 }
               }}
-              onDelete={selected === "custom" ? () => {
+              onDelete={selected === "custom" && !readOnly ? () => {
                 if (!w.myWordId) return;
                 void deleteMyVocabWordAction(w.myWordId);
                 setMyWords((prev) => prev.filter((x) => x.id !== w.myWordId));
@@ -333,12 +340,13 @@ function WordsPanel({
 }
 
 function WordRow({
-  w, showKorean, hideMode, revealed, onToggleReveal, folders, onSetFolder, onDelete,
+  w, showKorean, hideMode, revealed, onToggleReveal, folders, onSetFolder, onDelete, readOnly,
 }: {
   w: DisplayWord; showKorean: boolean; hideMode: "none" | "definition" | "word";
   revealed: boolean; onToggleReveal: () => void;
   folders: VocabFolder[]; onSetFolder: (folderId: string | null) => void;
   onDelete?: () => void;
+  readOnly?: boolean;
 }) {
   const [detailOpen, setDetailOpen] = useState(false);
   const [folderMenuOpen, setFolderMenuOpen] = useState(false);
@@ -363,13 +371,14 @@ function WordRow({
         </div>
         <div className="relative shrink-0">
           <button
-            onClick={() => setFolderMenuOpen((v) => !v)}
+            onClick={() => !readOnly && setFolderMenuOpen((v) => !v)}
+            disabled={readOnly}
             title={currentFolder ? `저장됨: ${currentFolder.name}` : "내 단어장에 저장"}
             className={"text-[16px] leading-none " + (w.myWordId ? "text-yellow-500" : "text-grey-300")}
           >
             ★
           </button>
-          {folderMenuOpen && (
+          {!readOnly && folderMenuOpen && (
             <div className="absolute right-0 top-6 z-10 bg-white border-[1.5px] border-grey-200 rounded-lg shadow-md py-1 w-[160px]">
               {folders.map((f) => (
                 <button
@@ -465,9 +474,9 @@ function AddWordForm({ folders, onCancel, onAdded }: { folders: VocabFolder[]; o
 // --- 시험 만들기·채점 ---
 
 function QuizPanel({
-  books, folders, initialQuizzes,
+  books, folders, initialQuizzes, readOnly,
 }: {
-  books: LibraryBook[]; folders: VocabFolder[]; initialQuizzes: VocabQuiz[];
+  books: LibraryBook[]; folders: VocabFolder[]; initialQuizzes: VocabQuiz[]; readOnly?: boolean;
 }) {
   const [quizzes, setQuizzes] = useState(initialQuizzes);
   const [creating, setCreating] = useState(false);
@@ -489,7 +498,11 @@ function QuizPanel({
     const bookIds = [...sources].filter((s) => s.startsWith("book:")).map((s) => s.slice(5));
     const r = await createVocabQuizAction({ customWords: sources.has("custom"), bookIds, count, folderIds: [...folderIds] });
     if (!r.ok) { setError(r.error); return; }
-    const quiz: VocabQuiz = { id: r.value.id, status: "pending", wordCount: r.value.items.length, items: r.value.items, score: null, total: null, answers: null, createdAt: new Date().toISOString(), dueAt: null, sessionId: null, assignedByTeacher: false };
+    const quiz: VocabQuiz = {
+      id: r.value.id, status: "pending", wordCount: r.value.items.length, items: r.value.items, score: null, total: null, answers: null,
+      source: { customWords: sources.has("custom"), bookIds, folderIds: [...folderIds] },
+      createdAt: new Date().toISOString(), dueAt: null, sessionId: null, assignedByTeacher: false,
+    };
     setQuizzes((prev) => [quiz, ...prev]);
     setCreating(false);
     setActive(quiz);
@@ -500,11 +513,34 @@ function QuizPanel({
     setActive(null);
   }
 
-  if (active) return <QuizRunner quiz={active} onDone={handleQuizDone} onExit={() => setActive(null)} />;
+  function handleQuizProgress(updated: VocabQuiz) {
+    setQuizzes((prev) => prev.map((q) => (q.id === updated.id ? updated : q)));
+  }
+
+  async function retake(quiz: VocabQuiz) {
+    const r = await retakeVocabQuizAction(quiz.id);
+    if (!r.ok) return;
+    const reset: VocabQuiz = { ...quiz, status: "pending", answers: null, score: null, total: null };
+    setQuizzes((prev) => prev.map((q) => (q.id === quiz.id ? reset : q)));
+    setActive(reset);
+  }
+
+  function sourceLabel(q: VocabQuiz): string {
+    const parts: string[] = [];
+    if (q.source.customWords) parts.push("내 단어장");
+    for (const bid of q.source.bookIds) {
+      const b = books.find((bk) => bk.id === bid);
+      if (b) parts.push(b.title.split(" — ")[0]);
+    }
+    if (q.source.folderIds.length > 0) parts.push(`폴더 ${q.source.folderIds.length}개`);
+    return parts.length > 0 ? parts.join(", ") : "전체";
+  }
+
+  if (!readOnly && active) return <QuizRunner quiz={active} onDone={handleQuizDone} onProgress={handleQuizProgress} onExit={() => setActive(null)} />;
 
   return (
     <div>
-      {!creating ? (
+      {readOnly ? null : !creating ? (
         <button onClick={() => setCreating(true)} className="text-[12.5px] font-bold px-3.5 py-2 rounded-lg bg-ink text-white mb-4">시험 만들기</button>
       ) : (
         <div className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3.5 mb-4">
@@ -545,36 +581,74 @@ function QuizPanel({
       {quizzes.length === 0 ? (
         <Empty text="아직 본 시험이 없어요." />
       ) : (
-        quizzes.map((q) => (
-          <div key={q.id} className="border border-grey-200 rounded-xl px-4 py-3 mb-2 flex items-center justify-between">
-            <span className="text-[13px] text-ink">
-              {q.wordCount}문항 {q.assignedByTeacher && <span className="text-[11px] text-grey-500">(선생님이 냄)</span>}
-              {q.dueAt && q.status !== "completed" && (
-                <span className="text-[11px] text-red ml-1">마감 {new Date(q.dueAt).toLocaleString("ko-KR", { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" })}</span>
-              )}
-            </span>
-            {q.status === "completed" ? (
-              <span className="text-[12.5px] font-bold text-ink">{q.score}/{q.total}점</span>
-            ) : (
-              <button onClick={() => setActive(q)} className="text-[12px] font-bold text-green">응시하기</button>
-            )}
-          </div>
-        ))
+        quizzes.map((q) => {
+          const answeredSoFar = q.answers?.filter((a) => a !== null).length ?? 0;
+          return (
+            <div key={q.id} className="border border-grey-200 rounded-xl px-4 py-3 mb-2">
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-[13px] font-bold text-ink">
+                  {new Date(q.createdAt).toLocaleDateString("ko-KR", { month: "numeric", day: "numeric" })} · {q.wordCount}문항 · {sourceLabel(q)}
+                  {q.assignedByTeacher && <span className="text-[11px] text-grey-500 font-normal"> (선생님이 냄)</span>}
+                </span>
+                <span className="text-[12.5px] font-bold text-ink">
+                  {q.status === "completed" ? `${q.score}/${q.total}점` : q.status === "in_progress" ? `진행 중 ${q.score ?? 0}/${answeredSoFar}` : "응시 전"}
+                </span>
+              </div>
+              <div className="flex items-center justify-between">
+                {q.dueAt && q.status !== "completed" && (
+                  <span className="text-[11px] text-red">마감 {new Date(q.dueAt).toLocaleString("ko-KR", { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" })}</span>
+                )}
+                {!readOnly && (
+                  <div className="ml-auto flex gap-2">
+                    {q.status === "pending" && <button onClick={() => setActive(q)} className="text-[12px] font-bold text-green">응시하기</button>}
+                    {q.status === "in_progress" && <button onClick={() => setActive(q)} className="text-[12px] font-bold text-green">계속 풀기</button>}
+                    {q.status !== "pending" && <button onClick={() => void retake(q)} className="text-[12px] font-bold text-grey-500">다시 풀기</button>}
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })
       )}
     </div>
   );
 }
 
-/** Quizlet 식 — 클릭 즉시 정답/오답이 색으로 표시된다(2026-09-16). 문항별 정오는 즉시 보이고,
- * 최종 점수 저장·오답 노트 반영은 마지막에 한 번에 한다. */
-export function QuizRunner({ quiz, onDone, onExit }: { quiz: VocabQuiz; onDone: (q: VocabQuiz) => void; onExit: () => void }) {
-  const [answers, setAnswers] = useState<(number | null)[]>(() => quiz.items.map(() => null));
-  const [i, setI] = useState(0);
+/** Quizlet 식 — 클릭 즉시 정답/오답이 색으로 표시된다(2026-09-16). 문항별 정오는 그 즉시 오답
+ * 노트에도 반영된다(saveVocabQuizProgressAction) — 다 풀지 않고 나가도 그때까지 답은 남는다. */
+export function QuizRunner({
+  quiz, onDone, onProgress, onExit,
+}: {
+  quiz: VocabQuiz; onDone: (q: VocabQuiz) => void; onProgress: (q: VocabQuiz) => void; onExit: () => void;
+}) {
+  const [answers, setAnswers] = useState<(number | null)[]>(() => quiz.items.map((_, idx) => quiz.answers?.[idx] ?? null));
+  const [i, setI] = useState(() => {
+    const firstUnanswered = quiz.items.findIndex((_, idx) => (quiz.answers?.[idx] ?? null) === null);
+    return firstUnanswered === -1 ? 0 : firstUnanswered;
+  });
   const [submitting, setSubmitting] = useState(false);
+  const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved">("idle");
   const [result, setResult] = useState<{ score: number; total: number; finalAnswers: number[] } | null>(null);
   const item: VocabQuizItem | undefined = quiz.items[i];
   const allAnswered = useMemo(() => answers.every((a) => a !== null), [answers]);
   const runningScore = answers.reduce((n: number, a, idx) => n + (a !== null && a === quiz.items[idx].correctIndex ? 1 : 0), 0);
+
+  async function saveProgress(next: (number | null)[]) {
+    setSaveStatus("saving");
+    const r = await saveVocabQuizProgressAction(quiz.id, next);
+    setSaveStatus(r.ok ? "saved" : "idle");
+    const answeredCount = next.filter((a) => a !== null).length;
+    const score = quiz.items.reduce((acc, it, idx) => acc + (next[idx] !== null && next[idx] === it.correctIndex ? 1 : 0), 0);
+    onProgress({ ...quiz, status: answeredCount > 0 ? "in_progress" : "pending", answers: next, score, total: quiz.items.length });
+  }
+
+  function pickAnswer(idx: number) {
+    setAnswers((prev) => {
+      const next = prev.map((a, j) => (j === i ? idx : a));
+      void saveProgress(next);
+      return next;
+    });
+  }
 
   async function submit() {
     setSubmitting(true);
@@ -626,7 +700,12 @@ export function QuizRunner({ quiz, onDone, onExit }: { quiz: VocabQuiz; onDone: 
     <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-5">
       <div className="flex items-center justify-between mb-4">
         <span className="text-[12px] font-bold text-grey-500">{i + 1} / {quiz.items.length} · 현재 {runningScore}점</span>
-        <button onClick={onExit} className="text-[12px] text-grey-500">나가기</button>
+        <span className="flex items-center gap-2">
+          {saveStatus === "saving" && <span className="text-[11px] text-grey-400">저장 중...</span>}
+          {saveStatus === "saved" && <span className="text-[11px] text-grey-400">저장됨</span>}
+          <button onClick={() => void saveProgress(answers)} className="text-[12px] font-semibold text-ink">저장하기</button>
+          <button onClick={onExit} className="text-[12px] text-grey-500">나가기</button>
+        </span>
       </div>
       <h3 className="text-[18px] font-extrabold text-ink mb-4">{item.definitionShown}</h3>
       <div className="flex flex-col gap-2 mb-4">
@@ -643,7 +722,7 @@ export function QuizRunner({ quiz, onDone, onExit }: { quiz: VocabQuiz; onDone: 
             <button
               key={idx}
               disabled={showFeedback}
-              onClick={() => setAnswers((prev) => prev.map((a, j) => (j === i ? idx : a)))}
+              onClick={() => pickAnswer(idx)}
               className={"text-left text-[13.5px] px-3.5 py-2.5 rounded-[10px] border-[1.5px] disabled:cursor-default " + cls}
             >
               {opt}

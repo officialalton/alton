@@ -13,6 +13,7 @@ import { loadChildrenSubjectEnrollments, loadProgressedTrialEnrollmentIds } from
 import { loadLessonBookingData } from "@/app/student/lesson-booking-data";
 import { loadParentMaterialsLibrary } from "./materials-data";
 import { loadParentVocabData } from "./vocab-data";
+import { loadParentHomeworkData } from "./homework-data";
 import ParentShell from "./ParentShell";
 
 export default async function ParentHomePage({
@@ -65,7 +66,8 @@ export default async function ParentHomePage({
     pendingRegularIntentChoices,
     childrenSubjectEnrollments,
     materialsLibrary,
-    vocabByChild,
+    vocabData,
+    homeworkByChild,
   ] = await Promise.all([
     dashboardPromise,
     lessonBookingPromise,
@@ -80,6 +82,7 @@ export default async function ParentHomePage({
     loadChildrenSubjectEnrollments(supabase, children),
     loadParentMaterialsLibrary(supabase, user.id),
     loadParentVocabData(supabase, user.id),
+    loadParentHomeworkData(supabase, user.id),
   ]);
 
   const pastSessionIds = past.map((l) => l.sessionId);
@@ -122,7 +125,8 @@ export default async function ParentHomePage({
       pendingRegularIntentChoices={pendingRegularIntentChoices}
       childrenSubjectEnrollments={childrenSubjectEnrollments}
       materialsLibrary={materialsLibrary}
-      vocabByChild={vocabByChild}
+      vocabData={vocabData}
+      homeworkByChild={homeworkByChild}
       progressedTrialEnrollmentIds={progressedTrialEnrollmentIds}
       lessonBooking={lessonBooking}
       focusSubjectEnrollmentId={focus}

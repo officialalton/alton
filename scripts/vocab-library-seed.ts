@@ -28,9 +28,11 @@ const VOLUME_PLAN: VolumePlan[] = [
   { volumeNo: 5, title: "5권 — 사회·경제 지문 어휘", theme: "역사·경제·사회 지문에 자주 나오는 학술 어휘", difficultyMin: 2, difficultyMax: 3 },
   { volumeNo: 6, title: "6권 — 인물 성격·태도 어휘", theme: "인물의 성격·태도·감정 상태를 정교하게 구분하는 어휘", difficultyMin: 3, difficultyMax: 4 },
   { volumeNo: 7, title: "7권 — 문학·수사 어휘", theme: "문학 지문·수사학적 분석에 쓰이는 어휘", difficultyMin: 3, difficultyMax: 4 },
-  { volumeNo: 8, title: "8권 — 추상·개념 어휘", theme: "추상적 개념과 관계를 표현하는 고급 어휘", difficultyMin: 3, difficultyMax: 4 },
-  { volumeNo: 9, title: "9권 — 저빈도 정밀 어휘", theme: "정확한 뉘앙스 구분이 필요한 저빈도 고급 어휘", difficultyMin: 4, difficultyMax: 5 },
-  { volumeNo: 10, title: "10권 — 최상급 어휘", theme: "SAT 최상위권 지문에서만 드물게 나오는 최상급 난이도 어휘", difficultyMin: 4, difficultyMax: 5 },
+  // 2026-09-16 — 원래 8·9·10권(추상·개념 / 저빈도 정밀 / 최상급)으로 나눴으나, 뒤로 갈수록
+  // 후보 어휘 풀이 좁아져 중복률이 급증해 셋 다 200개를 못 채웠다. 세 권의 남은 목표를
+  // 8권 하나(200개)로 합쳐 최상위 난이도 어휘를 폭넓게 확보한다 — 실제 손실분 없음
+  // (미달분은 저장되지 않아 애초에 DB에 없었다). 단어장은 최종 8권 구성이 된다.
+  { volumeNo: 8, title: "8권 — 고급·정밀 어휘", theme: "추상적 개념·관계, 정확한 뉘앙스 구분이 필요한 저빈도 어휘, SAT 최상위권 지문에서만 드물게 나오는 최상급 난이도 어휘를 아우르는 고급 어휘", difficultyMin: 3, difficultyMax: 5 },
 ];
 
 type RawWord = {

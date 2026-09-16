@@ -190,23 +190,17 @@ export async function createVocabQuizAction(input: {
   return { ok: true, value: { id: data.id as string, items } };
 }
 
-/** 채점 + 오답을 "오답 노트" 폴더에 자동 저장, 맞힌 단어는(오답 노트에 있었다면) 거기서 뺀다. */
-export async function submitVocabQuizAction(quizId: string, answers: number[]): Promise<ActionResult<{ score: number; total: number }>> {
-  const { supabase } = await requireUser();
-  const { data: quiz } = await supabase.from("vocab_quizzes").select("items, status, owner_id").eq("id", quizId).maybeSingle();
-  if (!quiz) return { ok: false, error: "시험을 찾을 수 없습니다." };
-  if (quiz.status === "completed") return { ok: false, error: "이미 채점된 시험입니다." };
-  const items = quiz.items as VocabQuizItem[];
-  const score = items.reduce((acc, item, i) => acc + (answers[i] === item.correctIndex ? 1 : 0), 0);
-  const { error } = await supabase
-    .from("vocab_quizzes")
-    .update({ status: "completed", score, total: items.length, answers, submitted_at: new Date().toISOString() })
-    .eq("id", quizId);
-  if (error) return { ok: false, error: "채점 결과를 저장하지 못했습니다." };
-
-  const studentId = quiz.owner_id as string;
-  const wrongItems = items.filter((it, idx) => answers[idx] !== it.correctIndex);
-  const correctItems = items.filter((it, idx) => answers[idx] === it.correctIndex);
+/** 지금까지 답한 문항만 기준으로 오답은 "오답 노트" 폴더에 넣고, 맞힌 문항은(거기 있었다면) 뺀다.
+ * 진행 중 저장(saveVocabQuizProgressAction)과 최종 제출(submitVocabQuizAction)이 함께 쓴다 —
+ * 도중에 나가도 그때까지 틀린 단어는 이미 오답 노트에 반영돼 있어야 한다. */
+async function syncWrongAnswersToNotebook(
+  supabase: Awaited<ReturnType<typeof requireUser>>["supabase"],
+  studentId: string,
+  items: VocabQuizItem[],
+  answers: (number | null)[]
+) {
+  const wrongItems = items.filter((it, idx) => answers[idx] !== null && answers[idx] !== it.correctIndex);
+  const correctItems = items.filter((it, idx) => answers[idx] !== null && answers[idx] === it.correctIndex);
 
   if (wrongItems.length > 0) {
     const { data: folderId } = await supabase.rpc("ensure_default_vocab_folder", { p_student_id: studentId });
@@ -234,6 +228,55 @@ export async function submitVocabQuizAction(quizId: string, answers: number[]): 
         .in("word", correctItems.map((it) => it.word));
     }
   }
+}
+
+/** 시험 도중 답을 고를 때마다 호출 — 그 즉시 오답을 오답 노트에 반영하고 진행 상태를 저장한다.
+ * 나가거나 새로고침해도 그때까지 답한 내용과 오답 노트 반영은 남아있다. */
+export async function saveVocabQuizProgressAction(quizId: string, answers: (number | null)[]): Promise<ActionResult> {
+  const { supabase } = await requireUser();
+  const { data: quiz } = await supabase.from("vocab_quizzes").select("items, status, owner_id").eq("id", quizId).maybeSingle();
+  if (!quiz) return { ok: false, error: "시험을 찾을 수 없습니다." };
+  if (quiz.status === "completed") return { ok: false, error: "이미 채점된 시험입니다." };
+  const items = quiz.items as VocabQuizItem[];
+  const studentId = quiz.owner_id as string;
+  const answeredCount = answers.filter((a) => a !== null).length;
+  const score = items.reduce((acc, item, i) => acc + (answers[i] !== null && answers[i] === item.correctIndex ? 1 : 0), 0);
+  const { error } = await supabase
+    .from("vocab_quizzes")
+    .update({ status: answeredCount > 0 ? "in_progress" : "pending", answers, score, total: items.length })
+    .eq("id", quizId);
+  if (error) return { ok: false, error: "진행 상태를 저장하지 못했습니다." };
+  await syncWrongAnswersToNotebook(supabase, studentId, items, answers);
+  return { ok: true, value: undefined };
+}
+
+/** 다시 풀기 — 점수·답안을 초기화하고 처음부터 다시 응시할 수 있게 한다(문항은 그대로). */
+export async function retakeVocabQuizAction(quizId: string): Promise<ActionResult> {
+  const { supabase } = await requireUser();
+  const { error } = await supabase
+    .from("vocab_quizzes")
+    .update({ status: "pending", answers: null, score: null, total: null, submitted_at: null })
+    .eq("id", quizId);
+  if (error) return { ok: false, error: "다시 풀기를 시작하지 못했습니다." };
+  return { ok: true, value: undefined };
+}
+
+/** 채점 + 오답을 "오답 노트" 폴더에 자동 저장, 맞힌 단어는(오답 노트에 있었다면) 거기서 뺀다. */
+export async function submitVocabQuizAction(quizId: string, answers: number[]): Promise<ActionResult<{ score: number; total: number }>> {
+  const { supabase } = await requireUser();
+  const { data: quiz } = await supabase.from("vocab_quizzes").select("items, status, owner_id").eq("id", quizId).maybeSingle();
+  if (!quiz) return { ok: false, error: "시험을 찾을 수 없습니다." };
+  if (quiz.status === "completed") return { ok: false, error: "이미 채점된 시험입니다." };
+  const items = quiz.items as VocabQuizItem[];
+  const score = items.reduce((acc, item, i) => acc + (answers[i] === item.correctIndex ? 1 : 0), 0);
+  const { error } = await supabase
+    .from("vocab_quizzes")
+    .update({ status: "completed", score, total: items.length, answers, submitted_at: new Date().toISOString() })
+    .eq("id", quizId);
+  if (error) return { ok: false, error: "채점 결과를 저장하지 못했습니다." };
+
+  const studentId = quiz.owner_id as string;
+  await syncWrongAnswersToNotebook(supabase, studentId, items, answers);
   return { ok: true, value: { score, total: items.length } };
 }
 

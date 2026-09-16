@@ -21,8 +21,14 @@ function mcItem(problemId: string, position: number, overrides: Partial<Homework
 }
 
 const batches: HomeworkBatch[] = [
-  { id: "b1", teacherId: "t1", studentId: "stu", label: "9월 15일 과제", createdAt: "2026-09-15T00:00:00Z", items: [mcItem("p1", 1), mcItem("p2", 2, { submittedAt: "2026-09-15T01:00:00Z", response: "0" })] },
-  { id: "b2", teacherId: "t1", studentId: "stu", label: "9월 14일 과제", createdAt: "2026-09-14T00:00:00Z", items: [mcItem("p3", 1, { submittedAt: "x", response: "0", graded: true, grade: "correct" })] },
+  {
+    id: "b1", teacherId: "t1", teacherName: "김선생", studentId: "stu", label: "9월 15일 수학 김선생", subjectId: null, subjectName: null,
+    createdAt: "2026-09-15T00:00:00Z", items: [mcItem("p1", 1), mcItem("p2", 2, { submittedAt: "2026-09-15T01:00:00Z", response: "0" })],
+  },
+  {
+    id: "b2", teacherId: "t1", teacherName: "김선생", studentId: "stu", label: "9월 14일 수학 김선생", subjectId: null, subjectName: null,
+    createdAt: "2026-09-14T00:00:00Z", items: [mcItem("p3", 1, { submittedAt: "x", response: "0", graded: true, grade: "correct" })],
+  },
 ];
 
 beforeEach(() => {
@@ -30,18 +36,19 @@ beforeEach(() => {
 });
 
 describe("StudentHomeworkTab — 배치 단위 과제(2026-09-16)", () => {
-  it("배치가 발급 날짜 라벨로 상단 탭에 뜨고, 첫 배치가 목차·본문으로 열린다", () => {
+  it("배치가 발급 날짜·과목·선생님 라벨로 상단 탭에 뜨고, 첫(미채점) 배치가 목차·본문으로 열린다", () => {
     render(<StudentHomeworkTab batches={batches} />);
-    expect(screen.getByRole("tab", { name: /9월 15일 과제/ })).toHaveAttribute("aria-selected", "true");
+    expect(screen.getByRole("tab", { name: /9월 15일 수학 김선생/ })).toHaveAttribute("aria-selected", "true");
     expect(screen.getByText("1문제 남음")).toBeInTheDocument();
     expect(screen.getByText("과제 1")).toBeInTheDocument();
     expect(screen.getByText("과제 2")).toBeInTheDocument();
     expect(screen.getByText("값은?")).toBeInTheDocument();
   });
 
-  it("다른 배치 탭을 누르면 그 배치가 열리고, 채점된 항목은 정답 여부를 보여준다", () => {
+  it("채점 완료된 배치는 지난 과제 목록에 있고, 누르면 정답 여부를 보여준다", () => {
     render(<StudentHomeworkTab batches={batches} />);
-    fireEvent.click(screen.getByRole("tab", { name: /9월 14일 과제/ }));
+    fireEvent.click(screen.getByText("지난 과제"));
+    fireEvent.click(screen.getByText("9월 14일 수학 김선생"));
     expect(screen.getByText("정답")).toBeInTheDocument();
   });
 

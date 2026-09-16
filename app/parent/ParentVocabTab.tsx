@@ -1,23 +1,23 @@
 "use client";
 
 import { useState } from "react";
-import type { ParentChildVocab } from "./vocab-data";
+import type { ParentVocabData } from "./vocab-data";
+import VocabLibraryTab from "@/app/student/VocabLibraryTab";
 
-/** 보호자 — 자녀 단어장·시험 이력 읽기 전용. 응시·CRUD 버튼이 전혀 없다(정책: 보호자는 읽기만). */
-export default function ParentVocabTab({ childrenVocab }: { childrenVocab: ParentChildVocab[] }) {
-  const [childId, setChildId] = useState(childrenVocab[0]?.childId ?? "");
-  const current = childrenVocab.find((c) => c.childId === childId) ?? childrenVocab[0];
+// 2026-09-16(제품 오너 지시) — 보호자 단어장 화면도 학생 포털과 완전히 같은 UI를 쓰되 읽기 전용으로만
+// 한다. 별도의 요약 화면을 유지하지 않고 VocabLibraryTab을 그대로 재사용한다.
+export default function ParentVocabTab({ data }: { data: ParentVocabData }) {
+  const { children, books } = data;
+  const [childId, setChildId] = useState(children[0]?.childId ?? "");
+  const current = children.find((c) => c.childId === childId) ?? children[0];
 
-  if (!current) return <div className="max-w-[720px] px-8 py-8 text-[13px] text-grey-500">연결된 자녀가 없습니다.</div>;
+  if (!current) return <div className="max-w-[760px] px-8 py-8 text-[13px] text-grey-500">연결된 자녀가 없습니다.</div>;
 
   return (
-    <div className="max-w-[720px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-1.5">단어장</h1>
-      <p className="text-[13px] text-grey-500 mb-5">자녀의 단어장과 시험 이력을 읽기 전용으로 볼 수 있습니다.</p>
-
-      {childrenVocab.length > 1 && (
-        <div className="flex flex-wrap gap-2 mb-5">
-          {childrenVocab.map((c) => (
+    <div>
+      {children.length > 1 && (
+        <div className="max-w-[760px] px-8 pt-8 flex flex-wrap gap-2">
+          {children.map((c) => (
             <button
               key={c.childId}
               onClick={() => setChildId(c.childId)}
@@ -28,50 +28,7 @@ export default function ParentVocabTab({ childrenVocab }: { childrenVocab: Paren
           ))}
         </div>
       )}
-
-      {(() => {
-        const defaultFolder = current.folders.find((f) => f.isDefault);
-        const wrongWords = defaultFolder ? current.myWords.filter((w) => w.folderId === defaultFolder.id) : [];
-        if (wrongWords.length === 0) return null;
-        return (
-          <div className="border-[1.5px] border-red rounded-xl px-4 py-3.5 mb-5 bg-red-bg">
-            <p className="text-[13px] font-bold text-ink mb-1">오답 노트 {wrongWords.length}개</p>
-            <div className="flex flex-wrap gap-1.5">
-              {wrongWords.slice(0, 15).map((w) => (
-                <span key={w.id} className="text-[11px] font-bold px-2 py-1 rounded-lg bg-white text-red border border-red">{w.word}</span>
-              ))}
-              {wrongWords.length > 15 && <span className="text-[11px] text-grey-500">외 {wrongWords.length - 15}개</span>}
-            </div>
-          </div>
-        );
-      })()}
-
-      <p className="text-[12px] font-bold text-grey-500 mb-2">내 단어장 ({current.myWords.length})</p>
-      {current.myWords.length === 0 ? (
-        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center mb-6">아직 저장한 단어가 없습니다.</div>
-      ) : (
-        <div className="flex flex-wrap gap-1.5 mb-6">
-          {current.myWords.map((w) => (
-            <span key={w.id} className="text-[12px] font-semibold px-2.5 py-1 rounded-lg bg-grey-100 text-ink" title={w.definition ?? ""}>{w.word}</span>
-          ))}
-        </div>
-      )}
-
-      <p className="text-[12px] font-bold text-grey-500 mb-2">시험 이력</p>
-      {current.quizzes.length === 0 ? (
-        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">아직 본 시험이 없습니다.</div>
-      ) : (
-        current.quizzes.map((q) => (
-          <div key={q.id} className="border border-grey-200 rounded-xl px-4 py-3 mb-2 flex items-center justify-between">
-            <span className="text-[13px] text-ink">
-              {q.wordCount}문항 {q.assignedByTeacher && <span className="text-[11px] text-grey-500">(선생님이 냄)</span>}
-            </span>
-            <span className="text-[12.5px] font-bold text-ink">
-              {q.status === "completed" ? `${q.score}/${q.total}점` : "응시 대기"}
-            </span>
-          </div>
-        ))
-      )}
+      <VocabLibraryTab myWords={current.myWords} books={books} quizzes={current.quizzes} folders={current.folders} readOnly />
     </div>
   );
 }

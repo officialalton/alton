@@ -49,10 +49,13 @@ export async function loadMyVocabWords(supabase: SupabaseClient, studentId: stri
 export async function loadLibraryBooks(supabase: SupabaseClient): Promise<LibraryBook[]> {
   const { data: books } = await supabase.from("vocab_library_books").select("id, volume_no, title").order("volume_no", { ascending: true });
   if (!books?.length) return [];
-  const { data: counts } = await supabase.from("vocab_library_words").select("book_id");
-  const countByBook = new Map<string, number>();
-  for (const c of counts ?? []) countByBook.set(c.book_id as string, (countByBook.get(c.book_id as string) ?? 0) + 1);
-  return books.map((b) => ({ id: b.id as string, volumeNo: b.volume_no as number, title: b.title as string, wordCount: countByBook.get(b.id as string) ?? 0 }));
+  // 권당 정확한 개수를 head:true count로 따로 받는다 — 전체 단어를 한 번에 select하면
+  // PostgREST 기본 응답 상한(1,000행)에 걸려 늦게 추가된 권(7·8권 등)의 개수가 0으로
+  // 잘못 표시된다(실제 단어 목록은 별도 페이지네이션 쿼리라 영향 없음).
+  const counts = await Promise.all(
+    books.map((b) => supabase.from("vocab_library_words").select("id", { count: "exact", head: true }).eq("book_id", b.id as string))
+  );
+  return books.map((b, i) => ({ id: b.id as string, volumeNo: b.volume_no as number, title: b.title as string, wordCount: counts[i].count ?? 0 }));
 }
 
 export async function loadLibraryBookWords(supabase: SupabaseClient, bookId: string): Promise<LibraryWord[]> {
@@ -82,14 +85,16 @@ export type VocabQuizItem = {
   synonymWords?: string[] | null;
   antonymWords?: string[] | null;
 };
+export type VocabQuizSource = { customWords: boolean; bookIds: string[]; folderIds: string[] };
 export type VocabQuiz = {
   id: string;
-  status: "pending" | "completed";
+  status: "pending" | "in_progress" | "completed";
   wordCount: number;
   items: VocabQuizItem[];
   score: number | null;
   total: number | null;
-  answers: number[] | null;
+  answers: (number | null)[] | null;
+  source: VocabQuizSource;
   createdAt: string;
   dueAt: string | null;
   sessionId: string | null;
@@ -99,7 +104,7 @@ export type VocabQuiz = {
 export async function loadVocabQuizzes(supabase: SupabaseClient, studentId: string, sessionId?: string): Promise<VocabQuiz[]> {
   let query = supabase
     .from("vocab_quizzes")
-    .select("id, status, items, score, total, answers, created_at, created_by, owner_id, due_at, session_id")
+    .select("id, status, items, score, total, answers, source, created_at, created_by, owner_id, due_at, session_id")
     .eq("owner_id", studentId)
     .order("created_at", { ascending: false })
     .limit(50);
@@ -107,12 +112,13 @@ export async function loadVocabQuizzes(supabase: SupabaseClient, studentId: stri
   const { data } = await query;
   return (data ?? []).map((q) => ({
     id: q.id as string,
-    status: q.status as "pending" | "completed",
+    status: q.status as "pending" | "in_progress" | "completed",
     wordCount: Array.isArray(q.items) ? q.items.length : 0,
     items: (q.items as VocabQuizItem[]) ?? [],
     score: q.score as number | null,
     total: q.total as number | null,
-    answers: q.answers as number[] | null,
+    answers: q.answers as (number | null)[] | null,
+    source: (q.source as VocabQuizSource) ?? { customWords: false, bookIds: [], folderIds: [] },
     createdAt: q.created_at as string,
     dueAt: q.due_at as string | null,
     sessionId: q.session_id as string | null,

@@ -30,15 +30,32 @@ export type HomeworkBatchItem = {
 export type HomeworkBatch = {
   id: string;
   teacherId: string;
+  teacherName: string | null;
   studentId: string;
   label: string;
+  subjectId: string | null;
+  subjectName: string | null;
   items: HomeworkBatchItem[];
   createdAt: string;
 };
 
-function mapRow(row: { id: string; teacher_id: string; student_id: string; label: string; items: unknown; created_at: string }): HomeworkBatch {
+const SELECT_COLUMNS = "id, teacher_id, student_id, label, subject_id, items, created_at, teacher:profiles!homework_batches_teacher_id_fkey(name), subject:subjects(name)";
+
+type Row = {
+  id: string; teacher_id: string; student_id: string; label: string; subject_id: string | null; items: unknown; created_at: string;
+  teacher: { name: string | null } | { name: string | null }[] | null;
+  subject: { name: string | null } | { name: string | null }[] | null;
+};
+
+function firstOf<T>(v: T | T[] | null): T | null {
+  return Array.isArray(v) ? (v[0] ?? null) : v;
+}
+
+function mapRow(row: Row): HomeworkBatch {
   return {
-    id: row.id, teacherId: row.teacher_id, studentId: row.student_id, label: row.label,
+    id: row.id, teacherId: row.teacher_id, teacherName: firstOf(row.teacher)?.name ?? null,
+    studentId: row.student_id, label: row.label,
+    subjectId: row.subject_id, subjectName: firstOf(row.subject)?.name ?? null,
     items: (row.items as HomeworkBatchItem[]) ?? [], createdAt: row.created_at,
   };
 }
@@ -47,30 +64,30 @@ function mapRow(row: { id: string; teacher_id: string; student_id: string; label
 export async function loadStudentHomeworkBatches(supabase: SupabaseClient, studentId: string): Promise<HomeworkBatch[]> {
   const { data } = await supabase
     .from("homework_batches")
-    .select("id, teacher_id, student_id, label, items, created_at")
+    .select(SELECT_COLUMNS)
     .eq("student_id", studentId)
     .order("created_at", { ascending: false })
     .limit(50);
-  return (data ?? []).map(mapRow);
+  return (data ?? []).map((r) => mapRow(r as unknown as Row));
 }
 
 /** 교사 본인이 본다 — "이 교사가 이 학생에게 낸" 배치만(다른 교사가 낸 것은 RLS가 애초에 안 보여준다). */
 export async function loadTeacherHomeworkBatchesForStudent(supabase: SupabaseClient, teacherId: string, studentId: string): Promise<HomeworkBatch[]> {
   const { data } = await supabase
     .from("homework_batches")
-    .select("id, teacher_id, student_id, label, items, created_at")
+    .select(SELECT_COLUMNS)
     .eq("teacher_id", teacherId)
     .eq("student_id", studentId)
     .order("created_at", { ascending: false })
     .limit(50);
-  return (data ?? []).map(mapRow);
+  return (data ?? []).map((r) => mapRow(r as unknown as Row));
 }
 
 export async function loadHomeworkBatch(supabase: SupabaseClient, batchId: string): Promise<HomeworkBatch | null> {
   const { data } = await supabase
     .from("homework_batches")
-    .select("id, teacher_id, student_id, label, items, created_at")
+    .select(SELECT_COLUMNS)
     .eq("id", batchId)
     .maybeSingle();
-  return data ? mapRow(data) : null;
+  return data ? mapRow(data as unknown as Row) : null;
 }

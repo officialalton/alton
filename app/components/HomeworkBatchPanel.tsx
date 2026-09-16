@@ -7,17 +7,29 @@ import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 
 const FORMAT_LABEL: Record<HomeworkBatchItem["format"], string> = { mc: "객관식", spr: "숫자 입력", essay: "서술형", math: "풀이형" };
 
+function isGraded(b: HomeworkBatch): boolean {
+  return b.items.length > 0 && b.items.every((i) => i.graded);
+}
+
 /** 2026-09-16 — 과제 배치 목록 + 배치 하나를 눌렀을 때의 목차·슬라이드 화면. 수업(세션)과 무관하게
- * 학생 포털·교사 포털·세션뷰 어디서나 같은 화면을 쓴다. */
+ * 학생 포털·교사 포털·세션뷰 어디서나 같은 화면을 쓴다. "예정 과제"(채점 전)와 "지난 과제"(채점
+ * 완료, 과목별 필터 + 누적 리스트)로 나눈다(2026-09-16 제품 오너 지시). */
 export default function HomeworkBatchPanel({
-  batches: initialBatches, viewerRole,
+  batches: initialBatches, viewerRole, readOnly,
 }: {
   batches: HomeworkBatch[];
   viewerRole: "student" | "teacher";
+  /** 보호자 등 읽기 전용 뷰어 — 답 제출·채점 버튼이 전부 숨는다(내용은 그대로 볼 수 있다). */
+  readOnly?: boolean;
 }) {
   const [batches, setBatches] = useState(initialBatches);
-  const [activeId, setActiveId] = useState<string | null>(batches[0]?.id ?? null);
+  const [subTab, setSubTab] = useState<"upcoming" | "past">("upcoming");
+  const upcoming = batches.filter((b) => !isGraded(b));
+  const past = batches.filter(isGraded);
+  const [activeId, setActiveId] = useState<string | null>(upcoming[0]?.id ?? null);
+  const [pastDetailId, setPastDetailId] = useState<string | null>(null);
   const active = batches.find((b) => b.id === activeId) ?? null;
+  const pastDetail = batches.find((b) => b.id === pastDetailId) ?? null;
 
   function updateBatch(updated: HomeworkBatch) {
     setBatches((prev) => prev.map((b) => (b.id === updated.id ? updated : b)));
@@ -33,35 +45,112 @@ export default function HomeworkBatchPanel({
 
   return (
     <div>
-      <div className="flex gap-2 mb-4 overflow-x-auto border-b border-grey-200" role="tablist" aria-label="과제 배치">
-        {batches.map((b) => {
-          const total = b.items.length;
-          const answered = b.items.filter((i) => i.submittedAt).length;
-          const graded = b.items.every((i) => i.graded) && total > 0;
-          const status = graded ? "채점 완료" : answered === total ? "채점 대기" : `${total - answered}문제 남음`;
-          const selected = b.id === activeId;
-          return (
-            <button
-              key={b.id}
-              role="tab"
-              aria-selected={selected}
-              onClick={() => setActiveId(b.id)}
-              className={"text-[13px] font-semibold pb-2.5 -mb-px border-b-2 whitespace-nowrap flex items-center gap-2 " + (selected ? "text-ink border-ink" : "text-grey-500 border-transparent")}
-            >
-              {b.label}
-              <span className={"text-[10.5px] font-bold px-2 py-0.5 rounded-full " + (graded ? "bg-green/10 text-green" : answered === total ? "bg-grey-100 text-grey-500" : "bg-red-bg text-red")}>
-                {status}
-              </span>
-            </button>
-          );
-        })}
+      <div className="flex gap-1 border-b border-grey-200 mb-4">
+        {(["upcoming", "past"] as const).map((t) => (
+          <button
+            key={t}
+            onClick={() => setSubTab(t)}
+            className={"text-[13.5px] font-bold px-3 pb-2.5 -mb-px border-b-2 " + (subTab === t ? "text-ink border-ink" : "text-grey-500 border-transparent")}
+          >
+            {t === "upcoming" ? "예정 과제" : "지난 과제"}
+          </button>
+        ))}
       </div>
-      {active && <BatchRunner batch={active} viewerRole={viewerRole} onChange={updateBatch} />}
+
+      {subTab === "upcoming" ? (
+        upcoming.length === 0 ? (
+          <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">예정된 과제가 없습니다.</div>
+        ) : (
+          <div>
+            <div className="flex gap-2 mb-4 overflow-x-auto border-b border-grey-200" role="tablist" aria-label="과제 배치">
+              {upcoming.map((b) => {
+                const total = b.items.length;
+                const answered = b.items.filter((i) => i.submittedAt).length;
+                const status = answered === total ? "채점 대기" : `${total - answered}문제 남음`;
+                const selected = b.id === activeId;
+                return (
+                  <button
+                    key={b.id}
+                    role="tab"
+                    aria-selected={selected}
+                    onClick={() => setActiveId(b.id)}
+                    className={"text-[13px] font-semibold pb-2.5 -mb-px border-b-2 whitespace-nowrap flex items-center gap-2 " + (selected ? "text-ink border-ink" : "text-grey-500 border-transparent")}
+                  >
+                    {b.label}
+                    <span className={"text-[10.5px] font-bold px-2 py-0.5 rounded-full " + (answered === total ? "bg-grey-100 text-grey-500" : "bg-red-bg text-red")}>
+                      {status}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+            {active && <BatchRunner batch={active} viewerRole={viewerRole} readOnly={readOnly} onChange={updateBatch} />}
+          </div>
+        )
+      ) : pastDetail ? (
+        <div>
+          <button onClick={() => setPastDetailId(null)} className="text-[12px] font-semibold text-grey-500 mb-3">← 지난 과제 목록으로</button>
+          <BatchRunner batch={pastDetail} viewerRole={viewerRole} readOnly={readOnly} onChange={updateBatch} />
+        </div>
+      ) : (
+        <PastBatchList batches={past} onOpen={(id) => setPastDetailId(id)} />
+      )}
     </div>
   );
 }
 
-function BatchRunner({ batch, viewerRole, onChange }: { batch: HomeworkBatch; viewerRole: "student" | "teacher"; onChange: (b: HomeworkBatch) => void }) {
+function PastBatchList({ batches, onOpen }: { batches: HomeworkBatch[]; onOpen: (id: string) => void }) {
+  const [subjectFilter, setSubjectFilter] = useState<string | "all">("all");
+  const subjects = Array.from(new Map(batches.filter((b) => b.subjectId).map((b) => [b.subjectId as string, b.subjectName ?? "과목"])).entries());
+  const filtered = subjectFilter === "all" ? batches : batches.filter((b) => b.subjectId === subjectFilter);
+
+  if (batches.length === 0) {
+    return <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">지난 과제가 없습니다.</div>;
+  }
+
+  return (
+    <div>
+      {subjects.length > 0 && (
+        <div className="flex flex-wrap gap-2 mb-4">
+          <button
+            onClick={() => setSubjectFilter("all")}
+            className={"text-[12.5px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] " + (subjectFilter === "all" ? "border-ink bg-ink text-white" : "border-grey-200 text-ink")}
+          >
+            전체
+          </button>
+          {subjects.map(([id, name]) => (
+            <button
+              key={id}
+              onClick={() => setSubjectFilter(id)}
+              className={"text-[12.5px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] " + (subjectFilter === id ? "border-ink bg-ink text-white" : "border-grey-200 text-ink")}
+            >
+              {name}
+            </button>
+          ))}
+        </div>
+      )}
+      {filtered.map((b) => {
+        const correct = b.items.filter((i) => i.grade === "correct").length;
+        return (
+          <button
+            key={b.id}
+            onClick={() => onOpen(b.id)}
+            className="w-full text-left border border-grey-200 rounded-xl px-4 py-3 mb-2 flex items-center justify-between hover:bg-grey-100"
+          >
+            <span className="text-[13px] font-bold text-ink">{b.label}</span>
+            <span className="text-[12.5px] text-grey-500">{b.items.length}문항 · <span className="font-bold text-ink">{correct}/{b.items.length}점</span></span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function BatchRunner({
+  batch, viewerRole, readOnly, onChange,
+}: {
+  batch: HomeworkBatch; viewerRole: "student" | "teacher"; readOnly?: boolean; onChange: (b: HomeworkBatch) => void;
+}) {
   const [i, setI] = useState(0);
   const [response, setResponse] = useState(batch.items[i]?.response ?? "");
   const [saving, setSaving] = useState(false);
@@ -122,18 +211,22 @@ function BatchRunner({ batch, viewerRole, onChange }: { batch: HomeworkBatch; vi
       <div className="w-[120px] shrink-0">
         <p className="text-[11px] font-bold text-grey-400 uppercase mb-2">목차</p>
         <div className="flex flex-col gap-1">
-          {batch.items.map((it, idx) => (
-            <button
-              key={it.problemId}
-              onClick={() => goTo(idx)}
-              className={
-                "text-[12.5px] text-left px-2.5 py-1.5 rounded-lg " +
-                (idx === i ? "bg-ink text-white font-bold" : it.graded ? (it.grade === "correct" ? "bg-green/10 text-green" : "bg-red-bg text-red") : it.submittedAt ? "bg-grey-100 text-ink" : "text-grey-500")
-              }
-            >
-              과제 {it.position}
-            </button>
-          ))}
+          {batch.items.map((it, idx) => {
+            const pendingGrade = it.submittedAt && !it.graded;
+            return (
+              <button
+                key={it.problemId}
+                onClick={() => goTo(idx)}
+                className={
+                  "text-[12.5px] text-left px-2.5 py-1.5 rounded-lg flex items-center justify-between gap-1.5 " +
+                  (idx === i ? "bg-ink text-white font-bold" : it.graded ? (it.grade === "correct" ? "bg-green/10 text-green" : "bg-red-bg text-red") : pendingGrade ? "bg-grey-100 text-ink" : "text-grey-500")
+                }
+              >
+                <span>과제 {it.position}</span>
+                {pendingGrade && <span className={"text-[10px] font-bold " + (idx === i ? "text-white/80" : "text-grey-500")}>채점 대기</span>}
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -150,7 +243,15 @@ function BatchRunner({ batch, viewerRole, onChange }: { batch: HomeworkBatch; vi
         {item.figure != null && <ProblemFigure spec={item.figure} className="mb-3" />}
         {item.question && <p className="text-[14px] font-bold text-ink mb-3">{item.question}</p>}
 
-        {viewerRole === "student" && !item.graded && (
+        {viewerRole === "student" && !item.graded && readOnly && (
+          <div className="mb-3">
+            <p className="text-[13px] text-ink">
+              제출한 답: {item.format === "mc" && item.options && item.response !== null ? item.options[Number(item.response)] : item.response || "(아직 제출하지 않음)"}
+            </p>
+          </div>
+        )}
+
+        {viewerRole === "student" && !item.graded && !readOnly && (
           <div className="mb-3">
             {item.format === "mc" && item.options ? (
               <div className="flex flex-col gap-2">

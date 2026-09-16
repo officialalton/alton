@@ -5,6 +5,8 @@ import type { VocabQuiz, VocabFolder } from "./vocab-library-data";
 
 const createVocabQuizAction = vi.fn();
 const submitVocabQuizAction = vi.fn();
+const saveVocabQuizProgressAction = vi.fn();
+const retakeVocabQuizAction = vi.fn();
 
 vi.mock("./vocab-library-actions", () => ({
   addMyVocabWordAction: vi.fn(),
@@ -15,9 +17,13 @@ vi.mock("./vocab-library-actions", () => ({
   toggleLibraryWordInMyVocabAction: vi.fn(),
   createVocabQuizAction: (...args: unknown[]) => createVocabQuizAction(...args),
   submitVocabQuizAction: (...args: unknown[]) => submitVocabQuizAction(...args),
+  saveVocabQuizProgressAction: (...args: unknown[]) => saveVocabQuizProgressAction(...args),
+  retakeVocabQuizAction: (...args: unknown[]) => retakeVocabQuizAction(...args),
 }));
 
 const folders: VocabFolder[] = [{ id: "f1", name: "오답 노트", isDefault: true }];
+saveVocabQuizProgressAction.mockResolvedValue({ ok: true, value: undefined });
+retakeVocabQuizAction.mockResolvedValue({ ok: true, value: undefined });
 
 describe("VocabLibraryTab — 시험 만들기·채점 흐름", () => {
   it("폴더를 선택해 시험을 만들면 folderIds로 요청한다", async () => {
@@ -46,6 +52,7 @@ describe("VocabLibraryTab — 시험 만들기·채점 흐름", () => {
       score: null,
       total: null,
       answers: null,
+      source: { customWords: true, bookIds: [], folderIds: [] },
       createdAt: "2026-09-15T00:00:00Z",
       dueAt: null,
       sessionId: null,
