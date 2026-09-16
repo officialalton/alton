@@ -7,8 +7,8 @@
 
 | 항목 | 값 |
 |---|---|
-| 브랜치 / Preview | `preview/m4-integration-verification` / **https://alton-czrtormc2-alton7.vercel.app** (커밋 `f52865c` 시점) |
-| 공유 non-prod(`worpsqwqgnspddnrtnvq`) | 마이그레이션 **`20261362000000`까지 적용됨**(local = remote) |
+| 브랜치 / Preview | `preview/m4-integration-verification` / **https://alton-gqt1zjtdx-alton7.vercel.app** (커밋 `62721f3` 시점) |
+| 공유 non-prod(`worpsqwqgnspddnrtnvq`) | 마이그레이션 **`20261381000000`까지 적용됨**(local = remote) |
 | Production | 배포·마이그레이션 없음(오픈 전, 실제 고객 데이터 없음) |
 | 테스트 | 마지막 전체 일괄 실행 2596/1 skip(`63d1189`, `db reset` 직후). 그 뒤 배치들은 **파일별 스위트 전부 초록**(전체 일괄 재실행 미실시). 통합 테스트는 `supabase db reset --local` 직후 `--no-file-parallelism`으로 돌려야 한다(예약 fixture 충돌·append-only 전역 count 는 재실행 시 실패 — 결함 아님) |
 | 실제 외부 연동 | 교재 Drive `ALTON Company Tutoring Resources`(id `0AKnx7roQfcSaUk9PVA`) 읽기·폴더 생성·파일 가져오기·고정 사본 공개 확인. Preview 환경변수 `CURRICULUM_DRIVE_ENABLED/ID/ALLOW_REAL_WRITES=true`(제품 오너 설정). AI 생성은 Anthropic 키(Preview·로컬 있음). 유료 서비스 추가 없음 |
@@ -92,7 +92,9 @@
 ## 6. 미결·다음 작업 단위
 
 - **지금**: 제품 오너 Preview UAT(문제은행 AI 생성 → 그림 확인 → 전체 공개 → 수업 준비에 담기 → SPR 풀이·채점 / 과제 발급·풀이 / 문제 위 필기 / 관리자 교재 탭).
-- **다음(문제은행 다음, C 상담·결제·정산 전) — 2026-09-15 제품 오너 지시**: 단어장 재구성(단어장/시험 두 탭, 내 단어장+College Board 1~10권 5,000단어, 유사어·반의어·예문, 뜻/단어 가리기, Quizlet식 시험 만들기·저장·채점, 세션뷰 연동+교사 즉석 시험). 상세는 [`2026-09-14-remaining-work.md`](2026-09-14-remaining-work.md) "단어장 재구성" 절. 기존 지문 클릭 저장(`VocabClickLayer.tsx`)은 당장 손대지 않음. 착수 전 1장 정리 필요.
+- **단어장(2026-09-15~16, 진행 중)**: ALTON SAT 공용 단어장 1~10권(1권 200개 기준, 실제로는 권당 목표 200개) — 1·2·4·5·7권 완료(1,000단어), 3권도 재보강 완료. 6·8·9·10권은 뒤로 갈수록 중복 충돌률이 높아 재보강 스크립트(`scripts/vocab-library-seed.ts`, 제외 목록 확대·재시도 상한 상향)가 아직 백그라운드로 도는 중 — 완료되면 `supabase db push --linked`로 non-prod 반영 필요(로컬에만 있음). 내 단어장 폴더(기본 "오답 노트"), 별표 저장, 시험 선택지 영어화, UI 개편(가리기 개별 공개·A-Z 필터·랜덤 순서·페이지네이션) 전부 구현·테스트·Preview 배포 완료(마이그레이션 `20261376`~`20261380`). 기존 지문 클릭 저장(`VocabClickLayer.tsx`)은 손대지 않음.
+- **과제(2026-09-16, 완료)**: 회차 키워드 풀에 묶는 방식을 폐기 — 교사 포털 "과제" 탭이 "과제 생성"(학생·수업·키워드를 한 번에 골라 즉시 발급, `issue_homework_batch` RPC)과 "과제 내역"(학생 포털과 같은 회차별 화면 재사용)으로 분리. 세션뷰에는 발급 UI가 없고 발급되는 순간 그 수업 과제 패널에 자동으로 뜬다(마이그레이션 `20261381`).
+- **SAT Math 생성 품질(2026-09-16, 1단계만 완료, 진행 중)**: 코드 검토([`2026-09-16-sat-math-generation-code-review-and-proposal.md`](2026-09-16-sat-math-generation-code-review-and-proposal.md))에서 지목한 A(검사·저장 문항 분리)/B(필수 검사 미실행이 통과 처리)/C(해설 따라 정답 자동 변경)/G(오답 수정 후 재검증 누락) 결함을 Math 한정으로 수정·모의 검증(`lib/problem-generation/pipeline.test.ts`, AI 호출 없이 재현). R&W는 기존 동작 유지. **미완료**: 계산 기반 검증 확장(좌표평면·연립방정식 target 명시화 등, 검토 문서 3~4절), 대표 유형 실측 배치 비교(승인된 유료 배치 예산 없어 이번 라운드는 실행하지 않음), Preview 로그인 확인(테스트 계정 없어 미실시).
 - 미결(제품 오너): 학생이 푼 것 실시간 배지 / 선택지 자체가 그래프 4개인 문항(선택지 figure) / 이미지가 있는 문항의 AI 생성(현재 AI는 데이터 도형만) / 기한·알림·AI 과제 생성(후속).
 - 다듬을 것: ~~`CompositionPanel` 전체 새로고침~~ ~~PDF 교재 행 키워드 이름~~ ~~SessionShell·ProblemBankTab lint 오류~~(완료 2026-09-15). 열린 항목: 통합 테스트 병렬 격리(예약 fixture·append-only 전역 count — 테스트 인프라 결함, 제품 결함 아님) / `session_homework_attempts`는 삭제·마이그레이션 없이 읽기 전용 보존, 보존·삭제 정책은 v3 과제 흐름 안정화 뒤 별도 결정.
 - 오픈 전 blocker(변화 없음, 아카이브 참고): 실제 세금 계산, 실제 이메일 발송, Workspace 위임 계정 분리, SECURITY DEFINER anon 권한 감사, E2E 전용 fixture, `mark_expired_invites` cron.
