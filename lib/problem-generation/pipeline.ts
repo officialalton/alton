@@ -278,6 +278,7 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
                   options: originalOptions, correctIndex: g.correctIndex!, explanation: g.explanation, index: target.index, reason: target.reason, avoid: attemptsAvoid,
                 });
                 if (repaired.ok) return { index: target.index, text: repaired.text };
+                console.error("[pipeline] 오답 보정 실패 사유:", target.index, attempt, repaired.error);
                 attemptsAvoid.push(repaired.error);
               } catch (e) {
                 console.error("[pipeline] 오답 부분 수정 오류:", target.index, e instanceof Error ? e.message : e);

@@ -570,7 +570,10 @@ export async function repairOneDistractorCore(params: {
   const otherOptions = params.options.map((o, i) => (i === params.index ? null : o)).filter((o): o is string => o !== null);
   const message = await getAnthropic().messages.create({
     model: "claude-sonnet-5",
-    max_tokens: 700,
+    // 계획(plan) 필드가 5개나 되어 응답이 길어지면 예전엔 맨 뒤에 둔 text 가 토큰 예산에 잘려 빈 문자열로 왔다
+    // (2026-09-15 재확인: 실패 사유 100%가 "새 선택지가 비어 있습니다"). text 를 먼저 받고 계획은 그 뒤로 미루며,
+    // 예산도 넉넉히 늘린다.
+    max_tokens: 1100,
     tools: [
       {
         name: "repair_one_distractor",
@@ -578,14 +581,14 @@ export async function repairOneDistractorCore(params: {
         input_schema: {
           type: "object",
           properties: {
+            text: { type: "string", description: "새 선택지 문장. 아래 계획을 반영하되, 이 필드를 가장 먼저 채운다." },
             evidence_kept: { type: "string", description: "이 오답이 유지해야 할 지문 근거 또는 자료 값." },
             misconception: { type: "string", description: "학생이 빠질 수 있는 구체적 오개념 하나." },
             why_plausible: { type: "string", description: "그 오개념이 정답처럼 보이는 이유." },
             actual_flaw: { type: "string", description: "실제로 틀리는 지점(정답과 갈라지는 지점)." },
             error_type: { type: "string", description: "다른 세 선택지와 겹치지 않는 오류 유형(예: 범위·인과·강도·시간·화자·조건·부분계산·단위·부호)." },
-            text: { type: "string", description: "위 계획을 반영한 새 선택지 문장." },
           },
-          required: ["evidence_kept", "misconception", "why_plausible", "actual_flaw", "error_type", "text"],
+          required: ["text", "evidence_kept", "misconception", "why_plausible", "actual_flaw", "error_type"],
         },
       },
     ],
