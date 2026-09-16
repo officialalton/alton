@@ -33,9 +33,19 @@ export type TeacherLessonScheduleItem = {
 // 판정 기준이 갈리는 것을 막기 위함.
 export function isPastLesson(lesson: TeacherLessonScheduleItem, nowMs: number): boolean {
   const ended = new Date(lesson.endsAt).getTime() < nowMs;
-  if (!ended) return false;
-  if (lesson.isTrial && lesson.reviewStatus !== "final") return false;
-  return true;
+  // 2026-09-17(실사용 중 발견) — 두 가지를 한 번에 고친다.
+  // (1) 시간 경과만 보고 판정해, 예약 시각이 아직 미래인데 final_status가
+  //     이미 종결(completed 등)된 세션이 "예정 수업"에 계속 남아 '수업
+  //     준비'/'Meet 입장'이 활성화돼 있었다 — app/student/lesson-booking-data.ts
+  //     의 isPastSession()과 동일 기준(시간 경과 OR 최종판정)으로 통일한다.
+  // (2) 체험 수업은 리뷰가 확정(final)돼야만 지난 수업으로 넘어가던 예전
+  //     정책은 이미 2026-09-11 학생/학부모 쪽에서 폐기됐다("완료된 체험
+  //     수업이 리뷰만 안 끝났다는 이유로 예정 수업에 계속 남는" 결함이었기
+  //     때문 — 제품 오너 지시). 교사 쪽만 그 정정이 누락돼 있었다. 리뷰
+  //     미확정 여부는 이제 화면에서 "리뷰 작성 필요" 배지로만 표시하고,
+  //     예정/지난 분류 자체에는 더 이상 쓰지 않는다.
+  const finalized = lesson.finalStatus !== "scheduled" && lesson.finalStatus !== "live";
+  return ended || finalized;
 }
 
 export async function loadTeacherLessonSchedule(

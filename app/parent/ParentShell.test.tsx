@@ -83,7 +83,7 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    ["홈", "레슨", "지인 추천", "수업권", "통계"].forEach((label) =>
+    ["홈", "수업", "지인 추천", "수업권", "통계"].forEach((label) =>
       expect(screen.getAllByText(label).length).toBeGreaterThan(0)
     );
     expect(screen.getAllByText("지훈").length).toBeGreaterThan(0);
@@ -107,7 +107,7 @@ describe("ParentShell", () => {
     expect(pushMock).toHaveBeenCalledWith("?child=s2&tab=home", { scroll: false });
   });
 
-  it("레슨 탭을 누르면 읽기전용 LessonsTab이 렌더링된다(메모 입력창 없음)", () => {
+  it("수업 탭을 누르면 읽기전용 LessonsTab이 렌더링된다(메모 입력창 없음)", () => {
     render(
       <ParentShell
         parentName="김민지"
@@ -117,7 +117,7 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("레슨")[0]);
+    fireEvent.click(screen.getAllByText("수업")[0]);
     expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
   });
 

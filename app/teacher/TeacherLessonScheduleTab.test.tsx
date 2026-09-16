@@ -482,7 +482,7 @@ describe("TeacherLessonScheduleTab", () => {
     vi.useRealTimers();
   });
 
-  it("M4 UAT #5 — 시간이 지난 정규 수업은 지난 수업으로, 리뷰 미확정 체험 수업은 예정된 수업에 남는다", () => {
+  it("2026-09-17(정정) — 시간이 지난 정규 수업도, 리뷰 미확정 체험 수업도 종료 처리되면 지난 수업으로 넘어간다", () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date("2026-09-08T12:00:00Z"));
     const pastRegular: TeacherLessonScheduleItem = {
@@ -516,15 +516,16 @@ describe("TeacherLessonScheduleTab", () => {
         onResolveLateness={vi.fn()}
       />
     );
-    // 체험(리뷰 미확정)은 예정된 수업 목록에 바로 보인다.
-    expect(screen.getByText(/체험/)).toBeInTheDocument();
-    expect(screen.getByText("수업 리뷰 작성")).toBeInTheDocument();
-    // 정규는 지난 수업으로 넘어가 접혀 있다 — "지난 수업 (1)" 토글이 보이고
-    // 펼치기 전까지는 정규 카드 자체가 렌더링되지 않는다.
-    expect(screen.getByText(/지난 수업 \(1\)/)).toBeInTheDocument();
+    // 둘 다 종료 처리(finalStatus completed)됐으므로 지난 수업으로 넘어가 접혀
+    // 있다 — 리뷰 확정 여부는 더 이상 예정/지난 분류에 영향을 주지 않는다
+    // (2026-09-17 정정 — 이전에는 체험 리뷰 미확정 시 예정된 수업에 남아있었다).
+    expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
+    expect(screen.getByText(/지난 수업 \(2\)/)).toBeInTheDocument();
     expect(screen.queryByText("정규")).not.toBeInTheDocument();
-    fireEvent.click(screen.getByText(/지난 수업 \(1\)/));
+    expect(screen.queryByText("수업 리뷰 작성")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByText(/지난 수업 \(2\)/));
     expect(screen.getByText("정규")).toBeInTheDocument();
+    expect(screen.getByText("수업 리뷰 작성")).toBeInTheDocument();
     vi.useRealTimers();
   });
 
@@ -565,6 +566,9 @@ describe("TeacherLessonScheduleTab", () => {
       />
     );
 
+    // 2026-09-17(정정) — 종료 처리된 체험 수업은 이제 지난 수업(접힌 섹션)에
+    // 있으므로 펼친 뒤에 리뷰 작성 버튼을 찾는다.
+    fireEvent.click(screen.getByText(/지난 수업 \(1\)/));
     fireEvent.click(screen.getByText("수업 리뷰 작성"));
     await waitFor(() => expect(listMyTrialSessionsNeedingReview).toHaveBeenCalled());
     expect(await screen.findByText("수업 리뷰 작성", { selector: "h2" })).toBeInTheDocument();
@@ -618,6 +622,7 @@ describe("TeacherLessonScheduleTab", () => {
       />
     );
 
+    fireEvent.click(screen.getByText(/지난 수업 \(1\)/));
     fireEvent.click(screen.getByText("수업 리뷰 작성"));
     await screen.findByText("수업 리뷰 작성", { selector: "h2" });
     fireEvent.click(screen.getByText("닫기"));

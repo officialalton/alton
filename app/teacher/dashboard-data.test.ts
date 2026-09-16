@@ -125,7 +125,7 @@ describe("loadTeacherDashboard — v3 예약 병합 + 시간대 통일(2026-09-1
     ]);
   });
 
-  it("리뷰 미확정 체험 수업(isPastLesson=false)은 종료 시각이 지났어도 예정 수업에 남는다 — '수업' 탭과 동일 판정", async () => {
+  it("2026-09-17(정정) — 리뷰 미확정 체험 수업도 종료 시각이 지나면 예정 수업에서 빠진다 — '수업' 탭과 동일 판정", async () => {
     const supabase = makeSupabase({
       profile: { name: "박서연" },
       teacherRow: { status: "active" },
@@ -145,7 +145,7 @@ describe("loadTeacherDashboard — v3 예약 병합 + 시간대 통일(2026-09-1
 
     const result = await loadTeacherDashboard(supabase, "teacher1", lessonSchedule, "Asia/Seoul");
 
-    expect(result.upcoming.map((u) => u.sessionId)).toContain("sess-trial-unreviewed");
+    expect(result.upcoming.map((u) => u.sessionId)).not.toContain("sess-trial-unreviewed");
   });
 
   it("리뷰 확정된 체험 수업(isPastLesson=true)은 홈 예정 수업에서 빠진다", async () => {

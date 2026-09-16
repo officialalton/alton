@@ -74,7 +74,7 @@ export default function LessonsTab({
 
   return (
     <div className={hideHeader ? "" : "max-w-[640px] px-8 py-8"}>
-      {!hideHeader && <h1 className="text-[20px] font-extrabold text-ink mb-5">레슨</h1>}
+      {!hideHeader && <h1 className="text-[20px] font-extrabold text-ink mb-5">수업</h1>}
 
       {!forcedSubtab && (
         <div className="flex gap-4 mb-5 border-b border-grey-200">

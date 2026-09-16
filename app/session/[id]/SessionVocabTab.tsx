@@ -25,12 +25,11 @@ export default function SessionVocabTab({
 
   return (
     <div className="max-w-[640px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-1.5">단어장</h1>
-      <p className="text-[13px] text-grey-500 mb-5">
-        {isTeacher
-          ? "학생 단어장을 그대로 보여줍니다. 여기서 바로 즉석 시험을 낼 수 있습니다."
-          : "선생님이 배정했거나 직접 추가한 단어입니다."}
-      </p>
+      {isTeacher && (
+        <p className="text-[13px] text-grey-500 mb-5">
+          학생 단어장을 그대로 보여줍니다. 여기서 바로 즉석 시험을 낼 수 있습니다.
+        </p>
+      )}
 
       {isTeacher && canManage && (
         <>

@@ -49,7 +49,7 @@ const NAV_ITEMS = [
   { id: "vocab", label: "단어장", icon: "🔤" },
   { id: "homework", label: "과제", icon: "📝" },
   { id: "booking", label: "예약", icon: "🗓️" },
-  { id: "lessons", label: "레슨", icon: "📅" },
+  { id: "lessons", label: "수업", icon: "📅" },
   { id: "credits", label: "지인 추천", icon: "💳" },
   { id: "entitlements", label: "수업권", icon: "🎟️" },
   { id: "stats", label: "통계", icon: "📊" },
