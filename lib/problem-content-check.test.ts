@@ -17,6 +17,11 @@ describe("수식·선택지 블록 검증", () => {
     expect(m).toEqual(expect.arrayContaining(["option_duplicate", "correct_index", "option_style"]));
     expect(checkContent({ ...base, options: ["1"] }).some((i) => i.code === "option_count")).toBe(true);
   });
+  it("선택지가 실제 그래프 없이 'Graph A' 같은 이름표뿐이면 거부(2026-09-15 — 그래프 선택형 미구현)", () => {
+    expect(checkContent({ ...base, options: ["Graph A", "Graph B", "Graph C", "Graph D"] }).some((i) => i.code === "figure_choice_placeholder")).toBe(true);
+    expect(checkContent({ ...base, options: ["2", "4", "5", "7"] }).some((i) => i.code === "figure_choice_placeholder")).toBe(false);
+  });
+
   it("로마숫자 진술: 조합 선택지와 진술 수가 맞아야 하고, 진술 없이 조합 선택지만 있으면 거부", () => {
     const ok = checkContent({ ...base, passage: "Which of the following must be true?", statements: ["$a > 0$", "$b < 0$", "$ab < 0$"], options: ["I only", "I and II only", "I, II, and III", "Neither"] });
     expect(ok).toEqual([]);

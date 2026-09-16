@@ -62,6 +62,12 @@ export function checkContent(input: ContentInput): FigureIssue[] {
     if (dup.length) issues.push({ code: "option_duplicate", message: `선택지가 중복됩니다: ${Array.from(new Set(dup)).join(", ")}` });
     if (input.correctIndex === null || input.correctIndex < 0 || input.correctIndex >= opts.length) issues.push({ code: "correct_index", message: "정답 인덱스가 선택지 범위 안에 없습니다." });
     if (opts.some((o) => /^[a-z]\s*=\s*/i.test(o) && !/^[a-z]\s*=\s*[a-z]/i.test(o))) issues.push({ code: "option_style", message: "선택지는 값만 적습니다('x = 3' 이 아니라 '3')." });
+    // 2026-09-15 — "선택지 자체가 그래프/도형 4개"인 문항은 아직 구현되지 않았다(구현 대기).
+    // AI가 실제 그래프를 못 그리고 "Graph A" 같은 이름표만 텍스트로 만들면, 학생은 볼 것이 없는데
+    // 그중 하나를 고르라는 셈이 되어 정답 표시 자체가 무의미해진다. 이 모양은 저장을 막는다(재생성 유도).
+    if (opts.length >= 2 && opts.every((o) => /^(graph|figure|diagram|option)\s*[a-d1-4]$/i.test(o.trim()))) {
+      issues.push({ code: "figure_choice_placeholder", message: "선택지가 실제 그래프/도형이 아니라 'Graph A' 같은 이름표뿐입니다 — 그래프 선택형(선택지 자체가 이미지 4개)은 아직 지원하지 않으니, 값을 직접 비교하는 형태로 다시 쓰세요." });
+    }
   }
   const statements = (input.statements ?? []).map((s) => s.trim()).filter(Boolean);
   const opts = input.options ?? [];
