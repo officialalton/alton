@@ -128,4 +128,30 @@ describe("loadLessons — v3 예약 병합", () => {
     expect(upcoming).toEqual([]);
     expect(past).toEqual([]);
   });
+
+  it("2026-09-16(실사용 중 발견) — v3 지난 수업(체험 포함)을 past에 포함한다", async () => {
+    const supabase = makeSupabase({ enrollments: [], teacherProfiles: [], legacySessions: [] });
+    const lessonBooking = makeLessonBooking({
+      pastSessionsForReport: [
+        {
+          sessionId: "v3-past-1",
+          subjectName: "SAT 체험",
+          teacherName: "김민준 선생님",
+          startsAt: "2026-09-14T09:00:00.000Z",
+          needsReview: false,
+        },
+      ],
+    });
+
+    const { past } = await loadLessons(supabase, "student1", lessonBooking);
+
+    expect(past).toHaveLength(1);
+    expect(past[0]).toMatchObject({
+      sessionId: "v3-past-1",
+      subjectName: "SAT 체험",
+      teacherName: "김민준 선생님",
+      status: "completed",
+      scheduledAt: "2026-09-14T09:00:00.000Z",
+    });
+  });
 });

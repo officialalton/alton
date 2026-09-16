@@ -112,6 +112,27 @@ export async function loadLessons(
     });
   }
 
+  // 2026-09-16(실사용 중 발견) — v3 지난 세션이 "지난 수업" 탭에서 전부
+  // 누락돼 있었다. 위 upcomingBookings 병합만 있고 지난 세션 병합이 없어,
+  // 완료된 v3 수업(체험 포함)이 학생/학부모 "레슨" 탭 어디에도 보이지 않았다.
+  // 이미 loadLessonBookingData()가 계산해둔 pastSessionsForReport(최근 14일,
+  // 확정 예약만)를 그대로 재사용한다(신고 대상 목록과 동일 기준 — 새 판정
+  // 로직을 만들지 않음).
+  for (const p of lessonBooking?.pastSessionsForReport ?? []) {
+    past.push({
+      sessionId: p.sessionId,
+      enrollmentId: "",
+      subjectId: "",
+      subjectName: p.subjectName,
+      teacherName: p.teacherName,
+      sessionNumber: null,
+      unitTitle: null,
+      status: "completed",
+      scheduledAt: p.startsAt,
+      durationMinutes: 0,
+    });
+  }
+
   upcoming.sort(
     (a, b) =>
       new Date(a.scheduledAt ?? 0).getTime() -

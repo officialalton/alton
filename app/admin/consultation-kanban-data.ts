@@ -95,7 +95,8 @@ const ACCOUNT_CREATION_CARD_LIMIT = 200;
 
 function buildAccountCreationCard(
   student: { id: string; student_name: string; student_grade: string | null; child_auth_user_id: string; created_at: string },
-  link: { guardian_name: string; guardian_email: string }
+  link: { guardian_name: string; guardian_email: string },
+  consentConfirmedAt: string | null
 ): ConsultationListItem {
   // 계정 생성 카드는 이미 계정이 만들어진 뒤라 "상담 신청/일정 확정"에
   // 해당하는 단계가 없다 — classifyStage()가 곧바로 체험 파이프라인 분기를
@@ -134,7 +135,7 @@ function buildAccountCreationCard(
     outcome_notes: null,
     prospect_contact_id: null,
     consent_version_id: null,
-    consent_confirmed_at: null,
+    consent_confirmed_at: consentConfirmedAt,
     child_id: student.child_auth_user_id,
     trial_intent_confirmed_at: student.created_at,
     trial_entitlement_grant_id: null,
@@ -166,11 +167,24 @@ async function loadAccountCreationCards(admin: ReturnType<typeof createAdminClie
     .order("created_at", { ascending: false })
     .limit(ACCOUNT_CREATION_CARD_LIMIT);
 
+  const childIds = (studentRows ?? [])
+    .map((s) => s.child_auth_user_id)
+    .filter((id): id is string => !!id);
+  // 2026-09-16(실사용 중 발견) — 계정 생성 경로는 consultations.consent_confirmed_at을
+  // 애초에 안 쓰고 record_trial_smart_notes_consent()가 trial_smart_notes_consents에
+  // 실제 동의를 남긴다(20261272000000). 이 카드가 그 값을 확인하지 않고 항상 null로
+  // 합성해, 보호자가 실제로 동의를 마쳐도 "보호자 동의 확인 대기 중" 배지가 절대
+  // 안 풀리는 결함이 있었다.
+  const { data: consentRows } = childIds.length
+    ? await admin.from("trial_smart_notes_consents").select("child_id, confirmed_at").in("child_id", childIds)
+    : { data: [] as { child_id: string; confirmed_at: string }[] };
+  const consentByChildId = new Map((consentRows ?? []).map((c) => [c.child_id, c.confirmed_at]));
+
   return (studentRows ?? [])
     .filter((s): s is typeof s & { child_auth_user_id: string } => !!s.child_auth_user_id)
     .map((s) => {
       const link = linkById.get(s.link_id)!;
-      return buildAccountCreationCard(s, link);
+      return buildAccountCreationCard(s, link, consentByChildId.get(s.child_auth_user_id) ?? null);
     });
 }
 
