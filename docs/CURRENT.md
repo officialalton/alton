@@ -92,6 +92,7 @@
 ## 6. 미결·다음 작업 단위
 
 - **지금**: 제품 오너 Preview UAT(문제은행 AI 생성 → 그림 확인 → 전체 공개 → 수업 준비에 담기 → SPR 풀이·채점 / 과제 발급·풀이 / 문제 위 필기 / 관리자 교재 탭).
+- **다음(문제은행 다음, C 상담·결제·정산 전) — 2026-09-15 제품 오너 지시**: 단어장 재구성(단어장/시험 두 탭, 내 단어장+College Board 1~10권 5,000단어, 유사어·반의어·예문, 뜻/단어 가리기, Quizlet식 시험 만들기·저장·채점, 세션뷰 연동+교사 즉석 시험). 상세는 [`2026-09-14-remaining-work.md`](2026-09-14-remaining-work.md) "단어장 재구성" 절. 기존 지문 클릭 저장(`VocabClickLayer.tsx`)은 당장 손대지 않음. 착수 전 1장 정리 필요.
 - 미결(제품 오너): 학생이 푼 것 실시간 배지 / 선택지 자체가 그래프 4개인 문항(선택지 figure) / 이미지가 있는 문항의 AI 생성(현재 AI는 데이터 도형만) / 기한·알림·AI 과제 생성(후속).
 - 다듬을 것: `CompositionPanel` 변경마다 `window.location.reload()` / PDF 교재 행 키워드 이름 / `SessionShell`(7)·`ProblemBankTab`(1) 기존 lint 오류 / 통합 테스트 병렬 격리(예약 fixture, append-only 전역 count).
 - 오픈 전 blocker(변화 없음, 아카이브 참고): 실제 세금 계산, 실제 이메일 발송, Workspace 위임 계정 분리, SECURITY DEFINER anon 권한 감사, E2E 전용 fixture, `mark_expired_invites` cron.
