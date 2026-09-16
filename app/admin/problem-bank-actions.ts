@@ -387,27 +387,28 @@ export async function createDraftVersionAction(params: {
   const { data: problemRow } = await admin.from("problems").select("format, skill_code, exam_system").eq("id", params.problemId).maybeSingle();
   const format = (problemRow?.format as string | undefined) ?? (params.options ? "mc" : "essay");
 
-  // 2026-09-15 제품 오너 — "정답이 정정되어야 초안으로 들어와야지, 공개할 때 정정되면 안 된다."
-  // 저장(초안 생성/수정) 시점에 정답-해설을 대조한다 — 이 초안을 만든 경로(배치 생성/관리자 직접 작성)와
-  // 무관하게, 초안이 존재하는 순간부터 이미 정답이 맞아야 한다. 공개 시점에는 더 이상 손대지 않는다.
+  // 2026-09-15 제품 오너 — "관리자가 고치는 상황을 원하지 않는다. 초안으로 들어올 때 이미 문제 자체에
+  // 오류가 없어야 한다." 관리자 검수는 "문제가 괜찮은가"를 판단하는 것이지 "문제가 틀렸는가"를 고치는
+  // 일이 아니다. 그래서 정답-해설이 어긋나면: (a) 정답이 선택지 안에 있으면 그 자리로 조용히 맞춰 저장하고
+  // (b) 정답이 선택지 어디에도 없으면(실제 사례) 아예 **저장을 거부한다** — "오답 보강 대기"처럼 admin이
+  // 보는 큐에 절대 들어가지 않는다. AI 배치 생성 경로는 이 거부를 실패로 받아 재생성하고, 수동 작성 경로는
+  // 관리자가 그 자리에서 다시 계산해 고쳐야만 저장된다(초안으로 남지 않는다).
   let correctIndex = params.correctIndex;
   let explanation = params.explanation;
   let answerFixed = false;
-  let answerUnresolved: string | null = null;
   if (format === "mc" && params.options && params.options.length >= 2 && correctIndex !== null && explanation.trim()) {
     try {
       const { resolveAnswerFromExplanationCore } = await import("@/lib/problem-generation/core");
       const resolved = await resolveAnswerFromExplanationCore({
         stimulus: fullText, question: params.question ?? "", options: params.options, explanation,
       });
-      if (resolved.ok && resolved.confidence === "high" && resolved.concludedIndex !== correctIndex) {
+      if (!resolved.ok) {
+        return { ok: false, error: "정답-해설이 서로 맞지 않습니다 — 해설이 어느 선택지도 명확히 뒷받침하지 않습니다. 계산이나 선택지를 다시 확인한 뒤 저장하세요." };
+      }
+      if (resolved.confidence === "high" && resolved.concludedIndex !== correctIndex) {
         correctIndex = resolved.concludedIndex;
         explanation = resolved.cleanExplanation;
         answerFixed = true;
-      } else if (!resolved.ok) {
-        // 해설이 어떤 선택지도 명확히 지지하지 않는다 — 정답이 선택지 중에 아예 없을 수 있다(실제 사례).
-        // 저장은 막지 않되(관리자가 보고 고칠 수 있어야 하니) 공개는 막는다.
-        answerUnresolved = "정답-해설 대조: 해설이 어느 선택지도 명확히 뒷받침하지 않습니다 — 계산이나 선택지를 다시 확인하세요.";
       }
     } catch (e) {
       console.error("[problem-bank] 저장 시 정답-해설 대조 오류:", e instanceof Error ? e.message : e);
@@ -436,12 +437,7 @@ export async function createDraftVersionAction(params: {
     const fv = validateFigureSpec(params.figure);
     return fv.ok ? fv.spec : params.figure;
   })();
-  const answerCheckIssues = answerUnresolved ? [{ code: "answer_explanation_unresolved", message: answerUnresolved }] : [];
-  const check: RenderCheck = {
-    ...figureCheck,
-    issues: [...figureCheck.issues, ...contentIssues, ...answerCheckIssues],
-    ok: figureCheck.ok && contentIssues.length === 0 && answerCheckIssues.length === 0,
-  };
+  const check: RenderCheck = { ...figureCheck, issues: [...figureCheck.issues, ...contentIssues], ok: figureCheck.ok && contentIssues.length === 0 };
   const { data, error } = await admin.rpc("save_problem_draft_version", {
     p_problem_id: params.problemId,
     p_passage: params.passage,

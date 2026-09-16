@@ -245,7 +245,10 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
         const resolved = await resolveAnswerFromExplanationCore({
           stimulus: text, question: question ?? "", options: g.options, explanation: g.explanation,
         });
-        if (resolved.ok && resolved.confidence === "high" && resolved.concludedIndex !== g.correctIndex) {
+        // 2026-09-15 제품 오너 — 해설이 선택지 중 어느 것도 뒷받침하지 못하면(정답이 선택지에 아예 없을
+        // 수 있다는 뜻) 관리자에게 넘기지 않는다 — 구조적 실패로 전체 재생성한다.
+        if (!resolved.ok) return fail("contract", "정답-해설 대조: 해설이 어느 선택지도 명확히 뒷받침하지 않습니다(정답이 선택지에 없을 수 있음).");
+        if (resolved.confidence === "high" && resolved.concludedIndex !== g.correctIndex) {
           stats.answerExplanationFixes += 1;
           usedCorrection = true;
           g.correctIndex = resolved.concludedIndex;
