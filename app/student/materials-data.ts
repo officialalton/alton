@@ -38,6 +38,8 @@ export type LibrarySection = {
 export type LibraryDocDetail = {
   id: string;
   title: string;
+  /** 2026-09-15 — 과목별 전체 교재 보기의 이전/다음 탐색에 쓴다. */
+  subjectId: string;
   sections: LibrarySection[];
   /** html = 섹션 본문. pdf/video = 파일 자료 — 지금 공개본(asset)을 뷰어가 연다(2026-09-14). */
   kind: "html" | "pdf" | "video";
@@ -137,7 +139,7 @@ export async function loadLibraryDoc(
 ): Promise<LibraryDocDetail | null> {
   const { data: doc } = await supabase
     .from("curriculum_docs")
-    .select("id, title, kind")
+    .select("id, title, kind, subject_id")
     .eq("id", docId)
     .eq("status", "published")
     .maybeSingle();
@@ -160,6 +162,7 @@ export async function loadLibraryDoc(
     return {
       id: doc.id,
       title: doc.title,
+      subjectId: doc.subject_id as string,
       sections: [],
       kind,
       asset: version
@@ -237,6 +240,7 @@ export async function loadLibraryDoc(
   return {
     id: doc.id,
     title: doc.title,
+    subjectId: doc.subject_id as string,
     kind,
     asset: null,
     sections: (sections ?? []).map((s) => ({

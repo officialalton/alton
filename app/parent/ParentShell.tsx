@@ -26,6 +26,8 @@ import InquiryTab from "./InquiryTab";
 import ParentEnrollmentTab from "./EnrollmentTab";
 import type { ChildSubjectEnrollments } from "./enrollment-data";
 import LessonBookingTab from "@/app/student/LessonBookingTab";
+import ParentMaterialsLibraryTab from "./MaterialsLibraryTab";
+import type { ParentChildLibrary } from "./materials-data";
 import type { LessonBookingData } from "@/app/student/lesson-booking-data";
 import {
   listAvailableSlotsForBooking,
@@ -39,6 +41,7 @@ import {
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
   { id: "enrollment", label: "수강 과목", icon: "🎓" },
+  { id: "materials", label: "교재", icon: "📖" },
   { id: "booking", label: "예약", icon: "🗓️" },
   { id: "lessons", label: "레슨", icon: "📅" },
   { id: "credits", label: "지인 추천", icon: "💳" },
@@ -72,6 +75,7 @@ export default function ParentShell({
   trialSmartNotesChildren,
   pendingRegularIntentChoices,
   childrenSubjectEnrollments,
+  materialsLibrary,
   progressedTrialEnrollmentIds,
   lessonBooking,
   focusSubjectEnrollmentId,
@@ -100,6 +104,7 @@ export default function ParentShell({
   trialSmartNotesChildren: TrialSmartNotesConsentStatus[];
   pendingRegularIntentChoices: PendingRegularIntentChoice[];
   childrenSubjectEnrollments: ChildSubjectEnrollments[];
+  materialsLibrary: ParentChildLibrary[];
   progressedTrialEnrollmentIds: string[];
   lessonBooking: LessonBookingData;
 }) {
@@ -302,6 +307,8 @@ export default function ParentShell({
               progressedTrialEnrollmentIds={progressedTrialEnrollmentIds}
               focusSubjectEnrollmentId={focusSubjectEnrollmentId}
             />
+          ) : activeTab === "materials" ? (
+            <ParentMaterialsLibraryTab childLibraries={materialsLibrary} />
           ) : activeTab === "family" ? (
             <FamilyTab onGoToConsultRequest={() => selectTab("consultRequest")} />
           ) : activeTab === "consultRequest" ? (

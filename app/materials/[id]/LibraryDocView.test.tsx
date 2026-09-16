@@ -15,6 +15,7 @@ const doc: LibraryDocDetail = {
   kind: "html",
   asset: null,
   id: "doc1",
+  subjectId: "sub1",
   title: "이차방정식 개념 정리",
   sections: [
     {
@@ -131,5 +132,23 @@ describe("LibraryDocView", () => {
     expect(
       screen.getByText("이 문제는 학생 계정으로 로그인해야 풀 수 있습니다.")
     ).toBeInTheDocument();
+  });
+
+  it("이전/다음 자료 링크가 있으면 상단에 보이고, 없으면 이 영역이 안 보인다(2026-09-15)", () => {
+    const { rerender } = render(<LibraryDocView doc={doc} viewerRole="student" />);
+    expect(screen.queryByText(/→$/)).not.toBeInTheDocument();
+
+    rerender(
+      <LibraryDocView
+        doc={doc}
+        viewerRole="student"
+        prevDoc={{ id: "doc0", title: "이전 교재", href: "/materials/doc0" }}
+        nextDoc={{ id: "doc2", title: "다음 교재", href: "/materials/doc2" }}
+      />
+    );
+    const prevLink = screen.getByText(/이전 교재/).closest("a");
+    expect(prevLink).toHaveAttribute("href", "/materials/doc0");
+    const nextLink = screen.getByText(/다음 교재/).closest("a");
+    expect(nextLink).toHaveAttribute("href", "/materials/doc2");
   });
 });

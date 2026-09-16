@@ -29,22 +29,68 @@ function isTeacherLikeRole(role: SessionViewViewer) {
   return role === "teacher" || role === "admin";
 }
 
+export type AdjacentDoc = { id: string; title: string; href: string };
+
+function AdjacentNav({ prevDoc, nextDoc }: { prevDoc: AdjacentDoc | null; nextDoc: AdjacentDoc | null }) {
+  if (!prevDoc && !nextDoc) return null;
+  return (
+    <div className="flex items-center justify-between gap-3 px-5 sm:px-8 py-2.5 border-b border-grey-100 text-[12.5px]">
+      {prevDoc ? (
+        <a href={prevDoc.href} className="font-semibold text-ink truncate max-w-[45%]">
+          ← {prevDoc.title}
+        </a>
+      ) : (
+        <span />
+      )}
+      {nextDoc ? (
+        <a href={nextDoc.href} className="font-semibold text-ink truncate max-w-[45%] text-right ml-auto">
+          {nextDoc.title} →
+        </a>
+      ) : (
+        <span />
+      )}
+    </div>
+  );
+}
+
 export default function LibraryDocView({
   doc,
   viewerRole,
+  prevDoc = null,
+  nextDoc = null,
+  initialSectionId = null,
 }: {
   doc: LibraryDocDetail;
   viewerRole: SessionViewViewer;
+  /** 2026-09-15 — 과목별 전체 교재 보기에서 같은 과목의 이전/다음 자료. */
+  prevDoc?: AdjacentDoc | null;
+  nextDoc?: AdjacentDoc | null;
+  /** 마지막으로 읽던 섹션(HTML만) — 있으면 그 자리로 스크롤한다. */
+  initialSectionId?: string | null;
 }) {
   // 파일 자료(PDF·영상)는 같은 뷰어로 읽는다 — 예약 없이, 필기 없이(수업이 아니다).
   // 훅 순서를 지키기 위해 본문 교재 화면은 별도 컴포넌트다.
-  if (doc.kind !== "html") return <AssetLibraryDocView doc={doc} viewerRole={viewerRole} />;
-  return <HtmlLibraryDocView doc={doc} viewerRole={viewerRole} />;
+  if (doc.kind !== "html")
+    return <AssetLibraryDocView doc={doc} viewerRole={viewerRole} prevDoc={prevDoc} nextDoc={nextDoc} />;
+  return (
+    <HtmlLibraryDocView doc={doc} viewerRole={viewerRole} prevDoc={prevDoc} nextDoc={nextDoc} initialSectionId={initialSectionId} />
+  );
 }
 
-function AssetLibraryDocView({ doc, viewerRole }: { doc: LibraryDocDetail; viewerRole: SessionViewViewer }) {
+function AssetLibraryDocView({
+  doc,
+  viewerRole,
+  prevDoc,
+  nextDoc,
+}: {
+  doc: LibraryDocDetail;
+  viewerRole: SessionViewViewer;
+  prevDoc: AdjacentDoc | null;
+  nextDoc: AdjacentDoc | null;
+}) {
   return (
     <div className="min-h-screen bg-white">
+      <AdjacentNav prevDoc={prevDoc} nextDoc={nextDoc} />
       <div className="border-b-[1.5px] border-grey-200 px-5 sm:px-8 py-4">
         <h1 className="text-[18px] font-extrabold text-ink">{doc.title}</h1>
         <p className="text-[12px] text-grey-500 mt-1">
@@ -76,15 +122,22 @@ function AssetLibraryDocView({ doc, viewerRole }: { doc: LibraryDocDetail; viewe
 function HtmlLibraryDocView({
   doc,
   viewerRole,
+  prevDoc,
+  nextDoc,
+  initialSectionId,
 }: {
   doc: LibraryDocDetail;
   viewerRole: SessionViewViewer;
+  prevDoc: AdjacentDoc | null;
+  nextDoc: AdjacentDoc | null;
+  initialSectionId: string | null;
 }) {
 
   const [activeSectionId, setActiveSectionId] = useState<string | null>(
     doc.sections[0]?.id ?? null
   );
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const restoredRef = useRef(false);
 
   useEffect(() => {
     if (typeof IntersectionObserver === "undefined") return;
@@ -107,6 +160,30 @@ function HtmlLibraryDocView({
     return () => observer.disconnect();
   }, [doc]);
 
+  // 마지막으로 읽던 자리로 한 번만 복귀한다(2026-09-15 — 읽던 위치 저장).
+  useEffect(() => {
+    if (restoredRef.current || !initialSectionId) return;
+    restoredRef.current = true;
+    document.getElementById(`sec-${initialSectionId}`)?.scrollIntoView({ behavior: "auto", block: "start" });
+  }, [initialSectionId]);
+
+  // 활성 섹션이 바뀌면 서버에 저장한다 — 복귀 직후 첫 값은 건너뛰어 불필요한 저장을 피한다.
+  const savedInitialRef = useRef(false);
+  useEffect(() => {
+    if (!activeSectionId) return;
+    if (!savedInitialRef.current) {
+      savedInitialRef.current = true;
+      if (activeSectionId === (initialSectionId ?? doc.sections[0]?.id ?? null)) return;
+    }
+    const timer = setTimeout(() => {
+      void import("./reading-position-actions").then(({ saveReadingPosition }) =>
+        saveReadingPosition(doc.id, activeSectionId)
+      );
+    }, 800);
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeSectionId, doc.id]);
+
   function scrollToSection(id: string) {
     document
       .getElementById(`sec-${id}`)
@@ -115,6 +192,7 @@ function HtmlLibraryDocView({
 
   return (
     <div className="min-h-screen bg-white">
+      <AdjacentNav prevDoc={prevDoc} nextDoc={nextDoc} />
       <div className="border-b border-grey-200 px-6 py-3">
         <div className="text-[11px] font-bold text-grey-500 mb-0.5">
           📖 교재 라이브러리
