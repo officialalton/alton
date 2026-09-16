@@ -706,3 +706,67 @@ ${params.issues.map((r) => `- ${r}`).join("\n")}
   if (!changedFields.length) return { ok: false, error: "고친 필드가 없습니다." };
   return { ok: true, passage, question, options, correctIndex, statements, explanation, changedFields };
 }
+
+/**
+ * 정답 자리(correct_index)와 해설이 서로 다른 답을 가리키는 경우가 있다(2026-09-15 제품 오너 확인 —
+ * 그래프 선택형처럼 해설은 맞는데 정답 표시만 틀린 사례). 해설이 실제로 어느 선택지를 결론으로 삼는지
+ * 독립적으로 다시 물어(정답 자리를 알려주지 않는다 — 앵커링 방지), 어긋나면 정답 자리를 해설 쪽으로
+ * 맞추고 해설도 "정정합니다" 류의 메타 코멘트 없이 깨끗한 최종본으로 다시 받는다.
+ */
+export async function resolveAnswerFromExplanationCore(params: {
+  stimulus: string;
+  question: string;
+  options: string[];
+  explanation: string;
+}): Promise<
+  | { ok: true; concludedIndex: number; confidence: "high" | "low"; cleanExplanation: string }
+  | { ok: false; error: string }
+> {
+  const message = await getAnthropic().messages.create({
+    model: "claude-sonnet-5",
+    max_tokens: 900,
+    tools: [
+      {
+        name: "resolve_answer",
+        description: "해설이 실제로 결론 내리는 선택지를 판정하고, 해설을 메타 코멘트 없는 최종본으로 다듬는다.",
+        input_schema: {
+          type: "object",
+          properties: {
+            concluded_index: { type: "number", description: "해설의 풀이가 실제로 도달하는 선택지의 0-based 인덱스." },
+            confidence: { type: "string", enum: ["high", "low"], description: "해설만으로 결론이 명확한가. 모호하면 low." },
+            clean_explanation: {
+              type: "string",
+              description: "위 결론에 맞춘 최종 해설. '정답을 정정합니다', '원래는 틀렸지만' 같은 메타 코멘트·수정 이력 언급 없이, 학생에게 보여줄 완성된 설명만 쓴다.",
+            },
+          },
+          required: ["concluded_index", "confidence", "clean_explanation"],
+        },
+      },
+    ],
+    tool_choice: { type: "tool", name: "resolve_answer" },
+    messages: [
+      {
+        role: "user",
+        content: `아래 문항의 해설을 읽고, 해설의 풀이가 실제로 어느 선택지에 도달하는지만 판정하세요. 정답이 무엇인지는 알려주지 않았습니다 — 해설 내용만으로 판단하세요.
+
+지문/자료: ${params.stimulus}
+질문: ${params.question}
+선택지: ${params.options.map((o, i) => `${String.fromCharCode(65 + i)}) ${o}`).join("\n")}
+해설: ${params.explanation}`,
+      },
+    ],
+  });
+  const toolUse = message.content.find((c) => c.type === "tool_use");
+  if (!toolUse || toolUse.type !== "tool_use") return { ok: false, error: "해설 대조 응답을 처리할 수 없습니다." };
+  const input = toolUse.input as { concluded_index?: number; confidence?: string; clean_explanation?: string };
+  if (typeof input.concluded_index !== "number" || input.concluded_index < 0 || input.concluded_index >= params.options.length) {
+    return { ok: false, error: "해설에서 결론 선택지를 찾지 못했습니다." };
+  }
+  const cleanExplanation = typeof input.clean_explanation === "string" && input.clean_explanation.trim() ? input.clean_explanation.trim() : params.explanation;
+  return {
+    ok: true,
+    concludedIndex: input.concluded_index,
+    confidence: input.confidence === "high" ? "high" : "low",
+    cleanExplanation,
+  };
+}

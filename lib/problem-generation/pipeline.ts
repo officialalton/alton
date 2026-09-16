@@ -3,7 +3,7 @@
 //   생성(core) → 자료 필요하면 자료 생성 → 유형별 품질 계약(다섯 연결) → 독립 품질 검사(정답·오답 품질·추정 난이도)
 //   → 통과한 것만 accepted. 걸리면 사유를 피드백으로 1회 재생성 → 재검사. 부족분은 1회 재생성.
 // 저장은 호출자가 한다(서버 액션은 DB 에, 스크립트는 보고서에).
-import { generateSectionProblemsCore, regenerateProblemCore, generateFigureForProblemCore, repairOneDistractorCore, repairFieldsCore, type FigurePolicy, type ProblemDifficulty, type ProblemFormat } from "./core";
+import { generateSectionProblemsCore, regenerateProblemCore, generateFigureForProblemCore, repairOneDistractorCore, repairFieldsCore, resolveAnswerFromExplanationCore, type FigurePolicy, type ProblemDifficulty, type ProblemFormat } from "./core";
 import { reviewProblemIndependently, classifyReviewIssues, type IndependentReview, type QualityRecord, type DistractorRationale, type DistractorKind } from "./review";
 import { checkQualityContract } from "@/lib/problem-quality-contract";
 import { judgeMaterialNeed, materialBlocker } from "@/lib/problem-material-need";
@@ -58,6 +58,8 @@ export type PipelineResult = {
     underReturned: { requested: number; returned: number; reason: string }[];
     /** 보강 대기 한도(요청 수) 초과로 폐기된 후보 수. */
     heldOverflowDiscarded: number;
+    /** 정답 자리와 해설의 결론이 달라 정답 자리를 해설 쪽으로 맞춘 횟수(2026-09-15). */
+    answerExplanationFixes: number;
   };
 };
 
@@ -104,6 +106,7 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
     emptyResponses: [] as { cause: string; retried: boolean; resolved: boolean }[],
     underReturned: [] as { requested: number; returned: number; reason: string }[],
     heldOverflowDiscarded: 0,
+    answerExplanationFixes: 0,
   };
   const held: Held[] = [];
   const countCall = () => { stats.modelCalls += 1; };
@@ -233,6 +236,27 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
       }
     }
     if (!contract.ok) return fail("contract", contract.issues.map((i) => i.message).slice(0, 2).join(" / "));
+
+    // 2.5) 정답 자리 vs 해설 대조(2026-09-15 제품 오너 확인 — 해설은 맞는데 정답 표시만 틀린 사례 발견).
+    // 해설이 실제로 결론 내리는 선택지로 정답 자리를 맞춘다("해설을 다시 반영하는 구조").
+    if (params.format === "mc" && g.options && g.correctIndex !== null && g.explanation?.trim()) {
+      countCall();
+      try {
+        const resolved = await resolveAnswerFromExplanationCore({
+          stimulus: text, question: question ?? "", options: g.options, explanation: g.explanation,
+        });
+        if (resolved.ok && resolved.confidence === "high" && resolved.concludedIndex !== g.correctIndex) {
+          stats.answerExplanationFixes += 1;
+          usedCorrection = true;
+          g.correctIndex = resolved.concludedIndex;
+          g.explanation = resolved.cleanExplanation;
+          contract = checkQualityContract(contractInputOf());
+          if (!contract.ok) return fail("contract", `정답을 해설에 맞춰 고친 뒤에도 계약 실패: ${contract.issues.map((i) => i.message).slice(0, 2).join(" / ")}`);
+        }
+      } catch (e) {
+        console.error("[pipeline] 정답-해설 대조 오류:", e instanceof Error ? e.message : e);
+      }
+    }
 
     // 3) 독립 품질 검사.
     const runReview = () => { countCall(); return reviewProblemIndependently({
