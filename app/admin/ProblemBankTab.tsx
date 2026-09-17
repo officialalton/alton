@@ -42,15 +42,21 @@ import type { AdminSubject, SubjectKeyword } from "./subject-data";
 //   * 관리자가 데이터 구조를 판단하지 않는다 — 자료 필요성은 시스템이 판정해 이유와 함께 보인다.
 //   * 복수 AI 생성도 단건과 같은 계약(자료/지문·질문·답안·정답·해설)이고, 어긴 결과는 저장하지 않고 사유와 함께 분리한다.
 
-type Bucket = "working" | "published" | "archived";
+type Bucket = "create" | "working" | "published" | "archived";
 
 // 2026-09-17(제품 오너 지시) — 관리자는 AI 생성 문항의 오류를 고쳐 완성하지 않는다.
 // 자동 검사를 통과한 완성 후보만 이 목록에 들어오고, 관리자는 '공개하기' 또는
 // '보관하기'만 고른다. '오답 보강 대기' 버킷은 그 전제 자체(검사 실패분을 살려
 // 관리자가 고친다)와 맞지 않아 없앤다 — 새 생성 경로는 애초에 그런 초안을
 // 만들지 않는다(오답이 걸리면 저장하지 않고 다른 후보로 대체).
+//
+// 2026-09-17 — 생성 흐름과 검수·공개·보관 목록을 완전히 분리한다(생성/검수/공개/보관
+// 순서, '검수 대기'는 '검수'로 개칭). '생성' 탭에는 목록이 없고(순수 생성 폼, 문항
+// 체계 SAT R&W/SAT Math/AP 선택은 그 안에 그대로 있다), 나머지 세 탭에는 생성 폼
+// 없이 필터+목록만 있다. 문항 체계는 생성에서만 쓰이므로 상위 nav 로 올리지 않는다.
 const BUCKETS: { key: Bucket; label: string; hint: string }[] = [
-  { key: "working", label: "검수 대기", hint: "자동 검사를 통과한 완성 후보입니다. 학생에게 제공할 가치가 있는지 판단해 공개하거나 보관하세요." },
+  { key: "create", label: "생성", hint: "새 문제를 만듭니다. 저장하거나 AI로 생성하면 검수 탭에서 확인할 수 있습니다." },
+  { key: "working", label: "검수", hint: "자동 검사를 통과한 완성 후보입니다. 학생에게 제공할 가치가 있는지 판단해 공개하거나 보관하세요." },
   { key: "published", label: "공개", hint: "지금 공개된 내용입니다. 회차 구성 후보가 됩니다." },
   { key: "archived", label: "보관", hint: "보관된 문제입니다. 과거 기록은 그대로 남습니다." },
 ];
@@ -188,10 +194,6 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
   return (
     <div className="max-w-[880px] px-8 py-8">
       <h1 className="text-[20px] font-extrabold text-ink mb-1.5">문제은행</h1>
-      <p className="text-[13px] text-grey-500 mb-5">
-        관리 과목은 문제를 보관하고 키워드·커리큘럼·자동 구성에 연결하는 단위이고, 문항 체계(SAT R&W / SAT Math / AP)는 어느 시험의 어떤 문항인가입니다.
-        둘은 따로 관리됩니다. 공개된 문제만 회차 구성 후보가 됩니다.
-      </p>
 
       <div className="flex gap-1 mb-2 border-b-[1.5px] border-grey-200">
         {BUCKETS.map((t) => (
@@ -214,15 +216,17 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
       {catalogError && <p className="text-[12.5px] text-red mb-3">과목을 불러오지 못했습니다. 새로고침 후 다시 시도해주세요.</p>}
       {catalog !== null && activeSubjects.length === 0 && <p className="text-[12.5px] text-grey-500 mb-3">먼저 커리큘럼에서 과목을 만들어야 문제를 추가할 수 있습니다.</p>}
 
-      <Filters
-        subjects={activeSubjects}
-        keywords={filter.subjectId ? keywordsBySubject.get(filter.subjectId) ?? [] : []}
-        filter={filter}
-        searchLabel={bucket === "working" ? "작성 중인 문제에서 찾기" : bucket === "published" ? "공개된 문제에서 찾기" : "보관된 문제에서 찾기"}
-        onChange={(next) => setFilter((f) => ({ ...f, ...next }))}
-      />
+      {bucket !== "create" && (
+        <Filters
+          subjects={activeSubjects}
+          keywords={filter.subjectId ? keywordsBySubject.get(filter.subjectId) ?? [] : []}
+          filter={filter}
+          searchLabel={bucket === "working" ? "작성 중인 문제에서 찾기" : bucket === "published" ? "공개된 문제에서 찾기" : "보관된 문제에서 찾기"}
+          onChange={(next) => setFilter((f) => ({ ...f, ...next }))}
+        />
+      )}
 
-      {audit && (
+      {bucket !== "create" && audit && (
         <p className="text-[12px] text-grey-500 mb-3" data-testid="question-audit">
           질문 집계{filter.subjectId ? "(이 과목)" : ""}: 질문 있음 <b className="text-ink">{audit.withQuestion}</b> · 질문 없는 초안 <b className="text-ink">{audit.draftWithout}</b> · 질문 없는 공개본{" "}
           <b className={audit.publishedWithout ? "text-red" : "text-ink"}>{audit.publishedWithout}</b>
@@ -230,7 +234,7 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
         </p>
       )}
 
-      {bucket === "working" && (
+      {bucket === "create" && (
         <NewProblemPanel
           subjects={activeSubjects}
           keywordsBySubject={keywordsBySubject}
@@ -285,7 +289,7 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
         </div>
       )}
 
-      {problems === null ? (
+      {bucket === "create" ? null : problems === null ? (
         <p className="text-[13px] text-grey-500">불러오는 중...</p>
       ) : visible.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
@@ -311,6 +315,47 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
   );
 }
 
+const FORMAT_FILTER_OPTIONS: { value: string; label: string }[] = [
+  { value: "", label: "전체" },
+  { value: "mc", label: "객관식" },
+  { value: "essay", label: "서술형" },
+  { value: "math", label: "풀이형" },
+];
+
+const DIFFICULTY_FILTER_OPTIONS: { value: string; label: string }[] = [
+  { value: "", label: "전체" },
+  { value: "medium", label: "Medium" },
+  { value: "hard", label: "Hard" },
+];
+
+function ToggleGroup({
+  ariaLabel,
+  options,
+  value,
+  onChange,
+}: {
+  ariaLabel: string;
+  options: { value: string; label: string }[];
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  return (
+    <div role="group" aria-label={ariaLabel} className="flex gap-1">
+      {options.map((o) => (
+        <button
+          key={o.value || "all"}
+          type="button"
+          aria-pressed={value === o.value}
+          onClick={() => onChange(o.value)}
+          className={"text-[12px] font-bold px-2.5 py-1.5 rounded-lg border-[1.5px] " + (value === o.value ? "bg-ink text-white border-ink" : "bg-white text-grey-500 border-grey-200")}
+        >
+          {o.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 function Filters({
   subjects,
   keywords,
@@ -326,9 +371,9 @@ function Filters({
 }) {
   const system = (filter.examSystem as ExamSystem | undefined) ?? null;
   return (
-    <div className="flex flex-wrap gap-2 mb-4">
+    <div className="flex flex-wrap gap-2 mb-4 items-center">
       <select aria-label="과목" value={filter.subjectId ?? ""} onChange={(e) => onChange({ subjectId: e.target.value || undefined, keywordId: undefined })} className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5">
-        <option value="">모든 과목</option>
+        <option value="">전체</option>
         {subjects.map((s) => (
           <option key={s.subjectId} value={s.subjectId}>{s.subjectName}</option>
         ))}
@@ -338,13 +383,6 @@ function Filters({
         {EXAM_SYSTEMS.map((e) => (
           <option key={e.code} value={e.code}>{e.label}</option>
         ))}
-      </select>
-      <select aria-label="형식" value={filter.format ?? ""} onChange={(e) => onChange({ format: e.target.value || undefined })} className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5">
-        <option value="">모든 형식</option>
-        <option value="mc">객관식</option>
-        <option value="essay">서술형</option>
-        <option value="spr">숫자 입력(SPR)</option>
-        <option value="math">풀이형</option>
       </select>
       {system !== "ap" && (
         <>
@@ -368,12 +406,8 @@ function Filters({
           <option key={k.id} value={k.id}>{k.label}</option>
         ))}
       </select>
-      <select aria-label="난이도 필터" value={filter.difficulty ?? ""} onChange={(e) => onChange({ difficulty: e.target.value || undefined })} className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5">
-        <option value="">모든 난이도</option>
-        <option value="easy">쉬움</option>
-        <option value="medium">보통</option>
-        <option value="hard">어려움</option>
-      </select>
+      <ToggleGroup ariaLabel="형식" options={FORMAT_FILTER_OPTIONS} value={filter.format ?? ""} onChange={(v) => onChange({ format: v || undefined })} />
+      <ToggleGroup ariaLabel="난이도 필터" options={DIFFICULTY_FILTER_OPTIONS} value={filter.difficulty ?? ""} onChange={(v) => onChange({ difficulty: v || undefined })} />
       <input aria-label="문제 검색" value={filter.query ?? ""} onChange={(e) => onChange({ query: e.target.value || undefined })} placeholder={`${searchLabel}(지문·주제)`} className="flex-1 min-w-[180px] text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5" />
     </div>
   );
@@ -461,7 +495,7 @@ function NewProblemPanel({
       </div>
 
       {/* 1. 관리 과목과 키워드 */}
-      <FieldTitle hint="문제를 보관하고 키워드·커리큘럼·자동 구성에 연결하는 라이브러리 단위입니다. 문항 체계와 별개입니다.">1. 관리 과목과 키워드</FieldTitle>
+      <FieldTitle>1. 관리 과목과 키워드</FieldTitle>
       <div className="flex flex-wrap gap-2 items-center">
         <select aria-label="새 문제 과목" value={subjectId} onChange={(e) => { setSubjectId(e.target.value); setKeywordIds([]); }} className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5">
           <option value="">과목 고르기…</option>
@@ -485,7 +519,7 @@ function NewProblemPanel({
       </div>
 
       {/* 2. 문제 규격 */}
-      <FieldTitle hint={system === "ap" ? "AP 과목을 먼저 고릅니다. 지원 과목에서만 문제 형식과 자료 블록이 열립니다." : "영역 → 세부 기술을 고르면 유형·답안 형식·자료 판정이 따라옵니다."}>2. 문제 규격</FieldTitle>
+      <FieldTitle hint={system === "ap" ? "AP 과목을 먼저 고릅니다. 지원 과목에서만 문제 형식과 자료 블록이 열립니다." : undefined}>2. 문제 규격</FieldTitle>
       {system === "ap" ? (
         <div className="flex flex-wrap gap-2 items-center">
           <select aria-label="AP 과목" value={apSubject} onChange={(e) => setApSubject(e.target.value)} className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5">
@@ -602,18 +636,10 @@ function NewProblemPanel({
           </>
         )}
       </div>
-      <p className="text-[11.5px] text-grey-500 mt-2">
-        어느 쪽으로 만들든 초안으로 들어갑니다. 다음 단계(3 지문/자료 → 4 질문 → 5 답안 → 6 해설 → 7 저장/공개)는 아래 초안 편집에서 이어집니다. 복수 생성도 단건과 같은 계약이며, 질문이 없거나 유형과 맞지 않는 결과는 저장하지 않고 사유를 보여줍니다.
-      </p>
-      {isCompilerSkill ? (
-        <p className="text-[11.5px] text-grey-500 mt-1">
+      {isCompilerSkill && (
+        <p className="text-[11.5px] text-grey-500 mt-2">
           이 세부 기술은 AI 대신 계산형 컴파일러가 만듭니다(정답·오답·그래프를 코드로 직접 계산) — AI 호출이 없어
           한 번에 10개까지 요청할 수 있습니다. 내부적으로는 요청 수와 무관하게 항상 최소 10문항 단위로 생성·검증합니다.
-        </p>
-      ) : (
-        <p className="text-[11.5px] text-red mt-1">
-          한 번에 최대 {MAX_SAFE_GENERATE_COUNT}개까지만 만들 수 있습니다 — 이 환경의 서버 처리 시간 제한(300초) 때문에,
-          그보다 많이 요청하면 시간 안에 끝내지 못해 결과도 실패 사유도 없이 조용히 실패합니다.
         </p>
       )}
     </div>

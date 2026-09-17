@@ -134,8 +134,55 @@ async function openFirstProblem() {
   await waitFor(() => expect(screen.getByLabelText("지문 / 자료")).toBeInTheDocument());
 }
 
-describe("목록 — 생성 · 공개 · 보관", () => {
-  it("기본은 생성이고, 보관은 서버에서 따로 불러온다", async () => {
+describe("탭 재구성(2026-09-17) — 생성/검수/공개/보관, 필터 단순화", () => {
+  it("탭은 생성·검수·공개·보관 순서이고, '검수 대기'라는 이름은 더 없다", async () => {
+    render(<ProblemBankTab subjects={subjects} />);
+    await waitFor(() => expect(screen.getByText("검수")).toBeInTheDocument());
+    const labels = ["생성", "검수", "공개", "보관"];
+    const order = screen
+      .getAllByRole("button")
+      .map((b) => b.textContent)
+      .filter((t): t is string => !!t && labels.includes(t));
+    expect(order).toEqual(labels);
+    expect(screen.queryByText("검수 대기")).not.toBeInTheDocument();
+  });
+
+  it("검수·공개·보관 탭에는 생성 폼이 없고 필터+목록만 있다", async () => {
+    render(<ProblemBankTab subjects={subjects} />);
+    await waitFor(() => expect(screen.getByText("판별식이 0일 때")).toBeInTheDocument());
+    expect(screen.queryByTestId("new-problem-panel")).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByText("공개"));
+    await waitFor(() => expect(screen.queryByTestId("new-problem-panel")).not.toBeInTheDocument());
+
+    fireEvent.click(screen.getByText("보관"));
+    await waitFor(() => expect(screen.queryByTestId("new-problem-panel")).not.toBeInTheDocument());
+  });
+
+  it("형식·난이도 필터는 드롭다운이 아니라 버튼 그룹이다", async () => {
+    render(<ProblemBankTab subjects={subjects} />);
+    await waitFor(() => expect(screen.getByRole("group", { name: "형식" })).toBeInTheDocument());
+    expect(screen.getByRole("group", { name: "난이도 필터" })).toBeInTheDocument();
+    const hardButton = screen.getByRole("button", { name: "Hard" });
+    fireEvent.click(hardButton);
+    await waitFor(() =>
+      expect(listBankProblemsAction).toHaveBeenCalledWith(expect.objectContaining({ difficulty: "hard" }))
+    );
+  });
+
+  it("삭제 대상이던 설명 문단 4개는 더 이상 렌더되지 않는다", async () => {
+    render(<ProblemBankTab subjects={subjects} />);
+    fireEvent.click(screen.getByText("생성"));
+    await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());
+    expect(screen.queryByText(/관리 과목은 문제를 보관하고/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/문제를 보관하고 키워드·커리큘럼·자동 구성에 연결하는 라이브러리 단위입니다/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/영역 → 세부 기술을 고르면 유형·답안 형식·자료 판정이 따라옵니다\./)).not.toBeInTheDocument();
+    expect(screen.queryByText(/어느 쪽으로 만들든 초안으로 들어갑니다/)).not.toBeInTheDocument();
+  });
+});
+
+describe("목록 — 검수 · 공개 · 보관", () => {
+  it("기본은 검수이고, 보관은 서버에서 따로 불러온다", async () => {
     render(<ProblemBankTab subjects={subjects} />);
     await waitFor(() =>
       expect(listBankProblemsAction).toHaveBeenCalledWith(
@@ -188,10 +235,15 @@ describe("목록 — 생성 · 공개 · 보관", () => {
     );
   });
 
-  it("새 문제 상자는 생성 탭에만 있고, 검색은 지금 탭 안에서 찾는다", async () => {
+  it("새 문제 상자는 생성 탭에만 있고, 검색은 검수 탭 안에서 찾는다", async () => {
     render(<ProblemBankTab subjects={subjects} />);
+    // 기본은 검수 탭 — 목록·필터만 있고 생성 상자는 없다.
+    await waitFor(() => expect(screen.getByPlaceholderText("작성 중인 문제에서 찾기(지문·주제)")).toBeInTheDocument());
+    expect(screen.queryByLabelText("새 문제 과목")).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByText("생성"));
     await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());
-    expect(screen.getByPlaceholderText("작성 중인 문제에서 찾기(지문·주제)")).toBeInTheDocument();
+    expect(screen.queryByPlaceholderText("작성 중인 문제에서 찾기(지문·주제)")).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByText("공개"));
     await waitFor(() =>
@@ -202,6 +254,7 @@ describe("목록 — 생성 · 공개 · 보관", () => {
 
   it("보관 과목은 새 문제 대상으로 고를 수 없다", async () => {
     render(<ProblemBankTab subjects={subjects} />);
+    fireEvent.click(screen.getByText("생성"));
     await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());
     expect(screen.getByLabelText("새 문제 과목").querySelectorAll("option")).toHaveLength(3);
     expect(screen.queryByRole("option", { name: "보관 과목" })).not.toBeInTheDocument();
@@ -211,6 +264,7 @@ describe("목록 — 생성 · 공개 · 보관", () => {
 describe("유형과 주제는 별도 항목이다", () => {
   it("새 문제에서 둘을 따로 받는다", async () => {
     render(<ProblemBankTab subjects={subjects} />);
+    fireEvent.click(screen.getByText("생성"));
     await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());
 
     fireEvent.change(screen.getByLabelText("새 문제 과목"), { target: { value: "sub1" } });
@@ -229,6 +283,7 @@ describe("유형과 주제는 별도 항목이다", () => {
 
   it("만들 때 키워드도 함께 고를 수 있다 — 선택 항목이다", async () => {
     render(<ProblemBankTab subjects={subjects} />);
+    fireEvent.click(screen.getByText("생성"));
     await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());
 
     // 과목을 고르기 전에는 고를 키워드가 없다.
@@ -250,6 +305,7 @@ describe("유형과 주제는 별도 항목이다", () => {
 
   it("키워드를 고르지 않아도 만들 수 있다", async () => {
     render(<ProblemBankTab subjects={subjects} />);
+    fireEvent.click(screen.getByText("생성"));
     await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());
     fireEvent.change(screen.getByLabelText("새 문제 과목"), { target: { value: "sub1" } });
     fireEvent.click(screen.getByText("직접 쓰기"));
@@ -330,6 +386,7 @@ describe("공개는 내용을 본 뒤에만 — 검수 요청 단계는 없다",
 
   it("AI로 만들어도 초안으로만 들어간다", async () => {
     render(<ProblemBankTab subjects={subjects} />);
+    fireEvent.click(screen.getByText("생성"));
     await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());
 
     fireEvent.change(screen.getByLabelText("새 문제 과목"), { target: { value: "sub1" } });
@@ -450,6 +507,7 @@ describe("보관은 삭제가 아니다", () => {
 
   it("난이도를 골라 만들면 AI 생성에 그 난이도가 간다(2026-09-14)", async () => {
     render(<ProblemBankTab subjects={subjects} />);
+    fireEvent.click(screen.getByText("생성"));
     await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());
     fireEvent.change(screen.getByLabelText("새 문제 과목"), { target: { value: "sub1" } });
     fireEvent.change(screen.getByLabelText("문제 유형"), { target: { value: "판별식" } });
@@ -460,7 +518,7 @@ describe("보관은 삭제가 아니다", () => {
     );
   });
 
-  it("생성 탭에서 '전체 공개'는 보이는 초안을 모두 공개하고 결과를 알린다(2026-09-14)", async () => {
+  it("검수 탭에서 '전체 공개'는 보이는 초안을 모두 공개하고 결과를 알린다(2026-09-14)", async () => {
     window.confirm = vi.fn(() => true);
     publishDraftAction.mockResolvedValue({ ok: true });
     render(<ProblemBankTab subjects={subjects} />);
@@ -489,12 +547,13 @@ describe("보관은 삭제가 아니다", () => {
 
   it("문항 체계 탭에서 세부 기술을 고르면 자료 판정이 보이고, 그 판정이 AI 생성의 그림 요구가 된다(2026-09-14 재구성)", async () => {
     render(<ProblemBankTab subjects={subjects} />);
+    fireEvent.click(screen.getByText("생성"));
     await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());
     fireEvent.click(screen.getByRole("tab", { name: "SAT Math" }));
     fireEvent.change(screen.getByLabelText("새 문제 과목"), { target: { value: "sub1" } });
-    // 필터 줄과 새 문제 줄에 같은 라벨이 있다 — 새 문제 줄은 두 번째.
-    fireEvent.change(screen.getAllByLabelText("SAT 영역")[1], { target: { value: "geometry_trig" } });
-    fireEvent.change(screen.getAllByLabelText("세부 기술")[1], { target: { value: "lines_angles_triangles" } });
+    // 생성 탭에는 필터 줄이 없다 — 새 문제 줄의 라벨이 하나뿐이다.
+    fireEvent.change(screen.getByLabelText("SAT 영역"), { target: { value: "geometry_trig" } });
+    fireEvent.change(screen.getByLabelText("세부 기술"), { target: { value: "lines_angles_triangles" } });
     expect(screen.getByTestId("new-material-need")).toHaveAttribute("data-level", "required");
     expect(screen.getByTestId("new-material-need")).toHaveTextContent(/도형/);
     // 관리자가 고르는 '그림' 선택은 없다.
@@ -507,11 +566,12 @@ describe("보관은 삭제가 아니다", () => {
 
   it("자료 권장이면 생성 전에 '자료 포함 / 텍스트형'을 고르고, 그 선택이 그림 요구로 들어간다(기본은 자료 포함)", async () => {
     render(<ProblemBankTab subjects={subjects} />);
+    fireEvent.click(screen.getByText("생성"));
     await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());
     fireEvent.click(screen.getByRole("tab", { name: "SAT Math" }));
     fireEvent.change(screen.getByLabelText("새 문제 과목"), { target: { value: "sub1" } });
-    fireEvent.change(screen.getAllByLabelText("SAT 영역")[1], { target: { value: "algebra" } });
-    fireEvent.change(screen.getAllByLabelText("세부 기술")[1], { target: { value: "linear_equations_two_var" } });
+    fireEvent.change(screen.getByLabelText("SAT 영역"), { target: { value: "algebra" } });
+    fireEvent.change(screen.getByLabelText("세부 기술"), { target: { value: "linear_equations_two_var" } });
     expect(screen.getByTestId("new-material-need")).toHaveAttribute("data-level", "recommended");
     expect(screen.getByTestId("new-material-need")).toHaveAttribute("data-choice", "with");
     fireEvent.click(screen.getByText("AI로 만들기"));
@@ -521,7 +581,7 @@ describe("보관은 삭제가 아니다", () => {
     fireEvent.click(screen.getByText("AI로 만들기"));
     await waitFor(() => expect(generateBankProblemsAction).toHaveBeenLastCalledWith(expect.objectContaining({ figurePolicy: "none" })));
     // 자료 유형이 둘 이상인 기술(Linear functions: 좌표평면 / 함수표)은 유형까지 고른다.
-    fireEvent.change(screen.getAllByLabelText("세부 기술")[1], { target: { value: "linear_functions" } });
+    fireEvent.change(screen.getByLabelText("세부 기술"), { target: { value: "linear_functions" } });
     expect(screen.getByTestId("new-material-need")).toHaveAttribute("data-kind", "plane");
     fireEvent.click(screen.getByLabelText(/자료 포함 · 표·그래프/));
     expect(screen.getByTestId("new-material-need")).toHaveAttribute("data-kind", "data");
@@ -531,6 +591,7 @@ describe("보관은 삭제가 아니다", () => {
 
   it("R&W 탭은 답안 형식이 객관식으로 고정되고 Math 전용 항목이 없다; AP 탭은 과목을 고르면 '준비 중'만 보인다", async () => {
     render(<ProblemBankTab subjects={subjects} />);
+    fireEvent.click(screen.getByText("생성"));
     await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());
     fireEvent.click(screen.getByRole("tab", { name: "SAT Reading & Writing" }));
     expect(screen.getByLabelText("새 문제 형식")).toHaveTextContent("객관식");
