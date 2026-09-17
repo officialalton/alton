@@ -187,6 +187,7 @@ function attemptOne(
     answers: null,
     statements: null,
     explanation: compiled.explanation,
+    explanationEn: compiled.explanationEn,
     difficulty,
     distractorRationales: compiled.distractorRationales.map((d) => ({
       index: d.index, plausible_because: d.plausibleBecause, matches: d.matches, why_wrong: d.whyWrong, kind: d.kind,

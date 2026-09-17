@@ -69,7 +69,7 @@ async function main() {
           p_problem_id: problemId, p_passage: g.stimulus ?? g.passage, p_options: g.options ?? null, p_correct_index: g.correctIndex ?? null,
           p_explanation: g.explanation, p_difficulty: difficulty, p_actor_id: actorId,
           p_answers: null, p_figure: g.figure ?? null, p_figure_checked: false, p_statements: null, p_question: g.question ?? null,
-          p_repair_status: "none",
+          p_repair_status: "none", p_explanation_en: (g as { explanationEn?: string }).explanationEn ?? null,
         });
         if (vErr || !versionId) { failures.push(`save_problem_draft_version: ${vErr?.message}`); dbSaveMs += Date.now() - t0; return; }
         const { error: qErr } = await admin.rpc("set_problem_quality", { p_version_id: versionId, p_quality: quality });

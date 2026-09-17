@@ -82,6 +82,8 @@ export type ProblemContent = {
   options: string[] | null;
   correctIndex: number | null;
   explanation: string | null;
+  /** 2026-09-17(사용자 지시) — 해설의 영어 버전(선택). null이면 화면에서 토글을 숨긴다. */
+  explanationEn: string | null;
   /** spr 동치 정답 목록. */
   answers: string[] | null;
   /** 도형·그래프 데이터(lib/problem-figures). */
@@ -194,7 +196,7 @@ export async function listBankProblemsAction(
   // 있다 — 그래서 공개된 문제가 "(아직 내용이 없는 문제)"로 보였다.
   const { data: contentRows } = await admin
     .from("problem_versions")
-    .select("id, problem_id, status, version_no, passage, question, options, correct_index, explanation, answers, figure, figure_checked, render_check, statements, quality, repair_status")
+    .select("id, problem_id, status, version_no, passage, question, options, correct_index, explanation, explanation_en, answers, figure, figure_checked, render_check, statements, quality, repair_status")
     .in("problem_id", problemIds)
     .in("status", ["published", "draft", "in_review"])
     .order("version_no", { ascending: false });
@@ -206,6 +208,7 @@ export async function listBankProblemsAction(
     options: (v.options as string[] | null) ?? null,
     correctIndex: (v.correct_index as number | null) ?? null,
     explanation: (v.explanation as string | null) ?? null,
+    explanationEn: (v.explanation_en as string | null) ?? null,
     answers: (v.answers as string[] | null) ?? null,
     figure: v.figure ?? null,
     figureChecked: Boolean(v.figure_checked),
@@ -389,6 +392,8 @@ export async function createDraftVersionAction(params: {
   options: string[] | null;
   correctIndex: number | null;
   explanation: string;
+  /** 2026-09-17(사용자 지시) — 해설의 영어 버전(선택). 있으면 학생·관리자 화면에 한국어/영어 토글이 뜬다. */
+  explanationEn?: string | null;
   difficulty: string;
   answers?: string[] | null;
   figure?: unknown | null;
@@ -483,6 +488,7 @@ export async function createDraftVersionAction(params: {
     p_statements: params.statements && params.statements.length ? params.statements : null,
     p_question: params.question?.trim() || null,
     p_repair_status: params.repairStatus ?? null,
+    p_explanation_en: params.explanationEn ?? null,
   });
   if (error) return { ok: false, error: readable(error.message, "초안을 저장하지 못했습니다.") };
   const { error: checkError } = await admin.rpc("set_problem_render_check", { p_version_id: data as string, p_check: check });
@@ -620,7 +626,7 @@ export async function createDraftFromPublishedAction(
 
   const { data: published } = await admin
     .from("problem_versions")
-    .select("passage, question, options, correct_index, explanation, difficulty, answers, figure, statements")
+    .select("passage, question, options, correct_index, explanation, explanation_en, difficulty, answers, figure, statements")
     .eq("problem_id", problemId)
     .eq("status", "published")
     .maybeSingle();
@@ -634,6 +640,7 @@ export async function createDraftFromPublishedAction(
     options: (published.options as string[] | null) ?? null,
     correctIndex: (published.correct_index as number | null) ?? null,
     explanation: (published.explanation as string | null) ?? "",
+    explanationEn: (published.explanation_en as string | null) ?? null,
     difficulty: (published.difficulty as string | null) ?? "",
     answers: (published.answers as string[] | null) ?? null,
     figure: published.figure ?? null,
@@ -771,7 +778,7 @@ export async function generateBankProblemsAction(params: {
         if (!problem.ok) { failures.push(problem.error); dbSaveMs += Date.now() - t0; return; }
         const draft = await createDraftVersionAction({
           problemId: problem.value, passage: g.stimulus ?? g.passage, question: g.question ?? null, options: g.options ?? null, correctIndex: g.correctIndex ?? null,
-          explanation: g.explanation, difficulty: params.difficulty, figure: g.figure ?? null,
+          explanation: g.explanation, explanationEn: (g as { explanationEn?: string }).explanationEn ?? null, difficulty: params.difficulty, figure: g.figure ?? null,
         });
         if (!draft.ok) {
           failures.push(draft.error);

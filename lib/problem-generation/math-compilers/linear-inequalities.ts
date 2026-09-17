@@ -225,6 +225,7 @@ export type CompiledMathProblem = {
   options: string[];
   correctIndex: number;
   explanation: string;
+  explanationEn: string;
   figure: PlaneSpec | null;
   distractorRationales: DistractorRationale[];
 };
@@ -255,6 +256,10 @@ export function renderLinearInequalityProblem(model: LinearInequalityModel): Com
     const explanation = flipped
       ? `${moveStep}음수 ${fmt(model.m)}로 나누므로 부등호 방향이 뒤집힌다. 따라서 ${model.correctAnswer}이다.`
       : `${moveStep}양수 ${fmt(model.m)}로 나누므로 부등호 방향은 그대로다. 따라서 ${model.correctAnswer}이다.`;
+    const moveStepEn = model.b === 0 ? "" : `Isolating the x-term by moving ${fmt(model.b)} to the other side, `;
+    const explanationEn = flipped
+      ? `${moveStepEn}dividing by the negative number ${fmt(model.m)} reverses the inequality sign. So the answer is ${model.correctAnswer}.`
+      : `${moveStepEn}dividing by the positive number ${fmt(model.m)} keeps the inequality sign the same. So the answer is ${model.correctAnswer}.`;
     const distractorRationales: DistractorRationale[] = model.distractors.map((d, i) => ({
       index: options.indexOf(d.value) >= 0 ? options.indexOf(d.value) : i,
       plausibleBecause: "같은 부등식에서 나올 수 있는 실제 계산 오류 경로다.",
@@ -263,15 +268,18 @@ export function renderLinearInequalityProblem(model: LinearInequalityModel): Com
       kind: d.kind,
       obvious: false,
     }));
-    return { passage, question, options, correctIndex, explanation, figure: null, distractorRationales };
+    return { passage, question, options, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
   }
 
   const opKor = model.op === "<" || model.op === "<=" ? "작다" : "크다";
+  const opEn = model.op === "<" || model.op === "<=" ? "less than" : "greater than";
   const eqIncl = model.op === "<=" || model.op === ">=" ? "(경계선 포함)" : "(경계선 제외)";
+  const eqInclEn = model.op === "<=" || model.op === ">=" ? "(boundary included)" : "(boundary excluded)";
   const passage = `Consider the graph of the inequality shown.\n\n${mathWrap(`y ${OP_TEXT[model.op]} ${rhsExpr(model.m, model.b)}`)}`;
   const question = "Which of the following points is a solution to the inequality shown?";
   const { options, correctIndex } = shuffleWithAnswer(model.correctAnswer, model.distractors.map((d) => d.value));
   const explanation = `경계선 y = ${rhsExpr(model.m, model.b)} ${eqIncl}을 기준으로, y 값이 경계선의 값보다 ${opKor} 쪽이 해 영역이다. ${model.correctAnswer}를 대입하면 조건을 만족하므로 정답이다.`;
+  const explanationEn = `Relative to the boundary line y = ${rhsExpr(model.m, model.b)} ${eqInclEn}, the solution region is where the y-value is ${opEn} the boundary's value. Substituting ${model.correctAnswer} satisfies the condition, so it is the correct answer.`;
   const distractorRationales: DistractorRationale[] = model.distractors.map((d, i) => ({
     index: options.indexOf(d.value) >= 0 ? options.indexOf(d.value) : i,
     plausibleBecause: "그래프 위 또는 반대편의 실제 점이라 얼핏 보면 해로 보일 수 있다.",
@@ -280,5 +288,5 @@ export function renderLinearInequalityProblem(model: LinearInequalityModel): Com
     kind: d.kind,
     obvious: false,
   }));
-  return { passage, question, options, correctIndex, explanation, figure: buildFigureForPointInSolution(model), distractorRationales };
+  return { passage, question, options, correctIndex, explanation, explanationEn, figure: buildFigureForPointInSolution(model), distractorRationales };
 }

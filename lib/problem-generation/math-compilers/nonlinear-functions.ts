@@ -131,6 +131,7 @@ export type CompiledMathProblem = {
   options: string[];
   correctIndex: number;
   explanation: string;
+  explanationEn: string;
   figure: null;
   distractorRationales: DistractorRationale[];
 };
@@ -155,14 +156,17 @@ export function renderNonlinearFnProblem(model: NonlinearFnModel): CompiledMathP
   if (model.questionKind === "evaluate") {
     const question = `What is f(${fmt(model.x0!)})?`;
     const explanation = `f(${fmt(model.x0!)}) = ${fmt(model.a)}(${fmt(model.x0!)} - ${fmt(model.h)})² ${model.k >= 0 ? "+" : "-"} ${fmt(Math.abs(model.k))} = ${fmt(model.a)} × ${fmt(model.x0! - model.h)}² ${model.k >= 0 ? "+" : "-"} ${fmt(Math.abs(model.k))} = ${model.correctAnswer}이다.`;
-    return { passage, question, options: shuffled, correctIndex, explanation, figure: null, distractorRationales };
+    const explanationEn = `f(${fmt(model.x0!)}) = ${fmt(model.a)}(${fmt(model.x0!)} - ${fmt(model.h)})² ${model.k >= 0 ? "+" : "-"} ${fmt(Math.abs(model.k))} = ${fmt(model.a)} × ${fmt(model.x0! - model.h)}² ${model.k >= 0 ? "+" : "-"} ${fmt(Math.abs(model.k))} = ${model.correctAnswer}.`;
+    return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
   }
   if (model.questionKind === "vertex_x") {
     const question = "What is the x-coordinate of the vertex of the graph of f in the xy-plane?";
     const explanation = `f(x) = a(x-h)² + k 형태에서 꼭짓점은 (h, k)이므로 꼭짓점의 x좌표는 h = ${model.correctAnswer}이다.`;
-    return { passage, question, options: shuffled, correctIndex, explanation, figure: null, distractorRationales };
+    const explanationEn = `In the form f(x) = a(x-h)² + k, the vertex is (h, k), so the x-coordinate of the vertex is h = ${model.correctAnswer}.`;
+    return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
   }
   const question = "What is the y-coordinate of the vertex of the graph of f in the xy-plane?";
   const explanation = `f(x) = a(x-h)² + k 형태에서 꼭짓점은 (h, k)이므로 꼭짓점의 y좌표는 k = ${model.correctAnswer}이다.`;
-  return { passage, question, options: shuffled, correctIndex, explanation, figure: null, distractorRationales };
+  const explanationEn = `In the form f(x) = a(x-h)² + k, the vertex is (h, k), so the y-coordinate of the vertex is k = ${model.correctAnswer}.`;
+  return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
 }

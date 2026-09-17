@@ -336,6 +336,32 @@ function buildExplanation(model: LinearTwoVarModel): string {
   return `${base} 따라서 x좌표와 y좌표의 합은 ${fmt(x)} + ${fmt(y)} = ${fmt(x + y)}이다.`;
 }
 
+/** 2026-09-17(사용자 지시) — 해설의 영어 버전. buildExplanation과 같은 계산값만 참조한다(번역이 아니라 같은 값으로 별도 작성). */
+function buildExplanationEn(model: LinearTwoVarModel): string {
+  const eq1 = fmtLine(model.m1, model.b1);
+  if (model.questionKind === "num_solutions") {
+    if (model.systemKind === "one_solution") return `The two equations have different slopes (${fmt(model.m1)} and ${fmt(model.m2)}), so the lines intersect at exactly one point. So there is exactly one solution.`;
+    if (model.systemKind === "no_solution") return `The two equations have the same slope (${fmt(model.m1)}) but different y-intercepts (${fmt(model.b1)} ≠ ${fmt(model.b2)}), so the lines are parallel and never meet. So there is no solution.`;
+    return `The two equations have the same slope and y-intercept (${fmt(model.m1)}, ${fmt(model.b1)}), so they represent the same line. So there are infinitely many solutions.`;
+  }
+  if (model.questionKind === "slope" || model.questionKind === "intercept") {
+    const askedM = model.askedLine === 2 ? model.m2 : model.m1;
+    const askedB = model.askedLine === 2 ? model.b2 : model.b1;
+    const eqAsked = fmtLine(askedM, askedB);
+    const lineWord = model.askedLine === 2 ? "second" : "first";
+    return model.questionKind === "slope"
+      ? `In the ${lineWord} equation (${eqAsked}), the coefficient of x is the slope, so the slope is ${fmt(askedM)}.`
+      : `In the ${lineWord} equation (${eqAsked}), the constant term is the y-intercept, so the y-intercept is ${fmt(askedB)}.`;
+  }
+  const { x, y } = model.intersection!;
+  const diffM = model.m1 - model.m2;
+  const diffB = model.b2 - model.b1;
+  const baseEn = `Since the right-hand sides are equal, ${rhsExpr(model.m1, model.b1)} = ${rhsExpr(model.m2, model.b2)}. Rearranging gives (${fmt(diffM)})x = ${fmt(diffB)}, so x = ${fmt(diffB)} ÷ (${fmt(diffM)}) = ${fmt(x)}. Substituting into ${eq1} gives y = ${fmt(model.m1)} × ${fmt(x)} ${model.b1 >= 0 ? "+" : "-"} ${fmt(Math.abs(model.b1))} = ${fmt(y)}.`;
+  if (model.questionKind === "intersection_x") return `${baseEn} So the x-coordinate is ${fmt(x)}.`;
+  if (model.questionKind === "intersection_y") return `${baseEn} So the y-coordinate is ${fmt(y)}.`;
+  return `${baseEn} So the sum of the x-coordinate and y-coordinate is ${fmt(x)} + ${fmt(y)} = ${fmt(x + y)}.`;
+}
+
 /** 결정적 검사 — 답의 유일성, 선택지 중복, 그래프-식 일치. 이 검사에서 걸리면 후보를 버리고 새로 만든다(재시도는 호출자가 한다). */
 export function validateLinearTwoVarModel(model: LinearTwoVarModel): { ok: true } | { ok: false; reason: string } {
   const values = [model.correctAnswer, ...model.distractors.map((d) => d.value)];
@@ -365,6 +391,8 @@ export type CompiledMathProblem = {
   options: string[];
   correctIndex: number;
   explanation: string;
+  /** 2026-09-17(사용자 지시) — 해설의 영어 버전. 관리자·학생 화면의 한국어/영어 토글에 쓰인다. */
+  explanationEn: string;
   figure: PlaneSpec | null;
   distractorRationales: DistractorRationale[];
 };
@@ -398,6 +426,7 @@ export function renderLinearTwoVarProblem(model: LinearTwoVarModel): CompiledMat
     options: shuffled,
     correctIndex,
     explanation: buildExplanation(model),
+    explanationEn: buildExplanationEn(model),
     figure: model.questionKind === "num_solutions" ? null : buildFigure(model),
     distractorRationales,
   };

@@ -90,6 +90,7 @@ export type CompiledMathProblem = {
   options: string[];
   correctIndex: number;
   explanation: string;
+  explanationEn: string;
   figure: null;
   distractorRationales: DistractorRationale[];
 };
@@ -122,6 +123,7 @@ export function renderEquivalentExpressionsProblem(model: EquivalentExpressionsM
   const correctIndex = order.indexOf(0);
 
   const explanation = `첫 번째 괄호를 분배하면 ${linearExpr(model.a, model.a * model.b)}이고, 두 번째 괄호를 분배하면 ${linearExpr(model.c, model.c * model.d)}이다. x항끼리 더하면 ${fmt(model.a)} + ${fmt(model.c)} = ${fmt(model.m)}이고, 상수항끼리 더하면 ${fmt(model.a * model.b)} + ${fmt(model.c * model.d)} = ${fmt(model.n)}이다. 따라서 ${model.correctAnswer}이다.`;
+  const explanationEn = `Distributing the first term gives ${linearExpr(model.a, model.a * model.b)}, and distributing the second term gives ${linearExpr(model.c, model.c * model.d)}. Adding the x-terms: ${fmt(model.a)} + ${fmt(model.c)} = ${fmt(model.m)}. Adding the constants: ${fmt(model.a * model.b)} + ${fmt(model.c * model.d)} = ${fmt(model.n)}. So the answer is ${model.correctAnswer}.`;
 
   const distractorRationales: DistractorRationale[] = model.distractors.map((d, i) => ({
     index: order.indexOf(i + 1),
@@ -132,5 +134,5 @@ export function renderEquivalentExpressionsProblem(model: EquivalentExpressionsM
     obvious: false,
   }));
 
-  return { passage, question, options: shuffled, correctIndex, explanation, figure: null, distractorRationales };
+  return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
 }

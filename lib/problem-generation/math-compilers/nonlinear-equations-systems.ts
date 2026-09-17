@@ -211,6 +211,7 @@ export type CompiledMathProblem = {
   options: string[];
   correctIndex: number;
   explanation: string;
+  explanationEn: string;
   figure: null;
   distractorRationales: DistractorRationale[];
 };
@@ -235,14 +236,24 @@ export function renderNonlinearEqProblem(model: NonlinearEqModel): CompiledMathP
   // PublishedContentView가 해설만 원문 그대로 <p>로 찍는다). 해설에는 $…$ 대신
   // 유니코드 위첨자(²)를 써서 $ 기호가 그대로 노출되지 않게 한다.
   let explanation: string;
+  let explanationEn: string;
   if (model.questionKind === "num_real_solutions") {
     explanation = `판별식은 b² - 4c = ${fmt(model.b)}² - 4×${fmt(model.c)} = ${fmt(model.discriminant!)}이다. ${model.discriminant! > 0 ? "0보다 크므로 서로 다른 두 실근을 갖는다." : model.discriminant === 0 ? "0이므로 중근을 하나 갖는다." : "0보다 작으므로 실근이 없다."} 따라서 ${model.correctAnswer}이다.`;
+    explanationEn = `The discriminant is b² - 4c = ${fmt(model.b)}² - 4×${fmt(model.c)} = ${fmt(model.discriminant!)}. ${model.discriminant! > 0 ? "Since it is greater than 0, there are two distinct real solutions." : model.discriminant === 0 ? "Since it equals 0, there is one real solution." : "Since it is less than 0, there are no real solutions."} So the answer is ${model.correctAnswer}.`;
   } else {
     const bSign = -model.b >= 0 ? "+" : "-";
     explanation = `${quadExpr(model.b, model.c).replace("x^2", "x²")} = (x ${model.r1! >= 0 ? "-" : "+"} ${fmt(Math.abs(model.r1!))})(x ${model.r2! >= 0 ? "-" : "+"} ${fmt(Math.abs(model.r2!))})로 인수분해되므로 근은 ${fmt(model.r1!)}, ${fmt(model.r2!)}이다. `;
-    if (model.questionKind === "root") explanation += `더 큰 값은 ${model.correctAnswer}이다.`;
-    else if (model.questionKind === "sum_of_roots") explanation += `두 근의 합은 -b = ${bSign}${fmt(Math.abs(model.b))} 이므로 ${model.correctAnswer}이다.`;
-    else explanation += `두 근의 곱은 c = ${model.correctAnswer}이다.`;
+    explanationEn = `${quadExpr(model.b, model.c).replace("x^2", "x²")} factors as (x ${model.r1! >= 0 ? "-" : "+"} ${fmt(Math.abs(model.r1!))})(x ${model.r2! >= 0 ? "-" : "+"} ${fmt(Math.abs(model.r2!))}), so the solutions are ${fmt(model.r1!)} and ${fmt(model.r2!)}. `;
+    if (model.questionKind === "root") {
+      explanation += `더 큰 값은 ${model.correctAnswer}이다.`;
+      explanationEn += `The larger value is ${model.correctAnswer}.`;
+    } else if (model.questionKind === "sum_of_roots") {
+      explanation += `두 근의 합은 -b = ${bSign}${fmt(Math.abs(model.b))} 이므로 ${model.correctAnswer}이다.`;
+      explanationEn += `The sum of the solutions is -b = ${bSign}${fmt(Math.abs(model.b))}, so the answer is ${model.correctAnswer}.`;
+    } else {
+      explanation += `두 근의 곱은 c = ${model.correctAnswer}이다.`;
+      explanationEn += `The product of the solutions is c = ${model.correctAnswer}.`;
+    }
   }
 
   const distractorRationales: DistractorRationale[] = model.distractors.map((d, i) => ({
@@ -254,5 +265,5 @@ export function renderNonlinearEqProblem(model: NonlinearEqModel): CompiledMathP
     obvious: false,
   }));
 
-  return { passage, question, options: shuffled, correctIndex, explanation, figure: null, distractorRationales };
+  return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
 }

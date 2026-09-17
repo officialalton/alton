@@ -107,6 +107,7 @@ export type CompiledMathProblem = {
   options: string[];
   correctIndex: number;
   explanation: string;
+  explanationEn: string;
   figure: null;
   distractorRationales: DistractorRationale[];
 };
@@ -123,6 +124,7 @@ export function renderLinearOneVarProblem(model: LinearOneVarModel): CompiledMat
   const diffDB = model.d - model.b;
   // 실제 소거·이항 단계: a x + b = c x + d → (a-c)x = d-b → x = (d-b)/(a-c).
   const explanation = `양변에서 ${sideExpr(model.c, 0)}를 빼면 ${sideExpr(diffAC, model.b)} = ${fmt(model.d)}이고, 다시 ${fmt(model.b)}를 이항하면 (${fmt(diffAC)})x = ${fmt(diffDB)}이다. 따라서 x = ${fmt(diffDB)} ÷ (${fmt(diffAC)}) = ${model.correctAnswer}이다.`;
+  const explanationEn = `Subtracting ${sideExpr(model.c, 0)} from both sides gives ${sideExpr(diffAC, model.b)} = ${fmt(model.d)}. Moving ${fmt(model.b)} to the other side gives (${fmt(diffAC)})x = ${fmt(diffDB)}. So x = ${fmt(diffDB)} ÷ (${fmt(diffAC)}) = ${model.correctAnswer}.`;
 
   const distractorRationales: DistractorRationale[] = model.distractors.map((d, i) => ({
     index: order.indexOf(i + 1),
@@ -133,5 +135,5 @@ export function renderLinearOneVarProblem(model: LinearOneVarModel): CompiledMat
     obvious: false,
   }));
 
-  return { passage, question, options: shuffled, correctIndex, explanation, figure: null, distractorRationales };
+  return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
 }

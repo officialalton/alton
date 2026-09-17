@@ -185,6 +185,7 @@ export type CompiledMathProblem = {
   options: string[];
   correctIndex: number;
   explanation: string;
+  explanationEn: string;
   figure: null;
   distractorRationales: DistractorRationale[];
 };
@@ -207,14 +208,16 @@ export function renderLinearFunctionProblem(model: LinearFunctionModel): Compile
     const passage = `The function f is defined by ${fx(model.m, model.b)}.`;
     const question = `What is f(${fmt(model.x0!)})?`;
     const explanation = `f(${fmt(model.x0!)}) = ${fmt(model.m)} × ${fmt(model.x0!)} ${model.b >= 0 ? "+" : "-"} ${fmt(Math.abs(model.b))} = ${model.correctAnswer}이다.`;
-    return { passage, question, options: shuffled, correctIndex, explanation, figure: null, distractorRationales };
+    const explanationEn = `f(${fmt(model.x0!)}) = ${fmt(model.m)} × ${fmt(model.x0!)} ${model.b >= 0 ? "+" : "-"} ${fmt(Math.abs(model.b))} = ${model.correctAnswer}.`;
+    return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
   }
 
   if (model.questionKind === "find_x_for_value") {
     const passage = `The function f is defined by ${fx(model.m, model.b)}.`;
     const question = `For what value of x does f(x) = ${fmt(model.target!)}?`;
     const explanation = `${fmt(model.m)}x ${model.b >= 0 ? "+" : "-"} ${fmt(Math.abs(model.b))} = ${fmt(model.target!)}에서 상수항을 이항하면 ${fmt(model.m)}x = ${fmt(model.target! - model.b)}이므로 x = ${fmt(model.target! - model.b)} ÷ ${fmt(model.m)} = ${model.correctAnswer}이다.`;
-    return { passage, question, options: shuffled, correctIndex, explanation, figure: null, distractorRationales };
+    const explanationEn = `From ${fmt(model.m)}x ${model.b >= 0 ? "+" : "-"} ${fmt(Math.abs(model.b))} = ${fmt(model.target!)}, moving the constant term gives ${fmt(model.m)}x = ${fmt(model.target! - model.b)}, so x = ${fmt(model.target! - model.b)} ÷ ${fmt(model.m)} = ${model.correctAnswer}.`;
+    return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
   }
 
   const { p1, p2 } = model;
@@ -223,5 +226,6 @@ export function renderLinearFunctionProblem(model: LinearFunctionModel): Compile
   const dy = p2!.y - p1!.y;
   const dx = p2!.x - p1!.x;
   const explanation = `기울기는 (y의 변화량) ÷ (x의 변화량) = (${fmt(dy)}) ÷ (${fmt(dx)}) = ${model.correctAnswer}이다.`;
-  return { passage, question, options: shuffled, correctIndex, explanation, figure: null, distractorRationales };
+  const explanationEn = `Slope = (change in y) ÷ (change in x) = (${fmt(dy)}) ÷ (${fmt(dx)}) = ${model.correctAnswer}.`;
+  return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
 }

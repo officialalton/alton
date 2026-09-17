@@ -619,6 +619,9 @@ function RecheckButton({ problemId, onDone }: { problemId: string; onDone: () =>
  */
 export function PublishedContentView({ problem, content }: { problem: BankProblem; content?: ProblemContent }) {
   const p = content ?? problem.published!;
+  // 2026-09-17(사용자 지시) — 해설을 한국어/영어 버튼으로 바꿔볼 수 있게 한다.
+  // 영어 해설이 없는 문항(대부분의 기존 AI·수동 문항)은 버튼 자체를 숨긴다.
+  const [explanationLang, setExplanationLang] = useState<"ko" | "en">("ko");
   const fullText = composeProblemText(p.passage, p.question);
   const need = judgeMaterialNeed({ examSystem: problem.examSystem, skillCode: problem.skillCode, text: fullText, format: problem.format });
   const vis = editorVisibility({ examSystem: problem.examSystem, format: problem.format, need, hasStatements: Boolean(p.statements?.length), hasFigure: p.figure != null, text: fullText });
@@ -656,8 +659,30 @@ export function PublishedContentView({ problem, content }: { problem: BankProble
       ) : null}
       {p.explanation && (
         <>
-          <FieldTitle>해설</FieldTitle>
-          <p className="text-[12.5px] text-grey-500 whitespace-pre-wrap leading-[1.6]">{p.explanation}</p>
+          <div className="flex items-center gap-2 mt-1">
+            <FieldTitle>해설</FieldTitle>
+            {p.explanationEn && (
+              <div className="flex gap-1 mb-1.5" role="group" aria-label="해설 언어">
+                <button
+                  type="button"
+                  onClick={() => setExplanationLang("ko")}
+                  className={"text-[11px] font-bold px-2 py-0.5 rounded-full border-[1.5px] " + (explanationLang === "ko" ? "bg-ink text-white border-ink" : "bg-white text-grey-500 border-grey-200")}
+                >
+                  한국어
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setExplanationLang("en")}
+                  className={"text-[11px] font-bold px-2 py-0.5 rounded-full border-[1.5px] " + (explanationLang === "en" ? "bg-ink text-white border-ink" : "bg-white text-grey-500 border-grey-200")}
+                >
+                  English
+                </button>
+              </div>
+            )}
+          </div>
+          <p className="text-[12.5px] text-grey-500 whitespace-pre-wrap leading-[1.6]">
+            {explanationLang === "en" && p.explanationEn ? p.explanationEn : p.explanation}
+          </p>
         </>
       )}
     </div>
