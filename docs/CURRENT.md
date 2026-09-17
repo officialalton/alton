@@ -1,4 +1,4 @@
-# ALTON — 현재 상태 (2026-09-14 기준)
+# ALTON — 현재 상태 (2026-09-17 기준)
 
 > 새 세션은 이 문서만 읽고 시작한다. 그 이전 상세 이력(2026-08-29 ~ 2026-09-14 낮)은
 > [`history/CURRENT-archive-until-2026-09-14.md`](history/CURRENT-archive-until-2026-09-14.md)에 원문 그대로 있다 — 필요할 때만 검색한다.
@@ -7,8 +7,8 @@
 
 | 항목 | 값 |
 |---|---|
-| 브랜치 / Preview | `preview/m4-integration-verification` / **https://alton-gqt1zjtdx-alton7.vercel.app** (커밋 `62721f3` 시점) |
-| 공유 non-prod(`worpsqwqgnspddnrtnvq`) | 마이그레이션 **`20261381000000`까지 적용됨**(local = remote) |
+| 브랜치 / Preview | `preview/m4-integration-verification` / **https://alton-gqt1zjtdx-alton7.vercel.app** (커밋 `62721f3` 시점 — Math 19종 완성분·R&W 근거 모델은 이 Preview 배포 이후 커밋이라 아직 Preview에 반영 안 됨, 로컬+non-prod DB 검증만 완료) |
+| 공유 non-prod(`worpsqwqgnspddnrtnvq`) | 마이그레이션 **`20261403000000`까지 적용됨**(local = remote) |
 | Production | 배포·마이그레이션 없음(오픈 전, 실제 고객 데이터 없음) |
 | 테스트 | 마지막 전체 일괄 실행 2596/1 skip(`63d1189`, `db reset` 직후). 그 뒤 배치들은 **파일별 스위트 전부 초록**(전체 일괄 재실행 미실시). 통합 테스트는 `supabase db reset --local` 직후 `--no-file-parallelism`으로 돌려야 한다(예약 fixture 충돌·append-only 전역 count 는 재실행 시 실패 — 결함 아님) |
 | 실제 외부 연동 | 교재 Drive `ALTON Company Tutoring Resources`(id `0AKnx7roQfcSaUk9PVA`) 읽기·폴더 생성·파일 가져오기·고정 사본 공개 확인. Preview 환경변수 `CURRICULUM_DRIVE_ENABLED/ID/ALLOW_REAL_WRITES=true`(제품 오너 설정). AI 생성은 Anthropic 키(Preview·로컬 있음). 유료 서비스 추가 없음 |
@@ -80,7 +80,11 @@
 10. **P3 11차** — 과제 발급 = 키워드별 개수·무작위(`20261364`), 학생 포털 문제 기록 v3 재구성, v3 과제 탭 역할 수정(답 선택·필기 불가 결함), 교재 목차 이름 = 현재 노출용 이름, 교사 해설 보기 전 형식, 그림 라벨 평문화, 렌더링 엔진 설계안.
 9. **P3 10차** — 그림 SAT 지면 스타일(격자·화살표 축·원점 O·축 설명·각 호 표시), UAT 수정: 문제 화면 필기 레이어가 **클릭을 먹던 결함**(선택지·버튼 클릭 불가) 수정, 서술형 = 글 상자 타이핑, 연습장 제거, PDF T 상자 기본 크기(가로 2배·5줄), 수업 준비 `담을 수 있는 문제` 클릭 미리보기(지문·선택지·그림), **키워드 자동 문제 기본 캡 20**(`20261363`).
 
-마이그레이션: `20261346`~`20261368`(전부 additive, 공유 non-prod 적용). 배치별 상세는 아카이브의 각 블록.
+25. **P3 26차 — SAT Math 19개 기술 코드 전부 결정적 컴파일러로 전환**(AI 호출 0회, 2026-09-16~17): 식·함수 공통 엔진(A) 8종(`linear_equations_two_var`·`systems_linear`은 같은 엔진 재사용·`linear_inequalities`·`linear_equations_one_var`·`linear_functions`·`equivalent_expressions`·`nonlinear_equations_systems`·`nonlinear_functions`), 통계·확률 공통 엔진(B) 7종(`ratios_rates_units`·`percentages`·`one_variable_data`·`two_variable_data`·`probability`·`inference_margin_error`·`evaluating_statistical_claims`), 도형 공통 엔진(C) 4종(`area_volume`·`lines_angles_triangles`·`right_triangles_trigonometry`·`circles`). 해설 이중언어(`explanation`/`explanationEn`, DB 컬럼 `problem_versions.explanation_en`, 관리자 UI 토글)도 이 배치에서 완성. 커밋 `e3b687d`~`0428b05`(중간 UAT 수정 다수 포함, `git log` 참고). 다음: Preview UI UAT(로컬·non-prod DB 검증만 완료, 아직 Preview 화면 확인 안 됨).
+26. **P3 27차 — R&W 5개 세부 기술에 얇은 근거 모델(Evidence Model) 추가**(2026-09-17, migration `20261403000000`): `words_in_context`·`central_ideas_details`·`inferences`·`command_of_evidence_text`·`cross_text_connections`에 구조화된 `target`/`evidence_span`/`answer_rationale`/`distractor_error_types` 필드를 기존 생성과 함께 산출, 저장 전 결정적 검사(지문 내 축어 일치 evidence_span + enum 검증)를 초안 채택 게이트로 추가, 관리자 화면에만 노출(학생·학부모는 안 보임). `cross_text_connections`의 `target`이 질문 재진술이 아니라 두 지문을 합성한 명제를 내도록 후속 수정. 커밋 `f106784`, `1e47505`. 다음: Preview UI UAT.
+27. **P5 — 언어 전환 이전 문제 아카이브**(migration `20261402000000`): 문제 지문·질문·선택지가 영어로 통일되기 전 시기(한국어 혼용)의 기존 문제를 전부 보관 상태로 전환(`problems`/`problem_versions` 공개 후보에서 제외), 삭제 없음.
+
+마이그레이션: `20261346`~`20261403`(전부 additive, 공유 non-prod 적용). 배치별 상세는 아카이브의 각 블록.
 
 ## 5. 검증 구분
 
@@ -112,6 +116,8 @@
   구성은 둘 수 있으나 실제 발급은 교사가 명시적으로 함, 필요 시 회차별 자동 발급
   규칙은 별도 설계).
 - **지금**: 제품 오너 Preview UAT(문제은행 AI 생성 → 그림 확인 → 전체 공개 → 수업 준비에 담기 → SPR 풀이·채점 / 과제 발급·풀이 / 문제 위 필기 / 관리자 교재 탭).
+- **분류 후속 UI**: criteria `skill_codes` 일괄 편집(문제은행에서 여러 문제를 한 번에 재분류), Preview UI UAT — 아직 착수 전.
+- **신규 — SAT Math 19종 + R&W 근거모델 5종 Preview UAT 필요(2026-09-17)**: 위 25·26차 작업은 로컬 테스트·non-prod DB 배치 검증만 마쳤고 실제 Preview 화면으로는 한 번도 확인되지 않았다. 다음 세션에서 관리자 문제은행 화면 기준으로 19개 Math 기술 코드 전부(생성→그림/렌더 확인→공개)와 R&W 5개 근거모델 기술(생성→근거모델 필드 표시·검사 통과 확인→공개)을 한 번씩 Preview UI로 통과시키는 전수 UAT가 필요.
 - **단어장(2026-09-15~16, 완료 — 최종 8권 구성)**: ALTON SAT 공용 단어장. 원래 10권 계획 중 8·9·10권(추상·개념/저빈도 정밀/최상급)은 후보 어휘 풀이 좁아 중복률이 급증해 각각 200개를 못 채웠다(제품 오너 지시로 세 권의 목표를 8권 하나로 병합, `scripts/vocab-library-seed.ts`의 `VOLUME_PLAN`에서 9·10권 제거·8권 난이도 3~5로 확장). **1~8권 전부 완료(1,800단어)**, 마이그레이션 `20261378`+`20261383`+`20261384` non-prod 반영 완료. 내 단어장 폴더(기본 "오답 노트"), 별표 저장, 시험 선택지 영어화, UI 개편(가리기 개별 공개·A-Z 필터·랜덤 순서·페이지네이션) 전부 구현·테스트·Preview 배포 완료(마이그레이션 `20261376`~`20261380`). 기존 지문 클릭 저장(`VocabClickLayer.tsx`)은 손대지 않음.
 - **과제(2026-09-16, 완료, 제품 오너 2차 정정 최종안)**: 과제를 수업(세션)과 완전히 분리 — 발급 시 수업 선택 없음, 배치명 = 발급 날짜, 발급할 때마다 새 배치(`homework_batches`, 단어장 `vocab_quizzes`와 같은 패턴: 세션 비의존 자기완결 레코드). 교사↔학생 쌍 단위로만 저장·노출(RLS + 쿼리 이중 격리, 다른 교사·다른 학생 노출 불가). 학생 포털 과제 탭·교사 포털 "과제 내역"·세션뷰 과제 탭 전부 동일한 공통 컴포넌트(`HomeworkBatchPanel`)로 배치를 눌러 열면 기존 목차/슬라이드 UI 그대로 정답·해설·채점. RPC `issue_homework_batch_v2`(마이그레이션 `20261382`, non-prod 반영 완료). **마이그레이션 `20261381`(`issue_homework_batch`, 회차 연동 1차안)은 이 최종안으로 대체되어 앱에서 더 이상 호출되지 않음 — DB 컬럼/RPC는 삭제하지 않고 방치.** 검증: 통합 테스트 6/6(발급 권한·배치 분리·문제 중복 방지·RLS 격리), 컴포넌트 테스트 전부 통과.
 - **SAT Math 생성 품질(2026-09-16, 1단계 완료 + 실측 파일럿 완료)**: 코드 검토([`2026-09-16-sat-math-generation-code-review-and-proposal.md`](2026-09-16-sat-math-generation-code-review-and-proposal.md))에서 지목한 A(검사·저장 문항 분리)/B(필수 검사 미실행이 통과 처리)/C(해설 따라 정답 자동 변경)/G(오답 수정 후 재검증 누락) 결함을 Math 한정으로 수정·모의 검증(`lib/problem-generation/pipeline.test.ts`). R&W는 기존 동작 유지. **실측 파일럿(2026-09-16, `scripts/problem-quality-pilot.ts`, 승인된 소액 예산)**: 5개 유형×5문항 실제 API 호출 → 22/25 저장(88%), 총 $1.55(문항당 $0.07). 실패는 대부분 "정답-해설 불일치라 자동 정정 안 함" 정책이 정상 작동한 케이스. 저장은 admin 문제은행에 초안까지만 — 공개는 관리자 확인 후. **미완료**: 계산 기반 검증 확장(좌표평면·연립방정식 target 명시화 등, 검토 문서 3~4절), 유형 확대 배치(남은 예산 $28.45), Preview 로그인 확인(테스트 계정 없어 미실시).
