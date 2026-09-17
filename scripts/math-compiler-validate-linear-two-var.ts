@@ -1,7 +1,8 @@
-// 2026-09-17 — "Linear equations in two variables" 계산형 컴파일러의 대표 10문항 배치
-// 검증(제품 오너 지시 3단계). 일반(medium)·어려움(hard) 각 10개를 실제 저장 경로로
-// 만들어 자동 통과율·부족률·벽시계 시간·호출 수를 실측한다. 로컬 DB에서만 실행한다.
-// 실행: npx tsx scripts/math-compiler-validate-linear-two-var.ts
+// 2026-09-17 — 계산형 Math 컴파일러(일차식 공통 엔진)의 대표 10문항 배치 검증(제품
+// 오너 지시). 일반(medium)·어려움(hard) 각 10개를 실제 저장 경로로 만들어 자동
+// 통과율·부족률·벽시계 시간·호출 수를 실측한다. 로컬 DB에서만 실행한다.
+// 실행: npx tsx scripts/math-compiler-validate-linear-two-var.ts [skillCode]
+// skillCode 생략 시 linear_equations_two_var. systems_linear·linear_inequalities도 지원.
 import { readFileSync, existsSync } from "node:fs";
 import path from "node:path";
 
@@ -14,6 +15,12 @@ if (existsSync(envPath)) {
 }
 
 const SAT_MATH_SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001";
+const SKILL_CODE = (process.argv[2] as "linear_equations_two_var" | "systems_linear" | "linear_inequalities") || "linear_equations_two_var";
+const SKILL_LABEL: Record<string, string> = {
+  linear_equations_two_var: "Linear equations in two variables",
+  systems_linear: "Systems of two linear equations",
+  linear_inequalities: "Linear inequalities",
+};
 
 async function main() {
   const { createClient } = await import("@supabase/supabase-js");
@@ -39,14 +46,14 @@ async function main() {
     let dbSaveMs = 0;
     const failures: string[] = [];
     const result = await runMathCompilerBatch({
-      skillCode: "linear_equations_two_var",
+      skillCode: SKILL_CODE,
       difficulty,
       count: 10,
       onAccepted: async ({ problem: g, quality }) => {
         const t0 = Date.now();
         const { data: problemId, error: pErr } = await admin.rpc("create_bank_problem", {
-          p_subject_id: SAT_MATH_SUBJECT_ID, p_format: "mc", p_skill_type: "Linear equations in two variables",
-          p_topic: "", p_skill_code: "linear_equations_two_var", p_exam_system: "sat_math", p_ap_subject: null,
+          p_subject_id: SAT_MATH_SUBJECT_ID, p_format: "mc", p_skill_type: SKILL_LABEL[SKILL_CODE],
+          p_topic: "", p_skill_code: SKILL_CODE, p_exam_system: "sat_math", p_ap_subject: null,
           p_difficulty: difficulty, p_actor_id: actorId,
         });
         if (pErr || !problemId) { failures.push(`create_bank_problem: ${pErr?.message}`); dbSaveMs += Date.now() - t0; return; }
@@ -64,7 +71,7 @@ async function main() {
       },
     });
     const totalRequestMs = Date.now() - requestStart;
-    console.log(`\n=== ${difficulty} — 요청 10 (linear_equations_two_var) ===`);
+    console.log(`\n=== ${difficulty} — 요청 10 (${SKILL_CODE}) ===`);
     console.log(`자동 통과(컴파일러) ${result.stats.accepted}/10, 실제 DB 저장 성공 ${created}/10, 부족 ${result.stats.shortfall}, 종료 사유 ${result.stats.stoppedReason}`);
     console.log(`후보 평가 수 ${result.stats.candidatesEvaluated} (요청 1~9여도 최소 10문항 배치 확인됨)`);
     console.log(`--- 시간 분리 기록 ---`);

@@ -18,8 +18,17 @@ import {
   validateLinearTwoVarModel,
   type LinearTwoVarDifficulty,
 } from "./linear-two-variables";
+import {
+  generateLinearInequalityModel,
+  renderLinearInequalityProblem,
+  validateLinearInequalityModel,
+} from "./linear-inequalities";
 
-export type MathCompilerSkill = "linear_equations_two_var";
+// 2026-09-17(제품 오너 지시) — "같은 일차식 공통 엔진으로 확장". systems_linear(두
+// 일차방정식의 연립)은 수학적으로 linear_equations_two_var 컴파일러가 이미 계산하는
+// "두 직선의 교점·기울기·절편·해의 개수"와 같은 문제다 — 별도 모델을 새로 만들지 않고
+// 같은 계산 함수를 그대로 쓴다(관리자가 고른 skillCode만 문제에 다르게 태깅된다).
+export type MathCompilerSkill = "linear_equations_two_var" | "systems_linear" | "linear_inequalities";
 
 const MIN_BATCH = 10;
 const MAX_CANDIDATE_MULTIPLIER: Record<LinearTwoVarDifficulty, number> = { easy: 1.5, medium: 1.5, hard: 2.5 };
@@ -68,12 +77,21 @@ function attemptOne(
   difficulty: LinearTwoVarDifficulty,
   timing: AttemptTiming
 ): { ok: true; problem: GeneratedProblem; quality: QualityRecord } | { ok: false; reason: string } {
-  if (skillCode !== "linear_equations_two_var") return { ok: false, reason: `지원하지 않는 계산형 유형: ${skillCode}` };
   const t0 = Date.now();
-  const model = generateLinearTwoVarModel({ difficulty });
-  const check = validateLinearTwoVarModel(model);
-  if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
-  const compiled = renderLinearTwoVarProblem(model);
+  let compiled: ReturnType<typeof renderLinearTwoVarProblem>;
+  if (skillCode === "linear_equations_two_var" || skillCode === "systems_linear") {
+    const model = generateLinearTwoVarModel({ difficulty });
+    const check = validateLinearTwoVarModel(model);
+    if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
+    compiled = renderLinearTwoVarProblem(model);
+  } else if (skillCode === "linear_inequalities") {
+    const model = generateLinearInequalityModel({ difficulty });
+    const check = validateLinearInequalityModel(model);
+    if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
+    compiled = renderLinearInequalityProblem(model);
+  } else {
+    return { ok: false, reason: `지원하지 않는 계산형 유형: ${skillCode}` };
+  }
   timing.compileMs += Date.now() - t0;
 
   const passageForCheck = compiled.passage + "\n\n" + compiled.question;

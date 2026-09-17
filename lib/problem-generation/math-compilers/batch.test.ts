@@ -42,4 +42,28 @@ describe("runMathCompilerBatch — 최소 10문항 배치 실행", () => {
     expect(item.problem.correctIndex).toBeLessThan(4);
     expect(typeof item.problem.explanation).toBe("string");
   });
+
+  // 2026-09-17 — 같은 일차식 공통 엔진 확장: systems_linear는 linear_equations_two_var와
+  // 같은 계산 함수를 쓰고(문제은행 skillCode만 다르게 태깅), linear_inequalities는 새
+  // 모델이지만 같은 배치 실행기·상한·no-held 정책을 그대로 따른다.
+  it("systems_linear는 같은 엔진으로 요청 수만큼 자동 통과 문항을 만든다", async () => {
+    const result = await runMathCompilerBatch({ skillCode: "systems_linear", difficulty: "medium", count: 10 });
+    expect(result.accepted).toHaveLength(10);
+    expect(result.stats.shortfall).toBe(0);
+    expect(result.stats.stoppedReason).toBe("target_met");
+  });
+
+  it("linear_inequalities는 요청 수만큼 자동 통과 문항을 만든다(medium·hard)", async () => {
+    for (const difficulty of ["medium", "hard"] as const) {
+      const result = await runMathCompilerBatch({ skillCode: "linear_inequalities", difficulty, count: 10 });
+      expect(result.accepted).toHaveLength(10);
+      expect(result.stats.shortfall).toBe(0);
+      expect(result.stats.stoppedReason).toBe("target_met");
+      for (const item of result.accepted) {
+        expect(item.problem.options).toHaveLength(4);
+        expect(item.problem.correctIndex).toBeGreaterThanOrEqual(0);
+        expect(item.problem.correctIndex).toBeLessThan(4);
+      }
+    }
+  });
 });
