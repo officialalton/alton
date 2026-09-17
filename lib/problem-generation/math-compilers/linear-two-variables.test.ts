@@ -42,6 +42,28 @@ describe("generateLinearTwoVarModel — 결정적 계산", () => {
     }
   });
 
+  it("hard 난이도의 slope/intercept 문항은 두 번째 식(m2/b2)을 묻고, medium은 첫 번째 식을 묻는다", () => {
+    for (let i = 0; i < 30; i++) {
+      const hardSlope = generateLinearTwoVarModel({ difficulty: "hard", questionKind: "slope" });
+      expect(hardSlope.askedLine).toBe(2);
+      expect(hardSlope.correctAnswer).toBe(String(hardSlope.m2));
+      const mediumSlope = generateLinearTwoVarModel({ difficulty: "medium", questionKind: "slope" });
+      expect(mediumSlope.askedLine).toBe(1);
+      expect(mediumSlope.correctAnswer).toBe(String(mediumSlope.m1));
+    }
+  });
+
+  it("오답은 실제 오류 경로(부호 반전·다른 값 혼동·절편 차 오적용)에서만 나오고 항상 정확히 3개다(100회 반복, 모든 유형·난이도)", () => {
+    const kinds = ["intersection_x", "intersection_y", "intersection_sum", "slope", "intercept"] as const;
+    const difficulties = ["easy", "medium", "hard"] as const;
+    const allowedKinds = new Set(["sign_error", "condition_ignored", "formula_misuse"]);
+    for (let i = 0; i < 100; i++) {
+      const model = generateLinearTwoVarModel({ difficulty: difficulties[i % 3], questionKind: kinds[i % kinds.length] });
+      expect(model.distractors).toHaveLength(3);
+      for (const d of model.distractors) expect(allowedKinds.has(d.kind)).toBe(true);
+    }
+  });
+
   it("num_solutions 문항은 세 범주(하나/없음/무한) 중 하나를 실제 계수 관계와 일치하게 낸다(50회 반복)", () => {
     for (let i = 0; i < 50; i++) {
       const model = generateLinearTwoVarModel({ difficulty: "medium", questionKind: "num_solutions" });

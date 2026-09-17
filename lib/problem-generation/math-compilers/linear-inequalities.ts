@@ -84,42 +84,47 @@ function opWord(op: Op): string {
   return op === "<" ? "미만" : op === "<=" ? "이하" : op === ">" ? "초과" : "이상";
 }
 
+/**
+ * 2026-09-17(제품 오너 지시) — "실제 오류 경로가 아닌 임의 수치 오답"을 없앤다.
+ * 예전에는 부호×방향 조합이 겹치면(계수가 양수일 때 특히 잦다) "경계값 ± 1..20"
+ * 같은 임의 오프셋으로 채웠다. 대신 실제 오류 경로 4개만 후보로 두고, 그래도
+ * 3개가 안 모이면(드묾) 계수를 다시 뽑아 재시도한다 — 임의값을 끼워 넣지 않는다.
+ */
 function generateSolveOneVar(difficulty: LinearInequalityDifficulty): LinearInequalityModel {
   const range = RANGE_BY_DIFFICULTY[difficulty];
-  const m = randSlope(difficulty);
-  const b = randInt(-range, range);
-  const opPool: Op[] = ["<", "<=", ">", ">="];
-  const op = opPool[randInt(0, 3)];
-  // 해의 경계값(boundary)을 먼저 정수로 고르고, 거기서 거꾸로 c = m·boundary + b를
-  // 계산한다 — c를 먼저 고르면 (c-b)가 m의 배수가 아닐 때 정수해가 안 나온다.
-  const boundary = randInt(-range, range);
-  const adjustedC = m * boundary + b;
-  const finalOp = m < 0 ? OP_FLIPPED[op] : op;
-  const correctAnswer = mathWrap(`x ${OP_TEXT[finalOp]} ${fmt(boundary)}`);
+  for (let attempt = 0; attempt < 30; attempt++) {
+    const m = randSlope(difficulty);
+    const b = randInt(-range, range);
+    const opPool: Op[] = ["<", "<=", ">", ">="];
+    const op = opPool[randInt(0, 3)];
+    // 해의 경계값(boundary)을 먼저 정수로 고르고, 거기서 거꾸로 c = m·boundary + b를
+    // 계산한다 — c를 먼저 고르면 (c-b)가 m의 배수가 아닐 때 정수해가 안 나온다.
+    const boundary = randInt(-range, range);
+    const adjustedC = m * boundary + b;
+    const finalOp = m < 0 ? OP_FLIPPED[op] : op;
+    const correctAnswer = mathWrap(`x ${OP_TEXT[finalOp]} ${fmt(boundary)}`);
 
-  const distractors: { value: string; kind: DistractorKind; reason: string }[] = [
-    { value: mathWrap(`x ${OP_TEXT[op]} ${fmt(boundary)}`), kind: "sign_error", reason: "계수가 음수인데도 부등호 방향을 뒤집지 않았다." },
-    { value: mathWrap(`x ${OP_TEXT[finalOp]} ${fmt(-boundary)}`), kind: "other", reason: "경계값의 부호를 반대로 계산했다." },
-    { value: mathWrap(`x ${OP_TEXT[OP_FLIPPED[finalOp]]} ${fmt(boundary)}`), kind: "condition_ignored", reason: "부등호 방향을 뒤집을 필요가 없는데도 뒤집었다." },
-  ];
-  const seen = new Set<string>([correctAnswer]);
-  const uniqueDistractors: typeof distractors = [];
-  for (const d of distractors) {
-    if (seen.has(d.value)) continue;
-    seen.add(d.value);
-    uniqueDistractors.push(d);
+    const candidates: { value: string; kind: DistractorKind; reason: string }[] = [
+      { value: mathWrap(`x ${OP_TEXT[op]} ${fmt(boundary)}`), kind: "sign_error", reason: "계수가 음수인데도 부등호 방향을 뒤집지 않았다." },
+      { value: mathWrap(`x ${OP_TEXT[finalOp]} ${fmt(-boundary)}`), kind: "other", reason: "경계값의 부호를 반대로 계산했다." },
+      { value: mathWrap(`x ${OP_TEXT[op]} ${fmt(-boundary)}`), kind: "other", reason: "부등호 방향도 뒤집지 않고 경계값 부호도 반대로 계산했다." },
+      { value: mathWrap(`x ${OP_TEXT[finalOp]} ${fmt(adjustedC)}`), kind: "step_missing", reason: "상수항을 이항하지 않고 원래 상수를 그대로 경계값으로 썼다." },
+    ];
+    const seen = new Set<string>([correctAnswer]);
+    const uniqueDistractors: typeof candidates = [];
+    for (const c of candidates) {
+      if (uniqueDistractors.length >= 3) break;
+      if (seen.has(c.value)) continue;
+      seen.add(c.value);
+      uniqueDistractors.push(c);
+    }
+    if (uniqueDistractors.length < 3 && attempt < 29) continue;
+    return {
+      skillCode: "linear_inequalities", difficulty, questionKind: "solve_one_var",
+      m, b, op, c: adjustedC, correctAnswer, distractors: uniqueDistractors.slice(0, 3),
+    };
   }
-  for (let offset = 1; uniqueDistractors.length < 3 && offset <= 20; offset++) {
-    const alt = mathWrap(`x ${OP_TEXT[finalOp]} ${fmt(boundary + offset)}`);
-    if (seen.has(alt)) continue;
-    seen.add(alt);
-    uniqueDistractors.push({ value: alt, kind: "other", reason: `경계값 계산에서 ${offset}만큼 어긋났다.` });
-  }
-
-  return {
-    skillCode: "linear_inequalities", difficulty, questionKind: "solve_one_var",
-    m, b, op, c: adjustedC, correctAnswer, distractors: uniqueDistractors.slice(0, 3),
-  };
+  throw new Error("linear_inequalities: 오답 후보 생성에 실패했습니다.");
 }
 
 function generatePointInSolution(difficulty: LinearInequalityDifficulty): LinearInequalityModel {
