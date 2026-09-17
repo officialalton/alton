@@ -52,6 +52,9 @@ export type UnitPreviewProblem = {
   format: string;
   passage: string | null;
   options: string[] | null;
+  /** 2026-09-17(UAT 지적) — 그래프가 꼭 필요한 문제(예: Math)를 그림 없이 보여주면
+   * 풀 수 없다. R&W는 대부분 null이라 지금까지 안 드러났을 뿐이다. */
+  figure?: unknown | null;
 };
 
 export type UnitPreview = {

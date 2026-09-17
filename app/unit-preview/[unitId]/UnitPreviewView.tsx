@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import LearningText from "@/app/session/[id]/LearningText";
+import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import { stripInlineOptions } from "@/lib/problem-text";
 import type { UnitPreview } from "@/app/student/curriculum-overlay-actions";
 
@@ -193,6 +194,9 @@ function ProblemList({ problems }: { problems: UnitPreview["problems"] }) {
           ) : (
             <p className="text-[13px] text-grey-500 mb-4">지문이 없는 문제입니다.</p>
           )}
+          {/* 2026-09-17(UAT 지적) — 그래프가 필요한 문제(Math)는 그림 없이 보여주면
+              풀 수 없다. 실제 수업(세션뷰)과 같은 렌더러(ProblemFigure)를 그대로 쓴다. */}
+          {p.figure != null && <ProblemFigure spec={p.figure} className="mb-5" />}
           {p.options && p.options.length > 0 && (
             <ol>
               {p.options.map((opt, i) => (
