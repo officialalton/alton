@@ -63,6 +63,34 @@ export default async function LessonPrepPage({
     );
   }
 
+  // 2026-09-17(실제 브라우저 UAT 지적) — 학생의 /unit-preview 경로는 이미 "실제로
+  // 시작·완료된(취소 아닌) 세션이 있으면 그 세션뷰로 들어간다"를 지원한다
+  // (unit_preview_for_viewer RPC). 교사가 여기(학생 사본 편집, layer=student)로
+  // 들어올 때도 같은 규칙을 적용한다 — 이미 시작된 수업은 준비 화면이 아니라
+  // 실제 수업 화면에서 다뤄야 한다. catalog(관리자 기준본)·teacher(폐지된 레이어)는
+  // 특정 세션에 묶이지 않으므로 대상이 아니다.
+  if (layer === "student") {
+    const { data: linkedRows } = await supabase
+      .from("session_curriculum_units")
+      .select("session_id, sessions(final_status, actual_start_at)")
+      .eq("overlay_unit_id", unitId);
+    const NOT_FROZEN = new Set(["scheduled", "student_cancelled", "teacher_cancelled", "company_cancelled"]);
+    const frozenSessions = (linkedRows ?? [])
+      .map((r) => {
+        const s = Array.isArray(r.sessions) ? r.sessions[0] : r.sessions;
+        return {
+          sessionId: r.session_id as string,
+          finalStatus: (s as { final_status?: string } | null)?.final_status,
+          actualStartAt: (s as { actual_start_at?: string | null } | null)?.actual_start_at ?? null,
+        };
+      })
+      .filter((r): r is { sessionId: string; finalStatus: string; actualStartAt: string | null } =>
+        Boolean(r.finalStatus) && !NOT_FROZEN.has(r.finalStatus as string)
+      )
+      .sort((a, b) => (b.actualStartAt ?? "").localeCompare(a.actualStartAt ?? ""));
+    if (frozenSessions[0]) redirect(`/session/${frozenSessions[0].sessionId}`);
+  }
+
   // 2026-09-14 — 단계별 소요를 서버 로그에 남긴다(Vercel 함수 로그에서 어디가 느린지 볼 수 있게).
   const t0 = Date.now();
   const composition = await loadComposition(supabase, layer, unitId);
