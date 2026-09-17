@@ -38,6 +38,13 @@ describe("renderProbabilityProblem — 렌더링·해설", () => {
         expect(rendered.options[rendered.correctIndex]).toBe(model.correctAnswer);
         expect(rendered.explanation).not.toMatch(/[$^]/);
         expect(rendered.explanationEn).not.toMatch(/[$^]/);
+        // 2026-09-17 버그 수정 — simple/conditional(양방향표)은 figure가 필수이고,
+        // sequential_without_replacement(항아리 문제)는 지문만으로 완결되어 figure가 필요 없다.
+        if (kind === "sequential_without_replacement") {
+          expect(rendered.figure).toBeNull();
+        } else {
+          expect(rendered.figure).toMatchObject({ type: "data", kind: "two_way", rowLabels: model.rowLabels, colLabels: model.colLabels, cells: model.table });
+        }
       }
     }
   });

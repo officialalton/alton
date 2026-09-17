@@ -94,11 +94,12 @@ const evidenceModelToolProperties = (skill: EvidenceModelSkill) => ({
     type: "array",
     items: { type: "string", enum: Array.from(DISTRACTOR_ERROR_TYPES[skill]) },
     description:
-      `오답(정답 제외) 각 선택지 순서대로 오류 유형 태그 하나씩. 반드시 다음 중에서만 고른다(자유 문구·새 카테고리 금지): ${DISTRACTOR_ERROR_TYPES[skill].join(", ")}.`,
+      `오답(정답 제외) 각 선택지 순서대로 오류 유형 태그 하나씩. 반드시 다음 중에서만 고른다(자유 문구·새 카테고리 금지): ${DISTRACTOR_ERROR_TYPES[skill].join(", ")}. ` +
+      `오답이 3개면 이 세 태그는 반드시 서로 달라야 한다(같은 태그를 두 오답에 중복해서 쓰지 않는다) — 오답마다 다른 방식으로 틀려야 변별력이 생긴다.`,
   },
 });
 const EVIDENCE_MODEL_PROMPT_NOTE = (skill: EvidenceModelSkill) =>
-  `\n근거 모델(내부 전용, 학생에게 보이지 않음) — 이 세부 기술(${skill})은 target/evidence_span/answer_rationale/distractor_error_types 네 필드를 함께 채운다. evidence_span은 지문에 실제로 있는 문장을 **그대로 복사**해야 하며(의역 금지), 지문에 없는 문장을 지어내면 검증에서 걸린다. distractor_error_types는 정해진 태그(${DISTRACTOR_ERROR_TYPES[skill].join(", ")}) 중에서만 고른다.`;
+  `\n근거 모델(내부 전용, 학생에게 보이지 않음) — 이 세부 기술(${skill})은 target/evidence_span/answer_rationale/distractor_error_types 네 필드를 함께 채운다. evidence_span은 지문에 실제로 있는 문장을 **그대로 복사**해야 하며(의역 금지), 지문에 없는 문장을 지어내면 검증에서 걸린다. distractor_error_types는 정해진 태그(${DISTRACTOR_ERROR_TYPES[skill].join(", ")}) 중에서만 고르고, 오답끼리 서로 다른 태그여야 한다(중복 금지).`;
 
 const FORMAT_LABEL: Record<ProblemFormat, string> = {
   mc: "객관식",

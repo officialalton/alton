@@ -795,6 +795,9 @@ export async function generateBankProblemsAction(params: {
       skillCode: params.skillCode as "linear_equations_two_var" | "systems_linear" | "linear_inequalities" | "linear_equations_one_var" | "linear_functions" | "equivalent_expressions" | "nonlinear_equations_systems" | "nonlinear_functions" | "ratios_rates_units" | "percentages" | "one_variable_data" | "two_variable_data" | "probability" | "inference_margin_error" | "evaluating_statistical_claims",
       difficulty: params.difficulty,
       count: params.count,
+      // 2026-09-17 버그 수정 — 이전엔 이 값이 통째로 빠져서 admin이 "자료 포함 · 좌표평면"을
+      // 골라도 계산형 컴파일러(nonlinear_functions)가 항상 텍스트형만 만들었다.
+      figurePolicy: params.figurePolicy,
       onAccepted: async ({ problem: g, quality }) => {
         const t0 = Date.now();
         const problem = await createBankProblemAction({

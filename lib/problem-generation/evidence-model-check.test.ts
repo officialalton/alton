@@ -59,6 +59,12 @@ describe("checkEvidenceModelFields", () => {
     if (!r.ok) expect(r.reason).toMatch(/distractor_error_types/);
   });
 
+  it("rejects duplicate distractor error type tags (2026-09-17 버그 수정 — 오답 3개가 서로 다른 오류 유형이어야 하는데 중복 검사가 없었다)", () => {
+    const r = checkEvidenceModelFields("command_of_evidence_text", { ...baseFields, distractorErrorTypes: ["IRRELEVANT_QUOTE", "IRRELEVANT_QUOTE", "CONTRADICTS_CLAIM"] }, [PASSAGE], 3);
+    expect(r.ok).toBe(false);
+    if (!r.ok) expect(r.reason).toMatch(/중복/);
+  });
+
   it("rejects mismatched distractor tag count vs distractor options", () => {
     const r = checkEvidenceModelFields("inferences", { ...baseFields, distractorErrorTypes: ["OVERREACH", "OPPOSITE"] }, [PASSAGE], 3);
     expect(r.ok).toBe(false);

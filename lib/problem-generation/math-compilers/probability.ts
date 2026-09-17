@@ -2,6 +2,7 @@
 // "Probability and conditional probability". 2×2 분할표에서 단순확률·조건부확률을
 // 묻거나, 비복원추출 2회 연속 사건의 확률을 묻는다. AI를 전혀 부르지 않는다.
 import type { DistractorRationale, DistractorKind } from "../review";
+import type { DataSpec } from "@/lib/problem-figures/templates/data";
 
 export type ProbabilityQuestionKind = "simple" | "conditional" | "sequential_without_replacement";
 export type ProbabilityDifficulty = "easy" | "medium" | "hard";
@@ -50,15 +51,6 @@ function rowTotal(table: [[number, number], [number, number]], r: 0 | 1): number
 function grandTotal(table: [[number, number], [number, number]]): number {
   return table[0][0] + table[0][1] + table[1][0] + table[1][1];
 }
-function renderTable(rowLabels: [string, string], colLabels: [string, string], table: [[number, number], [number, number]]): string {
-  return [
-    `| | ${colLabels[0]} | ${colLabels[1]} | Total |`,
-    `| ${rowLabels[0]} | ${table[0][0]} | ${table[0][1]} | ${rowTotal(table, 0)} |`,
-    `| ${rowLabels[1]} | ${table[1][0]} | ${table[1][1]} | ${rowTotal(table, 1)} |`,
-    `| Total | ${table[0][0] + table[1][0]} | ${table[0][1] + table[1][1]} | ${grandTotal(table)} |`,
-  ].join("\n");
-}
-
 function pickUniqueFrac(
   cands: { num: number; den: number; kind: DistractorKind; reason: string }[],
   correctAnswer: string
@@ -170,7 +162,7 @@ export type CompiledMathProblem = {
   correctIndex: number;
   explanation: string;
   explanationEn: string;
-  figure: null;
+  figure: DataSpec | null;
   distractorRationales: DistractorRationale[];
 };
 
@@ -179,6 +171,10 @@ export function renderProbabilityProblem(model: ProbabilityModel): CompiledMathP
   let question: string;
   let explanation: string;
   let explanationEn: string;
+  // 2026-09-17 버그 수정 — simple/conditional은 2×2 양방향표가 필수인데(marbles-in-a-bag인
+  // sequential_without_replacement는 지문만으로 완결되므로 그림이 필요 없다) 표를 지문 안에
+  // ascii 마크다운으로만 넣고 실제 figure는 만들지 않아 checkFigure가 누락을 놓쳤다.
+  let figure: DataSpec | null = null;
 
   if (model.questionKind === "sequential_without_replacement") {
     passage = `A bag contains ${model.total} marbles, of which ${model.success} are red. Two marbles are drawn at random, one after another, without putting the first one back.`;
@@ -191,7 +187,8 @@ export function renderProbabilityProblem(model: ProbabilityModel): CompiledMathP
     const colLabels = model.colLabels!;
     const targetRow = model.targetRow!;
     const targetCol = model.targetCol!;
-    passage = `The two-way table shows the results of a survey.\n\n${renderTable(rowLabels, colLabels, table)}`;
+    passage = `As shown in the table below, a survey was conducted.`;
+    figure = { type: "data", kind: "two_way", rowLabels, colLabels, cells: table, totals: true };
     if (model.questionKind === "simple") {
       question = `If one person is selected at random from those surveyed, what is the probability that the person is "${rowLabels[targetRow]}" and "${colLabels[targetCol]}"?`;
       const num = table[targetRow][targetCol];
@@ -221,5 +218,5 @@ export function renderProbabilityProblem(model: ProbabilityModel): CompiledMathP
     obvious: false,
   }));
 
-  return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
+  return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure, distractorRationales };
 }

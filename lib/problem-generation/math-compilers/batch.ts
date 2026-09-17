@@ -142,6 +142,10 @@ export type MathCompilerBatchParams = {
   skillCode: MathCompilerSkill;
   difficulty: LinearTwoVarDifficulty;
   count: number;
+  /** 2026-09-17 버그 수정 — 관리자가 "새 문제" 패널에서 고른 자료 정책(require_plane 등)이
+   * 이전엔 여기까지 전달되지 않아 nonlinear_functions가 "좌표평면 포함"을 골라도 항상
+   * 텍스트형으로만 나갔다. 이 배치 실행기가 실제로 구분하는 것은 "plane 그림을 붙이는가"뿐이다. */
+  figurePolicy?: string;
   onAccepted?: (item: Accepted) => Promise<void>;
 };
 
@@ -177,7 +181,8 @@ type AttemptTiming = { compileMs: number; renderCheckMs: number };
 function attemptOne(
   skillCode: MathCompilerSkill,
   difficulty: LinearTwoVarDifficulty,
-  timing: AttemptTiming
+  timing: AttemptTiming,
+  figurePolicy?: string
 ): { ok: true; problem: GeneratedProblem; quality: QualityRecord } | { ok: false; reason: string } {
   const t0 = Date.now();
   // 2026-09-17 — 컴파일러마다 figure 타입이 다르다(직선 그래프/삼각형/원/입체 등).
@@ -226,7 +231,7 @@ function attemptOne(
     const model = generateNonlinearFnModel({ difficulty });
     const check = validateNonlinearFnModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
-    compiled = renderNonlinearFnProblem(model);
+    compiled = renderNonlinearFnProblem(model, { figureMode: figurePolicy === "require_plane" ? "plane" : "text" });
   } else if (skillCode === "ratios_rates_units") {
     const model = generateRatiosRatesModel({ difficulty });
     const check = validateRatiosRatesModel(model);
@@ -353,7 +358,7 @@ export async function runMathCompilerBatch(
     if (candidatesEvaluated >= maxCandidates) { stoppedReason = "candidate_cap"; break; }
     if (Date.now() - start >= MAX_WALL_CLOCK_MS) { stoppedReason = "time_cap"; break; }
     candidatesEvaluated += 1;
-    const outcome = attemptOne(params.skillCode, params.difficulty, timing);
+    const outcome = attemptOne(params.skillCode, params.difficulty, timing, params.figurePolicy);
     if (!outcome.ok) {
       failures.push({ skillCode: params.skillCode, stage: "review", reason: outcome.reason, resolved: false, snippet: "" });
       continue;

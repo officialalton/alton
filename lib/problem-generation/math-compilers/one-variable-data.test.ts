@@ -31,4 +31,11 @@ describe("renderOneVarDataProblem — 렌더링·해설", () => {
       }
     }
   });
+
+  it("figure(number_list)를 실제로 채운다(2026-09-17 버그 수정 — 이전엔 표/그래프 필수 유형인데 figure가 항상 null이었다)", () => {
+    const model = generateOneVarDataModel({ difficulty: "medium", questionKind: "mean" });
+    const rendered = renderOneVarDataProblem(model);
+    expect(rendered.figure).toEqual({ type: "data", kind: "number_list", values: model.values, label: "Value" });
+    expect(rendered.passage).toMatch(/shown below/i);
+  });
 });

@@ -2,6 +2,7 @@
 // "One-variable data: distributions and measures of center and spread". 정수 목록에서
 // mean/median/range를 묻는다. AI를 전혀 부르지 않는다.
 import type { DistractorRationale, DistractorKind } from "../review";
+import type { DataSpec } from "@/lib/problem-figures/templates/data";
 
 export type OneVarDataQuestionKind = "mean" | "median" | "range";
 export type OneVarDataDifficulty = "easy" | "medium" | "hard";
@@ -119,7 +120,7 @@ export type CompiledMathProblem = {
   correctIndex: number;
   explanation: string;
   explanationEn: string;
-  figure: null;
+  figure: DataSpec;
   distractorRationales: DistractorRationale[];
 };
 
@@ -130,7 +131,11 @@ const QUESTION_TEXT: Record<OneVarDataQuestionKind, string> = {
 };
 
 export function renderOneVarDataProblem(model: OneVarDataModel): CompiledMathProblem {
-  const passage = `A data set contains the following values.\n\n${model.values.join(", ")}`;
+  // 2026-09-17 버그 수정 — 이 유형은 표/그래프가 필수인데(자료 없는 초안 저장 금지) 컴파일러가
+  // figure를 만들지 않고 checkFigure는 지문에 "as shown" 류 문구가 없으면 그냥 통과시켰다.
+  // 실제 자료를 number_list 그림으로 만들고, 지문에도 "as shown below"를 넣어 그림을 가리키게 한다.
+  const passage = `A data set is shown below.`;
+  const figure: DataSpec = { type: "data", kind: "number_list", values: model.values, label: "Value" };
   const question = QUESTION_TEXT[model.questionKind];
   const options = [model.correctAnswer, ...model.distractors.map((d) => d.value)];
   const order = [0, 1, 2, 3].sort(() => Math.random() - 0.5);
@@ -161,5 +166,5 @@ export function renderOneVarDataProblem(model: OneVarDataModel): CompiledMathPro
     obvious: false,
   }));
 
-  return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
+  return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure, distractorRationales };
 }

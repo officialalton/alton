@@ -143,6 +143,12 @@ export function checkEvidenceModelFields(
       return { ok: false, reason: `evidence-model: distractor_error_types에 알 수 없는 태그 "${tag}"가 있습니다(허용: ${Array.from(allowed).join(", ")}).` };
     }
   }
+  // 2026-09-17 버그 수정 — 오답 3개는 서로 다른 오류 유형이어야 하는데(각 오답이 다른 방식으로
+  // 틀려야 변별력이 있다), 이전엔 enum 소속 여부만 검사하고 서로 중복되는지는 보지 않아
+  // 같은 태그(예: IRRELEVANT_QUOTE)가 두 오답에 겹쳐도 통과됐다.
+  if (new Set(distractorErrorTypes).size !== distractorErrorTypes.length) {
+    return { ok: false, reason: `evidence-model: distractor_error_types에 중복된 오류 유형이 있습니다(${distractorErrorTypes.join(", ")}) — 오답끼리 서로 다른 오류 유형이어야 합니다.` };
+  }
 
   return { ok: true };
 }

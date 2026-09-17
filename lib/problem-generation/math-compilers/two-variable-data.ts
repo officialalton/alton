@@ -2,6 +2,7 @@
 // "Two-variable data: two-way frequency tables". 2×2 분할표에서 특정 칸·행/열 합·
 // 조건부 비율을 읽는다. AI를 전혀 부르지 않는다 — 표 값·정답·오답을 전부 코드로 계산한다.
 import type { DistractorRationale, DistractorKind } from "../review";
+import type { DataSpec } from "@/lib/problem-figures/templates/data";
 
 export type TwoVarDataQuestionKind = "cell" | "row_total" | "conditional_share";
 export type TwoVarDataDifficulty = "easy" | "medium" | "hard";
@@ -152,23 +153,19 @@ export type CompiledMathProblem = {
   correctIndex: number;
   explanation: string;
   explanationEn: string;
-  figure: null;
+  figure: DataSpec;
   distractorRationales: DistractorRationale[];
 };
 
-function renderTable(model: TwoVarDataModel): string {
-  const [r1, r2] = model.rowLabels;
-  const [c1, c2] = model.colLabels;
-  return [
-    `| | ${c1} | ${c2} | Total |`,
-    `| ${r1} | ${model.table[0][0]} | ${model.table[0][1]} | ${rowTotal(model.table, 0)} |`,
-    `| ${r2} | ${model.table[1][0]} | ${model.table[1][1]} | ${rowTotal(model.table, 1)} |`,
-    `| Total | ${colTotal(model.table, 0)} | ${colTotal(model.table, 1)} | ${grandTotal(model.table)} |`,
-  ].join("\n");
-}
-
 export function renderTwoVarDataProblem(model: TwoVarDataModel): CompiledMathProblem {
-  const passage = `The two-way table shows the results of a survey.\n\n${renderTable(model)}`;
+  // 2026-09-17 버그 수정 — 이 유형은 양방향표가 필수인데 표를 지문 안에 마크다운(ascii)으로만
+  // 박아 넣고 실제 figure(표준 렌더링) 는 만들지 않았다. checkFigure는 지문에 "as shown" 류
+  // 문구가 없으면 figure 누락을 통과시켜, 관리자 화면엔 마크다운 텍스트만 노출됐다.
+  const passage = `As shown in the table below, a survey was conducted.`;
+  const figure: DataSpec = {
+    type: "data", kind: "two_way",
+    rowLabels: model.rowLabels, colLabels: model.colLabels, cells: model.table, totals: true,
+  };
   const rowLabel = model.rowLabels[model.targetRow];
   const colLabel = model.colLabels[model.targetCol];
   const otherCol = model.colLabels[1 - model.targetCol];
@@ -205,5 +202,5 @@ export function renderTwoVarDataProblem(model: TwoVarDataModel): CompiledMathPro
     obvious: false,
   }));
 
-  return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
+  return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure, distractorRationales };
 }

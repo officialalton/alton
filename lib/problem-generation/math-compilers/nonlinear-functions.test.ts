@@ -59,4 +59,17 @@ describe("renderNonlinearFnProblem — 렌더링·해설", () => {
       }
     }
   });
+
+  // 2026-09-17 버그 수정 — 관리자가 "자료 포함 · 좌표평면"(require_plane)을 고르면
+  // 이전엔 이 값이 컴파일러까지 전달되지 않아 항상 텍스트형(그래프 없음)만 나왔다.
+  it("figureMode:'plane'이면 실제 좌표평면 figure를 만들고 지문이 그것을 가리킨다", () => {
+    const kinds = ["evaluate", "vertex_x", "vertex_y"] as const;
+    for (const kind of kinds) {
+      const model = generateNonlinearFnModel({ difficulty: "medium", questionKind: kind });
+      const rendered = renderNonlinearFnProblem(model, { figureMode: "plane" });
+      expect(rendered.figure).not.toBeNull();
+      expect(rendered.figure).toMatchObject({ type: "plane", objects: [{ id: "f", kind: "function", fn: "quadratic" }] });
+      expect(rendered.passage).toMatch(/graph.*shown/i);
+    }
+  });
 });

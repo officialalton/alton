@@ -4,6 +4,12 @@
 // 생성해 항상 정수 꼭짓점을 보장한다(표준형에서 -b/2a를 구해 나눗셈이 안 떨어지는
 // 문제를 피한다).
 import type { DistractorRationale, DistractorKind } from "../review";
+import type { PlaneSpec } from "@/lib/problem-figures/templates/coordinate-plane";
+
+/** 관리자가 "새 문제" 패널에서 고르는 자료 정책(none|optional|require_plane|…) 중 이 컴파일러가
+ * 실제로 구분하는 두 모드. 2026-09-17 버그 수정 — 이전에는 admin이 "자료 포함 · 좌표평면"을
+ * 골라도 이 값이 runMathCompilerBatch까지 전달되지 않아 항상 텍스트형으로만 나갔다. */
+export type NonlinearFnFigureMode = "text" | "plane";
 
 export type NonlinearFnQuestionKind = "evaluate" | "vertex_x" | "vertex_y";
 export type NonlinearFnDifficulty = "easy" | "medium" | "hard";
@@ -132,12 +138,38 @@ export type CompiledMathProblem = {
   correctIndex: number;
   explanation: string;
   explanationEn: string;
-  figure: null;
+  figure: PlaneSpec | null;
   distractorRationales: DistractorRationale[];
 };
 
-export function renderNonlinearFnProblem(model: NonlinearFnModel): CompiledMathProblem {
-  const passage = `The function f is defined by ${vertexExpr(model.a, model.h, model.k)}.`;
+/** vertex-form 계수(a,h,k)로 좌표평면 그림을 만든다 — x축은 꼭짓점을 중심으로 폭 6, y축은
+ * 구간 안에서 실제로 지나는 값들을 다 담도록 여유를 둔다. */
+function buildPlaneFigure(a: number, h: number, k: number): PlaneSpec {
+  const xMin = h - 6, xMax = h + 6;
+  const yAtEdge1 = a * (xMin - h) * (xMin - h) + k;
+  const yAtEdge2 = a * (xMax - h) * (xMax - h) + k;
+  const yValues = [k, yAtEdge1, yAtEdge2];
+  const yLo = Math.min(...yValues), yHi = Math.max(...yValues);
+  const margin = Math.max(2, Math.round((yHi - yLo) * 0.15) || 2);
+  const b = -2 * a * h;
+  const c = a * h * h + k;
+  return {
+    type: "plane",
+    axes: { x: { min: xMin, max: xMax }, y: { min: yLo - margin, max: yHi + margin } },
+    objects: [{ id: "f", kind: "function", fn: "quadratic", params: [a, b, c], label: "f" }],
+    grid: true,
+  };
+}
+
+export function renderNonlinearFnProblem(model: NonlinearFnModel, opts?: { figureMode?: NonlinearFnFigureMode }): CompiledMathProblem {
+  // 2026-09-17 버그 수정 — figureMode가 "plane"이면(관리자가 자료 포함·좌표평면을 골랐을 때)
+  // 실제로 그래프를 그려서 지문이 가리키는 "the graph"가 실존하게 한다. 기본(텍스트형)은
+  // 그림 없이 식만으로 성립하는 기존 문항 그대로다.
+  const figureMode: NonlinearFnFigureMode = opts?.figureMode ?? "text";
+  const figure: PlaneSpec | null = figureMode === "plane" ? buildPlaneFigure(model.a, model.h, model.k) : null;
+  const passage = figureMode === "plane"
+    ? `The function f is defined by ${vertexExpr(model.a, model.h, model.k)}. The graph of y = f(x) is shown in the xy-plane below.`
+    : `The function f is defined by ${vertexExpr(model.a, model.h, model.k)}.`;
   const options = [model.correctAnswer, ...model.distractors.map((d) => d.value)];
   const order = [0, 1, 2, 3].sort(() => Math.random() - 0.5);
   const shuffled = order.map((i) => options[i]);
@@ -157,16 +189,16 @@ export function renderNonlinearFnProblem(model: NonlinearFnModel): CompiledMathP
     const question = `What is f(${fmt(model.x0!)})?`;
     const explanation = `f(${fmt(model.x0!)}) = ${fmt(model.a)}(${fmt(model.x0!)} - ${fmt(model.h)})² ${model.k >= 0 ? "+" : "-"} ${fmt(Math.abs(model.k))} = ${fmt(model.a)} × ${fmt(model.x0! - model.h)}² ${model.k >= 0 ? "+" : "-"} ${fmt(Math.abs(model.k))} = ${model.correctAnswer}이다.`;
     const explanationEn = `f(${fmt(model.x0!)}) = ${fmt(model.a)}(${fmt(model.x0!)} - ${fmt(model.h)})² ${model.k >= 0 ? "+" : "-"} ${fmt(Math.abs(model.k))} = ${fmt(model.a)} × ${fmt(model.x0! - model.h)}² ${model.k >= 0 ? "+" : "-"} ${fmt(Math.abs(model.k))} = ${model.correctAnswer}.`;
-    return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
+    return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure, distractorRationales };
   }
   if (model.questionKind === "vertex_x") {
     const question = "What is the x-coordinate of the vertex of the graph of f in the xy-plane?";
     const explanation = `f(x) = a(x-h)² + k 형태에서 꼭짓점은 (h, k)이므로 꼭짓점의 x좌표는 h = ${model.correctAnswer}이다.`;
     const explanationEn = `In the form f(x) = a(x-h)² + k, the vertex is (h, k), so the x-coordinate of the vertex is h = ${model.correctAnswer}.`;
-    return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
+    return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure, distractorRationales };
   }
   const question = "What is the y-coordinate of the vertex of the graph of f in the xy-plane?";
   const explanation = `f(x) = a(x-h)² + k 형태에서 꼭짓점은 (h, k)이므로 꼭짓점의 y좌표는 k = ${model.correctAnswer}이다.`;
   const explanationEn = `In the form f(x) = a(x-h)² + k, the vertex is (h, k), so the y-coordinate of the vertex is k = ${model.correctAnswer}.`;
-  return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
+  return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure, distractorRationales };
 }

@@ -18,7 +18,7 @@ describe("generateTwoVarDataModel — 결정적 계산", () => {
 });
 
 describe("renderTwoVarDataProblem — 렌더링·해설", () => {
-  it("영어 지문/질문과 $/^ 없는 해설, 표가 지문에 포함된다", () => {
+  it("영어 지문/질문과 $/^ 없는 해설, 양방향표 figure가 실제로 채워진다(2026-09-17 버그 수정 — 이전엔 표가 지문 안 마크다운으로만 있고 figure가 없었다)", () => {
     const kinds = ["cell", "row_total", "conditional_share"] as const;
     for (const kind of kinds) {
       for (let i = 0; i < 10; i++) {
@@ -28,7 +28,9 @@ describe("renderTwoVarDataProblem — 렌더링·해설", () => {
         expect(rendered.options[rendered.correctIndex]).toBe(model.correctAnswer);
         expect(rendered.explanation).not.toMatch(/[$^]/);
         expect(rendered.explanationEn).not.toMatch(/[$^]/);
-        expect(rendered.passage).toContain("Total");
+        expect(rendered.passage).toMatch(/as shown/i);
+        expect(rendered.figure).not.toBeNull();
+        expect(rendered.figure).toMatchObject({ type: "data", kind: "two_way", rowLabels: model.rowLabels, colLabels: model.colLabels, cells: model.table });
       }
     }
   });
