@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import UnitPrepPanel from "./UnitPrepPanel";
 import { loadUnitPrepSummaries, type UnitPrepSummary } from "./unit-prep-actions";
 import { useEffect } from "react";
@@ -46,6 +47,7 @@ export default function StudentCurriculumPanel({
   studentName?: string;
   subjectName?: string;
 }) {
+  const router = useRouter();
   // P2/P3 3단계 — 예약이 없어도 여기서 바로 회차를 준비한다.
   const [preparingUnit, setPreparingUnit] = useState<{ id: string; title: string } | null>(null);
   // 회차별 준비 상태를 한 번에 불러와 목록에서 바로 보여준다.
@@ -274,7 +276,17 @@ export default function StudentCurriculumPanel({
                 ↓
               </button>
               <button
-                onClick={() => setPreparingUnit({ id: u.id, title: u.unitTitle })}
+                onClick={() => {
+                  // 2026-09-17(UAT 지적) — 이미 시작·완료된(취소 아닌) 수업이
+                  // 있으면 준비 편집 화면이 아니라 실제 수업 화면으로 들어간다.
+                  // 학생의 /unit-preview 경로가 이미 하는 것과 같은 규칙이다.
+                  const frozenSessionId = prepSummaries[u.id]?.frozenSessionId;
+                  if (frozenSessionId) {
+                    router.push(`/session/${frozenSessionId}`);
+                    return;
+                  }
+                  setPreparingUnit({ id: u.id, title: u.unitTitle });
+                }}
                 className="text-[11.5px] font-bold text-ink"
               >
                 수업 준비

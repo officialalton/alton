@@ -279,6 +279,11 @@ export type UnitPrepSummary = {
   linkedLessonCount: number;
   /** 이미 시작·종료돼 내용이 고정된 수업이 있는지. */
   hasFrozenLesson: boolean;
+  /** hasFrozenLesson이 true일 때 그 수업 id — "수업 준비"를 눌렀을 때 준비
+   * 편집 화면 대신 실제 수업 화면(/session/[id])으로 보내는 데 쓴다
+   * (2026-09-17 UAT 지적: 취소된 예약을 "고정된 수업"으로 잘못 셌던 버그도
+   * 여기서 함께 고쳤다 — 취소는 실사용이 아니다). */
+  frozenSessionId: string | null;
 };
 
 export async function loadUnitPrepSummaries(
@@ -310,14 +315,19 @@ export async function loadUnitPrepSummaries(
     .select("overlay_unit_id, session_id")
     .in("overlay_unit_id", overlayUnitIds);
   const sessionIds = Array.from(new Set((links ?? []).map((l) => l.session_id as string)));
-  const frozenSessions = new Set<string>();
+  // 2026-09-17(UAT 지적) — 취소된 예약(final_status가 취소 계열)은 실제로 아무
+  // 수업도 일어나지 않았다. "scheduled만 아니면 고정"으로 셌던 예전 판정은
+  // 취소된 예약까지 "진행한 수업 있음"으로 잘못 표시하고, 그 죽은 세션으로
+  // 리다이렉트하는 버그로 이어졌다.
+  const NOT_FROZEN = new Set(["scheduled", "student_cancelled", "teacher_cancelled", "company_cancelled"]);
+  const frozenSessionById = new Map<string, boolean>();
   if (sessionIds.length) {
     const { data: sessions } = await supabase
       .from("sessions")
       .select("id, final_status")
       .in("id", sessionIds);
     for (const s of sessions ?? []) {
-      if (s.final_status !== "scheduled") frozenSessions.add(s.id as string);
+      frozenSessionById.set(s.id as string, !NOT_FROZEN.has(s.final_status as string));
     }
   }
 
@@ -325,12 +335,14 @@ export async function loadUnitPrepSummaries(
   for (const unitId of overlayUnitIds) {
     const prep = (preps ?? []).find((p) => p.overlay_unit_id === unitId);
     const unitLinks = (links ?? []).filter((l) => l.overlay_unit_id === unitId);
+    const frozenLink = unitLinks.find((l) => frozenSessionById.get(l.session_id as string));
     summaries[unitId] = {
       overlayUnitId: unitId,
       hasGoal: Boolean((prep?.goal as string | null)?.trim()),
       itemCount: prep ? (itemCountByPrep.get(prep.id as string) ?? 0) : 0,
       linkedLessonCount: unitLinks.length,
-      hasFrozenLesson: unitLinks.some((l) => frozenSessions.has(l.session_id as string)),
+      hasFrozenLesson: Boolean(frozenLink),
+      frozenSessionId: frozenLink ? (frozenLink.session_id as string) : null,
     };
   }
   return summaries;

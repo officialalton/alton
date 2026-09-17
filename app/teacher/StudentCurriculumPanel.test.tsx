@@ -4,6 +4,10 @@ import StudentCurriculumPanel from "./StudentCurriculumPanel";
 import * as actions from "./student-curriculum-actions";
 import type { StudentCurriculum, EligibleLibrary } from "./student-curriculum-data";
 
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ push: vi.fn(), replace: vi.fn() }),
+}));
+
 vi.mock("./student-curriculum-actions", () => ({
   ensureActiveOverlay: vi.fn(),
   addCanonicalUnit: vi.fn(),

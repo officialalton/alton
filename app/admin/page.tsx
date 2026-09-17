@@ -1,3 +1,12 @@
+// 2026-09-17(UAT 지적) — 문제은행 AI 생성(generateBankProblemsAction)은 문항 하나당
+// 생성·자료·계약 검사·독립 검사·재생성까지 여러 번 순차 모델 호출을 거친다. 개수가
+// 조금만 늘어도 기본 300초 제한(Vercel Functions 기본값)에 걸려 서버가 결과를 하나도
+// 못 돌려주고 중간에 죽는다 — 이때 클라이언트는 실패 사유조차 못 받는다("여러 개가
+// 이유 없이 실패"로 보이는 원인). 이 관리자 화면에서 호출되는 서버 액션은 이 라우트의
+// 제한 시간을 물려받으므로 여기서 늘린다(플랜이 이 값을 지원하지 않으면 배포 시
+// 계정 최대치로 자동 낮춰질 뿐, 해가 되지 않는다).
+export const maxDuration = 800;
+
 import { requireUser } from "@/lib/auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { loadAdminDashboard, type AdminDashboardData } from "./dashboard-data";
