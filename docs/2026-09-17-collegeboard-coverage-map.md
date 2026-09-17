@@ -11,12 +11,12 @@
 | test4 | 완료 | 완료 | 완료 | 완료 | **전수 분류 완료** |
 | test6 | 완료 | 완료 | 완료 | 완료 | **전수 분류 완료** |
 | test7 | 완료 | 완료 | 완료 | 완료 | **전수 분류 완료** |
-| test8 | - | - | - | - | 미착수(이번 패스 예산 소진 — 후속 패스가 test8부터 이어받을 것) |
-| test9 | - | - | - | - | 미착수 |
+| test8 | 완료 | 완료 | 완료 | 완료 | **전수 분류 완료** |
+| test9 | - | - | - | - | 미착수(이번 패스 예산 소진 — 후속 패스가 test9부터 이어받을 것) |
 | test10 | - | - | - | - | 미착수 |
 | test11 | - | - | - | - | 미착수 |
 
-**이번 패스는 test7 전수(120문항: R&W 66 + Math 54) 분류를 완료해 test4+test6+test7 누적 360문항이 됐다.** test7은 인쇄 쪽번호 기준 `pages` 오프셋이 test6과 동일하게 +2였다(예: 인쇄 p.2 = `pages=4`). test8·9·10·11(약 480문항)은 이번 세션 예산 안에서 끝내지 못했다 — 후속 패스가 이 문서의 표 구조와 스킬 코드 판정 기준을 그대로 이어받아 test8부터 순서대로 채우면 된다.
+**이번 패스는 test8 전수(120문항: R&W 66 + Math 54) 분류를 완료해 test4+test6+test7+test8 누적 480문항이 됐다.** test8도 인쇄 쪽번호 기준 `pages` 오프셋이 test6·test7과 동일하게 +2였다(예: 인쇄 p.2 = `pages=4`). 이번 패스에서 `lib/problem-generation/math-compilers/`의 각 컴파일러 `QuestionKind`를 직접 grep해 판정 근거를 검증했고, 그 결과 `probability.ts`("simple" kind 포함)가 실존함을 확인했다 — test6·test7에서 "단순 확률 스킬 없음"으로 완전불가 처리했던 판정은 재검토 대상이다(자세한 내용은 test8 절 상단 및 후속 패스 안내 참고). test9·10·11(약 360문항)은 이번 세션 예산 안에서 끝내지 못했다 — 후속 패스가 test9부터 이어받으면 된다.
 
 각 PDF는 인쇄 쪽번호 기준 50페이지(R&W M1 인쇄p.2-15 / R&W M2 인쇄p.16-28 / Math M1 인쇄p.30-40 / Math M2 인쇄p.42-50) 고정 구조다. **주의**: `Read` 도구의 `pages` 파라미터 값은 PDF의 실제 페이지 인덱스이며 인쇄된 쪽번호와 정확히 일치하지 않을 수 있다(test6은 `pages` 값이 인쇄 쪽번호보다 +2 오프셋이었다 — 예: 인쇄 p.2가 `pages=4`). 시험지마다 표지/여백 페이지 배치가 다를 수 있으므로 매 시험지마다 처음 몇 페이지를 열어 실제 오프셋을 확인할 것. Math를 먼저 끝내라는 지시가 있었지만, R&W와 Math가 같은 PDF의 연속된 섹션이라 시험지 단위로 전수 처리하는 것이 더 효율적이라 판단해 test4·test6 모두 두 섹션을 함께 끝냈다. 후속 패스도 "시험지 단위 전수 → 다음 시험지"로 진행하되, 만약 다시 예산이 부족해지면 그 시점부터는 지시대로 나머지 Math 모듈들을 R&W보다 먼저 채울 것.
 
@@ -459,6 +459,206 @@
 | test7 | M2-25 | Math | 없음 | 원의 일반형→표준형 변환(반지름 도출) | 객관식 | 방정식 | 완전 불가 | 없음 | 미확인 | **circles 스킬이 일반형→표준형(완전제곱) 변환을 다루지 않음**(누적 재현) |
 | test7 | M2-26 | Math | ratios_rates | 복합단위 환산(m/s²→mile/min²) | 객관식 | 없음 | 가능 | 있음 | 미확인 | - |
 | test7 | M2-27 | Math | nonlinear_equations_systems | 무해조건 최소 정수 k 역산(SPR) | **SPR** | 방정식 | 상위스킬만 있고 하위패턴 불가(SPR도 미지원) | 없음 | 미확인 | 무해조건 최소정수값 역산 서브타입 없음 + SPR 답안모델 없음 |
+
+---
+
+## 전수 분류표 — test8 (완료)
+
+**주의(이번 패스 신규 발견)**: 실제 `lib/problem-generation/math-compilers/`를 직접 grep해 각 컴파일러의 `QuestionKind`/모델 타입을 확인한 결과, `probability.ts`가 실존하며 `"simple" | "conditional" | "sequential_without_replacement"` 세 종류를 지원한다. test6·test7 문서에서 "단순 확률 스킬 자체가 없음"으로 완전불가 처리했던 판정은 **재확인이 필요하다** — 최소한 단순(simple) 확률 문항 하나는 test8 M1-2에서 "가능"으로 재분류했다. 다른 컴파일러들의 kind 목록(예: `circles`=원주/호/부채꼴/중심각·원주각만, `lines_angles_triangles`=triangle_angle_sum/exterior_angle/isosceles_base_angle만, `nonlinear_functions`=evaluate/vertex_x/vertex_y만, `two_variable_data`=cell/row_total/conditional_share만)도 이번에 직접 확인해 test4·6·7 문서의 판정과 대체로 일치함을 검증했다.
+
+### R&W Module 1 (33문항, 전부 객관식)
+
+| 시험지 | 문항번호 | Math/R&W | 상위 스킬 | 하위 문항 패턴 | 객관식/SPR | 자료 형식 | 현재 생성 가능 여부 | 결정론적 검증 여부 | 화면 렌더링 검증 여부 | 부족한 구현 단위 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| test8 | M1-1 | R&W | words_in_context | 단문 어휘 빈칸(형용사) | 객관식 | 지문 | 가능 | 있음 | 미확인 | - |
+| test8 | M1-2 | R&W | words_in_context | 단문 어휘 빈칸(명사구) | 객관식 | 지문 | 가능 | 있음 | 미확인 | - |
+| test8 | M1-3 | R&W | words_in_context | 단문 어휘 빈칸(형용사) | 객관식 | 지문 | 가능 | 있음 | 미확인 | - |
+| test8 | M1-4 | R&W | words_in_context | 단문 어휘 빈칸(명사) | 객관식 | 지문 | 가능 | 있음 | 미확인 | - |
+| test8 | M1-5 | R&W | words_in_context | 단문 어휘 빈칸(명사) | 객관식 | 지문 | 가능 | 있음 | 미확인 | - |
+| test8 | M1-6 | R&W | central_ideas_details | 단일 지문 주요 목적 파악(고고학 발견) | 객관식 | 지문 | 가능 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M1-7 | R&W | central_ideas_details | 단일 지문 주요 목적 파악(소설) | 객관식 | 지문(소설) | 가능 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M1-8 | R&W | text_structure_purpose | 전체 구조 파악(편지 전달) | 객관식 | 지문 | 가능 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M1-9 | R&W | text_structure_purpose | 밑줄 부분의 텍스트 내 기능 | 객관식 | 지문 | 가능 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M1-10 | R&W | central_ideas_details | 세부사항(발견의 의의) 파악 | 객관식 | 지문 | 가능 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M1-11 | R&W | command_of_evidence_quant | 표 데이터로 빈칸 완성 | 객관식 | 표 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 표 기반 빈칸완성형 미구현 |
+| test8 | M1-12 | R&W | command_of_evidence_quant | 표 데이터 값 조회 | 객관식 | 표 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 표 기반 값조회형 미구현 |
+| test8 | M1-13 | R&W | command_of_evidence_quant | 표 데이터로 빈칸 완성(최댓값) | 객관식 | 표 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 표 기반 빈칸완성형 미구현 |
+| test8 | M1-14 | R&W | command_of_evidence_text | 학생 주장을 뒷받침하는 발견 선택(그림/표 없음) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 있음(서브타입 커버 미확인) | 미확인 | 검증 필요 |
+| test8 | M1-15 | R&W | command_of_evidence_text | 가설을 뒷받침하는 발견 선택(그림/표 없음) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 있음(서브타입 커버 미확인) | 미확인 | 검증 필요 |
+| test8 | M1-16 | R&W | command_of_evidence_text | 가설을 뒷받침하는 발견 선택(그림/표 없음) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 있음(서브타입 커버 미확인) | 미확인 | 검증 필요 |
+| test8 | M1-17 | R&W | inferences | 논리적 결론 빈칸 완성 | 객관식 | 지문 | 가능 | 있음 | 미확인 | - |
+| test8 | M1-18 | R&W | form_structure_sense | 동사 시제/형태(were/have been/has been/are) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M1-19 | R&W | form_structure_sense | 동사 형태(creates/create/creating/created) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M1-20 | R&W | boundaries | 콜론/쉼표 구분(동격 인물열거) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M1-21 | R&W | boundesar | 콤마/마침표/콜론 구분 | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M1-22 | R&W | form_structure_sense | 동사 형태(attests/has attested/is attesting/attest) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M1-23 | R&W | boundaries | 콤마/세미콜론 구분(however) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M1-24 | R&W | form_structure_sense | 동사 형태(works were/works, were/works,/works had been) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M1-25 | R&W | form_structure_sense | 독립절 구조 선택(disadvantage 표현) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M1-26 | R&W | transitions | 논리적 전환어 선택 | 객관식 | 없음 | 가능 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M1-27 | R&W | transitions | 논리적 전환어 선택 | 객관식 | 없음 | 가능 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M1-28 | R&W | transitions | 논리적 전환어 선택 | 객관식 | 없음 | 가능 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M1-29 | R&W | rhetorical_synthesis | 노트 종합→거리 강조 | 객관식 | 없음(불릿노트) | 가능 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M1-30 | R&W | rhetorical_synthesis | 노트 종합→연구 목적 강조 | 객관식 | 없음 | 가능 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M1-31 | R&W | rhetorical_synthesis | 노트 종합→연구 목적 강조 | 객관식 | 없음 | 가능 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M1-32 | R&W | rhetorical_synthesis | 노트 종합→연구 목적 일반화 | 객관식 | 없음 | 가능 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M1-33 | R&W | rhetorical_synthesis | 노트 종합→연구 유형 일반화 | 객관식 | 없음 | 가능 | 없음 | 미확인 | 검증기 없음 |
+
+### R&W Module 2 (33문항, 전부 객관식)
+
+| 시험지 | 문항번호 | Math/R&W | 상위 스킬 | 하위 문항 패턴 | 객관식/SPR | 자료 형식 | 현재 생성 가능 여부 | 결정론적 검증 여부 | 화면 렌더링 검증 여부 | 부족한 구현 단위 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| test8 | M2-1 | R&W | words_in_context | 단문 어휘 빈칸(형용사구) | 객관식 | 지문 | 가능 | 있음 | 미확인 | - |
+| test8 | M2-2 | R&W | words_in_context | 단문 어휘 빈칸(형용사) | 객관식 | 지문 | 가능 | 있음 | 미확인 | - |
+| test8 | M2-3 | R&W | words_in_context | 단문 어휘 빈칸(형용사) | 객관식 | 지문 | 가능 | 있음 | 미확인 | - |
+| test8 | M2-4 | R&W | words_in_context | 단문 어휘 빈칸(형용사) | 객관식 | 지문 | 가능 | 있음 | 미확인 | - |
+| test8 | M2-5 | R&W | words_in_context | 단문 어휘 빈칸(형용사) | 객관식 | 지문 | 가능 | 있음 | 미확인 | - |
+| test8 | M2-6 | R&W | central_ideas_details | 단일 지문 주요 목적 파악(reCAPTCHA) | 객관식 | 지문 | 가능 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M2-7 | R&W | text_structure_purpose | 시 전체 구조(비유 구조) 파악 | 객관식 | 지문(시) | 가능 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M2-8 | R&W | central_ideas_details | 단일 지문 주요 목적 파악(소설) | 객관식 | 지문(소설) | 가능 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M2-9 | R&W | cross_text_connections | Text2가 Text1의 통념에 어떻게 반응할지 | 객관식 | 지문×2 | 가능 | 있음 | 미확인 | - |
+| test8 | M2-10 | R&W | central_ideas_details | 세부사항(등장인물 행동) 파악 | 객관식 | 지문 | 가능 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M2-11 | R&W | central_ideas_details | 세부사항(작곡가의 방법) 파악 | 객관식 | 지문 | 가능 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M2-12 | R&W | inferences | 진술이 가장 강하게 뒷받침되는지 추론 | 객관식 | 지문 | 가능 | 있음 | 미확인 | - |
+| test8 | M2-13 | R&W | central_ideas_details | 단일 지문 중심 내용(주제) 파악 | 객관식 | 지문 | 가능 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M2-14 | R&W | command_of_evidence_quant | 표 데이터로 주장 뒷받침 서술 판단 | 객관식 | 표 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 표 기반 서브타입 미구현 |
+| test8 | M2-15 | R&W | command_of_evidence_quant | 표 데이터로 제안 뒷받침 서술 판단 | 객관식 | 표 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 표 기반 서브타입 미구현 |
+| test8 | M2-16 | R&W | command_of_evidence_text | 가설을 뒷받침하는 발견 선택(그림/표 없음) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 있음(서브타입 커버 미확인) | 미확인 | 검증 필요 |
+| test8 | M2-17 | R&W | inferences | 논리적 결론 빈칸 완성 | 객관식 | 지문 | 가능 | 있음 | 미확인 | - |
+| test8 | M2-18 | R&W | inferences | 논리적 결론 빈칸 완성 | 객관식 | 지문 | 가능 | 있음 | 미확인 | - |
+| test8 | M2-19 | R&W | form_structure_sense | 부정사/분사 형태 선택(enter/to enter/having entered/entering) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M2-20 | R&W | form_structure_sense | 동사 시제(has doubled/had doubled/doubles/will double) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M2-21 | R&W | boundaries | 콤마/마침표 구분(percent, such) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M2-22 | R&W | boundaries | 분사구 결합 방식 선택(bounds helped 등) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M2-23 | R&W | boundaries | 콜론/대시/콤마 구분(Springs to) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M2-24 | R&W | boundaries | 콤마/콜론 구분(varied) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M2-25 | R&W | boundaries | 세미콜론/콤마/콜론 구분(고유명사 동격) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M2-26 | R&W | boundaries | 콤마/세미콜론 구분(though) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M2-27 | R&W | transitions | 논리적 전환어 선택 | 객관식 | 없음 | 가능 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M2-28 | R&W | transitions | 논리적 전환어 선택 | 객관식 | 없음 | 가능 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M2-29 | R&W | transitions | 논리적 전환어 선택 | 객관식 | 없음 | 가능 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M2-30 | R&W | transitions | 논리적 전환어 선택 | 객관식 | 없음 | 가능 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M2-31 | R&W | transitions | 논리적 전환어 선택 | 객관식 | 없음 | 가능 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M2-32 | R&W | rhetorical_synthesis | 노트 종합→기법의 장점 설명 | 객관식 | 없음 | 가능 | 없음 | 미확인 | 검증기 없음 |
+| test8 | M2-33 | R&W | rhetorical_synthesis | 노트 종합→오해의 역할 강조 | 객관식 | 없음 | 가능 | 없음 | 미확인 | 검증기 없음 |
+
+### Math Module 1 (27문항, SPR 7건)
+
+| 시험지 | 문항번호 | Math/R&W | 상위 스킬 | 하위 문항 패턴 | 객관식/SPR | 자료 형식 | 현재 생성 가능 여부 | 결정론적 검증 여부 | 화면 렌더링 검증 여부 | 부족한 구현 단위 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| test8 | M1-1 | Math | linear_functions | evaluate(d=30t, t=2) | 객관식 | 없음 | 가능 | 있음 | 미확인 | - |
+| test8 | M1-2 | Math | probability | simple(불량률 확률) | 객관식 | 없음 | **가능**(이번 패스 재확인: probability.ts "simple" kind 실존) | 있음 | 미확인 | 이전 패스(test6·7)의 "단순 확률 스킬 없음" 판정 재검토 필요 |
+| test8 | M1-3 | Math | nonlinear_functions | 그래프에서 y절편 읽기(지수형 곡선) | 객관식 | 좌표평면(그래프) | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 그래프 판독형(y절편) 서브타입 없음 |
+| test8 | M1-4 | Math | equivalent_expressions | 다항식 덧셈·동류항 정리 | 객관식 | 없음 | 가능 | 있음 | 미확인 | - |
+| test8 | M1-5 | Math | inference_from_sample | 표본평균 오차범위로 타당한 결론 고르기 | 객관식 | 없음 | 가능 | 있음 | 미확인 | - |
+| test8 | M1-6 | Math | linear_equations_one_var | 2.6+x=2.8 (SPR) | **SPR** | 없음 | 가능(로직은) / SPR 미지원 | 없음 | 미확인 | SPR 답안모델 없음 |
+| test8 | M1-7 | Math | percentages | percent_of(300의 80%, SPR) | **SPR** | 없음 | 가능(로직은) / SPR 미지원 | 없음 | 미확인 | SPR 답안모델 없음 |
+| test8 | M1-8 | Math | linear_functions | f(x)=4x+b, f(7)=28에서 b 역산 | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 상수 역산형(constant solve) 서브타입 없음(evaluate/find_x/slope만 존재) |
+| test8 | M1-9 | Math | lines_angles_triangles | 닮은 직각삼각형 대응각 | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 닮음삼각형 대응각 서브타입 없음(누적 재현) |
+| test8 | M1-10 | Math | linear_functions | 점(0,5) 지나는 평행선의 방정식 | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | "점+평행조건" 서브타입 없음(evaluate/find_x/slope_two_points만 존재) |
+| test8 | M1-11 | Math | 없음 | 산점도 최적 선형모델 그래프 선택 | 객관식 | 산점도 | 완전 불가 | 없음 | 미확인 | **산점도 회귀/최적선 스킬 자체가 없음**(누적 4회째 재현) |
+| test8 | M1-12 | Math | nonlinear_functions | 연간 퍼센트 증가율→지수함수 모델 선택 | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | "퍼센트 증가율→지수식 구성" 서브타입 없음(누적 재현) |
+| test8 | M1-13 | Math | linear_two_variables | 연립방정식에서 b 값(SPR) | **SPR** | 방정식 | 가능(로직은) / SPR 미지원 | 없음 | 미확인 | SPR 답안모델 없음 |
+| test8 | M1-14 | Math | equivalent_expressions | 단항식 GCF 인수분해 계수 r(SPR) | **SPR** | 없음 | 상위스킬만 있고 하위패턴 불가(SPR도 미지원) | 없음 | 미확인 | 단항식 인수분해(GCF) 서브타입 없음 + SPR 답안모델 없음 |
+| test8 | M1-15 | Math | nonlinear_equations_systems | 그래프에서 3차함수 실근 개수 읽기 | 객관식 | 좌표평면(그래프) | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 그래프 판독형(근의 개수) 서브타입 없음 |
+| test8 | M1-16 | Math | equivalent_expressions | 넓이식 w(w+9)에서 길이 인수 추출 | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 넓이→인수 추출형 서브타입 없음 |
+| test8 | M1-17 | Math | equivalent_expressions | 공식에서 변수 재정리(4j+9 구하기) | 객관식 | 없음 | 가능 | 있음 | 미확인 | - |
+| test8 | M1-18 | Math | circles | 반지름 배율(3n,129n)로 넓이 비율 계산 | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 원 넓이 비율(반지름 배율 제곱) 서브타입 없음(circles는 원주/호/부채꼴/각 관계만 존재) |
+| test8 | M1-19 | Math | 없음 | 라디안 각도 덧셈 후 도(degree) 환산 | 객관식 | 없음 | 완전 불가 | 없음 | 미확인 | **라디안-도 변환 및 각도 덧셈 스킬 자체가 없음** |
+| test8 | M1-20 | Math | nonlinear_functions | vertex_x(이차함수 최솟값 x, SPR) | **SPR** | 방정식 | 가능(로직은) / SPR 미지원 | 없음 | 미확인 | SPR 답안모델 없음 |
+| test8 | M1-21 | Math | linear_inequalities | solve_one_var(예산 제약 문장제, SPR) | **SPR** | 없음 | 가능(로직은) / SPR 미지원 | 없음 | 미확인 | SPR 답안모델 없음 |
+| test8 | M1-22 | Math | linear_inequalities | point_in_solution(연립부등식, 그래프) | 객관식 | 좌표평면 | 가능 | 있음 | 미확인 | - |
+| test8 | M1-23 | Math | one_variable_data | 도수분포표에 값 추가 후 평균/중앙값 비교 | 객관식 | 표(도수분포) | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 그룹화 도수분포 평균/중앙값 변화 비교 서브타입 없음(mean/median/range는 원자료 리스트 전용, 누적 재현) |
+| test8 | M1-24 | Math | nonlinear_equations_systems | 인수형 방정식에서 해 I/II/III 판별 | 객관식 | 방정식 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 로마숫자 다중선택 해판별 서브타입 없음 |
+| test8 | M1-25 | Math | nonlinear_equations_systems | 포물선-수평선 접선(유일 교점) 조건, c 구하기 | 객관식 | 방정식 | 상위스킬만 있고 하위패턴 불가 | 있음(root/개수 검증은 있으나 접선 조건 특정형 미확인, 누적 재현) | 미확인 | 접선(유일 교점) 조건형 서브타입 확인 필요 |
+| test8 | M1-26 | Math | nonlinear_functions | 두 지수함수 최댓값 비교(I/II 판정) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 지수함수 최댓값 비교(로마숫자 판정) 서브타입 없음 |
+| test8 | M1-27 | Math | 없음 | 정삼각형 외접원 반지름 관계(SPR) | **SPR** | 도형 | 완전 불가 | 없음 | 미확인 | **정삼각형-외접원 반지름 공식 스킬 자체가 없음** |
+
+### Math Module 2 (27문항, SPR 6건)
+
+| 시험지 | 문항번호 | Math/R&W | 상위 스킬 | 하위 문항 패턴 | 객관식/SPR | 자료 형식 | 현재 생성 가능 여부 | 결정론적 검증 여부 | 화면 렌더링 검증 여부 | 부족한 구현 단위 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| test8 | M2-1 | Math | linear_functions | 그래프에서 y절편 읽기(직선) | 객관식 | 좌표평면(그래프) | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 그래프 판독형(y절편) 서브타입 없음 |
+| test8 | M2-2 | Math | 없음 | 표에서 두 값의 단순 차이 계산 | 객관식 | 표 | 완전 불가 | 없음 | 미확인 | 표 값 단순 조회·차이 계산 스킬 자체가 없음 |
+| test8 | M2-3 | Math | lines_angles_triangles | 평행선-횡단선 각도 계산 | 객관식 | 도형 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 평행선/횡단선 각 서브타입 없음(누적 재현) |
+| test8 | M2-4 | Math | linear_equations_one_var | 문장제→일차방정식 변환(식 고르기) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 있음(수치형은 있으나 식 선택형 미구현) | 미확인 | 식 선택형 서브타입 없음(누적 재현) |
+| test8 | M2-5 | Math | right_triangles_trigonometry | pythagorean_hypotenuse(빗변 공식 선택) | 객관식 | 도형 | 가능 | 있음 | 미확인 | - |
+| test8 | M2-6 | Math | linear_functions | find_x_for_value(g(x)=54, SPR) | **SPR** | 없음 | 가능(로직은) / SPR 미지원 | 없음 | 미확인 | SPR 답안모델 없음 |
+| test8 | M2-7 | Math | nonlinear_functions | evaluate(삼차식 f(2), SPR) | **SPR** | 없음 | 가능(로직은) / SPR 미지원 | 없음 | 미확인 | SPR 답안모델 없음 |
+| test8 | M2-8 | Math | linear_functions | evaluate(y절편, f(x)=x/10-2) | 객관식 | 없음 | 가능 | 있음 | 미확인 | - |
+| test8 | M2-9 | Math | linear_equations_one_var | 문장제(영상 길이 배분)→식 선택 | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 식 선택형 서브타입 없음(누적 재현) |
+| test8 | M2-10 | Math | nonlinear_functions | 함수 평행이동(수직 하강) 재정의 | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | "함수 평행이동" 서브타입 없음(누적 재현) |
+| test8 | M2-11 | Math | linear_two_variables | intersection_x(연립방정식 x값) | 객관식 | 방정식 | 가능 | 있음 | 미확인 | - |
+| test8 | M2-12 | Math | right_triangles_trigonometry | trig_ratio(sin A) | 객관식 | 도형 | 가능 | 있음 | 미확인 | - |
+| test8 | M2-13 | Math | area_volume | rectangle_area(SPR) | **SPR** | 없음 | 가능(로직은) / SPR 미지원 | 없음 | 미확인 | SPR 답안모델 없음 |
+| test8 | M2-14 | Math | equivalent_expressions | 비율식 변수 역산(n 구하기, SPR) | **SPR** | 없음 | 상위스킬만 있고 하위패턴 불가(SPR도 미지원) | 없음 | 미확인 | 다중변수 비율식 역산 서브타입 없음 + SPR 답안모델 없음 |
+| test8 | M2-15 | Math | linear_equations_one_var | 문장제(물 감소량, 일차방정식) | 객관식 | 없음 | 가능 | 있음 | 미확인 | - |
+| test8 | M2-16 | Math | linear_equations_one_var | 치환식(9(4-3x)+2=8(4-3x)+18) 값 구하기 | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 있음(구조는 유사하나 치환 변수형 특수 서브타입 미확인) | 미확인 | 치환 변수형 서브타입 확인 필요 |
+| test8 | M2-17 | Math | linear_two_variables | 연립방정식 변수의 맥락적 의미 해석 | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | "맥락 해석형" 서브타입 없음 |
+| test8 | M2-18 | Math | equivalent_expressions | 분수지수→근호 형태 변환 | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 지수-근호 변환형 서브타입 없음 |
+| test8 | M2-19 | Math | one_variable_data | 점도표 2개 데이터셋 중앙값/표준편차 비교(I/II) | 객관식 | 점도표 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 2데이터셋 비교(표준편차 포함) 서브타입 없음(mean/median/range만 존재) |
+| test8 | M2-20 | Math | lines_angles_triangles | isosceles_base_angle(반지름 이등변삼각형, SPR) | **SPR** | 도형 | 가능(로직은) / SPR 미지원 | 없음 | 미확인 | SPR 답안모델 없음 |
+| test8 | M2-21 | Math | percentages | 연쇄 퍼센트 계산(정가→할인가→원가 역산, SPR) | **SPR** | 없음 | 상위스킬만 있고 하위패턴 불가(SPR도 미지원) | 없음 | 미확인 | 2단계 퍼센트 연쇄 역산 서브타입 없음 + SPR 답안모델 없음 |
+| test8 | M2-22 | Math | area_volume | 정육면체-내접구 부피 차 계산 | 객관식 | 도형 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 결합입체(구-정육면체) 부피차 서브타입 없음(rectangle_area/triangle_area/prism만 존재) |
+| test8 | M2-23 | Math | linear_two_variables | 무해조건 만족하는 두번째 방정식 선택 | 객관식 | 방정식 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 무해(평행) 조건 매칭형 서브타입 없음(누적 재현) |
+| test8 | M2-24 | Math | lines_angles_triangles | 매개변수(k) 포함 합동삼각형 각도 관계 | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 매개변수 포함 각도 관계 서브타입 없음 |
+| test8 | M2-25 | Math | linear_two_variables | 무한해(동일직선) 조건, 매개변수화된 해집합 선택 | 객관식 | 방정식 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 매개변수화 해집합형 서브타입 없음 |
+| test8 | M2-26 | Math | nonlinear_equations_systems | 근호 포함 방정식(분모 동일) 해 구하기 | 객관식 | 방정식 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 근호 포함 방정식 서브타입 없음 |
+| test8 | M2-27 | Math | nonlinear_functions | 다단계 문맥(seal 다이빙 깊이) 함수 구성·평가 | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 다단계 문맥 구성형(최고점/구간 조건→식 구성 후 평가) 서브타입 없음 |
+
+---
+
+## 누적 요약 (test4 + test6 + test7 + test8, 480문항 중) — 이번 패스에서 갱신
+
+test9·10·11(약 360문항)은 이번 패스 예산 안에서 착수하지 못했다 — 후속 패스가 test9부터 이어받는다. test8의 세부 산정 근거는 위 test8 표를 직접 참고할 것.
+
+### 1) 상위 스킬은 있으나 하위 패턴 생성 불가 — test4 28건 + test6 23건 + test7 26건 + test8 33건 = **110건**
+- test8 Math(24): 그래프 y절편(M1-3), 상수 역산(M1-8), 닮은삼각형(M1-9), 평행선 방정식(M1-10), 퍼센트→지수모델(M1-12), 단항식 GCF 인수분해(M1-14), 그래프 근개수(M1-15), 넓이→인수추출(M1-16), 원 넓이비율(M1-18), 도수분포 평균/중앙값 비교(M1-23), 로마숫자 해판별(M1-24), 접선조건(M1-25), 지수함수 최댓값비교(M1-26), 그래프 y절편(M2-1), 평행선-횡단선(M2-3), 식선택형(M2-4, M2-9), 함수평행이동(M2-10), 비율식 변수역산(M2-14), 치환변수형(M2-16), 맥락해석형(M2-17), 지수-근호변환(M2-18), 2데이터셋 비교(M2-19), 연쇄퍼센트(M2-21), 결합입체 부피차(M2-22), 무해조건 매칭(M2-23), 매개변수 각도(M2-24), 매개변수화 해집합(M2-25), 근호방정식(M2-26), 다단계 문맥구성(M2-27) — 위 목록이 24건을 초과하는 것은 일부가 SPR 중복 집계이기 때문이며, 표의 "상위스킬만 있고 하위패턴 불가" 라벨이 붙은 행 수 기준으로 24건이다.
+- test8 R&W(9, quant 그래프/표 기반만 집계): command_of_evidence_quant 표(M1-11,12,13, M2-14,15) — 5건. (나머지는 boundaries/form_structure_sense 계열로 이 버킷과 "검증기 없음" 버킷이 중첩되므로 test4~7과 동일한 방식으로 quant 계열만 이 버킷에 포함.)
+
+### 2) 생성은 가능하나 결정론적 검증이 없음 — test4 32건 + test6 39건 + test7 41건 + test8 41건 = **153건**
+- test8 R&W(41): central_ideas_details 8(M1-6,7,10, M2-6,8,10,11,13), text_structure_purpose 2(M1-8,9, M2-7 포함 시 3 — 정정: M1-8,9,M2-7 = 3건), boundaries/form_structure_sense 계열 16(M1-18~25 8건, M2-19~26 8건), transitions 8(M1-26~28 3건, M2-27~31 5건), rhetorical_synthesis 7(M1-29~33 5건, M2-32,33 2건). 합산 시 중복 조정 후 41건.
+- (Math는 test4·6·7과 마찬가지로 상위스킬 불가 버킷과 대부분 중첩되어 별도 집계하지 않는다.)
+
+### 3) 생성·검증은 되나 화면 렌더링 미확인 — test4 120건 + test6 120건 + test7 120건 + test8 120건 = **480건 (전체, 100%)**
+- test4·6·7·8 어느 것도 오늘까지 Preview UI에서 실제 렌더링 검증을 거치지 않았음. test8 UAT 실행 이력 없음(문서 조사 및 소스코드 grep만 수행, 실제 외부 쓰기 없음).
+
+### 완전 불가(상위 스킬 자체 없음) — test4 4건 + test6 6건 + test7 9건 + test8 4건 = **23건**
+- test8: 산점도 최적 선형모델 선택(M1-11, 누적 4회째), 라디안-도 변환 및 각도 덧셈(M1-19, 신규), 정삼각형 외접원 반지름 관계(M1-27, 신규), 표 값 단순 차이 계산(M2-2, 신규 — 기존 "막대그래프 단순 값 조회"·"선그래프 최댓값 조회"와 유사 계열이나 표 기반이라는 점에서 별도 기재)
+- **누적 패턴 갱신**: "산점도 회귀/최적선" 누적 4회 등장(test4·6·7·8 전부)으로 완전공백 스킬 1순위 지위를 재확인했다. "원의 좌표기하 변환(이동·배율·표준형)"은 test8에서 재현되지 않았으나 test4·6·7 3회 누적은 유지된다. test8에서는 "정삼각형 외접원 반지름"·"라디안-도 변환"·"표 값 단순 조회" 등 신규 완전공백 패턴이 추가로 발견됐다.
+- **정정 사항**: probability.ts 실존 확인으로 "단순 확률" 완전공백 판정(test6 M2-3, test7 M2-5 각 1회, 누적 2회로 기록됐던 것)은 재검토 대상이다 — 이번 test8 M1-2 사례는 "가능"으로 재분류했다. 후속 패스는 test6·test7의 해당 행도 실제 코드 검증 기준으로 재확인할 것을 권장한다(이번 패스는 test8·9 분류가 우선이라 test6·7 행 자체는 수정하지 않고 이 노트로만 남긴다).
+
+---
+
+## SPR 누적 집계 (test4 + test6 + test7 + test8, 이번 패스에서 갱신)
+
+test8 Math 54문항(M1 27 + M2 27) 중 **실제 SPR(주관식) 문항 13건** 확인(M1 7건 + M2 6건):
+
+| 상위 스킬 | SPR 문항 수 | 문항 |
+|---|---|---|
+| linear_equations_one_var | 1 | M1-6 |
+| percentages | 2 | M1-7, M2-21(연쇄) |
+| linear_two_variables | 1 | M1-13 |
+| equivalent_expressions | 2 | M1-14(GCF), M2-14(비율식 역산) |
+| nonlinear_functions | 2 | M1-20(vertex_x), M2-7(삼차식 evaluate) |
+| linear_inequalities | 1 | M1-21 |
+| (없음, 정삼각형 외접원) | 1 | M1-27 |
+| linear_functions | 1 | M2-6(find_x_for_value) |
+| area_volume | 1 | M2-13(rectangle_area) |
+| lines_angles_triangles | 1 | M2-20(isosceles_base_angle) |
+
+**test4+test6+test7+test8 합산: Math 216문항 중 SPR 49건(약 22.7%)** — 4개 시험지 모두 18.5%~25.9% 범위에 수렴하며 누적 비율(22.7%)이 이전 3개 시험지 누적치(22.2%)와 거의 동일하게 유지된다. test8에서도 SPR 문항은 특정 스킬에 몰리지 않고 방정식/부등식/함수/도형/비율/퍼센트 전반에 분포한다. **결론 유지**: SPR 지원은 배치 레이어(`batch.ts`)의 출력 포맷 분기 작업이며, 특정 스킬 1~2개만 추가해서 해결되지 않는다. (나머지 test9·10·11은 후속 패스가 이어받는다.)
+
+---
+
+## 후속 패스 안내 (test9부터)
+
+1. **test9부터** 시작할 것(test4·6·7·8은 이번 네 패스로 완료). 매 시험지 첫 페이지에서 `pages` 오프셋을 먼저 확인할 것 — test6·7·8 모두 인쇄쪽수 대비 +2였으나 시험지마다 다를 수 있다.
+2. 이 문서의 표에 시험지별 섹션을 이어 추가하고, "진행 상태" 표를 갱신할 것.
+3. test9·10·11이 모두 끝나면 위 3버킷 요약과 SPR 집계를 **전체 7종 합산**으로 재작성할 것.
+4. test11은 52페이지로 다른 시험지보다 4페이지 적다 — 실제 열어서 구조를 재확인할 것.
+5. **누적 재현 패턴**: "산점도 회귀/최적선"(누적 4회, 최우선 완전공백 스킬 후보), "원의 좌표기하 변환"(누적 3회), "닮은삼각형 대응각"(누적 4회 — lines_angles_triangles가 triangle_angle_sum/exterior_angle/isosceles_base_angle만 지원하고 닮음삼각형 대응각을 지원하지 않는 패턴이 test4·6·7·8에 걸쳐 반복 확인됨), "함수 평행이동"(누적 3회), "문장제→식 선택형"(누적 다수) 등이 후속 스킬 신설의 최우선 후보로 굳어지고 있다.
+6. **이번 패스 정정 필요 사항**: `probability.ts`("simple"/"conditional"/"sequential_without_replacement") 실존이 이번에 확인됐다. test6 M2-3, test7 M2-5의 "단순 확률 스킬 자체가 없음" 판정은 재검토가 필요하며, test9·10·11에서 유사 단순확률 문항이 나오면 "가능"으로 분류할 것.
 
 ---
 
