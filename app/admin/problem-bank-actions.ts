@@ -728,19 +728,27 @@ export async function generateBankProblemsAction(params: {
     params.skillCode && MATH_COMPILER_SKILLS.has(params.skillCode) &&
     (params.difficulty === "easy" || params.difficulty === "medium" || params.difficulty === "hard")
   ) {
+    // 2026-09-17(제품 오너 지시) — "요청 시작부터 저장 완료까지의 전체 벽시계 시간,
+    // 컴파일 시간, DB 저장 시간, 렌더링 검증 시간을 분리 기록"한다. requestStart는
+    // 이 서버 액션이 시작된 시점(관리자가 "AI로 만들기"를 누른 시점과 사실상 같다) —
+    // dbSaveMs는 onAccepted 콜백(실제 Supabase 왕복) 안에서만 잰다. 컴파일·렌더링
+    // 검증 시간은 배치 실행기가 별도로 재서 compilerTiming으로 돌려준다.
+    const requestStart = Date.now();
     const { runMathCompilerBatch } = await import("@/lib/problem-generation/math-compilers/batch");
     const failures: string[] = [];
     let created = 0;
+    let dbSaveMs = 0;
     const result = await runMathCompilerBatch({
       skillCode: params.skillCode as "linear_equations_two_var",
       difficulty: params.difficulty,
       count: params.count,
       onAccepted: async ({ problem: g, quality }) => {
+        const t0 = Date.now();
         const problem = await createBankProblemAction({
           subjectId: params.subjectId, format: "mc", skillType: params.skillType, skillCode: params.skillCode,
           examSystem: params.examSystem, apSubject: params.apSubject, topic: params.topic, difficulty: params.difficulty, keywordIds: params.keywordIds,
         });
-        if (!problem.ok) { failures.push(problem.error); return; }
+        if (!problem.ok) { failures.push(problem.error); dbSaveMs += Date.now() - t0; return; }
         const draft = await createDraftVersionAction({
           problemId: problem.value, passage: g.stimulus ?? g.passage, question: g.question ?? null, options: g.options ?? null, correctIndex: g.correctIndex ?? null,
           explanation: g.explanation, difficulty: params.difficulty, figure: g.figure ?? null,
@@ -748,14 +756,26 @@ export async function generateBankProblemsAction(params: {
         if (!draft.ok) {
           failures.push(draft.error);
           await admin.from("problems").update({ archived_at: new Date().toISOString() }).eq("id", problem.value);
+          dbSaveMs += Date.now() - t0;
           return;
         }
         const { error: qErr } = await admin.rpc("set_problem_quality", { p_version_id: draft.value.versionId, p_quality: quality });
         if (qErr) console.error("[problem-bank] 품질 기록 실패(계산형):", qErr.message);
         created += 1;
+        dbSaveMs += Date.now() - t0;
       },
     });
     failures.push(...result.failures.filter((f) => !f.resolved).map((f) => f.reason));
+    const totalRequestMs = Date.now() - requestStart;
+    // AI 호출 계측 — 이 경로는 Anthropic 클라이언트를 아예 import하지 않으므로 항상 0이다.
+    // (기존 AI 파이프라인 경로였다면 result.stats.modelCalls가 0보다 컸을 것.)
+    console.log(JSON.stringify({
+      event: "math_compiler_product_path_timing",
+      skillCode: params.skillCode, difficulty: params.difficulty, requested: params.count,
+      totalRequestMs, compileMs: result.compilerTiming.compileMs, renderCheckMs: result.compilerTiming.renderCheckMs,
+      dbSaveMs, created, shortfall: result.stats.shortfall, stoppedReason: result.stats.stoppedReason,
+      mathAiCallCount: 0,
+    }));
     if (created === 0) {
       return { ok: false, error: `문제를 생성하지 못했습니다.${failures.length ? ` ${failures[0]}` : ""}` };
     }

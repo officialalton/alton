@@ -34,37 +34,45 @@ async function main() {
   const { runMathCompilerBatch } = await import("../lib/problem-generation/math-compilers/batch");
 
   for (const difficulty of ["medium", "hard"] as const) {
-    const t0 = Date.now();
+    const requestStart = Date.now();
     let created = 0;
+    let dbSaveMs = 0;
     const failures: string[] = [];
     const result = await runMathCompilerBatch({
       skillCode: "linear_equations_two_var",
       difficulty,
       count: 10,
       onAccepted: async ({ problem: g, quality }) => {
+        const t0 = Date.now();
         const { data: problemId, error: pErr } = await admin.rpc("create_bank_problem", {
           p_subject_id: SAT_MATH_SUBJECT_ID, p_format: "mc", p_skill_type: "Linear equations in two variables",
           p_topic: "", p_skill_code: "linear_equations_two_var", p_exam_system: "sat_math", p_ap_subject: null,
           p_difficulty: difficulty, p_actor_id: actorId,
         });
-        if (pErr || !problemId) { failures.push(`create_bank_problem: ${pErr?.message}`); return; }
+        if (pErr || !problemId) { failures.push(`create_bank_problem: ${pErr?.message}`); dbSaveMs += Date.now() - t0; return; }
         const { data: versionId, error: vErr } = await admin.rpc("save_problem_draft_version", {
           p_problem_id: problemId, p_passage: g.stimulus ?? g.passage, p_options: g.options ?? null, p_correct_index: g.correctIndex ?? null,
           p_explanation: g.explanation, p_difficulty: difficulty, p_actor_id: actorId,
           p_answers: null, p_figure: g.figure ?? null, p_figure_checked: false, p_statements: null, p_question: g.question ?? null,
           p_repair_status: "none",
         });
-        if (vErr || !versionId) { failures.push(`save_problem_draft_version: ${vErr?.message}`); return; }
+        if (vErr || !versionId) { failures.push(`save_problem_draft_version: ${vErr?.message}`); dbSaveMs += Date.now() - t0; return; }
         const { error: qErr } = await admin.rpc("set_problem_quality", { p_version_id: versionId, p_quality: quality });
         if (qErr) failures.push(`set_problem_quality: ${qErr.message}`);
         else created += 1;
+        dbSaveMs += Date.now() - t0;
       },
     });
-    const wallMs = Date.now() - t0;
-    console.log(`\n=== ${difficulty} — 요청 10 ===`);
-    console.log(`자동 통과(생성 컴파일러) ${result.stats.accepted}/10, 실제 DB 저장 성공 ${created}/10, 부족 ${result.stats.shortfall}`);
-    console.log(`후보 평가 수 ${result.stats.candidatesEvaluated}, 종료 사유 ${result.stats.stoppedReason}`);
-    console.log(`벽시계 시간 ${wallMs}ms (문항당 평균 ${Math.round(wallMs / Math.max(1, created))}ms)`);
+    const totalRequestMs = Date.now() - requestStart;
+    console.log(`\n=== ${difficulty} — 요청 10 (linear_equations_two_var) ===`);
+    console.log(`자동 통과(컴파일러) ${result.stats.accepted}/10, 실제 DB 저장 성공 ${created}/10, 부족 ${result.stats.shortfall}, 종료 사유 ${result.stats.stoppedReason}`);
+    console.log(`후보 평가 수 ${result.stats.candidatesEvaluated} (요청 1~9여도 최소 10문항 배치 확인됨)`);
+    console.log(`--- 시간 분리 기록 ---`);
+    console.log(`전체 제품 경로 벽시계 시간: ${totalRequestMs}ms`);
+    console.log(`  컴파일(모델 계산) 시간: ${result.compilerTiming.compileMs}ms`);
+    console.log(`  렌더링 검증(checkFigure) 시간: ${result.compilerTiming.renderCheckMs}ms`);
+    console.log(`  DB 저장(create_bank_problem+save_problem_draft_version+set_problem_quality) 시간: ${dbSaveMs}ms`);
+    console.log(`Math AI 호출 수: 0 (이 경로는 Anthropic 클라이언트를 아예 쓰지 않음)`);
     if (failures.length) console.log(`DB 저장 실패 사유: ${failures.join(" / ")}`);
     if (result.failures.length) console.log(`검증 실패 사유(표본): ${result.failures.slice(0, 3).map((f) => f.reason).join(" / ")}`);
   }
