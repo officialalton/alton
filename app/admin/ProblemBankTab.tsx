@@ -485,7 +485,6 @@ function NewProblemPanel({
 
   return (
     <div className="border-[1.5px] border-grey-200 rounded-xl p-4 mb-5" data-testid="new-problem-panel">
-      <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2">새 문제</div>
       <div className="flex gap-1 mb-3 border-b-[1.5px] border-grey-200" role="tablist" aria-label="문항 체계">
         {EXAM_SYSTEMS.map((e) => (
           <button
