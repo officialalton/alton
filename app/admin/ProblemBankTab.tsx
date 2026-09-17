@@ -389,7 +389,13 @@ function NewProblemPanel({
   const [topic, setTopic] = useState("");
   const [difficulty, setDifficulty] = useState<"easy" | "medium" | "hard">("medium");
   const [format, setFormat] = useState("mc");
-  const [count, setCount] = useState("3");
+  // 2026-09-17(UAT 지적) — 이 서버 액션은 문항 하나당 여러 번 순차 모델 호출을
+  // 거쳐, 개수가 조금만 늘어도 이 비프로덕션 배포의 함수 제한 시간(Vercel Hobby
+  // 플랜, 300초 고정 — 코드로 늘릴 수 없다)에 걸려 결과 없이 죽는다. 그때 클라이언트는
+  // 실패 사유조차 못 받는다("여러 개가 이유 없이 실패"로 보임). 기본값·상한을
+  // 안전한 범위로 낮춘다.
+  const MAX_SAFE_GENERATE_COUNT = 2;
+  const [count, setCount] = useState("1");
 
   const keywords = subjectId ? keywordsBySubject.get(subjectId) ?? [] : [];
   const formats = formatsForExamSystem(system, apSubject || null);
@@ -555,10 +561,21 @@ function NewProblemPanel({
         {system !== "ap" && (
           <>
             <span className="text-grey-300">|</span>
-            <input aria-label="생성 개수" value={count} onChange={(e) => setCount(e.target.value)} className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 w-[64px]" />
+            <input
+              aria-label="생성 개수"
+              type="number"
+              min={1}
+              max={MAX_SAFE_GENERATE_COUNT}
+              value={count}
+              onChange={(e) => {
+                const n = Number(e.target.value) || 1;
+                setCount(String(Math.max(1, Math.min(MAX_SAFE_GENERATE_COUNT, n))));
+              }}
+              className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 w-[64px]"
+            />
             <button
               disabled={!canCreate || !skillType.trim()}
-              onClick={() => void onGenerate({ subjectId, skillType: skillType.trim(), skillCode: skillCode || undefined, examSystem: system, topic: topic.trim() || undefined, difficulty, format, count: Number(count) || 1, keywordIds: keywordIds.length ? keywordIds : undefined, figurePolicy })}
+              onClick={() => void onGenerate({ subjectId, skillType: skillType.trim(), skillCode: skillCode || undefined, examSystem: system, topic: topic.trim() || undefined, difficulty, format, count: Math.max(1, Math.min(MAX_SAFE_GENERATE_COUNT, Number(count) || 1)), keywordIds: keywordIds.length ? keywordIds : undefined, figurePolicy })}
               className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
             >
               AI로 만들기
@@ -568,6 +585,10 @@ function NewProblemPanel({
       </div>
       <p className="text-[11.5px] text-grey-500 mt-2">
         어느 쪽으로 만들든 초안으로 들어갑니다. 다음 단계(3 지문/자료 → 4 질문 → 5 답안 → 6 해설 → 7 저장/공개)는 아래 초안 편집에서 이어집니다. 복수 생성도 단건과 같은 계약이며, 질문이 없거나 유형과 맞지 않는 결과는 저장하지 않고 사유를 보여줍니다.
+      </p>
+      <p className="text-[11.5px] text-red mt-1">
+        한 번에 최대 {MAX_SAFE_GENERATE_COUNT}개까지만 만들 수 있습니다 — 이 환경의 서버 처리 시간 제한(300초) 때문에,
+        그보다 많이 요청하면 시간 안에 끝내지 못해 결과도 실패 사유도 없이 조용히 실패합니다.
       </p>
     </div>
   );
