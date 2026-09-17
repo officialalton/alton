@@ -66,4 +66,18 @@ describe("runMathCompilerBatch — 최소 10문항 배치 실행", () => {
       }
     }
   });
+
+  // 2026-09-17 — 식·함수 엔진(2단계 A) 첫 세부 기술.
+  it("linear_equations_one_var는 요청 수만큼 자동 통과 문항을 만든다(medium·hard)", async () => {
+    for (const difficulty of ["medium", "hard"] as const) {
+      const result = await runMathCompilerBatch({ skillCode: "linear_equations_one_var", difficulty, count: 10 });
+      expect(result.accepted).toHaveLength(10);
+      expect(result.stats.shortfall).toBe(0);
+      expect(result.stats.stoppedReason).toBe("target_met");
+      for (const item of result.accepted) {
+        expect(item.problem.figure).toBeNull();
+        expect(item.problem.options).toHaveLength(4);
+      }
+    }
+  });
 });
