@@ -742,7 +742,7 @@ export async function generateBankProblemsAction(params: {
   // 이제 AI가 아니라 결정적 계산 컴파일러가 만든다(정답·오답·그래프 좌표를 전부
   // 코드로 계산). AI 호출이 아예 없으므로 ANTHROPIC_API_KEY 유무와 무관하게 동작한다.
   // 2026-09-17 — 같은 일차식 공통 엔진으로 systems_linear·linear_inequalities 확장.
-  const MATH_COMPILER_SKILLS = new Set(["linear_equations_two_var", "systems_linear", "linear_inequalities", "linear_equations_one_var"]);
+  const MATH_COMPILER_SKILLS = new Set(["linear_equations_two_var", "systems_linear", "linear_inequalities", "linear_equations_one_var", "linear_functions"]);
   if (
     params.skillCode && MATH_COMPILER_SKILLS.has(params.skillCode) &&
     (params.difficulty === "easy" || params.difficulty === "medium" || params.difficulty === "hard")
@@ -758,7 +758,7 @@ export async function generateBankProblemsAction(params: {
     let created = 0;
     let dbSaveMs = 0;
     const result = await runMathCompilerBatch({
-      skillCode: params.skillCode as "linear_equations_two_var" | "systems_linear" | "linear_inequalities" | "linear_equations_one_var",
+      skillCode: params.skillCode as "linear_equations_two_var" | "systems_linear" | "linear_inequalities" | "linear_equations_one_var" | "linear_functions",
       difficulty: params.difficulty,
       count: params.count,
       onAccepted: async ({ problem: g, quality }) => {
