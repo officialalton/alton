@@ -15,7 +15,10 @@ if (existsSync(envPath)) {
 }
 
 const SAT_MATH_SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001";
-const SKILL_CODE = (process.argv[2] as "linear_equations_two_var" | "systems_linear" | "linear_inequalities" | "linear_equations_one_var" | "linear_functions" | "equivalent_expressions") || "linear_equations_two_var";
+const SKILL_CODE = (process.argv[2] as
+  | "linear_equations_two_var" | "systems_linear" | "linear_inequalities" | "linear_equations_one_var"
+  | "linear_functions" | "equivalent_expressions" | "nonlinear_equations_systems" | "nonlinear_functions"
+) || "linear_equations_two_var";
 const SKILL_LABEL: Record<string, string> = {
   linear_equations_two_var: "Linear equations in two variables",
   systems_linear: "Systems of two linear equations",
@@ -23,6 +26,8 @@ const SKILL_LABEL: Record<string, string> = {
   linear_equations_one_var: "Linear equations in one variable",
   linear_functions: "Linear functions",
   equivalent_expressions: "Equivalent expressions",
+  nonlinear_equations_systems: "Nonlinear equations and systems",
+  nonlinear_functions: "Nonlinear functions",
 };
 
 async function main() {

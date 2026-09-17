@@ -39,6 +39,16 @@ import {
   renderEquivalentExpressionsProblem,
   validateEquivalentExpressionsModel,
 } from "./equivalent-expressions";
+import {
+  generateNonlinearEqModel,
+  renderNonlinearEqProblem,
+  validateNonlinearEqModel,
+} from "./nonlinear-equations-systems";
+import {
+  generateNonlinearFnModel,
+  renderNonlinearFnProblem,
+  validateNonlinearFnModel,
+} from "./nonlinear-functions";
 
 // 2026-09-17(제품 오너 지시) — "같은 일차식 공통 엔진으로 확장". systems_linear(두
 // 일차방정식의 연립)은 수학적으로 linear_equations_two_var 컴파일러가 이미 계산하는
@@ -52,7 +62,9 @@ export type MathCompilerSkill =
   | "linear_inequalities"
   | "linear_equations_one_var"
   | "linear_functions"
-  | "equivalent_expressions";
+  | "equivalent_expressions"
+  | "nonlinear_equations_systems"
+  | "nonlinear_functions";
 
 const MIN_BATCH = 10;
 const MAX_CANDIDATE_MULTIPLIER: Record<LinearTwoVarDifficulty, number> = { easy: 1.5, medium: 1.5, hard: 2.5 };
@@ -128,6 +140,16 @@ function attemptOne(
     const check = validateEquivalentExpressionsModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
     compiled = renderEquivalentExpressionsProblem(model);
+  } else if (skillCode === "nonlinear_equations_systems") {
+    const model = generateNonlinearEqModel({ difficulty });
+    const check = validateNonlinearEqModel(model);
+    if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
+    compiled = renderNonlinearEqProblem(model);
+  } else if (skillCode === "nonlinear_functions") {
+    const model = generateNonlinearFnModel({ difficulty });
+    const check = validateNonlinearFnModel(model);
+    if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
+    compiled = renderNonlinearFnProblem(model);
   } else {
     return { ok: false, reason: `지원하지 않는 계산형 유형: ${skillCode}` };
   }
