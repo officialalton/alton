@@ -12,6 +12,8 @@ vi.mock("./student-curriculum-actions", () => ({
   moveUnit: vi.fn(),
   setUnitStatus: vi.fn(),
   setActiveKeywords: vi.fn(),
+  previewBaseCurriculumUpdate: vi.fn(),
+  applyBaseCurriculumUpdate: vi.fn(),
 }));
 
 const initial: StudentCurriculum = {
@@ -29,6 +31,7 @@ const initial: StudentCurriculum = {
       keywordIds: ["kw1"],
     keywordLabels: [],
       materialDocIds: [],
+      needsBaseUpdate: false,
     },
   ],
 };

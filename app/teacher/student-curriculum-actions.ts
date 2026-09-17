@@ -62,6 +62,7 @@ function mapUnitRow(row: {
     keywordIds: [],
     keywordLabels: [],
     materialDocIds: [],
+    needsBaseUpdate: false,
   };
 }
 
@@ -278,4 +279,85 @@ export async function removeSupplementMaterial(
     .eq("overlay_unit_id", overlayUnitId)
     .eq("curriculum_doc_id", curriculumDocId);
   if (error) throw new Error(error.message);
+}
+
+export type BaseUpdateDiff = {
+  addedKeywordLabels: string[];
+  addedMaterialTitles: string[];
+  removedKeywordLabels: string[];
+  removedMaterialTitles: string[];
+};
+
+/** 2026-09-17(커리큘럼 2단 구조) — 적용 전에 "무엇이 추가되고 무엇이 빠지는지"를
+ * 미리 보여준다. 학생이 직접 조정한 값(inherited=false)은 이 계산에 아예
+ * 들어오지 않는다 — apply 쪽과 동일한 inherited 기준을 그대로 재사용한다. */
+export async function previewBaseCurriculumUpdate(
+  subjectEnrollmentId: string,
+  overlayUnitId: string
+): Promise<BaseUpdateDiff> {
+  const { supabase } = await requireAssignedTeacherOrAdmin(subjectEnrollmentId);
+
+  const { data: unit } = await supabase
+    .from("curriculum_overlay_units")
+    .select("source_unit_id")
+    .eq("id", overlayUnitId)
+    .maybeSingle();
+  const sourceUnitId = unit?.source_unit_id as string | null | undefined;
+  if (!sourceUnitId) return { addedKeywordLabels: [], addedMaterialTitles: [], removedKeywordLabels: [], removedMaterialTitles: [] };
+
+  const [
+    { data: currentKeywords },
+    { data: sourceKeywords },
+    { data: currentMaterials },
+    { data: sourceMaterials },
+  ] = await Promise.all([
+    supabase.from("curriculum_overlay_unit_keywords").select("keyword_id, inherited").eq("overlay_unit_id", overlayUnitId),
+    supabase.from("subject_template_unit_keywords").select("keyword_id").eq("unit_id", sourceUnitId),
+    supabase.from("curriculum_overlay_unit_materials").select("curriculum_doc_id, inherited").eq("overlay_unit_id", overlayUnitId),
+    supabase.from("subject_template_unit_materials").select("curriculum_doc_id").eq("unit_id", sourceUnitId),
+  ]);
+
+  const currentKwIds = new Set((currentKeywords ?? []).map((k) => k.keyword_id as string));
+  const inheritedKwIds = new Set((currentKeywords ?? []).filter((k) => k.inherited).map((k) => k.keyword_id as string));
+  const sourceKwIds = new Set((sourceKeywords ?? []).map((k) => k.keyword_id as string));
+  const addedKwIds = [...sourceKwIds].filter((id) => !currentKwIds.has(id));
+  const removedKwIds = [...inheritedKwIds].filter((id) => !sourceKwIds.has(id));
+
+  const currentMatIds = new Set((currentMaterials ?? []).map((m) => m.curriculum_doc_id as string));
+  const inheritedMatIds = new Set((currentMaterials ?? []).filter((m) => m.inherited).map((m) => m.curriculum_doc_id as string));
+  const sourceMatIds = new Set((sourceMaterials ?? []).map((m) => m.curriculum_doc_id as string));
+  const addedMatIds = [...sourceMatIds].filter((id) => !currentMatIds.has(id));
+  const removedMatIds = [...inheritedMatIds].filter((id) => !sourceMatIds.has(id));
+
+  const allKwIds = [...new Set([...addedKwIds, ...removedKwIds])];
+  const allDocIds = [...new Set([...addedMatIds, ...removedMatIds])];
+  const [{ data: kwLabels }, { data: docTitles }] = await Promise.all([
+    allKwIds.length ? supabase.from("subject_keywords").select("id, label").in("id", allKwIds) : Promise.resolve({ data: [] as { id: string; label: string }[] }),
+    allDocIds.length ? supabase.from("curriculum_docs").select("id, title").in("id", allDocIds) : Promise.resolve({ data: [] as { id: string; title: string }[] }),
+  ]);
+  const kwLabelById = new Map((kwLabels ?? []).map((k) => [k.id as string, k.label as string]));
+  const docTitleById = new Map((docTitles ?? []).map((d) => [d.id as string, d.title as string]));
+
+  return {
+    addedKeywordLabels: addedKwIds.map((id) => kwLabelById.get(id) ?? id),
+    removedKeywordLabels: removedKwIds.map((id) => kwLabelById.get(id) ?? id),
+    addedMaterialTitles: addedMatIds.map((id) => docTitleById.get(id) ?? id),
+    removedMaterialTitles: removedMatIds.map((id) => docTitleById.get(id) ?? id),
+  };
+}
+
+/** 기준본 업데이트를 이 회차에 적용한다(RPC apply_base_update_to_overlay_unit —
+ * 학생이 직접 조정한 값은 건드리지 않고, 상위에서 빠진 inherited 항목만 빼고
+ * 새로 추가된 항목만 받는다. 이미 수업에 쓰인 회차는 RPC가 거부한다). */
+export async function applyBaseCurriculumUpdate(
+  subjectEnrollmentId: string,
+  overlayUnitId: string
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  const { supabase, user } = await requireAssignedTeacherOrAdmin(subjectEnrollmentId);
+  const { error } = await supabase.rpc("apply_base_update_to_overlay_unit", {
+    p_overlay_unit_id: overlayUnitId,
+    p_actor_id: user.id,
+  });
+  if (error) return { ok: false, error: error.message };
+  return { ok: true };
 }

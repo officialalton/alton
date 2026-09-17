@@ -28,6 +28,11 @@ export type OverlayUnit = {
   /** 회차 키워드 이름 — 학생 커리큘럼 화면에 회차마다 보여준다(2026-09-14). */
   keywordLabels: string[];
   materialDocIds: string[];
+  /** 2026-09-17(커리큘럼 2단 구조) — 이 회차가 물려받은 관리자 공용 커리큘럼
+   * 회차(source_unit_id)가 사본 생성 이후 수정됐는지. 학생이 직접 조정한
+   * 값은 이 판정과 무관하게 그대로 유지된다 — 적용은 별도 액션
+   * (applyBaseCurriculumUpdate)에서만 일어난다. */
+  needsBaseUpdate: boolean;
 };
 
 export type StudentCurriculum = {
@@ -51,12 +56,19 @@ export async function loadStudentCurriculum(
   const { data: units } = await supabase
     .from("curriculum_overlay_units")
     .select(
-      "id, source_unit_id, source_teacher_template_unit_id, position, unit_title, note, status, status_changed_at"
+      "id, source_unit_id, source_teacher_template_unit_id, position, unit_title, note, status, status_changed_at, base_unit_updated_at"
     )
     .eq("overlay_id", overlay.id)
     .order("position", { ascending: true });
 
   const unitIds = (units ?? []).map((u) => u.id);
+  const sourceUnitIds = Array.from(
+    new Set((units ?? []).map((u) => u.source_unit_id).filter((id): id is string => Boolean(id)))
+  );
+  const { data: sourceUnitRows } = sourceUnitIds.length
+    ? await supabase.from("subject_template_units").select("id, updated_at").in("id", sourceUnitIds)
+    : { data: [] as { id: string; updated_at: string }[] };
+  const sourceUpdatedAtById = new Map((sourceUnitRows ?? []).map((r) => [r.id as string, r.updated_at as string]));
 
   // N+1 방지: 단원마다 따로 조회하지 않고 이 오버레이의 전체 단원 id 집합에
   // 대해 키워드/자료 관계를 각각 한 번씩만 조회한다.
@@ -107,6 +119,10 @@ export async function loadStudentCurriculum(
       keywordIds: keywordIdsByUnit.get(u.id) ?? [],
       keywordLabels: (keywordIdsByUnit.get(u.id) ?? []).map((id) => labelById.get(id)).filter((l): l is string => Boolean(l)),
       materialDocIds: materialIdsByUnit.get(u.id) ?? [],
+      needsBaseUpdate:
+        !!u.source_unit_id &&
+        sourceUpdatedAtById.has(u.source_unit_id) &&
+        sourceUpdatedAtById.get(u.source_unit_id) !== u.base_unit_updated_at,
     })),
   };
 }

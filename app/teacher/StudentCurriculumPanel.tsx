@@ -12,6 +12,9 @@ import {
   moveUnit,
   setUnitStatus,
   setActiveKeywords,
+  previewBaseCurriculumUpdate,
+  applyBaseCurriculumUpdate,
+  type BaseUpdateDiff,
 } from "./student-curriculum-actions";
 import type { EligibleLibrary, OverlayUnit, StudentCurriculum } from "./student-curriculum-data";
 
@@ -51,6 +54,41 @@ export default function StudentCurriculumPanel({
   const [units, setUnits] = useState(initial.units);
   const [showAddPanel, setShowAddPanel] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [updateDiffUnitId, setUpdateDiffUnitId] = useState<string | null>(null);
+  const [updateDiff, setUpdateDiff] = useState<BaseUpdateDiff | null>(null);
+  const [applyingUpdate, setApplyingUpdate] = useState(false);
+
+  async function handleOpenUpdateDiff(unitId: string) {
+    setError(null);
+    setUpdateDiff(null);
+    setUpdateDiffUnitId(unitId);
+    try {
+      const diff = await previewBaseCurriculumUpdate(subjectEnrollmentId, unitId);
+      setUpdateDiff(diff);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "변경 내용을 불러오지 못했습니다.");
+      setUpdateDiffUnitId(null);
+    }
+  }
+
+  async function handleApplyUpdate(unitId: string) {
+    setApplyingUpdate(true);
+    setError(null);
+    try {
+      const result = await applyBaseCurriculumUpdate(subjectEnrollmentId, unitId);
+      if (!result.ok) {
+        setError(result.error);
+        return;
+      }
+      setUnits((prev) => prev.map((u) => (u.id === unitId ? { ...u, needsBaseUpdate: false } : u)));
+      setUpdateDiffUnitId(null);
+      setUpdateDiff(null);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "기준본 업데이트 적용에 실패했습니다.");
+    } finally {
+      setApplyingUpdate(false);
+    }
+  }
 
   async function withOverlayId(): Promise<string> {
     if (overlayId) return overlayId;
@@ -206,8 +244,21 @@ export default function StudentCurriculumPanel({
                   보강
                 </span>
               )}
+              {u.needsBaseUpdate && (
+                <span className="ml-1.5 text-[10.5px] font-bold text-amber-700 bg-amber-100 rounded-full px-1.5 py-0.5">
+                  기준본 업데이트 있음
+                </span>
+              )}
             </span>
             <div className="flex items-center gap-1.5">
+              {u.needsBaseUpdate && (
+                <button
+                  onClick={() => handleOpenUpdateDiff(u.id)}
+                  className="text-[11.5px] font-bold text-amber-700"
+                >
+                  변경 확인
+                </button>
+              )}
               <button
                 disabled={idx === 0}
                 onClick={() => handleMove(u.id, -1)}
@@ -301,6 +352,62 @@ export default function StudentCurriculumPanel({
                   );
                 })}
               </div>
+            </div>
+          )}
+
+          {updateDiffUnitId === u.id && (
+            <div className="mt-2.5 pt-2.5 border-t border-amber-200 bg-amber-50/50 -mx-4 -mb-3 px-4 py-3 rounded-b-xl">
+              {!updateDiff ? (
+                <p className="text-[12px] text-grey-500">변경 내용을 불러오는 중...</p>
+              ) : (
+                <>
+                  <div className="text-[11px] font-bold text-amber-700 uppercase tracking-wide mb-1.5">
+                    적용하면 이렇게 바뀝니다(학생이 직접 조정한 값은 그대로 유지됩니다)
+                  </div>
+                  {updateDiff.addedKeywordLabels.length === 0 &&
+                  updateDiff.removedKeywordLabels.length === 0 &&
+                  updateDiff.addedMaterialTitles.length === 0 &&
+                  updateDiff.removedMaterialTitles.length === 0 ? (
+                    <p className="text-[12px] text-grey-500 mb-2">
+                      기준본 버전은 갱신됐지만, 실제로 추가·제거될 항목은 없습니다.
+                    </p>
+                  ) : (
+                    <ul className="text-[12px] text-ink mb-2 space-y-0.5">
+                      {updateDiff.addedKeywordLabels.map((l) => (
+                        <li key={`add-kw-${l}`}>키워드: {l} 추가</li>
+                      ))}
+                      {updateDiff.removedKeywordLabels.map((l) => (
+                        <li key={`rm-kw-${l}`}>키워드: {l} 제거</li>
+                      ))}
+                      {updateDiff.addedMaterialTitles.map((l) => (
+                        <li key={`add-mat-${l}`}>교재: {l} 추가</li>
+                      ))}
+                      {updateDiff.removedMaterialTitles.map((l) => (
+                        <li key={`rm-mat-${l}`}>교재: {l} 제거</li>
+                      ))}
+                    </ul>
+                  )}
+                  <div className="flex gap-2">
+                    <button
+                      disabled={applyingUpdate}
+                      onClick={() => handleApplyUpdate(u.id)}
+                      className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
+                    >
+                      {applyingUpdate ? "적용 중..." : "적용"}
+                    </button>
+                    <button
+                      disabled={applyingUpdate}
+                      onClick={() => {
+                        setUpdateDiffUnitId(null);
+                        setUpdateDiff(null);
+                      }}
+                      className="text-[12px] font-semibold text-grey-500"
+                    >
+                      취소
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
           )}
         </div>

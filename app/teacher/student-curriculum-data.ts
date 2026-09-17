@@ -57,6 +57,7 @@ export async function loadEligibleLibrary(
       .from("subject_template_units")
       .select("id, position, unit_title")
       .eq("subject_id", subjectId)
+      .is("archived_at", null)
       .order("position", { ascending: true }),
     supabase
       .from("curriculum_docs")

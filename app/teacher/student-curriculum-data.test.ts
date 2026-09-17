@@ -11,6 +11,7 @@ function makeSupabaseMock(tables: Record<string, unknown[]>, single?: unknown) {
       const builder: {
         select: () => typeof builder;
         eq: () => typeof builder;
+        is: () => typeof builder;
         order: () => typeof builder;
         in: () => typeof builder;
         limit: () => typeof builder;
@@ -19,6 +20,7 @@ function makeSupabaseMock(tables: Record<string, unknown[]>, single?: unknown) {
       } = {
         select: () => builder,
         eq: () => builder,
+        is: () => builder,
         order: () => builder,
         in: () => builder,
         limit: () => builder,

@@ -23,6 +23,7 @@ const data: StudentCurriculum = {
       keywordIds: [],
     keywordLabels: [],
       materialDocIds: [],
+      needsBaseUpdate: false,
     },
     {
       id: "u2",
@@ -36,6 +37,7 @@ const data: StudentCurriculum = {
       keywordIds: [],
     keywordLabels: [],
       materialDocIds: [],
+      needsBaseUpdate: false,
     },
     {
       id: "u3",
@@ -49,6 +51,7 @@ const data: StudentCurriculum = {
       keywordIds: [],
     keywordLabels: [],
       materialDocIds: [],
+      needsBaseUpdate: false,
     },
   ],
 };
