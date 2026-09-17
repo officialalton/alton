@@ -110,6 +110,11 @@ function pickIntersectingLines(range: number, difficulty: LinearTwoVarDifficulty
     // 2026-09-17(checkFigure 실측) — 교점이 원점이면 라벨 P가 원점 표시 O·축과
     // 겹칠 자리밖에 없다("label_collision"). 원점 교점은 걸러 다시 고른다.
     if (x === 0 && y === 0) continue;
+    // 2026-09-17(checkFigure 실측, 300회 반복 스트레스 테스트에서 드물게 발견) —
+    // 교점이 좌표 범위의 가장자리에 붙으면(예: range=10인데 x=8·y=0) 축 눈금
+    // 숫자(예: "10")와 점 라벨 "P"가 놓일 자리가 겹칠 수 있다. 교점은 항상 축
+    // 가장자리에서 최소 2칸 안쪽에 있도록 한다.
+    if (Math.abs(x) > range - 2 || Math.abs(y) > range - 2) continue;
     if (Math.abs(b1) <= range && Math.abs(b2) <= range) return { m1, b1, m2, b2, x, y };
   }
   // 이론상 도달하지 않는다(위 구성 자체가 항상 정수해를 만든다) — 폴백만 둔다.
@@ -344,6 +349,12 @@ export function validateLinearTwoVarModel(model: LinearTwoVarModel): { ok: true 
     if (!onLine1 || !onLine2) return { ok: false, reason: "교점이 두 직선의 식과 일치하지 않습니다." };
     // 원점 교점은 그래프에서 라벨 P가 원점 표시 O·축과 겹칠 자리밖에 없다.
     if (model.intersection.x === 0 && model.intersection.y === 0) return { ok: false, reason: "교점이 원점이라 그래프에서 라벨을 놓을 자리가 없습니다." };
+    // 2026-09-17(checkFigure 실측) — 교점이 축 가장자리에 붙으면 눈금 숫자와 점
+    // 라벨이 겹칠 수 있다(defense-in-depth — 생성 단계에서도 이미 걸러진다).
+    const range = RANGE_BY_DIFFICULTY[model.difficulty];
+    if (Math.abs(model.intersection.x) > range - 2 || Math.abs(model.intersection.y) > range - 2) {
+      return { ok: false, reason: "교점이 축 가장자리에 가까워 그래프에서 라벨이 겹칠 수 있습니다." };
+    }
   }
   return { ok: true };
 }

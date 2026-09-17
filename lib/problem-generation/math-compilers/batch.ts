@@ -34,6 +34,11 @@ import {
   renderLinearFunctionProblem,
   validateLinearFunctionModel,
 } from "./linear-functions";
+import {
+  generateEquivalentExpressionsModel,
+  renderEquivalentExpressionsProblem,
+  validateEquivalentExpressionsModel,
+} from "./equivalent-expressions";
 
 // 2026-09-17(제품 오너 지시) — "같은 일차식 공통 엔진으로 확장". systems_linear(두
 // 일차방정식의 연립)은 수학적으로 linear_equations_two_var 컴파일러가 이미 계산하는
@@ -46,7 +51,8 @@ export type MathCompilerSkill =
   | "systems_linear"
   | "linear_inequalities"
   | "linear_equations_one_var"
-  | "linear_functions";
+  | "linear_functions"
+  | "equivalent_expressions";
 
 const MIN_BATCH = 10;
 const MAX_CANDIDATE_MULTIPLIER: Record<LinearTwoVarDifficulty, number> = { easy: 1.5, medium: 1.5, hard: 2.5 };
@@ -117,6 +123,11 @@ function attemptOne(
     const check = validateLinearFunctionModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
     compiled = renderLinearFunctionProblem(model);
+  } else if (skillCode === "equivalent_expressions") {
+    const model = generateEquivalentExpressionsModel({ difficulty });
+    const check = validateEquivalentExpressionsModel(model);
+    if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
+    compiled = renderEquivalentExpressionsProblem(model);
   } else {
     return { ok: false, reason: `지원하지 않는 계산형 유형: ${skillCode}` };
   }
