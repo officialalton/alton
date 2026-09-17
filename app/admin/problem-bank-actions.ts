@@ -720,6 +720,51 @@ export async function generateBankProblemsAction(params: {
   if (!subject) return { ok: false, error: "존재하지 않는 과목입니다." };
   if (subject.archived_at) return { ok: false, error: "보관된 과목에는 문제를 만들 수 없습니다." };
 
+  // 2026-09-17(제품 오너 지시, 전환 2단계) — "Linear equations in two variables"는
+  // 이제 AI가 아니라 결정적 계산 컴파일러가 만든다(정답·오답·그래프 좌표를 전부
+  // 코드로 계산). AI 호출이 아예 없으므로 ANTHROPIC_API_KEY 유무와 무관하게 동작한다.
+  const MATH_COMPILER_SKILLS = new Set(["linear_equations_two_var"]);
+  if (
+    params.skillCode && MATH_COMPILER_SKILLS.has(params.skillCode) &&
+    (params.difficulty === "easy" || params.difficulty === "medium" || params.difficulty === "hard")
+  ) {
+    const { runMathCompilerBatch } = await import("@/lib/problem-generation/math-compilers/batch");
+    const failures: string[] = [];
+    let created = 0;
+    const result = await runMathCompilerBatch({
+      skillCode: params.skillCode as "linear_equations_two_var",
+      difficulty: params.difficulty,
+      count: params.count,
+      onAccepted: async ({ problem: g, quality }) => {
+        const problem = await createBankProblemAction({
+          subjectId: params.subjectId, format: "mc", skillType: params.skillType, skillCode: params.skillCode,
+          examSystem: params.examSystem, apSubject: params.apSubject, topic: params.topic, difficulty: params.difficulty, keywordIds: params.keywordIds,
+        });
+        if (!problem.ok) { failures.push(problem.error); return; }
+        const draft = await createDraftVersionAction({
+          problemId: problem.value, passage: g.stimulus ?? g.passage, question: g.question ?? null, options: g.options ?? null, correctIndex: g.correctIndex ?? null,
+          explanation: g.explanation, difficulty: params.difficulty, figure: g.figure ?? null,
+        });
+        if (!draft.ok) {
+          failures.push(draft.error);
+          await admin.from("problems").update({ archived_at: new Date().toISOString() }).eq("id", problem.value);
+          return;
+        }
+        const { error: qErr } = await admin.rpc("set_problem_quality", { p_version_id: draft.value.versionId, p_quality: quality });
+        if (qErr) console.error("[problem-bank] 품질 기록 실패(계산형):", qErr.message);
+        created += 1;
+      },
+    });
+    failures.push(...result.failures.filter((f) => !f.resolved).map((f) => f.reason));
+    if (created === 0) {
+      return { ok: false, error: `문제를 생성하지 못했습니다.${failures.length ? ` ${failures[0]}` : ""}` };
+    }
+    return {
+      ok: true,
+      value: { created, failures, requested: result.stats.requested, shortfall: result.stats.shortfall, stoppedReason: result.stats.stoppedReason },
+    };
+  }
+
   // AI 키가 없는 환경(예: 키를 심지 않은 Preview)에서 "생성하지 못했습니다"만
   // 돌려주면 관리자가 무엇을 해야 할지 알 수 없다. 설정 누락은 내부 오류가 아니라
   // 사람이 조치할 수 있는 사실이므로 구분해서 말한다.
