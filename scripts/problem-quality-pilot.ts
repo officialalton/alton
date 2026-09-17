@@ -151,7 +151,8 @@ async function main() {
       saved += 1;
     }
 
-    const row: Row = { code: skill.code, requested: plan.count, accepted: result.accepted.length, held: result.held.length, saved, saveFailed, avgModelCalls: result.stats.modelCalls, failures };
+    // 2026-09-17 — '오답 보강 대기'는 새 생성 파이프라인에서 없앴다. 하위 호환으로 0 고정.
+    const row: Row = { code: skill.code, requested: plan.count, accepted: result.accepted.length, held: 0, saved, saveFailed, avgModelCalls: result.stats.modelCalls, failures };
     rows.push(row);
     const summary =
       `## ${skill.code} (${legacy?.label ?? skill.label})\n` +

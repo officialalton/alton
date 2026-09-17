@@ -64,7 +64,10 @@ async function main() {
       subjectName, skillType: legacy?.label ?? skill.label, skillCode: skill.code, examSystem,
       difficulty: plan.difficulty, format, count: plan.count, figurePolicy: figurePolicy as never,
     });
-    process.stderr.write(`   통과 ${result.accepted.length} · 대기(완화하면 통과) ${result.held.length}\n`);
+    // 2026-09-17 — '오답 보강 대기(held)' 경로는 새 생성 파이프라인에서 없앴다
+    // (제품 오너 지시: AI 생성의 정상 결과는 자동 통과 완성 후보뿐). 이 스크립트의
+    // needs_distractor_repair 표본 시딩 목적은 더 이상 유효하지 않다.
+    process.stderr.write(`   통과 ${result.accepted.length}\n`);
 
     const insertOne = async (g: (typeof result.accepted)[number]["problem"], quality: unknown, repairStatus: "none" | "needs_distractor_repair") => {
       const { data: problemId, error: pErr } = await admin.rpc("create_bank_problem", {
@@ -84,7 +87,6 @@ async function main() {
     };
 
     for (const a of result.accepted) { if (await insertOne(a.problem, a.quality, "none")) totalAccepted += 1; }
-    for (const h of result.held) { if (await insertOne(h.problem, h.quality, "needs_distractor_repair")) totalHeld += 1; }
   }
 
   process.stderr.write(`\n완료 — 통과(엄격 기준) ${totalAccepted}개, 보강 대기(완화하면 통과) ${totalHeld}개 저장.\n`);

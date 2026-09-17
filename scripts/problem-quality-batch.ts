@@ -55,8 +55,11 @@ async function main() {
       row.accepted = r.accepted.length;
       row.candidatesEvaluated = r.stats.candidatesEvaluated;
       row.firstPassCount = r.stats.firstPassCount;
-      row.held = r.stats.held;
-      row.heldOverflowDiscarded = r.stats.heldOverflowDiscarded;
+      // 2026-09-17 — '오답 보강 대기' 경로는 새 생성 파이프라인에서 없앴다(제품
+      // 오너 지시: AI 생성의 정상 결과는 자동 통과 완성 후보뿐). 이 리포트 필드는
+      // 하위 호환으로 0 고정.
+      row.held = 0;
+      row.heldOverflowDiscarded = 0;
       row.regenerated = r.stats.regenerated;
       row.resolved = r.stats.regenerationResolved;
       row.repairs = r.stats.distractorRepairs;

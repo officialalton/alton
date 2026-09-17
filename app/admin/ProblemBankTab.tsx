@@ -250,8 +250,15 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
               await reload();
               if (!result.ok) setError(result.error);
               else {
-                setNotice(`${result.value.created}개를 초안으로 만들었습니다. 내용을 확인한 뒤 공개하세요.${result.value.held ? ` ${result.value.held}개는 지문·질문·정답·자료는 통과했지만 오답 보강이 필요해 '오답 보강 대기'에 넣었습니다.` : ""}${result.value.failures.length ? ` ${result.value.failures.length}개는 계약(자료/지문·질문·답안·정답·해설)을 어겨 저장하지 않았습니다.` : ""}`);
-                if (result.value.failures.length) setError(`저장하지 않은 결과: ${result.value.failures.join(" / ")}`);
+                // 2026-09-17(제품 오너 지시) — 자동 통과 수/요청 수를 항상 분모로 보여준다.
+                // 부족분은 관리자가 고칠 대상이 아니라 그냥 "덜 만들어졌다"는 사실이다.
+                const { created, requested, shortfall } = result.value;
+                setNotice(
+                  `자동 통과 ${created}/${requested}` +
+                    (shortfall > 0 ? `, 부족 ${shortfall}` : "") +
+                    ". 통과한 것만 초안으로 저장했습니다 — 내용을 확인한 뒤 공개하세요."
+                );
+                if (result.value.failures.length) setError(`부족분 사유: ${result.value.failures.join(" / ")}`);
               }
             } catch {
               setError("문제를 생성하지 못했습니다.");

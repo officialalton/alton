@@ -110,7 +110,7 @@ beforeEach(() => {
   setProblemArchivedAction.mockResolvedValue({ ok: true });
   setProblemKeywordAction.mockResolvedValue({ ok: true });
   updateProblemMetaAction.mockResolvedValue({ ok: true });
-  generateBankProblemsAction.mockResolvedValue({ ok: true, value: { created: 3, failures: [] } });
+  generateBankProblemsAction.mockResolvedValue({ ok: true, value: { created: 3, failures: [], requested: 3, shortfall: 0, stoppedReason: "target_met" } });
 });
 
 /** 공개 탭으로 옮겨 첫 문제를 편다. 공개된 문제는 생성 탭에 없다. */
@@ -332,7 +332,7 @@ describe("공개는 내용을 본 뒤에만 — 검수 요청 단계는 없다",
     fireEvent.click(screen.getByText("AI로 만들기"));
 
     await waitFor(() =>
-      expect(screen.getByText(/3개를 초안으로 만들었습니다/)).toBeInTheDocument()
+      expect(screen.getByText(/자동 통과 3\/3/)).toBeInTheDocument()
     );
     expect(publishDraftAction).not.toHaveBeenCalled();
   });

@@ -26,20 +26,22 @@ export type PipelineParams = {
   /** 독립 검사를 끄고 싶을 때(테스트). 기본 켜짐. */
   skipReview?: boolean;
   /**
-   * 2026-09-17(UAT 지적) — 통과·대기 판정이 난 "즉시" 호출된다(같은 배치의 다른
-   * 문항이 아직 게이트를 통과하는 중이어도 기다리지 않는다). 호출자(서버 액션)가
-   * 여기서 바로 DB에 저장하면, 배치 안의 느린 문항 하나(재생성 반복 등) 때문에
-   * 서버 함수 시간 제한에 걸려 전체가 죽어도 이미 통과한 문항은 남는다 — 예전에는
-   * 파이프라인 전체가 끝나야만(Promise.all 완료) 저장을 시작해, 시간 제한에 걸리면
-   * 이미 통과한 것까지 전부 사라졌다.
+   * 2026-09-17(UAT 지적) — 통과 판정이 난 "즉시" 호출된다(같은 배치의 다른 문항이
+   * 아직 게이트를 통과하는 중이어도 기다리지 않는다). 호출자(서버 액션)가 여기서
+   * 바로 DB에 저장하면, 배치 안의 느린 문항 하나(재생성 반복 등) 때문에 서버 함수
+   * 시간 제한에 걸려 전체가 죽어도 이미 통과한 문항은 남는다.
    */
   onAccepted?: (item: Accepted) => Promise<void>;
-  onHeld?: (item: Held) => Promise<void>;
+  /**
+   * 2026-09-17(제품 오너 지시) — "AI 생성 문항의 정상 결과는 자동 검사를 모두
+   * 통과한 완성 후보뿐입니다." 오답만 걸린 문항을 '오답 보강 대기'로 저장해
+   * 관리자가 고치게 하던 경로는 새 생성 경로에서 없앤다. 오답 문제는 그냥 실패로
+   * 집계하고(failures), 상한 안에서 다른 후보로 대체한다 — 부족하면 부족한 대로
+   * 반환한다(held 로 개수를 채운 것처럼 보이게 하지 않는다).
+   */
 };
 
 export type Accepted = { problem: GeneratedProblem; quality: QualityRecord };
-/** 오답 부분 수정만으로 끝나지 않은 항목 — 지문·질문·정답·자료는 통과했다. 일반 초안이 아니라 별도 대기함으로 간다(2026-09-15). */
-export type Held = { problem: GeneratedProblem; quality: QualityRecord; reasons: string[] };
 export type Failure = {
   skillCode: string | null;
   stage: "generate" | "material" | "contract" | "review" | "regenerate";
@@ -48,19 +50,33 @@ export type Failure = {
   resolved: boolean;
   snippet: string;
 };
-// 2026-09-16(코드 검토 A) — accepted/held 는 검사한 최종 문항 객체를 함께 들고 다닌다.
+// 2026-09-16(코드 검토 A) — accepted 는 검사한 최종 문항 객체를 함께 들고 다닌다.
 // 재생성이 일어나면 그 최종본이 저장 후보가 되어야 하고, 호출부가 원본 g를 다시 쓰면 안 된다.
 type GateOutcome =
   | { kind: "accepted"; quality: QualityRecord; problem: GeneratedProblem }
-  | { kind: "held"; quality: QualityRecord; reasons: string[]; problem: GeneratedProblem }
   | { kind: "rejected" };
+/** 2026-09-17 — 유형·난이도별 상한(후보 수·문항당 최대 호출 수·배치 전체 벽시계 시간).
+ * 상한을 넘기면 즉시 종료하고 그때까지의 통과분만 반환한다 — 부족분을 채우겠다고
+ * 계속 재시도하다 서버 함수 시간 제한에 배치 전체가 죽는 것을 막는다. */
+export type PipelineCaps = {
+  /** 요청 수 대비 최대 후보 생성 배수(예: 어려움 2.0, 보통·쉬움 1.5). */
+  maxCandidateMultiplier: number;
+  /** 문항 하나(재생성·부분수정·재검사 전부 포함)당 최대 모델 호출 수. */
+  maxModelCallsPerItem: number;
+  /** 배치 전체 최대 벽시계 시간(ms) — Vercel 함수 시간 제한보다 여유 있게 짧아야 한다. */
+  maxWallClockMs: number;
+};
+export const DEFAULT_PIPELINE_CAPS: Record<ProblemDifficulty, PipelineCaps> = {
+  easy: { maxCandidateMultiplier: 1.5, maxModelCallsPerItem: 8, maxWallClockMs: 200_000 },
+  medium: { maxCandidateMultiplier: 1.5, maxModelCallsPerItem: 8, maxWallClockMs: 200_000 },
+  hard: { maxCandidateMultiplier: 2.5, maxModelCallsPerItem: 12, maxWallClockMs: 240_000 },
+};
 export type PipelineResult = {
   accepted: Accepted[];
-  held: Held[];
   failures: Failure[];
   stats: {
     requested: number; generated: number; accepted: number; regenerated: number; regenerationResolved: number; refilled: number;
-    distractorRepairs: number; distractorRepairsResolved: number; fieldRepairs: number; fieldRepairsResolved: number; held: number;
+    distractorRepairs: number; distractorRepairsResolved: number; fieldRepairs: number; fieldRepairsResolved: number;
     /** 문항 하나당 평균 모델 호출 수(생성 1 + 자료·재생성·부분수정·독립검사 전부 포함) — 보고용. */
     modelCalls: number;
     /** 계약·독립검사 모두 한 번에 통과해 어떤 보정도 필요 없었던 문항 수(2026-09-15: 첫 생성 통과율 분리 보고). */
@@ -71,10 +87,12 @@ export type PipelineResult = {
     emptyResponses: { cause: string; retried: boolean; resolved: boolean }[];
     /** 요청 수보다 적게 반환된 경우 유형·사유 기록(2026-09-15). */
     underReturned: { requested: number; returned: number; reason: string }[];
-    /** 보강 대기 한도(요청 수) 초과로 폐기된 후보 수. */
-    heldOverflowDiscarded: number;
     /** 정답 자리와 해설의 결론이 달라 정답 자리를 해설 쪽으로 맞춘 횟수(2026-09-15). */
     answerExplanationFixes: number;
+    /** 요청 수 대비 부족 수(0이면 목표 달성). */
+    shortfall: number;
+    /** 왜 목표에 못 미친 채로 끝났는지 — 상한에 걸렸는지, 후보가 계속 실패했는지. */
+    stoppedReason: "target_met" | "candidate_cap" | "time_cap" | "no_more_candidates";
     /** 2026-09-17(UAT 지적 — "목표 60초/문항인데 실제는 훨씬 오래 걸린다") — 단계별
      * 누적 소요(ms). 어느 모델 호출이 실제 병목인지 실측하려고 추가했다. */
     timeMs: {
@@ -126,19 +144,30 @@ async function mapWithConcurrency<T, R>(items: T[], limit: number, fn: (item: T)
 export async function runGenerationPipeline(params: PipelineParams): Promise<PipelineResult> {
   const pipelineStart = Date.now();
   const requested = Math.max(1, Math.min(10, params.count));
+  const caps = DEFAULT_PIPELINE_CAPS[params.difficulty];
+  // 2026-09-17 — 후보군 상한은 요청 수 배수로 정한다("어려움은 최소 2배 후보군").
+  const maxCandidates = Math.max(requested + 1, Math.ceil(requested * caps.maxCandidateMultiplier));
+  const maxModelCallsTotal = requested * caps.maxModelCallsPerItem;
   const accepted: Accepted[] = [];
   const failures: Failure[] = [];
   const stats = {
     requested, generated: 0, accepted: 0, regenerated: 0, regenerationResolved: 0, refilled: 0, distractorRepairs: 0, distractorRepairsResolved: 0,
-    fieldRepairs: 0, fieldRepairsResolved: 0, held: 0, modelCalls: 0, firstPassCount: 0, candidatesEvaluated: 0,
+    fieldRepairs: 0, fieldRepairsResolved: 0, modelCalls: 0, firstPassCount: 0, candidatesEvaluated: 0,
     emptyResponses: [] as { cause: string; retried: boolean; resolved: boolean }[],
     underReturned: [] as { requested: number; returned: number; reason: string }[],
-    heldOverflowDiscarded: 0,
     answerExplanationFixes: 0,
+    shortfall: requested,
+    stoppedReason: "no_more_candidates" as PipelineResult["stats"]["stoppedReason"],
     timeMs: { total: 0, generate: 0, figure: 0, contractRepair: 0, answerExplanationCheck: 0, review: 0, regenerate: 0 },
   };
-  const held: Held[] = [];
   const countCall = () => { stats.modelCalls += 1; };
+  // 상한(후보 수 / 총 호출 수 / 벽시계 시간) 중 하나라도 넘겼는지 — 넘겼으면 더 시도하지 않고 즉시 종료한다.
+  const capExceeded = (): "candidate_cap" | "time_cap" | null => {
+    if (stats.candidatesEvaluated >= maxCandidates) return "candidate_cap";
+    if (stats.modelCalls >= maxModelCallsTotal) return "candidate_cap";
+    if (Date.now() - pipelineStart >= caps.maxWallClockMs) return "time_cap";
+    return null;
+  };
   // 2026-09-17 — 단계 하나를 재고, 그 단계 자체가 재귀(재생성 → 다시 gate())를
   // 타는 경우 이중으로 잡히지 않도록 각 타이머는 자기 구간만 잰다.
   const timed = async <T>(bucket: keyof typeof stats.timeMs, fn: () => Promise<T>): Promise<T> => {
@@ -324,7 +353,6 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
     })); };
     let review: IndependentReview | null = null;
     let secondReviewDisagreedFirst = false;
-    let heldReasons: string[] | null = null;
     if (!params.skipReview) {
       try {
         review = await runReview();
@@ -398,14 +426,12 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
           review = reReview;
           issues = classifyReviewIssues(reReview, params.difficulty, params.format);
         }
+        // 2026-09-17(제품 오너 지시) — "AI 생성 문항의 정상 결과는 자동 검사를
+        // 모두 통과한 완성 후보뿐입니다." 예전에는 오답 지적이 1~2개뿐이면
+        // '오답 보강 대기'로 살려 관리자가 고치게 했다 — 그 경로를 없앤다. 남은
+        // 지적이 무엇이든 그대로 실패로 집계하고 다른 후보로 대체한다.
         if (issues.reasons.length) {
-          // 보강 대기는 좁게 운영한다(2026-09-15): 지문·질문·정답·자료 계약과 독립 풀이 검사는 통과했고,
-          // 남은 실패가 정확히 오답 하나 또는 둘뿐일 때만 대기함으로 보낸다. 그 밖은 전부 폐기(사유만 집계, 저장 안 함).
-          if (!issues.hasStructuralIssue && issues.distractorTargets.length >= 1 && issues.distractorTargets.length <= 2) {
-            heldReasons = issues.reasons;
-          } else {
-            return fail("review", issues.reasons.join(" / "));
-          }
+          return fail("review", issues.reasons.join(" / "));
         }
       }
     }
@@ -423,7 +449,6 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
     }
     if (review && review.estimatedDifficulty !== params.difficulty) needsReviewReasons.push(`요청 난이도(${params.difficulty})와 추정 난이도(${review.estimatedDifficulty})가 다릅니다`);
     if (params.format === "mc" && distractors.length < 3) needsReviewReasons.push("오답 근거가 셋 미만입니다");
-    if (heldReasons) needsReviewReasons.push(...heldReasons);
     const quality: QualityRecord = {
       contract: { ok: true, issues: [] },
       estimatedDifficulty: review?.estimatedDifficulty ?? params.difficulty,
@@ -431,7 +456,7 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
       difficultyReasons: review?.difficultyReasons.length ? review.difficultyReasons : g.difficultyRationale ? [g.difficultyRationale] : [],
       distractors,
       independentReview: review ? { pickedIndex: review.pickedIndex, pickedAnswer: review.pickedAnswer, agrees: review.agrees, confidence: review.confidence, flags: review.flags } : { pickedIndex: null, pickedAnswer: null, agrees: false, confidence: "low", flags: ["미실행"] },
-      needsReview: needsReviewReasons.length > 0 || heldReasons !== null,
+      needsReview: needsReviewReasons.length > 0,
       needsReviewReasons,
       calibrated: false,
       reviewedAt: new Date().toISOString(),
@@ -442,11 +467,6 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
     // record()를 돌렸다 — 그러면 배치 안의 느린 문항 하나가 서버 함수 시간
     // 제한에 걸려 죽을 때, 이미 통과해 있던 다른 문항까지 전부 저장 못 하고
     // 사라졌다.
-    if (heldReasons) {
-      const outcome: GateOutcome = { kind: "held", quality, reasons: heldReasons, problem: g };
-      await record(outcome);
-      return outcome;
-    }
     if (!usedCorrection) stats.firstPassCount += 1;
     const outcome: GateOutcome = { kind: "accepted", quality, problem: g };
     await record(outcome);
@@ -469,14 +489,6 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
       // 끝났는지"로 어디서 시간이 새는지 특정할 수 있다).
       console.log(JSON.stringify({ event: "problem_generation_item_accepted", elapsedMs: Date.now() - pipelineStart, acceptedSoFar: stats.accepted }));
       await params.onAccepted?.(item);
-    } else if (outcome.kind === "held") {
-      // 보강 대기는 한 번의 요청에서 요청 수를 넘길 수 없다(2026-09-15: 목표는 대기함이 요청 수의 10% 이하).
-      if (held.length >= requested) { stats.heldOverflowDiscarded += 1; return; }
-      const item: Held = { problem: outcome.problem, quality: outcome.quality, reasons: outcome.reasons };
-      held.push(item);
-      stats.held += 1;
-      console.log(JSON.stringify({ event: "problem_generation_item_held", elapsedMs: Date.now() - pipelineStart, heldSoFar: stats.held }));
-      await params.onHeld?.(item);
     }
   };
 
@@ -539,10 +551,17 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
   // record()는 이제 gate()/attemptStagedOne 안에서 각 문항이 판정 나는 즉시 호출된다
   // (위 참고) — 여기서는 결과를 기다리기만 한다. 두 번 기록하지 않도록 record()를
   // 다시 호출하지 않는다.
+  // 2026-09-17(제품 오너 지시) — "상한 안에 N개를 채우지 못하면 즉시 종료"한다.
+  // 예전에는 고정 2라운드까지 무조건 재시도했다 — 후보가 계속 실패하면(예: 오답
+  // 품질) 라운드마다 시간만 쓰고 300초 제한까지 실행됐다. 이제 후보 수·모델 호출
+  // 수·벽시계 시간 중 하나라도 상한을 넘기면 그 자리에서 멈춘다.
   if (isRiskyMath) {
     await mapWithConcurrency(Array.from({ length: initialCount }), GATE_CONCURRENCY, attemptStagedOne);
-    for (let round = 0; stats.accepted < requested && round < 2; round += 1) {
-      const refillCount = Math.min(10, requested - stats.accepted + 1);
+    while (stats.accepted < requested) {
+      const exceeded = capExceeded();
+      if (exceeded) { stats.stoppedReason = exceeded; break; }
+      const refillCount = Math.min(10, requested - stats.accepted + 1, maxCandidates - stats.candidatesEvaluated);
+      if (refillCount <= 0) { stats.stoppedReason = "candidate_cap"; break; }
       await mapWithConcurrency(Array.from({ length: refillCount }), GATE_CONCURRENCY, attemptStagedOne);
       stats.refilled += refillCount;
     }
@@ -551,9 +570,12 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
     stats.generated += generated.length;
     await mapWithConcurrency(generated, GATE_CONCURRENCY, (g) => gate(g, 0));
 
-    // 부족하면 최대 두 번 더 채운다(각 청크가 개별적으로 빈 응답을 견디므로 재시도가 안전하다). 라운드 안에서는 병렬 처리.
-    for (let round = 0; stats.accepted < requested && round < 2; round += 1) {
-      const refillCount = Math.min(10, requested - stats.accepted + (params.difficulty === "hard" ? 1 : 0));
+    // 부족하면 상한 안에서 계속 채운다(각 청크가 개별적으로 빈 응답을 견디므로 재시도가 안전하다). 라운드 안에서는 병렬 처리.
+    while (stats.accepted < requested) {
+      const exceeded = capExceeded();
+      if (exceeded) { stats.stoppedReason = exceeded; break; }
+      const refillCount = Math.min(10, requested - stats.accepted + (params.difficulty === "hard" ? 1 : 0), maxCandidates - stats.candidatesEvaluated);
+      if (refillCount <= 0) { stats.stoppedReason = "candidate_cap"; break; }
       const refill = await generate(refillCount);
       stats.generated += refill.length;
       stats.refilled += refill.length;
@@ -563,15 +585,17 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
   // 오버샘플링·병렬 처리로 요청보다 많이 통과할 수 있다 — 초과분은 잘라내되(요청 수만 채택), 후보 수엔 그대로 반영한다.
   if (accepted.length > requested) accepted.length = requested;
   stats.accepted = accepted.length;
+  stats.shortfall = requested - stats.accepted;
+  if (stats.shortfall === 0) stats.stoppedReason = "target_met";
   if (stats.accepted < requested) stats.underReturned.push({ requested, returned: stats.accepted, reason: "게이트 통과분이 요청 수 미달" });
-  // 평균 모델 호출 수 — 생성·자료·재생성·부분수정·독립검사를 통틀어, 실제로 뭔가를 얻은 문항(통과+대기) 하나당.
-  const totalOutputs = stats.accepted + stats.held;
+  // 평균 모델 호출 수 — 생성·자료·재생성·부분수정·독립검사를 통틀어, 실제로 통과한 문항 하나당.
+  const totalOutputs = stats.accepted;
   const avgModelCalls = totalOutputs > 0 ? Math.round((stats.modelCalls / totalOutputs) * 100) / 100 : stats.modelCalls;
   stats.timeMs.total = Date.now() - pipelineStart;
   const finalStats = { ...stats, modelCalls: avgModelCalls };
   // 2026-09-17(UAT 지적 — "목표 60초/문항인데 실제는 훨씬 오래 걸린다") — 성공 여부와
   // 무관하게 항상 단계별 소요를 남긴다. 실패로 끝나 로그를 못 보는 경우를 없앤다
   // (Vercel 함수 로그에서 이 한 줄로 실제 병목 단계를 바로 특정할 수 있다).
-  console.log(JSON.stringify({ event: "problem_generation_pipeline_timing", requested, accepted: stats.accepted, held: stats.held, timeMs: stats.timeMs }));
-  return { accepted, held, failures, stats: finalStats };
+  console.log(JSON.stringify({ event: "problem_generation_pipeline_timing", requested, accepted: stats.accepted, shortfall: stats.shortfall, stoppedReason: stats.stoppedReason, timeMs: stats.timeMs }));
+  return { accepted, failures, stats: finalStats };
 }
