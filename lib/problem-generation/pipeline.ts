@@ -25,6 +25,16 @@ export type PipelineParams = {
   figurePolicy?: FigurePolicy;
   /** 독립 검사를 끄고 싶을 때(테스트). 기본 켜짐. */
   skipReview?: boolean;
+  /**
+   * 2026-09-17(UAT 지적) — 통과·대기 판정이 난 "즉시" 호출된다(같은 배치의 다른
+   * 문항이 아직 게이트를 통과하는 중이어도 기다리지 않는다). 호출자(서버 액션)가
+   * 여기서 바로 DB에 저장하면, 배치 안의 느린 문항 하나(재생성 반복 등) 때문에
+   * 서버 함수 시간 제한에 걸려 전체가 죽어도 이미 통과한 문항은 남는다 — 예전에는
+   * 파이프라인 전체가 끝나야만(Promise.all 완료) 저장을 시작해, 시간 제한에 걸리면
+   * 이미 통과한 것까지 전부 사라졌다.
+   */
+  onAccepted?: (item: Accepted) => Promise<void>;
+  onHeld?: (item: Held) => Promise<void>;
 };
 
 export type Accepted = { problem: GeneratedProblem; quality: QualityRecord };
@@ -400,22 +410,42 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
       calibrated: false,
       reviewedAt: new Date().toISOString(),
     };
-    if (heldReasons) return { kind: "held", quality, reasons: heldReasons, problem: g };
+    // 2026-09-17(UAT 지적) — 판정이 난 즉시(이 함수를 호출한 배치의 다른 문항이
+    // 아직 게이트 중이어도 기다리지 않고) 기록·저장한다. 예전에는 이 outcome을
+    // 그대로 반환만 하고, 호출자가 배치 전체(Promise.all)가 끝난 뒤에야 한꺼번에
+    // record()를 돌렸다 — 그러면 배치 안의 느린 문항 하나가 서버 함수 시간
+    // 제한에 걸려 죽을 때, 이미 통과해 있던 다른 문항까지 전부 저장 못 하고
+    // 사라졌다.
+    if (heldReasons) {
+      const outcome: GateOutcome = { kind: "held", quality, reasons: heldReasons, problem: g };
+      await record(outcome);
+      return outcome;
+    }
     if (!usedCorrection) stats.firstPassCount += 1;
-    return { kind: "accepted", quality, problem: g };
+    const outcome: GateOutcome = { kind: "accepted", quality, problem: g };
+    await record(outcome);
+    return outcome;
   };
 
   // 어려움은 오답·정답 기준이 엄격해 통과율이 낮다 — 요청보다 넉넉히 만들어 통과분만 채택한다(2026-09-15 제품 오너: "생성 수가 적으면 안 된다").
   const initialCount = params.difficulty === "hard" ? Math.min(10, requested + Math.min(2, requested)) : requested;
-  const record = (outcome: GateOutcome) => {
+  const record = async (outcome: GateOutcome) => {
     stats.candidatesEvaluated += 1;
     // 2026-09-16(코드 검토 A) — outcome.problem 은 재생성·부분 수정을 거친 뒤 실제로 검사한 최종 객체다.
     // 원본 후보(g)를 다시 쓰면 "검사한 문항과 저장되는 문항이 다를 수 있다"는 결함이 재발한다.
-    if (outcome.kind === "accepted") { accepted.push({ problem: outcome.problem, quality: outcome.quality }); stats.accepted += 1; }
-    else if (outcome.kind === "held") {
+    if (outcome.kind === "accepted") {
+      if (accepted.length >= requested) return; // 이미 채택 목표를 채웠으면 더 저장하지 않는다.
+      const item: Accepted = { problem: outcome.problem, quality: outcome.quality };
+      accepted.push(item);
+      stats.accepted += 1;
+      await params.onAccepted?.(item);
+    } else if (outcome.kind === "held") {
       // 보강 대기는 한 번의 요청에서 요청 수를 넘길 수 없다(2026-09-15: 목표는 대기함이 요청 수의 10% 이하).
       if (held.length >= requested) { stats.heldOverflowDiscarded += 1; return; }
-      held.push({ problem: outcome.problem, quality: outcome.quality, reasons: outcome.reasons }); stats.held += 1;
+      const item: Held = { problem: outcome.problem, quality: outcome.quality, reasons: outcome.reasons };
+      held.push(item);
+      stats.held += 1;
+      await params.onHeld?.(item);
     }
   };
 
@@ -475,20 +505,20 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
     return null;
   };
 
+  // record()는 이제 gate()/attemptStagedOne 안에서 각 문항이 판정 나는 즉시 호출된다
+  // (위 참고) — 여기서는 결과를 기다리기만 한다. 두 번 기록하지 않도록 record()를
+  // 다시 호출하지 않는다.
   if (isRiskyMath) {
-    const outcomes1 = await mapWithConcurrency(Array.from({ length: initialCount }), GATE_CONCURRENCY, attemptStagedOne);
-    for (const o of outcomes1) if (o) record(o.outcome);
+    await mapWithConcurrency(Array.from({ length: initialCount }), GATE_CONCURRENCY, attemptStagedOne);
     for (let round = 0; stats.accepted < requested && round < 2; round += 1) {
       const refillCount = Math.min(10, requested - stats.accepted + 1);
-      const outcomes2 = await mapWithConcurrency(Array.from({ length: refillCount }), GATE_CONCURRENCY, attemptStagedOne);
-      for (const o of outcomes2) if (o) record(o.outcome);
+      await mapWithConcurrency(Array.from({ length: refillCount }), GATE_CONCURRENCY, attemptStagedOne);
       stats.refilled += refillCount;
     }
   } else {
     const generated = await generate(initialCount);
     stats.generated += generated.length;
-    const initialOutcomes = await mapWithConcurrency(generated, GATE_CONCURRENCY, (g) => gate(g, 0));
-    initialOutcomes.forEach((outcome) => record(outcome));
+    await mapWithConcurrency(generated, GATE_CONCURRENCY, (g) => gate(g, 0));
 
     // 부족하면 최대 두 번 더 채운다(각 청크가 개별적으로 빈 응답을 견디므로 재시도가 안전하다). 라운드 안에서는 병렬 처리.
     for (let round = 0; stats.accepted < requested && round < 2; round += 1) {
@@ -496,8 +526,7 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
       const refill = await generate(refillCount);
       stats.generated += refill.length;
       stats.refilled += refill.length;
-      const outcomes = await mapWithConcurrency(refill, GATE_CONCURRENCY, (g) => gate(g, 0));
-      outcomes.forEach((outcome) => record(outcome));
+      await mapWithConcurrency(refill, GATE_CONCURRENCY, (g) => gate(g, 0));
     }
   }
   // 오버샘플링·병렬 처리로 요청보다 많이 통과할 수 있다 — 초과분은 잘라내되(요청 수만 채택), 후보 수엔 그대로 반영한다.

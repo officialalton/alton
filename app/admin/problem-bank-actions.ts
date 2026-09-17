@@ -6,6 +6,7 @@ import { checkContent } from "@/lib/problem-content-check";
 import { composeProblemText, hasQuestion, splitLegacyQuestion } from "@/lib/problem-question";
 import { judgeMaterialNeed, materialBlocker } from "@/lib/problem-material-need";
 import type { QualityRecord } from "@/lib/problem-generation/review";
+import type { GeneratedProblem } from "@/lib/problem-generation/pipeline";
 
 import { requireAdmin } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
@@ -729,7 +730,44 @@ export async function generateBankProblemsAction(params: {
     };
   }
 
-  // 생성 → 자료 → 유형별 품질 계약 → 독립 품질 검사 → 통과분만(2026-09-15). 걸린 결과는 사유 피드백으로 1회 재생성. 저장은 여기서.
+  // 2026-09-17(UAT 지적) — 예전에는 파이프라인 전체(모든 문항의 Promise.all)가
+  // 끝난 뒤에야 이 함수가 DB에 저장을 시작했다. 배치 안의 느린 문항 하나(재생성
+  // 반복 등)가 서버 함수 시간 제한(300초)에 걸려 통째로 죽으면, 이미 게이트를
+  // 통과해 있던 다른 문항까지 전부 저장되지 못하고 사라졌다 — "여러 개가 이유
+  // 없이 실패"로 보인 원인. 이제 파이프라인이 문항 하나가 판정 나는 즉시
+  // onAccepted/onHeld를 불러 그 자리에서 저장한다. 그러면 나머지가 아직 게이트
+  // 중이어도, 혹은 그러다 결국 시간 제한에 걸려도, 이미 저장된 문항은 남는다.
+  const failures: string[] = [];
+  let created = 0;
+  let held = 0;
+
+  async function persistProblem(
+    g: GeneratedProblem,
+    quality: QualityRecord,
+    repairStatus?: "needs_distractor_repair"
+  ): Promise<void> {
+    const problem = await createBankProblemAction({
+      subjectId: params.subjectId, format: params.format, skillType: params.skillType, skillCode: params.skillCode,
+      examSystem: params.examSystem, apSubject: params.apSubject, topic: params.topic, difficulty: params.difficulty, keywordIds: params.keywordIds,
+    });
+    if (!problem.ok) { failures.push(problem.error); return; }
+    const draft = await createDraftVersionAction({
+      problemId: problem.value, passage: g.stimulus ?? g.passage, question: g.question ?? null, options: g.options ?? null, correctIndex: g.correctIndex ?? null,
+      explanation: g.explanation, difficulty: params.difficulty, answers: g.answers ?? null, figure: g.figure ?? null, statements: g.statements ?? null,
+      ...(repairStatus ? { repairStatus } : {}),
+    });
+    if (!draft.ok) {
+      // 초안을 저장하지 못한 결과는 분리한다 — 빈 문제가 '질문 없는 초안'으로 남지 않게 바로 보관한다(삭제 아님).
+      failures.push(draft.error);
+      await admin.from("problems").update({ archived_at: new Date().toISOString() }).eq("id", problem.value);
+      return;
+    }
+    const { error: qErr } = await admin.rpc("set_problem_quality", { p_version_id: draft.value.versionId, p_quality: quality });
+    if (qErr) console.error("[problem-bank] 품질 기록 실패:", qErr.message);
+    if (repairStatus) held += 1; else created += 1;
+  }
+
+  // 생성 → 자료 → 유형별 품질 계약 → 독립 품질 검사 → 통과분만(2026-09-15). 걸린 결과는 사유 피드백으로 1회 재생성.
   const { runGenerationPipeline } = await import("@/lib/problem-generation/pipeline");
   const result = await runGenerationPipeline({
     subjectName: subject.name as string,
@@ -741,48 +779,11 @@ export async function generateBankProblemsAction(params: {
     format: params.format as never,
     count: params.count,
     figurePolicy: (params.figurePolicy as never) ?? "optional",
+    onAccepted: async ({ problem: g, quality }) => { await persistProblem(g, quality); },
+    // 오답만 걸린 결과 — 지문·질문·정답·자료는 통과했다. 일반 초안이 아니라 '오답 보강 대기'로 저장한다(2026-09-15 제품 오너).
+    onHeld: async ({ problem: g, quality }) => { await persistProblem(g, quality, "needs_distractor_repair"); },
   });
-  const failures: string[] = result.failures.filter((f) => !f.resolved).map((f) => `${f.snippet} — ${f.reason}`);
-  let created = 0;
-  for (const { problem: g, quality } of result.accepted) {
-    const problem = await createBankProblemAction({
-      subjectId: params.subjectId, format: params.format, skillType: params.skillType, skillCode: params.skillCode,
-      examSystem: params.examSystem, apSubject: params.apSubject, topic: params.topic, difficulty: params.difficulty, keywordIds: params.keywordIds,
-    });
-    if (!problem.ok) { failures.push(problem.error); continue; }
-    const draft = await createDraftVersionAction({
-      problemId: problem.value, passage: g.stimulus ?? g.passage, question: g.question ?? null, options: g.options ?? null, correctIndex: g.correctIndex ?? null,
-      explanation: g.explanation, difficulty: params.difficulty, answers: g.answers ?? null, figure: g.figure ?? null, statements: g.statements ?? null,
-    });
-    if (!draft.ok) {
-      // 초안을 저장하지 못한 결과는 분리한다 — 빈 문제가 '질문 없는 초안'으로 남지 않게 바로 보관한다(삭제 아님).
-      failures.push(draft.error);
-      await admin.from("problems").update({ archived_at: new Date().toISOString() }).eq("id", problem.value);
-      continue;
-    }
-    const { error: qErr } = await admin.rpc("set_problem_quality", { p_version_id: draft.value.versionId, p_quality: quality });
-    if (qErr) console.error("[problem-bank] 품질 기록 실패:", qErr.message);
-    created += 1;
-  }
-
-  // 오답만 걸린 결과 — 지문·질문·정답·자료는 통과했다. 일반 초안이 아니라 '오답 보강 대기'로 저장한다(2026-09-15 제품 오너).
-  let held = 0;
-  for (const { problem: g, quality } of result.held) {
-    const problem = await createBankProblemAction({
-      subjectId: params.subjectId, format: params.format, skillType: params.skillType, skillCode: params.skillCode,
-      examSystem: params.examSystem, apSubject: params.apSubject, topic: params.topic, difficulty: params.difficulty, keywordIds: params.keywordIds,
-    });
-    if (!problem.ok) { failures.push(problem.error); continue; }
-    const draft = await createDraftVersionAction({
-      problemId: problem.value, passage: g.stimulus ?? g.passage, question: g.question ?? null, options: g.options ?? null, correctIndex: g.correctIndex ?? null,
-      explanation: g.explanation, difficulty: params.difficulty, answers: g.answers ?? null, figure: g.figure ?? null, statements: g.statements ?? null,
-      repairStatus: "needs_distractor_repair",
-    });
-    if (!draft.ok) { failures.push(draft.error); await admin.from("problems").update({ archived_at: new Date().toISOString() }).eq("id", problem.value); continue; }
-    const { error: qErr } = await admin.rpc("set_problem_quality", { p_version_id: draft.value.versionId, p_quality: quality });
-    if (qErr) console.error("[problem-bank] 품질 기록 실패(대기):", qErr.message);
-    held += 1;
-  }
+  failures.push(...result.failures.filter((f) => !f.resolved).map((f) => `${f.snippet} — ${f.reason}`));
 
   if (created === 0 && held === 0) {
     console.error("[problem-bank] AI 생성 결과를 저장하지 못했습니다:", failures, result.stats);
