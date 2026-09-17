@@ -204,22 +204,22 @@ export function renderLinearFunctionProblem(model: LinearFunctionModel): Compile
   }));
 
   if (model.questionKind === "evaluate") {
-    const passage = `일차함수 ${fx(model.m, model.b)}가 있다.`;
-    const question = `f(${fmt(model.x0!)})의 값은?`;
+    const passage = `The function f is defined by ${fx(model.m, model.b)}.`;
+    const question = `What is f(${fmt(model.x0!)})?`;
     const explanation = `f(${fmt(model.x0!)}) = ${fmt(model.m)} × ${fmt(model.x0!)} ${model.b >= 0 ? "+" : "-"} ${fmt(Math.abs(model.b))} = ${model.correctAnswer}이다.`;
     return { passage, question, options: shuffled, correctIndex, explanation, figure: null, distractorRationales };
   }
 
   if (model.questionKind === "find_x_for_value") {
-    const passage = `일차함수 ${fx(model.m, model.b)}가 있다.`;
-    const question = `f(x) = ${fmt(model.target!)}일 때, x의 값은?`;
+    const passage = `The function f is defined by ${fx(model.m, model.b)}.`;
+    const question = `For what value of x does f(x) = ${fmt(model.target!)}?`;
     const explanation = `${fmt(model.m)}x ${model.b >= 0 ? "+" : "-"} ${fmt(Math.abs(model.b))} = ${fmt(model.target!)}에서 상수항을 이항하면 ${fmt(model.m)}x = ${fmt(model.target! - model.b)}이므로 x = ${fmt(model.target! - model.b)} ÷ ${fmt(model.m)} = ${model.correctAnswer}이다.`;
     return { passage, question, options: shuffled, correctIndex, explanation, figure: null, distractorRationales };
   }
 
   const { p1, p2 } = model;
-  const passage = `일차함수 f는 두 점 (${fmt(p1!.x)}, ${fmt(p1!.y)})과 (${fmt(p2!.x)}, ${fmt(p2!.y)})을 지난다.`;
-  const question = "이 함수의 기울기는?";
+  const passage = `In the xy-plane, line f passes through the points (${fmt(p1!.x)}, ${fmt(p1!.y)}) and (${fmt(p2!.x)}, ${fmt(p2!.y)}).`;
+  const question = "What is the slope of line f?";
   const dy = p2!.y - p1!.y;
   const dx = p2!.x - p1!.x;
   const explanation = `기울기는 (y의 변화량) ÷ (x의 변화량) = (${fmt(dy)}) ÷ (${fmt(dx)}) = ${model.correctAnswer}이다.`;

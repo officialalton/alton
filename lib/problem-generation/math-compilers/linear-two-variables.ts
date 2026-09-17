@@ -217,11 +217,11 @@ export function generateLinearTwoVarModel(params: {
         skillCode: "linear_equations_two_var", difficulty: params.difficulty, questionKind,
         m1: lines.m1, b1: lines.b1, m2: lines.m2, b2: lines.b2, systemKind: "one_solution",
         intersection: { x: lines.x, y: lines.y },
-        correctAnswer: "정확히 하나",
+        correctAnswer: "Exactly one",
         distractors: [
-          { value: "없음", kind: "condition_ignored", reason: "두 직선이 평행(기울기 같음, 절편 다름)이라고 착각했다." },
-          { value: "무한히 많음", kind: "condition_ignored", reason: "두 식이 같은 직선이라고 착각했다." },
-          { value: "정확히 둘", kind: "other", reason: "일차식 두 개의 교점이 여러 개일 수 있다고 착각했다." },
+          { value: "No solution", kind: "condition_ignored", reason: "두 직선이 평행(기울기 같음, 절편 다름)이라고 착각했다." },
+          { value: "Infinitely many", kind: "condition_ignored", reason: "두 식이 같은 직선이라고 착각했다." },
+          { value: "Exactly two", kind: "other", reason: "일차식 두 개의 교점이 여러 개일 수 있다고 착각했다." },
         ],
       };
     }
@@ -232,11 +232,11 @@ export function generateLinearTwoVarModel(params: {
       return {
         skillCode: "linear_equations_two_var", difficulty: params.difficulty, questionKind,
         m1, b1, m2: m1, b2, systemKind: "no_solution", intersection: null,
-        correctAnswer: "없음",
+        correctAnswer: "No solution",
         distractors: [
-          { value: "정확히 하나", kind: "condition_ignored", reason: "기울기가 같으면 항상 교점이 없다는 것을 놓쳤다." },
-          { value: "무한히 많음", kind: "condition_ignored", reason: "절편도 같다고 잘못 읽었다." },
-          { value: "정확히 둘", kind: "other", reason: "일차식 두 개의 교점이 여러 개일 수 있다고 착각했다." },
+          { value: "Exactly one", kind: "condition_ignored", reason: "기울기가 같으면 항상 교점이 없다는 것을 놓쳤다." },
+          { value: "Infinitely many", kind: "condition_ignored", reason: "절편도 같다고 잘못 읽었다." },
+          { value: "Exactly two", kind: "other", reason: "일차식 두 개의 교점이 여러 개일 수 있다고 착각했다." },
         ],
       };
     }
@@ -244,11 +244,11 @@ export function generateLinearTwoVarModel(params: {
     return {
       skillCode: "linear_equations_two_var", difficulty: params.difficulty, questionKind,
       m1, b1, m2: m1, b2: b1, systemKind: "infinite_solutions", intersection: null,
-      correctAnswer: "무한히 많음",
+      correctAnswer: "Infinitely many",
       distractors: [
-        { value: "정확히 하나", kind: "condition_ignored", reason: "두 식이 완전히 같은 직선임을 놓쳤다." },
-        { value: "없음", kind: "condition_ignored", reason: "같은 직선을 평행한 서로 다른 직선으로 착각했다." },
-        { value: "정확히 둘", kind: "other", reason: "일차식 두 개의 교점이 여러 개일 수 있다고 착각했다." },
+        { value: "Exactly one", kind: "condition_ignored", reason: "두 식이 완전히 같은 직선임을 놓쳤다." },
+        { value: "No solution", kind: "condition_ignored", reason: "같은 직선을 평행한 서로 다른 직선으로 착각했다." },
+        { value: "Exactly two", kind: "other", reason: "일차식 두 개의 교점이 여러 개일 수 있다고 착각했다." },
       ],
     };
   }
@@ -294,18 +294,18 @@ export function generateLinearTwoVarModel(params: {
 }
 
 const QUESTION_TEXT: Record<LinearTwoVarQuestionKind, string> = {
-  intersection_x: "이 연립방정식의 해에서 x좌표의 값은?",
-  intersection_y: "이 연립방정식의 해에서 y좌표의 값은?",
-  intersection_sum: "이 연립방정식의 해에서 x좌표와 y좌표의 합은?",
-  slope: "__LINE__ 식이 나타내는 직선의 기울기는?",
-  intercept: "__LINE__ 식이 나타내는 직선의 y절편은?",
-  num_solutions: "이 연립방정식의 해의 개수는?",
+  intersection_x: "What is the x-coordinate of the solution to the system of equations shown?",
+  intersection_y: "What is the y-coordinate of the solution to the system of equations shown?",
+  intersection_sum: "What is the sum of the x-coordinate and y-coordinate of the solution to the system of equations shown?",
+  slope: "What is the slope of the line represented by the __LINE__ equation shown?",
+  intercept: "What is the y-intercept of the line represented by the __LINE__ equation shown?",
+  num_solutions: "How many solutions does the system of equations shown have?",
 };
 
 function questionText(model: LinearTwoVarModel): string {
   const t = QUESTION_TEXT[model.questionKind];
   if (!t.includes("__LINE__")) return t;
-  return t.replace("__LINE__", model.askedLine === 2 ? "두 번째" : "첫 번째");
+  return t.replace("__LINE__", model.askedLine === 2 ? "second" : "first");
 }
 
 /** 해설 — 오직 모델의 계산값만 참조한다. 해설의 결론이 정답 키를 바꾸는 일은 없다(정답은 이미 모델에 고정돼 있다). */
@@ -373,8 +373,8 @@ export type CompiledMathProblem = {
 export function renderLinearTwoVarProblem(model: LinearTwoVarModel): CompiledMathProblem {
   const passage =
     model.questionKind === "num_solutions" || model.questionKind === "slope" || model.questionKind === "intercept"
-      ? `다음 연립방정식을 보자.\n\n${fmtLine(model.m1, model.b1)}\n${fmtLine(model.m2, model.b2)}`
-      : `다음 연립방정식의 해를 (x, y)라고 하자.\n\n${fmtLine(model.m1, model.b1)}\n${fmtLine(model.m2, model.b2)}`;
+      ? `Consider the system of equations shown.\n\n${fmtLine(model.m1, model.b1)}\n${fmtLine(model.m2, model.b2)}`
+      : `The solution to the system of equations shown is (x, y).\n\n${fmtLine(model.m1, model.b1)}\n${fmtLine(model.m2, model.b2)}`;
   const question = questionText(model);
 
   const options = [model.correctAnswer, ...model.distractors.map((d) => d.value)];

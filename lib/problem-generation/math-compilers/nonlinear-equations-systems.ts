@@ -76,18 +76,18 @@ export function generateNonlinearEqModel(params: {
         c = r1 * r2;
         discriminant = b * b - 4 * c;
         if (discriminant <= 0) continue;
-        correctAnswer = "서로 다른 두 실근";
+        correctAnswer = "Two distinct real solutions";
       } else if (roll === 1) {
         // 중근 하나 — D = 0, c = (b/2)^2 (b가 짝수여야 정수 중근).
         b = b % 2 === 0 ? b : b + 1;
         c = (b / 2) * (b / 2);
         discriminant = b * b - 4 * c;
-        correctAnswer = "중근 하나";
+        correctAnswer = "One real solution";
       } else {
         // 실근 없음 — D < 0.
         c = range * range + Math.abs(b) + 1; // 충분히 크게 잡아 b^2-4c < 0 보장.
         discriminant = b * b - 4 * c;
-        correctAnswer = "실근 없음";
+        correctAnswer = "No real solutions";
       }
       const result = finishNumRealSolutions(params.difficulty, b, c, discriminant, correctAnswer);
       if (result) return result;
@@ -174,10 +174,10 @@ function finishNumRealSolutions(
   // 2개밖에 안 나온다. 일차방정식(무한히 많은 해가 가능)과 혼동하는 실제 오개념을
   // 4번째 범주로 추가해 오답 3개를 항상 채운다.
   const rawCands: { value: string; kind: DistractorKind; reason: string }[] = [
-    { value: "서로 다른 두 실근", kind: "condition_ignored", reason: "판별식의 부호를 잘못 읽어 실근이 두 개라고 착각했다." },
-    { value: "중근 하나", kind: "condition_ignored", reason: "판별식이 0이 아닌데 0이라고 착각했다." },
-    { value: "실근 없음", kind: "condition_ignored", reason: "판별식이 음수가 아닌데 음수라고 착각해 실근이 없다고 답했다." },
-    { value: "근이 무수히 많음", kind: "other", reason: "일차방정식처럼 이차방정식도 근이 무수히 많을 수 있다고 착각했다." },
+    { value: "Two distinct real solutions", kind: "condition_ignored", reason: "판별식의 부호를 잘못 읽어 실근이 두 개라고 착각했다." },
+    { value: "One real solution", kind: "condition_ignored", reason: "판별식이 0이 아닌데 0이라고 착각했다." },
+    { value: "No real solutions", kind: "condition_ignored", reason: "판별식이 음수가 아닌데 음수라고 착각해 실근이 없다고 답했다." },
+    { value: "Infinitely many solutions", kind: "other", reason: "일차방정식처럼 이차방정식도 근이 무수히 많을 수 있다고 착각했다." },
   ];
   const distractors = rawCands.filter((c) => c.value !== correctAnswer).slice(0, 3);
   if (distractors.length !== 3) return null;
@@ -194,7 +194,7 @@ export function validateNonlinearEqModel(model: NonlinearEqModel): { ok: true } 
   if (model.questionKind === "num_real_solutions") {
     if (model.discriminant === undefined) return { ok: false, reason: "판별식이 없습니다." };
     const d = model.discriminant;
-    const expected = d > 0 ? "서로 다른 두 실근" : d === 0 ? "중근 하나" : "실근 없음";
+    const expected = d > 0 ? "Two distinct real solutions" : d === 0 ? "One real solution" : "No real solutions";
     if (expected !== model.correctAnswer) return { ok: false, reason: "판별식과 정답 범주가 일치하지 않습니다." };
     return { ok: true };
   }
@@ -216,26 +216,30 @@ export type CompiledMathProblem = {
 };
 
 const QUESTION_TEXT: Record<NonlinearEqQuestionKind, string> = {
-  root: "이 방정식의 해 중 더 큰 값은?",
-  sum_of_roots: "이 방정식의 두 근의 합은?",
-  product_of_roots: "이 방정식의 두 근의 곱은?",
-  num_real_solutions: "이 방정식의 서로 다른 실근의 개수는?",
+  root: "What is the larger solution to the equation shown?",
+  sum_of_roots: "What is the sum of the solutions to the equation shown?",
+  product_of_roots: "What is the product of the solutions to the equation shown?",
+  num_real_solutions: "How many distinct real solutions does the equation shown have?",
 };
 
 export function renderNonlinearEqProblem(model: NonlinearEqModel): CompiledMathProblem {
-  const passage = `다음 방정식을 보자.\n\n${quadEquation(model.b, model.c)}`;
+  const passage = `Consider the equation shown.\n\n${quadEquation(model.b, model.c)}`;
   const question = QUESTION_TEXT[model.questionKind];
   const options = [model.correctAnswer, ...model.distractors.map((d) => d.value)];
   const order = [0, 1, 2, 3].sort(() => Math.random() - 0.5);
   const shuffled = order.map((i) => options[i]);
   const correctIndex = order.indexOf(0);
 
+  // 2026-09-17(실측, 아침 UAT) — 해설(explanation) 칸은 지문과 달리 $…$를 KaTeX로
+  // 조판하지 않고 그대로 노출한다(app/admin/ProblemDraftEditor.tsx의
+  // PublishedContentView가 해설만 원문 그대로 <p>로 찍는다). 해설에는 $…$ 대신
+  // 유니코드 위첨자(²)를 써서 $ 기호가 그대로 노출되지 않게 한다.
   let explanation: string;
   if (model.questionKind === "num_real_solutions") {
-    explanation = `판별식은 $b^2 - 4c = ${fmt(model.b)}^2 - 4×${fmt(model.c)} = ${fmt(model.discriminant!)}$이다. ${model.discriminant! > 0 ? "0보다 크므로 서로 다른 두 실근을 갖는다." : model.discriminant === 0 ? "0이므로 중근을 하나 갖는다." : "0보다 작으므로 실근이 없다."} 따라서 ${model.correctAnswer}이다.`;
+    explanation = `판별식은 b² - 4c = ${fmt(model.b)}² - 4×${fmt(model.c)} = ${fmt(model.discriminant!)}이다. ${model.discriminant! > 0 ? "0보다 크므로 서로 다른 두 실근을 갖는다." : model.discriminant === 0 ? "0이므로 중근을 하나 갖는다." : "0보다 작으므로 실근이 없다."} 따라서 ${model.correctAnswer}이다.`;
   } else {
     const bSign = -model.b >= 0 ? "+" : "-";
-    explanation = `$${quadExpr(model.b, model.c)} = (x ${model.r1! >= 0 ? "-" : "+"} ${fmt(Math.abs(model.r1!))})(x ${model.r2! >= 0 ? "-" : "+"} ${fmt(Math.abs(model.r2!))})$로 인수분해되므로 근은 ${fmt(model.r1!)}, ${fmt(model.r2!)}이다. `;
+    explanation = `${quadExpr(model.b, model.c).replace("x^2", "x²")} = (x ${model.r1! >= 0 ? "-" : "+"} ${fmt(Math.abs(model.r1!))})(x ${model.r2! >= 0 ? "-" : "+"} ${fmt(Math.abs(model.r2!))})로 인수분해되므로 근은 ${fmt(model.r1!)}, ${fmt(model.r2!)}이다. `;
     if (model.questionKind === "root") explanation += `더 큰 값은 ${model.correctAnswer}이다.`;
     else if (model.questionKind === "sum_of_roots") explanation += `두 근의 합은 -b = ${bSign}${fmt(Math.abs(model.b))} 이므로 ${model.correctAnswer}이다.`;
     else explanation += `두 근의 곱은 c = ${model.correctAnswer}이다.`;

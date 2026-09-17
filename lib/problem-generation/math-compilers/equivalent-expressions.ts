@@ -114,8 +114,8 @@ function parenTerm(k: number): string {
 
 export function renderEquivalentExpressionsProblem(model: EquivalentExpressionsModel): CompiledMathProblem {
   const lhs = `${coefTerm(model.a)}${parenTerm(model.b)} ${model.c >= 0 ? "+" : "-"} ${coefMagnitude(model.c)}${parenTerm(model.d)}`;
-  const passage = `다음 식을 보자.\n\n${lhs}`;
-  const question = "이 식과 동치인 것은?";
+  const passage = `Consider the expression shown.\n\n${lhs}`;
+  const question = "Which of the following is equivalent to the expression shown?";
   const options = [model.correctAnswer, ...model.distractors.map((d) => d.value)];
   const order = [0, 1, 2, 3].sort(() => Math.random() - 0.5);
   const shuffled = order.map((i) => options[i]);

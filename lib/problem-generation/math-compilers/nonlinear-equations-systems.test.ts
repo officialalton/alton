@@ -25,9 +25,9 @@ describe("generateNonlinearEqModel — 결정적 계산", () => {
       const model = generateNonlinearEqModel({ difficulty: "medium", questionKind: "num_real_solutions" });
       expect(validateNonlinearEqModel(model)).toEqual({ ok: true });
       const d = model.discriminant!;
-      if (d > 0) expect(model.correctAnswer).toBe("서로 다른 두 실근");
-      if (d === 0) expect(model.correctAnswer).toBe("중근 하나");
-      if (d < 0) expect(model.correctAnswer).toBe("실근 없음");
+      if (d > 0) expect(model.correctAnswer).toBe("Two distinct real solutions");
+      if (d === 0) expect(model.correctAnswer).toBe("One real solution");
+      if (d < 0) expect(model.correctAnswer).toBe("No real solutions");
     }
   });
 

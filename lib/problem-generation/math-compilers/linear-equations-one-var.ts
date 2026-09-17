@@ -112,8 +112,8 @@ export type CompiledMathProblem = {
 };
 
 export function renderLinearOneVarProblem(model: LinearOneVarModel): CompiledMathProblem {
-  const passage = `다음 방정식을 보자.\n\n${sideExpr(model.a, model.b)} = ${sideExpr(model.c, model.d)}`;
-  const question = "이 방정식을 만족하는 x의 값은?";
+  const passage = `Consider the equation shown.\n\n${sideExpr(model.a, model.b)} = ${sideExpr(model.c, model.d)}`;
+  const question = "What is the solution to the equation shown?";
   const options = [model.correctAnswer, ...model.distractors.map((d) => d.value)];
   const order = [0, 1, 2, 3].sort(() => Math.random() - 0.5);
   const shuffled = order.map((i) => options[i]);

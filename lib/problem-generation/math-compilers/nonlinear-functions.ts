@@ -136,7 +136,7 @@ export type CompiledMathProblem = {
 };
 
 export function renderNonlinearFnProblem(model: NonlinearFnModel): CompiledMathProblem {
-  const passage = `이차함수 ${vertexExpr(model.a, model.h, model.k)}가 있다.`;
+  const passage = `The function f is defined by ${vertexExpr(model.a, model.h, model.k)}.`;
   const options = [model.correctAnswer, ...model.distractors.map((d) => d.value)];
   const order = [0, 1, 2, 3].sort(() => Math.random() - 0.5);
   const shuffled = order.map((i) => options[i]);
@@ -150,17 +150,19 @@ export function renderNonlinearFnProblem(model: NonlinearFnModel): CompiledMathP
     obvious: false,
   }));
 
+  // 2026-09-17(실측, 아침 UAT) — 해설(explanation) 칸은 지문과 달리 $…$를 KaTeX로
+  // 조판하지 않고 그대로 노출한다 — 해설에는 $…$ 대신 유니코드 위첨자(²)를 쓴다.
   if (model.questionKind === "evaluate") {
-    const question = `f(${fmt(model.x0!)})의 값은?`;
-    const explanation = `$f(${fmt(model.x0!)}) = ${fmt(model.a)}(${fmt(model.x0!)} - ${fmt(model.h)})^2 ${model.k >= 0 ? "+" : "-"} ${fmt(Math.abs(model.k))} = ${fmt(model.a)} × ${fmt(model.x0! - model.h)}^2 ${model.k >= 0 ? "+" : "-"} ${fmt(Math.abs(model.k))} = ${model.correctAnswer}$이다.`;
+    const question = `What is f(${fmt(model.x0!)})?`;
+    const explanation = `f(${fmt(model.x0!)}) = ${fmt(model.a)}(${fmt(model.x0!)} - ${fmt(model.h)})² ${model.k >= 0 ? "+" : "-"} ${fmt(Math.abs(model.k))} = ${fmt(model.a)} × ${fmt(model.x0! - model.h)}² ${model.k >= 0 ? "+" : "-"} ${fmt(Math.abs(model.k))} = ${model.correctAnswer}이다.`;
     return { passage, question, options: shuffled, correctIndex, explanation, figure: null, distractorRationales };
   }
   if (model.questionKind === "vertex_x") {
-    const question = "이 함수의 꼭짓점의 x좌표는?";
-    const explanation = `$f(x) = a(x-h)^2+k$ 형태에서 꼭짓점은 (h, k)이므로 꼭짓점의 x좌표는 h = ${model.correctAnswer}이다.`;
+    const question = "What is the x-coordinate of the vertex of the graph of f in the xy-plane?";
+    const explanation = `f(x) = a(x-h)² + k 형태에서 꼭짓점은 (h, k)이므로 꼭짓점의 x좌표는 h = ${model.correctAnswer}이다.`;
     return { passage, question, options: shuffled, correctIndex, explanation, figure: null, distractorRationales };
   }
-  const question = "이 함수의 꼭짓점의 y좌표는?";
-  const explanation = `$f(x) = a(x-h)^2+k$ 형태에서 꼭짓점은 (h, k)이므로 꼭짓점의 y좌표는 k = ${model.correctAnswer}이다.`;
+  const question = "What is the y-coordinate of the vertex of the graph of f in the xy-plane?";
+  const explanation = `f(x) = a(x-h)² + k 형태에서 꼭짓점은 (h, k)이므로 꼭짓점의 y좌표는 k = ${model.correctAnswer}이다.`;
   return { passage, question, options: shuffled, correctIndex, explanation, figure: null, distractorRationales };
 }

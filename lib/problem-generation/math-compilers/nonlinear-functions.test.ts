@@ -42,7 +42,7 @@ describe("renderNonlinearFnProblem — 렌더링·해설", () => {
     for (let i = 0; i < 100; i++) {
       const model = generateNonlinearFnModel({ difficulty: "medium" });
       const rendered = renderNonlinearFnProblem(model);
-      expect(rendered.passage).toMatch(/^이차함수 \$f\(x\) = .*\$가 있다\.$/);
+      expect(rendered.passage).toMatch(/^The function f is defined by \$f\(x\) = .*\$\.$/);
     }
   });
 

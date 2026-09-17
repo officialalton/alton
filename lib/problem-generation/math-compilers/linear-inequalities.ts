@@ -245,8 +245,8 @@ export function renderLinearInequalityProblem(model: LinearInequalityModel): Com
   };
 
   if (model.questionKind === "solve_one_var") {
-    const passage = `다음 부등식을 보자.\n\n${mathWrap(`${rhsExpr(model.m, model.b)} ${OP_TEXT[model.op]} ${fmt(model.c!)}`)}`;
-    const question = "이 부등식을 만족하는 x의 범위는?";
+    const passage = `Consider the inequality shown.\n\n${mathWrap(`${rhsExpr(model.m, model.b)} ${OP_TEXT[model.op]} ${fmt(model.c!)}`)}`;
+    const question = "Which of the following describes all values of x that satisfy the inequality shown?";
     const { options, correctIndex } = shuffleWithAnswer(model.correctAnswer, model.distractors.map((d) => d.value));
     const flipped = model.m < 0;
     // 2026-09-17(품질 보완) — 절편이 0이면 "0을 정리한 뒤" 같은 무의미한 문장이
@@ -268,8 +268,8 @@ export function renderLinearInequalityProblem(model: LinearInequalityModel): Com
 
   const opKor = model.op === "<" || model.op === "<=" ? "작다" : "크다";
   const eqIncl = model.op === "<=" || model.op === ">=" ? "(경계선 포함)" : "(경계선 제외)";
-  const passage = `다음 부등식의 그래프를 보자.\n\n${mathWrap(`y ${OP_TEXT[model.op]} ${rhsExpr(model.m, model.b)}`)}`;
-  const question = "다음 중 이 부등식의 해에 속하는 점은?";
+  const passage = `Consider the graph of the inequality shown.\n\n${mathWrap(`y ${OP_TEXT[model.op]} ${rhsExpr(model.m, model.b)}`)}`;
+  const question = "Which of the following points is a solution to the inequality shown?";
   const { options, correctIndex } = shuffleWithAnswer(model.correctAnswer, model.distractors.map((d) => d.value));
   const explanation = `경계선 y = ${rhsExpr(model.m, model.b)} ${eqIncl}을 기준으로, y 값이 경계선의 값보다 ${opKor} 쪽이 해 영역이다. ${model.correctAnswer}를 대입하면 조건을 만족하므로 정답이다.`;
   const distractorRationales: DistractorRationale[] = model.distractors.map((d, i) => ({

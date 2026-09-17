@@ -67,15 +67,15 @@ describe("generateLinearTwoVarModel — 결정적 계산", () => {
   it("num_solutions 문항은 세 범주(하나/없음/무한) 중 하나를 실제 계수 관계와 일치하게 낸다(50회 반복)", () => {
     for (let i = 0; i < 50; i++) {
       const model = generateLinearTwoVarModel({ difficulty: "medium", questionKind: "num_solutions" });
-      if (model.correctAnswer === "정확히 하나") {
+      if (model.correctAnswer === "Exactly one") {
         expect(model.systemKind).toBe("one_solution");
         expect(model.m1).not.toBe(model.m2);
-      } else if (model.correctAnswer === "없음") {
+      } else if (model.correctAnswer === "No solution") {
         expect(model.systemKind).toBe("no_solution");
         expect(model.m1).toBe(model.m2);
         expect(model.b1).not.toBe(model.b2);
       } else {
-        expect(model.correctAnswer).toBe("무한히 많음");
+        expect(model.correctAnswer).toBe("Infinitely many");
         expect(model.systemKind).toBe("infinite_solutions");
         expect(model.m1).toBe(model.m2);
         expect(model.b1).toBe(model.b2);
