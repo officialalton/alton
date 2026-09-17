@@ -49,6 +49,41 @@ import {
   renderNonlinearFnProblem,
   validateNonlinearFnModel,
 } from "./nonlinear-functions";
+import {
+  generateRatiosRatesModel,
+  renderRatiosRatesProblem,
+  validateRatiosRatesModel,
+} from "./ratios-rates";
+import {
+  generatePercentagesModel,
+  renderPercentagesProblem,
+  validatePercentagesModel,
+} from "./percentages";
+import {
+  generateOneVarDataModel,
+  renderOneVarDataProblem,
+  validateOneVarDataModel,
+} from "./one-variable-data";
+import {
+  generateTwoVarDataModel,
+  renderTwoVarDataProblem,
+  validateTwoVarDataModel,
+} from "./two-variable-data";
+import {
+  generateProbabilityModel,
+  renderProbabilityProblem,
+  validateProbabilityModel,
+} from "./probability";
+import {
+  generateInferenceModel,
+  renderInferenceProblem,
+  validateInferenceModel,
+} from "./inference-from-sample";
+import {
+  generateEvalClaimsModel,
+  renderEvalClaimsProblem,
+  validateEvalClaimsModel,
+} from "./evaluating-statistical-claims";
 
 // 2026-09-17(제품 오너 지시) — "같은 일차식 공통 엔진으로 확장". systems_linear(두
 // 일차방정식의 연립)은 수학적으로 linear_equations_two_var 컴파일러가 이미 계산하는
@@ -64,7 +99,14 @@ export type MathCompilerSkill =
   | "linear_functions"
   | "equivalent_expressions"
   | "nonlinear_equations_systems"
-  | "nonlinear_functions";
+  | "nonlinear_functions"
+  | "ratios_rates_units"
+  | "percentages"
+  | "one_variable_data"
+  | "two_variable_data"
+  | "probability"
+  | "inference_margin_error"
+  | "evaluating_statistical_claims";
 
 const MIN_BATCH = 10;
 const MAX_CANDIDATE_MULTIPLIER: Record<LinearTwoVarDifficulty, number> = { easy: 1.5, medium: 1.5, hard: 2.5 };
@@ -150,6 +192,41 @@ function attemptOne(
     const check = validateNonlinearFnModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
     compiled = renderNonlinearFnProblem(model);
+  } else if (skillCode === "ratios_rates_units") {
+    const model = generateRatiosRatesModel({ difficulty });
+    const check = validateRatiosRatesModel(model);
+    if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
+    compiled = renderRatiosRatesProblem(model);
+  } else if (skillCode === "percentages") {
+    const model = generatePercentagesModel({ difficulty });
+    const check = validatePercentagesModel(model);
+    if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
+    compiled = renderPercentagesProblem(model);
+  } else if (skillCode === "one_variable_data") {
+    const model = generateOneVarDataModel({ difficulty });
+    const check = validateOneVarDataModel(model);
+    if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
+    compiled = renderOneVarDataProblem(model);
+  } else if (skillCode === "two_variable_data") {
+    const model = generateTwoVarDataModel({ difficulty });
+    const check = validateTwoVarDataModel(model);
+    if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
+    compiled = renderTwoVarDataProblem(model);
+  } else if (skillCode === "probability") {
+    const model = generateProbabilityModel({ difficulty });
+    const check = validateProbabilityModel(model);
+    if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
+    compiled = renderProbabilityProblem(model);
+  } else if (skillCode === "inference_margin_error") {
+    const model = generateInferenceModel({ difficulty });
+    const check = validateInferenceModel(model);
+    if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
+    compiled = renderInferenceProblem(model);
+  } else if (skillCode === "evaluating_statistical_claims") {
+    const model = generateEvalClaimsModel({ difficulty });
+    const check = validateEvalClaimsModel(model);
+    if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
+    compiled = renderEvalClaimsProblem(model);
   } else {
     return { ok: false, reason: `지원하지 않는 계산형 유형: ${skillCode}` };
   }

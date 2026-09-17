@@ -18,6 +18,8 @@ const SAT_MATH_SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001";
 const SKILL_CODE = (process.argv[2] as
   | "linear_equations_two_var" | "systems_linear" | "linear_inequalities" | "linear_equations_one_var"
   | "linear_functions" | "equivalent_expressions" | "nonlinear_equations_systems" | "nonlinear_functions"
+  | "ratios_rates_units" | "percentages" | "one_variable_data" | "two_variable_data" | "probability"
+  | "inference_margin_error" | "evaluating_statistical_claims"
 ) || "linear_equations_two_var";
 const SKILL_LABEL: Record<string, string> = {
   linear_equations_two_var: "Linear equations in two variables",
@@ -28,6 +30,13 @@ const SKILL_LABEL: Record<string, string> = {
   equivalent_expressions: "Equivalent expressions",
   nonlinear_equations_systems: "Nonlinear equations and systems",
   nonlinear_functions: "Nonlinear functions",
+  ratios_rates_units: "Ratios, rates, proportional relationships, and units",
+  percentages: "Percentages",
+  one_variable_data: "One-variable data: distributions and measures of center and spread",
+  two_variable_data: "Two-variable data: models and scatterplots",
+  probability: "Probability and conditional probability",
+  inference_margin_error: "Inference from sample statistics and margin of error",
+  evaluating_statistical_claims: "Evaluating statistical claims: observational studies and experiments",
 };
 
 async function main() {
