@@ -396,12 +396,14 @@ function NewProblemPanel({
   const [topic, setTopic] = useState("");
   const [difficulty, setDifficulty] = useState<"easy" | "medium" | "hard">("medium");
   const [format, setFormat] = useState("mc");
-  // 2026-09-17(UAT 지적) — 이 서버 액션은 문항 하나당 여러 번 순차 모델 호출을
-  // 거쳐, 개수가 조금만 늘어도 이 비프로덕션 배포의 함수 제한 시간(Vercel Hobby
-  // 플랜, 300초 고정 — 코드로 늘릴 수 없다)에 걸려 결과 없이 죽는다. 그때 클라이언트는
-  // 실패 사유조차 못 받는다("여러 개가 이유 없이 실패"로 보임). 기본값·상한을
-  // 안전한 범위로 낮춘다.
-  const MAX_SAFE_GENERATE_COUNT = 2;
+  // 2026-09-17(UAT 지적) — AI 생성(문항 하나당 여러 번 순차 모델 호출)은 개수가
+  // 조금만 늘어도 이 비프로덕션 배포의 함수 제한 시간(Vercel Hobby 플랜, 300초
+  // 고정 — 코드로 늘릴 수 없다)에 걸려 결과 없이 죽는다. 다만 계산형 컴파일러
+  // 경로(예: linear_equations_two_var)는 AI를 아예 안 써서 이 위험이 없고, 오히려
+  // "생성 실행 단위는 최소 10문항 배치"가 정책이므로 상한을 걸면 안 된다.
+  const MATH_COMPILER_SKILLS = new Set(["linear_equations_two_var"]);
+  const isCompilerSkill = MATH_COMPILER_SKILLS.has(skillCode);
+  const MAX_SAFE_GENERATE_COUNT = isCompilerSkill ? 10 : 2;
   const [count, setCount] = useState("1");
 
   const keywords = subjectId ? keywordsBySubject.get(subjectId) ?? [] : [];
@@ -593,10 +595,17 @@ function NewProblemPanel({
       <p className="text-[11.5px] text-grey-500 mt-2">
         어느 쪽으로 만들든 초안으로 들어갑니다. 다음 단계(3 지문/자료 → 4 질문 → 5 답안 → 6 해설 → 7 저장/공개)는 아래 초안 편집에서 이어집니다. 복수 생성도 단건과 같은 계약이며, 질문이 없거나 유형과 맞지 않는 결과는 저장하지 않고 사유를 보여줍니다.
       </p>
-      <p className="text-[11.5px] text-red mt-1">
-        한 번에 최대 {MAX_SAFE_GENERATE_COUNT}개까지만 만들 수 있습니다 — 이 환경의 서버 처리 시간 제한(300초) 때문에,
-        그보다 많이 요청하면 시간 안에 끝내지 못해 결과도 실패 사유도 없이 조용히 실패합니다.
-      </p>
+      {isCompilerSkill ? (
+        <p className="text-[11.5px] text-grey-500 mt-1">
+          이 세부 기술은 AI 대신 계산형 컴파일러가 만듭니다(정답·오답·그래프를 코드로 직접 계산) — AI 호출이 없어
+          한 번에 10개까지 요청할 수 있습니다. 내부적으로는 요청 수와 무관하게 항상 최소 10문항 단위로 생성·검증합니다.
+        </p>
+      ) : (
+        <p className="text-[11.5px] text-red mt-1">
+          한 번에 최대 {MAX_SAFE_GENERATE_COUNT}개까지만 만들 수 있습니다 — 이 환경의 서버 처리 시간 제한(300초) 때문에,
+          그보다 많이 요청하면 시간 안에 끝내지 못해 결과도 실패 사유도 없이 조용히 실패합니다.
+        </p>
+      )}
     </div>
   );
 }
