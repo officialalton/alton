@@ -69,6 +69,9 @@ export type BankProblem = {
    * 이어서 고친다 — 반복 클릭으로 초안이 늘어나지 않게 한다.
    */
   draft: ProblemContent | null;
+  /** 2026-09-17(제품 오너 지시) — manual(관리자 직접 작성)만 검수 화면에서 내용
+   * 편집이 가능하다. ai_generated/compiler는 읽기 전용 + 공개/보관만. */
+  createdVia: "manual" | "ai_generated" | "compiler";
 };
 
 export type ProblemContent = {
@@ -110,6 +113,7 @@ export type ProblemBankFilter = {
   satDomain?: string;
   skillCode?: string;
   examSystem?: string;
+  difficulty?: string;
   /** 2026-09-15: 지정하지 않으면 'needs_distractor_repair' 초안은 기본 목록에서 숨는다. */
   repairStatus?: "none" | "needs_distractor_repair";
 };
@@ -123,7 +127,7 @@ export async function listBankProblemsAction(
   let q = admin
     .from("problems")
     .select(
-      "id, format, passage, skill_type, topic, difficulty, subject_id, status, archived_at, created_at, sat_domain, skill_code, exam_system, ap_subject"
+      "id, format, passage, skill_type, topic, difficulty, subject_id, status, archived_at, created_at, sat_domain, skill_code, exam_system, ap_subject, created_via"
     )
     .order("created_at", { ascending: false })
     .limit(200);
@@ -135,7 +139,11 @@ export async function listBankProblemsAction(
   if (filter.satDomain) q = q.eq("sat_domain", filter.satDomain);
   if (filter.skillCode) q = q.eq("skill_code", filter.skillCode);
   if (filter.examSystem) q = q.eq("exam_system", filter.examSystem);
-  if (filter.query?.trim()) q = q.ilike("passage", `%${filter.query.trim()}%`);
+  if (filter.difficulty) q = q.eq("difficulty", filter.difficulty);
+  if (filter.query?.trim()) {
+    const term = filter.query.trim().replace(/[%,]/g, "");
+    q = q.or(`passage.ilike.%${term}%,topic.ilike.%${term}%`);
+  }
 
   const { data: rows, error } = await q;
   if (error || !rows?.length) return [];
@@ -258,6 +266,7 @@ export async function listBankProblemsAction(
       "not_confirmed") as BankProblem["readiness"],
     published: publishedByProblem.get(r.id as string) ?? null,
     draft: draftByProblem.get(r.id as string) ?? null,
+    createdVia: ((r as { created_via?: string }).created_via as BankProblem["createdVia"] | undefined) ?? "manual",
   }));
 
   return mapped.filter((p) => {
@@ -326,6 +335,11 @@ export async function createBankProblemAction(params: {
    * 만든 뒤 편집 화면에서도 붙일 수 있지만, 이미 아는 것을 다시 찾아 들어가게 하지 않는다.
    */
   keywordIds?: string[];
+  /**
+   * 2026-09-17(제품 오너 지시) — 자동 생성(ai_generated/compiler)이면 검수 화면이
+   * 내용 편집을 막는다(공개/보관만). 기본은 관리자가 직접 쓰는 'manual'.
+   */
+  createdVia?: "manual" | "ai_generated" | "compiler";
 }): Promise<BankResult<string>> {
   const { adminUserId } = await requireAdmin();
   const admin = createAdminClient();
@@ -343,6 +357,10 @@ export async function createBankProblemAction(params: {
   if (error) return { ok: false, error: readable(error.message, "문제를 만들지 못했습니다.") };
 
   const problemId = data as string;
+  if (params.createdVia && params.createdVia !== "manual") {
+    const { error: viaError } = await admin.from("problems").update({ created_via: params.createdVia }).eq("id", problemId);
+    if (viaError) console.error("[problem-bank] created_via 기록 실패:", viaError.message);
+  }
   if (params.keywordIds?.length) {
     // 키워드를 붙이지 못해도 문제 자체는 만들어졌다. 만들기를 실패로 돌리면
     // 화면에 없는 문제가 DB 에 남는다 — 붙이기 실패만 따로 알린다.
@@ -747,6 +765,7 @@ export async function generateBankProblemsAction(params: {
         const problem = await createBankProblemAction({
           subjectId: params.subjectId, format: "mc", skillType: params.skillType, skillCode: params.skillCode,
           examSystem: params.examSystem, apSubject: params.apSubject, topic: params.topic, difficulty: params.difficulty, keywordIds: params.keywordIds,
+          createdVia: "compiler",
         });
         if (!problem.ok) { failures.push(problem.error); dbSaveMs += Date.now() - t0; return; }
         const draft = await createDraftVersionAction({
@@ -808,6 +827,7 @@ export async function generateBankProblemsAction(params: {
     const problem = await createBankProblemAction({
       subjectId: params.subjectId, format: params.format, skillType: params.skillType, skillCode: params.skillCode,
       examSystem: params.examSystem, apSubject: params.apSubject, topic: params.topic, difficulty: params.difficulty, keywordIds: params.keywordIds,
+      createdVia: "ai_generated",
     });
     if (!problem.ok) { failures.push(problem.error); return; }
     const draft = await createDraftVersionAction({

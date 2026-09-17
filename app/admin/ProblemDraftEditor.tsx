@@ -8,6 +8,7 @@ import {
   generateFigureForProblemAction,
   recheckDistractorRepairAction,
   type BankProblem,
+  type ProblemContent,
 } from "./problem-bank-actions";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import LearningText from "@/app/session/[id]/LearningText";
@@ -611,8 +612,13 @@ function RecheckButton({ problemId, onDone }: { problemId: string; onDone: () =>
   );
 }
 
-export function PublishedContentView({ problem }: { problem: BankProblem }) {
-  const p = problem.published!;
+/**
+ * 2026-09-17(제품 오너 지시) — 자동 생성(AI/계산형 컴파일러) 문항은 검수 화면에서
+ * 편집이 아니라 읽기 전용으로만 보인다. content를 명시적으로 받아, 아직 공개되지
+ * 않은 초안(problem.draft)도 같은 뷰로 보여줄 수 있게 한다(기본은 공개본).
+ */
+export function PublishedContentView({ problem, content }: { problem: BankProblem; content?: ProblemContent }) {
+  const p = content ?? problem.published!;
   const fullText = composeProblemText(p.passage, p.question);
   const need = judgeMaterialNeed({ examSystem: problem.examSystem, skillCode: problem.skillCode, text: fullText, format: problem.format });
   const vis = editorVisibility({ examSystem: problem.examSystem, format: problem.format, need, hasStatements: Boolean(p.statements?.length), hasFigure: p.figure != null, text: fullText });

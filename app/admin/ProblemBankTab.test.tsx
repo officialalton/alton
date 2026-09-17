@@ -67,6 +67,7 @@ const base = {
   archived: false,
   updatedAt: "2026-09-12T00:00:00Z",
   readiness: "ok" as const,
+  createdVia: "manual" as const,
 };
 
 const draftProblem = {
@@ -186,13 +187,13 @@ describe("목록 — 생성 · 공개 · 보관", () => {
   it("새 문제 상자는 생성 탭에만 있고, 검색은 지금 탭 안에서 찾는다", async () => {
     render(<ProblemBankTab subjects={subjects} />);
     await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());
-    expect(screen.getByPlaceholderText("작성 중인 문제에서 찾기")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("작성 중인 문제에서 찾기(지문·주제)")).toBeInTheDocument();
 
     fireEvent.click(screen.getByText("공개"));
     await waitFor(() =>
       expect(screen.queryByLabelText("새 문제 과목")).not.toBeInTheDocument()
     );
-    expect(screen.getByPlaceholderText("공개된 문제에서 찾기")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("공개된 문제에서 찾기(지문·주제)")).toBeInTheDocument();
   });
 
   it("보관 과목은 새 문제 대상으로 고를 수 없다", async () => {
@@ -550,5 +551,54 @@ describe("보관은 삭제가 아니다", () => {
     const preview = screen.getByTestId("passage-preview");
     expect(preview.querySelector("table")).not.toBeNull();
     expect(preview).toHaveTextContent("Defective");
+  });
+});
+
+describe("자동 생성(AI·계산형 컴파일러) 문항 — 읽기 전용 검수", () => {
+  const autoDraft = {
+    ...draftProblem,
+    createdVia: "compiler" as const,
+  };
+
+  it("지문·질문·선택지·정답·해설 편집 칸이 없고, 공개하기/보관하기만 있다", async () => {
+    listBankProblemsAction.mockResolvedValue([autoDraft]);
+    render(<ProblemBankTab subjects={subjects} />);
+    await waitFor(() => expect(screen.getByText("판별식이 0일 때")).toBeInTheDocument());
+    fireEvent.click(screen.getByText("판별식이 0일 때"));
+
+    // 편집 칸(지문 / 자료 textbox)은 없다 — 읽기 전용 뷰만 있다.
+    await waitFor(() => expect(screen.getByText("학생용 미리보기 · 선생님용 정보(정답·해설) — 읽기 전용")).toBeInTheDocument());
+    expect(screen.queryByLabelText("지문 / 자료")).toBeNull();
+    expect(screen.queryByLabelText("세부 기술 수정")).toBeNull();
+    expect(screen.queryByLabelText("난이도 수정")).toBeNull();
+
+    // 행동은 공개하기/보관하기 둘뿐이다.
+    expect(screen.getByText("공개하기")).toBeInTheDocument();
+    expect(screen.getByText("보관하기")).toBeInTheDocument();
+  });
+
+  it("공개하기를 누르면 publishDraftAction이 그 문항의 초안 버전으로 호출된다", async () => {
+    listBankProblemsAction.mockResolvedValue([autoDraft]);
+    render(<ProblemBankTab subjects={subjects} />);
+    await waitFor(() => expect(screen.getByText("판별식이 0일 때")).toBeInTheDocument());
+    fireEvent.click(screen.getByText("판별식이 0일 때"));
+    await waitFor(() => expect(screen.getByText("공개하기")).toBeInTheDocument());
+    fireEvent.click(screen.getByText("공개하기"));
+    await waitFor(() => expect(publishDraftAction).toHaveBeenCalledWith("v1"));
+  });
+
+  it("키워드는 자동 생성 문항에서도 여전히 바꿀 수 있다", async () => {
+    listBankProblemsAction.mockResolvedValue([autoDraft]);
+    render(<ProblemBankTab subjects={subjects} />);
+    await waitFor(() => expect(screen.getByText("판별식이 0일 때")).toBeInTheDocument());
+    fireEvent.click(screen.getByText("판별식이 0일 때"));
+    await waitFor(() => expect(screen.getByRole("button", { name: "판별식" })).toBeInTheDocument());
+    fireEvent.click(screen.getByRole("button", { name: "판별식" }));
+    await waitFor(() => expect(setProblemKeywordAction).toHaveBeenCalledWith("p1", "kw2", true));
+  });
+
+  it("manual 문항은 그대로 기존 편집기가 보인다(회귀 확인)", async () => {
+    await openFirstProblem();
+    expect(screen.getByLabelText("지문 / 자료")).toBeInTheDocument();
   });
 });

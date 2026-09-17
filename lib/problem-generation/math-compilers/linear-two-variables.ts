@@ -75,6 +75,9 @@ function pickIntersectingLines(range: number): { m1: number; b1: number; m2: num
     // 2026-09-17(checkFigure 실측) — 절편이 좌표 범위를 크게 벗어나면(예: range=10인데
     // b=30) 그 직선의 y절편이 화면 밖에 있어, 보이는 구간이 짧아 라벨을 놓을 자리가
     // 없어진다("label_collision"). 절편도 좌표 범위 안에 실제로 보이도록 좁힌다.
+    // 2026-09-17(checkFigure 실측) — 교점이 원점이면 라벨 P가 원점 표시 O·축과
+    // 겹칠 자리밖에 없다("label_collision"). 원점 교점은 걸러 다시 고른다.
+    if (x === 0 && y === 0) continue;
     if (Math.abs(b1) <= range && Math.abs(b2) <= range) return { m1, b1, m2, b2, x, y };
   }
   // 이론상 도달하지 않는다(위 구성 자체가 항상 정수해를 만든다) — 폴백만 둔다.
@@ -259,6 +262,8 @@ export function validateLinearTwoVarModel(model: LinearTwoVarModel): { ok: true 
     const onLine1 = model.m1 * model.intersection.x + model.b1 === model.intersection.y;
     const onLine2 = model.m2 * model.intersection.x + model.b2 === model.intersection.y;
     if (!onLine1 || !onLine2) return { ok: false, reason: "교점이 두 직선의 식과 일치하지 않습니다." };
+    // 원점 교점은 그래프에서 라벨 P가 원점 표시 O·축과 겹칠 자리밖에 없다.
+    if (model.intersection.x === 0 && model.intersection.y === 0) return { ok: false, reason: "교점이 원점이라 그래프에서 라벨을 놓을 자리가 없습니다." };
   }
   return { ok: true };
 }
