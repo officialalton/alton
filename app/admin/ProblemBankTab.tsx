@@ -8,6 +8,7 @@ import {
   publishDraftAction,
   setProblemArchivedAction,
   setProblemKeywordAction,
+  reassignProblemSubjectAction,
   updateProblemMetaAction,
   generateBankProblemsAction,
   problemQuestionAuditAction,
@@ -296,6 +297,7 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
             key={p.id}
             problem={p}
             keywords={p.subjectId ? keywordsBySubject.get(p.subjectId) ?? [] : []}
+            activeSubjects={activeSubjects}
             open={openId === p.id}
             busy={busy}
             onToggle={() => setOpenId(openId === p.id ? null : p.id)}
@@ -621,6 +623,7 @@ function NewProblemPanel({
 function ProblemRow({
   problem,
   keywords,
+  activeSubjects,
   open,
   busy,
   onToggle,
@@ -630,6 +633,7 @@ function ProblemRow({
 }: {
   problem: BankProblem;
   keywords: SubjectKeyword[];
+  activeSubjects: AdminSubject[];
   open: boolean;
   busy: boolean;
   onToggle: () => void;
@@ -708,11 +712,13 @@ function ProblemRow({
                   <PublishedContentView problem={problem} content={problem.draft} />
                 </div>
               )}
+              <SubjectPicker problem={problem} subjects={activeSubjects} busy={busy} onRun={onRun} />
               <KeywordPicker problem={problem} keywords={keywords} busy={busy} onRun={onRun} />
             </>
           ) : (
             <>
               <MetaEditor problem={problem} busy={busy} onRun={onRun} />
+              <SubjectPicker problem={problem} subjects={activeSubjects} busy={busy} onRun={onRun} />
               <KeywordPicker problem={problem} keywords={keywords} busy={busy} onRun={onRun} />
               {(problem.draft || !problem.published) && <ProblemDraftEditor key={`${problem.draft?.versionId ?? "none"}-${problem.examSystem ?? "x"}-${problem.format}`} problem={problem} busy={busy} onRun={onRun} />}
             </>
@@ -868,6 +874,43 @@ function MetaEditor({ problem, busy, onRun }: { problem: BankProblem; busy: bool
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+function SubjectPicker({
+  problem,
+  subjects,
+  busy,
+  onRun,
+}: {
+  problem: BankProblem;
+  subjects: AdminSubject[];
+  busy: boolean;
+  onRun: (job: Job, done?: string) => Promise<void>;
+}) {
+  // 2026-09-17(제품 오너 지시) — 과목 재배정은 문제은행 분류 정리 전용이다. 시험
+  // 체계·영역·세부 기술·주제·난이도·답안 형식·문제·정답·해설은 여기서 바뀌지 않는다.
+  // 활성 과목만 고를 수 있고, 바꾸면 옛 과목의 키워드 연결은 함께 지워진다.
+  return (
+    <div className="mb-3">
+      <label className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-1.5 block">과목</label>
+      <select
+        aria-label="문제 과목"
+        disabled={busy}
+        value={problem.subjectId ?? ""}
+        onChange={(e) => {
+          const newSubjectId = e.target.value;
+          if (!newSubjectId || newSubjectId === problem.subjectId) return;
+          void onRun(() => reassignProblemSubjectAction(problem.id, newSubjectId), "과목을 바꿨습니다. 기존 키워드는 함께 제거되어 새로 붙여야 합니다.");
+        }}
+        className="text-[12.5px] font-bold border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 disabled:opacity-50"
+      >
+        {!problem.subjectId && <option value="">(과목 없음)</option>}
+        {subjects.map((s) => (
+          <option key={s.subjectId} value={s.subjectId}>{s.subjectName}</option>
+        ))}
+      </select>
     </div>
   );
 }

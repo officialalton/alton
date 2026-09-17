@@ -990,3 +990,25 @@ export async function recheckDistractorRepairAction(problemId: string): Promise<
   }
   return { ok: true, value: { passed, reasons: issues.reasons } };
 }
+
+/**
+ * 문제은행 검수 화면에서 과목을 재배정한다(2026-09-17). 시험 체계·영역·세부 기술·주제·
+ * 난이도·답안 형식·문제·정답·해설은 건드리지 않는다 — 문제은행 분류 정리 전용이다.
+ * 옛 과목의 키워드는 새 과목에서 의미가 없으므로 함께 지워진다(관리자가 새로 붙인다).
+ * 이미 시작된 수업의 고정 사본은 세션 스냅샷 기반이라 영향받지 않는다.
+ */
+export async function reassignProblemSubjectAction(
+  problemId: string,
+  newSubjectId: string
+): Promise<BankResult<{ subjectId: string; subjectName: string }>> {
+  const { adminUserId } = await requireAdmin();
+  const admin = createAdminClient();
+  const { data, error } = await admin.rpc("reassign_problem_subject", {
+    p_problem_id: problemId,
+    p_new_subject_id: newSubjectId,
+    p_actor_id: adminUserId,
+  });
+  if (error) return { ok: false, error: error.message || "과목을 바꾸지 못했습니다." };
+  const { data: subject } = await admin.from("subjects").select("name").eq("id", newSubjectId).maybeSingle();
+  return { ok: true, value: { subjectId: newSubjectId, subjectName: (subject?.name as string) ?? "" } };
+}

@@ -23,6 +23,7 @@ vi.mock("./problem-bank-actions", () => ({
   updateProblemMetaAction: (...a: unknown[]) => updateProblemMetaAction(...a),
   generateBankProblemsAction: (...a: unknown[]) => generateBankProblemsAction(...a),
   problemQuestionAuditAction: (...a: unknown[]) => problemQuestionAuditAction(...a),
+  reassignProblemSubjectAction: (...a: unknown[]) => reassignProblemSubjectAction(...a),
 }));
 
 const listBankProblemsAction = vi.fn();
@@ -41,6 +42,7 @@ const setProblemKeywordAction = vi.fn();
 const updateProblemMetaAction = vi.fn();
 const generateBankProblemsAction = vi.fn();
 const problemQuestionAuditAction = vi.fn(async (..._a: unknown[]) => ({ ok: true, value: { withQuestion: 1, draftWithout: 0, publishedWithout: 0 } }));
+const reassignProblemSubjectAction = vi.fn();
 
 const subjects: AdminSubject[] = [
   {
@@ -52,6 +54,7 @@ const subjects: AdminSubject[] = [
       { id: "kw2", label: "판별식", status: "active" },
     ],
   },
+  { subjectId: "sub2", subjectName: "SAT R&W", units: [] },
   { subjectId: "sub9", subjectName: "보관 과목", units: [], archivedAt: "2026-09-11T00:00:00Z" },
 ];
 
@@ -112,6 +115,7 @@ beforeEach(() => {
   setProblemKeywordAction.mockResolvedValue({ ok: true });
   updateProblemMetaAction.mockResolvedValue({ ok: true });
   generateBankProblemsAction.mockResolvedValue({ ok: true, value: { created: 3, failures: [], requested: 3, shortfall: 0, stoppedReason: "target_met" } });
+  reassignProblemSubjectAction.mockResolvedValue({ ok: true, value: { subjectId: "sub2", subjectName: "SAT R&W" } });
 });
 
 /** 공개 탭으로 옮겨 첫 문제를 편다. 공개된 문제는 생성 탭에 없다. */
@@ -199,7 +203,7 @@ describe("목록 — 생성 · 공개 · 보관", () => {
   it("보관 과목은 새 문제 대상으로 고를 수 없다", async () => {
     render(<ProblemBankTab subjects={subjects} />);
     await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());
-    expect(screen.getByLabelText("새 문제 과목").querySelectorAll("option")).toHaveLength(2);
+    expect(screen.getByLabelText("새 문제 과목").querySelectorAll("option")).toHaveLength(3);
     expect(screen.queryByRole("option", { name: "보관 과목" })).not.toBeInTheDocument();
   });
 });
@@ -600,5 +604,33 @@ describe("자동 생성(AI·계산형 컴파일러) 문항 — 읽기 전용 검
   it("manual 문항은 그대로 기존 편집기가 보인다(회귀 확인)", async () => {
     await openFirstProblem();
     expect(screen.getByLabelText("지문 / 자료")).toBeInTheDocument();
+  });
+});
+
+describe("과목 재배정", () => {
+  it("활성 과목만 선택지에 뜨고 보관 과목은 빠진다", async () => {
+    await openFirstProblem();
+    const select = screen.getByLabelText("문제 과목") as HTMLSelectElement;
+    const optionLabels = Array.from(select.options).map((o) => o.textContent);
+    expect(optionLabels).toContain("SAT Math");
+    expect(optionLabels).toContain("SAT R&W");
+    expect(optionLabels).not.toContain("보관 과목");
+  });
+
+  it("과목을 바꾸면 reassignProblemSubjectAction이 즉시 호출된다", async () => {
+    await openFirstProblem();
+    const select = screen.getByLabelText("문제 과목") as HTMLSelectElement;
+    fireEvent.change(select, { target: { value: "sub2" } });
+    await waitFor(() => expect(reassignProblemSubjectAction).toHaveBeenCalledWith("p1", "sub2"));
+  });
+
+  it("자동 생성 문항의 검수 화면에서도 과목을 바꿀 수 있다", async () => {
+    listBankProblemsAction.mockResolvedValue([{ ...draftProblem, createdVia: "compiler" as const }]);
+    render(<ProblemBankTab subjects={subjects} />);
+    await waitFor(() => expect(screen.getByText("판별식이 0일 때")).toBeInTheDocument());
+    fireEvent.click(screen.getByText("판별식이 0일 때"));
+    const select = await screen.findByLabelText("문제 과목");
+    fireEvent.change(select, { target: { value: "sub2" } });
+    await waitFor(() => expect(reassignProblemSubjectAction).toHaveBeenCalledWith("p1", "sub2"));
   });
 });
