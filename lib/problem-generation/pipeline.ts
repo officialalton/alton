@@ -75,6 +75,18 @@ export type PipelineResult = {
     heldOverflowDiscarded: number;
     /** 정답 자리와 해설의 결론이 달라 정답 자리를 해설 쪽으로 맞춘 횟수(2026-09-15). */
     answerExplanationFixes: number;
+    /** 2026-09-17(UAT 지적 — "목표 60초/문항인데 실제는 훨씬 오래 걸린다") — 단계별
+     * 누적 소요(ms). 어느 모델 호출이 실제 병목인지 실측하려고 추가했다. */
+    timeMs: {
+      /** 전체 파이프라인 벽시계 시간(요청→반환). */
+      total: number;
+      generate: number;
+      figure: number;
+      contractRepair: number;
+      answerExplanationCheck: number;
+      review: number;
+      regenerate: number;
+    };
   };
 };
 
@@ -112,6 +124,7 @@ async function mapWithConcurrency<T, R>(items: T[], limit: number, fn: (item: T)
 }
 
 export async function runGenerationPipeline(params: PipelineParams): Promise<PipelineResult> {
+  const pipelineStart = Date.now();
   const requested = Math.max(1, Math.min(10, params.count));
   const accepted: Accepted[] = [];
   const failures: Failure[] = [];
@@ -122,9 +135,20 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
     underReturned: [] as { requested: number; returned: number; reason: string }[],
     heldOverflowDiscarded: 0,
     answerExplanationFixes: 0,
+    timeMs: { total: 0, generate: 0, figure: 0, contractRepair: 0, answerExplanationCheck: 0, review: 0, regenerate: 0 },
   };
   const held: Held[] = [];
   const countCall = () => { stats.modelCalls += 1; };
+  // 2026-09-17 — 단계 하나를 재고, 그 단계 자체가 재귀(재생성 → 다시 gate())를
+  // 타는 경우 이중으로 잡히지 않도록 각 타이머는 자기 구간만 잰다.
+  const timed = async <T>(bucket: keyof typeof stats.timeMs, fn: () => Promise<T>): Promise<T> => {
+    const t0 = Date.now();
+    try {
+      return await fn();
+    } finally {
+      stats.timeMs[bucket] += Date.now() - t0;
+    }
+  };
   const skillCode = params.skillCode ?? null;
   const label = skillCode ? skillLabel(skillCode) ?? params.skillType : params.skillType;
   // 2026-09-16 — 이번 라운드 변경(정답 자동 변경 금지, 독립 검사 실행 실패 시 통과 금지)은 Math 한정이다.
@@ -143,10 +167,10 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
     const chunks = await mapWithConcurrency(chunkSizes, GATE_CONCURRENCY, async (n) => {
       countCall();
       try {
-        const chunk = await generateSectionProblemsCore({
+        const chunk = await timed("generate", () => generateSectionProblemsCore({
           sectionTitle: params.topic?.trim() || params.skillType, subjectName: params.subjectName, skillType: params.skillType,
           difficulty: params.difficulty, format: params.format, count: n, figurePolicy: params.figurePolicy ?? "optional", skillCode: skillCode ?? undefined, keepFigureless: true,
-        });
+        }));
         if (chunk.length === 0) stats.emptyResponses.push({ cause: `생성 청크(${n}개 요청)가 빈 배열을 반환`, retried: false, resolved: false });
         else if (chunk.length < n) stats.underReturned.push({ requested: n, returned: chunk.length, reason: "생성 청크가 요청보다 적게 반환" });
         return chunk;
@@ -163,7 +187,7 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
     if (!kind) return;
     countCall();
     try {
-      const r = await generateFigureForProblemCore({ passage: text, options: g.options ?? null, explanation: g.explanation, kind, correctIndex: g.correctIndex ?? null });
+      const r = await timed("figure", () => generateFigureForProblemCore({ passage: text, options: g.options ?? null, explanation: g.explanation, kind, correctIndex: g.correctIndex ?? null }));
       if (r.ok) g.figure = r.figure;
       else console.error("[pipeline] 자료 생성 실패:", kind, r.error);
     } catch (e) {
@@ -194,11 +218,11 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
         stats.regenerated += 1;
         countCall();
         try {
-          const revised = await regenerateProblemCore({
+          const revised = await timed("regenerate", () => regenerateProblemCore({
             sectionTitle: params.topic?.trim() || params.skillType, subjectName: params.subjectName, skillType: params.skillType,
             difficulty: params.difficulty, format: params.format, current: { ...g, passage: text },
             feedback: `검증에 걸렸습니다: ${reason}. 이 사유가 해소되도록 지문·자료·질문·선택지·정답·해설을 서로 맞게 다시 쓰세요. 자료(figure)는 지문이 부르는 이름·값과 정확히 같아야 하고 정답이 드러나면 안 됩니다. 오답은 지문·자료의 일부를 맞게 반영하되 핵심 관계 하나를 놓친 것이어야 합니다.`,
-          });
+          }));
           const outcome = await gate({ ...revised, needsFigure: false } as GeneratedProblem, depth + 1);
           const ok = outcome.kind !== "rejected";
           if (ok) stats.regenerationResolved += 1;
@@ -234,11 +258,11 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
         usedCorrection = true;
         countCall();
         try {
-          const repaired = await repairFieldsCore({
+          const repaired = await timed("contractRepair", () => repairFieldsCore({
             skillType: params.skillType, subjectName: params.subjectName, difficulty: params.difficulty, format: params.format,
             passage: stimulus, question: question ?? "", options: g.options ?? null, correctIndex: g.correctIndex ?? null, statements: g.statements ?? null, explanation: g.explanation,
             issues: contract.issues.map((i) => i.message),
-          });
+          }));
           if (repaired.ok) {
             g.stimulus = repaired.passage; g.passage = repaired.passage; g.question = repaired.question || null;
             g.options = repaired.options; g.correctIndex = repaired.correctIndex; g.statements = repaired.statements; g.explanation = repaired.explanation;
@@ -259,10 +283,12 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
     // 해설이 실제로 결론 내리는 선택지로 정답 자리를 맞춘다("해설을 다시 반영하는 구조").
     if (params.format === "mc" && g.options && g.correctIndex !== null && g.explanation?.trim()) {
       countCall();
+      const optionsForCheck = g.options;
+      const explanationForCheck = g.explanation;
       try {
-        const resolved = await resolveAnswerFromExplanationCore({
-          stimulus: text, question: question ?? "", options: g.options, explanation: g.explanation,
-        });
+        const resolved = await timed("answerExplanationCheck", () => resolveAnswerFromExplanationCore({
+          stimulus: text, question: question ?? "", options: optionsForCheck, explanation: explanationForCheck,
+        }));
         // 2026-09-15 제품 오너 — 해설이 선택지 중 어느 것도 뒷받침하지 못하면(정답이 선택지에 아예 없을
         // 수 있다는 뜻) 관리자에게 넘기지 않는다 — 구조적 실패로 전체 재생성한다.
         if (!resolved.ok) return fail("contract", "정답-해설 대조: 해설이 어느 선택지도 명확히 뒷받침하지 않습니다(정답이 선택지에 없을 수 있음).");
@@ -291,11 +317,11 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
     }
 
     // 3) 독립 품질 검사.
-    const runReview = () => { countCall(); return reviewProblemIndependently({
+    const runReview = () => { countCall(); return timed("review", () => reviewProblemIndependently({
       skillLabel: label, examSystem: params.examSystem ?? null, format: params.format, stimulus, question: question ?? "", options: g.options ?? null,
       statements: g.statements ?? null, figure: g.figure ?? null, correctIndex: g.correctIndex ?? null, answers: g.answers ?? null, requestedDifficulty: params.difficulty,
       design: g.design ?? null,
-    }); };
+    })); };
     let review: IndependentReview | null = null;
     let secondReviewDisagreedFirst = false;
     let heldReasons: string[] | null = null;
@@ -438,6 +464,10 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
       const item: Accepted = { problem: outcome.problem, quality: outcome.quality };
       accepted.push(item);
       stats.accepted += 1;
+      // 2026-09-17(UAT 지적) — 배치 전체가 나중에 시간 제한에 걸려 죽어도, 여기까지의
+      // 실측 소요는 Vercel 함수 로그에 이미 남아 있다("몇 번째 문항이 몇 초째에
+      // 끝났는지"로 어디서 시간이 새는지 특정할 수 있다).
+      console.log(JSON.stringify({ event: "problem_generation_item_accepted", elapsedMs: Date.now() - pipelineStart, acceptedSoFar: stats.accepted }));
       await params.onAccepted?.(item);
     } else if (outcome.kind === "held") {
       // 보강 대기는 한 번의 요청에서 요청 수를 넘길 수 없다(2026-09-15: 목표는 대기함이 요청 수의 10% 이하).
@@ -445,6 +475,7 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
       const item: Held = { problem: outcome.problem, quality: outcome.quality, reasons: outcome.reasons };
       held.push(item);
       stats.held += 1;
+      console.log(JSON.stringify({ event: "problem_generation_item_held", elapsedMs: Date.now() - pipelineStart, heldSoFar: stats.held }));
       await params.onHeld?.(item);
     }
   };
@@ -536,5 +567,11 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
   // 평균 모델 호출 수 — 생성·자료·재생성·부분수정·독립검사를 통틀어, 실제로 뭔가를 얻은 문항(통과+대기) 하나당.
   const totalOutputs = stats.accepted + stats.held;
   const avgModelCalls = totalOutputs > 0 ? Math.round((stats.modelCalls / totalOutputs) * 100) / 100 : stats.modelCalls;
-  return { accepted, held, failures, stats: { ...stats, modelCalls: avgModelCalls } };
+  stats.timeMs.total = Date.now() - pipelineStart;
+  const finalStats = { ...stats, modelCalls: avgModelCalls };
+  // 2026-09-17(UAT 지적 — "목표 60초/문항인데 실제는 훨씬 오래 걸린다") — 성공 여부와
+  // 무관하게 항상 단계별 소요를 남긴다. 실패로 끝나 로그를 못 보는 경우를 없앤다
+  // (Vercel 함수 로그에서 이 한 줄로 실제 병목 단계를 바로 특정할 수 있다).
+  console.log(JSON.stringify({ event: "problem_generation_pipeline_timing", requested, accepted: stats.accepted, held: stats.held, timeMs: stats.timeMs }));
+  return { accepted, held, failures, stats: finalStats };
 }
