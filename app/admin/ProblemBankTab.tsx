@@ -54,11 +54,13 @@ type Bucket = "create" | "working" | "published" | "archived";
 // 순서, '검수 대기'는 '검수'로 개칭). '생성' 탭에는 목록이 없고(순수 생성 폼, 문항
 // 체계 SAT R&W/SAT Math/AP 선택은 그 안에 그대로 있다), 나머지 세 탭에는 생성 폼
 // 없이 필터+목록만 있다. 문항 체계는 생성에서만 쓰이므로 상위 nav 로 올리지 않는다.
-const BUCKETS: { key: Bucket; label: string; hint: string }[] = [
-  { key: "create", label: "생성", hint: "새 문제를 만듭니다. 저장하거나 AI로 생성하면 검수 탭에서 확인할 수 있습니다." },
-  { key: "working", label: "검수", hint: "자동 검사를 통과한 완성 후보입니다. 학생에게 제공할 가치가 있는지 판단해 공개하거나 보관하세요." },
-  { key: "published", label: "공개", hint: "지금 공개된 내용입니다. 회차 구성 후보가 됩니다." },
-  { key: "archived", label: "보관", hint: "보관된 문제입니다. 과거 기록은 그대로 남습니다." },
+// 2026-09-17 — 탭 아래 한 줄 설명(생성/검수/공개/보관 각각)은 화면이 번잡해
+// 보인다는 사용자 피드백으로 없앤다. 라벨 자체가 이미 뜻을 전달한다.
+const BUCKETS: { key: Bucket; label: string }[] = [
+  { key: "create", label: "생성" },
+  { key: "working", label: "검수" },
+  { key: "published", label: "공개" },
+  { key: "archived", label: "보관" },
 ];
 
 const WORK_STATE_LABEL: Record<BankProblem["workState"], string> = {
@@ -167,7 +169,6 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
     if (bucket === "published") return p.workState === "published";
     return p.workState === "draft" || p.workState === "in_review" || p.workState === "none";
   });
-  const bucketHint = BUCKETS.find((b) => b.key === bucket)?.hint ?? "";
   const publishableDrafts = visible.filter((p) => p.draft?.versionId);
 
   async function publishAllVisible() {
@@ -210,8 +211,6 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
           </button>
         ))}
       </div>
-      <p className="text-[12px] text-grey-500 mb-4">{bucketHint}</p>
-
       {catalog === null && !catalogError && <p className="text-[12.5px] text-grey-500 mb-3">과목을 불러오는 중...</p>}
       {catalogError && <p className="text-[12.5px] text-red mb-3">과목을 불러오지 못했습니다. 새로고침 후 다시 시도해주세요.</p>}
       {catalog !== null && activeSubjects.length === 0 && <p className="text-[12.5px] text-grey-500 mb-3">먼저 커리큘럼에서 과목을 만들어야 문제를 추가할 수 있습니다.</p>}
@@ -221,7 +220,6 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
           subjects={activeSubjects}
           keywords={filter.subjectId ? keywordsBySubject.get(filter.subjectId) ?? [] : []}
           filter={filter}
-          searchLabel={bucket === "working" ? "작성 중인 문제에서 찾기" : bucket === "published" ? "공개된 문제에서 찾기" : "보관된 문제에서 찾기"}
           onChange={(next) => setFilter((f) => ({ ...f, ...next }))}
         />
       )}
@@ -360,55 +358,63 @@ function Filters({
   subjects,
   keywords,
   filter,
-  searchLabel,
   onChange,
 }: {
   subjects: AdminSubject[];
   keywords: SubjectKeyword[];
   filter: ProblemBankFilter;
-  searchLabel: string;
   onChange: (next: Partial<ProblemBankFilter>) => void;
 }) {
   const system = (filter.examSystem as ExamSystem | undefined) ?? null;
   return (
-    <div className="flex flex-wrap gap-2 mb-4 items-center">
-      <select aria-label="과목" value={filter.subjectId ?? ""} onChange={(e) => onChange({ subjectId: e.target.value || undefined, keywordId: undefined })} className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5">
-        <option value="">전체</option>
-        {subjects.map((s) => (
-          <option key={s.subjectId} value={s.subjectId}>{s.subjectName}</option>
-        ))}
-      </select>
-      <select aria-label="문항 체계 필터" value={filter.examSystem ?? ""} onChange={(e) => onChange({ examSystem: e.target.value || undefined, satDomain: undefined, skillCode: undefined })} className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5">
-        <option value="">모든 문항 체계</option>
-        {EXAM_SYSTEMS.map((e) => (
-          <option key={e.code} value={e.code}>{e.label}</option>
-        ))}
-      </select>
-      {system !== "ap" && (
-        <>
-          <select aria-label="SAT 영역" value={filter.satDomain ?? ""} onChange={(e) => onChange({ satDomain: e.target.value || undefined, skillCode: undefined })} className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5">
-            <option value="">모든 영역</option>
-            {(system ? domainsForExamSystem(system) : domainsForExamSystem("sat_rw").concat(domainsForExamSystem("sat_math"))).map((d) => (
-              <option key={d.code} value={d.code}>{d.label}</option>
-            ))}
-          </select>
-          <select aria-label="세부 기술" value={filter.skillCode ?? ""} onChange={(e) => onChange({ skillCode: e.target.value || undefined })} className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 max-w-[260px]">
-            <option value="">{filter.satDomain ? "모든 기술" : "모든 기술(영역 먼저 고르면 좁혀짐)"}</option>
-            {(filter.satDomain ? skillsForDomain(filter.satDomain) : SKILL_CODES.filter((k) => !system || (system === "sat_rw" ? k.domain.startsWith("rw_") : !k.domain.startsWith("rw_")))).map((k) => (
-              <option key={k.code} value={k.code}>{k.label}</option>
-            ))}
-          </select>
-        </>
-      )}
-      <select aria-label="키워드" disabled={!filter.subjectId} value={filter.keywordId ?? ""} onChange={(e) => onChange({ keywordId: e.target.value || undefined })} className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 disabled:opacity-50">
-        <option value="">{filter.subjectId ? "모든 키워드" : "과목을 먼저 고르세요"}</option>
-        {keywords.map((k) => (
-          <option key={k.id} value={k.id}>{k.label}</option>
-        ))}
-      </select>
-      <ToggleGroup ariaLabel="형식" options={FORMAT_FILTER_OPTIONS} value={filter.format ?? ""} onChange={(v) => onChange({ format: v || undefined })} />
-      <ToggleGroup ariaLabel="난이도 필터" options={DIFFICULTY_FILTER_OPTIONS} value={filter.difficulty ?? ""} onChange={(v) => onChange({ difficulty: v || undefined })} />
-      <input aria-label="문제 검색" value={filter.query ?? ""} onChange={(e) => onChange({ query: e.target.value || undefined })} placeholder={`${searchLabel}(지문·주제)`} className="flex-1 min-w-[180px] text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5" />
+    <div className="flex flex-col gap-2 mb-4">
+      {/* 1행: 과목 · 키워드 */}
+      <div className="flex flex-wrap gap-2 items-center">
+        <select aria-label="과목" value={filter.subjectId ?? ""} onChange={(e) => onChange({ subjectId: e.target.value || undefined, keywordId: undefined })} className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5">
+          <option value="">전체</option>
+          {subjects.map((s) => (
+            <option key={s.subjectId} value={s.subjectId}>{s.subjectName}</option>
+          ))}
+        </select>
+        <select aria-label="키워드" disabled={!filter.subjectId} value={filter.keywordId ?? ""} onChange={(e) => onChange({ keywordId: e.target.value || undefined })} className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 disabled:opacity-50">
+          <option value="">{filter.subjectId ? "모든 키워드" : "과목을 먼저 고르세요"}</option>
+          {keywords.map((k) => (
+            <option key={k.id} value={k.id}>{k.label}</option>
+          ))}
+        </select>
+      </div>
+
+      {/* 2행: 문항 체계 → 영역 → 세부 기술(폭이 좁으면 다음 줄로) */}
+      <div className="flex flex-wrap gap-2 items-center">
+        <select aria-label="문항 체계 필터" value={filter.examSystem ?? ""} onChange={(e) => onChange({ examSystem: e.target.value || undefined, satDomain: undefined, skillCode: undefined })} className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5">
+          <option value="">모든 문항 체계</option>
+          {EXAM_SYSTEMS.map((e) => (
+            <option key={e.code} value={e.code}>{e.label}</option>
+          ))}
+        </select>
+        {system !== "ap" && (
+          <>
+            <select aria-label="SAT 영역" value={filter.satDomain ?? ""} onChange={(e) => onChange({ satDomain: e.target.value || undefined, skillCode: undefined })} className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5">
+              <option value="">모든 영역</option>
+              {(system ? domainsForExamSystem(system) : domainsForExamSystem("sat_rw").concat(domainsForExamSystem("sat_math"))).map((d) => (
+                <option key={d.code} value={d.code}>{d.label}</option>
+              ))}
+            </select>
+            <select aria-label="세부 기술" value={filter.skillCode ?? ""} onChange={(e) => onChange({ skillCode: e.target.value || undefined })} className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 w-full sm:w-auto max-w-[260px]">
+              <option value="">{filter.satDomain ? "모든 기술" : "모든 기술(영역 먼저 고르면 좁혀짐)"}</option>
+              {(filter.satDomain ? skillsForDomain(filter.satDomain) : SKILL_CODES.filter((k) => !system || (system === "sat_rw" ? k.domain.startsWith("rw_") : !k.domain.startsWith("rw_")))).map((k) => (
+                <option key={k.code} value={k.code}>{k.label}</option>
+              ))}
+            </select>
+          </>
+        )}
+      </div>
+
+      {/* 3행: 형식 · 난이도 버튼 그룹 */}
+      <div className="flex flex-wrap gap-3 items-center">
+        <ToggleGroup ariaLabel="형식" options={FORMAT_FILTER_OPTIONS} value={filter.format ?? ""} onChange={(v) => onChange({ format: v || undefined })} />
+        <ToggleGroup ariaLabel="난이도 필터" options={DIFFICULTY_FILTER_OPTIONS} value={filter.difficulty ?? ""} onChange={(v) => onChange({ difficulty: v || undefined })} />
+      </div>
     </div>
   );
 }
@@ -562,7 +568,7 @@ function NewProblemPanel({
               <option key={k.code} value={k.code}>{k.label}</option>
             ))}
           </select>
-          <input aria-label="문제 유형" value={skillType} onChange={(e) => setSkillType(e.target.value)} placeholder="유형 (세부 기술을 고르면 자동)" className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 w-[220px]" />
+          {/* '유형'은 세부 기술을 고르면 자동으로 채워지는 내부 값이다 — 읽기 전용 에코라 화면에는 보이지 않는다. */}
           <input aria-label="주제" value={topic} onChange={(e) => setTopic(e.target.value)} placeholder="주제 (선택 · 예: 생태계)" className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 w-[170px]" />
           <select aria-label="난이도" value={difficulty} onChange={(e) => setDifficulty(e.target.value as "easy" | "medium" | "hard")} className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5">
             <option value="medium">보통</option>
@@ -603,18 +609,12 @@ function NewProblemPanel({
         </div>
       )}
 
-      <div className="flex flex-wrap gap-2 items-center mt-3">
-        <button
-          disabled={!canCreate}
-          onClick={() => void onCreate({ subjectId, format, skillType: skillType.trim() || undefined, skillCode: skillCode || undefined, examSystem: system, apSubject: system === "ap" ? apSubject || undefined : undefined, topic: topic.trim() || undefined, difficulty, keywordIds: keywordIds.length ? keywordIds : undefined })}
-          className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
-        >
-          직접 쓰기
-        </button>
+      <div className="mt-3">
         {system !== "ap" && (
-          <>
-            <span className="text-grey-300">|</span>
+          <div className="flex items-center gap-2 mb-2">
+            <label htmlFor="new-problem-count" className="text-[12px] font-bold text-grey-500">문제 수:</label>
             <input
+              id="new-problem-count"
               aria-label="생성 개수"
               type="number"
               min={1}
@@ -626,15 +626,26 @@ function NewProblemPanel({
               }}
               className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 w-[64px]"
             />
+          </div>
+        )}
+        <div className="flex flex-wrap gap-2 items-center">
+          <button
+            disabled={!canCreate}
+            onClick={() => void onCreate({ subjectId, format, skillType: skillType.trim() || undefined, skillCode: skillCode || undefined, examSystem: system, apSubject: system === "ap" ? apSubject || undefined : undefined, topic: topic.trim() || undefined, difficulty, keywordIds: keywordIds.length ? keywordIds : undefined })}
+            className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink bg-white disabled:opacity-50"
+          >
+            직접 생성
+          </button>
+          {system !== "ap" && (
             <button
               disabled={!canCreate || !skillType.trim()}
               onClick={() => void onGenerate({ subjectId, skillType: skillType.trim(), skillCode: skillCode || undefined, examSystem: system, topic: topic.trim() || undefined, difficulty, format, count: Math.max(1, Math.min(MAX_SAFE_GENERATE_COUNT, Number(count) || 1)), keywordIds: keywordIds.length ? keywordIds : undefined, figurePolicy })}
-              className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
+              className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink bg-white disabled:opacity-50"
             >
-              AI로 만들기
+              AI 생성
             </button>
-          </>
-        )}
+          )}
+        </div>
       </div>
       {isCompilerSkill && (
         <p className="text-[11.5px] text-grey-500 mt-2">
