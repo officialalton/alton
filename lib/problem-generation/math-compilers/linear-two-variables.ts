@@ -51,9 +51,19 @@ function fmt(n: number): string {
   return Number.isInteger(n) ? String(n) : n.toFixed(2).replace(/\.?0+$/, "");
 }
 
-/** "y = 3x - 16" 형태로 부호를 정리한다 — "+ -16" 같은 어색한 표기를 막는다. */
+/**
+ * "y = 3x - 16" 형태로 부호를 정리한다 — "+ -16" 같은 어색한 표기를 막는다.
+ * 2026-09-17(품질 보완) — 계수 1/-1/0을 "1x"/"-1x"/"0x"로 그대로 찍으면 실제 SAT
+ * 표기와 달라 학생이 낯설어한다. x항은 "x"/"-x"로, 기울기 0이면 x항 자체를 뺀다.
+ */
 function fmtLine(m: number, b: number): string {
-  return `y = ${fmt(m)}x ${b >= 0 ? "+" : "-"} ${fmt(Math.abs(b))}`;
+  if (m === 0) return `y = ${fmt(b)}`;
+  const xTerm = m === 1 ? "x" : m === -1 ? "-x" : `${fmt(m)}x`;
+  // 2026-09-17(품질 보완, 실제 배치 표본 확인) — 절편이 0이면 "+ 0"을 그대로 붙여
+  // "y = -x + 0" 같은 불필요한 항이 나갔다. 0이면 상수항 자체를 뺀다.
+  if (b === 0) return `y = ${xTerm}`;
+  const bTerm = `${b >= 0 ? "+" : "-"} ${fmt(Math.abs(b))}`;
+  return `y = ${xTerm} ${bTerm}`;
 }
 
 // 2026-09-17(checkFigure 실측) — 기울기가 가파르면(예: |m|=10) 직선이 그래프 안에서
@@ -61,15 +71,27 @@ function fmtLine(m: number, b: number): string {
 // 절편 범위(range)와 별개로 기울기 크기는 항상 legible한 값(최대 6)으로 제한한다.
 const MAX_SLOPE_MAGNITUDE = 6;
 
+// 2026-09-17(품질 보완) — range(좌표·절편 범위)만으로는 medium·hard가 사실상 같은
+// 난이도로 보였다(둘 다 기울기가 |m|≤6로 같이 잘렸다). 기울기 크기 하한을 난이도별로
+// 둬서 easy는 계산이 쉬운 작은 기울기, hard는 |m|=1 같은 자명한 값을 배제한다.
+const MIN_SLOPE_MAGNITUDE_BY_DIFFICULTY: Record<LinearTwoVarDifficulty, number> = { easy: 1, medium: 1, hard: 2 };
+const MAX_SLOPE_MAGNITUDE_BY_DIFFICULTY: Record<LinearTwoVarDifficulty, number> = { easy: 3, medium: 5, hard: 6 };
+
+function randSlope(difficulty: LinearTwoVarDifficulty): number {
+  const min = MIN_SLOPE_MAGNITUDE_BY_DIFFICULTY[difficulty];
+  const max = MAX_SLOPE_MAGNITUDE_BY_DIFFICULTY[difficulty];
+  const magnitude = randInt(min, max);
+  return Math.random() < 0.5 ? magnitude : -magnitude;
+}
+
 /** 정수 교점을 갖는 두 직선을 계수 범위 안에서 찾는다(최대 200회 시도 — 정수해 밀도가 높아 보통 몇 회 안에 찾는다). */
-function pickIntersectingLines(range: number): { m1: number; b1: number; m2: number; b2: number; x: number; y: number } {
-  const slopeRange = Math.min(range, MAX_SLOPE_MAGNITUDE);
+function pickIntersectingLines(range: number, difficulty: LinearTwoVarDifficulty): { m1: number; b1: number; m2: number; b2: number; x: number; y: number } {
   for (let attempt = 0; attempt < 200; attempt++) {
     const x = randInt(-range, range);
     const y = randInt(-range, range);
-    const m1 = randInt(-slopeRange, slopeRange);
-    let m2 = randInt(-slopeRange, slopeRange);
-    if (m2 === m1) m2 = m1 + (m1 >= 0 ? -1 : 1); // 기울기가 같으면 교점이 하나로 정해지지 않는다.
+    const m1 = randSlope(difficulty);
+    let m2 = randSlope(difficulty);
+    if (m2 === m1) m2 = -m1; // 기울기가 같으면 교점이 하나로 정해지지 않는다.
     const b1 = y - m1 * x;
     const b2 = y - m2 * x;
     // 2026-09-17(checkFigure 실측) — 절편이 좌표 범위를 크게 벗어나면(예: range=10인데
@@ -84,18 +106,34 @@ function pickIntersectingLines(range: number): { m1: number; b1: number; m2: num
   return { m1: 1, b1: 0, m2: -1, b2: 2, x: 1, y: 1 };
 }
 
+/**
+ * 2026-09-17(품질 보완) — 오답 사유 문장은 실제로 무엇을 물었는지(좌표 / 기울기 /
+ * y절편)에 맞아야 한다. 세 문맥이 같은 함수를 공유하다 보니 좌표 문항이 아닌데도
+ * "묻는 좌표가 아니라 다른 좌표값을…" 같은 문구가 나가던 것을 바로잡는다.
+ */
+type CoordinateContext = "coordinate" | "slope" | "intercept";
+
 function buildDistractorsForCoordinate(
   correctValue: number,
   otherValue: number,
-  m1: number, b1: number, m2: number, b2: number
+  m1: number, b1: number, m2: number, b2: number,
+  context: CoordinateContext = "coordinate"
 ): { value: string; kind: DistractorKind; reason: string }[] {
-  // 실제 오류 경로 — 부호 오류, 두 식을 바꿔 계산(다른 좌표값을 답으로 착각), 절편을 빠뜨림.
+  // 실제 오류 경로 — 부호 오류, 두 식을 바꿔 계산(다른 값을 답으로 착각), 절편을 빠뜨림.
   // 우선순위 후보가 서로 겹치면(작은 범위에서는 흔하다) offset 시리즈로 계속 채운다 —
   // 항상 서로 다른 정수 3개를 낼 때까지 확장한다(무한 루프 방지용 상한만 둔다).
+  const otherReason =
+    context === "slope" ? "첫 번째 식이 아니라 두 번째 식의 기울기를 답으로 골랐다."
+    : context === "intercept" ? "첫 번째 식이 아니라 두 번째 식의 y절편을 답으로 골랐다."
+    : "묻는 좌표가 아니라 다른 좌표값을 답으로 골랐다.";
+  const formulaMisuseReason =
+    context === "slope" ? "기울기를 구하면서 두 식의 y절편 차를 그대로 더해 계산했다(무관한 값을 섞은 오류)."
+    : context === "intercept" ? "y절편을 구하면서 두 식의 y절편 차를 다시 그 위에 더해 계산했다(중복 반영 오류)."
+    : "두 식의 절편 차를 answer에 그대로 더해 계산했다(소거 과정 오류).";
   const candidates: { value: number; kind: DistractorKind; reason: string }[] = [
     { value: -correctValue, kind: "sign_error", reason: "부호를 반대로 계산했다." },
-    { value: otherValue, kind: "condition_ignored", reason: "묻는 좌표가 아니라 다른 좌표값을 답으로 골랐다." },
-    { value: correctValue + b1 - b2, kind: "formula_misuse", reason: "두 식의 절편 차를 answer에 그대로 더해 계산했다(소거 과정 오류)." },
+    { value: otherValue, kind: "condition_ignored", reason: otherReason },
+    { value: correctValue + b1 - b2, kind: "formula_misuse", reason: formulaMisuseReason },
   ];
   for (let offset = 1; offset <= 50; offset++) {
     candidates.push({ value: correctValue + offset, kind: "other", reason: `계산 과정에서 ${offset}만큼 어긋났다.` });
@@ -154,11 +192,9 @@ export function generateLinearTwoVarModel(params: {
   if (questionKind === "num_solutions") {
     // 해의 개수 문항 — 세 경우(하나/없음/무한)를 균등하게 낸다.
     const roll = randInt(0, 2);
-    const m1 = randInt(-range, range) || 1;
+    const m1 = randSlope(params.difficulty);
     if (roll === 0) {
-      const { m2: _drop, ...rest } = pickIntersectingLines(range);
-      void _drop;
-      const lines = pickIntersectingLines(range);
+      const lines = pickIntersectingLines(range, params.difficulty);
       return {
         skillCode: "linear_equations_two_var", difficulty: params.difficulty, questionKind,
         m1: lines.m1, b1: lines.b1, m2: lines.m2, b2: lines.b2, systemKind: "one_solution",
@@ -199,7 +235,7 @@ export function generateLinearTwoVarModel(params: {
     };
   }
 
-  const lines = pickIntersectingLines(range);
+  const lines = pickIntersectingLines(range, params.difficulty);
   const { m1, b1, m2, b2, x, y } = lines;
 
   if (questionKind === "slope" || questionKind === "intercept") {
@@ -210,7 +246,7 @@ export function generateLinearTwoVarModel(params: {
       skillCode: "linear_equations_two_var", difficulty: params.difficulty, questionKind,
       m1, b1, m2, b2, systemKind: "one_solution", intersection: { x, y },
       correctAnswer: fmt(value),
-      distractors: buildDistractorsForCoordinate(value, other, m1, b1, m2, b2).slice(0, 3),
+      distractors: buildDistractorsForCoordinate(value, other, m1, b1, m2, b2, questionKind).slice(0, 3),
     };
   }
 
@@ -245,7 +281,9 @@ function buildExplanation(model: LinearTwoVarModel): string {
   if (model.questionKind === "slope") return `${eq1}의 형태에서 x의 계수가 기울기이므로 기울기는 ${fmt(model.m1)}이다.`;
   if (model.questionKind === "intercept") return `${eq1}의 형태에서 상수항이 y절편이므로 y절편은 ${fmt(model.b1)}이다.`;
   const { x, y } = model.intersection!;
-  const base = `두 식을 연립하면 ${fmtLine(model.m1, model.b1)}과 ${fmtLine(model.m2, model.b2)}에서 x = ${fmt(x)}, y = ${fmt(y)}이다.`;
+  // 2026-09-17(품질 보완) — 영문 수식 뒤에 한국어 조사(과/와)를 그대로 붙이면
+  // ("y = x + 4과 …") 어색하다. 두 식을 쉼표로 나열해 조사 없이 잇는다.
+  const base = `두 식을 연립하면 ${eq1}, ${eq2}에서 x = ${fmt(x)}, y = ${fmt(y)}이다.`;
   if (model.questionKind === "intersection_x") return `${base} 따라서 x좌표는 ${fmt(x)}이다.`;
   if (model.questionKind === "intersection_y") return `${base} 따라서 y좌표는 ${fmt(y)}이다.`;
   return `${base} 따라서 x좌표와 y좌표의 합은 ${fmt(x)} + ${fmt(y)} = ${fmt(x + y)}이다.`;
