@@ -20,6 +20,7 @@ import { checkContent } from "@/lib/problem-content-check";
 import { composeProblemText, splitLegacyQuestion } from "@/lib/problem-question";
 import { judgeMaterialNeed, materialBlocker, MATERIAL_KIND_LABEL, MATERIAL_LEVEL_LABEL, type GeometryTemplate } from "@/lib/problem-material-need";
 import { skillLabel } from "@/lib/problem-taxonomy";
+import { isEvidenceModelSkill } from "@/lib/problem-generation/evidence-model-check";
 import { editorVisibility, FORMAT_LABEL } from "./problem-bank-ui";
 
 type Job = () => Promise<{ ok: true } | { ok: false; error: string }>;
@@ -263,6 +264,27 @@ export default function ProblemDraftEditor({
           )}
           {source.repairStatus === "needs_distractor_repair" && (
             <RecheckButton problemId={problem.id} onDone={() => void onRun(() => Promise.resolve({ ok: true }), undefined)} />
+          )}
+        </details>
+      )}
+
+      {/* 근거 모델(2026-09-17, 내부 검토용 — 학생 비공개): 5개 R&W 세부 기술에서만, 값이 있을 때만 보인다. */}
+      {source && isEvidenceModelSkill(problem.skillCode ?? null) && (source.evidenceTarget || source.evidenceSpan || source.answerRationale || source.distractorErrorTypes) && (
+        <details className="text-[12px] mt-1 mb-1 border-[1.5px] border-grey-200 rounded-lg px-3 py-2 bg-grey-100/60" data-testid="evidence-model-details">
+          <summary className="cursor-pointer text-ink font-semibold">내부 검토용 — 학생 비공개 (근거 모델)</summary>
+          {source.evidenceTarget && (
+            <p className="mt-1 text-ink"><b className="text-grey-500">대상:</b> {source.evidenceTarget}</p>
+          )}
+          {source.evidenceSpan && (
+            <p className="mt-1 text-ink"><b className="text-grey-500">근거 인용:</b> &ldquo;{source.evidenceSpan}&rdquo;</p>
+          )}
+          {source.answerRationale && (
+            <p className="mt-1 text-ink"><b className="text-grey-500">근거→정답 논리:</b> {source.answerRationale}</p>
+          )}
+          {source.distractorErrorTypes && source.distractorErrorTypes.length > 0 && (
+            <ul className="mt-1 list-disc pl-5 text-grey-500">
+              {source.distractorErrorTypes.map((t, i) => <li key={i}>{t}</li>)}
+            </ul>
           )}
         </details>
       )}

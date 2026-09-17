@@ -9,6 +9,8 @@ import { checkQualityContract } from "@/lib/problem-quality-contract";
 import { judgeMaterialNeed, materialBlocker } from "@/lib/problem-material-need";
 import { composeProblemText } from "@/lib/problem-question";
 import { skillLabel } from "@/lib/problem-taxonomy";
+import { isEvidenceModelSkill, checkEvidenceModelFields } from "./evidence-model-check";
+import { parseRwStimulus } from "@/lib/rw-stimulus";
 
 export type GeneratedProblem = Awaited<ReturnType<typeof generateSectionProblemsCore>>[number];
 type FigureKind = "plane" | "parallel_transversal" | "triangle" | "circle" | "polygon" | "solid" | "composite" | "data" | "figure_choice" | "figure_set";
@@ -250,6 +252,7 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
           const revised = await timed("regenerate", () => regenerateProblemCore({
             sectionTitle: params.topic?.trim() || params.skillType, subjectName: params.subjectName, skillType: params.skillType,
             difficulty: params.difficulty, format: params.format, current: { ...g, passage: text },
+            skillCode,
             feedback: `검증에 걸렸습니다: ${reason}. 이 사유가 해소되도록 지문·자료·질문·선택지·정답·해설을 서로 맞게 다시 쓰세요. 자료(figure)는 지문이 부르는 이름·값과 정확히 같아야 하고 정답이 드러나면 안 됩니다. 오답은 지문·자료의 일부를 맞게 반영하되 핵심 관계 하나를 놓친 것이어야 합니다.`,
           }));
           const outcome = await gate({ ...revised, needsFigure: false } as GeneratedProblem, depth + 1);
@@ -307,6 +310,29 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
       }
     }
     if (!contract.ok) return fail("contract", contract.issues.map((i) => i.message).slice(0, 2).join(" / "));
+
+    // 2.4) 근거 모델(2026-09-17, 5개 R&W 세부 기술 전용) — evidence_span이 실제 지문 문자열인지 결정적으로
+    // 검사한다. AI 자기 보고를 신뢰하지 않는다("Math AI는 진실값을 결정하지 않는다"의 R&W 대응).
+    // 이 게이트는 사람이 초안을 보기 **전**(생성 수락 단계)에서 돈다 — 실패하면 fail()이 정한 상한 안에서
+    // 사유를 피드백으로 넘겨 재생성한다(Math 컴파일러의 checkContent/checkFigure 재시도-예산 패턴과 동일).
+    if (isEvidenceModelSkill(skillCode)) {
+      const sourceTexts =
+        skillCode === "cross_text_connections"
+          ? (() => {
+              const parsed = parseRwStimulus(stimulus);
+              const bodies = parsed.blocks.filter((b): b is { kind: "text"; title: string; body: string } => b.kind === "text").map((b) => b.body);
+              return bodies.length ? bodies : [stimulus];
+            })()
+          : [stimulus];
+      const distractorCount = params.format === "mc" && g.options ? Math.max(0, g.options.length - 1) : 0;
+      const evCheck = checkEvidenceModelFields(
+        skillCode,
+        { target: g.evidenceTarget ?? null, evidenceSpan: g.evidenceSpan ?? null, answerRationale: g.answerRationale ?? null, distractorErrorTypes: g.distractorErrorTypes ?? null },
+        sourceTexts,
+        distractorCount
+      );
+      if (!evCheck.ok) return fail("contract", evCheck.reason);
+    }
 
     // 2.5) 정답 자리 vs 해설 대조(2026-09-15 제품 오너 확인 — 해설은 맞는데 정답 표시만 틀린 사례 발견).
     // 해설이 실제로 결론 내리는 선택지로 정답 자리를 맞춘다("해설을 다시 반영하는 구조").

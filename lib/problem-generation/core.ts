@@ -9,6 +9,7 @@ import { placeCorrectChoice } from "@/lib/problem-figures/templates/figure-choic
 import { findProblemSkill } from "@/lib/problem-skills";
 import { SKILL_BY_CODE, domainLabel } from "@/lib/problem-taxonomy";
 import type { DocProblem } from "@/app/admin/curriculum-doc-data";
+import { isEvidenceModelSkill, DISTRACTOR_ERROR_TYPES, type EvidenceModelSkill } from "@/lib/problem-generation/evidence-model-check";
 
 // 클라이언트는 호출 시점에 만든다 — 모듈 로드만 하는 테스트(jsdom)에서 SDK 가 브라우저 환경으로 오해하지 않게.
 let anthropicClient: Anthropic | null = null;
@@ -49,6 +50,52 @@ const FIGURE_POLICY_RULE: Record<FigurePolicy, string> = {
 };
 export type ProblemDifficulty = "easy" | "medium" | "hard";
 
+/**
+ * "얇은 근거 모델"(Evidence Model, 2026-09-17) — R&W 5개 세부 기술(words_in_context,
+ * central_ideas_details, inferences, command_of_evidence_text, cross_text_connections)
+ * 전용 스키마 추가. 기존 구조화 자료 블록(Text1/2, 표/그래프 근거, 밑줄/빈칸)은 그대로
+ * 두고, 같은 AI 호출 안에 target/evidence_span/answer_rationale/distractor_error_types
+ * 네 필드를 함께 받는다(2차 AI 왕복을 만들지 않는다). 이 필드들은 결정적 검증기
+ * (lib/problem-generation/evidence-model-check.ts)가 사람에게 보이기 전에 가려내는
+ * 내부/관리자 전용 데이터이고, 학생 화면에는 절대 노출하지 않는다.
+ */
+const evidenceModelToolProperties = (skill: EvidenceModelSkill) => ({
+  target: {
+    type: "string",
+    description:
+      skill === "words_in_context"
+        ? "이 문항이 실제로 묻는 대상 — 문맥상 의미를 물어야 할 특정 단어/구(지문에 나온 그대로)."
+        : skill === "inferences"
+          ? "학생이 추론해야 하는 구체적 주장/결론 한 문장(무엇을 추론하는가)."
+          : skill === "central_ideas_details"
+            ? "질문이 실제로 묻는 대상 — 지문 전체의 중심 생각인지, 특정 세부 정보인지 한 문장으로."
+            : skill === "command_of_evidence_text"
+              ? "정답 선택지(주장/결론)가 근거로 뒷받침해야 하는 구체적 주장 한 문장."
+              : "Text 1과 Text 2가 어떤 관계로 연결되는지(동의/반박/보완 등) 묻는 대상 한 문장.",
+  },
+  evidence_span: {
+    type: "string",
+    description:
+      "정답의 근거가 되는 지문(또는 cross_text_connections면 Text 1 또는 Text 2 중 관련된 쪽)의 **축자 그대로의 부분 문자열**(paraphrase 금지). " +
+      "이 문자열은 실제로 지문 원문에 그대로 존재해야 한다 — 검증기가 지문 안에서 이 문자열을 실제로 찾아본다(공백·구두점 차이만 허용). " +
+      "지문에 실제로 없는 문장을 만들어 넣으면 안 된다.",
+  },
+  answer_rationale: {
+    type: "string",
+    description:
+      "evidence_span이 정답을 논리적으로 어떻게 뒷받침하는지의 짧고 구조화된 한 문장(설명 산문이 아니라, explanation의 근거가 되는 뼈대). " +
+      "target·evidence_span과 다른 표현이어야 한다(그대로 베끼면 검증에서 거부된다).",
+  },
+  distractor_error_types: {
+    type: "array",
+    items: { type: "string", enum: Array.from(DISTRACTOR_ERROR_TYPES[skill]) },
+    description:
+      `오답(정답 제외) 각 선택지 순서대로 오류 유형 태그 하나씩. 반드시 다음 중에서만 고른다(자유 문구·새 카테고리 금지): ${DISTRACTOR_ERROR_TYPES[skill].join(", ")}.`,
+  },
+});
+const EVIDENCE_MODEL_PROMPT_NOTE = (skill: EvidenceModelSkill) =>
+  `\n근거 모델(내부 전용, 학생에게 보이지 않음) — 이 세부 기술(${skill})은 target/evidence_span/answer_rationale/distractor_error_types 네 필드를 함께 채운다. evidence_span은 지문에 실제로 있는 문장을 **그대로 복사**해야 하며(의역 금지), 지문에 없는 문장을 지어내면 검증에서 걸린다. distractor_error_types는 정해진 태그(${DISTRACTOR_ERROR_TYPES[skill].join(", ")}) 중에서만 고른다.`;
+
 const FORMAT_LABEL: Record<ProblemFormat, string> = {
   mc: "객관식",
   spr: "숫자 입력(SPR)",
@@ -69,12 +116,14 @@ export async function generateSectionProblemsCore(params: {
   skillCode?: string;
   /** 자료가 빠진(또는 규격에 안 맞는) 결과를 버리지 않고 figure:null 로 돌려준다 — 호출자가 2차 자료 생성으로 채운다(문제은행, 2026-09-15). */
   keepFigureless?: boolean;
-}): Promise<(Omit<DocProblem, "id" | "keywords"> & { stimulus?: string; question?: string | null; needsFigure?: boolean; distractorRationales?: { index: number; plausible_because: string; matches: string; why_wrong: string; kind: string }[]; difficultyRationale?: string; design?: { key_relations?: string[]; answer_uses_relations?: string; distractor_design?: { index: number; relation: string; error_type: string }[]; target_difficulty_note?: string } | null })[]> {
+}): Promise<(Omit<DocProblem, "id" | "keywords"> & { stimulus?: string; question?: string | null; needsFigure?: boolean; distractorRationales?: { index: number; plausible_because: string; matches: string; why_wrong: string; kind: string }[]; difficultyRationale?: string; design?: { key_relations?: string[]; answer_uses_relations?: string; distractor_design?: { index: number; relation: string; error_type: string }[]; target_difficulty_note?: string } | null; evidenceTarget?: string | null; evidenceSpan?: string | null; answerRationale?: string | null; distractorErrorTypes?: string[] | null })[]> {
   const { sectionTitle, subjectName, skillType, difficulty, format, count } = params;
   const skillMeta = params.skillCode ? SKILL_BY_CODE.get(params.skillCode) ?? null : null;
   const ruleSkill = findProblemSkill(skillType) ?? (skillMeta ? findProblemSkill(skillMeta.legacySkill) : null);
   const figurePolicy: FigurePolicy = params.figurePolicy ?? "optional";
   const clampedCount = Math.max(1, Math.min(10, count));
+  // 2026-09-17 — 근거 모델은 이 5개 세부 기술에만 적용된다. 다른 R&W 기술·모든 Math는 스키마·프롬프트가 전혀 바뀌지 않는다.
+  const evidenceSkill: EvidenceModelSkill | null = isEvidenceModelSkill(params.skillCode) ? params.skillCode : null;
 
   // 어려움(hard)은 design 이 필수라 항목당 응답이 훨씬 길다 — 개수·난이도에 맞춰 토큰 예산을 늘린다.
   // 예산이 부족하면 도구 호출이 중간에 잘려 problems 배열이 아예 비게 나온다("AI 응답에 문제가 없습니다").
@@ -179,8 +228,12 @@ export async function generateSectionProblemsCore(params: {
                     },
                     required: ["key_relations", "answer_uses_relations", "distractor_design"],
                   },
+                  ...(evidenceSkill ? evidenceModelToolProperties(evidenceSkill) : {}),
                 },
-                required: difficulty === "hard" ? ["passage", "question", "explanation", "design"] : ["passage", "question", "explanation"],
+                required: [
+                  ...(difficulty === "hard" ? ["passage", "question", "explanation", "design"] : ["passage", "question", "explanation"]),
+                  ...(evidenceSkill ? ["target", "evidence_span", "answer_rationale", "distractor_error_types"] : []),
+                ],
               },
             },
           },
@@ -212,6 +265,7 @@ Reading & Writing 구조 규칙: 지문 본문과 질문 단락은 빈 줄로 �
 난이도 규칙: 난이도는 지문 길이·낯선 고유명사·어려운 어휘로 만들지 않는다. 학생이 지문·자료의 핵심 관계(원인/결과·조건·범위·비교·화자 관점·시간 관계)를 얼마나 정확히 구분해야 하는지로 설계한다. 어려움(hard)이면 정답은 여러 문장 또는 자료의 관계를 종합해야 하고, 오답은 각각 그중 일부만 포착해야 한다.
 오답 규칙(객관식): 각 오답은 지문·자료의 일부를 맞게 반영하되 핵심 관계 하나를 빠뜨리거나 잘못 해석해야 한다. 어휘 문항의 오답은 그 단어의 다른 뜻이나 문맥에 그럴듯한 다른 단어여야 하고, 지문과 무관한 낱말·문장은 쓰지 않는다. 독해 문항(중심 생각·추론·근거·구조·비교)의 오답 셋은 서로 다른 오류 유형이어야 한다 — 예: 하나는 지문의 세부는 맞지만 범위를 과장/축소, 하나는 인과·비교·시간 관계를 뒤바꿈, 하나는 화자·대상을 혼동하거나 증거는 맞지만 질문에 답하지 않음. 지문에 없는 내용의 선택지는 오답으로 쓰지 않는다. 지문과 무관한 선택지, 명백한 반대말, 불필요한 과장(all/never/only)만으로 지워지는 오답은 만들지 않는다(내용상 그 표현이 정답이거나 필요한 오답이면 예외). Math 오답은 실제 풀이 오류 모델(부호·단위 변환·한 단계 누락·축/눈금 오독·조건 무시·평균/비율/확률 계산 오류·도형 관계 오적용)에서 나와야 하고, 정답과 오답 모두 질문의 조건을 다 고려한 값이어야 한다. distractor_rationales 에 오답 셋의 근거를 적는다.
 ${difficulty === "hard" ? `어려움(hard) 전용 절차 — **지문을 쓰기 전에** design 을 먼저 채운다: (1) key_relations 에 학생이 종합해야 하는 핵심 관계 2~3개를 정한다. (2) answer_uses_relations 에 정답이 그 관계들을 어떻게 함께 만족하는지 적는다. (3) distractor_design 에 각 오답이 어느 관계를 부분적으로 맞추는지와 정확히 어디서 틀리는지(scope·causal·intensity·temporal·speaker·condition·partial_computation·unit·sign 중 하나)를 적는다. 그 다음에만 이 설계에 맞춰 지문·질문·선택지·해설을 쓴다. 설계와 실제 문항이 어긋나면(예: distractor_design 에 적은 오류가 실제 선택지 문장에 드러나지 않음) 안 된다.` : ""}
+${evidenceSkill ? EVIDENCE_MODEL_PROMPT_NOTE(evidenceSkill) : ""}
 이 문제들은 특정 학생이 아니라 이 교재를 배정받는 어떤 학생에게도 재사용될 문제
 은행에 들어갑니다. 실전 SAT/AP 시험에 나올 법한 퀄리티로 만들어주세요.`,
       },
@@ -234,6 +288,10 @@ ${difficulty === "hard" ? `어려움(hard) 전용 절차 — **지문을 쓰기 
     distractor_rationales?: { index: number; plausible_because: string; matches: string; why_wrong: string; kind: string }[];
     difficulty_rationale?: string;
     design?: { key_relations?: string[]; answer_uses_relations?: string; distractor_design?: { index: number; relation: string; error_type: string }[]; target_difficulty_note?: string };
+    target?: string;
+    evidence_span?: string;
+    answer_rationale?: string;
+    distractor_error_types?: string[];
 };
   const input = toolUse.input as { problems?: unknown };
   // 모델이 배열 대신 객체({"0": {...}} 또는 문제 하나)를 주는 경우가 있다 — 배열로 정규화한다.
@@ -288,6 +346,11 @@ ${difficulty === "hard" ? `어려움(hard) 전용 절차 — **지문을 쓰기 
     distractorRationales: Array.isArray(p.distractor_rationales) ? p.distractor_rationales : [],
     difficultyRationale: typeof p.difficulty_rationale === "string" ? p.difficulty_rationale : "",
     design: p.design && typeof p.design === "object" ? p.design : null,
+    // 근거 모델(2026-09-17) — evidenceSkill이 아니면 항상 null(다른 R&W 기술·Math는 손대지 않는다).
+    evidenceTarget: evidenceSkill && typeof p.target === "string" ? p.target : null,
+    evidenceSpan: evidenceSkill && typeof p.evidence_span === "string" ? p.evidence_span : null,
+    answerRationale: evidenceSkill && typeof p.answer_rationale === "string" ? p.answer_rationale : null,
+    distractorErrorTypes: evidenceSkill && Array.isArray(p.distractor_error_types) ? p.distractor_error_types.map(String) : null,
     };
   });
 }
@@ -300,8 +363,11 @@ export async function regenerateProblemCore(params: {
   format: ProblemFormat;
   current: Omit<DocProblem, "id" | "keywords">;
   feedback: string;
-}): Promise<Omit<DocProblem, "id" | "keywords"> & { stimulus?: string; question?: string | null }> {
+  /** 근거 모델(2026-09-17) 5개 세부 기술이면 재생성에도 target/evidence_span/answer_rationale/distractor_error_types를 함께 받는다. */
+  skillCode?: string | null;
+}): Promise<Omit<DocProblem, "id" | "keywords"> & { stimulus?: string; question?: string | null; evidenceTarget?: string | null; evidenceSpan?: string | null; answerRationale?: string | null; distractorErrorTypes?: string[] | null }> {
   const { sectionTitle, subjectName, skillType, difficulty, format, current, feedback } = params;
+  const evidenceSkill: EvidenceModelSkill | null = isEvidenceModelSkill(params.skillCode) ? params.skillCode : null;
 
   const message = await getAnthropic().messages.create({
     model: "claude-sonnet-5",
@@ -334,8 +400,9 @@ export async function regenerateProblemCore(params: {
               type: "string",
               description: format === "mc" ? "정답 해설" : format === "spr" ? "풀이 과정과 정답" : "모범 답안 또는 풀이 과정",
             },
+            ...(evidenceSkill ? evidenceModelToolProperties(evidenceSkill) : {}),
           },
-          required: ["passage", "question", "explanation"],
+          required: ["passage", "question", "explanation", ...(evidenceSkill ? ["target", "evidence_span", "answer_rationale", "distractor_error_types"] : [])],
         },
       },
     ],
@@ -360,7 +427,8 @@ ${current.correctIndex !== null ? `정답 인덱스: ${current.correctIndex}` : 
 
 이 피드백을 반영해 문제를 다시 작성해주세요.${
           format === "mc" ? " 객관식은 반드시 선택지 4개와 정답 인덱스를 포함해주세요." : ""
-        }`,
+        }
+${evidenceSkill ? EVIDENCE_MODEL_PROMPT_NOTE(evidenceSkill) : ""}`,
       },
     ],
   });
@@ -377,6 +445,10 @@ ${current.correctIndex !== null ? `정답 인덱스: ${current.correctIndex}` : 
     answers?: string[];
     figure?: unknown;
     explanation: string;
+    target?: string;
+    evidence_span?: string;
+    answer_rationale?: string;
+    distractor_error_types?: string[];
   };
 
   const stimulusRaw = stripInlineOptions(raw.passage ?? "", raw.options ?? null);
@@ -393,6 +465,10 @@ ${current.correctIndex !== null ? `정답 인덱스: ${current.correctIndex}` : 
     answers: format === "spr" ? (raw.answers ?? []).map(String).filter(Boolean) : null,
     figure: (() => { const fv = raw.figure ? validateFigureSpec(raw.figure) : null; return fv && fv.ok ? fv.spec : null; })(),
     explanation: raw.explanation,
+    evidenceTarget: evidenceSkill && typeof raw.target === "string" ? raw.target : null,
+    evidenceSpan: evidenceSkill && typeof raw.evidence_span === "string" ? raw.evidence_span : null,
+    answerRationale: evidenceSkill && typeof raw.answer_rationale === "string" ? raw.answer_rationale : null,
+    distractorErrorTypes: evidenceSkill && Array.isArray(raw.distractor_error_types) ? raw.distractor_error_types.map(String) : null,
     difficulty,
   };
 }

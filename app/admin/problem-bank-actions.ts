@@ -97,6 +97,16 @@ export type ProblemContent = {
   quality: QualityRecord | null;
   /** 2026-09-15: 'needs_distractor_repair' 면 지문·질문·정답·자료는 통과했고 오답만 보강이 필요 — 일반 초안 목록에서 숨는다. */
   repairStatus: "none" | "needs_distractor_repair";
+  /**
+   * 2026-09-17 — "얇은 근거 모델"(Evidence Model). R&W 5개 세부 기술
+   * (words_in_context/central_ideas_details/inferences/command_of_evidence_text/cross_text_connections)
+   * 에만 채워진다(다른 R&W 세부 기술·모든 Math는 항상 null). **내부/관리자 전용** — 학생 화면·API에는
+   * 절대 넘기지 않는다(app/admin/ProblemDraftEditor.tsx 검수 화면에서만 읽기 전용으로 표시).
+   */
+  evidenceTarget: string | null;
+  evidenceSpan: string | null;
+  answerRationale: string | null;
+  distractorErrorTypes: string[] | null;
 };
 
 export type BankResult<T = undefined> =
@@ -196,7 +206,7 @@ export async function listBankProblemsAction(
   // 있다 — 그래서 공개된 문제가 "(아직 내용이 없는 문제)"로 보였다.
   const { data: contentRows } = await admin
     .from("problem_versions")
-    .select("id, problem_id, status, version_no, passage, question, options, correct_index, explanation, explanation_en, answers, figure, figure_checked, render_check, statements, quality, repair_status")
+    .select("id, problem_id, status, version_no, passage, question, options, correct_index, explanation, explanation_en, answers, figure, figure_checked, render_check, statements, quality, repair_status, evidence_target, evidence_span, answer_rationale, distractor_error_types")
     .in("problem_id", problemIds)
     .in("status", ["published", "draft", "in_review"])
     .order("version_no", { ascending: false });
@@ -216,6 +226,10 @@ export async function listBankProblemsAction(
     statements: Array.isArray(v.statements) ? (v.statements as string[]) : null,
     quality: (v.quality as QualityRecord | null) ?? null,
     repairStatus: (v.repair_status as "none" | "needs_distractor_repair" | undefined) ?? "none",
+    evidenceTarget: (v.evidence_target as string | null) ?? null,
+    evidenceSpan: (v.evidence_span as string | null) ?? null,
+    answerRationale: (v.answer_rationale as string | null) ?? null,
+    distractorErrorTypes: Array.isArray(v.distractor_error_types) ? (v.distractor_error_types as string[]) : null,
   });
 
   const publishedByProblem = new Map<string, ProblemContent>();
@@ -401,6 +415,11 @@ export async function createDraftVersionAction(params: {
   statements?: string[] | null;
   /** 2026-09-15: 'needs_distractor_repair' 로 저장하면 지문·질문·정답·자료는 통과했지만 오답 보강 대기 상태로 들어간다(일반 초안 목록에서 숨음). */
   repairStatus?: "none" | "needs_distractor_repair";
+  /** 2026-09-17 근거 모델(내부/관리자 전용) — 5개 R&W 세부 기술이 아니면 항상 null로 저장한다. */
+  evidenceTarget?: string | null;
+  evidenceSpan?: string | null;
+  answerRationale?: string | null;
+  distractorErrorTypes?: string[] | null;
 }): Promise<BankResult<{ versionId: string; answerFixed: boolean }>> {
   const { adminUserId } = await requireAdmin();
   const admin = createAdminClient();
@@ -489,6 +508,10 @@ export async function createDraftVersionAction(params: {
     p_question: params.question?.trim() || null,
     p_repair_status: params.repairStatus ?? null,
     p_explanation_en: params.explanationEn ?? null,
+    p_evidence_target: params.evidenceTarget ?? null,
+    p_evidence_span: params.evidenceSpan ?? null,
+    p_answer_rationale: params.answerRationale ?? null,
+    p_distractor_error_types: params.distractorErrorTypes ?? null,
   });
   if (error) return { ok: false, error: readable(error.message, "초안을 저장하지 못했습니다.") };
   const { error: checkError } = await admin.rpc("set_problem_render_check", { p_version_id: data as string, p_check: check });
@@ -626,7 +649,7 @@ export async function createDraftFromPublishedAction(
 
   const { data: published } = await admin
     .from("problem_versions")
-    .select("passage, question, options, correct_index, explanation, explanation_en, difficulty, answers, figure, statements")
+    .select("passage, question, options, correct_index, explanation, explanation_en, difficulty, answers, figure, statements, evidence_target, evidence_span, answer_rationale, distractor_error_types")
     .eq("problem_id", problemId)
     .eq("status", "published")
     .maybeSingle();
@@ -647,6 +670,10 @@ export async function createDraftFromPublishedAction(
     statements: Array.isArray(published.statements) ? (published.statements as string[]) : null,
     // 공개본의 그림은 이미 확인된 것이다 — 데이터가 그대로면 확인도 이어진다.
     figureChecked: published.figure != null,
+    evidenceTarget: (published.evidence_target as string | null) ?? null,
+    evidenceSpan: (published.evidence_span as string | null) ?? null,
+    answerRationale: (published.answer_rationale as string | null) ?? null,
+    distractorErrorTypes: Array.isArray(published.distractor_error_types) ? (published.distractor_error_types as string[]) : null,
   });
   if (!created.ok) return created;
   return { ok: true, value: { versionId: created.value.versionId, reused: false } };
@@ -841,6 +868,11 @@ export async function generateBankProblemsAction(params: {
     const draft = await createDraftVersionAction({
       problemId: problem.value, passage: g.stimulus ?? g.passage, question: g.question ?? null, options: g.options ?? null, correctIndex: g.correctIndex ?? null,
       explanation: g.explanation, difficulty: params.difficulty, answers: g.answers ?? null, figure: g.figure ?? null, statements: g.statements ?? null,
+      // 근거 모델(2026-09-17): GeneratedProblem이 evidenceSkill이 아니면 이 필드들은 core.ts에서 이미 null이다.
+      evidenceTarget: (g as { evidenceTarget?: string | null }).evidenceTarget ?? null,
+      evidenceSpan: (g as { evidenceSpan?: string | null }).evidenceSpan ?? null,
+      answerRationale: (g as { answerRationale?: string | null }).answerRationale ?? null,
+      distractorErrorTypes: (g as { distractorErrorTypes?: string[] | null }).distractorErrorTypes ?? null,
     });
     if (!draft.ok) {
       // 초안을 저장하지 못한 결과는 분리한다 — 빈 문제가 '질문 없는 초안'으로 남지 않게 바로 보관한다(삭제 아님).
