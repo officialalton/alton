@@ -44,4 +44,17 @@ describe("renderEquivalentExpressionsProblem — 렌더링·해설", () => {
       expect(rendered.explanation).toMatch(/분배하면/);
     }
   });
+
+  // 2026-09-17(실측, 아침 UAT) — 계수 1을 "1(x + 7)"처럼, 상수항 0을 "(x + 0)"처럼
+  // 그대로 찍던 결함.
+  it("괄호 앞 계수가 1/-1이면 숫자를 찍지 않고, 상수항이 0이면 '+ 0'을 찍지 않는다(100회 반복)", () => {
+    for (let i = 0; i < 100; i++) {
+      const model = generateEquivalentExpressionsModel({ difficulty: "medium" });
+      const rendered = renderEquivalentExpressionsProblem(model);
+      expect(rendered.passage).not.toMatch(/\b1\(x/);
+      expect(rendered.passage).not.toMatch(/\+ 1\(x/);
+      expect(rendered.passage).not.toMatch(/- 1\(x/);
+      expect(rendered.passage).not.toMatch(/[+-] 0\)/);
+    }
+  });
 });

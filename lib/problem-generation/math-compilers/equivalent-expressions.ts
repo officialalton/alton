@@ -94,8 +94,26 @@ export type CompiledMathProblem = {
   distractorRationales: DistractorRationale[];
 };
 
+/** 괄호 앞 계수(부호 포함, 예: -3) — 2026-09-17(실측, 아침 UAT) "1(x + 7)"처럼
+ * 계수 1을 그대로 찍던 것을 실제 SAT 표기(계수 생략, -1은 부호만)에 맞춘다.
+ * linear-two-variables.ts의 xTerm과 같은 규칙. */
+function coefTerm(a: number): string {
+  return a === 1 ? "" : a === -1 ? "-" : fmt(a);
+}
+/** 괄호 앞 계수(크기만, 부호는 앞에 별도로 "+"/"-"가 이미 붙는 두 번째 항용). */
+function coefMagnitude(a: number): string {
+  const abs = Math.abs(a);
+  return abs === 1 ? "" : fmt(abs);
+}
+/** "(x + 3)"/"(x - 3)"/"(x)" — 2026-09-17(실측, 아침 UAT) 상수항이 0이면 "(x + 0)"을
+ * 그대로 찍던 것을 고친다(linear-two-variables.ts의 rhsExpr과 같은 규칙). */
+function parenTerm(k: number): string {
+  if (k === 0) return "(x)";
+  return `(x ${k >= 0 ? "+" : "-"} ${fmt(Math.abs(k))})`;
+}
+
 export function renderEquivalentExpressionsProblem(model: EquivalentExpressionsModel): CompiledMathProblem {
-  const lhs = `${fmt(model.a)}(x ${model.b >= 0 ? "+" : "-"} ${fmt(Math.abs(model.b))}) ${model.c >= 0 ? "+" : "-"} ${fmt(Math.abs(model.c))}(x ${model.d >= 0 ? "+" : "-"} ${fmt(Math.abs(model.d))})`;
+  const lhs = `${coefTerm(model.a)}${parenTerm(model.b)} ${model.c >= 0 ? "+" : "-"} ${coefMagnitude(model.c)}${parenTerm(model.d)}`;
   const passage = `다음 식을 보자.\n\n${lhs}`;
   const question = "이 식과 동치인 것은?";
   const options = [model.correctAnswer, ...model.distractors.map((d) => d.value)];
