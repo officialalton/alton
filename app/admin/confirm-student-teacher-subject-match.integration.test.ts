@@ -2,15 +2,19 @@ import { execFileSync } from "node:child_process";
 import { createClient } from "@supabase/supabase-js";
 import { describe, expect, it } from "vitest";
 
-// 2026-09-10(매칭 공통화 + 커리큘럼 출처 보존) — 실제 로컬 Postgres에 대고
-// confirm_student_teacher_subject_match()/seed_curriculum_overlay_for_match()
-// (migration 20261270000000)를 직접 호출해 검증한다. 다음 UAT 항목을 다룬다:
+// 2026-09-17(커리큘럼 구조 단순화 — 교사 상시 레이어 제거) — 실제 로컬 Postgres에
+// 대고 confirm_student_teacher_subject_match()/ensure_active_curriculum_overlay()
+// (migration 20261394000000)를 직접 호출해 검증한다. 이 파일은 원래
+// teacher_curriculum_templates 우선순위(C-1, 20261270000000/20261274000000)를
+// 검증했는데, 그 레이어 자체가 제거돼 이 버전으로 대체한다. 다룬다:
 //   1) 공통 매칭의 원자성 — 유효 시급 없는 교사 배정 시도가 실패하면
 //      subject_enrollments insert까지 함께 롤백된다(부분 성공 없음).
 //   2) 중복 호출 멱등성 — 같은 조합을 두 번 호출해도 행이 중복 생성되지 않는다.
-//   3) 교사 운영본 우선 / 공통 원본(subject_template_units) 폴백.
-//   4) 서로 다른 시점에 매칭된 두 학생의 커리큘럼 스냅샷이 다르게 남는다.
-//   5) 교사 운영본 단원 삭제 후에도 학생 사본과 출처(source_kind)는 보존된다.
+//   3) 학생별 사본은 항상 관리자 공용 커리큘럼(subject_template_units)에서 직접
+//      만들어진다(source_kind='subject_template').
+//   4) 과목에 공용 커리큘럼(회차)이 없으면 배정 자체를 거부한다.
+//   5) 서로 다른 시점에 매칭된 두 학생은 그 사이 공용 커리큘럼이 바뀌면
+//      서로 다른 스냅샷을 갖는다(사본이지 실시간 참조가 아님).
 
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
 const SERVICE_ROLE_KEY =
@@ -82,17 +86,10 @@ function createTeacher(label: string, withValidRate: boolean): string {
   return id;
 }
 
-// C-1(2026-09-10) — 이제 confirm_student_teacher_subject_match()는 선생님이
-// 해당 과목의 운영 커리큘럼(단원 1개 이상)을 갖고 있어야만 배정을 허용한다.
-// 이 헬퍼로 그 전제조건을 만족시켜, 다른 테스트(원자성/멱등성 등)가 이
-// 가드가 아니라 원래 검증하려던 것만 확인하도록 격리한다.
-function giveTeacherOperatingCurriculum(teacherId: string, subjectId: string): void {
-  const templateId = psql(
-    `insert into teacher_curriculum_templates (teacher_id, subject_id) values ('${teacherId}', '${subjectId}') returning id;`
-  );
-  psql(
-    `insert into teacher_curriculum_template_units (template_id, position, unit_title) values ('${templateId}', 1, '기본 단원');`
-  );
+// 2026-09-17 — 교사 상시 레이어가 제거돼, 배정 가능 조건은 이제 "과목에 관리자
+// 공용 커리큘럼(회차 1개 이상)이 있는가"뿐이다.
+function giveSubjectCurriculum(subjectId: string): void {
+  psql(`insert into subject_template_units (subject_id, position, unit_title) values ('${subjectId}', 1, '기본 단원');`);
 }
 
 function createSubject(label: string): string {
@@ -119,14 +116,14 @@ function createHousehold(childId: string): string {
   return householdId;
 }
 
-describe("confirm_student_teacher_subject_match (2026-09-10, 매칭 공통화, 실제 DB)", () => {
+describe("confirm_student_teacher_subject_match (2026-09-17, 교사 레이어 제거 이후, 실제 DB)", () => {
   it("원자성: 유효 시급 없는 교사 배정은 전체가 실패하고 subject_enrollments도 만들어지지 않는다", async () => {
     const adminUser = await createAdminUser("관리자1");
     const childId = createChild("원자성학생1");
     createHousehold(childId);
     const subjectId = createSubject("원자성과목1");
+    giveSubjectCurriculum(subjectId);
     const teacherId = createTeacher("원자성교사1", false); // 유효 시급 없음
-    giveTeacherOperatingCurriculum(teacherId, subjectId); // 시급 검증만 격리해서 확인
 
     const adminClient = await signInAsAdmin(adminUser.email);
     const { error } = await adminClient.rpc("confirm_student_teacher_subject_match", {
@@ -149,8 +146,8 @@ describe("confirm_student_teacher_subject_match (2026-09-10, 매칭 공통화, �
     const childId = createChild("멱등학생1");
     createHousehold(childId);
     const subjectId = createSubject("멱등과목1");
+    giveSubjectCurriculum(subjectId);
     const teacherId = createTeacher("멱등교사1", true);
-    giveTeacherOperatingCurriculum(teacherId, subjectId);
 
     const adminClient = await signInAsAdmin(adminUser.email);
     const first = await adminClient.rpc("confirm_student_teacher_subject_match", {
@@ -187,25 +184,17 @@ describe("confirm_student_teacher_subject_match (2026-09-10, 매칭 공통화, �
     expect(studentStatus).toBe("active");
   });
 
-  it("교사 운영본이 있으면 그것을 우선 시딩하고, source_kind='teacher_template'로 표시한다(공통 원본과 가산하지 않음)", async () => {
+  it("학생별 사본은 항상 관리자 공용 커리큘럼에서 직접 만들어진다(source_kind='subject_template')", async () => {
     const adminUser = await createAdminUser("관리자3");
-    const childId = createChild("교사우선학생1");
+    const childId = createChild("공용원본학생1");
     createHousehold(childId);
-    const subjectId = createSubject("교사우선과목1");
-    const teacherId = createTeacher("교사우선교사1", true);
-
-    // 교사 운영본 생성.
-    const templateId = psql(
-      `insert into teacher_curriculum_templates (teacher_id, subject_id) values ('${teacherId}', '${subjectId}') returning id;`
-    );
+    const subjectId = createSubject("공용원본과목1");
     psql(
-      `insert into teacher_curriculum_template_units (template_id, position, unit_title, note) values
-        ('${templateId}', 1, '교사 단원 1', '교사 노트 1'),
-        ('${templateId}', 2, '교사 단원 2', null);`
+      `insert into subject_template_units (subject_id, position, unit_title) values
+        ('${subjectId}', 1, '공용 단원 1'),
+        ('${subjectId}', 2, '공용 단원 2');`
     );
-    // 공통 원본(subject_template_units)도 함께 만들어, 가산되지 않고 교사
-    // 운영본만 쓰이는지 확인한다.
-    psql(`insert into subject_template_units (subject_id, position, unit_title) values ('${subjectId}', 1, '공통 원본 단원');`);
+    const teacherId = createTeacher("공용원본교사1", true);
 
     const adminClient = await signInAsAdmin(adminUser.email);
     const { data, error } = await adminClient
@@ -222,19 +211,15 @@ describe("confirm_student_teacher_subject_match (2026-09-10, 매칭 공통화, �
     const units = psql(
       `select unit_title || '|' || source_kind from curriculum_overlay_units where overlay_id = '${matchData.out_overlay_id}' order by position;`
     ).split("\n");
-    expect(units).toEqual(["교사 단원 1|teacher_template", "교사 단원 2|teacher_template"]);
-    // 공통 원본 단원("공통 원본 단원")은 섞여 있지 않아야 한다 — 가산 금지.
-    expect(units.some((u) => u.includes("공통 원본 단원"))).toBe(false);
+    expect(units).toEqual(["공용 단원 1|subject_template", "공용 단원 2|subject_template"]);
   });
 
-  it("2026-09-10(C-1): 교사 운영본이 없으면 공통 원본으로 폴백하지 않고 배정 자체를 거부한다", async () => {
+  it("과목에 공용 커리큘럼(회차)이 없으면 배정 자체를 거부한다", async () => {
     const adminUser = await createAdminUser("관리자4");
-    const childId = createChild("폴백학생1");
+    const childId = createChild("빈과목학생1");
     createHousehold(childId);
-    const subjectId = createSubject("폴백과목1");
-    const teacherId = createTeacher("폴백교사1", true); // 운영본 없음
-
-    psql(`insert into subject_template_units (subject_id, position, unit_title) values ('${subjectId}', 1, '공통 원본 단원 A');`);
+    const subjectId = createSubject("빈과목1"); // 회차 없음
+    const teacherId = createTeacher("빈과목교사1", true);
 
     const adminClient = await signInAsAdmin(adminUser.email);
     const { error } = await adminClient.rpc("confirm_student_teacher_subject_match", {
@@ -244,42 +229,20 @@ describe("confirm_student_teacher_subject_match (2026-09-10, 매칭 공통화, �
     });
 
     expect(error).not.toBeNull();
-    expect(error?.message).toContain("운영 커리큘럼이 없어 배정할 수 없습니다");
+    expect(error?.message).toContain("공용 커리큘럼(회차)이 없어 배정할 수 없습니다");
     const enrollmentCount = psql(
       `select count(*) from subject_enrollments where child_id = '${childId}' and subject_id = '${subjectId}';`
     );
-    expect(enrollmentCount).toBe("0"); // 신규 매칭은 공통 원본 폴백을 쓰지 않는다 — 아무것도 만들어지지 않음.
+    expect(enrollmentCount).toBe("0"); // 빈 커리큘럼으로는 아무것도 만들어지지 않음.
   });
 
-  it("2026-09-10(C-1): 운영본에 단원이 0개(빈 템플릿)여도 배정을 거부한다", async () => {
-    const adminUser = await createAdminUser("관리자4-2");
-    const childId = createChild("빈운영본학생1");
-    createHousehold(childId);
-    const subjectId = createSubject("빈운영본과목1");
-    const teacherId = createTeacher("빈운영본교사1", true);
-    psql(`insert into teacher_curriculum_templates (teacher_id, subject_id) values ('${teacherId}', '${subjectId}');`); // 단원 없음
-
-    const adminClient = await signInAsAdmin(adminUser.email);
-    const { error } = await adminClient.rpc("confirm_student_teacher_subject_match", {
-      p_child_id: childId,
-      p_teacher_id: teacherId,
-      p_subject_id: subjectId,
-    });
-
-    expect(error).not.toBeNull();
-    expect(error?.message).toContain("운영 커리큘럼이 없어 배정할 수 없습니다");
-  });
-
-  it("서로 다른 시점에 매칭된 두 학생은 그 사이 교사 운영본이 바뀌면 서로 다른 스냅샷을 갖는다", async () => {
+  it("서로 다른 시점에 매칭된 두 학생은 그 사이 공용 커리큘럼이 바뀌면 서로 다른 스냅샷을 갖는다", async () => {
     const adminUser = await createAdminUser("관리자5");
     const subjectId = createSubject("스냅샷과목1");
-    const teacherId = createTeacher("스냅샷교사1", true);
-    const templateId = psql(
-      `insert into teacher_curriculum_templates (teacher_id, subject_id) values ('${teacherId}', '${subjectId}') returning id;`
-    );
     const unitId = psql(
-      `insert into teacher_curriculum_template_units (template_id, position, unit_title) values ('${templateId}', 1, '버전1 단원') returning id;`
+      `insert into subject_template_units (subject_id, position, unit_title) values ('${subjectId}', 1, '버전1 단원') returning id;`
     );
+    const teacherId = createTeacher("스냅샷교사1", true);
 
     const childA = createChild("스냅샷학생A");
     createHousehold(childA);
@@ -289,8 +252,8 @@ describe("confirm_student_teacher_subject_match (2026-09-10, 매칭 공통화, �
       .single();
     expect(resultA.error).toBeNull();
 
-    // 교사가 운영본을 수정.
-    psql(`update teacher_curriculum_template_units set unit_title = '버전2 단원' where id = '${unitId}';`);
+    // 관리자가 공용 커리큘럼을 수정.
+    psql(`update subject_template_units set unit_title = '버전2 단원' where id = '${unitId}';`);
 
     const childB = createChild("스냅샷학생B");
     createHousehold(childB);
@@ -301,35 +264,15 @@ describe("confirm_student_teacher_subject_match (2026-09-10, 매칭 공통화, �
 
     const titleA = psql(`select unit_title from curriculum_overlay_units where overlay_id = '${(resultA.data as MatchRpcRow).out_overlay_id}';`);
     const titleB = psql(`select unit_title from curriculum_overlay_units where overlay_id = '${(resultB.data as MatchRpcRow).out_overlay_id}';`);
-    expect(titleA).toBe("버전1 단원"); // A는 매칭 시점 스냅샷 유지 — 이후 교사 수정에 영향받지 않음.
+    expect(titleA).toBe("버전1 단원"); // A는 매칭 시점 스냅샷 유지 — 이후 공용 커리큘럼 수정에 영향받지 않음.
     expect(titleB).toBe("버전2 단원"); // B는 자기 매칭 시점(수정 후)의 상태로 시딩됨.
-  });
 
-  it("교사 운영본 단원을 삭제해도 이미 배정된 학생의 사본과 출처(source_kind)는 남는다", async () => {
-    const adminUser = await createAdminUser("관리자6");
-    const childId = createChild("삭제보존학생1");
-    createHousehold(childId);
-    const subjectId = createSubject("삭제보존과목1");
-    const teacherId = createTeacher("삭제보존교사1", true);
-    const templateId = psql(
-      `insert into teacher_curriculum_templates (teacher_id, subject_id) values ('${teacherId}', '${subjectId}') returning id;`
-    );
-    const unitId = psql(
-      `insert into teacher_curriculum_template_units (template_id, position, unit_title) values ('${templateId}', 1, '삭제될 단원') returning id;`
-    );
-
-    const adminClient = await signInAsAdmin(adminUser.email);
-    const { data, error } = await adminClient
-      .rpc("confirm_student_teacher_subject_match", { p_child_id: childId, p_teacher_id: teacherId, p_subject_id: subjectId })
-      .single();
-    expect(error).toBeNull();
-    const matchData = data as MatchRpcRow;
-
-    psql(`delete from teacher_curriculum_template_units where id = '${unitId}';`);
-
-    const row = psql(
-      `select unit_title || '|' || source_kind || '|' || coalesce(source_teacher_template_unit_id::text, 'NULL') from curriculum_overlay_units where overlay_id = '${matchData.out_overlay_id}';`
-    );
-    expect(row).toBe("삭제될 단원|teacher_template|NULL"); // 제목·출처 사실은 남고, FK만 null(on delete set null).
+    // A는 그 사이 바뀐 기준본과 달라졌으니 "업데이트 있음"으로 표시돼야 한다.
+    const unitAId = psql(`select id from curriculum_overlay_units where overlay_id = '${(resultA.data as MatchRpcRow).out_overlay_id}';`);
+    const needsUpdate = psql(`select overlay_unit_needs_base_update('${unitAId}');`);
+    expect(needsUpdate).toBe("t");
+    const unitBId = psql(`select id from curriculum_overlay_units where overlay_id = '${(resultB.data as MatchRpcRow).out_overlay_id}';`);
+    const bUpToDate = psql(`select overlay_unit_needs_base_update('${unitBId}');`);
+    expect(bUpToDate).toBe("f");
   });
 });
