@@ -16,6 +16,16 @@ type Op = "<" | "<=" | ">" | ">=";
 const OP_TEXT: Record<Op, string> = { "<": "<", "<=": "\\le", ">": ">", ">=": "\\ge" };
 const OP_FLIPPED: Record<Op, Op> = { "<": ">", "<=": ">=", ">": "<", ">=": "<=" };
 
+/**
+ * 2026-09-17(실측, 표준 렌더링 검증기가 잡음) — "\le"/"\ge" 같은 LaTeX 제어문은
+ * $…$ 수식 기호 밖에 그대로 두면 "latex_leak"으로 저장이 거부된다("수식은 항상
+ * $…$ 안에" 라는 앱 전체 규칙, lib/problem-content-check.ts). 부등호가 <=/>= 를
+ * 쓴 식 전체를 항상 $…$ 로 감싼다.
+ */
+function mathWrap(expr: string): string {
+  return `$${expr}$`;
+}
+
 export type LinearInequalityModel = {
   skillCode: "linear_inequalities";
   difficulty: LinearInequalityDifficulty;
@@ -85,12 +95,12 @@ function generateSolveOneVar(difficulty: LinearInequalityDifficulty): LinearIneq
   const boundary = randInt(-range, range);
   const adjustedC = m * boundary + b;
   const finalOp = m < 0 ? OP_FLIPPED[op] : op;
-  const correctAnswer = `x ${OP_TEXT[finalOp]} ${fmt(boundary)}`;
+  const correctAnswer = mathWrap(`x ${OP_TEXT[finalOp]} ${fmt(boundary)}`);
 
   const distractors: { value: string; kind: DistractorKind; reason: string }[] = [
-    { value: `x ${OP_TEXT[op]} ${fmt(boundary)}`, kind: "sign_error", reason: "계수가 음수인데도 부등호 방향을 뒤집지 않았다." },
-    { value: `x ${OP_TEXT[finalOp]} ${fmt(-boundary)}`, kind: "other", reason: "경계값의 부호를 반대로 계산했다." },
-    { value: `x ${OP_TEXT[OP_FLIPPED[finalOp]]} ${fmt(boundary)}`, kind: "condition_ignored", reason: "부등호 방향을 뒤집을 필요가 없는데도 뒤집었다." },
+    { value: mathWrap(`x ${OP_TEXT[op]} ${fmt(boundary)}`), kind: "sign_error", reason: "계수가 음수인데도 부등호 방향을 뒤집지 않았다." },
+    { value: mathWrap(`x ${OP_TEXT[finalOp]} ${fmt(-boundary)}`), kind: "other", reason: "경계값의 부호를 반대로 계산했다." },
+    { value: mathWrap(`x ${OP_TEXT[OP_FLIPPED[finalOp]]} ${fmt(boundary)}`), kind: "condition_ignored", reason: "부등호 방향을 뒤집을 필요가 없는데도 뒤집었다." },
   ];
   const seen = new Set<string>([correctAnswer]);
   const uniqueDistractors: typeof distractors = [];
@@ -100,7 +110,7 @@ function generateSolveOneVar(difficulty: LinearInequalityDifficulty): LinearIneq
     uniqueDistractors.push(d);
   }
   for (let offset = 1; uniqueDistractors.length < 3 && offset <= 20; offset++) {
-    const alt = `x ${OP_TEXT[finalOp]} ${fmt(boundary + offset)}`;
+    const alt = mathWrap(`x ${OP_TEXT[finalOp]} ${fmt(boundary + offset)}`);
     if (seen.has(alt)) continue;
     seen.add(alt);
     uniqueDistractors.push({ value: alt, kind: "other", reason: `경계값 계산에서 ${offset}만큼 어긋났다.` });
@@ -230,7 +240,7 @@ export function renderLinearInequalityProblem(model: LinearInequalityModel): Com
   };
 
   if (model.questionKind === "solve_one_var") {
-    const passage = `다음 부등식을 보자.\n\n${rhsExpr(model.m, model.b)} ${OP_TEXT[model.op]} ${fmt(model.c!)}`;
+    const passage = `다음 부등식을 보자.\n\n${mathWrap(`${rhsExpr(model.m, model.b)} ${OP_TEXT[model.op]} ${fmt(model.c!)}`)}`;
     const question = "이 부등식을 만족하는 x의 범위는?";
     const { options, correctIndex } = shuffleWithAnswer(model.correctAnswer, model.distractors.map((d) => d.value));
     const flipped = model.m < 0;
@@ -253,7 +263,7 @@ export function renderLinearInequalityProblem(model: LinearInequalityModel): Com
 
   const opKor = model.op === "<" || model.op === "<=" ? "작다" : "크다";
   const eqIncl = model.op === "<=" || model.op === ">=" ? "(경계선 포함)" : "(경계선 제외)";
-  const passage = `다음 부등식의 그래프를 보자.\n\ny ${OP_TEXT[model.op]} ${rhsExpr(model.m, model.b)}`;
+  const passage = `다음 부등식의 그래프를 보자.\n\n${mathWrap(`y ${OP_TEXT[model.op]} ${rhsExpr(model.m, model.b)}`)}`;
   const question = "다음 중 이 부등식의 해에 속하는 점은?";
   const { options, correctIndex } = shuffleWithAnswer(model.correctAnswer, model.distractors.map((d) => d.value));
   const explanation = `경계선 y = ${rhsExpr(model.m, model.b)} ${eqIncl}을 기준으로, y 값이 경계선의 값보다 ${opKor} 쪽이 해 영역이다. ${model.correctAnswer}를 대입하면 조건을 만족하므로 정답이다.`;

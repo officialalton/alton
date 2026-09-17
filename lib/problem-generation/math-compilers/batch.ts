@@ -12,6 +12,7 @@
 import type { Accepted, Failure, GeneratedProblem, PipelineResult } from "../pipeline";
 import type { QualityRecord } from "../review";
 import { checkFigure } from "@/lib/problem-figures/check";
+import { checkContent } from "@/lib/problem-content-check";
 import {
   generateLinearTwoVarModel,
   renderLinearTwoVarProblem,
@@ -100,6 +101,18 @@ function attemptOne(
   timing.renderCheckMs += Date.now() - t1;
   if (!renderCheck.ok) {
     return { ok: false, reason: `렌더링 검증 실패: ${renderCheck.issues.map((i) => i.message).join(" / ")}` };
+  }
+  // 2026-09-17(실측) — 실제 저장 경로(createDraftVersionAction)가 checkContent로
+  // "$…$ 밖의 LaTeX 제어문" 등을 걸러내는데, 컴파일러 자체 검증에는 이 검사가 없어
+  // 실제 UI에서만 뒤늦게 거부되는 격차가 있었다. 여기서도 같은 검사를 미리 돌려
+  // 저장 시점이 아니라 후보 평가 시점에 실패로 집계되게 한다.
+  const contentIssues = checkContent({
+    format: "mc", passage: passageForCheck, options: compiled.options, correctIndex: compiled.correctIndex,
+    explanation: compiled.explanation, answers: null, statements: null, skillCode, figure: compiled.figure,
+  });
+  const fatalContent = contentIssues.find((i) => ["math_parse", "math_unclosed", "latex_leak"].includes(i.code));
+  if (fatalContent) {
+    return { ok: false, reason: `내용 검증 실패: ${fatalContent.message}` };
   }
 
   const problem: GeneratedProblem = {
