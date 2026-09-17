@@ -329,7 +329,8 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
         skillCode,
         { target: g.evidenceTarget ?? null, evidenceSpan: g.evidenceSpan ?? null, answerRationale: g.answerRationale ?? null, distractorErrorTypes: g.distractorErrorTypes ?? null },
         sourceTexts,
-        distractorCount
+        distractorCount,
+        question
       );
       if (!evCheck.ok) return fail("contract", evCheck.reason);
     }

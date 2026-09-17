@@ -81,11 +81,30 @@ export function verifyEvidenceSpanInSource(evidenceSpan: string, sourceText: str
  * sourceTexts: cross_text_connections는 Text 1/Text 2 중 근거가 있는 쪽만 맞으면 되므로 후보 배열을 받는다.
  * distractorCount: 옵션 중 오답 개수(보통 3) — distractor_error_types 길이가 이와 같아야 한다.
  */
+/**
+ * target이 질문 문장을 그대로 되풀이한 것인지 검사한다(cross_text_connections 전용,
+ * 2026-09-17 검수에서 5/5 샘플이 질문 재진술로 나온 문제 발견 — 프롬프트 수정과 별개로
+ * 값싼 방어선을 하나 더 둔다). 정규화된 토큰 집합의 겹침 비율이 높으면
+ * "질문을 다른 말로 옮겨 적었을 뿐 합성된 명제가 아니다"로 보고 거부한다.
+ * 임계값 0.6은 느슨하게 잡아 오탐(false positive)을 줄인다 — 정상적인 target도 질문과
+ * 같은 고유명사·핵심 명사를 공유하기 마련이라, 살짝만 겹쳐도 거부하면 정상 케이스까지 막는다.
+ */
+function targetEchoesQuestion(target: string, question: string): boolean {
+  const targetTokens = new Set(normalizeForMatch(target).split(" ").filter((t) => t.length > 1));
+  const questionTokens = new Set(normalizeForMatch(question).split(" ").filter((t) => t.length > 1));
+  if (targetTokens.size < 3 || questionTokens.size < 3) return false;
+  let overlap = 0;
+  for (const t of targetTokens) if (questionTokens.has(t)) overlap += 1;
+  const overlapRatio = overlap / Math.min(targetTokens.size, questionTokens.size);
+  return overlapRatio >= 0.6;
+}
+
 export function checkEvidenceModelFields(
   skillCode: string,
   fields: EvidenceModelFields,
   sourceTexts: string[],
-  distractorCount: number
+  distractorCount: number,
+  questionText?: string | null
 ): EvidenceModelCheckResult {
   if (!isEvidenceModelSkill(skillCode)) return { ok: true };
 
@@ -102,6 +121,11 @@ export function checkEvidenceModelFields(
   if (normEq(target, answerRationale)) return { ok: false, reason: "evidence-model: target과 answer_rationale이 같은 문장입니다(에코 의심)." };
   if (normEq(target, evidenceSpan)) return { ok: false, reason: "evidence-model: target과 evidence_span이 같은 문장입니다(에코 의심)." };
   if (normEq(answerRationale, evidenceSpan)) return { ok: false, reason: "evidence-model: answer_rationale과 evidence_span이 같은 문장입니다(에코 의심)." };
+
+  // 0) cross_text_connections 전용 — target이 질문 재진술이 아니라 합성된 명제인지(방어선, 2026-09-17).
+  if (skillCode === "cross_text_connections" && questionText && targetEchoesQuestion(target, questionText)) {
+    return { ok: false, reason: "evidence-model: target이 질문을 재진술한 것으로 보입니다(두 텍스트의 합성된 관계 명제여야 합니다)." };
+  }
 
   // 1) 축자성 검사 — AI 자기 보고가 아니라 실제 지문 문자열 검색.
   const foundInAny = sourceTexts.some((t) => verifyEvidenceSpanInSource(evidenceSpan, t));
