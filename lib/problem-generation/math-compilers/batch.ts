@@ -84,6 +84,26 @@ import {
   renderEvalClaimsProblem,
   validateEvalClaimsModel,
 } from "./evaluating-statistical-claims";
+import {
+  generateAreaVolumeModel,
+  renderAreaVolumeProblem,
+  validateAreaVolumeModel,
+} from "./area-volume";
+import {
+  generateLinesAnglesModel,
+  renderLinesAnglesProblem,
+  validateLinesAnglesModel,
+} from "./lines-angles-triangles";
+import {
+  generateRightTriModel,
+  renderRightTriProblem,
+  validateRightTriModel,
+} from "./right-triangles-trigonometry";
+import {
+  generateCirclesModel,
+  renderCirclesProblem,
+  validateCirclesModel,
+} from "./circles";
 
 // 2026-09-17(제품 오너 지시) — "같은 일차식 공통 엔진으로 확장". systems_linear(두
 // 일차방정식의 연립)은 수학적으로 linear_equations_two_var 컴파일러가 이미 계산하는
@@ -106,7 +126,11 @@ export type MathCompilerSkill =
   | "two_variable_data"
   | "probability"
   | "inference_margin_error"
-  | "evaluating_statistical_claims";
+  | "evaluating_statistical_claims"
+  | "area_volume"
+  | "lines_angles_triangles"
+  | "right_triangles_trigonometry"
+  | "circles";
 
 const MIN_BATCH = 10;
 const MAX_CANDIDATE_MULTIPLIER: Record<LinearTwoVarDifficulty, number> = { easy: 1.5, medium: 1.5, hard: 2.5 };
@@ -156,7 +180,18 @@ function attemptOne(
   timing: AttemptTiming
 ): { ok: true; problem: GeneratedProblem; quality: QualityRecord } | { ok: false; reason: string } {
   const t0 = Date.now();
-  let compiled: ReturnType<typeof renderLinearTwoVarProblem>;
+  // 2026-09-17 — 컴파일러마다 figure 타입이 다르다(직선 그래프/삼각형/원/입체 등).
+  // checkFigure는 어차피 unknown을 받으므로 여기서는 공통 형태로만 좁혀 둔다.
+  let compiled: {
+    passage: string;
+    question: string;
+    options: string[];
+    correctIndex: number;
+    explanation: string;
+    explanationEn: string;
+    figure: unknown;
+    distractorRationales: ReturnType<typeof renderLinearTwoVarProblem>["distractorRationales"];
+  };
   if (skillCode === "linear_equations_two_var" || skillCode === "systems_linear") {
     const model = generateLinearTwoVarModel({ difficulty });
     const check = validateLinearTwoVarModel(model);
@@ -227,6 +262,26 @@ function attemptOne(
     const check = validateEvalClaimsModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
     compiled = renderEvalClaimsProblem(model);
+  } else if (skillCode === "area_volume") {
+    const model = generateAreaVolumeModel({ difficulty });
+    const check = validateAreaVolumeModel(model);
+    if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
+    compiled = renderAreaVolumeProblem(model);
+  } else if (skillCode === "lines_angles_triangles") {
+    const model = generateLinesAnglesModel({ difficulty });
+    const check = validateLinesAnglesModel(model);
+    if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
+    compiled = renderLinesAnglesProblem(model);
+  } else if (skillCode === "right_triangles_trigonometry") {
+    const model = generateRightTriModel({ difficulty });
+    const check = validateRightTriModel(model);
+    if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
+    compiled = renderRightTriProblem(model);
+  } else if (skillCode === "circles") {
+    const model = generateCirclesModel({ difficulty });
+    const check = validateCirclesModel(model);
+    if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
+    compiled = renderCirclesProblem(model);
   } else {
     return { ok: false, reason: `지원하지 않는 계산형 유형: ${skillCode}` };
   }

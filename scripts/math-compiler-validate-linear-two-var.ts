@@ -20,6 +20,7 @@ const SKILL_CODE = (process.argv[2] as
   | "linear_functions" | "equivalent_expressions" | "nonlinear_equations_systems" | "nonlinear_functions"
   | "ratios_rates_units" | "percentages" | "one_variable_data" | "two_variable_data" | "probability"
   | "inference_margin_error" | "evaluating_statistical_claims"
+  | "area_volume" | "lines_angles_triangles" | "right_triangles_trigonometry" | "circles"
 ) || "linear_equations_two_var";
 const SKILL_LABEL: Record<string, string> = {
   linear_equations_two_var: "Linear equations in two variables",
@@ -37,6 +38,10 @@ const SKILL_LABEL: Record<string, string> = {
   probability: "Probability and conditional probability",
   inference_margin_error: "Inference from sample statistics and margin of error",
   evaluating_statistical_claims: "Evaluating statistical claims: observational studies and experiments",
+  area_volume: "Area and volume",
+  lines_angles_triangles: "Lines, angles, and triangles",
+  right_triangles_trigonometry: "Right triangles and trigonometry",
+  circles: "Circles",
 };
 
 async function main() {

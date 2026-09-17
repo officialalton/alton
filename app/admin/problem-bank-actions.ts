@@ -749,7 +749,7 @@ export async function generateBankProblemsAction(params: {
   // 이제 AI가 아니라 결정적 계산 컴파일러가 만든다(정답·오답·그래프 좌표를 전부
   // 코드로 계산). AI 호출이 아예 없으므로 ANTHROPIC_API_KEY 유무와 무관하게 동작한다.
   // 2026-09-17 — 같은 일차식 공통 엔진으로 systems_linear·linear_inequalities 확장.
-  const MATH_COMPILER_SKILLS = new Set(["linear_equations_two_var", "systems_linear", "linear_inequalities", "linear_equations_one_var", "linear_functions", "equivalent_expressions", "nonlinear_equations_systems", "nonlinear_functions", "ratios_rates_units", "percentages", "one_variable_data", "two_variable_data", "probability", "inference_margin_error", "evaluating_statistical_claims"]);
+  const MATH_COMPILER_SKILLS = new Set(["linear_equations_two_var", "systems_linear", "linear_inequalities", "linear_equations_one_var", "linear_functions", "equivalent_expressions", "nonlinear_equations_systems", "nonlinear_functions", "ratios_rates_units", "percentages", "one_variable_data", "two_variable_data", "probability", "inference_margin_error", "evaluating_statistical_claims", "area_volume", "lines_angles_triangles", "right_triangles_trigonometry", "circles"]);
   if (
     params.skillCode && MATH_COMPILER_SKILLS.has(params.skillCode) &&
     (params.difficulty === "easy" || params.difficulty === "medium" || params.difficulty === "hard")

@@ -451,7 +451,7 @@ function NewProblemPanel({
   // 고정 — 코드로 늘릴 수 없다)에 걸려 결과 없이 죽는다. 다만 계산형 컴파일러
   // 경로(예: linear_equations_two_var)는 AI를 아예 안 써서 이 위험이 없고, 오히려
   // "생성 실행 단위는 최소 10문항 배치"가 정책이므로 상한을 걸면 안 된다.
-  const MATH_COMPILER_SKILLS = new Set(["linear_equations_two_var", "systems_linear", "linear_inequalities", "linear_equations_one_var", "linear_functions", "equivalent_expressions", "nonlinear_equations_systems", "nonlinear_functions", "ratios_rates_units", "percentages", "one_variable_data", "two_variable_data", "probability", "inference_margin_error", "evaluating_statistical_claims"]);
+  const MATH_COMPILER_SKILLS = new Set(["linear_equations_two_var", "systems_linear", "linear_inequalities", "linear_equations_one_var", "linear_functions", "equivalent_expressions", "nonlinear_equations_systems", "nonlinear_functions", "ratios_rates_units", "percentages", "one_variable_data", "two_variable_data", "probability", "inference_margin_error", "evaluating_statistical_claims", "area_volume", "lines_angles_triangles", "right_triangles_trigonometry", "circles"]);
   const isCompilerSkill = MATH_COMPILER_SKILLS.has(skillCode);
   const MAX_SAFE_GENERATE_COUNT = isCompilerSkill ? 10 : 2;
   const [count, setCount] = useState("1");
