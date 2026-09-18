@@ -104,6 +104,7 @@ import {
   renderCirclesProblem,
   validateCirclesModel,
 } from "./circles";
+import { sprFromAnswerText } from "./spr-answer";
 
 // 2026-09-17(제품 오너 지시) — "같은 일차식 공통 엔진으로 확장". systems_linear(두
 // 일차방정식의 연립)은 수학적으로 linear_equations_two_var 컴파일러가 이미 계산하는
@@ -132,6 +133,27 @@ export type MathCompilerSkill =
   | "right_triangles_trigonometry"
   | "circles";
 
+// 2026-09-17(제품 오너 지시, SPR 1차 범위) — 이 세트에 있는 유형만 format="spr"
+// 요청을 받는다. 목록 밖 유형(예: linear_functions·probability 등)에 spr을 요청하면
+// 배치 전체를 즉시 "지원하지 않음"으로 끝낸다(뒤늦게 매 후보마다 실패로 갉아먹지 않음).
+// 유형 안에서도 "정답이 문장/그래프 선택인 세부 종류"(예: nonlinear_equations_systems의
+// num_real_solutions, two_variable_data의 그래프 선택형)는 별도 분기를 두지 않았다 —
+// sprFromAnswerText가 숫자로 파싱되지 않는 정답을 null로 돌려주면 그 후보는 자동으로
+// 실패 처리되어 자연히 제외된다(요청한 만큼은 나머지 숫자형 종류에서 재시도로 채운다).
+const SPR_ELIGIBLE_SKILLS = new Set<MathCompilerSkill>([
+  "linear_equations_one_var",
+  "linear_equations_two_var",
+  "systems_linear",
+  "nonlinear_equations_systems",
+  "ratios_rates_units",
+  "percentages",
+  "one_variable_data",
+  "two_variable_data",
+  "area_volume",
+  "right_triangles_trigonometry",
+  "circles",
+]);
+
 const MIN_BATCH = 10;
 const MAX_CANDIDATE_MULTIPLIER: Record<LinearTwoVarDifficulty, number> = { easy: 1.5, medium: 1.5, hard: 2.5 };
 /** 순수 계산이라 실제 "호출"은 없지만, 무한 루프 방지용 시도 횟수 상한은 그대로 둔다. */
@@ -142,6 +164,9 @@ export type MathCompilerBatchParams = {
   skillCode: MathCompilerSkill;
   difficulty: LinearTwoVarDifficulty;
   count: number;
+  /** 2026-09-17(SPR 1차) — "mc"(기본) | "spr". SPR_ELIGIBLE_SKILLS 밖의 유형에 "spr"을
+   * 요청하면 후보를 하나도 시도하지 않고 즉시 shortfall=요청 수로 끝낸다. */
+  format?: "mc" | "spr";
   /** 2026-09-17 버그 수정 — 관리자가 "새 문제" 패널에서 고른 자료 정책(require_plane 등)이
    * 이전엔 여기까지 전달되지 않아 nonlinear_functions가 "좌표평면 포함"을 골라도 항상
    * 텍스트형으로만 나갔다. 이 배치 실행기가 실제로 구분하는 것은 "plane 그림을 붙이는가"뿐이다. */
@@ -182,8 +207,12 @@ function attemptOne(
   skillCode: MathCompilerSkill,
   difficulty: LinearTwoVarDifficulty,
   timing: AttemptTiming,
-  figurePolicy?: string
+  figurePolicy?: string,
+  format: "mc" | "spr" = "mc"
 ): { ok: true; problem: GeneratedProblem; quality: QualityRecord } | { ok: false; reason: string } {
+  if (format === "spr" && !SPR_ELIGIBLE_SKILLS.has(skillCode)) {
+    return { ok: false, reason: `${skillCode}: 아직 SPR(그리드 입력)을 지원하지 않는 유형입니다.` };
+  }
   const t0 = Date.now();
   // 2026-09-17 — 컴파일러마다 figure 타입이 다르다(직선 그래프/삼각형/원/입체 등).
   // checkFigure는 어차피 unknown을 받으므로 여기서는 공통 형태로만 좁혀 둔다.
@@ -303,25 +332,40 @@ function attemptOne(
   // "$…$ 밖의 LaTeX 제어문" 등을 걸러내는데, 컴파일러 자체 검증에는 이 검사가 없어
   // 실제 UI에서만 뒤늦게 거부되는 격차가 있었다. 여기서도 같은 검사를 미리 돌려
   // 저장 시점이 아니라 후보 평가 시점에 실패로 집계되게 한다.
+  //
+  // 2026-09-17(SPR 1차) — format="spr"이면 MC용으로 이미 계산된 정답 텍스트
+  // (compiled.options[compiled.correctIndex])를 sprFromAnswerText로 그리드 입력용
+  // 동치 정답 목록으로 바꾼다. 정답이 문장/그래프 선택형이라 숫자로 안 읽히거나
+  // 그리드 문자 수 제한에 안 맞으면 여기서 실패로 집계하고 다음 후보로 넘어간다 —
+  // 이것이 "다중 후보 중 숫자형만 SPR로 채택"하는 검증 게이트다.
+  let sprAnswers: string[] | null = null;
+  if (format === "spr") {
+    const sprModel = sprFromAnswerText(compiled.options[compiled.correctIndex]);
+    if (!sprModel) {
+      return { ok: false, reason: `SPR 변환 실패: 정답 '${compiled.options[compiled.correctIndex]}'을 그리드 입력 형식으로 바꿀 수 없습니다(문장형·그래프 선택형 정답이거나 문자 수 제한 초과).` };
+    }
+    sprAnswers = sprModel.answers;
+  }
+
   const contentIssues = checkContent({
-    format: "mc", passage: passageForCheck, options: compiled.options, correctIndex: compiled.correctIndex,
-    explanation: compiled.explanation, answers: null, statements: null, skillCode, figure: compiled.figure,
+    format, passage: passageForCheck, options: format === "mc" ? compiled.options : null, correctIndex: format === "mc" ? compiled.correctIndex : null,
+    explanation: compiled.explanation, answers: sprAnswers, statements: null, skillCode, figure: compiled.figure,
   });
-  const fatalContent = contentIssues.find((i) => ["math_parse", "math_unclosed", "latex_leak"].includes(i.code));
+  const fatalContent = contentIssues.find((i) => ["math_parse", "math_unclosed", "latex_leak", "answers"].includes(i.code));
   if (fatalContent) {
     return { ok: false, reason: `내용 검증 실패: ${fatalContent.message}` };
   }
 
   const problem: GeneratedProblem = {
-    format: "mc",
+    format,
     figure: compiled.figure,
     passage: passageForCheck,
     stimulus: compiled.passage,
     question: compiled.question,
     needsFigure: false,
-    options: compiled.options,
-    correctIndex: compiled.correctIndex,
-    answers: null,
+    options: format === "mc" ? compiled.options : null,
+    correctIndex: format === "mc" ? compiled.correctIndex : null,
+    answers: sprAnswers,
     statements: null,
     explanation: compiled.explanation,
     explanationEn: compiled.explanationEn,
@@ -358,7 +402,7 @@ export async function runMathCompilerBatch(
     if (candidatesEvaluated >= maxCandidates) { stoppedReason = "candidate_cap"; break; }
     if (Date.now() - start >= MAX_WALL_CLOCK_MS) { stoppedReason = "time_cap"; break; }
     candidatesEvaluated += 1;
-    const outcome = attemptOne(params.skillCode, params.difficulty, timing, params.figurePolicy);
+    const outcome = attemptOne(params.skillCode, params.difficulty, timing, params.figurePolicy, params.format ?? "mc");
     if (!outcome.ok) {
       failures.push({ skillCode: params.skillCode, stage: "review", reason: outcome.reason, resolved: false, snippet: "" });
       continue;

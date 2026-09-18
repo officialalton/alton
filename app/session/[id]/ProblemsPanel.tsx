@@ -533,6 +533,9 @@ export default function ProblemsPanel({
 
               {isSpr && !p.planned && (
                 <div className="mb-4" data-testid="spr-answer">
+                  <p className="text-[11.5px] text-grey-500 mb-1.5" data-testid="spr-input-hint">
+                    정수, 소수, 또는 분수로 입력하세요(예: 3.5 또는 7/2). 대분수는 입력할 수 없습니다.
+                  </p>
                   <div className="flex flex-wrap items-center gap-2">
                     <label className="text-[12.5px] font-bold text-ink" htmlFor={`spr-${p.problemId}`}>답</label>
                     <input

@@ -133,3 +133,42 @@ describe("runMathCompilerBatch — 최소 10문항 배치 실행", () => {
     }
   });
 });
+
+describe("runMathCompilerBatch — SPR(그리드 입력) 1차 지원(2026-09-17)", () => {
+  it("SPR 지원 유형(linear_equations_one_var)에 format:'spr'을 요청하면 answers가 있는 spr 문항을 만든다", async () => {
+    const result = await runMathCompilerBatch({ skillCode: "linear_equations_one_var", difficulty: "medium", count: 3, format: "spr" });
+    expect(result.accepted.length).toBeGreaterThan(0);
+    for (const item of result.accepted) {
+      expect(item.problem.format).toBe("spr");
+      expect(item.problem.options).toBeNull();
+      expect(item.problem.correctIndex).toBeNull();
+      expect(Array.isArray(item.problem.answers)).toBe(true);
+      expect((item.problem.answers as string[]).length).toBeGreaterThan(0);
+    }
+  });
+
+  it("SPR 지원 유형(one_variable_data: mean/median/range)도 spr을 채택한다 — 숫자형 kind만 남는다", async () => {
+    const result = await runMathCompilerBatch({ skillCode: "one_variable_data", difficulty: "medium", count: 5, format: "spr" });
+    expect(result.accepted.length).toBeGreaterThan(0);
+    for (const item of result.accepted) {
+      expect(item.problem.format).toBe("spr");
+      expect((item.problem.answers as string[]).length).toBeGreaterThan(0);
+    }
+  });
+
+  it("SPR 지원 유형(nonlinear_equations_systems)은 num_real_solutions 같은 문장형 정답을 자동으로 걸러낸다", async () => {
+    const result = await runMathCompilerBatch({ skillCode: "nonlinear_equations_systems", difficulty: "medium", count: 5, format: "spr" });
+    expect(result.accepted.length).toBeGreaterThan(0);
+    for (const item of result.accepted) {
+      const answers = item.problem.answers as string[];
+      expect(answers.every((a) => /^-?\d+(?:\.\d+)?(?:\/\d+)?$/.test(a))).toBe(true);
+    }
+  });
+
+  it("SPR을 지원하지 않는 유형(probability)에 spr을 요청하면 0건 채택 + 사유가 남는다", async () => {
+    const result = await runMathCompilerBatch({ skillCode: "probability", difficulty: "medium", count: 2, format: "spr" });
+    expect(result.accepted).toHaveLength(0);
+    expect(result.stats.shortfall).toBe(2);
+    expect(result.failures.some((f) => f.reason.includes("SPR"))).toBe(true);
+  });
+});

@@ -798,10 +798,16 @@ export async function generateBankProblemsAction(params: {
       // 2026-09-17 버그 수정 — 이전엔 이 값이 통째로 빠져서 admin이 "자료 포함 · 좌표평면"을
       // 골라도 계산형 컴파일러(nonlinear_functions)가 항상 텍스트형만 만들었다.
       figurePolicy: params.figurePolicy,
+      // 2026-09-17(SPR 1차) — 이전엔 이 배치 경로가 항상 format:"mc"로 저장해, 관리자가
+      // "새 문제" 패널에서 답안 형식을 spr로 골라도 계산형 컴파일러 문항은 늘 객관식으로만
+      // 나갔다. 이제 요청한 형식을 그대로 배치 실행기에 넘기고, 저장도 각 문항이 실제로
+      // 만들어진 형식(g.format)을 따른다 — SPR 미지원 유형에 spr을 요청하면 배치가 0건
+      // 채택으로 끝나고 아래 "생성하지 못했습니다" 분기로 사유와 함께 반환된다.
+      format: params.format === "spr" ? "spr" : "mc",
       onAccepted: async ({ problem: g, quality }) => {
         const t0 = Date.now();
         const problem = await createBankProblemAction({
-          subjectId: params.subjectId, format: "mc", skillType: params.skillType, skillCode: params.skillCode,
+          subjectId: params.subjectId, format: g.format, skillType: params.skillType, skillCode: params.skillCode,
           examSystem: params.examSystem, apSubject: params.apSubject, topic: params.topic, difficulty: params.difficulty, keywordIds: params.keywordIds,
           createdVia: "compiler",
         });
@@ -809,6 +815,7 @@ export async function generateBankProblemsAction(params: {
         const draft = await createDraftVersionAction({
           problemId: problem.value, passage: g.stimulus ?? g.passage, question: g.question ?? null, options: g.options ?? null, correctIndex: g.correctIndex ?? null,
           explanation: g.explanation, explanationEn: (g as { explanationEn?: string }).explanationEn ?? null, difficulty: params.difficulty, figure: g.figure ?? null,
+          answers: g.answers ?? null,
         });
         if (!draft.ok) {
           failures.push(draft.error);
