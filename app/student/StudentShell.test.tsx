@@ -3,8 +3,9 @@ import { describe, expect, it, vi } from "vitest";
 import StudentShell from "./StudentShell";
 import type { DashboardData } from "./dashboard-data";
 
+const pushMock = vi.fn();
 vi.mock("next/navigation", () => ({
-  useRouter: () => ({ push: vi.fn(), replace: vi.fn(), refresh: vi.fn() }),
+  useRouter: () => ({ push: pushMock, replace: vi.fn(), refresh: vi.fn() }),
 }));
 
 vi.mock("@/app/login/actions", () => ({
@@ -242,5 +243,22 @@ describe("StudentShell", () => {
     );
     fireEvent.click(screen.getByText("지훈 학생님 ▾"));
     expect(screen.getByText("로그아웃")).toBeInTheDocument();
+  });
+
+  // 2026-09-18(고정형 모의고사 V1 내비 연결) — /student/mock-exam은 StudentShell
+  // 탭이 아니라 독립 라우트라, 사이드바 클릭 시 router.push로 그 라우트로
+  // 이동해야 한다.
+  it("사이드바 '모의고사'를 누르면 /student/mock-exam으로 이동한다", () => {
+    pushMock.mockClear();
+    render(
+      <StudentShell
+        studentName="지훈"
+        dashboard={dashboard}
+        problemHistory={[]}
+        {...lessonsProps}
+      />
+    );
+    fireEvent.click(screen.getByText("모의고사"));
+    expect(pushMock).toHaveBeenCalledWith("/student/mock-exam");
   });
 });

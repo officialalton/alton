@@ -4,8 +4,9 @@ import TeacherShell from "./TeacherShell";
 import type { TeacherDashboardData } from "./dashboard-data";
 import type { RosterStudent } from "./roster-data";
 
+const pushMock = vi.fn();
 vi.mock("next/navigation", () => ({
-  useRouter: () => ({ push: vi.fn(), replace: vi.fn() }),
+  useRouter: () => ({ push: pushMock, replace: vi.fn() }),
 }));
 
 vi.mock("@/app/login/actions", () => ({
@@ -144,5 +145,15 @@ describe("TeacherShell", () => {
     render(<TeacherShell {...baseProps} />);
     fireEvent.click(screen.getByText("박서연 선생님 ▾"));
     expect(screen.getByText("로그아웃")).toBeInTheDocument();
+  });
+
+  // 2026-09-18(고정형 모의고사 V1 내비 연결) — /teacher/mock-exam은 TeacherShell
+  // 탭이 아니라 독립 라우트라, 사이드바 클릭 시 router.push로 그 라우트로
+  // 이동해야 한다.
+  it("사이드바 '모의고사'를 누르면 /teacher/mock-exam으로 이동한다", () => {
+    pushMock.mockClear();
+    render(<TeacherShell {...baseProps} />);
+    fireEvent.click(screen.getByText("모의고사"));
+    expect(pushMock).toHaveBeenCalledWith("/teacher/mock-exam");
   });
 });
