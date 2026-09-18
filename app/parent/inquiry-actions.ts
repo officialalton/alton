@@ -29,7 +29,10 @@ export type MeetingRequest = {
   childId: string | null;
   childName: string | null;
   subject: string | null;
-  status: "requested" | "scheduled" | "completed" | "cancelled";
+  content: string | null;
+  contactPreference: "phone" | "message" | "either" | null;
+  preferredContactTime: string | null;
+  status: "requested" | "confirming" | "scheduling" | "scheduled" | "completed" | "cancelled";
   startsAt: string | null;
   endsAt: string | null;
   googleMeetLink: string | null;
@@ -88,7 +91,9 @@ export async function listGuardianMeetingRequests(): Promise<MeetingRequest[]> {
   const householdId = await requireGuardianHouseholdId(supabase, user.id);
   const { data, error } = await supabase
     .from("meeting_requests")
-    .select("id, child_id, subject, status, starts_at, ends_at, google_meet_link, created_at, child:profiles!meeting_requests_child_id_fkey(name)")
+    .select(
+      "id, child_id, subject, content, contact_preference, preferred_contact_time, status, starts_at, ends_at, google_meet_link, created_at, child:profiles!meeting_requests_child_id_fkey(name)"
+    )
     .eq("household_id", householdId)
     .order("created_at", { ascending: false });
   if (error) throw new Error(error.message);
@@ -100,6 +105,9 @@ export async function listGuardianMeetingRequests(): Promise<MeetingRequest[]> {
       childId: r.child_id,
       childName: child?.name ?? null,
       subject: r.subject,
+      content: r.content,
+      contactPreference: r.contact_preference,
+      preferredContactTime: r.preferred_contact_time,
       status: r.status,
       startsAt: r.starts_at,
       endsAt: r.ends_at,
@@ -144,30 +152,131 @@ export type SubmitMeetingRequestResult =
 export async function submitMeetingRequest(params: {
   childId?: string;
   subject?: string;
-  slotStartsAtIso: string;
+  content: string;
+  contactPreference?: "phone" | "message" | "either";
+  preferredContactTime?: string;
+  slotStartsAtIso?: string;
   sourceMessageId?: string;
 }): Promise<SubmitMeetingRequestResult> {
   try {
     const { user, profile, supabase } = await requireUser();
-    if (profile?.role !== "parent") throw new Error("보호자만 면담을 신청할 수 있습니다.");
-    if (!params.slotStartsAtIso) throw new Error("면담 희망 시간을 선택해주세요.");
+    if (profile?.role !== "parent") throw new Error("보호자만 상담을 신청할 수 있습니다.");
+    if (!params.content?.trim()) throw new Error("상담 내용을 입력해주세요.");
     const householdId = await requireGuardianHouseholdId(supabase, user.id);
 
-    const startsAt = new Date(params.slotStartsAtIso);
-    const endsAt = new Date(startsAt.getTime() + 60 * 60 * 1000);
+    let startsAt: Date | null = null;
+    let endsAt: Date | null = null;
+    if (params.slotStartsAtIso) {
+      startsAt = new Date(params.slotStartsAtIso);
+      endsAt = new Date(startsAt.getTime() + 60 * 60 * 1000);
+    }
 
     const { error } = await supabase.from("meeting_requests").insert({
       household_id: householdId,
       child_id: params.childId || null,
       subject: params.subject?.trim() || null,
+      content: params.content.trim(),
+      contact_preference: params.contactPreference ?? null,
+      preferred_contact_time: params.preferredContactTime?.trim() || null,
       requested_by: user.id,
-      starts_at: startsAt.toISOString(),
-      ends_at: endsAt.toISOString(),
+      starts_at: startsAt ? startsAt.toISOString() : null,
+      ends_at: endsAt ? endsAt.toISOString() : null,
       source_message_id: params.sourceMessageId || null,
     });
     if (error) throw new Error(error.message);
     return { ok: true };
   } catch (e) {
-    return { ok: false, error: e instanceof Error ? e.message : "면담 신청에 실패했습니다." };
+    return { ok: false, error: e instanceof Error ? e.message : "상담 신청에 실패했습니다." };
   }
+}
+
+export type MeetingRequestMessage = {
+  id: string;
+  senderId: string;
+  senderRole: "guardian" | "admin";
+  body: string;
+  createdAt: string;
+};
+
+async function assertGuardianOwnsMeetingRequest(
+  supabase: SupabaseClient,
+  householdId: string,
+  meetingRequestId: string
+): Promise<void> {
+  const { data } = await supabase
+    .from("meeting_requests")
+    .select("id")
+    .eq("id", meetingRequestId)
+    .eq("household_id", householdId)
+    .maybeSingle();
+  if (!data) throw new Error("본인 household의 상담 신청만 조회할 수 있습니다.");
+}
+
+export async function listMeetingRequestMessages(meetingRequestId: string): Promise<MeetingRequestMessage[]> {
+  const { user, profile, supabase } = await requireUser();
+  if (profile?.role !== "parent") throw new Error("보호자만 접근할 수 있습니다.");
+  const householdId = await requireGuardianHouseholdId(supabase, user.id);
+  await assertGuardianOwnsMeetingRequest(supabase, householdId, meetingRequestId);
+  const { data, error } = await supabase
+    .from("meeting_request_messages")
+    .select("id, sender_id, sender_role, body, created_at")
+    .eq("meeting_request_id", meetingRequestId)
+    .order("created_at", { ascending: true });
+  if (error) throw new Error(error.message);
+  return (data ?? []).map((r) => ({
+    id: r.id,
+    senderId: r.sender_id,
+    senderRole: r.sender_role,
+    body: r.body,
+    createdAt: r.created_at,
+  }));
+}
+
+export async function sendMeetingRequestMessage(meetingRequestId: string, body: string): Promise<void> {
+  const { user, profile, supabase } = await requireUser();
+  if (profile?.role !== "parent") throw new Error("보호자만 접근할 수 있습니다.");
+  if (!body.trim()) throw new Error("내용을 입력해주세요.");
+  const householdId = await requireGuardianHouseholdId(supabase, user.id);
+  await assertGuardianOwnsMeetingRequest(supabase, householdId, meetingRequestId);
+  const { error } = await supabase.from("meeting_request_messages").insert({
+    meeting_request_id: meetingRequestId,
+    sender_id: user.id,
+    sender_role: "guardian",
+    body: body.trim(),
+  });
+  if (error) throw new Error(error.message);
+}
+
+export async function getMessengerUnreadCount(): Promise<number> {
+  const { user, profile, supabase } = await requireUser();
+  if (profile?.role !== "parent") throw new Error("보호자만 접근할 수 있습니다.");
+  const householdId = await requireGuardianHouseholdId(supabase, user.id);
+  const { data: readRow } = await supabase
+    .from("household_message_reads")
+    .select("last_read_at")
+    .eq("household_id", householdId)
+    .eq("viewer_role", "guardian")
+    .maybeSingle();
+  const since = readRow?.last_read_at ?? "1970-01-01T00:00:00Z";
+  const { count, error } = await supabase
+    .from("household_messages")
+    .select("id", { count: "exact", head: true })
+    .eq("household_id", householdId)
+    .eq("sender_role", "admin")
+    .gt("created_at", since);
+  if (error) throw new Error(error.message);
+  return count ?? 0;
+}
+
+export async function markMessengerRead(): Promise<void> {
+  const { user, profile, supabase } = await requireUser();
+  if (profile?.role !== "parent") throw new Error("보호자만 접근할 수 있습니다.");
+  const householdId = await requireGuardianHouseholdId(supabase, user.id);
+  const { error } = await supabase
+    .from("household_message_reads")
+    .upsert(
+      { household_id: householdId, viewer_role: "guardian", last_read_at: new Date().toISOString() },
+      { onConflict: "household_id,viewer_role" }
+    );
+  if (error) throw new Error(error.message);
 }

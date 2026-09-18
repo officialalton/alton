@@ -89,32 +89,51 @@ describe("submitMeetingRequest", () => {
     selectResults = {};
   });
 
-  it("슬롯 미선택 시 예외를 던지지 않고 ok:false를 반환한다", async () => {
-    const result = await submitMeetingRequest({ slotStartsAtIso: "" });
-    expect(result).toEqual({ ok: false, error: "면담 희망 시간을 선택해주세요." });
+  it("내용 미입력 시 예외를 던지지 않고 ok:false를 반환한다", async () => {
+    const result = await submitMeetingRequest({ content: "" });
+    expect(result).toEqual({ ok: false, error: "상담 내용을 입력해주세요." });
   });
 
-  it("정상 신청 시 meeting_requests에 60분 슬롯으로 insert한다", async () => {
+  it("정상 신청 시 meeting_requests에 content/연락 정보와 함께 insert한다(슬롯 선택 없이도 가능)", async () => {
     const result = await submitMeetingRequest({
       childId: "child1",
       subject: "성적 상담",
-      slotStartsAtIso: "2027-01-01T09:00:00.000Z",
+      content: "다음 학기 진도 상담을 요청합니다.",
+      contactPreference: "phone",
+      preferredContactTime: "평일 오후",
     });
     expect(result).toEqual({ ok: true });
     expect(insertMock).toHaveBeenCalledWith({
       household_id: "household1",
       child_id: "child1",
       subject: "성적 상담",
+      content: "다음 학기 진도 상담을 요청합니다.",
+      contact_preference: "phone",
+      preferred_contact_time: "평일 오후",
       requested_by: "guardian1",
-      starts_at: "2027-01-01T09:00:00.000Z",
-      ends_at: "2027-01-01T10:00:00.000Z",
+      starts_at: null,
+      ends_at: null,
       source_message_id: null,
     });
   });
 
+  it("슬롯을 선택하면 60분 slot으로 starts_at/ends_at을 채운다", async () => {
+    const result = await submitMeetingRequest({
+      content: "상담 요청",
+      slotStartsAtIso: "2027-01-01T09:00:00.000Z",
+    });
+    expect(result).toEqual({ ok: true });
+    expect(insertMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        starts_at: "2027-01-01T09:00:00.000Z",
+        ends_at: "2027-01-01T10:00:00.000Z",
+      })
+    );
+  });
+
   it("insert 실패 시 예외를 던지지 않고 ok:false로 반환한다(Minified React error #441 재발 방지)", async () => {
     insertMock = vi.fn().mockResolvedValue({ error: { message: "DB 오류" } });
-    const result = await submitMeetingRequest({ slotStartsAtIso: "2027-01-01T09:00:00.000Z" });
+    const result = await submitMeetingRequest({ content: "상담 요청" });
     expect(result).toEqual({ ok: false, error: "DB 오류" });
   });
 });

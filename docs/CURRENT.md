@@ -95,6 +95,30 @@
 
 ## 6. 미결·다음 작업 단위
 
+- **고정형 SAT 모의고사 V1(정책 확정, 구현 대기 — 2026-09-17)**: 모의고사는 과제와
+  별도 원본·응시 기록을 가진다. 수업 화면에 `모의고사` 탭을 추가해 교사가 배정하고 학생이
+  시작·재개할 수 있으며, 학생 포털의 독립 모의고사 탭에서도 같은 응시를 연다. V1은
+  기본·표준·상위 난이도의 고정 세트를 여러 개 운영하고 적응형 모듈은 V2로 미룬다. Math
+  문제·과제·모의고사에는 공통 계산기와 ALTON용으로 재구성한 참조표를 제공하며 R&W에는
+  보이지 않는다. 상세 사양: [`2026-09-17-fixed-mock-exam-v1-spec.md`](2026-09-17-fixed-mock-exam-v1-spec.md).
+
+- **학부모 ↔ 관리자 상담 신청·메신저 V1(구현 완료, 비프로덕션 배포·UAT 미완 — 2026-09-17)**:
+  R11(household_messages, meeting_requests)을 확장해 구현했다(신규 테이블 중복 생성 안 함).
+  마이그레이션 `supabase/migrations/20261406000000_r12_parent_admin_support_v1.sql`을
+  로컬에 적용해 meeting_requests에 content/contact_preference/preferred_contact_time과
+  5단계 상태(requested→confirming→scheduling→scheduled→completed, cancelled는 레거시
+  조회용)를 추가하고, meeting_request_messages(상담 신청 건별 대화)·
+  household_message_reads(메신저 읽음 추적) 테이블을 새로 만들었다. 서버 액션
+  (`app/parent/inquiry-actions.ts`, `app/admin/inquiry-and-meeting-actions.ts`)과
+  화면(학부모: `ConsultationRequestTab.tsx`/`MessengerTab.tsx`로 탭 분리, 관리자:
+  `InquiryAndMeetingTab.tsx` 서브탭 라벨을 메신저/상담 신청으로 변경 + 안읽음 표시 +
+  건별 대화 + 5단계 상태 버튼)까지 반영했다. 사용자 노출 문구는 "상담 신청"/"메신저"로
+  통일했다("문의"는 화면에 남기지 않음, 내부 파일명은 유지). 단위·통합 테스트
+  54건(`app/consult/r12-parent-admin-support.integration.test.ts` 포함, 로컬 Postgres
+  RLS 검증)과 `tsc --noEmit` 모두 통과 확인. 브라우저 UAT와 non-prod(`supabase db push`
+  + Vercel preview) 배포는 아직 수행하지 않았다 — 다음 세션에서 이어서 진행 필요. 상세
+  사양: [`2026-09-17-parent-admin-support-spec.md`](2026-09-17-parent-admin-support-spec.md).
+
 - **예약·수업 준비·진도 단일 흐름(2026-09-17, 완료)**: 예약 확정 시 다음 미완료 회차
   (`curriculum_overlay_units.status`)를 자동 연결하고 그 시점 교재·문제·키워드를
   세션 전용 사본으로 즉시 복사(`_stage_unit_for_session`, 기존 P2 자동연결 트리거
@@ -116,7 +140,7 @@
   구성은 둘 수 있으나 실제 발급은 교사가 명시적으로 함, 필요 시 회차별 자동 발급
   규칙은 별도 설계).
 - **지금**: 제품 오너 Preview UAT(문제은행 AI 생성 → 그림 확인 → 전체 공개 → 수업 준비에 담기 → SPR 풀이·채점 / 과제 발급·풀이 / 문제 위 필기 / 관리자 교재 탭).
-- **분류 후속 UI**: criteria `skill_codes` 일괄 편집(문제은행에서 여러 문제를 한 번에 재분류), Preview UI UAT — 아직 착수 전.
+- **분류 후속 UI(criteria `skill_codes` 일괄 편집)는 2026-09-17 제품 오너 지시로 폐기** — 스펙이 백로그 한 줄뿐이고 대상·진입화면·권한이 전혀 정해지지 않아 로드맵에서 제외.
 - **신규 — SAT Math 19종 + R&W 근거모델 5종 Preview UAT 필요(2026-09-17)**: 위 25·26차 작업은 로컬 테스트·non-prod DB 배치 검증만 마쳤고 실제 Preview 화면으로는 한 번도 확인되지 않았다. 다음 세션에서 관리자 문제은행 화면 기준으로 19개 Math 기술 코드 전부(생성→그림/렌더 확인→공개)와 R&W 5개 근거모델 기술(생성→근거모델 필드 표시·검사 통과 확인→공개)을 한 번씩 Preview UI로 통과시키는 전수 UAT가 필요.
 - **단어장(2026-09-15~16, 완료 — 최종 8권 구성)**: ALTON SAT 공용 단어장. 원래 10권 계획 중 8·9·10권(추상·개념/저빈도 정밀/최상급)은 후보 어휘 풀이 좁아 중복률이 급증해 각각 200개를 못 채웠다(제품 오너 지시로 세 권의 목표를 8권 하나로 병합, `scripts/vocab-library-seed.ts`의 `VOLUME_PLAN`에서 9·10권 제거·8권 난이도 3~5로 확장). **1~8권 전부 완료(1,800단어)**, 마이그레이션 `20261378`+`20261383`+`20261384` non-prod 반영 완료. 내 단어장 폴더(기본 "오답 노트"), 별표 저장, 시험 선택지 영어화, UI 개편(가리기 개별 공개·A-Z 필터·랜덤 순서·페이지네이션) 전부 구현·테스트·Preview 배포 완료(마이그레이션 `20261376`~`20261380`). 기존 지문 클릭 저장(`VocabClickLayer.tsx`)은 손대지 않음.
 - **과제(2026-09-16, 완료, 제품 오너 2차 정정 최종안)**: 과제를 수업(세션)과 완전히 분리 — 발급 시 수업 선택 없음, 배치명 = 발급 날짜, 발급할 때마다 새 배치(`homework_batches`, 단어장 `vocab_quizzes`와 같은 패턴: 세션 비의존 자기완결 레코드). 교사↔학생 쌍 단위로만 저장·노출(RLS + 쿼리 이중 격리, 다른 교사·다른 학생 노출 불가). 학생 포털 과제 탭·교사 포털 "과제 내역"·세션뷰 과제 탭 전부 동일한 공통 컴포넌트(`HomeworkBatchPanel`)로 배치를 눌러 열면 기존 목차/슬라이드 UI 그대로 정답·해설·채점. RPC `issue_homework_batch_v2`(마이그레이션 `20261382`, non-prod 반영 완료). **마이그레이션 `20261381`(`issue_homework_batch`, 회차 연동 1차안)은 이 최종안으로 대체되어 앱에서 더 이상 호출되지 않음 — DB 컬럼/RPC는 삭제하지 않고 방치.** 검증: 통합 테스트 6/6(발급 권한·배치 분리·문제 중복 방지·RLS 격리), 컴포넌트 테스트 전부 통과.

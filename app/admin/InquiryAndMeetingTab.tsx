@@ -10,13 +10,17 @@ import {
   listInquiryThreadsForAdmin,
   sendAdminHouseholdMessage,
   resolveHouseholdInquiryThread,
+  markHouseholdMessengerReadByAdmin,
   loadMeetingOperationsDashboardAction,
   updateMeetingRequestStatus,
   addMeetingAvailabilityRule,
   deactivateMeetingAvailabilityRule,
   addMeetingAvailabilityException,
   removeMeetingAvailabilityException,
+  listMeetingRequestMessagesForAdmin,
+  sendAdminMeetingRequestMessage,
   type AdminInquiryThread,
+  type AdminMeetingRequestMessage,
 } from "./inquiry-and-meeting-actions";
 import { useTabCachedData } from "./use-tab-cached-data";
 
@@ -29,11 +33,27 @@ const INQUIRY_TTL_MS = 30_000;
 
 const WEEKDAY_LABEL = ["일", "월", "화", "수", "목", "금", "토"];
 const MEETING_STATUS_LABEL: Record<string, string> = {
-  requested: "일정 조율 대기",
-  scheduled: "면담 확정",
+  requested: "신청됨",
+  confirming: "확인 중",
+  scheduling: "일정 조율 중",
+  scheduled: "일정 확정",
   completed: "완료",
   cancelled: "취소",
 };
+const MEETING_STATUS_ORDER = ["requested", "confirming", "scheduling", "scheduled", "completed"] as const;
+const CONTACT_PREFERENCE_LABEL: Record<string, string> = {
+  phone: "전화",
+  message: "메시지",
+  either: "둘 다 가능",
+};
+
+type MeetingTransitionTarget = "confirming" | "scheduling" | "scheduled" | "completed";
+
+function nextMeetingStatus(status: string): MeetingTransitionTarget | null {
+  const idx = MEETING_STATUS_ORDER.indexOf(status as (typeof MEETING_STATUS_ORDER)[number]);
+  if (idx === -1 || idx === MEETING_STATUS_ORDER.length - 1) return null;
+  return MEETING_STATUS_ORDER[idx + 1] as MeetingTransitionTarget;
+}
 
 function formatDateTime(iso: string | null): string {
   if (!iso) return "-";
@@ -95,10 +115,19 @@ function InquiryInbox({ initialThreads }: { initialThreads?: AdminInquiryThread[
           <div className="flex items-center justify-between mb-2">
             <span className="text-[13.5px] font-bold text-ink">
               {t.householdLabel} {t.hasOpen && <span className="text-red">● 미해결</span>}
+              {t.unreadForAdmin && <span className="ml-1.5 text-[11px] font-bold text-white bg-red rounded-full px-1.5 py-0.5">안읽음</span>}
             </span>
             <button
               className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5"
-              onClick={() => setOpenHouseholdId(openHouseholdId === t.householdId ? null : t.householdId)}
+              onClick={() => {
+                const opening = openHouseholdId !== t.householdId;
+                setOpenHouseholdId(opening ? t.householdId : null);
+                if (opening) {
+                  markHouseholdMessengerReadByAdmin(t.householdId)
+                    .then(refresh)
+                    .catch(() => {});
+                }
+              }}
             >
               {openHouseholdId === t.householdId ? "닫기" : "열기"}
             </button>
@@ -166,6 +195,83 @@ function InquiryInbox({ initialThreads }: { initialThreads?: AdminInquiryThread[
           )}
         </div>
       ))}
+    </div>
+  );
+}
+
+function AdminMeetingRequestThread({ meetingRequestId }: { meetingRequestId: string }) {
+  const [open, setOpen] = useState(false);
+  const [messages, setMessages] = useState<AdminMeetingRequestMessage[] | null>(null);
+  const [draft, setDraft] = useState("");
+  const [sending, setSending] = useState(false);
+
+  function load() {
+    listMeetingRequestMessagesForAdmin(meetingRequestId).then(setMessages).catch(() => setMessages([]));
+  }
+
+  if (!open) {
+    return (
+      <button
+        type="button"
+        className="mt-2 text-[11.5px] font-bold text-ink underline"
+        onClick={() => {
+          setOpen(true);
+          load();
+        }}
+      >
+        대화 보기
+      </button>
+    );
+  }
+
+  return (
+    <div className="mt-3 border-t border-grey-200 pt-3">
+      <button type="button" className="mb-2 text-[11.5px] font-bold text-ink underline" onClick={() => setOpen(false)}>
+        대화 닫기
+      </button>
+      {messages === null && <p className="text-[12px] text-grey-500">불러오는 중...</p>}
+      {messages && messages.length === 0 && <p className="text-[12px] text-grey-500 mb-2">아직 대화가 없습니다.</p>}
+      {messages && messages.length > 0 && (
+        <div className="space-y-1.5 mb-2 max-h-[220px] overflow-y-auto">
+          {messages.map((m) => (
+            <div
+              key={m.id}
+              className={"rounded-lg px-3 py-2 text-[12px] max-w-[85%] " + (m.senderRole === "admin" ? "bg-ink text-white ml-auto" : "bg-grey-100 text-ink")}
+            >
+              <div>{m.body}</div>
+              <div className={"text-[10px] mt-1 " + (m.senderRole === "admin" ? "text-white/70" : "text-grey-500")}>
+                {m.senderRole === "admin" ? "관리자" : "보호자"} · {formatDateTime(m.createdAt)}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      <div className="flex gap-2">
+        <textarea
+          aria-label="상담 신청 답장"
+          value={draft}
+          onChange={(e) => setDraft(e.target.value)}
+          placeholder="답장을 입력해주세요"
+          className="flex-1 px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[12px] min-h-[44px]"
+        />
+        <button
+          type="button"
+          disabled={sending || !draft.trim()}
+          className="px-3 py-2 rounded-lg bg-ink text-white text-[12px] font-bold disabled:opacity-50 self-end"
+          onClick={async () => {
+            setSending(true);
+            try {
+              await sendAdminMeetingRequestMessage(meetingRequestId, draft);
+              setDraft("");
+              load();
+            } finally {
+              setSending(false);
+            }
+          }}
+        >
+          전송
+        </button>
+      </div>
     </div>
   );
 }
@@ -249,35 +355,34 @@ function MeetingOperations() {
             <p className="text-[12.5px] text-grey-500 mt-1">
               {m.subject && `주제: ${m.subject} · `}희망 시간: {formatDateTime(m.startsAt)}
             </p>
+            {m.content && <p className="text-[12.5px] text-grey-700 mt-1">내용: {m.content}</p>}
+            {m.contactPreference && (
+              <p className="text-[12.5px] text-grey-500 mt-0.5">
+                희망 연락: {CONTACT_PREFERENCE_LABEL[m.contactPreference] ?? m.contactPreference}
+                {m.preferredContactTime ? ` · ${m.preferredContactTime}` : ""}
+              </p>
+            )}
             <div className="flex gap-2 mt-3">
-              {m.status === "requested" && (
+              {nextMeetingStatus(m.status) && (
                 <button
                   disabled={busyId === m.id}
                   className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
-                  onClick={() => withBusy(m.id, () => updateMeetingRequestStatus(m.id, "scheduled"))}
+                  onClick={() => withBusy(m.id, () => updateMeetingRequestStatus(m.id, nextMeetingStatus(m.status)!))}
                 >
-                  확정 처리
+                  {MEETING_STATUS_LABEL[nextMeetingStatus(m.status)!]}로 변경
                 </button>
               )}
-              {(m.status === "requested" || m.status === "scheduled") && (
-                <>
-                  <button
-                    disabled={busyId === m.id}
-                    className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50"
-                    onClick={() => withBusy(m.id, () => updateMeetingRequestStatus(m.id, "completed"))}
-                  >
-                    완료 처리
-                  </button>
-                  <button
-                    disabled={busyId === m.id}
-                    className="text-[12px] font-bold text-red border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50"
-                    onClick={() => withBusy(m.id, () => updateMeetingRequestStatus(m.id, "cancelled"))}
-                  >
-                    취소
-                  </button>
-                </>
+              {m.status !== "completed" && m.status !== "cancelled" && (
+                <button
+                  disabled={busyId === m.id}
+                  className="text-[12px] font-bold text-red border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50"
+                  onClick={() => withBusy(m.id, () => updateMeetingRequestStatus(m.id, "cancelled"))}
+                >
+                  취소
+                </button>
               )}
             </div>
+            <AdminMeetingRequestThread meetingRequestId={m.id} />
           </div>
         ))}
       </section>
@@ -384,7 +489,7 @@ export default function InquiryAndMeetingTab({ initialThreads }: { initialThread
             onClick={() => setSub(s)}
             className={"text-[12.5px] font-bold px-4 py-2 rounded-lg border-[1.5px] " + (sub === s ? "bg-ink text-white border-ink" : "border-grey-200 text-ink")}
           >
-            {s === "inbox" ? "문의함" : "면담 운영"}
+            {s === "inbox" ? "메신저" : "상담 신청"}
           </button>
         ))}
       </div>

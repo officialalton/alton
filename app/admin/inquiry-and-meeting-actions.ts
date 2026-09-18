@@ -18,6 +18,7 @@ export type AdminInquiryThread = {
     createdAt: string;
   }[];
   hasOpen: boolean;
+  unreadForAdmin: boolean;
 };
 
 // 2026-09-10(P1-2) — 데이터가 늘어나도 이 화면이 계속 느려지지 않도록 최근
@@ -49,6 +50,9 @@ export async function listInquiryThreadsForAdmin(): Promise<AdminInquiryThread[]
   if (openError) throw new Error(openError.message);
   const data = [...(openOlder ?? []), ...(recent ?? [])];
 
+  const { data: readRows } = await admin.from("household_message_reads").select("household_id, last_read_at").eq("viewer_role", "admin");
+  const readByHousehold = new Map<string, string>((readRows ?? []).map((r) => [r.household_id as string, r.last_read_at as string]));
+
   const byHousehold = new Map<string, AdminInquiryThread>();
   for (const row of data ?? []) {
     const householdRel = row.household as
@@ -62,7 +66,7 @@ export async function listInquiryThreadsForAdmin(): Promise<AdminInquiryThread[]
 
     let thread = byHousehold.get(row.household_id);
     if (!thread) {
-      thread = { householdId: row.household_id, householdLabel: label, messages: [], hasOpen: false };
+      thread = { householdId: row.household_id, householdLabel: label, messages: [], hasOpen: false, unreadForAdmin: false };
       byHousehold.set(row.household_id, thread);
     }
     thread.messages.push({
@@ -73,6 +77,10 @@ export async function listInquiryThreadsForAdmin(): Promise<AdminInquiryThread[]
       createdAt: row.created_at,
     });
     if (row.status === "open") thread.hasOpen = true;
+    const lastReadAt = readByHousehold.get(row.household_id) ?? null;
+    if (row.sender_role === "guardian" && (!lastReadAt || row.created_at > lastReadAt)) {
+      thread.unreadForAdmin = true;
+    }
   }
   return Array.from(byHousehold.values()).sort((a, b) => {
     if (a.hasOpen !== b.hasOpen) return a.hasOpen ? -1 : 1;
@@ -102,12 +110,27 @@ export async function resolveHouseholdInquiryThread(householdId: string): Promis
   if (error) throw new Error(error.message);
 }
 
+export async function markHouseholdMessengerReadByAdmin(householdId: string): Promise<void> {
+  const { supabase } = await requireAdmin();
+  const { error } = await supabase
+    .from("household_message_reads")
+    .upsert(
+      { household_id: householdId, viewer_role: "admin", last_read_at: new Date().toISOString() },
+      { onConflict: "household_id,viewer_role" }
+    );
+  if (error) throw new Error(error.message);
+}
+
 export type AdminMeetingRequest = {
   id: string;
+  householdId: string;
   householdLabel: string;
   childName: string | null;
   subject: string | null;
-  status: "requested" | "scheduled" | "completed" | "cancelled";
+  content: string | null;
+  contactPreference: "phone" | "message" | "either" | null;
+  preferredContactTime: string | null;
+  status: "requested" | "confirming" | "scheduling" | "scheduled" | "completed" | "cancelled";
   startsAt: string | null;
   endsAt: string | null;
   googleMeetLink: string | null;
@@ -126,7 +149,7 @@ async function loadMeetingRequestsForAdmin(
   const { data, error } = await admin
     .from("meeting_requests")
     .select(
-      "id, subject, status, starts_at, ends_at, google_meet_link, created_at, household:households(guardian:profiles!households_primary_guardian_id_fkey(name)), child:profiles!meeting_requests_child_id_fkey(name)"
+      "id, household_id, subject, content, contact_preference, preferred_contact_time, status, starts_at, ends_at, google_meet_link, created_at, household:households(guardian:profiles!households_primary_guardian_id_fkey(name)), child:profiles!meeting_requests_child_id_fkey(name)"
     )
     .order("created_at", { ascending: false })
     // 2026-09-10(P1-2) — 미래 데이터 증가 대비 상한. 최신순 정렬이라 최근 건이
@@ -142,9 +165,13 @@ async function loadMeetingRequestsForAdmin(
     const child = Array.isArray(childRel) ? childRel[0] : childRel;
     return {
       id: r.id,
+      householdId: r.household_id,
       householdLabel: guardian?.name ? `${guardian.name} 가족` : "-",
       childName: child?.name ?? null,
       subject: r.subject,
+      content: r.content,
+      contactPreference: r.contact_preference,
+      preferredContactTime: r.preferred_contact_time,
       status: r.status,
       startsAt: r.starts_at,
       endsAt: r.ends_at,
@@ -156,7 +183,7 @@ async function loadMeetingRequestsForAdmin(
 
 export async function updateMeetingRequestStatus(
   meetingRequestId: string,
-  status: "scheduled" | "completed" | "cancelled"
+  status: "confirming" | "scheduling" | "scheduled" | "completed" | "cancelled"
 ): Promise<void> {
   const { supabase } = await requireAdmin();
   const { error } = await supabase
@@ -275,5 +302,43 @@ export async function addMeetingAvailabilityException(params: {
 export async function removeMeetingAvailabilityException(exceptionId: string): Promise<void> {
   const { supabase } = await requireAdmin();
   const { error } = await supabase.from("meeting_availability_exceptions").delete().eq("id", exceptionId);
+  if (error) throw new Error(error.message);
+}
+
+export type AdminMeetingRequestMessage = {
+  id: string;
+  senderId: string;
+  senderRole: "guardian" | "admin";
+  body: string;
+  createdAt: string;
+};
+
+export async function listMeetingRequestMessagesForAdmin(meetingRequestId: string): Promise<AdminMeetingRequestMessage[]> {
+  await requireAdmin();
+  const admin = createAdminClient();
+  const { data, error } = await admin
+    .from("meeting_request_messages")
+    .select("id, sender_id, sender_role, body, created_at")
+    .eq("meeting_request_id", meetingRequestId)
+    .order("created_at", { ascending: true });
+  if (error) throw new Error(error.message);
+  return (data ?? []).map((r) => ({
+    id: r.id,
+    senderId: r.sender_id,
+    senderRole: r.sender_role,
+    body: r.body,
+    createdAt: r.created_at,
+  }));
+}
+
+export async function sendAdminMeetingRequestMessage(meetingRequestId: string, body: string): Promise<void> {
+  const { adminUserId, supabase } = await requireAdmin();
+  if (!body.trim()) throw new Error("내용을 입력해주세요.");
+  const { error } = await supabase.from("meeting_request_messages").insert({
+    meeting_request_id: meetingRequestId,
+    sender_id: adminUserId,
+    sender_role: "admin",
+    body: body.trim(),
+  });
   if (error) throw new Error(error.message);
 }

@@ -22,7 +22,9 @@ import type { ChildConsentStatus, ConsentPolicyOption, TrialSmartNotesConsentSta
 import type { PendingRegularIntentChoice } from "./regular-intent-data";
 import FamilyTab from "./FamilyTab";
 import ConsultRequestTab from "./ConsultRequestTab";
-import InquiryTab from "./InquiryTab";
+import ConsultationRequestTab from "./ConsultationRequestTab";
+import MessengerTab from "./MessengerTab";
+import { getMessengerUnreadCount } from "./inquiry-actions";
 import ParentEnrollmentTab from "./EnrollmentTab";
 import type { ChildSubjectEnrollments } from "./enrollment-data";
 import LessonBookingTab from "@/app/student/LessonBookingTab";
@@ -56,7 +58,8 @@ const NAV_ITEMS = [
   { id: "consent", label: "동의", icon: "✅" },
   { id: "family", label: "가족", icon: "👨‍👩‍👧" },
   { id: "consultRequest", label: "자녀상담", icon: "🗓️" },
-  { id: "inquiry", label: "문의", icon: "💬" },
+  { id: "consultationRequest", label: "상담 신청", icon: "🗓️" },
+  { id: "messenger", label: "메신저", icon: "💬" },
 ] as const;
 
 type TabId = (typeof NAV_ITEMS)[number]["id"];
@@ -125,6 +128,14 @@ export default function ParentShell({
   );
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const [timezoneModalOpen, setTimezoneModalOpen] = useState(false);
+  const [messengerUnread, setMessengerUnread] = useState(0);
+
+  // R12 — 메신저 안 읽은 관리자 메시지 수를 내비게이션 배지로 보여준다.
+  // 메신저 탭을 직접 열면 MessengerTab이 읽음 처리를 하므로, 탭을 떠날 때
+  // 다시 조회해 배지를 갱신한다.
+  useEffect(() => {
+    getMessengerUnreadCount().then(setMessengerUnread).catch(() => {});
+  }, [activeTab]);
 
   // 2026-09-10(P0-3 2차) — 공용 포털 내비게이션 결함: activeTab이 마운트
   // 시점의 initialTab으로만 초기화돼, 브라우저 뒤로가기/앞으로가기로 URL이
@@ -188,7 +199,14 @@ export default function ParentShell({
               (activeTab === item.id ? "text-ink" : "text-grey-300")
             }
           >
-            <span className="text-[17px]">{item.icon}</span>
+            <span className="relative text-[17px]">
+              {item.icon}
+              {item.id === "messenger" && messengerUnread > 0 && (
+                <span className="absolute -top-1 -right-1.5 min-w-[14px] h-[14px] px-[3px] rounded-full bg-red text-white text-[9px] font-bold flex items-center justify-center">
+                  {messengerUnread > 9 ? "9+" : messengerUnread}
+                </span>
+              )}
+            </span>
             {item.label}
           </button>
         ))}
@@ -327,8 +345,10 @@ export default function ParentShell({
             <FamilyTab onGoToConsultRequest={() => selectTab("consultRequest")} />
           ) : activeTab === "consultRequest" ? (
             <ConsultRequestTab />
-          ) : activeTab === "inquiry" ? (
-            <InquiryTab />
+          ) : activeTab === "consultationRequest" ? (
+            <ConsultationRequestTab />
+          ) : activeTab === "messenger" ? (
+            <MessengerTab />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.
