@@ -80,6 +80,11 @@ const HIDDEN_TABS = [{ id: "devlog", label: "개발 로그", icon: "🧾" }] as 
 
 const ALL_TABS = [...NAV_ITEMS, ...HIDDEN_TABS] as const;
 
+// 2026-09-18(고정형 모의고사 V1) — /admin/mock-exam은 AdminShell 탭(TabId)이
+// 아니라 독립 라우트다. NAV_ITEMS/ADMIN_TAB_IDS를 건드리지 않고, 클릭 시
+// router.push로 그 라우트로 이동하는 링크 전용 항목을 별도로 둔다.
+const MOCK_EXAM_NAV_ITEM = { id: "mock-exam", label: "모의고사", icon: "📝" } as const;
+
 // 2026-09-10(P1-3) — 탭 id 유효성 판정은 admin-tabs.ts의 resolveAdminTab()로
 // admin/page.tsx와 공유한다(둘이 어긋나면 탭과 SSR 데이터가 어긋난다).
 type TabId = AdminTabId;
@@ -218,7 +223,10 @@ export default function AdminShell({
   const CONTENT_IDS: TabId[] = ["catalog", "problem-bank"];
   const mobileGroups = [
     { label: "운영", items: NAV_ITEMS.filter((n) => OPERATIONS_IDS.includes(n.id)) },
-    { label: "콘텐츠", items: NAV_ITEMS.filter((n) => CONTENT_IDS.includes(n.id)) },
+    {
+      label: "콘텐츠",
+      items: [...NAV_ITEMS.filter((n) => CONTENT_IDS.includes(n.id)), MOCK_EXAM_NAV_ITEM],
+    },
     { label: "정산", items: NAV_ITEMS.filter((n) => !OPERATIONS_IDS.includes(n.id) && !CONTENT_IDS.includes(n.id)) },
   ];
 
@@ -241,9 +249,20 @@ export default function AdminShell({
             {item.label}
           </button>
         ))}
+        <button
+          onClick={() => router.push("/admin/mock-exam")}
+          className="w-full flex flex-col items-center gap-0.5 py-2.5 text-[10.5px] font-semibold text-grey-300"
+        >
+          <span className="text-[17px]">{MOCK_EXAM_NAV_ITEM.icon}</span>
+          {MOCK_EXAM_NAV_ITEM.label}
+        </button>
       </aside>
 
-      <MobileDrawerNav groups={mobileGroups} activeId={activeTab} onSelect={(id) => selectTab(id as TabId)} />
+      <MobileDrawerNav
+        groups={mobileGroups}
+        activeId={activeTab}
+        onSelect={(id) => (id === MOCK_EXAM_NAV_ITEM.id ? router.push("/admin/mock-exam") : selectTab(id as TabId))}
+      />
 
       <div className="flex-1 flex flex-col">
         <div className="flex items-center justify-end gap-4 border-b border-grey-200 px-6 py-3 relative">

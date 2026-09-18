@@ -376,7 +376,7 @@ export default function ParentShell({
               때는 일정·캘린더로 되돌아가지 않고 빈 상태 문구만 보여준다(요구사항). */}
           {activeTab === "home" ? (
             <div>
-              <div className="px-6 pt-5">
+              <div className="px-6 pt-5 flex items-center justify-between gap-3">
                 <PillSubTabs
                   items={[
                     { id: "reviews", label: "종합 리뷰" },
@@ -387,6 +387,15 @@ export default function ParentShell({
                   activeId={homeSubTab}
                   onSelect={setHomeSubTab}
                 />
+                {/* 2026-09-18(고정형 모의고사 V1) — /parent/mock-exam/[studentId]는
+                    독립 라우트다. 홈 서브탭(종합/수업/상담 리뷰·통계)과 나란히,
+                    현재 선택된 자녀의 모의고사 리포트로 이동하는 링크만 둔다. */}
+                <button
+                  onClick={() => router.push(`/parent/mock-exam/${currentChildId}`)}
+                  className="shrink-0 text-[11px] font-bold text-grey-500 px-2.5 py-1 rounded-full border border-grey-200"
+                >
+                  모의고사 →
+                </button>
               </div>
               {homeSubTab === "stats" ? (
                 childStats ? (

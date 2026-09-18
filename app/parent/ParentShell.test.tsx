@@ -424,4 +424,22 @@ describe("ParentShell", () => {
     fireEvent.click(screen.getByText("김민지 학부모님 ▾"));
     expect(within(screen.getByText("동의").parentElement as HTMLElement).getByText("1")).toBeInTheDocument();
   });
+
+  // 2026-09-18(고정형 모의고사 V1 내비 연결) — 홈 탭에서 "모의고사" 링크를
+  // 누르면 현재 선택된 자녀 기준 독립 라우트(/parent/mock-exam/[studentId])로
+  // 이동한다(ParentShell 탭이 아니다).
+  it("홈 탭의 '모의고사' 링크를 누르면 현재 선택된 자녀의 /parent/mock-exam/[studentId]로 이동한다", () => {
+    pushMock.mockClear();
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+      />
+    );
+    fireEvent.click(screen.getByText("모의고사 →"));
+    expect(pushMock).toHaveBeenCalledWith("/parent/mock-exam/s1");
+  });
 });

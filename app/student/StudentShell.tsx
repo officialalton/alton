@@ -61,6 +61,11 @@ const NAV_ITEMS = [
 
 type TabId = (typeof NAV_ITEMS)[number]["id"];
 
+// 2026-09-18(고정형 모의고사 V1) — /student/mock-exam은 StudentShell 탭이 아니라
+// 독립 라우트다. NAV_ITEMS/TabId를 건드리지 않고 router.push로 이동하는 링크
+// 전용 항목을 별도로 둔다.
+const MOCK_EXAM_NAV_ITEM = { id: "mock-exam", label: "모의고사", icon: "📝" } as const;
+
 export default function StudentShell({
   studentName,
   initialTab,
@@ -174,13 +179,20 @@ export default function StudentShell({
             {item.label}
           </button>
         ))}
+        <button
+          onClick={() => router.push("/student/mock-exam")}
+          className="w-full flex flex-col items-center gap-0.5 py-2.5 text-[10.5px] font-semibold text-grey-300"
+        >
+          <span className="text-[17px]">{MOCK_EXAM_NAV_ITEM.icon}</span>
+          {MOCK_EXAM_NAV_ITEM.label}
+        </button>
       </aside>
 
       <MobileBottomNav
         primary={mobilePrimary}
-        more={mobileMore}
+        more={[...mobileMore, MOCK_EXAM_NAV_ITEM]}
         activeId={activeTab}
-        onSelect={(id) => selectTab(id as TabId)}
+        onSelect={(id) => (id === MOCK_EXAM_NAV_ITEM.id ? router.push("/student/mock-exam") : selectTab(id as TabId))}
       />
 
       <div className="flex-1 flex flex-col pb-16 md:pb-0">
