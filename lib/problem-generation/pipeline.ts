@@ -190,10 +190,16 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
   // 도구 호출이 잘리고 배열이 통째로 비어 돌아온다(2026-09-15 재확인: count=10 요청 시 재현). 호출당 개수를 제한하고
   // 여러 번 나눠 불러 모은다. 청크 하나가 비면 그 청크만 실패로 기록하고 나머지 청크는 계속 시도한다.
   const CHUNK = params.difficulty === "hard" ? 3 : 6;
+  // 2026-09-18 — 같은 배치(이 pipeline 실행) 안에서 이미 나온 지문 소재를 누적해 다음 생성 호출에 "피하라"로 넘긴다.
+  // 청크는 동시에 발사되므로 같은 순간의 청크끼리는 서로 볼 수 없지만, 이전 generate() 호출(첫 시도 이후의 재시도·보충 호출)이
+  // 만든 소재는 전부 다음 호출들에 전달된다 — 지속 저장소 없이 이번 요청 안에서만 상태를 공유하는 방식.
+  const recentTopics: string[] = [];
+  const topicOf = (text: string): string => text.trim().split(/\n+/)[0]?.slice(0, 100) ?? "";
   const generate = async (count: number): Promise<GeneratedProblem[]> => {
     const chunkSizes: number[] = [];
     let remaining = count;
     while (remaining > 0) { const n = Math.min(CHUNK, remaining); remaining -= n; chunkSizes.push(n); }
+    const avoidTopics = recentTopics.slice(-30);
     // 청크끼리는 서로 독립적인 생성 호출이다 — 순서대로 기다리지 않고 동시에 보낸다(벽시계 시간 단축).
     const chunks = await mapWithConcurrency(chunkSizes, GATE_CONCURRENCY, async (n) => {
       countCall();
@@ -201,6 +207,7 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
         const chunk = await timed("generate", () => generateSectionProblemsCore({
           sectionTitle: params.topic?.trim() || params.skillType, subjectName: params.subjectName, skillType: params.skillType,
           difficulty: params.difficulty, format: params.format, count: n, figurePolicy: params.figurePolicy ?? "optional", skillCode: skillCode ?? undefined, keepFigureless: true,
+          avoidTopics,
         }));
         if (chunk.length === 0) stats.emptyResponses.push({ cause: `생성 청크(${n}개 요청)가 빈 배열을 반환`, retried: false, resolved: false });
         else if (chunk.length < n) stats.underReturned.push({ requested: n, returned: chunk.length, reason: "생성 청크가 요청보다 적게 반환" });
@@ -210,7 +217,12 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
         return [] as GeneratedProblem[];
       }
     });
-    return chunks.flat();
+    const flat = chunks.flat();
+    for (const g of flat) {
+      const t = topicOf(g.stimulus ?? g.passage ?? "");
+      if (t) recentTopics.push(t);
+    }
+    return flat;
   };
 
   const makeFigure = async (g: GeneratedProblem, text: string, need: ReturnType<typeof judgeMaterialNeed>) => {

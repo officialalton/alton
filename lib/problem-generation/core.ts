@@ -121,6 +121,8 @@ export async function generateSectionProblemsCore(params: {
   skillCode?: string;
   /** 자료가 빠진(또는 규격에 안 맞는) 결과를 버리지 않고 figure:null 로 돌려준다 — 호출자가 2차 자료 생성으로 채운다(문제은행, 2026-09-15). */
   keepFigureless?: boolean;
+  /** 같은 배치(pipeline 실행)에서 이미 나온 지문 소재 — 프롬프트에 넣어 같은 소재 재사용을 피한다(2026-09-18, 중복 지문 대응). */
+  avoidTopics?: string[];
 }): Promise<(Omit<DocProblem, "id" | "keywords"> & { stimulus?: string; question?: string | null; needsFigure?: boolean; distractorRationales?: { index: number; plausible_because: string; matches: string; why_wrong: string; kind: string }[]; difficultyRationale?: string; design?: { key_relations?: string[]; answer_uses_relations?: string; distractor_design?: { index: number; relation: string; error_type: string }[]; target_difficulty_note?: string } | null; evidenceTarget?: string | null; evidenceSpan?: string | null; answerRationale?: string | null; distractorErrorTypes?: string[] | null })[]> {
   const { sectionTitle, subjectName, skillType, difficulty, format, count } = params;
   const skillMeta = params.skillCode ? SKILL_BY_CODE.get(params.skillCode) ?? null : null;
@@ -265,12 +267,16 @@ ${format === "spr" ? "숫자 입력(SPR)은 SAT Math 학생 직접 입력 문항
 ${format === "mc" ? "해설에서 정답 선택지를 가리킬 때는 correct_index 같은 내부 번호(0, 1, 2...)를 그대로 쓰지 말고, 학생이 화면에서 보는 표기와 같은 A/B/C/D 문자(선택지 배열의 첫 번째가 A)로 쓴다(예: \"따라서 정답은 A번이다\"). \"0번\"처럼 0-based 인덱스를 그대로 노출하지 않는다." : ""}
 표기 규칙: 수식은 LaTeX 로 $…$(인라인)·$$…$$(블록) 안에 쓴다. 표·그래프 자료는 마크다운 표가 아니라 figure(type:'data') 데이터로 낸다.
 Reading & Writing 구조 규칙: 지문 본문과 질문 단락은 빈 줄로 나누고 질문은 물음표로 끝난다. 빈칸은 ______ 로 **정확히 한 곳**, 밑줄 친 문장은 __문장__ 으로 **정확히 한 문장**(Text Structure 의 'underlined' 문항에서만). Cross-Text 는 'Text 1' / 'Text 2' 제목 줄, Rhetorical Synthesis 는 "…the following notes:" 줄 + '- ' 메모 목록 + "The student wants to …" 질문. 선택지에는 빈칸을 두지 않는다.
+Reading & Writing 빈칸 완성형(boundaries, form_structure_sense, transitions, inferences) 선택지 규칙: 선택지 문장은 지문에 이미 있는 문구를 그대로 복사-붙여넣기 하지 않는다 — 지문 다른 곳과 6단어 이상 연속으로 겹치는 표현을 쓰면 안 된다(학생이 문법·논리를 판단하지 않고 문자열을 대조해 답을 찾게 된다). 정답을 포함한 4개 선택지 모두 지문에 없는, 직접 지어낸 문장이어야 한다.
+Reading & Writing transitions(전환어) 전용 규칙: 4개 선택지는 모두 "However,"/"Similarly,"/"For example,"/"Nevertheless,"/"In fact,"/"Consequently," 처럼 짧은(3단어 이하) 전환어/전환구 + 쉼표 형태여야 하고, 문법적 형태가 서로 같아야 한다. 정답이라고 해서 "Given these findings," 처럼 지시어(this/that/these/those)+명사로 구체적 내용을 지칭하거나 다른 선택지보다 길고 구체적으로 쓰면 안 된다 — 정답은 논리적 관계(원인/결과, 대조, 예시 등)로만 구별되어야지 형태·길이로 드러나면 안 된다.
 그림 규칙: ${FIGURE_POLICY_RULE[figurePolicy]}
 선택지 규칙: 값이 숫자·식이면 선택지에 "x =" 같은 변수 이름을 붙이지 않고 값만 쓴다(예: "118", "$\\frac{3}{2}$", "$4x^2 - 1$"). 단위·기호(°, $, %)는 문제 문장에 두고 선택지에는 붙이지 않는다(SAT 관례). 각도는 LaTeX 로 $118^\\circ$ 로 쓴다.
 난이도 규칙: 난이도는 지문 길이·낯선 고유명사·어려운 어휘로 만들지 않는다. 학생이 지문·자료의 핵심 관계(원인/결과·조건·범위·비교·화자 관점·시간 관계)를 얼마나 정확히 구분해야 하는지로 설계한다. 어려움(hard)이면 정답은 여러 문장 또는 자료의 관계를 종합해야 하고, 오답은 각각 그중 일부만 포착해야 한다.
 오답 규칙(객관식): 각 오답은 지문·자료의 일부를 맞게 반영하되 핵심 관계 하나를 빠뜨리거나 잘못 해석해야 한다. 어휘 문항의 오답은 그 단어의 다른 뜻이나 문맥에 그럴듯한 다른 단어여야 하고, 지문과 무관한 낱말·문장은 쓰지 않는다. 독해 문항(중심 생각·추론·근거·구조·비교)의 오답 셋은 서로 다른 오류 유형이어야 한다 — 예: 하나는 지문의 세부는 맞지만 범위를 과장/축소, 하나는 인과·비교·시간 관계를 뒤바꿈, 하나는 화자·대상을 혼동하거나 증거는 맞지만 질문에 답하지 않음. 지문에 없는 내용의 선택지는 오답으로 쓰지 않는다. 지문과 무관한 선택지, 명백한 반대말, 불필요한 과장(all/never/only)만으로 지워지는 오답은 만들지 않는다(내용상 그 표현이 정답이거나 필요한 오답이면 예외). Math 오답은 실제 풀이 오류 모델(부호·단위 변환·한 단계 누락·축/눈금 오독·조건 무시·평균/비율/확률 계산 오류·도형 관계 오적용)에서 나와야 하고, 정답과 오답 모두 질문의 조건을 다 고려한 값이어야 한다. distractor_rationales 에 오답 셋의 근거를 적는다.
 ${difficulty === "hard" ? `어려움(hard) 전용 절차 — **지문을 쓰기 전에** design 을 먼저 채운다: (1) key_relations 에 학생이 종합해야 하는 핵심 관계 2~3개를 정한다. (2) answer_uses_relations 에 정답이 그 관계들을 어떻게 함께 만족하는지 적는다. (3) distractor_design 에 각 오답이 어느 관계를 부분적으로 맞추는지와 정확히 어디서 틀리는지(scope·causal·intensity·temporal·speaker·condition·partial_computation·unit·sign 중 하나)를 적는다. 그 다음에만 이 설계에 맞춰 지문·질문·선택지·해설을 쓴다. 설계와 실제 문항이 어긋나면(예: distractor_design 에 적은 오류가 실제 선택지 문장에 드러나지 않음) 안 된다.` : ""}
 ${evidenceSkill ? EVIDENCE_MODEL_PROMPT_NOTE(evidenceSkill) : ""}
+소재 다양성 규칙(2026-09-18, 지문 중복 대응): 이번 호출에서 만드는 ${clampedCount}개 문항은 서로 완전히 다른 분야·소재를 다뤄야 한다(예: 해양 생물학, 도시 교통 인프라, 미술사, 천문학, 경제사, 식물학처럼 겹치지 않는 영역). 같은 인물·기관·사건을 두 문항 이상에서 다시 쓰지 않는다.
+${params.avoidTopics && params.avoidTopics.length ? `다음 소재는 이미 같은 배치의 다른 문항에서 사용됐다 — **절대 재사용하지 말고**, 아래 목록과 겹치지 않는 완전히 다른 인물·기관·사건·분야를 새로 골라라:\n${params.avoidTopics.map((t) => `- ${t}`).join("\n")}` : ""}
 이 문제들은 특정 학생이 아니라 이 교재를 배정받는 어떤 학생에게도 재사용될 문제
 은행에 들어갑니다. 실전 SAT/AP 시험에 나올 법한 퀄리티로 만들어주세요.`,
       },
