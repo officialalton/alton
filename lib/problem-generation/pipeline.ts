@@ -16,6 +16,7 @@ import { isTransitionsSkill, checkTransitionRelationshipFields } from "./transit
 import { isRhetoricalSynthesisSkill, checkRhetoricalSynthesisFields } from "./rhetorical-synthesis-check";
 import { isTextStructureSkill, checkTextStructureFields } from "./text-structure-check";
 import { parseRwStimulus } from "@/lib/rw-stimulus";
+import { findBannedWords, checkTagConsistency, checkExplanationDerivation } from "./common-quality-gate";
 
 export type GeneratedProblem = Awaited<ReturnType<typeof generateSectionProblemsCore>>[number];
 type FigureKind = "plane" | "parallel_transversal" | "triangle" | "circle" | "polygon" | "solid" | "composite" | "data" | "figure_choice" | "figure_set";
@@ -464,6 +465,28 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
         }
       } catch (e) {
         console.error("[pipeline] 정답-해설 대조 오류:", e instanceof Error ? e.message : e);
+      }
+    }
+
+    // 2.6) Step 6 공통 게이트(2026-09-17) — 위 유형별 검증이 전부 통과한 뒤, 아직 어디에도
+    // 없던 교차 유형 검사만 더한다. AI 재호출 없음(순수 문자열 검사), 재시도는 fail()의 기존
+    // 상한(maxDepth)을 그대로 쓴다 — 별도의 더 큰 재시도 허용을 만들지 않는다.
+    {
+      const bannedFields: Record<string, string | null | undefined> = { 지문: stimulus, 질문: question, 해설: g.explanation };
+      (g.options ?? []).forEach((o, i) => { bannedFields[`선택지${i + 1}`] = o; });
+      const bannedIssues = findBannedWords(bannedFields);
+      if (bannedIssues.length) return fail("contract", `금칙어 검출: ${bannedIssues[0].message}`);
+
+      const tagIssues = checkTagConsistency({ format: params.format, options: g.options ?? null, answers: g.answers ?? null, skillCode });
+      if (tagIssues.length) return fail("contract", `태그 정합성 오류: ${tagIssues[0].message}`);
+
+      // evidence-model 5개 스킬은 evidence_span/target이 이미 결정적으로 검증된 "핵심 도출 사실"이므로,
+      // 해설이 그 문자열의 일부를 실제로 담고 있는지(질문 재진술이 아닌지) 값싸게 다시 확인한다.
+      // 2.5의 정답-해설 대조(AI 호출)와 달리 이건 순수 문자열 포함 검사라 새 호출이 아니다.
+      if (isEvidenceModelSkill(skillCode) && g.evidenceSpan) {
+        const keyFacts = [g.evidenceSpan, ...(g.evidenceTarget ? [g.evidenceTarget] : [])];
+        const derivationIssues = checkExplanationDerivation(g.explanation ?? "", keyFacts, 1);
+        if (derivationIssues.length) return fail("review", derivationIssues[0].message);
       }
     }
 

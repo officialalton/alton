@@ -13,6 +13,7 @@ import type { Accepted, Failure, GeneratedProblem, PipelineResult } from "../pip
 import type { QualityRecord } from "../review";
 import { checkFigure } from "@/lib/problem-figures/check";
 import { checkContent } from "@/lib/problem-content-check";
+import { findBannedWords, checkTagConsistency } from "@/lib/problem-generation/common-quality-gate";
 import {
   generateLinearTwoVarModel,
   renderLinearTwoVarProblem,
@@ -355,6 +356,18 @@ function attemptOne(
   if (fatalContent) {
     return { ok: false, reason: `내용 검증 실패: ${fatalContent.message}` };
   }
+
+  // Step 6 공통 게이트(2026-09-17) — 유형별 검증이 이미 다 돈 뒤, 아직 어디에도 없던
+  // 교차 유형 검사 두 가지만 더한다(재해석·모델 재호출 없음, 순수 문자열 검사).
+  const bannedIssues = findBannedWords({
+    지문: compiled.passage, 질문: compiled.question, 해설: compiled.explanation,
+    ...(compiled.options ?? []).reduce((acc, o, i) => ({ ...acc, [`선택지${i + 1}`]: o }), {} as Record<string, string>),
+  });
+  if (bannedIssues.length) return { ok: false, reason: `금칙어 검출: ${bannedIssues[0].message}` };
+  const tagIssues = checkTagConsistency({
+    format, options: format === "mc" ? compiled.options : null, answers: sprAnswers, skillCode,
+  });
+  if (tagIssues.length) return { ok: false, reason: `태그 정합성 오류: ${tagIssues[0].message}` };
 
   const problem: GeneratedProblem = {
     format,

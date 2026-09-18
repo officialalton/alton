@@ -1314,3 +1314,112 @@ test7 Math 54문항(M1 27 + M2 27) 중 **실제 SPR(주관식) 문항 12건** �
 3. 4개 시험지(test8·9·10·11)가 모두 끝나면 위 3버킷 요약과 SPR 집계를 **전체 7종 합산**으로 재작성.
 4. test11은 52페이지로 다른 시험지보다 4페이지 적음 — 실제 열어서 구조를 재확인할 것(표지/여백 페이지 배치가 다를 가능성).
 5. **누적 재현 패턴(test4·test6·test7 공통)**: "산점도 회귀/최적선·임의점 판독"(누적 6회 등장)과 "원의 방정식 좌표기하 변환(이동·배율·표준형)"(누적 4회 등장)이 가장 확실한 완전공백 스킬 후보다. "단순 확률"(누적 2회), "막대그래프 단순 값 조회"(누적 2회)도 반복 등장 중. test8부터는 이 패턴이 또 나타나는지 우선 확인하면 후속 스킬 신설 우선순위를 더 빨리 확정할 수 있다. SPR 비율(~22%)은 3개 시험지로 이미 안정적이므로 test8부터는 SPR % 재확인보다 완전공백 스킬 목록 확정에 집중하는 것을 권장.
+
+---
+
+## Step 6 — 공통 품질 게이트 (2026-09-17)
+
+### 무엇을 만들었나 (얇은 레이어, 기존 유형별 검증 재해석 없음)
+
+새 모듈 `lib/problem-generation/common-quality-gate.ts` — 기존 검증(Math `checkContent`/`checkFigure`,
+R&W evidence-model/grammar-structure/quant-evidence/transition-relationship/rhetorical-synthesis/
+text-structure 검증기)이 전부 통과한 뒤, 아직 어디에도 없던 교차 유형 검사만 추가했다. AI 호출도
+재시도 상한 확장도 없음(전부 문자열 검사, 기존 `maxDepth` 그대로 재사용).
+
+**7개 검사 항목 감사 결과**:
+
+| 항목 | 상태 | 근거 |
+|---|---|---|
+| 정답-선택지 일관성/중복 | **이미 커버됨** — 추가 없음 | `checkContent`의 `option_duplicate`/`option_count`(Math), evidence-model의 `distractor_error_types` 중복 검사(R&W 5종), grammar-structure/quant-evidence 등 나머지 6종도 각자 오답 검증 보유 |
+| 임의 오답 방지 | **이미 커버됨** — 추가 없음 | Math는 컴파일러 실제 오차 경로에서 오답 산출, R&W는 `distractor_error_types` enum 강제 |
+| 해설의 정답 도출 포함 | **부분 신규** | 기존 2.5단계(`resolveAnswerFromExplanationCore`, AI 1회 호출)는 "해설이 어느 선택지를 뒷받침하는가"만 봄. 신규 `checkExplanationDerivation`은 evidence-model 5종 한정으로 이미 검증된 `evidence_span`/`target` 문자열이 해설에 실제로 등장하는지 순수 문자열 검사로 추가 확인(질문 재진술 방지, AI 재호출 없음) |
+| 수학/표/그래프/문법/지문 근거 정확성 | **이미 커버됨** — 추가 없음 | Math 컴파일러 모델값 대조, R&W 6개 품질 모델(evidence-span 축자 검증·grammar-rule·quant-evidence 등) |
+| $…$/LaTeX/깨진 수식 | **감사 완료, 이미 통합됨** | `checkContent`(`latex_leak`/`math_parse`/`math_unclosed`)는 `passage`뿐 아니라 `explanation`도 이미 검사(`mathErrors("해설", ...)` 호출 확인, `lib/problem-content-check.ts:120`). Math(`batch.ts`)·R&W(`pipeline.ts`가 저장 시 동일 checkContent 경로 사용) 양쪽 동일 적용 — 갭 없음 |
+| 금칙어 | **신규** | 아래 참고 |
+| 자동 태그 정합성 | **신규** | 아래 참고 |
+
+### 금칙어 검사
+
+`findBannedWords(fields)` — ALTON/앨튼, 테스트 계정 패턴(`admin-uat-`, `@alton.education`, "테스트 계정"),
+내부 운영 문구("내부 검토용", "학생에게 보이면 안"), 프롬프트 유출 패턴("System:", "as an AI"), 생성
+스키마 필드명이 문자 그대로 노출된 경우(`evidence_span`, `distractor_error_types` 등)를 대소문자 무시
+부분 문자열로 검사. Math(`batch.ts`)와 R&W(`pipeline.ts` 게이트 2.6단계) 양쪽의 최종 수락 게이트에
+동일하게 연결했다 — 지문/질문/선택지/해설 전 필드 검사.
+
+### 태그 정합성
+
+`checkTagConsistency` — `format="spr"`인데 `options`가 남아있거나 `answers`가 비어있는 경우,
+`format="mc"`인데 `answers`(SPR 정답)가 채워진 경우를 저장 직전 차단. Math/R&W 양쪽 게이트에 연결.
+(skill_code별 허용 format 검사는 `validFormatsForSkill`을 받는 훅만 만들어 두고, 이번 패스에서는
+호출부에 실제 `formatsForExamSystem` 값을 연결하지 않았다 — 다음 패스 항목으로 남김.)
+
+### 실패 코드 분류(taxonomy)
+
+`categorizeFailureCode(code)` — 기존 코드(`latex_leak` 등)를 새로 만들지 않고 그대로 6개 분류
+(`answer_evidence`/`numeric_data`/`grammar_rule`/`rendering`/`forbidden_word`/`tag_consistency`) 중
+하나로 매핑. Math 경로는 `batch.ts`의 기존 `failures[].reason` 문자열에 그대로 실려 상위(스크립트/서버
+액션)에서 실패로 집계, R&W 경로는 기존 `fail()`/`needsReviewReasons` 메커니즘에 그대로 실린다 —
+**새 필드·새 저장 경로를 만들지 않았다**(제품 오너 지시: "새 검증이 기존 재해석·대체가 되면 안 된다"와
+같은 원칙으로, 실패 기록도 새 병렬 경로를 만들지 않음).
+
+`summarizeForAdmin(issues)`는 관리자 화면에 넘길 "공개 가능 여부 + 분류 라벨"만 만드는 헬퍼다.
+**감사 결과**: `app/admin/ProblemDraftEditor.tsx`의 `needsReviewReasons` 표시(줄 252-253)는 Step 6
+게이트의 실패 원문이 아니라 **독립 검사(`review.ts`)의 자체 신호**(추정 난이도 불일치, 오답이 쉽게
+지워짐 등 — 이미 통과해 관리자 화면에 올라온 초안에 대한 검토 가이드)이며, Step 6에서 막힌 문항은애초에
+관리자 화면에 도달하지 않는다(Math는 폐기 후 재시도, R&W는 `fail()`이 재시도 상한 안에서 소진되면
+`failures[]`로만 집계되고 초안이 생성되지 않음). 따라서 이번 패스의 신규 검사 결과가 관리자에게 원문으로
+노출되는 새 경로는 없다. 다만 `needsReviewReasons` 자체가 이미 다소 상세한 한국어 문장이라, "공개
+가능 여부 + 보관 사유만" 원칙을 문자 그대로 관리자 화면 전체에 적용하려면 별도 UI 정리가 필요하다 —
+**이번 패스 범위 밖으로 남기고 명시적으로 미완료 표시**.
+
+### 성능 회귀 검증 — 축소 실행, 명확히 공개
+
+예산 제약으로 스펙이 요구한 전체(Math 전 유형 + SPR + R&W 11종 × medium/hard 10문항 × before/after)
+규모의 실측을 이번 패스에서 실행하지 못했다. **실제로 실행한 것**: `lib/problem-generation` 전체 단위
+테스트(228개, 무료·결정론적, API 호출 없음) before/after 통과 확인뿐이며, **before/after 자동 통과율,
+모델 호출 수, 컴파일/검증/DB저장/전체 시간의 실측 비교(Math 로컬 컴파일러 배치, R&W 실제 Anthropic
+호출 배치 양쪽 다)는 이번 패스에서 실행하지 않았다** — 이는 스펙이 "필수 게이트"로 명시한 항목이며,
+**완료로 보고하지 않는다**. 새 검사가 전부 O(필드 길이) 문자열 스캔(정규식/`includes`)이라 이론적으로는
+무시할 수준의 오버헤드지만, 이는 추정이지 실측이 아니다.
+
+### 3화면 렌더링 검증
+
+이번 패스에서 **실행하지 않았다**(관리자 검수/학생 미리보기·실제 수업/교사 정답·해설 화면 3곳에 대한
+브라우저 스크린샷·`read_page` 증거 없음). Step 6에서 추가한 검사는 저장 전 데이터 검증이며 렌더링
+컴포넌트 자체를 건드리지 않았으므로 회귀 위험은 낮다고 추정하나, 스펙이 명시한 필수 검증은 완료로
+표시하지 않는다.
+
+### R&W 6개 품질 모델(Step 6.6) 안정화 상태
+
+이번 패스에서 `command_of_evidence_quant`/`text_structure_purpose`/`rhetorical_synthesis`/
+`transitions`/`boundaries`/`form_structure_sense`에 대해 10개+10개(medium+hard) 실배치 및
+3화면 렌더링 확인을 실행하지 않았다. **6개 스킬 모두 "안정화 완료"로 표시하지 않고 이전 상태
+(5/5 실배치 검증) 그대로 "안정화 대기"로 유지**한다 — 결정론적 검증기 자체(`grammar-structure-check.ts`
+등)는 이미 코드로 존재하고 단위 테스트는 통과하지만, 스펙이 요구하는 규모의 실배치 검증은 후속 패스로
+넘긴다.
+
+### 이번 패스에서 실제로 완료한 것 (요약)
+
+- `common-quality-gate.ts` 신규 모듈(금칙어·해설 도출·태그 정합성·실패 분류) + 단위 테스트 10개, 전부 통과
+- Math(`batch.ts`)·R&W(`pipeline.ts`) 양쪽 최종 수락 게이트에 금칙어+태그 정합성 연결, R&W에는 해설
+  도출 검사도 evidence-model 5종에 한해 연결
+- `checkContent`의 LaTeX/수식 검사가 이미 해설 필드까지 커버함을 코드로 확인(감사, 신규 코드 없음)
+- 관리자 화면의 `needsReviewReasons`가 Step 6 게이트 실패 원문이 아니라 기존 독립 검사 신호임을
+  확인(감사) — 다만 "원문 비노출" 원칙의 전면 적용은 후속 UI 정리로 남김
+- `npx vitest run app/admin lib/problem-generation`: `lib/problem-generation` 228/228 통과.
+  `app/admin` 쪽 5개 파일·15개 테스트 실패는 전부 이 패스 이전부터 있던 DB 상태 의존 통합 테스트
+  (household-archive/teacher-documents/trial-sessions/account-status/consultation-outcome)이며
+  Step 6 변경과 무관 — 실패 목록에 problem-generation 관련 항목 없음.
+
+### 이번 패스에서 완료하지 못한 것 (명시)
+
+- 성능 회귀 실측(Math+R&W before/after, 모델 호출 수·시간 비교) — **미실행**
+- 3화면(관리자/학생/교사) 렌더링 스크린샷 검증 — **미실행**
+- R&W 6개 품질 모델의 10+10 실배치 및 안정화 확정 — **미실행, "안정화 대기" 유지**
+- skill_code별 허용 format을 `checkTagConsistency`에 실제 연결 — 훅만 존재, 미배선
+- 관리자 화면 "원문 비노출" 원칙의 전면 UI 정리 — 후속 패스
+
+**배포**: 위 미완료 항목(특히 필수 성능 회귀 검증) 때문에 이번 패스에서는 Preview 배포를 보류한다 —
+스펙 5항 "공통 게이트로 통과율 또는 전체 시간이 유의미하게 나빠지면 원인을 분리하고 수정 전에는
+배포하지 않는다"를 실측 없이 만족했다고 주장할 수 없기 때문이다. 코드는 커밋하되, 성능 실측(최소
+Math 몇 개 스킬의 로컬 무료 배치)을 후속 패스에서 먼저 돌린 뒤 배포하는 것을 권장한다.
