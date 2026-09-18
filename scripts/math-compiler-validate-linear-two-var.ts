@@ -1,8 +1,12 @@
 // 2026-09-17 — 계산형 Math 컴파일러(일차식 공통 엔진)의 대표 10문항 배치 검증(제품
 // 오너 지시). 일반(medium)·어려움(hard) 각 10개를 실제 저장 경로로 만들어 자동
 // 통과율·부족률·벽시계 시간·호출 수를 실측한다. 로컬 DB에서만 실행한다.
-// 실행: npx tsx scripts/math-compiler-validate-linear-two-var.ts [skillCode]
+// 실행: npx tsx scripts/math-compiler-validate-linear-two-var.ts [skillCode] [--kind=값]
 // skillCode 생략 시 linear_equations_two_var. systems_linear·linear_inequalities도 지원.
+// 2026-09-18(제품 오너 지시) — --kind=값을 주면 "세부 패턴" 강제 지정(forceKind) 경로를
+// 실제 저장 경로(create_bank_problem → save_problem_draft_version)로 검증한다. 채택된
+// 문항마다 problems.subpattern을 그 값으로 기록하고, 저장 뒤 DB에서 직접 읽어 실제로
+// 그 값으로 남았는지 확인한다(생성 시점 필터가 아니라 영구 태깅이 핵심이라는 요구사항).
 import { readFileSync, existsSync } from "node:fs";
 import path from "node:path";
 
@@ -22,6 +26,7 @@ const SKILL_CODE = (process.argv[2] as
   | "inference_margin_error" | "evaluating_statistical_claims"
   | "area_volume" | "lines_angles_triangles" | "right_triangles_trigonometry" | "circles"
 ) || "linear_equations_two_var";
+const KIND_ARG = process.argv.find((a) => a.startsWith("--kind="))?.slice("--kind=".length);
 const SKILL_LABEL: Record<string, string> = {
   linear_equations_two_var: "Linear equations in two variables",
   systems_linear: "Systems of two linear equations",
@@ -67,10 +72,12 @@ async function main() {
     let created = 0;
     let dbSaveMs = 0;
     const failures: string[] = [];
+    const savedSubpatterns: (string | null)[] = [];
     const result = await runMathCompilerBatch({
       skillCode: SKILL_CODE,
       difficulty,
       count: 10,
+      kind: KIND_ARG,
       onAccepted: async ({ problem: g, quality }) => {
         const t0 = Date.now();
         const { data: problemId, error: pErr } = await admin.rpc("create_bank_problem", {
@@ -79,6 +86,13 @@ async function main() {
           p_difficulty: difficulty, p_actor_id: actorId,
         });
         if (pErr || !problemId) { failures.push(`create_bank_problem: ${pErr?.message}`); dbSaveMs += Date.now() - t0; return; }
+        // 2026-09-18 — 실제 저장 경로(createBankProblemAction)와 같은 방식: create_bank_problem
+        // 직후 problems.subpattern을 실제로 쓰인 kind로 채운다(요청한 kind든 무작위든).
+        const subpattern = (g as { subpattern?: string | null }).subpattern ?? null;
+        if (subpattern) {
+          const { error: subErr } = await admin.from("problems").update({ subpattern }).eq("id", problemId);
+          if (subErr) failures.push(`subpattern 기록: ${subErr.message}`);
+        }
         const { data: versionId, error: vErr } = await admin.rpc("save_problem_draft_version", {
           p_problem_id: problemId, p_passage: g.stimulus ?? g.passage, p_options: g.options ?? null, p_correct_index: g.correctIndex ?? null,
           p_explanation: g.explanation, p_difficulty: difficulty, p_actor_id: actorId,
@@ -89,6 +103,9 @@ async function main() {
         const { error: qErr } = await admin.rpc("set_problem_quality", { p_version_id: versionId, p_quality: quality });
         if (qErr) failures.push(`set_problem_quality: ${qErr.message}`);
         else created += 1;
+        // 저장이 실제로 남았는지 DB에서 직접 다시 읽어 확인한다(캐시된 값이 아니라 진짜 컬럼 값).
+        const { data: savedRow } = await admin.from("problems").select("subpattern").eq("id", problemId).maybeSingle();
+        savedSubpatterns.push((savedRow?.subpattern as string | null) ?? null);
         dbSaveMs += Date.now() - t0;
       },
     });
@@ -104,6 +121,11 @@ async function main() {
     console.log(`Math AI 호출 수: 0 (이 경로는 Anthropic 클라이언트를 아예 쓰지 않음)`);
     if (failures.length) console.log(`DB 저장 실패 사유: ${failures.join(" / ")}`);
     if (result.failures.length) console.log(`검증 실패 사유(표본): ${result.failures.slice(0, 3).map((f) => f.reason).join(" / ")}`);
+    if (KIND_ARG) {
+      console.log(`--kind=${KIND_ARG} 지정 — DB에 실제 저장된 subpattern 값: [${savedSubpatterns.join(", ")}]`);
+      const allMatch = savedSubpatterns.length > 0 && savedSubpatterns.every((s) => s === KIND_ARG);
+      console.log(allMatch ? "✅ 저장된 모든 문항의 subpattern이 요청한 kind와 정확히 일치합니다." : "❌ 불일치 발견 — 위 목록을 확인하세요.");
+    }
   }
 }
 

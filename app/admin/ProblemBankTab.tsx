@@ -19,6 +19,7 @@ import { listSubjectCatalogAction } from "./subject-actions";
 import ProblemDraftEditor, { FieldTitle, PublishedContentView } from "./ProblemDraftEditor";
 import { compatibilityPreview, formatsForExamSystem, FORMAT_LABEL } from "./problem-bank-ui";
 import { findProblemSkill } from "@/lib/problem-skills";
+import { getMathSkillKinds, getMathKindLabel } from "@/lib/problem-generation/math-compilers/kind-catalog";
 import {
   AP_SUBJECTS,
   EXAM_SYSTEMS,
@@ -465,7 +466,7 @@ function NewProblemPanel({
   keywordsBySubject: Map<string, SubjectKeyword[]>;
   busy: boolean;
   onCreate: (p: { subjectId: string; format: string; skillType?: string; skillCode?: string; examSystem?: string; apSubject?: string; topic?: string; difficulty?: string; keywordIds?: string[] }) => void | Promise<void>;
-  onGenerate: (p: { subjectId: string; skillType: string; skillCode?: string; examSystem?: string; apSubject?: string; topic?: string; difficulty: string; format: string; count: number; keywordIds?: string[]; figurePolicy?: string }) => void | Promise<void>;
+  onGenerate: (p: { subjectId: string; skillType: string; skillCode?: string; examSystem?: string; apSubject?: string; topic?: string; difficulty: string; format: string; count: number; keywordIds?: string[]; figurePolicy?: string; kind?: string }) => void | Promise<void>;
 }) {
   const [system, setSystem] = useState<ExamSystem>("sat_rw");
   const [subjectId, setSubjectId] = useState("");
@@ -486,6 +487,11 @@ function NewProblemPanel({
   const isCompilerSkill = MATH_COMPILER_SKILLS.has(skillCode);
   const MAX_SAFE_GENERATE_COUNT = isCompilerSkill ? 10 : 2;
   const [count, setCount] = useState("1");
+  // 2026-09-18(제품 오너 지시) — "세부 패턴"(kind) 선택 항목. 해당 skillCode가 2개 이상의
+  // 세부 패턴을 가질 때만 드롭다운을 보인다(1개뿐이면 고를 게 없다). 선택 안 하면(빈 값)
+  // 기존과 동일하게 컴파일러 내부 무작위 선택을 그대로 쓴다 — 필수 항목이 아니다.
+  const skillKinds = getMathSkillKinds(skillCode);
+  const [kind, setKind] = useState("");
 
   const keywords = subjectId ? keywordsBySubject.get(subjectId) ?? [] : [];
   const formats = formatsForExamSystem(system, apSubject || null);
@@ -506,6 +512,7 @@ function NewProblemPanel({
     // 시험 분류는 문항 체계의 하위 — 체계를 바꾸면 다시 고른다. 관리 과목·키워드는 그대로.
     setSatDomain("");
     setSkillCode("");
+    setKind("");
     setSkillType("");
     setApSubject("");
     setFormat(formatsForExamSystem(next, null)[0] ?? "mc");
@@ -583,6 +590,7 @@ function NewProblemPanel({
             onChange={(e) => {
               const code = e.target.value;
               setSkillCode(code);
+              setKind("");
               setMaterialChoice("with");
               const meta = SKILL_BY_CODE.get(code);
               if (meta) {
@@ -598,6 +606,16 @@ function NewProblemPanel({
               <option key={k.code} value={k.code}>{k.label}</option>
             ))}
           </select>
+          {/* 2026-09-18(제품 오너 지시) — Math 계산형 컴파일러 세부 기술이 2개 이상의
+             세부 패턴을 가질 때만 노출. 선택 안 하면(무작위) 기존 동작 그대로다. */}
+          {skillKinds.length >= 2 && (
+            <select aria-label="세부 패턴" value={kind} onChange={(e) => setKind(e.target.value)} className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 max-w-[220px]">
+              <option value="">무작위(전체 패턴)</option>
+              {skillKinds.map((k) => (
+                <option key={k.value} value={k.value}>{k.label}</option>
+              ))}
+            </select>
+          )}
           {/* '유형'은 세부 기술을 고르면 자동으로 채워지는 내부 값이다 — 읽기 전용 에코라 화면에는 보이지 않는다. */}
           <input aria-label="주제" value={topic} onChange={(e) => setTopic(e.target.value)} placeholder="주제 (선택 · 예: 생태계)" className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 w-[170px]" />
           <select aria-label="난이도" value={difficulty} onChange={(e) => setDifficulty(e.target.value as "easy" | "medium" | "hard")} className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5">
@@ -669,7 +687,7 @@ function NewProblemPanel({
           {system !== "ap" && (
             <button
               disabled={!canCreate || !skillType.trim()}
-              onClick={() => void onGenerate({ subjectId, skillType: skillType.trim(), skillCode: skillCode || undefined, examSystem: system, topic: topic.trim() || undefined, difficulty, format, count: Math.max(1, Math.min(MAX_SAFE_GENERATE_COUNT, Number(count) || 1)), keywordIds: keywordIds.length ? keywordIds : undefined, figurePolicy })}
+              onClick={() => void onGenerate({ subjectId, skillType: skillType.trim(), skillCode: skillCode || undefined, examSystem: system, topic: topic.trim() || undefined, difficulty, format, count: Math.max(1, Math.min(MAX_SAFE_GENERATE_COUNT, Number(count) || 1)), keywordIds: keywordIds.length ? keywordIds : undefined, figurePolicy, kind: kind || undefined })}
               className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink bg-white disabled:opacity-50"
             >
               AI 생성
@@ -727,6 +745,7 @@ function ProblemRow({
           <div className="text-[12px] text-grey-500 mt-0.5">
             {problem.subjectName} · {examSystemLabel(problem.examSystem)}{problem.apSubject ? ` › ${AP_SUBJECTS.find((a) => a.code === problem.apSubject)?.label ?? problem.apSubject}` : ""} · {FORMAT_LABEL[problem.format] ?? problem.format} · {WORK_STATE_LABEL[problem.workState]}
             {problem.skillCode ? ` · ${domainShort(problem.satDomain)} › ${skillLabel(problem.skillCode)}` : problem.satDomain ? ` · ${domainShort(problem.satDomain)} › 기술 미지정` : ""}
+            {problem.subpattern ? ` · 패턴 ${getMathKindLabel(problem.skillCode, problem.subpattern)}` : ""}
             {problem.topic ? ` · 주제 ${problem.topic}` : ""}
             {problem.difficulty ? ` · 난이도 ${problem.difficulty}` : ""}
             {problem.keywords.length ? ` · ${problem.keywords.map((k) => k.label).join(", ")}` : " · 키워드 없음"}

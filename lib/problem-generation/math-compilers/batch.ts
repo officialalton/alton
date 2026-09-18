@@ -106,6 +106,7 @@ import {
   validateCirclesModel,
 } from "./circles";
 import { sprFromAnswerText } from "./spr-answer";
+import { getMathSkillKinds } from "./kind-catalog";
 
 // 2026-09-17(제품 오너 지시) — "같은 일차식 공통 엔진으로 확장". systems_linear(두
 // 일차방정식의 연립)은 수학적으로 linear_equations_two_var 컴파일러가 이미 계산하는
@@ -172,6 +173,16 @@ export type MathCompilerBatchParams = {
    * 이전엔 여기까지 전달되지 않아 nonlinear_functions가 "좌표평면 포함"을 골라도 항상
    * 텍스트형으로만 나갔다. 이 배치 실행기가 실제로 구분하는 것은 "plane 그림을 붙이는가"뿐이다. */
   figurePolicy?: string;
+  /**
+   * 2026-09-18(제품 오너 지시) — 관리자가 "세부 패턴" 드롭다운에서 특정 kind를
+   * 골랐을 때 내부 무작위 선택을 건너뛰고 그 kind로만 생성한다(lib/problem-generation/
+   * math-compilers/kind-catalog.ts 목록 중 하나). skillCode가 실제로 그 kind를 갖지
+   * 않으면(오타·목록 밖 값) 각 컴파일러의 questionKind?/kind? 파라미터가 그 값을
+   * 자신의 유니온에 없는 것으로 보고 무시하지 않는다 — 타입 경계를 넘는 문자열은
+   * attemptOne에서 그 skillCode가 실제로 아는 kind 목록에 있는지 먼저 확인해서만
+   * 넘긴다(모르는 값은 무작위로 폴백, 배치를 실패시키지 않는다).
+   */
+  kind?: string;
   onAccepted?: (item: Accepted) => Promise<void>;
 };
 
@@ -209,11 +220,16 @@ function attemptOne(
   difficulty: LinearTwoVarDifficulty,
   timing: AttemptTiming,
   figurePolicy?: string,
-  format: "mc" | "spr" = "mc"
+  format: "mc" | "spr" = "mc",
+  forceKind?: string
 ): { ok: true; problem: GeneratedProblem; quality: QualityRecord } | { ok: false; reason: string } {
   if (format === "spr" && !SPR_ELIGIBLE_SKILLS.has(skillCode)) {
     return { ok: false, reason: `${skillCode}: 아직 SPR(그리드 입력)을 지원하지 않는 유형입니다.` };
   }
+  // 카탈로그에 없는 값(오타·목록 밖)은 무시하고 무작위 선택으로 폴백한다 — 관리자가
+  // 구형 캐시된 값을 보내도 배치 자체는 실패하지 않는다.
+  const kind = forceKind && getMathSkillKinds(skillCode).some((k) => k.value === forceKind) ? forceKind : undefined;
+  let usedKind: string | null = null;
   const t0 = Date.now();
   // 2026-09-17 — 컴파일러마다 figure 타입이 다르다(직선 그래프/삼각형/원/입체 등).
   // checkFigure는 어차피 unknown을 받으므로 여기서는 공통 형태로만 좁혀 둔다.
@@ -228,92 +244,110 @@ function attemptOne(
     distractorRationales: ReturnType<typeof renderLinearTwoVarProblem>["distractorRationales"];
   };
   if (skillCode === "linear_equations_two_var" || skillCode === "systems_linear") {
-    const model = generateLinearTwoVarModel({ difficulty });
+    const model = generateLinearTwoVarModel({ difficulty, questionKind: kind as Parameters<typeof generateLinearTwoVarModel>[0]["questionKind"] });
+    usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
     const check = validateLinearTwoVarModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
     compiled = renderLinearTwoVarProblem(model);
   } else if (skillCode === "linear_inequalities") {
-    const model = generateLinearInequalityModel({ difficulty });
+    const model = generateLinearInequalityModel({ difficulty, questionKind: kind as Parameters<typeof generateLinearInequalityModel>[0]["questionKind"] });
+    usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
     const check = validateLinearInequalityModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
     compiled = renderLinearInequalityProblem(model);
   } else if (skillCode === "linear_equations_one_var") {
-    const model = generateLinearOneVarModel({ difficulty });
+    const model = generateLinearOneVarModel({ difficulty, kind: kind as Parameters<typeof generateLinearOneVarModel>[0]["kind"] });
+    usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
     const check = validateLinearOneVarModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
     compiled = renderLinearOneVarProblem(model);
   } else if (skillCode === "linear_functions") {
-    const model = generateLinearFunctionModel({ difficulty });
+    const model = generateLinearFunctionModel({ difficulty, questionKind: kind as Parameters<typeof generateLinearFunctionModel>[0]["questionKind"] });
+    usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
     const check = validateLinearFunctionModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
     compiled = renderLinearFunctionProblem(model);
   } else if (skillCode === "equivalent_expressions") {
-    const model = generateEquivalentExpressionsModel({ difficulty });
+    const model = generateEquivalentExpressionsModel({ difficulty, kind: kind as Parameters<typeof generateEquivalentExpressionsModel>[0]["kind"] });
+    usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
     const check = validateEquivalentExpressionsModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
     compiled = renderEquivalentExpressionsProblem(model);
   } else if (skillCode === "nonlinear_equations_systems") {
-    const model = generateNonlinearEqModel({ difficulty });
+    const model = generateNonlinearEqModel({ difficulty, questionKind: kind as Parameters<typeof generateNonlinearEqModel>[0]["questionKind"] });
+    usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
     const check = validateNonlinearEqModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
     compiled = renderNonlinearEqProblem(model);
   } else if (skillCode === "nonlinear_functions") {
-    const model = generateNonlinearFnModel({ difficulty });
+    const model = generateNonlinearFnModel({ difficulty, questionKind: kind as Parameters<typeof generateNonlinearFnModel>[0]["questionKind"] });
+    usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
     const check = validateNonlinearFnModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
     compiled = renderNonlinearFnProblem(model, { figureMode: figurePolicy === "require_plane" ? "plane" : "text" });
   } else if (skillCode === "ratios_rates_units") {
-    const model = generateRatiosRatesModel({ difficulty });
+    const model = generateRatiosRatesModel({ difficulty, questionKind: kind as Parameters<typeof generateRatiosRatesModel>[0]["questionKind"] });
+    usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
     const check = validateRatiosRatesModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
     compiled = renderRatiosRatesProblem(model);
   } else if (skillCode === "percentages") {
-    const model = generatePercentagesModel({ difficulty });
+    const model = generatePercentagesModel({ difficulty, questionKind: kind as Parameters<typeof generatePercentagesModel>[0]["questionKind"] });
+    usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
     const check = validatePercentagesModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
     compiled = renderPercentagesProblem(model);
   } else if (skillCode === "one_variable_data") {
-    const model = generateOneVarDataModel({ difficulty });
+    const model = generateOneVarDataModel({ difficulty, questionKind: kind as Parameters<typeof generateOneVarDataModel>[0]["questionKind"] });
+    usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
     const check = validateOneVarDataModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
     compiled = renderOneVarDataProblem(model);
   } else if (skillCode === "two_variable_data") {
-    const model = generateTwoVarDataModel({ difficulty });
+    const model = generateTwoVarDataModel({ difficulty, questionKind: kind as Parameters<typeof generateTwoVarDataModel>[0]["questionKind"] });
+    usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
     const check = validateTwoVarDataModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
     compiled = renderTwoVarDataProblem(model);
   } else if (skillCode === "probability") {
-    const model = generateProbabilityModel({ difficulty });
+    const model = generateProbabilityModel({ difficulty, questionKind: kind as Parameters<typeof generateProbabilityModel>[0]["questionKind"] });
+    usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
     const check = validateProbabilityModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
     compiled = renderProbabilityProblem(model);
   } else if (skillCode === "inference_margin_error") {
     const model = generateInferenceModel({ difficulty });
+    usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
     const check = validateInferenceModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
     compiled = renderInferenceProblem(model);
   } else if (skillCode === "evaluating_statistical_claims") {
     const model = generateEvalClaimsModel({ difficulty });
+    usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
     const check = validateEvalClaimsModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
     compiled = renderEvalClaimsProblem(model);
   } else if (skillCode === "area_volume") {
-    const model = generateAreaVolumeModel({ difficulty });
+    const model = generateAreaVolumeModel({ difficulty, questionKind: kind as Parameters<typeof generateAreaVolumeModel>[0]["questionKind"] });
+    usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
     const check = validateAreaVolumeModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
     compiled = renderAreaVolumeProblem(model);
   } else if (skillCode === "lines_angles_triangles") {
-    const model = generateLinesAnglesModel({ difficulty });
+    const model = generateLinesAnglesModel({ difficulty, questionKind: kind as Parameters<typeof generateLinesAnglesModel>[0]["questionKind"] });
+    usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
     const check = validateLinesAnglesModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
     compiled = renderLinesAnglesProblem(model);
   } else if (skillCode === "right_triangles_trigonometry") {
-    const model = generateRightTriModel({ difficulty });
+    const model = generateRightTriModel({ difficulty, questionKind: kind as Parameters<typeof generateRightTriModel>[0]["questionKind"] });
+    usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
     const check = validateRightTriModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
     compiled = renderRightTriProblem(model);
   } else if (skillCode === "circles") {
-    const model = generateCirclesModel({ difficulty });
+    const model = generateCirclesModel({ difficulty, questionKind: kind as Parameters<typeof generateCirclesModel>[0]["questionKind"] });
+    usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
     const check = validateCirclesModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
     compiled = renderCirclesProblem(model);
@@ -388,6 +422,10 @@ function attemptOne(
     })),
     difficultyRationale: "",
     design: null,
+    // 2026-09-18(제품 오너 지시) - 실제로 쓰인 세부 패턴(무작위 선택이든 forceKind든)을
+    // 그대로 들고 다닌다. GeneratedProblem 정식 타입에는 없는 필드라 위 캐스트로만 접근 -
+    // 저장 경로(problem-bank-actions.ts)가 (g as { subpattern?: string|null }).subpattern으로 읽는다.
+    subpattern: usedKind,
   } as unknown as GeneratedProblem;
   return { ok: true, problem, quality: buildQuality([]) };
 }
@@ -415,7 +453,7 @@ export async function runMathCompilerBatch(
     if (candidatesEvaluated >= maxCandidates) { stoppedReason = "candidate_cap"; break; }
     if (Date.now() - start >= MAX_WALL_CLOCK_MS) { stoppedReason = "time_cap"; break; }
     candidatesEvaluated += 1;
-    const outcome = attemptOne(params.skillCode, params.difficulty, timing, params.figurePolicy, params.format ?? "mc");
+    const outcome = attemptOne(params.skillCode, params.difficulty, timing, params.figurePolicy, params.format ?? "mc", params.kind);
     if (!outcome.ok) {
       failures.push({ skillCode: params.skillCode, stage: "review", reason: outcome.reason, resolved: false, snippet: "" });
       continue;

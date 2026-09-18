@@ -38,6 +38,8 @@ export type BankProblem = {
   /** SAT 영역·세부 기술 코드(lib/problem-taxonomy, DB problem_skill_codes). 만들기·찾기·배정·성취의 공통 기준. */
   satDomain: string | null;
   skillCode: string | null;
+  /** 2026-09-18: Math 계산형 컴파일러 세부 패턴(questionKind/kind) 태그. R&W·직접 작성은 null. */
+  subpattern: string | null;
   /** 문항 체계(2026-09-14): sat_rw | sat_math | ap. 관리 과목과 독립. */
   examSystem: string | null;
   /** AP 과목 코드(exam_system = ap). */
@@ -139,7 +141,7 @@ export async function listBankProblemsAction(
   let q = admin
     .from("problems")
     .select(
-      "id, format, passage, skill_type, topic, difficulty, subject_id, status, archived_at, created_at, sat_domain, skill_code, exam_system, ap_subject, created_via"
+      "id, format, passage, skill_type, topic, difficulty, subject_id, status, archived_at, created_at, sat_domain, skill_code, exam_system, ap_subject, created_via, subpattern"
     )
     .order("created_at", { ascending: false })
     .limit(200);
@@ -261,6 +263,7 @@ export async function listBankProblemsAction(
     skillType: (r.skill_type as string | null) ?? null,
     satDomain: (r.sat_domain as string | null) ?? null,
     skillCode: (r.skill_code as string | null) ?? null,
+    subpattern: (r.subpattern as string | null) ?? null,
     examSystem: (r.exam_system as string | null) ?? null,
     apSubject: (r.ap_subject as string | null) ?? null,
     hasQuestion: (() => {
@@ -357,6 +360,8 @@ export async function createBankProblemAction(params: {
    * 내용 편집을 막는다(공개/보관만). 기본은 관리자가 직접 쓰는 'manual'.
    */
   createdVia?: "manual" | "ai_generated" | "compiler";
+  /** 2026-09-18: Math 계산형 컴파일러가 실제로 쓴 세부 패턴(questionKind/kind). 수동 작성·R&W는 생략. */
+  subpattern?: string | null;
 }): Promise<BankResult<string>> {
   const { adminUserId } = await requireAdmin();
   const admin = createAdminClient();
@@ -377,6 +382,10 @@ export async function createBankProblemAction(params: {
   if (params.createdVia && params.createdVia !== "manual") {
     const { error: viaError } = await admin.from("problems").update({ created_via: params.createdVia }).eq("id", problemId);
     if (viaError) console.error("[problem-bank] created_via 기록 실패:", viaError.message);
+  }
+  if (params.subpattern) {
+    const { error: subpatternError } = await admin.from("problems").update({ subpattern: params.subpattern }).eq("id", problemId);
+    if (subpatternError) console.error("[problem-bank] subpattern 기록 실패:", subpatternError.message);
   }
   if (params.keywordIds?.length) {
     // 키워드를 붙이지 못해도 문제 자체는 만들어졌다. 만들기를 실패로 돌리면
@@ -760,6 +769,9 @@ export async function generateBankProblemsAction(params: {
   figurePolicy?: string;
   examSystem?: string;
   apSubject?: string;
+  /** 2026-09-18(제품 오너 지시) — 관리자가 "세부 패턴" 드롭다운에서 고른 값. 계산형
+   * 컴파일러 skillCode에만 의미가 있다 — 그 외에는 무시된다. */
+  kind?: string;
 }): Promise<BankResult<{ created: number; failures: string[]; requested: number; shortfall: number; stoppedReason: string }>> {
   await requireAdmin();
   const admin = createAdminClient();
@@ -804,12 +816,15 @@ export async function generateBankProblemsAction(params: {
       // 만들어진 형식(g.format)을 따른다 — SPR 미지원 유형에 spr을 요청하면 배치가 0건
       // 채택으로 끝나고 아래 "생성하지 못했습니다" 분기로 사유와 함께 반환된다.
       format: params.format === "spr" ? "spr" : "mc",
+      kind: params.kind,
       onAccepted: async ({ problem: g, quality }) => {
         const t0 = Date.now();
         const problem = await createBankProblemAction({
           subjectId: params.subjectId, format: g.format, skillType: params.skillType, skillCode: params.skillCode,
           examSystem: params.examSystem, apSubject: params.apSubject, topic: params.topic, difficulty: params.difficulty, keywordIds: params.keywordIds,
           createdVia: "compiler",
+          // 2026-09-18 — 실제로 쓰인 세부 패턴(요청한 kind든 무작위로 뽑힌 값이든)을 그대로 태깅한다.
+          subpattern: (g as { subpattern?: string | null }).subpattern ?? null,
         });
         if (!problem.ok) { failures.push(problem.error); dbSaveMs += Date.now() - t0; return; }
         const draft = await createDraftVersionAction({

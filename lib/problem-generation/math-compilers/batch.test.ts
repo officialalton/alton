@@ -172,3 +172,62 @@ describe("runMathCompilerBatch — SPR(그리드 입력) 1차 지원(2026-09-17)
     expect(result.failures.some((f) => f.reason.includes("SPR"))).toBe(true);
   });
 });
+
+// 2026-09-18(제품 오너 지시) — "세부 패턴" 드롭다운. kind를 지정하면 배치 안의 채택된
+// 문항이 전부(무작위 재시도로 채워진 나머지 후보까지 포함해) 정확히 그 kind여야 하고,
+// 각 문항 객체에도 subpattern으로 그대로 남아야 한다(저장 경로가 그 값을 읽어 DB에 태깅함).
+// kind를 생략하면 기존처럼 여러 kind가 섞여 나온다(회귀 없음 확인).
+describe("runMathCompilerBatch — 세부 패턴(kind) 강제 지정", () => {
+  it("nonlinear_equations_systems: kind='parameter_discriminant'을 지정하면 채택된 문항이 전부 그 kind다", async () => {
+    const result = await runMathCompilerBatch({
+      skillCode: "nonlinear_equations_systems", difficulty: "medium", count: 5, kind: "parameter_discriminant",
+    });
+    expect(result.accepted.length).toBeGreaterThan(0);
+    for (const item of result.accepted) {
+      expect((item.problem as unknown as { subpattern: string }).subpattern).toBe("parameter_discriminant");
+    }
+  });
+
+  it("linear_inequalities: kind='table_verification'을 지정하면 채택된 문항이 전부 그 kind다", async () => {
+    const result = await runMathCompilerBatch({
+      skillCode: "linear_inequalities", difficulty: "medium", count: 5, kind: "table_verification",
+    });
+    expect(result.accepted.length).toBeGreaterThan(0);
+    for (const item of result.accepted) {
+      expect((item.problem as unknown as { subpattern: string }).subpattern).toBe("table_verification");
+    }
+  });
+
+  it("percentages: kind='compound_change'를 지정하면 채택된 문항이 전부 그 kind다", async () => {
+    const result = await runMathCompilerBatch({
+      skillCode: "percentages", difficulty: "medium", count: 5, kind: "compound_change",
+    });
+    expect(result.accepted.length).toBeGreaterThan(0);
+    for (const item of result.accepted) {
+      expect((item.problem as unknown as { subpattern: string }).subpattern).toBe("compound_change");
+    }
+  });
+
+  it("equivalent_expressions: kind='rational_equivalence'를 지정하면 채택된 문항이 전부 그 kind다(kind 파라미터명이 다른 컴파일러)", async () => {
+    const result = await runMathCompilerBatch({
+      skillCode: "equivalent_expressions", difficulty: "medium", count: 5, kind: "rational_equivalence",
+    });
+    expect(result.accepted.length).toBeGreaterThan(0);
+    for (const item of result.accepted) {
+      expect((item.problem as unknown as { subpattern: string }).subpattern).toBe("rational_equivalence");
+    }
+  });
+
+  it("카탈로그에 없는 값(오타)을 kind로 주면 무시하고 무작위 선택으로 폴백한다 — 배치가 실패하지 않는다", async () => {
+    const result = await runMathCompilerBatch({
+      skillCode: "percentages", difficulty: "medium", count: 10, kind: "no_such_kind",
+    });
+    expect(result.accepted.length).toBeGreaterThan(0);
+  });
+
+  it("kind를 지정하지 않으면(기존 동작) 10문항 배치 안에 둘 이상의 kind가 섞여 나온다(회귀 없음)", async () => {
+    const result = await runMathCompilerBatch({ skillCode: "percentages", difficulty: "medium", count: 10 });
+    const kinds = new Set(result.accepted.map((item) => (item.problem as unknown as { subpattern: string | null }).subpattern));
+    expect(kinds.size).toBeGreaterThan(1);
+  });
+});
