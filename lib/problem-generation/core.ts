@@ -280,7 +280,15 @@ export async function generateSectionProblemsCore(params: {
 
   // 어려움(hard)은 design 이 필수라 항목당 응답이 훨씬 길다 — 개수·난이도에 맞춰 토큰 예산을 늘린다.
   // 예산이 부족하면 도구 호출이 중간에 잘려 problems 배열이 아예 비게 나온다("AI 응답에 문제가 없습니다").
-  const tokenBudget = Math.min(8000, (difficulty === "hard" ? 2200 : 1400) * clampedCount + 800);
+  // 2026-09-18(hard/medium n=10 재검증) — evidenceSkill(근거 모델 4필드: target/evidence_span/
+  // answer_rationale/distractor_error_types)이 있는 스킬은 그 필드들만큼 항목당 응답이 더 길다. 기존
+  // 고정 상한 8000은 이 여분을 계산에 안 넣어서, medium 기본 청크 크기(6개, pipeline.ts CHUNK)에서
+  // 1400*6+800=9200 > 8000으로 잘려 "AI 응답에 문제가 없습니다"(빈 배열) 예외가 났다 — count=5 이하
+  // 요청에서는 안 보이다가 count=10(청크가 2개로 나뉘며 6개짜리가 생김)에서만 드러난 잠재 버그.
+  // 재시도 횟수를 늘리는 게 아니라 애초에 잘리지 않게 항목당 예산과 상한을 올린다.
+  const perItemExtra = evidenceSkill ? 500 : 0;
+  const tokenCap = evidenceSkill ? 12000 : 8000;
+  const tokenBudget = Math.min(tokenCap, (difficulty === "hard" ? 2200 : 1400) * clampedCount + perItemExtra * clampedCount + 800);
   const message = await getAnthropic().messages.create({
     model: "claude-sonnet-5",
     max_tokens: tokenBudget,

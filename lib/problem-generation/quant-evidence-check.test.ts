@@ -41,7 +41,7 @@ describe("checkQuantEvidenceFields", () => {
   });
 
   it("rejects when the correct answer's number is not actually in the figure data (AI self-report cannot substitute)", () => {
-    const r = checkQuantEvidenceFields("command_of_evidence_quant", baseFields, FIGURE, "Shift 4 had 20 defective bottles", ["Shift 4 had 350 defective bottles", "Shift 4 had 9 defective bottles", "Shift 4 had 8 defective bottles"]);
+    const r = checkQuantEvidenceFields("command_of_evidence_quant", baseFields, FIGURE, "Shift 4 had 5000 defective bottles", ["Shift 4 had 350 defective bottles", "Shift 4 had 9 defective bottles", "Shift 4 had 8 defective bottles"]);
     expect(r.ok).toBe(false);
     if (!r.ok) expect(r.reason).toMatch(/자료/);
   });
@@ -71,6 +71,28 @@ describe("checkQuantEvidenceFields", () => {
   it("rejects when no figure is present", () => {
     const r = checkQuantEvidenceFields("command_of_evidence_quant", baseFields, null, "Shift 4 had 14 defective bottles", ["a", "b", "c"]);
     expect(r.ok).toBe(false);
+  });
+
+  it("accepts a DIFFERENCE-based correct answer whose value is the gap between two real cells (2026-09-18 hard-tier fix)", () => {
+    const r = checkQuantEvidenceFields(
+      "command_of_evidence_quant",
+      { ...baseFields, operation: "DIFFERENCE" },
+      FIGURE,
+      "shift 4 had 8 more defective bottles than shift 1",
+      ["shift 4 had 5 more defective bottles than shift 1", "shift 4 had 6 more defective bottles than shift 1", "shift 4 had 2 more defective bottles than shift 1"]
+    );
+    expect(r.ok).toBe(true);
+  });
+
+  it("accepts a distractor that partially shares a number with the correct answer but differs on another (2026-09-18 hard-tier fix — comparative options with two data points shouldn't be rejected just for sharing one)", () => {
+    const r = checkQuantEvidenceFields(
+      "command_of_evidence_quant",
+      baseFields,
+      FIGURE,
+      "Shift 1 had 6 defective bottles and shift 4 had 14 defective bottles",
+      ["Shift 1 had 6 defective bottles and shift 4 had 9 defective bottles", "Shift 1 had 6 defective bottles and shift 4 had 8 defective bottles", "Shift 1 had 9 defective bottles and shift 4 had 8 defective bottles"]
+    );
+    expect(r.ok).toBe(true);
   });
 
   it("rejects an unknown operation value or unknown distractor tag", () => {

@@ -66,18 +66,59 @@ function derivedStats(figure: unknown): Set<number> {
     for (const s of fig.series) if (Array.isArray(s.values)) rows.push(s.values.filter((n) => typeof n === "number"));
   }
   if (fig && Array.isArray(fig.values)) rows.push(fig.values.filter((n) => typeof n === "number"));
+  const rowStats: number[] = [];
   for (const r of rows) {
     if (!r.length) continue;
-    out.add(r.reduce((a, b) => a + b, 0));
+    const sum = r.reduce((a, b) => a + b, 0);
+    out.add(sum);
     out.add(Math.max(...r));
     out.add(Math.min(...r));
+    rowStats.push(sum);
+    // 2026-09-18(hard 재검증) — target=DIFFERENCE 인데 이 함수가 "차이" 값을 전혀 계산하지 않아,
+    // 정당한 차이 기반 정답까지 "자료에 없는 수치"로 오탐 거부하던 버그. 같은 행 안 두 셀의 차이도
+    // 파생 통계로 인정한다(부호 있는 값·절댓값 둘 다).
+    for (let i = 0; i < r.length; i += 1) {
+      for (let j = 0; j < r.length; j += 1) {
+        if (i === j) continue;
+        out.add(r[i] - r[j]);
+        out.add(Math.abs(r[i] - r[j]));
+      }
+    }
   }
-  // 열 합(행렬 형태일 때).
+  // 행 합계끼리의 차이(예: "shift 1 대비 shift 4 총합 차이").
+  for (let i = 0; i < rowStats.length; i += 1) {
+    for (let j = 0; j < rowStats.length; j += 1) {
+      if (i === j) continue;
+      out.add(rowStats[i] - rowStats[j]);
+      out.add(Math.abs(rowStats[i] - rowStats[j]));
+    }
+  }
+  // 열 합(행렬 형태일 때) + 열끼리의 차이.
   if (rows.length >= 2) {
     const cols = rows[0].length;
+    const colSums: number[] = [];
     for (let c = 0; c < cols; c += 1) {
       const col = rows.map((r) => r[c]).filter((n) => typeof n === "number");
-      if (col.length) out.add(col.reduce((a, b) => a + b, 0));
+      if (col.length) {
+        const sum = col.reduce((a, b) => a + b, 0);
+        out.add(sum);
+        colSums.push(sum);
+        // 같은 열 안 두 행의 차이(예: "shift 2와 shift 3의 불량 개수 차이").
+        for (let i = 0; i < col.length; i += 1) {
+          for (let j = 0; j < col.length; j += 1) {
+            if (i === j) continue;
+            out.add(col[i] - col[j]);
+            out.add(Math.abs(col[i] - col[j]));
+          }
+        }
+      }
+    }
+    for (let i = 0; i < colSums.length; i += 1) {
+      for (let j = 0; j < colSums.length; j += 1) {
+        if (i === j) continue;
+        out.add(colSums[i] - colSums[j]);
+        out.add(Math.abs(colSums[i] - colSums[j]));
+      }
     }
   }
   return out;
@@ -148,8 +189,16 @@ export function checkQuantEvidenceFields(
     if (nums.length === 0) {
       return { ok: false, reason: `quant-evidence: 오답 선택지 "${distractorOptions[i].slice(0, 60)}"에 수치가 없습니다.` };
     }
-    if (nums.some((n) => correctNums.includes(n))) {
-      return { ok: false, reason: `quant-evidence: 오답 선택지 "${distractorOptions[i].slice(0, 60)}"의 수치가 정답과 같습니다 — 변별력이 없습니다.` };
+    // 2026-09-18(hard 재검증) — "수치 하나라도 겹치면 무조건 거부"는 hard 난이도에서 흔한 정당한
+    // 오답 패턴(두 대상을 비교하는 복수 수치 선택지에서, 한쪽 수치는 정답과 같은 실제 값을 공유하고
+    // 다른 쪽 수치만 잘못 읽은 경우 — 예: "6에서 8로" vs 오답 "6에서 7로")까지 "변별력 없음"으로
+    // 오탐 거부해 hard 통과율을 끌어내렸다. 정답과 오답의 수치 집합이 **완전히 같을 때만**(오답이
+    // 정답과 하나도 다르지 않을 때만) 변별력이 없다고 본다 — 부분적으로만 겹치면 정당한 근접 오답이다.
+    const correctSet = new Set(correctNums);
+    const numsSet = new Set(nums);
+    const identical = numsSet.size === correctSet.size && Array.from(numsSet).every((n) => correctSet.has(n));
+    if (identical) {
+      return { ok: false, reason: `quant-evidence: 오답 선택지 "${distractorOptions[i].slice(0, 60)}"의 수치가 정답과 완전히 같습니다 — 변별력이 없습니다.` };
     }
     const plausible = nums.some((n) => cellSet.has(n) || derived.has(n));
     if (!plausible) {
