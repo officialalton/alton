@@ -10,7 +10,12 @@ export type LinearOneVarDifficulty = "easy" | "medium" | "hard";
 // 방정식을 "푸는" 게 아니라, 서술된 문장을 보고 "어느 식이 이 상황을 나타내는가"를
 // 고르는 것 — 정답은 숫자가 아니라 방정식 자기 자체(문자열)다. a·x + b = c 형태로
 // 한정한다("8배보다 3 크다" = 83 같은 한 단계 관계식).
-export type LinearOneVarKind = "solve" | "word_problem_translate";
+// 2026-09-17(제품 오너 지시, Step 4 고빈도 공백 8번) — "리터럴 방정식"(literal
+// equation) 재배열. 여러 변수가 있는 공식/등식에서 목표 변수를 다른 변수들로
+// 표현하는 식을 고르는 문항 — 정답도 방정식 문자열이다. 형태는
+// target = coef * (other +/- shift) (예: P = N(19 - C)) 로 한정해 분배·이항을
+// 둘 다 요구하면서도 항상 깔끔한 문자열 조작만으로 정답/오답을 조립할 수 있게 한다.
+export type LinearOneVarKind = "solve" | "word_problem_translate" | "literal_rearrange";
 
 /**
  * 불변 정답 모델 — a·x + b = c·x + d, 해는 x = (d-b)/(a-c). 계수는 항상 정수이고
@@ -26,7 +31,23 @@ export type LinearOneVarModel =
       correctAnswer: string;
       distractors: { value: string; kind: DistractorKind; reason: string }[];
     }
-  | WordProblemTranslateModel;
+  | WordProblemTranslateModel
+  | LiteralRearrangeModel;
+
+/**
+ * 리터럴 방정식 모델 — O = K(T + c) / O = K(T - c) / O = K(c - T) 세 형태 중 하나.
+ * O(outer), K(coefficient), T(target)는 서로 다른 한 글자 변수, c는 양의 정수 상수.
+ * 목표는 항상 T를 다른 변수들로 나타내는 식을 고르는 것 — 정답도 방정식 문자열이다.
+ */
+export type LiteralRearrangeModel = {
+  kind: "literal_rearrange";
+  skillCode: "linear_equations_one_var";
+  difficulty: LinearOneVarDifficulty;
+  form: "t_plus_c" | "t_minus_c" | "c_minus_t";
+  outerVar: string; coefVar: string; targetVar: string; c: number;
+  correctAnswer: string;
+  distractors: { value: string; kind: DistractorKind; reason: string }[];
+};
 
 /**
  * 문장제 → 방정식 모델. "a times a number x, plus/minus b, equals c" 형태의 관계를
@@ -88,10 +109,18 @@ function pickEquation(range: number, difficulty: LinearOneVarDifficulty): { a: n
 }
 
 export function generateLinearOneVarModel(params: { difficulty: LinearOneVarDifficulty; kind?: LinearOneVarKind }): LinearOneVarModel {
-  // 2026-09-17(제품 오너 지시) — kind를 지정하지 않으면 기존 "풀기" 문항 70%,
-  // "문장제 → 방정식 세우기" 문항 30%로 섞는다(실제 시험 빈도가 풀기 쪽이 더 많다).
-  const kind: LinearOneVarKind = params.kind ?? (Math.random() < 0.3 ? "word_problem_translate" : "solve");
+  // 2026-09-17(제품 오너 지시) — kind를 지정하지 않으면 "풀기" 60%, "문장제 → 방정식
+  // 세우기" 25%, "리터럴 방정식 재배열" 15%로 섞는다(리터럴은 실제 빈도가 더 낮다).
+  const kind: LinearOneVarKind =
+    params.kind ??
+    (() => {
+      const roll = Math.random();
+      if (roll < 0.15) return "literal_rearrange";
+      if (roll < 0.4) return "word_problem_translate";
+      return "solve";
+    })();
   if (kind === "word_problem_translate") return generateWordProblemTranslateModel(params);
+  if (kind === "literal_rearrange") return generateLiteralRearrangeModel(params);
   const range = RANGE_BY_DIFFICULTY[params.difficulty];
   for (let attempt = 0; attempt < 30; attempt++) {
     const { a, b, c, d, x } = pickEquation(range, params.difficulty);
@@ -188,7 +217,113 @@ export function generateWordProblemTranslateModel(params: { difficulty: LinearOn
   };
 }
 
+const LITERAL_VAR_POOL = ["P", "N", "C", "A", "b", "h", "M", "R", "T", "W", "V", "d", "F", "g", "k"];
+const LITERAL_C_RANGE_BY_DIFFICULTY: Record<LinearOneVarDifficulty, [number, number]> = {
+  easy: [2, 12], medium: [5, 20], hard: [8, 30],
+};
+const LITERAL_FORMS = ["t_plus_c", "t_minus_c", "c_minus_t"] as const;
+
+/** 서로 다른 한 글자 변수 3개를 뽑는다(outer, coef, target 순서). */
+function pickThreeDistinctVars(): [string, string, string] {
+  const pool = [...LITERAL_VAR_POOL];
+  const pick = (): string => {
+    const i = randInt(0, pool.length - 1);
+    return pool.splice(i, 1)[0];
+  };
+  return [pick(), pick(), pick()];
+}
+
+export function generateLiteralRearrangeModel(params: {
+  difficulty: LinearOneVarDifficulty;
+  form?: (typeof LITERAL_FORMS)[number];
+}): LiteralRearrangeModel {
+  const [cMin, cMax] = LITERAL_C_RANGE_BY_DIFFICULTY[params.difficulty];
+  for (let attempt = 0; attempt < 30; attempt++) {
+    const [outerVar, coefVar, targetVar] = pickThreeDistinctVars();
+    const c = randInt(cMin, cMax);
+    const form = params.form ?? LITERAL_FORMS[randInt(0, LITERAL_FORMS.length - 1)];
+
+    // O = K(T + c) → T = O/K - c
+    // O = K(T - c) → T = O/K + c
+    // O = K(c - T) → T = c - O/K
+    let correctAnswer: string;
+    const rawCandidates: { value: string; kind: DistractorKind; reason: string }[] = [];
+    if (form === "t_plus_c") {
+      correctAnswer = `${targetVar} = ${outerVar}/${coefVar} - ${c}`;
+      rawCandidates.push(
+        { value: `${targetVar} = ${outerVar}/${coefVar} + ${c}`, kind: "sign_error", reason: `${c}를 반대편으로 이항할 때 부호를 바꾸지 않았다.` },
+        { value: `${targetVar} = ${outerVar} - ${c}`, kind: "formula_misuse", reason: `양변을 ${coefVar}로 나누는 것을 잊고 상수항만 이항했다.` },
+        { value: `${targetVar} = (${outerVar} - ${c})/${coefVar}`, kind: "formula_misuse", reason: `${coefVar}를 괄호 안 ${targetVar}에만 곱한다고 착각해 ${outerVar} = ${coefVar}${targetVar} + ${c}로 잘못 분배했다(우변 상수에도 ${coefVar}를 곱해야 한다).` },
+        { value: `${targetVar} = ${coefVar}/${outerVar} - ${c}`, kind: "condition_ignored", reason: `${outerVar}와 ${coefVar}의 자리를 서로 바꿔 세웠다.` },
+      );
+    } else if (form === "t_minus_c") {
+      correctAnswer = `${targetVar} = ${outerVar}/${coefVar} + ${c}`;
+      rawCandidates.push(
+        { value: `${targetVar} = ${outerVar}/${coefVar} - ${c}`, kind: "sign_error", reason: `${c}를 반대편으로 이항할 때 부호를 바꾸지 않았다.` },
+        { value: `${targetVar} = ${outerVar} + ${c}`, kind: "formula_misuse", reason: `양변을 ${coefVar}로 나누는 것을 잊고 상수항만 이항했다.` },
+        { value: `${targetVar} = (${outerVar} + ${c})/${coefVar}`, kind: "formula_misuse", reason: `${coefVar}를 괄호 안 ${targetVar}에만 곱한다고 착각해 ${outerVar} = ${coefVar}${targetVar} - ${c}로 잘못 분배했다(우변 상수에도 ${coefVar}를 곱해야 한다).` },
+        { value: `${targetVar} = ${coefVar}/${outerVar} + ${c}`, kind: "condition_ignored", reason: `${outerVar}와 ${coefVar}의 자리를 서로 바꿔 세웠다.` },
+      );
+    } else {
+      correctAnswer = `${targetVar} = ${c} - ${outerVar}/${coefVar}`;
+      rawCandidates.push(
+        { value: `${targetVar} = ${outerVar}/${coefVar} - ${c}`, kind: "sign_error", reason: `${outerVar}/${coefVar}와 ${c}의 순서를 이항하면서 전체 부호를 반대로 처리했다.` },
+        { value: `${targetVar} = ${c} - ${outerVar}`, kind: "formula_misuse", reason: `양변을 ${coefVar}로 나누는 것을 잊었다.` },
+        { value: `${targetVar} = ${coefVar}×${c} - ${outerVar}`, kind: "formula_misuse", reason: `${coefVar}를 괄호 안 ${targetVar}에만 곱한다고 착각해 ${outerVar} = ${coefVar}×${c} - ${targetVar}로 잘못 분배했다(${targetVar}에도 ${coefVar}를 곱해야 한다).` },
+        { value: `${targetVar} = ${c} - ${coefVar}/${outerVar}`, kind: "condition_ignored", reason: `${outerVar}와 ${coefVar}의 자리를 서로 바꿔 세웠다.` },
+      );
+    }
+
+    const seen = new Set<string>([correctAnswer]);
+    const distractors: { value: string; kind: DistractorKind; reason: string }[] = [];
+    for (const cand of rawCandidates) {
+      if (distractors.length >= 3) break;
+      if (seen.has(cand.value)) continue;
+      seen.add(cand.value);
+      distractors.push(cand);
+    }
+    if (distractors.length < 3) continue;
+    return {
+      kind: "literal_rearrange", skillCode: "linear_equations_one_var", difficulty: params.difficulty,
+      form, outerVar, coefVar, targetVar, c, correctAnswer, distractors,
+    };
+  }
+  throw new Error("linear_equations_one_var(literal_rearrange): 오답 후보 생성에 실패했습니다.");
+}
+
 export function validateLinearOneVarModel(model: LinearOneVarModel): { ok: true } | { ok: false; reason: string } {
+  if (model.kind === "literal_rearrange") {
+    const values = [model.correctAnswer, ...model.distractors.map((d) => d.value)];
+    if (new Set(values).size !== values.length) return { ok: false, reason: "정답과 오답 중 표현식이 중복됩니다." };
+    if (model.distractors.length !== 3) return { ok: false, reason: "오답이 정확히 3개가 아닙니다." };
+    const vars = new Set([model.outerVar, model.coefVar, model.targetVar]);
+    if (vars.size !== 3) return { ok: false, reason: "세 변수가 서로 달라야 합니다." };
+    if (model.c <= 0) return { ok: false, reason: "상수는 양의 정수여야 합니다." };
+    // 정답을 실제 원식(O = K(T±c) 또는 O = K(c-T))에 임의의 정수를 대입해 대수적으로
+    // 검산한다 — T_TEST, K_TEST에서 O_TEST를 역산하고, 정답 공식으로 T를 되계산해
+    // T_TEST와 일치하는지 확인한다(문자열 파싱·eval 없이 순수 산술로만 검증).
+    const T_TEST = 5;
+    const K_TEST = 3;
+    let O_TEST: number;
+    let recoveredT: number;
+    if (model.form === "t_plus_c") {
+      O_TEST = K_TEST * (T_TEST + model.c);
+      recoveredT = O_TEST / K_TEST - model.c;
+    } else if (model.form === "t_minus_c") {
+      O_TEST = K_TEST * (T_TEST - model.c);
+      recoveredT = O_TEST / K_TEST + model.c;
+    } else {
+      O_TEST = K_TEST * (model.c - T_TEST);
+      recoveredT = model.c - O_TEST / K_TEST;
+    }
+    if (Math.abs(recoveredT - T_TEST) > 1e-9) return { ok: false, reason: "원식에서 정답 공식이 역산되지 않습니다." };
+    const expectedCorrect =
+      model.form === "t_plus_c" ? `${model.targetVar} = ${model.outerVar}/${model.coefVar} - ${model.c}`
+      : model.form === "t_minus_c" ? `${model.targetVar} = ${model.outerVar}/${model.coefVar} + ${model.c}`
+      : `${model.targetVar} = ${model.c} - ${model.outerVar}/${model.coefVar}`;
+    if (model.correctAnswer !== expectedCorrect) return { ok: false, reason: "정답 문자열이 기대되는 재배열 공식과 일치하지 않습니다." };
+    return { ok: true };
+  }
   if (model.kind === "word_problem_translate") {
     if ((model.c - model.b) % model.a !== 0) return { ok: false, reason: "방정식의 해가 정수가 아닙니다." };
     const values = [model.correctAnswer, ...model.distractors.map((d) => d.value)];
@@ -247,8 +382,53 @@ export function renderWordProblemTranslateProblem(model: WordProblemTranslateMod
   return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
 }
 
+/** 형태에 맞는 원식 문자열("O = K(T + c)" 등, 지문용). */
+function literalOriginalEquation(model: LiteralRearrangeModel): string {
+  const { outerVar, coefVar, targetVar, c, form } = model;
+  if (form === "t_plus_c") return `${outerVar} = ${coefVar}(${targetVar} + ${c})`;
+  if (form === "t_minus_c") return `${outerVar} = ${coefVar}(${targetVar} - ${c})`;
+  return `${outerVar} = ${coefVar}(${c} - ${targetVar})`;
+}
+
+export function renderLiteralRearrangeProblem(model: LiteralRearrangeModel): CompiledMathProblem {
+  const passage = `The equation shown relates the variables ${model.outerVar}, ${model.coefVar}, and ${model.targetVar}.\n\n${literalOriginalEquation(model)}`;
+  const question = `Which equation correctly gives ${model.targetVar} in terms of ${model.outerVar} and ${model.coefVar}?`;
+  const options = [model.correctAnswer, ...model.distractors.map((d) => d.value)];
+  const order = [0, 1, 2, 3].sort(() => Math.random() - 0.5);
+  const shuffled = order.map((i) => options[i]);
+  const correctIndex = order.indexOf(0);
+
+  const { outerVar: O, coefVar: K, targetVar: T, c } = model;
+  let explanation: string;
+  let explanationEn: string;
+  if (model.form === "t_plus_c") {
+    explanation = `양변을 ${K}로 나누면 ${O}/${K} = ${T} + ${c}이고, ${c}를 이항하면 ${T} = ${O}/${K} - ${c}이다.`;
+    explanationEn = `Dividing both sides by ${K} gives ${O}/${K} = ${T} + ${c}. Moving ${c} to the other side gives ${T} = ${O}/${K} - ${c}.`;
+  } else if (model.form === "t_minus_c") {
+    explanation = `양변을 ${K}로 나누면 ${O}/${K} = ${T} - ${c}이고, ${c}를 이항하면 ${T} = ${O}/${K} + ${c}이다.`;
+    explanationEn = `Dividing both sides by ${K} gives ${O}/${K} = ${T} - ${c}. Moving ${c} to the other side gives ${T} = ${O}/${K} + ${c}.`;
+  } else {
+    explanation = `양변을 ${K}로 나누면 ${O}/${K} = ${c} - ${T}이고, ${T}를 좌변으로, ${O}/${K}를 우변으로 이항하면 ${T} = ${c} - ${O}/${K}이다.`;
+    explanationEn = `Dividing both sides by ${K} gives ${O}/${K} = ${c} - ${T}. Moving ${T} to the left side and ${O}/${K} to the right side gives ${T} = ${c} - ${O}/${K}.`;
+  }
+  explanation += ` 따라서 정답은 ${model.correctAnswer}이다.`;
+  explanationEn += ` So the answer is ${model.correctAnswer}.`;
+
+  const distractorRationales: DistractorRationale[] = model.distractors.map((d, i) => ({
+    index: order.indexOf(i + 1),
+    plausibleBecause: "같은 원식에서 나올 수 있는 실제 이항·분배 오류다.",
+    matches: "같은 원식에서 재배열되었다.",
+    whyWrong: d.reason,
+    kind: d.kind,
+    obvious: false,
+  }));
+
+  return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
+}
+
 export function renderLinearOneVarProblem(model: LinearOneVarModel): CompiledMathProblem {
   if (model.kind === "word_problem_translate") return renderWordProblemTranslateProblem(model);
+  if (model.kind === "literal_rearrange") return renderLiteralRearrangeProblem(model);
   const passage = `Consider the equation shown.\n\n${sideExpr(model.a, model.b)} = ${sideExpr(model.c, model.d)}`;
   const question = "What is the solution to the equation shown?";
   const options = [model.correctAnswer, ...model.distractors.map((d) => d.value)];

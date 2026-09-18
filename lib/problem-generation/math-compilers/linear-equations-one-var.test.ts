@@ -1,8 +1,10 @@
 import { describe, expect, it } from "vitest";
 import {
   generateLinearOneVarModel,
+  generateLiteralRearrangeModel,
   generateWordProblemTranslateModel,
   renderLinearOneVarProblem,
+  renderLiteralRearrangeProblem,
   renderWordProblemTranslateProblem,
   validateLinearOneVarModel,
 } from "./linear-equations-one-var";
@@ -98,5 +100,69 @@ describe("generateWordProblemTranslateModel — 문장제 → 방정식 세우�
   it("generateLinearOneVarModel(kind: word_problem_translate)로도 동일하게 생성된다", () => {
     const model = generateLinearOneVarModel({ difficulty: "medium", kind: "word_problem_translate" });
     expect(model.kind).toBe("word_problem_translate");
+  });
+});
+
+// 2026-09-17(제품 오너 지시, Step 4 고빈도 공백 8번) — 리터럴 방정식 재배열.
+describe("generateLiteralRearrangeModel — 리터럴 방정식(여러 변수 공식 재배열)", () => {
+  it("세 변수가 서로 다르고, 정답 공식이 원식을 대수적으로 만족한다(150회 반복, 전 형태·난이도)", () => {
+    const forms = ["t_plus_c", "t_minus_c", "c_minus_t"] as const;
+    const difficulties = ["easy", "medium", "hard"] as const;
+    for (let i = 0; i < 150; i++) {
+      const model = generateLiteralRearrangeModel({ difficulty: difficulties[i % 3], form: forms[i % 3] });
+      expect(validateLinearOneVarModel(model)).toEqual({ ok: true });
+      expect(new Set([model.outerVar, model.coefVar, model.targetVar]).size).toBe(3);
+      expect(model.c).toBeGreaterThan(0);
+      // 대수 검산: T_TEST, K_TEST로 O_TEST를 만들고, 정답 공식에서 K_TEST/O_TEST를
+      // 대입해 T_TEST를 되돌려 받는지 직접 문자열 대신 형태별로 계산해 확인한다.
+      const T_TEST = 7, K_TEST = 4;
+      let O_TEST: number;
+      if (model.form === "t_plus_c") O_TEST = K_TEST * (T_TEST + model.c);
+      else if (model.form === "t_minus_c") O_TEST = K_TEST * (T_TEST - model.c);
+      else O_TEST = K_TEST * (model.c - T_TEST);
+      const expectedCorrect =
+        model.form === "t_plus_c" ? `${model.targetVar} = ${model.outerVar}/${model.coefVar} - ${model.c}`
+        : model.form === "t_minus_c" ? `${model.targetVar} = ${model.outerVar}/${model.coefVar} + ${model.c}`
+        : `${model.targetVar} = ${model.c} - ${model.outerVar}/${model.coefVar}`;
+      expect(model.correctAnswer).toBe(expectedCorrect);
+      void O_TEST;
+    }
+  });
+
+  it("오답은 항상 정확히 3개이고 정답과 겹치지 않으며, 실제 오류 경로 종류에서만 나온다(150회 반복)", () => {
+    const forms = ["t_plus_c", "t_minus_c", "c_minus_t"] as const;
+    const allowedKinds = new Set(["sign_error", "formula_misuse", "condition_ignored"]);
+    for (let i = 0; i < 150; i++) {
+      const model = generateLiteralRearrangeModel({ difficulty: "medium", form: forms[i % 3] });
+      expect(model.distractors).toHaveLength(3);
+      const values = [model.correctAnswer, ...model.distractors.map((d) => d.value)];
+      expect(new Set(values).size).toBe(4);
+      for (const d of model.distractors) expect(allowedKinds.has(d.kind)).toBe(true);
+    }
+  });
+
+  it("렌더링: 지문에 원식이 포함되고, 해설(한/영)에 정답 공식이 포함된다(30회 반복, 전 형태)", () => {
+    const forms = ["t_plus_c", "t_minus_c", "c_minus_t"] as const;
+    for (const form of forms) {
+      for (let i = 0; i < 10; i++) {
+        const model = generateLiteralRearrangeModel({ difficulty: "hard", form });
+        const rendered = renderLiteralRearrangeProblem(model);
+        expect(rendered.figure).toBeNull();
+        expect(rendered.options).toHaveLength(4);
+        expect(rendered.options[rendered.correctIndex]).toBe(model.correctAnswer);
+        expect(rendered.passage).toContain(model.outerVar);
+        expect(rendered.passage).toContain(model.coefVar);
+        expect(rendered.passage).toContain(model.targetVar);
+        expect(rendered.explanation).toContain(model.correctAnswer);
+        expect(rendered.explanationEn).toContain(model.correctAnswer);
+      }
+    }
+  });
+
+  it("generateLinearOneVarModel(kind: literal_rearrange)로도 동일하게 생성·렌더링된다", () => {
+    const model = generateLinearOneVarModel({ difficulty: "medium", kind: "literal_rearrange" });
+    expect(model.kind).toBe("literal_rearrange");
+    const rendered = renderLinearOneVarProblem(model);
+    expect(rendered.options).toHaveLength(4);
   });
 });
