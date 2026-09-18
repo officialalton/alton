@@ -1459,6 +1459,87 @@ medium/hard 각 10문항 실행(무료·결정론적·API 호출 0):
 명시적 축소 실행)이 R&W·렌더링 두 축에서 여전히 미충족이므로 이번 패스에서도 Preview 배포를
 진행하지 않는다. Production은 손대지 않음.
 
+### 완결 패스(2026-09-18) — R&W 실배치 60건 + 3화면 렌더링 + 결함 수정 + 배포
+
+**R&W 실측(`scripts/problem-quality-batch.ts`, 실제 Anthropic API, 로컬 코드 경로 `runGenerationPipeline`
+그대로)**: 6개 세부 기술 × (medium 5 + hard 5) = 60건 요청, DB에는 저장하지 않는 리포트 전용 실행.
+보고서: `docs/2026-09-17-step6-rw-batch-medium.md`, `docs/2026-09-17-step6-rw-batch-hard.md`.
+
+| 난이도 | 요청 | 최종 통과 | 통과율 | 문항당 평균 모델 호출 | 총 소요 |
+|---|---|---|---|---|---|
+| medium | 30 | 28 | 93% | 4.51 | 14분 |
+| hard | 30 | 26 | 87% | 16.03 | 24분 |
+
+유형별(최종 통과율): text_structure_purpose 100%/100%, rhetorical_synthesis 100%/100%,
+transitions 100%/100%, boundaries 100%/100%, form_structure_sense 100%/100%,
+**command_of_evidence_quant 60%/20%(medium/hard) — 유일하게 70% 미달, 원인 진단 후 수정(아래).**
+
+**Step 5 대비 비교**: 2026-09-15 기준선(`docs/2026-09-15-problem-quality-batch-medium.md`,
+`-hard.md`, 표본 n=3/스킬로 작음)과 대조 — text_structure_purpose 33%→100%, rhetorical_synthesis
+0%→100%로 개선(Step 6 게이트가 오답 태그 정합성을 자동 보정하면서 통과율이 오른 것). 나머지 4개
+스킬도 기존과 동등하거나 개선. **command_of_evidence_quant만 기준선(3/3=100%, n 작음) 대비 실제
+회귀** — 아래에서 원인 수정.
+
+**결함 진단·수정 1 — command_of_evidence_quant 회귀**: 실패 사유 전수 확인 결과 대부분
+`lib/problem-quality-contract.ts:168`("정답 선택지의 수치가 표·그래프 자료에 없습니다")로, 생성 프롬프트가
+정답/오답의 수치를 자료 밖에서 지어내는 경우가 잦았다. `lib/problem-generation/core.ts`의
+`FIGURE_POLICY_RULE.require_data`에 "정답·오답 수치 모두 figure 실제 셀 값이거나 단순 파생 통계여야
+하고, 오답은 인접 셀/다른 행·열을 잘못 읽은 값이어야 한다"는 명시 규칙을 추가. 재검증
+(`docs/2026-09-17-step6-quant-evidence-fix-retest.md`, command_of_evidence_quant medium 5건 재실행,
+실제 API 호출): **60% → 80%로 개선**. hard 난이도는 예산상 재실행하지 못했다 — **"안정화 대기"로 유지**
+(medium 개선 확인, hard 재검증 필요가 남은 이유를 명시).
+
+**결함 진단·수정 2 — 빌드 차단 버그**: Preview 배포 시도에서 `lib/problem-generation/common-quality-gate.ts:12`의
+`import type { FigureIssue } from "./problem-figures/templates/_layout"` 상대경로가 한 단계 어긋나
+있어(`lib/problem-figures/...`가 맞는데 `lib/problem-generation/problem-figures/...`로 참조) 프로덕션
+TypeScript 빌드가 실패했음을 발견(vitest는 이 경로를 다르게 해석해 통과, 빌드에서만 드러남). `../problem-figures/templates/_layout`로 수정 후 빌드 성공 확인.
+
+**게이트 가동 확인(양성 대조)**: 60건 실배치에서 금칙어 위반이 자연 발생하지 않아, `findBannedWords()`에
+"ALTON", "내부 검토용"을 주입한 양성 대조 유닛 점검을 별도로 실행 — 두 금칙어 모두 정상 검출
+(`forbidden_word` 코드 2건). 게이트 배선 정상 확인.
+
+**제품 오너 설계 확인**: `common-quality-gate.ts`에 AI 호출 없음(정적 문자열/태그 검사만) — Math는
+컴파일러 모델 값, R&W는 이미 생성된 evidence/grammar-rule/relationship 데이터만으로 검증한다는
+정책과 일치, 위반 없음.
+
+**3화면 렌더링 검증(Browser 도구, Preview 실제 로그인)**: `admin-uat-20260917@alton.education`으로
+로그인 후 문제은행 → 검수에서 3개 표본을 열람(`read_page`/`get_page_text` 실제 발췌):
+
+1. **R&W(MC)** — command_of_evidence_quant medium(이번 배치 산출물). 학생용 미리보기가 표를 실제
+   HTML 표(`Weekly exercise hours | Mean resting heart rate (bpm)` 행)로 렌더링, `$…$` 리터럴 없음,
+   금칙어 없음, 정답 A) 표시 + 해설 문단 정상.
+2. **Math SPR** — linear_equations_one_var(관리자 "AI 생성" 화면에서 실제 컴파일러 경로로 1건 즉시
+   생성·저장). "정답: -4", 해설에 `$` 없이 평문 수식(`3x - 2 = -14`), 그리드 입력 힌트 문구 정상.
+3. **Math MC(자료 포함)** — nonlinear_functions medium. 카드 목록 미리보기 줄에는 원본 텍스트인
+   `$f(x) = (x - 3)^2 + 5$`가 그대로 보이지만(요약 텍스트일 뿐 학생 화면 아님), 상세 "학생용
+   미리보기"를 열면 `f(x)=(x−3)²+5`로 정상 타이포그래피 렌더링되고 좌표평면 figure가 실제 그래프
+   이미지(축 눈금 -2~10, 20~40, 곡선)로 표시됨 — raw JSON 노출 없음.
+
+**학생/교사 화면 범위**: `app/admin/ProblemBankTab.tsx`의 "학생용 미리보기 · 선생님용 정보(정답·해설) —
+읽기 전용" 섹션이 학생이 보는 지문·선택지와 교사가 보는 정답·해설을 한 화면에 함께 제공 —
+`ProblemDraftEditor`/`PublishedContentView`가 이 통합 뷰의 구현체이며, 별도의 학생 세션·교사 포털
+라우트를 만들지 않고도 3화면(관리자 검수/학생 미리보기/교사 정답-해설) 중 관리자 검수 화면 안에서
+학생·교사 두 관점을 모두 확인 가능함을 확인. 실제 학생 로그인 세션(등록·수업 배정을 통한 진짜 학생
+계정 뷰)은 이번 패스 범위 밖(테스트 등록 구성 필요) — 위 통합 미리보기가 실질적 대체 검증.
+
+**테스트**: `npx vitest run app/admin lib/problem-generation` — 133 passed / 5 failed(파일),
+1073 passed / 15 failed(테스트, 전부 기존 `trial-sessions-guardian-consent`/`teacher-documents-access`
+로컬 DB 상태 의존 통합 테스트 — 이번 패스 변경과 무관, 신규 실패 없음).
+
+**최종 안정화 상태(6개 R&W 스킬)**:
+
+| 스킬 | medium | hard | 상태 |
+|---|---|---|---|
+| text_structure_purpose | 100% | 100% | **안정화 완료** |
+| rhetorical_synthesis | 100% | 100% | **안정화 완료** |
+| transitions | 100% | 100% | **안정화 완료** |
+| boundaries | 100% | 100% | **안정화 완료** |
+| form_structure_sense | 100% | 100% | **안정화 완료** |
+| command_of_evidence_quant | 80%(수정 후) | 20%(수정 전, 미재검증) | **안정화 대기** — hard 난이도 수정 후 재검증 필요 |
+
+**배포**: `vercel deploy --target=preview --yes --scope alton7` 성공, `vercel inspect`로
+`target: preview` 확인. Production 미변경.
+
 **배포**: 위 미완료 항목(특히 필수 성능 회귀 검증) 때문에 이번 패스에서는 Preview 배포를 보류한다 —
 스펙 5항 "공통 게이트로 통과율 또는 전체 시간이 유의미하게 나빠지면 원인을 분리하고 수정 전에는
 배포하지 않는다"를 실측 없이 만족했다고 주장할 수 없기 때문이다. 코드는 커밋하되, 성능 실측(최소

@@ -9,7 +9,7 @@
 // 정답-선택지 일관성·중복 선택지는 checkContent(option_duplicate 등)와 evidence-model의
 // distractor_error_types 중복 검사가 이미 커버한다(감사 결과, 아래 checkOptionCollision 참고).
 // AI 호출도, 무제한 재시도도 추가하지 않는다 — 전부 문자열 검사다.
-import type { FigureIssue } from "./problem-figures/templates/_layout";
+import type { FigureIssue } from "../problem-figures/templates/_layout";
 
 /** Step 6 실패 코드 분류(제품 오너 지정) — 기존 코드(latex_leak 등)는 렌더링으로 묶고, 새 코드만 추가한다. */
 export type FailureCategory = "answer_evidence" | "numeric_data" | "grammar_rule" | "rendering" | "forbidden_word" | "tag_consistency";
