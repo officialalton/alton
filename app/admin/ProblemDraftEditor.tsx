@@ -679,6 +679,25 @@ export function PublishedContentView({ problem, content }: { problem: BankProble
           <p className="text-[12.5px]">{p.answers.join(", ")}</p>
         </>
       ) : null}
+      {isEvidenceModelSkill(problem.skillCode ?? null) && (p.evidenceTarget || p.evidenceSpan || p.answerRationale || p.distractorErrorTypes) && (
+        <details className="text-[12px] mt-2 mb-1 border-[1.5px] border-grey-200 rounded-lg px-3 py-2 bg-grey-100/60" data-testid="evidence-model-details">
+          <summary className="cursor-pointer text-ink font-semibold">내부 검토용 — 학생 비공개 (근거 모델)</summary>
+          {p.evidenceTarget && (
+            <p className="mt-1 text-ink"><b className="text-grey-500">대상:</b> {p.evidenceTarget}</p>
+          )}
+          {p.evidenceSpan && (
+            <p className="mt-1 text-ink"><b className="text-grey-500">근거 인용:</b> &ldquo;{p.evidenceSpan}&rdquo;</p>
+          )}
+          {p.answerRationale && (
+            <p className="mt-1 text-ink"><b className="text-grey-500">근거→정답 논리:</b> {p.answerRationale}</p>
+          )}
+          {p.distractorErrorTypes && p.distractorErrorTypes.length > 0 && (
+            <ul className="mt-1 list-disc pl-5 text-grey-500">
+              {p.distractorErrorTypes.map((t, i) => <li key={i}>{t}</li>)}
+            </ul>
+          )}
+        </details>
+      )}
       {p.explanation && (
         <>
           <div className="flex items-center gap-2 mt-1">
