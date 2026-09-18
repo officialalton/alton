@@ -1419,6 +1419,46 @@ text-structure 검증기)이 전부 통과한 뒤, 아직 어디에도 없던 �
 - skill_code별 허용 format을 `checkTagConsistency`에 실제 연결 — 훅만 존재, 미배선
 - 관리자 화면 "원문 비노출" 원칙의 전면 UI 정리 — 후속 패스
 
+### 후속 패스(2026-09-18) — Math 성능 회귀 실측 + 관리자 UI 재감사, R&W는 예산상 재차 미실행
+
+**방법**: Step 6(`bb9662a`) 코드를 되돌리지 않고 HEAD 그대로 실측(Math 게이트 경로는 순수 추가라
+before 상태로 되돌릴 필요 없음 — HEAD에서 게이트가 실제로 몇 건을 거부했는지가 곧 회귀 여부의 직접
+증거가 됨). `scripts/math-compiler-validate-linear-two-var.ts`로 로컬 Supabase에 실제 저장 경로를
+medium/hard 각 10문항 실행(무료·결정론적·API 호출 0):
+
+| 스킬 | medium 자동통과 | hard 자동통과 | 후보수=수락수(신규 게이트 거부 0건) | 전체 벽시계(둘 다 합산) |
+|---|---|---|---|---|
+| nonlinear_equations_systems | 10/10 | 10/10 | 예 | 144ms + 86ms |
+| two_variable_data(산점도 포함) | 10/10 | 10/10 | 예 | 107ms(medium만 표본) |
+| circles | 10/10 | 10/10 | 예 | 92ms / 86ms |
+| linear_equations_one_var(SPR) | 10/10 | 10/10 | 예(후보 13/16, 부족분은 기존 SPR 변환 불가 사유 — Step 6 이전부터 있던 로직, 신규 게이트 무관) | 76ms / 44ms |
+
+**결론(Math)**: 4개 스킬 40문항(medium+hard) 전부 자동 통과 10/10, `candidatesEvaluated === accepted`로
+신규 금칙어/태그정합성 게이트가 단 1건도 후보를 거부하지 않았음을 확인 — Math AI 호출 0건 경로이므로
+금칙어 검사 외 나머지 게이트는 애초에 관여하지 않는다. 전체 벽시계 시간은 전부 200ms 미만(대부분 DB
+저장 시간)으로 Step 5 이전과 체감 차이가 없다. **Math 경로 회귀 없음으로 판단.**
+
+**R&W 실측(`command_of_evidence_quant`/`text_structure_purpose`/`rhetorical_synthesis`/`transitions`/
+`boundaries`/`form_structure_sense`, 실제 Anthropic API 배치)와 3화면 렌더링 스크린샷 검증은 이번
+후속 패스에서도 실행하지 못했다** — 세션 예산(실제 API 비용 최대 120회 호출 + Preview 로그인 브라우저
+자동화 다수 스텝)이 이번 턴 한도를 넘어 안전하게 끝까지 실행할 수 없다고 판단해, 축소 실행으로 결과를
+꾸며 보고하는 대신 미실행으로 명시한다. **R&W 6개 품질 모델은 "안정화 대기" 그대로 유지.**
+
+**관리자 UI 금칙어/실패코드 노출 재감사**: `app/admin/ProblemDraftEditor.tsx`를
+`answer_evidence|numeric_data|grammar_rule|forbidden_word|tag_consistency|rendering`로 재검색 —
+매치 없음(직전 패스 감사 결과와 동일, 재확인 완료). `summarizeForAdmin()`은 여전히 어떤 화면에서도
+호출되지 않는 미사용 헬퍼(관리자 화면에 아직 게이트 요약 자체가 없음 — 노출이 아니라 부재 상태이므로
+"leak"은 아님). 고쳐야 할 유출은 발견되지 않아 코드 변경 없음.
+
+**테스트**: `npx vitest run app/admin lib/problem-generation` — 133 passed / 5 failed(파일),
+1073 passed / 15 failed(테스트). 실패 15건은 전부 `trial-sessions-guardian-consent`,
+`teacher-documents-access` 등 로컬 DB 상태 의존 통합 테스트로 이번 패스(문서 변경만, 코드 변경 없음)
+이전부터 있던 실패이며 `lib/problem-generation`(228개)은 전부 통과.
+
+**배포하지 않음**: 스펙상 배포 전제 조건(성능 회귀 실측 + 3화면 렌더링 + R&W 6종 안정화, 또는 이들의
+명시적 축소 실행)이 R&W·렌더링 두 축에서 여전히 미충족이므로 이번 패스에서도 Preview 배포를
+진행하지 않는다. Production은 손대지 않음.
+
 **배포**: 위 미완료 항목(특히 필수 성능 회귀 검증) 때문에 이번 패스에서는 Preview 배포를 보류한다 —
 스펙 5항 "공통 게이트로 통과율 또는 전체 시간이 유의미하게 나빠지면 원인을 분리하고 수정 전에는
 배포하지 않는다"를 실측 없이 만족했다고 주장할 수 없기 때문이다. 코드는 커밋하되, 성능 실측(최소
