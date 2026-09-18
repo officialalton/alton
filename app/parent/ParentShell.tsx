@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { logout } from "@/app/login/actions";
 import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
-import HomeDashboard from "@/app/student/HomeDashboard";
 import type { DashboardData } from "@/app/student/dashboard-data";
 import LessonsTab from "@/app/student/LessonsTab";
 import type { LessonItem } from "@/app/student/lessons-data";
@@ -20,11 +19,15 @@ import type { ParentEntitlementsData } from "./entitlements-data";
 import ConsentTab from "./ConsentTab";
 import type { ChildConsentStatus, ConsentPolicyOption, TrialSmartNotesConsentStatus } from "./consent-data";
 import type { PendingRegularIntentChoice } from "./regular-intent-data";
-import ConsultRequestTab from "./ConsultRequestTab";
 import ConsultationRequestTab from "./ConsultationRequestTab";
 import ConsultationHistoryTab from "./ConsultationHistoryTab";
 import MessengerTab from "./MessengerTab";
 import { getMessengerUnreadCount } from "./inquiry-actions";
+import { getAllFamilyLessonReviews } from "./home-reviews-actions";
+import type { FamilyLessonReview } from "./lesson-review-family-actions";
+import { getParentChildStats } from "./home-stats-actions";
+import type { StatsData } from "@/app/student/stats-data";
+import StatsTab from "@/app/student/StatsTab";
 import ParentEnrollmentTab from "./EnrollmentTab";
 import type { ChildSubjectEnrollments } from "./enrollment-data";
 import LessonBookingTab from "@/app/student/LessonBookingTab";
@@ -42,14 +45,14 @@ import {
   reportTeacherIssueForChild,
 } from "./booking-actions";
 
-// 2026-09-17 — 학부모 포털 IA 재구성(R13 상담 마일스톤). 메인 내비는 아래
+// 2026-09-17/18 — 학부모 포털 IA 재구성(R13 상담 마일스톤). 메인 내비는 아래
 // 순서 고정: 홈/수업권/수강 과목/수업/상담/단어장/과제. "가족"(신규 자녀 상담
-// CTA는 상담→상담신청 안으로 이동), "예약"(수업 탭 안의 예정 수업 흐름으로
-// 편입), "교재"(기존 세션·수강 과목 화면의 /materials/[id] 진입점은 그대로
-// 유지, 별도 라이브러리 탭만 제거), "통계"(죽은 placeholder였음, 홈 안
-// 서브탭으로 이동 예정), "지인 추천"/"동의"(프로필 드롭다운으로 이동)는
-// 메인 내비에서 제거한다. "문의/자녀상담/상담신청/메신저"는 "상담" 탭 산하
-// 서브탭으로 통합한다.
+// 신청 흐름은 2026-09-18 통합 지시로 완전히 폐기됨 — ConsultationRequestTab
+// 단일 흐름으로 통합), "예약"(수업 탭 안의 예정 수업 흐름으로 편입), "교재"
+// (기존 세션·수강 과목 화면의 /materials/[id] 진입점은 그대로 유지, 별도
+// 라이브러리 탭만 제거), "통계"(홈 서브탭으로 이동), "지인 추천"/"동의"
+// (프로필 드롭다운으로 이동)는 메인 내비에서 제거한다. "문의/상담신청/메신저"는
+// "상담" 탭 산하 서브탭(상담 신청/상담 내역/메신저)으로 통합한다.
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
   { id: "entitlements", label: "수업권", icon: "🎟️" },
@@ -138,18 +141,36 @@ export default function ParentShell({
   // 상담 탭 산하 서브탭(신청/내역/메신저) — 메인 내비 항목 수를 늘리지 않고
   // 기존 3개 컴포넌트를 그대로 재사용한다.
   const [consultSubTab, setConsultSubTab] = useState<"request" | "history" | "messenger">("request");
-  // "가족" 탭의 유일한 실사용 기능이던 "신규 자녀 상담 신청"(ConsultRequestTab,
-  // 기존 자녀와는 다른 별도 DB 흐름)을 상담→상담신청 안에서 토글로 노출한다.
-  const [showNewChildConsult, setShowNewChildConsult] = useState(false);
   const [creditsModalOpen, setCreditsModalOpen] = useState(false);
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
+  // 2026-09-18 — 홈 재설계: "일정 확인"에서 "리뷰 확인"으로 목적이 바뀌어
+  // 종합 리뷰(기본)/수업 리뷰(시간순)/통계 3개 읽기 전용 서브탭으로 구성한다.
+  const [homeSubTab, setHomeSubTab] = useState<"reviews" | "lessonReviews" | "stats">("reviews");
+  const [familyReviews, setFamilyReviews] = useState<FamilyLessonReview[] | null>(null);
+  const [childStats, setChildStats] = useState<StatsData | null>(null);
 
   // R12 — 메신저 안 읽은 관리자 메시지 수를 내비게이션 배지로 보여준다.
   // 메신저 탭을 직접 열면 MessengerTab이 읽음 처리를 하므로, 탭을 떠날 때
-  // 다시 조회해 배지를 갱신한다.
+  // 다시 조회해 배지를 갱신한다. 2026-09-18 — 메신저는 이제 "상담" 탭 산하
+  // 서브탭이라 activeTab만으로는 진입/이탈을 못 잡는다 — consultSubTab도
+  // 의존성에 넣어 서브탭 전환마다(메신저를 열 때·떠날 때 모두) 다시 조회한다.
   useEffect(() => {
     getMessengerUnreadCount().then(setMessengerUnread).catch(() => {});
-  }, [activeTab]);
+  }, [activeTab, consultSubTab]);
+
+  // 2026-09-18 — 홈 서브탭 데이터는 탭에 처음 들어갈 때(또는 자녀 전환 시)
+  // 지연 로딩한다. 종합 리뷰는 해당 자녀의 모든 수강 과목을 병렬 조회해 합친다.
+  useEffect(() => {
+    if (activeTab !== "home") return;
+    if (homeSubTab === "stats") {
+      getParentChildStats(currentChildId).then(setChildStats).catch(() => setChildStats(null));
+      return;
+    }
+    const enrollmentIds =
+      childrenSubjectEnrollments.find((c) => c.childId === currentChildId)?.enrollments.map((e) => e.id) ?? [];
+    getAllFamilyLessonReviews(enrollmentIds).then(setFamilyReviews).catch(() => setFamilyReviews([]));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab, homeSubTab, currentChildId]);
 
   // 2026-09-10(P0-3 2차) — 공용 포털 내비게이션 결함: activeTab이 마운트
   // 시점의 initialTab으로만 초기화돼, 브라우저 뒤로가기/앞으로가기로 URL이
@@ -333,19 +354,65 @@ export default function ParentShell({
         </div>
 
         <div className="flex-1">
-          {/* 2026-09-17 — 홈 상단 동의 배너 제거(명시적 요구사항). 동의
-              긴급도는 프로필 드롭다운 "동의" 배지로만 노출한다. 자녀 선택
-              전환용 pill만 남기고, 나머지 ChildrenStatusRow(캘린더/예정 수업)
-              호출은 홈 재설계(종합 리뷰/수업 리뷰/통계, 별도 라운드) 전까지는
-              보류한다. */}
+          {/* 2026-09-17/18 — 홈 재설계: "일정 확인"에서 "리뷰 확인"으로 목적
+              전환. 상단 동의 배너는 제거(프로필 드롭다운 배지로만 노출), 캘린더·
+              예정 수업(HomeDashboard)도 더 이상 쓰지 않는다 — 종합 리뷰/수업
+              리뷰/통계 3개 읽기 전용 서브탭으로 대체한다. 데이터 없을 때는
+              일정·캘린더로 되돌아가지 않고 빈 상태 문구만 보여준다(요구사항). */}
           {activeTab === "home" ? (
-            <HomeDashboard
-              studentName={dashboard.studentName}
-              data={dashboard}
-              onShowLessons={() => selectTab("lessons")}
-              onShowStats={() => {}}
-              timezone={lessonBooking.timezone}
-            />
+            <div>
+              <div className="px-6 pt-5 flex gap-2 border-b border-grey-200 pb-3">
+                {(
+                  [
+                    ["reviews", "종합 리뷰"],
+                    ["lessonReviews", "수업 리뷰"],
+                    ["stats", "통계"],
+                  ] as const
+                ).map(([id, label]) => (
+                  <button
+                    key={id}
+                    onClick={() => setHomeSubTab(id)}
+                    className={
+                      "text-[12.5px] font-bold px-3.5 py-1.5 rounded-full " +
+                      (homeSubTab === id ? "bg-ink text-white" : "bg-grey-100 text-grey-500")
+                    }
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+              {homeSubTab === "stats" ? (
+                childStats ? (
+                  <StatsTab data={childStats} />
+                ) : (
+                  <p className="p-8 text-[14px] text-grey-500">불러오는 중...</p>
+                )
+              ) : familyReviews === null ? (
+                <p className="p-8 text-[14px] text-grey-500">불러오는 중...</p>
+              ) : homeSubTab === "reviews" ? (
+                familyReviews.length === 0 ? (
+                  <p className="p-8 text-[14px] text-grey-500">아직 확정된 리뷰가 없습니다.</p>
+                ) : (
+                  <div className="px-6 py-5 space-y-3">
+                    {familyReviews.map((r) => (
+                      <FamilyReviewCard key={r.reviewId} review={r} />
+                    ))}
+                  </div>
+                )
+              ) : // 수업 리뷰 — 시간순(오래된 순), 리뷰+확정 미팅록이 모두 있는 것만.
+              familyReviews.filter((r) => r.meetingRecordLink).length === 0 ? (
+                <p className="p-8 text-[14px] text-grey-500">확정된 미팅록이 있는 수업이 아직 없습니다.</p>
+              ) : (
+                <div className="px-6 py-5 space-y-3">
+                  {familyReviews
+                    .filter((r) => r.meetingRecordLink)
+                    .sort((a, b) => (a.finalizedAt > b.finalizedAt ? 1 : -1))
+                    .map((r) => (
+                      <FamilyReviewCard key={r.reviewId} review={r} />
+                    ))}
+                </div>
+              )}
+            </div>
           ) : activeTab === "enrollment" ? (
             <ParentEnrollmentTab childrenEnrollments={childrenSubjectEnrollments} />
           ) : activeTab === "lessons" ? (
@@ -446,33 +513,7 @@ export default function ParentShell({
                 ))}
               </div>
               {consultSubTab === "request" ? (
-                <div>
-                  {!showNewChildConsult ? (
-                    <>
-                      <ConsultationRequestTab />
-                      <div className="px-6 pb-6">
-                        <button
-                          onClick={() => setShowNewChildConsult(true)}
-                          className="text-[12.5px] font-semibold text-grey-500 underline"
-                        >
-                          새 자녀 상담이신가요? →
-                        </button>
-                      </div>
-                    </>
-                  ) : (
-                    <div>
-                      <div className="px-6 pt-4">
-                        <button
-                          onClick={() => setShowNewChildConsult(false)}
-                          className="text-[12.5px] font-semibold text-grey-500"
-                        >
-                          ← 기존 자녀 상담으로
-                        </button>
-                      </div>
-                      <ConsultRequestTab />
-                    </div>
-                  )}
-                </div>
+                <ConsultationRequestTab />
               ) : consultSubTab === "history" ? (
                 <ConsultationHistoryTab />
               ) : (
@@ -486,6 +527,43 @@ export default function ParentShell({
           )}
         </div>
       </div>
+    </div>
+  );
+}
+
+// 2026-09-18 — 홈 "종합 리뷰"/"수업 리뷰" 서브탭 공용 카드. 확정된 텍스트만
+// 보여준다(초안은 애초에 이 데이터 소스에 없음 — home-reviews-actions.ts 참고).
+function FamilyReviewCard({ review }: { review: FamilyLessonReview }) {
+  return (
+    <div className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3">
+      <div className="flex items-center justify-between">
+        <span className="text-[12px] font-bold text-ink">
+          {review.lessonType === "trial" ? "체험 수업" : "정규 수업"} 리뷰
+        </span>
+        <span className="text-[11px] text-grey-500">
+          {new Date(review.finalizedAt).toLocaleDateString("ko-KR")}
+        </span>
+      </div>
+      <p className="text-[12.5px] text-ink whitespace-pre-wrap mt-1.5">{review.finalText}</p>
+      {review.categoryNotes.length > 0 && (
+        <div className="mt-2 space-y-0.5">
+          {review.categoryNotes.map((c) => (
+            <p key={c.key} className="text-[11.5px] text-grey-500">
+              <span className="font-semibold text-grey-700">{c.label}</span> — {c.note}
+            </p>
+          ))}
+        </div>
+      )}
+      {review.meetingRecordLink && (
+        <a
+          href={review.meetingRecordLink}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-block mt-2 text-[12px] font-semibold text-ink underline"
+        >
+          미팅록 보기
+        </a>
+      )}
     </div>
   );
 }

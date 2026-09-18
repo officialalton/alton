@@ -75,8 +75,12 @@ describe("resolveHouseholdInquiryThread", () => {
 describe("updateMeetingRequestStatus", () => {
   it("면담 요청 상태를 변경한다", async () => {
     updateResult = { error: null };
-    await expect(updateMeetingRequestStatus("meeting1", "scheduled")).resolves.toBeUndefined();
+    await expect(updateMeetingRequestStatus("meeting1", "confirming")).resolves.toBeUndefined();
   });
+
+  // 2026-09-17 — "scheduled"는 이 함수로 만들 수 없다(유효한 시간 없이 조용히
+  // scheduled로 넘어가는 회귀 방지). scheduleMeetingRequest()의 가드는
+  // schedule-meeting-request.test.ts에서 별도로 검증한다.
 });
 
 describe("addMeetingAvailabilityRule", () => {

@@ -36,6 +36,14 @@ vi.mock("./inquiry-actions", () => ({
   getGuardianMeetingRequestReview: vi.fn().mockResolvedValue(null),
 }));
 
+vi.mock("./home-reviews-actions", () => ({
+  getAllFamilyLessonReviews: vi.fn().mockResolvedValue([]),
+}));
+
+vi.mock("./home-stats-actions", () => ({
+  getParentChildStats: vi.fn().mockResolvedValue({ attendanceRate: null, satisfactionAvg: null, bySubject: [] }),
+}));
+
 const childrenList: Child[] = [
   { studentId: "s1", name: "지훈", isPrimary: true },
   { studentId: "s2", name: "이서아", isPrimary: false },
@@ -79,7 +87,7 @@ const lessonsProps = {
 };
 
 describe("ParentShell", () => {
-  it("사이드바 항목(홈/수업권/수강 과목/수업/상담/단어장/과제)을 보여주고, 기본 탭은 홈이다", () => {
+  it("사이드바 항목(홈/수업권/수강 과목/수업/상담/단어장/과제)을 보여주고, 기본 탭은 홈(종합 리뷰 서브탭)이다", async () => {
     render(
       <ParentShell
         parentName="김민지"
@@ -92,16 +100,20 @@ describe("ParentShell", () => {
     ["홈", "수업권", "수강 과목", "수업", "상담", "단어장", "과제"].forEach((label) =>
       expect(screen.getAllByText(label).length).toBeGreaterThan(0)
     );
-    // 2026-09-17 IA 재구성: 지인 추천/통계/동의/가족/예약/교재는 메인
-    // 내비게이션에서 제거됐다(지인 추천·동의는 프로필 드롭다운으로 이동).
+    // 2026-09-17/18 IA 재구성: 지인 추천/통계(독립 탭)/동의/가족/예약/교재는
+    // 메인 내비게이션에서 제거됐다(지인 추천·동의는 프로필 드롭다운, 통계는
+    // 홈 서브탭으로 이동).
     expect(screen.queryByText("지인 추천")).not.toBeInTheDocument();
-    expect(screen.queryByText("통계")).not.toBeInTheDocument();
     expect(screen.queryByText("가족")).not.toBeInTheDocument();
     expect(screen.queryByText("예약")).not.toBeInTheDocument();
     expect(screen.queryByText("교재")).not.toBeInTheDocument();
     expect(screen.getAllByText("지훈").length).toBeGreaterThan(0);
     expect(screen.getAllByText("이서아").length).toBeGreaterThan(0);
-    expect(screen.getByText(/지훈의 학습 현황/)).toBeInTheDocument();
+    expect(screen.getByText("종합 리뷰")).toBeInTheDocument();
+    expect(screen.getByText("수업 리뷰")).toBeInTheDocument();
+    // "통계"는 이제 홈 서브탭 라벨로만 존재한다.
+    expect(screen.getAllByText("통계").length).toBeGreaterThan(0);
+    expect(await screen.findByText("아직 확정된 리뷰가 없습니다.")).toBeInTheDocument();
   });
 
   it("홈 상단에는 동의 배너를 보여주지 않는다(2026-09-17, 배지는 프로필 메뉴로만)", () => {
@@ -119,6 +131,20 @@ describe("ParentShell", () => {
       />
     );
     expect(screen.queryByText(/동의 필요한 문서가/)).not.toBeInTheDocument();
+  });
+
+  it("홈 '통계' 서브탭을 누르면 StatsTab(읽기 전용)이 렌더링된다", async () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+      />
+    );
+    fireEvent.click(screen.getByText("통계"));
+    expect(await screen.findByText("수업 참여율")).toBeInTheDocument();
   });
 
   it("다른 자녀 pill을 누르면 ?child= 쿼리로 이동한다", () => {
@@ -178,25 +204,14 @@ describe("ParentShell", () => {
       />
     );
     fireEvent.click(screen.getAllByText("상담")[0]);
-    expect(screen.getByText("새 자녀 상담이신가요? →")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("상담 사유를 입력해주세요")).toBeInTheDocument();
     fireEvent.click(screen.getByText("상담 내역"));
     expect(await screen.findByText("신청한 상담이 없습니다.")).toBeInTheDocument();
   });
 
-  it("상담 탭 안의 '새 자녀 상담이신가요' 토글로 기존 가족 탭의 신규 자녀 상담 신청 흐름에 진입할 수 있다", () => {
-    render(
-      <ParentShell
-        parentName="김민지"
-        childrenList={childrenList}
-        currentChildId="s1"
-        dashboard={dashboard}
-        {...lessonsProps}
-      />
-    );
-    fireEvent.click(screen.getAllByText("상담")[0]);
-    fireEvent.click(screen.getByText("새 자녀 상담이신가요? →"));
-    expect(screen.getByText("← 기존 자녀 상담으로")).toBeInTheDocument();
-  });
+  // 2026-09-18 통합 지시: 신규 자녀 상담 신청 흐름(showNewChildConsult 토글,
+  // ConsultRequestTab)은 완전히 폐기됐다 — "상담 신청" 서브탭은 이제
+  // ConsultationRequestTab 단일 흐름으로만 연결된다.
 
   it("계정 메뉴를 열면 동의/지인 추천/시간대 설정/로그아웃이 보인다", () => {
     render(

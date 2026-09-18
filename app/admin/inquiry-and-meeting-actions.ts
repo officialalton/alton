@@ -6,6 +6,8 @@
 
 import { requireAdmin } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
+import { createCalendarEventWithMeet, patchCalendarEventTime } from "@/lib/google-calendar";
+import { extractMeetingCodeFromLink } from "@/lib/google-meet";
 
 export type AdminInquiryThread = {
   householdId: string;
@@ -183,7 +185,9 @@ async function loadMeetingRequestsForAdmin(
 
 export async function updateMeetingRequestStatus(
   meetingRequestId: string,
-  status: "confirming" | "scheduling" | "scheduled" | "completed" | "cancelled"
+  // 2026-09-17(상담 마일스톤) — 'scheduled'는 유효한 시간+Calendar 이벤트 생성이
+  // 전제라 이 함수로는 만들 수 없다. scheduleMeetingRequest()를 거쳐야 한다.
+  status: "confirming" | "scheduling" | "completed" | "cancelled"
 ): Promise<void> {
   const { supabase } = await requireAdmin();
   const { error } = await supabase
@@ -191,6 +195,105 @@ export async function updateMeetingRequestStatus(
     .update({ status, updated_at: new Date().toISOString() })
     .eq("id", meetingRequestId);
   if (error) throw new Error(error.message);
+}
+
+// 2026-09-17(상담 마일스톤) — meeting_requests를 'scheduled'로 전이할 때 반드시
+// 거쳐야 하는 관문. 요구사항:
+//  1. starts_at/ends_at이 둘 다 있고 ends_at > starts_at이어야만 진행(그렇지
+//     않으면 상태 전이 자체를 거부 — "시간 없이 조용히 scheduled로 넘어가는" 회귀
+//     방지).
+//  2. 멱등: 이미 google_event_id가 있으면 새로 만들지 않고 시간이 바뀐 경우에만
+//     patchCalendarEventTime으로 갱신한다(같은 이벤트 유지).
+//  3. 실패 안전: Calendar API 호출이 실패하면 DB 상태를 전혀 건드리지 않는다(트
+//     랜잭션 없이도 "호출 성공 후에만 쓰기" 순서로 같은 효과를 낸다) — 실패 응답을
+//     그대로 호출부(관리자 UI)에 올려보낸다.
+const CONSULT_ORGANIZER_EMAIL = process.env.CONSULT_ORGANIZER_EMAIL ?? "official@alton.education";
+
+export async function scheduleMeetingRequest(params: {
+  meetingRequestId: string;
+  startsAt: string; // ISO
+  endsAt: string; // ISO
+}): Promise<{ googleMeetLink: string }> {
+  const { supabase } = await requireAdmin();
+  const admin = createAdminClient();
+
+  const startsAtDate = new Date(params.startsAt);
+  const endsAtDate = new Date(params.endsAt);
+  if (Number.isNaN(startsAtDate.getTime()) || Number.isNaN(endsAtDate.getTime())) {
+    throw new Error("일정 시간이 올바르지 않습니다.");
+  }
+  if (endsAtDate.getTime() <= startsAtDate.getTime()) {
+    throw new Error("종료 시각은 시작 시각보다 뒤여야 합니다.");
+  }
+
+  const { data: row, error: loadError } = await admin
+    .from("meeting_requests")
+    .select("id, subject, google_event_id, google_meet_link, household:households(guardian:profiles!households_primary_guardian_id_fkey(name, email))")
+    .eq("id", params.meetingRequestId)
+    .single();
+  if (loadError) throw new Error(loadError.message);
+
+  const householdRel = row.household as
+    | { guardian?: { name?: string; email?: string } | { name?: string; email?: string }[] }
+    | { guardian?: { name?: string; email?: string } | { name?: string; email?: string }[] }[]
+    | null;
+  const household = Array.isArray(householdRel) ? householdRel[0] : householdRel;
+  const guardianRel = household?.guardian;
+  const guardian = Array.isArray(guardianRel) ? guardianRel[0] : guardianRel;
+
+  let googleEventId = row.google_event_id as string | null;
+  let googleMeetLink = row.google_meet_link as string | null;
+
+  try {
+    if (googleEventId) {
+      // 이미 이벤트가 있으면 같은 이벤트의 시간만 갱신한다(새로 만들지 않음).
+      await patchCalendarEventTime({
+        teacherWorkspaceEmail: CONSULT_ORGANIZER_EMAIL,
+        googleEventId,
+        startsAt: startsAtDate,
+        endsAt: endsAtDate,
+        timezone: "Asia/Seoul",
+        sendUpdates: "all",
+      });
+    } else {
+      const created = await createCalendarEventWithMeet({
+        teacherWorkspaceEmail: CONSULT_ORGANIZER_EMAIL,
+        reservationId: params.meetingRequestId,
+        startsAt: startsAtDate,
+        endsAt: endsAtDate,
+        summary: `[Alton] 상담 — ${guardian?.name ?? "학부모"}`,
+        timezone: "Asia/Seoul",
+        attendeeEmail: guardian?.email,
+        sendUpdates: "all",
+      });
+      googleEventId = created.googleEventId;
+      googleMeetLink = created.meetLink;
+    }
+  } catch (e) {
+    // 실패 시 DB는 전혀 쓰지 않는다 — status는 이전 값(scheduling 등) 그대로
+    // 남고, 관리자는 재시도할 수 있다.
+    const message = e instanceof Error ? e.message : String(e);
+    throw new Error(`Calendar 일정 생성/갱신에 실패했습니다: ${message}`);
+  }
+
+  const meetingCode = googleMeetLink ? extractMeetingCodeFromLink(googleMeetLink) : null;
+
+  const { error: updateError } = await supabase
+    .from("meeting_requests")
+    .update({
+      status: "scheduled",
+      starts_at: params.startsAt,
+      ends_at: params.endsAt,
+      google_event_id: googleEventId,
+      google_meet_link: googleMeetLink,
+      google_meeting_code: meetingCode,
+      google_sync_status: "succeeded",
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", params.meetingRequestId);
+  if (updateError) throw new Error(updateError.message);
+
+  return { googleMeetLink: googleMeetLink as string };
 }
 
 // 면담 전용 가용시간 CRUD — consult_availability_rules/exceptions와 동일 패턴,
@@ -305,40 +408,8 @@ export async function removeMeetingAvailabilityException(exceptionId: string): P
   if (error) throw new Error(error.message);
 }
 
-export type AdminMeetingRequestMessage = {
-  id: string;
-  senderId: string;
-  senderRole: "guardian" | "admin";
-  body: string;
-  createdAt: string;
-};
-
-export async function listMeetingRequestMessagesForAdmin(meetingRequestId: string): Promise<AdminMeetingRequestMessage[]> {
-  await requireAdmin();
-  const admin = createAdminClient();
-  const { data, error } = await admin
-    .from("meeting_request_messages")
-    .select("id, sender_id, sender_role, body, created_at")
-    .eq("meeting_request_id", meetingRequestId)
-    .order("created_at", { ascending: true });
-  if (error) throw new Error(error.message);
-  return (data ?? []).map((r) => ({
-    id: r.id,
-    senderId: r.sender_id,
-    senderRole: r.sender_role,
-    body: r.body,
-    createdAt: r.created_at,
-  }));
-}
-
-export async function sendAdminMeetingRequestMessage(meetingRequestId: string, body: string): Promise<void> {
-  const { adminUserId, supabase } = await requireAdmin();
-  if (!body.trim()) throw new Error("내용을 입력해주세요.");
-  const { error } = await supabase.from("meeting_request_messages").insert({
-    meeting_request_id: meetingRequestId,
-    sender_id: adminUserId,
-    sender_role: "admin",
-    body: body.trim(),
-  });
-  if (error) throw new Error(error.message);
-}
+// R12.1: meeting_request_messages 스레드는 더 이상 관리자 UI에도 노출하지
+// 않는다 — 상담 신청과 관련된 관리자↔보호자 대화는 이제 household_messages
+// (메신저)로만 처리한다. listMeetingRequestMessagesForAdmin/
+// sendAdminMeetingRequestMessage는 여기서 제거했다(테이블은 추가 전용 원칙에
+// 따라 그대로 유지).

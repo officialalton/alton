@@ -13,15 +13,14 @@ import {
   markHouseholdMessengerReadByAdmin,
   loadMeetingOperationsDashboardAction,
   updateMeetingRequestStatus,
+  scheduleMeetingRequest,
   addMeetingAvailabilityRule,
   deactivateMeetingAvailabilityRule,
   addMeetingAvailabilityException,
   removeMeetingAvailabilityException,
-  listMeetingRequestMessagesForAdmin,
-  sendAdminMeetingRequestMessage,
   type AdminInquiryThread,
-  type AdminMeetingRequestMessage,
 } from "./inquiry-and-meeting-actions";
+import MeetingRequestReviewPanel from "./MeetingRequestReviewPanel";
 import { useTabCachedData } from "./use-tab-cached-data";
 
 // 2026-09-10(P1 재진입 성능 배치) — "문의·면담"은 상태 변화가 상대적으로
@@ -53,6 +52,14 @@ function nextMeetingStatus(status: string): MeetingTransitionTarget | null {
   const idx = MEETING_STATUS_ORDER.indexOf(status as (typeof MEETING_STATUS_ORDER)[number]);
   if (idx === -1 || idx === MEETING_STATUS_ORDER.length - 1) return null;
   return MEETING_STATUS_ORDER[idx + 1] as MeetingTransitionTarget;
+}
+
+// datetime-local(<input type="datetime-local">) 문자열("YYYY-MM-DDTHH:mm")을
+// KST 기준 ISO로 만든다. 서버 액션(scheduleMeetingRequest)이 그대로 Date로
+// 파싱하므로, 타임존 미표기 문자열이 브라우저 로컬이 아니라 KST로 해석되게
+// 여기서 오프셋을 명시한다.
+function kstLocalToIso(value: string): string {
+  return `${value}:00+09:00`;
 }
 
 function formatDateTime(iso: string | null): string {
@@ -199,82 +206,9 @@ function InquiryInbox({ initialThreads }: { initialThreads?: AdminInquiryThread[
   );
 }
 
-function AdminMeetingRequestThread({ meetingRequestId }: { meetingRequestId: string }) {
-  const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState<AdminMeetingRequestMessage[] | null>(null);
-  const [draft, setDraft] = useState("");
-  const [sending, setSending] = useState(false);
-
-  function load() {
-    listMeetingRequestMessagesForAdmin(meetingRequestId).then(setMessages).catch(() => setMessages([]));
-  }
-
-  if (!open) {
-    return (
-      <button
-        type="button"
-        className="mt-2 text-[11.5px] font-bold text-ink underline"
-        onClick={() => {
-          setOpen(true);
-          load();
-        }}
-      >
-        대화 보기
-      </button>
-    );
-  }
-
-  return (
-    <div className="mt-3 border-t border-grey-200 pt-3">
-      <button type="button" className="mb-2 text-[11.5px] font-bold text-ink underline" onClick={() => setOpen(false)}>
-        대화 닫기
-      </button>
-      {messages === null && <p className="text-[12px] text-grey-500">불러오는 중...</p>}
-      {messages && messages.length === 0 && <p className="text-[12px] text-grey-500 mb-2">아직 대화가 없습니다.</p>}
-      {messages && messages.length > 0 && (
-        <div className="space-y-1.5 mb-2 max-h-[220px] overflow-y-auto">
-          {messages.map((m) => (
-            <div
-              key={m.id}
-              className={"rounded-lg px-3 py-2 text-[12px] max-w-[85%] " + (m.senderRole === "admin" ? "bg-ink text-white ml-auto" : "bg-grey-100 text-ink")}
-            >
-              <div>{m.body}</div>
-              <div className={"text-[10px] mt-1 " + (m.senderRole === "admin" ? "text-white/70" : "text-grey-500")}>
-                {m.senderRole === "admin" ? "관리자" : "보호자"} · {formatDateTime(m.createdAt)}
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-      <div className="flex gap-2">
-        <textarea
-          aria-label="상담 신청 답장"
-          value={draft}
-          onChange={(e) => setDraft(e.target.value)}
-          placeholder="답장을 입력해주세요"
-          className="flex-1 px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[12px] min-h-[44px]"
-        />
-        <button
-          type="button"
-          disabled={sending || !draft.trim()}
-          className="px-3 py-2 rounded-lg bg-ink text-white text-[12px] font-bold disabled:opacity-50 self-end"
-          onClick={async () => {
-            setSending(true);
-            try {
-              await sendAdminMeetingRequestMessage(meetingRequestId, draft);
-              setDraft("");
-              load();
-            } finally {
-              setSending(false);
-            }
-          }}
-        >
-          전송
-        </button>
-      </div>
-    </div>
-  );
-}
+// R12.1: meeting_request_messages 스레드 UI(AdminMeetingRequestThread)는
+// 제거했다 — 상담 신청 관련 대화는 이제 위 InquiryInbox(household_messages/
+// 메신저)로만 처리한다.
 
 function MeetingOperationsSkeleton() {
   return (
@@ -363,15 +297,47 @@ function MeetingOperations() {
               </p>
             )}
             <div className="flex gap-2 mt-3">
-              {nextMeetingStatus(m.status) && (
+              {(() => {
+                const next = nextMeetingStatus(m.status);
+                if (next === "scheduled") return null;
+                return (
+                  next && (
+                    <button
+                      disabled={busyId === m.id}
+                      className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
+                      onClick={() => withBusy(m.id, () => updateMeetingRequestStatus(m.id, next))}
+                    >
+                      {MEETING_STATUS_LABEL[next]}로 변경
+                    </button>
+                  )
+                );
+              })()}
+              {nextMeetingStatus(m.status) === "scheduled" ? (
+                // 2026-09-17 — "일정 확정"은 status만 바꾸는 게 아니라 유효한
+                // 시간으로 실제 Calendar+Meet 이벤트를 만들어야 하므로, 여기서
+                // 시간을 입력받아 scheduleMeetingRequest(가드된 서버 액션)를
+                // 호출한다. 시간이 없거나 잘못되면 액션이 거부하고 상태는
+                // 그대로 남는다(조용히 scheduled로 넘어가지 않음).
                 <button
                   disabled={busyId === m.id}
                   className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
-                  onClick={() => withBusy(m.id, () => updateMeetingRequestStatus(m.id, nextMeetingStatus(m.status)!))}
+                  onClick={() => {
+                    const startsLocal = window.prompt("상담 시작 시간(KST, 예: 2026-09-20T14:00)");
+                    if (!startsLocal) return;
+                    const endsLocal = window.prompt("상담 종료 시간(KST, 예: 2026-09-20T14:30)");
+                    if (!endsLocal) return;
+                    withBusy(m.id, async () => {
+                      await scheduleMeetingRequest({
+                        meetingRequestId: m.id,
+                        startsAt: kstLocalToIso(startsLocal),
+                        endsAt: kstLocalToIso(endsLocal),
+                      });
+                    });
+                  }}
                 >
-                  {MEETING_STATUS_LABEL[nextMeetingStatus(m.status)!]}로 변경
+                  일정 확정(Calendar+Meet 생성)
                 </button>
-              )}
+              ) : null}
               {m.status !== "completed" && m.status !== "cancelled" && (
                 <button
                   disabled={busyId === m.id}
@@ -382,7 +348,7 @@ function MeetingOperations() {
                 </button>
               )}
             </div>
-            <AdminMeetingRequestThread meetingRequestId={m.id} />
+            {m.status === "completed" && <MeetingRequestReviewPanel meetingRequestId={m.id} />}
           </div>
         ))}
       </section>
