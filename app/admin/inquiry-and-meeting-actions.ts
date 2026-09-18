@@ -228,18 +228,25 @@ export async function scheduleMeetingRequest(params: {
 
   const { data: row, error: loadError } = await admin
     .from("meeting_requests")
-    .select("id, subject, google_event_id, google_meet_link, household:households(guardian:profiles!households_primary_guardian_id_fkey(name, email))")
+    .select("id, subject, google_event_id, google_meet_link, household:households(primary_guardian_id, guardian:profiles!households_primary_guardian_id_fkey(name))")
     .eq("id", params.meetingRequestId)
     .single();
   if (loadError) throw new Error(loadError.message);
 
   const householdRel = row.household as
-    | { guardian?: { name?: string; email?: string } | { name?: string; email?: string }[] }
-    | { guardian?: { name?: string; email?: string } | { name?: string; email?: string }[] }[]
+    | { primary_guardian_id?: string; guardian?: { name?: string } | { name?: string }[] }
+    | { primary_guardian_id?: string; guardian?: { name?: string } | { name?: string }[] }[]
     | null;
   const household = Array.isArray(householdRel) ? householdRel[0] : householdRel;
   const guardianRel = household?.guardian;
   const guardian = Array.isArray(guardianRel) ? guardianRel[0] : guardianRel;
+  // profiles에는 email 컬럼이 없다(auth.users에만 있음) — Admin API로 조회한다
+  // (app/admin/consultation-kanban-actions.ts와 동일 패턴).
+  let guardianEmail: string | undefined;
+  if (household?.primary_guardian_id) {
+    const { data: guardianAuth } = await admin.auth.admin.getUserById(household.primary_guardian_id);
+    guardianEmail = guardianAuth?.user?.email ?? undefined;
+  }
 
   let googleEventId = row.google_event_id as string | null;
   let googleMeetLink = row.google_meet_link as string | null;
@@ -263,7 +270,7 @@ export async function scheduleMeetingRequest(params: {
         endsAt: endsAtDate,
         summary: `[Alton] 상담 — ${guardian?.name ?? "학부모"}`,
         timezone: "Asia/Seoul",
-        attendeeEmail: guardian?.email,
+        attendeeEmail: guardianEmail,
         sendUpdates: "all",
       });
       googleEventId = created.googleEventId;

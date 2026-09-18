@@ -171,18 +171,18 @@ export async function attachAndGrantMeetingReviewDriveAccess(params: {
 
   const { data: mrRow, error: mrError } = await admin
     .from("meeting_requests")
-    .select("household:households(guardian:profiles!households_primary_guardian_id_fkey(email))")
+    .select("household:households(primary_guardian_id)")
     .eq("id", params.meetingRequestId)
     .single();
   if (mrError) throw new Error(mrError.message);
-  const householdRel = mrRow.household as
-    | { guardian?: { email?: string } | { email?: string }[] }
-    | { guardian?: { email?: string } | { email?: string }[] }[]
-    | null;
+  const householdRel = mrRow.household as { primary_guardian_id?: string } | { primary_guardian_id?: string }[] | null;
   const household = Array.isArray(householdRel) ? householdRel[0] : householdRel;
-  const guardianRel = household?.guardian;
-  const guardian = Array.isArray(guardianRel) ? guardianRel[0] : guardianRel;
-  const guardianEmail = guardian?.email;
+  // profiles에는 email 컬럼이 없다(auth.users에만 있음) — Admin API로 조회한다.
+  let guardianEmail: string | undefined;
+  if (household?.primary_guardian_id) {
+    const { data: guardianAuth } = await admin.auth.admin.getUserById(household.primary_guardian_id);
+    guardianEmail = guardianAuth?.user?.email ?? undefined;
+  }
   if (!guardianEmail) {
     await admin
       .from("meeting_request_review_drive_access")

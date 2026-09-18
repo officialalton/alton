@@ -21,8 +21,9 @@ let meetingRequestRow: {
   subject: string | null;
   google_event_id: string | null;
   google_meet_link: string | null;
-  household: { guardian: { name: string; email: string } };
+  household: { primary_guardian_id: string; guardian: { name: string } };
 };
+let guardianAuthEmail: string | null;
 let updateMock!: (payload: unknown) => void;
 let updateEqMock: ReturnType<typeof vi.fn>;
 
@@ -39,6 +40,11 @@ const adminSupabaseMock = {
     }
     throw new Error(`unexpected table ${table}`);
   }),
+  auth: {
+    admin: {
+      getUserById: async () => ({ data: { user: guardianAuthEmail ? { email: guardianAuthEmail } : null } }),
+    },
+  },
 };
 
 const requestingSupabaseMock = {
@@ -68,8 +74,9 @@ describe("scheduleMeetingRequest", () => {
       subject: "학습 상담",
       google_event_id: null,
       google_meet_link: null,
-      household: { guardian: { name: "김민지", email: "guardian@example.com" } },
+      household: { primary_guardian_id: "guardian1", guardian: { name: "김민지" } },
     };
+    guardianAuthEmail = "guardian@example.com";
     updateEqMock = vi.fn().mockResolvedValue({ error: null });
   });
 
