@@ -25,7 +25,6 @@ export default function VocabLibraryTab({
   const [folders, setFolders] = useState(initialFolders);
   return (
     <div className="max-w-[760px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-1.5">단어장</h1>
       <div className="flex gap-1 border-b border-grey-200 mb-5">
         {([["words", "단어장"], ["quiz", "시험"]] as const).map(([id, label]) => (
           <button

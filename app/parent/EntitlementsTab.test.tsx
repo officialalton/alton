@@ -94,6 +94,7 @@ const baseData: ParentEntitlementsData = {
 describe("EntitlementsTab", () => {
   it("현재 가격과 할인율을 보여준다", () => {
     render(<EntitlementsTab data={baseData} />);
+    fireEvent.click(screen.getByText("구매"));
     expect(screen.getByText("단건 수업권")).toBeInTheDocument();
     expect(screen.getByText("20회 패키지 수업권")).toBeInTheDocument();
     expect(screen.getByText(/20% 할인/)).toBeInTheDocument();
@@ -101,6 +102,7 @@ describe("EntitlementsTab", () => {
 
   it("자격 있는 자녀는 선택 가능하고 자격 없는 자녀는 비활성화된다", () => {
     render(<EntitlementsTab data={baseData} />);
+    fireEvent.click(screen.getByText("구매"));
     const eligibleButton = screen.getAllByText(/지훈/)[0].closest("button");
     const ineligibleButton = screen.getAllByText(/이서아/)[0].closest("button");
     expect(eligibleButton).not.toBeDisabled();
@@ -118,6 +120,7 @@ describe("EntitlementsTab", () => {
     window.location = { ...originalLocation, href: "" };
 
     render(<EntitlementsTab data={baseData} />);
+    fireEvent.click(screen.getByText("구매"));
     fireEvent.click(screen.getByText("구매하기"));
 
     await waitFor(() => {
@@ -137,6 +140,7 @@ describe("EntitlementsTab", () => {
       new Error("결제 가능한(active) 계약이 없어 구매할 수 없습니다.")
     );
     render(<EntitlementsTab data={baseData} />);
+    fireEvent.click(screen.getByText("구매"));
     fireEvent.click(screen.getByText("구매하기"));
 
     await waitFor(() => {
@@ -171,5 +175,19 @@ describe("EntitlementsTab", () => {
   it("purchaseStatus가 success면 완료 안내를 보여준다", () => {
     render(<EntitlementsTab data={baseData} purchaseStatus="success" />);
     expect(screen.getByText(/결제 완료, 수업권이 지급되었습니다/)).toBeInTheDocument();
+  });
+
+  // 2026-09-18(UI 폴리싱) — "현황"/"구매" 서브탭 분리.
+  it("기본 서브탭은 '현황'이라 잔여량은 바로 보이고 구매 상품 목록은 숨어있다", () => {
+    render(<EntitlementsTab data={baseData} />);
+    expect(screen.getByText("지훈의 수업권")).toBeInTheDocument();
+    expect(screen.queryByText("단건 수업권")).toBeNull();
+  });
+
+  it("'구매' 서브탭을 누르면 구매 전 확인 섹션이 보이고 현황 섹션은 숨는다", () => {
+    render(<EntitlementsTab data={baseData} />);
+    fireEvent.click(screen.getByText("구매"));
+    expect(screen.getByText("단건 수업권")).toBeInTheDocument();
+    expect(screen.queryByText("지훈의 수업권")).toBeNull();
   });
 });

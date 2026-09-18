@@ -9,6 +9,7 @@ import type { Memo } from "./memo-data";
 import type { ReviewData, StudentFeedback } from "./review-data";
 import CurriculumView from "./CurriculumView";
 import ReviewPanel from "./ReviewPanel";
+import PillSubTabs from "@/app/components/PillSubTabs";
 
 type SubView =
   | { type: "list" }
@@ -74,25 +75,16 @@ export default function LessonsTab({
 
   return (
     <div className={hideHeader ? "" : "max-w-[640px] px-8 py-8"}>
-      {!hideHeader && <h1 className="text-[20px] font-extrabold text-ink mb-5">수업</h1>}
-
       {!forcedSubtab && (
-        <div className="flex gap-4 mb-5 border-b border-grey-200">
-          {(["upcoming", "past"] as const).map((id) => (
-            <button
-              key={id}
-              onClick={() => setSubtab(id)}
-              className={
-                "text-[13.5px] font-semibold pb-2.5 -mb-px border-b-2 " +
-                (subtab === id
-                  ? "text-ink border-ink"
-                  : "text-grey-500 border-transparent")
-              }
-            >
-              {id === "upcoming" ? "예정된 수업" : "지난 수업"}
-            </button>
-          ))}
-        </div>
+        <PillSubTabs
+          className="mb-5"
+          items={[
+            { id: "upcoming", label: "예정된 수업" },
+            { id: "past", label: "지난 수업" },
+          ]}
+          activeId={subtab}
+          onSelect={setSubtab}
+        />
       )}
 
       {subtab === "upcoming" ? (

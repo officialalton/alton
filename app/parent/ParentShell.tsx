@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { logout } from "@/app/login/actions";
 import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
+import PillSubTabs from "@/app/components/PillSubTabs";
 import type { DashboardData } from "@/app/student/dashboard-data";
 import LessonsTab from "@/app/student/LessonsTab";
 import type { LessonItem } from "@/app/student/lessons-data";
@@ -375,26 +376,17 @@ export default function ParentShell({
               때는 일정·캘린더로 되돌아가지 않고 빈 상태 문구만 보여준다(요구사항). */}
           {activeTab === "home" ? (
             <div>
-              <div className="px-6 pt-5 flex gap-2 border-b border-grey-200 pb-3">
-                {(
-                  [
-                    ["reviews", "종합 리뷰"],
-                    ["lessonReviews", "수업 리뷰"],
-                    ["consultReviews", "상담 리뷰"],
-                    ["stats", "통계"],
-                  ] as const
-                ).map(([id, label]) => (
-                  <button
-                    key={id}
-                    onClick={() => setHomeSubTab(id)}
-                    className={
-                      "text-[12.5px] font-bold px-3.5 py-1.5 rounded-full " +
-                      (homeSubTab === id ? "bg-ink text-white" : "bg-grey-100 text-grey-500")
-                    }
-                  >
-                    {label}
-                  </button>
-                ))}
+              <div className="px-6 pt-5">
+                <PillSubTabs
+                  items={[
+                    { id: "reviews", label: "종합 리뷰" },
+                    { id: "lessonReviews", label: "수업 리뷰" },
+                    { id: "consultReviews", label: "상담 리뷰" },
+                    { id: "stats", label: "통계" },
+                  ]}
+                  activeId={homeSubTab}
+                  onSelect={setHomeSubTab}
+                />
               </div>
               {homeSubTab === "stats" ? (
                 childStats ? (
@@ -513,30 +505,17 @@ export default function ParentShell({
             <ParentHomeworkTab childrenHomework={homeworkByChild} />
           ) : activeTab === "consult" ? (
             <div>
-              <div className="px-6 pt-5 flex gap-2 border-b border-grey-200 pb-3">
-                {(
-                  [
-                    ["request", "상담 신청"],
-                    ["history", "상담 내역"],
-                    ["messenger", "메신저"],
-                  ] as const
-                ).map(([id, label]) => (
-                  <button
-                    key={id}
-                    onClick={() => setConsultSubTab(id)}
-                    className={
-                      "text-[12.5px] font-bold px-3.5 py-1.5 rounded-full relative " +
-                      (consultSubTab === id ? "bg-ink text-white" : "bg-grey-100 text-grey-500")
-                    }
-                  >
-                    {label}
-                    {id === "messenger" && messengerUnread > 0 && (
-                      <span className="absolute -top-1.5 -right-1.5 min-w-[16px] h-[16px] px-1 rounded-full bg-red text-white text-[9.5px] font-bold flex items-center justify-center">
-                        {messengerUnread > 9 ? "9+" : messengerUnread}
-                      </span>
-                    )}
-                  </button>
-                ))}
+              <div className="px-6 pt-5">
+                <PillSubTabs
+                  items={[
+                    { id: "messenger", label: "메신저" },
+                    { id: "request", label: "상담 신청" },
+                    { id: "history", label: "상담 내역" },
+                  ]}
+                  activeId={consultSubTab}
+                  onSelect={setConsultSubTab}
+                  badgeCounts={{ messenger: messengerUnread }}
+                />
               </div>
               {consultSubTab === "request" ? (
                 <ConsultationRequestTab />

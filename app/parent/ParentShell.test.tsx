@@ -34,6 +34,7 @@ vi.mock("./inquiry-actions", () => ({
   listGuardianMeetingRequests: vi.fn().mockResolvedValue([]),
   submitMeetingRequest: vi.fn(),
   getGuardianMeetingRequestReview: vi.fn().mockResolvedValue(null),
+  listOpenGuardianMeetingSlots: vi.fn().mockResolvedValue([]),
 }));
 
 vi.mock("./home-reviews-actions", () => ({
@@ -279,7 +280,8 @@ describe("ParentShell", () => {
       />
     );
     fireEvent.click(screen.getByText("수업권"));
-    expect(screen.getByText("수업권 구매/현황")).toBeInTheDocument();
+    expect(screen.getByText("현황")).toBeInTheDocument();
+    expect(screen.getByText("구매")).toBeInTheDocument();
   });
 
   it("상담 탭은 상담 신청 서브탭이 기본이고, 상담 내역 서브탭은 ConsultationHistoryTab을 보여준다", async () => {

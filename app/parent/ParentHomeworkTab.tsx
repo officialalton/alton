@@ -14,8 +14,6 @@ export default function ParentHomeworkTab({ childrenHomework }: { childrenHomewo
 
   return (
     <div className="max-w-[760px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-1.5">과제</h1>
-      <p className="text-[13px] text-grey-500 mb-4">자녀의 과제를 읽기 전용으로 볼 수 있습니다.</p>
       {childrenHomework.length > 1 && (
         <div className="flex flex-wrap gap-2 mb-5">
           {childrenHomework.map((c) => (

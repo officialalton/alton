@@ -2,26 +2,33 @@
 
 import { useEffect, useState } from "react";
 import type { SubjectEnrollmentView } from "./enrollment-data";
-import { getTrialLessonReviewForFamily } from "@/app/parent/trial-conversion-actions";
+import { getLessonReviewsForFamily, type FamilyLessonReview } from "@/app/parent/lesson-review-family-actions";
 import CurriculumOverlayView from "./CurriculumOverlayView";
+import PillSubTabs from "@/app/components/PillSubTabs";
 
-// M4 UI 폴리싱 — 확정된 체험 리뷰만 노출한다(초안·Smart Notes 원본·Drive 링크·
-// 내부 메모는 이 함수 자체가 반환하지 않으므로 화면에서 실수로 보여줄 수도 없다).
+const LESSON_TYPE_LABEL: Record<FamilyLessonReview["lessonType"], string> = {
+  trial: "체험",
+  regular: "정규",
+};
+
+// 2026-09-17(제품 오너 피드백) — 체험 수업으로만 제한하지 않는다: 완료된 모든
+// 수업(체험+정규)의 확정 리뷰를 보여준다. 초안·Smart Notes 원본·내부 메모는
+// getLessonReviewsForFamily 자체가 반환하지 않으므로 화면에서 실수로 보여줄 수도
+// 없다. 미팅록은 앱 안의 요약(ai_summary)과 실제 Google Meet 문서 링크
+// (meetingRecordLink, Drive reader 권한이 실제로 부여된 경우에만) 둘 다 보여준다.
 // 학생/보호자 공용 — 학생 화면에는 "정규 진행 희망" 버튼을 붙이지 않는다(그건
 // app/parent/TrialConversionPanel.tsx의 역할).
-function TrialReviewDisplay({ subjectEnrollmentId }: { subjectEnrollmentId: string }) {
-  const [review, setReview] = useState<
-    Awaited<ReturnType<typeof getTrialLessonReviewForFamily>> | undefined
-  >(undefined);
+function LessonReviewsDisplay({ subjectEnrollmentId }: { subjectEnrollmentId: string }) {
+  const [reviews, setReviews] = useState<FamilyLessonReview[] | undefined>(undefined);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    getTrialLessonReviewForFamily(subjectEnrollmentId)
-      .then(setReview)
-      .catch(() => setReview(null));
+    getLessonReviewsForFamily(subjectEnrollmentId)
+      .then(setReviews)
+      .catch(() => setReviews([]));
   }, [subjectEnrollmentId]);
 
-  if (!review) return null;
+  if (!reviews || reviews.length === 0) return null;
 
   return (
     <div className="mt-2.5">
@@ -30,20 +37,44 @@ function TrialReviewDisplay({ subjectEnrollmentId }: { subjectEnrollmentId: stri
         onClick={() => setOpen((v) => !v)}
         className="text-[12px] font-semibold text-blue"
       >
-        {open ? "리뷰 닫기" : "체험 수업 리뷰 보기"}
+        {open ? "리뷰 닫기" : `수업 리뷰 보기 (${reviews.length})`}
       </button>
-      {open && (
-        <div className="mt-2 bg-grey-50 rounded-lg px-3 py-2.5 border border-grey-200">
-          <div className="text-[11.5px] font-bold text-grey-500 mb-1">체험 수업 리뷰 (선생님 확정)</div>
-          {review.categoryNotes.map((c) => (
-            <div key={c.key} className="mb-1.5">
-              <div className="text-[10.5px] font-bold text-grey-400">{c.label}</div>
-              <p className="text-[12.5px] text-ink whitespace-pre-wrap">{c.note}</p>
+      {open &&
+        reviews.map((review) => (
+          <div key={review.reviewId} className="mt-2 bg-grey-50 rounded-lg px-3 py-2.5 border border-grey-200">
+            <div className="text-[11.5px] font-bold text-grey-500 mb-1">
+              {LESSON_TYPE_LABEL[review.lessonType]} 수업 리뷰 (선생님 확정)
             </div>
-          ))}
-          <p className="text-[12.5px] text-ink whitespace-pre-wrap">{review.finalText}</p>
-        </div>
-      )}
+            {review.categoryNotes.map((c) => (
+              <div key={c.key} className="mb-1.5">
+                <div className="text-[10.5px] font-bold text-grey-400">{c.label}</div>
+                <p className="text-[12.5px] text-ink whitespace-pre-wrap">{c.note}</p>
+              </div>
+            ))}
+            <p className="text-[12.5px] text-ink whitespace-pre-wrap">{review.finalText}</p>
+
+            {/* 확정된 리뷰에 한해서만 이 컴포넌트가 렌더되므로(getLessonReviewsForFamily가
+                final 행만 반환) 미팅록도 항상 확정 이후 것만 노출된다. */}
+            <div className="mt-2.5 pt-2.5 border-t border-grey-200">
+              <div className="text-[10.5px] font-bold text-grey-400 mb-1">미팅록 요약</div>
+              {review.aiSummary ? (
+                <p className="text-[12.5px] text-ink whitespace-pre-wrap mb-1.5">{review.aiSummary}</p>
+              ) : (
+                <p className="text-[12px] text-grey-400 mb-1.5">등록된 미팅록이 없습니다.</p>
+              )}
+              {review.meetingRecordLink && (
+                <a
+                  href={review.meetingRecordLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-[12px] font-semibold text-blue underline"
+                >
+                  미팅록 원본 보기(열람 전용)
+                </a>
+              )}
+            </div>
+          </div>
+        ))}
     </div>
   );
 }
@@ -65,10 +96,17 @@ function formatDate(iso: string | null): string {
   });
 }
 
+// 종료 상태 — "수강 종료" 서브탭. 나머지(planned/active/paused)는 "수강중".
+const ENDED_STATUSES = new Set<SubjectEnrollmentView["status"]>(["completed", "terminated"]);
+
 export default function EnrollmentTab({
   enrollments,
+  childName,
 }: {
   enrollments: SubjectEnrollmentView[];
+  /** 학부모 포털에서 자녀가 여럿일 때, 상단 별도 제목 대신 카드 안에 소속
+   * 자녀를 표시하기 위한 값(학생 포털에서는 전달하지 않음 — 항상 본인이므로). */
+  childName?: string;
 }) {
   // v3 커리큘럼 열람 결함 수정(2026-09-11) — 이 탭은 subject_enrollments(v3)만
   // 조회하므로(loadStudentSubjectEnrollments, enrollment-data.ts) 여기 뜨는
@@ -81,6 +119,7 @@ export default function EnrollmentTab({
     enrollmentId: string;
     subjectName: string;
   } | null>(null);
+  const [subTab, setSubTab] = useState<"active" | "ended">("active");
 
   if (openCurriculum) {
     return (
@@ -92,22 +131,28 @@ export default function EnrollmentTab({
     );
   }
 
+  const visibleEnrollments = enrollments.filter((e) =>
+    subTab === "ended" ? ENDED_STATUSES.has(e.status) : !ENDED_STATUSES.has(e.status)
+  );
+
   return (
     <div className="max-w-[640px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-1.5">
-        수강 과목
-      </h1>
-      <p className="text-[13px] text-grey-500 mb-5">
-        현재 수강 중인 과목과 담당 선생님, 예정된 선생님 변경 일정을 확인할 수
-        있습니다.
-      </p>
+      <PillSubTabs
+        className="mb-5"
+        items={[
+          { id: "active", label: "수강중" },
+          { id: "ended", label: "수강 종료" },
+        ]}
+        activeId={subTab}
+        onSelect={setSubTab}
+      />
 
-      {enrollments.length === 0 ? (
+      {visibleEnrollments.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-          등록된 과목 수강이 없습니다.
+          {subTab === "ended" ? "종료된 과목 수강이 없습니다." : "등록된 과목 수강이 없습니다."}
         </div>
       ) : (
-        enrollments.map((e) => (
+        visibleEnrollments.map((e) => (
           <div
             key={e.id}
             className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3"
@@ -115,6 +160,9 @@ export default function EnrollmentTab({
             <div className="flex items-center justify-between mb-2">
               <div className="text-[14px] font-bold text-ink">
                 {e.subjectName}
+                {childName && (
+                  <span className="ml-2 text-[11px] font-semibold text-grey-500">{childName}</span>
+                )}
               </div>
               <span className="text-[11px] font-bold px-2 py-1 rounded-full bg-grey-100 text-grey-500">
                 {STATUS_LABEL[e.status]}
@@ -163,7 +211,7 @@ export default function EnrollmentTab({
               커리큘럼 보기 →
             </button>
 
-            <TrialReviewDisplay subjectEnrollmentId={e.id} />
+            <LessonReviewsDisplay subjectEnrollmentId={e.id} />
 
             {e.history.length > 0 && (
               <details className="mt-2.5">

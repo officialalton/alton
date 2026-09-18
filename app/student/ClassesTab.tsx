@@ -8,6 +8,7 @@ import type { ReviewData, StudentFeedback } from "./review-data";
 import type { LessonBookingTabProps } from "./LessonBookingTab";
 import LessonBookingTab from "./LessonBookingTab";
 import LessonsTab from "./LessonsTab";
+import PillSubTabs from "@/app/components/PillSubTabs";
 
 // "수업" 탭 정리(A안, 2026-09-06) — 학생 포털의 "레슨"(레거시 legacy_sessions 뷰,
 // 커리큘럼·리뷰 연동)과 "예약"(v3 sessions/reservations, Calendar/Meet 연동) 탭이
@@ -49,20 +50,14 @@ export default function ClassesTab({
   return (
     <div>
       <div className="px-8 pt-8">
-        <h1 className="text-[20px] font-extrabold text-ink mb-3">수업</h1>
-        <div className="flex gap-1.5">
-          {(["upcoming", "past"] as const).map((s) => (
-            <button
-              key={s}
-              onClick={() => setSubtab(s)}
-              className={`text-[11px] font-bold px-2.5 py-1 rounded-full ${
-                subtab === s ? "bg-ink text-white" : "bg-grey-100 text-grey-500"
-              }`}
-            >
-              {s === "upcoming" ? "예정 수업" : "지난 수업"}
-            </button>
-          ))}
-        </div>
+        <PillSubTabs
+          items={[
+            { id: "upcoming", label: "예정 수업" },
+            { id: "past", label: "지난 수업" },
+          ]}
+          activeId={subtab}
+          onSelect={setSubtab}
+        />
       </div>
 
       <LessonBookingTab

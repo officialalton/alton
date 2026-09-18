@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { ParentEntitlementsData, PurchaseReceipt } from "./entitlements-data";
 import { createEntitlementCheckoutSession } from "./purchase-actions";
+import PillSubTabs from "@/app/components/PillSubTabs";
 
 function formatMoney(minor: number, currency: string): string {
   const amount = minor / 100;
@@ -54,6 +55,10 @@ export default function EntitlementsTab({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [expandedPurchaseId, setExpandedPurchaseId] = useState<string | null>(null);
+  // 2026-09-18(UI 폴리싱) — "현황"(잔여량/만료일/구매내역)과 "구매"(구매 전
+  // 확인+결제)를 서브탭으로 분리한다. 결제 완료/취소 직후에는 실제 상태
+  // 변화를 바로 보여주는 "현황"으로 기본 진입한다.
+  const [subTab, setSubTab] = useState<"status" | "purchase">("status");
 
   const selectedChild = data.children.find((c) => c.childId === selectedChildId) ?? null;
 
@@ -75,10 +80,15 @@ export default function EntitlementsTab({
 
   return (
     <div className="max-w-[720px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-1">수업권 구매/현황</h1>
-      <p className="text-[12px] text-grey-500 mb-5">
-        이용약관과 환불 정책은 구매 시점 버전으로 각 구매 건에 스냅샷 고정됩니다.
-      </p>
+      <PillSubTabs
+        className="mb-5"
+        items={[
+          { id: "status", label: "현황" },
+          { id: "purchase", label: "구매" },
+        ]}
+        activeId={subTab}
+        onSelect={setSubTab}
+      />
 
       {purchaseStatus === "success" && (
         <div className="bg-green/10 text-green text-[13px] font-semibold rounded-lg px-4 py-3 mb-4">
@@ -91,6 +101,8 @@ export default function EntitlementsTab({
         </div>
       )}
 
+      {subTab === "purchase" && (
+      <>
       {/* 구매 전 확인 */}
       <section className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4.5 mb-4">
         <h2 className="text-[14px] font-bold text-ink mb-3">구매 전 확인</h2>
@@ -172,7 +184,11 @@ export default function EntitlementsTab({
           {loading ? "이동 중…" : "구매하기"}
         </button>
       </section>
+      </>
+      )}
 
+      {subTab === "status" && (
+      <>
       {/* 자녀별 잔여량/만료일/구매내역 */}
       {data.children.map((c) => (
         <section
@@ -249,6 +265,8 @@ export default function EntitlementsTab({
           )}
         </section>
       ))}
+      </>
+      )}
     </div>
   );
 }
