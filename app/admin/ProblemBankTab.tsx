@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   listBankProblemsAction,
   createBankProblemAction,
@@ -114,16 +114,28 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
 
   const archived = bucket === "archived";
 
+  // 2026-09-18 버그 수정 — 필터를 빠르게 두 번 이상 바꾸면(예: 검수 탭에서 세부 기술을
+  // 연달아 바꿈) 먼저 보낸 요청이 나중 요청보다 늦게 응답할 수 있다. 그동안은 나중에
+  // 도착하는 응답이 무조건 이겨 화면 상태를 덮어썼다 — 필터가 바뀌었는데도 그 필터로
+  // 보낸 요청보다 "이전" 필터의 응답이 늦게 도착하면 그 오래된 결과로 되돌아갔다(첫 번째
+  // 필터 변경 뒤엔 아직 진행 중인 다른 요청이 없어 우연히 문제가 없었을 뿐이다). 요청마다
+  // 번호를 매기고, 응답이 왔을 때 그 번호가 "지금 가장 최근에 보낸 요청"과 같을 때만
+  // 화면에 반영한다(오래된 응답은 조용히 버린다).
+  const reloadSeqRef = useRef(0);
+
   const reload = useCallback(async () => {
+    const seq = ++reloadSeqRef.current;
     setError(null);
     try {
       const [rows, a] = await Promise.all([
         listBankProblemsAction({ ...filter, archived: archived || undefined }),
         problemQuestionAuditAction(filter.subjectId),
       ]);
+      if (seq !== reloadSeqRef.current) return; // 그 사이 더 최신 요청이 나갔다 — 이 응답은 버린다.
       setProblems(rows);
       setAudit(a.ok ? a.value : null);
     } catch {
+      if (seq !== reloadSeqRef.current) return;
       setProblems(null);
       setError("문제 목록을 불러오지 못했습니다.");
     }

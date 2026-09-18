@@ -170,6 +170,45 @@ describe("탭 재구성(2026-09-17) — 생성/검수/공개/보관, 필터 단�
     );
   });
 
+  // 2026-09-18 버그 수정 — 검수 탭에서 필터를 연달아 두 번 바꾸면 먼저 보낸 요청의
+  // 응답이 나중 요청보다 늦게 도착할 수 있다(느린 네트워크·DB 부하). 그 경우 이전엔
+  // 도착 순서와 무관하게 "가장 나중에 도착한 응답"이 화면을 덮어써, 이미 지나간 첫
+  // 번째 필터의 결과가 두 번째(최신) 필터를 선택했는데도 그대로 남아 있었다(전체
+  // 새로고침 없이는 고쳐지지 않았다). 응답에 순번을 매겨 오래된 응답을 버리도록
+  // 고쳤다 — 이 테스트는 일부러 첫 요청 응답을 두 번째 요청 응답보다 늦게
+  // resolve시켜 그 회귀를 잡는다.
+  it("필터를 연달아 두 번 바꾸면, 첫 번째 요청 응답이 두 번째보다 늦게 와도 화면은 두 번째(최신) 필터의 결과를 보여준다", async () => {
+    const firstFilterResult = { ...draftProblem, draft: { ...draftProblem.draft, passage: "첫 번째 필터 결과 문항" } };
+    const secondFilterResult = { ...draftProblem, draft: { ...draftProblem.draft, passage: "두 번째 필터 결과 문항" } };
+
+    let resolveFirst!: (v: (typeof draftProblem)[]) => void;
+    const firstCallPromise = new Promise<(typeof draftProblem)[]>((resolve) => {
+      resolveFirst = resolve;
+    });
+
+    // 초기 마운트 로딩은 즉시 끝내고, 이후 필터 변경 두 번만 응답 순서를 통제한다.
+    listBankProblemsAction.mockResolvedValueOnce([draftProblem]);
+    listBankProblemsAction.mockImplementationOnce(() => firstCallPromise);
+    listBankProblemsAction.mockResolvedValueOnce([secondFilterResult]);
+
+    render(<ProblemBankTab subjects={subjects} />);
+    await waitFor(() => expect(screen.getByText("판별식이 0일 때")).toBeInTheDocument());
+
+    // 첫 번째 필터 변경 — 아직 응답하지 않는다(firstCallPromise가 나중에 resolve됨).
+    fireEvent.change(screen.getByLabelText("세부 기술"), { target: { value: "words_in_context" } });
+    // 두 번째 필터 변경 — 먼저 응답한다.
+    fireEvent.change(screen.getByLabelText("세부 기술"), { target: { value: "linear_functions" } });
+
+    await waitFor(() => expect(screen.getByText("두 번째 필터 결과 문항")).toBeInTheDocument());
+
+    // 이제 첫 번째(오래된) 요청이 뒤늦게 응답한다 — 화면을 덮어쓰면 안 된다.
+    resolveFirst([firstFilterResult]);
+    await new Promise((r) => setTimeout(r, 0));
+
+    expect(screen.getByText("두 번째 필터 결과 문항")).toBeInTheDocument();
+    expect(screen.queryByText("첫 번째 필터 결과 문항")).not.toBeInTheDocument();
+  });
+
   it("삭제 대상이던 설명 문단 4개는 더 이상 렌더되지 않는다", async () => {
     render(<ProblemBankTab subjects={subjects} />);
     fireEvent.click(screen.getByText("생성"));
