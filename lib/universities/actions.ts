@@ -14,6 +14,7 @@
 import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
+import { createClient } from "@/utils/supabase/server";
 
 export type UniversitySummary = {
   id: string;
@@ -125,7 +126,19 @@ export type AdmissionCycle = {
   portfolioRequired: boolean;
   interviewRequired: boolean | null;
   acceptanceRate: number | null;
+  // Part 3(2026-09-19) — 재학생/입시 통계. 합격 확률 예측 필드는 의도적으로 없음(정책상 금지).
+  pellGrantPct: number | null;
+  studentFacultyRatio: string | null;
+  gradRate4yr: number | null;
+  gradRate6yr: number | null;
+  retentionRate: number | null;
+  totalApplicants: number | null;
+  yieldRate: number | null;
+  internationalPct: number | null;
+  womenPct: number | null;
 };
+
+export type UniversityMajor = { id: string; name: string; category: string | null };
 
 export type UniversityUpdateEntry = {
   id: string;
@@ -136,12 +149,10 @@ export type UniversityUpdateEntry = {
 };
 
 /** 관리자 상세/편집 화면용 — 대학 기본정보 + 연도별 사이클 전체 + 업데이트 타임라인. */
-export async function getUniversityDetail(
+async function loadUniversityDetail(
+  db: ReturnType<typeof createAdminClient>,
   universityId: string,
-): Promise<{ university: UniversityDetail; cycles: AdmissionCycle[]; updates: UniversityUpdateEntry[] }> {
-  await requireAdmin();
-  const db = createAdminClient();
-
+): Promise<{ university: UniversityDetail; cycles: AdmissionCycle[]; updates: UniversityUpdateEntry[]; majors: UniversityMajor[] }> {
   const { data: u, error: uErr } = await db.from("universities").select("*").eq("id", universityId).single();
   if (uErr) throw new Error(uErr.message);
 
@@ -158,6 +169,13 @@ export async function getUniversityDetail(
     .eq("university_id", universityId)
     .order("update_date", { ascending: false });
   if (upErr) throw new Error(upErr.message);
+
+  const { data: majorRows, error: mErr } = await db
+    .from("university_majors")
+    .select("*")
+    .eq("university_id", universityId)
+    .order("name", { ascending: true });
+  if (mErr) throw new Error(mErr.message);
 
   return {
     university: {
@@ -208,6 +226,15 @@ export async function getUniversityDetail(
       portfolioRequired: c.portfolio_required,
       interviewRequired: c.interview_required,
       acceptanceRate: c.acceptance_rate,
+      pellGrantPct: c.pell_grant_pct,
+      studentFacultyRatio: c.student_faculty_ratio,
+      gradRate4yr: c.grad_rate_4yr,
+      gradRate6yr: c.grad_rate_6yr,
+      retentionRate: c.retention_rate,
+      totalApplicants: c.total_applicants,
+      yieldRate: c.yield_rate,
+      internationalPct: c.international_pct,
+      womenPct: c.women_pct,
     })),
     updates: (updateRows ?? []).map((r) => ({
       id: r.id,
@@ -216,7 +243,32 @@ export async function getUniversityDetail(
       summary: r.summary,
       sourceUrl: r.source_url,
     })),
+    majors: (majorRows ?? []).map((m) => ({ id: m.id, name: m.name, category: m.category })),
   };
+}
+
+/** 관리자 상세/편집 화면용. */
+export async function getUniversityDetail(
+  universityId: string,
+): Promise<{ university: UniversityDetail; cycles: AdmissionCycle[]; updates: UniversityUpdateEntry[]; majors: UniversityMajor[] }> {
+  await requireAdmin();
+  return loadUniversityDetail(createAdminClient(), universityId);
+}
+
+/**
+ * 학생·학부모·교사용 읽기 전용 — 로그인만 확인하고(관리자 권한 불필요) 관리자 클라이언트로
+ * 조회한다. RLS가 이미 "인증 사용자 전원 읽기 가능"으로 열어 뒀으므로 이 함수는 그 정책을
+ * 그대로 대변한다(합격 확률/가능성 예측 필드는 없음 — 정책상 금지).
+ */
+export async function getUniversityDetailForStudent(
+  universityId: string,
+): Promise<{ university: UniversityDetail; cycles: AdmissionCycle[]; updates: UniversityUpdateEntry[]; majors: UniversityMajor[] }> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("로그인이 필요합니다.");
+  return loadUniversityDetail(createAdminClient(), universityId);
 }
 
 export type UpsertAdmissionCycleInput = {

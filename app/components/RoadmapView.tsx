@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import PillSubTabs from "./PillSubTabs";
+import CollegeExploreSection from "./CollegeExploreSection";
 import type {
   RoadmapData,
   PrepItemType,
@@ -36,7 +37,7 @@ export default function RoadmapView({
   data: RoadmapData;
   readOnly?: boolean;
 }) {
-  const [subTab, setSubTab] = useState<"profile" | "roadmap">("profile");
+  const [subTab, setSubTab] = useState<"profile" | "roadmap" | "colleges">("profile");
   const [pending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
 
@@ -95,6 +96,7 @@ export default function RoadmapView({
         items={[
           { id: "profile", label: "프로필" },
           { id: "roadmap", label: "로드맵" },
+          { id: "colleges", label: "대학 탐색" },
         ]}
         activeId={subTab}
         onSelect={setSubTab}
@@ -103,8 +105,10 @@ export default function RoadmapView({
 
       {subTab === "profile" ? (
         <ProfileSections data={data} readOnly={readOnly} pending={pending} run={run} />
-      ) : (
+      ) : subTab === "roadmap" ? (
         <RoadmapSection data={data} readOnly={readOnly} pending={pending} run={run} />
+      ) : (
+        <CollegeExploreSection />
       )}
     </div>
   );
