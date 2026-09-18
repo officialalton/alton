@@ -161,7 +161,12 @@ export default function ParentShell({
   }, [activeTab, consultSubTab]);
 
   // 2026-09-18 — 홈 서브탭 데이터는 탭에 처음 들어갈 때(또는 자녀 전환 시)
-  // 지연 로딩한다. 종합 리뷰는 해당 자녀의 모든 수강 과목을 병렬 조회해 합친다.
+  // 지연 로딩한다.
+  // 2026-09-18(사용자 결정, 2차) — "종합 리뷰"는 수업/상담 리뷰를 합쳐 보여주는
+  // 목록이 아니라, 향후 AI OS가 월 단위로 만들 "월간 종합 리뷰" 전용 자리다.
+  // 이번 범위에서는 AI 생성 로직·데이터 모델을 만들지 않으므로 이 탭은 아무
+  // 데이터도 불러오지 않는다(정적 준비 중 문구만). "수업 리뷰"는 그대로
+  // getAllFamilyLessonReviews를 쓴다.
   useEffect(() => {
     if (activeTab !== "home") return;
     if (homeSubTab === "stats") {
@@ -172,9 +177,11 @@ export default function ParentShell({
       getHomeConsultationReviews().then(setConsultReviews).catch(() => setConsultReviews([]));
       return;
     }
-    const enrollmentIds =
-      childrenSubjectEnrollments.find((c) => c.childId === currentChildId)?.enrollments.map((e) => e.id) ?? [];
-    getAllFamilyLessonReviews(enrollmentIds).then(setFamilyReviews).catch(() => setFamilyReviews([]));
+    if (homeSubTab === "lessonReviews") {
+      const enrollmentIds =
+        childrenSubjectEnrollments.find((c) => c.childId === currentChildId)?.enrollments.map((e) => e.id) ?? [];
+      getAllFamilyLessonReviews(enrollmentIds).then(setFamilyReviews).catch(() => setFamilyReviews([]));
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab, homeSubTab, currentChildId]);
 
@@ -407,18 +414,17 @@ export default function ParentShell({
                     ))}
                   </div>
                 )
+              ) : homeSubTab === "reviews" ? (
+                // 2026-09-18(사용자 결정, 2차) — "종합 리뷰"는 수업/상담 리뷰를
+                // 합친 목록이 아니라, 향후 AI OS가 월 단위로 생성할 "월간 종합
+                // 보고서" 전용 자리다. 이번 범위에서는 생성 로직·데이터 모델을
+                // 만들지 않고 정적 준비 중 문구만 보여준다.
+                <div className="p-8">
+                  <h2 className="text-[14px] font-bold text-ink mb-1.5">월간 종합 리뷰</h2>
+                  <p className="text-[13px] text-grey-500">아직 생성된 월간 종합 리뷰가 없습니다. 준비 중입니다.</p>
+                </div>
               ) : familyReviews === null ? (
                 <p className="p-8 text-[14px] text-grey-500">불러오는 중...</p>
-              ) : homeSubTab === "reviews" ? (
-                familyReviews.length === 0 ? (
-                  <p className="p-8 text-[14px] text-grey-500">아직 확정된 리뷰가 없습니다.</p>
-                ) : (
-                  <div className="px-6 py-5 space-y-3">
-                    {familyReviews.map((r) => (
-                      <FamilyReviewCard key={r.reviewId} review={r} />
-                    ))}
-                  </div>
-                )
               ) : // 수업 리뷰 — 시간순(오래된 순), 리뷰+확정 미팅록이 모두 있는 것만.
               familyReviews.filter((r) => r.meetingRecordLink).length === 0 ? (
                 <p className="p-8 text-[14px] text-grey-500">확정된 미팅록이 있는 수업이 아직 없습니다.</p>

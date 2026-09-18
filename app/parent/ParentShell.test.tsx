@@ -88,7 +88,7 @@ const lessonsProps = {
 };
 
 describe("ParentShell", () => {
-  it("사이드바 항목(홈/수업권/수강 과목/수업/상담/단어장/과제)을 보여주고, 기본 탭은 홈(종합 리뷰 서브탭)이다", async () => {
+  it("사이드바 항목(홈/수업권/수강 과목/수업/상담/단어장/과제)을 보여주고, 기본 탭은 홈(종합 리뷰 서브탭 = 월간 종합 리뷰 자리)이다", () => {
     render(
       <ParentShell
         parentName="김민지"
@@ -115,7 +115,25 @@ describe("ParentShell", () => {
     expect(screen.getByText("상담 리뷰")).toBeInTheDocument();
     // "통계"는 이제 홈 서브탭 라벨로만 존재한다.
     expect(screen.getAllByText("통계").length).toBeGreaterThan(0);
-    expect(await screen.findByText("아직 확정된 리뷰가 없습니다.")).toBeInTheDocument();
+    // 2026-09-18(사용자 결정 2차) — "종합 리뷰"는 수업/상담 리뷰를 합친 목록이
+    // 아니라 향후 AI OS가 만들 "월간 종합 리뷰" 전용 자리라 정적 준비 중
+    // 문구만 보여준다(데이터 로딩 없음 — 즉시 렌더되므로 findByText 불필요).
+    expect(screen.getByText("월간 종합 리뷰")).toBeInTheDocument();
+    expect(screen.getByText(/아직 생성된 월간 종합 리뷰가 없습니다/)).toBeInTheDocument();
+  });
+
+  it("홈 '종합 리뷰' 서브탭은 수업/상담 리뷰 로더를 호출하지 않는다(합산 목록 아님)", async () => {
+    const { getAllFamilyLessonReviews } = await import("./home-reviews-actions");
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+      />
+    );
+    expect(getAllFamilyLessonReviews).not.toHaveBeenCalled();
   });
 
   it("홈 상단에는 동의 배너를 보여주지 않는다(2026-09-17, 배지는 프로필 메뉴로만)", () => {
@@ -133,6 +151,35 @@ describe("ParentShell", () => {
       />
     );
     expect(screen.queryByText(/동의 필요한 문서가/)).not.toBeInTheDocument();
+  });
+
+  it("홈 '수업 리뷰' 서브탭을 누르면 확정된 수업 리뷰+미팅록만 시간순으로 보여준다(종합 리뷰와 별개 로딩)", async () => {
+    const { getAllFamilyLessonReviews } = await import("./home-reviews-actions");
+    vi.mocked(getAllFamilyLessonReviews).mockResolvedValueOnce([
+      {
+        reviewId: "rev1",
+        sessionId: "sess1",
+        lessonType: "regular",
+        finalText: "수업 리뷰 내용",
+        aiSummary: null,
+        finalizedAt: "2026-09-10T00:00:00.000Z",
+        categoryNotes: [],
+        meetingRecordLink: "https://drive.google.com/file/d/f1/view",
+      },
+    ]);
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+      />
+    );
+    expect(getAllFamilyLessonReviews).not.toHaveBeenCalled();
+    fireEvent.click(screen.getByText("수업 리뷰"));
+    expect(await screen.findByText("수업 리뷰 내용")).toBeInTheDocument();
+    expect(getAllFamilyLessonReviews).toHaveBeenCalledTimes(1);
   });
 
   it("홈 '통계' 서브탭을 누르면 StatsTab(읽기 전용)이 렌더링된다", async () => {
