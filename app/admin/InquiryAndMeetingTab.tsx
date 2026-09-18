@@ -249,6 +249,11 @@ function MeetingOperations() {
   const [ruleEnd, setRuleEnd] = useState("18:00");
   const [exceptionFormOpen, setExceptionFormOpen] = useState(false);
   const [exceptionDate, setExceptionDate] = useState("");
+  // 2026-09-18 — window.prompt는 브라우저 자동화(원격 UAT 도구)에서 채울 수
+  // 없고 UX도 나쁘다. 인라인 datetime-local 입력 2개로 교체한다.
+  const [scheduleFormOpenId, setScheduleFormOpenId] = useState<string | null>(null);
+  const [scheduleStarts, setScheduleStarts] = useState("");
+  const [scheduleEnds, setScheduleEnds] = useState("");
   const error = mutationError ?? fetchError;
 
   async function withBusy(id: string, fn: () => Promise<void>) {
@@ -313,30 +318,70 @@ function MeetingOperations() {
                 );
               })()}
               {nextMeetingStatus(m.status) === "scheduled" ? (
-                // 2026-09-17 — "일정 확정"은 status만 바꾸는 게 아니라 유효한
+                // 2026-09-17/18 — "일정 확정"은 status만 바꾸는 게 아니라 유효한
                 // 시간으로 실제 Calendar+Meet 이벤트를 만들어야 하므로, 여기서
                 // 시간을 입력받아 scheduleMeetingRequest(가드된 서버 액션)를
                 // 호출한다. 시간이 없거나 잘못되면 액션이 거부하고 상태는
-                // 그대로 남는다(조용히 scheduled로 넘어가지 않음).
-                <button
-                  disabled={busyId === m.id}
-                  className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
-                  onClick={() => {
-                    const startsLocal = window.prompt("상담 시작 시간(KST, 예: 2026-09-20T14:00)");
-                    if (!startsLocal) return;
-                    const endsLocal = window.prompt("상담 종료 시간(KST, 예: 2026-09-20T14:30)");
-                    if (!endsLocal) return;
-                    withBusy(m.id, async () => {
-                      await scheduleMeetingRequest({
-                        meetingRequestId: m.id,
-                        startsAt: kstLocalToIso(startsLocal),
-                        endsAt: kstLocalToIso(endsLocal),
-                      });
-                    });
-                  }}
-                >
-                  일정 확정(Calendar+Meet 생성)
-                </button>
+                // 그대로 남는다(조용히 scheduled로 넘어가지 않음). window.prompt는
+                // 자동화 도구로 채울 수 없고 UX도 나빠 인라인 폼으로 교체(2026-09-18).
+                scheduleFormOpenId === m.id ? (
+                  <div className="flex flex-col gap-1.5 border-[1.5px] border-grey-200 rounded-lg px-2.5 py-2">
+                    <label className="text-[11px] font-semibold text-grey-500">
+                      시작 시간(KST)
+                      <input
+                        type="datetime-local"
+                        value={scheduleStarts}
+                        onChange={(e) => setScheduleStarts(e.target.value)}
+                        className="ml-1.5 border-[1.5px] border-grey-200 rounded px-1.5 py-0.5 text-[11.5px]"
+                      />
+                    </label>
+                    <label className="text-[11px] font-semibold text-grey-500">
+                      종료 시간(KST)
+                      <input
+                        type="datetime-local"
+                        value={scheduleEnds}
+                        onChange={(e) => setScheduleEnds(e.target.value)}
+                        className="ml-1.5 border-[1.5px] border-grey-200 rounded px-1.5 py-0.5 text-[11.5px]"
+                      />
+                    </label>
+                    <div className="flex gap-1.5">
+                      <button
+                        disabled={busyId === m.id || !scheduleStarts || !scheduleEnds}
+                        className="text-[11.5px] font-bold text-white bg-ink rounded-lg px-2.5 py-1 disabled:opacity-50"
+                        onClick={() =>
+                          withBusy(m.id, async () => {
+                            await scheduleMeetingRequest({
+                              meetingRequestId: m.id,
+                              startsAt: kstLocalToIso(scheduleStarts),
+                              endsAt: kstLocalToIso(scheduleEnds),
+                            });
+                            setScheduleFormOpenId(null);
+                          })
+                        }
+                      >
+                        확정
+                      </button>
+                      <button
+                        className="text-[11.5px] font-semibold text-grey-500"
+                        onClick={() => setScheduleFormOpenId(null)}
+                      >
+                        취소
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <button
+                    disabled={busyId === m.id}
+                    className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
+                    onClick={() => {
+                      setScheduleStarts("");
+                      setScheduleEnds("");
+                      setScheduleFormOpenId(m.id);
+                    }}
+                  >
+                    일정 확정(Calendar+Meet 생성)
+                  </button>
+                )
               ) : null}
               {m.status !== "completed" && m.status !== "cancelled" && (
                 <button
