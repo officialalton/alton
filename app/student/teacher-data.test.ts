@@ -57,3 +57,54 @@ describe("loadTeacherList — M4 골든패스 실사용 버그 #1", () => {
     expect(teachers[0].subjects[0].subjectName).toBe("테스트1");
   });
 });
+
+// 2026-09-18(학생 홈 크래시 수정) — teacher_assignments가 가리키는 teacherId가
+// profiles에는 있어도 teachers 테이블에는 없는 경우(온보딩 미완료·데이터 정합성
+// 결함), 그 teacherId를 그대로 내려보내면 이후 ensureThreadAndLoadMessages()의
+// chat_threads insert가 chat_threads_teacher_id_fkey(teachers 참조) 위반으로
+// 던지는 예외를 page.tsx가 잡지 못해 /student 홈 전체가 크래시했다(실사용 UAT
+// 2026-09-18 재현: docs/2026-09-18-real-student-teacher-uat.md 5절). 이 테스트는
+// teachers 행이 없는 teacherId가 결과에서 제외되고 예외 없이 반환되는지 고정한다.
+describe("loadTeacherList — 학생 홈 크래시 회귀 방지", () => {
+  it("teachers 테이블에 없는 teacherId는 제외하고 예외 없이 반환한다", async () => {
+    const supabase = {
+      from: vi.fn((table: string) => {
+        if (table === "enrollments") {
+          return { select: () => ({ eq: () => ({ eq: () => Promise.resolve({ data: [] }) }) }) };
+        }
+        if (table === "subject_enrollments") {
+          return {
+            select: () => ({ eq: () => Promise.resolve({ data: [{ id: "se1", subject: { name: "테스트1" } }] }) }),
+          };
+        }
+        if (table === "teacher_assignments") {
+          return {
+            select: () => ({
+              in: () => ({
+                in: () =>
+                  Promise.resolve({
+                    data: [{ teacher_id: "teacher-dangling", subject_enrollment_id: "se1", status: "active" }],
+                  }),
+              }),
+            }),
+          };
+        }
+        if (table === "profiles") {
+          return { select: () => ({ in: () => Promise.resolve({ data: [{ id: "teacher-dangling", name: "Ghost Teacher" }] }) }) };
+        }
+        if (table === "teachers") {
+          // teacher_assignments가 가리키는 teacherId에 대한 teachers 행이 없음(정합성 결함 재현)
+          return { select: () => ({ in: () => Promise.resolve({ data: [] }) }) };
+        }
+        if (table === "student_curriculum_overlays") {
+          return { select: () => ({ in: () => ({ eq: () => Promise.resolve({ data: [] }) }) }) };
+        }
+        throw new Error(`unexpected table ${table}`);
+      }),
+    };
+
+    const teachers = await loadTeacherList(supabase as never, "student-dangling-teacher");
+
+    expect(teachers).toEqual([]);
+  });
+});
