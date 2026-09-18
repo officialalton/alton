@@ -6,6 +6,8 @@
 
 ## 진행 상태 (중요 — 반드시 먼저 읽을 것)
 
+**2026-09-17 후속(중간 우선순위 2건 구현 완료)**: 이 문서가 누적 재현 패턴으로 지목한 "닮은삼각형 대응변 길이"와 "원의 방정식 좌표기하 변환" 중 각 대표 패턴을 결정적(Zero-AI) 컴파일러에 신설했다 — `lib/problem-generation/math-compilers/lines-angles-triangles.ts`에 `similar_triangles`(두 삼각형 나란히 배치, AA/공유각 표기, 대응변 오짝짓기·배율 역전·가산 오류·합동 착각 4종 오답 경로), `lib/problem-generation/math-compilers/circles.ts`에 `circle_equation_transform`(이동/중심·반지름 조회/방정식 매칭 3변형, 부호 오류·제곱 누락·h·k 교환·이동량 산술실수 오답 경로). 로컬 DB 배치 검증 medium 10/10·hard 10/10(두 스킬 모두) 통과, `npx vitest run app/admin lib/problem-generation` 1110 passed/15 pre-existing failed. 아래 표의 개별 행 중 이 두 패턴과 정확히 일치하는 행만 상태를 갱신했다(교차선 배치·평행선 각도 등 인접 변형은 아직 별도 서브타입 없음 — 각 행의 비고 참고).
+
 | 시험지 | R&W M1(33) | R&W M2(33) | Math M1(27) | Math M2(27) | 상태 |
 |---|---|---|---|---|---|
 | test4 | 완료 | 완료 | 완료 | 완료 | **전수 분류 완료** |
@@ -170,7 +172,7 @@
 | test4 | M2-22 | Math | linear_two_variables | 3원 연립 해의 개수 판정 | 객관식 | 좌표평면 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 3식 연립 해개수 서브타입 없음 |
 | test4 | M2-23 | Math | percentages | 월별→연간 복리 감가율 역산 | 객관식 | 방정식 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 복리 기간환산형 서브타입 없음(percent_change는 단순 변화만) |
 | test4 | M2-24 | Math | one_variable_data | median/range 이동(상수 더하기) 비교 | 객관식 | 점도표 | 가능 | 있음 | 미확인 | - |
-| test4 | M2-25 | Math | 없음 | 원의 방정식 평행이동 | 객관식 | 없음 | 완전 불가 | 없음 | 미확인 | **원의 방정식 변환(이동) 스킬 자체가 없음**(circles는 둘레/호/부채꼴/각 관계만 다룸) |
+| test4 | M2-25 | Math | circles | 원의 방정식 평행이동 | 객관식 | 없음 | 가능(2026-09-17 circle_equation_transform 신설) | 있음(생성 시 결정적 계산+checkFigure) | 미확인 | - |
 | test4 | M2-26 | Math | area_volume | 정육면체 결합 표면적 역산(변 길이) | 객관식 | 도형 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 결합입체 표면적 역산 서브타입 확인 필요 |
 | test4 | M2-27 | Math | percentages | percent_change(몇 % 증가) | 객관식 | 없음 | 가능 | 있음 | 미확인 | - |
 
@@ -280,7 +282,7 @@
 | test6 | M1-20 | Math | linear_functions | 방정식에서 y절편 구하기(SPR) | **SPR** | 방정식 | 가능(로직은) / SPR 미지원 | 없음 | 미확인 | SPR 답안모델 없음 |
 | test6 | M1-21 | Math | nonlinear_functions | 그래프에서 계수 bc 값 추출(SPR) | **SPR** | 좌표평면(그래프) | 상위스킬만 있고 하위패턴 불가(SPR도 미지원) | 없음 | 미확인 | 그래프→계수 추출 서브타입 없음 + SPR 답안모델 없음 |
 | test6 | M1-22 | Math | percentages | 연속 퍼센트 증가(14%→4%) 배수 역산 | 객관식 | 없음 | 가능(compound_change) | 있음(수치 재계산 검증) | 미확인 | 2026-09-17 `compound_change` kind 추가로 해결 — 두 단계 변화율을 곱해서 합성(복리식)하며, 단순 덧셈(14-4=10) 등 4가지 실제 오류 경로에서 오답 생성 |
-| test6 | M1-23 | Math | 없음 | 원의 이동+반지름 배율 변환 | 객관식 | 좌표평면 | 완전 불가 | 없음 | 미확인 | **원의 방정식 평행이동/배율 변환 스킬 자체가 없음**(circles는 둘레/호/부채꼴/각 관계만 다룸) |
+| test6 | M1-23 | Math | circles | 원의 이동+반지름 배율 변환 | 객관식 | 좌표평면 | 부분 가능(2026-09-17 circle_equation_transform은 이동만 지원, 반지름 배율 변환은 별도) | 있음 | 미확인 | 반지름 배율(스케일) 변환 서브타입은 아직 없음 |
 | test6 | M1-24 | Math | right_triangles_trigonometry | 특수각(30°) tan 비율 계산 | 객관식 | 도형 | 가능 | 있음 | 미확인 | - |
 | test6 | M1-25 | Math | nonlinear_functions | 퍼센트 증가율→지수함수 식 구성 | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 퍼센트 증가율→지수식 구성 서브타입 없음 |
 | test6 | M1-26 | Math | linear_functions | 합성함수(g=f/(x+3))에서 f의 y절편 역산 | 객관식 | 표 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 합성함수 역산형 서브타입 없음 |
@@ -449,7 +451,7 @@
 | test7 | M2-11 | Math | linear_two_variables | 연립방정식 계수 차이 해석(문맥) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | "계수 차이 해석형" 서브타입 없음 |
 | test7 | M2-12 | Math | two_variable_data | 산점도 최적선 기울기 추정 | 객관식 | 산점도 | 가능 | 있음(2026-09-17, `scatter_equation`/`scatter_predict`/`scatter_slope_context`/`scatter_count_above` kind) | 확인(2026-09-17) | Step 4 항목 5 완료(2026-09-17) — `two_variable_data`에 `scatter_equation`/`scatter_predict`/`scatter_slope_context`/`scatter_count_above` 서브타입 신설, 기존 좌표평면 렌더러의 `scatter` figure kind 재사용 |
 | test7 | M2-13 | Math | circles | 원의 넓이 공식(A=bπ)에서 b 구하기(SPR) | **SPR** | 없음 | 가능(로직은) / SPR 미지원 | 없음 | 미확인 | SPR 답안모델 없음 |
-| test7 | M2-14 | Math | lines_angles_triangles | 평행선(PQ∥XY) 이용 각도 계산(SPR) | **SPR** | 도형 | 상위스킬만 있고 하위패턴 불가(SPR도 미지원) | 없음 | 미확인 | 평행선-닮은삼각형 각도 서브타입 없음 + SPR 답안모델 없음 |
+| test7 | M2-14 | Math | lines_angles_triangles | 평행선(PQ∥XY) 이용 각도 계산(SPR) | **SPR** | 도형 | 상위스킬만 있고 하위패턴 불가(SPR도 미지원) | 없음 | 미확인 | 2026-09-17 similar_triangles는 변 길이만 다루고 평행선-닮음 각도 서브타입은 아직 없음 + lines_angles_triangles는 SPR 미지원 |
 | test7 | M2-15 | Math | nonlinear_functions | 배가주기 지수함수 식 구성 | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | "배가주기 지수식 구성" 서브타입 없음 |
 | test7 | M2-16 | Math | linear_inequalities | point_in_solution(연립부등식, 표에서 항 검증) | 객관식 | 표 | 가능 | 있음(2026-09-17, `table_verification` kind) | 확인(2026-09-17) | Step 4 항목 4 완료 |
 | test7 | M2-17 | Math | equivalent_expressions | 지수법칙(거듭제곱 나눗셈) 간소화 | 객관식 | 없음 | 가능 | 있음 | 미확인 | - |
@@ -742,11 +744,11 @@
 | test9 | M2-12 | Math | linear_functions | 맥락 해석형(배수 감소율) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | "맥락 해석형" 서브타입 없음(누적 재현) |
 | test9 | M2-13 | Math | linear_functions | h(0)=45에서 b값(SPR) | **SPR** | 없음 | 가능 | 있음 | 미확인 | - |
 | test9 | M2-14 | Math | nonlinear_equations_systems | root(이차방정식 해, SPR) | **SPR** | 방정식 | 가능(로직은) / SPR 미지원 | 없음 | 미확인 | SPR 답안모델 없음 |
-| test9 | M2-15 | Math | right_triangles_trigonometry | 닮은 직각삼각형 대응각 삼각비 | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 닮은삼각형 대응각 삼각비 서브타입 없음(누적 재현) |
+| test9 | M2-15 | Math | right_triangles_trigonometry | 닮은 직각삼각형 대응각 삼각비 | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 닮은삼각형 대응각 삼각비 서브타입 없음(누적 재현, right_triangles_trigonometry 쪽 서브타입 — lines_angles_triangles의 2026-09-17 similar_triangles는 변 길이만 다뤄 이 문항은 별도) |
 | test9 | M2-16 | Math | percentages | percent_change(인구증가율 k값) | 객관식 | 없음 | 가능 | 있음 | 미확인 | - |
 | test9 | M2-17 | Math | one_variable_data | 점도표 표준편차 비교 | 객관식 | 점도표 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 표준편차 비교형 서브타입 없음(mean/median/range만 존재) |
 | test9 | M2-18 | Math | nonlinear_functions | 맥락 해석형(이차함수 계수 문맥, 동물 체중) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | "맥락 해석형" 서브타입 없음(누적 재현) |
-| test9 | M2-19 | Math | lines_angles_triangles | 닮은삼각형 대응각(2XY=RS 조건) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 닮은삼각형 대응각 서브타입 없음(누적 재현) |
+| test9 | M2-19 | Math | lines_angles_triangles | 닮은삼각형 대응각(2XY=RS 조건) | 객관식 | 없음 | 부분 가능(2026-09-17 similar_triangles 신설, 단 대응각이 아닌 대응변 길이형) | 있음 | 미확인 | similar_triangles는 대응변 길이만 다룸 — 이 문항처럼 배율 조건에서 대응각을 묻는 서브타입은 아직 없음 |
 | test9 | M2-20 | Math | nonlinear_functions | 지수함수 배가시간(SPR) | **SPR** | 없음 | 상위스킬만 있고 하위패턴 불가(SPR도 미지원) | 없음 | 미확인 | 배가시간 해석형 서브타입 없음(누적 재현) + SPR 답안모델 없음 |
 | test9 | M2-21 | Math | nonlinear_functions | 지수함수 다중조건 역산(a+b, SPR) | **SPR** | 없음 | 상위스킬만 있고 하위패턴 불가(SPR도 미지원) | 없음 | 미확인 | 다중조건 역산형 서브타입 없음(누적 재현) + SPR 답안모델 없음 |
 | test9 | M2-22 | Math | linear_inequalities | point_in_solution(표에서 부등식 항 검증) | 객관식 | 표 | 가능 | 있음 | 미확인 | - |
@@ -864,7 +866,7 @@
 | test10 | M1-20 | Math | linear_two_variables | 연립방정식 x−y 값(SPR) | **SPR** | 방정식 | 가능(로직은) / SPR 미지원 | 없음 | 미확인 | SPR 답안모델 없음 |
 | test10 | M1-21 | Math | right_triangles_trigonometry | 피타고라스(빗변=3√d 형태, d 구하기, SPR) | **SPR** | 도형 | 가능(로직은) / SPR 미지원 | 없음 | 미확인 | SPR 답안모델 없음 |
 | test10 | M1-22 | Math | ratios_rates | 축척 모형의 넓이 배율(제곱배) 계산 | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 면적 축척(제곱배) 서브타입 없음 |
-| test10 | M1-23 | Math | 없음 | 원이 y축과 정확히 한 점에서 만나는 조건 판별 | 객관식 | 없음 | 완전 불가 | 없음 | 미확인 | **원의 방정식-좌표축 접점 조건 스킬 자체가 없음**(circles는 둘레/호/부채꼴/각 관계만 다룸) |
+| test10 | M1-23 | Math | 없음 | 원이 y축과 정확히 한 점에서 만나는 조건 판별 | 객관식 | 없음 | 완전 불가 | 없음 | 미확인 | **원의 방정식-좌표축 접점(판별식) 조건 스킬 자체가 없음** — 2026-09-17 circle_equation_transform은 이동/중심·반지름/방정식 매칭만 다루고 접점 조건 판별은 다루지 않음 |
 | test10 | M1-24 | Math | lines_angles_triangles | 합동 판정에 충분한 추가 정보 선택 | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 합동조건 판정형 서브타입 없음 |
 | test10 | M1-25 | Math | percentages | percent_increase 역산(1,800% 증가) | 객관식 | 없음 | 가능 | 있음 | 미확인 | - |
 | test10 | M1-26 | Math | linear_functions | 문장제→식 구성(2시간 기본요금+시간당 추가요금) | 객관식 | 없음 | 가능 | 있음 | 미확인 | - |
@@ -1033,7 +1035,7 @@
 | test11 | M2-11 | Math | nonlinear_functions | 지수함수 모델 선택(토너먼트 탈락자 수) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 지수함수 모델 선택형 서브타입 없음(누적 재현) |
 | test11 | M2-12 | Math | linear_functions | 평행선의 방정식(주어진 점 통과) | 객관식 | 없음 | 가능 | 있음 | 미확인 | - |
 | test11 | M2-13 | Math | right_triangles_trigonometry | 45-45-90 특수각(이등변직각삼각형, SPR) | **SPR** | 도형 | 가능(로직은) / SPR 미지원 | 없음 | 미확인 | SPR 답안모델 없음 |
-| test11 | M2-14 | Math | circles | 원의 방정식에서 반지름 구하기(SPR) | **SPR** | 없음 | 가능(로직은) / SPR 미지원 | 없음 | 미확인 | SPR 답안모델 없음 |
+| test11 | M2-14 | Math | circles | 원의 방정식에서 반지름 구하기(SPR) | **SPR** | 없음 | 가능(2026-09-17 circle_equation_transform의 center_radius:radius 변형으로 지원, SPR은 숫자 정답이라 자동 호환) | 있음 | 미확인 | - |
 | test11 | M2-15 | Math | nonlinear_functions | 맥락 해석형(그래프상 점의 의미, 끓는점) | 객관식 | 좌표평면(그래프) | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | "맥락 해석형" 서브타입 없음(누적 재현) |
 | test11 | M2-16 | Math | nonlinear_equations_systems | x절편으로 다항식 인수 판별 | 객관식 | 없음 | 가능 | 있음 | 미확인 | - |
 | test11 | M2-17 | Math | linear_functions | 표에서 일차함수 b값 구하기 | 객관식 | 표 | 가능 | 있음 | 미확인 | - |
@@ -1042,7 +1044,7 @@
 | test11 | M2-20 | Math | equivalent_expressions | 복합 지수/거듭제곱근 방정식 미지수 역산(SPR) | **SPR** | 방정식 | 상위스킬만 있고 하위패턴 불가(SPR도 미지원) | 없음 | 미확인 | 복합 지수방정식 미지수 역산 서브타입 없음 + SPR 답안모델 없음 |
 | test11 | M2-21 | Math | percentages | 연쇄 퍼센트 관계 역산(SPR) | **SPR** | 없음 | 상위스킬만 있고 하위패턴 불가(SPR도 미지원) | 없음 | 미확인 | 연쇄 퍼센트 관계 서브타입 없음 + SPR 답안모델 없음 |
 | test11 | M2-22 | Math | nonlinear_functions | 동치형 중 꼭짓점형 식별(최댓값 표현) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 동치형 중 꼭짓점형 식별 서브타입 없음 |
-| test11 | M2-23 | Math | lines_angles_triangles | 교차선 닮은삼각형 변 길이(YZ) | 객관식 | 도형 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 닮은삼각형(교차선) 변 길이 서브타입 없음(누적 재현) |
+| test11 | M2-23 | Math | lines_angles_triangles | 교차선 닮은삼각형 변 길이(YZ) | 객관식 | 도형 | 부분 가능(2026-09-17 similar_triangles 신설, 단 두 삼각형이 나란히 배치된 형태만 지원) | 있음 | 미확인 | similar_triangles는 AA/공유각 배치를 나란한 두 삼각형으로만 그림 — 교차선(겹친 삼각형) 배치 서브타입은 아직 없음 |
 | test11 | M2-24 | Math | nonlinear_equations_systems | 고차 인수분해 결합형 해 개수 판별 | 객관식 | 방정식 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 고차 인수분해 결합형 해개수 판별 서브타입 없음 |
 | test11 | M2-25 | Math | one_variable_data | 히스토그램+신규값 추가 통계량 비교(중앙값/평균) | 객관식 | 히스토그램 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 히스토그램+신규값 추가 통계량 비교 서브타입 없음 |
 | test11 | M2-26 | Math | right_triangles_trigonometry | 고도(altitude) 분할 직각삼각형 삼각비(tan Z) | 객관식 | 도형 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 고도분할 직각삼각형 삼각비 서브타입 없음 |

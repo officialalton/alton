@@ -4,7 +4,7 @@
 import type { TriangleSpec } from "@/lib/problem-figures/templates/triangle";
 import type { DistractorRationale, DistractorKind } from "../review";
 
-export type LinesAnglesQuestionKind = "triangle_angle_sum" | "exterior_angle" | "isosceles_base_angle";
+export type LinesAnglesQuestionKind = "triangle_angle_sum" | "exterior_angle" | "isosceles_base_angle" | "similar_triangles";
 export type LinesAnglesDifficulty = "easy" | "medium" | "hard";
 
 export type LinesAnglesModel = {
@@ -14,6 +14,14 @@ export type LinesAnglesModel = {
   angleA?: number;
   angleB?: number;
   apexAngle?: number;
+  // similar_triangles — 삼각형 ABC ~ 삼각형 DEF(A↔D, B↔E, C↔F). AB·BC·CA는 ABC의 세 변,
+  // DE는 DEF에서 주어지는 한 변(배율 산출용), 배율은 scaleNum/scaleDenom(=k). 구하는 값은 EF.
+  sideAB?: number;
+  sideBC?: number;
+  sideCA?: number;
+  sideDE?: number;
+  scaleNum?: number;
+  scaleDenom?: number;
   correctAnswer: string;
   distractors: { value: string; kind: DistractorKind; reason: string }[];
 };
@@ -27,8 +35,8 @@ function fmt(n: number): string {
 
 const KINDS_BY_DIFFICULTY: Record<LinesAnglesDifficulty, LinesAnglesQuestionKind[]> = {
   easy: ["triangle_angle_sum"],
-  medium: ["triangle_angle_sum", "exterior_angle"],
-  hard: ["exterior_angle", "isosceles_base_angle"],
+  medium: ["triangle_angle_sum", "exterior_angle", "similar_triangles"],
+  hard: ["exterior_angle", "isosceles_base_angle", "similar_triangles"],
 };
 
 function pickUnique(
@@ -84,17 +92,53 @@ export function generateLinesAnglesModel(params: {
       return { skillCode: "lines_angles_triangles", difficulty: params.difficulty, questionKind, angleA, angleB, correctAnswer: fmt(exterior), distractors };
     }
 
-    // isosceles_base_angle
-    const apexAngle = randInt(10, 34) * 4; // 4의 배수 → (180-apex)는 항상 짝수 → 밑각은 항상 정수.
-    const baseAngle = (180 - apexAngle) / 2;
-    const cands: { value: string; kind: DistractorKind; reason: string }[] = [
-      { value: fmt(180 - apexAngle), kind: "formula_misuse", reason: "두 밑각으로 나누지 않고(÷2를 잊고) 나머지 전체를 답으로 썼다." },
-      { value: fmt(apexAngle), kind: "condition_ignored", reason: "이등변삼각형에서 밑각이 꼭지각과 같다고 착각했다." },
-      { value: fmt((180 + apexAngle) / 2), kind: "sign_error", reason: "180에서 꼭지각을 빼지 않고 오히려 더한 뒤 2로 나눴다." },
-    ];
-    const distractors = pickUnique(cands, fmt(baseAngle));
-    if (distractors.length < 3 && attempt < 29) continue;
-    return { skillCode: "lines_angles_triangles", difficulty: params.difficulty, questionKind, apexAngle, correctAnswer: fmt(baseAngle), distractors };
+    if (questionKind === "isosceles_base_angle") {
+      const apexAngle = randInt(10, 34) * 4; // 4의 배수 → (180-apex)는 항상 짝수 → 밑각은 항상 정수.
+      const baseAngle = (180 - apexAngle) / 2;
+      const cands: { value: string; kind: DistractorKind; reason: string }[] = [
+        { value: fmt(180 - apexAngle), kind: "formula_misuse", reason: "두 밑각으로 나누지 않고(÷2를 잊고) 나머지 전체를 답으로 썼다." },
+        { value: fmt(apexAngle), kind: "condition_ignored", reason: "이등변삼각형에서 밑각이 꼭지각과 같다고 착각했다." },
+        { value: fmt((180 + apexAngle) / 2), kind: "sign_error", reason: "180에서 꼭지각을 빼지 않고 오히려 더한 뒤 2로 나눴다." },
+      ];
+      const distractors = pickUnique(cands, fmt(baseAngle));
+      if (distractors.length < 3 && attempt < 29) continue;
+      return { skillCode: "lines_angles_triangles", difficulty: params.difficulty, questionKind, apexAngle, correctAnswer: fmt(baseAngle), distractors };
+    }
+
+    // similar_triangles — 삼각형 ABC ~ 삼각형 DEF(A↔D, B↔E, C↔F). AB·BC·CA는 삼각형 ABC의 세 변,
+    // DE는 삼각형 DEF에서 주어지는 한 변(배율 산출용). 구하는 값: EF = BC × k, k = DE/AB = m/n.
+    {
+      const isHard = params.difficulty === "hard";
+      const scaleDenom = isHard ? randInt(2, 3) : 1;
+      let scaleNum = randInt(2, 5);
+      while (scaleNum === scaleDenom) scaleNum = randInt(2, 5);
+      const sideAB = scaleDenom * randInt(2, 6);
+      let sideBC = scaleDenom * randInt(2, 6);
+      while (sideBC === sideAB) sideBC = scaleDenom * randInt(2, 6);
+      let sideCA = scaleDenom * randInt(2, 6);
+      while (sideCA === sideAB || sideCA === sideBC) sideCA = scaleDenom * randInt(2, 6);
+      const sideDE = (sideAB * scaleNum) / scaleDenom;
+      const correct = (sideBC * scaleNum) / scaleDenom;
+      if (!Number.isInteger(sideDE) || !Number.isInteger(correct)) continue;
+
+      const wrongPairing = (sideCA * scaleNum) / scaleDenom; // BC 대신 CA에 배율을 곱함(대응 안 되는 변 매칭)
+      const invertedScale = (sideBC * scaleDenom) / scaleNum; // k 대신 1/k
+      const additive = sideBC + (sideDE - sideAB); // 곱셈 대신 증가분을 그대로 더함
+      const noScale = sideBC; // 합동으로 착각(닮음비 무시)
+      const cands: { value: string; kind: DistractorKind; reason: string }[] = [
+        { value: fmt(wrongPairing), kind: "geometry_misapplied", reason: "대응변을 잘못 짝지어 BC 대신 CA에 배율을 곱했다(대응하지 않는 변끼리 매칭)." },
+        { value: fmt(invertedScale), kind: "formula_misuse", reason: "배율 k=DE÷AB 대신 그 역수 AB÷DE를 곱해 배율을 뒤집었다." },
+        { value: fmt(additive), kind: "formula_misuse", reason: "배율을 곱하지 않고 대응변의 증가분(DE−AB)을 그대로 더했다." },
+        { value: fmt(noScale), kind: "condition_ignored", reason: "두 삼각형이 서로 다른 크기(닮음)임을 무시하고 합동으로 착각해 배율을 적용하지 않았다." },
+      ];
+      const distractors = pickUnique(cands, fmt(correct));
+      if (distractors.length < 3 && attempt < 29) continue;
+      return {
+        skillCode: "lines_angles_triangles", difficulty: params.difficulty, questionKind,
+        sideAB, sideBC, sideCA, sideDE, scaleNum, scaleDenom,
+        correctAnswer: fmt(correct), distractors,
+      };
+    }
   }
   throw new Error("lines_angles_triangles: 오답 후보 생성에 실패했습니다.");
 }
@@ -115,6 +159,14 @@ export function validateLinesAnglesModel(model: LinesAnglesModel): { ok: true } 
     if (model.apexAngle === undefined) return { ok: false, reason: "꼭지각 값이 없습니다." };
     if (model.apexAngle <= 0 || model.apexAngle >= 180) return { ok: false, reason: "꼭지각이 유효하지 않습니다." };
     if (model.correctAnswer !== fmt((180 - model.apexAngle) / 2)) return { ok: false, reason: "밑각 값이 일치하지 않습니다." };
+  } else if (model.questionKind === "similar_triangles") {
+    const { sideAB, sideBC, sideCA, sideDE, scaleNum, scaleDenom } = model;
+    if (sideAB === undefined || sideBC === undefined || sideCA === undefined || sideDE === undefined || scaleNum === undefined || scaleDenom === undefined) {
+      return { ok: false, reason: "닮은삼각형 계산에 필요한 변·배율 값이 없습니다." };
+    }
+    if (sideAB <= 0 || sideBC <= 0 || sideCA <= 0 || scaleDenom <= 0) return { ok: false, reason: "변·배율 값이 유효하지 않습니다." };
+    if (sideDE !== (sideAB * scaleNum) / scaleDenom) return { ok: false, reason: "DE 값이 배율(AB×k)과 일치하지 않습니다." };
+    if (model.correctAnswer !== fmt((sideBC * scaleNum) / scaleDenom)) return { ok: false, reason: "EF 정답이 배율(BC×k)과 일치하지 않습니다." };
   }
   return { ok: true };
 }
@@ -134,6 +186,7 @@ const QUESTION_TEXT: Record<LinesAnglesQuestionKind, string> = {
   triangle_angle_sum: "What is the measure of angle C, in degrees, in the triangle shown?",
   exterior_angle: "What is the measure of the exterior angle at the third vertex, in degrees?",
   isosceles_base_angle: "What is the measure of each base angle, in degrees, of the isosceles triangle described?",
+  similar_triangles: "What is the length of EF?",
 };
 
 export function renderLinesAnglesProblem(model: LinesAnglesModel): CompiledMathProblem {
@@ -173,13 +226,41 @@ export function renderLinesAnglesProblem(model: LinesAnglesModel): CompiledMathP
     explanation = `삼각형의 한 외각은 그와 이웃하지 않는 두 내각(원격 내각)의 합과 같으므로 외각 = ${angleA}° + ${angleB}° = ${fmt(exterior)}°이다.`;
     explanationEn = `The exterior angle of a triangle equals the sum of the two remote (non-adjacent) interior angles, so the exterior angle = ${angleA}° + ${angleB}° = ${fmt(exterior)}°.`;
     figure = null;
-  } else {
+  } else if (model.questionKind === "isosceles_base_angle") {
     const { apexAngle } = model as { apexAngle: number };
     const baseAngle = (180 - apexAngle) / 2;
     passage = `Isosceles triangle ABC has apex angle A measuring ${apexAngle}°, and sides AB and AC are congruent, as shown in the figure.`;
     explanation = `이등변삼각형의 두 밑각은 서로 같으므로 (180° − ${apexAngle}°) ÷ 2 = ${fmt(baseAngle)}°이다.`;
     explanationEn = `The two base angles of an isosceles triangle are equal, so (180° − ${apexAngle}°) ÷ 2 = ${fmt(baseAngle)}°.`;
     figure = { type: "triangle", vertices: ["A", "B", "C"], kind: "isosceles", angles: [{ at: "A", label: `${apexAngle}°` }], sides: [{ between: ["A", "B"], tick: 1 }, { between: ["A", "C"], tick: 1 }] };
+  } else {
+    const { sideAB, sideBC, sideCA, sideDE, scaleNum, scaleDenom } = model as {
+      sideAB: number; sideBC: number; sideCA: number; sideDE: number; scaleNum: number; scaleDenom: number;
+    };
+    const ef = (sideBC * scaleNum) / scaleDenom;
+    const kDisplay = scaleDenom === 1 ? fmt(scaleNum) : `${fmt(scaleNum)}/${fmt(scaleDenom)}`;
+    passage = `Triangle ABC is similar to triangle DEF, with vertex A corresponding to vertex D, B corresponding to E, and C corresponding to F. Corresponding angles are marked congruent in the figure. In triangle ABC, AB = ${fmt(sideAB)}, BC = ${fmt(sideBC)}, and CA = ${fmt(sideCA)}. In triangle DEF, DE = ${fmt(sideDE)}, as shown in the figure.`;
+    explanation = `두 삼각형이 닮음이므로 대응변의 길이 비가 일정하다. AB와 DE는 서로 대응하므로 배율 k = DE ÷ AB = ${fmt(sideDE)} ÷ ${fmt(sideAB)} = ${kDisplay}이다. BC와 EF도 서로 대응하므로 EF = BC × k = ${fmt(sideBC)} × ${kDisplay} = ${fmt(ef)}이다.`;
+    explanationEn = `Since the two triangles are similar, corresponding sides have the same ratio. AB corresponds to DE, so the scale factor k = DE ÷ AB = ${fmt(sideDE)} ÷ ${fmt(sideAB)} = ${kDisplay}. BC corresponds to EF, so EF = BC × k = ${fmt(sideBC)} × ${kDisplay} = ${fmt(ef)}.`;
+    figure = {
+      type: "triangle",
+      vertices: ["A", "B", "C"],
+      kind: "scalene",
+      notToScale: true,
+      angles: [{ at: "A", tick: 1 }, { at: "B", tick: 2 }],
+      sides: [
+        { between: ["A", "B"], label: fmt(sideAB) },
+        { between: ["B", "C"], label: fmt(sideBC) },
+        { between: ["C", "A"], label: fmt(sideCA) },
+      ],
+      second: {
+        vertices: ["D", "E", "F"],
+        kind: "scalene",
+        scale: 0.8,
+        angles: [{ at: "D", tick: 1 }, { at: "E", tick: 2 }],
+        sides: [{ between: ["D", "E"], label: fmt(sideDE) }],
+      },
+    } as TriangleSpec;
   }
 
   return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure, distractorRationales };
