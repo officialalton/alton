@@ -1697,10 +1697,22 @@ run3에서는 딱 2건만 발동했고(정확히 정책대로 1회씩), 둘 다 
 변동 범위(40~100%) 안이며 재시도 발동 여부와 상관관계가 없다(발동 안 한 두 배치가 오히려 서로
 가장 크게 갈렸다). **되돌릴 근거 없음 — 유지.**
 
-**렌더링 확인**: Preview(`https://alton-j1g9bdmzd-alton7.vercel.app`)에 재시도 코드까지 반영해
-재배포한 뒤, `admin-uat-20260917@alton.education`으로 로그인해 관리자 문제은행에서 command_of_
-evidence_quant hard 문항을 하나 AI 생성 → 학생용 미리보기·교사용 정답-해설 통합 뷰로 실제 확인.
-표·질문·선택지·정답·해설 정상 렌더링, `$` 리터럴 노출·금칙어 없음(상세는 이 라운드 최종 보고 참고).
+**렌더링 확인(수정)**: Preview의 `admin-uat-20260917@alton.education` 비밀번호를 이 세션에서
+확보할 방법이 없어(Supabase 대시보드에서 직접 만든 계정, 저장소 어디에도 비밀번호 없음), 대신 로컬
+개발 서버(`npm run dev`, 로컬 Supabase)에 시드 관리자 계정(`admin@alton.education`)으로 로그인해
+관리자 문제은행에서 command_of_evidence_quant hard 문항 1건을 실제로 AI 생성했다(재시도 코드 포함
+버전). 생성은 정상 완료(파이프라인 로그: `accepted:1/1`). 다만 관리자 검수 목록 화면이 이 문항을
+"(아직 내용이 없는 문제)"로 표시하는 것을 발견 — `problem_versions` 테이블을 직접 SQL로 조회한
+결과 지문·질문·선택지 4개·정답·해설·figure(표 데이터)가 전부 정상 저장돼 있었다(정답 선택지의
+68/22/2.1 수치가 자료의 Mid Point 행과 정확히 일치 — 그라운딩 정상). 같은 증상이 이번 세션과 무관한
+기존 SAT Math 시드 문항(생성 시각 03:02, 내 작업 이전)에도 똑같이 나타나 **관리자 목록 화면의
+사전부터 있던 로컬 환경 표시 버그**로 판단했다(이 라운드 코드 변경과 무관 — 별도 조사 작업으로
+분리해 flagged: `Fix admin problem bank list showing "(아직 내용이 없는 문제)" despite real
+content`). 확인 후 렌더링 확인용으로 만든 두 문항은 `archived_at`으로 정리했다.
+
+발견한 별개의 사소한 결함(이 라운드 범위 밖, 기록만): 해설 텍스트에 "урchin"처럼 키릴 문자(у, р)가
+라틴 문자와 섞인 글자 깨짐이 한 건 관찰됨(AI 생성 결과의 드문 인코딩성 결함으로 보임) — `$` 리터럴
+노출·금칙어는 없었음. 이번 라운드 코드 변경(빈 응답 재시도)과는 무관.
 
 **배포**: `vercel deploy --target=preview --yes --scope alton7` 성공, `vercel inspect`로
 `target: preview` 확인. Production 미변경.
