@@ -274,9 +274,10 @@ export async function linkUnitPrepToLesson(
 // 회차를 하나씩 열어보지 않고도 어디까지 준비했는지 알 수 있어야 한다.
 export type UnitPrepSummary = {
   overlayUnitId: string;
-  hasGoal: boolean;
-  itemCount: number;
-  linkedLessonCount: number;
+  /** 이 회차의 준비된 문제 수(curriculum_unit_prep_items, content_type='problem'). */
+  problemCount: number;
+  /** 이 회차의 교재 수(curriculum_overlay_unit_materials, 문서 단위). */
+  materialCount: number;
   /** 이미 시작·종료돼 내용이 고정된 수업이 있는지. */
   hasFrozenLesson: boolean;
   /** hasFrozenLesson이 true일 때 그 수업 id — "수업 준비"를 눌렀을 때 준비
@@ -284,6 +285,10 @@ export type UnitPrepSummary = {
    * (2026-09-17 UAT 지적: 취소된 예약을 "고정된 수업"으로 잘못 셌던 버그도
    * 여기서 함께 고쳤다 — 취소는 실사용이 아니다). */
   frozenSessionId: string | null;
+  /** 2026-09-18(제품 오너 지시) — "수업 1개 연결됨" 같은 개수 배지 대신, 가장
+   * 가까운 예정(scheduled) 또는 진행 중(live) 수업의 실제 시작 시각. 없으면
+   * null(화면은 "다음 예약 없음"으로 보여준다). */
+  nearestSessionStartsAt: string | null;
 };
 
 export async function loadUnitPrepSummaries(
@@ -292,27 +297,38 @@ export async function loadUnitPrepSummaries(
   if (overlayUnitIds.length === 0) return {};
   const { supabase } = await requireTeacherOrAdmin();
 
-  const { data: preps } = await supabase
-    .from("curriculum_unit_preps")
-    .select("id, overlay_unit_id, goal")
-    .in("overlay_unit_id", overlayUnitIds);
+  const [{ data: preps }, { data: materialRows }] = await Promise.all([
+    supabase.from("curriculum_unit_preps").select("id, overlay_unit_id").in("overlay_unit_id", overlayUnitIds),
+    supabase
+      .from("curriculum_overlay_unit_materials")
+      .select("overlay_unit_id")
+      .in("overlay_unit_id", overlayUnitIds),
+  ]);
+
+  const materialCountByUnit = new Map<string, number>();
+  for (const row of materialRows ?? []) {
+    const key = row.overlay_unit_id as string;
+    materialCountByUnit.set(key, (materialCountByUnit.get(key) ?? 0) + 1);
+  }
 
   const prepIds = (preps ?? []).map((p) => p.id as string);
-  const itemCountByPrep = new Map<string, number>();
+  const problemCountByPrep = new Map<string, number>();
   if (prepIds.length) {
     const { data: items } = await supabase
       .from("curriculum_unit_prep_items")
       .select("prep_id")
+      .eq("content_type", "problem")
       .in("prep_id", prepIds);
     for (const item of items ?? []) {
       const key = item.prep_id as string;
-      itemCountByPrep.set(key, (itemCountByPrep.get(key) ?? 0) + 1);
+      problemCountByPrep.set(key, (problemCountByPrep.get(key) ?? 0) + 1);
     }
   }
 
   const { data: links } = await supabase
     .from("session_curriculum_units")
     .select("overlay_unit_id, session_id")
+    .eq("role", "primary")
     .in("overlay_unit_id", overlayUnitIds);
   const sessionIds = Array.from(new Set((links ?? []).map((l) => l.session_id as string)));
   // 2026-09-17(UAT 지적) — 취소된 예약(final_status가 취소 계열)은 실제로 아무
@@ -320,14 +336,18 @@ export async function loadUnitPrepSummaries(
   // 취소된 예약까지 "진행한 수업 있음"으로 잘못 표시하고, 그 죽은 세션으로
   // 리다이렉트하는 버그로 이어졌다.
   const NOT_FROZEN = new Set(["scheduled", "student_cancelled", "teacher_cancelled", "company_cancelled"]);
-  const frozenSessionById = new Map<string, boolean>();
+  const sessionById = new Map<string, { finalStatus: string; startsAt: string | null }>();
   if (sessionIds.length) {
     const { data: sessions } = await supabase
       .from("sessions")
-      .select("id, final_status")
+      .select("id, final_status, reservation:reservations(starts_at)")
       .in("id", sessionIds);
     for (const s of sessions ?? []) {
-      frozenSessionById.set(s.id as string, !NOT_FROZEN.has(s.final_status as string));
+      const reservation = Array.isArray(s.reservation) ? s.reservation[0] : s.reservation;
+      sessionById.set(s.id as string, {
+        finalStatus: s.final_status as string,
+        startsAt: (reservation as { starts_at?: string } | undefined)?.starts_at ?? null,
+      });
     }
   }
 
@@ -335,17 +355,98 @@ export async function loadUnitPrepSummaries(
   for (const unitId of overlayUnitIds) {
     const prep = (preps ?? []).find((p) => p.overlay_unit_id === unitId);
     const unitLinks = (links ?? []).filter((l) => l.overlay_unit_id === unitId);
-    const frozenLink = unitLinks.find((l) => frozenSessionById.get(l.session_id as string));
+    const frozenLink = unitLinks.find((l) => {
+      const s = sessionById.get(l.session_id as string);
+      return s && !NOT_FROZEN.has(s.finalStatus);
+    });
+    // 2026-09-18 — "가장 가까운 연결 수업의 실제 일시": 아직 시작하지 않았거나(scheduled)
+    // 지금 진행 중인(live) 세션의 예약 시각 중 가장 이른 것. 완료·취소·노쇼는 "다음"이
+    // 아니므로 뺀다.
+    const nearestStartsAt = unitLinks
+      .map((l) => sessionById.get(l.session_id as string))
+      .filter((s): s is { finalStatus: string; startsAt: string | null } => Boolean(s) && (s!.finalStatus === "scheduled" || s!.finalStatus === "live"))
+      .map((s) => s.startsAt)
+      .filter((v): v is string => Boolean(v))
+      .sort()[0] ?? null;
+
     summaries[unitId] = {
       overlayUnitId: unitId,
-      hasGoal: Boolean((prep?.goal as string | null)?.trim()),
-      itemCount: prep ? (itemCountByPrep.get(prep.id as string) ?? 0) : 0,
-      linkedLessonCount: unitLinks.length,
+      problemCount: prep ? (problemCountByPrep.get(prep.id as string) ?? 0) : 0,
+      materialCount: materialCountByUnit.get(unitId) ?? 0,
       hasFrozenLesson: Boolean(frozenLink),
       frozenSessionId: frozenLink ? (frozenLink.session_id as string) : null,
+      nearestSessionStartsAt: nearestStartsAt,
     };
   }
   return summaries;
+}
+
+/**
+ * "문제 20개 업데이트" — 개별 선택 없이, 지금 이 회차의 키워드와 일치하는 공개
+ * 문제 후보(problem_auto_composition_candidates, 확정+공개 버전만) 중 최대
+ * 20개로 회차 준비의 문제 구성을 통째로 다시 만든다.
+ *
+ * 다시 눌러도 항상 "지금 키워드 기준 전체 재구성"이다 — 기존 문제를 남기고
+ * 보충하는 방식이 아니다(2026-09-18 제품 오너 지시: "개별 선택 없이 문제 20개
+ * 업데이트로만 구성"). 이미 세션에 고정된 사본(session_prepared_selection_*)은
+ * 이 함수가 건드리는 curriculum_unit_prep_items와 완전히 분리된 테이블이라
+ * 영향을 받지 않는다.
+ */
+export async function composeUnitPrepProblems(
+  overlayUnitId: string
+): Promise<{ ok: true; composedCount: number; availableCount: number } | { ok: false; error: string }> {
+  const { supabase } = await requireTeacherOrAdmin();
+
+  const { data: keywordRows } = await supabase
+    .from("curriculum_overlay_unit_keywords")
+    .select("keyword_id")
+    .eq("overlay_unit_id", overlayUnitId);
+  const keywordIds = Array.from(new Set((keywordRows ?? []).map((k) => k.keyword_id as string)));
+  if (!keywordIds.length) {
+    return { ok: false, error: "이 회차에 아직 키워드가 없습니다. 키워드를 먼저 선택하세요." };
+  }
+
+  const { data: prep } = await supabase
+    .from("curriculum_unit_preps")
+    .select("id")
+    .eq("overlay_unit_id", overlayUnitId)
+    .maybeSingle();
+  if (!prep) return { ok: false, error: "이 회차의 준비를 찾을 수 없습니다." };
+
+  const { data: candidateRows } = await supabase
+    .from("problem_auto_composition_candidates")
+    .select("problem_id, created_at")
+    .in("keyword_id", keywordIds);
+
+  const byProblem = new Map<string, string>();
+  for (const row of candidateRows ?? []) {
+    const id = row.problem_id as string;
+    if (!byProblem.has(id)) byProblem.set(id, row.created_at as string);
+  }
+  const ordered = Array.from(byProblem.entries()).sort((a, b) => (a[1] < b[1] ? -1 : a[1] > b[1] ? 1 : 0));
+  const availableCount = ordered.length;
+  const picked = ordered.slice(0, 20).map(([problemId]) => problemId);
+
+  const { error: deleteError } = await supabase
+    .from("curriculum_unit_prep_items")
+    .delete()
+    .eq("prep_id", prep.id)
+    .eq("content_type", "problem");
+  if (deleteError) return { ok: false, error: "기존 문제 구성을 정리하지 못했습니다." };
+
+  if (picked.length > 0) {
+    const { error: insertError } = await supabase.from("curriculum_unit_prep_items").insert(
+      picked.map((problemId, index) => ({
+        prep_id: prep.id,
+        content_type: "problem" as const,
+        content_id: problemId,
+        position: index + 1,
+      }))
+    );
+    if (insertError) return { ok: false, error: "문제 구성을 저장하지 못했습니다." };
+  }
+
+  return { ok: true, composedCount: picked.length, availableCount };
 }
 
 // =========================================================================
@@ -373,6 +474,23 @@ export type CatalogMaterial = {
   /** 이미 이 회차 구성에 들어 있는가. */
   picked: boolean;
 };
+
+/** 이 회차의 준비된 문제 수만 가볍게 읽는다(수업 준비 화면 초기 로드용). */
+export async function loadProblemCount(overlayUnitId: string): Promise<number> {
+  const { supabase } = await requireTeacherOrAdmin();
+  const { data: prep } = await supabase
+    .from("curriculum_unit_preps")
+    .select("id")
+    .eq("overlay_unit_id", overlayUnitId)
+    .maybeSingle();
+  if (!prep) return 0;
+  const { count } = await supabase
+    .from("curriculum_unit_prep_items")
+    .select("id", { count: "exact", head: true })
+    .eq("prep_id", prep.id)
+    .eq("content_type", "problem");
+  return count ?? 0;
+}
 
 export type UnitComposition = {
   keywords: UnitKeyword[];
@@ -559,7 +677,12 @@ export async function removeUnitMaterial(
   return { ok: true };
 }
 
-/** 회차 구성에 담을 수 있는 교재 전체(공개된 것). 제목과 대표 키워드를 함께 준다. */
+/**
+ * 회차 구성에 담을 수 있는 교재 목록 — 이 회차에 선택된 키워드를 대표 키워드로
+ * 가진, 공개된 교재만(2026-09-18 제품 오너 지시: "목록은 선택된 키워드와 같은
+ * 과목의 공개 교재만 보여준다"). 키워드가 하나도 없으면 담을 대상이 없으므로
+ * 빈 목록을 준다 — 화면은 "키워드를 먼저 고르라"고 안내한다.
+ */
 export async function loadUnitMaterialCatalog(overlayUnitId: string): Promise<CatalogMaterial[]> {
   const { supabase } = await requireTeacherOrAdmin();
 
@@ -579,6 +702,13 @@ export async function loadUnitMaterialCatalog(overlayUnitId: string): Promise<Ca
     .maybeSingle();
   if (!enrollment?.subject_id) return [];
 
+  const { data: keywordRows } = await supabase
+    .from("curriculum_overlay_unit_keywords")
+    .select("keyword_id")
+    .eq("overlay_unit_id", overlayUnitId);
+  const keywordIds = Array.from(new Set((keywordRows ?? []).map((k) => k.keyword_id as string)));
+  if (!keywordIds.length) return [];
+
   const [{ data: docs }, { data: picked }] = await Promise.all([
     supabase
       .from("curriculum_docs")
@@ -586,6 +716,7 @@ export async function loadUnitMaterialCatalog(overlayUnitId: string): Promise<Ca
       .eq("subject_id", enrollment.subject_id)
       .eq("status", "published")
       .is("archived_at", null)
+      .in("primary_keyword_id", keywordIds)
       .order("title", { ascending: true }),
     supabase
       .from("curriculum_overlay_unit_materials")
@@ -593,11 +724,11 @@ export async function loadUnitMaterialCatalog(overlayUnitId: string): Promise<Ca
       .eq("overlay_unit_id", overlayUnitId),
   ]);
 
-  const keywordIds = Array.from(
+  const docKeywordIds = Array.from(
     new Set((docs ?? []).map((d) => d.primary_keyword_id as string | null).filter(Boolean) as string[])
   );
-  const { data: keywords } = keywordIds.length
-    ? await supabase.from("subject_keywords").select("id, label").in("id", keywordIds)
+  const { data: keywords } = docKeywordIds.length
+    ? await supabase.from("subject_keywords").select("id, label").in("id", docKeywordIds)
     : { data: [] as { id: string; label: string }[] };
   const labelById = new Map((keywords ?? []).map((k) => [k.id as string, k.label as string]));
   const pickedIds = new Set((picked ?? []).map((p) => p.curriculum_doc_id as string));
@@ -673,4 +804,17 @@ export async function addUnitMaterial(
   // 이미 담겨 있는 것은 오류가 아니다.
   if (error && error.code !== "23505") return { ok: false, error: "교재를 담지 못했습니다." };
   return { ok: true };
+}
+
+/** "교재 전체 담기" — 지금 목록(선택된 키워드의 공개 교재)에서 아직 안 담은 것을 한 번에 담는다. */
+export async function addAllUnitMaterials(
+  overlayUnitId: string
+): Promise<{ ok: true; addedCount: number } | { ok: false; error: string }> {
+  const catalog = await loadUnitMaterialCatalog(overlayUnitId);
+  const toAdd = catalog.filter((c) => !c.picked);
+  for (const c of toAdd) {
+    const result = await addUnitMaterial(overlayUnitId, c.curriculumDocId);
+    if (!result.ok) return result;
+  }
+  return { ok: true, addedCount: toAdd.length };
 }

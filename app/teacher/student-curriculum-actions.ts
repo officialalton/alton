@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
+import { createAdminClient } from "@/lib/supabase-admin";
 import {
   loadStudentCurriculum,
   loadEligibleLibrary,
@@ -360,4 +361,81 @@ export async function applyBaseCurriculumUpdate(
   });
   if (error) return { ok: false, error: error.message };
   return { ok: true };
+}
+
+
+// =========================================================================
+// 2026-09-18 — "다음 수업에 추가 학습 회차 넣기"(운영 커리큘럼 회차 카드).
+//
+// insert_additional_study_unit()/preview_additional_study_unit_insert()는
+// service_role 전용으로 만들었다(linkUnitPrepToLesson과 같은 이유 — 두 함수
+// 다 자기 안에서 p_actor_id 기준으로 관리자·담당 교사 여부를 다시 검사하므로,
+// 클라이언트가 넘긴 값을 곧이곧대로 믿는 게 아니다). 여기 앱 레벨 선검사
+// (requireAssignedTeacherOrAdmin)는 읽기 쉬운 오류만 앞당겨 주는 것이고, 실제
+// 방어선은 DB 함수 안의 재검사다 — actor_id는 항상 이 서버 액션이 인증
+// 세션에서 직접 얻은 user.id이지, 클라이언트가 보낸 값이 아니다.
+export type AdditionalStudyUnitPreview = {
+  newUnitTitle: string;
+  /** 예약 시각 순. resultingUnitTitle은 삽입이 확정되면 이 세션이 실제로 받게
+   * 될 회차명이다 — 맨 앞은 새 회차, 그다음부터는 바로 앞 세션이 원래 갖고
+   * 있던 회차로 한 칸씩 밀린다(insert_additional_study_unit의 재연결 순서와
+   * 정확히 같다). */
+  affectedFutureSessions: { sessionId: string; startsAt: string; currentUnitTitle: string; resultingUnitTitle: string }[];
+  unaffectedStartedOrCompletedCount: number;
+};
+
+export async function previewAdditionalStudyUnitInsert(
+  subjectEnrollmentId: string,
+  sourceOverlayUnitId: string
+): Promise<{ ok: true; preview: AdditionalStudyUnitPreview } | { ok: false; error: string }> {
+  let user: { id: string };
+  try {
+    ({ user } = await requireAssignedTeacherOrAdmin(subjectEnrollmentId));
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "이 학생의 커리큘럼을 열 권한이 없습니다." };
+  }
+  const admin = createAdminClient();
+  const { data, error } = await admin.rpc("preview_additional_study_unit_insert", {
+    p_source_overlay_unit_id: sourceOverlayUnitId,
+    p_actor_id: user.id,
+  });
+  if (error) return { ok: false, error: error.message };
+  const raw = data as { newUnitTitle: string; affectedFutureSessions: { sessionId: string; startsAt: string; currentUnitTitle: string }[]; unaffectedStartedOrCompletedCount: number };
+  const affectedFutureSessions = raw.affectedFutureSessions.map((s, i) => ({
+    ...s,
+    resultingUnitTitle: i === 0 ? raw.newUnitTitle : raw.affectedFutureSessions[i - 1].currentUnitTitle,
+  }));
+  return { ok: true, preview: { ...raw, affectedFutureSessions } };
+}
+
+export type AdditionalStudyUnitInsertResult = {
+  newUnitId: string;
+  newUnitTitle: string;
+  reassigned: { sessionId: string; startsAt: string; overlayUnitId: string }[];
+  leftPending: { sessionId: string; startsAt: string }[];
+};
+
+export async function insertAdditionalStudyUnit(
+  subjectEnrollmentId: string,
+  sourceOverlayUnitId: string
+): Promise<{ ok: true; result: AdditionalStudyUnitInsertResult } | { ok: false; error: string }> {
+  let user: { id: string };
+  try {
+    ({ user } = await requireAssignedTeacherOrAdmin(subjectEnrollmentId));
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "이 학생의 커리큘럼을 조정할 권한이 없습니다." };
+  }
+  const admin = createAdminClient();
+  const { data, error } = await admin.rpc("insert_additional_study_unit", {
+    p_source_overlay_unit_id: sourceOverlayUnitId,
+    p_actor_id: user.id,
+  });
+  if (error) return { ok: false, error: error.message };
+  return { ok: true, result: data as AdditionalStudyUnitInsertResult };
+}
+
+/** 추가 학습 회차 삽입 뒤 카드 목록·예정 수업 연결을 새로 읽는다. */
+export async function reloadCurriculumUnits(subjectEnrollmentId: string): Promise<StudentCurriculum> {
+  const { supabase } = await requireAssignedTeacherOrAdmin(subjectEnrollmentId);
+  return loadStudentCurriculum(supabase, subjectEnrollmentId);
 }

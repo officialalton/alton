@@ -52,7 +52,11 @@ export function generateOneVarDataModel(params: {
   const size = SIZE_BY_DIFFICULTY[params.difficulty]; // 항상 홀수 — 중앙값이 목록 값 하나로 딱 떨어지게.
   const range = RANGE_BY_DIFFICULTY[params.difficulty];
 
-  for (let attempt = 0; attempt < 50; attempt++) {
+  // 시도 횟수: "mean"은 정수 평균 조건(대략 1/size 확률)과 오답 3개 유일성 조건을 동시에
+  // 만족해야 하므로 hard(9개, 범위 60)에서는 시도당 성공 확률이 낮아(~10%) 50회로는
+  // 간헐적으로(테스트 전체에서 눈에 띄는 빈도로) 실패할 수 있었다. 500회로 늘려 실패
+  // 확률을 사실상 0으로 낮춘다.
+  for (let attempt = 0; attempt < 500; attempt++) {
     const values: number[] = [];
     for (let i = 0; i < size; i++) values.push(randInt(0, range));
     const sorted = [...values].sort((x, y) => x - y);

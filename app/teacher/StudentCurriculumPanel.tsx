@@ -15,7 +15,11 @@ import {
   setActiveKeywords,
   previewBaseCurriculumUpdate,
   applyBaseCurriculumUpdate,
+  previewAdditionalStudyUnitInsert,
+  insertAdditionalStudyUnit,
+  reloadCurriculumUnits,
   type BaseUpdateDiff,
+  type AdditionalStudyUnitPreview,
 } from "./student-curriculum-actions";
 import type { EligibleLibrary, OverlayUnit, StudentCurriculum } from "./student-curriculum-data";
 
@@ -26,6 +30,15 @@ const STATUS_LABEL: Record<OverlayUnit["status"], string> = {
   reinforcement_needed: "보강 필요",
   skipped: "건너뜀",
 };
+
+function formatSessionTime(startsAt: string | null): string {
+  if (!startsAt) return "다음 예약 없음";
+  const d = new Date(startsAt);
+  if (Number.isNaN(d.getTime())) return "다음 예약 없음";
+  const date = d.toLocaleDateString("ko-KR", { month: "long", day: "numeric" });
+  const time = d.toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit" });
+  return `${date} ${time} 수업`;
+}
 
 // R9(Task 3) — 선생님이 담당 학생의 운영 커리큘럼(오버레이)을 조정하는 화면.
 // 원본 문제 생성은 이 화면에 없다(스펙 §7 "학생별 커리큘럼 조정·보강 단원
@@ -60,6 +73,11 @@ export default function StudentCurriculumPanel({
   const [updateDiff, setUpdateDiff] = useState<BaseUpdateDiff | null>(null);
   const [applyingUpdate, setApplyingUpdate] = useState(false);
 
+  // 2026-09-18 — "다음 수업에 추가 학습 회차 넣기" 확인 패널 상태.
+  const [additionalStudyUnitId, setAdditionalStudyUnitId] = useState<string | null>(null);
+  const [additionalStudyPreview, setAdditionalStudyPreview] = useState<AdditionalStudyUnitPreview | null>(null);
+  const [additionalStudyBusy, setAdditionalStudyBusy] = useState(false);
+
   async function handleOpenUpdateDiff(unitId: string) {
     setError(null);
     setUpdateDiff(null);
@@ -89,6 +107,45 @@ export default function StudentCurriculumPanel({
       setError(e instanceof Error ? e.message : "기준본 업데이트 적용에 실패했습니다.");
     } finally {
       setApplyingUpdate(false);
+    }
+  }
+
+  async function handleOpenAdditionalStudyPreview(unitId: string) {
+    setError(null);
+    setAdditionalStudyPreview(null);
+    setAdditionalStudyUnitId(unitId);
+    try {
+      const result = await previewAdditionalStudyUnitInsert(subjectEnrollmentId, unitId);
+      if (!result.ok) {
+        setError(result.error);
+        setAdditionalStudyUnitId(null);
+        return;
+      }
+      setAdditionalStudyPreview(result.preview);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "미리보기를 불러오지 못했습니다.");
+      setAdditionalStudyUnitId(null);
+    }
+  }
+
+  async function handleConfirmAdditionalStudyUnit(unitId: string) {
+    setAdditionalStudyBusy(true);
+    setError(null);
+    try {
+      const result = await insertAdditionalStudyUnit(subjectEnrollmentId, unitId);
+      if (!result.ok) {
+        setError(result.error);
+        return;
+      }
+      const refreshed = await reloadCurriculumUnits(subjectEnrollmentId);
+      setOverlayId(refreshed.overlayId);
+      setUnits(refreshed.units);
+      setAdditionalStudyUnitId(null);
+      setAdditionalStudyPreview(null);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "추가 학습 회차를 넣지 못했습니다.");
+    } finally {
+      setAdditionalStudyBusy(false);
     }
   }
 
@@ -234,7 +291,10 @@ export default function StudentCurriculumPanel({
       <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2">
         전체 단원 ({sorted.length})
       </div>
-      {sorted.map((u, idx) => (
+      {sorted.map((u, idx) => {
+        const p = prepSummaries[u.id];
+        const canInsertAdditionalStudyUnit = u.status === "in_progress" || u.status === "completed";
+        return (
         <div key={u.id} className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3 mb-2.5">
           <div className="flex items-center justify-between gap-2 mb-1.5">
             <span className="text-[13px] font-bold text-ink">
@@ -248,7 +308,7 @@ export default function StudentCurriculumPanel({
               )}
               {u.needsBaseUpdate && (
                 <span className="ml-1.5 text-[10.5px] font-bold text-amber-700 bg-amber-100 rounded-full px-1.5 py-0.5">
-                  기준본 업데이트 있음
+                  교재·문제 변경 있음
                 </span>
               )}
             </span>
@@ -258,7 +318,7 @@ export default function StudentCurriculumPanel({
                   onClick={() => handleOpenUpdateDiff(u.id)}
                   className="text-[11.5px] font-bold text-amber-700"
                 >
-                  변경 확인
+                  변경 내용 보기
                 </button>
               )}
               <button
@@ -296,51 +356,105 @@ export default function StudentCurriculumPanel({
               </button>
             </div>
           </div>
-          {/* P2/P3 6단계 — 이 회차를 얼마나 준비했는지 목록에서 바로 읽힌다.
-              내부 상태값이 아니라 사람이 읽는 말로만 쓴다. */}
+          {/* 2026-09-18(제품 오너 지시) — 회차 카드는 회차명·진행 상태·키워드·교재
+              수·문제 수·가장 가까운 연결 수업의 실제 일시만 보여준다. "목표
+              미작성", "수업 N개 연결됨" 같은 배지는 없앤다. */}
           <div className="flex flex-wrap items-center gap-1.5 mb-2">
-            {(() => {
-              const p = prepSummaries[u.id];
-              if (!p) return null;
-              const chips: { label: string; tone: "ready" | "muted" | "locked" }[] = [];
-              chips.push(
-                p.itemCount > 0
-                  ? { label: `자료 ${p.itemCount}개 준비됨`, tone: "ready" }
-                  : { label: "준비한 자료 없음", tone: "muted" }
-              );
-              if (!p.hasGoal) chips.push({ label: "목표 미작성", tone: "muted" });
-              if (p.linkedLessonCount > 0)
-                chips.push({ label: `수업 ${p.linkedLessonCount}개에 연결됨`, tone: "ready" });
-              if (p.hasFrozenLesson) chips.push({ label: "진행한 수업 있음", tone: "locked" });
-              return chips.map((c) => (
+            {p && (
+              <>
+                <span className="text-[10.5px] font-bold rounded-full px-2 py-0.5 bg-grey-100 text-grey-500">
+                  교재 {p.materialCount}개
+                </span>
+                <span className="text-[10.5px] font-bold rounded-full px-2 py-0.5 bg-grey-100 text-grey-500">
+                  문제 {p.problemCount}개
+                </span>
                 <span
-                  key={c.label}
                   className={
                     "text-[10.5px] font-bold rounded-full px-2 py-0.5 " +
-                    (c.tone === "ready"
-                      ? "bg-green/10 text-green"
-                      : c.tone === "locked"
-                        ? "bg-ink text-white"
-                        : "bg-grey-100 text-grey-500")
+                    (p.nearestSessionStartsAt ? "bg-green/10 text-green" : "bg-grey-100 text-grey-500")
                   }
                 >
-                  {c.label}
+                  {formatSessionTime(p.nearestSessionStartsAt)}
                 </span>
-              ));
-            })()}
+                {p.hasFrozenLesson && (
+                  <span className="text-[10.5px] font-bold rounded-full px-2 py-0.5 bg-ink text-white">
+                    진행한 수업 있음
+                  </span>
+                )}
+              </>
+            )}
           </div>
 
-          <select
-            value={u.status}
-            onChange={(e) => handleStatus(u.id, e.target.value as OverlayUnit["status"])}
-            className="text-[12px] font-semibold px-2.5 py-1 border-[1.5px] border-grey-200 rounded-lg"
-          >
-            {Object.entries(STATUS_LABEL).map(([value, label]) => (
-              <option key={value} value={value}>
-                {label}
-              </option>
-            ))}
-          </select>
+          <div className="flex flex-wrap items-center gap-2">
+            <select
+              value={u.status}
+              onChange={(e) => handleStatus(u.id, e.target.value as OverlayUnit["status"])}
+              className="text-[12px] font-semibold px-2.5 py-1 border-[1.5px] border-grey-200 rounded-lg"
+            >
+              {Object.entries(STATUS_LABEL).map(([value, label]) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
+            {canInsertAdditionalStudyUnit && (
+              <button
+                onClick={() => handleOpenAdditionalStudyPreview(u.id)}
+                className="text-[11.5px] font-bold text-ink"
+              >
+                다음 수업에 추가 학습 회차 넣기
+              </button>
+            )}
+          </div>
+
+          {additionalStudyUnitId === u.id && (
+            <div className="mt-2.5 pt-2.5 border-t border-grey-200 bg-grey-50 -mx-4 -mb-3 px-4 py-3 rounded-b-xl">
+              {!additionalStudyPreview ? (
+                <p className="text-[12px] text-grey-500">확인 내용을 불러오는 중...</p>
+              ) : (
+                <>
+                  <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-1.5">
+                    새 회차: {additionalStudyPreview.newUnitTitle}
+                  </div>
+                  {additionalStudyPreview.affectedFutureSessions.length === 0 ? (
+                    <p className="text-[12px] text-grey-500 mb-2">
+                      바뀌는 예정 수업이 없습니다(아직 시작하지 않은 다음 예약이 없습니다).
+                    </p>
+                  ) : (
+                    <ul className="text-[12px] text-ink mb-2 space-y-0.5">
+                      {additionalStudyPreview.affectedFutureSessions.map((s) => (
+                        <li key={s.sessionId}>
+                          {formatSessionTime(s.startsAt)} → {s.resultingUnitTitle}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  <p className="text-[11.5px] text-grey-500 mb-2">
+                    영향받지 않는 시작·완료 수업 {additionalStudyPreview.unaffectedStartedOrCompletedCount}개
+                  </p>
+                  <div className="flex gap-2">
+                    <button
+                      disabled={additionalStudyBusy}
+                      onClick={() => handleConfirmAdditionalStudyUnit(u.id)}
+                      className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
+                    >
+                      {additionalStudyBusy ? "넣는 중..." : "추가 학습 회차 넣기"}
+                    </button>
+                    <button
+                      disabled={additionalStudyBusy}
+                      onClick={() => {
+                        setAdditionalStudyUnitId(null);
+                        setAdditionalStudyPreview(null);
+                      }}
+                      className="text-[12px] font-semibold text-grey-500"
+                    >
+                      취소
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
+          )}
 
           {library.keywords.length > 0 && (
             <div className="mt-2.5 pt-2.5 border-t border-grey-100">
@@ -405,7 +519,7 @@ export default function StudentCurriculumPanel({
                       onClick={() => handleApplyUpdate(u.id)}
                       className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
                     >
-                      {applyingUpdate ? "적용 중..." : "적용"}
+                      {applyingUpdate ? "반영 중..." : "구성에 반영"}
                     </button>
                     <button
                       disabled={applyingUpdate}
@@ -423,7 +537,8 @@ export default function StudentCurriculumPanel({
             </div>
           )}
         </div>
-      ))}
+        );
+      })}
 
       {upcoming.length === 0 && sorted.length === 0 && (
         <p className="text-[12.5px] text-grey-500 mb-3">아직 단원이 없습니다. 기본 원본에서 불러오거나 보강 단원을 만드세요.</p>
