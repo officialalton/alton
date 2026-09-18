@@ -163,6 +163,32 @@ export async function deleteCalendarEvent(params: {
   }
 }
 
+/** 2026-09-18(UAT 정리용) — 삭제 전 이벤트 메타데이터를 조회해 확인하기 위한
+ * 최소 조회 함수. 삭제와 동일한 안전 게이트(assertRealCallsAllowed)를 쓴다. */
+export async function getCalendarEvent(params: {
+  teacherWorkspaceEmail: string;
+  googleEventId: string;
+}): Promise<{
+  id: string;
+  summary?: string;
+  start?: { dateTime?: string };
+  end?: { dateTime?: string };
+  attendees?: Array<{ email: string }>;
+  status: string;
+} | null> {
+  assertRealCallsAllowed();
+  const token = await resolveCalendarAccessToken(params.teacherWorkspaceEmail);
+  const res = await fetch(`${CALENDAR_API}/calendars/primary/events/${params.googleEventId}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (res.status === 404 || res.status === 410) return null;
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`Calendar 이벤트 조회 실패 (status ${res.status}): ${text.slice(0, 300)}`);
+  }
+  return res.json();
+}
+
 export type IncrementalCalendarEvent = {
   googleEventId: string;
   status: "confirmed" | "cancelled";
