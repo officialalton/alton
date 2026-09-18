@@ -48,6 +48,27 @@ describe("템플릿 4 — 거부", () => {
     expect(i1.some((i) => i.code === "ref_mismatch" && i.message.includes("14"))).toBe(true);
     const i2 = lintDataAgainstText(table, 'The "Rejected Bottles" column shows the count for the Night shift row.');
     expect(i2.filter((i) => i.code === "ref_missing").length).toBeGreaterThanOrEqual(1);
+    // 2026-09-18(hard 재검증) — command_of_evidence_quant hard 문항은 질문 문장이 가설·주장 전체를
+    // 따옴표로 인용하는 경우가 흔하다(예: "…라는 연구자들의 가설에 대한 예외를 보여주는…"). 이런 완전한
+    // 문장 인용은 데이터 항목 이름이 아니므로 ref_missing으로 거부하면 안 된다 — 짧은 라벨 인용(6단어
+    // 이하)만 이 검사 대상이다.
+    const longQuoteIssues = lintDataAgainstText(table, 'Which choice illustrates an exception to the hypothesis that "deeper and cooler sites always show higher survival rates"?');
+    expect(longQuoteIssues.some((i) => i.code === "ref_missing")).toBe(false);
+    // 2026-09-18(hard 재검증) — "a series of panel paintings"처럼 그래프 용어(series/group/class/box)와
+    // 무관한 일반 영어 관용구("~의 무리"라는 뜻, 뒤에 'of'가 옴)를 "the X series" 참조로 오인하면 안 된다.
+    expect(lintDataAgainstText(table, "Analysts examined the pigments used in a series of panel paintings from one workshop.").some((i) => i.code === "ref_missing")).toBe(false);
+    // 2026-09-18(hard 재검증) — 행 이름("Tern 1".."Tern 5")에 숫자가 들어 있으면, "Tern 1"의 데이터
+    // 값(5)이 "다른 행 이름"(Tern 5)에도 같은 숫자가 들어 있다는 이유만으로 후보에서 빠지던 버그가
+    // 있었다("지문은 'Tern 1'의 'Rest Stops'를 70200으로 말하지만 표의 값은 5입니다"처럼, 절 안에
+    // 함께 나온 무관한 다른 숫자(총 거리 70,200)를 엉뚱하게 불일치로 지목). 이 행의 실제 값(5)이
+    // 절 안에 있으면 통과해야 한다.
+    const ternTable: DataSpec = { type: "data", kind: "table", columns: ["Tern", "Rest Stops", "Total Distance (kilometers)"], rows: [["Tern 1", 5, 70200], ["Tern 2", 7, 71500], ["Tern 3", 9, 70900], ["Tern 4", 11, 69800], ["Tern 5", 6, 70500]] };
+    expect(lintDataAgainstText(ternTable, "Tern 1 made 5 rest stops and traveled 70,200 kilometers.").filter((i) => i.code === "ref_mismatch")).toEqual([]);
+    // 2026-09-18(hard 재검증) — 대상 열이 퍼센트 열("Coral Cover Bleached (%)")이면 지문의 "22%"는
+    // 그 열의 진짜 값이다. 예전엔 "%"가 붙은 숫자를 전부 후보에서 빼서, 절 안의 무관한 다른 숫자(주 수)를
+    // "불일치"로 오탐했다("표의 값은 22인데 지문은 2라고 말한다"는 식).
+    const percentTable: DataSpec = { type: "data", kind: "table", columns: ["Site", "Heat-Stress Weeks", "Coral Cover Bleached (%)"], rows: [["Reef Site A", 2, 22], ["Reef Site B", 4, 15]] };
+    expect(lintDataAgainstText(percentTable, "Reef Site A experienced 2 heat-stress weeks and had 22% of its coral cover bleached.").filter((i) => i.code === "ref_mismatch")).toEqual([]);
     const bar = SAMPLES[4].spec;
     expect(lintDataAgainstText(bar, "In March, Store B had sales of 1,500.").some((i) => i.code === "ref_mismatch")).toBe(true);
     const noUnit: DataSpec = { ...bar, yTitle: "Sales" };

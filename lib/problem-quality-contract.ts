@@ -162,11 +162,14 @@ export function checkQualityContract(input: ContractInput): ContractResult {
     const overlap = words.filter((w) => notesText.includes(w));
     if (words.length && overlap.length === 0) issues.push({ code: "contract_answer", message: "정답 선택지가 메모의 정보를 쓰지 않습니다 — 메모 ↔ 목표 ↔ 정답이 연결되어야 합니다." });
   }
-  if (code === "command_of_evidence_quant" && isMc && input.correctIndex !== null && input.figure) {
-    const vals = dataValues(input.figure);
-    const nums = numbersIn(opts[input.correctIndex] ?? "");
-    if (nums.length && !nums.some((n) => vals.has(n))) issues.push({ code: "contract_answer", message: `정답 선택지의 수치(${nums.join(", ")})가 표·그래프 자료에 없습니다 — 근거 위치가 끊겼습니다.` });
-  }
+  // 2026-09-18(hard 재검증에서 발견) — command_of_evidence_quant의 정답 수치 검증은 여기서 원래
+  // "정확한 셀 값 하나"만 인정했다(dataValues는 파생 통계·차이값을 전혀 모른다). Step 6에서 훨씬
+  // 정교한 전용 검증기(quant-evidence-check.ts — 행/열 합·최댓값·최솟값·차이까지 인정)가 생겼는데도
+  // 이 구식 검사를 지우지 않아 둘이 같이 돌았다: DIFFERENCE 연산(예: "5.4→3.2는 2.2일 감소")처럼
+  // quant-evidence-check.ts는 정확히 인정하는 정당한 정답을, 이 구식 검사가 먼저 "자료에 없는 수치"로
+  // 오탐 거부해 pipeline.ts의 checkQuantEvidenceFields(2.4c)까지 가지도 못하고 걸렸다. command_of_
+  // evidence_quant는 pipeline.ts에서 항상 이어서 checkQuantEvidenceFields를 돌리므로(다른 경로 없음),
+  // 이 구식·더 좁은 검사는 지우고 전용 검증기에 맡긴다(검증 자체를 없앤 게 아니라 중복·열등한 쪽을 정리).
   const mathDataCodes = new Set(["one_variable_data", "two_variable_data", "probability", "percentages", "ratios_rates_units", "inference_margin_error"]);
   if (code && mathDataCodes.has(code) && input.figure && (input.figure as { type?: string }).type === "data") {
     // 질문·지문이 부르는 수치는 자료에 있어야 한다(연도·비율 등 파생 값은 제외 — 자료 값과 하나도 겹치지 않을 때만).

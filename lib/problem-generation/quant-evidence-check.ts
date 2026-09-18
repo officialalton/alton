@@ -7,6 +7,14 @@
 // 최솟값)인지, (2) 오답들의 수치가 자료와 "그냥 다른 숫자"가 아니라 그럴듯한 오독(다른 행/열, 인접 셀,
 // 인덱스 한 칸 밀림)인지를 결정적으로 확인한다.
 
+/**
+ * 부동소수점 오차 보정(2026-09-18 hard 재검증에서 발견) — 5.4-3.2를 JS로 계산하면
+ * 2.1999999999999997이 나온다(정확한 2.2가 아님). Set.has()는 정확히 같은 값만 찾으므로, 지문이
+ * "2.2"라고 쓴 정당한 정답이 파생 통계 Set에 있는 값과 비트 단위로 달라 "자료에 없음"으로 오탐
+ * 거부됐다. 저장·비교 양쪽에서 소수 9자리로 반올림해 이런 부동소수점 오차를 흡수한다.
+ */
+const r9 = (n: number): number => Math.round(n * 1e9) / 1e9;
+
 export const QUANT_OPERATIONS = ["EXACT_LOOKUP", "ROW_SUM", "COLUMN_SUM", "MAX", "MIN", "DIFFERENCE"] as const;
 export type QuantOperation = (typeof QUANT_OPERATIONS)[number];
 
@@ -37,11 +45,29 @@ function numbersIn(text: string): number[] {
     .filter((n) => Number.isFinite(n));
 }
 
+/**
+ * 셀 값이 순수 숫자 문자열("29.8", "-4")이면 숫자로 인정한다 — 2026-09-18(hard 재검증)에서 발견:
+ * AI가 같은 figure 스키마인데도 셀 값을 JSON 숫자가 아니라 문자열로 낸 경우(예: rows의 값이
+ * "4"/"29.8"/"71")가 있었다. 렌더러(problem-figures/templates/data.ts)는 문자열 셀도 그대로
+ * 표시하므로 이 자체는 렌더링 문제가 아니지만, 이 검증기는 typeof 'number'만 인정해 정답 수치가
+ * 자료에 있는데도 "자료에 없다"고 오탐 거부했다. 열 이름·범주 이름 같은 진짜 텍스트는 숫자로
+ * 파싱되지 않으므로 안전하다.
+ */
+function asNumeric(v: unknown): number | null {
+  if (typeof v === "number") return Number.isFinite(v) ? v : null;
+  if (typeof v === "string" && /^-?\d+(\.\d+)?$/.test(v.trim())) {
+    const n = Number(v.trim());
+    return Number.isFinite(n) ? n : null;
+  }
+  return null;
+}
+
 /** figure(jsonb)의 모든 숫자 셀 값을 모은다(열 이름·범주 이름 같은 문자열은 제외). */
 function numericCells(figure: unknown): number[] {
   const out: number[] = [];
   const walk = (v: unknown) => {
-    if (typeof v === "number") out.push(v);
+    const n = asNumeric(v);
+    if (n !== null) out.push(n);
     else if (Array.isArray(v)) v.forEach(walk);
     else if (v && typeof v === "object") Object.values(v as Record<string, unknown>).forEach(walk);
   };
@@ -57,22 +83,22 @@ function derivedStats(figure: unknown): Set<number> {
   if (fig && Array.isArray(fig.rows)) {
     for (const r of fig.rows) {
       if (Array.isArray(r)) {
-        const nums = r.filter((c): c is number => typeof c === "number");
+        const nums = r.map(asNumeric).filter((n): n is number => n !== null);
         if (nums.length) rows.push(nums);
       }
     }
   }
   if (fig && Array.isArray(fig.series)) {
-    for (const s of fig.series) if (Array.isArray(s.values)) rows.push(s.values.filter((n) => typeof n === "number"));
+    for (const s of fig.series) if (Array.isArray(s.values)) rows.push(s.values.map(asNumeric).filter((n): n is number => n !== null));
   }
-  if (fig && Array.isArray(fig.values)) rows.push(fig.values.filter((n) => typeof n === "number"));
+  if (fig && Array.isArray(fig.values)) rows.push(fig.values.map(asNumeric).filter((n): n is number => n !== null));
   const rowStats: number[] = [];
   for (const r of rows) {
     if (!r.length) continue;
     const sum = r.reduce((a, b) => a + b, 0);
-    out.add(sum);
-    out.add(Math.max(...r));
-    out.add(Math.min(...r));
+    out.add(r9(sum));
+    out.add(r9(Math.max(...r)));
+    out.add(r9(Math.min(...r)));
     rowStats.push(sum);
     // 2026-09-18(hard 재검증) — target=DIFFERENCE 인데 이 함수가 "차이" 값을 전혀 계산하지 않아,
     // 정당한 차이 기반 정답까지 "자료에 없는 수치"로 오탐 거부하던 버그. 같은 행 안 두 셀의 차이도
@@ -80,8 +106,8 @@ function derivedStats(figure: unknown): Set<number> {
     for (let i = 0; i < r.length; i += 1) {
       for (let j = 0; j < r.length; j += 1) {
         if (i === j) continue;
-        out.add(r[i] - r[j]);
-        out.add(Math.abs(r[i] - r[j]));
+        out.add(r9(r[i] - r[j]));
+        out.add(r9(Math.abs(r[i] - r[j])));
       }
     }
   }
@@ -89,8 +115,8 @@ function derivedStats(figure: unknown): Set<number> {
   for (let i = 0; i < rowStats.length; i += 1) {
     for (let j = 0; j < rowStats.length; j += 1) {
       if (i === j) continue;
-      out.add(rowStats[i] - rowStats[j]);
-      out.add(Math.abs(rowStats[i] - rowStats[j]));
+      out.add(r9(rowStats[i] - rowStats[j]));
+      out.add(r9(Math.abs(rowStats[i] - rowStats[j])));
     }
   }
   // 열 합(행렬 형태일 때) + 열끼리의 차이.
@@ -98,17 +124,17 @@ function derivedStats(figure: unknown): Set<number> {
     const cols = rows[0].length;
     const colSums: number[] = [];
     for (let c = 0; c < cols; c += 1) {
-      const col = rows.map((r) => r[c]).filter((n) => typeof n === "number");
+      const col = rows.map((r) => r[c]).filter((n): n is number => typeof n === "number");
       if (col.length) {
         const sum = col.reduce((a, b) => a + b, 0);
-        out.add(sum);
+        out.add(r9(sum));
         colSums.push(sum);
         // 같은 열 안 두 행의 차이(예: "shift 2와 shift 3의 불량 개수 차이").
         for (let i = 0; i < col.length; i += 1) {
           for (let j = 0; j < col.length; j += 1) {
             if (i === j) continue;
-            out.add(col[i] - col[j]);
-            out.add(Math.abs(col[i] - col[j]));
+            out.add(r9(col[i] - col[j]));
+            out.add(r9(Math.abs(col[i] - col[j])));
           }
         }
       }
@@ -116,8 +142,8 @@ function derivedStats(figure: unknown): Set<number> {
     for (let i = 0; i < colSums.length; i += 1) {
       for (let j = 0; j < colSums.length; j += 1) {
         if (i === j) continue;
-        out.add(colSums[i] - colSums[j]);
-        out.add(Math.abs(colSums[i] - colSums[j]));
+        out.add(r9(colSums[i] - colSums[j]));
+        out.add(r9(Math.abs(colSums[i] - colSums[j])));
       }
     }
   }
@@ -146,7 +172,7 @@ export function checkQuantEvidenceFields(
 
   const cells = numericCells(figure);
   const derived = derivedStats(figure);
-  const cellSet = new Set(cells);
+  const cellSet = new Set(cells.map(r9));
 
   // 모든 선택지(정답+오답)에 공통으로 나오는 숫자는 "Shift 4" 처럼 같은 항목을 가리키는 문맥 숫자다 —
   // 실제로 갈리는 값이 아니므로 비교에서 뺀다(안 빼면 문맥 숫자가 우연히 같아 오답이 정답과 "같은 값"으로
@@ -163,7 +189,7 @@ export function checkQuantEvidenceFields(
   if (correctNums.length === 0) {
     return { ok: false, reason: "quant-evidence: 정답 선택지에 수치가 없습니다 — 정량 근거 문항의 정답은 자료의 값을 인용해야 합니다." };
   }
-  const correctVerified = correctNums.some((n) => cellSet.has(n) || derived.has(n));
+  const correctVerified = correctNums.some((n) => cellSet.has(r9(n)) || derived.has(r9(n)));
   if (!correctVerified) {
     return {
       ok: false,
@@ -200,7 +226,7 @@ export function checkQuantEvidenceFields(
     if (identical) {
       return { ok: false, reason: `quant-evidence: 오답 선택지 "${distractorOptions[i].slice(0, 60)}"의 수치가 정답과 완전히 같습니다 — 변별력이 없습니다.` };
     }
-    const plausible = nums.some((n) => cellSet.has(n) || derived.has(n));
+    const plausible = nums.some((n) => cellSet.has(r9(n)) || derived.has(r9(n)));
     if (!plausible) {
       return {
         ok: false,

@@ -35,7 +35,7 @@ describe("유형별 문제 품질 계약", () => {
     expect(checkQualityContract(rs).ok).toBe(true);
     expect(checkQualityContract({ ...rs, correctIndex: 1 }).issues.map((i) => i.code)).toContain("contract_answer");
   });
-  it("정량 근거: 정답 선택지 수치가 자료에 없으면 근거 끊김, 자료 없으면 evidence", () => {
+  it("정량 근거: 정답이 자료에 근거하면 통과, 자료 없으면 evidence 실패", () => {
     const quant = {
       ...wic, skillCode: "command_of_evidence_quant",
       stimulus: "The table shows bird species recorded in three plots in 2010 and 2020. Ecologists claim diversity rose most where grazing was removed (Plot A).",
@@ -44,7 +44,12 @@ describe("유형별 문제 품질 계약", () => {
       figure: { type: "data", kind: "table", title: "Bird Species Recorded", columns: ["Plot", "2010", "2020"], rows: [["A", 12, 18], ["B", 9, 10], ["C", 15, 14]] },
     };
     expect(checkQualityContract(quant).ok).toBe(true);
-    expect(checkQualityContract({ ...quant, correctIndex: 3 }).issues.map((i) => i.code)).toContain("contract_answer");
+    // 2026-09-18(hard 재검증) — 정답 수치가 자료에 있는지 정확히 검증하는 일(파생 통계·차이값 포함)은
+    // 여기(checkQualityContract)가 아니라 pipeline.ts가 이어서 돌리는 전용 검증기
+    // (quant-evidence-check.ts의 checkQuantEvidenceFields)의 책임이다 — 예전엔 여기서도 훨씬 좁은
+    // 버전(정확한 셀 값 하나만 인정, 파생값·차이값 모름)을 중복으로 돌려서, 전용 검증기라면 정당하게
+    // 인정했을 정답(예: 두 값의 차이)까지 여기서 먼저 오탐 거부했다. 그 회귀 재현·수정은
+    // quant-evidence-check.test.ts에 있다.
     expect(checkQualityContract({ ...quant, figure: null }).issues.some((i) => i.code === "contract_evidence" || i.code === "contract_rw_data")).toBe(true);
   });
   it("Math 도형: 지문의 점이 도형에 없으면 참조 끊김", () => {

@@ -57,6 +57,22 @@ export type Failure = {
   /** 재생성으로 해소됐는가(해소되면 accepted 에도 들어간다). */
   resolved: boolean;
   snippet: string;
+  /**
+   * 2026-09-18(hard 재검증 진단) — 실패 원인 전수 재현용 전체 스냅샷(선택지·정답·figure·근거 모델
+   * 필드). 보고서에는 안 쓰고 진단 스크립트에서만 읽는다 — 기존 소비자(problem-quality-batch.ts 등)는
+   * 이 필드를 무시하므로 하위 호환에 영향 없음.
+   */
+  raw?: {
+    passage: string | null;
+    question: string | null;
+    options: string[] | null;
+    correctIndex: number | null;
+    figure: unknown;
+    evidenceTarget: string | null;
+    evidenceSpan: string | null;
+    answerRationale: string | null;
+    distractorErrorTypes: string[] | null;
+  };
 };
 // 2026-09-16(코드 검토 A) — accepted 는 검사한 최종 문항 객체를 함께 들고 다닌다.
 // 재생성이 일어나면 그 최종본이 저장 후보가 되어야 하고, 호출부가 원본 g를 다시 쓰면 안 된다.
@@ -129,6 +145,17 @@ export function pickFigureKind(need: ReturnType<typeof judgeMaterialNeed>, text:
 }
 
 const snippetOf = (g: GeneratedProblem) => `${(g.question ?? g.passage ?? "").slice(0, 40)}…`;
+const rawOf = (g: GeneratedProblem): Failure["raw"] => ({
+  passage: g.passage ?? null,
+  question: g.question ?? null,
+  options: g.options ?? null,
+  correctIndex: g.correctIndex ?? null,
+  figure: g.figure ?? null,
+  evidenceTarget: g.evidenceTarget ?? null,
+  evidenceSpan: g.evidenceSpan ?? null,
+  answerRationale: g.answerRationale ?? null,
+  distractorErrorTypes: g.distractorErrorTypes ?? null,
+});
 
 /**
  * 문항마다 자료·계약·독립검사·오답보정이 서로 독립인데 순서대로 처리하면 벽시계 시간이 문항 수만큼 그대로 늘어난다
@@ -276,14 +303,14 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
           const outcome = await gate({ ...revised, needsFigure: false } as GeneratedProblem, depth + 1);
           const ok = outcome.kind !== "rejected";
           if (ok) stats.regenerationResolved += 1;
-          failures.push({ skillCode, stage, reason, resolved: ok, snippet: snippetOf(g) });
+          failures.push({ skillCode, stage, reason, resolved: ok, snippet: snippetOf(g), raw: rawOf(g) });
           return outcome;
         } catch (e) {
-          failures.push({ skillCode, stage: "regenerate", reason: `${reason} (재생성 실패: ${e instanceof Error ? e.message : "오류"})`, resolved: false, snippet: snippetOf(g) });
+          failures.push({ skillCode, stage: "regenerate", reason: `${reason} (재생성 실패: ${e instanceof Error ? e.message : "오류"})`, resolved: false, snippet: snippetOf(g), raw: rawOf(g) });
           return { kind: "rejected" };
         }
       }
-      failures.push({ skillCode, stage, reason, resolved: false, snippet: snippetOf(g) });
+      failures.push({ skillCode, stage, reason, resolved: false, snippet: snippetOf(g), raw: rawOf(g) });
       return { kind: "rejected" };
     };
 

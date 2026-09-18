@@ -447,23 +447,41 @@ export function lintDataAgainstText(spec: DataSpec, passage: string): FigureIssu
   spec.rows?.forEach((r) => { if (typeof r[0] === "string") add(r[0]); });
   spec.rowLabels?.forEach(add); spec.colLabels?.forEach(add); add(spec.rowHeader); spec.facts?.forEach((fct) => add(fct.label));
   if (spec.kind === "two_way") add("total");
-  // 따옴표로 부른 이름은 데이터 어딘가에 있어야 한다.
+  // 따옴표로 부른 이름은 데이터 어딘가에 있어야 한다 — 단, 이건 "the 'Cost (dollars)' column"처럼
+  // 짧은 라벨 인용에만 해당한다. 2026-09-18(hard 재검증) — Command of Evidence (Quantitative) hard
+  // 문항은 질문 문장이 "…라는 연구자들의 가설에 대한 예외를 보여주는…"처럼 가설·주장 문장 전체를
+  // 따옴표로 인용하는 경우가 흔한데(SAT 실제 문항에도 있는 정상적인 수사적 구성), 이런 문장은
+  // 데이터 항목 이름이 아니므로 ref_missing으로 거부하면 안 된다. 라벨은 보통 6단어를 넘지 않는다 —
+  // 그보다 긴(완전한 문장에 가까운) 인용은 이 검사에서 제외한다.
   for (const m of text.matchAll(/["“]([^"”]{1,40})["”]/g)) {
     const q = m[1].trim().toLowerCase();
+    if (q.split(/\s+/).filter(Boolean).length > 6) continue;
     if (!Array.from(names).some((n) => n === q || n.includes(q) || q.includes(n))) issues.push({ code: "ref_missing", message: `지문의 "${m[1]}" 가 표·그래프의 항목(열·범주·계열·제목)에 없습니다.` });
   }
-  // "the X column/row/bar/group"
+  // "the X column/row/bar/group" — 단, "a series of panel paintings"/"a group of researchers"처럼
+  // 그래프 용어와 무관한 일반 영어 관용구("~의 무리/집합"이라는 뜻의 "a series/group/class/box of …")는
+  // 제외한다. 2026-09-18(hard 재검증) — "the pigments used in a series of panel paintings"에서
+  // "series" 바로 뒤에 "of"가 오는 걸 이 정규식이 그래프 계열(series) 참조로 오인해 정당한 문항을
+  // 오탐 거부했다. 그래프 용어 참조 뒤에는 보통 "of"가 오지 않는다("the Sales series shows…"이지
+  // "the Sales series of…"가 아니다) — 매치 뒤 바로 "of"가 오면 관용구로 보고 건너뛴다.
   for (const m of text.matchAll(/\bthe\s+([A-Za-z0-9][A-Za-z0-9 ]{0,24}?)\s+(column|row|bar|group|category|series|class|box)\b/gi)) {
+    const afterKeyword = text.slice((m.index ?? 0) + m[0].length).trimStart();
+    if (/^of\b/i.test(afterKeyword)) continue;
     const q = m[1].trim().toLowerCase();
     if (!Array.from(names).some((n) => n === q || n.includes(q))) issues.push({ code: "ref_missing", message: `지문의 '${m[1]} ${m[2]}' 에 해당하는 항목이 데이터에 없습니다.` });
   }
   // 값 일치: 절(clause) 안에 [행 이름 + 열 이름 + 숫자] 또는 [범주 + 계열 이름 + 숫자]
   const clauses = text.split(/[.;?!](?=\s|$)|\n/);
   const num = (t: string) => Number(t.replace(/,/g, ""));
-  /** 절 안의 숫자(천 단위 쉼표 포함). "10th" 같은 서수와 "…%" 는 데이터 값이 아니라 뺀다. */
-  const numbersIn = (cl: string): number[] =>
+  /**
+   * 절 안의 숫자(천 단위 쉼표 포함). "10th" 같은 서수와 "…%"는 보통 데이터 값이 아니라 빼지만,
+   * 대상 열 자체가 퍼센트 열("Coral Cover Bleached (%)" 등)이면 "22%"의 22가 바로 그 열의 진짜
+   * 값이므로 빼면 안 된다. 2026-09-18(hard 재검증) — 이 예외를 안 둬서 퍼센트 열 값이 통째로
+   * 후보에서 빠져, 절 안의 무관한 다른 숫자를 "불일치"로 오탐했다.
+   */
+  const numbersIn = (cl: string, includePercent = false): number[] =>
     Array.from(cl.matchAll(/(?<![\w.])(-?\d{1,3}(?:,\d{3})+(?:\.\d+)?|-?\d+(?:\.\d+)?)(?![\dA-Za-z])(\s*%)?/g))
-      .filter((m) => !m[2])
+      .filter((m) => !m[2] || includePercent)
       .map((m) => num(m[1]));
   const escapeRe = (t: string) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   /** 행/범주 이름이 절에 나오는가 — 짧은 이름('1', 'A')은 첫 열 이름과 붙어 나올 때만("Shift 4"). */
@@ -491,12 +509,17 @@ export function lintDataAgainstText(spec: DataSpec, passage: string): FigureIssu
       const colIdx = scores.indexOf(best);
       const cellV = spec.rows[rowIdx][colIdx];
       if (!isNum(cellV) && !/^-?[\d,]+(\.\d+)?$/.test(String(cellV))) continue;
-      const nums = numbersIn(cl);
+      const targetIsPercentCol = /%|percent/i.test(spec.columns[colIdx]);
+      const nums = numbersIn(cl, targetIsPercentCol);
       const target = isNum(cellV) ? cellV : num(String(cellV));
       const rowName = String(spec.rows[rowIdx][0]);
-      // 어느 행 이름에든 들어 있는 숫자("Month 2", "Shift 4")는 값 후보가 아니다.
-      const rowNameNums = spec.rows.flatMap((r) => Array.from(String(r[0]).matchAll(/\d+/g)).map((m) => Number(m[0])));
-      const candidates = nums.filter((n) => !rowNameNums.includes(n));
+      // 이 절이 가리키는 그 행 이름 자체에 들어 있는 숫자("Month 2"의 2, "Shift 4"의 4)는 값 후보가
+      // 아니다. 2026-09-18(hard 재검증에서 발견한 버그) — 예전엔 "어느 행이든" 이름에 들어 있는
+      // 숫자를 전부 제외했다("Tern 1"의 데이터 값 5가 우연히 다른 행 "Tern 5"의 이름 숫자와 같다는
+      // 이유로 후보에서 빠져, 진짜 정답 수치(5)를 놓치고 무관한 다른 숫자를 "불일치"로 오탐했다).
+      // 지금 절이 가리키는 이 행의 이름에 들어 있는 숫자만 제외해야 한다.
+      const thisRowNameNums = Array.from(rowName.matchAll(/\d+/g)).map((m) => Number(m[0]));
+      const candidates = nums.filter((n) => !thisRowNameNums.includes(n));
       if (candidates.length && !candidates.some((n) => Math.abs(n - target) < 1e-9)) issues.push({ code: "ref_mismatch", message: `지문은 '${rowName}' 의 '${spec.columns[colIdx]}' 를 ${candidates.join("/")} 로 말하지만 표의 값은 ${fmtNum(target)} 입니다.` });
     }
   }

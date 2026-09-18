@@ -95,6 +95,44 @@ describe("checkQuantEvidenceFields", () => {
     expect(r.ok).toBe(true);
   });
 
+  it("accepts a correct answer whose figure cell values are numeric strings rather than JSON numbers (2026-09-18 hard-tier fix — AI sometimes emits '\"4\"' instead of 4)", () => {
+    const STRING_FIGURE = {
+      type: "data",
+      kind: "table",
+      title: "Reef Site Data",
+      columns: ["Site", "Average Depth (m)", "Survival Rate (%)"],
+      rows: [
+        ["Manta Ridge", "4", "71"],
+        ["Kelso Wall", "18", "88"],
+      ],
+    };
+    const r = checkQuantEvidenceFields(
+      "command_of_evidence_quant",
+      baseFields,
+      STRING_FIGURE,
+      "Kelso Wall had a survival rate of 88 percent",
+      ["Kelso Wall had a survival rate of 71 percent", "Kelso Wall had a survival rate of 18 percent", "Kelso Wall had a survival rate of 4 percent"]
+    );
+    expect(r.ok).toBe(true);
+  });
+
+  it("accepts a DIFFERENCE answer computed across two rows of a single column (2026-09-18 hard-tier fix — e.g. a decrease from one category to the next in a one-column time series)", () => {
+    const THRUSH_FIGURE = {
+      type: "data",
+      kind: "table",
+      columns: ["Fat Score", "Number Banded", "Average Stopover Duration (days)"],
+      rows: [["1", 22, 6.1], ["2", 35, 5.4], ["3", 48, 3.2], ["4", 41, 2.8], ["5", 30, 2.5]],
+    };
+    const r = checkQuantEvidenceFields(
+      "command_of_evidence_quant",
+      { ...baseFields, operation: "DIFFERENCE" },
+      THRUSH_FIGURE,
+      "duration dropped 2.2 days from score 2 to score 3, but only 0.4 and 0.3 days for the next two steps",
+      ["duration dropped 1.9 days from score 2 to score 3, but only 0.4 and 0.3 days for the next two steps", "duration dropped 2.2 days from score 2 to score 3, but only 0.6 and 0.3 days for the next two steps", "duration dropped 2.2 days from score 2 to score 3, but only 0.4 and 0.5 days for the next two steps"]
+    );
+    expect(r.ok).toBe(true);
+  });
+
   it("rejects an unknown operation value or unknown distractor tag", () => {
     expect(checkQuantEvidenceFields("command_of_evidence_quant", { ...baseFields, operation: "GUESS" }, FIGURE, "Shift 4 had 14 defective bottles", ["a", "b", "c"]).ok).toBe(false);
     expect(checkQuantEvidenceFields("command_of_evidence_quant", { ...baseFields, distractorErrorTypes: ["WRONG_ROW", "MADE_UP", "ADJACENT_CELL"] }, FIGURE, "Shift 4 had 14 defective bottles", ["Shift 4 had 350 defective bottles", "Shift 4 had 9 defective bottles", "Shift 4 had 8 defective bottles"]).ok).toBe(false);
