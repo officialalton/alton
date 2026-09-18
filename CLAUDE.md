@@ -10,8 +10,9 @@
 
 1. `CLAUDE.md`(이 파일)
 2. `docs/CURRENT.md` — 지금 완료된 단계, 현재 스키마·외부 서비스 구조, 다음 작업에 필요한 확정 정책, 최신 migration, 배포 상태, 남은 blocker를 1~2페이지로 압축한 "지금 상태" 요약. **매 R 단계 종료 시 갱신된다 — 항상 이 문서를 최신 진행 상태의 출발점으로 삼는다.**
-3. 지금 진행할 R 단계의 `docs/2026-08-29-master-roadmap-v3.md` 해당 섹션
-4. 그 작업에 직접 필요한 설계 문서만 선택적으로 확인(예: `docs/2026-08-29-product-architecture-v3.md`의 관련 절, 해당 Gate 문서)
+3. `docs/BRANCH-WORKFLOW.md` — 여러 세션이 동시에 작업할 때 지켜야 하는 브랜치·커밋·마이그레이션 적용 분업 규칙(팀장/배포 담당 세션과 기능 세션의 역할 분리, git/마이그레이션 동기화 점검 체크리스트).
+4. 지금 진행할 R 단계의 `docs/2026-08-29-master-roadmap-v3.md` 해당 섹션
+5. 그 작업에 직접 필요한 설계 문서만 선택적으로 확인(예: `docs/2026-08-29-product-architecture-v3.md`의 관련 절, 해당 Gate 문서)
 
 `docs/2026-08-29-r0-approval-and-technical-validation-package.md`(Gate A·B·C 상세)와 각 R의 실행 로그(`docs/2026-08-29-r*-migration-execution-log.md`), `docs/tickets.md`, `docs/prompts/`, `docs/spec/schema-draft.md`, v2 문서, `docs/superpowers/`의 기존 계획은 **필요할 때만 검색**한다 — 세션 시작 시 통째로 읽지 않는다. 문서가 충돌하면 `docs/CURRENT.md` → 해당 R 로드맵 섹션 → 원본 정책 문서 순으로 더 최신·구체적인 쪽이 우선한다. 전체 문서 분류는 `docs/README.md` 참고.
 

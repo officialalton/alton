@@ -1,18 +1,20 @@
-# ALTON — 현재 상태 (2026-09-17 기준)
+# ALTON — 현재 상태 (2026-09-18 기준)
 
-> 새 세션은 이 문서만 읽고 시작한다. 그 이전 상세 이력(2026-08-29 ~ 2026-09-14 낮)은
+> 새 세션은 `CLAUDE.md` → 이 문서 → `docs/BRANCH-WORKFLOW.md` 순으로 읽고 시작한다.
+> 그 이전 상세 이력(2026-08-29 ~ 2026-09-14 낮)은
 > [`history/CURRENT-archive-until-2026-09-14.md`](history/CURRENT-archive-until-2026-09-14.md)에 원문 그대로 있다 — 필요할 때만 검색한다.
 
 ## 1. 한눈에
 
 | 항목 | 값 |
 |---|---|
-| 브랜치 / Preview | `preview/m4-integration-verification` / **https://alton-gqt1zjtdx-alton7.vercel.app** (커밋 `62721f3` 시점 — Math 19종 완성분·R&W 근거 모델은 이 Preview 배포 이후 커밋이라 아직 Preview에 반영 안 됨, 로컬+non-prod DB 검증만 완료). **학부모 포털 IA 재구성+상담 milestone은 이후 별도로 재배포됨 — 최신 Preview https://alton-ilrqy8v1j-alton7.vercel.app (커밋 `e5b1042`, 아래 6절 참고)** |
-| 공유 non-prod(`worpsqwqgnspddnrtnvq`) | 마이그레이션 **`20261412000000`까지 적용됨**(local = remote). `20261413000000`(문제은행 감사, 다른 담당 소유)만 미반영 — 최종 통합 시 적용 순서 검토 필요 |
+| 브랜치 / Preview | `preview/m4-integration-verification`. 최신 Preview **https://alton-7sfby1ror-alton7.vercel.app**(HEAD `db818b3` 시점 배포 — 이후 학부모/교사 UI 통일 커밋(`452ca80`·`0ae4de9`)과 Smart Notes 웹훅 멱등성(`3209ac9`)은 아직 이 Preview에 재배포 안 됨, 로컬+non-prod DB 검증만 완료). 이 URL에서 문제은행 Math MC/SPR·R&W 근거모델/정량모델 각 1문항을 실제 공개(uat20260918)해 학생·교사 실 세션 흐름까지 검증 완료(3절 참고). |
+| 공유 non-prod(`worpsqwqgnspddnrtnvq`) | 마이그레이션 **`20261414000000`까지 local=remote 확인**(drift 없음, `20261413000000` 문제은행 전수감사 보관분 포함 전부 적용됨). 새 마이그레이션 작성 시 이 문서의 `docs/BRANCH-WORKFLOW.md` 동기화 체크리스트를 통합/배포 직전 매번 실행할 것. |
 | Production | 배포·마이그레이션 없음(오픈 전, 실제 고객 데이터 없음) |
-| 테스트 | 마지막 전체 일괄 실행 2596/1 skip(`63d1189`, `db reset` 직후). 그 뒤 배치들은 **파일별 스위트 전부 초록**(전체 일괄 재실행 미실시). 통합 테스트는 `supabase db reset --local` 직후 `--no-file-parallelism`으로 돌려야 한다(예약 fixture 충돌·append-only 전역 count 는 재실행 시 실패 — 결함 아님) |
-| 실제 외부 연동 | 교재 Drive `ALTON Company Tutoring Resources`(id `0AKnx7roQfcSaUk9PVA`) 읽기·폴더 생성·파일 가져오기·고정 사본 공개 확인. Preview 환경변수 `CURRICULUM_DRIVE_ENABLED/ID/ALLOW_REAL_WRITES=true`(제품 오너 설정). AI 생성은 Anthropic 키(Preview·로컬 있음). 유료 서비스 추가 없음 |
-| 상태 | **제품 오너 Preview UAT 진행 중**(2026-09-14 야간 배치 전체) |
+| 테스트 | 오늘 관련 스위트 실행 결과: `npx vitest run app/admin lib/problem-generation` 138 files / 1129 tests pass, 1 fail(범위 밖 상담 관련 fixture, 회귀 아님); `... app/session` 포함 시 167 files pass / 4 fail(로컬 DB 상태 의존 사전 실패, 미수정). 전체 일괄 재실행은 R 종료 시에만 — 통합 테스트는 `supabase db reset --local` 직후 `--no-file-parallelism`으로 돌릴 것. |
+| 실제 외부 연동 | 교재 Drive 읽기·고정 사본 공개, Smart Notes Drive reader 권한 부여(웹훅 멱등성 적용), Google Calendar/Meet 실제 이벤트 생성(상담 일정 확정). Preview `CURRICULUM_DRIVE_ENABLED/ID/ALLOW_REAL_WRITES=true`. AI 생성은 Anthropic 키. 유료 서비스 추가 없음. |
+| 상태 | 문제생성 파이프라인 Step 6까지 완료 + College Board 실전 840문항 전수 커버리지 매핑 완료. **다음 마일스톤: 고정형 모의고사 V1**(`2026-09-17-fixed-mock-exam-v1-spec.md`, 적응형 아님). |
+| **알려진 버그(미수정, 우선 조치 필요)** | **`/student` 홈이 로그인 직후 500 에러(React #418/#441)로 렌더링 실패** — 세션뷰(`/session/[id]`)는 정상, 재현: uat20260918 학생 계정으로 로그인 후 `/student` 접속(`docs/2026-09-18-real-student-teacher-uat.md` 5절). 실제 서비스 오픈 전 반드시 수정. |
 
 ## 2. 지금 유효한 확정 정책 (바꾸려면 제품 오너 결정)
 
@@ -95,6 +97,27 @@
 
 ## 6. 미결·다음 작업 단위
 
+- **College Board 커버리지 전수 매핑 완료 + Math SPR 아키텍처 결론(2026-09-17, 완료)**:
+  `2026-09-17-collegeboard-coverage-map.md` — 실전 시험지 7종(test4·6·7·8·9·10·11)
+  840문항(R&W 462 + Math 378) 전수 분류 완료(test5는 결번). **최종 결론**: "생성
+  가능+결정론적 검증 있음" 331건(39.4%), 상위 스킬은 있으나 하위 패턴 불가 209건
+  (24.9%), 생성 가능하나 검증 없음(R&W 위주) 273건(32.5%), 완전 불가 27건(3.2%).
+  **화면 렌더링 검증은 840건 전부 미확인이었으나 2026-09-18 uat20260918로 4건
+  (Math MC/SPR, R&W 근거모델/정량모델) 실제 학생·교사 세션까지 검증 완료**(아래
+  참고). SPR은 특정 스킬 추가로 해결 안 됨 — `math-compilers/batch.ts`의
+  `format="mc"` 고정 출력을 SPR 분기 가능하도록 재설계해야 하는 아키텍처
+  작업(로드맵 Step 3, 아직 미착수). 완전 불가 갭 랭킹 1순위(산점도 회귀/최적선)는
+  Step 4에서 이미 구현 완료.
+- **문제은행 전수 감사 + 역할별/실사용자 UAT(2026-09-18, 완료)**: 활성(보관 안 된)
+  160문항 전수 감사(`2026-09-18-problem-bank-full-audit.md`) → 결함 8건(원시
+  LaTeX·빈 초안·내부 필드명 노출·완전 중복) 발견해 마이그레이션 `20261413000000`
+  으로 보관 처리(non-prod 반영 완료). 관리자 역할 UAT(`2026-09-18-problem-bank-role-uat.md`)
+  전부 PASS. 공개 문항이 0건이라 학생/교사 실사용 흐름은 별도로 Math MC·SPR,
+  R&W 근거모델·정량모델 각 1문항씩 실제 공개해 `uat20260918`(정리 안 함, 회귀
+  재현용으로 보존) 계정으로 실 세션 풀이·자동채점·교사 채점 확정까지 끝까지
+  검증(`2026-09-18-real-student-teacher-uat.md`) — 전부 정상. 이 UAT에서
+  `/student` 홈 500 에러(1절 참고)와 `ProblemLogTab.tsx`가 어떤 화면에서도
+  import되지 않는 죽은 코드로 보인다는 점을 발견(둘 다 미수정, 판단만 보류).
 - **고정형 SAT 모의고사 V1(정책 확정, 구현 대기 — 2026-09-17)**: 모의고사는 과제와
   별도 원본·응시 기록을 가진다. 수업 화면에 `모의고사` 탭을 추가해 교사가 배정하고 학생이
   시작·재개할 수 있으며, 학생 포털의 독립 모의고사 탭에서도 같은 응시를 연다. V1은
