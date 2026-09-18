@@ -68,8 +68,9 @@ export type NonlinearEqModel = {
   intersectionXs?: number[];
   /**
    * parameter_discriminant 전용 — 방정식은 항상 "x(kx - paramB) = -paramC"로
-   * 제시하며, 정리하면 k·x² - paramB·x + paramC = 0이다(k가 미지의 정수 매개변수,
-   * b/c 필드는 이 유형에서 쓰지 않는다).
+   * 제시하며, 정리하면 k·x² - paramB·x + paramC = 0이다(k가 미지의 정수 매개변수).
+   * 공용 b/c 필드는 이 유형에서 의미가 없어 항상 0으로 둔다(타입의 필수 필드를
+   * 채우기 위한 자리표시일 뿐 — 실제 값은 paramB/paramC를 쓴다).
    */
   paramB?: number;
   paramC?: number;
@@ -517,7 +518,7 @@ function generateParameterDiscriminant(difficulty: NonlinearEqDifficulty): Nonli
       ];
       const distractors = pickUnique(cands, correctAnswer);
       if (distractors.length < 3) continue;
-      return { skillCode: "nonlinear_equations_systems", difficulty, questionKind: "parameter_discriminant", paramB: b, paramC: c, paramDiscriminantSubKind: subKind, correctAnswer, distractors };
+      return { skillCode: "nonlinear_equations_systems", difficulty, questionKind: "parameter_discriminant", b: 0, c: 0, paramB: b, paramC: c, paramDiscriminantSubKind: subKind, correctAnswer, distractors };
     }
     throw new Error("nonlinear_equations_systems(parameter_discriminant, one_real_k): 생성 실패");
   }
@@ -550,7 +551,7 @@ function generateParameterDiscriminant(difficulty: NonlinearEqDifficulty): Nonli
       ];
       const distractors = pickUnique(cands, correctAnswer);
       if (distractors.length < 3) continue;
-      return { skillCode: "nonlinear_equations_systems", difficulty, questionKind: "parameter_discriminant", paramB: b, paramC: c, paramDiscriminantSubKind: subKind, correctAnswer, distractors };
+      return { skillCode: "nonlinear_equations_systems", difficulty, questionKind: "parameter_discriminant", b: 0, c: 0, paramB: b, paramC: c, paramDiscriminantSubKind: subKind, correctAnswer, distractors };
     }
 
     // at_least_one_greatest_k: D>=0 ⟺ k <= ratio ⟺ 가장 큰 정수 k = floorRatio.
@@ -568,7 +569,7 @@ function generateParameterDiscriminant(difficulty: NonlinearEqDifficulty): Nonli
     ];
     const distractors = pickUnique(cands, correctAnswer);
     if (distractors.length < 3) continue;
-    return { skillCode: "nonlinear_equations_systems", difficulty, questionKind: "parameter_discriminant", paramB: b, paramC: c, paramDiscriminantSubKind: subKind, correctAnswer, distractors };
+    return { skillCode: "nonlinear_equations_systems", difficulty, questionKind: "parameter_discriminant", b: 0, c: 0, paramB: b, paramC: c, paramDiscriminantSubKind: subKind, correctAnswer, distractors };
   }
   throw new Error("nonlinear_equations_systems(parameter_discriminant): 오답 후보 생성에 실패했습니다.");
 }
