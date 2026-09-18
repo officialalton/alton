@@ -171,6 +171,15 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
   });
   const publishableDrafts = visible.filter((p) => p.draft?.versionId);
 
+  const PAGE_SIZE = 10;
+  const [page, setPage] = useState(1);
+  const pageCount = Math.max(1, Math.ceil(visible.length / PAGE_SIZE));
+  const pageSafe = Math.min(page, pageCount);
+  const pageItems = visible.slice((pageSafe - 1) * PAGE_SIZE, pageSafe * PAGE_SIZE);
+  useEffect(() => {
+    setPage(1);
+  }, [bucket, filter]);
+
   async function publishAllVisible() {
     if (publishableDrafts.length === 0) return;
     if (typeof window !== "undefined" && !window.confirm(`지금 보이는 초안 ${publishableDrafts.length}개를 모두 공개할까요? 공개된 문제는 회차 구성 후보가 됩니다.`)) return;
@@ -294,7 +303,7 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
           {bucket === "archived" ? "보관된 문제가 없습니다." : bucket === "published" ? "공개된 문제가 없습니다." : "작성 중인 문제가 없습니다."}
         </div>
       ) : (
-        visible.map((p) => (
+        pageItems.map((p) => (
           <ProblemRow
             key={p.id}
             problem={p}
@@ -308,6 +317,28 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
             onNotice={setNotice}
           />
         ))
+      )}
+
+      {bucket !== "create" && visible.length > PAGE_SIZE && (
+        <div className="flex items-center justify-center gap-3 mt-4">
+          <button
+            type="button"
+            disabled={pageSafe <= 1}
+            onClick={() => setPage(pageSafe - 1)}
+            className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 disabled:opacity-40"
+          >
+            이전
+          </button>
+          <span className="text-[12.5px] text-grey-500">{pageSafe} / {pageCount} 페이지 (총 {visible.length}개)</span>
+          <button
+            type="button"
+            disabled={pageSafe >= pageCount}
+            onClick={() => setPage(pageSafe + 1)}
+            className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 disabled:opacity-40"
+          >
+            다음
+          </button>
+        </div>
       )}
     </div>
   );
