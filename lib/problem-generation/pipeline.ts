@@ -13,6 +13,8 @@ import { isEvidenceModelSkill, checkEvidenceModelFields } from "./evidence-model
 import { isGrammarStructureSkill, checkGrammarStructureFields } from "./grammar-structure-check";
 import { isQuantEvidenceSkill, checkQuantEvidenceFields } from "./quant-evidence-check";
 import { isTransitionsSkill, checkTransitionRelationshipFields } from "./transition-relationship-check";
+import { isRhetoricalSynthesisSkill, checkRhetoricalSynthesisFields } from "./rhetorical-synthesis-check";
+import { isTextStructureSkill, checkTextStructureFields } from "./text-structure-check";
 import { parseRwStimulus } from "@/lib/rw-stimulus";
 
 export type GeneratedProblem = Awaited<ReturnType<typeof generateSectionProblemsCore>>[number];
@@ -395,6 +397,37 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
         distractors
       );
       if (!trCheck.ok) return fail("contract", trCheck.reason);
+    }
+
+    // 2.4e) 자료 종합 모델(rhetorical_synthesis, 2026-09-17) — 정답의 핵심 내용이 notes에서 실제로
+    // 따라 나오는지, 오답들이 서로 다른 방식으로 학생의 목표를 놓쳤는지 결정적으로 검사한다.
+    if (isRhetoricalSynthesisSkill(skillCode) && params.format === "mc" && g.options && g.correctIndex !== null) {
+      const opts = g.options;
+      const correctOpt = opts[g.correctIndex] ?? "";
+      const distractors = opts.filter((_, i) => i !== g.correctIndex);
+      const notes = parseRwStimulus(stimulus).notes?.items ?? [];
+      const rsCheck = checkRhetoricalSynthesisFields(
+        skillCode,
+        { target: g.evidenceTarget ?? null, answerRationale: g.answerRationale ?? null, distractorErrorTypes: g.distractorErrorTypes ?? null },
+        notes,
+        correctOpt,
+        distractors
+      );
+      if (!rsCheck.ok) return fail("contract", rsCheck.reason);
+    }
+
+    // 2.4f) 글의 구조·기능 모델(text_structure_purpose, 2026-09-17) — 질문이 가리키는 구간이 실제
+    // 지문에 있는지, 정답·오답이 서로 다른 수사적 역할을 태그하는지 결정적으로 검사한다.
+    if (isTextStructureSkill(skillCode) && params.format === "mc" && g.options && g.correctIndex !== null) {
+      const opts = g.options;
+      const distractorCount = Math.max(0, opts.length - 1);
+      const tsCheck = checkTextStructureFields(
+        skillCode,
+        { target: g.evidenceTarget ?? null, evidenceSpan: g.evidenceSpan ?? null, answerRationale: g.answerRationale ?? null, distractorErrorTypes: g.distractorErrorTypes ?? null },
+        stimulus,
+        distractorCount
+      );
+      if (!tsCheck.ok) return fail("contract", tsCheck.reason);
     }
 
     // 2.5) 정답 자리 vs 해설 대조(2026-09-15 제품 오너 확인 — 해설은 맞는데 정답 표시만 틀린 사례 발견).

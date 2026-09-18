@@ -13,6 +13,8 @@ import { isEvidenceModelSkill, DISTRACTOR_ERROR_TYPES, type EvidenceModelSkill }
 import { isGrammarStructureSkill, GRAMMAR_RULES_BY_SKILL, type GrammarStructureSkill } from "@/lib/problem-generation/grammar-structure-check";
 import { isQuantEvidenceSkill, QUANT_OPERATIONS, QUANT_DISTRACTOR_ERROR_TYPES, type QuantEvidenceSkill } from "@/lib/problem-generation/quant-evidence-check";
 import { isTransitionsSkill, TRANSITION_RELATIONSHIPS, type TransitionsSkill } from "@/lib/problem-generation/transition-relationship-check";
+import { isRhetoricalSynthesisSkill, DISTRACTOR_ERROR_TYPES as RHETORICAL_SYNTHESIS_DISTRACTOR_ERROR_TYPES, type RhetoricalSynthesisSkill } from "@/lib/problem-generation/rhetorical-synthesis-check";
+import { isTextStructureSkill, PARAGRAPH_ROLES, type TextStructureSkill } from "@/lib/problem-generation/text-structure-check";
 
 // 클라이언트는 호출 시점에 만든다 — 모듈 로드만 하는 테스트(jsdom)에서 SDK 가 브라우저 환경으로 오해하지 않게.
 let anthropicClient: Anthropic | null = null;
@@ -111,13 +113,15 @@ const EVIDENCE_MODEL_PROMPT_NOTE = (skill: EvidenceModelSkill) =>
  * distractor_error_types)을 스킬별로 다른 의미로 재사용한다(제품 오너 지시 — 의미가 실제로 맞으면 재사용
  * 우선). 스킬 그룹마다 그 4개 필드의 설명·enum만 다르다.
  */
-type StructuredSkill = EvidenceModelSkill | GrammarStructureSkill | QuantEvidenceSkill | TransitionsSkill;
+type StructuredSkill = EvidenceModelSkill | GrammarStructureSkill | QuantEvidenceSkill | TransitionsSkill | RhetoricalSynthesisSkill | TextStructureSkill;
 
 function structuredSkillOf(skillCode: string | null | undefined): StructuredSkill | null {
   if (isEvidenceModelSkill(skillCode)) return skillCode;
   if (isGrammarStructureSkill(skillCode)) return skillCode;
   if (isQuantEvidenceSkill(skillCode)) return skillCode;
   if (isTransitionsSkill(skillCode)) return skillCode;
+  if (isRhetoricalSynthesisSkill(skillCode)) return skillCode;
+  if (isTextStructureSkill(skillCode)) return skillCode;
   return null;
 }
 
@@ -164,29 +168,72 @@ function structuredFieldToolProperties(skill: StructuredSkill) {
       distractor_error_types: {
         type: "array",
         items: { type: "string", enum: Array.from(QUANT_DISTRACTOR_ERROR_TYPES) },
-        description: `오답(정답 제외) 각 선택지 순서대로, 그 오답이 자료를 어떻게 잘못 읽었는지(반드시 다음 중에서만: ${QUANT_DISTRACTOR_ERROR_TYPES.join(", ")}). 오답의 수치는 반드시 자료 안에 실제로 있는 값(다른 행/열·인접 셀)이어야 한다 — 자료에 없는 임의의 숫자는 안 된다.`,
+        description: `오답(정답 제외) 각 선택지 순서대로, 그 오답이 자료를 어떻게 잘못 읽었는지(반드시 다음 중에서만: ${QUANT_DISTRACTOR_ERROR_TYPES.join(", ")}). 이 목록은 target(operation: ${QUANT_OPERATIONS.join(", ")})과 **완전히 다른, 겹치지 않는** 목록이다 — target의 값(예: EXACT_LOOKUP, ROW_SUM)을 여기 쓰면 안 된다. target은 "정답이 어떤 계산으로 나왔는가"이고, distractor_error_types는 "오답이 자료를 어떻게 잘못 읽었는가(어느 행/열·셀을 착각했는가)"로 서로 다른 질문에 답한다. 오답의 수치는 반드시 자료 안에 실제로 있는 값(다른 행/열·인접 셀)이어야 한다 — 자료에 없는 임의의 숫자는 안 된다.`,
       },
     };
   }
-  // transitions
+  if (isTransitionsSkill(skill)) {
+    return {
+      target: {
+        type: "string",
+        enum: Array.from(TRANSITION_RELATIONSHIPS),
+        description: `정답 전환어가 신호하는 두 문장 사이의 논리 관계(반드시 다음 중 하나): ${TRANSITION_RELATIONSHIPS.join(", ")}.`,
+      },
+      evidence_span: {
+        type: "string",
+        description: "정답 전환어 바로 앞뒤 문장 중 그 논리 관계가 드러나는 절(참고용).",
+      },
+      answer_rationale: {
+        type: "string",
+        description: "이 논리 관계가 왜 성립하는지 짧은 한 문장.",
+      },
+      distractor_error_types: {
+        type: "array",
+        items: { type: "string", enum: Array.from(TRANSITION_RELATIONSHIPS) },
+        description: `오답(정답 제외) 각 선택지 순서대로, 그 전환어가 (틀리게) 신호하는 논리 관계(반드시 다음 중에서만: ${TRANSITION_RELATIONSHIPS.join(", ")}). target과 같은 값을 쓰면 안 된다(오답은 다른 관계를 신호해야 한다).`,
+      },
+    };
+  }
+  if (isRhetoricalSynthesisSkill(skill)) {
+    return {
+      target: {
+        type: "string",
+        description: "정답이 실제로 근거로 삼는 note(들)에 대한 짧은 설명(예: 'notes 1과 3'). 검증은 정답 선택지의 내용을 notes 목록과 직접 대조한다.",
+      },
+      evidence_span: {
+        type: "string",
+        description: "참고용 — 정답이 참조하는 note 항목 축자 인용(선택).",
+      },
+      answer_rationale: {
+        type: "string",
+        description: "정답 선택지가 학생의 목표(The student wants to …)를 notes의 정보만으로 어떻게 이루는지 짧은 한 문장.",
+      },
+      distractor_error_types: {
+        type: "array",
+        items: { type: "string", enum: Array.from(RHETORICAL_SYNTHESIS_DISTRACTOR_ERROR_TYPES) },
+        description: `오답(정답 제외) 각 선택지 순서대로, 그 오답이 학생의 목표를 놓친 방식(반드시 다음 중에서만: ${RHETORICAL_SYNTHESIS_DISTRACTOR_ERROR_TYPES.join(", ")}). IGNORES_GOAL=목표와 무관한 종합, MISUSES_ONE_NOTE_ONLY=note 하나만 쓰고 나머지 무시, COMBINES_WRONG_NOTES=목표에 안 맞는 note들을 결합, ADDS_UNSUPPORTED_CLAIM=notes에 없는 내용을 지어냄. 오답 3개는 서로 다른 태그여야 한다(중복 금지).`,
+      },
+    };
+  }
+  // text_structure_purpose
   return {
     target: {
       type: "string",
-      enum: Array.from(TRANSITION_RELATIONSHIPS),
-      description: `정답 전환어가 신호하는 두 문장 사이의 논리 관계(반드시 다음 중 하나): ${TRANSITION_RELATIONSHIPS.join(", ")}.`,
+      enum: Array.from(PARAGRAPH_ROLES),
+      description: `질문이 묻는 구간(밑줄 친 문장 또는 특정 문단)이 지문 전체 안에서 실제로 하는 수사적 역할(반드시 다음 중 하나): ${PARAGRAPH_ROLES.join(", ")}. 정답 선택지는 이 역할을 정확히 서술해야 한다.`,
     },
     evidence_span: {
       type: "string",
-      description: "정답 전환어 바로 앞뒤 문장 중 그 논리 관계가 드러나는 절(참고용).",
+      description: "질문이 가리키는 구간(밑줄 친 문장 전체, 또는 질문이 지목하는 문단의 핵심 문장) 축자 그대로 복사 — 지문에 실제로 있어야 한다.",
     },
     answer_rationale: {
       type: "string",
-      description: "이 논리 관계가 왜 성립하는지 짧은 한 문장.",
+      description: "이 구간이 왜 target 역할을 하는지 짧은 한 문장.",
     },
     distractor_error_types: {
       type: "array",
-      items: { type: "string", enum: Array.from(TRANSITION_RELATIONSHIPS) },
-      description: `오답(정답 제외) 각 선택지 순서대로, 그 전환어가 (틀리게) 신호하는 논리 관계(반드시 다음 중에서만: ${TRANSITION_RELATIONSHIPS.join(", ")}). target과 같은 값을 쓰면 안 된다(오답은 다른 관계를 신호해야 한다).`,
+      items: { type: "string", enum: Array.from(PARAGRAPH_ROLES) },
+      description: `오답(정답 제외) 각 선택지 순서대로, 그 선택지가 (틀리게) 주장하는 역할(반드시 다음 중에서만: ${PARAGRAPH_ROLES.join(", ")}). target과 같은 값을 쓰면 안 된다(오답은 실제와 다른 역할을 잘못 주장해야 한다). 오답 3개는 서로 다른 역할이어야 한다(중복 금지).`,
     },
   };
 }
@@ -194,8 +241,10 @@ function structuredFieldToolProperties(skill: StructuredSkill) {
 function structuredFieldPromptNote(skill: StructuredSkill): string {
   if (isEvidenceModelSkill(skill)) return EVIDENCE_MODEL_PROMPT_NOTE(skill);
   if (isGrammarStructureSkill(skill)) return `\n문법 규칙 모델(내부 전용, 학생에게 보이지 않음) — 이 세부 기술(${skill})은 target(문법 규칙 태그)/evidence_span/answer_rationale/distractor_error_types 네 필드를 함께 채운다. target은 이 스킬 고유의 문법 규칙 taxonomy에서만 고른다(다른 스킬의 taxonomy를 쓰면 안 된다). 오답 중 최소 하나는 target과 같은 결함 태그여야 하고, 정답 선택지는 그 결함이 없어야 한다.`;
-  if (isQuantEvidenceSkill(skill)) return `\n정량 근거 모델(내부 전용) — 이 세부 기술(${skill})은 target(operation)/evidence_span/answer_rationale/distractor_error_types 네 필드를 함께 채운다. 정답 선택지의 수치는 반드시 figure 자료에 실제로 있는 값(또는 행/열 합·최댓값·최솟값 같은 단순 파생값)이어야 하고, 오답의 수치도 자료 안의 다른(그럴듯하게 잘못 읽은) 값이어야 한다 — 자료와 무관한 임의의 숫자는 검증에서 거부된다.`;
-  return `\n전환어 논리 관계 모델(내부 전용) — 이 세부 기술(transitions)은 target(relationship_type)/evidence_span/answer_rationale/distractor_error_types 네 필드를 함께 채운다. target은 정답 전환어가 실제로 신호하는 논리 관계여야 하고, 오답들은 반드시 다른 관계를 신호해야 한다(같은 관계의 다른 단어를 쓰면 검증에서 거부된다).`;
+  if (isQuantEvidenceSkill(skill)) return `\n정량 근거 모델(내부 전용) — 이 세부 기술(${skill})은 target(operation)/evidence_span/answer_rationale/distractor_error_types 네 필드를 함께 채운다. target과 distractor_error_types는 서로 다른 enum이다 — target(${QUANT_OPERATIONS.join("/")})은 정답의 계산 방식, distractor_error_types(${QUANT_DISTRACTOR_ERROR_TYPES.join("/")})는 오답이 자료의 어느 부분을 잘못 읽었는지를 나타낸다(두 목록을 섞어 쓰지 않는다). 정답 선택지의 수치는 반드시 figure 자료에 실제로 있는 값(또는 행/열 합·최댓값·최솟값 같은 단순 파생값)이어야 하고, 오답의 수치도 자료 안의 다른(그럴듯하게 잘못 읽은) 값이어야 한다 — 자료와 무관한 임의의 숫자는 검증에서 거부된다.`;
+  if (isTransitionsSkill(skill)) return `\n전환어 논리 관계 모델(내부 전용) — 이 세부 기술(transitions)은 target(relationship_type)/evidence_span/answer_rationale/distractor_error_types 네 필드를 함께 채운다. target은 정답 전환어가 실제로 신호하는 논리 관계여야 하고, 오답들은 반드시 다른 관계를 신호해야 한다(같은 관계의 다른 단어를 쓰면 검증에서 거부된다).`;
+  if (isRhetoricalSynthesisSkill(skill)) return `\n자료 종합 모델(내부 전용) — 이 세부 기술(rhetorical_synthesis)은 target/evidence_span/answer_rationale/distractor_error_types 네 필드를 함께 채운다. 정답 선택지의 핵심 내용은 notes 목록에 있는 정보만으로 구성해야 한다(notes에 없는 사실을 지어내면 검증에서 거부된다). distractor_error_types는 정해진 태그(IGNORES_GOAL/MISUSES_ONE_NOTE_ONLY/COMBINES_WRONG_NOTES/ADDS_UNSUPPORTED_CLAIM) 중에서만 고르고, 오답끼리 서로 다른 태그여야 한다.`;
+  return `\n글의 구조·기능 모델(내부 전용) — 이 세부 기술(text_structure_purpose)은 target(구간의 실제 수사적 역할)/evidence_span/answer_rationale/distractor_error_types 네 필드를 함께 채운다. evidence_span은 질문이 가리키는 구간(밑줄 친 문장 또는 지목된 문단의 핵심 문장)을 지문에서 축자 그대로 복사해야 한다(지어내면 검증에서 거부된다). 정답 선택지는 target 역할을 정확히 서술해야 하고, 오답들은 반드시 다른 역할을 잘못 주장해야 한다(같은 역할을 다른 말로 쓰면 검증에서 거부된다).`;
 }
 
 const FORMAT_LABEL: Record<ProblemFormat, string> = {
