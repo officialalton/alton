@@ -35,6 +35,27 @@ describe("renderTwoVarDataProblem — 렌더링·해설(양방향표)", () => {
       }
     }
   });
+
+  // 2026-09-18 버그 수정 — conditional_share 질문("Of the people in the category "X", ...")이
+  // lib/problem-figures/templates/data.ts의 "the <이름> category" 참조 검사를 "the people in the
+  // category"로 잘못 매칭해 매번 ref_missing으로 거부됐다(실제 배치에서 부분 실패 다수 관찰).
+  // 파이프라인(math-compilers/batch.ts)이 실제로 검증에 넘기는 것과 같은 문자열(passage+question)로
+  // checkFigure를 돌려 이 회귀를 잡는다 — 위 테스트는 렌더 결과만 보고 checkFigure를 부르지 않아
+  // 이 결함을 놓쳤었다.
+  it("양방향표 — passage+question이 실제 렌더 검증(checkFigure)을 통과한다(50회, 전 유형·전 난이도)", () => {
+    const kinds = ["cell", "row_total", "conditional_share"] as const;
+    const difficulties = ["easy", "medium", "hard"] as const;
+    for (const kind of kinds) {
+      for (let i = 0; i < 50; i++) {
+        const model = generateTwoVarDataModel({ difficulty: difficulties[i % 3], questionKind: kind });
+        const rendered = renderTwoVarDataProblem(model);
+        const passageForCheck = rendered.passage + "\n\n" + rendered.question;
+        const check = checkFigure(rendered.figure, passageForCheck, rendered.options, rendered.correctIndex);
+        expect(check.issues, `${kind} 실패: ${JSON.stringify(check.issues)} / 지문: ${passageForCheck}`).toEqual([]);
+        expect(check.ok).toBe(true);
+      }
+    }
+  });
 });
 
 // 2026-09-17(Step 4 항목 5) — 산점도·최적합선. CollegeBoard 실기출 매핑에서 가장 빈번한(8회) 갭.

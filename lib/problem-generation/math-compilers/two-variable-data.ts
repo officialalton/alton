@@ -367,7 +367,13 @@ function renderTableProblem(model: TwoWayTableModel): CompiledMathProblem {
     explanation = `"${rowLabel}" 행의 두 칸(${model.colLabels[0]}, ${model.colLabels[1]})을 더하면 ${model.table[model.targetRow][0]} + ${model.table[model.targetRow][1]} = ${model.correctAnswer}이다.`;
     explanationEn = `Adding the two cells in row "${rowLabel}" (${model.colLabels[0]}, ${model.colLabels[1]}) gives ${model.table[model.targetRow][0]} + ${model.table[model.targetRow][1]} = ${model.correctAnswer}.`;
   } else {
-    question = `Of the people in the category "${rowLabel}", what percent are also in the category "${colLabel}"?`;
+    // 2026-09-18 버그 수정 — "Of the people in the category "X", ... also in the category "Y"?"는
+    // lib/problem-figures/templates/data.ts의 일반 참조 검사(`the <이름> column/row/category/...`)가
+    // "the people in the category"를 "the <이름='people in the'> category" 로 잘못 파싱해
+    // 존재하지 않는 데이터 항목("people in the")을 찾다가 매번 거부했다(ref_missing). 실제 행/열
+    // 이름은 뒤 따옴표(rowLabel/colLabel)로 이미 올바르게 검증되므로, "category"라는 단어를 "the"
+    // 바로 뒤가 아니라 따옴표 앞에 오도록 문장 순서를 바꿔 이 오탐 패턴 자체를 만들지 않는다.
+    question = `Of the people in the "${rowLabel}" category, what percent are also in the "${colLabel}" category?`;
     const rTotal = rowTotal(model.table, model.targetRow);
     explanation = `"${rowLabel}"인 사람은 총 ${rTotal}명이고, 그중 "${colLabel}"인 사람은 ${model.table[model.targetRow][model.targetCol]}명이다(비교 대상은 "${otherCol}"이 아니라 이 행 전체다). 따라서 ${model.table[model.targetRow][model.targetCol]}÷${rTotal}×100 = ${model.correctAnswer}%이다.`;
     explanationEn = `There are ${rTotal} people in "${rowLabel}", and ${model.table[model.targetRow][model.targetCol]} of them are also in "${colLabel}" (the base is that whole row, not "${otherCol}"). So ${model.table[model.targetRow][model.targetCol]}÷${rTotal}×100 = ${model.correctAnswer}%.`;
