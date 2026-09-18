@@ -213,7 +213,20 @@ export async function cancelLessonBooking(params: CancelBookingParams): Promise<
     p_cancelled_by_id: params.cancelledById,
     p_reason: params.reason,
   });
-  if (error) throw new Error(error.message);
+  if (error) {
+    // 2026-09-18 — release_entitlement()의 원시 SQL 예외("이미 consume된 예약은
+    // release할 수 없습니다" 등, supabase/migrations/20260830050000_r1_entitlement.sql)가
+    // 그대로 화면에 노출되던 문제. 이미 완료·확정 판정이 난 수업(entitlement가 이미
+    // consume됨)에 취소를 시도할 때 발생한다 — app/admin/entitlement-actions.ts의
+    // releaseEntitlementForReservation()과 동일한 친화적 메시지로 감싼다.
+    if (error.message.includes("이미 consume") || error.message.includes("이미 release")) {
+      throw new Error("이미 진행이 확정된 수업은 취소할 수 없습니다. 새로고침 후 다시 확인해주세요.");
+    }
+    if (error.message.includes("확정된 예약만 취소할 수 있습니다")) {
+      throw new Error("이미 취소되었거나 진행된 수업입니다. 새로고침 후 다시 확인해주세요.");
+    }
+    throw new Error(error.message);
+  }
 
   if (reservationBeforeCancel?.google_event_id) {
     await cancelSyncedCalendarEvent({

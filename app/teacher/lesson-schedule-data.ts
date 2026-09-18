@@ -17,9 +17,10 @@ export type TeacherLessonScheduleItem = {
   externalChangeStatus: string;
   isTrial: boolean;
   smartNotesDriveFileId: string | null;
-  // M4 UAT #5 — 체험 수업은 "지난 수업"으로 넘어가는 기준에 리뷰 확정 여부가
-  // 추가된다(정규 수업은 대상 밖, R9로 미룸). finalStatus/reviewStatus는 이 판단과
-  // "수업 리뷰 작성" 버튼 노출 조건에만 쓰인다.
+  // 2026-09-17(제품 오너 피드백) — 리뷰 확정 여부는 체험/정규 모두 동일하게
+  // lesson_reviews(trial_session_id 또는 regular_session_id)에서 온다.
+  // finalStatus/reviewStatus는 "예정/지난" 판정(isPastLesson)과 "수업 리뷰 작성"
+  // 버튼 노출 조건에 쓰인다.
   finalStatus: string;
   subjectEnrollmentId: string;
   reviewStatus: "none" | "draft" | "final";
@@ -61,18 +62,22 @@ export async function loadTeacherLessonSchedule(
     .order("id", { ascending: true });
   if (error) throw new Error(error.message);
 
-  // 체험 수업의 확정 리뷰 상태만 필요하다(정규 수업은 R9 범위 밖). trial-review-actions와
-  // 동일하게 lesson_reviews.trial_session_id로 조회 — 여기서는 status만 필요.
-  const trialSessionIds = (data ?? [])
-    .filter((row) => {
-      const lt = Array.isArray(row.lesson_type) ? row.lesson_type[0] : row.lesson_type;
-      return (lt as { code?: string } | null)?.code === "trial";
-    })
-    .map((row) => row.id as string);
-  const { data: reviews } = trialSessionIds.length
-    ? await supabase.from("lesson_reviews").select("trial_session_id, status").in("trial_session_id", trialSessionIds)
-    : { data: [] as { trial_session_id: string; status: string }[] };
-  const reviewStatusBySession = new Map((reviews ?? []).map((r) => [r.trial_session_id, r.status]));
+  // 2026-09-17(제품 오너 피드백) — 체험/정규 모두 리뷰 상태를 조회한다.
+  // lesson_reviews는 세션당 trial_session_id 또는 regular_session_id 중
+  // 정확히 하나만 채우므로 두 컬럼 다 대상으로 조회해야 정규 수업 리뷰 상태도
+  // 잡힌다(체험만 걸면 정규 리뷰가 항상 "none"으로 보였다).
+  const allSessionIds = (data ?? []).map((row) => row.id as string);
+  const { data: reviews } = allSessionIds.length
+    ? await supabase
+        .from("lesson_reviews")
+        .select("trial_session_id, regular_session_id, status")
+        .or(`trial_session_id.in.(${allSessionIds.join(",")}),regular_session_id.in.(${allSessionIds.join(",")})`)
+    : { data: [] as { trial_session_id: string | null; regular_session_id: string | null; status: string }[] };
+  const reviewStatusBySession = new Map(
+    (reviews ?? [])
+      .map((r) => [r.trial_session_id ?? r.regular_session_id, r.status] as const)
+      .filter((entry): entry is [string, string] => entry[0] !== null)
+  );
 
   function one<T>(rel: T | T[] | null | undefined): T | null {
     return Array.isArray(rel) ? (rel[0] ?? null) : (rel ?? null);

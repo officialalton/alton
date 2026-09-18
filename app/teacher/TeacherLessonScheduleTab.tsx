@@ -8,12 +8,14 @@ import type { AvailabilityExceptionRow } from "./availability-actions";
 import MonthCalendar, { type DayBadge } from "@/app/components/MonthCalendar";
 import { dateKeyInTimezone, dateKeysCoveredByInterval, buildWeekGrid, todayKeyInTimezone } from "@/lib/calendar-date-utils";
 import LessonReviewForm from "./LessonReviewForm";
+import LessonReviewEditForm from "./LessonReviewEditForm";
 import {
-  listMyTrialSessionsNeedingReview,
+  listMySessionsNeedingReview,
   listActiveReviewCategories,
-  saveTrialLessonReviewDraft,
-  finalizeTrialLessonReview,
-  type TrialSessionNeedingReview,
+  saveLessonReviewDraft,
+  finalizeLessonReview,
+  teacherEditFinalizedLessonReview,
+  type SessionNeedingReview,
   type ReviewCategoryOption,
 } from "./trial-review-actions";
 import type { ReportSessionIssueParams } from "./ScheduleTab";
@@ -30,15 +32,6 @@ const REPORT_TYPE_LABEL: Record<ReportType, string> = {
 // 진행한 v3 세션이 예정/지난으로 보이는 곳)으로 옮겼다. `isPastLesson()` 판정
 // 자체는 2026-09-10(P0-4)부터 `lesson-schedule-data.ts`(v3 조회 정본)에서
 // 가져와 교사 홈 대시보드와 공유한다 — 화면마다 판정 기준이 갈리지 않게.
-
-// 2026-09-03 정책 전환(요구사항 1) — 선생님이 organizer로 생성한 Calendar 이벤트의
-// 생성·변경·취소·동기화 상태. 내부 Google 오류 원문은 노출하지 않는다(관리자 화면 전용).
-const SYNC_STATUS_LABEL: Record<string, string> = {
-  pending: "내 Calendar에 일정 생성 준비 중",
-  synced: "내 Calendar에 일정 생성됨(학생 초대 발송)",
-  failed: "Calendar 일정 생성 재시도 중",
-  reconciliation_needed: "Calendar 일정 생성 실패 — 관리자 조치 중",
-};
 
 function durationMinutes(startsAt: string, endsAt: string): number {
   return Math.round((new Date(endsAt).getTime() - new Date(startsAt).getTime()) / 60_000);
@@ -106,7 +99,7 @@ export default function TeacherLessonScheduleTab({
   const [error, setError] = useState<string | null>(null);
   const [externalBusyBlocks, setExternalBusyBlocks] = useState<ExternalBusyBlock[]>([]);
   const [reviewCategories, setReviewCategories] = useState<ReviewCategoryOption[]>([]);
-  const [reviewModalSession, setReviewModalSession] = useState<TrialSessionNeedingReview | null>(null);
+  const [reviewModalSession, setReviewModalSession] = useState<SessionNeedingReview | null>(null);
   const [reviewModalLoading, setReviewModalLoading] = useState(false);
   const [reviewModalError, setReviewModalError] = useState<string | null>(null);
   const [showPastLessons, setShowPastLessons] = useState(false);
@@ -122,6 +115,20 @@ export default function TeacherLessonScheduleTab({
   const [reportSubmitting, setReportSubmitting] = useState(false);
   const [reportError, setReportError] = useState<string | null>(null);
   const [reportedSessionIds, setReportedSessionIds] = useState<Set<string>>(new Set());
+  const [pastStudentFilter, setPastStudentFilter] = useState<string | null>(null);
+  const [pastSubjectFilter, setPastSubjectFilter] = useState<string | null>(null);
+  const [pastPage, setPastPage] = useState(1);
+
+  function selectPastStudent(name: string | null) {
+    setPastStudentFilter(name);
+    setPastSubjectFilter(null);
+    setPastPage(1);
+  }
+
+  function selectPastSubject(name: string | null) {
+    setPastSubjectFilter(name);
+    setPastPage(1);
+  }
 
   function openReportForm(sessionId: string) {
     setReportingSessionId(sessionId);
@@ -159,7 +166,7 @@ export default function TeacherLessonScheduleTab({
     setReviewModalLoading(true);
     try {
       const [sessions, categories] = await Promise.all([
-        listMyTrialSessionsNeedingReview(),
+        listMySessionsNeedingReview(),
         reviewCategories.length ? Promise.resolve(reviewCategories) : listActiveReviewCategories(),
       ]);
       setReviewCategories(categories);
@@ -246,8 +253,143 @@ export default function TeacherLessonScheduleTab({
     [visibleLessons, nowMs]
   );
 
+  // 지난 수업은 최신순(가장 최근 수업이 위)으로 노출한다.
+  const pastLessonsSorted = useMemo(
+    () => [...pastLessons].sort((a, b) => new Date(b.startsAt).getTime() - new Date(a.startsAt).getTime()),
+    [pastLessons]
+  );
+
+  const pastStudentNames = useMemo(() => {
+    const seen = new Set<string>();
+    const names: string[] = [];
+    for (const l of pastLessonsSorted) {
+      if (!seen.has(l.studentName)) {
+        seen.add(l.studentName);
+        names.push(l.studentName);
+      }
+    }
+    return names;
+  }, [pastLessonsSorted]);
+
+  const pastLessonsForStudent = useMemo(
+    () => (pastStudentFilter ? pastLessonsSorted.filter((l) => l.studentName === pastStudentFilter) : pastLessonsSorted),
+    [pastLessonsSorted, pastStudentFilter]
+  );
+
+  const pastSubjectNames = useMemo(() => {
+    if (!pastStudentFilter) return [];
+    const seen = new Set<string>();
+    const names: string[] = [];
+    for (const l of pastLessonsForStudent) {
+      if (!seen.has(l.subjectName)) {
+        seen.add(l.subjectName);
+        names.push(l.subjectName);
+      }
+    }
+    return names;
+  }, [pastLessonsForStudent, pastStudentFilter]);
+
+  const filteredPastLessons = useMemo(
+    () => (pastSubjectFilter ? pastLessonsForStudent.filter((l) => l.subjectName === pastSubjectFilter) : pastLessonsForStudent),
+    [pastLessonsForStudent, pastSubjectFilter]
+  );
+
+  const PAST_PAGE_SIZE = 5;
+  const pastTotalPages = Math.max(1, Math.ceil(filteredPastLessons.length / PAST_PAGE_SIZE));
+  const pastPageClamped = Math.min(pastPage, pastTotalPages);
+  const pagedPastLessons = useMemo(
+    () => filteredPastLessons.slice((pastPageClamped - 1) * PAST_PAGE_SIZE, pastPageClamped * PAST_PAGE_SIZE),
+    [filteredPastLessons, pastPageClamped]
+  );
+
+  function renderPastLessonsList() {
+    if (pastLessons.length === 0) {
+      return (
+        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">지난 수업이 없습니다.</div>
+      );
+    }
+    return (
+      <div>
+        <div className="flex gap-1.5 flex-wrap mb-2">
+          <button
+            onClick={() => selectPastStudent(null)}
+            className={`text-[11px] font-bold px-2.5 py-1 rounded-full ${
+              pastStudentFilter === null ? "bg-ink text-white" : "bg-grey-100 text-grey-500"
+            }`}
+          >
+            전체
+          </button>
+          {pastStudentNames.map((name) => (
+            <button
+              key={name}
+              onClick={() => selectPastStudent(name)}
+              className={`text-[11px] font-bold px-2.5 py-1 rounded-full ${
+                pastStudentFilter === name ? "bg-ink text-white" : "bg-grey-100 text-grey-500"
+              }`}
+            >
+              {name}
+            </button>
+          ))}
+        </div>
+        {pastStudentFilter && pastSubjectNames.length > 0 && (
+          <div className="flex gap-1.5 flex-wrap mb-3">
+            <button
+              onClick={() => selectPastSubject(null)}
+              className={`text-[11px] font-semibold px-2.5 py-1 rounded-full ${
+                pastSubjectFilter === null ? "bg-ink text-white" : "bg-grey-100 text-grey-500"
+              }`}
+            >
+              전체
+            </button>
+            {pastSubjectNames.map((name) => (
+              <button
+                key={name}
+                onClick={() => selectPastSubject(name)}
+                className={`text-[11px] font-semibold px-2.5 py-1 rounded-full ${
+                  pastSubjectFilter === name ? "bg-ink text-white" : "bg-grey-100 text-grey-500"
+                }`}
+              >
+                {name}
+              </button>
+            ))}
+          </div>
+        )}
+        {filteredPastLessons.length === 0 ? (
+          <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
+            해당 조건의 지난 수업이 없습니다.
+          </div>
+        ) : (
+          <>
+            {pagedPastLessons.map((lesson) => renderLessonCard(lesson, true))}
+            {pastTotalPages > 1 && (
+              <div className="flex items-center justify-center gap-3 mt-2">
+                <button
+                  disabled={pastPageClamped <= 1}
+                  onClick={() => setPastPage(pastPageClamped - 1)}
+                  className="text-[12px] font-semibold text-grey-500 disabled:opacity-30"
+                >
+                  이전
+                </button>
+                <span className="text-[12px] text-grey-500">
+                  {pastPageClamped} / {pastTotalPages}
+                </span>
+                <button
+                  disabled={pastPageClamped >= pastTotalPages}
+                  onClick={() => setPastPage(pastPageClamped + 1)}
+                  className="text-[12px] font-semibold text-grey-500 disabled:opacity-30"
+                >
+                  다음
+                </button>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+    );
+  }
+
   function renderLessonCard(lesson: TeacherLessonScheduleItem, isPast = false) {
-    const needsReview = lesson.isTrial && lesson.finalStatus === "completed" && lesson.reviewStatus !== "final";
+    const needsReview = lesson.finalStatus === "completed" && lesson.reviewStatus !== "final";
     return (
       <div key={lesson.reservationId} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3">
         <div className="flex items-center justify-between">
@@ -261,13 +403,14 @@ export default function TeacherLessonScheduleTab({
               >
                 {lesson.isTrial ? "체험" : "정규"}
               </span>
-              {lesson.studentName} · {lesson.subjectName}
+              {lesson.studentName}
             </div>
+            <div className="text-[12.5px] font-semibold text-grey-500 mt-0.5">{lesson.subjectName}</div>
             <div className="text-[13px] text-grey-500 mt-0.5">
               {formatDateTime(lesson.startsAt, timezone)} · {durationMinutes(lesson.startsAt, lesson.endsAt)}분
             </div>
           </div>
-          {cancellingReservationId !== lesson.reservationId && (
+          {!isPast && cancellingReservationId !== lesson.reservationId && (
             <button
               disabled={submitting}
               onClick={() => {
@@ -281,9 +424,6 @@ export default function TeacherLessonScheduleTab({
           )}
         </div>
         <div className="mt-2 flex items-center gap-2 flex-wrap">
-          <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-grey-100 text-grey-500">
-            {SYNC_STATUS_LABEL[lesson.googleSyncStatus] ?? lesson.googleSyncStatus}
-          </span>
           {lesson.externalChangeStatus !== "none" && (
             <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-red/10 text-red">관리자 확인 필요(외부 변경 감지)</span>
           )}
@@ -315,7 +455,7 @@ export default function TeacherLessonScheduleTab({
               {lesson.finalStatus === "live" ? "수업 입장" : "수업 기록"}
             </button>
           )}
-          {lesson.googleMeetLink && (
+          {!isPast && lesson.googleMeetLink && (
             // 2026-09-09(UAT 지적): "수업 시작"은 이미 진행중(live)으로 전환된
             // 뒤에는 더 보이지 않고 "Meet 입장" 링크만 남는데, 지금까지 이
             // 링크는 Meet만 열고 세션뷰로는 이동하지 않았다 — "수업 시작"과
@@ -349,8 +489,17 @@ export default function TeacherLessonScheduleTab({
               수업 리뷰 작성
             </button>
           )}
-          {lesson.isTrial && lesson.reviewStatus === "draft" && (
+          {lesson.reviewStatus === "draft" && (
             <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-grey-100 text-grey-500">리뷰 초안 저장됨 · 비공개</span>
+          )}
+          {lesson.finalStatus === "completed" && lesson.reviewStatus === "final" && (
+            <button
+              disabled={reviewModalLoading}
+              onClick={() => openReviewModal(lesson.sessionId)}
+              className="text-[11px] font-semibold px-2 py-0.5 rounded-full border border-grey-300 text-ink disabled:opacity-50"
+            >
+              리뷰 수정
+            </button>
           )}
         </div>
         {(lesson.finalStatus === "scheduled" || lesson.finalStatus === "live") && (
@@ -495,7 +644,7 @@ export default function TeacherLessonScheduleTab({
               <button
                 disabled={reportSubmitting}
                 onClick={() => openReportForm(lesson.sessionId)}
-                className="text-[11px] font-semibold text-red disabled:opacity-50"
+                className="text-[11px] font-semibold text-grey-300 disabled:opacity-50"
               >
                 지각·노쇼 신고
               </button>
@@ -696,7 +845,7 @@ export default function TeacherLessonScheduleTab({
     <div className="max-w-[640px] px-8 py-8">
       {showUpcomingSection && (
       <>
-      <div className="flex items-center justify-between mb-1.5">
+      <div className="flex items-center justify-between mb-5">
         <h1 className="text-[20px] font-extrabold text-ink">수업 일정</h1>
         <div className="flex gap-1.5">
           {(["week-list", "week", "month"] as const).map((v) => (
@@ -710,11 +859,6 @@ export default function TeacherLessonScheduleTab({
           ))}
         </div>
       </div>
-      <p className="text-[13px] text-grey-500 mb-5">
-        확정 수업(파란 점)과 등록해둔 휴무·임시 오픈(빨강·회색 점)을 함께 표시합니다. 밑줄이 있는 날짜는 Google
-        캘린더의 다른 개인 일정이 있어 "외부 일정·예약 불가"입니다(제목·내용·참석자는 절대 표시하지 않습니다). 실제
-        Google 조회는 Sandbox 승인 전까지 항상 빈 결과를 반환합니다.
-      </p>
       </>
       )}
 
@@ -790,15 +934,7 @@ export default function TeacherLessonScheduleTab({
       )}
 
       {showPastSection && mode === "past" ? (
-        <div>
-          {pastLessons.length === 0 ? (
-            <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-              지난 수업이 없습니다.
-            </div>
-          ) : (
-            pastLessons.map((lesson) => renderLessonCard(lesson, true))
-          )}
-        </div>
+        <div>{renderPastLessonsList()}</div>
       ) : (
         showPastSection &&
         pastLessons.length > 0 && (
@@ -809,9 +945,7 @@ export default function TeacherLessonScheduleTab({
             >
               지난 수업 ({pastLessons.length}) {showPastLessons ? "숨기기 ▲" : "펼치기 ▼"}
             </button>
-            {showPastLessons && (
-              <div className="mt-3">{pastLessons.map((lesson) => renderLessonCard(lesson, true))}</div>
-            )}
+            {showPastLessons && <div className="mt-3">{renderPastLessonsList()}</div>}
           </div>
         )
       )}
@@ -824,7 +958,9 @@ export default function TeacherLessonScheduleTab({
         <div className="fixed inset-0 bg-ink/40 flex items-center justify-center z-40 p-4">
           <div className="bg-white rounded-xl max-w-[520px] w-full max-h-[85vh] overflow-y-auto p-5">
             <div className="flex items-center justify-between mb-3">
-              <h2 className="text-[15px] font-extrabold text-ink">수업 리뷰 작성</h2>
+              <h2 className="text-[15px] font-extrabold text-ink">
+                {reviewModalSession.reviewStatus === "final" ? "수업 리뷰 정정" : "수업 리뷰 작성"}
+              </h2>
               <button
                 onClick={() => {
                   setReviewModalSession(null);
@@ -835,36 +971,60 @@ export default function TeacherLessonScheduleTab({
                 닫기
               </button>
             </div>
-            <p className="text-[12.5px] text-grey-500 mb-3">
-              초안 저장은 비공개입니다. <b>공개 확정</b>을 눌러야 보호자·학생 화면에 노출되고, 이 수업이 지난
-              수업으로 이동합니다.
-            </p>
+            {reviewModalSession.reviewStatus !== "final" && (
+              <p className="text-[12.5px] text-grey-500 mb-3">
+                초안 저장은 비공개입니다. <b>공개 확정</b>을 눌러야 보호자·학생 화면에 노출되고, 이 수업이 지난
+                수업으로 이동합니다.
+              </p>
+            )}
             {reviewModalError && <div className="mb-2 text-[12px] text-red">{reviewModalError}</div>}
-            <LessonReviewForm
-              sessionId={reviewModalSession.sessionId}
-              categories={reviewCategories}
-              initial={{
-                aiSummary: reviewModalSession.aiSummary,
-                draftText: reviewModalSession.draftText ?? "",
-                categoryNotes: Object.fromEntries(
-                  Object.entries(reviewModalSession.categoryNotes).map(([k, v]) => [k, v ?? ""])
-                ),
-              }}
-              onSaveDraft={async (value) => {
-                await saveTrialLessonReviewDraft({
-                  sessionId: reviewModalSession.sessionId,
-                  aiSummary: value.aiSummary,
-                  draftText: value.draftText,
-                  categoryNotes: value.categoryNotes,
-                });
-                await handleReviewSaved();
-              }}
-              onFinalize={async (finalText) => {
-                await finalizeTrialLessonReview({ sessionId: reviewModalSession.sessionId, finalText });
-                setReviewModalSession(null);
-                await handleReviewSaved();
-              }}
-            />
+            {reviewModalSession.reviewStatus === "final" ? (
+              <LessonReviewEditForm
+                sessionId={reviewModalSession.sessionId}
+                categories={reviewCategories}
+                initial={{
+                  finalText: reviewModalSession.finalText ?? "",
+                  categoryNotes: Object.fromEntries(
+                    Object.entries(reviewModalSession.categoryNotes).map(([k, v]) => [k, v ?? ""])
+                  ),
+                }}
+                onSave={async (value) => {
+                  await teacherEditFinalizedLessonReview({
+                    sessionId: reviewModalSession.sessionId,
+                    finalText: value.finalText,
+                    categoryNotes: value.categoryNotes,
+                  });
+                  setReviewModalSession(null);
+                  await handleReviewSaved();
+                }}
+              />
+            ) : (
+              <LessonReviewForm
+                sessionId={reviewModalSession.sessionId}
+                categories={reviewCategories}
+                initial={{
+                  aiSummary: reviewModalSession.aiSummary,
+                  draftText: reviewModalSession.draftText ?? "",
+                  categoryNotes: Object.fromEntries(
+                    Object.entries(reviewModalSession.categoryNotes).map(([k, v]) => [k, v ?? ""])
+                  ),
+                }}
+                onSaveDraft={async (value) => {
+                  await saveLessonReviewDraft({
+                    sessionId: reviewModalSession.sessionId,
+                    aiSummary: value.aiSummary,
+                    draftText: value.draftText,
+                    categoryNotes: value.categoryNotes,
+                  });
+                  await handleReviewSaved();
+                }}
+                onFinalize={async (finalText) => {
+                  await finalizeLessonReview({ sessionId: reviewModalSession.sessionId, finalText });
+                  setReviewModalSession(null);
+                  await handleReviewSaved();
+                }}
+              />
+            )}
           </div>
         </div>
       )}

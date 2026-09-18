@@ -79,7 +79,8 @@ describe("TeacherLessonScheduleTab", () => {
         onResolveLateness={vi.fn()}
       />
     );
-    expect(screen.getByText(/지훈 · SAT Math/)).toBeInTheDocument();
+    expect(screen.getByText("지훈")).toBeInTheDocument();
+    expect(screen.getByText("SAT Math")).toBeInTheDocument();
     expect(screen.getByText("정규")).toBeInTheDocument();
     expect(screen.getByText(/120분/)).toBeInTheDocument();
   });
@@ -480,7 +481,8 @@ describe("TeacherLessonScheduleTab", () => {
       />
     );
     expect(screen.getByText("예정 수업 목록")).toBeInTheDocument();
-    expect(screen.getByText(/지훈 · SAT Math/)).toBeInTheDocument();
+    expect(screen.getByText("지훈")).toBeInTheDocument();
+    expect(screen.getByText("SAT Math")).toBeInTheDocument();
     vi.useRealTimers();
   });
 

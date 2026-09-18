@@ -216,11 +216,28 @@ describe("cancelLessonBooking", () => {
   });
 
   it("에러 응답 시 에러를 던진다", async () => {
-    rpcMock.mockResolvedValue({ error: { message: "확정된 예약만 취소할 수 있습니다." } });
+    rpcMock.mockResolvedValue({ error: { message: "예약을 찾을 수 없습니다." } });
     const { cancelLessonBooking } = await import("./create-booking");
     await expect(
       cancelLessonBooking({ reservationId: "r1", cancelledByRole: "student", cancelledById: "c1", reason: "x" })
-    ).rejects.toThrow("확정된 예약만 취소할 수 있습니다.");
+    ).rejects.toThrow("예약을 찾을 수 없습니다.");
+  });
+
+  // 2026-09-18 — release_entitlement()의 원시 SQL 예외가 그대로 노출되던 버그 수정.
+  it("이미 확정·소진된 예약을 취소하려 하면 친화적 메시지로 감싼다", async () => {
+    rpcMock.mockResolvedValue({ error: { message: "이미 consume된 예약은 release할 수 없습니다." } });
+    const { cancelLessonBooking } = await import("./create-booking");
+    await expect(
+      cancelLessonBooking({ reservationId: "r1", cancelledByRole: "teacher", cancelledById: "t1", reason: "x" })
+    ).rejects.toThrow("이미 진행이 확정된 수업은 취소할 수 없습니다.");
+  });
+
+  it("이미 취소·완료된 예약을 다시 취소하려 하면 친화적 메시지로 감싼다", async () => {
+    rpcMock.mockResolvedValue({ error: { message: "확정된 예약만 취소할 수 있습니다(현재 상태: cancelled)." } });
+    const { cancelLessonBooking } = await import("./create-booking");
+    await expect(
+      cancelLessonBooking({ reservationId: "r1", cancelledByRole: "student", cancelledById: "c1", reason: "x" })
+    ).rejects.toThrow("이미 취소되었거나 진행된 수업입니다.");
   });
 
   it("취소 성공 후 google_event_id가 있으면 Calendar 이벤트 삭제를 호출한다", async () => {
