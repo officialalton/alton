@@ -150,15 +150,24 @@ export type SubmitMeetingRequestResult =
 
 /** 예외를 던지지 않고 { ok, error }로 반환한다(Next.js Server Action의 production
  * 예외 마스킹 재발 방지 — app/admin/trial-onboarding-actions.ts와 동일 규칙). */
-/** R12.1: 상담 신청 폼은 "상담 사유" 단일 입력만 받는다. child_id/subject/
- * contact_preference/preferred_contact_time 컬럼은 DB에 그대로 두지만(추가 전용
- * 마이그레이션 원칙), 이 폼에서는 값을 넣지 않고 null로 남긴다. */
-export async function submitMeetingRequest(params: { reason: string }): Promise<SubmitMeetingRequestResult> {
+/** R12.1: 상담 신청 폼은 관리자가 열어둔 상담 가능 시간(list_open_meeting_slots)
+ * 중 하나를 먼저 고르고, 그 아래 "상담 사유"를 적어 신청한다(2026-09-18 지시 —
+ * 수업 예약과 동일한 캘린더 UI). child_id/subject/contact_preference 컬럼은
+ * DB에 그대로 두지만(추가 전용 마이그레이션 원칙), 이 폼에서는 값을 넣지 않고
+ * null로 남긴다. */
+export async function submitMeetingRequest(params: {
+  reason: string;
+  slotStartsAtIso: string;
+}): Promise<SubmitMeetingRequestResult> {
   try {
     const { user, profile, supabase } = await requireUser();
     if (profile?.role !== "parent") throw new Error("보호자만 상담을 신청할 수 있습니다.");
     if (!params.reason?.trim()) throw new Error("상담 사유를 입력해주세요.");
+    if (!params.slotStartsAtIso) throw new Error("상담 희망 시간을 선택해주세요.");
     const householdId = await requireGuardianHouseholdId(supabase, user.id);
+
+    const startsAt = new Date(params.slotStartsAtIso);
+    const endsAt = new Date(startsAt.getTime() + 60 * 60 * 1000);
 
     const { error } = await supabase.from("meeting_requests").insert({
       household_id: householdId,
@@ -168,8 +177,8 @@ export async function submitMeetingRequest(params: { reason: string }): Promise<
       contact_preference: null,
       preferred_contact_time: null,
       requested_by: user.id,
-      starts_at: null,
-      ends_at: null,
+      starts_at: startsAt.toISOString(),
+      ends_at: endsAt.toISOString(),
       source_message_id: null,
     });
     if (error) throw new Error(error.message);

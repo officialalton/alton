@@ -1,12 +1,16 @@
 "use client";
 
-// R12.1 — 보호자 포털 "상담 신청" 서브탭. 신청 폼만 다룬다(단일 "상담 사유" 입력).
-// 신청 내역·리뷰 열람은 ConsultationHistoryTab에서, 대화는 MessengerTab에서 다룬다.
+// R12.1 — 보호자 포털 "상담 신청" 서브탭. 신청 폼만 다룬다: 관리자가 열어둔
+// 상담 가능 시간을 먼저 고르고(수업 예약과 동일한 ConsultSlotPicker UI),
+// 그 아래 "상담 사유"를 적어 신청한다(2026-09-18 지시). 신청 내역·리뷰 열람은
+// ConsultationHistoryTab에서, 대화는 MessengerTab에서 다룬다.
 
 import { useState } from "react";
-import { submitMeetingRequest } from "./inquiry-actions";
+import ConsultSlotPicker from "@/app/components/ConsultSlotPicker";
+import { listOpenGuardianMeetingSlots, submitMeetingRequest } from "./inquiry-actions";
 
 export default function ConsultationRequestTab() {
+  const [slotStartsAt, setSlotStartsAt] = useState<string | null>(null);
   const [reason, setReason] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -14,17 +18,22 @@ export default function ConsultationRequestTab() {
 
   async function handleSubmit() {
     setError(null);
+    if (!slotStartsAt) {
+      setError("상담 희망 시간을 먼저 선택해주세요.");
+      return;
+    }
     if (!reason.trim()) {
       setError("상담 사유를 입력해주세요.");
       return;
     }
     setSubmitting(true);
-    const result = await submitMeetingRequest({ reason });
+    const result = await submitMeetingRequest({ reason, slotStartsAtIso: slotStartsAt });
     setSubmitting(false);
     if (!result.ok) {
       setError(result.error);
       return;
     }
+    setSlotStartsAt(null);
     setReason("");
     setSubmitted(true);
   }
@@ -33,8 +42,21 @@ export default function ConsultationRequestTab() {
     <div className="max-w-[720px] px-5 py-6">
       <h2 className="text-[16px] font-bold text-ink mb-1">상담 신청</h2>
       <p className="text-[12.5px] text-grey-500 mb-5">
-        상담 사유를 입력해 상담을 신청할 수 있습니다. 신청 진행 상황과 대화는 각각 &quot;상담 내역&quot;·&quot;메신저&quot;에서 확인해주세요.
+        관리자가 열어둔 상담 가능 시간을 선택하고, 상담 사유를 입력해 신청할 수 있습니다.
+        신청 진행 상황과 대화는 각각 &quot;상담 내역&quot;·&quot;메신저&quot;에서 확인해주세요.
       </p>
+
+      <section className="border-[1.5px] border-grey-200 rounded-xl p-4 mb-5">
+        <h3 className="text-[13.5px] font-bold text-ink mb-3">상담 희망 시간(60분)</h3>
+        <ConsultSlotPicker
+          fetchSlots={listOpenGuardianMeetingSlots}
+          selectedStartsAt={slotStartsAt}
+          onSelect={(iso) => {
+            setSlotStartsAt(iso);
+            setSubmitted(false);
+          }}
+        />
+      </section>
 
       <section className="border-[1.5px] border-grey-200 rounded-xl p-4">
         {error && <p className="text-[12.5px] text-red mb-2">{error}</p>}
