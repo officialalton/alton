@@ -82,21 +82,34 @@ export async function loadTeacherList(
   supabase: SupabaseClient,
   studentId: string
 ): Promise<TeacherListItem[]> {
-  const assignments = await loadActiveAssignments(supabase, studentId);
-  const teacherIds = Array.from(new Set(assignments.map((a) => a.teacherId)));
-  if (teacherIds.length === 0) return [];
+  const rawAssignments = await loadActiveAssignments(supabase, studentId);
+  const rawTeacherIds = Array.from(new Set(rawAssignments.map((a) => a.teacherId)));
+  if (rawTeacherIds.length === 0) return [];
 
   const { data: profiles } = await supabase
     .from("profiles")
     .select("id, name")
-    .in("id", teacherIds);
+    .in("id", rawTeacherIds);
   const { data: teacherRows } = await supabase
     .from("teachers")
     .select("id, school")
-    .in("id", teacherIds);
+    .in("id", rawTeacherIds);
 
   const nameById = new Map((profiles ?? []).map((p) => [p.id, p.name]));
   const schoolById = new Map((teacherRows ?? []).map((t) => [t.id, t.school]));
+
+  // 2026-09-18(학생 홈 크래시 수정) — teacher_assignments가 가리키는 프로필이
+  // profiles에는 있어도 teachers 테이블에는 아직 없는 경우(온보딩 미완료·
+  // 데이터 정합성 결함)가 있을 수 있다. 이런 teacherId를 그대로 내려보내면
+  // 이후 ensureThreadAndLoadMessages()의 chat_threads insert가
+  // chat_threads_teacher_id_fkey(teachers 참조) 위반으로 던지는 예외를
+  // page.tsx가 잡지 못해 /student 홈 전체가 크래시한다(실사용 UAT
+  // 2026-09-18 재현: docs/2026-09-18-real-student-teacher-uat.md 5절).
+  // teachers 행이 실제로 있는 teacherId만 통과시킨다.
+  const validTeacherIdSet = new Set((teacherRows ?? []).map((t) => t.id));
+  const assignments = rawAssignments.filter((a) => validTeacherIdSet.has(a.teacherId));
+  const teacherIds = rawTeacherIds.filter((id) => validTeacherIdSet.has(id));
+  if (teacherIds.length === 0) return [];
 
   // C-1(2026-09-10) — 진도는 세션 실적이 아니라 curriculum_overlay_units
   // 기준으로 통일한다(다른 화면과 동일 기준).
