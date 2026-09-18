@@ -120,6 +120,24 @@ describe("Bug A/B(2026-09-17) — 빈칸 완성형 축자 복제·transitions �
   it("선택지가 지문과 겹치지 않는 독립 문장이면 정상 통과(오탐 없음)", () => {
     expect(checkQualityContract(fss).ok).toBe(true);
   });
+  it("실측(2026-09-18, 25문항 배치)에서 나온 오탐 패턴 — 평범한 연결구(6~7단어) 겹침은 통과해야 한다", () => {
+    // 실제 파이프라인 배치에서 걸렸던 사례를 축소 재현: "in the early years of the" 처럼 내용이
+    // 아니라 흔한 시간 표현을 6단어 그대로 공유하는 것만으로는 축자 복제가 아니다(문장 전체 복사가 아님).
+    const inf = {
+      ...wic, skillCode: "inferences",
+      stimulus:
+        "Historians note that in the early years of the tulip trade, transactions relied heavily on personal trust between merchants. ______ formal contracts became common only after repeated disputes over unpaid deliveries.",
+      question: "Which choice most logically completes the text?",
+      options: [
+        "By contrast, buyers in the early years of the market rarely needed written agreements at all.",
+        "Consequently, tulip prices fell sharply within a single growing season.",
+        "Meanwhile, unrelated trade routes to the east expanded rapidly.",
+        "Nevertheless, most merchants preferred to trade in silver rather than tulips.",
+      ],
+      correctIndex: 0,
+    };
+    expect(checkQualityContract(inf).issues.map((i) => i.code)).not.toContain("contract_option_echo");
+  });
   it("Rhetorical Synthesis 는 노트 고유명사를 정답이 인용해도 축자 복제 검사 대상이 아니다(오탐 방지)", () => {
     const rs = {
       ...wic, skillCode: "rhetorical_synthesis",

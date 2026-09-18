@@ -215,9 +215,14 @@ function normalizeWords(s: string): string[] {
     .filter(Boolean);
 }
 
-const ECHO_MIN_WORDS = 6;
+// 2026-09-18 — 제품 오너 지적 + 실측(25문항 실 파이프라인 배치, inferences/boundaries/
+// form_structure_sense/transitions) 반영: 6단어는 "sellers ... in the early years of the ..."
+// 같은 평범한 연결구까지 오탐으로 잡는다(관용구·전치사구는 지문·선택지가 같은 사건을 다루면 우연히도
+// 자주 겹친다). 실제 결함 사례(Sylvia Earle, 정답 절 전체가 지문과 12단어 이상 동일)는 8단어로 올려도
+// 여전히 걸린다. 8단어로 올려 "문장 하나를 통째로 복사"만 잡고 평범한 구 단위 겹침은 통과시킨다.
+const ECHO_MIN_WORDS = 8;
 
-/** 선택지 중 하나라도 지문과 6단어 이상 연속으로(정규화 허용) 겹치면 축자 복제로 본다. */
+/** 선택지 중 하나라도 지문과 8단어 이상 연속으로(정규화 허용) 겹치면 축자 복제로 본다. */
 function findVerbatimEcho(passage: string, options: string[]): FigureIssue | null {
   const passageWords = normalizeWords(passage);
   if (passageWords.length < ECHO_MIN_WORDS) return null;
@@ -231,7 +236,7 @@ function findVerbatimEcho(passage: string, options: string[]): FigureIssue | nul
     for (let i = 0; i <= optWords.length - ECHO_MIN_WORDS; i += 1) {
       const gram = optWords.slice(i, i + ECHO_MIN_WORDS).join(" ");
       if (passageNgrams.has(gram)) {
-        return { code: "contract_option_echo", message: `선택지 "${opt.slice(0, 80)}" 가 지문에 이미 있는 문구("${gram}")를 6단어 이상 그대로 복제했습니다 — 빈칸 완성형 선택지는 지문을 복사-붙여넣기 한 것이 아니라 직접 지어낸 문장이어야 합니다(패턴매칭으로 답을 찾을 수 없게).` };
+        return { code: "contract_option_echo", message: `선택지 "${opt.slice(0, 80)}" 가 지문에 이미 있는 문구("${gram}")를 ${ECHO_MIN_WORDS}단어 이상 그대로 복제했습니다 — 빈칸 완성형 선택지는 지문을 복사-붙여넣기 한 것이 아니라 직접 지어낸 문장이어야 합니다(패턴매칭으로 답을 찾을 수 없게).` };
       }
     }
   }
