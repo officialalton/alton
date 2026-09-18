@@ -365,13 +365,17 @@ export function renderCirclesProblem(model: CirclesModel): CompiledMathProblem {
     passage = `In the circle with center O shown, inscribed angle ACB (vertex C on the circle) intercepts the same arc AB as central angle AOB, and angle ACB measures ${inscribedAngle}°.`;
     explanation = `같은 호를 지나는 중심각은 원주각의 2배이므로 중심각 = 2 × ${inscribedAngle}° = ${fmt(centralAngle)}°이다.`;
     explanationEn = `A central angle is twice the inscribed angle that subtends the same arc, so the central angle = 2 × ${inscribedAngle}° = ${fmt(centralAngle)}°.`;
-    figure = { type: "circle", center: "O", points: [{ id: "A", angle: 0 }, { id: "B", angle: 100 }, { id: "C", angle: 220 }], radii: [{ to: "A" }, { to: "B" }], inscribedAngles: [{ at: "C", between: ["A", "B"], label: `${inscribedAngle}°` }] };
+    // 2026-09-19(제품 오너 발견) — B가 항상 고정 각도(100°)에 있어서 실제 중심각 값과 무관하게
+    // 그림이 늘 똑같아 보였다(43°든 21°든 시각적으로 같은 부채꼴 크기). A는 0°로 고정이므로
+    // B를 실제 centralAngle 위치에 둬야 그림이 값에 맞게 달라진다(원주각 정리는 C 위치와
+    // 무관하게 항상 성립하므로 C는 반대편 호 위 아무 자리나 유지해도 된다).
+    figure = { type: "circle", center: "O", points: [{ id: "A", angle: 0 }, { id: "B", angle: centralAngle }, { id: "C", angle: 220 }], radii: [{ to: "A" }, { to: "B" }], inscribedAngles: [{ at: "C", between: ["A", "B"], label: `${inscribedAngle}°` }] };
   } else if (model.questionKind === "inscribed_from_central") {
     const { inscribedAngle, centralAngle } = model as { inscribedAngle: number; centralAngle: number };
     passage = `In the circle with center O shown, inscribed angle ACB (vertex C on the circle) intercepts the same arc AB as central angle AOB, and angle AOB measures ${centralAngle}°.`;
     explanation = `같은 호를 지나는 원주각은 중심각의 절반이므로 원주각 = ${centralAngle}° ÷ 2 = ${fmt(inscribedAngle)}°이다.`;
     explanationEn = `An inscribed angle is half the central angle that subtends the same arc, so the inscribed angle = ${centralAngle}° ÷ 2 = ${fmt(inscribedAngle)}°.`;
-    figure = { type: "circle", center: "O", points: [{ id: "A", angle: 0 }, { id: "B", angle: 100 }, { id: "C", angle: 220 }], radii: [{ to: "A" }, { to: "B" }], centralAngles: [{ between: ["A", "B"], label: `${centralAngle}°` }] };
+    figure = { type: "circle", center: "O", points: [{ id: "A", angle: 0 }, { id: "B", angle: centralAngle }, { id: "C", angle: 220 }], radii: [{ to: "A" }, { to: "B" }], centralAngles: [{ between: ["A", "B"], label: `${centralAngle}°` }] };
   } else {
     // circle_equation_transform — 좌표평면 그림 없이 대수적으로만 다룬다(방정식 자체가 자료).
     const { eqVariant, centerH, centerK, radius } = model as { eqVariant: CircleEqVariant; centerH: number; centerK: number; radius: number };

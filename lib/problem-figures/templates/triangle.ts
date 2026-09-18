@@ -76,21 +76,54 @@ export function validateTriangle(input: unknown): { ok: true; spec: TriangleSpec
   return { ok: true, spec: s as unknown as TriangleSpec };
 }
 
+/** side/altitude 라벨을 순수 숫자로 파싱(변수 라벨이면 null). */
+function parseLabel(t?: string): number | null {
+  if (!t) return null;
+  const n = Number(t.trim().replace(/[^0-9.]/g, ""));
+  return Number.isFinite(n) && n > 0 ? n : null;
+}
+function labelBetween(sides: TriangleBody["sides"], a: string, b: string): number | null {
+  const s = (sides ?? []).find((s) => (s.between[0] === a && s.between[1] === b) || (s.between[0] === b && s.between[1] === a));
+  return parseLabel(s?.label);
+}
+
 /** 표준형 좌표(단위 프레임, 폭 1 기준) — kind 와 직각 위치로 모양을 정한다. 반환은 vertices 순서대로. */
 function shapeOf(b: TriangleBody): { pts: Pt[]; order: string[] } {
   const [v0, v1, v2] = b.vertices;
   const kind: TriangleKind = b.kind ?? (b.rightAngleAt ? "right" : "scalene");
   if (kind === "right") {
-    // 직각 꼭짓점 왼쓱 아래, 다음 꼭짓점(순환) 오른쪽 아래, 나머지 위. 가로:세로 = 4:3.
+    // 직각 꼭짓점 왼쓱 아래, 다음 꼭짓점(순환) 오른쪽 아래, 나머지 위.
     const r = b.rightAngleAt ?? v1;
     const i = b.vertices.indexOf(r);
     const bl = b.vertices[i], br = b.vertices[(i + 1) % 3], top = b.vertices[(i + 2) % 3];
-    const map: Record<string, Pt> = { [bl]: [0, 0], [br]: [1, 0], [top]: [0, 0.75] };
+    // 2026-09-19(제품 오너 발견) — 두 직각변 값과 무관하게 항상 가로:세로 = 4:3 고정이었다
+    // (예: AB=18, AC=80인데 거의 정사각형에 가까운 삼각형으로 보임). bl-br·bl-top 변의
+    // 숫자 라벨이 둘 다 있으면 그 실제 비율로 그린다(단위 프레임 안에서 상대 비율만
+    // 맞으면 되므로 두 값을 서로에 대해 정규화 — 더 긴 변을 1로 둔다).
+    const legBR = labelBetween(b.sides, bl, br); // 가로변(밑변)
+    const legTop = labelBetween(b.sides, bl, top); // 세로변(높이)
+    let w = 1, h = 0.75;
+    if (legBR !== null && legTop !== null) {
+      const maxLeg = Math.max(legBR, legTop);
+      w = legBR / maxLeg;
+      h = legTop / maxLeg;
+    }
+    const map: Record<string, Pt> = { [bl]: [0, 0], [br]: [w, 0], [top]: [0, h] };
     return { pts: b.vertices.map((v) => map[v]), order: [top, bl, br] };
   }
   if (kind === "equilateral") return { pts: [[0.5, Math.sqrt(3) / 2], [0, 0], [1, 0]], order: [v0, v1, v2] };
   if (kind === "isosceles") return { pts: [[0.5, 0.85], [0, 0], [1, 0]], order: [v0, v1, v2] };
-  return { pts: [[0.36, 0.72], [0, 0], [1, 0]], order: [v0, v1, v2] }; // scalene
+  // scalene — 밑변(v1-v2)에 대한 높이(altitude)가 숫자 라벨로 있으면 실제 밑변:높이 비율로.
+  // (예: base=26, height=4처럼 아주 납작한 삼각형인데 고정 비율 탓에 정삼각형에 가깝게 보이던 사례.)
+  const base = labelBetween(b.sides, v1, v2);
+  const alt = b.altitude?.from === v0 ? parseLabel(b.altitude.label) : null;
+  if (base !== null && alt !== null) {
+    const maxV = Math.max(base, alt);
+    // 꼭짓점 x좌표(발의 위치)는 임의로 밑변의 40% 지점에 둔다 — altitude foot 표시는 실제 발
+    // 위치를 요구하지 않으므로(수선 표시일 뿐) 비율만 맞으면 된다.
+    return { pts: [[0.4 * (base / maxV), alt / maxV], [0, 0], [base / maxV, 0]], order: [v0, v1, v2] };
+  }
+  return { pts: [[0.36, 0.72], [0, 0], [1, 0]], order: [v0, v1, v2] }; // scalene(라벨 없음, 기존 고정 비율)
 }
 
 function drawTriangle(sheet: Sheet, b: TriangleBody, frame: { x: number; y: number; w: number; h: number }, opts: { skipNoteSpace?: boolean } = {}): { alt: string } {
@@ -139,8 +172,23 @@ function drawTriangle(sheet: Sheet, b: TriangleBody, frame: { x: number; y: numb
     sheet.rightAngle(foot, a1, a2, 8);
     if (b.altitude.foot) sheet.label(foot[0], foot[1] + 14, b.altitude.foot, "높이 발 이름", { italic: true });
     if (b.altitude.label) {
+      // 2026-09-19(제품 오너 발견) — 아주 납작한 삼각형(높이가 밑변에 비해 매우 짧게 스케일됨)에서
+      // 고정 오프셋 한 곳만 시도하면 발의 직각 표시나 옆면 선과 겹쳤다. 좌우 여러 후보 중 첫
+      // 번째로 안 겹치는 자리를 고른다.
       const mx = (from[0] + foot[0]) / 2, my = (from[1] + foot[1]) / 2;
-      sheet.label(mx + 8 + halfDiag(b.altitude.label) * 0.8, my, b.altitude.label, "높이 라벨");
+      const d = 8 + halfDiag(b.altitude.label) * 0.8;
+      const offsets = [0, 10, 20, 35, 55];
+      const candidates: Pt[] = offsets.flatMap((o): Pt[] => [
+        [mx + d + o, my],
+        [mx - d - o, my],
+        [mx + d + o, my - 12],
+        [mx - d - o, my - 12],
+        [mx + d + o, my + 12],
+        [mx - d - o, my + 12],
+      ]);
+      const spot = sheet.firstFree(candidates, b.altitude.label);
+      const [lx, ly] = spot ?? candidates[0];
+      sheet.label(lx, ly, b.altitude.label, "높이 라벨");
     }
   }
 
@@ -171,20 +219,40 @@ function drawTriangle(sheet: Sheet, b: TriangleBody, frame: { x: number; y: numb
     const mx = p[0] + (q[0] - p[0]) * tPos, my = p[1] + (q[1] - p[1]) * tPos;
     if (s.tick) sheet.ticks(p, q, s.tick);
     if (s.label) {
+      // 2026-09-19(제품 오너 발견 — 극단 비율 도형에서) — "무게중심 반대쪽" 한 방향만 시도하면
+      // 아주 납작/뾰족한 삼각형(비율을 실제 값대로 그리기 시작한 뒤 생김)에서 그 방향이 변과
+      // 거의 평행해 라벨이 여전히 선과 겹쳤다. 변에 수직인 방향(과 그 반대) + 기존 방식을
+      // 후보로 두고 첫 번째로 안 겹치는 자리를 고른다(입체도형 sideLabel과 같은 패턴).
       const dx = mx - cx, dy = my - cy;
       const len = Math.hypot(dx, dy) || 1;
       const d = halfDiag(s.label) + 6;
-      sheet.label(mx + (dx / len) * d, my + (dy / len) * d, s.label, `변 라벨(${s.between.join("")})`);
+      const ex = q[0] - p[0], ey = q[1] - p[1];
+      const elen = Math.hypot(ex, ey) || 1;
+      let nx = -ey / elen, ny = ex / elen;
+      if (nx * dx + ny * dy < 0) { nx = -nx; ny = -ny; }
+      const candidates: Pt[] = [
+        [mx + nx * d, my + ny * d],
+        [mx + (dx / len) * d, my + (dy / len) * d],
+        [mx + nx * (d + 12), my + ny * (d + 12)],
+        [mx + nx * (d + 24), my + ny * (d + 24)],
+      ];
+      const spot = sheet.firstFree(candidates, s.label);
+      const [lx, ly] = spot ?? candidates[0];
+      sheet.label(lx, ly, s.label, `변 라벨(${s.between.join("")})`);
     }
   }
 
-  // 꼭짓점 이름 — 무게중심 반대쪽
+  // 꼭짓점 이름 — 무게중심 반대쪽. 극단 비율(예: 매우 납작한 삼각형)에서는 그 한 방향도
+  // 다른 변과 겹칠 수 있어 여러 반지름의 후보 중 첫 번째로 안 겹치는 자리를 고른다.
   for (const v of b.vertices) {
     const c = at(v);
     const dx = c[0] - cx, dy = c[1] - cy;
     const len = Math.hypot(dx, dy) || 1;
-    const d = halfDiag(v) + 6;
-    sheet.label(c[0] + (dx / len) * d, c[1] + (dy / len) * d, v, `꼭짓점 이름(${v})`, { italic: true });
+    const base = halfDiag(v) + 6;
+    const candidates: Pt[] = [0, 10, 20, 35].map((extra): Pt => [c[0] + (dx / len) * (base + extra), c[1] + (dy / len) * (base + extra)]);
+    const spot = sheet.firstFree(candidates, v);
+    const [lx, ly] = spot ?? candidates[0];
+    sheet.label(lx, ly, v, `꼭짓점 이름(${v})`, { italic: true });
   }
 
   const kindKo: Record<TriangleKind, string> = { scalene: "삼각형", isosceles: "이등변삼각형", right: "직각삼각형", equilateral: "정삼각형" };

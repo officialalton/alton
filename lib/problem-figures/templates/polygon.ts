@@ -54,11 +54,35 @@ export function validatePolygon(input: unknown): { ok: true; spec: PolygonSpec }
   return { ok: true, spec: s as unknown as PolygonSpec };
 }
 
+/** sideLabels에서 두 꼭짓점 사이 변의 라벨을 순수 숫자로 파싱한다(변수 라벨이면 null). */
+function parseSideLabel(spec: PolygonSpec, a: string, b: string): number | null {
+  const sl = (spec.sideLabels ?? []).find((s) => (s.between[0] === a && s.between[1] === b) || (s.between[0] === b && s.between[1] === a));
+  const t = sl?.label;
+  if (!t) return null;
+  const n = Number(t.trim().replace(/[^0-9.]/g, ""));
+  return Number.isFinite(n) && n > 0 ? n : null;
+}
+
 /** 표준형 좌표(화면 px, 프레임 안). 왼쪽 아래부터 반시계. */
 function shape(spec: PolygonSpec): Pt[] {
   const cx = 180, baseY = 210;
   switch (spec.kind) {
-    case "rectangle": return [[cx - 110, baseY], [cx + 110, baseY], [cx + 110, baseY - 140], [cx - 110, baseY - 140]];
+    case "rectangle": {
+      // 2026-09-19(제품 오너 발견) — 길이·너비 값과 무관하게 항상 같은 고정 비율(220×140)로
+      // 그려졌다(예: 길이 15·너비 6인데 거의 정사각형으로 보임). vertices는 왼쪽아래→오른쪽아래
+      // →오른쪽위→왼쪽위 순(A,B,C,D)이므로 A-B가 가로변(길이), B-C가 세로변(너비)이다. 두 라벨이
+      // 전부 숫자면 같은 단위당 픽셀(pxPerUnit)로 스케일해 실제 비율을 보존한다.
+      const MAX_W = 220, MAX_H = 170, MIN_SIDE = 60;
+      let halfW = 110, fullH = 140;
+      const wLabel = parseSideLabel(spec, spec.vertices[0], spec.vertices[1]);
+      const hLabel = parseSideLabel(spec, spec.vertices[1], spec.vertices[2]);
+      if (wLabel !== null && hLabel !== null) {
+        const pxPerUnit = Math.min(MAX_W / wLabel, MAX_H / hLabel);
+        halfW = Math.max(MIN_SIDE, Math.round(wLabel * pxPerUnit)) / 2;
+        fullH = Math.max(MIN_SIDE, Math.round(hLabel * pxPerUnit));
+      }
+      return [[cx - halfW, baseY], [cx + halfW, baseY], [cx + halfW, baseY - fullH], [cx - halfW, baseY - fullH]];
+    }
     case "square": return [[cx - 80, baseY], [cx + 80, baseY], [cx + 80, baseY - 160], [cx - 80, baseY - 160]];
     case "parallelogram": return [[cx - 120, baseY], [cx + 70, baseY], [cx + 120, baseY - 120], [cx - 70, baseY - 120]];
     case "rhombus": return [[cx - 110, baseY - 70], [cx, baseY], [cx + 110, baseY - 70], [cx, baseY - 140]];

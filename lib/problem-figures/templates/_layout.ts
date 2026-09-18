@@ -116,6 +116,17 @@ export class Sheet {
       if (b.x1 < 4 || b.y1 < 4 || b.x2 > this.width - 4 || b.y2 > this.height - 4) continue;
       if (this.placed.some((p) => p.kind === "label" && overlap(b, box(p.x, p.y, p.w, p.h)))) continue;
       if (this.segments.some(([a, c]) => boxHitsSegment(b, a, c))) continue;
+      // 2026-09-19 — label()이 실제 배치 시 검사하는 "각 표시(arc)와 겹침"을 firstFree도 미리
+      // 봐야 한다. 안 그러면 firstFree가 "빈 자리"라고 골라준 곳이 label()에서 다시 arc 충돌로
+      // 거부되는 모순이 생긴다(도형 비율을 실제 값대로 그리기 시작한 뒤 발견 — 직각 표시가
+      // 라벨 근처로 옮겨오는 각도 조합에서 재현).
+      const hitsArc = this.placed.some((p) => {
+        if (p.kind !== "arc") return false;
+        const ang = norm(Math.atan2(-(y - p.c[1]), x - p.c[0]));
+        const inWedge = (ang >= p.a1 && ang <= p.a2) || (ang + 2 * Math.PI >= p.a1 && ang + 2 * Math.PI <= p.a2);
+        return inWedge && Math.hypot(x - p.c[0], y - p.c[1]) < p.r + Math.hypot(w, h) / 2;
+      });
+      if (hitsArc) continue;
       return [x, y];
     }
     return null;

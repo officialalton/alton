@@ -79,12 +79,22 @@ export function renderSolid(spec: SolidSpec): { svg: string; alt: string; issues
       let depMag = 60;
       if (spec.kind === "rectangular_prism") {
         const L0 = parseNum(d.length), W0 = parseNum(d.width), H0 = parseNum(d.height);
-        if (L0 !== null && W0 !== null && H0 !== null) {
-          const maxVal = Math.max(L0, W0, H0);
-          const scale = (v: number, cap: number) => Math.max(MIN_SIDE, Math.round((v / maxVal) * cap));
-          w = scale(L0, MAX_W);
-          h = scale(H0, MAX_H);
-          depMag = scale(W0, MAX_DEP);
+        // 2026-09-19(제품 오너 재발견) — 각 변을 서로 다른 캡(MAX_W/MAX_H/MAX_DEP)에 맞춰
+        // 따로 스케일하면 실제 비율이 안 지켜진다(예: 높이가 가장 크면 h=MAX_H로 고정되고
+        // 길이는 그보다 작은 비율로 줄어드는데, MAX_W≠MAX_H라 픽셀 비율이 실제 값 비율과
+        // 달라짐 — 지름 12·높이 12(같은 값)인데도 화면에서 다르게 나온 사례로 발견). 세 변
+        // 전부에 **같은** 단위당 픽셀 값(pxPerUnit)을 적용해야 실제 비율이 보존된다 — 알려진
+        // 변들의 캡을 전부 만족하는 가장 작은 배율을 고른다. 미지수(예: prism_missing_dimension의
+        // "?")가 하나 섞여 있어도 나머지 두 변은 여전히 서로 정확한 비율로 그려야 한다(발견
+        // 사례: length=4/height=2인데 width가 "?"라서 스케일 자체를 건너뛰고 고정 크기를 써서
+        // 4:2 비율이 지켜지지 않음) — 알려진 변이 2개 이상이면 그 변들만으로 배율을 정한다.
+        const known: { val: number; cap: number; set: (px: number) => void }[] = [];
+        if (L0 !== null) known.push({ val: L0, cap: MAX_W, set: (px) => (w = px) });
+        if (H0 !== null) known.push({ val: H0, cap: MAX_H, set: (px) => (h = px) });
+        if (W0 !== null) known.push({ val: W0, cap: MAX_DEP, set: (px) => (depMag = px) });
+        if (known.length >= 2) {
+          const pxPerUnit = Math.min(...known.map((k) => k.cap / k.val));
+          for (const k of known) k.set(Math.max(MIN_SIDE, Math.round(k.val * pxPerUnit)));
         }
       }
       const dep: Pt = [depMag, -Math.round(depMag * DEP_RATIO)];

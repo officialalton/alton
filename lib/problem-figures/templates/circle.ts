@@ -148,7 +148,23 @@ export function renderCircle(spec: CircleSpec): { svg: string; alt: string; issu
     for (const id of a.between) sheet.line(v, at(id));
     let [a1, a2] = [...dirs].sort((x, y) => x - y); if (a2 - a1 > Math.PI) [a1, a2] = [a2, a1 + 2 * Math.PI];
     sheet.arc(v, ARC_R, a1, a2);
-    if (a.label) { const mid = (a1 + a2) / 2; const r = Math.max(30, (halfDiag(a.label) + 4) / Math.max(Math.sin((a2 - a1) / 2), 0.25)); sheet.label(v[0] + r * Math.cos(mid), v[1] - r * Math.sin(mid), a.label, `원주각 라벨(${a.at})`); }
+    if (a.label) {
+      // 2026-09-19(제품 오너 발견 — 중심각을 실제 값대로 그리기 시작한 뒤) — B 위치가 각도에
+      // 따라 달라지면서 원래 한 자리만 계산하던 라벨이 다른 선·꼭짓점과 겹치는 경우가 생겼다.
+      // 반지름을 늘려가며 첫 번째로 안 겹치는 자리를 고른다.
+      const mid = (a1 + a2) / 2;
+      const base = Math.max(30, (halfDiag(a.label) + 4) / Math.max(Math.sin((a2 - a1) / 2), 0.25));
+      // 각이 아주 좁으면(예: 14°) 이등분선 방향 후보가 전부 그 좁은 쐐기 경계선 위/근처에
+      // 걸린다 — 이등분선에서 살짝 벗어난 각도(바깥쪽으로)도 후보에 넣는다.
+      const candidates: Pt[] = [0, 12, 24, 40].flatMap((extra) => [
+        [v[0] + (base + extra) * Math.cos(mid), v[1] - (base + extra) * Math.sin(mid)] as Pt,
+        [v[0] + (base + extra) * Math.cos(mid + 0.35), v[1] - (base + extra) * Math.sin(mid + 0.35)] as Pt,
+        [v[0] + (base + extra) * Math.cos(mid - 0.35), v[1] - (base + extra) * Math.sin(mid - 0.35)] as Pt,
+      ]);
+      const spot = sheet.firstFree(candidates, a.label);
+      const [lx, ly] = spot ?? candidates[0];
+      sheet.label(lx, ly, a.label, `원주각 라벨(${a.at})`);
+    }
   }
   // 점·이름
   for (const p of spec.points) {
@@ -158,8 +174,15 @@ export function renderCircle(spec: CircleSpec): { svg: string; alt: string; issu
   if (centerName) {
     sheet.dot(c);
     // 반지름·현이 지나지 않는 쪽 대각선 자리(규칙: 좌하 → 우하 → 좌상 → 우상 순)에 놓는다.
-    const d = halfDiag(centerName) + 6;
-    const spot = sheet.firstFree([[c[0] - d, c[1] + d], [c[0] + d, c[1] + d], [c[0] - d, c[1] - d], [c[0] + d, c[1] - d]], centerName);
+    // 2026-09-19(제품 오너 발견) — B가 고정 각도가 아니라 실제 값 위치에 놓이게 되면서 대각선
+    // 4자리만으로는 반지름 선을 피하지 못하는 각도 조합이 생겼다 — 상하좌우 4자리를 후보에
+    // 더한다.
+    const angles16 = Array.from({ length: 16 }, (_, i) => (i * Math.PI) / 8);
+    const radii2 = [halfDiag(centerName) + 6, halfDiag(centerName) + 18];
+    const spot = sheet.firstFree(
+      radii2.flatMap((d) => angles16.map((a): Pt => [c[0] + d * Math.cos(a), c[1] + d * Math.sin(a)])),
+      centerName
+    );
     if (spot) sheet.label(spot[0], spot[1], centerName, "중심 이름", { italic: true });
     else issues.push({ code: "label_collision", message: `중심 이름 '${centerName}' 을 겹치지 않게 놓을 자리가 없습니다 — 반지름·현 수를 줄이세요.` });
   }
