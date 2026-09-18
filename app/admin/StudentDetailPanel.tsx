@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { setStudentStatus, adjustStudentCredit, verifyStudentDateOfBirth } from "./users-actions";
 import type { CreditTransaction, StudentListItem } from "./users-data";
 import SubjectEnrollmentPanel from "./SubjectEnrollmentPanel";
@@ -170,6 +171,12 @@ export default function StudentDetailPanel({
         <p className="text-[13px] text-grey-500 mt-1">
           AP 이수 {student.apCourseCount}건 · 비교과 활동 {student.extracurricularCount}건
         </p>
+        <Link
+          href={`/admin/students/${student.id}/roadmap`}
+          className="inline-block mt-2 text-[11.5px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white"
+        >
+          프로필·로드맵 전체 열람/수정
+        </Link>
       </div>
 
       <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">

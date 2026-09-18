@@ -19,7 +19,14 @@ type SubView =
   | { type: "list" }
   | { type: "curriculum"; enrollmentId: string }
   | { type: "review"; sessionId: string }
-  | { type: "operating-curriculum"; subjectEnrollmentId: string; subjectId: string; studentName: string; subjectName: string };
+  | {
+      type: "operating-curriculum";
+      subjectEnrollmentId: string;
+      subjectId: string;
+      studentName: string;
+      subjectName: string;
+      studentId?: string;
+    };
 
 export default function CurriculumTab({
   mySubjects,
@@ -83,6 +90,7 @@ export default function CurriculumTab({
         subjectId={subView.subjectId}
         studentName={subView.studentName}
         subjectName={subView.subjectName}
+        studentId={subView.studentId}
         cached={curriculumPanelCache[subView.subjectEnrollmentId]}
         onLoaded={(data) =>
           setCurriculumPanelCache((prev) => ({ ...prev, [subView.subjectEnrollmentId]: data }))
@@ -150,6 +158,7 @@ export default function CurriculumTab({
                   studentName:
                     students.find((s) => s.studentId === selectedStudentId)?.studentName ?? "",
                   subjectName: subject.subjectName,
+                  studentId: selectedStudentId ?? undefined,
                 })
               : setSubView({ type: "curriculum", enrollmentId: subject.enrollmentId })
           }
@@ -223,11 +232,13 @@ function StudentCurriculumOperatingView({
   subjectId,
   studentName,
   subjectName,
+  studentId,
   cached,
   onLoaded,
   onBack,
 }: {
   subjectEnrollmentId: string;
+  studentId?: string;
   subjectId: string;
   studentName: string;
   subjectName: string;
@@ -262,6 +273,7 @@ function StudentCurriculumOperatingView({
           library={state.library}
           studentName={studentName}
           subjectName={subjectName}
+          studentId={studentId}
         />
       )}
     </div>

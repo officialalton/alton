@@ -42,9 +42,12 @@ import {
   updateMyTimezone,
 } from "./booking-actions";
 import { reportTeacherIssue } from "./incident-report-actions";
+import RoadmapView from "@/app/components/RoadmapView";
+import type { RoadmapData } from "@/lib/roadmap/types";
 
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
+  { id: "roadmap", label: "로드맵", icon: "🧭" },
   { id: "enrollment", label: "수강 과목", icon: "🎓" },
   // 2026-09-06(A안 UI 정리) — "예약"(v3 예약/캘린더)과 "레슨"(레거시 커리큘럼·리뷰)이
   // 기능 중복이라는 지적에 따라 하나의 "수업" 탭으로 합쳤다(ClassesTab, 예정/지난
@@ -92,6 +95,7 @@ export default function StudentShell({
   chatThreads,
   subjectEnrollments,
   lessonBooking,
+  roadmap,
 }: {
   studentName: string;
   initialTab?: string;
@@ -119,6 +123,7 @@ export default function StudentShell({
   chatThreads: Record<string, { threadId: string; messages: ChatMessage[] }>;
   subjectEnrollments: SubjectEnrollmentView[];
   lessonBooking: LessonBookingData;
+  roadmap: RoadmapData;
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -239,6 +244,8 @@ export default function StudentShell({
               onShowStats={() => selectTab("stats")}
               timezone={lessonBooking.timezone}
             />
+          ) : activeTab === "roadmap" ? (
+            <RoadmapView data={roadmap} />
           ) : activeTab === "enrollment" ? (
             <EnrollmentTab enrollments={subjectEnrollments} />
           ) : activeTab === "classes" ? (

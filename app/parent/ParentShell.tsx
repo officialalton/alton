@@ -45,6 +45,9 @@ import {
   updateChildTimezone,
   reportTeacherIssueForChild,
 } from "./booking-actions";
+import RoadmapView from "@/app/components/RoadmapView";
+import type { RoadmapData } from "@/lib/roadmap/types";
+import { getRoadmapForStudent } from "@/lib/roadmap/actions";
 
 // 2026-09-17/18 — 학부모 포털 IA 재구성(R13 상담 마일스톤). 메인 내비는 아래
 // 순서 고정: 홈/수업권/수강 과목/수업/상담/단어장/과제. "가족"(신규 자녀 상담
@@ -56,6 +59,7 @@ import {
 // "상담" 탭 산하 서브탭(상담 신청/상담 내역/메신저)으로 통합한다.
 const NAV_ITEMS = [
   { id: "home", label: "홈", icon: "🏠" },
+  { id: "roadmap", label: "로드맵", icon: "🧭" },
   { id: "entitlements", label: "수업권", icon: "🎟️" },
   { id: "enrollment", label: "수강 과목", icon: "🎓" },
   { id: "lessons", label: "수업", icon: "📅" },
@@ -151,6 +155,7 @@ export default function ParentShell({
   const [familyReviews, setFamilyReviews] = useState<FamilyLessonReview[] | null>(null);
   const [consultReviews, setConsultReviews] = useState<HomeConsultationReview[] | null>(null);
   const [childStats, setChildStats] = useState<StatsData | null>(null);
+  const [roadmap, setRoadmap] = useState<RoadmapData | null>(null);
 
   // R12 — 메신저 안 읽은 관리자 메시지 수를 내비게이션 배지로 보여준다.
   // 메신저 탭을 직접 열면 MessengerTab이 읽음 처리를 하므로, 탭을 떠날 때
@@ -185,6 +190,12 @@ export default function ParentShell({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab, homeSubTab, currentChildId]);
+
+  // 로드맵 탭도 홈 "통계" 서브탭과 같은 자녀 전환 시 지연 로딩 패턴.
+  useEffect(() => {
+    if (activeTab !== "roadmap") return;
+    getRoadmapForStudent(currentChildId).then(setRoadmap).catch(() => setRoadmap(null));
+  }, [activeTab, currentChildId]);
 
   // 2026-09-10(P0-3 2차) — 공용 포털 내비게이션 결함: activeTab이 마운트
   // 시점의 initialTab으로만 초기화돼, 브라우저 뒤로가기/앞으로가기로 URL이
@@ -440,6 +451,12 @@ export default function ParentShell({
                 </div>
               )}
             </div>
+          ) : activeTab === "roadmap" ? (
+            roadmap && roadmap.studentId === currentChildId ? (
+              <RoadmapView data={roadmap} />
+            ) : (
+              <div className="p-8 text-[14px] text-grey-500">불러오는 중…</div>
+            )
           ) : activeTab === "enrollment" ? (
             <ParentEnrollmentTab childrenEnrollments={childrenSubjectEnrollments} />
           ) : activeTab === "lessons" ? (

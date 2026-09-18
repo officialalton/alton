@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import UnitPrepPanel from "./UnitPrepPanel";
 import { loadUnitPrepSummaries, type UnitPrepSummary } from "./unit-prep-actions";
 import { useEffect } from "react";
@@ -53,12 +54,14 @@ export default function StudentCurriculumPanel({
   library,
   studentName = "",
   subjectName = "",
+  studentId,
 }: {
   subjectEnrollmentId: string;
   initial: StudentCurriculum;
   library: EligibleLibrary;
   studentName?: string;
   subjectName?: string;
+  studentId?: string;
 }) {
   const router = useRouter();
   // P2/P3 3단계 — 예약이 없어도 여기서 바로 회차를 준비한다.
@@ -276,7 +279,17 @@ export default function StudentCurriculumPanel({
 
   return (
     <div className="max-w-[640px] px-6 py-6">
-      <h2 className="text-[16px] font-extrabold text-ink mb-1">학생 운영 커리큘럼</h2>
+      <div className="flex items-start justify-between gap-3 mb-1">
+        <h2 className="text-[16px] font-extrabold text-ink">학생 운영 커리큘럼</h2>
+        {studentId && (
+          <Link
+            href={`/teacher/student/${studentId}/roadmap`}
+            className="text-[11.5px] font-bold text-ink bg-grey-100 rounded-full px-3 py-1.5 shrink-0"
+          >
+            학생 프로필·로드맵 보기
+          </Link>
+        )}
+      </div>
       <p className="text-[12.5px] text-grey-500 mb-4">
         기본 원본은 그대로 두고, 이 학생만의 추가·제외·재정렬·진도를 관리합니다.
       </p>
