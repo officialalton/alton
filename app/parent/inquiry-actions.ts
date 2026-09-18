@@ -5,8 +5,9 @@
 // meeting_requests)만 다룬다 — 기존 자녀 면담은 가입·체험·정규 전환 파이프라인
 // 카드를 만들지 않는다(별도 테이블이므로 자연히 그렇게 됨).
 //
-// app/parent/consult-request-actions.ts와 동일한 원칙: 보호자 household/이름은
-// 세션에서만 가져오고 클라이언트 입력을 받지 않는다. 쓰기는 보호자 본인의 regular
+// 신규 자녀 상담 신청(구 app/parent/consult-request-actions.ts, R13에서 폐기)과
+// 같은 원칙: 보호자 household/이름은 세션에서만 가져오고 클라이언트 입력을 받지
+// 않는다. 쓰기는 보호자 본인의 regular
 // supabase 클라이언트(auth.uid()가 실제로 채워짐)로 RLS를 그대로 태워서 하고,
 // service_role 어드민 클라이언트는 쓰지 않는다 — 2026-09-06에 실제로 발견된
 // "service_role 호출인데 SQL이 auth.uid()/is_admin()을 다시 확인해 항상 거부되는"
