@@ -102,7 +102,7 @@
   문제·과제·모의고사에는 공통 계산기와 ALTON용으로 재구성한 참조표를 제공하며 R&W에는
   보이지 않는다. 상세 사양: [`2026-09-17-fixed-mock-exam-v1-spec.md`](2026-09-17-fixed-mock-exam-v1-spec.md).
 
-- **학부모 ↔ 관리자 상담 신청·메신저 V1(구현 완료, 비프로덕션 배포·UAT 미완 — 2026-09-17)**:
+- **학부모 ↔ 관리자 상담 신청·메신저 V1(구현·로컬 UAT 완료, non-prod 배포 미완 — 2026-09-17)**:
   R11(household_messages, meeting_requests)을 확장해 구현했다(신규 테이블 중복 생성 안 함).
   마이그레이션 `supabase/migrations/20261406000000_r12_parent_admin_support_v1.sql`을
   로컬에 적용해 meeting_requests에 content/contact_preference/preferred_contact_time과
@@ -115,9 +115,15 @@
   건별 대화 + 5단계 상태 버튼)까지 반영했다. 사용자 노출 문구는 "상담 신청"/"메신저"로
   통일했다("문의"는 화면에 남기지 않음, 내부 파일명은 유지). 단위·통합 테스트
   54건(`app/consult/r12-parent-admin-support.integration.test.ts` 포함, 로컬 Postgres
-  RLS 검증)과 `tsc --noEmit` 모두 통과 확인. 브라우저 UAT와 non-prod(`supabase db push`
-  + Vercel preview) 배포는 아직 수행하지 않았다 — 다음 세션에서 이어서 진행 필요. 상세
-  사양: [`2026-09-17-parent-admin-support-spec.md`](2026-09-17-parent-admin-support-spec.md).
+  RLS 검증)과 `tsc --noEmit` 모두 통과 확인. 로컬 dev 서버 + 브라우저로 실제 학부모/관리자
+  계정 UAT를 수행해 상담 신청 작성→관리자 5단계 상태 전환→건별 대화 양방향→메신저
+  양방향 대화·안읽음 배지 표시/해제까지 전 구간을 직접 확인했고 버그는 없었다. non-prod
+  (`supabase db push --linked`, project `worpsqwqgnspddnrtnvq`) 적용과 `vercel deploy`는
+  이 세션의 Claude Code auto mode 권한 분류기가 "Modify Shared Resources"로 두 명령
+  모두 차단해 수행하지 못했다 — 개발자가 직접 실행하거나 해당 Bash 권한을 허용해야
+  한다(`supabase db push --linked` 하나만 실행하면 됨; dry-run으로 확인한 대기 마이그레이션은
+  `20261405000000_p6_additional_study_unit_insert.sql`과 `20261406000000_r12_...`
+  두 건). 상세 사양: [`2026-09-17-parent-admin-support-spec.md`](2026-09-17-parent-admin-support-spec.md).
 
 - **예약·수업 준비·진도 단일 흐름(2026-09-17, 완료)**: 예약 확정 시 다음 미완료 회차
   (`curriculum_overlay_units.status`)를 자동 연결하고 그 시점 교재·문제·키워드를
