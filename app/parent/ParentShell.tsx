@@ -23,7 +23,7 @@ import ConsultationRequestTab from "./ConsultationRequestTab";
 import ConsultationHistoryTab from "./ConsultationHistoryTab";
 import MessengerTab from "./MessengerTab";
 import { getMessengerUnreadCount } from "./inquiry-actions";
-import { getAllFamilyLessonReviews } from "./home-reviews-actions";
+import { getAllFamilyLessonReviews, getHomeConsultationReviews, type HomeConsultationReview } from "./home-reviews-actions";
 import type { FamilyLessonReview } from "./lesson-review-family-actions";
 import { getParentChildStats } from "./home-stats-actions";
 import type { StatsData } from "@/app/student/stats-data";
@@ -144,9 +144,11 @@ export default function ParentShell({
   const [creditsModalOpen, setCreditsModalOpen] = useState(false);
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
   // 2026-09-18 — 홈 재설계: "일정 확인"에서 "리뷰 확인"으로 목적이 바뀌어
-  // 종합 리뷰(기본)/수업 리뷰(시간순)/통계 3개 읽기 전용 서브탭으로 구성한다.
-  const [homeSubTab, setHomeSubTab] = useState<"reviews" | "lessonReviews" | "stats">("reviews");
+  // 종합 리뷰(기본)/수업 리뷰(시간순)/상담 리뷰/통계 4개 읽기 전용 서브탭으로
+  // 구성한다. 상담 리뷰는 종합 리뷰에 합치지 않는다(사용자 결정, 2026-09-18).
+  const [homeSubTab, setHomeSubTab] = useState<"reviews" | "lessonReviews" | "consultReviews" | "stats">("reviews");
   const [familyReviews, setFamilyReviews] = useState<FamilyLessonReview[] | null>(null);
+  const [consultReviews, setConsultReviews] = useState<HomeConsultationReview[] | null>(null);
   const [childStats, setChildStats] = useState<StatsData | null>(null);
 
   // R12 — 메신저 안 읽은 관리자 메시지 수를 내비게이션 배지로 보여준다.
@@ -164,6 +166,10 @@ export default function ParentShell({
     if (activeTab !== "home") return;
     if (homeSubTab === "stats") {
       getParentChildStats(currentChildId).then(setChildStats).catch(() => setChildStats(null));
+      return;
+    }
+    if (homeSubTab === "consultReviews") {
+      getHomeConsultationReviews().then(setConsultReviews).catch(() => setConsultReviews([]));
       return;
     }
     const enrollmentIds =
@@ -357,8 +363,9 @@ export default function ParentShell({
           {/* 2026-09-17/18 — 홈 재설계: "일정 확인"에서 "리뷰 확인"으로 목적
               전환. 상단 동의 배너는 제거(프로필 드롭다운 배지로만 노출), 캘린더·
               예정 수업(HomeDashboard)도 더 이상 쓰지 않는다 — 종합 리뷰/수업
-              리뷰/통계 3개 읽기 전용 서브탭으로 대체한다. 데이터 없을 때는
-              일정·캘린더로 되돌아가지 않고 빈 상태 문구만 보여준다(요구사항). */}
+              리뷰/상담 리뷰/통계 4개 읽기 전용 서브탭으로 대체한다(상담 리뷰는
+              종합 리뷰에 합치지 않는다, 사용자 결정 2026-09-18). 데이터 없을
+              때는 일정·캘린더로 되돌아가지 않고 빈 상태 문구만 보여준다(요구사항). */}
           {activeTab === "home" ? (
             <div>
               <div className="px-6 pt-5 flex gap-2 border-b border-grey-200 pb-3">
@@ -366,6 +373,7 @@ export default function ParentShell({
                   [
                     ["reviews", "종합 리뷰"],
                     ["lessonReviews", "수업 리뷰"],
+                    ["consultReviews", "상담 리뷰"],
                     ["stats", "통계"],
                   ] as const
                 ).map(([id, label]) => (
@@ -386,6 +394,18 @@ export default function ParentShell({
                   <StatsTab data={childStats} />
                 ) : (
                   <p className="p-8 text-[14px] text-grey-500">불러오는 중...</p>
+                )
+              ) : homeSubTab === "consultReviews" ? (
+                consultReviews === null ? (
+                  <p className="p-8 text-[14px] text-grey-500">불러오는 중...</p>
+                ) : consultReviews.length === 0 ? (
+                  <p className="p-8 text-[14px] text-grey-500">아직 확정된 상담 리뷰가 없습니다.</p>
+                ) : (
+                  <div className="px-6 py-5 space-y-3">
+                    {consultReviews.map((r) => (
+                      <ConsultationReviewCard key={r.meetingRequestId} review={r} />
+                    ))}
+                  </div>
                 )
               ) : familyReviews === null ? (
                 <p className="p-8 text-[14px] text-grey-500">불러오는 중...</p>
@@ -563,6 +583,35 @@ function FamilyReviewCard({ review }: { review: FamilyLessonReview }) {
         >
           미팅록 보기
         </a>
+      )}
+    </div>
+  );
+}
+
+// 2026-09-18 — 홈 "상담 리뷰" 서브탭 카드. household 범위(상담 신청/내역 탭과
+// 동일 RLS)의 확정된 meeting_request_reviews만 다룬다 — 미팅록이 없으면
+// "미팅록이 없습니다"만 보여주고 링크를 지어내지 않는다.
+function ConsultationReviewCard({ review }: { review: HomeConsultationReview }) {
+  return (
+    <div className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3">
+      <div className="flex items-center justify-between">
+        <span className="text-[12px] font-bold text-ink">상담 리뷰</span>
+        <span className="text-[11px] text-grey-500">
+          {review.startsAt ? new Date(review.startsAt).toLocaleString("ko-KR", { dateStyle: "medium", timeStyle: "short" }) : "-"}
+        </span>
+      </div>
+      <p className="text-[12.5px] text-ink whitespace-pre-wrap mt-1.5">{review.finalText}</p>
+      {review.meetingRecordLink ? (
+        <a
+          href={review.meetingRecordLink}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-block mt-2 text-[12px] font-semibold text-ink underline"
+        >
+          미팅록 보기
+        </a>
+      ) : (
+        <p className="mt-2 text-[11px] text-grey-500">미팅록이 없습니다.</p>
       )}
     </div>
   );

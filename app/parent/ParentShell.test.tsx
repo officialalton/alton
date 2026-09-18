@@ -38,6 +38,7 @@ vi.mock("./inquiry-actions", () => ({
 
 vi.mock("./home-reviews-actions", () => ({
   getAllFamilyLessonReviews: vi.fn().mockResolvedValue([]),
+  getHomeConsultationReviews: vi.fn().mockResolvedValue([]),
 }));
 
 vi.mock("./home-stats-actions", () => ({
@@ -111,6 +112,7 @@ describe("ParentShell", () => {
     expect(screen.getAllByText("이서아").length).toBeGreaterThan(0);
     expect(screen.getByText("종합 리뷰")).toBeInTheDocument();
     expect(screen.getByText("수업 리뷰")).toBeInTheDocument();
+    expect(screen.getByText("상담 리뷰")).toBeInTheDocument();
     // "통계"는 이제 홈 서브탭 라벨로만 존재한다.
     expect(screen.getAllByText("통계").length).toBeGreaterThan(0);
     expect(await screen.findByText("아직 확정된 리뷰가 없습니다.")).toBeInTheDocument();
@@ -145,6 +147,46 @@ describe("ParentShell", () => {
     );
     fireEvent.click(screen.getByText("통계"));
     expect(await screen.findByText("수업 참여율")).toBeInTheDocument();
+  });
+
+  it("홈 '상담 리뷰' 서브탭은 종합 리뷰와 분리되어 household 상담 리뷰만 보여준다(빈 상태 포함)", async () => {
+    const { getHomeConsultationReviews } = await import("./home-reviews-actions");
+    vi.mocked(getHomeConsultationReviews).mockResolvedValueOnce([
+      {
+        meetingRequestId: "mr1",
+        startsAt: "2026-09-10T05:00:00.000Z",
+        endsAt: "2026-09-10T05:30:00.000Z",
+        finalText: "학습 태도가 좋아졌습니다.",
+        finalizedAt: "2026-09-11T00:00:00.000Z",
+        meetingRecordLink: null,
+      },
+    ]);
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+      />
+    );
+    fireEvent.click(screen.getByText("상담 리뷰"));
+    expect(await screen.findByText("학습 태도가 좋아졌습니다.")).toBeInTheDocument();
+    expect(screen.getByText("미팅록이 없습니다.")).toBeInTheDocument();
+  });
+
+  it("홈 '상담 리뷰' 서브탭 빈 상태는 간결한 문구를 보여준다", async () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+      />
+    );
+    fireEvent.click(screen.getByText("상담 리뷰"));
+    expect(await screen.findByText("아직 확정된 상담 리뷰가 없습니다.")).toBeInTheDocument();
   });
 
   it("다른 자녀 pill을 누르면 ?child= 쿼리로 이동한다", () => {
