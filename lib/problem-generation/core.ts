@@ -10,6 +10,9 @@ import { findProblemSkill } from "@/lib/problem-skills";
 import { SKILL_BY_CODE, domainLabel } from "@/lib/problem-taxonomy";
 import type { DocProblem } from "@/app/admin/curriculum-doc-data";
 import { isEvidenceModelSkill, DISTRACTOR_ERROR_TYPES, type EvidenceModelSkill } from "@/lib/problem-generation/evidence-model-check";
+import { isGrammarStructureSkill, GRAMMAR_RULES_BY_SKILL, type GrammarStructureSkill } from "@/lib/problem-generation/grammar-structure-check";
+import { isQuantEvidenceSkill, QUANT_OPERATIONS, QUANT_DISTRACTOR_ERROR_TYPES, type QuantEvidenceSkill } from "@/lib/problem-generation/quant-evidence-check";
+import { isTransitionsSkill, TRANSITION_RELATIONSHIPS, type TransitionsSkill } from "@/lib/problem-generation/transition-relationship-check";
 
 // 클라이언트는 호출 시점에 만든다 — 모듈 로드만 하는 테스트(jsdom)에서 SDK 가 브라우저 환경으로 오해하지 않게.
 let anthropicClient: Anthropic | null = null;
@@ -101,6 +104,100 @@ const evidenceModelToolProperties = (skill: EvidenceModelSkill) => ({
 const EVIDENCE_MODEL_PROMPT_NOTE = (skill: EvidenceModelSkill) =>
   `\n근거 모델(내부 전용, 학생에게 보이지 않음) — 이 세부 기술(${skill})은 target/evidence_span/answer_rationale/distractor_error_types 네 필드를 함께 채운다. evidence_span은 지문에 실제로 있는 문장을 **그대로 복사**해야 하며(의역 금지), 지문에 없는 문장을 지어내면 검증에서 걸린다. distractor_error_types는 정해진 태그(${DISTRACTOR_ERROR_TYPES[skill].join(", ")}) 중에서만 고르고, 오답끼리 서로 다른 태그여야 한다(중복 금지).`;
 
+/**
+ * 2026-09-17 — evidence-model의 "구조화 필드 + 결정적 검증" 설계를 boundaries/form_structure_sense
+ * (문법 규칙 taxonomy)·command_of_evidence_quant(수치 근거)·transitions(논리 관계)에도 확장한다.
+ * 새 DB 컬럼을 만들지 않고 evidence-model과 같은 4개 컬럼(target/evidence_span/answer_rationale/
+ * distractor_error_types)을 스킬별로 다른 의미로 재사용한다(제품 오너 지시 — 의미가 실제로 맞으면 재사용
+ * 우선). 스킬 그룹마다 그 4개 필드의 설명·enum만 다르다.
+ */
+type StructuredSkill = EvidenceModelSkill | GrammarStructureSkill | QuantEvidenceSkill | TransitionsSkill;
+
+function structuredSkillOf(skillCode: string | null | undefined): StructuredSkill | null {
+  if (isEvidenceModelSkill(skillCode)) return skillCode;
+  if (isGrammarStructureSkill(skillCode)) return skillCode;
+  if (isQuantEvidenceSkill(skillCode)) return skillCode;
+  if (isTransitionsSkill(skillCode)) return skillCode;
+  return null;
+}
+
+function structuredFieldToolProperties(skill: StructuredSkill) {
+  if (isEvidenceModelSkill(skill)) return evidenceModelToolProperties(skill);
+  if (isGrammarStructureSkill(skill)) {
+    const rules = GRAMMAR_RULES_BY_SKILL[skill];
+    return {
+      target: {
+        type: "string",
+        enum: Array.from(rules),
+        description: `이 문항이 실제로 테스트하는 문법 규칙(반드시 다음 중 하나): ${rules.join(", ")}. boundaries와 form_structure_sense는 질문 문구가 같아도 이 태그로 서로 다른 규칙을 테스트해야 한다 — 다른 스킬의 taxonomy에 있는 값을 고르면 검증에서 거부된다.`,
+      },
+      evidence_span: {
+        type: "string",
+        description: "빈칸을 포함해 그 문법 규칙이 실제로 적용되는 지문 안의 절/구간을 축자 그대로 복사(참고용 — evidence-model과 달리 검증은 grammar_rule·distractor_error_types로 한다).",
+      },
+      answer_rationale: {
+        type: "string",
+        description: "정답 선택지가 왜 이 문법 규칙을 올바르게 지키는지 짧은 한 문장.",
+      },
+      distractor_error_types: {
+        type: "array",
+        items: { type: "string", enum: Array.from(rules) },
+        description: `오답(정답 제외) 각 선택지 순서대로, 그 선택지가 실제로 담고 있는 문법 결함(반드시 다음 중에서만: ${rules.join(", ")}). 오답 중 최소 하나는 반드시 target(정답이 테스트하는 규칙)과 같은 태그여야 한다(그래야 정답·오답이 그 규칙에서 갈린다). 정답 선택지 자체는 이 결함이 없어야 한다.`,
+      },
+    };
+  }
+  if (isQuantEvidenceSkill(skill)) {
+    return {
+      target: {
+        type: "string",
+        enum: Array.from(QUANT_OPERATIONS),
+        description: `정답이 표·그래프 자료에서 값을 얻는 방식(반드시 다음 중 하나): ${QUANT_OPERATIONS.join(", ")}. EXACT_LOOKUP=한 셀 그대로, ROW_SUM/COLUMN_SUM/MAX/MIN=행·열 단순 통계, DIFFERENCE=두 값의 차.`,
+      },
+      evidence_span: {
+        type: "string",
+        description: "정답 수치가 어느 행/열·항목에서 나왔는지 사람이 읽는 설명(예: 'Row: Shift 4, Column: Defective Bottles'). 검증은 수치 자체를 자료와 직접 대조한다.",
+      },
+      answer_rationale: {
+        type: "string",
+        description: "정답 선택지의 수치가 자료의 어떤 값과 일치하는지 짧은 한 문장.",
+      },
+      distractor_error_types: {
+        type: "array",
+        items: { type: "string", enum: Array.from(QUANT_DISTRACTOR_ERROR_TYPES) },
+        description: `오답(정답 제외) 각 선택지 순서대로, 그 오답이 자료를 어떻게 잘못 읽었는지(반드시 다음 중에서만: ${QUANT_DISTRACTOR_ERROR_TYPES.join(", ")}). 오답의 수치는 반드시 자료 안에 실제로 있는 값(다른 행/열·인접 셀)이어야 한다 — 자료에 없는 임의의 숫자는 안 된다.`,
+      },
+    };
+  }
+  // transitions
+  return {
+    target: {
+      type: "string",
+      enum: Array.from(TRANSITION_RELATIONSHIPS),
+      description: `정답 전환어가 신호하는 두 문장 사이의 논리 관계(반드시 다음 중 하나): ${TRANSITION_RELATIONSHIPS.join(", ")}.`,
+    },
+    evidence_span: {
+      type: "string",
+      description: "정답 전환어 바로 앞뒤 문장 중 그 논리 관계가 드러나는 절(참고용).",
+    },
+    answer_rationale: {
+      type: "string",
+      description: "이 논리 관계가 왜 성립하는지 짧은 한 문장.",
+    },
+    distractor_error_types: {
+      type: "array",
+      items: { type: "string", enum: Array.from(TRANSITION_RELATIONSHIPS) },
+      description: `오답(정답 제외) 각 선택지 순서대로, 그 전환어가 (틀리게) 신호하는 논리 관계(반드시 다음 중에서만: ${TRANSITION_RELATIONSHIPS.join(", ")}). target과 같은 값을 쓰면 안 된다(오답은 다른 관계를 신호해야 한다).`,
+    },
+  };
+}
+
+function structuredFieldPromptNote(skill: StructuredSkill): string {
+  if (isEvidenceModelSkill(skill)) return EVIDENCE_MODEL_PROMPT_NOTE(skill);
+  if (isGrammarStructureSkill(skill)) return `\n문법 규칙 모델(내부 전용, 학생에게 보이지 않음) — 이 세부 기술(${skill})은 target(문법 규칙 태그)/evidence_span/answer_rationale/distractor_error_types 네 필드를 함께 채운다. target은 이 스킬 고유의 문법 규칙 taxonomy에서만 고른다(다른 스킬의 taxonomy를 쓰면 안 된다). 오답 중 최소 하나는 target과 같은 결함 태그여야 하고, 정답 선택지는 그 결함이 없어야 한다.`;
+  if (isQuantEvidenceSkill(skill)) return `\n정량 근거 모델(내부 전용) — 이 세부 기술(${skill})은 target(operation)/evidence_span/answer_rationale/distractor_error_types 네 필드를 함께 채운다. 정답 선택지의 수치는 반드시 figure 자료에 실제로 있는 값(또는 행/열 합·최댓값·최솟값 같은 단순 파생값)이어야 하고, 오답의 수치도 자료 안의 다른(그럴듯하게 잘못 읽은) 값이어야 한다 — 자료와 무관한 임의의 숫자는 검증에서 거부된다.`;
+  return `\n전환어 논리 관계 모델(내부 전용) — 이 세부 기술(transitions)은 target(relationship_type)/evidence_span/answer_rationale/distractor_error_types 네 필드를 함께 채운다. target은 정답 전환어가 실제로 신호하는 논리 관계여야 하고, 오답들은 반드시 다른 관계를 신호해야 한다(같은 관계의 다른 단어를 쓰면 검증에서 거부된다).`;
+}
+
 const FORMAT_LABEL: Record<ProblemFormat, string> = {
   mc: "객관식",
   spr: "숫자 입력(SPR)",
@@ -130,7 +227,7 @@ export async function generateSectionProblemsCore(params: {
   const figurePolicy: FigurePolicy = params.figurePolicy ?? "optional";
   const clampedCount = Math.max(1, Math.min(10, count));
   // 2026-09-17 — 근거 모델은 이 5개 세부 기술에만 적용된다. 다른 R&W 기술·모든 Math는 스키마·프롬프트가 전혀 바뀌지 않는다.
-  const evidenceSkill: EvidenceModelSkill | null = isEvidenceModelSkill(params.skillCode) ? params.skillCode : null;
+  const evidenceSkill: StructuredSkill | null = structuredSkillOf(params.skillCode);
 
   // 어려움(hard)은 design 이 필수라 항목당 응답이 훨씬 길다 — 개수·난이도에 맞춰 토큰 예산을 늘린다.
   // 예산이 부족하면 도구 호출이 중간에 잘려 problems 배열이 아예 비게 나온다("AI 응답에 문제가 없습니다").
@@ -235,7 +332,7 @@ export async function generateSectionProblemsCore(params: {
                     },
                     required: ["key_relations", "answer_uses_relations", "distractor_design"],
                   },
-                  ...(evidenceSkill ? evidenceModelToolProperties(evidenceSkill) : {}),
+                  ...(evidenceSkill ? structuredFieldToolProperties(evidenceSkill) : {}),
                 },
                 required: [
                   ...(difficulty === "hard" ? ["passage", "question", "explanation", "design"] : ["passage", "question", "explanation"]),
@@ -274,7 +371,7 @@ Reading & Writing transitions(전환어) 전용 규칙: 4개 선택지는 모두
 난이도 규칙: 난이도는 지문 길이·낯선 고유명사·어려운 어휘로 만들지 않는다. 학생이 지문·자료의 핵심 관계(원인/결과·조건·범위·비교·화자 관점·시간 관계)를 얼마나 정확히 구분해야 하는지로 설계한다. 어려움(hard)이면 정답은 여러 문장 또는 자료의 관계를 종합해야 하고, 오답은 각각 그중 일부만 포착해야 한다.
 오답 규칙(객관식): 각 오답은 지문·자료의 일부를 맞게 반영하되 핵심 관계 하나를 빠뜨리거나 잘못 해석해야 한다. 어휘 문항의 오답은 그 단어의 다른 뜻이나 문맥에 그럴듯한 다른 단어여야 하고, 지문과 무관한 낱말·문장은 쓰지 않는다. 독해 문항(중심 생각·추론·근거·구조·비교)의 오답 셋은 서로 다른 오류 유형이어야 한다 — 예: 하나는 지문의 세부는 맞지만 범위를 과장/축소, 하나는 인과·비교·시간 관계를 뒤바꿈, 하나는 화자·대상을 혼동하거나 증거는 맞지만 질문에 답하지 않음. 지문에 없는 내용의 선택지는 오답으로 쓰지 않는다. 지문과 무관한 선택지, 명백한 반대말, 불필요한 과장(all/never/only)만으로 지워지는 오답은 만들지 않는다(내용상 그 표현이 정답이거나 필요한 오답이면 예외). Math 오답은 실제 풀이 오류 모델(부호·단위 변환·한 단계 누락·축/눈금 오독·조건 무시·평균/비율/확률 계산 오류·도형 관계 오적용)에서 나와야 하고, 정답과 오답 모두 질문의 조건을 다 고려한 값이어야 한다. distractor_rationales 에 오답 셋의 근거를 적는다.
 ${difficulty === "hard" ? `어려움(hard) 전용 절차 — **지문을 쓰기 전에** design 을 먼저 채운다: (1) key_relations 에 학생이 종합해야 하는 핵심 관계 2~3개를 정한다. (2) answer_uses_relations 에 정답이 그 관계들을 어떻게 함께 만족하는지 적는다. (3) distractor_design 에 각 오답이 어느 관계를 부분적으로 맞추는지와 정확히 어디서 틀리는지(scope·causal·intensity·temporal·speaker·condition·partial_computation·unit·sign 중 하나)를 적는다. 그 다음에만 이 설계에 맞춰 지문·질문·선택지·해설을 쓴다. 설계와 실제 문항이 어긋나면(예: distractor_design 에 적은 오류가 실제 선택지 문장에 드러나지 않음) 안 된다.` : ""}
-${evidenceSkill ? EVIDENCE_MODEL_PROMPT_NOTE(evidenceSkill) : ""}
+${evidenceSkill ? structuredFieldPromptNote(evidenceSkill) : ""}
 소재 다양성 규칙(2026-09-18, 지문 중복 대응): 이번 호출에서 만드는 ${clampedCount}개 문항은 서로 완전히 다른 분야·소재를 다뤄야 한다(예: 해양 생물학, 도시 교통 인프라, 미술사, 천문학, 경제사, 식물학처럼 겹치지 않는 영역). 같은 인물·기관·사건을 두 문항 이상에서 다시 쓰지 않는다.
 ${params.avoidTopics && params.avoidTopics.length ? `다음 소재는 이미 같은 배치의 다른 문항에서 사용됐다 — **절대 재사용하지 말고**, 아래 목록과 겹치지 않는 완전히 다른 인물·기관·사건·분야를 새로 골라라:\n${params.avoidTopics.map((t) => `- ${t}`).join("\n")}` : ""}
 이 문제들은 특정 학생이 아니라 이 교재를 배정받는 어떤 학생에게도 재사용될 문제
@@ -378,7 +475,7 @@ export async function regenerateProblemCore(params: {
   skillCode?: string | null;
 }): Promise<Omit<DocProblem, "id" | "keywords"> & { stimulus?: string; question?: string | null; evidenceTarget?: string | null; evidenceSpan?: string | null; answerRationale?: string | null; distractorErrorTypes?: string[] | null }> {
   const { sectionTitle, subjectName, skillType, difficulty, format, current, feedback } = params;
-  const evidenceSkill: EvidenceModelSkill | null = isEvidenceModelSkill(params.skillCode) ? params.skillCode : null;
+  const evidenceSkill: StructuredSkill | null = structuredSkillOf(params.skillCode);
 
   const message = await getAnthropic().messages.create({
     model: "claude-sonnet-5",
@@ -411,7 +508,7 @@ export async function regenerateProblemCore(params: {
               type: "string",
               description: format === "mc" ? "정답 해설" : format === "spr" ? "풀이 과정과 정답" : "모범 답안 또는 풀이 과정",
             },
-            ...(evidenceSkill ? evidenceModelToolProperties(evidenceSkill) : {}),
+            ...(evidenceSkill ? structuredFieldToolProperties(evidenceSkill) : {}),
           },
           required: ["passage", "question", "explanation", ...(evidenceSkill ? ["target", "evidence_span", "answer_rationale", "distractor_error_types"] : [])],
         },
@@ -439,7 +536,7 @@ ${current.correctIndex !== null ? `정답 인덱스: ${current.correctIndex}` : 
 이 피드백을 반영해 문제를 다시 작성해주세요.${
           format === "mc" ? " 객관식은 반드시 선택지 4개와 정답 인덱스를 포함해주세요." : ""
         }
-${evidenceSkill ? EVIDENCE_MODEL_PROMPT_NOTE(evidenceSkill) : ""}`,
+${evidenceSkill ? structuredFieldPromptNote(evidenceSkill) : ""}`,
       },
     ],
   });

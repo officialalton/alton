@@ -86,6 +86,8 @@ export type ContractInput = {
   statements: string[] | null;
   explanation: string;
   figure: unknown | null;
+  /** 2026-09-17 — boundaries/form_structure_sense 등 구조화 필드 스킬의 태그(grammar_rule 등). checkRwStructure의 구조적 구분에 쓰인다. */
+  structuredTag?: string | null;
 };
 
 export type ContractResult = { ok: boolean; issues: FigureIssue[]; contract: QualityContract | null };
@@ -136,7 +138,7 @@ export function checkQualityContract(input: ContractInput): ContractResult {
   const need = judgeMaterialNeed({ examSystem: input.examSystem ?? null, skillCode: input.skillCode ?? null, text });
   const blocker = materialBlocker(need, input.figure ?? null);
   if (blocker) issues.push({ code: "contract_evidence", message: blocker });
-  issues.push(...checkRwStructure({ skillCode: input.skillCode ?? null, passage: text, options: input.options, figure: input.figure ?? null }).map((i) => ({ ...i, code: `contract_${i.code}` })));
+  issues.push(...checkRwStructure({ skillCode: input.skillCode ?? null, passage: text, options: input.options, figure: input.figure ?? null, structuredTag: input.structuredTag }).map((i) => ({ ...i, code: `contract_${i.code}` })));
   const fc = checkFigure(input.figure ?? null, text, input.options, input.correctIndex);
   issues.push(...fc.issues.map((i) => ({ ...i, code: `contract_${i.code}` })));
   // 내용(수식·선택지·진술·SPR 형식)은 RW 검사를 중복하지 않게 skillCode 없이.

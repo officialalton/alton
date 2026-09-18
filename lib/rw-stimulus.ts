@@ -174,7 +174,14 @@ const BLANK_SKILLS: Record<string, RegExp> = {
   transitions: /most logical transition/i,
 };
 
-export function checkRwStructure(input: { skillCode: string | null | undefined; passage: string; options: string[] | null; figure?: unknown | null }): FigureIssue[] {
+/** boundaries/form_structure_sense는 질문 문구가 실제 SAT에서도 동일해 문구만으로 구분할 수 없다 —
+ * 2026-09-17 결정적 검증기(grammar-structure-check.ts)가 매기는 grammarRule 태그로 구조적으로 구분한다. */
+const GRAMMAR_RULE_TAXONOMY: Record<string, readonly string[]> = {
+  boundaries: ["COMMA_SPLICE", "APOSTROPHE_POSSESSIVE", "SUBJECT_VERB_AGREEMENT", "SEMICOLON_COLON", "SENTENCE_BOUNDARY"],
+  form_structure_sense: ["DANGLING_MODIFIER", "FAULTY_PARALLELISM", "SUBORDINATION_COORDINATION", "VERB_FORM_AFTER_MODIFIER", "PRONOUN_AGREEMENT"],
+};
+
+export function checkRwStructure(input: { skillCode: string | null | undefined; passage: string; options: string[] | null; figure?: unknown | null; structuredTag?: string | null }): FigureIssue[] {
   const code = rwSkillCode(input.skillCode);
   if (!code) return [];
   const issues: FigureIssue[] = [];
@@ -223,6 +230,23 @@ export function checkRwStructure(input: { skillCode: string | null | undefined; 
       if (q && !blankRule.test(q)) issues.push({ code: "rw_question", message: `질문이 빈칸을 가리키는 표준 문구가 아닙니다 — ${skillQuestionHint(code)}` });
     }
     if (s.underlines > 0) issues.push({ code: "rw_target", message: "빈칸 문항에 밑줄(__…__)이 함께 있습니다 — 대상은 하나만." });
+  }
+
+  // boundaries/form_structure_sense 구조적 구분(2026-09-17) — 질문 문구가 두 스킬에서 동일하므로
+  // 문구 매칭만으로는 실제로 어느 스킬 사례인지 확인할 수 없다. grammarRule 태그가 그 스킬 고유
+  // taxonomy에 실제로 속해야만 "이 사례가 진짜 그 스킬"이라고 인정한다(다른 스킬의 taxonomy에 속한
+  // 태그를 잘못 붙였거나 태그 자체가 없으면 거부).
+  if ((code === "boundaries" || code === "form_structure_sense") && input.structuredTag !== undefined) {
+    const tag = (input.structuredTag ?? "").trim();
+    const ownTaxonomy = GRAMMAR_RULE_TAXONOMY[code];
+    const otherTaxonomy = GRAMMAR_RULE_TAXONOMY[code === "boundaries" ? "form_structure_sense" : "boundaries"];
+    if (!tag) {
+      issues.push({ code: "rw_grammar_rule", message: `${code}는 grammar_rule 태그(${ownTaxonomy.join(", ")}) 중 하나가 있어야 boundaries/form_structure_sense를 구조적으로 구분할 수 있습니다(질문 문구만으로는 두 스킬이 동일합니다).` });
+    } else if (otherTaxonomy.includes(tag)) {
+      issues.push({ code: "rw_grammar_rule", message: `grammar_rule "${tag}"은 ${code === "boundaries" ? "form_structure_sense" : "boundaries"}의 taxonomy에 속합니다 — 세부 기술과 실제 문법 규칙이 어긋납니다.` });
+    } else if (!ownTaxonomy.includes(tag)) {
+      issues.push({ code: "rw_grammar_rule", message: `grammar_rule "${tag}"이 ${code}의 taxonomy(${ownTaxonomy.join(", ")})에 없습니다.` });
+    }
   }
 
   // 밑줄 대상 — Text Structure and Purpose 의 '밑줄 친 문장' 문항.

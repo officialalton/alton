@@ -10,6 +10,9 @@ import { judgeMaterialNeed, materialBlocker } from "@/lib/problem-material-need"
 import { composeProblemText } from "@/lib/problem-question";
 import { skillLabel } from "@/lib/problem-taxonomy";
 import { isEvidenceModelSkill, checkEvidenceModelFields } from "./evidence-model-check";
+import { isGrammarStructureSkill, checkGrammarStructureFields } from "./grammar-structure-check";
+import { isQuantEvidenceSkill, checkQuantEvidenceFields } from "./quant-evidence-check";
+import { isTransitionsSkill, checkTransitionRelationshipFields } from "./transition-relationship-check";
 import { parseRwStimulus } from "@/lib/rw-stimulus";
 
 export type GeneratedProblem = Awaited<ReturnType<typeof generateSectionProblemsCore>>[number];
@@ -287,7 +290,7 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
     if (g.needsFigure || missingRequired || (g.figure == null && params.figurePolicy?.startsWith("require"))) await makeFigure(g, text, need);
 
     // 2) 유형별 품질 계약(질문 대상·자료 근거·표시·정답·답안 형식).
-    const contractInputOf = () => ({ skillCode, examSystem: params.examSystem ?? null, format: params.format, stimulus, question, options: g.options ?? null, correctIndex: g.correctIndex ?? null, answers: g.answers ?? null, statements: g.statements ?? null, explanation: g.explanation, figure: g.figure ?? null });
+    const contractInputOf = () => ({ skillCode, examSystem: params.examSystem ?? null, format: params.format, stimulus, question, options: g.options ?? null, correctIndex: g.correctIndex ?? null, answers: g.answers ?? null, statements: g.statements ?? null, explanation: g.explanation, figure: g.figure ?? null, structuredTag: (isGrammarStructureSkill(skillCode) ? g.evidenceTarget ?? null : undefined) });
     let contract = checkQualityContract(contractInputOf());
     if (!contract.ok) {
       const kinds = new Set(contract.issues.map((i) => classifyContractIssue(i.code)));
@@ -345,6 +348,53 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
         question
       );
       if (!evCheck.ok) return fail("contract", evCheck.reason);
+    }
+
+    // 2.4b) 문법 규칙 모델(boundaries/form_structure_sense, 2026-09-17) — 같은 4개 컬럼을 재사용해
+    // grammar_rule/distractor_error_types를 결정적으로 검사한다(정답에는 결함 없음, 오답 중 하나는
+    // target과 같은 결함, taxonomy가 스킬마다 겹치지 않음).
+    if (isGrammarStructureSkill(skillCode) && params.format === "mc" && g.options && g.correctIndex !== null) {
+      const opts = g.options;
+      const correctOpt = opts[g.correctIndex] ?? "";
+      const distractors = opts.filter((_, i) => i !== g.correctIndex);
+      const gsCheck = checkGrammarStructureFields(
+        skillCode,
+        { grammarRule: g.evidenceTarget ?? null, distractorErrorTypes: g.distractorErrorTypes ?? null },
+        correctOpt,
+        distractors
+      );
+      if (!gsCheck.ok) return fail("contract", gsCheck.reason);
+    }
+
+    // 2.4c) 정량 근거 모델(command_of_evidence_quant, 2026-09-17) — 정답·오답의 수치를 figure 자료와
+    // 직접 대조한다(AI가 "이 값을 표에서 읽었다"고 자기보고하는 것을 신뢰하지 않는다).
+    if (isQuantEvidenceSkill(skillCode) && params.format === "mc" && g.options && g.correctIndex !== null) {
+      const opts = g.options;
+      const correctOpt = opts[g.correctIndex] ?? "";
+      const distractors = opts.filter((_, i) => i !== g.correctIndex);
+      const qeCheck = checkQuantEvidenceFields(
+        skillCode,
+        { operation: g.evidenceTarget ?? null, answerRationale: g.answerRationale ?? null, distractorErrorTypes: g.distractorErrorTypes ?? null },
+        g.figure ?? null,
+        correctOpt,
+        distractors
+      );
+      if (!qeCheck.ok) return fail("contract", qeCheck.reason);
+    }
+
+    // 2.4d) 전환어 논리 관계 모델(transitions, 2026-09-17) — checkTransitionParallelism(표면 형태)의
+    // 다음 층: 정답·오답이 신호하는 논리 관계가 실제 단어 뜻과 일치하는지 카테고리→단어 매핑으로 대조한다.
+    if (isTransitionsSkill(skillCode) && params.format === "mc" && g.options && g.correctIndex !== null) {
+      const opts = g.options;
+      const correctOpt = opts[g.correctIndex] ?? "";
+      const distractors = opts.filter((_, i) => i !== g.correctIndex);
+      const trCheck = checkTransitionRelationshipFields(
+        skillCode,
+        { relationshipType: g.evidenceTarget ?? null, distractorRelationshipTypes: g.distractorErrorTypes ?? null },
+        correctOpt,
+        distractors
+      );
+      if (!trCheck.ok) return fail("contract", trCheck.reason);
     }
 
     // 2.5) 정답 자리 vs 해설 대조(2026-09-15 제품 오너 확인 — 해설은 맞는데 정답 표시만 틀린 사례 발견).

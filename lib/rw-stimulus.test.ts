@@ -149,3 +149,22 @@ describe("RW 구조화 자료 블록 — 검증", () => {
     expect(checkContent(base)).toEqual([]);
   });
 });
+
+describe("boundaries/form_structure_sense 구조적 구분(2026-09-17)", () => {
+  const BOUND = `The museum's new wing ______ visitors from three continents last year.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?`;
+  it("structuredTag 를 안 넘기면(기존 호출자) 검사하지 않는다 — 하위 호환", () => {
+    expect(checkRwStructure({ skillCode: "boundaries", passage: BOUND, options: ["welcomed", "welcomed,", "welcome", "welcoming"] }).map((i) => i.code)).not.toContain("rw_grammar_rule");
+  });
+  it("boundaries 태그가 없으면 거부한다", () => {
+    expect(checkRwStructure({ skillCode: "boundaries", passage: BOUND, options: ["welcomed", "welcomed,", "welcome", "welcoming"], structuredTag: "" }).map((i) => i.code)).toContain("rw_grammar_rule");
+  });
+  it("boundaries에 form_structure_sense taxonomy 태그를 붙이면 거부한다(구조적 구분)", () => {
+    expect(checkRwStructure({ skillCode: "boundaries", passage: BOUND, options: ["welcomed", "welcomed,", "welcome", "welcoming"], structuredTag: "DANGLING_MODIFIER" }).map((i) => i.code)).toContain("rw_grammar_rule");
+  });
+  it("boundaries에 자기 taxonomy의 태그를 붙이면 통과한다", () => {
+    expect(checkRwStructure({ skillCode: "boundaries", passage: BOUND, options: ["welcomed", "welcomed,", "welcome", "welcoming"], structuredTag: "SUBJECT_VERB_AGREEMENT" }).map((i) => i.code)).not.toContain("rw_grammar_rule");
+  });
+  it("form_structure_sense에 boundaries taxonomy 태그를 붙이면 거부한다", () => {
+    expect(checkRwStructure({ skillCode: "form_structure_sense", passage: BOUND, options: ["a", "b", "c", "d"], structuredTag: "COMMA_SPLICE" }).map((i) => i.code)).toContain("rw_grammar_rule");
+  });
+});
