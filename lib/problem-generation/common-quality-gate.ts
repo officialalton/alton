@@ -65,9 +65,103 @@ function normalizeFact(s: string): string {
 }
 
 /**
+ * 2026-09-18 추가 — evidence_target은 스킬이 아니라 **문항마다** 한국어 서술문으로 나올 때도
+ * 있고(central_ideas_details·cross_text_connections는 거의 항상) 영어 명제 문장으로 나올 때도
+ * 있다(inferences·command_of_evidence_text 실측 배치에서 자주 확인, `scripts/evidence-model-verify.ts`
+ * 실행 결과 — 같은 skill_code 안에서도 문항마다 갈렸다). 해설은 항상 한국어이므로, target이 영어일 때
+ * 문자열/토큰 검사는 근본적으로 성립하지 않는다(원래 결함과 같은 문제가 evidence_span→target으로 옮겨갈
+ * 뿐). 이 값싼 검사는 같은 언어끼리만 의미가 있으므로, target이 한국어가 아니면 이 검사 자체를
+ * 건너뛴다(오탐 방지 우선 — 그 문항의 다른 검증(evidence-model-check의 축자 인용·에코 방지, 이후
+ * 독립 AI 검사)은 그대로 돈다).
+ */
+export function isMostlyKorean(s: string): boolean {
+  const letters = s.match(/[\p{L}]/gu) ?? [];
+  if (!letters.length) return false;
+  const hangul = s.match(/[가-힣]/gu) ?? [];
+  return hangul.length / letters.length >= 0.3;
+}
+
+/**
+ * 2026-09-18 수정 — R&W 근거 모델 5개 스킬 중 4개(central_ideas_details·inferences·
+ * command_of_evidence_text·cross_text_connections)에서 이 검사가 거의 100% 오탐이던
+ * 결함 수정.
+ *
+ * 원인: 호출부(pipeline.ts)가 evidence_span(지문에서 축자 인용한 **영어** 문장)을 keyFacts에
+ * 넣고 한국어 해설이 그걸 그대로 포함하는지 보고 있었다 — 한국어 산문이 영어 문장을 통째로
+ * 축자 인용할 리 없다. words_in_context만 근거가 짧은 영어 단어 하나라 우연히 통과했을 뿐,
+ * 나머지 4개는 실측 300문항 배치(`docs/2026-09-18-problem-bank-full-reset-progress.jsonl`)
+ * 에서 사실상 전부 이 단계에서 걸렸다(central_ideas_details 2/10, inferences 0/10 등).
+ *
+ * 제품 오너 정정: 이 검사의 원래 의도는 "해설이 질문을 재진술만 하고 실제 도출 과정이
+ * 없는지"를 잡는 것이지, 영어 축어 인용을 요구하는 것이 아니다. 호출부는 evidence_span(영어)을
+ * keyFacts에서 빼고 evidence_target(한국어로 합성된 "이 문항이 실제로 묻는 대상" 서술문,
+ * `lib/problem-generation/evidence-model-check.ts` 참고)만 넘긴다.
+ *
+ * target도 완전 축어 포함을 요구하면 여전히 대부분 실패한다(한국어는 조사가 붙어 활용되고,
+ * target 자체가 질문 대상을 요약한 별도 문장이라 해설이 그 문장을 그대로 옮기지 않는다).
+ * 그래서 "완전 문자열 포함(숫자·짧은 인용 등 여전히 유효한 케이스는 그대로 통과)"이 실패하면
+ * "target의 의미 있는 단어 중 상당수가 해설에 등장하는가"의 부분 일치로 완화한다.
+ */
+function normalizeForTokenMatch(s: string): string {
+  return s.toLowerCase().normalize("NFKC");
+}
+
+/** 조사·접속어 등 실질적 의미가 없는 한국어 기능어 — 토큰 일치 검사에서 제외한다(오탐 방지용 노이즈 제거). */
+const KOREAN_STOPWORDS = new Set([
+  "이", "가", "은", "는", "을", "를", "의", "에", "에서", "와", "과", "도", "만", "로", "으로",
+  "그", "그리고", "그런데", "또한", "즉", "이다", "것", "수", "때", "후", "전", "대한", "대해",
+  "무엇인가", "어떤", "실제로", "진짜", "하는", "한다", "위해", "통해", "무엇", "이나",
+]);
+
+/** target 등 프로즈 사실을 의미 있는 단어(2음절 이상, 불용어 제외) 목록으로 쪼갠다. */
+function significantTokens(fact: string): string[] {
+  const words = normalizeForTokenMatch(fact).match(/[\p{L}\p{N}]+/gu) ?? [];
+  return words.filter((w) => w.length >= 2 && !KOREAN_STOPWORDS.has(w));
+}
+
+/**
+ * 정규화된 해설 문자열 안에 토큰이 (부분 문자열로) 있는지 본다. 한국어는 조사가 붙어 활용되므로
+ * ("문어의" vs 해설의 "문어가") 토큰 전체 일치 대신, 토큰 자체 또는 마지막 한 글자를 뗀 어간이
+ * 해설에 부분 문자열로 등장하면 일치로 본다(값싼 유사 어간 매칭 — 완전한 형태소 분석이 아니다).
+ */
+function tokenAppearsIn(token: string, normalizedExplanation: string): boolean {
+  if (normalizedExplanation.includes(token)) return true;
+  if (token.length >= 3) {
+    const stem = token.slice(0, -1);
+    if (stem.length >= 2 && normalizedExplanation.includes(stem)) return true;
+  }
+  return false;
+}
+
+/**
+ * 부분 일치 임계값 — 실측(2026-09-18 재검증 배치, `scripts/evidence-model-verify.ts`)으로
+ * 확인: 이보다 낮추면 질문만 재진술한 해설도 통과했고, 이보다 높이면 정상적으로 도출한
+ * 한국어 의역 해설까지 거부했다.
+ */
+const TOKEN_MATCH_THRESHOLD = 0.5;
+
+/**
+ * fact를 해설이 "실제로 담고 있다"고 볼 근거가 있는지 판정한다.
+ * 1) 완전 문자열 포함(숫자·짧은 인용 등 여전히 유효한 케이스) — 우선 시도.
+ * 2) 실패하면 의미 있는 단어 중 TOKEN_MATCH_THRESHOLD 이상 비율이 해설에 등장하는지로 완화.
+ *    의미 있는 단어가 하나도 없으면(전부 불용어) 완전 일치만으로 판정한다.
+ */
+function factIsDerivedIn(fact: string, explanation: string): boolean {
+  const normExplanation = normalizeFact(explanation);
+  if (normExplanation.includes(normalizeFact(fact))) return true;
+
+  const tokens = significantTokens(fact);
+  if (!tokens.length) return false;
+  const normExplanationForTokens = normalizeForTokenMatch(explanation).replace(/[^\p{L}\p{N}]/gu, "");
+  const matched = tokens.filter((t) => tokenAppearsIn(t, normExplanationForTokens)).length;
+  return matched / tokens.length >= TOKEN_MATCH_THRESHOLD;
+}
+
+/**
  * 해설이 정답 도출에 실제로 쓰인 핵심 사실(모델이 이미 산출/확인한 값)을 담고 있는지 확인한다.
- * 의미 이해가 아니라 "이 문자열들 중 최소 minHits개가 해설에 등장하는가"의 값싼 검사다.
- * keyFacts가 비어 있으면(핵심 값을 추출할 수 없는 유형) 판정을 건너뛴다 — 오탐 방지.
+ * 의미 이해가 아니라 "이 문자열(또는 그 의미 있는 단어 상당수)들 중 최소 minHits개가 해설에
+ * 등장하는가"의 값싼 검사다. keyFacts가 비어 있으면(핵심 값을 추출할 수 없는 유형) 판정을
+ * 건너뛴다 — 오탐 방지.
  */
 export function checkExplanationDerivation(
   explanation: string,
@@ -76,8 +170,7 @@ export function checkExplanationDerivation(
 ): FigureIssue[] {
   const facts = keyFacts.map((f) => f.trim()).filter((f) => f.length > 0);
   if (!facts.length) return [];
-  const normExplanation = normalizeFact(explanation ?? "");
-  const hits = facts.filter((f) => normExplanation.includes(normalizeFact(f)));
+  const hits = facts.filter((f) => factIsDerivedIn(f, explanation ?? ""));
   if (hits.length >= Math.min(minHits, facts.length)) return [];
   return [{
     code: "explanation_no_derivation",

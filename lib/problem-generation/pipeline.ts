@@ -16,7 +16,7 @@ import { isTransitionsSkill, checkTransitionRelationshipFields } from "./transit
 import { isRhetoricalSynthesisSkill, checkRhetoricalSynthesisFields } from "./rhetorical-synthesis-check";
 import { isTextStructureSkill, checkTextStructureFields } from "./text-structure-check";
 import { parseRwStimulus } from "@/lib/rw-stimulus";
-import { findBannedWords, checkTagConsistency, checkExplanationDerivation } from "./common-quality-gate";
+import { findBannedWords, checkTagConsistency, checkExplanationDerivation, isMostlyKorean } from "./common-quality-gate";
 
 export type GeneratedProblem = Awaited<ReturnType<typeof generateSectionProblemsCore>>[number];
 type FigureKind = "plane" | "parallel_transversal" | "triangle" | "circle" | "polygon" | "solid" | "composite" | "data" | "figure_choice" | "figure_set";
@@ -533,11 +533,22 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
       const tagIssues = checkTagConsistency({ format: params.format, options: g.options ?? null, answers: g.answers ?? null, skillCode });
       if (tagIssues.length) return fail("contract", `태그 정합성 오류: ${tagIssues[0].message}`);
 
-      // evidence-model 5개 스킬은 evidence_span/target이 이미 결정적으로 검증된 "핵심 도출 사실"이므로,
-      // 해설이 그 문자열의 일부를 실제로 담고 있는지(질문 재진술이 아닌지) 값싸게 다시 확인한다.
-      // 2.5의 정답-해설 대조(AI 호출)와 달리 이건 순수 문자열 포함 검사라 새 호출이 아니다.
-      if (isEvidenceModelSkill(skillCode) && g.evidenceSpan) {
-        const keyFacts = [g.evidenceSpan, ...(g.evidenceTarget ? [g.evidenceTarget] : [])];
+      // evidence-model 5개 스킬은 target(이 문항이 실제로 묻는 대상)이 이미 결정적으로 검증된
+      // "핵심 도출 사실"이므로, 해설이 그 내용을 실제로 담고 있는지(질문 재진술이 아닌지)
+      // 값싸게 다시 확인한다. 2.5의 정답-해설 대조(AI 호출)와 달리 이건 문자열 검사라 새 호출이 아니다.
+      // 2026-09-18 수정(1차) — evidence_span은 지문에서 축자 인용한 **영어** 문장이고 해설은
+      // 한국어 산문이라, keyFacts에 넣으면 words_in_context(영어 단어 하나만 근거)를 뺀 나머지
+      // 4개 스킬에서 거의 100% 오탐이었다(`docs/2026-09-18-problem-bank-full-reset-progress.jsonl`
+      // 실측). evidence_span을 빼고 target만 keyFacts로 쓰도록 고쳤다.
+      // 2026-09-18 수정(2차, 실측 재검증) — target도 스킬이 아니라 **문항마다** 한국어 서술문일
+      // 때도, 영어 명제 문장일 때도 있다는 게 실제 배치로 드러났다(같은 skill_code 안에서도
+      // 갈림 — inferences·command_of_evidence_text에서 특히 잦음, `scripts/evidence-model-verify.ts`
+      // 실행 결과). 영어 target이면 1차 수정과 똑같은 문제(한국어 해설이 영어 문장을 포함할 리
+      // 없음)가 evidence_span→target으로 옮겨갈 뿐이므로, target이 한국어일 때만 이 검사를
+      // 돌린다(`isMostlyKorean`) — 영어 target인 문항은 이 값싼 검사를 건너뛰고 evidence-model의
+      // 축자 인용·에코 방지 검증과 이후 독립 AI 검사에 판정을 맡긴다.
+      if (isEvidenceModelSkill(skillCode) && g.evidenceTarget && isMostlyKorean(g.evidenceTarget)) {
+        const keyFacts = [g.evidenceTarget];
         const derivationIssues = checkExplanationDerivation(g.explanation ?? "", keyFacts, 1);
         if (derivationIssues.length) return fail("review", derivationIssues[0].message);
       }
