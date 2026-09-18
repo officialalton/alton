@@ -81,18 +81,20 @@ describe("독립 품질 검사 판정", () => {
   it("정답 일치·오답 정상이면 통과", () => {
     expect(judgeReview(base, "medium", "mc")).toEqual([]);
   });
-  it("정답 불일치는 실패; 보통은 무관 2개 또는 전부 명백일 때만 실패; 어려움은 무관·명백 하나도 불허; 어려움인데 easy 실패", () => {
+  it("정답 불일치는 실패; 보통은 무관 2개 또는 전부 명백일 때만 실패; 어려움은 무관·명백 2개부터 불허(1개는 허용); 어려움인데 easy 실패", () => {
     expect(judgeReview({ ...base, agrees: false, pickedIndex: 2 }, "medium", "mc")[0]).toMatch(/독립 검사는 C\)/);
     const oneIrrelevant = { ...base, distractors: [{ ...base.distractors[0], kind: "irrelevant" as const }, base.distractors[1], base.distractors[2]] };
     expect(judgeReview(oneIrrelevant, "medium", "mc")).toEqual([]);
-    expect(judgeReview(oneIrrelevant, "hard", "mc")[0]).toMatch(/어려움 문제인데.*무관/);
+    expect(judgeReview(oneIrrelevant, "hard", "mc")).toEqual([]);
     const twoIrrelevant = { ...base, distractors: [{ ...base.distractors[0], kind: "irrelevant" as const }, { ...base.distractors[1], kind: "irrelevant" as const }, base.distractors[2]] };
     expect(judgeReview(twoIrrelevant, "medium", "mc")[0]).toMatch(/무관/);
+    expect(judgeReview(twoIrrelevant, "hard", "mc")[0]).toMatch(/어려움 문제인데.*무관/);
     const allObvious = { ...base, distractors: base.distractors.map((d) => ({ ...d, obvious: true })) };
     expect(judgeReview(allObvious, "medium", "mc")[0]).toMatch(/모두 너무 명백/);
     const twoObvious = { ...base, distractors: base.distractors.map((d, i) => ({ ...d, obvious: i < 2 })) };
     expect(judgeReview(twoObvious, "medium", "mc")).toEqual([]);
-    expect(judgeReview({ ...base, distractors: [{ ...base.distractors[0], obvious: true }, base.distractors[1], base.distractors[2]] }, "hard", "mc")[0]).toMatch(/어려움 문제인데.*명백/);
+    expect(judgeReview(twoObvious, "hard", "mc")[0]).toMatch(/어려움 문제인데.*명백/);
+    expect(judgeReview({ ...base, distractors: [{ ...base.distractors[0], obvious: true }, base.distractors[1], base.distractors[2]] }, "hard", "mc")).toEqual([]);
     expect(judgeReview({ ...base, estimatedDifficulty: "easy" }, "hard", "mc")[0]).toMatch(/추정 난이도가 easy/);
   });
   it("SPR 정답 정규화 — 7/2 와 3.5, 1,200 과 1200", () => {
@@ -190,10 +192,16 @@ describe("오답 부분 수정 대상 분류(2026-09-15)", () => {
     expect(issues.reasons).toEqual([]);
     expect(issues.hasStructuralIssue).toBe(false);
   });
-  it("어려움에서 오답 하나가 무관하면 구조 문제 없이 그 자리만 부분 수정 대상", () => {
+  it("어려움에서 오답 하나가 무관해도 1개까지는 허용(통과, 부분 수정 대상 없음)", () => {
     const issues = classifyReviewIssues({ ...base, distractors: [{ ...base.distractors[0], kind: "irrelevant" }, base.distractors[1], base.distractors[2]] }, "hard", "mc");
     expect(issues.hasStructuralIssue).toBe(false);
-    expect(issues.distractorTargets.map((t) => t.index)).toEqual([1]);
+    expect(issues.distractorTargets).toEqual([]);
+    expect(issues.reasons).toEqual([]);
+  });
+  it("어려움에서 오답 두 개가 무관하면 구조 문제 없이 그 자리들만 부분 수정 대상", () => {
+    const issues = classifyReviewIssues({ ...base, distractors: [{ ...base.distractors[0], kind: "irrelevant" }, { ...base.distractors[1], kind: "irrelevant" }, base.distractors[2]] }, "hard", "mc");
+    expect(issues.hasStructuralIssue).toBe(false);
+    expect(issues.distractorTargets.map((t) => t.index)).toEqual([1, 2]);
     expect(issues.reasons.length).toBeGreaterThan(0);
   });
   it("정답 불일치와 오답 문제가 함께 있으면 구조 문제로 분류(부분 수정으로 끝내지 않음)", () => {
