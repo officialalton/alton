@@ -127,4 +127,53 @@ describe("runGenerationPipeline — 2026-09-16 코드 검토 수정(Math 한정)
     expect(result.accepted).toHaveLength(0);
     expect(result.failures.some((f) => f.reason.includes("오답 수정 후 계약 실패"))).toBe(true);
   });
+
+  // 2026-09-18(제품 오너 지시) — 생성 자체가 빈/파싱불가 응답으로 실패하면(예외 메시지가 "AI 응답에
+  // 문제가 없습니다"/"AI 응답을 처리할 수 없습니다") 딱 1회만 그대로 재시도한다. 품질 검증 실패(위
+  // A/B/C/G 테스트들이 다루는 계약·독립검사·오답보정)는 이 재시도와 무관하게 기존 재생성 상한만 쓴다
+  // — 실제 API 호출 없이 mock 예외로 재현한다.
+  it("생성 예외(빈 응답)가 1회 재시도로 해소되면 정상 채택되고, emptyResponses에 retried=true·resolved=true로 기록된다", async () => {
+    const { runGenerationPipeline } = await import("./pipeline");
+    generateSectionProblemsCore
+      .mockRejectedValueOnce(new Error("AI 응답에 문제가 없습니다."))
+      .mockResolvedValueOnce([baseProblem()]);
+
+    const result = await runGenerationPipeline(mathParams);
+
+    expect(generateSectionProblemsCore).toHaveBeenCalledTimes(2);
+    expect(result.accepted).toHaveLength(1);
+    expect(result.stats.emptyResponses).toHaveLength(1);
+    expect(result.stats.emptyResponses[0]).toMatchObject({ retried: true, resolved: true });
+  });
+
+  it("생성 예외(빈 응답)가 재시도 1회에도 그대로면 그 슬롯은 실패로 끝난다(더 재시도하지 않는다)", async () => {
+    const { runGenerationPipeline } = await import("./pipeline");
+    // 매번 같은 빈 응답 예외 — accepted=0 이면 파이프라인의 기존 부족분 보충(refill) 로직이 generate()를
+    // 다시 부를 수 있으므로(내 변경과 무관한 기존 동작), 전체 호출 수를 고정값으로 단정하지 않는다.
+    // 대신 "이 재시도 로직 자체가 1회를 넘겨 반복하지 않는가"를 호출 횟수가 항상 짝수(최초+재시도 쌍)인
+    // 것으로 확인하고, 기록된 모든 emptyResponses 항목이 재시도했지만 끝내 해소되지 못했음을 검사한다.
+    generateSectionProblemsCore.mockRejectedValue(new Error("AI 응답을 처리할 수 없습니다."));
+
+    const result = await runGenerationPipeline(mathParams);
+
+    expect(result.accepted).toHaveLength(0);
+    expect(result.stats.emptyResponses.length).toBeGreaterThan(0);
+    expect(result.stats.emptyResponses.every((e) => e.retried && !e.resolved)).toBe(true);
+    // 항목 하나당 정확히 2번(최초+재시도 1회) 호출되고 그 이상 물러나지 않는다.
+    expect(generateSectionProblemsCore.mock.calls.length).toBe(result.stats.emptyResponses.length * 2);
+  });
+
+  it("빈 응답이 아닌 다른 생성 예외는 재시도하지 않는다(범위를 벗어난 실패에는 재시도 예산을 안 준다)", async () => {
+    const { runGenerationPipeline } = await import("./pipeline");
+    generateSectionProblemsCore.mockRejectedValue(new Error("네트워크 타임아웃"));
+
+    const result = await runGenerationPipeline(mathParams);
+
+    expect(result.accepted).toHaveLength(0);
+    expect(result.stats.emptyResponses.length).toBeGreaterThan(0);
+    expect(result.stats.emptyResponses.every((e) => !e.retried && !e.resolved)).toBe(true);
+    // 범위 밖 예외는 재시도 안 하므로, 기존 refill 로직이 몇 번을 부르든 호출 수와 emptyResponses
+    // 건수가 1:1이어야 한다(내 재시도가 끼어들지 않았다는 뜻).
+    expect(generateSectionProblemsCore.mock.calls.length).toBe(result.stats.emptyResponses.length);
+  });
 });

@@ -234,21 +234,47 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
     while (remaining > 0) { const n = Math.min(CHUNK, remaining); remaining -= n; chunkSizes.push(n); }
     const avoidTopics = recentTopics.slice(-30);
     // 청크끼리는 서로 독립적인 생성 호출이다 — 순서대로 기다리지 않고 동시에 보낸다(벽시계 시간 단축).
+    // 2026-09-18(제품 오너 지시) — "AI 응답에 문제가 없습니다"/"AI 응답을 처리할 수 없습니다" 같은
+    // 빈/파싱불가 응답만, 딱 1회 그대로 다시 호출한다. 품질 검증 실패(오답 품질·중복·형식 등)의 기존
+    // 재생성/거부 경로는 건드리지 않는다 — 여기서 잡는 건 "생성 자체가 아무것도 못 만든" 경우뿐이고,
+    // 이미 만들어진 후보가 계약·검증에 걸리는 실패는 이 catch에 들어오지 않는다(그 실패들은 gate()의
+    // fail()이 기존 재생성 상한(hard 2회/그 외 1회)으로 이미 처리한다 — 여기서 재시도 예산을 더 얹지
+    // 않는다). 재시도도 실패하면 그 슬롯은 그걸로 끝(더 물러나지 않는다) — 전체 후보 배수·모델 호출
+    // 상한·벽시계 시간 상한은 그대로.
     const chunks = await mapWithConcurrency(chunkSizes, GATE_CONCURRENCY, async (n) => {
-      countCall();
-      try {
-        const chunk = await timed("generate", () => generateSectionProblemsCore({
-          sectionTitle: params.topic?.trim() || params.skillType, subjectName: params.subjectName, skillType: params.skillType,
-          difficulty: params.difficulty, format: params.format, count: n, figurePolicy: params.figurePolicy ?? "optional", skillCode: skillCode ?? undefined, keepFigureless: true,
-          avoidTopics,
-        }));
-        if (chunk.length === 0) stats.emptyResponses.push({ cause: `생성 청크(${n}개 요청)가 빈 배열을 반환`, retried: false, resolved: false });
-        else if (chunk.length < n) stats.underReturned.push({ requested: n, returned: chunk.length, reason: "생성 청크가 요청보다 적게 반환" });
-        return chunk;
-      } catch (e) {
-        stats.emptyResponses.push({ cause: `생성 청크(${n}개 요청) 예외: ${e instanceof Error ? e.message : "오류"}`, retried: false, resolved: false });
+      const isEmptyResponseError = (e: unknown) =>
+        e instanceof Error && (e.message.includes("AI 응답에 문제가 없습니다") || e.message.includes("AI 응답을 처리할 수 없습니다"));
+      const attempt = async (): Promise<{ chunk: GeneratedProblem[] } | { error: unknown }> => {
+        countCall();
+        try {
+          const chunk = await timed("generate", () => generateSectionProblemsCore({
+            sectionTitle: params.topic?.trim() || params.skillType, subjectName: params.subjectName, skillType: params.skillType,
+            difficulty: params.difficulty, format: params.format, count: n, figurePolicy: params.figurePolicy ?? "optional", skillCode: skillCode ?? undefined, keepFigureless: true,
+            avoidTopics,
+          }));
+          return { chunk };
+        } catch (e) {
+          return { error: e };
+        }
+      };
+      const first = await attempt();
+      if ("chunk" in first) {
+        if (first.chunk.length < n) stats.underReturned.push({ requested: n, returned: first.chunk.length, reason: "생성 청크가 요청보다 적게 반환" });
+        return first.chunk;
+      }
+      if (!isEmptyResponseError(first.error)) {
+        stats.emptyResponses.push({ cause: `생성 청크(${n}개 요청) 예외: ${first.error instanceof Error ? first.error.message : "오류"}`, retried: false, resolved: false });
         return [] as GeneratedProblem[];
       }
+      // 빈/파싱불가 응답 — 딱 1회만 그대로 재시도.
+      const second = await attempt();
+      if ("chunk" in second) {
+        stats.emptyResponses.push({ cause: `생성 청크(${n}개 요청) 예외: ${first.error instanceof Error ? first.error.message : "오류"}`, retried: true, resolved: true });
+        if (second.chunk.length < n) stats.underReturned.push({ requested: n, returned: second.chunk.length, reason: "생성 청크가 요청보다 적게 반환" });
+        return second.chunk;
+      }
+      stats.emptyResponses.push({ cause: `생성 청크(${n}개 요청) 예외: ${second.error instanceof Error ? second.error.message : "오류"}`, retried: true, resolved: false });
+      return [] as GeneratedProblem[];
     });
     const flat = chunks.flat();
     for (const g of flat) {
