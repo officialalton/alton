@@ -113,7 +113,7 @@
 | test4 | M1-1 | Math | 없음 | 막대그래프 단순 값 읽기(범주형) | 객관식 | 막대그래프 | 완전 불가 | 없음 | 미확인 | 범주형 막대그래프 단순조회 스킬 자체가 없음 |
 | test4 | M1-2 | Math | percentages | percent_of(75가 300의 몇%) | 객관식 | 없음 | 가능 | 있음(수치 재계산 검증) | 미확인 | - |
 | test4 | M1-3 | Math | nonlinear_equations_systems | root(x²/25=36 형태) | 객관식 | 방정식 | 가능 | 있음 | 미확인 | - |
-| test4 | M1-4 | Math | linear_equations_one_var | 문장제→일차방정식 변환(식 고르기) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 있음(수치형은 검증 있으나 "식 자체를 고르는" 변환형 미구현) | 미확인 | 방정식-매칭형(식 선택) 서브타입 없음 |
+| test4 | M1-4 | Math | linear_equations_one_var | 문장제→일차방정식 변환(식 고르기) | 객관식 | 없음 | 가능(word_problem_translate 서브타입 구현, 2026-09-17) | 있음(수치형은 검증 있으나 "식 자체를 고르는" 변환형 미구현) | 미확인 | word_problem_translate 서브타입으로 해결(2026-09-17) |
 | test4 | M1-5 | Math | linear_functions | 일차함수 기울기의 맥락적 의미 해석 | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | "맥락 해석형" 서브타입 없음(evaluate/find_x/slope_two_points만 존재) |
 | test4 | M1-6 | Math | ratios_rates | 단가→수량 계산(SPR) | **SPR** | 없음 | 가능(로직은) / SPR 미지원 | 없음(SPR 답 모델 없음) | 미확인 | SPR 답안모델 없음 |
 | test4 | M1-7 | Math | linear_equations_one_var | 쿠폰 할인 문장제(SPR) | **SPR** | 없음 | 가능(로직은) / SPR 미지원 | 없음 | 미확인 | SPR 답안모델 없음 |
@@ -403,7 +403,7 @@
 | test7 | M1-1 | Math | 없음 | 산점도 최적선에서 특정 x값의 예측값 읽기 | 객관식 | 산점도 | 완전 불가 | 없음 | 미확인 | **산점도 회귀/최적선 스킬 자체가 없음**(누적 3회째 재현) |
 | test7 | M1-2 | Math | 없음 | 사각형 넓이 차 계산(단순 뺄셈 문장제) | 객관식 | 없음 | 완전 불가 | 없음 | 미확인 | 19종 컴파일러 어디에도 매칭되는 스킬 없음(단순 도형 넓이 차) |
 | test7 | M1-3 | Math | linear_equations_one_var | 절댓값 방정식(|p|+61=65) | 객관식 | 방정식 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 절댓값 방정식 서브타입 없음 |
-| test7 | M1-4 | Math | linear_equations_one_var | 문장제→일차방정식 변환(식 고르기) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 있음(수치형은 검증 있으나 식 선택형 미구현) | 미확인 | 방정식-매칭형(식 선택) 서브타입 없음 |
+| test7 | M1-4 | Math | linear_equations_one_var | 문장제→일차방정식 변환(식 고르기) | 객관식 | 없음 | 가능(word_problem_translate 서브타입 구현, 2026-09-17) | 있음(수치형은 검증 있으나 식 선택형 미구현) | 미확인 | word_problem_translate 서브타입으로 해결(2026-09-17) |
 | test7 | M1-5 | Math | 없음 | 막대그래프 단순 값 조회(범주형) | 객관식 | 막대그래프 | 완전 불가 | 없음 | 미확인 | 범주형 막대그래프 단순조회 스킬 자체가 없음(누적 3회째 재현) |
 | test7 | M1-6 | Math | linear_functions | 기울기+y절편으로 직선의 방정식 계수 구하기 | 객관식 | 없음 | 가능 | 있음 | 미확인 | - |
 | test7 | M1-7 | Math | nonlinear_equations_systems | 인수분해형(3차) x절편 하나 구하기(SPR) | **SPR** | 방정식 | 가능(로직은) / SPR 미지원 | 없음 | 미확인 | SPR 답안모델 없음 |
@@ -581,12 +581,12 @@
 | test8 | M2-1 | Math | linear_functions | 그래프에서 y절편 읽기(직선) | 객관식 | 좌표평면(그래프) | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 그래프 판독형(y절편) 서브타입 없음 |
 | test8 | M2-2 | Math | 없음 | 표에서 두 값의 단순 차이 계산 | 객관식 | 표 | 완전 불가 | 없음 | 미확인 | 표 값 단순 조회·차이 계산 스킬 자체가 없음 |
 | test8 | M2-3 | Math | lines_angles_triangles | 평행선-횡단선 각도 계산 | 객관식 | 도형 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 평행선/횡단선 각 서브타입 없음(누적 재현) |
-| test8 | M2-4 | Math | linear_equations_one_var | 문장제→일차방정식 변환(식 고르기) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 있음(수치형은 있으나 식 선택형 미구현) | 미확인 | 식 선택형 서브타입 없음(누적 재현) |
+| test8 | M2-4 | Math | linear_equations_one_var | 문장제→일차방정식 변환(식 고르기) | 객관식 | 없음 | 가능(word_problem_translate 서브타입 구현, 2026-09-17) | 있음(수치형은 있으나 식 선택형 미구현) | 미확인 | word_problem_translate 서브타입으로 해결(2026-09-17) |
 | test8 | M2-5 | Math | right_triangles_trigonometry | pythagorean_hypotenuse(빗변 공식 선택) | 객관식 | 도형 | 가능 | 있음 | 미확인 | - |
 | test8 | M2-6 | Math | linear_functions | find_x_for_value(g(x)=54, SPR) | **SPR** | 없음 | 가능(로직은) / SPR 미지원 | 없음 | 미확인 | SPR 답안모델 없음 |
 | test8 | M2-7 | Math | nonlinear_functions | evaluate(삼차식 f(2), SPR) | **SPR** | 없음 | 가능(로직은) / SPR 미지원 | 없음 | 미확인 | SPR 답안모델 없음 |
 | test8 | M2-8 | Math | linear_functions | evaluate(y절편, f(x)=x/10-2) | 객관식 | 없음 | 가능 | 있음 | 미확인 | - |
-| test8 | M2-9 | Math | linear_equations_one_var | 문장제(영상 길이 배분)→식 선택 | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 식 선택형 서브타입 없음(누적 재현) |
+| test8 | M2-9 | Math | linear_equations_one_var | 문장제(영상 길이 배분)→식 선택 | 객관식 | 없음 | 가능(word_problem_translate 서브타입 구현, 2026-09-17) | 없음 | 미확인 | word_problem_translate 서브타입으로 해결(2026-09-17) |
 | test8 | M2-10 | Math | nonlinear_functions | 함수 평행이동(수직 하강) 재정의 | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | "함수 평행이동" 서브타입 없음(누적 재현) |
 | test8 | M2-11 | Math | linear_two_variables | intersection_x(연립방정식 x값) | 객관식 | 방정식 | 가능 | 있음 | 미확인 | - |
 | test8 | M2-12 | Math | right_triangles_trigonometry | trig_ratio(sin A) | 객관식 | 도형 | 가능 | 있음 | 미확인 | - |
@@ -991,7 +991,7 @@
 | test11 | M1-5 | Math | probability | 단순 확률(빈도표에서 채식 샌드위치 선택) | 객관식 | 표 | 가능 | 있음 | 미확인 | - |
 | test11 | M1-6 | Math | percentages | percent_of(750의 10%, SPR) | **SPR** | 없음 | 가능(로직은) / SPR 미지원 | 없음 | 미확인 | SPR 답안모델 없음 |
 | test11 | M1-7 | Math | linear_two_variables | 연립방정식 y값(SPR) | **SPR** | 방정식 | 가능(로직은) / SPR 미지원 | 없음 | 미확인 | SPR 답안모델 없음 |
-| test11 | M1-8 | Math | linear_equations_one_var | 문장제→식 선택형(체스 점수) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 방정식-매칭형(식 선택) 서브타입 없음(누적 재현) |
+| test11 | M1-8 | Math | linear_equations_one_var | 문장제→식 선택형(체스 점수) | 객관식 | 없음 | 가능(word_problem_translate 서브타입 구현, 2026-09-17) | 없음 | 미확인 | word_problem_translate 서브타입으로 해결(2026-09-17) |
 | test11 | M1-9 | Math | nonlinear_functions | evaluate(g(x)=√x+300, g(81)) | 객관식 | 없음 | 가능 | 있음 | 미확인 | - |
 | test11 | M1-10 | Math | inference_from_sample | 표본비율로 전체 추정(고객 3만명 중 관심수) | 객관식 | 없음 | 가능 | 있음 | 미확인 | - |
 | test11 | M1-11 | Math | equivalent_expressions | 다항식 인수분해(GCF, 64t²s³-56t³s) | 객관식 | 없음 | 가능 | 있음 | 미확인 | - |
@@ -1000,7 +1000,7 @@
 | test11 | M1-14 | Math | nonlinear_functions | 지수함수 과거시점 역산(75년마다 2배, 1659년 인구, SPR) | **SPR** | 없음 | 상위스킬만 있고 하위패턴 불가(SPR도 미지원) | 없음 | 미확인 | 지수함수 역산(과거시점 값) 서브타입 없음 + SPR 답안모델 없음 |
 | test11 | M1-15 | Math | 없음 | 산점도 최적선 기울기 추정 | 객관식 | 산점도 | 완전 불가 | 없음 | 미확인 | **산점도 회귀/최적선 스킬 자체가 없음**(누적 재현) |
 | test11 | M1-16 | Math | nonlinear_equations_systems | 유일해 조건 판별((x+15)²=k꼴) | 객관식 | 방정식 | 가능 | 있음 | 미확인 | - |
-| test11 | M1-17 | Math | linear_equations_one_var | 문장제→식 선택형(버스 대여) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 방정식-매칭형(식 선택) 서브타입 없음(누적 재현) |
+| test11 | M1-17 | Math | linear_equations_one_var | 문장제→식 선택형(버스 대여) | 객관식 | 없음 | 가능(word_problem_translate 서브타입 구현, 2026-09-17) | 없음 | 미확인 | word_problem_translate 서브타입으로 해결(2026-09-17) |
 | test11 | M1-18 | Math | linear_two_variables | 연립방정식→그래프 매칭(해변의자/파라솔) | 객관식 | 좌표평면(그래프) | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 연립방정식→그래프 매칭 서브타입 없음 |
 | test11 | M1-19 | Math | right_triangles_trigonometry | 변 길이를 삼각비로 표현(QS=18/cosQ) | 객관식 | 도형 | 가능 | 있음 | 미확인 | - |
 | test11 | M1-20 | Math | circles | 반지름 2배 확대된 원 방정식의 상수 k | 객관식 | 없음 | 가능 | 있음 | 미확인 | - |
@@ -1083,6 +1083,8 @@ test4+6+7+8+9 누적 SPR 62건에 test10 SPR 13건(M1 6 + M2 7), test11 SPR 13�
 ### 로드맵 확인
 
 이 문서로 **로드맵 Step 2(College Board 실전 문제 전수 매핑)가 완료됐다.** 기획자가 지시한 순서대로, 다음 단계는 **Step 3(Math SPR 구현)** — 위 SPR 집계가 보여주듯 `batch.ts` 출력 포맷 분기(배치 레이어 아키텍처 변경)가 핵심 작업이며, 특정 스킬 1~2개 추가로는 해결되지 않는다는 점이 7개 시험지·88건 표본으로 충분히 검증됐다.
+
+**Step 4 진행 메모(2026-09-17)**: `linear_equations_one_var`에 `word_problem_translate` 서브타입(kind)을 신설해 "문장제→일차방정식 세우기(식 고르기)" 패턴(위 표의 test4 M1-4, test7 M1-4, test8 M2-4·M2-9, test11 M1-8·M1-17 등)을 코드 결정론적으로 해결했다 — 실제 오역 오류(more/less than 부호 반전, 괄호 그룹핑 오류, 계수·상수 스왑) 3종에서만 오답을 생성하며, `npx tsx scripts/math-compiler-validate-linear-two-var.ts linear_equations_one_var`로 medium·hard 각 10문항(총 20) 자동 통과·DB 저장 성공을 확인했다. 나머지 Step 4 고빈도 공백 7개(지수함수 증가·감소, 선형+이차 교점, 부등식 표 검증형, 산점도/최적합선, 기울기·절편 문맥해석, 무리수근 이차방정식, 리터럴 방정식)는 이번 패스 예산 안에서 착수하지 못했다 — 후속 패스가 이어받는다(산점도/최적합선은 위 갭 랭킹 1순위·누적 8회로 `two_variable_data`에 신규 figure primitive가 필요해 별도 세션 분량이다).
 
 ---
 
