@@ -149,39 +149,27 @@ export type SubmitMeetingRequestResult =
 
 /** 예외를 던지지 않고 { ok, error }로 반환한다(Next.js Server Action의 production
  * 예외 마스킹 재발 방지 — app/admin/trial-onboarding-actions.ts와 동일 규칙). */
-export async function submitMeetingRequest(params: {
-  childId?: string;
-  subject?: string;
-  content: string;
-  contactPreference?: "phone" | "message" | "either";
-  preferredContactTime?: string;
-  slotStartsAtIso?: string;
-  sourceMessageId?: string;
-}): Promise<SubmitMeetingRequestResult> {
+/** R12.1: 상담 신청 폼은 "상담 사유" 단일 입력만 받는다. child_id/subject/
+ * contact_preference/preferred_contact_time 컬럼은 DB에 그대로 두지만(추가 전용
+ * 마이그레이션 원칙), 이 폼에서는 값을 넣지 않고 null로 남긴다. */
+export async function submitMeetingRequest(params: { reason: string }): Promise<SubmitMeetingRequestResult> {
   try {
     const { user, profile, supabase } = await requireUser();
     if (profile?.role !== "parent") throw new Error("보호자만 상담을 신청할 수 있습니다.");
-    if (!params.content?.trim()) throw new Error("상담 내용을 입력해주세요.");
+    if (!params.reason?.trim()) throw new Error("상담 사유를 입력해주세요.");
     const householdId = await requireGuardianHouseholdId(supabase, user.id);
-
-    let startsAt: Date | null = null;
-    let endsAt: Date | null = null;
-    if (params.slotStartsAtIso) {
-      startsAt = new Date(params.slotStartsAtIso);
-      endsAt = new Date(startsAt.getTime() + 60 * 60 * 1000);
-    }
 
     const { error } = await supabase.from("meeting_requests").insert({
       household_id: householdId,
-      child_id: params.childId || null,
-      subject: params.subject?.trim() || null,
-      content: params.content.trim(),
-      contact_preference: params.contactPreference ?? null,
-      preferred_contact_time: params.preferredContactTime?.trim() || null,
+      child_id: null,
+      subject: null,
+      content: params.reason.trim(),
+      contact_preference: null,
+      preferred_contact_time: null,
       requested_by: user.id,
-      starts_at: startsAt ? startsAt.toISOString() : null,
-      ends_at: endsAt ? endsAt.toISOString() : null,
-      source_message_id: params.sourceMessageId || null,
+      starts_at: null,
+      ends_at: null,
+      source_message_id: null,
     });
     if (error) throw new Error(error.message);
     return { ok: true };
@@ -190,13 +178,10 @@ export async function submitMeetingRequest(params: {
   }
 }
 
-export type MeetingRequestMessage = {
-  id: string;
-  senderId: string;
-  senderRole: "guardian" | "admin";
-  body: string;
-  createdAt: string;
-};
+// R12.1: meeting_request_messages 스레드는 더 이상 UI로 노출하지 않는다("상담
+// 신청 내부 메시지 스레드는 노출하지 않고, 대화는 메신저로만 처리"). 테이블 자체는
+// 추가 전용 원칙에 따라 유지하되, listMeetingRequestMessages/
+// sendMeetingRequestMessage는 여기서 제거했다 — 대화는 household_messages(메신저)로.
 
 async function assertGuardianOwnsMeetingRequest(
   supabase: SupabaseClient,
@@ -212,39 +197,45 @@ async function assertGuardianOwnsMeetingRequest(
   if (!data) throw new Error("본인 household의 상담 신청만 조회할 수 있습니다.");
 }
 
-export async function listMeetingRequestMessages(meetingRequestId: string): Promise<MeetingRequestMessage[]> {
-  const { user, profile, supabase } = await requireUser();
-  if (profile?.role !== "parent") throw new Error("보호자만 접근할 수 있습니다.");
-  const householdId = await requireGuardianHouseholdId(supabase, user.id);
-  await assertGuardianOwnsMeetingRequest(supabase, householdId, meetingRequestId);
-  const { data, error } = await supabase
-    .from("meeting_request_messages")
-    .select("id, sender_id, sender_role, body, created_at")
-    .eq("meeting_request_id", meetingRequestId)
-    .order("created_at", { ascending: true });
-  if (error) throw new Error(error.message);
-  return (data ?? []).map((r) => ({
-    id: r.id,
-    senderId: r.sender_id,
-    senderRole: r.sender_role,
-    body: r.body,
-    createdAt: r.created_at,
-  }));
-}
+export type GuardianMeetingRequestReview = {
+  finalText: string;
+  finalizedAt: string | null;
+  driveLink: { driveFileId: string } | null;
+};
 
-export async function sendMeetingRequestMessage(meetingRequestId: string, body: string): Promise<void> {
+/** status='final'인 리뷰만 반환한다(RLS도 동일하게 강제하지만, 의도를 명시적으로
+ * 요청한다). 미팅록 링크는 meeting_request_review_drive_access.status='granted'일
+ * 때만 채워준다 — 그 외(행 없음/pending/failed)에는 null을 반환해 앱이 링크를
+ * 아예 렌더링하지 않게 한다. */
+export async function getGuardianMeetingRequestReview(
+  meetingRequestId: string
+): Promise<GuardianMeetingRequestReview | null> {
   const { user, profile, supabase } = await requireUser();
   if (profile?.role !== "parent") throw new Error("보호자만 접근할 수 있습니다.");
-  if (!body.trim()) throw new Error("내용을 입력해주세요.");
   const householdId = await requireGuardianHouseholdId(supabase, user.id);
   await assertGuardianOwnsMeetingRequest(supabase, householdId, meetingRequestId);
-  const { error } = await supabase.from("meeting_request_messages").insert({
-    meeting_request_id: meetingRequestId,
-    sender_id: user.id,
-    sender_role: "guardian",
-    body: body.trim(),
-  });
+
+  const { data: review, error } = await supabase
+    .from("meeting_request_reviews")
+    .select("id, final_text, finalized_at, status")
+    .eq("meeting_request_id", meetingRequestId)
+    .eq("status", "final")
+    .maybeSingle();
   if (error) throw new Error(error.message);
+  if (!review || !review.final_text) return null;
+
+  const { data: access } = await supabase
+    .from("meeting_request_review_drive_access")
+    .select("drive_file_id, status")
+    .eq("meeting_request_review_id", review.id)
+    .eq("status", "granted")
+    .maybeSingle();
+
+  return {
+    finalText: review.final_text,
+    finalizedAt: review.finalized_at,
+    driveLink: access ? { driveFileId: access.drive_file_id } : null,
+  };
 }
 
 export async function getMessengerUnreadCount(): Promise<number> {
