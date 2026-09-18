@@ -58,11 +58,36 @@ export function renderSolid(spec: SolidSpec): { svg: string; alt: string; issues
     const spot = sheet.firstFree([[mid[0] + off, mid[1]], [mid[0] - off, mid[1]], [mid[0] + off + 8, mid[1] - 10], [mid[0] - off - 8, mid[1] - 10], [mid[0] + off + 16, mid[1] + 12], [mid[0] - off - 16, mid[1] + 12], [mid[0] + off + 6, mid[1] + 26], [mid[0] - off - 6, mid[1] + 26]], t);
     if (spot) sheet.label(spot[0], spot[1], t, what); else issues.push({ code: "label_collision", message: `${what} '${t}' 을 놓을 자리가 없습니다.` });
   };
+  // 2026-09-19(제품 오너 발견) — 입체도형이 실제 치수 라벨(길이/반지름/높이 등) 값과 무관하게 항상
+  // 같은 고정 크기로 그려졌다(예: 4×9×2 직육면체인데 그림은 큐브에 가까운 비율) — 그림과 숫자가
+  // 안 맞았다. 라벨이 전부 숫자로 파싱되면 실제 비율대로 스케일한다(변수(x 등) 라벨이 섞이면 비율을
+  // 알 수 없으니 기존 고정 크기를 그대로 쓴다). 최소 크기(MIN_SIDE)로 극단적 비율에서도 가장 작은
+  // 변이 완전히 안 보이지 않게 한다.
+  const parseNum = (t?: string): number | null => {
+    if (!t) return null;
+    const n = Number(t.trim().replace(/[^0-9.]/g, ""));
+    return Number.isFinite(n) && n > 0 ? n : null;
+  };
   const parts: string[] = [];
   switch (spec.kind) {
     case "rectangular_prism":
     case "cube": {
-      const w = spec.kind === "cube" ? 130 : 170, h = spec.kind === "cube" ? 130 : 110, dep: Pt = [60, -40];
+      const MAX_W = 190, MAX_H = 150, MAX_DEP = 80, MIN_SIDE = 40;
+      const DEP_RATIO = 40 / 60; // 원래 고정 dep [60, -40]과 같은 기울기 각도를 유지.
+      let w = spec.kind === "cube" ? 130 : 170;
+      let h = spec.kind === "cube" ? 130 : 110;
+      let depMag = 60;
+      if (spec.kind === "rectangular_prism") {
+        const L0 = parseNum(d.length), W0 = parseNum(d.width), H0 = parseNum(d.height);
+        if (L0 !== null && W0 !== null && H0 !== null) {
+          const maxVal = Math.max(L0, W0, H0);
+          const scale = (v: number, cap: number) => Math.max(MIN_SIDE, Math.round((v / maxVal) * cap));
+          w = scale(L0, MAX_W);
+          h = scale(H0, MAX_H);
+          depMag = scale(W0, MAX_DEP);
+        }
+      }
+      const dep: Pt = [depMag, -Math.round(depMag * DEP_RATIO)];
       const x0 = 70, y0 = 215;
       const A: Pt = [x0, y0], B: Pt = [x0 + w, y0], C: Pt = [x0 + w, y0 - h], D: Pt = [x0, y0 - h];
       const A2: Pt = [A[0] + dep[0], A[1] + dep[1]], B2: Pt = [B[0] + dep[0], B[1] + dep[1]], C2: Pt = [C[0] + dep[0], C[1] + dep[1]], D2: Pt = [D[0] + dep[0], D[1] + dep[1]];
@@ -72,12 +97,22 @@ export function renderSolid(spec: SolidSpec): { svg: string; alt: string; issues
       const L = spec.kind === "cube" ? d.edge : d.length, Wd = spec.kind === "cube" ? undefined : d.width, Hd = spec.kind === "cube" ? undefined : d.height;
       dimLabel((A[0] + B[0]) / 2, A[1] + 16, L, "길이 라벨");
       dimLabel((B[0] + B2[0]) / 2 + 14, (B[1] + B2[1]) / 2 + 10, Wd, "너비 라벨");
-      dimLabel(B[0] + 14 + (Hd ? halfDiag(Hd) : 0), (B[1] + C[1]) / 2, Hd, "높이 라벨");
+      if (Hd) sideLabel([B[0], (B[1] + C[1]) / 2], Hd, "높이 라벨");
       parts.push(spec.kind === "cube" ? `정육면체, 모서리 ${d.edge ?? "?"}` : `직육면체, 길이 ${d.length ?? "?"}, 너비 ${d.width ?? "?"}, 높이 ${d.height ?? "?"}`);
       break;
     }
     case "cylinder": {
-      const c: Pt = [180, 70], rx = 80, ry = 24, h = 130;
+      const CYL_MAX_RX = 100, CYL_MAX_H = 170, CYL_MIN_SIDE = 30;
+      const r0 = parseNum(d.radius) ?? (parseNum(d.diameter) !== null ? parseNum(d.diameter)! / 2 : null);
+      const h0 = parseNum(d.height);
+      let rx = 80, h = 130;
+      if (r0 !== null && h0 !== null) {
+        const maxVal = Math.max(r0, h0);
+        rx = Math.max(CYL_MIN_SIDE, Math.round((r0 / maxVal) * CYL_MAX_RX));
+        h = Math.max(CYL_MIN_SIDE, Math.round((h0 / maxVal) * CYL_MAX_H));
+      }
+      const ry = Math.max(14, Math.round(rx * 0.3));
+      const c: Pt = [180, 70];
       ell(c, rx, ry);
       sheet.line([c[0] - rx, c[1]], [c[0] - rx, c[1] + h]); sheet.line([c[0] + rx, c[1]], [c[0] + rx, c[1] + h]);
       ell([c[0], c[1] + h], rx, ry, "front"); ell([c[0], c[1] + h], rx, ry, "back", true);
@@ -88,7 +123,17 @@ export function renderSolid(spec: SolidSpec): { svg: string; alt: string; issues
       break;
     }
     case "cone": {
-      const c: Pt = [180, 215], rx = 85, ry = 24, apex: Pt = [180, 60];
+      const CONE_MAX_RX = 100, CONE_MAX_H = 155, CONE_MIN_SIDE = 75;
+      const cr0 = parseNum(d.radius) ?? (parseNum(d.diameter) !== null ? parseNum(d.diameter)! / 2 : null);
+      const ch0 = parseNum(d.height);
+      let rx = 85, apexH = 155;
+      if (cr0 !== null && ch0 !== null) {
+        const maxVal = Math.max(cr0, ch0);
+        rx = Math.max(CONE_MIN_SIDE, Math.round((cr0 / maxVal) * CONE_MAX_RX));
+        apexH = Math.max(CONE_MIN_SIDE, Math.round((ch0 / maxVal) * CONE_MAX_H));
+      }
+      const ry = Math.max(14, Math.round(rx * 0.28));
+      const c: Pt = [180, 215], apex: Pt = [180, 215 - apexH];
       ell(c, rx, ry, "front"); ell(c, rx, ry, "back", true);
       sheet.line(apex, [c[0] - rx, c[1]]); sheet.line(apex, [c[0] + rx, c[1]]);
       if (d.height) { dash(apex, c); sheet.rightAngle(c, 0, Math.PI / 2, 8); sideLabel([c[0], (apex[1] + c[1]) / 2], d.height, "높이 라벨"); }

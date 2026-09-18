@@ -463,9 +463,6 @@ export default function ProblemsPanel({
                 )}
               </header>
 
-              {/* 그래프/도형 선택지(figure_choice)는 선택지 칸 안에 그림을 그린다 — 위에 따로 그리지 않는다. */}
-              {p.figure != null && (p.figure as { type?: string }).type !== "figure_choice" && <ProblemFigure spec={p.figure} className="mb-4" />}
-
               {p.passage ? (
                 <RwStimulusView
                   passage={stripInlineOptions(p.passage, p.options)}
@@ -474,6 +471,11 @@ export default function ProblemsPanel({
               ) : (
                 <p className="text-[13px] text-grey-500 mb-4">지문이 없는 문제입니다.</p>
               )}
+
+              {/* 그래프/도형 선택지(figure_choice)는 선택지 칸 안에 그림을 그린다 — 위에 따로 그리지 않는다.
+                  2026-09-19(제품 오너 발견) — 지문이 "as shown below" 처럼 자료가 아래에 있다고
+                  서술하는데 자료가 지문보다 먼저 그려져 서술과 화면 순서가 어긋났다 — 지문 다음으로 옮긴다. */}
+              {p.figure != null && (p.figure as { type?: string }).type !== "figure_choice" && <ProblemFigure spec={p.figure} className="mb-4" />}
 
               {p.statements && p.statements.length > 0 && (
                 <ol className="mb-4 pl-1" data-testid="statements">

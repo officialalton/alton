@@ -14,6 +14,7 @@ import { checkContent } from "./problem-content-check";
 import { checkRwStructure, parseRwStimulus, quotedTargetWord, rwSkillCode } from "./rw-stimulus";
 import { composeProblemText } from "./problem-question";
 import { judgeMaterialNeed, materialBlocker } from "./problem-material-need";
+import { isMostlyKorean } from "./problem-generation/common-quality-gate";
 import { SKILL_BY_CODE, skillLabel } from "./problem-taxonomy";
 
 export type EvidenceKind = "passage" | "text_1_2" | "notes" | "table" | "graph" | "figure" | "equation" | "options_figure";
@@ -181,6 +182,41 @@ export function checkQualityContract(input: ContractInput): ContractResult {
   if (isMc && input.correctIndex !== null && code && rwSkillCode(code) && !["words_in_context", "transitions", "boundaries", "form_structure_sense"].includes(code)) {
     const ans = opts[input.correctIndex] ?? "";
     if (ans.length >= 40 && input.stimulus.toLowerCase().includes(ans.toLowerCase().replace(/[.]$/, ""))) issues.push({ code: "contract_answer", message: "정답 선택지 문장이 지문에 그대로 들어 있습니다 — 정답 노출." });
+  }
+
+  // Bug C(2026-09-19 제품 오너 발견) — R&W(영어 지문) mc 선택지 일부가 한글로 나온 사례(cross_text_
+  // connections에서 A·B는 영어인데 C·D가 통째로 한국어 문장). R&W는 지문·질문·선택지가 전부 영어여야
+  // 하는 스킬(해설만 한국어) — isMostlyKorean(같은 임계값을 evidence-target 언어 검사에 이미 쓰고
+  // 있음)으로 선택지 각각을 검사해 하나라도 한글이면 거부한다.
+  if (isMc && code && rwSkillCode(code) && opts.length) {
+    const koreanOptions = opts.filter((o) => isMostlyKorean(o));
+    if (koreanOptions.length > 0) {
+      issues.push({ code: "contract_option_language", message: `선택지가 한국어로 작성됐습니다("${koreanOptions[0].slice(0, 40)}") — R&W 문항의 선택지는 지문과 같은 언어(영어)여야 합니다(해설만 한국어).` });
+    }
+  }
+
+  // Bug D(2026-09-19 제품 오너 발견) — 빈칸(______) 바로 앞 단어와 선택지 첫 단어가 그대로 겹치는
+  // 사례(예: "...surprising resilience, ______" 앞에서 "resilience," 다음 선택지가 "resilience
+  // that ...others..."로 시작 — 빈칸에 끼워 넣으면 "resilience, resilience that"처럼 같은 단어가
+  // 바로 반복되는 비문이 된다). transitions/boundaries/form_structure_sense/inferences처럼 빈칸을
+  // 문장에 그대로 삽입해 읽는 스킬에서만 의미 있는 검사다.
+  const BLANK_INSERT_SKILLS = new Set(["transitions", "boundaries", "form_structure_sense", "inferences"]);
+  if (isMc && code && BLANK_INSERT_SKILLS.has(code) && opts.length) {
+    const blankIdx = input.stimulus.indexOf("______");
+    if (blankIdx >= 0) {
+      const before = input.stimulus.slice(0, blankIdx);
+      const beforeWordMatch = before.match(/([a-zA-Z']+)[.,;:]*\s*$/);
+      const beforeWord = beforeWordMatch?.[1]?.toLowerCase();
+      if (beforeWord) {
+        for (const o of opts) {
+          const firstWordMatch = o.trim().match(/^([a-zA-Z']+)/);
+          const firstWord = firstWordMatch?.[1]?.toLowerCase();
+          if (firstWord && firstWord === beforeWord) {
+            issues.push({ code: "contract_blank_duplicate_word", message: `선택지 "${o.slice(0, 40)}"의 첫 단어가 빈칸 바로 앞 단어("${beforeWord}")와 같습니다 — 빈칸에 끼워 넣으면 같은 단어가 바로 반복되는 비문이 됩니다.` });
+          }
+        }
+      }
+    }
   }
 
   // Bug A(2026-09-17) — 빈칸 완성형 선택지의 지문 축자 복제.

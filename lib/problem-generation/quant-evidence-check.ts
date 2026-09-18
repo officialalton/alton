@@ -155,7 +155,8 @@ export function checkQuantEvidenceFields(
   fields: QuantEvidenceFields,
   figure: unknown,
   correctOption: string,
-  distractorOptions: string[]
+  distractorOptions: string[],
+  stimulus: string = ""
 ): QuantEvidenceCheckResult {
   if (!isQuantEvidenceSkill(skillCode)) return { ok: true };
 
@@ -173,6 +174,10 @@ export function checkQuantEvidenceFields(
   const cells = numericCells(figure);
   const derived = derivedStats(figure);
   const cellSet = new Set(cells.map(r9));
+  // 2026-09-19(제품 오너 발견) — "지문이 자료를 부연 설명하며 언급하는 숫자"(예: 지문 본문에 직접
+  // 적힌 값)까지도 자료로 인정한다. 단, figure/derived에 전혀 없는 숫자를 정답이 "some"(하나만
+  // 근거 확인)으로 통과시키던 원래 로직이 진짜 결함이었다 — 아래에서 every로 바꾼다.
+  const stimulusNumSet = new Set(numbersIn(stimulus).map(r9));
 
   // 모든 선택지(정답+오답)에 공통으로 나오는 숫자는 "Shift 4" 처럼 같은 항목을 가리키는 문맥 숫자다 —
   // 실제로 갈리는 값이 아니므로 비교에서 뺀다(안 빼면 문맥 숫자가 우연히 같아 오답이 정답과 "같은 값"으로
@@ -189,11 +194,18 @@ export function checkQuantEvidenceFields(
   if (correctNums.length === 0) {
     return { ok: false, reason: "quant-evidence: 정답 선택지에 수치가 없습니다 — 정량 근거 문항의 정답은 자료의 값을 인용해야 합니다." };
   }
-  const correctVerified = correctNums.some((n) => cellSet.has(r9(n)) || derived.has(r9(n)));
-  if (!correctVerified) {
+  // 2026-09-19(제품 오너 발견 — 전시회 관람객 문항) — 원래 some()은 정답 수치 중 "하나라도" 자료에
+  // 있으면 통과시켰다. 정답이 figure에 있는 값(예: 총 관람객 수)과 figure·지문 어디에도 없는 완전
+  // 조작된 값(예: 지문이 "부속 note에 있다"고만 말하고 실제로는 어디에도 적히지 않은 "운영 일수")을
+  // 함께 쓰면, 관람객 수 하나만으로 통과해버려 조작된 수치가 그대로 초안에 남았다. 이제 정답의
+  // distinctive 수치 전부가 자료(figure) 또는 지문 본문에 실제로 있어야 한다 — 하나라도 어디에도
+  // 없으면 그 수치는 "언급됐다고 주장만 될 뿐 실제로 제공되지 않은 자료"다.
+  const evidenceHas = (n: number) => cellSet.has(r9(n)) || derived.has(r9(n)) || stimulusNumSet.has(r9(n));
+  const unverifiedCorrect = correctNums.filter((n) => !evidenceHas(n));
+  if (unverifiedCorrect.length > 0) {
     return {
       ok: false,
-      reason: `quant-evidence: 정답 선택지의 수치(${correctNums.join(", ")})가 실제 자료의 셀 값이나 단순 파생 통계(행/열 합·최댓값·최솟값)와 일치하지 않습니다 — AI 자기보고가 아니라 자료 자체로 확인한 결과입니다.`,
+      reason: `quant-evidence: 정답 선택지가 언급하는 수치(${unverifiedCorrect.join(", ")})가 실제 자료(figure)에도, 지문 본문에도 없습니다 — 지문이 "표/그래프/note에 있다"고 서술만 하고 실제 값을 어디에도 제공하지 않은 자료 누락입니다. 정답이 인용하는 모든 수치는 실제로 화면에 표시되는 자료(figure) 또는 지문 문장 안에 있어야 합니다.`,
     };
   }
 

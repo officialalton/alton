@@ -649,11 +649,15 @@ export function PublishedContentView({ problem, content }: { problem: BankProble
   const vis = editorVisibility({ examSystem: problem.examSystem, format: problem.format, need, hasStatements: Boolean(p.statements?.length), hasFigure: p.figure != null, text: fullText });
   return (
     <div className="text-[13px] text-ink">
-      {p.figure != null && (p.figure as { type?: string }).type !== "figure_choice" && (vis.material || vis.legacyAll) && (
-        <div className="max-w-full mb-2"><ProblemFigure spec={p.figure} /></div>
-      )}
       <FieldTitle>지문 / 자료 · 질문</FieldTitle>
       {fullText ? <RwStimulusView passage={fullText} className="learning-body text-[13.5px] leading-[1.7]" /> : <span className="text-grey-500">(지문이 비어 있습니다)</span>}
+      {/* 2026-09-19(제품 오너 발견) — 지문이 "as shown below"/"the figure below" 처럼 자료가
+          아래에 있다고 서술하는데, 미리보기는 항상 자료를 지문보다 먼저 그렸다 — 서술과 화면
+          순서가 어긋났다. 실제 SAT도 자료는 그 자료를 언급하는 문장 뒤에 온다 — 지문 다음으로
+          옮긴다. */}
+      {p.figure != null && (p.figure as { type?: string }).type !== "figure_choice" && (vis.material || vis.legacyAll) && (
+        <div className="max-w-full mt-2 mb-2"><ProblemFigure spec={p.figure} /></div>
+      )}
       {!problem.hasQuestion && <p className="text-[11.5px] text-red mt-1">질문 보완 필요 — 공개본은 자동으로 고치지 않습니다. 수정 초안에서 질문을 갈라내거나 재생성하세요.</p>}
       {(vis.statements || vis.legacyAll) && p.statements?.length ? (
         <>

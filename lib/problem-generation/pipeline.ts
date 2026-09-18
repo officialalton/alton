@@ -433,7 +433,8 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
         { operation: g.evidenceTarget ?? null, answerRationale: g.answerRationale ?? null, distractorErrorTypes: g.distractorErrorTypes ?? null },
         g.figure ?? null,
         correctOpt,
-        distractors
+        distractors,
+        g.stimulus ?? g.passage ?? ""
       );
       if (!qeCheck.ok) return fail("contract", qeCheck.reason);
     }
