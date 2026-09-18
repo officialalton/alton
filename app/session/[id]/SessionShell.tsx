@@ -329,6 +329,14 @@ export default function SessionShell({
               📄 미팅록 보기
             </a>
           )}
+          {isTeacher && (
+            <a
+              href={`/teacher/student/${studentId}/roadmap`}
+              className="text-[12px] font-semibold text-grey-500 whitespace-nowrap"
+            >
+              🧭 학생 프로필·로드맵 보기
+            </a>
+          )}
           <span className="text-[12px] font-bold px-3.5 py-1.5 rounded-full bg-ink text-white whitespace-nowrap">
             {VIEWER_LABEL[viewerRole]}
           </span>

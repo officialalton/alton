@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import StudentShell from "./StudentShell";
 import type { DashboardData } from "./dashboard-data";
+import type { RoadmapData } from "@/lib/roadmap/types";
 
 const pushMock = vi.fn();
 vi.mock("next/navigation", () => ({
@@ -68,7 +69,32 @@ const dashboard: DashboardData = {
   attendanceRate: null,
 };
 
+const roadmap: RoadmapData = {
+  studentId: "student-1",
+  studentName: "지훈",
+  grade: null,
+  schoolName: null,
+  gpa: null,
+  academicProfile: { graduationYear: null, curriculumType: null, currentSubjects: [] },
+  testRecords: [],
+  collegeInterests: {
+    intendedMajors: [],
+    careerInterests: [],
+    targetCountries: [],
+    targetCollegeTypes: [],
+    targetColleges: [],
+    targetApplicationTiming: null,
+  },
+  activities: [],
+  awards: [],
+  prepItems: [],
+  milestones: [],
+  latestMonthlyReview: null,
+  completeness: { filledSections: 0, totalSections: 5 },
+};
+
 const lessonsProps = {
+  roadmap,
   upcoming: [],
   past: [],
   curricula: [],

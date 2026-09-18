@@ -19,6 +19,7 @@ import {
 import { ensureThreadAndLoadMessages } from "./chat-data";
 import { loadStudentSubjectEnrollments } from "./enrollment-data";
 import { loadLessonBookingData } from "./lesson-booking-data";
+import { loadRoadmapData } from "@/lib/roadmap/data";
 
 export default async function StudentHomePage({
   searchParams,
@@ -58,6 +59,7 @@ export default async function StudentHomePage({
     stats,
     subjectEnrollments,
     teacherList,
+    roadmap,
   ] = await Promise.all([
     dashboardPromise,
     lessonBookingPromise,
@@ -74,6 +76,7 @@ export default async function StudentHomePage({
     loadStats(supabase, user.id),
     loadStudentSubjectEnrollments(supabase, user.id),
     loadTeacherList(supabase, user.id),
+    loadRoadmapData(supabase, user.id),
   ]);
 
   const pastSessionIds = past.map((l) => l.sessionId);
@@ -140,6 +143,7 @@ export default async function StudentHomePage({
       chatThreads={chatThreads}
       subjectEnrollments={subjectEnrollments}
       lessonBooking={lessonBooking}
+      roadmap={roadmap}
     />
   );
 }
