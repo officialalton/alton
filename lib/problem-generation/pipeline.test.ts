@@ -111,7 +111,9 @@ describe("runGenerationPipeline — 2026-09-16 코드 검토 수정(Math 한정)
     generateSectionProblemsCore.mockResolvedValue([baseProblem()]);
     // 모든 시도(최초 + 재생성)에서 같은 오답 품질 문제가 재현된다고 가정 — repair가 "고친 오답"으로
     // 바꾸면 그 특정 문구가 계약을 깨는 것으로 모의한다(호출 순서가 아니라 실제 내용 기준 판정).
-    const badReview = { ...goodReview, distractors: [{ ...goodReview.distractors[0], obvious: true, kind: "irrelevant" as const }, goodReview.distractors[1], goodReview.distractors[2]] };
+    // 2026-09-19 — 어려움은 무관·명백한 오답 1개까지는 허용하므로(review.ts), repair를 실제로
+    // 유발하려면 2개를 나쁘게 만들어야 한다.
+    const badReview = { ...goodReview, distractors: [{ ...goodReview.distractors[0], obvious: true, kind: "irrelevant" as const }, { ...goodReview.distractors[1], obvious: true, kind: "irrelevant" as const }, goodReview.distractors[2]] };
     reviewProblemIndependently.mockResolvedValue(badReview);
     repairOneDistractorCore.mockResolvedValue({ ok: true, text: "고친 오답" });
     checkQualityContract.mockImplementation((input: { options?: string[] | null }) =>

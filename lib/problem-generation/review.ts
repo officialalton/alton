@@ -202,9 +202,12 @@ export function classifyReviewIssues(review: IndependentReview, requestedDifficu
       for (const d of ds) distractorTargets.push({ index: d.index, reason: `${d.kind === "irrelevant" ? "지문·자료와 무관합니다" : "너무 명백해 정답을 쉽게 고를 수 있습니다"} — ${note}` });
     };
     if (requestedDifficulty === "hard") {
-      // 어려움: 무관·명백한 오답을 하나도 허용하지 않는다(제품 오너 기준). 정답·난이도는 맞는데 오답만 약하면 그 자리만 고친다.
-      if (irrelevant.length) { reasons.push(`어려움 문제인데 오답 ${letters(irrelevant)}이 지문·자료와 무관합니다`); flagWeak(irrelevant, "어려움 문제는 무관한 오답을 허용하지 않습니다"); }
-      else if (obvious.length) { reasons.push(`어려움 문제인데 오답 ${letters(obvious)}이 너무 명백합니다`); flagWeak(obvious, "어려움 문제는 명백한 오답을 허용하지 않습니다"); }
+      // 2026-09-19(제품 오너 지시, 문제은행 전수 재검수 파일럿 결과 반영) — 어려움도
+      // 무관·명백한 오답 1개까지는 허용한다(실제 시험도 어려움 문제에 약한 오답 하나쯤
+      // 있다는 판단, 파일럿에서 0-허용 기준이 재생성으로도 해소 안 되는 탈락률을 만든 것 확인).
+      // 2개 이상이면 여전히 그 자리들만 고친다.
+      if (irrelevant.length >= 2) { reasons.push(`어려움 문제인데 오답 ${letters(irrelevant)}이 지문·자료와 무관합니다`); flagWeak(irrelevant, "어려움 문제는 무관한 오답을 2개 이상 허용하지 않습니다"); }
+      else if (obvious.length >= 2) { reasons.push(`어려움 문제인데 오답 ${letters(obvious)}이 너무 명백합니다`); flagWeak(obvious, "어려움 문제는 명백한 오답을 2개 이상 허용하지 않습니다"); }
     } else {
       // 보통·쉬움: 실제 시험도 쉽게 지워지는 오답이 하나쯤 있다. 오답 셋이 전부 명백/무관하거나 둘 이상이 무관하면 정답이 사실상 노출된 문항 → 그 자리들만 고친다.
       if (irrelevant.length >= 2) { reasons.push(`오답 ${letters(irrelevant)}이 지문·자료와 무관합니다`); flagWeak(irrelevant, "정답이 사실상 노출됩니다"); }
