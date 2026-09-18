@@ -76,3 +76,49 @@ describe("renderLinearInequalityProblem — 렌더링", () => {
     expect(rendered.options[rendered.correctIndex]).toBe(model.correctAnswer);
   });
 });
+
+describe("table_verification — 표 검증형(2026-09-17, Step 4 항목 4)", () => {
+  it("항상 엄격부등호(< 또는 >)만 쓰고, 후보 표 4개 중 정확히 하나만 세 행 모두 만족한다(100회 반복)", () => {
+    for (let i = 0; i < 100; i++) {
+      const model = generateLinearInequalityModel({ difficulty: "medium", questionKind: "table_verification" });
+      expect(model.questionKind).toBe("table_verification");
+      expect(["<", ">"]).toContain(model.op);
+      const v = validateLinearInequalityModel(model);
+      expect(v.ok).toBe(true);
+      const satisfies = (x: number, y: number) => {
+        const rhs = model.m * x + model.b;
+        return model.op === "<" ? y < rhs : y > rhs;
+      };
+      expect(model.tableCandidates).toHaveLength(4);
+      const trueCount = model.tableCandidates!.filter((t) => t.rows.every((r) => satisfies(r.x, r.y))).length;
+      expect(trueCount).toBe(1);
+      // 오답 표 3개는 각각 정확히 한 행만 실제로 위반한다(표 전체가 틀린 게 아니라 한 행짜리 실수).
+      for (const t of model.tableCandidates!.filter((t) => !t.allSatisfy)) {
+        const violations = t.rows.filter((r) => !satisfies(r.x, r.y)).length;
+        expect(violations).toBe(1);
+      }
+    }
+  });
+
+  it("오답은 항상 정확히 3개이고 정답과 겹치지 않는다(난이도 전체, 60회 반복)", () => {
+    const difficulties = ["easy", "medium", "hard"] as const;
+    for (let i = 0; i < 60; i++) {
+      const model = generateLinearInequalityModel({ difficulty: difficulties[i % 3], questionKind: "table_verification" });
+      expect(model.distractors).toHaveLength(3);
+      const values = [model.correctAnswer, ...model.distractors.map((d) => d.value)];
+      expect(new Set(values).size).toBe(4);
+    }
+  });
+
+  it("렌더링은 그림이 없고 선택지 4개가 모두 마크다운 파이프 표(| x | y |) 형식이다", () => {
+    const model = generateLinearInequalityModel({ difficulty: "hard", questionKind: "table_verification" });
+    const rendered = renderLinearInequalityProblem(model);
+    expect(rendered.figure).toBeNull();
+    expect(rendered.options).toHaveLength(4);
+    for (const opt of rendered.options) {
+      expect(opt.startsWith("| x | y |")).toBe(true);
+      expect(opt.split("\n")).toHaveLength(5); // 헤더 + 구분선 + 3행.
+    }
+    expect(rendered.options[rendered.correctIndex]).toBe(model.correctAnswer);
+  });
+});

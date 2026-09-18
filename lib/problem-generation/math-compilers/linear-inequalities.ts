@@ -9,7 +9,7 @@
 import type { PlaneSpec, PlaneObject } from "@/lib/problem-figures/templates/coordinate-plane";
 import type { DistractorRationale, DistractorKind } from "../review";
 
-export type LinearInequalityQuestionKind = "solve_one_var" | "point_in_solution";
+export type LinearInequalityQuestionKind = "solve_one_var" | "point_in_solution" | "table_verification";
 export type LinearInequalityDifficulty = "easy" | "medium" | "hard";
 type Op = "<" | "<=" | ">" | ">=";
 
@@ -41,6 +41,16 @@ export type LinearInequalityModel = {
   distractors: { value: string; kind: DistractorKind; reason: string }[];
   /** point_in_solution 전용 — 후보 점 4개(정답 포함, 이미 정답 위치에 correctAnswer 문자열과 대응). */
   candidatePoints?: { x: number; y: number; satisfies: boolean }[];
+  /**
+   * 2026-09-17(제품 오너 지시, Step 4 항목 4) — table_verification 전용: "표 검증형"
+   * 실제 SAT 패턴("y > 13x - 18. For which of the following tables are all the
+   * values of x and their corresponding values of y solutions...?"). x값 3개와
+   * 후보 표 4개(정답 포함) — 각 표는 (x, y) 세 쌍이며 정답 표만 세 행 모두 부등식을
+   * 만족한다. 오답 표는 실제 오류 경로(부등호 방향 반대·경계값 그대로 사용·기울기
+   * 부호 오류)로 정확히 한 행만 위반하게 만든다.
+   */
+  tableXValues?: number[];
+  tableCandidates?: { rows: { x: number; y: number }[]; allSatisfy: boolean }[];
 };
 
 function randInt(min: number, max: number): number {
@@ -188,12 +198,106 @@ function generatePointInSolution(difficulty: LinearInequalityDifficulty): Linear
   };
 }
 
+/** "| x | y |\n|---|---|\n| 3 | 21 |\n…" — 마크다운 파이프 표. LearningText(선택지 렌더링에도
+ * 그대로 쓰이는 컴포넌트, app/session/[id]/LearningText.tsx)가 이 형식을 표로 그린다는 것을
+ * two_variable_data의 지문 렌더링 경로에서 이미 확인했다(lib/render-learning-content.ts의
+ * splitLearningBlocks). 선택지 전용 렌더링 인프라를 새로 만들지 않는다. */
+function renderTableOption(rows: { x: number; y: number }[]): string {
+  const header = "| x | y |";
+  const sep = "|---|---|";
+  const body = rows.map((r) => `| ${fmt(r.x)} | ${fmt(r.y)} |`).join("\n");
+  return `${header}\n${sep}\n${body}`;
+}
+
+/**
+ * 2026-09-17(제품 오너 지시) — 표 검증형은 실제 College Board 표본이 전부 엄격부등호(< , >)다.
+ * 등호 포함 부등호(<=, >=)는 "경계값을 그대로 썼다"는 오류 경로 자체가 성립하지 않는다(등호를
+ * 포함하면 경계값도 실제 정답이라 오답으로 못 쓴다) — 그래서 이 유형만 엄격부등호로 제한한다.
+ */
+function generateTableVerification(difficulty: LinearInequalityDifficulty): LinearInequalityModel {
+  const range = RANGE_BY_DIFFICULTY[difficulty];
+  for (let attempt = 0; attempt < 40; attempt++) {
+    const m = randSlope(difficulty);
+    const b = randInt(-range, range);
+    const op: Op = Math.random() < 0.5 ? "<" : ">";
+    const satisfies = (x: number, y: number): boolean => {
+      const rhs = m * x + b;
+      return op === "<" ? y < rhs : y > rhs;
+    };
+    const margin = (): number => randInt(1, Math.max(2, Math.floor(range / 2)));
+
+    const xs: number[] = [];
+    while (xs.length < 3) {
+      const x = randInt(-range, range);
+      if (!xs.includes(x)) xs.push(x);
+    }
+    const trueRow = (x: number): { x: number; y: number } => {
+      const rhs = m * x + b;
+      const y = op === "<" ? rhs - margin() : rhs + margin();
+      return { x, y };
+    };
+    const correctRows = xs.map(trueRow);
+    if (!correctRows.every((r) => satisfies(r.x, r.y))) continue;
+
+    // 오답 표 1 — 첫 행만 부등호 방향을 반대로 적용한 값을 쓴다.
+    const wrongDirRows = correctRows.map((r, i) => {
+      if (i !== 0) return r;
+      const rhs = m * r.x + b;
+      const y = op === "<" ? rhs + margin() : rhs - margin();
+      return { x: r.x, y };
+    });
+    // 오답 표 2 — 둘째 행만 경계값(등호) 그대로 쓴다(엄격부등호라 항상 위반).
+    const boundaryRows = correctRows.map((r, i) => (i !== 1 ? r : { x: r.x, y: m * r.x + b }));
+    // 오답 표 3 — 셋째 행만 기울기 부호를 반대로 계산한 값을 쓴다.
+    const signErrRows = correctRows.map((r, i) => {
+      if (i !== 2) return r;
+      const wrongRhs = -m * r.x + b;
+      const y = op === "<" ? wrongRhs - margin() : wrongRhs + margin();
+      return { x: r.x, y };
+    });
+
+    const exactlyOneViolation = (rows: { x: number; y: number }[]): boolean =>
+      rows.filter((r) => !satisfies(r.x, r.y)).length === 1;
+    if (!exactlyOneViolation(wrongDirRows) || !exactlyOneViolation(boundaryRows) || !exactlyOneViolation(signErrRows)) continue;
+
+    const tableCandidates = [
+      { rows: correctRows, allSatisfy: true },
+      { rows: wrongDirRows, allSatisfy: false },
+      { rows: boundaryRows, allSatisfy: false },
+      { rows: signErrRows, allSatisfy: false },
+    ];
+    const texts = tableCandidates.map((c) => renderTableOption(c.rows));
+    if (new Set(texts).size !== 4) continue;
+
+    return {
+      skillCode: "linear_inequalities", difficulty, questionKind: "table_verification",
+      m, b, op,
+      tableXValues: xs,
+      tableCandidates,
+      correctAnswer: texts[0],
+      distractors: [
+        { value: texts[1], kind: "sign_error", reason: `표의 첫 행(x = ${fmt(wrongDirRows[0].x)})이 부등호 방향을 반대로 적용한 값을 쓰고 있다.` },
+        { value: texts[2], kind: "condition_ignored", reason: `표의 둘째 행(x = ${fmt(boundaryRows[1].x)})이 경계값(등호)을 그대로 써서 엄격부등호를 만족하지 않는다.` },
+        { value: texts[3], kind: "other", reason: `표의 셋째 행(x = ${fmt(signErrRows[2].x)})이 기울기의 부호를 반대로 계산한 값을 쓰고 있다.` },
+      ],
+    };
+  }
+  throw new Error("linear_inequalities(table_verification): 오답 표 생성에 실패했습니다.");
+}
+
 export function generateLinearInequalityModel(params: {
   difficulty: LinearInequalityDifficulty;
   questionKind?: LinearInequalityQuestionKind;
 }): LinearInequalityModel {
-  const kind = params.questionKind ?? (randInt(0, 1) === 0 ? "solve_one_var" : "point_in_solution");
-  return kind === "solve_one_var" ? generateSolveOneVar(params.difficulty) : generatePointInSolution(params.difficulty);
+  const kind = params.questionKind ?? (() => {
+    const roll = Math.random();
+    if (roll < 0.4) return "solve_one_var" as const;
+    if (roll < 0.7) return "point_in_solution" as const;
+    return "table_verification" as const;
+  })();
+  if (kind === "solve_one_var") return generateSolveOneVar(params.difficulty);
+  if (kind === "point_in_solution") return generatePointInSolution(params.difficulty);
+  return generateTableVerification(params.difficulty);
 }
 
 /** 결정적 검사 — 답의 유일성·오답 3개·(point_in_solution) 실제 대입 결과 일치. */
@@ -215,6 +319,20 @@ export function validateLinearInequalityModel(model: LinearInequalityModel): { o
     }
     const trueCount = model.candidatePoints.filter((p) => p.satisfies).length;
     if (trueCount !== 1) return { ok: false, reason: "해 영역에 속하는 후보 점이 정확히 하나가 아닙니다." };
+  }
+  if (model.questionKind === "table_verification") {
+    if (!model.tableCandidates || model.tableCandidates.length !== 4) return { ok: false, reason: "후보 표가 4개가 아닙니다." };
+    const check = (x: number, y: number): boolean => {
+      const rhs = model.m * x + model.b;
+      return model.op === "<" ? y < rhs : y > rhs;
+    };
+    for (const t of model.tableCandidates) {
+      const actual = t.rows.every((r) => check(r.x, r.y));
+      if (actual !== t.allSatisfy) return { ok: false, reason: "후보 표의 만족 여부가 실제 대입 결과와 다릅니다." };
+    }
+    const trueCount = model.tableCandidates.filter((t) => t.allSatisfy).length;
+    if (trueCount !== 1) return { ok: false, reason: "모든 행이 조건을 만족하는 후보 표가 정확히 하나가 아닙니다." };
+    if (model.op !== "<" && model.op !== ">") return { ok: false, reason: "table_verification은 엄격부등호(< 또는 >)만 지원합니다." };
   }
   return { ok: true };
 }
@@ -264,6 +382,27 @@ export function renderLinearInequalityProblem(model: LinearInequalityModel): Com
       index: options.indexOf(d.value) >= 0 ? options.indexOf(d.value) : i,
       plausibleBecause: "같은 부등식에서 나올 수 있는 실제 계산 오류 경로다.",
       matches: "같은 부등식에서 계산되었다.",
+      whyWrong: d.reason,
+      kind: d.kind,
+      obvious: false,
+    }));
+    return { passage, question, options, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
+  }
+
+  if (model.questionKind === "table_verification") {
+    const passage = `Consider the inequality shown.\n\n${mathWrap(`y ${OP_TEXT[model.op]} ${rhsExpr(model.m, model.b)}`)}`;
+    const question = "For which of the following tables are all the values of x and their corresponding values of y solutions to the given inequality?";
+    const { options, correctIndex } = shuffleWithAnswer(model.correctAnswer, model.distractors.map((d) => d.value));
+    const opKorTv = model.op === "<" ? "작아야" : "커야";
+    const opEnTv = model.op === "<" ? "less than" : "greater than";
+    const boundaryList = model.tableXValues!.map((x) => `x = ${fmt(x)}일 때 ${fmt(model.m * x + model.b)}`).join(", ");
+    const boundaryListEn = model.tableXValues!.map((x) => `x = ${fmt(x)} gives ${fmt(model.m * x + model.b)}`).join(", ");
+    const explanation = `경계선 y = ${rhsExpr(model.m, model.b)}에 각 표의 x값을 대입하면 경계값은 ${boundaryList}이다. 부등식이 ${OP_TEXT[model.op]}이므로 표의 y값이 이 경계값보다 ${opKorTv} 세 행 모두 조건을 만족한다. 오답 표들은 한 행씩 실제로 대입해 보면 조건을 만족하지 않는다(부등호 방향을 반대로 적용했거나, 경계값을 그대로 썼거나, 기울기 부호를 반대로 계산했다). 세 행 모두 조건을 만족하는 표는 정답 표뿐이다.`;
+    const explanationEn = `Substituting each table's x-value into the boundary line y = ${rhsExpr(model.m, model.b)} gives the boundary values: ${boundaryListEn}. Since the inequality uses ${OP_TEXT[model.op]}, every row's y-value must be ${opEnTv} that boundary value for the table to be entirely valid. In each wrong table, at least one row fails this check when substituted directly (wrong inequality direction, using the boundary value itself, or a sign error in the slope). Only the correct table has every row actually satisfy the inequality.`;
+    const distractorRationales: DistractorRationale[] = model.distractors.map((d, i) => ({
+      index: options.indexOf(d.value) >= 0 ? options.indexOf(d.value) : i,
+      plausibleBecause: "세 행 중 두 행은 실제로 조건을 만족해 얼핏 보면 정답 표로 보일 수 있다.",
+      matches: "같은 부등식·같은 x값으로 계산되었다.",
       whyWrong: d.reason,
       kind: d.kind,
       obvious: false,
