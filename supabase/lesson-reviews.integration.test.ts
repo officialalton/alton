@@ -258,3 +258,239 @@ describe("lesson_reviews — 체험 리뷰 작성/확정(카테고리별 의견 
     expect(rows).toBe("");
   });
 });
+
+describe("teacher_edit_finalized_lesson_review — 확정 리뷰의 선생님 정정 + 수정 이력", () => {
+  it("담당 선생님이 아니면 정정이 거부되고 이력도 남지 않는다", () => {
+    const beforeCount = psql(
+      `select count(*) from lesson_review_edit_history r
+       join lesson_reviews v on v.id = r.review_id
+       where v.trial_session_id = '${sessionId}';`
+    );
+    const stderr = asUserExpectError(
+      OTHER_TEACHER_ID,
+      `select teacher_edit_finalized_lesson_review('${sessionId}', '다른 선생님 정정 시도', null);`
+    );
+    expect(stderr).toMatch(/담당 선생님만 리뷰를 정정할 수 있습니다/);
+    const afterCount = psql(
+      `select count(*) from lesson_review_edit_history r
+       join lesson_reviews v on v.id = r.review_id
+       where v.trial_session_id = '${sessionId}';`
+    );
+    expect(afterCount).toBe(beforeCount);
+  });
+
+  it("빈 텍스트로는 정정할 수 없다", () => {
+    const stderr = asUserExpectError(
+      TEACHER_ID,
+      `select teacher_edit_finalized_lesson_review('${sessionId}', '   ', null);`
+    );
+    expect(stderr).toMatch(/빈 리뷰로 정정할 수 없습니다/);
+  });
+
+  it("담당 선생님이 정정하면 finalized_at은 보존되고, 정정 직전 값이 lesson_review_edit_history에 남는다", () => {
+    const beforeFinalText = psql(
+      `select final_text from lesson_reviews where trial_session_id = '${sessionId}';`
+    );
+    const finalizedAtBefore = psql(
+      `select finalized_at from lesson_reviews where trial_session_id = '${sessionId}';`
+    );
+
+    asUser(
+      TEACHER_ID,
+      `select teacher_edit_finalized_lesson_review('${sessionId}', '선생님 재정정 종합의견', '[{"category_key":"attitude","note":"선생님 재정정 태도"}]'::jsonb);`
+    );
+
+    const finalizedAtAfter = psql(
+      `select finalized_at from lesson_reviews where trial_session_id = '${sessionId}';`
+    );
+    expect(finalizedAtAfter).toBe(finalizedAtBefore);
+
+    const finalTextAfter = psql(
+      `select final_text from lesson_reviews where trial_session_id = '${sessionId}';`
+    );
+    expect(finalTextAfter).toBe("선생님 재정정 종합의견");
+
+    const history = asUser(
+      TEACHER_ID,
+      `select edited_by, edited_by_role, previous_final_text from lesson_review_edit_history r
+       join lesson_reviews v on v.id = r.review_id
+       where v.trial_session_id = '${sessionId}' order by r.edited_at desc limit 1;`
+    );
+    expect(history).toBe(`${TEACHER_ID}|teacher|${beforeFinalText}`);
+
+    // 보호자에게는 최신 정정 내용만 보인다(과거 버전이 아니라).
+    const familyRows = asUser(
+      guardianId,
+      `select final_text from get_lesson_reviews_for_family('${subjectEnrollmentId}') limit 1;`
+    );
+    expect(familyRows).toBe("선생님 재정정 종합의견");
+  });
+
+  it("이력은 관리자·담당 선생님만 조회할 수 있고, 다른 선생님은 조회할 수 없다", () => {
+    const otherTeacherRows = asUser(
+      OTHER_TEACHER_ID,
+      `select r.id from lesson_review_edit_history r
+       join lesson_reviews v on v.id = r.review_id
+       where v.trial_session_id = '${sessionId}';`
+    );
+    expect(otherTeacherRows).toBe("");
+
+    const adminRows = asUser(
+      ADMIN_ID,
+      `select count(*) from lesson_review_edit_history r
+       join lesson_reviews v on v.id = r.review_id
+       where v.trial_session_id = '${sessionId}';`
+    );
+    expect(Number(adminRows)).toBeGreaterThan(0);
+  });
+
+  it("관리자 정정(admin_edit_lesson_review)도 같은 이력 테이블에 남는다", () => {
+    asUser(
+      ADMIN_ID,
+      `select admin_edit_lesson_review('${sessionId}', '관리자 재정정 종합의견', null);`
+    );
+    const latest = asUser(
+      ADMIN_ID,
+      `select edited_by, edited_by_role from lesson_review_edit_history r
+       join lesson_reviews v on v.id = r.review_id
+       where v.trial_session_id = '${sessionId}' order by r.edited_at desc limit 1;`
+    );
+    expect(latest).toBe(`${ADMIN_ID}|admin`);
+  });
+
+  it("확정 전(draft만 있는) 리뷰는 선생님이 정정 함수로 손댈 수 없다", () => {
+    // 별도 세션으로 draft만 저장하고 아직 확정하지 않은 케이스. beforeAll이 쓴
+    // 수업권은 이미 소진했으므로 이 케이스 전용으로 하나 더 발급한다.
+    const trialProductId = psql(`select id from entitlement_products where code = 'trial_lesson_grant';`);
+    const extraGrantId = psql(
+      `insert into entitlement_grants (child_id, entitlement_product_id, purchase_id_ref, original_quantity, expires_at, is_paid)
+       values ('${childId}', '${trialProductId}', null, 1, now() + interval '90 days', false) returning id;`
+    );
+    psql(
+      `insert into entitlement_ledger (grant_id, event_type, amount, business_event_id) values ('${extraGrantId}', 'grant', 1, 'integration-review-draftonly-grant-${Date.now()}');`
+    );
+
+    // 기존 beforeAll과 같은 FIXED_BOOKING_HOUR_UTC 패턴(자정 경계 버그 회피) —
+    // 다른 날짜(+41일)로 겹치지 않게 예약한다.
+    const startsAtDate = new Date(Date.now() + 41 * 24 * 60 * 60 * 1000);
+    startsAtDate.setUTCHours(17, Math.floor(Math.random() * 50), 0, 0);
+    const startsAt = startsAtDate.toISOString();
+    const endsAt = new Date(startsAtDate.getTime() + 60 * 60000).toISOString();
+    const draftOnlySessionId = psql(
+      `select session_id from confirm_lesson_booking(
+        '${childId}', '${subjectEnrollmentId}', '${TEACHER_ID}',
+        (select id from lesson_types where code = 'trial'),
+        '${startsAt}', '${endsAt}',
+        'integration-review-draftonly-${Date.now()}'
+      );`
+    );
+    asUser(
+      TEACHER_ID,
+      `select save_lesson_review_draft('${draftOnlySessionId}', null, '아직 초안', '[]'::jsonb);`
+    );
+    const stderr = asUserExpectError(
+      TEACHER_ID,
+      `select teacher_edit_finalized_lesson_review('${draftOnlySessionId}', '정정 시도', null);`
+    );
+    expect(stderr).toMatch(/확정된 리뷰만 정정할 수 있습니다/);
+  });
+});
+
+describe("정규 수업 리뷰 확장(2026-09-17 제품 오너 피드백) — 체험 전용 제한 폐기", () => {
+  let regularSessionId: string;
+
+  beforeAll(() => {
+    const regularLessonTypeId = psql(`select id from lesson_types where code = 'regular';`);
+    const regularProductId = psql(`select id from entitlement_products where code = 'lesson_pack_1';`);
+    const grantId = psql(
+      `insert into entitlement_grants (child_id, entitlement_product_id, purchase_id_ref, original_quantity, expires_at, is_paid)
+       values ('${childId}', '${regularProductId}', null, 1, now() + interval '90 days', true) returning id;`
+    );
+    psql(
+      `insert into entitlement_ledger (grant_id, event_type, amount, business_event_id) values ('${grantId}', 'grant', 1, 'integration-review-regular-grant-${Date.now()}');`
+    );
+    const startsAtDate = new Date(Date.now() + 42 * 24 * 60 * 60 * 1000);
+    startsAtDate.setUTCHours(17, Math.floor(Math.random() * 50), 0, 0);
+    const startsAt = startsAtDate.toISOString();
+    const endsAt = new Date(startsAtDate.getTime() + 60 * 60000).toISOString();
+    regularSessionId = psql(
+      `select session_id from confirm_lesson_booking('${childId}', '${subjectEnrollmentId}', '${TEACHER_ID}', '${regularLessonTypeId}', '${startsAt}', '${endsAt}', 'integration-review-regular-${Date.now()}');`
+    );
+  });
+
+  it("정규 수업도 체험과 동일한 함수로 초안 저장·확정할 수 있고, 가족이 lesson_type=regular로 조회한다", () => {
+    asUser(
+      TEACHER_ID,
+      `select save_lesson_review_draft('${regularSessionId}', null, '정규 1회차 초안', '[]'::jsonb);`
+    );
+    asUser(TEACHER_ID, `select finalize_lesson_review('${regularSessionId}', '정규 1회차 확정 의견');`);
+
+    const familyRow = asUser(
+      guardianId,
+      `select lesson_type, session_id, final_text from get_lesson_reviews_for_family('${subjectEnrollmentId}') where session_id = '${regularSessionId}' limit 1;`
+    );
+    expect(familyRow).toBe(`regular|${regularSessionId}|정규 1회차 확정 의견`);
+  });
+
+  it("미팅록 원본 링크는 Drive 권한 부여 작업이 succeeded일 때만 노출 가능 상태가 된다(SECURITY DEFINER 함수로만 조회, status 컬럼만 반환)", () => {
+    psql(`insert into session_smart_notes (session_id, drive_file_id) values ('${regularSessionId}', 'test-drive-file-id');`);
+    const taskId = psql(
+      `insert into session_drive_tasks (session_id, task_type, payload, status, last_error)
+       values ('${regularSessionId}', 'smart_notes_reader_grant', '{"studentEmail":"child@example.com"}'::jsonb, 'queued', 'internal retry detail') returning id;`
+    );
+
+    // 큐 상태가 아직 queued면 가족 화면 쪽 로직(app/parent/lesson-review-family-actions.ts)이
+    // meetingRecordLink를 null로 둔다 — 여기서는 DB 레벨로 그 판단 재료(상태 값 자체)가
+    // 가족에게 올바르게 조회되는지만 검증한다.
+    const queuedStatus = asUser(
+      guardianId,
+      `select status from get_smart_notes_reader_grant_statuses(array['${regularSessionId}']::uuid[]);`
+    );
+    expect(queuedStatus).toBe("queued");
+
+    psql(`update session_drive_tasks set status = 'succeeded' where id = '${taskId}';`);
+    const succeededStatus = asUser(
+      guardianId,
+      `select status from get_smart_notes_reader_grant_statuses(array['${regularSessionId}']::uuid[]);`
+    );
+    expect(succeededStatus).toBe("succeeded");
+
+    // 다른 가족(본인 자녀가 아님)은 이 상태도, drive_file_id도 조회할 수 없다.
+    const otherGuardianStatus = asUser(
+      "bbbbbbbb-0000-0000-0000-000000000001",
+      `select status from get_smart_notes_reader_grant_statuses(array['${regularSessionId}']::uuid[]);`
+    );
+    expect(otherGuardianStatus).toBe("");
+    const otherGuardianFile = asUser(
+      "bbbbbbbb-0000-0000-0000-000000000001",
+      `select drive_file_id from session_smart_notes where session_id = '${regularSessionId}';`
+    );
+    expect(otherGuardianFile).toBe("");
+  });
+
+  it("session_drive_tasks 테이블 자체는 학생·보호자·다른 교사에게 전면 차단돼 있다(RLS 정책 없음 — payload·last_error가 함수 밖으로 새 나갈 경로 자체가 없다)", () => {
+    // 20261393000000이 이 테이블에 RLS를 켜면서 anon/authenticated 정책을 의도적으로
+    // 하나도 두지 않았다(service_role 전용 내부 큐). 20261410000000이 한 번 이 원칙을
+    // 깨고 학생·보호자용 정책을 테이블에 직접 추가했었는데(뷰가 security_invoker라도
+    // 밑에 깔린 테이블 정책이 있으면 테이블을 직접 select해도 걸린다), 그 정책은
+    // 20261412000000에서 되돌렸다 — 지금은 테이블 직접 조회가 본인 세션이어도 전부 빈
+    // 결과여야 한다.
+    const guardianDirect = asUser(
+      guardianId,
+      `select payload, last_error, status from session_drive_tasks where session_id = '${regularSessionId}' and task_type = 'smart_notes_reader_grant';`
+    );
+    expect(guardianDirect).toBe("");
+
+    const childDirect = asUser(
+      childId,
+      `select payload, last_error, status from session_drive_tasks where session_id = '${regularSessionId}' and task_type = 'smart_notes_reader_grant';`
+    );
+    expect(childDirect).toBe("");
+
+    const otherTeacherDirect = asUser(
+      OTHER_TEACHER_ID,
+      `select payload, last_error, status from session_drive_tasks where session_id = '${regularSessionId}';`
+    );
+    expect(otherTeacherDirect).toBe("");
+  });
+});

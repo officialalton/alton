@@ -19,16 +19,28 @@ vi.mock("@/lib/google-meet", () => ({
 const reservationMaybeSingleMock = vi.fn();
 const teacherMaybeSingleMock = vi.fn();
 const consultationMaybeSingleMock = vi.fn();
-const dedupMaybeSingleMock = vi.fn();
-const smartNotesUpsertMock = vi.fn();
 const sessionsUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
 const sessionSmartNotesUpsertMock = vi.fn().mockResolvedValue({ error: null });
 const consultationsUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
 const accessEventsInsertMock = vi.fn();
 const subscriptionMaybeSingleMock = vi.fn().mockResolvedValue({ data: null });
 const sessionMaybeSingleMock = vi.fn().mockResolvedValue({ data: null });
-const driveTasksInsertMock = vi.fn().mockResolvedValue({ error: null });
 const resolveVerifiedStudentEmailMock = vi.fn().mockResolvedValue("student@example.com");
+
+// 2026-09-18(제품 오너 지시) — smart_notes_generation_events 클레임과
+// session_drive_tasks(smart_notes_reader_grant) enqueue는 이제 원자적 SECURITY
+// DEFINER 함수(claim_smart_notes_generation_event/enqueue_smart_notes_reader_grant_task,
+// supabase/migrations/20261414000000)를 admin.rpc()로 호출한다 — 이 두 함수의
+// 실제 원자성·동시성 안전성은 mock으로 재현할 수 없으므로 여기서는 "route.ts가
+// 이 함수들을 올바른 인자로 호출하는지"만 검증한다. 실제 DB 제약·경합 검증은
+// route.idempotency.integration.test.ts(실제 Postgres)의 역할이다.
+const claimSmartNotesEventRpcMock = vi.fn().mockResolvedValue({ data: "event-1", error: null });
+const enqueueDriveGrantRpcMock = vi.fn().mockResolvedValue({ data: "task-1", error: null });
+const rpcMock = vi.fn((fn: string, args: unknown) => {
+  if (fn === "claim_smart_notes_generation_event") return claimSmartNotesEventRpcMock(args);
+  if (fn === "enqueue_smart_notes_reader_grant_task") return enqueueDriveGrantRpcMock(args);
+  throw new Error(`unexpected rpc ${fn}`);
+});
 
 vi.mock("@/lib/booking/calendar-sync", () => ({
   resolveVerifiedStudentEmail: (...args: unknown[]) => resolveVerifiedStudentEmailMock(...args),
@@ -47,12 +59,6 @@ const fromMock = vi.fn((table: string) => {
       update: () => ({ eq: consultationsUpdateEqMock }),
     };
   }
-  if (table === "smart_notes_generation_events") {
-    return {
-      select: () => ({ eq: () => ({ maybeSingle: dedupMaybeSingleMock }) }),
-      upsert: (payload: unknown, opts: unknown) => smartNotesUpsertMock(payload, opts),
-    };
-  }
   if (table === "sessions") {
     return {
       update: (payload: unknown) => ({ eq: (...args: unknown[]) => sessionsUpdateEqMock(payload, ...args) }),
@@ -61,9 +67,6 @@ const fromMock = vi.fn((table: string) => {
   }
   if (table === "session_smart_notes") {
     return { upsert: (payload: unknown, opts: unknown) => sessionSmartNotesUpsertMock(payload, opts) };
-  }
-  if (table === "session_drive_tasks") {
-    return { insert: (payload: unknown) => driveTasksInsertMock(payload) };
   }
   if (table === "session_access_events") {
     return { insert: (payload: unknown) => accessEventsInsertMock(payload) };
@@ -75,7 +78,7 @@ const fromMock = vi.fn((table: string) => {
 });
 
 vi.mock("@/lib/supabase-admin", () => ({
-  createAdminClient: () => ({ from: fromMock }),
+  createAdminClient: () => ({ from: fromMock, rpc: rpcMock }),
 }));
 
 function makeRequest(
@@ -108,10 +111,10 @@ beforeEach(() => {
   reservationMaybeSingleMock.mockResolvedValue({ data: { id: "r1", owner_profile_id: "t1", session: { id: "s1" } } });
   teacherMaybeSingleMock.mockResolvedValue({ data: { workspace_email: "teacher1@alton.education" } });
   consultationMaybeSingleMock.mockResolvedValue({ data: null });
-  dedupMaybeSingleMock.mockResolvedValue({ data: null });
   resolveMeetingCodeMock.mockResolvedValue("abc-defg-hij");
   fetchDriveFileIdMock.mockResolvedValue("drive-file-1");
-  smartNotesUpsertMock.mockResolvedValue({ error: null });
+  claimSmartNotesEventRpcMock.mockResolvedValue({ data: "event-1", error: null });
+  enqueueDriveGrantRpcMock.mockResolvedValue({ data: "task-1", error: null });
   accessEventsInsertMock.mockResolvedValue({ error: null });
 });
 
@@ -141,14 +144,14 @@ describe("POST /api/webhooks/workspace-events", () => {
     const { POST } = await import("./route");
     const res = await POST(makeRequest({}, undefined) as never);
     expect(res.status).toBe(200);
-    expect(smartNotesUpsertMock).not.toHaveBeenCalled();
+    expect(claimSmartNotesEventRpcMock).not.toHaveBeenCalled();
   });
 
   it("모르는 ce-type은 200으로 ack하고 아무것도 쓰지 않는다", async () => {
     const { POST } = await import("./route");
     const res = await POST(makeRequest({}, "google.workspace.calendar.event.v3.updated") as never);
     expect(res.status).toBe(200);
-    expect(smartNotesUpsertMock).not.toHaveBeenCalled();
+    expect(claimSmartNotesEventRpcMock).not.toHaveBeenCalled();
     expect(accessEventsInsertMock).not.toHaveBeenCalled();
   });
 
@@ -169,9 +172,8 @@ describe("POST /api/webhooks/workspace-events", () => {
       teacherWorkspaceEmail: "official@alton.education",
       smartNoteResourceName: "conferenceRecords/abc/smartNotes/note1",
     });
-    expect(smartNotesUpsertMock).toHaveBeenCalledWith(
-      expect.objectContaining({ session_id: "s1", google_meeting_code: "abc-defg-hij", drive_file_id: "drive-file-1", linked: true }),
-      { onConflict: "pubsub_message_id" }
+    expect(claimSmartNotesEventRpcMock).toHaveBeenCalledWith(
+      expect.objectContaining({ p_session_id: "s1", p_google_meeting_code: "abc-defg-hij", p_drive_file_id: "drive-file-1", p_linked: true })
     );
     expect(sessionsUpdateEqMock).toHaveBeenCalledWith({ smart_notes_status: "completed" }, "id", "s1");
     expect(sessionSmartNotesUpsertMock).toHaveBeenCalledWith(
@@ -188,10 +190,10 @@ describe("POST /api/webhooks/workspace-events", () => {
     );
     expect(res.status).toBe(200);
     expect(resolveVerifiedStudentEmailMock).toHaveBeenCalledWith(expect.anything(), "se1");
-    expect(driveTasksInsertMock).toHaveBeenCalledWith({
-      session_id: "s1",
-      task_type: "smart_notes_reader_grant",
-      payload: { fileId: "drive-file-1", studentEmail: "student@example.com" },
+    expect(enqueueDriveGrantRpcMock).toHaveBeenCalledWith({
+      p_session_id: "s1",
+      p_drive_file_id: "drive-file-1",
+      p_student_email: "student@example.com",
     });
   });
 
@@ -203,7 +205,7 @@ describe("POST /api/webhooks/workspace-events", () => {
       makeRequest({ smartNote: { name: "conferenceRecords/abc/smartNotes/note1" } }, SMART_NOTE_TYPE) as never
     );
     expect(res.status).toBe(200);
-    expect(driveTasksInsertMock).not.toHaveBeenCalled();
+    expect(enqueueDriveGrantRpcMock).not.toHaveBeenCalled();
   });
 
   it("ce-subject가 등록된 선생님 구독과 일치하면 admin이 아니라 그 선생님을 subject로 조회한다(실사용 403 버그 수정)", async () => {
@@ -231,9 +233,8 @@ describe("POST /api/webhooks/workspace-events", () => {
     reservationMaybeSingleMock.mockResolvedValue({ data: null });
     const { POST } = await import("./route");
     await POST(makeRequest({ smartNote: { name: "conferenceRecords/abc/smartNotes/note1" } }, SMART_NOTE_TYPE) as never);
-    expect(smartNotesUpsertMock).toHaveBeenCalledWith(
-      expect.objectContaining({ session_id: null, linked: false }),
-      { onConflict: "pubsub_message_id" }
+    expect(claimSmartNotesEventRpcMock).toHaveBeenCalledWith(
+      expect.objectContaining({ p_session_id: null, p_linked: false })
     );
     expect(sessionsUpdateEqMock).not.toHaveBeenCalled();
   });
@@ -245,9 +246,8 @@ describe("POST /api/webhooks/workspace-events", () => {
     const { POST } = await import("./route");
     const res = await POST(makeRequest({ smartNote: { name: "conferenceRecords/abc/smartNotes/note1" } }, SMART_NOTE_TYPE) as never);
     expect(res.status).toBe(200);
-    expect(smartNotesUpsertMock).toHaveBeenCalledWith(
-      expect.objectContaining({ google_meeting_code: null, drive_file_id: null, session_id: null, linked: false }),
-      { onConflict: "pubsub_message_id" }
+    expect(claimSmartNotesEventRpcMock).toHaveBeenCalledWith(
+      expect.objectContaining({ p_google_meeting_code: null, p_drive_file_id: null, p_session_id: null, p_linked: false })
     );
     errorSpy.mockRestore();
   });
@@ -321,9 +321,8 @@ describe("POST /api/webhooks/workspace-events", () => {
       makeRequest({ smartNote: { name: "conferenceRecords/abc/smartNotes/note1" } }, SMART_NOTE_TYPE) as never
     );
     expect(res.status).toBe(200);
-    expect(smartNotesUpsertMock).toHaveBeenCalledWith(
-      expect.objectContaining({ session_id: null, consultation_id: "consult-1", drive_file_id: "drive-file-1", linked: true }),
-      { onConflict: "pubsub_message_id" }
+    expect(claimSmartNotesEventRpcMock).toHaveBeenCalledWith(
+      expect.objectContaining({ p_session_id: null, p_consultation_id: "consult-1", p_drive_file_id: "drive-file-1", p_linked: true })
     );
     expect(consultationsUpdateEqMock).toHaveBeenCalled();
   });
@@ -336,37 +335,34 @@ describe("POST /api/webhooks/workspace-events", () => {
       makeRequest({ smartNote: { name: "conferenceRecords/abc/smartNotes/note1" } }, SMART_NOTE_TYPE) as never
     );
     expect(res.status).toBe(200);
-    expect(smartNotesUpsertMock).toHaveBeenCalledWith(
-      expect.objectContaining({ session_id: null, consultation_id: null, linked: false }),
-      { onConflict: "pubsub_message_id" }
+    expect(claimSmartNotesEventRpcMock).toHaveBeenCalledWith(
+      expect.objectContaining({ p_session_id: null, p_consultation_id: null, p_linked: false })
     );
   });
 
-  it("동일 Pub/Sub messageId 재전송이어도 이미 완전히 처리됐으면(linked+drive_file_id 있음) 재처리하지 않고 200으로 ack한다(멱등)", async () => {
-    dedupMaybeSingleMock.mockResolvedValue({ data: { id: "existing-event", linked: true, drive_file_id: "drive-file-1" } });
+  // 2026-09-18(제품 오너 지시) — 이전 "select 존재 여부로 건너뛰기" 방식은 동시
+  // 배달 경합에 안전하지 않았다. claim_smart_notes_generation_event()가 원자적
+  // INSERT ... ON CONFLICT DO NOTHING RETURNING으로 대체됐고, 반환값이 null이면
+  // "이미 다른 요청이 먼저 클레임했다"는 뜻이다 — 그 원자성 자체는 mock으로
+  // 검증할 수 없으므로(route.idempotency.integration.test.ts가 실제 Postgres로
+  // 검증한다), 여기서는 route.ts가 null 반환을 올바르게 skip으로 처리하는지만
+  // 확인한다. "미완료(linked=false) 행은 재시도"라는 이전 동작은 의도적으로
+  // 제거됐다(재처리는 reconcileMissedSmartNotesEvents 배치가 담당) — 동시 배달
+  // 경합을 막으려면 "이미 클레임된 메시지는 완결 여부와 무관하게 무조건 skip"
+  // 이어야 한다.
+  it("claim이 null을 반환하면(동시 배달 경합에서 짐, 또는 순차 재전송 중복) 이후 작업 없이 200으로 ack한다", async () => {
+    claimSmartNotesEventRpcMock.mockResolvedValue({ data: null, error: null });
     const { POST } = await import("./route");
     const res = await POST(
       makeRequest({ smartNote: { name: "conferenceRecords/abc/smartNotes/note1" } }, SMART_NOTE_TYPE) as never
     );
     expect(res.status).toBe(200);
-    expect(smartNotesUpsertMock).not.toHaveBeenCalled();
+    expect(sessionsUpdateEqMock).not.toHaveBeenCalled();
+    expect(enqueueDriveGrantRpcMock).not.toHaveBeenCalled();
   });
 
-  it("동일 Pub/Sub messageId 재전송인데 이전 시도가 미완료(linked=false)였으면 건너뛰지 않고 다시 해석을 시도한다(재처리 가능한 상태 머신, 2026-09-05 코드 점검 발견·수정)", async () => {
-    dedupMaybeSingleMock.mockResolvedValue({ data: { id: "existing-event", linked: false, drive_file_id: null } });
-    const { POST } = await import("./route");
-    const res = await POST(
-      makeRequest({ smartNote: { name: "conferenceRecords/abc/smartNotes/note1" } }, SMART_NOTE_TYPE) as never
-    );
-    expect(res.status).toBe(200);
-    expect(smartNotesUpsertMock).toHaveBeenCalledWith(
-      expect.objectContaining({ session_id: "s1", drive_file_id: "drive-file-1", linked: true }),
-      { onConflict: "pubsub_message_id" }
-    );
-  });
-
-  it("DB 반영(upsert) 자체가 실패하면 200이 아니라 500을 반환해 Pub/Sub가 실제로 재전송하게 한다(이전엔 200으로 ack해 재시도를 스스로 막던 버그, 2026-09-05 수정)", async () => {
-    smartNotesUpsertMock.mockResolvedValue({ error: { message: "connection reset" } });
+  it("claim 함수 호출 자체가 실패하면 200이 아니라 500을 반환해 Pub/Sub가 실제로 재전송하게 한다", async () => {
+    claimSmartNotesEventRpcMock.mockResolvedValue({ data: null, error: { message: "connection reset" } });
     const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
     const { POST } = await import("./route");
     const res = await POST(

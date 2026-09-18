@@ -10,10 +10,10 @@ import { resolveVerifiedStudentEmail } from "@/lib/booking/calendar-sync";
 // 엔드포인트 하나로 Smart Notes 산출물 이벤트와 Meet 참가자 join/leave 이벤트를 함께
 // 받는다(두 이벤트 모두 같은 구독을 타는 것으로 가정 — Sandbox 검증 전까지는 추정).
 //
-// **아직 실제로 이 엔드포인트를 향한 구독을 만들지 않았다** — 구독 생성 자체가
-// CALENDAR_SYNC_ALLOW_REAL_CALLS류 게이트로 막힌 실제 외부 쓰기이고, Sandbox 승인 요청의
-// 일부다. 지금은 수신 로직·검증·DB 연결만 구현하고 mock 페이로드로 검증한다(테스트 파일
-// 참고).
+// 2026-09-18: 이 엔드포인트를 향한 실제 Pub/Sub push 구독(workspace-events-webhook-push,
+// gate-c-meet-events 토픽)을 Sandbox에 생성하고, 실제 Meet 통화로 수신·인증까지
+// 실측 확인했다(app/api/webhooks/workspace-events/route.idempotency.integration.test.ts
+// 참고 — DB 멱등성은 그 파일에서 검증).
 //
 // 보안: Pub/Sub push 요청은 OIDC ID 토큰을 Authorization: Bearer 헤더로 싣는다(Pub/Sub
 // 구독 생성 시 지정한 서비스 계정으로 서명됨) — google-auth-library로 그 토큰의
@@ -142,23 +142,6 @@ export async function POST(req: NextRequest) {
   const pubsubMessageId = body.message?.messageId ?? null;
 
   if (parsed.kind === "smart_notes_generation") {
-    // 재처리 가능한 상태 머신(2026-09-05 코드 점검 반영) — 이전에는 같은
-    // pubsub_message_id의 행이 "존재하기만 하면" 무조건 재처리를 건너뛰었다.
-    // 그 행이 linked=false(세션/상담을 못 찾음)나 drive_file_id가 없는(원본을
-    // 아직 못 찾음) 미완료 상태로 남아있으면, Pub/Sub의 at-least-once 재전송이
-    // 도착해도 영원히 다시 시도되지 않는 실제 유실 경로였다 — 완료된 행만
-    // 건너뛰고, 미완료 행은 같은 행을 upsert로 갱신하며 아래 해석 로직을 다시
-    // 돈다(멱등 — 몇 번을 다시 돌아도 결과가 같다).
-    if (pubsubMessageId) {
-      const { data: existing } = await admin
-        .from("smart_notes_generation_events")
-        .select("id, linked, drive_file_id")
-        .eq("pubsub_message_id", pubsubMessageId)
-        .maybeSingle();
-      if (existing?.linked && existing?.drive_file_id) {
-        return NextResponse.json({ ok: true, skipped: "duplicate_message_already_complete" });
-      }
-    }
     // 실제 페이로드에는 meetingCode가 없다 — conferenceRecordName으로 Meet API를 추가
     // 조회해야 얻을 수 있는데, meetingCode를 알기 전까지는 어느 선생님 소유 회의인지
     // 몰라 그 선생님 subject로 조회할 수 없다(닭-달걀 문제)... 였는데, CloudEvents
@@ -206,29 +189,33 @@ export async function POST(req: NextRequest) {
     const resolvedConsultation = sessionId ? null : await resolveConsultationByMeetingCode(admin, meetingCode);
     const consultationId = resolvedConsultation?.consultationId ?? null;
 
-    const { error } = await admin.from("smart_notes_generation_events").upsert(
-      {
-        session_id: sessionId,
-        consultation_id: consultationId,
-        google_meeting_code: meetingCode,
-        google_conference_record_name: parsed.conferenceRecordName,
-        drive_file_id: driveFileId,
-        event_type: parsed.eventType,
-        linked: sessionId !== null || consultationId !== null,
-        raw_payload: payload as object,
-        pubsub_message_id: pubsubMessageId,
-      },
-      { onConflict: "pubsub_message_id" }
-    );
-    if (error) {
-      console.error(JSON.stringify({ type: "smart_notes_event_insert_failed", error: error.message }));
-      // 이전에는 DB 반영 실패를 200으로 ack해 Pub/Sub 재시도를 스스로 꺼버렸다
-      // (주석은 "재시도하게 둔다"고 했지만 실제 응답은 200이라 모순이었다 —
-      // 2026-09-05 코드 점검 발견). DB에 아예 못 남긴 실패는 진짜 인프라 문제이니
-      // 500으로 되돌려 Pub/Sub가 실제로 재전송하게 한다. 매칭 실패(session/
-      // consultation 둘 다 null)는 이것과 다르다 — 그건 DB에 linked=false로 정상
-      // 기록됐으므로 아래에서 여전히 200으로 ack한다(관리자 재처리 대상으로만 남김).
+    // 2026-09-18(제품 오너 지시) — select-then-upsert는 동시 배달 경합에 안전하지
+    // 않다(두 요청이 거의 동시에 도착하면 이후 select 모두 "기존 행 없음"을 보고
+    // 그대로 진행할 수 있다). claim_smart_notes_generation_event()는 원자적
+    // INSERT ... ON CONFLICT DO NOTHING RETURNING으로 "이 메시지를 내가 처음
+    // 처리하는지"를 한 번에 확정한다 — route.ts와 통합 테스트가 같은 함수를
+    // 호출해 드리프트가 없다(supabase/migrations/20261414000000).
+    const { data: claimedId, error: claimError } = await admin.rpc("claim_smart_notes_generation_event", {
+      p_pubsub_message_id: pubsubMessageId,
+      p_session_id: sessionId,
+      p_consultation_id: consultationId,
+      p_google_meeting_code: meetingCode,
+      p_google_conference_record_name: parsed.conferenceRecordName,
+      p_drive_file_id: driveFileId,
+      p_event_type: parsed.eventType,
+      p_linked: sessionId !== null || consultationId !== null,
+      p_raw_payload: payload as object,
+    });
+    if (claimError) {
+      console.error(JSON.stringify({ type: "smart_notes_event_insert_failed", error: claimError.message }));
+      // DB에 아예 못 남긴 실패는 진짜 인프라 문제이니 500으로 되돌려 Pub/Sub가
+      // 실제로 재전송하게 한다(200으로 ack하면 Pub/Sub 재시도가 스스로 막힌다).
       return NextResponse.json({ error: "insert_failed" }, { status: 500 });
+    }
+    if (!claimedId) {
+      // 이미 다른 요청(동시 배달) 또는 이전 배달이 같은 pubsub_message_id를
+      // 먼저 클레임했다 — 이후 Smart Notes/Drive 관련 작업을 전부 건너뛴다.
+      return NextResponse.json({ ok: true, skipped: "duplicate_message" });
     }
     if (sessionId && driveFileId) {
       // smart_notes_status(문서 생성·연결 파이프라인 상태, 20261008000000 주석 참고)는
@@ -253,10 +240,14 @@ export async function POST(req: NextRequest) {
       if (sessionRow?.subject_enrollment_id) {
         try {
           const studentEmail = await resolveVerifiedStudentEmail(admin, sessionRow.subject_enrollment_id as string);
-          await admin.from("session_drive_tasks").insert({
-            session_id: sessionId,
-            task_type: "smart_notes_reader_grant",
-            payload: { fileId: driveFileId, studentEmail },
+          // enqueue_smart_notes_reader_grant_task()도 원자적 INSERT ... ON CONFLICT
+          // DO NOTHING이다 — 같은 세션·같은 원본·같은 대상 이메일의 작업이 아직
+          // queued/processing/retryable_failed 상태로 남아있으면 새로 만들지 않는다
+          // (20261414000000). 반환값이 null이어도 실패가 아니라 "이미 큐에 있음".
+          await admin.rpc("enqueue_smart_notes_reader_grant_task", {
+            p_session_id: sessionId,
+            p_drive_file_id: driveFileId,
+            p_student_email: studentEmail,
           });
         } catch (e) {
           // 학생 이메일 미검증 등은 관리자가 조치할 사실이지 웹훅 처리 실패가 아니다 —
