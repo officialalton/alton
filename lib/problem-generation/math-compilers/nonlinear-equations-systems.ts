@@ -15,10 +15,23 @@ export type NonlinearEqQuestionKind =
   // 2026-09-17(제품 오너 지시, Step 4 항목 3) — "일차식과 이차식의 연립·교점"
   // (y=mx+k와 y=ax²+bx+c의 교점 개수/좌표). 같은 "Nonlinear equations and systems"
   // 세부 기술 코드를 재사용한다(연립방정식이므로 이 스킬 코드의 범위 안).
-  | "linear_quadratic_intersection";
+  | "linear_quadratic_intersection"
+  // 2026-09-17(제품 오너 지시, 중간우선순위 공백) — "매개변수와 판별식". 실제 SAT
+  // 패턴: x(kx-b) = -c 꼴(정리하면 kx² - bx + c = 0)에서 k가 미지의 정수 계수(=a
+  // 자리)이고, 판별식 부호 조건(무해/유일해/1개 이상의 실근)을 만족하는 k의
+  // 최소/최대 정수값을 묻는다.
+  | "parameter_discriminant";
 export type NonlinearEqDifficulty = "easy" | "medium" | "hard";
 /** linear_quadratic_intersection 전용 서브 질문 종류. */
 export type IntersectionSubKind = "count" | "x_coord" | "sum_x";
+/**
+ * parameter_discriminant 전용 서브 질문 종류 — kx² - bx + c = 0(b,c는 고정 정수,
+ * k가 미지의 정수 매개변수)에서:
+ * - no_real_least_k: 실근이 없을(D<0) "가장 작은" 정수 k(k는 그 경계보다 커야 함)
+ * - at_least_one_greatest_k: 실근이 하나 이상(D>=0)일 "가장 큰" 정수 k
+ * - one_real_k: 실근이 정확히 하나(D=0)인 유일한 정수 k
+ */
+export type ParamDiscriminantSubKind = "no_real_least_k" | "at_least_one_greatest_k" | "one_real_k";
 
 /** 불변 정답 모델 — x² + bx + c = 0, 근은 r1, r2(정수). b = -(r1+r2), c = r1*r2. */
 export type NonlinearEqModel = {
@@ -53,6 +66,14 @@ export type NonlinearEqModel = {
   intersectionCount?: 0 | 1 | 2;
   /** 교점의 x좌표들 — count=1이면 [r], count=2면 [r1, r2], count=0이면 []. */
   intersectionXs?: number[];
+  /**
+   * parameter_discriminant 전용 — 방정식은 항상 "x(kx - paramB) = -paramC"로
+   * 제시하며, 정리하면 k·x² - paramB·x + paramC = 0이다(k가 미지의 정수 매개변수,
+   * b/c 필드는 이 유형에서 쓰지 않는다).
+   */
+  paramB?: number;
+  paramC?: number;
+  paramDiscriminantSubKind?: ParamDiscriminantSubKind;
   correctAnswer: string;
   distractors: { value: string; kind: DistractorKind; reason: string }[];
 };
@@ -113,12 +134,25 @@ export function generateNonlinearEqModel(params: {
 }): NonlinearEqModel {
   const range = ROOT_RANGE_BY_DIFFICULTY[params.difficulty];
   const kinds: NonlinearEqQuestionKind[] = ["root", "sum_of_roots", "product_of_roots", "num_real_solutions", ...IRRATIONAL_KINDS];
-  // 2026-09-17 — linear_quadratic_intersection은 기존 목록과 별도로 20% 확률로 섞는다
-  // (linear-equations-one-var.ts의 word_problem_translate와 같은 확률적 서브타입 도입 방식).
-  const questionKind = params.questionKind ?? (Math.random() < 0.2 ? "linear_quadratic_intersection" : kinds[randInt(0, kinds.length - 1)]);
+  // 2026-09-17 — linear_quadratic_intersection·parameter_discriminant는 기존 목록과
+  // 별도로 각 15% 확률로 섞는다(linear-equations-one-var.ts의 word_problem_translate와
+  // 같은 확률적 서브타입 도입 방식).
+  let questionKind: NonlinearEqQuestionKind;
+  if (params.questionKind) {
+    questionKind = params.questionKind;
+  } else {
+    const roll = Math.random();
+    if (roll < 0.15) questionKind = "linear_quadratic_intersection";
+    else if (roll < 0.3) questionKind = "parameter_discriminant";
+    else questionKind = kinds[randInt(0, kinds.length - 1)];
+  }
 
   if (questionKind === "linear_quadratic_intersection") {
     return generateLinearQuadraticIntersection(params.difficulty);
+  }
+
+  if (questionKind === "parameter_discriminant") {
+    return generateParameterDiscriminant(params.difficulty);
   }
 
   if ((IRRATIONAL_KINDS as readonly string[]).includes(questionKind)) {
@@ -441,6 +475,104 @@ function buildIntersectionModel(p: {
   return { ...base, intersectionXs: [r1!, r2!], correctAnswer, distractors };
 }
 
+const PARAM_RANGE_BY_DIFFICULTY: Record<NonlinearEqDifficulty, { bMax: number; cMax: number; tMax: number; uMax: number }> = {
+  easy: { bMax: 12, cMax: 10, tMax: 4, uMax: 3 },
+  medium: { bMax: 30, cMax: 20, tMax: 6, uMax: 3 },
+  hard: { bMax: 60, cMax: 40, tMax: 8, uMax: 4 },
+};
+
+/**
+ * 2026-09-17(제품 오너 지시, 중간우선순위 공백) — "x(kx - b) = -c" ⟺ "kx² - bx + c = 0"
+ * (k는 미지의 정수 매개변수, b/c는 고정 정수, c는 항상 양수로 둔다 — 판별식 부호
+ * 조건이 k에 대해 한 방향으로만 단조가 되도록 보장하기 위함).
+ *
+ * 판별식 D = b² - 4kc. c>0이므로:
+ * - D<0 (실근 없음) ⟺ k > b²/(4c) — "가장 작은" 정수 k = floor(b²/(4c)) + 1
+ *   (b²/(4c)가 정수든 아니든 이 식은 "k가 그 값보다 커야 하는 가장 작은 정수"를
+ *   항상 정확히 준다).
+ * - D>=0 (실근 1개 이상) ⟺ k <= b²/(4c) — "가장 큰" 정수 k = floor(b²/(4c)).
+ * - D=0 (실근 정확히 1개) ⟺ k = b²/(4c) — b²/(4c) 자체가 정수여야 하므로,
+ *   b=2·k0·u, c=k0·u² (k0, u는 정수)로 역산해 b²/(4c) = k0가 정확히 정수가 되도록
+ *   구성한다.
+ */
+function generateParameterDiscriminant(difficulty: NonlinearEqDifficulty): NonlinearEqModel {
+  const { bMax, cMax, tMax, uMax } = PARAM_RANGE_BY_DIFFICULTY[difficulty];
+  const subKind: ParamDiscriminantSubKind = (["no_real_least_k", "at_least_one_greatest_k", "one_real_k"] as const)[randInt(0, 2)];
+
+  if (subKind === "one_real_k") {
+    for (let attempt = 0; attempt < 40; attempt++) {
+      const k0 = randInt(1, tMax); // c = k0*u² > 0을 보장하려면 k0도 양수여야 한다.
+      const u = randInt(1, uMax);
+      const b = 2 * k0 * u;
+      const c = k0 * u * u;
+      if (c === 0 || b === 0) continue;
+      // 판별식 D = b² - 4·k0·c = 4k0²u² - 4k0·k0u² = 0(항상 성립) — 검증만 다시 확인.
+      const discriminant = b * b - 4 * k0 * c;
+      if (discriminant !== 0) continue;
+      const correctAnswer = fmt(k0);
+      const cands: { value: number; kind: DistractorKind; reason: string }[] = [
+        { value: k0 + 1, kind: "step_missing", reason: "판별식을 0으로 놓고 k에 대해 정리하는 마지막 단계에서 계산이 하나 어긋났다(경계값보다 1 큰 값)." },
+        { value: k0 - 1, kind: "step_missing", reason: "판별식을 0으로 놓고 k에 대해 정리하는 마지막 단계에서 계산이 하나 어긋났다(경계값보다 1 작은 값)." },
+        { value: -k0, kind: "sign_error", reason: "판별식 공식 b² - 4kc의 부호를 반대로 계산해(b² + 4kc로 잘못 씀) k의 부호가 뒤집혔다." },
+      ];
+      const distractors = pickUnique(cands, correctAnswer);
+      if (distractors.length < 3) continue;
+      return { skillCode: "nonlinear_equations_systems", difficulty, questionKind: "parameter_discriminant", paramB: b, paramC: c, paramDiscriminantSubKind: subKind, correctAnswer, distractors };
+    }
+    throw new Error("nonlinear_equations_systems(parameter_discriminant, one_real_k): 생성 실패");
+  }
+
+  for (let attempt = 0; attempt < 40; attempt++) {
+    const b = nonZero(-bMax, bMax);
+    const c = randInt(1, cMax); // c는 항상 양수 — 부등식 방향을 한 갈래로 고정.
+    const ratio = (b * b) / (4 * c);
+    const floorRatio = Math.floor(ratio);
+    // ratio가 정수와 사실상 같으면(부동소수점 오차 포함) 경계가 애매해지므로 다시 뽑는다.
+    if (Math.abs(ratio - Math.round(ratio)) < 1e-9) continue;
+
+    if (subKind === "no_real_least_k") {
+      // D<0 ⟺ k > ratio ⟺ 가장 작은 정수 k = floorRatio + 1.
+      const correctK = floorRatio + 1;
+      const dCheck = b * b - 4 * correctK * c;
+      if (dCheck >= 0) continue;
+      const dCheckBoundary = b * b - 4 * floorRatio * c;
+      if (dCheckBoundary < 0) continue; // floorRatio 자체가 이미 조건을 만족하면 "가장 작은"이 달라짐 — 재시도.
+      const correctAnswer = fmt(correctK);
+      // 잘못된 방향(≤ 대신 <를 써야 하는데 반대로 씀)으로 풀면 경계값 자체(floorRatio)를 답으로 낸다.
+      // 판별식 부호를 b² + 4kc로 잘못 쓰면 부등식 방향이 뒤집혀 부호가 반대인 값이 나온다.
+      // k가 "a" 자리(k·x²)에 들어간다는 것을 놓치고 b² - 4k²c(중근 개념과 혼동)로 잘못 풀면
+      // sqrt(ratio) 근방의 전혀 다른 정수가 나온다.
+      const wrongQuadratic = Math.ceil(Math.sqrt(Math.max(ratio, 0))) + 1;
+      const cands: { value: number; kind: DistractorKind; reason: string }[] = [
+        { value: floorRatio, kind: "condition_ignored", reason: "부등식을 '<'가 아니라 '≤'로 풀어(방향을 반대로 적용해) 실근이 없어지는 경계값 바로 그 값을 최소값으로 착각했다." },
+        { value: -correctK, kind: "sign_error", reason: "판별식 공식을 b² - 4kc가 아니라 b² + 4kc로 잘못 써서 부등식 방향과 부호가 모두 반대로 나왔다." },
+        { value: wrongQuadratic, kind: "formula_misuse", reason: "k가 이차항의 계수(a) 자리에 들어간다는 것을 놓치고, b² - 4k²c = 0처럼 k에 대한 이차식으로 잘못 풀었다." },
+      ];
+      const distractors = pickUnique(cands, correctAnswer);
+      if (distractors.length < 3) continue;
+      return { skillCode: "nonlinear_equations_systems", difficulty, questionKind: "parameter_discriminant", paramB: b, paramC: c, paramDiscriminantSubKind: subKind, correctAnswer, distractors };
+    }
+
+    // at_least_one_greatest_k: D>=0 ⟺ k <= ratio ⟺ 가장 큰 정수 k = floorRatio.
+    const correctK = floorRatio;
+    const dCheck = b * b - 4 * correctK * c;
+    if (dCheck < 0) continue;
+    const dCheckNext = b * b - 4 * (correctK + 1) * c;
+    if (dCheckNext >= 0) continue; // floorRatio+1도 조건을 만족하면 "가장 큰"이 달라짐 — 재시도.
+    const correctAnswer = fmt(correctK);
+    const wrongQuadratic = Math.floor(Math.sqrt(Math.max(ratio, 0)));
+    const cands: { value: number; kind: DistractorKind; reason: string }[] = [
+      { value: correctK + 1, kind: "condition_ignored", reason: "부등식을 '≤'가 아니라 '<'로 풀어(방향을 반대로 적용해) 실근이 없어지기 직전 값까지 포함된다고 착각했다." },
+      { value: -correctK, kind: "sign_error", reason: "판별식 공식을 b² - 4kc가 아니라 b² + 4kc로 잘못 써서 부등식 방향과 부호가 모두 반대로 나왔다." },
+      { value: wrongQuadratic, kind: "formula_misuse", reason: "k가 이차항의 계수(a) 자리에 들어간다는 것을 놓치고, b² - 4k²c ≥ 0처럼 k에 대한 이차식으로 잘못 풀었다." },
+    ];
+    const distractors = pickUnique(cands, correctAnswer);
+    if (distractors.length < 3) continue;
+    return { skillCode: "nonlinear_equations_systems", difficulty, questionKind: "parameter_discriminant", paramB: b, paramC: c, paramDiscriminantSubKind: subKind, correctAnswer, distractors };
+  }
+  throw new Error("nonlinear_equations_systems(parameter_discriminant): 오답 후보 생성에 실패했습니다.");
+}
+
 function pickUnique(
   cands: { value: number; kind: DistractorKind; reason: string }[],
   correctAnswer: string
@@ -545,6 +677,31 @@ export function validateNonlinearEqModel(model: NonlinearEqModel): { ok: true } 
     }
     return { ok: true };
   }
+  if (model.questionKind === "parameter_discriminant") {
+    if (model.paramB === undefined || model.paramC === undefined || model.paramDiscriminantSubKind === undefined) {
+      return { ok: false, reason: "매개변수 판별식 모델의 필드가 없습니다." };
+    }
+    const b = model.paramB, c = model.paramC;
+    if (c <= 0) return { ok: false, reason: "c는 항상 양수여야 합니다(부등식 방향 고정)." };
+    const k = Number(model.correctAnswer);
+    if (!Number.isInteger(k)) return { ok: false, reason: "정답이 정수가 아닙니다." };
+    const discriminant = b * b - 4 * k * c;
+    if (model.paramDiscriminantSubKind === "no_real_least_k") {
+      if (discriminant >= 0) return { ok: false, reason: "정답 k에서 판별식이 음수가 아닙니다(실근이 없어야 함)." };
+      const boundaryDiscriminant = b * b - 4 * (k - 1) * c;
+      if (boundaryDiscriminant < 0) return { ok: false, reason: "k-1도 조건을 만족해 '가장 작은' 정수가 아닙니다." };
+      return { ok: true };
+    }
+    if (model.paramDiscriminantSubKind === "at_least_one_greatest_k") {
+      if (discriminant < 0) return { ok: false, reason: "정답 k에서 판별식이 음수입니다(실근이 하나 이상이어야 함)." };
+      const nextDiscriminant = b * b - 4 * (k + 1) * c;
+      if (nextDiscriminant >= 0) return { ok: false, reason: "k+1도 조건을 만족해 '가장 큰' 정수가 아닙니다." };
+      return { ok: true };
+    }
+    // one_real_k
+    if (discriminant !== 0) return { ok: false, reason: "정답 k에서 판별식이 0이 아닙니다(실근이 정확히 하나여야 함)." };
+    return { ok: true };
+  }
   if (model.r1 === undefined || model.r2 === undefined) return { ok: false, reason: "근이 계산되지 않았습니다." };
   // 근이 실제로 x^2+bx+c=0을 만족하는지 확인.
   const check = (r: number) => r * r + model.b * r + model.c === 0;
@@ -574,6 +731,9 @@ const QUESTION_TEXT: Record<NonlinearEqQuestionKind, string> = {
   // 실제로는 renderIntersectionProblem이 서브종류별로 다시 정하므로 이 값은 쓰이지 않는다
   // (타입을 Record<NonlinearEqQuestionKind, string>로 exhaustive하게 유지하기 위한 자리표시).
   linear_quadratic_intersection: "How many points of intersection do the graphs of the equations shown have?",
+  // 실제로는 renderParameterDiscriminantProblem이 서브종류별로 다시 정하므로 이 값은
+  // 쓰이지 않는다(타입을 exhaustive하게 유지하기 위한 자리표시).
+  parameter_discriminant: "What is the least possible value of k?",
 };
 
 /** "y = ax² + bx + c" 우변 — a가 1/-1/그 외 모두 지원(교점 문항은 a가 ±1이 아닐 수 있다). */
@@ -635,8 +795,49 @@ function renderIntersectionProblem(model: NonlinearEqModel): CompiledMathProblem
   return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
 }
 
+function renderParameterDiscriminantProblem(model: NonlinearEqModel): CompiledMathProblem {
+  const b = model.paramB!, c = model.paramC!;
+  const bSign = b >= 0 ? "-" : "+";
+  const passage = `In the given equation, k is an integer constant.\n\n$x(kx ${bSign} ${fmt(Math.abs(b))}) = ${fmt(-c)}$`;
+  const combinedEq = `kx² ${bSign} ${fmt(Math.abs(b))}x + ${fmt(c)} = 0`;
+
+  let question: string;
+  let verdictKo: string;
+  let verdictEn: string;
+  if (model.paramDiscriminantSubKind === "no_real_least_k") {
+    question = "If the equation has no real solution, what is the least possible value of k?";
+    verdictKo = `실근이 없으려면(D<0) k > b²/(4c) = ${fmt(b)}²/(4×${fmt(c)})를 만족해야 하므로, 이를 만족하는 가장 작은 정수는 ${model.correctAnswer}이다.`;
+    verdictEn = `For no real solution (D<0), k must satisfy k > b²/(4c) = ${fmt(b)}²/(4×${fmt(c)}), so the least integer satisfying this is ${model.correctAnswer}.`;
+  } else if (model.paramDiscriminantSubKind === "at_least_one_greatest_k") {
+    question = "If the equation has at least one real solution, what is the greatest possible value of k?";
+    verdictKo = `실근이 하나 이상이려면(D≥0) k ≤ b²/(4c) = ${fmt(b)}²/(4×${fmt(c)})를 만족해야 하므로, 이를 만족하는 가장 큰 정수는 ${model.correctAnswer}이다.`;
+    verdictEn = `For at least one real solution (D≥0), k must satisfy k ≤ b²/(4c) = ${fmt(b)}²/(4×${fmt(c)}), so the greatest integer satisfying this is ${model.correctAnswer}.`;
+  } else {
+    question = "If the equation has exactly one real solution, what is the value of k?";
+    verdictKo = `실근이 정확히 하나이려면(D=0) k = b²/(4c) = ${fmt(b)}²/(4×${fmt(c)}) = ${model.correctAnswer}이어야 한다.`;
+    verdictEn = `For exactly one real solution (D=0), k = b²/(4c) = ${fmt(b)}²/(4×${fmt(c)}) = ${model.correctAnswer}.`;
+  }
+  const explanation = `주어진 식을 정리하면 ${combinedEq}이다(k가 이차항의 계수 자리에 들어간다). 이 이차방정식의 판별식은 D = b² - 4kc = ${fmt(b)}² - 4k×${fmt(c)}이다. ${verdictKo}`;
+  const explanationEn = `Rearranging the given equation gives ${combinedEq} (k is the coefficient of the quadratic term). The discriminant of this quadratic is D = b² - 4kc = ${fmt(b)}² - 4k×${fmt(c)}. ${verdictEn}`;
+
+  const options = [model.correctAnswer, ...model.distractors.map((d) => d.value)];
+  const order = [0, 1, 2, 3].sort(() => Math.random() - 0.5);
+  const shuffled = order.map((i) => options[i]);
+  const correctIndex = order.indexOf(0);
+  const distractorRationales: DistractorRationale[] = model.distractors.map((d, i) => ({
+    index: order.indexOf(i + 1),
+    plausibleBecause: "같은 판별식 부등식에서 나올 수 있는 실제 계산 오류다.",
+    matches: "같은 방정식·같은 조건에서 계산되었다.",
+    whyWrong: d.reason,
+    kind: d.kind,
+    obvious: false,
+  }));
+  return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
+}
+
 export function renderNonlinearEqProblem(model: NonlinearEqModel): CompiledMathProblem {
   if (model.questionKind === "linear_quadratic_intersection") return renderIntersectionProblem(model);
+  if (model.questionKind === "parameter_discriminant") return renderParameterDiscriminantProblem(model);
   const isIrrational = model.questionKind === "irrational_sum_of_roots" || model.questionKind === "irrational_product_of_roots" || model.questionKind === "irrational_root_radical_form";
   const passage = isIrrational
     ? `Consider the equation shown.\n\n${quadEquationA(model.a ?? 1, model.b, model.c)}`

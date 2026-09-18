@@ -279,7 +279,7 @@
 | test6 | M1-19 | Math | one_variable_data | 도수분포표에서 중앙값 추정 | 객관식 | 표(도수분포) | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 그룹화 도수분포 중앙값 서브타입 없음(one_variable_data는 원자료 리스트 전용) |
 | test6 | M1-20 | Math | linear_functions | 방정식에서 y절편 구하기(SPR) | **SPR** | 방정식 | 가능(로직은) / SPR 미지원 | 없음 | 미확인 | SPR 답안모델 없음 |
 | test6 | M1-21 | Math | nonlinear_functions | 그래프에서 계수 bc 값 추출(SPR) | **SPR** | 좌표평면(그래프) | 상위스킬만 있고 하위패턴 불가(SPR도 미지원) | 없음 | 미확인 | 그래프→계수 추출 서브타입 없음 + SPR 답안모델 없음 |
-| test6 | M1-22 | Math | percentages | 연속 퍼센트 증가(14%→4%) 배수 역산 | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 연속(2단계) 퍼센트 증가 합성 서브타입 없음 |
+| test6 | M1-22 | Math | percentages | 연속 퍼센트 증가(14%→4%) 배수 역산 | 객관식 | 없음 | 가능(compound_change) | 있음(수치 재계산 검증) | 미확인 | 2026-09-17 `compound_change` kind 추가로 해결 — 두 단계 변화율을 곱해서 합성(복리식)하며, 단순 덧셈(14-4=10) 등 4가지 실제 오류 경로에서 오답 생성 |
 | test6 | M1-23 | Math | 없음 | 원의 이동+반지름 배율 변환 | 객관식 | 좌표평면 | 완전 불가 | 없음 | 미확인 | **원의 방정식 평행이동/배율 변환 스킬 자체가 없음**(circles는 둘레/호/부채꼴/각 관계만 다룸) |
 | test6 | M1-24 | Math | right_triangles_trigonometry | 특수각(30°) tan 비율 계산 | 객관식 | 도형 | 가능 | 있음 | 미확인 | - |
 | test6 | M1-25 | Math | nonlinear_functions | 퍼센트 증가율→지수함수 식 구성 | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 퍼센트 증가율→지수식 구성 서브타입 없음 |
@@ -462,7 +462,7 @@
 | test7 | M2-24 | Math | right_triangles_trigonometry | tan비로 변 길이·둘레 계산(피타고라스 삼조) | 객관식 | 도형 | 가능 | 있음 | 미확인 | - |
 | test7 | M2-25 | Math | 없음 | 원의 일반형→표준형 변환(반지름 도출) | 객관식 | 방정식 | 완전 불가 | 없음 | 미확인 | **circles 스킬이 일반형→표준형(완전제곱) 변환을 다루지 않음**(누적 재현) |
 | test7 | M2-26 | Math | ratios_rates | 복합단위 환산(m/s²→mile/min²) | 객관식 | 없음 | 가능 | 있음 | 미확인 | - |
-| test7 | M2-27 | Math | nonlinear_equations_systems | 무해조건 최소 정수 k 역산(SPR) | **SPR** | 방정식 | 상위스킬만 있고 하위패턴 불가(SPR도 미지원) | 없음 | 미확인 | 무해조건 최소정수값 역산 서브타입 없음 + SPR 답안모델 없음 |
+| test7 | M2-27 | Math | nonlinear_equations_systems | 무해조건 최소 정수 k 역산(SPR) | **SPR** | 방정식 | 가능(로직은)/SPR 미지원 | 있음 | 미확인 | **2026-09-17(중간우선순위) `parameter_discriminant`(`no_real_least_k`) 서브타입 신설로 로직·검증 해결됨. SPR 답안모델만 남음.** |
 
 ---
 
@@ -754,7 +754,7 @@
 | test9 | M2-24 | Math | circles | 원-내접정사각형 변 길이 관계 | 객관식 | 도형 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 원-내접다각형 관계 서브타입 없음(신규) |
 | test9 | M2-25 | Math | equivalent_expressions | 유리식(분수식) 간소화 | 객관식 | 없음 | 가능 | 있음 | 미확인 | - |
 | test9 | M2-26 | Math | nonlinear_functions | 복합 지수식 구조분석(y절편 표현형 I/II) | 객관식 | 없음 | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 복합 지수식 구조분석형 서브타입 없음 |
-| test9 | M2-27 | Math | nonlinear_equations_systems | num_real_solutions(무해조건 최소 k, SPR) | **SPR** | 방정식 | 가능(로직은) / SPR 미지원 | 없음 | 미확인 | SPR 답안모델 없음 |
+| test9 | M2-27 | Math | nonlinear_equations_systems | num_real_solutions(무해조건 최소 k, SPR) | **SPR** | 방정식 | 가능(로직은) / SPR 미지원 | 있음 | 미확인 | **2026-09-17(중간우선순위) `parameter_discriminant`(`no_real_least_k`) 서브타입 신설로 검증 확보. SPR 답안모델만 남음.** |
 
 ---
 
@@ -1721,3 +1721,50 @@ content`). 확인 후 렌더링 확인용으로 만든 두 문항은 `archived_a
 스펙 5항 "공통 게이트로 통과율 또는 전체 시간이 유의미하게 나빠지면 원인을 분리하고 수정 전에는
 배포하지 않는다"를 실측 없이 만족했다고 주장할 수 없기 때문이다. 코드는 커밋하되, 성능 실측(최소
 Math 몇 개 스킬의 로컬 무료 배치)을 후속 패스에서 먼저 돌린 뒤 배포하는 것을 권장한다.
+
+**진행 메모(2026-09-17, medium 우선순위 2건 — 퍼센트 역산·복합 퍼센트 변화)**: `percentages`에
+kind 2개를 신설했다. (1) `find_percent`("퍼센트 역산") — 부분(part)과 전체(whole)가 주어졌을 때
+"part는 whole의 몇 %인가"를 묻는다(위 표의 test4 M1-2, test9 M1-20 등 "몇%"류 문항 — 기존
+`percent_of`는 percent+whole이 주어졌을 때 part를 구하는 정반대 방향이라 이 역산 방향은 실제로는
+지원되지 않고 있었다). 오답 4종(그 중 3종을 채택) 중 실제 오류 경로: part÷whole 대신 whole÷part로
+비율을 뒤집음, %로 바꾸는 ×100을 잊고 소수값 그대로 답함, ×100 과정에서 자리수를 한 칸 더 옮겨
+10배 오차, 전체(whole) 대신 "부분을 제외한 나머지(whole-part)"를 기준값으로 잘못 사용(문맥형 오류).
+(2) `compound_change`("복합 퍼센트 변화", 위 표의 test6 M1-22 "연속 퍼센트 증가(14%→4%) 배수
+역산"과 정확히 일치) — 값이 두 번 연속으로(부호 각각 독립 — 증가/감소 임의 조합) 변화할 때 전체
+변화율 또는 최종값을 묻는다. 두 변화율을 곱해서 복리식으로 합성해야 하는데, 오답은 단순히
+더하거나 뺀 값(14%-4%=10% 같은 오류 — 이는 수학적으로 "두 변화를 원래 값에 각각 독립 적용해
+더한 것" 및 "두 번째 변화를 원래 값 기준으로 잘못 적용한 것"과 항상 같은 값이 되므로 세 가지
+실제 오류 경로가 한 후보로 합쳐진다), 두 번째 변화의 증가/감소 부호를 반대로 적용, 2단계 중
+1단계만 반영(첫 번째 또는 두 번째 변화 누락) 등 실제 오류 경로에서만 오답을 낸다.
+
+검증: `npx vitest run lib/problem-generation/math-compilers/percentages.test.ts`(8개 테스트 —
+전 kind 50회 반복 계산 검증, 렌더링 전 kind·전 난이도, find_percent 전용 실오류 검증 30회,
+compound_change 전용 복리 vs 덧셈 값 불일치 검증 30회 — 전부 통과) +
+`npx tsx scripts/math-compiler-validate-linear-two-var.ts percentages`로 medium 10/10·hard
+10/10 자동 통과·로컬 DB 실제 저장 성공을 확인했다. `npx vitest run app/admin lib/problem-generation`
+전체 실행에서 새 실패 없음을 확인했다(percentages 관련 실패 0건 — app/admin 통합테스트의 기존
+DB 상태 의존 실패는 이 변경과 무관).
+
+**진행 메모(2026-09-17, medium 우선순위 — 매개변수와 판별식)**: `nonlinear_equations_systems`에
+`parameter_discriminant` kind를 신설했다(위 표의 test7 M2-27·test9 M2-27 "무해조건 최소 정수 k
+역산" — 실제 SAT 패턴 "x(kx-56) = -16에서 k가 정수일 때, 실근이 없으려면 k의 최소값은?"과
+정확히 일치). 지문은 항상 "x(kx - b) = -c"(정리하면 kx² - bx + c = 0, k가 미지의 정수로 이차항
+계수 자리에 들어간다) 형태이고, c는 항상 양수로 고정해 판별식 부등식이 k에 대해 한 방향으로만
+단조가 되게 한다. 서브종류 3개를 무작위로 섞는다: `no_real_least_k`(D<0, 가장 작은 정수 k = ⌊b²/(4c)⌋+1),
+`at_least_one_greatest_k`(D≥0, 가장 큰 정수 k = ⌊b²/(4c)⌋), `one_real_k`(D=0, 유일한 정수 k —
+b=2k₀u, c=k₀u²로 역산해 b²/(4c)=k₀가 항상 정확한 정수가 되도록 구성). 오답은 실제 오류 경로
+3종: 부등식 방향을 반대로 적용(< 대신 ≤, 또는 그 반대 — 경계값 자체를 답으로 냄), 판별식 공식의
+부호를 반대로 씀(b²-4kc 대신 b²+4kc로 계산해 부호가 뒤집힘), k가 이차항 계수(a) 자리에 들어간다는
+것을 놓치고 b²-4k²c처럼 k에 대한 이차식으로 잘못 풂(전혀 다른 스케일의 정수가 나옴). `no_real_least_k`
+서브타입이 위 두 갭 항목의 실제 오류 패턴과 정확히 일치하지만, 답안 형식은 여전히 SPR이라 배치
+레이어의 답안모델이 없다는 제약은 그대로 남는다(위 두 표 행에서 "가능(로직은)/검증 있음, SPR
+답안모델만 남음"으로 갱신).
+
+검증: `npx vitest run lib/problem-generation/math-compilers/nonlinear-equations-systems.test.ts`
+(22개 테스트 — 3개 신규 테스트로 판별식 조건 실제 검증 150회, 오답 3개 항상 유지 150회, 렌더링
+지문·해설 60회, 전부 통과) + `npx tsx scripts/math-compiler-validate-linear-two-var.ts
+nonlinear_equations_systems`로 medium 10/10·hard 10/10 자동 통과·로컬 DB 실제 저장 성공을
+확인했다. `npx vitest run app/admin lib/problem-generation` 전체 실행(1121개 테스트)에서
+nonlinear-equations-systems 관련 실패 0건을 확인했다(전체 40건 실패는 전부 이 변경과 무관한
+기존 app/admin DB 상태 의존 통합테스트·equivalent-expressions·one-variable-data·
+linear-equations-one-var 파일이며, 동시 진행 중인 다른 세션의 작업 범위다).

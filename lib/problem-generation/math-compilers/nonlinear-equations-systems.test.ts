@@ -206,3 +206,51 @@ describe("generateNonlinearEqModel(irrational) — 무리수 근, 항상 유리�
     }
   });
 });
+
+// 2026-09-17(제품 오너 지시, 중간우선순위 공백) — "매개변수와 판별식".
+describe("parameter_discriminant — x(kx-b)=-c ⟺ kx²-bx+c=0, k의 최소/최대/유일 정수값", () => {
+  it("c는 항상 양수이고 정답 k에서 실제로 판별식 조건을 만족한다(150회 반복)", () => {
+    for (let i = 0; i < 150; i++) {
+      const model = generateNonlinearEqModel({ difficulty: ["easy", "medium", "hard"][i % 3] as "easy" | "medium" | "hard", questionKind: "parameter_discriminant" });
+      expect(validateNonlinearEqModel(model)).toEqual({ ok: true });
+      expect(model.paramC!).toBeGreaterThan(0);
+      const k = Number(model.correctAnswer);
+      expect(Number.isInteger(k)).toBe(true);
+      const d = model.paramB! * model.paramB! - 4 * k * model.paramC!;
+      if (model.paramDiscriminantSubKind === "no_real_least_k") {
+        expect(d).toBeLessThan(0);
+        expect(model.paramB! * model.paramB! - 4 * (k - 1) * model.paramC!).toBeGreaterThanOrEqual(0);
+      } else if (model.paramDiscriminantSubKind === "at_least_one_greatest_k") {
+        expect(d).toBeGreaterThanOrEqual(0);
+        expect(model.paramB! * model.paramB! - 4 * (k + 1) * model.paramC!).toBeLessThan(0);
+      } else {
+        expect(d).toBe(0);
+      }
+    }
+  });
+
+  it("오답은 항상 정확히 3개이고 정답과 겹치지 않는다(150회 반복)", () => {
+    for (let i = 0; i < 150; i++) {
+      const model = generateNonlinearEqModel({ difficulty: "medium", questionKind: "parameter_discriminant" });
+      expect(model.distractors).toHaveLength(3);
+      const values = [model.correctAnswer, ...model.distractors.map((d) => d.value)];
+      expect(new Set(values).size).toBe(4);
+    }
+  });
+
+  it("렌더링: 지문은 x(kx±b)=-c 형태의 $…$ 수식이고, 선택지 4개·정답 인덱스가 유효하며 해설에 정답이 포함된다(60회 반복)", () => {
+    for (let i = 0; i < 60; i++) {
+      const model = generateNonlinearEqModel({ difficulty: "medium", questionKind: "parameter_discriminant" });
+      const rendered = renderNonlinearEqProblem(model);
+      const eq = rendered.passage.split("\n\n")[1];
+      expect(eq.startsWith("$x(kx")).toBe(true);
+      expect(eq.endsWith("$")).toBe(true);
+      expect(rendered.options).toHaveLength(4);
+      expect(rendered.options[rendered.correctIndex]).toBe(model.correctAnswer);
+      expect(rendered.explanation).toContain(model.correctAnswer);
+      expect(rendered.explanationEn).toContain(model.correctAnswer);
+      expect(rendered.explanation).toMatch(/판별식/);
+      expect(rendered.explanationEn).toMatch(/discriminant/);
+    }
+  });
+});
