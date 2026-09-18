@@ -8,6 +8,8 @@
 
 **2026-09-17 후속(중간 우선순위 2건 구현 완료)**: 이 문서가 누적 재현 패턴으로 지목한 "닮은삼각형 대응변 길이"와 "원의 방정식 좌표기하 변환" 중 각 대표 패턴을 결정적(Zero-AI) 컴파일러에 신설했다 — `lib/problem-generation/math-compilers/lines-angles-triangles.ts`에 `similar_triangles`(두 삼각형 나란히 배치, AA/공유각 표기, 대응변 오짝짓기·배율 역전·가산 오류·합동 착각 4종 오답 경로), `lib/problem-generation/math-compilers/circles.ts`에 `circle_equation_transform`(이동/중심·반지름 조회/방정식 매칭 3변형, 부호 오류·제곱 누락·h·k 교환·이동량 산술실수 오답 경로). 로컬 DB 배치 검증 medium 10/10·hard 10/10(두 스킬 모두) 통과, `npx vitest run app/admin lib/problem-generation` 1110 passed/15 pre-existing failed. 아래 표의 개별 행 중 이 두 패턴과 정확히 일치하는 행만 상태를 갱신했다(교차선 배치·평행선 각도 등 인접 변형은 아직 별도 서브타입 없음 — 각 행의 비고 참고).
 
+**2026-09-17 후속(중간 우선순위, 추가 2건 구현 완료)**: `one_variable_data`에 `grouped_median_interval`(그룹화 도수분포표 — 값이 아니라 값의 "구간"과 도수만 주어질 때, 정확한 중앙값이 아니라 "중앙값이 속한 구간"을 묻는다. 실기출과 동일하게 구간 안의 값은 알 수 없으므로 구간만 결정 가능. 오답 경로 4종: 누적도수 off-by-one, 평균·중앙값 위치 혼동, 최빈구간 오답, 전체 개수(N) 누락)와 `ratios_rates_units`에 `chained_conversion`(2단계 이상 순차 단위환산 — 인치→피트→야드류 선형 체인과, hard 난이도에서는 mph→ft/s류 비율(분자·분모를 각각 다른 배율로 환산) 체인. 오답 경로 4종: 두 환산 중 한 단계만 적용, 곱셈·나눗셈 반전, 부정확한 환산계수 사용, 비율 환산 방향 반전)를 결정적(Zero-AI) 컴파일러에 신설했다. 둘 다 기존 표준 렌더러(표/텍스트)를 재사용해 새 렌더 인프라가 필요 없었다. 로컬 DB 배치 검증 medium 10/10·hard 10/10(두 스킬 모두) 통과, `npx vitest run app/admin lib/problem-generation` 1115 passed/15 pre-existing failed(신규 실패 없음). Preview UI를 통한 실제 화면 렌더링 확인은 아직 하지 않았다(컴파일러 자체검증·`checkFigure`만 통과) — 아래 표에서 "화면 렌더링 검증 여부"는 미확인으로 남겼다. 아래 표에서는 `grouped_median_interval`과 정확히 일치하는 행(test6 M1-19)만 갱신했다 — test8 M1-23("도수분포표에 값 추가 후 평균/중앙값 비교")은 "구간 판독" 서브타입만으로는 풀 수 없는 별도 패턴(값 추가 전후 비교 로직 필요)이라 상태를 바꾸지 않았다. `chained_conversion`은 이번 커버리지 맵의 기존 행 중 정확히 일치하는 "순수 단위환산" 문항이 없어(유일하게 인접한 test11 M2-19는 그래프 값 추정과 결합된 별도 패턴) 표 행 갱신 대상이 없다 — 다음 커버리지 재조사 패스에서 새로 발견되면 이 항목으로 매칭할 것.
+
 | 시험지 | R&W M1(33) | R&W M2(33) | Math M1(27) | Math M2(27) | 상태 |
 |---|---|---|---|---|---|
 | test4 | 완료 | 완료 | 완료 | 완료 | **전수 분류 완료** |
@@ -278,7 +280,7 @@
 | test6 | M1-16 | Math | linear_functions | 일차관계 문장제→식 구성 | 객관식 | 없음 | 가능 | 있음 | 미확인 | - |
 | test6 | M1-17 | Math | equivalent_expressions | 공식에서 변수 재정리(C 구하기) | 객관식 | 없음 | 가능 | 있음 | 미확인 | - |
 | test6 | M1-18 | Math | nonlinear_equations_systems | w²+12w-40=0 근 구하기 | 객관식 | 방정식 | 가능 | 있음 | 미확인 | - |
-| test6 | M1-19 | Math | one_variable_data | 도수분포표에서 중앙값 추정 | 객관식 | 표(도수분포) | 상위스킬만 있고 하위패턴 불가 | 없음 | 미확인 | 그룹화 도수분포 중앙값 서브타입 없음(one_variable_data는 원자료 리스트 전용) |
+| test6 | M1-19 | Math | one_variable_data | 도수분포표에서 중앙값 추정 | 객관식 | 표(도수분포) | 가능 | 있음(2026-09-17, `grouped_median_interval` kind) | 미확인(컴파일러 자체검증·`checkFigure`만 통과, Preview UI 실사용 확인은 아직 없음) | 해결(2026-09-17) — `one_variable_data`에 `grouped_median_interval` 서브타입 신설, 실기출과 동일하게 "중앙값이 속한 구간"을 물음(구간 자료만으로는 정확한 중앙값을 계산할 수 없음) |
 | test6 | M1-20 | Math | linear_functions | 방정식에서 y절편 구하기(SPR) | **SPR** | 방정식 | 가능(로직은) / SPR 미지원 | 없음 | 미확인 | SPR 답안모델 없음 |
 | test6 | M1-21 | Math | nonlinear_functions | 그래프에서 계수 bc 값 추출(SPR) | **SPR** | 좌표평면(그래프) | 상위스킬만 있고 하위패턴 불가(SPR도 미지원) | 없음 | 미확인 | 그래프→계수 추출 서브타입 없음 + SPR 답안모델 없음 |
 | test6 | M1-22 | Math | percentages | 연속 퍼센트 증가(14%→4%) 배수 역산 | 객관식 | 없음 | 가능(compound_change) | 있음(수치 재계산 검증) | 미확인 | 2026-09-17 `compound_change` kind 추가로 해결 — 두 단계 변화율을 곱해서 합성(복리식)하며, 단순 덧셈(14-4=10) 등 4가지 실제 오류 경로에서 오답 생성 |

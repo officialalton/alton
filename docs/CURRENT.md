@@ -102,28 +102,58 @@
   문제·과제·모의고사에는 공통 계산기와 ALTON용으로 재구성한 참조표를 제공하며 R&W에는
   보이지 않는다. 상세 사양: [`2026-09-17-fixed-mock-exam-v1-spec.md`](2026-09-17-fixed-mock-exam-v1-spec.md).
 
-- **학부모 ↔ 관리자 상담 신청·메신저 V1(구현·로컬 UAT 완료, non-prod 배포 미완 — 2026-09-17)**:
-  R11(household_messages, meeting_requests)을 확장해 구현했다(신규 테이블 중복 생성 안 함).
-  마이그레이션 `supabase/migrations/20261406000000_r12_parent_admin_support_v1.sql`을
-  로컬에 적용해 meeting_requests에 content/contact_preference/preferred_contact_time과
-  5단계 상태(requested→confirming→scheduling→scheduled→completed, cancelled는 레거시
-  조회용)를 추가하고, meeting_request_messages(상담 신청 건별 대화)·
-  household_message_reads(메신저 읽음 추적) 테이블을 새로 만들었다. 서버 액션
-  (`app/parent/inquiry-actions.ts`, `app/admin/inquiry-and-meeting-actions.ts`)과
-  화면(학부모: `ConsultationRequestTab.tsx`/`MessengerTab.tsx`로 탭 분리, 관리자:
-  `InquiryAndMeetingTab.tsx` 서브탭 라벨을 메신저/상담 신청으로 변경 + 안읽음 표시 +
-  건별 대화 + 5단계 상태 버튼)까지 반영했다. 사용자 노출 문구는 "상담 신청"/"메신저"로
-  통일했다("문의"는 화면에 남기지 않음, 내부 파일명은 유지). 단위·통합 테스트
-  54건(`app/consult/r12-parent-admin-support.integration.test.ts` 포함, 로컬 Postgres
-  RLS 검증)과 `tsc --noEmit` 모두 통과 확인. 로컬 dev 서버 + 브라우저로 실제 학부모/관리자
-  계정 UAT를 수행해 상담 신청 작성→관리자 5단계 상태 전환→건별 대화 양방향→메신저
-  양방향 대화·안읽음 배지 표시/해제까지 전 구간을 직접 확인했고 버그는 없었다. non-prod
-  (`supabase db push --linked`, project `worpsqwqgnspddnrtnvq`) 적용과 `vercel deploy`는
-  이 세션의 Claude Code auto mode 권한 분류기가 "Modify Shared Resources"로 두 명령
-  모두 차단해 수행하지 못했다 — 개발자가 직접 실행하거나 해당 Bash 권한을 허용해야
-  한다(`supabase db push --linked` 하나만 실행하면 됨; dry-run으로 확인한 대기 마이그레이션은
-  `20261405000000_p6_additional_study_unit_insert.sql`과 `20261406000000_r12_...`
-  두 건). 상세 사양: [`2026-09-17-parent-admin-support-spec.md`](2026-09-17-parent-admin-support-spec.md).
+- **학부모 ↔ 관리자 상담 신청·메신저(2026-09-17~, 진행 중 — R12 V1 완료·배포됨, R12.1 진행 중)**:
+  - **R12 V1(완료, non-prod 배포됨)**: R11(household_messages, meeting_requests)을
+    확장해 구현(신규 테이블 중복 생성 안 함). 마이그레이션
+    `supabase/migrations/20261406000000_r12_parent_admin_support_v1.sql` —
+    meeting_requests에 content/contact_preference/preferred_contact_time·5단계 상태
+    (requested→confirming→scheduling→scheduled→completed, cancelled는 레거시 조회용),
+    meeting_request_messages·household_message_reads 테이블. 단위·통합 테스트 54건
+    (`app/consult/r12-parent-admin-support.integration.test.ts` 포함) + `tsc --noEmit`
+    통과, 로컬 dev 서버+브라우저 UAT(학부모/관리자 양쪽, 신청→5단계 전환→대화→메신저
+    안읽음 배지) 완료. `supabase db push --linked`(project `worpsqwqgnspddnrtnvq`)와
+    `vercel deploy` 실행 완료(Preview: https://alton-edvwbrm6g-alton7.vercel.app) —
+    커밋 `0e37263`, `156b852`.
+  - **R12.1(2026-09-17 2차 지시, 진행 중)**: 제품 오너가 세 가지를 추가 지시함 —
+    ① 학부모 상담 화면을 `상담 신청`/`상담 내역`/`메신저` 3서브탭으로 재구성하고
+    상담 신청 폼을 `상담 사유` 단일 입력으로 단순화, ② 상담 신청 내부 메시지 스레드
+    (meeting_request_messages) 노출 중단(대화는 메신저로만), ③ 관리자 일정 확정 시
+    Google Calendar/Meet 생성(멱등, 중복 생성 방지)과 완료된 상담의 관리자 리뷰
+    초안/확정/수정이력 + 학부모용 확정 리뷰·권한 검증된 미팅록 링크. 마이그레이션
+    `supabase/migrations/20261409000000_r12_1_consult_calendar_and_review.sql`
+    (meeting_requests Calendar 동기화 컬럼, meeting_request_reviews·
+    meeting_request_review_edits·meeting_request_review_drive_access) 로컬 적용됨,
+    non-prod 미반영. 작업이 **두 갈래로 분리 진행 중**이라 담당과 완료 범위를
+    명확히 구분해 기록한다(다음 세션은 아래 경계를 넘어 임의로 수정하지 말 것):
+    - **완료(커밋 `c7d102a`)** — 학부모 쪽만: `상담 신청`/`상담 내역`/`메신저`
+      서브탭 분리(`ConsultationRequestTab.tsx`/`ConsultationHistoryTab.tsx`(신규)/
+      `MessengerTab.tsx`, `ParentShell.tsx`), 신청 폼을 `상담 사유` 단일 입력으로
+      축소(`app/parent/inquiry-actions.ts`의 `submitMeetingRequest`가
+      `{ reason }`만 받음), 학부모 쪽 상담 신청 내부 메시지 스레드 제거
+      (`meeting_request_messages` 테이블 자체는 유지, additive-only 원칙), 완료된
+      상담의 확정(`status='final'`) 리뷰 조회 + `meeting_request_review_drive_access.
+      status==='granted'`일 때만 미팅록 링크 노출(조건부 렌더링까지 구현·확인).
+      관련 유닛 테스트 28/28 통과.
+    - **다른 세션 담당(진행 중, 이 세션은 손대지 않음)** — 관리자 쪽:
+      `app/admin/inquiry-and-meeting-actions.ts`, `app/admin/InquiryAndMeetingTab.tsx`,
+      `app/admin/inquiry-and-meeting-actions.test.ts`. 이미 `scheduleMeetingRequest()`
+      (일정 확정 시 `lib/google-calendar.ts`의 `createCalendarEventWithMeet`/
+      `patchCalendarEventTime` 호출, `CALENDAR_SYNC_ALLOW_REAL_CALLS` 게이트는 계속
+      꺼진 상태 유지)가 추가되어 있으나, `updateMeetingRequestStatus` 타입이
+      `"scheduled"`를 제외하도록 좁혀져 `InquiryAndMeetingTab.tsx`·그 테스트가
+      타입 오류 상태(2026-09-18 확인 시점). 관리자 상담 리뷰 UI(초안/확정/수정이력)도
+      이 세션 담당. **완료 후 커밋 해시와 변경 범위를 받아 학부모 쪽 커밋(`c7d102a`)과의
+      충돌 여부만 확인할 것 — 통합·배포는 별도 담당이 두 커밋을 함께 검증한다.**
+    - **이후 연결 필요(누구 담당인지 아직 배정 안 됨)** — 미팅록 Drive 실제 권한
+      부여 워커(`grantSmartNotesReaderPermission` 패턴 재사용, `DRIVE_ARTIFACTS_
+      ALLOW_REAL_WRITES` 게이트 유지), `meeting_request_reviews`/
+      `meeting_request_review_edits`/`meeting_request_review_drive_access` 3개
+      테이블 RLS 통합 테스트, 관리자 쪽 커밋 이후 전체 `tsc`/vitest 재실행, non-prod
+      마이그레이션(`20261409000000`) 반영. **주의**: `CALENDAR_SYNC_ALLOW_REAL_CALLS`가
+      꺼진 상태에서 상태 전이·UI만 확인하는 것은 실제 Calendar/Meet UAT를 대체하지
+      않는다 — 최종 완료 보고에는 반드시 non-prod에서 게이트를 켠 뒤 실제 Google
+      Calendar 이벤트·Meet 링크 생성과 학부모의 실제 미팅록 권한 확인(열람 가능
+      여부)까지 포함해야 한다. 상세 사양: [`2026-09-17-parent-admin-support-spec.md`](2026-09-17-parent-admin-support-spec.md).
 
 - **예약·수업 준비·진도 단일 흐름(2026-09-17, 완료)**: 예약 확정 시 다음 미완료 회차
   (`curriculum_overlay_units.status`)를 자동 연결하고 그 시점 교재·문제·키워드를
