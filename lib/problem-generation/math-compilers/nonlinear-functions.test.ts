@@ -8,7 +8,8 @@ import {
 describe("generateNonlinearFnModel — 결정적 계산", () => {
   it("evaluate는 f(x0) = a(x0-h)^2+k를 정확히 계산한다(100회 반복)", () => {
     for (let i = 0; i < 100; i++) {
-      const model = generateNonlinearFnModel({ difficulty: "medium", questionKind: "evaluate" });
+      const model = generateNonlinearFnModel({ difficulty: "medium", family: "quadratic", questionKind: "evaluate" });
+      if (model.family !== "quadratic") throw new Error("family가 quadratic이어야 합니다.");
       const expected = model.a * (model.x0! - model.h) * (model.x0! - model.h) + model.k;
       expect(model.correctAnswer).toBe(String(expected));
       expect(validateNonlinearFnModel(model)).toEqual({ ok: true });
@@ -17,9 +18,11 @@ describe("generateNonlinearFnModel — 결정적 계산", () => {
 
   it("vertex_x/vertex_y는 h/k를 그대로 정답으로 낸다(100회 반복)", () => {
     for (let i = 0; i < 100; i++) {
-      const vx = generateNonlinearFnModel({ difficulty: "medium", questionKind: "vertex_x" });
+      const vx = generateNonlinearFnModel({ difficulty: "medium", family: "quadratic", questionKind: "vertex_x" });
+      if (vx.family !== "quadratic") throw new Error("family가 quadratic이어야 합니다.");
       expect(vx.correctAnswer).toBe(String(vx.h));
-      const vy = generateNonlinearFnModel({ difficulty: "medium", questionKind: "vertex_y" });
+      const vy = generateNonlinearFnModel({ difficulty: "medium", family: "quadratic", questionKind: "vertex_y" });
+      if (vy.family !== "quadratic") throw new Error("family가 quadratic이어야 합니다.");
       expect(vy.correctAnswer).toBe(String(vy.k));
     }
   });
