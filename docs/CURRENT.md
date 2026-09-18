@@ -7,8 +7,8 @@
 
 | 항목 | 값 |
 |---|---|
-| 브랜치 / Preview | `preview/m4-integration-verification` / **https://alton-gqt1zjtdx-alton7.vercel.app** (커밋 `62721f3` 시점 — Math 19종 완성분·R&W 근거 모델은 이 Preview 배포 이후 커밋이라 아직 Preview에 반영 안 됨, 로컬+non-prod DB 검증만 완료) |
-| 공유 non-prod(`worpsqwqgnspddnrtnvq`) | 마이그레이션 **`20261403000000`까지 적용됨**(local = remote) |
+| 브랜치 / Preview | `preview/m4-integration-verification` / **https://alton-gqt1zjtdx-alton7.vercel.app** (커밋 `62721f3` 시점 — Math 19종 완성분·R&W 근거 모델은 이 Preview 배포 이후 커밋이라 아직 Preview에 반영 안 됨, 로컬+non-prod DB 검증만 완료). **학부모 포털 IA 재구성+상담 milestone은 이후 별도로 재배포됨 — 최신 Preview https://alton-ilrqy8v1j-alton7.vercel.app (커밋 `e5b1042`, 아래 6절 참고)** |
+| 공유 non-prod(`worpsqwqgnspddnrtnvq`) | 마이그레이션 **`20261412000000`까지 적용됨**(local = remote). `20261413000000`(문제은행 감사, 다른 담당 소유)만 미반영 — 최종 통합 시 적용 순서 검토 필요 |
 | Production | 배포·마이그레이션 없음(오픈 전, 실제 고객 데이터 없음) |
 | 테스트 | 마지막 전체 일괄 실행 2596/1 skip(`63d1189`, `db reset` 직후). 그 뒤 배치들은 **파일별 스위트 전부 초록**(전체 일괄 재실행 미실시). 통합 테스트는 `supabase db reset --local` 직후 `--no-file-parallelism`으로 돌려야 한다(예약 fixture 충돌·append-only 전역 count 는 재실행 시 실패 — 결함 아님) |
 | 실제 외부 연동 | 교재 Drive `ALTON Company Tutoring Resources`(id `0AKnx7roQfcSaUk9PVA`) 읽기·폴더 생성·파일 가져오기·고정 사본 공개 확인. Preview 환경변수 `CURRICULUM_DRIVE_ENABLED/ID/ALLOW_REAL_WRITES=true`(제품 오너 설정). AI 생성은 Anthropic 키(Preview·로컬 있음). 유료 서비스 추가 없음 |
@@ -102,58 +102,91 @@
   문제·과제·모의고사에는 공통 계산기와 ALTON용으로 재구성한 참조표를 제공하며 R&W에는
   보이지 않는다. 상세 사양: [`2026-09-17-fixed-mock-exam-v1-spec.md`](2026-09-17-fixed-mock-exam-v1-spec.md).
 
-- **학부모 ↔ 관리자 상담 신청·메신저(2026-09-17~, 진행 중 — R12 V1 완료·배포됨, R12.1 진행 중)**:
-  - **R12 V1(완료, non-prod 배포됨)**: R11(household_messages, meeting_requests)을
-    확장해 구현(신규 테이블 중복 생성 안 함). 마이그레이션
-    `supabase/migrations/20261406000000_r12_parent_admin_support_v1.sql` —
-    meeting_requests에 content/contact_preference/preferred_contact_time·5단계 상태
-    (requested→confirming→scheduling→scheduled→completed, cancelled는 레거시 조회용),
-    meeting_request_messages·household_message_reads 테이블. 단위·통합 테스트 54건
-    (`app/consult/r12-parent-admin-support.integration.test.ts` 포함) + `tsc --noEmit`
-    통과, 로컬 dev 서버+브라우저 UAT(학부모/관리자 양쪽, 신청→5단계 전환→대화→메신저
-    안읽음 배지) 완료. `supabase db push --linked`(project `worpsqwqgnspddnrtnvq`)와
-    `vercel deploy` 실행 완료(Preview: https://alton-edvwbrm6g-alton7.vercel.app) —
-    커밋 `0e37263`, `156b852`.
-  - **R12.1(2026-09-17 2차 지시, 진행 중)**: 제품 오너가 세 가지를 추가 지시함 —
-    ① 학부모 상담 화면을 `상담 신청`/`상담 내역`/`메신저` 3서브탭으로 재구성하고
-    상담 신청 폼을 `상담 사유` 단일 입력으로 단순화, ② 상담 신청 내부 메시지 스레드
-    (meeting_request_messages) 노출 중단(대화는 메신저로만), ③ 관리자 일정 확정 시
-    Google Calendar/Meet 생성(멱등, 중복 생성 방지)과 완료된 상담의 관리자 리뷰
-    초안/확정/수정이력 + 학부모용 확정 리뷰·권한 검증된 미팅록 링크. 마이그레이션
-    `supabase/migrations/20261409000000_r12_1_consult_calendar_and_review.sql`
-    (meeting_requests Calendar 동기화 컬럼, meeting_request_reviews·
-    meeting_request_review_edits·meeting_request_review_drive_access) 로컬 적용됨,
-    non-prod 미반영. 작업이 **두 갈래로 분리 진행 중**이라 담당과 완료 범위를
-    명확히 구분해 기록한다(다음 세션은 아래 경계를 넘어 임의로 수정하지 말 것):
-    - **완료(커밋 `c7d102a`)** — 학부모 쪽만: `상담 신청`/`상담 내역`/`메신저`
-      서브탭 분리(`ConsultationRequestTab.tsx`/`ConsultationHistoryTab.tsx`(신규)/
-      `MessengerTab.tsx`, `ParentShell.tsx`), 신청 폼을 `상담 사유` 단일 입력으로
-      축소(`app/parent/inquiry-actions.ts`의 `submitMeetingRequest`가
-      `{ reason }`만 받음), 학부모 쪽 상담 신청 내부 메시지 스레드 제거
-      (`meeting_request_messages` 테이블 자체는 유지, additive-only 원칙), 완료된
-      상담의 확정(`status='final'`) 리뷰 조회 + `meeting_request_review_drive_access.
-      status==='granted'`일 때만 미팅록 링크 노출(조건부 렌더링까지 구현·확인).
-      관련 유닛 테스트 28/28 통과.
-    - **다른 세션 담당(진행 중, 이 세션은 손대지 않음)** — 관리자 쪽:
-      `app/admin/inquiry-and-meeting-actions.ts`, `app/admin/InquiryAndMeetingTab.tsx`,
-      `app/admin/inquiry-and-meeting-actions.test.ts`. 이미 `scheduleMeetingRequest()`
-      (일정 확정 시 `lib/google-calendar.ts`의 `createCalendarEventWithMeet`/
-      `patchCalendarEventTime` 호출, `CALENDAR_SYNC_ALLOW_REAL_CALLS` 게이트는 계속
-      꺼진 상태 유지)가 추가되어 있으나, `updateMeetingRequestStatus` 타입이
-      `"scheduled"`를 제외하도록 좁혀져 `InquiryAndMeetingTab.tsx`·그 테스트가
-      타입 오류 상태(2026-09-18 확인 시점). 관리자 상담 리뷰 UI(초안/확정/수정이력)도
-      이 세션 담당. **완료 후 커밋 해시와 변경 범위를 받아 학부모 쪽 커밋(`c7d102a`)과의
-      충돌 여부만 확인할 것 — 통합·배포는 별도 담당이 두 커밋을 함께 검증한다.**
-    - **이후 연결 필요(누구 담당인지 아직 배정 안 됨)** — 미팅록 Drive 실제 권한
-      부여 워커(`grantSmartNotesReaderPermission` 패턴 재사용, `DRIVE_ARTIFACTS_
-      ALLOW_REAL_WRITES` 게이트 유지), `meeting_request_reviews`/
-      `meeting_request_review_edits`/`meeting_request_review_drive_access` 3개
-      테이블 RLS 통합 테스트, 관리자 쪽 커밋 이후 전체 `tsc`/vitest 재실행, non-prod
-      마이그레이션(`20261409000000`) 반영. **주의**: `CALENDAR_SYNC_ALLOW_REAL_CALLS`가
-      꺼진 상태에서 상태 전이·UI만 확인하는 것은 실제 Calendar/Meet UAT를 대체하지
-      않는다 — 최종 완료 보고에는 반드시 non-prod에서 게이트를 켠 뒤 실제 Google
-      Calendar 이벤트·Meet 링크 생성과 학부모의 실제 미팅록 권한 확인(열람 가능
-      여부)까지 포함해야 한다. 상세 사양: [`2026-09-17-parent-admin-support-spec.md`](2026-09-17-parent-admin-support-spec.md).
+- **학부모 포털 IA 재구성 + 상담 신청·메신저(2026-09-17~18, 완료 — R12/R12.1 전체 반영, non-prod 배포·UAT 완료)**:
+  - **메인 nav 최종 순서**: 홈 → 수업권 → 수강 과목 → 수업 → 상담 → 단어장 → 과제.
+    **제거된 탭과 새 위치**: 가족(신규 자녀 상담 신청 흐름 자체를 폐기, `ConsultRequestTab.tsx`/
+    `consult-request-actions.ts`/`consult-request-data.ts` 삭제 — 학부모는 이제 기존 자녀든
+    신규든 상담 신청은 `상담 신청` 서브탭 하나로만 함) · 문의(구 `household_messages` 대화
+    화면 → `상담` 탭의 `메신저` 서브탭으로 통합) · 예약(독립 탭 제거 → `수업` 탭 안
+    "예정 수업 예약하기" 버튼으로 `LessonBookingTab`(학생 포털과 공유, 동작 변경 없음)을
+    모달로 연다) · 교재(관리자 전용 라이브러리 탭 제거, 기존 세션·수강 과목 화면의
+    `/materials/[id]` 진입점은 그대로 유지) · 독립 `통계` 탭(죽은 placeholder였음 →
+    `홈`의 `통계` 서브탭으로 이동, 학생 포털 `stats-data.ts`의 `loadStats` 재사용).
+    `지인 추천`(`CreditsTab`)·`동의`(`ConsentTab`)는 메인 nav에서 제거해 프로필
+    드롭다운(학부모님 ▾) 메뉴로 이동 — `동의`는 자녀별 미해결 동의/정규 진행 선택
+    건수를 숫자 배지로 표시.
+  - **상담(`consult`) 탭**: 서브탭 3개 — `상담 신청`(`ConsultationRequestTab.tsx`, `상담
+    사유` 단일 입력만, `submitMeetingRequest({ reason })`), `상담 내역`
+    (`ConsultationHistoryTab.tsx`, 상태별 목록 + 완료 건의 확정 리뷰·미팅록 조건부
+    노출), `메신저`(`MessengerTab.tsx`, 기존 그대로, 안읽음 배지). 상담 신청 내부
+    메시지 스레드(`meeting_request_messages`)는 더 이상 UI로 노출하지 않음(테이블
+    자체는 additive-only 원칙으로 유지, 대화는 메신저로만).
+  - **스키마(R11 `meeting_requests`/`household_messages` 확장, 신규 테이블 만들지
+    않음)**: `meeting_requests`(5단계 상태 requested→confirming→scheduling→
+    scheduled→completed, cancelled는 레거시 조회용; content/contact_preference/
+    preferred_contact_time; Calendar 동기화 컬럼 `google_event_id`/
+    `google_meeting_code`/`google_sync_status`/`google_sync_retry_count`,
+    `google_meet_link`는 R11부터 있던 컬럼), `meeting_request_reviews`(draft/final
+    상태, `save_meeting_request_review_draft`/`finalize_meeting_request_review`
+    RPC로만 씀), `meeting_request_review_edits`(확정 후 관리자 수정 시마다 이전
+    `final_text`를 스냅샷 — `admin_edit_meeting_request_review` RPC가 원자적으로
+    처리, `lesson_reviews`와 달리 이번 상담 리뷰는 확정 후 수정도 이력을 남기는
+    것이 요구사항이었음), `meeting_request_review_drive_access`(미팅록 Drive 문서
+    권한 부여 상태 `pending/granted/failed` — `status='granted'`일 때만 학부모에게
+    링크 노출, `DRIVE_ARTIFACTS_ALLOW_REAL_WRITES` 게이트로 실제 Drive 호출 차단
+    가능), `meeting_request_messages`(유지, UI 미노출), `household_message_reads`
+    (메신저 안읽음 추적).
+  - **RLS 요약**: `meeting_request_reviews`는 `status='final'`인 행만 그 household의
+    guardian이 조회 가능(draft는 관리자만), 쓰기는 위 SECURITY DEFINER RPC로만
+    허용(직접 insert/update 정책 없음 — `lesson_reviews` 패턴과 동일). `meeting_
+    request_review_drive_access`는 관리자 전체 조회, guardian은 자기 household의
+    확정된 리뷰에 연결된 행만 조회 가능(쓰기는 서비스 롤/서버 액션에서만). 다른
+    household의 `meeting_requests`/리뷰/미팅록은 어느 화면에서도 조회 불가(Preview
+    UAT에서 실제 두 household 계정으로 교차 열람 차단 확인).
+  - **Calendar/Meet 연동**: 관리자가 `일정 확정`을 누르면(인라인 `datetime-local`
+    입력, `window.prompt` 아님) `app/admin/inquiry-and-meeting-actions.ts`의
+    `scheduleMeetingRequest()`가 (1) 시작/종료 시간 유효성(둘 다 필요, 종료>시작)
+    검사 후 거부, (2) `google_event_id`가 이미 있으면 `patchCalendarEventTime`만
+    호출(멱등, 재생성 안 함), 없으면 `createCalendarEventWithMeet` 호출, (3) Calendar
+    API 호출이 실패하면 DB를 전혀 쓰지 않아 상태가 조용히 `scheduled`로 넘어가지
+    않는다. 참석자 이메일은 `profiles`가 아니라(email 컬럼 없음) `auth.admin.
+    getUserById()`로 조회(기존 `consultation-kanban-actions.ts` 패턴과 동일).
+    관리자 리뷰 UI(`MeetingRequestReviewPanel.tsx` + `meeting-request-review-
+    actions.ts`)는 완료된 상담에 draft 저장/확정/확정 후 수정 버튼을 제공하고,
+    미팅록 Drive 문서 연결 시 `grantSmartNotesReaderPermission`(세션 Smart Notes와
+    동일 헬퍼)으로 그 household 보호자에게 reader 권한 부여를 시도한다.
+  - **홈(`activeTab==="home"`) 재설계**: 서브탭 4개 — `종합 리뷰`(수업/상담 리뷰를
+    합친 목록이 **아니다** — 향후 AI OS가 월 단위로 생성할 "월간 종합 리뷰" 전용
+    빈 자리, 이번 범위에서는 생성 로직·데이터 모델 없이 "아직 생성된 월간 종합
+    리뷰가 없습니다. 준비 중입니다." 정적 문구만), `수업 리뷰`(`lesson-review-
+    family-actions.ts`의 `getLessonReviewsForFamily`를 자녀의 모든 수강 과목에
+    병렬 호출해 합친 것 — 확정 리뷰+확정 미팅록이 있는 것만, 시간순), `상담
+    리뷰`(`home-reviews-actions.ts`의 `getHomeConsultationReviews` — household
+    범위 확정된 `meeting_request_reviews`만, 최신순, 미팅록 없으면 "미팅록이
+    없습니다."만 표시), `통계`(`home-stats-actions.ts`가 학생 포털 `stats-data.ts`
+    의 `loadStats` 재사용). 상단 동의 배너(구 `ChildrenStatusRow`)와 캘린더·예정
+    수업(구 `HomeDashboard` 사용)은 제거 — 동의 긴급도는 프로필 드롭다운 배지로만.
+  - **마이그레이션·배포**: `supabase/migrations/20261406000000`(R12 V1)~
+    `20261412000000`(스마트노트 권한 상태 조회 함수) 전부 non-prod(`worpsqwqgnspddnrtnvq`)
+    반영 완료(`migration list --linked` local=remote 확인). 최신 Preview:
+    **https://alton-ilrqy8v1j-alton7.vercel.app**(커밋 `e5b1042`).
+  - **Preview UAT 실제 확인(2026-09-18, 실행 ID `r13-0918c`, 정리 완료)**: 태그된
+    household 2개 + 관리자 계정으로 상담 신청 제출→관리자 일정 확정(실제 Calendar
+    이벤트+Meet 링크 생성, `google_event_id`/`google_sync_status='succeeded'` DB
+    확인)→완료 처리→리뷰 draft→확정→학부모 계정으로 홈 `상담 리뷰`·`상담 내역`
+    양쪽에서 확정 리뷰 실제 열람 확인→다른 household 계정으로는 전혀 보이지 않음
+    확인. UAT로 만든 DB 데이터·Auth 계정·실제 생성된 Calendar 이벤트(`v7rjj2epr9g4
+    csroidibopjm1c`) 전부 삭제 확인 완료(재조회 시 `status="cancelled"`).
+  - **남은 blocker**:
+    (a) **미팅록 Drive 원본 링크 실제 클릭 검증 미완료** — `DRIVE_ARTIFACTS_ALLOW_
+    REAL_WRITES`가 다른 Drive 쓰기 경로(Smart Notes 등)에도 영향을 주는 공유
+    플래그라 이번 UAT에서는 켜지 않았다(게이트가 의도대로 차단하는 것만 확인).
+    추후 별도 Sandbox 검증 창에서 이 플래그를 제한적으로 켜고 실제 권한 부여→
+    학부모 계정으로 클릭 가능 여부까지 확인 필요.
+    (b) `supabase/migrations/20261413000000_p6_problem_bank_full_audit_archive.sql`
+    (문제은행 감사, 이 milestone과 무관한 다른 담당 소유)이 아직 non-prod에
+    미반영 — 최종 통합 시 마이그레이션 적용 순서만 함께 검토 필요(이 파일 자체는
+    수정하지 않았음).
 
 - **예약·수업 준비·진도 단일 흐름(2026-09-17, 완료)**: 예약 확정 시 다음 미완료 회차
   (`curriculum_overlay_units.status`)를 자동 연결하고 그 시점 교재·문제·키워드를
