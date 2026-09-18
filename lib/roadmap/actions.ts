@@ -10,6 +10,11 @@ import type {
   PrepItemType,
   PrepStatus,
   MilestoneStatus,
+  ActivityTier,
+  FinancialAidIntent,
+  FirstGeneration,
+  RecruitedAthlete,
+  ResidencyStatus,
 } from "./types";
 
 // 학부모 홈 "통계" 서브탭(home-stats-actions.ts)과 같은 지연 로딩 패턴 —
@@ -47,6 +52,12 @@ export async function saveAcademicProfile(input: {
   graduationYear: number | null;
   curriculumType: string | null;
   currentSubjects: string[];
+  honorsCount: number | null;
+  apCount: number | null;
+  collegeCoursesCount: number | null;
+  ibHlCount: number | null;
+  ibSlCount: number | null;
+  schoolApIbOfferedCount: number | null;
 }) {
   const supabase = await requireLoggedIn();
   const { error } = await supabase.from("student_academic_profile").upsert({
@@ -54,10 +65,85 @@ export async function saveAcademicProfile(input: {
     graduation_year: input.graduationYear,
     curriculum_type: input.curriculumType,
     current_subjects: input.currentSubjects,
+    honors_count: input.honorsCount,
+    ap_count: input.apCount,
+    college_courses_count: input.collegeCoursesCount,
+    ib_hl_count: input.ibHlCount,
+    ib_sl_count: input.ibSlCount,
+    school_ap_ib_offered_count: input.schoolApIbOfferedCount,
     updated_at: new Date().toISOString(),
   });
   if (error) throw new Error(error.message);
   revalidateRoadmapPaths(input.studentId);
+}
+
+/** CollegeVine Demographics 탭과 동등한 항목(2026-09-19) — 전부 선택 입력, 교사 조회 불가. */
+export async function saveDemographics(input: {
+  studentId: string;
+  homeCountry: string | null;
+  zipCode: string | null;
+  residencyStatus: ResidencyStatus | null;
+  gender: string | null;
+  raceEthnicity: string | null;
+  financialAidIntent: FinancialAidIntent | null;
+  maxAnnualBudget: number | null;
+  householdIncomeRange: string | null;
+  firstGeneration: FirstGeneration | null;
+  legacySchools: string[];
+  religiousAffiliation: string | null;
+  recruitedAthlete: RecruitedAthlete | null;
+  specialSchoolInterests: string[];
+}) {
+  const supabase = await requireLoggedIn();
+  const { error } = await supabase.from("student_demographics").upsert({
+    student_id: input.studentId,
+    home_country: input.homeCountry,
+    zip_code: input.zipCode,
+    residency_status: input.residencyStatus,
+    gender: input.gender,
+    race_ethnicity: input.raceEthnicity,
+    financial_aid_intent: input.financialAidIntent,
+    max_annual_budget: input.maxAnnualBudget,
+    household_income_range: input.householdIncomeRange,
+    first_generation: input.firstGeneration,
+    legacy_schools: input.legacySchools,
+    religious_affiliation: input.religiousAffiliation,
+    recruited_athlete: input.recruitedAthlete,
+    special_school_interests: input.specialSchoolInterests,
+    updated_at: new Date().toISOString(),
+  });
+  if (error) throw new Error(error.message);
+  revalidateRoadmapPaths(input.studentId);
+}
+
+/** 기존 student_ap_courses(P4/M4)를 로드맵 "시험 정보" 화면에서 그대로 재사용(2026-09-19). */
+export async function addApExam(input: {
+  studentId: string;
+  courseName: string;
+  status: "planned" | "taking" | "completed";
+  examYear: number | null;
+  score: number | null;
+}) {
+  if (input.score !== null && (input.score < 1 || input.score > 5)) {
+    throw new Error("AP 점수는 1~5 사이여야 합니다.");
+  }
+  const supabase = await requireLoggedIn();
+  const { error } = await supabase.from("student_ap_courses").insert({
+    student_id: input.studentId,
+    course_name: input.courseName,
+    status: input.status,
+    exam_year: input.examYear,
+    score: input.score,
+  });
+  if (error) throw new Error(error.message);
+  revalidateRoadmapPaths(input.studentId);
+}
+
+export async function removeApExam(studentId: string, id: string) {
+  const supabase = await requireLoggedIn();
+  const { error } = await supabase.from("student_ap_courses").delete().eq("id", id);
+  if (error) throw new Error(error.message);
+  revalidateRoadmapPaths(studentId);
 }
 
 export async function addTestRecord(input: {
@@ -67,6 +153,10 @@ export async function addTestRecord(input: {
   testDate: string | null;
   score: number | null;
   notes: string | null;
+  scoreMath: number | null;
+  scoreReadingWriting: number | null;
+  scoreEnglish: number | null;
+  scoreScience: number | null;
 }) {
   if (input.score !== null && (input.score < 0 || input.score > 1600)) {
     throw new Error("점수는 0~1600 사이여야 합니다.");
@@ -79,6 +169,10 @@ export async function addTestRecord(input: {
     test_date: input.testDate,
     score: input.score,
     notes: input.notes,
+    score_math: input.scoreMath,
+    score_reading_writing: input.scoreReadingWriting,
+    score_english: input.scoreEnglish,
+    score_science: input.scoreScience,
   });
   if (error) throw new Error(error.message);
   revalidateRoadmapPaths(input.studentId);
@@ -127,6 +221,7 @@ export async function addActivity(input: {
   totalHours: number | null;
   leadershipSummary: string | null;
   achievementSummary: string | null;
+  tier: ActivityTier | null;
 }) {
   const supabase = await requireLoggedIn();
   const { error } = await supabase.from("student_extracurricular_activities").insert({
@@ -141,6 +236,7 @@ export async function addActivity(input: {
     total_hours: input.totalHours,
     leadership_summary: input.leadershipSummary,
     achievement_summary: input.achievementSummary,
+    tier: input.tier,
   });
   if (error) throw new Error(error.message);
   revalidateRoadmapPaths(input.studentId);

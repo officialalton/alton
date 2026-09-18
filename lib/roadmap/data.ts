@@ -3,6 +3,8 @@ import type {
   RoadmapData,
   AcademicProfile,
   TestRecord,
+  ApExam,
+  Demographics,
   CollegeInterests,
   ActivityAward,
   Award,
@@ -23,6 +25,8 @@ export async function loadRoadmapData(
     studentRes,
     academicRes,
     testRes,
+    apExamRes,
+    demographicsRes,
     interestsRes,
     activitiesRes,
     awardsRes,
@@ -34,14 +38,28 @@ export async function loadRoadmapData(
     supabase.from("students").select("grade, school_name, gpa").eq("id", studentId).maybeSingle(),
     supabase
       .from("student_academic_profile")
-      .select("graduation_year, curriculum_type, current_subjects")
+      .select(
+        "graduation_year, curriculum_type, current_subjects, honors_count, ap_count, college_courses_count, ib_hl_count, ib_sl_count, school_ap_ib_offered_count"
+      )
       .eq("student_id", studentId)
       .maybeSingle(),
     supabase
       .from("student_test_records")
-      .select("id, test_type, record_kind, test_date, score, notes")
+      .select("id, test_type, record_kind, test_date, score, notes, score_math, score_reading_writing, score_english, score_science")
       .eq("student_id", studentId)
       .order("test_date", { ascending: false, nullsFirst: false }),
+    supabase
+      .from("student_ap_courses")
+      .select("id, course_name, status, exam_year, score")
+      .eq("student_id", studentId)
+      .order("exam_year", { ascending: false, nullsFirst: false }),
+    supabase
+      .from("student_demographics")
+      .select(
+        "home_country, zip_code, residency_status, gender, race_ethnicity, financial_aid_intent, max_annual_budget, household_income_range, first_generation, legacy_schools, religious_affiliation, recruited_athlete, special_school_interests"
+      )
+      .eq("student_id", studentId)
+      .maybeSingle(),
     supabase
       .from("student_college_interests")
       .select(
@@ -52,7 +70,7 @@ export async function loadRoadmapData(
     supabase
       .from("student_extracurricular_activities")
       .select(
-        "id, activity_name, description, field, role, start_date, end_date, is_ongoing, total_hours, leadership_summary, achievement_summary"
+        "id, activity_name, description, field, role, start_date, end_date, is_ongoing, total_hours, leadership_summary, achievement_summary, tier"
       )
       .eq("student_id", studentId)
       .order("created_at", { ascending: false }),
@@ -85,6 +103,8 @@ export async function loadRoadmapData(
     studentRes.error,
     academicRes.error,
     testRes.error,
+    apExamRes.error,
+    demographicsRes.error,
     interestsRes.error,
     activitiesRes.error,
     awardsRes.error,
@@ -100,6 +120,12 @@ export async function loadRoadmapData(
     graduationYear: academicRes.data?.graduation_year ?? null,
     curriculumType: academicRes.data?.curriculum_type ?? null,
     currentSubjects: academicRes.data?.current_subjects ?? [],
+    honorsCount: academicRes.data?.honors_count ?? null,
+    apCount: academicRes.data?.ap_count ?? null,
+    collegeCoursesCount: academicRes.data?.college_courses_count ?? null,
+    ibHlCount: academicRes.data?.ib_hl_count ?? null,
+    ibSlCount: academicRes.data?.ib_sl_count ?? null,
+    schoolApIbOfferedCount: academicRes.data?.school_ap_ib_offered_count ?? null,
   };
 
   const testRecords: TestRecord[] = (testRes.data ?? []).map((r) => ({
@@ -109,7 +135,35 @@ export async function loadRoadmapData(
     testDate: r.test_date,
     score: r.score,
     notes: r.notes,
+    scoreMath: r.score_math,
+    scoreReadingWriting: r.score_reading_writing,
+    scoreEnglish: r.score_english,
+    scoreScience: r.score_science,
   }));
+
+  const apExams: ApExam[] = (apExamRes.data ?? []).map((a) => ({
+    id: a.id,
+    courseName: a.course_name,
+    status: a.status,
+    examYear: a.exam_year,
+    score: a.score,
+  }));
+
+  const demographics: Demographics = {
+    homeCountry: demographicsRes.data?.home_country ?? null,
+    zipCode: demographicsRes.data?.zip_code ?? null,
+    residencyStatus: demographicsRes.data?.residency_status ?? null,
+    gender: demographicsRes.data?.gender ?? null,
+    raceEthnicity: demographicsRes.data?.race_ethnicity ?? null,
+    financialAidIntent: demographicsRes.data?.financial_aid_intent ?? null,
+    maxAnnualBudget: demographicsRes.data?.max_annual_budget ?? null,
+    householdIncomeRange: demographicsRes.data?.household_income_range ?? null,
+    firstGeneration: demographicsRes.data?.first_generation ?? null,
+    legacySchools: demographicsRes.data?.legacy_schools ?? [],
+    religiousAffiliation: demographicsRes.data?.religious_affiliation ?? null,
+    recruitedAthlete: demographicsRes.data?.recruited_athlete ?? null,
+    specialSchoolInterests: demographicsRes.data?.special_school_interests ?? [],
+  };
 
   const collegeInterests: CollegeInterests = {
     intendedMajors: interestsRes.data?.intended_majors ?? [],
@@ -132,6 +186,7 @@ export async function loadRoadmapData(
     totalHours: a.total_hours,
     leadershipSummary: a.leadership_summary,
     achievementSummary: a.achievement_summary,
+    tier: a.tier,
   }));
 
   const awards: Award[] = (awardsRes.data ?? []).map((a) => ({
@@ -195,6 +250,8 @@ export async function loadRoadmapData(
     gpa: studentRes.data?.gpa ?? null,
     academicProfile,
     testRecords,
+    apExams,
+    demographics,
     collegeInterests,
     activities,
     awards,

@@ -10,8 +10,13 @@ import type {
   MilestoneStatus,
   TestType,
   TestRecordKind,
+  ActivityTier,
+  FinancialAidIntent,
+  FirstGeneration,
+  RecruitedAthlete,
+  ResidencyStatus,
 } from "@/lib/roadmap/types";
-import { PREP_ITEM_LABELS, PREP_STATUS_LABELS, MILESTONE_STATUS_LABELS } from "@/lib/roadmap/types";
+import { PREP_ITEM_LABELS, PREP_STATUS_LABELS, MILESTONE_STATUS_LABELS, ACTIVITY_TIER_LABELS } from "@/lib/roadmap/types";
 import * as roadmapActions from "@/lib/roadmap/actions";
 
 const inputClass = "px-3 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12.5px] w-full";
@@ -138,8 +143,20 @@ function ProfileSections({
   const [colleges, setColleges] = useState(data.collegeInterests.targetColleges.join(", "));
   const [applicationTiming, setApplicationTiming] = useState(data.collegeInterests.targetApplicationTiming ?? "");
 
+  const [honorsCount, setHonorsCount] = useState(data.academicProfile.honorsCount?.toString() ?? "");
+  const [apCount, setApCount] = useState(data.academicProfile.apCount?.toString() ?? "");
+  const [collegeCoursesCount, setCollegeCoursesCount] = useState(data.academicProfile.collegeCoursesCount?.toString() ?? "");
+  const [ibHlCount, setIbHlCount] = useState(data.academicProfile.ibHlCount?.toString() ?? "");
+  const [ibSlCount, setIbSlCount] = useState(data.academicProfile.ibSlCount?.toString() ?? "");
+  const [schoolApIbOfferedCount, setSchoolApIbOfferedCount] = useState(
+    data.academicProfile.schoolApIbOfferedCount?.toString() ?? ""
+  );
+
   return (
     <>
+      {/* 0. 인구통계(CollegeVine Demographics 탭 동등 항목, 2026-09-19) */}
+      <DemographicsCard data={data} readOnly={readOnly} pending={pending} run={run} />
+
       {/* 1. 기본 학업 정보 */}
       <div className={cardClass}>
         <div className={cardTitleClass}>1. 기본 학업 정보</div>
@@ -154,6 +171,11 @@ function ProfileSections({
             <div>졸업 예정 연도: {data.academicProfile.graduationYear ?? "미입력"}</div>
             <div>교육과정: {data.academicProfile.curriculumType ?? "미입력"}</div>
             <div>현재 수강 과목: {data.academicProfile.currentSubjects.join(", ") || "미입력"}</div>
+            <div>
+              Honors {data.academicProfile.honorsCount ?? "-"} · AP {data.academicProfile.apCount ?? "-"} · 지역대학{" "}
+              {data.academicProfile.collegeCoursesCount ?? "-"} · IB HL {data.academicProfile.ibHlCount ?? "-"} · IB SL{" "}
+              {data.academicProfile.ibSlCount ?? "-"}
+            </div>
           </div>
         ) : (
           <div className="grid grid-cols-2 gap-3">
@@ -179,6 +201,45 @@ function ProfileSections({
               <label className={labelClass}>현재 수강 과목(쉼표로 구분)</label>
               <input className={inputClass} value={currentSubjects} onChange={(e) => setCurrentSubjects(e.target.value)} />
             </div>
+            <div className="col-span-2 text-[11px] font-bold text-grey-300 uppercase tracking-wide mt-1">
+              수강과목 개수(졸업까지 계획, CollegeVine Coursework 탭 동등 항목)
+            </div>
+            <div>
+              <label className={labelClass}>Honors 과목 수</label>
+              <input className={inputClass} type="number" min={0} value={honorsCount} onChange={(e) => setHonorsCount(e.target.value)} />
+            </div>
+            <div>
+              <label className={labelClass}>AP 과목 수</label>
+              <input className={inputClass} type="number" min={0} value={apCount} onChange={(e) => setApCount(e.target.value)} />
+            </div>
+            <div>
+              <label className={labelClass}>지역 대학 수강 과목 수</label>
+              <input
+                className={inputClass}
+                type="number"
+                min={0}
+                value={collegeCoursesCount}
+                onChange={(e) => setCollegeCoursesCount(e.target.value)}
+              />
+            </div>
+            <div>
+              <label className={labelClass}>IB HL 과목 수</label>
+              <input className={inputClass} type="number" min={0} value={ibHlCount} onChange={(e) => setIbHlCount(e.target.value)} />
+            </div>
+            <div>
+              <label className={labelClass}>IB SL 과목 수</label>
+              <input className={inputClass} type="number" min={0} value={ibSlCount} onChange={(e) => setIbSlCount(e.target.value)} />
+            </div>
+            <div>
+              <label className={labelClass}>학교가 제공하는 AP/IB 과목 수(선택)</label>
+              <input
+                className={inputClass}
+                type="number"
+                min={0}
+                value={schoolApIbOfferedCount}
+                onChange={(e) => setSchoolApIbOfferedCount(e.target.value)}
+              />
+            </div>
             <div className="col-span-2">
               <button
                 type="button"
@@ -191,6 +252,12 @@ function ProfileSections({
                       graduationYear: graduationYear ? Number(graduationYear) : null,
                       curriculumType: curriculumType || null,
                       currentSubjects: parseList(currentSubjects),
+                      honorsCount: honorsCount ? Number(honorsCount) : null,
+                      apCount: apCount ? Number(apCount) : null,
+                      collegeCoursesCount: collegeCoursesCount ? Number(collegeCoursesCount) : null,
+                      ibHlCount: ibHlCount ? Number(ibHlCount) : null,
+                      ibSlCount: ibSlCount ? Number(ibSlCount) : null,
+                      schoolApIbOfferedCount: schoolApIbOfferedCount ? Number(schoolApIbOfferedCount) : null,
                     })
                   )
                 }
@@ -283,6 +350,178 @@ function ProfileSections({
   );
 }
 
+const SPECIAL_SCHOOL_OPTIONS = ["HBCU", "여대", "군사학교", "인문대(Liberal Arts)", "본국 내 학교만", "기타"];
+
+function DemographicsCard({
+  data,
+  readOnly,
+  pending,
+  run,
+}: {
+  data: RoadmapData;
+  readOnly: boolean;
+  pending: boolean;
+  run: (fn: () => Promise<void>) => void;
+}) {
+  const d = data.demographics;
+  const [homeCountry, setHomeCountry] = useState(d.homeCountry ?? "");
+  const [zipCode, setZipCode] = useState(d.zipCode ?? "");
+  const [residencyStatus, setResidencyStatus] = useState<ResidencyStatus | "">(d.residencyStatus ?? "");
+  const [gender, setGender] = useState(d.gender ?? "");
+  const [raceEthnicity, setRaceEthnicity] = useState(d.raceEthnicity ?? "");
+  const [financialAidIntent, setFinancialAidIntent] = useState<FinancialAidIntent | "">(d.financialAidIntent ?? "");
+  const [maxAnnualBudget, setMaxAnnualBudget] = useState(d.maxAnnualBudget?.toString() ?? "");
+  const [householdIncomeRange, setHouseholdIncomeRange] = useState(d.householdIncomeRange ?? "");
+  const [firstGeneration, setFirstGeneration] = useState<FirstGeneration | "">(d.firstGeneration ?? "");
+  const [legacySchools, setLegacySchools] = useState(d.legacySchools.join(", "));
+  const [religiousAffiliation, setReligiousAffiliation] = useState(d.religiousAffiliation ?? "");
+  const [recruitedAthlete, setRecruitedAthlete] = useState<RecruitedAthlete | "">(d.recruitedAthlete ?? "");
+  const [specialSchoolInterests, setSpecialSchoolInterests] = useState<string[]>(d.specialSchoolInterests);
+
+  function toggleSpecialSchool(opt: string) {
+    setSpecialSchoolInterests((cur) => (cur.includes(opt) ? cur.filter((o) => o !== opt) : [...cur, opt]));
+  }
+
+  if (readOnly) {
+    // 교사는 RLS 자체가 이 데이터를 안 돌려준다(민감정보) — 화면에서도 섹션을 아예 숨긴다.
+    return null;
+  }
+
+  return (
+    <div className={cardClass}>
+      <div className={cardTitleClass}>0. 인구통계(선택 입력)</div>
+      <p className="text-[11.5px] text-grey-500 mb-2">
+        전부 선택 입력이며, 선생님에게는 보이지 않습니다(학생·보호자·관리자만 조회).
+      </p>
+      <div className="grid grid-cols-2 gap-3">
+        <div>
+          <label className={labelClass}>거주 국가</label>
+          <input className={inputClass} value={homeCountry} onChange={(e) => setHomeCountry(e.target.value)} />
+        </div>
+        <div>
+          <label className={labelClass}>우편번호</label>
+          <input className={inputClass} value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
+        </div>
+        <div>
+          <label className={labelClass}>거주 자격</label>
+          <select className={inputClass} value={residencyStatus} onChange={(e) => setResidencyStatus(e.target.value as ResidencyStatus | "")}>
+            <option value="">선택 안 함</option>
+            <option value="us_resident">미국 거주자격 있음</option>
+            <option value="international">국제학생으로 지원</option>
+          </select>
+        </div>
+        <div>
+          <label className={labelClass}>성별</label>
+          <input className={inputClass} value={gender} onChange={(e) => setGender(e.target.value)} />
+        </div>
+        <div>
+          <label className={labelClass}>인종·민족</label>
+          <input className={inputClass} value={raceEthnicity} onChange={(e) => setRaceEthnicity(e.target.value)} />
+        </div>
+        <div>
+          <label className={labelClass}>재정지원 신청 계획</label>
+          <select
+            className={inputClass}
+            value={financialAidIntent}
+            onChange={(e) => setFinancialAidIntent(e.target.value as FinancialAidIntent | "")}
+          >
+            <option value="">선택 안 함</option>
+            <option value="planning">신청 예정</option>
+            <option value="not_planning">신청 안 함</option>
+            <option value="not_sure">아직 모름</option>
+          </select>
+        </div>
+        <div>
+          <label className={labelClass}>연간 최대 지불 가능액(USD)</label>
+          <input className={inputClass} type="number" min={0} value={maxAnnualBudget} onChange={(e) => setMaxAnnualBudget(e.target.value)} />
+        </div>
+        <div>
+          <label className={labelClass}>가구 소득 구간</label>
+          <input
+            className={inputClass}
+            placeholder="예: $60,001–$100,000"
+            value={householdIncomeRange}
+            onChange={(e) => setHouseholdIncomeRange(e.target.value)}
+          />
+        </div>
+        <div>
+          <label className={labelClass}>1세대 대학생 여부</label>
+          <select className={inputClass} value={firstGeneration} onChange={(e) => setFirstGeneration(e.target.value as FirstGeneration | "")}>
+            <option value="">선택 안 함</option>
+            <option value="yes">예</option>
+            <option value="no">아니오</option>
+            <option value="prefer_not_to_say">밝히지 않음</option>
+          </select>
+        </div>
+        <div>
+          <label className={labelClass}>운동부 리크루트 여부</label>
+          <select className={inputClass} value={recruitedAthlete} onChange={(e) => setRecruitedAthlete(e.target.value as RecruitedAthlete | "")}>
+            <option value="">선택 안 함</option>
+            <option value="yes">예</option>
+            <option value="maybe">고려 중</option>
+            <option value="no">아니오</option>
+          </select>
+        </div>
+        <div>
+          <label className={labelClass}>부모님 출신 대학(Legacy, 쉼표 구분)</label>
+          <input className={inputClass} value={legacySchools} onChange={(e) => setLegacySchools(e.target.value)} />
+        </div>
+        <div>
+          <label className={labelClass}>종교</label>
+          <input className={inputClass} value={religiousAffiliation} onChange={(e) => setReligiousAffiliation(e.target.value)} />
+        </div>
+        <div className="col-span-2">
+          <label className={labelClass}>관심 있는 특수 학교 유형</label>
+          <div className="flex flex-wrap gap-1.5">
+            {SPECIAL_SCHOOL_OPTIONS.map((opt) => (
+              <button
+                key={opt}
+                type="button"
+                onClick={() => toggleSpecialSchool(opt)}
+                className={
+                  "text-[11.5px] font-bold px-2.5 py-1 rounded-full border-[1.5px] " +
+                  (specialSchoolInterests.includes(opt) ? "bg-ink text-white border-ink" : "bg-white text-grey-500 border-grey-200")
+                }
+              >
+                {opt}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="col-span-2">
+          <button
+            type="button"
+            disabled={pending}
+            className={smallBtn}
+            onClick={() =>
+              run(() =>
+                roadmapActions.saveDemographics({
+                  studentId: data.studentId,
+                  homeCountry: homeCountry || null,
+                  zipCode: zipCode || null,
+                  residencyStatus: residencyStatus || null,
+                  gender: gender || null,
+                  raceEthnicity: raceEthnicity || null,
+                  financialAidIntent: financialAidIntent || null,
+                  maxAnnualBudget: maxAnnualBudget ? Number(maxAnnualBudget) : null,
+                  householdIncomeRange: householdIncomeRange || null,
+                  firstGeneration: firstGeneration || null,
+                  legacySchools: parseList(legacySchools),
+                  religiousAffiliation: religiousAffiliation || null,
+                  recruitedAthlete: recruitedAthlete || null,
+                  specialSchoolInterests,
+                })
+              )
+            }
+          >
+            저장
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function TestRecordsCard({
   data,
   readOnly,
@@ -299,6 +538,10 @@ function TestRecordsCard({
   const [testDate, setTestDate] = useState("");
   const [score, setScore] = useState("");
   const [notes, setNotes] = useState("");
+  const [scoreMath, setScoreMath] = useState("");
+  const [scoreReadingWriting, setScoreReadingWriting] = useState("");
+  const [scoreEnglish, setScoreEnglish] = useState("");
+  const [scoreScience, setScoreScience] = useState("");
 
   const kindLabel: Record<TestRecordKind, string> = {
     actual: "응시 이력",
@@ -316,7 +559,15 @@ function TestRecordsCard({
             <div>
               <span className="font-bold text-ink">{r.testType}</span> · {kindLabel[r.recordKind]}
               {r.testDate && <span className="text-grey-500"> · {r.testDate}</span>}
-              {r.score !== null && <span className="text-grey-500"> · {r.score}점</span>}
+              {r.score !== null && <span className="text-grey-500"> · 합계 {r.score}점</span>}
+              {(r.scoreMath !== null || r.scoreReadingWriting !== null || r.scoreEnglish !== null || r.scoreScience !== null) && (
+                <span className="text-grey-300">
+                  {" "}
+                  (Math {r.scoreMath ?? "-"}
+                  {r.testType === "ACT" ? `, Reading ${r.scoreReadingWriting ?? "-"}, English ${r.scoreEnglish ?? "-"}, Science ${r.scoreScience ?? "-"}` : `, RW ${r.scoreReadingWriting ?? "-"}`}
+                  )
+                </span>
+              )}
               {r.notes && <span className="text-grey-300"> ({r.notes})</span>}
             </div>
             {!readOnly && (
@@ -337,6 +588,7 @@ function TestRecordsCard({
           <select className={inputClass} value={testType} onChange={(e) => setTestType(e.target.value as TestType)}>
             <option value="SAT">SAT</option>
             <option value="ACT">ACT</option>
+            <option value="PSAT">PSAT</option>
           </select>
           <select
             className={inputClass}
@@ -351,10 +603,45 @@ function TestRecordsCard({
           <input
             className={inputClass}
             type="number"
-            placeholder="점수(선택)"
+            placeholder="합계 점수(선택)"
             value={score}
             onChange={(e) => setScore(e.target.value)}
           />
+          <div className="col-span-2 text-[11px] font-bold text-grey-300 uppercase tracking-wide">
+            섹션별 점수(선택, CollegeVine Test scores 탭 동등 항목)
+          </div>
+          <input
+            className={inputClass}
+            type="number"
+            placeholder="Math"
+            value={scoreMath}
+            onChange={(e) => setScoreMath(e.target.value)}
+          />
+          <input
+            className={inputClass}
+            type="number"
+            placeholder={testType === "ACT" ? "Reading" : "Reading and Writing"}
+            value={scoreReadingWriting}
+            onChange={(e) => setScoreReadingWriting(e.target.value)}
+          />
+          {testType === "ACT" && (
+            <>
+              <input
+                className={inputClass}
+                type="number"
+                placeholder="English"
+                value={scoreEnglish}
+                onChange={(e) => setScoreEnglish(e.target.value)}
+              />
+              <input
+                className={inputClass}
+                type="number"
+                placeholder="Science"
+                value={scoreScience}
+                onChange={(e) => setScoreScience(e.target.value)}
+              />
+            </>
+          )}
           <input
             className={inputClass + " col-span-2"}
             placeholder="메모(선택)"
@@ -375,10 +662,99 @@ function TestRecordsCard({
                     testDate: testDate || null,
                     score: score ? Number(score) : null,
                     notes: notes || null,
+                    scoreMath: scoreMath ? Number(scoreMath) : null,
+                    scoreReadingWriting: scoreReadingWriting ? Number(scoreReadingWriting) : null,
+                    scoreEnglish: scoreEnglish ? Number(scoreEnglish) : null,
+                    scoreScience: scoreScience ? Number(scoreScience) : null,
                   });
                   setTestDate("");
                   setScore("");
                   setNotes("");
+                  setScoreMath("");
+                  setScoreReadingWriting("");
+                  setScoreEnglish("");
+                  setScoreScience("");
+                })
+              }
+            >
+              추가
+            </button>
+          </div>
+        </div>
+      )}
+
+      <ApExamsSection data={data} readOnly={readOnly} pending={pending} run={run} />
+    </div>
+  );
+}
+
+function ApExamsSection({
+  data,
+  readOnly,
+  pending,
+  run,
+}: {
+  data: RoadmapData;
+  readOnly: boolean;
+  pending: boolean;
+  run: (fn: () => Promise<void>) => void;
+}) {
+  const [courseName, setCourseName] = useState("");
+  const [examYear, setExamYear] = useState("");
+  const [apScore, setApScore] = useState("");
+
+  return (
+    <div className="mt-4 pt-3 border-t border-grey-100">
+      <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-1.5">
+        AP 시험(CollegeVine AP Exams 동등 항목, 선택)
+      </div>
+      {data.apExams.length === 0 && <div className="text-[12.5px] text-grey-300 mb-2">등록된 AP 시험이 없습니다.</div>}
+      {data.apExams.map((a) => (
+        <div key={a.id} className="flex items-center justify-between text-[12.5px] border-b border-grey-100 py-1.5">
+          <div>
+            <span className="font-bold text-ink">{a.courseName}</span>
+            {a.examYear && <span className="text-grey-500"> · {a.examYear}</span>}
+            {a.score !== null && <span className="text-grey-500"> · {a.score}점</span>}
+          </div>
+          {!readOnly && (
+            <button
+              type="button"
+              className={dangerBtn}
+              disabled={pending}
+              onClick={() => run(() => roadmapActions.removeApExam(data.studentId, a.id))}
+            >
+              삭제
+            </button>
+          )}
+        </div>
+      ))}
+      {!readOnly && (
+        <div className="grid grid-cols-3 gap-2 mt-2">
+          <input
+            className={inputClass}
+            placeholder="과목명(예: AP Physics C)"
+            value={courseName}
+            onChange={(e) => setCourseName(e.target.value)}
+          />
+          <input className={inputClass} type="number" placeholder="연도" value={examYear} onChange={(e) => setExamYear(e.target.value)} />
+          <input className={inputClass} type="number" min={1} max={5} placeholder="점수(1-5)" value={apScore} onChange={(e) => setApScore(e.target.value)} />
+          <div className="col-span-3">
+            <button
+              type="button"
+              className={smallBtn}
+              disabled={pending || !courseName.trim()}
+              onClick={() =>
+                run(async () => {
+                  await roadmapActions.addApExam({
+                    studentId: data.studentId,
+                    courseName,
+                    status: "completed",
+                    examYear: examYear ? Number(examYear) : null,
+                    score: apScore ? Number(apScore) : null,
+                  });
+                  setCourseName("");
+                  setExamYear("");
+                  setApScore("");
                 })
               }
             >
@@ -405,6 +781,7 @@ function ActivitiesAndAwardsCard({
   const [activityName, setActivityName] = useState("");
   const [field, setField] = useState("");
   const [role, setRole] = useState("");
+  const [tier, setTier] = useState<ActivityTier | "">("");
 
   const [awardName, setAwardName] = useState("");
   const [awardLevel, setAwardLevel] = useState("");
@@ -420,6 +797,7 @@ function ActivitiesAndAwardsCard({
             <span className="font-bold text-ink">{a.activityName}</span>
             {a.field && <span className="text-grey-500"> · {a.field}</span>}
             {a.role && <span className="text-grey-500"> · {a.role}</span>}
+            {a.tier && <span className="text-grey-500"> · {ACTIVITY_TIER_LABELS[a.tier]}</span>}
             {a.leadershipSummary && <div className="text-grey-300 text-[11.5px]">리더십: {a.leadershipSummary}</div>}
             {a.achievementSummary && <div className="text-grey-300 text-[11.5px]">성과: {a.achievementSummary}</div>}
           </div>
@@ -445,6 +823,14 @@ function ActivitiesAndAwardsCard({
           />
           <input className={inputClass} placeholder="분야" value={field} onChange={(e) => setField(e.target.value)} />
           <input className={inputClass} placeholder="역할" value={role} onChange={(e) => setRole(e.target.value)} />
+          <select className={inputClass + " col-span-3"} value={tier} onChange={(e) => setTier(e.target.value as ActivityTier | "")}>
+            <option value="">등급(선택, 자기평가)</option>
+            {(Object.keys(ACTIVITY_TIER_LABELS) as ActivityTier[]).map((t) => (
+              <option key={t} value={t}>
+                {ACTIVITY_TIER_LABELS[t]}
+              </option>
+            ))}
+          </select>
           <div className="col-span-3">
             <button
               type="button"
@@ -458,6 +844,7 @@ function ActivitiesAndAwardsCard({
                     description: null,
                     field: field || null,
                     role: role || null,
+                    tier: tier || null,
                     startDate: null,
                     endDate: null,
                     isOngoing: false,
@@ -468,6 +855,7 @@ function ActivitiesAndAwardsCard({
                   setActivityName("");
                   setField("");
                   setRole("");
+                  setTier("");
                 })
               }
             >

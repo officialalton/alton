@@ -1,6 +1,6 @@
 // P9 학생 프로필·로드맵 V1 — 공유 타입. supabase/migrations/20261420000000 스키마와 1:1 대응.
 
-export type TestType = "SAT" | "ACT";
+export type TestType = "SAT" | "ACT" | "PSAT";
 export type TestRecordKind = "actual" | "target" | "planned";
 export type PrepItemType =
   | "essay"
@@ -37,6 +37,13 @@ export interface AcademicProfile {
   graduationYear: number | null;
   curriculumType: string | null;
   currentSubjects: string[];
+  // 2026-09-19 확장(CollegeVine Coursework 탭 동등 항목).
+  honorsCount: number | null;
+  apCount: number | null;
+  collegeCoursesCount: number | null;
+  ibHlCount: number | null;
+  ibSlCount: number | null;
+  schoolApIbOfferedCount: number | null;
 }
 
 export interface TestRecord {
@@ -46,7 +53,41 @@ export interface TestRecord {
   testDate: string | null;
   score: number | null;
   notes: string | null;
+  // 2026-09-19 확장 — SAT/PSAT: scoreMath+scoreReadingWriting. ACT: scoreMath+scoreReadingWriting(Reading)+scoreEnglish+scoreScience.
+  scoreMath: number | null;
+  scoreReadingWriting: number | null;
+  scoreEnglish: number | null;
+  scoreScience: number | null;
 }
+
+export type FinancialAidIntent = "planning" | "not_planning" | "not_sure";
+export type FirstGeneration = "yes" | "no" | "prefer_not_to_say";
+export type RecruitedAthlete = "yes" | "maybe" | "no";
+export type ResidencyStatus = "us_resident" | "international";
+
+export interface Demographics {
+  homeCountry: string | null;
+  zipCode: string | null;
+  residencyStatus: ResidencyStatus | null;
+  gender: string | null;
+  raceEthnicity: string | null;
+  financialAidIntent: FinancialAidIntent | null;
+  maxAnnualBudget: number | null;
+  householdIncomeRange: string | null;
+  firstGeneration: FirstGeneration | null;
+  legacySchools: string[];
+  religiousAffiliation: string | null;
+  recruitedAthlete: RecruitedAthlete | null;
+  specialSchoolInterests: string[];
+}
+
+export type ActivityTier = "exceptional" | "strong" | "solid" | "standard";
+export const ACTIVITY_TIER_LABELS: Record<ActivityTier, string> = {
+  exceptional: "Exceptional — 전국/국제 최상위 성과",
+  strong: "Strong — 주/지역 상위 또는 학교 내 최고 직책",
+  solid: "Solid — 꾸준한 참여 + 일부 성과",
+  standard: "Standard — 일반 참여",
+};
 
 export interface CollegeInterests {
   intendedMajors: string[];
@@ -69,6 +110,15 @@ export interface ActivityAward {
   totalHours: number | null;
   leadershipSummary: string | null;
   achievementSummary: string | null;
+  tier: ActivityTier | null;
+}
+
+export interface ApExam {
+  id: string;
+  courseName: string;
+  status: "planned" | "taking" | "completed";
+  examYear: number | null;
+  score: number | null;
 }
 
 export interface Award {
@@ -114,6 +164,8 @@ export interface RoadmapData {
   gpa: number | null;
   academicProfile: AcademicProfile;
   testRecords: TestRecord[];
+  apExams: ApExam[];
+  demographics: Demographics;
   collegeInterests: CollegeInterests;
   activities: ActivityAward[];
   awards: Award[];
