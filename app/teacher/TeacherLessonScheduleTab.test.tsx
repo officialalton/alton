@@ -3,17 +3,19 @@ import { describe, expect, it, vi, beforeEach } from "vitest";
 import TeacherLessonScheduleTab from "./TeacherLessonScheduleTab";
 import type { TeacherLessonScheduleItem } from "./lesson-schedule-actions";
 import {
-  listMyTrialSessionsNeedingReview,
+  listMySessionsNeedingReview,
   listActiveReviewCategories,
-  saveTrialLessonReviewDraft,
-  finalizeTrialLessonReview,
+  saveLessonReviewDraft,
+  finalizeLessonReview,
+  teacherEditFinalizedLessonReview,
 } from "./trial-review-actions";
 
 vi.mock("./trial-review-actions", () => ({
-  listMyTrialSessionsNeedingReview: vi.fn(),
+  listMySessionsNeedingReview: vi.fn(),
   listActiveReviewCategories: vi.fn(),
-  saveTrialLessonReviewDraft: vi.fn(),
-  finalizeTrialLessonReview: vi.fn(),
+  saveLessonReviewDraft: vi.fn(),
+  finalizeLessonReview: vi.fn(),
+  teacherEditFinalizedLessonReview: vi.fn(),
 }));
 
 const refreshMock = vi.fn();
@@ -519,13 +521,16 @@ describe("TeacherLessonScheduleTab", () => {
     // 둘 다 종료 처리(finalStatus completed)됐으므로 지난 수업으로 넘어가 접혀
     // 있다 — 리뷰 확정 여부는 더 이상 예정/지난 분류에 영향을 주지 않는다
     // (2026-09-17 정정 — 이전에는 체험 리뷰 미확정 시 예정된 수업에 남아있었다).
+    // 리뷰 작성 버튼 자체는 2026-09-17(제품 오너 피드백)부터 체험/정규 모두에
+    // 뜬다(체험 전용 제한 폐기) — 둘 다 완료(completed)+리뷰 미확정이므로 두
+    // 카드 모두 "수업 리뷰 작성" 버튼이 있다.
     expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
     expect(screen.getByText(/지난 수업 \(2\)/)).toBeInTheDocument();
     expect(screen.queryByText("정규")).not.toBeInTheDocument();
     expect(screen.queryByText("수업 리뷰 작성")).not.toBeInTheDocument();
     fireEvent.click(screen.getByText(/지난 수업 \(2\)/));
     expect(screen.getByText("정규")).toBeInTheDocument();
-    expect(screen.getByText("수업 리뷰 작성")).toBeInTheDocument();
+    expect(screen.getAllByText("수업 리뷰 작성")).toHaveLength(2);
     vi.useRealTimers();
   });
 
@@ -536,7 +541,7 @@ describe("TeacherLessonScheduleTab", () => {
       finalStatus: "completed",
       reviewStatus: "none",
     };
-    (listMyTrialSessionsNeedingReview as ReturnType<typeof vi.fn>).mockResolvedValue([
+    (listMySessionsNeedingReview as ReturnType<typeof vi.fn>).mockResolvedValue([
       {
         sessionId: trialNeedingReview.sessionId,
         subjectEnrollmentId: trialNeedingReview.subjectEnrollmentId,
@@ -548,8 +553,8 @@ describe("TeacherLessonScheduleTab", () => {
         categoryNotes: {},
       },
     ]);
-    (saveTrialLessonReviewDraft as ReturnType<typeof vi.fn>).mockResolvedValue({ reviewId: "rev1" });
-    (finalizeTrialLessonReview as ReturnType<typeof vi.fn>).mockResolvedValue({ reviewId: "rev1" });
+    (saveLessonReviewDraft as ReturnType<typeof vi.fn>).mockResolvedValue({ reviewId: "rev1" });
+    (finalizeLessonReview as ReturnType<typeof vi.fn>).mockResolvedValue({ reviewId: "rev1" });
     const onRefresh = vi.fn().mockResolvedValue(undefined);
 
     render(
@@ -570,7 +575,7 @@ describe("TeacherLessonScheduleTab", () => {
     // 있으므로 펼친 뒤에 리뷰 작성 버튼을 찾는다.
     fireEvent.click(screen.getByText(/지난 수업 \(1\)/));
     fireEvent.click(screen.getByText("수업 리뷰 작성"));
-    await waitFor(() => expect(listMyTrialSessionsNeedingReview).toHaveBeenCalled());
+    await waitFor(() => expect(listMySessionsNeedingReview).toHaveBeenCalled());
     expect(await screen.findByText("수업 리뷰 작성", { selector: "h2" })).toBeInTheDocument();
 
     const textarea = await screen.findByLabelText("고객에게 보여줄 종합 의견");
@@ -579,7 +584,7 @@ describe("TeacherLessonScheduleTab", () => {
     fireEvent.click(screen.getByRole("button", { name: "네, 공개합니다" }));
 
     await waitFor(() =>
-      expect(finalizeTrialLessonReview).toHaveBeenCalledWith({
+      expect(finalizeLessonReview).toHaveBeenCalledWith({
         sessionId: trialNeedingReview.sessionId,
         finalText: "체험 수업 리뷰 내용",
       })
@@ -595,7 +600,7 @@ describe("TeacherLessonScheduleTab", () => {
       finalStatus: "completed",
       reviewStatus: "none",
     };
-    (listMyTrialSessionsNeedingReview as ReturnType<typeof vi.fn>).mockResolvedValue([
+    (listMySessionsNeedingReview as ReturnType<typeof vi.fn>).mockResolvedValue([
       {
         sessionId: trialNeedingReview.sessionId,
         subjectEnrollmentId: trialNeedingReview.subjectEnrollmentId,
@@ -627,7 +632,7 @@ describe("TeacherLessonScheduleTab", () => {
     await screen.findByText("수업 리뷰 작성", { selector: "h2" });
     fireEvent.click(screen.getByText("닫기"));
     expect(screen.queryByText("수업 리뷰 작성", { selector: "h2" })).not.toBeInTheDocument();
-    expect(finalizeTrialLessonReview).not.toHaveBeenCalled();
+    expect(finalizeLessonReview).not.toHaveBeenCalled();
   });
 
   it("이미 리뷰가 확정된 체험 수업은 리뷰 작성 버튼을 보여주지 않는다", () => {
@@ -651,5 +656,86 @@ describe("TeacherLessonScheduleTab", () => {
       />
     );
     expect(screen.queryByText("수업 리뷰 작성")).not.toBeInTheDocument();
+  });
+
+  it("2026-09-17(제품 오너 피드백): 완료된 정규 수업도 체험과 동일하게 '수업 리뷰 작성' 버튼을 보여준다(체험 전용 제한 폐기)", () => {
+    const regularNeedingReview: TeacherLessonScheduleItem = {
+      ...lesson,
+      isTrial: false,
+      finalStatus: "completed",
+      reviewStatus: "none",
+    };
+    render(
+      <TeacherLessonScheduleTab
+        lessons={[regularNeedingReview]}
+        exceptions={[]}
+        timezone="America/Los_Angeles"
+        onCancel={vi.fn()}
+        onRefresh={vi.fn()}
+        onLoadExternalBusy={vi.fn().mockResolvedValue([])}
+        onStartSession={vi.fn()}
+        onFinalizeSession={vi.fn()}
+        onResolveLateness={vi.fn()}
+      />
+    );
+    fireEvent.click(screen.getByText(/지난 수업 \(1\)/));
+    expect(screen.getByText("수업 리뷰 작성")).toBeInTheDocument();
+  });
+
+  it("확정된 체험 리뷰는 '리뷰 수정' 버튼으로 정정할 수 있고, 정정 시 teacherEditFinalizedLessonReview가 호출된다", async () => {
+    const trialReviewed: TeacherLessonScheduleItem = {
+      ...lesson,
+      isTrial: true,
+      finalStatus: "completed",
+      reviewStatus: "final",
+    };
+    (listMySessionsNeedingReview as ReturnType<typeof vi.fn>).mockResolvedValue([
+      {
+        sessionId: trialReviewed.sessionId,
+        subjectEnrollmentId: trialReviewed.subjectEnrollmentId,
+        startsAt: trialReviewed.startsAt,
+        finalStatus: "completed",
+        reviewStatus: "final",
+        aiSummary: "미팅록 요약",
+        draftText: "초안",
+        finalText: "확정된 리뷰 내용",
+        categoryNotes: {},
+      },
+    ]);
+    (teacherEditFinalizedLessonReview as ReturnType<typeof vi.fn>).mockResolvedValue(undefined);
+    const onRefresh = vi.fn().mockResolvedValue(undefined);
+
+    render(
+      <TeacherLessonScheduleTab
+        lessons={[trialReviewed]}
+        exceptions={[]}
+        timezone="America/Los_Angeles"
+        onCancel={vi.fn()}
+        onRefresh={onRefresh}
+        onLoadExternalBusy={vi.fn().mockResolvedValue([])}
+        onStartSession={vi.fn()}
+        onFinalizeSession={vi.fn()}
+        onResolveLateness={vi.fn()}
+      />
+    );
+
+    fireEvent.click(screen.getByText(/지난 수업 \(1\)/));
+    fireEvent.click(screen.getByText("리뷰 수정"));
+    expect(await screen.findByText("수업 리뷰 정정", { selector: "h2" })).toBeInTheDocument();
+
+    const textarea = await screen.findByLabelText("고객에게 보여줄 종합 의견");
+    expect(textarea).toHaveValue("확정된 리뷰 내용");
+    fireEvent.change(textarea, { target: { value: "정정된 리뷰 내용" } });
+    fireEvent.click(screen.getByRole("button", { name: "정정 저장" }));
+
+    await waitFor(() =>
+      expect(teacherEditFinalizedLessonReview).toHaveBeenCalledWith({
+        sessionId: trialReviewed.sessionId,
+        finalText: "정정된 리뷰 내용",
+        categoryNotes: { overall: "" },
+      })
+    );
+    await waitFor(() => expect(screen.queryByText("수업 리뷰 정정", { selector: "h2" })).not.toBeInTheDocument());
+    expect(onRefresh).toHaveBeenCalled();
   });
 });
