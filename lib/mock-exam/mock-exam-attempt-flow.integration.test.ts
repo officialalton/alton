@@ -1,4 +1,5 @@
 import { execFileSync } from "node:child_process";
+import { createClient } from "@supabase/supabase-js";
 import { beforeAll, describe, expect, it } from "vitest";
 
 // 고정형 SAT 모의고사 V1 — 배정 → 응시 → 제출 → 채점 확정 흐름의 DB 레벨(RLS 포함) 검증.
@@ -12,6 +13,15 @@ const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001";
 // 시드 데이터에서 STUDENT_ID는 이미 이 household의 child다(household_members_one_household_per_child
 // 유니크 제약 — 학생당 household는 하나뿐이라 새로 만들지 않고 기존 보호자를 재사용한다).
 const GUARDIAN_ID = "bbbbbbbb-0000-0000-0000-000000000001";
+
+// PostgREST(실제 REST API)를 직접 태우는 클라이언트 — psql 헬퍼는 raw SQL로 DB에
+// 바로 붙기 때문에 nested-select 임베드 문법의 관계 이름 오류(PostgREST 스키마 캐시
+// "Could not find a relationship..." 오류)를 전혀 잡아내지 못한다. 실제로 그 문제가
+// 있었다(enrollments/mock_exam_attempts → profiles 임베드가 실제로는 students를 가리키는
+// FK 제약을 참조해 렌더링이 전부 깨짐) — 그 회귀를 잡으려면 아래처럼 실제 REST API를 호출해야 한다.
+const SERVICE_ROLE_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImV4cCI6MTk4MzgxMjk5Nn0.EGIM96RAZx35lJzdJsyH-qQwv8Hdp7fsn3W0YpN81IU";
+const restClient = createClient("http://127.0.0.1:54421", SERVICE_ROLE_KEY);
 
 function psql(sql: string): string {
   return execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-q", "-t", "-A", "-c", sql], { encoding: "utf-8" }).trim();
@@ -167,5 +177,38 @@ describe("모의고사 응시 — 학생이 자기 응시만 답하고 제출할
   it("무관한 학생·교사에게는 이 응시 기록이 보이지 않는다", () => {
     expect(asUser(otherStudentId, `select count(*) from mock_exam_attempts where id = '${attemptId}';`)).toBe("0");
     expect(asUser(otherTeacherId, `select count(*) from mock_exam_attempts where id = '${attemptId}';`)).toBe("0");
+  });
+});
+
+// 회귀 테스트 — 위 describe 블록들은 psql(raw SQL)로만 검증해 실제 PostgREST 스키마
+// 캐시 오류("Could not find a relationship between 'enrollments'/'mock_exam_attempts'
+// and 'profiles' in the schema cache")를 잡아내지 못했다. 아래는 실제 supabase-js
+// 클라이언트 + 로컬 REST API로 데이터 레이어 함수를 직접 호출해 그 오류가 재발하지
+// 않는지 확인한다(enrollments.student_id/mock_exam_attempts.student_id는 profiles가
+// 아니라 students(id)를 참조하므로 `profiles!<fk이름>` 임베드는 항상 깨진다 —
+// students.id가 곧 profiles.id인 점을 이용해 profiles를 별도 조회해야 한다).
+describe("모의고사 데이터 레이어 — 실제 PostgREST로 profiles 임베드 회귀 확인", () => {
+  it("loadTeacherMockExamStudents는 enrollments→profiles 스키마 캐시 오류 없이 학생 이름을 반환한다", async () => {
+    const { loadTeacherMockExamStudents } = await import("../../app/teacher/mock-exam-assign-data");
+    const students = await loadTeacherMockExamStudents(restClient as never, TEACHER_ID);
+    const target = students.find((s) => s.studentId === STUDENT_ID);
+    expect(target).toBeDefined();
+    expect(target?.studentName).toBe("지훈");
+  });
+
+  it("loadStudentMockExamAttempts는 mock_exam_attempts→profiles 스키마 캐시 오류 없이 목록을 반환한다", async () => {
+    const { loadStudentMockExamAttempts } = await import("./attempt-data");
+    const attempts = await loadStudentMockExamAttempts(restClient as never, STUDENT_ID);
+    expect(attempts.length).toBeGreaterThan(0);
+    expect(attempts[0].studentId).toBe(STUDENT_ID);
+    expect(attempts[0].studentName).toBe("지훈");
+  });
+
+  it("loadMockExamAttemptDetail은 응시 상세에서도 학생 이름을 정상 해석한다", async () => {
+    const attemptId = psql(`select id from mock_exam_attempts where exam_set_id = '${examSetId}' and student_id = '${STUDENT_ID}';`);
+    const { loadMockExamAttemptDetail } = await import("./attempt-data");
+    const detail = await loadMockExamAttemptDetail(restClient as never, attemptId);
+    expect(detail).not.toBeNull();
+    expect(detail?.studentName).toBe("지훈");
   });
 });

@@ -71,10 +71,13 @@ function firstOf<T>(v: T | T[] | null | undefined): T | null {
   return Array.isArray(v) ? (v[0] ?? null) : (v ?? null);
 }
 
+// `mock_exam_attempts.student_id`는 `students(id)`를 참조한다(profiles가 아니다) —
+// `profiles!mock_exam_attempts_student_id_fkey` nested-select는 PostgREST가 그 제약을
+// students 테이블로 해석해 "no relationship" 스키마 캐시 오류를 낸다. `students.id`가
+// 곧 `profiles.id`(1:1 확장 테이블)이므로 student_id를 profiles에 별도 조회해 붙인다.
 const SUMMARY_COLUMNS = `
   id, exam_set_id, student_id, status, due_at, start_by, started_at, submitted_at, graded_at,
-  exam_set:mock_exam_sets!mock_exam_attempts_exam_set_id_fkey(name, difficulty_tier),
-  student:profiles!mock_exam_attempts_student_id_fkey(name)
+  exam_set:mock_exam_sets!mock_exam_attempts_exam_set_id_fkey(name, difficulty_tier)
 `;
 
 async function withCounts(
@@ -90,16 +93,18 @@ async function withCounts(
     submitted_at: string | null;
     graded_at: string | null;
     exam_set: { name: string; difficulty_tier: string } | { name: string; difficulty_tier: string }[] | null;
-    student: { name: string | null } | { name: string | null }[] | null;
   }[],
 ): Promise<MockExamAttemptSummary[]> {
   if (rows.length === 0) return [];
   const attemptIds = rows.map((r) => r.id);
   const examSetIds = [...new Set(rows.map((r) => r.exam_set_id))];
-  const [{ data: itemCounts }, { data: answerCounts }] = await Promise.all([
+  const studentIds = [...new Set(rows.map((r) => r.student_id))];
+  const [{ data: itemCounts }, { data: answerCounts }, { data: profiles }] = await Promise.all([
     supabase.from("mock_exam_set_items").select("exam_set_id").in("exam_set_id", examSetIds),
     supabase.from("mock_exam_answers").select("attempt_id, correct").in("attempt_id", attemptIds),
+    supabase.from("profiles").select("id, name").in("id", studentIds),
   ]);
+  const nameByStudentId = new Map((profiles ?? []).map((p) => [p.id, p.name]));
   const totalBySet = new Map<string, number>();
   for (const r of itemCounts ?? []) totalBySet.set(r.exam_set_id, (totalBySet.get(r.exam_set_id) ?? 0) + 1);
   const correctByAttempt = new Map<string, number>();
@@ -116,7 +121,7 @@ async function withCounts(
       examSetName: set?.name ?? "모의고사",
       difficultyTier: set?.difficulty_tier ?? "standard",
       studentId: r.student_id,
-      studentName: firstOf(r.student)?.name ?? null,
+      studentName: nameByStudentId.get(r.student_id) ?? null,
       status: r.status,
       dueAt: r.due_at,
       startBy: r.start_by,
@@ -165,8 +170,7 @@ export async function loadMockExamAttemptDetail(supabase: SupabaseClient, attemp
     .from("mock_exam_attempts")
     .select(
       `id, exam_set_id, student_id, status, due_at, start_by, max_attempts, attempt_count, started_at, submitted_at, graded_at, time_remaining_seconds,
-       exam_set:mock_exam_sets!mock_exam_attempts_exam_set_id_fkey(name, difficulty_tier, rw_time_limit_minutes, math_time_limit_minutes, math_calculator_allowed, math_reference_sheet_allowed),
-       student:profiles!mock_exam_attempts_student_id_fkey(name)`,
+       exam_set:mock_exam_sets!mock_exam_attempts_exam_set_id_fkey(name, difficulty_tier, rw_time_limit_minutes, math_time_limit_minutes, math_calculator_allowed, math_reference_sheet_allowed)`,
     )
     .eq("id", attemptId)
     .maybeSingle();
@@ -194,6 +198,13 @@ export async function loadMockExamAttemptDetail(supabase: SupabaseClient, attemp
   ]);
   if (itemsErr) throw new Error(itemsErr.message);
   if (answersErr) throw new Error(answersErr.message);
+
+  const { data: studentProfile, error: studentProfileErr } = await supabase
+    .from("profiles")
+    .select("name")
+    .eq("id", attempt.student_id)
+    .maybeSingle();
+  if (studentProfileErr) throw new Error(studentProfileErr.message);
 
   const answerByItem = new Map((answers ?? []).map((a) => [a.set_item_id, a]));
   const resultsVisible = attempt.status === "graded";
@@ -237,7 +248,7 @@ export async function loadMockExamAttemptDetail(supabase: SupabaseClient, attemp
     examSetName: set?.name ?? "모의고사",
     difficultyTier: set?.difficulty_tier ?? "standard",
     studentId: attempt.student_id,
-    studentName: firstOf(attempt.student as { name: string | null } | { name: string | null }[] | null)?.name ?? null,
+    studentName: studentProfile?.name ?? null,
     status: attempt.status,
     dueAt: attempt.due_at,
     startBy: attempt.start_by,

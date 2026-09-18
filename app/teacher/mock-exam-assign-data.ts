@@ -9,16 +9,23 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 export type TeacherMockExamStudent = { studentId: string; studentName: string | null };
 
 export async function loadTeacherMockExamStudents(supabase: SupabaseClient, teacherId: string): Promise<TeacherMockExamStudent[]> {
+  // `enrollments.student_id`는 `students(id)`를 참조한다(profiles가 아니다) — 그래서
+  // `profiles!enrollments_student_id_fkey` 형태의 nested-select는 PostgREST가 그 제약을
+  // students 테이블로 해석해 "no relationship" 스키마 캐시 오류를 낸다. `students.id`가
+  // 곧 `profiles.id`(1:1 확장 테이블)이므로, student_id 목록을 profiles에 별도 조회해
+  // 붙인다(app/student/teacher-data.ts와 동일 패턴).
   const { data, error } = await supabase
     .from("enrollments")
-    .select("student_id, student:profiles!enrollments_student_id_fkey(name)")
+    .select("student_id")
     .eq("teacher_id", teacherId)
     .eq("status", "active");
   if (error) throw new Error(error.message);
-  const seen = new Map<string, TeacherMockExamStudent>();
-  for (const row of data ?? []) {
-    const student = Array.isArray(row.student) ? row.student[0] : row.student;
-    seen.set(row.student_id, { studentId: row.student_id, studentName: student?.name ?? null });
-  }
-  return [...seen.values()];
+  const studentIds = [...new Set((data ?? []).map((row) => row.student_id))];
+  if (studentIds.length === 0) return [];
+
+  const { data: profiles, error: profilesError } = await supabase.from("profiles").select("id, name").in("id", studentIds);
+  if (profilesError) throw new Error(profilesError.message);
+  const nameById = new Map((profiles ?? []).map((p) => [p.id, p.name]));
+
+  return studentIds.map((studentId) => ({ studentId, studentName: nameById.get(studentId) ?? null }));
 }
