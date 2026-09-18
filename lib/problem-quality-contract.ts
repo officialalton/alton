@@ -178,7 +178,98 @@ export function checkQualityContract(input: ContractInput): ContractResult {
     if (ans.length >= 40 && input.stimulus.toLowerCase().includes(ans.toLowerCase().replace(/[.]$/, ""))) issues.push({ code: "contract_answer", message: "정답 선택지 문장이 지문에 그대로 들어 있습니다 — 정답 노출." });
   }
 
+  // Bug A(2026-09-17) — 빈칸 완성형 선택지의 지문 축자 복제.
+  if (isMc && code && VERBATIM_ECHO_SKILLS.has(code) && opts.length) {
+    const echoIssue = findVerbatimEcho(input.stimulus, opts);
+    if (echoIssue) issues.push(echoIssue);
+  }
+  // Bug B(2026-09-17) — transitions 선택지 구조 비대칭(정답만 문법 형태가 다름).
+  if (isMc && code === "transitions" && opts.length) {
+    issues.push(...checkTransitionParallelism(opts));
+  }
+
   return { ok: issues.length === 0, issues: dedupeIssues(issues), contract };
+}
+
+// ---------------------------------------------------------------------------------- Bug A/B (2026-09-17 제품 오너 발견)
+//
+// 실제 배치에서 발견된 R&W 콘텐츠 결함 2건 — evidence-model-check 의 "AI 자기 보고를 신뢰하지 않고 문자열로
+// 직접 확인" 원칙을 그대로 적용한다.
+//
+// Bug A — 빈칸 완성형(boundaries/form_structure_sense/transitions/inferences) 선택지가 지문에 이미 있는 문장을
+// 그대로(정규화 허용) 복제한 사례(예: Sylvia Earle 지문). 학생이 문법·논리를 판단하지 않고 문자열 패턴매칭으로
+// 답을 찾을 수 있게 되어 문항의 취지를 해친다. words_in_context(단어 하나)·command_of_evidence_text(인용이 곧
+// 정답 근거이므로 축자 일치가 정상)는 대상에서 제외한다 — 그 두 유형은 지문 내용을 그대로 가리키는 것이 정답 구조다.
+const VERBATIM_ECHO_SKILLS = new Set(["boundaries", "form_structure_sense", "transitions", "inferences"]);
+
+function normalizeWords(s: string): string[] {
+  return s
+    .toLowerCase()
+    .normalize("NFKC")
+    .replace(/[‘’]/g, "'")
+    .replace(/[“”]/g, '"')
+    .replace(/[^\p{L}\p{N}\s]/gu, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .split(" ")
+    .filter(Boolean);
+}
+
+const ECHO_MIN_WORDS = 6;
+
+/** 선택지 중 하나라도 지문과 6단어 이상 연속으로(정규화 허용) 겹치면 축자 복제로 본다. */
+function findVerbatimEcho(passage: string, options: string[]): FigureIssue | null {
+  const passageWords = normalizeWords(passage);
+  if (passageWords.length < ECHO_MIN_WORDS) return null;
+  const passageNgrams = new Set<string>();
+  for (let i = 0; i <= passageWords.length - ECHO_MIN_WORDS; i += 1) {
+    passageNgrams.add(passageWords.slice(i, i + ECHO_MIN_WORDS).join(" "));
+  }
+  for (const opt of options) {
+    const optWords = normalizeWords(opt);
+    if (optWords.length < ECHO_MIN_WORDS) continue;
+    for (let i = 0; i <= optWords.length - ECHO_MIN_WORDS; i += 1) {
+      const gram = optWords.slice(i, i + ECHO_MIN_WORDS).join(" ");
+      if (passageNgrams.has(gram)) {
+        return { code: "contract_option_echo", message: `선택지 "${opt.slice(0, 80)}" 가 지문에 이미 있는 문구("${gram}")를 6단어 이상 그대로 복제했습니다 — 빈칸 완성형 선택지는 지문을 복사-붙여넣기 한 것이 아니라 직접 지어낸 문장이어야 합니다(패턴매칭으로 답을 찾을 수 없게).` };
+      }
+    }
+  }
+  return null;
+}
+
+// Bug B — transitions 문항의 선택지 4개가 서로 다른 문법 형태(예: 정답만 "Given these findings," 같은 분사구/전치사구,
+// 나머지는 "Similarly,"/"For instance," 같은 단일 전환어)면 정답이 논리 관계가 아니라 형태만으로 드러난다. 실제
+// SAT 전환어 문항의 표준 전환어/구 목록으로 화이트리스트를 두고, 거기 없으면서 지시어+명사(구체적 내용 지칭) 또는
+// 4단어를 넘는 선택지를 구조 이질로 본다.
+const TRANSITION_WHITELIST = new Set([
+  "however", "similarly", "nevertheless", "for example", "for instance", "in fact", "consequently",
+  "therefore", "thus", "moreover", "furthermore", "additionally", "in addition", "meanwhile",
+  "in contrast", "on the other hand", "conversely", "likewise", "in other words", "as a result",
+  "for this reason", "in short", "in summary", "specifically", "indeed", "still", "yet",
+  "nonetheless", "accordingly", "hence", "otherwise", "by contrast", "in particular", "above all",
+  "in conclusion", "first", "second", "finally", "alternatively", "granted", "admittedly",
+]);
+
+function normalizeTransition(o: string): string {
+  return o.trim().replace(/,\s*$/, "").toLowerCase();
+}
+
+function checkTransitionParallelism(options: string[]): FigureIssue[] {
+  const issues: FigureIssue[] = [];
+  for (const o of options) {
+    const norm = normalizeTransition(o);
+    if (TRANSITION_WHITELIST.has(norm)) continue;
+    const wordCount = norm.split(/\s+/).filter(Boolean).length;
+    const hasDemonstrativeNoun = /\b(this|that|these|those)\s+\w+/i.test(o);
+    if (hasDemonstrativeNoun || wordCount > 3) {
+      issues.push({
+        code: "contract_transition_parallel",
+        message: `선택지 "${o}" 가 표준 전환어 목록에 없고 ${hasDemonstrativeNoun ? "지시어+명사로 구체적 내용을 지칭" : `${wordCount}단어로 다른 선택지보다 김`}합니다 — transitions 문항은 4개 선택지 모두 같은 문법 형태(짧은 전환어/구)여야 정답을 논리 관계로만 고를 수 있습니다.`,
+      });
+    }
+  }
+  return issues;
 }
 
 function dedupeIssues(list: FigureIssue[]): FigureIssue[] {

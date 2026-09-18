@@ -97,6 +97,57 @@ describe("독립 품질 검사 판정", () => {
   });
 });
 
+describe("Bug A/B(2026-09-17) — 빈칸 완성형 축자 복제·transitions 선택지 비대칭", () => {
+  const fss = {
+    ...wic, skillCode: "form_structure_sense",
+    stimulus:
+      "Sylvia Earle has spent decades studying the ocean's ecosystems firsthand as a research diver and expedition leader. ______ Her decades of fieldwork have made her one of the most respected marine biologists alive today.",
+    question: "Which choice completes the text so that it conforms to the conventions of Standard English?",
+    options: [
+      "Earle possesses a firsthand understanding of marine ecosystems that few scientists can claim.",
+      "Earle possess a firsthand understanding of marine ecosystems that few scientists can claim.",
+      "Earle, possesses a firsthand understanding of marine ecosystems that few scientists can claim.",
+      "Earle possessing a firsthand understanding of marine ecosystems that few scientists can claim.",
+    ],
+    correctIndex: 0,
+  };
+  it("정답 선택지가 지문과 6단어 이상 그대로 겹치면(Sylvia Earle 사례) 축자 복제로 거부", () => {
+    const stimulusWithEcho =
+      "Sylvia Earle possesses a firsthand understanding of marine ecosystems that few scientists can claim. She has spent decades studying the ocean's ecosystems firsthand as a research diver. ______ Her decades of fieldwork have made her one of the most respected marine biologists alive today.";
+    const codes = checkQualityContract({ ...fss, stimulus: stimulusWithEcho }).issues.map((i) => i.code);
+    expect(codes).toContain("contract_option_echo");
+  });
+  it("선택지가 지문과 겹치지 않는 독립 문장이면 정상 통과(오탐 없음)", () => {
+    expect(checkQualityContract(fss).ok).toBe(true);
+  });
+  it("Rhetorical Synthesis 는 노트 고유명사를 정답이 인용해도 축자 복제 검사 대상이 아니다(오탐 방지)", () => {
+    const rs = {
+      ...wic, skillCode: "rhetorical_synthesis",
+      stimulus: "While researching a topic, a student has taken the following notes:\n- Voyager 1 launched in 1977.\n- It entered interstellar space in 2012.\n- It still transmits data using a 22-watt radio.",
+      question: "The student wants to emphasize how long Voyager 1 has operated. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+      options: ["Launched in 1977, Voyager 1 is still transmitting data decades later.", "The moon is bright tonight over the harbor.", "Many probes exist.", "Radios are useful tools."], correctIndex: 0,
+    };
+    expect(checkQualityContract(rs).issues.map((i) => i.code)).not.toContain("contract_option_echo");
+  });
+
+  const transitions = {
+    ...wic, skillCode: "transitions",
+    stimulus:
+      "A city council studied ridership data for three years before proposing a new subway line. Commuter surveys showed strong demand along the corridor. ______ the council voted to approve funding for the project.",
+    question: "Which choice completes the text with the most logical transition?",
+    options: ["Similarly,", "For instance,", "Given these findings,", "Nevertheless,"],
+    correctIndex: 2,
+  };
+  it("정답만 지시어+명사로 구체적 내용을 지칭하면(subway 사례) 구조 비대칭으로 거부", () => {
+    const codes = checkQualityContract(transitions).issues.map((i) => i.code);
+    expect(codes).toContain("contract_transition_parallel");
+  });
+  it("4개 선택지가 모두 표준 전환어면 정상 통과", () => {
+    const parallel = { ...transitions, options: ["Similarly,", "For instance,", "Consequently,", "Nevertheless,"] };
+    expect(checkQualityContract(parallel).ok).toBe(true);
+  });
+});
+
 describe("오답 부분 수정 대상 분류(2026-09-15)", () => {
   const base: IndependentReview = {
     pickedIndex: 0, pickedAnswer: null, agrees: true, confidence: "high", estimatedDifficulty: "medium", difficultyReasons: [], flags: [],
