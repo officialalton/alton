@@ -162,6 +162,9 @@ export interface RoadmapData {
   grade: string | null;
   schoolName: string | null;
   gpa: number | null;
+  gpaScale: string | null;
+  classRank: number | null;
+  classSize: number | null;
   academicProfile: AcademicProfile;
   testRecords: TestRecord[];
   apExams: ApExam[];

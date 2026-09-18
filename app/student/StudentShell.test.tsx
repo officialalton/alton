@@ -75,6 +75,9 @@ const roadmap: RoadmapData = {
   grade: null,
   schoolName: null,
   gpa: null,
+  gpaScale: null,
+  classRank: null,
+  classSize: null,
   academicProfile: {
     graduationYear: null,
     curriculumType: null,

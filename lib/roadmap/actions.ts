@@ -47,6 +47,30 @@ async function requireLoggedIn() {
   return supabase;
 }
 
+/** 학년/학교/GPA/등수 — CollegeVine Grades 탭 동등 항목. 학생 본인/보호자/관리자 전부 여기서 직접 수정(2026-09-19). */
+export async function saveGrades(input: {
+  studentId: string;
+  grade: string | null;
+  schoolName: string | null;
+  gpa: number | null;
+  gpaScale: string | null;
+  classRank: number | null;
+  classSize: number | null;
+}) {
+  const supabase = await requireLoggedIn();
+  const { error } = await supabase.rpc("roadmap_save_grades", {
+    p_student_id: input.studentId,
+    p_grade: input.grade,
+    p_school_name: input.schoolName,
+    p_gpa: input.gpa,
+    p_gpa_scale: input.gpaScale,
+    p_class_rank: input.classRank,
+    p_class_size: input.classSize,
+  });
+  if (error) throw new Error(error.message);
+  revalidateRoadmapPaths(input.studentId);
+}
+
 export async function saveAcademicProfile(input: {
   studentId: string;
   graduationYear: number | null;

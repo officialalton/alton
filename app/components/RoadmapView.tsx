@@ -157,15 +157,11 @@ function ProfileSections({
       {/* 0. 인구통계(CollegeVine Demographics 탭 동등 항목, 2026-09-19) */}
       <DemographicsCard data={data} readOnly={readOnly} pending={pending} run={run} />
 
-      {/* 1. 기본 학업 정보 */}
+      {/* 1. 기본 학업 정보 · 성적 */}
+      <GradesCard data={data} readOnly={readOnly} pending={pending} run={run} />
+
       <div className={cardClass}>
-        <div className={cardTitleClass}>1. 기본 학업 정보</div>
-        <div className="text-[12.5px] text-grey-500 mb-2">
-          학년 <span className="font-bold text-ink">{data.grade ?? "미입력"}</span> · 학교{" "}
-          <span className="font-bold text-ink">{data.schoolName ?? "미입력"}</span> · GPA{" "}
-          <span className="font-bold text-ink">{data.gpa ?? "미입력"}</span>
-          <span className="text-grey-300"> (학년/학교/GPA는 계정 설정 화면에서 수정)</span>
-        </div>
+        <div className={cardTitleClass}>1b. 교육과정 · 수강과목</div>
         {readOnly ? (
           <div className="text-[12.5px] space-y-1">
             <div>졸업 예정 연도: {data.academicProfile.graduationYear ?? "미입력"}</div>
@@ -347,6 +343,134 @@ function ProfileSections({
       {/* 5. 준비 현황 */}
       <PrepStatusCard data={data} readOnly={readOnly} pending={pending} run={run} />
     </>
+  );
+}
+
+const GPA_SCALES = ["4.0", "4.3", "4.5", "5.0"];
+
+function GradesCard({
+  data,
+  readOnly,
+  pending,
+  run,
+}: {
+  data: RoadmapData;
+  readOnly: boolean;
+  pending: boolean;
+  run: (fn: () => Promise<void>) => void;
+}) {
+  const [grade, setGrade] = useState(data.grade ?? "");
+  const [schoolName, setSchoolName] = useState(data.schoolName ?? "");
+  const [gpa, setGpa] = useState(data.gpa?.toString() ?? "");
+  const [gpaScale, setGpaScale] = useState(data.gpaScale ?? "4.0");
+  const [classRank, setClassRank] = useState(data.classRank?.toString() ?? "");
+  const [classSize, setClassSize] = useState(data.classSize?.toString() ?? "");
+  const [noClassRank, setNoClassRank] = useState(data.classRank == null && data.classSize == null);
+
+  return (
+    <div className={cardClass}>
+      <div className={cardTitleClass}>1. 학년 · 학교 · 성적</div>
+      {readOnly ? (
+        <div className="text-[12.5px] space-y-1">
+          <div>학년: {data.grade ?? "미입력"}</div>
+          <div>학교: {data.schoolName ?? "미입력"}</div>
+          <div>
+            GPA: {data.gpa ?? "미입력"}
+            {data.gpa != null && data.gpaScale ? ` / ${data.gpaScale}` : ""}
+          </div>
+          <div>
+            학급 등수: {data.classRank ?? "미입력"}
+            {data.classSize ? ` / ${data.classSize}명` : ""}
+          </div>
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label className={labelClass}>학년</label>
+            <input className={inputClass} placeholder="예: 11학년" value={grade} onChange={(e) => setGrade(e.target.value)} />
+          </div>
+          <div>
+            <label className={labelClass}>학교</label>
+            <input className={inputClass} value={schoolName} onChange={(e) => setSchoolName(e.target.value)} />
+          </div>
+          <div>
+            <label className={labelClass}>비가중 GPA</label>
+            <input className={inputClass} type="number" step="0.01" min={0} value={gpa} onChange={(e) => setGpa(e.target.value)} />
+          </div>
+          <div>
+            <label className={labelClass}>GPA 척도</label>
+            <select className={inputClass} value={gpaScale} onChange={(e) => setGpaScale(e.target.value)}>
+              {GPA_SCALES.map((s) => (
+                <option key={s} value={s}>
+                  {s}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className={labelClass}>학급 등수(선택)</label>
+            <input
+              className={inputClass}
+              type="number"
+              min={1}
+              disabled={noClassRank}
+              value={classRank}
+              onChange={(e) => setClassRank(e.target.value)}
+            />
+          </div>
+          <div>
+            <label className={labelClass}>학급 인원(선택)</label>
+            <input
+              className={inputClass}
+              type="number"
+              min={1}
+              disabled={noClassRank}
+              value={classSize}
+              onChange={(e) => setClassSize(e.target.value)}
+            />
+          </div>
+          <div className="col-span-2 flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="no-class-rank"
+              checked={noClassRank}
+              onChange={(e) => {
+                setNoClassRank(e.target.checked);
+                if (e.target.checked) {
+                  setClassRank("");
+                  setClassSize("");
+                }
+              }}
+            />
+            <label htmlFor="no-class-rank" className="text-[12px] text-grey-500">
+              우리 학교는 학급 등수를 매기지 않습니다
+            </label>
+          </div>
+          <div className="col-span-2">
+            <button
+              type="button"
+              disabled={pending}
+              className={smallBtn}
+              onClick={() =>
+                run(() =>
+                  roadmapActions.saveGrades({
+                    studentId: data.studentId,
+                    grade: grade || null,
+                    schoolName: schoolName || null,
+                    gpa: gpa ? Number(gpa) : null,
+                    gpaScale: gpa ? gpaScale : null,
+                    classRank: noClassRank ? null : classRank ? Number(classRank) : null,
+                    classSize: noClassRank ? null : classSize ? Number(classSize) : null,
+                  })
+                )
+              }
+            >
+              저장
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 
