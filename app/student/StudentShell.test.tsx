@@ -165,7 +165,7 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    ["홈", "수강 과목", "수업", "선생님", "과제", "문제", "단어장", "교재", "수업권", "통계"].forEach(
+    ["Home", "Courses", "Classes", "My Teacher", "Assignments", "Practice", "Vocabulary", "Materials", "Credits", "Performance"].forEach(
       (label) => expect(screen.getAllByText(label).length).toBeGreaterThan(0)
     );
     expect(screen.queryByText("레슨")).toBeNull();
@@ -182,7 +182,7 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("선생님"));
+    fireEvent.click(screen.getAllByText("My Teacher")[0]);
     expect(screen.getByText("매칭된 선생님이 없습니다.")).toBeInTheDocument();
   });
 
@@ -195,7 +195,7 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("수업권"));
+    fireEvent.click(screen.getAllByText("Credits")[0]);
     expect(screen.getByText("장 보유")).toBeInTheDocument();
   });
 
@@ -208,7 +208,7 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("단어장"));
+    fireEvent.click(screen.getAllByText("Vocabulary")[0]);
     expect(
       screen.getByText("아직 추가한 단어가 없어요. '+ 단어 추가'를 눌러보세요.")
     ).toBeInTheDocument();
@@ -223,7 +223,7 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("문제"));
+    fireEvent.click(screen.getAllByText("Practice")[0]);
     expect(screen.getByText("조건에 맞는 문제 기록이 없습니다.")).toBeInTheDocument();
   });
 
@@ -236,7 +236,7 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("수업")[0]);
+    fireEvent.click(screen.getAllByText("Classes")[0]);
     expect(screen.getByText("예정 수업")).toBeInTheDocument();
     expect(screen.getByText("지난 수업")).toBeInTheDocument();
     expect(
@@ -253,7 +253,7 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("과제")[0]);
+    fireEvent.click(screen.getAllByText("Assignments")[0]);
     expect(
       screen.getByText(/아직 발급된 과제가 없습니다/)
     ).toBeInTheDocument();
@@ -268,7 +268,7 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("교재")[0]);
+    fireEvent.click(screen.getAllByText("Materials")[0]);
     expect(
       screen.getByText("아직 배정된 교재가 없어요. 담당 선생님이 곧 준비해드릴 예정이에요.")
     ).toBeInTheDocument();
@@ -283,7 +283,7 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("통계"));
+    fireEvent.click(screen.getAllByText("Performance")[0]);
     expect(screen.getByText("과목별 참여율")).toBeInTheDocument();
   });
 
@@ -313,7 +313,7 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("모의고사"));
+    fireEvent.click(screen.getAllByText("Mock Exams")[0]);
     expect(pushMock).toHaveBeenCalledWith("/student/mock-exam");
   });
 });

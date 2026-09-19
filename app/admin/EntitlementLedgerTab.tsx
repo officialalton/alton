@@ -69,8 +69,7 @@ export default function EntitlementLedgerTab({
   const [sub, setSub] = useState<SubTab>("versions");
 
   return (
-    <div className="px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-1">수업권 원장</h1>
+    <div>
       <p className="text-[13px] text-grey-500 mb-5">
         수업권 상품·가격 버전, 30일 고지, 결제 대사, 환불, 조정·연장·이전, 구매 상세를 관리합니다.
         (기존 &quot;구 크레딧(레거시)&quot; 탭과는 별개의 R4 수업권 시스템입니다.)

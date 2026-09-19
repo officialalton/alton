@@ -9,8 +9,7 @@ export default function VocabAssignTab({ overview }: { overview: TeacherVocabOve
   const [justIssued, setJustIssued] = useState(false);
 
   return (
-    <div className="max-w-[720px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-1.5">단어 시험 발급</h1>
+    <div className="max-w-[720px]">
       <p className="text-[13px] text-grey-500 mb-5">
         담당 학생에게 ALTON SAT 공용 단어장 범위로 즉석 시험을 낼 수 있습니다. 학생은 단어장 화면에서 응시합니다.
       </p>

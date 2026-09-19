@@ -22,6 +22,8 @@ import {
 } from "./availability-actions";
 import { reportSessionIssue } from "./incident-report-actions";
 import TeacherLessonScheduleTab from "./TeacherLessonScheduleTab";
+import PageFrame from "@/app/components/PageFrame";
+import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import TeacherMaterialsLibraryTab from "./MaterialsLibraryTab";
 import VocabAssignTab from "./VocabAssignTab";
 import type { TeacherVocabOverview } from "./vocab-assign-data";
@@ -38,18 +40,20 @@ import {
   type TeacherLessonScheduleItem,
 } from "./lesson-schedule-actions";
 
+// 2026-09-19(UI 통일화) — 좌측 네비게이션 라벨은 전부 영어로 통일한다(Acely
+// 레퍼런스). 탭 안 본문의 한국어 텍스트는 유지, 라벨만 영어로 바꾼다.
 const NAV_ITEMS = [
-  { id: "home", label: "홈", icon: "🏠" },
-  { id: "assignments", label: "담당 학생", icon: "🎯" },
-  { id: "homework", label: "과제", icon: "📝" },
-  { id: "lesson-schedule", label: "수업", icon: "📆" },
-  { id: "availability", label: "가능시간", icon: "🗓" },
-  { id: "curriculum", label: "커리큘럼", icon: "📘" },
-  { id: "materials", label: "교재", icon: "📚" },
-  { id: "vocab", label: "단어장", icon: "🔤" },
+  { id: "home", label: "Home", icon: "🏠" },
+  { id: "assignments", label: "My Students", icon: "🎯" },
+  { id: "homework", label: "Assignments", icon: "📝" },
+  { id: "lesson-schedule", label: "Schedule", icon: "📆" },
+  { id: "availability", label: "Availability", icon: "🗓" },
+  { id: "curriculum", label: "Curriculum", icon: "📘" },
+  { id: "materials", label: "Materials", icon: "📚" },
+  { id: "vocab", label: "Vocabulary", icon: "🔤" },
   // P4-2(2026-09-12) — 교사가 본인 정산 내역·지급 예정액·수취 계좌·제출 서류를
   // 한 곳에서 찾을 수 있게 하는 진입점.
-  { id: "settlement", label: "정산", icon: "💸" },
+  { id: "settlement", label: "Payouts", icon: "💸" },
 ] as const;
 
 type TabId = (typeof NAV_ITEMS)[number]["id"];
@@ -57,7 +61,7 @@ type TabId = (typeof NAV_ITEMS)[number]["id"];
 // 2026-09-18(고정형 모의고사 V1) — /teacher/mock-exam은 TeacherShell 탭이 아니라
 // 독립 라우트다. NAV_ITEMS/TabId를 건드리지 않고 router.push로 이동하는 링크
 // 전용 항목을 별도로 둔다.
-const MOCK_EXAM_NAV_ITEM = { id: "mock-exam", label: "모의고사", icon: "📝" } as const;
+const MOCK_EXAM_NAV_ITEM = { id: "mock-exam", label: "Mock Exams", icon: "📝" } as const;
 
 export default function TeacherShell({
   initialTab,
@@ -162,7 +166,7 @@ export default function TeacherShell({
               (activeTab === item.id ? "text-ink" : "text-grey-300")
             }
           >
-            <span className="text-[17px]">{item.icon}</span>
+            <span className="text-[17px] grayscale">{item.icon}</span>
             {item.label}
           </button>
         ))}
@@ -170,7 +174,7 @@ export default function TeacherShell({
           onClick={() => router.push("/teacher/mock-exam")}
           className="w-full flex flex-col items-center gap-0.5 py-2.5 text-[10.5px] font-semibold text-grey-300"
         >
-          <span className="text-[17px]">{MOCK_EXAM_NAV_ITEM.icon}</span>
+          <span className="text-[17px] grayscale">{MOCK_EXAM_NAV_ITEM.icon}</span>
           {MOCK_EXAM_NAV_ITEM.label}
         </button>
       </aside>
@@ -217,53 +221,57 @@ export default function TeacherShell({
           )}
         </div>
 
+        {/* 2026-09-19(UI 통일화) — 홈(자체 인사말 헤더)을 뺀 나머지 탭은
+            전부 같은 프레임(영어 제목 + 가운데 정렬 고정폭 컬럼) 안에서
+            렌더링된다. 제목 위치·컬럼 폭·서브탭 스타일만 통일한다. */}
         <div className="flex-1">
-          {activeTab === "home" ? (
-            <TeacherHomeDashboard
-              data={dashboard}
-              currentAssignments={currentAssignments}
-              onShowSchedule={() => selectTab("lesson-schedule")}
-              onShowAssignments={() => selectTab("assignments")}
-              onShowCurriculum={() => selectTab("curriculum")}
-            />
-          ) : activeTab === "assignments" ? (
+        {activeTab === "home" ? (
+          <TeacherHomeDashboard
+            data={dashboard}
+            currentAssignments={currentAssignments}
+            onShowSchedule={() => selectTab("lesson-schedule")}
+            onShowAssignments={() => selectTab("assignments")}
+            onShowCurriculum={() => selectTab("curriculum")}
+          />
+        ) : (
+        <PageFrame
+          title={activeLabel}
+          subtabs={
+            activeTab === "lesson-schedule" ? (
+              <UnderlineSubTabs
+                items={[
+                  { id: "upcoming", label: "예정 수업" },
+                  { id: "past", label: "지난 수업" },
+                ]}
+                activeId={lessonSubtab}
+                onSelect={setLessonSubtab}
+              />
+            ) : undefined
+          }
+        >
+          {activeTab === "assignments" ? (
             <AssignmentsTab
               current={currentAssignments}
               past={pastAssignments}
               onOpenOperatingCurriculum={openOperatingCurriculumFromAssignment}
             />
           ) : activeTab === "lesson-schedule" ? (
-            <div>
-              <div className="px-8 pt-8 flex gap-1.5">
-                {(["upcoming", "past"] as const).map((s) => (
-                  <button
-                    key={s}
-                    onClick={() => setLessonSubtab(s)}
-                    className={`text-[11px] font-bold px-2.5 py-1 rounded-full ${
-                      lessonSubtab === s ? "bg-ink text-white" : "bg-grey-100 text-grey-500"
-                    }`}
-                  >
-                    {s === "upcoming" ? "예정 수업" : "지난 수업"}
-                  </button>
-                ))}
-              </div>
-              <TeacherLessonScheduleTab
-                lessons={lessons}
-                exceptions={availabilityExceptions}
-                timezone={availabilityTimezone}
-                mode={lessonSubtab}
-                onCancel={async (reservationId, reason) => {
-                  const result = await cancelMyLessonScheduleBooking({ reservationId, reason });
-                  if (!result.ok) throw new Error(result.error);
-                }}
-                onLoadExternalBusy={listMyExternalBusyBlocks}
-                onRefresh={() => listMyLessonSchedule().then(setLessons)}
-                onStartSession={startMyLessonSession}
-                onFinalizeSession={finalizeMyLessonSession}
-                onResolveLateness={resolveMyLessonLateness}
-                onReportSessionIssue={reportSessionIssue}
-              />
-            </div>
+            <TeacherLessonScheduleTab
+              lessons={lessons}
+              exceptions={availabilityExceptions}
+              timezone={availabilityTimezone}
+              mode={lessonSubtab}
+              onCancel={async (reservationId, reason) => {
+                const result = await cancelMyLessonScheduleBooking({ reservationId, reason });
+                if (!result.ok) throw new Error(result.error);
+              }}
+              onLoadExternalBusy={listMyExternalBusyBlocks}
+              onRefresh={() => listMyLessonSchedule().then(setLessons)}
+              onStartSession={startMyLessonSession}
+              onFinalizeSession={finalizeMyLessonSession}
+              onResolveLateness={resolveMyLessonLateness}
+              onReportSessionIssue={reportSessionIssue}
+            />
           ) : activeTab === "availability" ? (
             <TeacherAvailabilityTab
               initialRules={availabilityRules}
@@ -298,6 +306,8 @@ export default function TeacherShell({
               {activeLabel} 탭은 준비 중입니다.
             </div>
           )}
+        </PageFrame>
+        )}
         </div>
       </div>
     </div>

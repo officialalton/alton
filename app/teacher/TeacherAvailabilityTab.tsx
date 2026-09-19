@@ -346,8 +346,7 @@ export default function TeacherAvailabilityTab({
   }
 
   return (
-    <div className="max-w-[640px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-1.5">가능시간 관리</h1>
+    <div className="max-w-[640px]">
       <p className="text-[13px] text-grey-500 mb-5">
         반복 가능 시간(주간 템플릿)을 기본으로 두고, 달력에서 날짜를 선택해 특정 날짜만 휴무·임시 오픈으로 덮어쓸 수
         있습니다({timezone} 기준). 이미 확정된 수업이 있는 시간은 예외를 등록해도 취소되지 않습니다 — 취소는

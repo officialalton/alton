@@ -180,9 +180,7 @@ export default function UsersTab({
   }
 
   return (
-    <div className="max-w-[640px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-5">사용자</h1>
-
+    <div className="max-w-[640px]">
       <div className="flex items-center justify-between mb-5 border-b border-grey-200">
         <div className="flex gap-4">
           {SUBTABS.map((t) => (

@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 import { logout } from "@/app/login/actions";
 import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
-import PillSubTabs from "@/app/components/PillSubTabs";
+import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
+import PageFrame from "@/app/components/PageFrame";
 import type { DashboardData } from "@/app/student/dashboard-data";
 import LessonsTab from "@/app/student/LessonsTab";
 import type { LessonItem } from "@/app/student/lessons-data";
@@ -57,15 +58,17 @@ import { getRoadmapForStudent } from "@/lib/roadmap/actions";
 // 라이브러리 탭만 제거), "통계"(홈 서브탭으로 이동), "지인 추천"/"동의"
 // (프로필 드롭다운으로 이동)는 메인 내비에서 제거한다. "문의/상담신청/메신저"는
 // "상담" 탭 산하 서브탭(상담 신청/상담 내역/메신저)으로 통합한다.
+// 2026-09-19(UI 통일화) — 좌측 네비게이션 라벨은 전부 영어로 통일한다(Acely
+// 레퍼런스). 탭 안 본문의 한국어 텍스트는 유지, 라벨만 영어로 바꾼다.
 const NAV_ITEMS = [
-  { id: "home", label: "홈", icon: "🏠" },
-  { id: "roadmap", label: "로드맵", icon: "🧭" },
-  { id: "entitlements", label: "수업권", icon: "🎟️" },
-  { id: "enrollment", label: "수강 과목", icon: "🎓" },
-  { id: "lessons", label: "수업", icon: "📅" },
-  { id: "consult", label: "상담", icon: "🗓️" },
-  { id: "vocab", label: "단어장", icon: "🔤" },
-  { id: "homework", label: "과제", icon: "📝" },
+  { id: "home", label: "Home", icon: "🏠" },
+  { id: "roadmap", label: "Roadmap", icon: "🧭" },
+  { id: "entitlements", label: "Credits", icon: "🎟️" },
+  { id: "enrollment", label: "My Courses", icon: "🎓" },
+  { id: "lessons", label: "Classes", icon: "📅" },
+  { id: "consult", label: "Consultations", icon: "🗓️" },
+  { id: "vocab", label: "Vocabulary", icon: "🔤" },
+  { id: "homework", label: "Assignments", icon: "📝" },
 ] as const;
 
 // 메인 내비에는 더 이상 그리지 않지만(사이드바/모바일 목록에서 숨김),
@@ -264,7 +267,7 @@ export default function ParentShell({
               (activeTab === item.id ? "text-ink" : "text-grey-300")
             }
           >
-            <span className="relative text-[17px]">
+            <span className="relative text-[17px] grayscale">
               {item.icon}
               {item.id === "consult" && messengerUnread > 0 && (
                 <span className="absolute -top-1 -right-1.5 min-w-[14px] h-[14px] px-[3px] rounded-full bg-red text-white text-[9px] font-bold flex items-center justify-center">
@@ -378,17 +381,16 @@ export default function ParentShell({
           </div>
         </div>
 
+        {/* 2026-09-19(UI 통일화) — 모든 탭이 같은 프레임(영어 제목 + 가운데
+            정렬 고정폭 컬럼) 안에서 렌더링된다. 탭 내부 정렬·서브탭은 그대로
+            두고, 제목 위치·컬럼 폭·서브탭 스타일만 통일한다. */}
         <div className="flex-1">
-          {/* 2026-09-17/18 — 홈 재설계: "일정 확인"에서 "리뷰 확인"으로 목적
-              전환. 상단 동의 배너는 제거(프로필 드롭다운 배지로만 노출), 캘린더·
-              예정 수업(HomeDashboard)도 더 이상 쓰지 않는다 — 종합 리뷰/수업
-              리뷰/상담 리뷰/통계 4개 읽기 전용 서브탭으로 대체한다(상담 리뷰는
-              종합 리뷰에 합치지 않는다, 사용자 결정 2026-09-18). 데이터 없을
-              때는 일정·캘린더로 되돌아가지 않고 빈 상태 문구만 보여준다(요구사항). */}
-          {activeTab === "home" ? (
-            <div>
-              <div className="px-6 pt-5 flex items-center justify-between gap-3">
-                <PillSubTabs
+        <PageFrame
+          title={activeLabel}
+          subtabs={
+            activeTab === "home" ? (
+              <div className="flex items-center justify-between gap-3">
+                <UnderlineSubTabs
                   items={[
                     { id: "reviews", label: "종합 리뷰" },
                     { id: "lessonReviews", label: "수업 리뷰" },
@@ -397,6 +399,7 @@ export default function ParentShell({
                   ]}
                   activeId={homeSubTab}
                   onSelect={setHomeSubTab}
+                  className="flex-1"
                 />
                 {/* 2026-09-18(고정형 모의고사 V1) — /parent/mock-exam/[studentId]는
                     독립 라우트다. 홈 서브탭(종합/수업/상담 리뷰·통계)과 나란히,
@@ -408,6 +411,28 @@ export default function ParentShell({
                   모의고사 →
                 </button>
               </div>
+            ) : activeTab === "consult" ? (
+              <UnderlineSubTabs
+                items={[
+                  { id: "messenger", label: "메신저" },
+                  { id: "request", label: "상담 신청" },
+                  { id: "history", label: "상담 내역" },
+                ]}
+                activeId={consultSubTab}
+                onSelect={setConsultSubTab}
+                badgeCounts={{ messenger: messengerUnread }}
+              />
+            ) : undefined
+          }
+        >
+          {/* 2026-09-17/18 — 홈 재설계: "일정 확인"에서 "리뷰 확인"으로 목적
+              전환. 상단 동의 배너는 제거(프로필 드롭다운 배지로만 노출), 캘린더·
+              예정 수업(HomeDashboard)도 더 이상 쓰지 않는다 — 종합 리뷰/수업
+              리뷰/상담 리뷰/통계 4개 읽기 전용 서브탭으로 대체한다(상담 리뷰는
+              종합 리뷰에 합치지 않는다, 사용자 결정 2026-09-18). 데이터 없을
+              때는 일정·캘린더로 되돌아가지 않고 빈 상태 문구만 보여준다(요구사항). */}
+          {activeTab === "home" ? (
+            <div>
               {homeSubTab === "stats" ? (
                 childStats ? (
                   <StatsTab data={childStats} />
@@ -530,32 +555,19 @@ export default function ParentShell({
           ) : activeTab === "homework" ? (
             <ParentHomeworkTab childrenHomework={homeworkByChild} />
           ) : activeTab === "consult" ? (
-            <div>
-              <div className="px-6 pt-5">
-                <PillSubTabs
-                  items={[
-                    { id: "messenger", label: "메신저" },
-                    { id: "request", label: "상담 신청" },
-                    { id: "history", label: "상담 내역" },
-                  ]}
-                  activeId={consultSubTab}
-                  onSelect={setConsultSubTab}
-                  badgeCounts={{ messenger: messengerUnread }}
-                />
-              </div>
-              {consultSubTab === "request" ? (
-                <ConsultationRequestTab />
-              ) : consultSubTab === "history" ? (
-                <ConsultationHistoryTab />
-              ) : (
-                <MessengerTab />
-              )}
-            </div>
+            consultSubTab === "request" ? (
+              <ConsultationRequestTab />
+            ) : consultSubTab === "history" ? (
+              <ConsultationHistoryTab />
+            ) : (
+              <MessengerTab />
+            )
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.
             </div>
           )}
+        </PageFrame>
         </div>
       </div>
     </div>

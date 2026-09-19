@@ -56,9 +56,7 @@ export default function TeacherTab({
   }
 
   return (
-    <div className="max-w-[640px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-5">선생님</h1>
-
+    <div className="max-w-[640px]">
       {teachers.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
           매칭된 선생님이 없습니다.

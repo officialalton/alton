@@ -8,6 +8,7 @@ import MobileDrawerNav from "@/app/components/MobileDrawerNav";
 import { linkAdminGoogleAccount } from "./google-link-actions";
 import { resolveAdminTab, type AdminTabId } from "./admin-tabs";
 import { setActiveAdminUser, clearAdminTabCache } from "./tab-data-cache";
+import PageFrame from "@/app/components/PageFrame";
 import AdminHomeDashboard from "./AdminHomeDashboard";
 import type { AdminDashboardData } from "./dashboard-data";
 import CatalogTab from "./CatalogTab";
@@ -55,21 +56,23 @@ import type {
   StudentListItem,
 } from "./users-data";
 
+// 2026-09-19(UI 통일화) — 좌측 네비게이션 라벨은 전부 영어로 통일한다(Acely
+// 레퍼런스). 탭 안 본문의 한국어 텍스트는 유지, 라벨만 영어로 바꾼다.
 const NAV_ITEMS = [
-  { id: "home", label: "홈", icon: "🏠" },
-  { id: "users", label: "사용자", icon: "👥" },
-  { id: "matching", label: "매칭", icon: "🔗" },
-  { id: "consult", label: "신규", icon: "🗓" },
-  { id: "inquiry", label: "문의·면담", icon: "💬" },
-  { id: "catalog", label: "커리큘럼", icon: "📘" },
-  { id: "problem-bank", label: "문제은행", icon: "🧩" },
-  { id: "mock-exam", label: "모의고사", icon: "📝" },
-  { id: "billing", label: "구 크레딧(레거시)", icon: "💳" },
-  { id: "entitlements", label: "수업권", icon: "🎫" },
-  { id: "unified-schedule", label: "통합 일정", icon: "🗺️" },
-  { id: "booking", label: "예약", icon: "🗓️" },
-  { id: "payouts", label: "정산", icon: "💸" },
-  { id: "documents", label: "문서", icon: "📄" },
+  { id: "home", label: "Home", icon: "🏠" },
+  { id: "users", label: "Users", icon: "👥" },
+  { id: "matching", label: "Matching", icon: "🔗" },
+  { id: "consult", label: "Onboarding", icon: "🗓" },
+  { id: "inquiry", label: "Inquiries", icon: "💬" },
+  { id: "catalog", label: "Curriculum", icon: "📘" },
+  { id: "problem-bank", label: "Question Bank", icon: "🧩" },
+  { id: "mock-exam", label: "Mock Exams", icon: "📝" },
+  { id: "billing", label: "Legacy Credits", icon: "💳" },
+  { id: "entitlements", label: "Entitlements", icon: "🎫" },
+  { id: "unified-schedule", label: "Schedule", icon: "🗺️" },
+  { id: "booking", label: "Bookings", icon: "🗓️" },
+  { id: "payouts", label: "Payouts", icon: "💸" },
+  { id: "documents", label: "Documents", icon: "📄" },
   { id: "workspace", label: "Workspace", icon: "🔑" },
 ] as const;
 
@@ -242,7 +245,7 @@ export default function AdminShell({
               (activeTab === item.id ? "text-ink" : "text-grey-300")
             }
           >
-            <span className="text-[17px]">{item.icon}</span>
+            <span className="text-[17px] grayscale">{item.icon}</span>
             {item.label}
           </button>
         ))}
@@ -311,17 +314,20 @@ export default function AdminShell({
           </div>
         )}
 
+        {/* 2026-09-19(UI 통일화) — 홈(자체 대시보드 헤더)을 뺀 나머지 탭은
+            전부 같은 프레임(영어 제목 + 가운데 정렬 컬럼) 안에서 렌더링된다.
+            관리자 화면은 표·대시보드가 많아 기본보다 넓은 폭을 쓴다. */}
         <div className="flex-1">
-          {activeTab === "home" ? (
-            <AdminHomeDashboard data={dashboard} onNavigate={selectTab} />
-          ) : activeTab === "catalog" ? (
+        {activeTab === "home" ? (
+          <AdminHomeDashboard data={dashboard} onNavigate={selectTab} />
+        ) : (
+        <PageFrame title={activeLabel} maxWidthClassName="max-w-7xl">
+          {activeTab === "catalog" ? (
             <CatalogTab subjects={subjects} docs={docs} />
           ) : activeTab === "problem-bank" ? (
             <ProblemBankTab subjects={subjects} />
           ) : activeTab === "mock-exam" ? (
-            <div className="mx-auto max-w-4xl px-6 py-10">
-              <MockExamTab />
-            </div>
+            <MockExamTab />
           ) : activeTab === "users" ? (
             <UsersTab subjects={subjects} />
           ) : activeTab === "billing" ? (
@@ -379,6 +385,8 @@ export default function AdminShell({
               {activeLabel} 탭은 준비 중입니다.
             </div>
           )}
+        </PageFrame>
+        )}
         </div>
       </div>
     </div>

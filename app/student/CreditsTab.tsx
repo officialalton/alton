@@ -29,8 +29,7 @@ export default function CreditsTab({ data }: { data: CreditsData }) {
   }
 
   return (
-    <div className="max-w-[480px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-1.5">수업권</h1>
+    <div className="max-w-[480px]">
       <p className="text-[13px] text-grey-500 mb-5">
         보유한 수업권 현황을 확인하세요. 충전은 학부모 계정에서 진행됩니다.
       </p>

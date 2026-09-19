@@ -99,7 +99,7 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    ["홈", "수업권", "수강 과목", "수업", "상담", "단어장", "과제"].forEach((label) =>
+    ["Home", "Credits", "My Courses", "Classes", "Consultations", "Vocabulary", "Assignments"].forEach((label) =>
       expect(screen.getAllByText(label).length).toBeGreaterThan(0)
     );
     // 2026-09-17/18 IA 재구성: 지인 추천/통계(독립 탭)/동의/가족/예약/교재는
@@ -261,7 +261,7 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("수업")[0]);
+    fireEvent.click(screen.getAllByText("Classes")[0]);
     expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
     // 2026-09-17 — "예약" 독립 탭 제거: 수업 탭 안에서 기존 LessonBookingTab
     // 모달로 들어가는 진입점만 확인한다(모달 내부 동작은 LessonBookingTab
@@ -279,7 +279,7 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("수업권"));
+    fireEvent.click(screen.getAllByText("Credits")[0]);
     expect(screen.getByText("현황")).toBeInTheDocument();
     expect(screen.getByText("구매")).toBeInTheDocument();
   });
@@ -294,7 +294,7 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("상담")[0]);
+    fireEvent.click(screen.getAllByText("Consultations")[0]);
     expect(screen.getByPlaceholderText("상담 사유를 입력해주세요")).toBeInTheDocument();
     fireEvent.click(screen.getByText("상담 내역"));
     expect(await screen.findByText("신청한 상담이 없습니다.")).toBeInTheDocument();

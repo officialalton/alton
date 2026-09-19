@@ -150,15 +150,14 @@ export default function SettlementTab() {
 
   if (settlement === null) {
     return (
-      <div className="max-w-[860px] px-8 py-8" aria-busy="true" data-testid="settlement-skeleton">
+      <div className="max-w-[860px]" aria-busy="true" data-testid="settlement-skeleton">
         <div className="h-4 w-32 bg-grey-200 rounded animate-pulse" />
       </div>
     );
   }
 
   return (
-    <div className="max-w-[860px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-1.5">정산</h1>
+    <div className="max-w-[860px]">
       <p className="text-[13px] text-grey-500 mb-5">
         완료된 수업의 정산 내역과 지급 예정 금액을 확인하고, 수취 계좌와 제출 서류를 관리합니다.
       </p>

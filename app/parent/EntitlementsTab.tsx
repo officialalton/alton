@@ -3,7 +3,7 @@
 import { useState } from "react";
 import type { ParentEntitlementsData, PurchaseReceipt } from "./entitlements-data";
 import { createEntitlementCheckoutSession } from "./purchase-actions";
-import PillSubTabs from "@/app/components/PillSubTabs";
+import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 
 function formatMoney(minor: number, currency: string): string {
   const amount = minor / 100;
@@ -79,8 +79,8 @@ export default function EntitlementsTab({
   }
 
   return (
-    <div className="max-w-[720px] px-8 py-8">
-      <PillSubTabs
+    <div className="max-w-[720px]">
+      <UnderlineSubTabs
         className="mb-5"
         items={[
           { id: "status", label: "현황" },

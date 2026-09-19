@@ -10,10 +10,10 @@ export default function ParentHomeworkTab({ childrenHomework }: { childrenHomewo
   const [childId, setChildId] = useState(childrenHomework[0]?.childId ?? "");
   const current = childrenHomework.find((c) => c.childId === childId) ?? childrenHomework[0];
 
-  if (!current) return <div className="max-w-[760px] px-8 py-8 text-[13px] text-grey-500">연결된 자녀가 없습니다.</div>;
+  if (!current) return <div className="max-w-[760px] text-[13px] text-grey-500">연결된 자녀가 없습니다.</div>;
 
   return (
-    <div className="max-w-[760px] px-8 py-8">
+    <div className="max-w-[760px]">
       {childrenHomework.length > 1 && (
         <div className="flex flex-wrap gap-2 mb-5">
           {childrenHomework.map((c) => (

@@ -44,22 +44,25 @@ import {
 import { reportTeacherIssue } from "./incident-report-actions";
 import RoadmapView from "@/app/components/RoadmapView";
 import type { RoadmapData } from "@/lib/roadmap/types";
+import PageFrame from "@/app/components/PageFrame";
 
+// 2026-09-19(UI 통일화) — 좌측 네비게이션 라벨은 전부 영어로 통일한다(Acely
+// 레퍼런스). 탭 안 본문의 한국어 텍스트는 유지, 라벨만 영어로 바꾼다.
 const NAV_ITEMS = [
-  { id: "home", label: "홈", icon: "🏠" },
-  { id: "roadmap", label: "로드맵", icon: "🧭" },
-  { id: "enrollment", label: "수강 과목", icon: "🎓" },
+  { id: "home", label: "Home", icon: "🏠" },
+  { id: "roadmap", label: "Roadmap", icon: "🧭" },
+  { id: "enrollment", label: "Courses", icon: "🎓" },
   // 2026-09-06(A안 UI 정리) — "예약"(v3 예약/캘린더)과 "레슨"(레거시 커리큘럼·리뷰)이
   // 기능 중복이라는 지적에 따라 하나의 "수업" 탭으로 합쳤다(ClassesTab, 예정/지난
   // 두 서브탭). 자세한 내용은 ClassesTab.tsx 상단 주석 참고.
-  { id: "classes", label: "수업", icon: "📅" },
-  { id: "teacher", label: "선생님", icon: "👤" },
-  { id: "homework", label: "과제", icon: "📝" },
-  { id: "problemlog", label: "문제", icon: "📋" },
-  { id: "vocab", label: "단어장", icon: "📖" },
-  { id: "materials", label: "교재", icon: "📚" },
-  { id: "credits", label: "수업권", icon: "💳" },
-  { id: "stats", label: "통계", icon: "📊" },
+  { id: "classes", label: "Classes", icon: "📅" },
+  { id: "teacher", label: "My Teacher", icon: "👤" },
+  { id: "homework", label: "Assignments", icon: "📝" },
+  { id: "problemlog", label: "Practice", icon: "📋" },
+  { id: "vocab", label: "Vocabulary", icon: "📖" },
+  { id: "materials", label: "Materials", icon: "📚" },
+  { id: "credits", label: "Credits", icon: "💳" },
+  { id: "stats", label: "Performance", icon: "📊" },
 ] as const;
 
 type TabId = (typeof NAV_ITEMS)[number]["id"];
@@ -67,7 +70,7 @@ type TabId = (typeof NAV_ITEMS)[number]["id"];
 // 2026-09-18(고정형 모의고사 V1) — /student/mock-exam은 StudentShell 탭이 아니라
 // 독립 라우트다. NAV_ITEMS/TabId를 건드리지 않고 router.push로 이동하는 링크
 // 전용 항목을 별도로 둔다.
-const MOCK_EXAM_NAV_ITEM = { id: "mock-exam", label: "모의고사", icon: "📝" } as const;
+const MOCK_EXAM_NAV_ITEM = { id: "mock-exam", label: "Mock Exams", icon: "📝" } as const;
 
 export default function StudentShell({
   studentName,
@@ -180,7 +183,7 @@ export default function StudentShell({
               (activeTab === item.id ? "text-ink" : "text-grey-300")
             }
           >
-            <span className="text-[17px]">{item.icon}</span>
+            <span className="text-[17px] grayscale">{item.icon}</span>
             {item.label}
           </button>
         ))}
@@ -188,7 +191,7 @@ export default function StudentShell({
           onClick={() => router.push("/student/mock-exam")}
           className="w-full flex flex-col items-center gap-0.5 py-2.5 text-[10.5px] font-semibold text-grey-300"
         >
-          <span className="text-[17px]">{MOCK_EXAM_NAV_ITEM.icon}</span>
+          <span className="text-[17px] grayscale">{MOCK_EXAM_NAV_ITEM.icon}</span>
           {MOCK_EXAM_NAV_ITEM.label}
         </button>
       </aside>
@@ -235,16 +238,22 @@ export default function StudentShell({
           )}
         </div>
 
+        {/* 2026-09-19(UI 통일화) — Acely 레퍼런스: 홈(개인화된 인사말 헤더를
+            이미 가지고 있음)을 뺀 나머지 탭은 전부 같은 프레임(영어 제목 +
+            가운데 정렬 고정폭 컬럼) 안에서 렌더링된다. 탭 내부 정렬은 그대로
+            (왼쪽 정렬 텍스트 등) 두고, 제목 위치·컬럼 폭만 통일한다. */}
         <div className="flex-1">
-          {activeTab === "home" ? (
-            <HomeDashboard
-              studentName={studentName}
-              data={dashboard}
-              onShowLessons={() => selectTab("classes")}
-              onShowStats={() => selectTab("stats")}
-              timezone={lessonBooking.timezone}
-            />
-          ) : activeTab === "roadmap" ? (
+        {activeTab === "home" ? (
+          <HomeDashboard
+            studentName={studentName}
+            data={dashboard}
+            onShowLessons={() => selectTab("classes")}
+            onShowStats={() => selectTab("stats")}
+            timezone={lessonBooking.timezone}
+          />
+        ) : (
+        <PageFrame title={activeLabel}>
+          {activeTab === "roadmap" ? (
             <RoadmapView data={roadmap} />
           ) : activeTab === "enrollment" ? (
             <EnrollmentTab enrollments={subjectEnrollments} />
@@ -292,6 +301,8 @@ export default function StudentShell({
               {activeLabel} 탭은 준비 중입니다.
             </div>
           )}
+        </PageFrame>
+        )}
         </div>
       </div>
     </div>

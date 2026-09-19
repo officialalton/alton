@@ -8,21 +8,25 @@ const KIND_BADGE: Record<string, string> = { pdf: "PDF", video: "영상" };
  */
 export default function MaterialLibraryTree({
   subjects,
-  title,
+  sectionHeading,
   description,
   emptyMessage,
   docHref,
 }: {
   subjects: LibrarySubjectTree[];
-  title: string;
+  /** 페이지 제목이 아니라 하위 구획 제목(예: 보호자 포털의 자녀별 구분). 페이지
+   * 제목은 호출자(각 포털 Shell)의 PageFrame이 영어로 그린다. */
+  sectionHeading?: string;
   description: string;
   emptyMessage: string;
   /** 자료 링크 — 보호자는 자녀를 쿼리로 붙여야 하므로 호출자가 만든다. */
   docHref: (docId: string) => string;
 }) {
   return (
-    <div className="max-w-[720px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-1.5">{title}</h1>
+    <div className="max-w-[720px]">
+      {sectionHeading && (
+        <h2 className="text-[15px] font-extrabold text-ink mb-1.5">{sectionHeading}</h2>
+      )}
       <p className="text-[13px] text-grey-500 mb-5">{description}</p>
 
       {subjects.length === 0 ? (

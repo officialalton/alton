@@ -295,9 +295,7 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
   }
 
   return (
-    <div className="max-w-[880px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-1.5">문제은행</h1>
-
+    <div className="max-w-[880px]">
       <div className="flex gap-1 mb-2 border-b-[1.5px] border-grey-200">
         {BUCKETS.map((t) => (
           <button

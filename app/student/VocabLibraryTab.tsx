@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import type { MyVocabWord, LibraryBook, LibraryWord, VocabQuiz, VocabQuizItem, VocabFolder } from "./vocab-library-data";
 import {
   addMyVocabWordAction, deleteMyVocabWordAction,
@@ -24,18 +25,16 @@ export default function VocabLibraryTab({
   const [myWords, setMyWords] = useState(initialMyWords);
   const [folders, setFolders] = useState(initialFolders);
   return (
-    <div className="max-w-[760px] px-8 py-8">
-      <div className="flex gap-1 border-b border-grey-200 mb-5">
-        {([["words", "단어장"], ["quiz", "시험"]] as const).map(([id, label]) => (
-          <button
-            key={id}
-            onClick={() => setTab(id)}
-            className={"text-[13px] font-bold px-3.5 py-2 -mb-px border-b-2 " + (tab === id ? "border-ink text-ink" : "border-transparent text-grey-500")}
-          >
-            {label}
-          </button>
-        ))}
-      </div>
+    <div className="max-w-[760px]">
+      <UnderlineSubTabs
+        className="mb-5"
+        items={[
+          { id: "words", label: "단어장" },
+          { id: "quiz", label: "시험" },
+        ]}
+        activeId={tab}
+        onSelect={setTab}
+      />
       {tab === "words" ? (
         <WordsPanel myWords={myWords} setMyWords={setMyWords} folders={folders} setFolders={setFolders} books={books} readOnly={readOnly} />
       ) : (

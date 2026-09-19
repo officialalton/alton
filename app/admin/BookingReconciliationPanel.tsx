@@ -385,9 +385,9 @@ export default function BookingReconciliationPanel({
   }
 
   return (
-    <div className="max-w-[880px] px-8 py-8">
+    <div className="max-w-[880px]">
       <div className="flex items-center justify-between mb-1.5">
-        <h1 className="text-[20px] font-extrabold text-ink">예약 운영 · Calendar 동기화 불일치</h1>
+        <p className="text-[13px] text-grey-500">Calendar 동기화 불일치 확인 · 재처리</p>
         <div className="flex items-center gap-2">
           <button
             onClick={refresh}

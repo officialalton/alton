@@ -46,9 +46,7 @@ export default function BillingTab({
   }
 
   return (
-    <div className="max-w-[640px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-5">수업권</h1>
-
+    <div className="max-w-[640px]">
       <div className="grid grid-cols-3 gap-3 mb-6">
         {PACKAGES.map((p) => (
           <div key={p.name} className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3 text-center">

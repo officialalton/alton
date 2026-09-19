@@ -141,22 +141,22 @@ describe("AdminShell", () => {
   it("사이드바 항목을 보여주고, 기본 탭은 홈이다", () => {
     render(<AdminShell {...baseProps} />);
     [
-      "홈",
-      "사용자",
-      "매칭",
-      "신규",
-      "커리큘럼",
-      "구 크레딧(레거시)",
-      "수업권",
-      "통합 일정",
-      "정산",
+      "Home",
+      "Users",
+      "Matching",
+      "Onboarding",
+      "Curriculum",
+      "Legacy Credits",
+      "Entitlements",
+      "Schedule",
+      "Payouts",
     ].forEach((label) => expect(screen.getByText(label)).toBeInTheDocument());
     expect(screen.getByText("관리자, 안녕하세요")).toBeInTheDocument();
   });
 
   it("2026-09-10(P0-3 2차) — 브라우저 뒤로가기/앞으로가기로 initialTab prop이 바뀌면 activeTab이 그대로 따라간다(마운트 시점에만 반영되던 정체 상태 수정)", async () => {
     const { rerender } = render(<AdminShell {...baseProps} initialTab="entitlements" />);
-    expect(await screen.findByText("수업권 원장")).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: "Entitlements" })).toBeInTheDocument();
 
     // Next.js가 뒤로가기로 새 initialTab을 다시 내려주는 상황을 재현한다 —
     // AdminShell 컴포넌트 자체는 리마운트되지 않고 새 props만 받는다.
@@ -164,7 +164,7 @@ describe("AdminShell", () => {
     await waitFor(() =>
       expect(screen.getByRole("heading", { name: "과목 템플릿" })).toBeInTheDocument()
     );
-    expect(screen.queryByText("수업권 원장")).not.toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Entitlements" })).not.toBeInTheDocument();
   });
 
   it("2026-09-10(UI/UX 1차 리뷰 지적): '개발 로그'는 일반 네비게이션(사이드바)에 노출되지 않는다", () => {
@@ -181,13 +181,13 @@ describe("AdminShell", () => {
 
   it("사용자 탭을 누르면 UsersTab이 렌더링된다", () => {
     render(<AdminShell {...baseProps} />);
-    fireEvent.click(screen.getByText("사용자"));
+    fireEvent.click(screen.getByText("Users"));
     expect(screen.getByText("학부모")).toBeInTheDocument();
   });
 
   it("매칭 탭을 누르면 MatchingTab이 렌더링된다", () => {
     render(<AdminShell {...baseProps} />);
-    fireEvent.click(screen.getByText("매칭"));
+    fireEvent.click(screen.getByText("Matching"));
     expect(screen.getByText("매칭 대기 중인 학생이 없습니다.")).toBeInTheDocument();
   });
 
@@ -200,7 +200,7 @@ describe("AdminShell", () => {
 
   it("다른 탭에서 홈으로를 누르면 대시보드로 돌아온다", () => {
     render(<AdminShell {...baseProps} />);
-    fireEvent.click(screen.getByText("매칭"));
+    fireEvent.click(screen.getByText("Matching"));
     fireEvent.click(screen.getByText("관리자 ▾"));
     fireEvent.click(screen.getByText("홈으로"));
     expect(screen.getByText("관리자, 안녕하세요")).toBeInTheDocument();
@@ -208,21 +208,21 @@ describe("AdminShell", () => {
 
   it("커리큘럼 탭을 누르면 과목 템플릿 서브탭이 렌더링된다", async () => {
     render(<AdminShell {...baseProps} />);
-    fireEvent.click(screen.getByText("커리큘럼"));
+    fireEvent.click(screen.getByText("Curriculum"));
     // 목록은 화면이 직접 불러온다 — 도착한 뒤에 보인다.
     expect(await screen.findByText("+ 과목 추가")).toBeInTheDocument();
   });
 
   it("구 크레딧(레거시) 탭을 누르면 BillingTab이 렌더링된다", () => {
     render(<AdminShell {...baseProps} />);
-    fireEvent.click(screen.getByText("구 크레딧(레거시)"));
+    fireEvent.click(screen.getByText("Legacy Credits"));
     expect(screen.getByText("학생별 수업권 현황")).toBeInTheDocument();
   });
 
   it("수업권 탭을 누르면 EntitlementLedgerTab이 렌더링된다", () => {
     render(<AdminShell {...baseProps} />);
-    fireEvent.click(screen.getByText("수업권"));
-    expect(screen.getByText("수업권 원장")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("Entitlements"));
+    expect(screen.getByRole("heading", { name: "Entitlements" })).toBeInTheDocument();
   });
 
   it("2026-09-10(UI/UX 1차 리뷰 지적): 내비게이션엔 없지만 ?tab=devlog 직접 접근으로는 DevLogTab이 그대로 열린다(내부 전용 경로)", () => {
@@ -233,21 +233,21 @@ describe("AdminShell", () => {
 
   it("정산 탭을 누르면 PayoutBatchesTab이 렌더링된다", () => {
     render(<AdminShell {...baseProps} />);
-    fireEvent.click(screen.getByText("정산"));
-    expect(screen.getByText("정산", { selector: "h1" })).toBeInTheDocument();
+    fireEvent.click(screen.getByText("Payouts"));
+    expect(screen.getByRole("heading", { name: "Payouts" })).toBeInTheDocument();
     // P4-2(2026-09-12): 정상 경로가 자동 마감으로 바뀌면서 기본 버튼이
     // "월 마감 실행"이 됐다(기존 "Batch 생성"은 구경로로 남겨 이름이 바뀜).
     // 설명 문단에도 같은 문구가 나오므로 버튼으로 한정한다.
     expect(screen.getByRole("button", { name: "월 마감 실행" })).toBeInTheDocument();
   });
 
-  // 2026-09-18(고정형 모의고사 V1 내비 연결) — /admin/mock-exam은 AdminShell
-  // 탭(AdminTabId)이 아니라 독립 라우트라, 사이드바 클릭 시 router.push로
-  // 그 라우트로 이동해야 한다.
-  it("사이드바 '모의고사'를 누르면 /admin/mock-exam으로 이동한다", () => {
+  // 2026-09-19 — 관리자 포털의 모의고사는 다른 포털과 달리 AdminTabId에
+  // 포함된 일반 셸 탭이다(admin-tabs.ts ADMIN_NAV_TAB_IDS 참고) — 독립
+  // 라우트로 이동하지 않고 다른 탭과 같은 방식(?tab=mock-exam)으로 전환된다.
+  it("사이드바 '모의고사'를 누르면 모의고사 탭으로 전환된다", () => {
     pushMock.mockClear();
     render(<AdminShell {...baseProps} />);
-    fireEvent.click(screen.getByText("모의고사"));
-    expect(pushMock).toHaveBeenCalledWith("/admin/mock-exam");
+    fireEvent.click(screen.getByText("Mock Exams"));
+    expect(pushMock).toHaveBeenCalledWith("?tab=mock-exam", { scroll: false });
   });
 });

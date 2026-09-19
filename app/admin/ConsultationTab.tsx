@@ -90,8 +90,7 @@ export default function ConsultationTab({
   const [sub, setSub] = useState<SubTab>("consult");
 
   return (
-    <div className="px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-1">신규</h1>
+    <div>
       <p className="text-[13px] text-grey-500 mb-5">
         상담·계정 생성 유입부터 체험·정규 전환·계약까지의 흐름과 예외 상황을 관리합니다.
       </p>
