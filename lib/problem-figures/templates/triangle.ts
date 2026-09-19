@@ -275,14 +275,20 @@ export function renderTriangle(spec: TriangleSpec): { svg: string; alt: string; 
   if (!spec.second) {
     alt = drawTriangle(sheet, spec, { x: PADX, y: PADTOP, w: W - PADX * 2, h: H - PADTOP - PADBOT }).alt;
   } else {
-    const sc = spec.second.scale ?? 0.7;
+    const scRaw = spec.second.scale ?? 0.7;
+    // 2026-09-19 — scale이 1보다 클(둘째 삼각형이 더 큰) 경우도 지원한다. 두
+    // 배치 상자 높이 중 큰 쪽이 항상 hAvail(가용 높이)을 꽉 채우도록 둘 다
+    // maxSc(=max(1,scRaw))로 나눠 정규화 — 상대적 크기 관계는 그대로 유지하면서
+    // 어느 쪽도 캔버스 밖으로 나가지 않는다.
+    const maxSc = Math.max(1, scRaw);
+    const sc1 = 1 / maxSc, sc2 = scRaw / maxSc;
     const gap = 84; // 두 삼각형 사이 — 양쪽 꼭짓점 이름이 서로 닿지 않게
-    const totalUnits = 1 + sc;
+    const totalUnits = sc1 + sc2;
     const wAvail = W - PADX * 2 - gap;
-    const w1 = (wAvail * 1) / totalUnits, w2 = (wAvail * sc) / totalUnits;
+    const w1 = (wAvail * sc1) / totalUnits, w2 = (wAvail * sc2) / totalUnits;
     const hAvail = H - PADTOP - PADBOT;
-    const a1 = drawTriangle(sheet, spec, { x: PADX, y: PADTOP, w: w1, h: hAvail }).alt;
-    const a2 = drawTriangle(sheet, spec.second, { x: PADX + w1 + gap, y: PADTOP + hAvail * (1 - sc), w: w2, h: hAvail * sc }).alt;
+    const a1 = drawTriangle(sheet, spec, { x: PADX, y: PADTOP + hAvail * (1 - sc1), w: w1, h: hAvail * sc1 }).alt;
+    const a2 = drawTriangle(sheet, spec.second, { x: PADX + w1 + gap, y: PADTOP + hAvail * (1 - sc2), w: w2, h: hAvail * sc2 }).alt;
     alt = `${a1} ${a2}`;
   }
   // 라벨 중복(꼭짓점·발 이름)

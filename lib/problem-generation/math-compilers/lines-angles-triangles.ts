@@ -256,7 +256,11 @@ export function renderLinesAnglesProblem(model: LinesAnglesModel): CompiledMathP
       second: {
         vertices: ["D", "E", "F"],
         kind: "scalene",
-        scale: 0.8,
+        // DEF는 ABC보다 배율 k(=DE/AB)배 크거나 작다 — 항상 0.8배로 그리면
+        // (2026-09-19 발견) k>1(DEF가 더 큼)인 경우에도 화면에는 더 작게
+        // 그려져 실제 크기 관계와 반대로 보인다. 실제 배율 방향을 반영하되
+        // 렌더 한도(0.4~1.6, triangle.ts 검증 범위) 안으로 눌러 담는다.
+        scale: Math.max(0.4, Math.min(1.6, scaleNum / scaleDenom)),
         angles: [{ at: "D", tick: 1 }, { at: "E", tick: 2 }],
         sides: [{ between: ["D", "E"], label: fmt(sideDE) }],
       },

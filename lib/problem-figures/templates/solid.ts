@@ -93,7 +93,18 @@ export function renderSolid(spec: SolidSpec): { svg: string; alt: string; issues
         if (H0 !== null) known.push({ val: H0, cap: MAX_H, set: (px) => (h = px) });
         if (W0 !== null) known.push({ val: W0, cap: MAX_DEP, set: (px) => (depMag = px) });
         if (known.length >= 2) {
-          const pxPerUnit = Math.min(...known.map((k) => k.cap / k.val));
+          let pxPerUnit = Math.min(...known.map((k) => k.cap / k.val));
+          // 2026-09-19(제품 오너 발견) — 세 변 중 하나(주로 깊이·MAX_DEP)의 캡이 유독 작으면
+          // pxPerUnit 자체가 아주 작아져, 나머지 변들이 전부 MIN_SIDE 밑으로 떨어진다. 그 상태에서
+          // MIN_SIDE로 "각자" 끌어올리면(예: length=4→17.8px, height=2→8.9px 모두 40px로 절상)
+          // 서로 다른 값이 같은 픽셀 크기가 돼 비율이 깨진다(4×9×2 프리즘 사례). MIN_SIDE 밑으로
+          // 떨어지는 변이 있으면 pxPerUnit **전체**를 한 번에 끌어올려 비율을 유지한 채 최소
+          // 크기를 만족시키고, 그 결과 캔버스를 벗어나지 않게 다시 한 번 균일하게 눌러 담는다.
+          const minPx = Math.min(...known.map((k) => k.val * pxPerUnit));
+          if (minPx < MIN_SIDE) pxPerUnit *= MIN_SIDE / minPx;
+          const OUTER_MAX = 260;
+          const maxPx = Math.max(...known.map((k) => k.val * pxPerUnit));
+          if (maxPx > OUTER_MAX) pxPerUnit *= OUTER_MAX / maxPx;
           for (const k of known) k.set(Math.max(MIN_SIDE, Math.round(k.val * pxPerUnit)));
         }
       }
