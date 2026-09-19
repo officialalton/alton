@@ -315,10 +315,10 @@ describe("ParentShell", () => {
       />
     );
     fireEvent.click(screen.getByText("김민지 학부모님 ▾"));
-    expect(screen.getByText("동의")).toBeInTheDocument();
-    expect(screen.getByText("지인 추천")).toBeInTheDocument();
-    expect(screen.getByText("시간대 설정")).toBeInTheDocument();
-    expect(screen.getByText("로그아웃")).toBeInTheDocument();
+    expect(screen.getAllByText("동의").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("지인 추천").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("시간대 설정").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("로그아웃").length).toBeGreaterThan(0);
   });
 
   it("계정 메뉴의 지인 추천을 누르면 CreditsTab(추천 코드 전용)이 모달로 뜨고 결제수단 입력은 없다", () => {
@@ -332,7 +332,7 @@ describe("ParentShell", () => {
       />
     );
     fireEvent.click(screen.getByText("김민지 학부모님 ▾"));
-    fireEvent.click(screen.getByText("지인 추천"));
+    fireEvent.click(screen.getAllByText("지인 추천")[0]);
     expect(screen.getByText("추천 코드가 아직 없습니다.")).toBeInTheDocument();
     expect(screen.queryByText("장 보유")).not.toBeInTheDocument();
     expect(screen.queryByPlaceholderText("0000 0000 0000 0000")).not.toBeInTheDocument();
@@ -349,7 +349,7 @@ describe("ParentShell", () => {
       />
     );
     fireEvent.click(screen.getByText("김민지 학부모님 ▾"));
-    fireEvent.click(screen.getByText("동의"));
+    fireEvent.click(screen.getAllByText("동의")[0]);
     expect(pushMock).toHaveBeenCalledWith("?child=s1&tab=consent", { scroll: false });
   });
 
@@ -368,7 +368,7 @@ describe("ParentShell", () => {
       />
     );
     fireEvent.click(screen.getByText("김민지 학부모님 ▾"));
-    expect(within(screen.getByText("동의").parentElement as HTMLElement).getByText("1")).toBeInTheDocument();
+    expect(within(screen.getAllByText("동의")[0].parentElement as HTMLElement).getByText("1")).toBeInTheDocument();
   });
 
   it("생년월일이 아직 입력되지 않은 자녀는 is_under_13이 true여도 동의 배지 카운트에 포함하지 않는다(계정 생성 직후 회귀 방지)", () => {
@@ -385,7 +385,7 @@ describe("ParentShell", () => {
       />
     );
     fireEvent.click(screen.getByText("김민지 학부모님 ▾"));
-    expect(within(screen.getByText("동의").parentElement as HTMLElement).queryByText("1")).not.toBeInTheDocument();
+    expect(within(screen.getAllByText("동의")[0].parentElement as HTMLElement).queryByText("1")).not.toBeInTheDocument();
   });
 
   it("조치가 필요한 항목이 전부 없으면 동의 배지를 보여주지 않는다", () => {
@@ -422,7 +422,7 @@ describe("ParentShell", () => {
       />
     );
     fireEvent.click(screen.getByText("김민지 학부모님 ▾"));
-    expect(within(screen.getByText("동의").parentElement as HTMLElement).getByText("1")).toBeInTheDocument();
+    expect(within(screen.getAllByText("동의")[0].parentElement as HTMLElement).getByText("1")).toBeInTheDocument();
   });
 
   // 2026-09-18(고정형 모의고사 V1 내비 연결) — 홈 탭에서 "모의고사" 링크를

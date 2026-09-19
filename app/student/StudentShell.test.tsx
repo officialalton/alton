@@ -297,7 +297,7 @@ describe("StudentShell", () => {
       />
     );
     fireEvent.click(screen.getByText("지훈 학생님 ▾"));
-    expect(screen.getByText("로그아웃")).toBeInTheDocument();
+    expect(screen.getAllByText("로그아웃").length).toBeGreaterThan(0);
   });
 
   // 2026-09-18(고정형 모의고사 V1 내비 연결) — /student/mock-exam은 StudentShell

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import TeacherPayoutAccountsPanel from "./TeacherPayoutAccountsPanel";
 import type { PayoutBatchListItem } from "./payout-batches-data";
 import { previousMonthRange } from "./payouts-data";
@@ -797,22 +798,7 @@ function SettlementSubtabs({
     { id: "batches", label: "정산 배치" },
     { id: "accounts", label: "수취 계좌" },
   ];
-  return (
-    <div className="flex gap-4 mb-4 border-b border-grey-200">
-      {tabs.map((t) => (
-        <button
-          key={t.id}
-          onClick={() => onChange(t.id)}
-          className={
-            "text-[13.5px] font-semibold pb-2.5 -mb-px border-b-2 " +
-            (subtab === t.id ? "text-ink border-ink" : "text-grey-500 border-transparent")
-          }
-        >
-          {t.label}
-        </button>
-      ))}
-    </div>
-  );
+  return <UnderlineSubTabs items={tabs} activeId={subtab} onSelect={onChange} className="mb-4" />;
 }
 
 // P4-2(UAT 후속) — 버튼을 눌렀는데 아무 반응이 없던 문제를 없애기 위해, 필수값은

@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import { listSubjectCatalogAction } from "./subject-actions";
 import SubjectTemplateTab from "./SubjectTemplateTab";
 import CurriculumDocsTab from "./CurriculumDocsTab";
@@ -60,22 +61,7 @@ export default function CatalogTab({
 
   return (
     <div>
-      <div className="flex gap-4 px-8 pt-6 border-b border-grey-200">
-        {SUBTABS.map((t) => (
-          <button
-            key={t.id}
-            onClick={() => setSubtab(t.id)}
-            className={
-              "text-[13.5px] font-semibold pb-2.5 -mb-px border-b-2 " +
-              (subtab === t.id
-                ? "text-ink border-ink"
-                : "text-grey-500 border-transparent")
-            }
-          >
-            {t.label}
-          </button>
-        ))}
-      </div>
+      <UnderlineSubTabs items={SUBTABS} activeId={subtab} onSelect={setSubtab} className="mb-0" />
 
       {subtab === "subjects" ? (
         subjectsState === "loading" ? (

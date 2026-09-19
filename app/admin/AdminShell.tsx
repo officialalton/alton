@@ -9,6 +9,7 @@ import { linkAdminGoogleAccount } from "./google-link-actions";
 import { resolveAdminTab, type AdminTabId } from "./admin-tabs";
 import { setActiveAdminUser, clearAdminTabCache } from "./tab-data-cache";
 import PageFrame from "@/app/components/PageFrame";
+import NavIcon from "@/app/components/NavIcon";
 import AdminHomeDashboard from "./AdminHomeDashboard";
 import type { AdminDashboardData } from "./dashboard-data";
 import CatalogTab from "./CatalogTab";
@@ -59,21 +60,21 @@ import type {
 // 2026-09-19(UI 통일화) — 좌측 네비게이션 라벨은 전부 영어로 통일한다(Acely
 // 레퍼런스). 탭 안 본문의 한국어 텍스트는 유지, 라벨만 영어로 바꾼다.
 const NAV_ITEMS = [
-  { id: "home", label: "Home", icon: "🏠" },
-  { id: "users", label: "Users", icon: "👥" },
-  { id: "matching", label: "Matching", icon: "🔗" },
-  { id: "consult", label: "Onboarding", icon: "🗓" },
-  { id: "inquiry", label: "Inquiries", icon: "💬" },
-  { id: "catalog", label: "Curriculum", icon: "📘" },
-  { id: "problem-bank", label: "Question Bank", icon: "🧩" },
-  { id: "mock-exam", label: "Mock Exams", icon: "📝" },
-  { id: "billing", label: "Legacy Credits", icon: "💳" },
-  { id: "entitlements", label: "Entitlements", icon: "🎫" },
-  { id: "unified-schedule", label: "Schedule", icon: "🗺️" },
-  { id: "booking", label: "Bookings", icon: "🗓️" },
-  { id: "payouts", label: "Payouts", icon: "💸" },
-  { id: "documents", label: "Documents", icon: "📄" },
-  { id: "workspace", label: "Workspace", icon: "🔑" },
+  { id: "home", label: "Home", icon: "home" },
+  { id: "users", label: "Users", icon: "users" },
+  { id: "matching", label: "Matching", icon: "matching" },
+  { id: "consult", label: "Onboarding", icon: "onboarding" },
+  { id: "inquiry", label: "Inquiries", icon: "inquiries" },
+  { id: "catalog", label: "Curriculum", icon: "curriculum" },
+  { id: "problem-bank", label: "Question Bank", icon: "questionBank" },
+  { id: "mock-exam", label: "Mock Exams", icon: "mockExam" },
+  { id: "billing", label: "Legacy Credits", icon: "legacyCredits" },
+  { id: "entitlements", label: "Entitlements", icon: "entitlements" },
+  { id: "unified-schedule", label: "Schedule", icon: "schedule" },
+  { id: "booking", label: "Bookings", icon: "bookings" },
+  { id: "payouts", label: "Payouts", icon: "payouts" },
+  { id: "documents", label: "Documents", icon: "documents" },
+  { id: "workspace", label: "Workspace", icon: "workspace" },
 ] as const;
 
 // 2026-09-10(UI/UX 1차 리뷰 지적) — "개발 로그"는 일반 운영 업무 중 볼 메뉴가
@@ -232,37 +233,43 @@ export default function AdminShell({
 
   return (
     <div className="min-h-screen bg-white flex">
-      <aside className="hidden md:flex w-[88px] shrink-0 border-r border-grey-200 flex-col items-center py-5 gap-1">
-        <div className="w-9 h-9 rounded-full bg-red text-white font-extrabold text-[15px] flex items-center justify-center mb-4">
-          A
+      <aside className="hidden md:flex w-56 shrink-0 border-r border-grey-200 flex-col py-5 px-3 gap-0.5 overflow-y-auto">
+        <div className="flex items-center gap-2 px-2.5 mb-5">
+          <div className="w-8 h-8 rounded-full bg-red text-white font-extrabold text-[14px] flex items-center justify-center shrink-0">
+            A
+          </div>
+          <span className="text-[13.5px] font-extrabold text-ink">ALTON</span>
         </div>
         {NAV_ITEMS.map((item) => (
           <button
             key={item.id}
             onClick={() => selectTab(item.id)}
             className={
-              "w-full flex flex-col items-center gap-0.5 py-2.5 text-[10.5px] font-semibold " +
-              (activeTab === item.id ? "text-ink" : "text-grey-300")
+              "w-full flex items-center gap-2.5 px-2.5 py-2.5 rounded-lg text-[13px] font-semibold transition-colors " +
+              (activeTab === item.id ? "bg-red text-white" : "text-grey-500 hover:bg-grey-100 hover:text-ink")
             }
           >
-            <span className="text-[17px] grayscale">{item.icon}</span>
+            <NavIcon name={item.icon} className="w-[18px] h-[18px] shrink-0" />
             {item.label}
           </button>
         ))}
-      </aside>
 
-      <MobileDrawerNav groups={mobileGroups} activeId={activeTab} onSelect={(id) => selectTab(id as TabId)} />
-
-      <div className="flex-1 flex flex-col">
-        <div className="flex items-center justify-end gap-4 border-b border-grey-200 px-6 py-3 relative">
+        {/* 2026-09-19(UAT 반영) — Acely 레퍼런스: 계정 메뉴를 상단 헤더바가
+            아니라 사이드바 맨 아래(프로필)로 옮긴다. 상단 헤더바 자체를
+            없앤다. 위로 펼쳐지는 드롭다운(bottom-full). */}
+        <div className="mt-auto pt-2 relative">
           <button
             onClick={() => setAccountMenuOpen((v) => !v)}
-            className="text-[13px] font-semibold text-ink"
+            className="w-full flex items-center gap-2.5 px-2.5 py-2.5 rounded-lg text-[13px] font-semibold text-ink hover:bg-grey-100"
           >
-            관리자 ▾
+            <div className="w-7 h-7 rounded-full bg-grey-100 text-ink font-extrabold text-[12px] flex items-center justify-center shrink-0">
+              A
+            </div>
+            <span className="flex-1 text-left truncate">관리자</span>
+            <NavIcon name="settings" className="w-4 h-4 shrink-0 text-grey-400" />
           </button>
           {accountMenuOpen && (
-            <div className="absolute top-full right-6 mt-1 w-40 bg-white border-[1.5px] border-grey-200 rounded-lg shadow-sm py-1.5 z-30">
+            <div className="absolute bottom-full left-0 mb-1 w-full bg-white border-[1.5px] border-grey-200 rounded-lg shadow-sm py-1.5 z-30">
               <button
                 onClick={() => selectTab("home")}
                 className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink"
@@ -293,11 +300,63 @@ export default function AdminShell({
               </form>
             </div>
           )}
-          {timezoneModalOpen && (
-            <TimezoneSettingsModal
-              showHouseholdDefault={false}
-              onClose={() => setTimezoneModalOpen(false)}
-            />
+        </div>
+      </aside>
+
+      {/* 2026-09-19 — aside는 모바일에서 hidden(display:none)이라, 그 안에
+          두면 모바일 계정 메뉴에서 연 모달이 함께 숨어 안 보인다. aside
+          바깥(항상 렌더링되는 자리)에 둔다. */}
+      {timezoneModalOpen && (
+        <TimezoneSettingsModal
+          showHouseholdDefault={false}
+          onClose={() => setTimezoneModalOpen(false)}
+        />
+      )}
+
+      <MobileDrawerNav groups={mobileGroups} activeId={activeTab} onSelect={(id) => selectTab(id as TabId)} />
+
+      <div className="flex-1 flex flex-col">
+        {/* 2026-09-19(UAT 반영) — 데스크톱은 계정 메뉴가 사이드바 맨 아래로
+            옮겨져 상단 헤더바가 없다. 모바일은 사이드바가 숨겨지므로 계정
+            메뉴만 담은 얇은 바를 여기 남긴다. */}
+        <div className="md:hidden flex items-center justify-end gap-4 border-b border-grey-200 px-4 py-2.5 relative">
+          <button
+            onClick={() => setAccountMenuOpen((v) => !v)}
+            className="text-[13px] font-semibold text-ink"
+          >
+            관리자 ▾
+          </button>
+          {accountMenuOpen && (
+            <div className="absolute top-full right-4 mt-1 w-40 bg-white border-[1.5px] border-grey-200 rounded-lg shadow-sm py-1.5 z-30">
+              <button
+                onClick={() => selectTab("home")}
+                className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink"
+              >
+                홈으로
+              </button>
+              <div className="h-px bg-grey-200 my-1" />
+              <form action={linkAdminGoogleAccount}>
+                <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink">
+                  Google 계정 연결
+                </button>
+              </form>
+              <div className="h-px bg-grey-200 my-1" />
+              <button
+                onClick={() => {
+                  setTimezoneModalOpen(true);
+                  setAccountMenuOpen(false);
+                }}
+                className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink"
+              >
+                시간대 설정
+              </button>
+              <div className="h-px bg-grey-200 my-1" />
+              <form action={logout} onSubmit={() => clearAdminTabCache()}>
+                <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-red">
+                  로그아웃
+                </button>
+              </form>
+            </div>
           )}
         </div>
 

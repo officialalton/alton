@@ -194,15 +194,15 @@ describe("AdminShell", () => {
   it("계정 메뉴를 열면 홈으로/로그아웃 버튼이 보인다", () => {
     render(<AdminShell {...baseProps} />);
     fireEvent.click(screen.getByText("관리자 ▾"));
-    expect(screen.getByText("홈으로")).toBeInTheDocument();
-    expect(screen.getByText("로그아웃")).toBeInTheDocument();
+    expect(screen.getAllByText("홈으로").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("로그아웃").length).toBeGreaterThan(0);
   });
 
   it("다른 탭에서 홈으로를 누르면 대시보드로 돌아온다", () => {
     render(<AdminShell {...baseProps} />);
     fireEvent.click(screen.getByText("Matching"));
     fireEvent.click(screen.getByText("관리자 ▾"));
-    fireEvent.click(screen.getByText("홈으로"));
+    fireEvent.click(screen.getAllByText("홈으로")[0]);
     expect(screen.getByText("관리자, 안녕하세요")).toBeInTheDocument();
   });
 

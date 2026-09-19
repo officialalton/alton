@@ -92,10 +92,6 @@ export default function ConsultationTab({
 
   return (
     <div>
-      <p className="text-[13px] text-grey-500 mb-5">
-        상담·계정 생성 유입부터 체험·정규 전환·계약까지의 흐름과 예외 상황을 관리합니다.
-      </p>
-
       <UnderlineSubTabs items={SUB_NAV} activeId={sub} onSelect={setSub} className="mb-6 flex-wrap" />
 
       {sub === "consult" && (

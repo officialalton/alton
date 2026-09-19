@@ -9,7 +9,7 @@ import type { Memo } from "./memo-data";
 import type { ReviewData, StudentFeedback } from "./review-data";
 import CurriculumView from "./CurriculumView";
 import ReviewPanel from "./ReviewPanel";
-import PillSubTabs from "@/app/components/PillSubTabs";
+import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 
 type SubView =
   | { type: "list" }
@@ -76,7 +76,7 @@ export default function LessonsTab({
   return (
     <div className={hideHeader ? "" : "max-w-[640px] px-8 py-8"}>
       {!forcedSubtab && (
-        <PillSubTabs
+        <UnderlineSubTabs
           className="mb-5"
           items={[
             { id: "upcoming", label: "예정된 수업" },

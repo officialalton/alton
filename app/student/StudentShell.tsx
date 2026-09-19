@@ -45,24 +45,25 @@ import { reportTeacherIssue } from "./incident-report-actions";
 import RoadmapView from "@/app/components/RoadmapView";
 import type { RoadmapData } from "@/lib/roadmap/types";
 import PageFrame from "@/app/components/PageFrame";
+import NavIcon from "@/app/components/NavIcon";
 
 // 2026-09-19(UI 통일화) — 좌측 네비게이션 라벨은 전부 영어로 통일한다(Acely
 // 레퍼런스). 탭 안 본문의 한국어 텍스트는 유지, 라벨만 영어로 바꾼다.
 const NAV_ITEMS = [
-  { id: "home", label: "Home", icon: "🏠" },
-  { id: "roadmap", label: "Roadmap", icon: "🧭" },
-  { id: "enrollment", label: "Courses", icon: "🎓" },
+  { id: "home", label: "Home", icon: "home" },
+  { id: "roadmap", label: "Roadmap", icon: "roadmap" },
+  { id: "enrollment", label: "Courses", icon: "courses" },
   // 2026-09-06(A안 UI 정리) — "예약"(v3 예약/캘린더)과 "레슨"(레거시 커리큘럼·리뷰)이
   // 기능 중복이라는 지적에 따라 하나의 "수업" 탭으로 합쳤다(ClassesTab, 예정/지난
   // 두 서브탭). 자세한 내용은 ClassesTab.tsx 상단 주석 참고.
-  { id: "classes", label: "Classes", icon: "📅" },
-  { id: "teacher", label: "My Teacher", icon: "👤" },
-  { id: "homework", label: "Assignments", icon: "📝" },
-  { id: "problemlog", label: "Practice", icon: "📋" },
-  { id: "vocab", label: "Vocabulary", icon: "📖" },
-  { id: "materials", label: "Materials", icon: "📚" },
-  { id: "credits", label: "Credits", icon: "💳" },
-  { id: "stats", label: "Performance", icon: "📊" },
+  { id: "classes", label: "Classes", icon: "classes" },
+  { id: "teacher", label: "My Teacher", icon: "teacher" },
+  { id: "homework", label: "Assignments", icon: "assignments" },
+  { id: "problemlog", label: "Practice", icon: "practice" },
+  { id: "vocab", label: "Vocabulary", icon: "vocabulary" },
+  { id: "materials", label: "Materials", icon: "materials" },
+  { id: "credits", label: "Credits", icon: "credits" },
+  { id: "stats", label: "Performance", icon: "performance" },
 ] as const;
 
 type TabId = (typeof NAV_ITEMS)[number]["id"];
@@ -70,7 +71,7 @@ type TabId = (typeof NAV_ITEMS)[number]["id"];
 // 2026-09-18(고정형 모의고사 V1) — /student/mock-exam은 StudentShell 탭이 아니라
 // 독립 라우트다. NAV_ITEMS/TabId를 건드리지 않고 router.push로 이동하는 링크
 // 전용 항목을 별도로 둔다.
-const MOCK_EXAM_NAV_ITEM = { id: "mock-exam", label: "Mock Exams", icon: "📝" } as const;
+const MOCK_EXAM_NAV_ITEM = { id: "mock-exam", label: "Mock Exams", icon: "mockExam" } as const;
 
 export default function StudentShell({
   studentName,
@@ -170,49 +171,50 @@ export default function StudentShell({
 
   return (
     <div className="min-h-screen bg-white flex">
-      <aside className="hidden md:flex w-[88px] shrink-0 border-r border-grey-200 flex-col items-center py-5 gap-1">
-        <div className="w-9 h-9 rounded-full bg-red text-white font-extrabold text-[15px] flex items-center justify-center mb-4">
-          A
+      <aside className="hidden md:flex w-56 shrink-0 border-r border-grey-200 flex-col py-5 px-3 gap-0.5">
+        <div className="flex items-center gap-2 px-2.5 mb-5">
+          <div className="w-8 h-8 rounded-full bg-red text-white font-extrabold text-[14px] flex items-center justify-center shrink-0">
+            A
+          </div>
+          <span className="text-[13.5px] font-extrabold text-ink">ALTON</span>
         </div>
         {NAV_ITEMS.map((item) => (
           <button
             key={item.id}
             onClick={() => selectTab(item.id)}
             className={
-              "w-full flex flex-col items-center gap-0.5 py-2.5 text-[10.5px] font-semibold " +
-              (activeTab === item.id ? "text-ink" : "text-grey-300")
+              "w-full flex items-center gap-2.5 px-2.5 py-2.5 rounded-lg text-[13px] font-semibold transition-colors " +
+              (activeTab === item.id ? "bg-red text-white" : "text-grey-500 hover:bg-grey-100 hover:text-ink")
             }
           >
-            <span className="text-[17px] grayscale">{item.icon}</span>
+            <NavIcon name={item.icon} className="w-[18px] h-[18px] shrink-0" />
             {item.label}
           </button>
         ))}
         <button
           onClick={() => router.push("/student/mock-exam")}
-          className="w-full flex flex-col items-center gap-0.5 py-2.5 text-[10.5px] font-semibold text-grey-300"
+          className="w-full flex items-center gap-2.5 px-2.5 py-2.5 rounded-lg text-[13px] font-semibold text-grey-500 hover:bg-grey-100 hover:text-ink transition-colors"
         >
-          <span className="text-[17px] grayscale">{MOCK_EXAM_NAV_ITEM.icon}</span>
+          <NavIcon name={MOCK_EXAM_NAV_ITEM.icon} className="w-[18px] h-[18px] shrink-0" />
           {MOCK_EXAM_NAV_ITEM.label}
         </button>
-      </aside>
 
-      <MobileBottomNav
-        primary={mobilePrimary}
-        more={[...mobileMore, MOCK_EXAM_NAV_ITEM]}
-        activeId={activeTab}
-        onSelect={(id) => (id === MOCK_EXAM_NAV_ITEM.id ? router.push("/student/mock-exam") : selectTab(id as TabId))}
-      />
-
-      <div className="flex-1 flex flex-col pb-16 md:pb-0">
-        <div className="flex items-center justify-end gap-4 border-b border-grey-200 px-6 py-3 relative">
+        {/* 2026-09-19(UAT 반영) — Acely 레퍼런스: 계정 메뉴를 상단 헤더바가
+            아니라 사이드바 맨 아래(프로필)로 옮긴다. 상단 헤더바 자체를
+            없앤다. 위로 펼쳐지는 드롭다운(bottom-full). */}
+        <div className="mt-auto pt-2 relative">
           <button
             onClick={() => setAccountMenuOpen((v) => !v)}
-            className="text-[13px] font-semibold text-ink"
+            className="w-full flex items-center gap-2.5 px-2.5 py-2.5 rounded-lg text-[13px] font-semibold text-ink hover:bg-grey-100"
           >
-            {studentName} 학생님 ▾
+            <div className="w-7 h-7 rounded-full bg-grey-100 text-ink font-extrabold text-[12px] flex items-center justify-center shrink-0">
+              {studentName.charAt(0)}
+            </div>
+            <span className="flex-1 text-left truncate">{studentName} 학생님</span>
+            <NavIcon name="settings" className="w-4 h-4 shrink-0 text-grey-400" />
           </button>
           {accountMenuOpen && (
-            <div className="absolute top-full right-6 mt-1 w-40 bg-white border-[1.5px] border-grey-200 rounded-lg shadow-sm py-1.5 z-30">
+            <div className="absolute bottom-full left-0 mb-1 w-full bg-white border-[1.5px] border-grey-200 rounded-lg shadow-sm py-1.5 z-30">
               <button
                 onClick={() => {
                   setTimezoneModalOpen(true);
@@ -230,11 +232,55 @@ export default function StudentShell({
               </form>
             </div>
           )}
-          {timezoneModalOpen && (
-            <TimezoneSettingsModal
-              showHouseholdDefault={false}
-              onClose={() => setTimezoneModalOpen(false)}
-            />
+        </div>
+      </aside>
+
+      {/* 2026-09-19 — aside는 모바일에서 hidden(display:none)이라, 그 안에
+          두면 모바일 계정 메뉴에서 연 모달이 함께 숨어 안 보인다. aside
+          바깥(항상 렌더링되는 자리)에 둔다. */}
+      {timezoneModalOpen && (
+        <TimezoneSettingsModal
+          showHouseholdDefault={false}
+          onClose={() => setTimezoneModalOpen(false)}
+        />
+      )}
+
+      <MobileBottomNav
+        primary={mobilePrimary}
+        more={[...mobileMore, MOCK_EXAM_NAV_ITEM]}
+        activeId={activeTab}
+        onSelect={(id) => (id === MOCK_EXAM_NAV_ITEM.id ? router.push("/student/mock-exam") : selectTab(id as TabId))}
+      />
+
+      <div className="flex-1 flex flex-col pb-16 md:pb-0">
+        {/* 2026-09-19(UAT 반영) — 데스크톱은 계정 메뉴가 사이드바 맨 아래로
+            옮겨져 상단 헤더바가 없다. 모바일은 사이드바 자체가 숨겨지므로
+            계정 메뉴만 담은 얇은 바를 여기 남긴다. */}
+        <div className="md:hidden flex items-center justify-end gap-4 border-b border-grey-200 px-4 py-2.5 relative">
+          <button
+            onClick={() => setAccountMenuOpen((v) => !v)}
+            className="text-[13px] font-semibold text-ink"
+          >
+            {studentName} 학생님 ▾
+          </button>
+          {accountMenuOpen && (
+            <div className="absolute top-full right-4 mt-1 w-40 bg-white border-[1.5px] border-grey-200 rounded-lg shadow-sm py-1.5 z-30">
+              <button
+                onClick={() => {
+                  setTimezoneModalOpen(true);
+                  setAccountMenuOpen(false);
+                }}
+                className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink"
+              >
+                시간대 설정
+              </button>
+              <div className="h-px bg-grey-200 my-1" />
+              <form action={logout}>
+                <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-red">
+                  로그아웃
+                </button>
+              </form>
+            </div>
           )}
         </div>
 

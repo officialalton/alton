@@ -128,10 +128,6 @@ export default function WorkspaceTab({
 
   return (
     <div className="max-w-[760px]">
-      <p className="text-[13px] text-grey-500 mb-5">
-        선생님 Google Workspace 프로비저닝 현황을 관리합니다.
-      </p>
-
       {error && (
         <div className="bg-red/10 text-red text-[13px] font-semibold rounded-lg px-4 py-3 mb-4">
           {error}

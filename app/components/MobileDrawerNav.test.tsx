@@ -1,10 +1,10 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import MobileDrawerNav from "./MobileDrawerNav";
+import MobileDrawerNav, { type MobileNavGroup } from "./MobileDrawerNav";
 
-const groups = [
-  { label: "운영", items: [{ id: "home", label: "홈", icon: "🏠" }] },
-  { label: "정산", items: [{ id: "payouts", label: "정산 관리", icon: "💸" }] },
+const groups: MobileNavGroup[] = [
+  { label: "운영", items: [{ id: "home", label: "홈", icon: "home" }] },
+  { label: "정산", items: [{ id: "payouts", label: "정산 관리", icon: "payouts" }] },
 ];
 
 describe("MobileDrawerNav", () => {

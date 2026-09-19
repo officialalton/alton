@@ -144,7 +144,7 @@ describe("TeacherShell", () => {
   it("계정 메뉴를 열면 로그아웃 버튼이 보인다", () => {
     render(<TeacherShell {...baseProps} />);
     fireEvent.click(screen.getByText("박서연 선생님 ▾"));
-    expect(screen.getByText("로그아웃")).toBeInTheDocument();
+    expect(screen.getAllByText("로그아웃").length).toBeGreaterThan(0);
   });
 
   // 2026-09-18(고정형 모의고사 V1 내비 연결) — /teacher/mock-exam은 TeacherShell
