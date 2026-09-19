@@ -356,6 +356,32 @@ export type UpsertAdmissionCycleInput = {
   portfolioRequired?: boolean;
   interviewRequired?: boolean | null;
   acceptanceRate?: number | null;
+  // Part 3(2026-09-19) — 재학생/입시 통계.
+  pellGrantPct?: number | null;
+  studentFacultyRatio?: string | null;
+  gradRate4yr?: number | null;
+  gradRate6yr?: number | null;
+  retentionRate?: number | null;
+  totalApplicants?: number | null;
+  yieldRate?: number | null;
+  internationalPct?: number | null;
+  womenPct?: number | null;
+  // Part 5(2026-09-19) — 비용/재정지원, ED/EA 제도 세부, 학사 상세, 합격자 학업 프로필.
+  tuitionInState?: number | null;
+  tuitionOutState?: number | null;
+  roomBoardCost?: number | null;
+  avgNetPrice?: number | null;
+  pctReceivingAid?: number | null;
+  avgAidAward?: number | null;
+  eaRestrictive?: boolean | null;
+  ed2Deadline?: string | null;
+  ed2DecisionDate?: string | null;
+  classSizeUnder20Pct?: number | null;
+  classSizeOver50Pct?: number | null;
+  studyAbroadPct?: number | null;
+  admittedAvgApExams?: number | null;
+  admittedWeightedGpaAvg?: number | null;
+  admittedTop10pctClassRankPct?: number | null;
 };
 
 /** 연도별 입시 사이클을 새로 만들거나(있으면) 갱신한다 — (university_id, cycle_year) unique. */
@@ -397,6 +423,30 @@ export async function upsertAdmissionCycle(input: UpsertAdmissionCycleInput): Pr
       portfolio_required: input.portfolioRequired ?? false,
       interview_required: input.interviewRequired ?? null,
       acceptance_rate: input.acceptanceRate ?? null,
+      pell_grant_pct: input.pellGrantPct ?? null,
+      student_faculty_ratio: input.studentFacultyRatio ?? null,
+      grad_rate_4yr: input.gradRate4yr ?? null,
+      grad_rate_6yr: input.gradRate6yr ?? null,
+      retention_rate: input.retentionRate ?? null,
+      total_applicants: input.totalApplicants ?? null,
+      yield_rate: input.yieldRate ?? null,
+      international_pct: input.internationalPct ?? null,
+      women_pct: input.womenPct ?? null,
+      tuition_in_state: input.tuitionInState ?? null,
+      tuition_out_state: input.tuitionOutState ?? null,
+      room_board_cost: input.roomBoardCost ?? null,
+      avg_net_price: input.avgNetPrice ?? null,
+      pct_receiving_aid: input.pctReceivingAid ?? null,
+      avg_aid_award: input.avgAidAward ?? null,
+      ea_restrictive: input.eaRestrictive ?? null,
+      ed2_deadline: input.ed2Deadline ?? null,
+      ed2_decision_date: input.ed2DecisionDate ?? null,
+      class_size_under_20_pct: input.classSizeUnder20Pct ?? null,
+      class_size_over_50_pct: input.classSizeOver50Pct ?? null,
+      study_abroad_pct: input.studyAbroadPct ?? null,
+      admitted_avg_ap_exams: input.admittedAvgApExams ?? null,
+      admitted_weighted_gpa_avg: input.admittedWeightedGpaAvg ?? null,
+      admitted_top10pct_class_rank_pct: input.admittedTop10pctClassRankPct ?? null,
     },
     { onConflict: "university_id,cycle_year" },
   );
