@@ -5,7 +5,9 @@ import { useRouter } from "next/navigation";
 import { logout } from "@/app/login/actions";
 import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
-import PillSubTabs from "@/app/components/PillSubTabs";
+import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
+import PageFrame from "@/app/components/PageFrame";
+import NavIcon from "@/app/components/NavIcon";
 import type { DashboardData } from "@/app/student/dashboard-data";
 import LessonsTab from "@/app/student/LessonsTab";
 import type { LessonItem } from "@/app/student/lessons-data";
@@ -57,15 +59,21 @@ import { getRoadmapForStudent } from "@/lib/roadmap/actions";
 // 라이브러리 탭만 제거), "통계"(홈 서브탭으로 이동), "지인 추천"/"동의"
 // (프로필 드롭다운으로 이동)는 메인 내비에서 제거한다. "문의/상담신청/메신저"는
 // "상담" 탭 산하 서브탭(상담 신청/상담 내역/메신저)으로 통합한다.
+// 2026-09-19(UI 통일화) — 좌측 네비게이션 라벨은 전부 영어로 통일한다(Acely
+// 레퍼런스). 탭 안 본문의 한국어 텍스트는 유지, 라벨만 영어로 바꾼다.
 const NAV_ITEMS = [
-  { id: "home", label: "홈", icon: "🏠" },
-  { id: "roadmap", label: "로드맵", icon: "🧭" },
-  { id: "entitlements", label: "수업권", icon: "🎟️" },
-  { id: "enrollment", label: "수강 과목", icon: "🎓" },
-  { id: "lessons", label: "수업", icon: "📅" },
-  { id: "consult", label: "상담", icon: "🗓️" },
-  { id: "vocab", label: "단어장", icon: "🔤" },
-  { id: "homework", label: "과제", icon: "📝" },
+  { id: "home", label: "Home", icon: "home" },
+  { id: "roadmap", label: "Roadmap", icon: "roadmap" },
+  { id: "entitlements", label: "Credits", icon: "credits" },
+  { id: "enrollment", label: "My Courses", icon: "courses" },
+  { id: "lessons", label: "Classes", icon: "classes" },
+  // 2026-09-19(UAT 반영, 제품 오너 결정) — 2026-09-17 R13에서 "예약 독립 탭
+  // 제거 → 수업 탭 안 버튼으로 흡수"로 정리했던 것을 이번에 다시 되돌린다.
+  // 독립 탭으로 예약 화면(LessonBookingTab)을 그대로 연다.
+  { id: "bookings", label: "Bookings", icon: "bookings" },
+  { id: "consult", label: "Consultations", icon: "consultations" },
+  { id: "vocab", label: "Vocabulary", icon: "vocabulary" },
+  { id: "homework", label: "Assignments", icon: "assignments" },
 ] as const;
 
 // 메인 내비에는 더 이상 그리지 않지만(사이드바/모바일 목록에서 숨김),
@@ -146,8 +154,11 @@ export default function ParentShell({
   // 상담 탭 산하 서브탭(신청/내역/메신저) — 메인 내비 항목 수를 늘리지 않고
   // 기존 3개 컴포넌트를 그대로 재사용한다.
   const [consultSubTab, setConsultSubTab] = useState<"request" | "history" | "messenger">("request");
+  // 2026-09-19(UAT 반영) — "수업" 탭의 예정/지난 서브탭을 PageFrame 서브탭
+  // 자리로 끌어올려, "예정 수업 예약하기" 버튼이 그 옆에 나란히(같은 줄) 있게
+  // 한다(전에는 LessonsTab 내부 서브탭 위에 따로 떠 있었다).
+  const [lessonsSubTab, setLessonsSubTab] = useState<"upcoming" | "past">("upcoming");
   const [creditsModalOpen, setCreditsModalOpen] = useState(false);
-  const [bookingModalOpen, setBookingModalOpen] = useState(false);
   // 2026-09-18 — 홈 재설계: "일정 확인"에서 "리뷰 확인"으로 목적이 바뀌어
   // 종합 리뷰(기본)/수업 리뷰(시간순)/상담 리뷰/통계 4개 읽기 전용 서브탭으로
   // 구성한다. 상담 리뷰는 종합 리뷰에 합치지 않는다(사용자 결정, 2026-09-18).
@@ -251,23 +262,44 @@ export default function ParentShell({
 
   return (
     <div className="min-h-screen bg-white flex">
-      <aside className="hidden md:flex w-[88px] shrink-0 border-r border-grey-200 flex-col items-center py-5 gap-1">
-        <div className="w-9 h-9 rounded-full bg-red text-white font-extrabold text-[15px] flex items-center justify-center mb-4">
-          A
+      <aside className="hidden md:flex w-56 shrink-0 border-r border-grey-200 flex-col py-5 px-3 gap-0.5">
+        <div className="flex items-center gap-2 px-2.5 mb-4">
+          <div className="w-8 h-8 rounded-full bg-red text-white font-extrabold text-[14px] flex items-center justify-center shrink-0">
+            A
+          </div>
+          <span className="text-[13.5px] font-extrabold text-ink">ALTON</span>
         </div>
+        {childrenList.length > 1 && (
+          <div className="flex flex-wrap gap-1.5 px-2.5 mb-4">
+            {childrenList.map((c) => (
+              <button
+                key={c.studentId}
+                onClick={() => selectChild(c.studentId)}
+                className={
+                  "text-[12px] font-bold px-3 py-1 rounded-full border-[1.5px] " +
+                  (c.studentId === currentChildId
+                    ? "bg-ink text-white border-ink"
+                    : "border-grey-200 text-grey-500")
+                }
+              >
+                {c.name}
+              </button>
+            ))}
+          </div>
+        )}
         {NAV_ITEMS.map((item) => (
           <button
             key={item.id}
             onClick={() => selectTab(item.id)}
             className={
-              "w-full flex flex-col items-center gap-0.5 py-2.5 text-[10.5px] font-semibold " +
-              (activeTab === item.id ? "text-ink" : "text-grey-300")
+              "w-full flex items-center gap-2.5 px-2.5 py-2.5 rounded-lg text-[13px] font-semibold transition-colors " +
+              (activeTab === item.id ? "bg-red text-white" : "text-grey-500 hover:bg-grey-100 hover:text-ink")
             }
           >
-            <span className="relative text-[17px]">
-              {item.icon}
+            <span className="relative shrink-0">
+              <NavIcon name={item.icon} className="w-[18px] h-[18px]" />
               {item.id === "consult" && messengerUnread > 0 && (
-                <span className="absolute -top-1 -right-1.5 min-w-[14px] h-[14px] px-[3px] rounded-full bg-red text-white text-[9px] font-bold flex items-center justify-center">
+                <span className="absolute -top-1.5 -right-1.5 min-w-[14px] h-[14px] px-[3px] rounded-full bg-red text-white text-[9px] font-bold flex items-center justify-center ring-2 ring-white">
                   {messengerUnread > 9 ? "9+" : messengerUnread}
                 </span>
               )}
@@ -275,7 +307,92 @@ export default function ParentShell({
             {item.label}
           </button>
         ))}
+
+        {/* 2026-09-19(UAT 반영) — Acely 레퍼런스: 계정 메뉴를 상단 헤더바가
+            아니라 사이드바 맨 아래(프로필)로 옮긴다. 상단 헤더바 자체를
+            없앤다. 위로 펼쳐지는 드롭다운(bottom-full). */}
+        <div className="mt-auto pt-2 relative">
+          <button
+            onClick={() => setAccountMenuOpen((v) => !v)}
+            className="w-full flex items-center gap-2.5 px-2.5 py-2.5 rounded-lg text-[13px] font-semibold text-ink hover:bg-grey-100"
+          >
+            <div className="w-7 h-7 rounded-full bg-grey-100 text-ink font-extrabold text-[12px] flex items-center justify-center shrink-0">
+              {parentName.charAt(0)}
+            </div>
+            <span className="flex-1 text-left truncate">{parentName} 학부모님</span>
+            <NavIcon name="settings" className="w-4 h-4 shrink-0 text-grey-400" />
+          </button>
+          {accountMenuOpen && (
+            <div className="absolute bottom-full left-0 mb-1 w-full bg-white border-[1.5px] border-grey-200 rounded-lg shadow-sm py-1.5 z-30">
+              <button
+                onClick={() => {
+                  setAccountMenuOpen(false);
+                  selectTab("consent");
+                }}
+                className="w-full flex items-center justify-between px-3.5 py-2 text-[13px] font-semibold text-ink"
+              >
+                동의
+                {consentBadgeCount > 0 && (
+                  <span className="min-w-[18px] h-[18px] px-1 rounded-full bg-red text-white text-[10.5px] font-bold flex items-center justify-center">
+                    {consentBadgeCount}
+                  </span>
+                )}
+              </button>
+              <button
+                onClick={() => {
+                  setAccountMenuOpen(false);
+                  setCreditsModalOpen(true);
+                }}
+                className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink"
+              >
+                지인 추천
+              </button>
+              <div className="h-px bg-grey-200 my-1" />
+              <button
+                onClick={() => {
+                  setTimezoneModalOpen(true);
+                  setAccountMenuOpen(false);
+                }}
+                className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink"
+              >
+                시간대 설정
+              </button>
+              <div className="h-px bg-grey-200 my-1" />
+              <form action={logout}>
+                <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-red">
+                  로그아웃
+                </button>
+              </form>
+            </div>
+          )}
+        </div>
       </aside>
+
+      {/* 2026-09-19 — aside는 모바일에서 hidden(display:none)이라, 그 안에
+          두면 모바일 계정 메뉴에서 연 모달이 함께 숨어 안 보인다. aside
+          바깥(항상 렌더링되는 자리)에 둔다. */}
+      {timezoneModalOpen && (
+        <TimezoneSettingsModal
+          showHouseholdDefault={true}
+          onClose={() => setTimezoneModalOpen(false)}
+        />
+      )}
+      {creditsModalOpen && (
+        <div className="fixed inset-0 z-40 bg-black/30 flex items-center justify-center p-4">
+          <div className="bg-white rounded-xl max-w-md w-full max-h-[80vh] overflow-y-auto">
+            <div className="flex items-center justify-between px-4 py-3 border-b border-grey-200">
+              <span className="text-[14px] font-bold text-ink">지인 추천</span>
+              <button
+                onClick={() => setCreditsModalOpen(false)}
+                className="text-[13px] font-semibold text-grey-500"
+              >
+                닫기
+              </button>
+            </div>
+            <CreditsTab data={credits} />
+          </div>
+        </div>
+      )}
 
       <MobileBottomNav
         primary={mobilePrimary}
@@ -285,7 +402,10 @@ export default function ParentShell({
       />
 
       <div className="flex-1 flex flex-col pb-16 md:pb-0">
-        <div className="flex items-center justify-between gap-4 border-b border-grey-200 px-6 py-3 relative">
+        {/* 2026-09-19(UAT 반영) — 데스크톱은 계정 메뉴·자녀 전환이 사이드바로
+            옮겨져 상단 헤더바가 없다. 모바일은 사이드바가 숨겨지므로 자녀
+            전환·계정 메뉴만 담은 얇은 바를 여기 남긴다. */}
+        <div className="md:hidden flex items-center justify-between gap-4 border-b border-grey-200 px-4 py-2.5 relative">
           <div className="flex items-center gap-2">
             {childrenList.map((c) => (
               <button
@@ -353,32 +473,61 @@ export default function ParentShell({
                 </form>
               </div>
             )}
-            {timezoneModalOpen && (
-              <TimezoneSettingsModal
-                showHouseholdDefault={true}
-                onClose={() => setTimezoneModalOpen(false)}
-              />
-            )}
-            {creditsModalOpen && (
-              <div className="fixed inset-0 z-40 bg-black/30 flex items-center justify-center p-4">
-                <div className="bg-white rounded-xl max-w-md w-full max-h-[80vh] overflow-y-auto">
-                  <div className="flex items-center justify-between px-4 py-3 border-b border-grey-200">
-                    <span className="text-[14px] font-bold text-ink">지인 추천</span>
-                    <button
-                      onClick={() => setCreditsModalOpen(false)}
-                      className="text-[13px] font-semibold text-grey-500"
-                    >
-                      닫기
-                    </button>
-                  </div>
-                  <CreditsTab data={credits} />
-                </div>
-              </div>
-            )}
           </div>
         </div>
 
+        {/* 2026-09-19(UI 통일화) — 모든 탭이 같은 프레임(영어 제목 + 가운데
+            정렬 고정폭 컬럼) 안에서 렌더링된다. 탭 내부 정렬·서브탭은 그대로
+            두고, 제목 위치·컬럼 폭·서브탭 스타일만 통일한다. */}
         <div className="flex-1">
+        <PageFrame
+          title={activeLabel}
+          subtabs={
+            activeTab === "home" ? (
+              // 2026-09-19(UAT 반영) — "모의고사"를 서브탭 옆 별도 버튼으로
+              // 띄우지 않고, 홈 서브탭 목록의 마지막 항목으로 편입한다(같은
+              // UnderlineSubTabs 스타일). 클릭 시 상태 전환이 아니라 독립
+              // 라우트(/parent/mock-exam/[studentId])로 이동만 한다.
+              <UnderlineSubTabs
+                items={[
+                  { id: "reviews", label: "종합 리뷰" },
+                  { id: "lessonReviews", label: "수업 리뷰" },
+                  { id: "consultReviews", label: "상담 리뷰" },
+                  { id: "stats", label: "통계" },
+                  { id: "mockExam", label: "모의고사 →" },
+                ]}
+                activeId={homeSubTab}
+                onSelect={(id) =>
+                  id === "mockExam"
+                    ? router.push(`/parent/mock-exam/${currentChildId}`)
+                    : setHomeSubTab(id as typeof homeSubTab)
+                }
+              />
+            ) : activeTab === "consult" ? (
+              <UnderlineSubTabs
+                items={[
+                  { id: "messenger", label: "메신저" },
+                  { id: "request", label: "상담 신청" },
+                  { id: "history", label: "상담 내역" },
+                ]}
+                activeId={consultSubTab}
+                onSelect={setConsultSubTab}
+                badgeCounts={{ messenger: messengerUnread }}
+              />
+            ) : activeTab === "lessons" ? (
+              // 2026-09-19(UAT 반영) — 예약 진입은 이제 독립 "Bookings" 탭으로
+              // 옮겼다(예약 탭 부활, 제품 오너 결정). 여기는 예정/지난 조회만.
+              <UnderlineSubTabs
+                items={[
+                  { id: "upcoming", label: "예정 수업" },
+                  { id: "past", label: "지난 수업" },
+                ]}
+                activeId={lessonsSubTab}
+                onSelect={setLessonsSubTab}
+              />
+            ) : undefined
+          }
+        >
           {/* 2026-09-17/18 — 홈 재설계: "일정 확인"에서 "리뷰 확인"으로 목적
               전환. 상단 동의 배너는 제거(프로필 드롭다운 배지로만 노출), 캘린더·
               예정 수업(HomeDashboard)도 더 이상 쓰지 않는다 — 종합 리뷰/수업
@@ -387,27 +536,6 @@ export default function ParentShell({
               때는 일정·캘린더로 되돌아가지 않고 빈 상태 문구만 보여준다(요구사항). */}
           {activeTab === "home" ? (
             <div>
-              <div className="px-6 pt-5 flex items-center justify-between gap-3">
-                <PillSubTabs
-                  items={[
-                    { id: "reviews", label: "종합 리뷰" },
-                    { id: "lessonReviews", label: "수업 리뷰" },
-                    { id: "consultReviews", label: "상담 리뷰" },
-                    { id: "stats", label: "통계" },
-                  ]}
-                  activeId={homeSubTab}
-                  onSelect={setHomeSubTab}
-                />
-                {/* 2026-09-18(고정형 모의고사 V1) — /parent/mock-exam/[studentId]는
-                    독립 라우트다. 홈 서브탭(종합/수업/상담 리뷰·통계)과 나란히,
-                    현재 선택된 자녀의 모의고사 리포트로 이동하는 링크만 둔다. */}
-                <button
-                  onClick={() => router.push(`/parent/mock-exam/${currentChildId}`)}
-                  className="shrink-0 text-[11px] font-bold text-grey-500 px-2.5 py-1 rounded-full border border-grey-200"
-                >
-                  모의고사 →
-                </button>
-              </div>
               {homeSubTab === "stats" ? (
                 childStats ? (
                   <StatsTab data={childStats} />
@@ -460,58 +588,38 @@ export default function ParentShell({
           ) : activeTab === "enrollment" ? (
             <ParentEnrollmentTab childrenEnrollments={childrenSubjectEnrollments} />
           ) : activeTab === "lessons" ? (
-            <div>
-              {/* 2026-09-17 — "예약" 독립 탭 제거: 예약 기능이 필요하면 수업
-                  탭 안 예정 수업 흐름에서 기존 LessonBookingTab(학생 포털과
-                  공유, 동작 변경 없음)을 모달로 연다. */}
-              <div className="px-6 pt-5 flex justify-end">
-                <button
-                  onClick={() => setBookingModalOpen(true)}
-                  className="text-[12.5px] font-bold text-white bg-ink px-3.5 py-2 rounded-full"
-                >
-                  예정 수업 예약하기 →
-                </button>
-              </div>
-              <LessonsTab
-                key={currentChildId}
-                upcoming={upcoming}
-                past={past}
-                curricula={curricula}
-                memosByEnrollment={memosByEnrollment}
-                reviews={reviews}
-                myFeedback={myFeedback}
-                readOnly
-              />
-              {bookingModalOpen && (
-                <div className="fixed inset-0 z-40 bg-black/30 flex items-center justify-center p-4">
-                  <div className="bg-white rounded-xl max-w-2xl w-full max-h-[85vh] overflow-y-auto">
-                    <div className="flex items-center justify-between px-4 py-3 border-b border-grey-200">
-                      <span className="text-[14px] font-bold text-ink">예정 수업 예약</span>
-                      <button
-                        onClick={() => setBookingModalOpen(false)}
-                        className="text-[13px] font-semibold text-grey-500"
-                      >
-                        닫기
-                      </button>
-                    </div>
-                    <LessonBookingTab
-                      key={currentChildId}
-                      bookableEnrollments={lessonBooking.bookableEnrollments}
-                      pendingActivationSubjects={lessonBooking.pendingActivationSubjects}
-                      upcomingBookings={lessonBooking.upcomingBookings}
-                      pastSessionsForReport={lessonBooking.pastSessionsForReport}
-                      timezone={lessonBooking.timezone}
-                      onListSlots={(teacherId, durationMinutes) => listAvailableSlotsForBooking({ teacherId, durationMinutes })}
-                      onCreateBooking={(params) => createLessonBookingForChild({ ...params, childId: currentChildId })}
-                      onCreateWeeklySeries={(params) => createWeeklyLessonSeriesForChild({ ...params, childId: currentChildId })}
-                      onCancelBooking={(reservationId, reason) => cancelLessonBookingForChild({ reservationId, childId: currentChildId, reason })}
-                      onUpdateTimezone={(timezone) => updateChildTimezone(currentChildId, timezone)}
-                      onReportTeacherIssue={(params) => reportTeacherIssueForChild({ ...params, childId: currentChildId })}
-                    />
-                  </div>
-                </div>
-              )}
-            </div>
+            // 2026-09-19(UAT 반영) — 예약 진입은 독립 "Bookings" 탭으로
+            // 옮겼다. 서브탭은 위 PageFrame subtabs 자리로 옮겨졌다(hideHeader).
+            <LessonsTab
+              key={currentChildId}
+              upcoming={upcoming}
+              past={past}
+              curricula={curricula}
+              memosByEnrollment={memosByEnrollment}
+              reviews={reviews}
+              myFeedback={myFeedback}
+              readOnly
+              hideHeader
+              forcedSubtab={lessonsSubTab}
+            />
+          ) : activeTab === "bookings" ? (
+            // 2026-09-19(UAT 반영, 제품 오너 결정) — 2026-09-17 R13에서
+            // 제거했던 독립 "예약" 탭을 다시 만든다(정책 되돌림 확인됨).
+            <LessonBookingTab
+              key={currentChildId}
+              hideHeader
+              bookableEnrollments={lessonBooking.bookableEnrollments}
+              pendingActivationSubjects={lessonBooking.pendingActivationSubjects}
+              upcomingBookings={lessonBooking.upcomingBookings}
+              pastSessionsForReport={lessonBooking.pastSessionsForReport}
+              timezone={lessonBooking.timezone}
+              onListSlots={(teacherId, durationMinutes) => listAvailableSlotsForBooking({ teacherId, durationMinutes })}
+              onCreateBooking={(params) => createLessonBookingForChild({ ...params, childId: currentChildId })}
+              onCreateWeeklySeries={(params) => createWeeklyLessonSeriesForChild({ ...params, childId: currentChildId })}
+              onCancelBooking={(reservationId, reason) => cancelLessonBookingForChild({ reservationId, childId: currentChildId, reason })}
+              onUpdateTimezone={(timezone) => updateChildTimezone(currentChildId, timezone)}
+              onReportTeacherIssue={(params) => reportTeacherIssueForChild({ ...params, childId: currentChildId })}
+            />
           ) : activeTab === "entitlements" ? (
             <EntitlementsTab data={entitlements} purchaseStatus={purchaseStatus} />
           ) : activeTab === "consent" ? (
@@ -530,32 +638,19 @@ export default function ParentShell({
           ) : activeTab === "homework" ? (
             <ParentHomeworkTab childrenHomework={homeworkByChild} />
           ) : activeTab === "consult" ? (
-            <div>
-              <div className="px-6 pt-5">
-                <PillSubTabs
-                  items={[
-                    { id: "messenger", label: "메신저" },
-                    { id: "request", label: "상담 신청" },
-                    { id: "history", label: "상담 내역" },
-                  ]}
-                  activeId={consultSubTab}
-                  onSelect={setConsultSubTab}
-                  badgeCounts={{ messenger: messengerUnread }}
-                />
-              </div>
-              {consultSubTab === "request" ? (
-                <ConsultationRequestTab />
-              ) : consultSubTab === "history" ? (
-                <ConsultationHistoryTab />
-              ) : (
-                <MessengerTab />
-              )}
-            </div>
+            consultSubTab === "request" ? (
+              <ConsultationRequestTab />
+            ) : consultSubTab === "history" ? (
+              <ConsultationHistoryTab />
+            ) : (
+              <MessengerTab />
+            )
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.
             </div>
           )}
+        </PageFrame>
         </div>
       </div>
     </div>

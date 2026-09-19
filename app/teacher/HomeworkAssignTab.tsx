@@ -5,6 +5,7 @@ import { loadStudentHomeworkBatchesAction } from "./homework-direct-client-data"
 import type { HomeworkBatch } from "@/lib/homework-batch-data";
 import HomeworkBatchPanel from "@/app/components/HomeworkBatchPanel";
 import HomeworkIssueForm from "@/app/components/HomeworkIssueForm";
+import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 
 export type HomeworkStudentOption = { id: string; name: string };
 
@@ -29,19 +30,16 @@ export default function HomeworkAssignTab({
   }, [studentId, subtab]);
 
   return (
-    <div className="max-w-[720px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-1.5">과제</h1>
-      <div className="flex gap-1 border-b border-grey-200 mb-5">
-        {([["create", "과제 생성"], ["history", "과제 내역"]] as const).map(([id, label]) => (
-          <button
-            key={id}
-            onClick={() => setSubtab(id)}
-            className={"text-[13px] font-bold px-3.5 py-2 -mb-px border-b-2 " + (subtab === id ? "border-ink text-ink" : "border-transparent text-grey-500")}
-          >
-            {label}
-          </button>
-        ))}
-      </div>
+    <div className="max-w-[720px]">
+      <UnderlineSubTabs
+        className="mb-5"
+        items={[
+          { id: "create", label: "과제 생성" },
+          { id: "history", label: "과제 내역" },
+        ]}
+        activeId={subtab}
+        onSelect={setSubtab}
+      />
 
       <div className="flex flex-wrap gap-2 mb-5">
         {students.map((s) => (

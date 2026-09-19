@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import type { SubjectEnrollmentView } from "./enrollment-data";
 import { getLessonReviewsForFamily, type FamilyLessonReview } from "@/app/parent/lesson-review-family-actions";
 import CurriculumOverlayView from "./CurriculumOverlayView";
-import PillSubTabs from "@/app/components/PillSubTabs";
+import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 
 const LESSON_TYPE_LABEL: Record<FamilyLessonReview["lessonType"], string> = {
   trial: "체험",
@@ -136,8 +136,8 @@ export default function EnrollmentTab({
   );
 
   return (
-    <div className="max-w-[640px] px-8 py-8">
-      <PillSubTabs
+    <div className="max-w-[640px]">
+      <UnderlineSubTabs
         className="mb-5"
         items={[
           { id: "active", label: "수강중" },

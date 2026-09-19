@@ -67,7 +67,7 @@ describe("TeacherShell", () => {
   // 못박고 있었다. 나머지 라벨 정리('배정'→'담당 학생' 등)는 그대로 유지한다.
   it("2026-09-12(P4-2): 사이드바에 '정산'을 포함한 항목을 보여주고, 기본 탭은 홈이다('배정'은 '담당 학생'으로)", () => {
     render(<TeacherShell {...baseProps} />);
-    ["홈", "담당 학생", "수업", "가능시간", "커리큘럼", "교재", "정산"].forEach((label) =>
+    ["Home", "My Students", "Schedule", "Availability", "Curriculum", "Materials", "Payouts"].forEach((label) =>
       expect(screen.getAllByText(label).length).toBeGreaterThan(0)
     );
     expect(screen.queryByText("학생")).toBeNull();
@@ -78,7 +78,7 @@ describe("TeacherShell", () => {
 
   it("수업 탭을 누르면 딱 두 개의 서브탭('예정 수업'/'지난 수업')만 보이고, 지난 수업 서브탭에는 레거시 지각·노쇼 신고 기능이 흡수되어 있다", () => {
     render(<TeacherShell {...baseProps} />);
-    fireEvent.click(screen.getAllByText("수업")[0]);
+    fireEvent.click(screen.getAllByText("Schedule")[0]);
     expect(screen.getByText("예정 수업")).toBeInTheDocument();
     expect(screen.getByText("지난 수업")).toBeInTheDocument();
     expect(screen.getByText("예정 수업 목록")).toBeInTheDocument();
@@ -107,7 +107,7 @@ describe("TeacherShell", () => {
       },
     ];
     render(<TeacherShell {...baseProps} currentAssignments={currentAssignments} />);
-    fireEvent.click(screen.getAllByText("담당 학생")[0]);
+    fireEvent.click(screen.getAllByText("My Students")[0]);
     expect(screen.getByText("11학년")).toBeInTheDocument();
     expect(screen.queryByText("커리큘럼 보기")).not.toBeInTheDocument();
     fireEvent.click(screen.getByText("운영 커리큘럼 관리"));
@@ -136,7 +136,7 @@ describe("TeacherShell", () => {
         ]}
       />
     );
-    fireEvent.click(screen.getByText("교재"));
+    fireEvent.click(screen.getAllByText("Materials")[0]);
     expect(screen.getByText("SAT Math")).toBeInTheDocument();
     expect(screen.getByText(/이차방정식 개념/)).toBeInTheDocument();
   });
@@ -144,7 +144,7 @@ describe("TeacherShell", () => {
   it("계정 메뉴를 열면 로그아웃 버튼이 보인다", () => {
     render(<TeacherShell {...baseProps} />);
     fireEvent.click(screen.getByText("박서연 선생님 ▾"));
-    expect(screen.getByText("로그아웃")).toBeInTheDocument();
+    expect(screen.getAllByText("로그아웃").length).toBeGreaterThan(0);
   });
 
   // 2026-09-18(고정형 모의고사 V1 내비 연결) — /teacher/mock-exam은 TeacherShell
@@ -153,7 +153,7 @@ describe("TeacherShell", () => {
   it("사이드바 '모의고사'를 누르면 /teacher/mock-exam으로 이동한다", () => {
     pushMock.mockClear();
     render(<TeacherShell {...baseProps} />);
-    fireEvent.click(screen.getByText("모의고사"));
+    fireEvent.click(screen.getAllByText("Mock Exams")[0]);
     expect(pushMock).toHaveBeenCalledWith("/teacher/mock-exam");
   });
 });

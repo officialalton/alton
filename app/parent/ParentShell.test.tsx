@@ -99,7 +99,7 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    ["홈", "수업권", "수강 과목", "수업", "상담", "단어장", "과제"].forEach((label) =>
+    ["Home", "Credits", "My Courses", "Classes", "Consultations", "Vocabulary", "Assignments"].forEach((label) =>
       expect(screen.getAllByText(label).length).toBeGreaterThan(0)
     );
     // 2026-09-17/18 IA 재구성: 지인 추천/통계(독립 탭)/동의/가족/예약/교재는
@@ -251,7 +251,7 @@ describe("ParentShell", () => {
     expect(pushMock).toHaveBeenCalledWith("?child=s2&tab=home", { scroll: false });
   });
 
-  it("수업 탭을 누르면 읽기전용 LessonsTab이 렌더링되고(메모 입력창 없음), 예정 수업 예약 진입점이 있다", () => {
+  it("수업 탭을 누르면 읽기전용 LessonsTab이 렌더링된다(메모 입력창 없음)", () => {
     render(
       <ParentShell
         parentName="김민지"
@@ -261,12 +261,27 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("수업")[0]);
+    fireEvent.click(screen.getAllByText("Classes")[0]);
     expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
-    // 2026-09-17 — "예약" 독립 탭 제거: 수업 탭 안에서 기존 LessonBookingTab
-    // 모달로 들어가는 진입점만 확인한다(모달 내부 동작은 LessonBookingTab
-    // 자체 테스트가 이미 커버).
-    expect(screen.getByText("예정 수업 예약하기 →")).toBeInTheDocument();
+  });
+
+  // 2026-09-19(UAT 반영, 제품 오너 결정) — 2026-09-17 R13의 "예약 독립 탭
+  // 제거" 정책을 되돌려 "Bookings" 탭을 다시 만들었다. LessonBookingTab
+  // 자체 동작은 그 컴포넌트 테스트가 이미 커버하므로, 여기서는 탭 진입만 확인.
+  it("Bookings 탭을 누르면 LessonBookingTab이 렌더링된다", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+      />
+    );
+    fireEvent.click(screen.getAllByText("Bookings")[0]);
+    expect(
+      screen.getByText(/아직 선생님 배정이 완료되지 않았어요/)
+    ).toBeInTheDocument();
   });
 
   it("수업권 탭을 누르면 EntitlementsTab(R4)이 렌더링된다", () => {
@@ -279,7 +294,7 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("수업권"));
+    fireEvent.click(screen.getAllByText("Credits")[0]);
     expect(screen.getByText("현황")).toBeInTheDocument();
     expect(screen.getByText("구매")).toBeInTheDocument();
   });
@@ -294,7 +309,7 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("상담")[0]);
+    fireEvent.click(screen.getAllByText("Consultations")[0]);
     expect(screen.getByPlaceholderText("상담 사유를 입력해주세요")).toBeInTheDocument();
     fireEvent.click(screen.getByText("상담 내역"));
     expect(await screen.findByText("신청한 상담이 없습니다.")).toBeInTheDocument();
@@ -315,10 +330,10 @@ describe("ParentShell", () => {
       />
     );
     fireEvent.click(screen.getByText("김민지 학부모님 ▾"));
-    expect(screen.getByText("동의")).toBeInTheDocument();
-    expect(screen.getByText("지인 추천")).toBeInTheDocument();
-    expect(screen.getByText("시간대 설정")).toBeInTheDocument();
-    expect(screen.getByText("로그아웃")).toBeInTheDocument();
+    expect(screen.getAllByText("동의").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("지인 추천").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("시간대 설정").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("로그아웃").length).toBeGreaterThan(0);
   });
 
   it("계정 메뉴의 지인 추천을 누르면 CreditsTab(추천 코드 전용)이 모달로 뜨고 결제수단 입력은 없다", () => {
@@ -332,7 +347,7 @@ describe("ParentShell", () => {
       />
     );
     fireEvent.click(screen.getByText("김민지 학부모님 ▾"));
-    fireEvent.click(screen.getByText("지인 추천"));
+    fireEvent.click(screen.getAllByText("지인 추천")[0]);
     expect(screen.getByText("추천 코드가 아직 없습니다.")).toBeInTheDocument();
     expect(screen.queryByText("장 보유")).not.toBeInTheDocument();
     expect(screen.queryByPlaceholderText("0000 0000 0000 0000")).not.toBeInTheDocument();
@@ -349,7 +364,7 @@ describe("ParentShell", () => {
       />
     );
     fireEvent.click(screen.getByText("김민지 학부모님 ▾"));
-    fireEvent.click(screen.getByText("동의"));
+    fireEvent.click(screen.getAllByText("동의")[0]);
     expect(pushMock).toHaveBeenCalledWith("?child=s1&tab=consent", { scroll: false });
   });
 
@@ -368,7 +383,7 @@ describe("ParentShell", () => {
       />
     );
     fireEvent.click(screen.getByText("김민지 학부모님 ▾"));
-    expect(within(screen.getByText("동의").parentElement as HTMLElement).getByText("1")).toBeInTheDocument();
+    expect(within(screen.getAllByText("동의")[0].parentElement as HTMLElement).getByText("1")).toBeInTheDocument();
   });
 
   it("생년월일이 아직 입력되지 않은 자녀는 is_under_13이 true여도 동의 배지 카운트에 포함하지 않는다(계정 생성 직후 회귀 방지)", () => {
@@ -385,7 +400,7 @@ describe("ParentShell", () => {
       />
     );
     fireEvent.click(screen.getByText("김민지 학부모님 ▾"));
-    expect(within(screen.getByText("동의").parentElement as HTMLElement).queryByText("1")).not.toBeInTheDocument();
+    expect(within(screen.getAllByText("동의")[0].parentElement as HTMLElement).queryByText("1")).not.toBeInTheDocument();
   });
 
   it("조치가 필요한 항목이 전부 없으면 동의 배지를 보여주지 않는다", () => {
@@ -422,7 +437,7 @@ describe("ParentShell", () => {
       />
     );
     fireEvent.click(screen.getByText("김민지 학부모님 ▾"));
-    expect(within(screen.getByText("동의").parentElement as HTMLElement).getByText("1")).toBeInTheDocument();
+    expect(within(screen.getAllByText("동의")[0].parentElement as HTMLElement).getByText("1")).toBeInTheDocument();
   });
 
   // 2026-09-18(고정형 모의고사 V1 내비 연결) — 홈 탭에서 "모의고사" 링크를

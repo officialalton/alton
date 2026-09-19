@@ -8,13 +8,14 @@ import MobileDrawerNav from "@/app/components/MobileDrawerNav";
 import { linkAdminGoogleAccount } from "./google-link-actions";
 import { resolveAdminTab, type AdminTabId } from "./admin-tabs";
 import { setActiveAdminUser, clearAdminTabCache } from "./tab-data-cache";
+import PageFrame from "@/app/components/PageFrame";
+import NavIcon from "@/app/components/NavIcon";
 import AdminHomeDashboard from "./AdminHomeDashboard";
 import type { AdminDashboardData } from "./dashboard-data";
 import CatalogTab from "./CatalogTab";
 import ProblemBankTab from "./ProblemBankTab";
 import MockExamTab from "./MockExamTab";
 import UsersTab from "./UsersTab";
-import BillingTab from "./BillingTab";
 import BookingReconciliationPanel from "./BookingReconciliationPanel";
 import UnifiedScheduleTab from "./UnifiedScheduleTab";
 import ConsultationTab from "./ConsultationTab";
@@ -50,27 +51,24 @@ import type {
 } from "./entitlement-actions";
 import type { AdminSubject } from "./subject-data";
 import type { CurriculumDocListItem } from "./curriculum-doc-data";
-import type {
-  CreditTransaction,
-  StudentListItem,
-} from "./users-data";
 
+// 2026-09-19(UI 통일화) — 좌측 네비게이션 라벨은 전부 영어로 통일한다(Acely
+// 레퍼런스). 탭 안 본문의 한국어 텍스트는 유지, 라벨만 영어로 바꾼다.
 const NAV_ITEMS = [
-  { id: "home", label: "홈", icon: "🏠" },
-  { id: "users", label: "사용자", icon: "👥" },
-  { id: "matching", label: "매칭", icon: "🔗" },
-  { id: "consult", label: "신규", icon: "🗓" },
-  { id: "inquiry", label: "문의·면담", icon: "💬" },
-  { id: "catalog", label: "커리큘럼", icon: "📘" },
-  { id: "problem-bank", label: "문제은행", icon: "🧩" },
-  { id: "mock-exam", label: "모의고사", icon: "📝" },
-  { id: "billing", label: "구 크레딧(레거시)", icon: "💳" },
-  { id: "entitlements", label: "수업권", icon: "🎫" },
-  { id: "unified-schedule", label: "통합 일정", icon: "🗺️" },
-  { id: "booking", label: "예약", icon: "🗓️" },
-  { id: "payouts", label: "정산", icon: "💸" },
-  { id: "documents", label: "문서", icon: "📄" },
-  { id: "workspace", label: "Workspace", icon: "🔑" },
+  { id: "home", label: "Home", icon: "home" },
+  { id: "users", label: "Users", icon: "users" },
+  { id: "matching", label: "Matching", icon: "matching" },
+  { id: "consult", label: "Onboarding", icon: "onboarding" },
+  { id: "inquiry", label: "Inquiries", icon: "inquiries" },
+  { id: "catalog", label: "Curriculum", icon: "curriculum" },
+  { id: "problem-bank", label: "Question Bank", icon: "questionBank" },
+  { id: "mock-exam", label: "Mock Exams", icon: "mockExam" },
+  { id: "entitlements", label: "Entitlements", icon: "entitlements" },
+  { id: "unified-schedule", label: "Schedule", icon: "schedule" },
+  { id: "booking", label: "Bookings", icon: "bookings" },
+  { id: "payouts", label: "Payouts", icon: "payouts" },
+  { id: "documents", label: "Documents", icon: "documents" },
+  { id: "workspace", label: "Workspace", icon: "workspace" },
 ] as const;
 
 // 2026-09-10(UI/UX 1차 리뷰 지적) — "개발 로그"는 일반 운영 업무 중 볼 메뉴가
@@ -92,8 +90,6 @@ export default function AdminShell({
   dashboard,
   subjects,
   docs,
-  students,
-  creditHistoryByStudent,
   matchingStudents,
   consultations,
   trials,
@@ -135,11 +131,8 @@ export default function AdminShell({
   // 위해, 학생/선생님과 동일하게 UsersTab이 직접
   // listParentsForUsersTabAction()으로 조회한다.
   // 2026-09-10(P1) — "사용자" 탭의 학생/선생님 목록·수업권 이력·QC 경고는
-  // 더 이상 SSR로 안 내려온다(UsersTab이 서브탭을 열 때 직접 조회). students는
-  // 이제 "구 크레딧(레거시)" 탭에서만 쓴다. teachers/qcWarningsByTeacher
-  // props 자체를 없앴다.
-  students: StudentListItem[];
-  creditHistoryByStudent: Record<string, CreditTransaction[]>;
+  // 더 이상 SSR로 안 내려온다(UsersTab이 서브탭을 열 때 직접 조회). teachers/
+  // qcWarningsByTeacher props 자체를 없앴다.
   // 2026-09-10(P1) — 매칭 탭 전용 경량 학생 목록(id·name·grade·parentNames·status).
   matchingStudents: MatchingStudentItem[];
   consultations: ConsultationListItem[];
@@ -229,37 +222,43 @@ export default function AdminShell({
 
   return (
     <div className="min-h-screen bg-white flex">
-      <aside className="hidden md:flex w-[88px] shrink-0 border-r border-grey-200 flex-col items-center py-5 gap-1">
-        <div className="w-9 h-9 rounded-full bg-red text-white font-extrabold text-[15px] flex items-center justify-center mb-4">
-          A
+      <aside className="hidden md:flex w-56 shrink-0 border-r border-grey-200 flex-col py-5 px-3 gap-0.5 overflow-y-auto">
+        <div className="flex items-center gap-2 px-2.5 mb-5">
+          <div className="w-8 h-8 rounded-full bg-red text-white font-extrabold text-[14px] flex items-center justify-center shrink-0">
+            A
+          </div>
+          <span className="text-[13.5px] font-extrabold text-ink">ALTON</span>
         </div>
         {NAV_ITEMS.map((item) => (
           <button
             key={item.id}
             onClick={() => selectTab(item.id)}
             className={
-              "w-full flex flex-col items-center gap-0.5 py-2.5 text-[10.5px] font-semibold " +
-              (activeTab === item.id ? "text-ink" : "text-grey-300")
+              "w-full flex items-center gap-2.5 px-2.5 py-2.5 rounded-lg text-[13px] font-semibold transition-colors " +
+              (activeTab === item.id ? "bg-red text-white" : "text-grey-500 hover:bg-grey-100 hover:text-ink")
             }
           >
-            <span className="text-[17px]">{item.icon}</span>
+            <NavIcon name={item.icon} className="w-[18px] h-[18px] shrink-0" />
             {item.label}
           </button>
         ))}
-      </aside>
 
-      <MobileDrawerNav groups={mobileGroups} activeId={activeTab} onSelect={(id) => selectTab(id as TabId)} />
-
-      <div className="flex-1 flex flex-col">
-        <div className="flex items-center justify-end gap-4 border-b border-grey-200 px-6 py-3 relative">
+        {/* 2026-09-19(UAT 반영) — Acely 레퍼런스: 계정 메뉴를 상단 헤더바가
+            아니라 사이드바 맨 아래(프로필)로 옮긴다. 상단 헤더바 자체를
+            없앤다. 위로 펼쳐지는 드롭다운(bottom-full). */}
+        <div className="mt-auto pt-2 relative">
           <button
             onClick={() => setAccountMenuOpen((v) => !v)}
-            className="text-[13px] font-semibold text-ink"
+            className="w-full flex items-center gap-2.5 px-2.5 py-2.5 rounded-lg text-[13px] font-semibold text-ink hover:bg-grey-100"
           >
-            관리자 ▾
+            <div className="w-7 h-7 rounded-full bg-grey-100 text-ink font-extrabold text-[12px] flex items-center justify-center shrink-0">
+              A
+            </div>
+            <span className="flex-1 text-left truncate">관리자</span>
+            <NavIcon name="settings" className="w-4 h-4 shrink-0 text-grey-400" />
           </button>
           {accountMenuOpen && (
-            <div className="absolute top-full right-6 mt-1 w-40 bg-white border-[1.5px] border-grey-200 rounded-lg shadow-sm py-1.5 z-30">
+            <div className="absolute bottom-full left-0 mb-1 w-full bg-white border-[1.5px] border-grey-200 rounded-lg shadow-sm py-1.5 z-30">
               <button
                 onClick={() => selectTab("home")}
                 className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink"
@@ -290,11 +289,63 @@ export default function AdminShell({
               </form>
             </div>
           )}
-          {timezoneModalOpen && (
-            <TimezoneSettingsModal
-              showHouseholdDefault={false}
-              onClose={() => setTimezoneModalOpen(false)}
-            />
+        </div>
+      </aside>
+
+      {/* 2026-09-19 — aside는 모바일에서 hidden(display:none)이라, 그 안에
+          두면 모바일 계정 메뉴에서 연 모달이 함께 숨어 안 보인다. aside
+          바깥(항상 렌더링되는 자리)에 둔다. */}
+      {timezoneModalOpen && (
+        <TimezoneSettingsModal
+          showHouseholdDefault={false}
+          onClose={() => setTimezoneModalOpen(false)}
+        />
+      )}
+
+      <MobileDrawerNav groups={mobileGroups} activeId={activeTab} onSelect={(id) => selectTab(id as TabId)} />
+
+      <div className="flex-1 flex flex-col">
+        {/* 2026-09-19(UAT 반영) — 데스크톱은 계정 메뉴가 사이드바 맨 아래로
+            옮겨져 상단 헤더바가 없다. 모바일은 사이드바가 숨겨지므로 계정
+            메뉴만 담은 얇은 바를 여기 남긴다. */}
+        <div className="md:hidden flex items-center justify-end gap-4 border-b border-grey-200 px-4 py-2.5 relative">
+          <button
+            onClick={() => setAccountMenuOpen((v) => !v)}
+            className="text-[13px] font-semibold text-ink"
+          >
+            관리자 ▾
+          </button>
+          {accountMenuOpen && (
+            <div className="absolute top-full right-4 mt-1 w-40 bg-white border-[1.5px] border-grey-200 rounded-lg shadow-sm py-1.5 z-30">
+              <button
+                onClick={() => selectTab("home")}
+                className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink"
+              >
+                홈으로
+              </button>
+              <div className="h-px bg-grey-200 my-1" />
+              <form action={linkAdminGoogleAccount}>
+                <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink">
+                  Google 계정 연결
+                </button>
+              </form>
+              <div className="h-px bg-grey-200 my-1" />
+              <button
+                onClick={() => {
+                  setTimezoneModalOpen(true);
+                  setAccountMenuOpen(false);
+                }}
+                className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink"
+              >
+                시간대 설정
+              </button>
+              <div className="h-px bg-grey-200 my-1" />
+              <form action={logout} onSubmit={() => clearAdminTabCache()}>
+                <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-red">
+                  로그아웃
+                </button>
+              </form>
+            </div>
           )}
         </div>
 
@@ -311,25 +362,22 @@ export default function AdminShell({
           </div>
         )}
 
+        {/* 2026-09-19(UI 통일화) — 홈(자체 대시보드 헤더)을 뺀 나머지 탭은
+            전부 같은 프레임(영어 제목 + 가운데 정렬 컬럼) 안에서 렌더링된다.
+            관리자 화면은 표·대시보드가 많아 기본보다 넓은 폭을 쓴다. */}
         <div className="flex-1">
-          {activeTab === "home" ? (
-            <AdminHomeDashboard data={dashboard} onNavigate={selectTab} />
-          ) : activeTab === "catalog" ? (
+        {activeTab === "home" ? (
+          <AdminHomeDashboard data={dashboard} onNavigate={selectTab} />
+        ) : (
+        <PageFrame title={activeLabel} maxWidthClassName="max-w-7xl">
+          {activeTab === "catalog" ? (
             <CatalogTab subjects={subjects} docs={docs} />
           ) : activeTab === "problem-bank" ? (
             <ProblemBankTab subjects={subjects} />
           ) : activeTab === "mock-exam" ? (
-            <div className="mx-auto max-w-4xl px-6 py-10">
-              <MockExamTab />
-            </div>
+            <MockExamTab />
           ) : activeTab === "users" ? (
             <UsersTab subjects={subjects} />
-          ) : activeTab === "billing" ? (
-            <BillingTab
-              initialStudents={students}
-              creditHistoryByStudent={creditHistoryByStudent}
-              subjects={subjects}
-            />
           ) : activeTab === "entitlements" ? (
             <EntitlementLedgerTab
               products={entitlementProducts}
@@ -379,6 +427,8 @@ export default function AdminShell({
               {activeLabel} 탭은 준비 중입니다.
             </div>
           )}
+        </PageFrame>
+        )}
         </div>
       </div>
     </div>

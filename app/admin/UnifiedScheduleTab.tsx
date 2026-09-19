@@ -123,9 +123,8 @@ export default function UnifiedScheduleTab({
   }, [filteredLessons, view, selectedDateKey, todayKey, weekDateKeys]);
 
   return (
-    <div className="max-w-[880px] px-8 py-8">
-      <div className="flex items-center justify-between mb-1.5">
-        <h1 className="text-[20px] font-extrabold text-ink">통합 일정</h1>
+    <div className="max-w-[880px]">
+      <div className="flex items-center justify-end mb-1.5">
         <div className="flex gap-1.5">
           {(["today", "week", "month"] as const).map((v) => (
             <button

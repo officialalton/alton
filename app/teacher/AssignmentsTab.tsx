@@ -181,10 +181,7 @@ export default function AssignmentsTab({
   ) => void;
 }) {
   return (
-    <div className="max-w-[640px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-1.5">
-        내 배정 학생
-      </h1>
+    <div className="max-w-[640px]">
       <p className="text-[13px] text-grey-500 mb-5">
         현재 배정되어 있는 학생·과목과 담당 기간입니다.
       </p>

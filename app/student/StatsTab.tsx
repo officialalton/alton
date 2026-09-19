@@ -2,9 +2,7 @@ import type { StatsData } from "./stats-data";
 
 export default function StatsTab({ data }: { data: StatsData }) {
   return (
-    <div className="max-w-[640px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-5">통계</h1>
-
+    <div className="max-w-[640px]">
       <div className="grid grid-cols-2 gap-3 mb-6">
         <StatCard
           value={data.attendanceRate !== null ? `${data.attendanceRate}%` : "—"}

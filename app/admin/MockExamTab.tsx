@@ -27,7 +27,6 @@ export default function MockExamTab() {
 
   return (
     <div>
-      <h1 className="text-xl font-semibold text-ink">고정형 모의고사 V1 — 세트 관리</h1>
       <p className="mt-1 text-sm text-grey-500">문제은행의 공개 문항만으로 영역·난이도 비중에 맞춘 고정형 세트를 조립·검토·공개합니다.</p>
       {error && <p className="mt-4 text-sm text-red">{error}</p>}
       {!error && sets === null && <p className="mt-4 text-sm text-grey-500">불러오는 중…</p>}

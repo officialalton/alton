@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import {
   createEntitlementProductVersion,
   discontinueEntitlementProductVersion,
@@ -69,27 +70,8 @@ export default function EntitlementLedgerTab({
   const [sub, setSub] = useState<SubTab>("versions");
 
   return (
-    <div className="px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-1">수업권 원장</h1>
-      <p className="text-[13px] text-grey-500 mb-5">
-        수업권 상품·가격 버전, 30일 고지, 결제 대사, 환불, 조정·연장·이전, 구매 상세를 관리합니다.
-        (기존 &quot;구 크레딧(레거시)&quot; 탭과는 별개의 R4 수업권 시스템입니다.)
-      </p>
-
-      <div className="flex gap-1 mb-6 border-b border-grey-200 flex-wrap">
-        {SUB_NAV.map((n) => (
-          <button
-            key={n.id}
-            onClick={() => setSub(n.id)}
-            className={
-              "text-[12.5px] font-bold px-3 py-2 -mb-px border-b-2 " +
-              (sub === n.id ? "border-ink text-ink" : "border-transparent text-grey-500")
-            }
-          >
-            {n.label}
-          </button>
-        ))}
-      </div>
+    <div>
+      <UnderlineSubTabs items={SUB_NAV} activeId={sub} onSelect={setSub} className="mb-6 flex-wrap" />
 
       {sub === "versions" && (
         <ProductVersionsSection products={products} versions={productVersions} />

@@ -1,14 +1,14 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import MobileBottomNav from "./MobileBottomNav";
+import MobileBottomNav, { type MobileNavItem } from "./MobileBottomNav";
 
-const primary = [
-  { id: "home", label: "홈", icon: "🏠" },
-  { id: "classes", label: "수업", icon: "📅" },
+const primary: MobileNavItem[] = [
+  { id: "home", label: "홈", icon: "home" },
+  { id: "classes", label: "수업", icon: "classes" },
 ];
-const more = [
-  { id: "vocab", label: "단어장", icon: "📖" },
-  { id: "stats", label: "통계", icon: "📊" },
+const more: MobileNavItem[] = [
+  { id: "vocab", label: "단어장", icon: "vocabulary" },
+  { id: "stats", label: "통계", icon: "performance" },
 ];
 
 describe("MobileBottomNav", () => {

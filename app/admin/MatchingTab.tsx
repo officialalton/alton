@@ -68,8 +68,7 @@ export default function MatchingTab({
   }
 
   return (
-    <div className="max-w-[720px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-1.5">매칭</h1>
+    <div className="max-w-[720px]">
       <p className="text-[13px] text-grey-500 mb-5">
         신규 매칭 확정과 종료 요청 처리를 다룹니다. 진행 중인 매칭 관리는 사용자 &gt; 학생의 학생 프로필에서 합니다.
       </p>

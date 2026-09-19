@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type MouseEvent } from "react";
+import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import {
   listParentsForUsersTabAction,
   listStudentsForUsersTabAction,
@@ -180,24 +181,9 @@ export default function UsersTab({
   }
 
   return (
-    <div className="max-w-[640px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-5">사용자</h1>
-
+    <div className="max-w-[640px]">
       <div className="flex items-center justify-between mb-5 border-b border-grey-200">
-        <div className="flex gap-4">
-          {SUBTABS.map((t) => (
-            <button
-              key={t.id}
-              onClick={() => setSubtab(t.id)}
-              className={
-                "text-[13.5px] font-semibold pb-2.5 -mb-px border-b-2 " +
-                (subtab === t.id ? "text-ink border-ink" : "text-grey-500 border-transparent")
-              }
-            >
-              {t.label}
-            </button>
-          ))}
-        </div>
+        <UnderlineSubTabs items={SUBTABS} activeId={subtab} onSelect={setSubtab} className="border-b-0" />
         {(subtab === "parents" || subtab === "students" || subtab === "teachers") && (
           <input
             value={searchQuery}

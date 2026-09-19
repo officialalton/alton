@@ -842,11 +842,10 @@ export default function TeacherLessonScheduleTab({
   const showPastSection = mode !== "upcoming";
 
   return (
-    <div className="max-w-[640px] px-8 py-8">
+    <div className="max-w-[640px]">
       {showUpcomingSection && (
       <>
-      <div className="flex items-center justify-between mb-5">
-        <h1 className="text-[20px] font-extrabold text-ink">수업 일정</h1>
+      <div className="flex items-center justify-end mb-5">
         <div className="flex gap-1.5">
           {(["week-list", "week", "month"] as const).map((v) => (
             <button

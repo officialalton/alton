@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { MobileNavItem } from "./MobileBottomNav";
+import NavIcon from "./NavIcon";
 
 export type MobileNavGroup = { label: string; items: MobileNavItem[] };
 
@@ -56,7 +57,7 @@ export default function MobileDrawerNav({
                       (activeId === item.id ? "bg-grey-100 text-ink" : "text-grey-500")
                     }
                   >
-                    <span className="text-[16px]">{item.icon}</span>
+                    <NavIcon name={item.icon} className="w-4 h-4" />
                     {item.label}
                   </button>
                 ))}

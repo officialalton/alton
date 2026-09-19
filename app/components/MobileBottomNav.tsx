@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import NavIcon, { type NavIconName } from "./NavIcon";
 
-export type MobileNavItem = { id: string; label: string; icon: string };
+export type MobileNavItem = { id: string; label: string; icon: NavIconName };
 
 // 2026-09-10(UI/UX 정리 1차, 배치4) — 학생/학부모/교사 포털 공용 모바일 하단
 // 내비게이션. 88px 고정 사이드바를 모바일에 그대로 두지 않기 위해 만든
@@ -38,7 +39,7 @@ export default function MobileBottomNav({
               (activeId === item.id ? "text-ink" : "text-grey-300")
             }
           >
-            <span className="text-[18px]">{item.icon}</span>
+            <NavIcon name={item.icon} className="w-[18px] h-[18px]" />
             {item.label}
           </button>
         ))}
@@ -79,7 +80,7 @@ export default function MobileBottomNav({
                     (activeId === item.id ? "bg-grey-100 text-ink" : "text-grey-500")
                   }
                 >
-                  <span className="text-[20px]">{item.icon}</span>
+                  <NavIcon name={item.icon} className="w-5 h-5" />
                   {item.label}
                 </button>
               ))}

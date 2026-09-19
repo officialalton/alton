@@ -52,8 +52,7 @@ export default function ProblemHistoryTab({ entries }: { entries: ProblemHistory
   const gradedCount = entries.filter((e) => e.graded).length;
 
   return (
-    <div className="max-w-[760px] px-5 sm:px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-1.5">문제 기록</h1>
+    <div className="max-w-[760px]">
       <p className="text-[13px] text-grey-500 mb-4">
         수업과 과제에서 답한 문제입니다. 선생님이 채점하면 정답과 해설이 열립니다.
         {entries.length > 0 && (

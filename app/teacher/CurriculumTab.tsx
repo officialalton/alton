@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import CurriculumView from "@/app/student/CurriculumView";
+import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import ReviewPanel from "@/app/student/ReviewPanel";
 import MySubjectsTab from "./MySubjectsTab";
 import type { MySubject } from "./mysubjects-data";
@@ -115,30 +116,16 @@ export default function CurriculumTab({
   }
 
   return (
-    <div className="max-w-[640px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-5">커리큘럼</h1>
-
-      <div className="flex gap-4 mb-5 border-b border-grey-200">
-        {(
-          [
-            { id: "mine", label: "내 과목" },
-            { id: "students", label: "학생별" },
-          ] as const
-        ).map((t) => (
-          <button
-            key={t.id}
-            onClick={() => setSubtab(t.id)}
-            className={
-              "text-[13.5px] font-semibold pb-2.5 -mb-px border-b-2 " +
-              (subtab === t.id
-                ? "text-ink border-ink"
-                : "text-grey-500 border-transparent")
-            }
-          >
-            {t.label}
-          </button>
-        ))}
-      </div>
+    <div className="max-w-[640px]">
+      <UnderlineSubTabs
+        className="mb-5"
+        items={[
+          { id: "mine", label: "내 과목" },
+          { id: "students", label: "학생별" },
+        ]}
+        activeId={subtab}
+        onSelect={setSubtab}
+      />
 
       {subtab === "mine" ? (
         <MySubjectsTab initialSubjects={mySubjects} />

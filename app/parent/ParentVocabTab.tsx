@@ -11,12 +11,12 @@ export default function ParentVocabTab({ data }: { data: ParentVocabData }) {
   const [childId, setChildId] = useState(children[0]?.childId ?? "");
   const current = children.find((c) => c.childId === childId) ?? children[0];
 
-  if (!current) return <div className="max-w-[760px] px-8 py-8 text-[13px] text-grey-500">연결된 자녀가 없습니다.</div>;
+  if (!current) return <div className="max-w-[760px] text-[13px] text-grey-500">연결된 자녀가 없습니다.</div>;
 
   return (
     <div>
       {children.length > 1 && (
-        <div className="max-w-[760px] px-8 pt-8 flex flex-wrap gap-2">
+        <div className="max-w-[760px] mb-4 flex flex-wrap gap-2">
           {children.map((c) => (
             <button
               key={c.childId}
