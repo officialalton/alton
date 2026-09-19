@@ -67,6 +67,10 @@ const NAV_ITEMS = [
   { id: "entitlements", label: "Credits", icon: "credits" },
   { id: "enrollment", label: "My Courses", icon: "courses" },
   { id: "lessons", label: "Classes", icon: "classes" },
+  // 2026-09-19(UAT 반영, 제품 오너 결정) — 2026-09-17 R13에서 "예약 독립 탭
+  // 제거 → 수업 탭 안 버튼으로 흡수"로 정리했던 것을 이번에 다시 되돌린다.
+  // 독립 탭으로 예약 화면(LessonBookingTab)을 그대로 연다.
+  { id: "bookings", label: "Bookings", icon: "bookings" },
   { id: "consult", label: "Consultations", icon: "consultations" },
   { id: "vocab", label: "Vocabulary", icon: "vocabulary" },
   { id: "homework", label: "Assignments", icon: "assignments" },
@@ -155,7 +159,6 @@ export default function ParentShell({
   // 한다(전에는 LessonsTab 내부 서브탭 위에 따로 떠 있었다).
   const [lessonsSubTab, setLessonsSubTab] = useState<"upcoming" | "past">("upcoming");
   const [creditsModalOpen, setCreditsModalOpen] = useState(false);
-  const [bookingModalOpen, setBookingModalOpen] = useState(false);
   // 2026-09-18 — 홈 재설계: "일정 확인"에서 "리뷰 확인"으로 목적이 바뀌어
   // 종합 리뷰(기본)/수업 리뷰(시간순)/상담 리뷰/통계 4개 읽기 전용 서브탭으로
   // 구성한다. 상담 리뷰는 종합 리뷰에 합치지 않는다(사용자 결정, 2026-09-18).
@@ -512,22 +515,16 @@ export default function ParentShell({
                 badgeCounts={{ messenger: messengerUnread }}
               />
             ) : activeTab === "lessons" ? (
-              <div className="flex items-center justify-between gap-3">
-                <UnderlineSubTabs
-                  items={[
-                    { id: "upcoming", label: "예정 수업" },
-                    { id: "past", label: "지난 수업" },
-                  ]}
-                  activeId={lessonsSubTab}
-                  onSelect={setLessonsSubTab}
-                />
-                <button
-                  onClick={() => setBookingModalOpen(true)}
-                  className="shrink-0 text-[11px] font-bold text-white bg-ink px-3 py-1.5 rounded-full"
-                >
-                  예정 수업 예약하기 →
-                </button>
-              </div>
+              // 2026-09-19(UAT 반영) — 예약 진입은 이제 독립 "Bookings" 탭으로
+              // 옮겼다(예약 탭 부활, 제품 오너 결정). 여기는 예정/지난 조회만.
+              <UnderlineSubTabs
+                items={[
+                  { id: "upcoming", label: "예정 수업" },
+                  { id: "past", label: "지난 수업" },
+                ]}
+                activeId={lessonsSubTab}
+                onSelect={setLessonsSubTab}
+              />
             ) : undefined
           }
         >
@@ -591,53 +588,38 @@ export default function ParentShell({
           ) : activeTab === "enrollment" ? (
             <ParentEnrollmentTab childrenEnrollments={childrenSubjectEnrollments} />
           ) : activeTab === "lessons" ? (
-            <div>
-              {/* 2026-09-17 — "예약" 독립 탭 제거: 예약 기능이 필요하면 수업
-                  탭 안 예정 수업 흐름에서 기존 LessonBookingTab(학생 포털과
-                  공유, 동작 변경 없음)을 모달로 연다. 서브탭·예약 버튼은
-                  위 PageFrame subtabs 자리로 옮겨졌다(hideHeader). */}
-              <LessonsTab
-                key={currentChildId}
-                upcoming={upcoming}
-                past={past}
-                curricula={curricula}
-                memosByEnrollment={memosByEnrollment}
-                reviews={reviews}
-                myFeedback={myFeedback}
-                readOnly
-                hideHeader
-                forcedSubtab={lessonsSubTab}
-              />
-              {bookingModalOpen && (
-                <div className="fixed inset-0 z-40 bg-black/30 flex items-center justify-center p-4">
-                  <div className="bg-white rounded-xl max-w-2xl w-full max-h-[85vh] overflow-y-auto">
-                    <div className="flex items-center justify-between px-4 py-3 border-b border-grey-200">
-                      <span className="text-[14px] font-bold text-ink">예정 수업 예약</span>
-                      <button
-                        onClick={() => setBookingModalOpen(false)}
-                        className="text-[13px] font-semibold text-grey-500"
-                      >
-                        닫기
-                      </button>
-                    </div>
-                    <LessonBookingTab
-                      key={currentChildId}
-                      bookableEnrollments={lessonBooking.bookableEnrollments}
-                      pendingActivationSubjects={lessonBooking.pendingActivationSubjects}
-                      upcomingBookings={lessonBooking.upcomingBookings}
-                      pastSessionsForReport={lessonBooking.pastSessionsForReport}
-                      timezone={lessonBooking.timezone}
-                      onListSlots={(teacherId, durationMinutes) => listAvailableSlotsForBooking({ teacherId, durationMinutes })}
-                      onCreateBooking={(params) => createLessonBookingForChild({ ...params, childId: currentChildId })}
-                      onCreateWeeklySeries={(params) => createWeeklyLessonSeriesForChild({ ...params, childId: currentChildId })}
-                      onCancelBooking={(reservationId, reason) => cancelLessonBookingForChild({ reservationId, childId: currentChildId, reason })}
-                      onUpdateTimezone={(timezone) => updateChildTimezone(currentChildId, timezone)}
-                      onReportTeacherIssue={(params) => reportTeacherIssueForChild({ ...params, childId: currentChildId })}
-                    />
-                  </div>
-                </div>
-              )}
-            </div>
+            // 2026-09-19(UAT 반영) — 예약 진입은 독립 "Bookings" 탭으로
+            // 옮겼다. 서브탭은 위 PageFrame subtabs 자리로 옮겨졌다(hideHeader).
+            <LessonsTab
+              key={currentChildId}
+              upcoming={upcoming}
+              past={past}
+              curricula={curricula}
+              memosByEnrollment={memosByEnrollment}
+              reviews={reviews}
+              myFeedback={myFeedback}
+              readOnly
+              hideHeader
+              forcedSubtab={lessonsSubTab}
+            />
+          ) : activeTab === "bookings" ? (
+            // 2026-09-19(UAT 반영, 제품 오너 결정) — 2026-09-17 R13에서
+            // 제거했던 독립 "예약" 탭을 다시 만든다(정책 되돌림 확인됨).
+            <LessonBookingTab
+              key={currentChildId}
+              hideHeader
+              bookableEnrollments={lessonBooking.bookableEnrollments}
+              pendingActivationSubjects={lessonBooking.pendingActivationSubjects}
+              upcomingBookings={lessonBooking.upcomingBookings}
+              pastSessionsForReport={lessonBooking.pastSessionsForReport}
+              timezone={lessonBooking.timezone}
+              onListSlots={(teacherId, durationMinutes) => listAvailableSlotsForBooking({ teacherId, durationMinutes })}
+              onCreateBooking={(params) => createLessonBookingForChild({ ...params, childId: currentChildId })}
+              onCreateWeeklySeries={(params) => createWeeklyLessonSeriesForChild({ ...params, childId: currentChildId })}
+              onCancelBooking={(reservationId, reason) => cancelLessonBookingForChild({ reservationId, childId: currentChildId, reason })}
+              onUpdateTimezone={(timezone) => updateChildTimezone(currentChildId, timezone)}
+              onReportTeacherIssue={(params) => reportTeacherIssueForChild({ ...params, childId: currentChildId })}
+            />
           ) : activeTab === "entitlements" ? (
             <EntitlementsTab data={entitlements} purchaseStatus={purchaseStatus} />
           ) : activeTab === "consent" ? (

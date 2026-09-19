@@ -251,7 +251,7 @@ describe("ParentShell", () => {
     expect(pushMock).toHaveBeenCalledWith("?child=s2&tab=home", { scroll: false });
   });
 
-  it("수업 탭을 누르면 읽기전용 LessonsTab이 렌더링되고(메모 입력창 없음), 예정 수업 예약 진입점이 있다", () => {
+  it("수업 탭을 누르면 읽기전용 LessonsTab이 렌더링된다(메모 입력창 없음)", () => {
     render(
       <ParentShell
         parentName="김민지"
@@ -263,10 +263,25 @@ describe("ParentShell", () => {
     );
     fireEvent.click(screen.getAllByText("Classes")[0]);
     expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
-    // 2026-09-17 — "예약" 독립 탭 제거: 수업 탭 안에서 기존 LessonBookingTab
-    // 모달로 들어가는 진입점만 확인한다(모달 내부 동작은 LessonBookingTab
-    // 자체 테스트가 이미 커버).
-    expect(screen.getByText("예정 수업 예약하기 →")).toBeInTheDocument();
+  });
+
+  // 2026-09-19(UAT 반영, 제품 오너 결정) — 2026-09-17 R13의 "예약 독립 탭
+  // 제거" 정책을 되돌려 "Bookings" 탭을 다시 만들었다. LessonBookingTab
+  // 자체 동작은 그 컴포넌트 테스트가 이미 커버하므로, 여기서는 탭 진입만 확인.
+  it("Bookings 탭을 누르면 LessonBookingTab이 렌더링된다", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+      />
+    );
+    fireEvent.click(screen.getAllByText("Bookings")[0]);
+    expect(
+      screen.getByText(/아직 선생님 배정이 완료되지 않았어요/)
+    ).toBeInTheDocument();
   });
 
   it("수업권 탭을 누르면 EntitlementsTab(R4)이 렌더링된다", () => {

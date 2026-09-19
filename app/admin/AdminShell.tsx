@@ -16,7 +16,6 @@ import CatalogTab from "./CatalogTab";
 import ProblemBankTab from "./ProblemBankTab";
 import MockExamTab from "./MockExamTab";
 import UsersTab from "./UsersTab";
-import BillingTab from "./BillingTab";
 import BookingReconciliationPanel from "./BookingReconciliationPanel";
 import UnifiedScheduleTab from "./UnifiedScheduleTab";
 import ConsultationTab from "./ConsultationTab";
@@ -52,10 +51,6 @@ import type {
 } from "./entitlement-actions";
 import type { AdminSubject } from "./subject-data";
 import type { CurriculumDocListItem } from "./curriculum-doc-data";
-import type {
-  CreditTransaction,
-  StudentListItem,
-} from "./users-data";
 
 // 2026-09-19(UI 통일화) — 좌측 네비게이션 라벨은 전부 영어로 통일한다(Acely
 // 레퍼런스). 탭 안 본문의 한국어 텍스트는 유지, 라벨만 영어로 바꾼다.
@@ -68,7 +63,6 @@ const NAV_ITEMS = [
   { id: "catalog", label: "Curriculum", icon: "curriculum" },
   { id: "problem-bank", label: "Question Bank", icon: "questionBank" },
   { id: "mock-exam", label: "Mock Exams", icon: "mockExam" },
-  { id: "billing", label: "Legacy Credits", icon: "legacyCredits" },
   { id: "entitlements", label: "Entitlements", icon: "entitlements" },
   { id: "unified-schedule", label: "Schedule", icon: "schedule" },
   { id: "booking", label: "Bookings", icon: "bookings" },
@@ -96,8 +90,6 @@ export default function AdminShell({
   dashboard,
   subjects,
   docs,
-  students,
-  creditHistoryByStudent,
   matchingStudents,
   consultations,
   trials,
@@ -139,11 +131,8 @@ export default function AdminShell({
   // 위해, 학생/선생님과 동일하게 UsersTab이 직접
   // listParentsForUsersTabAction()으로 조회한다.
   // 2026-09-10(P1) — "사용자" 탭의 학생/선생님 목록·수업권 이력·QC 경고는
-  // 더 이상 SSR로 안 내려온다(UsersTab이 서브탭을 열 때 직접 조회). students는
-  // 이제 "구 크레딧(레거시)" 탭에서만 쓴다. teachers/qcWarningsByTeacher
-  // props 자체를 없앴다.
-  students: StudentListItem[];
-  creditHistoryByStudent: Record<string, CreditTransaction[]>;
+  // 더 이상 SSR로 안 내려온다(UsersTab이 서브탭을 열 때 직접 조회). teachers/
+  // qcWarningsByTeacher props 자체를 없앴다.
   // 2026-09-10(P1) — 매칭 탭 전용 경량 학생 목록(id·name·grade·parentNames·status).
   matchingStudents: MatchingStudentItem[];
   consultations: ConsultationListItem[];
@@ -389,12 +378,6 @@ export default function AdminShell({
             <MockExamTab />
           ) : activeTab === "users" ? (
             <UsersTab subjects={subjects} />
-          ) : activeTab === "billing" ? (
-            <BillingTab
-              initialStudents={students}
-              creditHistoryByStudent={creditHistoryByStudent}
-              subjects={subjects}
-            />
           ) : activeTab === "entitlements" ? (
             <EntitlementLedgerTab
               products={entitlementProducts}

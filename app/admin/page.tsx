@@ -3,7 +3,6 @@ import { createAdminClient } from "@/lib/supabase-admin";
 import { loadAdminDashboard, type AdminDashboardData } from "./dashboard-data";
 import { loadSubjectCatalog } from "./subject-data";
 import { loadCurriculumDocList } from "./curriculum-doc-data";
-import { loadStudents, loadStudentCreditHistoryBatch } from "./users-data";
 import {
   loadConsultations,
   loadTrialSessions,
@@ -71,7 +70,6 @@ export default async function AdminHomePage({
     dashboard,
     subjects,
     docs,
-    students,
     matchingStudents,
     consultations,
     trials,
@@ -96,7 +94,6 @@ export default async function AdminHomePage({
     need("home") ? loadAdminDashboard(supabase, user.id) : Promise.resolve(EMPTY_DASHBOARD),
     need("catalog", "users", "consult", "matching", "problem-bank") ? loadSubjectCatalog(supabase) : Promise.resolve([]),
     need("catalog") ? loadCurriculumDocList(supabase) : Promise.resolve([]),
-    need("billing") ? loadStudents(supabase) : Promise.resolve([]),
     need("matching") ? loadStudentsForMatching(supabase) : Promise.resolve([]),
     need("consult") ? loadConsultations(supabase) : Promise.resolve([]),
     need("consult") ? loadTrialSessions(supabase) : Promise.resolve([]),
@@ -123,11 +120,7 @@ export default async function AdminHomePage({
 
   // 성능 corrective(2026-09-09, 2026-09-10 갱신): "사용자" 탭의 학생/선생님
   // 목록·이력은 이제 UsersTab이 서브탭을 열 때 listStudentsForUsersTabAction/
-  // listTeachersForUsersTabAction으로 지연 조회한다 — 여기서는 "billing" 탭이
-  // 계속 SSR로 필요로 하는 학생 수업권 이력만 배치로 읽는다.
-  const creditHistoryByStudent = need("billing")
-    ? await loadStudentCreditHistoryBatch(supabase, students.map((s) => s.id))
-    : {};
+  // listTeachersForUsersTabAction으로 지연 조회한다.
 
   return (
     <AdminShell
@@ -138,9 +131,7 @@ export default async function AdminHomePage({
       dashboard={dashboard}
       subjects={subjects}
       docs={docs}
-      students={students}
       matchingStudents={matchingStudents}
-      creditHistoryByStudent={creditHistoryByStudent}
       consultations={consultations}
       trials={trials}
       proposals={proposals}

@@ -113,9 +113,7 @@ const baseProps = {
   subjects: [],
   docs: [],
   parents: [],
-  students: [],
   matchingStudents: [],
-  creditHistoryByStudent: {},
   initialUnifiedScheduleMonthAnchor: "2026-09",
   consultations: [],
   trials: [],
@@ -146,7 +144,6 @@ describe("AdminShell", () => {
       "Matching",
       "Onboarding",
       "Curriculum",
-      "Legacy Credits",
       "Entitlements",
       "Schedule",
       "Payouts",
@@ -211,12 +208,6 @@ describe("AdminShell", () => {
     fireEvent.click(screen.getByText("Curriculum"));
     // 목록은 화면이 직접 불러온다 — 도착한 뒤에 보인다.
     expect(await screen.findByText("+ 과목 추가")).toBeInTheDocument();
-  });
-
-  it("구 크레딧(레거시) 탭을 누르면 BillingTab이 렌더링된다", () => {
-    render(<AdminShell {...baseProps} />);
-    fireEvent.click(screen.getByText("Legacy Credits"));
-    expect(screen.getByText("학생별 수업권 현황")).toBeInTheDocument();
   });
 
   it("수업권 탭을 누르면 EntitlementLedgerTab이 렌더링된다", () => {
