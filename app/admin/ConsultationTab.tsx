@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import { useTabCachedData } from "./use-tab-cached-data";
 import { listConsentGapsAction } from "./consent-actions";
 import { CONSENT_GAPS_CACHE_KEY, CONSENT_CACHE_TTL_MS } from "./consent-cache";
@@ -95,20 +96,7 @@ export default function ConsultationTab({
         상담·계정 생성 유입부터 체험·정규 전환·계약까지의 흐름과 예외 상황을 관리합니다.
       </p>
 
-      <div className="flex gap-1 mb-6 border-b border-grey-200">
-        {SUB_NAV.map((n) => (
-          <button
-            key={n.id}
-            onClick={() => setSub(n.id)}
-            className={
-              "text-[12.5px] font-bold px-3 py-2 -mb-px border-b-2 " +
-              (sub === n.id ? "border-ink text-ink" : "border-transparent text-grey-500")
-            }
-          >
-            {n.label}
-          </button>
-        ))}
-      </div>
+      <UnderlineSubTabs items={SUB_NAV} activeId={sub} onSelect={setSub} className="mb-6 flex-wrap" />
 
       {sub === "consult" && (
         <ConsultationKanbanBoard
