@@ -45,7 +45,10 @@ export const MATH_SKILL_KINDS: Record<string, SkillKindEntry[]> = {
     { value: "point_in_solution", label: "해 영역에 점 포함 판정" },
     { value: "table_verification", label: "표로 부등식 검증" },
   ],
-  linear_two_variables: [
+  // 2026-09-19(제품 오너 발견) — 실제 skillCode는 linear_equations_two_var이다(lib/problem-
+  // taxonomy.ts). 이 키가 linear_two_variables로 잘못 돼 있어서 getMathSkillKinds()가
+  // 항상 빈 배열을 반환했고, 관리자 화면에 "세부 패턴" 드롭다운 자체가 안 보였다.
+  linear_equations_two_var: [
     { value: "intersection_x", label: "교점 x좌표" },
     { value: "intersection_y", label: "교점 y좌표" },
     { value: "intersection_sum", label: "교점 좌표 합" },
@@ -126,7 +129,10 @@ export const MATH_SKILL_KINDS: Record<string, SkillKindEntry[]> = {
 export function getMathSkillKinds(skillCode: string | null | undefined): SkillKindEntry[] {
   if (!skillCode) return [];
   // systems_linear는 linear_two_variables 컴파일러를 그대로 재사용한다(batch.ts 참고).
-  const lookupCode = skillCode === "systems_linear" ? "linear_two_variables" : skillCode;
+  // systems_linear는 컴파일러는 재사용하지만(batch.ts 참고), 세부 패턴 드롭다운은 일부러
+  // 안 보여준다(제품 오너 지시 — 아래 MATH_SKILL_KINDS 주석 참고) — linear_equations_two_var로
+  // 리다이렉트하지 않는다.
+  const lookupCode = skillCode;
   return MATH_SKILL_KINDS[lookupCode] ?? [];
 }
 

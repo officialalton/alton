@@ -96,7 +96,15 @@ export function judgeMaterialNeed(input: {
   const isRw = input.examSystem === "sat_rw" || (skill?.domain ?? "").startsWith("rw_");
 
   // 1) 질문 문장에 단서가 있으면 그것이 우선한다 — 관리자가 판단할 일이 아니다.
-  const skillDefaultKind = input.skillCode ? SKILL_DEFAULT[input.skillCode]?.kind ?? null : null;
+  const skillDefault = input.skillCode ? SKILL_DEFAULT[input.skillCode] : undefined;
+  const skillDefaultKind = skillDefault?.kind ?? null;
+  // 2026-09-19(제품 오너 발견) — CUE.plane("xy-plane", "intercept" 등)은 SAT 대수 문항의
+  // 표준 문구("In the xy-plane, line f passes through...")에도 그냥 걸린다. 이 세부 기술이
+  // 이미 "recommended"(자료 없이도 성립)로 선언돼 있으면(예: linear_functions의
+  // slope_from_two_points, circles의 circle_equation_transform — 컴파일러가 애초에 자료 없이
+  // 대수만으로 설계한 kind) 이 값싼 단어 매칭 하나로 "required"로 격상시키지 않는다 —
+  // required는 그 세부 기술 자체가 required로 선언된 경우에만.
+  const cueCanOverrideToRequired = !skillDefault || skillDefault.level === "required";
   if (CUE.graphAmbiguous.test(text) && !CUE.data.test(text) && !CUE.figureChoice.test(text)) {
     const m = text.match(CUE.graphAmbiguous)?.[0] ?? "graph";
     if (skillDefaultKind === "data" || isRw) return { level: "required", kind: "data", geometry: [], alternatives: ["data"], reason: `${subject}이 자료 그래프(${m})를 읽어야 풀 수 있으므로 표·그래프 자료가 필요합니다.` };
@@ -109,7 +117,7 @@ export function judgeMaterialNeed(input: {
     const m = text.match(CUE.data)?.[0] ?? "table";
     return { level: "required", kind: "data", geometry: [], alternatives: ["data"], reason: `${subject}이 자료(${m})를 읽어야 풀 수 있으므로 표·그래프 자료가 필요합니다.` };
   }
-  if (!isRw && CUE.plane.test(text)) {
+  if (!isRw && cueCanOverrideToRequired && CUE.plane.test(text)) {
     const m = text.match(CUE.plane)?.[0] ?? "graph";
     return { level: "required", kind: "plane", geometry: [], alternatives: ["plane"], reason: `${subject}이 그래프(${m})를 가리키므로 좌표평면 자료가 필요합니다.` };
   }

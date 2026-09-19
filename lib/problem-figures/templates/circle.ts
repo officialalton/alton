@@ -140,7 +140,20 @@ export function renderCircle(spec: CircleSpec): { svg: string; alt: string; issu
     for (const id of a.between) if (!(spec.radii ?? []).some((r) => r.to === id) && !spec.sector) sheet.line(c, at(id));
     if (a.right) { sheet.rightAngle(c, a1, a2); if (Math.abs(a2 - a1 - Math.PI / 2) > 0.03) issues.push({ code: "impossible", message: `중심각 ${a.between.join("")} 을 직각으로 표시했지만 두 점의 각 차이가 90° 가 아닙니다.` }); }
     else sheet.arc(c, ARC_R + 3, a1, a2);
-    if (a.label) { const mid = (a1 + a2) / 2; const r = Math.max(ARC_R + 3 + halfDiag(a.label) + 4, (halfDiag(a.label) + 4) / Math.max(Math.sin((a2 - a1) / 2), 0.25)); sheet.label(c[0] + r * Math.cos(mid), c[1] - r * Math.sin(mid), a.label, `중심각 라벨(${a.between.join("")})`); }
+    if (a.label) {
+      // 2026-09-19 — 원주각 라벨과 같은 이유로(B가 실제 값 위치로 바뀌며 좁은 각도 조합이
+      // 생김) 여러 후보 반지름·이등분선 이탈 각을 시도한다.
+      const mid = (a1 + a2) / 2;
+      const base = Math.max(ARC_R + 3 + halfDiag(a.label) + 4, (halfDiag(a.label) + 4) / Math.max(Math.sin((a2 - a1) / 2), 0.25));
+      const candidates: Pt[] = [0, 12, 24, 40].flatMap((extra) => [
+        [c[0] + (base + extra) * Math.cos(mid), c[1] - (base + extra) * Math.sin(mid)] as Pt,
+        [c[0] + (base + extra) * Math.cos(mid + 0.35), c[1] - (base + extra) * Math.sin(mid + 0.35)] as Pt,
+        [c[0] + (base + extra) * Math.cos(mid - 0.35), c[1] - (base + extra) * Math.sin(mid - 0.35)] as Pt,
+      ]);
+      const spot = sheet.firstFree(candidates, a.label);
+      const [lx, ly] = spot ?? candidates[0];
+      sheet.label(lx, ly, a.label, `중심각 라벨(${a.between.join("")})`);
+    }
   }
   for (const a of spec.inscribedAngles ?? []) {
     const v = at(a.at);
