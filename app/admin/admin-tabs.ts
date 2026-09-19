@@ -13,6 +13,9 @@ export const ADMIN_NAV_TAB_IDS = [
   "catalog",
   // P2 3차 — 문제은행. 교재와 독립된 진입점이라 커리큘럼 바로 옆 콘텐츠 그룹에 둔다.
   "problem-bank",
+  // 2026-09-19 — 고정형 모의고사 V1. 문제은행 콘텐츠 그룹 바로 옆에 둔다(같은
+  // 문제은행 공개 문항을 재료로 쓰는 화면이라 인접 배치).
+  "mock-exam",
   "billing",
   "entitlements",
   "unified-schedule",
