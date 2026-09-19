@@ -128,9 +128,15 @@ export function renderSolid(spec: SolidSpec): { svg: string; alt: string; issues
       const h0 = parseNum(d.height);
       let rx = 80, h = 130;
       if (r0 !== null && h0 !== null) {
-        const maxVal = Math.max(r0, h0);
-        rx = Math.max(CYL_MIN_SIDE, Math.round((r0 / maxVal) * CYL_MAX_RX));
-        h = Math.max(CYL_MIN_SIDE, Math.round((h0 / maxVal) * CYL_MAX_H));
+        // 2026-09-19(제품 오너 재발견) — 반지름(r0, 지름의 절반)과 높이(h0, 전체 값)를
+        // maxVal = max(r0, h0) 하나로 나눠 같은 배율을 적용했다. rx는 "지름의 절반"만
+        // 반영하는데 h는 "높이 전체"를 반영하니, 지름=높이(예: 12, 12)여도 화면에서는
+        // 지름(=rx×2)이 높이의 절반으로 그려졌다 — 비교 기준을 지름(2×r0)과 높이로
+        // 맞춰야 한다.
+        const diameterVal = r0 * 2;
+        const pxPerUnit = Math.min((CYL_MAX_RX * 2) / diameterVal, CYL_MAX_H / h0);
+        rx = Math.max(CYL_MIN_SIDE, Math.round((diameterVal * pxPerUnit) / 2));
+        h = Math.max(CYL_MIN_SIDE, Math.round(h0 * pxPerUnit));
       }
       const ry = Math.max(14, Math.round(rx * 0.3));
       const c: Pt = [180, 70];
@@ -149,9 +155,13 @@ export function renderSolid(spec: SolidSpec): { svg: string; alt: string; issues
       const ch0 = parseNum(d.height);
       let rx = 85, apexH = 155;
       if (cr0 !== null && ch0 !== null) {
-        const maxVal = Math.max(cr0, ch0);
-        rx = Math.max(CONE_MIN_SIDE, Math.round((cr0 / maxVal) * CONE_MAX_RX));
-        apexH = Math.max(CONE_MIN_SIDE, Math.round((ch0 / maxVal) * CONE_MAX_H));
+        // 2026-09-19 — cylinder와 같은 버그: 반지름(cr0, 지름의 절반)을 높이(ch0, 전체 값)와
+        // 직접 비교하면 지름=높이인 원뿔도 화면에서 지름이 높이의 절반으로 그려진다.
+        // 지름(2×cr0) 기준으로 비교한다.
+        const diameterVal = cr0 * 2;
+        const pxPerUnit = Math.min((CONE_MAX_RX * 2) / diameterVal, CONE_MAX_H / ch0);
+        rx = Math.max(CONE_MIN_SIDE, Math.round((diameterVal * pxPerUnit) / 2));
+        apexH = Math.max(CONE_MIN_SIDE, Math.round(ch0 * pxPerUnit));
       }
       const ry = Math.max(14, Math.round(rx * 0.28));
       const c: Pt = [180, 215], apex: Pt = [180, 215 - apexH];
