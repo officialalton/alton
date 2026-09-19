@@ -88,12 +88,20 @@ export async function listUniversities(filter: UniversityListFilter = {}): Promi
 }
 
 export type UniversityDetail = UniversitySummary & {
+  overviewText: string | null;
   strengthsPrograms: string[];
   admissionsHomepageUrl: string | null;
   commonDataSetUrl: string | null;
   catalogProgramsUrl: string | null;
   deadlinesUrl: string | null;
   rankConfidence: string | null;
+  // Part 5(2026-09-19) — 캠퍼스 생활·학사 제도(자주 안 바뀌는 정보).
+  setting: string | null;
+  campusSizeAcres: number | null;
+  ncaaDivision: string | null;
+  religiousAffiliation: string | null;
+  calendarSystem: string | null;
+  honorsCollege: boolean | null;
 };
 
 export type AdmissionCycle = {
@@ -136,9 +144,26 @@ export type AdmissionCycle = {
   yieldRate: number | null;
   internationalPct: number | null;
   womenPct: number | null;
+  // Part 5(2026-09-19) — 비용/재정지원, ED/EA 제도 세부, 학사 상세, 합격자 학업 프로필.
+  tuitionInState: number | null;
+  tuitionOutState: number | null;
+  roomBoardCost: number | null;
+  avgNetPrice: number | null;
+  pctReceivingAid: number | null;
+  avgAidAward: number | null;
+  eaRestrictive: boolean | null;
+  ed2Deadline: string | null;
+  ed2DecisionDate: string | null;
+  classSizeUnder20Pct: number | null;
+  classSizeOver50Pct: number | null;
+  studyAbroadPct: number | null;
+  admittedAvgApExams: number | null;
+  admittedWeightedGpaAvg: number | null;
+  admittedTop10pctClassRankPct: number | null;
 };
 
 export type UniversityMajor = { id: string; name: string; category: string | null };
+export type EssayPrompt = { id: string; cycleYear: number; promptText: string; wordLimit: number | null; isRequired: boolean };
 
 export type UniversityUpdateEntry = {
   id: string;
@@ -152,7 +177,7 @@ export type UniversityUpdateEntry = {
 async function loadUniversityDetail(
   db: ReturnType<typeof createAdminClient>,
   universityId: string,
-): Promise<{ university: UniversityDetail; cycles: AdmissionCycle[]; updates: UniversityUpdateEntry[]; majors: UniversityMajor[] }> {
+): Promise<{ university: UniversityDetail; cycles: AdmissionCycle[]; updates: UniversityUpdateEntry[]; majors: UniversityMajor[]; essayPrompts: EssayPrompt[] }> {
   const { data: u, error: uErr } = await db.from("universities").select("*").eq("id", universityId).single();
   if (uErr) throw new Error(uErr.message);
 
@@ -177,6 +202,13 @@ async function loadUniversityDetail(
     .order("name", { ascending: true });
   if (mErr) throw new Error(mErr.message);
 
+  const { data: essayRows, error: eErr } = await db
+    .from("university_essay_prompts")
+    .select("*")
+    .eq("university_id", universityId)
+    .order("cycle_year", { ascending: false });
+  if (eErr) throw new Error(eErr.message);
+
   return {
     university: {
       id: u.id,
@@ -195,6 +227,13 @@ async function loadUniversityDetail(
       catalogProgramsUrl: u.catalog_programs_url,
       deadlinesUrl: u.deadlines_url,
       rankConfidence: u.rank_confidence,
+      overviewText: u.overview_text,
+      setting: u.setting,
+      campusSizeAcres: u.campus_size_acres,
+      ncaaDivision: u.ncaa_division,
+      religiousAffiliation: u.religious_affiliation,
+      calendarSystem: u.calendar_system,
+      honorsCollege: u.honors_college,
     },
     cycles: (cycleRows ?? []).map((c) => ({
       id: c.id,
@@ -235,6 +274,21 @@ async function loadUniversityDetail(
       yieldRate: c.yield_rate,
       internationalPct: c.international_pct,
       womenPct: c.women_pct,
+      tuitionInState: c.tuition_in_state,
+      tuitionOutState: c.tuition_out_state,
+      roomBoardCost: c.room_board_cost,
+      avgNetPrice: c.avg_net_price,
+      pctReceivingAid: c.pct_receiving_aid,
+      avgAidAward: c.avg_aid_award,
+      eaRestrictive: c.ea_restrictive,
+      ed2Deadline: c.ed2_deadline,
+      ed2DecisionDate: c.ed2_decision_date,
+      classSizeUnder20Pct: c.class_size_under_20_pct,
+      classSizeOver50Pct: c.class_size_over_50_pct,
+      studyAbroadPct: c.study_abroad_pct,
+      admittedAvgApExams: c.admitted_avg_ap_exams,
+      admittedWeightedGpaAvg: c.admitted_weighted_gpa_avg,
+      admittedTop10pctClassRankPct: c.admitted_top10pct_class_rank_pct,
     })),
     updates: (updateRows ?? []).map((r) => ({
       id: r.id,
@@ -244,13 +298,14 @@ async function loadUniversityDetail(
       sourceUrl: r.source_url,
     })),
     majors: (majorRows ?? []).map((m) => ({ id: m.id, name: m.name, category: m.category })),
+    essayPrompts: (essayRows ?? []).map((e) => ({ id: e.id, cycleYear: e.cycle_year, promptText: e.prompt_text, wordLimit: e.word_limit, isRequired: e.is_required })),
   };
 }
 
 /** 관리자 상세/편집 화면용. */
 export async function getUniversityDetail(
   universityId: string,
-): Promise<{ university: UniversityDetail; cycles: AdmissionCycle[]; updates: UniversityUpdateEntry[]; majors: UniversityMajor[] }> {
+): Promise<{ university: UniversityDetail; cycles: AdmissionCycle[]; updates: UniversityUpdateEntry[]; majors: UniversityMajor[]; essayPrompts: EssayPrompt[] }> {
   await requireAdmin();
   return loadUniversityDetail(createAdminClient(), universityId);
 }
@@ -262,7 +317,7 @@ export async function getUniversityDetail(
  */
 export async function getUniversityDetailForStudent(
   universityId: string,
-): Promise<{ university: UniversityDetail; cycles: AdmissionCycle[]; updates: UniversityUpdateEntry[]; majors: UniversityMajor[] }> {
+): Promise<{ university: UniversityDetail; cycles: AdmissionCycle[]; updates: UniversityUpdateEntry[]; majors: UniversityMajor[]; essayPrompts: EssayPrompt[] }> {
   const supabase = await createClient();
   const {
     data: { user },
@@ -377,6 +432,13 @@ export async function updateUniversityBasics(input: {
   universityId: string;
   applicationPlatform?: string | null;
   strengthsPrograms?: string[];
+  overviewText?: string | null;
+  setting?: string | null;
+  campusSizeAcres?: number | null;
+  ncaaDivision?: string | null;
+  religiousAffiliation?: string | null;
+  calendarSystem?: string | null;
+  honorsCollege?: boolean | null;
 }): Promise<void> {
   await requireAdmin();
   const db = createAdminClient();
@@ -385,6 +447,13 @@ export async function updateUniversityBasics(input: {
     .update({
       application_platform: input.applicationPlatform ?? null,
       strengths_programs: input.strengthsPrograms ?? [],
+      overview_text: input.overviewText ?? null,
+      setting: input.setting ?? null,
+      campus_size_acres: input.campusSizeAcres ?? null,
+      ncaa_division: input.ncaaDivision ?? null,
+      religious_affiliation: input.religiousAffiliation ?? null,
+      calendar_system: input.calendarSystem ?? null,
+      honors_college: input.honorsCollege ?? null,
     })
     .eq("id", input.universityId);
   if (error) throw new Error(error.message);

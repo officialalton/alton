@@ -5,10 +5,12 @@
 // 대학 관련 학생 진입점은 로드맵 탭 안에 둔다). 읽기 전용 — 합격 확률/가능성 예측은 정책상 없다.
 
 import { useEffect, useState, useTransition } from "react";
-import { listUniversities, getUniversityDetailForStudent, type UniversitySummary, type UniversityDetail, type AdmissionCycle, type UniversityMajor, type UniversityUpdateEntry } from "@/lib/universities/actions";
+import { listUniversities, getUniversityDetailForStudent, type UniversitySummary, type UniversityDetail, type AdmissionCycle, type UniversityMajor, type UniversityUpdateEntry, type EssayPrompt } from "@/lib/universities/actions";
 
 const cardClass = "border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4";
 const cardTitleClass = "text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2";
+const SETTING_LABEL: Record<string, string> = { urban: "도시", suburban: "교외", rural: "시골", town: "소도시" };
+const CALENDAR_LABEL: Record<string, string> = { semester: "학기제(Semester)", quarter: "쿼터제(Quarter)", trimester: "트라이메스터", "4-1-4": "4-1-4제", other: "기타" };
 
 export default function CollegeExploreSection() {
   const [search, setSearch] = useState("");
@@ -73,7 +75,7 @@ export default function CollegeExploreSection() {
 }
 
 function CollegeDetail({ universityId, onBack }: { universityId: string; onBack: () => void }) {
-  const [detail, setDetail] = useState<{ university: UniversityDetail; cycles: AdmissionCycle[]; updates: UniversityUpdateEntry[]; majors: UniversityMajor[] } | null>(null);
+  const [detail, setDetail] = useState<{ university: UniversityDetail; cycles: AdmissionCycle[]; updates: UniversityUpdateEntry[]; majors: UniversityMajor[]; essayPrompts: EssayPrompt[] } | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -106,11 +108,25 @@ function CollegeDetail({ universityId, onBack }: { universityId: string; onBack:
             </div>
             <div className="text-[12px] text-grey-500 mb-2">
               {[detail.university.city, detail.university.state].filter(Boolean).join(", ") || detail.university.country} · {detail.university.publicPrivate ?? "-"}
+              {detail.university.setting ? ` · ${SETTING_LABEL[detail.university.setting] ?? detail.university.setting}` : ""}
               {detail.university.applicationPlatform ? ` · ${detail.university.applicationPlatform}` : ""}
             </div>
-            {detail.university.strengthsPrograms.length > 0 && (
-              <div className="text-[12px] text-ink">강점 분야: {detail.university.strengthsPrograms.join(", ")}</div>
+            {detail.university.overviewText && (
+              <p className="text-[13px] text-ink leading-[1.6] mb-2">{detail.university.overviewText}</p>
             )}
+            {detail.university.strengthsPrograms.length > 0 && (
+              <div className="text-[12px] text-ink mb-1">강점 분야: {detail.university.strengthsPrograms.join(", ")}</div>
+            )}
+            <div className="text-[12px] text-grey-500">
+              {[
+                detail.university.calendarSystem ? `학사력 ${CALENDAR_LABEL[detail.university.calendarSystem] ?? detail.university.calendarSystem}` : null,
+                detail.university.ncaaDivision ? `NCAA ${detail.university.ncaaDivision}` : null,
+                detail.university.religiousAffiliation ? `종교 ${detail.university.religiousAffiliation}` : null,
+                detail.university.honorsCollege ? "Honors College 있음" : null,
+              ]
+                .filter(Boolean)
+                .join(" · ")}
+            </div>
             <div className="flex gap-3 mt-2 text-[11.5px]">
               {detail.university.admissionsHomepageUrl && (
                 <a href={detail.university.admissionsHomepageUrl} target="_blank" rel="noreferrer" className="text-ink underline">
@@ -126,6 +142,23 @@ function CollegeDetail({ universityId, onBack }: { universityId: string; onBack:
           </div>
 
           {detail.cycles[0] && <AdmissionCycleCard cycle={detail.cycles[0]} />}
+
+          {detail.essayPrompts.length > 0 && (
+            <div className={cardClass}>
+              <div className={cardTitleClass}>자체 에세이 문항({detail.essayPrompts[0]?.cycleYear} 사이클)</div>
+              {detail.essayPrompts
+                .filter((e) => e.cycleYear === detail.essayPrompts[0]?.cycleYear)
+                .map((e) => (
+                  <div key={e.id} className="mb-2 text-[12.5px]">
+                    <div className="text-ink">{e.promptText}</div>
+                    <div className="text-[11px] text-grey-500">
+                      {e.wordLimit ? `${e.wordLimit}단어 이내` : ""}
+                      {e.isRequired ? "" : " · 선택"}
+                    </div>
+                  </div>
+                ))}
+            </div>
+          )}
 
           {detail.majors.length > 0 && (
             <div className={cardClass}>
@@ -193,10 +226,58 @@ function AdmissionCycleCard({ cycle }: { cycle: AdmissionCycle }) {
         {stat("재적 유지율", cycle.retentionRate != null ? `${cycle.retentionRate}%` : null)}
         {stat("국제학생 비율", cycle.internationalPct != null ? `${cycle.internationalPct}%` : null)}
         {stat("Pell Grant 수혜율", cycle.pellGrantPct != null ? `${cycle.pellGrantPct}%` : null)}
-        {stat("지원 마감(ED/EA/RD)", [cycle.edDeadline, cycle.eaDeadline, cycle.rdDeadline].filter(Boolean).join(" / ") || null)}
+        {stat(
+          "지원 마감(ED/EA/RD)",
+          [
+            cycle.edDeadline ? `ED ${cycle.edDeadline}` : null,
+            cycle.ed2Deadline ? `ED2 ${cycle.ed2Deadline}` : null,
+            cycle.eaDeadline ? `${cycle.eaRestrictive ? "REA" : "EA"} ${cycle.eaDeadline}` : null,
+            cycle.rdDeadline ? `RD ${cycle.rdDeadline}` : null,
+          ]
+            .filter(Boolean)
+            .join(" / ") || null
+        )}
         {stat("에세이 수", cycle.essayCount)}
         {stat("추천서 수", cycle.recommendationLetterCount)}
+        {stat("포트폴리오 필요", cycle.portfolioRequired ? "필요" : null)}
+        {stat("인터뷰", cycle.interviewRequired === true ? "필요/권장" : cycle.interviewRequired === false ? "없음" : null)}
       </div>
+
+      {(cycle.tuitionInState != null || cycle.tuitionOutState != null || cycle.roomBoardCost != null || cycle.avgNetPrice != null || cycle.pctReceivingAid != null || cycle.avgAidAward != null) && (
+        <>
+          <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2 mt-1">비용 · 재정지원</div>
+          <div className="grid grid-cols-2 gap-3 mb-3">
+            {stat("등록금(주내)", cycle.tuitionInState != null ? `$${cycle.tuitionInState.toLocaleString()}` : null)}
+            {stat("등록금(주외/유학생)", cycle.tuitionOutState != null ? `$${cycle.tuitionOutState.toLocaleString()}` : null)}
+            {stat("기숙사·식비", cycle.roomBoardCost != null ? `$${cycle.roomBoardCost.toLocaleString()}` : null)}
+            {stat("평균 순부담액(net price)", cycle.avgNetPrice != null ? `$${cycle.avgNetPrice.toLocaleString()}` : null)}
+            {stat("재정지원 수혜율", cycle.pctReceivingAid != null ? `${cycle.pctReceivingAid}%` : null)}
+            {stat("평균 지원액", cycle.avgAidAward != null ? `$${cycle.avgAidAward.toLocaleString()}` : null)}
+          </div>
+        </>
+      )}
+
+      {(cycle.classSizeUnder20Pct != null || cycle.classSizeOver50Pct != null || cycle.studyAbroadPct != null) && (
+        <>
+          <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2 mt-1">학사</div>
+          <div className="grid grid-cols-2 gap-3 mb-3">
+            {stat("강의 20명 이하 비율", cycle.classSizeUnder20Pct != null ? `${cycle.classSizeUnder20Pct}%` : null)}
+            {stat("강의 50명 이상 비율", cycle.classSizeOver50Pct != null ? `${cycle.classSizeOver50Pct}%` : null)}
+            {stat("교환학생 참여율", cycle.studyAbroadPct != null ? `${cycle.studyAbroadPct}%` : null)}
+          </div>
+        </>
+      )}
+
+      {(cycle.admittedAvgApExams != null || cycle.admittedWeightedGpaAvg != null || cycle.admittedTop10pctClassRankPct != null) && (
+        <>
+          <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2 mt-1">합격자 학업 프로필(과거 실적)</div>
+          <div className="grid grid-cols-2 gap-3">
+            {stat("평균 AP 시험 응시 수", cycle.admittedAvgApExams)}
+            {stat("평균 가중 GPA", cycle.admittedWeightedGpaAvg)}
+            {stat("고교 상위 10% 비율", cycle.admittedTop10pctClassRankPct != null ? `${cycle.admittedTop10pctClassRankPct}%` : null)}
+          </div>
+        </>
+      )}
     </div>
   );
 }
