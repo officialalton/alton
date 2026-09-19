@@ -111,6 +111,10 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
   // 예전엔 공용 busy(다른 액션, 예: AI 생성이 도는 동안도 true)를 그대로 써서 생성 중에도
   // 이 버튼이 "공개 중…"으로 보였다.
   const [publishingAll, setPublishingAll] = useState(false);
+  // 2026-09-19(제품 오너 지시) — 목록에서 여러 문제를 골라 한꺼번에 공개·보관할 수 있게.
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [bulkBusy, setBulkBusy] = useState(false);
+  const [archivingAll, setArchivingAll] = useState(false);
 
   const archived = bucket === "archived";
 
@@ -191,7 +195,83 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
   const pageItems = visible.slice((pageSafe - 1) * PAGE_SIZE, pageSafe * PAGE_SIZE);
   useEffect(() => {
     setPage(1);
+    setSelectedIds(new Set());
   }, [bucket, filter]);
+
+  function toggleSelect(id: string) {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }
+
+  const selectedVisible = visible.filter((p) => selectedIds.has(p.id));
+  const selectedPublishable = selectedVisible.filter((p) => p.draft?.versionId && p.createdVia !== "manual" && !p.published);
+  const selectedArchivable = selectedVisible.filter((p) => !p.archived);
+
+  async function publishSelected() {
+    if (selectedPublishable.length === 0) return;
+    if (typeof window !== "undefined" && !window.confirm(`선택한 ${selectedPublishable.length}개를 공개할까요? 공개된 문제는 회차 구성 후보가 됩니다.`)) return;
+    setBulkBusy(true);
+    setError(null);
+    setNotice(null);
+    const failed: string[] = [];
+    let done = 0;
+    for (const p of selectedPublishable) {
+      const versionId = p.draft?.versionId;
+      if (!versionId) continue;
+      const result = await publishDraftAction(versionId);
+      if (result.ok) done += 1;
+      else failed.push(`${(p.draft?.passage ?? p.draft?.question ?? "").slice(0, 30) || "(내용 없음)"} — ${result.error}`);
+    }
+    await reload();
+    setSelectedIds(new Set());
+    setBulkBusy(false);
+    setNotice(`${done}개를 공개했습니다.${failed.length ? ` ${failed.length}개는 공개하지 못했습니다.` : ""}`);
+    if (failed.length) setError(failed.join(" / "));
+  }
+
+  async function archiveSelected() {
+    if (selectedArchivable.length === 0) return;
+    if (typeof window !== "undefined" && !window.confirm(`선택한 ${selectedArchivable.length}개를 보관할까요? 과거 기록은 그대로 남습니다.`)) return;
+    setBulkBusy(true);
+    setError(null);
+    setNotice(null);
+    const failed: string[] = [];
+    let done = 0;
+    for (const p of selectedArchivable) {
+      const result = await setProblemArchivedAction(p.id, true);
+      if (result.ok) done += 1;
+      else failed.push(`${p.id} — ${result.error}`);
+    }
+    await reload();
+    setSelectedIds(new Set());
+    setBulkBusy(false);
+    setNotice(`${done}개를 보관했습니다.${failed.length ? ` ${failed.length}개는 보관하지 못했습니다.` : ""}`);
+    if (failed.length) setError(failed.join(" / "));
+  }
+
+  async function archiveAllVisible() {
+    const targets = visible.filter((p) => !p.archived);
+    if (targets.length === 0) return;
+    if (typeof window !== "undefined" && !window.confirm(`지금 보이는 문제 ${targets.length}개를 모두 보관할까요? 과거 기록은 그대로 남습니다.`)) return;
+    setArchivingAll(true);
+    setError(null);
+    setNotice(null);
+    const failed: string[] = [];
+    let done = 0;
+    for (const p of targets) {
+      const result = await setProblemArchivedAction(p.id, true);
+      if (result.ok) done += 1;
+      else failed.push(`${p.id} — ${result.error}`);
+    }
+    await reload();
+    setArchivingAll(false);
+    setNotice(`${done}개를 보관했습니다.${failed.length ? ` ${failed.length}개는 보관하지 못했습니다.` : ""}`);
+    if (failed.length) setError(failed.join(" / "));
+  }
 
   async function publishAllVisible() {
     if (publishableDrafts.length === 0) return;
@@ -309,6 +389,35 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
         </div>
       )}
 
+      {bucket !== "archived" && visible.length > 0 && (
+        <div className="flex flex-wrap items-center gap-3 mb-3 border-[1.5px] border-grey-200 rounded-xl px-4 py-2.5">
+          <span className="text-[12.5px] text-ink">지금 보이는 문제 <b>{visible.length}</b>개</span>
+          <button type="button" disabled={busy || archivingAll} onClick={() => void archiveAllVisible()} className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-grey-500 disabled:opacity-50">
+            {archivingAll ? "보관 중…" : "전체 보관"}
+          </button>
+        </div>
+      )}
+
+      {/* 2026-09-19(제품 오너 지시) — 체크박스로 고른 문제만 골라 공개·보관. */}
+      {selectedIds.size > 0 && (
+        <div className="flex flex-wrap items-center gap-3 mb-3 border-[1.5px] border-ink rounded-xl px-4 py-2.5">
+          <span className="text-[12.5px] text-ink">선택됨 <b>{selectedIds.size}</b>개</span>
+          {selectedPublishable.length > 0 && (
+            <button type="button" disabled={busy || bulkBusy} onClick={() => void publishSelected()} className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50">
+              {bulkBusy ? "처리 중…" : `선택 공개 (${selectedPublishable.length})`}
+            </button>
+          )}
+          {selectedArchivable.length > 0 && (
+            <button type="button" disabled={busy || bulkBusy} onClick={() => void archiveSelected()} className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-grey-500 disabled:opacity-50">
+              {bulkBusy ? "처리 중…" : `선택 보관 (${selectedArchivable.length})`}
+            </button>
+          )}
+          <button type="button" onClick={() => setSelectedIds(new Set())} className="text-[12px] font-bold text-grey-500">
+            선택 해제
+          </button>
+        </div>
+      )}
+
       {bucket === "create" ? null : problems === null ? (
         <p className="text-[13px] text-grey-500">불러오는 중...</p>
       ) : visible.length === 0 ? (
@@ -324,6 +433,8 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
             activeSubjects={activeSubjects}
             open={openId === p.id}
             busy={busy}
+            selected={selectedIds.has(p.id)}
+            onSelectToggle={() => toggleSelect(p.id)}
             onToggle={() => setOpenId(openId === p.id ? null : p.id)}
             onArchive={(next) => void run(() => setProblemArchivedAction(p.id, next), next ? "보관했습니다. 과거 기록은 그대로 남습니다." : "보관을 풀었습니다.")}
             onRun={run}
@@ -723,6 +834,8 @@ function ProblemRow({
   activeSubjects,
   open,
   busy,
+  selected,
+  onSelectToggle,
   onToggle,
   onArchive,
   onRun,
@@ -733,6 +846,8 @@ function ProblemRow({
   activeSubjects: AdminSubject[];
   open: boolean;
   busy: boolean;
+  selected: boolean;
+  onSelectToggle: () => void;
   onToggle: () => void;
   onArchive: (archived: boolean) => void;
   onRun: (job: Job, done?: string) => Promise<void>;
@@ -752,6 +867,14 @@ function ProblemRow({
   return (
     <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5">
       <div className="flex items-start justify-between gap-3">
+        <input
+          type="checkbox"
+          checked={selected}
+          onChange={onSelectToggle}
+          onClick={(e) => e.stopPropagation()}
+          aria-label="문제 선택"
+          className="mt-1 shrink-0"
+        />
         <button onClick={onToggle} className="text-left min-w-0 flex-1">
           <div className="text-[13.5px] font-bold text-ink truncate" data-testid="bank-row-title">{title}</div>
           <div className="text-[12px] text-grey-500 mt-0.5">
