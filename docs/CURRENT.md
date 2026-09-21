@@ -1,4 +1,4 @@
-# ALTON — 현재 상태 (2026-09-18 기준)
+# ALTON — 현재 상태 (2026-09-21 기준)
 
 > 새 세션은 `CLAUDE.md` → 이 문서 → `docs/BRANCH-WORKFLOW.md` 순으로 읽고 시작한다.
 > 그 이전 상세 이력(2026-08-29 ~ 2026-09-14 낮)은
@@ -8,13 +8,14 @@
 
 | 항목 | 값 |
 |---|---|
-| 브랜치 / Preview | `preview/m4-integration-verification`. 최신 Preview **https://alton-7sfby1ror-alton7.vercel.app**(HEAD `db818b3` 시점 배포 — 이후 학부모/교사 UI 통일 커밋(`452ca80`·`0ae4de9`)과 Smart Notes 웹훅 멱등성(`3209ac9`)은 아직 이 Preview에 재배포 안 됨, 로컬+non-prod DB 검증만 완료). 이 URL에서 문제은행 Math MC/SPR·R&W 근거모델/정량모델 각 1문항을 실제 공개(uat20260918)해 학생·교사 실 세션 흐름까지 검증 완료(3절 참고). |
-| 공유 non-prod(`worpsqwqgnspddnrtnvq`) | 마이그레이션 **`20261414000000`까지 local=remote 확인**(drift 없음, `20261413000000` 문제은행 전수감사 보관분 포함 전부 적용됨). 새 마이그레이션 작성 시 이 문서의 `docs/BRANCH-WORKFLOW.md` 동기화 체크리스트를 통합/배포 직전 매번 실행할 것. |
-| Production | 배포·마이그레이션 없음(오픈 전, 실제 고객 데이터 없음) |
-| 테스트 | 오늘 관련 스위트 실행 결과: `npx vitest run app/admin lib/problem-generation` 138 files / 1129 tests pass, 1 fail(범위 밖 상담 관련 fixture, 회귀 아님); `... app/session` 포함 시 167 files pass / 4 fail(로컬 DB 상태 의존 사전 실패, 미수정). 전체 일괄 재실행은 R 종료 시에만 — 통합 테스트는 `supabase db reset --local` 직후 `--no-file-parallelism`으로 돌릴 것. |
+| 브랜치 / Preview | `preview/m4-integration-verification`(UI 통일화 `feature/ui-unification` 병합 완료). 최신 Preview **https://alton-81vwjnohd-alton7.vercel.app**(HEAD `20b06ab`). 배포 주의: 이 Vercel 프로젝트는 GitHub 연동이라 **커밋과 완전히 일치하는 깨끗한 작업 트리**에서 `vercel deploy`하면 커밋 작성자 검증(TEAM_ACCESS_REQUIRED)에 걸려 빌드가 조용히 BLOCKED 된다 — 메인 워크트리(미커밋 docs 변경이 늘 있음)에서 배포하거나, git 없는 임시 복사본에서 배포한다(2026-09-20 확인). |
+| 공유 non-prod(`worpsqwqgnspddnrtnvq`) | 마이그레이션 **`20261431000000`까지 local=remote 확인**. Supabase 프로젝트는 이 하나뿐(별도 프로덕션 DB 없음 — 2026-09-20 확인). 새 마이그레이션 작성 시 `docs/BRANCH-WORKFLOW.md` 동기화 체크리스트를 통합/배포 직전 매번 실행할 것. |
+| Production | Vercel production 도메인 배포·마이그레이션 없음(오픈 전, 실제 고객 데이터 없음). Stripe/DocuSign 등 외부 키는 샌드박스. |
+| 테스트 | 2026-09-21: `tsc` 통과. 유닛(app/student·parent·teacher·admin·components·session) 통과. 통합: 모의고사 응시 흐름·과제 배치 RLS·풀이판 21+… 통과. **알려진 사전 실패(무관)**: `app/session/[id]/problem-grading.integration.test.ts` 4건은 `confirm_and_publish_problem_version`·`issue_homework_by_keywords` 의 현재 정의에 없는 문구를 기대하는 오래된 테스트(함수 정의 확인됨), 나머지 `*.integration.test.ts` 실패는 로컬 DB 잔여 데이터(`reservations_no_overlap` 등) — `supabase db reset --local` 직후 `--no-file-parallelism`으로 돌릴 것. |
 | 실제 외부 연동 | 교재 Drive 읽기·고정 사본 공개, Smart Notes Drive reader 권한 부여(웹훅 멱등성 적용), Google Calendar/Meet 실제 이벤트 생성(상담 일정 확정). Preview `CURRICULUM_DRIVE_ENABLED/ID/ALLOW_REAL_WRITES=true`. AI 생성은 Anthropic 키. 유료 서비스 추가 없음. |
-| 상태 | 문제생성 파이프라인 Step 6까지 완료 + College Board 실전 840문항 전수 커버리지 매핑 완료. **다음 마일스톤: 고정형 모의고사 V1**(`2026-09-17-fixed-mock-exam-v1-spec.md`, 적응형 아님). |
-| **알려진 버그(미수정, 우선 조치 필요)** | **`/student` 홈이 로그인 직후 500 에러(React #418/#441)로 렌더링 실패** — 세션뷰(`/session/[id]`)는 정상, 재현: uat20260918 학생 계정으로 로그인 후 `/student` 접속(`docs/2026-09-18-real-student-teacher-uat.md` 5절). 실제 서비스 오픈 전 반드시 수정. |
+| 상태 | 문제생성 파이프라인 Step 6 + College Board 840문항 커버리지 매핑 완료. **고정형 모의고사 V1 구현 완료**(`2026-09-17-fixed-mock-exam-v1-spec.md`; 4개 포털 탭 통합, 학생/교사/학부모 목록은 Shell 탭 안, 응시·결과 화면만 독립 라우트). UI 통일화(Acely 레퍼런스, `docs/2026-09-19-ui-unification-spec.md`) 3차까지 병합. 대학 DB Part 5 + 관리자 전체 필드 편집 반영. **남은 UX 지적**: 수업 준비 UI 개선안(제품 오너 결정 대기). |
+| **2026-09-21 보안·리뷰 반영(기획자 코드 리뷰)** | **P0 차단 완료** — 학생이 모의고사 답안/응시 상태·과제 JSON(정답·성적)을 REST API 로 직접 읽거나 바꿀 수 있던 RLS 구멍을 막았다(`20261429000000`: 학생·학부모 읽기/쓰기는 SECURITY DEFINER RPC 만, 채점 확정 전 정답·해설·정오 DB 마스킹). P1: 결제→수업권 grant+ledger 원자화 RPC(`20261430000000`), 모의고사 교사 권한 `teaches_student()` 통일(v3 매칭 학생 누락 해결), `start_problem_work` 끝난 수업·미배정 문제 거절. P2: Stripe/DocuSign 웹훅 DB 오류는 500(재전송), Smart Notes 큐 적재 실패 시 claim 되돌림, `/student` 홈 목록 로더 실패 격리. **남은 리뷰 항목**: 전체 통합 테스트 green 복구(로컬 DB 격리), lint 정리(소스 82 errors), 로컬 webpack 빌드 PDF worker ESM 실패. |
+| 알려진 버그 | `/student` 홈 500(React #418/#441)은 이후 커밋으로 수정됨 + 2026-09-21 로더 실패 격리 추가. 재발 시 `docs/2026-09-18-real-student-teacher-uat.md` 5절 재현 절차 참고. |
 
 ## 2. 지금 유효한 확정 정책 (바꾸려면 제품 오너 결정)
 
