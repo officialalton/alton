@@ -18,18 +18,31 @@ export default function TeacherMockExamAttemptViewer({ attempt }: { attempt: Moc
   return (
     <div className="flex flex-col gap-3 md:flex-row">
       <div className="flex flex-wrap gap-1 md:w-[200px] md:flex-shrink-0 md:flex-col md:flex-nowrap md:overflow-y-auto md:max-h-[70vh]">
-        {attempt.items.map((it, i) => (
-          <button
-            key={it.setItemId}
-            type="button"
-            onClick={() => setIndex(i)}
-            className={`rounded px-2 py-1.5 text-left text-[12px] font-semibold ${
-              i === index ? "bg-ink text-white" : it.response ? "bg-green/10 text-ink" : "bg-grey-100 text-grey-600"
-            }`}
-          >
-            {SECTION_LABEL[it.section] ?? it.section} {it.position}
-          </button>
-        ))}
+        {attempt.items.map((it, i) => {
+          // 2026-09-21(UAT 지적) — 응답했다는 사실만이 아니라 정오(맞음/틀림)를 왼쪽 목록에서도
+          // 바로 구분할 수 있어야 한다(틀린 문항은 빨간색). correct가 null이면 아직 채점 전이라
+          // 응답 여부만 보여준다.
+          const stateClass =
+            i === index
+              ? "bg-ink text-white"
+              : it.correct === true
+                ? "bg-green/10 text-ink"
+                : it.correct === false
+                  ? "bg-red/10 text-red"
+                  : it.response
+                    ? "bg-grey-200 text-ink"
+                    : "bg-grey-100 text-grey-600";
+          return (
+            <button
+              key={it.setItemId}
+              type="button"
+              onClick={() => setIndex(i)}
+              className={`rounded px-2 py-1.5 text-left text-[12px] font-semibold ${stateClass}`}
+            >
+              {SECTION_LABEL[it.section] ?? it.section} {it.position}
+            </button>
+          );
+        })}
       </div>
       {current && <div className="min-w-0 flex-1">{<ItemDetail item={current} />}</div>}
     </div>
