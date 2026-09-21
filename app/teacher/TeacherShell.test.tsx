@@ -158,4 +158,24 @@ describe("TeacherShell", () => {
     fireEvent.click(screen.getAllByText("Mock Exams")[0]);
     expect(pushMock).toHaveBeenCalledWith("?tab=mock-exam", { scroll: false });
   });
+
+  it("현재 활성 탭에는 aria-current가 붙고, 탭 전환 시 이동한다", () => {
+    render(<TeacherShell {...baseProps} />);
+    expect(screen.getAllByRole("button", { name: new RegExp("Home") })[0]).toHaveAttribute(
+      "aria-current",
+      "page"
+    );
+    expect(
+      screen.getAllByRole("button", { name: new RegExp("My Students") })[0]
+    ).not.toHaveAttribute("aria-current");
+
+    fireEvent.click(screen.getAllByRole("button", { name: new RegExp("My Students") })[0]);
+    expect(screen.getAllByRole("button", { name: new RegExp("My Students") })[0]).toHaveAttribute(
+      "aria-current",
+      "page"
+    );
+    expect(
+      screen.getAllByRole("button", { name: new RegExp("Home") })[0]
+    ).not.toHaveAttribute("aria-current");
+  });
 });

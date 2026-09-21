@@ -241,4 +241,16 @@ describe("AdminShell", () => {
     fireEvent.click(screen.getByText("Mock Exams"));
     expect(pushMock).toHaveBeenCalledWith("?tab=mock-exam", { scroll: false });
   });
+
+  it("현재 활성 탭에는 aria-current가 붙고, 탭 전환 시 이동한다", () => {
+    render(<AdminShell {...baseProps} />);
+    const homeButton = screen.getByText("Home").closest("button")!;
+    const payoutsNavButton = screen.getByText("Payouts").closest("button")!;
+    expect(homeButton).toHaveAttribute("aria-current", "page");
+    expect(payoutsNavButton).not.toHaveAttribute("aria-current");
+
+    fireEvent.click(payoutsNavButton);
+    expect(payoutsNavButton).toHaveAttribute("aria-current", "page");
+    expect(homeButton).not.toHaveAttribute("aria-current");
+  });
 });

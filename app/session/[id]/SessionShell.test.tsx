@@ -488,4 +488,24 @@ describe("SessionShell — 수업 준비 탭", () => {
     fireEvent.click(screen.getByText("수업 준비"));
     expect(screen.queryByTestId("repin-live")).not.toBeInTheDocument();
   });
+
+  it("현재 활성 탭에는 aria-current가 붙고 다른 탭에는 붙지 않는다", () => {
+    render(
+      <SessionShell
+        {...baseProps}
+        viewerRole="student"
+        initialTab="homework"
+        initialState="prep"
+        status="upcoming"
+        scheduledAt={null}
+        durationMinutes={30}
+      />
+    );
+    expect(
+      screen.getByRole("button", { name: "과제" })
+    ).toHaveAttribute("aria-current", "page");
+    expect(
+      screen.getByRole("button", { name: "교재" })
+    ).not.toHaveAttribute("aria-current");
+  });
 });

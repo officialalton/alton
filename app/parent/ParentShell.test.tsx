@@ -460,4 +460,32 @@ describe("ParentShell", () => {
     expect(pushMock).not.toHaveBeenCalledWith("/parent/mock-exam/s1");
     expect(await screen.findByText("배정된 모의고사가 없습니다.")).toBeInTheDocument();
   });
+
+  it("현재 활성 탭에는 aria-current가 붙고, 탭 전환 시 이동한다", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+      />
+    );
+    expect(screen.getAllByRole("button", { name: new RegExp("Home") })[0]).toHaveAttribute(
+      "aria-current",
+      "page"
+    );
+    expect(
+      screen.getAllByRole("button", { name: new RegExp("Credits") })[0]
+    ).not.toHaveAttribute("aria-current");
+
+    fireEvent.click(screen.getAllByRole("button", { name: new RegExp("Credits") })[0]);
+    expect(screen.getAllByRole("button", { name: new RegExp("Credits") })[0]).toHaveAttribute(
+      "aria-current",
+      "page"
+    );
+    expect(
+      screen.getAllByRole("button", { name: new RegExp("Home") })[0]
+    ).not.toHaveAttribute("aria-current");
+  });
 });

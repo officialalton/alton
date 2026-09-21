@@ -102,4 +102,19 @@ describe("TeacherAssignmentTerminationPanel", () => {
     expect(screen.queryByPlaceholderText("새 선생님 ID")).toBeNull();
     expect(await screen.findByText("이도현")).toBeInTheDocument();
   });
+
+  it("취소를 누르면 패널이 닫히고, 다시 처리를 누르면 재확인할 수 있다", async () => {
+    (listTerminationRequests as ReturnType<typeof vi.fn>).mockResolvedValue([baseRequest]);
+    (previewTerminationImpactAction as ReturnType<typeof vi.fn>).mockResolvedValue([]);
+
+    render(<TeacherAssignmentTerminationPanel teacherCandidatesBySubject={{}} />);
+    await screen.findByText(/요청자: teacher/);
+    fireEvent.click(screen.getByText("처리"));
+
+    await screen.findByText("매칭 종료 확정");
+    fireEvent.click(screen.getByText("취소"));
+
+    expect(screen.queryByText("매칭 종료 확정")).not.toBeInTheDocument();
+    expect(processTerminationRequestAction).not.toHaveBeenCalled();
+  });
 });

@@ -45,6 +45,7 @@ export default function TeacherAssignmentTerminationPanel({
   const [effectiveFrom, setEffectiveFrom] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [openingId, setOpeningId] = useState<string | null>(null);
 
   async function refresh() {
     let list: TerminationRequestListItem[] = [];
@@ -64,16 +65,21 @@ export default function TeacherAssignmentTerminationPanel({
   }, []);
 
   async function openRequest(r: TerminationRequestListItem) {
+    setOpeningId(r.id);
     setOpenId(r.id);
     setImpact(null);
     setHistory(null);
     setError(null);
-    const [impactData, historyData] = await Promise.all([
-      previewTerminationImpactAction(r.teacherAssignmentId).catch(() => []),
-      listSubjectTeachingHistoryForCurrentTeacher(r.subjectEnrollmentId).catch(() => []),
-    ]);
-    setImpact(impactData);
-    setHistory(historyData);
+    try {
+      const [impactData, historyData] = await Promise.all([
+        previewTerminationImpactAction(r.teacherAssignmentId).catch(() => []),
+        listSubjectTeachingHistoryForCurrentTeacher(r.subjectEnrollmentId).catch(() => []),
+      ]);
+      setImpact(impactData);
+      setHistory(historyData);
+    } finally {
+      setOpeningId(null);
+    }
   }
 
   async function process(r: TerminationRequestListItem) {
@@ -137,10 +143,15 @@ export default function TeacherAssignmentTerminationPanel({
               </div>
               {(r.status === "requested" || r.status === "failed") && (
                 <button
-                  className="text-[12.5px] font-semibold text-ink underline"
+                  disabled={openingId === r.id}
+                  className="text-[12.5px] font-semibold text-ink border border-grey-200 rounded-md px-3 py-1.5 disabled:opacity-50"
                   onClick={() => openRequest(r)}
                 >
-                  {r.status === "failed" ? "재처리" : "처리"}
+                  {openingId === r.id
+                    ? "불러오는 중..."
+                    : r.status === "failed"
+                      ? "재처리"
+                      : "처리"}
                 </button>
               )}
             </div>
@@ -211,13 +222,22 @@ export default function TeacherAssignmentTerminationPanel({
 
                 {error && <div className="text-[12.5px] text-red mb-2">{error}</div>}
 
-                <button
-                  disabled={busy || (impact?.some((i) => i.sessionFinalStatus === "live") ?? false)}
-                  onClick={() => process(r)}
-                  className="text-[12.5px] font-bold text-white bg-ink rounded px-3 py-1.5 disabled:opacity-50"
-                >
-                  {busy ? "처리 중..." : resolution === "reassign" ? "재매칭 확정" : "매칭 종료 확정"}
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    disabled={busy || (impact?.some((i) => i.sessionFinalStatus === "live") ?? false)}
+                    onClick={() => process(r)}
+                    className="text-[12.5px] font-bold text-white bg-ink rounded px-3 py-1.5 disabled:opacity-50"
+                  >
+                    {busy ? "처리 중..." : resolution === "reassign" ? "재매칭 확정" : "매칭 종료 확정"}
+                  </button>
+                  <button
+                    disabled={busy}
+                    onClick={() => setOpenId(null)}
+                    className="text-[12.5px] font-semibold text-grey-500 border border-grey-200 rounded-md px-3 py-1.5 disabled:opacity-50"
+                  >
+                    취소
+                  </button>
+                </div>
               </div>
             )}
           </div>

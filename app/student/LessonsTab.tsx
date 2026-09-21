@@ -146,7 +146,7 @@ function UpcomingList({
             <div className="flex items-center gap-2 flex-wrap mb-1.5">
               <button
                 onClick={() => onOpenCurriculum(lesson.enrollmentId)}
-                className="text-[13px] font-bold text-ink"
+                className="text-[13px] font-bold text-ink hover:underline text-left"
               >
                 {lesson.subjectName}
                 {lesson.sessionNumber != null ? ` · ${lesson.sessionNumber}회차` : ""}
@@ -203,7 +203,7 @@ function PastList({
           <div className="flex items-center gap-2 flex-wrap mb-1.5">
             <button
               onClick={() => onOpenCurriculum(lesson.enrollmentId)}
-              className="text-[13px] font-bold text-ink"
+              className="text-[13px] font-bold text-ink hover:underline text-left"
             >
               {lesson.subjectName}
               {lesson.sessionNumber != null ? ` · ${lesson.sessionNumber}회차` : ""}

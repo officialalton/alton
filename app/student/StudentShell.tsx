@@ -181,6 +181,7 @@ export default function StudentShell({
           <button
             key={item.id}
             onClick={() => selectTab(item.id)}
+            aria-current={activeTab === item.id ? "page" : undefined}
             className={
               "w-full flex items-center gap-2.5 px-2.5 py-2.5 rounded-lg text-[13px] font-semibold transition-colors " +
               (activeTab === item.id ? "bg-red text-white" : "text-grey-500 hover:bg-grey-100 hover:text-ink")

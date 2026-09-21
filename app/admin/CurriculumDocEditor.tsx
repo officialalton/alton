@@ -369,6 +369,7 @@ function SectionEditor({
   onMove: (direction: -1 | 1) => void;
 }) {
   const [problems, setProblems] = useState(section.problems);
+  const [removingProblemId, setRemovingProblemId] = useState<string | null>(null);
   const [showProblemForm, setShowProblemForm] = useState(
     section.sectionType === "problem" && section.problems.length === 0
   );
@@ -413,7 +414,10 @@ function SectionEditor({
         >
           ↓
         </button>
-        <button onClick={onRemove} className="text-[12px] font-semibold text-red">
+        <button
+          onClick={onRemove}
+          className="text-[12px] font-semibold text-red border border-red/30 rounded px-2 py-1"
+        >
           삭제
         </button>
       </div>
@@ -479,13 +483,19 @@ function SectionEditor({
                   )}
                 </div>
                 <button
+                  disabled={removingProblemId === p.id}
                   onClick={async () => {
-                    await removeSectionProblem(p.id);
-                    commitProblems(problems.filter((x) => x.id !== p.id));
+                    setRemovingProblemId(p.id);
+                    try {
+                      await removeSectionProblem(p.id);
+                      commitProblems(problems.filter((x) => x.id !== p.id));
+                    } finally {
+                      setRemovingProblemId(null);
+                    }
                   }}
-                  className="text-[11.5px] font-semibold text-red shrink-0"
+                  className="text-[11.5px] font-semibold text-red border border-red/30 rounded px-2 py-1 shrink-0 disabled:opacity-50"
                 >
-                  삭제
+                  {removingProblemId === p.id ? "삭제 중..." : "삭제"}
                 </button>
               </div>
               <div className="mt-2">

@@ -320,4 +320,31 @@ describe("StudentShell", () => {
     // 2026-09-21 — 모의고사는 이제 독립 라우트가 아니라 일반 탭이다(좌측 네비 유지).
     expect(pushMock).toHaveBeenCalledWith("?tab=mock-exam", { scroll: false });
   });
+
+  it("현재 활성 탭에는 aria-current가 붙고, 탭 전환 시 이동한다", () => {
+    render(
+      <StudentShell
+        studentName="지훈"
+        dashboard={dashboard}
+        problemHistory={[]}
+        {...lessonsProps}
+      />
+    );
+    expect(screen.getAllByRole("button", { name: new RegExp("Home") })[0]).toHaveAttribute(
+      "aria-current",
+      "page"
+    );
+    expect(
+      screen.getAllByRole("button", { name: new RegExp("Assignments") })[0]
+    ).not.toHaveAttribute("aria-current");
+
+    fireEvent.click(screen.getAllByRole("button", { name: new RegExp("Assignments") })[0]);
+    expect(screen.getAllByRole("button", { name: new RegExp("Assignments") })[0]).toHaveAttribute(
+      "aria-current",
+      "page"
+    );
+    expect(
+      screen.getAllByRole("button", { name: new RegExp("Home") })[0]
+    ).not.toHaveAttribute("aria-current");
+  });
 });
