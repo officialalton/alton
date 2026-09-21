@@ -60,6 +60,15 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
   const [saveStatus, setSaveStatus] = useState<SaveStatus>("idle");
   const [error, setError] = useState<string | null>(null);
   const [lastSave, setLastSave] = useState<{ setItemId: string; response: string } | null>(null);
+  // 2026-09-21(UAT 지적: "소요 시간이 왜 0분이지") — saveCurrent가 timeSpentSeconds를
+  // 한 번도 안 넘겨서 항상 null로 저장되고 있었다. 문항별 누적 시간을 로컬에서 재고
+  // 있다가, 그 문항을 벗어날 때(이전/다음/문항 이동/섹션 전환/제출) 지금 답과 함께
+  // 서버에 흘려보낸다.
+  const itemSecondsRef = useRef<Record<string, number>>(
+    Object.fromEntries(attempt.items.map((i) => [i.setItemId, i.timeSpentSeconds ?? 0])),
+  );
+  const [eliminateMode, setEliminateMode] = useState(false);
+  const [eliminated, setEliminated] = useState<Record<string, Set<number>>>({});
   const [locked, setLocked] = useState<Record<"rw" | "math", boolean>>({ rw: false, math: false });
   const [submitting, setSubmitting] = useState(false);
   const [showReview, setShowReview] = useState(false);
@@ -73,6 +82,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
   const tickRef = useRef(remaining);
   tickRef.current = remaining;
 
+  const currentItemId = current?.setItemId;
   useEffect(() => {
     if (isSubmitted) return;
     const timer = setInterval(() => {
@@ -81,9 +91,12 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
         if (next[section] === 0 && !locked[section]) setLocked((l) => ({ ...l, [section]: true }));
         return next;
       });
+      if (currentItemId) {
+        itemSecondsRef.current[currentItemId] = (itemSecondsRef.current[currentItemId] ?? 0) + 1;
+      }
     }, 1000);
     return () => clearInterval(timer);
-  }, [section, isSubmitted, locked]);
+  }, [section, isSubmitted, locked, currentItemId]);
 
   useEffect(() => {
     if (isSubmitted) return;
@@ -121,9 +134,22 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
     setLastSave({ setItemId, response });
     setSaveStatus("saving");
     setError(null);
-    const result = await saveMockExamAnswerAction(attempt.id, setItemId, response);
+    const result = await saveMockExamAnswerAction(attempt.id, setItemId, response, itemSecondsRef.current[setItemId]);
     setSaveStatus(result.ok ? "saved" : "error");
     if (!result.ok) setError(result.error);
+  }
+
+  /** 문항을 벗어날 때 지금까지 쌓인 그 문항의 소요 시간만 서버에 반영한다(답은 그대로 두고
+   * time_spent_seconds만 갱신) — 사용자가 답을 안 바꾸고 시간만 쓰다 넘어가도 기록되게 한다. */
+  function flushItemTime(setItemId: string) {
+    const secs = itemSecondsRef.current[setItemId];
+    if (secs === undefined) return;
+    void saveMockExamAnswerAction(attempt.id, setItemId, responses[setItemId] ?? "", secs);
+  }
+
+  function goToIndex(newIndex: number) {
+    if (current) flushItemTime(current.setItemId);
+    setIndex(newIndex);
   }
 
   async function retrySave() {
@@ -147,6 +173,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
   async function handleSubmit() {
     setSubmitting(true);
     setError(null);
+    if (current) flushItemTime(current.setItemId);
     await saveMockExamSectionTimeAction(attempt.id, "rw", tickRef.current.rw);
     await saveMockExamSectionTimeAction(attempt.id, "math", tickRef.current.math);
     const result = await submitMockExamAttemptAction(attempt.id);
@@ -166,7 +193,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
           세로로 늘어서야 한다. */}
       <nav
         aria-label="문항 이동"
-        className="flex gap-1 overflow-x-auto lg:w-[72px] lg:flex-shrink-0 lg:flex-col lg:flex-nowrap lg:gap-1.5 lg:overflow-y-auto lg:max-h-[70vh]"
+        className="flex gap-1 overflow-x-auto lg:w-[72px] lg:flex-shrink-0 lg:flex-col lg:flex-nowrap lg:gap-1.5 lg:overflow-x-visible lg:overflow-y-auto lg:max-h-[70vh]"
       >
         {sectionItems.map((it, i) => {
           const isAnswered = (responses[it.setItemId] ?? "").trim() !== "";
@@ -175,7 +202,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
             <button
               key={it.setItemId}
               type="button"
-              onClick={() => setIndex(i)}
+              onClick={() => goToIndex(i)}
               aria-current={i === index}
               title={`${i + 1}번${isAnswered ? " · 응답 완료" : " · 미응답"}${isFlagged ? " · 다시 보기 표시" : ""}`}
               className={`relative flex h-9 w-9 shrink-0 items-center justify-center rounded text-[12px] font-bold lg:w-full ${
@@ -208,6 +235,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
                   key={s}
                   type="button"
                   onClick={() => {
+                    if (current) flushItemTime(current.setItemId);
                     setSection(s);
                     setIndex(0);
                   }}
@@ -241,35 +269,56 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
             이 섹션의 제한 시간이 끝났습니다. 답은 더 바꿀 수 없습니다.
           </div>
         ) : current ? (
-          <div className="rounded-lg border border-grey-200 bg-white p-4">
+          // 2026-09-21(UAT 지적) — Math는 선택지 텍스트 길이가 문항마다 달라 카드 가로폭이
+          // 계속 바뀌어 보기 힘들었다. min-w-0(플렉스 자식이 내용 크기만큼 커지는 것 방지) +
+          // 고정 가로폭(lg 이상 680px)으로 문항이 바뀌어도 폭이 흔들리지 않게 한다.
+          <div className="min-w-0 rounded-lg border border-grey-200 bg-white p-4 lg:w-[680px]">
             <div className="mb-2 flex items-center justify-between">
-              <p className="text-[12px] font-bold text-grey-500">
-                {section === "rw" ? "R&W" : "Math"} {index + 1} / {sectionItems.length}
-              </p>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5">
+                <p className="text-[12px] font-bold text-grey-500">
+                  {section === "rw" ? "R&W" : "Math"} {index + 1} / {sectionItems.length}
+                </p>
+                {/* 2026-09-21(UAT 지적) — 별표+"표시" 글자 대신 북마크 아이콘만. */}
                 <button
                   type="button"
                   onClick={toggleFlag}
                   aria-pressed={flags[current.setItemId]}
-                  className={`rounded px-2 py-1 text-[12px] font-bold ${flags[current.setItemId] ? "bg-yellow-100 text-yellow-700" : "text-grey-400"}`}
+                  className={`text-[14px] leading-none ${flags[current.setItemId] ? "text-yellow-600" : "text-grey-300"}`}
                   data-testid="toggle-flag"
-                  title="나중에 다시 보기"
+                  title="나중에 다시 보기로 표시"
                 >
-                  {flags[current.setItemId] ? "★ 표시됨" : "☆ 표시"}
+                  🔖
                 </button>
-                <span className="text-[11px] text-grey-400" data-testid="save-status">
-                  {saveStatus === "saving" && "저장 중…"}
-                  {saveStatus === "saved" && "저장됨"}
-                  {saveStatus === "error" && (
-                    <span className="text-red">
-                      저장 실패{" "}
-                      <button type="button" onClick={retrySave} className="underline">
-                        재시도
-                      </button>
-                    </span>
-                  )}
-                </span>
+                {/* "저장됨" 텍스트는 안 보이게(저장 중/실패일 때만 표시). */}
+                {(saveStatus === "saving" || saveStatus === "error") && (
+                  <span className="text-[11px] text-grey-400" data-testid="save-status">
+                    {saveStatus === "saving" && "저장 중…"}
+                    {saveStatus === "error" && (
+                      <span className="text-red">
+                        저장 실패{" "}
+                        <button type="button" onClick={retrySave} className="underline">
+                          재시도
+                        </button>
+                      </span>
+                    )}
+                  </span>
+                )}
               </div>
+              {/* 2026-09-21(UAT 지적) — 디지털 SAT의 "답 소거" 도구. 켜면 선택지를 눌러도
+                  답으로 선택되지 않고 줄이 그어진다(다시 누르면 해제). */}
+              {current.format === "mc" && current.options && (
+                <button
+                  type="button"
+                  onClick={() => setEliminateMode((v) => !v)}
+                  aria-pressed={eliminateMode}
+                  className={`rounded border px-2 py-1 text-[11px] font-bold ${
+                    eliminateMode ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-500"
+                  }`}
+                  title="답 소거 도구"
+                >
+                  ABC 소거
+                </button>
+              )}
             </div>
             {current.passage && <RwStimulusView passage={current.passage} className="mb-4 text-[13.5px]" />}
             {current.question && <LearningText text={current.question} className="mb-3 font-semibold text-[14px]" />}
@@ -279,15 +328,27 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
               <div className="flex flex-col gap-2">
                 {current.options.map((opt, i) => {
                   const isChosen = responses[current.setItemId] === String(i);
+                  const isEliminated = eliminated[current.setItemId]?.has(i) ?? false;
                   return (
                     <button
                       key={i}
                       type="button"
-                      onClick={() => saveCurrent(String(i))}
+                      onClick={() => {
+                        if (eliminateMode) {
+                          setEliminated((prev) => {
+                            const set = new Set(prev[current.setItemId] ?? []);
+                            if (set.has(i)) set.delete(i);
+                            else set.add(i);
+                            return { ...prev, [current.setItemId]: set };
+                          });
+                        } else if (!isEliminated) {
+                          saveCurrent(String(i));
+                        }
+                      }}
                       aria-pressed={isChosen}
-                      className={`flex items-start gap-2.5 rounded-lg border-2 px-3 py-2 text-left text-[13.5px] ${
+                      className={`flex min-w-0 items-start gap-2.5 rounded-lg border-2 px-3 py-2 text-left text-[13.5px] break-words ${
                         isChosen ? "border-ink bg-ink/5 font-bold" : "border-grey-200"
-                      }`}
+                      } ${isEliminated ? "opacity-50" : ""}`}
                     >
                       <span
                         className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[11px] font-bold ${
@@ -296,7 +357,9 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
                       >
                         {isChosen ? "✓" : OPTION_LETTERS[i] ?? i + 1}
                       </span>
-                      <LearningText text={opt} />
+                      <span className={`min-w-0 break-words ${isEliminated ? "line-through" : ""}`}>
+                        <LearningText text={opt} />
+                      </span>
                     </button>
                   );
                 })}
@@ -319,7 +382,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
           <button
             type="button"
             disabled={index === 0}
-            onClick={() => setIndex((i) => Math.max(0, i - 1))}
+            onClick={() => goToIndex(Math.max(0, index - 1))}
             className="shrink-0 whitespace-nowrap rounded-lg border border-grey-300 px-4 py-2 text-[13px] font-bold disabled:opacity-40"
           >
             이전 문항
@@ -327,7 +390,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
           {index < sectionItems.length - 1 ? (
             <button
               type="button"
-              onClick={() => setIndex((i) => Math.min(sectionItems.length - 1, i + 1))}
+              onClick={() => goToIndex(Math.min(sectionItems.length - 1, index + 1))}
               className="shrink-0 whitespace-nowrap rounded-lg bg-ink px-4 py-2 text-[13px] font-bold text-white"
             >
               다음 문항
@@ -338,6 +401,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
             <button
               type="button"
               onClick={() => {
+                if (current) flushItemTime(current.setItemId);
                 const next = sectionsOrder[sectionsOrder.indexOf(section) + 1];
                 if (next) {
                   setSection(next);
