@@ -39,39 +39,15 @@ export async function issueHomeworkBatchAction(
   return { ok: true, value: { id: batchId, problemCount } };
 }
 
-function normalizeSprAnswer(text: string): string {
-  return text.trim().replace(/\s+/g, "");
-}
-function sprMatches(response: string, answers: string[]): boolean {
-  const r = normalizeSprAnswer(response);
-  if (!r) return false;
-  return answers.some((a) => {
-    const na = normalizeSprAnswer(a);
-    if (na === r) return true;
-    const rn = Number(r);
-    const an = Number(na);
-    return Number.isFinite(rn) && Number.isFinite(an) && Math.abs(rn - an) < 1e-9;
-  });
-}
-
 /** 학생이 문항 하나에 답한다 — mc/spr 은 즉시 서버가 정오를 계산해 두지만(autoCorrect),
- * 교사가 "채점 완료"를 눌러야 학생에게 정답 여부·해설이 열린다(채점 전 재답변 가능). */
+ * 교사가 "채점 완료"를 눌러야 학생에게 정답 여부·해설이 열린다(채점 전 재답변 가능).
+ * 2026-09-21(P0 보안 차단) — 학생은 homework_batches 를 직접 UPDATE 할 수 없다(예전엔 행 전체
+ * UPDATE 가 열려 있어 graded/grade 를 REST API 로 직접 바꿀 수 있었다). SECURITY DEFINER RPC 가
+ * 본인·미채점 검사를 하고 response/submittedAt/autoCorrect 세 키만 갱신한다(정오 계산도 DB 안에서). */
 export async function submitHomeworkAnswerAction(batchId: string, problemId: string, response: string): Promise<ActionResult> {
-  const { user, supabase } = await requireUser();
-  const batch = await loadHomeworkBatch(supabase, batchId);
-  if (!batch) return { ok: false, error: "과제를 찾을 수 없습니다." };
-  if (batch.studentId !== user.id) return { ok: false, error: "본인 과제만 답할 수 있습니다." };
-  const item = batch.items.find((i) => i.problemId === problemId);
-  if (!item) return { ok: false, error: "문항을 찾을 수 없습니다." };
-  if (item.graded) return { ok: false, error: "이미 채점된 과제는 답을 바꿀 수 없습니다." };
-
-  let autoCorrect: boolean | null = null;
-  if (item.format === "mc" && item.correctIndex !== null) autoCorrect = response === String(item.correctIndex);
-  else if (item.format === "spr" && item.answers) autoCorrect = sprMatches(response, item.answers);
-
-  const nextItems = batch.items.map((i) => (i.problemId === problemId ? { ...i, response, submittedAt: new Date().toISOString(), autoCorrect } : i));
-  const { error } = await supabase.from("homework_batches").update({ items: nextItems }).eq("id", batchId);
-  if (error) return { ok: false, error: "답을 저장하지 못했습니다." };
+  const { supabase } = await requireUser();
+  const { error } = await supabase.rpc("homework_submit_answer", { p_batch_id: batchId, p_problem_id: problemId, p_response: response });
+  if (error) return { ok: false, error: error.message.replace(/^[A-Z0-9]{5}:\s*/, "") || "답을 저장하지 못했습니다." };
   return { ok: true, value: undefined };
 }
 

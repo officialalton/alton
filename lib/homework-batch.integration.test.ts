@@ -102,11 +102,36 @@ describe("issue_homework_batch_v2 — 담당 교사가 학생·키워드만으�
   });
 });
 
-describe("homework_batches RLS — 발급 교사·학생 본인만 보고, 다른 교사·다른 학생에게는 노출되지 않는다", () => {
-  it("발급 교사·학생 본인은 조회할 수 있다", () => {
+describe("homework_batches RLS — 발급 교사만 직접 보고, 학생 본인은 정답이 마스킹된 RPC 사본만 본다", () => {
+  // 2026-09-21(P0 보안 차단) — items JSON 에 정답·해설·자동채점·성적이 함께 있어 학생 직접 SELECT/UPDATE 를 막았다.
+  it("발급 교사는 직접 조회하고, 학생 본인은 직접 조회가 0행 — RPC 로는 채점 전 정답·해설이 null 로 내려온다", () => {
     const batchId = asUser(TEACHER_ID, `select issue_homework_batch_v2('${STUDENT_ID}', 'RLS테스트', '[{"keyword_id":"${keywordId}","count":1}]'::jsonb);`);
     expect(asUser(TEACHER_ID, `select count(*) from homework_batches where id = '${batchId}';`)).toBe("1");
-    expect(asUser(STUDENT_ID, `select count(*) from homework_batches where id = '${batchId}';`)).toBe("1");
+    expect(asUser(STUDENT_ID, `select count(*) from homework_batches where id = '${batchId}';`)).toBe("0");
+    const mine = JSON.parse(asUser(STUDENT_ID, `select homework_batches_for_viewer('${STUDENT_ID}')::text;`));
+    const batch = mine.find((b: { id: string }) => b.id === batchId);
+    expect(batch).toBeDefined();
+    expect(batch.items.length).toBe(1);
+    expect(batch.items[0].correctIndex).toBeNull();
+    expect(batch.items[0].explanation).toBeNull();
+    expect(batch.items[0].passage).toBeTruthy();
+    // 교사 시점의 RPC 사본은 정답이 그대로 있다.
+    const teacherView = JSON.parse(asUser(TEACHER_ID, `select homework_batches_for_viewer('${STUDENT_ID}')::text;`));
+    expect(teacherView.find((b: { id: string }) => b.id === batchId).items[0].correctIndex).not.toBeNull();
+  });
+
+  it("학생은 배치를 직접 UPDATE(성적 조작) 할 수 없고, RPC 로 답만 제출한다 — 정오는 서버가 계산한다", () => {
+    const batchId = psql(`select id from homework_batches where teacher_id = '${TEACHER_ID}' and student_id = '${STUDENT_ID}' and label = 'RLS테스트' order by created_at desc limit 1;`);
+    const problemId = psql(`select items->0->>'problemId' from homework_batches where id = '${batchId}';`);
+    const correctIndex = psql(`select items->0->>'correctIndex' from homework_batches where id = '${batchId}';`);
+    asUser(STUDENT_ID, `update homework_batches set items = '[]'::jsonb where id = '${batchId}';`);
+    expect(psql(`select jsonb_array_length(items) from homework_batches where id = '${batchId}';`)).toBe("1");
+
+    asUser(STUDENT_ID, `select homework_submit_answer('${batchId}', '${problemId}', '${correctIndex}');`);
+    expect(psql(`select items->0->>'response' from homework_batches where id = '${batchId}';`)).toBe(correctIndex);
+    expect(psql(`select items->0->>'autoCorrect' from homework_batches where id = '${batchId}';`)).toBe("true");
+    expect(psql(`select items->0->>'graded' from homework_batches where id = '${batchId}';`)).toBe("false");
+    expect(fails(() => asUser(otherStudentId, `select homework_submit_answer('${batchId}', '${problemId}', '0');`))).toContain("본인 과제만");
   });
 
   it("무관한 교사·무관한 학생에게는 노출되지 않는다", () => {

@@ -141,28 +141,64 @@ describe("모의고사 응시 — 학생이 자기 응시만 답하고 제출할
     attemptId = psql(`select id from mock_exam_attempts where exam_set_id = '${examSetId}' and student_id = '${STUDENT_ID}';`);
   });
 
-  it("학생 본인은 mc 답을 저장하고 상태를 in_progress 로 바꿀 수 있다", () => {
-    asUser(STUDENT_ID, `insert into mock_exam_answers (attempt_id, set_item_id, response, correct) values ('${attemptId}', '${mcItemId}', '1', true);`);
-    asUser(STUDENT_ID, `update mock_exam_attempts set status = 'in_progress', started_at = now() where id = '${attemptId}';`);
+  // 2026-09-21(P0 보안 차단) — 학생은 mock_exam_attempts UPDATE·mock_exam_answers 직접 쓰기/읽기가
+  // 전부 막히고, 답 저장·표시·시간·제출은 SECURITY DEFINER RPC 로만 한다. 정오(correct)는 서버가 계산한다.
+  it("학생이 답안 테이블에 직접 쓰거나 응시 상태를 직접 바꾸는 것은 RLS 가 거절한다", () => {
+    const ins = fails(() => asUser(STUDENT_ID, `insert into mock_exam_answers (attempt_id, set_item_id, response, correct) values ('${attemptId}', '${mcItemId}', '"1"', true);`));
+    expect(ins).toMatch(/row-level security|policy/i);
+    asUser(STUDENT_ID, `update mock_exam_attempts set status = 'graded', graded_at = now() where id = '${attemptId}';`);
+    expect(psql(`select status from mock_exam_attempts where id = '${attemptId}';`)).toBe("assigned");
+  });
+
+  it("학생 본인은 RPC 로 mc 답을 저장하고, 첫 저장에서 assigned → in_progress 로 바뀐다. 정오는 서버가 계산한다", () => {
+    asUser(STUDENT_ID, `select mock_exam_save_answer('${attemptId}', '${mcItemId}', '1', null);`);
     expect(psql(`select status from mock_exam_attempts where id = '${attemptId}';`)).toBe("in_progress");
     expect(psql(`select correct from mock_exam_answers where attempt_id = '${attemptId}' and set_item_id = '${mcItemId}';`)).toBe("t");
+    asUser(STUDENT_ID, `select mock_exam_save_answer('${attemptId}', '${mcItemId}', '3', null);`);
+    expect(psql(`select correct from mock_exam_answers where attempt_id = '${attemptId}' and set_item_id = '${mcItemId}';`)).toBe("f");
+    asUser(STUDENT_ID, `select mock_exam_save_answer('${attemptId}', '${mcItemId}', '1', 12);`);
   });
 
-  it("다른 학생은 이 응시의 답을 볼 수도 쓸 수도 없다(RLS)", () => {
+  it("채점 확정 전에는 학생에게 정답·해설·정오가 내려가지 않는다(RPC 마스킹) — 답안 테이블도 직접 읽지 못한다", () => {
+    expect(asUser(STUDENT_ID, `select count(*) from mock_exam_answers where attempt_id = '${attemptId}';`)).toBe("0");
+    const detail = JSON.parse(asUser(STUDENT_ID, `select mock_exam_attempt_detail('${attemptId}')::text;`));
+    const mc = detail.items.find((i: { setItemId: string }) => i.setItemId === mcItemId);
+    expect(mc.response).toBe("1");
+    expect(mc.correctIndex).toBeNull();
+    expect(mc.explanation).toBeNull();
+    expect(mc.correct).toBeNull();
+    // 담당 교사는 채점 확정 전에도 본다.
+    const teacherView = JSON.parse(asUser(TEACHER_ID, `select mock_exam_attempt_detail('${attemptId}')::text;`));
+    expect(teacherView.items.find((i: { setItemId: string }) => i.setItemId === mcItemId).correctIndex).toBe(1);
+  });
+
+  it("다른 학생은 이 응시의 답을 볼 수도 쓸 수도 없다(RLS·RPC)", () => {
     expect(asUser(otherStudentId, `select count(*) from mock_exam_answers where attempt_id = '${attemptId}';`)).toBe("0");
-    const out = fails(() => asUser(otherStudentId, `insert into mock_exam_answers (attempt_id, set_item_id, response) values ('${attemptId}', '${sprItemId}', '5');`));
-    expect(out).toMatch(/row-level security|policy/i);
+    expect(fails(() => asUser(otherStudentId, `select mock_exam_save_answer('${attemptId}', '${sprItemId}', '5', null);`))).toContain("본인 응시만");
+    expect(fails(() => asUser(otherStudentId, `select mock_exam_attempt_detail('${attemptId}');`))).toContain("권한이 없습니다");
   });
 
-  it("spr 답을 저장한 뒤 제출하면 상태가 submitted 로 바뀌고 더 이상 학생이 정답을 못 본다(애플리케이션 정책 — 정답 컬럼 자체는 채점 확정 전에도 채워져 있다)", () => {
-    asUser(STUDENT_ID, `insert into mock_exam_answers (attempt_id, set_item_id, response, correct) values ('${attemptId}', '${sprItemId}', '5', true);`);
-    asUser(STUDENT_ID, `update mock_exam_attempts set status = 'submitted', submitted_at = now() where id = '${attemptId}';`);
+  it("spr 답을 RPC 로 저장한 뒤 제출하면 submitted 가 되고, 이후 답 변경은 거절된다", () => {
+    asUser(STUDENT_ID, `select mock_exam_save_answer('${attemptId}', '${sprItemId}', ' 5 ', null);`);
+    expect(psql(`select correct from mock_exam_answers where attempt_id = '${attemptId}' and set_item_id = '${sprItemId}';`)).toBe("t");
+    asUser(STUDENT_ID, `select mock_exam_submit('${attemptId}');`);
     expect(psql(`select status from mock_exam_attempts where id = '${attemptId}';`)).toBe("submitted");
+    expect(fails(() => asUser(STUDENT_ID, `select mock_exam_save_answer('${attemptId}', '${sprItemId}', '6', null);`))).toContain("이미 제출한");
   });
 
-  it("담당 교사는 제출된 응시를 채점 확정(graded)할 수 있다", () => {
-    asUser(TEACHER_ID, `update mock_exam_attempts set status = 'graded', graded_at = now() where id = '${attemptId}';`);
+  it("학생은 스스로 채점 확정할 수 없고, 담당 교사는 RPC 로 채점 확정(graded)할 수 있다 — 그 뒤 학생에게 정답이 열린다", () => {
+    expect(fails(() => asUser(STUDENT_ID, `select mock_exam_finalize_grading('${attemptId}');`))).toContain("담당 학생의 응시만");
+    expect(fails(() => asUser(otherTeacherId, `select mock_exam_finalize_grading('${attemptId}');`))).toContain("담당 학생의 응시만");
+    asUser(TEACHER_ID, `select mock_exam_finalize_grading('${attemptId}');`);
     expect(psql(`select status from mock_exam_attempts where id = '${attemptId}';`)).toBe("graded");
+    const detail = JSON.parse(asUser(STUDENT_ID, `select mock_exam_attempt_detail('${attemptId}')::text;`));
+    const mc = detail.items.find((i: { setItemId: string }) => i.setItemId === mcItemId);
+    expect(mc.correctIndex).toBe(1);
+    expect(mc.correct).toBe(true);
+    const summaries = JSON.parse(asUser(STUDENT_ID, `select mock_exam_attempt_summaries('${STUDENT_ID}')::text;`));
+    const mine = summaries.find((s: { id: string }) => s.id === attemptId);
+    expect(mine.totalCount).toBe(2);
+    expect(mine.correctCount).toBe(2);
   });
 
   it("학부모는 자녀 응시를 읽을 수 있지만 답을 바꿀 수는 없다", () => {

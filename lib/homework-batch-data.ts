@@ -60,15 +60,16 @@ function mapRow(row: Row): HomeworkBatch {
   };
 }
 
-/** 학생 본인이 본다 — 자기 과제 배치 전체(모든 발급 교사 포함, RLS가 본인 것만 걸러준다). */
+/** 학생 본인·보호자가 본다 — 자기(자녀) 과제 배치 전체(모든 발급 교사 포함).
+ * 2026-09-21(P0 보안 차단) — homework_batches 는 이제 학생·보호자에게 직접 SELECT 가 열리지 않는다
+ * (items JSON 에 정답·해설·자동채점·성적이 함께 들어 있어 REST API 로 그대로 읽혔다). SECURITY DEFINER
+ * RPC 가 채점 확정(graded) 전 문항의 correctIndex/answers/explanation/autoCorrect/grade 를 null 로
+ * 마스킹한 사본을 돌려준다. */
 export async function loadStudentHomeworkBatches(supabase: SupabaseClient, studentId: string): Promise<HomeworkBatch[]> {
-  const { data } = await supabase
-    .from("homework_batches")
-    .select(SELECT_COLUMNS)
-    .eq("student_id", studentId)
-    .order("created_at", { ascending: false })
-    .limit(50);
-  return (data ?? []).map((r) => mapRow(r as unknown as Row));
+  const { data, error } = await supabase.rpc("homework_batches_for_viewer", { p_student_id: studentId });
+  if (error) throw new Error(error.message);
+  const rows = (Array.isArray(data) ? data : []) as (Omit<HomeworkBatch, "items"> & { items: HomeworkBatchItem[] | null })[];
+  return rows.map((b) => ({ ...b, items: Array.isArray(b.items) ? b.items : [] }));
 }
 
 /** 교사 본인이 본다 — "이 교사가 이 학생에게 낸" 배치만(다른 교사가 낸 것은 RLS가 애초에 안 보여준다). */
