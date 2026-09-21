@@ -24,7 +24,7 @@ const STATUS_LABEL: Record<string, string> = { draft: "초안", published: "공�
 // 2026-09-21(UAT 지적) — 관리자 모의고사 관리 화면을 생성/검토/공개/보관/배정/내역 6개
 // 서브탭으로 재구성한다. 기존엔 한 화면에 조립·목록·메타데이터만 있는 "검토" 테이블뿐이라
 // 실제 문항 내용을 볼 수 없었고, 보관·전체 배정·전체 응시 내역을 볼 방법도 없었다.
-const SUB_TABS = ["생성", "검토", "공개", "보관", "배정", "내역"] as const;
+const SUB_TABS = ["생성", "검토", "배정", "내역", "공개", "보관"] as const;
 type SubTab = (typeof SUB_TABS)[number];
 
 export default function MockExamSetsPanel({ initialSets }: { initialSets: MockExamSetSummary[] }) {
@@ -205,14 +205,266 @@ function SetListTable({ sets, emptyLabel }: { sets: MockExamSetSummary[]; emptyL
   );
 }
 
+/** 검토 — 아직 공개 전(초안)인 세트만. 실제 문항 내용을 확인한 뒤 그 자리에서 바로 공개할 수 있다. */
 function ReviewTab() {
+  const [sets, setSets] = useState<MockExamSetSummary[] | null>(null);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [items, setItems] = useState<MockExamSetContentItem[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [publishBusy, setPublishBusy] = useState(false);
+  const [publishError, setPublishError] = useState<string | null>(null);
+  const [archiveBusy, setArchiveBusy] = useState(false);
+  const [confirmingArchive, setConfirmingArchive] = useState(false);
+
+  function refresh() {
+    listMockExamSets().then((all) => setSets(all.filter((s) => s.status === "draft")));
+  }
+  useEffect(refresh, []);
+
+  function openContent(setId: string) {
+    setSelectedId(setId);
+    setItems(null);
+    setError(null);
+    setPublishError(null);
+    setConfirmingArchive(false);
+    getMockExamSetContentAction(setId)
+      .then(setItems)
+      .catch((e) => setError(e instanceof Error ? e.message : "문항을 불러오지 못했습니다."));
+  }
+
+  async function handlePublish(setId: string) {
+    setPublishBusy(true);
+    setPublishError(null);
+    try {
+      await publishMockExamSet(setId);
+      setSelectedId(null);
+      setItems(null);
+      refresh();
+    } catch (e) {
+      setPublishError(e instanceof Error ? e.message : "공개 중 오류가 발생했습니다.");
+    } finally {
+      setPublishBusy(false);
+    }
+  }
+
+  async function handleArchive(setId: string) {
+    setArchiveBusy(true);
+    setPublishError(null);
+    try {
+      await archiveMockExamSetAction(setId);
+      setSelectedId(null);
+      setItems(null);
+      setConfirmingArchive(false);
+      refresh();
+    } catch (e) {
+      setPublishError(e instanceof Error ? e.message : "보관 처리 중 오류가 발생했습니다.");
+    } finally {
+      setArchiveBusy(false);
+    }
+  }
+
+  if (sets === null) return <p className="text-sm text-grey-400">불러오는 중…</p>;
+
+  return (
+    <div className="space-y-6">
+      <section className="rounded-xl border border-grey-200 bg-white p-5">
+        <h2 className="text-sm font-semibold text-ink">검토 대기 중인 초안</h2>
+        <p className="mt-1 text-xs text-grey-500">공개 전 세트의 실제 지문·질문·선택지·정답·해설을 확인합니다.</p>
+        <ul className="mt-3 flex flex-col gap-1">
+          {sets.map((s) => (
+            <li key={s.id}>
+              <button
+                type="button"
+                onClick={() => openContent(s.id)}
+                className={`w-full rounded-lg px-3 py-2 text-left text-[13px] ${
+                  selectedId === s.id ? "bg-ink text-white" : "bg-grey-100 text-ink hover:bg-grey-200"
+                }`}
+              >
+                {s.name} v{s.versionNo} · {TIER_LABEL[s.difficultyTier]} · R&W {s.rwCount} · Math {s.mathCount}
+              </button>
+            </li>
+          ))}
+          {sets.length === 0 && <li className="text-sm text-grey-400">검토할 초안이 없습니다.</li>}
+        </ul>
+      </section>
+
+      {selectedId && (
+        <section className="rounded-xl border border-grey-200 bg-white p-5">
+          {error ? (
+            <p className="text-sm text-red">{error}</p>
+          ) : items === null ? (
+            <p className="text-sm text-grey-400">불러오는 중…</p>
+          ) : (
+            <>
+              <div className="mb-3 flex items-center justify-between gap-2">
+                <span className="text-sm font-semibold text-ink">문항 내용</span>
+                <div className="flex items-center gap-2">
+                  {confirmingArchive ? (
+                    <>
+                      <span className="text-xs text-grey-500">보관하면 학생에게 배정할 수 없습니다.</span>
+                      <button
+                        type="button"
+                        disabled={archiveBusy}
+                        onClick={() => handleArchive(selectedId)}
+                        className="rounded bg-red px-3 py-1.5 text-xs font-bold text-white disabled:opacity-40"
+                      >
+                        {archiveBusy ? "처리 중..." : "확인 — 보관"}
+                      </button>
+                      <button type="button" onClick={() => setConfirmingArchive(false)} className="text-xs font-semibold text-grey-500">
+                        취소
+                      </button>
+                    </>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => setConfirmingArchive(true)}
+                      className="rounded border border-grey-200 px-3 py-1.5 text-xs font-bold text-grey-600"
+                    >
+                      보관 처리
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    disabled={publishBusy}
+                    onClick={() => handlePublish(selectedId)}
+                    className="rounded bg-ink px-4 py-1.5 text-xs font-bold text-white disabled:opacity-40"
+                  >
+                    {publishBusy ? "공개 중..." : "이 세트 공개하기"}
+                  </button>
+                </div>
+              </div>
+              {publishError && <p className="mb-2 text-sm text-red">{publishError}</p>}
+              <MockExamSetContentViewer items={items} />
+            </>
+          )}
+        </section>
+      )}
+    </div>
+  );
+}
+
+/** 공개 — 이미 학생에게 노출 중인 세트를 확인·필요하면 여기서 보관 처리한다. */
+function PublishTab() {
+  const [sets, setSets] = useState<MockExamSetSummary[] | null>(null);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [items, setItems] = useState<MockExamSetContentItem[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [archiveBusy, setArchiveBusy] = useState(false);
+  const [archiveError, setArchiveError] = useState<string | null>(null);
+  const [confirmingArchive, setConfirmingArchive] = useState(false);
+
+  function refresh() {
+    listMockExamSets().then((all) => setSets(all.filter((s) => s.status === "published")));
+  }
+  useEffect(refresh, []);
+
+  function openContent(setId: string) {
+    setSelectedId(setId);
+    setItems(null);
+    setError(null);
+    setArchiveError(null);
+    setConfirmingArchive(false);
+    getMockExamSetContentAction(setId)
+      .then(setItems)
+      .catch((e) => setError(e instanceof Error ? e.message : "문항을 불러오지 못했습니다."));
+  }
+
+  async function handleArchive(setId: string) {
+    setArchiveBusy(true);
+    setArchiveError(null);
+    try {
+      await archiveMockExamSetAction(setId);
+      setSelectedId(null);
+      setItems(null);
+      setConfirmingArchive(false);
+      refresh();
+    } catch (e) {
+      setArchiveError(e instanceof Error ? e.message : "보관 처리 중 오류가 발생했습니다.");
+    } finally {
+      setArchiveBusy(false);
+    }
+  }
+
+  if (sets === null) return <p className="text-sm text-grey-400">불러오는 중…</p>;
+
+  return (
+    <div className="space-y-6">
+      <section className="rounded-xl border border-grey-200 bg-white p-5">
+        <h2 className="text-sm font-semibold text-ink">공개된 세트</h2>
+        <p className="mt-1 text-xs text-grey-500">지금 학생에게 배정 가능한 세트의 실제 문항 내용을 확인합니다.</p>
+        <ul className="mt-3 flex flex-col gap-1">
+          {sets.map((s) => (
+            <li key={s.id}>
+              <button
+                type="button"
+                onClick={() => openContent(s.id)}
+                className={`w-full rounded-lg px-3 py-2 text-left text-[13px] ${
+                  selectedId === s.id ? "bg-ink text-white" : "bg-grey-100 text-ink hover:bg-grey-200"
+                }`}
+              >
+                {s.name} v{s.versionNo} · {TIER_LABEL[s.difficultyTier]} · R&W {s.rwCount} · Math {s.mathCount}
+              </button>
+            </li>
+          ))}
+          {sets.length === 0 && <li className="text-sm text-grey-400">공개된 세트가 없습니다.</li>}
+        </ul>
+      </section>
+
+      {selectedId && (
+        <section className="rounded-xl border border-grey-200 bg-white p-5">
+          {error ? (
+            <p className="text-sm text-red">{error}</p>
+          ) : items === null ? (
+            <p className="text-sm text-grey-400">불러오는 중…</p>
+          ) : (
+            <>
+              <div className="mb-3 flex items-center justify-between gap-2">
+                <span className="text-sm font-semibold text-ink">문항 내용</span>
+                {confirmingArchive ? (
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs text-grey-500">보관하면 학생에게 배정할 수 없습니다.</span>
+                    <button
+                      type="button"
+                      disabled={archiveBusy}
+                      onClick={() => handleArchive(selectedId)}
+                      className="rounded bg-red px-3 py-1.5 text-xs font-bold text-white disabled:opacity-40"
+                    >
+                      {archiveBusy ? "처리 중..." : "확인 — 보관"}
+                    </button>
+                    <button type="button" onClick={() => setConfirmingArchive(false)} className="text-xs font-semibold text-grey-500">
+                      취소
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => setConfirmingArchive(true)}
+                    className="rounded border border-grey-200 px-3 py-1.5 text-xs font-bold text-grey-600"
+                  >
+                    보관 처리
+                  </button>
+                )}
+              </div>
+              {archiveError && <p className="mb-2 text-sm text-red">{archiveError}</p>}
+              <MockExamSetContentViewer items={items} />
+            </>
+          )}
+        </section>
+      )}
+    </div>
+  );
+}
+
+/** 보관 — 보관된 세트만 읽기 전용으로 확인한다. 보관 처리 자체는 검토·공개 탭에서 한다
+ * (2026-09-21 UAT 지적: "보관은 보관된 내역만 볼 수 있게, 검토·공개 쪽에서 보관 처리"). */
+function ArchiveTab() {
   const [sets, setSets] = useState<MockExamSetSummary[] | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [items, setItems] = useState<MockExamSetContentItem[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    listMockExamSets().then(setSets);
+    listMockExamSets({ archivedOnly: true }).then(setSets);
   }, []);
 
   function openContent(setId: string) {
@@ -229,8 +481,8 @@ function ReviewTab() {
   return (
     <div className="space-y-6">
       <section className="rounded-xl border border-grey-200 bg-white p-5">
-        <h2 className="text-sm font-semibold text-ink">세트 문항 검토</h2>
-        <p className="mt-1 text-xs text-grey-500">실제 지문·질문·선택지·정답·해설을 확인합니다.</p>
+        <h2 className="text-sm font-semibold text-ink">보관된 세트</h2>
+        <p className="mt-1 text-xs text-grey-500">더 이상 배정할 수 없는 세트입니다. 보관 처리는 &ldquo;검토&rdquo;·&ldquo;공개&rdquo; 탭에서 합니다.</p>
         <ul className="mt-3 flex flex-col gap-1">
           {sets.map((s) => (
             <li key={s.id}>
@@ -241,11 +493,11 @@ function ReviewTab() {
                   selectedId === s.id ? "bg-ink text-white" : "bg-grey-100 text-ink hover:bg-grey-200"
                 }`}
               >
-                {s.name} v{s.versionNo} · {STATUS_LABEL[s.status]} · R&W {s.rwCount} · Math {s.mathCount}
+                {s.name} v{s.versionNo} · {TIER_LABEL[s.difficultyTier]} · R&W {s.rwCount} · Math {s.mathCount}
               </button>
             </li>
           ))}
-          {sets.length === 0 && <li className="text-sm text-grey-400">검토할 세트가 없습니다.</li>}
+          {sets.length === 0 && <li className="text-sm text-grey-400">보관된 세트가 없습니다.</li>}
         </ul>
       </section>
 
@@ -260,162 +512,6 @@ function ReviewTab() {
           )}
         </section>
       )}
-    </div>
-  );
-}
-
-function PublishTab() {
-  const [sets, setSets] = useState<MockExamSetSummary[] | null>(null);
-  const [busyId, setBusyId] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  function refresh() {
-    listMockExamSets().then((all) => setSets(all.filter((s) => s.status === "draft")));
-  }
-  useEffect(refresh, []);
-
-  async function handlePublish(setId: string) {
-    setBusyId(setId);
-    setError(null);
-    try {
-      await publishMockExamSet(setId);
-      refresh();
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "공개 중 오류가 발생했습니다.");
-    } finally {
-      setBusyId(null);
-    }
-  }
-
-  if (sets === null) return <p className="text-sm text-grey-400">불러오는 중…</p>;
-
-  return (
-    <section className="rounded-xl border border-grey-200 bg-white p-5">
-      <h2 className="text-sm font-semibold text-ink">공개 대기 중인 초안</h2>
-      {error && <p className="mt-2 text-sm text-red">{error}</p>}
-      <table className="mt-3 w-full text-left text-sm">
-        <thead>
-          <tr className="text-xs text-grey-500">
-            <th className="py-1">이름</th>
-            <th>등급</th>
-            <th>R&W</th>
-            <th>Math</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {sets.map((s) => (
-            <tr key={s.id} className="border-t border-grey-100">
-              <td className="py-2">
-                {s.name} <span className="text-xs text-grey-400">v{s.versionNo}</span>
-              </td>
-              <td>{TIER_LABEL[s.difficultyTier]}</td>
-              <td>{s.rwCount}</td>
-              <td>{s.mathCount}</td>
-              <td className="text-right">
-                <button
-                  type="button"
-                  disabled={busyId === s.id}
-                  onClick={() => handlePublish(s.id)}
-                  className="rounded bg-ink px-3 py-1 text-xs font-bold text-white disabled:opacity-40"
-                >
-                  {busyId === s.id ? "공개 중..." : "공개"}
-                </button>
-              </td>
-            </tr>
-          ))}
-          {sets.length === 0 && (
-            <tr>
-              <td colSpan={5} className="py-4 text-center text-sm text-grey-400">
-                공개 대기 중인 초안이 없습니다.
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-    </section>
-  );
-}
-
-function ArchiveTab() {
-  const [active, setActive] = useState<MockExamSetSummary[] | null>(null);
-  const [archived, setArchived] = useState<MockExamSetSummary[] | null>(null);
-  const [busyId, setBusyId] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [confirmingId, setConfirmingId] = useState<string | null>(null);
-
-  function refresh() {
-    listMockExamSets().then(setActive);
-    listMockExamSets({ archivedOnly: true }).then(setArchived);
-  }
-  useEffect(refresh, []);
-
-  async function handleArchive(setId: string) {
-    setBusyId(setId);
-    setError(null);
-    try {
-      await archiveMockExamSetAction(setId);
-      setConfirmingId(null);
-      refresh();
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "보관 처리 중 오류가 발생했습니다.");
-    } finally {
-      setBusyId(null);
-    }
-  }
-
-  if (active === null || archived === null) return <p className="text-sm text-grey-400">불러오는 중…</p>;
-
-  return (
-    <div className="space-y-6">
-      <section className="rounded-xl border border-grey-200 bg-white p-5">
-        <h2 className="text-sm font-semibold text-ink">보관 처리</h2>
-        <p className="mt-1 text-xs text-grey-500">
-          더 이상 쓰지 않을 세트를 보관합니다. 이미 배정·응시된 학생의 기록은 그대로 남습니다.
-        </p>
-        {error && <p className="mt-2 text-sm text-red">{error}</p>}
-        <ul className="mt-3 flex flex-col gap-1.5">
-          {active.map((s) => (
-            <li key={s.id} className="flex items-center justify-between rounded-lg bg-grey-50 px-3 py-2 text-[13px]">
-              <span>
-                {s.name} v{s.versionNo} · {STATUS_LABEL[s.status]}
-              </span>
-              {confirmingId === s.id ? (
-                <span className="flex gap-2">
-                  <button
-                    type="button"
-                    disabled={busyId === s.id}
-                    onClick={() => handleArchive(s.id)}
-                    className="rounded bg-red px-2.5 py-1 text-xs font-bold text-white disabled:opacity-40"
-                  >
-                    {busyId === s.id ? "처리 중..." : "확인 — 보관"}
-                  </button>
-                  <button type="button" onClick={() => setConfirmingId(null)} className="text-xs font-semibold text-grey-500">
-                    취소
-                  </button>
-                </span>
-              ) : (
-                <button type="button" onClick={() => setConfirmingId(s.id)} className="text-xs font-bold text-red underline">
-                  보관 처리
-                </button>
-              )}
-            </li>
-          ))}
-          {active.length === 0 && <li className="text-sm text-grey-400">보관할 세트가 없습니다.</li>}
-        </ul>
-      </section>
-
-      <section className="rounded-xl border border-grey-200 bg-white p-5">
-        <h2 className="text-sm font-semibold text-ink">보관된 세트</h2>
-        <ul className="mt-3 flex flex-col gap-1.5">
-          {archived.map((s) => (
-            <li key={s.id} className="text-[13px] text-grey-500">
-              {s.name} v{s.versionNo} · R&W {s.rwCount} · Math {s.mathCount}
-            </li>
-          ))}
-          {archived.length === 0 && <li className="text-sm text-grey-400">보관된 세트가 없습니다.</li>}
-        </ul>
-      </section>
     </div>
   );
 }
@@ -474,7 +570,7 @@ function AssignTab() {
         </button>
       </div>
       {message && <p className="mt-2 text-sm text-grey-600">{message}</p>}
-      {sets.length === 0 && <p className="mt-2 text-xs text-grey-400">공개된 세트가 없습니다 — 먼저 "공개" 탭에서 세트를 공개하세요.</p>}
+      {sets.length === 0 && <p className="mt-2 text-xs text-grey-400">공개된 세트가 없습니다 — 먼저 &ldquo;공개&rdquo; 탭에서 세트를 공개하세요.</p>}
     </section>
   );
 }
