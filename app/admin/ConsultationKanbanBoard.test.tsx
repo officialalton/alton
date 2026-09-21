@@ -45,11 +45,13 @@ vi.mock("./consultation-scheduling-actions", () => ({
   retryTrialEntitlementGrant: vi.fn(),
 }));
 
+const manuallyCompleteContractActionMock = vi.fn();
 vi.mock("./trial-onboarding-actions", () => ({
   sendTrialOnboardingNoticeAction: vi.fn(),
   sendRegularContractOneClickAction: vi.fn(),
   confirmTrialIntentAction: vi.fn(),
   planTrialSubjectAndAssignTeacherAction: (params: unknown) => planTrialSubjectAndAssignTeacherActionMock(params),
+  manuallyCompleteContractAction: (contractId: string) => manuallyCompleteContractActionMock(contractId),
 }));
 
 const findDuplicateConsultationCandidatesMock = vi.fn().mockResolvedValue([]);
@@ -586,6 +588,30 @@ describe("ConsultationKanbanBoard — 정규 계약 발송 실패 피드백(2026
       target: { value: "대표이사" },
     });
     expect(button.disabled).toBe(false);
+  });
+
+  // 2026-09-21(제품 오너 지시) — 메일 미수신 테스트 계정을 관리자가 수동으로
+  // 완료 처리할 수 있어야 한다. 이미 발송된(envelope 있음) 계약에만 노출되고,
+  // 확인 단계에서 "실제 서명이 아니다"라는 경고를 반드시 보여준 뒤에만 액션을 호출한다.
+  it("이미 발송된 계약에는 수동 완료 처리 버튼이 있고, 확인 후에만 액션을 호출한다", async () => {
+    getConsultationCardDetailActionMock.mockResolvedValue({
+      ...contractCardDetail(),
+      latestContractVersionHasEnvelope: true,
+    });
+    manuallyCompleteContractActionMock.mockResolvedValue({ ok: true });
+
+    render(<ConsultationKanbanBoard subjects={subjects} teacherCandidatesBySubject={teacherCandidatesBySubject} />);
+
+    fireEvent.click(await screen.findByText("세온장"));
+    await screen.findByTestId("consultation-card-detail");
+
+    const manualButton = screen.getByText("메일 미수신 — 수동으로 완료 처리");
+    fireEvent.click(manualButton);
+    expect(screen.getByText(/실제 DocuSign 서명이 아닙니다/)).toBeInTheDocument();
+    expect(manuallyCompleteContractActionMock).not.toHaveBeenCalled();
+
+    fireEvent.click(screen.getByText("확인 — 수동 완료 처리"));
+    await waitFor(() => expect(manuallyCompleteContractActionMock).toHaveBeenCalledWith("contract1"));
   });
 });
 

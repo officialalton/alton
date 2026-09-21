@@ -33,6 +33,7 @@ import {
   sendRegularContractOneClickAction,
   confirmTrialIntentAction,
   planTrialSubjectAndAssignTeacherAction,
+  manuallyCompleteContractAction,
 } from "./trial-onboarding-actions";
 import {
   createNewContractVersionForResend,
@@ -300,6 +301,7 @@ function ConsultationCardDetailPanel({
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [closing, setClosing] = useState(false);
+  const [confirmingManualContract, setConfirmingManualContract] = useState(false);
   const [duplicateCandidates, setDuplicateCandidates] = useState<DuplicateConsultationCandidate[]>([]);
   // 2026-09-10 — 배정 자체는 성공했지만 학생 활성화·커리큘럼 시딩이
   // best-effort로 실패했을 때의 경고(빨간 error와 구분되는 amber 경고).
@@ -575,15 +577,59 @@ function ConsultationCardDetailPanel({
                       임은 분명히 보여준다 — 재발송(새 버전)은 여전히 필요할 때만
                       쓰는 별도 액션이다. */}
                   <div className="text-[12px] text-grey-500">이미 발송된 계약입니다(자동 발송 포함).</div>
-                  <button
-                    className={btnSecondary}
-                    disabled={busy}
-                    onClick={() => run(async () => {
-                      await createNewContractVersionForResend({ contractId: detail.contractId! });
-                    })}
-                  >
-                    재발송(새 버전)
-                  </button>
+                  <div className="flex flex-wrap gap-1.5">
+                    <button
+                      className={btnSecondary}
+                      disabled={busy}
+                      onClick={() => run(async () => {
+                        await createNewContractVersionForResend({ contractId: detail.contractId! });
+                      })}
+                    >
+                      재발송(새 버전)
+                    </button>
+                    {/* 2026-09-21(제품 오너 지시) — 일부 테스트 계정(+alton 서브어드레싱 등)에는
+                        메일이 전달되지 않아 보호자가 서명 링크를 아예 못 받는다. 실제 서명이 아니라
+                        메일 문제로 막힌 테스트 계정을 다음 단계(수강 활성화)로 넘기는 관리자 수동
+                        우회다(RegularContractTab.tsx와 같은 액션). */}
+                    {!confirmingManualContract ? (
+                      <button
+                        className="text-[12px] font-semibold px-3 py-1.5 rounded-lg border-[1.5px] border-red/30 text-red disabled:opacity-50"
+                        disabled={busy}
+                        onClick={() => setConfirmingManualContract(true)}
+                      >
+                        메일 미수신 — 수동으로 완료 처리
+                      </button>
+                    ) : (
+                      <div className="w-full rounded-lg border-[1.5px] border-red/20 bg-red/5 px-3 py-2.5">
+                        <p className="text-[12px] text-ink mb-2">
+                          <b>실제 DocuSign 서명이 아닙니다.</b> 메일 전달 문제로 보호자가 서명 링크를
+                          받지 못한 테스트 계정을 다음 단계로 넘기기 위한 수동 처리입니다.
+                        </p>
+                        <div className="flex gap-2">
+                          <button
+                            className="text-[12px] font-bold px-3.5 py-1.5 rounded-lg bg-red text-white disabled:opacity-50"
+                            disabled={busy}
+                            onClick={() =>
+                              run(async () => {
+                                const outcome = await manuallyCompleteContractAction(detail.contractId!);
+                                if (!outcome.ok) throw new Error(outcome.error);
+                                setConfirmingManualContract(false);
+                              })
+                            }
+                          >
+                            확인 — 수동 완료 처리
+                          </button>
+                          <button
+                            className="text-[12px] font-semibold px-3.5 py-1.5 rounded-lg text-grey-500"
+                            disabled={busy}
+                            onClick={() => setConfirmingManualContract(false)}
+                          >
+                            취소
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
               )}
             </div>
