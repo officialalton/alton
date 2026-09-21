@@ -14,10 +14,21 @@ import {
   type DifficultyTier,
   type EligibleProblem,
   type ExamSection,
+  type FormatWeight,
 } from "@/lib/mock-exam/assemble";
 
 const RW_DOMAINS = ["rw_information_ideas", "rw_craft_structure", "rw_expression_ideas", "rw_standard_english"];
 const MATH_DOMAINS = ["algebra", "advanced_math", "problem_solving_data", "geometry_trig"];
+
+// 2026-09-21(UAT 지적) — 조립 로직이 영역·난이도만 보고 형식(mc/spr)은 전혀 고려하지 않아, Math
+// 섹션이 전부 객관식으로만 채워질 수 있었다(실제 디지털 SAT Math는 객관식과 SPR이 섞여 나온다).
+// 사양에 별도 비중 입력 UI는 없어(제품 오너가 이 축을 아예 정의한 적이 없다) 실제 디지털 SAT의
+// 대략적인 구성비(약 75% 객관식 · 25% SPR)를 상수로 고정한다 — 필요하면 이후 관리자 입력값으로
+// 옮길 수 있게 fetchWeights 와 같은 자리에 분리해 뒀다. R&W는 전부 객관식이라 적용하지 않는다.
+const MATH_FORMAT_WEIGHTS: FormatWeight[] = [
+  { format: "mc", weightPct: 75 },
+  { format: "spr", weightPct: 25 },
+];
 
 export type MockExamSetSummary = {
   id: string;
@@ -70,7 +81,7 @@ async function fetchEligibleProblems(db: ReturnType<typeof createAdminClient>, d
   const { data, error } = await db
     .from("problems")
     .select(
-      `id, sat_domain, skill_code,
+      `id, sat_domain, skill_code, format,
        problem_versions!problem_versions_problem_id_fkey!inner(id, status, difficulty)`,
     )
     .in("sat_domain", domains)
@@ -86,12 +97,16 @@ async function fetchEligibleProblems(db: ReturnType<typeof createAdminClient>, d
     if (!version || !row.sat_domain) continue;
     const difficulty = (version.difficulty ?? "").toLowerCase();
     if (difficulty !== "easy" && difficulty !== "medium" && difficulty !== "hard") continue;
+    // 모의고사는 자동 채점 가능한 형식(mc/spr)만 조립 후보로 쓴다 — 서술형·풀이형(essay/math)은
+    // 채점 확정이 필요해 이번 라운드의 "제출 즉시 자동 채점" 정책과 맞지 않는다.
+    if (row.format !== "mc" && row.format !== "spr") continue;
     eligible.push({
       problemId: row.id,
       problemVersionId: version.id,
       satDomain: row.sat_domain,
       skillCode: row.skill_code,
       difficulty,
+      format: row.format,
     });
   }
   return eligible;
@@ -173,6 +188,7 @@ export async function assembleMockExamSet(input: AssembleMockExamSetInput): Prom
     difficultyWeights: mathWeights.difficultyWeights,
     candidates: mathCandidates,
     excludeProblemIds: excludeIds,
+    formatWeights: MATH_FORMAT_WEIGHTS,
   });
 
   const { data: setRow, error: setErr } = await db

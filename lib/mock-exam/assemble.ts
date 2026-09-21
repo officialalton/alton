@@ -12,6 +12,8 @@ export type DifficultyTier = "foundation" | "standard" | "advanced";
 
 export type DomainWeight = { satDomain: string; weightPct: number };
 export type DifficultyWeight = { difficulty: ProblemDifficulty; weightPct: number };
+export type ProblemFormat = "mc" | "spr";
+export type FormatWeight = { format: ProblemFormat; weightPct: number };
 
 export type EligibleProblem = {
   problemId: string;
@@ -19,6 +21,9 @@ export type EligibleProblem = {
   satDomain: string;
   skillCode: string | null;
   difficulty: ProblemDifficulty;
+  /** 문항 형식(객관식/SPR) — 조립 시 형식 비중을 걸 때만 쓴다(현재는 Math 섹션, 사양 미정의였던
+   * 간극을 2026-09-21 UAT 지적으로 메운다). 없으면 형식 무관하게 셀을 채운다(R&W는 전부 mc). */
+  format?: ProblemFormat;
 };
 
 export type AssembledItem = EligibleProblem & { section: ExamSection; position: number };
@@ -59,12 +64,13 @@ export function buildTargetCells(
   domainWeights: DomainWeight[],
   difficultyWeights: DifficultyWeight[],
   totalCount: int,
-): { satDomain: string; difficulty: ProblemDifficulty; targetCount: number }[] {
+  formatWeights?: FormatWeight[],
+): { satDomain: string; difficulty: ProblemDifficulty; format?: ProblemFormat; targetCount: number }[] {
   const domainCounts = allocateCounts(
     domainWeights.map((d) => ({ key: d.satDomain, weightPct: d.weightPct })),
     totalCount,
   );
-  const cells: { satDomain: string; difficulty: ProblemDifficulty; targetCount: number }[] = [];
+  const cells: { satDomain: string; difficulty: ProblemDifficulty; format?: ProblemFormat; targetCount: number }[] = [];
   for (const domain of domainWeights) {
     const domainTotal = domainCounts[domain.satDomain] ?? 0;
     const diffCounts = allocateCounts(
@@ -72,7 +78,18 @@ export function buildTargetCells(
       domainTotal,
     );
     for (const diff of difficultyWeights) {
-      cells.push({ satDomain: domain.satDomain, difficulty: diff.difficulty, targetCount: diffCounts[diff.difficulty] ?? 0 });
+      const diffTotal = diffCounts[diff.difficulty] ?? 0;
+      if (formatWeights && formatWeights.length > 0 && diffTotal > 0) {
+        const fmtCounts = allocateCounts(
+          formatWeights.map((f) => ({ key: f.format, weightPct: f.weightPct })),
+          diffTotal,
+        );
+        for (const fw of formatWeights) {
+          cells.push({ satDomain: domain.satDomain, difficulty: diff.difficulty, format: fw.format, targetCount: fmtCounts[fw.format] ?? 0 });
+        }
+      } else {
+        cells.push({ satDomain: domain.satDomain, difficulty: diff.difficulty, targetCount: diffTotal });
+      }
     }
   }
   return cells;
@@ -92,7 +109,7 @@ export type SelectionResult = {
  */
 export function selectForCells(
   candidates: EligibleProblem[],
-  targetCells: { satDomain: string; difficulty: ProblemDifficulty; targetCount: number }[],
+  targetCells: { satDomain: string; difficulty: ProblemDifficulty; format?: ProblemFormat; targetCount: number }[],
   excludeProblemIds: Set<string> = new Set(),
 ): SelectionResult {
   const used = new Set<string>();
@@ -102,7 +119,13 @@ export function selectForCells(
   for (const cell of targetCells) {
     if (cell.targetCount <= 0) continue;
     const pool = candidates
-      .filter((c) => c.satDomain === cell.satDomain && c.difficulty === cell.difficulty && !used.has(c.problemId))
+      .filter(
+        (c) =>
+          c.satDomain === cell.satDomain &&
+          c.difficulty === cell.difficulty &&
+          (!cell.format || c.format === cell.format) &&
+          !used.has(c.problemId),
+      )
       .sort((a, b) => a.problemId.localeCompare(b.problemId));
 
     // 1순위: 다른 세트에서 안 쓴 문항. 2순위(부족 시): 이미 쓴 문항도 허용.
@@ -142,6 +165,8 @@ export type AssembleSectionInput = {
   difficultyWeights: DifficultyWeight[];
   candidates: EligibleProblem[];
   excludeProblemIds?: Set<string>;
+  /** 지정하면 (영역×난이도) 셀을 형식(mc/spr)별로 다시 나눠 채운다 — 미지정 시 형식 무관(R&W). */
+  formatWeights?: FormatWeight[];
 };
 
 export type AssembleSectionResult = {
@@ -151,7 +176,7 @@ export type AssembleSectionResult = {
 
 /** 한 섹션(RW 또는 Math)을 통째로 조립한다 — 목표 셀 계산 → 후보 선택 → 순서 부여. */
 export function assembleSection(input: AssembleSectionInput): AssembleSectionResult {
-  const cells = buildTargetCells(input.domainWeights, input.difficultyWeights, input.totalCount);
+  const cells = buildTargetCells(input.domainWeights, input.difficultyWeights, input.totalCount, input.formatWeights);
   const { items, shortfalls } = selectForCells(input.candidates, cells, input.excludeProblemIds);
   return { items: orderSectionItems(items, input.section), shortfalls };
 }

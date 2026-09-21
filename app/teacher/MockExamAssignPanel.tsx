@@ -1,20 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { assignMockExamAction, finalizeMockExamGradingAction } from "@/lib/mock-exam/attempt-actions";
+import { assignMockExamAction } from "@/lib/mock-exam/attempt-actions";
 import type { TeacherMockExamStudent } from "./mock-exam-assign-data";
 import type { MockExamAttemptSummary } from "@/lib/mock-exam/attempt-data";
 
 const STATUS_LABEL: Record<string, string> = {
   assigned: "시작 전",
   in_progress: "진행 중",
-  submitted: "제출됨 — 채점 대기",
+  submitted: "채점 중",
   graded: "채점 완료",
 };
 
-/** 교사 흐름 — 담당 학생에게 공개된 시험 세트를 배정하고, 제출된 응시를 채점 확정한다
- * (사양 3절 교사 흐름 1~4). 수업 화면 `모의고사` 탭 배선은 이번 패스 범위 밖(SessionShell 은
- * 다른 브랜치가 동시에 작업 중이라 표면적을 최소화) — 우선 학생 단위 독립 화면으로 제공한다. */
+/** 교사 흐름 — 담당 학생에게 공개된 시험 세트를 배정한다(사양 3절 교사 흐름 1~2). 채점은
+ * 2026-09-21 제품 오너 지시로 제출 즉시 자동 확정되도록 바뀌어(교사 확인 단계 제거),
+ * 여기서는 더 이상 "채점 확정" 버튼을 두지 않는다 — 배정 현황은 상태 확인용으로만 남긴다. */
 export default function MockExamAssignPanel({
   students,
   examSets,
@@ -24,7 +24,7 @@ export default function MockExamAssignPanel({
   students: TeacherMockExamStudent[];
   examSets: { id: string; name: string; difficultyTier: string }[];
   attemptsByStudent: Record<string, MockExamAttemptSummary[]>;
-  /** 배정·채점 확정이 성공한 뒤 호출 — 탭 안에서 쓸 때 목록을 다시 읽는다. */
+  /** 배정이 성공한 뒤 호출 — 탭 안에서 쓸 때 목록을 다시 읽는다. */
   onChanged?: () => void;
 }) {
   const [selectedStudent, setSelectedStudent] = useState(students[0]?.studentId ?? "");
@@ -40,14 +40,6 @@ export default function MockExamAssignPanel({
     const result = await assignMockExamAction({ studentId: selectedStudent, examSetId: selectedSet, dueAt: dueAt || null });
     setBusy(false);
     setMessage(result.ok ? "배정했습니다." : result.error);
-    if (result.ok) onChanged?.();
-  }
-
-  async function finalize(attemptId: string) {
-    setBusy(true);
-    const result = await finalizeMockExamGradingAction(attemptId);
-    setBusy(false);
-    setMessage(result.ok ? "채점을 확정했습니다." : result.error);
     if (result.ok) onChanged?.();
   }
 
@@ -93,11 +85,6 @@ export default function MockExamAssignPanel({
                       {a.examSetName} — {STATUS_LABEL[a.status] ?? a.status}
                       {a.status === "graded" && a.correctCount !== null && ` (${a.correctCount}/${a.totalCount})`}
                     </span>
-                    {a.status === "submitted" && (
-                      <button type="button" disabled={busy} onClick={() => finalize(a.id)} className="rounded bg-green px-3 py-1 text-[12px] font-bold text-white">
-                        채점 확정
-                      </button>
-                    )}
                   </li>
                 ))}
               </ul>

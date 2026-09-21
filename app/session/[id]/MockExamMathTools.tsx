@@ -174,42 +174,113 @@ export function MathReferenceSheet() {
   );
 }
 
-/** Math 화면 오른쪽 고정 패널(넓은 화면) / 플로팅 버튼(좁은 화면) — 사양 6절. */
-export default function MockExamMathTools({ calculatorAllowed, referenceSheetAllowed }: { calculatorAllowed: boolean; referenceSheetAllowed: boolean }) {
-  const [open, setOpen] = useState<"calculator" | "reference" | null>(null);
+export type MathToolsOpen = "calculator" | "reference" | null;
+
+/** 계산기·참조표 열기/닫기 버튼만 렌더링한다 — 화면마다 원하는 자리(상단 바, 툴바 등)에 그대로
+ * 얹어 쓴다(2026-09-21 UAT: "상단 버튼으로 필요할 때 열고 닫게"). 상태는 부모가 들고 있는다 —
+ * 모의고사 응시 화면·과제 화면·세션 문제 화면이 각자 자기 레이아웃에 맞는 자리에 버튼을 놓으면서도
+ * 같은 계산기·참조표 패널(MockExamMathTools)을 공유하기 위함이다. */
+export function MockExamToolButtons({
+  calculatorAllowed,
+  referenceSheetAllowed,
+  open,
+  onToggle,
+}: {
+  calculatorAllowed: boolean;
+  referenceSheetAllowed: boolean;
+  open: MathToolsOpen;
+  onToggle: (which: "calculator" | "reference") => void;
+}) {
   if (!calculatorAllowed && !referenceSheetAllowed) return null;
   return (
+    <div className="flex items-center gap-1.5">
+      {calculatorAllowed && (
+        <button
+          type="button"
+          onClick={() => onToggle("calculator")}
+          aria-pressed={open === "calculator"}
+          className={`rounded-full border px-3 py-1.5 text-[12px] font-bold ${
+            open === "calculator" ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-600"
+          }`}
+          data-testid="toggle-calculator"
+        >
+          계산기
+        </button>
+      )}
+      {referenceSheetAllowed && (
+        <button
+          type="button"
+          onClick={() => onToggle("reference")}
+          aria-pressed={open === "reference"}
+          className={`rounded-full border px-3 py-1.5 text-[12px] font-bold ${
+            open === "reference" ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-600"
+          }`}
+          data-testid="toggle-reference"
+        >
+          참조표
+        </button>
+      )}
+    </div>
+  );
+}
+
+/** 계산기 패널(플로팅, fixed) + 참조표 팝업. 그리드·플렉스 등 부모 레이아웃과 무관하게 항상
+ * 화면 위에 뜬다 — 모의고사 응시(flex)·과제(block)·세션 문제 탭(grid)에서 전부 그대로 재사용
+ * 하기 위함이다(2026-09-21 UAT "문제·과제에서도 계산기·참조표 진입 가능해야"). 계산기는 한 번
+ * 열리면(calcMounted) 이후 CSS로만 숨겨서 Desmos 인스턴스를 유지한다 — 닫았다 다시 열어도
+ * 입력한 수식이 그대로 남는다. */
+export default function MockExamMathTools({
+  calculatorAllowed,
+  referenceSheetAllowed,
+  open,
+  onClose,
+}: {
+  calculatorAllowed: boolean;
+  referenceSheetAllowed: boolean;
+  open: MathToolsOpen;
+  onClose: () => void;
+}) {
+  const [calcMounted, setCalcMounted] = useState(false);
+  useEffect(() => {
+    if (open === "calculator") setCalcMounted(true);
+  }, [open]);
+
+  if (!calculatorAllowed && !referenceSheetAllowed) return null;
+
+  return (
     <>
-      <div className="fixed bottom-4 right-4 z-40 flex flex-col gap-2 lg:hidden">
-        {calculatorAllowed && (
-          <button
-            type="button"
-            onClick={() => setOpen(open === "calculator" ? null : "calculator")}
-            className="rounded-full bg-ink px-4 py-2 text-[13px] font-bold text-white shadow-lg"
-            data-testid="open-calculator-mobile"
+      {calculatorAllowed && calcMounted && (
+        <div
+          className={`fixed bottom-4 right-4 z-40 w-[calc(100vw-2rem)] max-w-[380px] ${open === "calculator" ? "block" : "hidden"}`}
+          data-testid="mock-exam-calculator-panel"
+        >
+          <div className="relative">
+            <button
+              type="button"
+              onClick={onClose}
+              className="absolute -top-2 -right-2 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-ink text-[12px] font-bold text-white shadow"
+              data-testid="close-calculator"
+              aria-label="계산기 닫기"
+            >
+              ×
+            </button>
+            <GraphingCalculator />
+          </div>
+        </div>
+      )}
+      {referenceSheetAllowed && open === "reference" && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" onClick={onClose}>
+          <div
+            className="max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-lg bg-white"
+            onClick={(e) => e.stopPropagation()}
           >
-            계산기
-          </button>
-        )}
-        {referenceSheetAllowed && (
-          <button
-            type="button"
-            onClick={() => setOpen(open === "reference" ? null : "reference")}
-            className="rounded-full bg-grey-700 px-4 py-2 text-[13px] font-bold text-white shadow-lg"
-            data-testid="open-reference-mobile"
-          >
-            참조표
-          </button>
-        )}
-      </div>
-      <div className="hidden lg:flex lg:w-[420px] lg:flex-shrink-0 lg:flex-col lg:gap-3">
-        {calculatorAllowed && <GraphingCalculator />}
-        {referenceSheetAllowed && <MathReferenceSheet />}
-      </div>
-      {open && (
-        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/30 lg:hidden" onClick={() => setOpen(null)}>
-          <div className="mb-4 w-full max-w-sm px-4" onClick={(e) => e.stopPropagation()}>
-            {open === "calculator" ? <GraphingCalculator /> : <MathReferenceSheet />}
+            <div className="sticky top-0 flex items-center justify-between border-b border-grey-200 bg-white px-4 py-2">
+              <span className="text-[12px] font-extrabold text-grey-500">참조표</span>
+              <button type="button" onClick={onClose} className="text-[12px] font-bold text-grey-500 underline" data-testid="close-reference">
+                닫기
+              </button>
+            </div>
+            <MathReferenceSheet />
           </div>
         </div>
       )}

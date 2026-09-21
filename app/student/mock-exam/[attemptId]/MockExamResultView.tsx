@@ -1,7 +1,14 @@
-import type { MockExamAttemptDetail } from "@/lib/mock-exam/attempt-data";
+"use client";
+
+import { useMemo, useState } from "react";
+import type { MockExamAttemptDetail, MockExamAttemptItem } from "@/lib/mock-exam/attempt-data";
 import { computeMockExamReport } from "@/lib/mock-exam/report";
+import LearningText from "@/app/session/[id]/LearningText";
+import RwStimulusView from "@/app/session/[id]/RwStimulusView";
+import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 
 const SECTION_LABEL: Record<string, string> = { rw: "R&W", math: "Math" };
+const OPTION_LETTERS = ["A", "B", "C", "D", "E"];
 
 function pct(correct: number, total: number): string {
   if (total === 0) return "-";
@@ -19,9 +26,68 @@ function formatMinutes(seconds: number): string {
  * 내부 채점 근거(문법 규칙 id 등 내부 필드)는 애초에 이 컴포넌트에 넘어오지 않는다 — attempt-data.ts 가
  * problem_versions 의 공개 가능한 필드(문항 내용·정답·해설)만 골라 내려준다.
  */
+function ItemDetail({ item }: { item: MockExamAttemptItem }) {
+  return (
+    <div className="rounded-lg border border-grey-200 bg-white p-4" data-testid="mock-exam-item-detail">
+      <p className="mb-2 text-[12px] font-bold text-grey-500">
+        {SECTION_LABEL[item.section]} {item.position}번 · {item.satDomain}
+        {item.skillCode ? ` · ${item.skillCode}` : ""}
+      </p>
+      {item.passage && <RwStimulusView passage={item.passage} className="mb-3 text-[13px]" />}
+      {item.question && <LearningText text={item.question} className="mb-3 font-semibold text-[13.5px]" />}
+      {item.figure ? <ProblemFigure spec={item.figure} className="mb-3" /> : null}
+
+      {item.options && item.options.length > 0 ? (
+        <div className="flex flex-col gap-1.5">
+          {item.options.map((opt, i) => {
+            const isCorrect = item.correctIndex === i;
+            const isMine = item.response === String(i);
+            return (
+              <div
+                key={i}
+                className={`flex items-start gap-2 rounded-lg border px-3 py-2 text-[13px] ${
+                  isCorrect ? "border-green bg-green/10" : isMine ? "border-red bg-red/5" : "border-grey-200"
+                }`}
+              >
+                <span className="font-bold">{OPTION_LETTERS[i] ?? i + 1}.</span>
+                <LearningText text={opt} />
+                {isCorrect && <span className="ml-auto shrink-0 text-[11px] font-bold text-green">정답</span>}
+                {isMine && !isCorrect && <span className="ml-auto shrink-0 text-[11px] font-bold text-red">내가 고른 답</span>}
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="flex flex-col gap-1.5 text-[13px]">
+          <p>
+            <span className="font-bold text-grey-500">내가 쓴 답: </span>
+            {item.response ?? <span className="text-grey-400">답하지 않음</span>}
+          </p>
+          <p>
+            <span className="font-bold text-grey-500">정답: </span>
+            {item.answers?.join(" 또는 ") ?? "-"}
+          </p>
+        </div>
+      )}
+
+      {item.explanation && (
+        <div className="mt-3 rounded-lg bg-grey-50 p-3 text-[12.5px] leading-relaxed">
+          <p className="mb-1 text-[11px] font-extrabold uppercase tracking-wide text-grey-400">해설</p>
+          <LearningText text={item.explanation} />
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function MockExamResultView({ attempt, readOnly }: { attempt: MockExamAttemptDetail; readOnly: boolean }) {
   const report = computeMockExamReport(attempt.items);
+  const itemsById = useMemo(() => new Map(attempt.items.map((i) => [i.setItemId, i])), [attempt.items]);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const selected = selectedId ? (itemsById.get(selectedId) ?? null) : null;
+
   return (
+    <div className={report.missedItems.length > 0 ? "md:grid md:grid-cols-[minmax(0,1fr)_420px] md:items-start md:gap-4" : ""}>
     <div className="flex flex-col gap-4">
       <div className="rounded-lg border border-grey-200 bg-white p-5 text-center">
         <p className="text-[12px] font-bold uppercase tracking-wide text-grey-500">전체 정답률</p>
@@ -84,15 +150,34 @@ export default function MockExamResultView({ attempt, readOnly }: { attempt: Moc
           <h3 className="mb-2 text-[13px] font-bold">오답 문항</h3>
           <ul className="flex flex-col gap-1.5">
             {report.missedItems.map((m) => (
-              <li key={m.setItemId} className="text-[12.5px] text-grey-600">
-                {SECTION_LABEL[m.section]} {m.position}번 · {m.satDomain}
-                {m.skillCode ? ` · ${m.skillCode}` : ""}
+              <li key={m.setItemId}>
+                <button
+                  type="button"
+                  onClick={() => setSelectedId(m.setItemId)}
+                  className={`w-full rounded-lg px-2 py-1.5 text-left text-[12.5px] ${
+                    selectedId === m.setItemId ? "bg-ink text-white" : "text-grey-600 hover:bg-grey-100"
+                  }`}
+                  data-testid={`missed-item-${m.setItemId}`}
+                >
+                  {SECTION_LABEL[m.section]} {m.position}번 · {m.satDomain}
+                  {m.skillCode ? ` · ${m.skillCode}` : ""}
+                </button>
               </li>
             ))}
           </ul>
           {!readOnly && <p className="mt-2 text-[11.5px] text-grey-400">오답 복습·보충 과제는 담당 선생님이 발급합니다(사양 7절 — 자동 발급하지 않음).</p>}
         </div>
       )}
+    </div>
+    {report.missedItems.length > 0 && (
+      <div className="mt-4 md:sticky md:top-4 md:mt-0">
+        {selected ? <ItemDetail item={selected} /> : (
+          <div className="rounded-lg border border-dashed border-grey-300 p-6 text-center text-[12.5px] text-grey-400">
+            왼쪽 오답 문항을 누르면 여기에 문제·내 답·정답·해설이 표시됩니다.
+          </div>
+        )}
+      </div>
+    )}
     </div>
   );
 }

@@ -178,19 +178,15 @@ describe("모의고사 응시 — 학생이 자기 응시만 답하고 제출할
     expect(fails(() => asUser(otherStudentId, `select mock_exam_attempt_detail('${attemptId}');`))).toContain("권한이 없습니다");
   });
 
-  it("spr 답을 RPC 로 저장한 뒤 제출하면 submitted 가 되고, 이후 답 변경은 거절된다", () => {
+  it("spr 답을 RPC 로 저장한 뒤 제출하면 곧바로 자동 채점 확정(graded)되고, 이후 답 변경은 거절된다 — 2026-09-21 제품 오너 지시로 교사 확인 단계 제거", () => {
     asUser(STUDENT_ID, `select mock_exam_save_answer('${attemptId}', '${sprItemId}', ' 5 ', null);`);
     expect(psql(`select correct from mock_exam_answers where attempt_id = '${attemptId}' and set_item_id = '${sprItemId}';`)).toBe("t");
     asUser(STUDENT_ID, `select mock_exam_submit('${attemptId}');`);
-    expect(psql(`select status from mock_exam_attempts where id = '${attemptId}';`)).toBe("submitted");
+    expect(psql(`select status from mock_exam_attempts where id = '${attemptId}';`)).toBe("graded");
     expect(fails(() => asUser(STUDENT_ID, `select mock_exam_save_answer('${attemptId}', '${sprItemId}', '6', null);`))).toContain("이미 제출한");
   });
 
-  it("학생은 스스로 채점 확정할 수 없고, 담당 교사는 RPC 로 채점 확정(graded)할 수 있다 — 그 뒤 학생에게 정답이 열린다", () => {
-    expect(fails(() => asUser(STUDENT_ID, `select mock_exam_finalize_grading('${attemptId}');`))).toContain("담당 학생의 응시만");
-    expect(fails(() => asUser(otherTeacherId, `select mock_exam_finalize_grading('${attemptId}');`))).toContain("담당 학생의 응시만");
-    asUser(TEACHER_ID, `select mock_exam_finalize_grading('${attemptId}');`);
-    expect(psql(`select status from mock_exam_attempts where id = '${attemptId}';`)).toBe("graded");
+  it("제출 즉시 학생에게 정답·해설이 열린다(자동 채점 확정) — 교사가 별도로 확정할 필요가 없다", () => {
     const detail = JSON.parse(asUser(STUDENT_ID, `select mock_exam_attempt_detail('${attemptId}')::text;`));
     const mc = detail.items.find((i: { setItemId: string }) => i.setItemId === mcItemId);
     expect(mc.correctIndex).toBe(1);

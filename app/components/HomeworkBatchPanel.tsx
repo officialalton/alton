@@ -4,7 +4,7 @@ import { useState } from "react";
 import type { HomeworkBatch, HomeworkBatchItem } from "@/lib/homework-batch-data";
 import { submitHomeworkAnswerAction, gradeHomeworkBatchAction } from "@/lib/homework-batch-actions";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
-import MockExamMathTools from "@/app/session/[id]/MockExamMathTools";
+import MockExamMathTools, { MockExamToolButtons, type MathToolsOpen } from "@/app/session/[id]/MockExamMathTools";
 
 const FORMAT_LABEL: Record<HomeworkBatchItem["format"], string> = { mc: "객관식", spr: "숫자 입력", essay: "서술형", math: "풀이형" };
 
@@ -32,6 +32,8 @@ export default function HomeworkBatchPanel({
 }) {
   const [batches, setBatches] = useState(initialBatches);
   const [subTab, setSubTab] = useState<"upcoming" | "past">("upcoming");
+  const [mathToolsOpen, setMathToolsOpen] = useState<MathToolsOpen>(null);
+  const toggleMathTools = (which: "calculator" | "reference") => setMathToolsOpen((cur) => (cur === which ? null : which));
   const upcoming = batches.filter((b) => !isGraded(b));
   const past = batches.filter(isGraded);
   const [activeId, setActiveId] = useState<string | null>(upcoming[0]?.id ?? null);
@@ -92,15 +94,29 @@ export default function HomeworkBatchPanel({
                 );
               })}
             </div>
-            {active && isMathBatch(active) && <MockExamMathTools calculatorAllowed referenceSheetAllowed />}
+            {active && isMathBatch(active) && (
+              <div className="mb-3">
+                <MockExamToolButtons calculatorAllowed referenceSheetAllowed open={mathToolsOpen} onToggle={toggleMathTools} />
+              </div>
+            )}
             {active && <BatchRunner batch={active} viewerRole={viewerRole} readOnly={readOnly} onChange={updateBatch} />}
+            {active && isMathBatch(active) && (
+              <MockExamMathTools calculatorAllowed referenceSheetAllowed open={mathToolsOpen} onClose={() => setMathToolsOpen(null)} />
+            )}
           </div>
         )
       ) : pastDetail ? (
         <div>
           <button onClick={() => setPastDetailId(null)} className="text-[12px] font-semibold text-grey-500 mb-3">← 지난 과제 목록으로</button>
-          {isMathBatch(pastDetail) && <MockExamMathTools calculatorAllowed referenceSheetAllowed />}
+          {isMathBatch(pastDetail) && (
+            <div className="mb-3">
+              <MockExamToolButtons calculatorAllowed referenceSheetAllowed open={mathToolsOpen} onToggle={toggleMathTools} />
+            </div>
+          )}
           <BatchRunner batch={pastDetail} viewerRole={viewerRole} readOnly={readOnly} onChange={updateBatch} />
+          {isMathBatch(pastDetail) && (
+            <MockExamMathTools calculatorAllowed referenceSheetAllowed open={mathToolsOpen} onClose={() => setMathToolsOpen(null)} />
+          )}
         </div>
       ) : (
         <PastBatchList batches={past} onOpen={(id) => setPastDetailId(id)} />

@@ -24,6 +24,7 @@ import PdfPageAnnotationLayer from "./PdfPageAnnotationLayer";
 import { renderFigureSvg } from "@/lib/problem-figures/render";
 import type { FigureSpec } from "@/lib/problem-figures/spec";
 import ProblemFigure from "./ProblemFigure";
+import MockExamMathTools, { MockExamToolButtons, type MathToolsOpen } from "./MockExamMathTools";
 
 const DIFFICULTY_LABEL: Record<string, string> = {
   easy: "쉬움",
@@ -131,6 +132,13 @@ export default function ProblemsPanel({
   // 채점 초안(교사) — 문제마다.
   const [gradeDraft, setGradeDraft] = useState<Record<string, { grade: ProblemGrade | null; comment: string }>>({});
   const [regrading, setRegrading] = useState<Set<string>>(new Set());
+
+  // 2026-09-21(UAT 지적) — 문제·과제 탭에서도 모의고사와 같은 계산기·참조표를 쓸 수 있어야 한다
+  // (사양 6절 "같은 렌더러"를 이 화면들엔 배선하지 않았던 간극). 수학 형식(spr/math) 문제가 하나라도
+  // 있으면 이 문제 목록 전체에 도구를 노출한다(문제별로 켜고 끄지 않음 — 세트 단위가 더 단순하다).
+  const hasMathProblem = problems.some((p) => p.format === "spr" || p.format === "math");
+  const [mathToolsOpen, setMathToolsOpen] = useState<MathToolsOpen>(null);
+  const toggleMathTools = (which: "calculator" | "reference") => setMathToolsOpen((cur) => (cur === which ? null : which));
 
   // 문제는 한 번에 하나(슬라이드). 왼쪽 목차와 이전/다음으로 오간다.
   const [current, setCurrent] = useState(0);
@@ -394,7 +402,10 @@ export default function ProblemsPanel({
           <span className="text-[12.5px] text-grey-500">
             {safeCurrent + 1} / {problems.length}
           </span>
-          <div className="flex gap-1.5">
+          <div className="flex items-center gap-1.5">
+            {hasMathProblem && (
+              <MockExamToolButtons calculatorAllowed referenceSheetAllowed open={mathToolsOpen} onToggle={toggleMathTools} />
+            )}
             <button
               type="button"
               disabled={safeCurrent === 0}
@@ -914,6 +925,9 @@ export default function ProblemsPanel({
         })}
       </div>
       </div>
+      {hasMathProblem && (
+        <MockExamMathTools calculatorAllowed referenceSheetAllowed open={mathToolsOpen} onClose={() => setMathToolsOpen(null)} />
+      )}
     </div>
   );
 }

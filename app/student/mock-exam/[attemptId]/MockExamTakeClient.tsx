@@ -12,7 +12,8 @@ import {
 import LearningText from "@/app/session/[id]/LearningText";
 import RwStimulusView from "@/app/session/[id]/RwStimulusView";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
-import MockExamMathTools from "@/app/session/[id]/MockExamMathTools";
+import MockExamMathTools, { MockExamToolButtons, type MathToolsOpen } from "@/app/session/[id]/MockExamMathTools";
+import MockExamResultView from "./MockExamResultView";
 
 // 고정형 SAT 모의고사 V1 — 학생 응시 화면(사양 3절 학생 흐름, 4절 수업 탭/독립 진입 공용).
 // 적응형이 아니므로 문항 순서는 고정(mock_exam_set_items.position). 시간 제한은 섹션(R&W/Math)
@@ -32,10 +33,22 @@ function formatClock(totalSeconds: number): string {
 export default function MockExamTakeClient({ attempt: initial }: { attempt: MockExamAttemptDetail }) {
   const router = useRouter();
   const [attempt] = useState(initial);
+  // 제출 성공 직후 서버가 돌려준 채점 완료 상세 — 이 값이 있으면 그대로 결과 화면을 그린다.
+  // (2026-09-21 UAT 지적: router.refresh()만 호출하면 이 클라이언트 컴포넌트는 마운트를 유지한 채
+  // useState(initial) 값을 그대로 들고 있어 제출 후 화면이 멈춘 것처럼 보였다 — 서버 재조회 결과를
+  // 로컬 상태로 직접 반영해야 즉시 반응한다.)
+  const [submittedAttempt, setSubmittedAttempt] = useState<MockExamAttemptDetail | null>(null);
+  const sectionsOrder = useMemo(
+    () => (["rw", "math"] as const).filter((s) => attempt.items.some((i) => i.section === s)),
+    [attempt.items],
+  );
   const [section, setSection] = useState<"rw" | "math">(attempt.items[0]?.section ?? "rw");
+  const isLastSection = sectionsOrder[sectionsOrder.length - 1] === section;
   const sectionItems = useMemo(() => attempt.items.filter((i) => i.section === section), [attempt.items, section]);
   const [index, setIndex] = useState(0);
   const current = sectionItems[index];
+  const [mathToolsOpen, setMathToolsOpen] = useState<MathToolsOpen>(null);
+  const toggleMathTools = (which: "calculator" | "reference") => setMathToolsOpen((cur) => (cur === which ? null : which));
 
   const [responses, setResponses] = useState<Record<string, string>>(
     Object.fromEntries(attempt.items.map((i) => [i.setItemId, i.response ?? ""])),
@@ -78,11 +91,15 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
   }, [attempt.id, isSubmitted]);
 
   if (attempt.items.length === 0) return <p className="text-[13px] text-grey-500">시험 문항이 없습니다.</p>;
+  // 제출 직후(자동 채점 완료) 서버가 돌려준 최신 상세가 있으면 곧바로 결과 화면을 보여준다.
+  if (submittedAttempt) {
+    return <MockExamResultView attempt={submittedAttempt} readOnly={false} />;
+  }
   if (isSubmitted) {
     return (
       <div className="rounded-lg border border-grey-200 bg-white p-6 text-center">
         <p className="text-[15px] font-bold">
-          {attempt.status === "graded" ? "채점이 완료됐습니다." : "제출됐습니다. 채점 확정을 기다리는 중입니다."}
+          {attempt.status === "graded" ? "채점이 완료됐습니다." : "제출됐습니다. 채점 결과를 확인해 주세요."}
         </p>
         <button type="button" className="mt-3 text-[13px] text-grey-500 underline" onClick={() => router.push("/student?tab=mock-exam")}>
           모의고사 목록으로
@@ -123,6 +140,8 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
       setError(result.error);
       return;
     }
+    setShowReview(false);
+    if (result.value.attempt) setSubmittedAttempt(result.value.attempt);
     router.refresh();
   }
 
@@ -149,8 +168,18 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
                 </button>
               ))}
           </div>
-          <div className="font-mono text-[15px] font-bold" data-testid="mock-exam-timer">
-            {formatClock(remaining[section])}
+          <div className="flex items-center gap-3">
+            {section === "math" && (
+              <MockExamToolButtons
+                calculatorAllowed={attempt.mathCalculatorAllowed}
+                referenceSheetAllowed={attempt.mathReferenceSheetAllowed}
+                open={mathToolsOpen}
+                onToggle={toggleMathTools}
+              />
+            )}
+            <div className="font-mono text-[15px] font-bold" data-testid="mock-exam-timer">
+              {formatClock(remaining[section])}
+            </div>
           </div>
         </div>
 
@@ -228,11 +257,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
               </button>
             ))}
           </div>
-          {index === sectionItems.length - 1 ? (
-            <button type="button" onClick={() => setShowReview(true)} className="rounded-lg bg-ink px-4 py-2 text-[13px] font-bold text-white">
-              검토·제출
-            </button>
-          ) : (
+          {index < sectionItems.length - 1 ? (
             <button
               type="button"
               onClick={() => setIndex((i) => Math.min(sectionItems.length - 1, i + 1))}
@@ -240,11 +265,36 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
             >
               다음 문항
             </button>
+          ) : !isLastSection ? (
+            // 2026-09-21 버그 수정 — 이전엔 "현재 섹션의 마지막 문항"에서 곧바로 제출 모달이 떴다
+            // (다른 섹션을 아직 안 풀었어도). 마지막 섹션의 마지막 문항일 때만 제출로 넘어가야 한다.
+            <button
+              type="button"
+              onClick={() => {
+                const next = sectionsOrder[sectionsOrder.indexOf(section) + 1];
+                if (next) {
+                  setSection(next);
+                  setIndex(0);
+                }
+              }}
+              className="rounded-lg bg-ink px-4 py-2 text-[13px] font-bold text-white"
+            >
+              다음 영역
+            </button>
+          ) : (
+            <button type="button" onClick={() => setShowReview(true)} className="rounded-lg bg-ink px-4 py-2 text-[13px] font-bold text-white">
+              검토·제출
+            </button>
           )}
         </div>
       </div>
 
-      {section === "math" && <MockExamMathTools calculatorAllowed={attempt.mathCalculatorAllowed} referenceSheetAllowed={attempt.mathReferenceSheetAllowed} />}
+      <MockExamMathTools
+        calculatorAllowed={attempt.mathCalculatorAllowed}
+        referenceSheetAllowed={attempt.mathReferenceSheetAllowed}
+        open={mathToolsOpen}
+        onClose={() => setMathToolsOpen(null)}
+      />
 
       {showReview && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">

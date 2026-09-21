@@ -12,6 +12,7 @@
 
 import { revalidatePath } from "next/cache";
 import { requireUser } from "@/lib/auth";
+import { loadMockExamAttemptDetail, type MockExamAttemptDetail } from "./attempt-data";
 
 type ActionResult<T = undefined> = { ok: true; value: T } | { ok: false; error: string };
 
@@ -129,14 +130,19 @@ export async function toggleMockExamFlagAction(attemptId: string, setItemId: str
   return callRpc("mock_exam_toggle_flag", { p_attempt_id: attemptId, p_set_item_id: setItemId, p_flagged: flagged }, "표시를 저장하지 못했습니다.");
 }
 
-/** 학생 흐름 마지막: 시험을 제출한다. 이후 문항 이동은 안 되고, 결과는 교사 확정(채점 완료) 뒤에만 보인다. */
-export async function submitMockExamAttemptAction(attemptId: string): Promise<ActionResult> {
+/** 학생 흐름 마지막: 시험을 제출한다. 자동 채점 문항(mc/spr)은 제출 즉시 채점 확정되어(2026-09-21
+ * 제품 오너 지시로 교사 확인 단계 제거) 정답·해설이 바로 열린다 — 제출 직후 화면이 곧바로 결과
+ * 화면으로 전환될 수 있게, 새로 채점된 상세를 같이 돌려준다(클라이언트가 갖고 있던 마스킹된 상태를
+ * 그대로 쓰면 아무것도 안 바뀐 것처럼 보이는 문제가 있었다). */
+export async function submitMockExamAttemptAction(attemptId: string): Promise<ActionResult<{ attempt: MockExamAttemptDetail | null }>> {
   const r = await callRpc("mock_exam_submit", { p_attempt_id: attemptId }, "제출하지 못했습니다.");
-  if (r.ok) {
-    revalidatePath("/student");
-    revalidatePath("/teacher");
-  }
-  return r;
+  if (!r.ok) return r;
+  revalidatePath("/student");
+  revalidatePath("/teacher");
+  revalidatePath("/parent");
+  const { supabase } = await requireUser();
+  const attempt = await loadMockExamAttemptDetail(supabase, attemptId);
+  return { ok: true, value: { attempt } };
 }
 
 /** 교사 흐름 마지막: 자동 채점 결과를 확정한다(사양 7절 "자동 채점 가능한 문항은 서버가 계산하고,

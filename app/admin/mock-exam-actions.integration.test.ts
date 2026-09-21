@@ -32,16 +32,33 @@ const RW_DOMAINS = ["rw_information_ideas", "rw_craft_structure", "rw_expression
 const MATH_DOMAINS = ["algebra", "advanced_math", "problem_solving_data", "geometry_trig"];
 const DIFFICULTIES = ["easy", "medium", "hard"] as const;
 
-async function seedConfirmedProblem(domain: string, difficulty: (typeof DIFFICULTIES)[number], label: string) {
+async function seedConfirmedProblem(
+  domain: string,
+  difficulty: (typeof DIFFICULTIES)[number],
+  label: string,
+  format: "mc" | "spr" = "mc",
+) {
   // problems 에 status='confirmed'로 바로 넣으면 트리거(problems_create_initial_version,
   // 20261293000000)가 1번 버전을 자동으로 만들고 즉시 published 로 올린다 — 별도 버전
   // insert가 필요 없다(오히려 중복 unique 제약 위반이 난다).
   const skillCode = psql(`select code from problem_skill_codes where domain = '${domain}' limit 1;`);
+  if (format === "mc") {
+    const problemId = psql(`
+      insert into problems (format, passage, options, correct_index, explanation, status, difficulty, skill_code, created_by)
+      values ('mc', '${label} passage', '["A","B","C","D"]'::jsonb, 0, 'because', 'confirmed', '${difficulty}', '${skillCode}', '${adminUserId}')
+      returning id;
+    `);
+    return { problemId };
+  }
+  // SPR은 problems 테이블에 answers 컬럼이 없다(problem_versions에만 있음) — 트리거가 만든
+  // 1번 버전에 별도로 채워 넣는다(lib/mock-exam/mock-exam-attempt-flow.integration.test.ts의
+  // publishedProblem 헬퍼와 같은 패턴).
   const problemId = psql(`
-    insert into problems (format, passage, options, correct_index, explanation, status, difficulty, skill_code, created_by)
-    values ('mc', '${label} passage', '["A","B","C","D"]'::jsonb, 0, 'because', 'confirmed', '${difficulty}', '${skillCode}', '${adminUserId}')
+    insert into problems (format, passage, explanation, status, difficulty, skill_code, created_by)
+    values ('spr', '${label} passage', 'because', 'confirmed', '${difficulty}', '${skillCode}', '${adminUserId}')
     returning id;
   `);
+  psql(`update problem_versions set answers = '["5"]'::jsonb where problem_id = '${problemId}' and version_no = 1;`);
   return { problemId };
 }
 
@@ -58,6 +75,14 @@ describe("mock-exam-actions (조립·공개, 실제 로컬 DB)", () => {
       for (const difficulty of DIFFICULTIES) {
         for (let i = 0; i < 3; i++) {
           await seedConfirmedProblem(domain, difficulty, `${domain}-${difficulty}-${i}`);
+        }
+      }
+    }
+    // Math는 형식(mc/spr) 비중도 걸리므로(2026-09-21 UAT 지적) spr 후보도 셀을 채울 만큼 심는다.
+    for (const domain of MATH_DOMAINS) {
+      for (const difficulty of DIFFICULTIES) {
+        for (let i = 0; i < 3; i++) {
+          await seedConfirmedProblem(domain, difficulty, `${domain}-${difficulty}-spr-${i}`, "spr");
         }
       }
     }
@@ -88,6 +113,22 @@ describe("mock-exam-actions (조립·공개, 실제 로컬 DB)", () => {
     }, {});
     expect(rwByDifficulty.medium).toBeGreaterThan(rwByDifficulty.easy ?? 0);
     expect(rwByDifficulty.medium).toBeGreaterThan(rwByDifficulty.hard ?? 0);
+  });
+
+  it("Math 섹션은 객관식만이 아니라 SPR도 섞어서 채운다(2026-09-21 UAT: 형식 비중 누락 수정)", async () => {
+    const { assembleMockExamSet } = await import("./mock-exam-actions");
+    const result = await assembleMockExamSet({
+      name: `형식 비중 세트 ${Date.now()}`,
+      difficultyTier: "standard",
+      rwCount: 10,
+      mathCount: 20,
+    });
+    const formats = psql(`
+      select p.format from mock_exam_set_items i join problems p on p.id = i.problem_id
+      where i.exam_set_id = '${result.examSetId}' and i.section = 'math';
+    `).split("\n");
+    expect(formats).toContain("mc");
+    expect(formats).toContain("spr");
   });
 
   it("draft 세트를 공개하면 status가 published로 바뀐다", async () => {
