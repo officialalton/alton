@@ -589,7 +589,14 @@ function QuizPanel({
                   {q.assignedByTeacher && <span className="text-[11px] text-grey-500 font-normal"> (선생님이 냄)</span>}
                 </span>
                 <span className="text-[12.5px] font-bold text-ink">
-                  {q.status === "completed" ? `${q.score}/${q.total}점` : q.status === "in_progress" ? `진행 중 ${q.score ?? 0}/${answeredSoFar}` : "응시 전"}
+                  {/* 2026-09-21(UAT 지적) — "진행 중 1/4"가 맞은 개수/지금까지 답한 개수라 문항 수(10문항)와
+                      안 맞아 보였다(분모가 전체가 아니라 그때그때 바뀌는 응답 수였다). 진행 중에는 정오
+                      대신 "지금까지 답한 문항/전체 문항"으로 보여준다 — 정답 여부는 끝나야 의미가 있다. */}
+                  {q.status === "completed"
+                    ? `${q.score}/${q.total}점`
+                    : q.status === "in_progress"
+                      ? `${answeredSoFar}/${q.wordCount}문항 답함`
+                      : "응시 전"}
                 </span>
               </div>
               <div className="flex items-center justify-between">
