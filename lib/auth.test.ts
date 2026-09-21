@@ -175,19 +175,17 @@ describe("resolveAccountDestination — 학생 프로필 완성 게이트(M4)", 
     expect(dest).toBe("/account-pending");
   });
 
-  it("학생이 아닌 role(보호자)은 프로필 완성 게이트를 확인하지 않는다", async () => {
+  it("학생이 아닌 role(보호자)은 프로필 완성 게이트로 리다이렉트되지 않는다(2026-09-21: 세 RPC를 병렬로 항상 조회하되, role이 student가 아니면 결과값을 게이트에 쓰지 않는다 — 순차 왕복을 줄이기 위한 의도된 변경)", async () => {
     const { resolveAccountDestination } = await import("./auth");
     const supabase = fakeSupabaseWithRpcMap({
       rpc: {
         current_account_status: "active",
         current_account_access_allowed: true,
+        current_student_profile_completed: false,
       },
     });
     const dest = await resolveAccountDestination(supabase as never, "parent");
     expect(dest).toBe("/parent");
-    expect(supabase.__rpcMock).not.toHaveBeenCalledWith(
-      "current_student_profile_completed"
-    );
   });
 });
 

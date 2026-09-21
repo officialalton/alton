@@ -30,6 +30,9 @@ function formatClock(totalSeconds: number): string {
   return `${String(m).padStart(2, "0")}:${String(r).padStart(2, "0")}`;
 }
 
+const OPTION_LETTERS = ["A", "B", "C", "D", "E"];
+type SaveStatus = "idle" | "saving" | "saved" | "error";
+
 export default function MockExamTakeClient({ attempt: initial }: { attempt: MockExamAttemptDetail }) {
   const router = useRouter();
   const [attempt] = useState(initial);
@@ -54,8 +57,9 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
     Object.fromEntries(attempt.items.map((i) => [i.setItemId, i.response ?? ""])),
   );
   const [flags, setFlags] = useState<Record<string, boolean>>(Object.fromEntries(attempt.items.map((i) => [i.setItemId, i.flagged])));
-  const [saving, setSaving] = useState(false);
+  const [saveStatus, setSaveStatus] = useState<SaveStatus>("idle");
   const [error, setError] = useState<string | null>(null);
+  const [lastSave, setLastSave] = useState<{ setItemId: string; response: string } | null>(null);
   const [locked, setLocked] = useState<Record<"rw" | "math", boolean>>({ rw: false, math: false });
   const [submitting, setSubmitting] = useState(false);
   const [showReview, setShowReview] = useState(false);
@@ -112,11 +116,22 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
 
   async function saveCurrent(response: string) {
     if (!current) return;
-    setResponses((r) => ({ ...r, [current.setItemId]: response }));
-    setSaving(true);
+    const setItemId = current.setItemId;
+    setResponses((r) => ({ ...r, [setItemId]: response }));
+    setLastSave({ setItemId, response });
+    setSaveStatus("saving");
     setError(null);
-    const result = await saveMockExamAnswerAction(attempt.id, current.setItemId, response);
-    setSaving(false);
+    const result = await saveMockExamAnswerAction(attempt.id, setItemId, response);
+    setSaveStatus(result.ok ? "saved" : "error");
+    if (!result.ok) setError(result.error);
+  }
+
+  async function retrySave() {
+    if (!lastSave) return;
+    setSaveStatus("saving");
+    setError(null);
+    const result = await saveMockExamAnswerAction(attempt.id, lastSave.setItemId, lastSave.response);
+    setSaveStatus(result.ok ? "saved" : "error");
     if (!result.ok) setError(result.error);
   }
 
@@ -191,27 +206,64 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
           </div>
         ) : current ? (
           <div className="rounded-lg border border-grey-200 bg-white p-4">
-            <p className="mb-2 text-[12px] font-bold text-grey-500">
-              {section === "rw" ? "R&W" : "Math"} {index + 1} / {sectionItems.length}
-            </p>
+            <div className="mb-2 flex items-center justify-between">
+              <p className="text-[12px] font-bold text-grey-500">
+                {section === "rw" ? "R&W" : "Math"} {index + 1} / {sectionItems.length}
+              </p>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={toggleFlag}
+                  aria-pressed={flags[current.setItemId]}
+                  className={`rounded px-2 py-1 text-[12px] font-bold ${flags[current.setItemId] ? "bg-yellow-100 text-yellow-700" : "text-grey-400"}`}
+                  data-testid="toggle-flag"
+                  title="나중에 다시 보기"
+                >
+                  {flags[current.setItemId] ? "★ 표시됨" : "☆ 표시"}
+                </button>
+                <span className="text-[11px] text-grey-400" data-testid="save-status">
+                  {saveStatus === "saving" && "저장 중…"}
+                  {saveStatus === "saved" && "저장됨"}
+                  {saveStatus === "error" && (
+                    <span className="text-red">
+                      저장 실패{" "}
+                      <button type="button" onClick={retrySave} className="underline">
+                        재시도
+                      </button>
+                    </span>
+                  )}
+                </span>
+              </div>
+            </div>
             {current.passage && <RwStimulusView passage={current.passage} className="mb-4 text-[13.5px]" />}
             {current.question && <LearningText text={current.question} className="mb-3 font-semibold text-[14px]" />}
             {current.figure ? <ProblemFigure spec={current.figure} className="mb-4" /> : null}
 
             {current.format === "mc" && current.options ? (
               <div className="flex flex-col gap-2">
-                {current.options.map((opt, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    onClick={() => saveCurrent(String(i))}
-                    className={`rounded-lg border px-3 py-2 text-left text-[13.5px] ${
-                      responses[current.setItemId] === String(i) ? "border-ink bg-ink/5 font-bold" : "border-grey-200"
-                    }`}
-                  >
-                    <LearningText text={opt} />
-                  </button>
-                ))}
+                {current.options.map((opt, i) => {
+                  const isChosen = responses[current.setItemId] === String(i);
+                  return (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => saveCurrent(String(i))}
+                      aria-pressed={isChosen}
+                      className={`flex items-start gap-2.5 rounded-lg border-2 px-3 py-2 text-left text-[13.5px] ${
+                        isChosen ? "border-ink bg-ink/5 font-bold" : "border-grey-200"
+                      }`}
+                    >
+                      <span
+                        className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[11px] font-bold ${
+                          isChosen ? "border-ink bg-ink text-white" : "border-grey-400 text-grey-500"
+                        }`}
+                      >
+                        {isChosen ? "✓" : OPTION_LETTERS[i] ?? i + 1}
+                      </span>
+                      <LearningText text={opt} />
+                    </button>
+                  );
+                })}
               </div>
             ) : (
               <input
@@ -224,44 +276,53 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
                 data-testid="mock-exam-spr-input"
               />
             )}
-
-            <div className="mt-3 flex items-center justify-between">
-              <button type="button" onClick={toggleFlag} className="text-[12.5px] text-grey-500 underline">
-                {flags[current.setItemId] ? "표시 해제" : "나중에 다시 보기로 표시"}
-              </button>
-              {saving && <span className="text-[11px] text-grey-400">저장 중…</span>}
-            </div>
           </div>
         ) : null}
 
-        <div className="mt-3 flex items-center justify-between">
+        <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
           <button
             type="button"
             disabled={index === 0}
             onClick={() => setIndex((i) => Math.max(0, i - 1))}
-            className="rounded-lg border border-grey-300 px-4 py-2 text-[13px] font-bold disabled:opacity-40"
+            className="shrink-0 whitespace-nowrap rounded-lg border border-grey-300 px-4 py-2 text-[13px] font-bold disabled:opacity-40"
           >
             이전 문항
           </button>
-          <div className="flex gap-1">
-            {sectionItems.map((it, i) => (
-              <button
-                key={it.setItemId}
-                type="button"
-                onClick={() => setIndex(i)}
-                className={`h-7 w-7 rounded text-[11px] font-bold ${
-                  i === index ? "bg-ink text-white" : (responses[it.setItemId] ?? "").trim() ? "bg-green/20" : "bg-grey-100"
-                } ${flags[it.setItemId] ? "ring-2 ring-yellow-400" : ""}`}
-              >
-                {i + 1}
-              </button>
-            ))}
+          <div className="flex flex-wrap gap-1" role="tablist" aria-label="문항 이동">
+            {sectionItems.map((it, i) => {
+              const isAnswered = (responses[it.setItemId] ?? "").trim() !== "";
+              const isFlagged = flags[it.setItemId];
+              return (
+                <button
+                  key={it.setItemId}
+                  type="button"
+                  onClick={() => setIndex(i)}
+                  aria-current={i === index}
+                  title={`${i + 1}번${isAnswered ? " · 응답 완료" : " · 미응답"}${isFlagged ? " · 다시 보기 표시" : ""}`}
+                  className={`relative flex h-7 w-7 items-center justify-center rounded text-[11px] font-bold ${
+                    i === index ? "bg-ink text-white" : isAnswered ? "bg-green/20 text-ink" : "bg-grey-100 text-grey-500"
+                  }`}
+                >
+                  {i + 1}
+                  {isFlagged && (
+                    <span className="absolute -right-1 -top-1 text-[9px] leading-none text-yellow-600" aria-hidden="true">
+                      ★
+                    </span>
+                  )}
+                  {isAnswered && i !== index && (
+                    <span className="absolute -bottom-0.5 -right-0.5 text-[8px] leading-none text-green" aria-hidden="true">
+                      ✓
+                    </span>
+                  )}
+                </button>
+              );
+            })}
           </div>
           {index < sectionItems.length - 1 ? (
             <button
               type="button"
               onClick={() => setIndex((i) => Math.min(sectionItems.length - 1, i + 1))}
-              className="rounded-lg bg-ink px-4 py-2 text-[13px] font-bold text-white"
+              className="shrink-0 whitespace-nowrap rounded-lg bg-ink px-4 py-2 text-[13px] font-bold text-white"
             >
               다음 문항
             </button>
@@ -277,12 +338,16 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
                   setIndex(0);
                 }
               }}
-              className="rounded-lg bg-ink px-4 py-2 text-[13px] font-bold text-white"
+              className="shrink-0 whitespace-nowrap rounded-lg bg-ink px-4 py-2 text-[13px] font-bold text-white"
             >
               다음 영역
             </button>
           ) : (
-            <button type="button" onClick={() => setShowReview(true)} className="rounded-lg bg-ink px-4 py-2 text-[13px] font-bold text-white">
+            <button
+              type="button"
+              onClick={() => setShowReview(true)}
+              className="shrink-0 whitespace-nowrap rounded-lg bg-ink px-4 py-2 text-[13px] font-bold text-white"
+            >
               검토·제출
             </button>
           )}

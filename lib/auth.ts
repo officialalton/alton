@@ -32,7 +32,17 @@ export async function resolveAccountDestination(
   supabase: SupabaseServerClient,
   role?: string | null
 ): Promise<string> {
-  const { data: status } = await supabase.rpc("current_account_status");
+  // 2026-09-21(UAT 지적: 탭 전환마다 체감 지연) — 아래 세 RPC는 전부 auth.uid() 하나로만
+  // 판정하는 순수 조회라 서로 결과를 참조하지 않는다(직렬로 기다릴 이유가 없었다). requireUser()가
+  // 페이지 로드뿐 아니라 서버 액션 하나하나(예: 모의고사 탭 목록 조회)마다도 매번 이 함수를 거치므로,
+  // 3번의 순차 왕복이 매 클릭마다 반복되고 있었다 — Preview처럼 리전 간 왕복 지연이 큰 환경에서는
+  // 이게 누적돼 눈에 띄게 느려진다. 아래에서 병렬로 한 번에 받아온 뒤 기존과 같은 분기 로직을 그대로
+  // 적용한다(호출 여부·순서 조건은 바뀌지 않는다 — 항상 셋 다 물어보고 필요한 값만 쓴다).
+  const [{ data: status }, { data: profileCompleted }, { data: accessAllowed }] = await Promise.all([
+    supabase.rpc("current_account_status"),
+    supabase.rpc("current_student_profile_completed"),
+    supabase.rpc("current_account_access_allowed"),
+  ]);
 
   if (status === "closure_pending" || status === "closed") {
     await supabase.auth.signOut();
@@ -62,11 +72,8 @@ export async function resolveAccountDestination(
   // "생년월일 입력 전 동의 화면에 갇히는" 문제와 같은 유형의 순서 버그가
   // pending 게이트에도 있었음). 프로필 완성은 계정 lifecycle 상태와 무관하게
   // 항상 최우선으로 확인한다.
-  if (role === "student") {
-    const { data: profileCompleted } = await supabase.rpc("current_student_profile_completed");
-    if (profileCompleted === false) {
-      return "/complete-profile";
-    }
+  if (role === "student" && profileCompleted === false) {
+    return "/complete-profile";
   }
 
   if (status === "suspended") {
@@ -76,7 +83,6 @@ export async function resolveAccountDestination(
     return "/account-pending";
   }
 
-  const { data: accessAllowed } = await supabase.rpc("current_account_access_allowed");
   if (accessAllowed === false) {
     return "/consent-pending";
   }
