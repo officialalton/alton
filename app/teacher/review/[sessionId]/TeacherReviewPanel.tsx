@@ -84,7 +84,7 @@ export default function TeacherReviewPanel({
           "Schedule" 탭이므로, 항상 그 탭으로 돌아가는 명시적 목적지를 쓴다. */}
       <button
         onClick={() => router.push("/teacher?tab=lesson-schedule")}
-        className="text-[13px] text-grey-500 font-semibold mb-4"
+        className="text-[13px] text-grey-600 font-semibold mb-4 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform"
       >
         ← 뒤로
       </button>

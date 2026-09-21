@@ -238,7 +238,7 @@ function StudentCurriculumOperatingView({
   return (
     <div className="max-w-[640px] px-8 pt-8">
       <div className="flex items-center justify-between px-6">
-        <button onClick={onBack} className="text-[13px] text-grey-500 font-semibold">
+        <button onClick={onBack} className="text-[13px] text-grey-600 font-semibold border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform">
           ← 뒤로
         </button>
       </div>
@@ -314,7 +314,7 @@ function LegacyCurriculumView({
   if (state.status === "error") {
     return (
       <div className="max-w-[640px] px-8 py-8">
-        <button onClick={onBack} className="text-[13px] text-grey-500 font-semibold mb-4">
+        <button onClick={onBack} className="text-[13px] text-grey-600 font-semibold mb-4 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform">
           ← 뒤로
         </button>
         <p className="text-[13px] text-red">{state.message}</p>
@@ -361,7 +361,7 @@ function LegacyReviewView({ sessionId, onBack }: { sessionId: string; onBack: ()
   if (state.status === "error") {
     return (
       <div className="max-w-[640px] px-8 py-8">
-        <button onClick={onBack} className="text-[13px] text-grey-500 font-semibold mb-4">
+        <button onClick={onBack} className="text-[13px] text-grey-600 font-semibold mb-4 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform">
           ← 뒤로
         </button>
         <p className="text-[13px] text-red">{state.message}</p>

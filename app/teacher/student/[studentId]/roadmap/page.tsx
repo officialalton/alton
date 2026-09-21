@@ -26,7 +26,10 @@ export default async function TeacherStudentRoadmapPage({
   return (
     <div className="min-h-screen bg-white">
       <div className="max-w-[720px] mx-auto px-6 pt-6">
-        <Link href="/teacher?tab=curriculum" className="text-[13px] text-grey-500 font-semibold">
+        <Link
+          href="/teacher?tab=curriculum"
+          className="text-[13px] text-grey-600 font-semibold border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform inline-block"
+        >
           ← 뒤로
         </Link>
         <h1 className="text-[18px] font-extrabold text-ink mt-2">

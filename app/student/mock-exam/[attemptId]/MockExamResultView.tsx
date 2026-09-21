@@ -26,7 +26,10 @@ function formatMinutes(seconds: number): string {
  * 내부 채점 근거(문법 규칙 id 등 내부 필드)는 애초에 이 컴포넌트에 넘어오지 않는다 — attempt-data.ts 가
  * problem_versions 의 공개 가능한 필드(문항 내용·정답·해설)만 골라 내려준다.
  */
-function ItemDetail({ item }: { item: MockExamAttemptItem }) {
+/** 문항 하나(지문·질문·선택지·내 답·정답·해설)를 읽기 전용으로 보여준다 — 학생 본인 결과
+ * 화면뿐 아니라 교사의 "학생 풀이 읽기 전용 열람"(TeacherMockExamStatusTab)에서도 그대로
+ * 재사용한다(둘 다 채점 뒤 필드가 채워진 MockExamAttemptItem을 받는다). */
+export function ItemDetail({ item }: { item: MockExamAttemptItem }) {
   return (
     <div className="rounded-lg border border-grey-200 bg-white p-4" data-testid="mock-exam-item-detail">
       <p className="mb-2 text-[12px] font-bold text-grey-500">

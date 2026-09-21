@@ -98,6 +98,41 @@ export default function UnitPrepPanel({
     }
   }
 
+  // 2026-09-21(UAT 지적) — 키워드를 바꾼 뒤 교재는 "전체 담기"를 눌러야 했고 문제는 "20개
+  // 업데이트"를 또 눌러야 했다(수업 준비 화면(CompositionPanel)은 이미 키워드 토글 한 번으로
+  // 교재·문제가 같이 반영되도록 고쳤는데 이 화면은 그때 범위에 없었다). 키워드 추가/제거
+  // 즉시 교재 전체 담기 + 문제 재구성까지 한 번에 실행해 별도 클릭이 필요 없게 한다.
+  async function handleKeywordChange(run: () => Promise<{ ok: true } | { ok: false; error: string }>) {
+    setSaving(true);
+    setError(null);
+    setNotice(null);
+    try {
+      const result = await run();
+      if (!result.ok) {
+        setError(result.error);
+        return;
+      }
+      const comp = await loadUnitComposition(overlayUnitId);
+      const nextCatalog = comp.keywords.length > 0 ? await loadUnitMaterialCatalog(overlayUnitId) : null;
+      if (nextCatalog && nextCatalog.some((c) => !c.picked)) {
+        await addAllUnitMaterials(overlayUnitId);
+      }
+      if (comp.keywords.length > 0) {
+        const composeResult = await composeUnitPrepProblems(overlayUnitId);
+        if (composeResult.ok) setProblemCount(composeResult.composedCount);
+      } else {
+        setProblemCount(0);
+      }
+      const finalComp = await loadUnitComposition(overlayUnitId);
+      setComposition(finalComp);
+      setCatalog(finalComp.keywords.length > 0 ? await loadUnitMaterialCatalog(overlayUnitId) : null);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "저장하지 못했습니다.");
+    } finally {
+      setSaving(false);
+    }
+  }
+
   async function handleComposeProblems() {
     setComposingProblems(true);
     setError(null);
@@ -125,7 +160,12 @@ export default function UnitPrepPanel({
 
   return (
     <div className="max-w-[760px] mx-auto px-5 sm:px-8 py-7">
-      <button onClick={onBack} className="text-[13px] text-grey-500 font-semibold mb-4">
+      {/* 2026-09-21(UAT 지적) — 텍스트 링크처럼 보이는 "뒤로" 버튼이 눌리는지 알 수 없었다.
+          테두리·배경으로 버튼 어포던스를 주고, active:scale로 눌림 반응을 준다. */}
+      <button
+        onClick={onBack}
+        className="text-[13px] text-grey-600 font-semibold mb-4 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform"
+      >
         ← 커리큘럼으로
       </button>
 
@@ -164,7 +204,7 @@ export default function UnitPrepPanel({
                   <button
                     aria-label={`${k.label} 키워드 빼기`}
                     disabled={saving}
-                    onClick={() => void withComposition(() => removeUnitKeyword(overlayUnitId, k.id))}
+                    onClick={() => void handleKeywordChange(() => removeUnitKeyword(overlayUnitId, k.id))}
                     className="text-grey-500 font-bold px-1"
                   >
                     ×
@@ -193,15 +233,16 @@ export default function UnitPrepPanel({
                 onClick={() => {
                   const id = keywordToAdd;
                   setKeywordToAdd("");
-                  void withComposition(() => addUnitKeyword(overlayUnitId, id));
+                  void handleKeywordChange(() => addUnitKeyword(overlayUnitId, id));
                 }}
-                className="text-[12px] font-bold text-ink disabled:text-grey-300"
+                className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:bg-grey-200 disabled:text-grey-400 active:scale-95 transition-transform"
               >
-                키워드 붙이기
+                해당 키워드로 수업 주제 세팅하기
               </button>
               {composition.hasTemplateDefaults && (
                 <button
                   disabled={saving}
+                  title="관리자·선생님이 이 과목에 미리 정해둔 기본 키워드·교재 구성을 그대로 가져옵니다(이미 붙인 키워드는 건드리지 않고, 빠진 것만 채웁니다)."
                   onClick={() =>
                     void withComposition(async () => {
                       const result = await inheritUnitDefaults(overlayUnitId);
@@ -214,9 +255,9 @@ export default function UnitPrepPanel({
                       return { ok: true } as const;
                     })
                   }
-                  className="text-[12px] font-bold text-ink disabled:text-grey-300 ml-auto"
+                  className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:text-grey-300 ml-auto active:scale-95 transition-transform"
                 >
-                  기본 구성 보충하기
+                  기본 구성 가져오기(관리자가 미리 정한 키워드·교재)
                 </button>
               )}
             </div>

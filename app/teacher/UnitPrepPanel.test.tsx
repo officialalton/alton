@@ -92,12 +92,12 @@ describe("UnitPrepPanel — 목표·예약연결·개별 후보 선택 없이 �
     expect(screen.getByText("문제 20개 업데이트")).toBeDisabled();
   });
 
-  it("키워드 붙이기를 누르면 addUnitKeyword가 호출된다", async () => {
+  it("해당 키워드로 수업 주제 세팅하기를 누르면 addUnitKeyword가 호출된다", async () => {
     renderPanel();
     await waitFor(() => expect(screen.getByLabelText("키워드 추가")).toBeInTheDocument());
 
     fireEvent.change(screen.getByLabelText("키워드 추가"), { target: { value: "kw-1" } });
-    fireEvent.click(screen.getByText("키워드 붙이기"));
+    fireEvent.click(screen.getByText("해당 키워드로 수업 주제 세팅하기"));
     await waitFor(() => expect(addUnitKeyword).toHaveBeenCalledWith("unit-1", "kw-1"));
   });
 
@@ -249,14 +249,14 @@ describe("UnitPrepPanel — 기본 구성 보충", () => {
   it("템플릿에서 나온 회차에서만 기본 구성을 가져올 수 있다", async () => {
     renderPanel();
     await waitFor(() => expect(screen.getByLabelText("키워드 추가")).toBeInTheDocument());
-    expect(screen.queryByText("기본 구성 보충하기")).not.toBeInTheDocument();
+    expect(screen.queryByText("기본 구성 가져오기(관리자가 미리 정한 키워드·교재)")).not.toBeInTheDocument();
   });
 
   it("기본 구성을 가져오면 무엇이 몇 개 왔는지 알려준다", async () => {
     mockAll({ composition: { hasTemplateDefaults: true } });
     renderPanel();
-    await waitFor(() => expect(screen.getByText("기본 구성 보충하기")).toBeInTheDocument());
-    fireEvent.click(screen.getByText("기본 구성 보충하기"));
+    await waitFor(() => expect(screen.getByText("기본 구성 가져오기(관리자가 미리 정한 키워드·교재)")).toBeInTheDocument());
+    fireEvent.click(screen.getByText("기본 구성 가져오기(관리자가 미리 정한 키워드·교재)"));
     await waitFor(() => expect(screen.getByText(/키워드 2개, 교재 3개를 가져왔습니다/)).toBeInTheDocument());
   });
 });

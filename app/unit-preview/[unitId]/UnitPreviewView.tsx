@@ -43,7 +43,7 @@ export default function UnitPreviewView({
         <div className="max-w-[960px] mx-auto flex flex-wrap items-center justify-between gap-3">
           <button
             onClick={() => router.push(backHref)}
-            className="text-[13px] font-semibold text-grey-500"
+            className="text-[13px] font-semibold text-grey-600 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform"
           >
             ← 뒤로
           </button>

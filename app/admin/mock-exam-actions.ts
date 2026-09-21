@@ -16,6 +16,7 @@ import {
   type ExamSection,
   type FormatWeight,
 } from "@/lib/mock-exam/assemble";
+import { loadMockExamSetContentForStaff, type MockExamSetContentItem } from "@/lib/mock-exam/set-content";
 
 const RW_DOMAINS = ["rw_information_ideas", "rw_craft_structure", "rw_expression_ideas", "rw_standard_english"];
 const MATH_DOMAINS = ["algebra", "advanced_math", "problem_solving_data", "geometry_trig"];
@@ -43,14 +44,20 @@ export type MockExamSetSummary = {
   publishedAt: string | null;
 };
 
-export async function listMockExamSets(): Promise<MockExamSetSummary[]> {
+/** includeArchived=false(기본, "생성/검토/공개" 서브탭용)면 보관된 세트를 뺀다.
+ * "보관" 서브탭은 archivedOnly=true로 보관된 세트만 따로 본다. */
+export async function listMockExamSets(
+  opts: { includeArchived?: boolean; archivedOnly?: boolean } = {},
+): Promise<MockExamSetSummary[]> {
   await requireAdmin();
   const db = createAdminClient();
-  const { data: sets, error } = await db
+  let query = db
     .from("mock_exam_sets")
     .select("id, set_group_id, version_no, name, difficulty_tier, status, created_at, published_at")
-    .is("archived_at", null)
     .order("created_at", { ascending: false });
+  if (opts.archivedOnly) query = query.not("archived_at", "is", null);
+  else if (!opts.includeArchived) query = query.is("archived_at", null);
+  const { data: sets, error } = await query;
   if (error) throw new Error(error.message);
 
   const { data: itemCounts } = await db.from("mock_exam_set_items").select("exam_set_id, section");
@@ -303,4 +310,153 @@ export async function publishMockExamSet(examSetId: string): Promise<void> {
   if (publishErr) throw new Error(publishErr.message);
 
   revalidatePath("/admin");
+}
+
+/** 관리자 흐름 "보관" — 초안·공개 어느 상태든 더 이상 쓰지 않을 세트를 보관 처리한다.
+ * 공개본을 보관하면 그 계열(set_group_id)에는 더 이상 공개된 버전이 없어지지만, 이미
+ * 배정·응시된 attempts는 exam_set_id를 그대로 참조하므로 과거 응시 기록·결과는 안 깨진다
+ * (2026-09-17 사양 5절 스냅샷 원칙과 동일). */
+export async function archiveMockExamSetAction(examSetId: string): Promise<void> {
+  await requireAdmin();
+  const db = createAdminClient();
+  const { error } = await db
+    .from("mock_exam_sets")
+    .update({ status: "archived", archived_at: new Date().toISOString() })
+    .eq("id", examSetId);
+  if (error) throw new Error(error.message);
+  revalidatePath("/admin");
+}
+
+/** 관리자 흐름 "검토" — 조립된 세트의 실제 문항 내용(지문·질문·선택지·정답·해설·그림)을 본다
+ * (2026-09-21 UAT 지적: 기존 검토 화면은 영역·난이도 메타데이터뿐이었다). */
+export async function getMockExamSetContentAction(examSetId: string): Promise<MockExamSetContentItem[]> {
+  const { supabase } = await requireAdmin();
+  return loadMockExamSetContentForStaff(supabase, examSetId);
+}
+
+export type MockExamStudentOption = { id: string; name: string | null };
+
+/** 관리자 흐름 "배정" — 교사 담당 여부와 무관하게 어떤 학생에게도 배정할 수 있다(교사 배정
+ * 화면은 담당 학생으로 제한되지만, 관리자는 전체 학생을 대상으로 한다). */
+export async function listAllActiveStudentsForMockExamAction(): Promise<MockExamStudentOption[]> {
+  await requireAdmin();
+  const db = createAdminClient();
+  const { data: activeStudents, error: studentsErr } = await db.from("students").select("id").eq("status", "active");
+  if (studentsErr) throw new Error(studentsErr.message);
+  const activeIds = (activeStudents ?? []).map((s) => s.id);
+  if (activeIds.length === 0) return [];
+  const { data, error } = await db.from("profiles").select("id, name").in("id", activeIds).order("name");
+  if (error) throw new Error(error.message);
+  return (data ?? []).map((r) => ({ id: r.id, name: r.name }));
+}
+
+/** assignMockExamAction(lib/mock-exam/attempt-actions.ts)과 같은 배정 로직이지만, RLS의
+ * teaches_student() 제한을 받지 않도록 admin 클라이언트로 직접 쓴다(관리자는 담당 교사가
+ * 아니어도 배정할 수 있어야 한다). */
+export async function assignMockExamAsAdminAction(input: {
+  studentId: string;
+  examSetId: string;
+  dueAt?: string | null;
+}): Promise<{ ok: true } | { ok: false; error: string }> {
+  // mock_exam_attempts.assigned_by는 teachers(id) 참조라, 관리자 본인 id를 그대로 넣으면
+  // (관리자가 동시에 teachers 행을 갖고 있지 않은 한) FK 위반이 난다 — 관리자 배정은 null로 둔다.
+  await requireAdmin();
+  const db = createAdminClient();
+
+  const { data: setRow, error: setErr } = await db
+    .from("mock_exam_sets")
+    .select("set_group_id")
+    .eq("id", input.examSetId)
+    .maybeSingle();
+  if (setErr) return { ok: false, error: setErr.message };
+  if (!setRow) return { ok: false, error: "존재하지 않는 시험 세트입니다." };
+
+  const { data: existing, error: existingErr } = await db
+    .from("mock_exam_attempts")
+    .select("id, status")
+    .eq("student_id", input.studentId)
+    .eq("exam_set_group_id", setRow.set_group_id)
+    .maybeSingle();
+  if (existingErr) return { ok: false, error: existingErr.message };
+
+  if (existing) {
+    if (existing.status !== "assigned") {
+      return { ok: false, error: "이미 시작했거나 제출한 시험은 다시 배정할 수 없습니다." };
+    }
+    const { error } = await db
+      .from("mock_exam_attempts")
+      .update({ exam_set_id: input.examSetId, due_at: input.dueAt ?? null })
+      .eq("id", existing.id);
+    if (error) return { ok: false, error: error.message };
+    revalidatePath("/admin");
+    return { ok: true };
+  }
+
+  const { error } = await db.from("mock_exam_attempts").insert({
+    student_id: input.studentId,
+    exam_set_id: input.examSetId,
+    due_at: input.dueAt ?? null,
+  });
+  if (error) return { ok: false, error: error.message };
+  revalidatePath("/admin");
+  return { ok: true };
+}
+
+export type MockExamAttemptHistoryRow = {
+  attemptId: string;
+  studentId: string;
+  studentName: string | null;
+  examSetName: string;
+  status: string;
+  dueAt: string | null;
+  submittedAt: string | null;
+  gradedAt: string | null;
+  totalCount: number;
+  correctCount: number | null;
+};
+
+/** 관리자 흐름 "내역" — 전체 배정·응시 내역(누구에게 언제 배정했고, 얼마나 풀었는지)을 한 번에 본다. */
+export async function listAllMockExamAttemptsAction(): Promise<MockExamAttemptHistoryRow[]> {
+  await requireAdmin();
+  const db = createAdminClient();
+
+  const { data: attempts, error } = await db
+    .from("mock_exam_attempts")
+    .select("id, student_id, exam_set_id, status, due_at, submitted_at, graded_at")
+    .order("due_at", { ascending: false, nullsFirst: false });
+  if (error) throw new Error(error.message);
+  if (!attempts || attempts.length === 0) return [];
+
+  const studentIds = Array.from(new Set(attempts.map((a) => a.student_id)));
+  const examSetIds = Array.from(new Set(attempts.map((a) => a.exam_set_id)));
+  const [{ data: profiles }, { data: sets }, { data: itemCounts }, { data: answers }] = await Promise.all([
+    db.from("profiles").select("id, name").in("id", studentIds),
+    db.from("mock_exam_sets").select("id, name").in("id", examSetIds),
+    db.from("mock_exam_set_items").select("exam_set_id").in("exam_set_id", examSetIds),
+    db.from("mock_exam_answers").select("attempt_id, correct").in(
+      "attempt_id",
+      attempts.map((a) => a.id),
+    ),
+  ]);
+  const nameByStudent = new Map((profiles ?? []).map((p) => [p.id, p.name as string | null]));
+  const nameBySet = new Map((sets ?? []).map((s) => [s.id, s.name as string]));
+  const totalCountBySet = new Map<string, number>();
+  for (const row of itemCounts ?? []) totalCountBySet.set(row.exam_set_id, (totalCountBySet.get(row.exam_set_id) ?? 0) + 1);
+  const correctCountByAttempt = new Map<string, number>();
+  for (const row of answers ?? []) {
+    if (row.correct) correctCountByAttempt.set(row.attempt_id, (correctCountByAttempt.get(row.attempt_id) ?? 0) + 1);
+  }
+
+  return attempts.map((a) => ({
+    attemptId: a.id,
+    studentId: a.student_id,
+    studentName: nameByStudent.get(a.student_id) ?? null,
+    examSetName: nameBySet.get(a.exam_set_id) ?? "모의고사",
+    status: a.status,
+    dueAt: a.due_at,
+    submittedAt: a.submitted_at,
+    gradedAt: a.graded_at,
+    totalCount: totalCountBySet.get(a.exam_set_id) ?? 0,
+    correctCount: a.status === "graded" ? (correctCountByAttempt.get(a.id) ?? 0) : null,
+  }));
 }
