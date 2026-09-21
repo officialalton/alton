@@ -1,4 +1,5 @@
 import { notFound, redirect } from "next/navigation";
+import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
 import {
   loadComposition,
@@ -7,6 +8,17 @@ import {
   type PrepLayer,
 } from "@/lib/unit-composition";
 import CompositionPanel from "../../CompositionPanel";
+
+// 2026-09-21(UAT 지적) — 이 화면은 AdminShell/TeacherShell 밖의 독립 라우트라 왼쪽
+// 사이드바가 사라지고, 뒤로 갈 방법도 없었다. 사이드바까지 통째로 다시 넣는 건(이
+// 화면이 admin/teacher 양쪽에서 쓰이는 공용 화면이라 두 Shell의 상태·데이터 요구사항이
+// 다름) 이번 범위 밖이라 우선 명시적 뒤로가기 링크만 붙인다. student 레이어는 이미
+// SessionShell 탭 안에서만 쓰여(Shell 안, 이 라우트로 오지 않음) 대상이 아니다.
+const BACK_HREF: Record<PrepLayer, string> = {
+  catalog: "/admin?tab=catalog",
+  teacher: "/teacher?tab=curriculum",
+  student: "/teacher?tab=curriculum",
+};
 
 // 수업 준비 — 회차 기준으로 연다.
 //
@@ -123,15 +135,26 @@ export default async function LessonPrepPage({
   );
 
   return (
-    <CompositionPanel
-      composition={composition}
-      pickable={pickable}
-      problems={problems}
-      scopeNotice={
-        fromSessionId
-          ? "예약된 수업에서 들어왔습니다. 여기서 고치는 것이 그 수업의 준비안이며, 아래에서 수업을 시작할 때 지금 내용이 고정됩니다."
-          : null
-      }
-    />
+    <div>
+      <div className="max-w-[720px] mx-auto px-8 pt-6">
+        <Link
+          href={BACK_HREF[layer]}
+          className="inline-block text-[13px] text-grey-600 font-semibold border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform"
+        >
+          ← 뒤로
+        </Link>
+      </div>
+      <CompositionPanel
+        composition={composition}
+        pickable={pickable}
+        problems={problems}
+        scopeNotice={
+          fromSessionId
+            ? "예약된 수업에서 들어왔습니다. 여기서 고치는 것이 그 수업의 준비안이며, 아래에서 수업을 시작할 때 지금 내용이 고정됩니다."
+            : null
+        }
+      />
+    </div>
   );
 }
+

@@ -114,6 +114,39 @@ export default function CompositionPanel({
     ]);
   }
 
+  // 2026-09-21(UAT 지적) — "문제 한 번에 20개 담기게 하는 버튼 필요" — 후보 목록에서
+  // 하나씩 "담기"를 20번 누르는 대신, 지금 보이는 후보(세부 기술 필터 적용된 목록) 상위
+  // count개를 한 번에 담는다. 서버 액션은 addProblem 하나씩이라 문항마다 순차 호출하되,
+  // 화면 상태는 마지막에 한 번만 갱신한다(중간에 실패하면 그때까지 성공한 것만 반영).
+  async function takeProblems(problemIds: string[]) {
+    if (problemIds.length === 0) return;
+    setBusy(true);
+    setError(null);
+    const added: typeof composedProblems = [];
+    for (const problemId of problemIds) {
+      const result = await addProblem(layer, unitId, problemId);
+      if (!result.ok) {
+        setError(result.error);
+        break;
+      }
+      const picked = problems.find((p) => p.problemId === problemId);
+      added.push({
+        problemId,
+        label: picked?.label ?? "",
+        position: 0, // 아래에서 실제 누적 개수 기준으로 다시 매긴다.
+        difficulty: picked?.difficulty ?? null,
+        source: "manual" as const,
+        problemVersionId: "pending",
+      });
+    }
+    setBusy(false);
+    if (added.length === 0) return;
+    setComposedProblems((prev) => [
+      ...prev,
+      ...added.map((a, i) => ({ ...a, position: prev.length + i + 1 })),
+    ]);
+  }
+
   async function dropProblem(problemId: string) {
     setBusy(true);
     setError(null);
@@ -404,7 +437,19 @@ export default function CompositionPanel({
           </ul>
         )}
 
-        <h3 className="text-[12.5px] font-bold text-ink mt-5 mb-1">더 담기</h3>
+        <div className="mt-5 mb-1 flex items-center justify-between">
+          <h3 className="text-[12.5px] font-bold text-ink">더 담기</h3>
+          {pickableProblems.length > 0 && (
+            <button
+              type="button"
+              disabled={busy}
+              onClick={() => void takeProblems(pickableProblems.slice(0, 20).map((p) => p.problemId))}
+              className="text-[11.5px] font-bold px-2.5 py-1 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
+            >
+              {Math.min(20, pickableProblems.length)}개 한 번에 담기
+            </button>
+          )}
+        </div>
         {materialLines.length > 0 && (
           <ul className="text-[12px] text-grey-500 mb-2 list-disc pl-5" data-testid="material-status">
             {materialLines.map((l) => <li key={l}>{l}</li>)}

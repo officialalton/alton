@@ -169,6 +169,31 @@ describe("수업 준비 구성 패널", () => {
     expect(screen.getAllByText("담기").length).toBe(2);
   });
 
+  // 2026-09-21(UAT 지적) — "문제 한 번에 20개 담기게 하는 버튼 필요". 후보가 20개보다
+  // 적으면 실제 개수만큼만 담고 버튼 라벨도 그 개수를 보여준다.
+  it("한 번에 담기 버튼을 누르면 후보 문제를 전부(20개 이하면 그만큼만) 한 번에 담는다", async () => {
+    vi.mocked(actions.addProblem).mockResolvedValue({ ok: true, value: undefined as never });
+    render(
+      <CompositionPanel
+        composition={makeComposition()}
+        pickable={[]}
+        problems={[
+          { problemId: "p1", label: "문제 1", difficulty: "medium", format: "mcq" },
+          { problemId: "p2", label: "문제 2", difficulty: null, format: "mcq" },
+        ]}
+      />
+    );
+
+    const bulkButton = screen.getByText("2개 한 번에 담기");
+    fireEvent.click(bulkButton);
+
+    await waitFor(() => expect(actions.addProblem).toHaveBeenCalledTimes(2));
+    expect(actions.addProblem).toHaveBeenNthCalledWith(1, "teacher", "u1", "p1");
+    expect(actions.addProblem).toHaveBeenNthCalledWith(2, "teacher", "u1", "p2");
+    // 담긴 뒤에는 후보(더 담기) 목록에서 빠지고 "문제" 구성 목록 쪽으로만 남는다.
+    await waitFor(() => expect(screen.getByText("더 담을 문제가 없습니다.")).toBeInTheDocument());
+  });
+
   // 2026-09-14 UAT: "문제를 클릭하면 문제를 볼 수 있어야 될 거 같아 간략하게라도"
   it("문제를 누르면 지문·선택지 미리보기가 펼쳐지고, 다시 누르면 접힌다", () => {
     render(
