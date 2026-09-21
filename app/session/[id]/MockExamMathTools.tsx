@@ -76,7 +76,7 @@ export function evalBasicExpression(expr: string): string {
 
 /** 실제 디지털 SAT과 같은 엔진(Desmos)을 쓰는 그래프 계산기. 마운트마다 인스턴스 하나만 만들고,
  * 언마운트 시 반드시 destroy 해 패널을 반복해서 열고 닫아도 인스턴스가 누적되지 않게 한다. */
-export function GraphingCalculator() {
+export function GraphingCalculator({ heightClassName = "h-[360px]" }: { heightClassName?: string } = {}) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const calculatorRef = useRef<{ destroy: () => void } | null>(null);
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
@@ -107,17 +107,13 @@ export function GraphingCalculator() {
   }, []);
 
   return (
-    <div className="rounded-lg border border-grey-200 bg-white p-2 w-full max-w-[420px]" data-testid="mock-exam-calculator">
+    <div className="rounded-lg border border-grey-200 bg-white p-2 w-full" data-testid="mock-exam-calculator">
       {status === "error" ? (
         <div className="p-3 text-center text-[13px] text-red" data-testid="calculator-error">
           그래프 계산기를 불러오지 못했습니다. 인터넷 연결을 확인해 주세요.
         </div>
       ) : (
-        <div
-          ref={containerRef}
-          data-testid="desmos-calculator-container"
-          className="h-[360px] w-full"
-        />
+        <div ref={containerRef} data-testid="desmos-calculator-container" className={`w-full ${heightClassName}`} />
       )}
     </div>
   );
@@ -234,11 +230,16 @@ export default function MockExamMathTools({
   referenceSheetAllowed,
   open,
   onClose,
+  docked = false,
 }: {
   calculatorAllowed: boolean;
   referenceSheetAllowed: boolean;
   open: MathToolsOpen;
   onClose: () => void;
+  /** 2026-09-21(UAT 지적) — "계산기가 문제 바로 오른쪽에, 더 넓게" — 모의고사 응시 화면처럼
+   * flex 레이아웃 안에서 실제 옆자리를 차지하는 일반 흐름 패널로 붙일 때 true. 기본값(false)은
+   * 기존처럼 부모 레이아웃과 무관하게 화면 위에 뜨는 플로팅 패널(과제·문제 탭에서 계속 사용). */
+  docked?: boolean;
 }) {
   const [calcMounted, setCalcMounted] = useState(false);
   useEffect(() => {
@@ -251,20 +252,26 @@ export default function MockExamMathTools({
     <>
       {calculatorAllowed && calcMounted && (
         <div
-          className={`fixed bottom-4 right-4 z-40 w-[calc(100vw-2rem)] max-w-[380px] ${open === "calculator" ? "block" : "hidden"}`}
+          className={
+            docked
+              ? `w-full lg:w-[520px] lg:flex-shrink-0 ${open === "calculator" ? "block" : "hidden"}`
+              : `fixed bottom-4 right-4 z-40 w-[calc(100vw-2rem)] max-w-[380px] ${open === "calculator" ? "block" : "hidden"}`
+          }
           data-testid="mock-exam-calculator-panel"
         >
           <div className="relative">
-            <button
-              type="button"
-              onClick={onClose}
-              className="absolute -top-2 -right-2 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-ink text-[12px] font-bold text-white shadow"
-              data-testid="close-calculator"
-              aria-label="계산기 닫기"
-            >
-              ×
-            </button>
-            <GraphingCalculator />
+            {!docked && (
+              <button
+                type="button"
+                onClick={onClose}
+                className="absolute -top-2 -right-2 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-ink text-[12px] font-bold text-white shadow"
+                data-testid="close-calculator"
+                aria-label="계산기 닫기"
+              >
+                ×
+              </button>
+            )}
+            <GraphingCalculator heightClassName={docked ? "h-[75vh] min-h-[520px]" : "h-[360px]"} />
           </div>
         </div>
       )}

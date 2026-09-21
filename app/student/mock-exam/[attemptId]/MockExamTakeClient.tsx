@@ -162,6 +162,42 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
 
   return (
     <div className="flex flex-col gap-4 lg:flex-row">
+      {/* 2026-09-21(UAT 지적) — 문항 번호가 하단 가로 점 목록이 아니라 과제 화면처럼 왼쪽에
+          세로로 늘어서야 한다. */}
+      <nav
+        aria-label="문항 이동"
+        className="flex gap-1 overflow-x-auto lg:w-[72px] lg:flex-shrink-0 lg:flex-col lg:flex-nowrap lg:gap-1.5 lg:overflow-y-auto lg:max-h-[70vh]"
+      >
+        {sectionItems.map((it, i) => {
+          const isAnswered = (responses[it.setItemId] ?? "").trim() !== "";
+          const isFlagged = flags[it.setItemId];
+          return (
+            <button
+              key={it.setItemId}
+              type="button"
+              onClick={() => setIndex(i)}
+              aria-current={i === index}
+              title={`${i + 1}번${isAnswered ? " · 응답 완료" : " · 미응답"}${isFlagged ? " · 다시 보기 표시" : ""}`}
+              className={`relative flex h-9 w-9 shrink-0 items-center justify-center rounded text-[12px] font-bold lg:w-full ${
+                i === index ? "bg-ink text-white" : isAnswered ? "bg-green/20 text-ink" : "bg-grey-100 text-grey-500"
+              }`}
+            >
+              {i + 1}
+              {isFlagged && (
+                <span className="absolute -right-1 -top-1 text-[9px] leading-none text-yellow-600" aria-hidden="true">
+                  ★
+                </span>
+              )}
+              {isAnswered && i !== index && (
+                <span className="absolute -bottom-0.5 -right-0.5 text-[8px] leading-none text-green" aria-hidden="true">
+                  ✓
+                </span>
+              )}
+            </button>
+          );
+        })}
+      </nav>
+
       <div className="min-w-0 flex-1">
         <div className="mb-3 flex flex-wrap items-center justify-between gap-2 rounded-lg border border-grey-200 bg-white px-4 py-3">
           <div className="flex gap-2">
@@ -288,36 +324,6 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
           >
             이전 문항
           </button>
-          <div className="flex flex-wrap gap-1" role="tablist" aria-label="문항 이동">
-            {sectionItems.map((it, i) => {
-              const isAnswered = (responses[it.setItemId] ?? "").trim() !== "";
-              const isFlagged = flags[it.setItemId];
-              return (
-                <button
-                  key={it.setItemId}
-                  type="button"
-                  onClick={() => setIndex(i)}
-                  aria-current={i === index}
-                  title={`${i + 1}번${isAnswered ? " · 응답 완료" : " · 미응답"}${isFlagged ? " · 다시 보기 표시" : ""}`}
-                  className={`relative flex h-7 w-7 items-center justify-center rounded text-[11px] font-bold ${
-                    i === index ? "bg-ink text-white" : isAnswered ? "bg-green/20 text-ink" : "bg-grey-100 text-grey-500"
-                  }`}
-                >
-                  {i + 1}
-                  {isFlagged && (
-                    <span className="absolute -right-1 -top-1 text-[9px] leading-none text-yellow-600" aria-hidden="true">
-                      ★
-                    </span>
-                  )}
-                  {isAnswered && i !== index && (
-                    <span className="absolute -bottom-0.5 -right-0.5 text-[8px] leading-none text-green" aria-hidden="true">
-                      ✓
-                    </span>
-                  )}
-                </button>
-              );
-            })}
-          </div>
           {index < sectionItems.length - 1 ? (
             <button
               type="button"
@@ -359,6 +365,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
         referenceSheetAllowed={attempt.mathReferenceSheetAllowed}
         open={mathToolsOpen}
         onClose={() => setMathToolsOpen(null)}
+        docked
       />
 
       {showReview && (

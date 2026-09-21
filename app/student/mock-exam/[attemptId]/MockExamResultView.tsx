@@ -90,7 +90,7 @@ export default function MockExamResultView({ attempt, readOnly }: { attempt: Moc
   const selected = selectedId ? (itemsById.get(selectedId) ?? null) : null;
 
   return (
-    <div className={report.missedItems.length > 0 ? "md:grid md:grid-cols-[minmax(0,1fr)_420px] md:items-start md:gap-4" : ""}>
+    <div className={attempt.items.length > 0 ? "md:grid md:grid-cols-[minmax(0,1fr)_420px] md:items-start md:gap-4" : ""}>
     <div className="flex flex-col gap-4">
       <div className="rounded-lg border border-grey-200 bg-white p-5 text-center">
         <p className="text-[12px] font-bold uppercase tracking-wide text-grey-500">전체 정답률</p>
@@ -148,35 +148,46 @@ export default function MockExamResultView({ attempt, readOnly }: { attempt: Moc
         </div>
       )}
 
-      {report.missedItems.length > 0 && (
+      {/* 2026-09-21(UAT 지적) — "봤던 모의고사도 다시 볼 수 있게" — 오답만이 아니라 전체
+          문항을 다시 열어볼 수 있어야 한다. 정오 표시는 색상과 별개로 텍스트로도 구분한다. */}
+      {attempt.items.length > 0 && (
         <div className="rounded-lg border border-grey-200 bg-white p-4">
-          <h3 className="mb-2 text-[13px] font-bold">오답 문항</h3>
+          <h3 className="mb-2 text-[13px] font-bold">전체 문항 다시 보기</h3>
           <ul className="flex flex-col gap-1.5">
-            {report.missedItems.map((m) => (
-              <li key={m.setItemId}>
+            {attempt.items.map((it) => (
+              <li key={it.setItemId}>
                 <button
                   type="button"
-                  onClick={() => setSelectedId(m.setItemId)}
-                  className={`w-full rounded-lg px-2 py-1.5 text-left text-[12.5px] ${
-                    selectedId === m.setItemId ? "bg-ink text-white" : "text-grey-600 hover:bg-grey-100"
+                  onClick={() => setSelectedId(it.setItemId)}
+                  className={`flex w-full items-center justify-between gap-2 rounded-lg px-2 py-1.5 text-left text-[12.5px] ${
+                    selectedId === it.setItemId ? "bg-ink text-white" : "text-grey-600 hover:bg-grey-100"
                   }`}
-                  data-testid={`missed-item-${m.setItemId}`}
+                  data-testid={`review-item-${it.setItemId}`}
                 >
-                  {SECTION_LABEL[m.section]} {m.position}번 · {m.satDomain}
-                  {m.skillCode ? ` · ${m.skillCode}` : ""}
+                  <span>
+                    {SECTION_LABEL[it.section]} {it.position}번 · {it.satDomain}
+                    {it.skillCode ? ` · ${it.skillCode}` : ""}
+                  </span>
+                  {it.correct !== null && (
+                    <span className={`shrink-0 text-[11px] font-bold ${selectedId === it.setItemId ? "" : it.correct ? "text-green" : "text-red"}`}>
+                      {it.correct ? "정답" : "오답"}
+                    </span>
+                  )}
                 </button>
               </li>
             ))}
           </ul>
-          {!readOnly && <p className="mt-2 text-[11.5px] text-grey-400">오답 복습·보충 과제는 담당 선생님이 발급합니다(사양 7절 — 자동 발급하지 않음).</p>}
+          {!readOnly && report.missedItems.length > 0 && (
+            <p className="mt-2 text-[11.5px] text-grey-400">오답 복습·보충 과제는 담당 선생님이 발급합니다(사양 7절 — 자동 발급하지 않음).</p>
+          )}
         </div>
       )}
     </div>
-    {report.missedItems.length > 0 && (
+    {attempt.items.length > 0 && (
       <div className="mt-4 md:sticky md:top-4 md:mt-0">
         {selected ? <ItemDetail item={selected} /> : (
           <div className="rounded-lg border border-dashed border-grey-300 p-6 text-center text-[12.5px] text-grey-400">
-            왼쪽 오답 문항을 누르면 여기에 문제·내 답·정답·해설이 표시됩니다.
+            왼쪽에서 문항을 누르면 여기에 문제·내 답·정답·해설이 표시됩니다.
           </div>
         )}
       </div>
