@@ -78,8 +78,12 @@ export default function TeacherReviewPanel({
 
   return (
     <div className="max-w-[640px] px-8 py-8">
+      {/* 2026-09-21(전수 점검 지적) — router.back()은 브라우저 히스토리에 의존해, 새로고침이나
+          딥링크(URL 직접 접속)로 들어오면 히스토리가 없어 엉뚱한 곳(또는 아예 안 움직임)으로
+          갈 수 있었다. 이 화면의 유일한 진입점(app/teacher/ScheduleTab.tsx)이 TeacherShell의
+          "Schedule" 탭이므로, 항상 그 탭으로 돌아가는 명시적 목적지를 쓴다. */}
       <button
-        onClick={() => router.back()}
+        onClick={() => router.push("/teacher?tab=lesson-schedule")}
         className="text-[13px] text-grey-500 font-semibold mb-4"
       >
         ← 뒤로

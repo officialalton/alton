@@ -10,6 +10,7 @@ import { useState } from "react";
 import {
   listRegularConversionCandidatesAction,
   sendRegularContractOneClickAction,
+  manuallyCompleteContractAction,
   type RegularConversionCandidate,
 } from "./trial-onboarding-actions";
 import { createNewContractVersionForResend } from "./consultation-actions";
@@ -103,6 +104,10 @@ function RegularContractRow({
   const [busy, setBusy] = useState(false);
   const [resending, setResending] = useState(false);
   const [resendError, setResendError] = useState<string | null>(null);
+  const [confirmingManual, setConfirmingManual] = useState(false);
+  const [manualBusy, setManualBusy] = useState(false);
+  const [manualError, setManualError] = useState<string | null>(null);
+  const [manualDone, setManualDone] = useState(false);
   const [result, setResult] = useState<
     { status: "sent" | "already_sent"; envelopeId: string; at: string } | { status: "failed"; error: string } | null
   >(null);
@@ -138,17 +143,23 @@ function RegularContractRow({
           <div className="mt-1 font-mono text-[11px] break-all">{result.error}</div>
         </div>
       )}
-      {isSent && (
+      {isSent && !manualDone && (
         <div className="text-[12px] text-ink mt-2 bg-grey-100 rounded-lg px-3 py-2">
           {result?.status === "sent"
             ? `발송 완료 — 수신자 ${item.guardianEmail} · 발송 시각 ${new Date(result.at).toLocaleString("ko-KR")} · 상태: 서명 대기`
             : `이미 발송됨 — 수신자 ${item.guardianEmail} · 상태: 서명 대기`}
         </div>
       )}
+      {manualDone && (
+        <div className="text-[12px] text-ink mt-2 bg-green/10 rounded-lg px-3 py-2">
+          관리자가 수동으로 완료 처리했습니다 — 실제 DocuSign 서명이 아닙니다.
+        </div>
+      )}
       {resendError && <div className="text-[12px] text-red mt-2">{resendError}</div>}
+      {manualError && <div className="text-[12px] text-red mt-2">{manualError}</div>}
 
-      {!confirming ? (
-        <div className="flex gap-2 mt-2.5">
+      {!confirming && !confirmingManual ? (
+        <div className="flex flex-wrap gap-2 mt-2.5">
           <button
             disabled={!canSend || isSent}
             onClick={() => setConfirming(true)}
@@ -156,7 +167,7 @@ function RegularContractRow({
           >
             {result?.status === "failed" ? "다시 시도" : isSent ? "발송 완료" : "회사 승인 및 계약 발송"}
           </button>
-          {isSent && (
+          {isSent && !manualDone && (
             <button
               disabled={resending}
               aria-busy={resending}
@@ -178,6 +189,59 @@ function RegularContractRow({
               {resending ? "새 버전 만드는 중..." : "재발송(새 버전)"}
             </button>
           )}
+          {/* 2026-09-21(제품 오너 지시) — 일부 테스트 계정(+alton 서브어드레싱 등)에는 메일이
+              전달되지 않아 보호자가 서명 링크를 아예 못 받는다. 실제 서명이 아니라 "메일 문제로
+              막힌 테스트 계정을 다음 단계로 넘기는" 관리자 수동 우회이므로, 발송된(isSent) 계약에만
+              노출하고 확인 문구로 실제 서명이 아님을 명확히 한다. */}
+          {isSent && !manualDone && (
+            <button
+              disabled={resending}
+              onClick={() => setConfirmingManual(true)}
+              className="text-[12px] font-semibold px-3 py-1.5 rounded-lg border-[1.5px] border-red/30 text-red disabled:opacity-50"
+            >
+              메일 미수신 — 수동으로 완료 처리
+            </button>
+          )}
+        </div>
+      ) : confirmingManual ? (
+        <div className="mt-2.5 bg-red/5 rounded-lg px-3.5 py-3 border-[1.5px] border-red/20">
+          <p className="text-[12px] text-ink mb-2">
+            <b>실제 DocuSign 서명이 아닙니다.</b> 메일 전달 문제로 보호자가 서명 링크를 받지 못한
+            테스트 계정을 다음 단계(수강 활성화)로 넘기기 위한 관리자 수동 처리입니다. 실제 계약
+            체결이 필요한 계정에는 사용하지 마세요.
+          </p>
+          <div className="flex gap-2">
+            <button
+              disabled={manualBusy}
+              aria-busy={manualBusy}
+              onClick={async () => {
+                setManualBusy(true);
+                setManualError(null);
+                try {
+                  const outcome = await manuallyCompleteContractAction(item.contractId);
+                  if (!outcome.ok) {
+                    setManualError(outcome.error);
+                  } else {
+                    setManualDone(true);
+                    onSent();
+                  }
+                } finally {
+                  setManualBusy(false);
+                  setConfirmingManual(false);
+                }
+              }}
+              className="text-[12px] font-bold px-3.5 py-1.5 rounded-lg bg-red text-white disabled:opacity-50"
+            >
+              {manualBusy ? "처리 중..." : "확인 — 수동 완료 처리"}
+            </button>
+            <button
+              disabled={manualBusy}
+              onClick={() => setConfirmingManual(false)}
+              className="text-[12px] font-semibold px-3.5 py-1.5 rounded-lg text-grey-500"
+            >
+              취소
+            </button>
+          </div>
         </div>
       ) : (
         <div className="mt-2.5 bg-grey-50 rounded-lg px-3.5 py-3">

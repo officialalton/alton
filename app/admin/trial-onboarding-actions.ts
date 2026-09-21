@@ -8,7 +8,7 @@
 // 로컬 검증(링크를 수동으로 열어보는 것)만 가능하게 한다.
 
 import { createHash } from "node:crypto";
-import { requireAdminOrCapability } from "@/lib/admin-auth";
+import { requireAdmin, requireAdminOrCapability } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { confirmStudentTeacherSubjectMatch } from "./matching-common-actions";
 import { sendEmail, escapeHtml } from "@/lib/email";
@@ -16,6 +16,8 @@ import { currentRequestOrigin } from "@/lib/request-origin";
 import { sendRegularContractForSubjectEnrollment, type SendRegularContractResult } from "@/lib/regular-contract-send";
 import { loadTrialPipelinesBatch } from "./trial-pipeline-data";
 import { findExistingAuthEmailCollisions, type OnboardingEmailCollision } from "@/lib/onboarding-email-guard";
+import { autoActivateReadySubjectEnrollments } from "@/lib/enrollment/auto-activate";
+import { autoCloseConsultationOnContractSigned } from "@/lib/enrollment/auto-close-consultation";
 
 // 기존 상담 관리 액션(app/admin/consultation-actions.ts)과 동일한 capability를
 // 재사용한다 — 새 권한 이름을 따로 만들지 않는다.
@@ -964,4 +966,49 @@ export async function retryFailedTrialOnboardingStudentAction(
   }
 
   return { status: "created", childId: childAuthUserId };
+}
+
+// 2026-09-21(제품 오너 지시) — 일부 테스트 계정 이메일(예: +alton 서브어드레싱)에는
+// 메일 서버가 DocuSign 발송분을 전달하지 못해, 보호자가 실제로 서명 링크를 받지 못하는
+// 경우가 있다. 이건 서명 자체를 관리자가 대신한다는 뜻이 아니라 — 실제 서명은 이미
+// DocuSign 쪽에서 유효하게 존재할 수도, 못 받아서 아예 불가능할 수도 있다 — "메일이 안
+// 와서 다음 단계로 못 넘어가는" 테스트 계정을 막힌 채로 두지 않기 위한 수동 우회다.
+// app/api/webhooks/docusign/route.ts 의 envelope-completed 처리와 정확히 같은 부수효과
+// (계약 active 전환 → 수강 자동 활성화 → 상담 자동 종료)만 수행하고, 실제 DocuSign
+// envelope 상태는 건드리지 않는다(나중에 진짜 완료 웹훅이 뒤늦게 와도 그대로 처리된다 —
+// contracts.status 갱신은 멱등하다). 반드시 admin 본인만 호출 가능하고, 구조화 로그로
+// "누가 언제 어떤 계약을 수동 완료 처리했는지" 남긴다(전용 감사 테이블은 아직 없음).
+export async function manuallyCompleteContractAction(
+  contractId: string
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  const { adminUserId } = await requireAdmin();
+  const admin = createAdminClient();
+
+  const { data: contract, error: contractErr } = await admin
+    .from("contracts")
+    .select("id, status")
+    .eq("id", contractId)
+    .maybeSingle();
+  if (contractErr) return { ok: false, error: contractErr.message };
+  if (!contract) return { ok: false, error: "존재하지 않는 계약입니다." };
+  if (contract.status === "active") return { ok: false, error: "이미 완료 처리된 계약입니다." };
+  if (contract.status === "void") return { ok: false, error: "이미 무효화된 계약은 수동 완료할 수 없습니다." };
+
+  const { error: activateError } = await admin.from("contracts").update({ status: "active" }).eq("id", contractId);
+  if (activateError) return { ok: false, error: activateError.message };
+
+  await autoActivateReadySubjectEnrollments(admin, contractId);
+  await autoCloseConsultationOnContractSigned(admin, contractId);
+
+  console.info(
+    JSON.stringify({
+      type: "contract_manually_completed_by_admin",
+      contractId,
+      adminUserId,
+      reason: "docusign_email_delivery_broken_for_test_account",
+      at: new Date().toISOString(),
+    })
+  );
+
+  return { ok: true };
 }
