@@ -35,6 +35,11 @@ import {
 // `loadNormalizedSession`이 legacy_sessions(R6 이전 레거시 세션뷰 테스트 데이터)와
 // v3 sessions/reservations(R6~R7 실제 예약)를 둘 다 판별해 같은 모양으로 정규화한다
 // — 자세한 배경은 docs/2026-09-07-r8-session-cutover-oneP-pager.md 참고.
+//
+// 2026-09-21(UAT "수업 준비 로딩이 엄청 느림") — 예전엔 아래 로더 20개가 전부 `await` 로 한 줄씩
+// 직렬 실행돼 첫 진입이 그 합만큼 느렸다. 서로 의존하지 않는 로더는 Promise.all 로 묶고, 의존
+// 관계가 있는 것(교재 → 필기 레이어, 단원 → 준비 구성, 고정 문제 → 예정 문제 폴백)만 두 번째
+// 단계로 미룬다. 반환 데이터·SessionShell 인터페이스는 그대로다.
 
 export default async function SessionPage({
   params,
@@ -43,9 +48,7 @@ export default async function SessionPage({
   params: Promise<{ id: string }>;
   searchParams: Promise<{ tab?: string }>;
 }) {
-  const { id } = await params;
-  const { tab } = await searchParams;
-  const { user, profile, supabase } = await requireUser();
+  const [{ id }, { tab }, { user, profile, supabase }] = await Promise.all([params, searchParams, requireUser()]);
 
   const session = await loadNormalizedSession(
     supabase,
@@ -70,94 +73,68 @@ export default async function SessionPage({
   // 쓰지 않은 내용을 그 수업의 내용처럼 보여주게 된다. 회차 구성은 그 뒤로도 계속
   // 바뀌므로 과거 수업을 열 때마다 다른 것이 보이게 된다.
   const showPlannedInstead = shouldFallBackToPlannedMaterial(session.source, initialState);
-  const material =
-    (session.source === "v3" ? await loadPinnedMaterialData(supabase, session.id) : null) ??
+  const isV3 = session.source === "v3";
+  const canPrepare = session.viewerRole === "teacher" || session.viewerRole === "admin";
+  const canSeeAnswers = profile?.role === "teacher" || profile?.role === "admin";
+
+  const loadMaterial = async () =>
+    (isV3 ? await loadPinnedMaterialData(supabase, session.id) : null) ??
     (showPlannedInstead ? await loadPlannedMaterialData(supabase, session.id) : null) ??
     (await loadMaterialData(supabase, session.curriculumDocId, session.id, session.studentId));
 
-  // 고정 자료가 없을 때 "없었다"고 단정하지 않는다. 문제만 고정된 수업과 고정
-  // 기록 자체가 없는 수업은 다르고, 앞엣것은 오류가 아니다.
-  const materialNotice =
-    session.source === "v3"
-      ? frozenMaterialNotice(initialState, await loadSessionFreezeState(supabase, session.id))
-      : null;
+  // 1단계 — 서로 독립인 로더를 한 번에.
+  const [material, freezeState, sessionVocab, homeworkItems, lessonContext, pinnedProblems, homeworkBatches, smartNotesUrl] =
+    await Promise.all([
+      loadMaterial(),
+      // 고정 자료가 없을 때 "없었다"고 단정하지 않는다. 문제만 고정된 수업과 고정
+      // 기록 자체가 없는 수업은 다르고, 앞엣것은 오류가 아니다.
+      isV3 ? loadSessionFreezeState(supabase, session.id) : Promise.resolve(null),
+      loadSessionVocabData(supabase, session.studentId),
+      loadHomeworkItems(supabase, session.id),
+      // R9(레슨 준비 Task 4) — v3 세션에서만 과제 구성 UI가 필요한 키워드 후보를
+      // 미리 불러온다(legacy 세션엔 session_content_manifest가 없으므로 항상 빈 배열).
+      isV3
+        ? loadSessionLessonContext(supabase, session.id)
+        : Promise.resolve({ unitTitle: null, goal: null, supplementTitles: [], primaryUnitId: null }),
+      // P3 4단계 — 수업 시작 시 고정된 문제들. 정답·해설은 볼 자격이 있을 때만
+      // 채워진다(학생은 자기 풀이 제출 뒤, 보호자는 자녀에게 열리는 시점과 동일).
+      isV3 ? loadSessionProblems(supabase, session.id, { canSeeAnswers, studentId: session.studentId }) : Promise.resolve([]),
+      // 2026-09-16(제품 오너 2차 정정) — 과제는 수업(세션)과 무관하다. 세션뷰의 과제 탭은 이 학생의
+      // 과제 배치 전체(어느 교사가 냈든, 이 교사가 낸 것만 — RLS/로더가 각 역할에 맞게 가른다)를 그대로 보여준다.
+      profile?.role === "teacher"
+        ? loadTeacherHomeworkBatchesForStudent(supabase, user.id, session.studentId)
+        : loadStudentHomeworkBatches(supabase, session.studentId),
+      // 2026-09-16(제품 오너 정정) — 정규 수업(v3)에 한해 학생·보호자에게 Smart Notes 회의록
+      // 열람 링크를 보여준다(첫 상담은 대상 아님, RLS가 v3 sessions에 한정해 접근을 걸러준다).
+      isV3 ? loadSmartNotesViewUrl(supabase, session.id) : Promise.resolve(null),
+    ]);
 
-  const sessionVocab = await loadSessionVocabData(supabase, session.studentId);
-  const homeworkItems = await loadHomeworkItems(supabase, session.id);
+  const materialNotice = isV3 && freezeState ? frozenMaterialNotice(initialState, freezeState) : null;
 
-  // R9(레슨 준비 Task 4) — v3 세션에서만 과제 구성 UI가 필요한 키워드 후보를
-  // 미리 불러온다(legacy 세션엔 session_content_manifest가 없으므로 항상 빈
-  // 배열).
-  const lessonContext =
-    session.source === "v3"
-      ? await loadSessionLessonContext(supabase, session.id)
-      : { unitTitle: null, goal: null, supplementTitles: [], primaryUnitId: null };
-
-  // 4절 — 준비를 수업 화면 안에서 한다. 별도 준비 화면과 같은 구성 패널을 쓰므로
-  // 준비 데이터를 두 곳에서 관리하지 않는다. 학생·학부모에게는 실어 보내지 않는다(7절).
-  const canPrepare = session.viewerRole === "teacher" || session.viewerRole === "admin";
-  const prepComposition =
-    canPrepare && lessonContext.primaryUnitId
-      ? await loadComposition(supabase, "student", lessonContext.primaryUnitId)
-      : null;
-  const prep = prepComposition
-    ? {
-        composition: prepComposition,
-        pickable: await loadPickableMaterials(
-          supabase,
-          prepComposition.subjectId,
-          prepComposition.materials.map((m) => m.curriculumDocId)
-        ),
-        problems: await loadKeywordProblems(
-          supabase,
-          prepComposition.keywords.map((k) => k.id)
-        ),
-      }
-    : null;
-
-  // P3 4단계 — 수업 시작 시 고정된 문제들. 정답·해설은 볼 자격이 있을 때만
-  // 채워진다(학생은 자기 풀이 제출 뒤, 보호자는 자녀에게 열리는 시점과 동일).
-  const pinnedProblems =
-    session.source === "v3"
-      ? await loadSessionProblems(supabase, session.id, {
-          canSeeAnswers: profile?.role === "teacher" || profile?.role === "admin",
-          studentId: session.studentId,
-        })
-      : [];
-  // 시작 전 수업에 고정된 문제가 없으면 **예정** 문제를 보여준다 — 교재와 같은 규칙
-  // (shouldFallBackToPlannedMaterial). 시작·완료된 수업에는 끼워 넣지 않는다.
-  const sessionProblems =
-    pinnedProblems.length === 0 && showPlannedInstead
-      ? await loadPlannedProblems(supabase, session.id)
-      : pinnedProblems;
-
-  // P3 7단계 — 교재 위 두 레이어를 각각 따로 재구성한다. 화면에서 각자
-  // 켜고 끌 수 있어야 하므로 섞어서 내려보내지 않는다.
-  const teacherMaterialStrokes =
-    session.source === "v3" && material?.docId
-      ? await loadTeacherMaterialStrokes(session.id, material.docId)
-      : [];
-  const studentMaterialStrokes =
-    session.source === "v3" && material?.docId
-      ? await loadStudentMaterialStrokes(session.id, material.docId)
-      : [];
-
-  // 정책 변경 전에 본인이 남긴 비공개 필기(보존 기록). 쓴 본인에게만 내려온다.
-  const legacyPrivateMaterialStrokes =
-    profile?.role === "student" && material?.docId
-      ? await loadMyLegacyPrivateMaterialStrokes(session.id, material.docId)
-      : [];
-
-  // 2026-09-16(제품 오너 2차 정정) — 과제는 수업(세션)과 무관하다. 세션뷰의 과제 탭은 이 학생의
-  // 과제 배치 전체(어느 교사가 냈든, 이 교사가 낸 것만 — RLS/로더가 각 역할에 맞게 가른다)를 그대로 보여준다.
-  const homeworkBatches =
-    profile?.role === "teacher"
-      ? await loadTeacherHomeworkBatchesForStudent(supabase, user.id, session.studentId)
-      : await loadStudentHomeworkBatches(supabase, session.studentId);
-
-  // 2026-09-16(제품 오너 정정) — 정규 수업(v3)에 한해 학생·보호자에게 Smart Notes 회의록
-  // 열람 링크를 보여준다(첫 상담은 대상 아님, RLS가 v3 sessions에 한정해 접근을 걸러준다).
-  const smartNotesUrl = session.source === "v3" ? await loadSmartNotesViewUrl(supabase, session.id) : null;
+  // 2단계 — 1단계 결과에 의존하는 로더들도 서로는 독립이라 한 번에.
+  const [prep, sessionProblems, teacherMaterialStrokes, studentMaterialStrokes, legacyPrivateMaterialStrokes] = await Promise.all([
+    // 4절 — 준비를 수업 화면 안에서 한다. 별도 준비 화면과 같은 구성 패널을 쓰므로
+    // 준비 데이터를 두 곳에서 관리하지 않는다. 학생·학부모에게는 실어 보내지 않는다(7절).
+    (async () => {
+      if (!canPrepare || !lessonContext.primaryUnitId) return null;
+      const composition = await loadComposition(supabase, "student", lessonContext.primaryUnitId);
+      if (!composition) return null;
+      const [pickable, problems] = await Promise.all([
+        loadPickableMaterials(supabase, composition.subjectId, composition.materials.map((m) => m.curriculumDocId)),
+        loadKeywordProblems(supabase, composition.keywords.map((k) => k.id)),
+      ]);
+      return { composition, pickable, problems };
+    })(),
+    // 시작 전 수업에 고정된 문제가 없으면 **예정** 문제를 보여준다 — 교재와 같은 규칙
+    // (shouldFallBackToPlannedMaterial). 시작·완료된 수업에는 끼워 넣지 않는다.
+    pinnedProblems.length === 0 && showPlannedInstead ? loadPlannedProblems(supabase, session.id) : Promise.resolve(pinnedProblems),
+    // P3 7단계 — 교재 위 두 레이어를 각각 따로 재구성한다. 화면에서 각자
+    // 켜고 끌 수 있어야 하므로 섞어서 내려보내지 않는다.
+    isV3 && material?.docId ? loadTeacherMaterialStrokes(session.id, material.docId) : Promise.resolve([]),
+    isV3 && material?.docId ? loadStudentMaterialStrokes(session.id, material.docId) : Promise.resolve([]),
+    // 정책 변경 전에 본인이 남긴 비공개 필기(보존 기록). 쓴 본인에게만 내려온다.
+    profile?.role === "student" && material?.docId ? loadMyLegacyPrivateMaterialStrokes(session.id, material.docId) : Promise.resolve([]),
+  ]);
 
   return (
     <SessionShell

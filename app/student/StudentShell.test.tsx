@@ -5,6 +5,9 @@ import type { DashboardData } from "./dashboard-data";
 import type { RoadmapData } from "@/lib/roadmap/types";
 
 const pushMock = vi.fn();
+vi.mock("./mock-exam-tab-actions", () => ({
+  loadMyMockExamAttemptsAction: vi.fn(async () => []),
+}));
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: pushMock, replace: vi.fn(), refresh: vi.fn() }),
 }));
@@ -314,6 +317,7 @@ describe("StudentShell", () => {
       />
     );
     fireEvent.click(screen.getAllByText("Mock Exams")[0]);
-    expect(pushMock).toHaveBeenCalledWith("/student/mock-exam");
+    // 2026-09-21 — 모의고사는 이제 독립 라우트가 아니라 일반 탭이다(좌측 네비 유지).
+    expect(pushMock).toHaveBeenCalledWith("?tab=mock-exam", { scroll: false });
   });
 });

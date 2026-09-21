@@ -6,6 +6,7 @@ import { logout } from "@/app/login/actions";
 import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
+import ParentMockExamTab from "./ParentMockExamTab";
 import PageFrame from "@/app/components/PageFrame";
 import NavIcon from "@/app/components/NavIcon";
 import type { DashboardData } from "@/app/student/dashboard-data";
@@ -162,7 +163,7 @@ export default function ParentShell({
   // 2026-09-18 — 홈 재설계: "일정 확인"에서 "리뷰 확인"으로 목적이 바뀌어
   // 종합 리뷰(기본)/수업 리뷰(시간순)/상담 리뷰/통계 4개 읽기 전용 서브탭으로
   // 구성한다. 상담 리뷰는 종합 리뷰에 합치지 않는다(사용자 결정, 2026-09-18).
-  const [homeSubTab, setHomeSubTab] = useState<"reviews" | "lessonReviews" | "consultReviews" | "stats">("reviews");
+  const [homeSubTab, setHomeSubTab] = useState<"reviews" | "lessonReviews" | "consultReviews" | "stats" | "mockExam">("reviews");
   const [familyReviews, setFamilyReviews] = useState<FamilyLessonReview[] | null>(null);
   const [consultReviews, setConsultReviews] = useState<HomeConsultationReview[] | null>(null);
   const [childStats, setChildStats] = useState<StatsData | null>(null);
@@ -486,22 +487,19 @@ export default function ParentShell({
             activeTab === "home" ? (
               // 2026-09-19(UAT 반영) — "모의고사"를 서브탭 옆 별도 버튼으로
               // 띄우지 않고, 홈 서브탭 목록의 마지막 항목으로 편입한다(같은
-              // UnderlineSubTabs 스타일). 클릭 시 상태 전환이 아니라 독립
-              // 라우트(/parent/mock-exam/[studentId])로 이동만 한다.
+              // UnderlineSubTabs 스타일).
+              // 2026-09-21(UAT 재지적) — 독립 라우트로 이동하지 않고 탭 안에서
+              // 자녀 응시 목록을 바로 보여준다(좌측 네비게이션 유지).
               <UnderlineSubTabs
                 items={[
                   { id: "reviews", label: "종합 리뷰" },
                   { id: "lessonReviews", label: "수업 리뷰" },
                   { id: "consultReviews", label: "상담 리뷰" },
                   { id: "stats", label: "통계" },
-                  { id: "mockExam", label: "모의고사 →" },
+                  { id: "mockExam", label: "모의고사" },
                 ]}
                 activeId={homeSubTab}
-                onSelect={(id) =>
-                  id === "mockExam"
-                    ? router.push(`/parent/mock-exam/${currentChildId}`)
-                    : setHomeSubTab(id as typeof homeSubTab)
-                }
+                onSelect={(id) => setHomeSubTab(id as typeof homeSubTab)}
               />
             ) : activeTab === "consult" ? (
               <UnderlineSubTabs
@@ -536,7 +534,9 @@ export default function ParentShell({
               때는 일정·캘린더로 되돌아가지 않고 빈 상태 문구만 보여준다(요구사항). */}
           {activeTab === "home" ? (
             <div>
-              {homeSubTab === "stats" ? (
+              {homeSubTab === "mockExam" ? (
+                <ParentMockExamTab studentId={currentChildId} />
+              ) : homeSubTab === "stats" ? (
                 childStats ? (
                   <StatsTab data={childStats} />
                 ) : (

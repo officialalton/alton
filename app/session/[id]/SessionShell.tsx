@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import { createClient } from "@/utils/supabase/client";
 import {
   computeSessionViewState,
   type SessionViewState,
@@ -183,6 +184,32 @@ export default function SessionShell({
   const [earlyEndReasonChoice, setEarlyEndReasonChoice] = useState<
     "student_reason" | "teacher_fault" | "service_incident" | null
   >(null);
+
+  // 2026-09-21(UAT 지적 "수업 시작 후 문제·교재 추가가 한참 뒤에야 반영") — 이 수업의 구성
+  // (session_content_manifest)이 바뀌면 Realtime postgres_changes 로 받아 서버 컴포넌트를 다시
+  // 읽는다(router.refresh → 교재·문제 props 갱신, ProblemsPanel 은 props 변화를 상태에 반영한다).
+  // 예전엔 답안/채점 broadcast 만 있어 교사가 수업 중 추가한 문제·교재는 새로고침 전까지 안 보였다.
+  // v3 수업에서만 구독한다(legacy 세션은 manifest 가 없다). 연속 변경은 400ms 로 묶는다.
+  useEffect(() => {
+    if (sessionSource !== "v3") return;
+    const supabase = createClient();
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    const channel = supabase
+      .channel(`session-manifest:${sessionId}`)
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "session_content_manifest", filter: `session_id=eq.${sessionId}` },
+        () => {
+          if (timer) clearTimeout(timer);
+          timer = setTimeout(() => router.refresh(), 400);
+        },
+      )
+      .subscribe();
+    return () => {
+      if (timer) clearTimeout(timer);
+      supabase.removeChannel(channel);
+    };
+  }, [sessionId, sessionSource, router]);
 
   // 상태(prep/live/completed)를 주기적으로 재계산 — 시작/종료 시각이 지나면
   // 새로고침 없이도 상태바가 자동으로 전환되게 한다.

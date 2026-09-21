@@ -30,6 +30,7 @@ import VocabAssignTab from "./VocabAssignTab";
 import type { TeacherVocabOverview } from "./vocab-assign-data";
 import HomeworkAssignTab from "./HomeworkAssignTab";
 import SettlementTab from "./SettlementTab";
+import TeacherMockExamTab from "./TeacherMockExamTab";
 import type { LibrarySubjectTree } from "@/lib/subject-material-library";
 import {
   listMyLessonSchedule,
@@ -55,14 +56,11 @@ const NAV_ITEMS = [
   // P4-2(2026-09-12) — 교사가 본인 정산 내역·지급 예정액·수취 계좌·제출 서류를
   // 한 곳에서 찾을 수 있게 하는 진입점.
   { id: "settlement", label: "Payouts", icon: "payouts" },
+  // 2026-09-21(UAT 지적) — 모의고사 배정은 독립 라우트가 아니라 일반 탭이다(좌측 네비 유지).
+  { id: "mock-exam", label: "Mock Exams", icon: "mockExam" },
 ] as const;
 
 type TabId = (typeof NAV_ITEMS)[number]["id"];
-
-// 2026-09-18(고정형 모의고사 V1) — /teacher/mock-exam은 TeacherShell 탭이 아니라
-// 독립 라우트다. NAV_ITEMS/TabId를 건드리지 않고 router.push로 이동하는 링크
-// 전용 항목을 별도로 둔다.
-const MOCK_EXAM_NAV_ITEM = { id: "mock-exam", label: "Mock Exams", icon: "mockExam" } as const;
 
 export default function TeacherShell({
   initialTab,
@@ -174,13 +172,6 @@ export default function TeacherShell({
             {item.label}
           </button>
         ))}
-        <button
-          onClick={() => router.push("/teacher/mock-exam")}
-          className="w-full flex items-center gap-2.5 px-2.5 py-2.5 rounded-lg text-[13px] font-semibold text-grey-500 hover:bg-grey-100 hover:text-ink transition-colors"
-        >
-          <NavIcon name={MOCK_EXAM_NAV_ITEM.icon} className="w-[18px] h-[18px] shrink-0" />
-          {MOCK_EXAM_NAV_ITEM.label}
-        </button>
 
         {/* 2026-09-19(UAT 반영) — Acely 레퍼런스: 계정 메뉴를 상단 헤더바가
             아니라 사이드바 맨 아래(프로필)로 옮긴다. 상단 헤더바 자체를
@@ -228,12 +219,7 @@ export default function TeacherShell({
         />
       )}
 
-      <MobileBottomNav
-        primary={mobilePrimary}
-        more={[...mobileMore, MOCK_EXAM_NAV_ITEM]}
-        activeId={activeTab}
-        onSelect={(id) => (id === MOCK_EXAM_NAV_ITEM.id ? router.push("/teacher/mock-exam") : selectTab(id as TabId))}
-      />
+      <MobileBottomNav primary={mobilePrimary} more={mobileMore} activeId={activeTab} onSelect={(id) => selectTab(id as TabId)} />
 
       <div className="flex-1 flex flex-col pb-16 md:pb-0">
         {/* 2026-09-19(UAT 반영) — 데스크톱은 계정 메뉴가 사이드바 맨 아래로
@@ -347,6 +333,8 @@ export default function TeacherShell({
             />
           ) : activeTab === "settlement" ? (
             <SettlementTab />
+          ) : activeTab === "mock-exam" ? (
+            <TeacherMockExamTab />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.

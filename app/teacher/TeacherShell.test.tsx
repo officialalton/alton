@@ -5,6 +5,9 @@ import type { TeacherDashboardData } from "./dashboard-data";
 import type { RosterStudent } from "./roster-data";
 
 const pushMock = vi.fn();
+vi.mock("./mock-exam-tab-actions", () => ({
+  loadTeacherMockExamTabDataAction: vi.fn(async () => ({ students: [], examSets: [], attemptsByStudent: {} })),
+}));
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: pushMock, replace: vi.fn() }),
 }));
@@ -147,13 +150,12 @@ describe("TeacherShell", () => {
     expect(screen.getAllByText("로그아웃").length).toBeGreaterThan(0);
   });
 
-  // 2026-09-18(고정형 모의고사 V1 내비 연결) — /teacher/mock-exam은 TeacherShell
-  // 탭이 아니라 독립 라우트라, 사이드바 클릭 시 router.push로 그 라우트로
-  // 이동해야 한다.
-  it("사이드바 '모의고사'를 누르면 /teacher/mock-exam으로 이동한다", () => {
+  // 2026-09-21(UAT 지적) — 모의고사는 독립 라우트가 아니라 일반 탭이다(좌측 네비 유지).
+  // 사이드바 클릭은 다른 탭과 똑같이 `?tab=mock-exam` 탭 전환으로 동작해야 한다.
+  it("사이드바 'Mock Exams'를 누르면 탭 전환(?tab=mock-exam)으로 동작한다 — 독립 라우트로 나가지 않는다", () => {
     pushMock.mockClear();
     render(<TeacherShell {...baseProps} />);
     fireEvent.click(screen.getAllByText("Mock Exams")[0]);
-    expect(pushMock).toHaveBeenCalledWith("/teacher/mock-exam");
+    expect(pushMock).toHaveBeenCalledWith("?tab=mock-exam", { scroll: false });
   });
 });

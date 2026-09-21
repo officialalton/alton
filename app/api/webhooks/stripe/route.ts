@@ -115,8 +115,14 @@ export async function POST(request: Request) {
       .from("external_event_receipts")
       .insert({ provider: "stripe", event_id: event.id, payload: event });
     if (insertError) {
-      // unique violation이면 동시 요청 경쟁 — 이미 처리 중/됨으로 취급.
-      return NextResponse.json({ ok: true, skipped: "race: already recorded" });
+      // unique violation(23505)만 동시 요청 경쟁 — 이미 처리 중/됨으로 취급한다.
+      // 2026-09-21(기획자 리뷰 P2) — 그 외(DB 장애·권한·스키마 오류)까지 200 으로 ACK 하면 Stripe 가
+      // 재전송을 멈춰 이벤트가 영구 유실된다. 500 으로 되돌려 재시도를 받는다.
+      if (insertError.code === "23505") {
+        return NextResponse.json({ ok: true, skipped: "race: already recorded" });
+      }
+      console.error(JSON.stringify({ type: "stripe_receipt_insert_failed", eventId: event.id, error: insertError.message }));
+      return NextResponse.json({ error: "receipt_insert_failed" }, { status: 500 });
     }
   }
 

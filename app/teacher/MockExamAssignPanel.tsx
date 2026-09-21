@@ -19,10 +19,13 @@ export default function MockExamAssignPanel({
   students,
   examSets,
   attemptsByStudent,
+  onChanged,
 }: {
   students: TeacherMockExamStudent[];
   examSets: { id: string; name: string; difficultyTier: string }[];
   attemptsByStudent: Record<string, MockExamAttemptSummary[]>;
+  /** 배정·채점 확정이 성공한 뒤 호출 — 탭 안에서 쓸 때 목록을 다시 읽는다. */
+  onChanged?: () => void;
 }) {
   const [selectedStudent, setSelectedStudent] = useState(students[0]?.studentId ?? "");
   const [selectedSet, setSelectedSet] = useState(examSets[0]?.id ?? "");
@@ -37,6 +40,7 @@ export default function MockExamAssignPanel({
     const result = await assignMockExamAction({ studentId: selectedStudent, examSetId: selectedSet, dueAt: dueAt || null });
     setBusy(false);
     setMessage(result.ok ? "배정했습니다." : result.error);
+    if (result.ok) onChanged?.();
   }
 
   async function finalize(attemptId: string) {
@@ -44,6 +48,7 @@ export default function MockExamAssignPanel({
     const result = await finalizeMockExamGradingAction(attemptId);
     setBusy(false);
     setMessage(result.ok ? "채점을 확정했습니다." : result.error);
+    if (result.ok) onChanged?.();
   }
 
   return (

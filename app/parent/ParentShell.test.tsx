@@ -5,6 +5,9 @@ import type { DashboardData } from "@/app/student/dashboard-data";
 import type { Child } from "./children-data";
 
 const pushMock = vi.fn();
+vi.mock("./mock-exam-tab-actions", () => ({
+  loadChildMockExamAttemptsAction: vi.fn(async () => []),
+}));
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: pushMock, replace: vi.fn(), refresh: vi.fn() }),
 }));
@@ -440,10 +443,9 @@ describe("ParentShell", () => {
     expect(within(screen.getAllByText("동의")[0].parentElement as HTMLElement).getByText("1")).toBeInTheDocument();
   });
 
-  // 2026-09-18(고정형 모의고사 V1 내비 연결) — 홈 탭에서 "모의고사" 링크를
-  // 누르면 현재 선택된 자녀 기준 독립 라우트(/parent/mock-exam/[studentId])로
-  // 이동한다(ParentShell 탭이 아니다).
-  it("홈 탭의 '모의고사' 링크를 누르면 현재 선택된 자녀의 /parent/mock-exam/[studentId]로 이동한다", () => {
+  // 2026-09-21(UAT 지적) — 홈 탭의 "모의고사" 서브탭은 독립 라우트로 이동하지 않고
+  // 탭 안에서 현재 선택된 자녀의 응시 목록을 바로 보여준다(좌측 네비 유지).
+  it("홈 탭의 '모의고사' 서브탭을 누르면 라우트 이동 없이 탭 안에서 자녀 응시 목록을 보여준다", async () => {
     pushMock.mockClear();
     render(
       <ParentShell
@@ -454,7 +456,8 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("모의고사 →"));
-    expect(pushMock).toHaveBeenCalledWith("/parent/mock-exam/s1");
+    fireEvent.click(screen.getByText("모의고사"));
+    expect(pushMock).not.toHaveBeenCalledWith("/parent/mock-exam/s1");
+    expect(await screen.findByText("배정된 모의고사가 없습니다.")).toBeInTheDocument();
   });
 });

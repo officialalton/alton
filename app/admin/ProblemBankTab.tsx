@@ -211,6 +211,39 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
   const selectedPublishable = selectedVisible.filter((p) => p.draft?.versionId && p.createdVia !== "manual" && !p.published);
   const selectedArchivable = selectedVisible.filter((p) => !p.archived);
 
+  // 2026-09-21(제품 오너 지시) — 선택한 문제들의 키워드를 한 번에 붙이거나 뗀다. 키워드는 과목에
+  // 속하므로, 선택된 문제들의 과목에 속한 키워드만 후보로 보이고 각 키워드는 그 과목의 문제에만 적용된다.
+  const [bulkKeywordId, setBulkKeywordId] = useState("");
+  const bulkKeywordOptions = useMemo(() => {
+    const subjectIds = [...new Set(selectedVisible.map((p) => p.subjectId).filter((s): s is string => Boolean(s)))];
+    const multi = subjectIds.length > 1;
+    return subjectIds.flatMap((sid) => {
+      const subjectName = (catalog ?? []).find((s) => s.subjectId === sid)?.subjectName ?? "";
+      return (keywordsBySubject.get(sid) ?? []).map((k) => ({ id: k.id, subjectId: sid, label: multi ? `${subjectName} · ${k.label}` : k.label }));
+    });
+  }, [selectedVisible, keywordsBySubject, catalog]);
+
+  async function applyKeywordToSelected(attached: boolean) {
+    const option = bulkKeywordOptions.find((o) => o.id === bulkKeywordId);
+    if (!option) return;
+    const targets = selectedVisible.filter((p) => p.subjectId === option.subjectId);
+    if (targets.length === 0) return;
+    setBulkBusy(true);
+    setError(null);
+    setNotice(null);
+    const failed: string[] = [];
+    let done = 0;
+    for (const p of targets) {
+      const result = await setProblemKeywordAction(p.id, option.id, attached);
+      if (result.ok) done += 1;
+      else failed.push(`${(p.draft?.passage ?? p.published?.passage ?? "").slice(0, 30) || p.id} — ${result.error}`);
+    }
+    await reload();
+    setBulkBusy(false);
+    setNotice(`${done}개 문제에 키워드를 ${attached ? "추가" : "제거"}했습니다.${failed.length ? ` ${failed.length}개는 실패했습니다.` : ""}`);
+    if (failed.length) setError(failed.join(" / "));
+  }
+
   async function publishSelected() {
     if (selectedPublishable.length === 0) return;
     if (typeof window !== "undefined" && !window.confirm(`선택한 ${selectedPublishable.length}개를 공개할까요? 공개된 문제는 회차 구성 후보가 됩니다.`)) return;
@@ -409,6 +442,27 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
             <button type="button" disabled={busy || bulkBusy} onClick={() => void archiveSelected()} className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-grey-500 disabled:opacity-50">
               {bulkBusy ? "처리 중…" : `선택 보관 (${selectedArchivable.length})`}
             </button>
+          )}
+          {bulkKeywordOptions.length > 0 && (
+            <span className="flex items-center gap-1.5">
+              <select
+                value={bulkKeywordId}
+                onChange={(e) => setBulkKeywordId(e.target.value)}
+                aria-label="일괄 적용할 키워드"
+                className="text-[12px] px-2 py-1.5 rounded-lg border-[1.5px] border-grey-200 bg-white max-w-[220px]"
+              >
+                <option value="">키워드 선택…</option>
+                {bulkKeywordOptions.map((o) => (
+                  <option key={o.id} value={o.id}>{o.label}</option>
+                ))}
+              </select>
+              <button type="button" disabled={busy || bulkBusy || !bulkKeywordId} onClick={() => void applyKeywordToSelected(true)} className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50">
+                키워드 추가
+              </button>
+              <button type="button" disabled={busy || bulkBusy || !bulkKeywordId} onClick={() => void applyKeywordToSelected(false)} className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-grey-500 disabled:opacity-50">
+                키워드 제거
+              </button>
+            </span>
           )}
           <button type="button" onClick={() => setSelectedIds(new Set())} className="text-[12px] font-bold text-grey-500">
             선택 해제

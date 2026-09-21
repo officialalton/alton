@@ -132,8 +132,14 @@ export async function POST(request: Request) {
       .from("external_event_receipts")
       .insert({ provider: "docusign", event_id: eventId, payload: body });
     if (insertError) {
-      // unique violation이면 동시 요청 경쟁 — 이미 처리 중/됨으로 취급하고 그냥 200.
-      return NextResponse.json({ ok: true, skipped: "race: already recorded" });
+      // unique violation(23505)만 동시 요청 경쟁 — 이미 처리 중/됨으로 취급하고 200.
+      // 2026-09-21(기획자 리뷰 P2) — 그 외 DB 오류까지 200 으로 ACK 하면 DocuSign 이 재전송을 멈춰
+      // 계약 상태 갱신이 영구 유실된다. 500 으로 되돌려 재시도를 받는다.
+      if (insertError.code === "23505") {
+        return NextResponse.json({ ok: true, skipped: "race: already recorded" });
+      }
+      console.error(JSON.stringify({ type: "docusign_receipt_insert_failed", eventId, error: insertError.message }));
+      return NextResponse.json({ error: "receipt_insert_failed" }, { status: 500 });
     }
   }
 

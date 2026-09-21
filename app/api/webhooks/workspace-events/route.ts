@@ -244,11 +244,19 @@ export async function POST(req: NextRequest) {
           // DO NOTHING이다 — 같은 세션·같은 원본·같은 대상 이메일의 작업이 아직
           // queued/processing/retryable_failed 상태로 남아있으면 새로 만들지 않는다
           // (20261414000000). 반환값이 null이어도 실패가 아니라 "이미 큐에 있음".
-          await admin.rpc("enqueue_smart_notes_reader_grant_task", {
+          const { error: enqueueError } = await admin.rpc("enqueue_smart_notes_reader_grant_task", {
             p_session_id: sessionId,
             p_drive_file_id: driveFileId,
             p_student_email: studentEmail,
           });
+          if (enqueueError) {
+            // 2026-09-21(기획자 리뷰 P1) — 큐 적재 실패를 무시하고 200 을 돌려주면, 이 메시지는 이미
+            // claim 돼 있어 Pub/Sub 재전송도 duplicate 로 건너뛰고 권한 부여 작업이 영구 유실된다.
+            // claim 을 되돌린 뒤 500 으로 되돌려 재전송 때 처음부터 다시 처리되게 한다.
+            console.error(JSON.stringify({ type: "smart_notes_reader_grant_enqueue_failed", sessionId, error: enqueueError.message }));
+            await admin.from("smart_notes_generation_events").delete().eq("id", claimedId);
+            return NextResponse.json({ error: "enqueue_failed" }, { status: 500 });
+          }
         } catch (e) {
           // 학생 이메일 미검증 등은 관리자가 조치할 사실이지 웹훅 처리 실패가 아니다 —
           // Smart Notes 원본 연결(위) 자체는 이미 끝났으므로 로그만 남기고 200으로 진행한다.

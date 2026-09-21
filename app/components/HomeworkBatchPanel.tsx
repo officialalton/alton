@@ -4,8 +4,16 @@ import { useState } from "react";
 import type { HomeworkBatch, HomeworkBatchItem } from "@/lib/homework-batch-data";
 import { submitHomeworkAnswerAction, gradeHomeworkBatchAction } from "@/lib/homework-batch-actions";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
+import MockExamMathTools from "@/app/session/[id]/MockExamMathTools";
 
 const FORMAT_LABEL: Record<HomeworkBatchItem["format"], string> = { mc: "객관식", spr: "숫자 입력", essay: "서술형", math: "풀이형" };
+
+/** 2026-09-21(UAT 지적) — 수학 과제에는 모의고사와 같은 그래프 계산기·참조표를 붙인다(사양 6절 "같은
+ * 렌더러"). 배치의 과목명이 Math 이거나 숫자 입력/풀이형 문항이 있으면 수학 과제로 본다. */
+function isMathBatch(batch: HomeworkBatch): boolean {
+  if (/math|수학/i.test(batch.subjectName ?? "")) return true;
+  return batch.items.some((i) => i.format === "spr" || i.format === "math");
+}
 
 function isGraded(b: HomeworkBatch): boolean {
   return b.items.length > 0 && b.items.every((i) => i.graded);
@@ -84,12 +92,14 @@ export default function HomeworkBatchPanel({
                 );
               })}
             </div>
+            {active && isMathBatch(active) && <MockExamMathTools calculatorAllowed referenceSheetAllowed />}
             {active && <BatchRunner batch={active} viewerRole={viewerRole} readOnly={readOnly} onChange={updateBatch} />}
           </div>
         )
       ) : pastDetail ? (
         <div>
           <button onClick={() => setPastDetailId(null)} className="text-[12px] font-semibold text-grey-500 mb-3">← 지난 과제 목록으로</button>
+          {isMathBatch(pastDetail) && <MockExamMathTools calculatorAllowed referenceSheetAllowed />}
           <BatchRunner batch={pastDetail} viewerRole={viewerRole} readOnly={readOnly} onChange={updateBatch} />
         </div>
       ) : (

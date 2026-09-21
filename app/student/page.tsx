@@ -43,6 +43,18 @@ export default async function StudentHomePage({
   const lessonsPromise = lessonBookingPromise.then((lb) =>
     loadLessons(supabase, user.id, lb)
   );
+  // 2026-09-21(기획자 리뷰 P2 "비활성 탭 하나의 실패가 /student 전체 500") — 목록형 탭 데이터는 실패해도
+  // 홈 전체를 죽이지 않고 빈 목록으로 내려간다(해당 탭만 비어 보이고 서버 로그에 사유가 남는다).
+  // 홈/수업/수업권/통계/로드맵처럼 모양이 필요한 데이터는 그대로 실패를 전파한다(잘못된 빈 화면보다 오류가 낫다).
+  const safeList = async <T,>(label: string, p: Promise<T[]>): Promise<T[]> => {
+    try {
+      return await p;
+    } catch (e) {
+      console.error(JSON.stringify({ type: "student_home_loader_failed", label, error: e instanceof Error ? e.message : String(e) }));
+      return [];
+    }
+  };
+
   const [
     dashboard,
     lessonBooking,
@@ -63,19 +75,19 @@ export default async function StudentHomePage({
   ] = await Promise.all([
     dashboardPromise,
     lessonBookingPromise,
-    loadMyVocabWords(supabase, user.id),
-    loadLibraryBooks(supabase),
-    loadVocabQuizzes(supabase, user.id),
-    loadVocabFolders(supabase, user.id),
-    loadProblemHistory(user.id),
+    safeList("vocab_words", loadMyVocabWords(supabase, user.id)),
+    safeList("vocab_books", loadLibraryBooks(supabase)),
+    safeList("vocab_quizzes", loadVocabQuizzes(supabase, user.id)),
+    safeList("vocab_folders", loadVocabFolders(supabase, user.id)),
+    safeList("problem_history", loadProblemHistory(user.id)),
     lessonsPromise,
-    loadCurricula(supabase, user.id),
-    loadStudentHomeworkBatches(supabase, user.id),
-    loadMaterialsLibraryTree(supabase, user.id),
+    safeList("curricula", loadCurricula(supabase, user.id)),
+    safeList("homework_batches", loadStudentHomeworkBatches(supabase, user.id)),
+    safeList("materials_library", loadMaterialsLibraryTree(supabase, user.id)),
     loadCreditsData(supabase, user.id),
     loadStats(supabase, user.id),
-    loadStudentSubjectEnrollments(supabase, user.id),
-    loadTeacherList(supabase, user.id),
+    safeList("subject_enrollments", loadStudentSubjectEnrollments(supabase, user.id)),
+    safeList("teacher_list", loadTeacherList(supabase, user.id)),
     loadRoadmapData(supabase, user.id),
   ]);
 
@@ -84,16 +96,20 @@ export default async function StudentHomePage({
   const [memosEntries, reviews, myFeedback, teacherEntries] = await Promise.all([
     Promise.all(
       curricula.map(
-        async (c) => [c.enrollmentId, await loadMemos(supabase, c.enrollmentId)] as const
+        async (c) => [c.enrollmentId, await safeList(`memos:${c.enrollmentId}`, loadMemos(supabase, c.enrollmentId))] as const
       )
     ),
     loadReviews(supabase, pastSessionIds),
     loadStudentFeedback(supabase, user.id, pastSessionIds),
     Promise.all(
       teacherList.map(async (t) => {
+        // 선생님 한 명의 프로필·기록·채팅 조회 실패가 홈 전체를 막지 않게 한다(그 선생님 카드만 비어 보인다).
         const [profile, sessionHistory, chatThread] = await Promise.all([
-          loadTeacherProfile(supabase, user.id, t.teacherId),
-          loadTeacherSessionHistory(supabase, user.id, t.teacherId),
+          loadTeacherProfile(supabase, user.id, t.teacherId).catch((e) => {
+            console.error(JSON.stringify({ type: "student_home_loader_failed", label: `teacher_profile:${t.teacherId}`, error: e instanceof Error ? e.message : String(e) }));
+            return null;
+          }),
+          safeList(`teacher_history:${t.teacherId}`, loadTeacherSessionHistory(supabase, user.id, t.teacherId)),
           ensureThreadAndLoadMessages(supabase, user.id, t.teacherId),
         ]);
         return { teacherId: t.teacherId, profile, sessionHistory, chatThread };
