@@ -172,7 +172,7 @@ describe("수업 준비 구성 패널", () => {
   // 2026-09-21(UAT 지적) — "문제 한 번에 20개 담기게 하는 버튼 필요". 후보가 20개보다
   // 적으면 실제 개수만큼만 담고 버튼 라벨도 그 개수를 보여준다.
   it("한 번에 담기 버튼을 누르면 후보 문제를 전부(20개 이하면 그만큼만) 한 번에 담는다", async () => {
-    vi.mocked(actions.addProblem).mockResolvedValue({ ok: true, value: undefined as never });
+    vi.mocked(actions.addProblem).mockResolvedValue({ ok: true });
     render(
       <CompositionPanel
         composition={makeComposition()}
