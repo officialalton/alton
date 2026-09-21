@@ -239,4 +239,32 @@ describe("StudentShell", () => {
     fireEvent.click(screen.getByText("지훈 학생님 ▾"));
     expect(screen.getByText("로그아웃")).toBeInTheDocument();
   });
+
+  it("현재 활성 탭에는 aria-current가 붙고, 탭 전환 시 이동한다", () => {
+    render(
+      <StudentShell
+        studentName="지훈"
+        dashboard={dashboard}
+        vocabWords={[]}
+        problemLog={[]}
+        {...lessonsProps}
+      />
+    );
+    expect(screen.getByRole("button", { name: new RegExp("홈") })).toHaveAttribute(
+      "aria-current",
+      "page"
+    );
+    expect(
+      screen.getByRole("button", { name: new RegExp("과제") })
+    ).not.toHaveAttribute("aria-current");
+
+    fireEvent.click(screen.getByRole("button", { name: new RegExp("과제") }));
+    expect(screen.getByRole("button", { name: new RegExp("과제") })).toHaveAttribute(
+      "aria-current",
+      "page"
+    );
+    expect(
+      screen.getByRole("button", { name: new RegExp("홈") })
+    ).not.toHaveAttribute("aria-current");
+  });
 });

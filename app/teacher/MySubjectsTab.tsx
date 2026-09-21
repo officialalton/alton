@@ -115,6 +115,7 @@ function TemplateEditor({
   onUnitsChange: (units: TemplateUnit[]) => void;
 }) {
   const [units, setUnits] = useState(subject.units);
+  const [removingUnitId, setRemovingUnitId] = useState<string | null>(null);
 
   function commit(next: TemplateUnit[]) {
     setUnits(next);
@@ -129,8 +130,13 @@ function TemplateEditor({
   }
 
   async function handleRemove(unitId: string) {
-    await removeTemplateUnit(unitId);
-    commit(units.filter((u) => u.id !== unitId));
+    setRemovingUnitId(unitId);
+    try {
+      await removeTemplateUnit(unitId);
+      commit(units.filter((u) => u.id !== unitId));
+    } finally {
+      setRemovingUnitId(null);
+    }
   }
 
   async function handleField(
@@ -214,10 +220,11 @@ function TemplateEditor({
               ↓ 아래로
             </button>
             <button
+              disabled={removingUnitId === u.id}
               onClick={() => handleRemove(u.id)}
-              className="text-[12px] font-semibold text-red ml-auto"
+              className="text-[12px] font-semibold text-red border border-red/30 rounded px-2 py-1 ml-auto disabled:opacity-50"
             >
-              삭제
+              {removingUnitId === u.id ? "삭제 중..." : "삭제"}
             </button>
           </div>
         </div>

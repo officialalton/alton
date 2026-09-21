@@ -186,4 +186,23 @@ describe("SessionShell — 탭 노출", () => {
       screen.getByRole("heading", { name: "과제" })
     ).toBeInTheDocument();
   });
+
+  it("현재 활성 탭에는 aria-current가 붙고 다른 탭에는 붙지 않는다", () => {
+    render(
+      <SessionShell
+        {...baseProps}
+        viewerRole="student"
+        initialState="prep"
+        status="upcoming"
+        scheduledAt={null}
+        durationMinutes={30}
+      />
+    );
+    expect(
+      screen.getByRole("button", { name: "과제" })
+    ).toHaveAttribute("aria-current", "page");
+    expect(
+      screen.getByRole("button", { name: "교재" })
+    ).not.toHaveAttribute("aria-current");
+  });
 });

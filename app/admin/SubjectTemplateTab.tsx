@@ -148,6 +148,7 @@ function SubjectDetailEditor({
   onUnitsChange: (units: SubjectUnit[]) => void;
 }) {
   const [units, setUnits] = useState(subject.units);
+  const [removingUnitId, setRemovingUnitId] = useState<string | null>(null);
   const [confirmingDelete, setConfirmingDelete] = useState(false);
   const [deleteError, setDeleteError] = useState<string | null>(null);
 
@@ -181,8 +182,13 @@ function SubjectDetailEditor({
   }
 
   async function handleRemove(unitId: string) {
-    await removeSubjectUnit(unitId);
-    commit(units.filter((u) => u.id !== unitId));
+    setRemovingUnitId(unitId);
+    try {
+      await removeSubjectUnit(unitId);
+      commit(units.filter((u) => u.id !== unitId));
+    } finally {
+      setRemovingUnitId(null);
+    }
   }
 
   async function handleField(unitId: string, field: "unitTitle" | "note", value: string) {
@@ -255,10 +261,11 @@ function SubjectDetailEditor({
               ↓ 아래로
             </button>
             <button
+              disabled={removingUnitId === u.id}
               onClick={() => handleRemove(u.id)}
-              className="text-[12px] font-semibold text-red ml-auto"
+              className="text-[12px] font-semibold text-red border border-red/30 rounded px-2 py-1 ml-auto disabled:opacity-50"
             >
-              삭제
+              {removingUnitId === u.id ? "삭제 중..." : "삭제"}
             </button>
           </div>
         </div>

@@ -155,4 +155,32 @@ describe("ParentShell", () => {
     fireEvent.click(screen.getByText("김민지 학부모님 ▾"));
     expect(screen.getByText("로그아웃")).toBeInTheDocument();
   });
+
+  it("현재 활성 탭에는 aria-current가 붙고, 탭 전환 시 이동한다", () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+      />
+    );
+    expect(screen.getByRole("button", { name: new RegExp("홈") })).toHaveAttribute(
+      "aria-current",
+      "page"
+    );
+    expect(
+      screen.getByRole("button", { name: new RegExp("통계") })
+    ).not.toHaveAttribute("aria-current");
+
+    fireEvent.click(screen.getByRole("button", { name: new RegExp("통계") }));
+    expect(screen.getByRole("button", { name: new RegExp("통계") })).toHaveAttribute(
+      "aria-current",
+      "page"
+    );
+    expect(
+      screen.getByRole("button", { name: new RegExp("홈") })
+    ).not.toHaveAttribute("aria-current");
+  });
 });

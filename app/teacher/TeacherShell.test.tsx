@@ -96,4 +96,24 @@ describe("TeacherShell", () => {
     fireEvent.click(screen.getByText("박서연 선생님 ▾"));
     expect(screen.getByText("로그아웃")).toBeInTheDocument();
   });
+
+  it("현재 활성 탭에는 aria-current가 붙고, 탭 전환 시 이동한다", () => {
+    render(<TeacherShell {...baseProps} />);
+    expect(screen.getByRole("button", { name: new RegExp("홈") })).toHaveAttribute(
+      "aria-current",
+      "page"
+    );
+    expect(
+      screen.getByRole("button", { name: new RegExp("학생") })
+    ).not.toHaveAttribute("aria-current");
+
+    fireEvent.click(screen.getByRole("button", { name: new RegExp("학생") }));
+    expect(screen.getByRole("button", { name: new RegExp("학생") })).toHaveAttribute(
+      "aria-current",
+      "page"
+    );
+    expect(
+      screen.getByRole("button", { name: new RegExp("홈") })
+    ).not.toHaveAttribute("aria-current");
+  });
 });

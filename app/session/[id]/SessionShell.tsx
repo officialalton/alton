@@ -151,9 +151,12 @@ export default function SessionShell({
             <button
               key={tab.id}
               onClick={() => selectTab(tab.id)}
+              aria-current={activeTab === tab.id ? "page" : undefined}
               className={
-                "text-[13.5px] font-semibold " +
-                (activeTab === tab.id ? "text-ink" : "text-grey-500")
+                "text-[13.5px] font-semibold px-3 py-1.5 rounded-lg border " +
+                (activeTab === tab.id
+                  ? "text-ink font-bold bg-grey-100 border-grey-200"
+                  : "text-grey-500 border-transparent")
               }
             >
               {tab.id === "vocab" && isTeacher

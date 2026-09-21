@@ -158,9 +158,12 @@ export default function AdminShell({
           <button
             key={item.id}
             onClick={() => selectTab(item.id)}
+            aria-current={activeTab === item.id ? "page" : undefined}
             className={
-              "w-full flex flex-col items-center gap-0.5 py-2.5 text-[10.5px] font-semibold " +
-              (activeTab === item.id ? "text-ink" : "text-grey-300")
+              "w-full flex flex-col items-center gap-0.5 py-2.5 text-[10.5px] font-semibold border-l-[3px] " +
+              (activeTab === item.id
+                ? "text-ink font-bold bg-grey-100 border-ink"
+                : "text-grey-300 border-transparent")
             }
           >
             <span className="text-[17px]">{item.icon}</span>
