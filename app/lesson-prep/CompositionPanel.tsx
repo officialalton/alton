@@ -8,7 +8,6 @@ import {
   addMaterial,
   removeMaterial,
   swapMaterialOrder,
-  saveGoal,
   previewRecomposition,
   applyRecomposition,
   addProblem,
@@ -17,11 +16,11 @@ import {
   linkLesson,
   startLesson,
   type PrepLesson,
-  type RecompositionSummary,
 } from "./actions";
 import type {
   KeywordProblem,
   PickableMaterial,
+  PrepLayer,
   UnitComposition,
   UnitMaterial,
 } from "@/lib/unit-composition";
@@ -63,8 +62,6 @@ export default function CompositionPanel({
   const [materials, setMaterials] = useState<UnitMaterial[]>(composition.materials);
   const [error, setError] = useState<string | null>(null);
   const [showPicker, setShowPicker] = useState(false);
-  const [goalSaved, setGoalSaved] = useState(false);
-  const [pending, setPending] = useState<RecompositionSummary | null>(null);
   const [busy, setBusy] = useState(false);
   const [composedProblems, setComposedProblems] = useState(composition.problems);
   // window.location.reload() 대신 router.refresh() 로 서버 데이터만 다시 받는다(전체 새로고침 제거).
@@ -133,63 +130,30 @@ export default function CompositionPanel({
   const pickedIds = new Set(materials.map((m) => m.curriculumDocId));
   const titleById = new Map(pickable.map((p) => [p.curriculumDocId, p.title]));
 
+  // 2026-09-21(제품 오너 지시) — 단원·키워드만 검색해서 추가/제거하면 나머지(교재·문제
+  // 구성)는 그냥 자동으로 반영돼야 한다. 예전엔 키워드를 바꾼 뒤 "구성에 반영되지 않은
+  // 변경 있음" 배너를 보고 사람이 "기본 구성 업데이트" → 변경분 확인 → 적용을 따로 눌러야
+  // 했다 — 그 중간 확인 단계를 없애고 키워드 토글 즉시 다시 구성해 반영한다.
   async function toggleKeyword(keywordId: string, attached: boolean) {
+    setBusy(true);
+    setError(null);
     const result = attached
       ? await removeKeyword(layer, unitId, keywordId)
       : await addKeyword(layer, unitId, keywordId);
     if (!result.ok) {
+      setBusy(false);
       setError(result.error);
       return;
     }
-    setError(null);
     setKeywordIds((prev) =>
       attached ? prev.filter((k) => k !== keywordId) : [...prev, keywordId]
     );
-    // 2026-09-13 확정(A안): 키워드를 바꿔도 구성을 자동으로 다시 계산하지 않는다.
-    // 최초 구성일 때만 서버가 한 번에 채우므로 그때는 다시 받아 그린다. 이미
-    // 구성된 회차라면 '구성에 반영되지 않은 변경 있음'만 뜨고 구성은 그대로다.
-    router.refresh();
-  }
-
-  async function showChanges() {
-    setBusy(true);
-    setError(null);
-    const result = await previewRecomposition(layer, unitId);
+    if (composition.composed) {
+      const preview = await previewRecomposition(layer, unitId);
+      if (preview.ok) await applyRecomposition(layer, unitId, preview.value.fingerprint);
+    }
     setBusy(false);
-    if (!result.ok) {
-      setError(result.error);
-      return;
-    }
-    setPending(result.value);
-  }
-
-  async function applyChanges() {
-    setBusy(true);
-    setError(null);
-    // 미리 본 시점의 지문을 들고 간다. 그 사이에 바뀌었으면 서버가 거절하고,
-    // 화면은 변경분을 다시 보여준다 — 적힌 것과 다른 결과가 조용히 들어가지 않는다.
-    const result = await applyRecomposition(layer, unitId, pending?.fingerprint ?? null);
-    setBusy(false);
-    if (!result.ok) {
-      setError(result.error);
-      if ("stale" in result && result.stale) {
-        setPending(null);
-        await showChanges();
-      }
-      return;
-    }
     router.refresh();
-  }
-
-  async function handleGoalBlur(value: string) {
-    if (value === (composition.goal ?? "")) return;
-    const result = await saveGoal(layer, unitId, value);
-    if (!result.ok) {
-      setError(result.error);
-      return;
-    }
-    setError(null);
-    setGoalSaved(true);
   }
 
   async function handleRemoveMaterial(docId: string) {
@@ -246,10 +210,7 @@ export default function CompositionPanel({
       <h1 className="text-[21px] font-extrabold text-ink leading-tight">
         {composition.unitTitle}
       </h1>
-      <p className="text-[12.5px] text-grey-500 mt-1 mb-5">
-        {composition.subjectName}
-        {layer !== "student" && " · 여기서 정한 구성이 학생 커리큘럼의 기본값이 됩니다"}
-      </p>
+      <p className="text-[12.5px] text-grey-500 mt-1 mb-5">{composition.subjectName}</p>
 
       {scopeNotice && (
         <div className="text-[12.5px] text-ink bg-grey-100 border-[1.5px] border-grey-200 rounded-lg px-4 py-3 mb-4">
@@ -263,133 +224,16 @@ export default function CompositionPanel({
         </div>
       )}
 
-      {/* 2026-09-13 확정 4번 — 업데이트 진입점은 **하나**다. 상위에서 보충되는 것과
-          지금 조건에 따른 변경을 한 자리에서 확인하고 한 번에 적용한다. */}
+      {/* 2026-09-21(제품 오너 지시) — 위 계층 변경·버전 갱신도 확인 배너 없이 자동으로
+          맞춘다. 반영 중에만 조용히 표시한다("확인하고 적용" 단계 제거). */}
       {(composition.hasUnappliedChanges ||
         composition.outdatedVersionCount > 0 ||
         composition.parentPendingCount > 0) && (
-          <div className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3.5 mb-5">
-            <div className="text-[13px] font-bold text-ink mb-1">업데이트 있음</div>
-            <p className="text-[12px] text-grey-500 mb-2.5">
-              {composition.parentPendingCount > 0
-                ? `위 계층과 어긋난 항목이 ${composition.parentPendingCount}개 있습니다. `
-                : ""}
-              {composition.hasUnappliedChanges
-                ? "키워드·조건이나 교재가 바뀌었습니다. "
-                : ""}
-              {composition.outdatedVersionCount > 0
-                ? `담긴 교재·문제 ${composition.outdatedVersionCount}개가 담을 때의 버전을 쓰고 있습니다. `
-                : ""}
-              지금 구성은 그대로 유지됩니다. 확인하고 적용해야 반영됩니다.
-            </p>
-
-            {pending === null ? (
-              <button
-                disabled={busy}
-                onClick={() => void showChanges()}
-                className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
-              >
-                기본 구성 업데이트
-              </button>
-            ) : (
-              <div>
-                <ul className="text-[12.5px] text-ink mb-2.5 space-y-0.5">
-                  {layer !== "catalog" && (
-                    <>
-                      <li>
-                        위 계층에서 받아올 것 — 키워드 {pending.inheritedKeywords}개 · 교재{" "}
-                        {pending.inheritedMaterials}개 · 문제 {pending.inheritedProblems}개
-                      </li>
-                      <li>
-                        위 계층에서 빠져 함께 빠질 것 — 키워드 {pending.withdrawnKeywords}개 · 교재{" "}
-                        {pending.withdrawnMaterials}개 · 문제 {pending.withdrawnProblems}개
-                      </li>
-                      <li>
-                        위 계층 순서를 따라 자리가 바뀔 항목 — {pending.reordered}개
-                        {pending.orderKeptByChoice > 0 && (
-                          <span className="text-grey-500">
-                            {" "}
-                            (직접 맞춘 순서는 그대로 둡니다)
-                          </span>
-                        )}
-                      </li>
-                      <li>
-                        목표 —{" "}
-                        {pending.goalUpdated > 0
-                          ? "위 계층의 목표로 바뀝니다"
-                          : pending.goalKeptByChoice > 0
-                            ? "직접 고친 목표를 그대로 둡니다"
-                            : "바뀌지 않습니다"}
-                      </li>
-                    </>
-                  )}
-                  <li>
-                    조건에 따른 교재 — 들어옴 {pending.materialsAdded}개 · 빠짐{" "}
-                    {pending.materialsRemoved}개
-                  </li>
-                  <li>
-                    조건에 따른 문제 — 들어옴 {pending.problemsAdded}개 · 빠짐{" "}
-                    {pending.problemsRemoved}개
-                  </li>
-                  <li>버전이 올라갈 항목 — {pending.versionsUpdated}개</li>
-                  <li className="text-grey-500">
-                    조건에 맞는 문제는 모두 {pending.problemsAvailable}개입니다. 모자라도
-                    자동으로 채우지 않습니다.
-                  </li>
-                </ul>
-                <p className="text-[11.5px] text-grey-500 mb-2.5">
-                  직접 담은 것·뺀 것·맞춰 둔 순서는 그대로 남습니다. 이미 시작한 수업은
-                  당시 버전을 그대로 씁니다.
-                </p>
-                <div className="flex gap-2">
-                  <button
-                    disabled={busy}
-                    onClick={() => void applyChanges()}
-                    className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
-                  >
-                    적용
-                  </button>
-                  <button
-                    disabled={busy}
-                    onClick={() => setPending(null)}
-                    className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
-                  >
-                    취소
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
+          <AutoSync layer={layer} unitId={unitId} onDone={() => router.refresh()} />
         )}
 
       <section className="mb-7">
-        <h2 className="text-[13px] font-bold text-ink mb-1">
-          이 회차의 목표
-          {goalSaved && <span className="text-[11.5px] font-semibold text-grey-300 ml-2">저장됨</span>}
-        </h2>
-        <p className="text-[12px] text-grey-500 mb-2">
-          {layer === "student"
-            ? "이 학생의 이번 회차에서 달성할 것입니다. 수업·복습 화면의 머리말로 쓰입니다."
-            : "여기서 적은 목표는 아래 계층으로 내려갑니다. 아래에서 고친 목표는 덮어쓰지 않습니다."}
-        </p>
-        <textarea
-          defaultValue={composition.goal ?? ""}
-          onBlur={(e) => handleGoalBlur(e.target.value)}
-          rows={2}
-          placeholder={
-            composition.goal === null
-              ? "아직 정해지지 않았습니다"
-              : "비워 두면 목표 없이 진행합니다"
-          }
-          className="w-full px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px] leading-[1.6]"
-        />
-      </section>
-
-      <section className="mb-7">
-        <h2 className="text-[13px] font-bold text-ink mb-1">회차 키워드</h2>
-        <p className="text-[12px] text-grey-500 mb-2.5">
-          키워드를 붙이면 그 키워드의 기본 교재가 아래 구성에 자동으로 들어옵니다.
-        </p>
+        <h2 className="text-[13px] font-bold text-ink mb-1">키워드</h2>
         {composition.subjectKeywords.length === 0 ? (
           <p className="text-[12.5px] text-grey-500 bg-grey-100 rounded-lg px-4 py-3">
             이 과목에 등록된 키워드가 없습니다.
@@ -420,17 +264,14 @@ export default function CompositionPanel({
 
       <section>
         <div className="flex items-center justify-between mb-1">
-          <h2 className="text-[13px] font-bold text-ink">교재 구성</h2>
+          <h2 className="text-[13px] font-bold text-ink">교재</h2>
           <button
             onClick={() => setShowPicker((v) => !v)}
             className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink"
           >
-            {showPicker ? "닫기" : "교재 담기"}
+            {showPicker ? "닫기" : "직접 담기"}
           </button>
         </div>
-        <p className="text-[12px] text-grey-500 mb-2.5">
-          자동으로 들어온 교재는 키워드를 떼면 함께 빠집니다. 직접 담은 교재는 그대로 남습니다.
-        </p>
 
         {materials.length === 0 ? (
           <p className="text-[12.5px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
@@ -484,9 +325,6 @@ export default function CompositionPanel({
 
         {showPicker && (
           <div className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3 mt-3">
-            <p className="text-[12px] text-grey-500 mb-2">
-              공개된 교재만 보입니다. 보관된 교재는 새로 담는 목록에서 빠집니다.
-            </p>
             {pickable.length === 0 ? (
               <p className="text-[12.5px] text-grey-500">담을 수 있는 교재가 없습니다.</p>
             ) : (
@@ -526,14 +364,9 @@ export default function CompositionPanel({
           세 계층 모두 여기서 담고 뺀다. 담기는 자리만 다르다(학생 층은 준비안). */}
       <section className="mt-7">
         <h2 className="text-[13px] font-bold text-ink mb-1">
-          이 회차의 문제
+          문제
           <span className="text-grey-300 font-semibold ml-1.5">{composedProblems.length}</span>
         </h2>
-        <p className="text-[12px] text-grey-500 mb-2.5">
-          {layer === "student"
-            ? "이 학생이 이번 회차에서 풀 문제입니다. 수업을 시작하면 여기 담긴 그대로, 담을 때의 버전으로 고정됩니다."
-            : "여기서 담은 문제가 아래 계층의 기본값이 됩니다."}
-        </p>
 
         {composedProblems.length === 0 ? (
           <p className="text-[12.5px] text-grey-500 bg-grey-100 rounded-lg px-4 py-4">
@@ -571,15 +404,10 @@ export default function CompositionPanel({
           </ul>
         )}
 
-        <h3 className="text-[12.5px] font-bold text-ink mt-5 mb-1">담을 수 있는 문제</h3>
-        <p className="text-[12px] text-grey-500 mb-2">
-          이 회차의 키워드로 찾은, 공개된 문제입니다. 모자라도 자동으로 만들지 않습니다. 키워드로 자동으로 들어오는 문제는
-          회차당 기본 20개까지이고(직접 담은 것은 세지 않음), 나머지는 여기서 골라 담습니다. 문제를 누르면 간략히 볼 수 있습니다.
-        </p>
+        <h3 className="text-[12.5px] font-bold text-ink mt-5 mb-1">더 담기</h3>
         {materialLines.length > 0 && (
           <ul className="text-[12px] text-grey-500 mb-2 list-disc pl-5" data-testid="material-status">
             {materialLines.map((l) => <li key={l}>{l}</li>)}
-            <li className="list-none -ml-5 text-[11.5px]">안내일 뿐 자동으로 문제를 넣거나 빼지 않습니다.</li>
           </ul>
         )}
         {skillsInPool.length > 0 && (
@@ -658,6 +486,24 @@ export default function CompositionPanel({
 }
 
 /** 담기 전 간략 미리보기 — 학생이 볼 지문·그림·선택지만. 정답·해설은 문제은행에서 본다. */
+/** 2026-09-21(제품 오너 지시) — 위 계층·버전 변경으로 생긴 차이를 확인 배너 없이 조용히
+ * 맞춘다. 마운트 시 한 번만 미리보기+적용을 실행하고 부모에 새로고침을 요청한다. */
+function AutoSync({ layer, unitId, onDone }: { layer: PrepLayer; unitId: string; onDone: () => void }) {
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const preview = await previewRecomposition(layer, unitId);
+      if (!cancelled && preview.ok) await applyRecomposition(layer, unitId, preview.value.fingerprint);
+      if (!cancelled) onDone();
+    })();
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [layer, unitId]);
+  return null;
+}
+
 function ProblemPreview({ problem }: { problem: KeywordProblem }) {
   const pv = problem.preview;
   if (!pv) {
@@ -723,10 +569,6 @@ function LessonSection({ unitId }: { unitId: string }) {
   return (
     <section className="mt-7">
       <h2 className="text-[13px] font-bold text-ink mb-1">예정된 수업</h2>
-      <p className="text-[12px] text-grey-500 mb-2.5">
-        연결해도 아직 고정되지 않습니다. <strong className="text-ink">수업 시작</strong>을 누를 때
-        지금 준비안의 버전과 순서가 그대로 고정되고, 이후 내용이 바뀌어도 그 수업은 바뀌지 않습니다.
-      </p>
 
       {error && <p className="text-[12.5px] text-red mb-2">{error}</p>}
 

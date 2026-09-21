@@ -11,7 +11,6 @@ vi.mock("next/navigation", () => ({
 }));
 
 vi.mock("./actions", () => ({
-  saveGoal: vi.fn(),
   addKeyword: vi.fn(),
   removeKeyword: vi.fn(),
   addMaterial: vi.fn(),
@@ -55,7 +54,19 @@ function makeComposition(over: Partial<UnitComposition> = {}): UnitComposition {
   };
 }
 
-beforeEach(() => vi.clearAllMocks());
+beforeEach(() => {
+  vi.clearAllMocks();
+  vi.mocked(actions.previewRecomposition).mockResolvedValue({
+    ok: true,
+    value: {
+      materialsAdded: 0, materialsRemoved: 0, problemsAdded: 0, problemsRemoved: 0, problemsAvailable: 0,
+      versionsUpdated: 0, inheritedKeywords: 0, inheritedMaterials: 0, inheritedProblems: 0,
+      withdrawnKeywords: 0, withdrawnMaterials: 0, withdrawnProblems: 0, reordered: 0,
+      orderKeptByChoice: 0, goalUpdated: 0, goalKeptByChoice: 0, fingerprint: "fp",
+    },
+  });
+  vi.mocked(actions.applyRecomposition).mockResolvedValue({ ok: true, value: {} as never });
+});
 
 describe("수업 준비 구성 패널", () => {
   it("무엇을 고치는 중인지 머리말로 밝힌다", () => {
@@ -63,19 +74,6 @@ describe("수업 준비 구성 패널", () => {
     expect(screen.getByText("내 기본 구성")).toBeInTheDocument();
     expect(screen.getByText("1회차 Speaking")).toBeInTheDocument();
     expect(screen.getByText(/SAT Reading/)).toBeInTheDocument();
-  });
-
-  it("학생 계층에서는 '학생 커리큘럼의 기본값' 안내를 쓰지 않는다", () => {
-    // 학생 회차를 고치는 것은 그 학생에게만 적용된다 — 기본값이라고 하면 거짓말이다.
-    render(
-      <CompositionPanel
-        composition={makeComposition({ layer: "student", scopeLabel: "테스트 자녀 10-1 학생" })}
-        pickable={[]}
-        problems={[]}
-      />
-    );
-    expect(screen.getByText("테스트 자녀 10-1 학생")).toBeInTheDocument();
-    expect(screen.queryByText(/기본값이 됩니다/)).not.toBeInTheDocument();
   });
 
   it("자동으로 들어온 교재와 직접 담은 교재를 구분해 보여준다", () => {
@@ -91,6 +89,17 @@ describe("수업 준비 구성 패널", () => {
       "true"
     );
     expect(screen.getByRole("button", { name: "Voca" })).toHaveAttribute("aria-pressed", "false");
+  });
+
+  // 2026-09-21(제품 오너 지시) — 키워드를 붙이거나 떼면 확인 배너 없이 바로 다시 구성해
+  // 반영한다("구성에 반영되지 않은 변경 있음" → 사람이 눌러 확인하던 중간 단계 제거).
+  it("이미 구성된 회차에서 키워드를 떼면 곧바로 다시 구성한다", async () => {
+    vi.mocked(actions.removeKeyword).mockResolvedValue({ ok: true });
+    render(<CompositionPanel composition={makeComposition()} pickable={[]} problems={[]} />);
+    fireEvent.click(screen.getByRole("button", { name: "Speaking" }));
+    await waitFor(() => expect(actions.removeKeyword).toHaveBeenCalledWith("teacher", "u1", "k1"));
+    await waitFor(() => expect(actions.previewRecomposition).toHaveBeenCalledWith("teacher", "u1"));
+    await waitFor(() => expect(actions.applyRecomposition).toHaveBeenCalledWith("teacher", "u1", "fp"));
   });
 
   it("교재를 빼면 층을 함께 넘긴다", async () => {
@@ -127,7 +136,7 @@ describe("수업 준비 구성 패널", () => {
         problems={[]}
       />
     );
-    fireEvent.click(screen.getByText("교재 담기"));
+    fireEvent.click(screen.getByText("직접 담기"));
     expect(screen.getByText("담김")).toBeInTheDocument();
     expect(screen.getByText("담기")).toBeInTheDocument();
   });
@@ -158,7 +167,6 @@ describe("수업 준비 구성 패널", () => {
     expect(screen.getByText("medium")).toBeInTheDocument();
     // 2026-09-13 지시 3번: 세 계층 모두 여기서 담고 뺀다 — 미리보기 전용이 아니다.
     expect(screen.getAllByText("담기").length).toBe(2);
-    expect(screen.getByText(/아래 계층의 기본값이 됩니다/)).toBeInTheDocument();
   });
 
   // 2026-09-14 UAT: "문제를 클릭하면 문제를 볼 수 있어야 될 거 같아 간략하게라도"
@@ -230,84 +238,12 @@ describe("수업 준비 구성 패널", () => {
     render(<CompositionPanel composition={makeComposition()} pickable={[]} problems={[]} />);
     expect(screen.queryByText(/고정/)).not.toBeInTheDocument();
   });
-
-  // 지시 3번 — 의도적으로 비운 목표와 아직 상속되지 않은 목표는 다르다.
-  it("아직 정해지지 않은 목표와 일부러 비운 목표를 다르게 안내한다", () => {
-    const { unmount } = render(
-      <CompositionPanel composition={makeComposition({ goal: null })} pickable={[]} problems={[]} />
-    );
-    expect(screen.getByPlaceholderText("아직 정해지지 않았습니다")).toBeInTheDocument();
-    unmount();
-
-    render(
-      <CompositionPanel composition={makeComposition({ goal: "" })} pickable={[]} problems={[]} />
-    );
-    expect(screen.getByPlaceholderText("비워 두면 목표 없이 진행합니다")).toBeInTheDocument();
-  });
-
-  it("목표를 고치면 층과 함께 저장한다", async () => {
-    vi.mocked(actions.saveGoal).mockResolvedValue({ ok: true });
-    render(
-      <CompositionPanel
-        composition={makeComposition({ goal: "이전 목표" })}
-        pickable={[]}
-        problems={[]}
-      />
-    );
-    const box = screen.getByDisplayValue("이전 목표");
-    fireEvent.blur(box, { target: { value: "새 목표" } });
-    await waitFor(() => expect(actions.saveGoal).toHaveBeenCalledWith("teacher", "u1", "새 목표"));
-  });
-
-  it("바뀌지 않았으면 저장하지 않는다", async () => {
-    vi.mocked(actions.saveGoal).mockResolvedValue({ ok: true });
-    render(
-      <CompositionPanel
-        composition={makeComposition({ goal: "그대로" })}
-        pickable={[]}
-        problems={[]}
-      />
-    );
-    fireEvent.blur(screen.getByDisplayValue("그대로"), { target: { value: "그대로" } });
-    await waitFor(() => expect(actions.saveGoal).not.toHaveBeenCalled());
-  });
-
-  it("학생 층에서는 목표 안내가 다르다", () => {
-    render(
-      <CompositionPanel
-        composition={makeComposition({ layer: "student" })}
-        pickable={[]}
-        problems={[]}
-      />
-    );
-    expect(screen.getByText(/이 학생의 이번 회차에서 달성할 것입니다/)).toBeInTheDocument();
-  });
 });
 
-// P2 12차 — '기본 구성 업데이트'가 상위에서 빠진 것·순서·목표까지 보여준다.
-describe("기본 구성 업데이트 미리보기", () => {
-  const summary = {
-    materialsAdded: 0,
-    materialsRemoved: 0,
-    problemsAdded: 0,
-    problemsRemoved: 0,
-    problemsAvailable: 3,
-    versionsUpdated: 0,
-    inheritedKeywords: 0,
-    inheritedMaterials: 1,
-    inheritedProblems: 0,
-    withdrawnKeywords: 0,
-    withdrawnMaterials: 2,
-    withdrawnProblems: 1,
-    reordered: 2,
-    orderKeptByChoice: 1,
-    goalUpdated: 0,
-    goalKeptByChoice: 1,
-    fingerprint: "fp",
-  };
-
-  it("빠질 것·순서·목표를 숫자와 말로 보여주고, 사람이 한 일은 그대로 둔다고 밝힌다", async () => {
-    vi.mocked(actions.previewRecomposition).mockResolvedValue({ ok: true, value: summary });
+// 2026-09-21(제품 오너 지시) — 위 계층·버전 변경도 확인 배너 없이 자동으로 맞춘다
+// (예전 "기본 구성 업데이트" 미리보기 → 적용 2단계 UI는 제거됨, AutoSync가 조용히 처리).
+describe("위 계층·버전 변경 자동 반영", () => {
+  it("반영할 변경이 있으면 확인 없이 바로 미리보기+적용을 실행한다", async () => {
     render(
       <CompositionPanel
         composition={makeComposition({ parentPendingCount: 3 })}
@@ -315,34 +251,16 @@ describe("기본 구성 업데이트 미리보기", () => {
         problems={[]}
       />
     );
-    expect(screen.getByText(/위 계층과 어긋난 항목이 3개/)).toBeInTheDocument();
-
-    fireEvent.click(screen.getByRole("button", { name: "기본 구성 업데이트" }));
     await waitFor(() =>
       expect(actions.previewRecomposition).toHaveBeenCalledWith("teacher", "u1")
     );
-
-    expect(screen.getByText(/빠져 함께 빠질 것 — 키워드 0개 · 교재 2개 · 문제 1개/)).toBeInTheDocument();
-    expect(screen.getByText(/자리가 바뀔 항목 — 2개/)).toBeInTheDocument();
-    expect(screen.getByText(/직접 맞춘 순서는 그대로 둡니다/)).toBeInTheDocument();
-    expect(screen.getByText(/직접 고친 목표를 그대로 둡니다/)).toBeInTheDocument();
-  });
-
-  it("적용은 미리 본 지문을 그대로 들고 간다", async () => {
-    vi.mocked(actions.previewRecomposition).mockResolvedValue({ ok: true, value: summary });
-    vi.mocked(actions.applyRecomposition).mockResolvedValue({ ok: true, value: summary });
-    render(
-      <CompositionPanel
-        composition={makeComposition({ parentPendingCount: 1 })}
-        pickable={[]}
-        problems={[]}
-      />
-    );
-    fireEvent.click(screen.getByRole("button", { name: "기본 구성 업데이트" }));
-    await waitFor(() => expect(screen.getByRole("button", { name: "적용" })).toBeInTheDocument());
-    fireEvent.click(screen.getByRole("button", { name: "적용" }));
     await waitFor(() =>
       expect(actions.applyRecomposition).toHaveBeenCalledWith("teacher", "u1", "fp")
     );
+  });
+
+  it("반영할 변경이 없으면 아무것도 하지 않는다", () => {
+    render(<CompositionPanel composition={makeComposition()} pickable={[]} problems={[]} />);
+    expect(actions.previewRecomposition).not.toHaveBeenCalled();
   });
 });
