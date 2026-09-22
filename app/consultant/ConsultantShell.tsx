@@ -8,12 +8,16 @@ import RoadmapView from "@/app/components/RoadmapView";
 import type { ConsultantStudent } from "./consultant-data";
 import type { IntakeConsultation } from "./intake-data";
 import { markConsultationContactedAction } from "./intake-actions";
+import type { ConsultantAvailabilityRule } from "./availability-actions";
+import { listMyAvailabilityRulesAction, addMyAvailabilityRuleAction, deactivateMyAvailabilityRuleAction } from "./availability-actions";
 
-type NavId = "students" | "assignments";
+type NavId = "students" | "assignments" | "schedule";
+
+const WEEKDAY_LABELS = ["일", "월", "화", "수", "목", "금", "토"];
 
 // 컨설턴트 포지션(2026-09-22, 가볍게 시작) — 담당 학생 목록 + 로드맵(쓰기),
-// 신규 배정 요청(스펙 §Screen Scope "New assignments") 두 화면.
-// Schedule(가용시간·확정 미팅) 전용 화면은 이메일·자동배정과 함께 Phase 2.
+// 신규 배정 요청(스펙 §Screen Scope "New assignments"), 본인 가능시간(Schedule,
+// Phase 2) 세 화면. 스케줄링 링크 이메일 발송·자동배정은 아직 Phase 2 후속.
 export default function ConsultantShell({
   consultantName,
   students,
@@ -73,6 +77,19 @@ export default function ConsultantShell({
         >
           담당 학생
         </button>
+        <button
+          onClick={() => {
+            setNav("schedule");
+            setSelectedId(null);
+          }}
+          aria-current={nav === "schedule" ? "page" : undefined}
+          className={
+            "w-full text-left px-2.5 py-2.5 rounded-lg text-[13px] font-semibold " +
+            (nav === "schedule" ? "bg-red text-white" : "text-grey-500 hover:bg-grey-100 hover:text-ink")
+          }
+        >
+          가능시간
+        </button>
         <div className="flex-1" />
         <div className="px-2.5 text-[12px] text-grey-500 mb-2">{consultantName} 컨설턴트님</div>
         <form action={logout}>
@@ -85,6 +102,8 @@ export default function ConsultantShell({
       <main className="flex-1">
         {nav === "assignments" ? (
           <AssignedConsultationsList initialConsultations={assignedConsultations} />
+        ) : nav === "schedule" ? (
+          <AvailabilityPanel />
         ) : selectedId === null ? (
           <StudentList students={students} onSelect={setSelectedId} />
         ) : (
@@ -144,6 +163,108 @@ function AssignedConsultationsList({ initialConsultations }: { initialConsultati
               {c.studentGrade ? ` · ${c.studentGrade}` : ""}
             </div>
             {c.concerns && <div className="text-[12.5px] text-grey-600 mt-2">{c.concerns}</div>}
+          </div>
+        ))
+      )}
+    </div>
+  );
+}
+
+function AvailabilityPanel() {
+  const [rules, setRules] = useState<ConsultantAvailabilityRule[] | null>(null);
+  const [weekday, setWeekday] = useState(1);
+  const [startTime, setStartTime] = useState("10:00");
+  const [endTime, setEndTime] = useState("17:00");
+  const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  function reload() {
+    listMyAvailabilityRulesAction()
+      .then(setRules)
+      .catch((e) => setError(e instanceof Error ? e.message : "불러오지 못했습니다."));
+  }
+  useEffect(() => {
+    reload();
+  }, []);
+
+  async function handleAdd() {
+    setBusy(true);
+    setError(null);
+    try {
+      await addMyAvailabilityRuleAction({ weekday, startTime, endTime });
+      reload();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "등록하지 못했습니다.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleDeactivate(id: string) {
+    setBusy(true);
+    try {
+      await deactivateMyAvailabilityRuleAction(id);
+      reload();
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  const activeRules = (rules ?? []).filter((r) => r.active);
+
+  return (
+    <div className="max-w-[560px] px-8 py-8">
+      <h1 className="text-[20px] font-extrabold text-ink mb-1">가능시간</h1>
+      <p className="text-[12.5px] text-grey-500 mb-5">
+        여기서 등록한 시간대만 배정된 고객에게 예약 가능 시간으로 보여집니다(스케줄링 링크는 다음 단계에서 연결됩니다).
+      </p>
+      {error && <div className="mb-4 text-[13px] font-semibold text-red bg-red/5 rounded-lg px-4 py-3">{error}</div>}
+
+      <form
+        className="flex items-end gap-2 mb-6"
+        onSubmit={(e) => {
+          e.preventDefault();
+          void handleAdd();
+        }}
+      >
+        <select value={weekday} onChange={(e) => setWeekday(Number(e.target.value))} className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]">
+          {WEEKDAY_LABELS.map((label, i) => (
+            <option key={i} value={i}>
+              {label}요일
+            </option>
+          ))}
+        </select>
+        <input
+          type="time"
+          value={startTime}
+          onChange={(e) => setStartTime(e.target.value)}
+          className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]"
+        />
+        <span className="text-[13px] text-grey-500">~</span>
+        <input
+          type="time"
+          value={endTime}
+          onChange={(e) => setEndTime(e.target.value)}
+          className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]"
+        />
+        <button type="submit" disabled={busy} className="text-[13px] font-bold bg-ink text-white rounded-lg px-4 py-1.5 disabled:opacity-50">
+          추가
+        </button>
+      </form>
+
+      {rules === null ? (
+        <p className="text-[13px] text-grey-500">불러오는 중…</p>
+      ) : activeRules.length === 0 ? (
+        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">등록된 가능시간이 없습니다.</div>
+      ) : (
+        activeRules.map((r) => (
+          <div key={r.id} className="flex items-center justify-between border-[1.5px] border-grey-200 rounded-xl px-4 py-3 mb-2">
+            <span className="text-[13px] font-semibold text-ink">
+              {WEEKDAY_LABELS[r.weekday]}요일 {r.startTime.slice(0, 5)} ~ {r.endTime.slice(0, 5)}
+            </span>
+            <button disabled={busy} onClick={() => handleDeactivate(r.id)} className="text-[12px] font-bold text-red disabled:opacity-50">
+              삭제
+            </button>
           </div>
         ))
       )}
