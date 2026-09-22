@@ -305,7 +305,7 @@ export default function SessionShell({
         <div className="flex items-center gap-4">
           <button
             onClick={() => router.push(backHref)}
-            className="text-[13px] text-grey-500 font-semibold whitespace-nowrap"
+            className="text-[13px] text-grey-600 font-semibold whitespace-nowrap border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform"
           >
             ← 나가기
           </button>

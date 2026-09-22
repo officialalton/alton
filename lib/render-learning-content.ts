@@ -96,14 +96,48 @@ export type ContentBlock =
 
 const TABLE_ROW = /^\s*\|.*\|\s*$/;
 const TABLE_SEP = /^\s*\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?\s*$/;
+const EMBEDDED_SEP = /\|\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)+\|/;
 
 function splitCells(line: string): string[] {
   const trimmed = line.trim().replace(/^\|/, "").replace(/\|$/, "");
   return trimmed.split("|").map((c) => c.trim());
 }
 
+/**
+ * 2026-09-21(UAT 지적) — 문제 데이터 생성 과정 어딘가에서 줄바꿈이 사라져, 마크다운
+ * 표 전체가 "| x | y | |---|---| | 4 | -18 | ..." 처럼 한 줄에 눌려 붙은 채로
+ * 들어오는 사례가 있었다(원인은 생성 파이프라인 쪽이라 이번엔 화면 쪽에서 방어한다 —
+ * 데이터를 일일이 찾아 고치는 대신, 렌더러가 이 모양을 알아보고 되살린다).
+ * 헤더 열 개수를 표 구분자(|---|...) 앞부분에서 세운 뒤, 그 개수만큼 셀을 묶고
+ * 행 사이의 빈 경계 칸(연속된 "||")을 건너뛰며 원래 행들로 되돌린다.
+ */
+function unflattenTableLine(line: string): string[] | null {
+  if (!TABLE_ROW.test(line) || TABLE_SEP.test(line)) return null;
+  const sepMatch = line.match(EMBEDDED_SEP);
+  if (!sepMatch || sepMatch.index === undefined) return null;
+  const headerPart = line.slice(0, sepMatch.index).trim();
+  if (!TABLE_ROW.test(headerPart)) return null;
+  const colCount = splitCells(headerPart).length;
+  if (colCount < 1) return null;
+
+  const cells = line.split("|");
+  const inner = cells.slice(1, -1); // 시작·끝의 빈 문자열(줄 앞뒤 파이프) 제외
+  const rows: string[][] = [];
+  let idx = 0;
+  while (idx < inner.length) {
+    const rowCells = inner.slice(idx, idx + colCount);
+    if (rowCells.length < colCount) return null; // 형태가 안 맞으면 되살리기 포기(원문 그대로 둔다)
+    rows.push(rowCells.map((c) => c.trim()));
+    idx += colCount;
+    if (idx < inner.length && inner[idx].trim() === "") idx += 1;
+  }
+  if (rows.length < 2) return null;
+  return rows.map((r) => `|${r.join("|")}|`);
+}
+
 export function splitLearningBlocks(source: string): ContentBlock[] {
-  const lines = source.replace(/\r\n/g, "\n").split("\n");
+  const rawLines = source.replace(/\r\n/g, "\n").split("\n");
+  const lines = rawLines.flatMap((line) => unflattenTableLine(line) ?? [line]);
   const blocks: ContentBlock[] = [];
   let buffer: string[] = [];
   const flush = () => {
