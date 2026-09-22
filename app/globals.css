@@ -148,6 +148,8 @@ body {
   line-height: 1;
   text-align: initial;
   transform-origin: 0 0;
+  z-index: 2;
+  pointer-events: auto;
   /* 2026-09-22(버그 수정) — 처음엔 글자 크기·회전 계산(font-size, transform)을
      빠뜨려서 모든 글자가 브라우저 기본 크기·위치로 나가 클릭이 실제 단어와
      전혀 안 맞았다. pdf.js 공식 규칙(web/pdf_viewer.css)에서 그대로 가져온다 —

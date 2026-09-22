@@ -12,9 +12,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import {
-  getMyPayoutAccountAction,
-  listMyDocumentsAction,
-  loadMySettlementAction,
+  loadSettlementPageDataAction,
   saveMyPayoutAccountAction,
   uploadMyDocumentAction,
   getMyDocumentDownloadUrlAction,
@@ -119,8 +117,8 @@ export default function SettlementTab() {
   const [subtab, setSubtab] = useState<SubtabId>("summary");
 
   function reload(): Promise<void> {
-    return Promise.all([loadMySettlementAction(), getMyPayoutAccountAction(), listMyDocumentsAction()])
-      .then(([s, a, d]) => {
+    return loadSettlementPageDataAction()
+      .then(({ settlement: s, account: a, documents: d }) => {
         setSettlement(s);
         setAccount(a);
         setDocuments(d);

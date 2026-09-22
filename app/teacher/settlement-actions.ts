@@ -81,6 +81,61 @@ export async function loadMySettlementAction(): Promise<TeacherSettlement> {
   return loadTeacherSettlement(supabase, user.id);
 }
 
+/** 2026-09-22(UAT "정산 로딩이 엄청 길다") — SettlementTab이 정산·계좌·서류를
+ * 서버 액션 3개(HTTP 왕복 3번, 각각 별도로 인증·역할 확인)로 따로 불러오고
+ * 있었다. 화면 하나가 쓸 데이터는 한 번의 서버 액션에서 같이 내려준다
+ * (InquiryAndMeetingTab이 loadInquiryAndMeetingDashboardAction 하나로 합친 것과
+ * 같은 패턴). */
+export async function loadSettlementPageDataAction(): Promise<{
+  settlement: TeacherSettlement;
+  account: MaskedPayoutAccount | null;
+  documents: TeacherDocumentItem[];
+}> {
+  const { user, supabase } = await requireUser();
+  const { data: profile, error: profileError } = await supabase.from("profiles").select("role").eq("id", user.id).maybeSingle();
+  if (profileError) throw new Error(profileError.message);
+  if (profile?.role !== "teacher") throw new Error("선생님 계정만 사용할 수 있습니다.");
+
+  const admin = createAdminClient();
+  const [settlement, { data: accountRow, error: accountError }, { data: docRows, error: docsError }] = await Promise.all([
+    loadTeacherSettlement(supabase, user.id),
+    admin
+      .from("teacher_payout_accounts")
+      .select("account_holder_name, bank_name, account_number_last4, currency, country, swift_or_routing, updated_at")
+      .eq("teacher_id", user.id)
+      .maybeSingle(),
+    admin
+      .from("teacher_documents")
+      .select("id, file_name, content_type, size_bytes, note, uploaded_at")
+      .eq("teacher_id", user.id)
+      .order("uploaded_at", { ascending: false }),
+  ]);
+  if (accountError) throw new Error(accountError.message);
+  if (docsError) throw new Error(docsError.message);
+
+  const account: MaskedPayoutAccount | null = accountRow
+    ? {
+        accountHolderName: accountRow.account_holder_name as string,
+        bankName: accountRow.bank_name as string,
+        accountNumberMasked: maskAccountNumber(accountRow.account_number_last4 as string),
+        currency: accountRow.currency as string,
+        country: (accountRow.country as string | null) ?? null,
+        swiftOrRouting: (accountRow.swift_or_routing as string | null) ?? null,
+        updatedAt: accountRow.updated_at as string,
+      }
+    : null;
+  const documents: TeacherDocumentItem[] = (docRows ?? []).map((d) => ({
+    id: d.id as string,
+    fileName: d.file_name as string,
+    contentType: (d.content_type as string | null) ?? null,
+    sizeBytes: d.size_bytes === null ? null : Number(d.size_bytes),
+    note: (d.note as string | null) ?? null,
+    uploadedAt: d.uploaded_at as string,
+  }));
+
+  return { settlement, account, documents };
+}
+
 export async function getMyPayoutAccountAction(): Promise<MaskedPayoutAccount | null> {
   const { userId } = await requireTeacherUser();
   const admin = createAdminClient();

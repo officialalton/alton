@@ -6,32 +6,41 @@ import { describe, expect, it, vi, beforeEach } from "vitest";
 // 마지막 갱신 시각·변동 가능 안내, 계좌 마스킹, 서류에 게이트성 표현 없음.
 
 const {
-  loadMock,
-  getAccountMock,
+  loadPageDataMock,
   saveAccountMock,
-  listDocsMock,
   uploadDocMock,
   downloadUrlMock,
   deleteDocMock,
 } = vi.hoisted(() => ({
-  loadMock: vi.fn(),
-  getAccountMock: vi.fn(),
+  loadPageDataMock: vi.fn(),
   saveAccountMock: vi.fn(),
-  listDocsMock: vi.fn(),
   uploadDocMock: vi.fn(),
   downloadUrlMock: vi.fn(),
   deleteDocMock: vi.fn(),
 }));
 
 vi.mock("./settlement-actions", () => ({
-  loadMySettlementAction: loadMock,
-  getMyPayoutAccountAction: getAccountMock,
+  loadSettlementPageDataAction: loadPageDataMock,
   saveMyPayoutAccountAction: saveAccountMock,
-  listMyDocumentsAction: listDocsMock,
   uploadMyDocumentAction: uploadDocMock,
   getMyDocumentDownloadUrlAction: downloadUrlMock,
   deleteMyDocumentAction: deleteDocMock,
 }));
+
+// 2026-09-22(성능 수정: 정산·계좌·서류를 서버 액션 1개로 합침) — 기존 테스트는
+// loadMock/getAccountMock/listDocsMock 세 개를 따로 mockResolvedValue 했는데,
+// 이제 하나의 loadPageDataMock이 세 값을 한 번에 돌려준다. 마지막에 설정된
+// settlement/account/documents 값을 기억해뒀다가 합쳐서 응답하는 얇은 헬퍼로
+// 기존 테스트 코드의 호출 모양(loadMock.mockResolvedValue(X) 등)을 유지한다.
+let currentSettlement: unknown = null;
+let currentAccount: unknown = null;
+let currentDocuments: unknown = [];
+function refreshPageDataMock() {
+  loadPageDataMock.mockResolvedValue({ settlement: currentSettlement, account: currentAccount, documents: currentDocuments });
+}
+const loadMock = { mockResolvedValue: (s: unknown) => { currentSettlement = s; refreshPageDataMock(); } };
+const getAccountMock = { mockResolvedValue: (a: unknown) => { currentAccount = a; refreshPageDataMock(); } };
+const listDocsMock = { mockResolvedValue: (d: unknown) => { currentDocuments = d; refreshPageDataMock(); } };
 
 import SettlementTab from "./SettlementTab";
 
