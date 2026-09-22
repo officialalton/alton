@@ -129,3 +129,10 @@ body {
 .learning-body {
   overflow-wrap: anywhere;
 }
+
+/* 모의고사 하이라이터(2026-09-21) — CSS Custom Highlight API.
+   드래그 선택한 Range를 CSS.highlights에 등록해서 표시한다(DOM을 건드리지 않으므로
+   React 리렌더와 충돌하지 않는다). 문항을 벗어나면 등록을 지워 세션/화면 단위로만 유지된다. */
+::highlight(exam-highlight) {
+  background-color: #fde68a;
+}

@@ -70,6 +70,37 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
   );
   const [eliminateMode, setEliminateMode] = useState(false);
   const [eliminated, setEliminated] = useState<Record<string, Set<number>>>({});
+  // 2026-09-21(UAT 지적) — 하이라이트(형광펜). CSS Custom Highlight API 사용 —
+  // 드래그한 Range를 CSS.highlights에 등록만 하고 DOM은 건드리지 않아 React 리렌더와
+  // 충돌하지 않는다. Range는 실제 DOM 노드를 참조하므로 문항이 바뀌어 내용이 다시
+  // 그려지면 자연히 무효화된다 — 서버에 저장하지 않는 화면 단위 기능이다.
+  const [highlightMode, setHighlightMode] = useState(false);
+  const highlightSupported = typeof window !== "undefined" && "highlights" in CSS;
+  const highlightObjRef = useRef<Highlight | null>(null);
+  const passageRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!highlightSupported) return;
+    highlightObjRef.current = new Highlight();
+    CSS.highlights.set("exam-highlight", highlightObjRef.current);
+    return () => {
+      CSS.highlights.delete("exam-highlight");
+    };
+  }, [highlightSupported, index, section]);
+
+  function handlePassageMouseUp() {
+    if (!highlightMode || !highlightSupported || !highlightObjRef.current) return;
+    const selection = window.getSelection();
+    if (!selection || selection.isCollapsed || selection.rangeCount === 0) return;
+    const range = selection.getRangeAt(0);
+    if (!passageRef.current?.contains(range.commonAncestorContainer)) return;
+    highlightObjRef.current.add(range.cloneRange());
+    selection.removeAllRanges();
+  }
+
+  function clearHighlights() {
+    highlightObjRef.current?.clear();
+  }
   const [locked, setLocked] = useState<Record<"rw" | "math", boolean>>({ rw: false, math: false });
   const [submitting, setSubmitting] = useState(false);
   const [showReview, setShowReview] = useState(false);
@@ -194,7 +225,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
           세로로 늘어서야 한다. */}
       <nav
         aria-label="문항 이동"
-        className="flex gap-1 overflow-x-auto lg:w-[72px] lg:flex-shrink-0 lg:flex-col lg:flex-nowrap lg:gap-1.5 lg:overflow-x-visible lg:overflow-y-auto lg:max-h-[70vh]"
+        className="flex gap-1 overflow-x-auto lg:w-[72px] lg:flex-shrink-0 lg:flex-col lg:flex-nowrap lg:gap-1.5 lg:overflow-x-hidden lg:overflow-y-auto lg:max-h-[70vh]"
       >
         {sectionItems.map((it, i) => {
           const isAnswered = (responses[it.setItemId] ?? "").trim() !== "";
@@ -305,24 +336,50 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
                   </span>
                 )}
               </div>
-              {/* 2026-09-21(UAT 지적) — 디지털 SAT의 "답 소거" 도구. 켜면 선택지를 눌러도
-                  답으로 선택되지 않고 줄이 그어진다(다시 누르면 해제). */}
-              {current.format === "mc" && current.options && (
-                <button
-                  type="button"
-                  onClick={() => setEliminateMode((v) => !v)}
-                  aria-pressed={eliminateMode}
-                  className={`rounded border px-2 py-1 text-[11px] font-bold ${
-                    eliminateMode ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-500"
-                  }`}
-                  title="답 소거 도구"
-                >
-                  ABC 소거
-                </button>
-              )}
+              <div className="flex items-center gap-1.5">
+                {highlightSupported && (
+                  <button
+                    type="button"
+                    onClick={() => setHighlightMode((v) => !v)}
+                    aria-pressed={highlightMode}
+                    className={`rounded border px-2 py-1 text-[11px] font-bold ${
+                      highlightMode ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-500"
+                    }`}
+                    title="드래그해서 형광펜으로 표시"
+                  >
+                    Highlight
+                  </button>
+                )}
+                {/* 2026-09-21(UAT 지적) — 디지털 SAT의 "답 소거" 도구. 켜면 선택지를 눌러도
+                    답으로 선택되지 않고 줄이 그어진다(다시 누르면 해제). */}
+                {current.format === "mc" && current.options && (
+                  <button
+                    type="button"
+                    onClick={() => setEliminateMode((v) => !v)}
+                    aria-pressed={eliminateMode}
+                    className={`rounded border px-2 py-1 text-[11px] font-bold ${
+                      eliminateMode ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-500"
+                    }`}
+                    title="Answer Eliminator"
+                  >
+                    Eliminator
+                  </button>
+                )}
+              </div>
             </div>
-            {current.passage && <RwStimulusView passage={current.passage} className="mb-4 text-[13.5px]" />}
-            {current.question && <LearningText text={current.question} className="mb-3 font-semibold text-[14px]" />}
+            <div ref={passageRef} onMouseUp={handlePassageMouseUp}>
+              {current.passage && <RwStimulusView passage={current.passage} className="mb-4 text-[13.5px]" />}
+              {current.question && <LearningText text={current.question} className="mb-3 font-semibold text-[14px]" />}
+            </div>
+            {highlightMode && highlightSupported && (
+              <button
+                type="button"
+                onClick={clearHighlights}
+                className="mb-3 text-[11px] font-semibold text-grey-500 underline"
+              >
+                하이라이트 지우기
+              </button>
+            )}
             {current.figure ? <ProblemFigure spec={current.figure} className="mb-4" /> : null}
 
             {current.format === "mc" && current.options ? (

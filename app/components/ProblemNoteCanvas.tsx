@@ -24,9 +24,11 @@ function drawAll(ctx: CanvasRenderingContext2D, strokes: StrokeSegment[], width:
   }
 }
 
-/** 모의고사·과제·문제 풀이 중 필기(2026-09-21 사용자 지시). 실시간 공유가 아니라 혼자 쓰는
- * 필기판 — 문항을 벗어나거나(부모가 key를 바꿔 재마운트) "필기 끄기"를 누를 때 저장한다.
- * authorId를 주면 읽기 전용(교사·학부모가 학생의 필기를 나중에 보는 용도). */
+/** 모의고사·과제·문제 풀이 중 화이트보드(2026-09-21 사용자 지시). 세션뷰의 실시간 공유
+ * 필기(PdfPageAnnotationLayer, 여러 참가자가 같은 캔버스를 실시간으로 같이 그리는 기능)와는
+ * 완전히 별개다 — 이건 혼자 쓰는 스냅샷 저장/재생 화이트보드로, 문항을 벗어나거나(부모가
+ * targetId/itemId를 바꿔 이 컴포넌트의 effect가 재실행) "화이트보드 끄기"를 누를 때 저장한다.
+ * authorId를 주면 읽기 전용(교사·학부모가 학생의 화이트보드를 나중에 보는 용도). */
 export default function ProblemNoteCanvas({
   context,
   targetId,
@@ -149,7 +151,7 @@ export default function ProblemNoteCanvas({
             open ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-600"
           }`}
         >
-          {readOnly ? (open ? "필기 닫기" : "필기 보기") : open ? "필기 끄기" : "✏️ 필기 모드"}
+          {readOnly ? (open ? "화이트보드 닫기" : "화이트보드 보기") : open ? "화이트보드 끄기" : "📝 화이트보드"}
         </button>
         {open && !readOnly && (
           <button type="button" onClick={handleClear} className="text-[11px] font-semibold text-grey-500 underline">

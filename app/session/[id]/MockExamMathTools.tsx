@@ -106,14 +106,18 @@ export function GraphingCalculator({ heightClassName = "h-[360px]" }: { heightCl
     };
   }, []);
 
+  // 2026-09-21(UAT 지적: "계산기가 아예 안 뜬다") — heightClassName(예: h-full)을 안쪽 Desmos
+  // 컨테이너에만 주면, 그 부모(이 바깥 div)가 스스로 높이를 안 가지고 있어(auto, 내용 기반)
+  // h-full이 기준으로 삼을 높이가 없어 0으로 무너졌다. 바깥 div가 실제 높이를 갖고
+  // (heightClassName을 여기로 옮김), 안쪽은 flex-1로 그 안을 채우게 바꾼다.
   return (
-    <div className="rounded-lg border border-grey-200 bg-white p-2 w-full" data-testid="mock-exam-calculator">
+    <div className={`flex flex-col rounded-lg border border-grey-200 bg-white p-2 w-full ${heightClassName}`} data-testid="mock-exam-calculator">
       {status === "error" ? (
         <div className="p-3 text-center text-[13px] text-red" data-testid="calculator-error">
           그래프 계산기를 불러오지 못했습니다. 인터넷 연결을 확인해 주세요.
         </div>
       ) : (
-        <div ref={containerRef} data-testid="desmos-calculator-container" className={`w-full ${heightClassName}`} />
+        <div ref={containerRef} data-testid="desmos-calculator-container" className="w-full min-h-0 flex-1" />
       )}
     </div>
   );
