@@ -5,6 +5,7 @@ import type { HomeworkBatch, HomeworkBatchItem } from "@/lib/homework-batch-data
 import { submitHomeworkAnswerAction, gradeHomeworkBatchAction } from "@/lib/homework-batch-actions";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import MockExamMathTools, { MockExamToolButtons, type MathToolsOpen } from "@/app/session/[id]/MockExamMathTools";
+import ProblemNoteCanvas from "@/app/components/ProblemNoteCanvas";
 
 const FORMAT_LABEL: Record<HomeworkBatchItem["format"], string> = { mc: "객관식", spr: "숫자 입력", essay: "서술형", math: "풀이형" };
 
@@ -353,6 +354,17 @@ function BatchRunner({
             />
           </div>
         )}
+
+        {/* 2026-09-21(사용자 지시) — 과제 풀이 중 필기. 세션 안 "문제" 탭은 이미 실시간 공유
+            필기(PdfPageAnnotationLayer)가 있어 그대로 두고, 세션 밖에서도 쓰는 이 배치 화면
+            (홈워크 배치)에는 없었다 — 저장/재생 방식(ProblemNoteCanvas)으로 채운다. */}
+        <ProblemNoteCanvas
+          context="homework"
+          targetId={batch.id}
+          itemId={item.problemId}
+          authorId={viewerRole === "student" && !readOnly ? undefined : batch.studentId}
+          readOnly={!(viewerRole === "student" && !readOnly)}
+        />
 
         {(showAnswer || (viewerRole === "teacher" && item.explanation)) && item.explanation && (
           <div className="border-t border-grey-100 pt-3">
