@@ -7,6 +7,7 @@ import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import ParentMockExamTab from "./ParentMockExamTab";
+import ParentPlannerTab from "./ParentPlannerTab";
 import PageFrame from "@/app/components/PageFrame";
 import NavIcon from "@/app/components/NavIcon";
 import type { DashboardData } from "@/app/student/dashboard-data";
@@ -64,6 +65,9 @@ import { getRoadmapForStudent } from "@/lib/roadmap/actions";
 // 레퍼런스). 탭 안 본문의 한국어 텍스트는 유지, 라벨만 영어로 바꾼다.
 const NAV_ITEMS = [
   { id: "home", label: "Home", icon: "home" },
+  // 2026-09-22(Student Success Planner MVP, 2026-09-21 승인) — 자녀의 과제·
+  // 모의고사·단어시험·수동 할 일 보드를 읽기 전용으로 보여준다.
+  { id: "planner", label: "Planner", icon: "planner" },
   { id: "roadmap", label: "Roadmap", icon: "roadmap" },
   { id: "entitlements", label: "Credits", icon: "credits" },
   { id: "enrollment", label: "My Courses", icon: "courses" },
@@ -580,6 +584,8 @@ export default function ParentShell({
                 </div>
               )}
             </div>
+          ) : activeTab === "planner" ? (
+            <ParentPlannerTab studentId={currentChildId} />
           ) : activeTab === "roadmap" ? (
             roadmap && roadmap.studentId === currentChildId ? (
               <RoadmapView data={roadmap} />

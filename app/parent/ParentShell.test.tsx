@@ -8,6 +8,9 @@ const pushMock = vi.fn();
 vi.mock("./mock-exam-tab-actions", () => ({
   loadChildMockExamAttemptsAction: vi.fn(async () => []),
 }));
+vi.mock("./board-actions", () => ({
+  loadChildBoardCardsAction: vi.fn(async () => []),
+}));
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: pushMock, replace: vi.fn(), refresh: vi.fn() }),
 }));
@@ -285,6 +288,20 @@ describe("ParentShell", () => {
     expect(
       screen.getByText(/아직 선생님 배정이 완료되지 않았어요/)
     ).toBeInTheDocument();
+  });
+
+  it("Planner 탭을 누르면 자녀 보드가 읽기 전용으로 렌더링된다(Student Success Planner MVP)", async () => {
+    render(
+      <ParentShell
+        parentName="김민지"
+        childrenList={childrenList}
+        currentChildId="s1"
+        dashboard={dashboard}
+        {...lessonsProps}
+      />
+    );
+    fireEvent.click(screen.getAllByText("Planner")[0]);
+    expect(await screen.findByText("백로그")).toBeInTheDocument();
   });
 
   it("수업권 탭을 누르면 EntitlementsTab(R4)이 렌더링된다", () => {

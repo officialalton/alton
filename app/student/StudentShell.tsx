@@ -46,7 +46,7 @@ import RoadmapView from "@/app/components/RoadmapView";
 import type { RoadmapData } from "@/lib/roadmap/types";
 import PageFrame from "@/app/components/PageFrame";
 import NavIcon from "@/app/components/NavIcon";
-import BoardTab from "./BoardTab";
+import PlannerTab from "./PlannerTab";
 
 // 2026-09-19(UI 통일화) — 좌측 네비게이션 라벨은 전부 영어로 통일한다(Acely
 // 레퍼런스). 탭 안 본문의 한국어 텍스트는 유지, 라벨만 영어로 바꾼다.
@@ -330,7 +330,7 @@ export default function StudentShell({
         ) : (
         <PageFrame title={activeLabel}>
           {activeTab === "planner" ? (
-            <BoardTab />
+            <PlannerTab />
           ) : activeTab === "roadmap" ? (
             <RoadmapView data={roadmap} />
           ) : activeTab === "enrollment" ? (
