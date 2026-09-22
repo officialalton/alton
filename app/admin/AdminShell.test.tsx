@@ -135,6 +135,8 @@ const baseProps = {
   openOrRecentPaymentDisputes: [],
   isMasterAdmin: false,
   adminAccounts: [],
+  consultants: [],
+  unassignedConsultations: [],
 };
 
 describe("AdminShell", () => {

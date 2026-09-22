@@ -54,6 +54,9 @@ import type { AdminSubject } from "./subject-data";
 import type { CurriculumDocListItem } from "./curriculum-doc-data";
 import AdminAccountsTab from "./AdminAccountsTab";
 import type { AdminAccount } from "./admin-accounts-data";
+import ConsultantAssignmentsTab from "./ConsultantAssignmentsTab";
+import type { ConsultantWithStudents } from "./consultant-assignment-actions";
+import type { IntakeConsultation } from "@/app/consultant/intake-data";
 
 // 2026-09-19(UI 통일화) — 좌측 네비게이션 라벨은 전부 영어로 통일한다(Acely
 // 레퍼런스). 탭 안 본문의 한국어 텍스트는 유지, 라벨만 영어로 바꾼다.
@@ -76,6 +79,8 @@ const NAV_ITEMS = [
   // (아래 visibleNavItems 참고). NAV_ITEMS 자체엔 늘 들어 있다 — ALL_TABS(제목
   // 표시용)는 이걸 그대로 쓰므로 마스터가 이 탭에 있을 때 제목이 정상 표시된다.
   { id: "admin-accounts", label: "Admins", icon: "settings" },
+  // 2026-09-22(컨설턴트 포지션) — 관리자 전원이 쓴다(학생 배정은 운영 업무).
+  { id: "consultants", label: "Consultants", icon: "consultations" },
 ] as const;
 
 // 2026-09-10(UI/UX 1차 리뷰 지적) — "개발 로그"는 일반 운영 업무 중 볼 메뉴가
@@ -124,6 +129,8 @@ export default function AdminShell({
   isMasterAdmin,
   adminAccounts,
   mockExamSets,
+  consultants,
+  unassignedConsultations,
 }: {
   initialTab?: string;
   // 2026-09-10(P1 재진입 성능 배치) — 탭 데이터 캐시(tab-data-cache.ts)를
@@ -173,6 +180,9 @@ export default function AdminShell({
   isMasterAdmin: boolean;
   adminAccounts: AdminAccount[];
   mockExamSets?: MockExamSetSummary[];
+  // 2026-09-22(컨설턴트 포지션) — 관리자 전원이 쓴다(마스터 전용 아님).
+  consultants: ConsultantWithStudents[];
+  unassignedConsultations: IntakeConsultation[];
 }) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<TabId>(resolveAdminTab(initialTab));
@@ -451,6 +461,8 @@ export default function AdminShell({
             ) : (
               <div className="p-8 text-[14px] text-grey-500">마스터 관리자만 볼 수 있습니다.</div>
             )
+          ) : activeTab === "consultants" ? (
+            <ConsultantAssignmentsTab initialConsultants={consultants} initialUnassignedConsultations={unassignedConsultations} />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.
