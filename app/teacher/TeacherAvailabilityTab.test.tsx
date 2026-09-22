@@ -14,14 +14,29 @@ const baseProps = {
 };
 
 describe("TeacherAvailabilityTab", () => {
-  it("월간 달력이 기본으로 렌더링된다", () => {
+  // 2026-09-22(사용자 지시) — 설명 문단 제거, "반복 일정 등록"/"휴무 일정 등록"
+  // 서브탭 두 개로 분리.
+  it("설명 문단 없이 반복 일정 등록/휴무 일정 등록 서브탭만 보인다", () => {
     render(<TeacherAvailabilityTab {...baseProps} />);
+    expect(screen.getByText("반복 일정 등록")).toBeInTheDocument();
+    expect(screen.getByText("휴무 일정 등록")).toBeInTheDocument();
+    expect(screen.queryByText(/반복 가능 시간\(주간 템플릿\)을 기본으로 두고/)).toBeNull();
+    expect(screen.queryByText("날짜별 예외(월간 달력)")).toBeNull();
+    fireEvent.click(screen.getByText("휴무 일정 등록"));
+    expect(screen.getByText("날짜별 예외(월간 달력)")).toBeInTheDocument();
+    expect(screen.queryByText("반복 가능 시간(주간 템플릿)")).toBeNull();
+  });
+
+  it("휴무 일정 등록 탭에서 월간 달력이 렌더링된다", () => {
+    render(<TeacherAvailabilityTab {...baseProps} />);
+    fireEvent.click(screen.getByText("휴무 일정 등록"));
     expect(screen.getByLabelText("다음 달")).toBeInTheDocument();
   });
 
   it("선택한 날짜를 휴무로 등록하면 onAddException이 호출된다", async () => {
     const onAddException = vi.fn().mockResolvedValue("ex1");
     render(<TeacherAvailabilityTab {...baseProps} onAddException={onAddException} />);
+    fireEvent.click(screen.getByText("휴무 일정 등록"));
     fireEvent.click(screen.getByText("이 날짜 휴무로"));
     await waitFor(() => expect(onAddException).toHaveBeenCalled());
     expect(onAddException.mock.calls[0][0]).toMatchObject({ kind: "blocked" });
@@ -75,6 +90,7 @@ describe("TeacherAvailabilityTab", () => {
         initialExceptions={[{ id: "ex1", exceptionDate: todayKey, kind: "blocked", reason: null }]}
       />
     );
+    fireEvent.click(screen.getByText("휴무 일정 등록"));
     expect(screen.getByText("이 예외 삭제")).toBeInTheDocument();
   });
 
@@ -91,6 +107,7 @@ describe("TeacherAvailabilityTab", () => {
         ]}
       />
     );
+    fireEvent.click(screen.getByText("휴무 일정 등록"));
     const timeline = screen.getByTestId("teacher-day-timeline");
     expect(timeline).toHaveTextContent("09:00~17:00");
   });
@@ -98,6 +115,7 @@ describe("TeacherAvailabilityTab", () => {
   it("부분 시간 휴무를 등록하면 onAddException이 startTimeLocal/endTimeLocal과 함께 호출된다", async () => {
     const onAddException = vi.fn().mockResolvedValue("ex-partial");
     render(<TeacherAvailabilityTab {...baseProps} onAddException={onAddException} />);
+    fireEvent.click(screen.getByText("휴무 일정 등록"));
     fireEvent.click(screen.getByText("이 시간대만 휴무로"));
     await waitFor(() => expect(onAddException).toHaveBeenCalled());
     expect(onAddException.mock.calls[0][0]).toMatchObject({
@@ -111,6 +129,7 @@ describe("TeacherAvailabilityTab", () => {
     const onAddException = vi.fn().mockResolvedValue("ex-partial");
     const onRemoveException = vi.fn().mockResolvedValue(undefined);
     render(<TeacherAvailabilityTab {...baseProps} onAddException={onAddException} onRemoveException={onRemoveException} />);
+    fireEvent.click(screen.getByText("휴무 일정 등록"));
     fireEvent.click(screen.getByText("이 시간대만 휴무로"));
     await waitFor(() => expect(screen.getByText(/부분 휴무: 13:00~14:00/)).toBeInTheDocument());
     fireEvent.click(screen.getByText("삭제"));

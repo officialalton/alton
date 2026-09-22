@@ -5,6 +5,7 @@ import type { TeacherAvailabilityRuleRow, AvailabilityExceptionRow } from "./ava
 import type { ExternalBusyBlock } from "./lesson-schedule-actions";
 import MonthCalendar, { type DayBadge } from "@/app/components/MonthCalendar";
 import WeeklyAvailabilityGrid from "@/app/components/WeeklyAvailabilityGrid";
+import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import { todayKeyInTimezone, dateKeysCoveredByInterval, dayOfWeekForDateKey, buildMonthGrid } from "@/lib/calendar-date-utils";
 import { computeOpenWindowsForDate, type AvailabilityException } from "@/lib/booking/slot-search";
 
@@ -59,6 +60,9 @@ export default function TeacherAvailabilityTab({
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [rulesView, setRulesView] = useState<"grid" | "list">("grid");
+  // 2026-09-22(사용자 지시) — 설명 문단을 없애고, "반복 일정 등록"/"휴무 일정
+  // 등록" 서브탭 두 개로 나눈다.
+  const [subtab, setSubtab] = useState<"recurring" | "exception">("recurring");
   const [partialStartTimeLocal, setPartialStartTimeLocal] = useState("13:00");
   const [partialEndTimeLocal, setPartialEndTimeLocal] = useState("14:00");
   const [externalBusyBlocks, setExternalBusyBlocks] = useState<ExternalBusyBlock[]>([]);
@@ -347,15 +351,21 @@ export default function TeacherAvailabilityTab({
 
   return (
     <div className="max-w-[640px]">
-      <p className="text-[13px] text-grey-500 mb-5">
-        반복 가능 시간(주간 템플릿)을 기본으로 두고, 달력에서 날짜를 선택해 특정 날짜만 휴무·임시 오픈으로 덮어쓸 수
-        있습니다({timezone} 기준). 이미 확정된 수업이 있는 시간은 예외를 등록해도 취소되지 않습니다 — 취소는
-        "정규수업" 탭에서 별도로 처리하세요.
-      </p>
+      <UnderlineSubTabs
+        className="mb-5"
+        items={[
+          { id: "recurring", label: "반복 일정 등록" },
+          { id: "exception", label: "휴무 일정 등록" },
+        ]}
+        activeId={subtab}
+        onSelect={setSubtab}
+      />
 
       {error && <div className="mb-4 text-[13px] font-semibold text-red bg-red/5 rounded-lg px-4 py-3">{error}</div>}
       {message && <div className="mb-4 text-[13px] font-semibold text-ink bg-green/10 rounded-lg px-4 py-3">{message}</div>}
 
+      {subtab === "recurring" && (
+      <>
       <div className="flex items-center justify-between mb-2.5">
         <h2 className="text-[15px] font-bold text-ink">반복 가능 시간(주간 템플릿)</h2>
         <div className="flex gap-1">
@@ -421,7 +431,11 @@ export default function TeacherAvailabilityTab({
           ))}
         </div>
       )}
+      </>
+      )}
 
+      {subtab === "exception" && (
+      <>
       <h2 className="text-[15px] font-bold text-ink mb-2.5">날짜별 예외(월간 달력)</h2>
       <div className="grid grid-cols-1 sm:grid-cols-[minmax(0,280px)_1fr] gap-4 mb-4">
         <div className="border-[1.5px] border-grey-200 rounded-xl p-3">
@@ -571,6 +585,8 @@ export default function TeacherAvailabilityTab({
           </button>
         </div>
       </div>
+      </>
+      )}
     </div>
   );
 }
