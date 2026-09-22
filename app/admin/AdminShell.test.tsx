@@ -133,9 +133,30 @@ const baseProps = {
   pendingRefundRequests: [],
   purchasesNeedingReconciliation: [],
   openOrRecentPaymentDisputes: [],
+  isMasterAdmin: false,
+  adminAccounts: [],
 };
 
 describe("AdminShell", () => {
+  // 2026-09-22(관리자 계정 구조) — "Admins" 탭은 마스터(official@alton.education)
+  // 계정에만 보인다.
+  it("마스터가 아니면 'Admins' nav 항목이 보이지 않는다", () => {
+    render(<AdminShell {...baseProps} isMasterAdmin={false} />);
+    expect(screen.queryByText("Admins")).toBeNull();
+  });
+
+  it("마스터면 'Admins' nav 항목이 보이고, 누르면 AdminAccountsTab이 렌더링된다", () => {
+    render(
+      <AdminShell
+        {...baseProps}
+        isMasterAdmin
+        adminAccounts={[{ id: "a1", name: "박운영", email: "ops@alton.education", tier: "full", capabilities: [] }]}
+      />
+    );
+    fireEvent.click(screen.getAllByText("Admins")[0]);
+    expect(screen.getByText("박운영")).toBeInTheDocument();
+  });
+
   it("사이드바 항목을 보여주고, 기본 탭은 홈이다", () => {
     render(<AdminShell {...baseProps} />);
     [

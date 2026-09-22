@@ -51,6 +51,8 @@ import type {
 } from "./entitlement-actions";
 import type { AdminSubject } from "./subject-data";
 import type { CurriculumDocListItem } from "./curriculum-doc-data";
+import AdminAccountsTab from "./AdminAccountsTab";
+import type { AdminAccount } from "./admin-accounts-data";
 
 // 2026-09-19(UI 통일화) — 좌측 네비게이션 라벨은 전부 영어로 통일한다(Acely
 // 레퍼런스). 탭 안 본문의 한국어 텍스트는 유지, 라벨만 영어로 바꾼다.
@@ -69,6 +71,10 @@ const NAV_ITEMS = [
   { id: "payouts", label: "Payouts", icon: "payouts" },
   { id: "documents", label: "Documents", icon: "documents" },
   { id: "workspace", label: "Workspace", icon: "workspace" },
+  // 2026-09-22(관리자 계정 구조) — 마스터가 아니면 렌더링 시점에 걸러낸다
+  // (아래 visibleNavItems 참고). NAV_ITEMS 자체엔 늘 들어 있다 — ALL_TABS(제목
+  // 표시용)는 이걸 그대로 쓰므로 마스터가 이 탭에 있을 때 제목이 정상 표시된다.
+  { id: "admin-accounts", label: "Admins", icon: "settings" },
 ] as const;
 
 // 2026-09-10(UI/UX 1차 리뷰 지적) — "개발 로그"는 일반 운영 업무 중 볼 메뉴가
@@ -114,6 +120,8 @@ export default function AdminShell({
   openOrRecentPaymentDisputes,
   googleLinkError,
   googleLinkSuccess,
+  isMasterAdmin,
+  adminAccounts,
 }: {
   initialTab?: string;
   // 2026-09-10(P1 재진입 성능 배치) — 탭 데이터 캐시(tab-data-cache.ts)를
@@ -159,6 +167,9 @@ export default function AdminShell({
   pendingRefundRequests: Awaited<ReturnType<typeof listPendingRefundRequests>>;
   purchasesNeedingReconciliation: Awaited<ReturnType<typeof listPurchasesNeedingReconciliation>>;
   openOrRecentPaymentDisputes: Awaited<ReturnType<typeof listOpenOrRecentPaymentDisputes>>;
+  // 2026-09-22(관리자 계정 구조) — "Admins" nav 항목·탭 내용은 마스터만.
+  isMasterAdmin: boolean;
+  adminAccounts: AdminAccount[];
 }) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<TabId>(resolveAdminTab(initialTab));
@@ -209,15 +220,23 @@ export default function AdminShell({
     // 떨어져 문서 탭이 정산 그룹에 표시된다.
     "documents",
     "workspace",
+    "admin-accounts",
   ];
   const CONTENT_IDS: TabId[] = ["catalog", "problem-bank", "mock-exam"];
+  // 2026-09-22(관리자 계정 구조) — "Admins"는 마스터(official@alton.education)만
+  // 본다. isMasterAdmin은 admin_tier='master' 여부를 SSR에서 이미 확인한 값
+  // (admin-accounts-data.ts의 서버 액션이 최종 방어선).
+  const visibleNavItems = NAV_ITEMS.filter((n) => n.id !== "admin-accounts" || isMasterAdmin);
   const mobileGroups = [
-    { label: "운영", items: NAV_ITEMS.filter((n) => OPERATIONS_IDS.includes(n.id)) },
+    { label: "운영", items: visibleNavItems.filter((n) => OPERATIONS_IDS.includes(n.id)) },
     {
       label: "콘텐츠",
-      items: NAV_ITEMS.filter((n) => CONTENT_IDS.includes(n.id)),
+      items: visibleNavItems.filter((n) => CONTENT_IDS.includes(n.id)),
     },
-    { label: "정산", items: NAV_ITEMS.filter((n) => !OPERATIONS_IDS.includes(n.id) && !CONTENT_IDS.includes(n.id)) },
+    {
+      label: "정산",
+      items: visibleNavItems.filter((n) => !OPERATIONS_IDS.includes(n.id) && !CONTENT_IDS.includes(n.id)),
+    },
   ];
 
   return (
@@ -229,7 +248,7 @@ export default function AdminShell({
           </div>
           <span className="text-[13.5px] font-extrabold text-ink">ALTON</span>
         </div>
-        {NAV_ITEMS.map((item) => (
+        {visibleNavItems.map((item) => (
           <button
             key={item.id}
             onClick={() => selectTab(item.id)}
@@ -423,6 +442,12 @@ export default function AdminShell({
             <DocumentsTab />
           ) : activeTab === "workspace" ? (
             <WorkspaceTab provisionings={workspaceProvisionings} />
+          ) : activeTab === "admin-accounts" ? (
+            isMasterAdmin ? (
+              <AdminAccountsTab initialAccounts={adminAccounts} />
+            ) : (
+              <div className="p-8 text-[14px] text-grey-500">마스터 관리자만 볼 수 있습니다.</div>
+            )
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.

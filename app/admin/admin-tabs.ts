@@ -24,6 +24,10 @@ export const ADMIN_NAV_TAB_IDS = [
   // 탭(Workspace) 앞에 둔다.
   "documents",
   "workspace",
+  // 2026-09-22(관리자 계정 구조) — 마스터(official@alton.education)만 보이는
+  // 관리자 등급·권한 셋업 화면. AdminShell이 마스터가 아니면 이 nav 항목을
+  // 숨긴다(admin-accounts-data.ts의 검사가 최종 방어선).
+  "admin-accounts",
 ] as const;
 
 // "개발 로그"는 내비게이션에는 없지만 ?tab=devlog 직접 접근으로 열람 가능한

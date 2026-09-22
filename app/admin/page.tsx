@@ -26,6 +26,7 @@ import {
   listOpenOrRecentPaymentDisputes,
 } from "./entitlement-actions";
 import { resolveAdminTab } from "./admin-tabs";
+import { loadAdminAccounts, type AdminAccount } from "./admin-accounts-data";
 import AdminShell from "./AdminShell";
 
 const EMPTY_DASHBOARD: AdminDashboardData = {
@@ -53,6 +54,13 @@ export default async function AdminHomePage({
   // (탭 전환은 이미 이 서버 컴포넌트를 다시 타는 RSC 왕복이라 — P1-1 결론).
   const activeTab = resolveAdminTab(tab);
   const need = (...tabs: string[]) => tabs.includes(activeTab);
+
+  // 2026-09-22(관리자 계정 구조) — "admin-accounts" 탭은 마스터만 실제로 데이터를
+  // 받는다. 마스터가 아닌 관리자가 URL을 직접 쳐도(?tab=admin-accounts) 서버
+  // 에러로 페이지 전체가 깨지지 않게, 여기서 조용히 빈 목록으로 막는다 —
+  // AdminShell이 마스터가 아니면 이 탭 내용 대신 안내만 보여준다.
+  const { data: myAdminProfile } = await supabase.from("profiles").select("admin_tier").eq("id", user.id).single();
+  const isMasterAdmin = myAdminProfile?.admin_tier === "master";
 
   const devLogContent = loadDevLog();
 
@@ -90,6 +98,7 @@ export default async function AdminHomePage({
     pendingRefundRequests,
     purchasesNeedingReconciliation,
     openOrRecentPaymentDisputes,
+    adminAccounts,
   ] = await Promise.all([
     need("home") ? loadAdminDashboard(supabase, user.id) : Promise.resolve(EMPTY_DASHBOARD),
     need("catalog", "users", "consult", "matching", "problem-bank") ? loadSubjectCatalog(supabase) : Promise.resolve([]),
@@ -116,6 +125,7 @@ export default async function AdminHomePage({
     need("entitlements") ? listPendingRefundRequests() : Promise.resolve([]),
     need("entitlements") ? listPurchasesNeedingReconciliation() : Promise.resolve([]),
     need("entitlements") ? listOpenOrRecentPaymentDisputes() : Promise.resolve([]),
+    need("admin-accounts") && isMasterAdmin ? loadAdminAccounts(supabase) : Promise.resolve([] as AdminAccount[]),
   ]);
 
   // 성능 corrective(2026-09-09, 2026-09-10 갱신): "사용자" 탭의 학생/선생님
@@ -153,6 +163,8 @@ export default async function AdminHomePage({
       pendingRefundRequests={pendingRefundRequests}
       purchasesNeedingReconciliation={purchasesNeedingReconciliation}
       openOrRecentPaymentDisputes={openOrRecentPaymentDisputes}
+      isMasterAdmin={isMasterAdmin}
+      adminAccounts={adminAccounts}
     />
   );
 }

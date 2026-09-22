@@ -26,6 +26,11 @@ const ADMIN_DIR = path.join(ROOT, "app", "admin");
 const ALLOWLIST_FILES = new Set<string>([
   "users-data.ts", // page.tsx가 middleware 역할 게이트로만 보호(다른 모든 포털 page.tsx와 동일 패턴)
   "payouts-cron.ts", // 완전 no-op, 별도 회귀 가드로 이미 증명됨
+  // 2026-09-22(관리자 계정 구조) — loadAdminAccounts()는 순수 데이터 로더고,
+  // 호출부(admin-accounts-actions.ts::listAdminAccountsAction)가
+  // requireMasterAdmin()으로, admin/page.tsx도 별도 isMasterAdmin 검사 후에만
+  // 호출한다 — users-data.ts와 같은 "호출부에서 게이트" 패턴.
+  "admin-accounts-data.ts",
 ]);
 const ALLOWLIST_FUNCTIONS = new Set<string>([
   "getClosureDraftAction", // requireAdminOrCapability를 이미 호출하는 getConsultationCardDetailAction에 위임
