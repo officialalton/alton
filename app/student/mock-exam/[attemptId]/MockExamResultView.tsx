@@ -7,6 +7,7 @@ import LearningText from "@/app/session/[id]/LearningText";
 import RwStimulusView from "@/app/session/[id]/RwStimulusView";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import ProblemNoteCanvas from "@/app/components/ProblemNoteCanvas";
+import { toggleMockExamSavedToPracticeAction } from "@/lib/mock-exam/attempt-actions";
 
 const SECTION_LABEL: Record<string, string> = { rw: "R&W", math: "Math" };
 const OPTION_LETTERS = ["A", "B", "C", "D", "E"];
@@ -44,12 +45,37 @@ export function ItemDetail({
    * 응시를 읽기 전용으로 보는 중. */
   viewerIsOwner?: boolean;
 }) {
+  const [saved, setSaved] = useState(item.savedToPractice);
+
+  async function toggleSaved() {
+    if (!attemptId) return;
+    const next = !saved;
+    setSaved(next);
+    await toggleMockExamSavedToPracticeAction(attemptId, item.setItemId, next);
+  }
+
   return (
     <div className="rounded-lg border border-grey-200 bg-white p-4" data-testid="mock-exam-item-detail">
-      <p className="mb-2 text-[12px] font-bold text-grey-500">
-        {SECTION_LABEL[item.section]} {item.position}번 · {item.satDomain}
-        {item.skillCode ? ` · ${item.skillCode}` : ""}
-      </p>
+      <div className="mb-2 flex items-center justify-between gap-2">
+        <p className="text-[12px] font-bold text-grey-500">
+          {SECTION_LABEL[item.section]} {item.position}번 · {item.satDomain}
+          {item.skillCode ? ` · ${item.skillCode}` : ""}
+        </p>
+        {/* 2026-09-21(사용자 지시) — 학생 포털 Practice 탭에 이 문항을 저장/해제. */}
+        {viewerIsOwner && attemptId && (
+          <button
+            type="button"
+            onClick={toggleSaved}
+            aria-pressed={saved}
+            className={`shrink-0 rounded-full border px-2 py-0.5 text-[11px] font-bold ${
+              saved ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-500"
+            }`}
+            title="Practice 탭(문제 기록)에 저장"
+          >
+            {saved ? "저장됨" : "+ 문제 저장"}
+          </button>
+        )}
+      </div>
       {item.passage && <RwStimulusView passage={item.passage} className="mb-3 text-[13px]" />}
       {item.question && <LearningText text={item.question} className="mb-3 font-semibold text-[13.5px]" />}
       {item.figure ? <ProblemFigure spec={item.figure} className="mb-3" /> : null}

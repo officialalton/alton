@@ -9,7 +9,7 @@ import { createAdminClient } from "@/lib/supabase-admin";
 export type ProblemHistoryEntry = {
   workId: string;
   sessionId: string;
-  source: "lesson" | "homework";
+  source: "lesson" | "homework" | "mock_exam";
   subjectName: string;
   /** 수업 시각(예약) — 없으면 null. */
   startsAt: string | null;
@@ -35,6 +35,68 @@ export type ProblemHistoryEntry = {
 
 const one = (rel: unknown) => (Array.isArray(rel) ? rel[0] : rel) as Record<string, unknown> | null | undefined;
 
+// 2026-09-21(사용자 지시) — 모의고사 문항도 이 화면에 보이게 하되, 수업/과제처럼 전부
+// 자동으로 들어가지 않고 학생이 "문제 저장" 버튼을 누른 것(saved_to_practice)만 보인다
+// (단어장의 "내 단어장"과 같은 구조). 정답·해설은 그 응시가 채점 확정(graded)된 뒤에만.
+async function loadSavedMockExamPractice(studentId: string): Promise<ProblemHistoryEntry[]> {
+  const admin = createAdminClient();
+  const { data: answers } = await admin
+    .from("mock_exam_answers")
+    .select(
+      "attempt_id, set_item_id, response, correct, updated_at, attempt:mock_exam_attempts!inner(id, student_id, status, exam_set_id, submitted_at, graded_at, exam_set:mock_exam_sets(name)), item:mock_exam_set_items!inner(id, sat_domain, skill_code, problem_id, problem_version_id)"
+    )
+    .eq("saved_to_practice", true)
+    .eq("attempt.student_id", studentId);
+  if (!answers?.length) return [];
+
+  const versionIds = Array.from(new Set(answers.map((a) => one(a.item)?.problem_version_id as string).filter(Boolean)));
+  const problemIds = Array.from(new Set(answers.map((a) => one(a.item)?.problem_id as string).filter(Boolean)));
+  const [{ data: versions }, { data: problems }] = await Promise.all([
+    versionIds.length
+      ? admin.from("problem_versions").select("id, passage, question, options, correct_index, explanation, answers, figure").in("id", versionIds)
+      : Promise.resolve({ data: [] as Record<string, unknown>[] }),
+    problemIds.length ? admin.from("problems").select("id, format").in("id", problemIds) : Promise.resolve({ data: [] as Record<string, unknown>[] }),
+  ]);
+  const versionById = new Map((versions ?? []).map((v) => [v.id as string, v]));
+  const formatById = new Map((problems ?? []).map((p) => [p.id as string, p.format as string]));
+
+  return answers.map((a) => {
+    const attempt = one(a.attempt);
+    const item = one(a.item);
+    const examSet = one(attempt?.exam_set);
+    const v = versionById.get((item?.problem_version_id as string) ?? "");
+    const options = Array.isArray(v?.options) ? (v!.options as unknown[]).map(String) : [];
+    const answersArr = Array.isArray(v?.answers) ? (v!.answers as unknown[]).map(String) : null;
+    const graded = attempt?.status === "graded";
+    const fmt = formatById.get((item?.problem_id as string) ?? "");
+    const format: ProblemHistoryEntry["format"] = fmt === "mc" || fmt === "spr" || fmt === "essay" || fmt === "math" ? fmt : options.length > 0 ? "mc" : "essay";
+    const grade: ProblemHistoryEntry["grade"] = graded ? (a.correct === true ? "correct" : a.correct === false ? "incorrect" : null) : null;
+    return {
+      workId: `mock:${a.attempt_id}:${a.set_item_id}`,
+      sessionId: a.attempt_id as string,
+      source: "mock_exam",
+      subjectName: "모의고사",
+      startsAt: (attempt?.submitted_at as string | null) ?? (attempt?.graded_at as string | null) ?? null,
+      unitTitle: (examSet?.name as string | undefined) ?? null,
+      format,
+      passage: [((v?.passage as string | null) ?? "").trim(), ((v?.question as string | null) ?? "").trim()].filter(Boolean).join("\n\n"),
+      options,
+      figure: (v?.figure as unknown) ?? null,
+      myChoice: format === "mc" && a.response != null ? Number(a.response) : null,
+      myText: format !== "mc" ? ((a.response as string | null) ?? null) : null,
+      submittedAt: (a.updated_at as string | null) ?? null,
+      graded,
+      grade,
+      gradeComment: null,
+      correctIndex: graded ? ((v?.correct_index as number | null) ?? null) : null,
+      acceptedAnswers: graded ? answersArr : null,
+      explanation: graded ? ((v?.explanation as string | null) ?? null) : null,
+      satDomain: (item?.sat_domain as string | null) ?? null,
+      skillCode: (item?.skill_code as string | null) ?? null,
+    };
+  });
+}
+
 export async function loadProblemHistory(studentId: string): Promise<ProblemHistoryEntry[]> {
   const admin = createAdminClient();
   const { data: work } = await admin
@@ -45,7 +107,8 @@ export async function loadProblemHistory(studentId: string): Promise<ProblemHist
     .eq("student_id", studentId)
     .or("submitted_at.not.is.null,graded_at.not.is.null")
     .order("submitted_at", { ascending: false, nullsFirst: false });
-  if (!work?.length) return [];
+  const savedMockExam = await loadSavedMockExamPractice(studentId);
+  if (!work?.length) return savedMockExam;
 
   // 같은 문제를 여러 번 풀었으면(풀이형 다시 풀기) 가장 최근 시도만.
   const latest = new Map<string, (typeof work)[number]>();
@@ -94,7 +157,7 @@ export async function loadProblemHistory(studentId: string): Promise<ProblemHist
     return "essay";
   };
 
-  return rows.map((r) => {
+  const lessonHomeworkEntries = rows.map((r) => {
     const v = versionById.get(r.problem_version_id as string);
     const options = Array.isArray(v?.options) ? (v!.options as unknown[]).map(String) : [];
     const graded = Boolean(r.graded_at);
@@ -123,5 +186,7 @@ export async function loadProblemHistory(studentId: string): Promise<ProblemHist
       satDomain: classById.get(r.problem_id as string)?.satDomain ?? null,
       skillCode: classById.get(r.problem_id as string)?.skillCode ?? null,
     };
-  });
+  }) as ProblemHistoryEntry[];
+
+  return [...lessonHomeworkEntries, ...savedMockExam];
 }

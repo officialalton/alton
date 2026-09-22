@@ -130,6 +130,19 @@ export async function toggleMockExamFlagAction(attemptId: string, setItemId: str
   return callRpc("mock_exam_toggle_flag", { p_attempt_id: attemptId, p_set_item_id: setItemId, p_flagged: flagged }, "표시를 저장하지 못했습니다.");
 }
 
+/** 2026-09-21(사용자 지시) — 문항을 학생 포털 Practice 탭(문제 기록)에 저장/해제한다.
+ * 단어장의 "내 단어장"처럼 원하는 문항만 골라 담는 구조 — 표시(flagged)와 달리 시험을
+ * 벗어나도(제출·채점 뒤에도) 계속 남아 나중에 다시 볼 수 있다. */
+export async function toggleMockExamSavedToPracticeAction(attemptId: string, setItemId: string, saved: boolean): Promise<ActionResult> {
+  const r = await callRpc(
+    "mock_exam_toggle_saved_to_practice",
+    { p_attempt_id: attemptId, p_set_item_id: setItemId, p_saved: saved },
+    "저장하지 못했습니다.",
+  );
+  if (r.ok) revalidatePath("/student");
+  return r;
+}
+
 /** 학생 흐름 마지막: 시험을 제출한다. 자동 채점 문항(mc/spr)은 제출 즉시 채점 확정되어(2026-09-21
  * 제품 오너 지시로 교사 확인 단계 제거) 정답·해설이 바로 열린다 — 제출 직후 화면이 곧바로 결과
  * 화면으로 전환될 수 있게, 새로 채점된 상세를 같이 돌려준다(클라이언트가 갖고 있던 마스킹된 상태를

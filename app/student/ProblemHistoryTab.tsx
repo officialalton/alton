@@ -20,7 +20,7 @@ export default function ProblemHistoryTab({ entries }: { entries: ProblemHistory
   const [subject, setSubject] = useState(ALL);
   const [gradeFilter, setGradeFilter] = useState<GradeFilter>("all");
   const [formatFilter, setFormatFilter] = useState<"all" | ProblemHistoryEntry["format"]>("all");
-  const [sourceFilter, setSourceFilter] = useState<"all" | "lesson" | "homework">("all");
+  const [sourceFilter, setSourceFilter] = useState<"all" | "lesson" | "homework" | "mock_exam">("all");
   const [skillFilter, setSkillFilter] = useState("");
   // 기술별 성취(2026-09-14) — 채점된 문제만 센다. 문제은행·자동 구성과 같은 분류.
   const skillSummary = useMemo(() => {
@@ -82,8 +82,8 @@ export default function ProblemHistoryTab({ entries }: { entries: ProblemHistory
         <Chips
           label="출처"
           value={sourceFilter}
-          onChange={(v) => setSourceFilter(v as "all" | "lesson" | "homework")}
-          options={[["all", "전체"], ["lesson", "수업"], ["homework", "과제"]]}
+          onChange={(v) => setSourceFilter(v as "all" | "lesson" | "homework" | "mock_exam")}
+          options={[["all", "전체"], ["lesson", "수업"], ["homework", "과제"], ["mock_exam", "모의고사"]]}
         />
       </div>
 
@@ -128,7 +128,9 @@ export default function ProblemHistoryTab({ entries }: { entries: ProblemHistory
                   className="w-full text-left flex flex-wrap items-center gap-2"
                 >
                   <span className="text-[10.5px] font-bold text-grey-500 border border-grey-200 rounded-full px-1.5 py-0.5">{FORMAT_LABEL[e.format]}</span>
-                  <span className="text-[10.5px] font-bold text-grey-500 border border-grey-200 rounded-full px-1.5 py-0.5">{e.source === "homework" ? "과제" : "수업"}</span>
+                  <span className="text-[10.5px] font-bold text-grey-500 border border-grey-200 rounded-full px-1.5 py-0.5">
+                    {e.source === "homework" ? "과제" : e.source === "mock_exam" ? "모의고사" : "수업"}
+                  </span>
                   <GradeBadge entry={e} />
                   {e.skillCode && (
                     <span className="text-[10.5px] font-bold text-grey-500 border border-grey-200 rounded-full px-1.5 py-0.5" title={domainLabel(e.satDomain) ?? undefined}>

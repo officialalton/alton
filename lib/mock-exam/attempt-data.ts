@@ -46,6 +46,7 @@ export type MockExamAttemptItem = {
   response: string | null;
   correct: boolean | null;
   flagged: boolean;
+  savedToPractice: boolean;
   timeSpentSeconds: number | null;
 };
 

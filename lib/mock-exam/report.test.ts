@@ -22,6 +22,7 @@ function item(overrides: Partial<MockExamAttemptItem>): MockExamAttemptItem {
     response: "0",
     correct: null,
     flagged: false,
+    savedToPractice: false,
     timeSpentSeconds: null,
     ...overrides,
   };

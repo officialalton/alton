@@ -8,6 +8,7 @@ import {
   saveMockExamSectionTimeAction,
   submitMockExamAttemptAction,
   toggleMockExamFlagAction,
+  toggleMockExamSavedToPracticeAction,
 } from "@/lib/mock-exam/attempt-actions";
 import LearningText from "@/app/session/[id]/LearningText";
 import RwStimulusView from "@/app/session/[id]/RwStimulusView";
@@ -58,6 +59,11 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
     Object.fromEntries(attempt.items.map((i) => [i.setItemId, i.response ?? ""])),
   );
   const [flags, setFlags] = useState<Record<string, boolean>>(Object.fromEntries(attempt.items.map((i) => [i.setItemId, i.flagged])));
+  // 2026-09-21(사용자 지시) — "표시"(flag)와 달리 학생 포털 Practice 탭에 계속 남는
+  // "문제 저장". 단어장의 "내 단어장"처럼 원하는 문항만 골라 담는다.
+  const [savedToPractice, setSavedToPractice] = useState<Record<string, boolean>>(
+    Object.fromEntries(attempt.items.map((i) => [i.setItemId, i.savedToPractice])),
+  );
   const [saveStatus, setSaveStatus] = useState<SaveStatus>("idle");
   const [error, setError] = useState<string | null>(null);
   const [lastSave, setLastSave] = useState<{ setItemId: string; response: string } | null>(null);
@@ -200,6 +206,13 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
     await toggleMockExamFlagAction(attempt.id, current.setItemId, next);
   }
 
+  async function toggleSavedToPractice() {
+    if (!current) return;
+    const next = !savedToPractice[current.setItemId];
+    setSavedToPractice((m) => ({ ...m, [current.setItemId]: next }));
+    await toggleMockExamSavedToPracticeAction(attempt.id, current.setItemId, next);
+  }
+
   const answeredCount = attempt.items.filter((i) => (responses[i.setItemId] ?? "").trim() !== "").length;
 
   async function handleSubmit() {
@@ -320,6 +333,19 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
                   title="나중에 다시 보기로 표시"
                 >
                   🔖
+                </button>
+                {/* 2026-09-21(사용자 지시) — Practice 탭에 계속 남는 "문제 저장"(표시와 다름). */}
+                <button
+                  type="button"
+                  onClick={toggleSavedToPractice}
+                  aria-pressed={savedToPractice[current.setItemId]}
+                  className={`text-[11px] font-bold rounded-full border px-2 py-0.5 ${
+                    savedToPractice[current.setItemId] ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-500"
+                  }`}
+                  data-testid="toggle-saved-to-practice"
+                  title="Practice 탭(문제 기록)에 저장"
+                >
+                  {savedToPractice[current.setItemId] ? "저장됨" : "+ 문제 저장"}
                 </button>
                 {/* "저장됨" 텍스트는 안 보이게(저장 중/실패일 때만 표시). */}
                 {(saveStatus === "saving" || saveStatus === "error") && (
