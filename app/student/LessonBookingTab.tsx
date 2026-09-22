@@ -41,15 +41,6 @@ function formatDateTime(iso: string, timezone: string): string {
   }).format(new Date(iso));
 }
 
-// 2026-09-03 정책 전환(요구사항 1) — Calendar 네이티브 초대가 학생 본인에게 발송되므로
-// 그 발송 상태를 보여준다. 내부 Google 오류 원문은 절대 노출하지 않는다(관리자 화면에만).
-const SYNC_STATUS_LABEL: Record<string, string> = {
-  pending: "Calendar 초대 발송 준비 중",
-  synced: "Calendar 초대 발송 완료",
-  failed: "Calendar 초대 발송 재시도 중",
-  reconciliation_needed: "Calendar 초대 발송 실패 — 관리자 조치 중",
-};
-
 export type LessonBookingTabProps = {
   bookableEnrollments: BookableSubjectEnrollment[];
   // v3 재매칭 후 예약 결함 수정(2026-09-11) — 계약/수업권이 아직 활성화되지
@@ -618,9 +609,9 @@ export default function LessonBookingTab({
           <div key={b.reservationId} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3">
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-[14px] font-bold text-ink">
-                  {b.subjectName} · {b.teacherName} 선생님
-                </div>
+                {/* 2026-09-22(사용자 지시) — 과목명·선생님명을 한 줄에 붙이지 말고 분리, 과목명이 위. */}
+                <div className="text-[14px] font-bold text-ink">{b.subjectName}</div>
+                <div className="text-[13px] text-grey-600">{b.teacherName} 선생님</div>
                 <div className="text-[13px] text-grey-500 mt-0.5">{formatDateTime(b.startsAt, timezone)}</div>
               </div>
               {cancellingReservationId !== b.reservationId && (
@@ -637,9 +628,8 @@ export default function LessonBookingTab({
               )}
             </div>
             <div className="mt-2 flex items-center gap-2 flex-wrap">
-              <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-grey-100 text-grey-500">
-                {SYNC_STATUS_LABEL[b.googleSyncStatus] ?? b.googleSyncStatus}
-              </span>
+              {/* 2026-09-22(사용자 지시) — "Calendar 초대 발송" 상태는 학생이 볼 필요 없는
+                  내부 동기화 정보라 배지를 없앤다. */}
               <button
                 onClick={() => router.push(`/session/${b.sessionId}`)}
                 className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-grey-100 text-ink"

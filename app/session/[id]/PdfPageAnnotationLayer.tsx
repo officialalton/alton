@@ -69,8 +69,11 @@ export default forwardRef<
     width: number;
     height: number;
     onSaveStateChange?: (state: "idle" | "saving" | "saved" | "error") => void;
+    /** 2026-09-22(사용자 지시) — 단어 저장 on/off를 "필기 시작" 옆에 두기 위한 자리.
+     * myScope와 무관하게(필기 권한이 없어도) 항상 보인다. */
+    extraControls?: React.ReactNode;
   }
->(function PdfPageAnnotationLayer({ target, role, viewerUserId, width, height, onSaveStateChange }, ref) {
+>(function PdfPageAnnotationLayer({ target, role, viewerUserId, width, height, onSaveStateChange, extraControls }, ref) {
   const teacherCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const studentCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const channelRef = useRef<RealtimeChannel | null>(null);
@@ -449,6 +452,7 @@ export default forwardRef<
         className="absolute top-2 right-2 pointer-events-auto flex flex-wrap items-center gap-1.5 bg-white/60 backdrop-blur-sm border border-white/60 shadow-sm rounded-lg px-2 py-1"
         style={{ zIndex: 8 }}
       >
+        {extraControls}
         {myScope && (
           <>
             <button

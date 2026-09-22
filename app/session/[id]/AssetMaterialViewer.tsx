@@ -33,6 +33,7 @@ export default function AssetMaterialViewer({
   role,
   viewerUserId,
   initialPosition,
+  extraControls,
 }: {
   assets: MaterialAsset[];
   /** 없으면 읽기 전용(과목 전체 보기·미리보기) — 필기 레이어를 두지 않는다. */
@@ -41,6 +42,8 @@ export default function AssetMaterialViewer({
   role: MaterialLayerRole;
   viewerUserId?: string;
   initialPosition?: AssetPosition;
+  /** 2026-09-22(사용자 지시) — PDF 필기 툴바("필기 시작") 옆에 끼워 넣을 컨트롤(단어 저장 등). */
+  extraControls?: React.ReactNode;
 }) {
   const memoryKey = `${sessionId ?? "library"}:${assets.map((a) => a.versionId).join(",")}`;
   const [pos, setPosState] = useState<AssetPosition>(
@@ -307,6 +310,7 @@ export default function AssetMaterialViewer({
                   width={rendered.width}
                   height={rendered.height}
                   onSaveStateChange={setSaveState}
+                  extraControls={extraControls}
                 />
               )}
             </div>

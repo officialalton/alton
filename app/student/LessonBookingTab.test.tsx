@@ -115,7 +115,8 @@ describe("LessonBookingTab — 예정된 수업 월간 보기", () => {
 
   it("기본은 목록 보기이고, 월간으로 전환하면 달력이 보인다", async () => {
     render(<LessonBookingTab {...baseProps} upcomingBookings={[booking]} />);
-    expect(screen.getByText(/SAT Math · 김선생 선생님/)).toBeInTheDocument();
+    expect(screen.getByText("SAT Math")).toBeInTheDocument();
+    expect(screen.getByText(/김선생 선생님/)).toBeInTheDocument();
     fireEvent.click(screen.getByText("월간"));
     await screen.findByLabelText("다음 달");
   });
@@ -129,7 +130,7 @@ describe("LessonBookingTab — 예정된 수업 월간 보기", () => {
     const day15 = screen.getAllByText("15").find((el) => el.closest("button"));
     fireEvent.click(day15!.closest("button")!);
 
-    const bookingCards = screen.getAllByText(/SAT Math · 김선생 선생님/);
+    const bookingCards = screen.getAllByText("SAT Math");
     expect(bookingCards).toHaveLength(1);
   });
 });
@@ -272,7 +273,8 @@ describe("LessonBookingTab — mode(A안 '수업' 탭 통합)", () => {
 
   it("mode='upcoming'이면 예정 수업 블록만 보이고 지난 수업 블록은 숨겨진다", () => {
     render(<LessonBookingTab {...baseProps} upcomingBookings={[upcomingBooking]} pastSessionsForReport={[pastSession]} mode="upcoming" />);
-    expect(screen.getByText(/SAT Math · 김선생 선생님/)).toBeInTheDocument();
+    expect(screen.getByText("SAT Math")).toBeInTheDocument();
+    expect(screen.getByText(/김선생 선생님/)).toBeInTheDocument();
     expect(screen.queryByText("지난 수업")).toBeNull();
   });
 

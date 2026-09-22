@@ -17,6 +17,7 @@ import CanvasOverlay from "./CanvasOverlay";
 import MaterialAnnotationLayers from "./MaterialAnnotationLayers";
 import AssetMaterialViewer from "./AssetMaterialViewer";
 import VocabClickLayer from "./VocabClickLayer";
+import { useVocabSaveController, VocabSaveToggleBar } from "./vocab-save-controller";
 import AutoGrowTextarea from "./AutoGrowTextarea";
 
 const DIFF_LABEL: Record<string, string> = {
@@ -63,6 +64,8 @@ export default function MaterialTab({
   // 사람은 각자 켜고 끄고, 쓰기는 자기 레이어에만 가능하다.
   const drawRole = annotationViewerRole ?? viewerRole;
   const layerRole = drawRole === "student" ? "student" : drawRole === "teacher" ? "teacher" : "reader";
+  const vocabEnabled = viewerRole === "student" || viewerRole === "teacher";
+  const vocab = useVocabSaveController(studentId);
   const [activeSectionId, setActiveSectionId] = useState<string | null>(
     material?.sections[0]?.id ?? null
   );
@@ -104,12 +107,13 @@ export default function MaterialTab({
   const assets = material.assets ?? [];
   if (material.sections.length === 0 && assets.length > 0) {
     return (
-      <VocabClickLayer sessionId={sessionId} studentId={studentId} enabled={viewerRole === "student" || viewerRole === "teacher"}>
+      <VocabClickLayer sessionId={sessionId} studentId={studentId} enabled={vocabEnabled} controller={vocab} showToggle={false}>
         <AssetMaterialViewer
           assets={assets}
           sessionId={sessionSource === "v3" ? sessionId : null}
           role={layerRole}
           viewerUserId={viewerUserId}
+          extraControls={vocabEnabled ? <VocabSaveToggleBar controller={vocab} /> : undefined}
         />
       </VocabClickLayer>
     );
@@ -126,7 +130,8 @@ export default function MaterialTab({
           <VocabClickLayer
             sessionId={sessionId}
             studentId={studentId}
-            enabled={viewerRole === "student" || viewerRole === "teacher"}
+            enabled={vocabEnabled}
+            controller={vocab}
           >
             {material.sections.map((s) => (
               <div key={s.id} id={`sec-${s.id}`} className="mb-11 scroll-mt-[72px]">
@@ -236,12 +241,13 @@ export default function MaterialTab({
       </div>
       {assets.length > 0 && (
         <div className="md:col-span-2 border-t border-grey-200">
-          <VocabClickLayer sessionId={sessionId} studentId={studentId} enabled={viewerRole === "student" || viewerRole === "teacher"}>
+          <VocabClickLayer sessionId={sessionId} studentId={studentId} enabled={vocabEnabled} controller={vocab} showToggle={false}>
             <AssetMaterialViewer
               assets={assets}
               sessionId={sessionSource === "v3" ? sessionId : null}
               role={layerRole}
               viewerUserId={viewerUserId}
+              extraControls={vocabEnabled ? <VocabSaveToggleBar controller={vocab} /> : undefined}
             />
           </VocabClickLayer>
         </div>

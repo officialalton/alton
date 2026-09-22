@@ -71,13 +71,15 @@ describe("ClassesTab — '레슨'+'예약' 병합, 예정/지난 서브탭 버�
     render(<ClassesTab {...baseProps} />);
     expect(screen.getByText("예정 수업")).toBeInTheDocument();
     expect(screen.getByText("지난 수업")).toBeInTheDocument();
-    expect(screen.getByText(/SAT Math · 김선생 선생님/)).toBeInTheDocument();
+    expect(screen.getByText("SAT Math")).toBeInTheDocument();
+    expect(screen.getByText(/김선생 선생님/)).toBeInTheDocument();
   });
 
   it("'지난 수업' 서브탭을 누르면 실제로 내용이 지난 수업으로 바뀐다(서브탭 전환 버그 재현·수정 고정)", () => {
     render(<ClassesTab {...baseProps} />);
     // 전환 전: 예정 수업(v3)만 보이고 지난 수업 목록은 없다.
-    expect(screen.getByText(/SAT Math · 김선생 선생님/)).toBeInTheDocument();
+    expect(screen.getByText("SAT Math")).toBeInTheDocument();
+    expect(screen.getByText(/김선생 선생님/)).toBeInTheDocument();
     expect(screen.queryByText("최근 14일 이내 지난 수업이 없습니다.")).toBeNull();
 
     fireEvent.click(screen.getByText("지난 수업"));
