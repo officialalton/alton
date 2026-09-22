@@ -137,6 +137,7 @@ const baseProps = {
   adminAccounts: [],
   consultants: [],
   unassignedConsultations: [],
+  assignedAwaitingSchedule: [],
 };
 
 describe("AdminShell", () => {

@@ -1,8 +1,11 @@
 "use server";
 
+import { randomBytes } from "node:crypto";
 import { requireAdmin } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
-import { loadUnassignedConsultations, type IntakeConsultation } from "@/app/consultant/intake-data";
+import { loadUnassignedConsultations, loadAssignedAwaitingSchedule, type IntakeConsultation } from "@/app/consultant/intake-data";
+import { sendConsultationSchedulingLinkEmail } from "@/lib/consultation/notifications";
+import { currentRequestOrigin } from "@/lib/request-origin";
 
 // 컨설턴트 포지션(2026-09-22, 가볍게 시작) — 신규 auth 계정 발급은 범위 밖.
 // 기존 계정(이메일로 찾음)의 role을 consultant로 바꾸고, 담당 학생을
@@ -91,6 +94,12 @@ export async function listUnassignedConsultationsAction(): Promise<IntakeConsult
   return loadUnassignedConsultations(supabase);
 }
 
+/** 컨설턴트는 배정됐지만 아직 일정이 없는 요청 — 스케줄링 링크 발송 대상 큐. */
+export async function listAssignedAwaitingScheduleAction(): Promise<IntakeConsultation[]> {
+  const { supabase } = await requireAdmin();
+  return loadAssignedAwaitingSchedule(supabase);
+}
+
 /**
  * 스펙 §Ownership Fields — MVP에서는 intake_owner와 admissions_consultant를
  * 한 번에 같은 사람에게 배정한다(둘 다 별도 필드로 저장되고 이력도 각각
@@ -110,4 +119,46 @@ export async function assignConsultationToConsultantAction(consultationId: strin
     p_new_owner_id: consultantId,
   });
   if (consultantError) throw new Error(consultantError.message);
+}
+
+/**
+ * 스펙 §Scheduling after Assignment — 배정 후 컨설턴트 전용 스케줄링 링크를
+ * 만들고 고객에게 안내 이메일을 보낸다. Phase 2b는 자동 발송이 아니라 관리자가
+ * "링크 보내기"를 명시적으로 눌러야만 실제 이메일이 나간다(안전장치).
+ */
+export async function sendConsultationSchedulingLinkAction(consultationId: string): Promise<void> {
+  const { supabase } = await requireAdmin();
+
+  const { data: consultation, error: consultationError } = await supabase
+    .from("consultations")
+    .select("contact_name, contact_email, admissions_consultant_id, starts_at")
+    .eq("id", consultationId)
+    .single();
+  if (consultationError) throw new Error(consultationError.message);
+  if (!consultation.admissions_consultant_id) throw new Error("담당 컨설턴트가 먼저 배정되어야 합니다.");
+  if (consultation.starts_at) throw new Error("이미 일정이 확정된 상담입니다.");
+
+  const { data: consultant, error: consultantLookupError } = await supabase
+    .from("profiles")
+    .select("name")
+    .eq("id", consultation.admissions_consultant_id)
+    .single();
+  if (consultantLookupError) throw new Error(consultantLookupError.message);
+
+  const token = randomBytes(24).toString("hex");
+  const { error: linkError } = await supabase.from("consultation_scheduling_links").insert({
+    consultation_id: consultationId,
+    consultant_id: consultation.admissions_consultant_id,
+    token,
+    expires_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+  });
+  if (linkError) throw new Error(linkError.message);
+
+  const origin = await currentRequestOrigin();
+  await sendConsultationSchedulingLinkEmail({
+    contact_name: consultation.contact_name,
+    contact_email: consultation.contact_email,
+    consultant_name: consultant.name ?? "담당 컨설턴트",
+    scheduling_url: `${origin}/schedule/${token}`,
+  });
 }

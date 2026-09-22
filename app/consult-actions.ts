@@ -24,20 +24,20 @@ export async function listOpenHomepageConsultSlots(fromIso: string, toIso: strin
   return ((data ?? []) as Array<{ slot_starts_at: string }>).map((r) => ({ startsAt: r.slot_starts_at }));
 }
 
+// 2026-09-22(컨설턴트 스펙 Phase 2b, 사용자 승인) — 홈페이지는 이제 "신청만"
+// 받는다. 슬롯은 어드미션 컨설턴트 배정 후 그 사람 전용 스케줄링 링크
+// (app/schedule-actions.ts)로 고객이 직접 고른다. slotStartsAtIso는 더 이상
+// 필수가 아니다 — submit_homepage_consult_request()도 이제 nullable을 받는다.
 export async function submitHomepageConsultRequest(params: {
   parentName: string;
   email: string;
   phone: string;
   studentGrade: string;
   concerns: string;
-  slotStartsAtIso: string;
   idempotencyKey: string;
 }): Promise<{ id: string; status: string }> {
   if (!params.parentName.trim() || !params.email.trim()) {
     throw new Error("이름과 이메일은 필수입니다.");
-  }
-  if (!params.slotStartsAtIso) {
-    throw new Error("상담 시간을 선택해 주세요.");
   }
 
   const admin = createAdminClient();
@@ -45,7 +45,7 @@ export async function submitHomepageConsultRequest(params: {
     p_full_name: params.parentName.trim(),
     p_email: params.email.trim(),
     p_phone: params.phone.trim() || null,
-    p_starts_at: params.slotStartsAtIso,
+    p_starts_at: null,
     p_student_grade: params.studentGrade.trim() || null,
     p_concerns: params.concerns.trim() || null,
     p_idempotency_key: params.idempotencyKey,

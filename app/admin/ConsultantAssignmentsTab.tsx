@@ -10,6 +10,8 @@ import {
   unassignStudentFromConsultantAction,
   listUnassignedConsultationsAction,
   assignConsultationToConsultantAction,
+  listAssignedAwaitingScheduleAction,
+  sendConsultationSchedulingLinkAction,
 } from "./consultant-assignment-actions";
 
 // 컨설턴트 포지션(2026-09-22 사용자 지시, 가볍게 시작) — 기존 계정을
@@ -22,17 +24,21 @@ import {
 export default function ConsultantAssignmentsTab({
   initialConsultants,
   initialUnassignedConsultations,
+  initialAssignedAwaitingSchedule,
 }: {
   initialConsultants: ConsultantWithStudents[];
   initialUnassignedConsultations: IntakeConsultation[];
+  initialAssignedAwaitingSchedule: IntakeConsultation[];
 }) {
   const [consultants, setConsultants] = useState(initialConsultants);
   const [unassigned, setUnassigned] = useState(initialUnassignedConsultations);
+  const [awaitingSchedule, setAwaitingSchedule] = useState(initialAssignedAwaitingSchedule);
   const [assignConsultant, setAssignConsultant] = useState<Record<string, string>>({});
   const [promoteEmail, setPromoteEmail] = useState("");
   const [assignEmail, setAssignEmail] = useState<Record<string, string>>({});
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [linkSentIds, setLinkSentIds] = useState<Set<string>>(new Set());
 
   function reload() {
     listConsultantsAction().then(setConsultants).catch(() => undefined);
@@ -40,6 +46,20 @@ export default function ConsultantAssignmentsTab({
 
   function reloadUnassigned() {
     listUnassignedConsultationsAction().then(setUnassigned).catch(() => undefined);
+    listAssignedAwaitingScheduleAction().then(setAwaitingSchedule).catch(() => undefined);
+  }
+
+  async function handleSendSchedulingLink(consultationId: string) {
+    setBusy(true);
+    setError(null);
+    try {
+      await sendConsultationSchedulingLinkAction(consultationId);
+      setLinkSentIds((prev) => new Set(prev).add(consultationId));
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "링크를 보내지 못했습니다.");
+    } finally {
+      setBusy(false);
+    }
   }
 
   async function handleAssignConsultation(consultationId: string) {
@@ -146,6 +166,35 @@ export default function ConsultantAssignmentsTab({
                   배정
                 </button>
               </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <h2 className="text-[13.5px] font-bold text-ink mb-3">일정 대기 중 ({awaitingSchedule.length})</h2>
+      {awaitingSchedule.length === 0 ? (
+        <div className="text-[12.5px] text-grey-500 bg-grey-100 rounded-lg px-4 py-4 mb-6 text-center">
+          컨설턴트는 배정됐지만 일정이 아직 없는 요청이 없습니다.
+        </div>
+      ) : (
+        <div className="mb-6">
+          {awaitingSchedule.map((c) => (
+            <div key={c.id} className="flex items-center justify-between border-[1.5px] border-grey-200 rounded-xl px-4 py-3 mb-2.5">
+              <div>
+                <div className="text-[13px] font-bold text-ink">{c.contactName}</div>
+                <div className="text-[12px] text-grey-500">{c.contactEmail}</div>
+              </div>
+              {linkSentIds.has(c.id) ? (
+                <span className="text-[11.5px] font-semibold text-green">링크 발송됨</span>
+              ) : (
+                <button
+                  disabled={busy}
+                  onClick={() => handleSendSchedulingLink(c.id)}
+                  className="text-[12px] font-bold px-3 py-1 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
+                >
+                  링크 보내기
+                </button>
+              )}
             </div>
           ))}
         </div>

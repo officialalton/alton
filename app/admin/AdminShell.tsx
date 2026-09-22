@@ -131,6 +131,7 @@ export default function AdminShell({
   mockExamSets,
   consultants,
   unassignedConsultations,
+  assignedAwaitingSchedule,
 }: {
   initialTab?: string;
   // 2026-09-10(P1 재진입 성능 배치) — 탭 데이터 캐시(tab-data-cache.ts)를
@@ -183,6 +184,7 @@ export default function AdminShell({
   // 2026-09-22(컨설턴트 포지션) — 관리자 전원이 쓴다(마스터 전용 아님).
   consultants: ConsultantWithStudents[];
   unassignedConsultations: IntakeConsultation[];
+  assignedAwaitingSchedule: IntakeConsultation[];
 }) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<TabId>(resolveAdminTab(initialTab));
@@ -462,7 +464,11 @@ export default function AdminShell({
               <div className="p-8 text-[14px] text-grey-500">마스터 관리자만 볼 수 있습니다.</div>
             )
           ) : activeTab === "consultants" ? (
-            <ConsultantAssignmentsTab initialConsultants={consultants} initialUnassignedConsultations={unassignedConsultations} />
+            <ConsultantAssignmentsTab
+              initialConsultants={consultants}
+              initialUnassignedConsultations={unassignedConsultations}
+              initialAssignedAwaitingSchedule={assignedAwaitingSchedule}
+            />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.

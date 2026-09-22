@@ -56,3 +56,15 @@ export async function loadMyAssignedConsultations(supabase: SupabaseClient, cons
   if (error) throw new Error(error.message);
   return (data ?? []).map(mapRow);
 }
+
+/** 관리자 뷰 — 컨설턴트는 배정됐지만 아직 일정(starts_at)이 없는 요청(스케줄링 링크 발송 대상). */
+export async function loadAssignedAwaitingSchedule(supabase: SupabaseClient): Promise<IntakeConsultation[]> {
+  const { data, error } = await supabase
+    .from("consultations")
+    .select(SELECT_COLUMNS)
+    .not("admissions_consultant_id", "is", null)
+    .is("starts_at", null)
+    .order("requested_at", { ascending: true });
+  if (error) throw new Error(error.message);
+  return (data ?? []).map(mapRow);
+}
