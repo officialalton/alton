@@ -266,7 +266,7 @@ export default function LandingPage() {
             1:1 수업 상담 신청
           </h2>
           <p className="text-[14.5px] text-grey-500 text-center mb-8 leading-[1.7]">
-            희망 시간을 선택해 신청하시면, 관리자가 확인 후 확정 안내를
+            신청해 주시면 담당 컨설턴트를 배정하고, 예약 링크를 이메일로
             보내드립니다.
           </p>
           <ConsultForm />
