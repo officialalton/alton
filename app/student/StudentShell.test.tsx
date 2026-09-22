@@ -49,6 +49,13 @@ vi.mock("./chat-actions", () => ({
   sendChatMessage: vi.fn(),
 }));
 
+vi.mock("./board-actions", () => ({
+  loadMyBoardCardsAction: vi.fn(async () => []),
+  createMyManualTaskAction: vi.fn(),
+  updateMyManualTaskStatusAction: vi.fn(),
+  deleteMyManualTaskAction: vi.fn(),
+}));
+
 vi.mock("@/utils/supabase/client", () => ({
   createClient: () => ({
     channel: () => ({
@@ -159,7 +166,7 @@ const lessonsProps = {
 };
 
 describe("StudentShell", () => {
-  it("사이드바 10개 항목을 보여주고, 기본 탭은 홈이다", () => {
+  it("사이드바 11개 항목을 보여주고, 기본 탭은 홈이다(2026-09-22: Planner 추가)", () => {
     render(
       <StudentShell
         studentName="지훈"
@@ -170,13 +177,26 @@ describe("StudentShell", () => {
     );
     // 2026-09-22(사용자 지시) — Credits는 계정 팝업으로, Performance는 제거(Home에서
     // 이미 보임). Mock Exams가 Assignments 위로 옮겨졌다.
-    ["Home", "Courses", "Classes", "My Teacher", "Mock Exams", "Assignments", "Practice", "Vocabulary", "Materials"].forEach(
+    ["Home", "Planner", "Courses", "Classes", "My Teacher", "Mock Exams", "Assignments", "Practice", "Vocabulary", "Materials"].forEach(
       (label) => expect(screen.getAllByText(label).length).toBeGreaterThan(0)
     );
     expect(screen.queryByText("Performance")).toBeNull();
     expect(screen.queryByText("레슨")).toBeNull();
     expect(screen.queryByText("예약")).toBeNull();
     expect(screen.getByText(/지훈의 학습 현황/)).toBeInTheDocument();
+  });
+
+  it("Planner 탭을 누르면 BoardTab이 렌더링된다(Student Success Planner MVP)", async () => {
+    render(
+      <StudentShell
+        studentName="지훈"
+        dashboard={dashboard}
+        problemHistory={[]}
+        {...lessonsProps}
+      />
+    );
+    fireEvent.click(screen.getAllByText("Planner")[0]);
+    expect(await screen.findByPlaceholderText("+ 할 일 추가")).toBeInTheDocument();
   });
 
   it("선생님 탭을 누르면 TeacherTab이 렌더링된다", () => {

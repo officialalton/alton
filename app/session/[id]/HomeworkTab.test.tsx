@@ -7,7 +7,7 @@ import type { HomeworkBatch } from "@/lib/homework-batch-data";
 // 교사 포털 "과제 내역"과 같은 화면(HomeworkBatchPanel)을 그대로 보여준다.
 
 const batch: HomeworkBatch = {
-  id: "b1", teacherId: "t1", teacherName: "김선생", studentId: "stu", label: "9월 16일 과제", subjectId: null, subjectName: null, createdAt: "2026-09-16T00:00:00Z",
+  id: "b1", teacherId: "t1", teacherName: "김선생", studentId: "stu", label: "9월 16일 과제", subjectId: null, subjectName: null, createdAt: "2026-09-16T00:00:00Z", dueAt: null,
   items: [{
     problemId: "p1", position: 1, format: "mc", passage: "지문", question: "값은?", options: ["1", "2", "3", "4"],
     correctIndex: 0, answers: null, explanation: "해설", statements: null, figure: null,

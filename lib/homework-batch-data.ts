@@ -39,12 +39,15 @@ export type HomeworkBatch = {
   subjectName: string | null;
   items: HomeworkBatchItem[];
   createdAt: string;
+  /** 2026-09-22(Student Success Planner) — 배정 후에도 발급 교사가 바꿀 수 있다. */
+  dueAt: string | null;
 };
 
-const SELECT_COLUMNS = "id, teacher_id, student_id, label, subject_id, items, created_at, teacher:profiles!homework_batches_teacher_id_fkey(name), subject:subjects(name)";
+const SELECT_COLUMNS = "id, teacher_id, student_id, label, subject_id, items, created_at, due_at, teacher:profiles!homework_batches_teacher_id_fkey(name), subject:subjects(name)";
 
 type Row = {
   id: string; teacher_id: string; student_id: string; label: string; subject_id: string | null; items: unknown; created_at: string;
+  due_at: string | null;
   teacher: { name: string | null } | { name: string | null }[] | null;
   subject: { name: string | null } | { name: string | null }[] | null;
 };
@@ -59,6 +62,7 @@ function mapRow(row: Row): HomeworkBatch {
     studentId: row.student_id, label: row.label,
     subjectId: row.subject_id, subjectName: firstOf(row.subject)?.name ?? null,
     items: (row.items as HomeworkBatchItem[]) ?? [], createdAt: row.created_at,
+    dueAt: row.due_at,
   };
 }
 

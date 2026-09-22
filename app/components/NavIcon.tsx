@@ -30,7 +30,8 @@ export type NavIconName =
   | "availability"
   | "consultations"
   | "users"
-  | "settings";
+  | "settings"
+  | "planner";
 
 const PATHS: Record<NavIconName, string> = {
   home: "M4 11.5 12 4l8 7.5M6 10v9a1 1 0 0 0 1 1h3v-6h4v6h3a1 1 0 0 0 1-1v-9",
@@ -62,6 +63,7 @@ const PATHS: Record<NavIconName, string> = {
   consultations: "M4.5 6.5h15v11h-9l-3.5 3v-3h-2.5v-11ZM8 10.5h8M8 13.5h5",
   users: "M8 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM2.5 19.5c0-3.2 2.5-5.5 5.5-5.5s5.5 2.3 5.5 5.5M16.2 10.5a2.6 2.6 0 1 0 0-5.2M18.5 14c1.8.5 3 1.9 3 3.8",
   settings: "M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM19.4 13.5a1.65 1.65 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.65 1.65 0 0 0-1.8-.3 1.65 1.65 0 0 0-1 1.5v.2a2 2 0 1 1-4 0v-.1a1.65 1.65 0 0 0-1.1-1.5 1.65 1.65 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.65 1.65 0 0 0 .3-1.8 1.65 1.65 0 0 0-1.5-1H4a2 2 0 1 1 0-4h.1a1.65 1.65 0 0 0 1.5-1 1.65 1.65 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.65 1.65 0 0 0 1.8.3H10a1.65 1.65 0 0 0 1-1.5V4a2 2 0 1 1 4 0v.1a1.65 1.65 0 0 0 1 1.5 1.65 1.65 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.65 1.65 0 0 0-.3 1.8V10c.2.7.8 1.2 1.5 1.4h.2a2 2 0 1 1 0 4h-.1a1.65 1.65 0 0 0-1.5 1Z",
+  planner: "M4.5 4.5h15v15h-15v-15ZM8 4.5v15M8 9.5h4.5M8 13h4.5",
 };
 
 export default function NavIcon({ name, className }: { name: NavIconName; className?: string }) {

@@ -23,11 +23,11 @@ function mcItem(problemId: string, position: number, overrides: Partial<Homework
 const batches: HomeworkBatch[] = [
   {
     id: "b1", teacherId: "t1", teacherName: "김선생", studentId: "stu", label: "9월 15일 수학 김선생", subjectId: null, subjectName: null,
-    createdAt: "2026-09-15T00:00:00Z", items: [mcItem("p1", 1), mcItem("p2", 2, { submittedAt: "2026-09-15T01:00:00Z", response: "0" })],
+    createdAt: "2026-09-15T00:00:00Z", dueAt: null, items: [mcItem("p1", 1), mcItem("p2", 2, { submittedAt: "2026-09-15T01:00:00Z", response: "0" })],
   },
   {
     id: "b2", teacherId: "t1", teacherName: "김선생", studentId: "stu", label: "9월 14일 수학 김선생", subjectId: null, subjectName: null,
-    createdAt: "2026-09-14T00:00:00Z", items: [mcItem("p3", 1, { submittedAt: "x", response: "0", graded: true, grade: "correct" })],
+    createdAt: "2026-09-14T00:00:00Z", dueAt: null, items: [mcItem("p3", 1, { submittedAt: "x", response: "0", graded: true, grade: "correct" })],
   },
 ];
 

@@ -46,11 +46,15 @@ import RoadmapView from "@/app/components/RoadmapView";
 import type { RoadmapData } from "@/lib/roadmap/types";
 import PageFrame from "@/app/components/PageFrame";
 import NavIcon from "@/app/components/NavIcon";
+import BoardTab from "./BoardTab";
 
 // 2026-09-19(UI 통일화) — 좌측 네비게이션 라벨은 전부 영어로 통일한다(Acely
 // 레퍼런스). 탭 안 본문의 한국어 텍스트는 유지, 라벨만 영어로 바꾼다.
 const NAV_ITEMS = [
   { id: "home", label: "Home", icon: "home" },
+  // 2026-09-22(Student Success Planner MVP, 2026-09-21 승인) — 과제·모의고사·
+  // 단어시험·수동 할 일을 한곳에서 보는 보드. Schedule·Overview 탭은 다음 라운드.
+  { id: "planner", label: "Planner", icon: "planner" },
   { id: "roadmap", label: "Roadmap", icon: "roadmap" },
   { id: "enrollment", label: "Courses", icon: "courses" },
   // 2026-09-06(A안 UI 정리) — "예약"(v3 예약/캘린더)과 "레슨"(레거시 커리큘럼·리뷰)이
@@ -325,7 +329,9 @@ export default function StudentShell({
           />
         ) : (
         <PageFrame title={activeLabel}>
-          {activeTab === "roadmap" ? (
+          {activeTab === "planner" ? (
+            <BoardTab />
+          ) : activeTab === "roadmap" ? (
             <RoadmapView data={roadmap} />
           ) : activeTab === "enrollment" ? (
             <EnrollmentTab enrollments={subjectEnrollments} />
