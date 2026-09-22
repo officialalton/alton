@@ -22,6 +22,7 @@ import type { SessionProblem } from "./session-problem-data";
 import SessionVocabTab from "./SessionVocabTab";
 import type { SessionVocabData } from "./vocab-data";
 import HomeworkTab from "./HomeworkTab";
+import SessionMockExamTab from "./SessionMockExamTab";
 import type { HomeworkItem } from "./homework-data";
 import type { HomeworkBatch } from "@/lib/homework-batch-data";
 import type { StrokePayload } from "./annotation-events-types";
@@ -43,6 +44,9 @@ const TABS = [
   // 포털에서만 본다(수업 화면에서는 필요 없다).
   { id: "vocab", label: "단어장", teacherOnly: false },
   { id: "homework", label: "과제", teacherOnly: false },
+  // 2026-09-21(UAT 지적) — 모의고사도 단어장처럼 별도 라우트로 나가지 않고 이 탭
+  // 안에서 그대로 응시·결과를 본다.
+  { id: "mock-exam", label: "모의고사", teacherOnly: false },
   // 4절 — 별도 준비 페이지를 없애고 준비를 수업 화면 안으로 넣는다. 선생님·관리자만
   // 보이고, 이 수업이 다루는 회차가 있을 때만 나타난다.
   { id: "prep", label: "수업 준비", teacherOnly: true },
@@ -575,6 +579,8 @@ export default function SessionShell({
           realViewerRole={viewerRole}
           homeworkBatches={homeworkBatches}
         />
+      ) : activeTab === "mock-exam" ? (
+        <SessionMockExamTab studentId={studentId} isTeacher={isTeacher} />
       ) : activeTab === "prep" ? (
         prep ? (
           <>
