@@ -16,6 +16,7 @@ type PdfDocumentLike = {
       promise: Promise<void>;
       cancel: () => void;
     };
+    streamTextContent: () => ReadableStream;
   }>;
   destroy: () => Promise<void>;
 };
@@ -61,12 +62,14 @@ export default function PdfPageCanvas({
   onError: (message: string) => void;
 }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const textLayerRef = useRef<HTMLDivElement | null>(null);
   const generationRef = useRef(0);
   const [size, setSize] = useState<{ width: number; height: number } | null>(null);
 
   useEffect(() => {
     const generation = ++generationRef.current;
     let cancelRender: (() => void) | null = null;
+    let cancelTextLayer: (() => void) | null = null;
     let disposed = false;
 
     (async () => {
@@ -99,6 +102,24 @@ export default function PdfPageCanvas({
         if (disposed || generation !== generationRef.current) return;
         setSize({ width, height });
         onRendered({ width, height });
+
+        // 2026-09-21(사용자 지시) — PDF는 캔버스에 이미지로만 그려 단어를 클릭할 수
+        // 없었다. pdf.js TextLayer로 실제 위치에 투명 텍스트를 겹쳐 클릭·드래그
+        // 선택·복사가 되게 한다(화면에 보이는 건 그대로 캔버스 이미지).
+        const textLayerEl = textLayerRef.current;
+        if (textLayerEl && "streamTextContent" in pdfPage) {
+          textLayerEl.replaceChildren();
+          textLayerEl.style.width = `${width}px`;
+          textLayerEl.style.height = `${height}px`;
+          const pdfjs = await import("pdfjs-dist");
+          const layer = new pdfjs.TextLayer({
+            textContentSource: pdfPage.streamTextContent(),
+            container: textLayerEl,
+            viewport: viewport as unknown as import("pdfjs-dist").PageViewport,
+          });
+          cancelTextLayer = () => layer.cancel();
+          await layer.render();
+        }
       } catch (e) {
         if (disposed || generation !== generationRef.current) return;
         const name = (e as { name?: string })?.name;
@@ -110,17 +131,21 @@ export default function PdfPageCanvas({
     return () => {
       disposed = true;
       cancelRender?.();
+      cancelTextLayer?.();
     };
   }, [url, page, zoom, fitWidth, fitHeight, onRendered, onError]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      data-testid="pdf-page-canvas"
-      data-page={page}
-      className="block bg-white shadow-sm"
-      style={size ? { width: size.width, height: size.height } : undefined}
-    />
+    <div className="relative inline-block">
+      <canvas
+        ref={canvasRef}
+        data-testid="pdf-page-canvas"
+        data-page={page}
+        className="block bg-white shadow-sm"
+        style={size ? { width: size.width, height: size.height } : undefined}
+      />
+      <div ref={textLayerRef} className="pdf-text-layer" data-testid="pdf-text-layer" />
+    </div>
   );
 }
 

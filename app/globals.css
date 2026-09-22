@@ -136,3 +136,27 @@ body {
 ::highlight(exam-highlight) {
   background-color: #fde68a;
 }
+
+/* PDF 교재 텍스트 레이어(2026-09-21 사용자 지시) — 캔버스에 이미지로만 그려지던 PDF
+   위에 pdf.js TextLayer로 투명한 실제 텍스트를 겹쳐, 단어 클릭 저장·드래그 선택·복사가
+   되게 한다(pdfjs-dist 공식 최소 스타일, web/pdf_viewer.css 기반). */
+.pdf-text-layer {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+  opacity: 1;
+  line-height: 1;
+  text-align: initial;
+  transform-origin: 0 0;
+}
+.pdf-text-layer span,
+.pdf-text-layer br {
+  color: transparent;
+  position: absolute;
+  white-space: pre;
+  cursor: text;
+  transform-origin: 0% 0%;
+}
+.pdf-text-layer ::selection {
+  background: rgba(37, 99, 235, 0.25);
+}

@@ -104,12 +104,14 @@ export default function MaterialTab({
   const assets = material.assets ?? [];
   if (material.sections.length === 0 && assets.length > 0) {
     return (
-      <AssetMaterialViewer
-        assets={assets}
-        sessionId={sessionSource === "v3" ? sessionId : null}
-        role={layerRole}
-        viewerUserId={viewerUserId}
-      />
+      <VocabClickLayer sessionId={sessionId} studentId={studentId} enabled={viewerRole === "student" || viewerRole === "teacher"}>
+        <AssetMaterialViewer
+          assets={assets}
+          sessionId={sessionSource === "v3" ? sessionId : null}
+          role={layerRole}
+          viewerUserId={viewerUserId}
+        />
+      </VocabClickLayer>
     );
   }
 
@@ -234,12 +236,14 @@ export default function MaterialTab({
       </div>
       {assets.length > 0 && (
         <div className="md:col-span-2 border-t border-grey-200">
-          <AssetMaterialViewer
-            assets={assets}
-            sessionId={sessionSource === "v3" ? sessionId : null}
-            role={layerRole}
-            viewerUserId={viewerUserId}
-          />
+          <VocabClickLayer sessionId={sessionId} studentId={studentId} enabled={viewerRole === "student" || viewerRole === "teacher"}>
+            <AssetMaterialViewer
+              assets={assets}
+              sessionId={sessionSource === "v3" ? sessionId : null}
+              role={layerRole}
+              viewerUserId={viewerUserId}
+            />
+          </VocabClickLayer>
         </div>
       )}
     </div>
