@@ -221,10 +221,11 @@ export default function AssetMaterialViewer({
       </nav>
 
       <div className="relative px-2 sm:px-4 py-2">
-        {/* 2026-09-14 UAT — 수업 중엔 교재가 화면을 채워야 한다. 제목·페이지·확대는 얇은 반투명
-            띠로 위 왼쪽에, 이전/다음은 아래 양쪽 구석의 화살표로. 나머지는 전부 페이지. */}
+        {/* 2026-09-22(사용자 지시) — 제목·페이지·확대 띠가 페이지 내용 위에 떠 있어
+            가려 보이던 것을, 페이지 위쪽 자기 줄로 옮긴다(더 이상 absolute 오버레이가
+            아니다). 이전/다음 화살표만 여전히 페이지 위에 떠 있는다. */}
         <div
-          className="absolute top-3 left-4 sm:left-6 z-10 flex items-center gap-2 bg-white/60 backdrop-blur-sm border border-white/60 shadow-sm rounded-lg px-2.5 py-1"
+          className="flex items-center gap-2 mb-2 bg-grey-100 border border-grey-200 rounded-lg px-2.5 py-1 w-fit"
           data-testid="asset-viewer-controls"
         >
           <span className="text-[12px] font-bold text-ink max-w-[220px] truncate" title={asset.title}>
