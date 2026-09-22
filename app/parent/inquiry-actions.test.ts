@@ -16,6 +16,8 @@ const membershipResult = { data: { household_id: "household1" } };
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let insertMock: any;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
+let insertInquiryMock: any;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let rpcMock: any;
 let selectResults: Record<string, unknown>;
 
@@ -25,6 +27,12 @@ const supabaseMock = {
       return {
         select: () => chain(membershipResult),
         insert: insertMock,
+      };
+    }
+    if (table === "household_inquiries") {
+      return {
+        select: () => chain(selectResults.household_inquiries ?? { data: [] }),
+        insert: insertInquiryMock,
       };
     }
     if (table === "household_messages") {
@@ -53,12 +61,46 @@ vi.mock("@/lib/auth", () => ({
 }));
 
 import {
-  sendGuardianHouseholdMessage,
+  startGuardianInquiry,
+  sendGuardianInquiryMessage,
   submitMeetingRequest,
   listOpenGuardianMeetingSlots,
 } from "./inquiry-actions";
 
-describe("sendGuardianHouseholdMessage", () => {
+describe("startGuardianInquiry", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    insertMock = vi.fn().mockResolvedValue({ error: null });
+    insertInquiryMock = vi.fn(() => ({
+      select: () => ({ single: () => Promise.resolve({ data: { id: "inquiry1" }, error: null }) }),
+    }));
+    rpcMock = vi.fn();
+    selectResults = {};
+  });
+
+  it("빈 내용이면 거부한다", async () => {
+    await expect(startGuardianInquiry("   ")).rejects.toThrow("내용을 입력해주세요");
+  });
+
+  it("본인 household_id로 문의를 만들고 첫 메시지를 삽입한다", async () => {
+    const result = await startGuardianInquiry("문의합니다");
+    expect(result).toEqual({ inquiryId: "inquiry1" });
+    expect(insertInquiryMock).toHaveBeenCalledWith({
+      household_id: "household1",
+      opened_by: "guardian1",
+      opened_by_role: "guardian",
+    });
+    expect(insertMock).toHaveBeenCalledWith({
+      household_id: "household1",
+      inquiry_id: "inquiry1",
+      sender_id: "guardian1",
+      sender_role: "guardian",
+      body: "문의합니다",
+    });
+  });
+});
+
+describe("sendGuardianInquiryMessage", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     insertMock = vi.fn().mockResolvedValue({ error: null });
@@ -67,16 +109,17 @@ describe("sendGuardianHouseholdMessage", () => {
   });
 
   it("빈 내용이면 거부한다", async () => {
-    await expect(sendGuardianHouseholdMessage("   ")).rejects.toThrow("내용을 입력해주세요");
+    await expect(sendGuardianInquiryMessage("inquiry1", "   ")).rejects.toThrow("내용을 입력해주세요");
   });
 
-  it("본인 household_id로 sender_role='guardian' 메시지를 삽입한다", async () => {
-    await sendGuardianHouseholdMessage("문의합니다");
+  it("지정한 문의에 sender_role='guardian' 메시지를 삽입한다", async () => {
+    await sendGuardianInquiryMessage("inquiry1", "재문의합니다");
     expect(insertMock).toHaveBeenCalledWith({
       household_id: "household1",
+      inquiry_id: "inquiry1",
       sender_id: "guardian1",
       sender_role: "guardian",
-      body: "문의합니다",
+      body: "재문의합니다",
     });
   });
 });

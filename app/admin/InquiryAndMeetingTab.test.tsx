@@ -3,8 +3,8 @@ import { describe, expect, it, vi, beforeEach } from "vitest";
 
 const {
   listInquiryThreadsForAdminMock,
-  sendAdminHouseholdMessageMock,
-  resolveHouseholdInquiryThreadMock,
+  sendAdminInquiryMessageMock,
+  closeHouseholdInquiryMock,
   markHouseholdMessengerReadByAdminMock,
   loadMeetingOperationsDashboardActionMock,
   updateMeetingRequestStatusMock,
@@ -16,8 +16,8 @@ const {
   sendAdminMeetingRequestMessageMock,
 } = vi.hoisted(() => ({
   listInquiryThreadsForAdminMock: vi.fn(),
-  sendAdminHouseholdMessageMock: vi.fn(),
-  resolveHouseholdInquiryThreadMock: vi.fn(),
+  sendAdminInquiryMessageMock: vi.fn(),
+  closeHouseholdInquiryMock: vi.fn(),
   markHouseholdMessengerReadByAdminMock: vi.fn(),
   loadMeetingOperationsDashboardActionMock: vi.fn(),
   updateMeetingRequestStatusMock: vi.fn(),
@@ -33,8 +33,8 @@ const {
 // 하나만 호출한다(면담 요청·가용 규칙·예외일을 한 번에 반환).
 vi.mock("./inquiry-and-meeting-actions", () => ({
   listInquiryThreadsForAdmin: listInquiryThreadsForAdminMock,
-  sendAdminHouseholdMessage: sendAdminHouseholdMessageMock,
-  resolveHouseholdInquiryThread: resolveHouseholdInquiryThreadMock,
+  sendAdminInquiryMessage: sendAdminInquiryMessageMock,
+  closeHouseholdInquiry: closeHouseholdInquiryMock,
   markHouseholdMessengerReadByAdmin: markHouseholdMessengerReadByAdminMock,
   loadMeetingOperationsDashboardAction: loadMeetingOperationsDashboardActionMock,
   updateMeetingRequestStatus: updateMeetingRequestStatusMock,
@@ -55,11 +55,13 @@ describe("InquiryAndMeetingTab", () => {
     listMeetingRequestMessagesForAdminMock.mockResolvedValue([]);
     listInquiryThreadsForAdminMock.mockResolvedValue([
       {
+        inquiryId: "i1",
         householdId: "h1",
         householdLabel: "김민지 가족",
-        hasOpen: true,
+        status: "open",
+        lastMessageAt: "2027-01-01T00:00:00.000Z",
         unreadForAdmin: true,
-        messages: [{ id: "m1", senderRole: "guardian", body: "문의합니다", status: "open", createdAt: "2027-01-01T00:00:00.000Z" }],
+        messages: [{ id: "m1", senderRole: "guardian", body: "문의합니다", createdAt: "2027-01-01T00:00:00.000Z" }],
       },
     ]);
     loadMeetingOperationsDashboardActionMock.mockResolvedValue({
@@ -85,8 +87,8 @@ describe("InquiryAndMeetingTab", () => {
     });
   });
 
-  it("메신저 탭에서 미해결 스레드를 열어 답장을 보낼 수 있다(안읽음 표시·읽음 처리 포함)", async () => {
-    sendAdminHouseholdMessageMock.mockResolvedValue(undefined);
+  it("메신저 탭에서 진행 중 문의를 열어 답장을 보낼 수 있다(안읽음 표시·읽음 처리 포함)", async () => {
+    sendAdminInquiryMessageMock.mockResolvedValue(undefined);
     render(<InquiryAndMeetingTab />);
     await waitFor(() => expect(screen.getByText(/김민지 가족/)).toBeInTheDocument());
     expect(screen.getByText("안읽음")).toBeInTheDocument();
@@ -96,7 +98,7 @@ describe("InquiryAndMeetingTab", () => {
 
     fireEvent.change(screen.getByLabelText("답장 내용"), { target: { value: "확인했습니다" } });
     fireEvent.click(screen.getByText("답장"));
-    await waitFor(() => expect(sendAdminHouseholdMessageMock).toHaveBeenCalledWith("h1", "확인했습니다"));
+    await waitFor(() => expect(sendAdminInquiryMessageMock).toHaveBeenCalledWith("i1", "h1", "확인했습니다"));
   });
 
   it("상담 신청 탭에서 요청을 5단계 상태로 전환할 수 있다", async () => {

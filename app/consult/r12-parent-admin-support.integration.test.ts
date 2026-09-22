@@ -52,6 +52,15 @@ function createMeetingRequest(householdId: string, guardianId: string): string {
   );
 }
 
+// 2026-09-22(사용자 지시) — household_messages.inquiry_id가 not null이라 메시지를
+// 남기기 전에 문의(household_inquiries)를 먼저 열어야 한다.
+function createInquiry(householdId: string, guardianId: string): string {
+  return psqlAsUser(
+    guardianId,
+    `insert into household_inquiries (household_id, opened_by, opened_by_role) values ('${householdId}', '${guardianId}', 'guardian') returning id;`
+  );
+}
+
 function createAdmin(label: string): string {
   const adminId = createAuthUser(label);
   psqlAsSuperuser(`insert into profiles (id, role, name) values ('${adminId}', 'admin', '관리자');`);
@@ -67,16 +76,17 @@ function createTeacher(label: string): string {
 describe("household_messages / meeting_requests — 학생·교사 권한 없음(R12 재확인)", () => {
   it("학생 계정은 household_messages를 조회·작성할 수 없다", () => {
     const a = setupHousehold("hm-student");
+    const inquiryId = createInquiry(a.householdId, a.guardianId);
     psqlAsUser(
       a.guardianId,
-      `insert into household_messages (household_id, sender_id, sender_role, body) values ('${a.householdId}', '${a.guardianId}', 'guardian', '메신저 메시지');`
+      `insert into household_messages (household_id, inquiry_id, sender_id, sender_role, body) values ('${a.householdId}', '${inquiryId}', '${a.guardianId}', 'guardian', '메신저 메시지');`
     );
     const studentVisibleCount = psqlAsUser(a.childId, `select count(*) from household_messages where household_id = '${a.householdId}';`);
     expect(studentVisibleCount).toBe("0");
     expect(() =>
       psqlAsUser(
         a.childId,
-        `insert into household_messages (household_id, sender_id, sender_role, body) values ('${a.householdId}', '${a.childId}', 'guardian', '학생이 쓴 메시지');`
+        `insert into household_messages (household_id, inquiry_id, sender_id, sender_role, body) values ('${a.householdId}', '${inquiryId}', '${a.childId}', 'guardian', '학생이 쓴 메시지');`
       )
     ).toThrow();
   });
@@ -84,16 +94,17 @@ describe("household_messages / meeting_requests — 학생·교사 권한 없음
   it("교사 계정은 household_messages를 조회·작성할 수 없다", () => {
     const a = setupHousehold("hm-teacher");
     const teacherId = createTeacher("hm-teacher-user");
+    const inquiryId = createInquiry(a.householdId, a.guardianId);
     psqlAsUser(
       a.guardianId,
-      `insert into household_messages (household_id, sender_id, sender_role, body) values ('${a.householdId}', '${a.guardianId}', 'guardian', '메신저 메시지');`
+      `insert into household_messages (household_id, inquiry_id, sender_id, sender_role, body) values ('${a.householdId}', '${inquiryId}', '${a.guardianId}', 'guardian', '메신저 메시지');`
     );
     const teacherVisibleCount = psqlAsUser(teacherId, `select count(*) from household_messages where household_id = '${a.householdId}';`);
     expect(teacherVisibleCount).toBe("0");
     expect(() =>
       psqlAsUser(
         teacherId,
-        `insert into household_messages (household_id, sender_id, sender_role, body) values ('${a.householdId}', '${teacherId}', 'admin', '교사가 쓴 메시지');`
+        `insert into household_messages (household_id, inquiry_id, sender_id, sender_role, body) values ('${a.householdId}', '${inquiryId}', '${teacherId}', 'admin', '교사가 쓴 메시지');`
       )
     ).toThrow();
   });
@@ -128,13 +139,14 @@ describe("household_messages / meeting_requests — 학생·교사 권한 없음
   it("관리자는 household_messages/meeting_requests를 모든 household에서 조회·작성할 수 있다", () => {
     const a = setupHousehold("hm-mr-admin");
     const adminId = createAdmin("hm-mr-admin-user");
+    const inquiryId = createInquiry(a.householdId, a.guardianId);
     psqlAsUser(
       a.guardianId,
-      `insert into household_messages (household_id, sender_id, sender_role, body) values ('${a.householdId}', '${a.guardianId}', 'guardian', '문의합니다');`
+      `insert into household_messages (household_id, inquiry_id, sender_id, sender_role, body) values ('${a.householdId}', '${inquiryId}', '${a.guardianId}', 'guardian', '문의합니다');`
     );
     psqlAsUser(
       adminId,
-      `insert into household_messages (household_id, sender_id, sender_role, body) values ('${a.householdId}', '${adminId}', 'admin', '답변드립니다');`
+      `insert into household_messages (household_id, inquiry_id, sender_id, sender_role, body) values ('${a.householdId}', '${inquiryId}', '${adminId}', 'admin', '답변드립니다');`
     );
     const adminVisibleMessages = psqlAsUser(adminId, `select count(*) from household_messages where household_id = '${a.householdId}';`);
     expect(adminVisibleMessages).toBe("2");

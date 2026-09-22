@@ -47,51 +47,69 @@ function setupHousehold(label: string): { guardianId: string; householdId: strin
   return { guardianId, householdId, childId };
 }
 
-describe("household_messages RLS", () => {
-  it("보호자는 자기 household 메시지만 쓰고 볼 수 있다(다른 household는 불가)", () => {
+// 2026-09-22(사용자 지시) — household 전체가 공유하는 끝없는 대화 대신 "문의"(household_inquiries)
+// 단위 스레드로 바뀌었다. household_messages.inquiry_id가 not null이라 먼저 문의를 열어야 한다.
+describe("household_inquiries / household_messages RLS", () => {
+  it("보호자는 자기 household 문의만 열고 메시지를 쓰고 볼 수 있다(다른 household는 불가)", () => {
     const a = setupHousehold("msg-a");
     const b = setupHousehold("msg-b");
 
-    // 본인 household에는 정상 작성 가능.
+    // 본인 household에는 문의를 열고 메시지를 정상 작성할 수 있다.
+    const inquiryId = psqlAsUser(
+      a.guardianId,
+      `insert into household_inquiries (household_id, opened_by, opened_by_role) values ('${a.householdId}', '${a.guardianId}', 'guardian') returning id;`
+    );
     psqlAsUser(
       a.guardianId,
-      `insert into household_messages (household_id, sender_id, sender_role, body) values ('${a.householdId}', '${a.guardianId}', 'guardian', '문의합니다');`
+      `insert into household_messages (household_id, inquiry_id, sender_id, sender_role, body) values ('${a.householdId}', '${inquiryId}', '${a.guardianId}', 'guardian', '문의합니다');`
     );
     const ownCount = psqlAsUser(a.guardianId, `select count(*) from household_messages where household_id = '${a.householdId}';`);
     expect(ownCount).toBe("1");
 
-    // 다른 household(b)에는 insert 자체가 거부된다(RLS with check 위반).
+    // 다른 household(b)에는 문의 insert 자체가 거부된다(RLS with check 위반).
     expect(() =>
       psqlAsUser(
         a.guardianId,
-        `insert into household_messages (household_id, sender_id, sender_role, body) values ('${b.householdId}', '${a.guardianId}', 'guardian', '남의 집 문의');`
+        `insert into household_inquiries (household_id, opened_by, opened_by_role) values ('${b.householdId}', '${a.guardianId}', 'guardian');`
       )
     ).toThrow();
 
-    // 다른 household(b)의 메시지는 조회도 되지 않는다(RLS select 필터).
+    // 다른 household(b)의 문의·메시지는 조회도 되지 않는다(RLS select 필터).
     const crossCount = psqlAsUser(a.guardianId, `select count(*) from household_messages where household_id = '${b.householdId}';`);
     expect(crossCount).toBe("0");
   });
 
-  it("관리자는 모든 household 문의를 조회·작성할 수 있다", () => {
+  it("관리자는 모든 household 문의를 조회·작성·종료할 수 있고, 종료된 문의엔 메시지를 남길 수 없다", () => {
     const a = setupHousehold("msg-admin");
     const adminId = createAuthUser("msg-admin-user");
     psqlAsSuperuser(`insert into profiles (id, role, name) values ('${adminId}', 'admin', '관리자');`);
 
+    const inquiryId = psqlAsUser(
+      a.guardianId,
+      `insert into household_inquiries (household_id, opened_by, opened_by_role) values ('${a.householdId}', '${a.guardianId}', 'guardian') returning id;`
+    );
     psqlAsUser(
       a.guardianId,
-      `insert into household_messages (household_id, sender_id, sender_role, body) values ('${a.householdId}', '${a.guardianId}', 'guardian', '질문 있습니다');`
+      `insert into household_messages (household_id, inquiry_id, sender_id, sender_role, body) values ('${a.householdId}', '${inquiryId}', '${a.guardianId}', 'guardian', '질문 있습니다');`
     );
     psqlAsUser(
       adminId,
-      `insert into household_messages (household_id, sender_id, sender_role, body) values ('${a.householdId}', '${adminId}', 'admin', '답변드립니다');`
+      `insert into household_messages (household_id, inquiry_id, sender_id, sender_role, body) values ('${a.householdId}', '${inquiryId}', '${adminId}', 'admin', '답변드립니다');`
     );
     const adminVisibleCount = psqlAsUser(adminId, `select count(*) from household_messages where household_id = '${a.householdId}';`);
     expect(adminVisibleCount).toBe("2");
 
-    psqlAsUser(adminId, `update household_messages set status = 'resolved' where household_id = '${a.householdId}';`);
-    const resolvedCount = psqlAsUser(adminId, `select count(*) from household_messages where household_id = '${a.householdId}' and status = 'resolved';`);
-    expect(resolvedCount).toBe("2");
+    psqlAsUser(adminId, `select close_household_inquiry('${inquiryId}');`);
+    const closedStatus = psqlAsUser(adminId, `select status from household_inquiries where id = '${inquiryId}';`);
+    expect(closedStatus).toBe("closed");
+
+    // 종료된 문의엔 보호자든 관리자든 메시지를 남길 수 없다(재문의는 새 문의로).
+    expect(() =>
+      psqlAsUser(
+        a.guardianId,
+        `insert into household_messages (household_id, inquiry_id, sender_id, sender_role, body) values ('${a.householdId}', '${inquiryId}', '${a.guardianId}', 'guardian', '재문의합니다');`
+      )
+    ).toThrow();
   });
 });
 

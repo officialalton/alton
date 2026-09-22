@@ -64,7 +64,10 @@ export default function MaterialTab({
   // 사람은 각자 켜고 끄고, 쓰기는 자기 레이어에만 가능하다.
   const drawRole = annotationViewerRole ?? viewerRole;
   const layerRole = drawRole === "student" ? "student" : drawRole === "teacher" ? "teacher" : "reader";
-  const vocabEnabled = viewerRole === "student" || viewerRole === "teacher";
+  // 2026-09-22(버그 수정) — 세션 시작 전엔 viewerRole이 "admin"으로 강제돼(SessionShell의
+  // contentViewerRole) 단어 저장 스위치가 하나도 안 보였다. 필기(annotationViewerRole)와
+  // 같은 실제 역할 기준으로 판단해야 한다 — 단어 저장도 필기처럼 "쓰기"이기 때문이다.
+  const vocabEnabled = drawRole === "student" || drawRole === "teacher";
   const vocab = useVocabSaveController(studentId);
   const [activeSectionId, setActiveSectionId] = useState<string | null>(
     material?.sections[0]?.id ?? null

@@ -9,26 +9,31 @@ import { createAdminClient } from "@/lib/supabase-admin";
 import { createCalendarEventWithMeet, patchCalendarEventTime } from "@/lib/google-calendar";
 import { extractMeetingCodeFromLink } from "@/lib/google-meet";
 
+// 2026-09-22(사용자 지시) — household 전체가 공유하는 끝없는 대화 대신 "문의" 단위
+// 스레드로 바꿨다. 카드 하나 = 문의 하나(householdId가 아니라 inquiryId가 기본 키다).
+// 관리자가 종료(close_household_inquiry RPC)하면 status='closed'로 남아 내역이 된다.
 export type AdminInquiryThread = {
+  inquiryId: string;
   householdId: string;
   householdLabel: string;
+  status: "open" | "closed";
+  lastMessageAt: string;
   messages: {
     id: string;
     senderRole: "guardian" | "admin";
     body: string;
-    status: "open" | "resolved";
     createdAt: string;
   }[];
-  hasOpen: boolean;
   unreadForAdmin: boolean;
 };
 
 // 2026-09-10(P1-2) — 데이터가 늘어나도 이 화면이 계속 느려지지 않도록 최근
-// 90일 + 상한을 둔다(지금은 데이터가 거의 없어 체감되지 않지만, 그게 이 화면이
-// 빠른 이유는 아니라는 게 P1-2 조사 결론이었다). 열린(open) 문의는 오래됐어도
-// 놓치면 안 되므로 기간 제한과 별개로 항상 포함한다.
+// 90일 + 상한을 둔다. 열린(open) 문의는 오래됐어도 놓치면 안 되므로 기간 제한과
+// 별개로 항상 포함한다. household_inquiries에 (status, last_message_at) 인덱스가
+// 있어 두 조건 모두 인덱스로 걸린다(전에는 household_messages에 이 조건에 맞는
+// 인덱스가 없어 매번 전체 스캔이었다).
 const INQUIRY_LOOKBACK_DAYS = 90;
-const INQUIRY_MESSAGE_LIMIT = 500;
+const INQUIRY_LIMIT = 200;
 
 export async function listInquiryThreadsForAdmin(): Promise<AdminInquiryThread[]> {
   await requireAdmin();
@@ -36,27 +41,30 @@ export async function listInquiryThreadsForAdmin(): Promise<AdminInquiryThread[]
   const since = new Date(Date.now() - INQUIRY_LOOKBACK_DAYS * 24 * 60 * 60 * 1000).toISOString();
   const [{ data: recent, error }, { data: openOlder, error: openError }] = await Promise.all([
     admin
-      .from("household_messages")
-      .select("id, household_id, sender_role, body, status, created_at, household:households(primary_guardian_id, guardian:profiles!households_primary_guardian_id_fkey(name))")
-      .gte("created_at", since)
-      .order("created_at", { ascending: true })
-      .limit(INQUIRY_MESSAGE_LIMIT),
+      .from("household_inquiries")
+      .select(
+        "id, household_id, status, last_message_at, household:households(primary_guardian_id, guardian:profiles!households_primary_guardian_id_fkey(name)), household_messages(id, sender_role, body, created_at)"
+      )
+      .gte("last_message_at", since)
+      .order("last_message_at", { ascending: false })
+      .limit(INQUIRY_LIMIT),
     admin
-      .from("household_messages")
-      .select("id, household_id, sender_role, body, status, created_at, household:households(primary_guardian_id, guardian:profiles!households_primary_guardian_id_fkey(name))")
-      .lt("created_at", since)
+      .from("household_inquiries")
+      .select(
+        "id, household_id, status, last_message_at, household:households(primary_guardian_id, guardian:profiles!households_primary_guardian_id_fkey(name)), household_messages(id, sender_role, body, created_at)"
+      )
+      .lt("last_message_at", since)
       .eq("status", "open")
-      .order("created_at", { ascending: true }),
+      .order("last_message_at", { ascending: false }),
   ]);
   if (error) throw new Error(error.message);
   if (openError) throw new Error(openError.message);
-  const data = [...(openOlder ?? []), ...(recent ?? [])];
+  const rows = [...(recent ?? []), ...(openOlder ?? [])];
 
   const { data: readRows } = await admin.from("household_message_reads").select("household_id, last_read_at").eq("viewer_role", "admin");
   const readByHousehold = new Map<string, string>((readRows ?? []).map((r) => [r.household_id as string, r.last_read_at as string]));
 
-  const byHousehold = new Map<string, AdminInquiryThread>();
-  for (const row of data ?? []) {
+  const threads: AdminInquiryThread[] = rows.map((row) => {
     const householdRel = row.household as
       | { primary_guardian_id?: string; guardian?: { name?: string } | { name?: string }[] }
       | { primary_guardian_id?: string; guardian?: { name?: string } | { name?: string }[] }[]
@@ -65,50 +73,43 @@ export async function listInquiryThreadsForAdmin(): Promise<AdminInquiryThread[]
     const guardianRel = household?.guardian;
     const guardian = Array.isArray(guardianRel) ? guardianRel[0] : guardianRel;
     const label = guardian?.name ? `${guardian.name} 가족` : row.household_id;
-
-    let thread = byHousehold.get(row.household_id);
-    if (!thread) {
-      thread = { householdId: row.household_id, householdLabel: label, messages: [], hasOpen: false, unreadForAdmin: false };
-      byHousehold.set(row.household_id, thread);
-    }
-    thread.messages.push({
-      id: row.id,
-      senderRole: row.sender_role,
-      body: row.body,
-      status: row.status,
-      createdAt: row.created_at,
-    });
-    if (row.status === "open") thread.hasOpen = true;
-    const lastReadAt = readByHousehold.get(row.household_id) ?? null;
-    if (row.sender_role === "guardian" && (!lastReadAt || row.created_at > lastReadAt)) {
-      thread.unreadForAdmin = true;
-    }
-  }
-  return Array.from(byHousehold.values()).sort((a, b) => {
-    if (a.hasOpen !== b.hasOpen) return a.hasOpen ? -1 : 1;
-    return (b.messages.at(-1)?.createdAt ?? "").localeCompare(a.messages.at(-1)?.createdAt ?? "");
+    const messages = ((row.household_messages as { id: string; sender_role: "guardian" | "admin"; body: string; created_at: string }[] | null) ?? []).sort(
+      (a, b) => a.created_at.localeCompare(b.created_at)
+    );
+    const lastReadAt = readByHousehold.get(row.household_id as string) ?? null;
+    const unreadForAdmin = messages.some((m) => m.sender_role === "guardian" && (!lastReadAt || m.created_at > lastReadAt));
+    return {
+      inquiryId: row.id as string,
+      householdId: row.household_id as string,
+      householdLabel: label as string,
+      status: row.status as "open" | "closed",
+      lastMessageAt: row.last_message_at as string,
+      messages: messages.map((m) => ({ id: m.id, senderRole: m.sender_role, body: m.body, createdAt: m.created_at })),
+      unreadForAdmin,
+    };
+  });
+  return threads.sort((a, b) => {
+    if (a.status !== b.status) return a.status === "open" ? -1 : 1;
+    return b.lastMessageAt.localeCompare(a.lastMessageAt);
   });
 }
 
-export async function sendAdminHouseholdMessage(householdId: string, body: string): Promise<void> {
+export async function sendAdminInquiryMessage(inquiryId: string, householdId: string, body: string): Promise<void> {
   const { adminUserId, supabase } = await requireAdmin();
   if (!body.trim()) throw new Error("내용을 입력해주세요.");
   const { error } = await supabase.from("household_messages").insert({
     household_id: householdId,
+    inquiry_id: inquiryId,
     sender_id: adminUserId,
     sender_role: "admin",
     body: body.trim(),
   });
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(error.message.includes("household_inquiries") ? "이미 종료된 문의입니다." : error.message);
 }
 
-export async function resolveHouseholdInquiryThread(householdId: string): Promise<void> {
+export async function closeHouseholdInquiry(inquiryId: string): Promise<void> {
   const { supabase } = await requireAdmin();
-  const { error } = await supabase
-    .from("household_messages")
-    .update({ status: "resolved" })
-    .eq("household_id", householdId)
-    .eq("status", "open");
+  const { error } = await supabase.rpc("close_household_inquiry", { p_inquiry_id: inquiryId });
   if (error) throw new Error(error.message);
 }
 

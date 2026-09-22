@@ -21,8 +21,19 @@ export type HouseholdMessage = {
   senderId: string;
   senderRole: "guardian" | "admin";
   body: string;
-  status: "open" | "resolved";
   createdAt: string;
+};
+
+// 2026-09-22(사용자 지시) — household 전체가 공유하는 끝없는 대화 대신 "문의" 단위
+// 스레드. 관리자가 닫으면 status='closed'로 내역에 남고, 재문의는 새 문의를 연다.
+export type HouseholdInquirySummary = {
+  id: string;
+  status: "open" | "closed";
+  createdAt: string;
+  lastMessageAt: string;
+  closedAt: string | null;
+  /** 목록에서 미리보기로 보여줄 첫 메시지. */
+  firstMessage: string;
 };
 
 export type MeetingRequest = {
@@ -52,14 +63,39 @@ async function requireGuardianHouseholdId(supabase: SupabaseClient, guardianId: 
   return data.household_id as string;
 }
 
-export async function listGuardianHouseholdMessages(): Promise<HouseholdMessage[]> {
+/** 진행 중 + 지난 문의 목록(최근 메시지 순). */
+export async function listGuardianInquiries(): Promise<HouseholdInquirySummary[]> {
   const { user, profile, supabase } = await requireUser();
   if (profile?.role !== "parent") throw new Error("보호자만 접근할 수 있습니다.");
   const householdId = await requireGuardianHouseholdId(supabase, user.id);
   const { data, error } = await supabase
-    .from("household_messages")
-    .select("id, sender_id, sender_role, body, status, created_at")
+    .from("household_inquiries")
+    .select("id, status, created_at, last_message_at, closed_at, household_messages(body, created_at)")
     .eq("household_id", householdId)
+    .order("last_message_at", { ascending: false });
+  if (error) throw new Error(error.message);
+  return (data ?? []).map((r) => {
+    const msgs = (r.household_messages as { body: string; created_at: string }[] | null) ?? [];
+    const first = [...msgs].sort((a, b) => a.created_at.localeCompare(b.created_at))[0];
+    return {
+      id: r.id,
+      status: r.status,
+      createdAt: r.created_at,
+      lastMessageAt: r.last_message_at,
+      closedAt: r.closed_at,
+      firstMessage: first?.body ?? "",
+    };
+  });
+}
+
+/** 문의 하나의 메시지 전체(시간순). */
+export async function listGuardianInquiryMessages(inquiryId: string): Promise<HouseholdMessage[]> {
+  const { profile, supabase } = await requireUser();
+  if (profile?.role !== "parent") throw new Error("보호자만 접근할 수 있습니다.");
+  const { data, error } = await supabase
+    .from("household_messages")
+    .select("id, sender_id, sender_role, body, created_at")
+    .eq("inquiry_id", inquiryId)
     .order("created_at", { ascending: true });
   if (error) throw new Error(error.message);
   return (data ?? []).map((r) => ({
@@ -67,23 +103,47 @@ export async function listGuardianHouseholdMessages(): Promise<HouseholdMessage[
     senderId: r.sender_id,
     senderRole: r.sender_role,
     body: r.body,
-    status: r.status,
     createdAt: r.created_at,
   }));
 }
 
-export async function sendGuardianHouseholdMessage(body: string): Promise<void> {
+/** 새 문의를 열고 첫 메시지를 남긴다. */
+export async function startGuardianInquiry(body: string): Promise<{ inquiryId: string }> {
+  const { user, profile, supabase } = await requireUser();
+  if (profile?.role !== "parent") throw new Error("보호자만 접근할 수 있습니다.");
+  if (!body.trim()) throw new Error("내용을 입력해주세요.");
+  const householdId = await requireGuardianHouseholdId(supabase, user.id);
+  const { data: inquiry, error: inquiryError } = await supabase
+    .from("household_inquiries")
+    .insert({ household_id: householdId, opened_by: user.id, opened_by_role: "guardian" })
+    .select("id")
+    .single();
+  if (inquiryError) throw new Error(inquiryError.message);
+  const { error } = await supabase.from("household_messages").insert({
+    household_id: householdId,
+    inquiry_id: inquiry.id,
+    sender_id: user.id,
+    sender_role: "guardian",
+    body: body.trim(),
+  });
+  if (error) throw new Error(error.message);
+  return { inquiryId: inquiry.id as string };
+}
+
+/** 진행 중인 문의에 이어서 메시지를 남긴다(재문의) — 닫힌 문의는 DB에서 거부된다. */
+export async function sendGuardianInquiryMessage(inquiryId: string, body: string): Promise<void> {
   const { user, profile, supabase } = await requireUser();
   if (profile?.role !== "parent") throw new Error("보호자만 접근할 수 있습니다.");
   if (!body.trim()) throw new Error("내용을 입력해주세요.");
   const householdId = await requireGuardianHouseholdId(supabase, user.id);
   const { error } = await supabase.from("household_messages").insert({
     household_id: householdId,
+    inquiry_id: inquiryId,
     sender_id: user.id,
     sender_role: "guardian",
     body: body.trim(),
   });
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(error.message.includes("household_inquiries") ? "종료된 문의입니다. 새 문의를 시작해주세요." : error.message);
 }
 
 export async function listGuardianMeetingRequests(): Promise<MeetingRequest[]> {

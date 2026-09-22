@@ -16,12 +16,15 @@ function chain(result: unknown) {
 
 let insertMock: ReturnType<typeof vi.fn>;
 let updateResult: unknown;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let rpcMock: any;
 
 const supabaseMock = {
   from: vi.fn((_table: string) => ({
     insert: insertMock,
     update: () => chain(updateResult),
   })),
+  rpc: (...args: unknown[]) => rpcMock(...args),
 };
 
 vi.mock("@/lib/admin-auth", () => ({
@@ -32,13 +35,13 @@ vi.mock("@/lib/supabase-admin", () => ({
 }));
 
 import {
-  sendAdminHouseholdMessage,
-  resolveHouseholdInquiryThread,
+  sendAdminInquiryMessage,
+  closeHouseholdInquiry,
   updateMeetingRequestStatus,
   addMeetingAvailabilityRule,
 } from "./inquiry-and-meeting-actions";
 
-describe("sendAdminHouseholdMessage", () => {
+describe("sendAdminInquiryMessage", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     insertMock = vi.fn().mockResolvedValue({ error: null });
@@ -46,13 +49,14 @@ describe("sendAdminHouseholdMessage", () => {
   });
 
   it("빈 내용이면 거부한다", async () => {
-    await expect(sendAdminHouseholdMessage("household1", "  ")).rejects.toThrow("내용을 입력해주세요");
+    await expect(sendAdminInquiryMessage("inquiry1", "household1", "  ")).rejects.toThrow("내용을 입력해주세요");
   });
 
-  it("sender_role='admin'으로 삽입한다", async () => {
-    await sendAdminHouseholdMessage("household1", "답변입니다");
+  it("sender_role='admin'으로 지정한 문의에 삽입한다", async () => {
+    await sendAdminInquiryMessage("inquiry1", "household1", "답변입니다");
     expect(insertMock).toHaveBeenCalledWith({
       household_id: "household1",
+      inquiry_id: "inquiry1",
       sender_id: "admin1",
       sender_role: "admin",
       body: "답변입니다",
@@ -60,15 +64,20 @@ describe("sendAdminHouseholdMessage", () => {
   });
 });
 
-describe("resolveHouseholdInquiryThread", () => {
-  it("에러 없이 해당 household의 open 메시지를 resolved로 갱신 요청한다", async () => {
-    updateResult = { error: null };
-    await expect(resolveHouseholdInquiryThread("household1")).resolves.toBeUndefined();
+describe("closeHouseholdInquiry", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
   });
 
-  it("업데이트 실패 시 에러를 던진다", async () => {
-    updateResult = { error: { message: "DB 오류" } };
-    await expect(resolveHouseholdInquiryThread("household1")).rejects.toThrow("DB 오류");
+  it("에러 없이 close_household_inquiry RPC를 호출한다", async () => {
+    rpcMock = vi.fn().mockResolvedValue({ error: null });
+    await expect(closeHouseholdInquiry("inquiry1")).resolves.toBeUndefined();
+    expect(rpcMock).toHaveBeenCalledWith("close_household_inquiry", { p_inquiry_id: "inquiry1" });
+  });
+
+  it("RPC 실패 시 에러를 던진다", async () => {
+    rpcMock = vi.fn().mockResolvedValue({ error: { message: "DB 오류" } });
+    await expect(closeHouseholdInquiry("inquiry1")).rejects.toThrow("DB 오류");
   });
 });
 

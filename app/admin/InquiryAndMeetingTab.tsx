@@ -8,8 +8,8 @@
 import { useState } from "react";
 import {
   listInquiryThreadsForAdmin,
-  sendAdminHouseholdMessage,
-  resolveHouseholdInquiryThread,
+  sendAdminInquiryMessage,
+  closeHouseholdInquiry,
   markHouseholdMessengerReadByAdmin,
   loadMeetingOperationsDashboardAction,
   updateMeetingRequestStatus,
@@ -97,16 +97,34 @@ function InquiryInbox({ initialThreads }: { initialThreads?: AdminInquiryThread[
     fetcher: listInquiryThreadsForAdmin,
   });
   const [mutationError, setMutationError] = useState<string | null>(null);
-  const [openHouseholdId, setOpenHouseholdId] = useState<string | null>(null);
+  const [openInquiryId, setOpenInquiryId] = useState<string | null>(null);
   const [reply, setReply] = useState("");
   const [busy, setBusy] = useState(false);
+  const [statusFilter, setStatusFilter] = useState<"open" | "closed">("open");
   const error = mutationError ?? fetchError;
 
   if (threads === null) return <InquiryThreadSkeleton />;
 
+  // 2026-09-22(사용자 지시) — household 전체 스레드가 아니라 문의(inquiry) 단위 카드.
+  // 관리자가 종료하면 그 문의는 "지난 문의"로 넘어가 읽기 전용 내역이 된다.
+  const visible = threads.filter((t) => t.status === statusFilter);
+
   return (
     <div>
-      <div className="flex justify-end mb-2">
+      <div className="flex items-center justify-between mb-2">
+        <div className="flex gap-1.5">
+          {(["open", "closed"] as const).map((s) => (
+            <button
+              key={s}
+              type="button"
+              onClick={() => setStatusFilter(s)}
+              aria-pressed={statusFilter === s}
+              className={"text-[12px] font-bold px-3 py-1.5 rounded-full " + (statusFilter === s ? "bg-ink text-white" : "bg-grey-100 text-grey-600")}
+            >
+              {s === "open" ? "진행 중 문의" : "지난 문의"}
+            </button>
+          ))}
+        </div>
         <button
           onClick={refresh}
           disabled={refreshing}
@@ -116,19 +134,21 @@ function InquiryInbox({ initialThreads }: { initialThreads?: AdminInquiryThread[
         </button>
       </div>
       {error && <p className="text-[12px] text-red mb-3">{error}</p>}
-      {threads.length === 0 && <p className="text-[13px] text-grey-500">문의 내역이 없습니다.</p>}
-      {threads.map((t) => (
-        <div key={t.householdId} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3">
+      {visible.length === 0 && (
+        <p className="text-[13px] text-grey-500">{statusFilter === "open" ? "진행 중인 문의가 없습니다." : "지난 문의가 없습니다."}</p>
+      )}
+      {visible.map((t) => (
+        <div key={t.inquiryId} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3">
           <div className="flex items-center justify-between mb-2">
             <span className="text-[13.5px] font-bold text-ink">
-              {t.householdLabel} {t.hasOpen && <span className="text-red">● 미해결</span>}
+              {t.householdLabel}
               {t.unreadForAdmin && <span className="ml-1.5 text-[11px] font-bold text-white bg-red rounded-full px-1.5 py-0.5">안읽음</span>}
             </span>
             <button
               className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5"
               onClick={() => {
-                const opening = openHouseholdId !== t.householdId;
-                setOpenHouseholdId(opening ? t.householdId : null);
+                const opening = openInquiryId !== t.inquiryId;
+                setOpenInquiryId(opening ? t.inquiryId : null);
                 if (opening) {
                   markHouseholdMessengerReadByAdmin(t.householdId)
                     .then(refresh)
@@ -136,10 +156,10 @@ function InquiryInbox({ initialThreads }: { initialThreads?: AdminInquiryThread[
                 }
               }}
             >
-              {openHouseholdId === t.householdId ? "닫기" : "열기"}
+              {openInquiryId === t.inquiryId ? "닫기" : "열기"}
             </button>
           </div>
-          {openHouseholdId === t.householdId && (
+          {openInquiryId === t.inquiryId && (
             <div>
               <div className="space-y-2 mb-3 max-h-[300px] overflow-y-auto">
                 {t.messages.map((m) => (
@@ -154,49 +174,53 @@ function InquiryInbox({ initialThreads }: { initialThreads?: AdminInquiryThread[
                   </div>
                 ))}
               </div>
-              <div className="flex gap-2 mb-2">
-                <textarea
-                  aria-label="답장 내용"
-                  value={reply}
-                  onChange={(e) => setReply(e.target.value)}
-                  placeholder="답장 내용을 입력해주세요"
-                  className="flex-1 px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px] min-h-[54px]"
-                />
-                <button
-                  disabled={busy || !reply.trim()}
-                  className="px-4 py-2 rounded-lg bg-ink text-white text-[13px] font-bold disabled:opacity-50 self-end"
-                  onClick={async () => {
-                    setBusy(true);
-                    try {
-                      await sendAdminHouseholdMessage(t.householdId, reply);
-                      setReply("");
-                      refresh();
-                    } catch (e) {
-                      setMutationError(e instanceof Error ? e.message : "전송에 실패했습니다.");
-                    } finally {
-                      setBusy(false);
-                    }
-                  }}
-                >
-                  답장
-                </button>
-              </div>
-              {t.hasOpen && (
-                <button
-                  disabled={busy}
-                  className="text-[12px] font-bold text-ink underline"
-                  onClick={async () => {
-                    setBusy(true);
-                    try {
-                      await resolveHouseholdInquiryThread(t.householdId);
-                      refresh();
-                    } finally {
-                      setBusy(false);
-                    }
-                  }}
-                >
-                  해결됨으로 표시
-                </button>
+              {t.status === "open" ? (
+                <>
+                  <div className="flex gap-2 mb-2">
+                    <textarea
+                      aria-label="답장 내용"
+                      value={reply}
+                      onChange={(e) => setReply(e.target.value)}
+                      placeholder="답장 내용을 입력해주세요"
+                      className="flex-1 px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px] min-h-[54px]"
+                    />
+                    <button
+                      disabled={busy || !reply.trim()}
+                      className="px-4 py-2 rounded-lg bg-ink text-white text-[13px] font-bold disabled:opacity-50 self-end"
+                      onClick={async () => {
+                        setBusy(true);
+                        try {
+                          await sendAdminInquiryMessage(t.inquiryId, t.householdId, reply);
+                          setReply("");
+                          refresh();
+                        } catch (e) {
+                          setMutationError(e instanceof Error ? e.message : "전송에 실패했습니다.");
+                        } finally {
+                          setBusy(false);
+                        }
+                      }}
+                    >
+                      답장
+                    </button>
+                  </div>
+                  <button
+                    disabled={busy}
+                    className="text-[12px] font-bold text-ink underline"
+                    onClick={async () => {
+                      setBusy(true);
+                      try {
+                        await closeHouseholdInquiry(t.inquiryId);
+                        refresh();
+                      } finally {
+                        setBusy(false);
+                      }
+                    }}
+                  >
+                    문의 종료
+                  </button>
+                </>
+              ) : (
+                <p className="text-[12px] font-bold text-grey-500">종료된 문의입니다(읽기 전용).</p>
               )}
             </div>
           )}
