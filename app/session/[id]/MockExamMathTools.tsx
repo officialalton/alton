@@ -234,17 +234,11 @@ export default function MockExamMathTools({
   referenceSheetAllowed,
   open,
   onClose,
-  docked = false,
 }: {
   calculatorAllowed: boolean;
   referenceSheetAllowed: boolean;
   open: MathToolsOpen;
   onClose: () => void;
-  /** 2026-09-21(UAT 지적) — 처음엔 문제 오른쪽에 도킹된 패널로 만들었으나, "왼쪽 입력칸이
-   * 너무 커서 보기 힘드니 차라리 팝업으로 전체 사이즈로 키우자"는 후속 지적으로 모의고사
-   * 응시 화면도 큰 중앙 팝업(참조표와 같은 방식, 더 크게)으로 바꿨다. true면 이 큰 팝업
-   * 모드, false(기본)면 과제·문제 탭에서 쓰는 화면 구석 플로팅 패널. */
-  docked?: boolean;
 }) {
   const [calcMounted, setCalcMounted] = useState(false);
   useEffect(() => {
@@ -255,7 +249,10 @@ export default function MockExamMathTools({
 
   return (
     <>
-      {calculatorAllowed && calcMounted && docked && (
+      {/* 2026-09-21(UAT 지적) — 처음엔 문제 오른쪽에 도킹된 패널, 그다음 화면 구석 작은
+       * 플로팅 패널이었으나 "그냥 팝업으로 가운데로 크게"라는 반복된 지적으로 모의고사·
+       * 문제·과제 탭 전부 이 큰 중앙 팝업 하나로 통일했다. */}
+      {calculatorAllowed && calcMounted && (
         <div
           className={`fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4 ${open === "calculator" ? "flex" : "hidden"}`}
           onClick={onClose}
@@ -273,25 +270,6 @@ export default function MockExamMathTools({
             <div className="min-h-0 flex-1 p-2">
               <GraphingCalculator heightClassName="h-full" />
             </div>
-          </div>
-        </div>
-      )}
-      {calculatorAllowed && calcMounted && !docked && (
-        <div
-          className={`fixed bottom-4 right-4 z-40 w-[calc(100vw-2rem)] max-w-[380px] ${open === "calculator" ? "block" : "hidden"}`}
-          data-testid="mock-exam-calculator-panel"
-        >
-          <div className="relative">
-            <button
-              type="button"
-              onClick={onClose}
-              className="absolute -top-2 -right-2 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-ink text-[12px] font-bold text-white shadow"
-              data-testid="close-calculator"
-              aria-label="계산기 닫기"
-            >
-              ×
-            </button>
-            <GraphingCalculator heightClassName="h-[360px]" />
           </div>
         </div>
       )}

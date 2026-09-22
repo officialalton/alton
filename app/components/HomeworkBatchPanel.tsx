@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { HomeworkBatch, HomeworkBatchItem } from "@/lib/homework-batch-data";
 import { submitHomeworkAnswerAction, gradeHomeworkBatchAction } from "@/lib/homework-batch-actions";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
+import LearningText from "@/app/session/[id]/LearningText";
 import MockExamMathTools, { MockExamToolButtons, type MathToolsOpen } from "@/app/session/[id]/MockExamMathTools";
 import ProblemNoteCanvas from "@/app/components/ProblemNoteCanvas";
 
@@ -18,6 +19,15 @@ function isMathBatch(batch: HomeworkBatch): boolean {
 
 function isGraded(b: HomeworkBatch): boolean {
   return b.items.length > 0 && b.items.every((i) => i.graded);
+}
+
+/** 학생이 고른 답(객관식이면 선택지 원문, 아니면 입력한 텍스트) — LearningText로
+ * 그려 선택지 안 마크다운 표·수식도 다른 곳과 똑같이 보이게 한다. */
+function ChosenAnswer({ item }: { item: HomeworkBatchItem }) {
+  if (item.format === "mc" && item.options && item.response !== null) {
+    return <LearningText text={item.options[Number(item.response)]} />;
+  }
+  return <>{item.response || "(제출 안 함)"}</>;
 }
 
 /** 2026-09-16 — 과제 배치 목록 + 배치 하나를 눌렀을 때의 목차·슬라이드 화면. 수업(세션)과 무관하게
@@ -266,15 +276,15 @@ function BatchRunner({
           </div>
         </div>
 
-        {item.passage && <p className="text-[13.5px] text-ink whitespace-pre-wrap mb-3">{item.passage}</p>}
+        {/* 2026-09-21(UAT 지적) — 이 화면만 LearningText를 안 써서 마크다운 표·KaTeX 수식이
+            원문 그대로("$y < -2x - 7$", "|x|y||---|---|..." 등) 노출되고 있었다. */}
+        {item.passage && <LearningText text={item.passage} className="mb-3 text-[13.5px]" />}
         {item.figure != null && <ProblemFigure spec={item.figure} className="mb-3" />}
-        {item.question && <p className="text-[14px] font-bold text-ink mb-3">{item.question}</p>}
+        {item.question && <LearningText text={item.question} className="mb-3 font-bold text-[14px]" />}
 
         {viewerRole === "student" && !item.graded && readOnly && (
-          <div className="mb-3">
-            <p className="text-[13px] text-ink">
-              제출한 답: {item.format === "mc" && item.options && item.response !== null ? item.options[Number(item.response)] : item.response || "(아직 제출하지 않음)"}
-            </p>
+          <div className="mb-3 text-[13px] text-ink">
+            제출한 답: <ChosenAnswer item={item} />
           </div>
         )}
 
@@ -288,7 +298,7 @@ function BatchRunner({
                     onClick={() => { setResponse(String(idx)); }}
                     className={"text-left text-[13.5px] px-3.5 py-2.5 rounded-[10px] border-[1.5px] " + (response === String(idx) ? "border-ink bg-grey-100" : "border-grey-200")}
                   >
-                    {opt}
+                    <LearningText text={opt} />
                   </button>
                 ))}
               </div>
@@ -313,7 +323,9 @@ function BatchRunner({
 
         {viewerRole === "student" && item.graded && (
           <div className="mb-3">
-            <p className="text-[13px] text-ink mb-1">내 답: {item.format === "mc" && item.options && item.response !== null ? item.options[Number(item.response)] : item.response || "(제출 안 함)"}</p>
+            <p className="mb-1 text-[13px] text-ink">
+              내 답: <ChosenAnswer item={item} />
+            </p>
             <p className={"text-[13px] font-bold " + (item.grade === "correct" ? "text-green" : "text-red")}>
               {item.grade === "correct" ? "정답" : "오답"}
             </p>
@@ -323,9 +335,9 @@ function BatchRunner({
         {viewerRole === "teacher" && (
           <div className="mb-3 border-[1.5px] border-grey-200 rounded-xl px-4 py-3">
             <p className="text-[12.5px] text-grey-500 mb-1">학생 답</p>
-            <p className="text-[13.5px] text-ink mb-2">
-              {item.format === "mc" && item.options && item.response !== null ? item.options[Number(item.response)] : item.response || "(제출 안 함)"}
-            </p>
+            <div className="mb-2 text-[13.5px] text-ink">
+              <ChosenAnswer item={item} />
+            </div>
             {!allGraded ? (
               <div className="flex items-center gap-2 mb-2">
                 <button
@@ -369,7 +381,7 @@ function BatchRunner({
         {(showAnswer || (viewerRole === "teacher" && item.explanation)) && item.explanation && (
           <div className="border-t border-grey-100 pt-3">
             <p className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-1">해설</p>
-            <p className="text-[13px] text-ink whitespace-pre-wrap">{item.explanation}</p>
+            <LearningText text={item.explanation} className="text-[13px] text-ink" />
           </div>
         )}
 

@@ -98,6 +98,7 @@ const mc: SessionProblem = {
   number: 1,
   problemId: "p1",
   format: "mc",
+  satDomain: null,
   passage: "첫 번째 지문",
   options: ["가", "나"],
   difficulty: "hard",

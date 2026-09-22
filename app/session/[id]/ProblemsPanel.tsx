@@ -134,9 +134,12 @@ export default function ProblemsPanel({
   const [regrading, setRegrading] = useState<Set<string>>(new Set());
 
   // 2026-09-21(UAT 지적) — 문제·과제 탭에서도 모의고사와 같은 계산기·참조표를 쓸 수 있어야 한다
-  // (사양 6절 "같은 렌더러"를 이 화면들엔 배선하지 않았던 간극). 수학 형식(spr/math) 문제가 하나라도
-  // 있으면 이 문제 목록 전체에 도구를 노출한다(문제별로 켜고 끄지 않음 — 세트 단위가 더 단순하다).
-  const hasMathProblem = problems.some((p) => p.format === "spr" || p.format === "math");
+  // (사양 6절 "같은 렌더러"를 이 화면들엔 배선하지 않았던 간극). 처음엔 형식(spr/math)만 봐서
+  // SAT Math의 객관식(mc) 문항(예: 부등식 표 문제)이 빠졌었다 — sat_domain으로 판단한다
+  // (rw_ 로 시작하지 않는 도메인이면 Math). 문제별로 켜고 끄지 않고 세트 단위로 노출한다.
+  const hasMathProblem = problems.some(
+    (p) => p.format === "spr" || p.format === "math" || (p.satDomain && !p.satDomain.startsWith("rw_")),
+  );
   const [mathToolsOpen, setMathToolsOpen] = useState<MathToolsOpen>(null);
   const toggleMathTools = (which: "calculator" | "reference") => setMathToolsOpen((cur) => (cur === which ? null : which));
 

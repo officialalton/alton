@@ -21,6 +21,9 @@ export type SessionProblem = {
    * 객관식은 선택지 클릭이 곧 답, 서술형은 아래 연습장, 풀이형만 풀이판·제출.
    */
   format: ProblemFormat;
+  /** SAT 영역 코드(algebra/advanced_math/problem_solving_data/geometry_trig/rw_*) —
+   * 계산기·참조표를 보여줄지(수학 영역인지) 판단하는 데 쓴다. SAT 문제가 아니면 null. */
+  satDomain: string | null;
   /** 지문/자료 + 질문을 합친 화면용 본문(2026-09-14: 질문은 버전에 따로 저장되지만 화면은 한 덩어리로 본다). */
   passage: string | null;
   options: string[];
@@ -171,18 +174,25 @@ async function buildSessionProblems(
 
 
   // 문제 유형 — 학생은 problems 를 직접 읽지 못하므로 수업 관계자용 함수로 받는다.
+  // sat_domain도 같이 받는다(2026-09-21 UAT: 계산기 노출 여부가 format이 아니라
+  // SAT Math/R&W 도메인으로 판단돼야 한다 — mc 형식의 SAT Math 문제도 있다).
   const formatByProblemId = new Map<string, ProblemFormat>();
+  const satDomainByProblemId = new Map<string, string | null>();
   {
     const { data: formats } = await supabase.rpc("session_problem_formats", { p_session_id: sessionId });
-    for (const f of (formats ?? []) as { problem_id: string; format: string }[]) {
+    for (const f of (formats ?? []) as { problem_id: string; format: string; sat_domain: string | null }[]) {
       formatByProblemId.set(f.problem_id, toFormat(f.format));
+      satDomainByProblemId.set(f.problem_id, f.sat_domain ?? null);
     }
     // 함수가 비워 돌려준 문제(예: 서비스 롤처럼 auth.uid 가 없는 호출)는 problems 를 직접 읽어 본다 —
     // 학생은 RLS 로 비어 그대로 남고, 아래에서 선택지 유무로 추정한다.
     const missing = rows.map((r) => r.problemId).filter((id) => !formatByProblemId.has(id));
     if (missing.length) {
-      const { data: direct } = await supabase.from("problems").select("id, format").in("id", missing);
-      for (const p of direct ?? []) formatByProblemId.set(p.id as string, toFormat(p.format as string));
+      const { data: direct } = await supabase.from("problems").select("id, format, sat_domain").in("id", missing);
+      for (const p of direct ?? []) {
+        formatByProblemId.set(p.id as string, toFormat(p.format as string));
+        satDomainByProblemId.set(p.id as string, (p.sat_domain as string | null) ?? null);
+      }
     }
   }
 
@@ -251,6 +261,7 @@ async function buildSessionProblems(
       number: index + 1,
       problemId,
       format: formatByProblemId.get(problemId) ?? (options.length > 0 ? "mc" : "essay"),
+      satDomain: satDomainByProblemId.get(problemId) ?? null,
       passage: version ? composeProblemText(version.passage as string | null, version.question as string | null) || null : null,
       options,
       difficulty: (version?.difficulty as string | null) ?? null,
@@ -300,6 +311,7 @@ export function toPlannedSessionProblems(
       problemId: p.problemId,
       // 미리보기 응답에는 유형이 없다 — 읽기만 하는 화면이라 선택지 유무로 갈라 보여준다.
       format: options.length > 0 ? "mc" : "essay",
+      satDomain: null,
       passage: p.passage ?? null,
       options,
       difficulty: null,

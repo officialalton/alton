@@ -514,7 +514,6 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
         referenceSheetAllowed={attempt.mathReferenceSheetAllowed}
         open={mathToolsOpen}
         onClose={() => setMathToolsOpen(null)}
-        docked
       />
 
       {showReview && (
