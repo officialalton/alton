@@ -54,10 +54,14 @@ export default function HomeDashboard({
   );
 }
 
+// 2026-09-22(사용자 지시) — Home은 Planner(Board)로 바뀌고, 이 캘린더·예정
+// 수업 위젯들은 Classes 탭의 새 "수업 일정" 서브탭으로 옮긴다(통계는 그대로
+// Home/Overview에 남는다). 컴포넌트 자체는 그대로 재사용하려고 export한다.
+
 // 2026-09-10(UI/UX 정리 1차) — "오늘 수업"이 있으면 가장 먼저 보이게 한다.
 // 새 쿼리는 추가하지 않는다(이미 홈에 내려오는 upcoming 목록에서 오늘 날짜인
 // 항목을 골라 보여줄 뿐). 오늘 수업이 없으면 다음 수업까지 D-day만 안내한다.
-function TodayLessonBanner({
+export function TodayLessonBanner({
   upcoming,
   timezone,
   onEnter,
@@ -108,7 +112,7 @@ function TodayLessonBanner({
 }
 
 
-function CalendarCard({
+export function CalendarCard({
   data,
   selectedDay,
   onSelectDay,
@@ -197,7 +201,7 @@ function CalendarCard({
   );
 }
 
-function UpcomingWidget({
+export function UpcomingWidget({
   upcoming,
   onShowAll,
   timezone,
@@ -248,7 +252,7 @@ function UpcomingWidget({
   );
 }
 
-function StatsWidget({
+export function StatsWidget({
   attendanceRate,
 }: {
   attendanceRate: number | null;

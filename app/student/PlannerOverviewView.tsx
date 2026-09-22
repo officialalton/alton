@@ -21,14 +21,18 @@ const SOURCE_LABEL: Record<BoardCard["sourceType"], string> = {
 // Student Success Planner — Overview 탭(2026-09-21 승인 계획의 일부, 1차 버전).
 // 지금 가진 카드만으로 계산할 수 있는 요약(칼럼별·소스별 개수, 완료율)만
 // 보여준다 — 점수·리뷰 등 다른 데이터 소스 연동은 다음 라운드.
-export default function PlannerOverviewView() {
-  const [cards, setCards] = useState<BoardCard[] | null>(null);
+export default function PlannerOverviewView({ cards: cardsProp }: { cards?: BoardCard[] } = {}) {
+  const [cards, setCards] = useState<BoardCard[] | null>(cardsProp ?? null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    // 2026-09-22(Home+Planner 통합) — 호출부(HomeTab)가 이미 보드 카드를 갖고
+    // 있으면(cardsProp) 다시 조회하지 않는다.
+    if (cardsProp) return;
     loadMyBoardCardsAction()
       .then(setCards)
       .catch((e) => setError(e instanceof Error ? e.message : "요약을 불러오지 못했습니다."));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (error) return <p className="text-[13px] text-red">{error}</p>;

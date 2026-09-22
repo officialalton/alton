@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { LessonItem } from "./lessons-data";
 import type { CurriculumData } from "./curriculum-data";
@@ -9,6 +10,8 @@ import type { LessonBookingTabProps } from "./LessonBookingTab";
 import LessonBookingTab from "./LessonBookingTab";
 import LessonsTab from "./LessonsTab";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
+import { TodayLessonBanner, CalendarCard, UpcomingWidget } from "./HomeDashboard";
+import type { DashboardData } from "./dashboard-data";
 
 // "수업" 탭 정리(A안, 2026-09-06) — 학생 포털의 "레슨"(레거시 legacy_sessions 뷰,
 // 커리큘럼·리뷰 연동)과 "예약"(v3 sessions/reservations, Calendar/Meet 연동) 탭이
@@ -24,6 +27,9 @@ export type ClassesTabProps = {
   memosByEnrollment: Record<string, Memo[]>;
   reviews: Record<string, ReviewData>;
   myFeedback: Record<string, StudentFeedback>;
+  /** 2026-09-22(사용자 지시) — Home이 Planner(Board)로 바뀌면서 캘린더·예정
+   * 수업 위젯이 여기 "수업 일정" 서브탭으로 옮겨왔다(통계는 Home에 남는다). */
+  dashboard: DashboardData;
 } & Omit<LessonBookingTabProps, "mode" | "hideHeader">;
 
 export default function ClassesTab({
@@ -33,6 +39,7 @@ export default function ClassesTab({
   memosByEnrollment,
   reviews,
   myFeedback,
+  dashboard,
   bookableEnrollments,
   pendingActivationSubjects,
   upcomingBookings,
@@ -45,7 +52,9 @@ export default function ClassesTab({
   onUpdateTimezone,
   onReportTeacherIssue,
 }: ClassesTabProps) {
-  const [subtab, setSubtab] = useState<"upcoming" | "past">("upcoming");
+  const [subtab, setSubtab] = useState<"schedule" | "upcoming" | "past">("upcoming");
+  const [selectedDay, setSelectedDay] = useState<number | null>(null);
+  const router = useRouter();
 
   return (
     <div>
@@ -54,47 +63,64 @@ export default function ClassesTab({
           items={[
             { id: "upcoming", label: "예정 수업" },
             { id: "past", label: "지난 수업" },
+            { id: "schedule", label: "수업 일정" },
           ]}
           activeId={subtab}
           onSelect={setSubtab}
         />
       </div>
 
-      <LessonBookingTab
-        bookableEnrollments={bookableEnrollments}
-        pendingActivationSubjects={pendingActivationSubjects}
-        upcomingBookings={upcomingBookings}
-        pastSessionsForReport={pastSessionsForReport}
-        timezone={timezone}
-        onListSlots={onListSlots}
-        onCreateBooking={onCreateBooking}
-        onCreateWeeklySeries={onCreateWeeklySeries}
-        onCancelBooking={onCancelBooking}
-        onUpdateTimezone={onUpdateTimezone}
-        onReportTeacherIssue={onReportTeacherIssue}
-        mode={subtab}
-        hideHeader
-      />
-
-      <div className="max-w-[640px]">
-        <details className="border-t border-grey-200 pt-4 pb-8">
-          <summary className="text-[12.5px] font-semibold text-grey-500 cursor-pointer">
-            커리큘럼 진행·리뷰 (레거시 수업 기록)
-          </summary>
-          <div className="mt-3">
-            <LessonsTab
-              upcoming={upcoming}
-              past={past}
-              curricula={curricula}
-              memosByEnrollment={memosByEnrollment}
-              reviews={reviews}
-              myFeedback={myFeedback}
-              forcedSubtab={subtab}
-              hideHeader
-            />
+      {subtab === "schedule" ? (
+        <div className="max-w-[640px]">
+          <TodayLessonBanner
+            upcoming={dashboard.upcoming}
+            timezone={timezone}
+            onEnter={(sessionId) => router.push(`/session/${sessionId}`)}
+          />
+          <CalendarCard data={dashboard} selectedDay={selectedDay} onSelectDay={setSelectedDay} />
+          <div className="mt-6">
+            <UpcomingWidget upcoming={dashboard.upcoming} onShowAll={() => setSubtab("upcoming")} timezone={timezone} />
           </div>
-        </details>
-      </div>
+        </div>
+      ) : (
+        <>
+          <LessonBookingTab
+            bookableEnrollments={bookableEnrollments}
+            pendingActivationSubjects={pendingActivationSubjects}
+            upcomingBookings={upcomingBookings}
+            pastSessionsForReport={pastSessionsForReport}
+            timezone={timezone}
+            onListSlots={onListSlots}
+            onCreateBooking={onCreateBooking}
+            onCreateWeeklySeries={onCreateWeeklySeries}
+            onCancelBooking={onCancelBooking}
+            onUpdateTimezone={onUpdateTimezone}
+            onReportTeacherIssue={onReportTeacherIssue}
+            mode={subtab}
+            hideHeader
+          />
+
+          <div className="max-w-[640px]">
+            <details className="border-t border-grey-200 pt-4 pb-8">
+              <summary className="text-[12.5px] font-semibold text-grey-500 cursor-pointer">
+                커리큘럼 진행·리뷰 (레거시 수업 기록)
+              </summary>
+              <div className="mt-3">
+                <LessonsTab
+                  upcoming={upcoming}
+                  past={past}
+                  curricula={curricula}
+                  memosByEnrollment={memosByEnrollment}
+                  reviews={reviews}
+                  myFeedback={myFeedback}
+                  forcedSubtab={subtab}
+                  hideHeader
+                />
+              </div>
+            </details>
+          </div>
+        </>
+      )}
     </div>
   );
 }

@@ -95,7 +95,7 @@ const lessonsProps = {
 };
 
 describe("ParentShell", () => {
-  it("사이드바 항목(홈/수업권/수강 과목/수업/상담/단어장/과제)을 보여주고, 기본 탭은 홈(종합 리뷰 서브탭 = 월간 종합 리뷰 자리)이다", () => {
+  it("사이드바 항목(홈/수업권/수강 과목/수업/상담/단어장/과제)을 보여주고, 기본 탭은 홈(Overview 서브탭)이다", () => {
     render(
       <ParentShell
         parentName="김민지"
@@ -122,6 +122,9 @@ describe("ParentShell", () => {
     expect(screen.getByText("상담 리뷰")).toBeInTheDocument();
     // "통계"는 이제 홈 서브탭 라벨로만 존재한다.
     expect(screen.getAllByText("통계").length).toBeGreaterThan(0);
+    // 2026-09-22(사용자 지시) — 홈 기본 서브탭이 Overview(Board)로 바뀌면서
+    // "종합 리뷰" 서브탭 내용은 눌러야 보인다.
+    fireEvent.click(screen.getByText("종합 리뷰"));
     // 2026-09-18(사용자 결정 2차) — "종합 리뷰"는 수업/상담 리뷰를 합친 목록이
     // 아니라 향후 AI OS가 만들 "월간 종합 리뷰" 전용 자리라 정적 준비 중
     // 문구만 보여준다(데이터 로딩 없음 — 즉시 렌더되므로 findByText 불필요).
@@ -290,7 +293,9 @@ describe("ParentShell", () => {
     ).toBeInTheDocument();
   });
 
-  it("Planner 탭을 누르면 자녀 보드가 읽기 전용으로 렌더링된다(Student Success Planner MVP)", async () => {
+  // 2026-09-22(사용자 지시) — 별도 Planner nav는 Home 서브탭(Overview/TODO/Done)으로
+  // 흡수됐다.
+  it("Home의 TODO 서브탭을 누르면 자녀 보드가 읽기 전용으로 렌더링된다(Student Success Planner MVP)", async () => {
     render(
       <ParentShell
         parentName="김민지"
@@ -300,7 +305,8 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("Planner")[0]);
+    fireEvent.click(screen.getAllByText("Home")[0]);
+    fireEvent.click(await screen.findByText("TODO"));
     expect(await screen.findByText("백로그")).toBeInTheDocument();
   });
 

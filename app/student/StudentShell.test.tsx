@@ -166,7 +166,7 @@ const lessonsProps = {
 };
 
 describe("StudentShell", () => {
-  it("사이드바 11개 항목을 보여주고, 기본 탭은 홈이다(2026-09-22: Planner 추가)", () => {
+  it("사이드바 10개 항목을 보여주고, 기본 탭은 홈이다", () => {
     render(
       <StudentShell
         studentName="지훈"
@@ -176,17 +176,22 @@ describe("StudentShell", () => {
       />
     );
     // 2026-09-22(사용자 지시) — Credits는 계정 팝업으로, Performance는 제거(Home에서
-    // 이미 보임). Mock Exams가 Assignments 위로 옮겨졌다.
-    ["Home", "Planner", "Courses", "Classes", "My Teacher", "Mock Exams", "Assignments", "Practice", "Vocabulary", "Materials"].forEach(
+    // 이미 보임). Mock Exams가 Assignments 위로 옮겨졌다. Planner는 별도 nav 없이
+    // Home 탭 서브탭(Overview/TODO/Done)으로 흡수됐다. 캘린더·예정 수업은 Classes의
+    // "수업 일정" 서브탭으로 옮겨졌다.
+    ["Home", "Courses", "Classes", "My Teacher", "Mock Exams", "Assignments", "Practice", "Vocabulary", "Materials"].forEach(
       (label) => expect(screen.getAllByText(label).length).toBeGreaterThan(0)
     );
     expect(screen.queryByText("Performance")).toBeNull();
+    expect(screen.queryByText("Planner")).toBeNull();
     expect(screen.queryByText("레슨")).toBeNull();
     expect(screen.queryByText("예약")).toBeNull();
     expect(screen.getByText(/지훈의 학습 현황/)).toBeInTheDocument();
   });
 
-  it("Planner 탭을 누르면 BoardTab이 렌더링된다(Student Success Planner MVP)", async () => {
+  // 2026-09-22(사용자 지시) — Home 탭 안에서 Overview/TODO/Done 서브탭으로
+  // 전환된다(별도 Planner nav 없음). 캘린더·예정 수업은 Classes 탭으로 옮겨졌다.
+  it("Home 탭 서브탭(Overview/TODO/Done)을 오갈 수 있다", async () => {
     render(
       <StudentShell
         studentName="지훈"
@@ -195,8 +200,11 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("Planner")[0]);
+    expect(screen.getByText("Overview")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("TODO"));
     expect(await screen.findByPlaceholderText("+ 할 일 추가")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("Done"));
+    expect(await screen.findByText("완료한 항목이 없습니다.")).toBeInTheDocument();
   });
 
   it("선생님 탭을 누르면 TeacherTab이 렌더링된다", () => {

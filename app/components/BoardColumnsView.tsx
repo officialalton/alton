@@ -7,21 +7,21 @@ import { boardColumnOf, type BoardCard, type BoardCardStatus, type BoardColumn }
 // 학생 포털은 수동 할 일에 상태 이동·삭제 버튼을 준다(onMove/onDelete 제공).
 // 학부모 포털은 읽기 전용(둘 다 생략) — 부모는 만들지도, 옮기지도 않는다.
 
-const COLUMNS: { id: BoardColumn; label: string }[] = [
+const ALL_COLUMNS: { id: BoardColumn; label: string }[] = [
   { id: "overdue", label: "기한 경과" },
   { id: "backlog", label: "백로그" },
   { id: "in_progress", label: "진행중" },
   { id: "done", label: "완료" },
 ];
 
-const SOURCE_LABEL: Record<BoardCard["sourceType"], string> = {
+export const SOURCE_LABEL: Record<BoardCard["sourceType"], string> = {
   homework: "과제",
   mock_exam: "모의고사",
   vocab_quiz: "단어시험",
   manual: "할 일",
 };
 
-function formatDueAt(dueAt: string | null): string | null {
+export function formatDueAt(dueAt: string | null): string | null {
   if (!dueAt) return null;
   return new Date(dueAt).toLocaleDateString("ko-KR", { month: "2-digit", day: "2-digit" });
 }
@@ -31,6 +31,7 @@ export default function BoardColumnsView({
   onMove,
   onDelete,
   disableLinks,
+  columns,
 }: {
   cards: BoardCard[];
   /** 없으면 수동 할 일도 읽기 전용으로 보여준다(학부모 포털). */
@@ -39,17 +40,22 @@ export default function BoardColumnsView({
   /** 학부모 포털처럼 카드가 가리키는 화면(/student/...)에 접근 권한이 없을 때 —
    * 링크를 만들지 않고 텍스트만 보여준다. */
   disableLinks?: boolean;
+  /** 2026-09-22(Home+Planner 통합) — 일부 칼럼만 보여줄 때(예: TODO 탭은
+   * 완료 칼럼을 빼고 셋만). 없으면 4개 전부. */
+  columns?: BoardColumn[];
 }) {
+  const visibleColumns = columns ? ALL_COLUMNS.filter((c) => columns.includes(c.id)) : ALL_COLUMNS;
   const nowIso = new Date().toISOString();
   const byColumn = new Map<BoardColumn, BoardCard[]>();
-  for (const col of COLUMNS) byColumn.set(col.id, []);
+  for (const col of visibleColumns) byColumn.set(col.id, []);
   for (const card of cards) {
-    byColumn.get(boardColumnOf(card, nowIso))?.push(card);
+    const col = boardColumnOf(card, nowIso);
+    if (byColumn.has(col)) byColumn.get(col)?.push(card);
   }
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-      {COLUMNS.map((col) => {
+      {visibleColumns.map((col) => {
         const colCards = byColumn.get(col.id) ?? [];
         return (
           <div key={col.id} className="bg-grey-100 rounded-xl p-3 min-h-[120px]">

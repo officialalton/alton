@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { logout } from "@/app/login/actions";
 import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
-import HomeDashboard from "./HomeDashboard";
+import HomeTab from "./HomeTab";
 import type { DashboardData } from "./dashboard-data";
 import VocabLibraryTab from "./VocabLibraryTab";
 import type { MyVocabWord, LibraryBook, VocabQuiz, VocabFolder } from "./vocab-library-data";
@@ -46,15 +46,14 @@ import RoadmapView from "@/app/components/RoadmapView";
 import type { RoadmapData } from "@/lib/roadmap/types";
 import PageFrame from "@/app/components/PageFrame";
 import NavIcon from "@/app/components/NavIcon";
-import PlannerTab from "./PlannerTab";
 
 // 2026-09-19(UI 통일화) — 좌측 네비게이션 라벨은 전부 영어로 통일한다(Acely
 // 레퍼런스). 탭 안 본문의 한국어 텍스트는 유지, 라벨만 영어로 바꾼다.
 const NAV_ITEMS = [
+  // 2026-09-22(사용자 지시) — 기존 Home과 Student Success Planner(Board)를
+  // 합쳐 Home 탭 하나 안에서 Overview/Lesson/TODO/Done 서브탭으로 나눈다
+  // (HomeTab.tsx). 별도 "Planner" nav 항목은 없앤다.
   { id: "home", label: "Home", icon: "home" },
-  // 2026-09-22(Student Success Planner MVP, 2026-09-21 승인) — 과제·모의고사·
-  // 단어시험·수동 할 일을 한곳에서 보는 보드. Schedule·Overview 탭은 다음 라운드.
-  { id: "planner", label: "Planner", icon: "planner" },
   { id: "roadmap", label: "Roadmap", icon: "roadmap" },
   { id: "enrollment", label: "Courses", icon: "courses" },
   // 2026-09-06(A안 UI 정리) — "예약"(v3 예약/캘린더)과 "레슨"(레거시 커리큘럼·리뷰)이
@@ -321,17 +320,10 @@ export default function StudentShell({
             (왼쪽 정렬 텍스트 등) 두고, 제목 위치·컬럼 폭만 통일한다. */}
         <div className="flex-1">
         {activeTab === "home" ? (
-          <HomeDashboard
-            studentName={studentName}
-            data={dashboard}
-            onShowLessons={() => selectTab("classes")}
-            timezone={lessonBooking.timezone}
-          />
+          <HomeTab studentName={studentName} dashboard={dashboard} />
         ) : (
         <PageFrame title={activeLabel}>
-          {activeTab === "planner" ? (
-            <PlannerTab />
-          ) : activeTab === "roadmap" ? (
+          {activeTab === "roadmap" ? (
             <RoadmapView data={roadmap} />
           ) : activeTab === "enrollment" ? (
             <EnrollmentTab enrollments={subjectEnrollments} />
@@ -343,6 +335,7 @@ export default function StudentShell({
               memosByEnrollment={memosByEnrollment}
               reviews={reviews}
               myFeedback={myFeedback}
+              dashboard={dashboard}
               bookableEnrollments={lessonBooking.bookableEnrollments}
               pendingActivationSubjects={lessonBooking.pendingActivationSubjects}
               upcomingBookings={lessonBooking.upcomingBookings}

@@ -55,6 +55,16 @@ const baseProps = {
   memosByEnrollment: {},
   reviews: {},
   myFeedback: {},
+  // 2026-09-22(사용자 지시) — Home이 Planner로 바뀌면서 캘린더·예정 수업이
+  // 여기 "수업 일정" 서브탭으로 옮겨왔다.
+  dashboard: {
+    studentName: "지훈",
+    upcoming: [],
+    calendarByDay: {},
+    calendarYear: 2026,
+    calendarMonth: 8,
+    attendanceRate: null,
+  },
   bookableEnrollments: [],
   upcomingBookings: [upcomingBooking],
   pastSessionsForReport: [pastSession],
@@ -67,12 +77,21 @@ const baseProps = {
 };
 
 describe("ClassesTab — '레슨'+'예약' 병합, 예정/지난 서브탭 버그 재현·수정", () => {
-  it("딱 두 개의 서브탭('예정 수업'/'지난 수업')만 있고, 기본은 예정 수업이 보인다", () => {
+  it("예정 수업/지난 수업/수업 일정 서브탭이 있고, 기본은 예정 수업이 보인다", () => {
     render(<ClassesTab {...baseProps} />);
     expect(screen.getByText("예정 수업")).toBeInTheDocument();
     expect(screen.getByText("지난 수업")).toBeInTheDocument();
+    expect(screen.getByText("수업 일정")).toBeInTheDocument();
     expect(screen.getByText("SAT Math")).toBeInTheDocument();
     expect(screen.getByText(/김선생 선생님/)).toBeInTheDocument();
+  });
+
+  // 2026-09-22(사용자 지시) — Home이 Planner로 바뀌면서 캘린더·예정 수업
+  // 위젯이 여기로 옮겨왔다.
+  it("'수업 일정' 서브탭을 누르면 캘린더가 보인다", () => {
+    render(<ClassesTab {...baseProps} />);
+    fireEvent.click(screen.getByText("수업 일정"));
+    expect(screen.getByText("2026년 9월")).toBeInTheDocument();
   });
 
   it("'지난 수업' 서브탭을 누르면 실제로 내용이 지난 수업으로 바뀐다(서브탭 전환 버그 재현·수정 고정)", () => {

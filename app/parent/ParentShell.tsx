@@ -7,7 +7,11 @@ import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import ParentMockExamTab from "./ParentMockExamTab";
-import ParentPlannerTab from "./ParentPlannerTab";
+import { loadChildBoardCardsAction } from "./board-actions";
+import PlannerOverviewView from "@/app/student/PlannerOverviewView";
+import BoardColumnsView from "@/app/components/BoardColumnsView";
+import DoneListView from "@/app/components/DoneListView";
+import { boardColumnOf, type BoardCard } from "@/lib/board/types";
 import PageFrame from "@/app/components/PageFrame";
 import NavIcon from "@/app/components/NavIcon";
 import type { DashboardData } from "@/app/student/dashboard-data";
@@ -64,10 +68,9 @@ import { getRoadmapForStudent } from "@/lib/roadmap/actions";
 // 2026-09-19(UI 통일화) — 좌측 네비게이션 라벨은 전부 영어로 통일한다(Acely
 // 레퍼런스). 탭 안 본문의 한국어 텍스트는 유지, 라벨만 영어로 바꾼다.
 const NAV_ITEMS = [
+  // 2026-09-22(사용자 지시) — 별도 "Planner" nav 대신 Home 탭 서브탭
+  // (Overview/TODO/Done)으로 흡수한다 — 학생 포털과 같은 구조("뷰 통일").
   { id: "home", label: "Home", icon: "home" },
-  // 2026-09-22(Student Success Planner MVP, 2026-09-21 승인) — 자녀의 과제·
-  // 모의고사·단어시험·수동 할 일 보드를 읽기 전용으로 보여준다.
-  { id: "planner", label: "Planner", icon: "planner" },
   { id: "roadmap", label: "Roadmap", icon: "roadmap" },
   { id: "entitlements", label: "Credits", icon: "credits" },
   { id: "enrollment", label: "My Courses", icon: "courses" },
@@ -167,10 +170,14 @@ export default function ParentShell({
   // 2026-09-18 — 홈 재설계: "일정 확인"에서 "리뷰 확인"으로 목적이 바뀌어
   // 종합 리뷰(기본)/수업 리뷰(시간순)/상담 리뷰/통계 4개 읽기 전용 서브탭으로
   // 구성한다. 상담 리뷰는 종합 리뷰에 합치지 않는다(사용자 결정, 2026-09-18).
-  const [homeSubTab, setHomeSubTab] = useState<"reviews" | "lessonReviews" | "consultReviews" | "stats" | "mockExam">("reviews");
+  const [homeSubTab, setHomeSubTab] = useState<
+    "overview" | "todo" | "done" | "reviews" | "lessonReviews" | "consultReviews" | "stats" | "mockExam"
+  >("overview");
   const [familyReviews, setFamilyReviews] = useState<FamilyLessonReview[] | null>(null);
   const [consultReviews, setConsultReviews] = useState<HomeConsultationReview[] | null>(null);
   const [childStats, setChildStats] = useState<StatsData | null>(null);
+  // 2026-09-22(사용자 지시) — Home+Planner 통합, Overview/TODO/Done 서브탭용.
+  const [childBoardCards, setChildBoardCards] = useState<BoardCard[] | null>(null);
   const [roadmap, setRoadmap] = useState<RoadmapData | null>(null);
 
   // R12 — 메신저 안 읽은 관리자 메시지 수를 내비게이션 배지로 보여준다.
@@ -191,6 +198,11 @@ export default function ParentShell({
   // getAllFamilyLessonReviews를 쓴다.
   useEffect(() => {
     if (activeTab !== "home") return;
+    if (homeSubTab === "overview" || homeSubTab === "todo" || homeSubTab === "done") {
+      setChildBoardCards(null);
+      loadChildBoardCardsAction(currentChildId).then(setChildBoardCards).catch(() => setChildBoardCards([]));
+      return;
+    }
     if (homeSubTab === "stats") {
       getParentChildStats(currentChildId).then(setChildStats).catch(() => setChildStats(null));
       return;
@@ -497,6 +509,13 @@ export default function ParentShell({
               // 자녀 응시 목록을 바로 보여준다(좌측 네비게이션 유지).
               <UnderlineSubTabs
                 items={[
+                  // 2026-09-22(사용자 지시) — 학생 포털과 같은 순서/라벨(Overview/
+                  // TODO/Done)로 통일. "Lesson"은 학부모 홈이 2026-09-18에 캘린더·
+                  // 예정 수업을 이미 빼기로 한 결정과 부딪혀 이번엔 넣지 않는다 —
+                  // 대신 기존 "수업 리뷰"가 그 자리에 가장 가깝다.
+                  { id: "overview", label: "Overview" },
+                  { id: "todo", label: "TODO" },
+                  { id: "done", label: "Done" },
                   { id: "reviews", label: "종합 리뷰" },
                   { id: "lessonReviews", label: "수업 리뷰" },
                   { id: "consultReviews", label: "상담 리뷰" },
@@ -539,7 +558,38 @@ export default function ParentShell({
               때는 일정·캘린더로 되돌아가지 않고 빈 상태 문구만 보여준다(요구사항). */}
           {activeTab === "home" ? (
             <div>
-              {homeSubTab === "mockExam" ? (
+              {homeSubTab === "overview" ? (
+                childBoardCards === null ? (
+                  <p className="p-8 text-[14px] text-grey-500">불러오는 중...</p>
+                ) : (
+                  <div className="px-6 py-5">
+                    <PlannerOverviewView cards={childBoardCards} />
+                  </div>
+                )
+              ) : homeSubTab === "todo" ? (
+                childBoardCards === null ? (
+                  <p className="p-8 text-[14px] text-grey-500">불러오는 중...</p>
+                ) : (
+                  <div className="px-6 py-5">
+                    <BoardColumnsView
+                      cards={childBoardCards.filter((c) => boardColumnOf(c, new Date().toISOString()) !== "done")}
+                      columns={["overdue", "backlog", "in_progress"]}
+                      disableLinks
+                    />
+                  </div>
+                )
+              ) : homeSubTab === "done" ? (
+                childBoardCards === null ? (
+                  <p className="p-8 text-[14px] text-grey-500">불러오는 중...</p>
+                ) : (
+                  <div className="px-6 py-5">
+                    <DoneListView
+                      cards={childBoardCards.filter((c) => boardColumnOf(c, new Date().toISOString()) === "done")}
+                      disableLinks
+                    />
+                  </div>
+                )
+              ) : homeSubTab === "mockExam" ? (
                 <ParentMockExamTab studentId={currentChildId} />
               ) : homeSubTab === "stats" ? (
                 childStats ? (
@@ -584,8 +634,6 @@ export default function ParentShell({
                 </div>
               )}
             </div>
-          ) : activeTab === "planner" ? (
-            <ParentPlannerTab studentId={currentChildId} />
           ) : activeTab === "roadmap" ? (
             roadmap && roadmap.studentId === currentChildId ? (
               <RoadmapView data={roadmap} />
