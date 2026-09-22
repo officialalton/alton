@@ -168,9 +168,12 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    ["Home", "Courses", "Classes", "My Teacher", "Assignments", "Practice", "Vocabulary", "Materials", "Credits", "Performance"].forEach(
+    // 2026-09-22(사용자 지시) — Credits는 계정 팝업으로, Performance는 제거(Home에서
+    // 이미 보임). Mock Exams가 Assignments 위로 옮겨졌다.
+    ["Home", "Courses", "Classes", "My Teacher", "Mock Exams", "Assignments", "Practice", "Vocabulary", "Materials"].forEach(
       (label) => expect(screen.getAllByText(label).length).toBeGreaterThan(0)
     );
+    expect(screen.queryByText("Performance")).toBeNull();
     expect(screen.queryByText("레슨")).toBeNull();
     expect(screen.queryByText("예약")).toBeNull();
     expect(screen.getByText(/지훈의 학습 현황/)).toBeInTheDocument();
@@ -189,7 +192,7 @@ describe("StudentShell", () => {
     expect(screen.getByText("매칭된 선생님이 없습니다.")).toBeInTheDocument();
   });
 
-  it("수업권 탭을 누르면 CreditsTab이 렌더링된다", () => {
+  it("계정 메뉴의 '수강권(Credits)'을 누르면 CreditsTab이 팝업으로 렌더링된다(2026-09-22: 탭에서 계정 팝업으로 이동)", () => {
     render(
       <StudentShell
         studentName="지훈"
@@ -198,7 +201,8 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("Credits")[0]);
+    fireEvent.click(screen.getAllByText(/지훈 학생님/)[0]);
+    fireEvent.click(screen.getAllByText("수강권(Credits)")[0]);
     expect(screen.getByText("장 보유")).toBeInTheDocument();
   });
 
@@ -275,19 +279,6 @@ describe("StudentShell", () => {
     expect(
       screen.getByText("아직 배정된 교재가 없어요. 담당 선생님이 곧 준비해드릴 예정이에요.")
     ).toBeInTheDocument();
-  });
-
-  it("통계 탭을 누르면 StatsTab이 렌더링된다", () => {
-    render(
-      <StudentShell
-        studentName="지훈"
-        dashboard={dashboard}
-        problemHistory={[]}
-        {...lessonsProps}
-      />
-    );
-    fireEvent.click(screen.getAllByText("Performance")[0]);
-    expect(screen.getByText("과목별 참여율")).toBeInTheDocument();
   });
 
   it("계정 메뉴를 열면 로그아웃 버튼이 보인다", () => {

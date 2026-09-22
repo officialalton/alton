@@ -92,7 +92,7 @@ describe("TeacherShell", () => {
     expect(screen.getByText("지난 수업이 없습니다.")).toBeInTheDocument();
   });
 
-  it("담당 학생 탭에서 학년/연락처가 보이고, C-1(2026-09-10) 이후 '커리큘럼 보기'는 없고 '운영 커리큘럼 관리'만으로 이동한다(M4 골든패스 #6/#7)", () => {
+  it("담당 학생 탭에서 '커리큘럼 보기'는 없고 '커리큘럼' 버튼으로만 이동한다(M4 골든패스 #6/#7, 2026-09-22 카드 재구성)", () => {
     const currentAssignments = [
       {
         assignmentId: "ta1",
@@ -111,9 +111,8 @@ describe("TeacherShell", () => {
     ];
     render(<TeacherShell {...baseProps} currentAssignments={currentAssignments} />);
     fireEvent.click(screen.getAllByText("My Students")[0]);
-    expect(screen.getByText("11학년")).toBeInTheDocument();
     expect(screen.queryByText("커리큘럼 보기")).not.toBeInTheDocument();
-    fireEvent.click(screen.getByText("운영 커리큘럼 관리"));
+    fireEvent.click(screen.getByText("커리큘럼"));
     expect(screen.getByText("지훈 학생 · SAT Math")).toBeInTheDocument();
   });
 

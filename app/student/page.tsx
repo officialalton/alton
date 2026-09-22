@@ -10,7 +10,6 @@ import { loadReviews, loadStudentFeedback } from "./review-data";
 import { loadStudentHomeworkBatches } from "@/lib/homework-batch-data";
 import { loadMaterialsLibraryTree } from "./materials-data";
 import { loadCreditsData } from "./credits-data";
-import { loadStats } from "./stats-data";
 import {
   loadTeacherList,
   loadTeacherProfile,
@@ -20,6 +19,7 @@ import { ensureThreadAndLoadMessages } from "./chat-data";
 import { loadStudentSubjectEnrollments } from "./enrollment-data";
 import { loadLessonBookingData } from "./lesson-booking-data";
 import { loadRoadmapData } from "@/lib/roadmap/data";
+import { loadStudentMockExamAttempts } from "@/lib/mock-exam/attempt-data";
 
 export default async function StudentHomePage({
   searchParams,
@@ -68,10 +68,10 @@ export default async function StudentHomePage({
     homeworkBatches,
     materialsLibraryTree,
     credits,
-    stats,
     subjectEnrollments,
     teacherList,
     roadmap,
+    mockExamAttempts,
   ] = await Promise.all([
     dashboardPromise,
     lessonBookingPromise,
@@ -85,10 +85,11 @@ export default async function StudentHomePage({
     safeList("homework_batches", loadStudentHomeworkBatches(supabase, user.id)),
     safeList("materials_library", loadMaterialsLibraryTree(supabase, user.id)),
     loadCreditsData(supabase, user.id),
-    loadStats(supabase, user.id),
     safeList("subject_enrollments", loadStudentSubjectEnrollments(supabase, user.id)),
     safeList("teacher_list", loadTeacherList(supabase, user.id)),
     loadRoadmapData(supabase, user.id),
+    // 2026-09-22(UAT "모의고사 탭 로딩이 길다") — 다른 탭처럼 SSR로 미리 받는다.
+    safeList("mock_exam_attempts", loadStudentMockExamAttempts(supabase, user.id)),
   ]);
 
   const pastSessionIds = past.map((l) => l.sessionId);
@@ -152,7 +153,6 @@ export default async function StudentHomePage({
       homeworkBatches={homeworkBatches}
       materialsLibraryTree={materialsLibraryTree}
       credits={credits}
-      stats={stats}
       teacherList={teacherList}
       teacherProfiles={teacherProfiles}
       teacherSessionHistory={teacherSessionHistory}
@@ -160,6 +160,7 @@ export default async function StudentHomePage({
       subjectEnrollments={subjectEnrollments}
       lessonBooking={lessonBooking}
       roadmap={roadmap}
+      mockExamAttempts={mockExamAttempts}
     />
   );
 }

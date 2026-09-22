@@ -17,6 +17,7 @@ type PdfDocumentLike = {
       cancel: () => void;
     };
     streamTextContent: () => ReadableStream;
+    getTextContent: () => Promise<{ items: { str?: string; transform?: number[] }[] }>;
   }>;
   destroy: () => Promise<void>;
 };
@@ -69,7 +70,6 @@ export default function PdfPageCanvas({
   useEffect(() => {
     const generation = ++generationRef.current;
     let cancelRender: (() => void) | null = null;
-    let cancelTextLayer: (() => void) | null = null;
     let disposed = false;
 
     (async () => {
@@ -104,31 +104,45 @@ export default function PdfPageCanvas({
         onRendered({ width, height });
 
         // 2026-09-21(사용자 지시) — PDF는 캔버스에 이미지로만 그려 단어를 클릭할 수
-        // 없었다. pdf.js TextLayer로 실제 위치에 투명 텍스트를 겹쳐 클릭·드래그
-        // 선택·복사가 되게 한다(화면에 보이는 건 그대로 캔버스 이미지).
+        // 없었다. 실제 위치에 투명 텍스트를 겹쳐 클릭·드래그 선택·복사가 되게 한다
+        // (화면에 보이는 건 그대로 캔버스 이미지).
+        //
+        // 2026-09-22(재수정) — 처음엔 pdf.js의 공식 TextLayer 클래스를 썼는데, 그건
+        // 자기 뷰어(.page 컨테이너)가 설정해 주는 --total-scale-factor 등 CSS 변수에
+        // 기대어 글자 크기·위치를 계산한다. 그 변수들을 우리가 대신 지정해도 여전히
+        // 선택 자체가 전혀 안 됐다(원인 미상 — 아마 그 클래스가 기대하는 다른 뷰어
+        // 구조/스타일시트가 더 있는 듯). CSS 변수에 기대지 않고 각 글자 위치를 pdf.js
+        // Util.transform으로 직접 계산해 순수 픽셀 값으로 span을 배치하는, 더 오래되고
+        // 더 단순한 방식으로 바꾼다 — 외부 스타일시트·CSS 변수 의존이 전혀 없다.
         const textLayerEl = textLayerRef.current;
-        if (textLayerEl && "streamTextContent" in pdfPage) {
-          textLayerEl.replaceChildren();
+        if (textLayerEl && "getTextContent" in pdfPage) {
           textLayerEl.style.width = `${width}px`;
           textLayerEl.style.height = `${height}px`;
-          // pdf.js의 TextLayer는 span 위치·글자 크기를 --total-scale-factor 등
-          // CSS 변수로 계산하는데, 이 변수는 pdf.js 자체 뷰어(.page 컨테이너)에서만
-          // 설정된다 — 우리는 그 뷰어를 안 쓰므로 값이 없어 계산이 무효화되고, 모든
-          // 글자가 브라우저 기본 크기·위치로 깨져서(클릭이 실제 단어와 안 맞음)
-          // "완전히 안 먹는" 상태가 됐다. 뷰어가 하는 것과 같은 값을 직접 지정한다.
-          textLayerEl.style.setProperty("--scale-factor", String(viewport.scale));
-          textLayerEl.style.setProperty("--user-unit", "1");
-          textLayerEl.style.setProperty("--total-scale-factor", String(viewport.scale));
-          textLayerEl.style.setProperty("--scale-round-x", "1px");
-          textLayerEl.style.setProperty("--scale-round-y", "1px");
           const pdfjs = await import("pdfjs-dist");
-          const layer = new pdfjs.TextLayer({
-            textContentSource: pdfPage.streamTextContent(),
-            container: textLayerEl,
-            viewport: viewport as unknown as import("pdfjs-dist").PageViewport,
-          });
-          cancelTextLayer = () => layer.cancel();
-          await layer.render();
+          const textContent = await pdfPage.getTextContent();
+          if (disposed || generation !== generationRef.current) return;
+          const frag = document.createDocumentFragment();
+          const vt = (viewport as unknown as { transform: number[] }).transform;
+          for (const item of textContent.items) {
+            if (!item.str || !item.transform) continue;
+            const tx = (pdfjs.Util as unknown as { transform: (m1: number[], m2: number[]) => number[] }).transform(vt, item.transform);
+            const angle = Math.atan2(tx[1], tx[0]);
+            const fontHeight = Math.hypot(tx[2], tx[3]);
+            if (fontHeight <= 0) continue;
+            const span = document.createElement("span");
+            span.textContent = item.str;
+            span.style.position = "absolute";
+            span.style.left = `${tx[4]}px`;
+            span.style.top = `${tx[5] - fontHeight}px`;
+            span.style.fontSize = `${fontHeight}px`;
+            span.style.fontFamily = "sans-serif";
+            span.style.lineHeight = "1";
+            span.style.whiteSpace = "pre";
+            span.style.transformOrigin = "0% 100%";
+            if (angle !== 0) span.style.transform = `rotate(${angle}rad)`;
+            frag.appendChild(span);
+          }
+          textLayerEl.replaceChildren(frag);
         }
       } catch (e) {
         if (disposed || generation !== generationRef.current) return;
@@ -141,7 +155,6 @@ export default function PdfPageCanvas({
     return () => {
       disposed = true;
       cancelRender?.();
-      cancelTextLayer?.();
     };
   }, [url, page, zoom, fitWidth, fitHeight, onRendered, onError]);
 

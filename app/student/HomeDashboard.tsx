@@ -12,13 +12,11 @@ export default function HomeDashboard({
   studentName,
   data,
   onShowLessons,
-  onShowStats,
   timezone,
 }: {
   studentName: string;
   data: DashboardData;
   onShowLessons: () => void;
-  onShowStats: () => void;
   /** R6 — 확정 일정 표시 기준 시간대(resolveUserTimezone() 결과). 미전달 시 전역 기본값. */
   timezone?: string;
 }) {
@@ -49,10 +47,7 @@ export default function HomeDashboard({
         </div>
         <div className="flex flex-col gap-6">
           <UpcomingWidget upcoming={data.upcoming} onShowAll={onShowLessons} timezone={timezone} />
-          <StatsWidget
-            attendanceRate={data.attendanceRate}
-            onShowAll={onShowStats}
-          />
+          <StatsWidget attendanceRate={data.attendanceRate} />
         </div>
       </div>
     </div>
@@ -255,21 +250,13 @@ function UpcomingWidget({
 
 function StatsWidget({
   attendanceRate,
-  onShowAll,
 }: {
   attendanceRate: number | null;
-  onShowAll: () => void;
 }) {
   return (
     <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4.5">
       <div className="flex items-center justify-between mb-3">
         <h2 className="text-[14px] font-bold text-ink">통계 요약</h2>
-        <button
-          onClick={onShowAll}
-          className="text-[11.5px] font-semibold text-grey-500"
-        >
-          전체 보기 →
-        </button>
       </div>
       <div className="bg-grey-100 rounded-lg px-4 py-4">
         <div className="text-[11.5px] font-bold text-grey-500 mb-1">

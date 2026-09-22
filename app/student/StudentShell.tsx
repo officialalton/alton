@@ -21,10 +21,9 @@ import MaterialsLibraryTab from "./MaterialsLibraryTab";
 import type { LibrarySubjectTree } from "@/lib/subject-material-library";
 import CreditsTab from "./CreditsTab";
 import type { CreditsData } from "./credits-data";
-import StatsTab from "./StatsTab";
-import type { StatsData } from "./stats-data";
 import TeacherTab from "./TeacherTab";
 import StudentMockExamTab from "./StudentMockExamTab";
+import type { MockExamAttemptSummary } from "@/lib/mock-exam/attempt-data";
 import type {
   TeacherListItem,
   TeacherProfileData,
@@ -59,15 +58,16 @@ const NAV_ITEMS = [
   // 두 서브탭). 자세한 내용은 ClassesTab.tsx 상단 주석 참고.
   { id: "classes", label: "Classes", icon: "classes" },
   { id: "teacher", label: "My Teacher", icon: "teacher" },
+  // 2026-09-21(UAT 지적) — 모의고사 목록은 독립 라우트가 아니라 일반 탭이다(좌측 네비 유지).
+  // 실제 응시/결과 화면(/student/mock-exam/[attemptId])만 전체 화면 독립 라우트로 남긴다.
+  // 2026-09-22(사용자 지시) — Assignments보다 위로.
+  { id: "mock-exam", label: "Mock Exams", icon: "mockExam" },
   { id: "homework", label: "Assignments", icon: "assignments" },
   { id: "problemlog", label: "Practice", icon: "practice" },
   { id: "vocab", label: "Vocabulary", icon: "vocabulary" },
   { id: "materials", label: "Materials", icon: "materials" },
-  { id: "credits", label: "Credits", icon: "credits" },
-  { id: "stats", label: "Performance", icon: "performance" },
-  // 2026-09-21(UAT 지적) — 모의고사 목록은 독립 라우트가 아니라 일반 탭이다(좌측 네비 유지).
-  // 실제 응시/결과 화면(/student/mock-exam/[attemptId])만 전체 화면 독립 라우트로 남긴다.
-  { id: "mock-exam", label: "Mock Exams", icon: "mockExam" },
+  // 2026-09-22(사용자 지시) — Credits는 계정 팝업으로, Performance는 Home에 이미
+  // 있어 제거(NAV_ITEMS에서 뺐다 — CreditsTab은 계정 팝업에서 계속 쓴다).
 ] as const;
 
 type TabId = (typeof NAV_ITEMS)[number]["id"];
@@ -91,7 +91,6 @@ export default function StudentShell({
   homeworkBatches,
   materialsLibraryTree,
   credits,
-  stats,
   teacherList,
   teacherProfiles,
   teacherSessionHistory,
@@ -99,6 +98,7 @@ export default function StudentShell({
   subjectEnrollments,
   lessonBooking,
   roadmap,
+  mockExamAttempts,
 }: {
   studentName: string;
   initialTab?: string;
@@ -119,7 +119,6 @@ export default function StudentShell({
   homeworkBatches: HomeworkBatch[];
   materialsLibraryTree: LibrarySubjectTree[];
   credits: CreditsData;
-  stats: StatsData;
   teacherList: TeacherListItem[];
   teacherProfiles: Record<string, TeacherProfileData | null>;
   teacherSessionHistory: Record<string, TeacherSessionHistoryItem[]>;
@@ -127,6 +126,7 @@ export default function StudentShell({
   subjectEnrollments: SubjectEnrollmentView[];
   lessonBooking: LessonBookingData;
   roadmap: RoadmapData;
+  mockExamAttempts?: MockExamAttemptSummary[];
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -135,6 +135,8 @@ export default function StudentShell({
   );
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const [timezoneModalOpen, setTimezoneModalOpen] = useState(false);
+  // 2026-09-22(사용자 지시) — Credits는 별도 탭 대신 계정 메뉴 팝업으로 옮긴다.
+  const [creditsModalOpen, setCreditsModalOpen] = useState(false);
 
   // 2026-09-10(P0-3 2차) — 공용 포털 내비게이션 결함: activeTab이 마운트
   // 시점의 initialTab으로만 초기화돼, 브라우저 뒤로가기/앞으로가기로 URL이
@@ -210,6 +212,15 @@ export default function StudentShell({
             <div className="absolute bottom-full left-0 mb-1 w-full bg-white border-[1.5px] border-grey-200 rounded-lg shadow-sm py-1.5 z-30">
               <button
                 onClick={() => {
+                  setCreditsModalOpen(true);
+                  setAccountMenuOpen(false);
+                }}
+                className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink"
+              >
+                수강권(Credits)
+              </button>
+              <button
+                onClick={() => {
                   setTimezoneModalOpen(true);
                   setAccountMenuOpen(false);
                 }}
@@ -238,6 +249,25 @@ export default function StudentShell({
         />
       )}
 
+      {creditsModalOpen && (
+        <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/40 p-4" onClick={() => setCreditsModalOpen(false)}>
+          <div
+            className="max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-lg bg-white"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="sticky top-0 flex items-center justify-between border-b border-grey-200 bg-white px-5 py-3">
+              <span className="text-[14px] font-bold text-ink">수강권(Credits)</span>
+              <button type="button" onClick={() => setCreditsModalOpen(false)} className="text-[12px] font-bold text-grey-500 underline">
+                닫기
+              </button>
+            </div>
+            <div className="p-5">
+              <CreditsTab data={credits} />
+            </div>
+          </div>
+        </div>
+      )}
+
       <MobileBottomNav primary={mobilePrimary} more={mobileMore} activeId={activeTab} onSelect={(id) => selectTab(id as TabId)} />
 
       <div className="flex-1 flex flex-col pb-16 md:pb-0">
@@ -253,6 +283,15 @@ export default function StudentShell({
           </button>
           {accountMenuOpen && (
             <div className="absolute top-full right-4 mt-1 w-40 bg-white border-[1.5px] border-grey-200 rounded-lg shadow-sm py-1.5 z-30">
+              <button
+                onClick={() => {
+                  setCreditsModalOpen(true);
+                  setAccountMenuOpen(false);
+                }}
+                className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink"
+              >
+                수강권(Credits)
+              </button>
               <button
                 onClick={() => {
                   setTimezoneModalOpen(true);
@@ -282,7 +321,6 @@ export default function StudentShell({
             studentName={studentName}
             data={dashboard}
             onShowLessons={() => selectTab("classes")}
-            onShowStats={() => selectTab("stats")}
             timezone={lessonBooking.timezone}
           />
         ) : (
@@ -319,10 +357,6 @@ export default function StudentShell({
             <StudentHomeworkTab batches={homeworkBatches} />
           ) : activeTab === "materials" ? (
             <MaterialsLibraryTab tree={materialsLibraryTree} />
-          ) : activeTab === "credits" ? (
-            <CreditsTab data={credits} />
-          ) : activeTab === "stats" ? (
-            <StatsTab data={stats} />
           ) : activeTab === "teacher" ? (
             <TeacherTab
               teachers={teacherList}
@@ -331,7 +365,7 @@ export default function StudentShell({
               chatThreads={chatThreads}
             />
           ) : activeTab === "mock-exam" ? (
-            <StudentMockExamTab />
+            <StudentMockExamTab initialAttempts={mockExamAttempts} />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.

@@ -16,14 +16,17 @@ const STATUS_LABEL: Record<string, string> = {
 // 2026-09-21(UAT 지적) — 모의고사 목록·결과는 독립 라우트가 아니라 StudentShell 의 탭 안에서
 // 왼쪽 네비게이션을 유지한 채 봐야 한다. 실제로 시험을 보는 화면(집중이 필요한 타이머 있는 화면)만
 // 예외적으로 /student/mock-exam/[attemptId] 독립 라우트로 남긴다.
-export default function StudentMockExamTab() {
-  const [attempts, setAttempts] = useState<MockExamAttemptSummary[] | null>(null);
+export default function StudentMockExamTab({ initialAttempts }: { initialAttempts?: MockExamAttemptSummary[] }) {
+  const [attempts, setAttempts] = useState<MockExamAttemptSummary[] | null>(initialAttempts ?? null);
   const [error, setError] = useState<string | null>(null);
   const [openId, setOpenId] = useState<string | null>(null);
   const [detail, setDetail] = useState<MockExamAttemptDetail | null>(null);
   const [detailError, setDetailError] = useState<string | null>(null);
 
+  // 2026-09-22(UAT "모의고사 탭 로딩이 길다") — 세션뷰 모의고사 탭과 같은 원인
+  // (SSR 없이 탭을 열 때마다 따로 왕복). 학생 홈 페이지가 미리 받아 두면 건너뛴다.
   useEffect(() => {
+    if (initialAttempts) return;
     let cancelled = false;
     loadMyMockExamAttemptsAction()
       .then((rows) => {
@@ -35,6 +38,7 @@ export default function StudentMockExamTab() {
     return () => {
       cancelled = true;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function openResult(id: string) {

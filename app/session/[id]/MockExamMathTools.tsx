@@ -217,7 +217,7 @@ export function MockExamToolButtons({
           }`}
           data-testid="toggle-reference"
         >
-          참조표
+          Reference Sheet
         </button>
       )}
     </div>
@@ -280,7 +280,7 @@ export default function MockExamMathTools({
             onClick={(e) => e.stopPropagation()}
           >
             <div className="sticky top-0 flex items-center justify-between border-b border-grey-200 bg-white px-4 py-2">
-              <span className="text-[12px] font-extrabold text-grey-500">참조표</span>
+              <span className="text-[12px] font-extrabold text-grey-500">Reference Sheet</span>
               <button type="button" onClick={onClose} className="text-[12px] font-bold text-grey-500 underline" data-testid="close-reference">
                 닫기
               </button>

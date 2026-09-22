@@ -24,7 +24,6 @@ describe("HomeDashboard", () => {
         studentName="지훈"
         data={baseData}
         onShowLessons={vi.fn()}
-        onShowStats={vi.fn()}
       />
     );
     expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
@@ -50,7 +49,6 @@ describe("HomeDashboard", () => {
         studentName="지훈"
         data={data}
         onShowLessons={vi.fn()}
-        onShowStats={vi.fn()}
       />
     );
     expect(screen.getByText(/SAT Math · 8회차/)).toBeInTheDocument();
@@ -63,7 +61,6 @@ describe("HomeDashboard", () => {
         studentName="지훈"
         data={{ ...baseData, attendanceRate: 92 }}
         onShowLessons={vi.fn()}
-        onShowStats={vi.fn()}
       />
     );
     expect(screen.getByText("92%")).toBeInTheDocument();
@@ -81,29 +78,19 @@ describe("HomeDashboard", () => {
         studentName="지훈"
         data={data}
         onShowLessons={vi.fn()}
-        onShowStats={vi.fn()}
       />
     );
     fireEvent.click(screen.getByText("15"));
     expect(screen.getByText("SAT Math · 8회차")).toBeInTheDocument();
   });
 
-  it("전체 보기 버튼이 콜백을 호출한다", () => {
+  it("전체 보기 버튼(예정 수업)이 콜백을 호출한다", () => {
+    // 2026-09-22(사용자 지시) — 통계 요약의 "전체 보기"(Performance 탭)는
+    // 제거됐다(Home에서 이미 보이므로 별도 탭이 불필요). 예정 수업 쪽만 남는다.
     const onShowLessons = vi.fn();
-    const onShowStats = vi.fn();
-    render(
-      <HomeDashboard
-        studentName="지훈"
-        data={baseData}
-        onShowLessons={onShowLessons}
-        onShowStats={onShowStats}
-      />
-    );
-    const showAllButtons = screen.getAllByText("전체 보기 →");
-    fireEvent.click(showAllButtons[0]);
-    fireEvent.click(showAllButtons[1]);
+    render(<HomeDashboard studentName="지훈" data={baseData} onShowLessons={onShowLessons} />);
+    fireEvent.click(screen.getByText("전체 보기 →"));
     expect(onShowLessons).toHaveBeenCalled();
-    expect(onShowStats).toHaveBeenCalled();
   });
 
   it("2026-09-10(UI/UX 정리 1차): 오늘 예정된 수업이 있으면 홈 최상단에 '오늘 수업' 배너와 입장하기 버튼을 보여준다", () => {
@@ -123,7 +110,7 @@ describe("HomeDashboard", () => {
       ],
     };
     render(
-      <HomeDashboard studentName="지훈" data={data} onShowLessons={vi.fn()} onShowStats={vi.fn()} />
+      <HomeDashboard studentName="지훈" data={data} onShowLessons={vi.fn()} />
     );
     expect(screen.getByText("오늘 수업")).toBeInTheDocument();
     fireEvent.click(screen.getByText("입장하기 →"));
@@ -147,7 +134,7 @@ describe("HomeDashboard", () => {
       ],
     };
     render(
-      <HomeDashboard studentName="지훈" data={data} onShowLessons={vi.fn()} onShowStats={vi.fn()} />
+      <HomeDashboard studentName="지훈" data={data} onShowLessons={vi.fn()} />
     );
     expect(screen.queryByText("오늘 수업")).not.toBeInTheDocument();
     expect(screen.getByText(/다음 수업까지 D-/)).toBeInTheDocument();

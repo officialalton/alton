@@ -302,7 +302,8 @@ type PlannedPreviewProblem = {
 
 /** unit_preview_for_viewer 의 문제 목록을 화면 모양으로 옮긴다. 정답·해설·풀이 상태는 없다. */
 export function toPlannedSessionProblems(
-  problems: PlannedPreviewProblem[] | null | undefined
+  problems: PlannedPreviewProblem[] | null | undefined,
+  satDomainByProblemId?: Map<string, string | null>
 ): SessionProblem[] {
   return (problems ?? []).map((p, index) => {
     const options = Array.isArray(p.options) ? p.options.map(String) : [];
@@ -311,7 +312,9 @@ export function toPlannedSessionProblems(
       problemId: p.problemId,
       // 미리보기 응답에는 유형이 없다 — 읽기만 하는 화면이라 선택지 유무로 갈라 보여준다.
       format: options.length > 0 ? "mc" : "essay",
-      satDomain: null,
+      // 2026-09-22(UAT "미리보기엔 계산기가 안 나온다") — sat_domain이 없으면 수학
+      // 문제라도 계산기·참조표 노출 조건(hasMathProblem)을 못 만족했다.
+      satDomain: satDomainByProblemId?.get(p.problemId) ?? null,
       passage: p.passage ?? null,
       options,
       difficulty: null,
@@ -355,5 +358,11 @@ export async function loadPlannedProblems(
     return [];
   }
   const preview = data as { problems?: PlannedPreviewProblem[] } | null;
-  return toPlannedSessionProblems(preview?.problems);
+  const problemIds = (preview?.problems ?? []).map((p) => p.problemId);
+  const satDomainByProblemId = new Map<string, string | null>();
+  if (problemIds.length) {
+    const { data: rows } = await supabase.from("problems").select("id, sat_domain").in("id", problemIds);
+    for (const r of rows ?? []) satDomainByProblemId.set(r.id as string, (r.sat_domain as string | null) ?? null);
+  }
+  return toPlannedSessionProblems(preview?.problems, satDomainByProblemId);
 }
