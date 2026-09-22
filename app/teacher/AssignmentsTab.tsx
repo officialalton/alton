@@ -215,6 +215,8 @@ export default function AssignmentsTab({
   current,
   past,
   onOpenOperatingCurriculum,
+  subtab: subtabProp,
+  onSubtabChange,
 }: {
   current: TeacherAssignedSubject[];
   past: TeacherAssignedSubject[];
@@ -224,10 +226,17 @@ export default function AssignmentsTab({
     studentName: string,
     subjectName: string
   ) => void;
+  /** 2026-09-22(사용자 지시) — "예정 수업/지난 수업"과 같은 자리(PageFrame의
+   * subtabs 슬롯)에서 렌더링하려고 부모(TeacherShell)가 상태를 들고 있는다.
+   * 없으면(테스트 등 독립 렌더) 이 컴포넌트가 자체 상태로 대체한다. */
+  subtab?: "active" | "past";
+  onSubtabChange?: (subtab: "active" | "past") => void;
 }) {
   // 2026-09-22(사용자 지시) — "현재/이전 배정 이력(펼침)" 대신 배정 중/배정 종료
   // 서브탭 두 개로 나눈다.
-  const [subtab, setSubtab] = useState<"active" | "past">("active");
+  const [localSubtab, setLocalSubtab] = useState<"active" | "past">("active");
+  const subtab = subtabProp ?? localSubtab;
+  const setSubtab = onSubtabChange ?? setLocalSubtab;
   const [view, setView] = useState<View>({ type: "list" });
 
   if (view.type === "roadmap") {
@@ -253,17 +262,20 @@ export default function AssignmentsTab({
 
   return (
     <div className="max-w-[640px]">
-      {/* 2026-09-22(사용자 지시) — pill 대신 다른 화면(예: "예정 수업/지난 수업")과
-          같은 1단 서브탭 표준(밑줄)으로 통일한다. */}
-      <UnderlineSubTabs
-        className="mb-5"
-        items={[
-          { id: "active", label: `배정 중 (${current.length})` },
-          { id: "past", label: `배정 종료 (${past.length})` },
-        ]}
-        activeId={subtab}
-        onSelect={setSubtab}
-      />
+      {/* 2026-09-22(사용자 지시) — subtabProp이 있으면(TeacherShell 렌더) 서브탭은
+          PageFrame의 subtabs 슬롯에서 그려진다("예정 수업/지난 수업"과 같은 자리) —
+          여기서 또 그리면 중복이라 생략한다. 독립 렌더(테스트 등)일 때만 자체적으로 그린다. */}
+      {subtabProp === undefined && (
+        <UnderlineSubTabs
+          className="mb-5"
+          items={[
+            { id: "active", label: `배정 중 (${current.length})` },
+            { id: "past", label: `배정 종료 (${past.length})` },
+          ]}
+          activeId={subtab}
+          onSelect={setSubtab}
+        />
+      )}
 
       {subtab === "active" ? (
         current.length === 0 ? (

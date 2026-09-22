@@ -109,6 +109,11 @@ export default function TeacherShell({
   // 각 카드 안으로 완전히 흡수했다(TeacherLessonScheduleTab의 mode="past" +
   // onReportSessionIssue).
   const [lessonSubtab, setLessonSubtab] = useState<"upcoming" | "past">("upcoming");
+  // 2026-09-22(사용자 지시) — My Students의 배정 중/배정 종료 서브탭 위치가
+  // Schedule의 예정 수업/지난 수업보다 살짝 높아 보였다(PageFrame subtabs
+  // 슬롯의 mt-4 vs 콘텐츠 내부 렌더의 mt-6 차이). 같은 슬롯에서 그리도록 상태를
+  // 여기로 올린다.
+  const [assignmentsSubtab, setAssignmentsSubtab] = useState<"active" | "past">("active");
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const [timezoneModalOpen, setTimezoneModalOpen] = useState(false);
   const [operatingCurriculumJump, setOperatingCurriculumJump] = useState<{
@@ -282,6 +287,15 @@ export default function TeacherShell({
                 activeId={lessonSubtab}
                 onSelect={setLessonSubtab}
               />
+            ) : activeTab === "assignments" ? (
+              <UnderlineSubTabs
+                items={[
+                  { id: "active", label: `배정 중 (${currentAssignments.length})` },
+                  { id: "past", label: `배정 종료 (${pastAssignments.length})` },
+                ]}
+                activeId={assignmentsSubtab}
+                onSelect={setAssignmentsSubtab}
+              />
             ) : undefined
           }
         >
@@ -290,6 +304,8 @@ export default function TeacherShell({
               current={currentAssignments}
               past={pastAssignments}
               onOpenOperatingCurriculum={openOperatingCurriculumFromAssignment}
+              subtab={assignmentsSubtab}
+              onSubtabChange={setAssignmentsSubtab}
             />
           ) : activeTab === "lesson-schedule" ? (
             <TeacherLessonScheduleTab
