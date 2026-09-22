@@ -148,6 +148,13 @@ body {
   line-height: 1;
   text-align: initial;
   transform-origin: 0 0;
+  /* 2026-09-22(버그 수정) — 처음엔 글자 크기·회전 계산(font-size, transform)을
+     빠뜨려서 모든 글자가 브라우저 기본 크기·위치로 나가 클릭이 실제 단어와
+     전혀 안 맞았다. pdf.js 공식 규칙(web/pdf_viewer.css)에서 그대로 가져온다 —
+     --total-scale-factor 등 변수는 PdfMaterialViewer가 렌더 시 직접 지정한다. */
+  --min-font-size: 1;
+  --text-scale-factor: calc(var(--total-scale-factor, 1) * var(--min-font-size));
+  --min-font-size-inv: calc(1 / var(--min-font-size));
 }
 .pdf-text-layer span,
 .pdf-text-layer br {
@@ -156,6 +163,17 @@ body {
   white-space: pre;
   cursor: text;
   transform-origin: 0% 0%;
+}
+.pdf-text-layer > :not(.markedContent),
+.pdf-text-layer .markedContent span:not(.markedContent) {
+  --font-height: 0;
+  font-size: calc(var(--text-scale-factor) * var(--font-height));
+  --scale-x: 1;
+  --rotate: 0deg;
+  transform: rotate(var(--rotate)) scaleX(var(--scale-x)) scale(var(--min-font-size-inv));
+}
+.pdf-text-layer .markedContent {
+  display: contents;
 }
 .pdf-text-layer ::selection {
   background: rgba(37, 99, 235, 0.25);

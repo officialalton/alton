@@ -66,7 +66,15 @@ export async function gradeHomeworkBatchAction(
   const nextItems: HomeworkBatchItem[] = batch.items.map((i) => {
     const override = overrideByProblem.get(i.problemId);
     const grade = override ? override.grade : i.autoCorrect === null ? null : i.autoCorrect ? "correct" : "incorrect";
-    return { ...i, graded: true, gradedAt: now, grade, gradeComment: override?.comment ?? i.gradeComment };
+    return {
+      ...i,
+      graded: true,
+      gradedAt: now,
+      grade,
+      gradeComment: override?.comment ?? i.gradeComment,
+      // 2026-09-22(사용자 지시) — 오답이었던 과제 문항도 자동으로 Practice에 저장.
+      savedToPractice: grade === "incorrect" ? true : i.savedToPractice,
+    };
   });
   const { error } = await supabase.from("homework_batches").update({ items: nextItems }).eq("id", batchId);
   if (error) return { ok: false, error: "채점을 저장하지 못했습니다." };

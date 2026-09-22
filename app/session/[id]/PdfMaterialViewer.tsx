@@ -11,7 +11,7 @@ import { useEffect, useRef, useState } from "react";
 type PdfDocumentLike = {
   numPages: number;
   getPage: (n: number) => Promise<{
-    getViewport: (o: { scale: number }) => { width: number; height: number };
+    getViewport: (o: { scale: number }) => { width: number; height: number; scale: number };
     render: (o: { canvasContext: CanvasRenderingContext2D; viewport: unknown }) => {
       promise: Promise<void>;
       cancel: () => void;
@@ -111,6 +111,16 @@ export default function PdfPageCanvas({
           textLayerEl.replaceChildren();
           textLayerEl.style.width = `${width}px`;
           textLayerEl.style.height = `${height}px`;
+          // pdf.js의 TextLayer는 span 위치·글자 크기를 --total-scale-factor 등
+          // CSS 변수로 계산하는데, 이 변수는 pdf.js 자체 뷰어(.page 컨테이너)에서만
+          // 설정된다 — 우리는 그 뷰어를 안 쓰므로 값이 없어 계산이 무효화되고, 모든
+          // 글자가 브라우저 기본 크기·위치로 깨져서(클릭이 실제 단어와 안 맞음)
+          // "완전히 안 먹는" 상태가 됐다. 뷰어가 하는 것과 같은 값을 직접 지정한다.
+          textLayerEl.style.setProperty("--scale-factor", String(viewport.scale));
+          textLayerEl.style.setProperty("--user-unit", "1");
+          textLayerEl.style.setProperty("--total-scale-factor", String(viewport.scale));
+          textLayerEl.style.setProperty("--scale-round-x", "1px");
+          textLayerEl.style.setProperty("--scale-round-y", "1px");
           const pdfjs = await import("pdfjs-dist");
           const layer = new pdfjs.TextLayer({
             textContentSource: pdfPage.streamTextContent(),
