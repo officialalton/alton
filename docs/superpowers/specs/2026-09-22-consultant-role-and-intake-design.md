@@ -95,6 +95,97 @@ For an assigned prospect, show the student and guardian basic details, request t
 
 Administrators and users with `manage_consultation_intake` need a new-request queue with owner and consultant assignment controls, onboarding checklist status, and exception handling. This replaces the assumption that an administrator personally schedules every incoming meeting.
 
+## Responsibility Split
+
+The consultant becomes the responsible customer-facing owner after assignment. The administrator remains the cross-account operating and control owner. The same person may initially hold both sets of capabilities, but the product must keep the boundaries explicit.
+
+### Transfer to the Assigned Consultant
+
+| Area | Consultant responsibility after assignment |
+| --- | --- |
+| Consultation request | Progress the assigned request, record first contact, coordinate the meeting, and update customer-facing status. |
+| Messenger | Receive new messages for the assigned household, reply, and track unread conversation work. |
+| Availability and meetings | Publish personal availability; create, change, and cancel first and follow-up meetings for assigned households. |
+| Calendar and Meet | Create Calendar events and Meet links using the assigned consultant's calendar and availability. |
+| Reviews | Write consultation notes, prepare customer-facing reviews, and record agreed next actions. |
+| Student Success Planner | Create and manage admissions-related manual tasks for assigned students. |
+| Admissions roadmap | Manage future admissions milestones and next actions for assigned students when this feature is released. |
+| Student context | Read the permitted score goal, completed mock-exam summary, teacher reviews, learning-task status, and onboarding completeness needed for advising. |
+| Customer communication | Trigger or send booking, meeting confirmation, rescheduling, and post-meeting next-step communications to assigned households. |
+
+Consultant access to a household's messenger, meetings, and planning work must derive from the same `admissions_consultant_id`. Do not maintain separate, drifting ownership values for these customer-facing surfaces.
+
+### Retain with Administrator
+
+| Area | Administrator responsibility |
+| --- | --- |
+| Global operations | View all requests, households, conversations, meetings, students, consultant workloads, and overall pipeline state. |
+| Assignment control | Assign or reassign consultants; control automatic-assignment mode and the eligible assignment pool. |
+| Account and permissions | Create, deactivate, and configure staff accounts; manage roles, capabilities, absence, and assignment eligibility. |
+| Commercial and legal operations | Control pricing, payments, refunds, entitlements, settlement, contract approval, consent policy, and compliance handling. |
+| Household lifecycle | Create or close accounts, process deletion requests, and resolve household-level identity or access issues. |
+| Exceptions and escalation | Intervene for consultant absence, customer complaints, failed handoffs, high-risk cases, and policy exceptions. |
+| Audit | Read assignment history, operational notes, access history, and system-wide reporting. |
+
+An administrator may act on behalf of a consultant for an exception, but such action must preserve the assigned consultant relationship and leave an audit record. Administrative visibility must not require impersonating a student, guardian, or consultant.
+
+### Access Rules by Surface
+
+| Surface | Assigned consultant | Other consultant | Administrator |
+| --- | --- | --- |
+| Assigned consultation request | Read and update | No access | Full access |
+| Household messenger | Read and reply | No access | Full access and exception reply |
+| Availability and booked meetings | Manage own assigned meetings | Manage own only | Full operational access |
+| Student planner and admissions roadmap | Read and edit admissions items | No access | Full access |
+| Learning answers and raw grading data | No access by default | No access | Existing role policy only |
+| Payments, contracts, entitlements, account closure | Read status only when required for onboarding | No access | Full access |
+
+## Assignment and Handoff Rules
+
+### Assignment Modes
+
+The administrator controls one global assignment setting:
+
+| Mode | Behavior |
+| --- | --- |
+| Manual assignment | An administrator or authorized intake user chooses the intake owner and admissions consultant. |
+| Automatic assignment | The system selects one eligible intake-capable consultant. In the MVP, use a transaction-safe random selection from active, accepting-new-work consultants. Assign that person as both `intake_owner_id` and `admissions_consultant_id`. |
+
+An eligible automatic-assignment candidate must have `manage_consultation_intake`, an active account, and an explicit accepting-new-work flag. The system must not assign a request to a user who has no active availability. Future versions may replace random selection with capacity, expertise, language, or region-aware routing.
+
+### Scheduling after Assignment
+
+Remove public exposure of a generic administrator calendar from the landing flow. The public homepage collects a consultation request only.
+
+After consultant assignment:
+
+1. Create a customer-specific, signed scheduling link scoped to the request and assigned consultant.
+2. Send an automated consultation guidance email to the request contact with a `Choose a meeting time` action.
+3. The scheduling page shows only the assigned consultant's open availability.
+4. The customer selects one slot without requiring an ALTON login.
+5. The server atomically reserves the slot, creates the Calendar event and Meet link, updates the request to Meeting confirmed, and sends confirmations.
+
+Use a booking page linked from email rather than an interactive calendar embedded inside email. The page can reliably handle time zones, expiration, rescheduling, cancellation, availability changes, and race-safe reservation.
+
+Scheduling links must be single-request scoped, expire, support authorized reissue, and be invalidated when the consultant changes or the request closes. If the assigned consultant has no open availability, do not send the link; place the request in an `availability required` exception state and notify the responsible user.
+
+### Reassignment
+
+When the assigned consultant changes, perform one auditable handoff transaction:
+
+```text
+Change admissions consultant
+  → update request and active-student ownership
+  → reroute future household messenger notifications
+  → transfer meeting-management and planner write access
+  → invalidate outstanding old-consultant scheduling links
+  → create or reissue a new scheduling link if a meeting is not confirmed
+  → notify the affected internal users and, when appropriate, the customer
+  → retain the complete assignment history
+```
+
+Do not rewrite historical message authors, existing consultation reviews, or prior calendar-event ownership. Preserve historical records and use the current assignment only to route future work and enforce current access.
+
 ## Meeting and Calendar Rules
 
 - Only the assigned admissions consultant, or an authorized intake user acting on their behalf, may create or modify the first meeting after assignment.
@@ -136,3 +227,6 @@ The consultant must not gain unrestricted access to learning answer keys, raw gr
 - An active admissions consultant can create admissions-related manual planner tasks only for assigned students.
 - Existing teacher, guardian, student, and administrator access rules do not broaden accidentally.
 - A future coordinator can receive only `manage_consultation_intake`, while a future admissions consultant can receive only `manage_admissions_students`, without data migration.
+- Once assigned, household messenger routing, scheduling, meetings, and admissions-planner access all follow the same assigned consultant.
+- Administrators retain global read access, reassignment controls, commercial/legal operations, account management, and exception handling.
+- The public landing page has no generic administrator-availability calendar; the customer receives an assigned-consultant scheduling link only after assignment.
