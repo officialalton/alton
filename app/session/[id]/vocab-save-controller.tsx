@@ -58,23 +58,57 @@ export function useVocabSaveController(studentId: string): VocabSaveController {
   return { saveMode, setSaveMode, folders, folderId, addingFolder, newFolderName, setNewFolderName, onFolderSelect, confirmNewFolder };
 }
 
-/** 어디서든 배치할 수 있는 단어 저장 on/off 스위치. 2026-09-22(사용자 지시) —
- * 폴더 선택 드롭다운이 "필기 시작" 옆에서 페이지 표시처럼 보여 헷갈린다고 해서
- * 뺐다. 저장은 항상 기본 폴더("오답 노트")로 들어간다 — 폴더를 바꾸고 싶으면
- * 단어장 탭에서 옮기면 된다. */
+/** 어디서든 배치할 수 있는 단어 저장 on/off 스위치 + 폴더 선택.
+ * 2026-09-22(사용자 지시) — 폴더 선택 드롭다운이 "필기 시작" 옆에서 페이지 표시처럼
+ * 보여 헷갈린다고 해서 뺐었는데, 다시 필요하다고 해서 되살린다. */
 export function VocabSaveToggleBar({ controller }: { controller: VocabSaveController }) {
-  const { saveMode, setSaveMode } = controller;
+  const { saveMode, setSaveMode, folders, folderId, addingFolder, newFolderName, setNewFolderName, onFolderSelect, confirmNewFolder } =
+    controller;
   return (
-    <button
-      type="button"
-      onClick={(e) => {
-        e.stopPropagation();
-        setSaveMode((v) => !v);
-      }}
-      aria-pressed={saveMode}
-      className={`rounded px-2 py-1 text-[11.5px] font-bold ${saveMode ? "bg-ink text-white" : "text-ink"}`}
-    >
-      {saveMode ? "📖 단어 저장 끄기" : "📖 단어 저장 켜기"}
-    </button>
+    <span className="inline-flex items-center gap-1.5" onClick={(e) => e.stopPropagation()}>
+      <button
+        type="button"
+        onClick={() => setSaveMode((v) => !v)}
+        aria-pressed={saveMode}
+        className={`rounded px-2 py-1 text-[11.5px] font-bold ${saveMode ? "bg-ink text-white" : "text-ink"}`}
+      >
+        {saveMode ? "📖 단어 저장 끄기" : "📖 단어 저장 켜기"}
+      </button>
+      {saveMode && folders && !addingFolder && (
+        <select
+          aria-label="저장할 폴더"
+          value={folderId ?? ""}
+          onChange={(e) => onFolderSelect(e.target.value)}
+          className="text-[11px] border border-grey-200 rounded px-1 py-0.5 bg-white max-w-[110px]"
+        >
+          {folders.map((f) => (
+            <option key={f.id} value={f.id}>
+              {f.name}
+            </option>
+          ))}
+          <option value="__new__">+ 새 폴더</option>
+        </select>
+      )}
+      {saveMode && addingFolder && (
+        <form
+          className="flex items-center gap-1"
+          onSubmit={(e) => {
+            e.preventDefault();
+            void confirmNewFolder();
+          }}
+        >
+          <input
+            autoFocus
+            value={newFolderName}
+            onChange={(e) => setNewFolderName(e.target.value)}
+            placeholder="새 폴더 이름"
+            className="text-[11px] border border-grey-200 rounded px-1 py-0.5 w-20"
+          />
+          <button type="submit" className="text-[11px] font-bold text-ink">
+            추가
+          </button>
+        </form>
+      )}
+    </span>
   );
 }

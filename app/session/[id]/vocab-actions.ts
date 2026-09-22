@@ -87,6 +87,17 @@ export async function addVocabWord(
 
   const entry = await generateVocabEntry(word);
 
+  // 2026-09-22(버그 수정) — `/session/[id]`는 legacy_sessions 도 같은 화면으로 보여준다
+  // (loadNormalizedSession). legacy_sessions 의 id 는 `sessions` 테이블엔 없어
+  // source_session_id FK(= sessions(id))를 위반해 저장 자체가 실패했다(Vercel 로그로
+  // 확인: "vocab_words_source_session_id_fkey"). 실제 sessions 에 있는 id 만 연결하고,
+  // 레거시 세션에서 저장하면 세션 연결 없이(= null) 저장한다 — 단어 저장은 계속 된다.
+  const { data: realSession } = await supabase
+    .from("sessions")
+    .select("id")
+    .eq("id", sourceSessionId)
+    .maybeSingle();
+
   const { data: inserted, error } = await supabase
     .from("vocab_words")
     .insert({
@@ -95,7 +106,7 @@ export async function addVocabWord(
       definition: entry.definition,
       example: entry.example,
       similar_words: entry.similar,
-      source_session_id: sourceSessionId,
+      source_session_id: realSession ? sourceSessionId : null,
       folder_id: folderId ?? null,
     })
     .select("id, word, definition, example, similar_words, created_at")
