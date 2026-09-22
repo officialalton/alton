@@ -177,3 +177,52 @@ describe("mock-exam-actions (조립·공개, 실제 로컬 DB)", () => {
     expect(secondAfter?.status).toBe("published");
   });
 });
+
+// 2026-09-21(사용자 지시) — "비활성화된 학생 제외 + 전체 학생 배정 기능".
+describe("모의고사 배정 — 전체 활성 학생 배정(2026-09-21)", () => {
+  it("비활성 학생은 목록·배정 대상에서 빠지고, 활성 학생 전원에게 배정된다", async () => {
+    const { listAllActiveStudentsForMockExamAction, assignMockExamToAllActiveStudentsAction, assembleMockExamSet, publishMockExamSet } =
+      await import("./mock-exam-actions");
+
+    const activeStudentId = psql(
+      `insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at)
+       values ('00000000-0000-0000-0000-000000000000', gen_random_uuid(), 'authenticated', 'authenticated', 'bulk-assign-active-${Date.now()}@example.com', 'x', now(), '{}', '{}', now(), now())
+       returning id;`,
+    );
+    psql(`insert into profiles (id, role, name) values ('${activeStudentId}', 'student', '활성학생-벌크');`);
+    psql(`insert into students (id, status) values ('${activeStudentId}', 'active');`);
+
+    const inactiveStudentId = psql(
+      `insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at)
+       values ('00000000-0000-0000-0000-000000000000', gen_random_uuid(), 'authenticated', 'authenticated', 'bulk-assign-inactive-${Date.now()}@example.com', 'x', now(), '{}', '{}', now(), now())
+       returning id;`,
+    );
+    psql(`insert into profiles (id, role, name) values ('${inactiveStudentId}', 'student', '비활성학생-벌크');`);
+    psql(`insert into students (id, status) values ('${inactiveStudentId}', 'inactive');`);
+
+    const students = await listAllActiveStudentsForMockExamAction();
+    expect(students.some((s) => s.id === activeStudentId)).toBe(true);
+    expect(students.some((s) => s.id === inactiveStudentId)).toBe(false);
+
+    const set = await assembleMockExamSet({
+      name: `전체 배정 테스트 세트 ${Date.now()}`,
+      difficultyTier: "standard",
+      rwCount: 5,
+      mathCount: 5,
+    });
+    await publishMockExamSet(set.examSetId);
+
+    const result = await assignMockExamToAllActiveStudentsAction({ examSetId: set.examSetId });
+    expect(result.assignedCount).toBeGreaterThan(0);
+    expect(result.skipped).toEqual([]);
+
+    const attemptStatus = psql(
+      `select status from mock_exam_attempts where student_id = '${activeStudentId}' and exam_set_id = '${set.examSetId}';`,
+    );
+    expect(attemptStatus).toBe("assigned");
+    const inactiveAttemptCount = psql(
+      `select count(*) from mock_exam_attempts where student_id = '${inactiveStudentId}' and exam_set_id = '${set.examSetId}';`,
+    );
+    expect(inactiveAttemptCount).toBe("0");
+  });
+});

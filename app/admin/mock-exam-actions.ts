@@ -402,6 +402,32 @@ export async function assignMockExamAsAdminAction(input: {
   return { ok: true };
 }
 
+export type BulkAssignMockExamResult = {
+  assignedCount: number;
+  skipped: { studentId: string; studentName: string | null; reason: string }[];
+};
+
+/** 2026-09-21(사용자 지시) — "전체 학생에게 배정" — 비활성화(active가 아닌) 학생은
+ * listAllActiveStudentsForMockExamAction이 이미 걸러낸다. 학생 하나하나에 대해
+ * assignMockExamAsAdminAction과 같은 배정 로직을 돌리고, 이미 시작·제출한 시험이라
+ * 배정을 건너뛴 학생은 사유와 함께 목록으로 돌려준다(전체를 막지 않는다 — 한 명
+ * 실패했다고 나머지 배정까지 막을 이유가 없다). */
+export async function assignMockExamToAllActiveStudentsAction(input: {
+  examSetId: string;
+  dueAt?: string | null;
+}): Promise<BulkAssignMockExamResult> {
+  await requireAdmin();
+  const students = await listAllActiveStudentsForMockExamAction();
+  let assignedCount = 0;
+  const skipped: BulkAssignMockExamResult["skipped"] = [];
+  for (const s of students) {
+    const result = await assignMockExamAsAdminAction({ studentId: s.id, examSetId: input.examSetId, dueAt: input.dueAt ?? null });
+    if (result.ok) assignedCount += 1;
+    else skipped.push({ studentId: s.id, studentName: s.name, reason: result.error });
+  }
+  return { assignedCount, skipped };
+}
+
 export type MockExamAttemptHistoryRow = {
   attemptId: string;
   studentId: string;

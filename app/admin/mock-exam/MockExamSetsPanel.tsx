@@ -8,6 +8,7 @@ import {
   listMockExamSets,
   publishMockExamSet,
   assignMockExamAsAdminAction,
+  assignMockExamToAllActiveStudentsAction,
   listAllActiveStudentsForMockExamAction,
   listAllMockExamAttemptsAction,
   type MockExamSetSummary,
@@ -524,6 +525,8 @@ function AssignTab() {
   const [dueAt, setDueAt] = useState("");
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
+  const [confirmingBulk, setConfirmingBulk] = useState(false);
+  const [bulkBusy, setBulkBusy] = useState(false);
 
   useEffect(() => {
     listAllActiveStudentsForMockExamAction().then(setStudents);
@@ -537,6 +540,22 @@ function AssignTab() {
     const result = await assignMockExamAsAdminAction({ studentId, examSetId, dueAt: dueAt || null });
     setBusy(false);
     setMessage(result.ok ? "배정했습니다." : result.error);
+  }
+
+  async function assignAll() {
+    if (!examSetId) return;
+    setBulkBusy(true);
+    setMessage(null);
+    const result = await assignMockExamToAllActiveStudentsAction({ examSetId, dueAt: dueAt || null });
+    setBulkBusy(false);
+    setConfirmingBulk(false);
+    setMessage(
+      result.skipped.length === 0
+        ? `활성 학생 ${result.assignedCount}명에게 배정했습니다.`
+        : `${result.assignedCount}명 배정 완료. ${result.skipped.length}명 건너뜀(이미 시작·제출한 시험): ${result.skipped
+            .map((s) => s.studentName ?? s.studentId)
+            .join(", ")}`,
+    );
   }
 
   return (
@@ -569,6 +588,39 @@ function AssignTab() {
           배정
         </button>
       </div>
+
+      <div className="mt-3 border-t border-grey-100 pt-3">
+        {!confirmingBulk ? (
+          <button
+            type="button"
+            disabled={!examSetId}
+            onClick={() => setConfirmingBulk(true)}
+            className="rounded border border-grey-200 px-3 py-1.5 text-xs font-bold text-grey-600 disabled:opacity-40"
+          >
+            전체 학생에게 배정(위에서 고른 세트·마감일 기준)
+          </button>
+        ) : (
+          <div className="rounded-lg border-[1.5px] border-red/20 bg-red/5 px-3.5 py-3">
+            <p className="mb-2 text-xs text-ink">
+              지금 활성 상태인 학생 {students.length}명 전원에게 배정합니다. 이미 시작·제출한 학생은 자동으로 건너뜁니다.
+            </p>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                disabled={bulkBusy}
+                onClick={() => void assignAll()}
+                className="rounded bg-red px-3.5 py-1.5 text-xs font-bold text-white disabled:opacity-50"
+              >
+                {bulkBusy ? "배정 중..." : `확인 — ${students.length}명 전체 배정`}
+              </button>
+              <button type="button" disabled={bulkBusy} onClick={() => setConfirmingBulk(false)} className="text-xs font-semibold text-grey-500">
+                취소
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+
       {message && <p className="mt-2 text-sm text-grey-600">{message}</p>}
       {sets.length === 0 && <p className="mt-2 text-xs text-grey-400">공개된 세트가 없습니다 — 먼저 &ldquo;공개&rdquo; 탭에서 세트를 공개하세요.</p>}
     </section>
