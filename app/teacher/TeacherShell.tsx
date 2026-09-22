@@ -29,6 +29,7 @@ import TeacherMaterialsLibraryTab from "./MaterialsLibraryTab";
 import VocabAssignTab from "./VocabAssignTab";
 import type { TeacherVocabOverview } from "./vocab-assign-data";
 import HomeworkAssignTab from "./HomeworkAssignTab";
+import type { HomeworkKeywordOption } from "./homework-direct-data";
 import SettlementTab from "./SettlementTab";
 import TeacherMockExamTab from "./TeacherMockExamTab";
 import type { LibrarySubjectTree } from "@/lib/subject-material-library";
@@ -76,6 +77,7 @@ export default function TeacherShell({
   materialsLibraryTree,
   vocabOverview,
   initialHomeworkStudentId,
+  initialHomeworkKeywords,
 }: {
   initialTab?: string;
   dashboard: TeacherDashboardData;
@@ -90,6 +92,7 @@ export default function TeacherShell({
   materialsLibraryTree: LibrarySubjectTree[];
   vocabOverview: TeacherVocabOverview;
   initialHomeworkStudentId?: string;
+  initialHomeworkKeywords?: { studentId: string; keywords: HomeworkKeywordOption[] };
 }) {
   const router = useRouter();
   const [lessons, setLessons] = useState<TeacherLessonScheduleItem[]>(lessonSchedule);
@@ -331,6 +334,7 @@ export default function TeacherShell({
             <HomeworkAssignTab
               students={Array.from(new Map(currentAssignments.map((a) => [a.studentId, a.studentName])).entries()).map(([id, name]) => ({ id, name }))}
               initialStudentId={initialHomeworkStudentId}
+              initialKeywords={initialHomeworkKeywords}
             />
           ) : activeTab === "settlement" ? (
             <SettlementTab />

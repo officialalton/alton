@@ -9,6 +9,7 @@ import {
   submitMockExamAttemptAction,
   toggleMockExamFlagAction,
   toggleMockExamSavedToPracticeAction,
+  recordMockExamEntryAction,
 } from "@/lib/mock-exam/attempt-actions";
 import LearningText from "@/app/session/[id]/LearningText";
 import RwStimulusView from "@/app/session/[id]/RwStimulusView";
@@ -43,6 +44,12 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
   // useState(initial) 값을 그대로 들고 있어 제출 후 화면이 멈춘 것처럼 보였다 — 서버 재조회 결과를
   // 로컬 상태로 직접 반영해야 즉시 반응한다.)
   const [submittedAttempt, setSubmittedAttempt] = useState<MockExamAttemptDetail | null>(null);
+
+  // 2026-09-22(사용자 지시) — 응시 화면에 들어올 때마다(진행 중인 응시만) 기록한다.
+  // 나갔다가 다시 들어오는 걸 시간 어뷰징 의심 신호로 교사가 볼 수 있게 한다.
+  useEffect(() => {
+    void recordMockExamEntryAction(attempt.id);
+  }, [attempt.id]);
   const sectionsOrder = useMemo(
     () => (["rw", "math"] as const).filter((s) => attempt.items.some((i) => i.section === s)),
     [attempt.items],

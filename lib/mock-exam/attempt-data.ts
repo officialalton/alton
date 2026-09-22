@@ -25,6 +25,9 @@ export type MockExamAttemptSummary = {
   gradedAt: string | null;
   totalCount: number;
   correctCount: number | null;
+  /** 2026-09-22(사용자 지시) — 응시 화면을 나갔다가 다시 들어온 횟수. 시간
+   * 어뷰징 의심 신호로 교사 화면에 노출한다(정교한 타이머 재설계는 아님). */
+  entryCount: number;
 };
 
 export type MockExamAttemptItem = {
@@ -70,6 +73,7 @@ export type MockExamAttemptDetail = {
   mathCalculatorAllowed: boolean;
   mathReferenceSheetAllowed: boolean;
   timeRemainingSeconds: { rw?: number; math?: number } | null;
+  entryCount: number;
   items: MockExamAttemptItem[];
 };
 
@@ -84,6 +88,7 @@ async function loadSummaries(supabase: SupabaseClient, studentId: string): Promi
     ...r,
     totalCount: Number(r.totalCount ?? 0),
     correctCount: r.correctCount === null || r.correctCount === undefined ? null : Number(r.correctCount),
+    entryCount: Number(r.entryCount ?? 0),
   }));
 }
 

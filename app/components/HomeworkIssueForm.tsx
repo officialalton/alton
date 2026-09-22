@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { HomeworkKeywordOption } from "@/app/teacher/homework-direct-data";
 import { loadStudentHomeworkCreatePanelAction } from "@/app/teacher/homework-direct-client-data";
 import { issueHomeworkBatchAction } from "@/lib/homework-batch-actions";
@@ -10,19 +10,27 @@ import { issueHomeworkBatchAction } from "@/lib/homework-batch-actions";
  * 별개로 저장되고, 학생 포털·교사 포털 "과제 내역"에서 똑같이 보인다. 수업 준비 단계에서도
  * 미리 낼 수 있다(제품 오너 지시, 2026-09-16). */
 export default function HomeworkIssueForm({
-  studentId, onIssued,
+  studentId, onIssued, initialKeywords,
 }: {
   studentId: string;
   onIssued?: () => void;
+  /** 2026-09-22(UAT "과제 탭 로딩이 길다") — 처음 보이는 학생의 키워드는 세션
+   * 페이지가 SSR로 미리 받아 두면 탭을 열 때 왕복이 없다. 다른 학생을 고르면
+   * (studentId가 이 값의 기준 학생과 달라지면) 평소처럼 새로 불러온다. */
+  initialKeywords?: { studentId: string; keywords: HomeworkKeywordOption[] };
 }) {
-  const [keywords, setKeywords] = useState<HomeworkKeywordOption[]>([]);
-  const [loading, setLoading] = useState(true);
+  const seeded = initialKeywords?.studentId === studentId;
+  const [keywords, setKeywords] = useState<HomeworkKeywordOption[]>(seeded ? initialKeywords!.keywords : []);
+  const [loading, setLoading] = useState(!seeded);
   const [counts, setCounts] = useState<Record<string, string>>({});
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
+  const loadedForRef = useRef<string | null>(seeded ? studentId : null);
 
   useEffect(() => {
+    if (loadedForRef.current === studentId) return;
+    loadedForRef.current = studentId;
     setLoading(true);
     setCounts({});
     setNotice(null);

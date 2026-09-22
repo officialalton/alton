@@ -137,6 +137,13 @@ function StatusSubTab({ data }: { data: TeacherMockExamTabData }) {
                   <span>
                     {a.examSetName} — {STATUS_LABEL[a.status] ?? a.status}
                     {a.status === "graded" && a.correctCount !== null && ` (${a.correctCount}/${a.totalCount})`}
+                    {/* 2026-09-22(사용자 지시) — 응시 중 재입장 횟수를 시간 어뷰징
+                        의심 신호로 노출한다(2회 이상만 눈에 띄게). */}
+                    {a.entryCount > 1 && (
+                      <span className="ml-1.5 text-[11px] font-bold text-amber-600" title="응시 중 화면을 나갔다가 다시 들어온 횟수">
+                        · 재입장 {a.entryCount}회
+                      </span>
+                    )}
                   </span>
                   {a.status !== "assigned" && (
                     <button type="button" onClick={() => openAttempt(a.id)} className="text-[12px] font-bold text-ink underline">

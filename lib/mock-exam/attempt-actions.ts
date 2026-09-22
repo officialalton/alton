@@ -125,6 +125,12 @@ export async function saveMockExamSectionTimeAction(
   );
 }
 
+/** 2026-09-22(사용자 지시) — 응시 화면에 들어올 때마다 기록한다(나갔다 다시 들어오는
+ * 시간 어뷰징 의심 신호를 교사가 통계로 볼 수 있게). 채점·시험 진행에는 영향 없다. */
+export async function recordMockExamEntryAction(attemptId: string): Promise<ActionResult> {
+  return callRpc("mock_exam_record_entry", { p_attempt_id: attemptId }, "입장 기록에 실패했습니다.");
+}
+
 /** 학생이 문항에 "표시"만 남긴다(정답 변경 없음) — 사양 3절 "문항 이동·표시". */
 export async function toggleMockExamFlagAction(attemptId: string, setItemId: string, flagged: boolean): Promise<ActionResult> {
   return callRpc("mock_exam_toggle_flag", { p_attempt_id: attemptId, p_set_item_id: setItemId, p_flagged: flagged }, "표시를 저장하지 못했습니다.");

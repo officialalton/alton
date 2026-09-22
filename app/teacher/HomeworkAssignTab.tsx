@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { loadStudentHomeworkBatchesAction } from "./homework-direct-client-data";
 import type { HomeworkBatch } from "@/lib/homework-batch-data";
+import type { HomeworkKeywordOption } from "./homework-direct-data";
 import HomeworkBatchPanel from "@/app/components/HomeworkBatchPanel";
 import HomeworkIssueForm from "@/app/components/HomeworkIssueForm";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
@@ -13,10 +14,13 @@ export type HomeworkStudentOption = { id: string; name: string };
  * 골라 즉시 발급("과제 생성")하고, "과제 내역"에서 배치를 눌러 그대로 채점한다. 발급마다 새 배치가
  * 생기고 이름은 발급 날짜로 자동으로 붙는다(예: "9월 16일 과제"). */
 export default function HomeworkAssignTab({
-  students, initialStudentId,
+  students, initialStudentId, initialKeywords,
 }: {
   students: HomeworkStudentOption[];
   initialStudentId?: string;
+  /** 2026-09-22(UAT "과제 탭 로딩이 길다") — 세션 페이지가 초기 학생의 키워드를
+   * SSR로 미리 받아 온 것(다른 학생을 고르면 평소처럼 새로 불러온다). */
+  initialKeywords?: { studentId: string; keywords: HomeworkKeywordOption[] };
 }) {
   const [subtab, setSubtab] = useState<"create" | "history">("create");
   const [studentId, setStudentId] = useState(initialStudentId ?? students[0]?.id ?? "");
@@ -57,7 +61,7 @@ export default function HomeworkAssignTab({
       {!studentId ? null : subtab === "history" ? (
         loading ? <p className="text-[13px] text-grey-500">불러오는 중…</p> : <HomeworkBatchPanel batches={batches} viewerRole="teacher" />
       ) : (
-        <HomeworkIssueForm studentId={studentId} />
+        <HomeworkIssueForm studentId={studentId} initialKeywords={initialKeywords} />
       )}
     </div>
   );

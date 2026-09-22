@@ -9,6 +9,7 @@ import { listMyLessonSchedule } from "./lesson-schedule-actions";
 import { resolveUserTimezone } from "@/lib/timezone";
 import { loadTeacherMaterialsLibraryTree } from "./materials-data";
 import { loadTeacherVocabOverview } from "./vocab-assign-data";
+import { loadStudentSubjectKeywords } from "./homework-direct-data";
 
 export default async function TeacherHomePage({
   searchParams,
@@ -77,6 +78,15 @@ export default async function TeacherHomePage({
     householdDefaultTimezone: null,
   });
 
+  // 2026-09-22(UAT "과제 탭 로딩이 길다") — HomeworkAssignTab이 처음 보이는 학생의
+  // 키워드를 매번 탭을 열 때 따로 불러왔다. 기본으로 뜰 학생(HomeworkAssignTab과
+  // 같은 규칙: student 검색 파라미터 → 없으면 첫 담당 학생)의 키워드만 미리 받아
+  // 둔다 — 다른 학생을 고르면 그때는 평소처럼 클라이언트에서 불러온다.
+  const homeworkStudentId = student ?? currentAssignments[0]?.studentId;
+  const initialHomeworkKeywords = homeworkStudentId
+    ? { studentId: homeworkStudentId, keywords: await loadStudentSubjectKeywords(supabase, homeworkStudentId) }
+    : undefined;
+
   return (
     <TeacherShell
       initialTab={tab}
@@ -92,6 +102,7 @@ export default async function TeacherHomePage({
       lessonSchedule={lessonSchedule}
       materialsLibraryTree={materialsLibraryTree}
       vocabOverview={vocabOverview}
+      initialHomeworkKeywords={initialHomeworkKeywords}
     />
   );
 }
