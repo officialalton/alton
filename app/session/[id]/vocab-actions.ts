@@ -87,13 +87,16 @@ export async function addVocabWord(
 
   const entry = await generateVocabEntry(word);
 
-  // 2026-09-22(버그 수정) — `/session/[id]`는 legacy_sessions 도 같은 화면으로 보여준다
-  // (loadNormalizedSession). legacy_sessions 의 id 는 `sessions` 테이블엔 없어
-  // source_session_id FK(= sessions(id))를 위반해 저장 자체가 실패했다(Vercel 로그로
-  // 확인: "vocab_words_source_session_id_fkey"). 실제 sessions 에 있는 id 만 연결하고,
-  // 레거시 세션에서 저장하면 세션 연결 없이(= null) 저장한다 — 단어 저장은 계속 된다.
-  const { data: realSession } = await supabase
-    .from("sessions")
+  // 2026-09-22(버그 수정) — vocab_words_source_session_id_fkey는 `legacy_sessions(id)`를
+  // 참조한다(초기 스키마의 "sessions" 테이블이 v3 sessions 도입 때 legacy_sessions로
+  // 이름이 바뀌었고, FK는 이름 변경을 그대로 따라갔다 — 정작 v3 sessions 테이블은
+  // 다른 테이블이라 이 FK 대상이 아니다). `/session/[id]`는 legacy_sessions·v3
+  // sessions 를 같은 화면으로 보여주므로(loadNormalizedSession), v3 세션에서 온
+  // sourceSessionId는 legacy_sessions에 없어 FK를 위반해 저장 자체가 실패했다
+  // (Vercel 로그로 확인). legacy_sessions 에 실제로 있는 id 만 연결하고, v3
+  // 세션에서 저장하면 세션 연결 없이(= null) 저장한다 — 단어 저장은 계속 된다.
+  const { data: legacySession } = await supabase
+    .from("legacy_sessions")
     .select("id")
     .eq("id", sourceSessionId)
     .maybeSingle();
@@ -106,7 +109,7 @@ export async function addVocabWord(
       definition: entry.definition,
       example: entry.example,
       similar_words: entry.similar,
-      source_session_id: realSession ? sourceSessionId : null,
+      source_session_id: legacySession ? sourceSessionId : null,
       folder_id: folderId ?? null,
     })
     .select("id, word, definition, example, similar_words, created_at")
