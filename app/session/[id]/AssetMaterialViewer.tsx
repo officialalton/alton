@@ -56,7 +56,8 @@ export default function AssetMaterialViewer({
     },
     [memoryKey]
   );
-  const [zoom, setZoom] = useState(1);
+  // 2026-09-22(사용자 지시) — 확대 컨트롤이 있던 툴바를 통째로 없앴다. 배율은 항상 맞춤(1).
+  const zoom = 1;
   const [urls, setUrls] = useState<Record<string, { url: string; mimeType: string }>>(() => {
     const now = Date.now();
     const initial: Record<string, { url: string; mimeType: string }> = {};
@@ -72,7 +73,6 @@ export default function AssetMaterialViewer({
   const [fitWidth, setFitWidth] = useState(0);
   const [navError, setNavError] = useState<string | null>(null);
   const [saveState, setSaveState] = useState<"idle" | "saving" | "saved" | "error">("idle");
-  const [pageInput, setPageInput] = useState("");
   const [collapsedAssets, setCollapsedAssets] = useState<Set<string>>(new Set());
   const layerRef = useRef<PdfPageAnnotationHandle | null>(null);
   const frameRef = useRef<HTMLDivElement | null>(null);
@@ -221,45 +221,9 @@ export default function AssetMaterialViewer({
       </nav>
 
       <div className="relative px-2 sm:px-4 py-2">
-        {/* 2026-09-22(사용자 지시) — 제목·페이지·확대 띠가 페이지 내용 위에 떠 있어
-            가려 보이던 것을, 페이지 위쪽 자기 줄로 옮긴다(더 이상 absolute 오버레이가
-            아니다). 이전/다음 화살표만 여전히 페이지 위에 떠 있는다. */}
-        <div
-          className="flex items-center gap-2 mb-2 bg-grey-100 border border-grey-200 rounded-lg px-2.5 py-1 w-fit"
-          data-testid="asset-viewer-controls"
-        >
-          <span className="text-[12px] font-bold text-ink max-w-[220px] truncate" title={asset.title}>
-            {asset.title}
-          </span>
-          {asset.kind === "pdf" && (
-            <form
-              className="flex items-center gap-1 text-grey-500 font-semibold text-[12px]"
-              onSubmit={(e) => {
-                e.preventDefault();
-                const n = Number(pageInput);
-                if (Number.isInteger(n) && n >= 1 && n <= total) void guardedGo({ assetIndex: pos.assetIndex, page: n });
-                setPageInput("");
-              }}
-            >
-              <input
-                aria-label="페이지 번호"
-                value={pageInput}
-                onChange={(e) => setPageInput(e.target.value)}
-                placeholder={String(pos.page)}
-                inputMode="numeric"
-                className="w-10 text-center text-[12px] border-[1.5px] border-grey-200 rounded px-1 py-0.5 bg-white/80"
-              />
-              <span>/ {total}</span>
-            </form>
-          )}
-          {asset.kind === "pdf" && (
-            <span className="flex items-center gap-1">
-              <button onClick={() => setZoom((z) => Math.max(0.5, Math.round((z - 0.25) * 100) / 100))} className="text-[12px] font-bold w-6 h-6 rounded border border-grey-200 bg-white/80">−</button>
-              <span className="text-[11px] text-grey-500 w-9 text-center">{Math.round(zoom * 100)}%</span>
-              <button onClick={() => setZoom((z) => Math.min(3, Math.round((z + 0.25) * 100) / 100))} className="text-[12px] font-bold w-6 h-6 rounded border border-grey-200 bg-white/80">＋</button>
-            </span>
-          )}
-        </div>
+        {/* 2026-09-22(사용자 지시) — 제목·페이지·확대 띠가 페이지 내용을 가려서
+            자꾸 문제가 됐다. 옮기는 대신 아예 없앤다(이전/다음 화살표만 페이지
+            위에 떠 있는다). */}
 
         {prevPosition(assets, pos) && (
           <button
