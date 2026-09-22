@@ -6,6 +6,7 @@ import type { MatchingTeacherCandidate, MatchingStudentItem } from "./matching-d
 import { selectableSubjects, type AdminSubject } from "./subject-data";
 import TeacherAssignmentTerminationPanel from "./TeacherAssignmentTerminationPanel";
 import { countPendingTerminationRequests } from "./teacher-assignment-termination-actions";
+import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 
 type MatchingSubtab = "waiting" | "closure";
 
@@ -69,34 +70,17 @@ export default function MatchingTab({
 
   return (
     <div className="max-w-[720px]">
-      <p className="text-[13px] text-grey-500 mb-5">
-        신규 매칭 확정과 종료 요청 처리를 다룹니다. 진행 중인 매칭 관리는 사용자 &gt; 학생의 학생 프로필에서 합니다.
+      <p className="text-[12.5px] text-grey-500 mb-5">
+        진행 중인 매칭 관리는 사용자 &gt; 학생의 학생 프로필에서 합니다.
       </p>
 
-      <div className="flex gap-1.5 mb-6 border-b border-grey-200">
-        {(Object.keys(SUBTAB_LABEL) as MatchingSubtab[]).map((id) => {
-          const count = id === "waiting" ? pending.length : pendingClosureCount;
-          return (
-            <button
-              key={id}
-              onClick={() => setSubtab(id)}
-              className={
-                "text-[13px] font-bold px-3.5 py-2 -mb-px border-b-2 " +
-                (subtab === id
-                  ? "border-ink text-ink"
-                  : "border-transparent text-grey-400")
-              }
-            >
-              {SUBTAB_LABEL[id]}
-              {count != null && count > 0 && (
-                <span className="ml-1.5 inline-flex items-center justify-center text-[11px] font-bold text-white bg-red rounded-full min-w-[18px] h-[18px] px-1">
-                  {count}
-                </span>
-              )}
-            </button>
-          );
-        })}
-      </div>
+      <UnderlineSubTabs
+        className="mb-6"
+        items={(Object.keys(SUBTAB_LABEL) as MatchingSubtab[]).map((id) => ({ id, label: SUBTAB_LABEL[id] }))}
+        activeId={subtab}
+        onSelect={setSubtab}
+        badgeCounts={{ waiting: pending.length, closure: pendingClosureCount ?? 0 }}
+      />
 
       {subtab === "waiting" && (
         <>

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { ConsentGapItem, CompletedConsentItem } from "./consultation-data";
+import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 
 // P4-3 1단계 — `신규 > 보호자 동의 대기`에서 `문서 > 동의서`로 옮기면서
 // ConsultationTab.tsx의 로컬 컴포넌트를 그대로 꺼냈다. props 시그니처는
@@ -13,26 +14,15 @@ export default function ConsentGapSection({ gaps, completed }: { gaps: ConsentGa
 
   return (
     <div>
-      <div className="flex gap-1 mb-4 border-b border-grey-200">
-        <button
-          onClick={() => setView("pending")}
-          className={
-            "text-[12.5px] font-bold px-3 py-2 -mb-px border-b-2 " +
-            (view === "pending" ? "border-ink text-ink" : "border-transparent text-grey-500")
-          }
-        >
-          대기 ({gaps.length})
-        </button>
-        <button
-          onClick={() => setView("done")}
-          className={
-            "text-[12.5px] font-bold px-3 py-2 -mb-px border-b-2 " +
-            (view === "done" ? "border-ink text-ink" : "border-transparent text-grey-500")
-          }
-        >
-          완료 ({completed.length})
-        </button>
-      </div>
+      <UnderlineSubTabs
+        className="mb-4"
+        items={[
+          { id: "pending", label: `대기 (${gaps.length})` },
+          { id: "done", label: `완료 (${completed.length})` },
+        ]}
+        activeId={view}
+        onSelect={setView}
+      />
 
       {view === "pending" ? (
         <>

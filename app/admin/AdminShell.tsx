@@ -15,6 +15,7 @@ import type { AdminDashboardData } from "./dashboard-data";
 import CatalogTab from "./CatalogTab";
 import ProblemBankTab from "./ProblemBankTab";
 import MockExamTab from "./MockExamTab";
+import type { MockExamSetSummary } from "./mock-exam-actions";
 import UsersTab from "./UsersTab";
 import BookingReconciliationPanel from "./BookingReconciliationPanel";
 import UnifiedScheduleTab from "./UnifiedScheduleTab";
@@ -122,6 +123,7 @@ export default function AdminShell({
   googleLinkSuccess,
   isMasterAdmin,
   adminAccounts,
+  mockExamSets,
 }: {
   initialTab?: string;
   // 2026-09-10(P1 재진입 성능 배치) — 탭 데이터 캐시(tab-data-cache.ts)를
@@ -170,6 +172,7 @@ export default function AdminShell({
   // 2026-09-22(관리자 계정 구조) — "Admins" nav 항목·탭 내용은 마스터만.
   isMasterAdmin: boolean;
   adminAccounts: AdminAccount[];
+  mockExamSets?: MockExamSetSummary[];
 }) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<TabId>(resolveAdminTab(initialTab));
@@ -395,7 +398,7 @@ export default function AdminShell({
           ) : activeTab === "problem-bank" ? (
             <ProblemBankTab subjects={subjects} />
           ) : activeTab === "mock-exam" ? (
-            <MockExamTab />
+            <MockExamTab initialSets={mockExamSets} />
           ) : activeTab === "users" ? (
             <UsersTab subjects={subjects} />
           ) : activeTab === "entitlements" ? (

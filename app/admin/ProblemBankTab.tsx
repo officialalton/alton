@@ -86,13 +86,16 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
   const [catalogError, setCatalogError] = useState(false);
 
   useEffect(() => {
+    // 2026-09-22(성능 전수 점검) — subjects가 이미 SSR로 받아 온 값(admin/page.tsx의
+    // need(..., "problem-bank"))이면 마운트 시 다시 조회하지 않는다.
+    if (subjects.length > 0) return;
     let cancelled = false;
     listSubjectCatalogAction()
       .then((rows) => {
         if (!cancelled) setCatalog(rows);
       })
       .catch(() => {
-        if (!cancelled && !subjects.length) setCatalogError(true);
+        if (!cancelled) setCatalogError(true);
       });
     return () => {
       cancelled = true;

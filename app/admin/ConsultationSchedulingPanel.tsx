@@ -38,6 +38,7 @@ import {
   type WorkspaceEventsSubscriptionRow,
 } from "./workspace-events-actions";
 import MonthCalendar from "@/app/components/MonthCalendar";
+import PillSubTabs from "@/app/components/PillSubTabs";
 import WeeklyAvailabilityGrid from "@/app/components/WeeklyAvailabilityGrid";
 import ConsultAvailabilityMonthView from "./ConsultAvailabilityMonthView";
 import { dateKeyInTimezone } from "@/lib/calendar-date-utils";
@@ -278,20 +279,15 @@ export default function ConsultationSchedulingPanel() {
       <section className="mb-8">
         <div className="flex items-center justify-between mb-2">
           <h2 className="text-[14px] font-extrabold text-ink">예정 상담</h2>
-          <div className="flex gap-1">
-            {(["today", "week", "month"] as CalendarView[]).map((v) => (
-              <button
-                key={v}
-                onClick={() => setView(v)}
-                className={
-                  "text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] " +
-                  (view === v ? "bg-ink text-white border-ink" : "border-grey-200 text-ink")
-                }
-              >
-                {v === "today" ? "오늘" : v === "week" ? "주간" : "월간"}
-              </button>
-            ))}
-          </div>
+          <PillSubTabs
+            items={[
+              { id: "today", label: "오늘" },
+              { id: "week", label: "주간" },
+              { id: "month", label: "월간" },
+            ]}
+            activeId={view}
+            onSelect={setView}
+          />
         </div>
         {view === "month" && (
           <div className="mb-4 max-w-[280px]" data-testid="consultation-month-calendar">
@@ -585,20 +581,14 @@ export default function ConsultationSchedulingPanel() {
       <section>
         <div className="flex items-center justify-between mb-2">
           <h2 className="text-[14px] font-extrabold text-ink">공용 상담 가능시간</h2>
-          <div className="flex gap-1">
-            {(["grid", "list"] as const).map((v) => (
-              <button
-                key={v}
-                onClick={() => setRulesView(v)}
-                className={
-                  "text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] " +
-                  (rulesView === v ? "bg-ink text-white border-ink" : "border-grey-200 text-ink")
-                }
-              >
-                {v === "grid" ? "주간 그리드" : "목록"}
-              </button>
-            ))}
-          </div>
+          <PillSubTabs
+            items={[
+              { id: "grid", label: "주간 그리드" },
+              { id: "list", label: "목록" },
+            ]}
+            activeId={rulesView}
+            onSelect={setRulesView}
+          />
         </div>
         <ConsultAvailabilityMonthView
           timezone={timezone}

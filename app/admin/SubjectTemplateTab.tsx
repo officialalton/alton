@@ -15,6 +15,7 @@ import {
   removeUnitKeyword,
 } from "./subject-actions";
 import type { AdminSubject, SubjectKeyword, SubjectUnit } from "./subject-data";
+import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 
 export default function SubjectTemplateTab({
   subjects,
@@ -91,32 +92,18 @@ export default function SubjectTemplateTab({
     <div className="max-w-[640px] px-8 py-8">
       <h1 className="text-[20px] font-extrabold text-ink mb-1.5">과목 템플릿</h1>
       <p className="text-[13px] text-grey-500 mb-5">
-        여기서 관리하는 과목·회차는 선생님의 커리큘럼 템플릿, 교재 생성 폼 등
-        다른 화면의 선택지로 그대로 사용됩니다.
+        여기서 바꾸면 선생님 커리큘럼 템플릿·교재 생성 폼 등 다른 화면의 선택지도 함께 바뀝니다.
       </p>
 
-      <div className="flex gap-1 mb-3 border-b-[1.5px] border-grey-200">
-        {[
-          { archived: false, label: "현재" },
-          { archived: true, label: "보관됨" },
-        ].map((t) => (
-          <button
-            key={t.label}
-            onClick={() => setShowArchived(t.archived)}
-            className={
-              "text-[13px] font-bold px-3.5 py-2 -mb-[1.5px] border-b-[2px] " +
-              (showArchived === t.archived
-                ? "border-ink text-ink"
-                : "border-transparent text-grey-500")
-            }
-          >
-            {t.label}
-            <span className="text-grey-300 font-semibold ml-1">
-              {subjects.filter((s) => (t.archived ? Boolean(s.archivedAt) : !s.archivedAt)).length}
-            </span>
-          </button>
-        ))}
-      </div>
+      <UnderlineSubTabs
+        className="mb-3"
+        items={[
+          { id: "current", label: `현재 (${subjects.filter((s) => !s.archivedAt).length})` },
+          { id: "archived", label: `보관됨 (${subjects.filter((s) => Boolean(s.archivedAt)).length})` },
+        ]}
+        activeId={showArchived ? "archived" : "current"}
+        onSelect={(id) => setShowArchived(id === "archived")}
+      />
 
       <input
         aria-label="과목 검색"

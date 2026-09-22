@@ -90,10 +90,13 @@ describe("과목 템플릿 첫 진입", () => {
     await waitFor(() => expect(screen.getByText("SAT Math")).toBeInTheDocument());
   });
 
-  it("SSR prop이 있으면 즉시 보여주고 배경에서 갱신한다", async () => {
+  // 2026-09-22(성능 전수 점검) — SSR이 이미 받아 온 값이 있으면 마운트 시
+  // 다시 조회하지 않는다(예전엔 "배경 갱신"이라며 매번 다시 불러 매 탭 진입마다
+  // 불필요한 왕복이 있었다 — 갱신할 신선도 문제가 없었다).
+  it("SSR prop이 있으면 즉시 보여주고 다시 조회하지 않는다", () => {
     render(<CatalogTab subjects={[subject]} docs={[]} />);
     // 첫 렌더부터 보인다(로딩 문구로 가리지 않는다).
     expect(screen.getByText("SAT Math")).toBeInTheDocument();
-    await waitFor(() => expect(listSubjectCatalogAction).toHaveBeenCalled());
+    expect(listSubjectCatalogAction).not.toHaveBeenCalled();
   });
 });

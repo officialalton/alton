@@ -10,6 +10,8 @@ import CurriculumDocEditor from "./CurriculumDocEditor";
 import type { DocEditorData, CurriculumDocListItem } from "./curriculum-doc-data";
 import { publishAssetDocAction } from "./curriculum-asset-actions";
 import type { AdminSubject } from "./subject-data";
+import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
+import PillSubTabs from "@/app/components/PillSubTabs";
 
 const STATUS_LABEL: Record<string, string> = {
   draft: "초안",
@@ -311,26 +313,15 @@ export default function CurriculumDocsTab({
       {archiveError && <p className="text-[12.5px] text-red mb-3">{archiveError}</p>}
       {assetNotice && <p className="text-[12.5px] text-ink bg-grey-100 rounded-lg px-3 py-2 mb-3">{assetNotice}</p>}
 
-      <div className="flex gap-1 mb-3 border-b-[1.5px] border-grey-200">
-        {[
-          { archived: false, label: "현재" },
-          { archived: true, label: "보관됨" },
-        ].map((t) => (
-          <button
-            key={t.label}
-            onClick={() => setShowArchived(t.archived)}
-            className={
-              "text-[13px] font-bold px-3.5 py-2 -mb-[1.5px] border-b-[2px] " +
-              (showArchived === t.archived ? "border-ink text-ink" : "border-transparent text-grey-500")
-            }
-          >
-            {t.label}
-            <span className="text-grey-300 font-semibold ml-1">
-              {docs.filter((d) => (t.archived ? Boolean(d.archivedAt) : !d.archivedAt)).length}
-            </span>
-          </button>
-        ))}
-      </div>
+      <UnderlineSubTabs
+        className="mb-3"
+        items={[
+          { id: "current", label: `현재 (${docs.filter((d) => !d.archivedAt).length})` },
+          { id: "archived", label: `보관됨 (${docs.filter((d) => Boolean(d.archivedAt)).length})` },
+        ]}
+        activeId={showArchived ? "archived" : "current"}
+        onSelect={(id) => setShowArchived(id === "archived")}
+      />
 
       <input
         aria-label="교재 검색"
@@ -340,27 +331,16 @@ export default function CurriculumDocsTab({
         className="w-full text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 mb-3"
       />
 
-      <div className="flex gap-1.5 mb-3" role="group" aria-label="보기 방식">
-        {(
-          [
+      <div className="mb-3" role="group" aria-label="보기 방식">
+        <PillSubTabs
+          items={[
             { id: "keyword", label: "키워드별 보기" },
             { id: "unit", label: "단원별 보기" },
             { id: "list", label: "목록" },
-          ] as const
-        ).map((m) => (
-          <button
-            key={m.id}
-            type="button"
-            aria-pressed={viewMode === m.id}
-            onClick={() => setViewMode(m.id)}
-            className={
-              "text-[12px] font-bold px-3 py-1.5 rounded-full border-[1.5px] " +
-              (viewMode === m.id ? "bg-ink text-white border-ink" : "border-grey-200 text-ink")
-            }
-          >
-            {m.label}
-          </button>
-        ))}
+          ]}
+          activeId={viewMode}
+          onSelect={setViewMode}
+        />
       </div>
 
       {showArchived && (

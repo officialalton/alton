@@ -25,6 +25,7 @@ import {
   listPurchasesNeedingReconciliation,
   listOpenOrRecentPaymentDisputes,
 } from "./entitlement-actions";
+import { listMockExamSets } from "./mock-exam-actions";
 import { resolveAdminTab } from "./admin-tabs";
 import { loadAdminAccounts, type AdminAccount } from "./admin-accounts-data";
 import AdminShell from "./AdminShell";
@@ -99,6 +100,7 @@ export default async function AdminHomePage({
     purchasesNeedingReconciliation,
     openOrRecentPaymentDisputes,
     adminAccounts,
+    mockExamSets,
   ] = await Promise.all([
     need("home") ? loadAdminDashboard(supabase, user.id) : Promise.resolve(EMPTY_DASHBOARD),
     need("catalog", "users", "consult", "matching", "problem-bank") ? loadSubjectCatalog(supabase) : Promise.resolve([]),
@@ -126,6 +128,7 @@ export default async function AdminHomePage({
     need("entitlements") ? listPurchasesNeedingReconciliation() : Promise.resolve([]),
     need("entitlements") ? listOpenOrRecentPaymentDisputes() : Promise.resolve([]),
     need("admin-accounts") && isMasterAdmin ? loadAdminAccounts(supabase) : Promise.resolve([] as AdminAccount[]),
+    need("mock-exam") ? listMockExamSets() : Promise.resolve(undefined),
   ]);
 
   // 성능 corrective(2026-09-09, 2026-09-10 갱신): "사용자" 탭의 학생/선생님
@@ -165,6 +168,7 @@ export default async function AdminHomePage({
       openOrRecentPaymentDisputes={openOrRecentPaymentDisputes}
       isMasterAdmin={isMasterAdmin}
       adminAccounts={adminAccounts}
+      mockExamSets={mockExamSets}
     />
   );
 }

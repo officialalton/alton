@@ -54,7 +54,13 @@ export default function CatalogTab({
   }, []);
 
   useEffect(() => {
-    void loadSubjects({ background: initialSubjects.length > 0 });
+    // 2026-09-22(성능 전수 점검) — SSR(admin/page.tsx의 need("catalog", ...))이
+    // 이미 initialSubjects를 받아 왔으면 마운트 시 다시 조회하지 않는다(예전엔
+    // "배경 갱신"이라며 매번 다시 불렀는데, 갱신할 이유(신선도 문제) 없이 매
+    // 탭 진입마다 왕복만 늘었다). 목록을 바꾸는 동작(추가·수정)은 각자 명시적으로
+    // loadSubjects()를 다시 부른다.
+    if (initialSubjects.length > 0) return;
+    void loadSubjects();
     // 최초 1회만 — 이후 갱신은 명시적 동작(다시 시도)으로 한다.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

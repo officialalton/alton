@@ -5,6 +5,7 @@ import ConsentGapPanel from "./ConsentGapPanel";
 import ContractArchivePanel from "./ContractArchivePanel";
 import TeacherDocumentsPanel from "./TeacherDocumentsPanel";
 import CompanyDocumentsPanel from "./CompanyDocumentsPanel";
+import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 
 // P4-3 — 관리자 `문서` 탭. 회사 문서 / 계약 / 동의서 / 교사 서류 네 영역의
 // 아카이브다. **조회·다운로드만 한다** — 계약 발송·재발송·무효화 같은 쓰기
@@ -32,26 +33,9 @@ export default function DocumentsTab() {
   return (
     <div className="px-5 sm:px-8 py-6">
       <h2 className="text-[17px] font-extrabold text-ink mb-1">문서</h2>
-      <p className="text-[12.5px] text-grey-500 mb-4">
-        계약·동의서·교사 제출 서류와 회사 문서를 모아 보는 곳입니다. 여기서는 조회와
-        다운로드만 합니다.
-      </p>
+      <p className="text-[12.5px] text-grey-500 mb-4">여기서는 조회와 다운로드만 합니다.</p>
 
-      <div className="flex flex-wrap gap-1 mb-5 border-b border-grey-200">
-        {SUB_NAV.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => setSub(item.id)}
-            aria-pressed={sub === item.id}
-            className={
-              "text-[12.5px] font-bold px-3 py-2 -mb-px border-b-2 " +
-              (sub === item.id ? "border-ink text-ink" : "border-transparent text-grey-500")
-            }
-          >
-            {item.label}
-          </button>
-        ))}
-      </div>
+      <UnderlineSubTabs className="mb-5" items={SUB_NAV} activeId={sub} onSelect={setSub} />
 
       {sub === "consent" && <ConsentGapPanel />}
 

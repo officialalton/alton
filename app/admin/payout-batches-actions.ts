@@ -242,6 +242,21 @@ export async function getDisbursementGateEnabled(): Promise<boolean> {
   return Boolean(data);
 }
 
+// 2026-09-22(성능 전수 점검) — PayoutBatchesTab이 마운트할 때마다 이 둘을 따로
+// 부르던 것을 하나로 합친다(HomeworkTab/SettlementTab 등과 같은 패턴 — 매
+// 왕복이 각자 requireAdmin()을 다시 검증했다).
+export async function loadPayoutSettingsAction(): Promise<{ autoDispatchOn: boolean; gateOpen: boolean }> {
+  await requireAdmin();
+  const admin = createAdminClient();
+  const [{ data: autoRow, error: autoError }, { data: gateData, error: gateError }] = await Promise.all([
+    admin.from("payout_auto_dispatch_settings").select("enabled").eq("id", true).maybeSingle(),
+    admin.rpc("real_disbursement_enabled"),
+  ]);
+  if (autoError) throw new Error(autoError.message);
+  if (gateError) throw new Error(gateError.message);
+  return { autoDispatchOn: Boolean(autoRow?.enabled), gateOpen: Boolean(gateData) };
+}
+
 /** 승인됐는데 지급 예정일이 비어 있는 묶음(도입 전 승인 건 등)을 안전하게 채운다. */
 export async function ensurePayoutBatchScheduledDate(batchId: string): Promise<PayoutActionResult> {
   const { adminUserId } = await requireAdmin();

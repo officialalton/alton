@@ -16,8 +16,7 @@ import {
   closePayoutMonthNow,
   setPayoutBatchScheduledDate,
   setPayoutBatchAutoDispatch,
-  getAutoDispatchEnabled,
-  getDisbursementGateEnabled,
+  loadPayoutSettingsAction,
   ensurePayoutBatchScheduledDate,
   setAutoDispatchEnabled,
   dispatchPayoutBatchNow,
@@ -134,12 +133,15 @@ export default function PayoutBatchesTab({
   }
 
   useEffect(() => {
-    void getAutoDispatchEnabled()
-      .then(setAutoDispatchOn)
-      .catch(() => setAutoDispatchOn(null));
-    void getDisbursementGateEnabled()
-      .then(setGateOpen)
-      .catch(() => setGateOpen(null));
+    void loadPayoutSettingsAction()
+      .then(({ autoDispatchOn, gateOpen }) => {
+        setAutoDispatchOn(autoDispatchOn);
+        setGateOpen(gateOpen);
+      })
+      .catch(() => {
+        setAutoDispatchOn(null);
+        setGateOpen(null);
+      });
     void refresh();
     // 최초 진입 시 1회만 조회한다(이후 갱신은 각 액션이 직접 부른다).
   }, []);

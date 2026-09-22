@@ -6,13 +6,12 @@ import type { PayoutBatchListItem } from "./payout-batches-data";
 // P4-2(UAT 후속) — 탭이 마운트되면 목록을 직접 조회한다(SSR initialBatches만
 // 믿다가 "탭을 다시 열면 목록이 비어 보이는" 버그가 있었다). 기본 목은 SSR로
 // 받은 값과 같은 배열을 돌려주도록 beforeEach에서 채운다.
-const { listMock, deleteMock, closeMonthMock, autoDispatchMock, gateMock, ensureDateMock, externalMock } =
+const { listMock, deleteMock, closeMonthMock, loadSettingsMock, ensureDateMock, externalMock } =
   vi.hoisted(() => ({
   listMock: vi.fn(),
   deleteMock: vi.fn(),
   closeMonthMock: vi.fn(),
-  autoDispatchMock: vi.fn(),
-  gateMock: vi.fn(),
+  loadSettingsMock: vi.fn(),
   ensureDateMock: vi.fn(),
   externalMock: vi.fn(),
 }));
@@ -26,8 +25,7 @@ vi.mock("./payout-batches-actions", () => ({
   listPayoutBatchesAction: listMock,
   deletePayoutBatch: deleteMock,
   closePayoutMonthNow: closeMonthMock,
-  getAutoDispatchEnabled: autoDispatchMock,
-  getDisbursementGateEnabled: gateMock,
+  loadPayoutSettingsAction: loadSettingsMock,
   ensurePayoutBatchScheduledDate: ensureDateMock,
   setAutoDispatchEnabled: vi.fn(),
   setPayoutBatchScheduledDate: vi.fn(),
@@ -64,9 +62,8 @@ beforeEach(() => {
   listMock.mockResolvedValue([]);
   deleteMock.mockResolvedValue({ status: "deleted" });
   closeMonthMock.mockResolvedValue({ closed: 1, itemCount: 2 });
-  autoDispatchMock.mockResolvedValue(true);
   // 기본은 지급 경계가 닫힌 상태(현재 운영 상태와 같다).
-  gateMock.mockResolvedValue(false);
+  loadSettingsMock.mockResolvedValue({ autoDispatchOn: true, gateOpen: false });
   ensureDateMock.mockResolvedValue({ status: "ok" });
   externalMock.mockResolvedValue({ status: "ok" });
 });
@@ -213,7 +210,7 @@ describe("PayoutBatchesTab — 승인 묶음 운영 UX (2026-09-12 UAT 후속)",
   });
 
   it("Wise 연동 게이트가 닫혀 있으면 '지금 송금 요청'을 실행 버튼으로 두지 않는다", async () => {
-    gateMock.mockResolvedValue(false);
+    loadSettingsMock.mockResolvedValue({ autoDispatchOn: true, gateOpen: false });
     listMock.mockResolvedValue([approvedBatch()]);
     render(<PayoutBatchesTab initialBatches={[]} />);
     fireEvent.click(await screen.findByText("상세"));
@@ -227,7 +224,7 @@ describe("PayoutBatchesTab — 승인 묶음 운영 UX (2026-09-12 UAT 후속)",
   });
 
   it("게이트가 열리면 실행 버튼으로 바뀐다", async () => {
-    gateMock.mockResolvedValue(true);
+    loadSettingsMock.mockResolvedValue({ autoDispatchOn: true, gateOpen: true });
     listMock.mockResolvedValue([approvedBatch()]);
     render(<PayoutBatchesTab initialBatches={[]} />);
     fireEvent.click(await screen.findByText("상세"));

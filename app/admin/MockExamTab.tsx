@@ -4,14 +4,18 @@ import { useEffect, useState } from "react";
 import { listMockExamSets, type MockExamSetSummary } from "./mock-exam-actions";
 import MockExamSetsPanel from "./mock-exam/MockExamSetsPanel";
 
-// 2026-09-19 — AdminShell 탭 통합. 기존 /admin/mock-exam 독립 라우트는 SSR로
-// 초기 목록을 내려받았지만, 탭 전환 시엔 서버 컴포넌트를 다시 못 타므로
-// ProblemBankTab과 같은 패턴(클라이언트에서 마운트 시 직접 조회)으로 바꾼다.
-export default function MockExamTab() {
-  const [sets, setSets] = useState<MockExamSetSummary[] | null>(null);
+// 2026-09-22(성능 전수 점검) — "탭 전환은 서버 컴포넌트를 다시 못 탄다"는
+// 이전 가정은 실제로는 틀렸다(admin/page.tsx의 P1-3 주석 — 탭 전환은 이미
+// ?tab= 쿼리로 이 서버 컴포넌트를 다시 타는 RSC 왕복이다. catalog·booking·
+// consult 등 다른 탭은 전부 이 방식으로 SSR 시딩된다). initialSets가 있으면
+// (=admin/page.tsx의 need("mock-exam") 배치가 이미 받아 둔 경우) 마운트 시
+// 재조회를 건너뛴다.
+export default function MockExamTab({ initialSets }: { initialSets?: MockExamSetSummary[] }) {
+  const [sets, setSets] = useState<MockExamSetSummary[] | null>(initialSets ?? null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (initialSets) return;
     let cancelled = false;
     listMockExamSets()
       .then((rows) => {
@@ -23,6 +27,7 @@ export default function MockExamTab() {
     return () => {
       cancelled = true;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

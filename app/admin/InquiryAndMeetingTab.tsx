@@ -22,6 +22,8 @@ import {
 } from "./inquiry-and-meeting-actions";
 import MeetingRequestReviewPanel from "./MeetingRequestReviewPanel";
 import { useTabCachedData } from "./use-tab-cached-data";
+import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
+import PillSubTabs from "@/app/components/PillSubTabs";
 
 // 2026-09-10(P1 재진입 성능 배치) — "문의·면담"은 상태 변화가 상대적으로
 // 느린 화면으로 분류돼 TTL 30초를 쓴다. 문의함(기본 서브탭)은 admin/page.tsx가
@@ -112,19 +114,14 @@ function InquiryInbox({ initialThreads }: { initialThreads?: AdminInquiryThread[
   return (
     <div>
       <div className="flex items-center justify-between mb-2">
-        <div className="flex gap-1.5">
-          {(["open", "closed"] as const).map((s) => (
-            <button
-              key={s}
-              type="button"
-              onClick={() => setStatusFilter(s)}
-              aria-pressed={statusFilter === s}
-              className={"text-[12px] font-bold px-3 py-1.5 rounded-full " + (statusFilter === s ? "bg-ink text-white" : "bg-grey-100 text-grey-600")}
-            >
-              {s === "open" ? "진행 중 문의" : "지난 문의"}
-            </button>
-          ))}
-        </div>
+        <PillSubTabs
+          items={[
+            { id: "open", label: "진행 중 문의" },
+            { id: "closed", label: "지난 문의" },
+          ]}
+          activeId={statusFilter}
+          onSelect={setStatusFilter}
+        />
         <button
           onClick={refresh}
           disabled={refreshing}
@@ -517,17 +514,15 @@ export default function InquiryAndMeetingTab({ initialThreads }: { initialThread
   const [sub, setSub] = useState<SubTab>("inbox");
   return (
     <div className="p-6">
-      <div className="flex gap-1 mb-5">
-        {(["inbox", "meetings"] as SubTab[]).map((s) => (
-          <button
-            key={s}
-            onClick={() => setSub(s)}
-            className={"text-[12.5px] font-bold px-4 py-2 rounded-lg border-[1.5px] " + (sub === s ? "bg-ink text-white border-ink" : "border-grey-200 text-ink")}
-          >
-            {s === "inbox" ? "메신저" : "상담 신청"}
-          </button>
-        ))}
-      </div>
+      <UnderlineSubTabs
+        className="mb-5"
+        items={[
+          { id: "inbox", label: "메신저" },
+          { id: "meetings", label: "상담 신청" },
+        ]}
+        activeId={sub}
+        onSelect={setSub}
+      />
       {sub === "inbox" ? <InquiryInbox initialThreads={initialThreads} /> : <MeetingOperations />}
     </div>
   );
