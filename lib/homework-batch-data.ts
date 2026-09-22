@@ -25,6 +25,8 @@ export type HomeworkBatchItem = {
   gradedAt: string | null;
   grade: "correct" | "incorrect" | null;
   gradeComment: string | null;
+  /** 2026-09-22(사용자 지시) — Practice 탭에 저장했는지(모의고사와 동일한 opt-in 구조). */
+  savedToPractice?: boolean;
 };
 
 export type HomeworkBatch = {

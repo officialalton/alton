@@ -461,3 +461,12 @@ function readable(message: string): string {
   // Postgres 예외 메시지는 이미 한국어 문장이다 — 앞의 코드 접두만 뗀다.
   return message.replace(/^[A-Z0-9]{5}:\s*/, "");
 }
+
+/** 2026-09-22(사용자 지시) — 학생 포털 Practice 탭에 이 풀이판을 저장/해제한다.
+ * 모의고사와 같은 구조 — 저장을 누른 것만 Practice에 나타난다. */
+export async function toggleProblemWorkSavedToPracticeAction(workId: string, saved: boolean): Promise<{ ok: true } | { ok: false; error: string }> {
+  const { supabase } = await requireUser();
+  const { error } = await supabase.rpc("toggle_problem_work_saved_to_practice", { p_work_id: workId, p_saved: saved });
+  if (error) return { ok: false, error: readable(error.message) };
+  return { ok: true };
+}

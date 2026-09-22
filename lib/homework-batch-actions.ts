@@ -72,3 +72,13 @@ export async function gradeHomeworkBatchAction(
   if (error) return { ok: false, error: "채점을 저장하지 못했습니다." };
   return { ok: true, value: undefined };
 }
+
+/** 2026-09-22(사용자 지시) — 학생 포털 Practice 탭에 이 과제 문항을 저장/해제한다
+ * (모의고사와 같은 구조 — 저장한 문항만 Practice에 뜬다). homework_batches.items는
+ * jsonb 배열이라 저장 여부도 원소 안에 같이 둔다(toggle_homework_item_saved_to_practice RPC). */
+export async function toggleHomeworkItemSavedToPracticeAction(batchId: string, problemId: string, saved: boolean): Promise<ActionResult> {
+  const { supabase } = await requireUser();
+  const { error } = await supabase.rpc("toggle_homework_item_saved_to_practice", { p_batch_id: batchId, p_problem_id: problemId, p_saved: saved });
+  if (error) return { ok: false, error: error.message.replace(/^[A-Z0-9]{5}:\s*/, "") || "저장하지 못했습니다." };
+  return { ok: true, value: undefined };
+}

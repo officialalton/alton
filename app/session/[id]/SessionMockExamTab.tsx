@@ -17,13 +17,25 @@ const STATUS_LABEL: Record<string, string> = {
 /** 세션뷰 "모의고사" 탭 — 단어장 탭과 같은 방식으로, 별도 라우트로 나가지 않고 이
  * 탭 안에서 목록·응시·결과를 그대로 본다(2026-09-21 UAT 지적). 학생은 직접 풀고,
  * 교사는 읽기 전용으로 본다(진행 중이면 지금까지 푼 것을, 채점 완료면 결과를). */
-export default function SessionMockExamTab({ studentId, isTeacher }: { studentId: string; isTeacher: boolean }) {
-  const [attempts, setAttempts] = useState<MockExamAttemptSummary[] | null>(null);
+export default function SessionMockExamTab({
+  studentId,
+  isTeacher,
+  initialAttempts,
+}: {
+  studentId: string;
+  isTeacher: boolean;
+  /** 2026-09-22(UAT "모의고사 탭만 유독 로딩이 길다") — 세션 페이지가 SSR로 미리
+   * 받아 두면(다른 탭과 동일한 패턴) 탭을 열 때 따로 왕복하지 않는다. 없으면(구
+   * 호출 경로 대비) 기존처럼 클라이언트에서 받는다. */
+  initialAttempts?: MockExamAttemptSummary[];
+}) {
+  const [attempts, setAttempts] = useState<MockExamAttemptSummary[] | null>(initialAttempts ?? null);
   const [openId, setOpenId] = useState<string | null>(null);
   const [detail, setDetail] = useState<MockExamAttemptDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (initialAttempts) return;
     let cancelled = false;
     loadSessionMockExamAttemptsAction(studentId)
       .then((rows) => {
@@ -35,6 +47,7 @@ export default function SessionMockExamTab({ studentId, isTeacher }: { studentId
     return () => {
       cancelled = true;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [studentId]);
 
   function open(id: string) {

@@ -30,6 +30,7 @@ import {
   loadTeacherMaterialStrokes,
   loadStudentMaterialStrokes,
 } from "./annotation-events-actions";
+import { loadStudentMockExamAttempts } from "@/lib/mock-exam/attempt-data";
 
 // R8 1/N — cutover connection: 이 화면은 원래 legacy_sessions만 조회했다.
 // `loadNormalizedSession`이 legacy_sessions(R6 이전 레거시 세션뷰 테스트 데이터)와
@@ -83,7 +84,7 @@ export default async function SessionPage({
     (await loadMaterialData(supabase, session.curriculumDocId, session.id, session.studentId));
 
   // 1단계 — 서로 독립인 로더를 한 번에.
-  const [material, freezeState, sessionVocab, homeworkItems, lessonContext, pinnedProblems, homeworkBatches, smartNotesUrl] =
+  const [material, freezeState, sessionVocab, homeworkItems, lessonContext, pinnedProblems, homeworkBatches, smartNotesUrl, mockExamAttempts] =
     await Promise.all([
       loadMaterial(),
       // 고정 자료가 없을 때 "없었다"고 단정하지 않는다. 문제만 고정된 수업과 고정
@@ -107,6 +108,10 @@ export default async function SessionPage({
       // 2026-09-16(제품 오너 정정) — 정규 수업(v3)에 한해 학생·보호자에게 Smart Notes 회의록
       // 열람 링크를 보여준다(첫 상담은 대상 아님, RLS가 v3 sessions에 한정해 접근을 걸러준다).
       isV3 ? loadSmartNotesViewUrl(supabase, session.id) : Promise.resolve(null),
+      // 2026-09-22(UAT "모의고사 탭만 유독 로딩이 길다") — 다른 탭(교재·문제·과제·
+      // 단어장)은 전부 이렇게 SSR로 미리 받아 두는데 모의고사 탭만 클라이언트가
+      // 탭을 열 때 따로 요청을 보내 그 왕복만큼 더 느렸다. 같은 배치에 합류시킨다.
+      loadStudentMockExamAttempts(supabase, session.studentId),
     ]);
 
   const materialNotice = isV3 && freezeState ? frozenMaterialNotice(initialState, freezeState) : null;
@@ -167,6 +172,7 @@ export default async function SessionPage({
       currentUserId={user.id}
       homeworkBatches={homeworkBatches}
       smartNotesUrl={smartNotesUrl}
+      initialMockExamAttempts={mockExamAttempts}
     />
   );
 }

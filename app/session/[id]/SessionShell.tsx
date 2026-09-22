@@ -23,6 +23,7 @@ import SessionVocabTab from "./SessionVocabTab";
 import type { SessionVocabData } from "./vocab-data";
 import HomeworkTab from "./HomeworkTab";
 import SessionMockExamTab from "./SessionMockExamTab";
+import type { MockExamAttemptSummary } from "@/lib/mock-exam/attempt-data";
 import type { HomeworkItem } from "./homework-data";
 import type { HomeworkBatch } from "@/lib/homework-batch-data";
 import type { StrokePayload } from "./annotation-events-types";
@@ -94,6 +95,7 @@ export default function SessionShell({
   currentUserId,
   homeworkBatches = [],
   smartNotesUrl = null,
+  initialMockExamAttempts,
 }: {
   sessionId: string;
   studentId: string;
@@ -153,6 +155,8 @@ export default function SessionShell({
   homeworkBatches?: HomeworkBatch[];
   /** 2026-09-16 — 정규 수업 Smart Notes 회의록 열람 링크(학생·보호자 view-only). 없으면 표시 안 함. */
   smartNotesUrl?: string | null;
+  /** 2026-09-22 — 모의고사 탭도 다른 탭처럼 SSR로 미리 받아 탭을 열 때 왕복 없이 바로 보이게 한다. */
+  initialMockExamAttempts?: MockExamAttemptSummary[];
 }) {
   const router = useRouter();
   const isTeacher = viewerRole === "teacher";
@@ -340,9 +344,7 @@ export default function SessionShell({
                   : "text-grey-500 border-transparent")
               }
             >
-              {tab.id === "vocab" && isTeacher
-                ? `${studentName} 학생의 단어장`
-                : tab.label}
+              {tab.label}
             </button>
           ))}
           {isTeacher && activeTab === "material" && (
@@ -365,7 +367,7 @@ export default function SessionShell({
           )}
           {isTeacher && (
             <a
-              href={`/teacher/student/${studentId}/roadmap`}
+              href={`/teacher/student/${studentId}/roadmap?returnTo=${encodeURIComponent(`/session/${sessionId}`)}`}
               className="text-[12px] font-semibold text-grey-500 whitespace-nowrap"
             >
               🧭 학생 프로필·로드맵 보기
@@ -580,7 +582,7 @@ export default function SessionShell({
           homeworkBatches={homeworkBatches}
         />
       ) : activeTab === "mock-exam" ? (
-        <SessionMockExamTab studentId={studentId} isTeacher={isTeacher} />
+        <SessionMockExamTab studentId={studentId} isTeacher={isTeacher} initialAttempts={initialMockExamAttempts} />
       ) : activeTab === "prep" ? (
         prep ? (
           <>

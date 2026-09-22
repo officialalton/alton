@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { HomeworkBatch, HomeworkBatchItem } from "@/lib/homework-batch-data";
-import { submitHomeworkAnswerAction, gradeHomeworkBatchAction } from "@/lib/homework-batch-actions";
+import { submitHomeworkAnswerAction, gradeHomeworkBatchAction, toggleHomeworkItemSavedToPracticeAction } from "@/lib/homework-batch-actions";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import LearningText from "@/app/session/[id]/LearningText";
 import MockExamMathTools, { MockExamToolButtons, type MathToolsOpen } from "@/app/session/[id]/MockExamMathTools";
@@ -194,15 +194,53 @@ function BatchRunner({
   const [error, setError] = useState<string | null>(null);
   const [overrides, setOverrides] = useState<Record<string, { grade: "correct" | "incorrect"; comment?: string }>>({});
   const [grading, setGrading] = useState(false);
+  // 2026-09-22(사용자 지시) — 모의고사와 같은 소거·하이라이트·"문제 저장" 도구를
+  // 과제에도 둔다(MockExamTakeClient와 같은 패턴).
+  const [eliminateMode, setEliminateMode] = useState(false);
+  const [eliminated, setEliminated] = useState<Record<string, Set<number>>>({});
+  const [highlightMode, setHighlightMode] = useState(false);
+  const highlightSupported = typeof window !== "undefined" && "highlights" in CSS;
+  const highlightObjRef = useRef<Highlight | null>(null);
+  const passageRef = useRef<HTMLDivElement | null>(null);
+  const [saved, setSaved] = useState(batch.items[0]?.savedToPractice ?? false);
+  const [saveBusy, setSaveBusy] = useState(false);
+
+  useEffect(() => {
+    if (!highlightSupported) return;
+    highlightObjRef.current = new Highlight();
+    CSS.highlights.set("exam-highlight", highlightObjRef.current);
+    return () => {
+      CSS.highlights.delete("exam-highlight");
+    };
+  }, [highlightSupported, i]);
 
   const item = batch.items[i];
   if (!item) return null;
   const allGraded = batch.items.every((it) => it.graded);
 
+  function handlePassageMouseUp() {
+    if (!highlightMode || !highlightSupported || !highlightObjRef.current) return;
+    const selection = window.getSelection();
+    if (!selection || selection.isCollapsed || selection.rangeCount === 0) return;
+    const range = selection.getRangeAt(0);
+    if (!passageRef.current?.contains(range.commonAncestorContainer)) return;
+    highlightObjRef.current.add(range.cloneRange());
+    selection.removeAllRanges();
+  }
+
+  async function toggleSaved() {
+    const next = !saved;
+    setSaved(next);
+    setSaveBusy(true);
+    await toggleHomeworkItemSavedToPracticeAction(batch.id, item.problemId, next);
+    setSaveBusy(false);
+  }
+
   function goTo(idx: number) {
     setI(idx);
     setResponse(batch.items[idx]?.response ?? "");
     setError(null);
+    setSaved(batch.items[idx]?.savedToPractice ?? false);
   }
 
   async function submit() {
@@ -270,7 +308,39 @@ function BatchRunner({
       <div className="flex-1 min-w-0">
         <div className="flex items-center justify-between mb-3">
           <span className="text-[12px] font-bold text-grey-500">과제 {item.position} · {FORMAT_LABEL[item.format]}</span>
-          <div className="flex gap-2">
+          <div className="flex items-center gap-2">
+            {viewerRole === "student" && (
+              <button
+                type="button"
+                onClick={() => void toggleSaved()}
+                disabled={saveBusy}
+                aria-pressed={saved}
+                className={`rounded-full border px-2 py-0.5 text-[11px] font-bold ${saved ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-500"}`}
+              >
+                {saved ? "저장됨" : "+ 문제 저장"}
+              </button>
+            )}
+            {highlightSupported && (
+              <button
+                type="button"
+                onClick={() => setHighlightMode((v) => !v)}
+                aria-pressed={highlightMode}
+                className={`rounded border px-2 py-1 text-[11px] font-bold ${highlightMode ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-500"}`}
+              >
+                Highlight
+              </button>
+            )}
+            {item.format === "mc" && item.options && (
+              <button
+                type="button"
+                onClick={() => setEliminateMode((v) => !v)}
+                aria-pressed={eliminateMode}
+                className={`rounded border px-2 py-1 text-[11px] font-bold ${eliminateMode ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-500"}`}
+                title="Answer Eliminator"
+              >
+                Eliminator
+              </button>
+            )}
             <button disabled={i === 0} onClick={() => goTo(i - 1)} className="text-[12px] font-semibold text-grey-500 disabled:opacity-30">이전 과제</button>
             <button disabled={i === batch.items.length - 1} onClick={() => goTo(i + 1)} className="text-[12px] font-semibold text-ink disabled:opacity-30">다음 과제</button>
           </div>
@@ -278,9 +348,16 @@ function BatchRunner({
 
         {/* 2026-09-21(UAT 지적) — 이 화면만 LearningText를 안 써서 마크다운 표·KaTeX 수식이
             원문 그대로("$y < -2x - 7$", "|x|y||---|---|..." 등) 노출되고 있었다. */}
-        {item.passage && <LearningText text={item.passage} className="mb-3 text-[13.5px]" />}
-        {item.figure != null && <ProblemFigure spec={item.figure} className="mb-3" />}
-        {item.question && <LearningText text={item.question} className="mb-3 font-bold text-[14px]" />}
+        <div ref={passageRef} onMouseUp={handlePassageMouseUp}>
+          {item.passage && <LearningText text={item.passage} className="mb-3 text-[13.5px]" />}
+          {item.figure != null && <ProblemFigure spec={item.figure} className="mb-3" />}
+          {item.question && <LearningText text={item.question} className="mb-3 font-bold text-[14px]" />}
+        </div>
+        {highlightMode && highlightSupported && (
+          <button type="button" onClick={() => highlightObjRef.current?.clear()} className="mb-3 text-[11px] font-semibold text-grey-500 underline">
+            하이라이트 지우기
+          </button>
+        )}
 
         {viewerRole === "student" && !item.graded && readOnly && (
           <div className="mb-3 text-[13px] text-ink">
@@ -292,15 +369,32 @@ function BatchRunner({
           <div className="mb-3">
             {item.format === "mc" && item.options ? (
               <div className="flex flex-col gap-2">
-                {item.options.map((opt, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => { setResponse(String(idx)); }}
-                    className={"text-left text-[13.5px] px-3.5 py-2.5 rounded-[10px] border-[1.5px] " + (response === String(idx) ? "border-ink bg-grey-100" : "border-grey-200")}
-                  >
-                    <LearningText text={opt} />
-                  </button>
-                ))}
+                {item.options.map((opt, idx) => {
+                  const isEliminated = eliminated[item.problemId]?.has(idx) ?? false;
+                  return (
+                    <button
+                      key={idx}
+                      onClick={() => {
+                        if (eliminateMode) {
+                          setEliminated((prev) => {
+                            const next = new Set(prev[item.problemId]);
+                            if (next.has(idx)) next.delete(idx);
+                            else next.add(idx);
+                            return { ...prev, [item.problemId]: next };
+                          });
+                          return;
+                        }
+                        setResponse(String(idx));
+                      }}
+                      className={
+                        "text-left text-[13.5px] px-3.5 py-2.5 rounded-[10px] border-[1.5px] " +
+                        (isEliminated ? "border-grey-200 text-grey-400 line-through" : response === String(idx) ? "border-ink bg-grey-100" : "border-grey-200")
+                      }
+                    >
+                      <LearningText text={opt} />
+                    </button>
+                  );
+                })}
               </div>
             ) : (
               <textarea

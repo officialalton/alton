@@ -295,7 +295,7 @@ describe("SessionShell — 탭 노출", () => {
     );
     expect(screen.getByText("교재")).toBeInTheDocument();
     expect(screen.getAllByText("과제").length).toBeGreaterThan(0);
-    expect(screen.getByText(`${baseProps.studentName} 학생의 단어장`)).toBeInTheDocument();
+    expect(screen.getByText("단어장")).toBeInTheDocument();
     expect(screen.queryByText("연습장")).not.toBeInTheDocument();
     expect(screen.queryByText("문제 기록")).not.toBeInTheDocument();
   });

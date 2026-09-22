@@ -15,7 +15,9 @@ import {
   openProblemWork,
   refreshSessionProblems,
   submitProblemWork,
+  toggleProblemWorkSavedToPracticeAction,
 } from "./problem-work-actions";
+import ProblemNoteCanvas from "@/app/components/ProblemNoteCanvas";
 import ProblemWorkBoardCanvas, { type ProblemBoardHandle } from "./ProblemWorkBoard";
 import LearningText from "./LearningText";
 import RwStimulusView from "./RwStimulusView";
@@ -143,6 +145,26 @@ export default function ProblemsPanel({
   const [mathToolsOpen, setMathToolsOpen] = useState<MathToolsOpen>(null);
   const toggleMathTools = (which: "calculator" | "reference") => setMathToolsOpen((cur) => (cur === which ? null : which));
 
+  // 2026-09-22(사용자 지시) — 모의고사에 있는 소거·하이라이트·화이트보드·"문제 저장"을
+  // 학생이 보는 모든 문제·과제에도 둔다(MockExamTakeClient와 같은 패턴).
+  const [eliminateMode, setEliminateMode] = useState(false);
+  const [eliminated, setEliminated] = useState<Record<string, Set<number>>>({});
+  const [highlightMode, setHighlightMode] = useState(false);
+  const highlightSupported = typeof window !== "undefined" && "highlights" in CSS;
+  const highlightObjRef = useRef<Highlight | null>(null);
+  const passageRef = useRef<HTMLDivElement | null>(null);
+  const [savedIds, setSavedIds] = useState<Record<string, boolean>>({});
+  const [saveBusyId, setSaveBusyId] = useState<string | null>(null);
+
+  async function toggleSavedToPractice(p: SessionProblem) {
+    if (!p.latestWorkId) return;
+    const next = !(savedIds[p.problemId] ?? false);
+    setSavedIds((prev) => ({ ...prev, [p.problemId]: next }));
+    setSaveBusyId(p.problemId);
+    await toggleProblemWorkSavedToPracticeAction(p.latestWorkId, next);
+    setSaveBusyId(null);
+  }
+
   // 문제는 한 번에 하나(슬라이드). 왼쪽 목차와 이전/다음으로 오간다.
   const [current, setCurrent] = useState(0);
   const safeCurrent = Math.min(current, Math.max(0, problems.length - 1));
@@ -191,6 +213,25 @@ export default function ProblemsPanel({
   }
 
   const currentProblem = visibleProblems[0];
+
+  useEffect(() => {
+    if (!highlightSupported) return;
+    highlightObjRef.current = new Highlight();
+    CSS.highlights.set("exam-highlight", highlightObjRef.current);
+    return () => {
+      CSS.highlights.delete("exam-highlight");
+    };
+  }, [highlightSupported, safeCurrent]);
+
+  function handlePassageMouseUp() {
+    if (!highlightMode || !highlightSupported || !highlightObjRef.current) return;
+    const selection = window.getSelection();
+    if (!selection || selection.isCollapsed || selection.rangeCount === 0) return;
+    const range = selection.getRangeAt(0);
+    if (!passageRef.current?.contains(range.commonAncestorContainer)) return;
+    highlightObjRef.current.add(range.cloneRange());
+    selection.removeAllRanges();
+  }
 
   // 서술형 답 — 글 상자에 타이핑, 쓰는 대로 저장(잠깐 멈추면). 2026-09-14 UAT: 화이트보드가 아니다.
   const [essayDraft, setEssayDraft] = useState<Record<string, string>>({});
@@ -406,6 +447,40 @@ export default function ProblemsPanel({
             {safeCurrent + 1} / {problems.length}
           </span>
           <div className="flex items-center gap-1.5">
+            {isStudent && currentProblem?.latestWorkId && (
+              <button
+                type="button"
+                disabled={saveBusyId === currentProblem.problemId}
+                onClick={() => void toggleSavedToPractice(currentProblem)}
+                aria-pressed={savedIds[currentProblem.problemId] ?? false}
+                className={`rounded-full border px-2 py-0.5 text-[11px] font-bold ${
+                  savedIds[currentProblem.problemId] ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-500"
+                }`}
+              >
+                {savedIds[currentProblem.problemId] ? "저장됨" : "+ 문제 저장"}
+              </button>
+            )}
+            {isStudent && highlightSupported && (
+              <button
+                type="button"
+                onClick={() => setHighlightMode((v) => !v)}
+                aria-pressed={highlightMode}
+                className={`rounded border px-2 py-1 text-[11px] font-bold ${highlightMode ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-500"}`}
+              >
+                Highlight
+              </button>
+            )}
+            {isStudent && currentProblem?.format === "mc" && (
+              <button
+                type="button"
+                onClick={() => setEliminateMode((v) => !v)}
+                aria-pressed={eliminateMode}
+                className={`rounded border px-2 py-1 text-[11px] font-bold ${eliminateMode ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-500"}`}
+                title="Answer Eliminator"
+              >
+                Eliminator
+              </button>
+            )}
             {hasMathProblem && (
               <MockExamToolButtons calculatorAllowed referenceSheetAllowed open={mathToolsOpen} onToggle={toggleMathTools} />
             )}
@@ -477,29 +552,36 @@ export default function ProblemsPanel({
                 )}
               </header>
 
-              {p.passage ? (
-                <RwStimulusView
-                  passage={stripInlineOptions(p.passage, p.options)}
-                  className="learning-body text-[15px] sm:text-[16px] leading-[1.8] text-ink mb-5"
-                />
-              ) : (
-                <p className="text-[13px] text-grey-500 mb-4">지문이 없는 문제입니다.</p>
-              )}
+              <div ref={p.problemId === currentProblem?.problemId ? passageRef : undefined} onMouseUp={handlePassageMouseUp}>
+                {p.passage ? (
+                  <RwStimulusView
+                    passage={stripInlineOptions(p.passage, p.options)}
+                    className="learning-body text-[15px] sm:text-[16px] leading-[1.8] text-ink mb-5"
+                  />
+                ) : (
+                  <p className="text-[13px] text-grey-500 mb-4">지문이 없는 문제입니다.</p>
+                )}
 
-              {/* 그래프/도형 선택지(figure_choice)는 선택지 칸 안에 그림을 그린다 — 위에 따로 그리지 않는다.
-                  2026-09-19(제품 오너 발견) — 지문이 "as shown below" 처럼 자료가 아래에 있다고
-                  서술하는데 자료가 지문보다 먼저 그려져 서술과 화면 순서가 어긋났다 — 지문 다음으로 옮긴다. */}
-              {p.figure != null && (p.figure as { type?: string }).type !== "figure_choice" && <ProblemFigure spec={p.figure} className="mb-4" />}
+                {/* 그래프/도형 선택지(figure_choice)는 선택지 칸 안에 그림을 그린다 — 위에 따로 그리지 않는다.
+                    2026-09-19(제품 오너 발견) — 지문이 "as shown below" 처럼 자료가 아래에 있다고
+                    서술하는데 자료가 지문보다 먼저 그려져 서술과 화면 순서가 어긋났다 — 지문 다음으로 옮긴다. */}
+                {p.figure != null && (p.figure as { type?: string }).type !== "figure_choice" && <ProblemFigure spec={p.figure} className="mb-4" />}
 
-              {p.statements && p.statements.length > 0 && (
-                <ol className="mb-4 pl-1" data-testid="statements">
-                  {p.statements.map((st, i) => (
-                    <li key={i} className="flex gap-3 text-[15px] leading-[1.75] text-ink py-0.5">
-                      <span className="font-bold w-7 shrink-0">{["I", "II", "III", "IV", "V"][i] ?? i + 1}.</span>
-                      <LearningText text={st} className="learning-body" />
-                    </li>
-                  ))}
-                </ol>
+                {p.statements && p.statements.length > 0 && (
+                  <ol className="mb-4 pl-1" data-testid="statements">
+                    {p.statements.map((st, i) => (
+                      <li key={i} className="flex gap-3 text-[15px] leading-[1.75] text-ink py-0.5">
+                        <span className="font-bold w-7 shrink-0">{["I", "II", "III", "IV", "V"][i] ?? i + 1}.</span>
+                        <LearningText text={st} className="learning-body" />
+                      </li>
+                    ))}
+                  </ol>
+                )}
+              </div>
+              {isStudent && highlightMode && highlightSupported && p.problemId === currentProblem?.problemId && (
+                <button type="button" onClick={() => highlightObjRef.current?.clear()} className="mb-3 text-[11px] font-semibold text-grey-500 underline">
+                  하이라이트 지우기
+                </button>
               )}
 
               {p.options.length > 0 && (
@@ -507,20 +589,35 @@ export default function ProblemsPanel({
                   {p.options.map((opt, i) => {
                     const mine = p.myChoice === i;
                     const correct = answerShown(p) && p.correctIndex === i;
+                    const isCurrent = p.problemId === currentProblem?.problemId;
+                    const isEliminated = isCurrent && (eliminated[p.problemId]?.has(i) ?? false);
                     return (
                       <li key={i}>
                         <button
                           type="button"
                           disabled={!canPick || busy}
-                          onClick={() => void pickChoice(p, i)}
+                          onClick={() => {
+                            if (isCurrent && eliminateMode) {
+                              setEliminated((prev) => {
+                                const next = new Set(prev[p.problemId]);
+                                if (next.has(i)) next.delete(i);
+                                else next.add(i);
+                                return { ...prev, [p.problemId]: next };
+                              });
+                              return;
+                            }
+                            void pickChoice(p, i);
+                          }}
                           aria-pressed={mine}
                           className={
                             "w-full text-left text-[14.5px] leading-[1.75] py-2 px-3.5 rounded-lg mb-1.5 border-[1.5px] " +
-                            (correct
-                              ? "bg-green/10 font-bold text-ink border-green/30"
-                              : mine
-                                ? "border-ink text-ink"
-                                : "border-transparent text-ink") +
+                            (isEliminated
+                              ? "border-grey-200 text-grey-400 line-through"
+                              : correct
+                                ? "bg-green/10 font-bold text-ink border-green/30"
+                                : mine
+                                  ? "border-ink text-ink"
+                                  : "border-transparent text-ink") +
                             (canPick ? " hover:bg-grey-100" : "")
                           }
                         >
@@ -641,6 +738,19 @@ export default function ProblemsPanel({
                 <p className="text-[12px] text-grey-500 mb-4">
                   풀이판에 풀고 제출하세요. 선생님이 채점하면 정답과 해설이 열립니다.
                 </p>
+              )}
+
+              {/* 2026-09-22(사용자 지시) — 모의고사·과제와 같은 화이트보드를 "문제" 탭에도.
+                  세션 실시간 공유 필기(PdfPageAnnotationLayer, 위에서 시트 전체를 덮는 레이어)와는
+                  별개의 개인 스냅샷 저장/재생 도구다. */}
+              {!p.planned && (
+                <ProblemNoteCanvas
+                  context="problem"
+                  targetId={sessionId}
+                  itemId={p.problemId}
+                  authorId={isStudent ? undefined : studentId}
+                  readOnly={!isStudent}
+                />
               )}
 
               {p.graded && !isTeacherLike && (

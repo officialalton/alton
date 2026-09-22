@@ -97,6 +97,71 @@ async function loadSavedMockExamPractice(studentId: string): Promise<ProblemHist
   });
 }
 
+// 2026-09-22(사용자 지시) — "과제" 탭도 저장한 문항만 Practice에 뜬다. 지금 과제는
+// homework_batches.items(문항 스냅샷을 담은 jsonb 배열, 개별 행이 아니다)라 저장
+// 여부도 그 배열 원소 안에 savedToPractice로 같이 둔다(toggle_homework_item_saved_to_practice).
+type SavedHomeworkItem = {
+  problemId: string;
+  format: ProblemHistoryEntry["format"];
+  passage: string | null;
+  question: string | null;
+  options: string[] | null;
+  correctIndex: number | null;
+  answers: string[] | null;
+  explanation: string | null;
+  figure: unknown;
+  response: string | null;
+  submittedAt: string | null;
+  graded: boolean;
+  gradedAt: string | null;
+  grade: "correct" | "incorrect" | null;
+  gradeComment: string | null;
+  savedToPractice?: boolean;
+};
+
+async function loadSavedHomeworkPractice(studentId: string): Promise<ProblemHistoryEntry[]> {
+  const admin = createAdminClient();
+  const { data: batches } = await admin
+    .from("homework_batches")
+    .select("id, label, created_at, items, subject:subjects(name)")
+    .eq("student_id", studentId);
+  if (!batches?.length) return [];
+
+  const entries: ProblemHistoryEntry[] = [];
+  for (const b of batches) {
+    const items = Array.isArray(b.items) ? (b.items as unknown as SavedHomeworkItem[]) : [];
+    const subjectName = (one(b.subject)?.name as string | undefined) ?? "";
+    for (const it of items) {
+      if (!it.savedToPractice) continue;
+      const graded = Boolean(it.gradedAt);
+      entries.push({
+        workId: `hw:${b.id}:${it.problemId}`,
+        sessionId: b.id as string,
+        source: "homework",
+        subjectName,
+        startsAt: (b.created_at as string | null) ?? null,
+        unitTitle: (b.label as string | null) ?? null,
+        format: it.format,
+        passage: [it.passage ?? "", it.question ?? ""].filter(Boolean).join("\n\n"),
+        options: it.options ?? [],
+        figure: it.figure ?? null,
+        myChoice: it.format === "mc" && it.response != null ? Number(it.response) : null,
+        myText: it.format !== "mc" ? it.response : null,
+        submittedAt: it.submittedAt,
+        graded,
+        grade: graded ? it.grade : null,
+        gradeComment: graded ? it.gradeComment : null,
+        correctIndex: graded ? it.correctIndex : null,
+        acceptedAnswers: graded ? it.answers : null,
+        explanation: graded ? it.explanation : null,
+        satDomain: null,
+        skillCode: null,
+      });
+    }
+  }
+  return entries;
+}
+
 export async function loadProblemHistory(studentId: string): Promise<ProblemHistoryEntry[]> {
   const admin = createAdminClient();
   const { data: work } = await admin
@@ -105,10 +170,13 @@ export async function loadProblemHistory(studentId: string): Promise<ProblemHist
       "id, session_id, problem_id, problem_version_id, source, submitted_at, submitted_choice_index, submitted_text, grade, grade_comment, graded_at, attempt_no"
     )
     .eq("student_id", studentId)
+    // 2026-09-22(사용자 지시) — 모의고사와 같은 정책으로 바뀌었다: 풀었다고 전부
+    // 자동으로 뜨지 않고, 학생이 "문제 저장"을 누른 것만 Practice에 나타난다.
+    .eq("saved_to_practice", true)
     .or("submitted_at.not.is.null,graded_at.not.is.null")
     .order("submitted_at", { ascending: false, nullsFirst: false });
-  const savedMockExam = await loadSavedMockExamPractice(studentId);
-  if (!work?.length) return savedMockExam;
+  const [savedMockExam, savedHomework] = await Promise.all([loadSavedMockExamPractice(studentId), loadSavedHomeworkPractice(studentId)]);
+  if (!work?.length) return [...savedMockExam, ...savedHomework];
 
   // 같은 문제를 여러 번 풀었으면(풀이형 다시 풀기) 가장 최근 시도만.
   const latest = new Map<string, (typeof work)[number]>();
@@ -188,5 +256,5 @@ export async function loadProblemHistory(studentId: string): Promise<ProblemHist
     };
   }) as ProblemHistoryEntry[];
 
-  return [...lessonHomeworkEntries, ...savedMockExam];
+  return [...lessonHomeworkEntries, ...savedMockExam, ...savedHomework];
 }

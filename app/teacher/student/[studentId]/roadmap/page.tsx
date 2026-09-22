@@ -8,10 +8,13 @@ import RoadmapView from "@/app/components/RoadmapView";
 // 조회 자체를 막으므로, 여기서는 로그인만 확인하고 나머지는 RLS에 맡긴다.
 export default async function TeacherStudentRoadmapPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ studentId: string }>;
+  searchParams: Promise<{ returnTo?: string }>;
 }) {
   const { studentId } = await params;
+  const { returnTo } = await searchParams;
   const { supabase, profile } = await requireUser();
   if (profile?.role !== "teacher" && profile?.role !== "admin") {
     return (
@@ -22,12 +25,16 @@ export default async function TeacherStudentRoadmapPage({
   }
 
   const data = await loadRoadmapData(supabase, studentId);
+  // 2026-09-22(사용자 지시) — 이 페이지는 CurriculumTab과 수업 세션뷰 둘 다에서
+  // 들어올 수 있는데 "뒤로"가 항상 커리큘럼 탭으로 고정돼 있었다. 세션에서 온
+  // 경우 세션뷰로 돌아가게 returnTo를 쓴다(내부 경로가 아니면 무시 — 오픈 리다이렉트 방지).
+  const backHref = returnTo && returnTo.startsWith("/") && !returnTo.startsWith("//") ? returnTo : "/teacher?tab=curriculum";
 
   return (
     <div className="min-h-screen bg-white">
       <div className="max-w-[720px] mx-auto px-6 pt-6">
         <Link
-          href="/teacher?tab=curriculum"
+          href={backHref}
           className="text-[13px] text-grey-600 font-semibold border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform inline-block"
         >
           ← 뒤로
