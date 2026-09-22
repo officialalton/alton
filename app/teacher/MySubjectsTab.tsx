@@ -63,15 +63,8 @@ export default function MySubjectsTab({
 
   return (
     <div className="max-w-[640px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-1.5">
-        내 과목 커리큘럼
-      </h1>
-      <p className="text-[13px] text-grey-500 mb-5">
-        과목을 맡으면 관리자 기준본의 회차와 키워드가 여기로 내려옵니다. 여기서 고친
-        구성은 <strong className="text-ink font-bold">앞으로 새로 배정받는 학생</strong>의
-        커리큘럼 기본값이 됩니다. 이미 배정된 학생의 진행 상황은 바뀌지 않습니다.
-      </p>
-
+      {/* 2026-09-22(사용자 지시) — 설명 문단을 없애고, 현재/보관됨 서브탭이
+          "내 과목" 바로 아래에 오도록 한다. */}
       <div className="flex gap-1 mb-3 border-b-[1.5px] border-grey-200">
         {[
           { archived: false, label: "현재" },

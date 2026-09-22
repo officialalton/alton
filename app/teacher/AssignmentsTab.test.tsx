@@ -3,10 +3,15 @@ import { describe, expect, it, vi, beforeEach } from "vitest";
 import AssignmentsTab from "./AssignmentsTab";
 import type { TeacherAssignedSubject } from "./assignments-data";
 import { requestOwnTerminationAsTeacher, listMyTerminationRequests } from "./teacher-assignment-termination-actions";
+import { loadTeacherStudentRoadmapAction } from "./student-roadmap-actions";
 
 vi.mock("./teacher-assignment-termination-actions", () => ({
   requestOwnTerminationAsTeacher: vi.fn(),
   listMyTerminationRequests: vi.fn(),
+}));
+
+vi.mock("./student-roadmap-actions", () => ({
+  loadTeacherStudentRoadmapAction: vi.fn(),
 }));
 
 const current: TeacherAssignedSubject[] = [
@@ -90,5 +95,82 @@ describe("AssignmentsTab — M3 배정 종료 요청 / 2026-09-22 배정 중·�
   it("onOpenOperatingCurriculum이 없으면 '커리큘럼' 버튼이 보이지 않는다", () => {
     render(<AssignmentsTab current={current} past={[]} />);
     expect(screen.queryByText("커리큘럼")).toBeNull();
+  });
+
+  // 2026-09-22(사용자 지시) — "오버뷰/로드맵/일정"이 별도 페이지로 나가버리면
+  // 좌측 네비게이션이 사라진다. 탭 안에서 그대로 전환되어야 한다(페이지 이동 없음).
+  it("'로드맵' 버튼을 누르면 페이지 이동 없이 탭 안에서 로드맵이 보이고, '뒤로'로 목록에 돌아간다", async () => {
+    (loadTeacherStudentRoadmapAction as ReturnType<typeof vi.fn>).mockResolvedValue({
+      studentId: "st1",
+      studentName: "김학생",
+      grade: null,
+      schoolName: null,
+      gpa: null,
+      gpaScale: null,
+      classRank: null,
+      classSize: null,
+      academicProfile: {
+        graduationYear: null,
+        curriculumType: null,
+        currentSubjects: [],
+        honorsCount: null,
+        apCount: null,
+        collegeCoursesCount: null,
+        ibHlCount: null,
+        ibSlCount: null,
+        schoolApIbOfferedCount: null,
+      },
+      testRecords: [],
+      apExams: [],
+      demographics: {
+        homeCountry: null,
+        zipCode: null,
+        residencyStatus: null,
+        gender: null,
+        raceEthnicity: null,
+        financialAidIntent: null,
+        maxAnnualBudget: null,
+        householdIncomeRange: null,
+        firstGeneration: null,
+        legacySchools: [],
+        religiousAffiliation: null,
+        recruitedAthlete: null,
+        specialSchoolInterests: [],
+      },
+      collegeInterests: {
+        intendedMajors: [],
+        careerInterests: [],
+        targetCountries: [],
+        targetCollegeTypes: [],
+        targetColleges: [],
+        targetApplicationTiming: null,
+      },
+      activities: [],
+      awards: [],
+      prepItems: [],
+      milestones: [],
+      latestMonthlyReview: null,
+      completeness: { filledSections: 0, totalSections: 5 },
+    });
+    render(<AssignmentsTab current={current} past={[]} />);
+
+    fireEvent.click(screen.getByText("로드맵"));
+    expect(await screen.findByText("김학생 학생 프로필 · 로드맵")).toBeInTheDocument();
+    expect(loadTeacherStudentRoadmapAction).toHaveBeenCalledWith("st1");
+
+    fireEvent.click(screen.getByText("← 뒤로"));
+    expect(screen.getByText("SAT Math")).toBeInTheDocument();
+  });
+
+  it("'오버뷰'/'일정' 버튼을 누르면 페이지 이동 없이 플래너 탭이 보인다", () => {
+    render(<AssignmentsTab current={current} past={[]} />);
+
+    fireEvent.click(screen.getByText("일정"));
+    expect(screen.getByText("김학생 학습 플래너")).toBeInTheDocument();
+    expect(screen.getByText("일정 탭은 준비 중입니다 — 곧 제공됩니다.")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText("← 뒤로"));
+    fireEvent.click(screen.getByText("오버뷰"));
+    expect(screen.getByText("오버뷰 탭은 준비 중입니다 — 곧 제공됩니다.")).toBeInTheDocument();
   });
 });
