@@ -634,7 +634,27 @@ export function QuizRunner({
   const [submitting, setSubmitting] = useState(false);
   const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved">("idle");
   const [result, setResult] = useState<{ score: number; total: number; finalAnswers: number[] } | null>(null);
+  // 2026-09-21(UAT 지적) — "여기에도 단어 저장하기 기능 있어야겠다": 틀린 단어만 결과
+  // 화면에서 자동으로 "오답 노트"에 저장되던 것과 별개로, 풀이 중에도 아무 단어나 바로
+  // 내 단어장에 저장할 수 있어야 한다.
+  const [savedWords, setSavedWords] = useState<Set<string>>(new Set());
+  const [savingWord, setSavingWord] = useState(false);
   const item: VocabQuizItem | undefined = quiz.items[i];
+
+  async function saveCurrentWord() {
+    if (!item || savedWords.has(item.word)) return;
+    setSavingWord(true);
+    const result = await addMyVocabWordAction({
+      word: item.word,
+      definition: item.options[item.correctIndex],
+      example: item.example1 ?? undefined,
+      example2: item.example2 ?? undefined,
+      synonymWords: item.synonymWords ?? undefined,
+      antonymWords: item.antonymWords ?? undefined,
+    });
+    setSavingWord(false);
+    if (result.ok) setSavedWords((prev) => new Set(prev).add(item.word));
+  }
   const allAnswered = useMemo(() => answers.every((a) => a !== null), [answers]);
   const runningScore = answers.reduce((n: number, a, idx) => n + (a !== null && a === quiz.items[idx].correctIndex ? 1 : 0), 0);
 
@@ -712,7 +732,19 @@ export function QuizRunner({
           <button onClick={onExit} className="text-[12px] text-grey-500">나가기</button>
         </span>
       </div>
-      <h3 className="text-[18px] font-extrabold text-ink mb-4">{item.definitionShown}</h3>
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-[18px] font-extrabold text-ink">{item.definitionShown}</h3>
+        <button
+          type="button"
+          disabled={savingWord || savedWords.has(item.word)}
+          onClick={() => void saveCurrentWord()}
+          className={`text-[12px] font-bold px-2.5 py-1 rounded-lg border-[1.5px] disabled:opacity-60 ${
+            savedWords.has(item.word) ? "border-green text-green" : "border-grey-200 text-ink"
+          }`}
+        >
+          {savedWords.has(item.word) ? "저장됨" : savingWord ? "저장 중..." : "단어 저장"}
+        </button>
+      </div>
       <div className="flex flex-col gap-2 mb-4">
         {item.options.map((opt, idx) => {
           const isPicked = picked === idx;
