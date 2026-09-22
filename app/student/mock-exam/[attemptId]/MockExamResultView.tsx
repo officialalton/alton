@@ -6,6 +6,7 @@ import { computeMockExamReport } from "@/lib/mock-exam/report";
 import LearningText from "@/app/session/[id]/LearningText";
 import RwStimulusView from "@/app/session/[id]/RwStimulusView";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
+import ProblemNoteCanvas from "@/app/components/ProblemNoteCanvas";
 
 const SECTION_LABEL: Record<string, string> = { rw: "R&W", math: "Math" };
 const OPTION_LETTERS = ["A", "B", "C", "D", "E"];
@@ -29,7 +30,20 @@ function formatMinutes(seconds: number): string {
 /** 문항 하나(지문·질문·선택지·내 답·정답·해설)를 읽기 전용으로 보여준다 — 학생 본인 결과
  * 화면뿐 아니라 교사의 "학생 풀이 읽기 전용 열람"(TeacherMockExamStatusTab)에서도 그대로
  * 재사용한다(둘 다 채점 뒤 필드가 채워진 MockExamAttemptItem을 받는다). */
-export function ItemDetail({ item }: { item: MockExamAttemptItem }) {
+export function ItemDetail({
+  item,
+  attemptId,
+  studentId,
+  viewerIsOwner = true,
+}: {
+  item: MockExamAttemptItem;
+  /** 필기 저장/열람에 필요 — 없으면(하위 호환) 필기 도구를 안 보여준다. */
+  attemptId?: string;
+  studentId?: string;
+  /** true(기본) — 이 응시의 학생 본인이 보는 중(필기 가능). false — 교사·학부모가 남의
+   * 응시를 읽기 전용으로 보는 중. */
+  viewerIsOwner?: boolean;
+}) {
   return (
     <div className="rounded-lg border border-grey-200 bg-white p-4" data-testid="mock-exam-item-detail">
       <p className="mb-2 text-[12px] font-bold text-grey-500">
@@ -78,6 +92,16 @@ export function ItemDetail({ item }: { item: MockExamAttemptItem }) {
           <p className="mb-1 text-[11px] font-extrabold uppercase tracking-wide text-grey-400">해설</p>
           <LearningText text={item.explanation} />
         </div>
+      )}
+
+      {attemptId && studentId && (
+        <ProblemNoteCanvas
+          context="mock_exam"
+          targetId={attemptId}
+          itemId={item.setItemId}
+          authorId={viewerIsOwner ? undefined : studentId}
+          readOnly={!viewerIsOwner}
+        />
       )}
     </div>
   );
@@ -185,7 +209,9 @@ export default function MockExamResultView({ attempt, readOnly }: { attempt: Moc
     </div>
     {attempt.items.length > 0 && (
       <div className="mt-4 md:sticky md:top-4 md:mt-0">
-        {selected ? <ItemDetail item={selected} /> : (
+        {selected ? (
+          <ItemDetail item={selected} attemptId={attempt.id} studentId={attempt.studentId} viewerIsOwner={!readOnly} />
+        ) : (
           <div className="rounded-lg border border-dashed border-grey-300 p-6 text-center text-[12.5px] text-grey-400">
             왼쪽에서 문항을 누르면 여기에 문제·내 답·정답·해설이 표시됩니다.
           </div>

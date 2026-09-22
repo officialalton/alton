@@ -14,6 +14,7 @@ import RwStimulusView from "@/app/session/[id]/RwStimulusView";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import MockExamMathTools, { MockExamToolButtons, type MathToolsOpen } from "@/app/session/[id]/MockExamMathTools";
 import MockExamResultView from "./MockExamResultView";
+import ProblemNoteCanvas from "@/app/components/ProblemNoteCanvas";
 
 // 고정형 SAT 모의고사 V1 — 학생 응시 화면(사양 3절 학생 흐름, 4절 수업 탭/독립 진입 공용).
 // 적응형이 아니므로 문항 순서는 고정(mock_exam_set_items.position). 시간 제한은 섹션(R&W/Math)
@@ -375,6 +376,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
                 data-testid="mock-exam-spr-input"
               />
             )}
+            <ProblemNoteCanvas context="mock_exam" targetId={attempt.id} itemId={current.setItemId} />
           </div>
         ) : null}
 
