@@ -11,16 +11,15 @@ import { requireUser } from "@/lib/auth";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { HouseholdInquirySummary, HouseholdMessage } from "@/app/parent/inquiry-actions";
 
+// 2026-09-22(실사용자 UAT에서 발견) — household_members는 컨설턴트에게 RLS가
+// 닫혀 있어(가구 구성원 전체를 노출하지 않기 위해) 직접 select하면 항상 0행이
+// 돌아온다. SECURITY DEFINER RPC(household_id_for_assigned_student,
+// 20261465000000)로 담당 컨설턴트/관리자만 household_id를 조회한다.
 async function requireStudentHouseholdId(supabase: SupabaseClient, studentId: string): Promise<string> {
-  const { data } = await supabase
-    .from("household_members")
-    .select("household_id")
-    .eq("profile_id", studentId)
-    .eq("role", "child")
-    .limit(1)
-    .maybeSingle();
+  const { data, error } = await supabase.rpc("household_id_for_assigned_student", { p_student_id: studentId });
+  if (error) throw new Error(error.message);
   if (!data) throw new Error("이 학생이 속한 household를 찾을 수 없습니다.");
-  return data.household_id as string;
+  return data as string;
 }
 
 async function requireConsultant(): Promise<{ supabase: SupabaseClient; userId: string }> {
