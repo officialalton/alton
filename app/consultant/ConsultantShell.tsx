@@ -5,6 +5,7 @@ import { logout } from "@/app/login/actions";
 import { getRoadmapForStudent } from "@/lib/roadmap/actions";
 import type { RoadmapData } from "@/lib/roadmap/types";
 import RoadmapView from "@/app/components/RoadmapView";
+import CollegeExploreSection from "@/app/components/CollegeExploreSection";
 import PlannerOverviewView from "@/app/student/PlannerOverviewView";
 import BoardColumnsView from "@/app/components/BoardColumnsView";
 import type { ConsultantStudent } from "./consultant-data";
@@ -46,7 +47,7 @@ import {
   type AssignedMeetingRequest,
 } from "./meeting-actions";
 
-type NavId = "students" | "assignments" | "meetings" | "schedule";
+type NavId = "students" | "assignments" | "meetings" | "schedule" | "college-explore";
 
 const WEEKDAY_LABELS = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -138,6 +139,19 @@ export default function ConsultantShell({
         >
           가능시간
         </button>
+        <button
+          onClick={() => {
+            setNav("college-explore");
+            setSelectedId(null);
+          }}
+          aria-current={nav === "college-explore" ? "page" : undefined}
+          className={
+            "w-full text-left px-2.5 py-2.5 rounded-lg text-[13px] font-semibold " +
+            (nav === "college-explore" ? "bg-red text-white" : "text-grey-500 hover:bg-grey-100 hover:text-ink")
+          }
+        >
+          대학 탐색
+        </button>
         <div className="flex-1" />
         <div className="px-2.5 text-[12px] text-grey-500 mb-2">{consultantName} 컨설턴트님</div>
         <form action={logout}>
@@ -154,6 +168,11 @@ export default function ConsultantShell({
           <MeetingRequestsPanel />
         ) : nav === "schedule" ? (
           <AvailabilityPanel />
+        ) : nav === "college-explore" ? (
+          <div className="px-8 py-8">
+            <h1 className="text-[20px] font-extrabold text-ink mb-5">대학 탐색</h1>
+            <CollegeExploreSection canProposeSourceUrl />
+          </div>
         ) : selectedId === null ? (
           <StudentList students={students} onSelect={setSelectedId} />
         ) : (
