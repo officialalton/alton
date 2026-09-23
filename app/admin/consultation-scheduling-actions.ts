@@ -115,10 +115,17 @@ async function attachTrialGrantExpiry(
   return new Map((data ?? []).map((g) => [g.id as string, g.expires_at as string | null]));
 }
 
-/** 관리자 "상담 운영" 화면 — 예정 상담 리스트 + 오늘/주간/월간 캘린더 조회(요구사항 3). */
-export async function listConsultationsForAdmin(params: { from: string; to: string }): Promise<ConsultationListItem[]> {
-  await requireAdmin();
-  const admin = createAdminClient();
+// R15-A(2/3, 2026-09-23 버그 수정) — 이 조회 자체(쿼리)는 인증 없이 분리해 둔다.
+// loadKanbanBoard()(관리자·컨설턴트 칸반이 공유)가 이 함수를 직접 호출한다 —
+// listConsultationsForAdmin()을 그대로 재사용하면 그 함수의 requireAdmin()이
+// 컨설턴트 호출을 "관리자만 사용할 수 있습니다"로 막아버린다(실사용 중 발견,
+// React #441로 마스킹돼 나타남). 인증은 호출자(listKanbanBoardAction=
+// requireAdminOrCapability, listMyKanbanBoardAction=requireConsultant)가 이미
+// 책임진다.
+export async function queryConsultationsInRange(
+  admin: ReturnType<typeof createAdminClient>,
+  params: { from: string; to: string }
+): Promise<ConsultationListItem[]> {
   const { data, error } = await admin
     .from("consultations")
     .select(
@@ -136,6 +143,12 @@ export async function listConsultationsForAdmin(params: { from: string; to: stri
     consultReadiness: computeConsultReadiness(row),
     completionReadiness: computeCompletionReadiness(row),
   }));
+}
+
+/** 관리자 "상담 운영" 화면 — 예정 상담 리스트 + 오늘/주간/월간 캘린더 조회(요구사항 3). */
+export async function listConsultationsForAdmin(params: { from: string; to: string }): Promise<ConsultationListItem[]> {
+  await requireAdmin();
+  return queryConsultationsInRange(createAdminClient(), params);
 }
 
 /** 승인 대기(requested) 목록 — hold 만료 여부와 무관하게 전부 보여준다(관리자가 뒤늦게라도 처리 가능). */

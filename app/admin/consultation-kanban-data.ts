@@ -8,7 +8,7 @@
 import { createAdminClient } from "@/lib/supabase-admin";
 import { archivedHouseholdProfileIds } from "@/lib/household/household-archive";
 import {
-  listConsultationsForAdmin,
+  queryConsultationsInRange,
   type ConsultationListItem,
 } from "./consultation-scheduling-actions";
 import type { KanbanStage } from "./consultation-kanban-constants";
@@ -251,7 +251,7 @@ export async function loadKanbanBoard(admin: ReturnType<typeof createAdminClient
   // 별도 배치로 분리.)
   const [rows, { data: closedIdsData }, { data: rootIdsData }, accountCreationRows, archivedProfileIds] =
     await Promise.all([
-      listConsultationsForAdmin({ from: "2020-01-01T00:00:00.000Z", to: "2035-01-01T00:00:00.000Z" }),
+      queryConsultationsInRange(admin, { from: "2020-01-01T00:00:00.000Z", to: "2035-01-01T00:00:00.000Z" }),
       admin.from("consultations").select("id").not("closure_type", "is", null),
       admin.from("consultations").select("family_root_consultation_id").not("family_root_consultation_id", "is", null),
       loadAccountCreationCards(admin),

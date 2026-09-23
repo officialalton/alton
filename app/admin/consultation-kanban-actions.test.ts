@@ -22,6 +22,7 @@ vi.mock("@/lib/admin-auth", () => ({
 }));
 vi.mock("./consultation-scheduling-actions", () => ({
   listConsultationsForAdmin: listConsultationsMock,
+  queryConsultationsInRange: listConsultationsMock,
 }));
 vi.mock("./trial-onboarding-actions", () => ({
   getTrialOnboardingPipelineAction: pipelineMock,

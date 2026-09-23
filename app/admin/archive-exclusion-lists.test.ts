@@ -23,7 +23,10 @@ const {
 vi.mock("@/lib/supabase-admin", () => ({ createAdminClient: () => ({ rpc: adminRpcMock, from: adminFromMock }) }));
 vi.mock("@/lib/admin-auth", () => ({ requireAdminOrCapability: requireAdminOrCapabilityMock }));
 vi.mock("@/lib/household/household-archive", () => ({ archivedHouseholdProfileIds: archivedProfileIdsMock }));
-vi.mock("./consultation-scheduling-actions", () => ({ listConsultationsForAdmin: listConsultationsForAdminMock }));
+vi.mock("./consultation-scheduling-actions", () => ({
+  listConsultationsForAdmin: listConsultationsForAdminMock,
+  queryConsultationsInRange: listConsultationsForAdminMock,
+}));
 vi.mock("@/lib/email", () => ({ sendEmail: vi.fn(), escapeHtml: (v: string) => v }));
 vi.mock("@/lib/request-origin", () => ({ currentRequestOrigin: () => Promise.resolve("http://localhost:3010") }));
 

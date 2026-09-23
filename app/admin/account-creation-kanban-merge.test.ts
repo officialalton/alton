@@ -14,6 +14,7 @@ const { listConsultationsMock } = vi.hoisted(() => ({
 
 vi.mock("./consultation-scheduling-actions", () => ({
   listConsultationsForAdmin: listConsultationsMock,
+  queryConsultationsInRange: listConsultationsMock,
 }));
 
 type Row = Record<string, unknown>;
