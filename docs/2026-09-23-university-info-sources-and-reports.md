@@ -1889,3 +1889,87 @@ East Carolina, Pace, West Virginia — 12개교 모두 공식 도메인 추정 U
 6. **200개교 전체가 끝나면 반드시 최종 통합보고서를 작성**하고 CDS 정보
    노출 UI를 계속 확장할 것 — 이 지시는 200개교가 끝날 때까지 매 세션
    인계 기록에 계속 전달되어야 한다.
+
+## 22차 세션 (2026-09-23)
+
+### 핵심 발견 — WebSearch 툴 사용 가능
+21차 세션이 "이 환경엔 웹 검색 도구가 없다"고 판단한 것은 오판이었다.
+`ToolSearch({query:"select:WebSearch"})`로 스키마를 로드하면 WebSearch가
+정상 동작한다(WebFetch도 마찬가지). 이번 세션은 이 방법으로 unconfirmed
+12개교의 실제 공식 CDS URL을 검색했다.
+
+### unconfirmed 12개교 → 3개교 확정/등록, 9개교는 여전히 unconfirmed
+WebSearch로 12개교 전부 재조사했다. 결과:
+- **확정 후 실수집 완료(3개교)**: University of Michigan Ann Arbor,
+  Baylor University, North Carolina State University — 공식 IR 부서
+  발행 CDS 2025-26 PDF를 `curl --max-time 60`으로 성공적으로 다운로드,
+  `pdftotext -layout`로 파싱, 표지 "Name of College/University" 값이
+  DB 이름과 일치함을 확인 후 반영.
+- **후보 URL은 찾았으나 curl이 차단되어 실수집 실패(나머지 9개교)**:
+  West Virginia University(CloudFront 403), Texas A&M University(공식
+  abpa.tamu.edu PDF는 찾았으나 curl 시 S3 NoSuchKey 오류로 파일 접근
+  불가), Gonzaga University, Ball State University, Catholic University
+  of America, East Carolina University(2023-24 버전만 curl 성공,
+  2025-26/2024-25 최신본은 못 찾음), Pace University(2025-26 PDF는
+  SharePoint 사설 링크라 접근 불가), Columbia University(공식 OPIR
+  최신 공개본이 2024-25까지만 존재), Miami University(Ohio,
+  `miamioh.edu/oir/data/cds/`가 올바른 공식 출처임을 확인 — 단
+  SSL 인증서 문제로 WebFetch 실패, curl 재시도는 시간 관계상 다음
+  세션으로 넘김).
+- **주의(중요)**: Miami University(Ohio) CDS를 University of Miami
+  (Florida)의 `irsa.miami.edu/facts-and-information/common-data-set/
+  cds2526.pdf`로 착각하지 않도록 20차 UIUC/UIC 혼동과 동일한 유형의
+  함정이 이번에도 존재했다 — 실제로는 등록하지 않고 정확한 출처
+  (`miamioh.edu`)만 기록.
+
+이 9개교는 후보 URL을 `university_source_urls`에 등록하지 않았다(추측
+URL/미검증 URL 등록 금지 원칙 — curl로 실제 파일을 열어보지 못한 채
+등록하면 다음 세션이 검증 없이 신뢰할 위험).
+
+### sources_pending_review 103개교 처리
+Clemson University, Oklahoma State University 시도 — 둘 다 Cloudflare/
+봇 차단으로 curl 실패(Clemson은 `open.clemson.edu` PDF 링크 자체는
+`article=1017`로 특정했으나 다운로드 시 HTML만 반환, Oklahoma State는
+Cloudflare challenge 페이지 반환). 시간 예산 소진으로 추가 학교는
+착수하지 못함.
+
+### 실제 반영 내역
+- `university_source_urls`에 3건 등록(Michigan/Baylor/NC State, 전부
+  `status='approved'`, `source_type='common_data_set'`, `cycle_year=2026`).
+- `university_admission_metrics`에 3개교 총 42행 삽입(applicants_count/
+  admitted_count/admit_rate/enrolled_count/yield_rate/SAT 25·50·75/
+  ACT 25·50·75/gpa_average 등, `verification_status='official'`,
+  `source_url_id`·`verified_at` 채움). Baylor는 CDS 원본에 GPA 항목이
+  공란이라 GPA 미기재(추측 금지 원칙 준수).
+- `universities.data_collection_status`를 3개교 `verified_pilot`으로
+  변경.
+- 학과 목록 보완: 착수하지 못함(시간 예산 전부 CDS 실수집에 사용).
+
+### 검증
+- `psql`로 반영 직후 카운트 확인: `verified_pilot` **85 → 88개교**,
+  `unconfirmed` **12 → 9개교**, `sources_pending_review` 103개교(불변).
+- `select count(*) from university_admission_metrics where
+  source_url_id in (...)`로 42행 실제 삽입 확인.
+- 학교명 검증: Michigan("University of Michigan"/Ann Arbor), Baylor
+  ("Baylor University"), NC State("North Carolina State University")
+  전부 CDS 문서 표지 텍스트와 DB 이름 일치 확인.
+- `git status`: 앱 코드 변경 없음, 새 마이그레이션 없음. `npx supabase
+  db push --linked` / `vercel deploy` 실행하지 않음.
+
+### 다음 세션 인계 (22차 작성분)
+1. unconfirmed 9개교(Columbia/Texas A&M/Gonzaga/Ball State/Catholic
+   University/East Carolina/Pace/West Virginia/Miami University Ohio)
+   — 후보 URL은 이 세션 기록에 있으니 curl 재시도(다른 User-Agent나
+   재시도 타이밍으로 CloudFront/S3 차단 우회 가능한지 확인) 또는
+   브라우저 도구로 직접 열어 실제 파일 링크 재확보 필요. Miami
+   University(Ohio)는 반드시 `miamioh.edu` 도메인만 사용할 것
+   (`irsa.miami.edu`는 다른 학교).
+2. sources_pending_review 103개교 중 Clemson/Oklahoma State는
+   Cloudflare 차단으로 실패 — 브라우저 기반 도구가 있는 세션에서
+   재시도 권장. 나머지 100여개교는 이번 세션에서 아직 착수 못함(URL은
+   40개교 예시 목록 참고, 전체는 `select ... where
+   data_collection_status='sources_pending_review'`로 재조회).
+3. 학과 목록 보완은 이번 세션 완전히 미착수 — 여전히 대량 남음.
+4. 관리자 화면 노출 확인 여전히 미착수.
+5. 200개교 전체가 끝나면 반드시 최종 통합보고서를 작성하고 CDS 정보
+   노출 UI를 계속 확장할 것 — 매 세션 인계 기록에 계속 전달.
