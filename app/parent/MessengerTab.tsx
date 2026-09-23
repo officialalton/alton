@@ -203,20 +203,21 @@ function InquiryDetail({ inquiry, onBack }: { inquiry: HouseholdInquirySummary; 
         {messages === null && !error && <p className="text-[13px] text-grey-500">불러오는 중...</p>}
         {messages && messages.length > 0 && (
           <div className="space-y-2 mb-3 max-h-[420px] overflow-y-auto">
-            {messages.map((m) => (
-              <div
-                key={m.id}
-                className={
-                  "rounded-lg px-3 py-2 text-[12.5px] max-w-[85%] " +
-                  (m.senderRole === "admin" ? "bg-grey-100 text-ink" : "bg-ink text-white ml-auto")
-                }
-              >
-                <div>{m.body}</div>
-                <div className={"text-[10.5px] mt-1 " + (m.senderRole === "admin" ? "text-grey-500" : "text-white/70")}>
-                  {m.senderRole === "admin" ? "관리자" : "나"} · {formatDateTime(m.createdAt)}
+            {messages.map((m) => {
+              const isMine = m.senderRole === "guardian";
+              const label = m.senderRole === "admin" ? "관리자" : m.senderRole === "consultant" ? "담당 컨설턴트" : "나";
+              return (
+                <div
+                  key={m.id}
+                  className={"rounded-lg px-3 py-2 text-[12.5px] max-w-[85%] " + (isMine ? "bg-ink text-white ml-auto" : "bg-grey-100 text-ink")}
+                >
+                  <div>{m.body}</div>
+                  <div className={"text-[10.5px] mt-1 " + (isMine ? "text-white/70" : "text-grey-500")}>
+                    {label} · {formatDateTime(m.createdAt)}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
         {!readOnly && (

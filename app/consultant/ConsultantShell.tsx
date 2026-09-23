@@ -25,6 +25,13 @@ import {
   loadMyAcceptingNewWorkAction,
   setMyAcceptingNewWorkAction,
 } from "./availability-actions";
+import type { HouseholdInquirySummary, HouseholdMessage } from "@/app/parent/inquiry-actions";
+import {
+  listConsultantInquiriesAction,
+  listConsultantInquiryMessagesAction,
+  sendConsultantInquiryMessageAction,
+  markConsultantMessengerReadAction,
+} from "./messenger-actions";
 
 type NavId = "students" | "assignments" | "schedule";
 
@@ -383,7 +390,7 @@ function StudentList({
   );
 }
 
-type StudentSubView = "overview" | "board" | "roadmap";
+type StudentSubView = "overview" | "board" | "roadmap" | "messenger";
 
 // 컨설턴트 Round A(2026-09-22 사용자 지시) — 담당 학생 진입 시 Overview/Board/
 // Roadmap 세 화면을 오갈 수 있게 하고, Board는 학생 본인처럼 직접 수정할 수
@@ -431,6 +438,7 @@ function StudentPanel({
             { id: "overview", label: "Overview" },
             { id: "board", label: "Board" },
             { id: "roadmap", label: "Roadmap" },
+            { id: "messenger", label: "메신저" },
           ] as const
         ).map((t) => (
           <button
@@ -454,8 +462,10 @@ function StudentPanel({
         )
       ) : subView === "board" ? (
         <StudentBoardPanel studentId={studentId} cards={cards} error={cardsError} onReload={reloadCards} />
-      ) : (
+      ) : subView === "roadmap" ? (
         <StudentRoadmapPanel studentId={studentId} />
+      ) : (
+        <ConsultantMessengerPanel key={studentId} studentId={studentId} />
       )}
     </div>
   );
@@ -548,4 +558,197 @@ function StudentRoadmapPanel({ studentId }: { studentId: string }) {
   if (state.status === "loading") return <div className="py-8 text-[13px] text-grey-500">불러오는 중...</div>;
   if (state.status === "error") return <div className="py-8 text-[13px] text-red">{state.message}</div>;
   return <RoadmapView data={state.data} />;
+}
+
+function formatMessengerDateTime(iso: string | null): string {
+  if (!iso) return "";
+  return new Date(iso).toLocaleString("ko-KR", { dateStyle: "medium", timeStyle: "short" });
+}
+
+// 2026-09-22 — 컨설턴트 household 메신저(읽기+답장 전용, 새 문의 열기는 없음).
+// app/parent/MessengerTab.tsx와 같은 데이터·같은 문의 단위 스레드를 다루지만,
+// studentId로 진입해 household를 서버 액션 안에서 알아낸다(RLS가 담당 확인).
+function ConsultantMessengerPanel({ studentId }: { studentId: string }) {
+  const [inquiries, setInquiries] = useState<HouseholdInquirySummary[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [subTab, setSubTab] = useState<"open" | "closed">("open");
+  const [openId, setOpenId] = useState<string | null>(null);
+
+  function loadInquiries() {
+    listConsultantInquiriesAction(studentId)
+      .then(setInquiries)
+      .catch((e) => setError(e instanceof Error ? e.message : "문의 목록을 불러오지 못했습니다."));
+  }
+
+  useEffect(() => {
+    loadInquiries();
+    markConsultantMessengerReadAction(studentId).catch(() => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const openInquiry = inquiries?.find((i) => i.id === openId) ?? null;
+  if (openInquiry) {
+    return (
+      <ConsultantInquiryDetail
+        studentId={studentId}
+        inquiry={openInquiry}
+        onBack={() => {
+          setOpenId(null);
+          loadInquiries();
+        }}
+      />
+    );
+  }
+
+  const visible = (inquiries ?? []).filter((i) => i.status === subTab);
+
+  return (
+    <div>
+      {error && <p className="text-[12.5px] text-red mb-3">{error}</p>}
+      <div className="flex gap-1.5 mb-3">
+        {(["open", "closed"] as const).map((t) => (
+          <button
+            key={t}
+            type="button"
+            onClick={() => setSubTab(t)}
+            className={
+              "text-[12px] font-bold px-3 py-1.5 rounded-full " +
+              (subTab === t ? "bg-ink text-white" : "bg-grey-100 text-grey-600")
+            }
+          >
+            {t === "open" ? "진행 중 문의" : "지난 문의"}
+          </button>
+        ))}
+      </div>
+
+      {inquiries === null && !error && <p className="text-[13px] text-grey-500">불러오는 중...</p>}
+      {inquiries && visible.length === 0 && (
+        <p className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
+          {subTab === "open" ? "진행 중인 문의가 없습니다." : "지난 문의가 없습니다."}
+        </p>
+      )}
+      {inquiries && visible.length > 0 && (
+        <ul className="border-[1.5px] border-grey-200 rounded-xl divide-y divide-grey-100">
+          {visible.map((i) => (
+            <li key={i.id}>
+              <button
+                type="button"
+                onClick={() => setOpenId(i.id)}
+                className="w-full text-left px-4 py-3 flex items-center justify-between gap-3"
+              >
+                <div className="min-w-0">
+                  <p className="text-[13px] text-ink truncate">{i.firstMessage}</p>
+                  <p className="text-[11px] text-grey-500 mt-0.5">
+                    {i.status === "closed" ? `종료됨 · ${formatMessengerDateTime(i.closedAt)}` : `최근 메시지 ${formatMessengerDateTime(i.lastMessageAt)}`}
+                  </p>
+                </div>
+                <span className="text-[11px] font-bold text-grey-400 shrink-0">›</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+function ConsultantInquiryDetail({
+  studentId,
+  inquiry,
+  onBack,
+}: {
+  studentId: string;
+  inquiry: HouseholdInquirySummary;
+  onBack: () => void;
+}) {
+  const [messages, setMessages] = useState<HouseholdMessage[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [draft, setDraft] = useState("");
+  const [sending, setSending] = useState(false);
+  const readOnly = inquiry.status === "closed";
+
+  function loadMessages() {
+    listConsultantInquiryMessagesAction(inquiry.id)
+      .then(setMessages)
+      .catch((e) => setError(e instanceof Error ? e.message : "메시지를 불러오지 못했습니다."));
+  }
+
+  useEffect(() => {
+    loadMessages();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inquiry.id]);
+
+  async function handleSend() {
+    if (!draft.trim()) return;
+    setSending(true);
+    setError(null);
+    try {
+      await sendConsultantInquiryMessageAction(studentId, inquiry.id, draft);
+      setDraft("");
+      loadMessages();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "전송에 실패했습니다.");
+    } finally {
+      setSending(false);
+    }
+  }
+
+  return (
+    <div>
+      <button
+        type="button"
+        onClick={onBack}
+        className="text-[13px] text-grey-600 font-semibold border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform mb-4"
+      >
+        ← 문의 목록으로
+      </button>
+      {readOnly && (
+        <p className="text-[12px] font-bold text-grey-500 bg-grey-100 rounded-lg px-3 py-2 mb-3">
+          종료된 문의입니다({formatMessengerDateTime(inquiry.closedAt)}) — 읽기 전용입니다.
+        </p>
+      )}
+      <section className="border-[1.5px] border-grey-200 rounded-xl p-4">
+        {error && <p className="text-[12.5px] text-red mb-2">{error}</p>}
+        {messages === null && !error && <p className="text-[13px] text-grey-500">불러오는 중...</p>}
+        {messages && messages.length > 0 && (
+          <div className="space-y-2 mb-3 max-h-[420px] overflow-y-auto">
+            {messages.map((m) => {
+              const isMine = m.senderRole === "consultant";
+              const label = m.senderRole === "guardian" ? "보호자" : m.senderRole === "admin" ? "관리자" : "나";
+              return (
+                <div
+                  key={m.id}
+                  className={"rounded-lg px-3 py-2 text-[12.5px] max-w-[85%] " + (isMine ? "bg-ink text-white ml-auto" : "bg-grey-100 text-ink")}
+                >
+                  <div>{m.body}</div>
+                  <div className={"text-[10.5px] mt-1 " + (isMine ? "text-white/70" : "text-grey-500")}>
+                    {label} · {formatMessengerDateTime(m.createdAt)}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+        {!readOnly && (
+          <div className="flex gap-2">
+            <textarea
+              aria-label="메시지 내용"
+              value={draft}
+              onChange={(e) => setDraft(e.target.value)}
+              placeholder="메시지를 입력해주세요"
+              className="flex-1 px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px] min-h-[54px]"
+            />
+            <button
+              type="button"
+              disabled={sending || !draft.trim()}
+              onClick={handleSend}
+              className="px-4 py-2 rounded-lg bg-ink text-white text-[13px] font-bold disabled:opacity-50 self-end"
+            >
+              전송
+            </button>
+          </div>
+        )}
+      </section>
+    </div>
+  );
 }
