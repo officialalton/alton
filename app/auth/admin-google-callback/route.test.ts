@@ -37,12 +37,12 @@ function googleUser(overrides: Partial<{ id: string; email: string; sub: string 
   };
 }
 
-// profiles select 체이닝(.select().eq().single())을 흉내낸다.
+// profiles select 체이닝(.select().eq().maybeSingle())을 흉내낸다.
 function mockProfileLookup(profile: { role: string } | null) {
   fromMock.mockReturnValue({
     select: () => ({
       eq: () => ({
-        single: async () => ({ data: profile, error: profile ? null : { message: "not found" } }),
+        maybeSingle: async () => ({ data: profile, error: null }),
       }),
     }),
   });
@@ -51,6 +51,10 @@ function mockProfileLookup(profile: { role: string } | null) {
 describe("GET /auth/admin-google-callback", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    // 2026-09-22(통합 스태프 콜백) — profiles 행이 없을 때 선생님/컨설턴트
+    // 프로비저닝을 순서대로 조회한다(find_teacher_provisioning_for_identity/
+    // find_consultant_provisioning_for_identity) — 기본값은 "둘 다 매칭 없음".
+    rpcMock.mockResolvedValue({ data: [], error: null });
   });
 
   it("Google 동의 화면 취소/실패(error 파라미터)는 랜딩 페이지가 아니라 로그인 에러로 보낸다", async () => {
@@ -85,9 +89,9 @@ describe("GET /auth/admin-google-callback", () => {
     expect(res.headers.get("location")).not.toContain("/admin");
   });
 
-  it("관리자가 아닌 역할(예: 선생님)이면 거부한다 — 본인 계정이므로 삭제하지 않고 로그아웃만 한다", async () => {
+  it("스태프가 아닌 역할(예: 학생)이면 거부한다 — 본인 계정이므로 삭제하지 않고 로그아웃만 한다", async () => {
     exchangeCodeForSessionMock.mockResolvedValue({ data: { session: {}, user: googleUser() }, error: null });
-    mockProfileLookup({ role: "teacher" });
+    mockProfileLookup({ role: "student" });
 
     const { GET } = await import("./route");
     const res = await GET(makeRequest({ code: "code1" }));
@@ -95,6 +99,30 @@ describe("GET /auth/admin-google-callback", () => {
     expect(deleteUserMock).not.toHaveBeenCalled();
     expect(signOutMock).toHaveBeenCalled();
     expect(res.headers.get("location")).toContain("/login?error=");
+  });
+
+  // 2026-09-22(통합 스태프 콜백, 사용자 지시) — 선생님/관리자/컨설턴트
+  // 로그인 버튼 3개를 하나로 합쳤다. 이미 profiles 행이 있는 재로그인은
+  // role로 바로 라우팅한다(선생님·컨설턴트는 신원 재확인 없이, 관리자만
+  // 기존처럼 매번 Google 신원 연결 여부를 재확인).
+  it("이미 연결된 선생님 계정으로 재로그인하면 /teacher로 보낸다", async () => {
+    exchangeCodeForSessionMock.mockResolvedValue({ data: { session: {}, user: googleUser() }, error: null });
+    mockProfileLookup({ role: "teacher" });
+
+    const { GET } = await import("./route");
+    const res = await GET(makeRequest({ code: "code1" }));
+
+    expect(res.headers.get("location")).toBe("http://localhost:3010/teacher");
+  });
+
+  it("이미 연결된 컨설턴트 계정으로 재로그인하면 /consultant로 보낸다", async () => {
+    exchangeCodeForSessionMock.mockResolvedValue({ data: { session: {}, user: googleUser() }, error: null });
+    mockProfileLookup({ role: "consultant" });
+
+    const { GET } = await import("./route");
+    const res = await GET(makeRequest({ code: "code1" }));
+
+    expect(res.headers.get("location")).toBe("http://localhost:3010/consultant");
   });
 
   it("관리자 계정이지만 Google 신원이 아직 연결되지 않았으면 거부한다", async () => {
@@ -121,6 +149,49 @@ describe("GET /auth/admin-google-callback", () => {
     const res = await GET(makeRequest({ code: "code1" }));
 
     expect(res.headers.get("location")).toBe("http://localhost:3010/admin");
+  });
+
+  // 2026-09-22 — profiles 행이 없는 첫 로그인(콜드 스타트)은 선생님 →
+  // 컨설턴트 순서로 사전 등록 여부를 확인해 매칭되면 그 자리에서 연결한다.
+  it("첫 로그인이고 선생님 프로비저닝에 매칭되면 연결하고 /teacher로 보낸다", async () => {
+    exchangeCodeForSessionMock.mockResolvedValue({ data: { session: {}, user: googleUser() }, error: null });
+    mockProfileLookup(null);
+    rpcMock.mockImplementation(async (name: string) => {
+      if (name === "find_teacher_provisioning_for_identity") return { data: [{ id: "prov-1", status: "created" }], error: null };
+      if (name === "link_teacher_workspace_identity") return { data: null, error: null };
+      return { data: [], error: null };
+    });
+
+    const { GET } = await import("./route");
+    const res = await GET(makeRequest({ code: "code1" }));
+
+    expect(rpcMock).toHaveBeenCalledWith(
+      "link_teacher_workspace_identity",
+      expect.objectContaining({ p_provisioning_id: "prov-1" })
+    );
+    expect(deleteUserMock).not.toHaveBeenCalled();
+    expect(res.headers.get("location")).toBe("http://localhost:3010/teacher");
+  });
+
+  it("첫 로그인이고 선생님은 아니지만 컨설턴트 프로비저닝에 매칭되면 연결하고 /consultant로 보낸다", async () => {
+    exchangeCodeForSessionMock.mockResolvedValue({ data: { session: {}, user: googleUser() }, error: null });
+    mockProfileLookup(null);
+    rpcMock.mockImplementation(async (name: string) => {
+      if (name === "find_teacher_provisioning_for_identity") return { data: [], error: null };
+      if (name === "find_consultant_provisioning_for_identity") return { data: [{ id: "cprov-1", workspace_google_user_id: null }], error: null };
+      if (name === "link_consultant_workspace_identity") return { data: null, error: null };
+      return { data: [], error: null };
+    });
+
+    const { GET } = await import("./route");
+    const res = await GET(makeRequest({ code: "code1" }));
+
+    expect(rpcMock).toHaveBeenCalledWith(
+      "link_consultant_workspace_identity",
+      expect.objectContaining({ p_provisioning_id: "cprov-1" })
+    );
+    expect(deleteUserMock).not.toHaveBeenCalled();
+    expect(res.headers.get("location")).toBe("http://localhost:3010/consultant");
   });
 
   it("이 콜백은 어떤 실패 경로에서도 랜딩 페이지('/')로 리다이렉트하지 않는다", async () => {

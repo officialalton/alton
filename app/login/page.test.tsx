@@ -3,8 +3,8 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 // 2026-09-10(P0-3) — 유효한 세션으로 /login을 다시 방문하면(뒤로가기 포함)
 // 로그인 폼이 아니라 그 계정의 목적지로 돌려보내야 한다. LoginPage가 서버에서
-// cookies()/supabase를 직접 쓰므로, 다른 서버 액션 테스트와 동일한 패턴
-// (app/login/teacher-google-actions.test.ts)으로 모킹한다.
+// cookies()/supabase를 직접 쓰므로, 다른 서버 액션 테스트와 동일한 패턴으로
+// 모킹한다.
 const getUserMock = vi.fn();
 const singleMock = vi.fn();
 vi.mock("@/utils/supabase/server", () => ({

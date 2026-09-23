@@ -1,25 +1,28 @@
+import { createHash } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
 import { createAdminClient } from "@/lib/supabase-admin";
+import type { ProfileRole } from "@/lib/session-view";
 
-// 관리자 전용 Google 로그인 콜백 — 이 라우트가 없던 것이 버그의 원인이었다
-// (관리자가 Google로 인증하면 랜딩 페이지로 떨어졌다). 선생님 콜백
-// (app/auth/teacher-callback/route.ts)과는 완전히 분리된 별도 경로이며,
-// 그 파일은 이 작업에서 건드리지 않는다.
+// 통합 스태프 Google 로그인 콜백(2026-09-22 사용자 지시 — "선생님/관리자/
+// 컨설턴트 로그인 버튼을 하나로 합치고 계정에 맞게 자동으로 들어가게").
+// 기존에 세 개(teacher-callback/admin-google-callback/consultant-google-callback)
+// 로 나뉘어 있던 콜백을 이 파일 하나로 합쳤다 — 경로 자체는 그대로
+// admin-google-callback을 재사용한다(Google Cloud Console의 승인된 리디렉션
+// URI 목록을 바꾸지 않기 위해 — 이미 이 경로만 승인돼 있다).
 //
-// 실패 경로는 전부 명시적으로 /login?error=...로 보낸다 — 어떤 경우에도
-// "/"(랜딩 페이지)로 조용히 떨어지지 않는다(그게 원래 버그였다).
+// 흐름:
+//   1) profiles 행이 이미 있다(재로그인) → role로 바로 라우팅(관리자는 기존과
+//      동일하게 매번 Google 신원 연결 여부를 재확인한다).
+//   2) profiles 행이 없다(이 Google 계정으로 첫 로그인) → 선생님 프로비저닝
+//      → 컨설턴트 프로비저닝 순서로 사전 등록 여부를 확인해 매칭되면 그
+//      자리에서 연결한다. 관리자는 콜드 스타트를 지원하지 않는다(기존 설계
+//      그대로 — self-service link만 가능, app/admin/google-link-actions.ts).
+//   실패 경로는 전부 명시적으로 /login?error=...로 보낸다 — 어떤 경우에도
+//   "/"(랜딩 페이지)로 조용히 떨어지지 않는다.
 export async function GET(request: NextRequest) {
-  // NEXT_PUBLIC_SITE_URL 대신 실제 요청 origin을 쓴다 — 고정 env 값을 쓰면
-  // Preview 배포에서 로그인 자체는 성공하고도 최종 리다이렉트가 다른
-  // origin(예: production 도메인)으로 나가 그 origin에는 이 세션의 쿠키가
-  // 없어 미인증 상태로 랜딩 페이지("/")에 떨어지는 버그가 생긴다 — 이 방식은
-  // 어떤 환경(local/preview/production)에서 시작했든 항상 같은 origin으로
-  // 돌아오므로 이 문제가 구조적으로 발생하지 않는다.
   const siteUrl = request.nextUrl.origin;
 
-  // Google 동의 화면에서 취소/실패한 경우 — 표준 OAuth error/error_description
-  // 쿼리 파라미터로 온다.
   const oauthError =
     request.nextUrl.searchParams.get("error_description") ??
     request.nextUrl.searchParams.get("error");
@@ -51,41 +54,138 @@ export async function GET(request: NextRequest) {
     .from("profiles")
     .select("role")
     .eq("id", authUserId)
-    .single();
+    .maybeSingle();
 
-  if (!profile) {
-    // profiles 행이 없다 = ALTON에 등록된 적 없는 Google 계정으로 방금
-    // 새로 생성된 auth 사용자 — 고아 계정/고아 세션을 남기지 않는다
-    // (teacher-callback의 rejectAndCleanup과 동일한 목적).
-    const admin = createAdminClient();
-    await admin.auth.admin.deleteUser(authUserId);
-    return NextResponse.redirect(loginError(siteUrl, "등록되지 않은 계정입니다. 관리자에게 문의해주세요."));
+  if (profile) {
+    return routeExistingProfile({ supabase, siteUrl, role: profile.role as ProfileRole, googleUserId });
   }
 
-  if (profile.role !== "admin") {
-    // 본인의 실제 계정(학생/학부모/선생님 등)이지만 관리자가 아니다 —
-    // 남의 계정이 아니므로 삭제하지 않고 세션만 종료한다.
-    await supabase.auth.signOut();
-    return NextResponse.redirect(loginError(siteUrl, "관리자 계정이 아닙니다."));
+  // 이 Google 계정으로 ALTON에 처음 로그인한다 — 선생님·컨설턴트 사전
+  // 등록 여부를 순서대로 확인한다(관리자는 콜드 스타트 미지원).
+  const teacherMatch = await findTeacherProvisioning(supabase, googleUserId, email);
+  if (teacherMatch) {
+    return linkAsTeacher({ supabase, siteUrl, authUserId, email, googleUserId, provisioningId: teacherMatch.id, name: staffName(data.user, email) });
   }
 
-  const { data: linked } = await supabase.rpc("current_user_admin_google_identity_linked", {
+  const consultantMatch = await findConsultantProvisioning(supabase, email);
+  if (consultantMatch) {
+    return linkAsConsultant({ supabase, siteUrl, authUserId, email, googleUserId, provisioningId: consultantMatch.id, name: staffName(data.user, email) });
+  }
+
+  await rejectAndCleanup(supabase, authUserId, `사전 등록되지 않은 Google 계정 (email_hash=${hashIdentifier(email)})`);
+  return NextResponse.redirect(loginError(siteUrl, "등록되지 않은 계정입니다. 관리자에게 문의해주세요."));
+}
+
+async function routeExistingProfile(params: {
+  supabase: Awaited<ReturnType<typeof createClient>>;
+  siteUrl: string;
+  role: ProfileRole;
+  googleUserId: string;
+}): Promise<NextResponse> {
+  const { supabase, siteUrl, role, googleUserId } = params;
+
+  if (role === "admin") {
+    const { data: linked } = await supabase.rpc("current_user_admin_google_identity_linked", {
+      p_google_user_id: googleUserId,
+    });
+    if (!linked) {
+      await supabase.auth.signOut();
+      return NextResponse.redirect(
+        loginError(
+          siteUrl,
+          "이 Google 계정은 관리자 계정에 연결되어 있지 않습니다. 먼저 관리자 화면에서 Google 계정을 연결해주세요."
+        )
+      );
+    }
+    return NextResponse.redirect(`${siteUrl}/admin`);
+  }
+
+  if (role === "teacher" || role === "consultant") {
+    return NextResponse.redirect(`${siteUrl}/${role}`);
+  }
+
+  // 학생/학부모 등 스태프가 아닌 본인 계정 — 남의 계정이 아니므로 삭제하지
+  // 않고 세션만 종료한다.
+  await supabase.auth.signOut();
+  return NextResponse.redirect(loginError(siteUrl, "직원(선생님·관리자·컨설턴트) 계정이 아닙니다."));
+}
+
+async function findTeacherProvisioning(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  googleUserId: string,
+  email: string
+): Promise<{ id: string } | null> {
+  const { data: matches } = await supabase.rpc("find_teacher_provisioning_for_identity", {
     p_google_user_id: googleUserId,
+    p_workspace_email: email,
   });
+  return (matches as Array<{ id: string; status: string }> | null)?.[0] ?? null;
+}
 
-  if (!linked) {
-    // 관리자 계정은 맞지만 이 Google 신원이 사전에 연결(self-service link)된
-    // 적이 없다 — 이메일/hd 클레임만으로는 신뢰하지 않는다.
-    await supabase.auth.signOut();
-    return NextResponse.redirect(
-      loginError(
-        siteUrl,
-        "이 Google 계정은 관리자 계정에 연결되어 있지 않습니다. 먼저 관리자 화면에서 Google 계정을 연결해주세요."
-      )
-    );
+async function linkAsTeacher(params: {
+  supabase: Awaited<ReturnType<typeof createClient>>;
+  siteUrl: string;
+  authUserId: string;
+  email: string;
+  googleUserId: string;
+  provisioningId: string;
+  name: string;
+}): Promise<NextResponse> {
+  const { supabase, siteUrl, authUserId, email, googleUserId, provisioningId, name } = params;
+  const { error: linkError } = await supabase.rpc("link_teacher_workspace_identity", {
+    p_auth_user_id: authUserId,
+    p_provisioning_id: provisioningId,
+    p_google_user_id: googleUserId,
+    p_workspace_email: email,
+    p_teacher_name: name,
+  });
+  if (linkError) {
+    await rejectAndCleanup(supabase, authUserId, linkError.message);
+    return NextResponse.redirect(loginError(siteUrl, "계정 연결에 실패했습니다: " + linkError.message));
   }
+  return NextResponse.redirect(`${siteUrl}/teacher`);
+}
 
-  return NextResponse.redirect(`${siteUrl}/admin`);
+async function findConsultantProvisioning(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  email: string
+): Promise<{ id: string } | null> {
+  const { data: matches } = await supabase.rpc("find_consultant_provisioning_for_identity", {
+    p_workspace_email: email,
+  });
+  return (matches as Array<{ id: string; workspace_google_user_id: string | null }> | null)?.[0] ?? null;
+}
+
+async function linkAsConsultant(params: {
+  supabase: Awaited<ReturnType<typeof createClient>>;
+  siteUrl: string;
+  authUserId: string;
+  email: string;
+  googleUserId: string;
+  provisioningId: string;
+  name: string;
+}): Promise<NextResponse> {
+  const { supabase, siteUrl, authUserId, email, googleUserId, provisioningId, name } = params;
+  const { error: linkError } = await supabase.rpc("link_consultant_workspace_identity", {
+    p_auth_user_id: authUserId,
+    p_provisioning_id: provisioningId,
+    p_google_user_id: googleUserId,
+    p_workspace_email: email,
+    p_name: name,
+  });
+  if (linkError) {
+    await rejectAndCleanup(supabase, authUserId, linkError.message);
+    return NextResponse.redirect(loginError(siteUrl, "계정 연결에 실패했습니다: " + linkError.message));
+  }
+  return NextResponse.redirect(`${siteUrl}/consultant`);
+}
+
+function staffName(user: { user_metadata?: Record<string, unknown> }, email: string): string {
+  return (
+    (user.user_metadata?.full_name as string | undefined) ??
+    (user.user_metadata?.name as string | undefined) ??
+    email
+  );
 }
 
 function extractGoogleUserId(user: {
@@ -98,4 +198,22 @@ function extractGoogleUserId(user: {
 
 function loginError(siteUrl: string, message: string): string {
   return `${siteUrl}/login?error=${encodeURIComponent(message)}`;
+}
+
+function hashIdentifier(value: string): string {
+  return createHash("sha256").update(value).digest("hex");
+}
+
+async function rejectAndCleanup(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  authUserId: string,
+  reason: string
+): Promise<void> {
+  try {
+    await supabase.rpc("log_workspace_link_rejected", { p_reason: reason });
+  } catch {
+    // 감사 로그 실패는 무시 — 계정 정리가 우선.
+  }
+  const admin = createAdminClient();
+  await admin.auth.admin.deleteUser(authUserId);
 }

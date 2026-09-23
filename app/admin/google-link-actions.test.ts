@@ -60,28 +60,3 @@ describe("linkAdminGoogleAccount", () => {
     expect(linkIdentityMock).not.toHaveBeenCalled();
   });
 });
-
-describe("signInWithGoogleForAdmin", () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
-  it("Google OAuth authorize URL로 리다이렉트한다(미인증 방문자 허용)", async () => {
-    signInWithOAuthMock.mockResolvedValue({
-      data: { url: "https://accounts.google.com/o/oauth2/authorize?login" },
-      error: null,
-    });
-
-    const { signInWithGoogleForAdmin } = await import("./google-link-actions");
-    await expect(signInWithGoogleForAdmin()).rejects.toThrow(
-      "REDIRECT:https://accounts.google.com/o/oauth2/authorize?login"
-    );
-  });
-
-  it("Supabase가 에러를 반환하면 에러를 던진다", async () => {
-    signInWithOAuthMock.mockResolvedValue({ data: { url: null }, error: { message: "provider not configured" } });
-
-    const { signInWithGoogleForAdmin } = await import("./google-link-actions");
-    await expect(signInWithGoogleForAdmin()).rejects.toThrow("provider not configured");
-  });
-});
