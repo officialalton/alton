@@ -133,7 +133,7 @@ export default function TeacherAvailabilityTab({
       })),
       exForDate
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [selectedDateKey, exceptionsForSelectedDate, rules, timezone]);
 
   // 월간 캘린더 배지 — 예외가 있는 날짜는 기존처럼 빨강(휴무)/회색(조정됨) 배지를,

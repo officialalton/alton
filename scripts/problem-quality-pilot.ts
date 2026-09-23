@@ -108,8 +108,8 @@ async function main() {
       const passage = g.stimulus ?? g.passage ?? "";
       const question = g.question ?? null;
       const options = g.options ?? null;
-      let correctIndex = g.correctIndex ?? null;
-      let explanation = g.explanation ?? "";
+      const correctIndex = g.correctIndex ?? null;
+      const explanation = g.explanation ?? "";
       const fullText = composeProblemText(passage, question);
 
       // createDraftVersionAction과 동일한 저장 시점 검증(정답-해설 대조, Math는 자동 정정 금지) — 실제

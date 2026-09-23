@@ -243,7 +243,7 @@ export default function StudentCurriculumPanel({
     }
   }
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+   
   useEffect(() => {
     if (preparingUnit) return;
     const ids = units.map((u) => u.id);

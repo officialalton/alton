@@ -29,7 +29,7 @@ export default function CollegeExploreSection() {
         setError(e instanceof Error ? e.message : "대학 목록을 불러오지 못했습니다.");
       }
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [search]);
 
   if (selectedId) {

@@ -41,7 +41,7 @@ export function allocateCounts(weights: { key: string; weightPct: number }[], to
 
   const raw = weights.map((w) => ({ key: w.key, exact: (w.weightPct / totalWeight) * totalCount }));
   const floors = raw.map((r) => ({ key: r.key, floor: Math.floor(r.exact), remainder: r.exact - Math.floor(r.exact) }));
-  let allocated = floors.reduce((sum, f) => sum + f.floor, 0);
+  const allocated = floors.reduce((sum, f) => sum + f.floor, 0);
   let remaining = totalCount - allocated;
 
   // 나머지가 큰 순서로 1개씩 더 배분한다.

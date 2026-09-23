@@ -67,7 +67,7 @@ function generateProportionModel(params: { difficulty: RatiosRatesDifficulty }):
   const { ratio, scale } = RANGE_BY_DIFFICULTY[params.difficulty];
   const [itemA, itemB] = ITEM_PAIRS[randInt(0, ITEM_PAIRS.length - 1)];
   for (let attempt = 0; attempt < 50; attempt++) {
-    let a = randInt(2, ratio);
+    const a = randInt(2, ratio);
     let b = randInt(2, ratio);
     if (a === b) b = a + 1;
     const k = randInt(2, scale);

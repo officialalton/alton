@@ -84,7 +84,7 @@ export default function ConsultAvailabilityMonthView({
   // 예외 목록이 바뀌면(등록/삭제) 현재 보고 있는 달의 실측 슬롯도 다시 불러온다.
   useEffect(() => {
     loadMonth(currentYearMonth);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [exceptions, currentYearMonth]);
 
   const badgesByDate = slots.reduce<Record<string, { count: number }>>((acc, s) => {

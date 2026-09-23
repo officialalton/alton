@@ -76,7 +76,7 @@ export default function UnitPrepPanel({
     return () => {
       cancelled = true;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+     
   }, [overlayUnitId]);
 
   async function withComposition(run: () => Promise<{ ok: true } | { ok: false; error: string }>) {
