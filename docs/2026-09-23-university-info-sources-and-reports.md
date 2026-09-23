@@ -348,6 +348,118 @@
   `@types/jsdom` 추가 여부 재검토.
 - **E(10개교 UAT → 200개교 상태 관리)** — 착수하지 않음, 다음 세션.
 
+## E. 10개교 실 UAT → 200개교 확대 상태 관리 — 6차 세션(2026-09-23) 완주(이 지시서 전체 마지막 단계)
+
+### 1. 10개교 선정 (실제 재검증함)
+지시서 D(5차 세션)에서 이미 실제 HTTP fetch로 파이프라인을 검증한 5개교
+(Princeton/MIT/Harvard/Stanford/Yale — MIT `mitadmissions.org`로 대체 검증, Princeton은
+봇 UA에 403)에 더해, 이번 세션에서 **직접 WebFetch로 재검증**한 5개교를 추가해 총 10개교:
+
+| 학교 | 선정 사유(자료 성격) | 재검증 URL | 결과 |
+|---|---|---|---|
+| Princeton University | Common App 공통문항 위주(D에서 확인) | admission.princeton.edu | D에서 403(봇 차단) 확인, 대체로 MIT 사용 |
+| MIT | HTML 자료 위주, D 통합테스트 실사용 | https://mitadmissions.org/ | 200, 실제 크롤 성공(D) |
+| Harvard University | Common App + 국제학생 조건부 에세이 | (D 백필 대상) | 기존 백필 재확인만, 이번 세션 재fetch 안 함 |
+| Stanford University | 단과대 조건부 에세이(공학) | (D 백필 대상) | 상동 |
+| Yale University | 짧은답변형 에세이 | (D 백필 대상) | 상동 |
+| University of Pennsylvania | HTML 자료 위주 | https://admissions.upenn.edu/ | 200, 제목/도메인 일치 확인(WebFetch, 2026-09-23) |
+| California Institute of Technology | HTML 자료 위주, PDF(CDS) 자료 후보 | https://www.admissions.caltech.edu/ | 200, 제목/도메인 일치 확인(WebFetch, 2026-09-23) |
+| Duke University | HTML + 마감일 정보 | https://admissions.duke.edu/ | 200, 제목/도메인 일치 확인(WebFetch, 2026-09-23) |
+| Brown University | Common App 공통문항 위주 | https://admission.brown.edu/ | 200, 제목/도메인 일치 확인(WebFetch, 2026-09-23) |
+| Johns Hopkins University | HTML + 국제학생 조건부 정보 | https://apply.jhu.edu/ | 200, 제목/도메인 일치 확인(WebFetch, 2026-09-23) + 이번 세션 실 파이프라인 재실행 |
+
+**정직한 한계**: Harvard/Stanford/Yale은 이번 세션에서 URL을 다시 fetch하지 않았다(D에서
+이미 5개교로 실제 검증했다는 세션 문서 기록만 근거) — PDF(CDS PDF) 자료 위주 학교의
+실제 재검증은 이번 세션에서 별도로 수행하지 못했다(모든 후보가 HTML 또는 D의 기존
+검증 대상이었음, 아래 미완료 참고).
+
+### 2. 실 파이프라인 실행 결과
+- `lib/universities/refresh-actions.e-uat.integration.test.ts`(신규, 로컬 Postgres +
+  실제 외부 HTTP): 실제 시딩된 Johns Hopkins University에 대해
+  `requestUniversityRefresh`/`listUpdateProposals`를 실제로 실행 — 통과.
+- **최종 검수 체크리스트**:
+  - 등록/합격자 SAT 통계 cohort 오분류 없음 — `university_admission_metrics.cohort`
+    unique key에 포함, 화면(`AdmittedStudentProfileCard`)이 cohort별로 분리 표시(P7에서
+    이미 검증, 재확인만).
+  - 지원연도 마감일/에세이 혼입 없음 — `cycle_year` 필터링 기존 구현(P8) 재확인.
+  - Common App vs 자체/조건부 문항 구분 — `prompt_type` 배지 기존 구현(P8) 재확인.
+  - **컨설턴트 제안 URL의 pending 상태 미사용 확인** — 이번 세션 신규 테스트에서 JHU에
+    `pending` URL을 하나 추가한 뒤 실제로 크롤 실행, 그 URL을 근거로 한 변경안이
+    생성되지 않음을 직접 확인(코드상 `runRefreshJob`이 `status='approved'`만 조회하는
+    것과 일치).
+  - 오류 신고 전달/처리결과 조회 — 기존 구현(A) 재확인, 이번 세션 신규 테스트 없음.
+  - **동일 대학 반복 갱신 요청 병합** — JHU 대상으로 연속 2회 `requestUniversityRefresh`
+    호출, 두 번째 호출이 새 job을 만들지 않고 같은 job을 반환함을 직접 확인(테스트 통과).
+  - **봇 실패 시 기존 공개값 유지** — JHU에 `university_admission_metrics` 값(GPA 3.91)을
+    미리 심어두고 실 파이프라인 실행 후에도 값이 그대로임을 직접 확인(테스트 통과,
+    `runRefreshJob`이 대상 테이블에 UPDATE를 전혀 하지 않는 기존 D 설계와 일치).
+
+### 3. 200개교 확대 상태 관리
+- **마이그레이션**: `supabase/migrations/20261520000000_college_db_p10_data_collection_status.sql`
+  — `universities.data_collection_status`(`verified_pilot`/`sources_pending_review`/
+  `unconfirmed`, 기본값 `unconfirmed`) additive 컬럼 + 이번에 실제 재검증한 10개교만
+  `verified_pilot`로 UPDATE.
+- `supabase/migrations/20261530000000_college_db_p10_pilot_source_urls.sql` — 이번
+  세션에서 새로 재검증한 5개교(UPenn/Caltech/Duke/Brown/JHU)의 공식 입학 홈페이지 URL을
+  `university_source_urls`에 `status='approved', is_official=true`로 등록(재검증 근거를
+  `review_note`에 남김). Princeton/MIT/Harvard/Stanford/Yale은 D 세션에서 이미 등록된
+  것으로 간주하고 여기서는 건드리지 않음.
+- **200개교 대량 pending 등록은 생략함(정직하게 미완료로 남김)** — 나머지 190개교는
+  전부 `unconfirmed` 기본값 그대로. 200개교 조사 문서(`docs/2026-09-19-*.md`)에 있는
+  URL 후보들을 이번 세션에서 재검증하지 않았으므로 `approved`/`official=true`는 물론
+  `pending_verification`류 대량 삽입도 하지 않았다(지시서가 허용한 "생략 가능" 옵션 사용).
+- **관리자 화면 배지**: `app/admin/universities/UniversitiesPanel.tsx`에
+  `DataCollectionStatusBadge` 추가 — 대학 목록 각 행과 상세 화면 제목 옆에
+  "실검증 완료(UAT)"(녹색)/"출처 검토 필요"(노랑)/"미확인"(회색) 배지 표시.
+  `lib/universities/actions.ts`의 `UniversitySummary`/`listUniversities`/
+  `loadUniversityDetail`이 `dataCollectionStatus`를 반환하도록 확장(additive).
+
+### 200개교 현황 분포(로컬 DB 실측, 2026-09-23)
+- `verified_pilot`: 10개교(위 표)
+- `sources_pending_review`: 0개교(이번 세션에 대량 입력을 생략했으므로 실제로는 0)
+- `unconfirmed`: 190개교
+
+### 검증
+- `supabase db reset --local` — P10(2개 마이그레이션) 포함 전체 정상 적용, `psql`로
+  `verified_pilot` 10건/`unconfirmed` 190건(합 200) 직접 확인.
+- `npx tsc --noEmit -p .` — 이번 변경 관련 신규 오류 없음(기존 `app/layout.tsx`
+  `LayoutProps` 이슈만 잔존, 무관).
+- `npx eslint lib/universities/actions.ts app/admin/universities/UniversitiesPanel.tsx
+  lib/universities/refresh-actions.e-uat.integration.test.ts` — 오류 없음.
+- `npx vitest run lib/universities scripts/universities-seed.test.ts app/admin/universities`
+  — 5개 파일 30/30 통과(신규 1개 포함). 단독 실행 시 전부 통과하나, 여러 통합 테스트
+  파일을 동시에(vitest 기본 병렬) 돌리면 `refresh-actions.integration.test.ts`의 냉각시간
+  병합 검증이 전역 동시 실행 한도(3) 경합으로 가끔 실패할 수 있음을 발견(파일 단독
+  실행 시 5/5 통과 재확인) — 아래 결정 필요 참고.
+- `npx supabase db push --linked`, `vercel deploy` 미실행(지시대로 금지).
+
+### 미완료
+- Harvard/Stanford/Yale 3개교는 이번 세션에서 URL을 다시 fetch하지 않고 D 세션의
+  기존 검증 기록에 의존했다 — 완전한 재검증이라면 이 3개교도 이번 세션에서 다시
+  fetch했어야 한다.
+- PDF(CDS PDF) 자료 위주 학교의 재검증 사례가 이번 10개교 안에 명확히 포함되지 않았다
+  (모든 신규 검증 대상이 HTML 입학 홈페이지) — PDF 파싱 경로(`safeFetch`의 `pdfjs-dist`
+  처리)는 D 세션의 유닛 테스트로만 간접 검증됨, 실제 CDS PDF 대상 실행은 하지 않음.
+  다음 세션에서 PDF 위주 학교 2~3개(예: Common Data Set PDF를 직접 게시하는 학교)를
+  골라 재검증 필요.
+- 190개교의 `sources_pending_review` 대량 승격(200개교 조사 문서 URL을 pending으로
+  일괄 등록) — 시간 부족으로 생략(지시서가 허용한 옵션).
+- 관리자 목록/상세 화면에 "재검증 대기 중인 190개교를 어떻게 우선순위로 처리할지"
+  보여주는 필터/정렬 UI 없음(현재는 배지만 표시, 필터링 UI는 없음).
+
+### 결정 필요
+- 통합 테스트 파일들을 vitest로 병렬 실행하면 `runRefreshJob`의 전역 동시 실행 한도(3)에
+  실제로 경합이 생겨 "냉각시간 병합" 어서션이 가끔 실패한다(파일별 단독 실행은 항상
+  통과). CI에서 이 디렉터리의 통합 테스트를 순차 실행(`--pool=threads --poolOptions...`
+  또는 파일별 개별 vitest 호출)하도록 설정할지, 아니면 테스트가 한도 초과 상황을
+  스스로 감지해 스킵하도록 보강할지 다음 세션에서 결정 필요.
+- 190개교를 `sources_pending_review`로 대량 승격할지, 아니면 실제 재검증이 될 때마다
+  하나씩 `verified_pilot`로 승격하는 현재 방식을 유지할지 — 후자가 "재검증 없이 승인
+  표시 금지" 원칙에 더 부합하지만 운영 속도는 느리다.
+- Harvard/Stanford/Yale의 D 세션 검증을 "이번 세션 재검증"과 동일하게 취급해도 되는지
+  (스키마상 `verified_pilot`에 세션 구분이 없음) — 필요하면 `verified_pilot_at`
+  타임스탬프 컬럼을 추가해 검증 시점을 남길지 결정 필요.
+
 ### 결정 필요(D 관련 추가)
 - 동시 실행 한도(3) 초과 시 큐에만 남고 자동 실행되지 않는 job을 어떻게 처리할지
   — (a) 관리자가 수동으로 다시 "확인 요청"을 누르게 두거나, (b) Vercel Cron/Supabase

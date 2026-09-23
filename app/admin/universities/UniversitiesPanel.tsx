@@ -104,6 +104,19 @@ const CALENDAR_OPTIONS = [
   { value: "other", label: "기타" },
 ];
 
+/** 지시서 E: 200개교 확대 상태 배지. 재검증 없이 verified_pilot로 표시하지 않는다는 원칙을
+ * 화면에서도 그대로 드러낸다(색상만으로 구분하지 않고 텍스트로 명확히 표기). */
+function DataCollectionStatusBadge({ status }: { status: "verified_pilot" | "sources_pending_review" | "unconfirmed" }) {
+  const style =
+    status === "verified_pilot"
+      ? "bg-green-100 text-green-700"
+      : status === "sources_pending_review"
+        ? "bg-yellow-100 text-yellow-700"
+        : "bg-grey-100 text-grey-500";
+  const text = status === "verified_pilot" ? "실검증 완료(UAT)" : status === "sources_pending_review" ? "출처 검토 필요" : "미확인";
+  return <span className={`rounded px-1.5 py-0.5 text-[10px] font-medium ${style}`}>{text}</span>;
+}
+
 /** 텍스트·숫자·날짜 입력 공용 라벨+인풋. onChange는 항상 문자열을 받는다(호출부에서 파싱). */
 function Field({
   label,
@@ -195,9 +208,10 @@ export default function UniversitiesPanel({ initialUniversities }: { initialUniv
                   selectedId === u.id ? "bg-grey-100" : ""
                 }`}
               >
-                <span>
+                <span className="flex items-center gap-2">
                   <span className="mr-2 text-grey-400">#{u.rankFinal ?? "-"}</span>
                   {u.name}
+                  <DataCollectionStatusBadge status={u.dataCollectionStatus} />
                 </span>
                 <span className="text-xs text-grey-400">{u.latestCycleYear ?? "미입력"}</span>
               </button>
@@ -378,7 +392,10 @@ function UniversityDetailPanel({
 
   return (
     <div className="rounded border border-grey-200 bg-white p-4">
-      <h2 className="text-lg font-semibold text-ink">{detail.name}</h2>
+      <h2 className="flex items-center gap-2 text-lg font-semibold text-ink">
+        {detail.name}
+        <DataCollectionStatusBadge status={detail.dataCollectionStatus} />
+      </h2>
       <p className="text-xs text-grey-500">
         #{detail.rankFinal ?? "-"} · {detail.city ?? "-"}, {detail.state ?? "-"} · {detail.publicPrivate ?? "-"}
       </p>
