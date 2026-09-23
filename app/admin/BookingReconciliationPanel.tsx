@@ -307,7 +307,7 @@ export default function BookingReconciliationPanel({
       setMessage(
         providedMinutes > 0
           ? "중단으로 확정했습니다(120분 상한 내 정산 + 못 제공한 분은 보충시간으로 이관됨)."
-          : "미시작으로 확정했습니다(수업권 hold 복원, 예약 취소 — 학생이 다시 예약할 수 있습니다)."
+          : "미시작으로 확정했습니다(수업권 보류 복원, 예약 취소 — 학생이 다시 예약할 수 있습니다)."
       );
       setInfraIncidentSessionId(null);
       await refresh();
@@ -406,8 +406,7 @@ export default function BookingReconciliationPanel({
         </div>
       </div>
       <p className="text-[13px] text-grey-500 mb-5">
-        Google Calendar/Meet 생성이 실패했거나 재시도 한도(5회)를 넘긴 예약입니다. 예약·수업권 hold 자체는
-        영향받지 않습니다 — Google 쪽 산출물(이벤트·Meet 링크)만 재처리 대상입니다.
+        Google Calendar·Meet 생성이 실패했거나 재시도 한도(5회)를 넘긴 예약입니다. 예약·수업권 보류 상태는 영향받지 않습니다.
       </p>
 
       {message && <div className="mb-4 text-[13px] font-semibold text-ink bg-green/10 rounded-lg px-4 py-3">{message}</div>}
@@ -519,7 +518,7 @@ export default function BookingReconciliationPanel({
       <h2 className="text-[14px] font-bold text-ink mb-2 mt-8">Google 외부 변경 감지</h2>
       <p className="text-[12px] text-grey-500 mb-3">
         선생님/관리자가 Google Calendar에서 이 수업 이벤트를 ALTON 모르게 직접 바꿨을 때만
-        여기 나타납니다. 예약·세션·수업권 hold는 감지만으로는 전혀 바뀌지 않습니다 — 아래에서
+        여기 나타납니다. 예약·세션·수업권 보류 상태는 감지만으로는 전혀 바뀌지 않습니다 — 아래에서
         관리자가 확인 처리해야만 확정됩니다. **UI 고도화 예정**: 지금은 이 목록 형태로만
         제공하고, 선생님별 금주/주간/월간 통합 일정 캘린더 뷰는 후속 작업으로 남아 있습니다.
       </p>
@@ -571,7 +570,7 @@ export default function BookingReconciliationPanel({
                 />
                 {c.externalChangeStatus === "deleted" ? (
                   <p className="text-[11px] text-grey-500 mb-2">
-                    Google 이벤트가 삭제됐습니다 — 예약·세션·수업권 hold는 자동으로 취소·재생성되지 않습니다.
+                    Google 이벤트가 삭제됐습니다 — 예약·세션·수업권 보류 상태는 자동으로 취소·재생성되지 않습니다.
                     아래 둘 중 하나를 반드시 선택하세요(&ldquo;무시&rdquo;는 허용되지 않습니다): &ldquo;ALTON 일정 유지&rdquo;는 예약을
                     그대로 두고 Calendar 이벤트+Meet을 새로 만들고, &ldquo;예약 취소&rdquo;는 정식 취소 절차(수업권
                     release/30일 연장 포함)로 예약 자체를 정리합니다.
@@ -787,7 +786,7 @@ export default function BookingReconciliationPanel({
               <div className="mt-3 border-t border-grey-200 pt-3">
                 <p className="text-[11.5px] text-grey-500 mb-2">
                   자동 장애 감지는 없습니다 — 관리자가 직접 판단해 선택합니다. 제공 분을 0(또는 비움)으로
-                  두면 &ldquo;미시작&rdquo;(수업권 hold 복원 + 예약 취소로 재예약 가능, 0분 정산)으로, 1분 이상 입력하면
+                  두면 &ldquo;미시작&rdquo;(수업권 보류 복원 + 예약 취소로 재예약 가능, 0분 정산)으로, 1분 이상 입력하면
                   &ldquo;중단&rdquo;(120분 상한 내 정산 + 못 제공한 분은 보충시간으로 자동 이관)으로 처리됩니다.
                 </p>
                 <div className="flex gap-2 items-end mb-2">
@@ -970,7 +969,7 @@ export default function BookingReconciliationPanel({
         ))
       )}
 
-      <h2 className="text-[14px] font-bold text-ink mb-2 mt-8">재판정 대사(reconciliation) 작업</h2>
+      <h2 className="text-[14px] font-bold text-ink mb-2 mt-8">재판정·대사 작업</h2>
       <p className="text-[12px] text-grey-500 mb-3">
         세션을 재개방(reopen)→재확정(recomplete)하면 payable_minutes/정산 항목은 자동 재계산되지만
         수업권 소진·해제(entitlement_ledger)는 예약당 1건 제약상 자동으로 뒤집히지 않습니다. 아래는
