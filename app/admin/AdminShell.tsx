@@ -52,6 +52,7 @@ import type { CurriculumDocListItem } from "./curriculum-doc-data";
 import AdminAccountsTab from "./AdminAccountsTab";
 import type { AdminAccount } from "./admin-accounts-data";
 import ConsultantAssignmentsTab from "./ConsultantAssignmentsTab";
+import MessengerTab from "./MessengerTab";
 import type { ConsultantWithStudents } from "./consultant-assignment-actions";
 import type { IntakeConsultation } from "@/app/consultant/intake-data";
 
@@ -78,6 +79,8 @@ const NAV_ITEMS = [
   { id: "admin-accounts", label: "Admins", icon: "settings" },
   // 2026-09-22(컨설턴트 포지션) — 관리자 전원이 쓴다(학생 배정은 운영 업무).
   { id: "consultants", label: "Consultants", icon: "consultations" },
+  // 관리자 포털 정리 항목 2(2026-09-23) — Teachers/Consultants 내부 문의.
+  { id: "messenger", label: "Messenger", icon: "inquiries" },
 ] as const;
 
 // 2026-09-10(UI/UX 1차 리뷰 지적) — "개발 로그"는 일반 운영 업무 중 볼 메뉴가
@@ -466,6 +469,8 @@ export default function AdminShell({
               initialAssignedAwaitingSchedule={assignedAwaitingSchedule}
               initialAutoAssignEnabled={autoAssignEnabled}
             />
+          ) : activeTab === "messenger" ? (
+            <MessengerTab />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.
