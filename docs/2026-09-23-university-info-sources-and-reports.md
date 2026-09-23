@@ -2457,4 +2457,108 @@ Claude_Browser로 각 학교 학사요람을 열어 페이지네이션을 넘기
    unconfirmed 3개교 처리가 끝나면 반드시 최종 통합보고서를 작성하고
    CDS 정보 노출 UI 확장을 계속 진행할 것 — 매 세션 인계 기록에
    계속 전달.
+
+## 27차 세션 (CDS 실수집 5개교 + 학과 보완 12개교)
+
+### 작업 방식
+- unconfirmed 3개교(Gonzaga/Catholic University of America/Miami
+  University Ohio) 재시도는 이번 세션도 착수하지 못함(시간 배분상
+  CDS 신규 수집 + 학과 보완에 집중) — 다음 세션 최우선 인계 사항으로
+  유지.
+- CDS는 `sources_pending_review`이면서 `common_data_set` 타입
+  `approved` source_url이 있는 41개교 후보 중 실제 CDS 원문을
+  공개 웹에서 확인 가능한 학교부터 처리. Virginia Tech(요청제),
+  UND(미발행), University of Utah(사이트 개편으로 링크 실효),
+  Fordham(2019-20 CDS로 과도하게 오래돼 품질상 제외), Mississippi
+  State(파일 경로 추출 실패)는 이번 세션 스킵.
+
+### CDS 실수집 완료 5개교 (`sources_pending_review` → `verified_pilot`)
+1. **University of Idaho** — CDS 2023-2024 PDF(`content-hub.uidaho.edu`
+   직접 링크, 학교 페이지에서 "latest Common Data Set report" 링크로
+   확보). Fall 2023 등록자 기준 SAT 950/1076/1200, ACT 20/25/29,
+   GPA 3.4, 지원 12222/합격 9666/등록 1869(합격률 79.09%,
+   등록률 19.34%), 1년 재학유지율 75%, 6년 졸업률 60%. 25행 반영.
+2. **University of Washington (Seattle)** — CDS 2025-2026 PDF(공식
+   IR 페이지 직접 다운로드 링크, Seattle/Bothell/Tacoma 3개 캠퍼스
+   중 Seattle 기준). Fall 2025 지원 72933/합격 30446/등록 7129
+   (합격률 41.75%, 등록률 23.42%), 대기자명단 제공 15363/수락
+   8350/합격 2252, SAT 1320/1440/1502, ACT 30/32/34, GPA 3.84,
+   1년 재학유지율 95%(단, UW는 캠퍼스별 CDS가 별도이므로 Bothell/
+   Tacoma는 미반영 — 필요 시 별도 처리). 27행 반영.
+3. **Purdue University (West Lafayette)** — CDS 2023-2024 xlsx(공식
+   `idata` 페이지, 2024-25부터는 PIN/TSW 통합 방식으로 방법론이
+   바뀌어 이전 연도와 비교 불가하므로 **의도적으로 2023-2024(WL
+   단독 기준)를 채택**). 지원 72800/합격 36602/등록 9285(합격률
+   50.28%, 등록률 25.37%), 대기자명단 14184/5252/466, SAT
+   1210/1330/1450, ACT 27/31/34, GPA 3.78, 1년 재학유지율 92.27%,
+   6년 졸업률(2017 코호트, Total) 83.86%. 28행 반영.
+4. **University of Texas at San Antonio** — CDS 2024-2025 xlsx(공식
+   IR 페이지 직접 링크, `openpyxl`로 시트 파싱). Fall 2024 지원
+   25422/합격 22063/등록 5980(합격률 86.79%, 등록률 27.10%), SAT
+   1010/1110/1210, ACT 19/23/25, 1년 재학유지율 80%, 6년 졸업률
+   (2018 코호트, Total) 52.64%. **GPA 평균은 CDS 원문에 값이
+   비어있어(미수집) 추측 채우기 금지 원칙에 따라 행 자체를 만들지
+   않음.** 24행 반영.
+5. **University of Oregon** — CDS 2024-2025 PDF(SharePoint 공개
+   공유폴더, `commonly SharePoint 뷰어(canvas 렌더링)`는 다운로드가
+   안 돼 뷰어 내 페이지 탐색(검색+줌+스크롤)으로 원문 직접 확인).
+   Fall 2024 지원 40021/합격 35337/등록 5087(합격률 88.29%,
+   등록률 14.40%), SAT 1130/1250/1360(제출률 8% — 사실상 test-
+   optional), ACT 23/27/30(제출률 5%), GPA 3.73, 1년 재학유지율
+   86.40%, 6년 졸업률(2017 코호트, Total) 71%. 24행 반영.
+
+재사용 가능 신규 기법: SharePoint `:b:` 공유링크는 curl로는
+세션 쿠키가 없어 항상 HTML 리다이렉트만 반환됨 — 반드시 브라우저로
+열어 내장 PDF 뷰어(캔버스 렌더링, 다운로드 버튼은 실제 파일시스템
+저장이라 이 세션 툴로는 못 읽음)에서 자체 검색(search-in-pdf)
+기능으로 필요한 섹션(`C9`, `B22`, `divided by C` 등 키워드)을
+찾아 100%/200% 줌 + 스크롤로 표 값을 직접 읽는 방식이 유일하게
+동작했다.
+
+### DB 반영 확인 (psql 직접 실행 결과)
+- `data_collection_status`: `verified_pilot` **135 → 140개교**,
+  `sources_pending_review` **62 → 57개교**, `unconfirmed`
+  **3개교 변동 없음**.
+- `university_admission_metrics`: 이번 세션 5개교 총 128행 신규/
+  upsert(Idaho 25, UW 27, Purdue 28, UTSA 24, Oregon 24).
+- `university_majors`: 이번 세션 12개교 총 **979행 신규 삽입**
+  (Baylor 112, Michigan State 183, James Madison 66, Elon 74,
+  Illinois State 182, East Carolina 118, Duquesne 68, Idaho
+  State 108, Chapman 48, Clark 48, American 52, Adelphi 61).
+  전체 DB 기준 `university_majors` 보유 학교 92개교/총 3,878행으로
+  증가.
+- **American University·Howard University 관련 경고**: American은
+  College of Arts & Sciences 소속 전공만 확보(Kogod 경영대/SIS/
+  SOC/SPA 등 다른 단과대 전공 미포함 — 표준 5번 "전체 수집" 원칙
+  위반 소지가 있으므로 다음 세션에서 나머지 단과대 보완 필요).
+  Howard University는 페이지에 학과(department) 20개만 나열되고
+  개별 전공명이 아니어서 이번 세션엔 삽입하지 않고 보류함.
+- `git status`: 앱 코드/스크립트 변경 없음(DB만 psql로 직접 수정).
+  새 마이그레이션 파일 생성하지 않음(스키마 변경 없음, 기존
+  `university_admission_metrics`/`university_majors` 테이블에
+  데이터 행만 추가). `npx supabase db push --linked` /
+  `vercel deploy` 실행하지 않음.
+
+### 다음 세션 인계 (28차용)
+1. unconfirmed 3개교(Gonzaga/Catholic University of America/Miami
+   University Ohio) 재시도 — 4개 세션 연속 이월 중, 최우선 처리 필요.
+2. American University 나머지 단과대(Kogod School of Business,
+   School of International Service, School of Communication,
+   School of Public Affairs) 전공 추가 보완 — CAS만 반영된 상태.
+3. Clemson/Oklahoma State/Purdue(CDS) 등 WAF로 막히는 곳은
+   Claude_Browser로 재시도(이번 세션엔 시도 안 함).
+4. sources_pending_review 남은 **57개교** 처리 계속. 이번 세션에
+   스킵한 Virginia Tech(요청제 CDS), UND(미발행), University of
+   Utah(사이트 개편), Fordham(구식 CDS), Mississippi State(파일
+   경로 미확인)는 별도 접근법 필요.
+5. 학과 미보유 학교가 아직 **108개교**(120개교 중 12개교 처리) 남음 —
+   Clarkson University, Bowling Green State University, Kansas
+   State University(필터링 복잡), George Mason University,
+   Georgia State University(12페이지 페이지네이션) 등은 이번
+   세션에 시도했으나 시간 관계상 미완료.
+6. 관리자 화면 노출 확인 여전히 미착수.
+7. 200개교 CDS 수집은 이제 140/200(70%) 완료. 남은 57개교 +
+   unconfirmed 3개교 처리가 끝나면 반드시 최종 통합보고서를 작성하고
+   CDS 정보 노출 UI 확장을 계속 진행할 것 — 매 세션 인계 기록에
+   계속 전달.
    매 세션 인계 기록에 계속 전달.
