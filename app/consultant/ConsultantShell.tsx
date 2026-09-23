@@ -6,6 +6,7 @@ import { getRoadmapForStudent } from "@/lib/roadmap/actions";
 import type { RoadmapData } from "@/lib/roadmap/types";
 import RoadmapView from "@/app/components/RoadmapView";
 import CollegeExploreSection from "@/app/components/CollegeExploreSection";
+import DocumentsPanel from "./DocumentsPanel";
 import PlannerOverviewView from "@/app/student/PlannerOverviewView";
 import BoardColumnsView from "@/app/components/BoardColumnsView";
 import type { ConsultantStudent, EndedConsultantStudent } from "./consultant-data";
@@ -54,7 +55,7 @@ import {
   type TimeOffConflict,
 } from "./time-off-actions";
 
-type NavId = "students" | "assignments" | "schedule" | "college-explore";
+type NavId = "students" | "assignments" | "schedule" | "documents" | "college-explore";
 
 const WEEKDAY_LABELS = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -140,6 +141,19 @@ export default function ConsultantShell({
         </button>
         <button
           onClick={() => {
+            setNav("documents");
+            setSelectedId(null);
+          }}
+          aria-current={nav === "documents" ? "page" : undefined}
+          className={
+            "w-full text-left px-2.5 py-2.5 rounded-lg text-[13px] font-semibold " +
+            (nav === "documents" ? "bg-red text-white" : "text-grey-500 hover:bg-grey-100 hover:text-ink")
+          }
+        >
+          Documents
+        </button>
+        <button
+          onClick={() => {
             setNav("college-explore");
             setSelectedId(null);
           }}
@@ -165,6 +179,8 @@ export default function ConsultantShell({
           <MyKanbanSection />
         ) : nav === "schedule" ? (
           <SchedulePanel assignedConsultations={assignedConsultations} />
+        ) : nav === "documents" ? (
+          <DocumentsPanel />
         ) : nav === "college-explore" ? (
           <div className="px-8 py-8">
             <h1 className="text-[20px] font-extrabold text-ink mb-5">College Explore</h1>
