@@ -1067,3 +1067,87 @@ Writing/Science/Reading, Auburn의 ACT Science/Reading, GPA 4.0 세부 분포 �
   컨설턴트·학생·학부모가 참고할 만한 항목은 전부 공개 화면에 노출되도록
   UI를 계속 확장할 것 — 이 지시는 200개교가 끝날 때까지 매 세션 인계
   기록에 계속 전달되어야 한다.
+
+## 13차 세션 — CDS 원문 실제 반영: Cornell/GWU/BU/BC/CWRU/Lehigh 6개교
+
+### 처리 완료 학교 (12차 세션 3개교 제외, 신규 6개교)
+1. **Cornell University** — CDS 2025-2026 공식 PDF(`irp.cornell.edu`),
+   Fall 2025 코호트, cycle_year=2025. 32개 지표(지원/합격/등록 수,
+   합격률·등록률 재계산, 대기자명단, SAT/ACT 25·50·75, 상위10%,
+   1년 재학유지율, 6년 졸업률, 등록금). GPA 평균은 원문 공란(미보고,
+   추측 금지로 미입력). G1 등록금은 원문이 **2026-2027학년도**를
+   보고(입학지표는 2025-2026학년도 Fall 2025 코호트) — CDS 발행 주기상
+   흔한 시차이며 notes에 명시.
+2. **George Washington University** — CDS 2025-2026(`irp.gwu.edu`),
+   Fall 2025, cycle_year=2025. 39개 지표. ACT 전 영역(Science/Reading
+   포함) 원문에 값 있어 전부 반영. GPA 평균 공란(미입력). G1도 Cornell과
+   동일하게 2026-2027학년도 등록금 시차 존재 — notes에 명시.
+3. **Boston University** — CDS 2025-2026, 섹션별 개별 PDF
+   (`bu.edu/asir` — A~I 분리 발행) 중 B/C/G만 다운로드. Fall 2025,
+   cycle_year=2025. 41개 지표. GPA 평균 3.86(제출률 100%), GPA 4.0
+   비율 36%(전체 기준)까지 반영. 등록금은 admissions와 동일 학년도
+   (2025-2026)로 시차 없음.
+4. **Boston College** — 학교 사이트에 **2025-2026 CDS가 아직
+   게시되지 않아** 최신 게시본인 **2024-2025판(Fall 2024 코호트)**
+   사용, cycle_year=2024로 정직하게 기록(추측으로 2025를 채우지 않음).
+   38개 지표. GPA 평균은 원문 공란.
+5. **Case Western Reserve University** — CDS 2025-2026(`case.edu/ir`),
+   Fall 2025, cycle_year=2025. 34개 지표. GPA 평균 3.78(제출률 92%).
+   대기자명단 "수락 인원"은 원문 공란이라 미입력. G1 등록금도
+   2026-2027학년도로 발행되어 있고 **필수비/기숙사·식비 항목 자체가
+   원문에 공란**이라 Tuition($71,410)만 반영(추측 합산 금지) — notes에
+   상세 명시.
+6. **Lehigh University** — CDS 2025-2026(`data.lehigh.edu`), Fall 2025,
+   cycle_year=2025. 34개 지표. GPA 평균 원문 공란. 등록금은
+   "Undergraduates" 열에만 값이 있고 "First-Year" 열은 공란 —
+   Undergraduates 값을 사용했음을 notes에 명시.
+
+### 방법론
+12차 세션과 동일: 각 학교 IR/CDS 랜딩 페이지를 `curl -A "Mozilla/5.0"`로
+가져와 최신 연도 CDS PDF 링크 탐색 → `curl`로 PDF 다운로드 →
+`pdftotext -layout`로 텍스트화 → B(재학생)/C(신입생 입학)/G(학비) 섹션을
+수기로 판독하여 지원자/합격자/등록자(C1), 대기자명단(C2), SAT/ACT
+25·50·75(C9), 상위10%(C10), GPA 평균(C12), 1년 재학유지율(B22), 6년
+졸업률(B4-B11/B14), 등록금(G1)을 추출. 합격률·등록률은 원문에 %가 없거나
+반올림 오차가 있는 경우 원시 인원수로 재계산해 notes에 명시. 값이 원문에
+없는 항목(GPA 평균, 특정 ACT 세부영역, 대기자 수락 인원 등)은 절대
+추측하지 않고 스킵.
+
+### 발견한 이상 징후 (notes에도 기록)
+- **Cornell/GWU/CWRU**: G1(학비) 섹션이 admissions 섹션(C1 Fall 2025)과
+  달리 **다음 학년도(2026-2027)** 등록금을 보고하는 CDS 발행 관행이
+  확인됨(12차 세션 CMU 사례와 동일 패턴) — 등록금 지표는 입학 코호트와
+  학년도가 정확히 일치하지 않을 수 있음에 유의.
+- **Boston College**: 2025-2026 CDS가 아직 미게시라 2024-2025판(Fall
+  2024)만 반영 — 다음 세션에서 2025-2026판 게시 여부 재확인 필요.
+- **Case Western**: G1에 필수비/기숙사비 자체가 공란인 특이 케이스.
+
+### 학과(전공) 목록 보완
+이번 세션은 시간 제약으로 미착수. 다음 세션 과제로 이월.
+
+### verified_pilot 승격 및 최종 카운트 (psql 직접 확인, 세션 종료 시점)
+- `data_collection_status`: `verified_pilot` 13→19, `sources_pending_review`
+  175→169, `unconfirmed` 12(변동 없음). 합계 200 유지.
+- `university_admission_metrics` 총 행수 364(psql 직접 카운트).
+- 새 마이그레이션 없음(데이터만 반영, 스키마 변경 없음).
+
+### 검증
+- `psql`로 `university_admission_metrics`, `universities.data_collection_status`
+  분포 직접 확인(위 카운트).
+- `npx tsc --noEmit` 실행 확인 — `app/layout.tsx(22,50): Cannot find name
+  'LayoutProps'` 1건 발견되었으나 이번 세션이 변경한 파일과 무관한
+  기존 이슈(데이터 반영만 수행, 앱 코드 미변경)이므로 그대로 기록만 남김.
+- 코드 변경이 없어 `eslint`/`vitest`는 이번 세션 범위와 무관.
+- `npx supabase db push --linked`, `vercel deploy` 미실행(지시대로 금지).
+
+### 다음 세션 필요 (갱신)
+- **최우선**: 남은 `sources_pending_review` 169개교를 동일 방식으로 계속
+  처리. 이번 세션에서 겪은 어려움: 일부 학교(Georgetown 등)는 CDS 파일이
+  Box.com 등 외부 스토리지에 연도 라벨 없이 해시형 URL로 걸려 있어
+  최신본 식별에 추가 탐색이 필요 — 이런 학교는 스킵하고 다음으로 넘어갔음
+  (Georgetown은 아직 미반영 상태로 남아있음, 재시도 필요).
+- 학과(전공) 목록 전체 보완(additive) — 여전히 미착수.
+- **200개교 전체가 끝나면 반드시 최종 통합보고서를 작성**하고 CDS 정보 중
+  컨설턴트·학생·학부모가 참고할 만한 항목은 전부 공개 화면에 노출되도록
+  UI를 계속 확장할 것 — 이 지시는 200개교가 끝날 때까지 매 세션 인계
+  기록에 계속 전달되어야 한다.
