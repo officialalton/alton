@@ -1151,3 +1151,104 @@ Writing/Science/Reading, Auburn의 ACT Science/Reading, GPA 4.0 세부 분포 �
   컨설턴트·학생·학부모가 참고할 만한 항목은 전부 공개 화면에 노출되도록
   UI를 계속 확장할 것 — 이 지시는 200개교가 끝날 때까지 매 세션 인계
   기록에 계속 전달되어야 한다.
+
+## 14차 세션 (2026-09-23, CDS 실수집 — Vanderbilt/Rochester/Georgetown/Northwestern/UChicago/Temple)
+
+### 처리 완료 학교 (6개교)
+1. **Vanderbilt University** — CDS 2025-2026 xlsx(`vanderbilt.edu/data`), Fall
+   2025, cycle_year=2025. 43개 지표. 대기자명단은 합격 수(207)만 공개,
+   제공/수락 수는 원문 공란. 등록금은 2026-2027학년도(Tuition 69822 +
+   필수비 3384 + 기숙사/식비 23690 = 96896).
+2. **University of Rochester** — CDS 2025-2026 PDF(`rochester.edu/provost`),
+   Fall 2025, cycle_year=2025. 43개 지표. B22 원문 문구가 "Fall 2025
+   entering cohort"라 되어 있으나 표 자체는 Fall 2024 코호트 기준(보일러플레이트
+   오기로 판단, notes에 기록). 등록금 2026-2027학년도 94944.
+3. **Georgetown University** — 13차 세션이 라벨 없는 Box.com 해시라 스킵한
+   학교. 이번 세션에서 실제로 열어본 결과 파일 메타데이터/본문에
+   "CDS_2025-2026.pdf"/"Common Data Set 2025-2026"이 명확히 확인되어
+   정식 반영(`https://georgetown.box.com/s/0r8akn4cbm52zjkll6i7uttlb9k36px2`,
+   페이지 텍스트 링크 라벨 "2025-2026 Common Data Set"으로 최신본임을
+   교차 확인). 42개 지표. **GPA 평균·GPA 4.0비율·ACT Writing은 원문에
+   전부 공란**이라 `value_text='N/A(미수집)'`으로 명시(추측 금지). 등록금
+   2026-2027학년도 96912.
+4. **Northwestern University** — CDS 2025-2026 PDF(`enrollment.northwestern.edu`),
+   Fall 2025, cycle_year=2025. 41개 지표. **고교 석차(C10)·GPA 분포(C11)·GPA
+   평균(C12)·대기자 제공/수락 수·housing/food 개별 항목이 전부 "C or t"
+   (Confidential or not tabulated) 또는 미기재 템플릿 문구**로 공개되지
+   않아 해당 항목은 `value_text='N/A(미수집)'` 처리. 등록금 2026-2027학년도
+   95965.
+5. **University of Chicago** — CDS PDF(`data.uchicago.edu`, 파일명은
+   "CDS_2025-2026_to_publish-1.pdf"). 42개 지표. **특이사항**: PDF 1~2쪽
+   헤더는 "Common Data Set 2025-2026"인데 B섹션부터 여러 쪽의 페이지
+   헤더가 "Common Data Set 2024-2025"로 남아있는 편집 오류 발견 — 다만
+   실제 데이터(Fall 2025 입학, Fall 2024→2025 재학유지, 2019 졸업
+   코호트)는 2025-2026판과 정확히 일치해 데이터 자체는 신뢰하고 반영,
+   notes에 이 불일치를 기록. ACT Writing 원문 공란. 등록금
+   2026-2027학년도 100089. 등록률(yield) 87.6%로 매우 높게 나타남(ED/ED2
+   비중이 큰 입학정책 특성 — notes에 설명 추가, 오류 아님).
+6. **Temple University** — CDS 2025-26 PDF(`ira.temple.edu`, 파일명
+   "CDS 2025-26_Temple University_26-27_Class-Rank-Update.pdf"). 40개
+   지표. 공립대학 특성상 단과대별 차등등록금이라 원문이 3개년 가중평균값을
+   보고 — in-state/in-district 40462, out-of-state 57455(notes에 산출
+   근거 기록). GPA 평균/분포 전 항목 원문 공란(`N/A(미수집)`). SAT/ACT
+   제출률이 매우 낮음(SAT 19%/1000명, ACT 1%/76명) — 표본 편향 가능성을
+   notes에 명시.
+
+### 방법론 (12~13차와 동일, 신규 도구만 추가)
+- PDF는 기존과 동일하게 `curl -A "Mozilla/5.0"` → `pdftotext -layout` →
+  Read로 B/C/G 섹션 직접 판독.
+- Vanderbilt는 IR 페이지가 `.xlsx` 원본을 게시해, Python 가상환경
+  (`/tmp/venv_cds`)에 `openpyxl`을 설치해 시트(CDS-B/C/G)를 프로그램적으로
+  파싱 — CDS 문항 코드(B.xxx/C.xxx/G.xxx)를 키로 추출해 오독 위험을
+  낮췄다. 다음 세션에서 xlsx형 CDS를 만나면 이 방식(venv+openpyxl)을
+  재사용할 것.
+- Georgetown Box.com 링크는 `curl -L`로 `https://<subdomain>.box.com/s/<hash>`에
+  접속하면 HTML 미리보기가 뜨는데, `<meta property="og:title" content="파일명.pdf">`에서
+  실제 파일명(연도 포함)을 확인할 수 있었고, `https://<subdomain>.box.com/shared/static/<hash>.pdf`
+  형태로 바꾸면 PDF 원본을 직접 받을 수 있었다 — 라벨 없는 Box 공유
+  링크를 만나면 이 방법을 먼저 시도할 것.
+
+### 로컬 DB 기동 관련 메모
+이번 세션 시작 시 `supabase status`가 "Stopped"였다 — `supabase start`로
+로컬 스택을 재기동한 뒤 `psql -h 127.0.0.1 -p 54422 -U postgres -d postgres`
+(비밀번호 `postgres`)로 접속해 작업. 다음 세션도 먼저 `supabase status`로
+확인 후 필요시 `supabase start`.
+
+### 학과(전공) 목록 보완
+이번 세션도 CDS 실수집에 시간을 모두 사용해 미착수. 13차에 이어 계속
+이월 — **누적 2세션째 미착수**, 다음 세션에서 최소 몇 개교라도 반드시
+시도할 것.
+
+### verified_pilot 승격 및 최종 카운트 (psql 직접 확인, 세션 종료 시점)
+- `data_collection_status`: `verified_pilot` 19→25, `sources_pending_review`
+  169→163, `unconfirmed` 12(변동 없음). 합계 200 유지.
+- `university_admission_metrics` 총 행수 364→615(신규 251행: Vanderbilt
+  43 + Rochester 43 + Georgetown 42 + Northwestern 41 + UChicago 42 +
+  Temple 40 = 251).
+- 새 마이그레이션 없음(데이터만 반영, 스키마 변경 없음).
+
+### 검증
+- `psql`로 `university_admission_metrics` 총 행수(615)와
+  `universities.data_collection_status` 분포(`verified_pilot`=25) 직접
+  확인.
+- `npx tsc --noEmit` 실행 — `app/layout.tsx(22,50): Cannot find name
+  'LayoutProps'` 1건, 13차 세션과 동일한 기존 이슈(이번 세션 미변경
+  파일)로 재확인만 하고 그대로 둠. 코드 변경이 없어 eslint/vitest는
+  이번 세션 범위와 무관.
+- `npx supabase db push --linked`, `vercel deploy` 미실행(지시대로 금지).
+
+### 다음 세션(15차) 필요
+- **최우선**: 남은 `sources_pending_review` 163개교를 동일 방식으로 계속
+  처리(전체 목록은 `university_source_urls`에서
+  `source_type='common_data_set' and status='approved'`이고
+  `universities.data_collection_status <> 'verified_pilot'`로 조회).
+- 이번 세션에서 시도했으나 접속 실패/차단으로 스킵한 학교: Emory(JS
+  렌더링 페이지로 curl 정적 수집 불가), Rice(Cloudflare 5xx 차단),
+  USC(정적 수집 불가), University of Virginia(요청 응답 없음) — 다음
+  세션은 브라우저 기반 도구(headless) 사용을 고려할 것.
+- 학과(전공) 목록 전체 보완(additive) — **누적 2세션째 미착수**, 반드시
+  다음 세션에서 착수.
+- **200개교 전체가 끝나면 반드시 최종 통합보고서를 작성**하고 CDS 정보 중
+  컨설턴트·학생·학부모가 참고할 만한 항목은 전부 공개 화면에 노출되도록
+  UI를 계속 확장할 것 — 이 지시는 200개교가 끝날 때까지 매 세션 인계
+  기록에 계속 전달되어야 한다.
