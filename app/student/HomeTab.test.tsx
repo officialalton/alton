@@ -21,6 +21,10 @@ vi.mock("./board-actions", () => ({
   deleteMyManualTaskAction: vi.fn(),
 }));
 
+vi.mock("./review-actions", () => ({
+  getMyLessonReviewsAction: vi.fn().mockResolvedValue([]),
+}));
+
 const dashboard: DashboardData = {
   studentName: "지훈",
   upcoming: [],
@@ -36,19 +40,20 @@ const cards: BoardCard[] = [
 ];
 
 describe("HomeTab — Home+Planner 통합(2026-09-22 사용자 지시)", () => {
-  it("Overview가 기본이고, TODO/Done으로 전환된다(Lesson은 Classes '수업 일정'으로 옮겨짐)", async () => {
+  it("Overview가 기본이고, TODO/Review로 전환된다(Lesson은 Classes '수업 일정'으로 옮겨짐, Done은 별도 탭 없이 보드 완료 칼럼)", async () => {
     (loadMyBoardCardsAction as ReturnType<typeof vi.fn>).mockResolvedValue(cards);
     render(<HomeTab studentName="지훈" dashboard={dashboard} />);
 
     expect(await screen.findByText("전체 완료율")).toBeInTheDocument();
     expect(screen.queryByText("Lesson")).toBeNull();
+    expect(screen.queryByText("Done")).toBeNull();
 
     fireEvent.click(screen.getByText("TODO"));
     expect(await screen.findByText("9월 과제")).toBeInTheDocument();
-    expect(screen.queryByText("완료된 할일")).toBeNull();
-
-    fireEvent.click(screen.getByText("Done"));
     expect(await screen.findByText("완료된 할일")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText("Review"));
+    expect(await screen.findByText("수업 리뷰")).toBeInTheDocument();
   });
 
   it("TODO에서 할 일을 추가/이동/삭제할 수 있다", async () => {

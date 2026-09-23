@@ -35,6 +35,7 @@ vi.mock("./memo-actions", () => ({
 
 vi.mock("./review-actions", () => ({
   submitStudentFeedback: vi.fn(),
+  getMyLessonReviewsAction: vi.fn(async () => []),
 }));
 
 vi.mock("@/app/session/[id]/homework-actions", () => ({
@@ -194,9 +195,11 @@ describe("StudentShell", () => {
     expect(screen.getByText(/지훈의 학습 현황/)).toBeInTheDocument();
   });
 
-  // 2026-09-22(사용자 지시) — Home 탭 안에서 Overview/TODO/Done 서브탭으로
-  // 전환된다(별도 Planner nav 없음). 캘린더·예정 수업은 Classes 탭으로 옮겨졌다.
-  it("Home 탭 서브탭(Overview/TODO/Done)을 오갈 수 있다", async () => {
+  // 2026-09-22(사용자 지시, 재지시로 Done 서브탭 제거) — Home 탭 안에서
+  // Overview/TODO/Review 서브탭으로 전환된다(별도 Planner nav 없음). 완료
+  // 항목은 별도 탭이 아니라 TODO의 보드 완료 칼럼에 있다. 캘린더·예정 수업은
+  // Classes 탭으로 옮겨졌다.
+  it("Home 탭 서브탭(Overview/TODO/Review)을 오갈 수 있다", async () => {
     render(
       <StudentShell
         studentName="지훈"
@@ -208,8 +211,8 @@ describe("StudentShell", () => {
     expect(screen.getByText("Overview")).toBeInTheDocument();
     fireEvent.click(screen.getByText("TODO"));
     expect(await screen.findByPlaceholderText("+ 할 일 추가")).toBeInTheDocument();
-    fireEvent.click(screen.getByText("Done"));
-    expect(await screen.findByText("완료한 항목이 없습니다.")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("Review"));
+    expect(await screen.findByText("수업 리뷰")).toBeInTheDocument();
   });
 
   it("선생님 탭을 누르면 TeacherTab이 렌더링된다", () => {

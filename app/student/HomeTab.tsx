@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import BoardColumnsView from "@/app/components/BoardColumnsView";
-import DoneListView from "@/app/components/DoneListView";
 import TimelineView from "@/app/components/TimelineView";
+import FamilyReviewCard from "@/app/components/FamilyReviewCard";
 import { StatsWidget, UpcomingWidget } from "./HomeDashboard";
 import PlannerOverviewView from "./PlannerOverviewView";
 import type { DashboardData } from "./dashboard-data";
@@ -15,13 +15,16 @@ import {
   updateMyManualTaskStatusAction,
   deleteMyManualTaskAction,
 } from "./board-actions";
-import { boardColumnOf, type BoardCard } from "@/lib/board/types";
+import { getMyLessonReviewsAction } from "./review-actions";
+import type { FamilyLessonReview } from "@/app/parent/lesson-review-family-actions";
+import type { BoardCard } from "@/lib/board/types";
 
 // Home+Planner 통합(2026-09-22 사용자 지시, 재정리) — Home은 이제 Planner
 // (Board)다. 캘린더·예정 수업(기존 Home 화면)은 Classes 탭의 "수업 일정"
 // 서브탭으로 옮겼다(통계는 그대로 여기 Overview에 남는다). 서브탭:
-// Overview(완료율·수업 참여율 요약) / TODO(할 일 보드, 완료 제외) /
-// Done(완료한 항목 — 예전 "일정" 탭 자리, 날짜별로 묶지 않고 단순 목록).
+// Overview(완료율·수업 참여율 요약) / TODO(할 일 보드, 완료 포함 전체 4칼럼) /
+// Review(학부모 포털과 동일한 수업 리뷰 — 2026-09-22 재지시로 별도 Done
+// 서브탭은 없애고 보드 안에 완료 칼럼으로 되돌렸다).
 export default function HomeTab({
   studentName,
   dashboard,
@@ -30,7 +33,7 @@ export default function HomeTab({
   dashboard: DashboardData;
 }) {
   const router = useRouter();
-  const [subtab, setSubtab] = useState<"overview" | "todo" | "done">("overview");
+  const [subtab, setSubtab] = useState<"overview" | "todo" | "review">("overview");
   const [boardView, setBoardView] = useState<"board" | "timeline">("board");
   const [cards, setCards] = useState<BoardCard[] | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -91,9 +94,6 @@ export default function HomeTab({
     }
   }
 
-  const nowIso = new Date().toISOString();
-  const doneCards = cards?.filter((c) => boardColumnOf(c, nowIso) === "done") ?? [];
-
   return (
     <div className="px-8 py-8">
       <h1 className="text-[20px] font-extrabold text-ink mb-4">{studentName}의 학습 현황</h1>
@@ -102,7 +102,7 @@ export default function HomeTab({
         items={[
           { id: "overview", label: "Overview" },
           { id: "todo", label: "TODO" },
-          { id: "done", label: "Done" },
+          { id: "review", label: "Review" },
         ]}
         activeId={subtab}
         onSelect={setSubtab}
@@ -173,14 +173,9 @@ export default function HomeTab({
             </button>
           </div>
           {boardView === "board" ? (
-            <BoardColumnsView
-              cards={cards.filter((c) => boardColumnOf(c, nowIso) !== "done")}
-              onMove={handleMoveTask}
-              onDelete={handleDeleteTask}
-              columns={["overdue", "backlog", "in_progress"]}
-            />
+            <BoardColumnsView cards={cards} onMove={handleMoveTask} onDelete={handleDeleteTask} />
           ) : (
-            <TimelineView cards={cards.filter((c) => boardColumnOf(c, nowIso) !== "done")} />
+            <TimelineView cards={cards} />
           )}
           {/* 2026-09-22(사용자 지시) — 보드 아래에 예정 수업 리스트(학부모/학생 통일 컴포넌트 재사용). */}
           <div className="max-w-[420px] mt-6">
@@ -188,8 +183,50 @@ export default function HomeTab({
           </div>
         </div>
       ) : (
-        <DoneListView cards={doneCards} />
+        <HomeReviewPanel />
       )}
+    </div>
+  );
+}
+
+// 2026-09-22(사용자 지시 — "학부모랑 똑같이 Review 탭 만들어줘") — 학부모 홈의
+// "수업 리뷰" 섹션과 같은 구성. 상담 리뷰는 household(보호자) 단위 개념이라
+// 여기엔 없다(review-actions.ts 주석 참고).
+function HomeReviewPanel() {
+  const [reviews, setReviews] = useState<FamilyLessonReview[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    getMyLessonReviewsAction()
+      .then(setReviews)
+      .catch((e) => setError(e instanceof Error ? e.message : "리뷰를 불러오지 못했습니다."));
+  }, []);
+
+  return (
+    <div className="space-y-8">
+      <div>
+        <h2 className="text-[14px] font-bold text-ink mb-1.5">월간 종합 리뷰</h2>
+        <p className="text-[13px] text-grey-500">아직 생성된 월간 종합 리뷰가 없습니다. 준비 중입니다.</p>
+      </div>
+
+      <div>
+        <h2 className="text-[14px] font-bold text-ink mb-3">수업 리뷰</h2>
+        {error && <p className="text-[13px] text-red mb-2">{error}</p>}
+        {reviews === null ? (
+          <p className="text-[13px] text-grey-500">불러오는 중...</p>
+        ) : reviews.filter((r) => r.meetingRecordLink).length === 0 ? (
+          <p className="text-[13px] text-grey-500">확정된 미팅록이 있는 수업이 아직 없습니다.</p>
+        ) : (
+          <div className="space-y-3">
+            {reviews
+              .filter((r) => r.meetingRecordLink)
+              .sort((a, b) => (a.finalizedAt > b.finalizedAt ? 1 : -1))
+              .map((r) => (
+                <FamilyReviewCard key={r.reviewId} review={r} />
+              ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
