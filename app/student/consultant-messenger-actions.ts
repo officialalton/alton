@@ -118,7 +118,7 @@ export async function getMyHouseholdMessengerUnreadCountAction(): Promise<number
     .from("household_messages")
     .select("id", { count: "exact", head: true })
     .eq("household_id", householdId)
-    .in("sender_role", ["admin", "consultant"])
+    .in("sender_role", ["guardian", "admin", "consultant"])
     .gt("created_at", since);
   if (error) throw new Error(error.message);
   return count ?? 0;
