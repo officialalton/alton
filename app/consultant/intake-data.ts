@@ -13,12 +13,13 @@ export type IntakeConsultation = {
   status: string;
   requestedAt: string;
   contactedAt: string | null;
+  startsAt: string | null;
   intakeOwnerId: string | null;
   admissionsConsultantId: string | null;
 };
 
 const SELECT_COLUMNS =
-  "id, contact_name, contact_email, student_grade, concerns, status, requested_at, contacted_at, intake_owner_id, admissions_consultant_id";
+  "id, contact_name, contact_email, student_grade, concerns, status, requested_at, contacted_at, starts_at, intake_owner_id, admissions_consultant_id";
 
 function mapRow(row: Record<string, unknown>): IntakeConsultation {
   return {
@@ -30,6 +31,7 @@ function mapRow(row: Record<string, unknown>): IntakeConsultation {
     status: row.status as string,
     requestedAt: row.requested_at as string,
     contactedAt: (row.contacted_at as string | null) ?? null,
+    startsAt: (row.starts_at as string | null) ?? null,
     intakeOwnerId: (row.intake_owner_id as string | null) ?? null,
     admissionsConsultantId: (row.admissions_consultant_id as string | null) ?? null,
   };

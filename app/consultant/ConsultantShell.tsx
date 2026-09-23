@@ -45,7 +45,7 @@ export default function ConsultantShell({
   const [nav, setNav] = useState<NavId>("assignments");
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  const contactRequiredCount = assignedConsultations.filter((c) => !c.contactedAt).length;
+  const contactRequiredCount = assignedConsultations.filter((c) => assignmentColumnOf(c) === "contact_needed").length;
 
   return (
     <div className="min-h-screen bg-white flex">
@@ -133,6 +133,24 @@ export default function ConsultantShell({
   );
 }
 
+type AssignmentColumn = "contact_needed" | "in_progress" | "scheduled";
+
+function assignmentColumnOf(c: IntakeConsultation): AssignmentColumn {
+  if (c.startsAt) return "scheduled";
+  if (c.contactedAt) return "in_progress";
+  return "contact_needed";
+}
+
+const ASSIGNMENT_COLUMNS: { id: AssignmentColumn; label: string }[] = [
+  { id: "contact_needed", label: "연락 필요" },
+  { id: "in_progress", label: "일정 조율 중" },
+  { id: "scheduled", label: "일정 확정" },
+];
+
+// 컨설턴트 Round B(2026-09-22 사용자 지시) — "신규 배정"을 플랫 리스트가
+// 아니라 칸반으로. 본인에게 배정된 것만 보인다(admissions_consultant_id
+// 필터는 이미 loadMyAssignedConsultationsAction/RLS에서 적용됨 — 관리자
+// 화면(ConsultantAssignmentsTab)은 반대로 전체를 본다, 사용자 확인됨).
 function AssignedConsultationsList({ initialConsultations }: { initialConsultations: IntakeConsultation[] }) {
   const [consultations, setConsultations] = useState(initialConsultations);
   const [busyId, setBusyId] = useState<string | null>(null);
@@ -150,36 +168,48 @@ function AssignedConsultationsList({ initialConsultations }: { initialConsultati
   }
 
   return (
-    <div className="max-w-[640px] px-8 py-8">
+    <div className="px-8 py-8">
       <h1 className="text-[20px] font-extrabold text-ink mb-5">신규 배정</h1>
       {consultations.length === 0 ? (
-        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
+        <div className="max-w-[640px] text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
           아직 배정된 상담 요청이 없습니다.
         </div>
       ) : (
-        consultations.map((c) => (
-          <div key={c.id} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-3.5 mb-2.5">
-            <div className="flex items-center justify-between">
-              <span className="text-[13.5px] font-bold text-ink">{c.contactName}</span>
-              {c.contactedAt ? (
-                <span className="text-[11.5px] font-semibold text-green">연락 완료</span>
-              ) : (
-                <button
-                  disabled={busyId === c.id}
-                  onClick={() => handleMarkContacted(c.id)}
-                  className="text-[12px] font-bold px-3 py-1 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
-                >
-                  연락 완료로 표시
-                </button>
-              )}
-            </div>
-            <div className="text-[12px] text-grey-500 mt-1">
-              {c.contactEmail}
-              {c.studentGrade ? ` · ${c.studentGrade}` : ""}
-            </div>
-            {c.concerns && <div className="text-[12.5px] text-grey-600 mt-2">{c.concerns}</div>}
-          </div>
-        ))
+        <div className="flex gap-4 overflow-x-auto pb-2">
+          {ASSIGNMENT_COLUMNS.map((col) => {
+            const items = consultations.filter((c) => assignmentColumnOf(c) === col.id);
+            return (
+              <div key={col.id} className="w-[280px] shrink-0">
+                <div className="text-[12.5px] font-bold text-grey-500 mb-2.5">
+                  {col.label} <span className="text-grey-400">{items.length}</span>
+                </div>
+                {items.length === 0 ? (
+                  <div className="text-[12px] text-grey-400 bg-grey-100 rounded-lg px-3 py-4 text-center">없음</div>
+                ) : (
+                  items.map((c) => (
+                    <div key={c.id} className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3 mb-2.5 bg-white">
+                      <div className="text-[13px] font-bold text-ink">{c.contactName}</div>
+                      <div className="text-[11.5px] text-grey-500 mt-1">
+                        {c.contactEmail}
+                        {c.studentGrade ? ` · ${c.studentGrade}` : ""}
+                      </div>
+                      {c.concerns && <div className="text-[12px] text-grey-600 mt-2">{c.concerns}</div>}
+                      {col.id === "contact_needed" && (
+                        <button
+                          disabled={busyId === c.id}
+                          onClick={() => handleMarkContacted(c.id)}
+                          className="mt-2.5 text-[12px] font-bold px-3 py-1 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
+                        >
+                          연락 완료로 표시
+                        </button>
+                      )}
+                    </div>
+                  ))
+                )}
+              </div>
+            );
+          })}
+        </div>
       )}
     </div>
   );
