@@ -105,7 +105,7 @@ export default async function LoginPage({
               type="submit"
               className="block w-full text-center border-[1.5px] border-grey-200 text-ink font-bold text-[14px] py-3 rounded-lg hover:bg-grey-100"
             >
-              직원 — Google로 로그인
+              Staff - Google Login
             </button>
           </form>
         </div>
