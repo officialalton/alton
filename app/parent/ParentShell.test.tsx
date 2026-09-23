@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, within } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi, beforeEach } from "vitest";
 import ParentShell from "./ParentShell";
 import type { DashboardData } from "@/app/student/dashboard-data";
 import type { Child } from "./children-data";
@@ -95,6 +95,13 @@ const lessonsProps = {
 };
 
 describe("ParentShell", () => {
+  // 2026-09-22 — "Review" 서브탭이 종합/수업/상담 리뷰를 한 번에 불러오면서
+  // 테스트 간 mock 호출 이력이 남으면 다음 테스트의 "호출 안 됨" 단언이
+  // 실행 순서에 따라 깨질 수 있다 — 매 테스트 전에 초기화한다.
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
   it("사이드바 항목(홈/수업권/수강 과목/수업/상담/단어장/과제)을 보여주고, 기본 탭은 홈(Overview 서브탭)이다", () => {
     render(
       <ParentShell
@@ -105,45 +112,29 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    ["Home", "Credits", "My Courses", "Classes", "Consultations", "Vocabulary", "Assignments"].forEach((label) =>
+    ["Home", "Credits", "My Courses", "Classes", "Mock Exams", "Consultations", "Vocabulary", "Assignments"].forEach((label) =>
       expect(screen.getAllByText(label).length).toBeGreaterThan(0)
     );
     // 2026-09-17/18 IA 재구성: 지인 추천/통계(독립 탭)/동의/가족/예약/교재는
-    // 메인 내비게이션에서 제거됐다(지인 추천·동의는 프로필 드롭다운, 통계는
-    // 홈 서브탭으로 이동).
+    // 메인 내비게이션에서 제거됐다(지인 추천·동의는 프로필 드롭다운).
+    // 2026-09-22(사용자 지시) — 모의고사도 홈 서브탭에서 좌측 nav "Mock Exams"로
+    // 옮겼고, 통계 서브탭은 아예 없앴다(Overview에 이미 있다는 이유).
     expect(screen.queryByText("지인 추천")).not.toBeInTheDocument();
     expect(screen.queryByText("가족")).not.toBeInTheDocument();
     expect(screen.queryByText("예약")).not.toBeInTheDocument();
     expect(screen.queryByText("교재")).not.toBeInTheDocument();
     expect(screen.getAllByText("지훈").length).toBeGreaterThan(0);
     expect(screen.getAllByText("이서아").length).toBeGreaterThan(0);
-    expect(screen.getByText("종합 리뷰")).toBeInTheDocument();
-    expect(screen.getByText("수업 리뷰")).toBeInTheDocument();
-    expect(screen.getByText("상담 리뷰")).toBeInTheDocument();
-    // "통계"는 이제 홈 서브탭 라벨로만 존재한다.
-    expect(screen.getAllByText("통계").length).toBeGreaterThan(0);
-    // 2026-09-22(사용자 지시) — 홈 기본 서브탭이 Overview(Board)로 바뀌면서
-    // "종합 리뷰" 서브탭 내용은 눌러야 보인다.
-    fireEvent.click(screen.getByText("종합 리뷰"));
+    // 2026-09-22(사용자 지시) — 종합/수업/상담 리뷰를 "Review" 서브탭 하나로 합쳤다.
+    expect(screen.getByText("Review")).toBeInTheDocument();
+    expect(screen.queryByText("통계")).not.toBeInTheDocument();
+    // 홈 기본 서브탭은 Overview — "Review" 탭 내용은 눌러야 보인다.
+    fireEvent.click(screen.getByText("Review"));
     // 2026-09-18(사용자 결정 2차) — "종합 리뷰"는 수업/상담 리뷰를 합친 목록이
     // 아니라 향후 AI OS가 만들 "월간 종합 리뷰" 전용 자리라 정적 준비 중
     // 문구만 보여준다(데이터 로딩 없음 — 즉시 렌더되므로 findByText 불필요).
     expect(screen.getByText("월간 종합 리뷰")).toBeInTheDocument();
     expect(screen.getByText(/아직 생성된 월간 종합 리뷰가 없습니다/)).toBeInTheDocument();
-  });
-
-  it("홈 '종합 리뷰' 서브탭은 수업/상담 리뷰 로더를 호출하지 않는다(합산 목록 아님)", async () => {
-    const { getAllFamilyLessonReviews } = await import("./home-reviews-actions");
-    render(
-      <ParentShell
-        parentName="김민지"
-        childrenList={childrenList}
-        currentChildId="s1"
-        dashboard={dashboard}
-        {...lessonsProps}
-      />
-    );
-    expect(getAllFamilyLessonReviews).not.toHaveBeenCalled();
   });
 
   it("홈 상단에는 동의 배너를 보여주지 않는다(2026-09-17, 배지는 프로필 메뉴로만)", () => {
@@ -163,8 +154,10 @@ describe("ParentShell", () => {
     expect(screen.queryByText(/동의 필요한 문서가/)).not.toBeInTheDocument();
   });
 
-  it("홈 '수업 리뷰' 서브탭을 누르면 확정된 수업 리뷰+미팅록만 시간순으로 보여준다(종합 리뷰와 별개 로딩)", async () => {
-    const { getAllFamilyLessonReviews } = await import("./home-reviews-actions");
+  // 2026-09-22(사용자 지시) — 종합/수업/상담 리뷰를 "Review" 서브탭 하나로
+  // 합쳤다. 클릭 한 번으로 수업 리뷰·상담 리뷰 로더가 함께 호출된다.
+  it("홈 'Review' 서브탭을 누르면 종합/수업/상담 리뷰가 함께 보인다", async () => {
+    const { getAllFamilyLessonReviews, getHomeConsultationReviews } = await import("./home-reviews-actions");
     vi.mocked(getAllFamilyLessonReviews).mockResolvedValueOnce([
       {
         reviewId: "rev1",
@@ -177,37 +170,6 @@ describe("ParentShell", () => {
         meetingRecordLink: "https://drive.google.com/file/d/f1/view",
       },
     ]);
-    render(
-      <ParentShell
-        parentName="김민지"
-        childrenList={childrenList}
-        currentChildId="s1"
-        dashboard={dashboard}
-        {...lessonsProps}
-      />
-    );
-    expect(getAllFamilyLessonReviews).not.toHaveBeenCalled();
-    fireEvent.click(screen.getByText("수업 리뷰"));
-    expect(await screen.findByText("수업 리뷰 내용")).toBeInTheDocument();
-    expect(getAllFamilyLessonReviews).toHaveBeenCalledTimes(1);
-  });
-
-  it("홈 '통계' 서브탭을 누르면 StatsTab(읽기 전용)이 렌더링된다", async () => {
-    render(
-      <ParentShell
-        parentName="김민지"
-        childrenList={childrenList}
-        currentChildId="s1"
-        dashboard={dashboard}
-        {...lessonsProps}
-      />
-    );
-    fireEvent.click(screen.getByText("통계"));
-    expect(await screen.findByText("수업 참여율")).toBeInTheDocument();
-  });
-
-  it("홈 '상담 리뷰' 서브탭은 종합 리뷰와 분리되어 household 상담 리뷰만 보여준다(빈 상태 포함)", async () => {
-    const { getHomeConsultationReviews } = await import("./home-reviews-actions");
     vi.mocked(getHomeConsultationReviews).mockResolvedValueOnce([
       {
         meetingRequestId: "mr1",
@@ -227,12 +189,14 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("상담 리뷰"));
+    expect(getAllFamilyLessonReviews).not.toHaveBeenCalled();
+    fireEvent.click(screen.getByText("Review"));
+    expect(await screen.findByText("수업 리뷰 내용")).toBeInTheDocument();
     expect(await screen.findByText("학습 태도가 좋아졌습니다.")).toBeInTheDocument();
-    expect(screen.getByText("미팅록이 없습니다.")).toBeInTheDocument();
+    expect(screen.getByText("월간 종합 리뷰")).toBeInTheDocument();
   });
 
-  it("홈 '상담 리뷰' 서브탭 빈 상태는 간결한 문구를 보여준다", async () => {
+  it("홈 'Review' 서브탭의 상담 리뷰 빈 상태는 간결한 문구를 보여준다", async () => {
     render(
       <ParentShell
         parentName="김민지"
@@ -242,7 +206,7 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("상담 리뷰"));
+    fireEvent.click(screen.getByText("Review"));
     expect(await screen.findByText("아직 확정된 상담 리뷰가 없습니다.")).toBeInTheDocument();
   });
 
@@ -293,9 +257,9 @@ describe("ParentShell", () => {
     ).toBeInTheDocument();
   });
 
-  // 2026-09-22(사용자 지시) — 별도 Planner nav는 Home 서브탭(Overview/TODO/Done)으로
-  // 흡수됐다.
-  it("Home의 TODO 서브탭을 누르면 자녀 보드가 읽기 전용으로 렌더링된다(Student Success Planner MVP)", async () => {
+  // 2026-09-22(사용자 지시) — 별도 Planner nav는 Home 서브탭(Overview/Board/Review)으로
+  // 흡수됐다. "Done"은 별도 서브탭 없이 Board 안 한 칼럼으로 합쳐졌다.
+  it("Home의 Board 서브탭을 누르면 자녀 보드가 읽기 전용으로 렌더링된다(Student Success Planner MVP)", async () => {
     render(
       <ParentShell
         parentName="김민지"
@@ -306,7 +270,7 @@ describe("ParentShell", () => {
       />
     );
     fireEvent.click(screen.getAllByText("Home")[0]);
-    fireEvent.click(await screen.findByText("TODO"));
+    fireEvent.click(await screen.findByText("Board"));
     expect(await screen.findByText("백로그")).toBeInTheDocument();
   });
 
@@ -466,9 +430,10 @@ describe("ParentShell", () => {
     expect(within(screen.getAllByText("동의")[0].parentElement as HTMLElement).getByText("1")).toBeInTheDocument();
   });
 
-  // 2026-09-21(UAT 지적) — 홈 탭의 "모의고사" 서브탭은 독립 라우트로 이동하지 않고
-  // 탭 안에서 현재 선택된 자녀의 응시 목록을 바로 보여준다(좌측 네비 유지).
-  it("홈 탭의 '모의고사' 서브탭을 누르면 라우트 이동 없이 탭 안에서 자녀 응시 목록을 보여준다", async () => {
+  // 2026-09-22(사용자 지시) — "모의고사"는 이제 홈 서브탭이 아니라 좌측
+  // 독립 nav("Mock Exams")다. 여전히 별도 라우트로 이동하지 않고 탭 안에서
+  // 현재 선택된 자녀의 응시 목록을 바로 보여준다.
+  it("Mock Exams 탭을 누르면 라우트 이동 없이 탭 안에서 자녀 응시 목록을 보여준다", async () => {
     pushMock.mockClear();
     render(
       <ParentShell
@@ -479,7 +444,7 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("모의고사"));
+    fireEvent.click(screen.getAllByText("Mock Exams")[0]);
     expect(pushMock).not.toHaveBeenCalledWith("/parent/mock-exam/s1");
     expect(await screen.findByText("배정된 모의고사가 없습니다.")).toBeInTheDocument();
   });

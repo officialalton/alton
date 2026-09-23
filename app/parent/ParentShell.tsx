@@ -10,8 +10,7 @@ import ParentMockExamTab from "./ParentMockExamTab";
 import { loadChildBoardCardsAction } from "./board-actions";
 import PlannerOverviewView from "@/app/student/PlannerOverviewView";
 import BoardColumnsView from "@/app/components/BoardColumnsView";
-import DoneListView from "@/app/components/DoneListView";
-import { boardColumnOf, type BoardCard } from "@/lib/board/types";
+import type { BoardCard } from "@/lib/board/types";
 import PageFrame from "@/app/components/PageFrame";
 import NavIcon from "@/app/components/NavIcon";
 import type { DashboardData } from "@/app/student/dashboard-data";
@@ -34,9 +33,6 @@ import MessengerTab from "./MessengerTab";
 import { getMessengerUnreadCount } from "./inquiry-actions";
 import { getAllFamilyLessonReviews, getHomeConsultationReviews, type HomeConsultationReview } from "./home-reviews-actions";
 import type { FamilyLessonReview } from "./lesson-review-family-actions";
-import { getParentChildStats } from "./home-stats-actions";
-import type { StatsData } from "@/app/student/stats-data";
-import StatsTab from "@/app/student/StatsTab";
 import ParentEnrollmentTab from "./EnrollmentTab";
 import type { ChildSubjectEnrollments } from "./enrollment-data";
 import LessonBookingTab from "@/app/student/LessonBookingTab";
@@ -79,6 +75,8 @@ const NAV_ITEMS = [
   // 제거 → 수업 탭 안 버튼으로 흡수"로 정리했던 것을 이번에 다시 되돌린다.
   // 독립 탭으로 예약 화면(LessonBookingTab)을 그대로 연다.
   { id: "bookings", label: "Bookings", icon: "bookings" },
+  // 2026-09-22(사용자 지시) — 홈 서브탭에서 빼서 독립 좌측 nav로 옮긴다(읽기 전용).
+  { id: "mockExam", label: "Mock Exams", icon: "mockExam" },
   { id: "consult", label: "Consultations", icon: "consultations" },
   { id: "vocab", label: "Vocabulary", icon: "vocabulary" },
   { id: "homework", label: "Assignments", icon: "assignments" },
@@ -170,12 +168,9 @@ export default function ParentShell({
   // 2026-09-18 — 홈 재설계: "일정 확인"에서 "리뷰 확인"으로 목적이 바뀌어
   // 종합 리뷰(기본)/수업 리뷰(시간순)/상담 리뷰/통계 4개 읽기 전용 서브탭으로
   // 구성한다. 상담 리뷰는 종합 리뷰에 합치지 않는다(사용자 결정, 2026-09-18).
-  const [homeSubTab, setHomeSubTab] = useState<
-    "overview" | "todo" | "done" | "reviews" | "lessonReviews" | "consultReviews" | "stats" | "mockExam"
-  >("overview");
+  const [homeSubTab, setHomeSubTab] = useState<"overview" | "todo" | "review">("overview");
   const [familyReviews, setFamilyReviews] = useState<FamilyLessonReview[] | null>(null);
   const [consultReviews, setConsultReviews] = useState<HomeConsultationReview[] | null>(null);
-  const [childStats, setChildStats] = useState<StatsData | null>(null);
   // 2026-09-22(사용자 지시) — Home+Planner 통합, Overview/TODO/Done 서브탭용.
   const [childBoardCards, setChildBoardCards] = useState<BoardCard[] | null>(null);
   const [roadmap, setRoadmap] = useState<RoadmapData | null>(null);
@@ -198,20 +193,15 @@ export default function ParentShell({
   // getAllFamilyLessonReviews를 쓴다.
   useEffect(() => {
     if (activeTab !== "home") return;
-    if (homeSubTab === "overview" || homeSubTab === "todo" || homeSubTab === "done") {
+    if (homeSubTab === "overview" || homeSubTab === "todo") {
       setChildBoardCards(null);
       loadChildBoardCardsAction(currentChildId).then(setChildBoardCards).catch(() => setChildBoardCards([]));
       return;
     }
-    if (homeSubTab === "stats") {
-      getParentChildStats(currentChildId).then(setChildStats).catch(() => setChildStats(null));
-      return;
-    }
-    if (homeSubTab === "consultReviews") {
+    if (homeSubTab === "review") {
+      // 2026-09-22(사용자 지시) — 종합/수업/상담 리뷰를 하나의 "Review" 탭으로
+      // 합친다. 세 데이터를 함께 불러온다.
       getHomeConsultationReviews().then(setConsultReviews).catch(() => setConsultReviews([]));
-      return;
-    }
-    if (homeSubTab === "lessonReviews") {
       const enrollmentIds =
         childrenSubjectEnrollments.find((c) => c.childId === currentChildId)?.enrollments.map((e) => e.id) ?? [];
       getAllFamilyLessonReviews(enrollmentIds).then(setFamilyReviews).catch(() => setFamilyReviews([]));
@@ -509,18 +499,9 @@ export default function ParentShell({
               // 자녀 응시 목록을 바로 보여준다(좌측 네비게이션 유지).
               <UnderlineSubTabs
                 items={[
-                  // 2026-09-22(사용자 지시) — 학생 포털과 같은 순서/라벨(Overview/
-                  // TODO/Done)로 통일. "Lesson"은 학부모 홈이 2026-09-18에 캘린더·
-                  // 예정 수업을 이미 빼기로 한 결정과 부딪혀 이번엔 넣지 않는다 —
-                  // 대신 기존 "수업 리뷰"가 그 자리에 가장 가깝다.
                   { id: "overview", label: "Overview" },
-                  { id: "todo", label: "TODO" },
-                  { id: "done", label: "Done" },
-                  { id: "reviews", label: "종합 리뷰" },
-                  { id: "lessonReviews", label: "수업 리뷰" },
-                  { id: "consultReviews", label: "상담 리뷰" },
-                  { id: "stats", label: "통계" },
-                  { id: "mockExam", label: "모의고사" },
+                  { id: "todo", label: "Board" },
+                  { id: "review", label: "Review" },
                 ]}
                 activeId={homeSubTab}
                 onSelect={(id) => setHomeSubTab(id as typeof homeSubTab)}
@@ -567,73 +548,62 @@ export default function ParentShell({
                   </div>
                 )
               ) : homeSubTab === "todo" ? (
+                // 2026-09-22(사용자 지시) — "Done"을 별도 서브탭으로 두지 않고
+                // 다시 Board(구 TODO) 하나로 합친다(전체 칼럼: 기한 경과/백로그/
+                // 진행중/완료).
                 childBoardCards === null ? (
                   <p className="p-8 text-[14px] text-grey-500">불러오는 중...</p>
                 ) : (
                   <div className="px-6 py-5">
-                    <BoardColumnsView
-                      cards={childBoardCards.filter((c) => boardColumnOf(c, new Date().toISOString()) !== "done")}
-                      columns={["overdue", "backlog", "in_progress"]}
-                      disableLinks
-                    />
+                    <BoardColumnsView cards={childBoardCards} disableLinks />
                   </div>
                 )
-              ) : homeSubTab === "done" ? (
-                childBoardCards === null ? (
-                  <p className="p-8 text-[14px] text-grey-500">불러오는 중...</p>
-                ) : (
-                  <div className="px-6 py-5">
-                    <DoneListView
-                      cards={childBoardCards.filter((c) => boardColumnOf(c, new Date().toISOString()) === "done")}
-                      disableLinks
-                    />
-                  </div>
-                )
-              ) : homeSubTab === "mockExam" ? (
-                <ParentMockExamTab studentId={currentChildId} />
-              ) : homeSubTab === "stats" ? (
-                childStats ? (
-                  <StatsTab data={childStats} />
-                ) : (
-                  <p className="p-8 text-[14px] text-grey-500">불러오는 중...</p>
-                )
-              ) : homeSubTab === "consultReviews" ? (
-                consultReviews === null ? (
-                  <p className="p-8 text-[14px] text-grey-500">불러오는 중...</p>
-                ) : consultReviews.length === 0 ? (
-                  <p className="p-8 text-[14px] text-grey-500">아직 확정된 상담 리뷰가 없습니다.</p>
-                ) : (
-                  <div className="px-6 py-5 space-y-3">
-                    {consultReviews.map((r) => (
-                      <ConsultationReviewCard key={r.meetingRequestId} review={r} />
-                    ))}
-                  </div>
-                )
-              ) : homeSubTab === "reviews" ? (
-                // 2026-09-18(사용자 결정, 2차) — "종합 리뷰"는 수업/상담 리뷰를
-                // 합친 목록이 아니라, 향후 AI OS가 월 단위로 생성할 "월간 종합
-                // 보고서" 전용 자리다. 이번 범위에서는 생성 로직·데이터 모델을
-                // 만들지 않고 정적 준비 중 문구만 보여준다.
-                <div className="p-8">
-                  <h2 className="text-[14px] font-bold text-ink mb-1.5">월간 종합 리뷰</h2>
-                  <p className="text-[13px] text-grey-500">아직 생성된 월간 종합 리뷰가 없습니다. 준비 중입니다.</p>
-                </div>
-              ) : familyReviews === null ? (
-                <p className="p-8 text-[14px] text-grey-500">불러오는 중...</p>
-              ) : // 수업 리뷰 — 시간순(오래된 순), 리뷰+확정 미팅록이 모두 있는 것만.
-              familyReviews.filter((r) => r.meetingRecordLink).length === 0 ? (
-                <p className="p-8 text-[14px] text-grey-500">확정된 미팅록이 있는 수업이 아직 없습니다.</p>
               ) : (
-                <div className="px-6 py-5 space-y-3">
-                  {familyReviews
-                    .filter((r) => r.meetingRecordLink)
-                    .sort((a, b) => (a.finalizedAt > b.finalizedAt ? 1 : -1))
-                    .map((r) => (
-                      <FamilyReviewCard key={r.reviewId} review={r} />
-                    ))}
+                // 2026-09-22(사용자 지시) — 종합/수업/상담 리뷰를 "Review" 탭
+                // 하나로 합친다.
+                <div className="px-6 py-5 space-y-8">
+                  <div>
+                    <h2 className="text-[14px] font-bold text-ink mb-1.5">월간 종합 리뷰</h2>
+                    <p className="text-[13px] text-grey-500">아직 생성된 월간 종합 리뷰가 없습니다. 준비 중입니다.</p>
+                  </div>
+
+                  <div>
+                    <h2 className="text-[14px] font-bold text-ink mb-3">수업 리뷰</h2>
+                    {familyReviews === null ? (
+                      <p className="text-[13px] text-grey-500">불러오는 중...</p>
+                    ) : familyReviews.filter((r) => r.meetingRecordLink).length === 0 ? (
+                      <p className="text-[13px] text-grey-500">확정된 미팅록이 있는 수업이 아직 없습니다.</p>
+                    ) : (
+                      <div className="space-y-3">
+                        {familyReviews
+                          .filter((r) => r.meetingRecordLink)
+                          .sort((a, b) => (a.finalizedAt > b.finalizedAt ? 1 : -1))
+                          .map((r) => (
+                            <FamilyReviewCard key={r.reviewId} review={r} />
+                          ))}
+                      </div>
+                    )}
+                  </div>
+
+                  <div>
+                    <h2 className="text-[14px] font-bold text-ink mb-3">상담 리뷰</h2>
+                    {consultReviews === null ? (
+                      <p className="text-[13px] text-grey-500">불러오는 중...</p>
+                    ) : consultReviews.length === 0 ? (
+                      <p className="text-[13px] text-grey-500">아직 확정된 상담 리뷰가 없습니다.</p>
+                    ) : (
+                      <div className="space-y-3">
+                        {consultReviews.map((r) => (
+                          <ConsultationReviewCard key={r.meetingRequestId} review={r} />
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
               )}
             </div>
+          ) : activeTab === "mockExam" ? (
+            <ParentMockExamTab studentId={currentChildId} />
           ) : activeTab === "roadmap" ? (
             roadmap && roadmap.studentId === currentChildId ? (
               <RoadmapView data={roadmap} />
