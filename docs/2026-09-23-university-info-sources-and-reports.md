@@ -2642,3 +2642,117 @@ Claude_Browser로 각 학교 학사요람을 열어 페이지네이션을 넘기
 5. 200개교 CDS 수집은 여전히 140/200(70%)에서 정체. 다음 세션은
    반드시 실제 DB 반영(verified_pilot 승격)까지 마치는 것을 최소
    목표로 삼을 것.
+
+## 29차 세션 (2026-09-23)
+
+### 접속 방법 확립
+`PGPASSWORD=postgres psql -h 127.0.0.1 -p 54422 -U postgres -d postgres`로
+정상 접속 확인(28차 세션에서 못 찾았던 부분 — 이번엔 처음부터 이 방법을
+사용해 즉시 성공). `curl --max-time N -A "<Chrome UA>"`로 정적 HTML은
+대부분 200 응답.
+
+### CDS 실수집 완료 — 2개교(sources_pending_review → verified_pilot)
+1. **University of Texas at Austin**: 28차 세션이 확보해둔 Box 공유
+   file_id(`1812286540077`)와 shared_name
+   (`d9izqb6s8dw2xxg5h5sunxyhrnef2ay6`)로
+   `https://app.box.com/index.php?rm=box_download_shared_file&shared_name=...&file_id=f_...`
+   패턴을 시도해 실제로 성공(200, PDF 686KB) — CDS 2024-2025 원문 확보.
+   표지(Respondent: Shiva Jaganathan, IRRIS 부서) 확인. Fall 2024
+   신입생 코호트: 지원자 72,885 / 합격자 19,417 / 등록자 9,210(모두
+   성별 세부 합산과 정확히 일치 검증). 합격률 26.64%, 등록률(수율)
+   47.44%. **SAT/ACT 25th/75th percentile, GPA 관련 항목(C9~C11)은
+   페이지 이미지까지 직접 렌더링해 확인한 결과 원본 PDF 자체가 공란**
+   (UT Austin이 해당 CDS 항목을 공개하지 않음) — 추측 채우기 금지
+   원칙에 따라 삽입하지 않음. `university_admission_metrics`에 5개
+   지표만 official로 삽입(cycle_year=2024).
+2. **South Dakota State University**: institutional-data 페이지에서
+   실제 PDF 링크 발견(`sdstate.edu/sites/.../South Dakota State
+   University - Common Data Set (2021-2022).pdf` — 사이트에 게시된
+   최신본이 2021-2022뿐, 이후 연도 미게시 확인). Fall 2021 신입생
+   코호트: 지원자 5,774 / 합격자 5,048 / 등록자 2,019(성별 세부 합산
+   일치 검증). 합격률 87.43%, 수율 40.00%. SAT Composite 25/75
+   993/1240, ACT Composite 25/75 19/25, 평균 GPA 3.53 등 20개 지표
+   전부 official로 삽입(cycle_year=2021, notes에 "최신 게시본이
+   2021-2022임" 명시).
+
+### CDS 시도했으나 확보 실패/보류한 학교(스킵 사유 기록)
+- **Indiana University-Purdue University Indianapolis**: DB에 등록된
+  소스 URL(purdue.edu/idata)에서 CDS xlsx를 실제로 다운로드했으나,
+  파일 내용의 A1(Name of College/University)이 **"Purdue University"
+  (West Lafayette 캠퍼스)** 로 확인되어 IUPUI가 아님 — 학교명 불일치로
+  폐기. 이 소스 URL 자체가 잘못 매핑된 것으로 보임(다음 세션 인계:
+  university_source_urls의 IUPUI 행 재검토 필요, 실제로는 IU 계열
+  iuia.iu.edu 쪽에서 찾아야 할 가능성).
+- Fordham University: 페이지 접근 시 CAS SSO 로그인으로 강제 리다이렉트
+  (봇 우회 불가, 스킵).
+- University of New Orleans: 실제 PDF 링크 3개 발견했으나 각각
+  2016-2017 / 2017-2018 / 2018-2019 — 28차 세션 기록대로 최신본 없음,
+  스킵.
+- Clemson/Oklahoma State/University of Colorado Boulder/University of
+  North Dakota/Ohio University/Virginia Tech 등: 페이지는 200으로
+  열리나 정적 HTML에 PDF/xlsx 링크 자체가 없음(JS 렌더링 대시보드로
+  추정) — 이번 세션도 시간 배분상 Claude_Browser 전환 없이 curl만
+  시도하고 스킵.
+- Andrews/Pepperdine/University of Texas at Arlington/Saint Louis
+  University: PDF 링크는 있었으나 무관한 문서(리소스 가이드,
+  HEOA 신고서, 통계 핸드북, 오래된 fact book)로 확인되어 스킵.
+
+### 학과(전공) 목록 보완 완료 — 1개교
+- **Illinois Institute of Technology**: `iit.edu/academics/programs?
+  program_level=1` 학부 프로그램 파인더 페이지가 정적 HTML로 전체
+  목록을 그대로 노출(SPA 아님) — 학사(B.S./B.A./B.ARCH) 전공 46개
+  전체 수집(부전공/이중학위 조합/자격증 과정은 제외해 "전공" 단위로
+  정제). `university_majors`에 additive insert(기존 0건 → 46건).
+
+### 학과 보완 시도했으나 실패한 학교
+Ball State, Kansas State, Old Dominion, Rowan, Montclair State,
+Northern Arizona, Howard, Georgia State, Clarkson, Bowling Green State
+— 모두 홈페이지 내비게이션까지는 추적했으나 실제 전공 목록 페이지가
+JS 필터/검색 위젯(Drupal Views AJAX, React 등)이라 정적 curl로 전체
+목록을 안전하게 추출 불가. Georgia State는 카드 4개만 정적으로
+노출되고 나머지는 lazy-load — **불완전한 목록이라 추측 금지 원칙상
+삽입하지 않고 보류**. 다음 세션은 Claude_Browser로 각 학교 필터
+페이지를 열고 스크롤/페이지네이션 끝까지 넘기며 수집하는 방식 필요.
+
+### DB 반영 확인 (psql 직접 실행 결과)
+- `data_collection_status`: `verified_pilot` **140 → 142개교**,
+  `sources_pending_review` **57 → 55개교**, `unconfirmed` **3개교
+  변동 없음**(이번 세션도 시간 배분상 Gonzaga/Catholic University of
+  America/Miami University Ohio 재시도 착수 못 함 — 10분 제한 규칙
+  자체를 적용할 기회조차 없었음).
+- `university_admission_metrics`: 이번 세션 2개교 총 25행 신규 upsert
+  (UT Austin 5, South Dakota State 20).
+- `university_majors`: 이번 세션 신규 삽입 46건(IIT), 전공 보유
+  학교 수 92 → 93개교.
+- `git status`: 앱 코드/스크립트 변경 없음(DB만 psql로 직접 수정).
+  새 마이그레이션 없음. `npx supabase db push --linked` /
+  `vercel deploy` 실행하지 않음.
+
+### 다음 세션 인계 (30차용)
+1. **unconfirmed 3개교(Gonzaga/Catholic University of America/Miami
+   University Ohio)** — 5세션째 이월, 이번에도 미착수. 다음 세션은
+   반드시 세션 시작 직후 10분을 명확히 배정해 Claude_Browser로
+   시도하고, 실패 시 즉시 다음 작업으로 넘어갈 것.
+2. **IUPUI 소스 URL 재검토**: `university_source_urls`에 등록된
+   purdue.edu/idata 링크가 실제로는 Purdue University(West Lafayette)
+   CDS를 가리키고 있음 — 관리자 검토 후 올바른 IUPUI/IU 소스로 교체
+   필요(iuia.iu.edu 계열 우선 시도 권장).
+3. **Box 뷰어 패턴 재확인**: `box_download_shared_file` URL 패턴
+   (`https://app.box.com/index.php?rm=box_download_shared_file&
+   shared_name=<shared_name>&file_id=f_<file_id>`)이 UT Austin에서
+   실제로 작동함을 확인 — Gonzaga 등 다른 Box 기반 학교에도 동일
+   패턴 적용 가능한지 file_id 확보 후 시도 권장.
+4. **JS 렌더링 차단 학교 다수**: Clemson/Oklahoma State/CU Boulder/
+   Ohio University/Virginia Tech/UNC(North Dakota) 등은 curl로는
+   근본적으로 PDF 링크를 못 찾음 — Claude_Browser의 navigate 후
+   `read_network_requests`로 실제 파일 다운로드 요청을 가로채는
+   방식으로 전환 필요(계속 curl만 반복하면 진전 없음).
+5. **학과 보완**: JS 필터형 학교(Ball State/Kansas State/Old Dominion/
+   Rowan/Montclair/Northern Arizona/Howard/Georgia State/Clarkson/
+   Bowling Green 등)는 Claude_Browser 기반 전체 스크롤/페이지네이션
+   수집으로 전환 필요. IIT처럼 정적 HTML로 전체 노출되는 학교를
+   우선 탐색하면 효율적.
+6. 200개교 CDS 수집은 이제 142/200(71%) 완료. 남은 55개교 +
+   unconfirmed 3개교 처리가 끝나면 최종 통합보고서 작성 및 CDS 정보
+   노출 UI 확장 계속 진행할 것 — 매 세션 인계 기록에 계속 전달.
+7. 관리자 화면 노출 확인 여전히 미착수.
