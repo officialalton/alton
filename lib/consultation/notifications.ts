@@ -42,8 +42,6 @@ export async function sendConsultationSchedulingLinkEmail(params: {
           상담 일정 선택하기
         </a>
       </p>
-      <p style="color:#888;font-size:12px;">버튼이 보이지 않으면 이 링크를 열어 주세요:
-      ${params.scheduling_url}</p>
       <p>감사합니다.<br/>Alton Education</p>
     `,
   });
