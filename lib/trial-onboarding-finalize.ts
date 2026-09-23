@@ -420,7 +420,13 @@ async function sendStudentSetPasswordEmail(
       html: `
         <p>안녕하세요, ${escapeHtml(params.studentName)}님.</p>
         <p>Alton Education 학생 계정이 생성되었습니다.</p>
-        <p><a href="${setPasswordUrl}">여기를 눌러 비밀번호를 설정해주세요</a></p>
+        <p style="margin: 24px 0;">
+          <a href="${setPasswordUrl}"
+             style="display:inline-block;background:#c81e34;color:#ffffff;text-decoration:none;
+                    font-weight:bold;font-size:15px;padding:12px 28px;border-radius:8px;">
+            비밀번호 설정하기
+          </a>
+        </p>
         <p>본인이 요청하지 않았다면 이 메일을 무시하세요.</p>
         <p>감사합니다.<br/>Alton Education</p>
       `,

@@ -255,8 +255,14 @@ async function sendTrialOnboardingNoticeInternal(params: {
   const studentNamesLabel = studentsPayload.map((s) => escapeHtml(s.name)).join(", ");
   const html = `
     <p>안녕하세요, ${escapeHtml(params.guardianName)}님.</p>
-    <p>${studentNamesLabel} 학생의 체험 수업 준비를 위해 아래 링크에서 계정을 만들어주세요.</p>
-    <p><a href="${redeemUrl}">${redeemUrl}</a></p>
+    <p>${studentNamesLabel} 학생의 체험 수업 준비를 위해 아래 버튼을 눌러 계정을 만들어주세요.</p>
+    <p style="margin: 24px 0;">
+      <a href="${redeemUrl}"
+         style="display:inline-block;background:#c81e34;color:#ffffff;text-decoration:none;
+                font-weight:bold;font-size:15px;padding:12px 28px;border-radius:8px;">
+        계정 생성하기
+      </a>
+    </p>
     <p>이 링크는 72시간 동안 유효합니다.</p>
   `;
   const contentHash = createHash("sha256").update(html).digest("hex");
