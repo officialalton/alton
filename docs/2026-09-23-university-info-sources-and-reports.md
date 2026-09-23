@@ -774,3 +774,108 @@ Virginia University — 전부 CSV 후보 URL이 실제 fetch에서 404/403/robo
   "출처가 실제로 접근 가능하고 크롤 완주함"을 의미할 뿐 "정보가 검증됨"을
   의미하지 않는다 — `verified_pilot`(실 UAT 완료)와는 여전히 명확히 구분된
   상태임을 강조.
+
+## 10차 세션 (2026-09-23, 프린스턴 CDS 2025-2026 공식 PDF 반영 + 상세 지표 확장)
+
+### 배경
+제품 오너가 프린스턴 대학 공식 Common Data Set(CDS) 2025-2026 PDF(30페이지,
+`ir.princeton.edu/other-university-data/common-data-set`에 공식 게시)를 다운받아
+"이런 상세 내용들이 다 들어가야지"라고 지적했다. Read 툴의 `pages` 파라미터로
+PDF 전체(1-20, 21-30 두 번)를 직접 읽고 아래 반영을 완주했다.
+
+### 스키마 갭 발견 및 마이그레이션
+`university_admission_metrics.metric_key`는 EAV처럼 보이지만 실제로는 고정된
+화이트리스트 CHECK 제약(`sat_total_25` 등 16개 값만 허용)이 걸려 있어, CDS의
+영역별 세부 지표(ACT Math/English/Writing/Science/Reading, 50th percentile,
+제출률, GPA 4.0 비율, 대기자명단, 재학유지율, 졸업률, 등록금)를 저장할 수
+없었다. `supabase/migrations/20261550000000_college_db_p10_cds_metric_keys.sql`로
+체크 제약을 확장(additive, 기존 데이터 무손실)하고 `npx supabase migration up
+--local`로 로컬 DB에 적용했다.
+
+### 기존 프린스턴 데이터의 코호트 오분류 수정
+기존 `university_admission_metrics`에 있던 SAT/ACT 지표(`sat_ebrw_25/75`,
+`sat_math_25/75`, `act_composite_25/75`)가 `cohort='admitted'`(합격자)로 잘못
+저장돼 있었다 — CDS C9-C12 섹션은 명확히 "Fall 2025 등록한 신입생(enrolled
+first-year)" 기준이지 합격자 기준이 아니다. 이번 세션에서 해당 6개 행을
+`cohort='enrolled'`로 정정했고(notes에 정정 사유 기록, 원 데이터 삭제 없음),
+`sat_math_25`는 값 자체도 770 → CDS 공식 760으로 정정했다. `admit_rate`는
+1868(합격)/42303(지원)로 정밀 재계산(4.40% → 4.42%)했다.
+`applicants_count`(42303, `cohort='applicant'`)는 값 변경 없이 출처·검증
+상태만 갱신했다.
+
+**주의**: `app/components/CollegeExploreSection.tsx`의 핵심 지표 카드
+(`ADMISSION_METRIC_DISPLAY_ORDER`)는 이 SAT/ACT/GPA/석차 지표들을 여전히
+`cohort:"admitted"`로 하드코딩해 조회한다(다른 4개 대학은 아직 같은 방식으로
+잘못 저장돼 있어 손대지 않음 — 이번 지시 범위는 프린스턴 한정). 프린스턴만
+정정하면 화면에서 빈칸("미공개")으로 사라지는 회귀가 생기므로,
+`ADMISSION_METRIC_COHORT_FALLBACK`을 추가해 `admitted`로 못 찾으면
+`enrolled`도 허용하도록 조회 로직만 보강했다(표시 순서·레이아웃·라벨은
+그대로).
+
+### 신규 반영 metric_key(전부 `cohort` 정확히 구분, `verification_status='official'`,
+`source_url_id`는 `https://ir.princeton.edu/other-university-data/common-data-set`
+(신규 등록, `source_type='common_data_set'`), `verified_at`='2026-09-23',
+notes에 "CDS 2025-2026, 관리자 업로드 PDF 기준 수기 입력" 명시)
+
+- `cohort='enrolled'`: sat_total_25/50/75(1490/1530/1560), sat_ebrw_50(760),
+  sat_math_50(790), act_composite_50(35), act_math_25/50/75(33/35/36),
+  act_english_25/50/75(35/35/36), act_writing_25/50/75(9/9/10),
+  act_science_25/50/75(33/35/36), act_reading_25/50/75(35/36/36),
+  sat_submitted_pct(60), act_submitted_pct(20), gpa_average(3.96),
+  gpa_4_0_pct_all(72), gpa_4_0_pct_submitters(76, submitters_only=true),
+  gpa_4_0_pct_nonsubmitters(51), enrolled_count(1408), yield_rate(75.37,
+  1408/1868 재계산), retention_rate_year1(99), grad_rate_6yr(97),
+  tuition_total(99574 = 등록금 68140 + 필수비 314 + 기숙사·식비 22120,
+  **2026-2027 학년도 기준 — 입학지표(Fall 2025)와 연도가 다름을 notes에 명시**).
+- `cohort='enrolled'`, 기존 `top10pct_pct` 키 재사용: `value_text='N/A(미수집)'`
+  (프린스턴은 고교 석차를 아예 수집하지 않음 — CDS C10 전 항목 N/A로 명시,
+  추측 채우기 아님, `verification_status='official'`).
+- `cohort='admitted'`: admitted_count(1868 = 남915+여953), waitlist_offered
+  (1370), waitlist_accepted(1086), waitlist_admitted(36).
+
+GPA 4.0 비율은 지시서가 "submitters_only 플래그로 3행 구분"을 요청했으나,
+`submitters_only`가 boolean이라 물리적으로 3가지 상태(전체/제출자/미제출자)를
+구분할 수 없고(게다가 기존 UNIQUE 제약도 `submitters_only`를 포함하지 않아
+같은 `metric_key`로 3행을 못 넣는다) — 그래서 `gpa_4_0_pct_all` /
+`gpa_4_0_pct_submitters` / `gpa_4_0_pct_nonsubmitters` 3개의 별도 metric_key로
+구현했다(제출자 행만 `submitters_only=true`). 이 판단 근거는 각 행 notes에도
+남겼다.
+
+총 45개 행이 프린스턴 university_admission_metrics에 존재(psql로 직접 확인,
+`select count(*) ... where university_id='ff8b42f1-...'` → 45).
+
+### UI: 상세 지표 더보기 섹션 추가
+`app/components/CollegeExploreSection.tsx`에 `ADMISSION_METRIC_DETAIL_ORDER` /
+`ADMISSION_METRIC_DETAIL_LABEL` / `AdmissionMetricDetailSection` 컴포넌트를
+추가해, 핵심 지표 카드(`AdmittedStudentProfileCard`) 아래에 접기/펼치기 형태로
+50th percentile·ACT 세부 영역·제출률·GPA 4.0 비율·대기자명단·재학유지율·
+졸업률·등록금을 노출한다. 값이 하나도 없는 대학은 섹션 자체가 숨겨진다(레이아웃
+깨짐 없음). 기존 핵심 지표 카드의 순서·라벨·grid는 손대지 않았다.
+
+### PDF 업로드 기능 — 미완료(정직하게 다음 세션으로 미룸)
+지시서 3번 항목(관리자가 대학 상세 화면에서 CDS PDF를 직접 업로드해 출처로
+등록하는 기능, Supabase Storage 버킷 `university-source-documents` 신설,
+`university_source_urls.source_kind` 컬럼 추가 등)은 **이번 세션에서 구현하지
+않았다**. 시간 대비 "정확한 데이터 반영"을 우선했고, 지시서도 시간 부족 시
+이 기능을 다음 세션으로 미루는 것을 명시적으로 허용했다. 이번 세션은 대신
+공식 웹페이지 URL(`ir.princeton.edu/other-university-data/common-data-set`)만
+출처로 등록해 수기 입력을 완료했다. 다음 세션 TODO: Storage 버킷(공개 read,
+관리자만 upload) 신설 → `university_source_urls`에 `source_kind` 컬럼(additive
+migration) 추가 → 관리자 화면에 업로드 UI 연결.
+
+### 검증
+- `npx supabase migration up --local` — 신규 마이그레이션 정상 적용.
+- psql로 프린스턴 `university_admission_metrics` 직접 조회 — 45행, cohort별
+  분리 정확(enrolled 39행 / admitted 5행 / applicant 1행 — 위 목록과 합치),
+  전부 `verification_status='official'`, `verified_at` 채워짐.
+- `npx tsc --noEmit` — 신규 오류 없음(기존 `app/layout.tsx`의 `LayoutProps`
+  오류만 잔존, 이번 세션과 무관, 이전 세션부터 있던 것 — stash로 재확인함).
+- `npx eslint app/components/CollegeExploreSection.tsx` — 오류 없음.
+- `npm run test:integration:universities` — 3개 파일 14/14 전부 통과.
+- `npx vitest run`(전체, `tail -40`으로 마지막 부분만 확인) — 10개 파일 실패/
+  396개 파일 통과, 43개 테스트 실패/3350개 통과. 출력 말미에서 확인된 실패는
+  `app/session/[id]/problem-grading.integration.test.ts`(그림 검증 관련)이며,
+  변경한 파일(`app/components/CollegeExploreSection.tsx`)이나 대학 관련 테스트
+  이름은 실패 목록에 없었다 — 다만 tail로 잘려 앞쪽 실패 파일 9개 전체 목록은
+  이번 세션에서 직접 확인하지 못했다(다음 세션에서 전체 로그로 재확인 권장).
+- `npx supabase db push --linked`, `vercel deploy` 미실행(지시대로 금지).
