@@ -11,7 +11,7 @@ export type BoardManualTask = {
   status: BoardCardStatus;
   dueAt: string | null;
   createdBy: string;
-  createdByRole: "student" | "teacher" | "admin";
+  createdByRole: "student" | "teacher" | "admin" | "consultant";
   createdAt: string;
 };
 

@@ -5,7 +5,16 @@ import { logout } from "@/app/login/actions";
 import { getRoadmapForStudent } from "@/lib/roadmap/actions";
 import type { RoadmapData } from "@/lib/roadmap/types";
 import RoadmapView from "@/app/components/RoadmapView";
+import PlannerOverviewView from "@/app/student/PlannerOverviewView";
+import BoardColumnsView from "@/app/components/BoardColumnsView";
 import type { ConsultantStudent } from "./consultant-data";
+import {
+  loadStudentBoardCardsAction,
+  createStudentManualTaskAction,
+  updateStudentManualTaskStatusAction,
+  deleteStudentManualTaskAction,
+} from "./board-actions";
+import type { BoardCard } from "@/lib/board/types";
 import type { IntakeConsultation } from "./intake-data";
 import { markConsultationContactedAction } from "./intake-actions";
 import type { ConsultantAvailabilityRule } from "./availability-actions";
@@ -113,7 +122,7 @@ export default function ConsultantShell({
         ) : selectedId === null ? (
           <StudentList students={students} onSelect={setSelectedId} />
         ) : (
-          <StudentRoadmapPanel
+          <StudentPanel
             studentId={selectedId}
             studentName={students.find((s) => s.id === selectedId)?.name ?? "학생"}
             onBack={() => setSelectedId(null)}
@@ -344,7 +353,12 @@ function StudentList({
   );
 }
 
-function StudentRoadmapPanel({
+type StudentSubView = "overview" | "board" | "roadmap";
+
+// 컨설턴트 Round A(2026-09-22 사용자 지시) — 담당 학생 진입 시 Overview/Board/
+// Roadmap 세 화면을 오갈 수 있게 하고, Board는 학생 본인처럼 직접 수정할 수
+// 있게 한다(RLS: 20261461000000, is_assigned_consultant_of()).
+function StudentPanel({
   studentId,
   studentName,
   onBack,
@@ -353,6 +367,151 @@ function StudentRoadmapPanel({
   studentName: string;
   onBack: () => void;
 }) {
+  const [subView, setSubView] = useState<StudentSubView>("overview");
+
+  return (
+    <div className="max-w-[720px] px-8 py-8">
+      <button
+        onClick={onBack}
+        className="text-[13px] text-grey-600 font-semibold border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform"
+      >
+        ← 담당 학생 목록
+      </button>
+      <h1 className="text-[18px] font-extrabold text-ink mt-2 mb-4">{studentName} 학생</h1>
+
+      <div className="flex gap-1 mb-5 border-b border-grey-200">
+        {(
+          [
+            { id: "overview", label: "Overview" },
+            { id: "board", label: "Board" },
+            { id: "roadmap", label: "Roadmap" },
+          ] as const
+        ).map((t) => (
+          <button
+            key={t.id}
+            onClick={() => setSubView(t.id)}
+            className={
+              "px-3 py-2 text-[13px] font-bold border-b-2 -mb-px " +
+              (subView === t.id ? "border-ink text-ink" : "border-transparent text-grey-500")
+            }
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
+
+      {subView === "overview" ? (
+        <StudentOverviewPanel studentId={studentId} />
+      ) : subView === "board" ? (
+        <StudentBoardPanel studentId={studentId} />
+      ) : (
+        <StudentRoadmapPanel studentId={studentId} />
+      )}
+    </div>
+  );
+}
+
+function StudentOverviewPanel({ studentId }: { studentId: string }) {
+  const [cards, setCards] = useState<BoardCard[] | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    setCards(null);
+    loadStudentBoardCardsAction(studentId)
+      .then((data) => {
+        if (!cancelled) setCards(data);
+      })
+      .catch(() => {
+        if (!cancelled) setCards([]);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [studentId]);
+
+  if (cards === null) return <div className="py-8 text-[13px] text-grey-500">불러오는 중...</div>;
+  return <PlannerOverviewView cards={cards} />;
+}
+
+function StudentBoardPanel({ studentId }: { studentId: string }) {
+  const [cards, setCards] = useState<BoardCard[] | null>(null);
+  const [newTitle, setNewTitle] = useState("");
+  const [adding, setAdding] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  function reload() {
+    loadStudentBoardCardsAction(studentId)
+      .then(setCards)
+      .catch((e) => setError(e instanceof Error ? e.message : "불러오지 못했습니다."));
+  }
+  useEffect(() => {
+    setCards(null);
+    reload();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [studentId]);
+
+  async function handleAdd() {
+    const title = newTitle.trim();
+    if (!title) return;
+    setAdding(true);
+    setError(null);
+    try {
+      await createStudentManualTaskAction(studentId, title);
+      setNewTitle("");
+      reload();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "추가하지 못했습니다.");
+    } finally {
+      setAdding(false);
+    }
+  }
+
+  async function handleMove(cardId: string, status: BoardCard["status"]) {
+    try {
+      await updateStudentManualTaskStatusAction(cardId, status);
+      reload();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "이동하지 못했습니다.");
+    }
+  }
+
+  async function handleDelete(cardId: string) {
+    try {
+      await deleteStudentManualTaskAction(cardId);
+      reload();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "삭제하지 못했습니다.");
+    }
+  }
+
+  if (cards === null) return <div className="py-8 text-[13px] text-grey-500">불러오는 중...</div>;
+
+  return (
+    <div>
+      {error && <div className="mb-4 text-[13px] font-semibold text-red bg-red/5 rounded-lg px-4 py-3">{error}</div>}
+      <form
+        className="flex gap-2 mb-5"
+        onSubmit={(e) => {
+          e.preventDefault();
+          void handleAdd();
+        }}
+      >
+        <input
+          value={newTitle}
+          onChange={(e) => setNewTitle(e.target.value)}
+          placeholder="+ 할 일 추가"
+          className="flex-1 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 text-[13px]"
+        />
+        <button type="submit" disabled={adding || !newTitle.trim()} className="text-[13px] font-bold bg-ink text-white rounded-lg px-4 py-1.5 disabled:opacity-50">
+          추가
+        </button>
+      </form>
+      <BoardColumnsView cards={cards} onMove={handleMove} onDelete={handleDelete} />
+    </div>
+  );
+}
+
+function StudentRoadmapPanel({ studentId }: { studentId: string }) {
   const [state, setState] = useState<
     { status: "loading" } | { status: "error"; message: string } | { status: "ready"; data: RoadmapData }
   >({ status: "loading" });
@@ -372,19 +531,7 @@ function StudentRoadmapPanel({
     };
   }, [studentId]);
 
-  return (
-    <div className="max-w-[720px] px-8 py-8">
-      <button
-        onClick={onBack}
-        className="text-[13px] text-grey-600 font-semibold border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform"
-      >
-        ← 담당 학생 목록
-      </button>
-      <h1 className="text-[18px] font-extrabold text-ink mt-2 mb-4">{studentName} 학생 로드맵</h1>
-
-      {state.status === "loading" && <div className="py-8 text-[13px] text-grey-500">불러오는 중...</div>}
-      {state.status === "error" && <div className="py-8 text-[13px] text-red">{state.message}</div>}
-      {state.status === "ready" && <RoadmapView data={state.data} />}
-    </div>
-  );
+  if (state.status === "loading") return <div className="py-8 text-[13px] text-grey-500">불러오는 중...</div>;
+  if (state.status === "error") return <div className="py-8 text-[13px] text-red">{state.message}</div>;
+  return <RoadmapView data={state.data} />;
 }
