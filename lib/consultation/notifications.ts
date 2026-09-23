@@ -33,9 +33,17 @@ export async function sendConsultationSchedulingLinkEmail(params: {
     subject: "[Alton Education] 상담 시간을 선택해 주세요",
     html: `
       <p>${params.contact_name}님, 안녕하세요.</p>
-      <p>담당 컨설턴트 ${params.consultant_name}님이 배정되었습니다. 아래 링크에서
+      <p>담당 컨설턴트 ${params.consultant_name}님이 배정되었습니다. 아래 버튼에서
       편한 상담 시간을 직접 골라 주세요.</p>
-      <p><a href="${params.scheduling_url}">${params.scheduling_url}</a></p>
+      <p style="margin: 24px 0;">
+        <a href="${params.scheduling_url}"
+           style="display:inline-block;background:#c81e34;color:#ffffff;text-decoration:none;
+                  font-weight:bold;font-size:15px;padding:12px 28px;border-radius:8px;">
+          상담 일정 선택하기
+        </a>
+      </p>
+      <p style="color:#888;font-size:12px;">버튼이 보이지 않으면 이 링크를 열어 주세요:
+      ${params.scheduling_url}</p>
       <p>감사합니다.<br/>Alton Education</p>
     `,
   });
