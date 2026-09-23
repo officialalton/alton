@@ -34,7 +34,7 @@ export async function listMyHouseholdInquiriesAction(): Promise<HouseholdInquiry
   const householdId = await requireStudentHouseholdId(supabase, userId);
   const { data, error } = await supabase
     .from("household_inquiries")
-    .select("id, status, created_at, last_message_at, closed_at, household_messages(body, created_at)")
+    .select("id, status, subject, created_at, last_message_at, closed_at, household_messages(body, created_at)")
     .eq("household_id", householdId)
     .order("last_message_at", { ascending: false });
   if (error) throw new Error(error.message);
@@ -44,6 +44,7 @@ export async function listMyHouseholdInquiriesAction(): Promise<HouseholdInquiry
     return {
       id: r.id,
       status: r.status,
+      subject: r.subject,
       createdAt: r.created_at,
       lastMessageAt: r.last_message_at,
       closedAt: r.closed_at,
@@ -69,13 +70,13 @@ export async function listMyHouseholdInquiryMessagesAction(inquiryId: string): P
   }));
 }
 
-export async function startMyHouseholdInquiryAction(body: string): Promise<{ inquiryId: string }> {
+export async function startMyHouseholdInquiryAction(body: string, subject?: string): Promise<{ inquiryId: string }> {
   const { supabase, userId } = await requireStudent();
   if (!body.trim()) throw new Error("내용을 입력해주세요.");
   const householdId = await requireStudentHouseholdId(supabase, userId);
   const { data: inquiry, error: inquiryError } = await supabase
     .from("household_inquiries")
-    .insert({ household_id: householdId, opened_by: userId, opened_by_role: "student" })
+    .insert({ household_id: householdId, opened_by: userId, opened_by_role: "student", subject: subject?.trim() || null })
     .select("id")
     .single();
   if (inquiryError) throw new Error(inquiryError.message);

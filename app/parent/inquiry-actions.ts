@@ -33,6 +33,8 @@ export type HouseholdInquirySummary = {
   createdAt: string;
   lastMessageAt: string;
   closedAt: string | null;
+  /** 2026-09-23 — 문의 제목(주제). 옛 문의는 null. */
+  subject: string | null;
   /** 목록에서 미리보기로 보여줄 첫 메시지. */
   firstMessage: string;
 };
@@ -71,7 +73,7 @@ export async function listGuardianInquiries(): Promise<HouseholdInquirySummary[]
   const householdId = await requireGuardianHouseholdId(supabase, user.id);
   const { data, error } = await supabase
     .from("household_inquiries")
-    .select("id, status, created_at, last_message_at, closed_at, household_messages(body, created_at)")
+    .select("id, status, subject, created_at, last_message_at, closed_at, household_messages(body, created_at)")
     .eq("household_id", householdId)
     .order("last_message_at", { ascending: false });
   if (error) throw new Error(error.message);
@@ -81,12 +83,24 @@ export async function listGuardianInquiries(): Promise<HouseholdInquirySummary[]
     return {
       id: r.id,
       status: r.status,
+      subject: r.subject,
       createdAt: r.created_at,
       lastMessageAt: r.last_message_at,
       closedAt: r.closed_at,
       firstMessage: first?.body ?? "",
     };
   });
+}
+
+/** 2026-09-23 — 담당 컨설턴트가 있으면 이름을, 없으면 null을 반환한다. 메신저
+ * 안내 문구("관리자에게 문의")가 실제 담당자를 반영하도록 화면에서 쓴다. */
+export async function getAssignedConsultantNameAction(): Promise<string | null> {
+  const { user, profile, supabase } = await requireUser();
+  if (profile?.role !== "parent") throw new Error("보호자만 접근할 수 있습니다.");
+  const householdId = await requireGuardianHouseholdId(supabase, user.id);
+  const { data, error } = await supabase.rpc("consultant_name_for_household", { p_household_id: householdId });
+  if (error) throw new Error(error.message);
+  return (data as string | null) ?? null;
 }
 
 /** 문의 하나의 메시지 전체(시간순). */
@@ -109,14 +123,14 @@ export async function listGuardianInquiryMessages(inquiryId: string): Promise<Ho
 }
 
 /** 새 문의를 열고 첫 메시지를 남긴다. */
-export async function startGuardianInquiry(body: string): Promise<{ inquiryId: string }> {
+export async function startGuardianInquiry(body: string, subject?: string): Promise<{ inquiryId: string }> {
   const { user, profile, supabase } = await requireUser();
   if (profile?.role !== "parent") throw new Error("보호자만 접근할 수 있습니다.");
   if (!body.trim()) throw new Error("내용을 입력해주세요.");
   const householdId = await requireGuardianHouseholdId(supabase, user.id);
   const { data: inquiry, error: inquiryError } = await supabase
     .from("household_inquiries")
-    .insert({ household_id: householdId, opened_by: user.id, opened_by_role: "guardian" })
+    .insert({ household_id: householdId, opened_by: user.id, opened_by_role: "guardian", subject: subject?.trim() || null })
     .select("id")
     .single();
   if (inquiryError) throw new Error(inquiryError.message);

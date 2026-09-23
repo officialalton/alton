@@ -89,6 +89,7 @@ describe("startGuardianInquiry", () => {
       household_id: "household1",
       opened_by: "guardian1",
       opened_by_role: "guardian",
+      subject: null,
     });
     expect(insertMock).toHaveBeenCalledWith({
       household_id: "household1",

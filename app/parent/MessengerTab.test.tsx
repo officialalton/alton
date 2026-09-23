@@ -7,12 +7,14 @@ const {
   startGuardianInquiryMock,
   sendGuardianInquiryMessageMock,
   markMessengerReadMock,
+  getAssignedConsultantNameActionMock,
 } = vi.hoisted(() => ({
   listGuardianInquiriesMock: vi.fn(),
   listGuardianInquiryMessagesMock: vi.fn(),
   startGuardianInquiryMock: vi.fn(),
   sendGuardianInquiryMessageMock: vi.fn(),
   markMessengerReadMock: vi.fn(),
+  getAssignedConsultantNameActionMock: vi.fn(),
 }));
 
 vi.mock("./inquiry-actions", () => ({
@@ -21,6 +23,7 @@ vi.mock("./inquiry-actions", () => ({
   startGuardianInquiry: startGuardianInquiryMock,
   sendGuardianInquiryMessage: sendGuardianInquiryMessageMock,
   markMessengerRead: markMessengerReadMock,
+  getAssignedConsultantNameAction: getAssignedConsultantNameActionMock,
 }));
 
 import MessengerTab from "./MessengerTab";
@@ -30,6 +33,7 @@ describe("MessengerTab", () => {
     vi.clearAllMocks();
     listGuardianInquiriesMock.mockResolvedValue([]);
     markMessengerReadMock.mockResolvedValue(undefined);
+    getAssignedConsultantNameActionMock.mockResolvedValue(null);
   });
 
   it("문의 목록을 불러오고 열자마자 읽음 처리한다", async () => {
@@ -52,7 +56,7 @@ describe("MessengerTab", () => {
     fireEvent.change(screen.getByLabelText("새 문의 내용"), { target: { value: "새 문의입니다" } });
     fireEvent.click(screen.getByText("문의하기"));
 
-    await waitFor(() => expect(startGuardianInquiryMock).toHaveBeenCalledWith("새 문의입니다"));
+    await waitFor(() => expect(startGuardianInquiryMock).toHaveBeenCalledWith("새 문의입니다", ""));
     await waitFor(() => expect(screen.getByText("새 문의입니다")).toBeInTheDocument());
   });
 

@@ -33,7 +33,7 @@ export async function listConsultantInquiriesAction(studentId: string): Promise<
   const householdId = await requireStudentHouseholdId(supabase, studentId);
   const { data, error } = await supabase
     .from("household_inquiries")
-    .select("id, status, created_at, last_message_at, closed_at, household_messages(body, created_at)")
+    .select("id, status, subject, created_at, last_message_at, closed_at, household_messages(body, created_at)")
     .eq("household_id", householdId)
     .order("last_message_at", { ascending: false });
   if (error) throw new Error(error.message);
@@ -43,12 +43,40 @@ export async function listConsultantInquiriesAction(studentId: string): Promise<
     return {
       id: r.id,
       status: r.status,
+      subject: r.subject,
       createdAt: r.created_at,
       lastMessageAt: r.last_message_at,
       closedAt: r.closed_at,
       firstMessage: first?.body ?? "",
     };
   });
+}
+
+// R15-A(Messenger 1/N, 2026-09-23) — 컨설턴트가 담당 가족·학생에게 먼저 대화를
+// 시작한다("Read and reply"에서 "Read, reply, and start"로 확장).
+export async function startConsultantInquiryAction(
+  studentId: string,
+  body: string,
+  subject?: string
+): Promise<{ inquiryId: string }> {
+  const { supabase, userId } = await requireConsultant();
+  if (!body.trim()) throw new Error("내용을 입력해주세요.");
+  const householdId = await requireStudentHouseholdId(supabase, studentId);
+  const { data: inquiry, error: inquiryError } = await supabase
+    .from("household_inquiries")
+    .insert({ household_id: householdId, opened_by: userId, opened_by_role: "consultant", subject: subject?.trim() || null })
+    .select("id")
+    .single();
+  if (inquiryError) throw new Error(inquiryError.message);
+  const { error } = await supabase.from("household_messages").insert({
+    household_id: householdId,
+    inquiry_id: inquiry.id,
+    sender_id: userId,
+    sender_role: "consultant",
+    body: body.trim(),
+  });
+  if (error) throw new Error(error.message);
+  return { inquiryId: inquiry.id as string };
 }
 
 export async function listConsultantInquiryMessagesAction(inquiryId: string): Promise<HouseholdMessage[]> {

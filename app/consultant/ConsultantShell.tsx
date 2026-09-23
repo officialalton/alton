@@ -37,6 +37,7 @@ import {
   sendConsultantInquiryMessageAction,
   markConsultantMessengerReadAction,
   getConsultantMessengerUnreadCountAction,
+  startConsultantInquiryAction,
 } from "./messenger-actions";
 import {
   listMyAssignedMeetingRequestsAction,
@@ -831,6 +832,10 @@ function ConsultantMessengerPanel({ studentId }: { studentId: string }) {
   const [error, setError] = useState<string | null>(null);
   const [subTab, setSubTab] = useState<"open" | "closed">("open");
   const [openId, setOpenId] = useState<string | null>(null);
+  const [composing, setComposing] = useState(false);
+  const [newSubject, setNewSubject] = useState("");
+  const [newBody, setNewBody] = useState("");
+  const [starting, setStarting] = useState(false);
 
   function loadInquiries() {
     listConsultantInquiriesAction(studentId)
@@ -863,6 +868,61 @@ function ConsultantMessengerPanel({ studentId }: { studentId: string }) {
   return (
     <div>
       {error && <p className="text-[12.5px] text-red mb-3">{error}</p>}
+
+      {/* R15-A(Messenger 1/N) — 컨설턴트가 먼저 대화를 시작할 수 있다. */}
+      {!composing ? (
+        <button
+          type="button"
+          onClick={() => setComposing(true)}
+          className="text-[12px] font-bold text-white bg-ink rounded-lg px-3.5 py-1.5 mb-3"
+        >
+          + 새 대화 시작
+        </button>
+      ) : (
+        <div className="border-[1.5px] border-grey-200 rounded-xl p-3 mb-3 space-y-1.5">
+          <input
+            value={newSubject}
+            onChange={(e) => setNewSubject(e.target.value)}
+            placeholder="주제(선택)"
+            className="w-full border border-grey-200 rounded px-2 py-1 text-[12.5px]"
+          />
+          <textarea
+            value={newBody}
+            onChange={(e) => setNewBody(e.target.value)}
+            placeholder="메시지 내용"
+            className="w-full border border-grey-200 rounded px-2 py-1.5 text-[12.5px] min-h-[54px]"
+          />
+          <div className="flex gap-2">
+            <button
+              type="button"
+              disabled={starting || !newBody.trim()}
+              onClick={async () => {
+                setStarting(true);
+                setError(null);
+                try {
+                  const { inquiryId } = await startConsultantInquiryAction(studentId, newBody, newSubject);
+                  setNewBody("");
+                  setNewSubject("");
+                  setComposing(false);
+                  loadInquiries();
+                  setOpenId(inquiryId);
+                } catch (e) {
+                  setError(e instanceof Error ? e.message : "대화를 시작하지 못했습니다.");
+                } finally {
+                  setStarting(false);
+                }
+              }}
+              className="text-[12px] font-bold text-white bg-ink rounded-lg px-3.5 py-1.5 disabled:opacity-50"
+            >
+              {starting ? "보내는 중..." : "보내기"}
+            </button>
+            <button type="button" className="text-[12px] font-semibold text-grey-500" onClick={() => setComposing(false)}>
+              취소
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="flex gap-1.5 mb-3">
         {(["open", "closed"] as const).map((t) => (
           <button
@@ -895,6 +955,7 @@ function ConsultantMessengerPanel({ studentId }: { studentId: string }) {
                 className="w-full text-left px-4 py-3 flex items-center justify-between gap-3"
               >
                 <div className="min-w-0">
+                  {i.subject && <p className="text-[12.5px] font-bold text-ink truncate">{i.subject}</p>}
                   <p className="text-[13px] text-ink truncate">{i.firstMessage}</p>
                   <p className="text-[11px] text-grey-500 mt-0.5">
                     {i.status === "closed" ? `종료됨 · ${formatMessengerDateTime(i.closedAt)}` : `최근 메시지 ${formatMessengerDateTime(i.lastMessageAt)}`}
