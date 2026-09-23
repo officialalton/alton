@@ -788,7 +788,7 @@ PDF 전체(1-20, 21-30 두 번)를 직접 읽고 아래 반영을 완주했다.
 화이트리스트 CHECK 제약(`sat_total_25` 등 16개 값만 허용)이 걸려 있어, CDS의
 영역별 세부 지표(ACT Math/English/Writing/Science/Reading, 50th percentile,
 제출률, GPA 4.0 비율, 대기자명단, 재학유지율, 졸업률, 등록금)를 저장할 수
-없었다. `supabase/migrations/20261550000000_college_db_p10_cds_metric_keys.sql`로
+없었다. `supabase/migrations/20261560000000_college_db_p10_cds_metric_keys.sql`로
 체크 제약을 확장(additive, 기존 데이터 무손실)하고 `npx supabase migration up
 --local`로 로컬 DB에 적용했다.
 
