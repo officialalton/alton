@@ -36,10 +36,13 @@ import {
 } from "@/lib/universities/actions";
 import {
   getLatestRefreshJob,
+  listQueuedRefreshJobs,
   listUpdateProposals,
   requestUniversityRefresh,
+  retryQueuedRefreshJob,
   reviewUpdateProposal,
   rollbackAppliedProposal,
+  type QueuedRefreshJob,
   type RefreshJob,
   type UpdateProposal,
 } from "@/lib/universities/refresh-actions";
@@ -106,7 +109,14 @@ const CALENDAR_OPTIONS = [
 
 /** 지시서 E: 200개교 확대 상태 배지. 재검증 없이 verified_pilot로 표시하지 않는다는 원칙을
  * 화면에서도 그대로 드러낸다(색상만으로 구분하지 않고 텍스트로 명확히 표기). */
-function DataCollectionStatusBadge({ status }: { status: "verified_pilot" | "sources_pending_review" | "unconfirmed" }) {
+function DataCollectionStatusBadge({
+  status,
+  verifiedAt,
+}: {
+  status: "verified_pilot" | "sources_pending_review" | "unconfirmed";
+  /** 마무리 세션 추가: verified_pilot로 바뀐 시각(재검증 시점). 과거 데이터는 없을 수 있다. */
+  verifiedAt?: string | null;
+}) {
   const style =
     status === "verified_pilot"
       ? "bg-green-100 text-green-700"
@@ -114,7 +124,14 @@ function DataCollectionStatusBadge({ status }: { status: "verified_pilot" | "sou
         ? "bg-yellow-100 text-yellow-700"
         : "bg-grey-100 text-grey-500";
   const text = status === "verified_pilot" ? "실검증 완료(UAT)" : status === "sources_pending_review" ? "출처 검토 필요" : "미확인";
-  return <span className={`rounded px-1.5 py-0.5 text-[10px] font-medium ${style}`}>{text}</span>;
+  const verifiedAtLabel =
+    status === "verified_pilot" && verifiedAt ? new Date(verifiedAt).toLocaleDateString("ko-KR") : null;
+  return (
+    <span className={`rounded px-1.5 py-0.5 text-[10px] font-medium ${style}`}>
+      {text}
+      {verifiedAtLabel ? ` · ${verifiedAtLabel}` : ""}
+    </span>
+  );
 }
 
 /** 텍스트·숫자·날짜 입력 공용 라벨+인풋. onChange는 항상 문자열을 받는다(호출부에서 파싱). */
@@ -187,7 +204,9 @@ export default function UniversitiesPanel({ initialUniversities }: { initialUniv
   }
 
   return (
-    <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-[1fr_1.2fr]">
+    <div className="mt-6">
+      <QueuedRefreshJobsSection setError={setError} />
+      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-[1fr_1.2fr]">
       <div>
         <input
           type="text"
@@ -211,7 +230,7 @@ export default function UniversitiesPanel({ initialUniversities }: { initialUniv
                 <span className="flex items-center gap-2">
                   <span className="mr-2 text-grey-400">#{u.rankFinal ?? "-"}</span>
                   {u.name}
-                  <DataCollectionStatusBadge status={u.dataCollectionStatus} />
+                  <DataCollectionStatusBadge status={u.dataCollectionStatus} verifiedAt={u.dataCollectionStatusVerifiedAt} />
                 </span>
                 <span className="text-xs text-grey-400">{u.latestCycleYear ?? "미입력"}</span>
               </button>
@@ -234,6 +253,87 @@ export default function UniversitiesPanel({ initialUniversities }: { initialUniv
           />
         )}
       </div>
+      </div>
+    </div>
+  );
+}
+
+/** 마무리 세션 추가: 동시 실행 한도(3) 초과로 'queued'에 머물러 있는 작업 전체를 대학 구분
+ * 없이 한 화면에서 보여주고, 관리자가 수동으로 즉시 재시도할 수 있게 한다. 자동 워커/폴러는
+ * 이번 세션 범위 밖(비용·인프라 결정 필요 항목으로 남겨둠). */
+function QueuedRefreshJobsSection({ setError }: { setError: (msg: string | null) => void }) {
+  const [jobs, setJobs] = useState<QueuedRefreshJob[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [isPending, startTransition] = useTransition();
+
+  function refresh() {
+    setLoading(true);
+    startTransition(async () => {
+      try {
+        setJobs(await listQueuedRefreshJobs());
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "대기 중인 작업 조회 중 오류가 발생했습니다.");
+      } finally {
+        setLoading(false);
+      }
+    });
+  }
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 최초 로드
+    refresh();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  function retry(jobId: string) {
+    setError(null);
+    startTransition(async () => {
+      try {
+        await retryQueuedRefreshJob(jobId);
+        refresh();
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "재시도 중 오류가 발생했습니다.");
+      }
+    });
+  }
+
+  if (!loading && jobs.length === 0) return null;
+
+  return (
+    <div className="rounded border border-yellow-200 bg-yellow-50 p-3">
+      <div className="flex items-center justify-between">
+        <h3 className="text-sm font-semibold text-ink">대기 중인 갱신 작업{jobs.length > 0 ? ` (${jobs.length})` : ""}</h3>
+        <button
+          type="button"
+          disabled={isPending}
+          onClick={refresh}
+          className="rounded border border-grey-300 px-2 py-1 text-xs text-grey-600 disabled:opacity-50"
+        >
+          새로고침
+        </button>
+      </div>
+      <p className="mt-1 text-xs text-grey-500">
+        동시 실행 한도(3개교)를 초과해 대기 중인 작업입니다. 자동으로 실행되지 않으니(자동 워커 미도입 —
+        결정 필요) 아래에서 직접 재시도하세요.
+      </p>
+      {loading && <p className="mt-2 text-xs text-grey-400">불러오는 중…</p>}
+      <ul className="mt-2 space-y-1">
+        {jobs.map((j) => (
+          <li key={j.id} className="flex items-center justify-between rounded border border-grey-100 bg-white px-2 py-1 text-xs">
+            <span>
+              {j.universityName} <span className="text-grey-400">· {new Date(j.createdAt).toLocaleString("ko-KR")}</span>
+            </span>
+            <button
+              type="button"
+              disabled={isPending}
+              onClick={() => retry(j.id)}
+              className="rounded bg-ink px-2 py-1 text-[11px] text-white disabled:opacity-50"
+            >
+              지금 재시도
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -394,7 +494,7 @@ function UniversityDetailPanel({
     <div className="rounded border border-grey-200 bg-white p-4">
       <h2 className="flex items-center gap-2 text-lg font-semibold text-ink">
         {detail.name}
-        <DataCollectionStatusBadge status={detail.dataCollectionStatus} />
+        <DataCollectionStatusBadge status={detail.dataCollectionStatus} verifiedAt={detail.dataCollectionStatusVerifiedAt} />
       </h2>
       <p className="text-xs text-grey-500">
         #{detail.rankFinal ?? "-"} · {detail.city ?? "-"}, {detail.state ?? "-"} · {detail.publicPrivate ?? "-"}

@@ -29,6 +29,8 @@ export type UniversitySummary = {
   latestCycleYear: number | null;
   /** 지시서 E: 'verified_pilot'(실제 재검증 완료)/'sources_pending_review'/'unconfirmed'(기본값). */
   dataCollectionStatus: "verified_pilot" | "sources_pending_review" | "unconfirmed";
+  /** 마무리 세션 추가: verified_pilot로 바뀐(재검증한) 시각. 과거 데이터는 null일 수 있다. */
+  dataCollectionStatusVerifiedAt: string | null;
 };
 
 export type UniversityListFilter = {
@@ -43,7 +45,7 @@ export async function listUniversities(filter: UniversityListFilter = {}): Promi
   const db = createAdminClient();
   let query = db
     .from("universities")
-    .select("id, rank_final, name, country, city, state, public_private, application_platform, url_verification_status, data_collection_status")
+    .select("id, rank_final, name, country, city, state, public_private, application_platform, url_verification_status, data_collection_status, data_collection_status_verified_at")
     .order("rank_final", { ascending: true, nullsFirst: false });
 
   if (filter.search?.trim()) {
@@ -87,6 +89,7 @@ export async function listUniversities(filter: UniversityListFilter = {}): Promi
     urlVerificationStatus: u.url_verification_status,
     latestCycleYear: latestYearByUniversity.get(u.id) ?? null,
     dataCollectionStatus: u.data_collection_status ?? "unconfirmed",
+    dataCollectionStatusVerifiedAt: u.data_collection_status_verified_at ?? null,
   }));
 }
 
@@ -241,6 +244,7 @@ async function loadUniversityDetail(
       applicationPlatform: u.application_platform,
       urlVerificationStatus: u.url_verification_status,
       dataCollectionStatus: u.data_collection_status ?? "unconfirmed",
+      dataCollectionStatusVerifiedAt: u.data_collection_status_verified_at ?? null,
       latestCycleYear: cycleRows?.[0]?.cycle_year ?? null,
       strengthsPrograms: u.strengths_programs ?? [],
       admissionsHomepageUrl: u.admissions_homepage_url,

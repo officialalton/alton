@@ -448,25 +448,24 @@
   보여주는 필터/정렬 UI 없음(현재는 배지만 표시, 필터링 UI는 없음).
 
 ### 결정 필요
-- 통합 테스트 파일들을 vitest로 병렬 실행하면 `runRefreshJob`의 전역 동시 실행 한도(3)에
-  실제로 경합이 생겨 "냉각시간 병합" 어서션이 가끔 실패한다(파일별 단독 실행은 항상
-  통과). CI에서 이 디렉터리의 통합 테스트를 순차 실행(`--pool=threads --poolOptions...`
-  또는 파일별 개별 vitest 호출)하도록 설정할지, 아니면 테스트가 한도 초과 상황을
-  스스로 감지해 스킵하도록 보강할지 다음 세션에서 결정 필요.
+- ~~통합 테스트 파일들을 vitest로 병렬 실행하면...~~ → **마무리 세션에서 해결**:
+  `vitest.integration.config.ts`(lib/universities 통합 테스트만 `fileParallelism:
+  false`)로 순차 실행하도록 분리, 연속 3회 재현 없음 확인. 아래 "마무리 세션" 절 참고.
 - 190개교를 `sources_pending_review`로 대량 승격할지, 아니면 실제 재검증이 될 때마다
   하나씩 `verified_pilot`로 승격하는 현재 방식을 유지할지 — 후자가 "재검증 없이 승인
-  표시 금지" 원칙에 더 부합하지만 운영 속도는 느리다.
-- Harvard/Stanford/Yale의 D 세션 검증을 "이번 세션 재검증"과 동일하게 취급해도 되는지
-  (스키마상 `verified_pilot`에 세션 구분이 없음) — 필요하면 `verified_pilot_at`
-  타임스탬프 컬럼을 추가해 검증 시점을 남길지 결정 필요.
+  표시 금지" 원칙에 더 부합하지만 운영 속도는 느리다. **여전히 결정 필요**(제품 정책
+  판단이라 마무리 세션에서도 손대지 않음, 190개교는 계속 `unconfirmed`).
+- ~~Harvard/Stanford/Yale의 D 세션 검증을...verified_pilot_at 타임스탬프 컬럼을
+  추가해...~~ → **마무리 세션에서 컬럼 추가로 해결**: `data_collection_status_verified_at`
+  추가, 10개교 백필 완료. 세 학교를 "이번 세션 재검증"과 동일 취급할지 자체는 여전히
+  제품 판단이지만, 최소한 각 학교가 "언제" 검증됐는지는 이제 화면에서 확인 가능하다.
 
 ### 결정 필요(D 관련 추가)
-- 동시 실행 한도(3) 초과 시 큐에만 남고 자동 실행되지 않는 job을 어떻게 처리할지
-  — (a) 관리자가 수동으로 다시 "확인 요청"을 누르게 두거나, (b) Vercel Cron/Supabase
-  Edge Function으로 폴러를 두는 것 중 선택 필요(이번 세션엔 로컬 테스트에서 한도에
-  걸릴 일이 없어 실사용 빈도를 알기 어려움).
-  - 권장: 200개교 확장(E) 전까지는 (a)로 충분(대학 수가 적어 동시 3개 한도에 실제로
-    걸릴 가능성이 낮음), E 단계에서 실사용 빈도를 보고 (b) 여부 결정.
+- ~~동시 실행 한도(3) 초과 시 큐에만 남고 자동 실행되지 않는 job을 어떻게 처리할지...~~
+  → **마무리 세션에서 (a) 임시 조치**: 관리자가 큐를 직접 보고 수동 재시도할 수 있는
+  `QueuedRefreshJobsSection`/`retryQueuedRefreshJob` 추가. (b) Vercel Cron/Supabase
+  Edge Function 자동 폴러 도입 여부는 **여전히 비용·인프라 결정 필요**(의도적으로
+  손대지 않음) — 200개교 확장 이후 실사용 빈도를 보고 결정.
 - 마감일/학업지표/에세이 등 실제 필드 비교(`result_type` new/changed/no_change의
   진짜 의미)를 만들려면 대학 사이트별 파서가 필요하다 — 이번 세션은 "접근 성공 여부
   + 근거 스니펫"까지만 자동화하고 실제 비교는 사람이 한다. 200개교로 갈 때 우선순위
@@ -532,14 +531,32 @@
   포함 전체 정상 적용.
 - `npx tsc --noEmit` — 이번 변경 관련 신규 오류 없음(기존 `app/layout.tsx`
   `LayoutProps` 이슈만 잔존, 무관, 이전 세션부터 있던 것).
-- `npx vitest run` — 전체 스위트 321/323 파일 통과(신규 실패 없음). 유일한 실패는
-  `lib/problem-generation/math-compilers/circles.test.ts`의 30회 반복 라벨 충돌
-  스트레스 테스트로, 이 브랜치가 손댄 적 없는 무관한 기존 랜덤 플레이키 테스트.
-- `npm run test:integration`(신설, `fileParallelism: false`)을 `supabase db reset
-  --local` 뒤 연속 3회 실행, 매회 `lib/universities`의 3개 통합 테스트 파일(actions/
-  refresh-actions/refresh-actions.e-uat) 전부 통과 — 경합 재현 없음.
-- `npx eslint` — `app/admin/universities/UniversitiesPanel.tsx`,
-  `lib/universities/actions.ts`, `lib/universities/refresh-actions.ts` 오류 없음.
+- `npx vitest run --exclude "**/*.integration.test.ts"` — 321/323 파일, 2542/2544
+  테스트 통과(신규 실패 없음). 유일한 실패는 `lib/problem-generation/math-compilers/
+  circles.test.ts`의 30회 반복 라벨 충돌 스트레스 테스트로, 이 브랜치가 손댄 적
+  없는 무관한 기존 랜덤 플레이키 테스트(같은 실패가 이번 세션 변경 전에도 재현됨).
+- `npm run test:integration:universities`(신설, `include:
+  ["lib/universities/**/*.integration.test.ts"]`, `fileParallelism: false`)를
+  `npx supabase db reset --local` 직후 연속 3회 실행 — 매회 `lib/universities`의
+  3개 통합 테스트 파일(actions/refresh-actions/refresh-actions.e-uat) 14/14 테스트
+  전부 통과, 경합 재현 없음. (참고: `db reset` 직후 PostgREST 스키마 캐시가 아직
+  갱신되지 않은 채로 테스트를 바로 돌리면 "Could not find the table ... in the schema
+  cache" 오류가 뜰 수 있다는 것도 확인했다 — 이건 이번 세션이 고치려던 동시 실행
+  경합과는 무관한 로컬 개발 환경의 별개 워밍업 지연이라, 코드/설정은 건드리지 않고
+  재검증 시 `db reset` 뒤 REST 헬스체크로 한 박자 기다린 뒤 실행하는 것으로 확인만
+  했다.)
+- 1차 시도에서는 `vitest.integration.config.ts`의 `include`를 `**/*.integration.test.ts`
+  (repo 전체)로 뒀다가, `app/session/[id]/problem-grading.integration.test.ts` 등
+  lib/universities 밖의 통합 테스트까지 순차 실행으로 옮겨져 5개 파일 34개 테스트가
+  새로 실패하는 것을 발견 — 그 파일들은 이 세션이 고치려는 전역 동시 실행 카운터를
+  공유하지 않으므로, `include`를 `lib/universities/**/*.integration.test.ts`로
+  좁히고 `vitest.config.ts`의 기본 `exclude`도 같은 범위로만 좁혀 다른 디렉터리의
+  통합 테스트는 기존 동작(병렬, 기본 설정)을 그대로 유지하게 했다.
+- `npx eslint .` — `app/admin/universities/UniversitiesPanel.tsx`,
+  `lib/universities/actions.ts`, `lib/universities/refresh-actions.ts`,
+  `vitest.config.ts`, `vitest.integration.config.ts` 오류 없음. 저장소 전체
+  기준으로는 이 브랜치가 손댄 적 없는 3개 기존 오류/경고(`ProblemBankTab.tsx`,
+  `LessonBookingTab.tsx`, `TeacherLessonScheduleTab.tsx`)가 그대로 남아있음(무관).
 - `npx supabase db push --linked`, `vercel deploy` 미실행(지시대로 금지).
 
 ### 결정 필요 (그대로 유지 — 이번 세션에서 새로 만들지 않았고, 판단도 하지 않음)

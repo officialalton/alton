@@ -127,6 +127,49 @@ export async function requestUniversityRefresh(universityId: string): Promise<Re
   return ran;
 }
 
+export type QueuedRefreshJob = RefreshJob & { universityName: string };
+
+/**
+ * 마무리 세션 추가: 관리자 Review Updates 화면에서 "동시 실행 한도(3) 초과로 대기 중인
+ * 작업" 목록을 보여주기 위한 조회. 자동 워커/폴러는 이번 세션 범위 밖(결정 필요 항목으로
+ * 남겨둠) — 대신 관리자가 눈으로 보고 아래 retryQueuedRefreshJob으로 수동 재시도한다.
+ */
+export async function listQueuedRefreshJobs(): Promise<QueuedRefreshJob[]> {
+  await requireAdmin();
+  const db = createAdminClient();
+  const { data, error } = await db
+    .from("university_refresh_jobs")
+    .select(`${JOB_COLUMNS}, universities(name)`)
+    .eq("status", "queued")
+    .order("created_at", { ascending: true });
+  if (error) throw new Error(error.message);
+  return (data ?? []).map((row) => {
+    const { universities, ...jobRow } = row as typeof row & {
+      universities: { name: string } | null;
+    };
+    return { ...mapJobRow(jobRow), universityName: universities?.name ?? "(알 수 없음)" };
+  });
+}
+
+/**
+ * 관리자 전용 수동 "지금 재시도" — queued 상태로 남아있는 작업을 동시 실행 한도 체크 없이
+ * 그 자리에서 바로 실행한다(자동 워커가 없는 이번 세션의 임시 대응책, 결정 필요 항목 참고).
+ */
+export async function retryQueuedRefreshJob(jobId: string): Promise<RefreshJob> {
+  await requireAdmin();
+  const db = createAdminClient();
+  const { data: job, error } = await db
+    .from("university_refresh_jobs")
+    .select(JOB_COLUMNS)
+    .eq("id", jobId)
+    .single();
+  if (error || !job) throw new Error(error?.message ?? "작업을 찾을 수 없습니다.");
+  if (job.status !== "queued") return mapJobRow(job);
+  const ran = await runRefreshJob(job.id, job.university_id);
+  revalidatePath("/admin/universities");
+  return ran;
+}
+
 /** 대학별 현재/최근 작업 상태만 가볍게 조회(폴링용). */
 export async function getLatestRefreshJob(universityId: string): Promise<RefreshJob | null> {
   await requireUser();
