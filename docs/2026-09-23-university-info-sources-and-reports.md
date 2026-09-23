@@ -1484,3 +1484,74 @@ University of Virginia, Ohio State University는 GPA(C12)가 원문에서
 5. **200개교 전체가 끝나면 반드시 최종 통합보고서를 작성**하고 CDS 정보
    노출 UI를 계속 확장할 것 — 이 지시는 200개교가 끝날 때까지 매 세션
    인계 기록에 계속 전달되어야 한다.
+
+## 18차 세션 (2026-09-23, 브라우저 도구 시도 — 세션 예산 극소)
+
+솔직한 요약: 이번 세션은 매우 작은 추론 예산으로 시작되어, 지시된
+범위(막힌 12개교 재시도 + 나머지 약 122개교 CDS 처리 + 학과 보완
+8개교)를 실행할 물리적 시간이 없었다. 데이터 위조를 피하기 위해
+실제로 확인된 것만 기록하고, 미완료임을 솔직히 남긴다.
+
+### A. 막혔던 학교 재시도 — 결론: 이 세션의 브라우저 도구로도 못 뚫음
+- Clemson(`open.clemson.edu/cgi/viewcontent.cgi?article=1016&context=cds`)을
+  `mcp__Claude_Browser__preview_start`/`navigate`로 열었으나, Chrome
+  내장 PDF 뷰어로 렌더링되어 `get_page_text`/`read_page`가 빈 페이지를
+  반환했고(`Viewport: 0x0`), `read_network_requests`로 응답 바이트를
+  가져와도 716자 base64(PDF 전체가 아님)만 반환되어 실제 CDS 수치를
+  읽어내지 못했다. `computer` 스크린샷도 검은 화면만 나왔다(PDF 렌더링
+  타이밍 문제로 추정). 이 세션의 브라우저 툴은 일반 HTML 페이지의
+  텍스트 추출에는 강하지만, PDF를 페이지 단위로 스크린샷→OCR 식으로
+  읽어내려면 문서당 수십 회의 zoom/스크롤 호출이 필요해 이번 세션
+  예산으로는 1개교도 끝까지 못 갔다. Elon/U Delaware/Oklahoma
+  State/George Mason/Fordham/SLU/DePaul/Pepperdine/Seton
+  Hall/Syracuse/Iowa State는 이번 세션에서 시도조차 못 함(정직하게
+  미착수로 남김).
+- 다음 세션 제안: PDF 렌더링 페이지는 스크린샷 방식보다, 브라우저로
+  실제 다운로드 트리거 후 로컬에 저장된 PDF 파일 경로를 얻어
+  `pdftotext`로 처리하는 방식을 우선 시도할 것(순수 텍스트 추출 시도가
+  차단되는 사이트 한정으로만 스크린샷 방식 사용).
+
+### B/C. 나머지 승인 CDS 학교 처리 / 학과 보완 — 이번 세션 미착수
+DB 조회로 `status='approved'`이고 아직 `verified_pilot`이 아닌 학교
+122개교 목록만 확보했고(Adelphi, Andrews, Binghamton, BGSU, BYU,
+Chapman, Clarkson, Clemson, Colorado School of Mines, DePaul, Duquesne,
+Elon, FAU, FSU, Fordham, George Mason, Georgia State, Hofstra, Howard,
+Idaho State, Illinois State, IU Bloomington, IUPUI, Iowa State, JMU,
+Kent State, LSU, LMU, Michigan State, MTSU, Mississippi State,
+Montclair State, Morgan State, NJIT, North Dakota State, Northern
+Arizona, Ohio University, Oklahoma State, Pepperdine, Purdue, RPI,
+Saint Joseph's, SLU, Seton Hall, South Dakota State, SIU Carbondale,
+SMU, St. John's, Stevens, SUNY-ESF, Syracuse, TCU, Texas Tech, Albany,
+Alabama, UAB, UAH, Arizona, Arkansas, Berkeley, UC Irvine, UCLA, UC
+Riverside, UCSD, UCSB, UCF, Cincinnati, CU Boulder, UConn, Dayton,
+Delaware, Denver, Georgia, Hawaii Manoa, Idaho, UIUC, Iowa, Kansas,
+Kentucky, UL Lafayette, Louisville, Maine, Maryland, UMass Amherst,
+UMass Boston, UMass Lowell, Memphis, Miami, Minnesota Twin Cities,
+Ole Miss, Montana, Nebraska-Lincoln, UNLV, Nevada Reno, New Mexico,
+New Orleans, UNC Chapel Hill, North Dakota, North Texas, Oregon,
+Pittsburgh, URI, San Diego, USF(San Francisco), South Alabama, South
+Carolina, South Dakota, USF(South Florida), UTK, UT Arlington, UT
+Austin, UTSA, Tulsa, Utah, Vermont, Washington, UW-Madison,
+UW-Milwaukee, Wyoming, Utah State, Villanova, VCU, Virginia Tech,
+Washington State, WPI), 실제 CDS 원문 조회·반영은 0건이다. DB 변경
+없음, `verified_pilot` 카운트는 17차 종료 시점(42개교)에서 불변.
+학과 목록 보완(ASU/Loyola Chicago/Rowan 등)도 착수하지 못했다.
+
+### 검증
+- `psql -h 127.0.0.1 -p 54422 -U postgres -d postgres`로 위 122개교
+  목록만 조회, 데이터 반영 쿼리는 실행하지 않음. `git diff`로 코드/
+  마이그레이션 변경 없음을 확인(이 문서 파일만 변경). `npx tsc
+  --noEmit` 스킵(앱 코드 변경 없음). `supabase db push`/`vercel
+  deploy` 실행하지 않음.
+
+### 다음 세션 인계 (18차 작성분, 17차 인계사항 전체 유효)
+1. PDF 차단 학교(Clemson 등 12개교)는 "브라우저로 다운로드 → 로컬
+   파일 → pdftotext" 방식을 먼저 시도. 스크린샷/OCR 방식은 문서당
+   호출 수가 너무 많아 비효율적임이 이번 세션에서 확인됨.
+2. 나머지 122개교 CDS 처리 — 목록은 위 B절 참고. 직접 PDF/정적 HTML
+   호스팅 학교부터 `curl` 우선.
+3. 학과 목록 보완 8개교(ASU/Loyola Chicago/Rowan 포함) 여전히 미착수.
+4. 관리자 화면 노출 확인 여전히 미착수.
+5. **200개교 전체가 끝나면 반드시 최종 통합보고서를 작성**하고 CDS 정보
+   노출 UI를 계속 확장할 것 — 이 지시는 200개교가 끝날 때까지 매 세션
+   인계 기록에 계속 전달되어야 한다.
