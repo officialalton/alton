@@ -509,3 +509,184 @@ export async function updateUniversityBasics(input: {
   if (error) throw new Error(error.message);
   revalidatePath("/admin/universities");
 }
+
+// --- 출처 URL 레지스트리(Part 6) ---------------------------------------------
+// 스키마: supabase/migrations/20261473000000_college_db_p6_source_urls_and_reports.sql
+
+export type SourceUrlType =
+  | "admissions_homepage"
+  | "common_data_set"
+  | "catalog_programs"
+  | "deadlines"
+  | "essay_prompts"
+  | "admitted_profile"
+  | "financial_aid"
+  | "other";
+
+export type UniversitySourceUrl = {
+  id: string;
+  universityId: string;
+  url: string;
+  sourceType: SourceUrlType;
+  cycleYear: number | null;
+  isOfficial: boolean;
+  status: "pending" | "approved" | "rejected";
+  submittedBy: string | null;
+  reviewedBy: string | null;
+  reviewedAt: string | null;
+  reviewNote: string | null;
+  createdAt: string;
+};
+
+function mapSourceUrlRow(row: {
+  id: string;
+  university_id: string;
+  url: string;
+  source_type: SourceUrlType;
+  cycle_year: number | null;
+  is_official: boolean;
+  status: "pending" | "approved" | "rejected";
+  submitted_by: string | null;
+  reviewed_by: string | null;
+  reviewed_at: string | null;
+  review_note: string | null;
+  created_at: string;
+}): UniversitySourceUrl {
+  return {
+    id: row.id,
+    universityId: row.university_id,
+    url: row.url,
+    sourceType: row.source_type,
+    cycleYear: row.cycle_year,
+    isOfficial: row.is_official,
+    status: row.status,
+    submittedBy: row.submitted_by,
+    reviewedBy: row.reviewed_by,
+    reviewedAt: row.reviewed_at,
+    reviewNote: row.review_note,
+    createdAt: row.created_at,
+  };
+}
+
+/** 관리자 화면 — 대학 하나의 출처 URL 전체(모든 상태) 조회. */
+export async function listUniversitySourceUrls(universityId: string): Promise<UniversitySourceUrl[]> {
+  await requireAdmin();
+  const db = createAdminClient();
+  const { data, error } = await db
+    .from("university_source_urls")
+    .select(
+      "id, university_id, url, source_type, cycle_year, is_official, status, submitted_by, reviewed_by, reviewed_at, review_note, created_at",
+    )
+    .eq("university_id", universityId)
+    .order("created_at", { ascending: false });
+  if (error) throw new Error(error.message);
+  return (data ?? []).map(mapSourceUrlRow);
+}
+
+/** 관리자 — 출처 URL 직접 등록(이미 승인 상태로). */
+export async function addUniversitySourceUrl(input: {
+  universityId: string;
+  url: string;
+  sourceType: SourceUrlType;
+  cycleYear?: number | null;
+  isOfficial: boolean;
+}): Promise<void> {
+  const { adminUserId } = await requireAdmin();
+  const db = createAdminClient();
+  const { error } = await db.from("university_source_urls").insert({
+    university_id: input.universityId,
+    url: input.url,
+    source_type: input.sourceType,
+    cycle_year: input.cycleYear ?? null,
+    is_official: input.isOfficial,
+    status: "approved",
+    submitted_by: adminUserId,
+    reviewed_by: adminUserId,
+    reviewed_at: new Date().toISOString(),
+  });
+  if (error) throw new Error(error.message);
+  revalidatePath("/admin/universities");
+}
+
+/** 관리자 — 컨설턴트가 제안한(pending) 출처 URL을 승인/반려. */
+export async function reviewUniversitySourceUrl(input: {
+  sourceUrlId: string;
+  approve: boolean;
+  reviewNote?: string | null;
+}): Promise<void> {
+  const { adminUserId } = await requireAdmin();
+  const db = createAdminClient();
+  const { error } = await db
+    .from("university_source_urls")
+    .update({
+      status: input.approve ? "approved" : "rejected",
+      reviewed_by: adminUserId,
+      reviewed_at: new Date().toISOString(),
+      review_note: input.reviewNote ?? null,
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", input.sourceUrlId);
+  if (error) throw new Error(error.message);
+  revalidatePath("/admin/universities");
+}
+
+// --- 오류 신고함(공개 화면 어디서나) -----------------------------------------
+
+export type UniversityDataReport = {
+  id: string;
+  universityId: string | null;
+  fieldPath: string | null;
+  reportedValue: string | null;
+  message: string;
+  reporterId: string | null;
+  reporterRole: string | null;
+  status: "open" | "in_review" | "resolved" | "dismissed";
+  resolutionNote: string | null;
+  createdAt: string;
+};
+
+/** 관리자 처리함 — 전체 신고 목록(최신순), 상태 필터 옵션. */
+export async function listUniversityDataReports(status?: UniversityDataReport["status"]): Promise<UniversityDataReport[]> {
+  await requireAdmin();
+  const db = createAdminClient();
+  let query = db
+    .from("university_data_reports")
+    .select("id, university_id, field_path, reported_value, message, reporter_id, reporter_role, status, resolution_note, created_at")
+    .order("created_at", { ascending: false });
+  if (status) query = query.eq("status", status);
+  const { data, error } = await query;
+  if (error) throw new Error(error.message);
+  return (data ?? []).map((r) => ({
+    id: r.id,
+    universityId: r.university_id,
+    fieldPath: r.field_path,
+    reportedValue: r.reported_value,
+    message: r.message,
+    reporterId: r.reporter_id,
+    reporterRole: r.reporter_role,
+    status: r.status,
+    resolutionNote: r.resolution_note,
+    createdAt: r.created_at,
+  }));
+}
+
+/** 관리자 — 신고 처리(상태 변경 + 메모). */
+export async function resolveUniversityDataReport(input: {
+  reportId: string;
+  status: "in_review" | "resolved" | "dismissed";
+  resolutionNote?: string | null;
+}): Promise<void> {
+  const { adminUserId } = await requireAdmin();
+  const db = createAdminClient();
+  const { error } = await db
+    .from("university_data_reports")
+    .update({
+      status: input.status,
+      resolved_by: input.status === "resolved" || input.status === "dismissed" ? adminUserId : null,
+      resolved_at: input.status === "resolved" || input.status === "dismissed" ? new Date().toISOString() : null,
+      resolution_note: input.resolutionNote ?? null,
+    })
+    .eq("id", input.reportId);
+  if (error) throw new Error(error.message);
+  revalidatePath("/admin/universities");
+}
