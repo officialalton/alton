@@ -292,7 +292,13 @@ export default function StudentShell({
         </div>
       )}
 
-      <MobileBottomNav primary={mobilePrimary} more={mobileMore} activeId={activeTab} onSelect={(id) => selectTab(id as TabId)} />
+      <MobileBottomNav
+        primary={mobilePrimary}
+        more={mobileMore}
+        activeId={activeTab}
+        onSelect={(id) => selectTab(id as TabId)}
+        badgeCounts={{ consultant: messengerUnread }}
+      />
 
       <div className="flex-1 flex flex-col pb-16 md:pb-0">
         {/* 2026-09-19(UAT 반영) — 데스크톱은 계정 메뉴가 사이드바 맨 아래로

@@ -413,6 +413,7 @@ export default function ParentShell({
         more={mobileMore}
         activeId={activeTab}
         onSelect={(id) => selectTab(id as TabId)}
+        badgeCounts={{ consult: messengerUnread }}
       />
 
       <div className="flex-1 flex flex-col pb-16 md:pb-0">
