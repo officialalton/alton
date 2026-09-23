@@ -2562,3 +2562,83 @@ Claude_Browser로 각 학교 학사요람을 열어 페이지네이션을 넘기
    CDS 정보 노출 UI 확장을 계속 진행할 것 — 매 세션 인계 기록에
    계속 전달.
    매 세션 인계 기록에 계속 전달.
+
+## 28차 세션 (CDS/학과 실착수 — DB 반영 0건, 차단 원인 기록)
+
+### 작업 방식
+- `university_source_urls`(source_type='common_data_set', status='approved')
+  중 `data_collection_status='sources_pending_review'` 학교 36개교 후보를
+  psql이 아닌 **Supabase JS 클라이언트(서비스 롤 키, `.env.local`)로 직접
+  조회**해 확보(이 워크트리엔 raw `psql` 접속 문자열이 `.env.local`에
+  없음 — `NEXT_PUBLIC_SUPABASE_URL`/`SUPABASE_SECRET_KEY`만 존재. 이전
+  세션 기록의 "psql로 확인"은 실제로는 이 방식이었을 가능성이 높음.
+  다음 세션은 raw psql 접속이 필요하면 `npx supabase db` 계열로 접속
+  문자열을 먼저 확보할 것).
+- unconfirmed 3개교(Gonzaga/Catholic University of America/Miami
+  University Ohio) 재시도를 **이번엔 실제로 Claude_Browser로 착수**했다
+  (4세션째 이월 사항).
+  - **Miami University**: `https://miamioh.edu/oir/data/cds/` 페이지
+    자체는 브라우저로 정상 접근됨(curl은 403/차단, 브라우저는 정상 —
+    페이지에 2015-16~2024-25 연도별 CDS 목록 확인). 그러나 실제 파일
+    링크(`_documents/cds/cds2024-25.xlsx`)는 curl과 브라우저의
+    `fetch()` 둘 다 실제 xlsx 대신 사이트 HTML(캐치올 404/인터스티셜
+    추정)을 반환했고, 브라우저 `navigate`로 직접 열어도 원래 CDS
+    목록 페이지로 되돌아가기만 함(클릭 시 새 탭 시도는 팝업 정책상
+    차단). 즉 **CDS 존재는 확인했으나 원문 파일 확보에는 실패** —
+    26~27차 세션이 남긴 "다운로드 버튼은 이 세션 툴로 못 읽음" 문제와
+    동일 계열.
+  - **Gonzaga University**: 기존 등록 URL 2건 모두 rejected(404/403).
+    대체 경로(`/about/offices-services/institutional-research`)도
+    404. 이번 세션은 여기서 시간 배분상 추가 탐색을 중단.
+  - **Catholic University of America**: 착수 전 단계에서 세션 종료 —
+    이번에도 실제 재확인은 못 함.
+  - **DB 반영: 3개교 모두 `unconfirmed` 상태 그대로 유지**(추측 채우기
+    금지 원칙상 Miami University도 실제 수치를 못 얻었으므로 상태
+    변경하지 않음).
+- 신규 CDS 후보 36개교 중 curl로 원문 링크 자동 탐색을 시도한 학교
+  (Indiana University Bloomington `iuia.iu.edu/apps/cds`, University
+  of Colorado Boulder `data.colorado.edu/reports/common-data-set`,
+  University of Maine `umaine.edu/oira/common-data-set`, Saint Louis
+  University, University of Memphis)는 전부 JS 렌더링 앱이거나(IU),
+  curl에 빈 응답(CU Boulder), 또는 실제 CDS 리소스 페이지가 대학
+  SSO 로그인 뒤로 가려짐(University of Maine — `login.live.com`
+  리다이렉트 확인, 공개 문서 아님)으로 확인돼 **이번 세션 내에는
+  실제 원문을 열지 못함**. Saint Louis University/Memphis는 Fact
+  Book류 PDF만 발견, CDS 원문은 못 찾음.
+- 학과(`university_majors`) 보완: 후보 학교 목록만 이번 세션 방식으로
+  다시 확인은 못 했음(시간 배분상 CDS 차단 원인 조사에 집중) — 실제
+  삽입 0건.
+
+### DB 반영 확인 (Supabase 클라이언트 직접 조회 결과)
+- `data_collection_status`: `verified_pilot` **140개교 변동 없음**,
+  `sources_pending_review` **57개교 변동 없음**, `unconfirmed`
+  **3개교 변동 없음**.
+- `university_admission_metrics` / `university_majors`: 이번 세션
+  신규 삽입 **0행**(실제 원문을 확보하지 못해 추측 채우기 금지
+  원칙에 따라 기록하지 않음).
+- `git status`: 이번 세션이 만든 임시 조회 스크립트(`scripts/.tmp-q1.mjs`,
+  `scripts/.tmp-q2.mjs`)는 작업 종료 전 삭제, 커밋 대상 아님. 앱
+  코드/마이그레이션 변경 없음. `npx supabase db push --linked` /
+  `vercel deploy` 실행하지 않음.
+
+### 다음 세션 인계 (29차용, 최우선순위 재확인 필요)
+1. **raw psql 접속 문자열 확보 우선** — 이번 세션엔 `.env.local`에
+   없어 Supabase JS 클라이언트로 대체했다. 다음 세션은 `npx supabase
+   db`(linked 상태 확인 후) 또는 프로젝트 대시보드에서 direct/pooler
+   연결 문자열을 받아와 원래 워크플로(psql)를 복구할 것.
+2. **unconfirmed 3개교는 이제 5세션째 이월** — Miami University는
+   CDS 페이지 자체는 열리므로, 다음 세션은 `navigate` 직후 브라우저
+   네트워크 탭(`read_network_requests`)으로 실제 xlsx 응답의 상태코드/
+   본문을 직접 확인하는 방식을 시도할 것(이번 세션엔 시도 안 함).
+   Gonzaga/CUA는 IR 페이지 URL 자체를 구글 검색 등으로 재탐색 필요.
+3. sources_pending_review 57개교는 이번 세션엔 **DB 반영 없이 그대로**.
+   University of Texas at Austin(Box 파일, 27차 세션이 file_id까지
+   확보해둠 — `box_download_shared_file` 패턴 최우선 시도 후보),
+   Indiana University Bloomington/CU Boulder/Maine 등은 이번 세션에
+   확인한 차단 사유를 참고해 다른 접근(브라우저 직접 탐색, 검색엔진
+   경유 대체 링크 등) 필요.
+4. 학과 미보유 108개교 보완도 이번 세션엔 착수만 하고 실제 삽입은
+   0건 — 다음 세션 최우선.
+5. 200개교 CDS 수집은 여전히 140/200(70%)에서 정체. 다음 세션은
+   반드시 실제 DB 반영(verified_pilot 승격)까지 마치는 것을 최소
+   목표로 삼을 것.
