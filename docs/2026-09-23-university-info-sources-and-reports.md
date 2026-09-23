@@ -1758,3 +1758,134 @@ UIUC만 xlsx), `pdftotext -layout`으로 텍스트를 뽑아 C1/C2/C9/B22/B4-B21
 6. **200개교 전체가 끝나면 반드시 최종 통합보고서를 작성**하고 CDS 정보
    노출 UI를 계속 확장할 것 — 이 지시는 200개교가 끝날 때까지 매 세션
    인계 기록에 계속 전달되어야 한다.
+
+---
+
+## 21차 세션 (2026-09-23)
+
+### A. 이번 세션 방법
+`curl --max-time N -A "Chrome UA"`로 각 학교 IR 페이지를 가져와 정적 HTML에
+노출된 직접 PDF/xlsx/docx 링크를 찾은 뒤(다수 최신 IR 페이지가 JS
+렌더링이라 정적 스캔으로는 못 찾는 경우가 많았음), 문서 형식별로 파서를
+달리 적용했다:
+- 일반 PDF(텍스트 레이어 있음): `pdftotext -layout`
+- Peterson's 표준 fillable-form PDF(암호화된 AcroForm, `pdftotext`로는
+  값이 안 뽑힘): `pip3 install --break-system-packages cryptography` 후
+  Python `pypdf`의 `get_fields()`로 필드명·값 직접 추출(UNM 사례)
+- "Microsoft: Print To PDF"로 만들어진 폼(값이 이미지/오버레이로 렌더링돼
+  텍스트도 폼필드도 없음): 추출 불가 — 스킵(University of Arizona 사례,
+  아래 D절)
+- xlsx(Peterson's/CDS 표준 Question/Answer 테이블 구조): `openpyxl`로
+  Question 텍스트 컬럼을 키워드 검색해 Answer 컬럼 값 추출(Georgia State
+  사례, Dropbox 링크로 배포됨)
+- docx(표 구조가 아니라 `<w:t>` 텍스트 런이 문단에 흩어져 python-docx의
+  `paragraphs`/`tables`로는 못 찾는 경우): docx를 unzip해 `word/document.xml`
+  raw XML에서 `<w:t>` 텍스트를 정규식으로 모두 추출한 뒤 하나의 문자열로
+  합쳐 키워드로 검색(Kent State 사례)
+
+각 학교마다 문서 표지의 "Name of College/University" 값이 DB 학교명과
+일치하는지 먼저 확인했다(전부 일치, 오매칭 없음).
+
+### B. CDS 실수집 완료 — 13개교
+
+1. **University of South Carolina** — CDS 2025-2026, Fall 2025 cohort,
+   25행. (oiraa.dw.sc.edu 아카이브 드롭다운에서 직접 PDF 링크 확보)
+2. **Utah State University** — CDS 2025-26, Fall 2025 cohort, 22행.
+3. **University of Wyoming** — CDS 2025-26, Fall 2025 cohort, 22행.
+4. **University of New Mexico** — CDS 2025-2026, Fall 2025 cohort, 22행.
+   Peterson's fillable-form PDF(암호화, JavaScript 포함) — `pypdf` 폼필드
+   추출로 처리한 첫 사례. SAT/ACT 필드명은 `SAT1_COMP_25TH_P` 등 CDS
+   표준과 다른 자체 네이밍(`AP_RECD_1ST_MEN_N`=지원자, `AP_ADMT_1ST_MEN_N`
+   =합격자, `EN_TOT_1ST_MEN_N`=등록자, `GRS_BACH_TOT_P`=6년 졸업률).
+5. **University of Cincinnati** — CDS 2025-2026, Fall 2025 cohort, 24행.
+6. **University of Montana** — CDS 2025-2026, Fall 2025 cohort, 22행.
+   (C1 residency 합계 표가 전부 "0"으로 비어 있어 남녀 성별 행 합산으로
+   대체 계산, notes에 명시)
+7. **University of South Florida** — CDS 2024-2025(사이트 최신본), Fall
+   2024 cohort, 24행. (SAT Composite 25/50/75 전부 공란이라 EBRW+Math
+   합산으로 근사 계산, notes에 명시)
+8. **University of South Alabama** — CDS 2025-2026, Fall 2025 cohort,
+   15행. (PDF 폰트 인코딩 손상 — 유니코드 매핑이 깨져 라벨 텍스트가
+   깨졌지만 숫자와 표 구조는 멀쩡해 대조 후 반영)
+9. **Georgia State University** — CDS 2025-26, Fall 2025 cohort, 22행.
+   xlsx 형식(Dropbox 링크), Question/Answer 테이블 파싱으로 처리한 첫
+   사례. Percent 필드가 소수(0.4 = 40%)로 저장되어 있어 100배 변환 필요.
+10. **DePaul University** — CDS 2025-2026(섹션별 개별 PDF: A/B/C 조합),
+    Fall 2025 cohort, 15행.
+11. **Kent State University (Kent Campus)** — CDS 2025-2026, Fall 2025
+    cohort, 21행. docx 형식으로 처리한 첫 사례(다른 8개 캠퍼스도 별도
+    docx로 존재 — 다음 세션 필요시 참고).
+12. **University of Massachusetts Lowell** — CDS 2024-2025(사이트
+    최신본), Fall 2024 cohort, 15행.
+13. **Idaho State University** — CDS 2023-2024(사이트 최신본, 2년 전
+    자료지만 IR 페이지에 이후 연도 게시가 없음), Fall 2023 cohort, 18행.
+
+### C. 학과 목록 보완 — 1개교
+- **University of South Carolina**: `sc.edu/study/majors_and_degrees/`
+  정적 HTML에서 학사(B.A./B.S./B.S.B.A./B.S.E. 등) 학위 88건 추출해
+  `university_majors`에 반영(중복은 `ON CONFLICT DO NOTHING`).
+- Utah State/Wyoming/Cincinnati는 학과 목록 페이지가 JS 렌더링(정적
+  HTML에 실제 학과명이 없음)이라 이번 세션에서는 스킵. 다음 세션에서
+  다른 접근(사이트맵, API 엔드포인트 등) 필요.
+
+### D. 스킵한 학교 — 5분 규칙 적용
+- **University of Arizona**: 최신 CDS PDF(`CDS_PDF_2025-26_v02_RE-PRINT.pdf`)가
+  `Producer: Microsoft: Print To PDF`로 생성된 폼으로, 응답 텍스트가
+  `pdftotext`에도 `pypdf` 폼필드에도 잡히지 않음(값이 이미지로 렌더링된
+  것으로 추정). OCR 없이는 추출 불가 — 스킵.
+- **University of Idaho, Louisiana at Lafayette, University of
+  Washington, University of Oregon, Brigham Young University,
+  Clemson University, University of Texas at Austin** 등: IR 페이지가
+  JS 렌더링 SPA이거나(정적 curl로 파일 링크 확보 불가) Box.com 호스팅이라
+  (UT Austin) 5분 내 직접 링크를 찾지 못해 스킵.
+
+### E. unconfirmed 12개교 — 신규 후보 URL 탐색 결과
+Columbia, Michigan(Ann Arbor), Texas A&M, Baylor, NC State, Miami
+University(Ohio), Gonzaga, Ball State, Catholic University of America,
+East Carolina, Pace, West Virginia — 12개교 모두 공식 도메인 추정 URL을
+`curl -sIL`로 확인 시도했으나:
+- Michigan(obp.umich.edu), Gonzaga: 봇 차단(403)
+- NC State(ipar.ncsu.edu), West Virginia(irdm.wvu.edu): DNS/연결 실패(000)
+- Baylor, East Carolina, Pace: 추정 경로 404
+- Miami University(Ohio), Ball State: 리다이렉트는 성공했으나 최종
+  페이지가 JS 렌더링이라 정적 스캔으로 실제 CDS 파일 링크를 찾지 못함
+- Columbia, Texas A&M(dars.tamu.edu → abpa.tamu.edu 리다이렉트, 404),
+  Catholic University: 확실한 공식 CDS 경로를 찾지 못함
+
+**12개교 전부 여전히 `unconfirmed`로 정직하게 남김** — 이번 세션에서는
+새 후보 URL을 확정하지 못했다(추측 URL 등록 금지 원칙 준수). 다음 세션은
+이 환경에 웹 검색 도구가 없어 URL 추정에 의존해야 하는 한계가 있었음을
+참고할 것 — 가능하면 웹 검색이 되는 세션에서 재시도 권장.
+
+### 검증
+- `psql`로 세션 종료 시점 `data_collection_status` 분포 직접 확인:
+  `verified_pilot` **85개교**(20차 종료 72개교 → 이번 세션 +13),
+  `sources_pending_review` 103개교, `unconfirmed` 12개교(총 200개교).
+- 각 학교 처리 직후 `INSERT ... ON CONFLICT DO UPDATE`의 반영 건수를
+  `psql` 출력(`DO`)으로 확인, 최종적으로 위 카운트 쿼리로 재확인.
+- 학교명 검증: 13개교 전부 CDS 문서 표지의 "Name of College/University"
+  값이 DB 이름과 일치함을 확인(오매칭 없음).
+- `git status`로 이번 세션은 `docs/*.md` 외 앱 코드 변경이 없음을 확인.
+  새 마이그레이션 없음(테이블 데이터만 변경, 스키마 변경 없음).
+  `npx supabase db push --linked` / `vercel deploy` 실행하지 않음.
+
+### 다음 세션 인계 (21차 작성분)
+1. `status='approved'`이고 아직 `verified_pilot`이 아닌 나머지 약 103개교
+   CDS 계속 처리. 이번 세션에서 JS 렌더링 IR 페이지라 정적 curl로 못 찾은
+   학교(Idaho, Louisiana Lafayette, Washington, Oregon, BYU, Clemson,
+   UT Austin 등)는 다른 접근 필요 — Chrome 기반 브라우저 도구가 있는
+   세션에서는 JS 렌더링 페이지도 직접 열어 링크를 확보할 수 있을 것.
+2. University of Arizona는 CDS PDF가 이미지 오버레이 폼이라 OCR 도구가
+   있는 세션에서 재시도 필요.
+3. unconfirmed 12개교(Columbia/Michigan/Texas A&M/Baylor/NC State/Miami
+   University(Ohio)/Gonzaga/Ball State/Catholic University/East
+   Carolina/Pace/West Virginia)는 이번 세션에서 새 후보 URL을 확정하지
+   못했다 — 웹 검색이 가능한 세션에서 재시도 권장(추측 URL 등록 금지
+   원칙은 계속 유지).
+4. 학과 목록 보완은 USC 1개교(88건)만 처리. Utah State/Wyoming/Cincinnati
+   포함 나머지 verified_pilot 학교 대부분이 학과 0건 상태 — 여전히 대량
+   미착수.
+5. 관리자 화면 노출 확인 여전히 미착수.
+6. **200개교 전체가 끝나면 반드시 최종 통합보고서를 작성**하고 CDS 정보
+   노출 UI를 계속 확장할 것 — 이 지시는 200개교가 끝날 때까지 매 세션
+   인계 기록에 계속 전달되어야 한다.
