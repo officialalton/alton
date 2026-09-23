@@ -16,8 +16,14 @@ export type BoardCard = {
   subtitle: string | null;
   status: BoardCardStatus;
   dueAt: string | null;
+  /** 2026-09-22(사용자 지시) — 기간 입력 지원(시간 없이 날짜만). 있으면
+   * dueStartAt~dueAt 기간으로, 없으면 dueAt 하나만 마감일로 보여준다.
+   * 자동 카드(과제·모의고사·단어시험)는 항상 null(단일 마감일만 있음). */
+  dueStartAt: string | null;
   /** 세션뷰·모의고사 응시 화면 등으로 이동할 링크. 수동 할 일은 null. */
   href: string | null;
+  /** 2026-09-22(사용자 지시) — "담당 선생님"/"담당 컨설턴트"/"학생 본인"/"관리자". */
+  createdByLabel: string;
 };
 
 export type BoardColumn = "overdue" | "backlog" | "in_progress" | "done";

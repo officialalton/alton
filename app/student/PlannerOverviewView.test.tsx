@@ -11,10 +11,10 @@ vi.mock("./board-actions", () => ({
 describe("PlannerOverviewView", () => {
   it("칼럼별·소스별 개수와 완료율을 계산해 보여준다", async () => {
     const cards: BoardCard[] = [
-      { id: "a", sourceType: "homework", sourceId: "a", title: "과제1", subtitle: null, status: "done", dueAt: null, href: null },
-      { id: "b", sourceType: "mock_exam", sourceId: "b", title: "모의고사1", subtitle: null, status: "backlog", dueAt: null, href: null },
-      { id: "c", sourceType: "manual", sourceId: "c", title: "할일1", subtitle: null, status: "in_progress", dueAt: null, href: null },
-      { id: "d", sourceType: "vocab_quiz", sourceId: "d", title: "단어시험1", subtitle: null, status: "backlog", dueAt: "2020-01-01T00:00:00Z", href: null },
+      { id: "a", sourceType: "homework", sourceId: "a", title: "과제1", subtitle: null, status: "done", dueAt: null, dueStartAt: null, href: null, createdByLabel: "담당 선생님" },
+      { id: "b", sourceType: "mock_exam", sourceId: "b", title: "모의고사1", subtitle: null, status: "backlog", dueAt: null, dueStartAt: null, href: null, createdByLabel: "담당 선생님" },
+      { id: "c", sourceType: "manual", sourceId: "c", title: "할일1", subtitle: null, status: "in_progress", dueAt: null, dueStartAt: null, href: null, createdByLabel: "학생 본인" },
+      { id: "d", sourceType: "vocab_quiz", sourceId: "d", title: "단어시험1", subtitle: null, status: "backlog", dueAt: "2020-01-01T00:00:00Z", dueStartAt: null, href: null, createdByLabel: "학생 본인" },
     ];
     (loadMyBoardCardsAction as ReturnType<typeof vi.fn>).mockResolvedValue(cards);
     render(<PlannerOverviewView />);

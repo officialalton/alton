@@ -26,6 +26,14 @@ export function formatDueAt(dueAt: string | null): string | null {
   return new Date(dueAt).toLocaleDateString("ko-KR", { month: "2-digit", day: "2-digit" });
 }
 
+/** 2026-09-22(사용자 지시) — 항상 노출: 기간이 있으면 "MM/DD~MM/DD", 없으면 단일 마감일, 둘 다 없으면 "마감 없음". */
+export function formatDueRange(dueAt: string | null, dueStartAt: string | null): string {
+  const end = formatDueAt(dueAt);
+  if (!end) return "마감 없음";
+  const start = formatDueAt(dueStartAt);
+  return start ? `${start} ~ ${end}` : `마감 ${end}`;
+}
+
 export default function BoardColumnsView({
   cards,
   onMove,
@@ -86,14 +94,14 @@ function BoardCardItem({
   onDelete?: (cardId: string) => void;
   disableLinks?: boolean;
 }) {
-  const dueLabel = formatDueAt(card.dueAt);
   const editable = card.sourceType === "manual" && onMove && onDelete;
   const body = (
     <div className="bg-white rounded-lg border border-grey-200 px-3 py-2">
       <div className="text-[11px] font-bold text-grey-400 mb-0.5">{SOURCE_LABEL[card.sourceType]}</div>
       <div className="text-[13px] font-semibold text-ink">{card.title}</div>
       {card.subtitle && <div className="text-[11px] text-grey-500">{card.subtitle}</div>}
-      {dueLabel && <div className="text-[11px] text-grey-500 mt-1">마감 {dueLabel}</div>}
+      <div className="text-[11px] text-grey-500 mt-1">{formatDueRange(card.dueAt, card.dueStartAt)}</div>
+      <div className="text-[10.5px] text-grey-400 mt-0.5">{card.createdByLabel}</div>
       {editable && (
         <div className="flex items-center gap-1.5 mt-2">
           {(["backlog", "in_progress", "done"] as const)

@@ -10,6 +10,7 @@ export type BoardManualTask = {
   title: string;
   status: BoardCardStatus;
   dueAt: string | null;
+  dueStartAt: string | null;
   createdBy: string;
   createdByRole: "student" | "teacher" | "admin" | "consultant";
   createdAt: string;
@@ -35,6 +36,16 @@ function vocabQuizStatus(status: VocabQuiz["status"]): BoardCardStatus {
   return "backlog";
 }
 
+// 2026-09-22(사용자 지시) — 카드마다 "누가 만들었는지" 보여준다. 자동 카드는
+// 발급 주체가 고정돼 있어 소스 타입으로 바로 정할 수 있다(과제=선생님이 발급,
+// 모의고사=선생님/관리자가 배정, 단어시험=학생 본인이 만든 학습 세션).
+const CREATED_BY_LABEL: Record<BoardManualTask["createdByRole"], string> = {
+  student: "학생 본인",
+  teacher: "담당 선생님",
+  consultant: "담당 컨설턴트",
+  admin: "관리자",
+};
+
 export function homeworkToBoardCard(batch: HomeworkBatch): BoardCard {
   return {
     id: `homework:${batch.id}`,
@@ -44,7 +55,9 @@ export function homeworkToBoardCard(batch: HomeworkBatch): BoardCard {
     subtitle: batch.subjectName,
     status: homeworkStatus(batch),
     dueAt: batch.dueAt,
+    dueStartAt: null,
     href: "/student?tab=homework",
+    createdByLabel: "담당 선생님",
   };
 }
 
@@ -57,9 +70,11 @@ export function mockExamToBoardCard(attempt: MockExamAttemptSummary): BoardCard 
     subtitle: null,
     status: mockExamStatus(attempt.status),
     dueAt: attempt.dueAt,
+    dueStartAt: null,
     href: attempt.status === "assigned" || attempt.status === "in_progress"
       ? `/student/mock-exam/${attempt.id}`
       : "/student?tab=mock-exam",
+    createdByLabel: "담당 선생님",
   };
 }
 
@@ -72,7 +87,9 @@ export function vocabQuizToBoardCard(quiz: VocabQuiz): BoardCard {
     subtitle: null,
     status: vocabQuizStatus(quiz.status),
     dueAt: quiz.dueAt,
+    dueStartAt: null,
     href: "/student?tab=vocab",
+    createdByLabel: "학생 본인",
   };
 }
 
@@ -85,14 +102,16 @@ export function manualTaskToBoardCard(task: BoardManualTask): BoardCard {
     subtitle: null,
     status: task.status,
     dueAt: task.dueAt,
+    dueStartAt: task.dueStartAt,
     href: null,
+    createdByLabel: CREATED_BY_LABEL[task.createdByRole],
   };
 }
 
-const MANUAL_TASK_COLUMNS = "id, student_id, title, status, due_at, created_by, created_by_role, created_at";
+const MANUAL_TASK_COLUMNS = "id, student_id, title, status, due_at, due_start_at, created_by, created_by_role, created_at";
 
 type ManualTaskRow = {
-  id: string; student_id: string; title: string; status: string; due_at: string | null;
+  id: string; student_id: string; title: string; status: string; due_at: string | null; due_start_at: string | null;
   created_by: string; created_by_role: string; created_at: string;
 };
 
@@ -103,6 +122,7 @@ function mapManualTaskRow(row: ManualTaskRow): BoardManualTask {
     title: row.title,
     status: row.status as BoardCardStatus,
     dueAt: row.due_at,
+    dueStartAt: row.due_start_at,
     createdBy: row.created_by,
     createdByRole: row.created_by_role as BoardManualTask["createdByRole"],
     createdAt: row.created_at,
@@ -121,7 +141,15 @@ export async function loadBoardManualTasks(supabase: SupabaseClient, studentId: 
 
 export async function createBoardManualTask(
   supabase: SupabaseClient,
-  input: { studentId: string; title: string; createdBy: string; createdByRole: BoardManualTask["createdByRole"]; dueAt?: string | null }
+  input: {
+    studentId: string;
+    title: string;
+    createdBy: string;
+    createdByRole: BoardManualTask["createdByRole"];
+    dueAt?: string | null;
+    /** 2026-09-22(사용자 지시) — 기간(시작~마감) 입력. dueAt 없이 dueStartAt만 주면 무시된다(끝 날짜가 있어야 기간이 성립). */
+    dueStartAt?: string | null;
+  }
 ): Promise<BoardManualTask> {
   const { data, error } = await supabase
     .from("board_manual_tasks")
@@ -131,6 +159,7 @@ export async function createBoardManualTask(
       created_by: input.createdBy,
       created_by_role: input.createdByRole,
       due_at: input.dueAt ?? null,
+      due_start_at: input.dueAt ? input.dueStartAt ?? null : null,
     })
     .select(MANUAL_TASK_COLUMNS)
     .single();

@@ -35,7 +35,7 @@ export async function loadMyBoardCardsAction(): Promise<BoardCard[]> {
   ];
 }
 
-export async function createMyManualTaskAction(title: string, dueAt?: string | null): Promise<BoardCard> {
+export async function createMyManualTaskAction(title: string, dueAt?: string | null, dueStartAt?: string | null): Promise<BoardCard> {
   const { supabase, user } = await requireUser();
   const trimmed = title.trim();
   if (!trimmed) throw new Error("할 일 제목을 입력하세요.");
@@ -45,6 +45,7 @@ export async function createMyManualTaskAction(title: string, dueAt?: string | n
     createdBy: user.id,
     createdByRole: "student",
     dueAt: dueAt ?? null,
+    dueStartAt: dueStartAt ?? null,
   });
   return manualTaskToBoardCard(task);
 }

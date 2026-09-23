@@ -14,6 +14,7 @@ import type { BoardCard } from "@/lib/board/types";
 import PageFrame from "@/app/components/PageFrame";
 import NavIcon from "@/app/components/NavIcon";
 import type { DashboardData } from "@/app/student/dashboard-data";
+import { UpcomingWidget } from "@/app/student/HomeDashboard";
 import LessonsTab from "@/app/student/LessonsTab";
 import type { LessonItem } from "@/app/student/lessons-data";
 import type { CurriculumData } from "@/app/student/curriculum-data";
@@ -556,6 +557,22 @@ export default function ParentShell({
                 ) : (
                   <div className="px-6 py-5">
                     <BoardColumnsView cards={childBoardCards} disableLinks />
+                    {/* 2026-09-22(사용자 지시) — 보드 아래에 예정 수업 리스트(학생 포털과 동일 컴포넌트). */}
+                    <div className="max-w-[420px] mt-6">
+                      <UpcomingWidget
+                        upcoming={lessonBooking.upcomingBookings.map((b) => ({
+                          sessionId: b.sessionId,
+                          subjectName: b.subjectName,
+                          teacherName: b.teacherName,
+                          sessionNumber: null,
+                          unitTitle: null,
+                          scheduledAt: b.startsAt,
+                          durationMinutes: Math.round((new Date(b.endsAt).getTime() - new Date(b.startsAt).getTime()) / 60000),
+                        }))}
+                        onShowAll={() => selectTab("bookings")}
+                        timezone={lessonBooking.timezone}
+                      />
+                    </div>
                   </div>
                 )
               ) : (

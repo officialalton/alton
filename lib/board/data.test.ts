@@ -66,7 +66,7 @@ describe("board card 상태 계산 — 소스별 status 매핑", () => {
   it("수동 할 일: 저장된 status를 그대로 쓴다", () => {
     const card = manualTaskToBoardCard({
       id: "m1", studentId: "s1", title: "SAT 신청서 작성", status: "in_progress",
-      dueAt: null, createdBy: "s1", createdByRole: "student", createdAt: "2026-09-20T00:00:00Z",
+      dueAt: null, dueStartAt: null, createdBy: "s1", createdByRole: "student", createdAt: "2026-09-20T00:00:00Z",
     });
     expect(card.status).toBe("in_progress");
     expect(card.sourceType).toBe("manual");

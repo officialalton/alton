@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import BoardColumnsView from "@/app/components/BoardColumnsView";
 import DoneListView from "@/app/components/DoneListView";
-import { StatsWidget } from "./HomeDashboard";
+import { StatsWidget, UpcomingWidget } from "./HomeDashboard";
 import PlannerOverviewView from "./PlannerOverviewView";
 import type { DashboardData } from "./dashboard-data";
 import {
@@ -27,10 +28,13 @@ export default function HomeTab({
   studentName: string;
   dashboard: DashboardData;
 }) {
+  const router = useRouter();
   const [subtab, setSubtab] = useState<"overview" | "todo" | "done">("overview");
   const [cards, setCards] = useState<BoardCard[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [newTitle, setNewTitle] = useState("");
+  const [newDueStart, setNewDueStart] = useState("");
+  const [newDueEnd, setNewDueEnd] = useState("");
   const [adding, setAdding] = useState(false);
 
   function reload() {
@@ -48,9 +52,16 @@ export default function HomeTab({
     if (!title) return;
     setAdding(true);
     try {
-      const card = await createMyManualTaskAction(title);
+      // 2026-09-22(사용자 지시) — 기한을 기간(시작~마감)으로도 입력할 수 있다
+      // (시간 입력은 없음, 날짜만). 마감일 없이 시작일만 있는 건 성립하지
+      // 않으므로 마감일이 없으면 시작일도 함께 무시한다.
+      const dueAt = newDueEnd ? new Date(`${newDueEnd}T00:00:00`).toISOString() : null;
+      const dueStartAt = dueAt && newDueStart ? new Date(`${newDueStart}T00:00:00`).toISOString() : null;
+      const card = await createMyManualTaskAction(title, dueAt, dueStartAt);
       setCards((prev) => (prev ? [card, ...prev] : [card]));
       setNewTitle("");
+      setNewDueStart("");
+      setNewDueEnd("");
     } catch (e) {
       setError(e instanceof Error ? e.message : "할 일을 추가하지 못했습니다.");
     } finally {
@@ -108,7 +119,7 @@ export default function HomeTab({
       ) : subtab === "todo" ? (
         <div>
           <form
-            className="flex gap-2 mb-5"
+            className="flex flex-wrap items-center gap-2 mb-5"
             onSubmit={(e) => {
               e.preventDefault();
               void handleAddTask();
@@ -118,7 +129,22 @@ export default function HomeTab({
               value={newTitle}
               onChange={(e) => setNewTitle(e.target.value)}
               placeholder="+ 할 일 추가"
-              className="flex-1 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 text-[13px]"
+              className="flex-1 min-w-[160px] border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 text-[13px]"
+            />
+            <input
+              type="date"
+              value={newDueStart}
+              onChange={(e) => setNewDueStart(e.target.value)}
+              title="시작일(선택)"
+              className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]"
+            />
+            <span className="text-[13px] text-grey-400">~</span>
+            <input
+              type="date"
+              value={newDueEnd}
+              onChange={(e) => setNewDueEnd(e.target.value)}
+              title="마감일(선택)"
+              className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]"
             />
             <button
               type="submit"
@@ -134,6 +160,10 @@ export default function HomeTab({
             onDelete={handleDeleteTask}
             columns={["overdue", "backlog", "in_progress"]}
           />
+          {/* 2026-09-22(사용자 지시) — 보드 아래에 예정 수업 리스트(학부모/학생 통일 컴포넌트 재사용). */}
+          <div className="max-w-[420px] mt-6">
+            <UpcomingWidget upcoming={dashboard.upcoming} onShowAll={() => router.push("?tab=classes", { scroll: false })} />
+          </div>
         </div>
       ) : (
         <DoneListView cards={doneCards} />
