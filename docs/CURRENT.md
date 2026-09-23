@@ -8,7 +8,7 @@
 
 | 항목 | 값 |
 |---|---|
-| 브랜치 / Preview | `preview/m4-integration-verification`(UI 통일화 `feature/ui-unification` 병합 완료 + 2026-09-23 컨설턴트·관리자 포털 확장 전체 반영 — Phase A/B/C + "관리자 포털 정리" 5항목, 아래 32번 참고). 최신 Preview **https://alton-ciasxhafn-alton7.vercel.app**(HEAD `c69dbdd`). 배포 주의: 이 Vercel 프로젝트는 GitHub 연동이라 **커밋과 완전히 일치하는 깨끗한 작업 트리**에서 `vercel deploy`하면 커밋 작성자 검증(TEAM_ACCESS_REQUIRED)에 걸려 빌드가 조용히 BLOCKED 된다 — 메인 워크트리(미커밋 docs 변경이 늘 있음)에서 배포하거나, git 없는 임시 복사본에서 배포한다(2026-09-20 확인). |
+| 브랜치 / Preview | `preview/m4-integration-verification`(UI 통일화 `feature/ui-unification` 병합 완료 + 2026-09-23 컨설턴트·관리자 포털 확장 전체 반영 — Phase A/B/C + "관리자 포털 정리" 5항목, 33번 참고 + `feature/university-info-sources` 병합, 34번 참고). 최신 Preview **https://alton-n20zr6b5i-alton7.vercel.app**(HEAD `3015727`). 배포 주의: 이 Vercel 프로젝트는 GitHub 연동이라 **커밋과 완전히 일치하는 깨끗한 작업 트리**에서 `vercel deploy`하면 커밋 작성자 검증(TEAM_ACCESS_REQUIRED)에 걸려 빌드가 조용히 BLOCKED 된다 — 메인 워크트리(미커밋 docs 변경이 늘 있음)에서 배포하거나, git 없는 임시 복사본에서 배포한다(2026-09-20 확인). |
 | 공유 non-prod(`worpsqwqgnspddnrtnvq`) | 마이그레이션 **`20261568000000`까지 local=remote 확인**(2026-09-23, `20261550000000`~`20261568000000`는 이번 컨설턴트·관리자 포털 확장분 — Students Active/Ended, Documents, Schedule/Time-off, Profile, Settlement, 상담 세션 자료, 선생님 내부 메신저). Supabase 프로젝트는 이 하나뿐(별도 프로덕션 DB 없음 — 2026-09-20 확인). 새 마이그레이션 작성 시 `docs/BRANCH-WORKFLOW.md` 동기화 체크리스트를 통합/배포 직전 매번 실행할 것. 동시 작업 중인 `feature/university-info-sources` 브랜치는 마이그레이션 번호 `20261600000000` 이상만 쓰기로 조율됨(충돌 시 서로 `SendMessage`). |
 | Production | Vercel production 도메인 배포·마이그레이션 없음(오픈 전, 실제 고객 데이터 없음). Stripe/DocuSign 등 외부 키는 샌드박스. |
 | 테스트 | 2026-09-23: `tsc` 통과, `npm run build` 통과, `eslint .` **0 errors/warnings**(2026-09-21 리뷰가 지적한 "lint 정리(소스 82 errors)" 완료 — 상세는 4절 참고). `vitest run --exclude "**/*.integration.test.ts"`: 2530/2531 통과(1 skip) — 남은 1건은 랜덤 지오메트리 스트레스 테스트가 매번 다른 파일에서 산발적으로 실패하는 기존 flaky 이슈(단독 재실행 시 항상 통과, 코드 결함 아님). **알려진 사전 실패(무관)**: `app/session/[id]/problem-grading.integration.test.ts` 4건은 `confirm_and_publish_problem_version`·`issue_homework_by_keywords` 의 현재 정의에 없는 문구를 기대하는 오래된 테스트(함수 정의 확인됨), 나머지 `*.integration.test.ts` 실패는 로컬 DB 잔여 데이터(`reservations_no_overlap` 등) — `supabase db reset --local` 직후 `--no-file-parallelism`으로 돌릴 것. |
@@ -139,7 +139,9 @@
     - 검증: 매 슬라이스마다 `tsc`/`eslint`/관련 vitest 통과 확인, 세션 종료 시점 `vitest run --exclude "**/*.integration.test.ts"` 334개 파일 2595개 전부 통과, `npm run build` 성공. 매 슬라이스 실제 Preview 배포 + 실제 Google/이메일 계정으로 라이브 UAT(관리자 `official@alton.education`, 컨설턴트 `jiman@alton.education`, 선생님 `teacher1@alton.education`, 보호자/학생 `matchbox512+alton-uat-p16@gmail.com` 계열 실제 비밀번호 로그인) — UAT 테스트 데이터·메시지는 세션 중 즉시 정리(단, `document_access_events` 등 append-only 감사 테이블은 정책대로 보존).
     - **남은 것**: (a) 컨설턴트 시간대 설정이 앱 전역 날짜 표시에 아직 일관 적용되지 않음(저장·조회만 구현, Profile 화면 자체에서 명시적으로 알린 한계). (b) 상담 자료 화면 캡처 등 완전한 유출 차단은 구현 범위 밖(다운로드/공개링크 제한 + 접근 기록만). (c) Bookings 서브탭 재구성 이후 UAT는 이번 세션에서 기능별로만 확인 — 마일스톤 종료 폴리싱 라운드에서 화면 전체 한 번 더 훑어볼 것.
 
-마이그레이션(2026-09-14 배치): `20261346`~`20261403`. 이후 배치는 위 각 항목 참고, 최신은 `20261568000000`(1절 표 참고).
+34. **`feature/university-info-sources` 병합(2026-09-23, 조정 세션 수행)**: 대학 정보 수집·신고 브랜치를 통합 브랜치로 merge(커밋 `3015727`, 충돌 없음). 새 마이그레이션은 `20261600000000`(college_db_p10_cds_metric_keys — CDS 세부 지표 metric_key 화이트리스트 확장, additive) 하나뿐, 그 이전 `20261480000000`~`20261540000000`은 이미 이전에 적용돼 있었다. `db push --linked`로 non-prod 반영(local=remote 확인), `tsc`/`eslint`/`vitest`(334 files·2595 tests)/`npm run build` 전부 통과, Preview에서 컨설턴트 포털 College Explore 탭 실제 로그인 확인. **주의**: 그 브랜치에서 psql로 직접 입력한 `university_admission_metrics`/`university_majors` 실제 데이터(140+개교분)는 마이그레이션 파일에 없다 — 그 데이터가 이 공유 non-prod DB(`worpsqwqgnspddnrtnvq`)에 이미 있는지, 아니면 별도 로컬 DB에만 있어 옮겨야 하는지 그 세션에 확인 요청함(응답 대기 중).
+
+마이그레이션(2026-09-14 배치): `20261346`~`20261403`. 이후 배치는 위 각 항목 참고, 최신은 `20261600000000`(1절 표 참고).
 
 ## 5. 검증 구분
 
