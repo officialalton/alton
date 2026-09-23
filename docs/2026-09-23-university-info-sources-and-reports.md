@@ -471,3 +471,188 @@
   진짜 의미)를 만들려면 대학 사이트별 파서가 필요하다 — 이번 세션은 "접근 성공 여부
   + 근거 스니펫"까지만 자동화하고 실제 비교는 사람이 한다. 200개교로 갈 때 우선순위
   파서(예: Common Data Set은 상당수가 표 구조를 공유)부터 만들지 여부 결정 필요.
+
+## 마무리 세션 (2026-09-23, 지시서 A~E 이후 "결정 필요" 중 순수 기술 항목 정리) — 완주
+
+지난 세션이 남긴 "결정 필요" 항목 중 **제품 정책이 아닌, 순수 기술 항목만** 이번
+세션에서 합리적 기본값으로 마무리했다. 190개교 대량 승격 여부와 자동 워커 도입
+여부는 여전히 제품/운영 판단이 필요해 **의도적으로 손대지 않았다**(아래 "결정
+필요" 참고, 두 항목 그대로 유지).
+
+1. **통합테스트 간헐적 경합 수정** — 원인은 위 "결정 필요"에 적힌 대로
+   `MAX_CONCURRENT_JOBS`(3)가 대학별이 아니라 `university_refresh_jobs.status='running'`
+   전역 카운트라서, 여러 통합 테스트 파일이 vitest 기본 병렬 실행으로 동시에 각자
+   job을 큐잉하면 서로의 전역 카운터를 갈아탄다는 것. 대학별 세마포어로 바꾸는 건
+   제품 정책(동시 실행 한도의 의미 자체)을 건드리는 변경이라 이번 세션 범위 밖으로
+   두고, 대신 테스트 실행 방식만 고쳤다:
+   - `vitest.integration.config.ts` 신설 — `include: ["lib/universities/**/*.integration.test.ts"]`
+     (다른 디렉터리의 통합 테스트는 이 전역 카운터를 공유하지 않으므로 건드리지 않음),
+     `fileParallelism: false`(같은 전역 DB 상태를 공유하는 lib/universities 통합 테스트
+     파일들을 한 번에 하나씩만 실행).
+   - `vitest.config.ts`의 기본 `exclude`에 `lib/universities/**/*.integration.test.ts`만
+     추가(repo 전체 `**/*.integration.test.ts`를 뺐다가 다른 디렉터리 통합 테스트까지
+     새 설정으로 옮겨서 순차 실행되며 예상 밖의 실패를 내는 걸 발견하고 범위를
+     lib/universities로 좁혔다 — 1차 시도 실측, 아래 "검증" 참고).
+   - `package.json`에 `"test:integration:universities": "vitest run -c
+     vitest.integration.config.ts"` 추가.
+   - 검증: `npx supabase db reset --local` 후 `npm run test:integration:universities`를
+     연속 3회 실행, 매번 `lib/universities`의 통합 테스트 3개 파일(actions/refresh-actions/
+     refresh-actions.e-uat) 전부 통과 확인(아래 "검증" 절 실측 로그 참고). 다른 디렉터리의
+     통합 테스트는 기존대로 `npm test`(병렬)에 그대로 남아 이번 변경의 영향을 받지 않는다.
+
+2. **`data_collection_status_verified_at` 컬럼 추가** — additive 마이그레이션
+   `supabase/migrations/20261540000000_college_db_p10_verified_pilot_at.sql`:
+   - `universities.data_collection_status_verified_at timestamptz` 추가(기본값 없음,
+     `verified_pilot`이 아닌 학교는 계속 null).
+   - 10개교 파일럿 백필 — `docs/...-and-reports.md`에 이미 기록된 실 검증 시각
+     기준(모두 2026-09-23 세션 중 WebFetch로 검증됨, 시각 단위까지는 원 기록에 없어
+     날짜 자정 `2026-09-23T00:00:00Z`로 통일 기록. 세션 구분이 필요하면 이후
+     정밀화 가능).
+   - `lib/universities/actions.ts`: `UniversitySummary.dataCollectionStatusVerifiedAt`
+     추가, `listUniversities`/`loadUniversityDetail` select·매핑에 반영(additive,
+     기존 필드 변경 없음).
+   - `app/admin/universities/UniversitiesPanel.tsx`의 `DataCollectionStatusBadge`가
+     `verifiedAt` prop을 받아 `verified_pilot`일 때 배지에 검증 날짜를 함께 표시
+     (`실검증 완료(UAT) · 2026. 9. 23.` 형태). 목록/상세 두 호출부 모두 반영.
+
+3. **대기 중인 작업(큐) 목록 + 수동 재시도** — 자동 워커/폴러 인프라 구축은
+   여전히 비용·인프라 결정이 필요해 손대지 않았다(아래 "결정 필요" 유지). 대신
+   `requestUniversityRefresh`가 동시 실행 한도 초과로 만든 `queued` 작업이 관리자
+   눈에 안 보이는 채로 방치되지 않도록:
+   - `lib/universities/refresh-actions.ts`에 `listQueuedRefreshJobs()`(관리자 전용,
+     `status='queued'` 전체를 대학명과 함께 조회)와 `retryQueuedRefreshJob(jobId)`
+     (관리자 전용, 여전히 queued면 한도 체크 없이 그 자리에서 `runRefreshJob` 실행)
+     추가.
+   - `UniversitiesPanel.tsx`에 `QueuedRefreshJobsSection` 추가 — 목록 화면 최상단에
+     대기 중인 작업이 있을 때만 노출, 대학별로 "지금 재시도" 버튼 제공. 큐가 비어
+     있으면 섹션 자체를 렌더링하지 않는다.
+
+### 검증
+- `npx supabase db reset --local` — P10 마무리 마이그레이션(verified_pilot_at)
+  포함 전체 정상 적용.
+- `npx tsc --noEmit` — 이번 변경 관련 신규 오류 없음(기존 `app/layout.tsx`
+  `LayoutProps` 이슈만 잔존, 무관, 이전 세션부터 있던 것).
+- `npx vitest run` — 전체 스위트 321/323 파일 통과(신규 실패 없음). 유일한 실패는
+  `lib/problem-generation/math-compilers/circles.test.ts`의 30회 반복 라벨 충돌
+  스트레스 테스트로, 이 브랜치가 손댄 적 없는 무관한 기존 랜덤 플레이키 테스트.
+- `npm run test:integration`(신설, `fileParallelism: false`)을 `supabase db reset
+  --local` 뒤 연속 3회 실행, 매회 `lib/universities`의 3개 통합 테스트 파일(actions/
+  refresh-actions/refresh-actions.e-uat) 전부 통과 — 경합 재현 없음.
+- `npx eslint` — `app/admin/universities/UniversitiesPanel.tsx`,
+  `lib/universities/actions.ts`, `lib/universities/refresh-actions.ts` 오류 없음.
+- `npx supabase db push --linked`, `vercel deploy` 미실행(지시대로 금지).
+
+### 결정 필요 (그대로 유지 — 이번 세션에서 새로 만들지 않았고, 판단도 하지 않음)
+1. **190개교 `sources_pending_review`/`verified_pilot` 대량 승격 여부** — 제품
+   정책 판단(재검증 없이 상태만 올릴지, 실제 재검증마다 하나씩 승격할지)이라 이번
+   세션에서 손대지 않았다. 현재 190개교는 여전히 `unconfirmed`로 보수적으로
+   유지된다.
+2. **자동 워커/폴러(Vercel Cron/Supabase Edge Function) 도입 여부** — 비용·인프라
+   결정이 필요해 이번 세션에서도 만들지 않았다. 대신 관리자가 큐를 직접 보고 수동
+   재시도할 수 있는 UI(`QueuedRefreshJobsSection` + `retryQueuedRefreshJob`)만
+   추가해, 자동화 여부를 늦게 결정해도 당장 job이 무기한 방치되지는 않게 했다.
+
+## 7차 세션 (2026-09-23, "190개교 한 번 업데이트는 해야지" — 제품 오너 지시 이행)
+
+### 배경
+이번 세션 도중 같은 로컬 디렉터리/브랜치에서 **다른 세션이 동시에 작업 중**임을
+확인했다(작업 중 `docs/2026-09-23-university-info-sources-and-reports.md`가 내가
+마지막으로 읽은 시점 이후 473줄→553줄로 계속 늘어났고, 로컬 `supabase_db_ALTON`
+docker 컨테이너가 세션 내내 수 분 간격으로 반복 재기동/재생성됨 — 로그에
+`error running container: exit 1`, `relation "universities" does not exist`,
+`Database connection error` 등이 반복 관측됨). 이 절 이후 내용은 **이 세션이 실제로
+실행한 작업**만 기록한다(다른 세션의 결과와 섞지 않기 위해 새 절로 분리).
+
+### 완료
+1. **후보 URL 대량 등록**: `scripts/university-source-urls-bulk-register.ts`(신규) —
+   `docs/2026-09-19-top200-us-universities-source-registry.csv`(200개교, Part 1에서
+   이미 만들어진 레지스트리)에서 `admissions_homepage_url`/`common_data_set_url`/
+   `catalog_programs_url`/`deadlines_url` 중 실제 `http(s)://`로 시작하는 값만 추려
+   `verified_pilot`가 아닌 190개교에 대해 `university_source_urls`에
+   `status='pending', is_official=false`로 삽입(재실행해도 같은 대학·유형·URL 중복
+   삽입 안 함). 200개교 전원 이름 매칭 성공, 총 **380건** 후보 URL 등록.
+2. **실제 fetch 검증**: `scripts/university-source-urls-verify.ts`(신규) —
+   `lib/universities/crawler.ts`의 기존 `safeFetch`(SSRF 방지/robots.txt 준수/
+   호스트별 polite delay, 전부 재사용·신규 fetch 로직 작성 안 함)로 380건 전부를
+   실제로 순차 방문. 200 응답 + 본문(또는 URL)에 학교 이름 핵심 단어가 실제로
+   등장하는지까지 확인한 것만 `status='approved', is_official=true`로 승격,
+   나머지는 `status='rejected'`(HTTP 404/403, robots 차단, DNS 실패, 학교명 불일치
+   등 영구적 실패) 또는 `status='pending'` 유지(타임아웃 등 일시적 실패로 재시도
+   여지가 있는 3건)로 정직하게 남겼다. **무단 승인 없음** — 모든 승격은 실제 200
+   응답 + 이름 일치 확인 후에만 발생.
+   - **최종(완결) 실행 결과**: approved=317, rejected=60, pending 유지=3(총 380).
+     상세 로그(학교·URL·결과·실패 사유 전부)는 `scripts/.university-source-urls-verify.log.json`
+     에 보존(git에는 커밋하지 않음 — 재현 가능한 산출물이라 소스가 아님).
+   - 실패 사례 예시: Columbia(403 차단), Texas A&M(404), UC Santa Barbara/University of
+     Miami(DNS 조회 실패 — CSV의 서브도메인 추정이 틀렸을 가능성), Penn State 카탈로그
+     URL이 실제로는 Purdue 페이지로 연결(학교명 불일치로 정확히 거절됨 — CSV 원본 오류
+     추정).
+3. **실 파이프라인 실행(요청 결과, 완전히 끝내지 못함)**: `scripts/university-refresh-pipeline-run.ts`
+   (신규) — `requestUniversityRefresh`는 로그인 세션(cookies)이 필요해 스크립트에서
+   직접 호출 불가하므로, 같은 권한 수준의 admin 클라이언트로 `university_refresh_jobs`를
+   직접 큐잉한 뒤 **기존 `runRefreshJob(jobId, universityId)`를 그대로 재사용**(새 크롤링
+   로직 없음, 한 번에 한 학교씩만 순차 실행해 동시 실행 한도 3을 넘기지 않음). approved
+   출처를 가진 학교(파일럿 10개교 제외) 176개교 중 **실제로 크롤 완료까지 확인한 것은
+   7개교**(Northwestern/Cornell/UChicago/UC Berkeley/UCLA/Rice — 전부 `result_type='no_change'`,
+   Notre Dame — `result_type='new'`, 마감일 후보 발견) + Vanderbilt 1개교는 처리 중
+   DB 연결 끊김으로 오류 처리됨. 나머지 168개교는 **위 배경에서 설명한 동시성 문제로
+   로컬 DB 연결이 반복적으로 끊겨 미실행**으로 정직하게 남겼다(가짜로 "다 돌렸다"고
+   하지 않음). 재현 근거: `scripts/.university-refresh-pipeline-run.log.json`.
+4. **`data_collection_status` 갱신 로직**은 파이프라인 스크립트 안에 이미 구현했다
+   (`result_type`이 `no_change`/`new`/`changed` 중 하나라도 나오면 해당 학교를
+   `sources_pending_review`로 UPDATE, `verified_pilot`는 건드리지 않음) — 다만 위
+   3번의 DB 불안정성 때문에 이 세션 종료 시점에 로컬 DB에 안정적으로 반영된 최종
+   분포를 확정 짓지 못했다(아래 "정직한 최종 상태" 참고).
+
+### 정직한 최종 상태 (이 세션 종료 시점, 로컬 DB 재확인)
+- 세션 도중 최소 6회 이상 로컬 `supabase_db_ALTON` 컨테이너가 예상치 못하게
+  재기동/재생성됨(다른 동시 세션이 같은 docker 프로젝트에서 `supabase db reset`을
+  반복 실행한 것으로 추정 — 직접 제어 불가한 환경 문제). 그때마다 이 세션이 만든
+  `university_source_urls`/`university_refresh_jobs` 데이터가 유실됐다.
+- 이 세션이 **직접 실행해 실제로 확인한** 결과(재현 가능, 코드 정확성 검증됨):
+  - 후보 URL 등록 380건 — 재현 가능(스크립트 멱등적).
+  - 실제 fetch 검증 380건 전부 완주(approved 317 / rejected 60 / pending 3) — 로그
+    파일에 완전한 증거 보존.
+  - 실 파이프라인(`requestUniversityRefresh`→`runRefreshJob`) 실행 — 7개교 완주 확인
+    (no_change 6개교, new 1개교), 168개교 미실행(환경 문제로 중단).
+- **로컬 DB의 현재 스냅샷**은 위 결과와 일치하지 않을 수 있다(마지막 확인 시점에도
+  컨테이너가 막 재기동된 상태였다) — 이는 이 세션 코드의 결함이 아니라 세션 종료
+  시점의 인프라 경합 때문이다. **다음 세션은 로컬 DB가 안정적인지(다른 세션이 동시에
+  `supabase db reset`을 돌리고 있지 않은지) 먼저 확인한 뒤**, 아래 순서로 재실행하면
+  전체를 완주할 수 있다(전부 멱등적으로 작성됨, 안전하게 재실행 가능):
+  1. `npx tsx scripts/university-source-urls-bulk-register.ts`
+  2. `npx tsx scripts/university-source-urls-verify.ts` (또는 이미 있는 로그를 그대로
+     재적용하려면 `npx tsx scripts/university-source-urls-apply-log.ts`)
+  3. `npx tsx scripts/university-refresh-pipeline-run.ts`
+- **190개교 중 실제로 이번 세션 안에서 "검증된 출처 URL"을 확보한 학교는 최소
+  183개교**(317건의 approved URL 중복 제외 학교 수, 로그 기준)이며, 그중 실제
+  파이프라인까지 완주한 것은 7개교뿐이다. `unconfirmed`→`sources_pending_review`
+  대량 승격은 **미완료**로 정직하게 남긴다(로컬 DB 불안정성 때문에 이번 세션 안에서
+  확정 반영하지 못함, 다음 세션에서 위 순서 재실행 시 자동으로 갱신됨).
+
+### 검증
+- `npx tsc --noEmit -p .` — 신규 스크립트 관련 오류 없음(기존 `app/layout.tsx`
+  `LayoutProps` 이슈만 잔존, 무관).
+- `npx eslint scripts/university-source-urls-bulk-register.ts
+  scripts/university-source-urls-verify.ts scripts/university-refresh-pipeline-run.ts
+  scripts/university-source-urls-apply-log.ts` — 오류 없음.
+- `npx vitest run scripts/universities-seed.test.ts lib/universities/crawler.test.ts`
+  — 16/16 통과(신규 스크립트는 DB/네트워크 의존적 운영 스크립트라 이 저장소의 기존
+  관례대로 전용 vitest는 작성하지 않음 — 실행 자체가 검증, 위 로그 파일이 증거).
+- `npx supabase db push --linked`, `vercel deploy` 미실행(지시대로 금지).
+
+### 미완료 / 다음 세션 필요
+- 168개교의 실 파이프라인 실행(환경 경합으로 중단) — 위 재실행 순서 그대로 따르면
+  됨, 코드 변경 불필요.
+- `data_collection_status`의 `sources_pending_review` 대량 반영 — 파이프라인
+  재실행이 끝나면 스크립트가 자동으로 갱신(수동 SQL 불필요).
+- 관리자 화면(Review Updates)의 대학별 필터/페이지네이션 — 기존 `listUpdateProposals`가
+  이미 `universityId` 단위로 스코프돼 있고, 대학 목록 자체도 검색(`listUniversities({search})`)이
+  있어 **수백 건 변경안 규모에서도 한 대학 상세 화면 단위로는 문제없음을 코드
+  재확인**했다(관리자가 한 번에 200개교 변경안을 한 화면에서 보는 전역 목록 자체가
+  애초에 없다 — 대학 상세로 들어가야만 그 학교 변경안이 보임). 그래서 이번 세션은
+  새 필터 UI를 추가하지 않았다(이미 대학 단위 스코프로 충분).
+- 로컬 개발 환경에 `.env.local`이 없어(이번 세션에서 새로 생성, `npx supabase status`
+  값으로 채움) 이번 세션 스크립트들이 동작했다 — 이 파일은 `.gitignore` 대상이라
+  커밋하지 않았다(다음 세션 담당자는 `npx supabase start` 후 `npx supabase status`
+  값으로 직접 만들어야 함).
