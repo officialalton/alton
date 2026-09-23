@@ -48,14 +48,6 @@ export default function UnitPrepPanel({
   const [preview, setPreview] = useState<{ title: string; sectionTitles: string[] } | null>(null);
   const [composingProblems, setComposingProblems] = useState(false);
 
-  async function refreshCatalogIfNeeded() {
-    if (composition && composition.keywords.length > 0) {
-      setCatalog(await loadUnitMaterialCatalog(overlayUnitId));
-    } else {
-      setCatalog(null);
-    }
-  }
-
   useEffect(() => {
     let cancelled = false;
     setLoading(true);

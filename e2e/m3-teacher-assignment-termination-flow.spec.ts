@@ -19,7 +19,6 @@ const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
 const CHILD_ID = "cccccccc-0000-0000-0000-000000000002"; // 이서아
 const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001"; // SAT Math
 const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001"; // 박서연
-const STUDENT_NAME = "이서아";
 
 function psql(sql: string): string {
   return execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-q", "-t", "-A", "-c", sql], {

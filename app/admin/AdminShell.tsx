@@ -28,8 +28,6 @@ import type {
   ConsultationListItem,
   TrialSessionListItem,
   ProposalListItem,
-  ConsentGapItem,
-  CompletedConsentItem,
   DriveArtifactIssue,
   StaleEnvelopeContract,
 } from "./consultation-data";

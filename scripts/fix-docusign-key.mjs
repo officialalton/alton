@@ -41,8 +41,6 @@ if (endIdx === startIdx && !hasEndMarker(lines[startIdx])) {
   process.exit(1);
 }
 
-const block = lines.slice(startIdx, endIdx + 1).join("\n");
-
 // DOCUSIGN_PRIVATE_KEY= 뒤의 실제 값 부분만 추출 (첫 줄은 "DOCUSIGN_PRIVATE_KEY=..." 형태)
 const firstLineValue = lines[startIdx].slice("DOCUSIGN_PRIVATE_KEY=".length);
 const restLines = lines.slice(startIdx + 1, endIdx + 1);
@@ -72,13 +70,11 @@ const singleLine = pemLines.join("\\n") + "\\n";
 
 // PEM 유효성 검증 (내용은 출력하지 않음)
 const restored = singleLine.replace(/\\n/g, "\n");
-let valid = false;
 try {
   const { createSign } = await import("node:crypto");
   const s = createSign("RSA-SHA256");
   s.update("format-check");
   s.sign(restored);
-  valid = true;
 } catch (e) {
   console.error("FAIL: 변환 후에도 유효한 PEM 개인키가 아닙니다 —", e.message);
   process.exit(1);

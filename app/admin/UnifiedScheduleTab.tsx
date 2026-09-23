@@ -142,7 +142,7 @@ export default function UnifiedScheduleTab({
       </div>
       <p className="text-[13px] text-grey-500 mb-5">
         전체 선생님의 확정 예약을 ALTON DB 기준으로 중앙 조회합니다(`official` 계정에 개별 Google Calendar를 공유하지
-        않음). 취소·재동기화는 "예약 운영" 탭에서 처리하세요. 빨간 점은 Google 외부 변경 감지로 관리자 확인이 필요한
+        않음). 취소·재동기화는 &ldquo;예약 운영&rdquo; 탭에서 처리하세요. 빨간 점은 Google 외부 변경 감지로 관리자 확인이 필요한
         예약입니다.
       </p>
 

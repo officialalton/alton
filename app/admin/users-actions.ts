@@ -177,7 +177,7 @@ export async function inviteStudent(params: {
 // 대체 구현과 이 함수 제거는 Task 7에서 진행하고, 지금은 명확한 오류로 막기만
 // 한다 — 관리자 권한 확인은 그대로 거쳐서 익명/비관리자에게는 그보다 먼저
 // "로그인이 필요합니다"/"관리자만 사용할 수 있습니다"가 나가도록 한다.
-export async function inviteTeacher(params: {
+export async function inviteTeacher(_params: {
   name: string;
   email: string;
   school: string;
@@ -192,6 +192,7 @@ export async function inviteTeacher(params: {
 // (2026-08-30 R2 Task 4) 위 inviteTeacher()가 호출을 막기 전까지 실제로 쓰이던
 // 구현 — Task 7에서 Workspace 프로비저닝으로 교체·제거될 때까지 참고용으로
 // 남겨둔다(호출부 없음, 삭제하지 않음).
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function legacyInviteTeacherByEmail(params: {
   name: string;
   email: string;

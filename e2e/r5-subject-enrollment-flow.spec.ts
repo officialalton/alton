@@ -15,7 +15,6 @@ import { ACCOUNTS, loginAs } from "./helpers";
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
 const CHILD_ID = "cccccccc-0000-0000-0000-000000000002"; // 이서아
 const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001"; // SAT Math
-const TEACHER_1_ID = "dddddddd-0000-0000-0000-000000000001"; // 박서연 — SAT Math 커리큘럼 보유(seed)
 const TEACHER_2_ID = "dddddddd-0000-0000-0000-000000000002"; // 이도현 — 이 스펙에서만 SAT Math 후보로 추가
 const TEACHER_1_NAME = "박서연 선생님";
 const TEACHER_2_NAME = "이도현 선생님";

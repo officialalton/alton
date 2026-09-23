@@ -101,7 +101,7 @@ export default function ParentShell({
   childrenList,
   currentChildId,
   initialTab,
-  dashboard,
+  dashboard: _dashboard,
   upcoming,
   past,
   curricula,

@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import { loadLibraryDoc, loadMaterialsLibrary } from "./materials-data";
 
 function makeSupabaseMock(attempts: { problem_id: string; correct: boolean | null; response: unknown }[]) {

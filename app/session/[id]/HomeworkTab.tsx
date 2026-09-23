@@ -16,7 +16,7 @@ import HomeworkIssueForm from "@/app/components/HomeworkIssueForm";
 export default function HomeworkTab({
   initialItems,
   studentId,
-  viewerRole,
+  viewerRole: _viewerRole,
   realViewerRole,
   homeworkBatches = [],
 }: {

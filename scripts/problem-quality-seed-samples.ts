@@ -47,7 +47,8 @@ async function main() {
     { skillCode: "linear_functions", difficulty: "hard", count: 5 },
   ];
 
-  let totalAccepted = 0, totalHeld = 0;
+  let totalAccepted = 0;
+  const totalHeld = 0;
   for (const plan of plans) {
     const skill = SKILL_CODES.find((k) => k.code === plan.skillCode);
     if (!skill) { console.error("알 수 없는 세부 기술:", plan.skillCode); continue; }

@@ -11,7 +11,6 @@ const OTHER_TEACHER_ID = "dddddddd-0000-0000-0000-000000000002";
 const STUDENT_ID = "cccccccc-0000-0000-0000-000000000001";
 const HOUSEHOLD_ID = "aabbccdd-0000-0000-0000-000000000001";
 const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001";
-const OTHER_SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000002";
 
 function psql(sql: string): string {
   return execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-q", "-t", "-A", "-c", sql], {

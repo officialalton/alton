@@ -88,7 +88,6 @@ describe("computeAvailableSlots", () => {
 
   it("available 예외는 규칙이 없는 날짜에도 슬롯을 연다", () => {
     const now = new Date("2026-10-01T00:00:00Z");
-    const rules: AvailabilityRule[] = []; // 반복 규칙 자체가 없음
     // available 예외만으로는 primaryTimezone을 못 정하므로(rules[0] 참조), 최소 규칙 하나를
     // 다른 요일에 넣어 timezone 앵커를 제공한다.
     const anchorRule: AvailabilityRule = {

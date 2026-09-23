@@ -89,7 +89,7 @@ export default function MonthCalendar({
             <button
               key={cell.dateKey}
               onClick={() => onSelectDate(cell.dateKey)}
-              aria-selected={isSelected}
+              aria-pressed={isSelected}
               aria-label={`${cell.day}일`}
               title={hasExternalBusy ? "외부 일정 있음(예약 불가)" : undefined}
               className={

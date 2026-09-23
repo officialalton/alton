@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { afterEach, beforeAll, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it } from "vitest";
 
 // P2 9차 — 준비안 유지 → 다시 구성 → 수업 시작 고정.
 //
@@ -41,14 +41,7 @@ const cleanupContracts: string[] = [];
 const cleanupProblems: string[] = [];
 const cleanupKeywords: string[] = [];
 
-let baseUnitId: string;
 let reservationOffsetDays = 5000;
-
-beforeAll(() => {
-  baseUnitId = psql(
-    `select id from subject_template_units where subject_id = '${SUBJECT_ID}' order by position limit 1;`
-  );
-});
 
 afterEach(() => {
   for (const id of cleanupContracts.splice(0)) {

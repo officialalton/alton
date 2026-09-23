@@ -195,7 +195,6 @@ describe("일반 커리큘럼 — 예약부터 완료·진도전진까지 실제
   let householdId: string;
   let enrollmentId: string;
   let unitIds: string[];
-  let materialDocId: string;
   let problemId: string;
   let regularLessonTypeId: string;
 
@@ -208,7 +207,6 @@ describe("일반 커리큘럼 — 예약부터 완료·진도전진까지 실제
     householdId = child.householdId;
 
     const curriculum = makeSubjectWithCurriculum(SAT_MATH_SUBJECT_ID, "일반검증", 2);
-    materialDocId = curriculum.materialDocId;
     problemId = curriculum.problemId;
     enrollmentId = makeEnrollment(childId, householdId, curriculum.subjectId, teacherId);
     const overlay = curriculum.overlayFor(enrollmentId);

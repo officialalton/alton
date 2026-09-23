@@ -13,6 +13,7 @@ function makeQuery(result: { data: unknown }) {
   return query;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- typeof makeTableClient로만 참조된다
 function makeTableClient(resultsByTable: Record<string, { data: unknown }>) {
   return {
     from: vi.fn((table: string) => {

@@ -68,8 +68,8 @@ const VIEWER_LABEL: Record<SessionViewViewer, string> = {
 export default function SessionShell({
   sessionId,
   studentId,
-  unitTitle,
-  subjectName,
+  unitTitle: _unitTitle,
+  subjectName: _subjectName,
   studentName,
   sessionNumber,
   viewerRole,
@@ -91,7 +91,7 @@ export default function SessionShell({
   teacherMaterialStrokes = [],
   studentMaterialStrokes = [],
   sessionProblems = [],
-  lessonContext = { unitTitle: null, goal: null, supplementTitles: [], primaryUnitId: null },
+  lessonContext: _lessonContext = { unitTitle: null, goal: null, supplementTitles: [], primaryUnitId: null },
   currentUserId,
   homeworkBatches = [],
   smartNotesUrl = null,
@@ -180,7 +180,7 @@ export default function SessionShell({
   const [state, setState] = useState(initialState);
   const [repin, setRepin] = useState<"idle" | "running" | { error: string }>("idle");
   const [tipsVisible, setTipsVisible] = useState(true);
-  const [homeworkList, setHomeworkList] = useState(homeworkItems);
+  const [homeworkList] = useState(homeworkItems);
   const [showEndLessonConfirm, setShowEndLessonConfirm] = useState(false);
   const [endingLesson, setEndingLesson] = useState(false);
   const [endLessonError, setEndLessonError] = useState<string | null>(null);
@@ -637,7 +637,7 @@ export default function SessionShell({
 function StatusBar({
   state,
   viewerRole,
-  scheduledLabel,
+  scheduledLabel: _scheduledLabel,
   endLabel,
   onRequestEndLesson,
 }: {

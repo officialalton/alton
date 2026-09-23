@@ -4,7 +4,7 @@ import CurriculumTab from "./CurriculumTab";
 import type { RosterStudent } from "./roster-data";
 import type { TeacherCurriculumData } from "./curriculum-data";
 import { loadStudentCurriculumPanelData } from "./student-curriculum-actions";
-import { loadLegacyCurriculumDetail, loadReviewDetail } from "./legacy-curriculum-actions";
+import { loadLegacyCurriculumDetail } from "./legacy-curriculum-actions";
 
 // 2026-09-11(제품 오너 UAT — 첫 진입 지연 재지적) — 레거시 커리큘럼 상세는
 // 이제 이 화면을 열 때만 legacy-curriculum-actions.ts로 온디맨드 조회한다

@@ -1068,7 +1068,7 @@ export async function reassignProblemSubjectAction(
 ): Promise<BankResult<{ subjectId: string; subjectName: string }>> {
   const { adminUserId } = await requireAdmin();
   const admin = createAdminClient();
-  const { data, error } = await admin.rpc("reassign_problem_subject", {
+  const { error } = await admin.rpc("reassign_problem_subject", {
     p_problem_id: problemId,
     p_new_subject_id: newSubjectId,
     p_actor_id: adminUserId,

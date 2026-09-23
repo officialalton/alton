@@ -35,14 +35,6 @@ const cleanupContracts: string[] = [];
 const cleanupProblems: string[] = [];
 const cleanupKeywords: string[] = [];
 
-let baseUnitId: string;
-
-beforeAll(() => {
-  baseUnitId = psql(
-    `select id from subject_template_units where subject_id = '${SUBJECT_ID}' order by position limit 1;`
-  );
-});
-
 afterEach(() => {
   for (const id of cleanupContracts.splice(0)) {
     psql(`

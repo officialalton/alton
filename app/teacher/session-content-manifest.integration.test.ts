@@ -744,7 +744,7 @@ describe("corrective — prepared_selection_unit_id가 source_overlay_unit_id의
 // 소속 선택이 전혀 재검증되지 않던 문제)에 대한 직접 증거.
 describe("corrective(2차) — prepared_selection_unit_id는 UPDATE로도 다른 선택의 단원을 가리킬 수 없다", () => {
   it("담당 선생님이 자신의 스테이징 항목의 prepared_selection_unit_id를 다른(무관한) 선택의 단원으로 UPDATE하면 복합 FK 위반으로 거부된다", () => {
-    const { selectionId, unitRowId, keywordId, sessionId, contractId } = createAttachedStagedSelection();
+    const { selectionId, unitRowId, keywordId, sessionId: _sessionId, contractId } = createAttachedStagedSelection();
     const sectionId = makeSelectableSection(keywordId);
     const itemId = asUser(
       TEACHER_ID,
@@ -828,7 +828,7 @@ describe("corrective(2차) — prepared_selection_unit_id는 UPDATE로도 다른
   });
 
   it("content_type/content_id를 바꾸는 UPDATE도(단원은 그대로 두고) selectable 트리거의 재검증을 다시 받는다 — 범위 밖 콘텐츠로 바꾸면 거부된다", () => {
-    const { selectionId, unitRowId, keywordId, sessionId, contractId } = createAttachedStagedSelection();
+    const { selectionId, unitRowId, keywordId, sessionId: _sessionId, contractId } = createAttachedStagedSelection();
     const sectionId = makeSelectableSection(keywordId);
     const itemId = asUser(
       TEACHER_ID,

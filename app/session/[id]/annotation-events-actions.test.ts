@@ -1,14 +1,14 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { reconstructVisibleStrokes, type AnnotationEvent } from "./annotation-events-types";
 
-const { insertMock, orderMock, eqMock, selectMock, fromMock, rpcMock } = vi.hoisted(() => {
+const { insertMock, orderMock, eqMock, fromMock, rpcMock } = vi.hoisted(() => {
   const insertMock = vi.fn();
   const orderMock = vi.fn();
   const eqMock = vi.fn(() => ({ order: orderMock }));
   const selectMock = vi.fn(() => ({ eq: eqMock }));
   const fromMock = vi.fn(() => ({ insert: insertMock, select: selectMock }));
   const rpcMock = vi.fn();
-  return { insertMock, orderMock, eqMock, selectMock, fromMock, rpcMock };
+  return { insertMock, orderMock, eqMock, fromMock, rpcMock };
 });
 
 vi.mock("@/lib/auth", () => ({

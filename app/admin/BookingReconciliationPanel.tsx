@@ -433,7 +433,7 @@ export default function BookingReconciliationPanel({
           <h2 className="text-[14px] font-bold text-ink mb-2">알림 발송 대기 현황</h2>
           <p className="text-[12px] text-grey-500 mb-2">
             실제 이메일·메시지 발송 인프라는 아직 없습니다(정식 오픈 전 필수 작업으로 별도 등록됨) — 아래는
-            "발송 대기(pending)" 상태까지만 표시합니다.
+            &ldquo;발송 대기(pending)&rdquo; 상태까지만 표시합니다.
           </p>
           <div className="flex flex-wrap gap-2">
             {outboxSummary.map((s) => (
@@ -572,14 +572,14 @@ export default function BookingReconciliationPanel({
                 {c.externalChangeStatus === "deleted" ? (
                   <p className="text-[11px] text-grey-500 mb-2">
                     Google 이벤트가 삭제됐습니다 — 예약·세션·수업권 hold는 자동으로 취소·재생성되지 않습니다.
-                    아래 둘 중 하나를 반드시 선택하세요("무시"는 허용되지 않습니다): "ALTON 일정 유지"는 예약을
-                    그대로 두고 Calendar 이벤트+Meet을 새로 만들고, "예약 취소"는 정식 취소 절차(수업권
+                    아래 둘 중 하나를 반드시 선택하세요(&ldquo;무시&rdquo;는 허용되지 않습니다): &ldquo;ALTON 일정 유지&rdquo;는 예약을
+                    그대로 두고 Calendar 이벤트+Meet을 새로 만들고, &ldquo;예약 취소&rdquo;는 정식 취소 절차(수업권
                     release/30일 연장 포함)로 예약 자체를 정리합니다.
                   </p>
                 ) : (
                   <p className="text-[11px] text-grey-500 mb-2">
-                    "Google 시간 반영"은 가용성·버퍼·중복예약·수업권을 재검증한 뒤 ALTON DB를 Google 시간으로
-                    맞춥니다. "ALTON 시간 유지"는 ALTON 시간은 그대로 두고 Google 이벤트만 되돌립니다. 두 처리
+                    &ldquo;Google 시간 반영&rdquo;은 가용성·버퍼·중복예약·수업권을 재검증한 뒤 ALTON DB를 Google 시간으로
+                    맞춥니다. &ldquo;ALTON 시간 유지&rdquo;는 ALTON 시간은 그대로 두고 Google 이벤트만 되돌립니다. 두 처리
                     모두 감사 이력(`reservation_reschedules`)에 남습니다.
                   </p>
                 )}
@@ -643,7 +643,7 @@ export default function BookingReconciliationPanel({
       <h2 className="text-[14px] font-bold text-ink mb-2 mt-8">지각·노쇼 신고 (최근 100건)</h2>
       <p className="text-[12px] text-grey-500 mb-3">
         학생·보호자·선생님이 제출한 신고 원문입니다. 이 신고 자체는 출석을 확정하지 않습니다 —
-        최종 판정은 아래 "세션 최종판정" 섹션에서 관리자가 명확한 규칙 기반 함수로 직접 확정합니다.
+        최종 판정은 아래 &ldquo;세션 최종판정&rdquo; 섹션에서 관리자가 명확한 규칙 기반 함수로 직접 확정합니다.
       </p>
       {!incidentReports || incidentReports.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
@@ -671,7 +671,7 @@ export default function BookingReconciliationPanel({
 
       <h2 className="text-[14px] font-bold text-ink mb-2 mt-8">세션 최종판정 (예약 시간 경과, 미확정)</h2>
       <p className="text-[12px] text-grey-500 mb-3">
-        선생님이 "수업 종료"를 누르지 않았거나 관리자가 직접 확정해야 하는 건입니다. 완료/학생 노쇼/선생님
+        선생님이 &ldquo;수업 종료&rdquo;를 누르지 않았거나 관리자가 직접 확정해야 하는 건입니다. 완료/학생 노쇼/선생님
         노쇼 중 하나로 확정하면 수업권 소진·해제와 정산 항목(payable_minutes)이 같은 트랜잭션으로 반영됩니다.
       </p>
       {judgmentRows === null ? (
@@ -787,8 +787,8 @@ export default function BookingReconciliationPanel({
               <div className="mt-3 border-t border-grey-200 pt-3">
                 <p className="text-[11.5px] text-grey-500 mb-2">
                   자동 장애 감지는 없습니다 — 관리자가 직접 판단해 선택합니다. 제공 분을 0(또는 비움)으로
-                  두면 "미시작"(수업권 hold 복원 + 예약 취소로 재예약 가능, 0분 정산)으로, 1분 이상 입력하면
-                  "중단"(120분 상한 내 정산 + 못 제공한 분은 보충시간으로 자동 이관)으로 처리됩니다.
+                  두면 &ldquo;미시작&rdquo;(수업권 hold 복원 + 예약 취소로 재예약 가능, 0분 정산)으로, 1분 이상 입력하면
+                  &ldquo;중단&rdquo;(120분 상한 내 정산 + 못 제공한 분은 보충시간으로 자동 이관)으로 처리됩니다.
                 </p>
                 <div className="flex gap-2 items-end mb-2">
                   <div>
@@ -834,7 +834,7 @@ export default function BookingReconciliationPanel({
         잘못 확정된 세션은 재개방 후 올바른 상태로 재확정할 수 있습니다(기존 확정 기록은 지우지 않고
         이력으로 남습니다 — session_status_events에 append-only로 쌓입니다). payable_minutes/정산
         항목은 새 상태 기준으로 자동 재계산되지만, 수업권 소진/해제 자체가 바뀌어야 하는 경우(예:
-        완료→선생님 노쇼)는 "수업권 원장" 탭의 조정 기능으로 별도 반영해야 합니다.
+        완료→선생님 노쇼)는 &ldquo;수업권 원장&rdquo; 탭의 조정 기능으로 별도 반영해야 합니다.
       </p>
       {finalizedRows === null ? (
         <ListSkeleton />
@@ -974,7 +974,7 @@ export default function BookingReconciliationPanel({
       <p className="text-[12px] text-grey-500 mb-3">
         세션을 재개방(reopen)→재확정(recomplete)하면 payable_minutes/정산 항목은 자동 재계산되지만
         수업권 소진·해제(entitlement_ledger)는 예약당 1건 제약상 자동으로 뒤집히지 않습니다. 아래는
-        그 차이를 자동 계산한 필수 대사 작업 목록 — "반영"을 누르면 필요한 수업권 조정이 실제로
+        그 차이를 자동 계산한 필수 대사 작업 목록 — &ldquo;반영&rdquo;을 누르면 필요한 수업권 조정이 실제로
         적용됩니다(같은 작업은 한 번만 반영 가능). 이미 지급 완료(paid)된 정산 항목의 금액 자체는
         여기서 바뀌지 않고 역분개 대상으로 표시만 됩니다.
       </p>

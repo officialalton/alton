@@ -76,11 +76,6 @@ function fmtLine(m: number, b: number): string {
   return `y = ${rhsExpr(m, b)}`;
 }
 
-// 2026-09-17(checkFigure 실측) — 기울기가 가파르면(예: |m|=10) 직선이 그래프 안에서
-// 거의 수직에 가까워 두 직선의 라벨이 겹칠 자리가 없어진다("label_collision"). 좌표·
-// 절편 범위(range)와 별개로 기울기 크기는 항상 legible한 값(최대 6)으로 제한한다.
-const MAX_SLOPE_MAGNITUDE = 6;
-
 // 2026-09-17(품질 보완) — range(좌표·절편 범위)만으로는 medium·hard가 사실상 같은
 // 난이도로 보였다(둘 다 기울기가 |m|≤6로 같이 잘렸다). 기울기 크기 하한을 난이도별로
 // 둬서 easy는 계산이 쉬운 작은 기울기, hard는 |m|=1 같은 자명한 값을 배제한다.

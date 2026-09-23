@@ -30,7 +30,6 @@ vi.mock("@/lib/request-origin", () => ({ currentRequestOrigin: async () => "http
 
 let consultationRow: Record<string, unknown> | null = null;
 const consultationsUpdatePayloads: Array<Record<string, unknown>> = [];
-const consultationsUpdateFinal = vi.fn().mockResolvedValue({ error: null });
 const issueTokenMock = vi.fn().mockResolvedValue({ error: null });
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

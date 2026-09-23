@@ -148,7 +148,7 @@ export default function TeacherReviewPanel({
       </button>
       {!canSubmit && !submitted && (
         <p className="text-[12px] text-grey-500 mt-2">
-          모든 카테고리 평가 선택, "오늘 배운 것"·"최종 정리" 작성 후 제출할 수 있습니다.
+          모든 카테고리 평가 선택, &ldquo;오늘 배운 것&rdquo;·&ldquo;최종 정리&rdquo; 작성 후 제출할 수 있습니다.
         </p>
       )}
       {submitted && (

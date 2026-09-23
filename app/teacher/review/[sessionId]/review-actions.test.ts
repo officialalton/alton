@@ -48,8 +48,8 @@ vi.mock("@/lib/supabase-admin", () => ({
     from: (table: string) => {
       if (table === "household_members") {
         return {
-          select: (cols: string) => ({
-            eq: (col1: string) => ({
+          select: (_cols: string) => ({
+            eq: (_col1: string) => ({
               eq: (col2: string, val2: unknown) => {
                 if (col2 === "role" && val2 === "child") {
                   return { maybeSingle: childMembershipMaybeSingleMock };

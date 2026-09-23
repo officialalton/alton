@@ -4,7 +4,6 @@ import SubjectEnrollmentPanel from "./SubjectEnrollmentPanel";
 import * as actions from "./subject-enrollment-actions";
 import * as matchingActions from "./matching-actions";
 import * as terminationActions from "./teacher-assignment-termination-actions";
-import type { StudentListItem } from "./users-data";
 import type { AdminSubject } from "./subject-data";
 
 vi.mock("./subject-enrollment-actions", () => ({
@@ -26,28 +25,6 @@ vi.mock("./teacher-assignment-termination-actions", () => ({
   adminTerminateAssignmentNow: vi.fn(),
   previewTerminationImpactAction: vi.fn(),
 }));
-
-const student: StudentListItem = {
-  id: "st1",
-  name: "지훈",
-  email: "jihoon@example.com",
-  grade: "10학년",
-  status: "active",
-  creditBalance: 0,
-  parentNames: [],
-  subjectNames: [],
-  dateOfBirth: null,
-    dateOfBirthVerifiedAt: null,
-  schoolName: null,
-  satScore: 0,
-  gpa: null,
-    gpaScale: null,
-  targetColleges: [],
-  intendedMajors: [],
-  profileCompletedAt: null,
-  apCourseCount: 0,
-  extracurricularCount: 0,
-};
 
 const subjects: AdminSubject[] = [
   { subjectId: "sub1", subjectName: "SAT Math", units: [] },

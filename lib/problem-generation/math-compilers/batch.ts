@@ -159,6 +159,7 @@ const SPR_ELIGIBLE_SKILLS = new Set<MathCompilerSkill>([
 const MIN_BATCH = 10;
 const MAX_CANDIDATE_MULTIPLIER: Record<LinearTwoVarDifficulty, number> = { easy: 1.5, medium: 1.5, hard: 2.5 };
 /** 순수 계산이라 실제 "호출"은 없지만, 무한 루프 방지용 시도 횟수 상한은 그대로 둔다. */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const MAX_ATTEMPTS_PER_ITEM = 20;
 const MAX_WALL_CLOCK_MS = 60_000;
 

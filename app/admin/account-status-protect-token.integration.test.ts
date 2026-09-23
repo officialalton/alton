@@ -26,11 +26,6 @@ function asUser(userId: string, sql: string): string {
   `);
 }
 
-function lastLine(output: string): string {
-  const lines = output.split("\n").filter((l) => l.trim().length > 0);
-  return lines[lines.length - 1]?.trim() ?? "";
-}
-
 // 어른 학생(만 13세 이상)을 만들어 미성년 동의 로직을 우회 — 이 파일은
 // bypass_status_protect 토큰 교체만 검증하므로 동의 로직은 관심사가 아니다.
 function createAdultStudent(label: string): string {

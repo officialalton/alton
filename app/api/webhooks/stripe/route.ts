@@ -53,11 +53,6 @@ type PaymentIntentObject = {
   last_payment_error?: { message?: string } | null;
 };
 
-type ChargeObject = {
-  id: string;
-  payment_intent: string | null;
-};
-
 type DisputeObject = {
   id: string;
   charge: string;

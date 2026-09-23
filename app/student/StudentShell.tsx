@@ -97,7 +97,7 @@ export default function StudentShell({
   memosByEnrollment,
   reviews,
   myFeedback,
-  studentId,
+  studentId: _studentId,
   homeworkBatches,
   materialsLibraryTree,
   credits,

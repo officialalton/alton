@@ -1,7 +1,7 @@
 // 표준 렌더링 엔진 — 템플릿 7: 입체도형 2.5D 도식 (직육면체·정육면체·원기둥·원뿔·구·사각뿔)
 // 치수 라벨만 받는다. 숨은 모서리는 점선, 밑면·높이·반지름 라벨은 정해진 자리. 겉넓이·부피 문항의 도식.
 
-import { dedupe, esc, f, halfDiag, Sheet, type FigureIssue, type Pt } from "./_layout";
+import { dedupe, f, halfDiag, Sheet, type FigureIssue, type Pt } from "./_layout";
 
 export type SolidKind = "rectangular_prism" | "cube" | "cylinder" | "cone" | "sphere" | "square_pyramid";
 export type SolidSpec = {

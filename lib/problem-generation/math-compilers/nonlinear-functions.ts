@@ -77,11 +77,6 @@ function randInt(min: number, max: number): number {
 function fmt(n: number): string {
   return Number.isInteger(n) ? String(n) : n.toFixed(2).replace(/\.?0+$/, "");
 }
-function nonZero(min: number, max: number): number {
-  let v = 0;
-  while (v === 0) v = randInt(min, max);
-  return v;
-}
 /**
  * "$f(x) = a(x-h)^2+k$" 형태 — a=1/-1 계수 생략, h/k=0이면 항 생략(SAT 표기 규칙).
  * 2026-09-17(실측, 아침 UAT) — "^2"를 $…$ 밖에 그대로 두면 위첨자로 조판되지

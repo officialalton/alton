@@ -284,12 +284,6 @@ export type ExternalCalendarChangeRow = {
   externalChangeDetail: Record<string, unknown> | null;
 };
 
-const EXTERNAL_CHANGE_STATUS_LABEL: Record<string, string> = {
-  time_changed: "시간 변경 감지",
-  deleted: "이벤트 삭제 감지",
-  meet_link_changed: "Meet 링크 변경 감지",
-};
-
 /**
  * R6 11/N — Google Calendar에서 직접 바뀐 ALTON 수업 이벤트 목록(관리자 확인 대기).
  * `reservations.external_change_status <> 'none'`인 것만 반환 — 감지만 됐을 뿐 예약·

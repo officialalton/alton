@@ -5,6 +5,18 @@ import nextTs from "eslint-config-next/typescript";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
+  // 2026-09-23(발견) — 코드베이스 전반에 "의도적으로 안 쓰는 매개변수/변수는
+  // `_` 접두어로 표시"하는 관례가 이미 퍼져 있었는데, no-unused-vars 규칙이
+  // 이를 인식하도록 설정돼 있지 않아 같은 관례를 따른 곳들이 전부 lint 에러로
+  // 잡히고 있었다 — 개별 파일을 고치는 대신 관례를 규칙에 반영한다.
+  {
+    rules: {
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_", caughtErrorsIgnorePattern: "^_" },
+      ],
+    },
+  },
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:

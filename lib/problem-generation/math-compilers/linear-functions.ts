@@ -83,21 +83,6 @@ function randSlope(difficulty: LinearFunctionDifficulty): number {
   return Math.random() < 0.5 ? magnitude : -magnitude;
 }
 
-function buildDistractors(
-  correctValue: number,
-  kind: "evaluate" | "find_x_for_value" | "slope"
-): { value: number; kind: DistractorKind; reason: string }[] {
-  const reasonByKind: Record<typeof kind, { sign: string; other: string }> = {
-    evaluate: { sign: "곱셈에서 부호를 반대로 계산했다.", other: "기울기를 곱하지 않고 그대로 더했다(x를 대입하는 자리를 잘못 썼다)." },
-    find_x_for_value: { sign: "이항할 때 부호를 바꾸지 않았다.", other: "기울기로 나누지 않고 빼서 계산했다." },
-    slope: { sign: "분자·분모의 부호를 반대로 계산했다.", other: "기울기 공식의 분자와 분모(x 변화량·y 변화량)를 바꿔 계산했다." },
-  };
-  return [
-    { value: -correctValue, kind: "sign_error", reason: reasonByKind[kind].sign },
-    { value: correctValue + 1, kind: "other", reason: reasonByKind[kind].other },
-  ];
-}
-
 const LINEAR_INTERPRET_KINDS: LinearFunctionQuestionKind[] = ["interpret_slope", "interpret_intercept"];
 
 function pickLinearContext(): LinearContext {

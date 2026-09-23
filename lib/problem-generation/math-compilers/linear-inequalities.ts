@@ -59,12 +59,6 @@ function randInt(min: number, max: number): number {
 function fmt(n: number): string {
   return Number.isInteger(n) ? String(n) : n.toFixed(2).replace(/\.?0+$/, "");
 }
-function nonZero(min: number, max: number): number {
-  let v = 0;
-  while (v === 0) v = randInt(min, max);
-  return v;
-}
-
 const RANGE_BY_DIFFICULTY: Record<LinearInequalityDifficulty, number> = { easy: 6, medium: 8, hard: 10 };
 const MIN_M_MAGNITUDE: Record<LinearInequalityDifficulty, number> = { easy: 1, medium: 1, hard: 2 };
 const MAX_M_MAGNITUDE: Record<LinearInequalityDifficulty, number> = { easy: 3, medium: 5, hard: 6 };
@@ -88,10 +82,6 @@ function xTerm(m: number): string {
 function rhsExpr(m: number, b: number): string {
   if (b === 0) return xTerm(m);
   return `${xTerm(m)} ${b >= 0 ? "+" : "-"} ${fmt(Math.abs(b))}`;
-}
-
-function opWord(op: Op): string {
-  return op === "<" ? "미만" : op === "<=" ? "이하" : op === ">" ? "초과" : "이상";
 }
 
 /**
