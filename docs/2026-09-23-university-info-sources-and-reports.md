@@ -2286,4 +2286,175 @@ Central Florida(106건, `ucf.edu/majors/`), University of Vermont(75건,
    sources_pending_review 처리가 끝나면(다음 2~3세션 내 가능할
    전망) unconfirmed 잔여 3개교만 남게 되므로, 완료 시 반드시 최종
    통합보고서를 작성하고 CDS 정보 노출 UI 확장을 계속 진행할 것 —
+
+## 26차 세션 (본 세션)
+
+### 환경 확인
+- 로컬 Supabase 스택(`psql -h 127.0.0.1 -p 54422 -U postgres -d postgres`)
+  기동 확인 후 시작. `curl --max-time N`, `-A "Mozilla/5.0 ..."` 사용.
+  25차까지 처리된 학교를 제외하고 `type='common_data_set',
+  status='approved'` + `data_collection_status='sources_pending_review'`
+  조인 쿼리로 48개교 확인 후 진행.
+
+### CDS 실수집 7개교 (전부 verified_pilot로 승격, 관리자 수기 확인)
+모두 CDS 2024-2025(Fall 2024 코호트) 기준, `cohort='enrolled'`
+SAT/ACT/GPA·`cohort='applicant'`/`'admitted'` 지원/합격/등록 구분을
+원문 표 제목으로 직접 확인 후 반영.
+
+- **University of Miami**(플로리다, `irsa.miami.edu/facts-and-information/common-data-set/cds2425.pdf`
+  직접 다운로드 성공 — 단, 이 PDF는 AcroForm 폼필드라 `pdftotext`로
+  숫자가 깨져 나와 `pdftoppm`+`tesseract` OCR 후 원본 이미지 확대로
+  교차검증. 지원 53,954/합격 10,195/등록 2,473, 대기자명단
+  18,078/7,364, SAT 1340-1450/ACT 30-33, GPA 3.80, 상위10% 58%,
+  재학유지율 94%, 2018코호트 6년 졸업률 84%. 40건.)
+- **University of Louisville**(`louisville.widen.net` Widen 뷰어 —
+  뷰어 스크린샷 대신 `PDFViewerApplication.url`을 JS로 읽어 서명된
+  직접 PDF URL 확보 후 curl로 원문 확보. 지원 15,668/합격
+  12,442/등록 3,120, SAT 1010-1230/ACT 19-27, GPA 3.60, 상위10%
+  24.8%, 재학유지율 81.5%, 2018코호트 6년 졸업률 61.20%. 35건.)
+- **University of Mississippi**(`olemiss.app.box.com` — Box 공유링크의
+  `box_download_shared_file` 고전 다운로드 엔드포인트(`shared_name`+
+  `file_id`)로 원문 PDF 직접 확보. 지원 33,363/합격 32,223/등록
+  5,972, SAT 1000-1200/ACT 21-29, GPA 3.50, 상위10% 22%, 재학유지율
+  87.20%, 2018코호트 6년 졸업률 72%. 35건.)
+- **Rensselaer Polytechnic Institute**(`rpi.box.com`, 위와 동일한 Box
+  직접다운로드 방식. 지원 17,193/합격 10,906/등록 1,314, SAT
+  1390-1500/ACT 30-34(ACT 세부영역 미공개), GPA 3.80, 상위10% 56%,
+  재학유지율 91%, 2018코호트 6년 졸업률 84%. 23건.)
+- **University of Wisconsin-Madison**(`uwmadison.box.com`, 동일
+  방식. 성별 거주지 분해표가 공란이라 성별 합계로 총계 산출(지원
+  65,933/합격 29,784/등록 8,514), SAT 1370-1490/ACT 29-33, GPA 3.90,
+  상위10% 53.80%, 재학유지율 96.10%, 2018코호트 6년 졸업률 90%.
+  17건.)
+- **University of California, Berkeley**(`opa.berkeley.edu` IR
+  페이지가 CDS를 Google Sheets로 배포 — `/export?format=xlsx`로
+  전체 시트(CDS-A~J) 확보 후 `openpyxl`로 파싱. 지원 124,245/합격
+  13,714/등록 6,272, 재학유지율 96.80%, 2018코호트 6년 졸업률
+  92.82%. **UC Berkeley는 시험-미제출(test-free) 정책이라 SAT/ACT를
+  입학사정에 쓰지 않고 GPA 평균·상위10%도 원문에 공란** — 추측 금지
+  원칙에 따라 미기재. 8건.)
+- **University of California, Irvine**(`sites.uci.edu/irap/...`
+  직접 PDF 링크 확보. 지원 122,706/합격 35,317/등록 6,736, 재학유지율
+  94.20%, 2018코호트 6년 졸업률 86.95%. UCI도 SAT/ACT 관련 표가
+  공란이라 미기재. 7건.)
+
+### 새로 확인한 실전 기법(다음 세션 인계용, 중요)
+- **Box 공유링크 직접 다운로드**: 뷰어 페이지(`https://<sub>.box.com/s/<shared_name>`)를
+  curl로 받아 `"typedID":"f_<file_id>"` 정규식으로 file_id 추출 →
+  `https://<sub>.box.com/index.php?rm=box_download_shared_file&shared_name=<shared_name>&file_id=f_<file_id>`
+  로 PDF 원문을 직접 받을 수 있다(Box API 토큰 불필요, 세션 3~5회
+  검증 성공). 단, Box 페이지가 JS 렌더링만 하고 `typedID`가 안 보이면
+  Claude_Browser로 페이지를 열어 `read_network_requests`에서
+  `/api/2.0/files/<id>` 요청을 찾아 file_id를 확보한다.
+- **Widen(widencdn.net) 뷰어**: 브라우저로 열고
+  `window.PDFViewerApplication.url`을 `javascript_tool`로 읽으면
+  서명된(`sig=...`, TTL 있음) 직접 PDF URL이 나온다 — 뷰어
+  스크린샷 없이 원문 확보 가능.
+- **Google Sheets로 배포하는 IR 페이지**(UC 계열에서 다수 확인):
+  `.../export?format=xlsx`로 전체 워크시트(CDS-A~J 탭 구조)를 한
+  번에 받아 `openpyxl`로 셀 단위 파싱 — `pdftotext`보다 훨씬
+  정확하고 빠르다.
+- **AcroForm 폼필드 PDF 주의**: 일부 학교(Miami 확인)는 CDS를
+  채워 넣는 양식 그대로 배포해 `pdftotext`가 숫자 글리프를 못 읽는다
+  (연도 "2024-2025"가 "202 -202 "로 깨짐 등). `pypdf`의
+  `get_fields()`도 빈 경우, `pdftoppm -r 300~600` + `tesseract
+  --psm 4`(표는 4가 6보다 나음)로 OCR하되, ACT Math 75th처럼
+  숫자 하나라도 의심스러우면 반드시 `Read` 도구로 PNG를 직접 눈으로
+  확인해 OCR 오독을 교차검증할 것(이번 세션 "39" OCR 오독을 "32"로
+  정정한 사례 있음).
+
+### 시도했으나 이번 세션도 실패한 항목
+- **Clemson University**: `open.clemson.edu`(bepress/digitalcommons)
+  홈/목록 페이지는 curl로 200이지만, 실제 PDF 다운로드
+  엔드포인트(`/cgi/viewcontent.cgi?article=...&context=cds`)는
+  curl에서 항상 403(User-Agent/Referer/쿠키 조합 재시도 5회 이상
+  실패). Claude_Browser로 열면 정상 렌더되지만(Cloudflare JS
+  챌린지를 브라우저가 통과) `read_network_requests`로 받은 응답
+  바디가 716바이트로 잘려 있어(리다이렉트 스텁 추정) 원문을 못
+  받음 — 완전한 우회에는 실제 브라우저의 다운로드 이벤트를 가로채는
+  능력이 필요해 이번 세션 도구로는 한계.
+- **Oklahoma State University**(`ira.okstate.edu/cds`): curl
+  403 유지(Referer 추가해도 동일) — Cloudflare 계열 추정, 미해결.
+- **Purdue University / Indiana University-Purdue University
+  Indianapolis**: 이번 세션 재시도 안 함(Oklahoma State/Clemson
+  패턴과 동일할 것으로 예상, 우선순위 낮춤).
+- **University of Utah**(`data.utah.edu`): curl 403, 브라우저
+  자동화까지는 이번 세션 시간상 시도하지 못함.
+- 나머지 처리 못한 학교(약 41개교, 아래 "인계"에 목록 성격 설명):
+  Andrews University, Bowling Green State University, Clarkson
+  University, Fordham University(리다이렉트만 확인, 원문 미확보),
+  Hofstra University(issuu 임베드 — 뷰어 스크린샷 필요해 보류),
+  Indiana University Bloomington(`iuia.iu.edu/apps/cds/`가 SPA라
+  정적 크롤링 불가), Mississippi State University(CDS가 xlsx
+  전용, openpyxl로 가능하나 이번 세션 시간 부족), Morgan State
+  University, New Jersey Institute of Technology, North Dakota
+  State University, Ohio University, Pepperdine University, Saint
+  Joseph's University, Saint Louis University(CDS 링크를 못 찾음 —
+  "Fact Book"만 발견), Seton Hall University, South Dakota State
+  University(인트라넷 SharePoint 추정 링크라 접근 불가), St. John's
+  University, University at Albany (SUNY)(2025-2026 CDS가
+  SharePoint 개인 공유 링크로 배포되어 인증 필요, 접근 불가),
+  University of California, Santa Barbara(홈페이지에 CDS 직접
+  링크 없음, 추가 탐색 필요), University of Colorado Boulder(Tableau
+  성격의 대시보드로 배포, PDF/텍스트 추출 안 됨), University of
+  Dayton, University of Hawaii at Manoa, University of Idaho,
+  University of Maine(2024-2025 리소스 페이지에 실제 파일 링크
+  없음), University of Memphis, University of Nevada Las Vegas,
+  University of New Orleans(CDS 아카이브가 2018-2019까지만 있고
+  최신본 없음), University of North Dakota, University of Oregon,
+  University of Texas at Arlington/San Antonio/Austin(Austin은
+  Box 뷰어인데 file_id 추출까지는 했으나 이번 세션 시간 배분상 뒤로
+  미룸 — 다음 세션 최우선 후보), University of Tulsa, University of
+  Wisconsin-Milwaukee, Virginia Tech(사이트가 완전 정적 HTML이 아니라
+  실제 CDS 파일 링크가 안 보임), University at Albany 등.
+
+### 학과(전공) 목록 보완 — 이번 세션 미완료
+`university_majors` 0건 학교가 다수 확인됐으나(Ole Miss, RPI,
+Louisville 포함 — 방금 CDS 처리한 학교도 포함), 각 학교 공식 학사
+요람 페이지가 전부 페이지네이션/SPA(JS 렌더링)라 정적 curl로 전체
+전공 목록을 안전하게 추출하지 못했다. **추측 금지 원칙상 불완전한
+목록을 억지로 넣지 않고 이번 세션은 보류** — 다음 세션에서
+Claude_Browser로 각 학교 학사요람을 열어 페이지네이션을 넘기며
+전체 수집하는 방식을 권장.
+
+### DB 반영 확인 (psql 직접 실행 결과)
+- `data_collection_status`: `verified_pilot` **128 → 135개교**,
+  `sources_pending_review` **69 → 62개교**, `unconfirmed` **3개교
+  변동 없음**(이번 세션은 브라우저 자동화 툴이 있었지만 Gonzaga/
+  Catholic University of America/Miami University Ohio 재시도는
+  시간 배분상 착수하지 못함 — 아래 인계 참고).
+- `university_admission_metrics`: 이번 세션 7개교 총 165행 신규/
+  upsert(Miami 40, Louisville 35, Ole Miss 35, RPI 23, Wisconsin-
+  Madison 17, Berkeley 8, UC Irvine 7).
+- `university_majors`: 이번 세션 신규 삽입 없음(위 사유).
+- `git status`: 앱 코드/스크립트 변경 없음(DB만 psql로 직접
+  수정). 새 마이그레이션 없음. `npx supabase db push --linked` /
+  `vercel deploy` 실행하지 않음.
+
+### 다음 세션 인계 (27차용)
+1. **unconfirmed 3개교(Gonzaga/Catholic University of America/Miami
+   University Ohio) 재시도 필수** — 이번 세션도 시간 배분상 미착수.
+   Claude_Browser로 navigate 후 실제 다운로드 링크(href)만 확인하고
+   뷰어 스크린샷은 피할 것(이번 세션에서 Box/Widen 뷰어는
+   `PDFViewerApplication.url` JS 읽기 또는 `box_download_shared_file`
+   패턴으로 원문 확보 가능함을 확인했으니 동일 기법 적용 시도).
+2. **University of Texas at Austin**: Box 뷰어(file_id 확보까지
+   완료 — `1812286540077`, shared_name
+   `d9izqb6s8dw2xxg5h5sunxyhrnef2ay6`)인데 `box_download_shared_file`
+   패턴을 아직 시도 안 함 — 다음 세션 최우선 후보로 바로 시도.
+3. **Clemson/Oklahoma State/Purdue**: Cloudflare/bepress WAF로
+   여전히 막힘. curl 재시도보다 Claude_Browser의 파일 다운로드
+   이벤트를 직접 가로채는 방법(예: `navigate`로 다운로드 트리거 후
+   `preview_logs`/파일시스템 확인) 조사 필요.
+4. **학과 목록 보완 재개 필요** — 이번 세션은 SPA/페이지네이션
+   문제로 보류했으나, 표준 문서 5번 규칙(additive, 전체 수집)을
+   지키려면 Claude_Browser 기반 수집이 다음 세션 우선순위.
+5. sources_pending_review 남은 **62개교** 중 위에 나열한 학교들이
+   후보 — Google Sheets/Box/Widen 패턴에 걸리는 학교부터 처리하면
+   효율적.
+6. 관리자 화면 노출 확인 여전히 미착수.
+7. 200개교 CDS 수집은 이제 135/200(67.5%) 완료. 남은 62개교 +
+   unconfirmed 3개교 처리가 끝나면 반드시 최종 통합보고서를 작성하고
+   CDS 정보 노출 UI 확장을 계속 진행할 것 — 매 세션 인계 기록에
+   계속 전달.
    매 세션 인계 기록에 계속 전달.
