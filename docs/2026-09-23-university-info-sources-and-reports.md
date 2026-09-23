@@ -994,3 +994,76 @@ Andrews University는 CSV 후보 URL이 실제로는 홈페이지 루트라 CDS 
   `ls supabase/migrations/ | tail -5`로 최신 번호를 확인하고 그보다 큰 번호를
   써서 여유를 둘 것 (다른 브랜치와 이미 3번 충돌했으므로 절대 아슬아슬하게 잡지
   말 것).
+
+## 12차 세션 (2026-09-23) — CDS 원문 실제 반영 3개교 완료
+
+### 처리 완료 학교(3개교, `data_collection_status`를 `verified_pilot`으로 승격)
+CDS 표준 문서 절차대로 각 학교의 승인된 CDS 원문(PDF 또는 웹버전)을 실제로
+`curl`+`pdftotext -layout`(PDF) 또는 HTML 태그 제거(웹버전)로 원문 텍스트를
+확보하고, 섹션 B/C/G를 사람이 직접 읽어 `university_admission_metrics`에
+`verification_status='official'`, 정확한 `cohort`, `source_url_id`,
+`verified_at`=2026-09-23로 반영했다. 값이 CDS 원문에 없는 항목(예: ASU의
+SAT/ACT 25/50/75 — 원문 표 자체가 0.00%/공란으로 비어 있음, CMU의 ACT
+Writing/Science/Reading, Auburn의 ACT Science/Reading, GPA 4.0 세부 분포 등)은
+추측하지 않고 그대로 비워뒀다(표준 문서 4번째 원칙).
+
+- **Arizona State University**(10개 지표): 지원자/합격자/등록자, 합격률,
+  등록률, GPA 평균(3.52), 상위10% 비율(29.9%, 석차 제출률 52%만 대상), 1년
+  재학유지율(87.3%), 6년 졸업률(69.3%, 2019 코호트), 등록금(인주 $32,353 /
+  2026-2027 학년도). SAT/ACT 점수는 CDS 원문 자체가 공란(ASU가 해당 사이클
+  미제출/미보고) — 미입력. 대기자명단 없음(정책 자체가 "No").
+- **Carnegie Mellon University**(34개 지표): 지원자/합격자/등록자, 합격률,
+  등록률, 대기자명단 3종, SAT 전과목 25/50/75, ACT Composite/Math/English
+  25/50/75(Writing/Science/Reading은 원문 공란), 상위10%(82.5%), GPA
+  평균(3.89), GPA4.0비율(43.9%, 제출자 기준만 보고), 1년 재학유지율(96.6%,
+  Fall 2023 코호트), 6년 졸업률(94.3%, 2019 코호트), 등록금($91,124,
+  2026-2027 학년도 신입생 기준). **주의**: CDS 원문 C9 헤더가 "enrolled in
+  Fall 2024"로 표기되어 있으나 C1 등 나머지 섹션은 전부 Fall 2025 기준이라
+  원문 자체의 연도 표기 불일치로 판단, notes에 명시해뒀다 — 다음 세션이
+  CMU를 재검토할 경우 이 불일치를 CMU IR에 직접 문의하거나 차기 CDS로
+  재확인할 것.
+- **Auburn University**(27개 지표): 지원자/합격자/등록자, 합격률, 등록률,
+  SAT/ACT 제출률, SAT/ACT 25/75(50th는 원문에 없음 — 25/75만 제공), 상위10%
+  비율(35%), GPA 평균(4.10), GPA4.0비율(64.02%, 전체 기준만 보고), 1년
+  재학유지율(94.2%), 6년 졸업률(82%, 2019 코호트), 등록금(인주 $30,528 /
+  2025-2026 학년도, 입학지표와 동일 연도). 대기자명단 없음.
+
+### 학과(전공) 목록 보완
+착수하지 못함. ASU 같은 대형 종합대는 학과 목록이 수백 개(전체 catalog
+크롤링이 별도의 큰 작업)라 이번 세션 시간 안에 "전체 수집" 기준(표준 문서
+5번)을 만족시키려면 학교당 상당한 시간이 필요 — 다음 세션이 이어받아야 한다.
+
+### 마이그레이션 충돌 대응
+세션 시작 직후 "ALTON 개발 세션"으로부터 3번째 타임스탬프 충돌 보고를
+받아 최우선 처리했다(`20261560000000` → `20261600000000` rename, 로컬 DB
+재적용, 브랜치 전용 번호대 `20261600000000+` 규칙을 위 항목에 기록). 이번
+세션은 새 마이그레이션을 만들지 않았다(데이터만 반영, 스키마 변경 없음).
+
+### 검증
+- `psql`로 직접 확인: `university_admission_metrics`에 3개교 총 71행
+  신규(ASU 10 + CMU 34 + Auburn 27), `universities.data_collection_status`
+  `verified_pilot` 10→13, `sources_pending_review` 178→175로 정확히 감소.
+- 이번 세션은 TypeScript/SQL 코드 변경 없이 마이그레이션 파일명 변경(rename,
+  내용 동일)과 데이터 반영만 수행 — `npx supabase migration up --local`로
+  로컬 DB 재적용 성공 확인(위 마이그레이션 규칙 항목 참고). 코드 변경이
+  없으므로 `tsc`/`eslint`/`vitest`는 이번 세션 변경분과 무관.
+- `npx supabase db push --linked`, `vercel deploy` 미실행(지시대로 금지).
+
+### 다음 세션 필요 (갱신)
+- **최우선**: 위 3개교를 제외한 `sources_pending_review` 175개교를 CDS
+  표준 문서 절차대로 계속 처리. approved CDS URL이 이미 있는 학교부터
+  진행(9~10차 세션이 확인한 158개교 중 3개교 완료, 155개교 남음 — 나머지
+  20개교는 URL이 landing page라 실제 CDS 파일/섹션 링크를 재탐색해야 함).
+  이번 세션에서 확인한 실전 요령: (1) IR 랜딩페이지는 `curl -A "Mozilla/5.0"`
+  로 HTML을 받아 최신 CDS PDF/섹션 링크를 찾고, (2) PDF는
+  `curl`로 다운로드 후 `pdftotext -layout`로 텍스트화(양식 필드가 아니라
+  일반 텍스트로 렌더링된 CDS만 값이 추출됨 — AcroForm 값이 채워지지 않은
+  PDF는 원문 자체가 공란일 수 있으니 반드시 `pdftotext`(비-layout)로도
+  재확인해 진짜 공란인지 확인), (3) 웹버전(Auburn처럼 section-b/c/g.php
+  구조)은 HTML 태그만 제거하면 label 다음 줄에 값이 그대로 나온다.
+- 학과(전공) 목록 전체 보완(additive) — 착수 전. 대형 종합대는 학과 수가
+  많아 별도 시간 배정 필요.
+- **200개교 전체가 끝나면 반드시 최종 통합보고서를 작성**하고 CDS 정보 중
+  컨설턴트·학생·학부모가 참고할 만한 항목은 전부 공개 화면에 노출되도록
+  UI를 계속 확장할 것 — 이 지시는 200개교가 끝날 때까지 매 세션 인계
+  기록에 계속 전달되어야 한다.
