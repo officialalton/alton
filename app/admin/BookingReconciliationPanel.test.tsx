@@ -51,6 +51,12 @@ beforeEach(() => {
   vi.mocked(actions.retryExternalCalendarReconciliationNow).mockResolvedValue([]);
 });
 
+// 관리자 포털 정리 항목 4(2026-09-23) — 화면이 4개 서브탭으로 나뉘면서
+// "동기화 실패·재처리"(기본 탭) 외의 내용은 해당 서브탭을 먼저 열어야 보인다.
+function openTab(label: string) {
+  fireEvent.click(screen.getByText(label));
+}
+
 describe("BookingReconciliationPanel", () => {
   it("불일치 예약이 없으면 빈 상태 메시지를 보여준다", async () => {
     render(<BookingReconciliationPanel />);
@@ -123,6 +129,7 @@ describe("BookingReconciliationPanel", () => {
 
   it("지각·노쇼 신고가 없으면 빈 상태 메시지를 보여준다", async () => {
     render(<BookingReconciliationPanel />);
+    openTab("지각·노쇼·세션 판정");
     await waitFor(() => expect(screen.getByText("제출된 신고가 없습니다.")).toBeInTheDocument());
   });
 
@@ -137,6 +144,7 @@ describe("BookingReconciliationPanel", () => {
       ],
     });
     render(<BookingReconciliationPanel />);
+    openTab("지각·노쇼·세션 판정");
     await waitFor(() => expect(screen.getByText(/학생1 · 선생님1 선생님/)).toBeInTheDocument());
     expect(screen.getByText("선생님 지각")).toBeInTheDocument();
     expect(screen.getByText(/지각 15분/)).toBeInTheDocument();
@@ -145,6 +153,7 @@ describe("BookingReconciliationPanel", () => {
 
   it("외부 변경이 없으면 빈 상태 메시지를 보여준다", async () => {
     render(<BookingReconciliationPanel />);
+    openTab("외부 변경 감지");
     await waitFor(() => expect(screen.getByText("감지된 외부 변경이 없습니다.")).toBeInTheDocument());
   });
 
@@ -160,6 +169,7 @@ describe("BookingReconciliationPanel", () => {
     });
     vi.mocked(actions.resolveExternalCalendarChange).mockResolvedValue(undefined);
     render(<BookingReconciliationPanel />);
+    openTab("외부 변경 감지");
     await waitFor(() => expect(screen.getByText("Google에서 시간 변경됨")).toBeInTheDocument());
 
     fireEvent.click(screen.getByText("확인 처리"));
@@ -184,6 +194,7 @@ describe("BookingReconciliationPanel", () => {
     });
     vi.mocked(actions.resolveExternalChangeAcceptGoogleTime).mockResolvedValue(undefined);
     render(<BookingReconciliationPanel />);
+    openTab("외부 변경 감지");
     await waitFor(() => expect(screen.getByText("Google에서 시간 변경됨")).toBeInTheDocument());
 
     fireEvent.click(screen.getByText("확인 처리"));
@@ -206,6 +217,7 @@ describe("BookingReconciliationPanel", () => {
     });
     vi.mocked(actions.resolveExternalChangeKeepAltonTime).mockResolvedValue(undefined);
     render(<BookingReconciliationPanel />);
+    openTab("외부 변경 감지");
     await waitFor(() => expect(screen.getByText("Google에서 시간 변경됨")).toBeInTheDocument());
 
     fireEvent.click(screen.getByText("확인 처리"));
@@ -227,6 +239,7 @@ describe("BookingReconciliationPanel", () => {
       ],
     });
     render(<BookingReconciliationPanel />);
+    openTab("외부 변경 감지");
     await waitFor(() => expect(screen.getByText("Google에서 이벤트 삭제됨")).toBeInTheDocument());
     fireEvent.click(screen.getByText("확인 처리"));
     expect(screen.queryByText("Google 시간 반영")).not.toBeInTheDocument();
@@ -248,6 +261,7 @@ describe("BookingReconciliationPanel", () => {
     });
     vi.mocked(actions.resolveExternalChangeRecreateAfterDeletion).mockResolvedValue(undefined);
     render(<BookingReconciliationPanel />);
+    openTab("외부 변경 감지");
     await waitFor(() => expect(screen.getByText("Google에서 이벤트 삭제됨")).toBeInTheDocument());
     fireEvent.click(screen.getByText("확인 처리"));
     fireEvent.click(screen.getByText("ALTON 일정 유지(재생성)"));
@@ -268,6 +282,7 @@ describe("BookingReconciliationPanel", () => {
     });
     vi.mocked(actions.resolveExternalChangeCancelDueToDeletion).mockResolvedValue(undefined);
     render(<BookingReconciliationPanel />);
+    openTab("외부 변경 감지");
     await waitFor(() => expect(screen.getByText("Google에서 이벤트 삭제됨")).toBeInTheDocument());
     fireEvent.click(screen.getByText("확인 처리"));
     fireEvent.click(screen.getByText("예약 취소"));
@@ -323,6 +338,7 @@ describe("BookingReconciliationPanel", () => {
     });
     vi.mocked(actions.adminFinalizeLessonSession).mockResolvedValue(undefined);
     render(<BookingReconciliationPanel />);
+    openTab("지각·노쇼·세션 판정");
     await waitFor(() => expect(screen.getByText(/지훈 · 김선생/)).toBeInTheDocument());
     expect(screen.getByText("신고 1건")).toBeInTheDocument();
 
@@ -356,6 +372,7 @@ describe("BookingReconciliationPanel", () => {
     });
     vi.mocked(actions.adminReopenSession).mockResolvedValue(undefined);
     render(<BookingReconciliationPanel />);
+    openTab("지각·노쇼·세션 판정");
     await waitFor(() => expect(screen.getByText("재개방(재판정 필요)")).toBeInTheDocument());
     fireEvent.click(screen.getByText("재개방(재판정 필요)"));
     fireEvent.change(screen.getByPlaceholderText(/선생님이 완료를 잘못 눌렀음/), { target: { value: "실제로는 선생님 노쇼" } });
@@ -388,6 +405,7 @@ describe("BookingReconciliationPanel", () => {
     });
     vi.mocked(actions.resolveSessionJudgmentReconciliationTask).mockResolvedValue({ result: "resolved" });
     render(<BookingReconciliationPanel />);
+    openTab("메이크업·정산 조정");
     await waitFor(() => expect(screen.getByText("반영 필요")).toBeInTheDocument());
     fireEvent.click(screen.getByText("반영"));
     await waitFor(() =>
@@ -400,6 +418,7 @@ describe("BookingReconciliationPanel", () => {
 
   it("2026-09-05: 대사 작업이 없으면 빈 상태 메시지를 보여준다", async () => {
     render(<BookingReconciliationPanel />);
+    openTab("메이크업·정산 조정");
     await waitFor(() => expect(screen.getByText("대사 작업이 없습니다.")).toBeInTheDocument());
   });
 
@@ -426,6 +445,7 @@ describe("BookingReconciliationPanel", () => {
     });
     vi.mocked(actions.setReconciliationTaskStudentCancelledDisposition).mockResolvedValue(undefined);
     render(<BookingReconciliationPanel />);
+    openTab("메이크업·정산 조정");
 
     await waitFor(() => expect(screen.getByText("수업권 처리 방식 선택")).toBeInTheDocument());
     expect(screen.queryByText("반영")).not.toBeInTheDocument();

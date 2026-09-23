@@ -5,6 +5,7 @@
 
 import { useState } from "react";
 import { useTabCachedData } from "./use-tab-cached-data";
+import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import {
   loadBookingReconciliationDashboardAction,
   retryCalendarSyncNow,
@@ -92,6 +93,16 @@ function ListSkeleton({ rows = 3 }: { rows?: number }) {
 // 분류돼 TTL 10초를 쓴다.
 const BOOKING_TTL_MS = 10_000;
 
+// 관리자 포털 정리 항목 4(2026-09-23, 사용자 승인) — 이 화면이 서브탭 없이
+// 7개 섹션을 한 화면에 쌓아 보여주던 것을 의미 있는 4개 서브탭으로 묶는다.
+const BOOKING_SUBTABS = [
+  { id: "sync", label: "동기화 실패·재처리" },
+  { id: "external", label: "외부 변경 감지" },
+  { id: "judgment", label: "지각·노쇼·세션 판정" },
+  { id: "settlement", label: "메이크업·정산 조정" },
+] as const;
+type BookingSubtabId = (typeof BOOKING_SUBTABS)[number]["id"];
+
 export default function BookingReconciliationPanel({
   initialDashboard,
 }: {
@@ -147,6 +158,7 @@ export default function BookingReconciliationPanel({
   // 진행 중 표시로도 같이 썼다. loading을 캐시 기반 "아직 한 번도 못 읽음"
   // 의미로 좁히면서, 저 세 액션 진행 중 버튼 비활성화는 별도 플래그로 분리했다.
   const [actionBusy, setActionBusy] = useState(false);
+  const [subtab, setSubtab] = useState<BookingSubtabId>("sync");
 
   async function handleResolveReconciliationTask(taskId: string) {
     setResolvingTaskId(taskId);
@@ -405,9 +417,6 @@ export default function BookingReconciliationPanel({
           </button>
         </div>
       </div>
-      <p className="text-[13px] text-grey-500 mb-5">
-        Google Calendar·Meet 생성이 실패했거나 재시도 한도(5회)를 넘긴 예약입니다. 예약·수업권 보류 상태는 영향받지 않습니다.
-      </p>
 
       {message && <div className="mb-4 text-[13px] font-semibold text-ink bg-green/10 rounded-lg px-4 py-3">{message}</div>}
       {error && <div className="mb-4 text-[13px] font-semibold text-red bg-red/5 rounded-lg px-4 py-3">{error}</div>}
@@ -426,6 +435,16 @@ export default function BookingReconciliationPanel({
           </ul>
         </div>
       )}
+
+      <div className="mb-5">
+        <UnderlineSubTabs items={BOOKING_SUBTABS} activeId={subtab} onSelect={setSubtab} />
+      </div>
+
+      {subtab === "sync" && (
+      <>
+      <p className="text-[13px] text-grey-500 mb-5">
+        Google Calendar·Meet 생성이 실패했거나 재시도 한도(5회)를 넘긴 예약입니다. 예약·수업권 보류 상태는 영향받지 않습니다.
+      </p>
 
       {outboxSummary && outboxSummary.length > 0 && (
         <div className="mb-6">
@@ -514,13 +533,13 @@ export default function BookingReconciliationPanel({
           </div>
         ))
       )}
+      </>
+      )}
 
-      <h2 className="text-[14px] font-bold text-ink mb-2 mt-8">Google 외부 변경 감지</h2>
-      <p className="text-[12px] text-grey-500 mb-3">
-        선생님/관리자가 Google Calendar에서 이 수업 이벤트를 ALTON 모르게 직접 바꿨을 때만
-        여기 나타납니다. 예약·세션·수업권 보류 상태는 감지만으로는 전혀 바뀌지 않습니다 — 아래에서
-        관리자가 확인 처리해야만 확정됩니다. **UI 고도화 예정**: 지금은 이 목록 형태로만
-        제공하고, 선생님별 금주/주간/월간 통합 일정 캘린더 뷰는 후속 작업으로 남아 있습니다.
+      {subtab === "external" && (
+      <>
+      <p className="text-[13px] text-grey-500 mb-5">
+        선생님·관리자가 Google Calendar에서 수업 이벤트를 ALTON 모르게 직접 바꾼 건입니다. 관리자가 확인 처리해야만 확정됩니다.
       </p>
       {externalChanges === null ? (
         <ListSkeleton />
@@ -638,11 +657,14 @@ export default function BookingReconciliationPanel({
           </div>
         ))
       )}
+      </>
+      )}
 
-      <h2 className="text-[14px] font-bold text-ink mb-2 mt-8">지각·노쇼 신고 (최근 100건)</h2>
+      {subtab === "judgment" && (
+      <>
+      <h2 className="text-[14px] font-bold text-ink mb-2">지각·노쇼 신고 (최근 100건)</h2>
       <p className="text-[12px] text-grey-500 mb-3">
-        학생·보호자·선생님이 제출한 신고 원문입니다. 이 신고 자체는 출석을 확정하지 않습니다 —
-        최종 판정은 아래 &ldquo;세션 최종판정&rdquo; 섹션에서 관리자가 명확한 규칙 기반 함수로 직접 확정합니다.
+        학생·보호자·선생님이 제출한 신고 원문입니다. 최종 판정은 아래 &ldquo;세션 최종판정&rdquo;에서 관리자가 직접 확정합니다.
       </p>
       {!incidentReports || incidentReports.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
@@ -886,11 +908,14 @@ export default function BookingReconciliationPanel({
           </div>
         ))
       )}
+      </>
+      )}
 
-      <h2 className="text-[14px] font-bold text-ink mb-2 mt-8">잔여 보충시간 (미이행 지각·장애분)</h2>
+      {subtab === "settlement" && (
+      <>
+      <h2 className="text-[14px] font-bold text-ink mb-2">잔여 보충시간 (미이행 지각·장애분)</h2>
       <p className="text-[12px] text-grey-500 mb-3">
-        선생님 지각 당일 연장으로 다 못 채운 분, 회사·Meet 장애로 중단돼 못 제공한 분이 여기 쌓입니다. 학생의
-        미래 정규 예약 ID를 입력해 그 예약 뒤에 이어붙이면 소비됩니다(새 예약 생성 없음, 수업권 추가 소진 없음).
+        선생님 지각·회사 장애로 못 채운 시간입니다. 학생의 미래 예약 ID에 이어붙이면 소비됩니다(새 예약·추가 수업권 소진 없음).
       </p>
       {makeupObligations === null ? (
         <ListSkeleton />
@@ -1094,6 +1119,8 @@ export default function BookingReconciliationPanel({
             )}
           </div>
         ))
+      )}
+      </>
       )}
     </div>
   );
