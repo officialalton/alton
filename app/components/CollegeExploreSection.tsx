@@ -9,6 +9,7 @@ import {
   listUniversities,
   getUniversityDetailForStudent,
   loadAdmissionMetrics,
+  loadUniversityEssayPrompts,
   type UniversitySummary,
   type UniversityDetail,
   type AdmissionCycle,
@@ -16,7 +17,8 @@ import {
   type AdmissionMetricCohort,
   type UniversityMajor,
   type UniversityUpdateEntry,
-  type EssayPrompt,
+  type UniversityEssayPrompt,
+  type EssayPrompt as LegacyEssayPrompt,
   type UniversitySourceUrl,
 } from "@/lib/universities/actions";
 import { listMySubmittedSourceUrls, proposeUniversitySourceUrl, reportUniversityDataIssue } from "@/lib/universities/user-actions";
@@ -108,8 +110,10 @@ function CollegeDetail({
   onBack: () => void;
   canProposeSourceUrl?: boolean;
 }) {
-  const [detail, setDetail] = useState<{ university: UniversityDetail; cycles: AdmissionCycle[]; updates: UniversityUpdateEntry[]; majors: UniversityMajor[]; essayPrompts: EssayPrompt[]; sourceUrls: UniversitySourceUrl[] } | null>(null);
+  const [detail, setDetail] = useState<{ university: UniversityDetail; cycles: AdmissionCycle[]; updates: UniversityUpdateEntry[]; majors: UniversityMajor[]; essayPrompts: LegacyEssayPrompt[]; sourceUrls: UniversitySourceUrl[] } | null>(null);
   const [metrics, setMetrics] = useState<AdmissionMetric[] | null>(null);
+  const [essayCycleYear, setEssayCycleYear] = useState<number | null>(null);
+  const [essays, setEssays] = useState<UniversityEssayPrompt[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -127,6 +131,16 @@ function CollegeDetail({
       })
       .catch(() => {
         if (!cancelled) setMetrics([]);
+      });
+    loadUniversityEssayPrompts(universityId)
+      .then((rows) => {
+        if (cancelled) return;
+        setEssays(rows);
+        const years = Array.from(new Set(rows.map((r) => r.cycleYear))).sort((a, b) => b - a);
+        setEssayCycleYear((prev) => prev ?? years[0] ?? null);
+      })
+      .catch(() => {
+        if (!cancelled) setEssays([]);
       });
     return () => {
       cancelled = true;
@@ -186,21 +200,8 @@ function CollegeDetail({
 
           {metrics && metrics.length > 0 && <AdmittedStudentProfileCard metrics={metrics} />}
 
-          {detail.essayPrompts.length > 0 && (
-            <div className={cardClass}>
-              <div className={cardTitleClass}>자체 에세이 문항({detail.essayPrompts[0]?.cycleYear} 사이클)</div>
-              {detail.essayPrompts
-                .filter((e) => e.cycleYear === detail.essayPrompts[0]?.cycleYear)
-                .map((e) => (
-                  <div key={e.id} className="mb-2 text-[12.5px]">
-                    <div className="text-ink">{e.promptText}</div>
-                    <div className="text-[11px] text-grey-500">
-                      {e.wordLimit ? `${e.wordLimit}단어 이내` : ""}
-                      {e.isRequired ? "" : " · 선택"}
-                    </div>
-                  </div>
-                ))}
-            </div>
+          {essays && essays.length > 0 && (
+            <EssaysSection essays={essays} cycleYear={essayCycleYear} onChangeCycleYear={setEssayCycleYear} />
           )}
 
           {detail.majors.length > 0 && (
@@ -254,6 +255,124 @@ function CollegeDetail({
           <ReportIssueForm universityId={universityId} />
         </>
       )}
+    </div>
+  );
+}
+
+const ESSAY_TYPE_LABEL: Record<string, string> = {
+  common_app: "공통 지원서(Common App 등)",
+  school_specific: "대학 자체 추가 에세이",
+  short_answer: "짧은 답변 / 활동 설명",
+  program_conditional: "단과대·전공별 조건부 문항",
+};
+
+const APPLICATION_PATH_LABEL: Record<string, string> = {
+  ED: "조기전형(ED)",
+  ED2: "조기전형2(ED2)",
+  EA: "얼리액션(EA)",
+  RD: "정시(RD)",
+  transfer: "편입",
+  international: "국제학생",
+};
+
+/** "Essays & Writing" 섹션 — 지원연도 선택, 유형별 분리 표시, 선택규칙("N개 중 M개") 그대로,
+ * 조건부 문항 적용범위 명시, 확인상태 배지(올해 확인완료/확인중, 지난연도 참고용 구분). */
+function EssaysSection({
+  essays,
+  cycleYear,
+  onChangeCycleYear,
+}: {
+  essays: UniversityEssayPrompt[];
+  cycleYear: number | null;
+  onChangeCycleYear: (y: number) => void;
+}) {
+  const years = Array.from(new Set(essays.map((e) => e.cycleYear))).sort((a, b) => b - a);
+  const shown = cycleYear != null ? essays.filter((e) => e.cycleYear === cycleYear) : essays;
+
+  const byType: Record<string, UniversityEssayPrompt[]> = {};
+  for (const e of shown) {
+    (byType[e.promptType] ??= []).push(e);
+  }
+
+  const requiredCount = shown.filter((e) => e.isRequired && e.selectionGroupId == null).length;
+  const groups = new Map<string, UniversityEssayPrompt[]>();
+  for (const e of shown) {
+    if (e.selectionGroupId) {
+      const arr = groups.get(e.selectionGroupId) ?? [];
+      arr.push(e);
+      groups.set(e.selectionGroupId, arr);
+    }
+  }
+
+  function statusBadge(e: UniversityEssayPrompt) {
+    if (e.promptStatus === "confirmed_current_year") {
+      return <span className="ml-1.5 rounded px-1.5 py-0.5 text-[10px] bg-green-100 text-green-700">올해 문항 확인완료</span>;
+    }
+    if (e.promptStatus === "prior_year_reference") {
+      return <span className="ml-1.5 rounded px-1.5 py-0.5 text-[10px] bg-grey-200 text-grey-600">작년 문항 — 참고용, 올해 문항 아님</span>;
+    }
+    return <span className="ml-1.5 rounded px-1.5 py-0.5 text-[10px] bg-yellow-100 text-yellow-700">확인 중</span>;
+  }
+
+  return (
+    <div className={cardClass}>
+      <div className="flex items-center justify-between mb-2">
+        <div className={cardTitleClass}>Essays & Writing</div>
+        {years.length > 1 && (
+          <select
+            value={cycleYear ?? years[0]}
+            onChange={(e) => onChangeCycleYear(Number(e.target.value))}
+            className="text-[11.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1"
+          >
+            {years.map((y) => (
+              <option key={y} value={y}>
+                {y} 사이클
+              </option>
+            ))}
+          </select>
+        )}
+      </div>
+
+      {(requiredCount > 0 || groups.size > 0) && (
+        <div className="mb-3 text-[12px] text-ink bg-grey-100 rounded-lg px-3 py-2">
+          이번 지원에 작성해야 할 것: 필수 문항 {requiredCount}개
+          {Array.from(groups.entries()).map(([gid, rows]) => (
+            <span key={gid}>
+              {", "}
+              {rows[0]?.groupSize ?? rows.length}개 중 {rows[0]?.selectCount ?? "?"}개 선택
+            </span>
+          ))}
+        </div>
+      )}
+
+      {Object.entries(byType).map(([type, rows]) => (
+        <div key={type} className="mb-3">
+          <div className="text-[11px] font-bold text-grey-400 uppercase tracking-wide mb-1">{ESSAY_TYPE_LABEL[type] ?? type}</div>
+          {rows.map((e) => (
+            <div key={e.id} className="mb-2 text-[12.5px]">
+              <div className="text-ink">
+                {e.title && <span className="font-bold">{e.title}: </span>}
+                {e.promptText ?? e.topicSummary ?? "(주제 미확보)"}
+                {statusBadge(e)}
+              </div>
+              <div className="text-[11px] text-grey-500">
+                {e.selectionGroupId
+                  ? `${e.groupSize ?? "?"}개 중 ${e.selectCount ?? "?"}개 선택`
+                  : e.isRequired
+                    ? "필수"
+                    : "선택"}
+                {e.wordLimitMax ? ` · ${e.wordLimitMin ? `${e.wordLimitMin}~` : ""}${e.wordLimitMax}단어 이내` : ""}
+                {e.charLimit ? ` · ${e.charLimit}자 이내` : ""}
+                {e.appliesToSchool ? ` · 적용: ${e.appliesToSchool}` : ""}
+                {e.appliesToMajors && e.appliesToMajors.length > 0 ? ` · 전공: ${e.appliesToMajors.join(", ")}` : ""}
+                {e.applicationPaths && e.applicationPaths.length > 0
+                  ? ` · 지원경로: ${e.applicationPaths.map((p) => APPLICATION_PATH_LABEL[p] ?? p).join(", ")}`
+                  : ""}
+              </div>
+            </div>
+          ))}
+        </div>
+      ))}
     </div>
   );
 }

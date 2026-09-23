@@ -159,16 +159,80 @@
   이 영역에 원래 없던 관례를 따름, 아래 결정 필요 참고).
 - `npx supabase db push --linked`, `vercel deploy` 미실행(지시대로 금지).
 
+## C. 지원요강·에세이(지원연도/경로별) — 4차 세션(2026-09-23) 완주
+
+### 완료
+- **마이그레이션**: `supabase/migrations/20261500000000_college_db_p8_essay_prompts.sql`.
+  기존 `university_essay_prompts`(P5, 20261428000000)는 "자체 supplement 에세이 원문 +
+  글자수 + 필수여부"만 표현 가능한 레거시 테이블이었다 — 새 테이블을 만드는 대신(이름이
+  이미 존재해 `create table if not exists`가 조용히 스킵되는 것을 확인한 뒤) 같은 테이블에
+  `ALTER TABLE ... ADD COLUMN IF NOT EXISTS`로 additive 확장했다(지시서의 "옆에 두거나
+  확장 컬럼 추가" 원칙 그대로). 기존 컬럼(`prompt_text`, `word_limit`, `is_required`,
+  `created_at`) 삭제 없음 — `prompt_text`만 NOT NULL 제약을 완화(공통지원서 등 원문
+  미확보 시 `topic_summary`만으로 저장 가능해야 해서).
+- **새 컬럼**: `prompt_type`(common_app/school_specific/short_answer/program_conditional),
+  `title`/`topic_summary`, 선택규칙(`selection_group_id`+`select_count`+`group_size` —
+  "N개 중 M개 선택"을 개수로 뭉개지 않고 그룹 단위로 표현), 조건부 적용범위
+  (`applies_to_school`/`applies_to_majors`/`application_paths` — ED/EA/RD/편입/국제학생 등),
+  `word_limit_min`/`word_limit_max`/`char_limit`, `source_url_id`(→`university_source_urls`),
+  확인상태 `prompt_status`(`confirmed_current_year`/`unconfirmed_current_year`/
+  `prior_year_reference` — 올해 확인완료/올해 확인중/작년 참고용을 명확히 구분),
+  `last_verified_at`, `reviewed_by`/`reviewed_at`/`review_note`, `notes`, `updated_at`(+트리거).
+- **RLS**: 읽기는 로그인 사용자 전원(`auth.role() = 'authenticated'`, 미확인/지난연도
+  포함 전부 반환 — 숨기지 않고 화면 배지로 구분하는 기존 P7 원칙과 동일), 쓰기(추가/
+  수정/삭제/검토)는 `is_admin()`만.
+- **서버 액션**(`lib/universities/actions.ts`): 레거시 `EssayPrompt` 타입과 이름이
+  충돌해 새 타입/함수는 `UniversityEssayPrompt`/`listUniversityEssayPrompts`/
+  `loadUniversityEssayPrompts`/`upsertUniversityEssayPrompt`/`reviewUniversityEssayPrompt`/
+  `deleteUniversityEssayPrompt`로 명명(레거시 `EssayPrompt`/`loadUniversityDetail`의
+  `essayPrompts` 필드는 그대로 유지, 다른 소비자 없음 확인 후 화면에서만 새 함수로 교체).
+- **관리자 화면**(`app/admin/universities/UniversitiesPanel.tsx`): `EssayPromptsSection`
+  추가(대학 상세 → 학업 지표 섹션 다음) — 연도/유형/제목/원문 또는 주제요약/선택규칙
+  (N/M)/글자수 상한/적용경로(콤마 구분 입력)/필수여부/확인상태/비고 입력 폼, 목록 테이블에서
+  확인상태를 드롭다운으로 바로 변경(검토), 행별 삭제.
+- **공개 화면**(`app/components/CollegeExploreSection.tsx`): 레거시 "자체 에세이 문항"
+  카드를 새 `EssaysSection`으로 교체 — 지원연도 선택(연도가 여럿이면 드롭다운), 유형별로
+  묶어서 표시, 선택규칙 그대로 노출("N개 중 M개 선택"), 조건부 문항은 단과대/전공/지원경로
+  명시, 상단에 "이번 지원에 작성해야 할 것"(필수 문항 개수 + 선택규칙 요약) 배너,
+  각 문항에 확인상태 배지(올해 확인완료=녹색/확인 중=노랑/"작년 문항 — 참고용, 올해
+  문항 아님"=회색 톤으로 명확히 구분).
+- **실데이터 백필**: 200개교 조사 자료 기반으로 Princeton/MIT/Harvard/Stanford/Yale
+  5개교(지시서 요구 3~5개교 충족) 이관 — Common App 공통에세이(7개 중 1개 선택,
+  전 5개교 공통, `unconfirmed_current_year`), MIT 자체 에세이 4문항(2025-2026 사이클
+  자료라 `prior_year_reference`로 정직하게 구분), Stanford 공학 단과대 조건부 문항
+  (`unconfirmed_current_year`), Yale 짧은답변(`unconfirmed_current_year`), Harvard
+  국제학생 조건부 문항(`application_paths=['international']`, `unconfirmed_current_year`).
+  원문 미확보 문항은 `topic_summary`만 채우고 추측으로 `prompt_text`를 만들어 넣지 않음
+  — `official`/`confirmed_current_year` 값은 이 백필에 전혀 없음(공식 사이트 원문 대조
+  전까지 의도적으로 사용하지 않음).
+
+### 검증
+- `supabase db reset --local` — 전체 마이그레이션(P8 포함) 정상 적용 확인(최초 시도 시
+  `create table if not exists`가 기존 P5 테이블 때문에 스킵되어 컬럼 참조 오류 발생 →
+  ALTER 방식으로 재작성 후 정상).
+- `psql`로 `university_essay_prompts` 백필 확인: `common_app/unconfirmed_current_year` 5행,
+  `program_conditional/unconfirmed_current_year` 2행, `school_specific/prior_year_reference`
+  4행, `short_answer/unconfirmed_current_year` 1행.
+- `npx tsc --noEmit` — 이번 변경 관련 신규 오류 없음(기존 `app/layout.tsx`의
+  `LayoutProps` 오류만 남음, 무관한 사전 존재 이슈).
+- `npx eslint lib/universities/actions.ts app/admin/universities/UniversitiesPanel.tsx
+  app/components/CollegeExploreSection.tsx` — 오류 없음.
+- `npx vitest run scripts/universities-seed.test.ts` — 3/3 통과(이 영역 유일한 기존 테스트).
+- `npx supabase db push --linked`, `vercel deploy` 미실행(지시대로 금지).
+
 ### 미완료 (다음 세션이 이어감)
-- **C(에세이 프롬프트 확장)** — 착수하지 않음. `university_essay_prompts`는 존재하나
-  공통/자체/짧은답변/조건부(단과대·전공)/선택규칙 구분 컬럼 없음(3차 세션 메모와 동일).
 - **D(수집봇)** — 착수하지 않음.
 - **E(10개교 UAT → 200개교 상태 관리)** — 착수하지 않음.
 
 ### 결정 필요
-- `university_admission_metrics`에 대한 전용 vitest(액션 단위 테스트)가 없다 —
-  이 영역의 다른 서버 액션들도 대부분 DB 연동 통합 테스트가 없는 관례라 이번에도
-  추가하지 않았지만, C/D/E 이후 한 번은 액션 계층 테스트를 갖출지 결정이 필요하다.
-- 관리자 화면의 지표 입력 폼이 지표당 1행씩 개별 저장하는 단순 폼이다(엑셀처럼
-  여러 지표를 한 번에 붙여넣는 대량 입력 UI는 아님) — 200개교 규모로 갈 때 이대로 충분한지
+- `university_admission_metrics`/`university_essay_prompts`에 대한 전용 vitest(액션 단위
+  테스트)가 없다 — 이 영역의 다른 서버 액션들도 대부분 DB 연동 통합 테스트가 없는
+  관례라 이번에도 추가하지 않았지만, D/E 이후 한 번은 액션 계층 테스트를 갖출지 결정이
+  필요하다.
+- 관리자 화면의 지표/에세이 입력 폼이 행당 1개씩 개별 저장하는 단순 폼이다(엑셀처럼
+  여러 항목을 한 번에 붙여넣는 대량 입력 UI는 아님) — 200개교 규모로 갈 때 이대로 충분한지
   다음 세션(E)에서 재검토 필요.
+- 에세이 "선택 그룹"(N개 중 M개)을 관리자 화면에서 만들 때 `selection_group_id`를
+  자동 생성/공유하는 UI가 없다(각 행을 개별 저장, 같은 그룹으로 묶으려면 DB에서 직접
+  `selection_group_id`를 맞춰야 함) — 문항 수가 많아지면 "그룹 만들기" 전용 UI가 필요할
+  수 있다.

@@ -893,3 +893,229 @@ export async function deleteAdmissionMetric(metricId: string): Promise<void> {
   if (error) throw new Error(error.message);
   revalidatePath("/admin/universities");
 }
+
+// --- 지원요강·에세이 문항(Essay Prompts, P8 2026-09-23) ----------------------
+//
+// 스키마: supabase/migrations/20261500000000_college_db_p8_essay_prompts.sql
+// (원본 테이블: P5 20261428000000 — 자체 supplement 에세이만 표현하던 레거시를 additive 확장)
+
+export type UniversityEssayPromptType = "common_app" | "school_specific" | "short_answer" | "program_conditional";
+export type UniversityEssayPromptStatus = "confirmed_current_year" | "unconfirmed_current_year" | "prior_year_reference";
+
+export type UniversityEssayPrompt = {
+  id: string;
+  universityId: string;
+  cycleYear: number;
+  promptType: UniversityEssayPromptType;
+  title: string | null;
+  promptText: string | null;
+  topicSummary: string | null;
+  selectionGroupId: string | null;
+  selectCount: number | null;
+  groupSize: number | null;
+  isRequired: boolean;
+  appliesToSchool: string | null;
+  appliesToMajors: string[] | null;
+  applicationPaths: string[] | null;
+  wordLimitMin: number | null;
+  wordLimitMax: number | null;
+  charLimit: number | null;
+  sourceUrlId: string | null;
+  promptStatus: UniversityEssayPromptStatus;
+  lastVerifiedAt: string | null;
+  reviewedBy: string | null;
+  reviewedAt: string | null;
+  reviewNote: string | null;
+  notes: string | null;
+  createdAt: string;
+};
+
+const ESSAY_PROMPT_COLUMNS =
+  "id, university_id, cycle_year, prompt_type, title, prompt_text, topic_summary, selection_group_id, select_count, group_size, is_required, applies_to_school, applies_to_majors, application_paths, word_limit_min, word_limit_max, char_limit, source_url_id, prompt_status, last_verified_at, reviewed_by, reviewed_at, review_note, notes, created_at";
+
+function mapUniversityEssayPromptRow(row: {
+  id: string;
+  university_id: string;
+  cycle_year: number;
+  prompt_type: UniversityEssayPromptType;
+  title: string | null;
+  prompt_text: string | null;
+  topic_summary: string | null;
+  selection_group_id: string | null;
+  select_count: number | null;
+  group_size: number | null;
+  is_required: boolean;
+  applies_to_school: string | null;
+  applies_to_majors: string[] | null;
+  application_paths: string[] | null;
+  word_limit_min: number | null;
+  word_limit_max: number | null;
+  char_limit: number | null;
+  source_url_id: string | null;
+  prompt_status: UniversityEssayPromptStatus;
+  last_verified_at: string | null;
+  reviewed_by: string | null;
+  reviewed_at: string | null;
+  review_note: string | null;
+  notes: string | null;
+  created_at: string;
+}): UniversityEssayPrompt {
+  return {
+    id: row.id,
+    universityId: row.university_id,
+    cycleYear: row.cycle_year,
+    promptType: row.prompt_type,
+    title: row.title,
+    promptText: row.prompt_text,
+    topicSummary: row.topic_summary,
+    selectionGroupId: row.selection_group_id,
+    selectCount: row.select_count,
+    groupSize: row.group_size,
+    isRequired: row.is_required,
+    appliesToSchool: row.applies_to_school,
+    appliesToMajors: row.applies_to_majors,
+    applicationPaths: row.application_paths,
+    wordLimitMin: row.word_limit_min,
+    wordLimitMax: row.word_limit_max,
+    charLimit: row.char_limit,
+    sourceUrlId: row.source_url_id,
+    promptStatus: row.prompt_status,
+    lastVerifiedAt: row.last_verified_at,
+    reviewedBy: row.reviewed_by,
+    reviewedAt: row.reviewed_at,
+    reviewNote: row.review_note,
+    notes: row.notes,
+    createdAt: row.created_at,
+  };
+}
+
+/** 관리자 화면 — 대학 하나의 에세이 문항 전체(모든 연도·유형) 조회, 편집 화면용. */
+export async function listUniversityEssayPrompts(universityId: string): Promise<UniversityEssayPrompt[]> {
+  await requireAdmin();
+  const db = createAdminClient();
+  const { data, error } = await db
+    .from("university_essay_prompts")
+    .select(ESSAY_PROMPT_COLUMNS)
+    .eq("university_id", universityId)
+    .order("cycle_year", { ascending: false })
+    .order("prompt_type", { ascending: true })
+    .order("created_at", { ascending: true });
+  if (error) throw new Error(error.message);
+  return (data ?? []).map(mapUniversityEssayPromptRow);
+}
+
+/**
+ * 공개 조회 — 학생/보호자/컨설턴트 화면용. 미확인/지난연도 포함 전부 반환한다(정책상
+ * 숨기지 않음 — 화면에서 확인상태 배지로 명시). cycle_year 내림차순 정렬로 반환하므로
+ * 화면에서 지원연도 선택 필터로 그대로 쓰면 된다.
+ */
+export async function loadUniversityEssayPrompts(universityId: string, cycleYear?: number): Promise<UniversityEssayPrompt[]> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("로그인이 필요합니다.");
+  const db = createAdminClient();
+  let query = db
+    .from("university_essay_prompts")
+    .select(ESSAY_PROMPT_COLUMNS)
+    .eq("university_id", universityId)
+    .order("cycle_year", { ascending: false })
+    .order("prompt_type", { ascending: true })
+    .order("created_at", { ascending: true });
+  if (cycleYear != null) query = query.eq("cycle_year", cycleYear);
+  const { data, error } = await query;
+  if (error) throw new Error(error.message);
+  return (data ?? []).map(mapUniversityEssayPromptRow);
+}
+
+export type UpsertUniversityEssayPromptInput = {
+  id?: string;
+  universityId: string;
+  cycleYear: number;
+  promptType: UniversityEssayPromptType;
+  title?: string | null;
+  promptText?: string | null;
+  topicSummary?: string | null;
+  selectionGroupId?: string | null;
+  selectCount?: number | null;
+  groupSize?: number | null;
+  isRequired?: boolean;
+  appliesToSchool?: string | null;
+  appliesToMajors?: string[] | null;
+  applicationPaths?: string[] | null;
+  wordLimitMin?: number | null;
+  wordLimitMax?: number | null;
+  charLimit?: number | null;
+  sourceUrlId?: string | null;
+  promptStatus: UniversityEssayPromptStatus;
+  notes?: string | null;
+};
+
+/** 관리자 — 문항 추가(id 없음) 또는 수정(id 있음). */
+export async function upsertUniversityEssayPrompt(input: UpsertUniversityEssayPromptInput): Promise<void> {
+  await requireAdmin();
+  const db = createAdminClient();
+  const payload = {
+    university_id: input.universityId,
+    cycle_year: input.cycleYear,
+    prompt_type: input.promptType,
+    title: input.title ?? null,
+    prompt_text: input.promptText ?? null,
+    topic_summary: input.topicSummary ?? null,
+    selection_group_id: input.selectionGroupId ?? null,
+    select_count: input.selectCount ?? null,
+    group_size: input.groupSize ?? null,
+    is_required: input.isRequired ?? true,
+    applies_to_school: input.appliesToSchool ?? null,
+    applies_to_majors: input.appliesToMajors ?? null,
+    application_paths: input.applicationPaths ?? null,
+    word_limit_min: input.wordLimitMin ?? null,
+    word_limit_max: input.wordLimitMax ?? null,
+    char_limit: input.charLimit ?? null,
+    source_url_id: input.sourceUrlId ?? null,
+    prompt_status: input.promptStatus,
+    notes: input.notes ?? null,
+    updated_at: new Date().toISOString(),
+  };
+  if (input.id) {
+    const { error } = await db.from("university_essay_prompts").update(payload).eq("id", input.id);
+    if (error) throw new Error(error.message);
+  } else {
+    const { error } = await db.from("university_essay_prompts").insert(payload);
+    if (error) throw new Error(error.message);
+  }
+  revalidatePath("/admin/universities");
+}
+
+/** 관리자 — 문항 검토(확인상태 갱신 + 확인일 기록). */
+export async function reviewUniversityEssayPrompt(input: {
+  promptId: string;
+  promptStatus: UniversityEssayPromptStatus;
+  reviewNote?: string | null;
+}): Promise<void> {
+  const { adminUserId } = await requireAdmin();
+  const db = createAdminClient();
+  const { error } = await db
+    .from("university_essay_prompts")
+    .update({
+      prompt_status: input.promptStatus,
+      reviewed_by: adminUserId,
+      reviewed_at: new Date().toISOString(),
+      review_note: input.reviewNote ?? null,
+      last_verified_at: input.promptStatus === "confirmed_current_year" ? new Date().toISOString().slice(0, 10) : null,
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", input.promptId);
+  if (error) throw new Error(error.message);
+  revalidatePath("/admin/universities");
+}
+
+/** 관리자 — 문항 삭제. */
+export async function deleteUniversityEssayPrompt(promptId: string): Promise<void> {
+  await requireAdmin();
+  const db = createAdminClient();
+  const { error } = await db.from("university_essay_prompts").delete().eq("id", promptId);
+  if (error) throw new Error(error.message);
+  revalidatePath("/admin/universities");
+}
