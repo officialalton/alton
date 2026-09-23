@@ -275,6 +275,11 @@ function MeetingOperations() {
   const [scheduleFormOpenId, setScheduleFormOpenId] = useState<string | null>(null);
   const [scheduleStarts, setScheduleStarts] = useState("");
   const [scheduleEnds, setScheduleEnds] = useState("");
+  // 관리자 포털 정리 항목 3(2026-09-23) — 담당 컨설턴트가 있는 요청은
+  // 기본적으로 컨설턴트 포털(app/consultant/meeting-actions.ts)에서 처리한다.
+  // 관리자는 전체 조회는 계속 하되, "관리자 개입"을 누른 건만 상태 변경
+  // 버튼을 보여준다(미배정 건은 항상 버튼이 보인다).
+  const [interveningIds, setInterveningIds] = useState<Set<string>>(new Set());
   const error = mutationError ?? fetchError;
 
   async function withBusy(id: string, fn: () => Promise<void>) {
@@ -307,7 +312,11 @@ function MeetingOperations() {
       <section className="mb-8">
         <h3 className="text-[13.5px] font-extrabold text-ink mb-2">면담 요청 목록</h3>
         {meetings.length === 0 && <p className="text-[13px] text-grey-500">면담 요청이 없습니다.</p>}
-        {meetings.map((m) => (
+        {meetings.map((m) => {
+          const isDelegated = !!m.consultantId;
+          const isIntervening = interveningIds.has(m.id);
+          const showActions = !isDelegated || isIntervening;
+          return (
           <div key={m.id} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3">
             <p className="text-[13.5px] font-bold text-ink">
               {m.householdLabel}{m.childName ? ` · ${m.childName}` : ""} — {MEETING_STATUS_LABEL[m.status] ?? m.status}
@@ -322,6 +331,20 @@ function MeetingOperations() {
                 {m.preferredContactTime ? ` · ${m.preferredContactTime}` : ""}
               </p>
             )}
+            {isDelegated && (
+              <div className="flex items-center gap-2 mt-2 bg-grey-100 rounded-lg px-3 py-1.5">
+                <span className="text-[11.5px] text-grey-500">담당 컨설턴트 {m.consultantName ?? "미상"}님이 처리 중입니다.</span>
+                {!isIntervening && m.status !== "completed" && m.status !== "cancelled" && (
+                  <button
+                    onClick={() => setInterveningIds((prev) => new Set(prev).add(m.id))}
+                    className="text-[11px] font-bold text-ink underline shrink-0"
+                  >
+                    관리자 개입
+                  </button>
+                )}
+              </div>
+            )}
+            {showActions && (
             <div className="flex gap-2 mt-3">
               {(() => {
                 const next = nextMeetingStatus(m.status);
@@ -414,9 +437,11 @@ function MeetingOperations() {
                 </button>
               )}
             </div>
+            )}
             {m.status === "completed" && <MeetingRequestReviewPanel meetingRequestId={m.id} />}
           </div>
-        ))}
+          );
+        })}
       </section>
 
       <section>

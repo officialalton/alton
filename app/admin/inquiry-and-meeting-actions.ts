@@ -129,6 +129,12 @@ export type AdminMeetingRequest = {
   householdId: string;
   householdLabel: string;
   childName: string | null;
+  // 관리자 포털 정리 항목 3(2026-09-23) — "담당 컨설턴트가 처리할 일반
+  // 상담 업무는 컨설턴트 포털로 옮기고, 관리자는 전체 조회·미배정·실패·
+  // 예외 개입에 집중" — 담당이 있는 요청인지 UI에서 구분하기 위해 추가.
+  // 전체 조회 자체는 계속 이 목록에서 가능하다(숨기지 않음).
+  consultantId: string | null;
+  consultantName: string | null;
   subject: string | null;
   content: string | null;
   contactPreference: "phone" | "message" | "either" | null;
@@ -152,7 +158,7 @@ async function loadMeetingRequestsForAdmin(
   const { data, error } = await admin
     .from("meeting_requests")
     .select(
-      "id, household_id, subject, content, contact_preference, preferred_contact_time, status, starts_at, ends_at, google_meet_link, created_at, household:households(guardian:profiles!households_primary_guardian_id_fkey(name)), child:profiles!meeting_requests_child_id_fkey(name)"
+      "id, household_id, subject, content, contact_preference, preferred_contact_time, status, starts_at, ends_at, google_meet_link, created_at, consultant_id, household:households(guardian:profiles!households_primary_guardian_id_fkey(name)), child:profiles!meeting_requests_child_id_fkey(name), consultant:profiles!meeting_requests_consultant_id_fkey(name)"
     )
     .order("created_at", { ascending: false })
     // 2026-09-10(P1-2) — 미래 데이터 증가 대비 상한. 최신순 정렬이라 최근 건이
@@ -166,11 +172,15 @@ async function loadMeetingRequestsForAdmin(
     const guardian = Array.isArray(guardianRel) ? guardianRel[0] : guardianRel;
     const childRel = r.child as { name?: string } | { name?: string }[] | null;
     const child = Array.isArray(childRel) ? childRel[0] : childRel;
+    const consultantRel = r.consultant as { name?: string } | { name?: string }[] | null;
+    const consultant = Array.isArray(consultantRel) ? consultantRel[0] : consultantRel;
     return {
       id: r.id,
       householdId: r.household_id,
       householdLabel: guardian?.name ? `${guardian.name} 가족` : "-",
       childName: child?.name ?? null,
+      consultantId: r.consultant_id,
+      consultantName: consultant?.name ?? null,
       subject: r.subject,
       content: r.content,
       contactPreference: r.contact_preference,
