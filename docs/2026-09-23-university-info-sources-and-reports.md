@@ -1393,7 +1393,7 @@ University of Virginia, Ohio State University는 GPA(C12)가 원문에서
 - 관리자 화면의 학과 목록 노출 여부는 이번 세션에서 확인하지 않음(데이터
   반영 우선) — 다음 세션 과제로 이월.
 
-### 다음 세션 인계
+### 다음 세션 인계 (16차 작성분)
 1. 브라우저 도구로 재시도: Fordham, SLU, DePaul, Pepperdine, Seton Hall,
    Syracuse, Iowa State(CDS), ASU/Loyola Chicago/Rowan(전공 목록).
 2. `type='common_data_set', status='approved'`이고 미처리인 나머지
@@ -1401,6 +1401,86 @@ University of Virginia, Ohio State University는 GPA(C12)가 원문에서
 3. 신규로 verified_pilot 되는 학교들도 전공 목록 상태(0건/부실) 확인 후
    보완.
 4. 관리자 화면에서 학과 목록이 실제로 표시되는지 확인.
+5. **200개교 전체가 끝나면 반드시 최종 통합보고서를 작성**하고 CDS 정보
+   노출 UI를 계속 확장할 것 — 이 지시는 200개교가 끝날 때까지 매 세션
+   인계 기록에 계속 전달되어야 한다.
+
+## 17차 세션 (2026-09-23, 이번 세션)
+
+솔직한 요약: 이번 세션은 브라우저/에이전트 도구 없이 `curl`(Chrome UA) +
+`pdftotext`만으로 직접 처리했고, 세션 예산(추론 강도) 제약으로 16차가
+지시한 128개교 전량 처리는 물리적으로 불가능했다. 실제로 완결 처리한
+학교 수는 예정보다 훨씬 적다. 아래는 실제로 검증·반영한 내용만 기록한다.
+
+### A. CDS 처리 — 실제 완료 3개교
+1. **American University** — CDS 2025-2026 PDF(`www.american.edu/provost/oira/upload/CDS-PDF-2025-2026_...pdf`)
+   원문에서 C1(지원/합격/등록), C9(SAT/ACT 25·50·75), B22(재학유지율
+   1444/1654=87.3%), B4-B21(6년 졸업률 75.49%, 2018 cohort), 학비
+   $62,680 확인 후 `university_admission_metrics`에 34행 반영
+   (cohort=Fall 2025, cycle_year=2025). GPA 평균 항목은 CDS 원문에
+   없어 미입력.
+2. **Tufts University** — CDS 2025-2026 PDF(provost.tufts.edu 직접
+   호스팅) 원문에서 C1 거주지별 합계(지원 33415/합격 3613/등록 1765),
+   C2 대기자명단(3061/1193/71), C9 SAT/ACT, B22 재학유지율
+   (1710/1796=95.21%), 6년 졸업률 94%, 학비 $74,862 확인 후 31행
+   반영(cycle_year=2025).
+3. **Illinois Institute of Technology** — CDS 2023-2024 PDF(iit.edu
+   직접 호스팅, 최신본이 이것뿐이라 cycle_year=2023) 원문에서 C1
+   거주지별 합계(지원 8912/합격 4939/등록 534), C9 SAT/ACT 전체
+   세부점수(ACT Writing/Science 포함), B22 재학유지율 87%(Fall 2022
+   cohort), 6년 졸업률 72%(2017 cohort) 확인 후 36행 반영. `pdftotext
+   -layout`이 SAT Composite 행을 오정렬해서 raw(-layout 미사용) 텍스트로
+   재확인 후 매핑을 바로잡았다(중요: composite 25/50/75=1190/1300/1400,
+   EBRW=570/640/690, Math=610/650/720).
+   - 세 학교 모두 `verification_status='official'`, `source_url_id`
+     연결, `verified_at`=오늘, notes에 cohort/연도/섹션 명시. 처리 후
+     `universities.data_collection_status='verified_pilot'`으로 갱신.
+
+### 시도했으나 실패한 학교 (이번 세션)
+- Clemson (open.clemson.edu/cds) — 최신 PDF 링크가 리다이렉트/로그인
+  래퍼로 감싸져 있어 `curl`로는 HTML만 받아짐(진짜 PDF 아님). 브라우저
+  도구 필요.
+- Elon University, University of Delaware, Oklahoma State, George Mason
+  — 기관 페이지가 JS 렌더링/위젯 기반이라 `curl`로는 PDF 링크 자체가
+  노출되지 않음.
+- 16차가 실패한 Fordham/SLU/DePaul/Pepperdine/Seton Hall/Syracuse/Iowa
+  State는 이번 세션에서 브라우저 도구를 쓰지 않았으므로(세션 지시상
+  가능했으나 시간 예산상) 재시도하지 못했다. 정직하게 미처리로 남긴다.
+
+### B. 학과 목록 보완 — 이번 세션 미착수
+세션 예산 제약으로 ASU/Loyola Chicago/Rowan 재시도 및 신규 CDS 3개교
+(American University, IIT — 둘 다 전공 0건 확인됨)의 학과 보완을
+진행하지 못했다. Tufts는 기존 10건 보유(이번 세션에서 추가하지 않음).
+
+### 검증
+- `psql`로 실제 반영 확인: American University 34행, Tufts 31행, IIT
+  36행, 총 101행 신규.
+- `data_collection_status` 분포(이번 세션 종료 시점, psql 직접 확인):
+  `verified_pilot` 42개교(39→42, +3), `sources_pending_review` 146개교,
+  `unconfirmed` 12개교.
+- CDS `approved` 소스가 있으나 아직 `verified_pilot`이 아닌 학교: 125개교
+  (161개교 목표 중 36개교 진행, 125개교 남음 — 16차의 "128개교" 추정치와
+  약간 차이나는 것은 세션 간 카운트 시점 차이 때문).
+- 이번 세션에서는 `docs/*.md`와 `university_admission_metrics`/
+  `universities` 테이블만 변경했다. 마이그레이션 추가 없음, `git add`는
+  이 문서 파일만 대상으로 함, `npx supabase db push --linked` /
+  `vercel deploy` 실행하지 않음. `npx tsc --noEmit`은 앱 코드 변경이
+  없어 스킵(변경 사항이 SQL/문서뿐).
+
+### 다음 세션 인계 (17차 작성분)
+1. **브라우저 기반 도구를 반드시 사용해서** Clemson, Elon, U Delaware,
+   Fordham, SLU, DePaul, Pepperdine, Seton Hall, Syracuse, Iowa State
+   CDS를 재시도할 것 — `curl`/WebFetch만으로는 이 학교들의 JS
+   렌더링/리다이렉트 벽을 못 넘는다는 것이 16~17차에 걸쳐 재확인됨.
+2. `status='approved'`이고 아직 `verified_pilot`이 아닌 나머지
+   약 122개교(위 3개교 제외) CDS 계속 처리. 직접 호스팅 PDF가 있는
+   학교(URL에 `.pdf` 또는 institutional research 서브도메인이 정적
+   HTML인 곳)부터 우선 처리하면 `curl`만으로도 처리 속도가 빠르다.
+3. American University, Illinois Institute of Technology(둘 다 전공
+   0건), ASU/Loyola Chicago/Rowan 학과 목록 보완을 다음 세션 최우선
+   과제로 이월.
+4. 관리자 화면에서 학과 목록/CDS 지표 노출 여부 확인 — 여러 세션째
+   이월 중, 아직 미확인.
 5. **200개교 전체가 끝나면 반드시 최종 통합보고서를 작성**하고 CDS 정보
    노출 UI를 계속 확장할 것 — 이 지시는 200개교가 끝날 때까지 매 세션
    인계 기록에 계속 전달되어야 한다.
