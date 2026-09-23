@@ -10,12 +10,15 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   listKanbanBoardAction,
+  listMyKanbanBoardAction,
   getConsultationCardDetailAction,
+  getMyConsultationCardDetailAction,
   getClosureDraftAction,
   closeConsultationAction,
   type KanbanCard,
   type ConsultationCardDetail,
 } from "./consultation-kanban-actions";
+import TeacherAssignmentRequestForm from "@/app/consultant/TeacherAssignmentRequestForm";
 import { getCachedTabData, setCachedTabData } from "./tab-data-cache";
 import {
   KANBAN_STAGE_ORDER,
@@ -71,6 +74,7 @@ export default function ConsultationKanbanBoard({
   subjects,
   teacherCandidatesBySubject,
   initialCards,
+  viewerRole = "admin",
 }: {
   subjects: AdminSubject[];
   teacherCandidatesBySubject: Record<string, MatchingTeacherCandidate[]>;
@@ -80,6 +84,13 @@ export default function ConsultationKanbanBoard({
   // refresh()가 호출될 때만 클라이언트에서 다시 조회한다. 없으면(예: 향후
   // 다른 진입 경로) 기존처럼 마운트 시 스스로 조회한다.
   initialCards?: KanbanCard[];
+  // R15-A(2/3) — 신규 칸반 분리: 같은 카드 데이터·5단계 판정을 관리자/컨설턴트가
+  // 함께 보되, 카드 상세의 행동(계약 발송·재발송·수동완료·상담 종료·직접
+  // 과목/선생님 배정 등)은 역할별로 갈린다. "consultant"면 본인 배정 건만
+  // 조회하고, 행동은 첫 상담 수락/거절·결과 기록·교사 배정 요청·읽기전용
+  // 계약 상태로 제한된다(서버 액션 권한도 별도로 확인돼 있음 — 화면에서
+  // 숨기는 것만이 아니다).
+  viewerRole?: "admin" | "consultant";
 }) {
   const router = useRouter();
   const [cards, setCards] = useState<KanbanCard[] | null>(
@@ -92,7 +103,7 @@ export default function ConsultationKanbanBoard({
   async function load() {
     setRefreshing(true);
     try {
-      const data = await listKanbanBoardAction();
+      const data = viewerRole === "consultant" ? await listMyKanbanBoardAction() : await listKanbanBoardAction();
       setCards(data);
       setCachedTabData(CONSULT_KANBAN_CACHE_KEY, data);
       setError(null);
@@ -273,6 +284,7 @@ export default function ConsultationKanbanBoard({
           consultationId={openId}
           subjects={subjects}
           teacherCandidatesBySubject={teacherCandidatesBySubject}
+          viewerRole={viewerRole}
           onClose={() => setOpenId(null)}
           onChanged={refresh}
           onNavigateToCard={(id) => setOpenId(id)}
@@ -286,6 +298,7 @@ function ConsultationCardDetailPanel({
   consultationId,
   subjects,
   teacherCandidatesBySubject,
+  viewerRole,
   onClose,
   onChanged,
   onNavigateToCard,
@@ -293,10 +306,12 @@ function ConsultationCardDetailPanel({
   consultationId: string;
   subjects: AdminSubject[];
   teacherCandidatesBySubject: Record<string, MatchingTeacherCandidate[]>;
+  viewerRole: "admin" | "consultant";
   onClose: () => void;
   onChanged: () => void;
   onNavigateToCard: (consultationId: string) => void;
 }) {
+  const isAdmin = viewerRole === "admin";
   const [detail, setDetail] = useState<ConsultationCardDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -312,17 +327,22 @@ function ConsultationCardDetailPanel({
 
   async function load() {
     try {
-      const d = await getConsultationCardDetailAction(consultationId);
+      const d = isAdmin
+        ? await getConsultationCardDetailAction(consultationId)
+        : await getMyConsultationCardDetailAction(consultationId);
       setDetail(d);
       // 2026-09-06 — 재상담 후보(같은 이메일로 과거에 상담한 이력) 조회.
       // 자동 병합하지 않고 후보 배지 + 참고용 요약만 노출한다(공개 화면에는
-      // 노출하지 않음, 관리자 상세 패널 전용).
-      findDuplicateConsultationCandidates({
-        email: d.consultation.contact_email,
-        excludeConsultationId: consultationId,
-      })
-        .then(setDuplicateCandidates)
-        .catch(() => setDuplicateCandidates([]));
+      // 노출하지 않음, 관리자 전용 — 컨설턴트 화면은 다른 가족의 상담 이력을
+      // 볼 이유가 없어 생략한다).
+      if (isAdmin) {
+        findDuplicateConsultationCandidates({
+          email: d.consultation.contact_email,
+          excludeConsultationId: consultationId,
+        })
+          .then(setDuplicateCandidates)
+          .catch(() => setDuplicateCandidates([]));
+      }
     } catch (e) {
       setError(e instanceof Error ? e.message : "상담 상세 조회에 실패했습니다.");
     }
@@ -510,7 +530,8 @@ function ConsultationCardDetailPanel({
             ) : (
               (c.outcome === "regular_recommended" || c.trial_intent_confirmed_at) &&
               detail.pipeline &&
-              !detail.pipeline.steps.find((s) => s.key === "account_linked")?.done && (
+              !detail.pipeline.steps.find((s) => s.key === "account_linked")?.done &&
+              (isAdmin ? (
                 <TrialOnboardingStudentsForm
                   consultationId={c.id}
                   defaultGuardianEmail={detail.guardianEmail ?? c.contact_email ?? ""}
@@ -523,9 +544,15 @@ function ConsultationCardDetailPanel({
                     if (result.status !== "failed") run(async () => {});
                   }}
                 />
-              )
+              ) : (
+                // R15-A(2/3) — 실제 이메일 발송 지점은 컨설턴트에게 열지 않는다
+                // (계정 생성 탭과 동일한 원칙). 관리자 처리를 기다리는 중임만 안내.
+                <p className="text-[12px] text-grey-500 bg-white rounded-lg px-3 py-2">
+                  온보딩 안내 발송은 관리자가 처리합니다 — 아직 발송되지 않았습니다.
+                </p>
+              ))
             )}
-            {c.trial_entitlement_grant_status === "failed" && (
+            {c.trial_entitlement_grant_status === "failed" && isAdmin && (
               <button
                 className={btnSecondary}
                 disabled={busy}
@@ -534,15 +561,19 @@ function ConsultationCardDetailPanel({
                 체험수업권 지급 재처리
               </button>
             )}
+            {c.trial_entitlement_grant_status === "failed" && !isAdmin && (
+              <p className="text-[12px] text-red">체험수업권 지급 실패 — 관리자 재처리 대기 중</p>
+            )}
             {/* 2026-09-06 — 안내를 보낸 뒤 보호자가 아직 확인하지 않은 상태(또는
                 확인해 계정을 만든 뒤)의 진행 상태를 조회할 방법이 없었다는 지적을
-                고친다. 링크가 한 번이라도 발급됐으면(발송 대기·발송됨·사용완료 모두) 노출. */}
+                고친다. 링크가 한 번이라도 발급됐으면(발송 대기·발송됨·사용완료 모두) 노출.
+                컨설턴트에게도 "온보딩 진행 확인"은 열려 있다(읽기 전용). */}
             {detail.latestOnboardingLinkId && <TrialOnboardingLinkProgress linkId={detail.latestOnboardingLinkId} />}
           </div>
         )}
 
-        {/* 4. 체험 일정 확정 단계 — 체험 리뷰 확정 검수 */}
-        {detail.pipeline?.subjectEnrollmentId && (
+        {/* 4. 체험 일정 확정 단계 — 체험 리뷰 확정 검수(관리자 전용 — 콘텐츠 품질 검수). */}
+        {isAdmin && detail.pipeline?.subjectEnrollmentId && (
           <LessonReviewAdminEditor subjectEnrollmentId={detail.pipeline.subjectEnrollmentId} />
         )}
 
@@ -557,7 +588,22 @@ function ConsultationCardDetailPanel({
                   발송 실패 — 관리자 조치 필요(계약은 draft 상태로 남아있습니다). 아래에서 다시 시도할 수 있습니다.
                 </div>
               )}
-              {!detail.latestContractVersionHasEnvelope ? (
+              {!isAdmin ? (
+                // R15-A(2/3) — 컨설턴트는 계약 상태만 본다(발송 대기/자동 발송됨/
+                // 발송 실패/서명 대기/완료). 회사 승인·수동 발송·재발송·새 버전
+                // 생성·수동 완료는 관리자 전용(서버 액션도 requireAdmin/
+                // requireAdminOrCapability('manage_consultations')로 막혀 있음 —
+                // 어떤 컨설턴트 계정도 이 capability를 보유하지 않는다).
+                <div className="text-[12px] text-ink bg-white rounded-lg px-3 py-2">
+                  {!detail.latestContractVersionHasEnvelope
+                    ? detail.contractStatus === "draft"
+                      ? "발송 실패 — 관리자 처리 대기 중"
+                      : "발송 대기 — 관리자가 계약을 준비 중입니다"
+                    : detail.contractStatus === "active"
+                      ? "완료 — 서명 및 계약 활성화됨"
+                      : "자동 발송됨 — 서명 대기 중"}
+                </div>
+              ) : !detail.latestContractVersionHasEnvelope ? (
                 <ContractSendForm
                   childId={c.child_id!}
                   subjectEnrollmentId={detail.pipeline.subjectEnrollmentId}
@@ -639,21 +685,35 @@ function ConsultationCardDetailPanel({
             과목 수강 계획 + 선생님 최초 배정을 전부 이 카드 안에서 처리한다
             (매칭 탭의 SubjectEnrollmentPanel은 이후 선생님 변경 등 일반
             운영에만 계속 쓰인다). 아직 과목 수강 계획 자체가 없으면(파이프라인
-            subjectEnrollmentId가 null) 과목→선생님 2단계 클릭 폼을 보여준다. */}
+            subjectEnrollmentId가 null) 과목→선생님 2단계 클릭 폼을 보여준다.
+            R15-A(2/3) — 컨설턴트는 직접 배정 대신 구조화된 배정 "요청"만 보낼 수
+            있다(TeacherAssignmentRequestForm, 선생님이 수락해야 실제 배정 확정). */}
         {c.child_id && !detail.pipeline?.subjectEnrollmentId && (
-          <SubjectTeacherAssignForm
-            childId={c.child_id}
-            subjects={subjects}
-            teacherCandidatesBySubject={teacherCandidatesBySubject}
-            busy={busy}
-            onAssign={(fn) => run(fn)}
-          />
+          isAdmin ? (
+            <SubjectTeacherAssignForm
+              childId={c.child_id}
+              subjects={subjects}
+              teacherCandidatesBySubject={teacherCandidatesBySubject}
+              busy={busy}
+              onAssign={(fn) => run(fn)}
+            />
+          ) : (
+            <TeacherAssignmentRequestForm
+              studentId={c.child_id}
+              studentName={detail.childName ?? c.contact_name}
+              defaultGrade={c.student_grade ?? undefined}
+              subjects={subjects}
+              teacherCandidatesBySubject={teacherCandidatesBySubject}
+              onSent={() => run(async () => {})}
+            />
+          )
         )}
 
         {/* 2026-09-10(P1-B) — "계정 생성" 카드(id가 "link:"로 시작)는 consultations
             테이블에 행이 없어 상담 종료 개념 자체가 없다 — 이 섹션은 상담
-            유입 카드에서만 보여준다. */}
-        {!consultationId.startsWith("link:") && (
+            유입 카드에서만 보여준다. R15-A(2/3) — 상담 종료(최종 리뷰·closure_type)는
+            관리자 전용이다(컨설턴트 목록은 "가족 후속 연락"까지만). */}
+        {isAdmin && !consultationId.startsWith("link:") && (
         <div className="border-t border-grey-200 pt-3 mt-2">
           {!closing ? (
             <button className={btnSecondary} disabled={busy} onClick={() => setClosing(true)}>

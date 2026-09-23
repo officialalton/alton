@@ -1,5 +1,24 @@
 import { createClient } from "@/utils/supabase/server";
 
+// R15-A(2/3) — 컨설턴트 전용 서버 액션(신규 칸반 분리, 선생님 배정 요청 등)이
+// 공통으로 쓰는 인증 헬퍼. app/consultant/messenger-actions.ts에 있던 로컬
+// 버전과 동일한 검사를 공유 위치로 옮겼다.
+export async function requireConsultant() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("로그인이 필요합니다.");
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .single();
+  if (profile?.role !== "consultant") throw new Error("컨설턴트만 사용할 수 있습니다.");
+  return { supabase, user };
+}
+
 export async function requireAdmin() {
   const supabase = await createClient();
   const {

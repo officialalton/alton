@@ -145,6 +145,7 @@ function buildAccountCreationCard(
     family_root_consultation_id: null,
     is_child_onboarding_card: false,
     source_link_child_id: null,
+    admissions_consultant_id: null,
     requested_children: [{ name: student.student_name, grade: student.student_grade ?? undefined }],
     consultReadiness: "not_applicable",
     completionReadiness: "not_applicable",
@@ -288,4 +289,22 @@ export async function loadKanbanBoard(admin: ReturnType<typeof createAdminClient
     is_family_root_with_children: !r.is_child_onboarding_card && rootIdsWithChildren.has(r.id),
     intakeSource: r.id.startsWith("link:") ? "account_creation" : "consultation",
   }));
+}
+
+/** R15-A(2/3) — 신규 칸반 분리: 컨설턴트 본인 배정 건만. 카드 데이터·단계
+ * 판정은 loadKanbanBoard()를 그대로 재사용하고(중복 없음), 상담 유입 카드는
+ * admissions_consultant_id로, 계정 생성 유입 카드는 consultant_assignments로
+ * 각각 담당 여부를 확인해 필터링만 다르게 한다. */
+export async function loadMyKanbanBoard(
+  admin: ReturnType<typeof createAdminClient>,
+  consultantId: string
+): Promise<KanbanCard[]> {
+  const [all, { data: assignments }] = await Promise.all([
+    loadKanbanBoard(admin),
+    admin.from("consultant_assignments").select("student_id").eq("consultant_id", consultantId),
+  ]);
+  const myStudentIds = new Set((assignments ?? []).map((a) => a.student_id as string));
+  return all.filter(
+    (c) => c.admissions_consultant_id === consultantId || (c.child_id !== null && myStudentIds.has(c.child_id))
+  );
 }

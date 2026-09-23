@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { ConsultantWithStudents } from "./consultant-assignment-actions";
 import type { IntakeConsultation } from "@/app/consultant/intake-data";
+import type { TeacherAssignmentRequestRow } from "@/app/consultant/teacher-assignment-request-actions";
 import {
   listConsultantsAction,
   promoteToConsultantAction,
@@ -14,6 +15,11 @@ import {
   sendConsultationSchedulingLinkAction,
   setAutoAssignEnabledAction,
 } from "./consultant-assignment-actions";
+import {
+  listAllTeacherAssignmentRequestsAction,
+  adminReprocessTeacherAssignmentRequestAction,
+  adminCancelTeacherAssignmentRequestAction,
+} from "./teacher-assignment-requests-actions";
 
 // 컨설턴트 포지션(2026-09-22 사용자 지시, 가볍게 시작) — 기존 계정을
 // 이메일로 찾아 컨설턴트로 지정하고, 담당 학생을 이메일로 배정/해제한다.
@@ -316,6 +322,97 @@ export default function ConsultantAssignmentsTab({
             </form>
           </div>
         ))
+      )}
+
+      <TeacherAssignmentRequestsAdminSection />
+    </div>
+  );
+}
+
+// R15-A(3/3) — 관리자는 전체 배정 요청을 보고 예외 처리(재처리/취소)할 수
+// 있다. 생성은 컨설턴트 전용이라 이 화면에서 새로 만들지는 않는다.
+function TeacherAssignmentRequestsAdminSection() {
+  const [requests, setRequests] = useState<TeacherAssignmentRequestRow[] | null>(null);
+  const [busyId, setBusyId] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  async function load() {
+    try {
+      setRequests(await listAllTeacherAssignmentRequestsAction());
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "요청 목록을 불러오지 못했습니다.");
+    }
+  }
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
+    load();
+  }, []);
+
+  const needsAttention = (requests ?? []).filter((r) => r.needsReprocessing || r.status === "pending");
+
+  return (
+    <div className="mt-8 border-t border-grey-200 pt-6">
+      <h2 className="text-[13.5px] font-bold text-ink mb-3">선생님 배정 요청 — 전체({requests?.length ?? 0})</h2>
+      {error && <div className="mb-3 text-[12.5px] text-red">{error}</div>}
+      {!requests ? (
+        <p className="text-[12.5px] text-grey-500">불러오는 중...</p>
+      ) : needsAttention.length === 0 ? (
+        <div className="text-[12.5px] text-grey-500 bg-grey-100 rounded-lg px-4 py-4 text-center">
+          응답 대기·재처리 필요 건이 없습니다.
+        </div>
+      ) : (
+        <div className="space-y-2">
+          {needsAttention.map((r) => (
+            <div key={r.id} className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3">
+              <div className="text-[12.5px] font-bold text-ink">
+                {r.studentName} — {r.status === "pending" ? "응답 대기" : "수락됨"}
+                {r.needsReprocessing && <span className="text-red"> · 재처리 필요</span>}
+              </div>
+              {r.reprocessingError && <div className="text-[11.5px] text-red mt-0.5">{r.reprocessingError}</div>}
+              <div className="flex gap-2 mt-2">
+                {r.needsReprocessing && r.studentId && (
+                  <button
+                    disabled={busyId === r.id}
+                    onClick={async () => {
+                      setBusyId(r.id);
+                      try {
+                        await adminReprocessTeacherAssignmentRequestAction(r.id);
+                        await load();
+                      } catch (e) {
+                        setError(e instanceof Error ? e.message : "재처리에 실패했습니다.");
+                      } finally {
+                        setBusyId(null);
+                      }
+                    }}
+                    className="text-[12px] font-bold px-3 py-1 rounded-lg bg-ink text-white disabled:opacity-50"
+                  >
+                    재처리
+                  </button>
+                )}
+                {r.status === "pending" && (
+                  <button
+                    disabled={busyId === r.id}
+                    onClick={async () => {
+                      setBusyId(r.id);
+                      try {
+                        await adminCancelTeacherAssignmentRequestAction(r.id);
+                        await load();
+                      } catch (e) {
+                        setError(e instanceof Error ? e.message : "취소에 실패했습니다.");
+                      } finally {
+                        setBusyId(null);
+                      }
+                    }}
+                    className="text-[12px] font-bold px-3 py-1 rounded-lg border-[1.5px] border-grey-200 text-red disabled:opacity-50"
+                  >
+                    요청 취소
+                  </button>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );

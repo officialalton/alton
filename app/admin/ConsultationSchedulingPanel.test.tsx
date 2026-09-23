@@ -83,6 +83,7 @@ const BASE_CONSULTATION = {
   family_root_consultation_id: null,
   is_child_onboarding_card: false,
   source_link_child_id: null,
+  admissions_consultant_id: null,
   consultReadiness: "ready" as const,
   // 요약(admin_review_summary)이 아직 없어 completionReadiness가 'summary_missing' —
   // 이게 바로 예전 버그가 재현되던 조합이다.

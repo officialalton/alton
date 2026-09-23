@@ -10,12 +10,12 @@
 //   조회 전용 계층 + 종료(closure) 액션만 새로 추가한다.
 // - 선생님 배정 액션만 기존 위치(SubjectEnrollmentPanel)에 그대로 둔다.
 
-import { requireAdminOrCapability } from "@/lib/admin-auth";
+import { requireAdminOrCapability, requireConsultant } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import type { ConsultationListItem } from "./consultation-scheduling-actions";
 import { getTrialOnboardingPipelineAction, type TrialOnboardingPipeline } from "./trial-onboarding-actions";
 import type { ConsultationClosureType } from "./consultation-kanban-constants";
-import { loadKanbanBoard, type KanbanCard } from "./consultation-kanban-data";
+import { loadKanbanBoard, loadMyKanbanBoard, type KanbanCard } from "./consultation-kanban-data";
 
 const CONSULT_CAPABILITY = "manage_consultations";
 
@@ -31,6 +31,12 @@ export type { KanbanCard } from "./consultation-kanban-data";
 export async function listKanbanBoardAction(): Promise<KanbanCard[]> {
   await requireAdminOrCapability(CONSULT_CAPABILITY);
   return loadKanbanBoard(createAdminClient());
+}
+
+/** R15-A(2/3) — 컨설턴트 본인 배정 건만 보이는 칸반. */
+export async function listMyKanbanBoardAction(): Promise<KanbanCard[]> {
+  const { user } = await requireConsultant();
+  return loadMyKanbanBoard(createAdminClient(), user.id);
 }
 
 export type ConsultationCardDetail = {
@@ -137,6 +143,7 @@ async function getAccountCreationCardDetail(
     family_root_consultation_id: null,
     is_child_onboarding_card: false,
     source_link_child_id: null,
+    admissions_consultant_id: null,
     requested_children: null,
     consultReadiness: "not_applicable",
     completionReadiness: "not_applicable",
@@ -198,7 +205,53 @@ async function getAccountCreationCardDetail(
 export async function getConsultationCardDetailAction(consultationId: string): Promise<ConsultationCardDetail> {
   await requireAdminOrCapability(CONSULT_CAPABILITY);
   const admin = createAdminClient();
+  return loadConsultationCardDetail(admin, consultationId);
+}
 
+// R15-A(2/3) — 컨설턴트 전용 카드 상세 조회. 담당(본인) 건인지 서버에서 다시
+// 확인한 뒤에만 같은 상세 조합 로직을 재사용한다 — 화면에서 행동만 가리는 게
+// 아니라 조회 자체를 다른 컨설턴트의 카드로는 못 하게 막는다.
+export async function getMyConsultationCardDetailAction(consultationId: string): Promise<ConsultationCardDetail> {
+  const { supabase, user } = await requireConsultant();
+  const admin = createAdminClient();
+
+  if (consultationId.startsWith("link:")) {
+    const childAuthUserId = await childIdForAccountCreationCard(admin, consultationId);
+    if (!childAuthUserId) throw new Error("담당 건을 찾을 수 없습니다.");
+    const { data: assignment } = await admin
+      .from("consultant_assignments")
+      .select("consultant_id")
+      .eq("student_id", childAuthUserId)
+      .maybeSingle();
+    if (assignment?.consultant_id !== user.id) throw new Error("담당 학생이 아닙니다.");
+  } else {
+    const { data: consultation } = await supabase
+      .from("consultations")
+      .select("admissions_consultant_id")
+      .eq("id", consultationId)
+      .maybeSingle();
+    if (consultation?.admissions_consultant_id !== user.id) throw new Error("담당 상담이 아닙니다.");
+  }
+
+  return loadConsultationCardDetail(admin, consultationId);
+}
+
+async function childIdForAccountCreationCard(
+  admin: ReturnType<typeof createAdminClient>,
+  cardId: string
+): Promise<string | null> {
+  const { data } = await admin
+    .from("trial_onboarding_link_students")
+    .select("child_auth_user_id")
+    .eq("id", cardId.slice("link:".length))
+    .maybeSingle();
+  return data?.child_auth_user_id ?? null;
+}
+
+async function loadConsultationCardDetail(
+  admin: ReturnType<typeof createAdminClient>,
+  consultationId: string
+): Promise<ConsultationCardDetail> {
   if (consultationId.startsWith("link:")) {
     return getAccountCreationCardDetail(admin, consultationId);
   }

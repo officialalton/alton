@@ -32,6 +32,7 @@ import HomeworkAssignTab from "./HomeworkAssignTab";
 import type { HomeworkKeywordOption } from "./homework-direct-data";
 import SettlementTab from "./SettlementTab";
 import TeacherMockExamTab from "./TeacherMockExamTab";
+import TeacherAssignmentRequestsTab from "./TeacherAssignmentRequestsTab";
 import type { LibrarySubjectTree } from "@/lib/subject-material-library";
 import {
   listMyLessonSchedule,
@@ -48,6 +49,9 @@ import {
 // 레퍼런스). 탭 안 본문의 한국어 텍스트는 유지, 라벨만 영어로 바꾼다.
 const NAV_ITEMS = [
   { id: "home", label: "Home", icon: "home" },
+  // R15-A(3/3, 2026-09-23) — 컨설턴트가 보낸 구조화된 배정 요청(수락 전에는
+  // 실제 배정이 생기지 않는다)을 확인·응답하는 화면.
+  { id: "assignment-requests", label: "Requests", icon: "students" },
   { id: "assignments", label: "My Students", icon: "students" },
   { id: "homework", label: "Assignments", icon: "assignments" },
   { id: "lesson-schedule", label: "Schedule", icon: "schedule" },
@@ -344,6 +348,8 @@ export default function TeacherShell({
               operatingCurriculumJumpTo={operatingCurriculumJump}
               onOperatingCurriculumJumpConsumed={() => setOperatingCurriculumJump(null)}
             />
+          ) : activeTab === "assignment-requests" ? (
+            <TeacherAssignmentRequestsTab />
           ) : activeTab === "materials" ? (
             <TeacherMaterialsLibraryTab tree={materialsLibraryTree} />
           ) : activeTab === "vocab" ? (

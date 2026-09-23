@@ -34,6 +34,14 @@ const ALLOWLIST_FILES = new Set<string>([
 ]);
 const ALLOWLIST_FUNCTIONS = new Set<string>([
   "getClosureDraftAction", // requireAdminOrCapability를 이미 호출하는 getConsultationCardDetailAction에 위임
+  // R15-A(2/3, 2026-09-23) — 신규 칸반 분리: 컨설턴트 전용 조회 함수(같은
+  // 파일의 관리자용 함수와 데이터·판정 로직을 공유하기 위해 이 admin/
+  // 디렉터리에 함께 둠). requireAdmin류 대신 requireConsultant()를 호출하고,
+  // getMyConsultationCardDetailAction은 그 안에서 담당(admissions_consultant_id/
+  // consultant_assignments) 여부까지 직접 확인한다 — "admin 전용 가드 누락"이
+  // 아니라 의도적으로 다른(컨설턴트) 권한 모델을 쓴다.
+  "listMyKanbanBoardAction",
+  "getMyConsultationCardDetailAction",
 ]);
 
 function collectAdminTsFiles(): string[] {
