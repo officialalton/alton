@@ -7,6 +7,7 @@ import type { RoadmapData } from "@/lib/roadmap/types";
 import RoadmapView from "@/app/components/RoadmapView";
 import CollegeExploreSection from "@/app/components/CollegeExploreSection";
 import DocumentsPanel from "./DocumentsPanel";
+import SettlementPanel from "./SettlementPanel";
 import {
   getMyConsultantProfileAction,
   updateMyConsultantProfileAction,
@@ -60,7 +61,7 @@ import {
   type TimeOffConflict,
 } from "./time-off-actions";
 
-type NavId = "students" | "assignments" | "schedule" | "documents" | "profile" | "college-explore";
+type NavId = "students" | "assignments" | "schedule" | "documents" | "profile" | "settlement" | "college-explore";
 
 const WEEKDAY_LABELS = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -172,6 +173,19 @@ export default function ConsultantShell({
         </button>
         <button
           onClick={() => {
+            setNav("settlement");
+            setSelectedId(null);
+          }}
+          aria-current={nav === "settlement" ? "page" : undefined}
+          className={
+            "w-full text-left px-2.5 py-2.5 rounded-lg text-[13px] font-semibold " +
+            (nav === "settlement" ? "bg-red text-white" : "text-grey-500 hover:bg-grey-100 hover:text-ink")
+          }
+        >
+          Settlement
+        </button>
+        <button
+          onClick={() => {
             setNav("college-explore");
             setSelectedId(null);
           }}
@@ -201,6 +215,8 @@ export default function ConsultantShell({
           <DocumentsPanel />
         ) : nav === "profile" ? (
           <ProfilePanel />
+        ) : nav === "settlement" ? (
+          <SettlementPanel />
         ) : nav === "college-explore" ? (
           <div className="px-8 py-8">
             <h1 className="text-[20px] font-extrabold text-ink mb-5">College Explore</h1>
