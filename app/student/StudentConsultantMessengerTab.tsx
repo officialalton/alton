@@ -1,30 +1,26 @@
 "use client";
 
-// R12(메신저) — 보호자 포털 "메신저" 탭. household 단위 비동기 대화만 다룬다.
-// 상담 신청(건별 대화)은 MeetingRequestTab.tsx로 분리했다.
-//
-// 2026-09-22(사용자 지시) — household 전체가 하나로 이어지는 끝없는 대화 대신
-// "문의" 단위 스레드로 바꿨다. 문의별로 카드가 있고, 열면 그 문의만의 대화가
-// 보인다. 관리자가 종료하면 "지난 문의"로 넘어가 읽기 전용이 된다 — 이어서
-// 문의하려면 새 문의를 시작한다.
+// 2026-09-22(사용자 지시 — "컨설턴트는 학생이랑도 메신저 필요하긴 하겠네") —
+// 학생 포털 "Consultant" 탭. 학부모 포털 MessengerTab.tsx와 완전히 같은
+// household 문의 스레드를 다룬다(같은 household 안 보호자·컨설턴트·관리자가
+// 보는 것과 같은 대화 — 학생도 이제 그 대화에 참여한다).
 
 import { useEffect, useState } from "react";
 import {
-  listGuardianInquiries,
-  listGuardianInquiryMessages,
-  startGuardianInquiry,
-  sendGuardianInquiryMessage,
-  markMessengerRead,
-  type HouseholdInquirySummary,
-  type HouseholdMessage,
-} from "./inquiry-actions";
+  listMyHouseholdInquiriesAction,
+  listMyHouseholdInquiryMessagesAction,
+  startMyHouseholdInquiryAction,
+  sendMyHouseholdInquiryMessageAction,
+  markMyHouseholdMessengerReadAction,
+} from "./consultant-messenger-actions";
+import type { HouseholdInquirySummary, HouseholdMessage } from "@/app/parent/inquiry-actions";
 
 function formatDateTime(iso: string | null): string {
   if (!iso) return "";
   return new Date(iso).toLocaleString("ko-KR", { dateStyle: "medium", timeStyle: "short" });
 }
 
-export default function MessengerTab() {
+export default function StudentConsultantMessengerTab() {
   const [inquiries, setInquiries] = useState<HouseholdInquirySummary[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [subTab, setSubTab] = useState<"open" | "closed">("open");
@@ -33,14 +29,14 @@ export default function MessengerTab() {
   const [newBody, setNewBody] = useState("");
 
   function loadInquiries() {
-    listGuardianInquiries()
+    listMyHouseholdInquiriesAction()
       .then(setInquiries)
       .catch((e) => setError(e instanceof Error ? e.message : "문의 목록을 불러오지 못했습니다."));
   }
 
   useEffect(() => {
     loadInquiries();
-    markMessengerRead().catch(() => {});
+    markMyHouseholdMessengerReadAction().catch(() => {});
   }, []);
 
   async function handleStart() {
@@ -48,7 +44,7 @@ export default function MessengerTab() {
     setStarting(true);
     setError(null);
     try {
-      const { inquiryId } = await startGuardianInquiry(newBody);
+      const { inquiryId } = await startMyHouseholdInquiryAction(newBody);
       setNewBody("");
       loadInquiries();
       setOpenId(inquiryId);
@@ -75,12 +71,11 @@ export default function MessengerTab() {
   const visible = (inquiries ?? []).filter((i) => i.status === subTab);
 
   return (
-    <div className="max-w-[720px] px-5 py-6">
-      <h2 className="text-[16px] font-bold text-ink mb-1">메신저</h2>
+    <div className="max-w-[720px] px-8 py-8">
+      <h2 className="text-[16px] font-bold text-ink mb-1">Consultant</h2>
       <p className="text-[12.5px] text-grey-500 mb-4">
-        기존 자녀에 대한 일반적인 문의는 여기서 관리자에게 남길 수 있습니다. 문의마다 별도 대화창으로
-        관리되고, 관리자가 답변을 마치고 종료하면 지난 문의로 넘어갑니다. 구체적인 상담이 필요하면
-        &ldquo;상담 신청&rdquo; 탭을 이용해주세요.
+        담당 컨설턴트·관리자와 대화할 수 있습니다. 문의마다 별도 대화창으로 관리되고, 종료되면 지난
+        문의로 넘어갑니다. 이 대화는 가족(보호자)도 함께 볼 수 있습니다.
       </p>
 
       {error && <p className="text-[12.5px] text-red mb-3">{error}</p>}
@@ -162,7 +157,7 @@ function InquiryDetail({ inquiry, onBack }: { inquiry: HouseholdInquirySummary; 
   const readOnly = inquiry.status === "closed";
 
   function loadMessages() {
-    listGuardianInquiryMessages(inquiry.id)
+    listMyHouseholdInquiryMessagesAction(inquiry.id)
       .then(setMessages)
       .catch((e) => setError(e instanceof Error ? e.message : "메시지를 불러오지 못했습니다."));
   }
@@ -177,7 +172,7 @@ function InquiryDetail({ inquiry, onBack }: { inquiry: HouseholdInquirySummary; 
     setSending(true);
     setError(null);
     try {
-      await sendGuardianInquiryMessage(inquiry.id, draft);
+      await sendMyHouseholdInquiryMessageAction(inquiry.id, draft);
       setDraft("");
       loadMessages();
     } catch (e) {
@@ -204,14 +199,14 @@ function InquiryDetail({ inquiry, onBack }: { inquiry: HouseholdInquirySummary; 
         {messages && messages.length > 0 && (
           <div className="space-y-2 mb-3 max-h-[420px] overflow-y-auto">
             {messages.map((m) => {
-              const isMine = m.senderRole === "guardian";
+              const isMine = m.senderRole === "student";
               const label =
                 m.senderRole === "admin"
                   ? "관리자"
                   : m.senderRole === "consultant"
                     ? "담당 컨설턴트"
-                    : m.senderRole === "student"
-                      ? "자녀"
+                    : m.senderRole === "guardian"
+                      ? "보호자"
                       : "나";
               return (
                 <div

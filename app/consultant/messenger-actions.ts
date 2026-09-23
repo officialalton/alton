@@ -100,7 +100,7 @@ export async function getConsultantMessengerUnreadCountAction(studentId: string)
     .from("household_messages")
     .select("id", { count: "exact", head: true })
     .eq("household_id", householdId)
-    .in("sender_role", ["guardian", "admin"])
+    .in("sender_role", ["guardian", "admin", "student"])
     .gt("created_at", since);
   if (error) throw new Error(error.message);
   return count ?? 0;

@@ -42,7 +42,7 @@ describe("board card 상태 계산 — 소스별 status 매핑", () => {
   it("모의고사: assigned→백로그, in_progress→진행중, submitted/graded→완료", () => {
     const base: MockExamAttemptSummary = {
       id: "a1", examSetId: "e1", examSetName: "Set 1", difficultyTier: "medium",
-      studentId: "s1", studentName: null, status: "assigned", dueAt: null,
+      studentId: "s1", studentName: null, status: "assigned", assignedByName: null, dueAt: null,
       startBy: null, startedAt: null, submittedAt: null, gradedAt: null,
       totalCount: 10, correctCount: null, entryCount: 0,
     };

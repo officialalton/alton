@@ -19,8 +19,8 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 export type HouseholdMessage = {
   id: string;
   senderId: string;
-  // 2026-09-22 — 담당 컨설턴트도 답장할 수 있다(household 메신저 확장).
-  senderRole: "guardian" | "admin" | "consultant";
+  // 2026-09-22 — 담당 컨설턴트, 그리고 학생 본인도 답장할 수 있다(household 메신저 확장).
+  senderRole: "guardian" | "admin" | "consultant" | "student";
   body: string;
   createdAt: string;
 };
@@ -324,7 +324,7 @@ export async function getMessengerUnreadCount(): Promise<number> {
     .from("household_messages")
     .select("id", { count: "exact", head: true })
     .eq("household_id", householdId)
-    .in("sender_role", ["admin", "consultant"])
+    .in("sender_role", ["admin", "consultant", "student"])
     .gt("created_at", since);
   if (error) throw new Error(error.message);
   return count ?? 0;

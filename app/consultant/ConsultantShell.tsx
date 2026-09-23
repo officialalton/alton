@@ -714,7 +714,14 @@ function ConsultantInquiryDetail({
           <div className="space-y-2 mb-3 max-h-[420px] overflow-y-auto">
             {messages.map((m) => {
               const isMine = m.senderRole === "consultant";
-              const label = m.senderRole === "guardian" ? "보호자" : m.senderRole === "admin" ? "관리자" : "나";
+              const label =
+                m.senderRole === "guardian"
+                  ? "보호자"
+                  : m.senderRole === "admin"
+                    ? "관리자"
+                    : m.senderRole === "student"
+                      ? "학생"
+                      : "나";
               return (
                 <div
                   key={m.id}

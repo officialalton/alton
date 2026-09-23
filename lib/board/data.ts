@@ -57,7 +57,7 @@ export function homeworkToBoardCard(batch: HomeworkBatch): BoardCard {
     dueAt: batch.dueAt,
     dueStartAt: null,
     href: "/student?tab=homework",
-    createdByLabel: "담당 선생님",
+    createdByLabel: batch.teacherName ?? "담당 선생님",
   };
 }
 
@@ -74,7 +74,7 @@ export function mockExamToBoardCard(attempt: MockExamAttemptSummary): BoardCard 
     href: attempt.status === "assigned" || attempt.status === "in_progress"
       ? `/student/mock-exam/${attempt.id}`
       : "/student?tab=mock-exam",
-    createdByLabel: "담당 선생님",
+    createdByLabel: attempt.assignedByName ?? "담당 선생님",
   };
 }
 

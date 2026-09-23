@@ -42,6 +42,7 @@ import {
   updateMyTimezone,
 } from "./booking-actions";
 import { reportTeacherIssue } from "./incident-report-actions";
+import StudentConsultantMessengerTab from "./StudentConsultantMessengerTab";
 import RoadmapView from "@/app/components/RoadmapView";
 import type { RoadmapData } from "@/lib/roadmap/types";
 import PageFrame from "@/app/components/PageFrame";
@@ -61,6 +62,9 @@ const NAV_ITEMS = [
   // 두 서브탭). 자세한 내용은 ClassesTab.tsx 상단 주석 참고.
   { id: "classes", label: "Classes", icon: "classes" },
   { id: "teacher", label: "My Teacher", icon: "teacher" },
+  // 2026-09-22(사용자 지시 — "컨설턴트는 학생이랑도 메신저 필요하긴 하겠네") —
+  // household 메신저(부모·컨설턴트가 쓰던 것)를 학생도 접근할 수 있게.
+  { id: "consultant", label: "Consultant", icon: "consultations" },
   // 2026-09-21(UAT 지적) — 모의고사 목록은 독립 라우트가 아니라 일반 탭이다(좌측 네비 유지).
   // 실제 응시/결과 화면(/student/mock-exam/[attemptId])만 전체 화면 독립 라우트로 남긴다.
   // 2026-09-22(사용자 지시) — Assignments보다 위로.
@@ -365,6 +369,8 @@ export default function StudentShell({
             />
           ) : activeTab === "mock-exam" ? (
             <StudentMockExamTab initialAttempts={mockExamAttempts} />
+          ) : activeTab === "consultant" ? (
+            <StudentConsultantMessengerTab />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.

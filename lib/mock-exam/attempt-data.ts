@@ -18,6 +18,8 @@ export type MockExamAttemptSummary = {
   studentId: string;
   studentName: string | null;
   status: AttemptStatus;
+  /** 2026-09-22(사용자 지시) — 보드 카드에 "담당 선생님" 대신 실제 이름을 보여주려고 추가. */
+  assignedByName: string | null;
   dueAt: string | null;
   startBy: string | null;
   startedAt: string | null;
