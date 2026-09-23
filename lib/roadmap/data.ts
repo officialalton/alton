@@ -4,6 +4,7 @@ import type {
   AcademicProfile,
   TestRecord,
   ApExam,
+  Course,
   Demographics,
   CollegeInterests,
   ActivityAward,
@@ -26,6 +27,7 @@ export async function loadRoadmapData(
     academicRes,
     testRes,
     apExamRes,
+    coursesRes,
     demographicsRes,
     interestsRes,
     activitiesRes,
@@ -39,7 +41,7 @@ export async function loadRoadmapData(
     supabase
       .from("student_academic_profile")
       .select(
-        "graduation_year, curriculum_type, current_subjects, honors_count, ap_count, college_courses_count, ib_hl_count, ib_sl_count, school_ap_ib_offered_count"
+        "graduation_year, curriculum_type, current_subjects, honors_count, ap_count, college_courses_count, ib_hl_count, ib_sl_count, school_ap_ib_offered_count, target_gpa, target_sat, target_ap_count, target_extracurricular"
       )
       .eq("student_id", studentId)
       .maybeSingle(),
@@ -53,6 +55,11 @@ export async function loadRoadmapData(
       .select("id, course_name, status, exam_year, score")
       .eq("student_id", studentId)
       .order("exam_year", { ascending: false, nullsFirst: false }),
+    supabase
+      .from("student_courses")
+      .select("id, course_name, status, score, academic_year, grade_level")
+      .eq("student_id", studentId)
+      .order("academic_year", { ascending: false, nullsFirst: false }),
     supabase
       .from("student_demographics")
       .select(
@@ -104,6 +111,7 @@ export async function loadRoadmapData(
     academicRes.error,
     testRes.error,
     apExamRes.error,
+    coursesRes.error,
     demographicsRes.error,
     interestsRes.error,
     activitiesRes.error,
@@ -126,6 +134,10 @@ export async function loadRoadmapData(
     ibHlCount: academicRes.data?.ib_hl_count ?? null,
     ibSlCount: academicRes.data?.ib_sl_count ?? null,
     schoolApIbOfferedCount: academicRes.data?.school_ap_ib_offered_count ?? null,
+    targetGpa: academicRes.data?.target_gpa ?? null,
+    targetSat: academicRes.data?.target_sat ?? null,
+    targetApCount: academicRes.data?.target_ap_count ?? null,
+    targetExtracurricular: academicRes.data?.target_extracurricular ?? null,
   };
 
   const testRecords: TestRecord[] = (testRes.data ?? []).map((r) => ({
@@ -147,6 +159,15 @@ export async function loadRoadmapData(
     status: a.status,
     examYear: a.exam_year,
     score: a.score,
+  }));
+
+  const courses: Course[] = (coursesRes.data ?? []).map((c) => ({
+    id: c.id,
+    courseName: c.course_name,
+    status: c.status,
+    score: c.score,
+    academicYear: c.academic_year,
+    gradeLevel: c.grade_level,
   }));
 
   const demographics: Demographics = {
@@ -254,6 +275,7 @@ export async function loadRoadmapData(
     academicProfile,
     testRecords,
     apExams,
+    courses,
     demographics,
     collegeInterests,
     activities,

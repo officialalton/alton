@@ -101,6 +101,29 @@ export async function saveAcademicProfile(input: {
   revalidateRoadmapPaths(input.studentId);
 }
 
+// 2026-09-22(사용자 지시) — 로드맵 탭 "목표 설정" 서브탭. 목표 학교는
+// student_college_interests.target_colleges를 그대로 재사용(중복 저장 안 함),
+// 여기서는 GPA/SAT/AP 과목수/Extracurricular 4개만 다룬다.
+export async function saveRoadmapGoals(input: {
+  studentId: string;
+  targetGpa: number | null;
+  targetSat: number | null;
+  targetApCount: number | null;
+  targetExtracurricular: string | null;
+}) {
+  const supabase = await requireLoggedIn();
+  const { error } = await supabase.from("student_academic_profile").upsert({
+    student_id: input.studentId,
+    target_gpa: input.targetGpa,
+    target_sat: input.targetSat,
+    target_ap_count: input.targetApCount,
+    target_extracurricular: input.targetExtracurricular,
+    updated_at: new Date().toISOString(),
+  });
+  if (error) throw new Error(error.message);
+  revalidateRoadmapPaths(input.studentId);
+}
+
 /** CollegeVine Demographics 탭과 동등한 항목(2026-09-19) — 전부 선택 입력, 교사 조회 불가. */
 export async function saveDemographics(input: {
   studentId: string;
@@ -166,6 +189,53 @@ export async function addApExam(input: {
 export async function removeApExam(studentId: string, id: string) {
   const supabase = await requireLoggedIn();
   const { error } = await supabase.from("student_ap_courses").delete().eq("id", id);
+  if (error) throw new Error(error.message);
+  revalidateRoadmapPaths(studentId);
+}
+
+// 2026-09-22(사용자 지시) — "수강 과목" 개수 입력을 과목별 목록(추가/수정/삭제)으로.
+export type CourseInput = {
+  studentId: string;
+  courseName: string;
+  status: "taking" | "completed";
+  score: string | null;
+  academicYear: number | null;
+  gradeLevel: string | null;
+};
+
+export async function addCourse(input: CourseInput) {
+  const supabase = await requireLoggedIn();
+  const { error } = await supabase.from("student_courses").insert({
+    student_id: input.studentId,
+    course_name: input.courseName,
+    status: input.status,
+    score: input.score,
+    academic_year: input.academicYear,
+    grade_level: input.gradeLevel,
+  });
+  if (error) throw new Error(error.message);
+  revalidateRoadmapPaths(input.studentId);
+}
+
+export async function updateCourse(id: string, input: CourseInput) {
+  const supabase = await requireLoggedIn();
+  const { error } = await supabase
+    .from("student_courses")
+    .update({
+      course_name: input.courseName,
+      status: input.status,
+      score: input.score,
+      academic_year: input.academicYear,
+      grade_level: input.gradeLevel,
+    })
+    .eq("id", id);
+  if (error) throw new Error(error.message);
+  revalidateRoadmapPaths(input.studentId);
+}
+
+export async function removeCourse(studentId: string, id: string) {
+  const supabase = await requireLoggedIn();
+  const { error } = await supabase.from("student_courses").delete().eq("id", id);
   if (error) throw new Error(error.message);
   revalidateRoadmapPaths(studentId);
 }

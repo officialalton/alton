@@ -44,6 +44,20 @@ export interface AcademicProfile {
   ibHlCount: number | null;
   ibSlCount: number | null;
   schoolApIbOfferedCount: number | null;
+  // 2026-09-22 확장(사용자 지시 — "목표 설정" 서브탭).
+  targetGpa: number | null;
+  targetSat: number | null;
+  targetApCount: number | null;
+  targetExtracurricular: string | null;
+}
+
+export interface Course {
+  id: string;
+  courseName: string;
+  status: "taking" | "completed";
+  score: string | null;
+  academicYear: number | null;
+  gradeLevel: string | null;
 }
 
 export interface TestRecord {
@@ -168,6 +182,7 @@ export interface RoadmapData {
   academicProfile: AcademicProfile;
   testRecords: TestRecord[];
   apExams: ApExam[];
+  courses: Course[];
   demographics: Demographics;
   collegeInterests: CollegeInterests;
   activities: ActivityAward[];

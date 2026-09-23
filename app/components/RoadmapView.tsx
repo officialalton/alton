@@ -45,12 +45,18 @@ export default function RoadmapView({
   const [subTab, setSubTab] = useState<"profile" | "roadmap" | "colleges">("profile");
   const [pending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
+  // 2026-09-22(사용자 지적 — "저장 누르니까 아무 반응이 없다") — 저장 자체는
+  // 되고 있었지만 성공 시 아무 표시가 없어 사용자가 반응이 없다고 느꼈다.
+  // 저장 버튼을 누른 곳과 무관하게 화면 상단에 잠깐 "저장되었습니다"를 띄운다.
+  const [savedFlash, setSavedFlash] = useState(false);
 
   function run(fn: () => Promise<void>) {
     setError(null);
     startTransition(async () => {
       try {
         await fn();
+        setSavedFlash(true);
+        setTimeout(() => setSavedFlash(false), 2000);
       } catch (e) {
         setError(e instanceof Error ? e.message : "저장에 실패했습니다.");
       }
@@ -95,6 +101,9 @@ export default function RoadmapView({
 
       {error && (
         <div className="mb-4 text-[12px] text-red bg-red/10 rounded-lg px-3 py-2">{error}</div>
+      )}
+      {savedFlash && (
+        <div className="mb-4 text-[12px] text-green bg-green/10 rounded-lg px-3 py-2">저장되었습니다.</div>
       )}
 
       <PillSubTabs
@@ -143,15 +152,6 @@ function ProfileSections({
   const [colleges, setColleges] = useState(data.collegeInterests.targetColleges.join(", "));
   const [applicationTiming, setApplicationTiming] = useState(data.collegeInterests.targetApplicationTiming ?? "");
 
-  const [honorsCount, setHonorsCount] = useState(data.academicProfile.honorsCount?.toString() ?? "");
-  const [apCount, setApCount] = useState(data.academicProfile.apCount?.toString() ?? "");
-  const [collegeCoursesCount, setCollegeCoursesCount] = useState(data.academicProfile.collegeCoursesCount?.toString() ?? "");
-  const [ibHlCount, setIbHlCount] = useState(data.academicProfile.ibHlCount?.toString() ?? "");
-  const [ibSlCount, setIbSlCount] = useState(data.academicProfile.ibSlCount?.toString() ?? "");
-  const [schoolApIbOfferedCount, setSchoolApIbOfferedCount] = useState(
-    data.academicProfile.schoolApIbOfferedCount?.toString() ?? ""
-  );
-
   return (
     <>
       {/* 0. 인구통계(CollegeVine Demographics 탭 동등 항목, 2026-09-19) */}
@@ -161,17 +161,12 @@ function ProfileSections({
       <GradesCard data={data} readOnly={readOnly} pending={pending} run={run} />
 
       <div className={cardClass}>
-        <div className={cardTitleClass}>1b. 교육과정 · 수강과목</div>
+        <div className={cardTitleClass}>1b. 교육과정</div>
         {readOnly ? (
           <div className="text-[12.5px] space-y-1">
             <div>졸업 예정 연도: {data.academicProfile.graduationYear ?? "미입력"}</div>
             <div>교육과정: {data.academicProfile.curriculumType ?? "미입력"}</div>
             <div>현재 수강 과목: {data.academicProfile.currentSubjects.join(", ") || "미입력"}</div>
-            <div>
-              Honors {data.academicProfile.honorsCount ?? "-"} · AP {data.academicProfile.apCount ?? "-"} · 지역대학{" "}
-              {data.academicProfile.collegeCoursesCount ?? "-"} · IB HL {data.academicProfile.ibHlCount ?? "-"} · IB SL{" "}
-              {data.academicProfile.ibSlCount ?? "-"}
-            </div>
           </div>
         ) : (
           <div className="grid grid-cols-2 gap-3">
@@ -197,45 +192,6 @@ function ProfileSections({
               <label className={labelClass}>현재 수강 과목(쉼표로 구분)</label>
               <input className={inputClass} value={currentSubjects} onChange={(e) => setCurrentSubjects(e.target.value)} />
             </div>
-            <div className="col-span-2 text-[11px] font-bold text-grey-300 uppercase tracking-wide mt-1">
-              수강과목 개수(졸업까지 계획, CollegeVine Coursework 탭 동등 항목)
-            </div>
-            <div>
-              <label className={labelClass}>Honors 과목 수</label>
-              <input className={inputClass} type="number" min={0} value={honorsCount} onChange={(e) => setHonorsCount(e.target.value)} />
-            </div>
-            <div>
-              <label className={labelClass}>AP 과목 수</label>
-              <input className={inputClass} type="number" min={0} value={apCount} onChange={(e) => setApCount(e.target.value)} />
-            </div>
-            <div>
-              <label className={labelClass}>지역 대학 수강 과목 수</label>
-              <input
-                className={inputClass}
-                type="number"
-                min={0}
-                value={collegeCoursesCount}
-                onChange={(e) => setCollegeCoursesCount(e.target.value)}
-              />
-            </div>
-            <div>
-              <label className={labelClass}>IB HL 과목 수</label>
-              <input className={inputClass} type="number" min={0} value={ibHlCount} onChange={(e) => setIbHlCount(e.target.value)} />
-            </div>
-            <div>
-              <label className={labelClass}>IB SL 과목 수</label>
-              <input className={inputClass} type="number" min={0} value={ibSlCount} onChange={(e) => setIbSlCount(e.target.value)} />
-            </div>
-            <div>
-              <label className={labelClass}>학교가 제공하는 AP/IB 과목 수(선택)</label>
-              <input
-                className={inputClass}
-                type="number"
-                min={0}
-                value={schoolApIbOfferedCount}
-                onChange={(e) => setSchoolApIbOfferedCount(e.target.value)}
-              />
-            </div>
             <div className="col-span-2">
               <button
                 type="button"
@@ -248,12 +204,12 @@ function ProfileSections({
                       graduationYear: graduationYear ? Number(graduationYear) : null,
                       curriculumType: curriculumType || null,
                       currentSubjects: parseList(currentSubjects),
-                      honorsCount: honorsCount ? Number(honorsCount) : null,
-                      apCount: apCount ? Number(apCount) : null,
-                      collegeCoursesCount: collegeCoursesCount ? Number(collegeCoursesCount) : null,
-                      ibHlCount: ibHlCount ? Number(ibHlCount) : null,
-                      ibSlCount: ibSlCount ? Number(ibSlCount) : null,
-                      schoolApIbOfferedCount: schoolApIbOfferedCount ? Number(schoolApIbOfferedCount) : null,
+                      honorsCount: data.academicProfile.honorsCount,
+                      apCount: data.academicProfile.apCount,
+                      collegeCoursesCount: data.academicProfile.collegeCoursesCount,
+                      ibHlCount: data.academicProfile.ibHlCount,
+                      ibSlCount: data.academicProfile.ibSlCount,
+                      schoolApIbOfferedCount: data.academicProfile.schoolApIbOfferedCount,
                     })
                   )
                 }
@@ -264,6 +220,9 @@ function ProfileSections({
           </div>
         )}
       </div>
+
+      {/* 1c. 수강 과목 목록(2026-09-22 사용자 지시 — 개수 입력 대신 과목별 추가/수정/삭제) */}
+      <CoursesCard data={data} readOnly={readOnly} pending={pending} run={run} />
 
       {/* 2. 시험 정보 */}
       <TestRecordsCard data={data} readOnly={readOnly} pending={pending} run={run} />
@@ -343,6 +302,139 @@ function ProfileSections({
       {/* 5. 준비 현황 */}
       <PrepStatusCard data={data} readOnly={readOnly} pending={pending} run={run} />
     </>
+  );
+}
+
+const COURSE_STATUS_LABELS: Record<"taking" | "completed", string> = {
+  taking: "수강 중",
+  completed: "완료",
+};
+
+// 2026-09-22(사용자 지시) — "수강 과목" 개수 입력을 과목별 목록(추가/수정/삭제)으로.
+function CoursesCard({
+  data,
+  readOnly,
+  pending,
+  run,
+}: {
+  data: RoadmapData;
+  readOnly: boolean;
+  pending: boolean;
+  run: (fn: () => Promise<void>) => void;
+}) {
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [courseName, setCourseName] = useState("");
+  const [status, setStatus] = useState<"taking" | "completed">("taking");
+  const [score, setScore] = useState("");
+  const [academicYear, setAcademicYear] = useState("");
+  const [gradeLevel, setGradeLevel] = useState("");
+
+  function resetForm() {
+    setEditingId(null);
+    setCourseName("");
+    setStatus("taking");
+    setScore("");
+    setAcademicYear("");
+    setGradeLevel("");
+  }
+
+  function startEdit(c: (typeof data.courses)[number]) {
+    setEditingId(c.id);
+    setCourseName(c.courseName);
+    setStatus(c.status);
+    setScore(c.score ?? "");
+    setAcademicYear(c.academicYear?.toString() ?? "");
+    setGradeLevel(c.gradeLevel ?? "");
+  }
+
+  function handleSubmit() {
+    const input = {
+      studentId: data.studentId,
+      courseName,
+      status,
+      score: score || null,
+      academicYear: academicYear ? Number(academicYear) : null,
+      gradeLevel: gradeLevel || null,
+    };
+    run(async () => {
+      if (editingId) {
+        await roadmapActions.updateCourse(editingId, input);
+      } else {
+        await roadmapActions.addCourse(input);
+      }
+      resetForm();
+    });
+  }
+
+  return (
+    <div className={cardClass}>
+      <div className={cardTitleClass}>1c. 수강 과목</div>
+      {data.courses.length === 0 && <div className="text-[12.5px] text-grey-300 mb-2">등록된 수강 과목이 없습니다.</div>}
+      {data.courses.map((c) => (
+        <div key={c.id} className="flex items-center justify-between text-[12.5px] border-b border-grey-100 py-1.5">
+          <div>
+            <span className="font-bold text-ink">{c.courseName}</span>
+            <span className="text-grey-500"> · {COURSE_STATUS_LABELS[c.status]}</span>
+            {c.score && <span className="text-grey-500"> · 점수 {c.score}</span>}
+            {c.academicYear && <span className="text-grey-500"> · {c.academicYear}년</span>}
+            {c.gradeLevel && <span className="text-grey-500"> · {c.gradeLevel}</span>}
+          </div>
+          {!readOnly && (
+            <div className="flex items-center gap-2 shrink-0">
+              <button type="button" className="text-[11px] font-bold text-grey-500" disabled={pending} onClick={() => startEdit(c)}>
+                수정
+              </button>
+              <button
+                type="button"
+                className={dangerBtn}
+                disabled={pending}
+                onClick={() => run(() => roadmapActions.removeCourse(data.studentId, c.id))}
+              >
+                삭제
+              </button>
+            </div>
+          )}
+        </div>
+      ))}
+      {!readOnly && (
+        <div className="grid grid-cols-2 gap-2 mt-3">
+          <input className={inputClass} placeholder="과목명" value={courseName} onChange={(e) => setCourseName(e.target.value)} />
+          <select className={inputClass} value={status} onChange={(e) => setStatus(e.target.value as "taking" | "completed")}>
+            <option value="taking">수강 중</option>
+            <option value="completed">완료</option>
+          </select>
+          <input className={inputClass} placeholder="점수" value={score} onChange={(e) => setScore(e.target.value)} />
+          <input
+            className={inputClass}
+            type="number"
+            placeholder="수강 년도"
+            value={academicYear}
+            onChange={(e) => setAcademicYear(e.target.value)}
+          />
+          <input
+            className={inputClass}
+            placeholder="수강 학년(예: 10학년)"
+            value={gradeLevel}
+            onChange={(e) => setGradeLevel(e.target.value)}
+          />
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              className={smallBtn}
+              disabled={pending || !courseName.trim()}
+              onClick={handleSubmit}
+            >
+              {editingId ? "수정 저장" : "과목 추가"}
+            </button>
+            {editingId && (
+              <button type="button" className="text-[11px] font-bold text-grey-500" onClick={resetForm}>
+                취소
+              </button>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -1169,6 +1261,104 @@ function PrepStatusCard({
   );
 }
 
+// 2026-09-22(사용자 지시) — "목표 설정" 서브서브탭. 목표 학교는
+// student_college_interests.target_colleges(3. 관심 분야와 대학 목표에서
+// 이미 입력)를 그대로 보여준다 — 중복 입력란을 만들지 않는다.
+function GoalsCard({
+  data,
+  readOnly,
+  pending,
+  run,
+}: {
+  data: RoadmapData;
+  readOnly: boolean;
+  pending: boolean;
+  run: (fn: () => Promise<void>) => void;
+}) {
+  const [targetGpa, setTargetGpa] = useState(data.academicProfile.targetGpa?.toString() ?? "");
+  const [targetSat, setTargetSat] = useState(data.academicProfile.targetSat?.toString() ?? "");
+  const [targetApCount, setTargetApCount] = useState(data.academicProfile.targetApCount?.toString() ?? "");
+  const [targetExtracurricular, setTargetExtracurricular] = useState(data.academicProfile.targetExtracurricular ?? "");
+
+  return (
+    <div className={cardClass}>
+      <div className={cardTitleClass}>목표 설정</div>
+      <div className="grid grid-cols-2 gap-3">
+        <div className="col-span-2">
+          <label className={labelClass}>목표 학교</label>
+          <div className="text-[12.5px] text-ink">
+            {data.collegeInterests.targetColleges.join(", ") || "미입력(위 '관심 분야와 대학 목표'에서 입력)"}
+          </div>
+        </div>
+        {readOnly ? (
+          <>
+            <div>
+              <div className={labelClass}>목표 GPA</div>
+              <div className="text-[12.5px] text-ink">{data.academicProfile.targetGpa ?? "미입력"}</div>
+            </div>
+            <div>
+              <div className={labelClass}>목표 SAT</div>
+              <div className="text-[12.5px] text-ink">{data.academicProfile.targetSat ?? "미입력"}</div>
+            </div>
+            <div>
+              <div className={labelClass}>목표 AP 과목 수</div>
+              <div className="text-[12.5px] text-ink">{data.academicProfile.targetApCount ?? "미입력"}</div>
+            </div>
+            <div className="col-span-2">
+              <div className={labelClass}>목표 Extracurricular</div>
+              <div className="text-[12.5px] text-ink">{data.academicProfile.targetExtracurricular ?? "미입력"}</div>
+            </div>
+          </>
+        ) : (
+          <>
+            <div>
+              <label className={labelClass}>목표 GPA</label>
+              <input className={inputClass} type="number" step="0.01" min={0} value={targetGpa} onChange={(e) => setTargetGpa(e.target.value)} />
+            </div>
+            <div>
+              <label className={labelClass}>목표 SAT</label>
+              <input className={inputClass} type="number" min={400} max={1600} value={targetSat} onChange={(e) => setTargetSat(e.target.value)} />
+            </div>
+            <div>
+              <label className={labelClass}>목표 AP 과목 수</label>
+              <input className={inputClass} type="number" min={0} value={targetApCount} onChange={(e) => setTargetApCount(e.target.value)} />
+            </div>
+            <div className="col-span-2">
+              <label className={labelClass}>목표 Extracurricular</label>
+              <input
+                className={inputClass}
+                placeholder="예: 전국 단위 로봇 대회 입상"
+                value={targetExtracurricular}
+                onChange={(e) => setTargetExtracurricular(e.target.value)}
+              />
+            </div>
+            <div className="col-span-2">
+              <button
+                type="button"
+                disabled={pending}
+                className={smallBtn}
+                onClick={() =>
+                  run(() =>
+                    roadmapActions.saveRoadmapGoals({
+                      studentId: data.studentId,
+                      targetGpa: targetGpa ? Number(targetGpa) : null,
+                      targetSat: targetSat ? Number(targetSat) : null,
+                      targetApCount: targetApCount ? Number(targetApCount) : null,
+                      targetExtracurricular: targetExtracurricular || null,
+                    })
+                  )
+                }
+              >
+                저장
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function RoadmapSection({
   data,
   readOnly,
@@ -1184,11 +1374,39 @@ function RoadmapSection({
   const [targetPeriod, setTargetPeriod] = useState("");
   const [targetDate, setTargetDate] = useState("");
   const [notes, setNotes] = useState("");
+  // 2026-09-22(사용자 지시) — 로드맵 탭 안에 "목표 설정" 서브서브탭 추가.
+  const [roadmapSubTab, setRoadmapSubTab] = useState<"milestones" | "goals">("milestones");
 
   const sorted = [...data.milestones].sort((a, b) => (a.targetDate ?? "9999").localeCompare(b.targetDate ?? "9999"));
 
+  if (roadmapSubTab === "goals") {
+    return (
+      <>
+        <PillSubTabs
+          items={[
+            { id: "milestones", label: "마일스톤" },
+            { id: "goals", label: "목표 설정" },
+          ]}
+          activeId={roadmapSubTab}
+          onSelect={(id) => setRoadmapSubTab(id as "milestones" | "goals")}
+          className="mb-4"
+        />
+        <GoalsCard data={data} readOnly={readOnly} pending={pending} run={run} />
+      </>
+    );
+  }
+
   return (
     <>
+      <PillSubTabs
+        items={[
+          { id: "milestones", label: "마일스톤" },
+          { id: "goals", label: "목표 설정" },
+        ]}
+        activeId={roadmapSubTab}
+        onSelect={(id) => setRoadmapSubTab(id as "milestones" | "goals")}
+        className="mb-4"
+      />
       <div className={cardClass}>
         <div className={cardTitleClass}>월별·학기별 마일스톤</div>
         {sorted.length === 0 && <div className="text-[12.5px] text-grey-300">등록된 마일스톤이 없습니다.</div>}
