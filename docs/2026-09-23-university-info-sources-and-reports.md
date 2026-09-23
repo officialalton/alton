@@ -980,3 +980,17 @@ Andrews University는 CSV 후보 URL이 실제로는 홈페이지 루트라 CDS 
   CDS 정보 중 컨설턴트·학생·학부모가 참고할 만한 항목은 전부 공개 화면에 노출되도록
   UI를 계속 확장할 것 — 이 지시는 200개교가 끝날 때까지 매 세션 인계 기록에 계속
   전달되어야 한다.
+
+### 마이그레이션 타임스탬프 규칙 (12차 세션, 3번째 충돌 후 확정)
+- `main`/다른 브랜치(특히 "ALTON 개발 세션" 계열)가 공유 non-prod DB에 이미
+  `20261560000000`대 번호를 push해서 이번이 **3번째 충돌**이었다.
+  `20261560000000_college_db_p10_cds_metric_keys.sql`을
+  `20261600000000_college_db_p10_cds_metric_keys.sql`로 rename하고 로컬 DB에
+  재적용(`supabase migration repair --local --status reverted 20261560000000`
+  → `supabase migration up --local`)해서 정상 동작 확인 후 커밋했다.
+- **이 브랜치(`feature/university-info-sources`) 및 이 브랜치를 이어받는 모든
+  후속 세션은 앞으로 새 마이그레이션 파일을 만들 때 반드시 `20261600000000`
+  이상 번호를 사용할 것.** 새 마이그레이션 전에는 항상
+  `ls supabase/migrations/ | tail -5`로 최신 번호를 확인하고 그보다 큰 번호를
+  써서 여유를 둘 것 (다른 브랜치와 이미 3번 충돌했으므로 절대 아슬아슬하게 잡지
+  말 것).
