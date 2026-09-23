@@ -20,7 +20,7 @@ export type DocumentAccessAction =
 
 export async function recordDocumentAccess(params: {
   actorId: string;
-  targetKind: "contract_artifact" | "teacher_document" | "company_document";
+  targetKind: "contract_artifact" | "teacher_document" | "company_document" | "consultation_material";
   targetId: string;
   subjectId?: string | null;
   action: DocumentAccessAction;

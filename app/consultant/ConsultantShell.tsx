@@ -9,6 +9,13 @@ import CollegeExploreSection from "@/app/components/CollegeExploreSection";
 import DocumentsPanel from "./DocumentsPanel";
 import SettlementPanel from "./SettlementPanel";
 import {
+  listMyConsultationMaterialsAction,
+  recordExternalMaterialOpenAction,
+  getMySessionNoteAction,
+  saveMySessionNoteAction,
+  type ConsultationMaterialForSession,
+} from "./consultation-session-actions";
+import {
   listMyStaffInquiriesAction,
   startMyStaffInquiryAction,
   listMyStaffMessagesAction,
@@ -468,11 +475,23 @@ function SchedulePanel({ assignedConsultations }: { assignedConsultations: Intak
 // 확정·변경·거절)과 이미 확정된 상담 일정(consultations.status='scheduled')을
 // 한 화면에서 보여준다(사용자 지시: "예정 일정에는 신청 확인·확정·변경·거절과
 // 확정된 상담 일정을 보여줍니다").
+// Phase C(2026-09-23) — "시작 전/진행 중/종료 후"는 별도 상태 컬럼 없이
+// 시작 시각(+60분 상담 슬롯 관례) 기준으로 판정한다.
+function sessionTimingLabel(startsAtIso: string): { label: string; canStart: boolean } {
+  const start = new Date(startsAtIso).getTime();
+  const end = start + 60 * 60 * 1000;
+  const now = Date.now();
+  if (now < start) return { label: "시작 전", canStart: false };
+  if (now > end) return { label: "종료됨", canStart: false };
+  return { label: "진행 중", canStart: true };
+}
+
 function UpcomingSchedulePanel({ assignedConsultations }: { assignedConsultations: IntakeConsultation[] }) {
   const confirmedConsultations = assignedConsultations
     .filter((c) => c.status === "scheduled" && c.startsAt)
     .sort((a, b) => (a.startsAt ?? "").localeCompare(b.startsAt ?? ""));
 
+  const [session, setSession] = useState<{ kind: "consultation" | "meeting_request"; id: string; label: string; startsAt: string } | null>(null);
   const [meetings, setMeetings] = useState<AssignedMeetingRequest[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
@@ -541,23 +560,38 @@ function UpcomingSchedulePanel({ assignedConsultations }: { assignedConsultation
     }
   }
 
+  if (session) {
+    return <ConsultationSessionView session={session} onExit={() => setSession(null)} />;
+  }
+
   return (
     <div>
       {confirmedConsultations.length > 0 && (
         <div className="mb-6">
           <div className="text-[11px] font-bold text-grey-500 uppercase tracking-wide mb-2">확정된 상담 일정</div>
           <div className="space-y-2">
-            {confirmedConsultations.map((c) => (
-              <div key={c.id} className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-[13px] font-bold text-ink">{c.contactName}</span>
-                  <span className="text-[11px] text-grey-500">상담</span>
+            {confirmedConsultations.map((c) => {
+              const timing = c.startsAt ? sessionTimingLabel(c.startsAt) : null;
+              return (
+                <div key={c.id} className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[13px] font-bold text-ink">{c.contactName}</span>
+                    <span className="text-[11px] text-grey-500">{timing?.label ?? "상담"}</span>
+                  </div>
+                  {c.startsAt && (
+                    <div className="text-[12px] text-grey-500 mt-1">{formatMeetingDateTime(c.startsAt)}</div>
+                  )}
+                  {timing?.canStart && c.startsAt && (
+                    <button
+                      onClick={() => setSession({ kind: "consultation", id: c.id, label: c.contactName, startsAt: c.startsAt! })}
+                      className="mt-2 text-[12px] font-bold px-3 py-1 rounded-lg bg-ink text-white"
+                    >
+                      상담 시작
+                    </button>
+                  )}
                 </div>
-                {c.startsAt && (
-                  <div className="text-[12px] text-grey-500 mt-1">{formatMeetingDateTime(c.startsAt)}</div>
-                )}
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}
@@ -585,6 +619,14 @@ function UpcomingSchedulePanel({ assignedConsultations }: { assignedConsultation
                 <a href={m.googleMeetLink} target="_blank" rel="noreferrer" className="inline-block mt-1 text-[12px] font-semibold text-ink underline">
                   Google Meet 링크
                 </a>
+              )}
+              {m.status === "scheduled" && m.startsAt && sessionTimingLabel(m.startsAt).canStart && (
+                <button
+                  onClick={() => setSession({ kind: "meeting_request", id: m.id, label: m.studentName ?? "학생", startsAt: m.startsAt! })}
+                  className="mt-2 text-[12px] font-bold px-3 py-1 rounded-lg bg-ink text-white"
+                >
+                  상담 시작
+                </button>
               )}
               {(m.status === "requested" || m.status === "confirming" || m.status === "scheduling") && (
                 <div className="mt-2.5">
@@ -640,6 +682,126 @@ function UpcomingSchedulePanel({ assignedConsultations }: { assignedConsultation
           ))}
         </div>
       )}
+    </div>
+  );
+}
+
+// Phase C(2026-09-23, 사용자 지시) — 상담 세션 전용 화면. 상담 정보·허용된
+// 자료·메모·다음 행동이 한 화면에 이어진다. 자료 원본 다운로드는 서버
+// 경유(다운로드 라우트)로만, 외부 링크는 새 탭으로 열되 열람 사실만 기록
+// 한다 — 화면 캡처 등 그 이후의 유출까지는 이 화면이 막을 수 없다(정직하게
+// "원본 다운로드 경로 제한 + 접근 기록"까지만 보장).
+function ConsultationSessionView({
+  session,
+  onExit,
+}: {
+  session: { kind: "consultation" | "meeting_request"; id: string; label: string; startsAt: string };
+  onExit: () => void;
+}) {
+  const [materials, setMaterials] = useState<ConsultationMaterialForSession[] | null>(null);
+  const [note, setNote] = useState("");
+  const [nextAction, setNextAction] = useState("");
+  const [savedAt, setSavedAt] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    listMyConsultationMaterialsAction().then(setMaterials).catch(() => setMaterials([]));
+    getMySessionNoteAction(session.kind, session.id)
+      .then((n) => {
+        setNote(n.note ?? "");
+        setNextAction(n.nextAction ?? "");
+        setSavedAt(n.updatedAt);
+      })
+      .catch(() => {});
+  }, [session.kind, session.id]);
+
+  async function handleSave() {
+    setBusy(true);
+    setError(null);
+    try {
+      await saveMySessionNoteAction({ sourceKind: session.kind, sourceId: session.id, note, nextAction });
+      setSavedAt(new Date().toISOString());
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "저장하지 못했습니다.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleOpenMaterial(m: ConsultationMaterialForSession) {
+    if (m.hasDriveFile) {
+      window.open(`/api/consultant/consultation-materials/${m.id}`, "_blank", "noopener,noreferrer");
+      return;
+    }
+    if (m.externalUrl) {
+      await recordExternalMaterialOpenAction(m.id).catch(() => {});
+      window.open(m.externalUrl, "_blank", "noopener,noreferrer");
+    }
+  }
+
+  const grouped = new Map<string, ConsultationMaterialForSession[]>();
+  for (const m of materials ?? []) {
+    const key = m.category ?? "기타";
+    grouped.set(key, [...(grouped.get(key) ?? []), m]);
+  }
+
+  return (
+    <div className="max-w-[760px] px-8 py-8">
+      <button onClick={onExit} className="text-[13px] text-grey-600 font-semibold border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 mb-3">
+        ← Schedule로
+      </button>
+      <h1 className="text-[18px] font-extrabold text-ink mb-1">{session.label}님 상담 세션</h1>
+      <div className="text-[12px] text-grey-500 mb-6">{formatMeetingDateTime(session.startsAt)} · 진행 중</div>
+
+      <div className="grid grid-cols-2 gap-6">
+        <div>
+          <h3 className="text-[13px] font-bold text-ink mb-2">상담 자료</h3>
+          {materials === null ? (
+            <p className="text-[13px] text-grey-500">불러오는 중…</p>
+          ) : materials.length === 0 ? (
+            <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">등록된 자료가 없습니다.</div>
+          ) : (
+            Array.from(grouped.entries()).map(([category, items]) => (
+              <div key={category} className="mb-4">
+                <div className="text-[11px] font-bold text-grey-500 uppercase tracking-wide mb-1.5">{category}</div>
+                {items.map((m) => (
+                  <button
+                    key={m.id}
+                    onClick={() => handleOpenMaterial(m)}
+                    className="w-full text-left border-[1.5px] border-grey-200 rounded-lg px-3 py-2 mb-1.5"
+                  >
+                    <div className="text-[12.5px] font-bold text-ink">{m.title}</div>
+                    {m.description && <div className="text-[11.5px] text-grey-500 mt-0.5">{m.description}</div>}
+                  </button>
+                ))}
+              </div>
+            ))
+          )}
+        </div>
+
+        <div>
+          <h3 className="text-[13px] font-bold text-ink mb-2">상담 메모</h3>
+          {error && <div className="mb-2 text-[12px] font-semibold text-red bg-red/5 rounded-lg px-3 py-2">{error}</div>}
+          <textarea
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+            placeholder="상담 내용을 기록해주세요"
+            className="w-full border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px] min-h-[100px] mb-3"
+          />
+          <h3 className="text-[13px] font-bold text-ink mb-2">다음 행동</h3>
+          <textarea
+            value={nextAction}
+            onChange={(e) => setNextAction(e.target.value)}
+            placeholder="다음에 할 일을 적어주세요"
+            className="w-full border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px] min-h-[60px] mb-3"
+          />
+          <button onClick={handleSave} disabled={busy} className="text-[13px] font-bold bg-ink text-white rounded-lg px-4 py-1.5 disabled:opacity-50">
+            저장
+          </button>
+          {savedAt && <span className="ml-2 text-[11.5px] text-grey-500">{new Date(savedAt).toLocaleString("ko-KR")} 저장됨</span>}
+        </div>
+      </div>
     </div>
   );
 }

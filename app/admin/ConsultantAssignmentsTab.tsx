@@ -40,6 +40,12 @@ import {
   type StaffInquiryListItem,
   type StaffMessage,
 } from "./staff-messenger-actions";
+import {
+  listConsultationMaterialsAction,
+  createConsultationMaterialAction,
+  archiveConsultationMaterialAction,
+  type ConsultationMaterial,
+} from "./consultation-materials-actions";
 
 // 컨설턴트 포지션(2026-09-22 사용자 지시, 가볍게 시작) — 기존 계정을
 // 이메일로 찾아 컨설턴트로 지정하고, 담당 학생을 이메일로 배정/해제한다.
@@ -347,6 +353,7 @@ export default function ConsultantAssignmentsTab({
       <TeacherAssignmentRequestsAdminSection />
       <ConsultantSettlementAdminSection consultants={consultants} />
       <StaffMessagesAdminSection consultants={consultants} />
+      <ConsultationMaterialsAdminSection />
     </div>
   );
 }
@@ -865,6 +872,107 @@ function StaffMessagesAdminSection({ consultants }: { consultants: ConsultantWit
             </div>
             <span className="text-[11px] text-grey-500">{new Date(i.lastMessageAt).toLocaleString("ko-KR")}</span>
           </button>
+        ))
+      )}
+    </div>
+  );
+}
+
+// Phase C(2026-09-23, 사용자 지시) — "관리자가 상담용 기초자료를 등록·분류·
+// 공개합니다." 컨설턴트 개인 업로드는 없다(관리자 전용 CRUD). 자료는 Drive
+// 파일 ID 또는 외부 링크 중 하나로 등록한다.
+function ConsultationMaterialsAdminSection() {
+  const [materials, setMaterials] = useState<ConsultationMaterial[] | null>(null);
+  const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("");
+  const [driveFileId, setDriveFileId] = useState("");
+  const [externalUrl, setExternalUrl] = useState("");
+  const [description, setDescription] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  function reload() {
+    listConsultationMaterialsAction()
+      .then(setMaterials)
+      .catch((e) => setError(e instanceof Error ? e.message : "불러오지 못했습니다."));
+  }
+  useEffect(() => {
+    reload();
+  }, []);
+
+  async function handleCreate() {
+    setBusy(true);
+    setError(null);
+    try {
+      await createConsultationMaterialAction({
+        title,
+        category: category || undefined,
+        driveFileId: driveFileId || undefined,
+        externalUrl: externalUrl || undefined,
+        description: description || undefined,
+      });
+      setTitle("");
+      setCategory("");
+      setDriveFileId("");
+      setExternalUrl("");
+      setDescription("");
+      reload();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "등록하지 못했습니다.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleArchive(id: string) {
+    setBusy(true);
+    try {
+      await archiveConsultationMaterialAction(id);
+      reload();
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  const active = (materials ?? []).filter((m) => !m.archivedAt);
+
+  return (
+    <div className="mt-8">
+      <h2 className="text-[15px] font-extrabold text-ink mb-1">상담 자료</h2>
+      <p className="text-[12px] text-grey-500 mb-3">등록하면 모든 컨설턴트의 상담 세션 화면에 바로 공개됩니다.</p>
+      {error && <div className="mb-3 text-[13px] font-semibold text-red bg-red/5 rounded-lg px-4 py-3">{error}</div>}
+
+      <div className="border-[1.5px] border-grey-200 rounded-xl p-4 mb-4">
+        <div className="grid grid-cols-2 gap-2 mb-2">
+          <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="제목" className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]" />
+          <input value={category} onChange={(e) => setCategory(e.target.value)} placeholder="분류(선택)" className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]" />
+          <input value={driveFileId} onChange={(e) => setDriveFileId(e.target.value)} placeholder="Drive 파일 ID(원본 보관 시)" className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]" />
+          <input value={externalUrl} onChange={(e) => setExternalUrl(e.target.value)} placeholder="외부 링크(Drive 파일이 없을 때)" className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]" />
+        </div>
+        <input value={description} onChange={(e) => setDescription(e.target.value)} placeholder="설명(선택)" className="w-full border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px] mb-2" />
+        <button onClick={handleCreate} disabled={busy || !title || (!driveFileId && !externalUrl)} className="text-[13px] font-bold bg-ink text-white rounded-lg px-4 py-1.5 disabled:opacity-50">
+          등록
+        </button>
+      </div>
+
+      {materials === null ? (
+        <p className="text-[13px] text-grey-500">불러오는 중…</p>
+      ) : active.length === 0 ? (
+        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">등록된 자료가 없습니다.</div>
+      ) : (
+        active.map((m) => (
+          <div key={m.id} className="flex items-center justify-between border-[1.5px] border-grey-200 rounded-xl px-4 py-3 mb-2">
+            <div>
+              <div className="text-[13px] font-bold text-ink">
+                {m.category && <span className="text-grey-500">[{m.category}] </span>}
+                {m.title}
+              </div>
+              {m.description && <div className="text-[11.5px] text-grey-500 mt-0.5">{m.description}</div>}
+            </div>
+            <button onClick={() => handleArchive(m.id)} disabled={busy} className="text-[12px] font-bold text-red disabled:opacity-50">
+              보관
+            </button>
+          </div>
         ))
       )}
     </div>
