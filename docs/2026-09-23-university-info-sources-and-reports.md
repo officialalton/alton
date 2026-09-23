@@ -2186,3 +2186,104 @@ data_collection_status`를 `verified_pilot`로 갱신. psql로 반영 건수
    세션이면 sources_pending_review 소진이 가능할 것으로 보이며, 완료
    시 반드시 최종 통합보고서를 작성하고 CDS 정보 노출 UI를 계속
    확장할 것 — 매 세션 인계 기록에 계속 전달.
+
+## 25차 세션(2026-09-23) — CDS 실수집 6개교 + unconfirmed 1개교 해소 +
+학과 보완 10개교
+
+### 방법론
+- psql로 `university_source_urls`에서 `type='common_data_set',
+  status='approved'`이면서 `data_collection_status='sources_pending_review'`
+  인 74개교를 재조회. 각 학교의 등록된 URL은 대부분 IR 랜딩 페이지라
+  WebSearch로 실제 PDF 직링크를 먼저 찾고, WebFetch(때로는 PDF가
+  로컬에 저장되어 Read 툴로 페이지 단위 재추출)로 Section
+  C(지원자/합격자/등록자, SAT/ACT, GPA)를 확인하는 방식으로 진행.
+  `curl --max-time N -A "Chrome UA"`는 랜딩 페이지 탐색과 Cloudflare
+  우회 재시도(Clemson)에만 사용.
+- Cloudflare 403: Clemson University(`open.clemson.edu`)는 Referer
+  헤더를 포함한 curl 재시도도 403 — 5분 내 포기, 다음 세션 인계.
+  Purdue(`purdue.edu/idata`)는 CDS가 xlsx 전용이며 다운로드 링크가
+  실제로는 워드프레스 404 HTML을 반환 — 스킵.
+
+### sources_pending_review → verified_pilot (5개교)
+- **University of California, Los Angeles**(CDS 2025-26,
+  `apb.ucla.edu`, Fall2025 — test-blind 정책으로 SAT/ACT 미보고,
+  GPA 3.94, 지원 145,086/합격 13,659/등록 6,553, 대기자명단·재학
+  유지율(97%)·2019코호트 6년 졸업률(92.8%) 포함 11건)
+- **University of Arizona**(CDS 2025-26, `uair.arizona.edu` 실제
+  PDF 경로 확인, Fall2025, SAT 1090–1320/ACT 20–28, GPA 3.43,
+  지원 56,376/합격 47,080/등록 7,492, 재학유지율 83%, 11건)
+- **University of Denver**(CDS 2025-26, `du.edu`, Fall2025, SAT
+  1160–1360/ACT 27–32, GPA 3.68, 지원 16,637/합격 14,205/등록 1,174,
+  대기자명단 포함 12건)
+- **University of San Francisco**(CDS 2024-25, `myusf.usfca.edu`,
+  Fall2024 — 최신 2025-26은 미공개, SAT 1200–1380/ACT 25–30, GPA
+  3.62, 지원 17,267/합격 2,827/등록 1,039, 10건)
+- **Syracuse University**(CDS 2025-26, `effectiveness.syr.edu` 신규
+  경로 확인, Fall2025, SAT 1300–1410/ACT 29–33, GPA 3.71, 지원
+  46,645/합격 22,756/등록 3,969, 대기자명단·재학유지율(92%)·2018
+  코호트 6년 졸업률(83.61%) 포함 15건)
+- 5개교 모두 성별(또는 거주지) 분해 합이 표 하단 총계와 일치함을
+  대조 후 반영. UCLA/USF는 GPA만 있고 SAT/ACT는 정책상 없거나
+  최신본이 없어 생략(추측 금지 원칙 적용, notes에 사유 명기).
+
+### unconfirmed → verified_pilot (1개교)
+- **Columbia University**(Columbia College/Columbia Engineering
+  버전 CDS 2024-25, `opir.columbia.edu` 공식 PDF 확인, Fall2024,
+  SAT 1510–1560/ACT 34–36, 지원 60,247/합격 2,325/등록 1,483,
+  2018코호트 6년 졸업률 96% 포함 10건 — Columbia General Studies는
+  별도 CDS라 이번 세션에 포함하지 않음, GPA는 원문에 공란이라 미기재).
+  나머지 3개교는 아래 참고.
+
+### 여전히 unconfirmed로 남은 학교(3개교)
+- **Gonzaga University**: `.ashx` 확장자 CDS 링크와 팩트북 PDF 모두
+  WebFetch에서 403 — WAF 차단 추정, 브라우저 자동화 도구 필요.
+- **Catholic University of America**: 공개 CDS PDF를 이번 세션도
+  찾지 못함(WebSearch 결과에 타 대학 CDS만 노출).
+- **Miami University (Ohio)**: 사이트가 리뉴얼되어 기존 `/oir/data/`
+  경로가 전부 다른 페이지로 리다이렉트, xlsx 전용이라 PDF 부재.
+  `irsa.miami.edu`(University of Miami, 플로리다)와 혼동 주의 —
+  실제로는 서로 다른 학교이며 DB의 University of Miami(플로리다)는
+  이미 verified_pilot 상태.
+
+### 학과 목록 보완 — 10개교 신규 추가(전부 additive insert)
+Louisiana State University(72건, `lsu.edu/majors/a-z.php`),
+University of Kansas(60건, `catalog.ku.edu/azindex/`), University of
+Iowa(56건, `clas.uiowa.edu` 학부 전공 목록), University of Alabama
+(83건, `catalog.ua.edu/programs/`), Virginia Commonwealth University
+(64건, `bulletin.vcu.edu/azprograms/`), University of
+Nebraska-Lincoln(78건, `catalog.unl.edu/undergraduate/majors/`), West
+Virginia University(46건, `catalog.wvu.edu/programs/`), University of
+Central Florida(106건, `ucf.edu/majors/`), University of Vermont(75건,
+`catalogue.uvm.edu/undergraduate/majors/`), University of Pittsburgh
+(87건, `academics.pitt.edu/undergraduate-programs`).
+- 전부 학교 공식 학사요람/전공 목록 페이지에서 직접 추출, 학위 접미사
+  (B.S./B.A. 등)는 정리하되 전공명 자체는 원문 유지.
+
+### verified_pilot 승격 및 최종 카운트 (psql 직접 확인, 세션 종료 시점)
+- `data_collection_status`: `verified_pilot` **122 → 128개교**,
+  `sources_pending_review` **74 → 69개교**, `unconfirmed` **4 →
+  3개교**.
+- `university_majors`: 전공 0건이던 학교 중 10개교 신규 보완 완료
+  (전공 0건 학교 120개교 남음 — 24차 대비 학교 총원 확인 차이는
+  이번 세션 psql 재조회 기준).
+- `git status`: 앱 코드 변경 없음. 새 마이그레이션 없음.
+  `npx supabase db push --linked` / `vercel deploy` 실행하지 않음.
+
+### 다음 세션 인계 (25차 작성분)
+1. sources_pending_review **69개교** 남음 — 이번 세션 처리 5개교는
+   자동 제외되고 재조회 가능.
+2. unconfirmed **3개교**(Gonzaga/Catholic University of America/
+   Miami University Ohio) — 전부 브라우저 자동화 도구(Claude_Browser
+   등)가 있는 세션에서 재시도 권장. Miami Ohio는 xlsx만 있으므로
+   openpyxl 등으로 직접 파싱하는 방법도 고려.
+3. Cloudflare/WAF 403 계열(Clemson, Gonzaga, Oklahoma State, Purdue)
+   은 이번 세션도 미해결 — 브라우저 기반 도구 필요.
+4. 학과 목록 보완: 120개교 남음(쿼리는 24차와 동일 패턴,
+   `data_collection_status` 필터 없이 전체 대학 기준 재확인 권장 —
+   sources_pending_review 상태 학교도 학과 자료는 미리 보완 가능).
+5. 관리자 화면 노출 확인 여전히 미착수.
+6. 200개교 CDS 수집은 이제 128/200(64%) 완료. 남은 69개교
+   sources_pending_review 처리가 끝나면(다음 2~3세션 내 가능할
+   전망) unconfirmed 잔여 3개교만 남게 되므로, 완료 시 반드시 최종
+   통합보고서를 작성하고 CDS 정보 노출 UI 확장을 계속 진행할 것 —
+   매 세션 인계 기록에 계속 전달.
