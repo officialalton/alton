@@ -51,6 +51,8 @@ export default function ClassesTab({
   onCancelBooking,
   onUpdateTimezone,
   onReportTeacherIssue,
+  onListPendingReschedule,
+  onRespondToReschedule,
 }: ClassesTabProps) {
   const [subtab, setSubtab] = useState<"schedule" | "upcoming" | "past">("upcoming");
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
@@ -96,6 +98,8 @@ export default function ClassesTab({
             onCancelBooking={onCancelBooking}
             onUpdateTimezone={onUpdateTimezone}
             onReportTeacherIssue={onReportTeacherIssue}
+            onListPendingReschedule={onListPendingReschedule}
+            onRespondToReschedule={onRespondToReschedule}
             mode={subtab}
             hideHeader
           />

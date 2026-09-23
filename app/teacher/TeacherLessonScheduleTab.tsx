@@ -6,7 +6,7 @@ import type { TeacherLessonScheduleItem, ExternalBusyBlock, ActionResult } from 
 import { isPastLesson } from "./lesson-schedule-data";
 import type { AvailabilityExceptionRow } from "./availability-actions";
 import MonthCalendar, { type DayBadge } from "@/app/components/MonthCalendar";
-import { dateKeyInTimezone, dateKeysCoveredByInterval, buildWeekGrid, todayKeyInTimezone } from "@/lib/calendar-date-utils";
+import { dateKeyInTimezone, dateKeysCoveredByInterval, buildWeekGrid, todayKeyInTimezone, zonedDateTimeToUtcIso } from "@/lib/calendar-date-utils";
 import LessonReviewForm from "./LessonReviewForm";
 import LessonReviewEditForm from "./LessonReviewEditForm";
 import {
@@ -75,6 +75,15 @@ export type TeacherLessonScheduleTabProps = {
   // 예정 목록 + 접이식 지난 수업 목록을 모두 보여준다 — 다른 호출부·테스트 호환).
   mode?: "upcoming" | "past";
   onReportSessionIssue?: (params: ReportSessionIssueParams) => Promise<void>;
+  // 2026-09-22(사용자 지시 — "선생님이 일정 확인 후 확정하거나 변경/거절") — 예약은
+  // 즉시 확정 그대로 두고, 확정된 예약에 대해 새 시간을 제안하는 재조정 요청만
+  // 추가한다. 학생/보호자가 수락해야 실제 시간이 바뀐다.
+  onRequestReschedule?: (params: {
+    reservationId: string;
+    proposedStartsAt: string;
+    proposedEndsAt: string;
+    reason: string;
+  }) => Promise<ActionResult>;
 };
 
 export default function TeacherLessonScheduleTab({
@@ -89,12 +98,17 @@ export default function TeacherLessonScheduleTab({
   onResolveLateness,
   mode,
   onReportSessionIssue,
+  onRequestReschedule,
 }: TeacherLessonScheduleTabProps) {
   const router = useRouter();
   const [view, setView] = useState<"week-list" | "week" | "month">("week-list");
   const [selectedDateKey, setSelectedDateKey] = useState<string | null>(null);
   const [cancellingReservationId, setCancellingReservationId] = useState<string | null>(null);
   const [cancelReasonDraft, setCancelReasonDraft] = useState("");
+  const [reschedulingReservationId, setReschedulingReservationId] = useState<string | null>(null);
+  const [rescheduleDateDraft, setRescheduleDateDraft] = useState("");
+  const [rescheduleTimeDraft, setRescheduleTimeDraft] = useState("");
+  const [rescheduleReasonDraft, setRescheduleReasonDraft] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [externalBusyBlocks, setExternalBusyBlocks] = useState<ExternalBusyBlock[]>([]);
@@ -410,17 +424,35 @@ export default function TeacherLessonScheduleTab({
               {formatDateTime(lesson.startsAt, timezone)} · {durationMinutes(lesson.startsAt, lesson.endsAt)}분
             </div>
           </div>
-          {!isPast && cancellingReservationId !== lesson.reservationId && (
-            <button
-              disabled={submitting}
-              onClick={() => {
-                setCancellingReservationId(lesson.reservationId);
-                setCancelReasonDraft("");
-              }}
-              className="text-[12px] font-bold text-red disabled:opacity-50"
-            >
-              취소
-            </button>
+          {!isPast && (
+            <div className="flex items-center gap-2">
+              {onRequestReschedule && reschedulingReservationId !== lesson.reservationId && cancellingReservationId !== lesson.reservationId && (
+                <button
+                  disabled={submitting}
+                  onClick={() => {
+                    setReschedulingReservationId(lesson.reservationId);
+                    setRescheduleDateDraft(dateKeyInTimezone(lesson.startsAt, timezone));
+                    setRescheduleTimeDraft("");
+                    setRescheduleReasonDraft("");
+                  }}
+                  className="text-[12px] font-bold text-ink disabled:opacity-50"
+                >
+                  재조정 요청
+                </button>
+              )}
+              {cancellingReservationId !== lesson.reservationId && (
+                <button
+                  disabled={submitting}
+                  onClick={() => {
+                    setCancellingReservationId(lesson.reservationId);
+                    setCancelReasonDraft("");
+                  }}
+                  className="text-[12px] font-bold text-red disabled:opacity-50"
+                >
+                  취소
+                </button>
+              )}
+            </div>
           )}
         </div>
         <div className="mt-2 flex items-center gap-2 flex-wrap">
@@ -636,6 +668,50 @@ export default function TeacherLessonScheduleTab({
             </div>
           </div>
         )}
+        {reschedulingReservationId === lesson.reservationId && (
+          <div className="mt-3 border-t border-grey-200 pt-3">
+            <p className="text-[11px] text-grey-500 mb-2">
+              제안한 시간을 학생/보호자가 수락해야 실제로 바뀝니다. 수락 전까지 기존 예약은 그대로 유지됩니다.
+            </p>
+            <div className="flex gap-2 mb-2">
+              <input
+                type="date"
+                autoFocus
+                className="border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px]"
+                value={rescheduleDateDraft}
+                onChange={(e) => setRescheduleDateDraft(e.target.value)}
+              />
+              <input
+                type="time"
+                className="border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px]"
+                value={rescheduleTimeDraft}
+                onChange={(e) => setRescheduleTimeDraft(e.target.value)}
+              />
+            </div>
+            <input
+              className="w-full border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px] mb-2"
+              value={rescheduleReasonDraft}
+              onChange={(e) => setRescheduleReasonDraft(e.target.value)}
+              placeholder="사유(선택)"
+            />
+            <div className="flex gap-2 justify-end">
+              <button
+                disabled={submitting}
+                onClick={() => setReschedulingReservationId(null)}
+                className="text-[12px] font-semibold text-grey-500 disabled:opacity-50"
+              >
+                닫기
+              </button>
+              <button
+                disabled={submitting || !rescheduleDateDraft || !rescheduleTimeDraft}
+                onClick={() => handleRequestReschedule(lesson)}
+                className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
+              >
+                재조정 요청 보내기
+              </button>
+            </div>
+          </div>
+        )}
         {isPast && onReportSessionIssue && (
           <div className="mt-2 flex items-center justify-end">
             {reportedSessionIds.has(lesson.sessionId) ? (
@@ -717,6 +793,33 @@ export default function TeacherLessonScheduleTab({
       setCancellingReservationId(null);
       setCancelReasonDraft("");
       router.refresh();
+      await onRefresh();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  async function handleRequestReschedule(lesson: TeacherLessonScheduleItem) {
+    if (!onRequestReschedule) return;
+    setSubmitting(true);
+    setError(null);
+    try {
+      const proposedStartsAt = zonedDateTimeToUtcIso(rescheduleDateDraft, rescheduleTimeDraft, timezone);
+      const durationMs = new Date(lesson.endsAt).getTime() - new Date(lesson.startsAt).getTime();
+      const proposedEndsAt = new Date(new Date(proposedStartsAt).getTime() + durationMs).toISOString();
+      const result = await onRequestReschedule({
+        reservationId: lesson.reservationId,
+        proposedStartsAt,
+        proposedEndsAt,
+        reason: rescheduleReasonDraft.trim(),
+      });
+      if (!result.ok) {
+        setError(result.error);
+        return;
+      }
+      setReschedulingReservationId(null);
       await onRefresh();
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));

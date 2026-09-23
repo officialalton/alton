@@ -25,6 +25,7 @@ import {
 } from "@/lib/booking/authorization";
 import { listAvailableSlotsForBooking as queryAvailableSlots, type AvailableSlotsQuery } from "@/lib/booking/query-slots";
 import { submitIncidentReport, type IncidentReportType } from "@/lib/booking/incident-reports";
+import { respondToLessonRescheduleRequest } from "@/lib/booking/reschedule";
 
 export type { AvailableSlotsQuery };
 
@@ -99,6 +100,61 @@ export async function updateChildTimezone(childId: string, timezone: string): Pr
   const admin = createAdminClient();
   const { error } = await admin.from("profiles").update({ timezone }).eq("id", childId);
   if (error) throw new Error(error.message);
+}
+
+export type PendingLessonRescheduleRequestForChild = {
+  id: string;
+  reservationId: string;
+  proposedStartsAt: string;
+  proposedEndsAt: string;
+  reason: string | null;
+};
+
+/** 2026-09-22(사용자 지시) — RLS("학생/보호자 본인 예약 조회")가 자녀의 예약에 대한
+ * 재조정 요청만 이미 보이게 해준다 — childId 인자는 방어적 재확인용. */
+export async function listPendingLessonRescheduleRequestsForChild(
+  childId: string
+): Promise<PendingLessonRescheduleRequestForChild[]> {
+  const { user, supabase } = await requireUser();
+  await assertGuardianOfChild(supabase, user.id, childId);
+  const { data, error } = await supabase
+    .from("reservation_reschedule_requests")
+    .select("id, reservation_id, proposed_starts_at, proposed_ends_at, reason, reservation:reservations!inner(subject_enrollment_id, subject_enrollments!inner(child_id))")
+    .eq("status", "pending")
+    .order("created_at", { ascending: false });
+  if (error) throw new Error(error.message);
+  type Row = {
+    id: string;
+    reservation_id: string;
+    proposed_starts_at: string;
+    proposed_ends_at: string;
+    reason: string | null;
+    reservation: { subject_enrollment_id: string; subject_enrollments: { child_id: string } | { child_id: string }[] } | null;
+  };
+  return (data as unknown as Row[])
+    .filter((r) => {
+      const rel = r.reservation?.subject_enrollments;
+      const enrollment = Array.isArray(rel) ? rel[0] : rel;
+      return enrollment?.child_id === childId;
+    })
+    .map((r) => ({
+      id: r.id,
+      reservationId: r.reservation_id,
+      proposedStartsAt: r.proposed_starts_at,
+      proposedEndsAt: r.proposed_ends_at,
+      reason: r.reason,
+    }));
+}
+
+export async function respondToLessonRescheduleRequestForChild(
+  requestId: string,
+  childId: string,
+  accept: boolean
+): Promise<void> {
+  const { user, supabase } = await requireUser();
+  await assertGuardianOfChild(supabase, user.id, childId);
+  await respondToLessonRescheduleRequest(supabase, requestId, accept);
+  revalidatePath("/parent");
 }
 
 export async function cancelLessonBookingForChild(params: {

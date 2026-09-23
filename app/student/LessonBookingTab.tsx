@@ -20,6 +20,7 @@ const PENDING_ACTIVATION_REASON_LABEL: Record<PendingActivationReason, string> =
 import type { WeeklySeriesOccurrenceResult, BookingActionOutcome } from "@/lib/booking/create-booking";
 import MonthCalendar from "@/app/components/MonthCalendar";
 import { dateKeyInTimezone, todayKeyInTimezone } from "@/lib/calendar-date-utils";
+import RescheduleRequestsBanner, { type PendingReschedule } from "./RescheduleRequestsBanner";
 
 const TEACHER_ISSUE_TYPE_LABEL: Record<"teacher_late" | "teacher_no_show_reported", string> = {
   teacher_late: "선생님 지각",
@@ -79,6 +80,10 @@ export type LessonBookingTabProps = {
   // 다른 호출부·테스트 호환).
   mode?: "upcoming" | "past";
   hideHeader?: boolean;
+  // 2026-09-22(사용자 지시) — 선생님 재조정 요청 배너. 학생·보호자 포털이
+  // 각자 자기 역할의 서버 액션을 주입한다(둘 다 없으면 배너 자체를 렌더링하지 않음).
+  onListPendingReschedule?: () => Promise<PendingReschedule[]>;
+  onRespondToReschedule?: (requestId: string, accept: boolean) => Promise<void>;
 };
 
 export default function LessonBookingTab({
@@ -95,6 +100,8 @@ export default function LessonBookingTab({
   onReportTeacherIssue,
   mode: tabMode,
   hideHeader = false,
+  onListPendingReschedule,
+  onRespondToReschedule,
 }: LessonBookingTabProps) {
   const router = useRouter();
   const [selectedEnrollmentId, setSelectedEnrollmentId] = useState<string>(bookableEnrollments[0]?.subjectEnrollmentId ?? "");
@@ -329,6 +336,9 @@ export default function LessonBookingTab({
 
   return (
     <div className={hideHeader ? "max-w-[640px] px-8 pt-4" : "max-w-[640px] px-8 py-8"}>
+      {showUpcoming && onListPendingReschedule && onRespondToReschedule && (
+        <RescheduleRequestsBanner timezone={timezone} listPending={onListPendingReschedule} onRespond={onRespondToReschedule} />
+      )}
       {showUpcoming && !hideHeader && (
         <>
       <h1 className="text-[20px] font-extrabold text-ink mb-1.5">수업 예약</h1>

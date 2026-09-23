@@ -40,6 +40,8 @@ import {
   createMyWeeklyLessonSeries,
   cancelMyLessonBooking,
   updateMyTimezone,
+  listMyPendingLessonRescheduleRequestsAction,
+  respondToMyLessonRescheduleRequestAction,
 } from "./booking-actions";
 import { reportTeacherIssue } from "./incident-report-actions";
 import StudentConsultantTab from "./StudentConsultantTab";
@@ -351,6 +353,8 @@ export default function StudentShell({
               onCancelBooking={(reservationId, reason) => cancelMyLessonBooking({ reservationId, reason })}
               onUpdateTimezone={updateMyTimezone}
               onReportTeacherIssue={reportTeacherIssue}
+              onListPendingReschedule={listMyPendingLessonRescheduleRequestsAction}
+              onRespondToReschedule={respondToMyLessonRescheduleRequestAction}
             />
           ) : activeTab === "vocab" ? (
             <VocabLibraryTab myWords={myVocabWords} books={vocabLibraryBooks} quizzes={vocabQuizzes} folders={vocabFolders} />

@@ -51,6 +51,8 @@ import {
   cancelLessonBookingForChild,
   updateChildTimezone,
   reportTeacherIssueForChild,
+  listPendingLessonRescheduleRequestsForChild,
+  respondToLessonRescheduleRequestForChild,
 } from "./booking-actions";
 import RoadmapView from "@/app/components/RoadmapView";
 import type { RoadmapData } from "@/lib/roadmap/types";
@@ -684,6 +686,8 @@ export default function ParentShell({
               onCancelBooking={(reservationId, reason) => cancelLessonBookingForChild({ reservationId, childId: currentChildId, reason })}
               onUpdateTimezone={(timezone) => updateChildTimezone(currentChildId, timezone)}
               onReportTeacherIssue={(params) => reportTeacherIssueForChild({ ...params, childId: currentChildId })}
+              onListPendingReschedule={() => listPendingLessonRescheduleRequestsForChild(currentChildId)}
+              onRespondToReschedule={(requestId, accept) => respondToLessonRescheduleRequestForChild(requestId, currentChildId, accept)}
             />
           ) : activeTab === "entitlements" ? (
             <EntitlementsTab data={entitlements} purchaseStatus={purchaseStatus} />

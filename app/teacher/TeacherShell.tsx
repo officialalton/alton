@@ -40,6 +40,7 @@ import {
   startMyLessonSession,
   finalizeMyLessonSession,
   resolveMyLessonLateness,
+  requestMyLessonRescheduleAction,
   type TeacherLessonScheduleItem,
 } from "./lesson-schedule-actions";
 
@@ -323,6 +324,7 @@ export default function TeacherShell({
               onFinalizeSession={finalizeMyLessonSession}
               onResolveLateness={resolveMyLessonLateness}
               onReportSessionIssue={reportSessionIssue}
+              onRequestReschedule={requestMyLessonRescheduleAction}
             />
           ) : activeTab === "availability" ? (
             <TeacherAvailabilityTab

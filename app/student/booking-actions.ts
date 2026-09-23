@@ -16,6 +16,7 @@ import {
 } from "@/lib/booking/create-booking";
 import { assertActiveTeacherAssignment, assertReservationBelongsToChild } from "@/lib/booking/authorization";
 import { listAvailableSlotsForBooking as queryAvailableSlots, type AvailableSlotsQuery } from "@/lib/booking/query-slots";
+import { respondToLessonRescheduleRequest } from "@/lib/booking/reschedule";
 
 export type { AvailableSlotsQuery };
 
@@ -85,6 +86,39 @@ export async function updateMyTimezone(timezone: string): Promise<void> {
   const { user, supabase } = await requireUser();
   const { error } = await supabase.from("profiles").update({ timezone }).eq("id", user.id);
   if (error) throw new Error(error.message);
+}
+
+export type PendingLessonRescheduleRequest = {
+  id: string;
+  reservationId: string;
+  proposedStartsAt: string;
+  proposedEndsAt: string;
+  reason: string | null;
+};
+
+/** 2026-09-22(사용자 지시) — 선생님이 건 재조정 요청 중 내 예약(subject_enrollments.child_id=본인)에
+ * 대한 대기 중인 것만 보여준다. RLS("학생/보호자 본인 예약 조회")가 이미 범위를 제한한다. */
+export async function listMyPendingLessonRescheduleRequestsAction(): Promise<PendingLessonRescheduleRequest[]> {
+  const { supabase } = await requireUser();
+  const { data, error } = await supabase
+    .from("reservation_reschedule_requests")
+    .select("id, reservation_id, proposed_starts_at, proposed_ends_at, reason")
+    .eq("status", "pending")
+    .order("created_at", { ascending: false });
+  if (error) throw new Error(error.message);
+  return (data ?? []).map((r) => ({
+    id: r.id,
+    reservationId: r.reservation_id,
+    proposedStartsAt: r.proposed_starts_at,
+    proposedEndsAt: r.proposed_ends_at,
+    reason: r.reason,
+  }));
+}
+
+export async function respondToMyLessonRescheduleRequestAction(requestId: string, accept: boolean): Promise<void> {
+  const { supabase } = await requireUser();
+  await respondToLessonRescheduleRequest(supabase, requestId, accept);
+  revalidatePath("/student");
 }
 
 export async function cancelMyLessonBooking(params: { reservationId: string; reason: string }): Promise<void> {

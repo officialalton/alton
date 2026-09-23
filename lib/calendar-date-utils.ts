@@ -16,6 +16,36 @@ export function dateKeyInTimezone(iso: string, timezone: string): string {
   return `${y}-${m}-${d}`;
 }
 
+/**
+ * 2026-09-22(선생님 재조정 요청 — 날짜/시간 입력을 "지역 시간"으로 다루기 위해
+ * 추가) — dateKeyInTimezone()의 역방향: 주어진 timezone에서의 "벽시계" 날짜·시간을
+ * UTC ISO로 변환한다. datetime-local처럼 브라우저가 임의로 로컬(시스템) timezone을
+ * 가정하는 입력 위젯 대신, date/time 두 입력을 명시적으로 지정한 timezone과 결합할
+ * 때 쓴다 — UTC를 그대로 지역 시간으로 착각해 시각이 어긋나는 버그(2026-09-22
+ * 컨설턴트 일정 확정 버그와 동일 클래스)를 여기서는 애초에 만들지 않기 위함.
+ * DST를 포함해 정확하도록 한 번 왕복 변환으로 오프셋을 계산한다.
+ */
+export function zonedDateTimeToUtcIso(dateKey: string, timeHHmm: string, timezone: string): string {
+  const [y, m, d] = dateKey.split("-").map(Number);
+  const [hh, mm] = timeHHmm.split(":").map(Number);
+  const guessUtcMs = Date.UTC(y, m - 1, d, hh, mm);
+
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: timezone,
+    hour12: false,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).formatToParts(new Date(guessUtcMs));
+  const get = (type: string) => Number(parts.find((p) => p.type === type)?.value ?? 0);
+  const hour = get("hour") % 24; // Intl은 자정을 "24"로 표기할 수 있다.
+  const displayedAsUtcMs = Date.UTC(get("year"), get("month") - 1, get("day"), hour, get("minute"));
+  const offsetMs = guessUtcMs - displayedAsUtcMs;
+  return new Date(guessUtcMs + offsetMs).toISOString();
+}
+
 export type CalendarCell = { dateKey: string; day: number; inCurrentMonth: boolean };
 
 /**

@@ -50,6 +50,70 @@ export async function listMyExternalBusyBlocks(params: { rangeStart: string; ran
   });
 }
 
+export type MyRescheduleRequest = {
+  id: string;
+  reservationId: string;
+  status: "pending" | "accepted" | "declined" | "cancelled";
+  proposedStartsAt: string;
+  proposedEndsAt: string;
+  reason: string | null;
+  createdAt: string;
+};
+
+/**
+ * 2026-09-22(사용자 지시) — 확정된 예약에 재조정을 요청한다. 소유권·상태
+ * 검증은 RPC(request_reservation_reschedule)가 한다.
+ */
+export async function requestMyLessonRescheduleAction(params: {
+  reservationId: string;
+  proposedStartsAt: string;
+  proposedEndsAt: string;
+  reason: string;
+}): Promise<ActionResult> {
+  try {
+    const { supabase } = await requireUser();
+    const { error } = await supabase.rpc("request_reservation_reschedule", {
+      p_reservation_id: params.reservationId,
+      p_proposed_starts_at: params.proposedStartsAt,
+      p_proposed_ends_at: params.proposedEndsAt,
+      p_reason: params.reason,
+    });
+    if (error) return { ok: false, error: error.message };
+    return { ok: true };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : String(e) };
+  }
+}
+
+export async function cancelMyRescheduleRequestAction(requestId: string): Promise<ActionResult> {
+  try {
+    const { supabase } = await requireUser();
+    const { error } = await supabase.rpc("cancel_my_reservation_reschedule_request", { p_request_id: requestId });
+    if (error) return { ok: false, error: error.message };
+    return { ok: true };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : String(e) };
+  }
+}
+
+export async function listMyRescheduleRequestsAction(): Promise<MyRescheduleRequest[]> {
+  const { supabase } = await requireUser();
+  const { data, error } = await supabase
+    .from("reservation_reschedule_requests")
+    .select("id, reservation_id, status, proposed_starts_at, proposed_ends_at, reason, created_at")
+    .order("created_at", { ascending: false });
+  if (error) throw new Error(error.message);
+  return (data ?? []).map((r) => ({
+    id: r.id,
+    reservationId: r.reservation_id,
+    status: r.status,
+    proposedStartsAt: r.proposed_starts_at,
+    proposedEndsAt: r.proposed_ends_at,
+    reason: r.reason,
+    createdAt: r.created_at,
+  }));
+}
+
 /**
  * 선생님 본인 취소 — reservationId가 실제로 본인 소유(owner_profile_id)인지 admin
  * 클라이언트로 재확인한 뒤에만 취소한다(app/parent/booking-actions.ts의
