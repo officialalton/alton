@@ -1555,3 +1555,106 @@ Washington State, WPI), 실제 CDS 원문 조회·반영은 0건이다. DB 변�
 5. **200개교 전체가 끝나면 반드시 최종 통합보고서를 작성**하고 CDS 정보
    노출 UI를 계속 확장할 것 — 이 지시는 200개교가 끝날 때까지 매 세션
    인계 기록에 계속 전달되어야 한다.
+
+## 19차 세션 (2026-09-23, curl+pdftotext 물량 처리 — 15개교 완료)
+
+### 핵심 교훈: 18차가 지적한 "브라우저 필요" 판단은 `timeout` 명령어 버그 때문이었다
+이번 세션은 `curl -A "Chrome UA"`로 122개교 전체를 일괄 스캔해 실제 CDS PDF
+링크(href)를 찾아내는 방식으로 시작했다. 첫 스캔에서 40개교 전부 PDF
+링크 0건이 나와 당황했는데, 원인은 이 macOS(zsh) 환경에 GNU `timeout`
+명령이 없어서 `timeout 12 curl ...`가 매번 "command not found"로 조용히
+실패하고 있었던 것(`2>/dev/null`로 에러가 숨겨짐, `grep`은 빈 입력에
+빈 출력 반환)이었다. `curl --max-time 12`로 교체 후 재스캔하니 125개교
+중 다수에서 실제 CDS PDF href가 잡혔다. **다음 세션 필독**: 이 환경에는
+`timeout` 바이너리가 없다 — 반드시 `curl --max-time N`을 쓸 것.
+
+### A. CDS 실수집 완료 — 15개교
+브라우저 도구 없이 `curl --max-time 12 -A "Chrome UA"`로 CDS 원문 PDF를
+직접 받고 `pdftotext -layout`으로 텍스트를 뽑아 C1/C2/C9/B22/B4-B21/G1을
+직접 읽어 반영했다(cohort 구분·verification_status='official' 표준 준수).
+`psql`로 실제 반영 건수 직접 확인:
+
+1. **Duquesne University** — CDS 2025-2026, Fall 2025 cohort, 38행
+   (`duq.edu/.../cds-2025-2026.pdf`, 직접 호스팅 정적 PDF)
+2. **Louisiana State University** — CDS 2024-2025, Fall 2024 cohort, 28행
+   (섹션별 개별 PDF 중 admissions/enrollpersist/expenses 3개 조합)
+3. **Loyola Marymount University** — CDS 2025-2026, Fall 2025 cohort, 36행
+4. **Iowa State University** — CDS 2025-2026, Fall 2025 cohort, 34행
+   (17차가 curl로 실패했던 학교 — `--max-time` 교체 후 정상 다운로드 확인,
+   16~18차의 "브라우저 필요" 판단은 틀렸음)
+5. **University of Kentucky** — CDS 2025-2026, Fall 2025 cohort, 34행
+   (PDF 폰트 인코딩이 깨져 pdftotext 결과가 리게처 손상 텍스트였으나
+   숫자/구조는 멀쩡해 직접 대조 후 반영 — notes에 손상 사실 기록)
+6. **University of Rhode Island** — CDS 2025-2026, Fall 2025 cohort, 34행
+7. **University of North Texas** — CDS 2025-2026, Fall 2025 cohort, 34행
+   (폰트 인코딩 손상, 위와 동일 처리)
+8. **University of California, Riverside** — CDS 2025-2026, Fall 2025
+   cohort, 7행(UC는 시험 제출 자체를 안 받음 — SAT/ACT test-blind
+   정책이라 C9 항목이 원천적으로 비어 있음, 추측 금지 원칙에 따라
+   입학/합격/등록/재학유지율/졸업률만 반영)
+9. **Stevens Institute of Technology** — CDS 2025-2026, Fall 2025 cohort,
+   34행(폰트 인코딩 손상, 동일 처리)
+10. **James Madison University** — CDS 2023-2024(사이트에 이게 최신,
+    2024-2025 없음), Fall 2023 cohort, 22행. 거주지별 세분류·GPA·ACT
+    세부점수는 원문에 "C or t"(입력 미완성 폼필드) 상태라 미기재.
+11. **Montclair State University** — CDS 2025-2026, Fall 2025 cohort,
+    18행(ACT 제출자 0 → ACT 점수 항목 없음)
+12. **University of Alabama in Huntsville** — CDS 2025-2026, Fall 2025
+    cohort, 34행
+13. **Worcester Polytechnic Institute** — CDS 2024-25, Fall 2024 cohort,
+    8행(test-optional으로 SAT/ACT 제출 데이터 자체가 CDS 원문에 공란 —
+    입학/합격/등록/재학유지율/졸업률/학비만 반영)
+14. **Villanova University** — CDS 2023-24(사이트 최신본), Fall 2023
+    cohort, 25행. 50th 퍼센타일 점수는 원문에 "(not used in BFCP)"로
+    명시돼 있어 미기재, B22 재학유지율은 PDF 폼필드 값이 텍스트
+    추출에서 누락되어(빈 칸) 미기재.
+15. **University of South Dakota** — CDS 2025-2026, Fall 2025 cohort,
+    34행
+
+### B. 데이터 정합성 이슈 발견 — 반영하지 않고 플래그만
+- **University of Illinois Urbana-Champaign**: DB에 저장된 승인
+  `common_data_set` 소스 URL(`https://oir.uic.edu/common-data-set-3/`)이
+  실제로는 **University of Illinois Chicago(UIC)**의 CDS 페이지다
+  (`oir.uic.edu`는 시카고 캠퍼스). Urbana-Champaign이 아닌 다른 학교
+  데이터를 잘못 매칭시키는 것을 방지하기 위해 **이 학교는 이번 세션에서
+  건드리지 않았다** — DB 변경 없음, `verified_pilot`으로 전환하지 않음.
+  다음 세션에서 `university_source_urls`의 이 URL을 수정(올바른
+  UIUC 소스, 예: `apps.dmi.illinois.edu` 계열)하거나 삭제/재승인 필요.
+
+### 검증
+- `psql`로 세션 종료 시점 `data_collection_status` 분포 직접 확인:
+  `verified_pilot` **57개교**(18차 종료 42개교 → 이번 세션 +15),
+  `sources_pending_review` 131개교, `unconfirmed` 12개교.
+  (총 200개교 = 57+131+12)
+- `git diff --cached --name-only`로 이번 세션은 이 문서 파일만 커밋
+  대상임을 확인. 새 마이그레이션 없음(`university_admission_metrics`/
+  `universities` 테이블 데이터만 변경, 스키마 변경 없음). `npx supabase
+  db push --linked` / `vercel deploy` 실행하지 않음. `npx tsc --noEmit`
+  스킵(앱 코드 변경 없음, SQL/문서만 변경).
+
+### 다음 세션 인계 (19차 작성분)
+1. **이 환경에 `timeout` 명령이 없다** — `curl --max-time N`을 쓸 것.
+   이 버그 때문에 17~18차가 "브라우저 도구가 필요하다"고 판단했던 학교
+   상당수가 사실은 curl만으로 충분했을 가능성이 높다. 막혔다고 기록된
+   학교도 이 방식으로 먼저 재시도할 것.
+2. `status='approved'`이고 아직 `verified_pilot`이 아닌 나머지
+   약 106개교 CDS 계속 처리(정확한 목록은 `university_source_urls`에서
+   재조회). 이번 세션 스캔(`/tmp/pdf_scan_full.txt`, 세션 임시 파일이라
+   다음 세션엔 재스캔 필요)에서 CDS 최신본 PDF href가 이미 확인됐던
+   학교가 다수 있다: University of Kansas, University of Vermont,
+   University of Tennessee Knoxville(섹션 분할), University of
+   Minnesota Twin Cities, University of North Carolina Chapel Hill,
+   University of Nevada Reno, University of New Mexico, University of
+   Arkansas, University of Arizona, University of Georgia, University
+   of Miami, UMass Boston, University of Pittsburgh, University of
+   Cincinnati, Idaho State, Adelphi, DePaul, Florida Atlantic 등 —
+   전부 curl 직접 다운로드 후보(우선순위 최상위로 처리 권장).
+3. **University of Illinois Urbana-Champaign 소스 URL 오류 수정 필요**
+   (위 B절 참고) — `university_source_urls`에서 UIC 링크를 UIUC로 오매칭한
+   건을 바로잡을 것. 다른 학교도 이런 도시명 혼동(캠퍼스 분교 등)이
+   있을 수 있으니 승인 URL 재확인 시 학교명 매칭을 한 번 더 검증할 것.
+4. 학과 목록 보완 8개교(ASU/Loyola Chicago/Rowan 포함) 여전히 미착수.
+5. 관리자 화면 노출 확인 여전히 미착수.
+6. **200개교 전체가 끝나면 반드시 최종 통합보고서를 작성**하고 CDS 정보
+   노출 UI를 계속 확장할 것 — 이 지시는 200개교가 끝날 때까지 매 세션
+   인계 기록에 계속 전달되어야 한다.
