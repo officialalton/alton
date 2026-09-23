@@ -1,5 +1,5 @@
 import { requireUser } from "@/lib/auth";
-import { loadMyAssignedStudents } from "./consultant-data";
+import { loadMyAssignedStudents, loadMyEndedAssignedStudents } from "./consultant-data";
 import { loadMyAssignedConsultations } from "./intake-data";
 import ConsultantShell from "./ConsultantShell";
 
@@ -12,8 +12,9 @@ import ConsultantShell from "./ConsultantShell";
 // Home에 함께 보여준다. Schedule/자동 이메일은 Phase 2.
 export default async function ConsultantHomePage() {
   const { user, profile, supabase } = await requireUser();
-  const [students, assignedConsultations] = await Promise.all([
+  const [students, endedStudents, assignedConsultations] = await Promise.all([
     loadMyAssignedStudents(supabase, user.id),
+    loadMyEndedAssignedStudents(supabase, user.id),
     loadMyAssignedConsultations(supabase, user.id),
   ]);
 
@@ -21,6 +22,7 @@ export default async function ConsultantHomePage() {
     <ConsultantShell
       consultantName={profile?.name ?? "컨설턴트"}
       students={students}
+      endedStudents={endedStudents}
       assignedConsultations={assignedConsultations}
     />
   );

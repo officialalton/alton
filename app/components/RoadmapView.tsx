@@ -72,7 +72,11 @@ export default function RoadmapView({
 
   return (
     <div className="max-w-[720px] px-6 py-6">
-      {/* 상단 요약 */}
+      {/* 상단 요약 — 프로필 탭은 아래 ProfileSections가 학년·목표 대학/전공을
+          그대로 다시 보여주므로 이 카드와 내용이 겹친다(2026-09-23 사용자
+          지적: "Roadmap 상단의 중복 요약 노출"). 로드맵/대학 탐색 탭에서만
+          맥락 요약으로 보여준다. */}
+      {subTab !== "profile" && (
       <div className={cardClass}>
         <div className={cardTitleClass}>로드맵 요약</div>
         <div className="grid grid-cols-2 gap-3 text-[12.5px]">
@@ -101,6 +105,7 @@ export default function RoadmapView({
           </div>
         </div>
       </div>
+      )}
 
       {error && (
         <div className="mb-4 text-[12px] text-red bg-red/10 rounded-lg px-3 py-2">{error}</div>

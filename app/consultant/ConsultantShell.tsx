@@ -8,7 +8,7 @@ import RoadmapView from "@/app/components/RoadmapView";
 import CollegeExploreSection from "@/app/components/CollegeExploreSection";
 import PlannerOverviewView from "@/app/student/PlannerOverviewView";
 import BoardColumnsView from "@/app/components/BoardColumnsView";
-import type { ConsultantStudent } from "./consultant-data";
+import type { ConsultantStudent, EndedConsultantStudent } from "./consultant-data";
 import {
   loadStudentBoardCardsAction,
   createStudentManualTaskAction,
@@ -57,14 +57,18 @@ const WEEKDAY_LABELS = ["일", "월", "화", "수", "목", "금", "토"];
 export default function ConsultantShell({
   consultantName,
   students,
+  endedStudents,
   assignedConsultations,
 }: {
   consultantName: string;
   students: ConsultantStudent[];
+  endedStudents: EndedConsultantStudent[];
   assignedConsultations: IntakeConsultation[];
 }) {
   const [nav, setNav] = useState<NavId>("assignments");
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [selectedEndedId, setSelectedEndedId] = useState<string | null>(null);
+  const [studentsSubTab, setStudentsSubTab] = useState<"active" | "ended">("active");
 
   const contactRequiredCount = assignedConsultations.filter((c) => c.status === "requested").length;
 
@@ -88,7 +92,7 @@ export default function ConsultantShell({
             (nav === "assignments" ? "bg-red text-white" : "text-grey-500 hover:bg-grey-100 hover:text-ink")
           }
         >
-          <span>신규 배정</span>
+          <span>New Assignments</span>
           {contactRequiredCount > 0 && (
             <span
               className={
@@ -104,6 +108,7 @@ export default function ConsultantShell({
           onClick={() => {
             setNav("students");
             setSelectedId(null);
+            setSelectedEndedId(null);
           }}
           aria-current={nav === "students" ? "page" : undefined}
           className={
@@ -111,7 +116,7 @@ export default function ConsultantShell({
             (nav === "students" ? "bg-red text-white" : "text-grey-500 hover:bg-grey-100 hover:text-ink")
           }
         >
-          담당 학생
+          Students
         </button>
         <button
           onClick={() => {
@@ -173,14 +178,45 @@ export default function ConsultantShell({
             <h1 className="text-[20px] font-extrabold text-ink mb-5">대학 탐색</h1>
             <CollegeExploreSection canProposeSourceUrl />
           </div>
-        ) : selectedId === null ? (
-          <StudentList students={students} onSelect={setSelectedId} />
-        ) : (
+        ) : selectedId !== null ? (
           <StudentPanel
             studentId={selectedId}
             studentName={students.find((s) => s.id === selectedId)?.name ?? "학생"}
             onBack={() => setSelectedId(null)}
           />
+        ) : selectedEndedId !== null ? (
+          <EndedStudentPanel
+            student={endedStudents.find((s) => s.id === selectedEndedId)!}
+            onBack={() => setSelectedEndedId(null)}
+          />
+        ) : (
+          <div className="max-w-[640px] px-8 py-8">
+            <h1 className="text-[20px] font-extrabold text-ink mb-5">Students</h1>
+            <div className="flex gap-1 mb-5 border-b border-grey-200">
+              {(
+                [
+                  { id: "active", label: "Active" },
+                  { id: "ended", label: "Ended" },
+                ] as const
+              ).map((t) => (
+                <button
+                  key={t.id}
+                  onClick={() => setStudentsSubTab(t.id)}
+                  className={
+                    "px-3 py-2 text-[13px] font-bold border-b-2 -mb-px " +
+                    (studentsSubTab === t.id ? "border-ink text-ink" : "border-transparent text-grey-500")
+                  }
+                >
+                  {t.label}
+                </button>
+              ))}
+            </div>
+            {studentsSubTab === "active" ? (
+              <StudentList students={students} onSelect={setSelectedId} />
+            ) : (
+              <EndedStudentList students={endedStudents} onSelect={setSelectedEndedId} />
+            )}
+          </div>
         )}
       </main>
     </div>
@@ -639,29 +675,93 @@ function StudentList({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [students.map((s) => s.id).join(",")]);
 
+  if (students.length === 0) {
+    return (
+      <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
+        아직 배정된 학생이 없습니다.
+      </div>
+    );
+  }
+  return (
+    <div>
+      {students.map((s) => (
+        <button
+          key={s.id}
+          onClick={() => onSelect(s.id)}
+          className="w-full text-left border-[1.5px] border-grey-200 rounded-xl px-5 py-3.5 mb-2.5 flex items-center justify-between"
+        >
+          <span className="text-[13.5px] font-bold text-ink">{s.name ?? "이름 없음"}</span>
+          {(unreadByStudent[s.id] ?? 0) > 0 && (
+            <span className="min-w-[18px] h-[18px] px-1 rounded-full bg-red text-white text-[10px] font-bold flex items-center justify-center">
+              {unreadByStudent[s.id] > 9 ? "9+" : unreadByStudent[s.id]}
+            </span>
+          )}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+// Phase B(1, 2026-09-23) — Ended 목록·상세는 기록 조회 전용이다(사용자 지시:
+// "종료된 배정은 기록 조회 중심으로 보여주고 현재·이전 담당자의 접근 권한을
+// 구분"). 목록에는 종료 시점·사유만 보여주고, 클릭하면 읽기 전용 상세로
+// 이동한다 — Board/메신저 등 쓰기 액션은 여전히 서버에서
+// is_assigned_consultant_of()로 막히지만(RLS), 화면에서도 애초에 그 버튼
+// 자체를 보여주지 않는다.
+function EndedStudentList({
+  students,
+  onSelect,
+}: {
+  students: EndedConsultantStudent[];
+  onSelect: (id: string) => void;
+}) {
+  if (students.length === 0) {
+    return (
+      <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
+        배정이 종료된 학생이 없습니다.
+      </div>
+    );
+  }
+  return (
+    <div>
+      {students.map((s) => (
+        <button
+          key={s.id}
+          onClick={() => onSelect(s.id)}
+          className="w-full text-left border-[1.5px] border-grey-200 rounded-xl px-5 py-3.5 mb-2.5"
+        >
+          <div className="flex items-center justify-between">
+            <span className="text-[13.5px] font-bold text-ink">{s.name ?? "이름 없음"}</span>
+            <span className="text-[11px] text-grey-500">{new Date(s.endedAt).toLocaleDateString("ko-KR")} 종료</span>
+          </div>
+          {s.reason && <div className="text-[12px] text-grey-500 mt-1">{s.reason}</div>}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function EndedStudentPanel({ student, onBack }: { student: EndedConsultantStudent; onBack: () => void }) {
   return (
     <div className="max-w-[640px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-5">담당 학생</h1>
-      {students.length === 0 ? (
-        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-          아직 배정된 학생이 없습니다.
-        </div>
-      ) : (
-        students.map((s) => (
-          <button
-            key={s.id}
-            onClick={() => onSelect(s.id)}
-            className="w-full text-left border-[1.5px] border-grey-200 rounded-xl px-5 py-3.5 mb-2.5 flex items-center justify-between"
-          >
-            <span className="text-[13.5px] font-bold text-ink">{s.name ?? "이름 없음"}</span>
-            {(unreadByStudent[s.id] ?? 0) > 0 && (
-              <span className="min-w-[18px] h-[18px] px-1 rounded-full bg-red text-white text-[10px] font-bold flex items-center justify-center">
-                {unreadByStudent[s.id] > 9 ? "9+" : unreadByStudent[s.id]}
-              </span>
-            )}
-          </button>
-        ))
-      )}
+      <button
+        onClick={onBack}
+        className="text-[13px] text-grey-600 font-semibold border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform"
+      >
+        ← Students
+      </button>
+      <h1 className="text-[18px] font-extrabold text-ink mt-2 mb-1">{student.name ?? "이름 없음"}</h1>
+      <div className="text-[12px] text-grey-500 mb-4">
+        {new Date(student.endedAt).toLocaleString("ko-KR")}에 담당이 종료됨
+      </div>
+      <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 bg-grey-100">
+        <div className="text-[11px] font-bold text-grey-500 uppercase tracking-wide mb-2">종료 사유</div>
+        <div className="text-[13px] text-ink">{student.reason ?? "기록된 사유 없음"}</div>
+      </div>
+      <div className="text-[12px] text-grey-500 mt-4">
+        배정이 종료된 학생은 기록 조회만 가능합니다. 로드맵·보드·메신저 등 실시간 정보는 현재 담당
+        컨설턴트만 접근할 수 있습니다.
+      </div>
     </div>
   );
 }
