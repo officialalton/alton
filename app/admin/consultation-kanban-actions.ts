@@ -13,7 +13,8 @@
 import { requireAdminOrCapability, requireConsultant } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import type { ConsultationListItem } from "./consultation-scheduling-actions";
-import { getTrialOnboardingPipelineAction, type TrialOnboardingPipeline } from "./trial-onboarding-actions";
+import type { TrialOnboardingPipeline } from "./trial-onboarding-actions";
+import { loadTrialPipelinesBatch } from "./trial-pipeline-data";
 import type { ConsultationClosureType } from "./consultation-kanban-constants";
 import { loadKanbanBoard, loadMyKanbanBoard, type KanbanCard } from "./consultation-kanban-data";
 
@@ -149,7 +150,11 @@ async function getAccountCreationCardDetail(
     completionReadiness: "not_applicable",
   };
 
-  const pipeline = await getTrialOnboardingPipelineAction(cardId, childId, consultation.trial_intent_confirmed_at);
+  const pipelineMap = await loadTrialPipelinesBatch(admin, [
+    { consultationId: cardId, childId, trialIntentConfirmedAt: consultation.trial_intent_confirmed_at },
+  ]);
+  const pipeline = pipelineMap.get(cardId);
+  if (!pipeline) throw new Error("파이프라인 조회에 실패했습니다.");
 
   let contractId: string | null = null;
   let contractStatus: string | null = null;
@@ -284,7 +289,13 @@ async function loadConsultationCardDetail(
   // 잠재고객 단계(child_id 아직 없음)에서도 pipeline은 항상 조회한다 — 그래야
   // "account_linked" 단계 미완료 상태가 정상적으로 채워져 체험 온보딩 안내 발송
   // 폼(TrialNoticeForm)이 카드 상세에 노출된다(classifyStage()와 동일한 패턴).
-  pipeline = await getTrialOnboardingPipelineAction(consultation.id, consultation.child_id, consultation.trial_intent_confirmed_at);
+  {
+    const pipelineMap = await loadTrialPipelinesBatch(admin, [
+      { consultationId: consultation.id, childId: consultation.child_id, trialIntentConfirmedAt: consultation.trial_intent_confirmed_at },
+    ]);
+    pipeline = pipelineMap.get(consultation.id) ?? null;
+    if (!pipeline) throw new Error("파이프라인 조회에 실패했습니다.");
+  }
 
   const { data: latestLink } = await admin
     .from("trial_onboarding_links")

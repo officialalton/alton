@@ -10,8 +10,12 @@ const { adminMockRef } = vi.hoisted(() => ({ adminMockRef: { current: null as un
 
 vi.mock("@/lib/admin-auth", () => ({ requireAdminOrCapability: vi.fn().mockResolvedValue(undefined) }));
 vi.mock("@/lib/supabase-admin", () => ({ createAdminClient: () => adminMockRef.current }));
-vi.mock("./trial-onboarding-actions", () => ({
-  getTrialOnboardingPipelineAction: vi.fn().mockResolvedValue(null),
+vi.mock("./trial-pipeline-data", () => ({
+  loadTrialPipelinesBatch: vi.fn(async (_admin: unknown, candidates: { consultationId: string }[]) => {
+    const map = new Map();
+    for (const c of candidates) map.set(c.consultationId, { steps: [] });
+    return map;
+  }),
 }));
 
 type Row = Record<string, unknown>;
@@ -21,6 +25,9 @@ function makeAdminMock(tables: Record<string, Row[] | Row | null>) {
     const builder = {
       select: () => builder,
       eq: () => builder,
+      in: () => builder,
+      is: () => builder,
+      not: () => builder,
       order: () => builder,
       limit: () => builder,
       maybeSingle: () => Promise.resolve({ data: result, error: null }),
