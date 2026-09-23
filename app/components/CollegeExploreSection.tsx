@@ -669,6 +669,91 @@ const ADMISSION_METRIC_COHORT_LABEL: Record<AdmissionMetricCohort, string> = {
   enrolled: "등록자",
 };
 
+// P10(2026-09-23) 프린스턴 CDS 반영 이후: SAT/ACT/GPA/석차 지표는 CDS 정의상 실제로는
+// "등록자(enrolled)" 코호트 값이다(과거 일부 학교 데이터가 admitted로 잘못 표시돼 들어와
+// 있었음). 화면 표시 순서·라벨은 그대로 두되, admitted로 찾다가 없으면 enrolled도
+// 허용해 정확히 재분류된 학교(예: 프린스턴)의 값이 빈칸으로 사라지지 않도록 한다.
+const ADMISSION_METRIC_COHORT_FALLBACK: Record<string, AdmissionMetricCohort> = {
+  sat_total_25: "enrolled",
+  sat_total_75: "enrolled",
+  sat_ebrw_25: "enrolled",
+  sat_ebrw_75: "enrolled",
+  sat_math_25: "enrolled",
+  sat_math_75: "enrolled",
+  act_composite_25: "enrolled",
+  act_composite_75: "enrolled",
+  gpa_average: "enrolled",
+  top10pct_pct: "enrolled",
+  ap_ib_indicator: "enrolled",
+};
+
+// 상세 지표 더보기(접기/펼치기) 섹션 — 핵심 지표 카드 아래에만 추가 노출한다.
+const ADMISSION_METRIC_DETAIL_ORDER: { metricKey: string; cohort: AdmissionMetricCohort }[] = [
+  { metricKey: "sat_total_50", cohort: "enrolled" },
+  { metricKey: "sat_ebrw_50", cohort: "enrolled" },
+  { metricKey: "sat_math_50", cohort: "enrolled" },
+  { metricKey: "act_composite_50", cohort: "enrolled" },
+  { metricKey: "act_math_25", cohort: "enrolled" },
+  { metricKey: "act_math_50", cohort: "enrolled" },
+  { metricKey: "act_math_75", cohort: "enrolled" },
+  { metricKey: "act_english_25", cohort: "enrolled" },
+  { metricKey: "act_english_50", cohort: "enrolled" },
+  { metricKey: "act_english_75", cohort: "enrolled" },
+  { metricKey: "act_writing_25", cohort: "enrolled" },
+  { metricKey: "act_writing_50", cohort: "enrolled" },
+  { metricKey: "act_writing_75", cohort: "enrolled" },
+  { metricKey: "act_science_25", cohort: "enrolled" },
+  { metricKey: "act_science_50", cohort: "enrolled" },
+  { metricKey: "act_science_75", cohort: "enrolled" },
+  { metricKey: "act_reading_25", cohort: "enrolled" },
+  { metricKey: "act_reading_50", cohort: "enrolled" },
+  { metricKey: "act_reading_75", cohort: "enrolled" },
+  { metricKey: "sat_submitted_pct", cohort: "enrolled" },
+  { metricKey: "act_submitted_pct", cohort: "enrolled" },
+  { metricKey: "gpa_4_0_pct_all", cohort: "enrolled" },
+  { metricKey: "gpa_4_0_pct_submitters", cohort: "enrolled" },
+  { metricKey: "gpa_4_0_pct_nonsubmitters", cohort: "enrolled" },
+  { metricKey: "waitlist_offered", cohort: "admitted" },
+  { metricKey: "waitlist_accepted", cohort: "admitted" },
+  { metricKey: "waitlist_admitted", cohort: "admitted" },
+  { metricKey: "retention_rate_year1", cohort: "enrolled" },
+  { metricKey: "grad_rate_6yr", cohort: "enrolled" },
+  { metricKey: "tuition_total", cohort: "enrolled" },
+];
+
+const ADMISSION_METRIC_DETAIL_LABEL: Record<string, string> = {
+  sat_total_50: "SAT 총점 50th",
+  sat_ebrw_50: "SAT EBRW 50th",
+  sat_math_50: "SAT Math 50th",
+  act_composite_50: "ACT Composite 50th",
+  act_math_25: "ACT Math 25th",
+  act_math_50: "ACT Math 50th",
+  act_math_75: "ACT Math 75th",
+  act_english_25: "ACT English 25th",
+  act_english_50: "ACT English 50th",
+  act_english_75: "ACT English 75th",
+  act_writing_25: "ACT Writing 25th",
+  act_writing_50: "ACT Writing 50th",
+  act_writing_75: "ACT Writing 75th",
+  act_science_25: "ACT Science 25th",
+  act_science_50: "ACT Science 50th",
+  act_science_75: "ACT Science 75th",
+  act_reading_25: "ACT Reading 25th",
+  act_reading_50: "ACT Reading 50th",
+  act_reading_75: "ACT Reading 75th",
+  sat_submitted_pct: "SAT 제출률",
+  act_submitted_pct: "ACT 제출률",
+  gpa_4_0_pct_all: "GPA 4.0 비율(전체)",
+  gpa_4_0_pct_submitters: "GPA 4.0 비율(점수 제출자)",
+  gpa_4_0_pct_nonsubmitters: "GPA 4.0 비율(점수 미제출자)",
+  waitlist_offered: "대기자명단 제안 인원",
+  waitlist_accepted: "대기자명단 수락 인원",
+  waitlist_admitted: "대기자명단 중 최종 합격",
+  retention_rate_year1: "1년 재학유지율",
+  grad_rate_6yr: "6년 졸업률",
+  tuition_total: "연간 등록금+기숙사+식비",
+};
+
 /**
  * 합격·등록 학생 학업 지표(Admitted Student Profile, P7 2026-09-23). 가장 최신 연도 하나만
  * 골라 고정된 순서·대상집단으로 표시한다 — 다른 연도 값을 섞어 빈칸을 채우지 않는다(정책상 금지).
@@ -683,7 +768,10 @@ function AdmittedStudentProfileCard({ metrics }: { metrics: AdmissionMetric[] })
       <div className={cardTitleClass}>Admitted Student Profile ({latestYear} 사이클)</div>
       <div className="grid grid-cols-2 gap-3">
         {ADMISSION_METRIC_DISPLAY_ORDER.map(({ metricKey, cohort }) => {
-          const found = latestMetrics.find((m) => m.metricKey === metricKey && m.cohort === cohort);
+          const fallbackCohort = ADMISSION_METRIC_COHORT_FALLBACK[metricKey];
+          const found =
+            latestMetrics.find((m) => m.metricKey === metricKey && m.cohort === cohort) ??
+            (fallbackCohort ? latestMetrics.find((m) => m.metricKey === metricKey && m.cohort === fallbackCohort) : undefined);
           const label = ADMISSION_METRIC_LABEL[metricKey] ?? metricKey;
           if (!found) {
             return (
@@ -719,6 +807,67 @@ function AdmittedStudentProfileCard({ metrics }: { metrics: AdmissionMetric[] })
           );
         })}
       </div>
+      <AdmissionMetricDetailSection metrics={latestMetrics} />
+    </div>
+  );
+}
+
+/**
+ * 상세 지표 더보기(접기/펼치기) — CDS 세부 항목(영역별 SAT/ACT 25/50/75, GPA 4.0 비율,
+ * 대기자명단, 재학유지율, 졸업률, 등록금 등). 값이 하나도 없으면 섹션 자체를 숨긴다.
+ * 핵심 지표 카드(위 grid)의 순서·레이아웃은 건드리지 않는다.
+ */
+function AdmissionMetricDetailSection({ metrics }: { metrics: AdmissionMetric[] }) {
+  const [expanded, setExpanded] = useState(false);
+  const rows = ADMISSION_METRIC_DETAIL_ORDER.map(({ metricKey, cohort }) => ({
+    metricKey,
+    cohort,
+    found: metrics.find((m) => m.metricKey === metricKey && m.cohort === cohort),
+  })).filter((row) => row.found);
+
+  if (rows.length === 0) return null;
+
+  return (
+    <div className="mt-3 border-t border-grey-100 pt-3">
+      <button
+        type="button"
+        onClick={() => setExpanded((v) => !v)}
+        className="text-[11px] font-bold text-brand-600"
+      >
+        {expanded ? "상세 지표 접기 ▲" : "상세 지표 더보기 ▼"}
+      </button>
+      {expanded && (
+        <div className="grid grid-cols-2 gap-3 mt-3">
+          {rows.map(({ metricKey, found }) => {
+            if (!found) return null;
+            const label = ADMISSION_METRIC_DETAIL_LABEL[metricKey] ?? metricKey;
+            const displayValue = found.value != null ? `${found.value}${found.unit ? ` ${found.unit}` : ""}` : (found.valueText ?? "확인 필요");
+            return (
+              <div key={metricKey}>
+                <div className="text-grey-300 text-[10.5px] font-bold mb-0.5">{label}</div>
+                <div className="font-bold text-ink text-[12.5px]">
+                  {displayValue}
+                  {found.submittersOnly ? " (제출자만)" : ""}
+                </div>
+                <div className="text-[10px] text-grey-400 mt-0.5">
+                  {ADMISSION_METRIC_COHORT_LABEL[found.cohort]} · {found.cycleYear}
+                  <span
+                    className={`ml-1 rounded px-1 py-0.5 ${
+                      found.verificationStatus === "official"
+                        ? "bg-green-100 text-green-700"
+                        : found.verificationStatus === "secondary"
+                          ? "bg-yellow-100 text-yellow-700"
+                          : "bg-red-100 text-red"
+                    }`}
+                  >
+                    {ADMISSION_METRIC_VERIFICATION_LABEL[found.verificationStatus]}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
