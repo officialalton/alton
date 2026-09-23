@@ -12,6 +12,8 @@ import ArchivedHouseholdsList from "./ArchivedHouseholdsList";
 import HouseholdArchiveControls from "./HouseholdArchiveControls";
 import StudentDetailPanel from "./StudentDetailPanel";
 import TeacherDetailPanel from "./TeacherDetailPanel";
+import ConsultantDetailPanel from "./ConsultantDetailPanel";
+import { listConsultantsAction, type ConsultantWithStudents } from "./consultant-assignment-actions";
 import type { AdminSubject } from "./subject-data";
 import type {
   CreditTransaction,
@@ -32,6 +34,9 @@ const SUBTABS = [
   { id: "parents", label: "학부모" },
   { id: "students", label: "학생" },
   { id: "teachers", label: "선생님" },
+  // 관리자 포털 정리 항목 1(2026-09-23) — 배정 운영 화면(Consultants 탭)과
+  // 별개로, 여기서는 컨설턴트 목록·프로필 상세를 다른 역할과 같은 자리에서 본다.
+  { id: "consultants", label: "컨설턴트" },
   // P4-1(B, 2026-09-11) — 아카이브된 가구는 위 목록에서 빠지고 여기서만 보인다.
   { id: "archived", label: "아카이브됨" },
 ] as const;
@@ -78,6 +83,8 @@ export default function UsersTab({
   const [qcWarningsByTeacher, setQcWarningsByTeacher] = useState<Record<string, QcWarning[]>>({});
   const [openStudentId, setOpenStudentId] = useState<string | null>(null);
   const [openTeacherId, setOpenTeacherId] = useState<string | null>(null);
+  const [consultants, setConsultants] = useState<ConsultantWithStudents[] | null>(null);
+  const [openConsultantId, setOpenConsultantId] = useState<string | null>(null);
 
   function loadParentsNow() {
     setLoadingParents(true);
@@ -111,11 +118,15 @@ export default function UsersTab({
         setQcWarningsByTeacher(r.qcWarningsByTeacher);
       });
     }
+    if (subtab === "consultants" && consultants === null) {
+      listConsultantsAction().then(setConsultants);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [subtab]);
 
   const openStudent = students?.find((s) => s.id === openStudentId);
   const openTeacher = teachers?.find((t) => t.id === openTeacherId);
+  const openConsultant = consultants?.find((c) => c.id === openConsultantId);
 
   const normalizedQuery = searchQuery.trim().toLowerCase();
   const filteredParents = !normalizedQuery
@@ -176,6 +187,16 @@ export default function UsersTab({
         subjects={subjects}
         onBack={() => setOpenTeacherId(null)}
         onUpdated={(patch) => patchTeacher(openTeacher.id, patch)}
+      />
+    );
+  }
+
+  if (openConsultant) {
+    return (
+      <ConsultantDetailPanel
+        consultantId={openConsultant.id}
+        consultantName={openConsultant.name}
+        onBack={() => setOpenConsultantId(null)}
       />
     );
   }
@@ -370,6 +391,40 @@ export default function UsersTab({
             선생님 초대는 현재 비활성화되어 있습니다. 선생님 계정은 Google Workspace 프로비저닝(관리자가 @alton.education
             계정을 발급한 뒤 최초 로그인으로 연결) 절차로만 생성할 수 있으며, 해당 기능은 준비 중입니다.
           </div>
+        </>
+      )}
+
+      {subtab === "consultants" && consultants === null && (
+        <div aria-busy="true" data-testid="consultants-skeleton">
+          {[0, 1].map((i) => (
+            <div key={i} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5 animate-pulse">
+              <div className="h-3.5 w-24 bg-grey-200 rounded" />
+              <div className="h-3 w-40 bg-grey-100 rounded mt-2" />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {subtab === "consultants" && consultants !== null && (
+        <>
+          {consultants.length === 0 && (
+            <p className="text-[12.5px] text-grey-500 mb-3">등록된 컨설턴트가 없습니다.</p>
+          )}
+          {consultants.map((c) => (
+            <button
+              key={c.id}
+              onClick={() => setOpenConsultantId(c.id)}
+              className="w-full text-left border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5"
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-[13.5px] font-bold text-ink">{c.name ?? "이름 없음"}</span>
+                <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-grey-100 text-ink">
+                  담당 {c.students.length}명
+                </span>
+              </div>
+              <div className="text-[12px] text-grey-500 mt-0.5">{c.email ?? "이메일 없음"}</div>
+            </button>
+          ))}
         </>
       )}
     </div>

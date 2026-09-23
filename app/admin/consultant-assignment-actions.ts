@@ -191,3 +191,122 @@ export async function sendConsultationSchedulingLinkAction(consultationId: strin
     scheduling_url: `${origin}/schedule/${token}`,
   });
 }
+
+// Users > Consultants 프로필 상세(관리자 포털 정리 항목 1, 2026-09-23) —
+// 기존 Consultants 탭(위 listConsultantsAction)은 배정 운영 화면으로 남기고,
+// 여기서는 한 컨설턴트의 담당 학생·보호자, 배정 이력(종료 포함), 프로필
+// 정보를 한 화면에서 보여준다. 매칭 변경은 같은 setStudentConsultantAction
+// RPC를 그대로 호출해 두 화면의 결과가 항상 일치한다.
+export type ConsultantAssignmentHistoryItem = {
+  id: string;
+  studentId: string | null;
+  studentName: string | null;
+  priorConsultantName: string | null;
+  newConsultantName: string | null;
+  reason: string | null;
+  changedAt: string;
+};
+
+export type ConsultantDetail = {
+  id: string;
+  name: string | null;
+  email: string | null;
+  gender: string | null;
+  careerBio: string | null;
+  hireDate: string | null;
+  currentStudents: { id: string; name: string | null; householdId: string | null; guardianNames: string[] }[];
+  history: ConsultantAssignmentHistoryItem[];
+};
+
+export async function getConsultantDetailAction(consultantId: string): Promise<ConsultantDetail> {
+  const { supabase } = await requireAdmin();
+
+  const [{ data: profile, error: profileError }, { data: assignments }, { data: historyRows }] = await Promise.all([
+    supabase.from("profiles").select("id, name, gender, career_bio, hire_date").eq("id", consultantId).single(),
+    supabase
+      .from("consultant_assignments")
+      .select("student_id, student:profiles!consultant_assignments_student_id_fkey(id, name)")
+      .eq("consultant_id", consultantId),
+    supabase
+      .from("consultant_assignment_history")
+      .select(
+        "id, student_id, changed_at, reason, student:profiles!consultant_assignment_history_student_id_fkey(name), prior:profiles!consultant_assignment_history_prior_consultant_id_fkey(name), new:profiles!consultant_assignment_history_new_consultant_id_fkey(name)"
+      )
+      .or(`prior_consultant_id.eq.${consultantId},new_consultant_id.eq.${consultantId}`)
+      .order("changed_at", { ascending: false }),
+  ]);
+  if (profileError) throw new Error(profileError.message);
+
+  const admin = createAdminClient();
+  const { data: authUser } = await admin.auth.admin.getUserById(consultantId);
+
+  const studentIds = (assignments ?? []).map((a) => a.student_id as string);
+  const guardianByStudent = new Map<string, { householdId: string | null; names: string[] }>();
+  if (studentIds.length > 0) {
+    const { data: studentMemberships } = await supabase
+      .from("household_members")
+      .select("household_id, member_id")
+      .in("member_id", studentIds)
+      .eq("role", "student");
+    const householdOfStudent = new Map<string, string>(
+      (studentMemberships ?? []).map((m) => [m.member_id as string, m.household_id as string])
+    );
+    const householdIds = [...new Set(householdOfStudent.values())];
+
+    if (householdIds.length > 0) {
+      const { data: guardianMemberships } = await supabase
+        .from("household_members")
+        .select("household_id, member_id")
+        .in("household_id", householdIds)
+        .eq("role", "guardian");
+      const guardianIds = [...new Set((guardianMemberships ?? []).map((m) => m.member_id as string))];
+      const { data: guardianProfiles } = await supabase.from("profiles").select("id, name").in("id", guardianIds);
+      const nameById = new Map((guardianProfiles ?? []).map((g) => [g.id as string, g.name as string | null]));
+
+      const guardiansByHousehold = new Map<string, string[]>();
+      for (const m of guardianMemberships ?? []) {
+        const list = guardiansByHousehold.get(m.household_id as string) ?? [];
+        const gname = nameById.get(m.member_id as string);
+        if (gname) list.push(gname);
+        guardiansByHousehold.set(m.household_id as string, list);
+      }
+      for (const sid of studentIds) {
+        const hid = householdOfStudent.get(sid) ?? null;
+        guardianByStudent.set(sid, { householdId: hid, names: hid ? guardiansByHousehold.get(hid) ?? [] : [] });
+      }
+    }
+  }
+
+  return {
+    id: consultantId,
+    name: (profile?.name as string | null) ?? null,
+    email: authUser.user?.email ?? null,
+    gender: (profile?.gender as string | null) ?? null,
+    careerBio: (profile?.career_bio as string | null) ?? null,
+    hireDate: (profile?.hire_date as string | null) ?? null,
+    currentStudents: (assignments ?? []).map((a) => {
+      const student = Array.isArray(a.student) ? a.student[0] : a.student;
+      const g = guardianByStudent.get(a.student_id as string);
+      return {
+        id: a.student_id as string,
+        name: (student as { name: string | null } | null)?.name ?? null,
+        householdId: g?.householdId ?? null,
+        guardianNames: g?.names ?? [],
+      };
+    }),
+    history: (historyRows ?? []).map((h) => {
+      const student = Array.isArray(h.student) ? h.student[0] : h.student;
+      const prior = Array.isArray(h.prior) ? h.prior[0] : h.prior;
+      const next = Array.isArray(h.new) ? h.new[0] : h.new;
+      return {
+        id: h.id as string,
+        studentId: h.student_id as string | null,
+        studentName: (student as { name: string | null } | null)?.name ?? null,
+        priorConsultantName: (prior as { name: string | null } | null)?.name ?? null,
+        newConsultantName: (next as { name: string | null } | null)?.name ?? null,
+        reason: h.reason as string | null,
+        changedAt: h.changed_at as string,
+      };
+    }),
+  };
+}
