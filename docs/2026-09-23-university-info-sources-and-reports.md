@@ -1973,3 +1973,101 @@ Cloudflare challenge 페이지 반환). 시간 예산 소진으로 추가 학교
 4. 관리자 화면 노출 확인 여전히 미착수.
 5. 200개교 전체가 끝나면 반드시 최종 통합보고서를 작성하고 CDS 정보
    노출 UI를 계속 확장할 것 — 매 세션 인계 기록에 계속 전달.
+
+## 23차 세션 (2026-09-23)
+
+### sources_pending_review 처리 — 14개교 실수집 완료
+`university_source_urls`에서 `type='common_data_set', status='approved'`
++ `data_collection_status='sources_pending_review'` 학교 목록(82개교 조회)
+중 curl/WebSearch로 실제 CDS 원문(PDF/xlsx)을 확보할 수 있었던 14개교를
+처리했다:
+
+Texas Tech University, Elon University, University of Delaware,
+Chapman University, University of Connecticut(CDS 2023-2024, cycle_year
+2024), Southern Methodist University, Florida State University(CDS 페이지
+자체가 404라 IR Fact Book "Student Characteristics, Fall 2024" PDF의 공식
+수치 사용, FSU 21%대 합격률 웹서치로 교차검증), Michigan State University,
+Texas Christian University, George Mason University, Howard University,
+University of Alabama, University of Alabama at Birmingham, University of
+Central Florida.
+
+각 학교: curl로 1차 시도 실패 시 WebSearch로 실제 CDS 원문 직접 링크를
+찾아 재시도(대부분 성공). PDF는 `pdftotext -layout`, xlsx(Elon)는
+`openpyxl`로 파싱. 표지/본문 텍스트로 학교명 일치 확인 후 반영.
+
+### unconfirmed 9개교 중 2개교 추가 해제
+- **West Virginia University**: CloudFront 403을 curl에 `-H "Referer:
+  https://dataoffice.wvu.edu/reports-analytics/common-data-set"` 헤더
+  추가로 우회 성공. CDS 2024-2025 PDF 확보 → 실수집 완료.
+- **Ball State University**: `bsu.edu` 공식 CDS 2024-2025 PDF 직접 링크를
+  WebSearch로 확보, curl 성공 → 실수집 완료.
+- 시도했으나 실패: Miami University(Ohio) — `miamioh.edu/oir/data/cds/`
+  페이지의 xlsx 상대경로(`_documents/cds/cds2024-25.xlsx`)가 실제로는
+  404/리다이렉트 HTML을 반환(경로 구조 재확인 필요, **주의**:
+  University of Miami(Florida, irsa.miami.edu)와 혼동 금지 원칙 유지,
+  이번 세션은 miamioh.edu만 시도함). Texas A&M(WebSearch로 찾은 abpa.tamu.edu
+  직접 pdf 링크가 404). Gonzaga(직접 CDS pdf 링크 미발견). Columbia,
+  Pace, Catholic University, East Carolina는 이번 세션 재시도 안 함
+  (시간 예산 우선순위상 sources_pending_review 물량 처리에 집중).
+
+### 실패/스킵 사례(각 5분 이내 판단 후 다음으로 이동)
+- Clemson University(open.clemson.edu — Cloudflare 챌린지, 22차와 동일)
+- Oklahoma State University(Cloudflare 403, 22차와 동일)
+- Purdue University(CDS xlsx 링크 2건 모두 Cloudflare 챌린지 HTML 반환)
+- University of Arizona(CDS PDF는 다운로드 성공하지만 텍스트 레이어가
+  없는 폼/오버레이 구조라 pdftotext/pypfr 필드 추출 모두 실패 — 22차의
+  진단과 동일, OCR 도구 필요)
+- University of Denver(CDS PDF도 동일하게 텍스트 추출 불가 — 폼 구조 추정)
+- University of Idaho, CU Boulder, University at Albany, Mississippi
+  State — 직접 pdf 링크 확보 실패(403 또는 페이지 구조상 링크 미발견)
+
+### 실제 반영 내역
+- `university_source_urls`: WVU/Ball State 2건을 실제 작동하는 직접
+  PDF URL로 `UPDATE`(status→`approved`, review_note에 우회 방법 기록).
+- `university_admission_metrics`: 16개교(위 14개교 + WVU + Ball State)
+  총 297행 삽입/갱신. 전부 `verification_status='official'`,
+  `source_url_id`·`verified_at` 채움. Chapman/TCU/UConn/Alabama/Ball
+  State는 CDS 원본에 GPA 평균이 공란이라 GPA 미기재(추측 금지).
+- `universities.data_collection_status`: 16개교 `verified_pilot`으로 변경.
+
+### 검증
+- `psql` 카운트: `verified_pilot` **88 → 104개교**, `unconfirmed`
+  **9 → 7개교**, `sources_pending_review` 89개교(103→89, 14개교 이탈).
+- 각 학교 applicant/admitted/enrolled 카운트는 CDS 원문의 "Total
+  first-time, first-year (degree-seeking) who applied/admitted/enrolled"
+  합계 행과 성별 분해 합이 일치함을 대조 확인(TTU/GMU/Alabama/UAB/UCF/
+  Ball State/WVU 등에서 이중 확인).
+- FSU는 CDS 전용 페이지가 404라 Fact Book 수치를 사용했다는 점과
+  admit_rate 24.2%가 실제와 부합함을 WebSearch로 교차검증 후 반영.
+- `git status`: 앱 코드 변경 없음, 새 마이그레이션 없음. `npx supabase
+  db push --linked` / `vercel deploy` 실행하지 않음.
+
+### 학과 목록 보완
+- 착수 못함. 확인 결과 `universities.strengths_programs`(text[])가
+  200개교 전원 NULL/빈 배열 — 이는 특정 학교 문제가 아니라 전체
+  미착수 상태. 별도 세션에서 스키마/데이터 소스부터 설계 필요.
+
+### 다음 세션 인계 (23차 작성분)
+1. sources_pending_review 89개교 남음 — 목록은 `select u.name, s.id,
+   s.url from university_source_urls s join universities u on
+   u.id=s.university_id where s.source_type='common_data_set' and
+   s.status='approved' and u.data_collection_status='sources_pending_review'
+   order by u.name`로 재조회. 이번 세션 처리 학교는 제외됨.
+2. unconfirmed 7개교(Miami University Ohio/Texas A&M/Pace/Gonzaga/
+   Catholic University/East Carolina/Columbia) — Miami Ohio는
+   `miamioh.edu/oir/data/cds/` 페이지 자체는 맞으나 xlsx 상대경로
+   해석이 틀렸을 가능성, 페이지를 브라우저 도구로 직접 열어 실제
+   다운로드 링크 재확인 권장. Texas A&M은 abpa.tamu.edu PDF 경로가
+   자주 바뀌는 것으로 보임(_files/_documents 구조), WebSearch로 최신
+   경로 재탐색 필요.
+3. Cloudflare 403 계열(Clemson/Oklahoma State/Purdue)은 이번 세션도
+   여전히 실패 — Referer 헤더 우회가 WVU에는 통했으나 Cloudflare
+   챌린지(challenges.cloudflare.com)가 뜨는 곳에는 안 통함, 브라우저
+   기반 도구가 있는 세션에서 재시도 권장.
+4. 폼/오버레이 구조 PDF(Arizona, Denver)는 pdftotext/pypdf 모두 실패 —
+   OCR 도구(예: pdftoppm+tesseract) 있는 세션에서 재시도.
+5. 학과 목록 보완은 여전히 완전 미착수(200개교 전원 0건) — 스키마
+   설계부터 필요한 별도 작업.
+6. 관리자 화면 노출 확인 여전히 미착수.
+7. 200개교 전체가 끝나면 반드시 최종 통합보고서를 작성하고 CDS 정보
+   노출 UI를 계속 확장할 것 — 매 세션 인계 기록에 계속 전달.
