@@ -281,7 +281,15 @@ function MeetingRequestsPanel() {
   function startEdit(m: AssignedMeetingRequest) {
     setEditingId(m.id);
     setError(null);
-    const toLocalInput = (iso: string | null) => (iso ? new Date(iso).toISOString().slice(0, 16) : "");
+    // 2026-09-22(실사용자 UAT에서 발견 — 확정 시각이 신청 시각과 7시간 어긋남) —
+    // datetime-local 입력은 "지역 시간" 문자열을 그대로 받는다. toISOString()은
+    // 항상 UTC라 여기 쓰면 안 된다(대신 로컬 getter로 조립).
+    const toLocalInput = (iso: string | null) => {
+      if (!iso) return "";
+      const d = new Date(iso);
+      const pad = (n: number) => String(n).padStart(2, "0");
+      return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+    };
     setEditStart(toLocalInput(m.startsAt));
     setEditEnd(toLocalInput(m.endsAt));
   }
