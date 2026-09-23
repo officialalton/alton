@@ -368,6 +368,22 @@ function StudentPanel({
   onBack: () => void;
 }) {
   const [subView, setSubView] = useState<StudentSubView>("overview");
+  // 2026-09-22(사용자 지적 — 탭 전환마다 로딩이 길다) — Overview/Board가
+  // 각자 loadStudentBoardCardsAction을 따로 호출해 학생을 열 때마다 최대
+  // 2번 같은 데이터를 중복 조회했다. 여기서 한 번만 불러와 두 탭이 공유한다.
+  const [cards, setCards] = useState<BoardCard[] | null>(null);
+  const [cardsError, setCardsError] = useState<string | null>(null);
+
+  function reloadCards() {
+    loadStudentBoardCardsAction(studentId)
+      .then(setCards)
+      .catch((e) => setCardsError(e instanceof Error ? e.message : "불러오지 못했습니다."));
+  }
+  useEffect(() => {
+    setCards(null);
+    reloadCards();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [studentId]);
 
   return (
     <div className="max-w-[720px] px-8 py-8">
@@ -377,7 +393,7 @@ function StudentPanel({
       >
         ← 담당 학생 목록
       </button>
-      <h1 className="text-[18px] font-extrabold text-ink mt-2 mb-4">{studentName} 학생</h1>
+      <h1 className="text-[18px] font-extrabold text-ink mt-2 mb-4">{studentName}</h1>
 
       <div className="flex gap-1 mb-5 border-b border-grey-200">
         {(
@@ -401,9 +417,13 @@ function StudentPanel({
       </div>
 
       {subView === "overview" ? (
-        <StudentOverviewPanel studentId={studentId} />
+        cards === null ? (
+          <div className="py-8 text-[13px] text-grey-500">불러오는 중...</div>
+        ) : (
+          <PlannerOverviewView cards={cards} />
+        )
       ) : subView === "board" ? (
-        <StudentBoardPanel studentId={studentId} />
+        <StudentBoardPanel studentId={studentId} cards={cards} error={cardsError} onReload={reloadCards} />
       ) : (
         <StudentRoadmapPanel studentId={studentId} />
       )}
@@ -411,77 +431,41 @@ function StudentPanel({
   );
 }
 
-function StudentOverviewPanel({ studentId }: { studentId: string }) {
-  const [cards, setCards] = useState<BoardCard[] | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    setCards(null);
-    loadStudentBoardCardsAction(studentId)
-      .then((data) => {
-        if (!cancelled) setCards(data);
-      })
-      .catch(() => {
-        if (!cancelled) setCards([]);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [studentId]);
-
-  if (cards === null) return <div className="py-8 text-[13px] text-grey-500">불러오는 중...</div>;
-  return <PlannerOverviewView cards={cards} />;
-}
-
-function StudentBoardPanel({ studentId }: { studentId: string }) {
-  const [cards, setCards] = useState<BoardCard[] | null>(null);
+function StudentBoardPanel({
+  studentId,
+  cards,
+  error,
+  onReload,
+}: {
+  studentId: string;
+  cards: BoardCard[] | null;
+  error: string | null;
+  onReload: () => void;
+}) {
   const [newTitle, setNewTitle] = useState("");
   const [adding, setAdding] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  function reload() {
-    loadStudentBoardCardsAction(studentId)
-      .then(setCards)
-      .catch((e) => setError(e instanceof Error ? e.message : "불러오지 못했습니다."));
-  }
-  useEffect(() => {
-    setCards(null);
-    reload();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [studentId]);
 
   async function handleAdd() {
     const title = newTitle.trim();
     if (!title) return;
     setAdding(true);
-    setError(null);
     try {
       await createStudentManualTaskAction(studentId, title);
       setNewTitle("");
-      reload();
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "추가하지 못했습니다.");
+      onReload();
     } finally {
       setAdding(false);
     }
   }
 
   async function handleMove(cardId: string, status: BoardCard["status"]) {
-    try {
-      await updateStudentManualTaskStatusAction(cardId, status);
-      reload();
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "이동하지 못했습니다.");
-    }
+    await updateStudentManualTaskStatusAction(cardId, status);
+    onReload();
   }
 
   async function handleDelete(cardId: string) {
-    try {
-      await deleteStudentManualTaskAction(cardId);
-      reload();
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "삭제하지 못했습니다.");
-    }
+    await deleteStudentManualTaskAction(cardId);
+    onReload();
   }
 
   if (cards === null) return <div className="py-8 text-[13px] text-grey-500">불러오는 중...</div>;
