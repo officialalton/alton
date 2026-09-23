@@ -1252,3 +1252,83 @@ Writing/Science/Reading, Auburn의 ACT Science/Reading, GPA 4.0 세부 분포 �
   컨설턴트·학생·학부모가 참고할 만한 항목은 전부 공개 화면에 노출되도록
   UI를 계속 확장할 것 — 이 지시는 200개교가 끝날 때까지 매 세션 인계
   기록에 계속 전달되어야 한다.
+
+## 15차 세션 (2026-09-23, 워크트리 `feature/university-info-sources`)
+
+### 스킵 4개교 재시도 결과 — 전부 성공
+14차에서 curl 차단으로 스킵했던 4개교를 이번 세션에서 모두 실제 원문으로
+반영했다.
+- **USC**: UA(Chrome 128) 헤더만 바꿔서 curl 재시도 → `oir.usc.edu`가
+  200 응답, `CDS_2025-26_FINAL.pdf` 직접 다운로드 성공.
+- **Rice**: 동일하게 UA 변경만으로 curl 성공, `ideas.rice.edu`에서
+  `CDS_2025-26_WEBSITE_Updated_8-3-2026.pdf` 확보.
+- **Emory**: 페이지의 상대경로(`../_includes/...`)가 원래 base와 달라
+  404였던 것 — base를 `/planning-administration/`으로 보정한 절대경로로
+  재시도해 PDF 확보.
+- **University of Virginia**: `ira.virginia.edu`는 Cloudflare JS 챌린지로
+  curl/WebFetch 모두 403 — 이번 세션은 브라우저 도구(Claude_Browser)로
+  실제 페이지를 렌더링해 챌린지를 통과했다. UVA CDS는 정적 PDF가 아니라
+  Qlik Sense 대시보드(iframe, `qlksnpn-apprd01.eservices.virginia.edu`)로
+  구현되어 있어, iframe URL을 직접 열어 각 섹션(C, G)을 스크롤하며 원문을
+  읽었다.
+
+### 추가로 신규 처리한 9개교
+approved 상태인 나머지 학교 중 정적 PDF를 직접 찾을 수 있었던 학교부터
+순서대로 처리: Colorado State University, Santa Clara University,
+Marquette University, Northeastern University(CDS 2024-25가 최신 —
+2025-26 미공개), Loyola University Chicago, Rowan University, Georgia
+Institute of Technology, Oregon State University, Ohio State University
+(Columbus 캠퍼스).
+
+Marquette와 Ohio State University는 CDS PDF가 "Print to PDF"로 만들어진
+파일이라 표 안 숫자가 텍스트 레이어에 없는 문제(pdftotext로 라벨만
+추출되고 값이 안 나옴)가 있었다 — `pdftoppm`으로 해당 페이지를 PNG
+렌더링한 뒤 이미지를 직접 읽어(OCR 대신 육안 판독) 정확한 숫자를 확인,
+notes에 "(OCR)"로 명시했다.
+
+Colorado State University는 CDS C9에 "표준화시험 입학전형 미반영으로
+데이터 미보고"라고 명시되어 있어 SAT/ACT 스코어 대신 그 사실을
+`sat_submitted_pct=0`/`act_submitted_pct=0`와 notes로 정직하게 반영했다.
+University of Virginia, Ohio State University는 GPA(C12)가 원문에서
+공란이라 입력하지 않았다(추측 금지 원칙).
+
+### 반영 내역 (psql 직접 확인)
+- `university_admission_metrics` 총 행수 615→998(신규 383행: USC 33 +
+  Rice 32 + Emory 21 + UVA 39 + CSU 10 + SCU 25 + Marquette 34 +
+  Northeastern 32 + Loyola Chicago 25 + Rowan 33 + Georgia Tech 36 +
+  Oregon State 30 + Ohio State 33 — cohort별 applicants/admitted/enrolled,
+  admit_rate/yield_rate(계산값), SAT/ACT 25·50·75, 제출률, GPA, 학비
+  중심. 세부 영역별 점수·대기자명단·top10%는 원문에 있는 만큼만 추가).
+- `data_collection_status`: `verified_pilot` 25→38, `sources_pending_review`
+  163→150, `unconfirmed` 12(변동 없음). 합계 200 유지.
+- 새 마이그레이션 없음(데이터만 반영, 스키마 변경 없음).
+- 학과(전공) 목록 보완: 이번 세션도 착수하지 못함 — **누적 3세션째
+  미착수**. 다음 세션 최우선 처리 필요.
+
+### 검증
+- `psql`로 `university_admission_metrics` 총 행수(998)와
+  `data_collection_status` 분포(`verified_pilot`=38) 직접 확인.
+- 로컬 Supabase(`supabase status`)만 사용, `npx supabase db push --linked`,
+  `vercel deploy` 미실행(지시대로 금지).
+- 코드 변경 없음(데이터 반영만) — `npx tsc --noEmit`는 13~14차와 동일한
+  기존 `LayoutProps` 1건 외 신규 이슈 없음.
+
+### 다음 세션(16차) 필요
+- **최우선**: 남은 `sources_pending_review` 150개교 중 approved CDS URL이
+  있는 129개교를 동일 방식으로 계속 처리. 조회 조건은 동일:
+  `university_source_urls`에서 `source_type='common_data_set' and
+  status='approved'`이고 `universities.data_collection_status <>
+  'verified_pilot'`.
+- approved URL이 없는(21개교) 학교는 IR 페이지 직접 검색으로 CDS URL부터
+  새로 등록해야 함(`university-source-urls-bulk-register.ts` 등 기존
+  도구 활용 검토).
+- Fordham, Saint Louis University, Drexel, DePaul, Pepperdine, Seton Hall은
+  이번 세션에 CDS PDF 직접 링크를 못 찾음(사이트 구조가 다름 — DePaul은
+  ASP 리다이렉트, 나머지는 정적 링크 미노출) — 다음 세션에서 브라우저
+  도구나 사이트 검색으로 재시도할 것.
+- 학과(전공) 목록 전체 보완(additive) — **누적 3세션째 미착수**, 반드시
+  다음 세션에서 착수.
+- **200개교 전체가 끝나면 반드시 최종 통합보고서를 작성**하고 CDS 정보 중
+  컨설턴트·학생·학부모가 참고할 만한 항목은 전부 공개 화면에 노출되도록
+  UI를 계속 확장할 것 — 이 지시는 200개교가 끝날 때까지 매 세션 인계
+  기록에 계속 전달되어야 한다.
