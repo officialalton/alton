@@ -5,14 +5,26 @@
 // 대학 관련 학생 진입점은 로드맵 탭 안에 둔다). 읽기 전용 — 합격 확률/가능성 예측은 정책상 없다.
 
 import { useEffect, useState, useTransition } from "react";
-import { listUniversities, getUniversityDetailForStudent, type UniversitySummary, type UniversityDetail, type AdmissionCycle, type UniversityMajor, type UniversityUpdateEntry, type EssayPrompt } from "@/lib/universities/actions";
+import { listUniversities, getUniversityDetailForStudent, type UniversitySummary, type UniversityDetail, type AdmissionCycle, type UniversityMajor, type UniversityUpdateEntry, type EssayPrompt, type UniversitySourceUrl } from "@/lib/universities/actions";
+import { listMySubmittedSourceUrls, proposeUniversitySourceUrl, reportUniversityDataIssue } from "@/lib/universities/user-actions";
+
+const SOURCE_TYPE_LABEL: Record<string, string> = {
+  admissions_homepage: "입학처 홈페이지",
+  common_data_set: "Common Data Set",
+  catalog_programs: "카탈로그/전공",
+  deadlines: "지원 마감일",
+  essay_prompts: "에세이 문항",
+  admitted_profile: "합격자 프로필",
+  financial_aid: "재정지원",
+  other: "기타",
+};
 
 const cardClass = "border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4";
 const cardTitleClass = "text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2";
 const SETTING_LABEL: Record<string, string> = { urban: "도시", suburban: "교외", rural: "시골", town: "소도시" };
 const CALENDAR_LABEL: Record<string, string> = { semester: "학기제(Semester)", quarter: "쿼터제(Quarter)", trimester: "트라이메스터", "4-1-4": "4-1-4제", other: "기타" };
 
-export default function CollegeExploreSection() {
+export default function CollegeExploreSection({ canProposeSourceUrl = false }: { canProposeSourceUrl?: boolean }) {
   const [search, setSearch] = useState("");
   const [list, setList] = useState<UniversitySummary[] | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -29,11 +41,11 @@ export default function CollegeExploreSection() {
         setError(e instanceof Error ? e.message : "대학 목록을 불러오지 못했습니다.");
       }
     });
-     
+
   }, [search]);
 
   if (selectedId) {
-    return <CollegeDetail universityId={selectedId} onBack={() => setSelectedId(null)} />;
+    return <CollegeDetail universityId={selectedId} onBack={() => setSelectedId(null)} canProposeSourceUrl={canProposeSourceUrl} />;
   }
 
   return (
@@ -74,8 +86,16 @@ export default function CollegeExploreSection() {
   );
 }
 
-function CollegeDetail({ universityId, onBack }: { universityId: string; onBack: () => void }) {
-  const [detail, setDetail] = useState<{ university: UniversityDetail; cycles: AdmissionCycle[]; updates: UniversityUpdateEntry[]; majors: UniversityMajor[]; essayPrompts: EssayPrompt[] } | null>(null);
+function CollegeDetail({
+  universityId,
+  onBack,
+  canProposeSourceUrl = false,
+}: {
+  universityId: string;
+  onBack: () => void;
+  canProposeSourceUrl?: boolean;
+}) {
+  const [detail, setDetail] = useState<{ university: UniversityDetail; cycles: AdmissionCycle[]; updates: UniversityUpdateEntry[]; majors: UniversityMajor[]; essayPrompts: EssayPrompt[]; sourceUrls: UniversitySourceUrl[] } | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -185,6 +205,213 @@ function CollegeDetail({ universityId, onBack }: { universityId: string; onBack:
               ))}
             </div>
           )}
+
+          {detail.sourceUrls.length > 0 && (
+            <div className={cardClass}>
+              <div className={cardTitleClass}>출처</div>
+              <ul className="space-y-1.5">
+                {detail.sourceUrls.map((s) => (
+                  <li key={s.id} className="text-[12px]">
+                    <a href={s.url} target="_blank" rel="noreferrer" className="text-ink underline break-all">
+                      {s.url}
+                    </a>
+                    <span className="ml-1.5 text-[11px] text-grey-500">
+                      ({SOURCE_TYPE_LABEL[s.sourceType] ?? s.sourceType}
+                      {s.isOfficial ? " · 공식" : " · 참고"}
+                      {s.cycleYear ? ` · ${s.cycleYear}` : ""})
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {canProposeSourceUrl && <ProposeSourceUrlSection universityId={universityId} />}
+
+          <ReportIssueForm universityId={universityId} />
+        </>
+      )}
+    </div>
+  );
+}
+
+/** 컨설턴트 전용 — 출처 URL 제안 폼 + 내가 제안한 URL의 검토 상태. */
+function ProposeSourceUrlSection({ universityId }: { universityId: string }) {
+  const [items, setItems] = useState<Awaited<ReturnType<typeof listMySubmittedSourceUrls>> | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [url, setUrl] = useState("");
+  const [sourceType, setSourceType] = useState("admissions_homepage");
+  const [pending, startTransition] = useTransition();
+
+  function refresh() {
+    startTransition(async () => {
+      try {
+        setItems(await listMySubmittedSourceUrls(universityId));
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "출처 목록을 불러오지 못했습니다.");
+      }
+    });
+  }
+
+  useEffect(() => {
+    refresh();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [universityId]);
+
+  function submit() {
+    if (!url.trim()) return;
+    setError(null);
+    startTransition(async () => {
+      try {
+        await proposeUniversitySourceUrl({
+          universityId,
+          url: url.trim(),
+          sourceType: sourceType as never,
+          isOfficial: false,
+        });
+        setUrl("");
+        refresh();
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "제안 등록 중 오류가 발생했습니다.");
+      }
+    });
+  }
+
+  return (
+    <div className={cardClass}>
+      <div className={cardTitleClass}>출처 URL 제안 (컨설턴트)</div>
+      {error && <p className="text-[11.5px] text-red mb-2">{error}</p>}
+      <input
+        type="text"
+        value={url}
+        onChange={(e) => setUrl(e.target.value)}
+        placeholder="https://... (승인 대기 상태로 등록됩니다)"
+        className="w-full mb-2 px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px]"
+      />
+      <div className="flex gap-2 mb-2">
+        <select
+          value={sourceType}
+          onChange={(e) => setSourceType(e.target.value)}
+          className="flex-1 px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px]"
+        >
+          {Object.entries(SOURCE_TYPE_LABEL).map(([value, label]) => (
+            <option key={value} value={value}>
+              {label}
+            </option>
+          ))}
+        </select>
+        <button
+          type="button"
+          disabled={pending || !url.trim()}
+          onClick={submit}
+          className="rounded-lg bg-ink px-3 py-1.5 text-[12.5px] text-white disabled:opacity-50"
+        >
+          제안
+        </button>
+      </div>
+      <div className="text-[11px] text-grey-500 mb-1">내가 제안한 URL 상태</div>
+      {items === null && <p className="text-[11.5px] text-grey-400">불러오는 중…</p>}
+      {items?.length === 0 && <p className="text-[11.5px] text-grey-400">제안한 출처가 없습니다.</p>}
+      <ul className="space-y-1">
+        {items?.map((s) => (
+          <li key={s.id} className="text-[11.5px] text-grey-600">
+            <span className="truncate">{s.url}</span>{" "}
+            <span
+              className={
+                s.status === "approved" ? "text-green-700" : s.status === "rejected" ? "text-red" : "text-yellow-700"
+              }
+            >
+              {s.status === "approved" ? "승인됨" : s.status === "rejected" ? "반려됨" : "검토 대기"}
+            </span>
+            {s.reviewNote && <span className="text-grey-400"> · {s.reviewNote}</span>}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+/** 공개 대학 상세 화면 하단 — 정보 오류 신고(일반/필드 단위 모두 가능). */
+function ReportIssueForm({ universityId }: { universityId: string }) {
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
+  const [fieldPath, setFieldPath] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [, startTransition] = useTransition();
+
+  function submit() {
+    if (!message.trim()) return;
+    setStatus("sending");
+    setErrorMsg(null);
+    startTransition(async () => {
+      try {
+        await reportUniversityDataIssue({
+          universityId,
+          fieldPath: fieldPath.trim() || null,
+          message: message.trim(),
+        });
+        setStatus("sent");
+        setMessage("");
+        setFieldPath("");
+      } catch (e) {
+        setStatus("error");
+        setErrorMsg(e instanceof Error ? e.message : "신고 접수 중 오류가 발생했습니다.");
+      }
+    });
+  }
+
+  if (!open) {
+    return (
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        className="w-full text-[12px] font-bold text-grey-500 border-[1.5px] border-grey-200 rounded-xl px-4 py-3 mb-4 hover:bg-grey-100"
+      >
+        정보 오류 신고
+      </button>
+    );
+  }
+
+  return (
+    <div className={cardClass}>
+      <div className={cardTitleClass}>정보 오류 신고</div>
+      {status === "sent" ? (
+        <p className="text-[12.5px] text-ink">신고가 접수되었습니다. 검토 후 반영됩니다.</p>
+      ) : (
+        <>
+          <input
+            type="text"
+            value={fieldPath}
+            onChange={(e) => setFieldPath(e.target.value)}
+            placeholder="어떤 항목인가요? (예: SAT 범위, 마감일 — 선택)"
+            className="w-full mb-2 px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px]"
+          />
+          <textarea
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="어떤 정보가 잘못됐는지 알려주세요."
+            className="w-full mb-2 px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px]"
+            rows={3}
+          />
+          {errorMsg && <p className="text-[11.5px] text-red mb-2">{errorMsg}</p>}
+          <div className="flex gap-2">
+            <button
+              type="button"
+              disabled={status === "sending" || !message.trim()}
+              onClick={submit}
+              className="rounded-lg bg-ink px-3 py-1.5 text-[12.5px] text-white disabled:opacity-50"
+            >
+              신고 제출
+            </button>
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              className="rounded-lg border-[1.5px] border-grey-200 px-3 py-1.5 text-[12.5px] text-grey-600"
+            >
+              취소
+            </button>
+          </div>
         </>
       )}
     </div>

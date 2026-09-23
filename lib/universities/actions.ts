@@ -177,7 +177,14 @@ export type UniversityUpdateEntry = {
 async function loadUniversityDetail(
   db: ReturnType<typeof createAdminClient>,
   universityId: string,
-): Promise<{ university: UniversityDetail; cycles: AdmissionCycle[]; updates: UniversityUpdateEntry[]; majors: UniversityMajor[]; essayPrompts: EssayPrompt[] }> {
+): Promise<{
+  university: UniversityDetail;
+  cycles: AdmissionCycle[];
+  updates: UniversityUpdateEntry[];
+  majors: UniversityMajor[];
+  essayPrompts: EssayPrompt[];
+  sourceUrls: UniversitySourceUrl[];
+}> {
   const { data: u, error: uErr } = await db.from("universities").select("*").eq("id", universityId).single();
   if (uErr) throw new Error(uErr.message);
 
@@ -208,6 +215,16 @@ async function loadUniversityDetail(
     .eq("university_id", universityId)
     .order("cycle_year", { ascending: false });
   if (eErr) throw new Error(eErr.message);
+
+  // 공개 화면에는 관리자가 승인한 공식/참고 출처만 노출한다(pending/rejected 제외).
+  const { data: sourceUrlRows, error: sErr } = await db
+    .from("university_source_urls")
+    .select("id, university_id, url, source_type, cycle_year, is_official, status, submitted_by, reviewed_by, reviewed_at, review_note, created_at")
+    .eq("university_id", universityId)
+    .eq("status", "approved")
+    .order("is_official", { ascending: false })
+    .order("created_at", { ascending: false });
+  if (sErr) throw new Error(sErr.message);
 
   return {
     university: {
@@ -299,13 +316,21 @@ async function loadUniversityDetail(
     })),
     majors: (majorRows ?? []).map((m) => ({ id: m.id, name: m.name, category: m.category })),
     essayPrompts: (essayRows ?? []).map((e) => ({ id: e.id, cycleYear: e.cycle_year, promptText: e.prompt_text, wordLimit: e.word_limit, isRequired: e.is_required })),
+    sourceUrls: (sourceUrlRows ?? []).map(mapSourceUrlRow),
   };
 }
 
 /** 관리자 상세/편집 화면용. */
 export async function getUniversityDetail(
   universityId: string,
-): Promise<{ university: UniversityDetail; cycles: AdmissionCycle[]; updates: UniversityUpdateEntry[]; majors: UniversityMajor[]; essayPrompts: EssayPrompt[] }> {
+): Promise<{
+  university: UniversityDetail;
+  cycles: AdmissionCycle[];
+  updates: UniversityUpdateEntry[];
+  majors: UniversityMajor[];
+  essayPrompts: EssayPrompt[];
+  sourceUrls: UniversitySourceUrl[];
+}> {
   await requireAdmin();
   return loadUniversityDetail(createAdminClient(), universityId);
 }
@@ -317,7 +342,14 @@ export async function getUniversityDetail(
  */
 export async function getUniversityDetailForStudent(
   universityId: string,
-): Promise<{ university: UniversityDetail; cycles: AdmissionCycle[]; updates: UniversityUpdateEntry[]; majors: UniversityMajor[]; essayPrompts: EssayPrompt[] }> {
+): Promise<{
+  university: UniversityDetail;
+  cycles: AdmissionCycle[];
+  updates: UniversityUpdateEntry[];
+  majors: UniversityMajor[];
+  essayPrompts: EssayPrompt[];
+  sourceUrls: UniversitySourceUrl[];
+}> {
   const supabase = await createClient();
   const {
     data: { user },

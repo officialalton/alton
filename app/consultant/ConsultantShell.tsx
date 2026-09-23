@@ -779,7 +779,7 @@ function StudentRoadmapPanel({ studentId }: { studentId: string }) {
 
   if (state.status === "loading") return <div className="py-8 text-[13px] text-grey-500">불러오는 중...</div>;
   if (state.status === "error") return <div className="py-8 text-[13px] text-red">{state.message}</div>;
-  return <RoadmapView data={state.data} />;
+  return <RoadmapView data={state.data} canProposeSourceUrl />;
 }
 
 function formatMessengerDateTime(iso: string | null): string {

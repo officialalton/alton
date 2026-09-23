@@ -38,9 +38,12 @@ function parseList(text: string): string[] {
 export default function RoadmapView({
   data,
   readOnly = false,
+  canProposeSourceUrl = false,
 }: {
   data: RoadmapData;
   readOnly?: boolean;
+  /** 컨설턴트 포털에서만 true — 대학 탐색 화면에 출처 URL 제안 폼을 노출한다. */
+  canProposeSourceUrl?: boolean;
 }) {
   const [subTab, setSubTab] = useState<"profile" | "roadmap" | "colleges">("profile");
   const [pending, startTransition] = useTransition();
@@ -122,7 +125,7 @@ export default function RoadmapView({
       ) : subTab === "roadmap" ? (
         <RoadmapSection data={data} readOnly={readOnly} pending={pending} run={run} />
       ) : (
-        <CollegeExploreSection />
+        <CollegeExploreSection canProposeSourceUrl={canProposeSourceUrl} />
       )}
     </div>
   );

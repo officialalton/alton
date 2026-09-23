@@ -6,12 +6,15 @@ import {
   addUniversityUpdate,
   getUniversityDetail,
   listUniversities,
+  listUniversityDataReports,
   listUniversitySourceUrls,
+  resolveUniversityDataReport,
   reviewUniversitySourceUrl,
   updateUniversityBasics,
   upsertAdmissionCycle,
   type AdmissionCycle,
   type SourceUrlType,
+  type UniversityDataReport,
   type UniversityDetail,
   type UniversitySourceUrl,
   type UniversitySummary,
@@ -500,6 +503,133 @@ function UniversityDetailPanel({
       </div>
 
       <SourceUrlsSection universityId={detail.id} setError={setError} />
+      <ReportsInboxSection universityId={detail.id} setError={setError} />
+    </div>
+  );
+}
+
+/** 대학 상세 화면의 "오류 신고함" 섹션 — 해당 대학에 접수된 신고 목록 + 상태 전이 처리. */
+function ReportsInboxSection({
+  universityId,
+  setError,
+}: {
+  universityId: string;
+  setError: (msg: string | null) => void;
+}) {
+  const [items, setItems] = useState<UniversityDataReport[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [isPending, startTransition] = useTransition();
+  const [notes, setNotes] = useState<Record<string, string>>({});
+
+  function refresh() {
+    setLoading(true);
+    startTransition(async () => {
+      try {
+        const all = await listUniversityDataReports();
+        setItems(all.filter((r) => r.universityId === universityId));
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "신고 목록 조회 중 오류가 발생했습니다.");
+      } finally {
+        setLoading(false);
+      }
+    });
+  }
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
+    refresh();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [universityId]);
+
+  function transition(reportId: string, status: "in_review" | "resolved" | "dismissed") {
+    setError(null);
+    startTransition(async () => {
+      try {
+        await resolveUniversityDataReport({ reportId, status, resolutionNote: notes[reportId] ?? null });
+        refresh();
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "신고 처리 중 오류가 발생했습니다.");
+      }
+    });
+  }
+
+  const statusLabel: Record<UniversityDataReport["status"], string> = {
+    open: "접수",
+    in_review: "확인중",
+    resolved: "수정완료",
+    dismissed: "확인불가",
+  };
+  const statusClass: Record<UniversityDataReport["status"], string> = {
+    open: "bg-yellow-100 text-yellow-700",
+    in_review: "bg-blue-100 text-blue-700",
+    resolved: "bg-green-100 text-green-700",
+    dismissed: "bg-grey-200 text-grey-600",
+  };
+
+  return (
+    <div className="mt-6 border-t border-grey-200 pt-4">
+      <h3 className="text-sm font-semibold text-ink">오류 신고함</h3>
+      {loading && <p className="text-xs text-grey-400">불러오는 중…</p>}
+      <ul className="mt-2 space-y-2 text-xs text-grey-600">
+        {!loading && items.length === 0 && <li className="text-grey-400">접수된 신고가 없습니다.</li>}
+        {items.map((r) => (
+          <li key={r.id} className="rounded border border-grey-100 p-2">
+            <div className="flex items-center justify-between gap-2">
+              <span className="font-medium text-ink">{r.fieldPath ?? "일반 신고"}</span>
+              <span className={`shrink-0 rounded px-1.5 py-0.5 text-[11px] ${statusClass[r.status]}`}>
+                {statusLabel[r.status]}
+              </span>
+            </div>
+            <p className="mt-1 whitespace-pre-wrap text-grey-700">{r.message}</p>
+            {r.reportedValue && <p className="mt-1 text-grey-400">신고된 값: {r.reportedValue}</p>}
+            <p className="mt-1 text-grey-400">
+              신고자 역할: {r.reporterRole ?? "알 수 없음"} · {new Date(r.createdAt).toLocaleString("ko-KR")}
+            </p>
+            {r.status !== "resolved" && r.status !== "dismissed" && (
+              <div className="mt-2 space-y-1">
+                <input
+                  type="text"
+                  placeholder="처리 메모"
+                  value={notes[r.id] ?? ""}
+                  onChange={(e) => setNotes((prev) => ({ ...prev, [r.id]: e.target.value }))}
+                  className="w-full rounded border border-grey-300 px-2 py-1 text-xs"
+                />
+                <div className="flex gap-2">
+                  {r.status === "open" && (
+                    <button
+                      type="button"
+                      disabled={isPending}
+                      onClick={() => transition(r.id, "in_review")}
+                      className="rounded border border-grey-300 px-2 py-1 text-[11px] text-grey-700 disabled:opacity-50"
+                    >
+                      확인중으로 변경
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    disabled={isPending}
+                    onClick={() => transition(r.id, "resolved")}
+                    className="rounded bg-ink px-2 py-1 text-[11px] text-white disabled:opacity-50"
+                  >
+                    수정완료
+                  </button>
+                  <button
+                    type="button"
+                    disabled={isPending}
+                    onClick={() => transition(r.id, "dismissed")}
+                    className="rounded border border-grey-300 px-2 py-1 text-[11px] text-grey-700 disabled:opacity-50"
+                  >
+                    정보정확함/확인불가
+                  </button>
+                </div>
+              </div>
+            )}
+            {r.resolutionNote && r.status === "resolved" && (
+              <p className="mt-1 text-green-700">처리 메모: {r.resolutionNote}</p>
+            )}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

@@ -35,6 +35,41 @@ export async function proposeUniversitySourceUrl(input: {
   revalidatePath("/consultant");
 }
 
+/** 컨설턴트 — 본인이 제안한 출처 URL 전체(승인/반려/대기 모두) 조회.
+ * RLS "university_source_urls_select_own_submission"(submitted_by = auth.uid())가
+ * 안전망이므로 본인 세션 클라이언트를 그대로 쓴다. */
+export async function listMySubmittedSourceUrls(universityId: string): Promise<
+  {
+    id: string;
+    url: string;
+    sourceType: SourceUrlType;
+    cycleYear: number | null;
+    isOfficial: boolean;
+    status: "pending" | "approved" | "rejected";
+    reviewNote: string | null;
+    createdAt: string;
+  }[]
+> {
+  const { user, supabase } = await requireUser();
+  const { data, error } = await supabase
+    .from("university_source_urls")
+    .select("id, url, source_type, cycle_year, is_official, status, review_note, created_at")
+    .eq("university_id", universityId)
+    .eq("submitted_by", user.id)
+    .order("created_at", { ascending: false });
+  if (error) throw new Error(error.message);
+  return (data ?? []).map((r) => ({
+    id: r.id,
+    url: r.url,
+    sourceType: r.source_type,
+    cycleYear: r.cycle_year,
+    isOfficial: r.is_official,
+    status: r.status,
+    reviewNote: r.review_note,
+    createdAt: r.created_at,
+  }));
+}
+
 /** 로그인한 누구나 — 공개 대학 정보 화면 어디서나 오류 신고. */
 export async function reportUniversityDataIssue(input: {
   universityId?: string | null;
