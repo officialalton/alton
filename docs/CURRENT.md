@@ -8,8 +8,8 @@
 
 | 항목 | 값 |
 |---|---|
-| 브랜치 / Preview | `preview/m4-integration-verification`(UI 통일화 `feature/ui-unification` 병합 완료 + 2026-09-23 컨설턴트 포털 확장·lint 전량 정리 반영). 최신 Preview **https://alton-epv8zq7xw-alton7.vercel.app**(HEAD `60e6dd2`). 배포 주의: 이 Vercel 프로젝트는 GitHub 연동이라 **커밋과 완전히 일치하는 깨끗한 작업 트리**에서 `vercel deploy`하면 커밋 작성자 검증(TEAM_ACCESS_REQUIRED)에 걸려 빌드가 조용히 BLOCKED 된다 — 메인 워크트리(미커밋 docs 변경이 늘 있음)에서 배포하거나, git 없는 임시 복사본에서 배포한다(2026-09-20 확인). |
-| 공유 non-prod(`worpsqwqgnspddnrtnvq`) | 마이그레이션 **`20261472000000`까지 local=remote 확인**(2026-09-23, `20261464000000`~`20261472000000`는 이번 컨설턴트 포털 확장분). Supabase 프로젝트는 이 하나뿐(별도 프로덕션 DB 없음 — 2026-09-20 확인). 새 마이그레이션 작성 시 `docs/BRANCH-WORKFLOW.md` 동기화 체크리스트를 통합/배포 직전 매번 실행할 것. |
+| 브랜치 / Preview | `preview/m4-integration-verification`(UI 통일화 `feature/ui-unification` 병합 완료 + 2026-09-23 컨설턴트·관리자 포털 확장 전체 반영 — Phase A/B/C + "관리자 포털 정리" 5항목, 아래 32번 참고). 최신 Preview **https://alton-ciasxhafn-alton7.vercel.app**(HEAD `c69dbdd`). 배포 주의: 이 Vercel 프로젝트는 GitHub 연동이라 **커밋과 완전히 일치하는 깨끗한 작업 트리**에서 `vercel deploy`하면 커밋 작성자 검증(TEAM_ACCESS_REQUIRED)에 걸려 빌드가 조용히 BLOCKED 된다 — 메인 워크트리(미커밋 docs 변경이 늘 있음)에서 배포하거나, git 없는 임시 복사본에서 배포한다(2026-09-20 확인). |
+| 공유 non-prod(`worpsqwqgnspddnrtnvq`) | 마이그레이션 **`20261568000000`까지 local=remote 확인**(2026-09-23, `20261550000000`~`20261568000000`는 이번 컨설턴트·관리자 포털 확장분 — Students Active/Ended, Documents, Schedule/Time-off, Profile, Settlement, 상담 세션 자료, 선생님 내부 메신저). Supabase 프로젝트는 이 하나뿐(별도 프로덕션 DB 없음 — 2026-09-20 확인). 새 마이그레이션 작성 시 `docs/BRANCH-WORKFLOW.md` 동기화 체크리스트를 통합/배포 직전 매번 실행할 것. 동시 작업 중인 `feature/university-info-sources` 브랜치는 마이그레이션 번호 `20261600000000` 이상만 쓰기로 조율됨(충돌 시 서로 `SendMessage`). |
 | Production | Vercel production 도메인 배포·마이그레이션 없음(오픈 전, 실제 고객 데이터 없음). Stripe/DocuSign 등 외부 키는 샌드박스. |
 | 테스트 | 2026-09-23: `tsc` 통과, `npm run build` 통과, `eslint .` **0 errors/warnings**(2026-09-21 리뷰가 지적한 "lint 정리(소스 82 errors)" 완료 — 상세는 4절 참고). `vitest run --exclude "**/*.integration.test.ts"`: 2530/2531 통과(1 skip) — 남은 1건은 랜덤 지오메트리 스트레스 테스트가 매번 다른 파일에서 산발적으로 실패하는 기존 flaky 이슈(단독 재실행 시 항상 통과, 코드 결함 아님). **알려진 사전 실패(무관)**: `app/session/[id]/problem-grading.integration.test.ts` 4건은 `confirm_and_publish_problem_version`·`issue_homework_by_keywords` 의 현재 정의에 없는 문구를 기대하는 오래된 테스트(함수 정의 확인됨), 나머지 `*.integration.test.ts` 실패는 로컬 DB 잔여 데이터(`reservations_no_overlap` 등) — `supabase db reset --local` 직후 `--no-file-parallelism`으로 돌릴 것. |
 | 실제 외부 연동 | 교재 Drive 읽기·고정 사본 공개, Smart Notes Drive reader 권한 부여(웹훅 멱등성 적용), Google Calendar/Meet 실제 이벤트 생성(상담 일정 확정). Preview `CURRICULUM_DRIVE_ENABLED/ID/ALLOW_REAL_WRITES=true`. AI 생성은 Anthropic 키. 유료 서비스 추가 없음. |
@@ -129,7 +129,16 @@
       2. **개인 이메일 기반 선생님/학부모 초대 폼**(`InviteForm`, admin `UsersTab`) — Google Workspace 프로비저닝(R2 Task 7)으로 이미 대체된 뒤 호출부 없이 방치돼 있던 폼. 삭제.
     - 검증: `tsc` 클린, `vitest run` 2530/2531 통과(1건은 무관한 기존 flaky), `npm run build` 성공, Preview 배포 확인.
 
-마이그레이션(2026-09-14 배치): `20261346`~`20261403`. 이후 배치는 위 각 항목 참고, 최신은 `20261472000000`(1절 표 참고).
+33. **컨설턴트 포털 확장 Phase B/C + 관리자 포털 정리(2026-09-23, 사용자 업무지시서 전체 완료, migration `20261550000000`~`20261568000000`)**:
+    - **Phase B — 컨설턴트 포털**: Students 탭을 배정 중/배정 종료 서브탭으로 분리(종료는 기록 조회 전용) + Roadmap 상단 중복 요약 제거. Documents 메인 탭 신설(담당 학생 계약 문서·서명 상태, 다른 컨설턴트 담당 건 접근 불가). Schedule 메인 탭으로 통합(예정 일정/일정 오픈/휴무 3서브탭 — 휴무 등록 시 기존 확정 일정과 충돌 검사). Profile(성별·이력·시간대 자기수정, 입사일 등 회사기준정보는 관리자 전용 — `protect_hire_date` 트리거로 강제). Settlement(계좌 등록 + 관리자가 확정한 지급 예정/완료 내역 조회 — 상담 건수 기반 자동계산·자동지급 없음, 확정 전후 상태 구분).
+    - **Phase A 마무리**: 보호자가 자녀별 담당 컨설턴트에게 직접 상담 신청(그 컨설턴트의 가능 시간만 노출). 관리자<->컨설턴트/선생님 내부 메신저 신설(고객에게 노출 안 됨). 선생님 배정 요청 수락/거절 결과가 내부 메신저에 시스템 메시지로 반영.
+    - **Phase C — 상담 세션 화면**: 컨설턴트가 확정된 일정에서 "상담 시작"으로 진입, 관리자가 등록한 상담 자료를 열람(다운로드 기록 남김), 상담 메모·다음 행동 저장.
+    - **버그 2건(전부 실사용 UAT로 발견, mock 테스트는 못 잡음)**: (a) 보호자→담당 컨설턴트 상담 신청이 처음부터 전혀 동작하지 않았음 — `consultant_assignments`/`profiles`에 guardian용 SELECT RLS 정책 자체가 없어 조용히 빈 배열만 반환(예외 없음). (b) `consultation_materials` RLS가 `profiles` role 확인을 일반 서브쿼리로 써서 `profiles`의 무거운 RLS가 재귀 평가돼 `statement timeout` 발생 — `is_admin()`과 같은 SECURITY DEFINER 헬퍼(`is_consultant()`)로 교체. **패턴 노트**: 다른 테이블 값을 확인하는 새 RLS 정책은 반드시 SECURITY DEFINER 헬퍼를 쓸 것(인라인 서브쿼리는 침묵 실패 또는 타임아웃 위험).
+    - **관리자 포털 정리(5항목 전체 완료)**: (1) Users에 Consultants 서브탭 추가(담당 학생·이력·프로필, 매칭 변경은 기존 Consultants 운영 탭과 같은 RPC 재사용). (2) Messenger 메인 탭 신설, Teachers/Consultants 내부 문의 분리(향후 학생·보호자 채널 확장 가능한 구조). (3) Inquiries 면담 목록에서 담당 컨설턴트가 있는 요청은 "처리 중" 배지로 표시하고 상태변경 버튼 기본 숨김("관리자 개입"으로 예외 처리, 전체 조회는 유지). (4) Entitlements/Schedule/Bookings/Payouts/Onboarding 장문 설명 축약, 내부 용어(hold/payout_batches/batch 등) 순화, **Bookings 화면을 서브탭 없는 7섹션 나열 구조에서 4개 서브탭(동기화 실패·재처리/외부 변경 감지/지각·노쇼·세션 판정/메이크업·정산 조정)으로 재구성**. (5) Users/Onboarding 성능 실측(컨설턴트 데이터 추가로 인한 불필요한 전체 조회 없음 확인 — 서브탭 열 때만 lazy fetch).
+    - 검증: 매 슬라이스마다 `tsc`/`eslint`/관련 vitest 통과 확인, 세션 종료 시점 `vitest run --exclude "**/*.integration.test.ts"` 334개 파일 2595개 전부 통과, `npm run build` 성공. 매 슬라이스 실제 Preview 배포 + 실제 Google/이메일 계정으로 라이브 UAT(관리자 `official@alton.education`, 컨설턴트 `jiman@alton.education`, 선생님 `teacher1@alton.education`, 보호자/학생 `matchbox512+alton-uat-p16@gmail.com` 계열 실제 비밀번호 로그인) — UAT 테스트 데이터·메시지는 세션 중 즉시 정리(단, `document_access_events` 등 append-only 감사 테이블은 정책대로 보존).
+    - **남은 것**: (a) 컨설턴트 시간대 설정이 앱 전역 날짜 표시에 아직 일관 적용되지 않음(저장·조회만 구현, Profile 화면 자체에서 명시적으로 알린 한계). (b) 상담 자료 화면 캡처 등 완전한 유출 차단은 구현 범위 밖(다운로드/공개링크 제한 + 접근 기록만). (c) Bookings 서브탭 재구성 이후 UAT는 이번 세션에서 기능별로만 확인 — 마일스톤 종료 폴리싱 라운드에서 화면 전체 한 번 더 훑어볼 것.
+
+마이그레이션(2026-09-14 배치): `20261346`~`20261403`. 이후 배치는 위 각 항목 참고, 최신은 `20261568000000`(1절 표 참고).
 
 ## 5. 검증 구분
 
