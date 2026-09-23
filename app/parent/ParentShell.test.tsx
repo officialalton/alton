@@ -41,6 +41,8 @@ vi.mock("./inquiry-actions", () => ({
   submitMeetingRequest: vi.fn(),
   getGuardianMeetingRequestReview: vi.fn().mockResolvedValue(null),
   listOpenGuardianMeetingSlots: vi.fn().mockResolvedValue([]),
+  getMyHouseholdConsultantsAction: vi.fn().mockResolvedValue([]),
+  listOpenSlotsForConsultantAction: vi.fn().mockResolvedValue([]),
 }));
 
 vi.mock("./home-reviews-actions", () => ({
@@ -300,7 +302,7 @@ describe("ParentShell", () => {
       />
     );
     fireEvent.click(screen.getAllByText("Consultations")[0]);
-    expect(screen.getByPlaceholderText("상담 사유를 입력해주세요")).toBeInTheDocument();
+    expect(await screen.findByPlaceholderText("상담 사유를 입력해주세요")).toBeInTheDocument();
     fireEvent.click(screen.getByText("상담 내역"));
     expect(await screen.findByText("신청한 상담이 없습니다.")).toBeInTheDocument();
   });

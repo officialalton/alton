@@ -219,6 +219,72 @@ export async function listOpenGuardianMeetingSlots(fromIso: string, toIso: strin
   return ((data ?? []) as Array<{ slot_starts_at: string }>).map((r) => ({ startsAt: r.slot_starts_at }));
 }
 
+export type HouseholdChildConsultant = {
+  childId: string;
+  childName: string | null;
+  consultantId: string;
+  consultantName: string | null;
+};
+
+// Phase A 마무리(2026-09-23, 사용자 지시) — "보호자는 자녀별 담당 컨설턴트를
+// 확인하고 그 사람에게 상담 신청... 할 수 있어야 합니다." 자녀마다 담당
+// 컨설턴트가 다를 수 있어(다자녀), 자녀 단위로 반환한다 — 화면이 "대상 자녀를
+// 명시"할 수 있게.
+export async function getMyHouseholdConsultantsAction(): Promise<HouseholdChildConsultant[]> {
+  const { user, profile, supabase } = await requireUser();
+  if (profile?.role !== "parent") throw new Error("보호자만 접근할 수 있습니다.");
+  const householdId = await requireGuardianHouseholdId(supabase, user.id);
+
+  const { data: children, error: childrenError } = await supabase
+    .from("household_members")
+    .select("profile_id, child:profiles!household_members_profile_id_fkey(id, name)")
+    .eq("household_id", householdId)
+    .eq("role", "child");
+  if (childrenError) throw new Error(childrenError.message);
+  const childIds = (children ?? []).map((c) => c.profile_id as string);
+  if (childIds.length === 0) return [];
+
+  const { data: assignments, error: assignmentsError } = await supabase
+    .from("consultant_assignments")
+    .select("student_id, consultant_id, consultant:profiles!consultant_assignments_consultant_id_fkey(id, name)")
+    .in("student_id", childIds);
+  if (assignmentsError) throw new Error(assignmentsError.message);
+
+  const nameByChild = new Map(
+    (children ?? []).map((c) => {
+      const rel = c.child as { id: string; name: string | null } | { id: string; name: string | null }[] | null;
+      const child = Array.isArray(rel) ? rel[0] : rel;
+      return [c.profile_id as string, child?.name ?? null];
+    })
+  );
+
+  return (assignments ?? []).map((a) => {
+    const rel = a.consultant as { name: string | null } | { name: string | null }[] | null;
+    const consultant = Array.isArray(rel) ? rel[0] : rel;
+    return {
+      childId: a.student_id as string,
+      childName: nameByChild.get(a.student_id as string) ?? null,
+      consultantId: a.consultant_id as string,
+      consultantName: consultant?.name ?? null,
+    };
+  });
+}
+
+export async function listOpenSlotsForConsultantAction(
+  consultantId: string,
+  fromIso: string,
+  toIso: string
+): Promise<OpenMeetingSlot[]> {
+  const { supabase } = await requireUser();
+  const { data, error } = await supabase.rpc("list_open_consultant_meeting_slots", {
+    p_consultant_id: consultantId,
+    p_from: fromIso,
+    p_to: toIso,
+  });
+  if (error) throw new Error(error.message);
+  return ((data ?? []) as Array<{ slot_starts_at: string }>).map((r) => ({ startsAt: r.slot_starts_at }));
+}
+
 export type SubmitMeetingRequestResult =
   | { ok: true }
   | { ok: false; error: string };
@@ -233,6 +299,11 @@ export type SubmitMeetingRequestResult =
 export async function submitMeetingRequest(params: {
   reason: string;
   slotStartsAtIso: string;
+  /** Phase A 마무리(2026-09-23) — 담당 컨설턴트에게 신청하는 경우 그 자녀·
+   * 컨설턴트를 지정한다. 미지정이면 기존처럼 관리자 큐로 간다(신규 상담,
+   * 아직 담당자가 없는 가족). */
+  childId?: string;
+  consultantId?: string;
 }): Promise<SubmitMeetingRequestResult> {
   try {
     const { user, profile, supabase } = await requireUser();
@@ -241,12 +312,26 @@ export async function submitMeetingRequest(params: {
     if (!params.slotStartsAtIso) throw new Error("상담 희망 시간을 선택해주세요.");
     const householdId = await requireGuardianHouseholdId(supabase, user.id);
 
+    if (params.consultantId) {
+      if (!params.childId) throw new Error("대상 자녀를 선택해주세요.");
+      const { data: assignment, error: assignmentError } = await supabase
+        .from("consultant_assignments")
+        .select("consultant_id")
+        .eq("student_id", params.childId)
+        .maybeSingle();
+      if (assignmentError) throw new Error(assignmentError.message);
+      if (assignment?.consultant_id !== params.consultantId) {
+        throw new Error("선택한 자녀의 담당 컨설턴트가 아닙니다.");
+      }
+    }
+
     const startsAt = new Date(params.slotStartsAtIso);
     const endsAt = new Date(startsAt.getTime() + 60 * 60 * 1000);
 
     const { error } = await supabase.from("meeting_requests").insert({
       household_id: householdId,
-      child_id: null,
+      child_id: params.childId ?? null,
+      consultant_id: params.consultantId ?? null,
       subject: null,
       content: params.reason.trim(),
       contact_preference: null,

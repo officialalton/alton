@@ -151,6 +151,7 @@ describe("submitMeetingRequest", () => {
     expect(insertMock).toHaveBeenCalledWith({
       household_id: "household1",
       child_id: null,
+      consultant_id: null,
       subject: null,
       content: "다음 학기 진도 상담을 요청합니다.",
       contact_preference: null,
