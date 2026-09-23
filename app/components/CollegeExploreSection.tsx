@@ -22,6 +22,7 @@ import {
   type UniversitySourceUrl,
 } from "@/lib/universities/actions";
 import { listMySubmittedSourceUrls, proposeUniversitySourceUrl, reportUniversityDataIssue } from "@/lib/universities/user-actions";
+import { requestUniversityRefresh } from "@/lib/universities/refresh-actions";
 
 const SOURCE_TYPE_LABEL: Record<string, string> = {
   admissions_homepage: "입학처 홈페이지",
@@ -252,6 +253,8 @@ function CollegeDetail({
 
           {canProposeSourceUrl && <ProposeSourceUrlSection universityId={universityId} />}
 
+          <RefreshRequestButton universityId={universityId} />
+
           <ReportIssueForm universityId={universityId} />
         </>
       )}
@@ -474,6 +477,50 @@ function ProposeSourceUrlSection({ universityId }: { universityId: string }) {
 }
 
 /** 공개 대학 상세 화면 하단 — 정보 오류 신고(일반/필드 단위 모두 가능). */
+/** "최신 정보 확인 요청" 버튼 — 학생/보호자/컨설턴트/관리자 전원 노출. 진행중/최근완료
+ * 작업이 있으면 같은 상태를 그대로 보여준다(requestUniversityRefresh가 중복 큐잉하지 않음). */
+function RefreshRequestButton({ universityId }: { universityId: string }) {
+  const [job, setJob] = useState<{ status: "queued" | "running" | "succeeded" | "failed" } | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [, startTransition] = useTransition();
+
+  function request() {
+    setLoading(true);
+    startTransition(async () => {
+      try {
+        const result = await requestUniversityRefresh(universityId);
+        setJob(result);
+      } catch {
+        // 화면에는 조용히 실패 표시만(신고 폼과 달리 백그라운드 작업이라 재시도 유도로 충분)
+        setJob(null);
+      } finally {
+        setLoading(false);
+      }
+    });
+  }
+
+  const statusLabel: Record<string, string> = {
+    queued: "대기중",
+    running: "확인중",
+    succeeded: "확인 완료",
+    failed: "확인 실패(다시 시도해 주세요)",
+  };
+
+  return (
+    <div className="mb-4 flex items-center gap-2">
+      <button
+        type="button"
+        disabled={loading || job?.status === "queued" || job?.status === "running"}
+        onClick={request}
+        className="text-[12px] font-bold text-grey-600 border-[1.5px] border-grey-200 rounded-xl px-4 py-2 hover:bg-grey-100 disabled:opacity-50"
+      >
+        최신 정보 확인 요청
+      </button>
+      {job && <span className="text-[11px] text-grey-500">{statusLabel[job.status]}</span>}
+    </div>
+  );
+}
+
 function ReportIssueForm({ universityId }: { universityId: string }) {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");

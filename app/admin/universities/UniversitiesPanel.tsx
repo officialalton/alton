@@ -34,6 +34,15 @@ import {
   type UniversitySummary,
   type UniversityUpdateEntry,
 } from "@/lib/universities/actions";
+import {
+  getLatestRefreshJob,
+  listUpdateProposals,
+  requestUniversityRefresh,
+  reviewUpdateProposal,
+  rollbackAppliedProposal,
+  type RefreshJob,
+  type UpdateProposal,
+} from "@/lib/universities/refresh-actions";
 
 const ADMISSION_METRIC_KEY_OPTIONS: { value: AdmissionMetricKey; label: string }[] = [
   { value: "sat_total_25", label: "SAT 총점 25th" },
@@ -551,6 +560,205 @@ function UniversityDetailPanel({
       <EssayPromptsSection universityId={detail.id} setError={setError} />
       <SourceUrlsSection universityId={detail.id} setError={setError} />
       <ReportsInboxSection universityId={detail.id} setError={setError} />
+      <RefreshAndProposalsSection universityId={detail.id} setError={setError} />
+    </div>
+  );
+}
+
+/** 대학 상세 화면의 "정보 수집 봇" 섹션 — 갱신 요청 버튼 + job 상태 + 변경안 검토(승인/수정후승인/보류/거절/롤백). */
+function RefreshAndProposalsSection({
+  universityId,
+  setError,
+}: {
+  universityId: string;
+  setError: (msg: string | null) => void;
+}) {
+  const [job, setJob] = useState<RefreshJob | null>(null);
+  const [proposals, setProposals] = useState<UpdateProposal[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [isPending, startTransition] = useTransition();
+  const [reasons, setReasons] = useState<Record<string, string>>({});
+
+  function refresh() {
+    setLoading(true);
+    startTransition(async () => {
+      try {
+        const [latestJob, list] = await Promise.all([getLatestRefreshJob(universityId), listUpdateProposals(universityId)]);
+        setJob(latestJob);
+        setProposals(list);
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "갱신 상태 조회 중 오류가 발생했습니다.");
+      } finally {
+        setLoading(false);
+      }
+    });
+  }
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
+    refresh();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [universityId]);
+
+  function requestRefresh() {
+    setError(null);
+    startTransition(async () => {
+      try {
+        await requestUniversityRefresh(universityId);
+        refresh();
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "갱신 요청 중 오류가 발생했습니다.");
+      }
+    });
+  }
+
+  function review(proposalId: string, decision: "approved" | "held" | "rejected") {
+    setError(null);
+    startTransition(async () => {
+      try {
+        await reviewUpdateProposal({ proposalId, decision, reviewReason: reasons[proposalId] ?? null });
+        refresh();
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "변경안 처리 중 오류가 발생했습니다.");
+      }
+    });
+  }
+
+  function rollback(proposalId: string) {
+    setError(null);
+    startTransition(async () => {
+      try {
+        await rollbackAppliedProposal(proposalId);
+        refresh();
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "롤백 중 오류가 발생했습니다.");
+      }
+    });
+  }
+
+  const jobStatusLabel: Record<RefreshJob["status"], string> = {
+    queued: "대기중",
+    running: "실행중",
+    succeeded: "완료",
+    failed: "실패",
+  };
+  const resultTypeLabel: Record<UpdateProposal["resultType"], string> = {
+    no_change: "변경없음",
+    new: "신규",
+    changed: "변경됨",
+    source_conflict: "출처충돌",
+    fetch_failed: "수집실패",
+  };
+  const statusLabel: Record<UpdateProposal["status"], string> = {
+    pending: "검토대기",
+    approved: "승인됨",
+    approved_with_edit: "수정후승인",
+    held: "보류",
+    rejected: "거절",
+  };
+  const statusClass: Record<UpdateProposal["status"], string> = {
+    pending: "bg-yellow-100 text-yellow-700",
+    approved: "bg-green-100 text-green-700",
+    approved_with_edit: "bg-green-100 text-green-700",
+    held: "bg-grey-200 text-grey-600",
+    rejected: "bg-red-100 text-red-700",
+  };
+
+  return (
+    <div className="mt-6 border-t border-grey-200 pt-4">
+      <h3 className="text-sm font-semibold text-ink">정보 수집 봇 / 변경안 검토</h3>
+      <div className="mt-2 flex items-center gap-2">
+        <button
+          type="button"
+          disabled={isPending || job?.status === "queued" || job?.status === "running"}
+          onClick={requestRefresh}
+          className="rounded bg-ink px-3 py-1.5 text-xs text-white disabled:opacity-50"
+        >
+          최신 정보 확인 요청
+        </button>
+        {job && (
+          <span className="text-xs text-grey-500">
+            최근 작업: {jobStatusLabel[job.status]}
+            {job.errorSummary ? ` — ${job.errorSummary}` : ""}
+          </span>
+        )}
+      </div>
+      {loading && <p className="mt-2 text-xs text-grey-400">불러오는 중…</p>}
+      <ul className="mt-3 space-y-2 text-xs text-grey-600">
+        {!loading && proposals.length === 0 && <li className="text-grey-400">아직 변경안이 없습니다.</li>}
+        {proposals.map((p) => (
+          <li key={p.id} className="rounded border border-grey-100 p-2">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <span className="font-medium text-ink">
+                {p.fieldArea} · {p.targetTable}
+                {p.cycleYear ? ` · ${p.cycleYear}` : ""}
+              </span>
+              <span className="flex gap-1">
+                <span className="rounded bg-grey-100 px-1.5 py-0.5 text-[11px] text-grey-600">
+                  {resultTypeLabel[p.resultType]}
+                </span>
+                <span className={`rounded px-1.5 py-0.5 text-[11px] ${statusClass[p.status]}`}>{statusLabel[p.status]}</span>
+              </span>
+            </div>
+            {p.evidenceLocation && (
+              <p className="mt-1 truncate text-grey-400">
+                출처: <a href={p.evidenceLocation} target="_blank" rel="noreferrer" className="underline">{p.evidenceLocation}</a>
+              </p>
+            )}
+            {p.evidenceExcerpt && <p className="mt-1 whitespace-pre-wrap text-grey-700">{p.evidenceExcerpt}</p>}
+            {p.status === "pending" && (
+              <div className="mt-2 space-y-1">
+                <input
+                  type="text"
+                  placeholder="검토 사유(선택)"
+                  value={reasons[p.id] ?? ""}
+                  onChange={(e) => setReasons((prev) => ({ ...prev, [p.id]: e.target.value }))}
+                  className="w-full rounded border border-grey-300 px-2 py-1 text-xs"
+                />
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    disabled={isPending}
+                    onClick={() => review(p.id, "approved")}
+                    className="rounded bg-ink px-2 py-1 text-[11px] text-white disabled:opacity-50"
+                  >
+                    승인
+                  </button>
+                  <button
+                    type="button"
+                    disabled={isPending}
+                    onClick={() => review(p.id, "held")}
+                    className="rounded border border-grey-300 px-2 py-1 text-[11px] text-grey-700 disabled:opacity-50"
+                  >
+                    보류
+                  </button>
+                  <button
+                    type="button"
+                    disabled={isPending}
+                    onClick={() => review(p.id, "rejected")}
+                    className="rounded border border-grey-300 px-2 py-1 text-[11px] text-grey-700 disabled:opacity-50"
+                  >
+                    거절
+                  </button>
+                </div>
+              </div>
+            )}
+            {p.appliedAt && (p.status === "approved" || p.status === "approved_with_edit") && (
+              <div className="mt-2">
+                <button
+                  type="button"
+                  disabled={isPending}
+                  onClick={() => rollback(p.id)}
+                  className="rounded border border-red-300 px-2 py-1 text-[11px] text-red-700 disabled:opacity-50"
+                >
+                  승인 취소(롤백)
+                </button>
+              </div>
+            )}
+            {p.reviewReason && <p className="mt-1 text-grey-400">검토 사유: {p.reviewReason}</p>}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

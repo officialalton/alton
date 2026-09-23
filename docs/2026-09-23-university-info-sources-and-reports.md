@@ -220,9 +220,9 @@
 - `npx vitest run scripts/universities-seed.test.ts` — 3/3 통과(이 영역 유일한 기존 테스트).
 - `npx supabase db push --linked`, `vercel deploy` 미실행(지시대로 금지).
 
-### 미완료 (다음 세션이 이어감)
-- **D(수집봇)** — 착수하지 않음.
-- **E(10개교 UAT → 200개교 상태 관리)** — 착수하지 않음.
+### 미완료 (D 완주 전 시점, 아래 D 섹션에서 이어감)
+- **D(수집봇)** — 이번 세션에서 완주(아래 참고).
+- **E(10개교 UAT → 200개교 상태 관리)** — 착수하지 않음, 다음 세션.
 
 ### 결정 필요
 - `university_admission_metrics`/`university_essay_prompts`에 대한 전용 vitest(액션 단위
@@ -236,3 +236,126 @@
   자동 생성/공유하는 UI가 없다(각 행을 개별 저장, 같은 그룹으로 묶으려면 DB에서 직접
   `selection_group_id`를 맞춰야 함) — 문항 수가 많아지면 "그룹 만들기" 전용 UI가 필요할
   수 있다.
+
+## 5차 세션 (2026-09-23, 지시서 D: 정보 수집 봇 + 변경안 검토) — 완주
+
+### 완료
+- **마이그레이션**: `supabase/migrations/20261510000000_college_db_p9_refresh_bot_and_proposals.sql`
+  — `university_refresh_jobs`(대학별 "최신 정보 확인 요청" 큐, status
+  queued/running/succeeded/failed)와 `university_update_proposals`(필드별 변경안,
+  field_area/target_table/target_record_key/cycle_year/cohort/current_value/
+  proposed_value/evidence_excerpt/evidence_location/result_type/status/reviewed_by/
+  reviewed_at/review_reason/applied_at) 신규 추가. RLS: `university_update_proposals`는
+  select 자체를 `profiles.role in ('admin','consultant')`로 제한(학생/보호자는 전혀
+  못 봄), insert/update는 관리자(service_role)만. `university_refresh_jobs`는 상태
+  표시가 민감하지 않아 인증 사용자 전원 select 가능, insert는 본인 명의로만.
+- **크롤러 안전장치**(`lib/universities/crawler.ts`, 순수 로직·"use server" 없음):
+  - `checkUrlSafety`: http(s) 스킴만 허용, IP 리터럴 호스트는 즉시 사설/루프백 대역
+    검사, 그 외 호스트는 `dns/promises`의 `lookup`으로 실제 조회한 뒤 나온 IP가
+    10.0.0.0/8·172.16.0.0/12·192.168.0.0/16·127.0.0.0/8·169.254.0.0/16·`::1`·
+    `fe80::/10`·`fc00::/7`(ULA)면 차단(SSRF 방지, 외부 라이브러리 없이 직접 작성).
+  - `fetchRobotsRules`+`isPathAllowedByRobots`: `User-agent: *` 그룹의 `Disallow`만
+    보는 최소 파서(robots.txt 없음/오류 = 허용으로 취급, 보수적 fail-open이 아니라
+    "규칙이 없으면 막을 근거도 없다"는 표준 해석).
+  - `politeDelay`: 호스트별 마지막 요청 시각을 메모리에 기록해 2~5초 랜덤 지연.
+  - `safeFetch`: 위 안전장치를 전부 통과한 뒤에만 실제 `fetch` — User-Agent에 봇
+    식별자+연락처(`AltonUniversityInfoBot/1.0 (+contact: engineering@alton.education...)`)
+    포함, 10초 타임아웃, 5MB 응답 크기 제한. PDF는 `pdfjs-dist`(기존
+    `lib/curriculum-assets/pdf.ts`와 동일 legacy build 사용법)로 텍스트만 추출(최대
+    30페이지). HTML은 정규식 기반 최소 텍스트 추출(`extractHtmlText`) — jsdom은
+    `@types/jsdom`이 없어 타입 에러가 나 이번엔 정규식으로 충분히 처리하고 결정
+    필요에 남김.
+  - `extractDeadlineCandidates`: "Early Decision/Early Action/Regular Decision" 문구
+    주변 텍스트를 근거 스니펫으로만 뽑는 최소 휴리스틱(구조화 파싱 아님 — 아래 결정
+    필요 참고).
+- **작업 큐 + 변경안 서버 액션**(`lib/universities/refresh-actions.ts`):
+  - `requestUniversityRefresh(universityId)`: 로그인 사용자 전원 호출 가능(역할 제한
+    없음 — 학생/보호자/컨설턴트/관리자 전부). 대학별로 (1) 진행중(queued/running)
+    작업이 있으면 그대로 반환, (2) 없으면 최근 완료 작업이 6시간 냉각시간 이내인지
+    확인해 있으면 그대로 반환(재실행 안 함), (3) 둘 다 아니면 새 job을 본인 세션
+    클라이언트로 insert(RLS `requested_by = auth.uid()`가 안전망) 후, 전역
+    `status='running'` 카운트가 3 미만이면 바로 크롤을 동기 실행한다(이 세션에는
+    별도 백그라운드 워커가 없음 — 아래 결정 필요 참고). 한도 초과 시 `queued`
+    상태로 남긴 뒤 리턴(실행은 다음 요청/워커 몫, 이번 세션 미구현).
+  - `runRefreshJob(jobId, universityId)`: 그 대학의 `status='approved'` 출처 URL만
+    순회하며 `safeFetch` 호출. 실패(스킴/사설 IP/robots 차단/타임아웃/HTTP 오류/PDF
+    파싱 실패 전부 포함)는 `result_type='fetch_failed'`로 `university_update_proposals`에
+    적재하고 원문 접근 실패 사유를 `evidence_excerpt`에 남긴다. 성공하면 마감일
+    휴리스틱으로 후보를 찾아 `result_type='new'`(target_table='other', 대상 테이블
+    자동반영 대상 아님 — 사람이 검토 후 다른 화면에서 반영)로 적재, 후보가 없으면
+    `result_type='no_change'`로 원문 발췌만 남긴다. **이 함수 어디에도 다른 대학
+    정보 테이블에 대한 UPDATE/UPSERT가 없다** — 크롤링과 반영을 코드로 분리해
+    "기존 공개값은 절대 건드리지 않는다"를 보장.
+  - `listUpdateProposals`/`reviewUpdateProposal`/`rollbackAppliedProposal`(관리자 전용,
+    `requireAdmin`): `reviewUpdateProposal`은 held/rejected면 상태만 바꾸고 끝,
+    approved/approved_with_edit면 `applyProposalToTarget`로 실제 대상 테이블에
+    반영(현재는 `university_admission_metrics`—unique key 4컬럼 upsert—와
+    `university_essay_prompts`—id 있으면 update, 없으면 insert—만 자동 반영 지원,
+    그 외 target_table은 상태만 바뀌고 반영은 관리자가 수동으로 함). 반영 직전
+    기존 값을 읽어 `current_value`에 저장해 두므로 `rollbackAppliedProposal`이
+    그 값으로 대상 테이블을 복원하고 proposal 상태를 `held`로 되돌릴 수 있다.
+    자동승인 로직은 이 파일 어디에도 없다(마감일/시험정책/에세이/국제학생 요건
+    전부 사람이 버튼을 눌러야만 반영됨).
+- **관리자 화면**(`app/admin/universities/UniversitiesPanel.tsx`): `RefreshAndProposalsSection`
+  추가(대학 상세 맨 아래) — "최신 정보 확인 요청" 버튼(작업 진행중이면 비활성화),
+  최근 작업 상태 표시, 변경안 목록(필드영역/대상테이블/연도·결과유형·상태 배지 +
+  출처 링크 + 근거 발췌), pending 항목에 승인/보류/거절 버튼(+검토 사유 입력),
+  반영된(approved/approved_with_edit + applied_at 있음) 항목에 롤백 버튼.
+- **공개 화면**(`app/components/CollegeExploreSection.tsx`): `RefreshRequestButton`
+  추가(대학 상세, 컨설턴트 출처 제안 섹션과 오류 신고 버튼 사이) — 학생/보호자/
+  컨설턴트/관리자 전원 노출, 클릭 시 `requestUniversityRefresh` 호출 후 상태 텍스트
+  표시(대기중/확인중/확인 완료/확인 실패).
+
+### 실제 실행 테스트(외부 변경 있음 — 실제 HTTP 요청)
+- `lib/universities/crawler.test.ts`(13개, 순수 로직·네트워크 없음): SSRF 차단
+  케이스(스킴/사설 IP 리터럴/localhost/파싱불가), `isPrivateOrLoopbackIp` IPv4/IPv6
+  경계, robots.txt 파서(그룹 구분/Disallow), 마감일 휴리스틱, HTML 텍스트 추출.
+- `lib/universities/refresh-actions.integration.test.ts`(5개, **로컬 Postgres +
+  실제 외부 HTTP 요청**, mock 아님): 테스트용 대학에 실제 공개 대학 공식 페이지
+  (`https://mitadmissions.org/` — Princeton은 봇 User-Agent에 403을 반환해 대신
+  선택, 실제로 확인함) 1개와 존재하지 않는 경로 1개를 승인된 출처로 등록한 뒤
+  `requestUniversityRefresh`를 실제로 실행 → job이 `succeeded`로 끝나고, 존재하지
+  않는 URL은 `result_type='fetch_failed'`로 정확히 기록됨을 확인. 직후 재요청하면
+  냉각시간 로직으로 같은 job을 반환(중복 실행 병합) 확인. 별도로 변경안을 직접
+  만들어 `reviewUpdateProposal(approved)`가 `university_admission_metrics`를 실제로
+  갱신하고, `rejected`는 갱신하지 않으며, `rollbackAppliedProposal`이 이전 값으로
+  정확히 복원하는 것까지 통합 테스트로 확인.
+- 로컬 `supabase db reset` 재실행 — P9 마이그레이션 정상 적용 확인.
+- `npx tsc --noEmit -p .` — 신규 오류 없음(기존 `app/layout.tsx` `LayoutProps` 이슈만
+  잔존, 무관).
+- `npx eslint lib/universities/crawler.ts lib/universities/refresh-actions.ts
+  lib/universities/crawler.test.ts lib/universities/refresh-actions.integration.test.ts
+  app/admin/universities/UniversitiesPanel.tsx app/components/CollegeExploreSection.tsx`
+  — 오류 없음.
+- `npx vitest run lib/universities scripts/universities-seed.test.ts app/admin/universities`
+  — 4개 파일, 29/29 통과(신규 18개 포함).
+- `npx supabase db push --linked`, `vercel deploy` 미실행(지시대로 금지, non-prod
+  마이그레이션 적용은 통합 세션 몫).
+
+### 미완료 / 다음 세션(E)로 이관
+- **동시 실행 제한 초과 시 실제 백그라운드 워커/재시도 폴러 없음** — `queued` 상태로
+  남기기는 하지만 그 job을 나중에 자동으로 집어 실행하는 코드가 없다(이번 세션은
+  버튼을 누른 요청 안에서 동기 실행만 구현). 200개교 규모로 확장하면(E) 실제 큐
+  워커(cron/edge function 등)가 필요하다.
+- **구조화 필드 파싱이 아니라 마감일 키워드 휴리스틱뿐** — 각 대학 사이트 HTML 구조가
+  달라 이번 세션에서 학업지표/에세이 문항까지 자동으로 뽑아 비교하는 파서는 만들지
+  않았다. `target_table='university_admission_cycles'`/`'other'`로 남긴 변경안은
+  자동 반영 대상이 아니라(설계상 지원 대상 테이블은 admission_metrics/essay_prompts
+  뿐) 관리자가 원문을 보고 다른 화면에서 수동 반영해야 한다.
+- **HTML 파싱이 jsdom이 아니라 정규식 기반** — `@types/jsdom`이 프로젝트에 없어
+  타입 에러가 났고, 이번 세션 범위(안전장치+최소 파서)에는 정규식으로 충분해 새
+  타입 선언 파일을 추가하는 대신 정규식으로 처리했다. 구조화 파싱이 필요해지면
+  `@types/jsdom` 추가 여부 재검토.
+- **E(10개교 UAT → 200개교 상태 관리)** — 착수하지 않음, 다음 세션.
+
+### 결정 필요(D 관련 추가)
+- 동시 실행 한도(3) 초과 시 큐에만 남고 자동 실행되지 않는 job을 어떻게 처리할지
+  — (a) 관리자가 수동으로 다시 "확인 요청"을 누르게 두거나, (b) Vercel Cron/Supabase
+  Edge Function으로 폴러를 두는 것 중 선택 필요(이번 세션엔 로컬 테스트에서 한도에
+  걸릴 일이 없어 실사용 빈도를 알기 어려움).
+  - 권장: 200개교 확장(E) 전까지는 (a)로 충분(대학 수가 적어 동시 3개 한도에 실제로
+    걸릴 가능성이 낮음), E 단계에서 실사용 빈도를 보고 (b) 여부 결정.
+- 마감일/학업지표/에세이 등 실제 필드 비교(`result_type` new/changed/no_change의
+  진짜 의미)를 만들려면 대학 사이트별 파서가 필요하다 — 이번 세션은 "접근 성공 여부
+  + 근거 스니펫"까지만 자동화하고 실제 비교는 사람이 한다. 200개교로 갈 때 우선순위
+  파서(예: Common Data Set은 상당수가 표 구조를 공유)부터 만들지 여부 결정 필요.
