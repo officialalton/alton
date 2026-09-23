@@ -31,6 +31,7 @@ import {
   listConsultantInquiryMessagesAction,
   sendConsultantInquiryMessageAction,
   markConsultantMessengerReadAction,
+  getConsultantMessengerUnreadCountAction,
 } from "./messenger-actions";
 import {
   listMyAssignedMeetingRequestsAction,
@@ -553,6 +554,9 @@ function AvailabilityPanel() {
   );
 }
 
+// 2026-09-22(사용자 지시) — 담당 학생 목록에 메신저 안읽음 배지. 학생마다
+// household가 달라 학생 수만큼 병렬 조회한다(N이 작다 — 컨설턴트 1인당 담당
+// 학생 수가 많지 않은 전제).
 function StudentList({
   students,
   onSelect,
@@ -560,6 +564,25 @@ function StudentList({
   students: ConsultantStudent[];
   onSelect: (id: string) => void;
 }) {
+  const [unreadByStudent, setUnreadByStudent] = useState<Record<string, number>>({});
+
+  useEffect(() => {
+    let cancelled = false;
+    Promise.all(
+      students.map((s) =>
+        getConsultantMessengerUnreadCountAction(s.id)
+          .then((count) => [s.id, count] as const)
+          .catch(() => [s.id, 0] as const)
+      )
+    ).then((entries) => {
+      if (!cancelled) setUnreadByStudent(Object.fromEntries(entries));
+    });
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [students.map((s) => s.id).join(",")]);
+
   return (
     <div className="max-w-[640px] px-8 py-8">
       <h1 className="text-[20px] font-extrabold text-ink mb-5">담당 학생</h1>
@@ -572,9 +595,14 @@ function StudentList({
           <button
             key={s.id}
             onClick={() => onSelect(s.id)}
-            className="w-full text-left border-[1.5px] border-grey-200 rounded-xl px-5 py-3.5 mb-2.5"
+            className="w-full text-left border-[1.5px] border-grey-200 rounded-xl px-5 py-3.5 mb-2.5 flex items-center justify-between"
           >
             <span className="text-[13.5px] font-bold text-ink">{s.name ?? "이름 없음"}</span>
+            {(unreadByStudent[s.id] ?? 0) > 0 && (
+              <span className="min-w-[18px] h-[18px] px-1 rounded-full bg-red text-white text-[10px] font-bold flex items-center justify-center">
+                {unreadByStudent[s.id] > 9 ? "9+" : unreadByStudent[s.id]}
+              </span>
+            )}
           </button>
         ))
       )}

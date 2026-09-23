@@ -45,6 +45,7 @@ import {
 } from "./booking-actions";
 import { reportTeacherIssue } from "./incident-report-actions";
 import StudentConsultantTab from "./StudentConsultantTab";
+import { getMyHouseholdMessengerUnreadCountAction } from "./consultant-messenger-actions";
 import RoadmapView from "@/app/components/RoadmapView";
 import type { RoadmapData } from "@/lib/roadmap/types";
 import PageFrame from "@/app/components/PageFrame";
@@ -146,6 +147,13 @@ export default function StudentShell({
   const [timezoneModalOpen, setTimezoneModalOpen] = useState(false);
   // 2026-09-22(사용자 지시) — Credits는 별도 탭 대신 계정 메뉴 팝업으로 옮긴다.
   const [creditsModalOpen, setCreditsModalOpen] = useState(false);
+  const [messengerUnread, setMessengerUnread] = useState(0);
+
+  // 2026-09-22(사용자 지시) — Consultant 탭(메신저)을 열고 닫을 때마다 배지를
+  // 다시 조회한다(app/parent/ParentShell.tsx와 동일 패턴).
+  useEffect(() => {
+    getMyHouseholdMessengerUnreadCountAction().then(setMessengerUnread).catch(() => {});
+  }, [activeTab]);
 
   // 2026-09-10(P0-3 2차) — 공용 포털 내비게이션 결함: activeTab이 마운트
   // 시점의 initialTab으로만 초기화돼, 브라우저 뒤로가기/앞으로가기로 URL이
@@ -198,7 +206,14 @@ export default function StudentShell({
               (activeTab === item.id ? "bg-red text-white" : "text-grey-500 hover:bg-grey-100 hover:text-ink")
             }
           >
-            <NavIcon name={item.icon} className="w-[18px] h-[18px] shrink-0" />
+            <span className="relative shrink-0">
+              <NavIcon name={item.icon} className="w-[18px] h-[18px]" />
+              {item.id === "consultant" && messengerUnread > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 min-w-[14px] h-[14px] px-[3px] rounded-full bg-red text-white text-[9px] font-bold flex items-center justify-center ring-2 ring-white">
+                  {messengerUnread > 9 ? "9+" : messengerUnread}
+                </span>
+              )}
+            </span>
             {item.label}
           </button>
         ))}
