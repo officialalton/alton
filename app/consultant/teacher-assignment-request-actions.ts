@@ -11,6 +11,7 @@ import { loadTeacherCandidatesBySubject, type MatchingTeacherCandidate } from "@
 
 export type TeacherAssignmentRequestRow = {
   id: string;
+  consultantId: string;
   studentId: string | null;
   linkStudentId: string | null;
   subjectId: string;
@@ -33,6 +34,7 @@ export type TeacherAssignmentRequestRow = {
 function mapRow(r: Record<string, unknown>): TeacherAssignmentRequestRow {
   return {
     id: r.id as string,
+    consultantId: r.consultant_id as string,
     studentId: r.student_id as string | null,
     linkStudentId: r.link_student_id as string | null,
     subjectId: r.subject_id as string,

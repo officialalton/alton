@@ -12,6 +12,7 @@ import type { TeacherAssignmentRequestRow } from "@/app/consultant/teacher-assig
 function mapRow(r: Record<string, unknown>): TeacherAssignmentRequestRow {
   return {
     id: r.id as string,
+    consultantId: r.consultant_id as string,
     studentId: r.student_id as string | null,
     linkStudentId: r.link_student_id as string | null,
     subjectId: r.subject_id as string,

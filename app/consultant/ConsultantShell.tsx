@@ -9,6 +9,15 @@ import CollegeExploreSection from "@/app/components/CollegeExploreSection";
 import DocumentsPanel from "./DocumentsPanel";
 import SettlementPanel from "./SettlementPanel";
 import {
+  listMyStaffInquiriesAction,
+  startMyStaffInquiryAction,
+  listMyStaffMessagesAction,
+  sendMyStaffMessageAction,
+  markMyStaffMessengerReadAction,
+  type ConsultantAdminInquiry,
+  type ConsultantAdminMessage,
+} from "./staff-messenger-actions";
+import {
   getMyConsultantProfileAction,
   updateMyConsultantProfileAction,
   type ConsultantProfile,
@@ -61,7 +70,7 @@ import {
   type TimeOffConflict,
 } from "./time-off-actions";
 
-type NavId = "students" | "assignments" | "schedule" | "documents" | "profile" | "settlement" | "college-explore";
+type NavId = "students" | "assignments" | "schedule" | "documents" | "profile" | "settlement" | "staff-messages" | "college-explore";
 
 const WEEKDAY_LABELS = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -186,6 +195,19 @@ export default function ConsultantShell({
         </button>
         <button
           onClick={() => {
+            setNav("staff-messages");
+            setSelectedId(null);
+          }}
+          aria-current={nav === "staff-messages" ? "page" : undefined}
+          className={
+            "w-full text-left px-2.5 py-2.5 rounded-lg text-[13px] font-semibold " +
+            (nav === "staff-messages" ? "bg-red text-white" : "text-grey-500 hover:bg-grey-100 hover:text-ink")
+          }
+        >
+          Admin Messages
+        </button>
+        <button
+          onClick={() => {
             setNav("college-explore");
             setSelectedId(null);
           }}
@@ -217,6 +239,8 @@ export default function ConsultantShell({
           <ProfilePanel />
         ) : nav === "settlement" ? (
           <SettlementPanel />
+        ) : nav === "staff-messages" ? (
+          <StaffMessagesPanel />
         ) : nav === "college-explore" ? (
           <div className="px-8 py-8">
             <h1 className="text-[20px] font-extrabold text-ink mb-5">College Explore</h1>
@@ -1005,6 +1029,166 @@ function ProfilePanel() {
       <button onClick={handleSave} disabled={busy} className="text-[13px] font-bold bg-ink text-white rounded-lg px-4 py-1.5 disabled:opacity-50">
         저장
       </button>
+    </div>
+  );
+}
+
+// Phase A 마무리(2026-09-23, 사용자 지시 — "관리자와 컨설턴트의 이슈 보고·
+// 업무 지침 대화가 가능한지") — 담당 가족 메신저와 완전히 별개인 관리자
+// 내부 채널. 학생·보호자 화면에는 이 탭 자체가 없다(RLS도 별도 테이블).
+function StaffMessagesPanel() {
+  const [inquiries, setInquiries] = useState<ConsultantAdminInquiry[] | null>(null);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [messages, setMessages] = useState<ConsultantAdminMessage[] | null>(null);
+  const [newSubject, setNewSubject] = useState("");
+  const [newBody, setNewBody] = useState("");
+  const [replyBody, setReplyBody] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  function reloadInquiries() {
+    listMyStaffInquiriesAction()
+      .then(setInquiries)
+      .catch((e) => setError(e instanceof Error ? e.message : "불러오지 못했습니다."));
+  }
+  useEffect(() => {
+    reloadInquiries();
+    markMyStaffMessengerReadAction().catch(() => {});
+  }, []);
+
+  function openInquiry(id: string) {
+    setSelectedId(id);
+    setMessages(null);
+    listMyStaffMessagesAction(id)
+      .then(setMessages)
+      .catch((e) => setError(e instanceof Error ? e.message : "불러오지 못했습니다."));
+  }
+
+  async function handleStart() {
+    if (!newBody.trim()) return;
+    setBusy(true);
+    setError(null);
+    try {
+      const { inquiryId } = await startMyStaffInquiryAction(newBody, newSubject || undefined);
+      setNewBody("");
+      setNewSubject("");
+      reloadInquiries();
+      openInquiry(inquiryId);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "시작하지 못했습니다.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleReply() {
+    if (!selectedId || !replyBody.trim()) return;
+    setBusy(true);
+    setError(null);
+    try {
+      await sendMyStaffMessageAction(selectedId, replyBody);
+      setReplyBody("");
+      openInquiry(selectedId);
+      reloadInquiries();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "전송하지 못했습니다.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  const selected = inquiries?.find((i) => i.id === selectedId) ?? null;
+
+  return (
+    <div className="max-w-[720px] px-8 py-8">
+      <h1 className="text-[20px] font-extrabold text-ink mb-1">Admin Messages</h1>
+      <p className="text-[12.5px] text-grey-500 mb-5">관리자와의 내부 대화입니다. 가족·학생에게는 보이지 않습니다.</p>
+      {error && <div className="mb-4 text-[13px] font-semibold text-red bg-red/5 rounded-lg px-4 py-3">{error}</div>}
+
+      {!selectedId && (
+        <div className="border-[1.5px] border-grey-200 rounded-xl p-4 mb-5">
+          <h3 className="text-[13.5px] font-bold text-ink mb-2">새 대화 시작</h3>
+          <input
+            value={newSubject}
+            onChange={(e) => setNewSubject(e.target.value)}
+            placeholder="주제(선택)"
+            className="w-full mb-2 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 text-[13px]"
+          />
+          <textarea
+            value={newBody}
+            onChange={(e) => setNewBody(e.target.value)}
+            placeholder="이슈 보고·문의 내용을 입력해주세요"
+            className="w-full border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px] min-h-[80px]"
+          />
+          <button
+            onClick={handleStart}
+            disabled={busy || !newBody.trim()}
+            className="mt-2 text-[13px] font-bold bg-ink text-white rounded-lg px-4 py-1.5 disabled:opacity-50"
+          >
+            보내기
+          </button>
+        </div>
+      )}
+
+      {selectedId ? (
+        <div>
+          <button onClick={() => setSelectedId(null)} className="text-[12.5px] font-semibold text-grey-500 mb-3">
+            ← 목록으로
+          </button>
+          <h3 className="text-[14px] font-bold text-ink mb-3">{selected?.subject ?? "제목 없음"}</h3>
+          {messages === null ? (
+            <p className="text-[13px] text-grey-500">불러오는 중…</p>
+          ) : (
+            <div className="space-y-2 mb-4">
+              {messages.map((m) => (
+                <div
+                  key={m.id}
+                  className={"rounded-xl px-3 py-2 text-[13px] max-w-[80%] " + (m.senderRole === "consultant" ? "bg-ink text-white ml-auto" : "bg-grey-100 text-ink")}
+                >
+                  <div className="text-[10.5px] font-bold opacity-70 mb-0.5">{m.senderRole === "consultant" ? "나" : "관리자"}</div>
+                  {m.body}
+                </div>
+              ))}
+            </div>
+          )}
+          {selected?.status === "open" ? (
+            <div className="flex gap-2">
+              <input
+                value={replyBody}
+                onChange={(e) => setReplyBody(e.target.value)}
+                placeholder="답장하기"
+                className="flex-1 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 text-[13px]"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") void handleReply();
+                }}
+              />
+              <button onClick={handleReply} disabled={busy || !replyBody.trim()} className="text-[13px] font-bold bg-ink text-white rounded-lg px-4 py-1.5 disabled:opacity-50">
+                전송
+              </button>
+            </div>
+          ) : (
+            <p className="text-[12px] text-grey-500">종료된 대화입니다.</p>
+          )}
+        </div>
+      ) : inquiries === null ? (
+        <p className="text-[13px] text-grey-500">불러오는 중…</p>
+      ) : inquiries.length === 0 ? (
+        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">아직 대화가 없습니다.</div>
+      ) : (
+        inquiries.map((i) => (
+          <button
+            key={i.id}
+            onClick={() => openInquiry(i.id)}
+            className="w-full text-left border-[1.5px] border-grey-200 rounded-xl px-4 py-3 mb-2 flex items-center justify-between"
+          >
+            <div>
+              <div className="text-[13px] font-bold text-ink">{i.subject ?? "제목 없음"}</div>
+              <div className="text-[11.5px] text-grey-500">{i.status === "open" ? "진행 중" : "종료됨"}</div>
+            </div>
+            <span className="text-[11px] text-grey-500">{new Date(i.lastMessageAt).toLocaleString("ko-KR")}</span>
+          </button>
+        ))
+      )}
     </div>
   );
 }

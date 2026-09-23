@@ -31,6 +31,15 @@ import {
   type ConsultantPayoutPeriodAdmin,
   type ConsultantPayoutPeriodEvent,
 } from "./consultant-settlement-actions";
+import {
+  listAllStaffInquiriesAction,
+  startStaffInquiryAction,
+  listStaffMessagesAction,
+  sendAdminStaffMessageAction,
+  closeStaffInquiryAction,
+  type StaffInquiryListItem,
+  type StaffMessage,
+} from "./staff-messenger-actions";
 
 // 컨설턴트 포지션(2026-09-22 사용자 지시, 가볍게 시작) — 기존 계정을
 // 이메일로 찾아 컨설턴트로 지정하고, 담당 학생을 이메일로 배정/해제한다.
@@ -337,6 +346,7 @@ export default function ConsultantAssignmentsTab({
 
       <TeacherAssignmentRequestsAdminSection />
       <ConsultantSettlementAdminSection consultants={consultants} />
+      <StaffMessagesAdminSection consultants={consultants} />
     </div>
   );
 }
@@ -666,6 +676,196 @@ function ConsultantSettlementAdminSection({ consultants }: { consultants: Consul
             ))
           )}
         </div>
+      )}
+    </div>
+  );
+}
+
+// Phase A 마무리(2026-09-23) — 관리자 쪽 컨설턴트 내부 채널. 새 문의는
+// 관리자·컨설턴트 둘 다 시작할 수 있으므로 여기서도 컨설턴트를 골라 먼저
+// 말을 걸 수 있게 한다.
+function StaffMessagesAdminSection({ consultants }: { consultants: ConsultantWithStudents[] }) {
+  const [inquiries, setInquiries] = useState<StaffInquiryListItem[] | null>(null);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [messages, setMessages] = useState<StaffMessage[] | null>(null);
+  const [newConsultantId, setNewConsultantId] = useState("");
+  const [newSubject, setNewSubject] = useState("");
+  const [newBody, setNewBody] = useState("");
+  const [replyBody, setReplyBody] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  function reload() {
+    listAllStaffInquiriesAction()
+      .then(setInquiries)
+      .catch((e) => setError(e instanceof Error ? e.message : "불러오지 못했습니다."));
+  }
+  useEffect(() => {
+    reload();
+  }, []);
+
+  function openInquiry(id: string) {
+    setSelectedId(id);
+    setMessages(null);
+    listStaffMessagesAction(id)
+      .then(setMessages)
+      .catch((e) => setError(e instanceof Error ? e.message : "불러오지 못했습니다."));
+  }
+
+  async function handleStart() {
+    if (!newConsultantId || !newBody.trim()) return;
+    setBusy(true);
+    setError(null);
+    try {
+      const { inquiryId } = await startStaffInquiryAction(newConsultantId, newBody, newSubject || undefined);
+      setNewBody("");
+      setNewSubject("");
+      reload();
+      openInquiry(inquiryId);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "시작하지 못했습니다.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleReply() {
+    if (!selectedId || !replyBody.trim()) return;
+    setBusy(true);
+    setError(null);
+    try {
+      await sendAdminStaffMessageAction(selectedId, replyBody);
+      setReplyBody("");
+      openInquiry(selectedId);
+      reload();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "전송하지 못했습니다.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleClose() {
+    if (!selectedId) return;
+    setBusy(true);
+    try {
+      await closeStaffInquiryAction(selectedId);
+      openInquiry(selectedId);
+      reload();
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  const selected = inquiries?.find((i) => i.id === selectedId) ?? null;
+
+  return (
+    <div className="mt-8">
+      <h2 className="text-[15px] font-extrabold text-ink mb-3">컨설턴트 내부 문의</h2>
+      {error && <div className="mb-3 text-[13px] font-semibold text-red bg-red/5 rounded-lg px-4 py-3">{error}</div>}
+
+      {!selectedId && (
+        <div className="border-[1.5px] border-grey-200 rounded-xl p-4 mb-5">
+          <div className="flex flex-wrap gap-2 mb-2">
+            <select
+              value={newConsultantId}
+              onChange={(e) => setNewConsultantId(e.target.value)}
+              className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]"
+            >
+              <option value="">컨설턴트 선택</option>
+              {consultants.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.name ?? c.id}
+                </option>
+              ))}
+            </select>
+            <input
+              value={newSubject}
+              onChange={(e) => setNewSubject(e.target.value)}
+              placeholder="주제(선택)"
+              className="flex-1 min-w-[140px] border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 text-[13px]"
+            />
+          </div>
+          <textarea
+            value={newBody}
+            onChange={(e) => setNewBody(e.target.value)}
+            placeholder="업무 지침·안내 내용을 입력해주세요"
+            className="w-full border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px] min-h-[80px]"
+          />
+          <button
+            onClick={handleStart}
+            disabled={busy || !newConsultantId || !newBody.trim()}
+            className="mt-2 text-[13px] font-bold bg-ink text-white rounded-lg px-4 py-1.5 disabled:opacity-50"
+          >
+            보내기
+          </button>
+        </div>
+      )}
+
+      {selectedId ? (
+        <div>
+          <button onClick={() => setSelectedId(null)} className="text-[12.5px] font-semibold text-grey-500 mb-3">
+            ← 목록으로
+          </button>
+          <h3 className="text-[14px] font-bold text-ink mb-1">{selected?.subject ?? "제목 없음"}</h3>
+          <div className="text-[12px] text-grey-500 mb-3">{selected?.consultantName}</div>
+          {messages === null ? (
+            <p className="text-[13px] text-grey-500">불러오는 중…</p>
+          ) : (
+            <div className="space-y-2 mb-4">
+              {messages.map((m) => (
+                <div
+                  key={m.id}
+                  className={"rounded-xl px-3 py-2 text-[13px] max-w-[80%] " + (m.senderRole === "admin" ? "bg-ink text-white ml-auto" : "bg-grey-100 text-ink")}
+                >
+                  <div className="text-[10.5px] font-bold opacity-70 mb-0.5">{m.senderRole === "admin" ? "관리자" : "컨설턴트"}</div>
+                  {m.body}
+                </div>
+              ))}
+            </div>
+          )}
+          {selected?.status === "open" ? (
+            <div className="flex gap-2">
+              <input
+                value={replyBody}
+                onChange={(e) => setReplyBody(e.target.value)}
+                placeholder="답장하기"
+                className="flex-1 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 text-[13px]"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") void handleReply();
+                }}
+              />
+              <button onClick={handleReply} disabled={busy || !replyBody.trim()} className="text-[13px] font-bold bg-ink text-white rounded-lg px-4 py-1.5 disabled:opacity-50">
+                전송
+              </button>
+              <button onClick={handleClose} disabled={busy} className="text-[13px] font-bold text-red disabled:opacity-50">
+                종료
+              </button>
+            </div>
+          ) : (
+            <p className="text-[12px] text-grey-500">종료된 대화입니다.</p>
+          )}
+        </div>
+      ) : inquiries === null ? (
+        <p className="text-[13px] text-grey-500">불러오는 중…</p>
+      ) : inquiries.length === 0 ? (
+        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">아직 대화가 없습니다.</div>
+      ) : (
+        inquiries.map((i) => (
+          <button
+            key={i.id}
+            onClick={() => openInquiry(i.id)}
+            className="w-full text-left border-[1.5px] border-grey-200 rounded-xl px-4 py-3 mb-2 flex items-center justify-between"
+          >
+            <div>
+              <div className="text-[13px] font-bold text-ink">
+                {i.consultantName} · {i.subject ?? "제목 없음"}
+              </div>
+              <div className="text-[11.5px] text-grey-500">{i.status === "open" ? "진행 중" : "종료됨"}</div>
+            </div>
+            <span className="text-[11px] text-grey-500">{new Date(i.lastMessageAt).toLocaleString("ko-KR")}</span>
+          </button>
+        ))
       )}
     </div>
   );
