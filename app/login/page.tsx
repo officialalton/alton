@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { login } from "./actions";
 import { signInWithGoogleForTeacher } from "./teacher-google-actions";
 import { signInWithGoogleForAdmin } from "@/app/admin/google-link-actions";
+import { signInWithGoogleForConsultant } from "./consultant-google-actions";
 import { createClient } from "@/utils/supabase/server";
 import { resolveAccountDestination } from "@/lib/auth";
 
@@ -116,6 +117,15 @@ export default async function LoginPage({
               className="block w-full text-center border-[1.5px] border-grey-200 text-ink font-bold text-[14px] py-3 rounded-lg hover:bg-grey-100"
             >
               관리자 — Google로 로그인
+            </button>
+          </form>
+
+          <form action={signInWithGoogleForConsultant} className="mt-2.5">
+            <button
+              type="submit"
+              className="block w-full text-center border-[1.5px] border-grey-200 text-ink font-bold text-[14px] py-3 rounded-lg hover:bg-grey-100"
+            >
+              컨설턴트 — Google로 로그인
             </button>
           </form>
         </div>
