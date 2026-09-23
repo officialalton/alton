@@ -1658,3 +1658,103 @@ Washington State, WPI), 실제 CDS 원문 조회·반영은 0건이다. DB 변�
 6. **200개교 전체가 끝나면 반드시 최종 통합보고서를 작성**하고 CDS 정보
    노출 UI를 계속 확장할 것 — 이 지시는 200개교가 끝날 때까지 매 세션
    인계 기록에 계속 전달되어야 한다.
+
+## 20차 세션 (2026-09-23, UIUC 정합성 수정 + curl+pdftotext/xlsx 15개교 완료)
+
+### A. UIUC(University of Illinois Urbana-Champaign) 정합성 버그 수정 — 완료
+19차 세션이 발견만 하고 손대지 않은 채 넘긴 문제를 이번 세션에서 해결했다.
+- 기존 승인 URL `https://oir.uic.edu/common-data-set-3/`(University of
+  Illinois **Chicago**, UIC 캠퍼스)를 `status='rejected'`, `review_note='다른
+  캠퍼스(UIC)로 연결됨'`으로 변경(`8ea3cf42-b4a3-4705-87f3-c60af2e7b6cb`).
+- UIUC의 실제 공식 CDS 출처를 재검색: `oir.uic.edu`가 아니라
+  `dair.illinois.edu`(Data, Analytics and Institutional Research, Urbana-
+  Champaign 소속)이 정답이었다. `https://dair.illinois.edu/access-data/
+  common-data-set/`을 새 `common_data_set` 행으로 승인 등록.
+- UIUC CDS는 PDF가 아니라 **xlsx**(Box.com 호스팅) 형식이었다
+  (`openpyxl`로 파싱, `pip3 install --break-system-packages openpyxl`
+  필요). CDS-C/B/G 시트를 Question Number(C.101, C.905 등) 기준으로 직접
+  대조해 C1/C2/C9/C10/B22/B4-B21/G1을 반영(32건). 표지의 학교명이 실제로
+  University of Illinois Urbana-Champaign임을 재확인 후 진행.
+- `data_collection_status`를 `verified_pilot`으로 전환.
+
+### B. 이번 세션에서 추가로 확인한 "다른 학교로 연결된 URL" 문제
+이번 세션에서 처리한 학교들은 매번 CDS 문서 표지/본문에서 학교명을 재확인했다.
+UIUC 외에 추가로 발견된 오매칭 사례는 없었다(Miami·Arizona는 아래 D절 참고
+—오매칭이 아니라 빈 서식 문제).
+
+### C. CDS 실수집 완료 — 15개교
+`curl --max-time N -A "Chrome UA"`로 CDS 원문을 직접 받고(대부분 PDF,
+UIUC만 xlsx), `pdftotext -layout`으로 텍스트를 뽑아 C1/C2/C9/B22/B4-B21/G1을
+직접 대조해 반영했다. 각 학교마다 문서 표지/헤더에서 학교명이 DB 이름과
+일치하는지 먼저 확인했다.
+
+1. **University of Illinois Urbana-Champaign** — CDS 2025-2026(xlsx),
+   Fall 2025 cohort, 32행(위 A절 참고)
+2. **University of Vermont** — CDS 2025-2026(C섹션)+2024-2025(B/G섹션,
+   최신 C섹션과 발행연도 다름을 notes에 명시), 38행
+3. **University of North Carolina at Chapel Hill** — CDS 2025-2026,
+   Fall 2025 cohort, 43행(GPA 평균 4.47 가중치 포함)
+4. **University of Georgia** — CDS 2025-2026, Fall 2025 cohort, 31행
+5. **University of Nevada, Reno** — CDS 2025-2026, Fall 2025 cohort,
+   28행(B22 retention 원문 공란이라 미기재)
+6. **University of Arkansas** — CDS 2025-2026, Fall 2025 cohort, 33행
+   (PDF 폰트 인코딩 손상, 구조 대조 후 반영)
+7. **University of Minnesota, Twin Cities** — CDS 2024-2025(최신 연도),
+   Fall 2024 cohort, 28행(폰트 인코딩 손상, 학비 항목은 원문 자체가 공란)
+8. **Florida Atlantic University** — CDS 2025-2026, Fall 2025 cohort,
+   30행(폰트 인코딩 손상, 구조 대조 후 반영)
+9. **University of Pittsburgh** — CDS 2025-2026, Fall 2025 cohort, 30행
+   (SAT Composite 총점 항목이 원문에 없어 EBRW/Math만 반영)
+10. **University of Tennessee, Knoxville** — CDS 2025-2026, Fall 2025
+    cohort, 33행
+11. **University of Iowa** — CDS 2025-2026, Fall 2025 cohort, 31행
+    (학비 항목 전체가 원문에 "—"로 공란 처리되어 미기재)
+12. **University of Massachusetts Boston** — CDS 2023-2024(사이트 최신본),
+    Fall 2023 cohort, 30행
+13. **University of California, San Diego** — CDS 2025-2026, Fall 2025
+    cohort, 12행(UC 계열 test-blind 정책으로 C9 시험점수 항목이 원천적으로
+    공란 — 19차의 UC Riverside 처리와 동일 원칙 적용)
+14. **University of Kansas** — CDS 2025-2026(섹션별 개별 PDF: B2/B3/C/G
+    조합), Fall 2025 cohort, 30행
+15. **Washington State University** — CDS 2025-2026, Fall 2025 cohort,
+    11행(PDF 폰트 인코딩 손상, SAT/ACT 백분위 점수는 제출률이 매우 낮아
+    원문 자체가 공란)
+
+### D. 스킵한 학교 — 5분 규칙 적용
+- **University of Miami**, **University of Arizona**: 다운로드한 CDS PDF가
+  `pdftotext`로 확인해보니 실제로는 **빈 서식(작성되지 않은 템플릿)** 이었다
+  (주소/응답자 정보부터 C1 입학 수치까지 전부 공란, `Producer: Microsoft:
+  Print To PDF`). 오매칭이 아니라 파일 자체가 미작성 상태 — 브라우저
+  렌더링으로도 해결 안 되는 문제이므로(내용이 없음) 스킵하고 기록만 남김.
+  다음 세션에서 해당 학교 IR 페이지를 다시 확인해 실제로 값이 채워진 CDS가
+  있는지(다른 파일/다른 연도) 확인 필요.
+
+### 검증
+- `psql`로 세션 종료 시점 `data_collection_status` 분포 직접 확인:
+  `verified_pilot` **72개교**(19차 종료 57개교 → 이번 세션 +15),
+  `sources_pending_review` 116개교, `unconfirmed` 12개교(총 200개교).
+- UIUC 관련 변경 확인: `university_source_urls`에서 기존 UIC 오매칭 행은
+  `status='rejected'`로 확인, 신규 UIUC(DAIR) 행은 `status='approved'`로
+  확인.
+- `git status`로 이번 세션은 `docs/*.md` 외 앱 코드 변경이 없음을 확인
+  (스크립트 로그 파일 3개는 다른 도구가 생성한 미추적 파일로 이번 세션
+  git add 대상에서 제외). 새 마이그레이션 없음(테이블 데이터만 변경,
+  스키마 변경 없음). `npx supabase db push --linked` / `vercel deploy`
+  실행하지 않음. `npx tsc --noEmit`은 앱 코드 변경이 없어 스킵.
+
+### 다음 세션 인계 (20차 작성분)
+1. Miami, Arizona는 CDS PDF가 빈 서식이었다 — IR 페이지에서 다른 연도/다른
+   파일을 다시 찾아볼 것(위 D절 참고).
+2. `status='approved'`이고 아직 `verified_pilot`이 아닌 나머지 약 116개교
+   CDS 계속 처리. 이번 세션에서 direct PDF/xlsx 링크가 이미 확인된 학교가
+   다수 있었다(BYU/Clemson/Kent State/FSU/Idaho State/DePaul 등은 홈페이지가
+   JS 렌더링이라 이번 세션에서 직접 링크를 못 찾음 — 다음 세션에서 재시도
+   권장). University of Denver, University of Connecticut, University of
+   Central Florida, University of Wisconsin-Madison 등은 아직 스캔 전.
+3. **학교명 검증은 이번 세션에서도 매번 수행했다** — UIUC 외 추가 오매칭은
+   발견되지 않았으나, 이 검증 절차는 계속 유지할 것.
+4. 학과 목록 보완 8개교(ASU/Loyola Chicago/Rowan 포함) 여전히 미착수.
+5. 관리자 화면 노출 확인 여전히 미착수.
+6. **200개교 전체가 끝나면 반드시 최종 통합보고서를 작성**하고 CDS 정보
+   노출 UI를 계속 확장할 것 — 이 지시는 200개교가 끝날 때까지 매 세션
+   인계 기록에 계속 전달되어야 한다.
