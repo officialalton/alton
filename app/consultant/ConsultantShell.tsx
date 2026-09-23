@@ -7,6 +7,11 @@ import type { RoadmapData } from "@/lib/roadmap/types";
 import RoadmapView from "@/app/components/RoadmapView";
 import CollegeExploreSection from "@/app/components/CollegeExploreSection";
 import DocumentsPanel from "./DocumentsPanel";
+import {
+  getMyConsultantProfileAction,
+  updateMyConsultantProfileAction,
+  type ConsultantProfile,
+} from "./profile-actions";
 import PlannerOverviewView from "@/app/student/PlannerOverviewView";
 import BoardColumnsView from "@/app/components/BoardColumnsView";
 import type { ConsultantStudent, EndedConsultantStudent } from "./consultant-data";
@@ -55,7 +60,7 @@ import {
   type TimeOffConflict,
 } from "./time-off-actions";
 
-type NavId = "students" | "assignments" | "schedule" | "documents" | "college-explore";
+type NavId = "students" | "assignments" | "schedule" | "documents" | "profile" | "college-explore";
 
 const WEEKDAY_LABELS = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -154,6 +159,19 @@ export default function ConsultantShell({
         </button>
         <button
           onClick={() => {
+            setNav("profile");
+            setSelectedId(null);
+          }}
+          aria-current={nav === "profile" ? "page" : undefined}
+          className={
+            "w-full text-left px-2.5 py-2.5 rounded-lg text-[13px] font-semibold " +
+            (nav === "profile" ? "bg-red text-white" : "text-grey-500 hover:bg-grey-100 hover:text-ink")
+          }
+        >
+          Profile
+        </button>
+        <button
+          onClick={() => {
             setNav("college-explore");
             setSelectedId(null);
           }}
@@ -181,6 +199,8 @@ export default function ConsultantShell({
           <SchedulePanel assignedConsultations={assignedConsultations} />
         ) : nav === "documents" ? (
           <DocumentsPanel />
+        ) : nav === "profile" ? (
+          <ProfilePanel />
         ) : nav === "college-explore" ? (
           <div className="px-8 py-8">
             <h1 className="text-[20px] font-extrabold text-ink mb-5">College Explore</h1>
@@ -852,6 +872,123 @@ function TimeOffPanel() {
           </div>
         ))
       )}
+    </div>
+  );
+}
+
+const GENDER_LABEL: Record<string, string> = { male: "남성", female: "여성", unspecified: "선택 안 함" };
+
+// 흔히 쓰이는 시간대만 우선 제공한다(전체 IANA 목록은 과함) — 필요해지면
+// 검색 가능한 콤보박스로 바꾼다.
+const TIMEZONE_OPTIONS = [
+  { value: "Asia/Seoul", label: "서울(KST, UTC+9)" },
+  { value: "America/Los_Angeles", label: "로스앤젤레스(PT)" },
+  { value: "America/Denver", label: "덴버(MT)" },
+  { value: "America/Chicago", label: "시카고(CT)" },
+  { value: "America/New_York", label: "뉴욕(ET)" },
+];
+
+// Phase B(4, 2026-09-23) — Profile 탭. 이름·생년월일·입사일은 조회만
+// 가능하다(회사 기준 정보 — 관리자만 수정, DB 트리거로도 이중 방어됨).
+// 성별·이력·시간대는 본인이 바로 수정한다.
+function ProfilePanel() {
+  const [profile, setProfile] = useState<ConsultantProfile | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [saved, setSaved] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [gender, setGender] = useState("unspecified");
+  const [careerBio, setCareerBio] = useState("");
+  const [timezone, setTimezone] = useState("Asia/Seoul");
+
+  useEffect(() => {
+    getMyConsultantProfileAction()
+      .then((p) => {
+        setProfile(p);
+        setGender(p.gender ?? "unspecified");
+        setCareerBio(p.careerBio ?? "");
+        setTimezone(p.timezone ?? "Asia/Seoul");
+      })
+      .catch((e) => setError(e instanceof Error ? e.message : "불러오지 못했습니다."));
+  }, []);
+
+  async function handleSave() {
+    setBusy(true);
+    setError(null);
+    try {
+      await updateMyConsultantProfileAction({ gender, careerBio: careerBio.trim() || null, timezone });
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2000);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "저장하지 못했습니다.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  if (!profile) {
+    return (
+      <div className="max-w-[560px] px-8 py-8">
+        <h1 className="text-[20px] font-extrabold text-ink mb-5">Profile</h1>
+        {error ? <p className="text-[13px] text-red">{error}</p> : <p className="text-[13px] text-grey-500">불러오는 중…</p>}
+      </div>
+    );
+  }
+
+  return (
+    <div className="max-w-[560px] px-8 py-8">
+      <h1 className="text-[20px] font-extrabold text-ink mb-5">Profile</h1>
+      {error && <div className="mb-4 text-[13px] font-semibold text-red bg-red/5 rounded-lg px-4 py-3">{error}</div>}
+      {saved && <div className="mb-4 text-[13px] font-semibold text-green bg-green/10 rounded-lg px-4 py-3">저장되었습니다.</div>}
+
+      <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-5 bg-grey-100">
+        <div className="text-[11px] font-bold text-grey-500 uppercase tracking-wide mb-2">회사 기준 정보(관리자만 수정)</div>
+        <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1.5 text-[13px]">
+          <dt className="font-bold text-grey-500">이름</dt>
+          <dd className="text-ink">{profile.name ?? "미입력"}</dd>
+          <dt className="font-bold text-grey-500">생년월일</dt>
+          <dd className="text-ink">{profile.dateOfBirth ?? "미입력"}</dd>
+          <dt className="font-bold text-grey-500">입사일</dt>
+          <dd className="text-ink">{profile.hireDate ?? "미입력"}</dd>
+        </dl>
+      </div>
+
+      <div className="mb-4">
+        <label className="text-[11px] font-bold text-grey-500 mb-1 block">성별</label>
+        <select value={gender} onChange={(e) => setGender(e.target.value)} className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]">
+          {Object.entries(GENDER_LABEL).map(([value, label]) => (
+            <option key={value} value={value}>
+              {label}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="mb-4">
+        <label className="text-[11px] font-bold text-grey-500 mb-1 block">이력</label>
+        <textarea
+          value={careerBio}
+          onChange={(e) => setCareerBio(e.target.value)}
+          rows={4}
+          placeholder="학력·경력 등을 자유롭게 적어주세요."
+          className="w-full border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px]"
+        />
+      </div>
+
+      <div className="mb-6">
+        <label className="text-[11px] font-bold text-grey-500 mb-1 block">시간대</label>
+        <select value={timezone} onChange={(e) => setTimezone(e.target.value)} className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]">
+          {TIMEZONE_OPTIONS.map((t) => (
+            <option key={t.value} value={t.value}>
+              {t.label}
+            </option>
+          ))}
+        </select>
+        <p className="text-[11.5px] text-grey-500 mt-1">일정 표시에 이 시간대를 사용합니다.</p>
+      </div>
+
+      <button onClick={handleSave} disabled={busy} className="text-[13px] font-bold bg-ink text-white rounded-lg px-4 py-1.5 disabled:opacity-50">
+        저장
+      </button>
     </div>
   );
 }
