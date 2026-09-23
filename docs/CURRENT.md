@@ -1,4 +1,4 @@
-# ALTON — 현재 상태 (2026-09-21 기준)
+# ALTON — 현재 상태 (2026-09-23 기준)
 
 > 새 세션은 `CLAUDE.md` → 이 문서 → `docs/BRANCH-WORKFLOW.md` 순으로 읽고 시작한다.
 > 그 이전 상세 이력(2026-08-29 ~ 2026-09-14 낮)은
@@ -8,13 +8,13 @@
 
 | 항목 | 값 |
 |---|---|
-| 브랜치 / Preview | `preview/m4-integration-verification`(UI 통일화 `feature/ui-unification` 병합 완료). 최신 Preview **https://alton-81vwjnohd-alton7.vercel.app**(HEAD `20b06ab`). 배포 주의: 이 Vercel 프로젝트는 GitHub 연동이라 **커밋과 완전히 일치하는 깨끗한 작업 트리**에서 `vercel deploy`하면 커밋 작성자 검증(TEAM_ACCESS_REQUIRED)에 걸려 빌드가 조용히 BLOCKED 된다 — 메인 워크트리(미커밋 docs 변경이 늘 있음)에서 배포하거나, git 없는 임시 복사본에서 배포한다(2026-09-20 확인). |
-| 공유 non-prod(`worpsqwqgnspddnrtnvq`) | 마이그레이션 **`20261431000000`까지 local=remote 확인**. Supabase 프로젝트는 이 하나뿐(별도 프로덕션 DB 없음 — 2026-09-20 확인). 새 마이그레이션 작성 시 `docs/BRANCH-WORKFLOW.md` 동기화 체크리스트를 통합/배포 직전 매번 실행할 것. |
+| 브랜치 / Preview | `preview/m4-integration-verification`(UI 통일화 `feature/ui-unification` 병합 완료 + 2026-09-23 컨설턴트 포털 확장·lint 전량 정리 반영). 최신 Preview **https://alton-epv8zq7xw-alton7.vercel.app**(HEAD `60e6dd2`). 배포 주의: 이 Vercel 프로젝트는 GitHub 연동이라 **커밋과 완전히 일치하는 깨끗한 작업 트리**에서 `vercel deploy`하면 커밋 작성자 검증(TEAM_ACCESS_REQUIRED)에 걸려 빌드가 조용히 BLOCKED 된다 — 메인 워크트리(미커밋 docs 변경이 늘 있음)에서 배포하거나, git 없는 임시 복사본에서 배포한다(2026-09-20 확인). |
+| 공유 non-prod(`worpsqwqgnspddnrtnvq`) | 마이그레이션 **`20261472000000`까지 local=remote 확인**(2026-09-23, `20261464000000`~`20261472000000`는 이번 컨설턴트 포털 확장분). Supabase 프로젝트는 이 하나뿐(별도 프로덕션 DB 없음 — 2026-09-20 확인). 새 마이그레이션 작성 시 `docs/BRANCH-WORKFLOW.md` 동기화 체크리스트를 통합/배포 직전 매번 실행할 것. |
 | Production | Vercel production 도메인 배포·마이그레이션 없음(오픈 전, 실제 고객 데이터 없음). Stripe/DocuSign 등 외부 키는 샌드박스. |
-| 테스트 | 2026-09-21: `tsc` 통과. 유닛(app/student·parent·teacher·admin·components·session) 통과. 통합: 모의고사 응시 흐름·과제 배치 RLS·풀이판 21+… 통과. **알려진 사전 실패(무관)**: `app/session/[id]/problem-grading.integration.test.ts` 4건은 `confirm_and_publish_problem_version`·`issue_homework_by_keywords` 의 현재 정의에 없는 문구를 기대하는 오래된 테스트(함수 정의 확인됨), 나머지 `*.integration.test.ts` 실패는 로컬 DB 잔여 데이터(`reservations_no_overlap` 등) — `supabase db reset --local` 직후 `--no-file-parallelism`으로 돌릴 것. |
+| 테스트 | 2026-09-23: `tsc` 통과, `npm run build` 통과, `eslint .` **0 errors/warnings**(2026-09-21 리뷰가 지적한 "lint 정리(소스 82 errors)" 완료 — 상세는 4절 참고). `vitest run --exclude "**/*.integration.test.ts"`: 2530/2531 통과(1 skip) — 남은 1건은 랜덤 지오메트리 스트레스 테스트가 매번 다른 파일에서 산발적으로 실패하는 기존 flaky 이슈(단독 재실행 시 항상 통과, 코드 결함 아님). **알려진 사전 실패(무관)**: `app/session/[id]/problem-grading.integration.test.ts` 4건은 `confirm_and_publish_problem_version`·`issue_homework_by_keywords` 의 현재 정의에 없는 문구를 기대하는 오래된 테스트(함수 정의 확인됨), 나머지 `*.integration.test.ts` 실패는 로컬 DB 잔여 데이터(`reservations_no_overlap` 등) — `supabase db reset --local` 직후 `--no-file-parallelism`으로 돌릴 것. |
 | 실제 외부 연동 | 교재 Drive 읽기·고정 사본 공개, Smart Notes Drive reader 권한 부여(웹훅 멱등성 적용), Google Calendar/Meet 실제 이벤트 생성(상담 일정 확정). Preview `CURRICULUM_DRIVE_ENABLED/ID/ALLOW_REAL_WRITES=true`. AI 생성은 Anthropic 키. 유료 서비스 추가 없음. |
 | 상태 | 문제생성 파이프라인 Step 6 + College Board 840문항 커버리지 매핑 완료. **고정형 모의고사 V1 구현 완료**(`2026-09-17-fixed-mock-exam-v1-spec.md`; 4개 포털 탭 통합, 학생/교사/학부모 목록은 Shell 탭 안, 응시·결과 화면만 독립 라우트). UI 통일화(Acely 레퍼런스, `docs/2026-09-19-ui-unification-spec.md`) 3차까지 병합. 대학 DB Part 5 + 관리자 전체 필드 편집 반영. **남은 UX 지적**: 수업 준비 UI 개선안(제품 오너 결정 대기). |
-| **2026-09-21 보안·리뷰 반영(기획자 코드 리뷰)** | **P0 차단 완료** — 학생이 모의고사 답안/응시 상태·과제 JSON(정답·성적)을 REST API 로 직접 읽거나 바꿀 수 있던 RLS 구멍을 막았다(`20261429000000`: 학생·학부모 읽기/쓰기는 SECURITY DEFINER RPC 만, 채점 확정 전 정답·해설·정오 DB 마스킹). P1: 결제→수업권 grant+ledger 원자화 RPC(`20261430000000`), 모의고사 교사 권한 `teaches_student()` 통일(v3 매칭 학생 누락 해결), `start_problem_work` 끝난 수업·미배정 문제 거절. P2: Stripe/DocuSign 웹훅 DB 오류는 500(재전송), Smart Notes 큐 적재 실패 시 claim 되돌림, `/student` 홈 목록 로더 실패 격리. **남은 리뷰 항목**: 전체 통합 테스트 green 복구(로컬 DB 격리), lint 정리(소스 82 errors), 로컬 webpack 빌드 PDF worker ESM 실패. |
+| **2026-09-21 보안·리뷰 반영(기획자 코드 리뷰)** | **P0 차단 완료** — 학생이 모의고사 답안/응시 상태·과제 JSON(정답·성적)을 REST API 로 직접 읽거나 바꿀 수 있던 RLS 구멍을 막았다(`20261429000000`: 학생·학부모 읽기/쓰기는 SECURITY DEFINER RPC 만, 채점 확정 전 정답·해설·정오 DB 마스킹). P1: 결제→수업권 grant+ledger 원자화 RPC(`20261430000000`), 모의고사 교사 권한 `teaches_student()` 통일(v3 매칭 학생 누락 해결), `start_problem_work` 끝난 수업·미배정 문제 거절. P2: Stripe/DocuSign 웹훅 DB 오류는 500(재전송), Smart Notes 큐 적재 실패 시 claim 되돌림, `/student` 홈 목록 로더 실패 격리. **남은 리뷰 항목**: 전체 통합 테스트 green 복구(로컬 DB 격리, 순수 테스트 인프라 문제), 로컬 webpack 빌드 PDF worker ESM 실패(non-blocking). **lint 정리는 2026-09-23 완료**(아래 4절 및 테스트 행 참고). |
 | 알려진 버그 | `/student` 홈 500(React #418/#441)은 이후 커밋으로 수정됨 + 2026-09-21 로더 실패 격리 추가. 재발 시 `docs/2026-09-18-real-student-teacher-uat.md` 5절 재현 절차 참고. |
 
 ## 2. 지금 유효한 확정 정책 (바꾸려면 제품 오너 결정)
@@ -88,6 +88,26 @@
 27. **P5 — 언어 전환 이전 문제 아카이브**(migration `20261402000000`): 문제 지문·질문·선택지가 영어로 통일되기 전 시기(한국어 혼용)의 기존 문제를 전부 보관 상태로 전환(`problems`/`problem_versions` 공개 후보에서 제외), 삭제 없음.
 
 마이그레이션: `20261346`~`20261403`(전부 additive, 공유 non-prod 적용). 배치별 상세는 아카이브의 각 블록.
+
+> **문서화 공백**: 2026-09-18 이후 컨설턴트 포털 확장(담당 학생 Overview/Board/Roadmap, 칸반, 자동배정, Google Calendar organizer, 학부모 IA 재구성 등 — 커밋 `ee4a91e`~`a9e6387` 구간)은 이 문서에 상세 기록이 없다. 해당 작업을 진행한 세션의 맥락(compaction)이 소실돼 이번 세션에서는 정확히 재구성할 수 없었다 — 필요하면 `git log`로 커밋 메시지를 훑거나 담당 세션 기록을 확인할 것.
+
+28. **컨설턴트 포털 — 가구/학생 메신저 + 개인 일정 잡기 + 교사 재조정 요청**(2026-09-22~23, migration `20261464000000`~`20261472000000`, non-prod 반영 완료):
+    - **가구 메신저 컨설턴트 접근**: 담당 학생의 household 메신저(보호자↔컨설턴트)를 읽고 답장할 수 있게 함. `household_id_for_assigned_student()` SECURITY DEFINER RPC로 `household_members` 원본 행을 넓게 노출하지 않고 household_id만 반환하는 패턴 사용.
+    - **학생↔컨설턴트 개인 메신저**를 신설(보호자와 별도 채널). 프로필/모의고사 열람 RLS도 담당 컨설턴트까지 확장(`is_assigned_consultant_of()`).
+    - **학생-컨설턴트 개인 일정 잡기(신청→확정)**: 수업 예약과 같은 UI 패턴이되, 학생 개인 단위로 진행 가능(보호자 동반 불필요) — 컨설턴트가 요청을 확인하고 확정/변경/거절하는 request→confirm 흐름(수업 예약 자체의 즉시 확정 방식과는 분리해 새로 설계, 기존 예약 상태 머신은 건드리지 않음).
+    - **선생님 수업 재조정 요청**: 기존 즉시 확정 예약 시스템(약 54개 연관 테스트)은 그대로 두고, 교사가 확정된 예약에 대해 변경을 요청하면 학생/보호자가 확인 후 확정·변경·거절할 수 있는 별도 레이어를 추가.
+    - **버그 수정**(실사용 UAT로 발견): 컨설턴트 담당 학생 목록이 전부 "이름 없음"으로 뜨던 문제(프로필 가시성 RLS 누락), Overview/Board가 500으로 멈추던 문제(모의고사 권한 함수가 컨설턴트 관계를 모름), 일정 확정 시각이 신청 시각과 어긋나던 타임존 버그(`toISOString()`이 항상 UTC를 반환해 `datetime-local` input에 잘못 채워짐 — `lib/calendar-date-utils.ts`에 DST-안전 `zonedDateTimeToUtcIso()` 유틸 신설), 학생 쪽 "일정 잡기"가 배정된 컨설턴트가 있는데도 없다고 뜨던 RLS 누락.
+    - **메신저 안읽음 배지**: 학생·컨설턴트 포털 데스크톱/모바일 내비에 실제 안읽음 수 배지 추가. 버그 수정 — 보호자가 보낸 메시지가 학생 쪽 배지에 안 잡히던 필터 누락.
+
+29. **ESLint 실제 이슈 161개 전량 정리 + 죽은 기능 2건 삭제(사용자 승인)**(2026-09-23):
+    - **근본 원인 2건**: (a) `.claude/worktrees/**`(다른 세션들의 전체 git worktree 사본, 각자 `.next` 빌드 산출물 포함)가 lint 대상에서 빠지지 않아 `npx eslint .`가 실제 161개가 아니라 766개로 부풀려 보고되고 있었음 — `eslint.config.mjs`에 ignore 패턴 추가. (b) 코드베이스 전반에 이미 퍼져 있던 "`_` 접두사로 의도적 미사용 표시" 관례를 ESLint 설정이 인식하지 못해, 그 관례를 따른 곳들까지 전부 에러로 잡히고 있었음(`no-unused-vars` 71개 중 23개) — `argsIgnorePattern`/`varsIgnorePattern: '^_'` 규칙 추가.
+    - 나머지는 카테고리별 수작업 정리: 미사용 import·타입·함수·상수 삭제, 한국어 따옴표 `&ldquo;/&rdquo;` 치환(30건), `react/no-children-prop`(데이터 prop 이름이 우연히 `children`과 겹치던 곳을 JSX children 형태로 전환, 동작 동일), `exhaustive-deps` 실제 버그 1건 수정(관리자 통합 일정 화면이 시간대 비동기 로드 후 재계산 안 되던 문제), `set-state-in-effect` 28건(전부 "마운트 시 데이터 로드" 관용 패턴 확인 후 의도 명시), 렌더 중 `Date.now()`/ref 직접 조작 2건을 effect로 이동.
+    - **기획 참고 — 기능 2건 완전 삭제(코드베이스에서 더 이상 존재하지 않음)**:
+      1. **"제안서(Proposal)" 생성/발송 UI**(`ProposalSection`, admin `ConsultationTab`) — 2026-09-10 서브탭 재편으로 진입 경로 자체가 이미 없어졌던 채 방치돼 있던 기능. `제안서 생성 → 발송 → 학부모 수락/거절 관리자 기록` 흐름 전체와 백엔드 액션(`createProposal`/`sendProposal`/`respondToProposal`)을 삭제. **`proposals`/`proposal_subjects` DB 테이블 자체는 남아있음**(삭제하지 않음, 데이터 손실 없음). 이 기능이 다시 필요해지면 재설계가 필요함(코드 없음).
+      2. **개인 이메일 기반 선생님/학부모 초대 폼**(`InviteForm`, admin `UsersTab`) — Google Workspace 프로비저닝(R2 Task 7)으로 이미 대체된 뒤 호출부 없이 방치돼 있던 폼. 삭제.
+    - 검증: `tsc` 클린, `vitest run` 2530/2531 통과(1건은 무관한 기존 flaky), `npm run build` 성공, Preview 배포 확인.
+
+마이그레이션(2026-09-14 배치): `20261346`~`20261403`. 이후 배치는 위 각 항목 참고, 최신은 `20261472000000`(1절 표 참고).
 
 ## 5. 검증 구분
 
