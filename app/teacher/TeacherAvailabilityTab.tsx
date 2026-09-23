@@ -102,7 +102,10 @@ export default function TeacherAvailabilityTab({
     return map;
   }, [exceptions]);
 
-  const exceptionsForSelectedDate = exceptionsByDate.get(selectedDateKey) ?? [];
+  const exceptionsForSelectedDate = useMemo(
+    () => exceptionsByDate.get(selectedDateKey) ?? [],
+    [exceptionsByDate, selectedDateKey]
+  );
   const selectedException = exceptionsForSelectedDate.find((e) => !e.startTimeLocal) ?? null;
   const partialExceptionsForSelectedDate = exceptionsForSelectedDate.filter((e) => e.startTimeLocal);
   const hasExternalBusyOnSelectedDate = externalBusyDateKeys.has(selectedDateKey);

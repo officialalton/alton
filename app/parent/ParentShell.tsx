@@ -694,13 +694,14 @@ export default function ParentShell({
             <EntitlementsTab data={entitlements} purchaseStatus={purchaseStatus} />
           ) : activeTab === "consent" ? (
             <ConsentTab
-              children={consentChildren}
               activePolicy={activeConsentPolicy}
               trialSmartNotesChildren={trialSmartNotesChildren}
               childrenSubjectEnrollments={childrenSubjectEnrollments}
               progressedTrialEnrollmentIds={progressedTrialEnrollmentIds}
               focusSubjectEnrollmentId={focusSubjectEnrollmentId}
-            />
+            >
+              {consentChildren}
+            </ConsentTab>
           ) : activeTab === "credits" ? (
             <CreditsTab data={credits} />
           ) : activeTab === "vocab" ? (

@@ -31,7 +31,7 @@ const activePolicy: ConsentPolicyOption = {
 
 describe("ConsentTab", () => {
   it("13세 미만 자녀가 없으면 안내 문구만 보여준다", () => {
-    render(<ConsentTab children={[]} activePolicy={activePolicy} trialSmartNotesChildren={[]} />);
+    render(<ConsentTab activePolicy={activePolicy} trialSmartNotesChildren={[]}>{[]}</ConsentTab>);
     expect(
       screen.getByText("동의가 필요한 만 13세 미만 자녀가 없습니다.")
     ).toBeInTheDocument();
@@ -49,7 +49,7 @@ describe("ConsentTab", () => {
         latestConsent: null,
       },
     ];
-    render(<ConsentTab children={children} activePolicy={activePolicy} trialSmartNotesChildren={[]} />);
+    render(<ConsentTab activePolicy={activePolicy} trialSmartNotesChildren={[]}>{children}</ConsentTab>);
 
     expect(screen.getByText("동의 필요")).toBeInTheDocument();
     fireEvent.click(screen.getByText(`${activePolicy.title} 원문 보기`));
@@ -72,7 +72,7 @@ describe("ConsentTab", () => {
       { studentId: "student1", name: "테스트 자녀 4", isUnder13: true, dobKnown: false, hasValidConsent: false, latestConsent: null },
       { studentId: "student2", name: "테스트 자녀 5", isUnder13: true, dobKnown: false, hasValidConsent: false, latestConsent: null },
     ];
-    render(<ConsentTab children={children} activePolicy={activePolicy} trialSmartNotesChildren={[]} />);
+    render(<ConsentTab activePolicy={activePolicy} trialSmartNotesChildren={[]}>{children}</ConsentTab>);
     expect(
       screen.getByText("동의가 필요한 만 13세 미만 자녀가 없습니다.")
     ).toBeInTheDocument();
@@ -93,10 +93,11 @@ describe("ConsentTab", () => {
     ];
     render(
       <ConsentTab
-        children={children}
         activePolicy={{ ...activePolicy, documentUrl: null }}
         trialSmartNotesChildren={[]}
-      />
+      >
+        {children}
+      </ConsentTab>
     );
 
     fireEvent.click(screen.getByText(`${activePolicy.title} 원문 보기`));
@@ -121,7 +122,7 @@ describe("ConsentTab", () => {
         },
       },
     ];
-    render(<ConsentTab children={children} activePolicy={activePolicy} trialSmartNotesChildren={[]} />);
+    render(<ConsentTab activePolicy={activePolicy} trialSmartNotesChildren={[]}>{children}</ConsentTab>);
     expect(screen.queryByText("동의 철회")).not.toBeInTheDocument();
     const doneButton = screen.getByRole("button", { name: "동의 완료" });
     expect(doneButton).toBeDisabled();
@@ -132,7 +133,7 @@ describe("ConsentTab", () => {
     const children: ChildConsentStatus[] = [
       { studentId: "student2", name: "이서아", isUnder13: false, dobKnown: true, hasValidConsent: true, latestConsent: null },
     ];
-    render(<ConsentTab children={children} activePolicy={activePolicy} trialSmartNotesChildren={[]} />);
+    render(<ConsentTab activePolicy={activePolicy} trialSmartNotesChildren={[]}>{children}</ConsentTab>);
     expect(screen.getByTestId("smart-notes-contract-notice")).toBeInTheDocument();
     expect(screen.queryByText(/사용 중 · 끄기/)).not.toBeInTheDocument();
     expect(screen.queryByText(/사용 안 함 · 켜기/)).not.toBeInTheDocument();
@@ -146,10 +147,11 @@ describe("ConsentTab", () => {
     ];
     render(
       <ConsentTab
-        children={[]}
         activePolicy={activePolicy}
         trialSmartNotesChildren={trialSmartNotesChildren}
-      />
+      >
+        {[]}
+      </ConsentTab>
     );
 
     expect(screen.getByTestId("trial-smart-notes-consent-card-student3")).toBeInTheDocument();
@@ -173,10 +175,11 @@ describe("ConsentTab", () => {
     ];
     render(
       <ConsentTab
-        children={[]}
         activePolicy={activePolicy}
         trialSmartNotesChildren={trialSmartNotesChildren}
-      />
+      >
+        {[]}
+      </ConsentTab>
     );
 
     const card = screen.getByTestId("trial-smart-notes-consent-card-student3");
@@ -186,7 +189,7 @@ describe("ConsentTab", () => {
   });
 
   it("체험 Smart Notes 동의가 필요한 자녀가 없으면 섹션 자체를 보여주지 않는다", () => {
-    render(<ConsentTab children={[]} activePolicy={activePolicy} trialSmartNotesChildren={[]} />);
+    render(<ConsentTab activePolicy={activePolicy} trialSmartNotesChildren={[]}>{[]}</ConsentTab>);
     expect(screen.queryByText("체험 Smart Notes 동의")).not.toBeInTheDocument();
   });
 
@@ -196,10 +199,11 @@ describe("ConsentTab", () => {
     ];
     render(
       <ConsentTab
-        children={[]}
         activePolicy={{ ...activePolicy, documentUrl: null }}
         trialSmartNotesChildren={trialSmartNotesChildren}
-      />
+      >
+        {[]}
+      </ConsentTab>
     );
     fireEvent.click(screen.getByText("Smart Notes 이용 원문 보기"));
     expect(screen.getByTestId("consent-document-modal")).toHaveTextContent("원문 준비 중입니다.");
@@ -216,7 +220,7 @@ describe("ConsentTab — 정규 진행 희망 섹션(2026-09-10, P0-5)", () => {
   ];
 
   it("정규 진행 희망 대상 과목이 없으면 섹션을 보여주지 않는다", () => {
-    render(<ConsentTab children={[]} activePolicy={activePolicy} trialSmartNotesChildren={[]} />);
+    render(<ConsentTab activePolicy={activePolicy} trialSmartNotesChildren={[]}>{[]}</ConsentTab>);
     expect(screen.queryByTestId("regular-intent-section")).not.toBeInTheDocument();
   });
 
@@ -224,12 +228,13 @@ describe("ConsentTab — 정규 진행 희망 섹션(2026-09-10, P0-5)", () => {
     (hasConfirmedRegularProgressIntent as ReturnType<typeof vi.fn>).mockResolvedValue(false);
     render(
       <ConsentTab
-        children={[]}
         activePolicy={activePolicy}
         trialSmartNotesChildren={[]}
         childrenSubjectEnrollments={childrenSubjectEnrollments}
         progressedTrialEnrollmentIds={["se1"]}
-      />
+      >
+        {[]}
+      </ConsentTab>
     );
 
     expect(screen.getByTestId("regular-intent-section")).toBeInTheDocument();
@@ -240,13 +245,14 @@ describe("ConsentTab — 정규 진행 희망 섹션(2026-09-10, P0-5)", () => {
     (hasConfirmedRegularProgressIntent as ReturnType<typeof vi.fn>).mockResolvedValue(false);
     render(
       <ConsentTab
-        children={[]}
         activePolicy={activePolicy}
         trialSmartNotesChildren={[]}
         childrenSubjectEnrollments={childrenSubjectEnrollments}
         progressedTrialEnrollmentIds={["se1"]}
         focusSubjectEnrollmentId="se1"
-      />
+      >
+        {[]}
+      </ConsentTab>
     );
 
     const row = await screen.findByTestId("regular-intent-row-se1");
@@ -257,12 +263,13 @@ describe("ConsentTab — 정규 진행 희망 섹션(2026-09-10, P0-5)", () => {
     (hasConfirmedRegularProgressIntent as ReturnType<typeof vi.fn>).mockResolvedValue(true);
     render(
       <ConsentTab
-        children={[]}
         activePolicy={activePolicy}
         trialSmartNotesChildren={[]}
         childrenSubjectEnrollments={childrenSubjectEnrollments}
         progressedTrialEnrollmentIds={["se1"]}
-      />
+      >
+        {[]}
+      </ConsentTab>
     );
 
     expect(await screen.findByText(/접수 완료/)).toBeInTheDocument();

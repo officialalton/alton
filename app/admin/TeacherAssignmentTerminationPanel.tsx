@@ -4,7 +4,7 @@
 // 다룬다. 데이터는 마운트 시 서버 액션으로 직접 불러온다(별도 페이지 데이터 로더 없이
 // MatchingTab 하단에 얹는 형태 — R5 매칭 화면과 같은 관리자 권한 범위이므로 자연스럽다).
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   listTerminationRequests,
   previewTerminationImpactAction,
@@ -47,7 +47,7 @@ export default function TeacherAssignmentTerminationPanel({
   const [error, setError] = useState<string | null>(null);
   const [openingId, setOpeningId] = useState<string | null>(null);
 
-  async function refresh() {
+  const refresh = useCallback(async () => {
     let list: TerminationRequestListItem[] = [];
     try {
       list = await listTerminationRequests();
@@ -58,11 +58,11 @@ export default function TeacherAssignmentTerminationPanel({
     onPendingCountChange?.(
       list.filter((r) => r.status === "requested" || r.status === "processing" || r.status === "failed").length
     );
-  }
+  }, [onPendingCountChange]);
 
   useEffect(() => {
     refresh();
-  }, []);
+  }, [refresh]);
 
   async function openRequest(r: TerminationRequestListItem) {
     setOpeningId(r.id);

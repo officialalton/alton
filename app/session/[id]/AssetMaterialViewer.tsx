@@ -146,7 +146,7 @@ export default function AssetMaterialViewer({
       setRendered({ width: 0, height: 0 });
       setPos(next);
     },
-    []
+    [setPos]
   );
 
   if (!asset) return null;

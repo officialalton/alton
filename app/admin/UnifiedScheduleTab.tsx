@@ -82,7 +82,7 @@ export default function UnifiedScheduleTab({
 
   const todayKey = todayKeyInTimezone(timezone);
   const weekGrid = useMemo(() => buildWeekGrid(todayKey), [todayKey]);
-  const weekDateKeys = new Set(weekGrid.map((c) => c.dateKey));
+  const weekDateKeys = useMemo(() => new Set(weekGrid.map((c) => c.dateKey)), [weekGrid]);
 
   const teacherOptions = useMemo(
     () => Array.from(new Set((lessons ?? []).map((l) => l.teacherName ?? "(이름 없음)"))).sort(),
@@ -110,7 +110,7 @@ export default function UnifiedScheduleTab({
       badges[key] = { count: (badges[key]?.count ?? 0) + 1, tone };
     }
     return badges;
-  }, [filteredLessons]);
+  }, [filteredLessons, timezone]);
 
   const visibleLessons = useMemo(() => {
     if (view === "today") return filteredLessons.filter((l) => dateKeyInTimezone(l.startsAt, timezone) === todayKey);
@@ -120,7 +120,7 @@ export default function UnifiedScheduleTab({
     }
     if (selectedDateKey) return filteredLessons.filter((l) => dateKeyInTimezone(l.startsAt, timezone) === selectedDateKey);
     return filteredLessons;
-  }, [filteredLessons, view, selectedDateKey, todayKey, weekDateKeys]);
+  }, [filteredLessons, view, selectedDateKey, todayKey, weekDateKeys, timezone]);
 
   return (
     <div className="max-w-[880px]">

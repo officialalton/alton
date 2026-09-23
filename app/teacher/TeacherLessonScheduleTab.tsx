@@ -238,7 +238,6 @@ export default function TeacherLessonScheduleTab({
   }, [lessons, exceptions, timezone]);
 
   const weekGrid = useMemo(() => buildWeekGrid(todayKey), [todayKey]);
-  const weekDateKeys = new Set(weekGrid.map((c) => c.dateKey));
 
   // M4 골든패스 실사용 버그 #3/#4 — "금주 목록"이 실제 이번 주 날짜 범위(weekDateKeys)로
   // 필터링돼 있었는데도 다음 주 수업이 목록에 나타난다는 지적이 있었고, 제품 오너가
@@ -254,7 +253,7 @@ export default function TeacherLessonScheduleTab({
       return lessons.filter((l) => dateKeyInTimezone(l.startsAt, timezone) === selectedDateKey);
     }
     return lessons;
-  }, [lessons, view, selectedDateKey, timezone, weekDateKeys]);
+  }, [lessons, view, selectedDateKey, timezone]);
 
   // M4 UAT #5 — "예정된 수업"/"지난 수업" 분리. 정규 수업은 시간 경과만 기준(기존 그대로),
   // 체험 수업은 리뷰 확정 전까지 시간이 지나도 예정된 수업 쪽에 남는다(isPastLesson 참고).
