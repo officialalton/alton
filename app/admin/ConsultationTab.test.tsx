@@ -24,9 +24,6 @@ vi.mock("./consultation-actions", () => ({
   approveTrialException: vi.fn(),
   cancelTrialSession: vi.fn(),
   markTrialNoShow: vi.fn(),
-  createProposal: vi.fn(),
-  sendProposal: vi.fn(),
-  respondToProposal: vi.fn(),
   retryFailedDriveArtifacts: vi.fn(),
   reconcileDocusignStatus: vi.fn(),
   retryContractActivation: vi.fn(),
@@ -91,7 +88,6 @@ const baseProps = {
     },
   ],
   trials: [],
-  proposals: [],
   driveIssues: [
     { id: "d1", contractId: "ct1", artifactType: "signed_document", syncStatus: "retryable_failed" as const },
   ],

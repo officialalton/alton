@@ -12,9 +12,6 @@ import {
   approveTrialException,
   cancelTrialSession,
   markTrialNoShow,
-  createProposal,
-  sendProposal,
-  respondToProposal,
   retryFailedDriveArtifacts,
   reconcileDocusignStatus,
   retryContractActivation,
@@ -29,7 +26,6 @@ import ClosedConsultationsSection from "./ClosedConsultationsSection";
 import type {
   ConsultationListItem,
   TrialSessionListItem,
-  ProposalListItem,
   ConsentGapItem,
   DriveArtifactIssue,
   StaleEnvelopeContract,
@@ -66,7 +62,6 @@ const errText = "text-[12px] text-red mb-2";
 export default function ConsultationTab({
   consultations,
   trials,
-  proposals,
   driveIssues,
   staleEnvelopes,
   contractActivationRetries,
@@ -76,7 +71,6 @@ export default function ConsultationTab({
 }: {
   consultations: ConsultationListItem[];
   trials: TrialSessionListItem[];
-  proposals: ProposalListItem[];
   driveIssues: DriveArtifactIssue[];
   staleEnvelopes: StaleEnvelopeContract[];
   contractActivationRetries: ContractActivationRetryItem[];
@@ -451,214 +445,6 @@ function TrialDetail({
   );
 }
 
-function ProposalSection({
-  proposals,
-  trials,
-}: {
-  proposals: ProposalListItem[];
-  trials: TrialSessionListItem[];
-}) {
-  const [creating, setCreating] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [busyId, setBusyId] = useState<string | null>(null);
-
-  const completedTrials = trials.filter((t) => t.status === "completed");
-
-  return (
-    <div>
-      <div className="flex justify-end mb-4">
-        <button className={btnPrimary} onClick={() => setCreating((v) => !v)}>
-          {creating ? "취소" : "제안서 생성"}
-        </button>
-      </div>
-      {error && <p className={errText}>{error}</p>}
-      {creating && (
-        <NewProposalForm
-          completedTrials={completedTrials}
-          onDone={() => setCreating(false)}
-          onError={setError}
-        />
-      )}
-
-      {proposals.length === 0 && <p className="text-[13px] text-grey-500">등록된 제안서가 없습니다.</p>}
-
-      {proposals.map((p) => (
-        <div key={p.id} className={card} data-testid={`proposal-card-${p.id}`}>
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="text-[14px] font-bold text-ink">
-                v{p.versionNumber}{" "}
-                <span className="text-[11px] font-semibold text-grey-500">({p.status})</span>
-                {p.supersedesProposalId && (
-                  <span className="text-[11px] text-grey-500"> · v{p.versionNumber - 1}의 재작성</span>
-                )}
-              </div>
-              <div className="text-[12px] text-grey-500">
-                과목 {p.recommendedSubjects.length}개 · 회차 {p.recommendedSessionCount ?? "-"}
-              </div>
-            </div>
-            <div className="flex gap-1.5">
-              {p.status === "draft" && (
-                <button
-                  disabled={busyId === p.id}
-                  className={btnSecondary}
-                  onClick={async () => {
-                    setBusyId(p.id);
-                    setError(null);
-                    try {
-                      await sendProposal(p.id);
-                    } catch (e) {
-                      setError(e instanceof Error ? e.message : "발송 실패");
-                    } finally {
-                      setBusyId(null);
-                    }
-                  }}
-                >
-                  발송
-                </button>
-              )}
-              {p.status === "sent" && (
-                <>
-                  <button
-                    disabled={busyId === p.id}
-                    className={btnSecondary}
-                    onClick={async () => {
-                      setBusyId(p.id);
-                      setError(null);
-                      try {
-                        await respondToProposal(p.id, "accepted");
-                      } catch (e) {
-                        setError(e instanceof Error ? e.message : "처리 실패");
-                      } finally {
-                        setBusyId(null);
-                      }
-                    }}
-                  >
-                    수락 처리
-                  </button>
-                  <button
-                    disabled={busyId === p.id}
-                    className={btnSecondary}
-                    onClick={async () => {
-                      setBusyId(p.id);
-                      setError(null);
-                      try {
-                        await respondToProposal(p.id, "rejected");
-                      } catch (e) {
-                        setError(e instanceof Error ? e.message : "처리 실패");
-                      } finally {
-                        setBusyId(null);
-                      }
-                    }}
-                  >
-                    거절 처리
-                  </button>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function NewProposalForm({
-  completedTrials,
-  onDone,
-  onError,
-}: {
-  completedTrials: TrialSessionListItem[];
-  onDone: () => void;
-  onError: (e: string | null) => void;
-}) {
-  const [trialSessionId, setTrialSessionId] = useState("");
-  const [subjectId, setSubjectId] = useState("");
-  const [teacherId, setTeacherId] = useState("");
-  const [sessionCount, setSessionCount] = useState("");
-  const [priceMinor, setPriceMinor] = useState("");
-  const [submitting, setSubmitting] = useState(false);
-
-  return (
-    <div className={card}>
-      <div className="grid grid-cols-2 gap-2 mb-2">
-        <select
-          value={trialSessionId}
-          onChange={(e) => setTrialSessionId(e.target.value)}
-          className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[12.5px]"
-        >
-          <option value="">완료된 체험 선택</option>
-          {completedTrials.map((t) => (
-            <option key={t.id} value={t.id}>
-              {t.childName ?? t.childId} · {t.subjectName ?? t.subjectId}
-            </option>
-          ))}
-        </select>
-        <input
-          value={teacherId}
-          onChange={(e) => setTeacherId(e.target.value)}
-          placeholder="추천 선생님 ID"
-          className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[12.5px]"
-        />
-        <input
-          value={subjectId}
-          onChange={(e) => setSubjectId(e.target.value)}
-          placeholder="추천 과목 ID"
-          className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[12.5px]"
-        />
-        <input
-          value={sessionCount}
-          onChange={(e) => setSessionCount(e.target.value)}
-          placeholder="추천 회차 수"
-          type="number"
-          className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[12.5px]"
-        />
-        <input
-          value={priceMinor}
-          onChange={(e) => setPriceMinor(e.target.value)}
-          placeholder="가격(원 단위, 최소단위)"
-          type="number"
-          className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[12.5px]"
-        />
-      </div>
-      <button
-        className={btnPrimary}
-        disabled={submitting}
-        onClick={async () => {
-          const trial = completedTrials.find((t) => t.id === trialSessionId);
-          if (!trial || !subjectId) {
-            onError("체험과 과목은 필수입니다.");
-            return;
-          }
-          setSubmitting(true);
-          onError(null);
-          try {
-            await createProposal({
-              consultationId: trial.consultationId,
-              trialSessionId: trial.id,
-              subjects: [
-                {
-                  subjectId,
-                  recommendedSessionCount: sessionCount ? Number(sessionCount) : undefined,
-                  priceMinor: priceMinor ? Number(priceMinor) : undefined,
-                },
-              ],
-              recommendedTeacherId: teacherId || undefined,
-              recommendedSessionCount: sessionCount ? Number(sessionCount) : undefined,
-            });
-            onDone();
-          } catch (e) {
-            onError(e instanceof Error ? e.message : "제안서 생성에 실패했습니다.");
-          } finally {
-            setSubmitting(false);
-          }
-        }}
-      >
-        {submitting ? "생성 중…" : "제안서 생성"}
-      </button>
-    </div>
-  );
-}
 
 function ErrorDashboardSection({
   driveIssues,

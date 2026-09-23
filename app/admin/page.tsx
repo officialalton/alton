@@ -6,7 +6,6 @@ import { loadCurriculumDocList } from "./curriculum-doc-data";
 import {
   loadConsultations,
   loadTrialSessions,
-  loadProposals,
   loadDriveArtifactIssues,
   loadStaleEnvelopeVersions,
 } from "./consultation-data";
@@ -88,7 +87,6 @@ export default async function AdminHomePage({
     matchingStudents,
     consultations,
     trials,
-    proposals,
     driveIssues,
     staleEnvelopes,
     contractActivationRetries,
@@ -118,7 +116,6 @@ export default async function AdminHomePage({
     need("matching") ? loadStudentsForMatching(supabase) : Promise.resolve([]),
     need("consult") ? loadConsultations(supabase) : Promise.resolve([]),
     need("consult") ? loadTrialSessions(supabase) : Promise.resolve([]),
-    need("consult") ? loadProposals(supabase) : Promise.resolve([]),
     need("consult") ? loadDriveArtifactIssues(supabase) : Promise.resolve([]),
     need("consult") ? loadStaleEnvelopeVersions(supabase) : Promise.resolve([]),
     need("consult") ? listOpenContractActivationRetries() : Promise.resolve([]),
@@ -161,7 +158,6 @@ export default async function AdminHomePage({
       matchingStudents={matchingStudents}
       consultations={consultations}
       trials={trials}
-      proposals={proposals}
       driveIssues={driveIssues}
       staleEnvelopes={staleEnvelopes}
       contractActivationRetries={contractActivationRetries}

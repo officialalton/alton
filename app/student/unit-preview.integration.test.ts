@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { afterEach, beforeAll, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it } from "vitest";
 
 // P2 10차 — 학생·보호자의 수업 전 열람.
 //

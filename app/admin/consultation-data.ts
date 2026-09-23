@@ -133,49 +133,6 @@ export async function loadTrialSessions(supabase: SupabaseClient): Promise<Trial
   }));
 }
 
-export type ProposalListItem = {
-  id: string;
-  consultationId: string;
-  trialSessionId: string | null;
-  versionNumber: number;
-  supersedesProposalId: string | null;
-  status: string;
-  recommendedSubjects: Array<{
-    subjectId: string;
-    recommendedSessionCount: number | null;
-    priceMinor: number | null;
-    currency: string;
-  }>;
-  recommendedTeacherId: string | null;
-  recommendedSessionCount: number | null;
-  sentAt: string | null;
-  respondedAt: string | null;
-  createdAt: string;
-};
-
-export async function loadProposals(supabase: SupabaseClient): Promise<ProposalListItem[]> {
-  const { data: rows } = await supabase
-    .from("proposals")
-    .select(
-      "id, consultation_id, trial_session_id, version_number, supersedes_proposal_id, status, recommended_subjects, recommended_teacher_id, recommended_session_count, sent_at, responded_at, created_at"
-    )
-    .order("created_at", { ascending: false });
-  return (rows ?? []).map((r) => ({
-    id: r.id,
-    consultationId: r.consultation_id,
-    trialSessionId: r.trial_session_id,
-    versionNumber: r.version_number,
-    supersedesProposalId: r.supersedes_proposal_id,
-    status: r.status,
-    recommendedSubjects: (r.recommended_subjects ?? []) as ProposalListItem["recommendedSubjects"],
-    recommendedTeacherId: r.recommended_teacher_id,
-    recommendedSessionCount: r.recommended_session_count,
-    sentAt: r.sent_at,
-    respondedAt: r.responded_at,
-    createdAt: r.created_at,
-  }));
-}
-
 export type ConsentGapItem = {
   childId: string;
   childName: string | null;

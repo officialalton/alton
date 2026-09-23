@@ -2,7 +2,6 @@ import { describe, expect, it, vi } from "vitest";
 import {
   loadConsultations,
   loadTrialSessions,
-  loadProposals,
   loadConsentGaps,
   loadDriveArtifactIssues,
 } from "./consultation-data";
@@ -145,40 +144,6 @@ describe("loadTrialSessions", () => {
         exceptionReason: null,
       },
     ]);
-  });
-});
-
-describe("loadProposals", () => {
-  it("제안서 목록을 매핑해 반환한다", async () => {
-    const supabase = {
-      from: vi.fn(() => ({
-        select: () => ({
-          order: () =>
-            Promise.resolve({
-              data: [
-                {
-                  id: "p1",
-                  consultation_id: "c1",
-                  trial_session_id: "t1",
-                  version_number: 1,
-                  supersedes_proposal_id: null,
-                  status: "draft",
-                  recommended_subjects: [],
-                  recommended_teacher_id: null,
-                  recommended_session_count: 10,
-                  sent_at: null,
-                  responded_at: null,
-                  created_at: "2026-08-06T00:00:00Z",
-                },
-              ],
-            }),
-        }),
-      })),
-    };
-
-    const result = await loadProposals(supabase as never);
-    expect(result[0].versionNumber).toBe(1);
-    expect(result[0].recommendedSessionCount).toBe(10);
   });
 });
 

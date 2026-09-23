@@ -603,24 +603,6 @@ describe("proposal → contract handoff", () => {
     consultationsUpdateEqMock.mockResolvedValue({ error: null });
   });
 
-  it("createProposal은 proposals와 proposal_subjects를 함께 생성하고 상담 상태를 proposed로 갱신한다", async () => {
-    proposalsInsertSingleMock.mockResolvedValue({ data: { id: "prop1" }, error: null });
-    const { createProposal } = await import("./consultation-actions");
-
-    const result = await createProposal({
-      consultationId: "c1",
-      trialSessionId: "trial1",
-      subjects: [{ subjectId: "sub1", recommendedSessionCount: 10, priceMinor: 1000000 }],
-      recommendedTeacherId: "t1",
-    });
-
-    expect(result.id).toBe("prop1");
-    expect(proposalSubjectsInsertMock).toHaveBeenCalledWith([
-      expect.objectContaining({ proposal_id: "prop1", subject_id: "sub1", recommended_session_count: 10, price_minor: 1000000, currency: "KRW" }),
-    ]);
-    expect(consultationsUpdateEqMock).toHaveBeenCalledWith("id", "c1");
-  });
-
   it("accepted 제안서에서 계약+첫 계약 버전을 생성하고 proposal_id가 계약 버전에 정확히 채워진다(과목은 계약에 고정하지 않는다)", async () => {
     proposalsSelectSingleMock.mockResolvedValue({
       data: {

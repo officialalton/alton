@@ -27,7 +27,6 @@ import type { UnifiedScheduleLessonRow, BookingReconciliationDashboard } from ".
 import type {
   ConsultationListItem,
   TrialSessionListItem,
-  ProposalListItem,
   DriveArtifactIssue,
   StaleEnvelopeContract,
 } from "./consultation-data";
@@ -103,7 +102,6 @@ export default function AdminShell({
   matchingStudents,
   consultations,
   trials,
-  proposals,
   driveIssues,
   staleEnvelopes,
   contractActivationRetries,
@@ -154,7 +152,6 @@ export default function AdminShell({
   matchingStudents: MatchingStudentItem[];
   consultations: ConsultationListItem[];
   trials: TrialSessionListItem[];
-  proposals: ProposalListItem[];
   driveIssues: DriveArtifactIssue[];
   staleEnvelopes: StaleEnvelopeContract[];
   contractActivationRetries: ContractActivationRetryItem[];
@@ -433,7 +430,6 @@ export default function AdminShell({
             <ConsultationTab
               consultations={consultations}
               trials={trials}
-              proposals={proposals}
               driveIssues={driveIssues}
               staleEnvelopes={staleEnvelopes}
               contractActivationRetries={contractActivationRetries}
