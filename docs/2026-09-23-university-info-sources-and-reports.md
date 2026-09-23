@@ -53,18 +53,47 @@
   (오류 없음, `react-hooks/set-state-in-effect`는 코드베이스 관용 패턴대로 disable-line 처리),
   `npx vitest run scripts/universities-seed.test.ts`(통과, 이 영역에 대한 유일한 기존 테스트).
 
+## 3차 세션 추가분 (2026-09-23, 지시서 A 마무리)
+- **관리자 오류 신고함 화면**: `UniversitiesPanel.tsx`에 `ReportsInboxSection` 추가.
+  `listUniversityDataReports`(전체 조회 후 해당 대학으로 클라이언트단 필터 — 대학별
+  전용 조회 액션은 아직 없음, 아래 결정 필요 참고)로 목록을 보여주고, `open` →
+  `in_review` → `resolved`/`dismissed` 상태 전이 버튼과 처리 메모 입력을 연결.
+- **공개 대학 상세 화면(학생/학부모/컨설턴트/교사 공용, `app/components/CollegeExploreSection.tsx`)**:
+  - `loadUniversityDetail`(관리자·학생 공용 내부 함수, `lib/universities/actions.ts`)이
+    `status='approved'`인 `university_source_urls`도 함께 반환하도록 확장(additive —
+    반환 객체에 `sourceUrls` 필드 추가, 기존 필드는 변경 없음). "출처" 섹션에 렌더링.
+  - "정보 오류 신고" 버튼 추가 → `reportUniversityDataIssue` 연결(일반 신고 + `fieldPath`
+    입력으로 필드 단위 신고 모두 가능).
+- **컨설턴트 포털의 출처 URL 제안 UI**: `RoadmapView`에 `canProposeSourceUrl` prop 추가,
+  `app/consultant/ConsultantShell.tsx`에서만 `true`로 전달(학생/학부모/교사/관리자 쪽은
+  기본 `false` — 화면 자체가 안 보임, 서버 액션도 어차피 역할 검사로 막혀 있음).
+  신규 액션 `listMySubmittedSourceUrls`(`lib/universities/user-actions.ts`)를 만들어
+  본인 세션 클라이언트로 본인이 제안한 URL 전체 상태(대기/승인/반려 + 반려 사유)를
+  조회 — 기존 RLS 정책 `university_source_urls_select_own_submission`
+  (`submitted_by = auth.uid()`)이 이미 이걸 허용하고 있어서 새 정책은 필요 없었다.
+
+### 검증
+- 로컬 `supabase db reset` 실행 — 로컬 DB에 P6 마이그레이션(`20261480000000`)이
+  적용 안 돼 있어 `university_source_urls` 테이블이 스키마 캐시에 없는 상태였음을
+  발견하고 반영(전체 마이그레이션 재적용, 정상 완료).
+- `npx tsc --noEmit -p .` — 이번 변경 관련 신규 오류 없음(기존 `app/layout.tsx`의
+  `LayoutProps` 오류만 남음, 무관한 사전 존재 이슈).
+- `npx eslint app/admin/universities/UniversitiesPanel.tsx app/components/CollegeExploreSection.tsx app/components/RoadmapView.tsx app/consultant/ConsultantShell.tsx lib/universities/actions.ts lib/universities/user-actions.ts` — 오류 없음.
+- `npx vitest run lib/universities/actions.integration.test.ts scripts/universities-seed.test.ts` — 11/11 통과.
+- 커밋: `fec40ff`.
+
 ## 미완료 (지시서 대비) — 이번 세션 종료 시점 기준
-- 관리자 신고 처리함 화면(`listUniversityDataReports`/`resolveUniversityDataReport`) —
-  액션만 존재, 화면 미연결(출처 URL 섹션만 연결 완료, 위 참고).
-- 컨설턴트 포털의 출처 URL 제안 UI(`proposeUniversitySourceUrl`) + "내가 제안한 URL 상태"
-  조회 — 미착수.
-- 공개 대학 상세 화면의 승인된 공식 출처 노출 + "정보 오류 신고" 버튼
-  (`reportUniversityDataIssue`) 연결 — 미착수.
-- 이 섹션에 대한 컴포넌트 단위 테스트 없음(기존에도 UniversitiesPanel 테스트 자체가 없음).
+- A는 이번 세션에서 마무리(위 3차 세션 추가분 참고). 다만 관리자 신고함이 대학별
+  전용 서버 액션(`listUniversityDataReportsForUniversity` 같은) 없이 전체 목록을
+  받아 클라이언트에서 필터링하는 방식이라 신고가 많아지면 비효율 — 개선 여지 있음.
+- 이 섹션들에 대한 컴포넌트 단위 테스트 없음(기존에도 `UniversitiesPanel`/
+  `CollegeExploreSection` 테스트 자체가 없음 — 새로 작성하지 않음).
 - Admitted Student Profile 지표(지시서 B) — 전혀 미착수. 기존 Part 5(`20261428000000`)
   구조로 연도/대상집단/공식여부/출처·확인일을 표현 가능한지조차 미확인.
 - 지원연도별 에세이 프롬프트 확장(지시서 C) — 전혀 미착수. `university_essay_prompts`
-  테이블 실재 여부·스키마 미확인 상태 그대로.
+  테이블은 실재하며(Part 2/3 마이그레이션, `id/university_id/cycle_year/prompt_text/
+  word_limit/is_required` 컬럼 확인됨 — `loadUniversityDetail`에서 이미 조회 중),
+  다만 공통/자체/짧은답변/조건부(단과대·전공)/선택규칙 구분 컬럼은 없다. 확장 미착수.
 - 수집봇 + 필드별 변경안 검토 큐(지시서 D) — 전혀 미착수.
 - 10개교 실선정 UAT → 200개교 상태 관리(지시서 E) — 전혀 미착수.
 - `npx supabase db push --linked`, `vercel deploy` 미실행(지시대로 통합 세션 담당).
@@ -72,8 +101,11 @@
 ## 결정 필요
 - B~E는 스키마 설계(신규 정규화 테이블 `university_admission_metrics`, 에세이 조건부
   구조, 크롤러 아키텍처, robots.txt/사설 IP 차단 정책)부터 필요한 다중 세션 분량 작업이라
-  이번 세션 내에서는 시작하지 못했다. 다음 세션에서 B부터(스키마 설계 우선) 이어가는 것을
-  제안한다.
+  이번 세션 내에서도 시작하지 못했다(A 마무리에 세션을 전부 사용). 다음 세션에서
+  B부터(스키마 설계 우선) 이어가는 것을 제안한다.
+- 관리자 신고함이 대학별 전용 조회 액션 없이 전체 신고를 받아 클라이언트에서 필터링하는
+  임시 구조인데, 신고 건수가 늘어나기 전에 `listUniversityDataReports(universityId?)`
+  형태로 서버 필터를 추가할지 여부 — 지금은 단순성 우선으로 보류.
 
 ## 제안 마이그레이션
 `supabase/migrations/20261480000000_college_db_p6_source_urls_and_reports.sql`
