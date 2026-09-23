@@ -673,3 +673,104 @@ docker 컨테이너가 세션 내내 수 분 간격으로 반복 재기동/재�
   값으로 채움) 이번 세션 스크립트들이 동작했다 — 이 파일은 `.gitignore` 대상이라
   커밋하지 않았다(다음 세션 담당자는 `npx supabase start` 후 `npx supabase status`
   값으로 직접 만들어야 함).
+
+## 9차 세션 (2026-09-23, 168개교 미실행분 이어서 실행 + 200개교 상태 확정)
+
+### 배경 확인
+세션 시작 전 `git log --oneline -5`로 HEAD가 지시받은 `7a7e15b`와 일치함을 확인,
+`git status --short`도 지난 세션이 남긴 두 로그 파일(`.university-*.log.json`,
+둘 다 `.gitignore` 대상 미커밋 산출물)만 있고 낯선 변경 없음을 확인 후 시작. 이
+세션 동안 다른 세션이 동시에 같은 워크트리를 건드리는 징후(문서/커밋 예기치 않은
+변경, DB 컨테이너 반복 재기동)는 관찰되지 않았다.
+
+### 완료
+1. `npm install` 확인(이미 `node_modules` 존재), `npx supabase db reset --local` 1회
+   깨끗하게 실행해 로컬 DB를 P10까지 전체 마이그레이션 적용된 빈 상태로 초기화.
+2. **pending 3건 재시도**: `University of New Hampshire`의 CDS 페이지는 이번
+   세션의 두 번째 검증 라운드에서 `approved`로 승격됨(첫 라운드는 타임아웃,
+   재시도로 확정). `Miami University`의 두 URL(`miamioh.edu/admission/`,
+   `miamioh.edu/oir/data/cds/`)은 매 시도 `fetch failed`로 실패 — 원인을 직접
+   진단한 결과 URL 자체 문제가 아니라 **이 로컬 macOS 환경의 Node.js가 시스템
+   신뢰 루트(root CA)를 사용하지 않아 TLS 인증서 체인을 검증하지 못하는 환경
+   문제**였다(`curl`은 같은 URL에 정상 301 응답, Node `fetch`는
+   `UNABLE_TO_VERIFY_LEAF_SIGNATURE`로 실패 — 직접 재현 확인). `safeFetch`에
+   `rejectUnauthorized: false` 등으로 인증서 검증을 완화해 억지로 통과시키는
+   것은 SSRF/보안 안전장치를 훼손하는 잘못된 해법이라 판단해 **적용하지
+   않았다** — Miami University 2건은 정직하게 `pending` 그대로 남겼다(다음
+   세션은 `node --use-system-ca` 실행 또는 이 macOS의 Node 빌드/CA 번들
+   설정을 먼저 점검할 것).
+3. **168개교 미실행분 이어서 실행**: `scripts/university-refresh-pipeline-run.ts`를
+   재실행해 approved 출처를 가진 파일럿 제외 학교 전체(이번 세션 기준 178개교)를
+   한 번에 한 학교씩 순차 처리(동시 실행 한도 3 준수, 스크립트가 이미 순차 실행이라
+   추가 조치 불필요) — **178개교 전부 `job=succeeded`로 완주**(에러/실패 job 0건).
+   총 338건의 변경안 생성: `no_change` 287건, `new` 50건(마감일 후보 발견),
+   `fetch_failed` 1건(어느 학교의 여러 승인 URL 중 1개만 실패, 그 학교 자체는
+   다른 URL로 `succeeded` 처리됨 — 대상 테이블 UPDATE는 여전히 전혀 없음, 기존
+   D 세션 설계 그대로).
+   - 재현 노트: DB를 중간에 한 번 더 `db reset`(테스트 실행 전 스키마 캐시 워밍업
+     확인 목적)했기 때문에, 위 pending 재시도/등록/검증/파이프라인 4단계를 리셋
+     전후로 **두 번** 실행했다. 두 실행 결과가 약간 다르다(1차: approved 317/
+     rejected 60/pending 3, 파이프라인 177개교, sources_pending_review 176개교
+     / 2차: approved 319→324/rejected 58/pending 3, 파이프라인 178개교,
+     sources_pending_review 178개교) — 이는 코드 버그가 아니라 실제 외부 사이트의
+     그 순간 응답 변동(University of Virginia·Oklahoma State 등 일부가 재시도에서
+     통과) 때문이며, **최종 반영된 상태는 두 번째(마지막) 실행 결과**다.
+4. `universities.data_collection_status` 최종 반영은 스크립트가 자동으로 수행함
+   (지시 4번 규칙 그대로: 실제 refresh 1회 이상 succeeded + no_change/new/changed
+   신호가 하나라도 있는 학교 → `sources_pending_review`, approved 출처가 없거나
+   전부 rejected/pending인 학교 → `unconfirmed` 유지, 파일럿 10개교는 변경 없음).
+   rejected 58건(2차 실행 기준)을 가진 12개교를 확인했으나 CSV 기반 후보
+   URL(admissions_homepage_url/common_data_set_url/catalog_programs_url/deadlines_url
+   4종 중 http(s) 값이 있는 것)이 이미 전부 등록·검증된 상태라 **대체 가능한
+   다른 후보 URL이 DB에 없음**을 직접 확인 — 정직하게 `unconfirmed`로 남겼다.
+
+### 200개교 최종 상태 분포 (psql 직접 확인, 2026-09-23, 이 세션 종료 시점)
+```
+data_collection_status  | count
+-------------------------+-------
+sources_pending_review  |   178
+unconfirmed              |    12
+verified_pilot           |    10
+                         |  ---
+합계                     |   200
+```
+`unconfirmed` 12개교: Ball State University, Baylor University, Catholic University
+of America, Columbia University, East Carolina University, Gonzaga University,
+Miami University(TLS 환경 문제, 위 2번 참고), North Carolina State University,
+Pace University, Texas A&M University, University of Michigan Ann Arbor, West
+Virginia University — 전부 CSV 후보 URL이 실제 fetch에서 404/403/robots 차단 등으로
+`rejected`되었고(Miami만 예외, 로컬 환경 TLS 문제) 대체 후보가 없다.
+
+`university_source_urls` 최종: `approved` 324건 / `rejected` 58건 / `pending` 3건.
+`university_update_proposals` 총 338건(이번 세션 마지막 파이프라인 실행분).
+
+### 검증
+- `npx supabase db reset --local` — P10까지 전체 마이그레이션 정상 적용(2회 실행,
+  둘 다 정상).
+- `npx tsc --noEmit -p .` — 신규 오류 없음(기존 `app/layout.tsx`의 `LayoutProps`
+  오류만 잔존, 무관, 이전 세션부터 있던 것).
+- `npx eslint scripts/university-source-urls-bulk-register.ts
+  scripts/university-source-urls-verify.ts scripts/university-source-urls-apply-log.ts
+  scripts/university-refresh-pipeline-run.ts` — 오류 없음.
+- `npm run test:integration:universities`(db reset 직후 1회 실행) — 3개 파일
+  14/14 전부 통과.
+- `npx supabase db push --linked`, `vercel deploy` 미실행(지시대로 금지).
+
+### 미완료 / 다음 세션 필요
+- Miami University 2개 URL — 로컬 macOS Node.js의 시스템 CA 미사용 문제로 이번
+  세션에서 재검증 실패. 코드는 건드리지 않았다(안전장치 완화는 부적절하다고 판단).
+  다음 세션은 `node --use-system-ca` 플래그로 재시도하거나, 이 문제가 CI/배포
+  환경에서도 재현되는지(로컬 macOS만의 문제인지) 먼저 확인 후 재시도.
+- 12개교(위 목록)는 CSV 레지스트리의 4종 후보 URL이 전부 소진·거절됐다 — 새 출처
+  URL을 사람이 직접 찾아 관리자 화면(`addUniversitySourceUrl`)으로 등록하지
+  않는 한 자동으로는 더 진행할 수 없다.
+- `sources_pending_review` 178개교에 쌓인 338건의 변경안은 전부 사람이 검토해야
+  하는 상태 그대로다(자동 승인 로직 없음, 기존 D 세션 설계 유지) — 관리자가
+  대학별 상세 화면에서 `RefreshAndProposalsSection`으로 하나씩 검토/승인해야
+  실제 학업지표/에세이 테이블에 반영된다.
+- 168개교 규모에서도 여전히 마감일 키워드 휴리스틱뿐 구조화 파서 없음(기존
+  결정 필요 항목 유지, 이번 세션에서 손대지 않음).
+- 190개교(비파일럿) 중 178개교가 `sources_pending_review`로 승격됐지만, 이는
+  "출처가 실제로 접근 가능하고 크롤 완주함"을 의미할 뿐 "정보가 검증됨"을
+  의미하지 않는다 — `verified_pilot`(실 UAT 완료)와는 여전히 명확히 구분된
+  상태임을 강조.
