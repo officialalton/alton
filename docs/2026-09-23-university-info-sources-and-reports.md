@@ -111,3 +111,64 @@
 `supabase/migrations/20261480000000_college_db_p6_source_urls_and_reports.sql`
 (원래 `20261473000000`이었으나 충돌 회피를 위해 rename, 내용 동일) — non-prod 반영 필요
 (이번 세션에서 `db push`는 실행하지 않음).
+
+## 4차 세션 (2026-09-23, 지시서 B: 합격·등록 학생 학업 지표) — 완료
+
+### 완료
+- **스키마 재확인**: `university_admission_cycles`(Part 4/5)에 이미 flat 컬럼으로
+  `sat_ebrw_25/75`, `sat_math_25/75`, `act_composite_25/75`, `gpa_25/75`,
+  `gpa_average`, `total_applicants`, `acceptance_rate`, `yield_rate` 등이 있으나
+  연도별로만 나뉘고 대상집단(지원자/합격자/등록자)·전체 vs 제출자만·공식/2차/미검증
+  구분·출처 링크·확인일을 표현할 수 없음을 확인(P4 데이터 삽입문의 `source_notes` 자유
+  텍스트로만 그 구분을 서술해 두고 있었음). 기존 컬럼은 삭제/변경하지 않았다.
+- **신규 마이그레이션**: `supabase/migrations/20261490000000_college_db_p7_admission_metrics.sql`
+  — `university_admission_metrics(id, university_id, cycle_year, cohort, metric_key,
+  value, value_text, unit, submitters_only, gpa_weighted, verification_status,
+  source_url_id, verified_at, notes, created_at, updated_at)`, unique
+  `(university_id, cycle_year, cohort, metric_key)`. RLS: 읽기는 인증 사용자 전원
+  (미검증 포함 — 정책상 숨기지 않음), 쓰기는 `is_admin()`만.
+- **서버 액션**(`lib/universities/actions.ts`): `listAdmissionMetrics`(관리자 전체 조회),
+  `loadAdmissionMetrics`(공개 조회, 로그인만 확인), `upsertAdmissionMetric`(unique 키
+  기준 upsert), `deleteAdmissionMetric`. 타입 `AdmissionMetric*` export.
+- **관리자 화면**(`app/admin/universities/UniversitiesPanel.tsx`):
+  `AdmissionMetricsSection` 추가 — 연도×대상집단×지표 테이블 + 값/단위/제출자만/검증상태/
+  비고 입력 폼, 행별 삭제 버튼, 검증상태 배지(공식/참고/미검증 색상 구분).
+- **공개 화면**(`app/components/CollegeExploreSection.tsx`): `AdmittedStudentProfileCard`
+  추가 — `ADMISSION_METRIC_DISPLAY_ORDER`로 고정된 순서·대상집단만 표시(가장 최신
+  연도 하나만 선택, 다른 연도 값으로 빈칸을 채우지 않도록 코드로 강제). 데이터
+  없는 지표는 "미공개", `value_text`만 있고 숫자가 없으면 "확인 필요"로 표시.
+  각 지표 옆에 대상집단·연도·검증상태 배지 노출.
+- **개인 합격확률 계산/변환 기능 없음** — 스키마·서버 액션·화면 어디에도 추가하지 않았다.
+- **실데이터 백필**: 기존 P4 조사 문서(`university_admission_cycles` 2027 사이클,
+  Princeton/MIT/Harvard/Stanford/Yale — 총 5개교, 지시서 요구 3~5개교 충족)의
+  SAT/ACT/GPA/지원자수/합격률/등록률 값을 원본 `source_notes`를 재검토해 이관.
+  "미검증/미확인"으로 명시된 값(Princeton SAT·ACT, MIT SAT 합산, Harvard SAT 합산)은
+  `verification_status='unverified'`로, 나머지 2차자료성 값은 `'secondary'`로 표시
+  (이 백필에 `'official'`은 없음 — CDS 원문 직접 대조 전까지 공식으로 표시하지 않음).
+  추측으로 채운 값 없음.
+
+### 검증
+- `supabase db reset --local` — 전체 마이그레이션(P7 포함) 정상 적용 확인.
+- `psql`로 `university_admission_metrics` 백필 데이터 33행 확인(5개교 × 지표 수).
+- `npx tsc --noEmit` — 이번 변경 관련 신규 오류 없음(기존 `app/layout.tsx`의
+  `LayoutProps` 오류만 남음, 무관한 사전 존재 이슈).
+- `npx eslint lib/universities/actions.ts app/admin/universities/UniversitiesPanel.tsx
+  app/components/CollegeExploreSection.tsx` — 오류 없음.
+- `npx vitest run scripts/universities-seed.test.ts` — 3/3 통과(이 영역 유일한 기존
+  테스트, 새 테이블에 대한 전용 테스트는 작성하지 않음 — 컴포넌트/액션 테스트가
+  이 영역에 원래 없던 관례를 따름, 아래 결정 필요 참고).
+- `npx supabase db push --linked`, `vercel deploy` 미실행(지시대로 금지).
+
+### 미완료 (다음 세션이 이어감)
+- **C(에세이 프롬프트 확장)** — 착수하지 않음. `university_essay_prompts`는 존재하나
+  공통/자체/짧은답변/조건부(단과대·전공)/선택규칙 구분 컬럼 없음(3차 세션 메모와 동일).
+- **D(수집봇)** — 착수하지 않음.
+- **E(10개교 UAT → 200개교 상태 관리)** — 착수하지 않음.
+
+### 결정 필요
+- `university_admission_metrics`에 대한 전용 vitest(액션 단위 테스트)가 없다 —
+  이 영역의 다른 서버 액션들도 대부분 DB 연동 통합 테스트가 없는 관례라 이번에도
+  추가하지 않았지만, C/D/E 이후 한 번은 액션 계층 테스트를 갖출지 결정이 필요하다.
+- 관리자 화면의 지표 입력 폼이 지표당 1행씩 개별 저장하는 단순 폼이다(엑셀처럼
+  여러 지표를 한 번에 붙여넣는 대량 입력 UI는 아님) — 200개교 규모로 갈 때 이대로 충분한지
+  다음 세션(E)에서 재검토 필요.

@@ -5,7 +5,20 @@
 // 대학 관련 학생 진입점은 로드맵 탭 안에 둔다). 읽기 전용 — 합격 확률/가능성 예측은 정책상 없다.
 
 import { useEffect, useState, useTransition } from "react";
-import { listUniversities, getUniversityDetailForStudent, type UniversitySummary, type UniversityDetail, type AdmissionCycle, type UniversityMajor, type UniversityUpdateEntry, type EssayPrompt, type UniversitySourceUrl } from "@/lib/universities/actions";
+import {
+  listUniversities,
+  getUniversityDetailForStudent,
+  loadAdmissionMetrics,
+  type UniversitySummary,
+  type UniversityDetail,
+  type AdmissionCycle,
+  type AdmissionMetric,
+  type AdmissionMetricCohort,
+  type UniversityMajor,
+  type UniversityUpdateEntry,
+  type EssayPrompt,
+  type UniversitySourceUrl,
+} from "@/lib/universities/actions";
 import { listMySubmittedSourceUrls, proposeUniversitySourceUrl, reportUniversityDataIssue } from "@/lib/universities/user-actions";
 
 const SOURCE_TYPE_LABEL: Record<string, string> = {
@@ -96,6 +109,7 @@ function CollegeDetail({
   canProposeSourceUrl?: boolean;
 }) {
   const [detail, setDetail] = useState<{ university: UniversityDetail; cycles: AdmissionCycle[]; updates: UniversityUpdateEntry[]; majors: UniversityMajor[]; essayPrompts: EssayPrompt[]; sourceUrls: UniversitySourceUrl[] } | null>(null);
+  const [metrics, setMetrics] = useState<AdmissionMetric[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -106,6 +120,13 @@ function CollegeDetail({
       })
       .catch((e) => {
         if (!cancelled) setError(e instanceof Error ? e.message : "대학 정보를 불러오지 못했습니다.");
+      });
+    loadAdmissionMetrics(universityId)
+      .then((m) => {
+        if (!cancelled) setMetrics(m);
+      })
+      .catch(() => {
+        if (!cancelled) setMetrics([]);
       });
     return () => {
       cancelled = true;
@@ -162,6 +183,8 @@ function CollegeDetail({
           </div>
 
           {detail.cycles[0] && <AdmissionCycleCard cycle={detail.cycles[0]} />}
+
+          {metrics && metrics.length > 0 && <AdmittedStudentProfileCard metrics={metrics} />}
 
           {detail.essayPrompts.length > 0 && (
             <div className={cardClass}>
@@ -424,6 +447,112 @@ function stat(label: string, value: string | number | null | undefined) {
     <div>
       <div className="text-grey-300 text-[10.5px] font-bold mb-0.5">{label}</div>
       <div className="font-bold text-ink text-[12.5px]">{value}</div>
+    </div>
+  );
+}
+
+const ADMISSION_METRIC_LABEL: Record<string, string> = {
+  sat_total_25: "SAT 총점 25th",
+  sat_total_75: "SAT 총점 75th",
+  sat_ebrw_25: "SAT EBRW 25th",
+  sat_ebrw_75: "SAT EBRW 75th",
+  sat_math_25: "SAT Math 25th",
+  sat_math_75: "SAT Math 75th",
+  act_composite_25: "ACT Composite 25th",
+  act_composite_75: "ACT Composite 75th",
+  gpa_average: "GPA 평균",
+  top10pct_pct: "고교 상위 10% 비율",
+  ap_ib_indicator: "AP/IB 지표",
+  applicants_count: "지원자 수",
+  admitted_count: "합격자 수",
+  enrolled_count: "등록자 수",
+  admit_rate: "합격률",
+  yield_rate: "등록률(수율)",
+};
+
+// 화면에 항상 이 순서·이 대상집단으로 노출한다(연도가 섞이지 않도록 강제) — 지시서 요구사항:
+// "각 지표는 동일 순서·단위로 표시... 빈칸에 다른 연도값 끼워넣기 금지".
+const ADMISSION_METRIC_DISPLAY_ORDER: { metricKey: string; cohort: AdmissionMetricCohort }[] = [
+  { metricKey: "sat_total_25", cohort: "admitted" },
+  { metricKey: "sat_total_75", cohort: "admitted" },
+  { metricKey: "sat_ebrw_25", cohort: "admitted" },
+  { metricKey: "sat_ebrw_75", cohort: "admitted" },
+  { metricKey: "sat_math_25", cohort: "admitted" },
+  { metricKey: "sat_math_75", cohort: "admitted" },
+  { metricKey: "act_composite_25", cohort: "admitted" },
+  { metricKey: "act_composite_75", cohort: "admitted" },
+  { metricKey: "gpa_average", cohort: "admitted" },
+  { metricKey: "top10pct_pct", cohort: "admitted" },
+  { metricKey: "ap_ib_indicator", cohort: "admitted" },
+  { metricKey: "applicants_count", cohort: "applicant" },
+  { metricKey: "admitted_count", cohort: "admitted" },
+  { metricKey: "enrolled_count", cohort: "enrolled" },
+  { metricKey: "admit_rate", cohort: "admitted" },
+  { metricKey: "yield_rate", cohort: "enrolled" },
+];
+
+const ADMISSION_METRIC_VERIFICATION_LABEL: Record<string, string> = {
+  official: "공식",
+  secondary: "참고",
+  unverified: "미검증",
+};
+
+const ADMISSION_METRIC_COHORT_LABEL: Record<AdmissionMetricCohort, string> = {
+  applicant: "지원자",
+  admitted: "합격자",
+  enrolled: "등록자",
+};
+
+/**
+ * 합격·등록 학생 학업 지표(Admitted Student Profile, P7 2026-09-23). 가장 최신 연도 하나만
+ * 골라 고정된 순서·대상집단으로 표시한다 — 다른 연도 값을 섞어 빈칸을 채우지 않는다(정책상 금지).
+ * 데이터가 없는 지표는 "미공개"로, 미검증 값은 배지로 명시(숨기지 않음).
+ */
+function AdmittedStudentProfileCard({ metrics }: { metrics: AdmissionMetric[] }) {
+  const latestYear = metrics.reduce((max, m) => Math.max(max, m.cycleYear), 0);
+  const latestMetrics = metrics.filter((m) => m.cycleYear === latestYear);
+
+  return (
+    <div className={cardClass}>
+      <div className={cardTitleClass}>Admitted Student Profile ({latestYear} 사이클)</div>
+      <div className="grid grid-cols-2 gap-3">
+        {ADMISSION_METRIC_DISPLAY_ORDER.map(({ metricKey, cohort }) => {
+          const found = latestMetrics.find((m) => m.metricKey === metricKey && m.cohort === cohort);
+          const label = ADMISSION_METRIC_LABEL[metricKey] ?? metricKey;
+          if (!found) {
+            return (
+              <div key={metricKey}>
+                <div className="text-grey-300 text-[10.5px] font-bold mb-0.5">{label}</div>
+                <div className="text-grey-400 text-[12.5px]">미공개</div>
+              </div>
+            );
+          }
+          const displayValue = found.value != null ? `${found.value}${found.unit ? ` ${found.unit}` : ""}` : (found.valueText ?? "확인 필요");
+          return (
+            <div key={metricKey}>
+              <div className="text-grey-300 text-[10.5px] font-bold mb-0.5">{label}</div>
+              <div className="font-bold text-ink text-[12.5px]">
+                {displayValue}
+                {found.submittersOnly ? " (제출자만)" : ""}
+              </div>
+              <div className="text-[10px] text-grey-400 mt-0.5">
+                {ADMISSION_METRIC_COHORT_LABEL[found.cohort]} · {found.cycleYear}
+                <span
+                  className={`ml-1 rounded px-1 py-0.5 ${
+                    found.verificationStatus === "official"
+                      ? "bg-green-100 text-green-700"
+                      : found.verificationStatus === "secondary"
+                        ? "bg-yellow-100 text-yellow-700"
+                        : "bg-red-100 text-red"
+                  }`}
+                >
+                  {ADMISSION_METRIC_VERIFICATION_LABEL[found.verificationStatus]}
+                </span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

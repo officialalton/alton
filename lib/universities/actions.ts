@@ -722,3 +722,174 @@ export async function resolveUniversityDataReport(input: {
   if (error) throw new Error(error.message);
   revalidatePath("/admin/universities");
 }
+
+// --- 합격·등록 학생 학업 지표(Admitted Student Profile, P7 2026-09-23) ------------
+//
+// 정책: 개인 합격확률 계산/변환 기능은 여기 없다(정책상 금지, 기존 원칙과 동일).
+// 스키마: supabase/migrations/20261490000000_college_db_p7_admission_metrics.sql
+
+export type AdmissionMetricCohort = "applicant" | "admitted" | "enrolled";
+export type AdmissionMetricKey =
+  | "sat_total_25"
+  | "sat_total_75"
+  | "sat_ebrw_25"
+  | "sat_ebrw_75"
+  | "sat_math_25"
+  | "sat_math_75"
+  | "act_composite_25"
+  | "act_composite_75"
+  | "gpa_average"
+  | "top10pct_pct"
+  | "ap_ib_indicator"
+  | "applicants_count"
+  | "admitted_count"
+  | "enrolled_count"
+  | "admit_rate"
+  | "yield_rate";
+export type AdmissionMetricVerificationStatus = "official" | "secondary" | "unverified";
+
+export type AdmissionMetric = {
+  id: string;
+  universityId: string;
+  cycleYear: number;
+  cohort: AdmissionMetricCohort;
+  metricKey: AdmissionMetricKey;
+  value: number | null;
+  valueText: string | null;
+  unit: string | null;
+  submittersOnly: boolean;
+  gpaWeighted: boolean | null;
+  verificationStatus: AdmissionMetricVerificationStatus;
+  sourceUrlId: string | null;
+  verifiedAt: string | null;
+  notes: string | null;
+  createdAt: string;
+};
+
+function mapAdmissionMetricRow(row: {
+  id: string;
+  university_id: string;
+  cycle_year: number;
+  cohort: AdmissionMetricCohort;
+  metric_key: AdmissionMetricKey;
+  value: number | null;
+  value_text: string | null;
+  unit: string | null;
+  submitters_only: boolean;
+  gpa_weighted: boolean | null;
+  verification_status: AdmissionMetricVerificationStatus;
+  source_url_id: string | null;
+  verified_at: string | null;
+  notes: string | null;
+  created_at: string;
+}): AdmissionMetric {
+  return {
+    id: row.id,
+    universityId: row.university_id,
+    cycleYear: row.cycle_year,
+    cohort: row.cohort,
+    metricKey: row.metric_key,
+    value: row.value,
+    valueText: row.value_text,
+    unit: row.unit,
+    submittersOnly: row.submitters_only,
+    gpaWeighted: row.gpa_weighted,
+    verificationStatus: row.verification_status,
+    sourceUrlId: row.source_url_id,
+    verifiedAt: row.verified_at,
+    notes: row.notes,
+    createdAt: row.created_at,
+  };
+}
+
+const ADMISSION_METRIC_COLUMNS =
+  "id, university_id, cycle_year, cohort, metric_key, value, value_text, unit, submitters_only, gpa_weighted, verification_status, source_url_id, verified_at, notes, created_at";
+
+/** 관리자 화면 — 대학 하나의 학업 지표 전체(모든 연도·대상집단) 조회, 편집 화면용. */
+export async function listAdmissionMetrics(universityId: string): Promise<AdmissionMetric[]> {
+  await requireAdmin();
+  const db = createAdminClient();
+  const { data, error } = await db
+    .from("university_admission_metrics")
+    .select(ADMISSION_METRIC_COLUMNS)
+    .eq("university_id", universityId)
+    .order("cycle_year", { ascending: false })
+    .order("cohort", { ascending: true })
+    .order("metric_key", { ascending: true });
+  if (error) throw new Error(error.message);
+  return (data ?? []).map(mapAdmissionMetricRow);
+}
+
+/**
+ * 공개 조회 — 학생/보호자/컨설턴트 화면용. 미검증(unverified) 포함 전부 반환한다
+ * (정책상 숨기지 않음 — 화면에서 검증상태 배지로 명시). cycle_year 내림차순, cohort/metric_key
+ * 순으로 정렬해 반환하므로 화면은 그대로 그룹핑해서 쓰면 된다.
+ */
+export async function loadAdmissionMetrics(universityId: string): Promise<AdmissionMetric[]> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("로그인이 필요합니다.");
+  const db = createAdminClient();
+  const { data, error } = await db
+    .from("university_admission_metrics")
+    .select(ADMISSION_METRIC_COLUMNS)
+    .eq("university_id", universityId)
+    .order("cycle_year", { ascending: false })
+    .order("cohort", { ascending: true })
+    .order("metric_key", { ascending: true });
+  if (error) throw new Error(error.message);
+  return (data ?? []).map(mapAdmissionMetricRow);
+}
+
+export type UpsertAdmissionMetricInput = {
+  universityId: string;
+  cycleYear: number;
+  cohort: AdmissionMetricCohort;
+  metricKey: AdmissionMetricKey;
+  value?: number | null;
+  valueText?: string | null;
+  unit?: string | null;
+  submittersOnly?: boolean;
+  gpaWeighted?: boolean | null;
+  verificationStatus: AdmissionMetricVerificationStatus;
+  sourceUrlId?: string | null;
+  notes?: string | null;
+};
+
+/** 관리자 — 지표 추가/수정(연도×대상집단×지표 unique 키 기준 upsert). */
+export async function upsertAdmissionMetric(input: UpsertAdmissionMetricInput): Promise<void> {
+  await requireAdmin();
+  const db = createAdminClient();
+  const { error } = await db.from("university_admission_metrics").upsert(
+    {
+      university_id: input.universityId,
+      cycle_year: input.cycleYear,
+      cohort: input.cohort,
+      metric_key: input.metricKey,
+      value: input.value ?? null,
+      value_text: input.valueText ?? null,
+      unit: input.unit ?? null,
+      submitters_only: input.submittersOnly ?? false,
+      gpa_weighted: input.gpaWeighted ?? null,
+      verification_status: input.verificationStatus,
+      source_url_id: input.sourceUrlId ?? null,
+      verified_at: input.verificationStatus === "official" ? new Date().toISOString() : null,
+      notes: input.notes ?? null,
+      updated_at: new Date().toISOString(),
+    },
+    { onConflict: "university_id,cycle_year,cohort,metric_key" },
+  );
+  if (error) throw new Error(error.message);
+  revalidatePath("/admin/universities");
+}
+
+/** 관리자 — 지표 삭제. */
+export async function deleteAdmissionMetric(metricId: string): Promise<void> {
+  await requireAdmin();
+  const db = createAdminClient();
+  const { error } = await db.from("university_admission_metrics").delete().eq("id", metricId);
+  if (error) throw new Error(error.message);
+  revalidatePath("/admin/universities");
+}

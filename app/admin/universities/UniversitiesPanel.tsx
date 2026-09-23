@@ -4,7 +4,9 @@ import { useEffect, useState, useTransition } from "react";
 import {
   addUniversitySourceUrl,
   addUniversityUpdate,
+  deleteAdmissionMetric,
   getUniversityDetail,
+  listAdmissionMetrics,
   listUniversities,
   listUniversityDataReports,
   listUniversitySourceUrls,
@@ -12,7 +14,12 @@ import {
   reviewUniversitySourceUrl,
   updateUniversityBasics,
   upsertAdmissionCycle,
+  upsertAdmissionMetric,
   type AdmissionCycle,
+  type AdmissionMetric,
+  type AdmissionMetricCohort,
+  type AdmissionMetricKey,
+  type AdmissionMetricVerificationStatus,
   type SourceUrlType,
   type UniversityDataReport,
   type UniversityDetail,
@@ -20,6 +27,37 @@ import {
   type UniversitySummary,
   type UniversityUpdateEntry,
 } from "@/lib/universities/actions";
+
+const ADMISSION_METRIC_KEY_OPTIONS: { value: AdmissionMetricKey; label: string }[] = [
+  { value: "sat_total_25", label: "SAT 총점 25th" },
+  { value: "sat_total_75", label: "SAT 총점 75th" },
+  { value: "sat_ebrw_25", label: "SAT EBRW 25th" },
+  { value: "sat_ebrw_75", label: "SAT EBRW 75th" },
+  { value: "sat_math_25", label: "SAT Math 25th" },
+  { value: "sat_math_75", label: "SAT Math 75th" },
+  { value: "act_composite_25", label: "ACT Composite 25th" },
+  { value: "act_composite_75", label: "ACT Composite 75th" },
+  { value: "gpa_average", label: "GPA 평균" },
+  { value: "top10pct_pct", label: "상위 10% 비율" },
+  { value: "ap_ib_indicator", label: "AP/IB 지표" },
+  { value: "applicants_count", label: "지원자 수" },
+  { value: "admitted_count", label: "합격자 수" },
+  { value: "enrolled_count", label: "등록자 수" },
+  { value: "admit_rate", label: "합격률" },
+  { value: "yield_rate", label: "등록률(수율)" },
+];
+
+const ADMISSION_METRIC_COHORT_OPTIONS: { value: AdmissionMetricCohort; label: string }[] = [
+  { value: "applicant", label: "지원자" },
+  { value: "admitted", label: "합격자" },
+  { value: "enrolled", label: "등록자" },
+];
+
+const ADMISSION_METRIC_VERIFICATION_OPTIONS: { value: AdmissionMetricVerificationStatus; label: string }[] = [
+  { value: "official", label: "공식" },
+  { value: "secondary", label: "참고(2차자료)" },
+  { value: "unverified", label: "미검증" },
+];
 
 const SOURCE_TYPE_OPTIONS: { value: SourceUrlType; label: string }[] = [
   { value: "admissions_homepage", label: "입학처 홈페이지" },
@@ -502,6 +540,7 @@ function UniversityDetailPanel({
         </button>
       </div>
 
+      <AdmissionMetricsSection universityId={detail.id} setError={setError} />
       <SourceUrlsSection universityId={detail.id} setError={setError} />
       <ReportsInboxSection universityId={detail.id} setError={setError} />
     </div>
@@ -630,6 +669,231 @@ function ReportsInboxSection({
           </li>
         ))}
       </ul>
+    </div>
+  );
+}
+
+/** 대학 상세 화면의 "학업 지표" 섹션 — 연도×대상집단×지표 편집(P7, 2026-09-23). */
+function AdmissionMetricsSection({
+  universityId,
+  setError,
+}: {
+  universityId: string;
+  setError: (msg: string | null) => void;
+}) {
+  const [items, setItems] = useState<AdmissionMetric[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [isPending, startTransition] = useTransition();
+
+  const [cycleYear, setCycleYear] = useState(String(CURRENT_CYCLE_YEAR));
+  const [cohort, setCohort] = useState<AdmissionMetricCohort>("admitted");
+  const [metricKey, setMetricKey] = useState<AdmissionMetricKey>("sat_total_25");
+  const [value, setValue] = useState("");
+  const [unit, setUnit] = useState("");
+  const [submittersOnly, setSubmittersOnly] = useState(false);
+  const [verificationStatus, setVerificationStatus] = useState<AdmissionMetricVerificationStatus>("secondary");
+  const [notes, setNotes] = useState("");
+
+  function refresh() {
+    setLoading(true);
+    startTransition(async () => {
+      try {
+        setItems(await listAdmissionMetrics(universityId));
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "학업 지표 조회 중 오류가 발생했습니다.");
+      } finally {
+        setLoading(false);
+      }
+    });
+  }
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
+    refresh();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [universityId]);
+
+  function save() {
+    if (!cycleYear.trim() || !value.trim()) return;
+    setError(null);
+    startTransition(async () => {
+      try {
+        await upsertAdmissionMetric({
+          universityId,
+          cycleYear: Number(cycleYear),
+          cohort,
+          metricKey,
+          value: Number(value),
+          unit: unit.trim() || null,
+          submittersOnly,
+          verificationStatus,
+          notes: notes.trim() || null,
+        });
+        setValue("");
+        setUnit("");
+        setNotes("");
+        refresh();
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "학업 지표 저장 중 오류가 발생했습니다.");
+      }
+    });
+  }
+
+  function remove(metricId: string) {
+    setError(null);
+    startTransition(async () => {
+      try {
+        await deleteAdmissionMetric(metricId);
+        refresh();
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "학업 지표 삭제 중 오류가 발생했습니다.");
+      }
+    });
+  }
+
+  const cohortLabel: Record<AdmissionMetricCohort, string> = {
+    applicant: "지원자",
+    admitted: "합격자",
+    enrolled: "등록자",
+  };
+  const verificationLabel: Record<AdmissionMetricVerificationStatus, string> = {
+    official: "공식",
+    secondary: "참고(2차자료)",
+    unverified: "미검증",
+  };
+
+  return (
+    <div className="mt-6 border-t border-grey-200 pt-4">
+      <h3 className="text-sm font-semibold text-ink">학업 지표(합격·등록 학생 프로필)</h3>
+      {loading && <p className="text-xs text-grey-400">불러오는 중…</p>}
+      <table className="mt-2 w-full text-xs text-grey-600">
+        <thead>
+          <tr className="text-left text-grey-400">
+            <th className="pr-2">연도</th>
+            <th className="pr-2">대상집단</th>
+            <th className="pr-2">지표</th>
+            <th className="pr-2">값</th>
+            <th className="pr-2">검증상태</th>
+            <th className="pr-2">비고</th>
+            <th />
+          </tr>
+        </thead>
+        <tbody>
+          {!loading && items.length === 0 && (
+            <tr>
+              <td colSpan={7} className="text-grey-400">
+                등록된 학업 지표가 없습니다.
+              </td>
+            </tr>
+          )}
+          {items.map((m) => (
+            <tr key={m.id} className="border-t border-grey-100">
+              <td className="pr-2 py-1">{m.cycleYear}</td>
+              <td className="pr-2 py-1">{cohortLabel[m.cohort]}</td>
+              <td className="pr-2 py-1">{ADMISSION_METRIC_KEY_OPTIONS.find((o) => o.value === m.metricKey)?.label ?? m.metricKey}</td>
+              <td className="pr-2 py-1">
+                {m.value ?? m.valueText ?? "-"}
+                {m.unit ? ` ${m.unit}` : ""}
+                {m.submittersOnly ? " (제출자만)" : ""}
+              </td>
+              <td className="pr-2 py-1">
+                <span
+                  className={`rounded px-1.5 py-0.5 text-[11px] ${
+                    m.verificationStatus === "official"
+                      ? "bg-green-100 text-green-700"
+                      : m.verificationStatus === "secondary"
+                        ? "bg-yellow-100 text-yellow-700"
+                        : "bg-red-100 text-red"
+                  }`}
+                >
+                  {verificationLabel[m.verificationStatus]}
+                </span>
+              </td>
+              <td className="pr-2 py-1 max-w-[200px] truncate" title={m.notes ?? undefined}>
+                {m.notes ?? ""}
+              </td>
+              <td className="py-1">
+                <button
+                  type="button"
+                  disabled={isPending}
+                  onClick={() => remove(m.id)}
+                  className="rounded border border-grey-300 px-2 py-0.5 text-[11px] text-grey-700 disabled:opacity-50"
+                >
+                  삭제
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
+        <input
+          type="number"
+          placeholder="연도"
+          value={cycleYear}
+          onChange={(e) => setCycleYear(e.target.value)}
+          className="rounded border border-grey-300 px-2 py-1 text-sm"
+        />
+        <select value={cohort} onChange={(e) => setCohort(e.target.value as AdmissionMetricCohort)} className="rounded border border-grey-300 px-2 py-1 text-sm">
+          {ADMISSION_METRIC_COHORT_OPTIONS.map((o) => (
+            <option key={o.value} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+        <select value={metricKey} onChange={(e) => setMetricKey(e.target.value as AdmissionMetricKey)} className="rounded border border-grey-300 px-2 py-1 text-sm">
+          {ADMISSION_METRIC_KEY_OPTIONS.map((o) => (
+            <option key={o.value} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+        <input
+          type="number"
+          placeholder="값"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          className="rounded border border-grey-300 px-2 py-1 text-sm"
+        />
+        <input
+          type="text"
+          placeholder="단위(예: score, pct, count)"
+          value={unit}
+          onChange={(e) => setUnit(e.target.value)}
+          className="rounded border border-grey-300 px-2 py-1 text-sm"
+        />
+        <select
+          value={verificationStatus}
+          onChange={(e) => setVerificationStatus(e.target.value as AdmissionMetricVerificationStatus)}
+          className="rounded border border-grey-300 px-2 py-1 text-sm"
+        >
+          {ADMISSION_METRIC_VERIFICATION_OPTIONS.map((o) => (
+            <option key={o.value} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+        <label className="flex items-center gap-2 text-xs text-grey-600">
+          <input type="checkbox" checked={submittersOnly} onChange={(e) => setSubmittersOnly(e.target.checked)} />
+          제출자만
+        </label>
+        <input
+          type="text"
+          placeholder="비고(출처/메모)"
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+          className="col-span-2 rounded border border-grey-300 px-2 py-1 text-sm sm:col-span-4"
+        />
+      </div>
+      <button
+        type="button"
+        disabled={isPending}
+        onClick={save}
+        className="mt-2 rounded bg-ink px-3 py-1.5 text-sm text-white disabled:opacity-50"
+      >
+        학업 지표 저장
+      </button>
     </div>
   );
 }
