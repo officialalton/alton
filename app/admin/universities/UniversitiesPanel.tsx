@@ -1,17 +1,33 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import {
+  addUniversitySourceUrl,
   addUniversityUpdate,
   getUniversityDetail,
   listUniversities,
+  listUniversitySourceUrls,
+  reviewUniversitySourceUrl,
   updateUniversityBasics,
   upsertAdmissionCycle,
   type AdmissionCycle,
+  type SourceUrlType,
   type UniversityDetail,
+  type UniversitySourceUrl,
   type UniversitySummary,
   type UniversityUpdateEntry,
 } from "@/lib/universities/actions";
+
+const SOURCE_TYPE_OPTIONS: { value: SourceUrlType; label: string }[] = [
+  { value: "admissions_homepage", label: "입학처 홈페이지" },
+  { value: "common_data_set", label: "Common Data Set" },
+  { value: "catalog_programs", label: "카탈로그/전공" },
+  { value: "deadlines", label: "지원 마감일" },
+  { value: "essay_prompts", label: "에세이 문항" },
+  { value: "admitted_profile", label: "합격자 프로필" },
+  { value: "financial_aid", label: "재정지원" },
+  { value: "other", label: "기타" },
+];
 
 const CURRENT_CYCLE_YEAR = 2027;
 
@@ -480,6 +496,180 @@ function UniversityDetailPanel({
           className="rounded bg-ink px-3 py-1.5 text-sm text-white disabled:opacity-50"
         >
           업데이트 추가
+        </button>
+      </div>
+
+      <SourceUrlsSection universityId={detail.id} setError={setError} />
+    </div>
+  );
+}
+
+/** 대학 상세 화면의 "출처 URL" 섹션 — 목록 조회, 직접 등록(즉시 승인), 제안 승인/반려. */
+function SourceUrlsSection({
+  universityId,
+  setError,
+}: {
+  universityId: string;
+  setError: (msg: string | null) => void;
+}) {
+  const [items, setItems] = useState<UniversitySourceUrl[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [isPending, startTransition] = useTransition();
+
+  const [newUrl, setNewUrl] = useState("");
+  const [newType, setNewType] = useState<SourceUrlType>("admissions_homepage");
+  const [newCycleYear, setNewCycleYear] = useState("");
+  const [newIsOfficial, setNewIsOfficial] = useState(true);
+
+  function refresh() {
+    setLoading(true);
+    startTransition(async () => {
+      try {
+        setItems(await listUniversitySourceUrls(universityId));
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "출처 URL 조회 중 오류가 발생했습니다.");
+      } finally {
+        setLoading(false);
+      }
+    });
+  }
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
+    refresh();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [universityId]);
+
+  function addUrl() {
+    if (!newUrl.trim()) return;
+    setError(null);
+    startTransition(async () => {
+      try {
+        await addUniversitySourceUrl({
+          universityId,
+          url: newUrl.trim(),
+          sourceType: newType,
+          cycleYear: newCycleYear ? Number(newCycleYear) : null,
+          isOfficial: newIsOfficial,
+        });
+        setNewUrl("");
+        setNewCycleYear("");
+        refresh();
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "출처 URL 등록 중 오류가 발생했습니다.");
+      }
+    });
+  }
+
+  function review(sourceUrlId: string, approve: boolean) {
+    setError(null);
+    startTransition(async () => {
+      try {
+        await reviewUniversitySourceUrl({ sourceUrlId, approve });
+        refresh();
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "검토 처리 중 오류가 발생했습니다.");
+      }
+    });
+  }
+
+  const statusLabel: Record<UniversitySourceUrl["status"], string> = {
+    pending: "검토 대기",
+    approved: "승인됨",
+    rejected: "반려됨",
+  };
+
+  return (
+    <div className="mt-6 border-t border-grey-200 pt-4">
+      <h3 className="text-sm font-semibold text-ink">출처 URL</h3>
+      {loading && <p className="text-xs text-grey-400">불러오는 중…</p>}
+      <ul className="mt-2 space-y-1 text-xs text-grey-600">
+        {!loading && items.length === 0 && <li className="text-grey-400">등록된 출처 URL이 없습니다.</li>}
+        {items.map((s) => (
+          <li key={s.id} className="rounded border border-grey-100 p-2">
+            <div className="flex items-center justify-between gap-2">
+              <a href={s.url} target="_blank" rel="noreferrer" className="truncate text-blue-600 underline">
+                {s.url}
+              </a>
+              <span
+                className={`shrink-0 rounded px-1.5 py-0.5 text-[11px] ${
+                  s.status === "approved"
+                    ? "bg-green-100 text-green-700"
+                    : s.status === "rejected"
+                      ? "bg-red-100 text-red"
+                      : "bg-yellow-100 text-yellow-700"
+                }`}
+              >
+                {statusLabel[s.status]}
+              </span>
+            </div>
+            <p className="mt-1 text-grey-500">
+              {SOURCE_TYPE_OPTIONS.find((o) => o.value === s.sourceType)?.label ?? s.sourceType}
+              {s.cycleYear ? ` · ${s.cycleYear}` : ""} · {s.isOfficial ? "공식" : "비공식/참고"}
+            </p>
+            {s.status === "pending" && (
+              <div className="mt-1 flex gap-2">
+                <button
+                  type="button"
+                  disabled={isPending}
+                  onClick={() => review(s.id, true)}
+                  className="rounded bg-ink px-2 py-1 text-[11px] text-white disabled:opacity-50"
+                >
+                  승인
+                </button>
+                <button
+                  type="button"
+                  disabled={isPending}
+                  onClick={() => review(s.id, false)}
+                  className="rounded border border-grey-300 px-2 py-1 text-[11px] text-grey-700 disabled:opacity-50"
+                >
+                  반려
+                </button>
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+
+      <div className="mt-3 space-y-2">
+        <input
+          type="text"
+          placeholder="https://... (공식 출처 URL)"
+          value={newUrl}
+          onChange={(e) => setNewUrl(e.target.value)}
+          className="w-full rounded border border-grey-300 px-2 py-1 text-sm"
+        />
+        <div className="flex gap-2">
+          <select
+            value={newType}
+            onChange={(e) => setNewType(e.target.value as SourceUrlType)}
+            className="flex-1 rounded border border-grey-300 px-2 py-1 text-sm"
+          >
+            {SOURCE_TYPE_OPTIONS.map((o) => (
+              <option key={o.value} value={o.value}>
+                {o.label}
+              </option>
+            ))}
+          </select>
+          <input
+            type="number"
+            placeholder="연도"
+            value={newCycleYear}
+            onChange={(e) => setNewCycleYear(e.target.value)}
+            className="w-24 rounded border border-grey-300 px-2 py-1 text-sm"
+          />
+        </div>
+        <label className="flex items-center gap-2 text-xs text-grey-600">
+          <input type="checkbox" checked={newIsOfficial} onChange={(e) => setNewIsOfficial(e.target.checked)} />
+          공식 출처
+        </label>
+        <button
+          type="button"
+          disabled={isPending}
+          onClick={addUrl}
+          className="rounded bg-ink px-3 py-1.5 text-sm text-white disabled:opacity-50"
+        >
+          출처 URL 등록(즉시 승인)
         </button>
       </div>
     </div>
