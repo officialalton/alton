@@ -9,7 +9,13 @@ import type { ConsultantStudent } from "./consultant-data";
 import type { IntakeConsultation } from "./intake-data";
 import { markConsultationContactedAction } from "./intake-actions";
 import type { ConsultantAvailabilityRule } from "./availability-actions";
-import { listMyAvailabilityRulesAction, addMyAvailabilityRuleAction, deactivateMyAvailabilityRuleAction } from "./availability-actions";
+import {
+  listMyAvailabilityRulesAction,
+  addMyAvailabilityRuleAction,
+  deactivateMyAvailabilityRuleAction,
+  loadMyAcceptingNewWorkAction,
+  setMyAcceptingNewWorkAction,
+} from "./availability-actions";
 
 type NavId = "students" | "assignments" | "schedule";
 
@@ -177,6 +183,7 @@ function AvailabilityPanel() {
   const [endTime, setEndTime] = useState("17:00");
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [acceptingNewWork, setAcceptingNewWork] = useState<boolean | null>(null);
 
   function reload() {
     listMyAvailabilityRulesAction()
@@ -185,7 +192,22 @@ function AvailabilityPanel() {
   }
   useEffect(() => {
     reload();
+    loadMyAcceptingNewWorkAction().then(setAcceptingNewWork).catch(() => setAcceptingNewWork(true));
   }, []);
+
+  async function handleToggleAcceptingNewWork() {
+    if (acceptingNewWork === null) return;
+    const next = !acceptingNewWork;
+    setBusy(true);
+    try {
+      await setMyAcceptingNewWorkAction(next);
+      setAcceptingNewWork(next);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "설정을 바꾸지 못했습니다.");
+    } finally {
+      setBusy(false);
+    }
+  }
 
   async function handleAdd() {
     setBusy(true);
@@ -216,9 +238,30 @@ function AvailabilityPanel() {
     <div className="max-w-[560px] px-8 py-8">
       <h1 className="text-[20px] font-extrabold text-ink mb-1">가능시간</h1>
       <p className="text-[12.5px] text-grey-500 mb-5">
-        여기서 등록한 시간대만 배정된 고객에게 예약 가능 시간으로 보여집니다(스케줄링 링크는 다음 단계에서 연결됩니다).
+        여기서 등록한 시간대만 배정된 고객에게 예약 가능 시간으로 보여집니다.
       </p>
       {error && <div className="mb-4 text-[13px] font-semibold text-red bg-red/5 rounded-lg px-4 py-3">{error}</div>}
+
+      {acceptingNewWork !== null && (
+        <div className="flex items-center justify-between border-[1.5px] border-grey-200 rounded-xl px-4 py-3 mb-6">
+          <div>
+            <div className="text-[13px] font-bold text-ink">신규 배정 받기</div>
+            <div className="text-[11.5px] text-grey-500">
+              {acceptingNewWork ? "자동배정 대상에 포함됩니다." : "자동배정 대상에서 제외됩니다(관리자 수동 배정은 계속 받을 수 있습니다)."}
+            </div>
+          </div>
+          <button
+            disabled={busy}
+            onClick={handleToggleAcceptingNewWork}
+            className={
+              "text-[12px] font-bold px-4 py-1.5 rounded-lg disabled:opacity-50 " +
+              (acceptingNewWork ? "bg-ink text-white" : "border-[1.5px] border-grey-200 text-ink")
+            }
+          >
+            {acceptingNewWork ? "받는 중" : "받지 않음"}
+          </button>
+        </div>
+      )}
 
       <form
         className="flex items-end gap-2 mb-6"

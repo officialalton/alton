@@ -94,6 +94,20 @@ export async function listUnassignedConsultationsAction(): Promise<IntakeConsult
   return loadUnassignedConsultations(supabase);
 }
 
+/** 스펙 §Assignment Modes — 전역 수동/자동배정 설정 조회·변경. */
+export async function loadAutoAssignEnabledAction(): Promise<boolean> {
+  const { supabase } = await requireAdmin();
+  const { data, error } = await supabase.from("consultant_assignment_settings").select("auto_assign_enabled").eq("id", true).single();
+  if (error) throw new Error(error.message);
+  return data.auto_assign_enabled;
+}
+
+export async function setAutoAssignEnabledAction(enabled: boolean): Promise<void> {
+  const { supabase } = await requireAdmin();
+  const { error } = await supabase.rpc("set_consultant_auto_assign_enabled", { p_enabled: enabled });
+  if (error) throw new Error(error.message);
+}
+
 /** 컨설턴트는 배정됐지만 아직 일정이 없는 요청 — 스케줄링 링크 발송 대상 큐. */
 export async function listAssignedAwaitingScheduleAction(): Promise<IntakeConsultation[]> {
   const { supabase } = await requireAdmin();

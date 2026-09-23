@@ -46,6 +46,20 @@ export async function addMyAvailabilityRuleAction(params: { weekday: number; sta
   }
 }
 
+/** 스펙 §Assignment Modes "accepting-new-work flag" — 자동배정 대상에서 스스로 빠지고 들어올 수 있다. */
+export async function loadMyAcceptingNewWorkAction(): Promise<boolean> {
+  const { user, supabase } = await requireUser();
+  const { data, error } = await supabase.from("consultant_settings").select("accepting_new_work").eq("consultant_id", user.id).maybeSingle();
+  if (error) throw new Error(error.message);
+  return data?.accepting_new_work ?? true;
+}
+
+export async function setMyAcceptingNewWorkAction(accepting: boolean): Promise<void> {
+  const { supabase } = await requireUser();
+  const { error } = await supabase.rpc("set_consultant_accepting_new_work", { p_accepting: accepting });
+  if (error) throw new Error(error.message);
+}
+
 export async function deactivateMyAvailabilityRuleAction(ruleId: string): Promise<void> {
   const { user, supabase } = await requireUser();
   const { error } = await supabase

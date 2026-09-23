@@ -8,8 +8,16 @@ import { currentRequestOrigin } from "@/lib/request-origin";
 import { ensureSubscriptionForOrganizer } from "@/lib/workspace-events/subscription-lifecycle";
 
 // M1 — 상담 확정 시 Calendar 이벤트+Meet 생성. R6 lib/booking/calendar-sync.ts와 같은
-// 원칙을 그대로 따르되, subject는 담당 선생님이 아니라 회사 상담 관리자 계정
-// (official@alton.education)이다 — M1 요구사항 3.
+// 원칙을 그대로 따르되, subject는 원래 회사 상담 관리자 계정(official@alton.education)
+// 이었다 — M1 요구사항 3.
+//
+// 2026-09-22(컨설턴트 스펙 §Meeting and Calendar Rules) — "이벤트 organizer와 가능
+// 시간은 배정된 컨설턴트여야 한다"는 요구에 따라, admissions_consultant_id가 있으면
+// 그 컨설턴트의 실제 Google Workspace 계정을 organizer로 쓴다(R6 lib/booking/
+// calendar-sync.ts가 이미 선생님마다 resolveTeacherWorkspaceEmail()로 하는 것과 동일한
+// 패턴 — 서비스 계정의 도메인 위임은 특정 메일함 하나가 아니라 도메인 전체에 대해
+// 이미 허용돼 있으므로 컨설턴트별 추가 설정이 필요 없다). 배정된 컨설턴트가 없는
+// 카테고리(예: 선생님 지원자 상담)는 기존처럼 CONSULT_ORGANIZER_EMAIL을 그대로 쓴다.
 //
 // 실패해도 consultations.status(requested/scheduled 등)와 hold는 절대 건드리지
 // 않는다 — google_sync_status만 pending/failed/reconciliation_needed로 남아
@@ -31,7 +39,19 @@ type ConsultationRow = {
   google_sync_retry_count: number;
   consent_version_id: string | null;
   confirmation_email_content_hash: string | null;
+  admissions_consultant_id: string | null;
 };
+
+/** 배정된 컨설턴트가 있으면 그 사람의 실제 이메일을, 없으면 기존 회사 계정을 organizer로 쓴다. */
+async function resolveConsultOrganizerEmail(
+  admin: ReturnType<typeof createAdminClient>,
+  admissionsConsultantId: string | null
+): Promise<string> {
+  if (!admissionsConsultantId) return CONSULT_ORGANIZER_EMAIL;
+  const { data, error } = await admin.auth.admin.getUserById(admissionsConsultantId);
+  if (error || !data.user?.email) return CONSULT_ORGANIZER_EMAIL;
+  return data.user.email;
+}
 
 /**
  * 상담 Meet space의 Smart Notes 상태를 확인·보정한다(요구사항 3, 2026-09-03 정책 정정).
@@ -47,11 +67,12 @@ async function applySmartNotesBestEffort(params: {
   admin: ReturnType<typeof createAdminClient>;
   consultationId: string;
   meetLink: string;
+  organizerEmail: string;
 }): Promise<void> {
   const meetingCode = extractMeetingCodeFromLink(params.meetLink);
   if (!meetingCode) return;
   try {
-    await ensureMeetSpaceSmartNotesOn({ teacherWorkspaceEmail: CONSULT_ORGANIZER_EMAIL, meetingCode });
+    await ensureMeetSpaceSmartNotesOn({ teacherWorkspaceEmail: params.organizerEmail, meetingCode });
     await params.admin
       .from("consultations")
       .update({ smart_notes_config_status: "applied", smart_notes_config_error: null })
@@ -165,15 +186,17 @@ async function processOneConsultation(
 
   let googleEventId = row.google_event_id;
   let meetLink = row.google_meet_link;
+  const organizerEmail = await resolveConsultOrganizerEmail(admin, row.admissions_consultant_id);
 
   if (!googleEventId) {
-    // 요구사항 2(2026-09-03 정책 전환): official@alton.education이 organizer, 신청
-    // 이메일이 유일한 외부 attendee. sendUpdates="all"로 Google 네이티브 초대 메일이
-    // 나간다 — 동의 확인 링크는 상담 UUID가 아니라 만료형 토큰으로만 이벤트 설명에
-    // 싣는다(요구사항 5와 동일한 원칙, Calendar description도 예외 없음).
+    // 요구사항 2(2026-09-03 정책 전환, 2026-09-22 컨설턴트 스펙 개정): 배정된
+    // 컨설턴트가 있으면 그 사람이, 없으면 official@alton.education이 organizer.
+    // 신청 이메일이 유일한 외부 attendee. sendUpdates="all"로 Google 네이티브
+    // 초대 메일이 나간다 — 동의 확인 링크는 상담 UUID가 아니라 만료형 토큰으로만
+    // 이벤트 설명에 싣는다(요구사항 5와 동일한 원칙, Calendar description도 예외 없음).
     const consentUrl = await issueConsentUrl(admin, row.id);
     const created = await createCalendarEventWithMeet({
-      teacherWorkspaceEmail: CONSULT_ORGANIZER_EMAIL,
+      teacherWorkspaceEmail: organizerEmail,
       reservationId: `consult-${row.id}`,
       startsAt,
       endsAt,
@@ -207,7 +230,7 @@ async function processOneConsultation(
     // 요구사항 2: 시간 변경도 같은 이벤트를 PATCH하고 sendUpdates="all"로 Google
     // 네이티브 변경 알림을 보낸다 — 별도 커스텀 이메일을 추가로 보내지 않는다.
     await patchCalendarEventTime({
-      teacherWorkspaceEmail: CONSULT_ORGANIZER_EMAIL,
+      teacherWorkspaceEmail: organizerEmail,
       googleEventId,
       startsAt,
       endsAt,
@@ -235,14 +258,14 @@ async function processOneConsultation(
 
   if (meetLink) {
     // Smart Notes 확인·보정은 Calendar 초대 성공 여부와 무관하게 항상 시도한다.
-    await applySmartNotesBestEffort({ admin, consultationId: row.id, meetLink });
+    await applySmartNotesBestEffort({ admin, consultationId: row.id, meetLink, organizerEmail });
 
     // 요구사항 1 — Smart Notes 원본 자동 연결이 Workspace Events 웹훅에 의존하므로,
     // 이 organizer의 구독이 없거나 만료됐으면 여기서 best-effort로 보장한다. 실패해도
     // 상담 확정 자체는 이미 끝난 뒤라 영향 없음 — 다음 배치 재처리(renewExpiringSubscriptions)
     // 나 사후 대조(reconcileMissedSmartNotesEvents)가 뒤를 받친다.
     try {
-      await ensureSubscriptionForOrganizer(CONSULT_ORGANIZER_EMAIL, "consult_organizer");
+      await ensureSubscriptionForOrganizer(organizerEmail, "consult_organizer");
     } catch (e) {
       console.error(
         JSON.stringify({ type: "m1_consult_workspace_events_subscription_ensure_failed", consultationId: row.id, error: e instanceof Error ? e.message : String(e) })
@@ -262,7 +285,7 @@ export async function syncOneConsultationCalendarEvent(consultationId: string): 
     .update({ google_sync_status: "pending" })
     .eq("id", consultationId)
     .in("google_sync_status", ["pending", "failed"])
-    .select("id, contact_name, contact_email, starts_at, ends_at, google_event_id, google_meet_link, google_sync_status, google_sync_retry_count, consent_version_id, confirmation_email_content_hash")
+    .select("id, contact_name, contact_email, starts_at, ends_at, google_event_id, google_meet_link, google_sync_status, google_sync_retry_count, consent_version_id, confirmation_email_content_hash, admissions_consultant_id")
     .maybeSingle();
 
   if (!claimed) return;
@@ -324,11 +347,12 @@ export async function retrySmartNotesConfigForConsultation(consultationId: strin
   const admin = createAdminClient();
   const { data: row } = await admin
     .from("consultations")
-    .select("id, google_meet_link")
+    .select("id, google_meet_link, admissions_consultant_id")
     .eq("id", consultationId)
     .maybeSingle();
   if (!row?.google_meet_link) return;
-  await applySmartNotesBestEffort({ admin, consultationId, meetLink: row.google_meet_link });
+  const organizerEmail = await resolveConsultOrganizerEmail(admin, row.admissions_consultant_id);
+  await applySmartNotesBestEffort({ admin, consultationId, meetLink: row.google_meet_link, organizerEmail });
 }
 
 /** 취소 시 Google 이벤트도 삭제한다(취소는 hold/DB 확정 이후에만 발생하므로 실패해도 상담 취소 자체는 막지 않는다). */
@@ -336,13 +360,14 @@ export async function cancelSyncedConsultationCalendarEvent(consultationId: stri
   const admin = createAdminClient();
   const { data: row } = await admin
     .from("consultations")
-    .select("id, google_event_id")
+    .select("id, google_event_id, admissions_consultant_id")
     .eq("id", consultationId)
     .maybeSingle();
   if (!row?.google_event_id) return;
+  const organizerEmail = await resolveConsultOrganizerEmail(admin, row.admissions_consultant_id);
 
   try {
-    await deleteCalendarEvent({ teacherWorkspaceEmail: CONSULT_ORGANIZER_EMAIL, googleEventId: row.google_event_id, sendUpdates: "all" });
+    await deleteCalendarEvent({ teacherWorkspaceEmail: organizerEmail, googleEventId: row.google_event_id, sendUpdates: "all" });
     await admin.from("consultations").update({ google_sync_status: "synced", google_sync_last_error: null }).eq("id", consultationId);
   } catch (e) {
     const message = e instanceof Error ? e.message : String(e);

@@ -12,6 +12,7 @@ import {
   assignConsultationToConsultantAction,
   listAssignedAwaitingScheduleAction,
   sendConsultationSchedulingLinkAction,
+  setAutoAssignEnabledAction,
 } from "./consultant-assignment-actions";
 
 // 컨설턴트 포지션(2026-09-22 사용자 지시, 가볍게 시작) — 기존 계정을
@@ -25,20 +26,37 @@ export default function ConsultantAssignmentsTab({
   initialConsultants,
   initialUnassignedConsultations,
   initialAssignedAwaitingSchedule,
+  initialAutoAssignEnabled,
 }: {
   initialConsultants: ConsultantWithStudents[];
   initialUnassignedConsultations: IntakeConsultation[];
   initialAssignedAwaitingSchedule: IntakeConsultation[];
+  initialAutoAssignEnabled: boolean;
 }) {
   const [consultants, setConsultants] = useState(initialConsultants);
   const [unassigned, setUnassigned] = useState(initialUnassignedConsultations);
   const [awaitingSchedule, setAwaitingSchedule] = useState(initialAssignedAwaitingSchedule);
+  const [autoAssignEnabled, setAutoAssignEnabled] = useState(initialAutoAssignEnabled);
   const [assignConsultant, setAssignConsultant] = useState<Record<string, string>>({});
   const [promoteEmail, setPromoteEmail] = useState("");
   const [assignEmail, setAssignEmail] = useState<Record<string, string>>({});
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [linkSentIds, setLinkSentIds] = useState<Set<string>>(new Set());
+
+  async function handleToggleAutoAssign() {
+    const next = !autoAssignEnabled;
+    setBusy(true);
+    setError(null);
+    try {
+      await setAutoAssignEnabledAction(next);
+      setAutoAssignEnabled(next);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "설정을 바꾸지 못했습니다.");
+    } finally {
+      setBusy(false);
+    }
+  }
 
   function reload() {
     listConsultantsAction().then(setConsultants).catch(() => undefined);
@@ -130,6 +148,27 @@ export default function ConsultantAssignmentsTab({
       </div>
 
       {error && <div className="mb-4 text-[13px] font-semibold text-red bg-red/5 rounded-lg px-4 py-3">{error}</div>}
+
+      <div className="flex items-center justify-between border-[1.5px] border-grey-200 rounded-xl px-4 py-3 mb-6">
+        <div>
+          <div className="text-[13px] font-bold text-ink">자동배정</div>
+          <div className="text-[11.5px] text-grey-500">
+            {autoAssignEnabled
+              ? "새 상담 요청을 신청 즉시 가능한 컨설턴트 중 무작위로 배정합니다."
+              : "관리자가 요청마다 직접 컨설턴트를 배정합니다."}
+          </div>
+        </div>
+        <button
+          disabled={busy}
+          onClick={handleToggleAutoAssign}
+          className={
+            "text-[12px] font-bold px-4 py-1.5 rounded-lg disabled:opacity-50 " +
+            (autoAssignEnabled ? "bg-ink text-white" : "border-[1.5px] border-grey-200 text-ink")
+          }
+        >
+          {autoAssignEnabled ? "자동배정 켜짐" : "자동배정 꺼짐"}
+        </button>
+      </div>
 
       <h2 className="text-[13.5px] font-bold text-ink mb-3">미배정 상담 요청 ({unassigned.length})</h2>
       {unassigned.length === 0 ? (

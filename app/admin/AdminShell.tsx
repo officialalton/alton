@@ -132,6 +132,7 @@ export default function AdminShell({
   consultants,
   unassignedConsultations,
   assignedAwaitingSchedule,
+  autoAssignEnabled,
 }: {
   initialTab?: string;
   // 2026-09-10(P1 재진입 성능 배치) — 탭 데이터 캐시(tab-data-cache.ts)를
@@ -185,6 +186,7 @@ export default function AdminShell({
   consultants: ConsultantWithStudents[];
   unassignedConsultations: IntakeConsultation[];
   assignedAwaitingSchedule: IntakeConsultation[];
+  autoAssignEnabled: boolean;
 }) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<TabId>(resolveAdminTab(initialTab));
@@ -468,6 +470,7 @@ export default function AdminShell({
               initialConsultants={consultants}
               initialUnassignedConsultations={unassignedConsultations}
               initialAssignedAwaitingSchedule={assignedAwaitingSchedule}
+              initialAutoAssignEnabled={autoAssignEnabled}
             />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
