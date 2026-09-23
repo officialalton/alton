@@ -13,6 +13,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:integration:universities": "vitest run -c vitest.integration.config.ts",
     "test:e2e": "playwright test"
   },
   "dependencies": {
