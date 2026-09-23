@@ -32,8 +32,14 @@ import {
   sendConsultantInquiryMessageAction,
   markConsultantMessengerReadAction,
 } from "./messenger-actions";
+import {
+  listMyAssignedMeetingRequestsAction,
+  scheduleMyMeetingRequestAction,
+  cancelMyMeetingRequestAction,
+  type AssignedMeetingRequest,
+} from "./meeting-actions";
 
-type NavId = "students" | "assignments" | "schedule";
+type NavId = "students" | "assignments" | "meetings" | "schedule";
 
 const WEEKDAY_LABELS = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -101,6 +107,19 @@ export default function ConsultantShell({
         </button>
         <button
           onClick={() => {
+            setNav("meetings");
+            setSelectedId(null);
+          }}
+          aria-current={nav === "meetings" ? "page" : undefined}
+          className={
+            "w-full text-left px-2.5 py-2.5 rounded-lg text-[13px] font-semibold " +
+            (nav === "meetings" ? "bg-red text-white" : "text-grey-500 hover:bg-grey-100 hover:text-ink")
+          }
+        >
+          일정 요청
+        </button>
+        <button
+          onClick={() => {
             setNav("schedule");
             setSelectedId(null);
           }}
@@ -124,6 +143,8 @@ export default function ConsultantShell({
       <main className="flex-1">
         {nav === "assignments" ? (
           <AssignedConsultationsList initialConsultations={assignedConsultations} />
+        ) : nav === "meetings" ? (
+          <MeetingRequestsPanel />
         ) : nav === "schedule" ? (
           <AvailabilityPanel />
         ) : selectedId === null ? (
@@ -216,6 +237,169 @@ function AssignedConsultationsList({ initialConsultations }: { initialConsultati
               </div>
             );
           })}
+        </div>
+      )}
+    </div>
+  );
+}
+
+const MEETING_STATUS_LABEL: Record<string, string> = {
+  requested: "신청됨",
+  confirming: "확인 중",
+  scheduling: "일정 조율 중",
+  scheduled: "일정 확정",
+  completed: "완료",
+  cancelled: "거절됨",
+};
+
+function formatMeetingDateTime(iso: string | null): string {
+  if (!iso) return "";
+  return new Date(iso).toLocaleString("ko-KR", { dateStyle: "medium", timeStyle: "short" });
+}
+
+// 2026-09-22(사용자 지시 — "관리자/컨설턴트가 최종 확인 후 확정") — 학생이
+// 개인 단위로 신청한 일정(meeting_requests.consultant_id=본인)을 확인하고
+// 확정(요청 시간 그대로 또는 조정)하거나 거절한다.
+function MeetingRequestsPanel() {
+  const [meetings, setMeetings] = useState<AssignedMeetingRequest[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [busyId, setBusyId] = useState<string | null>(null);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editStart, setEditStart] = useState("");
+  const [editEnd, setEditEnd] = useState("");
+
+  function reload() {
+    listMyAssignedMeetingRequestsAction()
+      .then(setMeetings)
+      .catch((e) => setError(e instanceof Error ? e.message : "불러오지 못했습니다."));
+  }
+
+  useEffect(() => {
+    reload();
+  }, []);
+
+  function startEdit(m: AssignedMeetingRequest) {
+    setEditingId(m.id);
+    setError(null);
+    const toLocalInput = (iso: string | null) => (iso ? new Date(iso).toISOString().slice(0, 16) : "");
+    setEditStart(toLocalInput(m.startsAt));
+    setEditEnd(toLocalInput(m.endsAt));
+  }
+
+  async function handleConfirm(meetingRequestId: string) {
+    if (!editStart || !editEnd) {
+      setError("시작·종료 시각을 모두 입력해주세요.");
+      return;
+    }
+    setBusyId(meetingRequestId);
+    setError(null);
+    try {
+      await scheduleMyMeetingRequestAction({
+        meetingRequestId,
+        startsAt: new Date(editStart).toISOString(),
+        endsAt: new Date(editEnd).toISOString(),
+      });
+      setEditingId(null);
+      reload();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "확정에 실패했습니다.");
+    } finally {
+      setBusyId(null);
+    }
+  }
+
+  async function handleCancel(meetingRequestId: string) {
+    setBusyId(meetingRequestId);
+    setError(null);
+    try {
+      await cancelMyMeetingRequestAction(meetingRequestId);
+      reload();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "거절에 실패했습니다.");
+    } finally {
+      setBusyId(null);
+    }
+  }
+
+  return (
+    <div className="max-w-[640px] px-8 py-8">
+      <h1 className="text-[20px] font-extrabold text-ink mb-5">일정 요청</h1>
+      {error && <p className="text-[12.5px] text-red mb-3">{error}</p>}
+      {meetings === null ? (
+        <p className="text-[13px] text-grey-500">불러오는 중...</p>
+      ) : meetings.length === 0 ? (
+        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
+          아직 신청된 일정이 없습니다.
+        </div>
+      ) : (
+        <div className="space-y-2.5">
+          {meetings.map((m) => (
+            <div key={m.id} className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3">
+              <div className="flex items-center justify-between">
+                <span className="text-[13px] font-bold text-ink">{m.studentName ?? "학생"}</span>
+                <span className="text-[11px] text-grey-500">{MEETING_STATUS_LABEL[m.status] ?? m.status}</span>
+              </div>
+              {m.content && <div className="text-[12px] text-grey-600 mt-1">사유: {m.content}</div>}
+              {m.startsAt && (
+                <div className="text-[12px] text-grey-500 mt-1">희망 시간: {formatMeetingDateTime(m.startsAt)}</div>
+              )}
+              {m.googleMeetLink && (
+                <a href={m.googleMeetLink} target="_blank" rel="noreferrer" className="inline-block mt-1 text-[12px] font-semibold text-ink underline">
+                  Google Meet 링크
+                </a>
+              )}
+              {(m.status === "requested" || m.status === "confirming" || m.status === "scheduling") && (
+                <div className="mt-2.5">
+                  {editingId === m.id ? (
+                    <div className="flex flex-wrap items-center gap-2">
+                      <input
+                        type="datetime-local"
+                        value={editStart}
+                        onChange={(e) => setEditStart(e.target.value)}
+                        className="border-[1.5px] border-grey-200 rounded-lg px-2 py-1 text-[12px]"
+                      />
+                      <span className="text-[12px] text-grey-400">~</span>
+                      <input
+                        type="datetime-local"
+                        value={editEnd}
+                        onChange={(e) => setEditEnd(e.target.value)}
+                        className="border-[1.5px] border-grey-200 rounded-lg px-2 py-1 text-[12px]"
+                      />
+                      <button
+                        type="button"
+                        disabled={busyId === m.id}
+                        onClick={() => handleConfirm(m.id)}
+                        className="text-[12px] font-bold px-3 py-1 rounded-lg bg-ink text-white disabled:opacity-50"
+                      >
+                        확정
+                      </button>
+                      <button type="button" onClick={() => setEditingId(null)} className="text-[12px] font-bold text-grey-500">
+                        취소
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex gap-2">
+                      <button
+                        type="button"
+                        onClick={() => startEdit(m)}
+                        className="text-[12px] font-bold px-3 py-1 rounded-lg border-[1.5px] border-grey-200 text-ink"
+                      >
+                        확정/시간 조정
+                      </button>
+                      <button
+                        type="button"
+                        disabled={busyId === m.id}
+                        onClick={() => handleCancel(m.id)}
+                        className="text-[12px] font-bold px-3 py-1 rounded-lg text-red disabled:opacity-50"
+                      >
+                        거절
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          ))}
         </div>
       )}
     </div>

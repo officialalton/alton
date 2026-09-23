@@ -71,8 +71,7 @@ export default function StudentConsultantMessengerTab() {
   const visible = (inquiries ?? []).filter((i) => i.status === subTab);
 
   return (
-    <div className="max-w-[720px] px-8 py-8">
-      <h2 className="text-[16px] font-bold text-ink mb-1">Consultant</h2>
+    <div>
       <p className="text-[12.5px] text-grey-500 mb-4">
         담당 컨설턴트·관리자와 대화할 수 있습니다. 문의마다 별도 대화창으로 관리되고, 종료되면 지난
         문의로 넘어갑니다. 이 대화는 가족(보호자)도 함께 볼 수 있습니다.

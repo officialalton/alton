@@ -42,7 +42,7 @@ import {
   updateMyTimezone,
 } from "./booking-actions";
 import { reportTeacherIssue } from "./incident-report-actions";
-import StudentConsultantMessengerTab from "./StudentConsultantMessengerTab";
+import StudentConsultantTab from "./StudentConsultantTab";
 import RoadmapView from "@/app/components/RoadmapView";
 import type { RoadmapData } from "@/lib/roadmap/types";
 import PageFrame from "@/app/components/PageFrame";
@@ -370,7 +370,7 @@ export default function StudentShell({
           ) : activeTab === "mock-exam" ? (
             <StudentMockExamTab initialAttempts={mockExamAttempts} />
           ) : activeTab === "consultant" ? (
-            <StudentConsultantMessengerTab />
+            <StudentConsultantTab />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.
