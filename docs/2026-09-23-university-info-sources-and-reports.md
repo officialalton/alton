@@ -1332,3 +1332,75 @@ University of Virginia, Ohio State University는 GPA(C12)가 원문에서
   컨설턴트·학생·학부모가 참고할 만한 항목은 전부 공개 화면에 노출되도록
   UI를 계속 확장할 것 — 이 지시는 200개교가 끝날 때까지 매 세션 인계
   기록에 계속 전달되어야 한다.
+
+
+## 16차 세션 (2026-09-23, WebFetch/WebSearch 기반 — psql 직접 확인)
+
+### A. CDS 처리
+- 14차 재시도 목록(Fordham/SLU/Drexel/DePaul/Pepperdine/Seton Hall) 재시도:
+  - **Drexel University**: CDS 2025-26 PDF(공식,
+    `drexel.edu/institutionalresearch/.../CDS_2025-2026.pdf`) 직접 다운로드
+    → `pdftotext -layout`으로 판독 → Fall 2025 cohort 실수집. 지원자
+    38,030 / 합격 26,583(합격률 69.90%) / 등록 1,948(등록률 7.33%),
+    SAT 25/50/75 1260/1350/1430, SAT EBRW 630/670/710, SAT Math
+    630/680/730, ACT Composite 28/30/33(Math/English/Science/Reading
+    포함), GPA 평균 3.79, 상위10% 31.78% — 총 33개 지표,
+    `verification_status='official'`, `verified_at` 오늘. Drexel
+    `data_collection_status`를 `verified_pilot`으로 승격.
+  - Fordham: CDS 페이지가 CAS 로그인으로 리다이렉트(WebFetch로는 접근
+    불가) — 브라우저 도구 재시도 필요.
+  - Saint Louis University: institutional-data 페이지에 CDS 파일 링크
+    없음(팩트북/대시보드만 노출) — 브라우저로 하위 페이지 탐색 필요.
+  - DePaul: `irma.depaul.edu/FFPlus.asp?cont=cds` → `depaul.edu/cds/2025/2025CDS_*.pdf`
+    형태 URL 확인했으나 curl로 받으면 HTML 오류 페이지만 반환(세션/리퍼러
+    필요 추정) — 브라우저 도구 재시도 필요.
+  - Pepperdine: OIE 페이지에서 CDS가 Google Drive 링크로 호스팅됨을 확인,
+    WebFetch로는 파일 내용 추출 불가 — 브라우저로 직접 열어 다운로드 필요.
+  - Seton Hall: 메인 페이지에 CDS/IR 링크 자체가 노출 안 됨 — 사이트 내
+    검색 또는 브라우저로 재탐색 필요.
+  - Syracuse: `institutionaldata.syr.edu` → `effectiveness.syr.edu`로
+    리다이렉트, 리다이렉트된 페이지에도 CDS 직접 링크 없음("Key Data"
+    하위 섹션 재탐색 필요) — 다음 세션 과제.
+  - Iowa State: WebSearch로 `iastate.edu/files/documents/cds/CDS-25-26.pdf`
+    URL을 찾았으나 curl 시도 시 HTML(오류/차단 페이지) 반환 — 브라우저
+    또는 Chrome UA 우회 재시도 필요.
+- 결과: **verified_pilot 39개교**(38→39, Drexel 추가). 나머지 148개교
+  (approved URL 있는 학교 중) 그대로 남음.
+
+### B. 학과(전공) 목록 보완 — 이번 세션에서 착수 완료
+- psql로 verified_pilot 학교 중 전공 0건인 12개교 확인: Arizona State,
+  Auburn, Case Western Reserve, Colorado State, GWU, Lehigh, Loyola
+  Chicago, Marquette, Oregon State, Rowan, Santa Clara, Temple.
+- 이 중 **9개교**를 공식 학사요람/전공 목록 페이지에서 WebFetch로 실제
+  전문(全文) 수집하여 `university_majors`에 additive insert(기존 항목 없어
+  전량 신규, `ON CONFLICT (university_id, name) DO NOTHING`):
+  - Case Western Reserve University — 69건 (bulletin.case.edu)
+  - Colorado State University — 49건 (catalog.colostate.edu/general-catalog/programsaz/, 알파벳 일부만 수집 — 전체 대비 부분적일 가능성)
+  - George Washington University — 58건 (bulletin.gwu.edu/find-your-program/, A~D + E~Z 일부)
+  - Lehigh University — 71건 (www2.lehigh.edu/academics/undergraduate-studies/degree-programs)
+  - Auburn University — 90건 (bulletin.auburn.edu/undergraduate/majors/)
+  - Marquette University — 66건 (bulletin.marquette.edu/programs/)
+  - Oregon State University — 84건 (catalog.oregonstate.edu/programs/)
+  - Santa Clara University — 42건 (scu.edu/bulletin .../academic-programs.html)
+  - Temple University — 94건 (bulletin.temple.edu/academic-programs/)
+  - 총 **623건** 신규 반영(psql로 학교별 건수 직접 확인 완료).
+- 실패/보류: **Arizona State University**(degrees.asu.edu, catalog.asu.edu
+  모두 개별 전공명이 페이지에 렌더링되지 않음 — JS 기반, 브라우저 도구
+  필요), **Loyola University Chicago**(luc.edu 메뉴 페이지에 실제 목록
+  없음, catalog.luc.edu/programs/ 재시도 필요), **Rowan University**
+  (admissions.rowan.edu/program-finder.html이 JS 위젯이라 WebFetch로는
+  "Error fetching data" — 브라우저 도구 필요). 3개교는 다음 세션 인계.
+- 관리자 화면의 학과 목록 노출 여부는 이번 세션에서 확인하지 않음(데이터
+  반영 우선) — 다음 세션 과제로 이월.
+
+### 다음 세션 인계
+1. 브라우저 도구로 재시도: Fordham, SLU, DePaul, Pepperdine, Seton Hall,
+   Syracuse, Iowa State(CDS), ASU/Loyola Chicago/Rowan(전공 목록).
+2. `type='common_data_set', status='approved'`이고 미처리인 나머지
+   약 128개교 CDS 계속 처리.
+3. 신규로 verified_pilot 되는 학교들도 전공 목록 상태(0건/부실) 확인 후
+   보완.
+4. 관리자 화면에서 학과 목록이 실제로 표시되는지 확인.
+5. **200개교 전체가 끝나면 반드시 최종 통합보고서를 작성**하고 CDS 정보
+   노출 UI를 계속 확장할 것 — 이 지시는 200개교가 끝날 때까지 매 세션
+   인계 기록에 계속 전달되어야 한다.
