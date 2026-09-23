@@ -2071,3 +2071,118 @@ Central Florida.
 6. 관리자 화면 노출 확인 여전히 미착수.
 7. 200개교 전체가 끝나면 반드시 최종 통합보고서를 작성하고 CDS 정보
    노출 UI를 계속 확장할 것 — 매 세션 인계 기록에 계속 전달.
+
+## 24차 세션 (2026-09-23, curl+WebSearch 기반 — psql 직접 확인)
+
+### 정정사항 재확인
+- 23차 세션이 "학과 데이터 전혀 없음"이라 판단한 것은 `universities.
+  strengths_programs` 컬럼만 확인한 착오였음을 재확인. 실제 학과
+  데이터는 `university_majors` 테이블에 이미 1204건(60개교)이
+  존재했고, 이번 세션 착수 시점 기준 `verified_pilot` 104개교 중
+  전공 0건 학교가 77개교 확인됨(아래 보완 내역 참고).
+
+### CDS 실수집 반영 — 18개교 (verified_pilot 104 → 122)
+`university_admission_metrics`에 official 검증 데이터 삽입,
+`source_url_id` 연결, `verified_at`=오늘, `universities.
+data_collection_status`를 `verified_pilot`로 갱신. psql로 반영 건수
+직접 확인 완료(총 2985행).
+
+- **sources_pending_review → verified_pilot (15개교)**: Brigham Young
+  University(CDS 2024-25, Fall2024, 19건), Colorado School of Mines(CDS
+  2021-22 최신 공개본, Fall2022, 18건), University of Massachusetts
+  Amherst(CDS 2025-26, Fall2025, 21건), University of Maryland College
+  Park(CDS 2024-25 xlsx, Fall2024, 19건), University of Nebraska-Lincoln
+  (CDS 2024-25, Fall2024, 18건), Virginia Commonwealth University(CDS
+  2022-23 최신 공개본, Fall2022, 22건), Binghamton University SUNY(CDS
+  2024-25, Fall2025, 20건), Illinois State University(CDS 2024-25,
+  Fall2024, 18건), Southern Illinois University Carbondale(CDS 2023-24,
+  Fall2023, 19건 — GPA 미보고), Adelphi University(CDS 2018-19 — 사이트에
+  공개된 가장 최신본이 이것뿐, 최신년도는 intranet.adelphi.edu
+  SharePoint 인증벽으로 접근 불가, 15건), SUNY College of Environmental
+  Science and Forestry(CDS 2018-19 — 동일 사유로 최신본, 18건),
+  University of San Diego(CDS 2024-25, Fall2024 — test-blind 정책이라
+  SAT/ACT 미보고, 10건), University of Louisiana at Lafayette(CDS
+  2023-24, Fall2023, 19건), Northern Arizona University(CDS 2024-25,
+  Fall2024, 19건), Middle Tennessee State University(CDS 2024-25,
+  Fall2024, 19건).
+- **unconfirmed → verified_pilot (3개교, source_url을 새로 승인 등록 후
+  반영)**: Texas A&M University(CDS 2024-25, abpa.tamu.edu 신규 경로
+  `_files/_documents/common-data/cds-2024-2025-texasa-m.pdf` 확인,
+  Fall2024, 18건), East Carolina University(ipar.ecu.edu 실파일은 표지
+  연도 2021-2022, Fall2021, 19건), Pace University(pace.edu university-wide
+  CDS 2023-24, Fall2023, 20건).
+- 대부분 학교는 applicant/admitted/enrolled 총계가 성별 분해 합과
+  일치함을 대조 확인 후 반영(BYU/UMass/UMD/MTSU/NAU/VCU/Binghamton/ISU
+  /SIU 등). 오래된 CDS만 남아있는 학교(Adelphi/ESF)는 그 사실을
+  `notes` 필드에 명기하고 verified_pilot으로 승격했으나, 데이터가
+  7년 이상 지난 점을 다음 세션에 인계함(최신본 재탐색 필요).
+
+### 여전히 unconfirmed로 남은 학교(4개교, 5분 예산 내 실패)
+- Gonzaga University: 공식 CDS PDF(.ashx 확장자)가 curl에서 HTML
+  리다이렉트로 응답 — WAF/봇 차단으로 추정, 브라우저 기반 세션에서
+  재시도 필요.
+- Catholic University of America: `ir.catholic.edu/common-data-set/`
+  페이지 접근 시 대학 로그인 요구, 공개 PDF 미발견.
+- Columbia University, Miami University (Ohio): 23차 세션 인계사항과
+  동일 사유로 이번 세션도 미해결.
+
+### 학과 목록 보완 — 10개교 신규 추가(모두 additive insert, 기존 항목
+삭제 없음, `university_majors` 총 2031행으로 증가)
+- Colorado School of Mines 21건(catalog.mines.edu 학위 목록 페이지),
+  Southern Illinois University Carbondale 42건(catalog.siu.edu
+  programs 페이지, "(See X)" 상위 전공명 기준 정리), SUNY ESF 25건
+  (esf.edu 학부 프로그램 페이지), Pace University 52건(catalog.pace.edu
+  programs-a-z, "Major" 단위만 추출), Binghamton University 27건
+  (Harpur College of Arts and Sciences 학과 기준, 6개 단과대 중 1개만
+  반영 — 나머지 단과대는 다음 세션 과제), University of Louisiana at
+  Lafayette 33건(louisiana.edu majors-minors 페이지의 단과대/학과명
+  기준 — 세부 전공명이 아닌 학과 단위인 점 유의), Iowa State University
+  175건(catalog.iastate.edu collegescurricula 페이지, 학위 접미사
+  제거 후 정리), Kent State University 182건(catalog.kent.edu
+  programsaz, 학위 접미사 제거), Drexel University 98건
+  (catalog.drexel.edu/majors/, 학위 약어 제거), DePaul University
+  172건(catalog.depaul.edu/programs/, 과목 코드 기준 프로그램명 —
+  일부는 학과/과목 단위이지 순수 전공 단위가 아닐 수 있음, 다음
+  세션에서 재검증 권장).
+- JS 렌더링 페이지라 curl로 학과 목록을 못 가져온 학교(정적 HTML이
+  아니어서 실패): Adelphi, American University, Arizona State, NAU
+  degree-search, University of Massachusetts Amherst(공식 majors
+  페이지), Mississippi State, University of San Diego coursedog
+  카탈로그, East Carolina University degrees.ecu.edu. 브라우저 자동화
+  도구(Claude_Browser 등)가 있는 세션에서 재시도하면 성공 가능성 높음.
+
+### verified_pilot 승격 및 최종 카운트 (psql 직접 확인, 세션 종료 시점)
+- `data_collection_status`: `verified_pilot` **104 → 122개교**,
+  `sources_pending_review` **89 → 74개교**, `unconfirmed` **7 → 4개교**.
+- `university_admission_metrics` 총 행수 **2985**(psql 직접 카운트).
+- `university_majors` 총 행수 **2031**, 이번 세션에 전공 0건이던
+  77개교 중 10개교 신규 보완 완료(67개교 남음).
+- `git status`: 앱 코드 변경 없음(스크립트 로그 파일 3개는 untracked,
+  커밋 대상 아님), 새 마이그레이션 없음. `npx supabase db push
+  --linked` / `vercel deploy` 실행하지 않음.
+
+### 다음 세션 인계 (24차 작성분)
+1. sources_pending_review **74개교** 남음 — 목록은 이전 세션과 동일한
+   쿼리로 재조회(이번 세션 처리 15개교는 자동 제외됨).
+2. unconfirmed **4개교**(Columbia/Miami University Ohio/Gonzaga/
+   Catholic University of America) — Gonzaga는 .ashx PDF가 WAF 차단
+   추정, Catholic은 로그인 필요, 브라우저 자동화 도구가 있는 세션에서
+   재시도 권장.
+3. Cloudflare 403 계열(Clemson/Oklahoma State/Purdue)은 이번 세션
+   시도하지 않음 — 여전히 브라우저 기반 도구 필요.
+4. 폼/오버레이 구조 PDF(Arizona, Denver)는 이번 세션도 미시도 — OCR
+   도구 있는 세션에서 재시도.
+5. 학과 목록 보완: 67개교 남음(전체 명단은 `select u.id, u.name from
+   universities u left join (select university_id, count(*) cnt from
+   university_majors group by 1) m on m.university_id=u.id where
+   u.data_collection_status='verified_pilot' and coalesce(m.cnt,0)=0`
+   로 재조회). JS 렌더링 카탈로그가 많아 curl 성공률이 낮으므로,
+   브라우저 자동화 도구가 있는 세션에서 진행하면 효율이 크게 오를 것.
+   Binghamton과 Louisiana Lafayette은 이번 세션에 학과 단위(단과대/
+   department) 수준까지만 반영했으므로 세부 전공명 보강도 고려.
+6. 관리자 화면 노출 확인 여전히 미착수.
+7. 200개교 CDS 수집은 이제 절반을 훌쩍 넘었다(122/200 verified_pilot,
+   74개교 sources_pending_review, 4개교 unconfirmed). 다음 1~2
+   세션이면 sources_pending_review 소진이 가능할 것으로 보이며, 완료
+   시 반드시 최종 통합보고서를 작성하고 CDS 정보 노출 UI를 계속
+   확장할 것 — 매 세션 인계 기록에 계속 전달.
