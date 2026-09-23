@@ -60,6 +60,7 @@ export default function CatalogTab({
     // 탭 진입마다 왕복만 늘었다). 목록을 바꾸는 동작(추가·수정)은 각자 명시적으로
     // loadSubjects()를 다시 부른다.
     if (initialSubjects.length > 0) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
     void loadSubjects();
     // 최초 1회만 — 이후 갱신은 명시적 동작(다시 시도)으로 한다.
     // eslint-disable-next-line react-hooks/exhaustive-deps

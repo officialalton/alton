@@ -200,6 +200,7 @@ export default function ParentShell({
   useEffect(() => {
     if (activeTab !== "home") return;
     if (homeSubTab === "overview" || homeSubTab === "todo") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
       setChildBoardCards(null);
       loadChildBoardCardsAction(currentChildId).then(setChildBoardCards).catch(() => setChildBoardCards([]));
       return;

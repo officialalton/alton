@@ -125,7 +125,9 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
     math: attempt.timeRemainingSeconds?.math ?? limitSeconds.math,
   });
   const tickRef = useRef(remaining);
-  tickRef.current = remaining;
+  useEffect(() => {
+    tickRef.current = remaining;
+  }, [remaining]);
 
   const currentItemId = current?.setItemId;
   useEffect(() => {

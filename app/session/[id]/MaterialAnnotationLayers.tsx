@@ -297,6 +297,7 @@ export default function MaterialAnnotationLayers({
     pendingRef.current = [...recovered, ...pendingRef.current];
     mineRef.current = [...mineRef.current, ...recovered];
     redraw();
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
     scheduleSave();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pendingKey]);

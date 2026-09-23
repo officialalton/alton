@@ -637,6 +637,7 @@ function StudentPanel({
       .catch((e) => setCardsError(e instanceof Error ? e.message : "불러오지 못했습니다."));
   }
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
     setCards(null);
     reloadCards();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -762,6 +763,7 @@ function StudentRoadmapPanel({ studentId }: { studentId: string }) {
 
   useEffect(() => {
     let cancelled = false;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
     setState({ status: "loading" });
     getRoadmapForStudent(studentId)
       .then((data) => {

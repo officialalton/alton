@@ -157,6 +157,7 @@ export default function LessonBookingTab({
 
   useEffect(() => {
     try {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
       setBrowserTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone);
     } catch {
       setBrowserTimezone(null);
@@ -164,6 +165,7 @@ export default function LessonBookingTab({
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
     setSlots(null);
     setError(null);
     setMessage(null);
@@ -190,6 +192,7 @@ export default function LessonBookingTab({
 
   useEffect(() => {
     if (selectedDateKey || !slots || slots.length === 0) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
     setSelectedDateKey(dateKeyInTimezone(slots[0].toISOString(), timezone));
   }, [slots, timezone, selectedDateKey]);
 

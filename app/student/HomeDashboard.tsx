@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { DashboardData } from "./dashboard-data";
 import { dateKeyInTimezone } from "@/lib/calendar-date-utils";
 import { DEFAULT_TIMEZONE } from "@/lib/timezone";
@@ -70,6 +70,11 @@ export function TodayLessonBanner({
   timezone?: string;
   onEnter: (sessionId: string) => void;
 }) {
+  const [nowMs, setNowMs] = useState<number | null>(null);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 렌더 중 Date.now() 직접 호출 금지 — 마운트 시 1회 스냅샷
+    setNowMs(Date.now());
+  }, []);
   if (upcoming.length === 0) return null;
 
   const tz = timezone ?? DEFAULT_TIMEZONE;
@@ -101,7 +106,7 @@ export function TodayLessonBanner({
   const next = sorted[0];
   const daysUntil = Math.max(
     0,
-    Math.ceil((new Date(next.scheduledAt).getTime() - Date.now()) / (24 * 60 * 60 * 1000))
+    Math.ceil((new Date(next.scheduledAt).getTime() - (nowMs ?? new Date(next.scheduledAt).getTime())) / (24 * 60 * 60 * 1000))
   );
   return (
     <div className="bg-grey-100 rounded-xl px-5 py-4 mb-6 text-[13px] text-grey-500">

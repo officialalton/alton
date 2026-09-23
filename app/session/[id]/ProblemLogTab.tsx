@@ -437,6 +437,7 @@ function DetailBody({ entry }: { entry: ProblemLogEntry }) {
             내 응답
           </div>
           {entry.format === "math" ? (
+            // eslint-disable-next-line @next/next/no-img-element -- 캔버스에서 뽑은 data URL이라 next/image 최적화 대상이 아님
             <img src={entry.response} alt="내 풀이" className="border border-grey-200 rounded-lg" />
           ) : (
             <p className="text-[13px] text-ink whitespace-pre-wrap">{entry.response}</p>

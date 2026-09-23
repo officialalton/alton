@@ -83,6 +83,7 @@ export default function ConsultAvailabilityMonthView({
 
   // 예외 목록이 바뀌면(등록/삭제) 현재 보고 있는 달의 실측 슬롯도 다시 불러온다.
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
     loadMonth(currentYearMonth);
      
   }, [exceptions, currentYearMonth]);

@@ -21,6 +21,7 @@ export default function ParentMockExamTab({ studentId }: { studentId: string | n
   useEffect(() => {
     if (!studentId) return;
     let cancelled = false;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
     setAttempts(null);
     loadChildMockExamAttemptsAction(studentId)
       .then((rows) => {

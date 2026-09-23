@@ -113,6 +113,7 @@ export default function SubjectEnrollmentPanel({
 
   useEffect(() => {
     let cancelled = false;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
     setBusy(true);
     setMessage(null);
     Promise.all([

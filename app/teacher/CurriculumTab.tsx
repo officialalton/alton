@@ -69,6 +69,7 @@ export default function CurriculumTab({
 
   useEffect(() => {
     if (!jumpTo) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
     setSubtab("students");
     setSelectedStudentId(jumpTo.studentId);
     setSubView({ type: "curriculum", enrollmentId: jumpTo.enrollmentId });
@@ -78,6 +79,7 @@ export default function CurriculumTab({
 
   useEffect(() => {
     if (!operatingCurriculumJumpTo) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
     setSubtab("students");
     setSubView({ type: "operating-curriculum", ...operatingCurriculumJumpTo });
     onOperatingCurriculumJumpConsumed?.();
@@ -288,6 +290,7 @@ function LegacyCurriculumView({
 
   useEffect(() => {
     let cancelled = false;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
     setState({ status: "loading" });
     loadLegacyCurriculumDetail(enrollmentId)
       .then((result) => {
@@ -340,6 +343,7 @@ function LegacyReviewView({ sessionId, onBack }: { sessionId: string; onBack: ()
 
   useEffect(() => {
     let cancelled = false;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
     setState({ status: "loading" });
     loadReviewDetail(sessionId)
       .then(({ review, myFeedback }) => {

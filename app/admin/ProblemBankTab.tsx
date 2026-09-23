@@ -197,6 +197,7 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
   const pageSafe = Math.min(page, pageCount);
   const pageItems = visible.slice((pageSafe - 1) * PAGE_SIZE, pageSafe * PAGE_SIZE);
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
     setPage(1);
     setSelectedIds(new Set());
   }, [bucket, filter]);
