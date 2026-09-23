@@ -152,11 +152,36 @@ function ProfileSections({
   const [colleges, setColleges] = useState(data.collegeInterests.targetColleges.join(", "));
   const [applicationTiming, setApplicationTiming] = useState(data.collegeInterests.targetApplicationTiming ?? "");
 
+  // 2026-09-22(사용자 지시) — 프로필 탭을 섹터별 서브서브탭으로 재구성하고,
+  // 맨 앞에 "요약" 탭을 두어 각 섹션의 중요한 내용을 앞으로 데리고 온다.
+  const [profileSubTab, setProfileSubTab] = useState<
+    "summary" | "demographics" | "academics" | "colleges" | "activities" | "prep"
+  >("summary");
+
   return (
     <>
-      {/* 0. 인구통계(CollegeVine Demographics 탭 동등 항목, 2026-09-19) */}
-      <DemographicsCard data={data} readOnly={readOnly} pending={pending} run={run} />
+      <PillSubTabs
+        items={[
+          { id: "summary", label: "요약" },
+          { id: "demographics", label: "인구통계" },
+          { id: "academics", label: "학업정보" },
+          { id: "colleges", label: "대학 관심사" },
+          { id: "activities", label: "활동/수상" },
+          { id: "prep", label: "준비 현황" },
+        ]}
+        activeId={profileSubTab}
+        onSelect={setProfileSubTab}
+        className="mb-4"
+      />
 
+      {profileSubTab === "summary" && <ProfileSummaryCard data={data} />}
+
+      {profileSubTab === "demographics" && (
+        <DemographicsCard data={data} readOnly={readOnly} pending={pending} run={run} />
+      )}
+
+      {profileSubTab === "academics" && (
+        <>
       {/* 1. 기본 학업 정보 · 성적 */}
       <GradesCard data={data} readOnly={readOnly} pending={pending} run={run} />
 
@@ -226,8 +251,10 @@ function ProfileSections({
 
       {/* 2. 시험 정보 */}
       <TestRecordsCard data={data} readOnly={readOnly} pending={pending} run={run} />
+        </>
+      )}
 
-      {/* 3. 관심 분야와 대학 목표 */}
+      {profileSubTab === "colleges" && (
       <div className={cardClass}>
         <div className={cardTitleClass}>3. 관심 분야와 대학 목표</div>
         {readOnly ? (
@@ -295,12 +322,88 @@ function ProfileSections({
           </div>
         )}
       </div>
+      )}
 
-      {/* 4. 활동과 수상 */}
-      <ActivitiesAndAwardsCard data={data} readOnly={readOnly} pending={pending} run={run} />
+      {profileSubTab === "activities" && (
+        /* 4. 활동과 수상 */
+        <ActivitiesAndAwardsCard data={data} readOnly={readOnly} pending={pending} run={run} />
+      )}
 
-      {/* 5. 준비 현황 */}
-      <PrepStatusCard data={data} readOnly={readOnly} pending={pending} run={run} />
+      {profileSubTab === "prep" && (
+        /* 5. 준비 현황 */
+        <PrepStatusCard data={data} readOnly={readOnly} pending={pending} run={run} />
+      )}
+    </>
+  );
+}
+
+// 2026-09-22(사용자 지시) — 프로필 "요약" 서브서브탭: 각 섹션에서 작성된
+// 중요한 내용을 앞으로 데리고 와서 한눈에 볼 수 있게 한다(읽기 전용 digest).
+function ProfileSummaryCard({ data }: { data: RoadmapData }) {
+  const latestTest = data.testRecords[0];
+  const activeCourses = data.courses.filter((c) => c.status === "taking");
+  const completedCourses = data.courses.filter((c) => c.status === "completed");
+
+  return (
+    <>
+      <div className={cardClass}>
+        <div className={cardTitleClass}>학업 요약</div>
+        <div className="grid grid-cols-2 gap-3 text-[12.5px]">
+          <div>
+            <div className="text-grey-300 text-[10.5px] font-bold mb-0.5">학년 · 학교</div>
+            <div className="font-bold text-ink">
+              {data.grade ?? "미입력"} · {data.schoolName ?? "미입력"}
+            </div>
+          </div>
+          <div>
+            <div className="text-grey-300 text-[10.5px] font-bold mb-0.5">GPA</div>
+            <div className="font-bold text-ink">
+              {data.gpa ?? "미입력"}{data.gpaScale ? ` / ${data.gpaScale}` : ""}
+            </div>
+          </div>
+          <div>
+            <div className="text-grey-300 text-[10.5px] font-bold mb-0.5">교육과정 · 졸업 예정</div>
+            <div className="font-bold text-ink">
+              {data.academicProfile.curriculumType ?? "미입력"}
+              {data.academicProfile.graduationYear ? ` · ${data.academicProfile.graduationYear}년` : ""}
+            </div>
+          </div>
+          <div>
+            <div className="text-grey-300 text-[10.5px] font-bold mb-0.5">수강 과목</div>
+            <div className="font-bold text-ink">
+              수강 중 {activeCourses.length} · 완료 {completedCourses.length}
+            </div>
+          </div>
+          <div className="col-span-2">
+            <div className="text-grey-300 text-[10.5px] font-bold mb-0.5">최근 시험 성적</div>
+            <div className="font-bold text-ink">
+              {latestTest
+                ? `${latestTest.testType} ${latestTest.score ?? "-"}점 (${latestTest.testDate ?? "날짜 미입력"})`
+                : "미입력"}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className={cardClass}>
+        <div className={cardTitleClass}>대학 관심사 요약</div>
+        <div className="text-[12.5px] space-y-1">
+          <div>관심 전공: {data.collegeInterests.intendedMajors.join(", ") || "미입력"}</div>
+          <div>관심 대학: {data.collegeInterests.targetColleges.join(", ") || "미입력"}</div>
+          <div>지원 목표 시기: {data.collegeInterests.targetApplicationTiming ?? "미입력"}</div>
+        </div>
+      </div>
+
+      <div className={cardClass}>
+        <div className={cardTitleClass}>활동 · 수상 · 준비 현황 요약</div>
+        <div className="text-[12.5px] space-y-1">
+          <div>등록된 활동: {data.activities.length}개</div>
+          <div>등록된 수상: {data.awards.length}개</div>
+          <div>
+            준비 항목: {data.prepItems.filter((p) => p.status === "done").length} / {data.prepItems.length} 완료
+          </div>
+        </div>
+      </div>
     </>
   );
 }

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import BoardColumnsView from "@/app/components/BoardColumnsView";
 import DoneListView from "@/app/components/DoneListView";
+import TimelineView from "@/app/components/TimelineView";
 import { StatsWidget, UpcomingWidget } from "./HomeDashboard";
 import PlannerOverviewView from "./PlannerOverviewView";
 import type { DashboardData } from "./dashboard-data";
@@ -30,6 +31,7 @@ export default function HomeTab({
 }) {
   const router = useRouter();
   const [subtab, setSubtab] = useState<"overview" | "todo" | "done">("overview");
+  const [boardView, setBoardView] = useState<"board" | "timeline">("board");
   const [cards, setCards] = useState<BoardCard[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [newTitle, setNewTitle] = useState("");
@@ -154,12 +156,32 @@ export default function HomeTab({
               추가
             </button>
           </form>
-          <BoardColumnsView
-            cards={cards.filter((c) => boardColumnOf(c, nowIso) !== "done")}
-            onMove={handleMoveTask}
-            onDelete={handleDeleteTask}
-            columns={["overdue", "backlog", "in_progress"]}
-          />
+          <div className="flex gap-1.5 mb-3">
+            <button
+              type="button"
+              onClick={() => setBoardView("board")}
+              className={`text-[12px] font-bold px-3 py-1.5 rounded-lg ${boardView === "board" ? "bg-ink text-white" : "bg-grey-100 text-grey-500"}`}
+            >
+              보드
+            </button>
+            <button
+              type="button"
+              onClick={() => setBoardView("timeline")}
+              className={`text-[12px] font-bold px-3 py-1.5 rounded-lg ${boardView === "timeline" ? "bg-ink text-white" : "bg-grey-100 text-grey-500"}`}
+            >
+              타임라인
+            </button>
+          </div>
+          {boardView === "board" ? (
+            <BoardColumnsView
+              cards={cards.filter((c) => boardColumnOf(c, nowIso) !== "done")}
+              onMove={handleMoveTask}
+              onDelete={handleDeleteTask}
+              columns={["overdue", "backlog", "in_progress"]}
+            />
+          ) : (
+            <TimelineView cards={cards.filter((c) => boardColumnOf(c, nowIso) !== "done")} />
+          )}
           {/* 2026-09-22(사용자 지시) — 보드 아래에 예정 수업 리스트(학부모/학생 통일 컴포넌트 재사용). */}
           <div className="max-w-[420px] mt-6">
             <UpcomingWidget upcoming={dashboard.upcoming} onShowAll={() => router.push("?tab=classes", { scroll: false })} />

@@ -10,6 +10,7 @@ import ParentMockExamTab from "./ParentMockExamTab";
 import { loadChildBoardCardsAction } from "./board-actions";
 import PlannerOverviewView from "@/app/student/PlannerOverviewView";
 import BoardColumnsView from "@/app/components/BoardColumnsView";
+import TimelineView from "@/app/components/TimelineView";
 import type { BoardCard } from "@/lib/board/types";
 import PageFrame from "@/app/components/PageFrame";
 import NavIcon from "@/app/components/NavIcon";
@@ -170,6 +171,7 @@ export default function ParentShell({
   // 종합 리뷰(기본)/수업 리뷰(시간순)/상담 리뷰/통계 4개 읽기 전용 서브탭으로
   // 구성한다. 상담 리뷰는 종합 리뷰에 합치지 않는다(사용자 결정, 2026-09-18).
   const [homeSubTab, setHomeSubTab] = useState<"overview" | "todo" | "review">("overview");
+  const [homeBoardView, setHomeBoardView] = useState<"board" | "timeline">("board");
   const [familyReviews, setFamilyReviews] = useState<FamilyLessonReview[] | null>(null);
   const [consultReviews, setConsultReviews] = useState<HomeConsultationReview[] | null>(null);
   // 2026-09-22(사용자 지시) — Home+Planner 통합, Overview/TODO/Done 서브탭용.
@@ -556,7 +558,27 @@ export default function ParentShell({
                   <p className="p-8 text-[14px] text-grey-500">불러오는 중...</p>
                 ) : (
                   <div className="px-6 py-5">
-                    <BoardColumnsView cards={childBoardCards} disableLinks />
+                    <div className="flex gap-1.5 mb-3">
+                      <button
+                        type="button"
+                        onClick={() => setHomeBoardView("board")}
+                        className={`text-[12px] font-bold px-3 py-1.5 rounded-lg ${homeBoardView === "board" ? "bg-ink text-white" : "bg-grey-100 text-grey-500"}`}
+                      >
+                        보드
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setHomeBoardView("timeline")}
+                        className={`text-[12px] font-bold px-3 py-1.5 rounded-lg ${homeBoardView === "timeline" ? "bg-ink text-white" : "bg-grey-100 text-grey-500"}`}
+                      >
+                        타임라인
+                      </button>
+                    </div>
+                    {homeBoardView === "board" ? (
+                      <BoardColumnsView cards={childBoardCards} disableLinks />
+                    ) : (
+                      <TimelineView cards={childBoardCards} disableLinks />
+                    )}
                     {/* 2026-09-22(사용자 지시) — 보드 아래에 예정 수업 리스트(학생 포털과 동일 컴포넌트). */}
                     <div className="max-w-[420px] mt-6">
                       <UpcomingWidget
