@@ -879,3 +879,104 @@ migration) 추가 → 관리자 화면에 업로드 UI 연결.
   이름은 실패 목록에 없었다 — 다만 tail로 잘려 앞쪽 실패 파일 9개 전체 목록은
   이번 세션에서 직접 확인하지 못했다(다음 세션에서 전체 로그로 재확인 권장).
 - `npx supabase db push --linked`, `vercel deploy` 미실행(지시대로 금지).
+
+## 11차 세션 (2026-09-23, "CDS 우선 수집 표준" 제정 + 도구화 + 마이그레이션 충돌 수습)
+
+### 세션 도중 긴급 처리: 마이그레이션 타임스탬프 충돌
+작업 도중 "ALTON 개발 세션"으로부터 `supabase/migrations/20261550000000_college_db_p10_cds_metric_keys.sql`
+(10차 세션이 만든 파일)이 다른 브랜치가 이미 공유 non-prod DB에 적용한
+`20261550000000_r_consultant_ended_assignments.sql`과 타임스탬프가 겹친다는 알림을
+받았다(이번이 두 번째 충돌). `ls supabase/migrations/ | tail -10`으로 확인 후
+`git mv`로 `20261560000000_college_db_p10_cds_metric_keys.sql`로 rename, 문서 내
+파일명 참조(10차 세션 절, 이 문서 791줄)도 함께 정정했다. `npx supabase db reset`은
+로컬 데이터 파괴 위험으로 도구 정책상 거부되어, 대신 로컬
+`supabase_migrations.schema_migrations` 테이블의 해당 버전 행을 `20261550000000`→
+`20261560000000`으로 UPDATE(스키마·데이터 변경 없는 메타데이터 정정)해 로컬 DB
+상태를 새 파일명과 일치시켰다. 별도 커밋(`f7e5214`)으로 분리 반영. **다음 세션부터
+새 마이그레이션은 반드시 `20261560000000`보다 큰 번호를 쓰고, 만들기 직전 매번
+`ls supabase/migrations/ | tail -5`로 최신 확인할 것.**
+
+### 1. CDS 우선 수집 표준 문서 제정
+[`docs/2026-09-23-cds-first-data-collection-standard.md`](2026-09-23-cds-first-data-collection-standard.md)
+신규 작성. 10차 세션이 프린스턴에 실제로 한 절차(CDS 원문 우선 탐색 → 섹션 B/C/G
+전 항목 추출 → cohort 정확 구분 → 출처·검증상태 명시 → 학과 목록 전체 수집)를
+앞으로 이 프로젝트의 모든 대학 데이터 세션이 따라야 할 **표준**으로 명문화했다.
+`docs/CURRENT.md` 1절에 이 표준 문서를 가리키는 행을 추가해 새 세션이 쉽게 찾도록
+했다. 문서 7절에 "200개교 전부 끝나면 최종 통합보고서 작성 필요(CDS 정보 중
+컨설턴트·학생·학부모가 참고할 만한 것은 전부 UI 노출)" 지시를 그대로 명시해
+다음 세션들에게 계속 전달되도록 했다.
+
+### 2. 실제 조사로 확인한 사실 — CDS 링크 발견은 이미 대부분 끝나 있었다
+스크립트 작성 전 psql로 직접 확인한 결과, 9~10차 세션이 CSV 레지스트리의
+`common_data_set_url` 후보를 이미 전 학교분 등록·검증까지 마쳐 놓았다:
+`university_source_urls`에 `source_type='common_data_set'`이 **approved 158건 /
+rejected 31건 / pending 2건** 존재(`sources_pending_review` 178개교 전원이 후보
+URL을 이미 보유). 즉 "CDS 링크를 찾는" 단계는 이미 대부분 끝나 있고, 남은 진짜
+병목은 **"그 CDS 원문을 실제로 읽고 상세 항목을 정확한 cohort로 반영하는" 단계**
+(프린스턴 10차 세션 방식)임을 확인했다 — 이 판단을 표준 문서와 아래 도구 설계에
+반영했다.
+
+### 3. `scripts/university-cds-collect.ts` 신규 작성
+approved 상태인 common_data_set URL을 실제로 `safeFetch`(PDF는 기존 crawler.ts의
+pdfjs 추출 재사용)해서 원문 텍스트를 확보하고, `university_update_proposals`에
+"CDS 원문 확보 — 상세 파싱·정확한 cohort 반영은 관리자가 표준 문서 절차대로 수기
+확인 필요" 메모 + 원문 앞부분을 evidence로 남긴다. common_data_set 후보가 아예
+없는 학교(있을 경우 대비)는 IR 페이지 경로 패턴 7종을 시도해 신규 발견도
+지원한다(발견해도 `pending`으로만 등록 — 무단 승인 금지 원칙 유지, 승격은 기존
+`university-source-urls-verify.ts`가 담당). PDF 전체를 완벽 자동 파싱하는 로직은
+의도적으로 만들지 않았다(오분류 위험이 실제 항목 추출 자동화보다 크다고 판단,
+지시서도 이를 허용).
+
+**실행 검증**(`--limit 3`로 스모크 테스트, 실제 네트워크 호출): Adelphi
+University/American University/Andrews University 3개교에서 실제로 CDS 원문을
+fetch해 update_proposals에 evidence 남김 확인(`university_update_proposals` 총
+338→341건, +3 정확히 일치). American University는 실제 CDS 페이지(`/provost/oira/
+common-data-set.cfm`)에서 2642자 확보, Adelphi는 IR 데이터 페이지에서 12995자,
+Andrews University는 CSV 후보 URL이 실제로는 홈페이지 루트라 CDS 특정 페이지가
+아닌 홈페이지 본문(10526자)을 확보함(추가 발견 시도는 하지 않음 — 정확한 CDS
+페이지는 사람이 수동 검색해야 함, 로그에 정직하게 남음). 전체 178개교 규모
+실행은 **이번 세션에서 수행하지 않았다**(시간/네트워크 호출 규모상 다음 세션이
+`--limit`을 크게 잡아 이어서 실행 가능, 스크립트는 멱등적 — 이미 update_proposal이
+있어도 재실행 시 중복 evidence만 추가될 뿐 데이터 파괴 없음).
+
+### 4. 실 학교 처리 — 이번 세션 범위와 한계 (정직한 기록)
+이번 세션은 **표준 확립 + 도구화**에 시간을 집중했고, 프린스턴 방식(원문 전체를
+사람이 직접 읽고 SAT/ACT 영역별·GPA 분포·cohort 정확 구분까지 반영)으로 완결
+처리한 **신규 학교는 0개교**다. 위 3번의 스모크 테스트로 확보한 3개교의 CDS
+원문은 "발견·evidence 확보"만 됐을 뿐, 표준 문서 2~4절 수준의 상세 반영(학교당
+다수 metric_key insert + cohort 판정 + notes 기록)은 아직 안 됐다 — 이는 학교당
+원문을 실제로 읽고 20개 이상의 지표를 정확히 판정·입력해야 하는 작업이라(10차
+세션이 프린스턴 1개교에 쓴 시간과 맞먹음), 178개교 전체를 한 세션에서 이 수준으로
+끝내는 것은 애초에 지시서도 요구하지 않았다("200개교를 전부 끝내는 것은 이번
+세션의 목표가 아니다"). 학과(전공) 목록 보완도 이번 세션에서 착수하지 않았다
+(0개교).
+
+### 검증
+- `npx tsc --noEmit -p .` — 신규 오류 없음(`app/layout.tsx`의 `LayoutProps` 오류만
+  잔존, 무관, 이전 세션부터 있던 것).
+- `npx eslint scripts/university-cds-collect.ts` — 오류 없음.
+- `npx vitest run scripts/universities-seed.test.ts lib/universities/crawler.test.ts`
+  — 16/16 통과.
+- psql로 `university_update_proposals` 개수 직접 확인(338→341, +3 스모크 테스트와
+  정확히 일치).
+- `npx supabase db push --linked`, `vercel deploy` 미실행(지시대로 금지).
+
+### 미완료 / 다음 세션 필요
+- **최우선**: `docs/2026-09-23-cds-first-data-collection-standard.md`를 먼저 읽고,
+  그 절차대로 `sources_pending_review` 178개교(우선순위: approved CDS URL이 이미
+  있는 학교부터, `scripts/university-cds-collect.ts` 실행 결과 로그
+  `scripts/.university-cds-collect.log.json` 참고) 원문을 학교별로 직접 읽어
+  SAT/ACT 영역별 25/50/75, GPA 분포, 지원자/합격자/등록자 수(cohort 정확 구분),
+  합격률/등록률, 대기자명단, 재학유지율, 졸업률, 학비를
+  `university_admission_metrics`에 반영(프린스턴 10차 세션 방식 그대로).
+- 학과(전공) 목록 전체 보완(additive) — 착수 전.
+- `scripts/university-cds-collect.ts`를 `--limit`을 178 이상으로 잡아 전체
+  실행해 나머지 175개교의 CDS 원문 evidence를 먼저 다 모아두면, 이후 세션들이
+  원문 재검색 없이 바로 상세 반영 단계로 들어갈 수 있다(권장하지만 필수는 아님 —
+  이미 approved URL 자체는 있으므로 사람이 직접 방문해도 무방).
+- **200개교(verified_pilot 10 + sources_pending_review 178 + unconfirmed 12,
+  unconfirmed는 CSV 후보 URL 소진 상태로 사람이 새 출처를 찾아야 진행 가능) 전체가
+  끝나면 반드시 최종 통합보고서를 작성**하고(표준 문서 7절, 원 지시서 3번 그대로),
+  CDS 정보 중 컨설턴트·학생·학부모가 참고할 만한 항목은 전부 공개 화면에 노출되도록
+  UI를 계속 확장할 것 — 이 지시는 200개교가 끝날 때까지 매 세션 인계 기록에 계속
+  전달되어야 한다.
