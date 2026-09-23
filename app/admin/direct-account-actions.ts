@@ -25,6 +25,8 @@ export type DirectOnboardingStudentInput = {
   email: string;
   grade?: string;
   subject?: string;
+  // R15-A(2026-09-23) — 담당 컨설턴트. 필수(안내 이메일은 이 값이 없으면 발송되지 않는다).
+  consultantId: string;
 };
 
 export type SendDirectOnboardingNoticeResult =
@@ -51,6 +53,7 @@ function assertDirectOnboardingParamsValid(params: {
     const norm = s.email.trim().toLowerCase();
     if (seen.has(norm)) throw new Error(`같은 이메일이 중복 입력됐습니다: ${s.email}`);
     seen.add(norm);
+    if (!s.consultantId) throw new Error(`담당 컨설턴트를 지정해주세요: ${s.name || s.email}`);
   }
 }
 
@@ -85,6 +88,7 @@ async function sendDirectOnboardingNoticeInternal(params: {
     email: s.email.trim(),
     grade: s.grade?.trim() || null,
     subject: s.subject?.trim() || null,
+    consultantId: s.consultantId,
   }));
 
   // 2026-09-11(제품 오너 확정 정책) — 링크 생성·발송 전 자녀 이메일이 기존
@@ -201,7 +205,7 @@ async function reissueDirectOnboardingLinkInternal(
 
   const { data: students, error: studentsError } = await admin
     .from("trial_onboarding_link_students")
-    .select("id, student_name, student_email, student_grade, student_subject, status")
+    .select("id, student_name, student_email, student_grade, student_subject, status, consultant_id")
     .eq("link_id", linkId)
     .order("created_at", { ascending: true });
   if (studentsError) throw new Error(studentsError.message);
@@ -227,12 +231,16 @@ async function reissueDirectOnboardingLinkInternal(
           email: s.email.trim() || activeStudents[i].student_email,
           grade: s.grade ?? activeStudents[i].student_grade ?? undefined,
           subject: s.subject ?? activeStudents[i].student_subject ?? undefined,
+          // R15-A(2026-09-23) — 재발급 폼은 아직 담당 컨설턴트 변경 입력을 받지
+          // 않는다 — 기존 링크에 지정돼 있던 담당자를 그대로 이어간다.
+          consultantId: activeStudents[i].consultant_id ?? "",
         }))
       : activeStudents.map((s) => ({
           name: s.student_name,
           email: s.student_email,
           grade: s.student_grade ?? undefined,
           subject: s.student_subject ?? undefined,
+          consultantId: s.consultant_id ?? "",
         }));
 
   assertDirectOnboardingParamsValid({ guardianEmail, guardianName, students: studentsPayload });

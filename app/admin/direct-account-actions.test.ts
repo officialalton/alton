@@ -52,7 +52,7 @@ beforeEach(() => {
 const VALID_PARAMS = {
   guardianEmail: "guardian@example.com",
   guardianName: "김보호자",
-  students: [{ name: "김학생", email: "student@example.com" }],
+  students: [{ name: "김학생", email: "student@example.com", consultantId: "consultant1" }],
 };
 
 describe("sendDirectOnboardingNoticeAction", () => {
@@ -87,8 +87,8 @@ describe("sendDirectOnboardingNoticeAction", () => {
     const result = await sendDirectOnboardingNoticeAction({
       ...VALID_PARAMS,
       students: [
-        { name: "학생1", email: "dup@example.com" },
-        { name: "학생2", email: "dup@example.com" },
+        { name: "학생1", email: "dup@example.com", consultantId: "consultant1" },
+        { name: "학생2", email: "dup@example.com", consultantId: "consultant1" },
       ],
     });
     expect(result.status).toBe("failed");

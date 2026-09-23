@@ -13,6 +13,7 @@ import {
   type PrimaryGuardianCandidate,
   type SendDirectOnboardingNoticeResult,
 } from "./direct-account-actions";
+import { listConsultantsAction, type ConsultantWithStudents } from "./consultant-assignment-actions";
 import { useToasts, ToastStack } from "./Toast";
 
 const SIMPLE_EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -25,10 +26,18 @@ export default function AddChildToGuardianForm({ onSent }: { onSent?: () => void
   const [searching, setSearching] = useState(false);
   const [searched, setSearched] = useState(false);
   const [selected, setSelected] = useState<PrimaryGuardianCandidate | null>(null);
-  const [student, setStudent] = useState({ name: "", email: "", grade: "", subject: "" });
+  const [student, setStudent] = useState({ name: "", email: "", grade: "", subject: "", consultantId: "" });
+  const [consultants, setConsultants] = useState<ConsultantWithStudents[]>([]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [lastResult, setLastResult] = useState<SendDirectOnboardingNoticeResult | null>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    listConsultantsAction()
+      .then(setConsultants)
+      .catch(() => setConsultants([]));
+  }, [open]);
   // 발급 전 자녀 이메일 중복 차단(lib/onboarding-email-guard.ts)에 걸린 이메일.
   const [duplicateEmail, setDuplicateEmail] = useState<string | null>(null);
   const { toasts, showToast, dismiss } = useToasts();
@@ -65,7 +74,7 @@ export default function AddChildToGuardianForm({ onSent }: { onSent?: () => void
     setCandidates([]);
     setSearched(false);
     setSelected(null);
-    setStudent({ name: "", email: "", grade: "", subject: "" });
+    setStudent({ name: "", email: "", grade: "", subject: "", consultantId: "" });
     setError(null);
     setDuplicateEmail(null);
   }
@@ -73,7 +82,8 @@ export default function AddChildToGuardianForm({ onSent }: { onSent?: () => void
   const isValid =
     selected !== null &&
     student.name.trim().length > 0 &&
-    SIMPLE_EMAIL_RE.test(student.email.trim());
+    SIMPLE_EMAIL_RE.test(student.email.trim()) &&
+    student.consultantId.length > 0;
 
   if (!open) {
     return (
@@ -211,6 +221,18 @@ export default function AddChildToGuardianForm({ onSent }: { onSent?: () => void
               placeholder="과목(선택)"
               className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]"
             />
+            <select
+              value={student.consultantId}
+              onChange={(e) => setStudent((s) => ({ ...s, consultantId: e.target.value }))}
+              className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]"
+            >
+              <option value="">담당 컨설턴트 선택</option>
+              {consultants.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.name ?? c.email ?? c.id}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
       )}
@@ -233,6 +255,7 @@ export default function AddChildToGuardianForm({ onSent }: { onSent?: () => void
                   email: student.email,
                   grade: student.grade || undefined,
                   subject: student.subject || undefined,
+                  consultantId: student.consultantId,
                 },
               });
               setLastResult(result);

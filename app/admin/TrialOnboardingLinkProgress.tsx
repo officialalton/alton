@@ -16,10 +16,12 @@ import {
   retryFailedTrialOnboardingStudentAction,
   reissueTrialOnboardingLinkAction,
   cancelTrialOnboardingLinkAction,
+  setLinkStudentConsultantAction,
   type TrialOnboardingLinkDetail,
   type TrialOnboardingLinkStudent,
 } from "./trial-onboarding-actions";
 import { cancelDirectOnboardingLinkStudentAction } from "./direct-account-actions";
+import { listConsultantsAction, setStudentConsultantAction, type ConsultantWithStudents } from "./consultant-assignment-actions";
 import { useToasts, ToastStack } from "./Toast";
 
 const LINK_STATUS_LABEL: Record<TrialOnboardingLinkDetail["status"], string> = {
@@ -47,6 +49,8 @@ export default function TrialOnboardingLinkProgress({ linkId }: { linkId: string
   const [students, setStudents] = useState<TrialOnboardingLinkStudent[] | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [retryingId, setRetryingId] = useState<string | null>(null);
+  const [consultants, setConsultants] = useState<ConsultantWithStudents[]>([]);
+  const [reassigningId, setReassigningId] = useState<string | null>(null);
   const [reissuing, setReissuing] = useState(false);
   const [cancelling, setCancelling] = useState(false);
   const [reissueFormOpen, setReissueFormOpen] = useState(false);
@@ -75,8 +79,13 @@ export default function TrialOnboardingLinkProgress({ linkId }: { linkId: string
   }
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
-    if (open) load();
+    if (open) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
+      load();
+      listConsultantsAction()
+        .then(setConsultants)
+        .catch(() => setConsultants([]));
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, linkId]);
 
@@ -272,6 +281,49 @@ export default function TrialOnboardingLinkProgress({ linkId }: { linkId: string
                     >
                       {STUDENT_STATUS_LABEL[s.status]}
                       {s.status === "failed" && s.error && `: ${s.error}`}
+                    </div>
+                    <div className="mt-1 flex items-center gap-1.5">
+                      <span className="text-[11px] text-grey-500">
+                        담당 컨설턴트: {s.consultantName ?? <span className="text-red font-semibold">미지정</span>}
+                      </span>
+                      <select
+                        value=""
+                        disabled={reassigningId === s.id}
+                        onChange={async (e) => {
+                          const consultantId = e.target.value;
+                          if (!consultantId) return;
+                          setReassigningId(s.id);
+                          try {
+                            if (s.status === "created" && s.childAuthUserId) {
+                              await setStudentConsultantAction(
+                                s.childAuthUserId,
+                                consultantId,
+                                s.consultantId ? "관리자 재배정(발송 내역 화면)" : "관리자 배정(발송 내역 화면)"
+                              );
+                            } else {
+                              await setLinkStudentConsultantAction(
+                                s.id,
+                                consultantId,
+                                s.consultantId ? "관리자 재배정(발송 내역 화면)" : "관리자 배정(발송 내역 화면)"
+                              );
+                            }
+                            showToast("success", `${s.studentName}의 담당 컨설턴트를 변경했습니다.`);
+                            await load();
+                          } catch (err) {
+                            showToast("error", `변경 실패 — ${err instanceof Error ? err.message : String(err)}`);
+                          } finally {
+                            setReassigningId(null);
+                          }
+                        }}
+                        className="text-[10.5px] border border-grey-200 rounded px-1 py-0.5"
+                      >
+                        <option value="">{s.consultantId ? "변경..." : "지정..."}</option>
+                        {consultants.map((c) => (
+                          <option key={c.id} value={c.id}>
+                            {c.name ?? c.email ?? c.id}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                     {s.status === "failed" && (
                       <button

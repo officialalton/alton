@@ -17,3 +17,52 @@ export async function loadMyAssignedConsultationsAction(): Promise<IntakeConsult
   const { user, supabase } = await requireUser();
   return loadMyAssignedConsultations(supabase, user.id);
 }
+
+// R15-A(2026-09-23) — 관리자가 계정 생성 안내를 발송했지만 아직 보호자가
+// 확인하지 않았거나(가입 대기) 계정이 아직 안 만들어진, 내가 담당인 학생.
+export type PendingOnboardingStudent = {
+  linkStudentId: string;
+  linkId: string;
+  studentName: string;
+  studentEmail: string;
+  studentGrade: string | null;
+  status: "pending" | "created" | "failed" | "cancelled";
+  guardianName: string;
+  guardianEmail: string;
+  linkStatus: "pending" | "redeemed" | "expired" | "revoked";
+  noticeDeliveryStatus: "pending" | "sent" | "failed";
+  createdAt: string;
+};
+
+type PendingOnboardingStudentRow = {
+  link_student_id: string;
+  link_id: string;
+  student_name: string;
+  student_email: string;
+  student_grade: string | null;
+  status: string;
+  guardian_name: string;
+  guardian_email: string;
+  link_status: string;
+  notice_delivery_status: string;
+  created_at: string;
+};
+
+export async function loadMyPendingOnboardingStudentsAction(): Promise<PendingOnboardingStudent[]> {
+  const { supabase } = await requireUser();
+  const { data, error } = await supabase.rpc("list_my_pending_onboarding_students");
+  if (error) throw new Error(error.message);
+  return ((data ?? []) as PendingOnboardingStudentRow[]).map((r) => ({
+    linkStudentId: r.link_student_id,
+    linkId: r.link_id,
+    studentName: r.student_name,
+    studentEmail: r.student_email,
+    studentGrade: r.student_grade,
+    status: r.status as PendingOnboardingStudent["status"],
+    guardianName: r.guardian_name,
+    guardianEmail: r.guardian_email,
+    linkStatus: r.link_status as PendingOnboardingStudent["linkStatus"],
+    noticeDeliveryStatus: r.notice_delivery_status as PendingOnboardingStudent["noticeDeliveryStatus"],
+    createdAt: r.created_at,
+  }));
+}

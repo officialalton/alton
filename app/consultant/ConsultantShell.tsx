@@ -16,7 +16,7 @@ import {
 } from "./board-actions";
 import type { BoardCard } from "@/lib/board/types";
 import type { IntakeConsultation } from "./intake-data";
-import { markConsultationContactedAction } from "./intake-actions";
+import { markConsultationContactedAction, loadMyPendingOnboardingStudentsAction, type PendingOnboardingStudent } from "./intake-actions";
 import type { ConsultantAvailabilityRule } from "./availability-actions";
 import {
   listMyAvailabilityRulesAction,
@@ -240,6 +240,55 @@ function AssignedConsultationsList({ initialConsultations }: { initialConsultati
           })}
         </div>
       )}
+      <PendingOnboardingStudentsSection />
+    </div>
+  );
+}
+
+// R15-A(2026-09-23) — 관리자 "Onboarding > 계정 생성"에서 담당으로 지정됐지만
+// 아직 계정이 안 만들어진(가입 대기) 학생. 상담이 아니므로 위 칸반과는 분리해
+// 보여준다 — 다음 슬라이스(신규 배정 칸반 확장)에서 계정생성→체험→정규전환
+// 전체 파이프라인 카드로 통합할 예정, 지금은 목록만.
+function PendingOnboardingStudentsSection() {
+  const [students, setStudents] = useState<PendingOnboardingStudent[] | null>(null);
+
+  useEffect(() => {
+    loadMyPendingOnboardingStudentsAction()
+      .then(setStudents)
+      .catch(() => setStudents([]));
+  }, []);
+
+  if (!students || students.length === 0) return null;
+
+  return (
+    <div className="mt-8">
+      <h2 className="text-[15px] font-extrabold text-ink mb-1">가입 대기</h2>
+      <p className="text-[12px] text-grey-500 mb-3">
+        관리자가 계정 생성 안내를 발송했고 내가 담당인 학생입니다. 상담 신청 건이 아닙니다.
+      </p>
+      <div className="flex flex-col gap-2 max-w-[420px]">
+        {students.map((s) => (
+          <div key={s.linkStudentId} className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3 bg-white">
+            <div className="text-[13px] font-bold text-ink">
+              {s.studentName} <span className="font-normal text-grey-500">({s.studentEmail})</span>
+            </div>
+            <div className="text-[11.5px] text-grey-500 mt-1">
+              보호자: {s.guardianName}({s.guardianEmail})
+            </div>
+            <div className="text-[11.5px] text-grey-500 mt-0.5">
+              {s.linkStatus === "pending"
+                ? s.noticeDeliveryStatus === "sent"
+                  ? "안내 발송됨 — 보호자 확인 대기"
+                  : "안내 발송 대기"
+                : s.linkStatus === "redeemed"
+                  ? "보호자 확인 완료 — 계정 생성 진행 중"
+                  : s.linkStatus === "expired"
+                    ? "안내 링크 만료됨"
+                    : "취소됨"}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

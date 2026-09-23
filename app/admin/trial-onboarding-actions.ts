@@ -703,6 +703,10 @@ export type TrialOnboardingLinkStudent = {
   status: "pending" | "created" | "failed" | "cancelled";
   childAuthUserId: string | null;
   error: string | null;
+  // R15-A(2026-09-23) — 직접생성 경로(가입 안내 링크) 전용 담당 컨설턴트.
+  // 상담 경로 학생은 항상 null(consultations.admissions_consultant_id를 대신 쓴다).
+  consultantId: string | null;
+  consultantName: string | null;
 };
 
 // 2026-09-06(발송 상태 조회 화면) — 제품 오너 지적: "메일을 보낸 상태에서 해당
@@ -891,20 +895,48 @@ export async function listTrialOnboardingLinkStudentsAction(linkId: string): Pro
   const admin = createAdminClient();
   const { data, error } = await admin
     .from("trial_onboarding_link_students")
-    .select("id, student_name, student_email, student_grade, student_subject, status, child_auth_user_id, error")
+    .select(
+      "id, student_name, student_email, student_grade, student_subject, status, child_auth_user_id, error, consultant_id, consultant:profiles!trial_onboarding_link_students_consultant_id_fkey(name)"
+    )
     .eq("link_id", linkId)
     .order("created_at", { ascending: true });
   if (error) throw new Error(error.message);
-  return (data ?? []).map((s) => ({
-    id: s.id,
-    studentName: s.student_name,
-    studentEmail: s.student_email,
-    studentGrade: s.student_grade,
-    studentSubject: s.student_subject,
-    status: s.status as TrialOnboardingLinkStudent["status"],
-    childAuthUserId: s.child_auth_user_id,
-    error: s.error,
-  }));
+  return (data ?? []).map((s) => {
+    const consultant = Array.isArray(s.consultant) ? s.consultant[0] : s.consultant;
+    return {
+      id: s.id,
+      studentName: s.student_name,
+      studentEmail: s.student_email,
+      studentGrade: s.student_grade,
+      studentSubject: s.student_subject,
+      status: s.status as TrialOnboardingLinkStudent["status"],
+      childAuthUserId: s.child_auth_user_id,
+      error: s.error,
+      consultantId: s.consultant_id,
+      consultantName: (consultant as { name: string | null } | null)?.name ?? null,
+    };
+  });
+}
+
+// R15-A(2026-09-23) — 가입 대기 단계(아직 계정 생성 전) 학생의 담당 컨설턴트를
+// 지정/변경한다. 계정 생성 후에는 admin_set_student_consultant(같은 개념,
+// consultant-assignment-actions.ts의 setStudentConsultantAction)를 대신 쓴다 —
+// 두 RPC가 각각 pre-account/post-account 단계를 나눠 맡고, 화면(발송 내역/
+// Users/Consultants)은 학생 상태에 따라 알맞은 쪽을 호출한다.
+export async function setLinkStudentConsultantAction(
+  linkStudentId: string,
+  consultantId: string,
+  reason?: string
+): Promise<void> {
+  const { actorUserId } = await requireAdminOrCapability(CONSULT_CAPABILITY);
+  const admin = createAdminClient();
+  const { error } = await admin.rpc("admin_set_link_student_consultant", {
+    p_link_student_id: linkStudentId,
+    p_consultant_id: consultantId,
+    p_admin_id: actorUserId,
+    p_reason: reason ?? null,
+  });
+  if (error) throw new Error(error.message);
 }
 
 export type RetryTrialOnboardingStudentResult =

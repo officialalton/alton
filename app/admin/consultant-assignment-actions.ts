@@ -65,27 +65,42 @@ export async function promoteToConsultantAction(email: string): Promise<void> {
   if (error) throw new Error(error.message);
 }
 
-export async function assignStudentToConsultantAction(consultantId: string, studentEmail: string): Promise<void> {
+// R15-A(2026-09-23) — consultant_assignments.student_id에 유니크 제약을 걸어
+// "학생 한 명 = 담당 컨설턴트 한 명"을 강제한 뒤로는(20261473000000), 여기서
+// raw upsert(기본 conflict target = PK (consultant_id, student_id))로 쓰면
+// 재배정(다른 컨설턴트로 바꾸는 경우) 시 student_id 유니크 위반 에러가 난다.
+// admin_set_student_consultant() RPC(이력 기록 포함)로 전부 옮긴다 — Users/
+// Consultants/계정 생성 발송 내역 네 화면이 전부 이 함수(또는 같은 RPC를 쓰는
+// setLinkStudentConsultantAction의 post-account 짝)로 담당자를 바꿔야 어디서
+// 바꾸든 같은 이력·같은 결과로 이어진다.
+export async function setStudentConsultantAction(
+  studentId: string,
+  consultantId: string | null,
+  reason?: string
+): Promise<void> {
   const { supabase, adminUserId } = await requireAdmin();
+  const { error } = await supabase.rpc("admin_set_student_consultant", {
+    p_student_id: studentId,
+    p_new_consultant_id: consultantId,
+    p_admin_id: adminUserId,
+    p_reason: reason ?? null,
+  });
+  if (error) throw new Error(error.message);
+}
+
+export async function assignStudentToConsultantAction(consultantId: string, studentEmail: string): Promise<void> {
+  const { supabase } = await requireAdmin();
   const { data: studentId, error: lookupError } = await supabase.rpc("find_profile_id_by_email", {
     p_email: studentEmail.trim(),
   });
   if (lookupError) throw new Error(lookupError.message);
   if (!studentId) throw new Error("해당 이메일의 학생 계정을 찾을 수 없습니다.");
-  const { error } = await supabase
-    .from("consultant_assignments")
-    .upsert({ consultant_id: consultantId, student_id: studentId, assigned_by: adminUserId });
-  if (error) throw new Error(error.message);
+  await setStudentConsultantAction(studentId as string, consultantId);
 }
 
 export async function unassignStudentFromConsultantAction(consultantId: string, studentId: string): Promise<void> {
-  const { supabase } = await requireAdmin();
-  const { error } = await supabase
-    .from("consultant_assignments")
-    .delete()
-    .eq("consultant_id", consultantId)
-    .eq("student_id", studentId);
-  if (error) throw new Error(error.message);
+  void consultantId; // 유니크 제약으로 학생당 담당 컨설턴트가 하나뿐이라 더 이상 필요 없지만, 호출부 호환을 위해 시그니처는 유지한다.
+  await setStudentConsultantAction(studentId, null, "관리자 배정 해제");
 }
 
 /** 스펙 §Screen Scope "New request queue" — 어드미션 컨설턴트가 아직 없는 상담 요청. */

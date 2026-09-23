@@ -5,13 +5,22 @@ import { describe, expect, it, vi, beforeEach } from "vitest";
 // UI 기준 검증: 검색 빈 상태, 후보 선택, 발송 시 guardianId만 서버로 보냄,
 // 중복 이메일의 인라인 안내, 성공 시 폼 닫힘 + 목록 갱신 콜백.
 
-const { searchMock, sendMock } = vi.hoisted(() => ({ searchMock: vi.fn(), sendMock: vi.fn() }));
+const { searchMock, sendMock, listConsultantsMock } = vi.hoisted(() => ({
+  searchMock: vi.fn(),
+  sendMock: vi.fn(),
+  listConsultantsMock: vi.fn(),
+}));
 vi.mock("./direct-account-actions", () => ({
   searchPrimaryGuardiansAction: searchMock,
   sendAddChildToGuardianNoticeAction: sendMock,
 }));
+vi.mock("./consultant-assignment-actions", () => ({
+  listConsultantsAction: listConsultantsMock,
+}));
 
 import AddChildToGuardianForm from "./AddChildToGuardianForm";
+
+const CONSULTANT = { id: "consultant1", name: "박컨설턴트", email: "consultant1@example.com", students: [] };
 
 const GUARDIAN = {
   guardianId: "g1",
@@ -24,7 +33,13 @@ beforeEach(() => {
   vi.clearAllMocks();
   searchMock.mockResolvedValue([GUARDIAN]);
   sendMock.mockResolvedValue({ status: "sent", linkId: "link1", sentAt: "2026-09-11T00:00:00Z", localRedeemUrl: null });
+  listConsultantsMock.mockResolvedValue([CONSULTANT]);
 });
+
+async function selectConsultant() {
+  const select = await screen.findByDisplayValue("담당 컨설턴트 선택");
+  fireEvent.change(select, { target: { value: "consultant1" } });
+}
 
 function openForm() {
   render(<AddChildToGuardianForm onSent={vi.fn()} />);
@@ -60,12 +75,13 @@ describe("AddChildToGuardianForm", () => {
 
     fireEvent.change(screen.getByPlaceholderText("학생 이름"), { target: { value: "김둘째" } });
     fireEvent.change(screen.getByPlaceholderText("학생 이메일"), { target: { value: "child2@example.com" } });
+    await selectConsultant();
     fireEvent.click(screen.getByText("자녀 추가 안내 발송"));
 
     await waitFor(() =>
       expect(sendMock).toHaveBeenCalledWith({
         guardianId: "g1",
-        student: { name: "김둘째", email: "child2@example.com", grade: undefined, subject: undefined },
+        student: { name: "김둘째", email: "child2@example.com", grade: undefined, subject: undefined, consultantId: "consultant1" },
       })
     );
     // 성공하면 폼이 닫힌다.
@@ -86,6 +102,7 @@ describe("AddChildToGuardianForm", () => {
     await selectGuardian();
     fireEvent.change(screen.getByPlaceholderText("학생 이름"), { target: { value: "김둘째" } });
     fireEvent.change(screen.getByPlaceholderText("학생 이메일"), { target: { value: "taken@example.com" } });
+    await selectConsultant();
     fireEvent.click(screen.getByText("자녀 추가 안내 발송"));
 
     expect(await screen.findByTestId("duplicate-email")).toBeInTheDocument();
@@ -102,6 +119,7 @@ describe("AddChildToGuardianForm", () => {
     await selectGuardian();
     fireEvent.change(screen.getByPlaceholderText("학생 이름"), { target: { value: "김둘째" } });
     fireEvent.change(screen.getByPlaceholderText("학생 이메일"), { target: { value: "child2@example.com" } });
+    await selectConsultant();
     fireEvent.click(screen.getByText("자녀 추가 안내 발송"));
 
     expect(await screen.findByText("발송 실패(관리자 조치 필요) — 메일 발송 실패")).toBeInTheDocument();

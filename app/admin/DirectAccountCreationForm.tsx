@@ -4,29 +4,64 @@
 // UI 패턴은 TrialOnboardingStudentsForm.tsx와 동일(보호자 1명 + 학생 1~N행)하되
 // consultationId를 받지 않고 sendDirectOnboardingNoticeAction()을 호출한다.
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   sendDirectOnboardingNoticeAction,
   type SendDirectOnboardingNoticeResult,
 } from "./direct-account-actions";
+import { listConsultantsAction, type ConsultantWithStudents } from "./consultant-assignment-actions";
 import { useToasts, ToastStack } from "./Toast";
 
 const SIMPLE_EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-type StudentRow = { name: string; email: string; grade: string; subject: string };
+type StudentRow = { name: string; email: string; grade: string; subject: string; consultantId: string };
 
-function emptyRow(): StudentRow {
-  return { name: "", email: "", grade: "", subject: "" };
+function emptyRow(defaultConsultantId: string): StudentRow {
+  return { name: "", email: "", grade: "", subject: "", consultantId: defaultConsultantId };
+}
+
+/** 여러 자녀는 기본적으로 같은 담당 컨설턴트를 쓰되, 행마다 다르게 바꿀 수 있다. */
+function ConsultantSelect({
+  value,
+  onChange,
+  consultants,
+}: {
+  value: string;
+  onChange: (id: string) => void;
+  consultants: ConsultantWithStudents[];
+}) {
+  return (
+    <select
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]"
+    >
+      <option value="">담당 컨설턴트 선택</option>
+      {consultants.map((c) => (
+        <option key={c.id} value={c.id}>
+          {c.name ?? c.email ?? c.id}
+        </option>
+      ))}
+    </select>
+  );
 }
 
 export default function DirectAccountCreationForm({ onSent }: { onSent?: () => void } = {}) {
   const [open, setOpen] = useState(false);
   const [guardianEmail, setGuardianEmail] = useState("");
   const [guardianName, setGuardianName] = useState("");
-  const [students, setStudents] = useState<StudentRow[]>([emptyRow()]);
+  const [students, setStudents] = useState<StudentRow[]>([emptyRow("")]);
+  const [consultants, setConsultants] = useState<ConsultantWithStudents[]>([]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [lastResult, setLastResult] = useState<SendDirectOnboardingNoticeResult | null>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    listConsultantsAction()
+      .then(setConsultants)
+      .catch(() => setConsultants([]));
+  }, [open]);
   // 2026-09-11(제품 오너 확정 정책) — 발급 전 자녀 이메일 중복 차단 시, 어느
   // 학생 입력란이 문제인지 이메일별로 표시한다(일반 에러 배너 대신).
   const [duplicateEmails, setDuplicateEmails] = useState<Set<string>>(new Set());
@@ -43,7 +78,9 @@ export default function DirectAccountCreationForm({ onSent }: { onSent?: () => v
     setStudents((prev) => prev.map((s, i) => (i === index ? { ...s, [field]: value } : s)));
   }
   function addStudentRow() {
-    setStudents((prev) => [...prev, emptyRow()]);
+    // 여러 자녀는 기본적으로 첫 학생과 같은 담당 컨설턴트를 쓴다(제품 오너 확정) —
+    // 다르게 배정해야 하면 행마다 드롭다운에서 바꾸면 된다.
+    setStudents((prev) => [...prev, emptyRow(prev[0]?.consultantId ?? "")]);
   }
   function removeStudentRow(index: number) {
     setStudents((prev) => (prev.length > 1 ? prev.filter((_, i) => i !== index) : prev));
@@ -51,7 +88,7 @@ export default function DirectAccountCreationForm({ onSent }: { onSent?: () => v
   function reset() {
     setGuardianEmail("");
     setGuardianName("");
-    setStudents([emptyRow()]);
+    setStudents([emptyRow("")]);
     setError(null);
     setDuplicateEmails(new Set());
   }
@@ -59,7 +96,7 @@ export default function DirectAccountCreationForm({ onSent }: { onSent?: () => v
   const isValid =
     guardianName.trim().length > 0 &&
     SIMPLE_EMAIL_RE.test(guardianEmail.trim()) &&
-    students.every((s) => s.name.trim().length > 0 && SIMPLE_EMAIL_RE.test(s.email.trim()));
+    students.every((s) => s.name.trim().length > 0 && SIMPLE_EMAIL_RE.test(s.email.trim()) && s.consultantId);
 
   if (!open) {
     return (
@@ -132,6 +169,11 @@ export default function DirectAccountCreationForm({ onSent }: { onSent?: () => v
                 placeholder="과목(선택)"
                 className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]"
               />
+              <ConsultantSelect
+                value={s.consultantId}
+                onChange={(id) => updateStudent(i, "consultantId", id)}
+                consultants={consultants}
+              />
               {students.length > 1 && (
                 <button
                   type="button"
@@ -165,6 +207,7 @@ export default function DirectAccountCreationForm({ onSent }: { onSent?: () => v
                     email: s.email,
                     grade: s.grade || undefined,
                     subject: s.subject || undefined,
+                    consultantId: s.consultantId,
                   })),
                 });
                 setLastResult(result);

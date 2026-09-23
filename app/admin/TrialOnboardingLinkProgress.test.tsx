@@ -11,6 +11,11 @@ vi.mock("./trial-onboarding-actions", () => ({
   getTrialOnboardingLinkDetailAction: vi.fn(),
   listTrialOnboardingLinkStudentsAction: vi.fn(),
   retryFailedTrialOnboardingStudentAction: vi.fn(),
+  setLinkStudentConsultantAction: vi.fn(),
+}));
+vi.mock("./consultant-assignment-actions", () => ({
+  listConsultantsAction: vi.fn().mockResolvedValue([]),
+  setStudentConsultantAction: vi.fn(),
 }));
 
 // 2026-09-06(발송 상태 조회 화면) — 제품 오너 지적: 온보딩 안내를 보낸 뒤
@@ -44,6 +49,8 @@ describe("TrialOnboardingLinkProgress", () => {
         status: "pending",
         childAuthUserId: null,
         error: null,
+      consultantId: null,
+      consultantName: null,
       },
       {
         id: "s2",
@@ -54,6 +61,8 @@ describe("TrialOnboardingLinkProgress", () => {
         status: "failed",
         childAuthUserId: null,
         error: "이메일 형식이 올바르지 않습니다.",
+      consultantId: null,
+      consultantName: null,
       },
     ]);
 
@@ -98,6 +107,8 @@ describe("TrialOnboardingLinkProgress", () => {
           status: "failed",
           childAuthUserId: null,
           error: "일시적 오류",
+        consultantId: null,
+        consultantName: null,
         },
       ])
       .mockResolvedValueOnce([
@@ -110,6 +121,8 @@ describe("TrialOnboardingLinkProgress", () => {
           status: "created",
           childAuthUserId: "child2",
           error: null,
+        consultantId: null,
+        consultantName: null,
         },
       ]);
     vi.mocked(retryFailedTrialOnboardingStudentAction).mockResolvedValue({ status: "created", childId: "child2" });

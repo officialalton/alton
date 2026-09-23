@@ -115,7 +115,7 @@ describe("sendAddChildToGuardianNoticeAction", () => {
     arrangeValidGuardian();
     const result = await sendAddChildToGuardianNoticeAction({
       guardianId: "g1",
-      student: { name: "김둘째", email: "child2@example.com", grade: "9학년" },
+      student: { name: "김둘째", email: "child2@example.com", grade: "9학년", consultantId: "consultant1" },
     });
 
     expect(result.status).toBe("sent");
@@ -124,7 +124,7 @@ describe("sendAddChildToGuardianNoticeAction", () => {
       expect.objectContaining({
         p_guardian_email: "guardian1@example.com",
         p_guardian_name: "김보호자",
-        p_students: [{ name: "김둘째", email: "child2@example.com", grade: "9학년", subject: null }],
+        p_students: [{ name: "김둘째", email: "child2@example.com", grade: "9학년", subject: null, consultantId: "consultant1" }],
         p_admin_id: "admin1",
       })
     );
@@ -135,7 +135,7 @@ describe("sendAddChildToGuardianNoticeAction", () => {
     setTableResults("households", [{ data: null, error: null }]);
     const result = await sendAddChildToGuardianNoticeAction({
       guardianId: "g2",
-      student: { name: "김둘째", email: "child2@example.com" },
+      student: { name: "김둘째", email: "child2@example.com", consultantId: "consultant1" },
     });
 
     expect(result.status).toBe("failed");
@@ -148,7 +148,7 @@ describe("sendAddChildToGuardianNoticeAction", () => {
     setTableResults("profiles", [{ data: { name: "홍길동", role: "student" }, error: null }]);
     const result = await sendAddChildToGuardianNoticeAction({
       guardianId: "g3",
-      student: { name: "김둘째", email: "child2@example.com" },
+      student: { name: "김둘째", email: "child2@example.com", consultantId: "consultant1" },
     });
     expect(result.status).toBe("failed");
     expect(sendEmailMock).not.toHaveBeenCalled();
@@ -166,7 +166,7 @@ describe("sendAddChildToGuardianNoticeAction", () => {
 
     const result = await sendAddChildToGuardianNoticeAction({
       guardianId: "g1",
-      student: { name: "김둘째", email: "taken@example.com" },
+      student: { name: "김둘째", email: "taken@example.com", consultantId: "consultant1" },
     });
 
     expect(result).toEqual({
@@ -181,7 +181,7 @@ describe("sendAddChildToGuardianNoticeAction", () => {
     requireAdminOrCapabilityMock.mockRejectedValue(new Error("권한이 없습니다."));
     const result = await sendAddChildToGuardianNoticeAction({
       guardianId: "g1",
-      student: { name: "김둘째", email: "child2@example.com" },
+      student: { name: "김둘째", email: "child2@example.com", consultantId: "consultant1" },
     });
     expect(result).toEqual({ status: "failed", linkId: "", error: "권한이 없습니다." });
     expect(sendEmailMock).not.toHaveBeenCalled();
