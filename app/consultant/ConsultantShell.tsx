@@ -46,8 +46,15 @@ import {
   cancelMyMeetingRequestAction,
   type AssignedMeetingRequest,
 } from "./meeting-actions";
+import {
+  listMyTimeOffAction,
+  createMyTimeOffAction,
+  cancelMyTimeOffAction,
+  type ConsultantTimeOff,
+  type TimeOffConflict,
+} from "./time-off-actions";
 
-type NavId = "students" | "assignments" | "meetings" | "schedule" | "college-explore";
+type NavId = "students" | "assignments" | "schedule" | "college-explore";
 
 const WEEKDAY_LABELS = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -120,19 +127,6 @@ export default function ConsultantShell({
         </button>
         <button
           onClick={() => {
-            setNav("meetings");
-            setSelectedId(null);
-          }}
-          aria-current={nav === "meetings" ? "page" : undefined}
-          className={
-            "w-full text-left px-2.5 py-2.5 rounded-lg text-[13px] font-semibold " +
-            (nav === "meetings" ? "bg-red text-white" : "text-grey-500 hover:bg-grey-100 hover:text-ink")
-          }
-        >
-          일정 요청
-        </button>
-        <button
-          onClick={() => {
             setNav("schedule");
             setSelectedId(null);
           }}
@@ -142,7 +136,7 @@ export default function ConsultantShell({
             (nav === "schedule" ? "bg-red text-white" : "text-grey-500 hover:bg-grey-100 hover:text-ink")
           }
         >
-          가능시간
+          Schedule
         </button>
         <button
           onClick={() => {
@@ -155,7 +149,7 @@ export default function ConsultantShell({
             (nav === "college-explore" ? "bg-red text-white" : "text-grey-500 hover:bg-grey-100 hover:text-ink")
           }
         >
-          대학 탐색
+          College Explore
         </button>
         <div className="flex-1" />
         <div className="px-2.5 text-[12px] text-grey-500 mb-2">{consultantName} 컨설턴트님</div>
@@ -169,13 +163,11 @@ export default function ConsultantShell({
       <main className="flex-1">
         {nav === "assignments" ? (
           <MyKanbanSection />
-        ) : nav === "meetings" ? (
-          <MeetingRequestsPanel />
         ) : nav === "schedule" ? (
-          <AvailabilityPanel />
+          <SchedulePanel assignedConsultations={assignedConsultations} />
         ) : nav === "college-explore" ? (
           <div className="px-8 py-8">
-            <h1 className="text-[20px] font-extrabold text-ink mb-5">대학 탐색</h1>
+            <h1 className="text-[20px] font-extrabold text-ink mb-5">College Explore</h1>
             <CollegeExploreSection canProposeSourceUrl />
           </div>
         ) : selectedId !== null ? (
@@ -350,10 +342,61 @@ function formatMeetingDateTime(iso: string | null): string {
   return new Date(iso).toLocaleString("ko-KR", { dateStyle: "medium", timeStyle: "short" });
 }
 
+// Phase B(3, 2026-09-23) — 기존 "일정 요청"(meetings)과 "가능시간"(schedule)을
+// Schedule 메인 탭 하나로 합치고, 서브탭을 Upcoming/Availability/Time Off로
+// 나눈다(사용자 지시). Time Off는 신규 — 월간 캘린더 대신(1차 범위는 목록+폼)
+// 종일/부분 시간 등록을 지원하고, 등록 전 기존 확정 일정과 겹치면 서버가
+// 막고 어떤 일정과 겹치는지 알려준다.
+type ScheduleSubTab = "upcoming" | "availability" | "time-off";
+
+function SchedulePanel({ assignedConsultations }: { assignedConsultations: IntakeConsultation[] }) {
+  const [subTab, setSubTab] = useState<ScheduleSubTab>("upcoming");
+  return (
+    <div className="max-w-[640px] px-8 py-8">
+      <h1 className="text-[20px] font-extrabold text-ink mb-5">Schedule</h1>
+      <div className="flex gap-1 mb-5 border-b border-grey-200">
+        {(
+          [
+            { id: "upcoming", label: "Upcoming" },
+            { id: "availability", label: "Availability" },
+            { id: "time-off", label: "Time Off" },
+          ] as const
+        ).map((t) => (
+          <button
+            key={t.id}
+            onClick={() => setSubTab(t.id)}
+            className={
+              "px-3 py-2 text-[13px] font-bold border-b-2 -mb-px " +
+              (subTab === t.id ? "border-ink text-ink" : "border-transparent text-grey-500")
+            }
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
+      {subTab === "upcoming" ? (
+        <UpcomingSchedulePanel assignedConsultations={assignedConsultations} />
+      ) : subTab === "availability" ? (
+        <AvailabilityPanel />
+      ) : (
+        <TimeOffPanel />
+      )}
+    </div>
+  );
+}
+
 // 2026-09-22(사용자 지시 — "관리자/컨설턴트가 최종 확인 후 확정") — 학생이
 // 개인 단위로 신청한 일정(meeting_requests.consultant_id=본인)을 확인하고
 // 확정(요청 시간 그대로 또는 조정)하거나 거절한다.
-function MeetingRequestsPanel() {
+// Phase B(3, 2026-09-23) — Schedule > Upcoming. 학생 개인 일정 요청(신청 확인·
+// 확정·변경·거절)과 이미 확정된 상담 일정(consultations.status='scheduled')을
+// 한 화면에서 보여준다(사용자 지시: "예정 일정에는 신청 확인·확정·변경·거절과
+// 확정된 상담 일정을 보여줍니다").
+function UpcomingSchedulePanel({ assignedConsultations }: { assignedConsultations: IntakeConsultation[] }) {
+  const confirmedConsultations = assignedConsultations
+    .filter((c) => c.status === "scheduled" && c.startsAt)
+    .sort((a, b) => (a.startsAt ?? "").localeCompare(b.startsAt ?? ""));
+
   const [meetings, setMeetings] = useState<AssignedMeetingRequest[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
@@ -423,8 +466,26 @@ function MeetingRequestsPanel() {
   }
 
   return (
-    <div className="max-w-[640px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-5">일정 요청</h1>
+    <div>
+      {confirmedConsultations.length > 0 && (
+        <div className="mb-6">
+          <div className="text-[11px] font-bold text-grey-500 uppercase tracking-wide mb-2">확정된 상담 일정</div>
+          <div className="space-y-2">
+            {confirmedConsultations.map((c) => (
+              <div key={c.id} className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-[13px] font-bold text-ink">{c.contactName}</span>
+                  <span className="text-[11px] text-grey-500">상담</span>
+                </div>
+                {c.startsAt && (
+                  <div className="text-[12px] text-grey-500 mt-1">{formatMeetingDateTime(c.startsAt)}</div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      <div className="text-[11px] font-bold text-grey-500 uppercase tracking-wide mb-2">학생 일정 요청</div>
       {error && <p className="text-[12.5px] text-red mb-3">{error}</p>}
       {meetings === null ? (
         <p className="text-[13px] text-grey-500">불러오는 중...</p>
@@ -566,8 +627,7 @@ function AvailabilityPanel() {
   const activeRules = (rules ?? []).filter((r) => r.active);
 
   return (
-    <div className="max-w-[560px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-1">가능시간</h1>
+    <div>
       <p className="text-[12.5px] text-grey-500 mb-5">
         여기서 등록한 시간대만 배정된 고객에게 예약 가능 시간으로 보여집니다.
       </p>
@@ -638,6 +698,140 @@ function AvailabilityPanel() {
             </span>
             <button disabled={busy} onClick={() => handleDeactivate(r.id)} className="text-[12px] font-bold text-red disabled:opacity-50">
               삭제
+            </button>
+          </div>
+        ))
+      )}
+    </div>
+  );
+}
+
+// Phase B(3, 2026-09-23) — Schedule > Time Off. 종일/부분 시간 등록·취소.
+// 등록 시도 시 서버(createMyTimeOffAction)가 기존 확정 일정과의 충돌을
+// 검사해, 충돌이 있으면 저장하지 않고 어떤 일정과 겹치는지 알려준다.
+function TimeOffPanel() {
+  const [items, setItems] = useState<ConsultantTimeOff[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [conflicts, setConflicts] = useState<TimeOffConflict[] | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [allDay, setAllDay] = useState(true);
+  const [date, setDate] = useState("");
+  const [startTime, setStartTime] = useState("09:00");
+  const [endTime, setEndTime] = useState("18:00");
+  const [reason, setReason] = useState("");
+
+  function reload() {
+    listMyTimeOffAction()
+      .then(setItems)
+      .catch((e) => setError(e instanceof Error ? e.message : "불러오지 못했습니다."));
+  }
+  useEffect(() => {
+    reload();
+  }, []);
+
+  async function handleAdd() {
+    if (!date) {
+      setError("날짜를 선택해주세요.");
+      return;
+    }
+    const startsAt = allDay ? `${date}T00:00:00` : `${date}T${startTime}:00`;
+    const endsAt = allDay ? `${date}T23:59:59` : `${date}T${endTime}:00`;
+    setBusy(true);
+    setError(null);
+    setConflicts(null);
+    try {
+      const result = await createMyTimeOffAction({
+        startsAt: new Date(startsAt).toISOString(),
+        endsAt: new Date(endsAt).toISOString(),
+        allDay,
+        reason: reason.trim() || undefined,
+      });
+      if ("conflicts" in result) {
+        setConflicts(result.conflicts);
+        return;
+      }
+      setDate("");
+      setReason("");
+      reload();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "등록하지 못했습니다.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleCancel(id: string) {
+    setBusy(true);
+    try {
+      await cancelMyTimeOffAction(id);
+      reload();
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <div>
+      {error && <div className="mb-4 text-[13px] font-semibold text-red bg-red/5 rounded-lg px-4 py-3">{error}</div>}
+      {conflicts && conflicts.length > 0 && (
+        <div className="mb-4 text-[13px] text-red bg-red/5 rounded-lg px-4 py-3">
+          <div className="font-bold mb-1">이미 확정된 일정과 겹쳐 등록할 수 없습니다.</div>
+          <ul className="list-disc list-inside">
+            {conflicts.map((c, i) => (
+              <li key={i}>
+                {c.label}
+                {c.startsAt ? ` · ${formatMeetingDateTime(c.startsAt)}` : ""}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-1 text-grey-600">
+            Upcoming 탭에서 해당 일정을 먼저 변경·거절한 뒤 다시 등록해주세요.
+          </div>
+        </div>
+      )}
+      <div className="flex flex-wrap items-end gap-2 mb-2">
+        <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]" />
+        <label className="flex items-center gap-1.5 text-[12.5px] text-ink">
+          <input type="checkbox" checked={allDay} onChange={(e) => setAllDay(e.target.checked)} />
+          종일
+        </label>
+        {!allDay && (
+          <>
+            <input type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]" />
+            <span className="text-[13px] text-grey-500">~</span>
+            <input type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)} className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]" />
+          </>
+        )}
+      </div>
+      <div className="flex items-center gap-2 mb-6">
+        <input
+          value={reason}
+          onChange={(e) => setReason(e.target.value)}
+          placeholder="사유(선택)"
+          className="flex-1 border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]"
+        />
+        <button type="button" disabled={busy} onClick={handleAdd} className="text-[13px] font-bold bg-ink text-white rounded-lg px-4 py-1.5 disabled:opacity-50">
+          등록
+        </button>
+      </div>
+
+      {items === null ? (
+        <p className="text-[13px] text-grey-500">불러오는 중…</p>
+      ) : items.length === 0 ? (
+        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">등록된 휴무가 없습니다.</div>
+      ) : (
+        items.map((t) => (
+          <div key={t.id} className="flex items-center justify-between border-[1.5px] border-grey-200 rounded-xl px-4 py-3 mb-2">
+            <div>
+              <span className="text-[13px] font-semibold text-ink">
+                {t.allDay
+                  ? new Date(t.startsAt).toLocaleDateString("ko-KR")
+                  : `${formatMeetingDateTime(t.startsAt)} ~ ${new Date(t.endsAt).toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit" })}`}
+              </span>
+              {t.reason && <div className="text-[11.5px] text-grey-500 mt-0.5">{t.reason}</div>}
+            </div>
+            <button disabled={busy} onClick={() => handleCancel(t.id)} className="text-[12px] font-bold text-red disabled:opacity-50">
+              취소
             </button>
           </div>
         ))
