@@ -4329,3 +4329,70 @@ Browser 등)로 재시도하면 가능할 수 있다.
    세션 번호 충돌을 피하기 위해 이번 세션은 44차로 기록했다. 다음
    세션은 시작 전 반드시 `git log`로 최신 커밋을 확인해 세션 번호와
    작업 대상 중복 여부를 재확인할 것.
+
+## 46차 세션 — collegeessayadvisors.com 인덱스 기반 에세이 문항 수집 (부분 완료)
+
+### 배경 및 방법
+- `https://www.collegeessayadvisors.com/supplemental-essay-guide/`에서
+  2026-27 사이클 기준 총 191개교 목록 확보.
+- 우리 DB 200개교와 이름 대조 → 약 80개교 겹침 확인(American University,
+  Boston College, Boston University, Brown, Caltech, Carnegie Mellon,
+  Chapman, Clemson, Columbia, Cornell, Duke, Georgetown 등 대부분의
+  사립 상위권/공대 계열 및 다수 주립대 포함).
+- 겹치는 학교 중 **4개교(American University, Boston College, Brown
+  University, Caltech)**를 실제로 처리 완료. 브라우저 자동화(Claude
+  Browser 도구)로 각 학교 개별 가이드 페이지를 열어 "문항 개수/주제/
+  글자수/선택규칙"만 추출했고, CEA 특유의 첨삭 팁·분석 문단은 절대
+  DB나 문서에 옮기지 않았다(한국어로 사실만 요약해 title/topic_summary
+  에 기록).
+- **공식 사이트(대학 admissions 페이지·Common App) 재대조는 이번
+  세션에서 수행하지 못함** — 시간 제약으로 4개교 모두
+  `prompt_status='unconfirmed_current_year'`, source_url_id는
+  collegeessayadvisors 페이지(`is_official=false`)로만 등록. 정직하게
+  secondary 수준으로 남겨둠.
+- 삽입 전 `select count(*) from university_essay_prompts where
+  university_id=... ` 로 4개교 전부 기존 0건 확인 후 삽입(중복 없음).
+
+### 실제 반영 내역 (university_essay_prompts, 이번 세션분만)
+| 학교 | 신규 문항 행 수 | 유형 |
+|---|---|---|
+| American University | 1 | school_specific(지원동기 150자) |
+| Boston College | 2 | school_specific(택1, 5문항 그룹) + program_conditional(HCE 전공) |
+| Brown University | 5 | school_specific 2 + short_answer 2 + program_conditional(PLME 3편 묶음) |
+| Caltech | 6 | school_specific 4 + short_answer(4택2) + 선택형 학업사정 설명 |
+
+- 총 14건 신규 삽입. 세션 시작 전 12건 → 세션 종료 시 `university_essay_prompts`
+  총 26건 (psql `select count(*)`로 확인).
+- `university_source_urls`에 4건 신규 등록(source_type='essay_prompts',
+  is_official=false, status='pending').
+
+### 미완료 및 한계 (정직하게 기록)
+- **목표(최소 30개교) 대비 4개교만 처리** — 이번 세션 도중 Browser 도구
+  세션이 다른 무관한 탭들(nces.ed.gov, virginia.edu 등 — 다른 백그라운드
+  작업의 잔여 탭으로 추정)과 공유되는 현상이 발생해 안정적인 대량
+  스크레이핑에 제약이 있었고, 학교별 URL slug가 불규칙해(연도 포함/
+  미포함 등) 매번 개별 확인이 필요했다. 시간 예산 내에서 정확도를
+  우선해 4개교만 확정 처리했다.
+- 공식 출처 재대조 0건 — 전부 secondary 상태로 다음 세션에서 대학
+  공식 admissions 페이지 또는 Common App 학교별 페이지로 원문 재확인
+  필요.
+- 나머지 겹치는 ~76개교는 이번 세션에서 손대지 않음(브라우저로 목록만
+  확보, 개별 페이지는 미방문).
+
+### 다음 세션 인계
+1. 겹치는 학교 목록(대략 80개교, 위 배경 절 참고)에서 아직 미처리인
+   대다수를 이어서 처리할 것. Georgetown, Duke, Columbia, Cornell,
+   Northwestern, Johns Hopkins 등 URL slug가 `-2026-27-` 포함 여부가
+   제각각이므로, 매번 인덱스 페이지에서 정확한 링크를 확인(브라우저
+   `javascript_tool`로 `<a>` href 목록 추출 권장)하고 개별 방문할 것.
+2. 이번 세션이 등록한 4개교 14건 전부 `prompt_status=
+   'unconfirmed_current_year'`, source secondary 상태 — 공식 사이트
+   재확인 시 `prompt_status`를 `confirmed_current_year`로 올리고
+   `university_source_urls.is_official=true`인 공식 출처 행을 추가로
+   등록해 `source_url_id`를 교체할 것.
+3. 삽입 전 반드시 `select count(*) ... where university_id=... and
+   cycle_year=...`로 중복 확인 절차를 유지할 것(이번 세션에서도 준수).
+4. 다른 백그라운드 세션(33차 확장필드, 34차 학과보완)과 테이블 충돌
+   여부를 커밋 전 `git diff --cached --name-only`로 재확인했고, 이번
+   세션은 `university_essay_prompts`/`university_source_urls` 데이터와
+   본 문서만 건드렸다.
