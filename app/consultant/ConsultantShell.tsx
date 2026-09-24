@@ -124,6 +124,7 @@ export default function ConsultantShell({
   // 2026-09-23 — 모바일 폭에서 사이드바가 항상 풀사이즈로 떠 있어 본문이 가로
   // 스크롤되던 문제. md 미만에서는 사이드바를 숨기고 햄버거로 여는 드로어로 전환.
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [accountMenuOpen, setAccountMenuOpen] = useState(false);
 
   const contactRequiredCount = assignedConsultations.filter((c) => c.status === "requested").length;
 
@@ -227,19 +228,6 @@ export default function ConsultantShell({
         </button>
         <button
           onClick={() => {
-            selectNav("profile");
-            setSelectedId(null);
-          }}
-          aria-current={nav === "profile" ? "page" : undefined}
-          className={
-            "w-full text-left px-2.5 py-2.5 rounded-lg text-[13px] font-semibold " +
-            (nav === "profile" ? "bg-red text-white" : "text-grey-500 hover:bg-grey-100 hover:text-ink")
-          }
-        >
-          Profile
-        </button>
-        <button
-          onClick={() => {
             selectNav("settlement");
             setSelectedId(null);
           }}
@@ -278,12 +266,39 @@ export default function ConsultantShell({
           College Explore
         </button>
         <div className="flex-1" />
-        <div className="px-2.5 text-[12px] text-grey-500 mb-2">{consultantName} 컨설턴트님</div>
-        <form action={logout}>
-          <button type="submit" className="w-full text-left px-2.5 py-2 rounded-lg text-[12.5px] font-semibold text-grey-500 hover:bg-grey-100">
-            로그아웃
+        {/* 2026-09-24(사용자 지시) — ParentShell과 같은 패턴: Profile을 사이드바
+            메인 항목에서 빼고, 계정명을 누르면 위로 펼쳐지는 팝업으로 옮긴다. */}
+        <div className="relative">
+          <button
+            onClick={() => setAccountMenuOpen((v) => !v)}
+            className="w-full flex items-center gap-2.5 px-2.5 py-2.5 rounded-lg text-[13px] font-semibold text-ink hover:bg-grey-100"
+          >
+            <div className="w-7 h-7 rounded-full bg-grey-100 text-ink font-extrabold text-[12px] flex items-center justify-center shrink-0">
+              {consultantName.charAt(0)}
+            </div>
+            <span className="flex-1 text-left truncate">{consultantName} 컨설턴트님</span>
           </button>
-        </form>
+          {accountMenuOpen && (
+            <div className="absolute bottom-full left-0 mb-1 w-full bg-white border-[1.5px] border-grey-200 rounded-lg shadow-sm py-1.5 z-30">
+              <button
+                onClick={() => {
+                  setAccountMenuOpen(false);
+                  selectNav("profile");
+                  setSelectedId(null);
+                }}
+                className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink"
+              >
+                Profile
+              </button>
+              <div className="h-px bg-grey-200 my-1" />
+              <form action={logout}>
+                <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-red">
+                  로그아웃
+                </button>
+              </form>
+            </div>
+          )}
+        </div>
       </aside>
 
       <main className="flex-1">

@@ -78,8 +78,13 @@ export async function setStudentConsultantAction(
   consultantId: string | null,
   reason?: string
 ): Promise<void> {
-  const { supabase, adminUserId } = await requireAdmin();
-  const { error } = await supabase.rpc("admin_set_student_consultant", {
+  const { adminUserId } = await requireAdmin();
+  // admin_set_student_consultant()는 service_role에만 execute 권한이 있다
+  // (20261473000000) — 세션 클라이언트(authenticated)로 부르면 "permission
+  // denied for function" 에러가 난다. 관리자 인증은 requireAdmin()이 이미
+  // 확인했으니 실제 호출만 admin 클라이언트로 한다.
+  const admin = createAdminClient();
+  const { error } = await admin.rpc("admin_set_student_consultant", {
     p_student_id: studentId,
     p_new_consultant_id: consultantId,
     p_admin_id: adminUserId,

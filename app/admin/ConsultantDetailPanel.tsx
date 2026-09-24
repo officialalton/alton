@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import {
   getConsultantDetailAction,
   setStudentConsultantAction,
+  assignStudentToConsultantAction,
   type ConsultantDetail,
 } from "./consultant-assignment-actions";
 
@@ -22,6 +23,8 @@ export default function ConsultantDetailPanel({
   const [detail, setDetail] = useState<ConsultantDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [unassigningId, setUnassigningId] = useState<string | null>(null);
+  const [assignEmail, setAssignEmail] = useState("");
+  const [assigning, setAssigning] = useState(false);
 
   function reload() {
     getConsultantDetailAction(consultantId)
@@ -44,6 +47,22 @@ export default function ConsultantDetailPanel({
       setError(e instanceof Error ? e.message : "배정 해제에 실패했습니다.");
     } finally {
       setUnassigningId(null);
+    }
+  }
+
+  async function handleAssign() {
+    const email = assignEmail.trim();
+    if (!email) return;
+    setAssigning(true);
+    setError(null);
+    try {
+      await assignStudentToConsultantAction(consultantId, email);
+      setAssignEmail("");
+      reload();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "배정에 실패했습니다.");
+    } finally {
+      setAssigning(false);
     }
   }
 
@@ -77,6 +96,24 @@ export default function ConsultantDetailPanel({
             {detail.careerBio && (
               <p className="text-[12px] text-grey-500 mt-2 whitespace-pre-wrap">{detail.careerBio}</p>
             )}
+          </div>
+
+          <h3 className="text-[13px] font-extrabold text-ink mb-2">신규 학생 배정</h3>
+          <div className="flex gap-2 mb-4">
+            <input
+              type="email"
+              value={assignEmail}
+              onChange={(e) => setAssignEmail(e.target.value)}
+              placeholder="학생 계정 이메일"
+              className="flex-1 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 text-[12.5px]"
+            />
+            <button
+              onClick={handleAssign}
+              disabled={assigning || !assignEmail.trim()}
+              className="text-[12px] font-bold px-3.5 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50 shrink-0"
+            >
+              {assigning ? "배정 중..." : "배정"}
+            </button>
           </div>
 
           <h3 className="text-[13px] font-extrabold text-ink mb-2">담당 중인 학생·보호자</h3>
