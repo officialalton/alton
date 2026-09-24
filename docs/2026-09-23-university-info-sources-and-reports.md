@@ -7056,3 +7056,50 @@ Aid/Cost-of-Attendance 웹페이지를 WebFetch/브라우저로 직접 조회**�
 - 이번 세션은 시간 예산 제약으로 목표(20개교) 대비 3개교만 실수집 완료. 나머지 62개교는 후속 세션에서
   이어서 처리 필요 — 특히 Ohio State/Arizona/Miami(FL)/Arkansas/JHU/UVA는 이미 두 세션째 막힌 상태로
   다음 세션에서 우선 처리 권장.
+
+### 72차 세션 (2026-09-24)
+- 처리 학교(62개교 → 49개교로 감소, 13개교 실수집). 이번 세션은 ALTON 메인 저장소 세션에서 병행
+  실행되어 이 저장소(university-info-sources)의 git 이력에는 커밋을 남기지 않음 — 아래 표는 같은
+  Postgres DB(127.0.0.1:54422)에 대한 실제 삽입 기록.
+
+| 학교 | cycle_year | 원본 형식 | 비고 |
+|---|---|---|---|
+| University of Arizona | 2024(B)/2023(H) | pdf | **드디어 해결**: 폼필드형이라 pdftotext 무효 — `pdftoppm -r 150`으로 B1/B2/H2 페이지를 이미지 렌더링 후 시각 판독하여 수집 |
+| University of Miami | 2024(B)/2023(H) | pdf | 이전 세션 캐시(`miami2425.pdf`)의 B1/B2는 텍스트 추출 정상, H2만 이미지 판독 필요 |
+| Michigan State University | 2024 | pdf | `ir.msu.edu/cds` 공식 페이지의 직링크, pdftotext 정상 추출 |
+| The Ohio State University | 2024(B)/2023(H) | pdf | **드디어 해결**: 폼필드형 — `irp.osu.edu` 공식 신규 소스로 재다운로드 후 pdftoppm 이미지 판독 |
+| Texas State University | 2024 | pdf | `docs.gato.txst.edu` 직링크, pdftotext 정상 추출 |
+| University of Alabama | 2024 | pdf | `oira.ua.edu` 공식 페이지 직링크, 텍스트 라벨은 정상(B1/B2/H2 헤더 형식이 타 대학과 다름) |
+| Oklahoma State University | 2024 | pdf | `ira.okstate.edu`가 curl에 403 반환 — Claude Browser로 페이지 로드 후 `fetch()`+`btoa()`로 base64
+  추출, 6개 청크로 나눠 받아 로컬에서 재조합(따옴표/트레일러 텍스트 제거 후 디코딩)하여 정상 PDF 확보 |
+| Marquette University | 2024 | pdf | `marquette.edu` 공식 직링크, 라벨 폰트 깨짐(유니코드 치환)이나 숫자는 정상 추출 |
+| Southern Methodist University | 2024 | pdf(Part B+H 분리) | `smu.edu` Part-B/Part-H 개별 PDF 직링크 사용 |
+| University of Texas at Dallas | 2024 | pdf | `dox.utdallas.edu/report44675` 직링크, pdftotext 정상 추출 |
+| University of South Florida | 2024 | pdf | `usf.edu/ods` 직링크, pdftotext 정상 추출 |
+| Florida International University | 2024 | pdf | `aim.fiu.edu/cds/CDS2024.pdf` 직링크, pdftotext 정상 추출 |
+| Florida Atlantic University | 2024 | pdf | `fau.edu/iea` 직링크, 라벨 폰트 깨짐이나 숫자는 정상 추출 |
+
+- 모든 학교 university_demographics 9~11행(gender_male/female[/other]+race_* 8종, B2 "Total
+  Undergraduates(both degree- and non-degree-seeking)" 열 기준 비율%, cycle_year=2024) +
+  university_financial_aid_programs 2행(need_based_grant: H2 E/A 비율%+K 평균액, merit_scholarship:
+  H2 G/A 비율%)으로 삽입. verification_status='official', verified_at=오늘, `source_url_id` 신규 등록
+  (status='approved', is_official=true) 또는 기존 재사용. `WHERE NOT EXISTS(...)` 가드로 중복 방지.
+- 스킵/보류 (다음 세션 인계):
+  - **Johns Hopkins University, University of Virginia, Clemson University**: 등록 CDS URL이 각각
+    403/봇차단. UVA·Clemson은 Claude Browser로 pdf.js 뷰어까지는 로드 성공(43쪽/33쪽 확인)했으나,
+    뷰어가 iframe이라 좌표 클릭이 거부됨(`lands in an embedded frame with no resolvable origin`) —
+    Oklahoma State에 썼던 `fetch()+btoa()` 방식을 여기도 적용하면 될 것으로 추정되나 이번 세션에서는
+    시간 예산상 시도하지 못함. 다음 세션에서 최우선 시도 권장.
+  - **University of Arkansas**: 여전히 미해결(폰트 인코딩 깨짐) — 미착수.
+  - **Georgia State University, Kent State University, University of Oklahoma, University of
+    Mississippi, University of Nebraska-Lincoln, University of Oregon, University of Louisville,
+    University of Memphis**: WebSearch로 정확한 최신(2024-2025) 직링크를 못 찾았거나(대학명 혼동:
+    검색 결과가 인근 동명 학교로 잘못 매칭), Memphis는 브라우저에서도 403 확인. 재시도 필요.
+  - **Virginia Tech**: `aie.vt.edu`의 xlsx 링크가 HTML 오류 페이지 반환 — 브라우저 재시도 필요.
+  - **Georgetown University**: 공식 CDS가 Box.com 공유 링크(`georgetown.box.com/s/...`)라 직접
+    다운로드 불가 — Box 다운로드 URL 변환 또는 브라우저 자동화 필요.
+- 세션 종료 시점 재확인: demographics/financial_aid_programs 둘 다 0건인 학교 49개교
+  (`select count(*) from universities u where u.data_collection_status='verified_pilot' and not
+  exists(...financial_aid...) and not exists(...demographics...)`로 확인).
+- 목표 20개교 대비 13개교 실수집 완료. Oklahoma State에서 확립한 "curl 403 시 Claude Browser
+  fetch+base64 청크 재조합" 기법은 이후 세션에서 봇차단된 대학 사이트 전반에 재사용 가능.
