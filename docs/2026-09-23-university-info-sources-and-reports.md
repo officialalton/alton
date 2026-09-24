@@ -4071,3 +4071,60 @@ select data_collection_status, count(*) from universities group by 1;
 **200개교 CDS/IPEDS 1차 실수집은 이번 세션으로 사실상 완료됐다.** 남은
 작업은 학과 목록 보완, 에세이 확대, 발견된 2건의 데이터 오류 정정이며
 모두 "신규 확장" 성격이 아닌 유지보수 작업이다.
+
+## 42차 세션 — 학과(Majors) 데이터 감사, 프린스턴 정정 (부분 완료)
+
+### 배경
+제품 오너가 Preview에서 프린스턴 대학 페이지의 Majors 탭을 직접 확인,
+10개만 노출되는 것을 발견(실제 학부 전공 약 37개). 초기 세션이 좁은
+카테고리 몇 개만 입력하고 만 사례로 확인됨.
+
+### 전수 감사 결과
+```sql
+select count(*) from (select u.id, count(m.id) cnt from universities u
+left join university_majors m on m.university_id=u.id group by 1) t
+where cnt=0;
+```
+→ **200개교 중 84개교가 학과 0건**(기존 세션 기록의 86개교와 유사한
+규모, 소폭 차이는 이전 세션 보완분 반영). 프린스턴은 10건으로 부실
+상태였음(0건은 아니었으나 실제 대비 27개 누락).
+
+### 실제 재검증 및 보완 완료 (브라우저로 공식 학사요람 직접 확인, 4개교)
+| 학교 | 출처 | 이전 건수 | 최종 건수 |
+|---|---|---|---|
+| Princeton University | ua.princeton.edu (Undergraduate Announcement, A.B./B.S.E. 전공 목록 페이지) | 10 | **37** |
+| University of Connecticut | tme.uconn.edu/explore-majors/profiles (Major Profiles A-Z) | 0 | **119** |
+| University of Oregon | catalog.uoregon.edu/ug-programs (Majors 탭) | 0 | **78** |
+| University of Delaware | udel.edu Major Finder (All Majors A-Z) | 0 | **146** |
+
+- 프린스턴: 기존 10건 중 표기가 다른 3건(`Electrical & Computer
+  Engineering`, `Operations Research & Financial Engineering`,
+  `Public and International Affairs`)을 공식 카탈로그 표기로 통일하며
+  삭제하고, 공식 목록 37개(A.B. 31개 + B.S.E. 6개, Computer Science
+  중복 제외)로 전량 대체 확인. **사용자가 지적한 문제는 해결됨.**
+- 나머지 3개교는 university_id+name UNIQUE 제약으로 기존 데이터와
+  자동 중복 방지되며 insert만 수행(삭제 없음).
+- 대학원 전공/부전공/인증서(예: Associate 학위, Undeclared 트랙)는
+  제외하고 학부 전공만 선별 삽입.
+
+### 미완료 (다음 세션 인계 필요)
+- **목표였던 "최소 15개교" 중 4개교만 완료.** 세션 예산(reasoning
+  effort) 제약으로 나머지 80개교(0건) 및 프린스턴 외 부실 학교는
+  손대지 못함.
+- 남은 0건 84개교 목록은 위 쿼리로 재산출 가능. 우선순위: 종합대학
+  규모가 큰 곳(Stony Brook, University at Buffalo, University at
+  Albany, Rutgers Newark/Camden, University of Memphis, University of
+  Mississippi, TCU, Seton Hall, University of Rhode Island, University
+  of New Mexico, University of South Florida 등)부터 브라우저로 공식
+  학사요람 확인 후 동일 방식으로 insert 계속 필요.
+
+### B. 신규 확장 필드(affiliations/demographics/financial_aid_programs) 작업
+**착수하지 못함.** 학과 감사에 세션 예산을 모두 사용해 스펙 문서 확인
+및 테이블 구조 파악(`\d`)조차 진행하지 못했다. 다음 세션에서 스펙
+문서(`docs/2026-09-23-college-explore-expansion-field-spec.md`)부터
+재확인 후 착수 필요.
+
+### 참고 — non-prod 재sync 필요
+이번 세션에서 `university_majors`에 psql로 직접 insert한 데이터(4개교,
+총 380건)는 로컬 DB에만 반영되어 있다. 기존 세션 관례대로 non-prod
+환경 동기화가 필요하다.
