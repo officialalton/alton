@@ -22,6 +22,19 @@ async function driveFetch(url: string, token: string, init?: RequestInit) {
   return res;
 }
 
+export async function GET(req: Request) {
+  await requireAdmin();
+  const { searchParams } = new URL(req.url);
+  const fileId = searchParams.get("fileId");
+  if (!fileId) return NextResponse.json({ error: "fileId required" }, { status: 400 });
+  const token = await getR3PreviewDriveAccessToken();
+  const permsRes = await driveFetch(
+    `${DRIVE_API}/files/${fileId}/permissions?supportsAllDrives=true&fields=permissions(id,type,role,emailAddress)`,
+    token
+  );
+  return NextResponse.json(await permsRes.json());
+}
+
 export async function POST(req: Request) {
   await requireAdmin();
   const { studentEmail, sessionId } = (await req.json()) as { studentEmail: string; sessionId: string };
