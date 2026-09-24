@@ -10,8 +10,11 @@ import { getR3PreviewDriveAccessToken } from "@/lib/drive-preview-verify-auth";
 import { processQueuedSessionDriveTasks } from "@/lib/drive-session-tasks";
 
 const DRIVE_API = "https://www.googleapis.com/drive/v3";
-const SHARED_DRIVE_NAME = "Alton Integration Sandbox";
-const TEST_FOLDER_NAME = "R3 Test";
+const DRIVE_UPLOAD_API = "https://www.googleapis.com/upload/drive/v3";
+// R3 SA의 현재 Shared Drive 멤버십을 실측 확인한 결과("Alton Integration Sandbox"는
+// 더 이상 보이지 않음, 2026-09-23) — 실제 접근 가능한 드라이브로 대체.
+const SHARED_DRIVE_NAME = "ALTON Company Tutoring Resources";
+const TEST_FOLDER_NAME = "R12 Drive Verify Test";
 
 async function driveFetch(url: string, token: string, init?: RequestInit) {
   const res = await fetch(url, { ...init, headers: { ...(init?.headers ?? {}), Authorization: `Bearer ${token}` } });
@@ -28,10 +31,15 @@ export async function POST(req: Request) {
 
   const token = await getR3PreviewDriveAccessToken();
 
-  const drivesRes = await driveFetch(`${DRIVE_API}/drives`, token);
+  const drivesRes = await driveFetch(`${DRIVE_API}/drives?pageSize=100`, token);
   const drivesData = (await drivesRes.json()) as { drives: Array<{ id: string; name: string }> };
   const sharedDrive = drivesData.drives.find((d) => d.name.toLowerCase() === SHARED_DRIVE_NAME.toLowerCase());
-  if (!sharedDrive) return NextResponse.json({ error: `Shared Drive "${SHARED_DRIVE_NAME}" not found` }, { status: 500 });
+  if (!sharedDrive) {
+    return NextResponse.json(
+      { error: `Shared Drive "${SHARED_DRIVE_NAME}" not found`, visibleDrives: drivesData.drives },
+      { status: 500 }
+    );
+  }
 
   const folderQ = encodeURIComponent(
     `name='${TEST_FOLDER_NAME}' and mimeType='application/vnd.google-apps.folder' and trashed=false and '${sharedDrive.id}' in parents`
@@ -41,8 +49,20 @@ export async function POST(req: Request) {
     token
   );
   const folderListData = (await folderListRes.json()) as { files: Array<{ id: string }> };
-  const folderId = folderListData.files[0]?.id;
-  if (!folderId) return NextResponse.json({ error: `"${TEST_FOLDER_NAME}" folder not found` }, { status: 500 });
+  let folderId = folderListData.files[0]?.id;
+  if (!folderId) {
+    const createFolderRes = await driveFetch(`${DRIVE_API}/files?supportsAllDrives=true&fields=id`, token, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: TEST_FOLDER_NAME,
+        mimeType: "application/vnd.google-apps.folder",
+        parents: [sharedDrive.id],
+      }),
+    });
+    const createdFolder = (await createFolderRes.json()) as { id: string };
+    folderId = createdFolder.id;
+  }
 
   const fileName = `r12-drive-verify-${Date.now()}.txt`;
   const metadata = { name: fileName, parents: [folderId], mimeType: "text/plain" };
@@ -53,9 +73,9 @@ export async function POST(req: Request) {
     "R12 Drive click-through verification test file. Safe to delete." +
     `\r\n--${boundary}--`;
   const createRes = await driveFetch(
-    `${DRIVE_API}/files?uploadType=multipart&supportsAllDrives=true&fields=id,webViewLink`,
+    `${DRIVE_UPLOAD_API}/files?uploadType=multipart&supportsAllDrives=true&fields=id,webViewLink`,
     token,
-    { method: "POST", headers: { "Content-Type": `multipart/related; boundary=${boundary}` }, body }
+    { method: "POST", headers: { "Content-Type": `multipart/related; boundary=${boundary}` }, body: Buffer.from(body, "binary") }
   );
   const created = (await createRes.json()) as { id: string; webViewLink: string };
 
