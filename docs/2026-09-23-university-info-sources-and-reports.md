@@ -7604,3 +7604,61 @@ Applicants/Admission Requirements 페이지 2건을 직접 확인해
 - 200개교 전체 완료 후 CDS 정보 UI 노출 작업(제품 오너 지시)은 여전히 미착수 —
   매 세션 인계 유지. 에세이 데이터가 이제 전체 커버되었으므로 이 작업을 우선
   착수할 시점.
+
+## 79차 세션 — university_financial_aid_programs 잔여 20개교 전수 실입력 (200개교 100% 달성)
+
+**대상 테이블**: `university_financial_aid_programs`만.
+
+**시작 시점**: `data_collection_status='verified_pilot'` 200개교 중 180개교 기입 완료,
+20개교 잔여(American University, Binghamton University (SUNY), California Institute of
+Technology, Carnegie Mellon University, Georgia Institute of Technology, Illinois
+Institute of Technology, Middle Tennessee State University, Southern Illinois University
+Carbondale, SUNY College of Environmental Science and Forestry, University of California
+San Diego, University of Chicago, University of Iowa, University of Kansas, University of
+Massachusetts Lowell, University of North Carolina at Chapel Hill, University of San Diego,
+University of South Alabama, University of Toledo, University of Wyoming, Yale University).
+
+**방법론**: CDS PDF 개별 크롤링 대신 73차 세션에서 이미 로컬에 다운로드해 둔 College
+Scorecard(IPEDS 기반) 벌크 데이터셋(`Most-Recent-Cohorts-Institution.csv`,
+`/private/tmp/scorecard/full/`에 캐시됨)을 재사용. 20개교 전부 `INSTNM` 완전/부분일치로
+정확히 1건씩 매칭 확인(동명이교 후보 있었던 American University, California Institute of
+Technology, Southern Illinois University 등도 매칭 전 전체 후보 목록을 출력해 정확한
+기관 확인 후 사용). insert 전 전체 20개교 `select id, name from universities where id in
+(...)`로 university_id ↔ 의도한 학교명 재확인 완료.
+
+- `PCTPELL`(연방 Pell Grant 수혜 비율) → `program_type='need_based_grant'`,
+  `eligibility_scope='us_citizen_permanent_resident'`.
+- `PCTFLOAN`(연방 학자금 대출 수혜 비율) → `program_type='federal_loan'`,
+  `eligibility_scope='all_students'`.
+- 둘 다 `name`에 "(College Scorecard/IPEDS proxy)" 명시(CDS 원문 수치와 출처 구분),
+  `cycle_year=2023`(Scorecard 최신 기준 연도, 73차 세션과 동일 컨벤션),
+  `value_status='reported'`, `verification_status='official'`, `verified_at`=오늘,
+  `notes`에 매칭 INSTNM 및 출처 컬럼명 기록. `source_url_id`는 미연결(73차 세션과 동일 —
+  후속 세션에서 backfill 권장).
+- `with ... as (values ...) insert ... where not exists(...)` 형태로 `(university_id,
+  program_type, cycle_year)` 단위 중복 방지 가드 적용, 20개교 × 2행 = 40행 신규 삽입
+  (`INSERT 0 40` 확인).
+
+**검증**:
+```sql
+select count(*) as total_verified_pilot,
+ count(*) filter (where exists(select 1 from university_financial_aid_programs f
+   where f.university_id=u.id)) as with_aid
+from universities u where u.data_collection_status='verified_pilot';
+-- 200 | 200
+```
+**`university_financial_aid_programs` 200개교 커버리지 100% 달성.**
+
+psql direct INSERT만 사용, 마이그레이션 파일/`supabase db push --linked`/`vercel deploy`
+미실행. `university_financial_aid_programs` 외 테이블 미접촉.
+
+### 다음 세션 인계
+- **재정지원(university_financial_aid_programs) 200/200 완료** — 잔여 0개교.
+- 신규 20개교(및 73차 세션 49개교) 모두 `source_url_id` 미연결 — College Scorecard 공식
+  school URL(`https://collegescorecard.ed.gov/school/?<unitid>`)로 `university_source_urls`
+  등록 후 backfill 권장.
+- 이번 20개교는 Pell/Federal Loan 비율만 확보(merit_scholarship, work_study, 평균 지급액 등
+  CDS H2 세부 항목 미포함) — 정보 밀도가 CDS 직접 수집 학교보다 낮음. 가능하면 학교별
+  원문 CDS PDF로 점진적 보강 권장(다만 이들 학교는 대부분 CDS PDF가 폼필드/봇차단
+  이슈로 이전 세션들에서 처리 보류되었던 곳들 — 73차 세션 인계사항 참고).
+- 다른 카테고리(university_affiliations 등)는 여전히 잔여 있음, 별도 세션에서 계속 필요.
