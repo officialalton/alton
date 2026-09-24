@@ -5550,3 +5550,66 @@ Tulsa(3·필수1+선택2).
   Virginia Commonwealth University, Worcester Polytechnic Institute,
   University of Wyoming, University of Vermont, University of Wisconsin-
   Madison 등) — 다음 세션에서 이어서 처리 가능.
+
+## 53차 세션 — 신규 비용/교수비율 지표 8개교 실수집 (university_admission_metrics/university_source_urls만)
+
+이번 세션도 verified_pilot 중 tuition_in_state 미보유 136개교를 재확인 후,
+CDS 원문(curl+pdftotext, 폼필드 PDF는 pypdf)에서 G1(비용)/I-2(학생:교수
+비율) 섹션만 실수집. 세션 중간에 다른 통합 세션의 `supabase db reset
+--local` 임박 경고가 있었으나 곧 취소되어 정상 진행. university_majors/
+university_essay_prompts/university_demographics/university_financial_aid_programs
+는 전혀 건드리지 않음(병행 세션과 충돌 방지).
+
+### 반영 완료 (8개교, CDS 원문 실측치만)
+| 학교 | CDS 연도 | 등록금(주내/주외 또는 사립) | 필수비 | 기숙사 | 식비 | 학생:교수 |
+|---|---|---|---|---|---|---|
+| University of South Dakota | 2024-25 | $7,773 / $11,283 | $1,659 | $4,890 | $4,618 | 16:1 |
+| University of Louisiana at Lafayette | 2025-26 | $70,486(사립 표기, 실질 주내) | $1,110 | $12,968 | $7,928 | 10:1 |
+| Rowan University | 2025-26 | $12,344 / $23,168 | $5,084 | $9,880 | $5,474 | 17:1 |
+| Montclair State University | 2024-25 | $14,790 / $24,900 | $1,122 | $10,732 | $5,998 | 17.6:1 |
+| University of South Alabama | 2024-25 | $11,220 / $22,440 | $840 | $4,680 | $4,150 | 19:1 |
+| Stevens Institute of Technology | 2025-26 | $65,530(사립) | $2,700 | $12,214 | $8,530 | 11:1 |
+| American University | 2025-26 | $62,680(사립, Undergraduates 열) | $1,722 | $15,230 | $6,584 | 10:1 |
+| Binghamton University (SUNY) | 2025-26 | $7,070 / $28,970 | $3,497 | 미확인(공란) | 미확인(공란) | 16:1 |
+
+### 반영하지 않은 것 (추측 금지)
+- Binghamton: G1의 Food and Housing/Housing Only/Food Only 항목이 전부
+  공란(등록금·필수비만 공개) — room_cost/board_cost 미반영.
+- Clark University: CDS PDF가 폼필드 없이 static인데도 G1 숫자 값이
+  pdftotext -layout/-raw 모두 공란으로 추출됨 (pypdf get_fields도 no
+  fields) — 렌더링 이슈로 판단, 다음 세션 pdftoppm 육안 확인 권장.
+- Texas Tech University: CDS 2025-2026이 DRAFT 상태로 TUIT_* 필드가
+  전부 None(미기재) — student_faculty_ratio(20.7)만 확인되었으나
+  tuition 없이는 무의미해 스킵.
+- University of South Florida(usf.edu) 재확인 시도는 51차 세션에서 이미
+  처리된 학교와 동일해 중복 스킵.
+- UMass 계열: umass.edu/uair/media/1062 링크가 실제로는 "University of
+  Massachusetts Amherst"(52차 세션에 이미 반영) 자료였음을 확인, UMass
+  Boston/Lowell 전용 CDS 직링크는 이번 세션에서 찾지 못함.
+- University of Central Florida: analytics.ucf.edu PDF 링크가 curl로
+  HTML(차단/리다이렉트 페이지)만 반환 — 재시도 필요.
+- Villanova University: WebSearch로 CDS v3 링크를 찾았으나 52차 세션에서
+  이미 동일 데이터가 반영되어 있어 중복 삽입 방지 위해 스킵.
+- Johns Hopkins/Brown/UPenn/FSU/Oregon/Idaho/Georgetown/Oklahoma State/
+  Ole Miss/Michigan State/Purdue/Notre Dame/Columbia/Kent State/Indiana
+  Bloomington/UT Austin 계열/Arizona: 이번 세션 시간 배분상 미시도(이전
+  세션들과 동일 사유로 추정).
+
+### 검증
+- `select u.name, count(*) from university_admission_metrics m join
+  universities u on u.id=m.university_id where u.name in (...8개교...)
+  and m.created_at > now() - interval '3 hours' group by u.name` → 각
+  4~6건씩 신규 반영 확인(총 43건).
+- `git status --short` → 이번 세션이 `docs/` 외 어떤 파일도 건드리지
+  않음 확인. university_majors/university_essay_prompts/university_
+  demographics/university_financial_aid_programs는 전혀 접촉하지 않음.
+- `npx supabase db push --linked`/`vercel deploy` 미실행. 로컬 psql
+  direct INSERT만 사용, 마이그레이션 파일 작성 없음. `supabase db reset
+  --local`도 실행하지 않음(다른 세션 경고였고 취소됨).
+
+### 다음 세션 인계
+- verified_pilot 136개교 중 8개교 처리, 128개교 잔여.
+- Johns Hopkins 등 봇차단/JS렌더링 학교군은 여전히 미해결 — 브라우저
+  자동화 재시도 권장.
+- Clark University/Texas Tech/UCF는 링크는 확보했으나 값 추출 실패 —
+  다음 세션에서 pdftoppm 렌더링 육안 확인 또는 재요청 권장.
