@@ -77,6 +77,15 @@ import {
   type ConsultantTimeOff,
   type TimeOffConflict,
 } from "./time-off-actions";
+import {
+  getMeetingRequestReviewForConsultant,
+  listMeetingRequestReviewEditsForConsultant,
+  saveMyMeetingRequestReviewDraftAction,
+  finalizeMyMeetingRequestReviewAction,
+  editMyFinalizedMeetingRequestReviewAction,
+  type MeetingRequestReviewForConsultant,
+  type MeetingRequestReviewEditForConsultant,
+} from "./meeting-request-review-actions";
 
 type NavId = "students" | "assignments" | "schedule" | "documents" | "profile" | "settlement" | "staff-messages" | "college-explore";
 
@@ -744,8 +753,119 @@ function UpcomingSchedulePanel({ assignedConsultations }: { assignedConsultation
                   )}
                 </div>
               )}
+              {m.status === "completed" && <ConsultantMeetingReviewPanel meetingRequestId={m.id} />}
             </div>
           ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// 2026-09-24(사용자 지시 — "상담 리뷰는 담당 컨설턴트가 당연히 작성해야지") —
+// admin/MeetingRequestReviewPanel.tsx와 같은 UI지만 컨설턴트 본인 세션
+// 액션(meeting-request-review-actions.ts)을 쓴다. 미팅록(Drive) 링크 연결은
+// 범위 밖(관리자 전용 유지) — 이 패널은 리뷰 텍스트 draft/확정/수정만 한다.
+function ConsultantMeetingReviewPanel({ meetingRequestId }: { meetingRequestId: string }) {
+  const [review, setReview] = useState<MeetingRequestReviewForConsultant | null>(null);
+  const [edits, setEdits] = useState<MeetingRequestReviewEditForConsultant[]>([]);
+  const [text, setText] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [showEdits, setShowEdits] = useState(false);
+
+  function reload() {
+    getMeetingRequestReviewForConsultant(meetingRequestId).then((r) => {
+      setReview(r);
+      setText(r.status === "final" ? r.finalText ?? "" : r.draftText ?? "");
+    });
+  }
+
+  useEffect(reload, [meetingRequestId]);
+
+  async function run(fn: () => Promise<void>) {
+    setBusy(true);
+    setError(null);
+    try {
+      await fn();
+      reload();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "처리에 실패했습니다.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  if (!review) return <p className="text-[12px] text-grey-500 mt-2">리뷰를 불러오는 중...</p>;
+
+  const isFinal = review.status === "final";
+
+  return (
+    <div className="mt-3 border-t border-grey-200 pt-3">
+      <h4 className="text-[12.5px] font-extrabold text-ink mb-1">상담 리뷰</h4>
+      {error && <p className="text-[12px] text-red mb-1">{error}</p>}
+      <textarea
+        aria-label="상담 리뷰 내용"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        className="w-full px-2.5 py-2 border-[1.5px] border-grey-200 rounded-lg text-[12.5px] min-h-[90px]"
+        placeholder="학부모에게 보여줄 상담 리뷰를 작성해주세요"
+      />
+      <div className="flex gap-2 mt-2">
+        {!isFinal && (
+          <button
+            type="button"
+            disabled={busy}
+            onClick={() => run(() => saveMyMeetingRequestReviewDraftAction(meetingRequestId, text))}
+            className="text-[11.5px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50"
+          >
+            초안 저장
+          </button>
+        )}
+        <button
+          type="button"
+          disabled={busy}
+          onClick={() =>
+            run(() =>
+              isFinal
+                ? editMyFinalizedMeetingRequestReviewAction(meetingRequestId, text)
+                : finalizeMyMeetingRequestReviewAction(meetingRequestId, text)
+            )
+          }
+          className="text-[11.5px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
+        >
+          {isFinal ? "확정본 수정" : "확정하기"}
+        </button>
+      </div>
+      {isFinal && (
+        <p className="text-[11px] text-grey-500 mt-1">
+          확정일 {review.finalizedAt ? new Date(review.finalizedAt).toLocaleString("ko-KR") : "-"}
+          {review.adminEditedAt && ` · 최종 수정 ${new Date(review.adminEditedAt).toLocaleString("ko-KR")}`}
+        </p>
+      )}
+      {isFinal && (
+        <div className="mt-2">
+          <button
+            type="button"
+            onClick={() => {
+              setShowEdits((v) => !v);
+              if (!showEdits) listMeetingRequestReviewEditsForConsultant(meetingRequestId).then(setEdits);
+            }}
+            className="text-[11px] font-semibold text-grey-500 underline"
+          >
+            {showEdits ? "수정 이력 접기" : "수정 이력 보기"}
+          </button>
+          {showEdits && (
+            <div className="mt-1 space-y-1">
+              {edits.length === 0 && <p className="text-[11px] text-grey-500">수정 이력이 없습니다(아직 확정 후 수정된 적 없음).</p>}
+              {edits.map((e) => (
+                <div key={e.id} className="text-[11px] text-grey-500 border-l-2 border-grey-200 pl-2">
+                  {new Date(e.editedAt).toLocaleString("ko-KR")} · {e.editedByName ?? "컨설턴트"}
+                  {e.previousFinalText && <div className="text-grey-700 mt-0.5 whitespace-pre-wrap">이전 내용: {e.previousFinalText}</div>}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>
