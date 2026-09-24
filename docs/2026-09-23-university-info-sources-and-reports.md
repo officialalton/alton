@@ -4865,3 +4865,71 @@ Santa Cruz). 8개 전부 cycle_year=2027 기준 university_essay_prompts 0건
 `university_essay_prompts`, `university_source_urls`, 본 문서만 수정.
 다른 백그라운드 세션이 다루는 `university_majors`,
 `university_admission_metrics`는 건드리지 않음.
+
+## 세션: university_majors 학과 0건 학교 20개교 실수집 (2026-09-23)
+
+### 담당 범위
+`university_majors` 테이블만 수정. 다른 백그라운드 세션이 다루는
+`university_admission_metrics`, `university_essay_prompts` 등은 건드리지
+않음. 마이그레이션 파일 미사용, psql insert 직접 실행.
+
+### 시작 시점 상태
+학과 0건 학교 53개교 확인(쿼리:
+`select u.name from universities u left join university_majors m on
+m.university_id=u.id group by u.id, u.name having count(m.id)=0`).
+
+### 방법
+- 주 출처: IPEDS College Navigator(nces.ed.gov/collegenavigator)
+  Programs/Majors 탭의 Completions 표. 학사(BACHELOR) 열이 `-`(미제공)가
+  아닌 CIP 프로그램만 추출(브라우저 JS로 표 파싱, 헤더에서 BACHELOR 컬럼
+  인덱스 동적 탐지 — 학교마다 컬럼 구성이 다름).
+- 보조 출처: 학교 공식 학사요람(academic catalog)의 Undergraduate
+  Programs / Academic Program Inventory 페이지(예: UNH `catalog.unh.edu`,
+  UMaine `catalog.umaine.edu`, Rutgers-Newark `sasn.rutgers.edu`,
+  Rutgers-Camden `sas.camden.rutgers.edu`) — 대학원 전공/부전공은 제외.
+- IPEDS 사이트가 세션 중 일시적으로 rate-limit(고부하)에 걸려 응답 거부
+  구간 발생 → 해당 구간은 학교 자체 카탈로그 페이지로 대체.
+
+### 처리 완료 20개교 (전공 수)
+1. South Dakota State University — 87
+2. University of Cincinnati — 132
+3. University of Memphis — 53
+4. University of Mississippi — 91
+5. University of Missouri — 87
+6. Villanova University — 59
+7. Virginia Tech — 75
+8. Washington State University — 113
+9. Worcester Polytechnic Institute — 36
+10. University of Colorado Boulder — 78
+11. University of Toledo — 85
+12. Rutgers University-Camden — 34 (SAS 공식 페이지 기준)
+13. Rutgers University-Newark — 35 (SASN 공식 페이지 기준, 단과대 한정)
+14. University of Arkansas — 89
+15. University of Oklahoma — 105
+16. Utah State University — 116
+17. University of North Texas — 104
+18. Texas Christian University — 101
+19. University of New Hampshire — 247 (전공+옵션 포함, 공식 카탈로그 A-Z)
+20. University of Maine — 86
+
+### 남은 0건 학교: 34개교
+Arizona State University(400+ 전공, degrees.asu.edu가 JS 렌더링/방대해
+스킵), Rowan University, Seton Hall University, Southern Methodist
+University, St. John's University, Stevens Institute of Technology
+(IPEDS rate-limit로 세션 중 처리 못함), Stony Brook University (SUNY),
+University at Albany (SUNY), University at Buffalo (SUNY), University of
+Alabama in Huntsville, UC Riverside, UC Santa Cruz, University of Dayton,
+University of Hawaii at Manoa, UMass Amherst/Boston/Lowell, University of
+Minnesota Twin Cities, University of Nevada Las Vegas/Reno(IPEDS ID 확보
+완료: 182281 / 182290, rate-limit로 미처리), University of New Orleans,
+University of North Dakota, University of Rhode Island, University of San
+Diego, University of San Francisco, University of South Dakota,
+University of South Florida, University of Southern Mississippi,
+University of Tennessee Knoxville, UT Arlington/Dallas/San Antonio,
+University of Tulsa, University of Wisconsin-Milwaukee.
+
+### 검증
+각 삽입 후 `select u.name from universities u left join university_majors
+m on m.university_id=u.id group by u.id, u.name having count(m.id)=0`
+재실행으로 53→34개교 감소 확인. `on conflict (university_id, name) do
+nothing`으로 중복 자동 무시.
