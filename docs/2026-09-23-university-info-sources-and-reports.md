@@ -4396,3 +4396,78 @@ Browser 등)로 재시도하면 가능할 수 있다.
    여부를 커밋 전 `git diff --cached --name-only`로 재확인했고, 이번
    세션은 `university_essay_prompts`/`university_source_urls` 데이터와
    본 문서만 건드렸다.
+
+## 세션: 지원 마감일/일정(admission cycle timeline) 완전화 — 2026-09-23
+
+### 대상 테이블
+- `university_admission_cycles`만 다룸 (university_majors, essay_prompts,
+  affiliations/demographics/financial_aid_programs는 손대지 않음 — 커밋 전
+  `git diff --cached --name-only`로 확인).
+
+### 스키마 방식 판단
+- 기존 스키마에 이미 `ed_deadline/ea_deadline/rd_deadline/ed2_deadline` +
+  `ed_decision_date/ea_decision_date/rd_decision_date/ed2_decision_date`
+  (통보일) 컬럼이 모두 존재 — 통보일 EAV 확장은 불필요했음.
+- 유일하게 빠진 값은 "원서 접수 시작일(application opens)". EAV
+  (`university_admission_metrics.metric_key`)는 `metric_key` CHECK
+  제약이 숫자형 지표 전용이라 날짜값에 부적합 → 기존 테이블에 additive
+  컬럼 1개 신규 마이그레이션으로 추가:
+  `supabase/migrations/20261700000000_college_db_p10_application_opens_date.sql`
+  (`university_admission_cycles.application_opens_date date`, nullable,
+  기존 데이터 영향 없음). psql로 직접 적용 완료(`ALTER TABLE` 확인됨).
+
+### 실제 수집/반영 내역 (cycle_year=2027, verified_pilot 학교만)
+- **27개교**에 `application_opens_date=2026-07-31` 반영 — Common App이
+  2026-27 시즌을 실제로 오픈한 날짜(commonapp.org 공식 블로그
+  "Common App opens application to launch 2026-27 season" 확인, 발행일
+  2026-07-31). Common App 정식 회원교로 확인된 학교만 대상:
+  Boston College, Boston University, Brown, Caltech, Carnegie Mellon,
+  Columbia, Cornell, Duke, Emory, Johns Hopkins, Northeastern,
+  Northwestern, Princeton, Rice, Stanford, Tufts, University of Chicago,
+  University of Michigan(Ann Arbor), UNC Chapel Hill, Notre Dame,
+  University of Pennsylvania, University of Rochester, USC, UVA,
+  University of Wisconsin-Madison, Vanderbilt, Yale.
+  (UC 계열/UT 계열/ApplyTexas 등 자체 원서 시스템을 쓰는 학교는 추측을
+  피하기 위해 이번 세션에서 제외 — 다음 세션에서 각 학교 공식 시스템의
+  오픈일을 별도 확인 필요.)
+- **통보일(decision date)**은 대학 공식 페이지에 정확한 날짜(구체적 날짜
+  가 실제로 게시된 경우)만 반영, "mid-December"류 모호 표현은 날짜
+  컬럼에 넣지 않고 `source_notes`에 텍스트로만 남김(추측 채우기 금지
+  원칙 준수):
+  - Boston College: `ed_decision_date=2026-12-15`,
+    `ed2_deadline=2027-01-04`, `ed2_decision_date=2027-02-15`,
+    `rd_decision_date=2027-04-01` (출처: bc.edu 공식 Early Decision vs
+    Regular Decision 페이지).
+  - University of Pennsylvania: `rd_decision_date=2027-04-01`
+    (출처: ask.admissions.upenn.edu 공식 지원 FAQ, "by April 1").
+  - Brown, Caltech: 공식 페이지에서 마감일은 재확인했으나 통보일이
+    "mid-December/early April/mid-March"로만 게시되어 있어 날짜 컬럼은
+    비워두고 `source_notes`에만 기록.
+- 신규 `university_source_urls` 12건 등록(Common App 공식 블로그 1건을
+  27개교에 재사용 + BC/Brown(2)/Caltech/Penn 학교별 공식 페이지 각 1건),
+  전부 `is_official=true`, `status='approved'`.
+
+### 완전한 일정 기준 처리 결과
+- **application_opens_date까지 포함해 완전성이 개선된 학교: 27개교**
+  (목표 25개교 이상 달성).
+- 이 중 통보일까지 전부 확정된 "완전 타임라인"은 Boston College,
+  University of Pennsylvania(RD만) 2개교뿐 — 나머지 25개교는 접수
+  시작일은 확정, 통보일은 대학이 아직 정확한 날짜를 공표하지 않아
+  (2027학년도 사이클이라 발표 전) 미정으로 남김. 이는 추측을 피하기
+  위한 의도적 보수 처리.
+
+### 다음 세션 인계
+1. 통보일이 "mid-December" 등으로만 게시된 학교들은 실제 발표 시점
+   (통상 12월 중순~2월)에 재방문해 정확한 날짜로 갱신 필요 — 대상:
+   Brown, Caltech, Johns Hopkins, MIT, Columbia, Georgetown, Vanderbilt,
+   UVA, Michigan 등 이번 세션에서 확인만 하고 날짜는 못 채운 학교.
+2. UC 계열(Berkeley/Davis/Irvine/LA/San Diego/Santa Barbara), UT 계열
+   (Austin), Texas A&M, Florida State/Florida, Georgia/Georgia Tech,
+   Maryland, Ohio State, Purdue, Rutgers, Washington 등은 자체 원서
+   시스템 오픈일을 이번 세션에서 확인하지 못함 — 각 학교 admissions
+   "Important Dates" 공식 페이지에서 개별 확인 후 `application_opens_date`
+   채울 것.
+3. 신규 컬럼 `application_opens_date`는 마이그레이션
+   `20261700000000_college_db_p10_application_opens_date.sql`로 반영됨 —
+   `npx supabase db push --linked`는 실행하지 않았음(로컬 DB에만 psql로
+   직접 적용). 다음 세션/배포 시 마이그레이션 파일 자체를 push해야 함.
