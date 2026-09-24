@@ -4471,3 +4471,103 @@ Browser 등)로 재시도하면 가능할 수 있다.
    `20261700000000_college_db_p10_application_opens_date.sql`로 반영됨 —
    `npx supabase db push --linked`는 실행하지 않았음(로컬 DB에만 psql로
    직접 적용). 다음 세션/배포 시 마이그레이션 파일 자체를 push해야 함.
+
+## 47차 세션 — 학과(Majors) 목록 보완, IPEDS College Navigator 소스 전환 (15개교, 1,432건)
+
+### 배경
+직전 세션들(42차/44차)이 남긴 학과 0건 학교 목록(84개교 → 44차 종료
+시점 62개교)을 이어받아 처리. 44차가 정적 파싱 실패로 포기했던
+Coursedog/JS 렌더링 플랫폼 학교(Kansas State, Georgia State, Northern
+Arizona, Gonzaga 등)를 이번 세션에서는 브라우저 자동화(Claude Browser
+navigate + get_page_text) + **IPEDS College Navigator "Programs/Majors"
+완성 데이터**(nces.ed.gov/collegenavigator, `unitId`별 페이지의
+COMPLETIONS 표)로 우회 처리했다. 학교 공식 학사요람이 봇 차단/SPA라도
+IPEDS는 정적 렌더링이라 안정적으로 파싱 가능했다.
+
+### 처리 방법
+각 학교의 IPEDS UnitID를 WebSearch로 확인 → College Navigator
+`?id=<unitId>#programs` 페이지를 Claude Browser로 열어 get_page_text →
+COMPLETIONS 표에서 **BACHELOR 열 값이 "-"(미제공)가 아닌 행만** 추출해
+`university_majors`에 psql insert(university_id+name unique 제약,
+ON CONFLICT DO NOTHING으로 중복 자동 방지, additive only). 대학원 전용
+전공(Bachelor 열이 "-"인 행)은 전부 제외. CIP 2020 분류 체계의 프로그램
+명칭을 그대로 사용(예: "Biology/Biological Sciences, General" 등 일부
+접미사는 정리).
+
+### 처리 완료 학교 (15개교, 총 1,432건)
+
+| 학교 | UnitID | 반영 건수 |
+|---|---|---|
+| Brigham Young University | 230038 | 152 |
+| Catholic University of America | 131283 | 74 |
+| Clemson University | 217882 | 79 |
+| Florida Atlantic University | 133669 | 60 |
+| Florida International University | 133951 | 76 |
+| Georgia State University | 139940 | 61 |
+| Gonzaga University | 235316 | 49 |
+| Indiana University Bloomington | 151351 | 105 |
+| Indiana University-Purdue University Indianapolis | 151111 | 90 |
+| Kansas State University | 155399 | 96 |
+| Miami University | 204024 | 108(신규, 44차의 기존 99건과 별도) |
+| Middle Tennessee State University | 220978 | 84 |
+| Montclair State University | 185590 | 70 |
+| North Dakota State University | 200332 | 72(신규, 44차의 기존 99건과 별도) |
+| Northern Arizona University | 105330 | 104 |
+| **합계** | | **1,432건** |
+
+주의: Miami University와 North Dakota State University는 44차 세션이
+이미 학교 공식 카탈로그로 각 99건을 반영해둔 상태였다(이번 세션 시작
+시점에 확인). 두 학교는 IPEDS 소스로 추가 교차검증 겸 보완 삽입했고,
+`ON CONFLICT DO NOTHING`으로 이름이 겹치는 항목은 자동 스킵됐다 — 최종
+university_id별 전공명 유니크 제약으로 실질 중복은 없음(psql로 학교별
+count 재검증 완료: Miami 207건, NDSU 171건 = 두 소스 합계와 정확히
+일치).
+
+Indiana University-Purdue University Indianapolis(IUPUI)는 2024년
+IU/Purdue 분리 이후 IPEDS UnitID 151111이 현재 "Indiana University-
+Indianapolis"로 개편되어 있어, 이번에 반영한 90건은 **분리 이후 IU
+Indianapolis 단독 학사 프로그램만 반영**하고 과거 IUPUI 시절 Purdue
+계열 학과(예: 일부 공학 프로그램)는 포함하지 않았을 수 있음 — 다음
+세션에서 명칭 정책 확인 필요.
+
+### 검증
+- psql로 학교별 JOIN count 재검증: 15개교 전체 정확히 일치.
+- 학과 0건 학교: 세션 시작 시점 기준 62개교(44차 종료 시점) → 정확한
+  재확인 결과 이번 세션 시작 시 73개교였음(44차 이후에도 다른 세션이
+  university_majors에 계속 쓰기 작업 중이었던 것으로 보임 — 아래 참고).
+  이번 세션 처리 후 **53개교**로 감소.
+- 세션 도중 `university_majors`에 대해 다른 프로세스(동시 진행 중인
+  "33차 확장필드" 세션 등)가 계속 레코드를 추가하고 있는 정황을 다시
+  확인함(Miami/NDSU 99건 선반영). 지시받은 대로 이번 세션은
+  university_admission_metrics/affiliations/demographics/
+  financial_aid_programs 테이블은 전혀 건드리지 않았고, university_majors/
+  universities만 다룸.
+- `npx supabase db push --linked` / `vercel deploy` 미실행. 로컬
+  psql direct insert만 사용, 마이그레이션 파일 없음.
+
+### 다음 세션 인계
+1. **학과 미보완 53개교** 남음: Arizona State University, Rowan
+   University, Rutgers-Camden/Newark, Seton Hall, South Dakota State,
+   Southern Methodist, St. John's, Stevens Institute of Technology,
+   Stony Brook(SUNY), Texas Christian, Albany(SUNY), Buffalo(SUNY),
+   Alabama in Huntsville, Arkansas, UC Riverside, UC Santa Cruz,
+   Cincinnati, Colorado Boulder, Dayton, Hawaii at Manoa, Maine,
+   UMass Amherst/Boston/Lowell, Memphis, Minnesota Twin Cities,
+   Mississippi, Missouri, UNLV, Nevada Reno, New Hampshire, New
+   Orleans, North Dakota, North Texas, Oklahoma, Rhode Island, San
+   Diego, San Francisco, South Dakota, South Florida, Southern
+   Mississippi, Tennessee Knoxville, UT Arlington/Dallas/San Antonio,
+   Toledo, Tulsa, Wisconsin-Milwaukee, Utah State, Villanova, Virginia
+   Tech, Washington State, Worcester Polytechnic.
+2. IPEDS College Navigator 방식(UnitID 확인 → `#programs` 페이지 →
+   BACHERLOR 열 필터)이 봇 차단/SPA 학교에도 안정적으로 통했으므로
+   다음 세션도 이 방식을 권장. 단, 세션 후반부에 nces.ed.gov 자체가
+   브라우저 navigate 요청을 계속 거부(rate-limit 추정)해 Oklahoma State
+   University부터는 처리하지 못하고 중단했다 — 다음 세션은 시간을 두고
+   재시도하거나 WebFetch/curl 등 다른 접근을 병행할 것.
+3. Miami University/North Dakota State University처럼 이미 다른
+   세션이 처리한 학교와 겹치는 경우가 발생하고 있음 — 세션 시작 시
+   대상 학교 목록을 매번 최신 psql 쿼리로 재확인해 중복 작업을 최소화
+   할 것.
+4. IUPUI의 IPEDS UnitID 분리(151111 = IU Indianapolis 단독) 이슈는
+   명칭/데이터 정책 결정이 필요.
