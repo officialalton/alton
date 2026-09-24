@@ -6853,3 +6853,56 @@ Aid/Cost-of-Attendance 웹페이지를 WebFetch/브라우저로 직접 조회**�
   신뢰도가 낮음 — grep으로 B1/B2 구간을 넓게 뽑은 뒤 사람이 숫자를 직접 대조하는 방식을 유지할 것.
 - 약어 파일명(USD, UGA 등)이 여러 학교와 충돌할 수 있으니 반드시 전체 학교명으로 한 번 더 대조 후
   INSERT할 것(이번 세션 University of San Diego/South Dakota 혼동 사례 참고).
+
+### 65차 세션: university_financial_aid_programs 신규 실수집 (17개교, 51행)
+
+- 대상: demographics/financial_aid_programs 둘 다 0건인 106개교(64차 세션 종료 시점) 중 이번 세션에서
+  university_financial_aid_programs만 우선 채움. CDS PDF 원문은 스크래치패드(/tmp/cds)에 64차 세션이
+  남긴 다운로드/pdftotext 결과물이 그대로 남아있어 재다운로드 없이 재사용.
+- 방법: CDS H2(need_based_grant, "First-time Full-time First-year" 열의 E/K)+H2A(merit_scholarship,
+  같은 열의 N/O)+H5(federal_loan, row B의 인원/%/평균 누적 원금)만 사용. H1은 사용하지 않음(기존
+  63차 세션 컨벤션 그대로 유지). recipient_pct는 E(또는 N)/A(같은 열의 Fall 신입생 수)*100으로 계산,
+  avg_award_amount는 K(또는 O) 원문 값을 그대로 사용. H5는 CDS 원문에 보고된 %/평균을 그대로 사용.
+- 원문에서 표 숫자 자체가 pdftotext로 추출되지 않는 학교(University of Miami, Marquette University,
+  University of Arizona, University of California San Diego, Montclair State University 등)는
+  건드리지 않음(폼 필드가 이미지로 렌더링되어 텍스트 레이어에 숫자가 없거나, 파일이 실제 학교와
+  맞지 않는 소규모 코호트로 보여 데이터 신뢰도 문제로 스킵).
+- 모든 INSERT는 `WHERE NOT EXISTS(university_id, program_type, name, cycle_year)` 가드 사용,
+  기존 university_source_urls의 approved CDS PDF 링크에 source_url_id 연결(신규 source_url 추가 0건).
+  verification_status='official', verified_at=오늘.
+- university_demographics는 이번 세션에서 건드리지 않음(시간 배분상 financial_aid 우선 처리).
+
+| 대학 | cycle_year | 비고 |
+|---|---|---|
+| University of Cincinnati | 2024 | |
+| Texas A&M University | 2024 | |
+| University of Georgia | 2024 | |
+| University of Minnesota, Twin Cities | 2024 | |
+| Stevens Institute of Technology | 2025 | |
+| University of Utah | 2024 | |
+| University of Washington | 2024 | |
+| Washington State University | 2024 | |
+| University of California, Irvine | 2024 | |
+| University of California, Riverside | 2025 | |
+| University of Rochester | 2025 | |
+| University of Southern California | 2025 | |
+| University of South Carolina | 2024 | |
+| University of Nevada, Reno | 2024 | |
+| University of Central Florida | 2024 | |
+| Loyola Marymount University | 2024 | |
+| Santa Clara University | 2025 | |
+
+- 각 학교당 need_based_grant/merit_scholarship/federal_loan 3행씩, 합계 51행 삽입.
+- 세션 종료 시점 재확인: demographics/financial_aid_programs 둘 다 0건인 학교 106개교 → 101개교로
+  감소(17개교는 financial_aid_programs만 채워졌고 demographics는 여전히 0건이므로, 다음 세션은 이
+  17개교의 demographics도 마저 채우는 것을 우선 검토 — 원문 PDF는 스크래치패드가 살아있는 동안은
+  /tmp/cds에 재사용 가능하나 세션 종료 후 소실 가능성 있음).
+- Agent 툴로 하위 에이전트 spawn하지 않고 직접 psql/curl/pdftotext로 작업. 마이그레이션 파일 작성,
+  `supabase db push`/`vercel deploy` 미실행.
+
+### 66차 세션(다음) 인계
+- university_demographics 101개교, university_financial_aid_programs 101개교 남음(정확히 동일
+  집합 — 이번 세션에서 financial_aid만 채운 17개교는 두 테이블 모두 0건인 카운트에서는 빠졌지만
+  demographics는 아직 비어있음에 유의).
+- CDS 표 숫자가 pdftotext 텍스트 레이어에 없는 학교(스캔/이미지 폼 필드)는 브라우저 자동화나 OCR이
+  필요 — 이번 세션에서는 스킵하고 텍스트 추출이 되는 학교 위주로 처리함.
