@@ -5977,3 +5977,112 @@ essay_prompts/source_urls는 전혀 건드리지 않았다.
   0건 (University of Louisiana at Lafayette 포함, source_url 재검증 필요).
 - Vanderbilt University 등 xlsx 형식 CDS는 openpyxl로 별도 처리 필요(이번 세션은
   PDF 위주로 처리).
+
+## 56차 세션 — Johns Hopkins/Brown/UPenn/Georgetown 브라우저 자동화 재시도 +
+신규 비용/교수비율 지표 19개교 실수집 (university_admission_metrics/
+university_source_urls만)
+
+여러 세션째 이월되던 지시사항대로 Johns Hopkins/Brown/UPenn/Georgetown을 실제로
+Browser 툴(navigate + get_page_text + javascript_tool fetch)로 시도했다. curl이
+Cloudflare/WAF에 차단되는 사이트(JHU oira.jhu.edu, UPenn/Georgetown box.com)는
+브라우저에서 `fetch()` 후 base64로 청크 분할 추출하거나(JHU), Box 뷰어를 스크롤하며
+페이지를 직접 읽는 방식(UPenn/Georgetown/Princeton/UT Austin)으로 우회했다.
+Brown은 공식 oir.brown.edu 페이지 자체가 문서 목록을 렌더링하지 않아(JS 콘텐츠
+없음, 로그인 필요 가능성) 이번에도 원문을 확보하지 못했다 — 3/4 학교 성공.
+나머지는 WebSearch로 공식 CDS PDF URL을 찾은 뒤 curl+pdftotext(-layout)로
+시도하고, 폼필드 공란으로 나오는 경우 pdftoppm(200dpi) 렌더링 후 Read 툴로
+육안 확인했다. university_majors/university_essay_prompts/university_demographics/
+university_financial_aid_programs는 전혀 건드리지 않았고, 모든 INSERT에
+`WHERE NOT EXISTS` 가드를 사용했다.
+
+### 브라우저 자동화로 확보 (지시사항 대상 4개교 중 3개교 성공)
+
+| 학교 | 방법 | 결과 |
+|---|---|---|
+| Johns Hopkins University | oira.jhu.edu PDF, curl 차단 → 브라우저 fetch+base64 청크 추출 후 로컬 재조립(pdftotext 성공) | CDS 2024-2025: 등록금 $66,670(사립), 필수비 $500, 기숙사 $12,450, 식비 $8,552, 학생:교수 6:1(Fall 2024) — 5개 지표 전량 |
+| University of Pennsylvania | ira.upenn.edu → upenn.box.com 링크, Box 뷰어 스크롤+screenshot으로 육안 확인 | CDS 2025-26(2026-27 비용): 등록금 $65,670(사립), 필수비 $8,308, 기숙사 $13,644, 식비 $6,960, 학생:교수 10:1(Fall 2025) — 5개 지표 전량 |
+| Georgetown University | oads.georgetown.edu → georgetown.box.com 링크, Box 뷰어 스크롤+screenshot | CDS 2025-2026(2026-27 비용): 등록금 $74,520(사립), 필수비 $212, 기숙사 $14,768(Undergraduates열), 식비 $8,236, 학생:교수 11:1(Fall 2025) — 5개 지표 전량 |
+| Brown University | oir.brown.edu 페이지 접근했으나 문서 목록이 비어 렌더링됨(JS로도 링크 미발견), Scribd 미러는 페이월로 본문 블러 처리 — 원문 미확보 | 미반영, 다음 세션 인계 |
+
+### 추가로 신규 반영 (19개교, WebSearch+curl/브라우저 우회)
+
+| 학교 | CDS 연도 | 등록금(주내/사립) | 등록금(주외) | 필수비 | 기숙사 | 식비 | 학생:교수 |
+|---|---|---|---|---|---|---|---|
+| Cornell University | 2024-25 | $71,266(사립) | — | $1,004 | $13,246 | $7,328 | 9:1 |
+| Columbia University(College/Engineering) | 2024-25 | $70,170(사립) | — | $3,280 | $13,222 | $7,100 | 6:1 |
+| Princeton University | 2024-25 | 미기재(G1 공란, 2025-26 비용 7/1 예정) | — | — | — | — | 5:1 |
+| Michigan State University | 2022-23(확보 가능한 최신본) | $18,016 | $44,368 | $340 | $4,854 | $6,900 | 16.6:1 |
+| Illinois Institute of Technology | 2023-24 | 미기재(G1 공란) | — | — | — | — | 17:1 |
+| Louisiana State University | 2024-25 | $8,038 | $24,715 | $3,916 | $9,910 | $5,232 | 21:1 |
+| University of North Carolina at Chapel Hill | 2024-25 | $7,020 | $43,152 | $2,076 | $8,570 | $6,468 | 15:1 |
+| University of Minnesota, Twin Cities | 2024-25 | 미기재(G1 공란, 2025-26 비용 7/1 예정) | — | — | — | — | 17:1 |
+| University of Kansas | 2024-25(Section G, Oct 2024) | $10,968 | $29,298 | $1,134 | $6,696 | $4,662 | 17.6:1 |
+| Texas Tech University | 2024-25 | $8,934 | $21,234 | $2,918 | $6,462 | $4,280 | 20:1 |
+| Arizona State University(Campus Immersion) | 2024-25 | $11,478 | $32,394(국제 $35,430) | $745 | $10,162 | $6,550 | 18:1 |
+| University of Arizona | 2024-25(Undergraduates열) | $11,835 | $38,165 | $1,738 | $9,575 | $7,171 | 20:1 |
+| Temple University | 2024-25 | 미기재(G1 공란, 2025-26 비용 7월 예정) | — | — | — | — | 12:1 |
+| University of New Mexico | 2024-25 | 미기재(G1 공란, 2025-26 비용 5/1 예정) | — | — | — | — | 15:1 |
+| Texas State University | 2024-25 | $9,221 | $21,521 | $3,019 | $7,592 | $4,170 | 21:1 |
+| University of Texas at Austin | 2024-25 | $11,688 | $44,908 | Not Applicable(정액수업료) | 분리불가(Food+Housing 합산 $14,828) | — | 18:1 |
+
+(University of Cincinnati는 이번 세션에서도 CDS 원문을 재확인했으나 G1이 여전히
+공란이었고, 병행 세션이 이미 student_faculty_ratio=19(2025 cycle_year)를
+value_text로 선반영해둔 것을 확인해 중복 삽입하지 않았다.)
+
+### curl 차단 → 브라우저 우회가 필요했던 사례
+
+- **JHU**: `oira.jhu.edu`가 curl 요청에 HTML(에러) 페이지를 반환. 브라우저 탭에서
+  `fetch()`로 실제 PDF(498KB, `application/pdf`)를 확인한 뒤, 결과가 도구 출력
+  한도를 넘어 base64를 3번에 나눠 받아 로컬에서 재조립 → 정상 PDF(30페이지)
+  복원, pdftotext로 값 확보.
+- **UPenn/Georgetown/Princeton/UT Austin**: 공식 IR 페이지가 최종 PDF를
+  box.com(Box 뷰어) 링크로만 제공. Box 뷰어는 페이지를 캔버스로 렌더링해
+  pdftotext 접근이 불가능하므로, 스크롤로 G(비용)·I(교수비율) 섹션을 찾아
+  screenshot으로 육안 확인.
+- **UVA(University of Virginia)**: `ira.virginia.edu` PDF도 curl 차단 확인,
+  브라우저 fetch로 실제 PDF(1.1MB) 확인까지는 했으나 base64 청크 추출 비용이
+  높아 이번 세션에서는 값 추출을 보류(다음 세션 인계).
+
+### 반영하지 않은 것 (추측 금지)
+
+- Brown University: oir.brown.edu 공식 페이지가 문서 링크를 렌더링하지 않음
+  (스크린샷상 사이드바만 있고 본문 목록 비어있음). Scribd 미러
+  (`scribd.com/document/937378329/CDS-2024-2025`)도 페이지 블러 처리(페이월)로
+  본문 확인 불가. `commondatasets.fyi/brown`(제3자 2차 가공 사이트)에서 비용
+  수치를 확인했으나 이번 세션 규칙(official 소스만 official 판정, 점검용
+  third-party는 대량 반영 금지)에 따라 DB에 넣지 않음 — 다음 세션에서 브라우저로
+  oir.brown.edu 재탐색 또는 공식 문의 필요.
+- University of Memphis / University of Tennessee Knoxville / University at
+  Albany(SUNY) / Purdue University / Southern Illinois University Carbondale /
+  Ohio University / Fordham University: WebSearch로 URL 후보를 찾았으나 403/404
+  또는 SharePoint 임베드(다운로드 불가)로 이번 세션에서 확보 실패.
+- Virginia Tech: aie.vt.edu 최신본(24-25)을 찾지 못함(23-24만 WebSearch에 노출),
+  curl도 차단.
+
+### 검증
+
+- `select count(*) from universities u where u.data_collection_status=
+  'verified_pilot' and not exists (select 1 from university_admission_metrics am
+  where am.university_id=u.id and am.metric_key='tuition_in_state')` → 세션 시작
+  101개교 → 종료 시점 87개교(이번 세션 직접 기여 19개교 tuition_in_state 확보분
+  기준; JHU/UPenn/Georgetown/Princeton/UMN/Temple/UNM/IIT 등 일부는 tuition_in_state
+  없이 student_faculty_ratio만 반영된 경우도 포함되어 있어 위 카운트 감소분과
+  정확히 일치하지는 않음).
+- 모든 INSERT는 `WHERE NOT EXISTS(...)` 가드 사용. University of Cincinnati는
+  중복 방지를 위해 신규 INSERT 대신 기존 행 확인만 수행(변경 없음).
+- `git status --short` → 이번 세션이 `docs/` 외 어떤 파일도 건드리지 않음 확인.
+  university_majors/university_essay_prompts/university_demographics/
+  university_financial_aid_programs는 전혀 접촉하지 않음.
+- `npx supabase db push --linked`/`vercel deploy` 미실행. 로컬 psql direct
+  INSERT만 사용, 마이그레이션 파일 작성 없음.
+
+### 다음 세션 인계
+
+- Brown University: oir.brown.edu 브라우저 재탐색(JS 렌더링 대기, 로그인
+  필요 여부 확인) 또는 대안 소스 탐색 필요 — 4세션 이상 이월 중인 유일한 미해결
+  타깃.
+- UVA(University of Virginia): 브라우저 fetch로 PDF 존재는 확인됨(1.1MB) —
+  base64 청크 추출만 마무리하면 바로 반영 가능.
+- Memphis/UTK/Albany/Purdue/SIU Carbondale/Ohio University/Fordham 등은 403/404/
+  SharePoint 임베드라 브라우저 로그인 세션 또는 다른 접근 경로 필요.
+- 여전히 verified_pilot 잔여 87개교.
