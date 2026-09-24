@@ -6554,3 +6554,62 @@ Carolina Asheville의 CDS PDF를 가리키는 Google Drive 링크**를 반환하
 - Virginia Tech/Indiana University Bloomington/IUPUI/University of Colorado Boulder/University of
   Missouri는 조직 SSO 인증이 걸린 포털(SharePoint 등)로만 CDS를 게시 — Albany/Fordham류와 동일한
   구조적 장벽으로 분류하고 우선순위를 낮출 것.
+
+## 62차 세션 — tuition 실수집 2개교 + Widen.net/Google Drive pdf.js 텍스트추출 기법 확립
+
+### 신규 실수집(university_admission_metrics / university_source_urls만 DB 직접 insert)
+| 학교 | cycle | in-state | out-of-state | fees | room/board | 비고 |
+|---|---|---|---|---|---|---|
+| University of Cincinnati | 2025 | $12,716 | $28,050 | $1,678 | 미삽입 | CDS 2024-2025 AcroForm(TUIT_AREA를 in-state로 매핑, TUIT_STATE 공란) |
+| University of Louisville | 2025 | $13,390 | $29,736 | $552 | $9,684/$4,802 | CDS 2024-2025, Widen.net 호스팅 → pdf.js 텍스트레이어 직접 추출 |
+
+### 새로 검증된 핵심 기법: Widen.net(DAM) 호스팅 CDS PDF 추출
+일부 학교(Louisville 등)는 CDS PDF를 Widen.net 디지털 자산관리 플랫폼의 `<school>.widen.net/s/<id>/<slug>`
+링크로 게시한다. 이 링크를 브라우저로 열면 Widen 자체 pdf.js 뷰어가 뜨는데, curl로는 HTML 래퍼만
+받아진다. 브라우저에서 `window.PDFViewerApplication.url`을 읽으면 서명된(sig.expires/sig.keyId/sig=...)
+실제 PDF 원본 URL(previews.<region>.widencdn.net/...)이 노출되고, 이미 로드된
+`PDFViewerApplication.pdfDocument.getPage(n).getTextContent()`로 페이지별 텍스트를 직접 읽을 수 있다.
+AcroForm 필드가 없는(플랫텍스트) CDS PDF에서도 이 방법으로 G1 섹션 텍스트를 완전하게 확보했다.
+
+### Google Drive CDS 다운로드 재확인: `uc?export=download&confirm=t` 필요
+기존 세션에서 쓰던 `uc?export=download&id=`만으로는 일부 파일(Notre Dame 등, 공유폴더 내부 파일)에서
+로그인 페이지로 리다이렉트됨. `&confirm=t` 쿼리파라미터를 추가하면 (drive.google.com 오리진에서 fetch 시)
+200으로 실제 `%PDF-...` 바이너리를 받을 수 있음을 확인. 단, 이 바이트를 브라우저 밖(bash)으로 꺼내려면
+base64 인코딩 후 청크 전송이 필요해 비용이 크고, `drive.google.com` 자체가 strict CSP(Trusted Types)를
+걸어놔서 페이지 내 동적 pdf.js 주입(`<script src>`, `eval`, `import()`)이 전부 차단됨 — 이 조합 때문에
+Notre Dame은 파일을 확보하고도(200 OK, 440KB 실제 PDF 확인, A1 필드에서 "University of Notre Dame" 학교명도
+프리뷰에서 육안 확인) 이번 세션에서는 텍스트 추출에 실패하고 DB 미기록으로 종료. 다음 세션은 (a) 별도
+오리진(예: about:blank가 아닌 동일 사이트 iframe)에서 CSP 우회를 시도하거나, (b) base64 청크 전송으로
+bash까지 옮겨 pypdf/pdftotext로 처리할 것을 권장.
+
+### 이번 세션 스킵 사례(추측 금지 원칙 준수, DB 미기록)
+- Middle Tennessee State University: CDS 2024-2025 AcroForm의 TUIT_* 필드 전부 `None`(공란) 확인, 구조적
+  미공시로 판단, 스킵.
+- University of Texas at San Antonio: CDS 2024-2025 xlsx(G시트) G1 tuition 행이 전부 공백 셀 확인(병합
+  셀 포함 전체 스캔), 구조적 미공시로 판단, 스킵.
+- University of Massachusetts Lowell: CDS 2024-2025 PDF(`uml.edu` 직접 호스팅) 전체 텍스트에 G1/G 섹션
+  자체가 통째로 없음(H 재정지원 섹션은 있음) — 이 특정 PDF가 발행 시 G섹션이 누락된 것으로 추정, 스킵.
+- University of Idaho: `uidaho.edu` CDN이 curl과 브라우저 fetch 모두 403(봇 차단)으로 거부 — Akamai류
+  방화벽으로 추정, 스킵.
+- University of Notre Dame: 위 "Google Drive CDS" 항목 참조 — 파일은 확보했으나 텍스트 추출 실패로 스킵.
+- Wright State University 호스팅 "CDS-PDF-2025-2026_Dayton.pdf"는 실제로는 Wright State University
+  자체 CDS였음(A1 "Name of College/University" 필드로 재확인, University of Dayton 아님) — **검색 결과
+  오염 3번째 사례**로 확인 후 폐기, DB 미기록.
+- Mississippi State University: `ir.msstate.edu/CDS/cds2023_2024.pdf` 404 확인, 유효 링크 재탐색 필요.
+- Gonzaga University: `.ashx` CDS 링크(2021-2022) curl 시 HTML만 반환(리다이렉트/토큰 만료 추정), 최신
+  연도(2024-2025) 링크 미발견.
+
+### 검증
+- `select count(*) ... metric_key='tuition_in_state'` → 세션 시작 36개교(Brown/Memphis/Albany/Ohio 제외
+  기준) → 종료 시점 34개교. university_source_urls/university_admission_metrics만 insert, 모두
+  `WHERE NOT EXISTS` 가드 사용. demographics/financial_aid_programs 미접촉.
+- Agent 툴로 하위 에이전트 spawn하지 않음. `npx supabase db push --linked`/`vercel deploy` 미실행,
+  마이그레이션 파일 작성 없음.
+
+### 다음 세션 인계
+- 남은 34개교(Brown/Memphis/Albany/Ohio University 제외 기준). 위 스킵 사례들은 재시도 시 새로운
+  접근(예: Notre Dame은 base64 청크 전송, Idaho는 다른 IP/우회 경로) 필요.
+- Widen.net 호스팅 CDS는 `PDFViewerApplication.pdfDocument.getPage(n).getTextContent()` 패턴을 표준
+  절차로 사용할 것 — AcroForm 유무와 무관하게 동작.
+- Google Drive `uc?export=download&confirm=t`는 유효하나, drive.google.com 자체의 Trusted Types CSP로
+  인해 동일 탭에서 pdf.js를 동적 주입할 수 없음 — 우회 방법 필요.
