@@ -7433,3 +7433,65 @@ University는 재확인 결과 일반 신입생 대상 필수 에세이가 없�
   단일 공식 URL을 확보하지 못함) — 우선적으로 공식 URL 확보 후 연결 필요.
 - 200개교 전체 완료 후 CDS 정보 UI 노출 작업(제품 오너 지시)은 여전히 미착수 —
   매 세션 인계 유지.
+
+## 77차 세션 — university_essay_prompts 26개교 실입력 (공식 페이지 직접 조사)
+
+이전 세션 인계대로 남은 86개교(대부분 대형 주립대)를 대학 공식 admissions
+페이지 직접 fetch 방식으로 조사해 `university_essay_prompts`에 저장.
+cycle_year=2027(2026-27 지원 사이클) 기준. "에세이 요구 없음"도 유효한 정보로
+명시적으로 저장(스킵하지 않음).
+
+**반영 학교 (26개교, 각 essay_prompts 1행, 전부 공식 페이지 직접 fetch로 confirmed_current_year)**:
+
+| 대학 | 요약 |
+|---|---|
+| University of Iowa | 일반 지원 에세이 불요구 |
+| University of Kansas | 일반 지원 에세이 불요구 |
+| University of Nebraska-Lincoln | 에세이 불요구 |
+| University of New Mexico | 에세이 불요구 |
+| University of North Dakota | 에세이 불요구 |
+| University of South Dakota | 에세이 불요구 |
+| Illinois State University | 선택 Personal Statement 약 500단어 |
+| Old Dominion University | 선택 Personal Statement(글자수 미제한) |
+| East Carolina University | 필수 에세이 250-650단어(Common App 프롬프트) |
+| Southern Illinois University Carbondale | 에세이 불요구 |
+| University of Louisiana at Lafayette | 에세이 불요구 |
+| Texas State University | 선택 에세이(ApplyTexas A/B/C 또는 Common App) |
+| University of North Texas | 불요구(GED 145-164 지원자만 예외) |
+| University of Texas at Arlington | 불요구(보장입학 미충족 개별심사 대상자만 개인진술서 필수) |
+| University of Texas at Dallas | 선택 에세이 |
+| University of Texas at San Antonio | 선택 에세이(종합심사 대상자 권장, ApplyTexas Essay A/Common App) |
+| University of South Alabama | 불요구(2026 test-optional 경로만 예외 가능) |
+| University of Alabama in Huntsville | 에세이·추천서 불요구 |
+| University of Idaho | 불요구(장학금용 선택 메모 섹션만 존재, Honors Program 별도) |
+| Idaho State University | 불요구(대학원 OT/PT 프로그램 제외) |
+| University of Montana | 불요구 |
+| Washington State University | 불요구(25세 이상 지원자만 1페이지 에세이 필수) |
+| University of Wisconsin-Milwaukee | 선택 에세이 250-650단어 |
+| University of Toledo | 불요구 |
+| Morgan State University | 공식 체크리스트 기준 불요구(제3자 출처의 "선택 500단어" 주장은 공식 페이지 미확인) |
+| University of Nevada, Reno | 불요구(Honors College 별도 가능성, 미확인) |
+
+**검증**:
+- 삽입 전 26개교 전부 `select id,name from universities where name in (...)`로 id 확인.
+- 삽입 전 대상 대학 목록 자체가 `select ... from university_essay_prompts` 기준
+  0건(NOT EXISTS)인 86개교에서 추출했으므로 중복 없음. 삽입 후 재조회로 미보유
+  대학이 86 → **60개교**로 감소 확인.
+- 전부 공식 admissions 페이지 WebFetch 직접 확인 후 `confirmed_current_year`로 저장
+  (제3자 요약만으로 저장한 행 없음; 불일치 발견 시 notes에 명기).
+- psql direct INSERT만 사용, 마이그레이션 파일/`supabase db push`/`vercel deploy` 미실행.
+- `university_essay_prompts` 외 테이블 미접촉.
+
+### 다음 세션 인계
+- 남은 60개교 계속 공식 페이지 직접 조사.
+- University of Alabama at Birmingham은 공식 admissions 페이지가 SSL 인증서 오류로
+  fetch 실패(기존 10개교 SSL/403 목록에 추가 필요) — 대체 경로(브라우저 자동화 등)
+  필요.
+- Northern Arizona University, University of Nevada Las Vegas는 공식 페이지 URL이
+  최근 변경되어(404/리다이렉트) 이번 세션에서 확인 실패, 다음 세션에서 정확한
+  URL 재탐색 필요.
+- Morgan State University는 공식 체크리스트에 에세이 언급이 없어 불요구로 저장했으나,
+  prepscholar 등 제3자 출처는 "선택 500단어 에세이"를 언급 — 다음 세션에서 실제
+  지원서 포털(Common App/Morgan State 자체앱) 직접 확인으로 재검증 권장.
+- 200개교 전체 완료 후 CDS 정보 UI 노출 작업(제품 오너 지시)은 여전히 미착수 —
+  매 세션 인계 유지.
