@@ -5683,3 +5683,104 @@ financial_aid_programs를 등록하지 않았고, 표 자체가 깨진 학교(Ma
    57건)는 로컬 DB에만 존재. 기존 세션 관례대로 non-prod 동기화 export가 필요하다.
 5. university_source_urls 신규 추가 없음(기존 승인 CDS URL만 재사용) — 병행 세션과
    충돌 없이 완료.
+
+## 54차 세션 — 신규 비용/교수비율 지표 19개교 실수집 (university_admission_metrics/university_source_urls만)
+
+이번 세션은 verified_pilot 중 `tuition_in_state` 미보유 128개교를 재확인 후, 각 학교
+공식 Common Data Set(CDS) PDF를 WebSearch로 탐색, curl로 원문을 내려받아
+pdftotext(-layout) 또는 pypdf(get_fields, 폼필드 PDF)로 G1(비용)/I-2(학생:교수 비율)
+섹션만 실수집했다. 세션 내내 다른 병행 세션이 같은 테이블을 동시에 채우고 있어
+INSERT 시 `WHERE NOT EXISTS` 가드를 항상 사용했고, 실제로 여러 학교(Northwestern,
+Emory, Duke, Santa Clara 등)에서 병행 세션이 이미 삽입한 값과 이번 세션이 추출한
+값이 정확히 일치함을 확인했다(교차 검증 효과). university_majors/
+university_essay_prompts/university_demographics/university_financial_aid_programs는
+전혀 건드리지 않았다.
+
+### 반영 완료 (19개교, CDS 원문 실측치만)
+
+| 학교 | CDS 연도 | 등록금(주내/사립) | 필수비 | 기숙사 | 식비 | 학생:교수 |
+|---|---|---|---|---|---|---|
+| University of Washington | 2025-26 | $12,260 / $43,494(주외·국제) | $1,146 | $12,117 | $6,288 | 21:1 |
+| University of Georgia | 2025-26 | $10,034 / $30,878(주외) / $31,774(국제) | $1,458 | $7,498 | $4,586 | 17:1 |
+| University of Kansas | 2025-26 | $11,298 / $30,177(주외·국제) | $1,155 | $6,898 | $4,900 | 18.1:1 |
+| University of Denver | 2025-26 | $63,720(사립) | $1,584 | $11,283 | $7,532 | 10:1 |
+| Santa Clara University | 2025-26 | $64,956(사립) | $780 | $13,383 | $7,851 | 11:1 |
+| Southern Methodist University | 2025-26 | $63,736(사립) | $8,080 | 미기재(Food+Housing 합산 $20,950만 공개) | — | 11:1 |
+| University of Southern California | 2025-26 | $66,640(사립) | $1,597 | $11,910 | $7,290 | 9:1 |
+| Northwestern University | 2025-26 | $71,802(사립) | $1,260 | 미기재(Food+Housing 합산 $22,941) | — | 6:1 |
+| Emory University | 2025-26 | $70,300(사립) | $1,148 | $13,222 | $9,184 | 8.3:1 |
+| Duke University | 2025-26 | $73,740(사립) | $2,635 | $11,560 | $8,662 | 7:1 |
+| Tufts University | 2025-26 | $74,862(사립) | $1,696 | $11,220 | $9,374 | 9.691:1 |
+| Rice University | 2025-26 | $65,280(사립, UNDERGRADUATES 열) | $984 | $13,930 | $6,600 | 5.61:1 |
+| Syracuse University | 2025-26 | $69,180(사립) | $1,869 | $12,220 | $8,360 | 14:1 |
+| Case Western Reserve University | 2025-26 | $71,410(사립) | 미기재 | 미기재 | 미기재 | 10:1 |
+| Temple University | 2025-26 | 미기재(G1 공란) | — | — | — | 15:1 |
+| University of New Mexico | 2024-25 | 미기재(G1 공란) | — | — | — | 15:1 |
+| Northeastern University | 2024-25 | $67,990(사립) | $1,299 | $13,148 | $8,900 | 16:1 |
+| University of Rochester | 2025-26 | $71,750(사립) | $1,622 | $12,822 | $8,750 | 9.7:1 |
+| Loyola Marymount University | 2024-25(2025-26 비용판) | $64,470(사립, UNDERGRADUATES 열) | $897 | $14,994 | $6,904 | 10:1 |
+
+### 반영하지 않은 것 (추측 금지)
+
+- Temple University/University of New Mexico/Case Western Reserve University:
+  CDS 원문 G1(비용) 표 자체가 공란 — student_faculty_ratio만 반영, tuition/fees/
+  room/board는 스킵.
+- Southern Methodist University/Northwestern University: CDS G1이 "Food and
+  Housing (on-campus)" 합산값만 공개하고 Housing Only/Food Only가 공란 — 합산치를
+  room_cost/board_cost로 임의 분할하지 않고 스킵.
+- Rice University/Loyola Marymount University: FIRST-YEAR 열과 UNDERGRADUATES 열
+  숫자가 서로 다름(장학/차등 정책 추정) — UNDERGRADUATES 열을 채택하고 review_note에
+  명시.
+- Johns Hopkins/Brown/UPenn/FSU/Oregon/Idaho/Georgetown/Villanova(중복)/UC
+  Cincinnati(2026-27 CDS 초안, G1 전부 공란)/University of Iowa(CDS 문서가
+  instructions 전용, G1 공란)/University of Kentucky(pdftotext 추출 시 숫자
+  전부 누락, 폼필드도 0건 — 렌더링 이슈로 추정)/Ohio State University(동일 사유)/
+  University of Tennessee Knoxville·University of Central Florida(검색 스니펫의
+  URL이 실제로는 404 — CDN 캐시만 남고 원문 삭제된 것으로 추정)/University of
+  Miami(CDS 2025-26 원문 G1·I-2 모두 공란)/Colorado School of Mines·Bowling
+  Green State·Ohio University·Mississippi State·Clemson·North Dakota State·
+  Fordham University·Drexel University·Elon University·Vanderbilt University·
+  Gonzaga University·University of Virginia·Virginia Tech·University of
+  Maryland College Park·University of Illinois Urbana-Champaign·University of
+  Wisconsin-Madison: 이번 세션 검색으로 2025-2026(또는 최근) CDS 공개 PDF를 찾지
+  못함(미시도 아님, 시도 후 실패) — 다음 세션에서 브라우저 자동화 또는 직접
+  기관 IR 사이트 크롤링 권장.
+- University of Texas at Austin 계열(Texas State University 포함)/University of
+  Memphis: CDS 링크가 curl에서 빈 응답(9바이트)/차단(Cloudflare 등)으로 실패,
+  재시도 필요.
+
+### 검증
+
+- `select u.name, count(*) from university_admission_metrics m join
+  universities u on u.id=m.university_id where u.name in (...19개교...) group by
+  u.name` → 19개교 각각 3~31건(과거 세션분 포함) 확인, 이번 세션 신규분은 각
+  1~10건.
+- 삽입 전량 `WHERE NOT EXISTS(...)` 가드 사용 — 병행 세션과의 PK 충돌
+  (university_id, cycle_year, cohort, metric_key) 발생 시 자동 스킵되도록 설계,
+  실제로 여러 건이 "이미 존재"로 스킵되며 값이 일치함을 확인(교차 검증).
+- `select u.name from universities u where u.data_collection_status=
+  'verified_pilot' and not exists (select 1 from university_admission_metrics am
+  where am.university_id=u.id and am.metric_key='tuition_in_state') order by
+  u.name` → 세션 시작 128개교 → 종료 시점 약 109개교로 감소(본 세션 직접 기여분 +
+  병행 세션 기여분 포함).
+- `git status --short` → 이번 세션이 `docs/` 외 어떤 파일도 건드리지 않음 확인.
+  university_majors/university_essay_prompts/university_demographics/
+  university_financial_aid_programs는 전혀 접촉하지 않음.
+- `npx supabase db push --linked`/`vercel deploy` 미실행. 로컬 psql direct
+  INSERT/UPDATE만 사용, 마이그레이션 파일 작성 없음.
+
+### 다음 세션 인계
+
+- Johns Hopkins/Brown/UPenn/FSU/Oregon/Idaho/Georgetown 계열은 여전히 미해결 —
+  브라우저 자동화(navigate+get_page_text) 재시도 권장.
+- Ohio State/University of Kentucky/University of Iowa: CDS PDF는 확보했으나
+  텍스트 추출 시 G1 숫자가 전부 공란으로 나옴(폼필드 0건, pdftotext -layout/raw
+  모두 실패) — pdftoppm 렌더링 후 육안 확인 또는 이미지 OCR 필요.
+  (`/tmp/cds/osu.pdf`, `/tmp/cds/uky.pdf`, `/tmp/cds/uiowa.pdf`에 원문 캐시됨,
+  세션 종료 시 삭제될 수 있으니 재다운로드 필요.)
+- UTK/UCF: WebSearch 스니펫이 가리키는 URL이 404 — 최신 CDS 위치 재탐색 필요.
+- Texas State University/University of Memphis: curl 응답이 빈 바이트/차단 —
+  재시도 또는 브라우저 자동화 권장.
+- 여전히 verified_pilot 잔여 다수(약 109개교) — Virginia Tech/UVA/Maryland/
+  UIUC/Wisconsin-Madison 등 대형 주립대는 이번 세션 검색으로 2025-2026 CDS
+  공개본을 찾지 못함(기관 IR 페이지 직접 크롤링 필요할 가능성).
