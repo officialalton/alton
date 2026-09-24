@@ -5409,3 +5409,75 @@ university_majors/university_essay_prompts는 전혀 건드리지 않음(다른
   Notre Dame/Columbia/Kent State/Indiana Bloomington/UT Austin 계열/
   University of Arizona: CDS 링크 재탐색 또는 폼 값 채워지길 대기 필요.
 - verified_pilot 151개교 중 21개교 처리, 130개교 잔여.
+
+## 52차 세션 — 신규 비용/교수비율 지표 19개교 실수집 (university_admission_metrics/university_source_urls만)
+
+이번 세션도 verified_pilot 중 tuition_in_state/tuition_total 미보유 학교를
+재확인 후, CDS 원문(curl+pdftotext, xlsx는 openpyxl)에서 G(비용)/I-2(교수
+비율) 섹션만 실수집. 이번 세션 동안 다른 백그라운드 세션이 동시에 매우
+많은 학교(Auburn, Baylor, Boston College, Penn State, Rutgers 등 100개교
+이상)를 동일 방식으로 처리 중이었음을 확인 — university_majors/
+university_essay_prompts는 전혀 건드리지 않음(충돌 방지).
+
+### 반영 완료 (19개교, CDS 원문 실측치만)
+| 학교 | CDS 연도 | 등록금(주내/주외 또는 사립 total) | 필수비 | 기숙사 | 식비 | 학생:교수 |
+|---|---|---|---|---|---|---|
+| University of Texas at Dallas | 2026-27 | $10,640 / $36,140 | $4,024 | $9,328 | $5,906 | 23:1 |
+| Georgia State University | 2025-26 | $9,180 / $30,000 | $1,320 | $6,780 | $4,358 | 20:1 |
+| University of Minnesota, Twin Cities | 2024-25(비용 미공개) | - | - | - | - | 17:1 |
+| University of Alabama | 2025-26 | $11,684 / $34,542 | $800 | $9,000 | $4,616 | 19:1 |
+| University of Alabama at Birmingham | 2025-26 | $11,970 / $29,820(국제 $32,490) | $500 | $8,480 | $5,280 | 18:1 |
+| University of Alabama in Huntsville | 2025-26 | $10,700 / $25,390 | $1,758 | $7,928 | $4,500 | 17:1 |
+| University of Massachusetts Amherst | 2025-26 | $17,601 / $40,873 | $1,386 | $8,734 | $7,992 | 17:1 |
+| Drexel University | 2024-25 | $61,842(사립) | $2,370 | $11,685 | $7,146 | 9.4:1 |
+| Case Western Reserve University | 2025-26 | $71,410(사립, 필수비·기숙사 미공개) | - | - | - | 10:1 |
+| Northeastern University | 2024-25 | $67,990(사립) | $1,299 | $13,148 | $8,900 | 16:1 |
+| Howard University | 2024-25 | $37,996(사립) | $940 | $12,380 | $6,602 | 13:1 |
+| Chapman University | 2025-26 | $69,990(사립) | $404 | $15,618 | $6,082 | 12:1 |
+| Tufts University | 2025-26 | $74,862(사립) | $1,696 | $11,220 | $9,374 | 9.7:1 |
+| Villanova University | 2025-26 v3 | $72,990(사립) | $1,024 | $10,314 | $9,040 | 9:1 |
+| Vanderbilt University | 2026-27 | $69,822(사립) | $3,384 | $15,170 | $8,432 | 8:1 |
+| Rice University | 2025-26 | $71,170(사립, 2024학번 이후 기준) | $984 | $13,930 | $6,600 | 5.61:1 |
+| Emory University | 2025-26 | $70,300(사립) | $1,148 | $13,222 | $9,184 | 8.3:1 |
+| Duke University | 2025-26 | $73,740(사립) | $2,635 | $11,560 | $8,662 | 7:1 |
+| Northwestern University | 2025-26 | $71,802(사립) | $1,260 | 합산만($22,941, 식+숙 미분리) | 6:1 |
+
+### 반영하지 않은 것 (추측 금지)
+- Case Western: G1에서 필수비/기숙사/식비 항목이 전부 공란(사립 tuition만
+  공개) — 값 없는 항목은 스킵.
+- Northwestern: Housing Only/Food Only가 개별 공란, Food and Housing
+  합산치만 존재 — board_cost에 합산치 기록, notes에 명시.
+- 이미 CDS G1이 "비용 미공개"로 확인된 학교(University of Iowa, UC Santa
+  Cruz, University of New Mexico, University of Cincinnati, North Dakota
+  State University)는 재확인만 하고 중복 삽입하지 않음(기존 51차 세션
+  데이터와 동일 확인).
+- Johns Hopkins University: oira.jhu.edu가 봇 차단(Wordfence 챌린지 페이지
+  반환) — 재시도 필요.
+- Brown University, University of Pennsylvania, Florida State University,
+  University of Oregon, University of Idaho, Georgetown University:
+  WebSearch로 CDS 페이지까지는 도달했으나 실제 PDF 직링크를 찾지 못함
+  (JS 렌더링 페이지이거나 검색 결과에 누락) — 다음 세션 재시도 필요.
+
+### 검증
+- `select u.name, count(*) from university_admission_metrics m join
+  universities u on u.id=m.university_id where u.name in (...19개교...)
+  and m.created_at > now() - interval '4 hours' group by u.name` 로 각
+  학교 1건 이상 신규 반영 확인.
+- `git status --short` → 이번 세션이 `docs/` 외 어떤 파일도 건드리지
+  않음 확인. university_majors/university_essay_prompts는 전혀 접촉하지
+  않음.
+- `npx supabase db push --linked`/`vercel deploy` 미실행. 로컬 psql
+  direct INSERT만 사용, 마이그레이션 파일 작성 없음.
+- 삽입 과정에서 source_url_id를 다른 학교/자기 university_id와 혼동한
+  실수 2건(Case Western, University of Alabama in Huntsville) 발견 —
+  즉시 올바른 university_source_urls 행을 추가하고 UPDATE로 수정 완료.
+
+### 다음 세션 인계
+- Johns Hopkins/Brown/UPenn/FSU/Oregon/Idaho/Georgetown: CDS 직링크
+  재탐색 필요(브라우저 자동화로 JS 렌더링 페이지 접근 권장).
+- Oklahoma State/University of Mississippi/Michigan State/Purdue/Notre
+  Dame/Columbia/Kent State/Indiana Bloomington/UT Austin 계열/University
+  of Arizona: 여전히 미해결(이전 세션들과 동일 사유로 추정, 이번 세션은
+  시간상 미시도).
+- 다른 백그라운드 세션이 대량 처리 중이므로, 다음 세션 시작 시 먼저
+  verified_pilot 잔여 목록을 재조회해 중복 작업을 피할 것.
