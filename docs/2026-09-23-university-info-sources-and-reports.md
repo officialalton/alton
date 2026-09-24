@@ -5481,3 +5481,72 @@ university_essay_prompts는 전혀 건드리지 않음(충돌 방지).
   시간상 미시도).
 - 다른 백그라운드 세션이 대량 처리 중이므로, 다음 세션 시작 시 먼저
   verified_pilot 잔여 목록을 재조회해 중복 작업을 피할 것.
+
+## 53차 세션 — 에세이 프롬프트(university_essay_prompts) 29개교 신규 확대 (69건, DB 직접 insert)
+
+**대상 테이블**: `university_essay_prompts`, `university_source_urls`만 (병렬
+세션과 충돌 방지, admission_metrics/demographics/financial_aid는 미접촉).
+
+**방법**: collegeessayadvisors.com의 `supplemental-essay-guide` 인덱스
+페이지에서 우리 200개교와 겹치는 학교 중 `university_essay_prompts`가
+0건인 학교를 골라, 각 학교의 개별 가이드 페이지에서 문항 원문·글자수
+제한·선택 규칙만 발췌(조언/분석 문단은 저장하지 않음). 시간 제약상
+개별 대학 공식 페이지로의 재확인은 생략 — 모두 `prompt_status`를
+`unconfirmed_current_year`(가이드가 2026-27 사이클로 명시된 경우) 또는
+`prior_year_reference`(가이드가 2025-26/2024-25 등 이전 사이클로 명시된
+경우)로 정직하게 낮춰 저장. `notes` 컬럼에 "CEA 가이드 기준 연도"를
+남겨 다음 세션이 재확인 우선순위를 알 수 있게 함.
+
+**반영 학교 (29개교, 69행)**:
+Baylor University(1), Chapman University(7·Panther Profile 전문),
+Clark University(2), Clemson University(1·선택), Colorado School of
+Mines(2·선택), Drexel University(1), Elon University(5), George Mason
+University(1), Georgia State University(1), Gonzaga University(2·choose
+1/2, prior_year), Hofstra University(1·선택), Howard University(2),
+Illinois Institute of Technology(3), Indiana University Bloomington
+(1·Apply IU 전용), Loyola Marymount University(1), North Carolina State
+University(3·prior_year, Honors 조건부 포함), Southern Methodist
+University(2), Texas Christian University(3·prior_year, CEA 자체가
+"작년 것" 명시), University of Cincinnati(1), University of Colorado
+Boulder(1), University of Illinois Urbana-Champaign(5·prior_year,
+전공선택 상태별 분기), University of Maryland, College Park(6·prior_year,
+650자 단답형), University of Massachusetts Amherst(2), University of
+Mississippi(2·prior_year, Honors College 전용), University of
+Oklahoma(3·전부 선택), University of Oregon(2·choose 1/2), University of
+Rochester(1), University of San Diego(4·필수1+choose 1/3), University of
+Tulsa(3·필수1+선택2).
+
+**저장하지 않은 것**: University of San Francisco — CEA 가이드가 "이번
+사이클 에세이 요건을 없앴다"고 명시(2024-25 기준), 저장할 사실 정보가
+없어 스킵.
+
+**source_url**: 학교당 1건씩 `university_source_urls`에 신규 삽입
+(`source_type='essay_prompts'`, `is_official=false`, `status='pending'`,
+`review_note`에 3rd-party 인덱스임을 명시). 삽입 전 URL 중복 여부
+확인(`WHERE NOT EXISTS`) 후 29건 전부 신규 삽입 확인.
+
+**검증**:
+- 삽입 전 각 `(university_id, cycle_year, title)` 조합에 대해
+  `NOT EXISTS` 서브쿼리로 중복 삽입 방지(스크립트 자체에 내장).
+- 삽입 후 `select u.name, count(*), string_agg(distinct prompt_status,',')
+  ... group by u.name` 로 29개교 각각 최소 1건 이상, status 값이 의도한
+  대로(`unconfirmed_current_year`/`prior_year_reference`) 반영됐음을 확인.
+- `npx supabase db push --linked`/`vercel deploy` 미실행. psql direct
+  INSERT만 사용, 마이그레이션 파일 없음.
+- 이번 세션은 `university_essay_prompts`/`university_source_urls` 외
+  다른 테이블(admission_metrics/demographics/financial_aid_programs)은
+  전혀 접촉하지 않음 — 병렬 세션과 충돌 없음.
+
+### 다음 세션 인계
+- 이번 세션은 CEA 3rd-party 소스만 사용하고 공식 출처 재확인을 하지
+  않았다 — `prompt_status='unconfirmed_current_year'`/`prior_year_reference`
+  로 낮춰 저장된 29개교는 다음 세션에서 대학 공식 admissions 페이지/
+  Common App 학교별 페이지로 재확인해 `confirmed_current_year`로 승격
+  가능한지 점검할 것. 특히 Gonzaga, NC State, UIUC, Maryland, Ole Miss,
+  TCU는 CEA 자체가 "구 사이클" 데이터라고 명시했으므로 우선순위 높음.
+- collegeessayadvisors.com 인덱스 기준 우리 200개교와 겹치지만 아직
+  미처리인 학교가 다수 남아있음(Pepperdine, Rensselaer Polytechnic
+  Institute, Stevens Institute of Technology, Santa Clara University,
+  Virginia Commonwealth University, Worcester Polytechnic Institute,
+  University of Wyoming, University of Vermont, University of Wisconsin-
+  Madison 등) — 다음 세션에서 이어서 처리 가능.
