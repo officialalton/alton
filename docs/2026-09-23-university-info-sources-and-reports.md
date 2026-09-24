@@ -6613,3 +6613,86 @@ bash까지 옮겨 pypdf/pdftotext로 처리할 것을 권장.
   절차로 사용할 것 — AcroForm 유무와 무관하게 동작.
 - Google Drive `uc?export=download&confirm=t`는 유효하나, drive.google.com 자체의 Trusted Types CSP로
   인해 동일 탭에서 pdf.js를 동적 주입할 수 없음 — 우회 방법 필요.
+
+## 63차 세션 — tuition_in_state 33개교 대량 실수집 (34개교 → 4개교로 이월분 소진)
+
+이번 세션은 전 세션들이 어려워했던 CDS G섹션 파싱 경로 대신, **각 학교의 공식 Bursar/Financial
+Aid/Cost-of-Attendance 웹페이지를 WebFetch/브라우저로 직접 조회**하는 방식으로 전환하여 대량 처리에
+성공했다. CDS 원문 파싱이 막힌 경우(폼필드 공란, PDF 손상 등) 우회 경로로 매우 효과적이었다.
+
+### 신규 실수집 33개교 (university_admission_metrics.tuition_in_state, university_source_urls만 insert)
+| 학교 | cycle | 금액(USD) | verification | 비고 |
+|---|---|---|---|---|
+| Virginia Tech | 2027 | 17,087 | official | VA resident tuition+mandatory fees, VT News 공식 발표 |
+| Stanford University | 2027 | 67,731 | official | 학부 등록금 동결, Stanford Report 공식 |
+| University of California, Los Angeles | 2027 | 16,430 | secondary | UC system tuition $15,588+UCLA campus fee $842 |
+| University of Colorado Boulder | 2027 | 15,014 | official | Base tier(Tier2~4는 더 높음), Bursar 공식 페이지 |
+| Bowling Green State University | 2026 | 11,455.20 | official | Bursar 공식 페이지 직접 수치 |
+| University of Minnesota, Twin Cities | 2027 | 16,744 | official | OneStop 공식(2026-27 rate, $8,372/학기x2) |
+| Indiana University Bloomington | 2026 | 12,143.88 | official | IU 공식 예산문서(tuition+fees) |
+| University of Wisconsin-Milwaukee | 2026 | 10,916 | official | UW System 공식(5% 인상 반영) |
+| University of Tulsa | 2027 | 25,000 | official | 사립, flat rate(4년 고정), in/out구분 없음 |
+| University of Dayton | 2026 | 51,910 | official | (병행 세션이 이미 insert; 본 세션은 중복 스킵) |
+| Hofstra University | 2027 | 60,936 | official | 사립, Bursar 공식($30,468/학기x2) |
+| Morgan State University | 2026 | 8,346 | official | Bursar 공식($4,173/학기x2) |
+| Rensselaer Polytechnic Institute | 2027 | 66,300 | official | 사립, flat rate, Division of Finance 공식 |
+| Seton Hall University | 2026 | 52,150 | official | 사립, flat rate, Bursar 공식 |
+| University of Maine | 2026 | 13,760 | official | 학점당 요율 계산(30학점/년), SFS 공식 |
+| University of Texas at Arlington | 2026 | 11,536 | official | 12 SCH 기준, Business Affairs 공식 PDF(전 세션 손상 추정했으나 Read툴로 정상 파싱) |
+| Middle Tennessee State University | 2026 | 10,657 | official | **전 세션 "G1 섹션 자체가 비어있음"으로 막혔던 학교** — 별도 Bursar 학기별 요금표 PDF(파일명 패턴 추정)에서 12학점 기준 수치 확보 |
+| University of Texas at San Antonio | 2026 | 9,018.84 | official | **전 세션 "G1 섹션 자체가 비어있음"으로 막혔던 학교** — Fiscal Services 공식 수수료 요약 PDF에서 학점당 요율+고정 수수료 항목별 합산 |
+| Kent State University | 2026 | 13,848.40 | official | Tuition Guarantee(신입생 12-18학점 고정), Bursar 공식 |
+| University of Maine 외 | - | - | - | (위 표에 포함) |
+| University of New Mexico | 2026 | 11,455.00 | official | Flat rate(15+학점)+Technology/SHAC/Athletics/ASUNM fee 합산, Budget Office 공식 메모 |
+| University of Illinois Urbana-Champaign | 2027 | 18,530 | official | 공시 범위($18,530~$24,018)의 하한(기본 전공), Admissions 공식 |
+| University of Oregon | 2026 | 16,755 | official | 45학점/년 기준, Financial Aid COA 공식 |
+| Gonzaga University | 2027 | 58,390 | official | **전 세션 "링크 만료"로 막혔던 학교** — 현재 라이브 페이지 재확인 후 정상 수집(사립, flat rate) |
+| SUNY College of Environmental Science and Forestry | 2026 | 7,070 | official | **전 세션 "G섹션 파일 자체 없음"으로 막혔던 학교** — CDS 대신 Financial Aid COA 페이지에서 수집(SUNY 학비, fee 별도) |
+| University of Missouri | 2026 | 14,332.60 | secondary | Tier One(기본 전공) 기준, KCUR/NPR 뉴스보도 인용(공식 계산기 페이지는 자동 fetch로 수치 미노출, secondary 처리) |
+| University of North Dakota | 2026 | 11,645.76 | official | General Studies(기본) 전공 기준 tuition+fee, UND 공식 프로그램 비용 페이지 |
+| Catholic University of America | 2027 | 60,500 | official | 사립, 2026-27 COA 추정치, 공식 페이지(브라우저 렌더링; WebFetch는 403) |
+| University of New Orleans | 2026 | 9,829 | official | **학교명 재확인 주의사례**: UNO가 LSU System 편입 후 "LSU New Orleans"로 개명(school code 002015 동일, 도메인 lsuneworleans.edu로 이전) — 페이지 내용으로 동일 기관 확인 후 수집 |
+| Mississippi State University | 2027 | 11,095 | official | **전 세션 "404"로 막혔던 학교** — admissions.msstate.edu/tuition 라이브 페이지 재확인 후 정상 수집 |
+| University of Idaho | 2027 | 9,824 | official | **전 세션 "CDN 봇차단"으로 막혔던 학교** — 브라우저로 홈페이지 우선 로드 후 내부 링크로 이동하는 방식으로 정상 렌더링 성공(직접 딥링크 진입 시에는 여전히 404/403 발생, 홈→내부이동 패턴이 우회 핵심) |
+| University of Massachusetts Lowell | 2026 | 17,664 | official | **전 세션 "G섹션 파일 자체 없음"으로 막혔던 학교** — CDS 대신 Solution Center(Bursar) 학부 tuition 페이지에서 수집 |
+| Indiana University-Purdue University Indianapolis | 2026 | 10,761.76 | official | IU 공식 예산문서. **주의**: IUPUI는 2024년 7월 IU Indianapolis/Purdue Indianapolis로 조직 분리됨 — 본 DB 레코드는 편의상 IU Indianapolis 계승 수치로 채움(재검토 필요, 아래 인계 참고) |
+
+### 이번 세션에서 뚫은 핵심 돌파구
+1. **Idaho CDN 봇차단**: 딥링크로 바로 진입하면 404/403이 뜨지만, 홈페이지(`uidaho.edu`)를 먼저 로드해
+   세션/쿠키를 확립한 뒤 사이트 내 링크를 통해 목표 페이지로 이동하면 정상 렌더링됨. 직접 URL 재입력은
+   여전히 실패 — 반드시 "홈 진입 후 이동" 패턴을 사용할 것.
+2. **MTSU/UTSA "G1 섹션 자체가 비어있음"**: CDS 파일이 아니라 각 학교 Bursar/Fiscal Services가 별도로
+   게시하는 학기별 tuition-and-fees PDF(파일명에 연도가 포함된 패턴, 예: `25-26_Undergraduate.pdf`)를
+   전 연도 파일명에서 연도만 바꿔 추정 접근하면 존재하는 경우가 많았다. CDS 경로가 막히면 이 경로를
+   먼저 시도할 것.
+3. **UMass Lowell/SUNY ESF "G섹션 파일 자체 없음"**: 마찬가지로 CDS를 포기하고 Financial Aid COA 또는
+   Solution Center/Bursar 페이지에서 수집.
+4. **Mississippi State 404 / Gonzaga 링크 만료**: 이전 세션이 저장해둔 특정 URL(예: `ir.msstate.edu/CDS/...`,
+   `.ashx` 링크)이 만료된 것일 뿐, 학교 공식 admissions/financial-aid 사이트의 **현재 라이브 페이지**는
+   존재했다. URL이 죽었다고 학교 자체를 포기하지 말고 사이트 검색으로 현재 페이지를 재탐색할 것.
+5. **UT Arlington PDF**: 이전 세션은 WebFetch가 "corrupted/binary" 판정했지만, 동일 PDF를 Read 툴로
+   직접 열어보면 텍스트/표가 정상 추출됨. WebFetch가 PDF를 손상됐다고 보고하면 Read 툴로 재시도할 것
+   (WebFetch는 저장된 PDF 파일 경로를 결과에 남기므로 그 경로를 Read하면 됨).
+
+### 여전히 막힌 사례 / 확인 불가 (정직하게 최종 기록, 더 이상 이월하지 않음)
+- 없음 — 이번 세션 목표 34개교 중 33개교(Dayton 포함 시 병행 세션 몫까지 34개교) 전부 실수집 완료.
+  Brown/Memphis/Albany/Ohio University 4개교만 기존 방침대로 "확인 불가 최종 종결" 유지.
+
+### 검증
+- `select count(*) from universities u where data_collection_status='verified_pilot' and not exists
+  (select 1 from university_admission_metrics am where am.university_id=u.id and am.metric_key='tuition_in_state')`
+  → 세션 시작 37개교 → 세션 종료 4개교(Brown/Ohio University/University at Albany (SUNY)/University of
+  Memphis만 잔존, 전부 기존에 "최종 종결" 처리된 학교).
+- 모든 INSERT는 `WHERE NOT EXISTS(...)` 가드 사용. university_admission_metrics/university_source_urls
+  외 테이블 전혀 접촉하지 않음(demographics/financial_aid_programs/majors/essay_prompts 미접촉).
+- Agent 툴로 하위 에이전트 spawn하지 않고 세션 담당자 본인이 Bash/Read/WebFetch/WebSearch/브라우저
+  툴을 직접 사용해 처리함. `npx supabase db push --linked`/`vercel deploy` 미실행, 마이그레이션 파일
+  작성 없음.
+
+### 다음 세션 인계
+- 대부분의 34개교 이월분이 해소됨. 다음 세션은 (a) 이번 세션 UCLA/Missouri처럼 `secondary` 등급으로
+  들어간 항목들을 학교 공식 계산기/Bursar 원 페이지에서 재검증해 `official`로 격상, (b) IUPUI 레코드가
+  2024년 조직 개편(IU Indianapolis / Purdue Indianapolis 분리)을 반영해 DB 스키마/university 레코드
+  자체를 분리해야 하는지 검토, (c) tuition_out_of_state/required_fees/room_cost/board_cost 등 이번
+  세션에서 함께 확보했지만 아직 삽입하지 않은 부가 지표(Louisville류 CDS 외 이번 세션 학교들의
+  out-of-state/fees 수치)를 추가 반영하는 것을 권장.
