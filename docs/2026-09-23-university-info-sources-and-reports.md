@@ -5342,3 +5342,70 @@ $26,862을 international에 사용).
    직링크 문제로 스킵 — 재검색 필요.
 2. verified_pilot 200개교 중 아직 tuition_in_state 미보유 학교가
    151개교 남음 — 동일 방식으로 계속 진행 권장.
+
+## 51차 세션 — 신규 비용/교수비율 지표 21개교 실수집 (university_admission_metrics/university_source_urls만)
+
+이번 세션은 verified_pilot 학교 중 `tuition_in_state` 미보유 151개교를
+재확인 후, 기존 university_source_urls의 CDS 링크를 curl+pdftotext(폼필드
+PDF는 pypdf, xlsx는 openpyxl)로 열어 G(비용)/I(교수비율) 섹션을 실수집.
+university_majors/university_essay_prompts는 전혀 건드리지 않음(다른
+백그라운드 세션과 충돌 방지).
+
+### 반영 완료 (21개교, CDS 원문 실측치만)
+| 학교 | CDS 연도 | 등록금(주내/주외) | 필수비 | 기숙사 | 식비 | 학생:교수 |
+|---|---|---|---|---|---|---|
+| Loyola Marymount University | 2025-26 | $68,042(사립) | $898 | $15,744 | $7,250 | 10:1 |
+| Florida Atlantic University | 2025-26 | $6,099 / $21,655 | 미확인(공란) | $11,324 | $5,090 | 24:1 |
+| University of Kentucky | 2024-25(비용 미공개) | - | - | - | - | 17.7:1 |
+| University of Oklahoma (Norman) | 2025-26 | $5,532 / $24,210 | $4,953 | $9,161 | $7,220 | 18.9:1 |
+| Santa Clara University | 2025-26 | $64,956(사립) | $780 | $13,383 | $7,851 | 11:1 |
+| University of Arkansas | 2025-26 | $8,336 / $30,604 | $2,580 | 미반영 | 미반영 | 20.7:1 |
+| UC Riverside | 2025-26(코호트별 변동) | - | - | - | - | 22:1 |
+| University of Denver | 2025-26 | $63,720(사립) | $1,584 | $11,283 | $7,532 | 10:1 |
+| University of South Florida | 2025-26 | $4,559 / $16,565 | $1,851 | 미반영 | 미반영 | 21.5:1(학부) |
+| North Dakota State University | 2024-25(비용 미공개) | - | - | - | - | 17:1 |
+| University of San Diego | 2025-26 | $64,100(사립) | $1,099 | $13,450 | $5,750 | 14:1 |
+| Florida International University | 2025-26 | $6,168 / $19,806 | $398 | $8,930 | $4,922 | 25:1 |
+| Syracuse University | 2025-26 | $69,180(사립) | $1,869 | $12,220 | $8,360 | 14:1 |
+| University of Southern Mississippi | 2024-25 | $9,888 / $11,888 | $110 | 미확인(공란) | 미확인(공란) | 18:1 |
+| University of Cincinnati | 2025-26(비용 미공개) | - | - | - | - | 19:1 |
+| University of Connecticut | 2025-26 | $17,010 / $39,678 | $4,564 | $8,288 | $6,896 | 16.78:1 |
+| Old Dominion University | 2025-26 | $8,040 / $28,605 | $5,280 | $8,782 | $6,838 | 14:1 |
+| Southern Methodist University | 2025-26 | $63,736(사립) | $8,080 | 합산만($20,950, 식+숙 미분리) | 14:1(미기재) |
+| Northern Arizona University | 2024-25 | $11,688 / $28,560 | $1,321 | $7,790 | $6,642 | 19:1 |
+| University of Iowa | 2025-26(비용 미공개) | - | - | - | - | 17:1 |
+| University of New Mexico | 2024-25(비용 미공개) | - | - | - | - | 15:1 |
+
+### 반영하지 않은 것 (추측 금지)
+- Kentucky/UCR(코호트별 변동)/NDSU/Cincinnati/Iowa/New Mexico: CDS G1이
+  "비용 미공개" 체크박스 또는 빈 폼필드(pypdf get_fields 전부 None)로
+  확인됨 — pdftoppm 렌더링 또는 필드 덤프로 육안/데이터 확인 후 스킵.
+  student_faculty_ratio(I-2)는 별도 섹션이라 대부분 값이 있어 반영.
+- Arkansas/USF/USM: room_cost 또는 board_cost 개별 항목이 CDS에 공란.
+- SMU: G1이 Food+Housing 합산 값만 제공(개별 room/board 분리 없음) —
+  board_cost에 합산치 기록, notes에 명시.
+- University of Texas at Austin/San Antonio/Dallas, Notre Dame, Univ.
+  of Maryland College Park, Columbia, Clemson, Kent State, Indiana
+  Bloomington, Oklahoma State, University of Mississippi, Michigan
+  State, University of Arizona, Purdue 등은 이번 세션에서 CDS PDF를
+  찾았으나 (a) 폼이 아직 빈 값(TTU, Miami 등 draft), (b) 링크가 봇
+  차단/403(Notre Dame, Columbia, Kent State docx 빈 셀, Indiana PHP
+  오류), (c) 특정 섹션만 배포(OU는 성공, 다른 학교는 실패)로 스킵.
+  다음 세션 재시도 권장.
+- ap_credit_accepted 등 AP 지표는 이번 세션에서 WebSearch 시간 부족으로
+  미착수.
+
+### 검증
+- `select count(distinct university_id) from university_admission_metrics
+  where university_id in (...21개 id...) and created_at > now() - interval
+  '3 hours'` → 21 확인.
+- `git status`/`git diff --cached --name-only`로 이번 세션이 university_
+  admission_metrics/university_source_urls INSERT(psql direct)만 수행,
+  university_majors/university_essay_prompts 미접촉 확인.
+- `npx supabase db push --linked`/`vercel deploy` 미실행.
+
+### 다음 세션 인계
+- Oklahoma State/University of Mississippi/Michigan State/Purdue/
+  Notre Dame/Columbia/Kent State/Indiana Bloomington/UT Austin 계열/
+  University of Arizona: CDS 링크 재탐색 또는 폼 값 채워지길 대기 필요.
+- verified_pilot 151개교 중 21개교 처리, 130개교 잔여.
