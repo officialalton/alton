@@ -4711,3 +4711,103 @@ CDS에 없어 각 대학 admissions/registrar 공식 페이지를 WebSearch+WebF
 university_admission_metrics, university_source_urls(신규 3건: NC State CDS
 AP정책 페이지, CMU CDS+AP정책 페이지, BU CDS+AP정책 페이지)만 수정. 학과/에세이
 테이블은 건드리지 않음.
+
+## 48차 세션 — collegeessayadvisors.com 겹치는 학교 15개교 에세이 문항 확대
+
+### 배경
+46/44차 세션이 처리한 12개교(American University, Boston College, Boston
+University, Brown, Caltech, Carnegie Mellon, Cornell, Duke, Emory, Fordham,
+George Washington, Georgetown)를 제외하고 CEA 인덱스(191개교)와 우리 DB
+200개교의 나머지 겹치는 학교들을 이어서 처리. 다른 백그라운드 세션과의 충돌을
+피하기 위해 `university_essay_prompts`/`university_source_urls`/
+`university_admission_cycles`만 다루기로 지시받음(이번 세션은 essay_prompts,
+source_urls만 실제로 수정 — admission_cycles는 건드리지 않음).
+
+### 처리 대상 선정
+`select u.name, count(e.id) from universities u left join
+university_essay_prompts e on ... where cycle_year=2027` 으로 기존 essay_prompts
+보유 17개교(위 12개교 + Harvard/MIT/Princeton/Stanford/Yale — 별도 세션에서
+이미 수집됨) 확인 → CEA 인덱스와 겹치되 essay_prompts가 0건인 학교 중 15개교를
+선정: Johns Hopkins, Northwestern, Columbia, University of Chicago, Rice,
+Tufts, Vanderbilt, University of Michigan(Ann Arbor), Villanova, Lehigh,
+Purdue, Syracuse, Texas A&M, University of Wisconsin-Madison, Virginia Tech.
+
+- Georgia Tech, UNC Chapel Hill은 CEA 가이드가 "이번 사이클 에세이 요구사항을
+  폐지했다"고 명시해 현재 에세이가 없으므로 삽입 대상에서 제외(사실관계만 확인,
+  DB에 문항 데이터 없음 상태 유지가 정확함).
+
+### 실제 처리 방법
+- 각 학교 `collegeessayadvisors.com/supplemental-essay/<slug>-supplemental-essay-prompt-guide/`
+  개별 가이드 페이지를 WebFetch로 열어 "문항 원문·글자수·필수/선택·선택그룹
+  규칙"만 추출(광고/첨삭 조언 문단은 전부 제외).
+- 공식 대학 admissions 페이지 재확인을 시도: Vanderbilt는
+  `https://admissions.vanderbilt.edu/apply/personal-essay-and-short-answer-prompts/`
+  직접 fetch에 성공해 원문 완전일치 확인 →
+  `prompt_status='confirmed_current_year'`, `is_official=true`로 등록.
+  나머지 14개교는 공식 페이지 직접 fetch가 404/403/DNS 실패로 막히거나(JHU,
+  UVA, Syracuse, UW-Madison, Villanova 등), 검색 스니펫으로 부분 확인은 됐지만
+  전체 원문/글자수를 공식 페이지에서 직접 읽지 못해 정직하게
+  `prompt_status='unconfirmed_current_year'`, `is_official=false`(CEA
+  출처)로 유지. JHU는 2차 출처 간 문항 텍스트가 사이클마다 달라 보여
+  (2025-26 "important first" 문항 vs 가이드의 "engaging across differences"
+  문항) 특히 주의: notes에 불일치 사실을 남겨둠.
+- 선택형 문항(예: Northwestern 5개 중 1~2개, UChicago 5개 중 1개, Rice 2개
+  중 1개, Villanova 5개 중 1개)은 `selection_group_id`(uuid, python
+  `uuid.uuid4()`로 생성) + `select_count`/`group_size`로 그룹화.
+- 프로그램별 조건부 필수 문항(Tufts 4개 단과대/BFA별 필수, Michigan Ross
+  School 우선입학 전용 2건)은 `prompt_type='program_conditional'` +
+  `applies_to_school`로 구분(선택 그룹이 아니라 지원 프로그램에 따라 고정
+  필수임을 명확히 함).
+- 삽입 전 매 학교 `select count(*) from university_essay_prompts where
+  university_id=... and cycle_year=2027`로 0건 확인 후 진행(15개교 전부
+  기존 0건).
+- `university_source_urls` 신규 15건(CEA 14건 `is_official=false`,
+  Vanderbilt 공식 1건 `is_official=true`, 전부 `status='pending'`,
+  `source_type='essay_prompts'`) 등록. 첫 시도에서 Vanderbilt 서브쿼리가
+  기존에 다른 세션이 등록해 둔 `https://admissions.vanderbilt.edu/`(루트
+  도메인) 출처 행과 `LIKE` 패턴이 겹쳐 "more than one row" 오류로 트랜잭션
+  전체 롤백됨 → 정확한 전체 URL로 `=` 매칭하도록 수정 후 재실행, 전량
+  커밋 확인.
+
+### 실제 반영 내역 (university_essay_prompts, cycle_year=2027)
+| 학교 | 신규 문항 행 수 | 상태 |
+|---|---|---|
+| Johns Hopkins University | 1 | unconfirmed(CEA) |
+| Northwestern University | 6 (필수1 + 선택그룹 5개 중 1~2) | unconfirmed(CEA) |
+| Columbia University | 6 (전부 필수) | unconfirmed(CEA) |
+| University of Chicago | 6 (필수1 + 선택그룹 5개 중 1) | unconfirmed(CEA) |
+| Rice University | 4 (필수2 + 선택그룹 2개 중 1) | unconfirmed(CEA) |
+| Tufts University | 5 (필수1 + 단과대별 조건부 필수 4) | unconfirmed(CEA) |
+| Vanderbilt University | 1 (필수) | **confirmed(공식 admissions.vanderbilt.edu)** |
+| University of Michigan | 4 (일반 필수2 + Ross 조건부 필수2) | unconfirmed(CEA) |
+| Villanova University | 5 (선택그룹 5개 중 1) | unconfirmed(CEA) |
+| Lehigh University | 3 (전부 필수) | unconfirmed(CEA) |
+| Purdue University | 2 (전부 필수) | unconfirmed(CEA) |
+| Syracuse University | 1 (필수) | unconfirmed(CEA) |
+| Texas A&M University | 7 (필수6 + 선택1) | unconfirmed(CEA) |
+| University of Wisconsin-Madison | 1 (필수) | unconfirmed(CEA) |
+| Virginia Tech | 4 (전부 필수, Ut Prosim Profile) | unconfirmed(CEA) |
+
+- 총 15개교, 56건 신규 삽입. 세션 시작 전 `university_essay_prompts` 56건 →
+  세션 종료 시 112건(psql `select count(*)`로 확인).
+- `university_source_urls` 15건 신규 등록(14건 secondary/CEA, 1건 official/
+  Vanderbilt).
+
+### 미완료 및 한계 (정직하게 기록)
+- 목표(15개교) 딱 달성했으나 공식 출처 재확인은 Vanderbilt 1개교뿐 —
+  나머지 14개교는 여전히 CEA 2차 출처, `unconfirmed_current_year` 상태.
+  Purdue는 CEA 가이드에서 확인 안 된 조건부 3·4번째 에세이(대안 전공/
+  Honors College)가 존재함을 notes에만 남기고 실제 행은 추가하지 않음
+  (원문 미확인 상태로 추측 삽입 금지 원칙 준수).
+- Georgia Tech, UNC Chapel Hill은 이번 사이클 에세이 자체가 폐지되어 처리
+  대상에서 제외 — 향후 사이클에 부활하면 재확인 필요.
+- CEA 인덱스와 겹치는 학교가 아직 40개교 이상 남아있음(Johns Hopkins~Virginia
+  Tech 외에도 Case는 CEA 목록에 없어 제외, Colorado School of Mines/Clemson/
+  Santa Clara/Southern Methodist/University of Pittsburgh/University of
+  Rochester/University of San Diego/San Francisco 등 다수 미착수) — 다음
+  세션에서 이어서 공식 출처 재확인 위주로 진행 권장.
+
+### 담당 범위
+`university_essay_prompts`, `university_source_urls`, 본 문서만 수정.
+`university_majors`, `university_admission_metrics`, `university_admission_cycles`는
+건드리지 않음(다른 백그라운드 세션과 충돌 방지).
