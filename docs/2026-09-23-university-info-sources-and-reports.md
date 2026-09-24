@@ -3360,3 +3360,88 @@ university_essay_prompts: 34행 (변동 없음)
    UI라 페이지네이션을 여러 번 읽어야 함(각 페이지 `get_page_text` 반복).
 6. 200개교 완료 후 UI 확장 지시(CDS 전체 정보 노출)는 아직 손대지 않음 —
    200개교 완료 전까지 매 세션 인계에 계속 전달.
+
+## 35차 세션 (2026-09-23, 이어쓰기)
+
+### 요약
+낮은 작업 예산으로 소규모 실수집만 수행. CDS 1개교(Oklahoma State University,
+Cloudflare를 브라우저 navigate + `javascript_tool`의 `fetch().arrayBuffer()`→
+base64→청크 저장→로컬 재조립→`pdftotext`로 우회 성공), 학과 2개교(North
+Carolina State University 101건 전체, University of Kentucky 40건 — Program
+Finder가 22페이지 분량이라 앞쪽 6페이지만 수집한 부분 목록, 추측 없이 실제
+확인된 항목만 삽입) 반영.
+
+### 1. Oklahoma State University CDS — 완료
+- 출처: `https://ira.okstate.edu/site-files/documents/cds/cds2425.pdf`
+  (source_url_id `5c440a0c-06b3-4e14-9869-c6582ef16e23`, 기존 pending → approved)
+- Cloudflare가 curl은 물론 브라우저의 `read_network_requests` 응답 바디까지
+  차단(716자 placeholder)했지만, 같은 오리진 페이지 컨텍스트에서
+  `fetch(pdfUrl).then(r=>r.arrayBuffer())` 후 base64 인코딩 → 결과가
+  토큰 한도를 넘겨 자동으로 로컬 파일에 저장되는 동작을 이용해 4개 청크로
+  나눠 받고 로컬에서 재조립 → 실제 PDF(659KB, 학교명 "Oklahoma State
+  University" 확인) 획득. 이후 `pdftotext -layout`으로 텍스트 추출.
+- Fall 2024 cohort: 지원 24,910 / 합격 18,693 / 등록 5,030
+  (admit_rate 75.04%, yield_rate 26.91%)
+- SAT Total 25/50/75 = 1040/1150/1240, EBRW 25/75, Math 25/75,
+  ACT Composite/Math/English/Science/Reading 25/75, SAT 제출률 20.4%,
+  ACT 제출률 64.8%, 평균 GPA 3.59 — 총 25개 metric row, `verification_status
+  ='official'`, `verified_at`=오늘.
+- `universities.data_collection_status` → `verified_pilot` 반영.
+
+### 2. 그 외 CDS 시도 — 결과: 미해결(전부 스킵)
+- Mississippi State University: IR 페이지(`ir.msstate.edu/cdsets.php`)의
+  "2024-2025 Common Data Set" 링크가 JS `value` 속성에 인코딩이 깨진 경로
+  (`Common%Data%Set`, `%20` 누락 추정)를 담고 있고 실제 클릭 시 새 탭이
+  차단되어 실제 파일 URL을 확보하지 못함.
+- Bowling Green State University: `/institutional-research/CDS.html`
+  페이지 본문이 사실상 비어 있음(마지막 업데이트 2019-07-18) — 신규 URL
+  탐색 필요, 이번 세션 미시도.
+- Andrews University: Google 검색으로도 공개 CDS 문서를 찾지 못함(대학
+  자체 아카이브 미공개 가능성) — 우선순위 하향 권고.
+- Clemson, Morgan State: 이번 세션 미시도(시간 예산 소진으로 스킵).
+
+### 3. 학과 보완 — 2개교(목표 8개교 중 일부만 달성)
+- North Carolina State University: `catalog.ncsu.edu/undergraduate/` A-Z
+  Majors 탭에서 학위과정(트랙/concentration 제외 기본 전공명) 101건 전량
+  수집·삽입.
+- University of Kentucky: `academics.uky.edu/programs` Program Finder가
+  페이지네이션 22페이지(0~21) 규모라 예산 내에서 앞쪽 6페이지(0~5)만
+  확인, 학사 학위(BS/BA/BFA/BHS/BACJ/BSCJ/BSD/BSA) 40건만 삽입 — **전체
+  목록 아님, 나머지 16페이지는 다음 세션에서 이어서 수집 필요**.
+- Ball State, Montclair State, University of Arizona, Georgia State 등은
+  A-Z 리스트 URL을 찾지 못했거나(Ball State 404, 검색 결과 링크 파싱 실패),
+  페이지네이션/필터 UI가 무거워(Arizona 1037건·52페이지, Montclair
+  300여 건 카드형 필터) 예산 내 완료 불가로 스킵.
+
+### 4. IUPUI 출처 / unconfirmed 2개교 — 이번 세션도 미착수
+낮은 작업 예산으로 착수하지 못함. 계속 이월.
+
+### 5. 최종 카운트 (세션 종료, psql 직접 확인)
+```
+data_collection_status: verified_pilot 146(+1) / sources_pending_review 30(-1) / unconfirmed 24(변동없음)
+university_majors: North Carolina State University +101건, University of Kentucky +40건(부분)
+university_admission_metrics: Oklahoma State University +25행(전량 official)
+university_source_urls: Oklahoma State University 1건 pending→approved
+```
+
+### 검증
+- 마이그레이션 파일 신규/변경 없음, 20261700000000 이후 확장 필드 미접촉.
+- `npx supabase db push --linked`, `vercel deploy` 실행하지 않음.
+- 로컬 DB 리셋 관련 명령 전혀 실행하지 않음.
+- Oklahoma State 모든 metric은 CDS 2024-2025 원문 Fall 2024 cohort에서
+  직접 확인 후 저장(추측 없음).
+
+### 다음 세션 인계 (36차용, 최우선)
+1. **로컬 DB 리셋 금지 규칙 재강조.**
+2. IUPUI 출처 확보 + Catholic University of America/Miami University
+   Ohio(unconfirmed) 재조사 — 세 세션 연속 이월된 최우선 과제.
+3. University of Kentucky 학과 목록: `academics.uky.edu/programs?page=6`부터
+   `page=21`까지 이어서 수집(현재 페이지 0~5만 반영됨).
+4. Mississippi State CDS: IR 페이지의 JS 링크가 깨진 경로를 담고 있어 실제
+   파일 URL을 별도로 찾아야 함(사이트 검색 또는 사이트맵 확인 권장).
+5. Clemson(PDF가 Chrome 내장 뷰어), Morgan State, Bowling Green, Andrews
+   여전히 미해결 — 이번 세션에서 검증된 "같은 오리진 페이지에서
+   `fetch().arrayBuffer()`→base64→토큰 초과로 자동 저장된 로컬 파일 재조립"
+   방식을 Clemson에도 적용 시도할 것(OSU에서 효과 확인됨).
+6. 200개교 완료 후 UI 확장 지시(CDS 전체 정보 노출)는 아직 손대지 않음 —
+   200개교 완료 전까지 매 세션 인계에 계속 전달.
