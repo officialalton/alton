@@ -7805,3 +7805,174 @@ select count(*) from universities u
 - 잔여 2개교(Andrews University, SUNY ESF)만 남음 — 둘 다 USCAA 계열 소규모교로,
   공식 사이트 자동화 차단이 원인. 실제 브라우저(비-자동화) 접속이나 USCAA 공식
   뉴스레터/PDF 자료 등 대체 소스로 재시도 필요.
+
+---
+
+## 최종 통합 보고 (2026-09-24)
+
+약 78~80개 세션에 걸친 200개교 대학 정보 수집 프로젝트를 마무리하며 작성하는
+최종 통합 보고서다. 아래 모든 수치는 이 보고서 작성 시점(2026-09-24)에
+`psql -h 127.0.0.1 -p 54422 -U postgres -d postgres`로 로컬 개발 DB를 직접
+재조회해 확인한 값이며, 과거 세션 기록을 그대로 베끼지 않았다.
+
+### 1. 카테고리별 최종 커버리지 (200개교 기준)
+
+| 카테고리 | 테이블 | 완료 학교 수 | 비고 |
+|---|---|---|---|
+| 핵심 입시지표(합격률 등) | `university_admission_metrics` (`metric_key='admit_rate'`) | **195/200** | 나머지 5개교는 아래 7절 참고 |
+| 비용지표(주내 등록금) | `university_admission_metrics` (`metric_key='tuition_in_state'`) | **196/200** | 나머지 4개교는 아래 7절 참고 |
+| 학과(전공) | `university_majors` | **200/200** | 총 13,211행(학교당 평균 66개 전공) |
+| 에세이 프롬프트 | `university_essay_prompts` | **200/200** | 총 402행 |
+| 재학생 인구통계 | `university_demographics` | **194/200** | 총 2,027행. 나머지 6개교는 아래 7절 참고 |
+| 재정지원 프로그램 | `university_financial_aid_programs` | **200/200** | 총 538행 |
+| 소속 컨퍼런스/디비전 | `university_affiliations` | **198/200** | 총 199행. 나머지 2개교(Andrews University, SUNY ESF)는 아래 7절 참고 |
+
+참고로 `university_admission_metrics`는 단일 key-value 테이블에 52종의
+세부 지표(applicants_count 195개교, act_composite_25 174개교,
+student_faculty_ratio 149개교, gpa_average 98개교 등)가 함께 들어 있어,
+"핵심지표"와 "비용지표"는 그중 대표 지표 하나씩을 기준으로 집계했다.
+전체 지표별 커버리지는 세션별로 편차가 크며(SAT/ACT 하위 항목·GPA
+관련 항목·waitlist 항목 등은 대학이 애초에 CDS/IPEDS에 공개하지 않는
+경우가 많아 구조적으로 100%에 도달할 수 없다), 200개교 전 지표 완전
+커버리지는 이 프로젝트의 목표가 아니었다.
+
+### 2. 출처 구성 (`university_source_urls`, 총 1,181행, approved 기준 추정)
+
+세션 기록 및 `source_type`/URL 패턴 기준 대략적인 추정치다(정확한 학교 단위
+1:1 매핑은 세션 기록에 흩어져 있어 완전 재구성은 불가능하므로 "대략"으로 표기):
+
+- **CDS(Common Data Set) 원문 기준**: 약 150~165개교. `common_data_set` 소스 타입
+  411행(199개교 걸침, 일부 중복/재승인 포함) 중 대다수가 여기 해당하며, PDF
+  직접 다운로드(curl+pdftotext), pdftoppm 이미지 렌더링 육안 확인, 브라우저
+  자동화(pdf.js 캔버스 렌더링, SharePoint/Box.com 뷰어 스크롤 등) 세 가지
+  방식을 혼용했다.
+- **IPEDS College Navigator / College Scorecard 기준**: 약 35~40개교. CDS 원문이
+  Cloudflare/WAF 봇 차단, SharePoint 인증벽, Google Drive 비공개 링크 등으로
+  구조적으로 막힌 학교에 한해 39차 세션부터 공식 2차 출처로 전환해 사용했다.
+- **대학 공식 웹페이지(입학처 홈페이지, 학사요람/카탈로그, 재정지원 페이지,
+  에세이 프롬프트 안내 페이지 등) 기준**: 나머지 대다수. `admissions_homepage`
+  198행, `essay_prompts` 169행, `deadlines` 32행, `other` 369행(200개교 걸침 —
+  학과 카탈로그·컨퍼런스 공식 사이트·IPEDS 링크 등이 섞여 있음)이 여기 해당한다.
+  에세이 프롬프트는 초반에 CollegeEssayAdvisors.com(CEA) 인덱스를 참고 출처로
+  일부 사용했으나(약 73행, 169개교 중 일부와 겹침), CEA 소진 이후에는 전량
+  대학 공식 페이지로 직접 조사했다(76~78차 세션).
+
+### 3. 발견·수정된 데이터 오류 전체 목록
+
+| # | 학교/항목 | 오류 내용 | 발견 세션 | 조치 |
+|---|---|---|---|---|
+| 1 | IUPUI (Indiana University-Purdue University Indianapolis) | 승인 등록된 CDS 소스 URL(`purdue.edu/idata/.../common-data-set.php`)이 실제로는 Purdue University(West Lafayette) 본교 페이지였음. 2024년 IUPUI가 IU Indianapolis/IU Columbus로 개편되며 발생 | 29차 발견, 30차 정정 | 해당 행 `status='rejected'` 전환, `uirr.iu.edu/apps/cds/` 신규 pending 등록(단, 캠퍼스 파라미터 미확정으로 실데이터는 여전히 미확보 상태로 이월) |
+| 2 | University of Illinois Urbana-Champaign (UIUC) | 승인 등록된 CDS 소스 URL(`oir.uic.edu/common-data-set-3/`)이 실제로는 University of Illinois **Chicago**(UIC) 페이지였음 — 도시명 혼동 | 19차 발견, 20차 정정 | 기존 URL `status='rejected'`, 실제 UIUC 출처(`dair.illinois.edu`, xlsx 형식) 재검색해 신규 승인 등록 후 32건 실반영 |
+| 3 | St. John's University (NY) | 승인 등록된 CDS 소스 URL이 학부 CDS가 아니라 St. John's College of Liberal Arts and Sciences 산하 Psy.D.(대학원) 프로그램 개별 데이터 페이지였음 | 38차 발견, 39차 정정 | 해당 행 `status='rejected'`, 학부 CDS/IPEDS 대체 출처는 이후 세션에서 재탐색·확보 |
+| 4 | University of Louisiana at Lafayette | Lafayette College(펜실베이니아 소재 별도 사립대)와 혼동될 위험이 기록됨(등록금 등 지표가 "사립 표기"로 남은 사례 포함) | 세션 전반에 걸쳐 반복 경고 | 학교명/표지 재대조로 정정, 최종적으로 University of Louisiana at Lafayette(주립, Fall2023/2025-26 CDS) 데이터로 정확히 반영 |
+| 5 | Penn State University, University Park | `universities.common_data_set_url` 컬럼이 `https://www.purdue.edu/`로 잘못 들어가 있었음(원 CSV/초기 데이터 오류로 추정) | 41차 발견(`university_source_urls`에서 이미 rejected 처리된 상태였음 확인) | `university_source_urls` 오배정 건 rejected 처리 완료. `universities.common_data_set_url` 컬럼 자체의 직접 정정은 "신규 확장 필드 외 기존 컬럼 불가침" 원칙에 따라 이후 세션으로 이월(본 보고서 작성 시점까지 정정 여부 미재확인 — 8절 참고) |
+| 6 | 에세이 프롬프트 중복 삽입 | 로컬 DB 복구(export/remap) 이후 여러 세션이 같은 학교(Princeton 포함 11개교)의 같은 에세이 문항을 `selection_group_id`만 다르게 하여 중복 재삽입 — 33행 중 22행이 중복 | 37차(통합 세션 제보) | 내용 전체 일치 기준으로 가장 이른 `created_at` 1건만 남기고 22행 psql DELETE, 34→12행으로 정리 |
+| 7 | `university_affiliations` 86건 | 직전 세션이 Ivy League/NCAA 컨퍼런스 소속 86건을 **실제 공식 페이지를 열지 않고 모델 자체 지식(기억)만으로 입력** — 프로젝트 최우선 원칙("추측 채우기 절대 금지") 정면 위반. 제품 오너가 직접 지적 | 사고 직후(84차대 세션) | 86건 전부 `verification_status='unverified'`로 즉시 강등 후, 별도 세션에서 컨퍼런스 공식 사이트(ivyleague.com/theacc.com/big12sports.com 등)를 브라우저로 직접 열어 86건 전수 재검증 — 결과적으로 division/label 값 자체는 전건 정확했음이 확인됐으나(오류 정정 0건), "확인 없이 입력했다"는 절차 위반은 별개 기록으로 남김 |
+
+### 4. 품질 관리(QC) 기법
+
+- **PDF 추출 오류 재검증(41차→44차)**: 41차 세션이 Rutgers-New Brunswick에서
+  "압축 PDF(FlateDecode) 자동추출이 숫자를 조용히 오염시킬 수 있다"는 문제를
+  발견한 뒤, 44차 세션에서 19~40차(curl+pdftotext 또는 WebFetch 자동추출만
+  사용한 초기 방식) 처리 학교 중 **13개교를 표본**으로 재검증했다. 폰트
+  인코딩 손상이 기록된 3개교(Stevens/Kentucky/North Texas)는 pdftoppm으로
+  페이지를 이미지 렌더링해 육안 대조, 나머지 10개교는 텍스트 대조만으로
+  검증. **결과: 13개교 전원 정확, 오류 0건**(지원자/합격자/등록자 수 39개
+  값, SAT/ACT 백분위 등 전부 원문과 DB 일치). 다만 이는 표본 검증이며 200개교
+  전수 재검증은 수행되지 않았다는 점을 명시적으로 남겼다.
+- **학교 약어/캠퍼스 혼동 방지 규칙**: IUPUI(29~30차), UIUC/UIC(19~20차),
+  Penn State/Purdue(41차) 사고를 계기로, 승인된 CDS/IR 소스 URL을 사용하기
+  전 반드시 **CDS 문서 표지 또는 페이지 제목의 학교명을 실제로 읽고 대상
+  학교와 일치하는지 재확인**하는 절차가 이후 세션 규칙으로 명문화됐다(20차
+  이후 세션 기록에서 "매번 CDS 문서 표지/본문에서 학교명을 재확인했다"는
+  검증 문구가 반복 등장).
+- **학교명 표지 대조 규칙**: 위와 연동해, 브라우저로 PDF/웹페이지를 열 때
+  본문 상단이나 표지에 인쇄된 정식 교명을 대상 `universities.name`과 문자열
+  단위로 대조한 뒤에만 값을 반영하는 방식이 정착됐다(St. John's 대학원
+  페이지 오류, Louisiana at Lafayette 혼동 방지 등에 동일하게 적용).
+- **추측 채우기 절대 금지 원칙**: 값이 원문에 없으면(UC 시스템 test-blind로
+  SAT/ACT 항목 자체가 없는 경우 등) 행 자체를 생성하지 않는 방식을 전
+  세션에 걸쳐 유지. `university_affiliations` 86건 사고 이후 이 원칙이
+  재차 강조되고 세션 시작 전 체크리스트화됨.
+- **동시 세션 충돌 방지**: 여러 세션이 같은 로컬 DB를 공유하는 것을 전제로,
+  후반 세션들은 INSERT에 `WHERE NOT EXISTS` 가드를 사용하고 unique 제약
+  (예: `university_majors`의 university_id+name)에 의존해 중복 삽입을 자동
+  방지했다.
+
+### 5. 세션 규모
+
+- 현재 브랜치(`feature/university-info-sources`)의 커밋 수는 **1,194개**
+  (`git log --oneline | wc -l`)이며, 이 문서 자체의 세션 번호 표기는 약
+  **78~80차**까지 진행됐다(세션 번호가 여러 차례 충돌·재부여된 기록이 문서
+  내에 남아 있어 정확한 총 세션 수는 "약 78~80개"로만 특정 가능하다).
+- **병렬 처리 사례**: 44차 세션이 작업 도중 동일 브랜치에 다른 세션(42차,
+  43차)의 커밋이 추가로 반영된 것을 발견해, 여러 세션이 동시에 같은
+  워크트리/브랜치에서 작업했음이 확인된 바 있다. 56차 이후에는 "병행
+  세션"이라는 표현으로 admission_metrics 전용 세션과
+  demographics/financial_aid_programs 전용 세션이 의도적으로 병렬 운영된
+  사례도 여러 건 기록돼 있다.
+- **로컬 DB 리셋 사고와 복구**: 32차 세션이 작업 도중 로컬 supabase 컨테이너
+  (포트 54422)가 리셋되어, 마이그레이션에 포함되지 않고 psql로 직접
+  INSERT됐던 31개 세션 누적 데이터(당시 `verified_pilot` 149개교,
+  `university_admission_metrics` 다수 행)가 전부 유실된 것을 발견했다.
+  원인은 "다른 워크트리 세션이 `supabase db reset`을 실행했을 가능성"으로
+  추정됐고, 복구는 불가능해 33차 세션부터 CDS 실수집을 처음부터 다시
+  진행했다(사실상 31개 세션 분량 재작업). 이 사고 이후 "로컬 DB 리셋 금지"
+  규칙이 이후 거의 모든 세션 인계 기록에 반복 명시됐다.
+
+### 6. 비용/시간 추정
+
+정확한 비용이나 소요 시간은 로그로 남아있지 않아 알 수 없다. 정직하게
+범위로만 기술한다: 다수의 백그라운드 세션(약 78~80개)이 진행됐고, 각
+세션당 수십~수백 회의 tool call(WebSearch/브라우저 자동화/curl/psql 등)이
+발생한 것으로 세션별 작업 로그에서 추정되며, 총 소요 시간은 세션 수와
+작업 강도를 감안할 때 최소 수 시간에서 수일 이상 규모로 추정된다. 이
+추정치는 검증되지 않은 범위 추정이며, 이 이상의 정밀한 수치는 제시하지
+않는다.
+
+### 7. 남은 미해결 항목 (psql 재확인 기준)
+
+- **핵심 입시지표(admit_rate) 미확보 5개교**: University of Pennsylvania,
+  California Institute of Technology, Duke University, Brown University,
+  Johns Hopkins University. 공통 원인은 **구조적 차단** — JHU(`oira.jhu.edu`)는
+  Wordfence 봇 챌린지, UPenn/Georgetown/Brown 계열은 Box.com/JS 렌더링
+  페이지로 curl이 막히고 브라우저 자동화로도 완전 데이터 추출에 실패, Duke/
+  Caltech은 세션 기록상 반복 시도했으나 CDS PDF 직링크를 찾지 못함.
+- **비용지표(tuition_in_state) 미확보 4개교**: Ohio University, University at
+  Albany (SUNY), University of Memphis, Brown University. Ohio University는
+  CDS 링크 반복 소실(리다이렉트 오류), Memphis는 curl 응답이 빈 바이트/차단,
+  Albany는 SharePoint 임베드 대시보드로 정적 접근 불가.
+- **재학생 인구통계(demographics) 미확보 6개교**: Stevens Institute of
+  Technology, Texas A&M University, University of Minnesota Twin Cities,
+  Loyola Marymount University, Chapman University, University of Cincinnati.
+  CDS G1(비용)/B(인구통계) 섹션이 폼필드 0건·pdftotext 공란으로 나와
+  pdftoppm 이미지 렌더링 또는 OCR이 필요한 상태로 이월된 사례 포함.
+- **소속 컨퍼런스(affiliations) 미확보 2개교**: Andrews University, SUNY
+  College of Environmental Science and Forestry(ESF). 둘 다 USCAA 계열
+  소규모교로, 공식 사이트/소속 컨퍼런스 사이트가 자동화 접근을 차단해
+  미확정 상태(ESF는 3rd-party 자료상 HVIAC 소속으로 추정되나 미검증).
+- 이 외에 `university_admission_metrics`의 세부 지표(GPA 관련 3종,
+  ap_max_credits 2개교, act_writing 계열 13~14개교 등)는 대학이 해당 데이터
+  자체를 CDS/IPEDS에 공개하지 않는 경우가 많아 구조적으로 200개교 완전
+  커버리지에 도달할 수 없는 항목으로 확인된다.
+
+### 8. 남은 결정 사항
+
+- **`university_admission_cycles`(지원 마감일) non-prod 반영 여부**: 현재
+  로컬 DB에는 52개교 52행이 이미 존재하나, non-prod/스테이징 환경으로의
+  반영(마이그레이션 또는 별도 sync) 여부는 이 보고서 작성 시점 기준 확정된
+  기록을 찾지 못했다 — 통합 세션("ALTON 개발 세션")의 확인이 필요하다.
+- **`university_affiliations` 세부 확장 필요 여부**: 현재 스키마
+  (`kind`/`label`/`division`)는 컨퍼런스·디비전 수준만 기록하며 종목별
+  (풋볼/농구 등) 세부 소속 컬럼이 없다 — 86건 재검증 과정에서 Big East처럼
+  "농구 전용 컨퍼런스"나 Notre Dame처럼 "풋볼은 독립, 타 종목은 ACC" 같은
+  종목별 차이가 실제로 존재함이 확인됐으므로, 이를 세분화할지(신규
+  컬럼/행 추가) 제품 오너 결정이 필요하다.
+- **신규 3테이블(`university_demographics`, `university_financial_aid_programs`,
+  `university_affiliations`) UI 노출 최종 확정**: 여러 세션 인계 기록에
+  "200개교 완료 후 UI 확장 지시(CDS 전체 정보 노출)"가 반복 언급됐으나,
+  이 보고서 작성 세션은 문서만 다뤘으므로 UI 반영 여부는 별도 확인이
+  필요하다 — 통합 세션과의 조율 필요.
+
+---
+
