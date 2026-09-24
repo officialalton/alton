@@ -3125,3 +3125,121 @@ University of Alabama in Huntsville(`uah.edu/images/administrative/provost/oir/u
 5. sources_pending_review/unconfirmed 대다수는 여전히 미착수 — DB
   리셋으로 재작업 필요량이 늘었으므로 다음 세션은 복구를 우선하고
   신규 학교 확대는 그다음 순위로.
+
+---
+
+## 33차 세션 (2026-09-23, 복구 후 재개)
+
+### 0. 전제 — 32차 사고 이후 복구된 baseline
+세션 시작 시 통합 세션으로부터 "로컬 Supabase가 다른 워크트리의
+`supabase db reset --local`로 리셋되어 20~32차 데이터(153개교분)가
+유실되었다가, non-prod 공유 클라우드 DB에서 142개교분을 재매핑해
+복구 완료" 안내를 받았다. 세션 시작 시 psql로 재확인한 결과:
+
+```
+data_collection_status: verified_pilot 142 / sources_pending_review 34 / unconfirmed 24
+university_admission_metrics: 3,381행
+university_majors: 3,924행 (세션 시작 시점)
+university_source_urls: 403행
+university_essay_prompts: 34행
+```
+지시받은 baseline과 정확히 일치함을 확인 — 복구가 정상적으로
+반영되어 있었다.
+
+**재발 방지 규칙 준수**: 이번 세션에서 `supabase db reset`, `supabase stop`,
+도커 컨테이너 재시작을 전혀 실행하지 않았다. `npx supabase db push --linked`,
+`vercel deploy`도 실행하지 않았다.
+
+### 1. CDS 신규 실수집 — 결과: 0개교 (시도했으나 실패, 허위 기재 없음)
+`university_source_urls`에서 `source_type='common_data_set' AND status='approved'`
+이면서 `university_admission_metrics`에 official 데이터가 없는 34개교를
+psql로 추출해 curl 기반 수집을 시도했다. 결과는 다음과 같이 전부 실패:
+
+- **Cloudflare 챌린지로 차단**: Clemson University(`open.clemson.edu`),
+  Oklahoma State University(`ira.okstate.edu/cds`) — `curl`로 403 +
+  "Just a moment..." 챌린지 페이지만 반환, 실제 PDF 접근 불가.
+- **로그인 포털/전용 카탈로그 필요**: Indiana University Bloomington
+  (`crimsoncatalog.iu.edu` 로그인 필요 launch-task 링크로만 연결).
+- **원문 URL이 일반 IR 홈페이지일 뿐 실제 CDS 문서 링크 없음** (해당
+  페이지 HTML에 `.pdf` 링크 자체가 없거나 JS 렌더링): Bowling Green
+  State, Mississippi State, Andrews, Fordham, Hofstra, Morgan State,
+  NJIT, North Dakota State, Pepperdine, Saint Joseph's, Saint Louis,
+  Seton Hall, St. John's, University at Albany, UC Santa Barbara,
+  Colorado Boulder, Dayton, Hawaii Manoa, Maine, Memphis, UNLV, New
+  Orleans, North Dakota, UT Arlington, Tulsa, Utah, Wisconsin-
+  Milwaukee, Virginia Tech, Purdue(IUPUI) — 34개교 전부 이번 세션
+  방식(curl+grep)으로는 실제 CDS 원문에 도달하지 못했다.
+- **이름 불일치 위험으로 보류**: University of Maine의 CDS 링크가
+  "UMaine and UMaine Machias **combined** CDS"로, 32차 세션에서
+  Montclair/Bloomfield 건과 동일한 유형의 학교명 불일치 위험이 있어
+  검증 없이 반영하지 않음(다음 세션에서 별도 확인 필요).
+
+**중요**: 이번 세션은 존재하지 않는 CDS 수치를 추측해서 채우지
+않았다 — 접근 실패 시 그대로 미착수 처리했다. `university_admission_metrics`
+행수는 세션 시작(3,381)과 종료(3,381) 동일, CDS 신규 실수집 0개교.
+
+32차 문서에 인계된 "URL 확보 완료, 재다운로드만 하면 되는 9개교"
+(Duquesne/JMU/LSU/LMU/Stevens/UAH/Kentucky/UNT/URI)는 재확인 결과
+**이미 verified_pilot으로 완료돼 있었다**(32차 세션 자체 내에서 처리 완료,
+문서의 "다음 세션 인계" 문구가 갱신되지 않았던 것으로 보임) — 중복
+작업 없이 스킵.
+
+### 2. 학과(전공) 보완 — 결과: 1개교만 실데이터로 완료
+학과 0건 학교(약 40개교)를 대상으로 공식 홈페이지에서 학과 목록을
+찾는 시도를 했다. 대부분 JS 렌더링 필터 UI(정적 HTML에 목록 없음)라
+`curl`로는 접근 불가했고, 웹서치로 얻은 정보는 "약 100개 전공" 같은
+요약 통계뿐이라 정확한 학교 공식 카탈로그가 아니므로(추측 채우기 금지
+원칙) 반영하지 않았다.
+
+유일하게 성공한 것은 **Penn State University, University Park**
+(`https://admissions.psu.edu/academics/majors/`) — 페이지 내 임베디드
+JSON에서 학위 포함 전공명 522건(중복 제거 후 262건 고유 이름)을
+추출, `university_id, name` 유니크 제약 기준으로 228건 신규 insert
+성공(동일 이름에 학위과정만 다른 항목은 제약상 1건만 유지됨). psql로
+반영 확인:
+```
+select count(*) from university_majors where university_id='dd5b4ab9-934d-4fcc-a995-b1907871e82e';
+→ 228
+```
+목표(8개교 이상)에는 크게 못 미쳤다 — 나머지 학교는 공식 소스에서
+정확한 목록을 얻지 못해 미착수로 남김(허위 기재보다 미착수를 선택).
+
+### 3. IUPUI 출처 확보 / unconfirmed 2개교(Catholic University of America,
+### Miami University Ohio) 재시도 — 결과: 미착수
+CDS 수집 시도에서 대부분의 시간을 소모했고(Cloudflare/로그인 포털/JS
+렌더링 장벽 확인에 다수 시도), 15분 한도 내 unconfirmed 2개교 재조사와
+IUPUI 출처 재확보까지는 도달하지 못했다. 다음 세션 인계 사항으로 이월.
+
+### 4. 최종 카운트 (세션 종료, psql 직접 확인 — 다음 세션 baseline)
+```
+data_collection_status: verified_pilot 142 / sources_pending_review 34 / unconfirmed 24  (변동 없음)
+university_admission_metrics: 3,381행                                                     (변동 없음)
+university_majors: 4,152행 (+228, Penn State만)
+university_source_urls: 403행                                                             (변동 없음)
+university_essay_prompts: 34행                                                            (변동 없음)
+```
+
+### 검증
+- 마이그레이션 파일 변경 없음(`ls supabase/migrations/`에 신규 파일 없음
+  확인) — 신규 확장 필드(20261700000000 이후)에도 데이터 삽입 전혀
+  하지 않음(지시 3번 규칙 준수).
+- `npx supabase db push --linked`, `vercel deploy` 실행하지 않음.
+- 로컬 DB 리셋 관련 명령 전혀 실행하지 않음.
+
+### 다음 세션 인계 (34차용)
+1. **로컬 DB 리셋 금지 규칙 재강조** — 이번에도 지켰음. 통합 세션과
+   공유 컨테이너를 쓰는 한 계속 조심할 것.
+2. CDS 미착수 34개교는 curl 접근이 대부분 막혀 있다(Cloudflare/로그인
+   포털/JS 렌더링). 다음 세션은 브라우저 자동화(Claude Browser 등)로
+   전환해 실제 PDF까지 내비게이션하는 방식을 우선 고려할 것 — 이번
+   세션처럼 curl+정규식만으로는 수집률이 매우 낮다.
+3. 학과 0건 학교(약 39개교 남음)도 대부분 JS 렌더링 페이지라 curl로는
+   막힌다. Penn State처럼 페이지 소스에 임베디드 JSON이 있는 학교를
+   찾거나(뷰소스에서 `"name":"...` 패턴 확인), 브라우저 자동화로
+   렌더링 후 텍스트 추출하는 방식이 필요하다.
+4. University of Maine CDS는 "UMaine and UMaine Machias combined"
+   문서라 본교 단독 수치인지 확인 후에만 반영할 것(불일치 시 32차의
+   Montclair/Bloomfield처럼 반영 보류).
+5. IUPUI 출처 확보, Catholic University of America/Miami University
+   Ohio(unconfirmed) 재조사는 이번 세션에서 손대지 못했다 — 34차 최우선
+   과제로 이월.
