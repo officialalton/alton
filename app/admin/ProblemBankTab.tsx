@@ -114,6 +114,9 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
   // 예전엔 공용 busy(다른 액션, 예: AI 생성이 도는 동안도 true)를 그대로 써서 생성 중에도
   // 이 버튼이 "공개 중…"으로 보였다.
   const [publishingAll, setPublishingAll] = useState(false);
+  // 2026-09-23 — window.confirm()은 브라우저 자동화 도구의 입력 파이프를 막아
+  // (실사용자는 문제없지만) UAT 자동화를 블로킹시킨다. 인앱 모달로 대체.
+  const [pendingConfirm, setPendingConfirm] = useState<{ message: string; onConfirm: () => void } | null>(null);
   // 2026-09-19(제품 오너 지시) — 목록에서 여러 문제를 골라 한꺼번에 공개·보관할 수 있게.
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [bulkBusy, setBulkBusy] = useState(false);
@@ -248,9 +251,15 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
     if (failed.length) setError(failed.join(" / "));
   }
 
-  async function publishSelected() {
+  function publishSelected() {
     if (selectedPublishable.length === 0) return;
-    if (typeof window !== "undefined" && !window.confirm(`선택한 ${selectedPublishable.length}개를 공개할까요? 공개된 문제는 회차 구성 후보가 됩니다.`)) return;
+    setPendingConfirm({
+      message: `선택한 ${selectedPublishable.length}개를 공개할까요? 공개된 문제는 회차 구성 후보가 됩니다.`,
+      onConfirm: () => void publishSelectedImpl(),
+    });
+  }
+
+  async function publishSelectedImpl() {
     setBulkBusy(true);
     setError(null);
     setNotice(null);
@@ -270,9 +279,15 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
     if (failed.length) setError(failed.join(" / "));
   }
 
-  async function archiveSelected() {
+  function archiveSelected() {
     if (selectedArchivable.length === 0) return;
-    if (typeof window !== "undefined" && !window.confirm(`선택한 ${selectedArchivable.length}개를 보관할까요? 과거 기록은 그대로 남습니다.`)) return;
+    setPendingConfirm({
+      message: `선택한 ${selectedArchivable.length}개를 보관할까요? 과거 기록은 그대로 남습니다.`,
+      onConfirm: () => void archiveSelectedImpl(),
+    });
+  }
+
+  async function archiveSelectedImpl() {
     setBulkBusy(true);
     setError(null);
     setNotice(null);
@@ -290,10 +305,18 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
     if (failed.length) setError(failed.join(" / "));
   }
 
-  async function archiveAllVisible() {
+  function archiveAllVisible() {
     const targets = visible.filter((p) => !p.archived);
     if (targets.length === 0) return;
-    if (typeof window !== "undefined" && !window.confirm(`지금 보이는 문제 ${targets.length}개를 모두 보관할까요? 과거 기록은 그대로 남습니다.`)) return;
+    setPendingConfirm({
+      message: `지금 보이는 문제 ${targets.length}개를 모두 보관할까요? 과거 기록은 그대로 남습니다.`,
+      onConfirm: () => void archiveAllVisibleImpl(),
+    });
+  }
+
+  async function archiveAllVisibleImpl() {
+    const targets = visible.filter((p) => !p.archived);
+    if (targets.length === 0) return;
     setArchivingAll(true);
     setError(null);
     setNotice(null);
@@ -310,9 +333,15 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
     if (failed.length) setError(failed.join(" / "));
   }
 
-  async function publishAllVisible() {
+  function publishAllVisible() {
     if (publishableDrafts.length === 0) return;
-    if (typeof window !== "undefined" && !window.confirm(`지금 보이는 초안 ${publishableDrafts.length}개를 모두 공개할까요? 공개된 문제는 회차 구성 후보가 됩니다.`)) return;
+    setPendingConfirm({
+      message: `지금 보이는 초안 ${publishableDrafts.length}개를 모두 공개할까요? 공개된 문제는 회차 구성 후보가 됩니다.`,
+      onConfirm: () => void publishAllVisibleImpl(),
+    });
+  }
+
+  async function publishAllVisibleImpl() {
     setPublishingAll(true);
     setError(null);
     setNotice(null);
@@ -518,6 +547,33 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
           >
             다음
           </button>
+        </div>
+      )}
+      {pendingConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-white rounded-xl p-5 max-w-[360px] shadow-lg">
+            <p className="text-[13.5px] text-ink mb-4">{pendingConfirm.message}</p>
+            <div className="flex justify-end gap-2">
+              <button
+                type="button"
+                onClick={() => setPendingConfirm(null)}
+                className="text-[12.5px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-grey-500"
+              >
+                취소
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  const { onConfirm } = pendingConfirm;
+                  setPendingConfirm(null);
+                  onConfirm();
+                }}
+                className="text-[12.5px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white"
+              >
+                확인
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
