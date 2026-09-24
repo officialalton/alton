@@ -7283,3 +7283,93 @@ DB `university_essay_prompts` 0건 학교의 교집합에서 추가로 발굴한
 - 다음 세션 원칙 재확인: **어떤 필드든 실제로 원문을 열어보지 않고 모델 지식만으로
   채우는 것은 금지.** 이번 사고가 재발하지 않도록 신규 대량 입력 작업 시작 전
   "실제로 페이지를 열었는가"를 스스로 체크리스트로 확인할 것.
+
+---
+
+## 75차 세션 — collegeessayadvisors.com 잔여 인덱스 소진 + 공식 출처 5개교 신규 (15개교)
+
+**대상 테이블**: `university_essay_prompts`, `university_source_urls`만.
+
+**시작 시점**: `university_essay_prompts` 미보유 학교(200개교 중) 124개교,
+distinct university_id 79개교 기보유.
+
+**방법**: CEA 인덱스(`supplemental-essay-guide/`, 2026-27판, 191개교)를 브라우저로
+전체 재수집(제목만, 본문 스크래핑 아님)한 뒤, 우리 DB `university_essay_prompts` 0건
+학교 124개교와 정확히 교집합 계산. CEA 인덱스 안에서 발견된 매칭은 Georgia Tech,
+Penn State, University of Massachusetts Lowell, UNC Chapel Hill, Notre Dame,
+University of Pennsylvania, USC, UT Austin, UVA, University of Washington,
+University of Wyoming, WPI, Santa Clara University 13개교뿐이었음(대다수 대형
+공립대는 CEA 인덱스 자체에 없음 — 74차 세션 인계 예상과 일치). 이 중 CEA 페이지가
+**"이번 사이클 에세이 요건을 폐지했다"고 명시한 Georgia Tech**는 저장하지 않고
+스킵. 나머지 CEA 매칭 12개교는 본문에서 문항 원문·글자수·필수/선택만 발췌해 저장
+(조언·분석 문단 제외). CEA 사이트에 광고 리다이렉트 스크립트가 있어 브라우저
+자동화(`navigate`+`get_page_text`) 중 임의 스포츠 사이트로 튕기는 문제가 반복
+발생 → `WebFetch`(정적 HTML 파싱)로 전환해 안정적으로 본문만 추출.
+
+목표(15개교) 미달이라, CEA 인덱스에 없는 나머지 학교들을 대학 공식 admissions
+페이지에서 직접 조사해 5개교 추가:
+- **Temple University**: 공식 `temple.edu` College of Liberal Arts 학부 입학 페이지에
+  College of Liberal Arts 지원자에 한해 "grades와 표준화 시험 점수 이상의 것을
+  보여주는 에세이"(250자 이상)를 필수로 명시.
+- **Michigan State University**: 공식 `admissions.msu.edu` 페이지에 전체 지원자
+  필수 에세이(7개 문항 중 1개 선택, 250~650단어) 명시.
+- **Duquesne University**: 공식 `duq.edu` 입학 요건 페이지에 Health Professions
+  전공 지원자에 한해 필수 에세이 원문 명시(타 전공은 선택).
+- **Iowa State University**: 공식 `honors.iastate.edu` University Honors Program
+  1학년 지원자 페이지에 2개 섹션 각 2문항 중 1개 선택(500단어) 명시.
+
+**반영 학교 (15개교, 총 47행: essay_prompts 27행 + source_urls 15건 + 나머지는
+essay_prompts 내 조건부/선택그룹 세부 행)**:
+
+| 대학 | cycle_year | prompt_status | 비고 |
+|---|---|---|---|
+| Pennsylvania State University, University Park | 2024 | prior_year_reference | CEA 2024-25 캐시, 선택 에세이 |
+| University of Massachusetts Lowell | 2026 | unconfirmed_current_year | CEA 2026-27, 필수 1편 |
+| University of North Carolina at Chapel Hill | 2025 | prior_year_reference | CEA가 "이번 사이클 요건 폐지" 명시, 작년(2025-26) 2문항만 참고용 저장 |
+| University of Notre Dame | 2026 | unconfirmed_current_year | CEA 2026-27, 필수 2편+택2/4 단답 |
+| University of Pennsylvania | 2026 | unconfirmed_current_year | CEA 2026-27, 공통 2편+단과대별 택1(4종) |
+| University of Southern California | 2026 | unconfirmed_current_year | CEA 2026-27, 필수1+선택1+단답10문항(요약 1행) |
+| University of Texas at Austin | 2026 | unconfirmed_current_year | CEA 2026-27, 필수2+선택1 |
+| University of Virginia | 2026 | unconfirmed_current_year | CEA 2026-27, School of Nursing 지원자 전용 필수 1편 |
+| University of Wyoming | 2026 | unconfirmed_current_year | CEA 2026-27, 필수 1편(1-2문장) |
+| Worcester Polytechnic Institute | 2025 | prior_year_reference | CEA가 "이번 사이클 요건 폐지" 명시, 작년(2025-26) 1편만 참고용 저장 |
+| Santa Clara University | 2025 | unconfirmed_current_year | CEA 2025-26(현재 사이클로 명시), 필수2+선택1 |
+| Temple University | 2026 | confirmed_current_year | 공식 temple.edu, CLA 지원자 필수 |
+| Michigan State University | 2026 | confirmed_current_year | 공식 admissions.msu.edu, 전체 지원자 필수(택1/7) |
+| Duquesne University | 2026 | confirmed_current_year | 공식 duq.edu, Health Professions 전공 필수 |
+| Iowa State University | 2026 | confirmed_current_year | 공식 honors.iastate.edu, Honors Program 지원자 필수(2섹션 각 택1/2) |
+
+**스킵(저장 안 함)**:
+- Georgia Tech — CEA가 "이번 사이클 에세이 요건 폐지" 명시, 작년도 자료뿐이라 현재
+  유효한 사실이 없다고 판단해 UNC/WPI와 달리 아예 스킵(단일 학교·단일 문항이라
+  참고용 가치가 낮다고 판단).
+  University of Miami, University of San Francisco, University of Vermont —
+  이전 세션(74차)에서 이미 "요건 폐지/모순" 확인되어 재시도하지 않음.
+- Arizona State University, University of Alabama, Rutgers University-New
+  Brunswick, University of Denver, Kansas State University — 공식 페이지/검색으로
+  "에세이 요건 없음"을 확인, 저장할 사실 정보가 없어 스킵.
+
+**검증**:
+- 삽입 전 15개교 전부 `select id,name from universities where name=...`로 학교명·id
+  일치 확인 완료.
+- 삽입 전 각 `(university_id, cycle_year, title)` 조합에 대해 `WHERE NOT EXISTS`
+  가드 적용(psql INSERT...SELECT...WHERE NOT EXISTS 패턴), 마이그레이션 파일 없음.
+- 삽입 후 `select u.name, count(*), string_agg(distinct prompt_status,',') ...
+  group by u.name` 15개교 전부 확인, `select count(distinct university_id) from
+  university_essay_prompts` 79 → **94**로 증가 확인.
+- `npx supabase db push --linked`/`vercel deploy` 미실행. psql direct INSERT만 사용.
+- `university_essay_prompts`/`university_source_urls` 외 다른 테이블 미접촉(같은 시각
+  다른 세션이 `university_affiliations`를 병행 작업 중이었음).
+
+### 다음 세션 인계
+- `university_essay_prompts` 미보유 학교가 200개교 중 **106개교**로 감소
+  (124 → 106, 이번 세션 15개교 처리 + Georgia Tech 등 스킵 학교는 여전히 0건).
+- CEA 인덱스(191개교)와 우리 DB의 교집합은 이번 세션으로 사실상 소진(Georgia Tech
+  제외 전부 처리 완료 또는 이전 세션에 이미 처리됨). **다음 세션부터는 CEA 등
+  제3자 인덱스에 의존하지 말고, 남은 106개교(주로 대형 주립대·공립대) 각각의 공식
+  admissions 페이지에서 "Essay Requirements"/"Application Requirements"를 직접
+  조사하는 방식으로 전환할 것.**
+- Penn/Notre Dame/UT Austin/USC/Santa Clara/UMass Lowell/UVA/Wyoming 8개교는
+  `prompt_status='unconfirmed_current_year'`로 저장됨(CEA 2차 출처) — 가능하면 다음
+  세션에서 각 대학 공식 Common App/Coalition 포털 문구와 대조해
+  `confirmed_current_year`로 승격 검토.
