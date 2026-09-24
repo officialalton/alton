@@ -258,11 +258,23 @@
     확인. UAT로 만든 DB 데이터·Auth 계정·실제 생성된 Calendar 이벤트(`v7rjj2epr9g4
     csroidibopjm1c`) 전부 삭제 확인 완료(재조회 시 `status="cancelled"`).
   - **남은 blocker**:
-    (a) **미팅록 Drive 원본 링크 실제 클릭 검증 미완료** — `DRIVE_ARTIFACTS_ALLOW_
-    REAL_WRITES`가 다른 Drive 쓰기 경로(Smart Notes 등)에도 영향을 주는 공유
-    플래그라 이번 UAT에서는 켜지 않았다(게이트가 의도대로 차단하는 것만 확인).
-    추후 별도 Sandbox 검증 창에서 이 플래그를 제한적으로 켜고 실제 권한 부여→
-    학부모 계정으로 클릭 가능 여부까지 확인 필요.
+    (a) ~~미팅록 Drive 원본 링크 실제 클릭 검증 미완료~~ — **2026-09-23 해소.**
+    R3(계약서 업로드, `lib/drive-preview-verify-auth.ts`)와 동일한 Preview 전용
+    최소권한 서비스 계정 경로를 `lib/drive-session-tasks.ts`의
+    `processOneSessionDriveTask`에 임시로 분기 추가해, 실제
+    `grantSmartNotesReaderPermission` 코드 경로로 UAT 계정(`matchbox512@gmail.com`)에
+    Google Drive 테스트 문서 reader 권한 부여 → Drive API `permissions.list`로
+    `role: "reader"` 실제 부여 확인(서버 응답 직접 확인, 클릭 자체는 미실시했지만
+    권한 부여 메커니즘 자체는 실측 검증됨). 검증 중 실제 버그 1건 발견·수정
+    (Drive 파일 생성 시 `drive/v3` 대신 `upload/drive/v3` 엔드포인트를 써야
+    multipart 업로드가 성공함 — 기존 `lib/drive-artifacts.ts`의 `uploadArtifactToDrive`
+    는 정상 경로를 쓰고 있었으나 이번에 새로 짠 임시 라우트에서 처음엔 잘못 씀).
+    검증 후 임시 라우트·코드 분기·테스트 Drive 파일·DB 테스트 행·
+    `DRIVE_ARTIFACTS_ALLOW_REAL_WRITES` env var 전부 원복·삭제 완료(커밋 `5b50dd0`→
+    `e5c9767`). `session_drive_tasks` 워커 자체는 여전히 Preview에서
+    `assertNotPreview()`로 프로덕션 체인을 못 쓰므로, Preview에서 실제로
+    자동 처리되게 하려면 R3처럼 상시 preview-safe 분기를 정식으로 유지할지는
+    별도 정책 결정 필요(이번엔 검증 1회성 임시 조치로만 사용).
     (b) `supabase/migrations/20261413000000_p6_problem_bank_full_audit_archive.sql`
     (문제은행 감사, 이 milestone과 무관한 다른 담당 소유)이 아직 non-prod에
     미반영 — 최종 통합 시 마이그레이션 적용 순서만 함께 검토 필요(이 파일 자체는
@@ -290,7 +302,7 @@
   규칙은 별도 설계).
 - **지금**: 제품 오너 Preview UAT(문제은행 AI 생성 → 그림 확인 → 전체 공개 → 수업 준비에 담기 → SPR 풀이·채점 / 과제 발급·풀이 / 문제 위 필기 / 관리자 교재 탭).
 - **분류 후속 UI(criteria `skill_codes` 일괄 편집)는 2026-09-17 제품 오너 지시로 폐기** — 스펙이 백로그 한 줄뿐이고 대상·진입화면·권한이 전혀 정해지지 않아 로드맵에서 제외.
-- **신규 — SAT Math 19종 + R&W 근거모델 5종 Preview UAT 필요(2026-09-17)**: 위 25·26차 작업은 로컬 테스트·non-prod DB 배치 검증만 마쳤고 실제 Preview 화면으로는 한 번도 확인되지 않았다. 다음 세션에서 관리자 문제은행 화면 기준으로 19개 Math 기술 코드 전부(생성→그림/렌더 확인→공개)와 R&W 5개 근거모델 기술(생성→근거모델 필드 표시·검사 통과 확인→공개)을 한 번씩 Preview UI로 통과시키는 전수 UAT가 필요.
+- **SAT Math 19종 + R&W 근거모델 5종 Preview UAT(2026-09-17 지시 → 2026-09-23 완료)**: 관리자 문제은행 화면에서 19개 Math 기술 코드 전부(Algebra 5·Advanced Math 3·PSDA 7·Geo/Trig 4)를 결정형 컴파일러("AI 생성" 버튼, 실제 AI 호출 0회·비용 $0)로 1개씩 생성→"자동 통과" 확인→저장, R&W 근거모델 5종(words_in_context/central_ideas_details/inferences/command_of_evidence_text/cross_text_connections)은 실제 AI 생성(평가모델 검증 통과까지 개당 40~90초, 2회 재시도로 통과한 경우 포함 5/5 전부 성공)으로 생성. Math 19개 스킬 결과물 25개 초안 중 24개 전체 공개 완료(1개는 발행 게이트가 정답 선택지 표기 불일치를 정상적으로 거부 — `x = 3` vs `3`, 버그 아님), R&W 5개 스킬 결과물 6개 초안 중 5개 공개(구조·정답 근거 표기 육안 확인 포함). **발견한 실제 버그**: 관리자 문제은행 "전체 공개" 버튼이 `window.confirm()` 네이티브 다이얼로그를 쓰는데, 이게 브라우저 자동화 도구의 CDP 입력 파이프를 블로킹시켜 타임아웃 발생(사람이 클릭할 땐 문제없음 — 자동화 환경에서만 드러난 이슈, 코드 결함 아님). 미완료: 모바일 뷰포트 화면 확인은 이번에도 브라우저 자동화 환경 한계(`resize_window`가 실제 `window.innerWidth`를 바꾸지 못함)로 불가.
 - **단어장(2026-09-15~16, 완료 — 최종 8권 구성)**: ALTON SAT 공용 단어장. 원래 10권 계획 중 8·9·10권(추상·개념/저빈도 정밀/최상급)은 후보 어휘 풀이 좁아 중복률이 급증해 각각 200개를 못 채웠다(제품 오너 지시로 세 권의 목표를 8권 하나로 병합, `scripts/vocab-library-seed.ts`의 `VOLUME_PLAN`에서 9·10권 제거·8권 난이도 3~5로 확장). **1~8권 전부 완료(1,800단어)**, 마이그레이션 `20261378`+`20261383`+`20261384` non-prod 반영 완료. 내 단어장 폴더(기본 "오답 노트"), 별표 저장, 시험 선택지 영어화, UI 개편(가리기 개별 공개·A-Z 필터·랜덤 순서·페이지네이션) 전부 구현·테스트·Preview 배포 완료(마이그레이션 `20261376`~`20261380`). 기존 지문 클릭 저장(`VocabClickLayer.tsx`)은 손대지 않음.
 - **과제(2026-09-16, 완료, 제품 오너 2차 정정 최종안)**: 과제를 수업(세션)과 완전히 분리 — 발급 시 수업 선택 없음, 배치명 = 발급 날짜, 발급할 때마다 새 배치(`homework_batches`, 단어장 `vocab_quizzes`와 같은 패턴: 세션 비의존 자기완결 레코드). 교사↔학생 쌍 단위로만 저장·노출(RLS + 쿼리 이중 격리, 다른 교사·다른 학생 노출 불가). 학생 포털 과제 탭·교사 포털 "과제 내역"·세션뷰 과제 탭 전부 동일한 공통 컴포넌트(`HomeworkBatchPanel`)로 배치를 눌러 열면 기존 목차/슬라이드 UI 그대로 정답·해설·채점. RPC `issue_homework_batch_v2`(마이그레이션 `20261382`, non-prod 반영 완료). **마이그레이션 `20261381`(`issue_homework_batch`, 회차 연동 1차안)은 이 최종안으로 대체되어 앱에서 더 이상 호출되지 않음 — DB 컬럼/RPC는 삭제하지 않고 방치.** 검증: 통합 테스트 6/6(발급 권한·배치 분리·문제 중복 방지·RLS 격리), 컴포넌트 테스트 전부 통과.
 - **SAT Math 생성 품질(2026-09-16, 1단계 완료 + 실측 파일럿 완료)**: 코드 검토([`2026-09-16-sat-math-generation-code-review-and-proposal.md`](2026-09-16-sat-math-generation-code-review-and-proposal.md))에서 지목한 A(검사·저장 문항 분리)/B(필수 검사 미실행이 통과 처리)/C(해설 따라 정답 자동 변경)/G(오답 수정 후 재검증 누락) 결함을 Math 한정으로 수정·모의 검증(`lib/problem-generation/pipeline.test.ts`). R&W는 기존 동작 유지. **실측 파일럿(2026-09-16, `scripts/problem-quality-pilot.ts`, 승인된 소액 예산)**: 5개 유형×5문항 실제 API 호출 → 22/25 저장(88%), 총 $1.55(문항당 $0.07). 실패는 대부분 "정답-해설 불일치라 자동 정정 안 함" 정책이 정상 작동한 케이스. 저장은 admin 문제은행에 초안까지만 — 공개는 관리자 확인 후. **미완료**: 계산 기반 검증 확장(좌표평면·연립방정식 target 명시화 등, 검토 문서 3~4절), 유형 확대 배치(남은 예산 $28.45), Preview 로그인 확인(테스트 계정 없어 미실시).
