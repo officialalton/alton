@@ -6973,3 +6973,61 @@ Aid/Cost-of-Attendance 웹페이지를 WebFetch/브라우저로 직접 조회**�
   다시 열어보거나 다른 연도 CDS를 확보해야 함.
 - Idaho State University는 merit_scholarship 데이터가 CDS 원문 표 파싱 모순으로 비어있음 — 필요시
   브라우저로 원문 재확인.
+
+### 69차 세션 (2026-09-24)
+- 작업 방식: university_source_urls에 이미 등록된 CDS 원문(xlsx/docx/pdf)을 curl로 받아 openpyxl(xlsx)
+  /python-docx(docx)/pdftotext -layout(pdf)으로 파싱. 매 학교 삽입 전 `select name from universities
+  where id=...`로 university_id—학교명 일치를 확인한 뒤 진행(사고 방지 체크리스트 준수).
+- university_demographics: B1(성별, gender_male/female/other)+B2(인종, "Total Undergraduates(both
+  degree- and non-degree-seeking)" 열 기준 비율%) 11행. university_financial_aid_programs: H2
+  (need_based_grant: E/A, 값 K, "Full-time Undergrad incl. First-Year" 코호트 기준)+H2A
+  (merit_scholarship: N/A, 값 O)+H5(federal_loan: row B 인원%/누적원금) 3행. 모두
+  verification_status='official', verified_at=오늘, 기존 source_url_id 재사용(UAB만 신규 URL 1건 추가),
+  `WHERE NOT EXISTS(...)`/`ON CONFLICT` 가드.
+- 완료 16개교:
+
+| 대학 | cycle_year | 원문 형식 | 비고 |
+|---|---|---|---|
+| Miami University (Ohio) | 2024 | xlsx | |
+| New Jersey Institute of Technology | 2024 | xlsx | |
+| North Dakota State University | 2024 | xlsx | |
+| Elon University | 2024 | xlsx | |
+| Vanderbilt University | 2024 | xlsx | Answer Sheet 탭은 값이 #REF!라 CDS-B/H 원본 탭에서 직접 파싱 |
+| University of Texas at San Antonio | 2024 | xlsx | |
+| James Madison University | 2024 | docx | 표 기반 CDS 원문 |
+| Purdue University | 2024 | xlsx | |
+| Stony Brook University (SUNY) | 2025 | xlsx | CDS 2025-2026본 |
+| University of Maryland, College Park | 2024 | xlsx | |
+| Oregon State University | 2024 | pdf | pdftotext -layout으로 정상 추출 |
+| Princeton University | 2024 | pdf | merit_scholarship(H2A)은 원문 N/O 셀이 공란 — Princeton은 non-need 장학금 미운영 정책이라
+  value_status='not_applicable'로 삽입 |
+| University of Connecticut | 2025 | pdf | CDS 2025-2026본 |
+| University of Massachusetts Amherst | 2025 | pdf | CDS 2025-2026본, `umass2.txt`(이전 세션 캐시) 재활용 |
+| University of Alabama at Birmingham | 2025 | pdf | 기존 university_source_urls에 등록된 URL이 요약
+  페이지뿐이라 실제 CDS 소재 페이지(`uab.edu/institutionaleffectiveness/data-library/common-data-set`)
+  URL을 새로 등록 후 사용 |
+| University of Tennessee, Knoxville | 2025 | pdf | CDS 2025-2026본, `utk.txt`(이전 세션 캐시) 재활용 |
+
+- 스킵/보류:
+  - **Johns Hopkins University, University of Virginia**: 등록 CDS URL이 403/redirect로 다운로드 실패
+    (4-5KB 오류 페이지만 수신). 다음 세션에서 브라우저로 재확인 필요.
+  - **Ohio State University, University of Arizona, University of Miami**: CDS PDF가 폼필드형이라
+    pdftotext로 표 안 숫자가 전혀 추출되지 않음(Marquette와 동일 증상). pdftoppm 이미지 렌더링 후
+    시각 판독 필요 — 다음 세션 권장.
+  - **University of Arkansas**: 캐시된 `uark.txt`가 폰트 인코딩 깨짐(예: "7RWDO"↔"Total") 상태로,
+    B2 TOTAL행 등 일부 숫자를 신뢰할 수 없어 스킵. 재다운로드 후 재추출 필요.
+  - **University of Louisiana at Lafayette**: 이전 세션에서 발견된 대로 등록 URL이 Lafayette College
+    (전혀 다른 학교) 원문이라 여전히 스킵 — university_source_urls 레코드 정정 필요(미해결).
+- 세션 종료 시점 재확인: demographics/financial_aid_programs 둘 다 0건인 학교 81개교 → 65개교로 감소
+  (16개교 처리).
+- Agent 툴로 하위 에이전트 spawn하지 않고 직접 psql/curl/pdftotext/openpyxl/python-docx로 작업.
+  마이그레이션 파일 작성, `supabase db push`/`vercel deploy` 미실행.
+
+### 70차 세션(다음) 인계
+- demographics/financial_aid_programs 둘 다 0건인 학교 65개교 남음.
+- Johns Hopkins, UVA: CDS 다운로드가 403/redirect로 실패 — 브라우저 자동화로 재시도 필요.
+- Ohio State, Arizona, Miami(FL): CDS가 폼필드형 PDF라 pdftotext 무효 — pdftoppm 이미지 렌더링 후
+  시각 판독 또는 xlsx/docx 버전 CDS 탐색 필요.
+- University of Arkansas: 캐시 텍스트가 폰트 인코딩 깨짐 — 재다운로드 후 pdftotext 재시도.
+- University of Louisiana at Lafayette: university_source_urls의 CDS 링크가 Lafayette College 것으로
+  확인된 지 두 세션째 미정정 — 이번엔 꼭 정정 권장.
