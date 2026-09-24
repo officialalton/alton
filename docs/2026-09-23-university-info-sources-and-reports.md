@@ -6441,3 +6441,116 @@ CDS URL 연결(`university_source_urls`에 `status='approved'`로 등록).
 - UMass Lowell은 섹션 분할 배포 구조 확인 필요(G섹션 별도 파일 탐색).
 - 브라우저 fetch + pdf.js `getAnnotations()` 패턴은 이번 세션에서도 안정적으로
   작동 확인 — 계속 표준 절차로 사용 권장.
+
+## 61차 세션 — 비용 지표(tuition_in_state 등) 13개교 신규 실수집 (2026-09-24)
+
+### 범위 및 병행 작업 안전장치
+다른 백그라운드 세션이 `university_demographics`/`financial_aid_programs`를 동시 작업 중일 가능성이
+있어 이번 세션은 `university_admission_metrics`/`university_source_urls`만 건드렸다. 모든 INSERT는
+`WHERE NOT EXISTS` 가드 사용, `db push`/`vercel deploy` 미실행, 마이그레이션 파일 생성 없음.
+
+### Brown/Memphis/Albany/Ohio University/Fordham 재시도 (5분 한도)
+- **Fordham University: 이번 세션에서 최종 해결.** 이전 세션들이 "SharePoint 인증 필요"로 막혔다고
+  기록했으나, 재검색 결과 Fordham 자체 도메인(`www.fordham.edu/media/.../common_data_set_2019-2020.pdf`)에
+  정적 공개 PDF가 있었고 curl로 바로 200 성공. CDS 2019-2020 문서 기준 tuition_in_state=$54,730(사립),
+  required_fees=$1,431 확보. (참고: room/board는 $19,066으로 미분리 제공되어 미삽입)
+- Memphis: `irp.memphis.edu` DNS 자체가 해석 불가, `www.memphis.edu/oir/.../CDS2021_2022.pdf`는 403 —
+  서버 자체 차단 재확인, 스킵.
+- Albany: `albany.edu/ir` 페이지의 "Annual Expenses" 링크가 `livealbany.sharepoint.com` 익명 공유로 연결 —
+  SharePoint 인증 필요 재확인, 스킵.
+- Ohio University: `ohio.edu/iea/historical-data/historic-common-data-set-reports` 페이지 자체에 "Historical
+  Common Data Set files are currently under review to address a possible calculation error... corrections
+  expected later in 2026" 안내만 있고 파일 링크 전무 — 정책적으로 비공개 재확인, 스킵.
+- Brown: `oir.brown.edu/institutional-data/common-data-set` 페이지에 실제 PDF 링크 자체가 없음(설명 텍스트만
+  존재) — 재확인, 스킵.
+- **최종 결론**: Memphis/Albany/Ohio University/Brown 4개교는 "확인 불가"로 최종 기록하고 더 이상 이월하지
+  않는다(각기 다른 구조적 차단 원인 — 서버 403/SharePoint 인증/정책적 비공개/링크 부재 — 브라우저 자동화로
+  해결 불가능함을 여러 세션에 걸쳐 확인 완료).
+
+### 신규 실수집 13개교 (tuition_in_state 기준 52개교 → 39개교로 감소)
+
+| 대학 | cycle_year | in-state/사립 등록금 | out-of-state | required_fees | room/board | 출처 방식 |
+|---|---|---|---|---|---|---|
+| Fordham University | 2019 | $54,730(사립) | — | $1,431 | 미분리($19,066) | 공식 도메인 curl 직접 |
+| Andrews University | 2024 | $33,696(사립, 연간) | — | $1,360 | 옵션 다양해 미삽입 | 공식 cost sheet PDF |
+| South Dakota State University | 2021 | $7,773 | $11,283 | $1,526 | 미삽입(모호) | 공식 CDS PDF |
+| University of Nebraska-Lincoln | 2024 | $8,730 | $27,960 | $2,370 | $7,960/$6,250 | IR 사이트 HTML(섹션별) |
+| University of Washington (Seattle) | 2024 | $11,869 | $42,105 | $1,104 | $12,117(room only) | CDS PDF AcroForm 필드 판독 |
+| University of Mississippi | 2024 | $9,990 | $30,150 | $160 | $7,612/$5,392 | **Box.com 클래식 다운로드 우회**(`index.php?rm=box_download_shared_file`) |
+| Saint Louis University | 2021 | $49,800(사립) | — | $1,044 | 미분리($13,890) | IR 사이트 HTML |
+| University of California, Santa Barbara | 2025 | $14,202 | $53,472 | $3,441 | 미삽입 | **Google Drive 우회**(`uc?export=download&id=`) |
+| University of California, Berkeley | 2025 | $13,602 | $51,204 | $4,119 | 미삽입 | Google Sheets → xlsx export(`/export?format=xlsx`) |
+| Pepperdine University | 2024 | $71,860(사립) | — | $812 | $16,090/$6,390 | Google Drive 우회 |
+| Clarkson University | 2024 | $61,594(사립) | — | $1,370 | $10,840/$8,528 | Google Drive 우회 |
+| Saint Joseph's University | 2024 | $53,060(사립) | — | $200 | $10,330/$5,910 | Google Drive 우회 |
+| St. John's University | 2025 | $53,980(사립) | — | $1,660 | 미분리($21,710) | "At a Glance" 공식 요약 PDF(CDS 아님, IR 발간) |
+
+### 새로 검증된 핵심 기법: Google Drive/Box.com 공유 링크 우회
+이번 세션에서 다수 학교(UMN Ole Miss, UCSB, Pepperdine, Clarkson, Saint Joseph's)가 CDS PDF를
+Google Drive 또는 Box.com 공유 링크로만 게시하고 있었다. 표준 `drive.google.com/file/d/.../view`나
+`box.com/file/...` 뷰어 페이지는 로그인 없이도 열리지만 curl은 403/HTML만 반환한다. 다음 우회로
+로그인 없이 원본 PDF를 직접 받을 수 있었다:
+- Google Drive: `https://drive.google.com/uc?export=download&id=<FILE_ID>`
+- Box.com: `https://<subdomain>.app.box.com/index.php?rm=box_download_shared_file&shared_name=<SHARED_NAME>&file_id=f_<FILE_ID>`
+  (공유 URL의 `/file/<FILE_ID>?s=<SHARED_NAME>` 부분에서 두 값을 추출)
+
+이 패턴을 다음 세션에도 표준 절차로 사용할 것을 권장. Google Sheets로 게시된 경우
+(UC Berkeley)는 `/export?format=xlsx`로 워크북 전체를 받아 openpyxl로 시트별(CDS-G 등) 파싱하는 것이
+PDF보다 훨씬 안정적이었다.
+
+### 검증 시 주의: WebSearch 결과 오염(잘못된 파일 매칭) 발견 및 차단
+이번 세션 후반부에 WebSearch가 "Morgan State University common data set"과 "Clarkson University common
+data set" 쿼리에 대해 **실제로는 University of California Santa Barbara(2021-22)와 University of North
+Carolina Asheville의 CDS PDF를 가리키는 Google Drive 링크**를 반환하는 것을 확인했다(검색엔진 캐시/색인
+오류로 추정). 두 파일 모두 다운로드 후 A1(기관명) 섹션을 직접 읽어 학교명이 일치하지 않음을 확인하고
+**DB에 삽입하지 않고 폐기**했다. 이후 세션에서도 Google Drive/Box 링크로 확보한 CDS 데이터는 반드시
+문서 내 "Name of College/University" 필드로 학교명을 재확인한 뒤 삽입할 것 — 검색 결과의 제목만 보고
+신뢰하지 말 것.
+
+### 스킵/실패 사례(추측 금지 원칙 준수, DB 미기록)
+- University of Minnesota, Twin Cities: 2021-22/2022-23/2023-24 CDS 모두 G1 섹션이 "check here if
+  costs not available" 체크됨 + 값 전부 공란 — 구조적으로 매년 비용 데이터를 CDS에 미기재하는 것으로
+  확인(등록금이 연중 확정되지 않는 방식으로 추정). 스킵.
+- University of New Mexico: 2024-25 CDS도(AcroForm 필드 `TUIT_STATE_FT_D` 등) 전부 공란 재확인 — 3개
+  연도 연속 미공시 확인, 스킵.
+- UCLA: 2025-26 CDS도 AcroForm 필드(`TUIT_*`)가 전부 공란 — 3번째 세션째 동일 결과 확인, 완전히
+  포기 권장(원문 자체에 값이 없음).
+- University of Wisconsin-Milwaukee: 알려진 URL 404 재확인, 스킵.
+- University of North Dakota: IR 페이지 자체에 "Updated reports will be available soon" 안내만 있고
+  파일 없음.
+- Virginia Tech: `aie.vt.edu` 페이지에 "Current and historical CDS files... available via request to
+  aiesupport@vt.edu"만 명시, 공개 파일 없음 재확인.
+- Kent State University: `kent.edu/ir/common-dataset-cds`에 2025-2026 링크만 있고 실제 다운로드 가능한
+  href 없음(JS 토글 추정), 스킵.
+- Indiana University Bloomington / IUPUI: `iuia.iu.edu/apps/cds/pdf.html`가 로그인 필요(빈 목록),
+  IUPUI도 동일 포털로 리다이렉트. University of Colorado Boulder(`data.colorado.edu`)도 로그인 필요.
+  University of Missouri(`udair.missouri.edu`)는 SharePoint 익명 공유로 연결. 모두 SSO/조직 인증 필요.
+- Hofstra University: CDS가 Issuu 플립북으로만 게시되어 텍스트/이미지 추출 실패, 스킵(다음 세션은
+  Issuu 문서 ID 기반 다운로드 API 리버스엔지니어링 필요).
+- Morgan State / Bowling Green State University / Saint Joseph's(구버전만)/Seton Hall(2002-2005만
+  공개): 유효한 최신 공개 파일을 찾지 못함, 스킵.
+- University of Oregon: 공식 등록금 PDF는 학점당 요율표 형식이라 "연간 전일제 등록금" 단일 값으로
+  환산하려면 가정이 필요 — 추측 금지 원칙에 따라 스킵.
+- University of New Orleans: CDS 2016-2017 PDF는 확보했으나 G1 섹션 텍스트 레이어에 숫자 값이 전혀
+  없음(이미지 렌더링 추정), 스킵.
+
+### 검증
+- `select count(*) from universities u where data_collection_status='verified_pilot' and not exists
+  (... metric_key='tuition_in_state')` → 세션 시작 52개교 → 종료 시점 39개교.
+- 모든 INSERT는 `WHERE NOT EXISTS(...)` 가드 사용. university_majors/university_essay_prompts/
+  university_demographics/university_financial_aid_programs는 전혀 접촉하지 않음.
+- Agent 툴로 하위 에이전트 spawn하지 않음. `npx supabase db push --linked`/`vercel deploy` 미실행,
+  마이그레이션 파일 작성 없음.
+
+### 다음 세션 인계
+- 남은 39개교. Brown/Memphis/Albany/Ohio University는 **"확인 불가"로 최종 확정** — 더 이상 이월하지
+  말 것(브라우저 자동화로 여러 세션에 걸쳐 반복 실패, 학교 담당자 문의만이 유일한 경로).
+- UMN/UNM/UCLA는 CDS 자체에 비용 데이터가 구조적으로 없는 것으로 3개 세션 연속 확인 — CDS가 아닌 별도
+  "cost of attendance" 페이지에서 수집 시도 필요(단, 그 경우 CDS와 형식이 달라 항목 매핑에 주의).
+- Google Drive/Box.com 다운로드 우회 기법과 Google Sheets → xlsx export 기법을 다음 세션도 표준
+  절차로 사용할 것. 단, 검색 결과로 얻은 Drive/Box 링크는 반드시 문서 내 학교명을 재확인 후 삽입할 것
+  (이번 세션에서 오염된 검색 결과 2건 발견 및 폐기).
+- Hofstra University는 Issuu 플립북 형식이라 별도 접근법 필요.
+- Virginia Tech/Indiana University Bloomington/IUPUI/University of Colorado Boulder/University of
+  Missouri는 조직 SSO 인증이 걸린 포털(SharePoint 등)로만 CDS를 게시 — Albany/Fordham류와 동일한
+  구조적 장벽으로 분류하고 우선순위를 낮출 것.
