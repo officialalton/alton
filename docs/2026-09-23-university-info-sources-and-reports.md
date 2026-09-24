@@ -6160,3 +6160,78 @@ university_financial_aid_programs는 전혀 접촉하지 않음.
   기존과 동일하게 미해결(이번 세션은 university_admission_metrics/
   university_source_urls 전용이라 별도 시도 없음).
 - 여전히 verified_pilot 잔여 77개교(tuition_in_state 기준).
+
+## 58차 세션 — university_admission_metrics/university_source_urls 전용, CDS 실수집 (11개교 접촉, tuition_in_state 2개교 신규)
+
+이번 세션도 university_admission_metrics/university_source_urls만 건드렸다
+(demographics/financial_aid_programs 미접촉). 지시된 미해결 우선순위
+(Brown/UVA/Memphis/UTK/Albany/Purdue/SIU Carbondale/Ohio University/Fordham/
+Georgia/Georgia Tech/Clemson)는 curl 기준 대부분 Cloudflare 챌린지("Just a
+moment...") 또는 404로 차단되어(브라우저 자동화는 이번 세션에서 시도하지
+못함) 실패했고, 그중 University of Georgia는 WebSearch로 새 URL
+(`oir.uga.edu/wp-content/uploads/UGA_CDS_2024-2025.pdf`, 57차 세션이 실패했던
+`_resources/files/cds/...` 경로와 다름)을 찾아 성공했다. 나머지는 WebSearch+
+curl+pdftotext/pypdf(AcroForm)/openpyxl 조합으로 대체 학교를 확보했다.
+
+### tuition_in_state 등 비용 지표 신규 확보 (2개교)
+
+| 학교 | 등록금(주내) | 등록금(주외) | 필수비 | 기숙사 | 식비 | 학생:교수 |
+|---|---|---|---|---|---|---|
+| University of Georgia | $10,034(in-district) | $30,272 | $1,406 | $7,228 | $4,444 | 17:1 |
+| University of Nevada, Reno | $4,327 | $22,959 | $1,021 | $7,767 | $6,675 | 17:1 |
+
+### student_faculty_ratio만 추가 확보 (tuition은 CDS 원문 G1 공란, 9개교)
+
+- Middle Tennessee State University: 17:1 (재확인, 57차와 동일 결론 — G1 전부 공란)
+- University of New Mexico: 15:1 (재확인, 기존 병행 세션 값과 동일)
+- Clark University: 8.5:1 (재확인, 57차와 동일 결론)
+- North Dakota State University: 17:1 (xlsx 원본, G1 전부 공란)
+- University of Cincinnati: 19:1 (Clifton 캠퍼스, G1 전부 공란)
+- University of Massachusetts Lowell: 17:1 (재확인, 57차와 동일 결론)
+- Temple University: 12:1 (CDS 원문 폰트 서브셋 깨짐으로 텍스트가 일부
+  깨져 있으나 I-2 수치는 명확히 판독됨)
+- University of Kentucky: 17.7:1 (G1 전부 공란)
+- University of Texas at San Antonio: 23.8:1 (xlsx 원본, G1 전부 공란)
+
+### 확보 실패 / 오탐 제외
+
+- Southern Illinois University Carbondale, University of Virginia, University
+  of Memphis, University of Tennessee Knoxville, University at Albany(SUNY),
+  Purdue University, Ohio University, Fordham University, Georgia Institute
+  of Technology, Clemson University: WebSearch가 제시한 CDS 직링크가 curl
+  기준 전부 Cloudflare 챌린지 또는 404 — 브라우저 자동화가 필요(이번 세션
+  시간 내 미시도).
+- South Dakota State University로 추정한 `asir.sdsu.edu` 링크는 실제로
+  San Diego State University 문서였음을 원문 확인 후 폐기(오탐 방지, DB
+  미삽입).
+- Washington State University(`wsu.edu`)를 University of Washington으로
+  오인할 뻔했으나 원문에서 기관명이 다름을 확인, DB 미삽입.
+- Virginia Tech(`aie.vt.edu`), University of Louisville(widen.net 자산),
+  Oklahoma State University(`ira.okstate.edu`, Cloudflare)는 링크 후보만
+  확보하고 실제 다운로드 실패.
+
+### 검증
+
+- `select count(*) from universities u where u.data_collection_status=
+  'verified_pilot' and not exists (select 1 from university_admission_metrics am
+  where am.university_id=u.id and am.metric_key='tuition_in_state')` →
+  세션 시작 77개교 → 종료 시점 75개교(University of Georgia, University of
+  Nevada Reno 2개교 tuition_in_state 신규 확보).
+- 모든 INSERT는 `WHERE NOT EXISTS(...)` 가드 사용(university_source_urls,
+  university_admission_metrics 모두). university_majors/
+  university_essay_prompts/university_demographics/
+  university_financial_aid_programs는 전혀 접촉하지 않음.
+- `npx supabase db push --linked`/`vercel deploy` 미실행, 마이그레이션 파일
+  작성 없음. Agent 툴로 하위 에이전트 spawn하지 않음.
+
+### 다음 세션 인계
+
+- Brown/UVA/Memphis/UTK/Albany/Purdue/SIU Carbondale/Ohio University/Fordham/
+  Georgia Tech/Clemson: 여전히 미해결. curl은 대부분 Cloudflare/404로 막히므로
+  다음 세션은 브라우저 자동화(5분 한도)를 우선 시도할 것을 권장.
+- 이번 세션에서 확인한 패턴: 다수 학교가 CDS 2024-2025의 G1(등록금) 섹션을
+  "FULL 2025-2026 academic year" 문구 그대로 두고 실제 금액은 공란으로 제출함
+  (MTSU/UNM/NDSU/Clark/UC/UML/UKY/UTSA 등). 이런 학교는 CDS만으로는
+  tuition_in_state를 얻을 수 없으므로, 다음 세션은 학교 자체 "cost of
+  attendance"/net price 공식 페이지를 별도로 찾는 접근이 필요.
+- 여전히 verified_pilot 잔여 75개교(tuition_in_state 기준).
