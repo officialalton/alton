@@ -19,6 +19,9 @@ import { createClient } from "@/utils/supabase/server";
 export type UniversitySummary = {
   id: string;
   rankFinal: number | null;
+  /** College Explore UI 개편(2026-09-23) — 목록에서 순위를 이름보다 강조하지 않되
+   * 신뢰도를 함께 다루려면 필요. 기존 `universities.rank_confidence` 컬럼을 그대로 읽는다. */
+  rankConfidence: string | null;
   name: string;
   country: string;
   city: string | null;
@@ -45,7 +48,7 @@ export async function listUniversities(filter: UniversityListFilter = {}): Promi
   const db = createAdminClient();
   let query = db
     .from("universities")
-    .select("id, rank_final, name, country, city, state, public_private, application_platform, url_verification_status, data_collection_status, data_collection_status_verified_at")
+    .select("id, rank_final, rank_confidence, name, country, city, state, public_private, application_platform, url_verification_status, data_collection_status, data_collection_status_verified_at")
     .order("rank_final", { ascending: true, nullsFirst: false });
 
   if (filter.search?.trim()) {
@@ -80,6 +83,7 @@ export async function listUniversities(filter: UniversityListFilter = {}): Promi
   return (data ?? []).map((u) => ({
     id: u.id,
     rankFinal: u.rank_final,
+    rankConfidence: u.rank_confidence,
     name: u.name,
     country: u.country,
     city: u.city,
