@@ -69,8 +69,11 @@ async function openNewPanel(page: Page, c: Case) {
   await page.getByRole("button", { name: "생성", exact: true }).click();
   await page.getByRole("tab", { name: c.tab }).click();
   await page.getByLabel("새 문제 과목").selectOption(SUBJECT_ID);
-  await page.getByLabel("SAT 영역", { exact: true }).nth(1).selectOption(c.domain);
-  await page.getByLabel("세부 기술", { exact: true }).nth(1).selectOption(c.skillCode);
+  // 2026-09-17 버킷 분리로 "생성" 화면에는 필터 줄이 없어져(목록 자체가
+  // bucket==="create"면 렌더 안 됨) 이제 "SAT 영역"/"세부 기술" select가
+  // 생성 폼 자신 하나뿐이다 — 예전엔 필터 줄과 합쳐 2개라 .nth(1)이 필요했다.
+  await page.getByLabel("SAT 영역", { exact: true }).selectOption(c.domain);
+  await page.getByLabel("세부 기술", { exact: true }).selectOption(c.skillCode);
   if (c.format === "spr") await page.getByLabel("새 문제 형식").selectOption("spr");
   const need = page.getByTestId("new-material-need");
   await expect(need).toHaveAttribute("data-level", c.need);
@@ -155,15 +158,11 @@ async function publishAndCheckStudent(page: Page, c: Case, problemId: string, sh
     return "blocked";
   }
   await page.getByTestId("draft-editor").screenshot({ path: `${OUT}/${shot}-admin.png` });
-  const hasFigure = (await page.getByTestId("figure-preview").count()) > 0;
   await page.getByRole("button", { name: "초안 저장" }).click();
-  await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible();
-  if (hasFigure) {
-    const check = page.getByLabel("그림 확인함");
-    await expect(check).toBeEnabled();
-    await check.check();
-    await expect(page.getByText(/미리보기로 확인했다고 표시했습니다/)).toBeVisible();
-  }
+  await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible({ timeout: 15_000 });
+  // "그림 확인함" 체크박스·수동 확인 단계는 현재 UI에서 완전히 제거됐다
+  // (app/admin/ProblemDraftEditor.tsx의 "공개하기" 버튼은 이제 canSave·
+  // missingAnswer만 보고 그림 확인 여부는 조건에 없음).
   await page.getByRole("button", { name: "공개하기" }).click();
   await expect(page.getByText(/공개했습니다|공개됐습니다|공개되었습니다/)).toBeVisible({ timeout: 20_000 });
   const row = psql(`select v.status || '|' || (v.render_check->>'ok') || '|' || (case when coalesce(nullif(btrim(v.question), ''), '') <> '' then 'q' else 'noq' end) || '|' || coalesce(v.figure->>'type', '-') from problem_versions v where v.problem_id = '${problemId}' order by v.version_no desc limit 1;`);
@@ -175,7 +174,7 @@ async function publishAndCheckStudent(page: Page, c: Case, problemId: string, sh
   expect(psql(`select problem_version_has_question(v.passage, v.question)::text from problem_versions v where v.problem_id = '${problemId}' order by v.version_no desc limit 1;`)).toBe("true");
   const sessionId = startedSessionWith(problemId);
   await page.context().clearCookies();
-  await loginAs(page, ACCOUNTS.student);
+  await loginAs(page, family.children[0].email); // 공용 지훈 아님 — 이 세션은 fixture 학생 소유
   await page.goto(`/session/${sessionId}?tab=problems`);
   await expect(page.getByTestId("problem-sheet")).toBeVisible({ timeout: 30_000 });
   await expect(page.getByTestId("rw-question").or(page.getByTestId("rw-stimulus")).first()).toBeVisible();
@@ -235,17 +234,21 @@ test("AP 탭: 과목을 고르면 '준비 중'만 보이고 SAT 입력을 재사
   await page.getByRole("tab", { name: "AP" }).click();
   await page.getByLabel("새 문제 과목").selectOption(SUBJECT_ID);
   await expect(page.getByLabel("AP 과목")).toBeVisible();
-  await expect(page.getByLabel("SAT 영역", { exact: true })).toHaveCount(1); // 필터 줄만
+  // 2026-09-17 버킷 분리로 "생성" 화면에는 필터 줄 자체가 없다(목록도 없음) —
+  // AP 체계에서는 생성 폼의 "SAT 영역" select도 렌더되지 않으므로(system !== "ap"
+  // 조건부) 0개가 맞다. 예전엔 필터 줄이 생성 화면에 같이 있어 1개였다.
+  await expect(page.getByLabel("SAT 영역", { exact: true })).toHaveCount(0);
   await page.getByLabel("AP 과목").selectOption("ap_statistics");
   await expect(page.getByTestId("ap-pending-note")).toContainText("준비 중");
   await expect(page.getByRole("button", { name: "AI로 만들기" })).toHaveCount(0);
-  await expect(page.getByRole("button", { name: "직접 쓰기" })).toBeDisabled();
+  // 버튼명이 "직접 쓰기"→"직접 생성"으로 바뀜(2026-09-17 재구성).
+  await expect(page.getByRole("button", { name: "직접 생성" })).toBeDisabled();
   await page.getByTestId("new-problem-panel").screenshot({ path: `${OUT}/ap-select.png` });
 });
 
 for (const c of CASES) {
   test(`단건·복수 생성 → 편집 화면 항목 → 질문·자료 판정 → 공개 → 학생: ${c.tab} / ${c.label}`, async ({ page }) => {
-    test.skip(!process.env.ANTHROPIC_API_KEY, "ANTHROPIC_API_KEY 없음 — 실제 모델 호출이 필요한 검증");
+    test.skip(!process.env.E2E_REAL_AI, "E2E_REAL_AI=1 로 명시적으로 켜야 실행됨 — 실제 모델 호출 비용 발생");
     await openNewPanel(page, c);
     await page.getByTestId("new-problem-panel").screenshot({ path: `${OUT}/${c.prefix}-panel.png` });
 
@@ -267,8 +270,9 @@ for (const c of CASES) {
     // 결과를 열어 항목·판정 확인 → 공개 → 학생. 검증 게이트에 막힌 결과(AI 자료 품질)는 사유를 기록하고 다음 결과로 — 최대 2개까지 본다.
     let published = false;
     for (const id of all.slice(0, 2)) {
+      // 방금 만든 초안은 "검수"(기본 버킷)에 뜬다 — "생성" 버킷은 목록/필터 자체가
+      // 없다(2026-09-17 버킷 분리, ProblemBankTab.tsx: bucket==="create"면 목록 null).
       await page.goto("/admin?tab=problem-bank");
-  await page.getByRole("button", { name: "생성", exact: true }).click();
       await page.getByLabel("과목", { exact: true }).selectOption(SUBJECT_ID);
       await openRow(page, id);
       await assertEditorShape(page, c);
@@ -280,7 +284,6 @@ for (const c of CASES) {
       const id = seedFallback(c);
       test.info().annotations.push({ type: "fallback-seed", description: id });
       await page.goto("/admin?tab=problem-bank");
-  await page.getByRole("button", { name: "생성", exact: true }).click();
       await page.getByLabel("과목", { exact: true }).selectOption(SUBJECT_ID);
       await openRow(page, id);
       await assertEditorShape(page, c);

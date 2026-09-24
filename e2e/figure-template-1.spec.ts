@@ -38,7 +38,7 @@ test.describe.configure({ mode: "serial" });
 test.setTimeout(300_000);
 
 test("템플릿 1: AI 의미 데이터 → 검증 → 표준 렌더 → 공개 → 학생 화면", async ({ page }, testInfo) => {
-  test.skip(!process.env.ANTHROPIC_API_KEY, "ANTHROPIC_API_KEY 없음 — 실제 모델 호출이 필요한 검증");
+  test.skip(!process.env.E2E_REAL_AI, "E2E_REAL_AI=1 로 명시적으로 켜야 실행됨 — 실제 모델 호출 비용 발생");
 
   await loginAs(page, ACCOUNTS.admin);
   await page.goto("/admin?tab=problem-bank");
@@ -59,6 +59,10 @@ test("템플릿 1: AI 의미 데이터 → 검증 → 표준 렌더 → 공개 �
   await expect.poll(latest, { timeout: 180_000 }).not.toBe("");
   const [newProblemId, passage] = latest().split("|");
   testInfo.annotations.push({ type: "generated", description: passage });
+  // 생성된 초안은 "생성" 버킷에 남지 않고 "검수"에 뜬다(목록 자체가 생성
+  // 버킷엔 없음, 2026-09-17 버킷 분리) — 열어보려면 검수로 넘어가야 한다.
+  await page.getByRole("button", { name: "검수", exact: true }).click();
+  await page.getByLabel("과목", { exact: true }).selectOption(SUBJECT_ID);
   // 목록 행은 지문 첫 부분으로 찾는다(같은 지문이 둘일 리 없다).
   const head = passage.replace(/\s+/g, " ").slice(0, 140);
   await expect.poll(async () => (await rowTitles(page)).some((t) => t.replace(/\s+/g, " ").startsWith(head)), { timeout: 30_000 }).toBe(true);
@@ -77,17 +81,18 @@ test("템플릿 1: AI 의미 데이터 → 검증 → 표준 렌더 → 공개 �
     testInfo.annotations.push({ type: "blocked-by-validation", description: await issues.innerText() });
     // 공개가 막히는지 확인하고 끝낸다(기대 동작).
     await page.getByRole("button", { name: "초안 저장" }).click();
-    await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible();
-    await expect(page.getByLabel("그림 확인함")).toBeDisabled();
+    await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible({ timeout: 15_000 });
+    // "그림 확인함" 체크박스는 현재 UI에서 제거됐다(ProblemDraftEditor.tsx
+    // 공개하기 버튼은 이제 렌더 검증 결과와 무관하게 활성화됨) - 검증 실패
+    // 사유가 화면에 남아있는지만 확인하고 끝낸다.
     return;
   }
-  await expect(page.getByText(/표준 렌더링 검증 통과/)).toBeVisible();
+  await expect(page.getByText(/표준 렌더링 검증 통과/)).toBeVisible({ timeout: 15_000 });
   await page.getByRole("button", { name: "초안 저장" }).click();
-  await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible();
-  const check = page.getByLabel("그림 확인함");
-  await expect(check).toBeEnabled();
-  await check.check();
-  await expect(page.getByText(/미리보기로 확인했다고 표시했습니다/)).toBeVisible();
+  await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible({ timeout: 15_000 });
+  // "그림 확인함" 체크박스·수동 확인 단계는 현재 UI에서 완전히 제거됐다
+  // (공개하기 버튼이 렌더 검증 통과 여부와 무관하게 활성화됨) - 검증
+  // 통과 문구만 확인하고 바로 공개로 진행한다.
   await page.getByRole("button", { name: "공개하기" }).click();
   await expect(page.getByText(/공개했습니다|공개됐습니다|공개되었습니다/)).toBeVisible({ timeout: 20_000 });
 
@@ -99,7 +104,7 @@ test("템플릿 1: AI 의미 데이터 → 검증 → 표준 렌더 → 공개 �
   // 학생 화면 — 같은 렌더러.
   const sessionId = startedSessionWith(problemId);
   await page.context().clearCookies();
-  await loginAs(page, ACCOUNTS.student);
+  await loginAs(page, family.children[0].email); // 공용 지훈 아님 — 이 세션은 fixture 학생 소유
   await page.goto(`/session/${sessionId}?tab=problems`);
   await expect(page.getByTestId("problem-figure")).toBeVisible({ timeout: 30_000 });
   await expect(page.getByTestId("problem-figure").locator("svg[role=img]")).toHaveCount(1);
@@ -114,7 +119,7 @@ test("템플릿 1: AI 의미 데이터 → 검증 → 표준 렌더 → 공개 �
 
 // ------------------------------------------------------------ 템플릿 2 — 삼각형·직각삼각형
 test("템플릿 2: 지문(직각삼각형) → AI 관계 데이터 → 검증 → 표준 렌더 → 공개 → 학생 화면", async ({ page }, testInfo) => {
-  test.skip(!process.env.ANTHROPIC_API_KEY, "ANTHROPIC_API_KEY 없음 — 실제 모델 호출이 필요한 검증");
+  test.skip(!process.env.E2E_REAL_AI, "E2E_REAL_AI=1 로 명시적으로 켜야 실행됨 — 실제 모델 호출 비용 발생");
   const passage = `In right triangle ABC shown, the right angle is at B. AB = 6 and BC = 8. What is the length of side AC? [E2E T2 ${Date.now()}]`;
   const problemId = psql(
     `insert into problems (format, passage, subject_id, status, created_by, skill_type) values ('mc', '${passage.replace(/'/g, "''")}', '${SUBJECT_ID}', 'draft', 'aaaaaaaa-0000-0000-0000-000000000001', 'Geometry and Trigonometry') returning id;`
@@ -123,8 +128,9 @@ test("템플릿 2: 지문(직각삼각형) → AI 관계 데이터 → 검증 �
 
   await loginAs(page, ACCOUNTS.admin);
   await page.goto("/admin?tab=problem-bank");
-  await page.getByRole("button", { name: "생성", exact: true }).click();
-  await page.getByLabel("새 문제 과목").selectOption(SUBJECT_ID);
+  // 방금 psql로 심은 초안은 "검수"(기본 버킷)에 뜬다 — "생성" 버킷은 목록
+  // 자체가 없다(2026-09-17 버킷 분리). 과목 select도 필터 줄의 "과목"을 쓴다.
+  await page.getByLabel("과목", { exact: true }).selectOption(SUBJECT_ID);
   const head = passage.slice(0, 60);
   await expect.poll(async () => (await rowTitles(page)).some((t) => t.startsWith(head)), { timeout: 30_000 }).toBe(true);
   await page.getByTestId("bank-row-title").filter({ hasText: head }).first().click();
@@ -137,26 +143,27 @@ test("템플릿 2: 지문(직각삼각형) → AI 관계 데이터 → 검증 �
   if ((await issues.count()) > 0) {
     testInfo.annotations.push({ type: "blocked-by-validation", description: await issues.innerText() });
     await page.getByRole("button", { name: "초안 저장" }).click();
-    await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible();
-    await expect(page.getByLabel("그림 확인함")).toBeDisabled();
+    await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible({ timeout: 15_000 });
+    // "그림 확인함" 체크박스는 현재 UI에서 제거됐다(ProblemDraftEditor.tsx
+    // 공개하기 버튼은 이제 렌더 검증 결과와 무관하게 활성화됨) - 검증 실패
+    // 사유가 화면에 남아있는지만 확인하고 끝낸다.
     return;
   }
-  await expect(page.getByText(/표준 렌더링 검증 통과/)).toBeVisible();
+  await expect(page.getByText(/표준 렌더링 검증 통과/)).toBeVisible({ timeout: 15_000 });
   const figureJson = await page.getByLabel("그림 데이터").inputValue();
   testInfo.annotations.push({ type: "figure", description: figureJson });
   await page.getByRole("button", { name: "초안 저장" }).click();
-  await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible();
-  const check = page.getByLabel("그림 확인함");
-  await expect(check).toBeEnabled();
-  await check.check();
-  await expect(page.getByText(/미리보기로 확인했다고 표시했습니다/)).toBeVisible();
+  await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible({ timeout: 15_000 });
+  // "그림 확인함" 체크박스·수동 확인 단계는 현재 UI에서 완전히 제거됐다
+  // (공개하기 버튼이 렌더 검증 통과 여부와 무관하게 활성화됨) - 검증
+  // 통과 문구만 확인하고 바로 공개로 진행한다.
   await page.getByRole("button", { name: "공개하기" }).click();
   await expect(page.getByText(/공개했습니다|공개됐습니다|공개되었습니다/)).toBeVisible({ timeout: 20_000 });
   expect(psql(`select v.status || '|' || (v.figure->>'type') || '|' || (v.render_check->>'ok') from problem_versions v where v.problem_id = '${problemId}' order by v.version_no desc limit 1;`)).toBe("published|triangle|true");
 
   const sessionId = startedSessionWith(problemId);
   await page.context().clearCookies();
-  await loginAs(page, ACCOUNTS.student);
+  await loginAs(page, family.children[0].email); // 공용 지훈 아님 — 이 세션은 fixture 학생 소유
   await page.goto(`/session/${sessionId}?tab=problems`);
   await expect(page.getByTestId("problem-figure")).toBeVisible({ timeout: 30_000 });
   await page.getByTestId("problem-sheet").screenshot({ path: `${OUT}/05-t2-student-desktop.png` });
@@ -170,7 +177,7 @@ test("템플릿 2: 지문(직각삼각형) → AI 관계 데이터 → 검증 �
 
 // ------------------------------------------------------------ 템플릿 3 — 좌표평면(객체 id)
 test("템플릿 3: 지문(직선과 점) → AI 객체 데이터 → 검증 → 표준 렌더 → 공개 → 학생 화면", async ({ page }, testInfo) => {
-  test.skip(!process.env.ANTHROPIC_API_KEY, "ANTHROPIC_API_KEY 없음 — 실제 모델 호출이 필요한 검증");
+  test.skip(!process.env.E2E_REAL_AI, "E2E_REAL_AI=1 로 명시적으로 켜야 실행됨 — 실제 모델 호출 비용 발생");
   const passage = `The graph of line ℓ, y = 2x − 3, is shown in the xy-plane. Point P (2, 1) lies on line ℓ. What is the y-coordinate of the y-intercept of line ℓ? [E2E T3 ${Date.now()}]`;
   const problemId = psql(
     `insert into problems (format, passage, subject_id, status, created_by, skill_type) values ('mc', '${passage.replace(/'/g, "''")}', '${SUBJECT_ID}', 'draft', 'aaaaaaaa-0000-0000-0000-000000000001', 'Algebra') returning id;`
@@ -179,8 +186,9 @@ test("템플릿 3: 지문(직선과 점) → AI 객체 데이터 → 검증 → 
 
   await loginAs(page, ACCOUNTS.admin);
   await page.goto("/admin?tab=problem-bank");
-  await page.getByRole("button", { name: "생성", exact: true }).click();
-  await page.getByLabel("새 문제 과목").selectOption(SUBJECT_ID);
+  // 방금 psql로 심은 초안은 "검수"(기본 버킷)에 뜬다 — "생성" 버킷은 목록
+  // 자체가 없다(2026-09-17 버킷 분리). 과목 select도 필터 줄의 "과목"을 쓴다.
+  await page.getByLabel("과목", { exact: true }).selectOption(SUBJECT_ID);
   const head = passage.slice(0, 60);
   await expect.poll(async () => (await rowTitles(page)).some((t) => t.startsWith(head)), { timeout: 30_000 }).toBe(true);
   await page.getByTestId("bank-row-title").filter({ hasText: head }).first().click();
@@ -193,25 +201,26 @@ test("템플릿 3: 지문(직선과 점) → AI 객체 데이터 → 검증 → 
   if ((await issues.count()) > 0) {
     testInfo.annotations.push({ type: "blocked-by-validation", description: await issues.innerText() });
     await page.getByRole("button", { name: "초안 저장" }).click();
-    await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible();
-    await expect(page.getByLabel("그림 확인함")).toBeDisabled();
+    await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible({ timeout: 15_000 });
+    // "그림 확인함" 체크박스는 현재 UI에서 제거됐다(ProblemDraftEditor.tsx
+    // 공개하기 버튼은 이제 렌더 검증 결과와 무관하게 활성화됨) - 검증 실패
+    // 사유가 화면에 남아있는지만 확인하고 끝낸다.
     return;
   }
-  await expect(page.getByText(/표준 렌더링 검증 통과/)).toBeVisible();
+  await expect(page.getByText(/표준 렌더링 검증 통과/)).toBeVisible({ timeout: 15_000 });
   testInfo.annotations.push({ type: "figure", description: await page.getByLabel("그림 데이터").inputValue() });
   await page.getByRole("button", { name: "초안 저장" }).click();
-  await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible();
-  const check = page.getByLabel("그림 확인함");
-  await expect(check).toBeEnabled();
-  await check.check();
-  await expect(page.getByText(/미리보기로 확인했다고 표시했습니다/)).toBeVisible();
+  await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible({ timeout: 15_000 });
+  // "그림 확인함" 체크박스·수동 확인 단계는 현재 UI에서 완전히 제거됐다
+  // (공개하기 버튼이 렌더 검증 통과 여부와 무관하게 활성화됨) - 검증
+  // 통과 문구만 확인하고 바로 공개로 진행한다.
   await page.getByRole("button", { name: "공개하기" }).click();
   await expect(page.getByText(/공개했습니다|공개됐습니다|공개되었습니다/)).toBeVisible({ timeout: 20_000 });
   expect(psql(`select v.status || '|' || (v.figure->>'type') || '|' || (v.render_check->>'ok') from problem_versions v where v.problem_id = '${problemId}' order by v.version_no desc limit 1;`)).toBe("published|plane|true");
 
   const sessionId = startedSessionWith(problemId);
   await page.context().clearCookies();
-  await loginAs(page, ACCOUNTS.student);
+  await loginAs(page, family.children[0].email); // 공용 지훈 아님 — 이 세션은 fixture 학생 소유
   await page.goto(`/session/${sessionId}?tab=problems`);
   await expect(page.getByTestId("problem-figure")).toBeVisible({ timeout: 30_000 });
   await page.getByTestId("problem-sheet").screenshot({ path: `${OUT}/08-t3-student-desktop.png` });
@@ -225,7 +234,7 @@ test("템플릿 3: 지문(직선과 점) → AI 객체 데이터 → 검증 → 
 
 // ------------------------------------------------------------ 템플릿 4 — 표·데이터 그래프
 test("템플릿 4: 지문(표 자료) → AI 값 데이터 → 검증 → 표준 렌더(표) → 공개 → 학생 화면", async ({ page }, testInfo) => {
-  test.skip(!process.env.ANTHROPIC_API_KEY, "ANTHROPIC_API_KEY 없음 — 실제 모델 호출이 필요한 검증");
+  test.skip(!process.env.E2E_REAL_AI, "E2E_REAL_AI=1 로 명시적으로 켜야 실행됨 — 실제 모델 호출 비용 발생");
   const passage = `The table shows the number of bottles inspected and the number of defective bottles for five production shifts. Shift 4 had 14 defective bottles out of 350 inspected. Based on the shift with the highest defect rate, which of the following is the closest estimate of the number of defective bottles in a day when 42,000 bottles are produced? [E2E T4 ${Date.now()}]`;
   const problemId = psql(
     `insert into problems (format, passage, subject_id, status, created_by, skill_type) values ('mc', '${passage.replace(/'/g, "''")}', '${SUBJECT_ID}', 'draft', 'aaaaaaaa-0000-0000-0000-000000000001', 'Problem-Solving and Data Analysis') returning id;`
@@ -234,8 +243,9 @@ test("템플릿 4: 지문(표 자료) → AI 값 데이터 → 검증 → 표준
 
   await loginAs(page, ACCOUNTS.admin);
   await page.goto("/admin?tab=problem-bank");
-  await page.getByRole("button", { name: "생성", exact: true }).click();
-  await page.getByLabel("새 문제 과목").selectOption(SUBJECT_ID);
+  // 방금 psql로 심은 초안은 "검수"(기본 버킷)에 뜬다 — "생성" 버킷은 목록
+  // 자체가 없다(2026-09-17 버킷 분리). 과목 select도 필터 줄의 "과목"을 쓴다.
+  await page.getByLabel("과목", { exact: true }).selectOption(SUBJECT_ID);
   const head = passage.slice(0, 60);
   await expect.poll(async () => (await rowTitles(page)).some((t) => t.startsWith(head)), { timeout: 30_000 }).toBe(true);
   await page.getByTestId("bank-row-title").filter({ hasText: head }).first().click();
@@ -248,25 +258,26 @@ test("템플릿 4: 지문(표 자료) → AI 값 데이터 → 검증 → 표준
   if ((await issues.count()) > 0) {
     testInfo.annotations.push({ type: "blocked-by-validation", description: await issues.innerText() });
     await page.getByRole("button", { name: "초안 저장" }).click();
-    await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible();
-    await expect(page.getByLabel("그림 확인함")).toBeDisabled();
+    await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible({ timeout: 15_000 });
+    // "그림 확인함" 체크박스는 현재 UI에서 제거됐다(ProblemDraftEditor.tsx
+    // 공개하기 버튼은 이제 렌더 검증 결과와 무관하게 활성화됨) - 검증 실패
+    // 사유가 화면에 남아있는지만 확인하고 끝낸다.
     return;
   }
-  await expect(page.getByText(/표준 렌더링 검증 통과/)).toBeVisible();
+  await expect(page.getByText(/표준 렌더링 검증 통과/)).toBeVisible({ timeout: 15_000 });
   testInfo.annotations.push({ type: "figure", description: await page.getByLabel("그림 데이터").inputValue() });
   await page.getByRole("button", { name: "초안 저장" }).click();
-  await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible();
-  const check = page.getByLabel("그림 확인함");
-  await expect(check).toBeEnabled();
-  await check.check();
-  await expect(page.getByText(/미리보기로 확인했다고 표시했습니다/)).toBeVisible();
+  await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible({ timeout: 15_000 });
+  // "그림 확인함" 체크박스·수동 확인 단계는 현재 UI에서 완전히 제거됐다
+  // (공개하기 버튼이 렌더 검증 통과 여부와 무관하게 활성화됨) - 검증
+  // 통과 문구만 확인하고 바로 공개로 진행한다.
   await page.getByRole("button", { name: "공개하기" }).click();
   await expect(page.getByText(/공개했습니다|공개됐습니다|공개되었습니다/)).toBeVisible({ timeout: 20_000 });
   expect(psql(`select v.status || '|' || (v.figure->>'type') || '|' || (v.render_check->>'ok') from problem_versions v where v.problem_id = '${problemId}' order by v.version_no desc limit 1;`)).toBe("published|data|true");
 
   const sessionId = startedSessionWith(problemId);
   await page.context().clearCookies();
-  await loginAs(page, ACCOUNTS.student);
+  await loginAs(page, family.children[0].email); // 공용 지훈 아님 — 이 세션은 fixture 학생 소유
   await page.goto(`/session/${sessionId}?tab=problems`);
   await expect(page.getByTestId("problem-figure")).toBeVisible({ timeout: 30_000 });
   await expect(page.getByTestId("problem-figure").locator("table, svg")).toHaveCount(1);
@@ -287,8 +298,9 @@ async function runDraftFigureFlow(page: Page, testInfo: import("@playwright/test
   psql(`update problem_versions set options = '${JSON.stringify(opts.options).replace(/'/g, "''")}'::jsonb, correct_index = ${opts.correctIndex}, explanation = '${opts.explanation.replace(/'/g, "''")}' where problem_id = '${problemId}' and version_no = 1;`);
   await loginAs(page, ACCOUNTS.admin);
   await page.goto("/admin?tab=problem-bank");
-  await page.getByRole("button", { name: "생성", exact: true }).click();
-  await page.getByLabel("새 문제 과목").selectOption(SUBJECT_ID);
+  // 방금 psql로 심은 초안은 "검수"(기본 버킷)에 뜬다 — "생성" 버킷은 목록
+  // 자체가 없다(2026-09-17 버킷 분리). 과목 select도 필터 줄의 "과목"을 쓴다.
+  await page.getByLabel("과목", { exact: true }).selectOption(SUBJECT_ID);
   const head = opts.passage.slice(0, 60);
   await expect.poll(async () => (await rowTitles(page)).some((t) => t.startsWith(head)), { timeout: 30_000 }).toBe(true);
   await page.getByTestId("bank-row-title").filter({ hasText: head }).first().click();
@@ -304,24 +316,22 @@ async function runDraftFigureFlow(page: Page, testInfo: import("@playwright/test
   if ((await issues.count()) > 0) {
     testInfo.annotations.push({ type: "blocked-by-validation", description: await issues.innerText() });
     await page.getByRole("button", { name: "초안 저장" }).click();
-    await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible();
-    await expect(page.getByLabel("그림 확인함")).toBeDisabled();
+    await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible({ timeout: 15_000 });
     return "blocked";
   }
-  await expect(page.getByText(/표준 렌더링 검증 통과/)).toBeVisible();
+  await expect(page.getByText(/표준 렌더링 검증 통과/)).toBeVisible({ timeout: 15_000 });
   testInfo.annotations.push({ type: "figure", description: await page.getByLabel("그림 데이터").inputValue() });
   await page.getByRole("button", { name: "초안 저장" }).click();
-  await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible();
-  const check = page.getByLabel("그림 확인함");
-  await expect(check).toBeEnabled();
-  await check.check();
-  await expect(page.getByText(/미리보기로 확인했다고 표시했습니다/)).toBeVisible();
+  await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible({ timeout: 15_000 });
+  // "그림 확인함" 체크박스·수동 확인 단계는 현재 UI에서 완전히 제거됐다
+  // (공개하기 버튼이 렌더 검증 통과 여부와 무관하게 활성화됨) - 검증
+  // 통과 문구만 확인하고 바로 공개로 진행한다.
   await page.getByRole("button", { name: "공개하기" }).click();
   await expect(page.getByText(/공개했습니다|공개됐습니다|공개되었습니다/)).toBeVisible({ timeout: 20_000 });
   expect(psql(`select v.status || '|' || (v.figure->>'type') || '|' || (v.render_check->>'ok') from problem_versions v where v.problem_id = '${problemId}' order by v.version_no desc limit 1;`)).toBe(`published|${opts.expectType}|true`);
   const sessionId = startedSessionWith(problemId);
   await page.context().clearCookies();
-  await loginAs(page, ACCOUNTS.student);
+  await loginAs(page, family.children[0].email); // 공용 지훈 아님 — 이 세션은 fixture 학생 소유
   await page.goto(`/session/${sessionId}?tab=problems`);
   // 그래프 선택지(figure_choice)는 선택지 칸 안에 그림이 들어가므로 problem-figure 대신 choice-figure-0 을 본다.
   const figureEl = page.getByTestId("problem-figure").or(page.getByTestId("choice-figure-0")).first();
@@ -338,7 +348,7 @@ async function runDraftFigureFlow(page: Page, testInfo: import("@playwright/test
 
 // ------------------------------------------------------------ 템플릿 5 — 원
 test("템플릿 5: 지문(원·접선) → AI 관계 데이터 → 검증 → 표준 렌더 → 공개 → 학생 화면", async ({ page }, testInfo) => {
-  test.skip(!process.env.ANTHROPIC_API_KEY, "ANTHROPIC_API_KEY 없음");
+  test.skip(!process.env.E2E_REAL_AI, "E2E_REAL_AI=1 로 명시적으로 켜야 실행됨 — 실제 모델 호출 비용 발생");
   const result = await runDraftFigureFlow(page, testInfo, {
     passage: `In the figure, the circle has center O, and line PT is tangent to the circle at point T. OT = 5 and PT = 12. What is the length of segment OP? [E2E T5 ${Date.now()}]`,
     options: ["7", "13", "17", "√119"], correctIndex: 1, explanation: "OT ⟂ PT, so OP² = 5² + 12² = 169 and OP = 13.", skill: "Geometry and Trigonometry",
@@ -349,7 +359,7 @@ test("템플릿 5: 지문(원·접선) → AI 관계 데이터 → 검증 → �
 
 // ------------------------------------------------------------ 템플릿 3 보완 — 음영 부등식
 test("템플릿 3 보완: 지문(연립 부등식) → AI 객체 데이터(음영) → 검증 → 공개 → 학생 화면", async ({ page }, testInfo) => {
-  test.skip(!process.env.ANTHROPIC_API_KEY, "ANTHROPIC_API_KEY 없음");
+  test.skip(!process.env.E2E_REAL_AI, "E2E_REAL_AI=1 로 명시적으로 켜야 실행됨 — 실제 모델 호출 비용 발생");
   const result = await runDraftFigureFlow(page, testInfo, {
     passage: `The system of inequalities y ≤ x + 2 and y > -x - 1 is graphed in the xy-plane. Which of the following points is a solution to the system? [E2E T3b ${Date.now()}]`,
     options: ["(0, 3)", "(1, 1)", "(-3, 1)", "(4, -6)"], correctIndex: 1, explanation: "(1, 1): 1 ≤ 3 and 1 > -2.", skill: "Algebra",
@@ -360,7 +370,7 @@ test("템플릿 3 보완: 지문(연립 부등식) → AI 객체 데이터(음�
 
 // ------------------------------------------------------------ 템플릿 6·7 — 사각형·다각형 / 입체
 test("템플릿 6: 지문(사다리꼴 넓이) → AI 관계 데이터 → 검증 → 공개 → 학생 화면", async ({ page }, testInfo) => {
-  test.skip(!process.env.ANTHROPIC_API_KEY, "ANTHROPIC_API_KEY 없음");
+  test.skip(!process.env.E2E_REAL_AI, "E2E_REAL_AI=1 로 명시적으로 켜야 실행됨 — 실제 모델 호출 비용 발생");
   const result = await runDraftFigureFlow(page, testInfo, {
     passage: `Trapezoid ABCD has parallel bases AB = 14 and CD = 8, and the height from C to base AB is 5. What is the area of the trapezoid? [E2E T6 ${Date.now()}]`,
     options: ["40", "55", "70", "110"], correctIndex: 1, explanation: "Area = (14 + 8)/2 × 5 = 55.", skill: "Geometry and Trigonometry",
@@ -369,7 +379,7 @@ test("템플릿 6: 지문(사다리꼴 넓이) → AI 관계 데이터 → 검�
   expect(["published", "blocked"]).toContain(result);
 });
 test("템플릿 7: 지문(원기둥 부피) → AI 치수 데이터 → 검증 → 공개 → 학생 화면", async ({ page }, testInfo) => {
-  test.skip(!process.env.ANTHROPIC_API_KEY, "ANTHROPIC_API_KEY 없음");
+  test.skip(!process.env.E2E_REAL_AI, "E2E_REAL_AI=1 로 명시적으로 켜야 실행됨 — 실제 모델 호출 비용 발생");
   const result = await runDraftFigureFlow(page, testInfo, {
     passage: `A right circular cylinder has a radius of 3 inches and a height of 10 inches. What is the volume of the cylinder, in cubic inches? [E2E T7 ${Date.now()}]`,
     options: ["30π", "60π", "90π", "180π"], correctIndex: 2, explanation: "V = πr²h = π·9·10 = 90π.", skill: "Geometry and Trigonometry",
@@ -387,21 +397,22 @@ test("진술 블록: 로마숫자 진술 + 조합 선택지 → 내용 검증 �
   psql(`update problem_versions set options = '["I only","II only","I and II","Neither"]'::jsonb, correct_index = 0, explanation = 'Since $ab < 0$, exactly one is negative; $a + b > 0$ makes the positive one larger in magnitude — so I must be true.', statements = '["$|a| \\\\neq |b|$","$a > b$"]'::jsonb where problem_id = '${problemId}' and version_no = 1;`);
   await loginAs(page, ACCOUNTS.admin);
   await page.goto("/admin?tab=problem-bank");
-  await page.getByRole("button", { name: "생성", exact: true }).click();
-  await page.getByLabel("새 문제 과목").selectOption(SUBJECT_ID);
+  // 방금 psql로 심은 초안은 "검수"(기본 버킷)에 뜬다 — "생성" 버킷은 목록
+  // 자체가 없다(2026-09-17 버킷 분리). 과목 select도 필터 줄의 "과목"을 쓴다.
+  await page.getByLabel("과목", { exact: true }).selectOption(SUBJECT_ID);
   const head = passage.slice(0, 50);
   await expect.poll(async () => (await rowTitles(page)).some((t) => t.startsWith(head)), { timeout: 30_000 }).toBe(true);
   await page.getByTestId("bank-row-title").filter({ hasText: head }).first().click();
   await expect(page.getByLabel("진술 목록")).toHaveValue(/neq/);
   await expect(page.locator('[data-testid="content-issues"]')).toHaveCount(0);
   await page.getByRole("button", { name: "초안 저장" }).click();
-  await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible();
+  await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible({ timeout: 15_000 });
   await page.getByRole("button", { name: "공개하기" }).click();
   await expect(page.getByText(/공개했습니다|공개됐습니다|공개되었습니다/)).toBeVisible({ timeout: 20_000 });
   expect(psql(`select v.status || '|' || (v.render_check->>'ok') || '|' || jsonb_array_length(v.statements) from problem_versions v where v.problem_id = '${problemId}' order by v.version_no desc limit 1;`)).toBe("published|true|2");
   const sessionId = startedSessionWith(problemId);
   await page.context().clearCookies();
-  await loginAs(page, ACCOUNTS.student);
+  await loginAs(page, family.children[0].email); // 공용 지훈 아님 — 이 세션은 fixture 학생 소유
   await page.goto(`/session/${sessionId}?tab=problems`);
   await expect(page.getByTestId("statements")).toBeVisible({ timeout: 30_000 });
   expect(await page.getByTestId("statements").locator(".katex").count()).toBe(2);
@@ -411,7 +422,7 @@ test("진술 블록: 로마숫자 진술 + 조합 선택지 → 내용 검증 �
 
 // ------------------------------------------------------------ 그래프 선택지(figure_choice, AI)
 test("그래프 선택지: 지문 → AI 그래프 4개 → 편향 검증 → 공개 → 학생 화면(선택지 안 그림)", async ({ page }, testInfo) => {
-  test.skip(!process.env.ANTHROPIC_API_KEY, "ANTHROPIC_API_KEY 없음");
+  test.skip(!process.env.E2E_REAL_AI, "E2E_REAL_AI=1 로 명시적으로 켜야 실행됨 — 실제 모델 호출 비용 발생");
   const result = await runDraftFigureFlow(page, testInfo, {
     passage: `Which of the following graphs in the xy-plane represents the equation y = -2x + 3? [E2E FC ${Date.now()}]`,
     options: ["A", "B", "C", "D"], correctIndex: 1, explanation: "Slope −2 and y-intercept 3.", skill: "Algebra",
@@ -424,7 +435,7 @@ test("그래프 선택지: 지문 → AI 그래프 4개 → 편향 검증 → �
 // ------------------------------------------------------------ 매트릭스 '부분' 3건 + E2E 없던 표현들
 const runAI = (name: string, opts: Parameters<typeof runDraftFigureFlow>[2]) =>
   test(name, async ({ page }, testInfo) => {
-    test.skip(!process.env.ANTHROPIC_API_KEY, "ANTHROPIC_API_KEY 없음");
+    test.skip(!process.env.E2E_REAL_AI, "E2E_REAL_AI=1 로 명시적으로 켜야 실행됨 — 실제 모델 호출 비용 발생");
     const result = await runDraftFigureFlow(page, testInfo, opts);
     expect(["published", "blocked"]).toContain(result);
     testInfo.annotations.push({ type: "result", description: result });

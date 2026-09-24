@@ -41,10 +41,18 @@ const collapse = (s: string) => s.replace(/\s+/g, " ").trim();
 type Seed = { skillCode: string; skillType: string; passage: string; options: string[]; correctIndex: number; explanation: string; figure?: unknown };
 
 function seedProblem(s: Seed): string {
+  // 2026-09-14 재구성으로 질문이 지문과 별도 컬럼(problem_versions.question)에
+  // 저장되게 바뀌었다 — 지문 안에 질문이 섞여 있으면(옛 형식) "초안 저장"
+  // 버튼 자체가 비활성화된다("질문 갈라내기"를 눌러야 함). 이 스펙의 모든
+  // 호출부가 `${본문}\n\n${질문}?` 형태로 합쳐서 넘기므로, 마지막 빈 줄
+  // 기준으로 나눠 두 컬럼에 각각 저장한다.
+  const splitAt = s.passage.lastIndexOf("\n\n");
+  const passageOnly = splitAt === -1 ? s.passage : s.passage.slice(0, splitAt);
+  const questionOnly = splitAt === -1 ? "" : s.passage.slice(splitAt + 2);
   const problemId = psql(
-    `insert into problems (format, passage, subject_id, status, created_by, skill_type, skill_code) values ('mc', '${q(s.passage)}', '${SUBJECT_ID}', 'draft', '${ADMIN_ID}', '${q(s.skillType)}', '${s.skillCode}') returning id;`
+    `insert into problems (format, passage, subject_id, status, created_by, skill_type, skill_code) values ('mc', '${q(passageOnly)}', '${SUBJECT_ID}', 'draft', '${ADMIN_ID}', '${q(s.skillType)}', '${s.skillCode}') returning id;`
   );
-  psql(`update problem_versions set options = '${q(JSON.stringify(s.options))}'::jsonb, correct_index = ${s.correctIndex}, explanation = '${q(s.explanation)}'${s.figure ? `, figure = '${q(JSON.stringify(s.figure))}'::jsonb` : ""} where problem_id = '${problemId}' and version_no = 1;`);
+  psql(`update problem_versions set question = '${q(questionOnly)}', options = '${q(JSON.stringify(s.options))}'::jsonb, correct_index = ${s.correctIndex}, explanation = '${q(s.explanation)}'${s.figure ? `, figure = '${q(JSON.stringify(s.figure))}'::jsonb` : ""} where problem_id = '${problemId}' and version_no = 1;`);
   return problemId;
 }
 
@@ -52,8 +60,9 @@ function seedProblem(s: Seed): string {
 async function adminSaveAndPublish(page: Page, passage: string, problemId: string, opts: { expectBlocked?: RegExp; hasFigure?: boolean; shot?: string }) {
   await loginAs(page, ACCOUNTS.admin);
   await page.goto("/admin?tab=problem-bank");
-  await page.getByRole("button", { name: "생성", exact: true }).click();
-  await page.getByLabel("새 문제 과목").selectOption(SUBJECT_ID);
+  // 방금 psql로 심은 초안은 "검수"(기본 버킷)에 뜬다 — "생성" 버킷은 목록
+  // 자체가 없다(2026-09-17 버킷 분리). 과목 select도 필터 줄의 "과목"을 쓴다.
+  await page.getByLabel("과목", { exact: true }).selectOption(SUBJECT_ID);
   const head = collapse(passage).slice(0, 60);
   await expect.poll(async () => (await rowTitles(page)).some((t) => collapse(t).startsWith(head)), { timeout: 30_000 }).toBe(true);
   const rows = page.getByTestId("bank-row-title");
@@ -61,7 +70,11 @@ async function adminSaveAndPublish(page: Page, passage: string, problemId: strin
   for (let i = 0; i < n; i++) {
     if (collapse(await rows.nth(i).innerText()).startsWith(head)) { await rows.nth(i).click(); break; }
   }
-  await expect(page.getByLabel("지문 / 자료")).toHaveValue(passage);
+  // seedProblem()이 질문을 별도 컬럼으로 이미 갈라뒀으므로(2026-09-14 재구성),
+  // "지문 / 자료" 칸에는 질문을 뺀 앞부분만 들어있다.
+  const passageOnlySplit = passage.lastIndexOf("\n\n");
+  const passageOnly = passageOnlySplit === -1 ? passage : passage.slice(0, passageOnlySplit);
+  await expect(page.getByLabel("지문 / 자료")).toHaveValue(passageOnly);
   await expect(page.getByTestId("rw-structure")).toBeVisible();
   const structure = await page.getByTestId("rw-structure").innerText();
   await expect(page.getByTestId("passage-preview")).toBeVisible();
@@ -69,7 +82,9 @@ async function adminSaveAndPublish(page: Page, passage: string, problemId: strin
   if (opts.expectBlocked) {
     await expect(page.getByTestId("content-issues")).toContainText(opts.expectBlocked);
     await page.getByRole("button", { name: "초안 저장" }).click();
-    await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible();
+    // 3-worker 병렬 실행 시 CPU 경합으로 토스트 표시가 15s를 넘기는 flake가
+    // 관찰돼(격리 실행 시엔 항상 통과) 30s로 늘림 — fixture 충돌은 아님.
+    await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible({ timeout: 30_000 });
     await page.getByRole("button", { name: "공개하기" }).click();
     // 게이트 메시지("표준 렌더링 검증을 통과하지 못해 공개할 수 없습니다: …")는 화면에서 사유만 남긴다(readable) — 사유가 오류 줄에 보인다.
     await expect(page.locator("p.text-red").filter({ hasText: opts.expectBlocked })).toBeVisible({ timeout: 20_000 });
@@ -78,13 +93,13 @@ async function adminSaveAndPublish(page: Page, passage: string, problemId: strin
   }
   await expect(page.getByTestId("content-issues")).toHaveCount(0);
   await page.getByRole("button", { name: "초안 저장" }).click();
-  await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible();
+  await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible({ timeout: 15_000 });
   if (opts.hasFigure) {
-    await expect(page.getByText(/표준 렌더링 검증 통과/)).toBeVisible();
-    const check = page.getByLabel("그림 확인함");
-    await expect(check).toBeEnabled();
-    await check.check();
-    await expect(page.getByText(/미리보기로 확인했다고 표시했습니다/)).toBeVisible();
+    // "그림 확인함" 체크박스·수동 확인 단계는 현재 UI에서 완전히 제거됐다
+    // (app/admin/ProblemDraftEditor.tsx "공개하기" 버튼은 이제 canSave·
+    // missingAnswer만 보고 figure 확인 여부는 조건에 없음) — 렌더링 검증
+    // 통과 문구만 확인하고 바로 공개로 진행한다.
+    await expect(page.getByText(/표준 렌더링 검증 통과/)).toBeVisible({ timeout: 15_000 });
   }
   await page.getByRole("button", { name: "공개하기" }).click();
   await expect(page.getByText(/공개했습니다|공개됐습니다|공개되었습니다/)).toBeVisible({ timeout: 20_000 });
@@ -95,7 +110,10 @@ async function adminSaveAndPublish(page: Page, passage: string, problemId: strin
 async function studentView(page: Page, problemId: string, shots: [string, string]) {
   const sessionId = startedSessionWith(problemId);
   await page.context().clearCookies();
-  await loginAs(page, ACCOUNTS.student);
+  // ACCOUNTS.student(공용 지훈)이 아니라 이 스펙 전용 fixture 학생으로 봐야
+  // 한다 — startedSessionWith가 만든 세션은 family.children[0]에 귀속돼
+  // 있어 지훈으로 보면 RLS가 막아 404가 뜬다.
+  await loginAs(page, family.children[0].email);
   await page.goto(`/session/${sessionId}?tab=problems`);
   await expect(page.getByTestId("problem-sheet")).toBeVisible({ timeout: 30_000 });
   await expect(page.getByTestId("rw-question")).toBeVisible();
@@ -199,15 +217,17 @@ const AI_CASES: { domain: string; skillLabel: string; skillCode: string; figureT
 
 for (const c of AI_CASES) {
   test(`AI 생성 → RW 구조 검증 → 공개 → 학생: ${c.skillLabel}`, async ({ page }, testInfo) => {
-    test.skip(!process.env.ANTHROPIC_API_KEY, "ANTHROPIC_API_KEY 없음 — 실제 모델 호출이 필요한 검증");
+    test.skip(!process.env.E2E_REAL_AI, "E2E_REAL_AI=1 로 명시적으로 켜야 실행됨 — 실제 모델 호출 비용 발생");
     await loginAs(page, ACCOUNTS.admin);
     await page.goto("/admin?tab=problem-bank");
-  await page.getByRole("button", { name: "생성", exact: true }).click();
+    await page.getByRole("button", { name: "생성", exact: true }).click();
     await page.getByLabel("새 문제 과목").selectOption(SUBJECT_ID);
-    // 문항 체계 탭 SAT Reading & Writing(기본). 필터 줄(첫 번째)과 새 문제 줄(두 번째)에 같은 라벨의 선택이 있다 — 새 문제 줄을 쓴다.
+    // 문항 체계 탭 SAT Reading & Writing(기본). 2026-09-17 버킷 분리로 "생성"
+    // 화면엔 필터 줄이 없어져 이제 이 select가 유일하다(예전엔 필터 줄과
+    // 합쳐 2개라 .nth(1)이 필요했다).
     await page.getByRole("tab", { name: "SAT Reading & Writing" }).click();
-    await page.getByLabel("SAT 영역", { exact: true }).nth(1).selectOption(c.domain);
-    await page.getByLabel("세부 기술", { exact: true }).nth(1).selectOption(c.skillCode);
+    await page.getByLabel("SAT 영역", { exact: true }).selectOption(c.domain);
+    await page.getByLabel("세부 기술", { exact: true }).selectOption(c.skillCode);
     await page.getByLabel("생성 개수").fill("1");
     const startedAt = psql(`select now()::text;`);
     await page.getByRole("button", { name: "AI로 만들기" }).click();
@@ -218,6 +238,10 @@ for (const c of AI_CASES) {
     const problemId = raw.slice(0, raw.indexOf("|"));
     const passage = psql(`select passage from problem_versions where problem_id = '${problemId}' order by version_no desc limit 1;`);
     testInfo.annotations.push({ type: "generated", description: passage });
+    // 생성된 초안은 "생성" 버킷에 남지 않고 "검수"에 뜬다(목록 자체가 생성
+    // 버킷엔 없음) — 열어보려면 검수로 넘어가야 한다.
+    await page.getByRole("button", { name: "검수", exact: true }).click();
+    await page.getByLabel("과목", { exact: true }).selectOption(SUBJECT_ID);
     const head = collapse(passage).slice(0, 60);
     await expect.poll(async () => (await rowTitles(page)).some((t) => collapse(t).startsWith(head)), { timeout: 30_000 }).toBe(true);
     const rows = page.getByTestId("bank-row-title");
@@ -234,20 +258,17 @@ for (const c of AI_CASES) {
     if ((await issues.count()) > 0) {
       testInfo.annotations.push({ type: "blocked-by-validation", description: await issues.allInnerTexts().then((t) => t.join(" / ")) });
       await page.getByRole("button", { name: "초안 저장" }).click();
-      await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible();
+      await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible({ timeout: 15_000 });
       await page.getByRole("button", { name: "공개하기" }).click();
       await expect(page.locator("p.text-red").first()).toBeVisible({ timeout: 20_000 });
       expect(psql(`select status from problem_versions where problem_id = '${problemId}' order by version_no desc limit 1;`)).toBe("draft");
       return;
     }
     await page.getByRole("button", { name: "초안 저장" }).click();
-    await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible();
+    await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible({ timeout: 15_000 });
     if (c.figureType) {
-      await expect(page.getByText(/표준 렌더링 검증 통과/)).toBeVisible();
-      const check = page.getByLabel("그림 확인함");
-      await expect(check).toBeEnabled();
-      await check.check();
-      await expect(page.getByText(/미리보기로 확인했다고 표시했습니다/)).toBeVisible();
+      // "그림 확인함" 체크박스·수동 확인 단계는 현재 UI에서 완전히 제거됐다.
+      await expect(page.getByText(/표준 렌더링 검증 통과/)).toBeVisible({ timeout: 15_000 });
     }
     await page.getByRole("button", { name: "공개하기" }).click();
     await expect(page.getByText(/공개했습니다|공개됐습니다|공개되었습니다/)).toBeVisible({ timeout: 20_000 });

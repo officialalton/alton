@@ -163,23 +163,36 @@ export function cleanupFamily(family: FixtureFamily) {
     psql(`select count(*) from entitlement_ledger where grant_id in (select id from entitlement_grants where child_id in (${idList}));`)
   ) > 0;
 
+  // mark_lesson_session_started()(startedSessionWith이 씀)가 freeze_session_content_at_start를
+  // 통해 session_prepared_selections를 'pinned'로 만든다 — R9 보안 수정
+  // (20261236000000)으로 pinned 행은 session_id를 포함해 어떤 컬럼도 다시 바꿀
+  // 수 없다(트리거가 완전히 막음, 우회 경로 없음 — 이 프로젝트의 UAT 정리
+  // 관례도 "지우지 않고 supabase db reset --local에 맡긴다"). sessions를 지우면
+  // FK(ON DELETE SET NULL)가 이 트리거에 걸려 실패하므로, pinned 행이 있으면
+  // sessions/reservations도 건드리지 않는다.
+  const hasPinnedPreparedSelections = Number(
+    psql(`select count(*) from session_prepared_selections where status = 'pinned' and subject_enrollment_id in (select id from subject_enrollments where child_id in (${idList}));`)
+  ) > 0;
+
   psql(`delete from booking_notification_outbox where reservation_id in (select id from reservations where subject_enrollment_id in (select id from subject_enrollments where child_id in (${idList})));`);
-  if (!hasLedgerRows) {
+  if (!hasLedgerRows && !hasPinnedPreparedSelections) {
     psql(`delete from reservation_cancellations where reservation_id in (select id from reservations where subject_enrollment_id in (select id from subject_enrollments where child_id in (${idList})));`);
     psql(`delete from sessions where subject_enrollment_id in (select id from subject_enrollments where child_id in (${idList}));`);
     psql(`delete from reservations where subject_enrollment_id in (select id from subject_enrollments where child_id in (${idList}));`);
   }
-  psql(`delete from curriculum_unit_prep_items where prep_id in (select id from curriculum_unit_preps where overlay_unit_id in (select id from curriculum_overlay_units where overlay_id in (select id from student_curriculum_overlays where subject_enrollment_id in (select id from subject_enrollments where child_id in (${idList})))));`);
-  psql(`delete from curriculum_unit_preps where overlay_unit_id in (select id from curriculum_overlay_units where overlay_id in (select id from student_curriculum_overlays where subject_enrollment_id in (select id from subject_enrollments where child_id in (${idList}))));`);
-  psql(`delete from curriculum_overlay_unit_keywords where overlay_unit_id in (select id from curriculum_overlay_units where overlay_id in (select id from student_curriculum_overlays where subject_enrollment_id in (select id from subject_enrollments where child_id in (${idList}))));`);
-  psql(`delete from curriculum_overlay_units where overlay_id in (select id from student_curriculum_overlays where subject_enrollment_id in (select id from subject_enrollments where child_id in (${idList})));`);
-  psql(`delete from student_curriculum_overlays where subject_enrollment_id in (select id from subject_enrollments where child_id in (${idList}));`);
+  if (!hasPinnedPreparedSelections) {
+    psql(`delete from curriculum_unit_prep_items where prep_id in (select id from curriculum_unit_preps where overlay_unit_id in (select id from curriculum_overlay_units where overlay_id in (select id from student_curriculum_overlays where subject_enrollment_id in (select id from subject_enrollments where child_id in (${idList})))));`);
+    psql(`delete from curriculum_unit_preps where overlay_unit_id in (select id from curriculum_overlay_units where overlay_id in (select id from student_curriculum_overlays where subject_enrollment_id in (select id from subject_enrollments where child_id in (${idList}))));`);
+    psql(`delete from curriculum_overlay_unit_keywords where overlay_unit_id in (select id from curriculum_overlay_units where overlay_id in (select id from student_curriculum_overlays where subject_enrollment_id in (select id from subject_enrollments where child_id in (${idList}))));`);
+    psql(`delete from curriculum_overlay_units where overlay_id in (select id from student_curriculum_overlays where subject_enrollment_id in (select id from subject_enrollments where child_id in (${idList})));`);
+    psql(`delete from student_curriculum_overlays where subject_enrollment_id in (select id from subject_enrollments where child_id in (${idList}));`);
+  }
   psql(`delete from document_permission_retries where subject_enrollment_id in (select id from subject_enrollments where child_id in (${idList}));`);
   psql(`delete from subject_thread_messages where thread_id in (select id from subject_threads where subject_enrollment_id in (select id from subject_enrollments where child_id in (${idList})));`);
   psql(`delete from subject_threads where subject_enrollment_id in (select id from subject_enrollments where child_id in (${idList}));`);
   psql(`delete from notifications where recipient_id in (${idList});`);
 
-  if (hasLedgerRows) {
+  if (hasLedgerRows || hasPinnedPreparedSelections) {
     psql(`update teacher_assignments set status = 'ended', effective_until = now() where subject_enrollment_id in (select id from subject_enrollments where child_id in (${idList})) and status = 'active';`);
     psql(`update subject_enrollments set status = 'terminated' where child_id in (${idList}) and status <> 'terminated';`);
     psql(`update contracts set status = 'void', voided_at = now(), void_reason = 'e2e cleanup' where household_id = '${family.householdId}' and status <> 'void';`);
@@ -330,8 +343,16 @@ export function startedSessionWith(params: {
   psql(`insert into problem_keywords (problem_id, keyword_id) values ('${problemId}', '${keywordId}') on conflict do nothing;`);
   const prepId = asUser(teacherId, `insert into curriculum_unit_preps (overlay_unit_id, created_by) values ('${overlayUnitId}', '${teacherId}') on conflict (overlay_unit_id) do update set created_by = excluded.created_by returning id;`);
   asUser(teacherId, `insert into curriculum_unit_prep_items (prep_id, content_type, content_id, position) values ('${prepId}', 'problem', '${problemId}', 1);`);
-  const offset = 10000 + Math.floor(Math.random() * 400);
-  const reservationId = psql(`insert into reservations (kind, subject_enrollment_id, owner_profile_id, starts_at, ends_at, status) values ('lesson', '${enrollmentId}', '${teacherId}', now() + interval '${offset} days', now() + interval '${offset} days 1 hour', 'confirmed') returning id;`);
+  // reservations_no_overlap 제외 제약(owner_profile_id, 시간 범위)이 있어
+  // 공용 선생님(박서연/이도현 등)을 재사용하는 여러 파일·여러 실행이 우연히
+  // 같은 미래 시각을 고르면 충돌한다 — 날짜 범위를 크게 벌리고 분 단위까지
+  // 무작위화해 충돌 확률을 낮춘다.
+  // 너무 먼 미래(수만 일)로 벌리면 날짜 처리 쪽에서 다른 문제가 생길 수 있어
+  // (실제로 확인됨 — 학생 세션 화면이 404) 원래 범위(약 10000일)는 유지하고
+  // 분 단위만 넓혀 충돌 확률을 낮춘다(400일 × 1440분 = 576,000가지).
+  const offsetDays = 10000 + Math.floor(Math.random() * 400);
+  const offsetMinutes = Math.floor(Math.random() * 1440);
+  const reservationId = psql(`insert into reservations (kind, subject_enrollment_id, owner_profile_id, starts_at, ends_at, status) values ('lesson', '${enrollmentId}', '${teacherId}', now() + interval '${offsetDays} days' + interval '${offsetMinutes} minutes', now() + interval '${offsetDays} days' + interval '${offsetMinutes} minutes' + interval '1 hour', 'confirmed') returning id;`);
   const sessionId = psql(`insert into sessions (reservation_id, subject_enrollment_id, teacher_id, lesson_type_id, scheduled_duration_minutes) values ('${reservationId}', '${enrollmentId}', '${teacherId}', (select id from lesson_types where code = 'regular'), 60) returning id;`);
   psql(`select link_unit_prep_to_session('${overlayUnitId}', '${sessionId}', '${teacherId}');`);
   psql(`select mark_lesson_session_started('${sessionId}', '${teacherId}');`);
