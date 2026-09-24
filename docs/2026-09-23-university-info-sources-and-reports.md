@@ -4646,3 +4646,68 @@ Indianapolis 단독 학사 프로그램만 반영**하고 과거 IUPUI 시절 Pu
    더 있음(American University, Boston College, Brown, Columbia, Dartmouth 등
    다수) — 우리 DB에 이미 essay_prompts가 있는 학교(American University, Boston
    College, Brown University 등)는 건드리지 않았음.
+
+## 48차 세션 — 신규 학업/비용 지표(12종) 실수집 3개교
+
+### 배경
+통합 세션이 `university_admission_metrics.metric_key` CHECK를 12개 확장
+(`ap_credit_accepted`/`ap_min_score_required`/`ap_max_credits`,
+`tuition_in_state`/`tuition_out_of_state`/`tuition_international`/
+`required_fees`/`room_cost`/`board_cost`/`net_price_average`,
+`student_faculty_ratio`/`academic_calendar`). 43차 이후 세션 기록을 확인한 결과
+이 12개 지표를 다룬 세션은 없어 중복 없음을 확인 후 시작.
+
+### 처리 방식
+verified_pilot 학교 중 이미 university_source_urls에 CDS 원문이 등록된 학교를
+대상으로, WebSearch로 최신(2025-2026 또는 2024-2025) CDS 직링크 PDF를 찾고,
+WebFetch로 저장된 바이너리를 Read 도구로 페이지 지정 추출(텍스트 또는
+스크린샷)하여 G(비용)/I(교수:학생비율)/A4(학사력) 섹션을 확인. AP 학점 정책은
+CDS에 없어 각 대학 admissions/registrar 공식 페이지를 WebSearch+WebFetch로 별도
+확인.
+
+### 완료: 3개교 (28건 반영)
+- **North Carolina State University** (CDS 2025-2026, 2026-2027학년도 비용
+  기준): tuition_in_state $6,535 / tuition_out_of_state·international $31,500
+  (비거주자 단일세율) / required_fees $2,493 / room_cost $8,335 / board_cost
+  $6,406 / student_faculty_ratio 16:1(Fall 2025) / academic_calendar
+  semester / ap_credit_accepted yes / ap_min_score_required 3점
+  (admissions.ncsu.edu AP 페이지, UNC System 공통 정책). ap_max_credits는
+  누적 상한 명시가 없어 미반영. net_price_average는 CDS에 수치 없이 계산기
+  URL만 있어 미반영.
+- **Carnegie Mellon University** (CDS 2025-2026, 2025-2026학년도 비용):
+  사립대 단일 등록금 $67,020(거주지 구분 없음 — in-state/out-of-state/
+  international 동일값으로 3건 반영) / required_fees $1,076 / room_cost
+  $14,364 / board_cost $7,334 / student_faculty_ratio 6:1(Fall 2024) /
+  academic_calendar semester / ap_credit_accepted yes. ap_min_score_required는
+  단과대별로 4점 또는 5점으로 갈려(STEM 5점, 인문/사회 4점 다수) 단일 수치로
+  단정하지 않고 미반영, notes에 사유 기록.
+- **Boston University** (CDS 2024-2025 cds-2025.pdf, 2024-2025학년도 비용):
+  사립대 단일 등록금 $66,670(3건 반영) / required_fees $1,432 / room_cost
+  $12,180 / board_cost $6,840 / student_faculty_ratio 10:1(Fall 2024) /
+  academic_calendar semester / ap_credit_accepted yes. ap_min_score_required는
+  BU Advanced Credit Guide 기준 전공별로 3~5점 혼재해 미반영.
+
+### 반영 안 한 것 (추측 금지 원칙)
+- ap_max_credits: 3개교 모두 원문에 누적 상한 명시 없어 미반영.
+- net_price_average: 3개교 모두 CDS에 net price calculator URL만 있고 수치
+  없어 미반영.
+- ap_min_score_required (CMU, BU): 단과대/학과별로 값이 갈려 대표값 하나로
+  단정하지 않음.
+
+### 시도했으나 중단
+- East Carolina University: 기존 university_source_urls에 연결된 CDS PDF가
+  2022-2023판(오래됨)이고 스캔 중 연도 표기가 2021-2022/2022-2023로 뒤섞여
+  있어 데이터 신뢰도 우려로 반영 보류.
+- Arizona State University, Georgia Institute of Technology: WebSearch로
+  찾은 CDS 최신 PDF 직링크가 모두 404(URL 인코딩/버전 경로 문제로 추정) —
+  다음 세션에서 해당 대학 IR 페이지를 직접 열람해 최신 링크 재탐색 필요.
+
+### 시간 제약으로 미완료
+- 목표 25개교 중 3개교만 완료. 나머지 20개 이상 verified_pilot 학교는 다음
+  세션에서 이어서 진행 필요(위와 동일한 방식 — WebSearch로 CDS 직링크 PDF
+  탐색 → Read로 G/I/A4 섹션 추출 → AP 정책은 별도 official 페이지 확인).
+
+### 담당 범위
+university_admission_metrics, university_source_urls(신규 3건: NC State CDS
+AP정책 페이지, CMU CDS+AP정책 페이지, BU CDS+AP정책 페이지)만 수정. 학과/에세이
+테이블은 건드리지 않음.
