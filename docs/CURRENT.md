@@ -275,10 +275,10 @@
     `assertNotPreview()`로 프로덕션 체인을 못 쓰므로, Preview에서 실제로
     자동 처리되게 하려면 R3처럼 상시 preview-safe 분기를 정식으로 유지할지는
     별도 정책 결정 필요(이번엔 검증 1회성 임시 조치로만 사용).
-    (b) `supabase/migrations/20261413000000_p6_problem_bank_full_audit_archive.sql`
-    (문제은행 감사, 이 milestone과 무관한 다른 담당 소유)이 아직 non-prod에
-    미반영 — 최종 통합 시 마이그레이션 적용 순서만 함께 검토 필요(이 파일 자체는
-    수정하지 않았음).
+    (b) ~~`supabase/migrations/20261413000000_p6_problem_bank_full_audit_archive.sql`
+    non-prod 미반영~~ — **2026-09-23 재확인 결과 이미 non-prod에 적용되어 있었음**
+    (`migration list --linked`에 버전 기록 존재, 대상 8개 문항 전부 `archived_at`
+    설정 확인). 이 항목은 오기재였던 것으로 보임 — 실제로 남은 액션 없음.
 
 - **예약·수업 준비·진도 단일 흐름(2026-09-17, 완료)**: 예약 확정 시 다음 미완료 회차
   (`curriculum_overlay_units.status`)를 자동 연결하고 그 시점 교재·문제·키워드를
