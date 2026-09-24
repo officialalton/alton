@@ -485,9 +485,35 @@
   별도 티켓으로 분리. 다음 세션에서 실제 AI 생성까지 포함해 3개 파일
   전체를 현재 화면 기준으로 재검증·수정할 것 — 위 두 항목이 출발점.
 
-- 오픈 전 blocker(남은 것): 실제 세금 계산(설계만, 활성화 보류), 실제 이메일
-  발송(설계만, 비프로덕션 발송 차단 유지), Workspace 위임 계정 분리(설계만),
-  `mark_expired_invites` cron 연결(다음 착수).
+- **`mark_expired_invites` cron 연결(2026-09-24, 완료)**: `app/api/cron/mark-expired-invites/route.ts`
+  신설(기존 payout 크론과 동일 fail-closed 패턴, `vercel.json`에 매시간 등록).
+  RPC가 `is_admin()`만 통과시켜(서비스 롤 호출은 `auth.uid()`가 null이라 항상
+  실패) 크론이 원래 못 돌았을 것 — `is_admin() OR auth.role() = 'service_role'`로
+  조건만 넓혀 사람 관리자 세션 경로는 그대로 두고 서비스 롤도 허용
+  (`20261900000007`). 검증: `set role service_role`로 직접 호출 성공, `set role
+  anon`은 여전히 차단, 기존 통합 테스트 18개 전부 통과, 새 라우트 테스트 4개
+  추가. **주의**: Vercel에 `CRON_SECRET` 환경변수가 아직 없으면 이 크론은
+  503으로 비활성 상태 그대로다(다른 두 payout 크론과 같은 안전장치) — 실제
+  활성화하려면 `CRON_SECRET`을 설정해야 하고, 이는 다른 크론까지 동시에
+  활성화시키는 스위치이므로 사용자 승인 필요.
+
+- **Workspace 위임 계정 분리(2026-09-24, 재확인 — 코드 작업 아님, 외부 실제
+  계정 작업 필요)**: `docs/2026-08-29-master-roadmap-v3.md:1014`에 명시된 원래
+  요구사항은 domain-wide delegation의 위임 대상을 `official@alton.education`
+  (Gate C 검증 때 임시로 쓴 실제 회사 최고관리자 계정)에서 **사용자 관리
+  권한만 가진 전용 자동화 관리자 계정**으로 바꾸는 것. 코드는 이미
+  `GOOGLE_WORKSPACE_DELEGATED_ADMIN_EMAIL` 환경변수로 위임 대상 이메일을
+  주입받게 돼 있어(`lib/google-workspace-auth.ts:149`) 코드 변경은 필요 없다 —
+  남은 작업은 전부 실제 Google Workspace Admin Console에서 사람이 해야 하는
+  일이라 이 세션이 대신 할 수 없다: (1) `alton.education` 도메인에 사용자
+  관리(만) 권한을 가진 커스텀 관리자 역할 생성, (2) 그 역할로 새 계정(예:
+  `automation@alton.education`) 생성, (3) domain-wide delegation의 승인 대상
+  주체(subject)를 그 계정 이메일로 변경, (4) Vercel
+  `GOOGLE_WORKSPACE_DELEGATED_ADMIN_EMAIL`을 새 이메일로 갱신, (5) 기존
+  `official@alton.education` 위임을 그대로 둘지 회수할지 결정. 실제 회사
+  Google Workspace 관리자 콘솔 접근·계정 생성은 사용자(또는 IT 담당)가 직접
+  진행해야 하며, 완료되면 이 세션(또는 다음 세션)이 env 값 갱신·재검증만
+  이어받는다.
 
 ## 7. 관련 문서
 - **표준 렌더링 엔진**(승인됨, 템플릿 1 구현): `docs/2026-09-14-standard-rendering-engine-design.md` + 표본 `docs/assets/2026-09-14-render-samples/`. AI=의미 데이터만, ALTON 렌더러=조판, 검증 계층=거부. 좌표형 `geometry` 는 레거시(표시만, 공개 불가). 템플릿 1~7 완료(평행선·삼각형·좌표평면·표/데이터·원·사각형/다각형·입체) + 분류 모델. 다음: 좌표기하·복합 도형 → 그래프/도형 선택지 → 수식·로마숫자 선택지 Block.
