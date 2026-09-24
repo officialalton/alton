@@ -4128,3 +4128,188 @@ where cnt=0;
 이번 세션에서 `university_majors`에 psql로 직접 insert한 데이터(4개교,
 총 380건)는 로컬 DB에만 반영되어 있다. 기존 세션 관례대로 non-prod
 환경 동기화가 필요하다.
+
+## 43차 세션 — 신규 확장 테이블(demographics/financial_aid_programs) 착수, 스키마 블로커 발견
+
+### 배경
+제품 오너 요구사항: 학교 기본정보/NCAA/입학요건/AP지표/재학생 인구통계
+(성별·국제학생·인종)/학생교수비율/학사운영방식/비용 세분화/재정지원
+프로그램을 CDS 한 번 열람으로 최대한 같이 수집. 목표는 20개교 이상.
+
+### 중요 발견 — 스키마 블로커 (다음 세션·통합 세션에 반드시 인계)
+`university_admission_metrics.metric_key`는 **CHECK 제약으로 고정된
+enum**이며 지시문의 가정("EAV라 자유롭게 추가 가능")과 달리 **자유
+추가가 불가능하다.** 현재 허용된 metric_key 목록에는 다음이
+**없다**:
+- `ap_credit_accepted`, `ap_min_score_required`, `ap_max_credits` (AP 지표)
+- `tuition_in_state`, `tuition_out_of_state`, `tuition_international`, `required_fees`, `room_cost`, `board_cost`, `net_price_average` (비용 세분화)
+- `student_faculty_ratio`, `academic_calendar` (학생교수비율/학사운영방식)
+
+마이그레이션 파일 작성 및 `db push`는 금지되어 있고 스키마는 통합
+세션 소관이므로, 이번 세션에서는 **ALTER TABLE을 시도하지 않고
+보류**했다. → **다음 필요 조치: 통합 세션이
+`university_admission_metrics_metric_key_check` 제약에 위 11개
+metric_key를 추가하는 마이그레이션을 작성해야, 위 카테고리들을
+정상적으로 admission_metrics에 적재할 수 있다.** 그 전까지는 AP
+지표·비용 세분화·학생교수비율·학사운영방식 데이터는 CDS 원문에서
+확인은 했지만 **DB에 적재하지 못했다** (Ball State 학생/교수비율
+14:1, 학사력 semester 등은 메모로만 남기고 스킵).
+
+이 블로커 때문에 이번 세션은 스키마 제약이 없는 3개 신규 테이블 중
+`university_affiliations`(NCAA 등)는 시간 예산상 보류하고,
+`university_demographics`와 `university_financial_aid_programs`
+위주로 진행했다.
+
+### 실제 수집·적재 완료 (8개교, CDS 원문 1회 열람 방식)
+CDS PDF를 `curl` + `pdftotext -layout`으로 받아 Section B(인구통계)와
+H(재정지원)를 동시에 파싱, university_source_urls의 기존 approved
+CDS URL을 source_url_id로 연결.
+
+| 학교 | cycle | demographics 건수 | financial_aid_programs 건수 | 비고 |
+|---|---|---|---|---|
+| Ball State University | 2024 | 10 | 4 (need/merit/Pell프록시/work-study) | Pell은 2018 졸업코호트 프록시(35.1%), 원문에 신입생 기준 Pell%가 별도 없음 |
+| Baylor University | 2025 | 10 | 2 | |
+| North Carolina State University | 2025 | 10 | 2 | |
+| Penn State University, University Park | 2024 | 10 | 2 | |
+| Rutgers University-Camden | 2023 | 10 | 2 | |
+| Rutgers University-New Brunswick | 2023 | 10 | 2 | |
+| Rutgers University-Newark | 2023 | 10 | 2 | |
+| Pace University | 2023 | 10 | 2 | |
+
+**demographics 80건 / financial_aid_programs 18건**, 전량
+`verification_status='official'`, `source_url_id` 연결, 각 row에
+CDS 원문 근거(분자/분모 숫자) `notes`로 명기. 추측 없음 — CDS에
+직접 없는 항목(예: work-study 수혜 인원 비율)은
+`value_status='not_disclosed_by_school'`로 정직하게 표시.
+
+- East Carolina University는 university_source_urls의 CDS URL이
+  깨져있음(404/HTML 리다이렉트) — 다음 세션에서 대체 출처 필요.
+- Clemson University CDS URL(`open.clemson.edu/cgi/viewcontent...`)도
+  PDF가 아닌 HTML 리다이렉트 페이지 반환 — 대체 접근 필요.
+
+### 미완료 / 다음 세션 인계사항
+1. **스키마 블로커 해소 최우선**: 위 11개 metric_key를
+   `university_admission_metrics_metric_key_check`에 추가하는 작업을
+   통합 세션에 요청/진행해야 AP·비용세분화·학생교수비율·학사운영방식
+   반영 가능.
+2. **university_affiliations(NCAA/컨퍼런스/Ivy League) 0건 그대로.**
+   CDS에는 없는 정보라 대학 athletics 공식 페이지를 별도로 열어야
+   하며, 이번 세션은 시간 예산상 손대지 못함.
+3. **8개교 외 나머지 verified_pilot 192개교**의
+   demographics/financial_aid_programs가 여전히 0건. 목표(20개교
+   이상)의 40%만 달성. 같은 방식(CDS PDF 1회 파싱)으로 계속 확장
+   필요. 직접 PDF 링크가 있는 학교(예: North Dakota State - xlsx,
+   NJIT - xlsx)는 `pdftotext` 대신 엑셀 파싱 스크립트가 필요할 수
+   있음.
+4. **non-prod 미반영**: 이번 세션 insert(demographics 80건,
+   financial_aid_programs 18건)는 로컬 DB에만 존재. 기존 세션
+   관례대로 non-prod 동기화 export가 필요하다.
+
+## 42차 세션 (2026-09-23, PDF 재검증 QA + 학과 목록 보완 16개교)
+
+### A. PDF 추출 품질 재검증 (41차가 발견한 "압축 PDF 자동추출 오염" 이슈 대응)
+41차 세션이 Rutgers-New Brunswick에서 발견한 문제(WebFetch/pdftotext
+자동추출이 압축 PDF에서 숫자를 조용히 오염시킴)에 대응해, **이미지
+렌더링 전환 이전(19~40차, curl+pdftotext 또는 WebFetch 자동추출만
+사용)** 세션들에서 처리한 학교 중 13개교를 표본으로 재검증했다.
+
+**표본**: 19차 세션에서 curl+pdftotext로 일괄 처리된 15개교 중 13개교
+— Duquesne, Iowa State, James Madison, Louisiana State, Loyola
+Marymount, Montclair State, Stevens Institute of Technology(폰트
+인코딩 손상 기록됨), University of Alabama in Huntsville, University
+of Kentucky(폰트 인코딩 손상 기록됨), University of North Texas(폰트
+인코딩 손상 기록됨), University of Rhode Island, Villanova, Worcester
+Polytechnic Institute.
+
+**방법**: 각 학교의 CDS 원문 PDF를 다시 curl로 받아 `pdftotext -layout`
+1차 확인 후, 폰트 인코딩 손상이 기록된 3개교(Stevens/Kentucky/North
+Texas)는 41차와 동일하게 `pdftoppm`으로 C1 페이지를 PNG 이미지로
+렌더링해 Read 도구로 직접 읽어 대조했다. 나머지 10개교는 텍스트
+추출이 깨끗해(숫자가 표 구조와 함께 정상 추출) 텍스트 대조만으로
+충분히 검증 가능했다.
+
+**결과: 13개교 전원 정확 확인, 오류 0건.**
+- 지원자/합격자/등록자 수(3개 지표 × 13개교 = 39개 값) 전부 DB 값과
+  원문이 정확히 일치.
+- SAT/ACT 25th/75th 백분위(확인 가능한 9개교)도 전부 일치.
+- 폰트 인코딩이 깨진 것으로 기록된 Stevens/Kentucky/North Texas 3개교도
+  이미지 렌더링 재확인 결과 **DB에 이미 반영된 숫자 자체는 정확했다**
+  (손상은 섹션 제목 등 텍스트 라벨에만 있었고, 표 안의 숫자 글리프는
+  정상 추출되어 있었음). North Texas는 성별 세부 테이블의 자체 합계
+  (41,250)가 공식 거주지별 총계 테이블(41,247)과 3명 어긋나는 원문
+  자체의 내부 불일치가 있었으나, DB에는 공식 TOTAL 값(41,247)이
+  올바르게 반영되어 있어 문제 없음.
+
+**결론**: 이번 표본(13개교, 오류율 0%)에서는 19~40차의 curl+pdftotext
+방식이 결과적으로 신뢰할 만했던 것으로 확인됐다. 41차가 발견한
+Rutgers-New Brunswick 오염 사례는 표본에 포함되지 않은 개별 사례성
+문제였을 가능성이 있다(Rutgers-New Brunswick 자체는 41차에서 이미
+이미지 렌더링으로 재검증·정정 완료됨). 오류율이 0%였으므로 지침에
+따라 표본을 추가로 늘리지 않았다 — 다만 **200개교 전체에 대한 전수
+재검증은 아니므로, 완전한 신뢰도 보증은 아니다.** DB 정정 건수: 0건.
+
+### B. 학과(전공) 목록 보완 — 16개교, 1,520건 추가
+학과 0건이었던 86개교 중 16개교를 실제 학교 공식 학사요람/카탈로그
+(주로 Modern Campus Catalog/Acalog 계열의 정적 HTML 페이지, 일부는
+공식 PDF Master List)에서 학부 전공만 추출해 `university_majors`에
+psql insert(university_id+name unique 제약으로 중복 자동 방지, additive
+only). 신규 확장 필드는 건드리지 않음.
+
+| 학교 | 출처 | 반영 건수 |
+|---|---|---|
+| University of Arizona | 학교 공식 아카이브 카탈로그(archive.catalog.arizona.edu) | 94 |
+| University of Louisville | catalog.louisville.edu/undergraduate/majors/ | 80 |
+| University of New Mexico | catalog.unm.edu (2021-22, Baccalaureate Degree Programs 섹션) | 85 |
+| University of Wyoming | Master List of Degrees and Majors 2025(이사회 승인 공식 PDF) | 143 |
+| University of Utah | majormaps.utah.edu/majors_list/ | 110 |
+| University of Idaho | catalog.uidaho.edu/university/degrees-granted/ | 104 |
+| Old Dominion University | catalog.odu.edu (프로그램별 개별 URL 슬러그 기반 파싱) | 165 |
+| University of Montana | catalog.umt.edu/programs/programs.pdf(공식 전체 프로그램 목록) | 52 |
+| University of Alabama at Birmingham | catalog.uab.edu/undergraduate/majorindex/ | 58 |
+| University of Denver | bulletin.du.edu(전공/부전공/학위 매트릭스 표) | 69 |
+| University of South Alabama | bulletin.southalabama.edu/programs-az/(Program Level=Undergraduate 필터) | 80 |
+| North Dakota State University | catalog.ndsu.edu/curriculum/undergraduate/(전공 존재 항목만) | 99 |
+| Miami University (Ohio) | bulletin.miamioh.edu(학부 학위 컬럼 존재 항목만) | 99 |
+| Ball State University | bsu.edu 학과별 페이지 링크(Concentration 하위 항목 제외) | 90 |
+| Texas State University | mycatalog.txstate.edu/undergraduate/majors/ | 103 |
+| Oklahoma State University | catalog.okstate.edu/degree-programs/(학사 학위 코드만 필터) | 89 |
+| **합계** | | **1,520건** |
+
+각 학교는 명칭이 정확히 일치함을 URL/페이지 제목으로 확인 후 처리했고,
+대학원 전공은 제외(학부 전공만 반영)했다. 일부 목록은 세부
+concentration/track까지 포함하거나(Old Dominion, Texas State 등) 반대로
+과별 대표명만 남기고 concentration을 제거(Ball State, Wyoming)해
+소스 페이지 구조에 따라 처리 방식이 달랐다 — 다음 세션에서 통일 기준
+정리가 필요할 수 있음.
+
+시도했으나 정적 파싱이 불가능해 포기한 학교(모두 JS 렌더링 SPA/Coursedog
+플랫폼 또는 봇 차단으로 확인): Kansas State University, University of
+Cincinnati, University of Oregon, University of Connecticut, University
+of Mississippi(catalog.usm.edu 계열도 봇 차단), Georgia State University,
+Northern Arizona University, University of San Diego, Texas Christian
+University, Gonzaga University, Seton Hall University, Southern
+Methodist University. 다음 세션에서는 브라우저 렌더링 도구(Claude
+Browser 등)로 재시도하면 가능할 수 있다.
+
+### 검증
+- `psql`로 반영 건수 직접 확인: 16개교 각각 SELECT count로 확인,
+  총 1,520건. `university_majors` 전체 레코드 5,556 → 7,076으로 증가
+  (재검증 표본 A절에서는 DB 변경 없음).
+- 학과 0건 학교: 86개교 → 62개교로 감소.
+- 신규 확장 필드(마이그레이션 `20261700000000` 이후) 전혀 건드리지
+  않음. 스키마 변경 없음. `npx supabase db push --linked` / `vercel
+  deploy` 미실행.
+
+### 다음 세션 인계
+1. **학과 미보완 62개교** 남음 — 남은 학교 상당수가 Coursedog/봇 차단
+   플랫폼을 쓰고 있어 curl 정적 파싱이 어려움. 브라우저 자동화 도구로
+   전환 권장.
+2. PDF 재검증은 13개교 표본만 진행(오류 0건) — 200개교 전수 재검증은
+   아직 안 됐음. 특히 41차가 지적한 대로 압축 PDF(FlateDecode) 특성이
+   있는 학교 위주로 추가 표본 검증을 이어가면 좋음.
+3. 학과 목록의 concentration 포함/제외 기준이 학교마다 달라졌음(위 B절
+   참고) — 데이터 일관성을 위해 통일 기준(예: 최상위 전공명만 유지)
+   정리가 필요할 수 있음.
+4. 41차가 남긴 기존 미해결 사항(Penn State `common_data_set_url` 오배정
+   정정, University of New Orleans 명칭 정책 결정, 에세이 프롬프트
+   확대)은 이번 세션에서 다루지 않음 — 계속 인계.
