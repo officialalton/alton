@@ -270,3 +270,54 @@ insert into teacher_qc_warnings (teacher_id, student_id, type, detail, occurred_
     '수업 10분 지각', now() - interval '10 days'),
   ('dddddddd-0000-0000-0000-000000000001', 'cccccccc-0000-0000-0000-000000000001', 'no_homework_review',
     '전 회차 과제 피드백 누락', now() - interval '3 days');
+
+-- =========================================================================
+-- 13. E2E 전용 fixture(2026-09-23) — 공용 계정(ACCOUNTS.student=지훈 등)을
+-- 변경하는 e2e 스펙을 여기로 옮긴다. 지훈은 e2e/auth-roles.spec.ts 등 다른
+-- 여러 스펙이 "정상 로그인 가능한 학생"으로 가정하는데, minor-consent.spec.ts는
+-- 그 학생의 생년월일을 13세 미만으로 바꿨다가 되돌리는 식으로 테스트해서
+-- fullyParallel(다중 워커) 아래서는 두 스펙이 같은 계정 상태를 두고 경합해
+-- 플레이키했다(account-lifecycle.spec.ts 옆 주석에도 동일 패턴이 이미 기록돼
+-- 있음: "기본 병렬 실행에서 5개 실패, --workers=1에서는 전부 통과"). 이 학생/
+-- 학부모 쌍은 이 fixture 전용으로만 쓰고 다른 어떤 스펙에서도 로그인하지 않는다.
+insert into auth.users (
+  instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change_token_new, email_change,
+  email_change_token_current, phone_change, phone_change_token, reauthentication_token
+) values
+  ('00000000-0000-0000-0000-000000000000', 'eeee1111-0000-0000-0000-000000000001', 'authenticated', 'authenticated',
+    'e2e-minor-consent-student@example.com', crypt('alton-dev-1234', gen_salt('bf')), now(),
+    '{"provider":"email","providers":["email"]}', '{}', now(), now(), '', '', '', '', '', '', '', ''),
+  ('00000000-0000-0000-0000-000000000000', 'eeee1111-0000-0000-0000-000000000002', 'authenticated', 'authenticated',
+    'e2e-minor-consent-parent@example.com', crypt('alton-dev-1234', gen_salt('bf')), now(),
+    '{"provider":"email","providers":["email"]}', '{}', now(), now(), '', '', '', '', '', '', '', '');
+
+insert into auth.identities (
+  id, provider_id, user_id, identity_data, provider, last_sign_in_at, created_at, updated_at
+)
+select gen_random_uuid(), u.id::text, u.id, jsonb_build_object('sub', u.id::text, 'email', u.email), 'email', now(), now(), now()
+from auth.users u
+where u.id in ('eeee1111-0000-0000-0000-000000000001', 'eeee1111-0000-0000-0000-000000000002');
+
+insert into profiles (id, role, name, phone, date_of_birth) values
+  ('eeee1111-0000-0000-0000-000000000001', 'student', 'E2E 동의테스트 학생', null, (now() - interval '16 years')::date);
+
+insert into profiles (id, role, name, phone) values
+  ('eeee1111-0000-0000-0000-000000000002', 'parent', 'E2E 동의테스트 학부모', null);
+
+insert into parents (id, referral_code, location) values
+  ('eeee1111-0000-0000-0000-000000000002', 'ALTON-E2ECONSENT', 'E2E fixture');
+
+insert into students (id, grade, status, credit_balance, school_name, sat_score, gpa, gpa_scale, target_colleges, intended_majors, profile_completed_at) values
+  ('eeee1111-0000-0000-0000-000000000001', '10학년', 'active', 14,
+    '서울국제학교', 1350, 3.7, '4.0', array['Stanford University'], array['Computer Science'], now());
+
+insert into households (id, primary_guardian_id, billing_currency) values
+  ('eeee1111-0000-0000-0000-000000000099', 'eeee1111-0000-0000-0000-000000000002', 'USD');
+
+insert into household_members (household_id, profile_id, role, relation, is_primary) values
+  ('eeee1111-0000-0000-0000-000000000099', 'eeee1111-0000-0000-0000-000000000002', 'guardian', '모', true);
+
+insert into household_members (household_id, profile_id, role, is_primary) values
+  ('eeee1111-0000-0000-0000-000000000099', 'eeee1111-0000-0000-0000-000000000001', 'child', true);
