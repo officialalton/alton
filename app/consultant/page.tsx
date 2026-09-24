@@ -10,7 +10,12 @@ import ConsultantShell from "./ConsultantShell";
 //
 // Phase 1(2026-09-22 스펙) — "New assignments"(연락 필요한 배정 요청)를
 // Home에 함께 보여준다. Schedule/자동 이메일은 Phase 2.
-export default async function ConsultantHomePage() {
+export default async function ConsultantHomePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ tab?: string }>;
+}) {
+  const { tab } = await searchParams;
   const { user, profile, supabase } = await requireUser();
   const [students, endedStudents, assignedConsultations] = await Promise.all([
     loadMyAssignedStudents(supabase, user.id),
@@ -24,6 +29,7 @@ export default async function ConsultantHomePage() {
       students={students}
       endedStudents={endedStudents}
       assignedConsultations={assignedConsultations}
+      initialTab={tab}
     />
   );
 }

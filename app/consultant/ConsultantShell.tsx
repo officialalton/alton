@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { logout } from "@/app/login/actions";
 import { getRoadmapForStudent } from "@/lib/roadmap/actions";
 import type { RoadmapData } from "@/lib/roadmap/types";
@@ -84,18 +85,39 @@ const WEEKDAY_LABELS = ["일", "월", "화", "수", "목", "금", "토"];
 // 컨설턴트 포지션(2026-09-22, 가볍게 시작) — 담당 학생 목록 + 로드맵(쓰기),
 // 신규 배정 요청(스펙 §Screen Scope "New assignments"), 본인 가능시간(Schedule,
 // Phase 2) 세 화면. 스케줄링 링크 이메일 발송·자동배정은 아직 Phase 2 후속.
+const NAV_IDS: NavId[] = ["students", "assignments", "schedule", "documents", "profile", "settlement", "staff-messages", "college-explore"];
+
 export default function ConsultantShell({
   consultantName,
   students,
   endedStudents,
   assignedConsultations,
+  initialTab,
 }: {
   consultantName: string;
   students: ConsultantStudent[];
   endedStudents: EndedConsultantStudent[];
   assignedConsultations: IntakeConsultation[];
+  initialTab?: string;
 }) {
-  const [nav, setNav] = useState<NavId>("assignments");
+  const router = useRouter();
+  const validNavIds = useMemo(() => NAV_IDS, []);
+  const [nav, setNav] = useState<NavId>(
+    validNavIds.includes(initialTab as NavId) ? (initialTab as NavId) : "assignments"
+  );
+  // 2026-09-10 ParentShell과 같은 결함(포털 내비게이션 결함 — 뒤로가기가
+  // 포털 밖 랜딩까지 건너뜀)이 컨설턴트 포털에도 있었다 — nav가 URL과
+  // 동기화되지 않아 탭 전환이 히스토리 항목을 만들지 않았기 때문이다.
+  // ParentShell과 동일하게 URL(?tab=)에 push하고, 뒤로/앞으로가기로 바뀐
+  // initialTab을 다시 반영한다.
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setNav(validNavIds.includes(initialTab as NavId) ? (initialTab as NavId) : "assignments");
+  }, [initialTab, validNavIds]);
+  function selectNav(id: NavId) {
+    setNav(id);
+    router.push(`?tab=${id}`, { scroll: false });
+  }
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [selectedEndedId, setSelectedEndedId] = useState<string | null>(null);
   const [studentsSubTab, setStudentsSubTab] = useState<"active" | "ended">("active");
@@ -142,7 +164,7 @@ export default function ConsultantShell({
         </div>
         <button
           onClick={() => {
-            setNav("assignments");
+            selectNav("assignments");
             setSelectedId(null);
           }}
           aria-current={nav === "assignments" ? "page" : undefined}
@@ -165,7 +187,7 @@ export default function ConsultantShell({
         </button>
         <button
           onClick={() => {
-            setNav("students");
+            selectNav("students");
             setSelectedId(null);
             setSelectedEndedId(null);
           }}
@@ -179,7 +201,7 @@ export default function ConsultantShell({
         </button>
         <button
           onClick={() => {
-            setNav("schedule");
+            selectNav("schedule");
             setSelectedId(null);
           }}
           aria-current={nav === "schedule" ? "page" : undefined}
@@ -192,7 +214,7 @@ export default function ConsultantShell({
         </button>
         <button
           onClick={() => {
-            setNav("documents");
+            selectNav("documents");
             setSelectedId(null);
           }}
           aria-current={nav === "documents" ? "page" : undefined}
@@ -205,7 +227,7 @@ export default function ConsultantShell({
         </button>
         <button
           onClick={() => {
-            setNav("profile");
+            selectNav("profile");
             setSelectedId(null);
           }}
           aria-current={nav === "profile" ? "page" : undefined}
@@ -218,7 +240,7 @@ export default function ConsultantShell({
         </button>
         <button
           onClick={() => {
-            setNav("settlement");
+            selectNav("settlement");
             setSelectedId(null);
           }}
           aria-current={nav === "settlement" ? "page" : undefined}
@@ -231,7 +253,7 @@ export default function ConsultantShell({
         </button>
         <button
           onClick={() => {
-            setNav("staff-messages");
+            selectNav("staff-messages");
             setSelectedId(null);
           }}
           aria-current={nav === "staff-messages" ? "page" : undefined}
@@ -244,7 +266,7 @@ export default function ConsultantShell({
         </button>
         <button
           onClick={() => {
-            setNav("college-explore");
+            selectNav("college-explore");
             setSelectedId(null);
           }}
           aria-current={nav === "college-explore" ? "page" : undefined}
