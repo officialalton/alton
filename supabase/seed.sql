@@ -347,3 +347,57 @@ insert into profiles (id, role, name, phone, date_of_birth) values
 insert into students (id, grade, status, credit_balance, school_name, sat_score, gpa, gpa_scale, target_colleges, intended_majors, profile_completed_at) values
   ('eeee2222-0000-0000-0000-000000000001', '10학년', 'active', 14,
     '서울국제학교', 1350, 3.7, '4.0', array['Stanford University'], array['Computer Science'], now());
+
+-- e2e/r4-purchase-flow.spec.ts 전용 — 이 스펙은 지훈/이서아(ACCOUNTS.student
+-- 계열)의 contracts 행을 직접 만들었다 지웠다 해서(active 계약 유무로 구매
+-- 자격을 가른다) r5-subject-enrollment-flow.spec.ts/m4-trial-to-regular-golden-path.spec.ts
+-- 등 같은 학생의 계약 상태를 가정하는 다른 스펙과 경합할 수 있었다.
+-- 부모 1 + 자녀 2(자격 있음/없음)로 완전히 분리한다.
+insert into auth.users (
+  instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change_token_new, email_change,
+  email_change_token_current, phone_change, phone_change_token, reauthentication_token
+) values
+  ('00000000-0000-0000-0000-000000000000', 'eeee3333-0000-0000-0000-000000000001', 'authenticated', 'authenticated',
+    'e2e-purchase-parent@example.com', crypt('alton-dev-1234', gen_salt('bf')), now(),
+    '{"provider":"email","providers":["email"]}', '{}', now(), now(), '', '', '', '', '', '', '', ''),
+  ('00000000-0000-0000-0000-000000000000', 'eeee3333-0000-0000-0000-000000000002', 'authenticated', 'authenticated',
+    'e2e-purchase-eligible-child@example.com', crypt('alton-dev-1234', gen_salt('bf')), now(),
+    '{"provider":"email","providers":["email"]}', '{}', now(), now(), '', '', '', '', '', '', '', ''),
+  ('00000000-0000-0000-0000-000000000000', 'eeee3333-0000-0000-0000-000000000003', 'authenticated', 'authenticated',
+    'e2e-purchase-ineligible-child@example.com', crypt('alton-dev-1234', gen_salt('bf')), now(),
+    '{"provider":"email","providers":["email"]}', '{}', now(), now(), '', '', '', '', '', '', '', '');
+
+insert into auth.identities (
+  id, provider_id, user_id, identity_data, provider, last_sign_in_at, created_at, updated_at
+)
+select gen_random_uuid(), u.id::text, u.id, jsonb_build_object('sub', u.id::text, 'email', u.email), 'email', now(), now(), now()
+from auth.users u
+where u.id in ('eeee3333-0000-0000-0000-000000000001', 'eeee3333-0000-0000-0000-000000000002', 'eeee3333-0000-0000-0000-000000000003');
+
+insert into profiles (id, role, name, phone, date_of_birth) values
+  ('eeee3333-0000-0000-0000-000000000002', 'student', 'E2E 구매테스트 자녀(자격O)', null, (now() - interval '16 years')::date),
+  ('eeee3333-0000-0000-0000-000000000003', 'student', 'E2E 구매테스트 자녀(자격X)', null, (now() - interval '17 years')::date);
+
+insert into profiles (id, role, name, phone) values
+  ('eeee3333-0000-0000-0000-000000000001', 'parent', 'E2E 구매테스트 학부모', null);
+
+insert into parents (id, referral_code, location) values
+  ('eeee3333-0000-0000-0000-000000000001', 'ALTON-E2EPURCHASE', 'E2E fixture');
+
+insert into students (id, grade, status, credit_balance, school_name, sat_score, gpa, gpa_scale, target_colleges, intended_majors, profile_completed_at) values
+  ('eeee3333-0000-0000-0000-000000000002', '10학년', 'active', 14,
+    '서울국제학교', 1350, 3.7, '4.0', array['Stanford University'], array['Computer Science'], now()),
+  ('eeee3333-0000-0000-0000-000000000003', '11학년', 'active', 8,
+    '서울국제학교', 1400, 3.8, '4.0', array['MIT'], array['Physics'], now());
+
+insert into households (id, primary_guardian_id, billing_currency) values
+  ('eeee3333-0000-0000-0000-000000000099', 'eeee3333-0000-0000-0000-000000000001', 'USD');
+
+insert into household_members (household_id, profile_id, role, relation, is_primary) values
+  ('eeee3333-0000-0000-0000-000000000099', 'eeee3333-0000-0000-0000-000000000001', 'guardian', '모', true);
+
+insert into household_members (household_id, profile_id, role, is_primary) values
+  ('eeee3333-0000-0000-0000-000000000099', 'eeee3333-0000-0000-0000-000000000002', 'child', true),
+  ('eeee3333-0000-0000-0000-000000000099', 'eeee3333-0000-0000-0000-000000000003', 'child', false);

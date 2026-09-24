@@ -1,6 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { test, expect } from "@playwright/test";
-import { ACCOUNTS, loginAs } from "./helpers";
+import { loginAs } from "./helpers";
 
 // R4 — 보호자 "수업권 구매" 플로우. 실제 Stripe 결제 완료(성공 리다이렉트)까지는
 // 검증하지 않는다(실제 Stripe API 호출 여부는 STRIPE_SECRET_KEY에 달려 있고, 이
@@ -8,16 +8,18 @@ import { ACCOUNTS, loginAs } from "./helpers";
 // createEntitlementCheckoutSession 서버 액션이 Stripe 호출 "이전"에 실제로
 // 만드는 것(purchases 행 + 가격/정책 스냅샷)이 정확한지를 psql로 검증한다.
 //
-// 격리된 고정 fixture만 쓴다(account-lifecycle/account-merge.spec.ts가 쓰는
-// 공유 전역 seed 패턴은 문서화된 flaky 이슈가 있어 여기서는 쓰지 않는다) —
-// 이 파일은 기존 household(aabbccdd-...0001, 보호자 김민지)의 두 자녀
-// (지훈/이서아)에 대해 매 테스트 시작 시 자기 자신의 contracts 행만 직접
-// 세팅/정리한다.
+// 2026-09-23 — 원래 기존 household(aabbccdd-...0001, 보호자 김민지)의 두
+// 자녀(지훈/이서아)를 그대로 썼는데, "격리된 fixture만 쓴다"는 원래 의도와
+// 달리 정작 contracts 행은 그 공용 학생들 위에 직접 만들었다 지웠다 했다 —
+// r5-subject-enrollment-flow.spec.ts/m4-trial-to-regular-golden-path.spec.ts
+// 등 같은 학생의 계약 상태를 가정하는 다른 스펙과 fullyParallel 아래 경합할
+// 수 있었다. 이제 진짜로 이 스펙 전용 부모+자녀2로 분리한다.
 
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
-const HOUSEHOLD_ID = "aabbccdd-0000-0000-0000-000000000001";
-const ELIGIBLE_CHILD_ID = "cccccccc-0000-0000-0000-000000000001"; // 지훈
-const INELIGIBLE_CHILD_ID = "cccccccc-0000-0000-0000-000000000002"; // 이서아 — active 계약 없음
+const E2E_PARENT = "e2e-purchase-parent@example.com";
+const HOUSEHOLD_ID = "eeee3333-0000-0000-0000-000000000099";
+const ELIGIBLE_CHILD_ID = "eeee3333-0000-0000-0000-000000000002"; // E2E 구매테스트 자녀(자격O)
+const INELIGIBLE_CHILD_ID = "eeee3333-0000-0000-0000-000000000003"; // E2E 구매테스트 자녀(자격X) — active 계약 없음
 
 function psql(sql: string): string {
   return execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-t", "-A", "-c", sql], {
@@ -43,7 +45,7 @@ function cleanup() {
 test.describe("R4 — 보호자 수업권 구매 플로우", () => {
   test.beforeAll(() => {
     cleanup();
-    // ELIGIBLE_CHILD_ID(지훈)에게만 active 계약을 만든다 — INELIGIBLE_CHILD_ID(이서아)는
+    // ELIGIBLE_CHILD_ID(자격O 자녀)에게만 active 계약을 만든다 — INELIGIBLE_CHILD_ID(자격X 자녀)는
     // 의도적으로 계약 없이 남겨 "구매 불가" 자격 검사를 검증한다.
     psql(
       `insert into contracts (household_id, child_id, status) values ('${HOUSEHOLD_ID}', '${ELIGIBLE_CHILD_ID}', 'active');`
@@ -77,20 +79,24 @@ test.describe("R4 — 보호자 수업권 구매 플로우", () => {
     });
 
     // 1. 보호자 로그인 → 수업권 구매 탭.
-    await loginAs(page, ACCOUNTS.parent);
+    // EntitlementsTab은 "현황"/"구매" 두 서브탭이 있고 기본값이 "현황"이라
+    // (app/parent/EntitlementsTab.tsx) 가격이 보이는 "구매" 서브탭으로
+    // 명시적으로 전환해야 한다 — 원래 테스트에 이 클릭이 빠져 있었다.
+    await loginAs(page, E2E_PARENT);
     await page.goto("/parent?tab=entitlements");
+    await page.getByRole("button", { name: "구매", exact: true }).click();
 
     // 2. 라이브 가격이 DB 값과 일치하는지 확인(하드코딩이 아니라 entitlement_product_versions 조회).
     await expect(page.getByText(expectedPriceText, { exact: false }).first()).toBeVisible();
 
-    // 3. 자격 있는 자녀(지훈)는 선택 가능, 자격 없는 자녀(이서아)는 비활성 + 사유 노출.
+    // 3. 자격 있는 자녀는 선택 가능, 자격 없는 자녀는 비활성 + 사유 노출.
     // ParentShell 상단에도 자녀 전환 버튼이 별도로 있어(같은 이름) "자녀 선택"
     // 섹션 안으로 범위를 좁힌다.
     const childPickerSection = page
       .locator("section")
       .filter({ has: page.getByRole("heading", { name: "자녀 선택" }) });
-    const eligibleBtn = childPickerSection.getByRole("button", { name: "지훈", exact: true });
-    const ineligibleBtn = childPickerSection.getByRole("button", { name: /이서아/ });
+    const eligibleBtn = childPickerSection.getByRole("button", { name: "E2E 구매테스트 자녀(자격O)", exact: true });
+    const ineligibleBtn = childPickerSection.getByRole("button", { name: /E2E 구매테스트 자녀\(자격X\)/ });
     await expect(eligibleBtn).toBeEnabled();
     await expect(ineligibleBtn).toBeDisabled();
     await expect(ineligibleBtn).toHaveText(/구매 불가/);
