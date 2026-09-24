@@ -5049,3 +5049,109 @@ notes에 병기.
    Boston College/Baylor/Penn State/Michigan/Iowa State/Ball State)는
    "일반적으로 가장 흔한 최소점수"를 단일값으로 넣지 않았음 — 필요 시
    과목별 세부 테이블 구조를 새로 설계하는 것이 정확할 것으로 판단됨.
+
+## 세션: 신규 학업/비용 지표 15개교 실수집 (verified_pilot 잔여분)
+
+### 방법
+1. `select u.name from universities u where u.data_collection_status=
+   'verified_pilot' and not exists (select 1 from
+   university_admission_metrics am where am.university_id=u.id and
+   am.metric_key='tuition_in_state') order by u.name;` 로 대상 학교 확인
+   (약 160개교 이상 남아있었음).
+2. 각 학교의 `university_source_urls`에 등록된 CDS 링크 우선 시도, 깨진
+   링크/Cloudflare 차단(Clemson)/xlsx 전용(Elon, Bowling Green)인 경우
+   WebSearch로 최신 CDS 직링크 재탐색. `curl -A "Mozilla/5.0 ..."`로
+   User-Agent를 지정해야 정상 다운로드되는 경우 다수(West Virginia,
+   Kansas State, Auburn HTML 섹션, Colorado State 등).
+3. `pdftotext -layout`으로 텍스트 추출 후 G(비용)/I(교수비율)/A4(학사
+   운영) 섹션 grep. PDF가 양식필드(AcroForm) 기반이라 pdftotext에 값이
+   안 잡히는 경우(George Mason 신판) `python3 + pypdf`로 필드값 직접
+   추출. xlsx 기반 CDS(Miami University)는 `openpyxl`로 시트별 파싱.
+   체크박스(A4 계열)가 텍스트로 안 잡히면 `pdftoppm`으로 해당 페이지를
+   렌더링해 Read 도구로 육안 확인(West Virginia, Montana).
+4. AP 학점 정책은 WebSearch로 각 대학 공식 registrar/admissions 페이지
+   확인 — 주(state) 단위 통일 정책(Kansas Regents, Illinois Public Act
+   99-0358, West Virginia 주법)이 있는 경우 `ap_min_score_required`
+   반영, 과목/단과대별로 갈리는 경우(Auburn/DePaul/JMU/GMU/Colorado
+   State/Wyoming) `ap_credit_accepted`만 반영.
+5. 각 학교마다 실제 사용한 CDS 직링크를 `university_source_urls`에
+   `source_type='common_data_set'`, `is_official=true`,
+   `status='approved'`로 신규 등록 후 그 id를 `source_url_id`로 사용.
+
+### 완료: 15개교 (총 133건 반영)
+
+| 학교 | 비용 AY | tuition(주내/주외) | fees | room | board | ratio | calendar | AP |
+|---|---|---|---|---|---|---|---|---|
+| East Carolina University | 2025-26 | $4,452 / $20,729 | $2,909 | $6,498 | $4,852 | 17:1 | semester | 가능, min 3(학위 25%/전공 50% 잔류학점 요건 별도) |
+| West Virginia University | 2024-25 | $8,688 / $27,192 | $1,416 | $8,490 | $6,092 | 19:1 | semester | 가능, WV주 통일 min 3(일부 전공 상향 가능) |
+| Auburn University | 2024-25 | $11,016 / $33,048(비거주자 $33,198) | $1,874 | $10,326 | $6,300 | 21:1 | semester | 가능, 단과대별 4~5점 상이(미반영) |
+| DePaul University | 2025-26(2026-27 비용) | $48,179 (사립 단일) | $900 | $12,477 | $8,289 | 17:1 | quarter(로스쿨만 semester) | 가능, 과목별 3~5점 상이(미반영) |
+| Kansas State University | 2024-25 | $10,243 / $27,590 | $978 | $5,900 | $5,370 | 19:1 | semester | 가능, Kansas Regents 주 통일 min 3 |
+| James Madison University | 2024-25 | $8,150 / $25,496 | $6,100 | 미기재(합산만) | 미기재 | 16.9:1 | semester | 가능, 과목별 3~4점 상이(미반영) |
+| George Mason University | 2024-25 | $14,220 / $38,688 | $3,828 | 미기재(합산만) | 미기재 | 16.2:1 | semester | 가능, 대부분 3점이나 영어 등 4점 요구(미반영) |
+| Colorado State University | 2024-25 | $11,093 / $33,432 | $2,681 | $7,460 | $9,080 | 17:1 | semester | 가능, 단일 공식 최소점수 미확인(미반영) |
+| Illinois State University | 2024-25 | $12,066 / $24,132 | $4,078 | $6,178 | $5,232 | 19:1 | semester | 가능, Illinois주법 통일 min 3 |
+| Miami University (Ohio) | 2025-26(2026-27 비용) | $17,191 / $40,713 | $1,328 | $10,594 | $6,560 | 16:1 | semester | 가능, 기본 min 3(과목별 4~5점 추가학점) |
+| University of New Hampshire | 2024-25 | $15,908 / $37,070 | $3,774 | $8,962 | $5,358 | 17:1 | semester | 가능, 기본 min 4(3점은 원칙 불인정, 과목별 예외) |
+| University of Montana | 2024-25 | $8,456 / $33,664 | 미기재 | 미기재(합산만) | 미기재 | 17.9:1 | semester | 가능, min 3(AP3/AP4/AP5 등급) |
+| University of Toledo | 2024-25 | $11,017 / $20,377(First-Year 기준) | $1,629 | $10,022 | $6,427 | 18:1 | semester | 가능, min 3 |
+| University of Wyoming | 2025-26 | $5,610 / $22,470 | $3,070 | $6,450 | $7,956 | 12.4:1 | semester | 가능, registrar 페이지 접속장애로 단일 최소점수 미확인(미반영) |
+| Utah State University | 2025-26 | $8,272 / $25,717 | $793 | 미기재(합산만) | 미기재 | 20:1 | semester | 가능, min 3 |
+
+국제학생 등록금이 별도 표기되지 않은 전원(공립대)은 non-resident/
+out-of-state 세율을 international에도 동일 적용하고 notes에 명시.
+DePaul(사립)은 거주지 구분 없는 단일 등록금이라 3건 모두 동일 금액.
+
+### 반영하지 않은 것 (추측 금지 원칙)
+- room_cost/board_cost: JMU/GMU/Montana/Utah State는 CDS G1에 "Food and
+  Housing(합산)"만 있고 Housing Only/Food Only 개별 항목이 비어있어
+  미반영.
+- required_fees: Montana는 CDS G1 Required Fees 필드 자체가 공란이라
+  미반영.
+- ap_min_score_required: Auburn/DePaul/JMU/GMU/Colorado State/Wyoming
+  6개교는 과목/단과대별로 값이 갈리거나(또는 공식 페이지 접속 장애로)
+  단일 공식 수치를 찾지 못해 미반영, notes에 사유 명시.
+- net_price_average: 15개교 전원 미반영(CDS에 실제 평균 수치 없음).
+- Elon University/Bowling Green State University: CDS가 xlsx 전용으로만
+  공개되어 있었으나 시도 결과 확인 실패 또는 스킵(Elon은 xlsx 위치만
+  확인, 실제 파싱은 다음 세션으로 이월). Clemson University는
+  open.clemson.edu가 Cloudflare 챌린지로 curl 차단되어 스킵. University
+  of North Dakota는 CDS 직링크를 페이지에서 찾지 못해 스킵.
+
+### 다운로드 관련 팁 (다음 세션 참고)
+- 다수 학교 사이트가 기본 curl User-Agent를 차단함 —
+  `curl -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"`
+  지정 시 정상 다운로드(West Virginia, Kansas State, Auburn, Colorado
+  State, Illinois State, Miami, UNH, Montana, Toledo, Wyoming, Utah
+  State 전부 이 방식 사용).
+- Auburn은 PDF 대신 학교 자체 HTML 섹션 페이지(`.../common-data-set/
+  2024/section-g.html` 등)로 제공 — `re.sub('<[^>]+>',' ',html)`로 텍스트
+  추출.
+- George Mason 신판(2025-26) CDS는 AcroForm 필드가 pdftotext로 안 잡혀
+  `pypdf`의 `get_fields()`로 값 추출(구판 2024-25는 정상 추출됨, 이번엔
+  구판 사용).
+- Miami University는 xlsx로만 제공 — `openpyxl`로 시트별(`CDS-A`,
+  `CDS-G`, `CDS-I` 등) 파싱, 정상 작동 확인.
+- 체크박스 계열 문항(A4 학사력 등)이 텍스트 추출로 안 잡히면
+  `pdftoppm -f N -l N -r 150 -png`로 해당 페이지만 렌더링 후 Read
+  도구로 육안 확인.
+
+### 검증
+- 삽입 전/후 학교별 group by로 15개교 각 7~10건, 총 133건 반영 확인.
+- `git status --short`로 이번 세션이 `docs/` 외 어떤 소스 파일도 건드리지
+  않았음을 확인. `university_majors`/`university_essay_prompts`는 전혀
+  건드리지 않음.
+- `npx supabase db push --linked` / `vercel deploy` 미실행. 로컬 psql
+  direct insert만 사용, 마이그레이션 파일 작성 없음.
+
+### 다음 세션 인계
+1. Elon University, Bowling Green State University(xlsx CDS 위치는
+   확인됨, 파싱 미완료), Clemson University(Cloudflare 차단),
+   University of North Dakota(직링크 미발견)는 이번 세션에서 스킵 —
+   재시도 필요.
+2. ap_min_score_required를 과목별 상이로 스킵한 6개교(Auburn/DePaul/
+   JMU/GMU/Colorado State/Wyoming)는 과목별 세부 테이블이 없는 한 단일
+   값 반영이 어려움 — 구조 개선 필요 시 별도 설계 검토.
+3. 여전히 verified_pilot 학교 상당수가 신규 지표 미보유 상태 —
+   동일 방식(User-Agent 지정 curl + pdftotext/pypdf/openpyxl) 계속 활용
+   권장.
