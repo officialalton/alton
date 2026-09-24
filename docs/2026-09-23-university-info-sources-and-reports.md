@@ -3243,3 +3243,120 @@ university_essay_prompts: 34행                                                 
 5. IUPUI 출처 확보, Catholic University of America/Miami University
    Ohio(unconfirmed) 재조사는 이번 세션에서 손대지 못했다 — 34차 최우선
    과제로 이월.
+
+## 34차 세션 (2026-09-23, 브라우저 자동화 전환)
+
+### 0. 전제
+세션 시작 시 psql 재확인: `verified_pilot 142 / sources_pending_review 34 /
+unconfirmed 24`(33차 종료값과 일치). 이번 세션은 33차 인계사항대로 curl 대신
+`mcp__Claude_Browser__*` 브라우저 자동화 툴을 처음부터 사용했다. 로컬 DB
+리셋(`supabase db reset --local`, `supabase stop` 등), `npx supabase db push
+--linked`, `vercel deploy`는 전혀 실행하지 않았다(세션 종료 시 `git status`로
+마이그레이션 파일 무변동 확인).
+
+### 1. CDS 신규 실수집 — 결과: 3개교 성공 (Pepperdine, North Dakota State,
+### New Jersey Institute of Technology) — 전부 브라우저 자동화로 뚫음
+- **Pepperdine University**: IR 페이지(`pepperdine.edu/oie/institutional-
+  research/common-data-set.htm`)를 브라우저로 열어 Google Drive에 호스팅된
+  CDS 2024-2025 PDF의 실제 파일 링크(`drive.google.com/file/d/...`)를
+  찾아냄 → 이 URL은 curl(`drive.google.com/uc?export=download&id=...`)로도
+  바로 통과됨. C1(지원 11,526/합격 7,245/등록 843), C9(SAT/ACT 25·50·75),
+  C12(GPA 평균 3.61), B22(재학유지율 88%), 6년 졸업률(83%, Fall 2018
+  cohort), 대기자명단, G1(등록금 $71,860, 2025-2026학년도) 등 32개 지표
+  `official`로 반영. `data_collection_status='verified_pilot'` 갱신.
+- **North Dakota State University**: 구글 검색으로 실제 IR 하위 경로
+  (`ndsu.edu/data-services-strategic-analytics/institutional-reports/
+  common-data-set`)를 찾아 브라우저로 열람 → xlsx 직링크
+  (`.../fileadmin/oira/Common_Data_Set/NDSU_CDS_2024-2025.xlsx`)를 확보,
+  curl로 바로 다운로드 성공(정적 파일이라 Cloudflare 차단 없음). `openpyxl`로
+  CDS-C/B 시트를 파싱해 38개 지표(SAT/ACT 전 영역, GPA 3.52, top10% 17.27%,
+  지원 7,228/합격 6,864/등록 2,197, 재학유지율 78.42%, 6년 졸업률 63.89%)
+  반영. G(학비) 시트는 값이 비어 있어(원문 자체 미기재로 추정) 미반영,
+  추측 채우기 하지 않음.
+- **New Jersey Institute of Technology**: 구글 검색으로 공식 페이지
+  `njit.edu/oie/external-surveys`를 찾아 브라우저로 열람 →
+  xlsx 직링크(`CDS_2024-2025_v12.xlsx`) 확보, curl 성공. 39개 지표(SAT/ACT,
+  GPA 3.73, 지원 15,607/합격 10,156/등록 1,746, 대기자명단, 재학유지율
+  90%, 6년 졸업률 72.84%, 등록금 in-state $16,334) 반영.
+- **시도했으나 실패/보류**: Clemson University(`open.clemson.edu/cds/`) —
+  브라우저 navigate로는 Cloudflare 챌린지를 통과해 아티클 페이지까지는
+  열렸으나, 실제 PDF(`cgi/viewcontent.cgi?...`)는 Chrome 내장 PDF 뷰어로
+  렌더링되어 텍스트 추출 불가(`get_page_text` 빈 값, network 응답도
+  716바이트로 실제 파일이 아님) — 이번 세션 방식으로는 미해결, 다음 세션
+  숙제로 이월. Mississippi State University — 공식 아카이브
+  (`scholarsjunction.msstate.edu/oire-common-dataset`)가 2015년까지만
+  게시돼 있어 최신 CDS 없음, 미착수. Bowling Green State University — CDS가
+  Tableau Public 대시보드로만 제공되어(JS 렌더링) 이번 세션에서는 미시도.
+  Andrews University, Morgan State University — 공식 사이트에 CDS 게시
+  페이지 자체를 찾지 못함(IR 페이지에 CDS 링크 없음).
+
+### 2. 학과(전공) 보완 — 결과: 8개교 성공 (전부 브라우저로 공식 카탈로그
+### 페이지를 직접 읽어 실제 전공명 추출, 목표 8개교 달성)
+모두 정적 HTML(또는 브라우저 렌더링 후 고정된 표)로 제공되는 공식
+학사요람/전공 목록 페이지를 `navigate` + `get_page_text`로 통째로 읽어
+Bachelor's 레벨 항목만 추려 반영(additive, 기존 데이터 삭제 없음):
+- **New Jersey Institute of Technology**: `catalog.njit.edu/programs/` →
+  54개 학사 전공
+- **George Mason University**: `catalog.gmu.edu/programs/` (Programs A-Z,
+  스크롤 없이 전체 노출) → 67개 학사 전공(BA/BS/BAS 등)
+- **Texas Tech University**: `ttu.edu/programs/` (Bachelor's 필터,
+  RESULTS-99) → 99개 학사 전공(degree_level은 세부 학위(BA/BS) 미기재,
+  이름만 확정 반영 — 추측 방지)
+- **Syracuse University**: `coursecatalog.syracuse.edu/academic-offerings/`
+  (A-Z 전체 목록) → 125개 학사 전공
+- **Howard University**: `howard.edu/fields-of-study`(탭 클릭 후 노출) →
+  45개 학사 전공
+- **Loyola Marymount University**: `bulletin.lmu.edu/academic-degrees-
+  programs/programs-by-type/`(Bachelor's Degrees 섹션 확장) → 56개 학사
+  전공
+- **Rensselaer Polytechnic Institute**: `catalog.rpi.edu`의 "Degrees
+  Offered" 표(학위종류 컬럼에서 B.S./B.Arch. 포함 항목만 필터) → 36개
+  학사 전공
+- **Loyola University Chicago**: `catalog.luc.edu/programs/`(Programs A-Z
+  전체) → 101개 학사 전공(괄호 안 학위코드가 BA/BS/BBA/BSEd/BSW인 것만
+  필터, Minor/Certificate/대학원 과정 제외)
+
+시도했으나 미완료: Rowan University(공식 URL 다수 시도했으나 404),
+Ball State University(리다이렉트로 실패), Georgia State University(공식
+목록이 12페이지 필터형 UI라 시간 내 전량 수집 불가), Stevens Institute of
+Technology(Program Finder가 학위 레벨 구분 없이 전공명만 나열돼 학부만
+분리 불가 — 추측 방지로 미반영), Mississippi State/Bowling Green/Andrews/
+Morgan State(위 1번과 동일 이유로 미시도).
+
+### 3. IUPUI 출처 확보 / unconfirmed 2개교 재시도 — 결과: 이번에도 미착수
+CDS 3개교 + 학과 8개교 확보에 시간을 집중 배분했다. Catholic University of
+America, Miami University(Ohio) unconfirmed 재조사, IUPUI 출처 확보는
+이번 세션에서도 손대지 못했다 — 35차 최우선 과제로 재이월.
+
+### 4. 최종 카운트 (세션 종료, psql 직접 확인)
+```
+data_collection_status: verified_pilot 145(+3) / sources_pending_review 31(-3) / unconfirmed 24(변동없음)
+university_admission_metrics: 3,490행 (+109, Pepperdine 32 + NDSU 38 + NJIT 39)
+university_majors: 4,735행 (+583, 8개교)
+university_source_urls: 406행 (+3, 신규 확보한 실제 CDS 파일 URL)
+university_essay_prompts: 34행 (변동 없음)
+```
+
+### 검증
+- 마이그레이션 파일 신규/변경 없음(`ls supabase/migrations` 확인, 20261700000000
+  이후 확장 필드에는 데이터 삽입 전혀 하지 않음 — 지시 4번 규칙 준수).
+- `npx supabase db push --linked`, `vercel deploy` 실행하지 않음.
+- 로컬 DB 리셋 관련 명령 전혀 실행하지 않음.
+- 모든 admission metric은 CDS 원문에서 cohort(enrolled/admitted/applicant)를
+  직접 확인 후 저장(추측 없음), notes에 CDS 연도·섹션·Fall 코호트 명시.
+
+### 다음 세션 인계 (35차용, 최우선)
+1. **로컬 DB 리셋 금지 규칙 재강조.**
+2. IUPUI 출처 확보 + Catholic University of America/Miami University
+   Ohio(unconfirmed) 재조사 — 두 세션 연속 이월된 최우선 과제.
+3. Clemson University CDS: 브라우저로 아티클 페이지까지는 열리나
+   `viewcontent.cgi` PDF가 Chrome 내장 뷰어라 텍스트 추출 실패. 시도해볼 것:
+   `read_network_requests`에서 실제 PDF 바이트 응답을 별도 requestId로
+   찾거나, PDF.js 텍스트 레이어를 DOM에서 읽거나, 다른 UA/Referer 조합으로
+   curl 재시도.
+4. Oklahoma State University(`ira.okstate.edu/cds`)도 Cloudflare 대상으로
+   이번 세션에서 미시도 — 브라우저 navigate 우선 시도.
+5. 학과 미착수 남은 school 중 Georgia State University는 12페이지 필터형
+   UI라 페이지네이션을 여러 번 읽어야 함(각 페이지 `get_page_text` 반복).
+6. 200개교 완료 후 UI 확장 지시(CDS 전체 정보 노출)는 아직 손대지 않음 —
+   200개교 완료 전까지 매 세션 인계에 계속 전달.
