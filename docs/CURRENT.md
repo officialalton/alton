@@ -309,7 +309,55 @@
 - **Smart Notes 학생 열람 정책 반전(2026-09-16, 제품 오너 지시)**: 기존 정책("고객에게 원본을 직접 보여주지 않는다", `20261025000000`)을 뒤집어 **정규 수업(계정 생성 이후)에 한해 학생·보호자가 회의록 원본을 열람(view-only)** 할 수 있게 함(마이그레이션 `20261388`). 첫 상담(consultations)은 계속 관리자 전용 — 이 반전 대상이 아님. `session_smart_notes`에 학생·보호자 SELECT RLS 추가, 실제 Drive 문서 reader 권한 부여는 기존 `session_drive_tasks` 큐(`DRIVE_ARTIFACTS_ALLOW_REAL_WRITES` 게이트 재사용)로 비동기 처리(`grantSmartNotesReaderPermission`). **주의**: 이 웹훅(`app/api/webhooks/workspace-events/route.ts`)은 아직 실제 Pub/Sub 구독이 없어(코드 상단 주석 참고) 실제 트래픽으로 발동한 적이 없다 — 큐에 넣는 로직만 완성, 실제 동작은 구독 생성 후 확인 필요. **미완료**: 학생/보호자 포털에 "미팅록 보기" 링크 UI(백엔드 권한만 구현), 동의서 정책 갱신(제품 오너가 계약 문안은 직접 수정 예정 — 콘센트 UI 구조는 아직 손대지 않음), 수업 리뷰 화면 자체의 재설계(5단계 버튼+선택적 텍스트, 교사 본인 리뷰 열람, AI 요약 제거)는 별도 착수 필요.
 - 미결(제품 오너): 학생이 푼 것 실시간 배지 / 선택지 자체가 그래프 4개인 문항(선택지 figure) / 이미지가 있는 문항의 AI 생성(현재 AI는 데이터 도형만) / 기한·알림·AI 과제 생성(후속).
 - 다듬을 것: ~~`CompositionPanel` 전체 새로고침~~ ~~PDF 교재 행 키워드 이름~~ ~~SessionShell·ProblemBankTab lint 오류~~(완료 2026-09-15). 열린 항목: 통합 테스트 병렬 격리(예약 fixture·append-only 전역 count — 테스트 인프라 결함, 제품 결함 아님) / `session_homework_attempts`는 삭제·마이그레이션 없이 읽기 전용 보존, 보존·삭제 정책은 v3 과제 흐름 안정화 뒤 별도 결정.
-- 오픈 전 blocker(변화 없음, 아카이브 참고): 실제 세금 계산, 실제 이메일 발송, Workspace 위임 계정 분리, SECURITY DEFINER anon 권한 감사, E2E 전용 fixture, `mark_expired_invites` cron.
+- **SECURITY DEFINER·anon 권한 감사(2026-09-23, 1차 완료)**: `pg_proc`에서 SECURITY
+  DEFINER 함수 311개 전수 조회 → anon 실행권한(PUBLIC 포함) + 내부 인가검사
+  부재 조합으로 51개 후보 도출 → 실제 앱 호출부(`app/**`) 대조로 압축한 결과
+  **실제 결함 2건 확인**(둘 다 anon role로 직접 재현해 exploit 성립 확인):
+  (1) `find_possible_duplicate_consultations(p_email, p_phone, p_exclude_id)` —
+  anon이 임의 이메일/전화번호로 호출하면 `consultations` 테이블 전체 컬럼(연락처·
+  상담 내용 등 PII)을 그대로 반환. 유일한 앱 호출부(`app/admin/consultation-actions.ts`
+  `findDuplicateConsultationCandidates`)는 `requireAdmin()` 이후 service_role로만
+  호출하므로 anon/authenticated 권한은 순수 과잉이었음.
+  (2) `hold_entitlement(...)` — 내부에 호출자 인가 검사가 전혀 없어 child_id/
+  reservation_id만 알면 타인의 수업권을 소모시킬 수 있었음. 시그니처 변경 이력
+  때문에 **오버로드 2개**(4-인자 레거시 + 5-인자 현재)가 각각 별도 ACL을 갖고
+  있었고 둘 다 PUBLIC(=X) 포함 과잉 권한 보유. 유일한 호출부(`app/admin/entitlement-actions.ts`
+  `holdEntitlementForReservation`)도 `requireAdmin()`+service_role만 사용.
+  추가로 `mark_expired_invites()`(is_admin() 내부검사는 있으나 아직 앱에서 미호출)의
+  불필요한 anon/authenticated 권한도 함께 제거(방어 심층화).
+  **수정**: `supabase/migrations/20261900000001~3` 3건으로 anon/authenticated/PUBLIC
+  EXECUTE 권한 회수, service_role/postgres만 유지. **검증**: 수정 전 anon role로
+  직접 SQL 실행해 exploit 재현(전체 PII 행 실제로 받아옴) → 수정 후 동일 호출이
+  `permission denied for function`으로 차단됨을 재확인, `has_function_privilege()`로
+  anon=false/authenticated=false(hold_entitlement)/service_role=true 3중 확인,
+  관련 단위 테스트(`consultation-actions.test.ts`/`entitlement-actions.test.ts`)
+  63개 전부 통과 확인. **영향받은 사용자 흐름**: 없음(관리자 전용 기능이었고
+  실제 호출 경로는 이미 service_role만 썼음 — 이번 수정은 "의도한 대로만 되게"
+  좁힌 것이지 기존 정상 흐름을 바꾼 것이 아님).
+  **미완료(2차 필요)**: 같은 전수 조회에서 PUBLIC(=X) 권한을 가진 SECURITY
+  DEFINER 함수가 85개 더 발견됨(대부분 `is_admin()`/`is_master_admin()`/`auth.uid()`
+  등 내부 인가검사가 있어 anon이 호출해도 예외로 막히는 것으로 확인했으나,
+  하나하나 실측 재현은 이번 1차 범위에서 다 못함) — 다음 라운드에서 나머지도
+  같은 방식(전수 실측 → 앱 호출부 대조 → PUBLIC/anon 권한 회수)으로 좁혀야 함.
+  또한 이번에 실제로 겪은 함정(시그니처를 바꾸며 CREATE OR REPLACE하면 새
+  오버로드가 별도 함수 객체·별도 ACL로 남고, 이미 적용된 마이그레이션 파일을
+  고쳐도 반영 안 되는 문제가 겹쳐 한 번에 안 끝나고 세 번에 나눠 고쳐야 했음)를
+  체크리스트화해 다음 라운드에 반영할 것.
+
+- **모바일 사이드바 반응형(2026-09-23, 완료)**: 컨설턴트 포털에서 모바일 폭에서도
+  사이드바가 항상 풀사이즈로 떠 있어 본문이 가로 스크롤되던 문제 — `app/consultant/ConsultantShell.tsx`에
+  `md:` 브레이크포인트로 사이드바를 드로어화(햄버거 버튼+오버레이+탭 시 자동
+  닫힘). 실제 375px 뷰포트로 재현 검증 완료. 다른 포털(관리자/선생님/학부모)
+  셸은 아직 손대지 않음 — 같은 패턴이면 각각 별도로 필요.
+
+- **university_source_urls 중복 정리(2026-09-23, 완료)**: 모바일 UAT 중 발견 —
+  non-prod에 `(university_id, url, source_type, cycle_year)` 완전 일치 중복
+  408건(858→450행) 적재돼 있던 것을 가장 이른 id만 남기고 정리. 데이터 수집
+  세션 쪽 로컬 DB도 같은 패턴 12건 확인·정리됨(595→583행).
+
+- 오픈 전 blocker(남은 것): 실제 세금 계산(설계만, 활성화 보류), 실제 이메일
+  발송(설계만, 비프로덕션 발송 차단 유지), Workspace 위임 계정 분리(설계만),
+  E2E 전용 fixture(다음 착수), `mark_expired_invites` cron 연결(다음 착수).
 
 ## 7. 관련 문서
 - **표준 렌더링 엔진**(승인됨, 템플릿 1 구현): `docs/2026-09-14-standard-rendering-engine-design.md` + 표본 `docs/assets/2026-09-14-render-samples/`. AI=의미 데이터만, ALTON 렌더러=조판, 검증 계층=거부. 좌표형 `geometry` 는 레거시(표시만, 공개 불가). 템플릿 1~7 완료(평행선·삼각형·좌표평면·표/데이터·원·사각형/다각형·입체) + 분류 모델. 다음: 좌표기하·복합 도형 → 그래프/도형 선택지 → 수식·로마숫자 선택지 Block.
