@@ -6086,3 +6086,77 @@ value_text로 선반영해둔 것을 확인해 중복 삽입하지 않았다.)
 - Memphis/UTK/Albany/Purdue/SIU Carbondale/Ohio University/Fordham 등은 403/404/
   SharePoint 임베드라 브라우저 로그인 세션 또는 다른 접근 경로 필요.
 - 여전히 verified_pilot 잔여 87개교.
+
+## 57차 세션 — university_admission_metrics/university_source_urls 전용, CDS PDF 실수집 (10개교 tuition_in_state 신규 확보)
+
+이번 세션은 병행 세션과의 충돌을 피하기 위해 `university_admission_metrics`/
+`university_source_urls`만 건드렸다(demographics/financial_aid_programs 미접촉).
+Brown/UVA/Memphis/UTK/Albany/Purdue는 브라우저 자동화(5분 한도) 시도 결과 UTK는
+irsa.utk.edu의 검색 결과 URL이 모두 404(구조 변경), 나머지는 시간 관계상
+WebSearch+curl 경로로 대체했다. 모든 INSERT는 `WHERE NOT EXISTS` 가드 사용,
+university_majors/university_essay_prompts/university_demographics/
+university_financial_aid_programs는 전혀 접촉하지 않음.
+
+### tuition_in_state 등 비용 지표 신규 확보 (10개교, CDS 2024-2025 원문 curl+pdftotext/pdftoppm 육안 확인)
+
+| 학교 | 등록금(주내/사립) | 등록금(주외) | 필수비 | 기숙사 | 식비 | 학생:교수 |
+|---|---|---|---|---|---|---|
+| University of Iowa | $9,565 | $31,653 | $2,057 | $9,180 | $4,700 | 16:1 |
+| Oregon State University | $12,675 | $37,860 | $2,577 | $12,768 | $5,400 | 17:1 |
+| Brigham Young University | $13,776(non-LDS)/$6,888(LDS) | — | $0 | 합산 $10,716(별도 미제공) | — | 22:1 |
+| University of Central Florida | $6,368 | $24,076 | $0 | $5,800 | $5,732 | 28.3:1 |
+| University of Miami | $63,456(사립) | — | $1,974 | $16,050 | $8,980 | 11:1 |
+| Idaho State University | $8,610 | $27,720 | $2,506 | $3,280 | $3,920 | 11:1 |
+| University of California, San Diego | $14,934(in-district) | $52,536 | $5,472 | 합산 $19,629(별도 미제공) | — | 미기재(원문 공란) |
+| University of California, Irvine | $13,602 | $51,204 | $2,852 | 합산 $19,653(별도 미제공) | — | 19:1 |
+| University of California, Santa Cruz | $13,602 | $51,204 | $2,901 | — | — | 22:1 |
+| University of California, Riverside | $13,602 | $51,204 | $3,056 | 합산 $20,416(별도 미제공) | — | 22.3:1 |
+
+### student_faculty_ratio만 추가 확보 (tuition은 원문에 미기재, 4개교)
+
+- Clark University: 8.5:1 (G1은 "2025-2026 costs not available" 체크, 비용 공란)
+- Middle Tennessee State University: 17:1 (G1 필드가 렌더링상 전부 공란으로 확인,
+  실제로 미기재 상태로 판단)
+- University of Massachusetts Lowell: 17:1 (이 CDS 편집본은 G(연간비용) 섹션
+  자체가 통째로 누락되어 있음 — F에서 바로 H로 이어짐)
+- University of New Mexico: 이미 병행 세션이 15:1(Fall 2024, cycle_year 2024/2025/2026)
+  선반영 완료 확인 — 중복 삽입하지 않음
+
+### 확보 실패 (URL 소스가 404/차단, 추측 금지)
+
+- University of Georgia: `oir.uga.edu/_resources/files/cds/UGA_CDS_2024-2025.pdf`
+  WebSearch 결과 URL이 서버에서 404(nginx) 반환 — 실제 경로가 다른 것으로 추정,
+  다음 세션에서 `oir.uga.edu` 페이지 직접 탐색 필요.
+- Clemson University: `open.clemson.edu`가 Cloudflare 챌린지("Just a moment...")로
+  curl 차단.
+- Georgia Institute of Technology: WebSearch가 제시한 `irp.gatech.edu/files/CDS/...`
+  경로가 실제로는 404(Drupal 404 서브리퀘스트 확인) — 최신 URL 재탐색 필요.
+- University of Tennessee, Knoxville: WebSearch가 제시한 `irsa.utk.edu` PDF URL
+  2건 모두 404 — 지시사항 대상이었으나 이번 세션에서도 미해결.
+- University of Georgia 외 UGA/Clemson/Georgia Tech/UTK는 모두 "URL 후보는
+  찾았지만 실제 파일이 이동/차단된" 케이스로, Brown/Memphis/Albany/Purdue와는
+  다른 종류의 실패임을 구분해 기록함.
+
+### 검증
+
+- `select count(*) from universities u where u.data_collection_status=
+  'verified_pilot' and not exists (select 1 from university_admission_metrics am
+  where am.university_id=u.id and am.metric_key='tuition_in_state')` →
+  세션 시작 87개교 → 종료 시점 77개교(이번 세션 10개교 tuition_in_state 신규 확보).
+- 모든 INSERT는 `WHERE NOT EXISTS(...)` 가드 사용. UNM은 병행 세션의 기존 행을
+  확인 후 재삽입하지 않음(카운트 불일치 없음).
+- `git status --short` → 이번 세션이 `docs/` 외 어떤 파일도 건드리지 않음
+  확인(psql 직접 INSERT만 사용).
+- `npx supabase db push --linked`/`vercel deploy` 미실행, 마이그레이션 파일
+  작성 없음. Agent 툴로 하위 에이전트 spawn하지 않음.
+
+### 다음 세션 인계
+
+- University of Georgia/Georgia Tech/UTK: 공식 IR 페이지를 브라우저로 직접
+  열어 최신 CDS PDF 링크를 재탐색 필요(WebSearch가 제시한 URL이 서버 이전/
+  구조 변경으로 404).
+- Clemson: Cloudflare 챌린지 우회 위해 브라우저 자동화 필요.
+- Brown/UVA/Memphis/Albany/Purdue/SIU Carbondale/Ohio University/Fordham:
+  기존과 동일하게 미해결(이번 세션은 university_admission_metrics/
+  university_source_urls 전용이라 별도 시도 없음).
+- 여전히 verified_pilot 잔여 77개교(tuition_in_state 기준).
