@@ -7373,3 +7373,63 @@ essay_prompts 내 조건부/선택그룹 세부 행)**:
   `prompt_status='unconfirmed_current_year'`로 저장됨(CEA 2차 출처) — 가능하면 다음
   세션에서 각 대학 공식 Common App/Coalition 포털 문구와 대조해
   `confirmed_current_year`로 승격 검토.
+
+## 76차 세션 — university_essay_prompts 20개교 실입력 (CEA 소진 후 공식 페이지 직접 조사 전환)
+
+이전 세션 인계대로 CEA/제3자 인덱스에 의존하지 않고, 에세이 0건 106개교 중 20개교를
+대학 공식 admissions 페이지(일부는 뉴스/공지, 실패 시 검색 요약 보완)로 직접 조사해
+`university_essay_prompts`에 저장. cycle_year=2027(2026-27 지원 사이클) 기준.
+
+**핵심 발견**: "에세이 문항이 없다"는 것도 유효한 사실 정보로 취급해 기록함(이전
+세션은 "요건 없음" 확인 시 스킵했으나, 이번 세션은 명시적으로 `is_required=false`
+행을 저장). 또한 **직전 세션이 "요건 없음"으로 스킵했던 Rutgers University-New
+Brunswick은 실제로는 필수 에세이(Common App 250-650단어 또는 Rutgers 자체앱
+3,800자, 7개 프롬프트 중 택1/자유주제)를 요구함을 공식 페이지(admissions.rutgers.edu)
+로 확인 — 직전 세션의 스킵 판단은 오류였음. Kansas State University와 Arizona State
+University는 재확인 결과 일반 신입생 대상 필수 에세이가 없다는 이전 판단이 맞았음
+(각각 holistic review 대상자 한정 에세이 / Barrett Honors 한정 에세이만 존재).**
+
+**반영 학교 (20개교, 각 essay_prompts 1행 + source_urls 1행, 총 40행)**:
+
+| 대학 | prompt_status | 요약 |
+|---|---|---|
+| Arizona State University | confirmed | 일반 지원 에세이 불요구(Barrett Honors만 별도) |
+| Auburn University | confirmed | Personal Statement 선택 |
+| Bowling Green State University | confirmed | 에세이 불요구(Aviation 전공 제외) |
+| Colorado State University | confirmed | Common App 250-650단어 필수 |
+| Florida State University | confirmed | 에세이 필수(단어수 미명시) |
+| Georgia Institute of Technology | confirmed | 2026-27부터 자체 단답 폐지, Common App만 필수(공식 발표) |
+| Kansas State University | confirmed | 일반 불요구, Holistic Review 대상자만 |
+| Kent State University | confirmed | 일반 불요구(Honors College 제외) |
+| Louisiana State University | unconfirmed | Common App 경로 추정(LSU 자체 페이지엔 명시 없음) |
+| Miami University (Ohio) | unconfirmed | 공식 페이지 SSL 오류로 fetch 실패, 검색 요약 기반 |
+| Northeastern University | unconfirmed | 검색 요약 기반, 공식 재확인 필요 |
+| Ohio State University | confirmed | Common App만 필수(Morrill 장학금 제외) |
+| Oklahoma State University | unconfirmed | 공식 페이지 403으로 직접 fetch 실패 |
+| Oregon State University | unconfirmed | 검색 요약 기반 |
+| Rutgers University-New Brunswick | confirmed | 필수 에세이 확인(위 핵심 발견 참고) |
+| Texas Tech University | unconfirmed | 신뢰 가능한 공식 URL 미확보, source_url_id 없음 |
+| University of Alabama | unconfirmed | 공식 요건 페이지엔 언급 없음(불요구 방증), 세부는 검색 기반 |
+| University of Arkansas | unconfirmed | 검색 요약 기반 |
+| University of Connecticut | unconfirmed | 검색 요약 기반, Special Programs 제외 |
+| University of Kentucky | unconfirmed | 세부 프롬프트 미확인, source_url_id 없음 |
+
+**검증**:
+- 삽입 전 20개교 전부 `select id,name from universities where name in (...)`로 id 확인.
+- 삽입 전 각 `(university_id, cycle_year, title)`·URL 조합에 `WHERE NOT EXISTS` 가드.
+- 삽입 후 `select count(*) from university_essay_prompts where cycle_year=2027`
+  20건, 미보유 학교 106 → **86개교**로 감소 확인.
+- psql direct INSERT만 사용, 마이그레이션/`supabase db push`/`vercel deploy` 미실행.
+- `university_essay_prompts`/`university_source_urls` 외 테이블 미접촉.
+
+### 다음 세션 인계
+- 남은 86개교(대부분 대형 주립대) 계속 공식 페이지 직접 조사 방식으로 진행.
+- 이번 세션 `unconfirmed_current_year`로 저장된 10개교(LSU, Miami OH, Northeastern,
+  Oklahoma State, Oregon State, Texas Tech, Alabama, Arkansas, UConn, Kentucky)는
+  공식 페이지 직접 fetch가 실패했거나(SSL/403/URL 미확정) 검색 요약에 의존한
+  경우이므로, 가능하면 다음 세션에서 공식 페이지 재시도해 `confirmed_current_year`로
+  승격하거나 세부 프롬프트를 보강할 것.
+- Texas Tech·University of Kentucky는 `source_url_id`를 비워둔 채 저장(신뢰 가능한
+  단일 공식 URL을 확보하지 못함) — 우선적으로 공식 URL 확보 후 연결 필요.
+- 200개교 전체 완료 후 CDS 정보 UI 노출 작업(제품 오너 지시)은 여전히 미착수 —
+  매 세션 인계 유지.
