@@ -7743,3 +7743,65 @@ select count(*) from universities u
 - UAA 공식 사이트가 지속 유지보수 모드라면 각 학교(Case Western/Emory/Chicago/CMU/
   Rochester) 자체 사이트 푸터에서 개별 확인하는 방식 권장(이번 세션의 MEAC 처리 방식과
   동일).
+
+## 80차 세션 (2026-09-24) — university_affiliations 잔여 57개교 중 55개교 실입력
+
+### 방법
+잔여 57개교 전수에 대해 브라우저로 학교 자체 공식 athletics 홈페이지를 직접 열어
+(navigate) `find`/`get_page_text`로 소속 컨퍼런스 로고 링크·기사 문구를 확인. 학교 자체
+사이트가 자동화 접근을 차단하는 경우(Carnegie Mellon)에 한해 해당 컨퍼런스의 공식
+사이트(uaasports.info)로 대체 확인. 추측 없이 실제로 연 페이지에서 확인된 내용만 기록.
+
+### 잔류 이슈 해결
+- **Gonzaga University** → gozags.com 홈페이지에 "Zags to Pac-12" 배너 및 Pac-12 상품
+  다수 확인. **Pac-12 Conference, D1**로 확정(WCC 아님 — 2026시즌부터 Pac-12 재편 합류).
+- **Colorado State University** → csurams.com 홈페이지에 "Richards Named Pac-12
+  Defensive Player of the Week" 등 Pac-12 관련 기사 다수. **Pac-12 Conference, D1**로
+  확정.
+- 두 학교 모두 Utah State(utahstateaggies.com)의 "Volleyball Opens Inaugural Pac-12
+  Season with Matches Against Texas State and Gonzaga" 기사로 교차 확인됨(Texas State·
+  Utah State도 동일하게 Pac-12 신규 합류 확인).
+- **UAA(Carnegie Mellon)** → athletics.cmu.edu/cmutartans.com 자동화 접근 차단 지속.
+  공식 컨퍼런스 사이트 uaasports.info에서 Carnegie Mellon 멤버 확인으로 대체 확인 완료.
+
+### 신규 확인 55개교 (school 자체 공식 athletics 사이트에서 직접 확인, source_url_id 연결)
+| 컨퍼런스 | 학교 수 | 비고 |
+|---|---|---|
+| Pac-12 Conference (D1) | 5 | Gonzaga, Colorado State, Texas State, Utah State, Arizona State |
+| University Athletic Association (D3) | 5 | Carnegie Mellon, Case Western Reserve, Emory, University of Chicago, (Rochester는 Liberty League로 별도 표기) |
+| New Jersey Athletic Conference (D3) | 4 | Montclair State, Rowan, Rutgers-Camden, Rutgers-Newark |
+| American Athletic Conference (D1) | 4 | Florida Atlantic, Rice, UAB, North Texas |
+| Conference USA (D1) | 3 | Florida International, Middle Tennessee State, Delaware |
+| Liberty League (D3) | 3 | Clarkson, RPI, Rochester |
+| Missouri Valley Conference (D1) | 2 | Illinois State, Southern Illinois Carbondale |
+| Horizon League (D1) | 2 | IUPUI, UW-Milwaukee |
+| SCIAC (D3) | 2 | Caltech, Chapman |
+| NEWMAC (D3) | 3 | Clark, MIT, WPI |
+| Northeast-10 Conference (D2) | 2 | Pace, Adelphi |
+| Patriot League (D1) | 3 | American University, Boston University, Lehigh |
+| 기타(1교씩) | 17 | Landmark(Catholic), RMAC(Colorado School of Mines), NACC(Illinois Tech), Centennial(Johns Hopkins), CAA(Northeastern, Stony Brook), MAC-Freedom(Stevens), Big 12(TCU, Arizona State는 위 Pac-12행과 별도 아님-중복없음), NESCAC(Tufts), MAC(Buffalo, UMass Amherst), Gulf South(UAH), C2C(UC Santa Cruz), Little East(UMass Boston), Southland(New Orleans), UAC(UT Arlington), Lone Star(UT Dallas) |
+
+**합계 55건 삽입.** `university_source_urls`에 실제 navigate로 연 URL을
+`status='approved'`, `is_official=true`로 함께 등록해 `source_url_id`로 연결.
+
+### 검증
+```sql
+select count(*) from university_affiliations;  -- 144 -> 199
+select count(*) from universities u
+ where u.data_collection_status='verified_pilot'
+   and not exists(select 1 from university_affiliations a where a.university_id=u.id);
+-- 57 -> 2
+```
+
+### 건너뛴 항목(불확실 — 추측 금지 원칙에 따라 미입력)
+- **Andrews University** — 학교 자체 사이트(andrews.edu/life/recreation)에 컨퍼런스
+  명시 없음. 3rd-party(theuscaa.com/Wikipedia 등)에서는 USCAA 소속으로 나오나 USCAA
+  공식 사이트(theuscaa.com)가 자동화 접근 차단으로 직접 확인 불가 — 스킵.
+- **SUNY College of Environmental Science and Forestry (ESF)** — 자체 사이트
+  (esfathletics.com)와 소속 컨퍼런스(HVIAC, hviac.net) 사이트 모두 자동화 접근 차단으로
+  확인 불가 — 스킵. (3rd-party 자료상으로는 USCAA HVIAC 소속으로 추정되나 미확정)
+
+### 다음 세션 인계
+- 잔여 2개교(Andrews University, SUNY ESF)만 남음 — 둘 다 USCAA 계열 소규모교로,
+  공식 사이트 자동화 차단이 원인. 실제 브라우저(비-자동화) 접속이나 USCAA 공식
+  뉴스레터/PDF 자료 등 대체 소스로 재시도 필요.
