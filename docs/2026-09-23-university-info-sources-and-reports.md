@@ -2939,3 +2939,67 @@ Mississippi State(위 CDS 실패 사유와 동일), Rutgers University-Newark
    unconfirmed 2개교 처리가 끝나면 최종 통합보고서 작성 및 CDS 정보
    노출 UI 확장 계속 진행할 것 — 매 세션 인계 기록에 계속 전달.
 8. 관리자 화면 노출 확인 여전히 미착수.
+
+## 31차 세션 (2026-09-23, 이어쓰기)
+
+### 1. 30차 마이그레이션 오류 정정
+- 세션 시작 시 이미 `git status`에 13개 데이터 마이그레이션 파일
+  (`20261610000000`~`20261610000012`)이 `D`(삭제 스테이징)로 남아있는
+  상태였음 — 30차 세션이 지시대로 삭제까지는 했으나 커밋을 못 하고
+  끝난 것으로 보임.
+- psql로 Clemson/Oklahoma State/Dayton/NDSU/UNLV/NJIT/Gonzaga의
+  `university_admission_metrics` 실데이터가 로컬 DB에 이미 반영돼
+  있음을 재확인(각 학교 `verification_status='official'` 행 다수 존재)
+  → 파일 삭제가 로컬 DB에 영향 없음을 검증하고 커밋 완료
+  (`0992777 chore(migrations): remove hardcoded-UUID data migrations from 30th session`).
+
+### 2. CDS 실수집 시도 결과 (신규 verified_pilot 전환 0건)
+- `sources_pending_review` 중 `common_data_set` 승인 출처가 있는 27개교를
+  조회해 순서대로 시도.
+- 30차 인계 메모에 있던 **Kansas State University**의 CDS PDF
+  (`https://www.k-state.edu/data/institutional-research/resources/common-data-set/CDS_2024_2025.pdf`)를
+  curl로 재확인 — 실제 PDF(29p, HTTP 200) 정상 다운로드·파싱 성공
+  (Fall 2024: 지원 15,432 / 합격 12,653 / 등록 3,482, SAT 1060–1255,
+  ACT 20–27, GPA 3.81, 재학유지율 85.59%, 6년 졸업률 70.95%,
+  등록금 in-state $22,491 / out-of-state $39,838). 하지만 DB 조회
+  결과 Kansas State University는 **이미 `verified_pilot`이고
+  `university_admission_metrics` 28행 + `university_majors` 28행이
+  이미 존재** — 인계 메모가 갱신되지 않았을 뿐 실제로는 이전 세션에서
+  처리 완료된 상태였음(중복 삽입 방지를 위해 추가 insert 하지 않음).
+- 나머지 26개교(Andrews, BGSU, Clarkson, Fordham, Hofstra, IU
+  Bloomington, Mississippi State, Morgan State, Ohio University,
+  Pepperdine, Saint Joseph's, SLU, Seton Hall, St. John's, Albany,
+  UCSB, CU Boulder, Hawaii Manoa, Maine, Memphis, New Orleans, North
+  Dakota, UT Arlington, Tulsa, Utah, UW-Milwaukee, Virginia Tech)에
+  대해 WebSearch + curl로 실제 CDS PDF를 확보 시도했으나:
+  - 검색 결과로 제시된 다수의 "직접 PDF 링크"가 실제로는 404/403
+    (Utah, Memphis, UND, UWM 등 — 존재하지 않는 URL을 검색 도구가
+    그럴듯하게 생성한 것으로 추정, 실제 fetch 시 오류).
+  - Mississippi State는 실제 CDS 페이지가 아코디언 클릭 시 "Document
+    Serving" iframe으로 PDF를 여는 방식이라 직접 URL 확보 실패.
+  - Albany/CU Boulder/Maine 등은 실데이터가 SharePoint 임베드
+    Excel/대시보드("GO TO REPORT")로 제공돼 curl/일반 fetch로 접근
+    불가(30차 인계 메모의 Maine CSP 이슈와 동일 계열 문제).
+  - 시간 예산 내에 브라우저 자동화(pdf.js 캔버스 렌더링 등 30차가
+    Gonzaga에 썼던 기법)까지 전개하지 못함.
+- 결과: **이번 세션 CDS 신규 verified_pilot 전환 0건**
+  (149 → 149 유지, `sources_pending_review` 45개교 그대로).
+  추측 채우기 금지 원칙에 따라 확인되지 않은 수치는 삽입하지 않음.
+
+### 3. 미착수 항목 (시간 예산 소진으로 처리 못함)
+- IUPUI 실제 출처 확보
+- unconfirmed 2개교(Catholic University of America, Miami University
+  Ohio) 브라우저 자동화 재시도
+- 학과 0건 학교 보완
+
+### 다음 세션 인계
+1. 이번 세션에서 확인된 "검색 도구가 존재하지 않는 CDS PDF URL을
+   그럴듯하게 생성하는" 현상에 유의 — 반드시 curl `-I`로 실제
+   200 응답을 받은 뒤에만 다운로드/파싱할 것.
+2. Mississippi State, Albany, CU Boulder, Maine, UW-Milwaukee 등
+   SharePoint/임베디드 대시보드형 CDS는 정적 curl로는 불가 — Gonzaga에
+   썼던 브라우저 pdf.js 캔버스 렌더링 기법을 우선 순위로 재시도.
+3. Kansas State University 인계 메모는 갱신 완료(이미 처리됨, 재작업
+   불필요) — 30차 문서의 "다음 세션 인계 6번" 항목은 이번 세션에서
+   해소됨.
+4. unconfirmed 2개교, IUPUI, 학과 보완 8개교는 전부 다음 세션으로 이월.
