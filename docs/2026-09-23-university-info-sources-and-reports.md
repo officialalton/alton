@@ -5784,3 +5784,116 @@ university_essay_prompts/university_demographics/university_financial_aid_progra
 - 여전히 verified_pilot 잔여 다수(약 109개교) — Virginia Tech/UVA/Maryland/
   UIUC/Wisconsin-Madison 등 대형 주립대는 이번 세션 검색으로 2025-2026 CDS
   공개본을 찾지 못함(기관 IR 페이지 직접 크롤링 필요할 가능성).
+
+## 55차 세션 — 신규 비용/교수비율 지표 22개교 실수집 (university_admission_metrics/university_source_urls만)
+
+이번 세션은 verified_pilot 중 `tuition_in_state` 미보유 약 114개교를 재확인 후,
+공식 CDS PDF를 WebSearch로 탐색, curl+pdftotext(-layout)로 G1(비용)/I-2(학생:교수
+비율) 섹션을 실수집했다. Ohio State/Kentucky/Iowa는 지시대로 pdftoppm(200dpi)으로
+페이지를 이미지 렌더링한 뒤 Read 툴로 직접 육안 확인했다. Johns Hopkins/Brown/
+UPenn/Georgetown은 이번에도 시도하지 않았다(시간 배분상 검색 성공률이 높은 학교
+위주로 진행). university_majors/university_essay_prompts/university_demographics/
+university_financial_aid_programs는 전혀 건드리지 않았고, 병행 세션과의 충돌
+방지를 위해 모든 INSERT에 `WHERE NOT EXISTS` 가드를 사용했다.
+
+### 반영 완료 (22개교, CDS 원문 실측치)
+
+| 학교 | CDS 연도 | 등록금(주내/사립) | 필수비 | 기숙사 | 식비 | 학생:교수 |
+|---|---|---|---|---|---|---|
+| California Institute of Technology | 2024-25 | $65,622(사립) | $2,586 | $12,105 | $8,886 | 3:1 |
+| Worcester Polytechnic Institute | 2025-26 | $63,936(사립) | $1,302 | $10,660 | $8,592 | 13:1 |
+| Yale University | 2025-26 | $72,500(사립) | 미기재(원문 공란, 무과금으로 추정) | $12,080 | $9,520 | 8.8:1 |
+| University of Chicago | 2024-25 | $71,325(사립) | $1,941 | 미기재(Food+Housing $20,835 합산치만 공개, 분리 불가) | — | 5:1 |
+| Chapman University | 2025-26 | $69,990(사립) | $404 | $15,618 | $6,082 | 12:1 |
+| Texas Christian University | 2024-25 | $63,500(사립) | $90 | $11,500 | $6,520 | 14:1 |
+| Drexel University | 2024-25 | $61,842(사립) | $2,370 | $11,685 | $7,146 | 9.4:1 |
+| Villanova University | 2025-26 | $72,990(사립) | $1,024 | $10,314 | $9,040 | 9:1 |
+| George Washington University | 2025-26(문서상 2026-27 표기) | $72,000(사립) | $420 | $14,800 | $6,720 | 13:1 |
+| Howard University | 2025-26 | $37,996(사립) | $940 | $12,380 | $6,602 | 13:1 |
+| University of San Diego | 2025-26 | $64,100(사립) | $1,099 | $13,450 | $5,750 | 14:1 |
+| University of San Francisco | 2024-25 | $61,720(사립) | $592 | $12,490 | $6,000 | 11:1 |
+| Ohio State University | 2024-25 | $12,180(주내)/$40,962(주외)/$44,065(국제) | $1,064 | $10,090 | $5,622 | 14:1 |
+| Texas Tech University | 2025-26 | 미기재(G1 공란) | — | — | — | 21:1 |
+| Clark University | 2024-25 | 미기재(G1 공란) | — | — | — | 8.5:1 |
+| Harvard University | 2025-26 | 미기재(G1 공란) | — | — | — | 11:1 |
+| Middle Tennessee State University | 2024-25 | 미기재(G1 공란) | — | — | — | 17:1 |
+| University of Cincinnati | 2026-27(초안) | 미기재(G1 공란) | — | — | — | 19:1 |
+| University of Massachusetts Lowell | 2024-25 | 문서에서 G1 위치 미확인(I-2만 확보) | — | — | — | 17:1 |
+| SUNY College of Environmental Science and Forestry | 2025-26 | 미기재(G1 공란) | — | — | — | 11.867:1 |
+| University of Kentucky | 2024-25 | 미기재(원문에 "not available, 07/01 예정" 체크됨 — 실제 미제출 확인) | — | — | — | 17.7:1 |
+| University of Iowa | 2026-27(초안) | 미기재(원문 전부 "—") | — | — | — | 17:1 |
+
+### 데이터 정합성 개선
+
+- **University of Kentucky**: 병행 세션이 이미 `student_faculty_ratio` 2024/2025/
+  2026 3개 cycle_year row를 값 NULL로 선삽입해둔 상태를 발견. 2025 row가
+  이번 세션이 확인한 CDS 2024-2025(Fall 2024 기준)와 정확히 대응하여, 새 INSERT
+  대신 해당 row를 `UPDATE`로 17.7(NULL→값)로 보정했다(id
+  `6eb0ef38-5719-4bb6-a9bf-4c7a88859983`). 다른 학교의 NULL row는 별도로
+  전수조사하지 않았으므로 다음 세션에서 동일 패턴(값이 NULL인 student_faculty_ratio
+  row) 전수 점검을 권장한다.
+
+### 육안 확인(pdftoppm) 결과 — 지시사항 3개교 처리
+
+- **Ohio State University**: pdftotext -layout으로는 G1/I-2 모두 공란으로
+  나왔으나(양식 필드 렌더링 문제로 추정), pdftoppm 200dpi로 해당 페이지(29, 39)를
+  렌더링해 Read 툴로 직접 읽으니 값이 선명하게 보임 — G1/I-2 전량 확보,
+  1개교 7개 지표 반영.
+- **University of Kentucky**: 동일 방식으로 렌더링해보니 pdftotext 실패가 아니라
+  **원문 자체가 실제로 공란**임을 육안으로 확인(G0 항목에 "2025-2026 academic year
+  costs of attendance are not available at this time, 07/01"이라고 명시적으로
+  체크·기재됨). 즉 이 학교는 추출 실패가 아니라 CDS 제출 시점에 비용 데이터가
+  없었던 것 — I-2(17.7:1)만 반영.
+- **University of Iowa**: 검색으로 새로 찾은 URL(`CDS_2526.pdf`, 2026-2027
+  초안)을 렌더링해 확인한 결과 G1 표 전체가 "—"로 채워진 미제출 상태(I-2는
+  Fall 2025 기준 17:1 확보). 이전 세션이 언급한 `.docx` 파일과 별개로, 이 PDF도
+  동일하게 비용 데이터가 없었다.
+
+### 반영하지 않은 것 (추측 금지)
+
+- Johns Hopkins/Brown/UPenn/Georgetown: 이번 세션에서 브라우저 자동화 재시도를
+  하지 않음(검색 기반 성공률이 높은 학교를 우선 처리하는 전략을 택함) — 다음
+  세션 인계 필요.
+- University of Memphis: curl 응답이 HTML(차단/리다이렉트)로 실패, 재시도 필요.
+- 검색 자체가 Common Data Set 2025-2026(또는 최근 연도) 공개 URL을 찾지 못한 학교:
+  Andrews University, Saint Joseph's University, Adelphi University,
+  St. John's University(NY), Seton Hall University, Fordham University,
+  Gonzaga University, Colorado School of Mines, Catholic University of
+  America, Bowling Green State University, Ohio University, University of
+  Idaho, Purdue University, Michigan State University, Indiana University
+  Bloomington, University of Colorado Boulder, Rensselaer Polytechnic
+  Institute, Illinois Institute of Technology, Kent State University,
+  Idaho State University, Morgan State University, University of Louisville,
+  North Dakota State University, University of North Dakota, Louisiana State
+  University, Oklahoma State University 등.
+- San Diego State University(sdsu.edu)를 검색 결과가 "South Dakota State
+  University"로 잘못 라벨링해 다운로드했다가, 문서 내 respondent 주소(San Diego,
+  CA)를 확인하고 즉시 폐기 — South Dakota State University는 이번 세션에서
+  실수집하지 못함. 학교명 불일치를 원문에서 재확인하는 절차가 유효했음을 보여주는
+  사례.
+
+### 검증
+
+- `select u.name from universities u where u.data_collection_status=
+  'verified_pilot' and not exists (select 1 from university_admission_metrics am
+  where am.university_id=u.id and am.metric_key='tuition_in_state') order by
+  u.name` → 세션 시작 114개교 → 종료 시점 105개교(본 세션 직접 기여분 12개교
+  tuition_in_state 확보 + 병행 세션 기여분 포함).
+- 모든 INSERT는 `WHERE NOT EXISTS(...)` 가드 사용, PK 충돌 시 자동 스킵 확인
+  (예: Villanova는 6개 중 5개가 이미 병행/이전 세션분과 정확히 일치, San Diego는
+  6개 중 4개 기존값과 일치).
+- `git status --short` → 이번 세션이 `docs/` 외 어떤 파일도 건드리지 않음 확인.
+  university_majors/university_essay_prompts/university_demographics/
+  university_financial_aid_programs는 전혀 접촉하지 않음.
+- `npx supabase db push --linked`/`vercel deploy` 미실행. 로컬 psql direct
+  INSERT/UPDATE만 사용, 마이그레이션 파일 작성 없음.
+
+### 다음 세션 인계
+
+- Johns Hopkins/Brown/UPenn/Georgetown: 여전히 브라우저 자동화 필요.
+- University of Kentucky 사례처럼 `student_faculty_ratio` 값이 NULL인 채로
+  선삽입된 row가 다른 학교에도 있을 수 있음 — 전수 점검(`select * from
+  university_admission_metrics where value is null and value_text is null and
+  value_status='reported'`) 권장.
+- 위 "검색으로 못 찾은 학교" 목록은 기관 IR 페이지 직접 크롤링이나 브라우저
+  자동화가 필요할 가능성이 높음.
