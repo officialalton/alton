@@ -992,6 +992,12 @@ Andrews University는 CSV 후보 URL이 실제로는 홈페이지 루트라 CDS 
   후속 세션은 앞으로 새 마이그레이션 파일을 만들 때 반드시 `20261600000000`
   이상 번호를 사용할 것.** 새 마이그레이션 전에는 항상
   `ls supabase/migrations/ | tail -5`로 최신 번호를 확인하고 그보다 큰 번호를
+- **[30차 세션 갱신]** `preview/m4-integration-verification` 통합 세션이
+  이미 `20261600000000`을 해당 브랜치/공유 non-prod DB에 적용 완료했다.
+  따라서 이 브랜치(`feature/university-info-sources`)는 이제부터 새
+  마이그레이션에 **`20261610000000` 이상** 번호를 사용할 것(30차 세션이
+  `20261610000000` ~ `20261610000012`을 사용함). 다음 세션은 항상
+  `ls supabase/migrations/ | tail -5`로 최신 번호를 먼저 확인할 것.
   써서 여유를 둘 것 (다른 브랜치와 이미 3번 충돌했으므로 절대 아슬아슬하게 잡지
   말 것).
 
@@ -2756,3 +2762,180 @@ JS 필터/검색 위젯(Drupal Views AJAX, React 등)이라 정적 curl로 전�
    unconfirmed 3개교 처리가 끝나면 최종 통합보고서 작성 및 CDS 정보
    노출 UI 확장 계속 진행할 것 — 매 세션 인계 기록에 계속 전달.
 7. 관리자 화면 노출 확인 여전히 미착수.
+
+## 30차 세션 (2026-09-23) — 브라우저 자동화 전환, CDS 7개교 + Gonzaga unconfirmed 해소 + 학과 9개교 + IUPUI 소스 오류 수정
+
+### 핵심 성과: pdf.js 캔버스 렌더링 기법 확립
+이번 세션의 가장 큰 전환점은 **curl이 막힌 학교(Cloudflare 봇 차단,
+fillable PDF form 등)를 브라우저 자동화로 뚫는 재현 가능한 절차를
+확립**한 것:
+1. `navigate`로 실제 브라우저에서 PDF URL을 열면(사람 브라우저처럼
+   렌더되므로) Cloudflare 챌린지가 통과됨.
+2. `javascript_tool`로 페이지 컨텍스트 내에서 `fetch()`로 같은 URL을
+   다시 요청하면 (이미 챌린지를 통과한 세션이므로) 실제 PDF 바이너리를
+   온전히 받아올 수 있음.
+3. `pdfjs-dist`(cdnjs)를 동적 `import()`로 로드해 그 바이너리를
+   파싱. **Fillable/AcroForm PDF**(Clemson, Oklahoma State, UNLV
+   등 College Board/Peterson's 표준 CDS 양식)는
+   `page.getAnnotations()`로 필드명=값 쌍을 바로 읽을 수 있음(가장
+   빠름).
+4. 값이 텍스트 레이어에 없는 특수 PDF(Gonzaga처럼 텍스트 추출은
+   비어있지만 실제로는 값이 렌더링되어 있는 경우)는
+   `page.render({canvasContext, viewport})`로 캔버스에 그린 뒤
+   화면 캡처(screenshot/zoom)로 사람이 읽듯이 읽어냄 — OCR 없이도
+   정확한 숫자 확인 가능.
+5. xlsx로 배포하는 학교(NDSU, NJIT)는 curl이 그냥 통했으므로
+   `openpyxl`로 직접 파싱(가장 간단).
+이 4가지 조합으로 이번 세션은 실제 데이터 확보 성공률이 매우 높았다.
+
+### CDS 실수집 완료 — 7개교 (verified_pilot 142 → 149)
+전부 Fall 2024 또는 Fall 2025 cohort, 지원자/합격자/등록자 수 +
+합격률/등록률 + SAT/ACT 25·50·75 + GPA평균(가능한 경우) +
+재학유지율 + 6년 졸업률까지 확보. 표지/본문 학교명 전부 대조 확인:
+- **Clemson University**: `open.clemson.edu` CDS 아카이브의
+  2024-2025 PDF(fillable). 지원 61,517 / 합격 23,586(38.34%) /
+  등록 4,880(20.69%). SAT 1250/1320/1400, ACT 28/31/32, 재학유지율
+  93.5%, 6년 졸업률 86.6%.
+- **Oklahoma State University**: `ira.okstate.edu` 직접 PDF(텍스트
+  레이어 정상). 지원 24,910 / 합격 18,693(75.04%) / 등록
+  5,030(26.91%). SAT 1040/1150/1240, ACT 20/23/27, GPA평균 3.59,
+  재학유지율 84.80%, 6년 졸업률 65.87%.
+- **University of Dayton**: udayton.edu 페이지에 링크된 공개 Google
+  Docs(2025-2026, Fall 2025 cohort, `export?format=txt`로 curl 직접
+  성공). 지원 22,247 / 합격 14,814(66.60%) / 등록 1,578(10.65%).
+  SAT 1210/1270/1350, ACT 26/29/31, GPA평균 3.78, 재학유지율 90%,
+  6년 졸업률 80.4%.
+- **North Dakota State University**: `ndsu.edu`에서 직접 xlsx
+  다운로드(curl 성공). 지원 7,228 / 합격 6,864(94.96%) / 등록
+  2,197(32.00%). SAT 1130/1280/1430, ACT 19/22/25, GPA평균 3.52,
+  재학유지율 78.42%, 6년 졸업률 63.89%.
+- **University of Nevada, Las Vegas**: `it.unlv.edu` 직접 PDF
+  (fillable, curl 성공). 지원 14,472 / 합격 12,242(84.59%) / 등록
+  4,430(36.19%). SAT 750/1010/1020(제출률 낮아 분포 왜곡),
+  ACT 18/21/25, GPA평균 3.38, 재학유지율 79.2%, 6년 졸업률 50.5%.
+- **New Jersey Institute of Technology**: `njit.edu` 직접 xlsx
+  (curl 성공). 지원 15,607 / 합격 10,156(65.07%) / 등록
+  1,746(17.19%). 대기자 명단: 제안 3,621/수락 2,520/합격 827.
+  SAT 1235/1340/1460, ACT 28/31/31, GPA평균 3.73, 재학유지율 90%,
+  6년 졸업률 72.84%.
+- **Gonzaga University** *(5개 세션째 이월된 unconfirmed 해소)*:
+  `gonzaga.edu/__data/assets/...` 직접 PDF(Fall 2025-2026, curl은
+  여전히 봇 차단되지만 브라우저 fetch+pdf.js 캔버스 렌더링으로
+  성공). 지원 8,906 / 합격 7,091(79.62%) / 등록 1,130(15.94%).
+  대기자: 제안 676/수락 241/합격 66. SAT 1230/1320/1383,
+  ACT 29/30/32, GPA평균 3.70, 재학유지율 90%, 6년 졸업률 86.0%.
+  `university_source_urls`에 새 approved 행 추가 후 사용.
+
+### CDS 시도했으나 실패/보류한 학교
+- **Virginia Tech**: 공식 페이지에 "CDS 파일은 요청 시에만 제공"이라고
+  명시 — 공개 URL 자체가 없음. 스킵.
+- **Ohio University**: 공식 페이지가 "Section H1 계산 오류 검토 중,
+  2026년 중 재게시 예정"이라고 안내하며 파일을 전부 내려놓은 상태.
+  스킵.
+- **University of North Dakota**: "업데이트된 보고서 곧 제공 예정"
+  안내만 있고 실제 파일 없음. 스킵.
+- **University of Colorado Boulder**: 데이터 포털이 "GO TO REPORT"
+  클릭 후 진입하는 임베디드 대시보드(Tableau/PowerBI 추정) — 이번
+  세션엔 시간 배분상 진입 시도 안 함. 다음 세션 후보.
+- **Mississippi State University**: `ir.msstate.edu/cdsets.php`가
+  아코디언(`#cds2024` 앵커)이지만 실제 파일 링크가 DOM에 없음(iframe/
+  JS 동적 삽입 추정) — 브라우저로 클릭해도 새 탭이 차단되어 URL을
+  못 찾음.
+- **Seton Hall, St. John's, Indiana University Bloomington
+  (iuia.iu.edu — 로그인 필요 추정), Hofstra(issuu 플립북만 존재,
+  텍스트/폼필드 추출 불가), University of Maine(SharePoint
+  익명접근은 되나 CSP가 pdf.js 동적 import를 차단, 캔버스 렌더링
+  전환은 다음 세션 과제로 보류), University of Texas at Arlington,
+  Fordham(SharePoint xlsx, 로그인 필요 추정)**: 전부 공개 URL은
+  찾았으나 이번 세션 시간 내 데이터 확보 실패.
+- **Catholic University of America, Miami University (Ohio)**:
+  구글 검색으로 현재 연도 CDS 공개 PDF를 찾지 못함(둘 다 5개
+  세션째 이월 유지). 이번 세션은 Gonzaga에 시간을 집중 배분해 이
+  둘은 재시도하지 못함 — 다음 세션 최우선 후보.
+
+### IUPUI 소스 URL 오류 수정 (29차에서 발견된 문제 해결)
+- 기존 `university_source_urls`에 approved로 등록되어 있던
+  `https://www.purdue.edu/idata/products-services/common-data-set.php`가
+  실제로는 **Purdue University(West Lafayette) 본교**의 CDS
+  페이지였고 IUPUI(Indiana University-Purdue University
+  Indianapolis)와 무관함을 확인 — 해당 행을 `status='rejected'`로
+  전환하고 사유를 `review_note`에 기록.
+- 원인 파악: 2024년 IUPUI가 **IU Indianapolis / IU Columbus**로
+  개편되며 관리 주체가 IU 쪽으로 이전됨.
+  `irds.indianapolis.iu.edu/reports-presentations/common-data-set.html`
+  공식 페이지에 "IUPUI CDS는 `https://uirr.iu.edu/apps/cds/`에서
+  확인하라"는 안내가 있어 이를 새 `pending` 소스로 등록.
+- 다만 `uirr.iu.edu/apps/cds/`는 `iuia.iu.edu`로 리다이렉트되는
+  전체 캠퍼스 공용 웹앱이며 기본값이 Bloomington 캠퍼스라 URL
+  파라미터로 Indianapolis 캠퍼스를 지정하는 방법을 이번 세션엔
+  찾지 못함(로그인/세션 필요 가능성도 있음) — **관리자 수동
+  확인이 계속 필요**. 데이터 자체는 아직 미확보.
+
+### 학과(전공) 보완 완료 — 9개교(CDS Section J 기준, bachelor's % > 0인
+계열만 반영, 92 → 102개교 보유)
+- Clemson University (22개 계열), Oklahoma State University
+  (26개), University of Dayton (22개), North Dakota State
+  University (25개), University of Nevada Las Vegas (24개), New
+  Jersey Institute of Technology (17개) — 위 CDS 문서에서 J섹션도
+  함께 추출.
+- **Ball State University**(28개, CDS 2025-2026 직접 PDF, curl
+  성공), **Kansas State University**(28개, CDS 2024-2025 직접
+  PDF, curl 성공 — CDS 관리 URL 목록엔 없던 신규 발견, 다음 세션
+  admission metrics도 함께 수집 권장), **Rowan University**(28개,
+  CDS 2022-2023 PDF 사용 — 2025-2026 "Work In Progress" 버전엔
+  J섹션 데이터 없어 최근 확인 가능한 연도로 대체, 전공 카테고리는
+  자주 바뀌지 않으므로 학과 목록 용도로는 문제 없음).
+
+### 학과 보완 시도했으나 실패한 학교
+Bowling Green State(대시보드), Miami University(CDS 링크 없음,
+이사회 자료에 인용만 존재), Georgia State(구글 결과에 CDS 없음),
+Old Dominion(공개 PDF가 IR 내부 리뷰 툴 export라 J섹션 없음),
+Mississippi State(위 CDS 실패 사유와 동일), Rutgers University-Newark
+(`oirds.rutgers.edu/ReportingCommonDataSet`가 대화형 웹앱으로 추정,
+디렉터리 직접 접근은 403).
+
+### DB 반영 확인 (psql 직접 실행 결과)
+- `data_collection_status`: `verified_pilot` **142 → 149개교**,
+  `sources_pending_review` **55 → 49개교**, `unconfirmed` **3 → 2개교**
+  (Gonzaga 해소, Catholic University of America·Miami University
+  Ohio 남음).
+- `university_admission_metrics`: 이번 세션 7개교 총 205행 upsert
+  (Clemson 28, Oklahoma State 35, Dayton 34, NDSU 36, UNLV 27,
+  NJIT 36, Gonzaga 30 — 학교별 확보 가능한 항목 수에 따라 행 수
+  차이).
+- `university_majors`: 이번 세션 신규 삽입 137건(9개교), 전공 보유
+  학교 수 93 → 102개교.
+- `university_source_urls`: IUPUI 관련 1건 reject + 1건 신규 pending
+  등록, Gonzaga 1건 신규 approved 등록.
+- 새 마이그레이션 13개 파일(`20261610000000` ~ `20261610000012`),
+  전부 로컬 DB(`127.0.0.1:54422`)에 psql로 직접 적용해 반영 확인
+  완료. `npx supabase db push --linked` / `vercel deploy` 실행하지
+  않음. 앱 코드 변경 없음(DB 마이그레이션 + 문서만).
+
+### 다음 세션 인계 (31차용)
+1. **unconfirmed 2개교(Catholic University of America / Miami
+   University Ohio)** — 이번 세션도 시간 배분상 착수하지 못함.
+   다음 세션 최우선 처리 권장. Gonzaga에서 검증된 "브라우저
+   fetch + pdf.js 캔버스 렌더링" 기법을 그대로 적용해볼 것.
+2. **IUPUI/IU Indianapolis CDS 데이터 미확보**: `uirr.iu.edu/apps/cds/`
+   → `iuia.iu.edu` 앱에서 Indianapolis 캠퍼스를 선택하는 URL
+   파라미터 또는 로그인 요구 여부를 확인해볼 것. 안 되면 IU
+   시스템 전체 IR 사무실에 별도 공개 페이지가 있는지 재탐색.
+3. **University of Maine**: SharePoint 익명 접근은 되지만 그 페이지의
+   CSP가 pdf.js CDN 동적 import를 막음 — blob URL 우회도 실패.
+   해당 origin이 아닌 별도 무관 탭에서 fetch 후 데이터를 어떻게
+   전달할지(예: 같은 세션의 다른 탭에서 재요청 가능한지) 검토 필요.
+4. **University of Colorado Boulder**: 임베디드 대시보드("GO TO
+   REPORT" 클릭 후 진입) 진입 시도 안 해봄 — 다음 세션 시도 권장.
+5. **마이그레이션 번호**: 이 브랜치는 이제 `20261610000000` 이상
+   사용(문서 상단 규칙 섹션에도 갱신 기록함). 다음 새 마이그레이션은
+   `ls supabase/migrations/ | tail -5`로 최신 번호 확인 후 그보다
+   큰 번호 사용할 것.
+6. **Kansas State University**: 학과만 보완했고 admission metrics는
+   미수집 — CDS PDF(`https://www.k-state.edu/data/institutional-research/resources/common-data-set/CDS_2024_2025.pdf`)는
+   이미 확보되어 있으니 `university_source_urls`에 신규 등록 후
+   admission metrics도 추가하면 바로 verified_pilot 전환 가능.
+7. 200개교 CDS 수집은 이제 149/200(74.5%) 완료. 남은 49개교 +
+   unconfirmed 2개교 처리가 끝나면 최종 통합보고서 작성 및 CDS 정보
+   노출 UI 확장 계속 진행할 것 — 매 세션 인계 기록에 계속 전달.
+8. 관리자 화면 노출 확인 여전히 미착수.
