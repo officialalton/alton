@@ -3003,3 +3003,125 @@ Mississippi State(위 CDS 실패 사유와 동일), Rutgers University-Newark
    불필요) — 30차 문서의 "다음 세션 인계 6번" 항목은 이번 세션에서
    해소됨.
 4. unconfirmed 2개교, IUPUI, 학과 보완 8개교는 전부 다음 세션으로 이월.
+
+## 32차 세션 (2026-09-23) — 범위 확장 지시 → 통합 세션 정정으로 전환 + 로컬 DB 리셋 발견(중요) + CDS 실수집 3개교
+
+### 0. 세션 도중 지시 변경 경위 (정직하게 기록)
+- 세션 시작 시 제품 오너로부터 "학교 기본정보/지원요건/재학생 인구통계/
+  비용/재정지원" 5개 신규 카테고리를 200개교에 확대 수집하라는 지시를
+  받았고, 이를 위해 범용 스테이징 테이블
+  `university_pending_data_fields`(마이그레이션
+  `20261610000000_college_db_p11_pending_data_fields.sql`)를 만들어
+  로컬 DB에 적용까지 했다.
+- 작업 도중 **"ALTON 개발 세션"(통합 담당)으로부터 긴급 정정 메시지**를
+  받았다: 통합 세션이 이미 정식 스키마(`university_affiliations`,
+  `university_demographics`, `university_financial_aid_programs`,
+  `university_admission_metrics`/`university_majors` 확장, 마이그레이션
+  `20261700000000`, 문서 `docs/2026-09-23-college-explore-expansion-field-spec.md`)를
+  만들어 non-prod에 반영했으니 스테이징 테이블을 만들지 말고, 신규
+  필드는 UI 표시 방식 확정 전까지 대량 입력을 보류하라는 지시였다.
+- 지시에 따라 **스테이징 마이그레이션 파일을 삭제**하고(커밋 전이라
+  되돌릴 필요 없이 단순 삭제), 로컬 DB에서
+  `drop table university_pending_data_fields`로 정리했다. 범위 확장
+  데이터(기본정보/지원요건/재학생 인구통계/비용/재정지원)는 **이번
+  세션에서 하나도 반영하지 않았다.**
+- `docs/2026-09-23-college-explore-expansion-field-spec.md`는 이
+  워크트리에는 존재하지 않았다(다른 세션/브랜치에서 작성된 것으로
+  보임) — 다음에 이 워크트리로 병합되면 확인 필요.
+
+### 1. 중요 발견 — 로컬 DB가 리셋되어 31차까지 누적된 실 데이터가 사라짐
+- 정정 지시 처리 중 `data_collection_status` 분포를 재확인했더니
+  `verified_pilot`이 (31차 종료 시점) 149개교였던 것이 **10개교로
+  급감**했고, `university_admission_metrics`가 33행, `university_essay_prompts`가
+  12행, `university_majors`가 493행으로 — 31개 세션 누적치 대비 크게
+  줄어 있었다. 남은 10개교는 5차 세션 때 마이그레이션 파일 자체에
+  하드코딩되어 있던 최초 10개교(Princeton/MIT/Harvard 등)와 정확히
+  일치한다.
+- 결론: 로컬 supabase 컨테이너(`supabase_db_ALTON`, 포트 54422)가
+  세션 도중 리셋(또는 다른 워크트리 세션이 `supabase db reset` 실행)되어
+  **마이그레이션에 포함되지 않은 psql 직접 insert 데이터가 전부
+  유실**됐다. 이는 "실 데이터는 마이그레이션에 넣지 않는다"는 규칙의
+  근본적 리스크를 보여준다 — 여러 세션/워크트리가 **같은 로컬 DB
+  컨테이너를 공유**하므로, 한 세션의 DB 리셋이 다른 세션이 psql로
+  쌓아온 모든 실 데이터를 지운다.
+- **다음 세션(통합 담당 포함) 최우선 확인 필요**: 이 유실이 non-prod/운영
+  환경까지 영향을 미쳤는지, 혹은 로컬 개발 컨테이너에 국한된 것인지
+  확인 필요. 로컬이라면 149개교 CDS 데이터를 처음부터 다시 psql로
+  넣어야 하며, 이는 31개 세션 분량의 작업이 사라졌다는 뜻이다.
+
+### 2. 핵심 CDS 파이프라인 재개 — 실수집 3개교(DB 리셋으로 unconfirmed가 된 학교 중)
+지시 3번에 따라 원래의 SAT/ACT/GPA/지원자·합격·등록자수 수집으로
+전환했다. 스테이징 작업 중 이미 CDS PDF를 curl+pdftotext로 확보해둔
+학교들 중 3개교를 골라 실제 원문 수치를 `university_admission_metrics`에
+반영하고 `verified_pilot`으로 전환했다(psql 직접 확인):
+
+1. **Iowa State University** — CDS 2025-26, Fall 2025 cohort, 18행
+   (`ir.iastate.edu/files/documents/cds/CDS-25-26.pdf`, 직접 호스팅
+   정적 PDF, curl 200 확인 후 다운로드). 지원자 24,625 / 합격자 21,652 /
+   등록자 6,160(C1), SAT 제출률 12%·ACT 제출률 45%, SAT 1153/1260/1360,
+   ACT 21/25/28(C9), 평균 고교 GPA 3.76(C12).
+2. **University of California, Riverside** — CDS 2025-26, Fall 2025
+   cohort, 3행(`ir.ucr.edu/sites/default/files/2026-05/cds-2025-2026.pdf`).
+   지원자 61,184 / 합격자 52,676 / 등록자 6,686(C1). UC 시스템은
+   test-blind 정책이라 SAT/ACT 항목이 원문에 없어 추측 없이 미기재.
+3. **Villanova University** — CDS 2023-24(사이트 최신본, 2024-25 없음),
+   Fall 2023 cohort, 11행(`villanova.edu/.../CDS_2023_2024_v2.pdf`).
+   지원자 23,127 / 합격자 5,810 / 등록자 1,740(C1), SAT 제출률 25%·ACT
+   제출률 11%, SAT 1410/1450/1490, ACT 32/33/34(C9).
+
+같은 방식으로 curl+pdftotext 확보까지 마쳤으나 이번 세션에서 DB 반영은
+못한 학교(다음 세션에서 텍스트 재추출 없이 바로 반영 가능,
+`/tmp/cds/*.txt`는 세션 종료 시 스크래치패드라 사라지므로 다음 세션은
+URL만 참고해 재다운로드 필요):
+Duquesne University(`duq.edu/.../cds-2025-2026.pdf`), Louisiana State
+University(섹션별 PDF, `lsu.edu/data/common-data-set/2024/`), Loyola
+Marymount University(`academics.lmu.edu/.../CDS 2025-26_20260518.pdf`),
+University of Kentucky(`irads.uky.edu/.../university-of-kentucky-cds-2025-2026-flat.pdf`,
+폰트 인코딩 손상 있었음), University of Rhode Island(`web.uri.edu/ir/wp-content/uploads/sites/276/CDS-PDF-2025-2026_fillablePDF.pdf`),
+University of North Texas(`institutionalresearch.unt.edu/cds_univnorthtx_2025-2026.pdf`),
+Stevens Institute of Technology(`assets.stevens.edu/.../CDS-2025-2026-PDF_Final.pdf`),
+James Madison University(`jmu.edu/pair/ir/common-data-set/cds_2023-2024.pdf`),
+University of Alabama in Huntsville(`uah.edu/images/administrative/provost/oir/university_of_alabama_in_huntsville_cds_2025-2026.pdf`).
+**주의**: Montclair State University는 발견된 최신 PDF가
+`irdata.montclair.edu/.../Bloomfield CDS 2025-2026.pdf`였는데, 실제
+내용이 Bloomfield College(합병된 소규모 캠퍼스) 데이터로 확인되어
+(지원자 1,316명 수준으로 본교 규모와 불일치) **학교명 불일치로 판단,
+반영하지 않음** — 다음 세션에서 본교(Montclair 메인 캠퍼스) CDS를
+별도로 찾아야 한다.
+
+### 3. 학교별 항목 확보율(이번 세션 실제 처리 3개교만)
+| 학교명 | 기본정보 | 지원요건 | 학업지표 | 재학생현황 | 비용 | 재정지원 | 전공 | 에세이 |
+|---|---|---|---|---|---|---|---|---|
+| Iowa State University | 공식확인(공립/도시 등 기존 컬럼) | 미수집 | 공식확인(지원자/합격/등록/SAT/ACT/GPA) | 미수집 | 미수집 | 미수집 | 검토필요(기존 데이터 유실 여부 미확인) | 검토필요 |
+| University of California, Riverside | 공식확인 | 미수집 | 공식확인(지원자/합격/등록, SAT/ACT는 공식자료에없음-test blind) | 미수집 | 미수집 | 미수집 | 검토필요 | 검토필요 |
+| Villanova University | 공식확인 | 미수집 | 공식확인(지원자/합격/등록/SAT/ACT) | 미수집 | 미수집 | 미수집 | 검토필요 | 검토필요 |
+
+(기본정보/지원요건/재학생현황/비용/재정지원 카테고리는 통합 세션 지시에
+따라 이번 세션에서 의도적으로 미착수 — "미수집"이 아니라 "보류"로
+이해할 것)
+
+### 검증
+- `psql`로 세션 종료 시점 확인: `data_collection_status` 분포
+  `verified_pilot` 13개교, `unconfirmed` 187개교(리셋 이전 149개교였던
+  것과 비교해 재작업 필요량이 큼), `university_admission_metrics` 65행.
+- 스테이징 마이그레이션 파일은 커밋 전 삭제, git status에 남지 않음
+  확인.
+- `npx supabase db push --linked` / `vercel deploy` 실행하지 않음(로컬
+  DB 데이터 변경 + 문서만). 스키마 변경 없으므로 신규 마이그레이션
+  파일 없음.
+
+### 다음 세션 인계 (33차용, 최우선)
+1. **DB 리셋 원인 조사 및 149개교 CDS 데이터 복구 필요**(1번 항목 참고) —
+   이 세션의 최우선 인계 사항. 통합 세션과 공유 로컬 DB 컨테이너 사용
+   시 `supabase db reset`을 함부로 실행하지 않도록 세션 간 조율 필요.
+2. 범위 확장(기본정보/지원요건/재학생 인구통계/비용/재정지원)은
+   통합 세션이 "이제 채워도 된다"고 알리기 전까지 보류 — 대신
+   `docs/2026-09-23-college-explore-expansion-field-spec.md`를 다음
+   세션에서 먼저 읽고 정식 스키마 구조를 숙지해둘 것.
+3. 위에 나열한 9개교(Duquesne/LSU/LMU/Kentucky/URI/UNT/Stevens/JMU/UAH)는
+   URL을 이미 확보했으니 재검색 없이 바로 curl+pdftotext로 반영 가능.
+4. Montclair State University는 본교 CDS(Bloomfield 아님)를 별도로
+   찾아야 함.
+5. sources_pending_review/unconfirmed 대다수는 여전히 미착수 — DB
+  리셋으로 재작업 필요량이 늘었으므로 다음 세션은 복구를 우선하고
+  신규 학교 확대는 그다음 순위로.
