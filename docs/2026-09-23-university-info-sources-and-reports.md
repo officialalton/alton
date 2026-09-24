@@ -3531,3 +3531,97 @@ university_source_urls: Clemson University 1건 approved(common_data_set, cycle_
    적용 가능.
 6. 200개교 완료 후 UI 확장 지시(CDS 전체 정보 노출)는 아직 손대지 않음 —
    200개교 완료 전까지 매 세션 인계에 계속 전달.
+
+## 37차 세션 (2026-09-23) — CDS 3개교 실수집, 다수 학교 출처 단절 확인
+
+### 1. CDS 실수집 완료 (3개교, 전량 `verification_status='official'`)
+
+- **University of Florida** (cycle_year=2025, 출처:
+  `https://data-apps.ir.aa.ufl.edu/public/cds/CDS_2024-2025_UFMAIN_Post_v4_ADA5.pdf`,
+  fillable PDF를 WebFetch로 로컬 저장 후 Read 도구로 페이지별 이미지 추출):
+  applicants_count 73,557 / admitted_count 17,804 / enrolled_count
+  7,513 / admit_rate 24.20% / yield_rate 42.20% / SAT total 25-75
+  1330-1470 / SAT EBRW 25-75 660-730 / SAT math 25-75 660-750 /
+  ACT composite 25-75 29-33 / SAT·ACT 제출률 80%·40% / GPA 평균 3.92 /
+  retention_rate_year1 98.00%. 성별 합산값과 거주지별 합산값이
+  서로 일치함을 대조 확인(추측 없음).
+- **University of Utah** (cycle_year=2025, 출처:
+  `https://uair.utah.edu/wp-content/uploads/2026/08/CDS-2024-2025-Template-for-Website.pdf`):
+  applicants_count 26,822 / admitted_count 23,062 / enrolled_count
+  6,001 / admit_rate 85.98% / yield_rate 26.02% / SAT total 25-75
+  1200-1370 / SAT EBRW 25-75 600-690 / SAT math 25-75 590-690 /
+  ACT composite 25-75 22-29 / SAT·ACT 제출률 10%·38% / GPA 평균 3.67 /
+  retention_rate_year1 86.00%. 대기자명단 없음(No) 확인.
+- **Indiana University Bloomington** (cycle_year=2025, 출처:
+  `https://iuapps.iu.edu/cds/?campus=BL&year=2024` — IU는 PDF가 아닌
+  라이브 웹 CDS를 연도별 드롭다운으로 제공, "Fall 2024" 문구로 실제
+  2024-2025 사이클임을 확인 후 수집): applicants_count 67,658 /
+  admitted_count 52,918 / enrolled_count 9,611 / admit_rate 78.22% /
+  yield_rate 18.16% / waitlist_offered·accepted·admitted 7,524 /
+  3,059 / 3,041 / SAT total 25-75 1180-1390 / SAT EBRW 25-75
+  590-690 / SAT math 25-75 580-710 / ACT composite 25-75 27-33 /
+  SAT·ACT 제출률 42.2%·14.1% / GPA 평균 3.76 / retention_rate_year1
+  91.1%.
+- 세 학교 모두 `universities.data_collection_status` →
+  `verified_pilot` 반영 완료.
+
+### 2. 이번 세션 시도했으나 출처 단절로 실패한 학교 (다음 세션 참고)
+- **University of Colorado Boulder**: `data.colorado.edu`의 CDS
+  리포트가 로그인 필요 대시보드(Report #1190, HTML 유형)로만
+  제공됨 — 공개 PDF 없음. 우회 경로 못 찾음.
+- **Ohio University**: `ohio.edu/iea/university-data`의 "2025 Common
+  Data Set" 링크가 SharePoint 개인 계정(`catmailohio.sharepoint.com`)
+  Excel 파일로 연결되어 인증 없이 열람 불가.
+- **Fordham University**: CDS 2024-25 링크가
+  `fordhamit-my.sharepoint.com` 개인 공유 링크로 연결 — 브라우저에서
+  파일명은 확인됐으나(`FORDHAM UNIVERSITY CDS_2024-2025.xlsx`)
+  Excel Online 뷰어가 콘텐츠를 렌더링하지 않음(빈 화면, 인증 필요
+  추정). 추가 시도 가치 있음(공개 공유 링크라 완전히 막힌 건 아님).
+- **Mississippi State University**: 35·36차에 이어 재확인 —
+  IR 사이트의 CDS 드롭다운 href가 여전히 깨진 상대경로
+  (`/var/www/site/htdocs/../documents/Common%Data%Set/cds2024_2025.xlsx`,
+  공백 인코딩 손상)를 그대로 사용. 직접 URL 추정 시도(여러 조합)
+  모두 404. **3세션 연속 실패 — 다음 세션은 이 학교를 완전히 스킵
+  권장.**
+- **University of Wisconsin-Milwaukee**: `uwm.edu/institutional-research/
+  common-data-set-cds/` 404. 구글 색인에 2022-2023 파일 경로만 존재,
+  2024-2025 파일 경로 추정 실패.
+- **Saint Louis University**: `slu.edu/provost/institutional-data`,
+  `slu.edu/office-of-institutional-research/*` 등 시도한 URL 전부 404.
+- **University of Notre Dame**: 공식 CDS 리포트가 Google Drive 폴더
+  (`drive.google.com/drive/folders/...`)로만 제공되어 개별 파일 접근
+  불가(브라우저 자동화로 폴더 목록 탐색 미시도 — 다음 세션에서 폴더
+  내부 진입 시도 가치 있음).
+
+### 3. 학과 보완 — 이번 세션 미착수(시간 예산 전량 CDS에 사용)
+Kentucky 22페이지 중 6페이지만 완료 상태 그대로 이월. IUPUI 출처,
+unconfirmed 학교 재조사도 미착수.
+
+### 4. 최종 카운트 (세션 종료, psql 직접 확인)
+```
+data_collection_status: verified_pilot 150(+3) / sources_pending_review 27(-2) / unconfirmed 23(-1)
+university_admission_metrics: UF +17행 / Utah +17행 / IU Bloomington +20행 (전량 official)
+university_source_urls: UF·Utah·IU Bloomington 각 1건 approved(common_data_set, cycle_year=2025)
+```
+
+### 검증
+- 마이그레이션 파일 신규/변경 없음, 20261700000000 이후 확장 필드 미접촉.
+- `npx supabase db push --linked`, `vercel deploy` 실행하지 않음.
+- 로컬 DB 리셋 관련 명령 전혀 실행하지 않음.
+- UF·Utah·IU Bloomington 모두 CDS 원문에서 성별/거주지 합산값이
+  총계와 일치함을 대조 확인 후 저장(추측 없음). 에세이 테이블은
+  이번 세션에서 건드리지 않음(중복 삽입 리스크 없음).
+
+### 다음 세션 인계 (38차용, 최우선)
+1. **로컬 DB 리셋 금지 규칙 재강조.**
+2. IUPUI 출처 확보 + Catholic University of America/Miami University
+   Ohio(unconfirmed) 재조사 — 다섯 세션 연속 이월된 최우선 과제.
+3. University of Kentucky 학과 목록 이어서 수집(`page=6`부터) — 변동 없음.
+4. Mississippi State CDS는 3세션 연속 실패 확인 — 완전히 스킵 권장.
+   대신 Fordham(SharePoint 공유 링크 재시도), Notre Dame(Google Drive
+   폴더 진입), Bowling Green, Andrews, Morgan State에 예산 배분 권장.
+5. CDS 웹폼(IU Bloomington 방식)을 만나면 연도 드롭다운을 반드시
+   확인해 "Fall 20XX" 문구로 실제 수집 사이클을 재확인할 것(기본
+   선택값이 최신 미공개 사이클일 수 있음).
+6. 200개교 완료 후 UI 확장 지시(CDS 전체 정보 노출)는 아직 손대지 않음 —
+   200개교 완료 전까지 매 세션 인계에 계속 전달.
