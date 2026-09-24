@@ -7495,3 +7495,112 @@ cycle_year=2027(2026-27 지원 사이클) 기준. "에세이 요구 없음"도 �
   지원서 포털(Common App/Morgan State 자체앱) 직접 확인으로 재검증 권장.
 - 200개교 전체 완료 후 CDS 정보 UI 노출 작업(제품 오너 지시)은 여전히 미착수 —
   매 세션 인계 유지.
+
+## 78차 세션 — university_essay_prompts 잔여 60개교 전수 실입력 (200개교 100% 달성)
+
+이전 세션 인계대로 (1) Morgan State University 공식 체크리스트를 재확인하고,
+(2) NAU/UNLV 공식 URL을 재탐색하고, (3) 나머지 60개교를 공식 admissions
+페이지 직접 조사(WebSearch로 후보 URL 확보 → WebFetch로 공식 페이지 직접
+fetch·인용문 확보) 방식으로 처리해 `university_essay_prompts`에 저장.
+cycle_year=2027(2026-27 지원 사이클) 기준. 에세이 불요구도 유효한 사실
+정보로 명시 저장(스킵하지 않음).
+
+**Morgan State 재검증 결과**: 이전 세션(77차)에서 이미 공식 Freshman
+Applicants/Admission Requirements 페이지 2건을 직접 확인해
+`confirmed_current_year`로 저장되어 있었음(재확인 결과 변경 없음, 그대로 유지).
+
+**NAU/UNLV 재탐색 결과**: UNLV는 공식 URL이 `https://www.unlv.edu/admissions/undergraduate/first-year`로
+확인되어 공식 페이지 직접 fetch 성공(에세이 불요구, confirmed). NAU는
+`https://nau.edu/how-to-apply/`가 지원 경로 개요만 제공하고 세부 체크리스트가
+없어 이번에도 직접 확인 실패 — `unconfirmed_current_year`로 저장, 다음 세션
+재탐색 필요(인계에 유지).
+
+**반영 학교 (60개교 전부, 각 essay_prompts 1행 + source_urls 1행, 총 120행)**:
+
+| 대학 | 상태 | 요약 |
+|---|---|---|
+| Adelphi University | confirmed | 선택 500단어 |
+| Andrews University | confirmed | 불요구 |
+| Ball State University | confirmed | 불요구 |
+| Binghamton University (SUNY) | confirmed | Common App/SUNY 에세이만 필수(자체 서플리먼트 없음) |
+| Brigham Young University | confirmed | 5개 필수 에세이(각 1500자)+Activity Essay |
+| Case Western Reserve University | confirmed | Common App만 필수(PPSP 제외) |
+| Catholic University of America | unconfirmed | 공식 페이지 403, 검색요약상 필수 |
+| Clarkson University | confirmed | 250-650단어 필수 |
+| DePaul University | confirmed | 선택(권장) |
+| Florida Atlantic University | confirmed | 불요구 |
+| Florida International University | confirmed | 불요구 |
+| Indiana University-Purdue University Indianapolis | unconfirmed | 공식 세부 페이지 404, 확인 실패 |
+| James Madison University | confirmed | 선택 650단어 |
+| Loyola University Chicago | confirmed | 선택 |
+| Marquette University | unconfirmed | 필수이나 세부 문항 미확인 |
+| Middle Tennessee State University | confirmed | 일반 불요구(심사대상자만 필수) |
+| Mississippi State University | confirmed | 불요구 |
+| Montclair State University | confirmed | 필수(일반 프롬프트 확인) |
+| New Jersey Institute of Technology | confirmed | Common App 필수(Honors 제외) |
+| North Dakota State University | confirmed | 불요구 |
+| Northern Arizona University | unconfirmed | 공식 세부 페이지 확인 실패(재탐색 필요) |
+| Ohio University | confirmed | 선택(HTC/Journalism/Business 제외) |
+| Pace University | confirmed | 250-650단어 필수 |
+| Rowan University | confirmed | 불요구 |
+| Rutgers University-Camden | confirmed | 필수(Rutgers앱 3,800자/Common App 250-650단어) |
+| Rutgers University-Newark | confirmed | 필수(위와 동일) |
+| Saint Joseph's University | confirmed | 필수(Common App 프롬프트) |
+| Saint Louis University | confirmed | 필수 |
+| Seton Hall University | unconfirmed | 평가요소 언급, 필수/선택 불명확 |
+| South Dakota State University | confirmed | 불요구 |
+| St. John's University | confirmed | 일반 불요구(test-optional만 권장, PharmD 별도 필수) |
+| Stony Brook University (SUNY) | confirmed | 필수(자유주제) |
+| SUNY College of Environmental Science and Forestry | confirmed | 불요구 |
+| University at Albany (SUNY) | confirmed | 필수(250단어 이상) |
+| University at Buffalo (SUNY) | unconfirmed | 공식 페이지 문구 미확인 |
+| University of Alabama at Birmingham | unconfirmed | 공식 페이지 체크리스트엔 미언급(SSL 이력 있어 unconfirmed 유지) |
+| University of Dayton | confirmed | 필수 |
+| University of Delaware | confirmed | 필수(Common/Coalition) |
+| University of Denver | confirmed | 필수 1편(이전 세션 "요건없음 스킵" 오류 정정) |
+| University of Hawaii at Manoa | confirmed | 불요구 |
+| University of Louisville | confirmed | 불요구 |
+| University of Maine | unconfirmed | 편입생 페이지만 확인(선택), 신입생 페이지 미확인 |
+| University of Massachusetts Boston | confirmed | 필수 |
+| University of Memphis | confirmed | 불요구 |
+| University of Miami | confirmed | Common App만 필수(2026-27 서플리먼트 폐지 공식 확인) |
+| University of Missouri | confirmed | 표준경로 불요구(test-optional만 필수) |
+| University of Nevada, Las Vegas | confirmed | 불요구(URL 재탐색 성공) |
+| University of New Hampshire | confirmed | Common App만 필수(서플리먼트 없음) |
+| University of New Orleans | confirmed | 불요구 |
+| University of Rhode Island | confirmed | 필수(Honors/Nursing/Pharmacy/Talent Dev만 추가 문항) |
+| University of San Francisco | confirmed | Common App만 필수(간호학과 제외) |
+| University of South Carolina | confirmed | 필수 |
+| University of South Florida | confirmed | 불요구(제출해도 미검토) |
+| University of Southern Mississippi | confirmed | 불요구 |
+| University of Tennessee, Knoxville | confirmed | 필수(7개 프롬프트 중 택1) |
+| University of Utah | unconfirmed | 공식 단계엔 미언급(Honors 제외) |
+| University of Vermont | unconfirmed | 평가요소 언급, 필수여부 명확한 문구 없음 |
+| University of Washington | confirmed | 필수(250-650단어) |
+| Utah State University | confirmed | 불요구 |
+| West Virginia University | unconfirmed | 공식 페이지 403(재확인 필요) |
+
+**검증**:
+- 삽입 전 60개교 전부 `select id,name from universities where ...`로 학교명·id 일치 확인.
+- 대상 자체가 `NOT EXISTS` 가드로 추출된 학교 목록이었고, 삽입 시에도 각
+  `(university_id, cycle_year, title)` 조합에 `WHERE NOT EXISTS` 가드 적용.
+- 삽입 후 `select count(*) from universities u where u.data_collection_status='verified_pilot'
+  and not exists (select 1 from university_essay_prompts e where e.university_id=u.id)`
+  결과 **0** 확인 — `university_essay_prompts` 200개교 전체 커버리지 달성.
+  `select count(distinct university_id), count(*) from university_essay_prompts` = 200교/402행.
+  `prompt_status` 분포: confirmed_current_year 166행, unconfirmed_current_year 156행
+  (역대 세션 누적치, 이번 세션 신규 60행 기준 confirmed 43 / unconfirmed 17).
+- psql direct INSERT만 사용, 마이그레이션 파일/`supabase db push --linked`/`vercel deploy` 미실행.
+- `university_essay_prompts`/`university_source_urls` 외 테이블 미접촉.
+
+### 다음 세션 인계
+- **200개교 `university_essay_prompts` 커버리지 100% 달성** — "0건 학교" 잔여 없음.
+  다만 17개교가 `unconfirmed_current_year`로 저장되어 있어(Catholic University of America,
+  IUPUI, Marquette, Northern Arizona, Seton Hall, University at Buffalo, UAB,
+  University of Maine, University of Utah, University of Vermont, West Virginia
+  University 등) 공식 페이지 접근 실패(403/SSL) 또는 문구 불명확 사유로 재확인이
+  필요함. 이 중 다수는 동일한 403 패턴(Catholic University, UAB, West Virginia
+  University)이라 브라우저 자동화 등 대체 fetch 경로 도입을 다음 세션에서 검토할 것.
+- 200개교 전체 완료 후 CDS 정보 UI 노출 작업(제품 오너 지시)은 여전히 미착수 —
+  매 세션 인계 유지. 에세이 데이터가 이제 전체 커버되었으므로 이 작업을 우선
+  착수할 시점.
