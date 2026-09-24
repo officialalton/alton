@@ -1,42 +1,23 @@
-import { execFileSync } from "node:child_process";
 import { test, expect } from "@playwright/test";
+import { psql, psqlExpectError, createFamily, cleanupFamily, type FixtureFamily } from "./fixtures";
 
 // R5 — DB 레벨 검증: subject_enrollments/teacher_assignments 위에 얹은
 // 활성화 선행조건, 겹침 방지 exclusion constraint, 선생님 변경 원자성,
 // 채팅 스레드 archive/생성, 문서 권한 재처리 큐 등록을 실제 psql로 검증한다.
 // (r4-admin-entitlement-ledger.spec.ts와 동일하게 브라우저 없이 DB만 검증 —
 // 이 스펙은 UI를 거치지 않고 마이그레이션의 함수/제약을 직접 실행 검증한다.)
-
-const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
-
-function psql(sql: string): string {
-  const out = execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-q", "-t", "-A", "-c", sql], {
-    encoding: "utf-8",
-  }).trim();
-  // psql -q suppresses command status lines for statements without RETURNING/SELECT
-  // output, but INSERT/UPDATE without a result set still prints nothing extra with -q.
-  return out;
-}
-function psqlExpectError(sql: string): string {
-  try {
-    execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-t", "-A", "-c", sql], {
-      encoding: "utf-8",
-      stdio: ["ignore", "ignore", "pipe"],
-    });
-    throw new Error("expected psql to fail but it succeeded");
-  } catch (e) {
-    const err = e as { stderr?: Buffer; message: string };
-    return err.stderr ? err.stderr.toString() : err.message;
-  }
-}
+//
+// 2026-09-24 — 공용 시드 학생(지훈)/household 대신 이 스펙 전용 fixture로
+// 옮김(e2e/fixtures.ts) — 이 스펙은 contracts.status를 draft→active로 직접
+// 전환해 다른 스펙의 "지훈은 항상 특정 상태" 가정과 경합할 수 있었다.
 
 const TEACHER_1 = "dddddddd-0000-0000-0000-000000000001"; // active, rate set (seed)
 const TEACHER_2 = "dddddddd-0000-0000-0000-000000000002"; // active, rate set (seed)
 const TEACHER_PENDING = "77777777-0000-0000-0000-000000000001"; // pending, no active status
-const CHILD = "cccccccc-0000-0000-0000-000000000001"; // 지훈 (seed)
 const SUBJECT = "eeeeeeee-0000-0000-0000-000000000001"; // SAT Math
 
-let householdId: string;
+let family: FixtureFamily;
+let CHILD: string;
 let contractId: string;
 let enrollmentId: string;
 let teacherAssignmentId: string | null = null;
@@ -49,11 +30,10 @@ test.describe("R5 — subject_enrollments/teacher_assignments DB 레벨 검증",
   let teacher2TemplateId: string;
 
   test.beforeAll(() => {
-    householdId = psql(
-      `insert into households (primary_guardian_id) values ('bbbbbbbb-0000-0000-0000-000000000001') returning id;`
-    );
+    family = createFamily("r5-assign", { childNames: ["E2E R5배정테스트 학생"] });
+    CHILD = family.children[0].id;
     contractId = psql(
-      `insert into contracts (household_id, child_id, status) values ('${householdId}', '${CHILD}', 'draft') returning id;`
+      `insert into contracts (household_id, child_id, status) values ('${family.householdId}', '${CHILD}', 'draft') returning id;`
     );
     enrollmentId = psql(
       `insert into subject_enrollments (child_id, subject_id, contract_id, status) values ('${CHILD}', '${SUBJECT}', '${contractId}', 'planned') returning id;`
@@ -66,18 +46,9 @@ test.describe("R5 — subject_enrollments/teacher_assignments DB 레벨 검증",
   });
 
   test.afterAll(() => {
-    psql(`delete from document_permission_retries where subject_enrollment_id = '${enrollmentId}';`);
-    psql(`delete from subject_thread_messages where thread_id in (select id from subject_threads where subject_enrollment_id = '${enrollmentId}');`);
-    psql(`delete from subject_threads where subject_enrollment_id = '${enrollmentId}';`);
-    psql(`delete from teacher_assignments where subject_enrollment_id = '${enrollmentId}';`);
-    psql(`delete from subject_enrollments where id = '${enrollmentId}';`);
-    psql(`delete from entitlement_ledger where grant_id in (select id from entitlement_grants where child_id = '${CHILD}');`);
-    psql(`delete from entitlement_grants where child_id = '${CHILD}';`);
-    psql(`delete from purchases where contract_id = '${contractId}';`);
-    psql(`delete from contracts where id = '${contractId}';`);
-    psql(`delete from households where id = '${householdId}';`);
     psql(`delete from teacher_curriculum_template_units where template_id = '${teacher2TemplateId}';`);
     psql(`delete from teacher_curriculum_templates where id = '${teacher2TemplateId}';`);
+    cleanupFamily(family);
   });
 
   test("activation blocked when contract not active and no paid entitlement", () => {
@@ -102,7 +73,7 @@ test.describe("R5 — subject_enrollments/teacher_assignments DB 레벨 검증",
     );
     const purchaseId = psql(
       `insert into purchases (household_id, child_id, contract_id, entitlement_product_id, product_version_id, quantity, unit_price_minor, package_price_minor, total_minor, validity_months, status)
-       values ('${householdId}', '${CHILD}', '${contractId}', '${productId}', '${versionId}', 1, 1000, 1000, 1000, 6, 'succeeded') returning id;`
+       values ('${family.householdId}', '${CHILD}', '${contractId}', '${productId}', '${versionId}', 1, 1000, 1000, 1000, 6, 'succeeded') returning id;`
     );
     psql(
       `insert into entitlement_grants (child_id, entitlement_product_id, purchase_id_ref, original_quantity, expires_at) values ('${CHILD}', '${productId}', '${purchaseId}', 1, now() + interval '6 months');`

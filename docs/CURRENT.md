@@ -355,7 +355,7 @@
   408건(858→450행) 적재돼 있던 것을 가장 이른 id만 남기고 정리. 데이터 수집
   세션 쪽 로컬 DB도 같은 패턴 12건 확인·정리됨(595→583행).
 
-- **E2E 전용 fixture 분리(2026-09-23, 1개 스펙 완료 — 나머지 진행 중)**:
+- **E2E 전용 fixture 분리(2026-09-23~24, 완료)**:
   `e2e/minor-consent.spec.ts`가 공용 계정(`ACCOUNTS.student`=지훈)의 생년월일을
   13세 미만으로 바꿨다 되돌리는 식으로 테스트해, fullyParallel 아래 다른
   스펙(`auth-roles.spec.ts` 등)과 같은 계정 상태를 두고 경합하던 것을 이 스펙
@@ -366,16 +366,72 @@
   보류, 테스트만 관리자 직접 호출 경로로 수정), (2) 로그아웃 헬퍼가 찾던
   "OOO님 ▾" 버튼이 모바일 전용(`md:hidden`) 상단바에만 있어 데스크톱 기본
   뷰포트에서 영원히 타임아웃, (3) 로그아웃(form action) 리다이렉트를 안
-  기다리고 바로 다음 로그인을 시도해 실제 경합 재현. **검증**:
-  `minor-consent.spec.ts` + `auth-roles.spec.ts`를 `--workers=2/3`으로 3회
-  반복 실행해 매번 9/9 통과(이전엔 기본 병렬에서 실패하던 패턴). **남은 범위**:
-  `ACCOUNTS.*`를 쓰는 스펙 15개 중 이미 `test.describe.configure({mode:"serial"})`로
-  파일 내부만 순차 처리하게 막아둔 게 다수 있고, `account-lifecycle.spec.ts` 옆
-  주석은 전체 스위트가 "기본 병렬 실행에서 5개 실패, `--workers=1`에서는 전부
-  통과"라고 명시 — 즉 스위트 전체가 사실상 `--workers=1` 전제로 돌아가는 중.
-  나머지 파일도 같은 방식(전용 fixture로 이전)으로 하나씩 옮겨야 진짜
-  다중 워커 병렬이 가능해짐 — 이번 라운드는 그 패턴을 확립하고 가장 문제가
-  뚜렷했던 1개를 끝까지 검증한 것.
+  기다리고 바로 다음 로그인을 시도해 실제 경합 재현.
+  뒤이어 `complete-profile-flow.spec.ts`/`r4-purchase-flow.spec.ts`도 같은
+  패턴으로 이전.
+
+  **2026-09-24 — 나머지 8개 파일 완료**: `r5-subject-enrollment-flow`,
+  `r5-subject-enrollment-teacher-assignment`, `m3-teacher-assignment-termination-flow`,
+  `r6-lesson-booking-flow`, `problem-bank-flow`, `figure-template-1`,
+  `rw-structured-blocks`가 공용 지훈/이서아/공용 household/공용 선생님
+  커리큘럼 템플릿을 더 이상 건드리지 않도록 전용 fixture로 옮김. 생성·정리
+  로직은 새 공통 헬퍼 `e2e/fixtures.ts`(`createFamily`/`cleanupFamily`/
+  `createFixtureTeacher`/`cleanupFixtureTeacher`/`grantOperatingCurriculum`/
+  `startedSessionWith` 등)로 통합 — 실행마다 `randomUUID`+타임스탬프로
+  태깅된 계정을 만들고, `entitlement_ledger`/`teacher_rate_history`처럼
+  설계상 삭제 불가한(INSERT-only 트리거) 테이블이 걸린 경우에만
+  `r4-purchase-flow.spec.ts`와 동일하게 완전 삭제 대신 contract만 void하고
+  남긴다(다음 실행과 충돌하지 않음 — 실행마다 새 계정이므로). `fullyParallel`
+  설정은 그대로 유지.
+
+  `teacher_curriculum_templates(teacher_id, subject_id)` UNIQUE 제약을
+  `r5-subject-enrollment-flow`와 `r5-subject-enrollment-teacher-assignment`가
+  둘 다 공용 이도현+SAT Math 조합에 동시에 쓰면 병렬 실행 시 충돌하는 것을
+  발견 — `r5-subject-enrollment-flow`는 이 스펙 전용 임시 선생님으로
+  옮겨 해결(`r6`의 `teacher_availability_rules`는 다른 파일이 안 건드려 충돌
+  없음, 공용 선생님 자체를 여러 파일이 assignment 대상으로 재사용하는 것은
+  exclusion 제약이 enrollment 단위라 안전).
+
+  `r5-subject-enrollment-flow`/`m3-teacher-assignment-termination-flow`는
+  2026-09-11 정보구조 개편(관리자 매칭 화면이 "매칭" 탭에서 "사용자 > 학생 >
+  학생 프로필"로 이동, 수강 계획 생성→활성화→배정 3단계가 매칭 확인 한
+  번으로 통합)으로 기존 테스트가 이미 존재하지 않는 화면을 찾고 있던 것도
+  함께 발견·재작성(순수 테스트 드리프트, 제품 결함 아님). `r6-lesson-booking-flow`도
+  2026-09-19 UAT 반영(예약이 독립 "Bookings" 탭으로 이동)에 맞춰 갱신.
+
+  **검증**: DB 레벨 4개 파일(`r5-subject-enrollment-flow`/
+  `r5-subject-enrollment-teacher-assignment`/`m3`/`r6`, 총 17개 테스트)을
+  기본 병렬 설정으로 두 번 연속 실행해 모두 통과, 재실행 계약 중복 충돌
+  없음 확인. 공용 시드 계정(지훈/이서아)에 남은 contracts 없음 확인.
+  나머지 3개 파일(`problem-bank-flow`/`figure-template-1`/`rw-structured-blocks`)은
+  실제 AI 생성을 포함해 fixture 전환 자체는 끝났지만, 검증 중 이 작업과
+  무관한 별개의 사전 존재 UI 드리프트를 발견해 별도 작업으로 분리했다
+  (아래 항목 참고) — 이번 라운드에서는 8개 파일 전체가 아니라 5개 파일만
+  실제 통과까지 확인됨.
+
+- **문제은행 E2E 3개 파일 UI 드리프트(2026-09-24 발견, 미해결 — 별도 작업)**:
+  `problem-bank-flow`/`figure-template-1`/`rw-structured-blocks` 3개 파일이
+  `/admin?tab=problem-bank`으로 이동한 뒤 실제 AI 생성까지 검증하는 흐름인데,
+  fixture 격리 검증 중 이 파일들이 2026-09-17 제품 개편("생성/검수/공개/보관"
+  4개 버킷 분리, 버킷 기본값이 이제 "검수") 이후 한 번도 갱신되지 않았음을
+  발견했다. 확인된 것:
+  1. `page.goto("/admin?tab=problem-bank")` 직후 곧바로 "SAT Math"/"AP" 등
+     체계 탭을 찾던 12곳 전부 — 그 탭은 "생성" 버킷 안에만 있는데 기본
+     버킷이 "검수"라 전부 타임아웃. **이건 이번에 고쳤다**("생성" 버킷 버튼
+     클릭을 12곳 모두 추가, `npx tsc --noEmit` 통과).
+  2. 위 수정 후 재검증하니 또 다른 문제 발견: `problem-bank-flow.spec.ts`의
+     "AP 탭" 테스트가 `getByLabel("SAT 영역", { exact: true })).toHaveCount(1)`을
+     기대하는데, 그 라벨을 가진 select는 버킷 분리 이전에 "생성" 화면에
+     같이 있던 필터 줄(`FilterBar`, `aria-label="SAT 영역"`, 검수/공개/보관
+     버킷에만 있음)과 SAT R&W 생성 폼 자신(`aria-label="SAT 영역"`, AP
+     선택 시엔 렌더 안 됨) 둘을 가정한 것 — 버킷 분리 이후 "생성" 화면에는
+     필터 줄이 없어져 AP 탭에서는 0개가 정상이다. 같은 이유로 CASES 루프
+     테스트들이 쓰는 `getByLabel("SAT 영역", {exact:true}).nth(1)`도 필터
+     줄이 사라져 `.nth(1)`이 범위를 벗어날 가능성이 높다(직접 하나하나
+     재검증 필요 — 실제 AI 호출이 걸려 비용·시간이 크다).
+  **사용자 결정(2026-09-24)**: 이번 fixture 격리 작업 범위에서 제외하고
+  별도 티켓으로 분리. 다음 세션에서 실제 AI 생성까지 포함해 3개 파일
+  전체를 현재 화면 기준으로 재검증·수정할 것 — 위 두 항목이 출발점.
 
 - 오픈 전 blocker(남은 것): 실제 세금 계산(설계만, 활성화 보류), 실제 이메일
   발송(설계만, 비프로덕션 발송 차단 유지), Workspace 위임 계정 분리(설계만),

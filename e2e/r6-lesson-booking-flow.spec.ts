@@ -1,6 +1,6 @@
-import { execFileSync } from "node:child_process";
 import { test, expect } from "@playwright/test";
 import { loginAs } from "./helpers";
+import { psql, createFamily, cleanupFamily, type FixtureFamily } from "./fixtures";
 
 // R6 — 자체 예약(신규 sessions/reservations) 실브라우저 E2E. 신규 예약→수업권 hold→취소→
 // 수업권 release까지의 핵심 흐름을 검증한다. Google Calendar/Meet 실제 생성은
@@ -10,20 +10,23 @@ import { loginAs } from "./helpers";
 // **(2026-09-03 갱신)** 개별 회차 예약용 Calendly/Zoom은 실제 Google Sandbox 통합 검증
 // 통과 후 완전히 제거됐다 — 상담(consult_requests) 예약 Calendly는 애초에 이 스펙의
 // 범위가 아니었고 ConsultForm으로 독립적으로 동작해 영향 없음.
+//
+// 2026-09-24 — 공용 시드 보호자(김민지)의 household에 박준서를 얹어 쓰던 것을
+// 이 스펙 전용 부모+자녀+household로 옮김(e2e/fixtures.ts) — 공용 household를
+// 더 이상 건드리지 않는다.
+//
+// 2026-09-24(2차) — 2026-09-19 UAT 반영으로 예약 진입이 독립 "Bookings"
+// 탭(activeTab id: "bookings")으로 바뀌었고, 그 화면은 hideHeader로 열려
+// "정규수업 예약" 제목 자체가 더 이상 렌더되지 않는다(제목이 없다고 검증을
+// 지우지 않고, 실제 화면 구조에 맞춰 갱신한다). 슬롯도 이전엔 바로
+// 보였지만 이제 "+ 새 수업 예약하기"를 먼저 열어야 과목·선생님 선택과
+// 슬롯이 나온다.
 
-const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
-const CHILD_ID = "88888888-0000-0000-0000-000000000001"; // 박준서 — 다른 스펙이 쓰지 않는 학생(격리)
-const GUARDIAN_EMAIL = "minji.kim@example.com"; // 이 스펙 전용 household를 새로 만들어 붙임
 const TEACHER_ID = "dddddddd-0000-0000-0000-000000000002"; // 이도현 선생님 — 유효한 시급 이력 보유(seed)
 const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001"; // SAT Math
 
-function psql(sql: string): string {
-  return execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-q", "-t", "-A", "-c", sql], {
-    encoding: "utf-8",
-  }).trim();
-}
-
-let householdId: string;
+let family: FixtureFamily;
+let CHILD_ID: string;
 let contractId: string;
 let enrollmentId: string;
 let grantId: string;
@@ -32,16 +35,11 @@ test.describe.configure({ mode: "serial" });
 
 test.describe("R6 — 정규수업 예약 흐름 (실브라우저)", () => {
   test.beforeAll(() => {
-    // 김민지(GUARDIAN_EMAIL)의 기존 household(aabbccdd-...0001, 지훈/이서아가 이미 속함)에
-    // 박준서를 세번째 자녀로 추가한다 — 새 household를 만들지 않아 "guardian은 household
-    // 하나"라는 기존 모델 가정을 건드리지 않는다.
-    householdId = psql(
-      `select household_id from household_members where profile_id='bbbbbbbb-0000-0000-0000-000000000001' and role='guardian' limit 1;`
-    );
-    psql(`insert into household_members (household_id, profile_id, role) values ('${householdId}', '${CHILD_ID}', 'child');`);
+    family = createFamily("r6-booking", { childNames: ["E2E R6예약테스트 학생"] });
+    CHILD_ID = family.children[0].id;
 
     contractId = psql(
-      `insert into contracts (household_id, child_id, status) values ('${householdId}', '${CHILD_ID}', 'active') returning id;`
+      `insert into contracts (household_id, child_id, status) values ('${family.householdId}', '${CHILD_ID}', 'active') returning id;`
     );
     enrollmentId = psql(
       `insert into subject_enrollments (child_id, subject_id, contract_id, status) values ('${CHILD_ID}', '${SUBJECT_ID}', '${contractId}', 'active') returning id;`
@@ -68,13 +66,9 @@ test.describe("R6 — 정규수업 예약 흐름 (실브라우저)", () => {
     // 동일한 관례 참고). 여기서 지울 수 있는 것만 지우고, 나머지는 상태 전환으로 다음 실행이
     // unique 제약(child당 active 과목수강 1개, 선생님 겹침방지 등)과 충돌하지 않게만 만든다.
     psql(`delete from booking_notification_outbox where reservation_id in (select id from reservations where subject_enrollment_id = '${enrollmentId}');`);
-    psql(`delete from notifications where recipient_id = '${CHILD_ID}' or recipient_id in (select profile_id from household_members where household_id = '${householdId}' and role='guardian');`);
     psql(`delete from reservation_cancellations where reservation_id in (select id from reservations where subject_enrollment_id = '${enrollmentId}');`);
-    psql(`update teacher_assignments set status = 'ended', effective_until = now() where subject_enrollment_id = '${enrollmentId}';`);
-    psql(`update subject_enrollments set status = 'terminated' where id = '${enrollmentId}';`);
-    psql(`update contracts set status = 'void', voided_at = now(), void_reason = 'e2e cleanup' where id = '${contractId}';`);
     psql(`delete from teacher_availability_rules where teacher_id = '${TEACHER_ID}' and created_by = (select id from profiles where role='admin' limit 1);`);
-    psql(`delete from household_members where household_id = '${householdId}' and profile_id = '${CHILD_ID}';`);
+    cleanupFamily(family);
   });
 
   test("보호자: 슬롯 예약 → 수업권 hold → 취소 → 수업권 release", async ({ page }) => {
@@ -82,12 +76,16 @@ test.describe("R6 — 정규수업 예약 흐름 (실브라우저)", () => {
     // hold_entitlement, 이 스펙이 만든 grant가 아니라 이 child의 다른 기존 grant가 뽑힐 수도
     // 있다) 특정 grantId의 잔액이 아니라 "예약에 실제로 걸린 hold/release 원장 이벤트"로
     // 검증한다 — 이게 FIFO 선택과 무관하게 항상 정확하다.
-    await loginAs(page, GUARDIAN_EMAIL);
-    await page.goto(`/parent?tab=booking&child=${CHILD_ID}`);
+    await loginAs(page, family.parentEmail);
+    await page.goto(`/parent?tab=bookings&child=${CHILD_ID}`);
 
-    await expect(page.getByText("정규수업 예약")).toBeVisible();
+    // hideHeader라 "정규수업 예약" 제목은 없다. showBookingForm의 초기값이
+    // upcomingBookings.length === 0이라(app/student/LessonBookingTab.tsx) —
+    // 이 fixture 학생은 예정된 수업이 아직 없으므로 "+ 새 수업 예약하기"를
+    // 누를 필요 없이 폼(과목·선생님 선택)이 이미 펼쳐진 채로 로드된다.
+    await expect(page.getByText("과목·선생님 선택")).toBeVisible({ timeout: 15000 });
 
-    const firstSlotButton = page.locator("button").filter({ hasText: /^오전|^오후/ }).first();
+    const firstSlotButton = page.locator("button").filter({ hasText: /오전|오후/ }).first();
     await expect(firstSlotButton).toBeVisible({ timeout: 15000 });
     await firstSlotButton.click();
 

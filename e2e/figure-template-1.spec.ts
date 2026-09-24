@@ -1,45 +1,33 @@
 import { test, expect, type Page } from "@playwright/test";
-import { execFileSync } from "node:child_process";
 import { ACCOUNTS, loginAs } from "./helpers";
+import { psql, createFamily, cleanupFamily, startedSessionWith as startedSessionWithFixture, type FixtureFamily } from "./fixtures";
 
 // 표준 렌더링 엔진 템플릿 1(평행선·횡단선·각) — 한 경로 검증(2026-09-14 제품 오너 지시):
 //   AI 의미 데이터 생성 → 서버 검증(render_check) → 표준 렌더 미리보기 → 미리보기로 확인함 → 공개 → 학생 수업 화면.
 // 로컬 Supabase(시드 계정) + 로컬 dev 서버. 실제 모델을 호출하므로 ANTHROPIC_API_KEY 가 없으면 건너뛴다.
+//
+// 2026-09-24 — 공용 시드 학생(지훈)/household 대신 이 스펙 전용 fixture로 옮김
+// (e2e/fixtures.ts).
 
-const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
 const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001";
 const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001";
-const STUDENT_ID = "cccccccc-0000-0000-0000-000000000001";
-const HOUSEHOLD_ID = "aabbccdd-0000-0000-0000-000000000001";
 const OUT = "docs/assets/2026-09-14-render-samples/e2e";
 
-function psql(sql: string): string {
-  return execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-q", "-t", "-A", "-c", sql], { encoding: "utf-8" }).trim();
-}
-function asUser(userId: string, sql: string): string {
-  return psql(`set role authenticated; do $$ begin perform set_config('request.jwt.claim.sub', '${userId}', false); end $$; ${sql} reset role;`);
-}
+let family: FixtureFamily;
+test.beforeAll(() => {
+  family = createFamily("figure1", { childNames: ["E2E 도형템플릿테스트 학생"] });
+});
+test.afterAll(() => cleanupFamily(family));
 
-/** 공개된 문제 하나를 고정한, 시작된 v3 수업(선생님 seoyeon · 학생 jihoon). 통합 테스트 fixture 와 같은 경로. */
+/** 공개된 문제 하나를 고정한, 시작된 v3 수업(이 스펙 전용 선생님·학생). 통합 테스트 fixture 와 같은 경로. */
 function startedSessionWith(problemId: string): string {
-  const baseUnit = psql(`select id from subject_template_units where subject_id = '${SUBJECT_ID}' order by position limit 1;`);
-  const contractId = psql(`insert into contracts (household_id, child_id, status) values ('${HOUSEHOLD_ID}', '${STUDENT_ID}', 'draft') returning id;`);
-  const enrollmentId = psql(`insert into subject_enrollments (child_id, subject_id, contract_id, status) values ('${STUDENT_ID}', '${SUBJECT_ID}', '${contractId}', 'planned') returning id;`);
-  psql(`insert into teacher_assignments (subject_enrollment_id, teacher_id, status, effective_from) values ('${enrollmentId}', '${TEACHER_ID}', 'active', now() - interval '1 day');`);
-  const overlayId = asUser(TEACHER_ID, `insert into student_curriculum_overlays (subject_enrollment_id) values ('${enrollmentId}') returning id;`);
-  const overlayUnitId = asUser(TEACHER_ID, `insert into curriculum_overlay_units (overlay_id, source_unit_id, position, unit_title) values ('${overlayId}', '${baseUnit}', 1, 'E2E 도형 회차') returning id;`);
-  // 회차 키워드 범위 안이어야 담긴다 — 이 문제에 키워드를 달고 회차에도 붙인다.
-  const keywordId = psql(`insert into subject_keywords (subject_id, label) values ('${SUBJECT_ID}', 'E2E 평행선 ${Date.now()}') returning id;`);
-  asUser(TEACHER_ID, `insert into curriculum_overlay_unit_keywords (overlay_unit_id, keyword_id) values ('${overlayUnitId}', '${keywordId}');`);
-  psql(`insert into problem_keywords (problem_id, keyword_id) values ('${problemId}', '${keywordId}') on conflict do nothing;`);
-  const prepId = asUser(TEACHER_ID, `insert into curriculum_unit_preps (overlay_unit_id, created_by) values ('${overlayUnitId}', '${TEACHER_ID}') on conflict (overlay_unit_id) do update set created_by = excluded.created_by returning id;`);
-  asUser(TEACHER_ID, `insert into curriculum_unit_prep_items (prep_id, content_type, content_id, position) values ('${prepId}', 'problem', '${problemId}', 1);`);
-  const offset = 9000 + Math.floor(Math.random() * 500);
-  const reservationId = psql(`insert into reservations (kind, subject_enrollment_id, owner_profile_id, starts_at, ends_at, status) values ('lesson', '${enrollmentId}', '${TEACHER_ID}', now() + interval '${offset} days', now() + interval '${offset} days 1 hour', 'confirmed') returning id;`);
-  const sessionId = psql(`insert into sessions (reservation_id, subject_enrollment_id, teacher_id, lesson_type_id, scheduled_duration_minutes) values ('${reservationId}', '${enrollmentId}', '${TEACHER_ID}', (select id from lesson_types where code = 'regular'), 60) returning id;`);
-  psql(`select link_unit_prep_to_session('${overlayUnitId}', '${sessionId}', '${TEACHER_ID}');`);
-  psql(`select mark_lesson_session_started('${sessionId}', '${TEACHER_ID}');`);
-  return sessionId;
+  return startedSessionWithFixture({
+    problemId,
+    subjectId: SUBJECT_ID,
+    teacherId: TEACHER_ID,
+    studentId: family.children[0].id,
+    householdId: family.householdId,
+  });
 }
 
 async function rowTitles(page: Page): Promise<string[]> {
@@ -54,6 +42,7 @@ test("템플릿 1: AI 의미 데이터 → 검증 → 표준 렌더 → 공개 �
 
   await loginAs(page, ACCOUNTS.admin);
   await page.goto("/admin?tab=problem-bank");
+  await page.getByRole("button", { name: "생성", exact: true }).click();
   // 2026-09-14 재구성: 문항 체계 탭(SAT Math) → 영역 → 세부 기술. 그림 요구는 관리자가 고르지 않고 자료 판정이 정한다.
   await page.getByRole("tab", { name: "SAT Math" }).click();
   await page.getByLabel("새 문제 과목").selectOption(SUBJECT_ID);
@@ -134,6 +123,7 @@ test("템플릿 2: 지문(직각삼각형) → AI 관계 데이터 → 검증 �
 
   await loginAs(page, ACCOUNTS.admin);
   await page.goto("/admin?tab=problem-bank");
+  await page.getByRole("button", { name: "생성", exact: true }).click();
   await page.getByLabel("새 문제 과목").selectOption(SUBJECT_ID);
   const head = passage.slice(0, 60);
   await expect.poll(async () => (await rowTitles(page)).some((t) => t.startsWith(head)), { timeout: 30_000 }).toBe(true);
@@ -189,6 +179,7 @@ test("템플릿 3: 지문(직선과 점) → AI 객체 데이터 → 검증 → 
 
   await loginAs(page, ACCOUNTS.admin);
   await page.goto("/admin?tab=problem-bank");
+  await page.getByRole("button", { name: "생성", exact: true }).click();
   await page.getByLabel("새 문제 과목").selectOption(SUBJECT_ID);
   const head = passage.slice(0, 60);
   await expect.poll(async () => (await rowTitles(page)).some((t) => t.startsWith(head)), { timeout: 30_000 }).toBe(true);
@@ -243,6 +234,7 @@ test("템플릿 4: 지문(표 자료) → AI 값 데이터 → 검증 → 표준
 
   await loginAs(page, ACCOUNTS.admin);
   await page.goto("/admin?tab=problem-bank");
+  await page.getByRole("button", { name: "생성", exact: true }).click();
   await page.getByLabel("새 문제 과목").selectOption(SUBJECT_ID);
   const head = passage.slice(0, 60);
   await expect.poll(async () => (await rowTitles(page)).some((t) => t.startsWith(head)), { timeout: 30_000 }).toBe(true);
@@ -295,6 +287,7 @@ async function runDraftFigureFlow(page: Page, testInfo: import("@playwright/test
   psql(`update problem_versions set options = '${JSON.stringify(opts.options).replace(/'/g, "''")}'::jsonb, correct_index = ${opts.correctIndex}, explanation = '${opts.explanation.replace(/'/g, "''")}' where problem_id = '${problemId}' and version_no = 1;`);
   await loginAs(page, ACCOUNTS.admin);
   await page.goto("/admin?tab=problem-bank");
+  await page.getByRole("button", { name: "생성", exact: true }).click();
   await page.getByLabel("새 문제 과목").selectOption(SUBJECT_ID);
   const head = opts.passage.slice(0, 60);
   await expect.poll(async () => (await rowTitles(page)).some((t) => t.startsWith(head)), { timeout: 30_000 }).toBe(true);
@@ -394,6 +387,7 @@ test("진술 블록: 로마숫자 진술 + 조합 선택지 → 내용 검증 �
   psql(`update problem_versions set options = '["I only","II only","I and II","Neither"]'::jsonb, correct_index = 0, explanation = 'Since $ab < 0$, exactly one is negative; $a + b > 0$ makes the positive one larger in magnitude — so I must be true.', statements = '["$|a| \\\\neq |b|$","$a > b$"]'::jsonb where problem_id = '${problemId}' and version_no = 1;`);
   await loginAs(page, ACCOUNTS.admin);
   await page.goto("/admin?tab=problem-bank");
+  await page.getByRole("button", { name: "생성", exact: true }).click();
   await page.getByLabel("새 문제 과목").selectOption(SUBJECT_ID);
   const head = passage.slice(0, 50);
   await expect.poll(async () => (await rowTitles(page)).some((t) => t.startsWith(head)), { timeout: 30_000 }).toBe(true);

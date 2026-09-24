@@ -1,46 +1,36 @@
 import { test, expect, type Page } from "@playwright/test";
-import { execFileSync } from "node:child_process";
 import { ACCOUNTS, loginAs } from "./helpers";
+import { psql, createFamily, cleanupFamily, startedSessionWith as startedSessionWithFixture, type FixtureFamily } from "./fixtures";
 
 // Reading & Writing 구조화 자료 블록(2026-09-14 제품 오너 지시) — 기존 11개 유형에 대한 표준 렌더·검증·게이트 확인.
 //   관리자(초안 저장 → render_check 에 RW 구조 검사 → 공개 게이트) → 학생 수업 화면(Text 1/2 구역·메모 목록·빈칸·밑줄·질문·데이터 표).
 // 앞부분은 모델 호출 없이 결정적으로(관리자 저장 → 공개 → 학생), 뒷부분은 실제 AI 생성(ANTHROPIC_API_KEY 필요).
 // 로컬 Supabase(시드 계정) + 로컬 dev 서버. figure-template-1.spec 과 같은 fixture 경로.
+//
+// 2026-09-24 — 공용 시드 학생(지훈)/household 대신 이 스펙 전용 fixture로 옮김
+// (e2e/fixtures.ts).
 
-const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
 const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001";
 const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001";
-const STUDENT_ID = "cccccccc-0000-0000-0000-000000000001";
-const HOUSEHOLD_ID = "aabbccdd-0000-0000-0000-000000000001";
 const ADMIN_ID = "aaaaaaaa-0000-0000-0000-000000000001";
 const OUT = "docs/assets/2026-09-14-render-samples/e2e";
 
-function psql(sql: string): string {
-  return execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-q", "-t", "-A", "-c", sql], { encoding: "utf-8" }).trim();
-}
-function asUser(userId: string, sql: string): string {
-  return psql(`set role authenticated; do $$ begin perform set_config('request.jwt.claim.sub', '${userId}', false); end $$; ${sql} reset role;`);
-}
 const q = (s: string) => s.replace(/'/g, "''");
 
+let family: FixtureFamily;
+test.beforeAll(() => {
+  family = createFamily("rwblocks", { childNames: ["E2E RW블록테스트 학생"] });
+});
+test.afterAll(() => cleanupFamily(family));
+
 function startedSessionWith(problemId: string): string {
-  const baseUnit = psql(`select id from subject_template_units where subject_id = '${SUBJECT_ID}' order by position limit 1;`);
-  const contractId = psql(`insert into contracts (household_id, child_id, status) values ('${HOUSEHOLD_ID}', '${STUDENT_ID}', 'draft') returning id;`);
-  const enrollmentId = psql(`insert into subject_enrollments (child_id, subject_id, contract_id, status) values ('${STUDENT_ID}', '${SUBJECT_ID}', '${contractId}', 'planned') returning id;`);
-  psql(`insert into teacher_assignments (subject_enrollment_id, teacher_id, status, effective_from) values ('${enrollmentId}', '${TEACHER_ID}', 'active', now() - interval '1 day');`);
-  const overlayId = asUser(TEACHER_ID, `insert into student_curriculum_overlays (subject_enrollment_id) values ('${enrollmentId}') returning id;`);
-  const overlayUnitId = asUser(TEACHER_ID, `insert into curriculum_overlay_units (overlay_id, source_unit_id, position, unit_title) values ('${overlayId}', '${baseUnit}', 1, 'E2E RW 회차') returning id;`);
-  const keywordId = psql(`insert into subject_keywords (subject_id, label) values ('${SUBJECT_ID}', 'E2E RW ${Date.now()}${Math.floor(Math.random() * 1000)}') returning id;`);
-  asUser(TEACHER_ID, `insert into curriculum_overlay_unit_keywords (overlay_unit_id, keyword_id) values ('${overlayUnitId}', '${keywordId}');`);
-  psql(`insert into problem_keywords (problem_id, keyword_id) values ('${problemId}', '${keywordId}') on conflict do nothing;`);
-  const prepId = asUser(TEACHER_ID, `insert into curriculum_unit_preps (overlay_unit_id, created_by) values ('${overlayUnitId}', '${TEACHER_ID}') on conflict (overlay_unit_id) do update set created_by = excluded.created_by returning id;`);
-  asUser(TEACHER_ID, `insert into curriculum_unit_prep_items (prep_id, content_type, content_id, position) values ('${prepId}', 'problem', '${problemId}', 1);`);
-  const offset = 9500 + Math.floor(Math.random() * 400);
-  const reservationId = psql(`insert into reservations (kind, subject_enrollment_id, owner_profile_id, starts_at, ends_at, status) values ('lesson', '${enrollmentId}', '${TEACHER_ID}', now() + interval '${offset} days', now() + interval '${offset} days 1 hour', 'confirmed') returning id;`);
-  const sessionId = psql(`insert into sessions (reservation_id, subject_enrollment_id, teacher_id, lesson_type_id, scheduled_duration_minutes) values ('${reservationId}', '${enrollmentId}', '${TEACHER_ID}', (select id from lesson_types where code = 'regular'), 60) returning id;`);
-  psql(`select link_unit_prep_to_session('${overlayUnitId}', '${sessionId}', '${TEACHER_ID}');`);
-  psql(`select mark_lesson_session_started('${sessionId}', '${TEACHER_ID}');`);
-  return sessionId;
+  return startedSessionWithFixture({
+    problemId,
+    subjectId: SUBJECT_ID,
+    teacherId: TEACHER_ID,
+    studentId: family.children[0].id,
+    householdId: family.householdId,
+  });
 }
 
 async function rowTitles(page: Page): Promise<string[]> {
@@ -62,6 +52,7 @@ function seedProblem(s: Seed): string {
 async function adminSaveAndPublish(page: Page, passage: string, problemId: string, opts: { expectBlocked?: RegExp; hasFigure?: boolean; shot?: string }) {
   await loginAs(page, ACCOUNTS.admin);
   await page.goto("/admin?tab=problem-bank");
+  await page.getByRole("button", { name: "생성", exact: true }).click();
   await page.getByLabel("새 문제 과목").selectOption(SUBJECT_ID);
   const head = collapse(passage).slice(0, 60);
   await expect.poll(async () => (await rowTitles(page)).some((t) => collapse(t).startsWith(head)), { timeout: 30_000 }).toBe(true);
@@ -211,6 +202,7 @@ for (const c of AI_CASES) {
     test.skip(!process.env.ANTHROPIC_API_KEY, "ANTHROPIC_API_KEY 없음 — 실제 모델 호출이 필요한 검증");
     await loginAs(page, ACCOUNTS.admin);
     await page.goto("/admin?tab=problem-bank");
+  await page.getByRole("button", { name: "생성", exact: true }).click();
     await page.getByLabel("새 문제 과목").selectOption(SUBJECT_ID);
     // 문항 체계 탭 SAT Reading & Writing(기본). 필터 줄(첫 번째)과 새 문제 줄(두 번째)에 같은 라벨의 선택이 있다 — 새 문제 줄을 쓴다.
     await page.getByRole("tab", { name: "SAT Reading & Writing" }).click();
