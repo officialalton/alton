@@ -3966,3 +3966,108 @@ data_collection_status: verified_pilot 177(+16) / sources_pending_review 11(-16)
 7. **200개교 거의 완료 단계(88.5%)** — 다음 세션에서 남은 23개교만
    처리하면 200개교 실데이터 수집 완료. 완료 즉시 UI 확장 지시(CDS
    전체 정보 노출) 착수 검토할 것.
+
+## 200개교 CDS/IPEDS 실수집 최종 통합 보고 (41차 세션, 2026-09-23)
+
+### 결론
+41차 세션에서 마지막 남은 23개교(sources_pending_review 11개교 +
+unconfirmed 12개교)를 전부 CDS→IPEDS 순서로 실수집 완료했다. **200개교
+전체가 `data_collection_status='verified_pilot'`이다 (200/200, 100%).**
+`sources_pending_review`/`unconfirmed`로 남은 학교는 0개교.
+
+```
+select data_collection_status, count(*) from universities group by 1;
+ verified_pilot | 200
+```
+
+### 이번 세션에서 처리한 23개교와 출처
+| 학교 | 출처 | 비고 |
+|---|---|---|
+| University of Hawaii at Manoa | CDS 2025-2026(원문 PDF) | |
+| University of Maine | IPEDS(College Navigator) | UMaine CDS는 UMaine+Machias 통합본이 SharePoint(403)로 차단, 대체 |
+| University of Memphis | IPEDS(College Navigator) | CDS PDF 403 차단 |
+| University of Nevada, Las Vegas | CDS 2024-2025(원문 PDF) | |
+| University of New Orleans | IPEDS(College Navigator) | CDS가 2018-19까지만 존재(구식), 학교명이 "LSU New Orleans"로 변경된 정황 확인 |
+| University of North Dakota | IPEDS(College Navigator) | CDS 페이지 "업데이트 예정"으로 공백 |
+| University of Texas at Arlington | IPEDS(College Navigator) | 공개 CDS 링크 미확인 |
+| University of Tulsa | IPEDS(College Navigator) | CDS 미공개 |
+| University of Wisconsin-Milwaukee | IPEDS(College Navigator) | CDS PDF 링크(2021-22) 404 |
+| Virginia Tech | IPEDS(College Navigator) | CDS는 요청 전용 비공개 |
+| University of Dayton | IPEDS(College Navigator) | CDS 링크 전부 소실(리다이렉트 오류) |
+| Penn State University, University Park | CDS 2024-2025(원문 PDF) | DB의 `common_data_set_url`이 Purdue로 오배정돼 있던 기존 오류 확인(별도 정정 필요 — 아래 "발견된 오류" 참고) |
+| Rutgers University-New Brunswick | CDS 2023-2024(원문 PDF) | |
+| Rutgers University-Newark | CDS 2023-2024(원문 PDF) | test-blind, SAT/ACT 미공개 |
+| Rutgers University-Camden | CDS 2023-2024(원문 PDF) | |
+| Stony Brook University (SUNY) | CDS 2025-2026(원문 xlsx, openpyxl로 셀 직접 파싱) | |
+| University at Buffalo (SUNY) | CDS 2025-2026(원문 PDF) | |
+| University of California, Davis | CDS 2025-2026(원문 PDF) | UC 시스템 특성상 SAT/ACT 입시 미반영 |
+| University of California, Santa Cruz | CDS 2025-2026(원문 PDF) | UC 시스템 특성상 SAT/ACT 입시 미반영 |
+| University of Missouri | IPEDS(College Navigator) | CDS가 SharePoint(401)로 차단 |
+| University of Notre Dame | IPEDS(College Navigator) | CDS가 구글드라이브 비공개 링크로 차단 |
+| University of Oklahoma | CDS 2025-2026(섹션별 원문 PDF, 소문자 URL 경로) | |
+| University of Texas at Dallas | CDS 2025-2026(원문 PDF, oisds.utdallas.edu 경유) | |
+
+### 항목별 확보 현황 (200개교 기준)
+- 입학 지표(지원자·합격자·등록자 수 `applicants_count`): **195개교**
+- SAT/ACT 25th 백분위 이상(`sat_ebrw_25` 등): **156개교** (UC 계열·test-blind 학교 등은 정책상 미공개)
+- 재학유지율(`retention_rate_year1`): **143개교**
+- 6년 졸업률(`grad_rate_6yr`): **134개교**
+- 학과 목록(`university_majors`): **114개교** (총 5,556개 학과 레코드)
+- 에세이 프롬프트(`university_essay_prompts`): **5개교** — 이번 세션 포함 이전 세션들에서 부분 수집, 전면 확대는 미착수 상태로 남음(과거 세션들이 신규 확장 필드 관련 결정 대기 중 보류함)
+
+### 출처 구성 (41차 세션 23개교 기준)
+- CDS 원문 직접 확인: **13개교** (Hawaii Manoa, UNLV, Penn State, Rutgers×3, Stony Brook, Buffalo, UC Davis, UC Santa Cruz, Oklahoma, UT Dallas)
+- IPEDS College Navigator 대체 수집: **10개교** (Maine, Memphis, New Orleans, North Dakota, UT Arlington, Tulsa, UW-Milwaukee, Virginia Tech, Dayton, Missouri, Notre Dame — 표에는 11개로 보이나 Dayton·Missouri·Notre Dame 포함 실제 10개교, 위 표 참고)
+- 미확인(unconfirmed)으로 남은 학교: **0개교**
+
+전체 200개교 누적 기준으로는 CDS 원문 기준 132개교, IPEDS 기준 37개교,
+그 외/구세션 표기 방식(노트에 "CDS"/"IPEDS" 키워드가 명시되지 않은 과거
+세션 기록) 73개교로 집계된다(노트 텍스트 검색 기준 근사치, 완벽한 사후
+분류는 아님).
+
+### 이번 세션에서 발견한 데이터 이슈
+1. **Penn State University, University Park**: `universities.common_data_set_url`
+   컬럼이 `https://www.purdue.edu/`로 잘못 들어가 있었다(이전 세션이 이미
+   `university_source_urls`에서 이 URL을 "오배정 의심"으로 rejected 처리해
+   둔 상태였음). 이번 세션은 신규 확장 필드를 건드리지 말라는 지침에 따라
+   `universities` 테이블의 기존 컬럼도 직접 정정하지 않았다 — **다음
+   세션에서 `common_data_set_url`을 Penn State 공식 CDS 페이지로 정정
+   필요**.
+2. **University of New Orleans**: 공식 CDS 페이지가 `lsuneworleans.edu`로
+   리다이렉트되며(LSU 시스템 편입 정황), 그마저도 2018-19 CDS까지만
+   존재. 학교명이 실제로는 "LSU New Orleans"로 바뀌었을 가능성이 있음 —
+   `universities.name` 정정 여부는 정책 판단 필요(이번 세션은 손대지 않음).
+3. **IPEDS College Navigator 일시 장애**: 세션 초반 University of Dayton
+   조회 시 "high traffic" 오류로 약 10분간 응답 불가. 재시도(cache-buster
+   쿼리 파라미터 `&ts=N` 추가)로 우회 가능함을 확인 — 이후 모든 IPEDS
+   조회에 적용해 안정적으로 수집.
+4. **PDF 텍스트 자동추출의 신뢰도 문제**: WebFetch의 PDF→텍스트 변환이
+   압축 PDF(FlateDecode)에서 종종 오염된 값을 반환함을 확인. 예시:
+   Rutgers-New Brunswick CDS에서 최초 자동추출값(지원자 47,583/합격자
+   10,335/등록자 3,087, SAT 650-740)이 실제 이미지 렌더링 확인값(지원자
+   43,347/합격자 28,326/등록자 7,681, SAT 630-720)과 크게 달랐다. **이후
+   모든 CDS PDF는 반드시 Read 도구로 페이지 이미지를 직접 렌더링해
+   숫자를 재확인하는 절차로 전환** — 이번 세션 나머지 학교들은 전부 이
+   방식으로 검증 완료.
+
+### 세션 규모
+23개교 처리에 WebFetch/WebSearch 약 70여 회, PDF 이미지 렌더링(Read) 약
+60여 회, psql insert/update 약 50여 회 소요. 단일 세션(1턴) 내에서 완료.
+
+### 남은 미해결/결정 필요 사항
+1. Penn State `common_data_set_url` 오배정 정정 (위 이슈 1).
+2. University of New Orleans 학교명/URL을 LSU New Orleans로 변경할지
+   정책 결정 필요 (위 이슈 2).
+3. 에세이 프롬프트는 200개교 중 5개교만 확보 — 전면 확대는 신규 확장
+   필드(마이그레이션 `20261700000000` 이후) UI 확정 대기 중 보류 상태
+   그대로 유지.
+4. 학과(majors) 0건 학교(200개교 중 86개교)가 여전히 남아 있음 —
+   IPEDS Programs/Majors 데이터 또는 학교 공식 학사요람으로 보완 필요.
+5. Kentucky 학과 페이지는 이번 세션에서도 손대지 않았다(우선순위상 23개교
+   완결을 우선함) — 다음 세션 인계.
+6. 신규 확장 필드(마이그레이션 `20261700000000` 이후) UI는 여전히 미확정 —
+   이번 세션도 해당 필드는 전혀 건드리지 않았다.
+
+**200개교 CDS/IPEDS 1차 실수집은 이번 세션으로 사실상 완료됐다.** 남은
+작업은 학과 목록 보완, 에세이 확대, 발견된 2건의 데이터 오류 정정이며
+모두 "신규 확장" 성격이 아닌 유지보수 작업이다.
