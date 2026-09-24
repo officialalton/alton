@@ -6906,3 +6906,70 @@ Aid/Cost-of-Attendance 웹페이지를 WebFetch/브라우저로 직접 조회**�
   demographics는 아직 비어있음에 유의).
 - CDS 표 숫자가 pdftotext 텍스트 레이어에 없는 학교(스캔/이미지 폼 필드)는 브라우저 자동화나 OCR이
   필요 — 이번 세션에서는 스킵하고 텍스트 추출이 되는 학교 위주로 처리함.
+
+### 67차 세션: demographics/financial_aid_programs 둘 다 0건이던 101개교 중 20개교 신규 실수집
+
+- 대상: `where not exists(financial_aid_programs) and not exists(demographics)` 101개교 목록에서
+  curl+pdftotext -layout으로 CDS 원문이 안정적으로 텍스트 추출되는 학교를 우선 선정.
+- 방법: university_source_urls에 이미 등록된 승인 CDS PDF 링크를 curl -A "Mozilla/5.0"로 다운로드 후
+  pdftotext -layout으로 변환. B1(성별)/B2(인종)은 "Total Undergraduates(both degree & non-degree
+  seeking)" 열 기준으로 비율(%) 계산, university_demographics.population_scope='all_students'로 삽입.
+  financial_aid_programs는 H2(need_based_grant: E/A, 값은 K)+H2A(merit_scholarship: N/A, 값은 O)+
+  H5(federal_loan: row B 인원%/누적원금)+H1 Federal Work-Study 총액(1인당 금액 미기재이므로 avg_award_amount
+  는 NULL, notes에 총액만 기록)로 4개 프로그램 행 삽입. 모두 verification_status='official',
+  verified_at=오늘, source_url_id는 기존 CDS URL 재사용(신규 URL 추가 없음), `WHERE NOT EXISTS(...)` 가드.
+- 완료 20개교(university_financial_aid_programs 4행 + university_demographics 9~11행, 단 Chapman은
+  demographics 없음 — 아래 참고):
+
+| 대학 | cycle_year(aid/demo) | 비고 |
+|---|---|---|
+| South Dakota State University | 2021 | CDS 2021-22, University of South Dakota와 혼동 주의 — id 별도 확인 완료 |
+| Clark University | 2024 | |
+| Colorado School of Mines | 2021(aid)/2022(demo) | H1 아이년도와 B1 fall 코호트 연도가 CDS 특성상 1년 차이 |
+| Montclair State University | 2024 | |
+| Northern Arizona University | 2023(aid)/2024(demo) | |
+| Old Dominion University | 2025 | |
+| Rowan University | 2024(aid)/2025(demo) | |
+| Texas Christian University | 2024 | |
+| University of Massachusetts Boston | 2021(aid)/2022(demo) | CDS 2021-2022본(2022년 fall 기준) |
+| University of South Dakota | 2024 | South Dakota State University와 혼동 주의 — id 별도 확인 완료 |
+| University of Southern Mississippi | 2024 | |
+| University of San Francisco | 2024 | |
+| Utah State University | 2025 | |
+| West Virginia University | 2023(aid)/2024(demo) | |
+| Worcester Polytechnic Institute | 2024(aid)/2025(demo) | |
+| East Carolina University | 2021(aid)/2022(demo) | CDS 2021-2022본 |
+| Idaho State University | 2024 | PDF가 데이터 태그 export 형식(B101, H201 등) — merit_scholarship 행 숫자가
+  first-year(337) > 전체 undergrad(9) 로 모순되어 스킵, federal_loan은 인원% only(평균 금액 셀 공란) |
+| Fordham University | 2019 | CDS 2019-2020본 — university_source_urls에 이 학교의 더 최신 CDS PDF가
+  없어 구버전 그대로 사용(다음 세션에서 최신 CDS 링크 추가 검토 권장) |
+| Chapman University | 2024 | 이 학교의 CDS 원문에는 B(Enrollment) 섹션이 없고 H(Financial Aid)만
+  존재 — financial_aid_programs만 삽입, demographics는 0건 유지 |
+| DePaul University | 2025 | 이 학교는 섹션별 개별 PDF(`2025CDS_B.pdf`, `2025CDS_H.pdf`)로 제공됨을
+  확인 — 기존 university_source_urls에 등록된 `2025CDS_G.pdf`(세부 비용 섹션만) 링크와는 별도로
+  존재하는 파일이며, 이번 세션은 새 URL을 university_source_urls에 추가하지 않고 직접 패턴 추론으로
+  다운로드만 진행했음. 다음 세션에서 B/H 섹션 PDF도 정식으로 university_source_urls에 등록 권장. |
+
+- 스킵(원문 자체가 잘못된 학교와 매칭됨 — 데이터 미삽입, 별도 확인 필요):
+  - **University of Louisiana at Lafayette**: university_source_urls에 등록된
+    `https://oir.lafayette.edu/.../CDS2025-2026.pdf` 링크의 실제 내용은 "Lafayette College"(펜실베이니아
+    소재 사립 리버럴아츠칼리지, University of Louisiana at Lafayette와 전혀 다른 학교)의 CDS였음.
+    총 학부생 2,675명·대학원생 0명이라는 규모부터 University of Louisiana at Lafayette(학부생 약
+    17,000명대)와 맞지 않아 확인 후 스킵. **이 university_source_urls 레코드는 잘못된 학교 데이터이므로
+    수정/삭제 필요**.
+  - Marquette University: 등록된 CDS PDF의 H1/H2/H2A 표 셀이 전부 공란(폼 필드가 텍스트 레이어 없이
+    이미지로 렌더링된 것으로 추정) — 실수 대신 스킵.
+- 세션 종료 시점 재확인: demographics/financial_aid_programs 둘 다 0건인 학교 101개교 → 81개교로 감소
+  (20개교 처리, 이 중 Chapman은 financial_aid만 채워져 두 테이블 다 0건 카운트에서는 빠지지만
+  demographics는 여전히 0건).
+- Agent 툴로 하위 에이전트 spawn하지 않고 직접 psql/curl/pdftotext로 작업. 마이그레이션 파일 작성,
+  `supabase db push`/`vercel deploy` 미실행.
+
+### 68차 세션(다음) 인계
+- demographics/financial_aid_programs 둘 다 0건인 학교 81개교 남음.
+- University of Louisiana at Lafayette의 university_source_urls CDS 링크가 실제로는 Lafayette College
+  것이므로 정정 필요(review_note 남기거나 status='rejected' 처리 후 올바른 CDS URL 재등록 권장).
+- Marquette University는 등록 CDS PDF에서 H 섹션 숫자가 텍스트로 추출되지 않음 — 브라우저 자동화로
+  다시 열어보거나 다른 연도 CDS를 확보해야 함.
+- Idaho State University는 merit_scholarship 데이터가 CDS 원문 표 파싱 모순으로 비어있음 — 필요시
+  브라우저로 원문 재확인.
