@@ -1,5 +1,9 @@
 import { createAdminClient } from "@/lib/supabase-admin";
 import { getDriveApiAccessToken } from "@/lib/google-workspace-auth";
+// R12 Drive 링크 실제 클릭 검증 임시 조치(2026-09-23) — lib/drive-artifacts.ts의
+// uploadArtifactToDrive와 동일한 R3 preview 우회 분기. 검증 완료 후 이 import와
+// 아래 분기를 제거할 것(docs/CURRENT.md R12 blocker 참고).
+import { getR3PreviewDriveAccessToken } from "@/lib/drive-preview-verify-auth";
 
 // R8 6/N — 학생→과목→연도→세션 Shared Drive 폴더 자동 생성 + 선생님 배정 권한
 // 자동 부여/회수, 그리고 실패 재처리 큐(Gate C GW-12 인수 기준).
@@ -210,7 +214,11 @@ async function processOneSessionDriveTask(
       "not implemented: DRIVE_ARTIFACTS_ALLOW_REAL_WRITES=true가 아니면 실제 Drive 호출을 하지 않습니다."
     );
   }
-  const token = await getDriveApiAccessToken();
+  // R12 임시 조치(2026-09-23, 검증 후 제거) — lib/drive-artifacts.ts와 동일한 패턴.
+  const token =
+    process.env.VERCEL_ENV === "preview"
+      ? await getR3PreviewDriveAccessToken()
+      : await getDriveApiAccessToken();
   await performSessionDriveTask(token, row);
 }
 
