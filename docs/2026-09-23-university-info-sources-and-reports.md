@@ -3802,3 +3802,167 @@ university_source_urls: IPEDS 신규 11건 approved(source_type='other', cycle_y
    막히는 학교는 즉시 IPEDS로 전환할 것(시간 낭비 방지).
 7. 200개교 완료 후 UI 확장 지시(CDS 전체 정보 노출)는 아직 손대지 않음 —
    200개교 완료 전까지 매 세션 인계에 계속 전달.
+
+## 40차 세션 (본 세션) — IPEDS 16개교 실수집 + 학과 10개교 보완 + St. John's/IUPUI 해소
+
+### 배경 및 이슈
+세션 시작 직후 `nces.ed.gov` 전체 도메인이 약 5분간 완전히 응답하지
+않는 상태(curl `ECONNRESET`, 브라우저 tool도 navigate 거부)를 겪음 —
+백그라운드 폴링(`until curl ... ; sleep 15`)으로 복구를 기다리는 동안
+CDS 직접 접근을 시도했으나 Fordham·Mississippi State 모두 로그인
+필요/soft-404로 재확인만 하고 즉시 포기, nces.ed.gov 복구 후 전량
+IPEDS로 전환. 이후 세션 끝까지 IPEDS는 안정적으로 응답.
+
+### 1. IPEDS College Navigator로 실수집한 16개교
+전부 `verification_status='official'`, `cycle_year=2024`(Fall 2024
+신입생 코호트), `source_url_id`는 신규 `university_source_urls`
+행(`source_type='other'`, `status='approved'`)에 연결, `verified_at`은
+today. notes에 "IPEDS College Navigator 기준 (Fall 2024 신입생, IPEDS
+ID ...)" 형식으로 출처 유형 명시. 처리 후
+`data_collection_status='verified_pilot'`로 갱신.
+
+- **Andrews University** (IPEDS ID 168740): 지원자 1,306 / 합격률
+  82% / 등록률 23% / SAT EBRW·Math 520-660·470-630 / ACT Composite
+  20-26 / 재학유지율 83% / 6년 졸업률 72%.
+- **Bowling Green State University-Main Campus** (IPEDS ID 201441):
+  지원자 21,153 / 합격률 81% / 등록률 21% / SAT EBRW·Math
+  500-610·500-600 / ACT Composite 19-26 / 재학유지율 82% / 6년 졸업률
+  61%.
+- **Hofstra University** — CDS 직접 확보(IPEDS 아님). 공식 CDS
+  2024-2025 PDF가 Hofstra 공식 Issuu 계정
+  (`issuu.com/hofstra/docs/2024-2025_common_data_set_hofstra_university`)에
+  게재돼 있어 브라우저로 페이지를 넘기며(키보드 방향키 필요, 좌우
+  화살표 아이콘 클릭은 페이지 상태에 따라 씹히는 경우가 있어 페이지
+  본문 클릭 후 방향키 사용이 더 안정적이었음) C1/C9/B22/졸업률 코호트를
+  직접 읽음. 지원자 25,021 / 합격 17,035(68%) / 등록 1,754(수율
+  10.3%) / SAT EBRW·Math 620-700·650-700(Composite 1240-1380) / ACT
+  Composite 27-32 / 재학유지율(전일제) 84% / 6년 졸업률
+  약 70%(1,079/1,545 누적 계산, CDS B7~B9 합산).
+- **Mississippi State University** (IPEDS ID 176080): CDS
+  PDF(`ir.msstate.edu/CDS/cds20XX_20XX.pdf`)가 실제로는 전부
+  soft-404(HTTP 200이지만 페이지 내용은 "Error 404")였고, 아코디언
+  링크는 JS `window.open()`으로 실제 URL을 새 창에 넘겨 브라우저
+  tool이 차단 — IPEDS로 전환. 지원자 23,346 / 합격률 78% / 등록률
+  20% / SAT EBRW·Math 560-670·540-680 / ACT Composite 21-29 /
+  재학유지율 83% / 6년 졸업률 67%.
+- **Clarkson University** (IPEDS ID 190044): 지원자 6,661 / 합격률
+  77% / 등록률 9% / SAT EBRW·Math 590-690·610-700 / ACT Composite
+  25-32 / 재학유지율 85% / 6년 졸업률 75%.
+- **Fordham University** (IPEDS ID 191241): 공식 CDS 페이지가
+  `loginp.fordham.edu` CAS 로그인으로 리다이렉트되어 접근 불가 확인 후
+  IPEDS 전환. 지원자 43,364 / 합격률 59% / 등록률 10% / SAT EBRW·Math
+  660-730·660-750 / ACT Composite 30-33 / 재학유지율 89% / 6년 졸업률
+  82%.
+- **Indiana University-Purdue University Indianapolis (IUPUI)**
+  (IPEDS ID 151111, 2024년 재편으로 현재 IPEDS 등재명은 "Indiana
+  University-Indianapolis") — **7개 세션 연속 이월되던 출처 미확보
+  문제 해소**. 지원자 15,643 / 합격률 76% / 등록률 25% / SAT
+  EBRW·Math 520-630·510-610 / ACT Composite 21-29 / 재학유지율 72% /
+  6년 졸업률 54%.
+- **Morgan State University** (IPEDS ID 163453): 지원자 23,366 /
+  합격률 82% / 등록률 12% / SAT EBRW·Math 400-520·440-550 / ACT
+  Composite 16-21 / 재학유지율 73% / 6년 졸업률 41%.
+- **Ohio University-Main Campus** (IPEDS ID 204857): 지원자 27,486 /
+  합격률 85% / 등록률 19% / SAT EBRW·Math 550-650·540-640 / ACT
+  Composite 22-28 / 재학유지율 84% / 6년 졸업률 65%.
+- **Saint Joseph's University - Philadelphia** (IPEDS ID 215770):
+  지원자 10,631 / 합격률 89% / 등록률 14% / SAT EBRW·Math
+  590-680·580-670 / ACT Composite 28-31 / 재학유지율 89% / 6년 졸업률
+  79%.
+- **Saint Louis University** (IPEDS ID 179159): 지원자 15,533 / 합격률
+  75% / 등록률 14% / SAT EBRW·Math 600-700·600-710 / ACT Composite
+  25-31 / 재학유지율 88% / 6년 졸업률 80%.
+- **Seton Hall University** (IPEDS ID 186584): 지원자 24,776 / 합격률
+  73% / 등록률 9% / SAT EBRW·Math 620-700·600-690 / ACT Composite
+  27-32 / 재학유지율 81% / 6년 졸업률 69%.
+- **St. John's University-New York** (IPEDS ID 195809) — **오출처로
+  reject됐던 St. John's University 문제 최종 해소**. 지원자 24,208 /
+  합격률 83% / 등록률 12% / SAT EBRW·Math 580-670·570-670 / ACT
+  Composite 24-29 / 재학유지율 79% / 6년 졸업률 66%.
+- **University at Albany (SUNY)** (IPEDS ID 196060): SAT/ACT 항목
+  자체가 Admissions 섹션에 없음(입시에 시험 점수 요구하지 않는 것으로
+  보임) — 추측 없이 해당 메트릭 미입력. 지원자 32,442 / 합격률 69% /
+  등록률 13% / 재학유지율 83% / 6년 졸업률 61%.
+- **University of California, Santa Barbara** (IPEDS ID 110705):
+  UC 시스템 공통 test-blind 정책 확인(SAT/ACT "NOT CONSIDERED") —
+  추측 없이 미입력. 지원자 110,259 / 합격률 33% / 등록률 14% /
+  재학유지율 93% / 6년 졸업률 83%.
+- **University of Colorado Boulder** (IPEDS ID 126614): 지원자
+  67,286 / 합격률 78% / 등록률 14% / SAT EBRW·Math 630-710·610-720 /
+  ACT Composite 29-33 / 재학유지율 90% / 6년 졸업률 74%.
+
+### 2. 학과(university_majors) 0건 학교 10개교 보완
+IPEDS College Navigator "PROGRAMS/MAJORS" 섹션(2024-2025 학위수여
+completions 표, CIP 코드 기준)에서 학사(BACHELOR) 열에 값이 있는
+프로그램명을 추출해 `university_majors`에 삽입(`ON CONFLICT DO
+NOTHING`). 세부 전공명을 그대로 쓰되 일부는 "General/Other" 등 접미어를
+정리한 정도로만 축약 — 완전한 목록이 아니라 학사 완료 실적이 있는
+전공만 반영한 것이므로, 추후 학교 공식 카탈로그와 대조해 세분화할
+여지가 있음(정직하게 남김).
+
+- Andrews University: 48건
+- Bowling Green State University: 102건
+- Clarkson University: 33건
+- Fordham University: 64건
+- Hofstra University: 81건
+- Mississippi State University: 80건
+- Morgan State University: 52건
+- Ohio University: 94건
+- Saint Joseph's University - Philadelphia: 55건
+- Saint Louis University: 71건
+
+Kentucky 학과 `page=6`부터 이어받기는 **이번 세션에서도 착수하지
+못함** — IPEDS 신규 학교 확보와 학과 10개교 보완에 시간을 전량
+배분했기 때문. 다음 세션 최우선 이월.
+
+### 3. 최종 카운트 (세션 종료, psql 직접 확인)
+```
+data_collection_status: verified_pilot 177(+16) / sources_pending_review 11(-16) / unconfirmed 12(변동없음)
+```
+`sources_pending_review` 27개교 중 16개교를 처리해 11개교 남음.
+`unconfirmed` 12개교는 이번 세션에서 착수하지 않음(다음 세션 이월).
+**200개교 중 177개교(88.5%)가 verified_pilot 상태 — 거의 다 끝나가는
+단계.** 남은 23개교(sources_pending_review 11 + unconfirmed 12)만
+처리하면 200개교 전량 완료.
+
+### 검증
+- 마이그레이션 파일 신규/변경 없음, `20261700000000` 이후 확장 필드
+  미접촉.
+- `npx supabase db push --linked`, `vercel deploy`, DB 리셋 명령
+  전혀 실행하지 않음.
+- 모든 IPEDS 값은 College Navigator 화면(텍스트 표 + 막대그래프
+  스크린샷)에서 직접 읽어 확인 후 저장(추측 없음). 값이 없는 항목
+  (Albany·UCSB의 SAT/ACT 등)은 행 자체를 생성하지 않음.
+- Hofstra CDS는 원문 PDF(Issuu 게재본)를 직접 페이지 단위로 읽어
+  수집 — 6년 졸업률은 CDS B7~B9 누적 완료자 수를 직접 합산해 계산한
+  값임을 notes/본 문서에 명시.
+- 에세이 테이블은 이번 세션에서 건드리지 않음(중복 삽입 리스크 없음).
+- `university_majors` 삽입 전 각 학교 `count(*)=0` 확인 후 진행.
+
+### 다음 세션 인계 (41차용, 최우선)
+1. **로컬 DB 리셋 금지 규칙 재강조.**
+2. 남은 `sources_pending_review` 11개교: University of Dayton, Hawaii
+   at Manoa, Maine, Memphis, UNLV, New Orleans, North Dakota, UT
+   Arlington, Tulsa, UW-Milwaukee, Virginia Tech.
+3. 남은 `unconfirmed` 12개교: Penn State University Park, Rutgers
+   (Camden/New Brunswick/Newark) 3개교, Stony Brook, UB(SUNY), UC
+   Davis, UC Santa Cruz, Missouri, Notre Dame, Oklahoma, UT Dallas.
+   이 12개교는 이번 세션에서 전혀 손대지 않았으므로 CDS 우선 시도 후
+   막히면 즉시 IPEDS 전환.
+4. Kentucky 학과 `page=6`부터 이어서 수집 — 여전히 미착수, 8세션째
+   이월.
+5. 학과 0건 학교 나머지(Arizona State, Ball State, Brigham Young,
+   Catholic University of America, Clemson, Florida Atlantic, Florida
+   International, Georgia State, Gonzaga, Indiana University
+   Bloomington, IUPUI, Kansas State, Miami University, Middle
+   Tennessee State, Montclair State, North Dakota State, Northern
+   Arizona, Old Dominion, Rowan, Rutgers Camden/Newark, Seton Hall,
+   South Dakota State, Southern Methodist, St. John's, Stevens
+   Institute, Stony Brook, Texas Christian, Texas State 등) 계속 보완.
+6. nces.ed.gov가 세션 중 일시적으로 완전히 응답하지 않는 경우가
+   있었음(약 5분) — 재시도 루프로 대응 가능, 당황하지 말고 대기 후
+   재시도할 것. 그래도 복구 안 되면 CDS 원문(Issuu/기관 IR 페이지 등
+   비-nces.ed.gov 경로)을 먼저 시도.
+7. **200개교 거의 완료 단계(88.5%)** — 다음 세션에서 남은 23개교만
+   처리하면 200개교 실데이터 수집 완료. 완료 즉시 UI 확장 지시(CDS
+   전체 정보 노출) 착수 검토할 것.
