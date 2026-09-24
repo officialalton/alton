@@ -7662,3 +7662,84 @@ psql direct INSERT만 사용, 마이그레이션 파일/`supabase db push --link
   원문 CDS PDF로 점진적 보강 권장(다만 이들 학교는 대부분 CDS PDF가 폼필드/봇차단
   이슈로 이전 세션들에서 처리 보류되었던 곳들 — 73차 세션 인계사항 참고).
 - 다른 카테고리(university_affiliations 등)는 여전히 잔여 있음, 별도 세션에서 계속 필요.
+
+## 79차 세션 (2026-09-24) — university_affiliations 잔여 114개교 중 57개교 실입력
+
+지시서 요구: 모델 지식(기억)만으로 값을 넣지 말고, 실제 웹페이지를 열어서(브라우저로
+navigate + get_page_text/find/read_page) 확인한 것만 저장. Agent 위임 없이 직접 실행.
+
+### 방법
+1. `university_affiliations`가 없는 `verified_pilot` 114개교 조회.
+2. 각 컨퍼런스의 **공식 사이트를 직접 navigate로 열어** "Members"/"Schools" 내비게이션
+   메뉴(footer 또는 header) 또는 팀 목록을 `find`+`read_page`/`get_page_text`로 실제 확인.
+   컨퍼런스별로 한 번의 공식 페이지 확인으로 여러 학교를 한 번에 처리(효율화).
+3. 매칭된 학교명은 DB의 `universities.name`과 정확히 일치하는지 대조 후 삽입.
+4. 페이지가 열리지 않거나(예: `uaa.prestosports.com` 유지보수 중, `meacsports.com`
+   스플래시 차단) 소속이 모호한 경우(예: UC Davis가 Big West 2025-26 시즌 아카이브
+   스탠딩스에는 나오지만 Big West 공식 홈페이지 "current" 서술에는 "loss of UC Davis in
+   2026" 언급 존재, 반면 Mountain West 공식 헤더 nav에는 UC Davis가 현재 정회원으로
+   나열됨)는 **가장 신뢰할 수 있는 현재 시점 공식 소스(컨퍼런스 자체 헤더/푸터
+   멤버 내비게이션)를 우선**하고, 여전히 불확실한 항목(예: Gonzaga의 WCC 잔류 여부 —
+   wccsports.com 공식 멤버 목록에 Gonzaga가 보이지 않았고 gozags.com 홈페이지에서도
+   확인 불가)은 **건너뜀**.
+5. North Dakota State University는 gobison.com(NDSU 자체 애슬레틱 사이트) 푸터에
+   Summit League·Mountain West 로고가 **동시에** 존재 — 풋볼은 Mountain West로 이동,
+   나머지 종목은 Summit League 잔류로 판단해 **행 2개**(컨퍼런스별 `notes`에 근거 명시)로
+   등록.
+6. CAA(Coastal Athletic Association) 공식 사이트의 "All Schools" 필터에는 America
+   East(Albany/Maine/New Hampshire) 및 Atlantic 10(Rhode Island) 소속 학교도 함께 나열됨
+   — 이는 CAA Football(풋볼 전용 하위리그) 소속 때문. 이미 다른 컨퍼런스로 주 소속을
+   확인한 학교는 CAA로 중복 등록하지 않고, CAA가 전종목 주 소속인 학교(Drexel, Elon,
+   Hofstra)만 등록.
+
+### 확인·등록 컨퍼런스 (전부 D1, `verification_status='official'`)
+| 컨퍼런스 | 실제 확인 방법 | 신규 등록 학교 수 |
+|---|---|---|
+| Atlantic 10 Conference | atlantic10.com 헤더 멤버 내비게이션 | 10 |
+| Big West Conference | bigwest.org 2026 시즌 스탠딩스(현재 라이브 페이지) | 4 |
+| America East Conference | americaeast.com "Schools" 내비게이션 메뉴 | 7 |
+| West Coast Conference | wccsports.com 푸터 "Members" 리전(로고+링크 목록) | 6 |
+| Mid-American Conference | mac-sports.com(실제 도메인 getsomemaction.com) "Members Desktop" 리전 | 6 |
+| Sun Belt Conference | sunbeltsports.org "Members" 리전 | 6 |
+| Mountain West Conference | themw.com 헤더 nav 링크(air_force/grand_canyon/hawaii/nevada/new_mexico/niu/ndsu/san_josé_state/uc_davis/unlv/utep/wyoming) | 6 |
+| Big Sky Conference | bigskyconf.com 푸터 "Members" 메뉴(Full Members) | 4 |
+| The Summit League | thesummitleague.org 헤더 nav 링크 | 4 (NDSU 중복행 포함) |
+| Coastal Athletic Association | caasports.com 스케줄 "All Schools" 필터 | 3 |
+| Mid-Eastern Athletic Conference | 각 학교 자체 애슬레틱 사이트(hubison.com, morganstatebears.com) 푸터의 MEAC 로고 링크로 교차확인 | 2 |
+
+**합계 58건 삽입**(학교 수 기준 57개교, NDSU만 2건). `university_source_urls`에 실제
+navigate로 연 URL을 `status='approved'`, `is_official=true`로 함께 등록해
+`source_url_id`로 연결.
+
+### 검증
+```sql
+select count(*) from university_affiliations;  -- 86 -> 144
+select count(*) from universities u
+ where u.data_collection_status='verified_pilot'
+   and not exists(select 1 from university_affiliations a where a.university_id=u.id);
+-- 114 -> 57
+```
+
+### 건너뛴 항목(불확실 — 추측 금지 원칙에 따라 미입력)
+- Gonzaga University (WCC 공식 멤버 목록에 미확인)
+- Colorado State University (Mountain West 공식 헤더 nav에 없음 — 최근 재편 가능성,
+  타 컨퍼런스 여부 미확인)
+- UAA(University Athletic Association, D3 — Case Western/Emory/Chicago/CMU/Rochester
+  등) — 공식 사이트(uaa.prestosports.com/universityathletic.org)가 유지보수 모드로 열리지
+  않아 확인 불가, 스킵.
+- MEAC 공식 사이트(meacsports.com) 자체는 스플래시 페이지 차단으로 멤버 리스트 직접
+  확인 불가 — 대신 각 소속 학교 자체 사이트 푸터로 교차 확인(Howard, Morgan State만).
+- 그 외 Big 12/ACC/Ivy 미가입 D3 리그(Liberty League, NEWMAC, SCIAC, Centennial 등)는
+  이번 세션에서 미착수 — 잔여 57개교의 상당수가 여기 해당, 후속 세션 과제.
+
+### 다음 세션 인계
+- 잔여 57개교(위 목록) — 주로 D3(UAA/Centennial/Liberty League/NEWMAC/SCIAC 등),
+  Big 12(Arizona State, TCU, Colorado State?), American Athletic Conference(Rice,
+  North Texas, Tulsa 등), Conference USA(Middle Tennessee State 등), Horizon League,
+  Missouri Valley(Illinois State, Southern Illinois Carbondale), Northeast
+  Conference/ECC(Adelphi, Pace 등 D2/D3 소규모교) 확인 필요.
+- Gonzaga·Colorado State는 공식 소속이 바뀌었을 가능성이 있어 학교 자체 애슬레틱
+  사이트를 직접 열어 재확인 필요.
+- UAA 공식 사이트가 지속 유지보수 모드라면 각 학교(Case Western/Emory/Chicago/CMU/
+  Rochester) 자체 사이트 푸터에서 개별 확인하는 방식 권장(이번 세션의 MEAC 처리 방식과
+  동일).
