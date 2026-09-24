@@ -5613,3 +5613,73 @@ university_essay_prompts/university_demographics/university_financial_aid_progra
   자동화 재시도 권장.
 - Clark University/Texas Tech/UCF는 링크는 확보했으나 값 추출 실패 —
   다음 세션에서 pdftoppm 렌더링 육안 확인 또는 재요청 권장.
+
+## 세션 (2026-09-23) — university_demographics/financial_aid_programs 20개교 확대 (병행 세션, admission_metrics/source_urls 미접촉)
+
+### 배경
+"ALTON 개발 세션"(통합 담당)이 `docs/2026-09-23-college-explore-expansion-field-spec.md`
+스펙에 따라 `university_demographics`/`university_financial_aid_programs` 테이블을
+이미 non-prod에 반영. 이번 세션은 **이 두 테이블만** 다뤘고
+`university_admission_metrics`/`university_source_urls`는 동시 진행 중인 다른 세션과의
+충돌을 피하기 위해 전혀 건드리지 않았다(신규 source_url INSERT 없이 기존 승인된
+CDS URL만 재사용).
+
+세션 도중 통합 세션이 `supabase db reset --local`을 실행할 수 있다는 긴급 알림을
+받았으나 곧 "additive insert로만 처리하기로 해서 reset 안 함"으로 취소되어 정상
+진행함.
+
+### 처리 방식
+verified_pilot이면서 두 테이블 모두 0건인 학교 중, `university_source_urls`에 이미
+승인된 CDS PDF 직링크가 있는 22개교를 골라 `curl` + `pdftotext -layout`으로 원문을
+받아 CDS Section B1(성별)/B2(인종), H1-H2A(니드/논니드 장학금)/H5(연방대출) 를
+직접 대조했다. CMU·Marquette·Tufts는 PDF 내부 표가 폼 필드/폰트 인코딩 문제로
+숫자가 pdftotext에 추출되지 않아(H2/H5 전부 공란, 또는 헤더까지 깨짐)
+financial_aid_programs를 스킵하거나(CMU는 demographics만 등록) 학교 자체를
+스킵(Marquette, Tufts)했다. Villanova/VCU는 `/tmp`에 다른 세션이 남긴 것으로 보이는
+캐시 텍스트가 실제 CDS 연도와 달라(2023 vs 2025) 의심스러워 원본 PDF를 재다운로드해
+재검증 후 사용했다.
+
+### 실제 수집·적재 완료 (20개교)
+
+| 학교 | cycle | demographics | financial_aid_programs | 비고 |
+|---|---|---|---|---|
+| Boston College | 2024 | 11 | 3 | |
+| Boston University | 2024 | 11 | 3 | |
+| Carnegie Mellon University | 2025 | 11 | 0 | CDS H2/H5 표가 공란이라 재정지원 스킵 |
+| Case Western Reserve University | 2025 | 11 | 3 | |
+| Colorado State University | 2025 | 11 | 3 | |
+| Duke University | 2025 | 11 | 3 | |
+| Duquesne University | 2025 | 11 | 3 | |
+| Emory University | 2025 | 11 | 3 | |
+| George Mason University | 2024 | 11 | 3 | |
+| Illinois State University | 2024 | 11 | 3 | |
+| Iowa State University | 2025 | 11 | 3 | |
+| Kansas State University | 2024 | 11 | 3 | |
+| Lehigh University | 2025 | 11 | 3 | |
+| Loyola University Chicago | 2025 | 11 | 3 | B2 표 줄바꿈으로 White/Native Hawaiian 열 오배치 발견, 무레이아웃 재추출로 교차검증 |
+| Northeastern University | 2024 | 11 | 3 | |
+| Northwestern University | 2025 | 11 | 3 | 니드 온리 정책 — 논니드 장학금 수혜율 0.4%대로 매우 낮음 |
+| Rice University | 2025 | 11 | 3 | |
+| University at Buffalo (SUNY) | 2025 | 11 | 3 | |
+| Villanova University | 2025 | 11 | 3 | `/tmp` 캐시가 2023년도 CDS라 재다운로드 후 사용 |
+| Virginia Commonwealth University | 2024 | 11 | 3 | |
+
+**demographics 219건 / financial_aid_programs 57건**, 전량 `verification_status='official'`,
+`source_url_id`는 기존 승인 CDS URL 재사용, `verified_at`=2026-09-23. 각 row에 CDS
+원문 분자/분모 숫자를 notes로 명기. 인종 카테고리는 원문에서 Asian과 Native
+Hawaiian/Pacific Islander가 분리된 경우 합산해 `race_asian_pacific_islander`로
+매핑하고 notes에 원문 숫자를 남겼다. 추측 없음 — H2/H5가 공란인 학교(CMU)는
+financial_aid_programs를 등록하지 않았고, 표 자체가 깨진 학교(Marquette, Tufts)는
+스킵했다.
+
+### 남은 이슈
+1. **verified_pilot 중 나머지 약 165개교**가 여전히 demographics/financial_aid_programs
+   0건. 같은 방식(승인된 CDS PDF 1회 파싱)으로 계속 확장 필요.
+2. **Marquette, Tufts**: CDS PDF의 폰트 인코딩/폼필드 문제로 pdftotext 추출 실패.
+   `pdftoppm`으로 이미지 렌더링 후 육안 확인 또는 다른 추출 도구 필요.
+3. **CMU**: financial_aid_programs 0건 (demographics만 등록) — CDS 2025-26 H2/H5가
+   실제로 공란으로 제출된 것으로 보임(전년도 CDS 재확인 권장).
+4. **non-prod 미반영**: 이번 세션 insert(demographics 219건, financial_aid_programs
+   57건)는 로컬 DB에만 존재. 기존 세션 관례대로 non-prod 동기화 export가 필요하다.
+5. university_source_urls 신규 추가 없음(기존 승인 CDS URL만 재사용) — 병행 세션과
+   충돌 없이 완료.
