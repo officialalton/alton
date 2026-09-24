@@ -9,15 +9,48 @@ import { psql, createFamily, cleanupFamily, startedSessionWith as startedSession
 // 2026-09-24 — 공용 시드 학생(지훈)/household 대신 이 스펙 전용 fixture로 옮김
 // (e2e/fixtures.ts).
 
-const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001";
+// 2026-09-24 — problem-bank-flow.spec.ts/rw-structured-blocks.spec.ts와 같은
+// 공유 seed 과목(SAT Math)을 썼는데, 세 파일이 기본 병렬(workers>1)로 같이
+// 돌면 서로 다른 파일이 동시에 이 과목에 문제를 만들고 지워 문제은행 목록이
+// 오염됐다("공개하기" 버튼이 3개 매치되는 등 선택자 모호성·타임아웃 플레이크).
+// 이 파일 전용 과목으로 분리해 다른 파일과 절대 겹치지 않게 한다.
+const SUBJECT_ID = "eeeeeeee-1111-0000-0000-000000000001";
 const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001";
 const OUT = "docs/assets/2026-09-14-render-samples/e2e";
 
 let family: FixtureFamily;
+// 이 파일은 여러 곳에서 직접 psql insert로 problems를 심는데(템플릿마다 개별
+// insert문 + AI 생성 경로), createFamily/cleanupFamily 관리 밖이라 실행마다
+// 영원히 쌓인다 — 생성한 id를 모아뒀다가 afterAll에서 지운다.
+const seededProblemIds: string[] = [];
 test.beforeAll(() => {
+  psql(`insert into subjects (id, name) values ('${SUBJECT_ID}', 'E2E Figure Template Subject') on conflict (id) do nothing;`);
+  psql(`insert into subject_template_units (id, subject_id, position, unit_title) values ('eeeeeeee-1111-0000-0000-000000000002', '${SUBJECT_ID}', 1, 'E2E 회차') on conflict (id) do nothing;`);
+  // is_teacher_of_subject()(20261339000000)가 teacher_curriculum_templates
+  // ("담당 과목")로 문제은행 조회 RLS를 좁혀서, 이게 없으면 학생 화면 검증에서
+  // 방금 공개한 문제를 curriculum_unit_prep_items에 담을 때 "존재하지 않는
+  // 문제입니다" 에러가 난다(트리거가 SECURITY INVOKER라 RLS로 못 봄).
+  psql(`insert into teacher_curriculum_templates (teacher_id, subject_id) values ('${TEACHER_ID}', '${SUBJECT_ID}') on conflict (teacher_id, subject_id) do nothing;`);
   family = createFamily("figure1", { childNames: ["E2E 도형템플릿테스트 학생"] });
 });
-test.afterAll(() => cleanupFamily(family));
+test.afterAll(() => {
+  cleanupFamily(family);
+  if (seededProblemIds.length) {
+    const idList = seededProblemIds.map((id) => `'${id}'`).join(",");
+    // 학생 화면 검증(startedSessionWith)이 mark_lesson_session_started()로
+    // session_prepared_selections를 pinned로 만들어(20261236000000, 우회 불가)
+    // cleanupFamily()가 curriculum_unit_prep_items를 못 지운다 — 그 항목이
+    // 가리키는 문제는 영구히 지울 수 없다(설계상 정상, e2e-fixture 고유 태그라
+    // 남아 있어도 다음 실행과 충돌하지 않는다). 지울 수 있는 것만 지운다.
+    psql(`delete from session_content_manifest where problem_version_id in (select id from problem_versions where problem_id in (${idList}));`);
+    psql(`delete from problems where id in (${idList})
+      and id not in (
+        select p.id from problems p join problem_versions v on v.problem_id = p.id
+        where exists (select 1 from curriculum_unit_prep_items i where i.content_id = p.id)
+           or exists (select 1 from session_prepared_selection_content_items sc where sc.problem_version_id = v.id)
+      );`);
+  }
+});
 
 /** 공개된 문제 하나를 고정한, 시작된 v3 수업(이 스펙 전용 선생님·학생). 통합 테스트 fixture 와 같은 경로. */
 function startedSessionWith(problemId: string): string {
@@ -39,82 +72,23 @@ test.setTimeout(300_000);
 
 test("템플릿 1: AI 의미 데이터 → 검증 → 표준 렌더 → 공개 → 학생 화면", async ({ page }, testInfo) => {
   test.skip(!process.env.E2E_REAL_AI, "E2E_REAL_AI=1 로 명시적으로 켜야 실행됨 — 실제 모델 호출 비용 발생");
-
-  await loginAs(page, ACCOUNTS.admin);
-  await page.goto("/admin?tab=problem-bank");
-  await page.getByRole("button", { name: "생성", exact: true }).click();
-  // 2026-09-14 재구성: 문항 체계 탭(SAT Math) → 영역 → 세부 기술. 그림 요구는 관리자가 고르지 않고 자료 판정이 정한다.
-  await page.getByRole("tab", { name: "SAT Math" }).click();
-  await page.getByLabel("새 문제 과목").selectOption(SUBJECT_ID);
-  await page.getByLabel("SAT 영역", { exact: true }).nth(1).selectOption("geometry_trig");
-  await page.getByLabel("세부 기술", { exact: true }).nth(1).selectOption("lines_angles_triangles");
-  await expect(page.getByTestId("new-material-need")).toHaveAttribute("data-level", "required");
-  await page.getByLabel("생성 개수").fill("1");
-
-  const startedAt = psql(`select now()::text;`);
-  await page.getByRole("button", { name: "AI로 만들기" }).click();
-  // 모델 호출 — DB 에 새 문제(표준 템플릿 그림)가 생길 때까지.
-  const latest = () =>
-    psql(`select coalesce((select v.problem_id || '|' || v.passage from problem_versions v where v.figure->>'type' = 'parallel_transversal' and v.created_at > '${startedAt}'::timestamptz order by v.created_at desc limit 1), '');`);
-  await expect.poll(latest, { timeout: 180_000 }).not.toBe("");
-  const [newProblemId, passage] = latest().split("|");
-  testInfo.annotations.push({ type: "generated", description: passage });
-  // 생성된 초안은 "생성" 버킷에 남지 않고 "검수"에 뜬다(목록 자체가 생성
-  // 버킷엔 없음, 2026-09-17 버킷 분리) — 열어보려면 검수로 넘어가야 한다.
-  await page.getByRole("button", { name: "검수", exact: true }).click();
-  await page.getByLabel("과목", { exact: true }).selectOption(SUBJECT_ID);
-  // 목록 행은 지문 첫 부분으로 찾는다(같은 지문이 둘일 리 없다).
-  const head = passage.replace(/\s+/g, " ").slice(0, 140);
-  await expect.poll(async () => (await rowTitles(page)).some((t) => t.replace(/\s+/g, " ").startsWith(head)), { timeout: 30_000 }).toBe(true);
-  await page.getByTestId("bank-row-title").filter({ hasText: head }).first().click();
-  await expect(page.getByLabel("지문 / 자료")).toBeVisible();
-  // 질문은 따로 저장된다(2026-09-14) — 지문 칸 + 질문 칸을 합치면 생성된 본문이다.
-  await expect(page.getByLabel("지문 / 자료")).toHaveValue(passage);
-  await expect(page.getByLabel("질문")).not.toHaveValue("");
-
-  // 표준 렌더러 미리보기 + 검증 결과. AI 가 지문과 어긋난 데이터를 내면 여기서 사유가 보이고 공개가 막힌다 — 그것도 기록한다.
-  await expect(page.getByTestId("figure-preview")).toBeVisible();
-  await page.getByTestId("figure-section").screenshot({ path: `${OUT}/01-admin-preview.png` });
-  const issues = page.getByTestId("figure-issues");
-  const hasIssues = (await issues.count()) > 0;
-  if (hasIssues) {
-    testInfo.annotations.push({ type: "blocked-by-validation", description: await issues.innerText() });
-    // 공개가 막히는지 확인하고 끝낸다(기대 동작).
-    await page.getByRole("button", { name: "초안 저장" }).click();
-    await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible({ timeout: 15_000 });
-    // "그림 확인함" 체크박스는 현재 UI에서 제거됐다(ProblemDraftEditor.tsx
-    // 공개하기 버튼은 이제 렌더 검증 결과와 무관하게 활성화됨) - 검증 실패
-    // 사유가 화면에 남아있는지만 확인하고 끝낸다.
-    return;
-  }
-  await expect(page.getByText(/표준 렌더링 검증 통과/)).toBeVisible({ timeout: 15_000 });
-  await page.getByRole("button", { name: "초안 저장" }).click();
-  await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible({ timeout: 15_000 });
-  // "그림 확인함" 체크박스·수동 확인 단계는 현재 UI에서 완전히 제거됐다
-  // (공개하기 버튼이 렌더 검증 통과 여부와 무관하게 활성화됨) - 검증
-  // 통과 문구만 확인하고 바로 공개로 진행한다.
-  await page.getByRole("button", { name: "공개하기" }).click();
-  await expect(page.getByText(/공개했습니다|공개됐습니다|공개되었습니다/)).toBeVisible({ timeout: 20_000 });
-
-  // DB: 공개본에 표준 템플릿 그림 + render_check ok
-  const row = psql(`select v.status || '|' || (v.figure->>'type') || '|' || (v.render_check->>'ok') from problem_versions v where v.problem_id = '${newProblemId}' order by v.version_no desc limit 1;`);
-  expect(row).toBe("published|parallel_transversal|true");
-  const problemId = newProblemId;
-
-  // 학생 화면 — 같은 렌더러.
-  const sessionId = startedSessionWith(problemId);
-  await page.context().clearCookies();
-  await loginAs(page, family.children[0].email); // 공용 지훈 아님 — 이 세션은 fixture 학생 소유
-  await page.goto(`/session/${sessionId}?tab=problems`);
-  await expect(page.getByTestId("problem-figure")).toBeVisible({ timeout: 30_000 });
-  await expect(page.getByTestId("problem-figure").locator("svg[role=img]")).toHaveCount(1);
-  await page.getByTestId("problem-sheet").screenshot({ path: `${OUT}/02-student-desktop.png` });
-  await page.setViewportSize({ width: 375, height: 812 });
-  await page.reload();
-  await expect(page.getByTestId("problem-figure")).toBeVisible({ timeout: 30_000 });
-  const box = await page.getByTestId("problem-figure").locator("svg").boundingBox();
-  expect(box && box.x >= 0 && box.x + box.width <= 375).toBeTruthy(); // 잘림 없음
-  await page.screenshot({ path: `${OUT}/03-student-mobile.png`, fullPage: true });
+  // 2026-09-24 원인 확인 — 이 테스트는 원래 "생성" 패널(문항 체계 탭 →
+  // lines_angles_triangles 선택 → "AI 생성")로 전체 문제를 생성해 figure.type
+  // ='parallel_transversal'인 행이 생기길 기다렸다. 그런데 lines_angles_triangles는
+  // 지금 MATH_COMPILER_SKILLS(app/admin/ProblemBankTab.tsx)에 들어 있어 "AI
+  // 생성"을 눌러도 실제 모델을 부르지 않는 결정론적 컴파일러 경로로 가고,
+  // 그 컴파일러(lib/problem-generation/math-compilers/lines-angles-triangles.ts)는
+  // figure.type: "triangle"만 만든다 — "parallel_transversal"은 절대 나올 수
+  // 없어 180초 뒤 항상(플레이크가 아니라 100% 재현) 타임아웃했다. 다른
+  // 템플릿들(2~8)과 같은 경로 — 관리자가 지문을 직접 쓴 초안에
+  // "AI로 도형 데이터 만들기(평행선·횡단선)" 버튼(진짜 실제 AI 호출,
+  // app/admin/ProblemDraftEditor.tsx makeFigure)을 눌러 그림만 생성 — 로 바꾼다.
+  const result = await runDraftFigureFlow(page, testInfo, {
+    passage: `In the figure, lines ℓ and m are parallel and line t is a transversal crossing both. The angle formed between ℓ and t on the upper-right side measures 65°. What is the measure of the angle formed between m and t on the lower-left side? [E2E T1 ${Date.now()}]`,
+    options: ["65°", "115°", "25°", "155°"], correctIndex: 0, explanation: "동위각(corresponding angles)은 같다 — 65°.", skill: "Geometry and Trigonometry",
+    button: "AI로 도형 데이터 만들기(평행선·횡단선)", expectType: "parallel_transversal", shots: ["01-admin-preview.png", "02-student-desktop.png", "03-student-mobile.png"],
+  });
+  expect(["published", "blocked"]).toContain(result);
 });
 
 // ------------------------------------------------------------ 템플릿 2 — 삼각형·직각삼각형
@@ -125,6 +99,7 @@ test("템플릿 2: 지문(직각삼각형) → AI 관계 데이터 → 검증 �
     `insert into problems (format, passage, subject_id, status, created_by, skill_type) values ('mc', '${passage.replace(/'/g, "''")}', '${SUBJECT_ID}', 'draft', 'aaaaaaaa-0000-0000-0000-000000000001', 'Geometry and Trigonometry') returning id;`
   );
   psql(`update problem_versions set options = '["10","12","14","100"]'::jsonb, correct_index = 0, explanation = 'Pythagorean theorem: 6² + 8² = 100, so AC = 10.' where problem_id = '${problemId}' and version_no = 1;`);
+  seededProblemIds.push(problemId);
 
   await loginAs(page, ACCOUNTS.admin);
   await page.goto("/admin?tab=problem-bank");
@@ -157,7 +132,7 @@ test("템플릿 2: 지문(직각삼각형) → AI 관계 데이터 → 검증 �
   // "그림 확인함" 체크박스·수동 확인 단계는 현재 UI에서 완전히 제거됐다
   // (공개하기 버튼이 렌더 검증 통과 여부와 무관하게 활성화됨) - 검증
   // 통과 문구만 확인하고 바로 공개로 진행한다.
-  await page.getByRole("button", { name: "공개하기" }).click();
+  await page.getByTestId("draft-editor").getByRole("button", { name: "공개하기" }).click();
   await expect(page.getByText(/공개했습니다|공개됐습니다|공개되었습니다/)).toBeVisible({ timeout: 20_000 });
   expect(psql(`select v.status || '|' || (v.figure->>'type') || '|' || (v.render_check->>'ok') from problem_versions v where v.problem_id = '${problemId}' order by v.version_no desc limit 1;`)).toBe("published|triangle|true");
 
@@ -183,6 +158,7 @@ test("템플릿 3: 지문(직선과 점) → AI 객체 데이터 → 검증 → 
     `insert into problems (format, passage, subject_id, status, created_by, skill_type) values ('mc', '${passage.replace(/'/g, "''")}', '${SUBJECT_ID}', 'draft', 'aaaaaaaa-0000-0000-0000-000000000001', 'Algebra') returning id;`
   );
   psql(`update problem_versions set options = '["-3","-1.5","2","3"]'::jsonb, correct_index = 0, explanation = 'At x = 0, y = −3.' where problem_id = '${problemId}' and version_no = 1;`);
+  seededProblemIds.push(problemId);
 
   await loginAs(page, ACCOUNTS.admin);
   await page.goto("/admin?tab=problem-bank");
@@ -214,7 +190,7 @@ test("템플릿 3: 지문(직선과 점) → AI 객체 데이터 → 검증 → 
   // "그림 확인함" 체크박스·수동 확인 단계는 현재 UI에서 완전히 제거됐다
   // (공개하기 버튼이 렌더 검증 통과 여부와 무관하게 활성화됨) - 검증
   // 통과 문구만 확인하고 바로 공개로 진행한다.
-  await page.getByRole("button", { name: "공개하기" }).click();
+  await page.getByTestId("draft-editor").getByRole("button", { name: "공개하기" }).click();
   await expect(page.getByText(/공개했습니다|공개됐습니다|공개되었습니다/)).toBeVisible({ timeout: 20_000 });
   expect(psql(`select v.status || '|' || (v.figure->>'type') || '|' || (v.render_check->>'ok') from problem_versions v where v.problem_id = '${problemId}' order by v.version_no desc limit 1;`)).toBe("published|plane|true");
 
@@ -240,6 +216,7 @@ test("템플릿 4: 지문(표 자료) → AI 값 데이터 → 검증 → 표준
     `insert into problems (format, passage, subject_id, status, created_by, skill_type) values ('mc', '${passage.replace(/'/g, "''")}', '${SUBJECT_ID}', 'draft', 'aaaaaaaa-0000-0000-0000-000000000001', 'Problem-Solving and Data Analysis') returning id;`
   );
   psql(`update problem_versions set options = '["1,050","1,260","1,680","2,100"]'::jsonb, correct_index = 2, explanation = 'Shift 4: 14/350 = 4%. 4% of 42,000 = 1,680.' where problem_id = '${problemId}' and version_no = 1;`);
+  seededProblemIds.push(problemId);
 
   await loginAs(page, ACCOUNTS.admin);
   await page.goto("/admin?tab=problem-bank");
@@ -271,7 +248,7 @@ test("템플릿 4: 지문(표 자료) → AI 값 데이터 → 검증 → 표준
   // "그림 확인함" 체크박스·수동 확인 단계는 현재 UI에서 완전히 제거됐다
   // (공개하기 버튼이 렌더 검증 통과 여부와 무관하게 활성화됨) - 검증
   // 통과 문구만 확인하고 바로 공개로 진행한다.
-  await page.getByRole("button", { name: "공개하기" }).click();
+  await page.getByTestId("draft-editor").getByRole("button", { name: "공개하기" }).click();
   await expect(page.getByText(/공개했습니다|공개됐습니다|공개되었습니다/)).toBeVisible({ timeout: 20_000 });
   expect(psql(`select v.status || '|' || (v.figure->>'type') || '|' || (v.render_check->>'ok') from problem_versions v where v.problem_id = '${problemId}' order by v.version_no desc limit 1;`)).toBe("published|data|true");
 
@@ -296,6 +273,7 @@ async function runDraftFigureFlow(page: Page, testInfo: import("@playwright/test
     `insert into problems (format, passage, subject_id, status, created_by, skill_type) values ('mc', '${opts.passage.replace(/'/g, "''")}', '${SUBJECT_ID}', 'draft', 'aaaaaaaa-0000-0000-0000-000000000001', '${opts.skill}') returning id;`
   );
   psql(`update problem_versions set options = '${JSON.stringify(opts.options).replace(/'/g, "''")}'::jsonb, correct_index = ${opts.correctIndex}, explanation = '${opts.explanation.replace(/'/g, "''")}' where problem_id = '${problemId}' and version_no = 1;`);
+  seededProblemIds.push(problemId);
   await loginAs(page, ACCOUNTS.admin);
   await page.goto("/admin?tab=problem-bank");
   // 방금 psql로 심은 초안은 "검수"(기본 버킷)에 뜬다 — "생성" 버킷은 목록
@@ -326,7 +304,7 @@ async function runDraftFigureFlow(page: Page, testInfo: import("@playwright/test
   // "그림 확인함" 체크박스·수동 확인 단계는 현재 UI에서 완전히 제거됐다
   // (공개하기 버튼이 렌더 검증 통과 여부와 무관하게 활성화됨) - 검증
   // 통과 문구만 확인하고 바로 공개로 진행한다.
-  await page.getByRole("button", { name: "공개하기" }).click();
+  await page.getByTestId("draft-editor").getByRole("button", { name: "공개하기" }).click();
   await expect(page.getByText(/공개했습니다|공개됐습니다|공개되었습니다/)).toBeVisible({ timeout: 20_000 });
   expect(psql(`select v.status || '|' || (v.figure->>'type') || '|' || (v.render_check->>'ok') from problem_versions v where v.problem_id = '${problemId}' order by v.version_no desc limit 1;`)).toBe(`published|${opts.expectType}|true`);
   const sessionId = startedSessionWith(problemId);
@@ -395,19 +373,25 @@ test("진술 블록: 로마숫자 진술 + 조합 선택지 → 내용 검증 �
     `insert into problems (format, passage, subject_id, status, created_by, skill_type) values ('mc', '${passage.replace(/'/g, "''")}', '${SUBJECT_ID}', 'draft', 'aaaaaaaa-0000-0000-0000-000000000001', 'Algebra') returning id;`
   );
   psql(`update problem_versions set options = '["I only","II only","I and II","Neither"]'::jsonb, correct_index = 0, explanation = 'Since $ab < 0$, exactly one is negative; $a + b > 0$ makes the positive one larger in magnitude — so I must be true.', statements = '["$|a| \\\\neq |b|$","$a > b$"]'::jsonb where problem_id = '${problemId}' and version_no = 1;`);
+  seededProblemIds.push(problemId);
   await loginAs(page, ACCOUNTS.admin);
   await page.goto("/admin?tab=problem-bank");
   // 방금 psql로 심은 초안은 "검수"(기본 버킷)에 뜬다 — "생성" 버킷은 목록
   // 자체가 없다(2026-09-17 버킷 분리). 과목 select도 필터 줄의 "과목"을 쓴다.
   await page.getByLabel("과목", { exact: true }).selectOption(SUBJECT_ID);
-  const head = passage.slice(0, 50);
-  await expect.poll(async () => (await rowTitles(page)).some((t) => t.startsWith(head)), { timeout: 30_000 }).toBe(true);
+  // 2026-09-24 — head가 50자였는데 이 지문의 고정(태그 없는) 앞부분이 50자보다
+  // 길어 반복 실행마다 항상 같은 head로 매칭됐다. 이전 실행이 정리 못 하고 남긴
+  // 동일 head의 초안이 있으면 .first()가 그 오래된(엉뚱한) 행을 열어 "공개하기"가
+  // 두 번 렌더되는(strict mode violation) 원인이 됐다 — 태그(타임스탬프)까지
+  // 포함되도록 head를 늘려 실행마다 유일하게 만든다.
+  const head = passage.replace(/\s+/g, " ").slice(0, 120);
+  await expect.poll(async () => (await rowTitles(page)).some((t) => t.replace(/\s+/g, " ").startsWith(head)), { timeout: 30_000 }).toBe(true);
   await page.getByTestId("bank-row-title").filter({ hasText: head }).first().click();
   await expect(page.getByLabel("진술 목록")).toHaveValue(/neq/);
   await expect(page.locator('[data-testid="content-issues"]')).toHaveCount(0);
   await page.getByRole("button", { name: "초안 저장" }).click();
   await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible({ timeout: 15_000 });
-  await page.getByRole("button", { name: "공개하기" }).click();
+  await page.getByTestId("draft-editor").getByRole("button", { name: "공개하기" }).click();
   await expect(page.getByText(/공개했습니다|공개됐습니다|공개되었습니다/)).toBeVisible({ timeout: 20_000 });
   expect(psql(`select v.status || '|' || (v.render_check->>'ok') || '|' || jsonb_array_length(v.statements) from problem_versions v where v.problem_id = '${problemId}' order by v.version_no desc limit 1;`)).toBe("published|true|2");
   const sessionId = startedSessionWith(problemId);

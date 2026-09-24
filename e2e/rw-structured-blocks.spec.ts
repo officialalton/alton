@@ -10,7 +10,14 @@ import { psql, createFamily, cleanupFamily, startedSessionWith as startedSession
 // 2026-09-24 — 공용 시드 학생(지훈)/household 대신 이 스펙 전용 fixture로 옮김
 // (e2e/fixtures.ts).
 
-const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001";
+// 2026-09-24 — figure-template-1.spec.ts/problem-bank-flow.spec.ts와 같은
+// 공유 seed 과목(SAT Math)을 썼는데, 세 파일이 기본 병렬(workers>1)로 같이
+// 돌면 서로 다른 파일이 동시에 이 과목에 문제를 만들고 지워 문제은행 목록이
+// 오염됐다("공개하기" 버튼이 3개 매치되는 등 선택자 모호성·타임아웃 플레이크).
+// 이 파일 전용 과목으로 분리해 다른 파일과 절대 겹치지 않게 한다(이름도
+// 실제로 "SAT Math"였던 잘못된 부분을 함께 바로잡음 — 이 파일은 RW 문제만
+// 다루는데 이름이 틀려 헷갈렸었다).
+const SUBJECT_ID = "eeeeeeee-3333-0000-0000-000000000001";
 const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001";
 const ADMIN_ID = "aaaaaaaa-0000-0000-0000-000000000001";
 const OUT = "docs/assets/2026-09-14-render-samples/e2e";
@@ -18,10 +25,37 @@ const OUT = "docs/assets/2026-09-14-render-samples/e2e";
 const q = (s: string) => s.replace(/'/g, "''");
 
 let family: FixtureFamily;
+// seedProblem()이 psql로 직접 심는 problems 행은 createFamily/cleanupFamily
+// 관리 밖이라 실행마다 영원히 쌓인다 — id를 모아뒀다가 afterAll에서 지운다.
+const seededProblemIds: string[] = [];
 test.beforeAll(() => {
+  psql(`insert into subjects (id, name) values ('${SUBJECT_ID}', 'E2E RW Blocks Subject') on conflict (id) do nothing;`);
+  psql(`insert into subject_template_units (id, subject_id, position, unit_title) values ('eeeeeeee-3333-0000-0000-000000000002', '${SUBJECT_ID}', 1, 'E2E 회차') on conflict (id) do nothing;`);
+  // is_teacher_of_subject()(20261339000000)가 teacher_curriculum_templates
+  // ("담당 과목")로 문제은행 조회 RLS를 좁혀서, 이게 없으면 학생 화면 검증에서
+  // 방금 공개한 문제를 curriculum_unit_prep_items에 담을 때 "존재하지 않는
+  // 문제입니다" 에러가 난다(트리거가 SECURITY INVOKER라 RLS로 못 봄).
+  psql(`insert into teacher_curriculum_templates (teacher_id, subject_id) values ('${TEACHER_ID}', '${SUBJECT_ID}') on conflict (teacher_id, subject_id) do nothing;`);
   family = createFamily("rwblocks", { childNames: ["E2E RW블록테스트 학생"] });
 });
-test.afterAll(() => cleanupFamily(family));
+test.afterAll(() => {
+  cleanupFamily(family);
+  if (seededProblemIds.length) {
+    const idList = seededProblemIds.map((id) => `'${id}'`).join(",");
+    // studentView()로 시작된 세션은 mark_lesson_session_started()가
+    // session_prepared_selections를 pinned로 만들어(20261236000000, 우회 불가)
+    // cleanupFamily()가 curriculum_unit_prep_items를 못 지운다 — 그 항목이
+    // 가리키는 문제는 영구히 지울 수 없다(설계상 정상, e2e-fixture 고유 태그라
+    // 남아 있어도 다음 실행과 충돌하지 않는다). 지울 수 있는 것만 지운다.
+    psql(`delete from session_content_manifest where problem_version_id in (select id from problem_versions where problem_id in (${idList}));`);
+    psql(`delete from problems where id in (${idList})
+      and id not in (
+        select p.id from problems p join problem_versions v on v.problem_id = p.id
+        where exists (select 1 from curriculum_unit_prep_items i where i.content_id = p.id)
+           or exists (select 1 from session_prepared_selection_content_items sc where sc.problem_version_id = v.id)
+      );`);
+  }
+});
 
 function startedSessionWith(problemId: string): string {
   return startedSessionWithFixture({
@@ -53,6 +87,7 @@ function seedProblem(s: Seed): string {
     `insert into problems (format, passage, subject_id, status, created_by, skill_type, skill_code) values ('mc', '${q(passageOnly)}', '${SUBJECT_ID}', 'draft', '${ADMIN_ID}', '${q(s.skillType)}', '${s.skillCode}') returning id;`
   );
   psql(`update problem_versions set question = '${q(questionOnly)}', options = '${q(JSON.stringify(s.options))}'::jsonb, correct_index = ${s.correctIndex}, explanation = '${q(s.explanation)}'${s.figure ? `, figure = '${q(JSON.stringify(s.figure))}'::jsonb` : ""} where problem_id = '${problemId}' and version_no = 1;`);
+  seededProblemIds.push(problemId);
   return problemId;
 }
 
@@ -82,10 +117,11 @@ async function adminSaveAndPublish(page: Page, passage: string, problemId: strin
   if (opts.expectBlocked) {
     await expect(page.getByTestId("content-issues")).toContainText(opts.expectBlocked);
     await page.getByRole("button", { name: "초안 저장" }).click();
-    // 3-worker 병렬 실행 시 CPU 경합으로 토스트 표시가 15s를 넘기는 flake가
-    // 관찰돼(격리 실행 시엔 항상 통과) 30s로 늘림 — fixture 충돌은 아님.
-    await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible({ timeout: 30_000 });
-    await page.getByRole("button", { name: "공개하기" }).click();
+    // 3-worker 병렬 실행 시 CPU 경합으로 토스트 표시가 지연되는 flake가 계속
+    // 관찰돼(격리 실행 시엔 항상 13~15s 안에 통과) 45s로 늘림 — 이 세션에서 반복
+    // 검증한 결과 fixture 충돌·selector 문제가 아니라 순수 로컬 머신 부하임.
+    await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible({ timeout: 45_000 });
+    await page.getByTestId("draft-editor").getByRole("button", { name: "공개하기" }).click();
     // 게이트 메시지("표준 렌더링 검증을 통과하지 못해 공개할 수 없습니다: …")는 화면에서 사유만 남긴다(readable) — 사유가 오류 줄에 보인다.
     await expect(page.locator("p.text-red").filter({ hasText: opts.expectBlocked })).toBeVisible({ timeout: 20_000 });
     expect(psql(`select v.status || '|' || (v.render_check->>'ok') from problem_versions v where v.problem_id = '${problemId}' order by v.version_no desc limit 1;`)).toBe("draft|false");
@@ -101,7 +137,7 @@ async function adminSaveAndPublish(page: Page, passage: string, problemId: strin
     // 통과 문구만 확인하고 바로 공개로 진행한다.
     await expect(page.getByText(/표준 렌더링 검증 통과/)).toBeVisible({ timeout: 15_000 });
   }
-  await page.getByRole("button", { name: "공개하기" }).click();
+  await page.getByTestId("draft-editor").getByRole("button", { name: "공개하기" }).click();
   await expect(page.getByText(/공개했습니다|공개됐습니다|공개되었습니다/)).toBeVisible({ timeout: 20_000 });
   expect(psql(`select v.status || '|' || (v.render_check->>'ok') from problem_versions v where v.problem_id = '${problemId}' order by v.version_no desc limit 1;`)).toBe("published|true");
   return structure;
@@ -230,12 +266,13 @@ for (const c of AI_CASES) {
     await page.getByLabel("세부 기술", { exact: true }).selectOption(c.skillCode);
     await page.getByLabel("생성 개수").fill("1");
     const startedAt = psql(`select now()::text;`);
-    await page.getByRole("button", { name: "AI로 만들기" }).click();
+    await page.getByRole("button", { name: "AI 생성" }).click();
     const latest = () =>
       psql(`select coalesce((select v.problem_id || '|' || v.passage from problem_versions v join problems p on p.id = v.problem_id where p.skill_code = '${c.skillCode}' and v.created_at > '${startedAt}'::timestamptz order by v.created_at desc limit 1), '');`);
     await expect.poll(latest, { timeout: 240_000 }).not.toBe("");
     const raw = latest();
     const problemId = raw.slice(0, raw.indexOf("|"));
+    seededProblemIds.push(problemId);
     const passage = psql(`select passage from problem_versions where problem_id = '${problemId}' order by version_no desc limit 1;`);
     testInfo.annotations.push({ type: "generated", description: passage });
     // 생성된 초안은 "생성" 버킷에 남지 않고 "검수"에 뜬다(목록 자체가 생성
@@ -249,7 +286,9 @@ for (const c of AI_CASES) {
     for (let i = 0; i < n; i++) {
       if (collapse(await rows.nth(i).innerText()).startsWith(head)) { await rows.nth(i).click(); break; }
     }
-    await expect(page.getByLabel("지문 / 자료")).toBeVisible();
+    // 기본 expect 타임아웃(5s)은 다른 파일들이 동시에 실제 AI 호출로 부하를
+    // 주는 상황(3개 스펙 병렬)에서 에디터 렌더가 늦어지면 부족할 수 있어 늘림.
+    await expect(page.getByLabel("지문 / 자료")).toBeVisible({ timeout: 15_000 });
     await expect(page.getByLabel("질문")).not.toHaveValue("");
     const structure = await page.getByTestId("rw-structure").innerText();
     testInfo.annotations.push({ type: "structure", description: structure });
@@ -259,7 +298,7 @@ for (const c of AI_CASES) {
       testInfo.annotations.push({ type: "blocked-by-validation", description: await issues.allInnerTexts().then((t) => t.join(" / ")) });
       await page.getByRole("button", { name: "초안 저장" }).click();
       await expect(page.getByText(/초안을 저장했습니다/)).toBeVisible({ timeout: 15_000 });
-      await page.getByRole("button", { name: "공개하기" }).click();
+      await page.getByTestId("draft-editor").getByRole("button", { name: "공개하기" }).click();
       await expect(page.locator("p.text-red").first()).toBeVisible({ timeout: 20_000 });
       expect(psql(`select status from problem_versions where problem_id = '${problemId}' order by version_no desc limit 1;`)).toBe("draft");
       return;
@@ -270,7 +309,7 @@ for (const c of AI_CASES) {
       // "그림 확인함" 체크박스·수동 확인 단계는 현재 UI에서 완전히 제거됐다.
       await expect(page.getByText(/표준 렌더링 검증 통과/)).toBeVisible({ timeout: 15_000 });
     }
-    await page.getByRole("button", { name: "공개하기" }).click();
+    await page.getByTestId("draft-editor").getByRole("button", { name: "공개하기" }).click();
     await expect(page.getByText(/공개했습니다|공개됐습니다|공개되었습니다/)).toBeVisible({ timeout: 20_000 });
     expect(psql(`select v.status || '|' || (v.render_check->>'ok') || '|' || coalesce(v.figure->>'type', '-') from problem_versions v where v.problem_id = '${problemId}' order by v.version_no desc limit 1;`)).toBe(`published|true|${c.figureType ?? "-"}`);
     await studentView(page, problemId, [`${c.prefix}-student.png`, `${c.prefix}-mobile.png`]);

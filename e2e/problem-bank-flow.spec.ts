@@ -13,15 +13,49 @@ import { psql, createFamily, cleanupFamily, startedSessionWith as startedSession
 // 파일들도 같은 계정을 동시에 건드릴 수 있어 이 스펙 전용 fixture로 옮겼다
 // (e2e/fixtures.ts의 공통 헬퍼 사용, cleanup 없던 것도 이번에 추가).
 
-const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001";
+// 2026-09-24 — figure-template-1.spec.ts/rw-structured-blocks.spec.ts와 같은
+// 공유 seed 과목(SAT Math)을 썼는데, 세 파일이 기본 병렬(workers>1)로 같이
+// 돌면 서로 다른 파일이 동시에 이 과목에 문제를 만들고 지워 문제은행 목록이
+// 오염됐다("공개하기" 버튼이 3개 매치되는 등 선택자 모호성·타임아웃 플레이크).
+// 이 파일 전용 과목으로 분리해 다른 파일과 절대 겹치지 않게 한다.
+const SUBJECT_ID = "eeeeeeee-2222-0000-0000-000000000001";
 const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001";
 const OUT = "docs/assets/2026-09-14-render-samples/e2e/bank";
 
 let family: FixtureFamily;
+// 2026-09-24 — generate()/seedFallback()이 만드는 problems는 createFamily/
+// cleanupFamily 관리 밖이라 실행마다 영원히 쌓였다(공유 SUBJECT_ID에 오늘
+// 하루만 89개 누적 확인 — 목록이 비대해지며 다른 결정적 테스트까지 타임아웃
+// 플레이크를 유발했다). id를 모아뒀다가 afterAll에서 지운다.
+const seededProblemIds: string[] = [];
 test.beforeAll(() => {
+  psql(`insert into subjects (id, name) values ('${SUBJECT_ID}', 'E2E Problem Bank Subject') on conflict (id) do nothing;`);
+  psql(`insert into subject_template_units (id, subject_id, position, unit_title) values ('eeeeeeee-2222-0000-0000-000000000002', '${SUBJECT_ID}', 1, 'E2E 회차') on conflict (id) do nothing;`);
+  // is_teacher_of_subject()(20261339000000)가 teacher_curriculum_templates
+  // ("담당 과목")로 문제은행 조회 RLS를 좁혀서, 이게 없으면 학생 화면 검증에서
+  // 방금 공개한 문제를 curriculum_unit_prep_items에 담을 때 "존재하지 않는
+  // 문제입니다" 에러가 난다(트리거가 SECURITY INVOKER라 RLS로 못 봄).
+  psql(`insert into teacher_curriculum_templates (teacher_id, subject_id) values ('${TEACHER_ID}', '${SUBJECT_ID}') on conflict (teacher_id, subject_id) do nothing;`);
   family = createFamily("bank", { childNames: ["E2E 문제은행테스트 학생"] });
 });
-test.afterAll(() => cleanupFamily(family));
+test.afterAll(() => {
+  cleanupFamily(family);
+  if (seededProblemIds.length) {
+    const idList = seededProblemIds.map((id) => `'${id}'`).join(",");
+    // 학생 화면 검증(startedSessionWith)이 mark_lesson_session_started()로
+    // session_prepared_selections를 pinned로 만들어(20261236000000, 우회 불가)
+    // cleanupFamily()가 curriculum_unit_prep_items를 못 지운다 — 그 항목이
+    // 가리키는 문제는 영구히 지울 수 없다(설계상 정상, e2e-fixture 고유 태그라
+    // 남아 있어도 다음 실행과 충돌하지 않는다). 지울 수 있는 것만 지운다.
+    psql(`delete from session_content_manifest where problem_version_id in (select id from problem_versions where problem_id in (${idList}));`);
+    psql(`delete from problems where id in (${idList})
+      and id not in (
+        select p.id from problems p join problem_versions v on v.problem_id = p.id
+        where exists (select 1 from curriculum_unit_prep_items i where i.content_id = p.id)
+           or exists (select 1 from session_prepared_selection_content_items sc where sc.problem_version_id = v.id)
+      );`);
+  }
+});
 
 const collapse = (s: string) => s.replace(/\s+/g, " ").trim();
 
@@ -82,16 +116,21 @@ async function openNewPanel(page: Page, c: Case) {
 async function generate(page: Page, c: Case, count: number): Promise<string[]> {
   await page.getByLabel("생성 개수").fill(String(count));
   const startedAt = psql(`select now()::text;`);
-  await page.getByRole("button", { name: "AI로 만들기" }).click();
+  await page.getByRole("button", { name: "AI 생성" }).click();
   const ids = () =>
     psql(`select coalesce(string_agg(p.id::text, ',' order by p.created_at), '') from problems p where p.skill_code = '${c.skillCode}' and p.exam_system = '${c.system}' and p.archived_at is null and p.created_at > '${startedAt}'::timestamptz;`);
   // 생성 완료 표시(성공 또는 사유)를 기다린다.
   // 성공 알림 또는 실패 사유(자료 요구를 못 채운 경우 포함) 중 하나가 보일 때까지.
-  const done = page.getByText(/개를 초안으로 만들었습니다|문제를 생성하지 못했습니다|만들어지지 않았습니다|설정되어 있지 않습니다/).first();
+  // 2026-09-17 제품 오너 지시로 성공 문구가 "자동 통과 X/Y..."로 바뀌었다
+  // (app/admin/ProblemBankTab.tsx onGenerate) — 예전 "...개를 초안으로
+  // 만들었습니다" 문구는 더 이상 어디에도 없다.
+  const done = page.getByText(/자동 통과 \d+\/\d+|문제를 생성하지 못했습니다|만들어지지 않았습니다|설정되어 있지 않습니다/).first();
   await expect(done).toBeVisible({ timeout: 300_000 });
   const noticeText = await done.innerText();
   test.info().annotations.push({ type: `generate-${count}`, description: noticeText });
-  return ids().split(",").filter(Boolean);
+  const generatedIds = ids().split(",").filter(Boolean);
+  seededProblemIds.push(...generatedIds);
+  return generatedIds;
 }
 
 async function openRow(page: Page, problemId: string) {
@@ -163,7 +202,7 @@ async function publishAndCheckStudent(page: Page, c: Case, problemId: string, sh
   // "그림 확인함" 체크박스·수동 확인 단계는 현재 UI에서 완전히 제거됐다
   // (app/admin/ProblemDraftEditor.tsx의 "공개하기" 버튼은 이제 canSave·
   // missingAnswer만 보고 그림 확인 여부는 조건에 없음).
-  await page.getByRole("button", { name: "공개하기" }).click();
+  await page.getByTestId("draft-editor").getByRole("button", { name: "공개하기" }).click();
   await expect(page.getByText(/공개했습니다|공개됐습니다|공개되었습니다/)).toBeVisible({ timeout: 20_000 });
   const row = psql(`select v.status || '|' || (v.render_check->>'ok') || '|' || (case when coalesce(nullif(btrim(v.question), ''), '') <> '' then 'q' else 'noq' end) || '|' || coalesce(v.figure->>'type', '-') from problem_versions v where v.problem_id = '${problemId}' order by v.version_no desc limit 1;`);
   expect(row.startsWith("published|true|q|")).toBeTruthy();
@@ -221,6 +260,7 @@ function seedFallback(c: Case): string {
   const tag = ` [E2E BANK SEED ${Date.now()}]`;
   const id = psql(`insert into problems (format, passage, subject_id, status, created_by, skill_code, exam_system) values ('${c.format ?? "mc"}', '${q(f.passage + tag)}', '${SUBJECT_ID}', 'draft', 'aaaaaaaa-0000-0000-0000-000000000001', '${c.skillCode}', '${c.system}') returning id;`);
   psql(`update problem_versions set passage = '${q(f.passage + tag)}', question = '${q(f.question)}', options = ${f.options ? `'${q(JSON.stringify(f.options))}'::jsonb` : "null"}, correct_index = ${f.options ? 0 : "null"}, answers = ${f.answers ? `'${q(JSON.stringify(f.answers))}'::jsonb` : "null"}, explanation = 'seed'${f.figure ? `, figure = '${q(JSON.stringify(f.figure))}'::jsonb` : ""} where problem_id = '${id}' and version_no = 1;`);
+  seededProblemIds.push(id);
   return id;
 }
 
@@ -240,7 +280,7 @@ test("AP 탭: 과목을 고르면 '준비 중'만 보이고 SAT 입력을 재사
   await expect(page.getByLabel("SAT 영역", { exact: true })).toHaveCount(0);
   await page.getByLabel("AP 과목").selectOption("ap_statistics");
   await expect(page.getByTestId("ap-pending-note")).toContainText("준비 중");
-  await expect(page.getByRole("button", { name: "AI로 만들기" })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "AI 생성" })).toHaveCount(0);
   // 버튼명이 "직접 쓰기"→"직접 생성"으로 바뀜(2026-09-17 재구성).
   await expect(page.getByRole("button", { name: "직접 생성" })).toBeDisabled();
   await page.getByTestId("new-problem-panel").screenshot({ path: `${OUT}/ap-select.png` });
