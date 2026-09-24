@@ -3459,3 +3459,75 @@ group_size, select_count, is_required, prompt_status)` 전체 내용 일치 기�
 `created_at` 1건만 남기고 22행 삭제. 최종 university_essay_prompts 34→12행.
 Princeton 외에도 같은 패턴이 있던 학교 전부 정리됨(단일 세션에서 psql DELETE로 직접 처리,
 마이그레이션 파일 없음). 커밋 포함.
+
+## 36차 세션 (2026-09-23)
+
+### 1. CDS 실수집 — 1개교 완료 (목표 10개교 중 일부만 달성)
+- **Clemson University**: 35차 인계사항에서 지목된 "PDF가 Chrome 내장
+  뷰어로 열려 텍스트 추출 불가" 문제를 pdf.js(`cdnjs`에서 동적 로드) +
+  `getFieldObjects()`로 해결. PDF가 AcroForm(입력형) 문서라 일반
+  텍스트 레이어에는 값이 없고, 폼 필드 값(`AP_RECD_1ST_MEN_N` 등)에
+  실제 숫자가 들어있음을 확인 — 이후 세션에서 같은 유형(입력형 CDS
+  PDF) 만나면 이 방식을 우선 시도할 것.
+  - 원문: `https://open.clemson.edu/cgi/viewcontent.cgi?article=1016&context=cds`
+    (Clemson OPEN 저장소, Common Data Set 2024-2025, Fall 2024 cohort)
+  - 수집 값(전량 `verification_status='official'`, `cycle_year=2025`):
+    applicants_count 61,517 / admitted_count 23,586 / enrolled_count
+    4,880 / admit_rate 38.34% / yield_rate 20.69% / SAT total 25-75
+    1250-1400 / SAT math 25-75 620-710 / SAT EBRW 25-75 620-700 /
+    ACT composite 25-75 28-32 / waitlist offered·accepted·admitted
+    11,102 / 3,598 / 112.
+  - GPA 평균: CDS 원문이 평균 수치가 아닌 분포(%)만 제공 →
+    `gpa_average` 행을 `value_status='not_disclosed_by_school'`로
+    명시적으로 기록(추측 금지 원칙 준수).
+  - `universities.data_collection_status` → `verified_pilot` 반영.
+
+### 2. 그 외 CDS 시도 — 결과: 미해결
+- **Mississippi State University**: 35차와 동일한 깨진 링크
+  (`Common%Data%Set`, 공백 인코딩 누락) 재확인. IR 사이트
+  자체 JS(`app_d681db53.js`)를 역추적한 결과 해당 `value` 속성을
+  가공 없이 그대로 href로 사용하는 것으로 확인 — 사이트 자체 버그로
+  판단(재현 가능한 우회 경로 없음). Scholars Junction 리포지토리는
+  2015년까지만 아카이브되어 있어 최신 연도 CDS 없음. **다음 세션은
+  이 학교를 사이트맵/구글 캐시로 재탐색하거나 스킵 권장.**
+- **Bowling Green State University**: `/institutional-research/CDS.html`
+  본문이 비어 있음(최종 수정 2019) 재확인, 대체 링크도 못 찾음.
+- **Andrews University**: 공개 CDS 문서 확인 안 됨(35차와 동일).
+- **Morgan State University**: 이번 세션 미착수(시간 예산 소진).
+
+### 3. 학과 보완 — 이번 세션 미착수
+Kentucky 22페이지 중 6페이지만 완료 상태 그대로 이월(35차 인계와 동일).
+IUPUI 출처 확보, unconfirmed 학교 재조사도 미착수.
+
+### 4. 최종 카운트 (세션 종료, psql 직접 확인)
+```
+data_collection_status: verified_pilot 147(+1) / sources_pending_review 29(-1) / unconfirmed 24(변동없음)
+university_admission_metrics: Clemson University +17행(전량 official)
+university_source_urls: Clemson University 1건 approved(common_data_set, cycle_year=2025)
+```
+
+### 검증
+- 마이그레이션 파일 신규/변경 없음, 20261700000000 이후 확장 필드 미접촉.
+- `npx supabase db push --linked`, `vercel deploy` 실행하지 않음.
+- 로컬 DB 리셋 관련 명령 전혀 실행하지 않음.
+- Clemson 모든 metric은 CDS 2024-2025 원문 PDF 폼 필드 값에서 직접
+  확인 후 저장(추측 없음). 총계 필드(AP_RECD_1ST_N, EN_TOT_1ST_N,
+  AP_ADMT_1ST_N)와 성별 합산값이 서로 일치함을 대조 확인.
+
+### 다음 세션 인계 (37차용, 최우선)
+1. **로컬 DB 리셋 금지 규칙 재강조.**
+2. IUPUI 출처 확보 + Catholic University of America/Miami University
+   Ohio(unconfirmed) 재조사 — 네 세션 연속 이월된 최우선 과제.
+3. University of Kentucky 학과 목록: `academics.uky.edu/programs?page=6`부터
+   `page=21`까지 이어서 수집(현재 페이지 0~5만 반영됨) — 변동 없음.
+4. Mississippi State CDS: 사이트 자체 링크가 근본적으로 깨져 있음을
+   확인(35·36차 모두 실패) — 다음 세션은 이 학교를 스킵하고 Morgan
+   State, Bowling Green(신규 URL 탐색), Andrews 등 다른 미해결 학교에
+   예산을 우선 배분 권장.
+5. **신규 검증 기법(36차 확립)**: 입력형(AcroForm) CDS PDF는
+   `getFieldObjects()`로 전 필드 값을 한 번에 덤프한 뒤 `AP_RECD/
+   AP_ADMT/EN_TOT` 접두사로 grep하면 성별별·합계 값을 모두 얻을 수
+   있음 — Clemson에서 검증 완료, 다른 학교의 유사 입력형 PDF에도
+   적용 가능.
+6. 200개교 완료 후 UI 확장 지시(CDS 전체 정보 노출)는 아직 손대지 않음 —
+   200개교 완료 전까지 매 세션 인계에 계속 전달.
