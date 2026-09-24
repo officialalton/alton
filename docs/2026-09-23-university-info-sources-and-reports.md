@@ -5897,3 +5897,83 @@ university_financial_aid_programs는 전혀 건드리지 않았고, 병행 세�
   value_status='reported'`) 권장.
 - 위 "검색으로 못 찾은 학교" 목록은 기관 IR 페이지 직접 크롤링이나 브라우저
   자동화가 필요할 가능성이 높음.
+
+## 세션 (2026-09-23, 이어서) — university_demographics/financial_aid_programs 20개교 추가 확대
+
+verified_pilot 165개교 잔여분 중 demographics/financial_aid_programs 0건인 학교를
+대상으로, university_source_urls에 이미 승인된 CDS 원문(대부분 PDF, 일부
+university_source_urls 자체는 재사용, 신규 추가 없음)을 curl+pdftotext로 재추출해
+20개교를 실수집했다. 병행 세션과의 충돌을 피하기 위해 university_admission_metrics/
+essay_prompts/source_urls는 전혀 건드리지 않았다.
+
+### 처리 학교 (cycle_year, demographics/financial_aid_programs 건수)
+
+| 학교 | cycle | demographics | financial_aid_programs | 비고 |
+|---|---|---|---|---|
+| Syracuse University | 2026 | 11 | 4 | |
+| Temple University | 2026 | 11 | 4 | |
+| Tufts University | 2026 | 10 | 4 | PDF 폰트 인코딩 깨짐(라벨만) — 숫자 데이터는 정상 판독 |
+| University of Alabama in Huntsville | 2026 | 10 | 4 | |
+| University of California, Davis | 2026 | 11 | 4 | |
+| University of California, Santa Cruz | 2026 | 10 | 1 | H1/H2/H2A/H5 전체 공란 — need_based_grant 1건만 not_disclosed_by_school로 마킹 |
+| University of Delaware | 2025 | 10 | 4 | PDF 폰트 인코딩 깨짐(라벨만) |
+| University of Denver | 2026 | 10 | 4 | |
+| University of Florida | 2025 | 10 | 4 | |
+| University of Hawaii at Manoa | 2025 | 11 | 1 | H1/H2/H2A 컬럼 정렬 깨짐(추출 오류) — federal_loan(H5)만 등록, 나머지 스킵 |
+| University of Kentucky | 2025 | 10 | 4 | |
+| University of Michigan, Ann Arbor | 2026 | 10 | 4 | |
+| University of Montana | 2025 | 10 | 4 | |
+| University of Nevada, Las Vegas | 2025 | 11 | 4 | |
+| University of New Hampshire | 2025 | 11 | 4 | PDF 폰트 인코딩 깨짐(라벨만) |
+| University of New Mexico | 2025 | 11 | 4 | H2A 공란 — merit_scholarship은 not_disclosed_by_school |
+| University of North Texas | 2025 | 10 | 4 | PDF 폰트 인코딩 깨짐(라벨만) |
+| University of Pittsburgh | 2025 | 10 | 4 | Pittsburgh 캠퍼스 기준(멀티캠퍼스 CDS) |
+| University of Rhode Island | 2024 | 11 | 4 | |
+| University of Vermont | 2025 | 10 | 4 | |
+
+**demographics 205건 / financial_aid_programs 74건**, 전량 `verification_status='official'`,
+`source_url_id`는 university_source_urls의 기존 승인 CDS URL 재사용(신규 URL 추가 없음).
+
+### 데이터 산출 방법
+
+- **university_demographics**: CDS B1(성별, FULL-TIME+PART-TIME 합산 전체 학부생 기준
+  population_scope='all_students')과 B2(인종/민족, "Total Undergraduates" 컬럼 기준.
+  해당 컬럼이 비어있으면 "Degree-Seeking Undergraduates(incl. first-time)" 컬럼으로 대체)
+  에서 산출. race_asian_pacific_islander는 Asian + Native Hawaiian/Pacific Islander 합산.
+- **university_financial_aid_programs**: need_based_grant/merit_scholarship은 CDS
+  H2/H2A의 "Full-time Undergrad (Incl. Fresh/First-year)" 열 기준 recipient_pct(=E or N
+  나누기 A)와 avg_award_amount(K or O). federal_loan은 H5의 federal loan programs
+  행(row B) 기준. work_study는 H1의 Federal Work-Study 총액만 기재(개인별 인원수가
+  CDS에 없어 recipient_pct/avg_award_amount는 NULL로 남김).
+
+### 스킵/이슈
+
+1. **University of Louisiana at Lafayette 원문 불일치**: DB의 `oir.lafayette.edu`
+   CDS URL이 실제로는 Pennsylvania 소재 **Lafayette College**(별개 학교) 문서였음
+   — 학교명이 문서 내 주소(Easton, PA)와 전혀 다름을 확인하고 즉시 폐기, 데이터
+   삽입하지 않음. `university_source_urls`의 해당 row(university_id=U Louisiana
+   Lafayette, source_type='common_data_set', url에 lafayette.edu 포함)를 별도로
+   재검증/수정 필요 — 이번 세션에서는 source_urls 미접촉 방침에 따라 그대로 둠.
+2. **University of Hawaii at Manoa**: CDS PDF의 H1/H2/H2A 표가 pdftotext 추출 시
+   컬럼이 밀려서 개수 필드에 달러 금액이 나오는 등 명백히 깨짐 — need_based_grant/
+   merit_scholarship은 등록하지 않고 H5(federal_loan, 컬럼 정상)만 등록.
+3. **UC Santa Cruz / UNM**: 기관이 CDS 해당 섹션을 공란으로 제출 — 추측 없이
+   value_status='not_disclosed_by_school'로 1건만 마킹해 "0건" 상태에서 벗어나게
+   하고 사유를 notes에 기록.
+4. **non-prod 미반영**: 이번 세션 insert(demographics 205건, financial_aid_programs
+   74건)는 로컬 DB에만 존재. `npx supabase db push --linked`/`vercel deploy` 미실행.
+
+### 검증
+
+- `git status --short` → `docs/` 외 파일 미변경 확인.
+- university_admission_metrics/university_essay_prompts/university_source_urls는
+  전혀 접촉하지 않음(요청된 병행-세션 충돌 방지 조건 준수).
+- 처리 20개교 전부 `select count(*) from university_demographics/financial_aid_programs
+  where university_id=...`로 사후 확인, 전량 0건 → 1건 이상으로 전환됨을 확인.
+
+### 다음 세션 인계
+
+- verified_pilot 중 나머지 약 145개교가 여전히 demographics/financial_aid_programs
+  0건 (University of Louisiana at Lafayette 포함, source_url 재검증 필요).
+- Vanderbilt University 등 xlsx 형식 CDS는 openpyxl로 별도 처리 필요(이번 세션은
+  PDF 위주로 처리).
