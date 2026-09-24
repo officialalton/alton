@@ -5155,3 +5155,89 @@ DePaul(사립)은 거주지 구분 없는 단일 등록금이라 3건 모두 동
 3. 여전히 verified_pilot 학교 상당수가 신규 지표 미보유 상태 —
    동일 방식(User-Agent 지정 curl + pdftotext/pypdf/openpyxl) 계속 활용
    권장.
+
+## 세션: university_majors 학과 0건 학교 34개교 잔여분 전량 처리 (2026-09-23, 2차)
+
+### 담당 범위
+`university_majors` 테이블만 수정. 다른 백그라운드 세션이 다루는
+`university_admission_metrics`, `university_essay_prompts` 등은 건드리지
+않음. 마이그레이션 파일 미사용, psql insert 직접 실행.
+
+### 시작 시점 상태
+직전 세션(20개교 처리) 종료 후 남은 학과 0건 학교 34개교
+(Arizona State, Stevens Institute, UNLV, UNR 포함) 확인.
+
+### 방법
+- 주 출처: IPEDS College Navigator(nces.ed.gov/collegenavigator)
+  Programs/Majors 탭의 Completions 표. 브라우저 JS로 표 헤더에서
+  BACHELOR 컬럼 인덱스를 동적 탐지 후, 값이 `-`(미제공)가 아니고
+  "Category total"/"Grand total" 행이 아닌 CIP 프로그램명만 추출.
+- Stevens Institute(unitid 186867), UNLV(182281), UNR(182290)은 직전
+  세션에서 IPEDS rate-limit로 중단됐던 학교 — 이번 세션 시작 시 재시도
+  결과 정상 응답(레이트리밋 해제 확인), 문제없이 처리 완료.
+- Arizona State University: catalog.asu.edu/degrees search 및 IPEDS
+  Programs/Majors 탭 모두 세션 후반 IPEDS 자체가 일시적으로 응답 거부
+  (rate-limit 재발)로 접근 불가. 대안으로 ASU 공식 사이트
+  `asuonline.asu.edu/online-degree-programs/undergraduate/` (ASU Online
+  학사 학위 목록, ASU 공식 도메인)을 WebFetch로 열람 — 118개 고유 학사
+  전공명을 확인해 반영. 이는 ASU Online 편성 기준 목록으로, 전체
+  캠퍼스(Tempe/Downtown/Poly/West) 통합 카탈로그의 400+ 전공 전체는
+  아니며 하위 집합(subset)임을 명시. 추후 세션에서 IPEDS 재시도 시
+  대면 캠퍼스 전용 전공(예: 특정 공학 세부전공)을 추가 보완 권장.
+
+### 처리 완료 34개교 (전공 수)
+1. Stevens Institute of Technology — 36
+2. University of Nevada, Las Vegas — 115
+3. University of Nevada, Reno — 89
+4. Rowan University — 91
+5. Seton Hall University — 63
+6. Southern Methodist University — 90
+7. St. John's University — 71
+8. Stony Brook University (SUNY) — 81
+9. University at Albany (SUNY) — 81
+10. University at Buffalo (SUNY) — 108
+11. University of Alabama in Huntsville — 43
+12. University of California, Riverside — 85
+13. University of California, Santa Cruz — 82
+14. University of Dayton — 77
+15. University of Hawaii at Manoa — 94
+16. University of Massachusetts Amherst — 90
+17. University of Massachusetts Boston — 53
+18. University of Massachusetts Lowell — 51
+19. University of Minnesota, Twin Cities — 133
+20. University of New Orleans — 37
+21. University of North Dakota — 90
+22. University of Rhode Island — 96
+23. University of San Diego — 44
+24. University of San Francisco — 55
+25. University of South Dakota — 55
+26. University of South Florida — 103
+27. University of Southern Mississippi — 72
+28. University of Tennessee, Knoxville — 98
+29. University of Texas at Arlington — 74
+30. University of Texas at Dallas — 64
+31. University of Texas at San Antonio — 83
+32. University of Tulsa — 60
+33. University of Wisconsin-Milwaukee — 90
+34. Arizona State University — 118 (ASU Online 공식 목록 기준, 전체
+    캠퍼스 통합 카탈로그의 하위 집합 — 주의 표시)
+
+### 검증
+`select u.name from universities u left join university_majors m on
+m.university_id=u.id group by u.id, u.name having count(m.id)=0`을
+매 학교 삽입 후 재실행, 34→0개교로 감소 확인.
+`select count(*) as total_universities, (0건 학교 수)` 쿼리로 전체
+200개교 중 학과 0건 학교가 0개임을 최종 확인 — **university_majors
+기준 200개교 학과 데이터 수집이 사실상 완료**됨 (Arizona State는 공식
+서브셋 118개 전공으로 잠정 커버, 추후 IPEDS 재접근 시 전체 카탈로그
+보완 여지 있음).
+
+### 한계 및 후속 권장
+- `on conflict (university_id, name) do nothing`으로 중복은 자동
+  무시되나, 학교명 표기가 IPEDS CIP 표준 명칭이라 학교 공식 홈페이지의
+  전공명과 다소 다를 수 있음(예: "Registered Nursing/Registered Nurse"
+  vs 학교 자체 "Nursing (BSN)"). 추후 UI에 노출 시 사용자 친화적
+  이름으로 매핑하는 레이어 검토 필요.
+- Arizona State University는 118개 전공으로 등록됐으나 실제 전체
+  학사 전공 수(400+)에는 크게 못 미침 — IPEDS rate-limit이 풀리면
+  Programs/Majors 탭으로 재작업해 보완할 것.
