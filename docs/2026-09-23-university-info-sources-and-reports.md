@@ -4571,3 +4571,78 @@ Indianapolis 단독 학사 프로그램만 반영**하고 과거 IUPUI 시절 Pu
    할 것.
 4. IUPUI의 IPEDS UnitID 분리(151111 = IU Indianapolis 단독) 이슈는
    명칭/데이터 정책 결정이 필요.
+
+## 44차 세션 — 에세이 프롬프트/지원 마감일 확대 (collegeessayadvisors.com 기반, 8개교)
+
+### 배경
+제품 오너 요구: collegeessayadvisors.com/supplemental-essay-guide/(191개교 수록)를
+브라우저로 열람해 대학별 에세이 문항 원문·글자수·선택 옵션·필수여부와 지원
+마감일/통보일 같은 **사실 정보**만 DB로 옮기고, 그 사이트의 "조언/분석 문단"은
+저작물이므로 절대 옮기지 않는다. 가능하면 대학 공식 페이지로 재확인 후
+`prompt_status='confirmed_current_year'`로, 재확인 불가하면 2차 출처로 낮춰
+`unconfirmed_current_year`로 저장.
+
+### 착수 전 확인
+- `docs/2026-09-23-university-info-sources-and-reports.md`에서 기존 에세이 세션 이력
+  확인: 4차 세션이 Common App 공통에세이 5개교(Harvard/Stanford/Yale/Princeton/MIT)를
+  이관했고, 37차 세션이 그 중복 삽입 22건을 정리(34→12행)한 이력이 있었다. 이번
+  세션은 그 5개교(+MIT)와 겹치지 않는 새 학교만 대상으로 함.
+- `\d university_essay_prompts`로 스키마 확인: `title`/`prompt_text`/`word_limit_max`/
+  `is_required`/`prompt_status`/`selection_group_id`/`select_count`/`group_size`/
+  `applies_to_school`/`source_url_id` 등 필요한 필드가 이미 갖춰져 있어 스키마 변경
+  불필요.
+- 마감일 스키마는 이미 `university_admission_cycles`(ed_deadline/ea_deadline/
+  rd_deadline/ed2_deadline/*_decision_date/application_opens_date 등)에 구축돼
+  있음을 확인 — 신규 테이블/필드 불필요.
+- 삽입 전 매번 `select count(*) from university_essay_prompts where university_id=...
+  and cycle_year=... and title=...` 패턴으로 기존 중복 여부 확인 후 진행(중복 0건).
+
+### 처리한 8개교 및 반영 건수
+| 학교 | cycle | 에세이 신규 건수 | 검증 방식 | 마감일 반영/정정 |
+|---|---|---|---|---|
+| Duke University | 2027 | 5 (필수 2 + 선택그룹 3개 중 1개) | 공식 admissions.duke.edu/apply/ ESSAYS 아코디언에서 원문 완전일치 확인 → `confirmed_current_year` | ED 11/2, RD 1/4 신규 반영(공식 확인) |
+| Emory University | 2027 | 5 (필수 1 + 선택그룹 4개 중 1개) | 공식 사이트는 "2개 단답형 요구" 개수만 확인, 원문은 Common App 내부 전용이라 비공개 → `unconfirmed_current_year`(2차 출처) | ED/ED2/RD 마감일 및 통보일 공식 확인·반영 |
+| Fordham University | 2027 | 3 (선택그룹 3개 중 1개, 공식 사이트가 "optional"로 명시) | 원문 비공개, 2차 출처 → `unconfirmed_current_year` | ED1/EA/RD/ED2 마감일+통보일 공식 확인 후 신규 cycle row 생성 |
+| George Washington University | 2027 | 2 (전체가 선택 에세이, 2개 중 1개) | 원문 비공개, 2차 출처 → `unconfirmed_current_year` | ED1/ED2/RD 마감일 공식 확인 후 신규 cycle row 생성(통보일은 "late Dec/Feb/March"로만 명시돼 정확한 날짜 아니라 미반영) |
+| Georgetown University | 2027 | **10건 전부 공식 원문 확인** (필수 Short Essay 1·2 + Essay 1 + 단과대별 Essay 2 6종: A&S/McCourt/Earth Commons/Nursing/School of Health/McDonough) | 공식 `uadmissions.georgetown.edu/apply/first-year-applicants/application-requirements-and-forms/` 페이지에 전체 문항 원문이 공개돼 있어 전량 `confirmed_current_year` | **기존 DB의 rd_deadline이 2027-01-10으로 잘못 저장돼 있었음 → 공식 확인 결과 January 1이 맞아 2027-01-01로 정정(중요 데이터 오류 수정)**. ea_decision_date(12/15), rd_decision_date(4/1) 신규 반영 |
+| Cornell University | 2027 | 1 (College of Arts and Sciences 지원자 전용, `applies_to_school` 필드 사용) | 공식 `admissions.cornell.edu/first-year-arts-sciences-applicants` 페이지 원문과 완전일치 → `confirmed_current_year`. **단과대가 10개 있어 이번 세션은 A&S 1개만 처리, 나머지 9개 단과대(CALS/AAP/Engineering/Human Ecology/Brooks Public Policy/Hotel Administration/Dyson/ILR 등)는 미처리로 남김** | ED 11/1, RD 1/2 공식 확인 후 신규 반영 |
+| Carnegie Mellon University | 2027 | 3 (전체 필수) | 공식 사이트는 "3개 단답형 요구" 개수만 확인, 원문 비공개 → `unconfirmed_current_year` | 기존 DB 값(ED 11/2, RD 1/4)이 공식 페이지와 일치함을 재확인, 변경 없음 |
+| Boston University | 2027 | 1 (전체 필수) | 원문 비공개, 2차 출처 → `unconfirmed_current_year` | **기존 DB의 ed_deadline이 2026-11-01로 잘못 저장돼 있었음 → 공식 확인 결과 November 2가 맞아 2026-11-02로 정정(데이터 오류 수정)**. rd_deadline(1/5) 신규 반영. Kilachand Honors College 지원 시 별도 필수 에세이 1개가 추가로 있음을 확인했으나 원문 미확인 상태로 다음 세션에 인계 |
+
+**총 에세이 프롬프트 신규 30건** (`university_essay_prompts` 26행 → 56행), **8개교**
+처리. `university_source_urls`에 학교당 1개씩 출처 레코드(Duke/Georgetown/Cornell은
+`is_official=true, status='approved'`; 나머지 5개교는 공식 원문이 비공개라
+`is_official=false, status='pending'`로 2차 출처 명시).
+
+### 발견한 기존 데이터 오류 2건 (정정 완료)
+1. **Georgetown University** `rd_deadline`: 기존 2027-01-10 → 공식 확인 결과 **2027-01-01**로 정정.
+2. **Boston University** `ed_deadline`: 기존 2026-11-01 → 공식 확인 결과 **2026-11-02**로 정정.
+
+두 건 모두 `source_notes`에 정정 근거를 남겼다.
+
+### 검증
+- 삽입 전 각 학교마다 `select count(*) ... where university_id=... and cycle_year=...
+  and title=...`로 중복 확인 — 전부 0건이었음을 확인 후 insert.
+- `git status`로 이번 세션이 DB(psql)와 `docs/` 문서 외 어떤 소스 파일도 건드리지
+  않았음을 확인(워크트리 클린 상태 유지, 다른 백그라운드 세션과 충돌 없음).
+- `npx supabase db push --linked` / `vercel deploy` 미실행. 마이그레이션 파일
+  작성 없음(전부 psql insert/update).
+
+### 미완료 / 다음 세션 인계
+1. **Cornell University**: College of Arts and Sciences 외 9개 단과대(College of
+   Agriculture and Life Sciences, College of Architecture Art and Planning,
+   College of Engineering, College of Human Ecology, Jeb E. Brooks School of Public
+   Policy, Nolan School of Hotel Administration, Dyson School of Applied Economics
+   and Management, School of Industrial and Labor Relations)의 지원 에세이 미반영.
+   각 단과대 전용 admissions.cornell.edu 하위 페이지에서 원문이 공개돼 있는 것으로
+   확인했으므로(Arts & Sciences 사례와 동일 패턴) 다음 세션에서 이어서 진행 가능.
+2. **Boston University**: Kilachand Honors College 지원자 전용 필수 에세이 1개가
+   있음을 공식 페이지에서 확인했으나 원문 위치를 찾지 못해 미반영.
+3. **Emory/Fordham/GW/CMU/BU**: 5개교는 문항 원문이 대학 공식 공개 페이지에는
+   없고 Common App 포털 내부에서만 열람 가능해 `unconfirmed_current_year`(2차
+   출처, collegeessayadvisors.com)로 저장됨. 추후 Common App 계정 접근이 가능한
+   세션이 있다면 공식 검증으로 격상 가능.
+3. collegeessayadvisors.com에는 이번 세션이 다루지 않은 나머지 180개교 이상이
+   더 있음(American University, Boston College, Brown, Columbia, Dartmouth 등
+   다수) — 우리 DB에 이미 essay_prompts가 있는 학교(American University, Boston
+   College, Brown University 등)는 건드리지 않았음.
