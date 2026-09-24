@@ -4811,3 +4811,57 @@ Purdue, Syracuse, Texas A&M, University of Wisconsin-Madison, Virginia Tech.
 `university_essay_prompts`, `university_source_urls`, 본 문서만 수정.
 `university_majors`, `university_admission_metrics`, `university_admission_cycles`는
 건드리지 않음(다른 백그라운드 세션과 충돌 방지).
+
+## 49차 세션 — UC 계열 8개교 PIQ(Personal Insight Questions) 공식 반영
+
+### 배경
+UC(University of California) 계열 캠퍼스는 Common App이 아닌 UC 자체 지원서를
+쓰고, 에세이도 Common App 방식이 아닌 PIQ 체계(전 캠퍼스 공통 8문항 풀 중 4개
+선택)를 쓴다. collegeessayadvisors.com의 UC 전용 가이드로 문항 목록을 먼저
+확인했으나(참고용, 광고/첨삭 조언 문단은 저장 대상에서 제외), 최종 저장은 UC
+공식 입학처 페이지로 재검증했다.
+
+### 공식 출처 재확인
+`https://admission.universityofcalifornia.edu/how-to-apply/applying-as-a-freshman/personal-insight-questions.html`
+을 WebFetch로 직접 열람 — 8개 PIQ 문항 원문, 응답당 최대 350단어, "8개 중
+4개 선택" 규칙을 공식 페이지에서 완전히 확인. CEA 2차 출처와 문항 내용
+일치.
+
+### DB 대상 확인
+`select id, name from universities where name ilike '%university of
+california%' or name ilike 'uc %' or name like 'UC%'` → 8개 캠퍼스 확인
+(Berkeley, Davis, Irvine, Los Angeles, Riverside, San Diego, Santa Barbara,
+Santa Cruz). 8개 전부 cycle_year=2027 기준 university_essay_prompts 0건
+확인 후 진행(신규 세션과 중복 없음).
+
+### 반영 내역
+- `university_source_urls`: 8건 신규(캠퍼스별 1건, 공식 UC PIQ 페이지,
+  `source_type='essay_prompts'`, `is_official=true`, `cycle_year=2027`,
+  `status='pending'`).
+- `university_essay_prompts`: 8개 캠퍼스 × 8문항 = 64건 신규.
+  - `prompt_type='school_specific'`, `is_required=false`,
+    `selection_group_id`(캠퍼스별로 서로 다른 uuid, `gen_random_uuid()`),
+    `select_count=4`, `group_size=8`, `word_limit_max=350`,
+    `prompt_status='confirmed_current_year'`(공식 출처 확인),
+    `last_verified_at=현재일`, `source_url_id`는 해당 캠퍼스 공식 출처 행에
+    연결.
+  - 8문항 제목/원문(요약, 전체 원문은 DB에 저장):
+    1. Leadership — 리더십 경험
+    2. Creativity — 창의성 표현 방식
+    3. Talent or skill — 가장 큰 재능/기술
+    4. Educational opportunity or barrier — 교육 기회 활용/장벽 극복
+    5. Significant challenge — 가장 큰 도전과 극복
+    6. Favorite academic subject — 흥미로운 학업 주제
+    7. Community contribution — 학교/지역사회 기여
+    8. Additional strengths — 추가 강점
+- 삽입 후 검증(psql): 캠퍼스별 8건, `selection_group_id` distinct 1개,
+  전부 `confirmed_current_year`, 연결된 source_url 전부 `is_official=true`
+  확인 완료.
+- Berkeley/UCLA 등 UC 캠퍼스별 추가 학교 자체 에세이(PIQ 외)는 UC 시스템
+  자체가 PIQ 8문항 외 별도 supplemental essay를 요구하지 않는 것으로 확인되어
+  (공식 페이지 및 CEA 가이드 모두 PIQ 8개가 전부라고 명시) 추가 문항 없음.
+
+### 담당 범위
+`university_essay_prompts`, `university_source_urls`, 본 문서만 수정.
+다른 백그라운드 세션이 다루는 `university_majors`,
+`university_admission_metrics`는 건드리지 않음.
