@@ -7103,3 +7103,39 @@ Aid/Cost-of-Attendance 웹페이지를 WebFetch/브라우저로 직접 조회**�
   exists(...financial_aid...) and not exists(...demographics...)`로 확인).
 - 목표 20개교 대비 13개교 실수집 완료. Oklahoma State에서 확립한 "curl 403 시 Claude Browser
   fetch+base64 청크 재조합" 기법은 이후 세션에서 봇차단된 대학 사이트 전반에 재사용 가능.
+
+### 73차 세션 (2026-09-24)
+- 처리 학교: 남은 49개교 전부(목표 20개교 대비 초과 달성).
+- **방법론 전환**: CDS PDF를 학교별로 개별 크롤링하는 대신, 미 교육부 공식 오픈데이터인
+  College Scorecard(IPEDS 기반, `collegescorecard.ed.gov`)의 최신 기관 단위 벌크 데이터셋
+  (`Most-Recent-Cohorts-Institution.csv`, 2026-06-10자 업데이트, 3308개 컬럼)을
+  `https://ed-public-download.scorecard.network/downloads/Most-Recent-Cohorts-Institution_06102026.zip`에서
+  직접 다운로드하여 사용. API(`api.data.gov` DEMO_KEY)는 초반 9개교 조회 후 즉시 `OVER_RATE_LIMIT`으로
+  막혀 벌크 CSV 방식으로 전환.
+  - university_demographics: `UGDS_WHITE/BLACK/HISP/ASIAN+NHPI(합산)/AIAN/2MOR/NRA/UNKN`,
+    `UGDS_MEN/WOMEN` → 각각 race_*/gender_* 카테고리 매핑, `population_scope='all_students'`,
+    `cycle_year=2023`(Scorecard "latest" 학부생 구성 기준 연도), pct는 비율×100.
+  - university_financial_aid_programs: `PCTPELL`(연방 Pell Grant 수혜 비율) →
+    `program_type='need_based_grant'`, `PCTFLOAN`(연방 학자금 대출 수혜 비율) →
+    `program_type='federal_loan'`. 두 값 모두 name에 "(College Scorecard/IPEDS proxy)"로 명시하여
+    기존 세션들의 학교별 CDS 원문 H1/H2 수치와 구분되는 데이터 출처임을 표시.
+  - `verification_status='official'`(미 연방정부 공식 데이터), `verified_at`=오늘, `notes`에
+    매칭된 정확한 기관명(INSTNM) 및 출처 컬럼명 기록. `source_url_id`는 이번 세션에서 미연결
+    (신규 소스 URL 미등록) — 다음 세션에서 `https://collegescorecard.ed.gov/school/?<unitid>` 또는
+    데이터셋 다운로드 URL로 `university_source_urls`에 등록 후 backfill 권장.
+- **드디어 해결(브라우저 자동화 불필요)**: Johns Hopkins University, University of Virginia,
+  Clemson University, University of Arkansas — 전부 이번 세션의 Scorecard 벌크 CSV 방식으로 일괄
+  해결(PDF 폼필드/봇차단 이슈 자체를 우회).
+- 학교명 매칭 시 IPEDS 표기가 자체 DB 표기와 다른 경우 보정: Indiana University-Purdue University
+  Indianapolis→"Indiana University-Indianapolis", Kent State University→"Kent State University at
+  Kent", Saint Joseph's University→"Saint Joseph's University - Philadelphia", St. John's
+  University→"St. John's University-New York", University of Texas at Arlington/Austin→"The
+  University of Texas at Arlington/Austin" 등. 각 케이스 insert 전 `select id,name from
+  universities` 및 매칭된 INSTNM을 대조 확인.
+- 합계 검증: race_* 카테고리 합 99.99~100.01, gender_* 합 100.00으로 라운딩 오차 범위 내 확인.
+- `where not exists(...)` 가드로 카테고리/scope/cycle_year 단위 중복 방지 적용.
+- **세션 종료 시점 재확인: demographics/financial_aid_programs 둘 다 0건인 학교 0개교 — 49개교 전체
+  완료.**
+- 후속 과제: (1) 이번 세션 신규 49개교의 `source_url_id`를 College Scorecard 공식 URL로 backfill,
+  (2) 가능하면 학교별 원문 CDS PDF(H1/H2 상세 항목: merit_scholarship, work_study, 평균 지급액 등)로
+  점진적 보강 — 현재는 Pell/Federal Loan 비율만 확보되어 있어 정보 밀도가 CDS 직접 수집 학교보다 낮음.
