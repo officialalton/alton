@@ -6235,3 +6235,132 @@ curl+pdftotext/pypdf(AcroForm)/openpyxl 조합으로 대체 학교를 확보했�
   tuition_in_state를 얻을 수 없으므로, 다음 세션은 학교 자체 "cost of
   attendance"/net price 공식 페이지를 별도로 찾는 접근이 필요.
 - 여전히 verified_pilot 잔여 75개교(tuition_in_state 기준).
+
+## 59차 세션 — 브라우저 자동화 우선 시도, 이월 11개교 중 6개교 해결 + 신규 6개교 추가 실수집
+
+이번 세션 지시사항의 핵심은 "curl로 여러 세션째 막힌 11개교(Brown/UVA/Memphis/
+UTK/Albany/Purdue/SIU Carbondale/Ohio University/Fordham/Georgia Tech/Clemson)를
+브라우저 자동화로 끝까지 시도"였다. Claude Browser 툴(navigate/get_page_text/
+javascript_tool)로 각 학교의 CDS 원문 페이지를 열고, 페이지 컨텍스트 안에서
+`fetch()`로 PDF를 직접 받아 pdf.js(CDN)로 텍스트/폼필드(AcroForm annotations)를
+추출하는 방식을 사용했다. curl에서 403/404였던 상당수가 브라우저 컨텍스트
+fetch에서는 200으로 통과했다(Cloudflare/WAF가 요청 출처의 브라우저 지문·
+리퍼러를 확인하는 것으로 추정).
+
+### 이월 11개교 결과: 6개교 해결, 5개교 여전히 실패
+
+**해결(6개교)**:
+- University of Virginia: curl 403 → 브라우저 fetch+pdf.js로 CDS_2024-2025_508.pdf
+  통과, student_faculty_ratio 14:1(Fall 2024) 확보. tuition(G1)은 원문 표가
+  1열/2열 값이 겹쳐 나와(UVA-Wise 병기 추정) 애매하여 추측 없이 스킵.
+- University of Tennessee, Knoxville: irsa.utk.edu 페이지가 구조 변경되어
+  2025-2026 CDS만 게시 중(2024-2025는 더 이상 없음). 새 URL 구조로 G/​I 섹션
+  PDF 개별 확보, tuition_in_state $11,560/out-of-state $31,672/fees $2,464/
+  room $9,572/board $5,166/ratio 18:1(Fall 2025, cycle_year 2025로 기록).
+- Georgia Institute of Technology: irp.gatech.edu 공식 페이지에서 CDS_2024-2025_
+  FINAL_20FEB2025.pdf 확보(브라우저 fetch로 curl 404 우회). tuition_in_state
+  $10,512/out-of-state $32,938/fees $1,546/ratio 21:1.
+- Clemson University: open.clemson.edu Cloudflare 챌린지를 브라우저 컨텍스트
+  fetch로 우회, viewcontent.cgi PDF의 AcroForm 필드값 직접 판독(TUIT_AREA_FT_D
+  등). tuition_in_state $14,038/out-of-state $39,350/fees $1,516/room $8,208/
+  board $5,076/ratio 16:1.
+- Southern Illinois University Carbondale: irs.siu.edu 공식 페이지에서
+  cds_2025-2026.pdf 확보(AcroForm). tuition_in_state=out-of-state $9,833(정액제)/
+  international $24,581.40/fees $3,951/ratio 11:1(cycle_year 2025).
+- Purdue University: 공식 idata 페이지의 CDS_2024-2025.xlsx(브라우저 fetch,
+  curl은 로그인 페이지로 리다이렉트됨) SheetJS로 파싱. tuition_in_state $9,718/
+  out-of-state $28,520/fees $274/room $7,820/board $5,900/ratio 14.6:1.
+
+**여전히 실패(5개교, 원인별로 구분)**:
+- Brown University: oir.brown.edu 페이지 자체에 CDS 다운로드 링크가 없음
+  (다른 세션들이 찾은 scribd 등은 원문 소스가 아니라 스킵). 캠퍼스 인증이
+  필요한 구조로 추정.
+- University of Memphis: 서버 자체가 403(브라우저 fetch도 동일하게 403 —
+  Cloudflare가 아니라 memphis.edu 자체 WAF/hotlink 차단으로 확인). OIR
+  홈페이지에도 CDS 링크 노출 안 됨.
+- University at Albany (SUNY): albany.edu 페이지의 섹션별 링크가 모두
+  livealbany.sharepoint.com(조직 SharePoint)으로 연결되어 로그인 없이는
+  빈 페이지만 렌더링됨(Fordham의 익명 공유 OneDrive와 달리 조직 인증 필요).
+- Ohio University: iea/historic-common-data-set-reports 페이지 자체가
+  "Historical Common Data Set files are currently under review... corrections
+  expected later in 2026"로 전면 비공개 상태(정책적 미게시, 접근 방법 문제
+  아님).
+- Fordham University: fordhamit-my.sharepoint.com 익명 공유 링크는 열리지만
+  Excel Online 뷰어가 빈 페이지만 렌더링(그리드 로딩 실패), download=1
+  파라미터도 HTML 인터스티셜만 반환. 시간 관계상 추가 시도 중단.
+
+### 신규 확보 (11개교 이월 대상 외, university_admission_metrics/university_source_urls)
+
+브라우저 자동화 + pypdf `get_fields()`(AcroForm 폼필드 직접 판독, Clemson/SIU와
+동일한 기법을 curl로 받은 PDF에도 적용)를 병행해 확보:
+
+| 학교 | 등록금(주내/사립) | 등록금(주외) | 필수비 | 기숙사 | 식비 | 학생:교수 |
+|---|---|---|---|---|---|---|
+| Vanderbilt University | $67,934(사립) | — | $3,292 | $14,760 | $8,288 | 8:1 |
+| Florida State University | $4,640 | $21,323 | $1,877 | $7,890 | $5,584 | 16.9:1 |
+| University of Maryland, College Park | $10,087 | $39,464 | $1,722 | $9,562 | $6,157 | 17:1 |
+| University of Wisconsin-Madison | $10,506.48 | $42,530.88 | $1,659.98 | 합산 $14,520(별도 미제공) | — | 17.9:1 |
+| Harvard University | $59,320(사립) | — | $5,476 | $13,532 | $8,598 | 7:1 |
+| Massachusetts Institute of Technology | $64,310(사립) | — | $420 | $13,614 | $7,650 | 3:1 |
+
+- Vanderbilt: cdn.vanderbilt.edu 공식 xlsx(정적 파일, curl로도 접근 가능했음).
+- Florida State: ir.fsu.edu가 ASP.NET 드롭다운(연도/섹션 select) 기반 동적
+  페이지라 브라우저에서 select.value 설정 + change 이벤트 디스패치로 재조회.
+- University of Maryland: irpa.umd.edu의 CDS xlsx URL을 연도만 바꿔 추정
+  요청했더니 curl로 바로 성공(비-Cloudflare).
+- University of Wisconsin-Madison: data.wisc.edu 아코디언 내부의 Box.com
+  공유 링크 → box 공유 URL의 `/shared/static/<id>.pdf` 패턴으로 curl 직다운로드
+  성공. AcroForm 필드값 직접 판독.
+- Harvard: oira.harvard.edu가 wpmucdn CDN에 공개 PDF를 올려둠, curl 직접 성공.
+- MIT: ir.mit.edu가 CDS 전체를 정적 HTML 페이지로 게시(다운로드 파일 없이
+  본문에 값 노출) — get_page_text로 바로 판독.
+
+### 확보 실패(값 자체가 원문에서 비어있음, 추측 금지)
+
+- Princeton University: CDS_2425 PDF의 G1(비용) 필드가 실제로 비어 있음
+  (이미 병행 세션이 먼저 확인·기록: student_faculty_ratio 5:1만 존재, "2025-2026
+  costs 7/1 예정"). 이번 세션은 동일 URL의 source row만 추가 시도했으나 이미
+  존재하여 중복 삽입 없음.
+- UCLA: apb.ucla.edu의 CDS PDF가 AcroForm 없이 텍스트 레이어에서 숫자만
+  전부 누락(치수 이미지 렌더링 추정) — 추측 금지 원칙에 따라 스킵.
+- Stanford University: irds.stanford.edu → Google Drive 공유 PDF 확보했으나
+  동일하게 G1/I-2 숫자 값이 텍스트 레이어에서 누락. 2차 출처(manuals.plus)가
+  "6:1, 7,671명/1,374명"을 인용했으나 원문에서 직접 재확인 불가하여 DB
+  미삽입.
+- Kent State University: kent.edu가 아직 CDS 2025-2026 "Final" 문서를 게시했지만
+  실제 표 내용(tuition/ratio)이 완전히 공란인 초안 상태로 확인, 스킵.
+- University of Cincinnati/Princeton: 이미 병행 세션이 처리(중복 확인만).
+
+### 검증
+
+- `select count(*) ... tuition_in_state 미보유 verified_pilot` → 세션 시작
+  70개교 → 종료 시점 64개교.
+- 모든 INSERT는 `WHERE NOT EXISTS(...)` 가드 사용. university_majors/
+  university_essay_prompts/university_demographics/
+  university_financial_aid_programs는 전혀 접촉하지 않음(university_admission_
+  metrics/university_source_urls만 insert).
+- 일부 URL은 이미 병행 세션이 먼저 등록해두어(FSU, Clemson 등) source_url_id를
+  재사용하고 새 INSERT 시 UNIQUE 제약 충돌 없이 진행.
+- `npx supabase db push --linked`/`vercel deploy` 미실행, 마이그레이션 파일
+  작성 없음. Agent 툴로 하위 에이전트 spawn하지 않음.
+- 이번 세션에서 실제로 새 데이터를 확보한 학교(11개교): University of Virginia
+  (ratio만), University of Tennessee Knoxville, Georgia Institute of Technology,
+  Clemson University, Southern Illinois University Carbondale, Purdue University,
+  Vanderbilt University, Florida State University, University of Maryland College
+  Park, University of Wisconsin-Madison, Harvard University, Massachusetts
+  Institute of Technology.
+
+### 다음 세션 인계
+
+- Brown/Memphis/Albany/Ohio University/Fordham: 5개교는 브라우저 자동화로도
+  이번 세션에서 뚫지 못했다. 원인이 서로 다르므로(Memphis=서버 자체 403,
+  Albany/Fordham=조직 SharePoint 인증 필요, Ohio=정책적 비공개, Brown=원문
+  링크 자체 부재) 각기 다른 접근이 필요 — Memphis/Brown은 학교 담당자 문의
+  경로 검토, Albany/Fordham은 SharePoint 익명 공유 설정 변경 여부 재확인 필요.
+- 이번 세션에서 검증된 유용한 패턴: (1) curl이 403/404인 사이트 상당수가
+  브라우저 컨텍스트 `fetch()`로는 통과함(WAF가 브라우저 지문 확인 추정) →
+  다음 세션도 curl 실패 시 브라우저 fetch를 먼저 시도할 것. (2) pdf.js
+  `getAnnotations()`/pypdf `get_fields()`로 AcroForm 폼필드 값을 직접 읽으면
+  일반 텍스트 추출이 숫자를 빠뜨리는 CDS PDF(Clemson/SIU/UW-Madison/UC
+  Cincinnati 등)를 정확히 읽을 수 있음 — 이 패턴을 표준 절차로 삼을 것.
+- 여전히 verified_pilot 잔여 64개교(tuition_in_state 기준).
