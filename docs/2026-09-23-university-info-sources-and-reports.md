@@ -6364,3 +6364,80 @@ fetch에서는 200으로 통과했다(Cloudflare/WAF가 요청 출처의 브라�
   일반 텍스트 추출이 숫자를 빠뜨리는 CDS PDF(Clemson/SIU/UW-Madison/UC
   Cincinnati 등)를 정확히 읽을 수 있음 — 이 패턴을 표준 절차로 삼을 것.
 - 여전히 verified_pilot 잔여 64개교(tuition_in_state 기준).
+
+## 60차 세션 — 비용 지표(tuition_in_state 등) 12개교 신규 실수집 (2026-09-24)
+
+### 범위 및 병행 작업 안전장치
+다른 백그라운드 세션이 `university_demographics`/`financial_aid_programs`를 동시 작업 중일
+가능성이 있어 이번 세션은 `university_admission_metrics`/`university_source_urls`만 건드렸다.
+모든 INSERT는 `WHERE NOT EXISTS` 가드 사용, `db push`/`vercel deploy` 미실행, 마이그레이션
+파일 생성 없음(psql 직접 insert만).
+
+### Brown/Memphis/Albany/Ohio University/Fordham 재시도
+5분 한도로 시도했으나 이전 세션들과 동일하게 막힘 — Brown(ND/Brown 계열 WAF 403,
+oir.brown.edu 문서 링크 자체 부재), Memphis(서버 403), Ohio University(정책적 비공개),
+Albany/Fordham(조직 SharePoint 인증 필요)는 이번 세션에서도 뚫지 못했다. 5분 한도를
+지켜 각 교당 1회만 시도 후 스킵했다.
+
+### 신규 실수집 12개교 (tuition_in_state 기준 64개교 → 52개교로 감소)
+모두 대학 공식 CDS(Common Data Set) PDF/XLSX 원문에서 직접 확인. "브라우저 컨텍스트
+fetch + pdf.js `getAnnotations()`" 패턴(직전 세션 인계 사항)을 표준 절차로 사용 —
+curl이 403/HTML만 반환하는 경우가 많았고, Claude Browser의 `javascript_tool`로
+`fetch()` 후 pdf.js를 CDN에서 동적 import해 페이지 텍스트/AcroForm 필드값을 직접
+읽는 방식이 가장 안정적이었다. AcroForm 필드가 비어 있는 경우(학교가 아직 해당 연도
+비용을 미공시, ACAD_COA 체크박스로 확인 가능)는 즉시 이전 연도 파일로 전환해 재확인.
+
+| 대학 | cycle_year | in-state/사립 등록금 | out-of-state | 출처 |
+|---|---|---|---|---|
+| Colorado School of Mines | 2023 | $17,520 | $39,600 | ir.mines.edu CDS23.pdf |
+| Elon University | 2025 | $46,451(사립) | — | eloncdn CDS2024-2025.xlsx |
+| Temple University | 2024 | $22,667 | $39,088 | ira.temple.edu CDS-2024-2025-tuit.pdf |
+| University of Kentucky | 2022 | $11,496 | $30,913 | irads.uky.edu CDS_2021-2022.pdf |
+| Oklahoma State University | 2025 | $5,416.50 | $20,937.00 | ira.okstate.edu cds2425.pdf |
+| University of Massachusetts Boston | 2023 | $14,542 | $35,514 | umb.edu CDS_2022-2023_UMass_Boston.pdf |
+| North Dakota State University | 2023 | $9,309 | $13,963 | ndsu.edu NDSU_CDS_2023-2024.xlsx |
+| University of Virginia | 2025 | $20,101 | $59,127 | ira.virginia.edu CDS_2024-2025_508.pdf |
+| Illinois Institute of Technology | 2023 | $49,643(사립) | — | iit.edu Full-2022-2023-Common-Data-Set.pdf |
+| Clark University | 2024 | $57,440(사립) | — | clarku.edu Clark-CDS-2022-2023.pdf |
+| Adelphi University | 2019 | $36,920(사립) | — | adelphi.edu 2018-2019-Common-Data-Set.pdf |
+| Princeton University | 2024 | $62,400(사립) | — | ir.princeton.edu (document/491) cds_2324_princeton.pdf |
+
+각 대학마다 required_fees/room_cost/board_cost도 함께 확보된 경우 같이 insert(표는
+tuition만 요약). 모든 행 `verification_status='official'`, `source_url_id`로 원문
+CDS URL 연결(`university_source_urls`에 `status='approved'`로 등록).
+
+### 스킵/실패 사례(추측 금지 원칙 준수, DB 미기록)
+- **AcroForm 필드가 비어있어 실제 미공시로 확인된 경우**: University of Cincinnati
+  (2023-24/2024-25 모두 "Not Available", net price calculator만 유도), University of
+  New Mexico(2023-24/2024-25 모두 ACAD_COA 체크 — 비용 미확정 시점 제출), UCLA
+  (2023-24/2025-26 모두 동일), Middle Tennessee State University(2024-25 전부 blank).
+  → 추측 채우기 대신 스킵.
+- **파일 자체가 깨짐/이동/403**: Virginia Tech(aiesupport@vt.edu 요청 전용으로
+  전환, 공개 파일 없음), University of Louisville(개별 PDF 링크 소멸, 랜딩페이지에도
+  직접 링크 없음), University of Idaho(WAF 403), University of Notre Dame(WAF 403,
+  기존에 알려진 케이스와 동일), University of Dayton(랜딩페이지에 PDF 링크 없음,
+  아코디언 뒤에도 없음), UW-Milwaukee(구 URL 404, 신규 URL 미탐색), Gonzaga
+  University(모든 후보 링크 404).
+- UMass Lowell: 최신 CDS PDF가 섹션별로 분할 배포되는 것으로 보이며(파일명에
+  "Section_A" 포함) 받은 26페이지 PDF에 G(연간비용) 섹션이 없었음 — G섹션 파일
+  별도 확인 필요, 이번 세션에서는 스킵.
+
+### 검증
+- 모든 insert 전후 `SELECT ... WHERE NOT EXISTS` 가드로 중복 방지 확인.
+- University of Virginia는 `university_source_urls`에 기존 세션이 이미 동일 URL을
+  cycle_year=2024로 등록해둔 상태였음을 발견 — 신규 insert 대신 기존 source_url_id를
+  재사용하도록 쿼리 수정(신규 중복 URL 행 생성 안 함).
+- `select ... from universities u where data_collection_status='verified_pilot' and not
+  exists (... metric_key='tuition_in_state')` 재실행 결과 64 → 52개교로 감소 확인.
+
+### 다음 세션 인계
+- 남은 52개교. Brown/Memphis/Albany/Ohio University/Fordham은 여전히 막힘(원인 불변,
+  학교 담당자 문의 경로가 유일한 다음 수 — 브라우저 자동화 재시도는 더 이상 효율적이지
+  않음).
+- University of Cincinnati/New Mexico/UCLA/MTSU는 CDS 자체에 비용 데이터가 없는
+  것으로 확인(제출 시점에 "추후 공시" 표시) — 각 학교의 별도 "cost of attendance"
+  웹페이지(net price calculator 아님)에서 수집을 시도하거나, 해당 학교 CDS의 이전
+  회계연도(제출 완료분)를 다시 찾아볼 것.
+- UMass Lowell은 섹션 분할 배포 구조 확인 필요(G섹션 별도 파일 탐색).
+- 브라우저 fetch + pdf.js `getAnnotations()` 패턴은 이번 세션에서도 안정적으로
+  작동 확인 — 계속 표준 절차로 사용 권장.
