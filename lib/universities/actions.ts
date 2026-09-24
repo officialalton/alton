@@ -112,6 +112,9 @@ export type UniversityDetail = UniversitySummary & {
   religiousAffiliation: string | null;
   calendarSystem: string | null;
   honorsCollege: boolean | null;
+  // Part 11(2026-09-23, Overview 확장) — 공식 연락처. 설정성 정보라 자주 안 바뀜.
+  officialAddress: string | null;
+  officialPhone: string | null;
 };
 
 export type AdmissionCycle = {
@@ -172,7 +175,15 @@ export type AdmissionCycle = {
   admittedTop10pctClassRankPct: number | null;
 };
 
-export type UniversityMajor = { id: string; name: string; category: string | null };
+export type UniversityMajor = {
+  id: string;
+  name: string;
+  category: string | null;
+  // Part 11(2026-09-23) — 전공/학위/트랙 구분(같은 항목으로 혼동하지 않기 위함).
+  degreeLevel: string | null;
+  isTrack: boolean;
+  parentMajorId: string | null;
+};
 export type EssayPrompt = { id: string; cycleYear: number; promptText: string; wordLimit: number | null; isRequired: boolean };
 
 export type UniversityUpdateEntry = {
@@ -263,6 +274,8 @@ async function loadUniversityDetail(
       religiousAffiliation: u.religious_affiliation,
       calendarSystem: u.calendar_system,
       honorsCollege: u.honors_college,
+      officialAddress: u.official_address,
+      officialPhone: u.official_phone,
     },
     cycles: (cycleRows ?? []).map((c) => ({
       id: c.id,
@@ -326,7 +339,14 @@ async function loadUniversityDetail(
       summary: r.summary,
       sourceUrl: r.source_url,
     })),
-    majors: (majorRows ?? []).map((m) => ({ id: m.id, name: m.name, category: m.category })),
+    majors: (majorRows ?? []).map((m) => ({
+      id: m.id,
+      name: m.name,
+      category: m.category,
+      degreeLevel: m.degree_level,
+      isTrack: m.is_track ?? false,
+      parentMajorId: m.parent_major_id,
+    })),
     essayPrompts: (essayRows ?? []).map((e) => ({ id: e.id, cycleYear: e.cycle_year, promptText: e.prompt_text, wordLimit: e.word_limit, isRequired: e.is_required })),
     sourceUrls: (sourceUrlRows ?? []).map(mapSourceUrlRow),
   };
@@ -533,6 +553,8 @@ export async function updateUniversityBasics(input: {
   religiousAffiliation?: string | null;
   calendarSystem?: string | null;
   honorsCollege?: boolean | null;
+  officialAddress?: string | null;
+  officialPhone?: string | null;
 }): Promise<void> {
   await requireAdmin();
   const db = createAdminClient();
@@ -548,6 +570,8 @@ export async function updateUniversityBasics(input: {
       religious_affiliation: input.religiousAffiliation ?? null,
       calendar_system: input.calendarSystem ?? null,
       honors_college: input.honorsCollege ?? null,
+      official_address: input.officialAddress ?? null,
+      official_phone: input.officialPhone ?? null,
     })
     .eq("id", input.universityId);
   if (error) throw new Error(error.message);
@@ -1128,6 +1152,320 @@ export async function deleteUniversityEssayPrompt(promptId: string): Promise<voi
   await requireAdmin();
   const db = createAdminClient();
   const { error } = await db.from("university_essay_prompts").delete().eq("id", promptId);
+  if (error) throw new Error(error.message);
+  revalidatePath("/admin/universities");
+}
+
+// =============================================================================
+// Part 11(2026-09-23, College Explore Overview/Cost & Aid 확장)
+// university_affiliations / university_demographics / university_financial_aid_programs
+// — 세 테이블 모두 같은 패턴(항목별 출처·검증상태 필수, unverified는 RLS가 공개 조회 차단).
+// =============================================================================
+
+export type ValueStatus = "reported" | "not_applicable" | "not_disclosed_by_school";
+export type VerificationStatus = "official" | "secondary" | "unverified";
+
+export type AffiliationKind = "ncaa_sport" | "athletic_conference" | "ivy_league" | "consortium" | "other";
+
+export type UniversityAffiliation = {
+  id: string;
+  universityId: string;
+  kind: AffiliationKind;
+  label: string;
+  division: string | null;
+  sourceUrlId: string | null;
+  verificationStatus: VerificationStatus;
+  verifiedAt: string | null;
+  notes: string | null;
+  createdAt: string;
+};
+
+function mapAffiliationRow(row: {
+  id: string; university_id: string; kind: AffiliationKind; label: string; division: string | null;
+  source_url_id: string | null; verification_status: VerificationStatus; verified_at: string | null;
+  notes: string | null; created_at: string;
+}): UniversityAffiliation {
+  return {
+    id: row.id, universityId: row.university_id, kind: row.kind, label: row.label, division: row.division,
+    sourceUrlId: row.source_url_id, verificationStatus: row.verification_status, verifiedAt: row.verified_at,
+    notes: row.notes, createdAt: row.created_at,
+  };
+}
+
+const AFFILIATION_COLUMNS = "id, university_id, kind, label, division, source_url_id, verification_status, verified_at, notes, created_at";
+
+/** 공개 조회 — 검증된(official/secondary) 소속·태그만. RLS가 이미 unverified를 걸러내지만
+ * 쿼리 자체에도 명시해 의도를 분명히 한다. */
+export async function loadUniversityAffiliations(universityId: string): Promise<UniversityAffiliation[]> {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) throw new Error("로그인이 필요합니다.");
+  const db = createAdminClient();
+  const { data, error } = await db
+    .from("university_affiliations")
+    .select(AFFILIATION_COLUMNS)
+    .eq("university_id", universityId)
+    .in("verification_status", ["official", "secondary"])
+    .order("kind", { ascending: true });
+  if (error) throw new Error(error.message);
+  return (data ?? []).map(mapAffiliationRow);
+}
+
+/** 관리자 — 전체(미검증 포함) 조회. */
+export async function listUniversityAffiliations(universityId: string): Promise<UniversityAffiliation[]> {
+  await requireAdmin();
+  const db = createAdminClient();
+  const { data, error } = await db
+    .from("university_affiliations")
+    .select(AFFILIATION_COLUMNS)
+    .eq("university_id", universityId)
+    .order("created_at", { ascending: false });
+  if (error) throw new Error(error.message);
+  return (data ?? []).map(mapAffiliationRow);
+}
+
+export async function upsertUniversityAffiliation(input: {
+  id?: string; universityId: string; kind: AffiliationKind; label: string; division?: string | null;
+  sourceUrlId?: string | null; verificationStatus: VerificationStatus; notes?: string | null;
+}): Promise<void> {
+  await requireAdmin();
+  const db = createAdminClient();
+  const row = {
+    university_id: input.universityId, kind: input.kind, label: input.label, division: input.division ?? null,
+    source_url_id: input.sourceUrlId ?? null, verification_status: input.verificationStatus,
+    verified_at: input.verificationStatus === "unverified" ? null : new Date().toISOString(),
+    notes: input.notes ?? null,
+  };
+  const { error } = input.id
+    ? await db.from("university_affiliations").update(row).eq("id", input.id)
+    : await db.from("university_affiliations").insert(row);
+  if (error) throw new Error(error.message);
+  revalidatePath("/admin/universities");
+}
+
+export async function deleteUniversityAffiliation(id: string): Promise<void> {
+  await requireAdmin();
+  const db = createAdminClient();
+  const { error } = await db.from("university_affiliations").delete().eq("id", id);
+  if (error) throw new Error(error.message);
+  revalidatePath("/admin/universities");
+}
+
+export type DemographicCategory =
+  | "gender_male" | "gender_female" | "gender_other"
+  | "race_white" | "race_black" | "race_hispanic" | "race_asian_pacific_islander"
+  | "race_native_american" | "race_two_or_more" | "race_unknown" | "race_international";
+export type PopulationScope = "all_students" | "us_students_only";
+
+export type UniversityDemographic = {
+  id: string;
+  universityId: string;
+  cycleYear: number;
+  category: DemographicCategory;
+  populationScope: PopulationScope;
+  pct: number | null;
+  valueStatus: ValueStatus;
+  sourceUrlId: string | null;
+  verificationStatus: VerificationStatus;
+  verifiedAt: string | null;
+  notes: string | null;
+};
+
+function mapDemographicRow(row: {
+  id: string; university_id: string; cycle_year: number; category: DemographicCategory;
+  population_scope: PopulationScope; pct: number | null; value_status: ValueStatus;
+  source_url_id: string | null; verification_status: VerificationStatus; verified_at: string | null; notes: string | null;
+}): UniversityDemographic {
+  return {
+    id: row.id, universityId: row.university_id, cycleYear: row.cycle_year, category: row.category,
+    populationScope: row.population_scope, pct: row.pct, valueStatus: row.value_status,
+    sourceUrlId: row.source_url_id, verificationStatus: row.verification_status, verifiedAt: row.verified_at,
+    notes: row.notes,
+  };
+}
+
+const DEMOGRAPHIC_COLUMNS = "id, university_id, cycle_year, category, population_scope, pct, value_status, source_url_id, verification_status, verified_at, notes";
+
+export async function loadUniversityDemographics(universityId: string): Promise<UniversityDemographic[]> {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) throw new Error("로그인이 필요합니다.");
+  const db = createAdminClient();
+  const { data, error } = await db
+    .from("university_demographics")
+    .select(DEMOGRAPHIC_COLUMNS)
+    .eq("university_id", universityId)
+    .in("verification_status", ["official", "secondary"])
+    .order("cycle_year", { ascending: false });
+  if (error) throw new Error(error.message);
+  return (data ?? []).map(mapDemographicRow);
+}
+
+export async function listUniversityDemographics(universityId: string): Promise<UniversityDemographic[]> {
+  await requireAdmin();
+  const db = createAdminClient();
+  const { data, error } = await db
+    .from("university_demographics")
+    .select(DEMOGRAPHIC_COLUMNS)
+    .eq("university_id", universityId)
+    .order("cycle_year", { ascending: false });
+  if (error) throw new Error(error.message);
+  return (data ?? []).map(mapDemographicRow);
+}
+
+export async function upsertUniversityDemographic(input: {
+  id?: string; universityId: string; cycleYear: number; category: DemographicCategory; populationScope: PopulationScope;
+  pct?: number | null; valueStatus: ValueStatus; sourceUrlId?: string | null; verificationStatus: VerificationStatus; notes?: string | null;
+}): Promise<void> {
+  await requireAdmin();
+  const db = createAdminClient();
+  const row = {
+    university_id: input.universityId, cycle_year: input.cycleYear, category: input.category,
+    population_scope: input.populationScope, pct: input.pct ?? null, value_status: input.valueStatus,
+    source_url_id: input.sourceUrlId ?? null, verification_status: input.verificationStatus,
+    verified_at: input.verificationStatus === "unverified" ? null : new Date().toISOString(),
+    notes: input.notes ?? null,
+  };
+  const { error } = input.id
+    ? await db.from("university_demographics").update(row).eq("id", input.id)
+    : await db.from("university_demographics").upsert(row, { onConflict: "university_id,cycle_year,category,population_scope" });
+  if (error) throw new Error(error.message);
+  revalidatePath("/admin/universities");
+}
+
+export async function deleteUniversityDemographic(id: string): Promise<void> {
+  await requireAdmin();
+  const db = createAdminClient();
+  const { error } = await db.from("university_demographics").delete().eq("id", id);
+  if (error) throw new Error(error.message);
+  revalidatePath("/admin/universities");
+}
+
+export type FinancialAidProgramType = "need_based_grant" | "merit_scholarship" | "federal_loan" | "work_study";
+export type EligibilityScope = "us_citizen_permanent_resident" | "all_students" | "other";
+
+export type UniversityFinancialAidProgram = {
+  id: string;
+  universityId: string;
+  programType: FinancialAidProgramType;
+  name: string;
+  description: string | null;
+  eligibilityScope: EligibilityScope;
+  recipientPct: number | null;
+  avgAwardAmount: number | null;
+  awardAmountMin: number | null;
+  awardAmountMax: number | null;
+  renewalCondition: string | null;
+  cycleYear: number | null;
+  valueStatus: ValueStatus;
+  sourceUrlId: string | null;
+  verificationStatus: VerificationStatus;
+  verifiedAt: string | null;
+  notes: string | null;
+};
+
+function mapFinancialAidProgramRow(row: {
+  id: string; university_id: string; program_type: FinancialAidProgramType; name: string; description: string | null;
+  eligibility_scope: EligibilityScope; recipient_pct: number | null; avg_award_amount: number | null;
+  award_amount_min: number | null; award_amount_max: number | null; renewal_condition: string | null;
+  cycle_year: number | null; value_status: ValueStatus; source_url_id: string | null;
+  verification_status: VerificationStatus; verified_at: string | null; notes: string | null;
+}): UniversityFinancialAidProgram {
+  return {
+    id: row.id, universityId: row.university_id, programType: row.program_type, name: row.name, description: row.description,
+    eligibilityScope: row.eligibility_scope, recipientPct: row.recipient_pct, avgAwardAmount: row.avg_award_amount,
+    awardAmountMin: row.award_amount_min, awardAmountMax: row.award_amount_max, renewalCondition: row.renewal_condition,
+    cycleYear: row.cycle_year, valueStatus: row.value_status, sourceUrlId: row.source_url_id,
+    verificationStatus: row.verification_status, verifiedAt: row.verified_at, notes: row.notes,
+  };
+}
+
+const FINANCIAL_AID_PROGRAM_COLUMNS =
+  "id, university_id, program_type, name, description, eligibility_scope, recipient_pct, avg_award_amount, award_amount_min, award_amount_max, renewal_condition, cycle_year, value_status, source_url_id, verification_status, verified_at, notes";
+
+export async function loadUniversityFinancialAidPrograms(universityId: string): Promise<UniversityFinancialAidProgram[]> {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) throw new Error("로그인이 필요합니다.");
+  const db = createAdminClient();
+  const { data, error } = await db
+    .from("university_financial_aid_programs")
+    .select(FINANCIAL_AID_PROGRAM_COLUMNS)
+    .eq("university_id", universityId)
+    .in("verification_status", ["official", "secondary"])
+    .order("program_type", { ascending: true });
+  if (error) throw new Error(error.message);
+  return (data ?? []).map(mapFinancialAidProgramRow);
+}
+
+export async function listUniversityFinancialAidPrograms(universityId: string): Promise<UniversityFinancialAidProgram[]> {
+  await requireAdmin();
+  const db = createAdminClient();
+  const { data, error } = await db
+    .from("university_financial_aid_programs")
+    .select(FINANCIAL_AID_PROGRAM_COLUMNS)
+    .eq("university_id", universityId)
+    .order("created_at", { ascending: false });
+  if (error) throw new Error(error.message);
+  return (data ?? []).map(mapFinancialAidProgramRow);
+}
+
+export async function upsertUniversityFinancialAidProgram(input: {
+  id?: string; universityId: string; programType: FinancialAidProgramType; name: string; description?: string | null;
+  eligibilityScope: EligibilityScope; recipientPct?: number | null; avgAwardAmount?: number | null;
+  awardAmountMin?: number | null; awardAmountMax?: number | null; renewalCondition?: string | null;
+  cycleYear?: number | null; valueStatus: ValueStatus; sourceUrlId?: string | null;
+  verificationStatus: VerificationStatus; notes?: string | null;
+}): Promise<void> {
+  await requireAdmin();
+  const db = createAdminClient();
+  const row = {
+    university_id: input.universityId, program_type: input.programType, name: input.name, description: input.description ?? null,
+    eligibility_scope: input.eligibilityScope, recipient_pct: input.recipientPct ?? null, avg_award_amount: input.avgAwardAmount ?? null,
+    award_amount_min: input.awardAmountMin ?? null, award_amount_max: input.awardAmountMax ?? null,
+    renewal_condition: input.renewalCondition ?? null, cycle_year: input.cycleYear ?? null, value_status: input.valueStatus,
+    source_url_id: input.sourceUrlId ?? null, verification_status: input.verificationStatus,
+    verified_at: input.verificationStatus === "unverified" ? null : new Date().toISOString(),
+    notes: input.notes ?? null,
+  };
+  const { error } = input.id
+    ? await db.from("university_financial_aid_programs").update(row).eq("id", input.id)
+    : await db.from("university_financial_aid_programs").insert(row);
+  if (error) throw new Error(error.message);
+  revalidatePath("/admin/universities");
+}
+
+export async function deleteUniversityFinancialAidProgram(id: string): Promise<void> {
+  await requireAdmin();
+  const db = createAdminClient();
+  const { error } = await db.from("university_financial_aid_programs").delete().eq("id", id);
+  if (error) throw new Error(error.message);
+  revalidatePath("/admin/universities");
+}
+
+/** 관리자 — 전공 등록/수정(학위·트랙 구분 포함). 수집 스크립트가 대량 삽입하는 것과 별개로
+ * 관리자가 개별 보정할 수 있게 최소 CRUD를 둔다. */
+export async function upsertUniversityMajor(input: {
+  id?: string; universityId: string; name: string; category?: string | null;
+  degreeLevel?: string | null; isTrack?: boolean; parentMajorId?: string | null;
+}): Promise<void> {
+  await requireAdmin();
+  const db = createAdminClient();
+  const row = {
+    university_id: input.universityId, name: input.name, category: input.category ?? null,
+    degree_level: input.degreeLevel ?? null, is_track: input.isTrack ?? false, parent_major_id: input.parentMajorId ?? null,
+  };
+  const { error } = input.id
+    ? await db.from("university_majors").update(row).eq("id", input.id)
+    : await db.from("university_majors").insert(row);
+  if (error) throw new Error(error.message);
+  revalidatePath("/admin/universities");
+}
+
+export async function deleteUniversityMajor(id: string): Promise<void> {
+  await requireAdmin();
+  const db = createAdminClient();
+  const { error } = await db.from("university_majors").delete().eq("id", id);
   if (error) throw new Error(error.message);
   revalidatePath("/admin/universities");
 }

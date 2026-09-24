@@ -21,12 +21,18 @@ import {
   listUniversities,
   getUniversityDetailForStudent,
   loadAdmissionMetrics,
+  loadUniversityAffiliations,
+  loadUniversityDemographics,
   loadUniversityEssayPrompts,
+  loadUniversityFinancialAidPrograms,
   type UniversitySummary,
   type UniversityDetail,
   type AdmissionCycle,
   type AdmissionMetric,
   type AdmissionMetricCohort,
+  type UniversityAffiliation,
+  type UniversityDemographic,
+  type UniversityFinancialAidProgram,
   type UniversityMajor,
   type UniversityUpdateEntry,
   type UniversityEssayPrompt,
@@ -277,11 +283,15 @@ function RangeBar({ label, lo, hi, scaleMin, scaleMax, suffix = "" }: { label: s
 // 상세 화면
 // ---------------------------------------------------------------------------
 
+// College Explore UI·데이터 구조 확장 지시서(2026-09-23, 2차) — 탭 구성을
+// Overview/Admissions/Cost & Aid/Majors/Sources & Updates 5개로 재편(기존
+// Admissions/Student Profile/Essays 3개를 Admissions 하나로 합침 — 지시서:
+// "Admissions: 지원 방식·요건·마감일, 합격률과 과거 지원 결과, SAT/ACT/GPA 등
+// 실제 공개 통계, 에세이").
 const SECTIONS = [
+  { id: "overview", label: "Overview" },
   { id: "admissions", label: "Admissions" },
-  { id: "profile", label: "Student Profile" },
-  { id: "essays", label: "Essays" },
-  { id: "costs", label: "Costs & Aid" },
+  { id: "costs", label: "Cost & Aid" },
   { id: "majors", label: "Majors" },
   { id: "sources", label: "Sources & Updates" },
 ] as const;
@@ -307,9 +317,12 @@ function CollegeDetail({
   const [detail, setDetail] = useState<DetailData | null>(null);
   const [metrics, setMetrics] = useState<AdmissionMetric[] | null>(null);
   const [essays, setEssays] = useState<UniversityEssayPrompt[] | null>(null);
+  const [affiliations, setAffiliations] = useState<UniversityAffiliation[] | null>(null);
+  const [demographics, setDemographics] = useState<UniversityDemographic[] | null>(null);
+  const [financialAidPrograms, setFinancialAidPrograms] = useState<UniversityFinancialAidProgram[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
-  const [activeSection, setActiveSection] = useState<SectionId>("admissions");
+  const [activeSection, setActiveSection] = useState<SectionId>("overview");
   const [reportOpen, setReportOpen] = useState(false);
   const [reportFieldPath, setReportFieldPath] = useState("");
 
@@ -336,6 +349,27 @@ function CollegeDetail({
       })
       .catch(() => {
         if (!cancelled) setEssays([]);
+      });
+    loadUniversityAffiliations(universityId)
+      .then((rows) => {
+        if (!cancelled) setAffiliations(rows);
+      })
+      .catch(() => {
+        if (!cancelled) setAffiliations([]);
+      });
+    loadUniversityDemographics(universityId)
+      .then((rows) => {
+        if (!cancelled) setDemographics(rows);
+      })
+      .catch(() => {
+        if (!cancelled) setDemographics([]);
+      });
+    loadUniversityFinancialAidPrograms(universityId)
+      .then((rows) => {
+        if (!cancelled) setFinancialAidPrograms(rows);
+      })
+      .catch(() => {
+        if (!cancelled) setFinancialAidPrograms([]);
       });
     return () => {
       cancelled = true;
@@ -377,7 +411,7 @@ function CollegeDetail({
             onChangeYear={setSelectedYear}
           />
 
-          <SummaryCard cycle={cyclePick?.items[0] ?? null} metrics={metricsPick?.items ?? []} onFlag={flagField} onJumpToProfile={() => setActiveSection("profile")} />
+          <SummaryCard cycle={cyclePick?.items[0] ?? null} metrics={metricsPick?.items ?? []} onFlag={flagField} onJumpToProfile={() => setActiveSection("admissions")} />
 
           <div className="mb-4 flex gap-4 overflow-x-auto border-b border-grey-200 -mx-1 px-1" role="tablist" aria-label="대학 정보 섹션">
             {SECTIONS.map((s) => (
@@ -396,16 +430,26 @@ function CollegeDetail({
             ))}
           </div>
 
+          {activeSection === "overview" && (
+            <OverviewSection
+              university={detail.university}
+              cycle={cyclePick?.items[0] ?? null}
+              metrics={metricsPick?.items ?? []}
+              affiliations={affiliations}
+              demographics={demographics}
+              onFlag={flagField}
+            />
+          )}
           {activeSection === "admissions" && (
-            <AdmissionsSection cyclePick={cyclePick} selectedYear={year} onFlag={flagField} />
+            <>
+              <AdmissionsSection cyclePick={cyclePick} selectedYear={year} onFlag={flagField} />
+              <StudentProfileSection metricsPick={metricsPick} selectedYear={year} onFlag={flagField} />
+              <EssaysSection essaysPick={essaysPick} selectedYear={year} onFlag={flagField} />
+            </>
           )}
-          {activeSection === "profile" && (
-            <StudentProfileSection metricsPick={metricsPick} selectedYear={year} onFlag={flagField} />
+          {activeSection === "costs" && (
+            <CostsAidSection cyclePick={cyclePick} selectedYear={year} financialAidPrograms={financialAidPrograms} onFlag={flagField} />
           )}
-          {activeSection === "essays" && (
-            <EssaysSection essaysPick={essaysPick} selectedYear={year} onFlag={flagField} />
-          )}
-          {activeSection === "costs" && <CostsAidSection cyclePick={cyclePick} selectedYear={year} onFlag={flagField} />}
           {activeSection === "majors" && <MajorsSection majors={detail.majors} />}
           {activeSection === "sources" && (
             <SourcesSection
@@ -590,11 +634,113 @@ function SummaryCard({
             </div>
           )}
           <button type="button" onClick={onJumpToProfile} className="text-[11.5px] font-bold text-blue underline">
-            근거·세부값 Student Profile에서 보기 →
+            근거·세부값 Admissions에서 보기 →
           </button>
         </div>
       )}
     </div>
+  );
+}
+
+const DEMOGRAPHIC_CATEGORY_LABEL: Record<string, string> = {
+  gender_male: "남", gender_female: "여", gender_other: "기타",
+  race_white: "White", race_black: "Black", race_hispanic: "Hispanic",
+  race_asian_pacific_islander: "Asian/Pacific Islander", race_native_american: "Native American",
+  race_two_or_more: "둘 이상", race_unknown: "미상", race_international: "국제학생",
+};
+/** Overview 섹션 — 학교 기본정보·재학생 현황·학업 환경. 재학생 구성(demographics)은
+ * 입시 사이클과 다른 개념이라 전역 연도 선택과 무관하게 그 항목 자체의 최신 기준연도를
+ * 쓰고, 화면에 그 연도를 명시한다(지시서: "각 묶음에 실제 기준 연도와 대상 집단을 표시"). */
+function OverviewSection({
+  university,
+  cycle,
+  metrics,
+  affiliations,
+  demographics,
+  onFlag,
+}: {
+  university: UniversityDetail;
+  cycle: AdmissionCycle | null;
+  metrics: AdmissionMetric[];
+  affiliations: UniversityAffiliation[] | null;
+  demographics: UniversityDemographic[] | null;
+  onFlag: (label: string) => void;
+}) {
+  const totalEnrollment = findMetric(metrics, "total_undergrad_enrollment", "enrolled");
+
+  const latestDemographicYear = demographics && demographics.length > 0 ? Math.max(...demographics.map((d) => d.cycleYear)) : null;
+  const latestDemographics = demographics?.filter((d) => d.cycleYear === latestDemographicYear) ?? [];
+  const genderRows = latestDemographics.filter((d) => d.category.startsWith("gender_"));
+  const raceRows = latestDemographics.filter((d) => d.category.startsWith("race_"));
+  const raceScope = raceRows[0]?.populationScope;
+
+  const sports = (affiliations ?? []).filter((a) => a.kind === "ncaa_sport");
+  const otherAffiliations = (affiliations ?? []).filter((a) => a.kind !== "ncaa_sport");
+
+  return (
+    <>
+      <div className={cardClass}>
+        <div className={cardTitleClass}>학교 기본정보</div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {stat("공식 주소", university.officialAddress, onFlag)}
+          {stat("공식 대표 전화", university.officialPhone, onFlag)}
+        </div>
+        {(sports.length > 0 || otherAffiliations.length > 0) && (
+          <div className="mt-3 pt-3 border-t border-grey-100">
+            <div className="text-grey-300 text-[10.5px] font-bold mb-1.5">소속·인증(공식 확인분만 표시)</div>
+            <div className="flex flex-wrap gap-1.5">
+              {otherAffiliations.map((a) => (
+                <span key={a.id} className="text-[11.5px] px-2.5 py-1 bg-grey-100 rounded-full text-ink">{a.label}</span>
+              ))}
+              {sports.map((a) => (
+                <span key={a.id} className="text-[11.5px] px-2.5 py-1 bg-grey-100 rounded-full text-ink">{a.label}{a.division ? ` (${a.division})` : ""}</span>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div className={cardClass}>
+        <div className={cardTitleClass}>재학생 현황</div>
+        <div className="grid grid-cols-2 gap-3">
+          {stat("학부 재학생 총수", totalEnrollment?.value, onFlag)}
+          {stat("학생 대 교수 비율", cycle?.studentFacultyRatio, onFlag)}
+          {stat("1년 재학유지율", cycle?.retentionRate != null ? `${cycle.retentionRate}%` : null, onFlag)}
+          {stat("4년 졸업률", cycle?.gradRate4yr != null ? `${cycle.gradRate4yr}%` : null, onFlag)}
+          {stat("6년 졸업률", cycle?.gradRate6yr != null ? `${cycle.gradRate6yr}%` : null, onFlag)}
+          {stat("국제학생 비율", cycle?.internationalPct != null ? `${cycle.internationalPct}%` : null, onFlag)}
+        </div>
+
+        {genderRows.length > 0 && (
+          <div className="mt-3 pt-3 border-t border-grey-100">
+            <div className="text-grey-300 text-[10.5px] font-bold mb-1">
+              성별 구성 <span className="font-normal text-grey-400">({latestDemographicYear}학년도 기준)</span>
+            </div>
+            <div className="flex gap-4 text-[13px] text-ink font-bold">
+              {genderRows.map((d) => (
+                <span key={d.id}>{DEMOGRAPHIC_CATEGORY_LABEL[d.category]}: {d.valueStatus === "reported" ? `${d.pct}%` : "미공개"}</span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {raceRows.length > 0 && (
+          <div className="mt-3 pt-3 border-t border-grey-100">
+            <div className="text-grey-300 text-[10.5px] font-bold mb-1">
+              인종·민족 구성{" "}
+              <span className="font-normal text-grey-400">
+                ({latestDemographicYear}학년도 기준 · {raceScope === "us_students_only" ? "미국 내 학생 대상" : "전체 학생 대상"})
+              </span>
+            </div>
+            <div className="grid grid-cols-2 gap-1.5 text-[12px] text-ink">
+              {raceRows.map((d) => (
+                <span key={d.id}>{DEMOGRAPHIC_CATEGORY_LABEL[d.category]}: {d.valueStatus === "reported" ? `${d.pct}%` : "미공개"}</span>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 
@@ -616,18 +762,12 @@ function AdmissionsSection({
     <div className={cardClass}>
       {cyclePick && <YearFallbackNotice selectedYear={selectedYear} effectiveYear={cyclePick.year} />}
       <div className="grid grid-cols-2 gap-4">
-        {stat("학생 대 교수 비율", cycle.studentFacultyRatio, onFlag)}
         {stat("인터뷰", cycle.interviewRequired === true ? "필요/권장" : cycle.interviewRequired === false ? "없음" : null, onFlag)}
         {stat("포트폴리오", cycle.portfolioRequired ? "필요" : null, onFlag)}
         {stat("추천 이수 과정", cycle.recommendedCoursework, onFlag)}
         {stat("AP/IB 정책", cycle.apIbPolicy, onFlag)}
-        {stat("TOEFL 최소 점수", cycle.toeflMin, onFlag)}
-        {stat("IELTS 최소 점수", cycle.ieltsMin, onFlag)}
-        {stat("국제학생 비율", cycle.internationalPct != null ? `${cycle.internationalPct}%` : null, onFlag)}
-        {stat("4년 졸업률", cycle.gradRate4yr != null ? `${cycle.gradRate4yr}%` : null, onFlag)}
-        {stat("6년 졸업률", cycle.gradRate6yr != null ? `${cycle.gradRate6yr}%` : null, onFlag)}
-        {stat("재학 유지율(1년)", cycle.retentionRate != null ? `${cycle.retentionRate}%` : null, onFlag)}
-        {stat("Pell Grant 수혜율", cycle.pellGrantPct != null ? `${cycle.pellGrantPct}%` : null, onFlag)}
+        {stat("국제학생 TOEFL 최소 점수", cycle.toeflMin, onFlag)}
+        {stat("국제학생 IELTS 최소 점수", cycle.ieltsMin, onFlag)}
       </div>
     </div>
   );
@@ -838,46 +978,106 @@ function CdsDetailGroups({ metrics }: { metrics: AdmissionMetric[] }) {
 // Costs & Aid
 // ---------------------------------------------------------------------------
 
+const FINANCIAL_AID_PROGRAM_TYPE_LABEL: Record<string, string> = {
+  need_based_grant: "재정필요 기반 보조금(Grant)",
+  merit_scholarship: "성적 기반 장학금",
+  federal_loan: "연방 학자금 대출",
+  work_study: "근로장학(Work-Study)",
+};
+const ELIGIBILITY_SCOPE_LABEL: Record<string, string> = {
+  us_citizen_permanent_resident: "미국 시민·영주권자만 대상",
+  all_students: "국제학생 포함 전원 대상",
+  other: "대상 조건 별도 확인 필요",
+};
+
 function CostsAidSection({
   cyclePick,
   selectedYear,
+  financialAidPrograms,
   onFlag,
 }: {
   cyclePick: { year: number; items: AdmissionCycle[] } | null;
   selectedYear: number;
+  financialAidPrograms: UniversityFinancialAidProgram[] | null;
   onFlag: (label: string) => void;
 }) {
   const cycle = cyclePick?.items[0];
-  if (!cycle || (cycle.tuitionInState == null && cycle.tuitionOutState == null && cycle.avgNetPrice == null)) {
-    return <div className={cardClass}><p className="text-[12.5px] text-grey-500">이 연도의 비용·재정지원 정보가 아직 없습니다.</p></div>;
-  }
+  const hasCostData = cycle && (cycle.tuitionInState != null || cycle.tuitionOutState != null || cycle.avgNetPrice != null);
+
   return (
-    <div className={cardClass}>
-      {cyclePick && <YearFallbackNotice selectedYear={selectedYear} effectiveYear={cyclePick.year} />}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div className="border-[1.5px] border-grey-100 rounded-lg px-3 py-2.5">
-          <div className="text-grey-300 text-[10.5px] font-bold mb-0.5">
-            등록금(주내·재학주 거주 시민 기준) <FlagButton label="주내 등록금" onFlag={onFlag} />
-          </div>
-          <div className="font-bold text-ink text-[14px]">{cycle.tuitionInState != null ? `$${cycle.tuitionInState.toLocaleString()}` : "확인 필요"}</div>
-        </div>
-        <div className="border-[1.5px] border-grey-100 rounded-lg px-3 py-2.5">
-          <div className="text-grey-300 text-[10.5px] font-bold mb-0.5">
-            등록금(주외/유학생 기준) <FlagButton label="주외·유학생 등록금" onFlag={onFlag} />
-          </div>
-          <div className="font-bold text-ink text-[14px]">{cycle.tuitionOutState != null ? `$${cycle.tuitionOutState.toLocaleString()}` : "확인 필요"}</div>
-        </div>
+    <>
+      <div className={cardClass}>
+        <div className={cardTitleClass}>학비·총비용</div>
+        {!hasCostData ? (
+          <p className="text-[12.5px] text-grey-500">이 연도의 비용 정보가 아직 없습니다 — 공식 정보 확인 중입니다.</p>
+        ) : (
+          <>
+            {cyclePick && <YearFallbackNotice selectedYear={selectedYear} effectiveYear={cyclePick.year} />}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="border-[1.5px] border-grey-100 rounded-lg px-3 py-2.5">
+                <div className="text-grey-300 text-[10.5px] font-bold mb-0.5">
+                  등록금(주내·재학주 거주 시민 기준) <FlagButton label="주내 등록금" onFlag={onFlag} />
+                </div>
+                <div className="font-bold text-ink text-[14px]">{cycle!.tuitionInState != null ? `$${cycle!.tuitionInState.toLocaleString()}` : "확인 필요"}</div>
+              </div>
+              <div className="border-[1.5px] border-grey-100 rounded-lg px-3 py-2.5">
+                <div className="text-grey-300 text-[10.5px] font-bold mb-0.5">
+                  등록금(주외/유학생 기준) <FlagButton label="주외·유학생 등록금" onFlag={onFlag} />
+                </div>
+                <div className="font-bold text-ink text-[14px]">{cycle!.tuitionOutState != null ? `$${cycle!.tuitionOutState.toLocaleString()}` : "확인 필요"}</div>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-3 mt-3">
+              {stat("기숙사·식비", cycle!.roomBoardCost != null ? `$${cycle!.roomBoardCost.toLocaleString()}` : null, onFlag)}
+              {stat("평균 순부담액(net price, 전체 학생 평균)", cycle!.avgNetPrice != null ? `$${cycle!.avgNetPrice.toLocaleString()}` : null, onFlag)}
+              {stat("재정지원 수혜율(전체)", cycle!.pctReceivingAid != null ? `${cycle!.pctReceivingAid}%` : null, onFlag)}
+              {stat("평균 지원액", cycle!.avgAidAward != null ? `$${cycle!.avgAidAward.toLocaleString()}` : null, onFlag)}
+              {stat("Pell Grant 수혜율", cycle!.pellGrantPct != null ? `${cycle!.pellGrantPct}%` : null, onFlag)}
+            </div>
+            <p className="text-[11px] text-grey-400 mt-3">
+              등록금과 총비용(기숙사·식비 포함)은 다른 금액입니다. 평균 순부담액(net price)은 재정지원을 받은 재학생
+              {cyclePick ? ` ${cyclePick.year}년` : ""} 평균이며, 개별 가정의 예상 비용으로 쓸 수 없습니다.
+            </p>
+          </>
+        )}
       </div>
-      <div className="grid grid-cols-2 gap-3 mt-3">
-        {stat("기숙사·식비", cycle.roomBoardCost != null ? `$${cycle.roomBoardCost.toLocaleString()}` : null, onFlag)}
-        {stat("평균 순부담액(net price, 전체 학생 평균)", cycle.avgNetPrice != null ? `$${cycle.avgNetPrice.toLocaleString()}` : null, onFlag)}
-        {stat("재정지원 수혜율", cycle.pctReceivingAid != null ? `${cycle.pctReceivingAid}%` : null, onFlag)}
-        {stat("평균 지원액", cycle.avgAidAward != null ? `$${cycle.avgAidAward.toLocaleString()}` : null, onFlag)}
+
+      <div className={cardClass}>
+        <div className={cardTitleClass}>보조금·장학금·대출·근로장학</div>
+        {financialAidPrograms === null ? (
+          <p className="text-[12.5px] text-grey-500">불러오는 중…</p>
+        ) : financialAidPrograms.length === 0 ? (
+          <p className="text-[12.5px] text-grey-500">공식 정보 확인 중입니다 — 아직 등록된 프로그램이 없습니다.</p>
+        ) : (
+          <div className="space-y-3">
+            {financialAidPrograms.map((f) => (
+              <div key={f.id} className="border-[1.5px] border-grey-100 rounded-lg px-3 py-2.5">
+                <div className="flex items-center justify-between">
+                  <div className="text-[13px] font-bold text-ink">
+                    {f.name} <span className="text-[11px] font-semibold text-grey-500">({FINANCIAL_AID_PROGRAM_TYPE_LABEL[f.programType] ?? f.programType})</span>
+                  </div>
+                  <FlagButton label={f.name} onFlag={onFlag} />
+                </div>
+                <div className={`mt-1 text-[11.5px] font-bold ${f.eligibilityScope === "us_citizen_permanent_resident" ? "text-red" : "text-grey-500"}`}>
+                  {ELIGIBILITY_SCOPE_LABEL[f.eligibilityScope] ?? f.eligibilityScope}
+                </div>
+                {f.valueStatus !== "reported" ? (
+                  <div className="text-[12px] text-grey-400 mt-1">{f.valueStatus === "not_applicable" ? "이 학교엔 해당 없음" : "학교가 세부 수치를 공개하지 않음"}</div>
+                ) : (
+                  <div className="text-[12px] text-ink mt-1">
+                    {f.recipientPct != null && `수혜율 ${f.recipientPct}%`}
+                    {f.recipientPct != null && f.avgAwardAmount != null && " · "}
+                    {f.avgAwardAmount != null && `평균 ${f.programType === "federal_loan" ? "대출" : "지급"}액 $${f.avgAwardAmount.toLocaleString()}`}
+                  </div>
+                )}
+                {f.renewalCondition && <div className="text-[11px] text-grey-500 mt-0.5">갱신 조건: {f.renewalCondition}</div>}
+                {f.description && <div className="text-[11.5px] text-grey-600 mt-1">{f.description}</div>}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
-      <p className="text-[11px] text-grey-400 mt-3">
-        평균 순부담액(net price)은 재정지원을 받은 재학생 평균이며, 개별 가정의 실제 부담액과 다를 수 있습니다.
-      </p>
-    </div>
+    </>
   );
 }
 
@@ -888,6 +1088,10 @@ function CostsAidSection({
 function MajorsSection({ majors }: { majors: UniversityMajor[] }) {
   const [search, setSearch] = useState("");
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
+
+  // 지시서: "전공·학위·세부 트랙을 같은 항목으로 혼동하지 않도록" — 전공 수 집계는
+  // 트랙(is_track=true)을 제외한다.
+  const independentCount = majors.filter((m) => !m.isTrack).length;
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -912,7 +1116,7 @@ function MajorsSection({ majors }: { majors: UniversityMajor[] }) {
 
   return (
     <div className={cardClass}>
-      <div className={cardTitleClass}>전공 ({majors.length})</div>
+      <div className={cardTitleClass}>전공 ({independentCount}개)</div>
       <input
         type="search"
         value={search}
@@ -939,8 +1143,10 @@ function MajorsSection({ majors }: { majors: UniversityMajor[] }) {
             {isOpen && (
               <div className="flex flex-wrap gap-1.5">
                 {items.map((m) => (
-                  <span key={m.id} className="text-[11.5px] px-2.5 py-1 bg-grey-100 rounded-full text-ink">
+                  <span key={m.id} className={`text-[11.5px] px-2.5 py-1 rounded-full text-ink ${m.isTrack ? "bg-grey-100/60 border border-dashed border-grey-200" : "bg-grey-100"}`}>
+                    {m.isTrack ? "↳ " : ""}
                     {m.name}
+                    {m.degreeLevel ? ` (${m.degreeLevel})` : ""}
                   </span>
                 ))}
               </div>
