@@ -6696,3 +6696,90 @@ Aid/Cost-of-Attendance 웹페이지를 WebFetch/브라우저로 직접 조회**�
   자체를 분리해야 하는지 검토, (c) tuition_out_of_state/required_fees/room_cost/board_cost 등 이번
   세션에서 함께 확보했지만 아직 삽입하지 않은 부가 지표(Louisville류 CDS 외 이번 세션 학교들의
   out-of-state/fees 수치)를 추가 반영하는 것을 권장.
+
+## 63차 세션 — tuition 6개교 실수집 + demographics/financial_aid_programs 15개교 신규 실수집(세션 중 작업 전환)
+
+### 1부: tuition_in_state 등 비용 지표 6개교 (세션 시작 37개교 → 종료 시점 31개교, 이후 다른 세션이
+병행 진행하여 최종 4개교(Brown/Memphis/Albany/Ohio University, 확인불가 확정)만 남음을 확인)
+
+| 대학 | cycle_year | in-state/사립 | out-of-state | fees | room/board | 비고 |
+|---|---|---|---|---|---|---|
+| University of Dayton | 2026 | $51,910(사립) | — | $600 | $10,140/$7,050 | Google Docs export=txt(institution's own CDS 호스팅) |
+| Rensselaer Polytechnic Institute | 2026 | $66,300(사립) | — | $1,676 | $9,850/$9,020 | Box.com pdfjs AcroForm(getAnnotations) 직접 판독 |
+| University of Illinois Urbana-Champaign | 2026 | $12,992 | $33,344 | $5,054 | $8,094/$7,090 | 공식 uofi.box.com static xlsx, openpyxl 파싱 |
+| Stanford University | 2026 | $67,731(사립) | — | $843 | $14,802/$8,142 | Google Drive `uc?export=download&confirm=t` **직접 curl 성공**(브라우저 불필요) |
+| University of Notre Dame | 2026 | $67,100(사립) | — | $507 | 미분리(comprehensive) | Google Drive 동일 기법 성공(직전 세션 실패 원인이었던 브라우저 CSP를 curl로 완전 우회) |
+| University of Missouri | 2024 | $13,650 | $34,860 | $1,180 | $9,800/$3,900 | SharePoint 익명 공유 링크 → 브라우저 fetch로 authenticated download.aspx 획득 → base64 13청크
+  전송(초당 90KB, 랩퍼 텍스트 `"..."` + `(captured at origin...)` 제거 후 재조립) → pdftotext |
+
+### 새로 검증된 핵심 기법
+1. **Google Drive `uc?export=download&confirm=t`는 curl 단독으로 충분** — 62차 세션에서 브라우저의
+   Trusted Types CSP 때문에 실패했던 Notre Dame 케이스가, 이번 세션에는 **bash curl 직접 호출만으로
+   200 + 완전한 PDF 바이너리**를 받았다(브라우저 관여 전혀 없음). 브라우저를 거치지 않고 먼저 bash curl을
+   표준 1차 시도로 삼을 것.
+2. **SharePoint 익명 공유 링크(`mailmissouri.sharepoint.com/:b:/...`) 우회**: curl은 로그인 리다이렉트로
+   막히지만, 브라우저로 링크를 열면 뷰어가 `_layouts/15/download.aspx?UniqueId=...`를 자동으로
+   `fetch()`한다(`performance.getEntriesByType('resource')`로 URL 확보). 이 URL을 페이지 컨텍스트에서
+   재차 `fetch()`하면 200 + 원본 바이트를 받을 수 있다. 브라우저 밖(bash)으로 옮기려면 `btoa`로
+   base64 인코딩 후 90000자 단위로 여러 번의 `javascript_tool` 호출에 나눠 출력해야 한다(툴 결과가
+   자동으로 파일로 저장됨) — 이때 툴이 반환하는 텍스트에는 앞뒤로 `"..."` 따옴표와
+   `\n\n(captured at origin ...)` 꼬리표가 섞여 들어가므로, 재조립 전 반드시 정규식으로 제거할 것
+   (제거 안 하면 base64 길이가 맞아도 PDF가 깨짐 — 이번 세션에서 실제로 한 번 실패 후 원인 파악).
+3. **Box.com 공유 링크는 pdfjsLib가 이미 로드돼 있음** — RPI 케이스처럼 `rpi.app.box.com` 프리뷰 페이지는
+   `window.pdfjsLib`를 자체 번들에 포함하고 있어 별도 CDN 스크립트 주입 없이 바로
+   `pdfjsLib.getDocument({data: buf})`를 쓸 수 있다. AcroForm 필드가 있는 CDS는
+   `page.getAnnotations()`로, 텍스트 레이어만 있는 CDS는 `page.getTextContent()`로 값을 읽는다.
+
+### 2부(세션 중 통합 세션 지시로 작업 전환): university_demographics/university_financial_aid_programs
+15개교 신규 실수집(DB 직접 insert, 두 테이블만 접촉 — admission_metrics/source_urls는 조회만 하고
+쓰기는 하지 않음. 단, 이미 확보한 원문의 재사용을 위해 university_source_urls는 세션 1부에서 쓴 신규
+행만 그대로 재사용)
+
+| 대학 | cycle_year | demographics 행 수 | financial_aid_programs 행 수 |
+|---|---|---|---|
+| University of Missouri | 2024 | 10 | 3 |
+| University of Dayton | 2026 | 11 | 2 |
+| Rensselaer Polytechnic Institute | 2026 | 10 | 2 |
+| University of Illinois Urbana-Champaign | 2026 | 11 | 3 |
+| Stanford University | 2026 | 10 | 3 |
+| University of Notre Dame | 2026 | 10 | 3 |
+| Cornell University | 2025 | 10 | 2 |
+| Columbia University | 2025 | 11 | 2 |
+| Drexel University | 2025 | 11 | 1 |
+| George Washington University | 2026 | 10 | 2 |
+| Howard University | 2025 | 10 | 3 |
+| Arizona State University | 2025 | 10 | 3 |
+| Harvard University | 2025 | 10 | 3 |
+| Auburn University | 2025 | 10 | 3 |
+| Brigham Young University | 2025 | 10 | 3 |
+
+- demographics는 CDS B1(성별)+B2(인종/민족, "Total Undergraduates" 열 기준)을 `population_scope='all_students'`로
+  환산해 삽입. `race_asian_pacific_islander`는 원문이 Asian/Native Hawaiian·Pacific Islander를 분리한
+  경우 합산해서 매핑(스펙 문서 4절 지침 준수).
+- financial_aid_programs는 CDS H2(need_based_grant, full-time undergrad 열의 E/K)+H2A(merit_scholarship,
+  N/O, 값이 0이거나 섹션 자체가 없으면 행 생성 안 함)+H5(federal_loan, B행 %/평균, `eligibility_scope='us_citizen_permanent_resident'`)만
+  사용. Drexel/Cornell/GWU/Columbia는 H2A 또는 H5 중 일부 섹션이 공란이라 해당 프로그램 행을 생성하지
+  않음(추측 금지 원칙).
+- 모든 INSERT는 `WHERE NOT EXISTS` 가드 사용(university_demographics는
+  `(university_id, cycle_year, category, population_scope)`, university_financial_aid_programs는
+  `(university_id, program_type, name, cycle_year)` 기준). university_majors/university_essay_prompts/
+  university_source_urls(2부 한정)/university_admission_metrics(2부 한정)는 전혀 쓰기 접촉 없음.
+
+### 검증
+- 세션 종료 시점: `select count(*) from universities u where data_collection_status='verified_pilot'
+  and not exists(...university_demographics...) and not exists(...university_financial_aid_programs...)`
+  → 137개교 남음(세션 시작 시점 약 152개교 추정, 정확한 시작 카운트는 재확인 안 함 — 다음 세션은 이
+  카운트를 먼저 조회해서 정확한 진행률을 기록할 것).
+- Agent 툴로 하위 에이전트 spawn하지 않음. `npx supabase db push --linked`/`vercel deploy` 미실행,
+  마이그레이션 파일 작성 없음.
+
+### 다음 세션 인계
+- demographics/financial_aid_programs 137개교 남음. 이번 세션에서 확보한 CDS 원문 재사용 가능한
+  학교(Fordham/Georgetown/JHU/Clarkson/Andrews 등, university_source_urls에 이미 직접 PDF 링크 존재)를
+  우선순위로 처리할 것.
+- SharePoint 익명 공유(University of Missouri류) base64 청크 전송 기법은 비용이 크므로(13회 호출),
+  같은 학교를 다시 열 필요는 없지만 Virginia Tech/Colorado Boulder/Indiana Bloomington류의 진짜 SSO
+  로그인 포털에는 이 기법이 통하지 않는다(익명 공유 링크가 아니라 조직 계정 로그인 자체가 걸려 있음) —
+  구분해서 적용할 것.
+- google Drive `uc?export=download&confirm=t` + 순수 curl 조합을 항상 1차 시도로 사용할 것(브라우저
+  거치지 않아 훨씬 빠름) — 이번 세션 Stanford/Notre Dame에서 확인.
