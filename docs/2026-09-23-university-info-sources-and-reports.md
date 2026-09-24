@@ -5241,3 +5241,104 @@ m.university_id=u.id group by u.id, u.name having count(m.id)=0`을
 - Arizona State University는 118개 전공으로 등록됐으나 실제 전체
   학사 전공 수(400+)에는 크게 못 미침 — IPEDS rate-limit이 풀리면
   Programs/Majors 탭으로 재작업해 보완할 것.
+
+## 50차 세션 — 신규 학업/비용 지표 20개교 실수집(172건)
+
+### 작업 범위
+university_admission_metrics / university_source_urls만 처리(다른
+백그라운드 세션이 university_majors/university_essay_prompts 작업
+중이라는 지시에 따라 미접촉).
+
+### 방법
+1. `verified_pilot` 상태이면서 `tuition_in_state` 지표가 없는 학교
+   171개교 확인.
+2. 각 학교 `university_source_urls`에 등록된 CDS 직링크(PDF/xlsx)를
+   `curl -A "Mozilla/5.0 ..."`로 다운로드, 실패 시 WebSearch로 최신
+   직링크 재탐색 후 신규 `university_source_urls` 행 등록(approved).
+3. `pdftotext -layout`으로 G(비용)/I(교수비율)/A4(학사력) 섹션 파싱.
+   양식필드형 PDF(University of Kentucky, UC Santa Cruz, University of
+   New Mexico)는 값 자체가 "2025-26/2026-27 비용 미공개" 체크박스가
+   되어 있어 `pdftoppm`으로 렌더링 후 육안 확인, 실제로 비용 데이터가
+   없음을 확인하고 해당 학교는 비용 지표를 아예 insert하지 않음(ratio/
+   calendar/AP만 반영).
+4. xlsx 기반 CDS(NJIT, North Dakota State, Stony Brook)는 `openpyxl`로
+   시트별(`CDS-A`,`CDS-G`,`CDS-I`) 파싱. North Dakota State는 xlsx에도
+   비용 체크박스가 되어 있어 비용 미반영.
+5. AP 학점 정책은 WebSearch — Rutgers 3개 캠퍼스 공통 정책(min 4,
+   3점 이하 불인정) 확인, UC 시스템 공통 정책(min 3, 이공계 일부
+   4~5점) 확인. 나머지는 대부분 min 3, 학과별 상이 시 `ap_credit_
+   accepted`만 반영하고 `ap_min_score_required`는 skip.
+
+### 완료: 20개교 (총 172건 반영, cycle_year=2026/enrolled)
+
+| 학교 | 비용 AY | tuition(주내/주외) | fees | room | board | ratio | calendar | AP |
+|---|---|---|---|---|---|---|---|---|
+| Rutgers University-Camden | 2024-25 | $14,222 / $33,734 | $3,542 | $10,376 | $4,000 | 12:1 | semester | 가능, Rutgers 공통 min 4 |
+| Rutgers University-New Brunswick | 2024-25 | $14,222 / $33,734 | $3,707 | $9,366 | $6,348 | 15:1 | semester | 가능, Rutgers 공통 min 4 |
+| Rutgers University-Newark | 2024-25 | $14,222 / $33,734 | $3,028 | $10,123 | $5,951 | 13:1 | semester | 가능, Rutgers 공통 min 4 |
+| Texas A&M University | 2024-25 | $8,886 / $36,187 | $3,970 | $8,098 | $4,910 | 21:1 | semester | 가능, 과목별 3~5점 상이(미반영) |
+| University of Kentucky | 2025-26(비용 미공개) | - | - | - | - | 17.7:1 | semester | 가능, 대부분 학과 min 3 |
+| University of Utah | 2024-25 | $9,739 / $34,089 | $1,109 | $7,995 | $6,642 | 19:1 | semester | 가능, min 3 |
+| University of Hawaii at Manoa | 2025-26 | $11,760 / $33,792 | $914 | $8,222 | $7,468 | 13.6:1 | semester | 가능, 기본 min 3(elective) |
+| University of Nevada, Las Vegas | 2024-25 | $8,909 / $26,572(비거주자 $26,862) | $839 | $6,828 | $5,800 | 19:1 | semester | 가능, 학과별 상이(미반영) |
+| University of California, Santa Cruz | 2026-27(비용 미공개) | - | - | - | - | 22:1 | quarter | 가능(기존 반영), UC 공통 min 3 |
+| University of Pittsburgh | 2024-25 | $20,966 / $41,662 | $1,770 | $8,770 | $5,950 | 13:1 | semester | 가능, min 3(전공별 상이 가능) |
+| University of South Carolina | 2024-25 | $12,288 / $36,976 | $400 | $10,798 | $5,578 | 19:1 | semester | 가능, min 3 |
+| Virginia Commonwealth University | 2024-25 | $13,520 / $35,994 | $3,720 | $8,818 | $6,310 | 17:1 | semester | 가능, min 3 |
+| Washington State University | 2024-25 | $11,678 / $28,784 | $2,210 | $9,398 | $5,030 | 13:1 | semester | 가능, min 3 |
+| University of Vermont | 2024-25 | $16,280 / $42,724 | $2,778 | $9,048 | $4,728 | 17:1 | semester | 가능, 5점 전과목/3~4점 과목별 재검토(미반영) |
+| New Jersey Institute of Technology | 2025-26 | $16,334 / $34,024 | $3,640 | $10,900 | $5,550 | 16:1 | semester | 가능, 과목별 상이(미반영) |
+| North Dakota State University | 2025-26(비용 미공개) | - | - | - | - | 17:1 | semester | 가능, min 3 |
+| Stony Brook University (SUNY) | 2026-27 | $7,070 / $31,050 | $3,861 | $11,424 | $7,450 | 19:1 | semester | 가능, min 3(최소 2학점 보장) |
+| University of New Mexico | 2025-26(비용 미공개) | - | - | - | - | 15:1 | semester | 가능, 뉴멕시코 주 통일 min 3 |
+| University of North Texas | 2024-25 | $8,673 / $20,973 | $2,990 | 미반영(합산만) | 미반영 | 26:1 | semester | 가능, 최소점수 미확인(미반영) |
+| University of Rhode Island | 2023-24 | $14,630 / $34,834 | $2,312 | $9,288 | $5,350 | 17:1 | semester | 가능, 학과별 상이(미반영) |
+
+국제학생 등록금 별도 미표기 학교는 non-resident/out-of-state 세율을
+international에도 동일 적용(UNLV는 CDS의 별도 Non-resident 항목
+$26,862을 international에 사용).
+
+### 반영하지 않은 것 (추측 금지 원칙)
+- University of Kentucky, UC Santa Cruz, North Dakota State, University
+  of New Mexico: CDS 자체가 "차기 연도 비용 미공개" 체크박스로
+  표시되어 있음을 페이지 렌더링(pdftoppm)으로 육안 확인 — tuition/
+  fees/room/board 행을 아예 생성하지 않음.
+- University of North Texas: room_cost/board_cost는 CDS에 "Food and
+  Housing(합산)"만 있고 개별 항목이 공란이라 미반영.
+- ap_min_score_required: Texas A&M/UNLV/NJIT/Vermont/University of
+  North Texas/University of Rhode Island는 과목·학과별로 값이 갈리거나
+  공식 자료에서 단일 수치를 찾지 못해 미반영, notes에 사유 명시.
+- net_price_average: 20개교 전원 미반영(CDS에 실제 평균 수치 없음).
+- University of Oklahoma(Norman): 공식 사이트가 CDS를 섹션별(A~J)
+  개별 PDF로 분리 배포해 G(비용) 섹션 단독 PDF를 찾지 못함 — 스킵,
+  다음 세션에서 재시도 필요.
+
+### 다운로드/파싱 팁 (다음 세션 참고)
+- University of Kentucky/UC Santa Cruz/University of New Mexico처럼
+  pdftotext로 G1 tuition 값이 전부 공란으로 나오는 경우, 먼저
+  `pdftoppm -f N -l N -r 150 -png`로 해당 페이지를 렌더링해 "비용
+  미공개 체크박스"가 체크되어 있는지 확인할 것 — 실제로 값이 없는
+  경우가 많으므로 pypdf get_fields()가 빈 값을 반환해도 재시도하지
+  말고 바로 스킵.
+- Rutgers 3개 캠퍼스(Camden/New Brunswick/Newark)는 AP 정책이 학교
+  공통(4점 이상만 학점 인정)이라 한 번의 WebSearch로 3개교 모두 처리
+  가능.
+- UT Knoxville, Virginia Tech는 이번 세션에서 검색된 직링크가 모두
+  404 응답 — institutional research 사이트가 URL을 자주 변경하므로
+  다음 세션에서 재검색 필요.
+
+### 검증
+- `select count(*) ... where cycle_year=2026 and university 20개교`로
+  총 172건, 학교별 4~10건 확인(비용 미공개 4개교는 4건, 그 외는
+  7~10건).
+- `git status --short`로 이번 세션이 `docs/` 외 어떤 소스 파일도
+  건드리지 않았음을 확인. `university_majors`/`university_essay_prompts`
+  는 전혀 건드리지 않음.
+- `npx supabase db push --linked` / `vercel deploy` 미실행. 로컬 psql
+  direct insert만 사용, 마이그레이션 파일 작성 없음.
+
+### 다음 세션 인계
+1. University of Oklahoma(Norman), UT Knoxville, Virginia Tech는
+   직링크 문제로 스킵 — 재검색 필요.
+2. verified_pilot 200개교 중 아직 tuition_in_state 미보유 학교가
+   151개교 남음 — 동일 방식으로 계속 진행 권장.
