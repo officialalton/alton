@@ -3691,3 +3691,114 @@ data_collection_status: verified_pilot 150 / sources_pending_review 27 / unconfi
    Ohio(unconfirmed) 재조사 — 여섯 세션 연속 이월.
 5. Kentucky 학과 `page=6`부터 이어서 수집 — 변동 없음.
 6. 로컬 DB 리셋 금지 규칙 재강조.
+
+## 39차 세션 (2026-09-23) — IPEDS 대체 출처 전환, 11개교 실수집 + St. John's 출처 오류 정정
+
+### 0. 전략 전환 배경
+38차까지 CDS 원문 자체가 SharePoint/Google Drive/로그인 필요 대시보드로
+막힌 학교가 누적되어 신규 삽입이 여러 세션 0건이었다. 지시서 원문("대학
+공식 CDS와 함께 IPEDS 같은 공식 통계 자료를 우선한다")에 따라 이번
+세션부터 CDS 원문 미확보 학교는 **IPEDS College Navigator**
+(`https://nces.ed.gov/collegenavigator/`)를 공식 2차 출처로 사용했다.
+학교명을 확인한 뒤 IPEDS ID를 얻으면 `?id=<IPEDS ID>` 형태로 안정적인
+직접 링크가 만들어짐을 확인(예: `?id=206084`). NCES 사이트가 간헐적으로
+"High Load" 오류를 내는 경우가 있어 재시도가 필요했다.
+
+### 1. IPEDS College Navigator로 실수집 완료 (11개교, 전량 `verification_status='official'`)
+아래 전 학교 공통: cycle_year=2024(Fall 2024 신입생), source_type='other'
+(`university_source_urls`에 IPEDS College Navigator 프로필 URL 등록,
+status='approved'), cohort는 applicant(지원자수·합격률)/admitted(등록률)/
+enrolled(SAT·ACT 백분위·재학유지율·6년 졸업률) 구분 적용. 재학유지율·
+졸업률 수치는 텍스트 추출이 안 되는 막대그래프(canvas/이미지 렌더링)라
+스크린샷 확대로 직접 읽어 확인.
+
+- **University of Toledo** (IPEDS ID 206084): 지원자 11,067 / 합격률
+  92% / 등록률 19% / SAT EBRW·Math 25-75 550-650·550-650 / ACT
+  Composite 25-75 23-29 / 재학유지율(전일제) 77% / 6년 졸업률(Fall 2018)
+  58%.
+- **Old Dominion University** (IPEDS ID 232982): 지원자 15,100 / 합격률
+  90% / 등록률 20% / SAT EBRW·Math 570-650·530-630 / ACT Composite
+  24-29 / 재학유지율 77% / 6년 졸업률 46%.
+- **Kansas State University** (IPEDS ID 155399): 지원자 15,509 / 합격률
+  82% / 등록률 27% / SAT EBRW·Math 550-640·510-620 / ACT Composite
+  20-27 / 재학유지율 86% / 6년 졸업률 71%.
+- **Texas State University** (IPEDS ID 228459): 지원자 34,146 / 합격률
+  89% / 등록률 27% / SAT EBRW·Math 500-610·480-590 / ACT Composite
+  19-25 / 재학유지율(전일제) 80% / 6년 졸업률 55%.
+- **Clark University** (IPEDS ID 165334): 지원자 11,452 / 합격률 40% /
+  등록률 11% / SAT EBRW·Math 658-740·630-720 / ACT Composite 30-33 /
+  재학유지율 86% / 6년 졸업률 77%.
+- **Gonzaga University** (IPEDS ID 235316): 지원자 8,759 / 합격률 82% /
+  등록률 17% / SAT EBRW·Math 600-700·590-680 / ACT Composite 27-31 /
+  재학유지율 93% / 6년 졸업률 86%.
+- **Florida International University** (IPEDS ID 133951): 지원자
+  32,855 / 합격률 55% / 등록률 29% / SAT EBRW·Math 550-640·520-620 /
+  ACT Composite 21-27 / 재학유지율 92% / 6년 졸업률 74%.
+- **University of Southern Mississippi** (IPEDS ID 176372): 지원자
+  7,048 / 합격률 99% / 등록률 25% / SAT 미제출(제출 0건, ACT만 99%
+  제출) / ACT Composite 20-29 / 재학유지율 72% / 6년 졸업률 49%.
+- **University of New Hampshire** (IPEDS ID 183044, Main Campus):
+  지원자 21,175 / 합격률 88% / 등록률 14% / SAT EBRW·Math
+  550-670·540-660 / ACT Composite 26-30 / 재학유지율 87% / 6년 졸업률
+  76%.
+- **Miami University** (Ohio, IPEDS ID 204024, Oxford 본교 캠퍼스):
+  지원자 39,580 / 합격률 75% / 등록률 14% / SAT EBRW·Math
+  610-690·610-700 / ACT Composite 25-30 / 재학유지율 90% / 6년 졸업률
+  80%.
+- **Catholic University of America** (IPEDS ID 131283): 지원자 6,714 /
+  합격률 83% / 등록률 13% / **시험 test-blind 정책 확인**(SAT/ACT
+  고려하지 않음, 백분위 데이터 없음 — 추측 없이 미입력) / 재학유지율
+  87% / 6년 졸업률 79%.
+
+GPA 평균은 IPEDS College Navigator에 항목 자체가 없어(CDS 고유 항목)
+11개교 전부 미입력 — notes에 "IPEDS는 GPA 미제공"으로 남기지 않고
+단순히 행을 만들지 않음(추측 금지 원칙).
+
+### 2. St. John's University 출처 오류 정정
+38차가 발견한 문제 확인: 기존 `university_source_urls`의
+`common_data_set` URL(`b0420877-b91d-46e3-a6ee-f7755bd2f265`)이 학부
+CDS가 아니라 St. John's College of Liberal Arts and Sciences 산하
+Psy.D. 프로그램 개별 데이터 페이지였다. 해당 행을 `status='rejected'`로
+변경하고 review_note에 사유 기록. **학부 CDS/IPEDS 대체 자료 재탐색은
+이번 세션에서 미완료**(다음 세션 이월) — 브라우저 예산을 IPEDS
+신규 학교 확보에 우선 배분함.
+
+### 3. 학과 데이터 보완 — 이번 세션 미착수
+Kentucky 학과 이어받기(`page=6`부터), 학과 0건 학교 8개교 보완 모두
+이번 세션 예산 내 착수하지 못함(IPEDS 신규 학교 확보에 전량 배분).
+
+### 4. 최종 카운트 (세션 종료, psql 직접 확인)
+```
+data_collection_status: verified_pilot 161(+11) / sources_pending_review 27(변동없음) / unconfirmed 12(-11)
+university_admission_metrics: IPEDS 신규 11개교 총 170행(전량 official, notes에 "IPEDS College Navigator 기준" 명시)
+university_source_urls: IPEDS 신규 11건 approved(source_type='other', cycle_year=2024)
+                          St. John's University CDS 오출처 1건 rejected 처리
+```
+
+### 검증
+- 마이그레이션 파일 신규/변경 없음, 20261700000000 이후 확장 필드 미접촉.
+- `npx supabase db push --linked`, `vercel deploy`, DB 리셋 명령 전혀 실행하지 않음.
+- 모든 IPEDS 값은 College Navigator 화면(텍스트 표 + 막대그래프 스크린샷
+  확대)에서 직접 읽어 확인 후 저장(추측 없음). 값이 없는 항목(GPA,
+  Catholic University 시험점수 등)은 행 자체를 생성하지 않음.
+- 에세이 테이블은 이번 세션에서 건드리지 않음(중복 삽입 리스크 없음).
+
+### 다음 세션 인계 (40차용, 최우선)
+1. **로컬 DB 리셋 금지 규칙 재강조.**
+2. St. John's University 학부 CDS 또는 IPEDS 대체 자료 재탐색·등록
+   (Psy.D. 오출처는 이미 rejected 처리 완료, 신규 출처만 필요).
+3. IUPUI 출처 확보 — 일곱 세션 연속 이월.
+4. 남은 `unconfirmed` 12개교(psql로 재조회 필요, 이번 세션에서 11개교
+   해소) 및 `sources_pending_review` 27개교에 IPEDS 우선 전략을 계속
+   적용할 것 — IPEDS College Navigator 검색 URL 패턴:
+   `?q=<학교명>` → 검색결과에서 정확한 캠퍼스명 클릭 → `?id=<IPEDS ID>`로
+   고정 링크 확보 → Admissions/Retention and Graduation Rates 섹션
+   확장(클릭) → `get_page_text`로 표 데이터, 막대그래프(재학유지율·
+   졸업률)는 스크린샷 확대로 읽기.
+5. Kentucky 학과 `page=6`부터 이어서 수집 — 변동 없음.
+6. Fordham(SharePoint), Notre Dame(Google Drive 폴더), Bowling Green,
+   Andrews, Morgan State, Hofstra, Saint Joseph's, Dayton(Google Docs
+   캔버스) — CDS 원문 재시도 후보. 다만 이번 세션 이후로는 CDS가 계속
+   막히는 학교는 즉시 IPEDS로 전환할 것(시간 낭비 방지).
+7. 200개교 완료 후 UI 확장 지시(CDS 전체 정보 노출)는 아직 손대지 않음 —
+   200개교 완료 전까지 매 세션 인계에 계속 전달.
