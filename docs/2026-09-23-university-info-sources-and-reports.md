@@ -4933,3 +4933,119 @@ University of Tulsa, University of Wisconsin-Milwaukee.
 m on m.university_id=u.id group by u.id, u.name having count(m.id)=0`
 재실행으로 53→34개교 감소 확인. `on conflict (university_id, name) do
 nothing`으로 중복 자동 무시.
+
+## 49차 세션 — 신규 학업/비용 지표(12종) 실수집 17개교 확대
+
+### 배경
+48차 세션이 NC State/CMU/BU 3개교만 완료하고 시간 제약으로 중단한 신규 지표
+(`tuition_in_state`/`tuition_out_of_state`/`tuition_international`/`required_fees`/
+`room_cost`/`board_cost`/`net_price_average`/`student_faculty_ratio`/
+`academic_calendar`/`ap_credit_accepted`/`ap_min_score_required`/`ap_max_credits`)
+수집을 이어받아, 이 지표가 하나도 없는 verified_pilot 학교를 대상으로 확대
+진행했다. 담당 범위는 `university_admission_metrics`/`university_source_urls`만.
+
+### 처리 방식
+1. 대상 학교의 `university_source_urls`에 이미 등록된 CDS 랜딩페이지를
+   WebFetch로 열어 최신 CDS PDF 직링크를 확인.
+2. `curl`로 PDF를 로컬(스크래치 디렉터리)에 내려받아 `pdftotext -layout`으로
+   텍스트 추출 → G(연간비용)/I(교수:학생비율)/A4(학사력) 섹션을 grep으로
+   빠르게 확인(체크박스가 텍스트로 안 잡히는 경우는 Read 도구로 해당 페이지
+   이미지를 직접 렌더링해 육안 확인).
+3. AP 학점 정책은 CDS에 없어 WebSearch로 각 대학 registrar/admissions 공식
+   페이지를 확인 — 단일 최소점수가 명확한 경우만 `ap_min_score_required`
+   반영, 과목/단과대별로 갈리는 경우는 `ap_credit_accepted`만 반영하고
+   `ap_min_score_required`는 스킵(사유를 notes에 기록).
+4. 각 학교마다 실제 사용한 CDS PDF 직링크와 AP 정책 페이지를
+   `university_source_urls`에 `source_type='common_data_set'`/`'other'`,
+   `is_official=true`, `status='approved'`로 신규 등록 후 그 id를
+   `source_url_id`로 사용.
+
+### 완료: 17개교 (총 165건 반영)
+
+| 학교 | 비용 AY | tuition(주내/주외) | fees | room | board | ratio | calendar | AP |
+|---|---|---|---|---|---|---|---|---|
+| Marquette University | 2026-27 | $53,890 (사립 단일) | $1,200 | 미기재(합산만) | 미기재 | 14:1 | semester | 가능, min 3 |
+| Lehigh University | 2026-27 | $69,420 (사립 단일) | $1,170 | $11,470 | $7,760 | 11:1 | semester | 가능, min 4(일반) |
+| Loyola University Chicago | 2025-26 | $56,930 (사립 단일) | $1,580 | $11,270 | $6,710 | 13:1 | semester | 가능, min 과목별 상이(미반영) |
+| Duquesne University | 2026-27 | $53,238 (사립 단일) | 미기재 | $9,572 | $8,224 | 13:1 | semester | 가능, min 학과/연도별 상이(미반영) |
+| Boston College | 2025-26 | $72,180 (사립 단일) | $1,328 | $10,940 | $8,350 | 10:1(Fall24) | semester | 가능(핵심교과 면제 위주), min 과목별 상이(미반영) |
+| Ball State University | 2024-25 | $9,126 / $28,044 | $2,178 | 미기재(합산만) | 미기재 | 14:1 | semester | 스킵(단일값 미확인) |
+| Baylor University | 2026-27 | $67,756 (사립 단일) | 미기재 | $9,976 | $7,246 | 14:1 | semester | 가능, min 과목별 상이(미반영) |
+| Pace University | 2024-25(CDS 2023-24 최신본) | $51,382 (사립 단일) | $1,908 | $18,028 | $4,900 | 16:1(Fall23, 구버전) | semester | 가능, min 4(CS만 3), max 30학점 |
+| Penn State Univ. Park | 2024-25 | $20,066 / $41,212 | $578 | $9,006 | $6,038 | 15.43:1 | semester | 가능, min 3~4 과목별 상이(미반영) |
+| University at Buffalo (SUNY) | 2025-26 | $7,070 / $28,500 | $3,966 | $10,074 | $7,990 | 12:1 | semester | 가능, min 3 |
+| UC Davis | 2026-27 | $14,202 / $53,472(신입생 기준) | $3,798 | 미기재(합산만) | 미기재 | 22:1 | quarter | 가능, min 3 |
+| UC Santa Cruz | — | 미기재(CDS 원문 비어있음) | 미기재 | 미기재 | 미기재 | 22:1 | quarter | 가능, min 3 |
+| University of Florida | 2024-25 | $4,477 / $27,815 | $1,904(주내) | $7,800 | $4,815 | 16:1 | semester | 가능, min 3, max 45학점 |
+| University of Michigan, Ann Arbor | 2026-27 | $18,402 / $66,602(신입생 기준) | $494 | 미기재(합산만) | 미기재 | 15:1 | **trimester(CDS 원문 그대로, 특이사항 notes 기록)** | 스킵(과목/단과대별 3~5점 상이) |
+| University of Kentucky | — | 미기재(CDS G1 "제공불가" 체크) | 미기재 | 미기재 | 미기재 | 17.7:1 | semester | 가능, min 3(의대 예과 Bio/Chem은 4) |
+| University of Delaware | 2024-25 | $15,280 / $40,840 | $2,380 | $8,928 | $7,046 | 13:1 | semester | 가능(2024년 이후 입학자 기준), min 3 |
+| Iowa State University | 2025-26 | $9,530 / $28,578 | $1,561 | $6,086 | $7,842 | 19:1 | semester | 스킵(과목별 상이, 예: 화학 4~5점) |
+
+사립대(Marquette/Lehigh/Loyola Chicago/Duquesne/Boston College/Baylor/Pace)는
+거주지 구분 없는 단일 등록금 정책이라 `tuition_in_state`/`out_of_state`/
+`international` 3건 모두 동일 금액으로 반영. 국제 학생 등록금이 별도
+표기되지 않은 공립대(Ball State/Buffalo/Penn State/UF/Iowa State/UC Davis)는
+비거주자(out-of-state/nonresident) 세율을 international에도 동일 적용하고
+notes에 명시. UC Davis/Michigan은 CDS가 First-Year/Undergraduates 두 열을
+별도로 제공해 First-Year 열 값을 대표값으로 채택하고 continuing 값은
+notes에 병기.
+
+### 반영하지 않은 것 (추측 금지 원칙)
+- room_cost/board_cost: Marquette/Ball State/UC Davis/Michigan은 CDS G1에
+  "Food and Housing(합산)"만 있고 Housing Only/Food Only 개별 항목이
+  비어있어 미반영(notes에 사유 기록).
+- required_fees: Duquesne/Baylor/UKY는 CDS G1 필드 자체가 공란이라 미반영.
+- 학교 전체 비용(tuition 포함): UC Santa Cruz/University of Kentucky는
+  CDS G1 전체가 공란("추후 확정" 체크박스 표기)이라 원문에 수치 자체가
+  없어 미반영 — ratio/calendar만 반영.
+- ap_min_score_required: Loyola Chicago, Duquesne, Boston College, Baylor,
+  Penn State, Michigan, Iowa State, Ball State — 학과/과목/단과대별로 값이
+  갈리거나 단일 공식 수치를 찾지 못해 미반영, notes에 사유 명시.
+  ap_credit_accepted='yes'는 정책이 존재함이 확인된 경우만 반영.
+- net_price_average: 17개교 전원 CDS에 net price calculator URL만 있고
+  실제 평균 수치가 없어 전건 미반영.
+- ap_max_credits: Pace(30학점), UF(45학점) 2개교만 원문에 명시된 상한이
+  있어 반영, 나머지는 미반영.
+
+### 데이터 품질 관련 참고사항 (다음 세션 검토 필요)
+1. **Pace University**: `university_source_urls`에 등록된 CDS가
+   2023-2024판(가장 최신 공개본)뿐이라 student_faculty_ratio가 Fall 2023
+   기준으로 다소 오래됨. 2024-2025 또는 2025-2026 CDS가 공개되면 갱신 필요.
+2. **University of Michigan**: CDS A4 문항에 "Trimester"로 체크되어 있으나
+   미시간대는 일반적으로 semester 기반 학사력으로 알려져 있어 CDS 응답
+   자체의 특이사항일 가능성이 있음 — notes에 그대로 기록하고 원문 그대로
+   반영(임의 정정하지 않음).
+3. **Lehigh/Baylor/UC Santa Cruz/Iowa State**: G1 비용 항목 상단에
+   "해당 학년도 비용 미확정" 체크박스가 표시되어 있음에도 표에는 수치가
+   채워진 경우(Lehigh/Baylor/Iowa State)와 완전히 공란인 경우(UCSC)가
+   혼재 — 값이 채워진 경우는 원문 그대로 신뢰해 반영했고, 이 애매성을
+   notes에 기록함.
+4. 대학마다 CDS 문서상 "비용 회계연도"와 "CDS 발행연도"가 1년 어긋나는
+   경우(예: CDS 2025-26 문서가 2026-27 비용을 담음)와 그렇지 않은 경우가
+   혼재 — 각 행의 notes에 실제 적용 회계연도를 명시해 혼동 방지.
+
+### 검증
+- 삽입 전/후 `select count(*) from university_admission_metrics where
+  verified_at::date = current_date` 로 총 165건 반영 확인, 학교별 group by
+  로 17개교 전부 확인.
+- `git status --short` 로 이번 세션이 코드/문서 외 어떤 소스 파일도 건드리지
+  않았음을 확인. `university_majors`/`university_essay_prompts`는 전혀
+  건드리지 않음(동시 진행 중일 수 있는 다른 세션과 충돌 없음).
+- `npx supabase db push --linked` / `vercel deploy` 미실행. 로컬 psql
+  direct insert만 사용, 마이그레이션 파일 작성 없음.
+
+### 다음 세션 인계
+1. 아직 신규 지표가 없는 verified_pilot 학교가 다수 남아있음(약 160개교
+   이상) — 동일 방식(curl+pdftotext -layout으로 CDS 직링크 텍스트 추출 후
+   G/I/A4 섹션 grep)을 계속 사용 권장. 특히 xlsx 형식 CDS(NJIT, Stony
+   Brook 등)는 이번 세션에서 다루지 못함 — 별도 xlsx 파싱 방법 필요.
+2. UC Santa Cruz/University of Kentucky는 비용 데이터가 원문에 없어
+   ratio/calendar만 반영된 상태 — 각 대학이 새 CDS(예: UCSC 2026-27,
+   UKY 2025-26)를 공개하면 재확인 후 비용 지표 보완 필요.
+3. Pace University는 오래된 CDS(2023-24)만 공개되어 있어 최신판이 나오면
+   교체 필요.
+4. AP 최소점수를 과목별 상이로 스킵한 8개교(Loyola Chicago/Duquesne/
+   Boston College/Baylor/Penn State/Michigan/Iowa State/Ball State)는
+   "일반적으로 가장 흔한 최소점수"를 단일값으로 넣지 않았음 — 필요 시
+   과목별 세부 테이블 구조를 새로 설계하는 것이 정확할 것으로 판단됨.
