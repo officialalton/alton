@@ -3625,3 +3625,69 @@ university_source_urls: UF·Utah·IU Bloomington 각 1건 approved(common_data_s
    선택값이 최신 미공개 사이클일 수 있음).
 6. 200개교 완료 후 UI 확장 지시(CDS 전체 정보 노출)는 아직 손대지 않음 —
    200개교 완료 전까지 매 세션 인계에 계속 전달.
+
+## 38차 세션 (2026-09-23) — CDS 신규 학교 탐색, 전량 출처 단절로 실패
+
+37차가 막힌 7개교(CU Boulder/Ohio University/Fordham/Mississippi
+State/UWM/SLU/Notre Dame)는 지시대로 스킵하고, 미시도 학교 위주로
+`sources_pending_review`/`unconfirmed` 목록에서 새 학교를 탐색했다.
+아래 각 학교에서 실제 CDS 원문에 도달하지 못해 **DB에 신규 데이터를
+삽입하지 않았다**(추측 삽입 금지 원칙 준수).
+
+### 1. 이번 세션 시도했으나 출처 단절/미도달로 실패한 학교
+- **University of Dayton**: `udayton.edu/provost/ods/` "By the
+  Numbers" 페이지에서 공개 CDS 링크(`docs.google.com/document/d/
+  1LcfkO0vQyFI2JUUA9rgVqINRu6XkSagx`, 2025-2026)를 발견 — 로그인 없이
+  열람은 가능하나 Google Docs가 캔버스(비-DOM) 렌더링이라 텍스트
+  추출 실패. 목차(A~J 섹션 제목)만 확인, 본문(C9-C12 신입생
+  프로필 등) 수치 미확보. **다음 세션 최우선 재시도 권장**(공개
+  문서라 완전히 막힌 건 아님 — 스크린샷 확대 방식으로 섹션별
+  캡처 필요).
+- **University at Albany (SUNY)**: `albany.edu/common-data-set-2025-2026`
+  페이지의 A/B/C 섹션 링크가 개인 SharePoint Excel
+  (`livealbany.sharepoint.com/:x:/s/web_institutional-research/...`)로
+  연결 — 인증 없이 렌더링 불가. Ohio University/Fordham과 동일 패턴.
+- **Virginia Tech**: `aie.vt.edu/analytics-and-ai/common-data-set.html`에
+  "현재/과거 CDS 파일은 aiesupport@vt.edu로 요청" 문구만 있고 공개
+  파일 없음. 공개 경로 없음 확인.
+- **University of North Dakota**: `und.edu/.../common-data-set.html`에
+  "업데이트된 리포트 곧 제공 예정" 문구만 있고 실제 링크 없음.
+- **University of Memphis**: `memphis.edu/oir/` 페이지에 Common Data
+  Set 관련 링크/문구 자체가 없음(페이지 구조 변경 추정, 재탐색 필요).
+- **St. John's University**: 기존 `university_source_urls`에 저장된
+  URL이 St. John's College of Liberal Arts and Sciences 산하 **Psy.D.
+  프로그램 개별 데이터 페이지**였음(학부 CDS 아님) — 출처 URL 자체가
+  잘못 연결되어 있음. 다음 세션에서 학부 CDS 출처 재탐색 필요.
+- **Seton Hall University**: 추정 URL(`shu.edu/institutional-research/
+  common-data-set.cfm`) 404 — 정확한 경로 미확보.
+
+### 2. 학과 데이터 보완 — 이번 세션 미착수
+브라우저 예산을 전량 CDS 탐색에 사용, Kentucky 학과 이어받기 및
+학과 0건 학교 8개교 보완에 착수하지 못함.
+
+### 3. 최종 카운트 (세션 종료, psql 직접 확인 — 변동 없음)
+```
+data_collection_status: verified_pilot 150 / sources_pending_review 27 / unconfirmed 23
+```
+신규 삽입 0건(모두 원문 미도달로 검증 불가 판단, 추측 삽입 금지 원칙 준수).
+
+### 검증
+- 마이그레이션 파일 신규/변경 없음, 20261700000000 이후 확장 필드 미접촉.
+- `npx supabase db push --linked`, `vercel deploy`, DB 리셋 명령 전혀 실행하지 않음.
+- psql insert/update 전혀 실행하지 않음(원문 미확보로 추측 삽입 금지 원칙 준수).
+
+### 다음 세션 인계 (39차용, 최우선)
+1. **University of Dayton CDS 재시도** — Google Docs 링크는 살아있음.
+   `get_page_text`는 캔버스 렌더링 때문에 실패하므로, 화면 확대
+   스크린샷(줌)으로 C9-C12(신입생 SAT/ACT·GPA), C1-C2(지원자 수),
+   B22(재학유지율) 섹션을 직접 읽는 방식으로 전환할 것.
+2. St. John's University는 `university_source_urls`의 CDS URL
+   자체가 학부 데이터가 아닌 Psy.D. 프로그램 페이지로 잘못 연결됨 —
+   `stjohns.edu` 내 실제 학부 CDS/IR 페이지 재탐색 후 URL 교체 검토.
+3. Fordham(SharePoint 공유 링크 재시도), Notre Dame(Google Drive
+   폴더 진입), Bowling Green, Andrews, Morgan State, Hofstra,
+   Saint Joseph's — 아직 미시도, 다음 세션 우선 배정.
+4. IUPUI 출처 확보 + Catholic University of America/Miami University
+   Ohio(unconfirmed) 재조사 — 여섯 세션 연속 이월.
+5. Kentucky 학과 `page=6`부터 이어서 수집 — 변동 없음.
+6. 로컬 DB 리셋 금지 규칙 재강조.
