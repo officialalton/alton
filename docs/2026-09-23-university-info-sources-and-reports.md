@@ -7031,3 +7031,28 @@ Aid/Cost-of-Attendance 웹페이지를 WebFetch/브라우저로 직접 조회**�
 - University of Arkansas: 캐시 텍스트가 폰트 인코딩 깨짐 — 재다운로드 후 pdftotext 재시도.
 - University of Louisiana at Lafayette: university_source_urls의 CDS 링크가 Lafayette College 것으로
   확인된 지 두 세션째 미정정 — 이번엔 꼭 정정 권장.
+
+### 71차 세션 (2026-09-24)
+- 처리 학교(65개교 → 62개교로 감소, 3개교 실수집):
+
+| 학교 | cycle_year | 원본 형식 | 비고 |
+|---|---|---|---|
+| Louisiana State University | 2024 | pdf | 기존 approved 소스(`lsu.edu/data/common-data-set`) 중 2_2425_enrollpersist.pdf(B1/B2), 8_2425_finaid.pdf(H) 신규 등록 후 사용 |
+| Texas Tech University | 2024 | pdf | 기존 approved `TTU_CDS_2024-2025-06-03-25.pdf` 사용, pdftotext -layout 정상 추출 |
+| University of Louisiana at Lafayette | 2023 | pdf | **소스 정정 완료**: 기존 approved `getdata.louisiana.edu` 사이트의 `data-sources` 페이지에서 진짜 UL Lafayette CDS(`UL_CDS_2023-2024.pdf`)를 찾아 신규 등록, B1/B2/H 파싱하여 정상 수집. Lafayette College 오염 소스(`oir.lafayette.edu`, rejected 유지)는 건드리지 않음 |
+
+- 3개교 모두 demographics 11행(gender 3 + race 8) + financial_aid_programs 3행(need_based_grant,
+  merit_scholarship, federal_loan; work_study는 원문에 인원수 없어 스킵)으로 삽입. verification_status='official',
+  source_url_id 연결, verified_at=오늘.
+- 스킵/보류 (여전히 미해결, 이번 세션에서 막힘 재확인만 함):
+  - **Johns Hopkins University, University of Virginia**: 이번 세션에서는 브라우저 자동화 재시도를
+    수행하지 못함(시간 예산 초과) — 여전히 다음 세션 인계.
+  - **Ohio State University, University of Arizona, University of Miami**: 이번 세션에서 pdftoppm 이미지
+    판독 재시도를 수행하지 못함 — 여전히 다음 세션 인계.
+  - **University of Arkansas**: 재다운로드/재추출 미수행 — 여전히 다음 세션 인계.
+  - **Clemson University**: 신규 시도 — `open.clemson.edu/cgi/viewcontent.cgi?article=1016&context=cds`가
+    curl(User-Agent 포함)로도 HTML 리디렉션 페이지만 반환되어 PDF 획득 실패. 브라우저 자동화 필요.
+- 세션 종료 시점 재확인: demographics/financial_aid_programs 둘 다 0건인 학교 62개교.
+- 이번 세션은 시간 예산 제약으로 목표(20개교) 대비 3개교만 실수집 완료. 나머지 62개교는 후속 세션에서
+  이어서 처리 필요 — 특히 Ohio State/Arizona/Miami(FL)/Arkansas/JHU/UVA는 이미 두 세션째 막힌 상태로
+  다음 세션에서 우선 처리 권장.
