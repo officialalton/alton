@@ -154,6 +154,21 @@
 
 ## 6. 미결·다음 작업 단위
 
+- **[출시 전 재확인 필요] figure_choice 실제 AI E2E 공개 성공 토스트 미출현
+  (2026-09-24, 미완료·원인 미확인)**: `e2e/figure-template-1.spec.ts` "그래프
+  선택지: 지문 → AI 그래프 4개 → 편향 검증 → 공개 → 학생 화면(선택지 안 그림)"
+  테스트가 실제 AI(`E2E_REAL_AI=1`) 실행에서 "공개하기" 클릭 뒤 공개 성공 토스트
+  (`/공개했습니다|공개됐습니다|공개되었습니다/`)가 20초 안에 뜨지 않아 실패(같은
+  라운드에서 확인한 다른 3개 버그 — 선택자 모호성/문구 드리프트/컴파일러-전용
+  스킬 오인 — 와는 별개, 그것들은 전부 수정·재검증 완료). 이 실패 하나는 원인
+  미확인 상태로 남겨둠 — 반복 실행으로 재현·진단 비용(실제 API 호출)을 더
+  쓰지 않기로 함(2026-09-24 사용자 지시). 테스트 프로세스 종료 시 `afterAll`이
+  이 실행이 만든 문제 행을 정리해 DB 증거는 남아있지 않다 — 재조사 시 이
+  테스트만 다시 `E2E_REAL_AI=1`로 단독 실행해 재현부터 할 것(`figure_choice`
+  타입 AI 생성 경로: `app/admin/ProblemDraftEditor.tsx`의 `makeFigure("figure_choice")`
+  → 서버 액션 → 실제 Anthropic 호출). **출시 전 반드시 재확인**(다른 3가지
+  E2E_REAL_AI 스펙 유형 중 유일하게 미검증 상태로 남은 것).
+
 - **College Board 커버리지 전수 매핑 완료 + Math SPR 아키텍처 결론(2026-09-17, 완료)**:
   `2026-09-17-collegeboard-coverage-map.md` — 실전 시험지 7종(test4·6·7·8·9·10·11)
   840문항(R&W 462 + Math 378) 전수 분류 완료(test5는 결번). **최종 결론**: "생성
@@ -343,6 +358,43 @@
   오버로드가 별도 함수 객체·별도 ACL로 남고, 이미 적용된 마이그레이션 파일을
   고쳐도 반영 안 되는 문제가 겹쳐 한 번에 안 끝나고 세 번에 나눠 고쳐야 했음)를
   체크리스트화해 다음 라운드에 반영할 것.
+
+- **SECURITY DEFINER·anon 권한 감사 2차(2026-09-24, 완료, `20261900000006`)**: 1차가
+  남긴 85개 후보 중 anon 실행권한을 가진 SECURITY DEFINER 139개를 전수 조회해
+  함수 본문에 `auth.uid()`/`is_admin()`/`raise exception`/trigger 등 내부 인가
+  패턴이 없는 21개를 추출, 앱 실제 호출부(`app/**`, `lib/**`) 대조로 좁혔다.
+  **실제 결함 1건 확인(exploit 성립)**: `issue_consult_consent_token(consultation_id,
+  token_plain, ttl_hours)` — 내부 인가 검사가 전혀 없고 호출자가 consultation_id와
+  평문 토큰을 둘 다 직접 지정한다. anon이 임의 consultation_id로 직접 호출하면
+  자기가 고른 토큰으로 그 상담의 동의 확인 토큰을 새로 발급받아(기존 토큰도
+  무효화 안 됨) 남의 상담 동의를 대신 확인 처리할 수 있었다. `set role anon`으로
+  직접 재현(수정 전 성공 → 수정 후 `permission denied` 확인). 유일한 실제 호출부
+  (`lib/consultation/calendar-sync.ts`)는 admin(service_role) 클라이언트만 씀 —
+  anon/authenticated/PUBLIC 권한 회수, service_role만 유지.
+  **나머지 20개**: 전부 anon 직접 호출 경로 없음(session 클라이언트 또는 admin
+  클라이언트로만 호출) — anon/PUBLIC 회수(6개는 admin 전용이라 authenticated도
+  회수: `find_consultant_provisioning_for_identity`/`find_teacher_provisioning_for_identity`/
+  `log_workspace_link_rejected`/`get_teacher_activation_checklist`/
+  `cancel_reservation_notifications`/`refresh_teacher_onboarding_completed_at`/
+  `record_pending_guardian_account`/`release_trial_onboarding_link_finalize_claim`,
+  나머지 `has_valid_guardian_consent`/`is_under_13`/`student_date_of_birth_known`/
+  `list_open_consult_slots`/`list_open_consultant_meeting_slots`/`list_open_meeting_slots`/
+  `student_already_has_homework_problem`/`current_curriculum_doc_version_id`/
+  `session_student_id`/`session_teacher_id`/`current_account_active`는 authenticated
+  유지 — 세션 클라이언트로 실사용 중이거나, RLS USING절에 직접 인라인될 가능성이
+  있어 잘못 회수하면 정상 조회가 정책 평가 단계에서 깨질 수 있음). `resolve_consult_consent_token`/
+  `confirm_consult_consent_by_token`은 토큰 소지 자체가 인가 수단인 설계(주석에
+  명시)라 그대로 둠. **검증**: `has_function_privilege()`로 anon=false 19건 전부
+  확인, service_role=true 확인, 관련 단위 테스트(consent-data/workspace-actions/
+  trial-onboarding-finalize/consult-actions/consultant-schedule-actions/
+  inquiry-actions/calendar-sync) 53개 전부 통과. **영향받은 정상 흐름**: 없음(전부
+  server action이 admin 또는 session 클라이언트로만 부르던 것을 그대로 유지 —
+  브라우저가 anon 키로 이 RPC들을 직접 부르는 코드 경로는 원래도 없었음).
+  **미완료**: 나머지 118개(anon 실행권한은 있지만 본문에 인가 패턴이 있는 것으로
+  자동 분류된 것들)는 이번에도 정규식 기반 1차 스크리닝만 했고 개별 실측 재현은
+  다음 라운드로 남김 — 특히 `is_admin()`/`auth.uid()`가 있어도 조건 분기가 잘못돼
+  일부 경로만 검사하는 경우는 이 방식으로 못 잡는다(1차 문서의 알려진 한계와
+  동일).
 
 - **모바일 사이드바 반응형(2026-09-23, 완료)**: 컨설턴트 포털에서 모바일 폭에서도
   사이드바가 항상 풀사이즈로 떠 있어 본문이 가로 스크롤되던 문제 — `app/consultant/ConsultantShell.tsx`에
