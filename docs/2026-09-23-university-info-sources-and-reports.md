@@ -6783,3 +6783,73 @@ Aid/Cost-of-Attendance 웹페이지를 WebFetch/브라우저로 직접 조회**�
   구분해서 적용할 것.
 - google Drive `uc?export=download&confirm=t` + 순수 curl 조합을 항상 1차 시도로 사용할 것(브라우저
   거치지 않아 훨씬 빠름) — 이번 세션 Stanford/Notre Dame에서 확인.
+
+### 64차 세션: university_demographics 신규 실수집 (31개교)
+
+- 대상: verified_pilot 중 university_demographics/university_financial_aid_programs 둘 다 0건인
+  137개교에서 university_source_urls에 CDS PDF 원문(직접 링크, source_type='common_data_set',
+  status='approved')이 이미 있는 학교를 우선 선정.
+- 방법: `curl -A "Mozilla/5.0"`로 PDF 병렬 다운로드 → `pdftotext -layout` 텍스트 변환 → CDS B1(성별
+  재학생 구성)/B2(인종·민족 구성) 섹션을 grep+수기 대조로 추출(자동 정규식 파서는 학교별 레이아웃
+  편차가 커서 신뢰도가 낮아 폐기하고, 각 학교 원문을 직접 읽어 숫자 검증 후 삽입).
+- population_scope는 전부 `all_students`. B2의 "Total Undergraduates(both degree- and
+  non-degree-seeking)" 열을 우선 사용했고, 그 열이 없는 학교(UMN 등, 제외함)는 스킵. race 카테고리
+  합/gender 카테고리 합이 각각 100%(±0.02 반올림 오차)로 떨어지는지 삽입 후 재검증 완료.
+- **주의(발견한 실수, 수정 완료)**: 작업 중 파일명 약어 "USD"를 University of San Diego와 University
+  of South Dakota 둘 다에 쓸 뻔했고, 최초 삽입 시 University of South Dakota의 university_id에
+  University of San Diego 데이터를 잘못 연결했다가 즉시 발견하여 해당 11행 삭제 후 올바른
+  University of San Diego(id: c6568914-...)에 재삽입함. 최종 검증 쿼리로 학교명-데이터 매칭 재확인 완료.
+
+| 대학 | cycle_year | demographics 행 수 |
+|---|---|---|
+| California Institute of Technology | 2024 | 11 |
+| American University | 2025 | 11 |
+| SUNY College of Environmental Science and Forestry | 2025 | 11 |
+| Middle Tennessee State University | 2024 | 11 |
+| University of Georgia | 2024 | 11 |
+| University of Iowa | 2024 | 11 |
+| University of San Diego | 2024 | 11 |
+| University of Utah | 2024 | 11 |
+| University of Washington | 2024 | 11 |
+| Washington State University | 2024 | 11 |
+| Southern Illinois University Carbondale | 2025 | 11 |
+| Santa Clara University | 2025 | 11 |
+| Yale University | 2025 | 11 |
+| University of Kansas | 2024 | 11 |
+| Georgia Institute of Technology | 2024 | 10 (native_american 행 원문에서 숫자 판독 불가로 생략) |
+| Binghamton University (SUNY) | 2025 | 11 |
+| Illinois Institute of Technology | 2023 | 11 |
+| University of Chicago | 2024 | 11 |
+| University of Central Florida | 2024 | 11 |
+| University of California, Irvine | 2024 | 11 |
+| University of California, Riverside | 2024 | 11 |
+| University of California, San Diego | 2024 | 11 |
+| University of North Carolina at Chapel Hill | 2024 | 11 |
+| University of Rochester | 2025 | 11 |
+| University of Wyoming | 2025 | 11 |
+| University of Toledo | 2024 | 11 |
+| University of Nevada, Reno | 2024 | 11 |
+| University of Massachusetts Lowell | 2024 | 11 |
+| University of South Alabama | 2024 | 11 |
+| University of Southern California | 2025 | 11 |
+| University of South Carolina | 2024 | 11 |
+
+- 합계 340행 삽입(university_demographics만). university_financial_aid_programs는 이번 세션에서
+  건드리지 않음(시간 배분상 demographics에 집중, H1/H2/H2A/H5 파싱은 학교별 서식 편차가 커서 다음
+  세션 과제로 이월).
+- `WHERE NOT EXISTS (university_id, cycle_year, category, population_scope)` 가드 사용.
+  admission_metrics/majors/essay_prompts/source_urls는 조회만 하고 쓰기 없음(신규 source_url 추가 0건,
+  기존 approved 링크만 재사용).
+- 세션 종료 시점 재확인: 137개교 중 31개교 처리 완료 → demographics/financial_aid_programs 둘 다
+  0건인 학교 106개교 남음(university_financial_aid_programs는 이번 세션에서 미처리이므로 다음 세션은
+  이 31개교의 financial_aid_programs H1/H2/H2A/H5도 마저 채우는 것을 우선 검토할 것 — 이미 원문 PDF가
+  로컬에 없으니 재다운로드 필요).
+
+### 65차 세션(다음) 인계
+- 이번 세션에서 확보했던 원문 PDF는 세션 종료와 함께 임시 디렉토리(스크래치패드)에서 소실됨 —
+  재사용하려면 재다운로드 필요. university_source_urls의 approved CDS PDF 링크 목록은 본 문서 상단
+  검색으로 재조회 가능.
+- 자동 정규식 파서(pdftotext + regex)는 학교별 표 레이아웃 편차(줄바꿈 위치, 유니코드 깨짐 등)가 커서
+  신뢰도가 낮음 — grep으로 B1/B2 구간을 넓게 뽑은 뒤 사람이 숫자를 직접 대조하는 방식을 유지할 것.
+- 약어 파일명(USD, UGA 등)이 여러 학교와 충돌할 수 있으니 반드시 전체 학교명으로 한 번 더 대조 후
+  INSERT할 것(이번 세션 University of San Diego/South Dakota 혼동 사례 참고).
