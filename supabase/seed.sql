@@ -321,3 +321,29 @@ insert into household_members (household_id, profile_id, role, relation, is_prim
 
 insert into household_members (household_id, profile_id, role, is_primary) values
   ('eeee1111-0000-0000-0000-000000000099', 'eeee1111-0000-0000-0000-000000000001', 'child', true);
+
+-- e2e/complete-profile-flow.spec.ts 전용 — 이 스펙도 ACCOUNTS.student(지훈)의
+-- profile_completed_at을 null로 됐다 복원하는 식으로 테스트해서 같은 이유로
+-- 공용 계정과 경합했다. 부모/household는 이 테스트에서 안 쓰므로 학생만.
+insert into auth.users (
+  instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change_token_new, email_change,
+  email_change_token_current, phone_change, phone_change_token, reauthentication_token
+) values
+  ('00000000-0000-0000-0000-000000000000', 'eeee2222-0000-0000-0000-000000000001', 'authenticated', 'authenticated',
+    'e2e-complete-profile-student@example.com', crypt('alton-dev-1234', gen_salt('bf')), now(),
+    '{"provider":"email","providers":["email"]}', '{}', now(), now(), '', '', '', '', '', '', '', '');
+
+insert into auth.identities (
+  id, provider_id, user_id, identity_data, provider, last_sign_in_at, created_at, updated_at
+)
+select gen_random_uuid(), u.id::text, u.id, jsonb_build_object('sub', u.id::text, 'email', u.email), 'email', now(), now(), now()
+from auth.users u where u.id = 'eeee2222-0000-0000-0000-000000000001';
+
+insert into profiles (id, role, name, phone, date_of_birth) values
+  ('eeee2222-0000-0000-0000-000000000001', 'student', 'E2E 프로필완성테스트 학생', null, (now() - interval '16 years')::date);
+
+insert into students (id, grade, status, credit_balance, school_name, sat_score, gpa, gpa_scale, target_colleges, intended_majors, profile_completed_at) values
+  ('eeee2222-0000-0000-0000-000000000001', '10학년', 'active', 14,
+    '서울국제학교', 1350, 3.7, '4.0', array['Stanford University'], array['Computer Science'], now());

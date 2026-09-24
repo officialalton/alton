@@ -1,9 +1,14 @@
 import { execFileSync } from "node:child_process";
 import { test, expect } from "@playwright/test";
-import { ACCOUNTS, loginAs } from "./helpers";
+import { loginAs } from "./helpers";
 
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
-const STUDENT_ID = "cccccccc-0000-0000-0000-000000000001"; // 시드 학생(jihoon@example.com)
+// 2026-09-23 — 원래 ACCOUNTS.student(지훈)를 썼는데, profile_completed_at을
+// null로 됐다 복원하는 식으로 테스트해서 fullyParallel 아래 다른 스펙(지훈이
+// 항상 프로필 완성 상태라고 가정하는 auth-roles.spec.ts 등)과 경합했다 —
+// minor-consent.spec.ts와 같은 문제라 같은 방식(전용 fixture)으로 옮김.
+const STUDENT_ID = "eeee2222-0000-0000-0000-000000000001"; // supabase/seed.sql §13
+const E2E_STUDENT = "e2e-complete-profile-student@example.com";
 
 // M4 UAT #2(2026-09-05) — 학생 프로필 완성 강제 게이트 실 브라우저 검증.
 //
@@ -56,7 +61,7 @@ test.describe("학생 프로필 완성 강제 게이트", () => {
   }) => {
     resetStudentProfile();
 
-    await loginAs(page, ACCOUNTS.student);
+    await loginAs(page, E2E_STUDENT);
     await expect(page).toHaveURL(/\/complete-profile/);
 
     // 학생 포털로 직접 이동을 시도해도 다시 여기로 돌아온다(건너뛰기 불가).
