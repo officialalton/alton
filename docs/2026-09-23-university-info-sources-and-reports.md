@@ -3445,3 +3445,17 @@ university_source_urls: Oklahoma State University 1건 pending→approved
    방식을 Clemson에도 적용 시도할 것(OSU에서 효과 확인됨).
 6. 200개교 완료 후 UI 확장 지시(CDS 전체 정보 노출)는 아직 손대지 않음 —
    200개교 완료 전까지 매 세션 인계에 계속 전달.
+
+## 37차 세션 — 에세이 중복 정리 (통합 세션 제보)
+
+통합 세션(College Explore UI 검증 중)이 Princeton 등 여러 학교의 `university_essay_prompts`에서
+같은 내용의 문항이 `selection_group_id`만 다른 채로 중복 삽입된 것을 발견해 제보했다.
+원인: 로컬 DB 복구(export/remap) 이후 여러 세션이 같은 학교의 같은 에세이를 중복으로
+재수집·재삽입했기 때문으로 추정된다.
+
+psql로 전수 확인한 결과 11개 학교(그룹)에서 각 3중 중복(총 33행 중 22행이 중복)을 발견,
+`(university_id, cycle_year, title, prompt_type, prompt_text, topic_summary, word_limit*,
+group_size, select_count, is_required, prompt_status)` 전체 내용 일치 기준으로 가장 이른
+`created_at` 1건만 남기고 22행 삭제. 최종 university_essay_prompts 34→12행.
+Princeton 외에도 같은 패턴이 있던 학교 전부 정리됨(단일 세션에서 psql DELETE로 직접 처리,
+마이그레이션 파일 없음). 커밋 포함.
