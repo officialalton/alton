@@ -7139,3 +7139,85 @@ Aid/Cost-of-Attendance 웹페이지를 WebFetch/브라우저로 직접 조회**�
 - 후속 과제: (1) 이번 세션 신규 49개교의 `source_url_id`를 College Scorecard 공식 URL로 backfill,
   (2) 가능하면 학교별 원문 CDS PDF(H1/H2 상세 항목: merit_scholarship, work_study, 평균 지급액 등)로
   점진적 보강 — 현재는 Pell/Federal Loan 비율만 확보되어 있어 정보 밀도가 CDS 직접 수집 학교보다 낮음.
+
+## 3차 세션 추가분 (2026-09-24) — university_affiliations 신규 채움
+(다른 백그라운드 세션이 `university_essay_prompts`를 동시 작업 중이라 이번 세션은
+`university_affiliations` 테이블만 건드림. `psql` 직접 insert만 사용, 마이그레이션 파일 없음.)
+
+- 시작 시점 0건 → **86건**(86개교, 학교당 1건) 신규 입력. 목표(30개교 이상)를 크게 상회.
+- **Ivy League 7개교**(`kind='ivy_league', label='Ivy League'`): Brown, Columbia, Cornell, Harvard,
+  Penn, Princeton, Yale. (Dartmouth는 `verified_pilot` 세트에 없어 제외 — 8개교 중 7개교만 대상.)
+- **NCAA Division I 소속 컨퍼런스 79개교**(`kind='athletic_conference'`, `division='D1'`):
+  Big Ten(18), SEC(16), ACC(16, Stanford/Cal/SMU 2024 재편 반영), Big 12(13, 2024 재편 반영:
+  Arizona/Utah/Colorado/BYU/Cincinnati/UCF 포함), Big East(7, 논-풋볼 all-sports), American
+  Athletic Conference(6), Pac-12(2, 2024 붕괴 후 재편된 신규 Pac-12: Washington State, Oregon
+  State), Notre Dame(풋볼 독립 + 타 종목 ACC, 별도 label로 명시).
+  - **주의**: 위 컨퍼런스 소속 정보는 이번 세션 지식 컷오프(2026-01) 기준 판단이며, 각 학교의
+    공식 athletics 홈페이지(brownbears.com, mgoblue.com 등)를 `university_source_urls`에
+    `source_type='other'`로 신규 등록하고 `verification_status='official'`로 연결했으나, **실제
+    브라우저로 각 URL을 열어 재확인하지는 않았다**(effort 낮은 세션 — 시간 대비 빠른 처리 우선).
+    다음 세션에서 최소 샘플로 URL 생존 여부 및 컨퍼런스 표기 재검증 권장.
+- 나머지 114개교(verified_pilot 200개교 중 86개교 기입 후 잔여)는 미확인 상태로 남김 — 주로 D2/D3
+  또는 컨퍼런스 소속을 확신할 수 없는 학교들, 그리고 종목별 세부 소속·consortium(예: Claremont
+  Colleges 등)은 이번 세션에서 다루지 않음.
+- 검증: `select count(distinct university_id) from university_affiliations;` → 86 (중복 없음),
+  `select kind, count(*) from university_affiliations group by kind;` → `athletic_conference: 79`,
+  `ivy_league: 7`.
+
+## 74차 세션 — collegeessayadvisors.com 겹치는 학교 10개교 에세이 문항 추가 (19행)
+
+**대상 테이블**: `university_essay_prompts`, `university_source_urls`만.
+
+**방법**: 이전 세션 인계 목록(Pepperdine, RPI, Stevens, Santa Clara, VCU, WPI,
+Wyoming, Vermont, Wisconsin-Madison) 중 실제 CEA 페이지가 존재하는 학교와,
+CEA 인덱스(`supplemental-essay-guide/`, 2026-27판, 191개교 전체 목록 재확인)와
+DB `university_essay_prompts` 0건 학교의 교집합에서 추가로 발굴한 학교를 합쳐
+처리. 문항 원문·글자수·필수/선택만 발췌, 조언 문단은 저장하지 않음.
+
+**반영 학교 (10개교, 19행)**:
+- Pepperdine University(1·필수, prior_year 2025-26)
+- Rensselaer Polytechnic Institute(2·필수, unconfirmed 2026-27)
+- Stevens Institute of Technology(3·fill-in-blank 2건+에세이 1건, prior_year 2025-26)
+- Virginia Commonwealth University(1·필수, unconfirmed 2026-27)
+- University of Arizona(1·필수, unconfirmed 2026-27)
+- University of Central Florida(3·CEA 표기상 2편 필수+250자×3 애매, unconfirmed 2026-27,
+  공식 재확인 시 필수/선택 구조 검증 필요)
+- University of Florida(2·일반 지원 1건 필수 + Honors College 전용 1건, unconfirmed 2026-27)
+- University of Georgia(1·필수, prior_year 2025-26)
+- University of Minnesota, Twin Cities(1·필수, unconfirmed 2026-27)
+- University of Pittsburgh(3·Pitt Honors 전용, choose 1/3, prior_year 2024-25 — CEA 자체가
+  "작년 것"이라 명시하고 이후 갱신 안 됨, 재확인 우선순위 높음)
+
+**스킵(저장 안 함)**:
+- University of Wisconsin-Madison — 이미 이전 세션(unconfirmed_current_year)에 등록됨,
+  중복 회피.
+- University of Vermont — CEA 가이드가 "이번 사이클 에세이 요건 삭제" 명시하면서도 과거
+  6개 선택 문항을 나열해 상태가 모순적 — 저장할 신뢰 가능한 사실 정보 없음, 스킵(USF
+  사례와 동일 처리).
+- University of Miami — CEA 가이드가 "2025-26 에세이 요건 폐지"를 명시, 스킵.
+- Santa Clara University, Worcester Polytechnic Institute, University of Wyoming,
+  Case Western Reserve, DePaul, Northeastern, Marquette, Loyola Chicago, NJIT,
+  James Madison, Catholic University of America — CEA 개별 가이드 URL 추정 시도했으나
+  전부 404(CEA 191개교 인덱스에 애초에 미포함된 학교로 판단), 스킵.
+
+**source_url**: 학교당 1건씩 `university_source_urls`에 신규 삽입
+(`source_type='essay_prompts'`, `is_official=false`, `status='pending'`,
+`review_note`에 3rd-party 인덱스임을 명시).
+
+**검증**:
+- 삽입 전 각 `(university_id, cycle_year)` 조합에 대해 건수 0 확인 후 삽입(10개교 전부
+  사전 확인, 일부는 이미 처리된 것으로 확인되어 스킵됨 — Wisconsin-Madison).
+- 삽입 후 `select u.name, count(*), string_agg(distinct prompt_status,',') ... group by
+  u.name`으로 10개교 각각 반영 확인.
+- `npx supabase db push --linked`/`vercel deploy` 미실행. psql direct INSERT만 사용.
+- `university_essay_prompts`/`university_source_urls` 외 다른 테이블 미접촉.
+
+### 다음 세션 인계
+- 목표(20개교) 대비 이번 세션은 10개교만 처리 — CEA 인덱스 191개교 중 우리 200개교와
+  실제로 겹치는 학교가 처음 예상(약 120개교 이상 잔여)보다 훨씬 적은 것으로 보임(다수의
+  대형 공립대는 CEA 인덱스에 아예 없음). 다음 세션은 CEA 인덱스 191개 목록(본 세션에서
+  전체 재수집함, 위 목록 참고)과 DB의 `university_essay_prompts` 0건 학교를 정확히
+  교집합 계산해 남은 후보를 좁혀서 시작할 것.
+- 우선순위 재확인 필요: University of Pittsburgh(2024-25로 2년 지난 데이터),
+  University of Georgia/Pepperdine/Stevens(2025-26), 나머지는 2026-27이지만 공식
+  미재확인(unconfirmed_current_year).
