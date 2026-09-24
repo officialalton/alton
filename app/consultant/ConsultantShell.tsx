@@ -99,12 +99,41 @@ export default function ConsultantShell({
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [selectedEndedId, setSelectedEndedId] = useState<string | null>(null);
   const [studentsSubTab, setStudentsSubTab] = useState<"active" | "ended">("active");
+  // 2026-09-23 — 모바일 폭에서 사이드바가 항상 풀사이즈로 떠 있어 본문이 가로
+  // 스크롤되던 문제. md 미만에서는 사이드바를 숨기고 햄버거로 여는 드로어로 전환.
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   const contactRequiredCount = assignedConsultations.filter((c) => c.status === "requested").length;
 
   return (
-    <div className="min-h-screen bg-white flex">
-      <aside className="w-56 shrink-0 border-r border-grey-200 flex flex-col py-5 px-3 gap-0.5">
+    <div className="min-h-screen bg-white flex md:flex-row flex-col">
+      <div className="md:hidden flex items-center justify-between px-3 py-3 border-b border-grey-200">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-full bg-red text-white font-extrabold text-[14px] flex items-center justify-center shrink-0">
+            A
+          </div>
+          <span className="text-[13.5px] font-extrabold text-ink">ALTON</span>
+        </div>
+        <button
+          type="button"
+          aria-label="메뉴 열기"
+          onClick={() => setMobileNavOpen(true)}
+          className="text-[13px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200"
+        >
+          메뉴
+        </button>
+      </div>
+      {mobileNavOpen && (
+        <div className="md:hidden fixed inset-0 z-40 bg-black/40" onClick={() => setMobileNavOpen(false)} />
+      )}
+      <aside
+        onClickCapture={() => setMobileNavOpen(false)}
+        className={
+          "w-56 shrink-0 border-r border-grey-200 flex flex-col py-5 px-3 gap-0.5 bg-white " +
+          "fixed md:static inset-y-0 left-0 z-50 md:z-auto transition-transform md:translate-x-0 " +
+          (mobileNavOpen ? "translate-x-0" : "-translate-x-full")
+        }
+      >
         <div className="flex items-center gap-2 px-2.5 mb-5">
           <div className="w-8 h-8 rounded-full bg-red text-white font-extrabold text-[14px] flex items-center justify-center shrink-0">
             A
