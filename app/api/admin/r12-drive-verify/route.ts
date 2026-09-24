@@ -22,6 +22,16 @@ async function driveFetch(url: string, token: string, init?: RequestInit) {
   return res;
 }
 
+export async function DELETE(req: Request) {
+  await requireAdmin();
+  const { searchParams } = new URL(req.url);
+  const fileId = searchParams.get("fileId");
+  if (!fileId) return NextResponse.json({ error: "fileId required" }, { status: 400 });
+  const token = await getR3PreviewDriveAccessToken();
+  await driveFetch(`${DRIVE_API}/files/${fileId}?supportsAllDrives=true`, token, { method: "DELETE" });
+  return NextResponse.json({ deleted: fileId });
+}
+
 export async function GET(req: Request) {
   await requireAdmin();
   const { searchParams } = new URL(req.url);
