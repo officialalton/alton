@@ -7,6 +7,7 @@ import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import { loadTeacherStudentRoadmapAction } from "./student-roadmap-actions";
 import RoadmapView from "@/app/components/RoadmapView";
 import type { RoadmapData } from "@/lib/roadmap/types";
+import TeacherPlannerBoard from "./TeacherPlannerBoard";
 // M4 UAT #5 — 체험 수업 리뷰 작성 UI는 배정 탭에서 제거됐다. 진입 위치는
 // "정규수업" 탭(TeacherLessonScheduleTab)의 "예정된 수업" 목록으로 이동했다 —
 // 진행한 수업 내역이 실제로 보이는 화면에서 바로 리뷰를 작성하고, 확정하면
@@ -116,8 +117,10 @@ type PlannerTabId = (typeof PLANNER_TABS)[number]["id"];
 
 // 2026-09-22(사용자 지시) — "오버뷰/로드맵/일정" 버튼이 별도 페이지로 나가버려
 // 좌측 네비게이션이 사라졌다. My Students 탭 안에서 그대로 전환되게 바꾼다
-// (내용은 그대로 — 데이터 모델·서버 액션이 붙으면 이 자리를 채운다).
+// (2026-09-24 — 보드 탭은 TeacherPlannerBoard로 연결. 일정·오버뷰는 아직
+// 데이터 모델·서버 액션이 붙지 않아 자리만 남겨둔다).
 function StudentPlannerPanel({
+  studentId,
   studentName,
   initialTab,
   onBack,
@@ -146,11 +149,13 @@ function StudentPlannerPanel({
         onSelect={setTab}
       />
 
-      <div className="py-10 text-center text-[13px] text-grey-500">
-        {tab === "board" && "할 일 보드는 준비 중입니다 — 곧 제공됩니다."}
-        {tab === "schedule" && "일정 탭은 준비 중입니다 — 곧 제공됩니다."}
-        {tab === "overview" && "오버뷰 탭은 준비 중입니다 — 곧 제공됩니다."}
-      </div>
+      {tab === "board" && <TeacherPlannerBoard studentId={studentId} />}
+      {tab !== "board" && (
+        <div className="py-10 text-center text-[13px] text-grey-500">
+          {tab === "schedule" && "일정 탭은 준비 중입니다 — 곧 제공됩니다."}
+          {tab === "overview" && "오버뷰 탭은 준비 중입니다 — 곧 제공됩니다."}
+        </div>
+      )}
     </div>
   );
 }

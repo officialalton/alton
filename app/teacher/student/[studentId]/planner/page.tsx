@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { requireUser } from "@/lib/auth";
-import TeacherPlannerBoard from "./TeacherPlannerBoard";
+import TeacherPlannerBoard from "@/app/teacher/TeacherPlannerBoard";
 
 // Student Success Planner — 교사 진입점(2026-09-22 확정 스펙, My Students·수업
 // 세션뷰의 "오버뷰"/"로드맵"/"일정"/"커리큘럼" 진입 버튼 중 오버뷰·일정).
