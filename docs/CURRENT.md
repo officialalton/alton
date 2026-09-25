@@ -179,6 +179,19 @@
   (Smart Notes 미검토 원본 1년/확정 리뷰 3년 이중 만료 — Google Drive
   API 연동 필요, 별도 슬라이스), 정기 스케줄러 연결(현재는 cron 등록만
   하고 CRON_SECRET 미설정으로 전부 비활성 유지 — 사용자가 활성화 시점 결정).
+- **ParentDetailPanel 신설(2026-09-24, 완료)**: 관리자 Users > 학부모 카드가
+  이제 클릭 가능하며, 상세 화면에서 상태 전환(Student/TeacherDetailPanel과
+  동일 패턴, closed는 ClosedAccountAccessGate로 보호), 연결 자녀와 자녀별
+  담당 컨설턴트(배정 변경은 ConsultantDetailPanel과 같은
+  `setStudentConsultantAction()` 재사용), 가구의 계약·진행 현황
+  (`contracts`, `v3_contract_status` 11개 값 전부 라벨링), 가구 연락 이력
+  (`household_messages` 최근 20건)을 확인·관리할 수 있다. `ParentListItem`에
+  `status` 필드가 그동안 아예 없었던 것도 함께 추가(`loadParents`).
+  non-prod 실제 계정으로 브라우저 검증 완료. `setParentStatus`는 이제 실제
+  UI 호출부가 생겼다(이전까지 액션만 있고 화면이 없던 유일한 갭이었음).
+  **부수 발견**: `ConsultantDetailPanel`의 보호자 이름 조회가 존재하지 않는
+  컬럼(`member_id`)·값(`role='student'`)을 써서 항상 빈 결과만 받아 "보호자:
+  없음"으로 조용히 폴백되는 버그를 발견 — 별도 세션으로 이관(task_83cdc1d7).
 - **R12 자료 유형별 보존기간 자동 삭제·비식별화 배치 1차 슬라이스(2026-09-24,
   완료, `20261900000016`)**: §4.13 처리 방식 4가지 중 3가지를 대표 테이블로
   구현(4번째 "접근 차단 후 보존"은 위 closed 게이트 재사용, 신규 코드 없음).
