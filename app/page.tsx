@@ -35,71 +35,71 @@ const plexKr = IBM_Plex_Sans_KR({
 });
 
 const NAV_LINKS = [
-  { href: "#how", label: "How it works" },
-  { href: "#roles", label: "For Students" },
-  { href: "#roles", label: "For Parents" },
-  { href: "#roles", label: "For Tutors" },
-  { href: "#college", label: "College Guidance" },
+  { href: "#how", label: "수업 방식" },
+  { href: "#roles", label: "학생" },
+  { href: "#roles", label: "학부모" },
+  { href: "#roles", label: "선생님" },
+  { href: "#college", label: "대학 진학" },
 ];
 
-const SUBJECT_PILLS = ["AP Chemistry", "SAT Math", "Essay writing", "SAT Reading & Writing"];
+const SUBJECT_PILLS = ["AP Chemistry", "SAT Math", "에세이 작문", "SAT Reading & Writing"];
 
 const HOW_IT_WORKS = [
   {
     n: "01",
     icon: "match" as const,
-    title: "Match",
+    title: "매칭",
     kr: "학생에게 맞는 선생님",
-    body: "We match on subject, goals and schedule — then keep the same tutor for continuity.",
+    body: "과목·목표·일정을 기준으로 매칭하고, 이후에는 같은 선생님과 계속 함께합니다.",
   },
   {
     n: "02",
     icon: "lesson" as const,
-    title: "Learn",
+    title: "수업",
     kr: "1:1 수업",
-    body: "Live 1:1 lessons with shared materials, notes and practice — all in one place.",
+    body: "교재, 노트, 연습 문제를 한 곳에서 공유하는 실시간 1:1 수업.",
   },
   {
     n: "03",
     icon: "feedback" as const,
-    title: "Feedback",
+    title: "피드백",
     kr: "매 수업 피드백",
-    body: "Specific, written feedback after every lesson — for the student and the family.",
+    body: "매 수업 후 학생과 가족에게 구체적인 서면 피드백을 전달합니다.",
   },
   {
     n: "04",
     icon: "growth" as const,
-    title: "Grow",
+    title: "성장",
     kr: "눈에 보이는 성장",
-    body: "Weekly goals and a visible record of progress, lesson after lesson.",
+    body: "매주 목표와 함께, 수업이 쌓일수록 눈에 보이는 성장 기록.",
   },
 ];
 
 const COLLEGE_POINTS = [
-  { icon: "explore" as const, t: "Explore colleges", d: "Structured, sourced profiles — admission outlook, program rules, cost." },
-  { icon: "essay" as const, t: "Essays, with continuity", d: "The tutor who knows the student's writing helps write the essay." },
-  { icon: "goal" as const, t: "A strategy, not a guess", d: "A balanced list and timeline set with a college advisor." },
+  { icon: "explore" as const, t: "대학 탐색", d: "합격 동향, 지원 규정, 비용까지 근거를 갖춰 정리한 대학 프로필." },
+  { icon: "essay" as const, t: "이어지는 에세이 지도", d: "학생의 글쓰기를 아는 선생님이 직접 에세이를 지도합니다." },
+  { icon: "goal" as const, t: "추측이 아닌 전략", d: "대학 어드바이저와 함께 세우는 균형 잡힌 지원 리스트와 일정." },
 ];
 
 const COLLEGE_FACTS = [
-  { k: "Admit rate", v: "5.7%" },
-  { k: "Avg. SAT", v: "1500–1570" },
-  { k: "Early decision", v: "Nov 1" },
-  { k: "Need-blind aid", v: "Yes" },
+  { k: "합격률", v: "5.7%" },
+  { k: "평균 SAT", v: "1500–1570" },
+  { k: "얼리 디시전", v: "11월 1일" },
+  { k: "니드 블라인드 지원", v: "가능" },
 ];
 
 const TRUST_CARDS = [
-  { icon: "feedback" as const, t: "Feedback after every lesson", d: "No waiting for a monthly report to know how it's going." },
-  { icon: "match" as const, t: "Continuity with one tutor", d: "The same tutor, term after term — not a rotating roster." },
-  { icon: "report" as const, t: "Progress families can follow", d: "One record, written for a parent, not a specialist." },
-  { icon: "lock" as const, t: "Private by design", d: "A student's record is visible only to their own family and tutor." },
+  { icon: "feedback" as const, t: "매 수업 후 피드백", d: "월간 리포트를 기다리지 않아도 진행 상황을 알 수 있습니다." },
+  { icon: "match" as const, t: "한 선생님과의 연속성", d: "학기마다 선생님이 바뀌지 않고 계속 이어집니다." },
+  { icon: "report" as const, t: "학부모도 따라갈 수 있는 진행 기록", d: "전문가가 아니어도 이해할 수 있게 정리된 하나의 기록." },
+  { icon: "lock" as const, t: "설계 단계부터 지켜지는 개인정보", d: "학생의 기록은 해당 가족과 담당 선생님만 볼 수 있습니다." },
 ];
 
 const FOOTER_COLS = [
-  { h: "TUTORING", items: ["AP Chemistry", "AP Calculus", "SAT Math", "SAT Reading & Writing", "Essay writing"] },
-  { h: "FOR", items: ["Students", "Parents", "Tutors", "College guidance"] },
-  { h: "COMPANY", items: ["How it works", "Sign in"] },
-  { h: "CONTACT", items: ["hello@altonedu.com"] },
+  { h: "과목", items: ["AP Chemistry", "AP Calculus", "SAT Math", "SAT Reading & Writing", "에세이 작문"] },
+  { h: "대상", items: ["학생", "학부모", "선생님", "대학 진학"] },
+  { h: "회사", items: ["수업 방식", "로그인"] },
+  { h: "문의", items: ["hello@altonedu.com"] },
 ];
 
 export default function LandingPage() {
@@ -131,7 +131,7 @@ export default function LandingPage() {
           </nav>
           <div className="flex items-center gap-5">
             <Link href="/login" className="text-[14px] font-medium text-[#4F5A6B] hover:text-[#142240]">
-              Sign in
+              로그인
             </Link>
             <LandingCtaLink
               href="#book"
@@ -139,7 +139,7 @@ export default function LandingPage() {
               section="header"
               className="h-10 px-4 rounded-xl bg-[#C8102E] hover:bg-[#8F0B20] text-white text-[14px] font-semibold flex items-center transition-colors"
             >
-              Book a consultation
+              상담 신청
             </LandingCtaLink>
           </div>
         </div>
@@ -151,14 +151,13 @@ export default function LandingPage() {
           <div className="max-w-[1440px] mx-auto px-10 md:px-20 pt-20 pb-28 grid grid-cols-1 lg:grid-cols-[560px_minmax(0,1fr)] gap-16 items-start">
             <div className="flex flex-col gap-6">
               <span className="font-mono text-[12px] font-medium tracking-[0.08em] text-[#C8102E]">
-                PREMIUM 1:1 TUTORING &amp; COACHING
+                프리미엄 1:1 수업 &amp; 코칭
               </span>
-              <h1 className="m-0 font-[family-name:var(--font-bricolage)] font-semibold text-[52px] leading-[1.06] tracking-[-0.02em] text-[#142240]">
-                Better learning,
+              <h1 className="m-0 font-[family-name:var(--font-bricolage)] font-semibold text-[46px] leading-[1.22] tracking-[-0.02em] text-[#142240]" style={{ wordBreak: "keep-all" }}>
+                더 나은 학습,
                 <br />
-                built around{" "}
                 <span className="relative inline-block">
-                  you.
+                  너
                   <svg
                     className="absolute left-0 -bottom-1.5 w-full"
                     height="8"
@@ -169,13 +168,14 @@ export default function LandingPage() {
                     <path d="M2 6 C 40 1, 100 1, 138 6" stroke="#C8102E" strokeWidth="3" fill="none" strokeLinecap="round" />
                   </svg>
                 </span>
+                에게 맞춰서.
               </h1>
               <p className="text-[16px] font-medium text-[#3F6B5E]" style={{ wordBreak: "keep-all" }}>
                 학생에게 맞춘 수업과 코칭으로 매주 더 분명한 성장을 만듭니다.
               </p>
-              <p className="text-[16px] leading-[1.7] text-[#4F5A6B] max-w-[460px]">
-                Alton pairs each student with one dedicated tutor, feedback after every lesson,
-                and a learning record the whole family can follow.
+              <p className="text-[16px] leading-[1.7] text-[#4F5A6B] max-w-[460px]" style={{ wordBreak: "keep-all" }}>
+                ALTON은 학생마다 전담 선생님 한 명을 배정하고, 매 수업 후 피드백을 남기며,
+                온 가족이 함께 볼 수 있는 학습 기록을 만들어 갑니다.
               </p>
               <div className="flex flex-wrap items-center gap-3 mt-1">
                 <LandingCtaLink
@@ -184,13 +184,13 @@ export default function LandingPage() {
                   section="hero"
                   className="h-12 px-5 rounded-xl bg-[#C8102E] hover:bg-[#8F0B20] text-white text-[15px] font-semibold flex items-center transition-colors"
                 >
-                  Start learning
+                  학습 시작하기
                 </LandingCtaLink>
                 <a
                   href="#how"
                   className="h-12 px-5 rounded-xl border border-[#DDD7CC] bg-white text-[#142240] text-[15px] font-semibold flex items-center hover:border-[#142240] transition-colors"
                 >
-                  See how lessons work
+                  수업 방식 살펴보기
                 </a>
               </div>
               <div className="flex flex-wrap gap-2 mt-2">
@@ -204,42 +204,42 @@ export default function LandingPage() {
                 ))}
               </div>
               <a href="#college" className="mt-2 text-[14px] font-semibold text-[#284DB0] inline-flex items-center gap-1.5">
-                Planning for college? <span aria-hidden="true">→</span>
+                대학 진학도 준비하고 계신가요? <span aria-hidden="true">→</span>
               </a>
             </div>
 
             <div className="relative min-h-[520px]">
               <div className="ml-auto w-full max-w-[560px] bg-white border border-[#E6E1D8] rounded-3xl shadow-[0_32px_64px_-20px_rgba(20,34,64,0.2)] overflow-hidden">
                 <div className="h-[56px] px-6 flex items-center justify-between border-b border-[#F1EDE6]">
-                  <strong className="text-[14px] text-[#142240]">Jiwoo&rsquo;s week</strong>
-                  <span className="text-[11px] font-mono text-[#5F6778]">Student view</span>
+                  <strong className="text-[14px] text-[#142240]">지우의 이번 주</strong>
+                  <span className="text-[11px] font-mono text-[#5F6778]">학생 화면</span>
                 </div>
                 <div className="p-5 flex flex-col gap-3.5">
                   <div className="flex gap-3 items-center py-3 px-3.5 rounded-2xl bg-[#FCEBEB]">
                     <div className="flex flex-col items-center w-9 shrink-0">
-                      <span className="text-[10px] text-[#5F6778]">TUE</span>
+                      <span className="text-[10px] text-[#5F6778]">화</span>
                       <strong className="text-[16px] text-[#142240]">14</strong>
                     </div>
                     <div className="flex flex-col gap-px flex-grow">
-                      <span className="text-[13px] font-semibold text-[#1B2536]">AP Chemistry · Ms. Choi</span>
-                      <span className="text-[12px] text-[#5F6778]">4:30 PM · in 12 min</span>
+                      <span className="text-[13px] font-semibold text-[#1B2536]">AP Chemistry · 최 선생님</span>
+                      <span className="text-[12px] text-[#5F6778]">오후 4:30 · 12분 후</span>
                     </div>
                     <span className="w-2 h-2 rounded-full bg-[#C8102E]" />
                   </div>
                   <div className="flex justify-between items-center py-2 px-1 text-[13px]">
-                    <span className="text-[#4F5A6B]">Next: Essay writing · Sarah Lee</span>
-                    <span className="text-[#5F6778]">Thu 5:00 PM</span>
+                    <span className="text-[#4F5A6B]">다음: 에세이 작문 · 이 선생님</span>
+                    <span className="text-[#5F6778]">목 오후 5:00</span>
                   </div>
                   <div className="border border-[#E6E1D8] rounded-2xl p-4 flex gap-3">
                     <span className="w-8 h-8 rounded-full bg-[#DCE6FC] text-[#284DB0] text-[11px] font-semibold flex items-center justify-center shrink-0">
-                      SL
+                      이샘
                     </span>
                     <span className="text-[13px] leading-[1.5] text-[#1B2536]">
-                      Your thesis finally sounds like you — keep paragraph 1, rewrite paragraph 2.
+                      이제 논지가 네 목소리처럼 들려 — 1단락은 그대로 두고, 2단락을 다시 써보자.
                     </span>
                   </div>
                   <div className="grid grid-cols-3 gap-2.5">
-                    {["Chemistry", "Writing", "Math"].map((s, i) => (
+                    {["화학", "작문", "수학"].map((s, i) => (
                       <div key={s} className="p-3 rounded-2xl bg-[#F8F5EF] flex flex-col gap-1.5">
                         <span className="text-[11px] text-[#4F5A6B]">{s}</span>
                         <div className="h-[5px] rounded-full bg-[#EBE6DD]">
@@ -252,7 +252,7 @@ export default function LandingPage() {
                     ))}
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    {["Balance any equilibrium", "Lock the thesis"].map((g) => (
+                    {["임의의 평형 반응 균형 맞추기", "논지 확정하기"].map((g) => (
                       <div key={g} className="flex items-center gap-2 text-[13px] text-[#1B2536]">
                         <span className="w-4 h-4 rounded-full bg-[#5E8C7E] flex items-center justify-center text-white text-[10px]">
                           ✓
@@ -266,15 +266,15 @@ export default function LandingPage() {
 
               <div className="hidden md:block absolute -left-6 -bottom-10 w-[280px] bg-white border border-[#E6E1D8] rounded-2xl shadow-[0_20px_40px_-14px_rgba(20,34,64,0.22)] p-4">
                 <span className="font-mono text-[10px] tracking-[0.06em] text-[#5F6778]">
-                  WEEKLY REPORT TO PARENTS
+                  학부모용 주간 리포트
                 </span>
                 <div className="mt-2 flex items-center justify-between">
-                  <strong className="text-[13px] text-[#142240]">Lessons attended</strong>
+                  <strong className="text-[13px] text-[#142240]">출석한 수업</strong>
                   <strong className="text-[15px] text-[#142240]">3 / 3</strong>
                 </div>
                 <div className="mt-1.5 flex items-center justify-between">
-                  <span className="text-[13px] text-[#4F5A6B]">Goals met</span>
-                  <span className="text-[13px] text-[#1B2536]">2 of 3</span>
+                  <span className="text-[13px] text-[#4F5A6B]">달성한 목표</span>
+                  <span className="text-[13px] text-[#1B2536]">3개 중 2개</span>
                 </div>
               </div>
             </div>
@@ -286,10 +286,10 @@ export default function LandingPage() {
           <div className="max-w-[1440px] mx-auto">
             <div className="max-w-[640px] mb-14 flex flex-col gap-4">
               <span className="font-mono text-[12px] font-medium tracking-[0.08em] text-[#C8102E]">
-                HOW ALTON TUTORING WORKS
+                ALTON 수업이 진행되는 방식
               </span>
-              <h2 className="m-0 font-[family-name:var(--font-bricolage)] font-semibold text-[38px] leading-[1.15] tracking-[-0.02em] text-[#142240]">
-                Every week, a little further.
+              <h2 className="m-0 font-[family-name:var(--font-bricolage)] font-semibold text-[36px] leading-[1.2] tracking-[-0.02em] text-[#142240]" style={{ wordBreak: "keep-all" }}>
+                매주, 한 걸음씩 더 나아갑니다.
               </h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -320,13 +320,13 @@ export default function LandingPage() {
           <div className="max-w-[1440px] mx-auto flex flex-col gap-14">
             <div className="max-w-[640px] flex flex-col gap-4">
               <span className="font-mono text-[12px] font-medium tracking-[0.08em] text-[#C8102E]">
-                GROWTH MADE VISIBLE
+                눈에 보이는 성장
               </span>
-              <h2 className="m-0 font-[family-name:var(--font-bricolage)] font-semibold text-[38px] leading-[1.15] tracking-[-0.02em] text-[#142240]">
-                Small wins you can actually see.
+              <h2 className="m-0 font-[family-name:var(--font-bricolage)] font-semibold text-[36px] leading-[1.2] tracking-[-0.02em] text-[#142240]" style={{ wordBreak: "keep-all" }}>
+                작은 성취도 눈으로 확인할 수 있습니다.
               </h2>
-              <p className="text-[16px] leading-[1.7] text-[#4F5A6B]">
-                Every lesson and practice score feeds one chart, so progress is never just a feeling.
+              <p className="text-[16px] leading-[1.7] text-[#4F5A6B]" style={{ wordBreak: "keep-all" }}>
+                매 수업과 연습 점수가 하나의 차트로 쌓이기 때문에, 성장이 막연한 느낌으로만 남지 않습니다.
               </p>
               <p className="text-[15px] font-medium text-[#3F6B5E]" style={{ wordBreak: "keep-all" }}>
                 작은 성장도 눈에 보이게 기록합니다.
@@ -341,13 +341,13 @@ export default function LandingPage() {
           <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-[520px_minmax(0,1fr)] gap-16 items-center">
             <div className="flex flex-col gap-5">
               <span className="font-mono text-[12px] font-medium tracking-[0.08em] text-[#C8102E]">
-                WHEN IT&rsquo;S TIME · COLLEGE GUIDANCE
+                때가 되면 · 대학 진학
               </span>
-              <h2 className="m-0 font-[family-name:var(--font-bricolage)] font-semibold text-[36px] leading-[1.15] tracking-[-0.02em] text-[#142240]">
-                Guidance that starts from what your tutor already knows.
+              <h2 className="m-0 font-[family-name:var(--font-bricolage)] font-semibold text-[32px] leading-[1.25] tracking-[-0.02em] text-[#142240]" style={{ wordBreak: "keep-all" }}>
+                담당 선생님이 이미 알고 있는 것에서 시작하는 진학 지도.
               </h2>
-              <p className="text-[15px] leading-[1.7] text-[#4F5A6B]">
-                College guidance builds on the learning record already in place — not a separate consulting engagement.
+              <p className="text-[15px] leading-[1.7] text-[#4F5A6B]" style={{ wordBreak: "keep-all" }}>
+                대학 진학 지도는 별도의 컨설팅이 아니라, 이미 쌓여 있는 학습 기록을 바탕으로 이어집니다.
               </p>
               <div className="flex flex-col gap-3.5 mt-1">
                 {COLLEGE_POINTS.map((p) => (
@@ -363,15 +363,15 @@ export default function LandingPage() {
                 ))}
               </div>
               <a href="#roles" className="mt-1 text-[14px] font-semibold text-[#284DB0] inline-flex items-center gap-1.5 w-fit">
-                Explore colleges <span aria-hidden="true">→</span>
+                대학 탐색하기 <span aria-hidden="true">→</span>
               </a>
             </div>
 
             <div className="bg-white border border-[#E6E1D8] rounded-3xl shadow-[0_24px_48px_-16px_rgba(20,34,64,0.14)] overflow-hidden">
               <div className="h-[60px] px-6 flex items-center justify-between border-b border-[#F1EDE6]">
-                <strong className="text-[15px] text-[#142240]">Princeton University</strong>
+                <strong className="text-[15px] text-[#142240]">프린스턴대학교</strong>
                 <span className="py-0.5 px-2.5 rounded-full text-[11px] font-semibold bg-[#F1F4F9] text-[#283C62]">
-                  Reach for Jiwoo
+                  지우에게는 도전 지원
                 </span>
               </div>
               <div className="p-6 grid grid-cols-2 gap-4">
@@ -383,10 +383,10 @@ export default function LandingPage() {
                 ))}
                 <div className="col-span-2 border border-[#E6E1D8] rounded-2xl p-4 flex gap-3">
                   <span className="w-8 h-8 rounded-full bg-[#E3EEEA] text-[#3F6B5E] text-[11px] font-semibold flex items-center justify-center shrink-0">
-                    SL
+                    이샘
                   </span>
                   <span className="text-[13px] leading-[1.5] text-[#1B2536]">
-                    Sarah, Jiwoo&rsquo;s writing tutor, will carry her essay work directly into the application.
+                    지우의 작문 선생님인 이 선생님이 에세이 작업을 지원서까지 그대로 이어갑니다.
                   </span>
                 </div>
               </div>
@@ -399,34 +399,34 @@ export default function LandingPage() {
           <div className="max-w-[1440px] mx-auto flex flex-col gap-14 items-center text-center">
             <div className="max-w-[640px] flex flex-col gap-4 items-center">
               <span className="font-mono text-[12px] font-medium tracking-[0.08em] text-[#C8102E]">
-                WHY FAMILIES STAY
+                가족들이 계속 함께하는 이유
               </span>
-              <h2 className="m-0 font-[family-name:var(--font-bricolage)] font-semibold text-[38px] leading-[1.15] tracking-[-0.02em] text-[#142240]">
-                Trust you can see in every lesson.
+              <h2 className="m-0 font-[family-name:var(--font-bricolage)] font-semibold text-[36px] leading-[1.2] tracking-[-0.02em] text-[#142240]" style={{ wordBreak: "keep-all" }}>
+                매 수업에서 확인할 수 있는 신뢰.
               </h2>
             </div>
 
             <svg viewBox="0 0 720 200" className="w-full max-w-[720px]" aria-hidden="true">
               {[
-                { x: 90, label: "Student" },
-                { x: 260, label: "Tutor" },
-                { x: 460, label: "Parents" },
-                { x: 630, label: "College advisor" },
+                { x: 90, label: "학생" },
+                { x: 260, label: "선생님" },
+                { x: 460, label: "학부모" },
+                { x: 630, label: "대학 어드바이저" },
               ].map((n) => (
                 <line key={n.x} x1={n.x} y1={40} x2={360} y2={140} stroke="#E6E1D8" strokeWidth={1.5} />
               ))}
               <circle cx="360" cy="140" r="42" fill="#142240" />
               <text x="360" y="136" textAnchor="middle" fill="#fff" fontSize="11" fontWeight={600}>
-                Jiwoo&rsquo;s
+                지우의
               </text>
               <text x="360" y="150" textAnchor="middle" fill="#fff" fontSize="11" fontWeight={600}>
-                learning record
+                학습 기록
               </text>
               {[
-                { x: 90, label: "Student" },
-                { x: 260, label: "Tutor" },
-                { x: 460, label: "Parents" },
-                { x: 630, label: "College advisor" },
+                { x: 90, label: "학생" },
+                { x: 260, label: "선생님" },
+                { x: 460, label: "학부모" },
+                { x: 630, label: "대학 어드바이저" },
               ].map((n) => (
                 <g key={n.label}>
                   <circle cx={n.x} cy={40} r="30" fill="#F8F5EF" stroke="#E6E1D8" strokeWidth={1.5} />
@@ -462,8 +462,8 @@ export default function LandingPage() {
                 <rect x="6" y="7" width="18" height="9" rx="2.5" fill="#fff" opacity="0.55" />
                 <rect x="9" y="1" width="12" height="7.5" rx="2.5" fill="#C8102E" />
               </svg>
-              <h2 className="m-0 font-[family-name:var(--font-bricolage)] font-semibold text-[42px] leading-[1.12] tracking-[-0.02em] text-white">
-                Start with one good lesson.
+              <h2 className="m-0 font-[family-name:var(--font-bricolage)] font-semibold text-[36px] leading-[1.25] tracking-[-0.02em] text-white" style={{ wordBreak: "keep-all" }}>
+                좋은 수업 한 번으로 시작하세요.
               </h2>
               <p className="text-[15px] font-medium text-[#C3CFE2]" style={{ wordBreak: "keep-all" }}>
                 첫 수업부터, 학생에게 맞게.
@@ -475,26 +475,26 @@ export default function LandingPage() {
                   section="final_cta"
                   className="h-12 px-5 rounded-xl bg-[#C8102E] hover:bg-[#8F0B20] text-white text-[15px] font-semibold flex items-center transition-colors"
                 >
-                  Book a consultation
+                  상담 신청하기
                 </LandingCtaLink>
                 <a
                   href="#how"
                   className="h-12 px-5 rounded-xl border border-white/25 text-white text-[15px] font-semibold flex items-center hover:border-white/60 transition-colors"
                 >
-                  See how it works
+                  수업 방식 보기
                 </a>
               </div>
             </div>
 
             <div className="bg-white/[0.06] border border-white/15 rounded-3xl p-6 backdrop-blur-sm">
               <span className="font-mono text-[11px] tracking-[0.08em] text-[#97A9C8]">
-                YOUR FIRST CONSULTATION
+                첫 상담 진행 순서
               </span>
               <ol className="mt-3 flex flex-col gap-3 list-none p-0 m-0">
                 {[
-                  "Tell us the student's goals and current level",
-                  "We match a tutor and set up a free trial lesson",
-                  "Meet the tutor, then decide together",
+                  "학생의 목표와 현재 실력을 알려주세요",
+                  "선생님을 매칭하고 무료 체험 수업을 준비합니다",
+                  "선생님을 직접 만나본 뒤 함께 결정합니다",
                 ].map((s, i) => (
                   <li key={s} className="flex gap-3 items-start">
                     <span className="w-6 h-6 rounded-full bg-white/10 text-white text-[12px] font-semibold flex items-center justify-center shrink-0">
@@ -512,7 +512,7 @@ export default function LandingPage() {
         <section id="book" className="bg-[#F8F5EF] px-10 md:px-20 py-24 border-t border-[#E6E1D8]">
           <div className="max-w-[640px] mx-auto flex flex-col gap-3 text-center mb-10">
             <span className="font-mono text-[12px] font-medium tracking-[0.08em] text-[#C8102E]">
-              BOOK A CONSULTATION
+              상담 신청
             </span>
             <h2 className="m-0 font-[family-name:var(--font-bricolage)] font-semibold text-[32px] leading-[1.15] tracking-[-0.02em] text-[#142240]">
               1:1 수업 상담 신청
@@ -539,8 +539,8 @@ export default function LandingPage() {
                   ALTON
                 </span>
               </div>
-              <p className="text-[13.5px] leading-[1.7] text-[#97A9C8] max-w-[320px]">
-                Premium 1:1 tutoring and college guidance for students in Korea and the US.
+              <p className="text-[13.5px] leading-[1.7] text-[#97A9C8] max-w-[320px]" style={{ wordBreak: "keep-all" }}>
+                한국·미국 거주 학생을 위한 프리미엄 1:1 수업과 대학 진학 지도.
               </p>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
@@ -561,10 +561,10 @@ export default function LandingPage() {
           <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
             <span className="text-[12.5px] text-[#97A9C8]">© 2026 Alton Education Inc.</span>
             <div className="flex items-center gap-6 text-[12.5px] text-[#97A9C8]">
-              <span>Privacy</span>
-              <span>Terms</span>
+              <span>개인정보처리방침</span>
+              <span>이용약관</span>
               <Link href="/login" className="hover:text-white">
-                Sign in
+                로그인
               </Link>
             </div>
             <div className="flex items-center gap-2.5">

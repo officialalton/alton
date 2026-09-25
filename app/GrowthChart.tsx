@@ -3,9 +3,9 @@
 const LESSONS_PER_WEEK = [2, 2, 3, 2, 3, 3, 2, 3, 3, 3];
 const SCORES = [52, 55, 61, 60, 66, 71, 70, 76, 80, 84];
 const MILESTONES = [
-  { i: 2, label: "First full score on a quiz" },
-  { i: 5, label: "Equilibrium unit mastered" },
-  { i: 9, label: "Ready for the mock exam" },
+  { i: 2, label: "쪽지시험 첫 만점" },
+  { i: 5, label: "평형 단원 완전 정복" },
+  { i: 9, label: "모의고사 준비 완료" },
 ];
 
 const x = (i: number) => 66 + i * 66;
@@ -19,13 +19,13 @@ export default function GrowthChart() {
   return (
     <div className="bg-white border border-[#E6E1D8] rounded-3xl p-8 overflow-x-auto">
       <div className="flex items-center justify-between mb-6">
-        <strong className="text-[14px] text-[#142240]">Jiwoo · AP Chemistry, Weeks 1–10</strong>
+        <strong className="text-[14px] text-[#142240]">지우 · AP Chemistry, 1~10주차</strong>
         <div className="flex items-center gap-4 text-[12px] text-[#4F5A6B]">
           <span className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-sm bg-[#DCE6FC]" /> Lessons
+            <span className="w-2.5 h-2.5 rounded-sm bg-[#DCE6FC]" /> 수업 횟수
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="w-2.5 h-[3px] rounded-full bg-[#C8102E]" /> Practice score
+            <span className="w-2.5 h-[3px] rounded-full bg-[#C8102E]" /> 연습 점수
           </span>
         </div>
       </div>
@@ -72,7 +72,7 @@ export default function GrowthChart() {
 
         {LESSONS_PER_WEEK.map((_, i) => (
           <text key={i} x={x(i)} y={382} textAnchor="middle" fontSize="11" fill="#9A9284">
-            W{i + 1}
+            {i + 1}주
           </text>
         ))}
       </svg>
