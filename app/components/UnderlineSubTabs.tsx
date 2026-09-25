@@ -22,7 +22,7 @@ export default function UnderlineSubTabs<T extends string>({
   badgeCounts?: Partial<Record<T, number>>;
 }) {
   return (
-    <div className={"flex items-center gap-5 border-b border-grey-200" + (className ? ` ${className}` : "")}>
+    <div className={"flex items-center gap-5 border-b border-brand-border" + (className ? ` ${className}` : "")}>
       {items.map((item) => {
         const count = badgeCounts?.[item.id] ?? 0;
         const active = activeId === item.id;
@@ -33,12 +33,12 @@ export default function UnderlineSubTabs<T extends string>({
             onClick={() => onSelect(item.id)}
             className={
               "relative pb-2.5 -mb-px text-[13.5px] font-semibold border-b-2 transition-colors " +
-              (active ? "border-ink text-ink" : "border-transparent text-grey-400")
+              (active ? "border-navy text-navy" : "border-transparent text-grey-400")
             }
           >
             {item.label}
             {count > 0 && (
-              <span className="ml-1.5 inline-flex min-w-[16px] h-[16px] px-1 rounded-full bg-red text-white text-[9.5px] font-bold items-center justify-center align-middle">
+              <span className="ml-1.5 inline-flex min-w-[16px] h-[16px] px-1 rounded-full bg-brand-red text-white text-[9.5px] font-bold items-center justify-center align-middle">
                 {count > 9 ? "9+" : count}
               </span>
             )}

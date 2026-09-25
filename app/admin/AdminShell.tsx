@@ -255,13 +255,15 @@ export default function AdminShell({
   ];
 
   return (
-    <div className="min-h-screen bg-white flex">
-      <aside className="hidden md:flex w-56 shrink-0 border-r border-grey-200 flex-col py-5 px-3 gap-0.5 overflow-y-auto">
+    <div className="min-h-screen bg-cream flex">
+      <aside className="hidden md:flex w-56 shrink-0 bg-navy flex-col py-5 px-3 gap-0.5 overflow-y-auto">
         <div className="flex items-center gap-2 px-2.5 mb-5">
-          <div className="w-8 h-8 rounded-full bg-red text-white font-extrabold text-[14px] flex items-center justify-center shrink-0">
-            A
-          </div>
-          <span className="text-[13.5px] font-extrabold text-ink">ALTON</span>
+          <svg width="22" height="22" viewBox="0 0 30 30" fill="none" aria-hidden="true" className="shrink-0">
+            <rect x="3" y="15" width="24" height="9" rx="2.5" fill="#fff" opacity="0.9" />
+            <rect x="6" y="7" width="18" height="9" rx="2.5" fill="#fff" opacity="0.55" />
+            <rect x="9" y="1" width="12" height="7.5" rx="2.5" fill="#C8102E" />
+          </svg>
+          <span className="text-[13.5px] font-extrabold text-white tracking-[-0.01em]">ALTON</span>
         </div>
         {visibleNavItems.map((item) => (
           <button
@@ -270,7 +272,7 @@ export default function AdminShell({
             aria-current={activeTab === item.id ? "page" : undefined}
             className={
               "w-full flex items-center gap-2.5 px-2.5 py-2.5 rounded-lg text-[13px] font-semibold transition-colors " +
-              (activeTab === item.id ? "bg-red text-white" : "text-grey-500 hover:bg-grey-100 hover:text-ink")
+              (activeTab === item.id ? "bg-brand-red text-white" : "text-[#97A9C8] hover:bg-white/10 hover:text-white")
             }
           >
             <NavIcon name={item.icon} className="w-[18px] h-[18px] shrink-0" />
@@ -284,41 +286,41 @@ export default function AdminShell({
         <div className="mt-auto pt-2 relative">
           <button
             onClick={() => setAccountMenuOpen((v) => !v)}
-            className="w-full flex items-center gap-2.5 px-2.5 py-2.5 rounded-lg text-[13px] font-semibold text-ink hover:bg-grey-100"
+            className="w-full flex items-center gap-2.5 px-2.5 py-2.5 rounded-lg text-[13px] font-semibold text-white hover:bg-white/10"
           >
-            <div className="w-7 h-7 rounded-full bg-grey-100 text-ink font-extrabold text-[12px] flex items-center justify-center shrink-0">
+            <div className="w-7 h-7 rounded-full bg-white/10 text-white font-extrabold text-[12px] flex items-center justify-center shrink-0">
               A
             </div>
             <span className="flex-1 text-left truncate">관리자</span>
-            <NavIcon name="settings" className="w-4 h-4 shrink-0 text-grey-400" />
+            <NavIcon name="settings" className="w-4 h-4 shrink-0 text-[#97A9C8]" />
           </button>
           {accountMenuOpen && (
-            <div className="absolute bottom-full left-0 mb-1 w-full bg-white border-[1.5px] border-grey-200 rounded-lg shadow-sm py-1.5 z-30">
+            <div className="absolute bottom-full left-0 mb-1 w-full bg-white border border-brand-border rounded-xl shadow-lg py-1.5 z-30">
               <button
                 onClick={() => selectTab("home")}
-                className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink"
+                className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-navy"
               >
                 홈으로
               </button>
-              <div className="h-px bg-grey-200 my-1" />
+              <div className="h-px bg-brand-border my-1" />
               <form action={linkAdminGoogleAccount}>
-                <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink">
+                <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-navy">
                   Google 계정 연결
                 </button>
               </form>
-              <div className="h-px bg-grey-200 my-1" />
+              <div className="h-px bg-brand-border my-1" />
               <button
                 onClick={() => {
                   setTimezoneModalOpen(true);
                   setAccountMenuOpen(false);
                 }}
-                className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink"
+                className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-navy"
               >
                 시간대 설정
               </button>
-              <div className="h-px bg-grey-200 my-1" />
+              <div className="h-px bg-brand-border my-1" />
               <form action={logout} onSubmit={() => clearAdminTabCache()}>
-                <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-red">
+                <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-brand-red">
                   로그아웃
                 </button>
               </form>
@@ -343,40 +345,40 @@ export default function AdminShell({
         {/* 2026-09-19(UAT 반영) — 데스크톱은 계정 메뉴가 사이드바 맨 아래로
             옮겨져 상단 헤더바가 없다. 모바일은 사이드바가 숨겨지므로 계정
             메뉴만 담은 얇은 바를 여기 남긴다. */}
-        <div className="md:hidden flex items-center justify-end gap-4 border-b border-grey-200 px-4 py-2.5 relative">
+        <div className="md:hidden flex items-center justify-end gap-4 border-b border-brand-border bg-white px-4 py-2.5 relative">
           <button
             onClick={() => setAccountMenuOpen((v) => !v)}
-            className="text-[13px] font-semibold text-ink"
+            className="text-[13px] font-semibold text-navy"
           >
             관리자 ▾
           </button>
           {accountMenuOpen && (
-            <div className="absolute top-full right-4 mt-1 w-40 bg-white border-[1.5px] border-grey-200 rounded-lg shadow-sm py-1.5 z-30">
+            <div className="absolute top-full right-4 mt-1 w-40 bg-white border border-brand-border rounded-xl shadow-lg py-1.5 z-30">
               <button
                 onClick={() => selectTab("home")}
-                className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink"
+                className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-navy"
               >
                 홈으로
               </button>
-              <div className="h-px bg-grey-200 my-1" />
+              <div className="h-px bg-brand-border my-1" />
               <form action={linkAdminGoogleAccount}>
-                <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink">
+                <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-navy">
                   Google 계정 연결
                 </button>
               </form>
-              <div className="h-px bg-grey-200 my-1" />
+              <div className="h-px bg-brand-border my-1" />
               <button
                 onClick={() => {
                   setTimezoneModalOpen(true);
                   setAccountMenuOpen(false);
                 }}
-                className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink"
+                className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-navy"
               >
                 시간대 설정
               </button>
-              <div className="h-px bg-grey-200 my-1" />
+              <div className="h-px bg-brand-border my-1" />
               <form action={logout} onSubmit={() => clearAdminTabCache()}>
-                <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-red">
+                <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-brand-red">
                   로그아웃
                 </button>
               </form>

@@ -26,8 +26,8 @@ export default function PageFrame({
     <div className={`w-full ${maxWidthClassName} mx-auto px-5 md:px-8 py-6 md:py-8`}>
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-[20px] md:text-[22px] font-extrabold text-ink">{title}</h1>
-          {description && <p className="mt-1 text-[13px] text-grey-500">{description}</p>}
+          <h1 className="text-[20px] md:text-[22px] font-extrabold text-navy">{title}</h1>
+          {description && <p className="mt-1 text-[13px] text-brand-body">{description}</p>}
         </div>
         {actions && <div className="shrink-0">{actions}</div>}
       </div>
