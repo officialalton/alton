@@ -10,6 +10,11 @@ import { closePreviousMonth } from "@/lib/payout/close-payout-month";
 //
 // 이 라우트는 정산 묶음 생성(= 검토 중 진입)까지만 한다. 송금 승인·송금 요청·
 // 지급 완료는 사람과 금융 연동의 영역이며 여기서 절대 진행하지 않는다.
+//
+// 2026-09-24(사용자 지시) — CRON_SECRET은 vercel.json의 모든 크론에 공통으로
+// 적용돼 그것만으로는 "정산 크론은 끄고 다른 크론만 켠다"를 표현할 수 없다.
+// 정산 크론 2개에만 이 추가 게이트를 얹어 CRON_SECRET을 설정해도 기본값으로는
+// 계속 꺼져 있게 한다(다른 크론 — mark-expired-invites — 는 이 플래그와 무관).
 export async function GET(request: Request) {
   const secret = process.env.CRON_SECRET;
   if (!secret) {
@@ -20,6 +25,12 @@ export async function GET(request: Request) {
   }
   if (request.headers.get("authorization") !== `Bearer ${secret}`) {
     return NextResponse.json({ ok: false, error: "unauthorized" }, { status: 401 });
+  }
+  if (process.env.PAYOUT_CRON_ENABLED !== "true") {
+    return NextResponse.json(
+      { ok: false, error: "disabled: PAYOUT_CRON_ENABLED=true가 아니면 정산 크론은 실행하지 않습니다." },
+      { status: 503 }
+    );
   }
 
   try {

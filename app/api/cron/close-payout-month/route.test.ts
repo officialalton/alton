@@ -10,14 +10,18 @@ vi.mock("@/lib/payout/close-payout-month", () => ({ closePreviousMonth: closePre
 import { GET } from "./route";
 
 const ORIGINAL_SECRET = process.env.CRON_SECRET;
+const ORIGINAL_ENABLED = process.env.PAYOUT_CRON_ENABLED;
 
 beforeEach(() => {
   vi.clearAllMocks();
+  process.env.PAYOUT_CRON_ENABLED = "true";
   closePreviousMonthMock.mockResolvedValue({ periodStart: "2026-08-01", periodEnd: "2026-08-31", batches: [] });
 });
 afterEach(() => {
   if (ORIGINAL_SECRET === undefined) delete process.env.CRON_SECRET;
   else process.env.CRON_SECRET = ORIGINAL_SECRET;
+  if (ORIGINAL_ENABLED === undefined) delete process.env.PAYOUT_CRON_ENABLED;
+  else process.env.PAYOUT_CRON_ENABLED = ORIGINAL_ENABLED;
 });
 
 function request(headers: Record<string, string> = {}): Request {
@@ -53,5 +57,13 @@ describe("GET /api/cron/close-payout-month", () => {
     const res = await GET(request({ authorization: "Bearer s3cret" }));
     expect(res.status).toBe(500);
     await expect(res.json()).resolves.toMatchObject({ ok: false, error: "lock timeout" });
+  });
+
+  it("PAYOUT_CRON_ENABLED가 true가 아니면 CRON_SECRET이 맞아도 실행하지 않는다(정산 크론만 별도로 끌 수 있음)", async () => {
+    process.env.CRON_SECRET = "s3cret";
+    delete process.env.PAYOUT_CRON_ENABLED;
+    const res = await GET(request({ authorization: "Bearer s3cret" }));
+    expect(res.status).toBe(503);
+    expect(closePreviousMonthMock).not.toHaveBeenCalled();
   });
 });

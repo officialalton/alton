@@ -10,9 +10,11 @@ vi.mock("@/lib/payout/auto-dispatch", () => ({ runAutoPayoutDispatch: runMock })
 import { GET } from "./route";
 
 const ORIGINAL = process.env.CRON_SECRET;
+const ORIGINAL_ENABLED = process.env.PAYOUT_CRON_ENABLED;
 
 beforeEach(() => {
   vi.clearAllMocks();
+  process.env.PAYOUT_CRON_ENABLED = "true";
   runMock.mockResolvedValue({
     dueOn: "2026-10-10",
     eligibleCount: 2,
@@ -24,6 +26,8 @@ beforeEach(() => {
 afterEach(() => {
   if (ORIGINAL === undefined) delete process.env.CRON_SECRET;
   else process.env.CRON_SECRET = ORIGINAL;
+  if (ORIGINAL_ENABLED === undefined) delete process.env.PAYOUT_CRON_ENABLED;
+  else process.env.PAYOUT_CRON_ENABLED = ORIGINAL_ENABLED;
 });
 
 function request(headers: Record<string, string> = {}): Request {
@@ -62,5 +66,13 @@ describe("GET /api/cron/dispatch-approved-payouts", () => {
     runMock.mockRejectedValue(new Error("boom"));
     const res = await GET(request({ authorization: "Bearer s3cret" }));
     expect(res.status).toBe(500);
+  });
+
+  it("PAYOUT_CRON_ENABLED가 true가 아니면 CRON_SECRET이 맞아도 실행하지 않는다(정산 크론만 별도로 끌 수 있음)", async () => {
+    process.env.CRON_SECRET = "s3cret";
+    delete process.env.PAYOUT_CRON_ENABLED;
+    const res = await GET(request({ authorization: "Bearer s3cret" }));
+    expect(res.status).toBe(503);
+    expect(runMock).not.toHaveBeenCalled();
   });
 });
