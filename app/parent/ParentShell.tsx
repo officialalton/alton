@@ -71,20 +71,20 @@ import { getRoadmapForStudent } from "@/lib/roadmap/actions";
 const NAV_ITEMS = [
   // 2026-09-22(사용자 지시) — 별도 "Planner" nav 대신 Home 탭 서브탭
   // (Overview/TODO/Done)으로 흡수한다 — 학생 포털과 같은 구조("뷰 통일").
-  { id: "home", label: "Home", icon: "home" },
-  { id: "roadmap", label: "Roadmap", icon: "roadmap" },
-  { id: "entitlements", label: "Credits", icon: "credits" },
-  { id: "enrollment", label: "My Courses", icon: "courses" },
-  { id: "lessons", label: "Classes", icon: "classes" },
+  { id: "home", label: "홈", icon: "home" },
+  { id: "roadmap", label: "로드맵", icon: "roadmap" },
+  { id: "entitlements", label: "수강권", icon: "credits" },
+  { id: "enrollment", label: "수강 과목", icon: "courses" },
+  { id: "lessons", label: "수업", icon: "classes" },
   // 2026-09-19(UAT 반영, 제품 오너 결정) — 2026-09-17 R13에서 "예약 독립 탭
   // 제거 → 수업 탭 안 버튼으로 흡수"로 정리했던 것을 이번에 다시 되돌린다.
   // 독립 탭으로 예약 화면(LessonBookingTab)을 그대로 연다.
-  { id: "bookings", label: "Bookings", icon: "bookings" },
+  { id: "bookings", label: "예약", icon: "bookings" },
   // 2026-09-22(사용자 지시) — 홈 서브탭에서 빼서 독립 좌측 nav로 옮긴다(읽기 전용).
-  { id: "mockExam", label: "Mock Exams", icon: "mockExam" },
-  { id: "consult", label: "Consultations", icon: "consultations" },
-  { id: "vocab", label: "Vocabulary", icon: "vocabulary" },
-  { id: "homework", label: "Assignments", icon: "assignments" },
+  { id: "mockExam", label: "모의고사", icon: "mockExam" },
+  { id: "consult", label: "상담", icon: "consultations" },
+  { id: "vocab", label: "단어장", icon: "vocabulary" },
+  { id: "homework", label: "과제", icon: "assignments" },
 ] as const;
 
 // 메인 내비에는 더 이상 그리지 않지만(사이드바/모바일 목록에서 숨김),
@@ -275,13 +275,15 @@ export default function ParentShell({
   const mobileMore = NAV_ITEMS.filter((n) => !MOBILE_PRIMARY_IDS.includes(n.id));
 
   return (
-    <div className="min-h-screen bg-white flex">
-      <aside className="hidden md:flex w-56 shrink-0 border-r border-grey-200 flex-col py-5 px-3 gap-0.5">
+    <div className="min-h-screen bg-cream flex">
+      <aside className="hidden md:flex w-56 shrink-0 bg-navy flex-col py-5 px-3 gap-0.5">
         <div className="flex items-center gap-2 px-2.5 mb-4">
-          <div className="w-8 h-8 rounded-full bg-red text-white font-extrabold text-[14px] flex items-center justify-center shrink-0">
-            A
-          </div>
-          <span className="text-[13.5px] font-extrabold text-ink">ALTON</span>
+          <svg width="22" height="22" viewBox="0 0 30 30" fill="none" aria-hidden="true" className="shrink-0">
+            <rect x="3" y="15" width="24" height="9" rx="2.5" fill="#fff" opacity="0.9" />
+            <rect x="6" y="7" width="18" height="9" rx="2.5" fill="#fff" opacity="0.55" />
+            <rect x="9" y="1" width="12" height="7.5" rx="2.5" fill="#C8102E" />
+          </svg>
+          <span className="text-[13.5px] font-extrabold text-white tracking-[-0.01em]">ALTON</span>
         </div>
         {childrenList.length > 1 && (
           <div className="flex flex-wrap gap-1.5 px-2.5 mb-4">
@@ -290,10 +292,10 @@ export default function ParentShell({
                 key={c.studentId}
                 onClick={() => selectChild(c.studentId)}
                 className={
-                  "text-[12px] font-bold px-3 py-1 rounded-full border-[1.5px] " +
+                  "text-[12px] font-bold px-3 py-1 rounded-full border " +
                   (c.studentId === currentChildId
-                    ? "bg-ink text-white border-ink"
-                    : "border-grey-200 text-grey-500")
+                    ? "bg-brand-red text-white border-brand-red"
+                    : "border-white/20 text-[#97A9C8]")
                 }
               >
                 {c.name}
@@ -308,13 +310,13 @@ export default function ParentShell({
             aria-current={activeTab === item.id ? "page" : undefined}
             className={
               "w-full flex items-center gap-2.5 px-2.5 py-2.5 rounded-lg text-[13px] font-semibold transition-colors " +
-              (activeTab === item.id ? "bg-red text-white" : "text-grey-500 hover:bg-grey-100 hover:text-ink")
+              (activeTab === item.id ? "bg-brand-red text-white" : "text-[#97A9C8] hover:bg-white/10 hover:text-white")
             }
           >
             <span className="relative shrink-0">
               <NavIcon name={item.icon} className="w-[18px] h-[18px]" />
               {item.id === "consult" && messengerUnread > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 min-w-[14px] h-[14px] px-[3px] rounded-full bg-red text-white text-[9px] font-bold flex items-center justify-center ring-2 ring-white">
+                <span className="absolute -top-1.5 -right-1.5 min-w-[14px] h-[14px] px-[3px] rounded-full bg-brand-red text-white text-[9px] font-bold flex items-center justify-center ring-2 ring-navy">
                   {messengerUnread > 9 ? "9+" : messengerUnread}
                 </span>
               )}
@@ -329,26 +331,26 @@ export default function ParentShell({
         <div className="mt-auto pt-2 relative">
           <button
             onClick={() => setAccountMenuOpen((v) => !v)}
-            className="w-full flex items-center gap-2.5 px-2.5 py-2.5 rounded-lg text-[13px] font-semibold text-ink hover:bg-grey-100"
+            className="w-full flex items-center gap-2.5 px-2.5 py-2.5 rounded-lg text-[13px] font-semibold text-white hover:bg-white/10"
           >
-            <div className="w-7 h-7 rounded-full bg-grey-100 text-ink font-extrabold text-[12px] flex items-center justify-center shrink-0">
+            <div className="w-7 h-7 rounded-full bg-white/10 text-white font-extrabold text-[12px] flex items-center justify-center shrink-0">
               {parentName.charAt(0)}
             </div>
             <span className="flex-1 text-left truncate">{parentName} 학부모님</span>
-            <NavIcon name="settings" className="w-4 h-4 shrink-0 text-grey-400" />
+            <NavIcon name="settings" className="w-4 h-4 shrink-0 text-[#97A9C8]" />
           </button>
           {accountMenuOpen && (
-            <div className="absolute bottom-full left-0 mb-1 w-full bg-white border-[1.5px] border-grey-200 rounded-lg shadow-sm py-1.5 z-30">
+            <div className="absolute bottom-full left-0 mb-1 w-full bg-white border border-brand-border rounded-xl shadow-lg py-1.5 z-30">
               <button
                 onClick={() => {
                   setAccountMenuOpen(false);
                   selectTab("consent");
                 }}
-                className="w-full flex items-center justify-between px-3.5 py-2 text-[13px] font-semibold text-ink"
+                className="w-full flex items-center justify-between px-3.5 py-2 text-[13px] font-semibold text-navy"
               >
                 동의
                 {consentBadgeCount > 0 && (
-                  <span className="min-w-[18px] h-[18px] px-1 rounded-full bg-red text-white text-[10.5px] font-bold flex items-center justify-center">
+                  <span className="min-w-[18px] h-[18px] px-1 rounded-full bg-brand-red text-white text-[10.5px] font-bold flex items-center justify-center">
                     {consentBadgeCount}
                   </span>
                 )}
@@ -358,23 +360,23 @@ export default function ParentShell({
                   setAccountMenuOpen(false);
                   setCreditsModalOpen(true);
                 }}
-                className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink"
+                className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-navy"
               >
                 지인 추천
               </button>
-              <div className="h-px bg-grey-200 my-1" />
+              <div className="h-px bg-brand-border my-1" />
               <button
                 onClick={() => {
                   setTimezoneModalOpen(true);
                   setAccountMenuOpen(false);
                 }}
-                className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink"
+                className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-navy"
               >
                 시간대 설정
               </button>
-              <div className="h-px bg-grey-200 my-1" />
+              <div className="h-px bg-brand-border my-1" />
               <form action={logout}>
-                <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-red">
+                <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-brand-red">
                   로그아웃
                 </button>
               </form>
@@ -395,11 +397,11 @@ export default function ParentShell({
       {creditsModalOpen && (
         <div className="fixed inset-0 z-40 bg-black/30 flex items-center justify-center p-4">
           <div className="bg-white rounded-xl max-w-md w-full max-h-[80vh] overflow-y-auto">
-            <div className="flex items-center justify-between px-4 py-3 border-b border-grey-200">
-              <span className="text-[14px] font-bold text-ink">지인 추천</span>
+            <div className="flex items-center justify-between px-4 py-3 border-b border-brand-border">
+              <span className="text-[14px] font-bold text-navy">지인 추천</span>
               <button
                 onClick={() => setCreditsModalOpen(false)}
-                className="text-[13px] font-semibold text-grey-500"
+                className="text-[13px] font-semibold text-brand-body"
               >
                 닫기
               </button>
@@ -421,17 +423,17 @@ export default function ParentShell({
         {/* 2026-09-19(UAT 반영) — 데스크톱은 계정 메뉴·자녀 전환이 사이드바로
             옮겨져 상단 헤더바가 없다. 모바일은 사이드바가 숨겨지므로 자녀
             전환·계정 메뉴만 담은 얇은 바를 여기 남긴다. */}
-        <div className="md:hidden flex items-center justify-between gap-4 border-b border-grey-200 px-4 py-2.5 relative">
+        <div className="md:hidden flex items-center justify-between gap-4 border-b border-brand-border bg-white px-4 py-2.5 relative">
           <div className="flex items-center gap-2">
             {childrenList.map((c) => (
               <button
                 key={c.studentId}
                 onClick={() => selectChild(c.studentId)}
                 className={
-                  "text-[13px] font-bold px-3.5 py-1.5 rounded-full border-[1.5px] " +
+                  "text-[13px] font-bold px-3.5 py-1.5 rounded-full border " +
                   (c.studentId === currentChildId
-                    ? "bg-ink text-white border-ink"
-                    : "border-grey-200 text-grey-500")
+                    ? "bg-navy text-white border-navy"
+                    : "border-brand-border text-brand-body")
                 }
               >
                 {c.name}
@@ -442,22 +444,22 @@ export default function ParentShell({
           <div className="relative">
             <button
               onClick={() => setAccountMenuOpen((v) => !v)}
-              className="text-[13px] font-semibold text-ink"
+              className="text-[13px] font-semibold text-navy"
             >
               {parentName} 학부모님 ▾
             </button>
             {accountMenuOpen && (
-              <div className="absolute top-full right-0 mt-1 w-48 bg-white border-[1.5px] border-grey-200 rounded-lg shadow-sm py-1.5 z-30">
+              <div className="absolute top-full right-0 mt-1 w-48 bg-white border border-brand-border rounded-xl shadow-lg py-1.5 z-30">
                 <button
                   onClick={() => {
                     setAccountMenuOpen(false);
                     selectTab("consent");
                   }}
-                  className="w-full flex items-center justify-between px-3.5 py-2 text-[13px] font-semibold text-ink"
+                  className="w-full flex items-center justify-between px-3.5 py-2 text-[13px] font-semibold text-navy"
                 >
                   동의
                   {consentBadgeCount > 0 && (
-                    <span className="min-w-[18px] h-[18px] px-1 rounded-full bg-red text-white text-[10.5px] font-bold flex items-center justify-center">
+                    <span className="min-w-[18px] h-[18px] px-1 rounded-full bg-brand-red text-white text-[10.5px] font-bold flex items-center justify-center">
                       {consentBadgeCount}
                     </span>
                   )}
@@ -467,23 +469,23 @@ export default function ParentShell({
                     setAccountMenuOpen(false);
                     setCreditsModalOpen(true);
                   }}
-                  className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink"
+                  className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-navy"
                 >
                   지인 추천
                 </button>
-                <div className="h-px bg-grey-200 my-1" />
+                <div className="h-px bg-brand-border my-1" />
                 <button
                   onClick={() => {
                     setTimezoneModalOpen(true);
                     setAccountMenuOpen(false);
                   }}
-                  className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-ink"
+                  className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-navy"
                 >
                   시간대 설정
                 </button>
-                <div className="h-px bg-grey-200 my-1" />
+                <div className="h-px bg-brand-border my-1" />
                 <form action={logout}>
-                  <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-red">
+                  <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-brand-red">
                     로그아웃
                   </button>
                 </form>

@@ -114,16 +114,17 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    ["Home", "Credits", "My Courses", "Classes", "Mock Exams", "Consultations", "Vocabulary", "Assignments"].forEach((label) =>
+    ["홈", "수강권", "수강 과목", "수업", "모의고사", "상담", "단어장", "과제"].forEach((label) =>
       expect(screen.getAllByText(label).length).toBeGreaterThan(0)
     );
-    // 2026-09-17/18 IA 재구성: 지인 추천/통계(독립 탭)/동의/가족/예약/교재는
+    // 2026-09-17/18 IA 재구성: 지인 추천/통계(독립 탭)/동의/가족/교재는
     // 메인 내비게이션에서 제거됐다(지인 추천·동의는 프로필 드롭다운).
-    // 2026-09-22(사용자 지시) — 모의고사도 홈 서브탭에서 좌측 nav "Mock Exams"로
+    // 2026-09-19(UAT 반영)에서 "예약"(Bookings) 탭은 다시 메인 내비로
+    // 돌아왔으므로 더 이상 부재를 확인하지 않는다(아래 별도 테스트가 커버).
+    // 2026-09-22(사용자 지시) — 모의고사도 홈 서브탭에서 좌측 nav "모의고사"로
     // 옮겼고, 통계 서브탭은 아예 없앴다(Overview에 이미 있다는 이유).
     expect(screen.queryByText("지인 추천")).not.toBeInTheDocument();
     expect(screen.queryByText("가족")).not.toBeInTheDocument();
-    expect(screen.queryByText("예약")).not.toBeInTheDocument();
     expect(screen.queryByText("교재")).not.toBeInTheDocument();
     expect(screen.getAllByText("지훈").length).toBeGreaterThan(0);
     expect(screen.getAllByText("이서아").length).toBeGreaterThan(0);
@@ -236,12 +237,12 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("Classes")[0]);
+    fireEvent.click(screen.getAllByText("수업")[0]);
     expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
   });
 
   // 2026-09-19(UAT 반영, 제품 오너 결정) — 2026-09-17 R13의 "예약 독립 탭
-  // 제거" 정책을 되돌려 "Bookings" 탭을 다시 만들었다. LessonBookingTab
+  // 제거" 정책을 되돌려 "예약" 탭을 다시 만들었다. LessonBookingTab
   // 자체 동작은 그 컴포넌트 테스트가 이미 커버하므로, 여기서는 탭 진입만 확인.
   it("Bookings 탭을 누르면 LessonBookingTab이 렌더링된다", () => {
     render(
@@ -253,7 +254,7 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("Bookings")[0]);
+    fireEvent.click(screen.getAllByText("예약")[0]);
     expect(
       screen.getByText(/아직 선생님 배정이 완료되지 않았어요/)
     ).toBeInTheDocument();
@@ -271,7 +272,7 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("Home")[0]);
+    fireEvent.click(screen.getAllByText("홈")[0]);
     fireEvent.click(await screen.findByText("Board"));
     expect(await screen.findByText("백로그")).toBeInTheDocument();
   });
@@ -286,7 +287,7 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("Credits")[0]);
+    fireEvent.click(screen.getAllByText("수강권")[0]);
     expect(screen.getByText("현황")).toBeInTheDocument();
     expect(screen.getByText("구매")).toBeInTheDocument();
   });
@@ -301,7 +302,7 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("Consultations")[0]);
+    fireEvent.click(screen.getAllByText("상담")[0]);
     expect(await screen.findByPlaceholderText("상담 사유를 입력해주세요")).toBeInTheDocument();
     fireEvent.click(screen.getByText("상담 내역"));
     expect(await screen.findByText("신청한 상담이 없습니다.")).toBeInTheDocument();
@@ -433,7 +434,7 @@ describe("ParentShell", () => {
   });
 
   // 2026-09-22(사용자 지시) — "모의고사"는 이제 홈 서브탭이 아니라 좌측
-  // 독립 nav("Mock Exams")다. 여전히 별도 라우트로 이동하지 않고 탭 안에서
+  // 독립 nav("모의고사")다. 여전히 별도 라우트로 이동하지 않고 탭 안에서
   // 현재 선택된 자녀의 응시 목록을 바로 보여준다.
   it("Mock Exams 탭을 누르면 라우트 이동 없이 탭 안에서 자녀 응시 목록을 보여준다", async () => {
     pushMock.mockClear();
@@ -446,7 +447,7 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("Mock Exams")[0]);
+    fireEvent.click(screen.getAllByText("모의고사")[0]);
     expect(pushMock).not.toHaveBeenCalledWith("/parent/mock-exam/s1");
     expect(await screen.findByText("배정된 모의고사가 없습니다.")).toBeInTheDocument();
   });
@@ -461,21 +462,21 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    expect(screen.getAllByRole("button", { name: new RegExp("Home") })[0]).toHaveAttribute(
+    expect(screen.getAllByRole("button", { name: new RegExp("홈") })[0]).toHaveAttribute(
       "aria-current",
       "page"
     );
     expect(
-      screen.getAllByRole("button", { name: new RegExp("Credits") })[0]
+      screen.getAllByRole("button", { name: new RegExp("수강권") })[0]
     ).not.toHaveAttribute("aria-current");
 
-    fireEvent.click(screen.getAllByRole("button", { name: new RegExp("Credits") })[0]);
-    expect(screen.getAllByRole("button", { name: new RegExp("Credits") })[0]).toHaveAttribute(
+    fireEvent.click(screen.getAllByRole("button", { name: new RegExp("수강권") })[0]);
+    expect(screen.getAllByRole("button", { name: new RegExp("수강권") })[0]).toHaveAttribute(
       "aria-current",
       "page"
     );
     expect(
-      screen.getAllByRole("button", { name: new RegExp("Home") })[0]
+      screen.getAllByRole("button", { name: new RegExp("홈") })[0]
     ).not.toHaveAttribute("aria-current");
   });
 });
