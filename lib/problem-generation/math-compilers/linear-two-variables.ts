@@ -9,6 +9,7 @@
 // 기울기, 절편, 해의 개수. 계수는 항상 정수이고, 교점이 존재하는 유형은 교점 좌표도
 // 항상 정수가 되도록 계수를 고른다(선택지가 지저분한 분수가 되지 않게).
 import type { PlaneSpec, PlaneObject } from "@/lib/problem-figures/templates/coordinate-plane";
+import type { FigureChoiceSpec } from "@/lib/problem-figures/templates/figure-choice";
 import type { DistractorRationale, DistractorKind } from "../review";
 
 export type LinearTwoVarQuestionKind =
@@ -185,6 +186,41 @@ function buildFigure(model: Pick<LinearTwoVarModel, "m1" | "b1" | "m2" | "b2" | 
     axes: { x: { min: -range, max: range }, y: { min: -range, max: range } },
     objects,
   };
+}
+
+/** 2026-09-24(UAT 지적) — "그래프 선택지 4개"(systems_linear 전용). 정답은 실제 두 직선
+ * 그대로, 오답 셋은 한쪽 식의 기울기 부호를 뒤집거나 절편을 옮긴 실제 있을 법한 그래프다. */
+function buildSystemFigureChoice(model: Pick<LinearTwoVarModel, "m1" | "b1" | "m2" | "b2">): { choices: PlaneSpec[]; correctIndex: number; reasons: { kind: DistractorKind; whyWrong: string }[] } {
+  // 2026-09-24(checkFigure 실측) — findEquationChoice는 지문에서 첫 번째 식(line1)만 추출해
+  // 그 (기울기, 절편)과 정확히 같은 l1을 가진 선택지를 전부 정답 후보로 본다. l1이 그대로인
+  // 오답(l2만 바꾼 경우)은 정답과 l1이 같아 "정답이 둘"로 걸린다 — 오답 셋 모두 l1 자체를
+  // (원래 값과 다르게) 바꿔서 오직 정답 선택지만 line1과 정확히 같게 한다.
+  const variants = [
+    { m1: model.m1, b1: model.b1, m2: model.m2, b2: model.b2 },
+    { m1: -model.m1, b1: model.b1, m2: model.m2, b2: model.b2 },
+    { m1: model.m1, b1: model.b1 + 4, m2: model.m2, b2: model.b2 },
+    { m1: model.m1, b1: model.b1 - 4, m2: -model.m2, b2: model.b2 },
+  ];
+  const range = Math.max(8, Math.abs(model.m1) + 2, Math.abs(model.m2) + 2, Math.abs(model.b1) + 4, Math.abs(model.b2) + 4);
+  const order = [0, 1, 2, 3].sort(() => Math.random() - 0.5);
+  const choices: PlaneSpec[] = order.map((i) => {
+    const v = variants[i];
+    return {
+      type: "plane",
+      axes: { x: { min: -range, max: range }, y: { min: -range, max: range } },
+      objects: [
+        { id: "l1", kind: "line", slope: v.m1, intercept: v.b1 },
+        { id: "l2", kind: "line", slope: v.m2, intercept: v.b2 },
+      ],
+    };
+  });
+  const correctIndex = order.indexOf(0);
+  const reasons: { kind: DistractorKind; whyWrong: string }[] = [
+    { kind: "sign_error", whyWrong: "첫 번째 식의 기울기 부호를 반대로 그렸다." },
+    { kind: "formula_misuse", whyWrong: "첫 번째 식의 y절편을 다른 값으로 옮겨 그렸다." },
+    { kind: "sign_error", whyWrong: "첫 번째 식의 y절편도, 두 번째 식의 기울기 부호도 모두 다르게 그렸다." },
+  ];
+  return { choices, correctIndex, reasons };
 }
 
 const RANGE_BY_DIFFICULTY: Record<LinearTwoVarDifficulty, number> = { easy: 6, medium: 8, hard: 10 };
@@ -388,12 +424,35 @@ export type CompiledMathProblem = {
   explanation: string;
   /** 2026-09-17(사용자 지시) — 해설의 영어 버전. 관리자·학생 화면의 한국어/영어 토글에 쓰인다. */
   explanationEn: string;
-  figure: PlaneSpec | null;
+  figure: PlaneSpec | FigureChoiceSpec | null;
   distractorRationales: DistractorRationale[];
 };
 
-/** 모델 → 실제 문제 렌더링(지문·선택지·해설·그래프). 전부 모델 값을 그대로 읽기만 한다 — 여기서 값을 만들지 않는다. */
-export function renderLinearTwoVarProblem(model: LinearTwoVarModel): CompiledMathProblem {
+/** 모델 → 실제 문제 렌더링(지문·선택지·해설·그래프). 전부 모델 값을 그대로 읽기만 한다 — 여기서 값을 만들지 않는다.
+ * figureMode가 "figure_choice"면(systems_linear 전용) 수치 정답 대신 그래프 4개 중 실제 시스템을
+ * 나타내는 것을 고르는 문항으로 완전히 바꾼다(질문·선택지·정답 전부 이 분기에서 새로 만든다). */
+export function renderLinearTwoVarProblem(model: LinearTwoVarModel, opts?: { figureMode?: "figure_choice" }): CompiledMathProblem {
+  if (opts?.figureMode === "figure_choice") {
+    const { choices, correctIndex, reasons } = buildSystemFigureChoice(model);
+    const distractorRationales: DistractorRationale[] = reasons.map((r, i) => ({
+      index: [0, 1, 2, 3].filter((j) => j !== correctIndex)[i] ?? i,
+      plausibleBecause: "같은 두 식에서 한쪽 계수만 틀리게 읽으면 나오는 그래프다.",
+      matches: "같은 축·형식을 쓴다.",
+      whyWrong: r.whyWrong,
+      kind: r.kind,
+      obvious: false,
+    }));
+    return {
+      passage: `Consider the system of equations shown.\n\n${fmtLine(model.m1, model.b1)}\n${fmtLine(model.m2, model.b2)}`,
+      question: "Which of the following graphs could represent the system of equations shown in the xy-plane?",
+      options: ["A", "B", "C", "D"],
+      correctIndex,
+      explanation: `첫 번째 식은 기울기 ${fmt(model.m1)}, y절편 ${fmt(model.b1)}이고 두 번째 식은 기울기 ${fmt(model.m2)}, y절편 ${fmt(model.b2)}이다. 두 값이 모두 일치하는 그래프만 정답이다.`,
+      explanationEn: `The first equation has slope ${fmt(model.m1)} and y-intercept ${fmt(model.b1)}; the second has slope ${fmt(model.m2)} and y-intercept ${fmt(model.b2)}. Only the graph matching both is correct.`,
+      figure: { type: "figure_choice", choices },
+      distractorRationales,
+    };
+  }
   const passage =
     model.questionKind === "num_solutions" || model.questionKind === "slope" || model.questionKind === "intercept"
       ? `Consider the system of equations shown.\n\n${fmtLine(model.m1, model.b1)}\n${fmtLine(model.m2, model.b2)}`

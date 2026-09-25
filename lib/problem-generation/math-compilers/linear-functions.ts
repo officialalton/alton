@@ -3,6 +3,13 @@
 // 방정식(linear_equations_two_var)과 달리 "함수값 계산"·"두 점에서 기울기 구하기"가
 // 질문 대상이라 오류 경로도 다르다(기울기 공식의 분자·분모를 바꾸는 실수 등).
 import type { DistractorRationale, DistractorKind } from "../review";
+import type { PlaneSpec } from "@/lib/problem-figures/templates/coordinate-plane";
+import type { DataSpec } from "@/lib/problem-figures/templates/data";
+
+/** 2026-09-24(UAT 지적) — 관리자가 "자료 포함"을 고르면 실제로 자료를 붙인다. plane 은
+ * 직선 f 를 좌표평면에 그리고, data 는 f 의 값 몇 개를 표로 보여준다(식은 그대로 지문에
+ * 남겨 계산 근거는 유지한다 — 표는 부가 자료다). */
+export type LinearFunctionFigureMode = "text" | "plane" | "data";
 
 // 2026-09-17(제품 오너 지시, Step 4 고빈도 공백 6번) — "기울기·절편의 문맥 해석".
 // 실제 문맥(구독자 수, 요금 등)에 얹은 일차함수 S(t) = m·t + b에서 m(기울기)과
@@ -138,6 +145,9 @@ function generateInterpretModel(params: { difficulty: LinearFunctionDifficulty; 
 export function generateLinearFunctionModel(params: {
   difficulty: LinearFunctionDifficulty;
   questionKind?: LinearFunctionQuestionKind;
+  /** 2026-09-24 — plane/data 자료는 계산형 세 유형(evaluate 등)에만 그린다. 문맥 해석
+   * 두 유형은 문장형이라 이 두 자료와 짝짓지 않는다(무작위 굴림에서 뺀다). */
+  figureMode?: LinearFunctionFigureMode;
 }): LinearFunctionModel {
   const range = RANGE_BY_DIFFICULTY[params.difficulty];
   const kinds: LinearFunctionQuestionKind[] = ["evaluate", "find_x_for_value", "slope_from_two_points"];
@@ -146,7 +156,7 @@ export function generateLinearFunctionModel(params: {
   }
   // 2026-09-17(제품 오너 지시) — questionKind를 지정하지 않으면 기존 계산형 세 유형을
   // 70%, 새 문맥 해석 두 유형(slope/intercept 각 15%)을 30%로 섞는다.
-  if (!params.questionKind) {
+  if (!params.questionKind && (!params.figureMode || params.figureMode === "text")) {
     const roll = Math.random();
     if (roll >= 0.85) return generateInterpretModel({ difficulty: params.difficulty, questionKind: "interpret_slope" });
     if (roll >= 0.7) return generateInterpretModel({ difficulty: params.difficulty, questionKind: "interpret_intercept" });
@@ -271,11 +281,32 @@ export type CompiledMathProblem = {
   correctIndex: number;
   explanation: string;
   explanationEn: string;
-  figure: null;
+  figure: PlaneSpec | DataSpec | null;
   distractorRationales: DistractorRationale[];
 };
 
-export function renderLinearFunctionProblem(model: LinearFunctionModel): CompiledMathProblem {
+/** f(x) = mx + b 를 좌표평면에 직선으로 그린다 — label을 "f"로 둬 지문의 "f(x)" 참조와
+ * 맞춘다(checkFigure 의 ref_missing 검사). */
+function buildLinearPlaneFigure(m: number, b: number, xs: number[]): PlaneSpec {
+  const xMin = Math.min(-10, ...xs) - 1, xMax = Math.max(10, ...xs) + 1;
+  const ys = [m * xMin + b, m * xMax + b, ...xs.map((x) => m * x + b)];
+  const yLo = Math.min(...ys), yHi = Math.max(...ys);
+  const margin = Math.max(2, Math.round((yHi - yLo) * 0.15) || 2);
+  return {
+    type: "plane",
+    axes: { x: { min: xMin, max: xMax }, y: { min: yLo - margin, max: yHi + margin } },
+    objects: [{ id: "f", kind: "line", slope: m, intercept: b, label: "f" }],
+    grid: true,
+  };
+}
+
+/** f 의 값 몇 개를 표로 보여준다 — 식과 별개로 값을 직접 읽을 수 있는 보조 자료. */
+function buildLinearDataFigure(m: number, b: number, xs: number[]): DataSpec {
+  return { type: "data", kind: "table", title: "Selected values of the function f", columns: ["x", "f(x)"], rows: xs.map((x) => [x, fmt(m * x + b)]) };
+}
+
+export function renderLinearFunctionProblem(model: LinearFunctionModel, opts?: { figureMode?: LinearFunctionFigureMode }): CompiledMathProblem {
+  const figureMode: LinearFunctionFigureMode = opts?.figureMode ?? "text";
   const options = [model.correctAnswer, ...model.distractors.map((d) => d.value)];
   const order = [0, 1, 2, 3].sort(() => Math.random() - 0.5);
   const shuffled = order.map((i) => options[i]);
@@ -290,30 +321,42 @@ export function renderLinearFunctionProblem(model: LinearFunctionModel): Compile
   }));
 
   if (model.questionKind === "evaluate") {
-    const passage = `The function f is defined by ${fx(model.m, model.b)}.`;
+    const figure = figureMode === "plane" ? buildLinearPlaneFigure(model.m, model.b, [model.x0!]) : figureMode === "data" ? buildLinearDataFigure(model.m, model.b, [-2, -1, 0, 1, 2, model.x0!].filter((v, i, a) => a.indexOf(v) === i).sort((a, b) => a - b)) : null;
+    const passage = figureMode === "plane"
+      ? `The function f is defined by ${fx(model.m, model.b)}. The graph of y = f(x) is shown in the xy-plane below.`
+      : figureMode === "data"
+        ? `The function f is defined by ${fx(model.m, model.b)}. The table shows some values of f.`
+        : `The function f is defined by ${fx(model.m, model.b)}.`;
     const question = `What is f(${fmt(model.x0!)})?`;
     const explanation = `f(${fmt(model.x0!)}) = ${fmt(model.m)} × ${fmt(model.x0!)} ${model.b >= 0 ? "+" : "-"} ${fmt(Math.abs(model.b))} = ${model.correctAnswer}이다.`;
     const explanationEn = `f(${fmt(model.x0!)}) = ${fmt(model.m)} × ${fmt(model.x0!)} ${model.b >= 0 ? "+" : "-"} ${fmt(Math.abs(model.b))} = ${model.correctAnswer}.`;
-    return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
+    return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure, distractorRationales };
   }
 
   if (model.questionKind === "find_x_for_value") {
-    const passage = `The function f is defined by ${fx(model.m, model.b)}.`;
+    const figure = figureMode === "plane" ? buildLinearPlaneFigure(model.m, model.b, []) : figureMode === "data" ? buildLinearDataFigure(model.m, model.b, [-2, -1, 0, 1, 2]) : null;
+    const passage = figureMode === "plane"
+      ? `The function f is defined by ${fx(model.m, model.b)}. The graph of y = f(x) is shown in the xy-plane below.`
+      : figureMode === "data"
+        ? `The function f is defined by ${fx(model.m, model.b)}. The table shows some values of f.`
+        : `The function f is defined by ${fx(model.m, model.b)}.`;
     const question = `For what value of x does f(x) = ${fmt(model.target!)}?`;
     const explanation = `${fmt(model.m)}x ${model.b >= 0 ? "+" : "-"} ${fmt(Math.abs(model.b))} = ${fmt(model.target!)}에서 상수항을 이항하면 ${fmt(model.m)}x = ${fmt(model.target! - model.b)}이므로 x = ${fmt(model.target! - model.b)} ÷ ${fmt(model.m)} = ${model.correctAnswer}이다.`;
     const explanationEn = `From ${fmt(model.m)}x ${model.b >= 0 ? "+" : "-"} ${fmt(Math.abs(model.b))} = ${fmt(model.target!)}, moving the constant term gives ${fmt(model.m)}x = ${fmt(model.target! - model.b)}, so x = ${fmt(model.target! - model.b)} ÷ ${fmt(model.m)} = ${model.correctAnswer}.`;
-    return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
+    return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure, distractorRationales };
   }
 
   if (model.questionKind === "slope_from_two_points") {
     const { p1, p2 } = model;
-    const passage = `In the xy-plane, line f passes through the points (${fmt(p1!.x)}, ${fmt(p1!.y)}) and (${fmt(p2!.x)}, ${fmt(p2!.y)}).`;
+    const figure = figureMode === "plane" ? buildLinearPlaneFigure(model.m, model.b, [p1!.x, p2!.x]) : figureMode === "data" ? buildLinearDataFigure(model.m, model.b, [p1!.x, p2!.x].sort((a, b) => a - b)) : null;
+    const passage = `In the xy-plane, line f passes through the points (${fmt(p1!.x)}, ${fmt(p1!.y)}) and (${fmt(p2!.x)}, ${fmt(p2!.y)}).`
+      + (figureMode === "plane" ? " The graph of line f is shown below." : figureMode === "data" ? " The table shows some points on line f." : "");
     const question = "What is the slope of line f?";
     const dy = p2!.y - p1!.y;
     const dx = p2!.x - p1!.x;
     const explanation = `기울기는 (y의 변화량) ÷ (x의 변화량) = (${fmt(dy)}) ÷ (${fmt(dx)}) = ${model.correctAnswer}이다.`;
     const explanationEn = `Slope = (change in y) ÷ (change in x) = (${fmt(dy)}) ÷ (${fmt(dx)}) = ${model.correctAnswer}.`;
-    return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
+    return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure, distractorRationales };
   }
 
   const { context } = model;

@@ -4,6 +4,7 @@
 // 엔진과 달리 "정수 근 두 개를 먼저 고르고 계수를 역산" 방식으로 항상 깔끔한
 // 근을 보장한다 — 분수근이나 복소근은 이 1차 범위 밖이다.
 import type { DistractorRationale, DistractorKind } from "../review";
+import type { PlaneSpec } from "@/lib/problem-figures/templates/coordinate-plane";
 
 export type NonlinearEqQuestionKind =
   | "root" | "sum_of_roots" | "product_of_roots" | "num_real_solutions"
@@ -132,6 +133,9 @@ function extractSquareFactor(n: number): { q: number; squareFree: number } {
 export function generateNonlinearEqModel(params: {
   difficulty: NonlinearEqDifficulty;
   questionKind?: NonlinearEqQuestionKind;
+  /** 2026-09-24(UAT 지적) — require_plane 은 좌표평면에 실제로 그릴 수 있는
+   * linear_quadratic_intersection 으로 고정한다(다른 유형은 좌표평면 그림이 없다). */
+  figureMode?: "plane";
 }): NonlinearEqModel {
   const range = ROOT_RANGE_BY_DIFFICULTY[params.difficulty];
   const kinds: NonlinearEqQuestionKind[] = ["root", "sum_of_roots", "product_of_roots", "num_real_solutions", ...IRRATIONAL_KINDS];
@@ -139,7 +143,9 @@ export function generateNonlinearEqModel(params: {
   // 별도로 각 15% 확률로 섞는다(linear-equations-one-var.ts의 word_problem_translate와
   // 같은 확률적 서브타입 도입 방식).
   let questionKind: NonlinearEqQuestionKind;
-  if (params.questionKind) {
+  if (params.figureMode === "plane") {
+    questionKind = "linear_quadratic_intersection";
+  } else if (params.questionKind) {
     questionKind = params.questionKind;
   } else {
     const roll = Math.random();
@@ -717,9 +723,28 @@ export type CompiledMathProblem = {
   correctIndex: number;
   explanation: string;
   explanationEn: string;
-  figure: null;
+  figure: PlaneSpec | null;
   distractorRationales: DistractorRationale[];
 };
+
+/** 이차함수·직선을 좌표평면에 그린다 — 둘 다 지문의 식과 정확히 같은 계수를 쓴다. */
+function buildIntersectionPlaneFigure(a: number, qb: number, qc: number, m: number, k: number, xs: number[]): PlaneSpec {
+  const xMin = Math.min(-8, ...xs) - 1, xMax = Math.max(8, ...xs) + 1;
+  const quadAt = (x: number) => a * x * x + qb * x + qc;
+  const lineAt = (x: number) => m * x + k;
+  const ys = [quadAt(xMin), quadAt(xMax), lineAt(xMin), lineAt(xMax), ...xs.map(quadAt)];
+  const yLo = Math.min(...ys), yHi = Math.max(...ys);
+  const margin = Math.max(2, Math.round((yHi - yLo) * 0.15) || 2);
+  return {
+    type: "plane",
+    axes: { x: { min: xMin, max: xMax }, y: { min: yLo - margin, max: yHi + margin } },
+    objects: [
+      { id: "q", kind: "function", fn: "quadratic", params: [a, qb, qc] },
+      { id: "l", kind: "line", slope: m, intercept: k },
+    ],
+    grid: true,
+  };
+}
 
 const QUESTION_TEXT: Record<NonlinearEqQuestionKind, string> = {
   root: "What is the larger solution to the equation shown?",
@@ -751,9 +776,11 @@ function lineRhsGeneral(m: number, k: number): string {
   return `${mTerm} ${k >= 0 ? "+" : "-"} ${fmt(Math.abs(k))}`;
 }
 
-function renderIntersectionProblem(model: NonlinearEqModel): CompiledMathProblem {
+function renderIntersectionProblem(model: NonlinearEqModel, opts?: { figureMode?: "plane" }): CompiledMathProblem {
   const a = model.quadA!, qb = model.quadB!, qc = model.quadC!, m = model.lineM!, k = model.lineK!;
-  const passage = `Consider the system of equations shown.\n\n$y = ${quadRhsGeneral(a, qb, qc)}$\n$y = ${lineRhsGeneral(m, k)}$`;
+  const shownBelow = opts?.figureMode === "plane" ? " The graphs of the equations are shown in the xy-plane below." : "";
+  const passage = `Consider the system of equations shown.${shownBelow}\n\n$y = ${quadRhsGeneral(a, qb, qc)}$\n$y = ${lineRhsGeneral(m, k)}$`;
+  const figure = opts?.figureMode === "plane" ? buildIntersectionPlaneFigure(a, qb, qc, m, k, model.intersectionXs ?? []) : null;
   const B = qb - m, C = qc - k;
   const combinedEqKo = `${quadRhsGeneral(a, B, C).replace("x^2", "x²")} = 0`;
   const quadKo = quadRhsGeneral(a, qb, qc).replace("x^2", "x²");
@@ -793,7 +820,7 @@ function renderIntersectionProblem(model: NonlinearEqModel): CompiledMathProblem
     kind: d.kind,
     obvious: false,
   }));
-  return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
+  return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure, distractorRationales };
 }
 
 function renderParameterDiscriminantProblem(model: NonlinearEqModel): CompiledMathProblem {
@@ -836,8 +863,8 @@ function renderParameterDiscriminantProblem(model: NonlinearEqModel): CompiledMa
   return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
 }
 
-export function renderNonlinearEqProblem(model: NonlinearEqModel): CompiledMathProblem {
-  if (model.questionKind === "linear_quadratic_intersection") return renderIntersectionProblem(model);
+export function renderNonlinearEqProblem(model: NonlinearEqModel, opts?: { figureMode?: "plane" }): CompiledMathProblem {
+  if (model.questionKind === "linear_quadratic_intersection") return renderIntersectionProblem(model, opts);
   if (model.questionKind === "parameter_discriminant") return renderParameterDiscriminantProblem(model);
   const isIrrational = model.questionKind === "irrational_sum_of_roots" || model.questionKind === "irrational_product_of_roots" || model.questionKind === "irrational_root_radical_form";
   const passage = isIrrational

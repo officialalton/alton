@@ -2,6 +2,7 @@
 // "Inference from sample statistics and margin of error". 표본에서 나온 비율을
 // 모집단 크기로 확장 추정한다(단순 비례식). AI를 전혀 부르지 않는다.
 import type { DistractorRationale, DistractorKind } from "../review";
+import type { DataSpec } from "@/lib/problem-figures/templates/data";
 
 export type InferenceDifficulty = "easy" | "medium" | "hard";
 
@@ -97,12 +98,15 @@ export type CompiledMathProblem = {
   correctIndex: number;
   explanation: string;
   explanationEn: string;
-  figure: null;
+  figure: DataSpec | null;
   distractorRationales: DistractorRationale[];
 };
 
-export function renderInferenceProblem(model: InferenceModel): CompiledMathProblem {
-  const passage = `A random sample of ${model.sampleSize} ${model.context.includes("residents") ? "residents" : model.context.includes("students") ? "students" : model.context.includes("customers") ? "customers" : "employees"} was surveyed. Of those surveyed, ${model.sampleCount} were ${model.context}. The population consists of ${model.population} total.`;
+export function renderInferenceProblem(model: InferenceModel, opts?: { figureMode?: "data" }): CompiledMathProblem {
+  const wantsData = opts?.figureMode === "data";
+  const passage = `A random sample of ${model.sampleSize} ${model.context.includes("residents") ? "residents" : model.context.includes("students") ? "students" : model.context.includes("customers") ? "customers" : "employees"} was surveyed. Of those surveyed, ${model.sampleCount} were ${model.context}. The population consists of ${model.population} total.`
+    + (wantsData ? " The sample results are also shown in the table below." : "");
+  const figure: DataSpec | null = wantsData ? { type: "data", kind: "table", title: "Sample results", columns: ["Category", "Count"], rows: [["Sample size", model.sampleSize], ["Have this characteristic", model.sampleCount], ["Population", model.population]] } : null;
   const question = "Based on the sample, about how many people in the entire population would be expected to have this same characteristic?";
   const options = [model.correctAnswer, ...model.distractors.map((d) => d.value)];
   const order = [0, 1, 2, 3].sort(() => Math.random() - 0.5);
@@ -121,5 +125,5 @@ export function renderInferenceProblem(model: InferenceModel): CompiledMathProbl
     obvious: false,
   }));
 
-  return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
+  return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure, distractorRationales };
 }
