@@ -390,11 +390,56 @@
   inquiry-actions/calendar-sync) 53개 전부 통과. **영향받은 정상 흐름**: 없음(전부
   server action이 admin 또는 session 클라이언트로만 부르던 것을 그대로 유지 —
   브라우저가 anon 키로 이 RPC들을 직접 부르는 코드 경로는 원래도 없었음).
-  **미완료**: 나머지 118개(anon 실행권한은 있지만 본문에 인가 패턴이 있는 것으로
-  자동 분류된 것들)는 이번에도 정규식 기반 1차 스크리닝만 했고 개별 실측 재현은
-  다음 라운드로 남김 — 특히 `is_admin()`/`auth.uid()`가 있어도 조건 분기가 잘못돼
-  일부 경로만 검사하는 경우는 이 방식으로 못 잡는다(1차 문서의 알려진 한계와
-  동일).
+  **미완료(→ 3차에서 완료, 아래 참고)**: 나머지 118개는 이번엔 정규식 1차
+  스크리닝만 했음.
+
+- **SECURITY DEFINER 권한 감사 3차·최종 완료(2026-09-24, `20261900000008~11`)**:
+  2차가 남긴 118개(정규식으로 "인가 패턴 있음"까지만 확인됨)를 위험도 순으로
+  4개 배치 나눠 전부 개별 실측·호출부 대조 완료 — 1차(2개)·2차(1개)까지 합쳐
+  이제 anon/PUBLIC 실행권한을 가진 SECURITY DEFINER 함수 전수(139개)가 개별
+  검증 끝났다.
+  - **batch1 토큰/초대 14개** — **실제 결함 1건**: `finalize_account_invite(invite_id,
+    auth_user_id)`에 `auth.uid()` 검사가 전혀 없고 호출자가 auth_user_id를 직접
+    지정 — anon이 accepted 상태(claim 직후~finalize 전 실존 경합구간)인 임의
+    초대에 자기 auth_user_id를 넣어 남의 household/학생 프로필을 가로챌 수
+    있었다. `set role anon`으로 재현(수정 전 성공 → 수정 후 permission denied),
+    유일한 호출부(`app/api/invite/accept/route.ts`)는 admin 클라이언트+서버
+    생성 auth_user_id만 써서 service_role만 남겨도 영향 없음. `claim_account_invite`는
+    기존 통합테스트 6개가 "anon 접근이 계약"이라고 명시해(토큰 해시 검증 자체가
+    인가 근거) 그대로 둠 — 처음에 같이 좁혔다가 테스트 실패로 원복.
+  - **batch2 개인정보 22개** — **실제 결함 1건**: `assert_guardian_consent_ok`가
+    원래(20260913000000) 생성 시점부터 anon 회수·authenticated만 부여였는데
+    지금 anon이 붙어 있었음(재정의한 마이그레이션 없음 — 원인 불명 드리프트,
+    이런 "원래 좁혀놨는데 나중에 풀린" 사례가 또 있을 수 있어 정기 재감사
+    필요). anon으로 임의 student_id를 넣으면 "13세 미만+동의 없음" 여부를
+    예외 메시지로 알아낼 수 있었다 — 재현 확인 후 원복.
+  - **batch3 결제·상태변경 25개** — **실제 결함 2건**: `finalize_trial_onboarding_students`
+    (auth.uid() 미검사, guardian_auth_user_id 직접 지정 — 같은 클래스의 결함이나
+    link_id+claim_id 검증이 1차 방어선), `schedule_reservation_notifications`
+    (앱 호출부 자체가 없음 — 다른 SECURITY DEFINER 함수 안에서만 PERFORM으로
+    쓰여 애초에 anon/authenticated 권한이 불필요했는데, anon이 임의 reservation_id로
+    직접 불러 "정규수업이 예약되었습니다" 알림을 그 가족에게 반복 주입할 수
+    있었음 — 스팸/사회공학 벡터). 둘 다 service_role만 남김.
+  - **batch4 문의·모의고사·순수 헬퍼 57개** — 55개는 문제 없음(전부 `auth.uid()`를
+    본인 또는 정확한 대상 관계로 대조하는 구조 확인), 2개(`submit_homepage_consult_request`,
+    `list_consultant_open_slots`)는 취약점은 아니었으나(각각 idempotency key,
+    만료·소진 토큰 검사가 있어 anon 직접 호출도 안전) 앱이 admin 클라이언트로만
+    부르므로 잉여 권한 회수.
+  - **검증 방식(전 배치 공통)**: 각 함수를 "패턴이 있다"가 아니라 "그 패턴이
+    실제로 호출자 자신 또는 대상과 일치를 확인하는가"까지 본문을 읽어 판단,
+    `has_function_privilege()`로 anon=false/service_role 또는 authenticated=true
+    확인, 관련 unit/integration 테스트 재실행(총 150개 이상 통과), 실제 exploit
+    가능성이 있던 4건은 수정 전 `set role anon`으로 직접 재현 후 수정 확인.
+  - **정상 흐름 영향**: 없음 — 전부 앱이 admin 또는 session 클라이언트로만
+    부르던 것을 그대로 유지, `claim_account_invite`만 예외적으로 anon 접근이
+    설계상 필요해 그대로 둠.
+  - **후속 필요**: (1) 이번에 발견한 "원래 좁혀놨는데 나중에 anon이 재부여된"
+    드리프트(`assert_guardian_consent_ok`)의 원인을 아직 못 찾음 — 같은 드리프트가
+    다른 함수에도 있을 수 있어 주기적 재감사 권장. (2) 이번 4개 배치도 "인가
+    패턴이 있는가"를 사람이 읽고 판단한 것이라, 조건 분기가 미묘하게 틀린
+    경우(예: OR 조건 중 하나가 항상 true가 되는 버그)는 여전히 놓쳤을 수 있다 —
+    완벽한 전수 검증이 아니라 "이번 세션이 실제로 읽고 판단한 결과"임을
+    출시 전 재확인 시 감안할 것.
 
 - **모바일 사이드바 반응형(2026-09-23, 완료)**: 컨설턴트 포털에서 모바일 폭에서도
   사이드바가 항상 풀사이즈로 떠 있어 본문이 가로 스크롤되던 문제 — `app/consultant/ConsultantShell.tsx`에
