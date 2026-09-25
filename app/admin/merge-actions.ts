@@ -122,3 +122,65 @@ export async function listMergeCandidates(role: "student" | "teacher" | "parent"
     .filter((p) => !mergedIds.has(p.id))
     .map((p) => ({ id: p.id, name: p.name, role: p.role, status: statusById.get(p.id) ?? "unknown" }));
 }
+
+export type PendingAnonymization = {
+  mergedId: string;
+  mergedName: string | null;
+  survivorId: string;
+  survivorName: string | null;
+  mergedAt: string;
+  reason: string | null;
+  eligibleNow: boolean;
+};
+
+// Section 2(2026-09-24) — anonymize_merged_account()는 이미 구현돼 있었지만
+// 관리자가 "누가 30일 유예를 지났는지" 확인할 화면이 없었다(서버 액션만
+// 존재, page.tsx 어디서도 안 부름). account_merges를 직접 조회해 목록을
+// 만든다 — 실제 익명화 실행 여부는 DB 함수가 재확인하므로 여기 eligibleNow는
+// UI 안내용일 뿐 최종 검사가 아니다.
+export async function listPendingAnonymizations(): Promise<PendingAnonymization[]> {
+  const { supabase } = await requireAdminOrCapability(CAPABILITY);
+  const { data, error } = await supabase
+    .from("account_merges")
+    .select(
+      "merged_id, survivor_id, merged_at, reason, anonymized_at, merged:profiles!account_merges_merged_id_fkey(name), survivor:profiles!account_merges_survivor_id_fkey(name)"
+    )
+    .is("anonymized_at", null)
+    .order("merged_at", { ascending: true });
+  if (error) throw new Error(error.message);
+
+  const thirtyDaysAgo = Date.now() - 30 * 24 * 60 * 60 * 1000;
+  return (data ?? []).map((row) => {
+    const mergedRel = row.merged as { name: string | null } | { name: string | null }[] | null;
+    const survivorRel = row.survivor as { name: string | null } | { name: string | null }[] | null;
+    const merged = Array.isArray(mergedRel) ? mergedRel[0] : mergedRel;
+    const survivor = Array.isArray(survivorRel) ? survivorRel[0] : survivorRel;
+    return {
+      mergedId: row.merged_id,
+      mergedName: merged?.name ?? null,
+      survivorId: row.survivor_id,
+      survivorName: survivor?.name ?? null,
+      mergedAt: row.merged_at,
+      reason: row.reason,
+      eligibleNow: new Date(row.merged_at).getTime() <= thirtyDaysAgo,
+    };
+  });
+}
+
+export type MergeSearchResult = { id: string; name: string | null; role: string; email: string | null } | null;
+
+// 병합 화면의 "계정 찾기" — 이메일 정확 일치로 검색한다(find_profile_id_by_email
+// RPC, is_admin() 내부 검사 있음 — 1차 보안감사 확인 완료).
+export async function findAccountForMergeByEmail(email: string): Promise<MergeSearchResult> {
+  const { supabase } = await requireAdminOrCapability(CAPABILITY);
+  const trimmed = email.trim();
+  if (!trimmed) return null;
+  const { data: profileId, error } = await supabase.rpc("find_profile_id_by_email", { p_email: trimmed });
+  if (error) throw new Error(error.message);
+  if (!profileId) return null;
+
+  const { data: profile } = await supabase.from("profiles").select("id, name, role").eq("id", profileId).single();
+  if (!profile) return null;
+
+  return { id: profile.id, name: profile.name, role: profile.role, email: trimmed.toLowerCase() };
+}

@@ -13,6 +13,7 @@ import HouseholdArchiveControls from "./HouseholdArchiveControls";
 import StudentDetailPanel from "./StudentDetailPanel";
 import TeacherDetailPanel from "./TeacherDetailPanel";
 import ConsultantDetailPanel from "./ConsultantDetailPanel";
+import MergeAccountsPanel from "./MergeAccountsPanel";
 import { listConsultantsAction, type ConsultantWithStudents } from "./consultant-assignment-actions";
 import type { AdminSubject } from "./subject-data";
 import type {
@@ -39,6 +40,9 @@ const SUBTABS = [
   { id: "consultants", label: "컨설턴트" },
   // P4-1(B, 2026-09-11) — 아카이브된 가구는 위 목록에서 빠지고 여기서만 보인다.
   { id: "archived", label: "아카이브됨" },
+  // Section 2(2026-09-24) — merge_accounts()/anonymize_merged_account()는
+  // R2 Task 5부터 있었지만 실행 화면이 없었다(master-roadmap-v3.md 미완료 항목).
+  { id: "merge", label: "계정 병합" },
 ] as const;
 type SubtabId = (typeof SUBTABS)[number]["id"];
 
@@ -289,6 +293,7 @@ export default function UsersTab({
       )}
 
       {subtab === "archived" && <ArchivedHouseholdsList />}
+      {subtab === "merge" && <MergeAccountsPanel />}
 
       {subtab === "students" && students === null && (
         <div aria-busy="true" data-testid="students-skeleton">
