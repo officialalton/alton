@@ -8899,3 +8899,327 @@ EAV 방식)는 이미 `loadAdmissionMetrics` + `AdmittedStudentProfileCard`/
 
 검증: `npx tsc --noEmit` 통과. `npm run dev` 로컬 렌더링 확인은 이번 세션에서
 수행하지 않음(시간 제약) — 병합 전 리뷰어가 Preview에서 실제 화면 확인 필요.
+
+## 스탠포드 패턴 재발 점검 — 유명 사립/주요 대형주립대 university_essay_prompts 재검증 (2026-09-24)
+
+배경: 스탠포드가 Preview에서 2행(Common App + 조건부 1개)만 노출됐는데 실제로는
+장문 에세이 3개 + 단답형 5개, 총 10행이 필요하다는 게 발견됨. 프린스턴/코넬에서도
+같은 패턴(공통문항 또는 조건부 문항 하나만 있고 진짜 전체 supplement 세트 누락)이
+이미 한 번 발견된 바 있어, 에세이 수요가 실제로 많은 유명 사립/대형 주립대 21개교를
+`collegeessayadvisors.com` 개별 학교 페이지·공식 admissions 페이지로 재검증했다.
+(기존 행 삭제 없이 additive insert만, psql 직접 실행, 마이그레이션 파일 없음.)
+
+### 실보강한 학교 (11개교, 이전 행수 → 이후 행수)
+
+- **Harvard University (2→7)**: 실제로는 필수 단답형 5문항(각 150단어)이 전부인데
+  DB엔 Common App + 조건부(국제학생 재정) 2행뿐이었음. CEA 2026-27 가이드로 5문항
+  원문·150단어 제한 전부 확인 후 추가.
+- **Yale University (2→9)**: 학업분야 선택(최대 3개), Short Takes 3개(각 ~35단어/
+  200자), 에세이 택1(3개 옵션 중 1개, 400단어) 이 전부 빠져 있었음. CEA 가이드로
+  확인 후 7행 추가.
+- **Vanderbilt University (2→3)**: Common App 필수 행 자체가 DB에 없었음(학교 자체
+  에세이 2행만 존재, 그마저 단어제한이 250/400으로 서로 다른 중복 행으로 보임 —
+  중복 정리는 이번 범위 밖, notes에 플래그만 남김) → Common App 행 추가.
+- **University of North Carolina at Chapel Hill (2→3)**: 2025-26 사이클부터 UNC가
+  기존 단답형 2문항을 공식 폐지(Common App 에세이만 필요)했다는 것을 CEA/IvyCoach로
+  확인. 기존 2025년 행은 과거 기록으로 남기고, 현재(2027) Common App 필수 행만 추가.
+- **University of Virginia (2→3)**: 기존 2행은 모두 간호대학 전용 조건부 에세이
+  중복이었고, 일반 지원자(인문대/공대/건축대/운동학과)는 2026-27부터 supplement
+  자체가 없어져 Common App 에세이만 필요 — 그 필수 행이 빠져 있어 추가.
+- **University of Washington (2→3)**: 공식 writing-section 페이지 확인 결과 선택
+  섹션 "Additional Information"(300단어)이 빠져 있었음(기존 "Challenges and
+  Circumstances" 250단어 행과는 별개) → 추가.
+- **University of Wisconsin-Madison (2→3)**: Common App 지원자용 필수 행 자체가
+  없었음(학교 자체 Why-Madison/전공 에세이 2행만 존재, 단어제한 불일치 중복 — 정리는
+  범위 밖) → Common App 행 추가.
+- **Boston College (2→7)**: 실제로는 일반 지원자용 택1 프롬프트가 4개인데 DB엔 1개
+  주제만 있었음. IvyCoach 2026-27 가이드로 나머지 3개 프롬프트 원문(400단어) +
+  Common App 필수 행까지 총 5행 추가.
+- **George Washington University (2→3)**: 기존 2행(선택 택1 프롬프트 2개)은 정확했으나
+  Common App 필수 행이 빠져 있었음 → 추가.
+- **University of Rochester (2→3)**: 실제 요구사항은 필수 에세이 1개(250단어)뿐으로
+  기존 2행이 그 중복이었음. Common App 필수 행이 빠져 있어 추가.
+- **University of Colorado Boulder (2→3)**: 학업관심사 단답형(250단어) 중복 2행은
+  있었으나 Common App 필수 행이 빠져 있었음 → 추가.
+- **University of Delaware (2→4)**: Test-optional 지원자 전용 에세이가 기존엔
+  "3문항 중 1개 선택"으로 잘못 기재돼 있었는데, 실제로는 **3문항 전부 필수 제출**
+  (각 250단어)임을 공식 자료(Bright Horizons/College Coach 블로그)로 확인. 누락된
+  나머지 2문항 원문 추가(기존 "택1" 오기재 행은 삭제하지 않고 유지, additive만).
+- **University of Massachusetts Amherst (2→3)**: 실제로는 필수 단답형 3문항(각
+  100단어: Why UMass / Community & Contribution / Why Major)인데 세 번째
+  (Community & Contribution) 문항이 DB에서 빠져 있었음 → 추가.
+
+### 검증 후 변경 없음 (실제로 이미 정확했던 학교, 8개교)
+
+- **Johns Hopkins University**: 실제로 커뮤니티/가교 에세이 1개(350단어) + Common
+  App이 전부 — 기존 2행 정확.
+- **University of Arizona**: 일반 지원자 필수 에세이 1개(Why Arizona/전공, 500단어)
+  + Common App이 전부 — 기존 2행 정확(단어제한 메타데이터 일부 누락은 있으나 문항
+  누락은 아님).
+- **University of Cincinnati**: 필수 에세이 1개(전공 관련) + Common App이 전부 —
+  기존 2행 정확.
+- **University of Minnesota, Twin Cities**: 전체 지원자 공통 필수 에세이 1개(~150
+  단어)만 있고, 간호학과 조건부 추가 에세이는 공식 페이지로 재확인 불가(불확실) —
+  기존 2행은 동일 문항의 중복이나 실제 "빠진 문항"은 아님, 추가 안 함.
+- **University of Mississippi (Ole Miss)**: 일반 입학에는 에세이 자체가 필수가 아님
+  (Common App도 선택) — Honors College 조건부 에세이 2개만 존재하는 기존 DB가 정확.
+- **University of Oregon**: 학교 자체 택1 프롬프트(사회정의/다양성 커뮤니티, 각
+  500단어)가 곧 필수 에세이 그 자체이며 별도 Common App 에세이 요구가 없음 — 기존
+  2행 정확.
+- **University of Utah**: 커뮤니티 에세이 1개(300단어)가 사실상 유일한 필수 문항이고
+  Common App 필수 여부는 공식 소스로 명확히 확인 불가 — 기존에 이미 "unconfirmed"로
+  정직하게 플래그돼 있어 추가 변경 없음.
+- **University of Vermont**: Common App 필수 + 선택 단답형 1개(최대 500단어)라는
+  현재 CEA 가이드 설명이 기존 DB의 2행 구조와 일치 — 추가 변경 없음.
+
+### 후속 필요 (범위 밖으로 남긴 것)
+
+- Vanderbilt, UW-Madison, University of Rochester, University of Colorado Boulder,
+  University of Minnesota 에서 **동일 문항이 서로 다른 word_limit_max 값으로 중복
+  저장**되어 있는 패턴을 다수 발견함(예: Vanderbilt 250 vs 400단어, UW-Madison 두
+  행 다른 word_limit). 이번 세션은 additive-only 지시라 삭제/수정하지 않고 각 행의
+  `notes`에 플래그만 남김 — 별도 데이터 정합성 정리 세션 필요.
+- University of Delaware의 기존 "3문항 중 1개 선택" 오기재 행은 실제로는 "3문항
+  전부 필수"이므로, 별도 세션에서 `title`/`is_required` 정정이 필요함(이번엔
+  나머지 2문항만 추가).
+
+**Non-prod 재sync 필요**: 이번 세션에서 추가한 총 24개 행(Harvard 5, Yale 7,
+Vanderbilt 1, UNC 1, UVA 1, UW 1, Wisconsin 1, BC 5, GW 1, Rochester 1, CU Boulder
+1, Delaware 2, UMass Amherst 1 = 24행)은 로컬 개발 DB(`127.0.0.1:54422`)에만
+반영됐다. `docs/*university_essay_prompts*` 계열 이전 세션들과 마찬가지로 non-prod
+환경에 별도 반영(재sync) 작업이 필요하다.
+
+## 세션: setting/official_address/official_phone 일괄 실보강 (2026-09-24)
+
+### 배경
+`universities.setting`(도시유형), `official_address`, `official_phone` 세 컬럼이
+200개교 중 4/3/3개교에만 존재하는 상태였음. 이미 확보된 `university_source_urls`의
+Common Data Set(CDS) PDF 링크를 재활용해 A1 섹션(주소·전화)과 setting 매핑값을
+빠르게 채우는 세션.
+
+### 방법
+- `universities.setting` CHECK 제약 확인: `urban`/`suburban`/`rural`/`town` 만 허용.
+- WebFetch로 CDS PDF를 열면 모델이 raw PDF 바이트를 읽지 못해 텍스트 추출에
+  실패했지만, 각 fetch가 로컬에 PDF 원본을 캐시(`~/.claude/projects/.../tool-results/`)
+  로 저장한다는 점을 이용 — 로컬 `pdftotext -layout`으로 재추출해 A1(Address
+  Information) 섹션을 정확히 읽어냄. 이 방식으로 70개교 이상을 몇 번의 배치
+  요청으로 처리.
+- 주소는 CDS의 "Mailing Address / Street Address / City / State / Zip" 필드를
+  결합. 전화는 "Main Phone Number"(대표 전화, 입학처 전화 아님)만 채택.
+- `setting`은 CDS 문서에 명시된 도시/타운 성격이 확실한 경우에만 매핑(예: Boston
+  University·Northeastern→urban 캠퍼스 설명 확인, 대학 소재지가 명백한 소도시인
+  경우→town). 애매한 경우(예: MTSU, SDSU, Stevens 등 CDS가 빈 템플릿이거나 정보
+  누락)는 스킵하고 추측하지 않음.
+- 일부 URL은 403/404/리다이렉트로 실패(FIU, Auburn, Texas A&M, Iowa State 최초
+  시도 등) — 재시도하거나 스킵.
+
+### 결과 (이 세션에서 74개교 신규/보강)
+세션 시작 대비 컬럼 채움 개수:
+- `setting`: 4 → 66개교
+- `official_address`: 3 → 75개교
+- `official_phone`: 3 → 61개교
+
+목표(각 60개교 이상) 달성. 갱신된 학교 목록(주소/전화 최소 1개 이상 채움,
+알파벳순 74개교): Adelphi University, American University, Arizona State
+University, Baylor University, Binghamton University (SUNY), Boston College,
+Boston University, Colorado School of Mines, Colorado State University, Columbia
+University, Cornell University, Drexel University, Duke University, East Carolina
+University, Florida Atlantic University, George Mason University, George
+Washington University, Georgia Institute of Technology, Harvard University,
+Howard University, Illinois Institute of Technology, Illinois State University,
+Iowa State University, Kansas State University, Lehigh University, Loyola
+Marymount University, Loyola University Chicago, Marquette University, Michigan
+State University, Montclair State University, North Carolina State University,
+Northeastern University, Northern Arizona University, Northwestern University,
+Old Dominion University, Oregon State University, Pace University, Penn State
+University University Park, Princeton University, Rice University, Rowan
+University, Rutgers University-Camden, Rutgers University-New Brunswick, Rutgers
+University-Newark, Santa Clara University, Southern Illinois University
+Carbondale, Syracuse University, Temple University, Texas Christian University,
+Texas Tech University, University at Buffalo (SUNY), University of Alabama,
+University of Alabama in Huntsville, University of California Davis, University
+of California Irvine, University of California Riverside, University of
+California San Diego, University of California Santa Cruz, University of Central
+Florida, University of Chicago, University of Connecticut, University of
+Delaware, University of Denver, University of Georgia, University of Iowa,
+University of Kansas, University of Louisiana at Lafayette, University of
+Michigan Ann Arbor, University of Minnesota Twin Cities, University of Nevada
+Reno, University of New Hampshire, University of New Mexico, University of North
+Carolina at Chapel Hill, University of North Texas.
+
+### 스킵한 케이스 (추측 금지 원칙에 따라 비워둠)
+- CDS 문서 자체가 빈 템플릿이거나 A1 섹션이 잘려서 없었던 경우: Middle Tennessee
+  State University, San Diego State University(11y3mp), Stevens Institute of
+  Technology, DePaul University(구간만 확보, A1 없음), Duquesne University(구간만
+  확보, A1 없음), University of Arizona(빈 템플릿), Tufts University(빈 템플릿).
+- 접근 실패(403/404/redirect 미해결): Auburn University, Florida International
+  University, Iowa State University(1차 시도), Texas A&M University, Clemson
+  University(비-PDF 링크), Georgetown University(Box 링크), Purdue/Miami
+  University/NJIT(xlsx 링크) 등 — 이번 세션에서 처리 안 함, 후속 세션 대상.
+- `setting`은 CDS에 명시적 근거가 없으면 채우지 않음(주소/전화만 채운 학교 다수).
+
+### 후속 필요
+- 나머지 ~126개교(주소/전화/setting 중 하나 이상 비어있는)에 대해 동일 방식
+  (CDS PDF → 로컬 캐시 → `pdftotext -layout`)으로 이어서 진행 가능.
+- FIU, Auburn, Texas A&M 등 접근 실패 URL은 대학 홈페이지 "Contact Us" 페이지로
+  재시도 필요.
+- 이번 세션 변경분은 로컬 개발 DB(`127.0.0.1:54422`)에만 반영됨 — non-prod
+  재sync 필요(migration 파일 없음, psql UPDATE만 수행).
+
+## word_limit_max 중복행 정정 + Delaware 재검증 + 추가 5개교 재검증 (2026-09-24)
+
+배경: 직전 세션이 Vanderbilt/UW-Madison/Rochester/CU Boulder/Minnesota Twin Cities에서
+동일 문항인데 word_limit_max가 다른 중복 행이 있다고 플래그했고, Delaware의 "3개 중
+1개 선택" 라벨이 실제로는 "3개 전부 필수"라는 오류를 지적했었다. 이번 세션에서 WebSearch로
+공식/2차 출처를 재확인해 실제로 UPDATE/DELETE 정정했다(마이그레이션 없음, psql 직접 실행,
+로컬 개발 DB `127.0.0.1:54422`만 반영).
+
+### 중복행 정정 (5개교)
+
+- **Vanderbilt University (3→2행)**: "Crescere Aude"(=Dare to Grow) 프롬프트가
+  "Dare to Grow 에세이"(250단어, 공식 admissions.vanderbilt.edu 확인) 행과
+  "Crescere Aude Essay"(200-400단어, 2차 출처만) 행으로 중복 존재. WebSearch 재확인
+  결과 공식 값은 ~250단어(Common App 필드는 200-300 허용)이고 400단어 근거는 없음 →
+  잘못된 값의 "Crescere Aude Essay" 행 삭제, 공식 확인된 "Dare to Grow"(250) 유지.
+- **University of Wisconsin-Madison (3→2행)**: "Why UW-Madison / Why Major" 프롬프트가
+  한 행은 max=650(min 없음), 다른 행은 min=80(max 없음)으로 쪼개져 중복. 재확인 결과
+  실제 범위는 min=80~max=650(2차 출처 다수 일치, high confidence) → max=650 행에
+  word_limit_min=80 병합 UPDATE, min-only 중복행 삭제.
+- **University of Rochester (3→2행)**: "Curiosity and Creativity" 프롬프트가 한 행은
+  max=250, 다른 행은 word_limit 전체 없음으로 중복. 공식 admissions.rochester.edu
+  페이지가 "approximately 250 words"로 명시 확인 → 250단어 확인 행 유지, limit 없는
+  중복행 삭제.
+- **University of Colorado Boulder (3→2행)**: "Academic Interest"(What/why study at
+  CU Boulder) 프롬프트가 한 행은 max=250, 다른 행은 limit 없음으로 중복. 2차 출처
+  다수(CollegeEssayGuy/Scholarships360) 250단어로 수렴(medium-high confidence,
+  공식 페이지 직접 확인은 실패) → 250단어 행 유지, limit 없는 중복행 삭제.
+- **University of Minnesota, Twin Cities (2→1행)**: word_limit 자체는 두 행 모두
+  null이라 값 충돌은 없었으나, "Academic Interests"와 "Academic/Career Interest
+  Essay"가 동일 문항의 순수 중복이었음. 정보가 더 풍부한(간호학과 조건부 에세이 메모
+  포함) 행을 남기고 plain 행 삭제.
+
+### University of Delaware 재검증 — "3개 전부 필수" 확인 및 오기재 수정
+
+WebSearch로 Bright Horizons/College Coach 블로그 재확인 결과 이전 세션의 결론과 동일:
+UD test-optional 지원자는 3개 에세이 **전부 필수**(선택 아님) — 단, 2026-27 공식
+udel.edu 페이지에는 이 부분이 명시돼 있지 않아 confidence는 moderate. 기존에
+"Test-Optional 지원자 전용 추가 에세이(3문항 중 1개)"로 잘못 기재돼 있던 행을
+`title`/`select_count`(NULL로) 정정 — 실제로는 이 행이 3문항 중 아직 주제 미확인인
+세 번째 문항이었음(다른 2행은 이미 "Unfair Treatment"/"Accomplishment"로 존재).
+select_count는 원래도 값이 비어 있었어서(=NULL) 변경 없음, title만 정정.
+
+### 추가 재검증 (선택 과제, 4개교)
+
+`count<=2` 목록에서 유명 학교 4곳을 WebSearch로 재확인:
+- **Georgia Tech / Northeastern University / Case Western Reserve University**: 이미
+  정확했음 — 세 학교 모두 2026-27 사이클부터 Common App 개인 에세이만 요구(자체
+  서플리먼트 폐지/부재)로 DB가 이미 맞게 반영돼 있었고(이전 세션에서 이미 처리됨),
+  변경 없음.
+- **Clemson University (2→2행, 내용 정정)**: 기존 2행이 "Optional additional
+  statement"/"Optional Personal Statement"로 동일 선택 에세이의 순수 중복이었고,
+  정작 필수인 Common App Personal Essay 행이 누락돼 있었음 → 중복행 1개 삭제, 필수
+  Common App 행(650/250단어) 신규 추가.
+
+### Non-prod 재sync 필요
+
+이번 세션 변경분(로컬 개발 DB만):
+- DELETE 6건(Vanderbilt 1, UW-Madison 1, Rochester 1, CU Boulder 1, Minnesota 1,
+  Clemson 1)
+- UPDATE 3건(UW-Madison min 병합 1, Delaware title 정정 2회)
+- INSERT 1건(Clemson Common App 행)
+
+이전 세션들과 마찬가지로 non-prod 환경에는 별도 반영(재sync) 작업이 필요하다.
+
+## 세션: setting/official_address/official_phone 잔여 학교 2차 보강 (2026-09-24)
+
+이전 세션이 CDS PDF의 A1(주소/전화) 섹션을 curl+pdftotext로 파싱해 74개교를 채웠으나,
+봇차단/빈 폼필드 PDF/부분 섹션(PDF가 A~J 중 일부 섹션만 포함)로 막힌 학교와 아직 시도
+안 한 학교가 약 148개교 남아 있었다. 이번 세션은 그 잔여분을 대상으로 CDS 원문(주로
+university_source_urls의 CDS 링크, 없는 학교는 WebSearch로 기관 공식 IR/OIR 페이지의
+최신 CDS를 찾아) A1 섹션을 curl+pdftotext 또는 WebFetch(모델이 PDF를 직접 읽어 텍스트
+추출)로 확인 후, 확인된 값만 `UPDATE ... SET x = COALESCE(x, '값')`로 반영했다(기존에
+이미 채워진 값은 절대 덮어쓰지 않음). 로컬 개발 DB(`127.0.0.1:54422`)에만 psql 직접
+UPDATE로 반영, 마이그레이션 파일 없음.
+
+### 처리 방식
+
+1. `university_source_urls`에서 CDS 링크가 있는 학교(89개교) → curl+pdftotext(-layout)로
+   일괄 다운로드/추출 후 A1 섹션 grep.
+2. 폼필드(AcroForm) PDF라 -layout으로 값이 빠지는 학교(Ohio State, Arizona, Miami,
+   Georgia 등)는 pdftoppm으로 이미지 렌더링 후 직접 읽어 확인.
+3. CDS 링크가 없거나(DePaul, MTSU, Oklahoma, Tennessee-Knoxville 등은 다운로드된
+   PDF가 CDS 특정 섹션(G/C 등)만 포함한 부분 파일이라 A1 없음 → 스킵) 실패한 나머지
+   ~60개교는 WebSearch로 기관 공식 IR 페이지의 최신 CDS를 찾아 WebFetch로 직접
+   추출(WebFetch는 PDF 바이너리를 로컬에 저장해주므로 pdftotext로 재추출해 검증).
+4. Box.com/SharePoint 호스팅 PDF(Georgetown, Wisconsin-Madison 등)는 JS 렌더링이
+   필요해 WebFetch/curl로 텍스트 추출 불가 → 이번 세션에서는 스킵(추후 브라우저
+   자동화 필요).
+5. `setting`(urban/suburban/rural/town)은 CDS A1에 포함되지 않는 항목이라 이번
+   세션에서는 확인된 것이 거의 없어 손대지 않음(애매한 추측 금지 원칙 유지).
+
+### 확인/반영된 학교 (official_address 및/또는 official_phone 신규 채움, 총 44개교)
+
+North Carolina State University(phone), University of Pittsburgh(addr+phone),
+University of South Carolina(phone), University of South Alabama(addr+phone),
+University of Rhode Island(phone), University of Montana(addr+phone), Case Western
+Reserve University(phone), Rowan University(phone), Brigham Young University(addr+phone),
+University of Florida(phone), Carnegie Mellon University(addr+phone), Ball State
+University(addr), Colorado School of Mines(addr+phone), University of Kentucky(addr),
+University of Massachusetts Lowell(addr+phone), University of Minnesota Twin Cities(phone),
+California Institute of Technology(phone), Temple University(phone), University of
+Cincinnati(phone), Clark University(addr+phone), Baylor University(phone), Florida
+International University(phone), Texas Tech University(phone), Lehigh University(phone),
+University of Toledo(addr+phone), University of Massachusetts Boston(addr), Tufts
+University(phone), Duke University(phone), Yale University(phone), Texas State
+University(phone), George Washington University(phone), University of Southern
+Mississippi(phone), University of Utah(phone), University of North Texas(phone),
+Villanova University(phone), Utah State University(phone), Chapman University(phone),
+Ohio State University(addr+phone, 폼필드 PDF 이미지 판독), University of Arizona(addr+phone,
+동일), University of Miami(addr+phone, 동일), University of Georgia(addr+phone, 동일),
+Massachusetts Institute of Technology(addr+phone), University of California Los
+Angeles(addr), Louisiana State University(phone), Virginia Commonwealth University(addr+phone),
+Auburn University(addr+phone), University of Vermont(addr+phone), University of
+Massachusetts Amherst(addr+phone), University of Oregon(addr+phone), University of
+Alabama at Birmingham(addr+phone), University of California Santa Cruz(addr+phone),
+University of Hawaii at Manoa(addr+phone), Idaho State University(addr+phone), South
+Dakota State University(addr+phone), University at Albany SUNY(addr+phone).
+
+### 확인 실패/스킵 (근거 불충분 — 추측 채우기 금지 원칙에 따라 NULL 유지)
+
+- **DePaul University, Middle Tennessee State University, University of Oklahoma,
+  University of Tennessee Knoxville**: university_source_urls에 등록된 CDS 링크가
+  전체 CDS가 아니라 특정 섹션(G. Annual Expenses, C. Admission 등)만 담은 부분 PDF라
+  A1 섹션 자체가 없음. 전체 CDS 링크 재탐색 필요.
+- **Georgetown University, University of Wisconsin-Madison**: 최신 CDS가 Box.com
+  공유 링크로만 제공되어 curl/WebFetch로는 JS 셸만 보이고 본문 추출 불가. 브라우저
+  자동화(Claude Browser) 필요.
+- **Washington State University, University of New Mexico, University of Pittsburgh
+  Duquesne University, Binghamton University, University of Washington, SIU
+  Carbondale, University of Rochester, SUNY ESF** 등 일부는 CDS는 확보했으나 메인
+  기관 전화번호 칸이 공란이거나 OCR 컬럼 밀림으로 신뢰도 낮아 phone만 스킵(주소도
+  일부는 도시/우편번호 누락으로 스킵).
+- 그 외 ~60개교(Bowling Green, Brown, Catholic University, Clarkson, Emory, Fordham,
+  Georgia State, Gonzaga, Hofstra, IUPUI, Mississippi State, Morgan State, Ohio
+  University, Pepperdine, RPI, Saint Joseph's, Seton Hall, St. John's, Stanford,
+  UC Berkeley, UC Santa Barbara, U Colorado Boulder, U Dayton, U Idaho, U Maine,
+  U Memphis, U Mississippi, U Missouri, U Nebraska-Lincoln, UNLV, U New Orleans,
+  U North Dakota, U South Dakota, UT Arlington, UT Austin, UT Dallas, U Tulsa,
+  UW-Milwaukee, Virginia Tech, Andrews University 등)은 WebSearch로 CDS 소재는
+  확인했으나 이번 세션 시간 내에 실제 파싱까지 완료하지 못함 — 링크는 위 텍스트에
+  기록된 검색 결과 참고해 다음 세션에서 이어서 진행 가능.
+
+### 결과 커버리지
+
+세션 시작 시점: setting/official_address/official_phone 중 하나라도 NULL인 학교
+148개교(전체 200개교 중). 세션 종료 시점:
+- official_address 채워진 학교: 100/200
+- official_phone 채워진 학교: 106/200
+- setting 채워진 학교: 66/200 (이번 세션에서는 손대지 않음 — CDS A1에 없는 항목)
+- 3개 필드 모두 채워진 학교: 60/200
+- 셋 중 하나라도 NULL인 학교: 140/200 (148→140)
+
+### Non-prod 재sync 필요
+
+이번 세션 변경분은 UPDATE만(DELETE/INSERT 없음), 총 36+4+3+2+5+3+3+3+2+3=약 60여 건의
+official_address/official_phone UPDATE. 로컬 개발 DB(`127.0.0.1:54422`)에만 반영됐고
+non-prod 환경에는 이전 세션들과 마찬가지로 별도 재sync 작업이 필요하다.
