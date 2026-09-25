@@ -378,6 +378,7 @@ function UniversityDetailPanel({
   const [testPolicy, setTestPolicy] = useState(existing?.testPolicy ?? "optional");
   const [gpaAverage, setGpaAverage] = useState(existing?.gpaAverage?.toString() ?? "");
   const [rdDeadline, setRdDeadline] = useState(existing?.rdDeadline ?? "");
+  const [applicationOpensDate, setApplicationOpensDate] = useState(existing?.applicationOpensDate ?? "");
   const [essayCount, setEssayCount] = useState(existing?.essayCount?.toString() ?? "");
   const [acceptanceRate, setAcceptanceRate] = useState(existing?.acceptanceRate?.toString() ?? "");
   // Part 3 — 재학생/입시 통계.
@@ -459,6 +460,7 @@ function UniversityDetailPanel({
           testPolicy,
           gpaAverage: gpaAverage ? Number(gpaAverage) : null,
           rdDeadline: rdDeadline || null,
+          applicationOpensDate: applicationOpensDate || null,
           essayCount: essayCount ? Number(essayCount) : null,
           acceptanceRate: acceptanceRate ? Number(acceptanceRate) : null,
           pellGrantPct: pellGrantPct ? Number(pellGrantPct) : null,
@@ -601,6 +603,7 @@ function UniversityDetailPanel({
           </select>
         </label>
         <Field label="GPA 평균" type="number" value={gpaAverage} onChange={setGpaAverage} />
+        <Field label="지원접수 시작일" type="date" value={applicationOpensDate} onChange={setApplicationOpensDate} />
         <Field label="RD 마감일" type="date" value={rdDeadline} onChange={setRdDeadline} />
         <Field label="ED2 마감일" type="date" value={ed2Deadline} onChange={setEd2Deadline} />
         <Field label="필수 에세이 개수" type="number" value={essayCount} onChange={setEssayCount} />

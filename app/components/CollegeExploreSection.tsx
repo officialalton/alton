@@ -762,6 +762,7 @@ function AdmissionsSection({
     <div className={cardClass}>
       {cyclePick && <YearFallbackNotice selectedYear={selectedYear} effectiveYear={cyclePick.year} />}
       <div className="grid grid-cols-2 gap-4">
+        {stat("지원접수 시작일", cycle.applicationOpensDate, onFlag)}
         {stat("인터뷰", cycle.interviewRequired === true ? "필요/권장" : cycle.interviewRequired === false ? "없음" : null, onFlag)}
         {stat("포트폴리오", cycle.portfolioRequired ? "필요" : null, onFlag)}
         {stat("추천 이수 과정", cycle.recommendedCoursework, onFlag)}
