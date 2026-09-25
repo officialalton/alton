@@ -245,28 +245,28 @@ export async function getConsultantDetailAction(consultantId: string): Promise<C
   if (studentIds.length > 0) {
     const { data: studentMemberships } = await supabase
       .from("household_members")
-      .select("household_id, member_id")
-      .in("member_id", studentIds)
-      .eq("role", "student");
+      .select("household_id, profile_id")
+      .in("profile_id", studentIds)
+      .eq("role", "child");
     const householdOfStudent = new Map<string, string>(
-      (studentMemberships ?? []).map((m) => [m.member_id as string, m.household_id as string])
+      (studentMemberships ?? []).map((m) => [m.profile_id as string, m.household_id as string])
     );
     const householdIds = [...new Set(householdOfStudent.values())];
 
     if (householdIds.length > 0) {
       const { data: guardianMemberships } = await supabase
         .from("household_members")
-        .select("household_id, member_id")
+        .select("household_id, profile_id")
         .in("household_id", householdIds)
         .eq("role", "guardian");
-      const guardianIds = [...new Set((guardianMemberships ?? []).map((m) => m.member_id as string))];
+      const guardianIds = [...new Set((guardianMemberships ?? []).map((m) => m.profile_id as string))];
       const { data: guardianProfiles } = await supabase.from("profiles").select("id, name").in("id", guardianIds);
       const nameById = new Map((guardianProfiles ?? []).map((g) => [g.id as string, g.name as string | null]));
 
       const guardiansByHousehold = new Map<string, string[]>();
       for (const m of guardianMemberships ?? []) {
         const list = guardiansByHousehold.get(m.household_id as string) ?? [];
-        const gname = nameById.get(m.member_id as string);
+        const gname = nameById.get(m.profile_id as string);
         if (gname) list.push(gname);
         guardiansByHousehold.set(m.household_id as string, list);
       }
