@@ -145,6 +145,8 @@
 
 마이그레이션(2026-09-14 배치): `20261346`~`20261403`. 이후 배치는 위 각 항목 참고, 최신은 `20261600000000`(1절 표 참고).
 
+35. **SAT Math 그래프 선택지 필수 정책 버그 수정(2026-09-24)**: `nonlinear_functions`는 일반 AI 파이프라인이 아니라 결정적 Math 컴파일러로 생성되며, 컴파일러가 `require_figure_choice`를 무시해 텍스트 문항을 채택하던 것이 실제 원인. 이차함수의 동일 축 그래프 선택지 4개를 계산해 만들고 정답 자리·오답 근거를 함께 맞췄다. 컴파일러와 일반 파이프라인 양쪽에서 관리자 `require_*` 정책의 자료 누락을 거부하도록 검사하고, 관리자 읽기 전용 검수 화면에도 그래프 4개를 표시한다. DB 변경 없음. 로컬 관리자 브라우저에서 7문항 생성·7건 모두 `figure_choice` 4개·실제 SVG 4개 확인.
+
 ## 5. 검증 구분
 
 - **자동 테스트(로컬 DB)**: 위 전부. 통합 — 부모 변경 반영 25, Drive 자료 15, 채점·재고정·과제·문제 필기·출처 분리·SPR·그림 게이트 21 등. 컴포넌트 — ProblemsPanel 32, ProblemBankTab 28, PDF 레이어 9, HomeworkTab 7, StudentHomeworkTab 3, CurriculumDocsTab 13, Drive 패널 6, 셸 18, figures 4, blocks 4.
@@ -154,6 +156,44 @@
 
 ## 6. 미결·다음 작업 단위
 
+- **R12 보존 자동화 1차 슬라이스 — closure_pending 자동 폐쇄 + closed 계정
+  접근통제(2026-09-24, 완료, `20261900000013`~`20261900000015`)**: §4.13/§4.19의
+  `closure_pending`(30일 철회 유예) → `closed` 자동 전환과, `closed` 계정
+  제한 보관("사유 입력 후에만 접근, 조회는 감사 로그에 남긴다")을 구현.
+  `close_expired_pending_accounts()`(cron 대상, `/api/cron/close-pending-accounts`,
+  다른 크론과 동일 fail-closed — 지금은 CRON_SECRET 미설정으로 비활성),
+  `record_closed_account_access()` + `account_closure_access_events`(append-only
+  감사), 관리자 Users 화면의 `ClosedAccountAccessGate`(사유 입력 전엔
+  StudentDetailPanel/TeacherDetailPanel을 렌더하지 않음). non-prod에서 실제
+  계정으로 30일 경과 backdate → 자동 폐쇄 → 사유 입력 열람 → 감사 기록까지
+  end-to-end 확인 후 테스트 계정 정리(auth.users만 삭제, profiles/
+  account_status_events/account_closure_access_events는 정책대로 보존).
+  **버그 2건 발견·수정**: (1) `is_admin() or auth.role() = 'service_role'`
+  패턴이 `auth.role()`이 NULL일 때(일반 authenticated 세션이 jwt role claim을
+  안 가진 경우) `false or NULL` = NULL → plpgsql이 NULL을 false로 취급해
+  관리자/서비스 게이트를 그냥 통과시키는 fail-open이었다 — `mark_expired_invites()`
+  (`20261900000007`)에도 같은 결함이 있어서 함께 고침(`20261900000014`).
+  (2) `close_expired_pending_accounts()` 초안이 `status_transition_tokens`
+  없이 바로 UPDATE해서 `protect_account_status()` 트리거가 항상 거부.
+  **남은 것**: 자료유형별 보관기간 실제 자동 삭제/비식별화 배치, GW-14
+  (Smart Notes 미검토 원본 1년/확정 리뷰 3년 이중 만료 — Google Drive
+  API 연동 필요, 별도 슬라이스), 정기 스케줄러 연결(현재는 cron 등록만
+  하고 CRON_SECRET 미설정으로 전부 비활성 유지 — 사용자가 활성화 시점 결정).
+- **선생님 학습 플래너 "보드" 탭 연결(2026-09-24, 완료)**: `2026-09-21`에
+  만든 Student Success Planner Board(학부모 포털엔 연결됨)가 선생님 화면에는
+  한 번도 연결되지 않아 항상 "준비 중" placeholder만 보이던 버그를 실사용
+  중 발견·수정(`app/teacher/board-actions.ts` + `TeacherPlannerBoard`,
+  학부모 board-actions와 동일한 읽기 전용/RLS 의존 패턴). "일정"·"오버뷰"
+  탭은 여전히 미구현.
+- **[출시 전 재확인 필요] Question Bank AI 생성 — `require_figure_choice`
+  선택 시 그래프/도형이 실제로 하나도 포함되지 않는 버그(2026-09-24, 발견,
+  별도 세션(`task_119ff183`)에 이관, 수정 미완료)**: 관리자가 SAT Math
+  생성 화면에서 "자료 포함 · 그래프/도형 선택지 4개"를 선택해도 생성된
+  문항에 도형이 붙지 않는다. 코드 추적 결과 `lib/problem-generation/pipeline.ts`의
+  `makeFigure()`가 실패해도 조용히 넘어가고(`console.error`만), 품질 게이트
+  `materialBlocker`가 관리자가 강제한 `figurePolicy`가 아니라 문항 텍스트
+  기준 자체 판정(`judgeMaterialNeed`)만 봐서 무자료 문항도 그냥 통과시키는
+  것으로 추정(확정 아님, 별도 세션에서 실제 로그로 검증 중).
 - **계정 병합·개인정보 삭제 실제 운영 경로 검증 + 관리자 UI 신설(2026-09-24,
   완료, `20261900000012`)**: Section 2 지시("실제 운영 경로를 점검")에 따라
   `merge_accounts()`/`anonymize_merged_account()`(R2 Task 5, 2026-08-31)를
