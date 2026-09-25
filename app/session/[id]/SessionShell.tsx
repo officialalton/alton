@@ -308,24 +308,24 @@ export default function SessionShell({
   }, [scheduledAt, durationMinutes]);
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="flex items-center justify-between gap-4 border-b border-grey-200 px-6 py-3 flex-wrap">
+    <div className="min-h-screen bg-cream">
+      <div className="flex items-center justify-between gap-4 border-b border-brand-border bg-navy px-6 py-3 flex-wrap">
         <div className="flex items-center gap-4">
           <button
             onClick={() => router.push(backHref)}
-            className="text-[13px] text-grey-600 font-semibold whitespace-nowrap border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform"
+            className="text-[13px] text-white font-semibold whitespace-nowrap border border-white/25 rounded-lg px-3 py-1.5 hover:bg-white/10 active:scale-95 transition-transform"
           >
             ← 나가기
           </button>
           {/* P2/P3 5단계 — 학생·과목·회차·목표는 바로 아래 LessonContextHeader가
               한 번만 보여준다. 여기서 같은 내용을 또 쓰면 좁은 화면에서 두 줄이
               겹쳐 읽기 어려워진다. 상단 바에는 나가기와 탭만 남긴다. */}
-          <div className="text-[13px] font-bold text-ink whitespace-nowrap">
+          <div className="text-[13px] font-bold text-white whitespace-nowrap">
             {sessionNumber}회차
           </div>
           {/* 2026-09-14 제품 오너 — 준비 중·예정 일시는 별도 노란 줄이 아니라 회차 옆에. */}
           {state === "prep" && (
-            <span className="text-[12.5px] text-grey-500 whitespace-nowrap" data-testid="prep-schedule">
+            <span className="text-[12.5px] text-[#97A9C8] whitespace-nowrap" data-testid="prep-schedule">
               🗓 수업 준비 중{scheduledLabel ? ` · ${scheduledLabel} 예정` : ""}
             </span>
           )}
@@ -340,8 +340,8 @@ export default function SessionShell({
               className={
                 "text-[13.5px] font-semibold px-3 py-1.5 rounded-lg border " +
                 (activeTab === tab.id
-                  ? "text-ink font-bold bg-grey-100 border-grey-200"
-                  : "text-grey-500 border-transparent")
+                  ? "text-white font-bold bg-brand-red border-brand-red"
+                  : "text-[#97A9C8] border-transparent hover:text-white")
               }
             >
               {tab.label}
@@ -350,7 +350,7 @@ export default function SessionShell({
           {isTeacher && activeTab === "material" && (
             <button
               onClick={() => setTipsVisible((v) => !v)}
-              className="text-[12px] font-semibold px-3 py-1.5 rounded-lg border border-grey-200"
+              className="text-[12px] font-semibold px-3 py-1.5 rounded-lg border border-white/25 text-white"
             >
               💡 티칭 팁 {tipsVisible ? "숨기기" : "보기"}
             </button>
@@ -360,7 +360,7 @@ export default function SessionShell({
               href={smartNotesUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[12px] font-semibold text-grey-500 whitespace-nowrap"
+              className="text-[12px] font-semibold text-[#97A9C8] whitespace-nowrap hover:text-white"
             >
               📄 미팅록 보기
             </a>
@@ -368,12 +368,12 @@ export default function SessionShell({
           {isTeacher && (
             <a
               href={`/teacher/student/${studentId}/roadmap?returnTo=${encodeURIComponent(`/session/${sessionId}`)}`}
-              className="text-[12px] font-semibold text-grey-500 whitespace-nowrap"
+              className="text-[12px] font-semibold text-[#97A9C8] whitespace-nowrap hover:text-white"
             >
               🧭 학생 프로필·로드맵 보기
             </a>
           )}
-          <span className="text-[12px] font-bold px-3.5 py-1.5 rounded-full bg-ink text-white whitespace-nowrap">
+          <span className="text-[12px] font-bold px-3.5 py-1.5 rounded-full bg-brand-red text-white whitespace-nowrap">
             {VIEWER_LABEL[viewerRole]}
           </span>
         </div>
