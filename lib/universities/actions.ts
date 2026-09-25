@@ -140,6 +140,7 @@ export type AdmissionCycle = {
   edDecisionDate: string | null;
   eaDecisionDate: string | null;
   rdDecisionDate: string | null;
+  applicationOpensDate: string | null;
   applicationFee: number | null;
   essayCount: number | null;
   essayTopics: string | null;
@@ -300,6 +301,7 @@ async function loadUniversityDetail(
       edDecisionDate: c.ed_decision_date,
       eaDecisionDate: c.ea_decision_date,
       rdDecisionDate: c.rd_decision_date,
+      applicationOpensDate: c.application_opens_date,
       applicationFee: c.application_fee,
       essayCount: c.essay_count,
       essayTopics: c.essay_topics,
@@ -413,6 +415,7 @@ export type UpsertAdmissionCycleInput = {
   edDecisionDate?: string | null;
   eaDecisionDate?: string | null;
   rdDecisionDate?: string | null;
+  applicationOpensDate?: string | null;
   applicationFee?: number | null;
   essayCount?: number | null;
   essayTopics?: string | null;
@@ -480,6 +483,7 @@ export async function upsertAdmissionCycle(input: UpsertAdmissionCycleInput): Pr
       ed_decision_date: input.edDecisionDate ?? null,
       ea_decision_date: input.eaDecisionDate ?? null,
       rd_decision_date: input.rdDecisionDate ?? null,
+      application_opens_date: input.applicationOpensDate ?? null,
       application_fee: input.applicationFee ?? null,
       essay_count: input.essayCount ?? null,
       essay_topics: input.essayTopics ?? null,
