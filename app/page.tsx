@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import Link from "next/link";
 import ConsultForm from "./ConsultForm";
+import LandingCtaLink from "./LandingCtaLink";
 
 const PILLARS = [
   {
@@ -83,12 +84,14 @@ export default function LandingPage() {
             <Link href="/login" className="text-[13.5px] font-semibold text-grey-700 hover:text-ink">
               로그인
             </Link>
-            <a
+            <LandingCtaLink
               href="#consult"
+              ctaName="consult_signup"
+              section="header"
               className="px-4 py-2 rounded-lg bg-red text-white text-[13.5px] font-bold"
             >
               상담 신청
-            </a>
+            </LandingCtaLink>
           </div>
         </div>
       </header>

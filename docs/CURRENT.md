@@ -157,6 +157,53 @@
 
 ## 6. 미결·다음 작업 단위
 
+- **제품 분석 P0 — Vercel Web Analytics/Speed Insights + 상담 전환 이벤트 3종
+  (2026-09-25, 완료, `docs/2026-09-25-product-analytics-prd.md` 기준)**:
+  랜딩·상담 신청 전환을 측정할 최소 분석 기반. 대학 탐색은 이번 범위에서
+  명시적으로 제외.
+  - **연결**: `@vercel/analytics`/`@vercel/speed-insights`를
+    `app/layout.tsx`에 `AnalyticsScripts`(서버 컴포넌트)로 연결. 이
+    컴포넌트는 `process.env.NEXT_PUBLIC_VERCEL_ENV === "production"`일
+    때만 `<Analytics/>`/`<SpeedInsights/>`를 렌더링한다 — `next.config.ts`가
+    `VERCEL_ENV`(Vercel 시스템 환경변수, 기본적으로 클라이언트 미노출)를
+    `NEXT_PUBLIC_VERCEL_ENV`로 명시 복사해, 프로젝트의 "Automatically
+    expose System Environment Variables" 설정 여부와 무관하게 항상 동작한다.
+    local/test/Preview는 이 값이 없거나 `"preview"`라 스크립트 자체가
+    내려가지 않는다(별도 활성화 필요 없음, 설정 하나로 충분).
+  - **공통 이벤트 모듈**: `lib/analytics/`
+    (`events.ts`=이벤트별 허용 속성 화이트리스트 단일 진실 소스,
+    `track.ts`=`trackEvent()`, `config.ts`=환경 판정,
+    `AnalyticsScripts.tsx`). 화면 코드는 `trackEvent(eventName, props)`만
+    호출 — 도구 종류·허용 속성은 전부 이 모듈이 결정한다.
+  - **이벤트 3종**(P0, PRD 축소판 — 대학 탐색 이벤트 2종은 제외):
+    `landing_cta_clicked`(`cta_name`, `section`) — 랜딩 헤더 "상담 신청"
+    링크 클릭(`app/LandingCtaLink.tsx`). `consultation_started`
+    (`entry_point`) — 상담 폼 첫 포커스, 폼 인스턴스당 1회(`onceKey`).
+    `consultation_submitted`(`entry_point`, `consultation_type`) — 서버
+    저장 성공 직후에만, 실패(catch)에는 보내지 않음 — 전부
+    `app/ConsultForm.tsx`.
+  - **개인정보 방어**: `trackEvent()`가 이벤트별 화이트리스트에 없는 속성은
+    무조건 버린다(블랙리스트가 아니라 화이트리스트라 실수로 넣은 새 필드가
+    기본적으로 새어나가지 않는다). `page_path`는 호출부 입력을 쓰지 않고
+    `window.location.pathname`에서 직접 읽어 쿼리스트링·fragment를 원천
+    차단한다.
+  - **중복 방지**: `onceKey`(폼당 1회성 이벤트)와 짧은 시간창 디바운스
+    (연타 방지) 두 가지 메커니즘. 분석 전송 예외는 항상 삼켜 실제 기능
+    (로그인·상담 제출)에 영향 없음.
+  - **검증**: tsc/eslint 클린. 신규 유닛 테스트 24건(환경 게이팅, 화이트
+    리스트, PII 미포함, 중복 방지, 실패 시 미발생 등) 전부 통과. 전체 회귀
+    2694/2708(12 skip) 통과(무관한 기존 flaky 지오메트리 테스트 1건 제외).
+  - **Preview 확인**: 랜딩 CTA 클릭·상담 폼 작성·제출 성공 흐름을 실제
+    브라우저로 확인(아래 최종 보고 참고) — Preview에서는 분석 스크립트
+    자체가 로드되지 않아 네트워크 전송이 없음을 확인.
+  - **운영 전 필요 작업(코드 변경 아님, 사람이 해야 함)**: Vercel
+    프로젝트 설정에서 Web Analytics와 Speed Insights를 활성화해야
+    실제 프로덕션 배포에서 대시보드에 데이터가 쌓인다(Project → Analytics
+    / Speed Insights 탭에서 Enable). 코드는 이미 조건부로 스크립트를
+    내려주므로, 이 활성화 전에는 프로덕션에서도 대시보드가 비어 있을 뿐
+    기능·성능에는 영향 없다.
+  - **남은 것**: P1(대학 탐색 이벤트 2종, PostHog/GA4)은 이번 범위 밖 —
+    별도 지시 대기.
 - **R12 보존 자동화 1차 슬라이스 — closure_pending 자동 폐쇄 + closed 계정
   접근통제(2026-09-24, 완료, `20261900000013`~`20261900000015`)**: §4.13/§4.19의
   `closure_pending`(30일 철회 유예) → `closed` 자동 전환과, `closed` 계정

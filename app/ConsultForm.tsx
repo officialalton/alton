@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { submitHomepageConsultRequest } from "./consult-actions";
+import { trackEvent } from "@/lib/analytics/track";
 
 // M1 — 홈페이지 상담 신청 폼.
 // 2026-09-22(컨설턴트 스펙 Phase 2b, 사용자 승인 "지금 바로 랜딩 폼도 스펙대로
@@ -25,6 +26,13 @@ export default function ConsultForm() {
     submissionNonceRef.current = crypto.randomUUID();
   }
 
+  function handleFormFocus() {
+    // 제품 분석 P0(2026-09-25) — 폼을 처음 열거나 작성을 시작한 시점(첫 입력 포커스)에
+    // 1회만 발생. submissionNonceRef는 이 폼 인스턴스마다 한 번만 만들어지므로
+    // onceKey로 쓰면 리렌더·재포커스로 중복 집계되지 않는다.
+    trackEvent("consultation_started", { entry_point: "landing_form" }, { onceKey: submissionNonceRef.current! });
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
@@ -43,6 +51,12 @@ export default function ConsultForm() {
         idempotencyKey: `${email.trim().toLowerCase()}-${submissionNonceRef.current}`,
       });
       setSubmitted(true);
+      // 서버 저장이 성공한 뒤에만 발생 — 실패 시(catch)에는 절대 보내지 않는다.
+      trackEvent(
+        "consultation_submitted",
+        { entry_point: "landing_form", consultation_type: "homepage" },
+        { onceKey: submissionNonceRef.current! }
+      );
     } catch (err) {
       setError(err instanceof Error ? err.message : "신청에 실패했습니다.");
     } finally {
@@ -67,6 +81,7 @@ export default function ConsultForm() {
   return (
     <form
       onSubmit={handleSubmit}
+      onFocusCapture={handleFormFocus}
       className="rounded-2xl border-[1.5px] border-grey-200 bg-white px-6 py-8 sm:px-10 sm:py-10"
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
