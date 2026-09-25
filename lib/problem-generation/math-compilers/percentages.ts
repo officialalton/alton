@@ -5,6 +5,7 @@
 // 주어졌을 때 몇 %인지 역으로 구하기), compound_change(복합 퍼센트 변화: 두 번의 연속
 // 증감을 합성한 전체 변화율/최종값). 둘 다 결정적 계산이며 AI를 호출하지 않는다.
 import type { DistractorRationale, DistractorKind } from "../review";
+import type { DataSpec } from "@/lib/problem-figures/templates/data";
 
 export type PercentagesQuestionKind =
   | "percent_of"
@@ -70,6 +71,9 @@ function pickUnique(
 export function generatePercentagesModel(params: {
   difficulty: PercentagesDifficulty;
   questionKind?: PercentagesQuestionKind;
+  /** 2026-09-24(UAT 지적) — require_data 는 표로 보여줄 두 수량(전·후)이 있는
+   * percent_change 로 고정한다. */
+  figureMode?: "data";
 }): PercentagesModel {
   const kinds: PercentagesQuestionKind[] = [
     "percent_of",
@@ -78,7 +82,7 @@ export function generatePercentagesModel(params: {
     "find_percent",
     "compound_change",
   ];
-  const questionKind = params.questionKind ?? kinds[randInt(0, kinds.length - 1)];
+  const questionKind = params.figureMode === "data" ? "percent_change" : params.questionKind ?? kinds[randInt(0, kinds.length - 1)];
   const percentPool = PERCENT_POOL_BY_DIFFICULTY[params.difficulty];
   const baseRange = BASE_RANGE_BY_DIFFICULTY[params.difficulty];
 
@@ -273,15 +277,16 @@ export type CompiledMathProblem = {
   correctIndex: number;
   explanation: string;
   explanationEn: string;
-  figure: null;
+  figure: DataSpec | null;
   distractorRationales: DistractorRationale[];
 };
 
-export function renderPercentagesProblem(model: PercentagesModel): CompiledMathProblem {
+export function renderPercentagesProblem(model: PercentagesModel, opts?: { figureMode?: "data" }): CompiledMathProblem {
   let passage: string;
   let question: string;
   let explanation: string;
   let explanationEn: string;
+  let figure: DataSpec | null = null;
 
   if (model.questionKind === "percent_of") {
     passage = `A store has ${fmt(model.base)} items in stock.`;
@@ -295,7 +300,8 @@ export function renderPercentagesProblem(model: PercentagesModel): CompiledMathP
     explanationEn = `x×${fmt(model.percent)}÷100 = ${fmt(model.base)}, so x = ${fmt(model.base)}×100÷${fmt(model.percent)} = ${model.correctAnswer}.`;
   } else if (model.questionKind === "percent_change") {
     const direction = model.changed! > model.original! ? "increased" : "decreased";
-    passage = `A quantity ${direction} from ${fmt(model.original!)} to ${fmt(model.changed!)}.`;
+    passage = `A quantity ${direction} from ${fmt(model.original!)} to ${fmt(model.changed!)}.` + (opts?.figureMode === "data" ? " The before-and-after values are also shown in the table below." : "");
+    if (opts?.figureMode === "data") figure = { type: "data", kind: "table", title: "Before and after", columns: ["Time", "Value"], rows: [["Before", model.original!], ["After", model.changed!]] };
     question = "By what percent did the quantity change (as a positive number)?";
     const delta = Math.abs(model.changed! - model.original!);
     explanation = `변화량은 |${fmt(model.changed!)} - ${fmt(model.original!)}| = ${fmt(delta)}이고, 변화율은 항상 원래 값을 기준으로 하므로 ${fmt(delta)}÷${fmt(model.original!)}×100 = ${model.correctAnswer}%이다.`;
@@ -355,5 +361,5 @@ export function renderPercentagesProblem(model: PercentagesModel): CompiledMathP
     obvious: false,
   }));
 
-  return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
+  return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure, distractorRationales };
 }

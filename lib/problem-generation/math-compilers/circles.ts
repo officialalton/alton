@@ -2,6 +2,7 @@
 // 원의 둘레, 호의 길이, 부채꼴의 넓이, 중심각·원주각 관계를 코드로 계산한다. AI는
 // 전혀 부르지 않는다 — 정답·오답·그림 데이터를 전부 이 모듈이 확정한 값에서만 만든다.
 import type { CircleSpec } from "@/lib/problem-figures/templates/circle";
+import type { PlaneSpec } from "@/lib/problem-figures/templates/coordinate-plane";
 import type { DistractorRationale, DistractorKind } from "../review";
 
 export type CirclesQuestionKind = "circumference_radius" | "circumference_diameter" | "arc_length" | "sector_area" | "central_from_inscribed" | "inscribed_from_central" | "circle_equation_transform";
@@ -87,9 +88,12 @@ function pickUnique(
 export function generateCirclesModel(params: {
   difficulty: CirclesDifficulty;
   questionKind?: CirclesQuestionKind;
+  /** 2026-09-24(UAT 지적) — require_plane 은 좌표평면의 원의 방정식 문항(circle_equation_transform)만
+   * 그 자료와 짝지을 수 있다(다른 유형은 도형 자료다) — 강제로 그 유형으로 고정한다. */
+  figureMode?: "geometry" | "plane";
 }): CirclesModel {
   const pool = KINDS_BY_DIFFICULTY[params.difficulty];
-  const questionKind = params.questionKind ?? pool[randInt(0, pool.length - 1)];
+  const questionKind = params.questionKind ?? (params.figureMode === "plane" ? "circle_equation_transform" : pool[randInt(0, pool.length - 1)]);
 
   for (let attempt = 0; attempt < 30; attempt++) {
     if (questionKind === "circumference_radius") {
@@ -297,9 +301,20 @@ export type CompiledMathProblem = {
   correctIndex: number;
   explanation: string;
   explanationEn: string;
-  figure: CircleSpec | null;
+  figure: CircleSpec | PlaneSpec | null;
   distractorRationales: DistractorRationale[];
 };
+
+/** circle_equation_transform 문항에 실제 좌표평면 원을 그린다 — 이동 변형은 이동 전 원을 보여준다. */
+function buildCirclePlaneFigure(centerH: number, centerK: number, radius: number): PlaneSpec {
+  const margin = 2;
+  return {
+    type: "plane",
+    axes: { x: { min: centerH - radius - margin, max: centerH + radius + margin }, y: { min: centerK - radius - margin, max: centerK + radius + margin } },
+    objects: [{ id: "c", kind: "circle", center: [centerH, centerK], radius, label: "c" }],
+    grid: true,
+  };
+}
 
 function circleEquationQuestion(model: CirclesModel): string {
   if (model.eqVariant === "shift") return "Which equation represents the new circle after this shift?";
@@ -307,7 +322,8 @@ function circleEquationQuestion(model: CirclesModel): string {
   return "Which equation represents this circle?";
 }
 
-export function renderCirclesProblem(model: CirclesModel): CompiledMathProblem {
+export function renderCirclesProblem(model: CirclesModel, opts?: { figureMode?: "geometry" | "plane" }): CompiledMathProblem {
+  const wantsPlane = opts?.figureMode === "plane";
   const question =
     model.questionKind === "circumference_radius" || model.questionKind === "circumference_diameter" ? "What is the circumference of the circle shown, in terms of π?"
     : model.questionKind === "arc_length" ? "What is the length of arc AB, in terms of π?"
@@ -332,7 +348,7 @@ export function renderCirclesProblem(model: CirclesModel): CompiledMathProblem {
   let passage: string;
   let explanation: string;
   let explanationEn: string;
-  let figure: CircleSpec | null;
+  let figure: CircleSpec | PlaneSpec | null;
 
   if (model.questionKind === "circumference_radius") {
     const { radius } = model as { radius: number };
@@ -377,22 +393,24 @@ export function renderCirclesProblem(model: CirclesModel): CompiledMathProblem {
     explanationEn = `An inscribed angle is half the central angle that subtends the same arc, so the inscribed angle = ${centralAngle}° ÷ 2 = ${fmt(inscribedAngle)}°.`;
     figure = { type: "circle", center: "O", points: [{ id: "A", angle: 0 }, { id: "B", angle: centralAngle }, { id: "C", angle: 220 }], radii: [{ to: "A" }, { to: "B" }], centralAngles: [{ between: ["A", "B"], label: `${centralAngle}°` }] };
   } else {
-    // circle_equation_transform — 좌표평면 그림 없이 대수적으로만 다룬다(방정식 자체가 자료).
+    // circle_equation_transform — 기본은 방정식 자체가 자료(그림 없음). figureMode가 plane이면
+    // (2026-09-24 UAT 지적) 이동 전 원을 실제 좌표평면에 그린다.
     const { eqVariant, centerH, centerK, radius } = model as { eqVariant: CircleEqVariant; centerH: number; centerK: number; radius: number };
-    figure = null;
+    figure = wantsPlane ? buildCirclePlaneFigure(centerH, centerK, radius) : null;
+    const shownBelow = wantsPlane ? " The circle is shown in the xy-plane below." : "";
     if (eqVariant === "shift") {
       const { shiftDx, shiftDy } = model as { shiftDx: number; shiftDy: number };
       const newH = centerH + shiftDx;
       const newK = centerK - shiftDy;
       const original = correctEquation(centerH, centerK, radius);
       const moved = correctEquation(newH, newK, radius);
-      passage = `A circle in the xy-plane is defined by the equation ${original}. The circle is shifted ${shiftDx} units to the right and ${shiftDy} units down.`;
+      passage = `A circle in the xy-plane is defined by the equation ${original}. The circle is shifted ${shiftDx} units to the right and ${shiftDy} units down.${shownBelow}`;
       explanation = `원래 방정식에서 중심은 (${fmt(centerH)}, ${fmt(centerK)})이고 반지름은 ${fmt(radius)}이다. 오른쪽으로 ${shiftDx}만큼 이동하면 h는 ${fmt(centerH)} + ${shiftDx} = ${fmt(newH)}가 되고, 아래로 ${shiftDy}만큼 이동하면 k는 ${fmt(centerK)} − ${shiftDy} = ${fmt(newK)}가 된다(아래로 이동은 y좌표가 줄어드는 방향이다). 반지름은 그대로이므로 새 방정식은 ${moved}이다.`;
       explanationEn = `In the original equation, the center is (${fmt(centerH)}, ${fmt(centerK)}) and the radius is ${fmt(radius)}. Shifting ${shiftDx} units right changes h to ${fmt(centerH)} + ${shiftDx} = ${fmt(newH)}, and shifting ${shiftDy} units down changes k to ${fmt(centerK)} − ${shiftDy} = ${fmt(newK)} (moving down decreases the y-coordinate). The radius stays the same, so the new equation is ${moved}.`;
     } else if (eqVariant === "center_radius") {
       const { askFor } = model as { askFor: "radius" | "center" };
       const eq = correctEquation(centerH, centerK, radius);
-      passage = `A circle in the xy-plane is defined by the equation ${eq}.`;
+      passage = `A circle in the xy-plane is defined by the equation ${eq}.${shownBelow}`;
       if (askFor === "radius") {
         explanation = `방정식을 (x-h)² + (y-k)² = r² 형태와 비교하면 r² = ${fmt(radius * radius)}이므로 반지름 r = √${fmt(radius * radius)} = ${fmt(radius)}이다.`;
         explanationEn = `Comparing with (x-h)² + (y-k)² = r², r² = ${fmt(radius * radius)}, so the radius r = √${fmt(radius * radius)} = ${fmt(radius)}.`;
@@ -403,7 +421,7 @@ export function renderCirclesProblem(model: CirclesModel): CompiledMathProblem {
     } else {
       // match_equation
       const eq = correctEquation(centerH, centerK, radius);
-      passage = `A circle in the xy-plane has center (${fmt(centerH)}, ${fmt(centerK)}) and radius ${fmt(radius)}.`;
+      passage = `A circle in the xy-plane has center (${fmt(centerH)}, ${fmt(centerK)}) and radius ${fmt(radius)}.${shownBelow}`;
       explanation = `중심 (h, k) = (${fmt(centerH)}, ${fmt(centerK)})과 반지름 r = ${fmt(radius)}를 (x-h)² + (y-k)² = r²에 대입하면 ${eq}이다.`;
       explanationEn = `Substituting center (h, k) = (${fmt(centerH)}, ${fmt(centerK)}) and radius r = ${fmt(radius)} into (x-h)² + (y-k)² = r² gives ${eq}.`;
     }

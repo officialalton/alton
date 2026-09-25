@@ -246,11 +246,18 @@ function attemptOne(
     distractorRationales: ReturnType<typeof renderLinearTwoVarProblem>["distractorRationales"];
   };
   if (skillCode === "linear_equations_two_var" || skillCode === "systems_linear") {
-    const model = generateLinearTwoVarModel({ difficulty, questionKind: kind as Parameters<typeof generateLinearTwoVarModel>[0]["questionKind"] });
+    // 2026-09-24(UAT 지적) — systems_linear의 "그래프 선택지 4개"는 실제 교점이 있는
+    // 시스템(one_solution)이어야 그래프 넷을 의미 있게 구분할 수 있다 — kind를
+    // intersection_x로 고정해(수치 정답은 버리고 그래프만 쓴다) 항상 그 경로를 타게 한다.
+    const wantsFigureChoice = skillCode === "systems_linear" && figurePolicy === "require_figure_choice";
+    if (wantsFigureChoice && kind && kind !== "intersection_x") {
+      return { ok: false, reason: `선택한 세부 패턴 '${kind}'은 그래프 선택지 4개 자료를 지원하지 않습니다.` };
+    }
+    const model = generateLinearTwoVarModel({ difficulty, questionKind: (wantsFigureChoice ? "intersection_x" : kind) as Parameters<typeof generateLinearTwoVarModel>[0]["questionKind"] });
     usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
     const check = validateLinearTwoVarModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
-    compiled = renderLinearTwoVarProblem(model);
+    compiled = renderLinearTwoVarProblem(model, wantsFigureChoice ? { figureMode: "figure_choice" } : undefined);
   } else if (skillCode === "linear_inequalities") {
     const model = generateLinearInequalityModel({ difficulty, questionKind: kind as Parameters<typeof generateLinearInequalityModel>[0]["questionKind"] });
     usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
@@ -264,11 +271,14 @@ function attemptOne(
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
     compiled = renderLinearOneVarProblem(model);
   } else if (skillCode === "linear_functions") {
-    const model = generateLinearFunctionModel({ difficulty, questionKind: kind as Parameters<typeof generateLinearFunctionModel>[0]["questionKind"] });
+    // 2026-09-24(UAT 지적) — require_plane/require_data 를 골라도 실제 자료를 안 그려 늘
+    // 텍스트형으로만 나가던 결함. figureMode를 모델 생성·렌더 양쪽에 전달한다.
+    const linearFnFigureMode = figurePolicy === "require_plane" ? "plane" : figurePolicy === "require_data" ? "data" : "text";
+    const model = generateLinearFunctionModel({ difficulty, questionKind: kind as Parameters<typeof generateLinearFunctionModel>[0]["questionKind"], figureMode: linearFnFigureMode });
     usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
     const check = validateLinearFunctionModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
-    compiled = renderLinearFunctionProblem(model);
+    compiled = renderLinearFunctionProblem(model, { figureMode: linearFnFigureMode });
   } else if (skillCode === "equivalent_expressions") {
     const model = generateEquivalentExpressionsModel({ difficulty, kind: kind as Parameters<typeof generateEquivalentExpressionsModel>[0]["kind"] });
     usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
@@ -276,11 +286,17 @@ function attemptOne(
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
     compiled = renderEquivalentExpressionsProblem(model);
   } else if (skillCode === "nonlinear_equations_systems") {
-    const model = generateNonlinearEqModel({ difficulty, questionKind: kind as Parameters<typeof generateNonlinearEqModel>[0]["questionKind"] });
+    // 2026-09-24(UAT 지적) — require_plane 은 linear_quadratic_intersection(일차·이차
+    // 연립 교점)으로 고정해야 실제로 그릴 좌표평면 그래프가 있다.
+    const nonlinearEqFigureMode = figurePolicy === "require_plane" ? "plane" as const : undefined;
+    if (nonlinearEqFigureMode && kind && kind !== "linear_quadratic_intersection") {
+      return { ok: false, reason: `선택한 세부 패턴 '${kind}'은 좌표평면 자료를 지원하지 않습니다(일차·이차 연립 교점 유형만 가능합니다).` };
+    }
+    const model = generateNonlinearEqModel({ difficulty, questionKind: (kind ?? undefined) as Parameters<typeof generateNonlinearEqModel>[0]["questionKind"], figureMode: nonlinearEqFigureMode });
     usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
     const check = validateNonlinearEqModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
-    compiled = renderNonlinearEqProblem(model);
+    compiled = renderNonlinearEqProblem(model, { figureMode: nonlinearEqFigureMode });
   } else if (skillCode === "nonlinear_functions") {
     // 그래프 4개 선택은 현재 이차함수의 결정적 그래프 생성기로 만든다.
     // 지수함수 문맥 해석 패턴은 그림 선택지가 아니므로 섞지 않는다.
@@ -293,17 +309,29 @@ function attemptOne(
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
     compiled = renderNonlinearFnProblem(model, { figureMode: figurePolicy === "require_figure_choice" ? "figure_choice" : figurePolicy === "require_plane" ? "plane" : "text" });
   } else if (skillCode === "ratios_rates_units") {
-    const model = generateRatiosRatesModel({ difficulty, questionKind: kind as Parameters<typeof generateRatiosRatesModel>[0]["questionKind"] });
+    // 2026-09-24(UAT 지적) — require_data 는 proportion(비례식)으로 고정해야 표로
+    // 보여줄 두 수량이 있다(연쇄 단위환산은 표 자료와 맞지 않는다).
+    const ratiosFigureMode = figurePolicy === "require_data" ? "data" as const : undefined;
+    if (ratiosFigureMode && kind && kind !== "proportion") {
+      return { ok: false, reason: `선택한 세부 패턴 '${kind}'은 표 자료를 지원하지 않습니다(비례식 유형만 가능합니다).` };
+    }
+    const model = generateRatiosRatesModel({ difficulty, questionKind: (kind ?? undefined) as Parameters<typeof generateRatiosRatesModel>[0]["questionKind"], figureMode: ratiosFigureMode });
     usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
     const check = validateRatiosRatesModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
-    compiled = renderRatiosRatesProblem(model);
+    compiled = renderRatiosRatesProblem(model, { figureMode: ratiosFigureMode });
   } else if (skillCode === "percentages") {
-    const model = generatePercentagesModel({ difficulty, questionKind: kind as Parameters<typeof generatePercentagesModel>[0]["questionKind"] });
+    // 2026-09-24(UAT 지적) — require_data 는 전·후 값을 표로 보여줄 수 있는
+    // percent_change 로 고정한다.
+    const percentagesFigureMode = figurePolicy === "require_data" ? "data" as const : undefined;
+    if (percentagesFigureMode && kind && kind !== "percent_change") {
+      return { ok: false, reason: `선택한 세부 패턴 '${kind}'은 표 자료를 지원하지 않습니다(증감률 유형만 가능합니다).` };
+    }
+    const model = generatePercentagesModel({ difficulty, questionKind: (kind ?? undefined) as Parameters<typeof generatePercentagesModel>[0]["questionKind"], figureMode: percentagesFigureMode });
     usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
     const check = validatePercentagesModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
-    compiled = renderPercentagesProblem(model);
+    compiled = renderPercentagesProblem(model, { figureMode: percentagesFigureMode });
   } else if (skillCode === "one_variable_data") {
     const model = generateOneVarDataModel({ difficulty, questionKind: kind as Parameters<typeof generateOneVarDataModel>[0]["questionKind"] });
     usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
@@ -323,17 +351,20 @@ function attemptOne(
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
     compiled = renderProbabilityProblem(model);
   } else if (skillCode === "inference_margin_error") {
+    // 2026-09-24(UAT 지적) — 이 유형은 모델이 하나뿐이라 강제할 세부 패턴이 없다.
+    const inferenceFigureMode = figurePolicy === "require_data" ? "data" as const : undefined;
     const model = generateInferenceModel({ difficulty });
     usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
     const check = validateInferenceModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
-    compiled = renderInferenceProblem(model);
+    compiled = renderInferenceProblem(model, { figureMode: inferenceFigureMode });
   } else if (skillCode === "evaluating_statistical_claims") {
+    const evalClaimsFigureMode = figurePolicy === "require_data" ? "data" as const : undefined;
     const model = generateEvalClaimsModel({ difficulty });
     usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
     const check = validateEvalClaimsModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
-    compiled = renderEvalClaimsProblem(model);
+    compiled = renderEvalClaimsProblem(model, { figureMode: evalClaimsFigureMode });
   } else if (skillCode === "area_volume") {
     const model = generateAreaVolumeModel({ difficulty, questionKind: kind as Parameters<typeof generateAreaVolumeModel>[0]["questionKind"] });
     usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
@@ -353,11 +384,18 @@ function attemptOne(
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
     compiled = renderRightTriProblem(model);
   } else if (skillCode === "circles") {
-    const model = generateCirclesModel({ difficulty, questionKind: kind as Parameters<typeof generateCirclesModel>[0]["questionKind"] });
+    // 2026-09-24(UAT 지적) — require_plane 은 circle_equation_transform(좌표평면 원의 방정식)으로
+    // 고정하고 실제 원을 그린다. 다른 세부 패턴을 강제로 골랐는데 require_plane이면 지원하지
+    // 않는 조합이라 명시적으로 거절한다(조용히 도형으로 대체하지 않는다).
+    const circlesFigureMode = figurePolicy === "require_plane" ? "plane" : "geometry";
+    if (circlesFigureMode === "plane" && kind && kind !== "circle_equation_transform") {
+      return { ok: false, reason: `선택한 세부 패턴 '${kind}'은 좌표평면 자료를 지원하지 않습니다(원의 방정식 유형만 가능합니다).` };
+    }
+    const model = generateCirclesModel({ difficulty, questionKind: (kind ?? undefined) as Parameters<typeof generateCirclesModel>[0]["questionKind"], figureMode: circlesFigureMode });
     usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
     const check = validateCirclesModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
-    compiled = renderCirclesProblem(model);
+    compiled = renderCirclesProblem(model, { figureMode: circlesFigureMode });
   } else {
     return { ok: false, reason: `지원하지 않는 계산형 유형: ${skillCode}` };
   }

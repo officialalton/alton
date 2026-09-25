@@ -4,6 +4,7 @@
 // 어떤 결론(인과·일반화 가능 여부)을 낼 수 있는지 묻는다. 정답·오답이 전부 네 조합의
 // 고정 문구이므로 계산이 아니라 조합 자체가 결정적 정답 모델이다. AI를 전혀 부르지 않는다.
 import type { DistractorRationale, DistractorKind } from "../review";
+import type { DataSpec } from "@/lib/problem-figures/templates/data";
 
 export type EvalClaimsDifficulty = "easy" | "medium" | "hard";
 
@@ -81,11 +82,12 @@ export type CompiledMathProblem = {
   correctIndex: number;
   explanation: string;
   explanationEn: string;
-  figure: null;
+  figure: DataSpec | null;
   distractorRationales: DistractorRationale[];
 };
 
-export function renderEvalClaimsProblem(model: EvalClaimsModel): CompiledMathProblem {
+export function renderEvalClaimsProblem(model: EvalClaimsModel, opts?: { figureMode?: "data" }): CompiledMathProblem {
+  const wantsData = opts?.figureMode === "data";
   const t = JSON.parse(model.topic) as { subject: string; treatment: string; outcome: string };
   const assignmentSentence = model.randomAssignment
     ? `Researchers randomly assigned each participant to either use ${t.treatment} or not.`
@@ -93,7 +95,9 @@ export function renderEvalClaimsProblem(model: EvalClaimsModel): CompiledMathPro
   const samplingSentence = model.randomSampling
     ? `The participants were selected at random from all ${t.subject}.`
     : `The participants were a group of ${t.subject} who volunteered for the study (not selected at random from all ${t.subject}).`;
-  const passage = `A study examined the effect of ${t.treatment} on ${t.outcome} among ${t.subject}. ${samplingSentence} ${assignmentSentence}`;
+  const passage = `A study examined the effect of ${t.treatment} on ${t.outcome} among ${t.subject}. ${samplingSentence} ${assignmentSentence}`
+    + (wantsData ? " The study design is also summarized in the table below." : "");
+  const figure: DataSpec | null = wantsData ? { type: "data", kind: "table", title: "Study design", columns: ["Feature", "Present"], rows: [["Random sampling", model.randomSampling ? "Yes" : "No"], ["Random assignment", model.randomAssignment ? "Yes" : "No"]] } : null;
   const question = "Based on the design of the study, which of the following is an appropriate conclusion?";
 
   const options = [model.correctAnswer, ...model.distractors.map((d) => d.value)];
@@ -115,5 +119,5 @@ export function renderEvalClaimsProblem(model: EvalClaimsModel): CompiledMathPro
     obvious: false,
   }));
 
-  return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
+  return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure, distractorRationales };
 }

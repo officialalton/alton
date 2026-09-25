@@ -6,6 +6,7 @@
 // (2단계 이상 순차 단위환산, 예: inches→feet→yards, mph→ft/s) 세부 유형을 추가한다.
 // 전부 결정적 코드 계산 — AI 호출 없음.
 import type { DistractorRationale, DistractorKind } from "../review";
+import type { DataSpec } from "@/lib/problem-figures/templates/data";
 
 export type RatiosRatesDifficulty = "easy" | "medium" | "hard";
 export type RatiosRatesQuestionKind = "proportion" | "chained_conversion";
@@ -217,9 +218,12 @@ function generateChainedConversionModel(params: { difficulty: RatiosRatesDifficu
 export function generateRatiosRatesModel(params: {
   difficulty: RatiosRatesDifficulty;
   questionKind?: RatiosRatesQuestionKind;
+  /** 2026-09-24(UAT 지적) — require_data 는 표로 보여줄 수 있는 proportion 으로
+   * 고정한다(연쇄 단위환산은 표 자료와 짝짓지 않는다). */
+  figureMode?: "data";
 }): RatiosRatesModel {
   const kinds: RatiosRatesQuestionKind[] = ["proportion", "chained_conversion"];
-  const questionKind = params.questionKind ?? kinds[randInt(0, kinds.length - 1)];
+  const questionKind = params.figureMode === "data" ? "proportion" : params.questionKind ?? kinds[randInt(0, kinds.length - 1)];
   if (questionKind === "chained_conversion") return generateChainedConversionModel({ difficulty: params.difficulty });
   return generateProportionModel({ difficulty: params.difficulty });
 }
@@ -246,7 +250,7 @@ export type CompiledMathProblem = {
   correctIndex: number;
   explanation: string;
   explanationEn: string;
-  figure: null;
+  figure: DataSpec | null;
   distractorRationales: DistractorRationale[];
 };
 
@@ -290,18 +294,21 @@ function renderChainedConversionProblem(model: ChainedConversionModel): Compiled
   return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
 }
 
-function renderProportionProblem(model: ProportionModel): CompiledMathProblem {
-  const passage = `The ratio of ${model.itemA} to ${model.itemB} is ${fmt(model.a)} to ${fmt(model.b)}. A recipe or plan uses ${fmt(model.c)} ${model.itemA} that follows this same ratio.`;
+function renderProportionProblem(model: ProportionModel, opts?: { figureMode?: "data" }): CompiledMathProblem {
+  const wantsData = opts?.figureMode === "data";
+  const passage = `The ratio of ${model.itemA} to ${model.itemB} is ${fmt(model.a)} to ${fmt(model.b)}. A recipe or plan uses ${fmt(model.c)} ${model.itemA} that follows this same ratio.`
+    + (wantsData ? " The base ratio is also shown in the table below." : "");
   const question = `Based on the ratio shown, how many ${model.itemB} are needed?`;
 
   const explanation = `비율 ${fmt(model.a)}:${fmt(model.b)} = ${fmt(model.c)}:x가 성립해야 하므로 x = ${fmt(model.c)}×${fmt(model.b)}÷${fmt(model.a)} = ${model.correctAnswer}이다.`;
   const explanationEn = `The proportion ${fmt(model.a)}:${fmt(model.b)} = ${fmt(model.c)}:x must hold, so x = ${fmt(model.c)}×${fmt(model.b)}÷${fmt(model.a)} = ${model.correctAnswer}.`;
+  const figure: DataSpec | null = wantsData ? { type: "data", kind: "table", title: "Base ratio", columns: [model.itemA, model.itemB], rows: [[model.a, model.b]] } : null;
 
   const { shuffled, correctIndex, distractorRationales } = shuffleOptions(model.correctAnswer, model.distractors);
-  return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure: null, distractorRationales };
+  return { passage, question, options: shuffled, correctIndex, explanation, explanationEn, figure, distractorRationales };
 }
 
-export function renderRatiosRatesProblem(model: RatiosRatesModel): CompiledMathProblem {
+export function renderRatiosRatesProblem(model: RatiosRatesModel, opts?: { figureMode?: "data" }): CompiledMathProblem {
   if (model.questionKind === "chained_conversion") return renderChainedConversionProblem(model);
-  return renderProportionProblem(model);
+  return renderProportionProblem(model, opts);
 }
