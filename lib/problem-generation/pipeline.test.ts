@@ -29,10 +29,10 @@ vi.mock("./review", async () => {
 const checkQualityContract = vi.fn();
 vi.mock("@/lib/problem-quality-contract", () => ({ checkQualityContract: (...a: unknown[]) => checkQualityContract(...a) }));
 
-vi.mock("@/lib/problem-material-need", () => ({
-  judgeMaterialNeed: () => ({ level: "none", kind: null, geometry: [] }),
-  materialBlocker: () => null,
-}));
+vi.mock("@/lib/problem-material-need", async () => {
+  const actual = await vi.importActual<typeof import("@/lib/problem-material-need")>("@/lib/problem-material-need");
+  return { ...actual, judgeMaterialNeed: () => ({ level: "none", kind: null, geometry: [], alternatives: [], reason: "" }) };
+});
 
 function baseProblem(overrides: Record<string, unknown> = {}) {
   return {
@@ -66,6 +66,23 @@ const mathParams = {
 };
 
 describe("runGenerationPipeline — 2026-09-16 코드 검토 수정(Math 한정)", () => {
+  it("관리자가 그래프 선택지 4개를 강제하면 스킬 기본 자료 유형(좌표평면)보다 우선한다", async () => {
+    const { pickFigureKind } = await import("./pipeline");
+    expect(pickFigureKind({ level: "recommended", kind: "plane", geometry: [], alternatives: ["plane", "figure_choice"], reason: "" }, "", "nonlinear_functions", "require_figure_choice")).toBe("figure_choice");
+  });
+
+  it("강제한 그래프 선택지 생성이 실패하면 텍스트 문항을 채택하지 않는다", async () => {
+    const { runGenerationPipeline } = await import("./pipeline");
+    generateSectionProblemsCore.mockResolvedValue([baseProblem()]);
+    regenerateProblemCore.mockResolvedValue(baseProblem());
+    generateFigureForProblemCore.mockResolvedValue({ ok: false, error: "figure_choice 생성 실패" });
+
+    const result = await runGenerationPipeline({ ...mathParams, skillType: "nonlinear_functions", skillCode: "nonlinear_functions", figurePolicy: "require_figure_choice", skipReview: true });
+
+    expect(result.accepted).toHaveLength(0);
+    expect(result.failures.some((f) => f.reason.includes("그래프/도형 선택지"))).toBe(true);
+  });
+
   it("A: 계약 실패 → 재생성 후 통과하면, 저장 후보는 재생성된 최종 문항이다(원본이 아니다)", async () => {
     const { runGenerationPipeline } = await import("./pipeline");
     const original = baseProblem({ question: "원본 질문" });

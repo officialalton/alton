@@ -10,6 +10,11 @@ const wic = {
 };
 
 describe("유형별 문제 품질 계약", () => {
+  it("관리자가 강제한 자료 유형은 자동 판정이 권장이어도 계약 필수 조건이다", () => {
+    const math = { ...wic, skillCode: "nonlinear_functions", examSystem: "sat_math", stimulus: "The function $f(x)=x^2+1$ is given.", question: "Which choice represents its graph?", options: ["A", "B", "C", "D"], figure: null, figurePolicy: "require_figure_choice" as const };
+    expect(checkQualityContract(math).issues.map((i) => i.code)).toContain("contract_evidence");
+  });
+
   it("세부 기술 30개 전부 계약이 있다", () => {
     expect(contractCoverageGaps()).toEqual([]);
     expect(Object.keys(QUALITY_CONTRACTS)).toHaveLength(30);

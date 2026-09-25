@@ -5,11 +5,10 @@
 // 문제를 피한다).
 import type { DistractorRationale, DistractorKind } from "../review";
 import type { PlaneSpec } from "@/lib/problem-figures/templates/coordinate-plane";
+import type { FigureChoiceSpec } from "@/lib/problem-figures/templates/figure-choice";
 
-/** 관리자가 "새 문제" 패널에서 고르는 자료 정책(none|optional|require_plane|…) 중 이 컴파일러가
- * 실제로 구분하는 두 모드. 2026-09-17 버그 수정 — 이전에는 admin이 "자료 포함 · 좌표평면"을
- * 골라도 이 값이 runMathCompilerBatch까지 전달되지 않아 항상 텍스트형으로만 나갔다. */
-export type NonlinearFnFigureMode = "text" | "plane";
+/** 이차함수 컴파일러가 지원하는 텍스트·좌표평면·그래프 선택지 모드. */
+export type NonlinearFnFigureMode = "text" | "plane" | "figure_choice";
 
 export type NonlinearFnQuestionKind = "evaluate" | "vertex_x" | "vertex_y";
 export type NonlinearFnDifficulty = "easy" | "medium" | "hard";
@@ -338,7 +337,7 @@ export type CompiledMathProblem = {
   correctIndex: number;
   explanation: string;
   explanationEn: string;
-  figure: PlaneSpec | null;
+  figure: PlaneSpec | FigureChoiceSpec | null;
   distractorRationales: DistractorRationale[];
 };
 
@@ -366,11 +365,48 @@ export function renderNonlinearFnProblem(model: NonlinearFnModel, opts?: { figur
   return renderQuadraticFnProblem(model, opts);
 }
 
+/** 같은 축·객체 수의 네 그래프를 코드로 계산한다. 정답 자리와 그림 순서는 함께 섞는다. */
+function renderQuadraticFigureChoice(model: QuadraticFnModel): CompiledMathProblem {
+  const variants = [
+    { a: model.a, h: model.h, k: model.k },
+    { a: -model.a, h: model.h, k: model.k },
+    { a: model.a, h: model.h + 2, k: model.k },
+    { a: 2 * model.a, h: model.h, k: model.k },
+  ];
+  const xMin = model.h - 4;
+  const xMax = model.h + 6;
+  const yValues = variants.flatMap(({ a, h, k }) => [k, a * (xMin - h) ** 2 + k, a * (xMax - h) ** 2 + k]);
+  const yMin = Math.min(...yValues) - 2;
+  const yMax = Math.max(...yValues) + 2;
+  const order = [0, 1, 2, 3].sort(() => Math.random() - 0.5);
+  const choices: PlaneSpec[] = order.map((i) => {
+    const { a, h, k } = variants[i];
+    return { type: "plane", axes: { x: { min: xMin, max: xMax }, y: { min: yMin, max: yMax } }, objects: [{ id: "f", kind: "function", fn: "quadratic", params: [a, -2 * a * h, a * h * h + k] }], grid: true };
+  });
+  const correctIndex = order.indexOf(0);
+  const reasons = [
+    { kind: "sign_error" as const, whyWrong: "이차항 계수의 부호를 반대로 적용해 그래프의 개구 방향이 바뀌었다." },
+    { kind: "sign_error" as const, whyWrong: "꼭짓점의 x좌표를 2만큼 잘못 옮겼다." },
+    { kind: "formula_misuse" as const, whyWrong: "이차항 계수를 두 배로 적용해 포물선의 폭이 다르다." },
+  ];
+  return {
+    passage: `The function f is defined by ${vertexExpr(model.a, model.h, model.k)}.`,
+    question: "Which of the following graphs represents y = f(x) in the xy-plane?",
+    options: ["A", "B", "C", "D"],
+    correctIndex,
+    explanation: `f(x) = a(x-h)² + k에서 a = ${fmt(model.a)}, 꼭짓점은 (${fmt(model.h)}, ${fmt(model.k)})이다. ${"ABCD"[correctIndex]}의 그래프만 개구 방향·꼭짓점·폭이 모두 일치한다.`,
+    explanationEn: `The coefficient is ${fmt(model.a)} and the vertex is (${fmt(model.h)}, ${fmt(model.k)}). Only graph ${"ABCD"[correctIndex]} has the correct opening direction, vertex, and width.`,
+    figure: { type: "figure_choice", choices },
+    distractorRationales: reasons.map((reason, i) => ({ index: order.indexOf(i + 1), plausibleBecause: "계수나 꼭짓점을 잘못 읽으면 나오는 그래프다.", matches: "동일한 축과 이차함수 형태를 사용한다.", ...reason, obvious: false })),
+  };
+}
+
 function renderQuadraticFnProblem(model: QuadraticFnModel, opts?: { figureMode?: NonlinearFnFigureMode }): CompiledMathProblem {
   // 2026-09-17 버그 수정 — figureMode가 "plane"이면(관리자가 자료 포함·좌표평면을 골랐을 때)
   // 실제로 그래프를 그려서 지문이 가리키는 "the graph"가 실존하게 한다. 기본(텍스트형)은
   // 그림 없이 식만으로 성립하는 기존 문항 그대로다.
   const figureMode: NonlinearFnFigureMode = opts?.figureMode ?? "text";
+  if (figureMode === "figure_choice") return renderQuadraticFigureChoice(model);
   const figure: PlaneSpec | null = figureMode === "plane" ? buildPlaneFigure(model.a, model.h, model.k) : null;
   const passage = figureMode === "plane"
     ? `The function f is defined by ${vertexExpr(model.a, model.h, model.k)}. The graph of y = f(x) is shown in the xy-plane below.`

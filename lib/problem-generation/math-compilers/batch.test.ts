@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { runMathCompilerBatch } from "./batch";
+import { figureSatisfies } from "@/lib/problem-material-need";
 
 describe("runMathCompilerBatch — 최소 10문항 배치 실행", () => {
   it("요청이 1개여도 내부적으로 최소 10문항 단위로 후보를 평가한다", async () => {
@@ -130,6 +131,38 @@ describe("runMathCompilerBatch — 최소 10문항 배치 실행", () => {
         expect(item.problem.figure).toBeNull();
         expect(item.problem.options).toHaveLength(4);
       }
+    }
+  });
+
+  it("nonlinear_functions에서 그래프 선택지 4개를 강제하면 모든 채택 문항에 실제 그림 선택지가 있다", async () => {
+    const result = await runMathCompilerBatch({ skillCode: "nonlinear_functions", difficulty: "medium", count: 7, figurePolicy: "require_figure_choice" });
+    expect(result.accepted).toHaveLength(7);
+    for (const { problem } of result.accepted) {
+      expect((problem.figure as { type: string }).type).toBe("figure_choice");
+      const choices = (problem.figure as { choices: { type: string }[] }).choices;
+      expect(choices).toHaveLength(4);
+      expect(choices.every((choice) => choice.type === "plane")).toBe(true);
+      expect(problem.options).toEqual(["A", "B", "C", "D"]);
+      expect(problem.question).toMatch(/Which of the following graphs/i);
+    }
+  });
+
+  it("미지원 필수 자료 정책은 텍스트 문항으로 대체하지 않는다", async () => {
+    const result = await runMathCompilerBatch({ skillCode: "nonlinear_functions", difficulty: "medium", count: 1, figurePolicy: "require_data" });
+    expect(result.accepted).toHaveLength(0);
+    expect(result.failures.some((f) => f.reason.includes("자료"))).toBe(true);
+  });
+
+  it("기존 좌표평면·표·도형 필수 정책은 해당 자료를 가진 문항만 채택한다", async () => {
+    const cases = [
+      { skillCode: "nonlinear_functions", figurePolicy: "require_plane", type: "plane" },
+      { skillCode: "two_variable_data", figurePolicy: "require_data", type: "data" },
+      { skillCode: "lines_angles_triangles", figurePolicy: "require_geometry", type: "geometry" },
+    ] as const;
+    for (const c of cases) {
+      const result = await runMathCompilerBatch({ ...c, difficulty: "medium", count: 1 });
+      expect(result.accepted).toHaveLength(1);
+      expect(figureSatisfies(c.type, result.accepted[0].problem.figure)).toBe(true);
     }
   });
 });

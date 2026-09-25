@@ -658,6 +658,9 @@ export function PublishedContentView({ problem, content }: { problem: BankProble
       {p.figure != null && (p.figure as { type?: string }).type !== "figure_choice" && (vis.material || vis.legacyAll) && (
         <div className="max-w-full mt-2 mb-2"><ProblemFigure spec={p.figure} /></div>
       )}
+      {p.figure != null && (p.figure as { type?: string }).type === "figure_choice" && (
+        <div className="max-w-full mt-2 mb-2" data-testid="published-figure-choice"><ProblemFigure spec={p.figure} /></div>
+      )}
       {!problem.hasQuestion && <p className="text-[11.5px] text-red mt-1">질문 보완 필요 — 공개본은 자동으로 고치지 않습니다. 수정 초안에서 질문을 갈라내거나 재생성하세요.</p>}
       {(vis.statements || vis.legacyAll) && p.statements?.length ? (
         <>
@@ -665,7 +668,10 @@ export function PublishedContentView({ problem, content }: { problem: BankProble
           <ol>{p.statements.map((s, i) => <li key={i}><b className="mr-2">{["I", "II", "III", "IV", "V"][i]}.</b><LearningText text={s} className="inline" /></li>)}</ol>
         </>
       ) : null}
-      {problem.format === "mc" && p.options && p.options.length > 0 && (
+      {problem.format === "mc" && p.options && p.options.length > 0 && (p.figure as { type?: string } | null)?.type === "figure_choice" && (
+        <p className="text-[12.5px] font-bold text-ink">정답: {p.correctIndex === null ? "미지정" : String.fromCharCode(65 + p.correctIndex)}</p>
+      )}
+      {problem.format === "mc" && p.options && p.options.length > 0 && (p.figure as { type?: string } | null)?.type !== "figure_choice" && (
         <>
           <FieldTitle>선택지 · 정답</FieldTitle>
           <ol className="space-y-0.5">

@@ -36,6 +36,17 @@ export const MATERIAL_KIND_LABEL: Record<MaterialKind, string> = {
 };
 export const MATERIAL_LEVEL_LABEL: Record<MaterialLevel, string> = { required: "자료 필수", recommended: "자료 권장", none: "자료 불필요" };
 
+/** 생성 화면에서 관리자가 고른 필수 자료 유형은 스킬의 자동 기본값보다 우선한다. */
+export function applyFigurePolicy(need: MaterialNeed, figurePolicy?: string | null): MaterialNeed {
+  const kind: MaterialKind | null =
+    figurePolicy === "require_plane" ? "plane" :
+    figurePolicy === "require_geometry" ? "geometry" :
+    figurePolicy === "require_data" ? "data" :
+    figurePolicy === "require_figure_choice" ? "figure_choice" : null;
+  if (!kind) return need;
+  return { ...need, level: "required", kind, alternatives: [kind], reason: `관리자가 '${MATERIAL_KIND_LABEL[kind]}' 자료를 필수로 선택했습니다.` };
+}
+
 const CUE = {
   figureChoice: /\bwhich (?:of the following )?(?:graphs?|figures?|diagrams?)\b|\bgraphs? (?:below|shown)\b.*\b(?:which|represents)\b/i,
   plane: /\b(?:xy-plane|coordinate plane|graph of|the graph|graphed|plotted|intercept|slope of the line shown|shown in the xy)\b/i,

@@ -6,7 +6,7 @@
 import { generateSectionProblemsCore, regenerateProblemCore, generateFigureForProblemCore, repairOneDistractorCore, repairFieldsCore, resolveAnswerFromExplanationCore, type FigurePolicy, type ProblemDifficulty, type ProblemFormat } from "./core";
 import { reviewProblemIndependently, classifyReviewIssues, type IndependentReview, type QualityRecord, type DistractorRationale, type DistractorKind } from "./review";
 import { checkQualityContract } from "@/lib/problem-quality-contract";
-import { judgeMaterialNeed, materialBlocker } from "@/lib/problem-material-need";
+import { applyFigurePolicy, judgeMaterialNeed, materialBlocker } from "@/lib/problem-material-need";
 import { composeProblemText } from "@/lib/problem-question";
 import { skillLabel } from "@/lib/problem-taxonomy";
 import { isEvidenceModelSkill, checkEvidenceModelFields } from "./evidence-model-check";
@@ -134,7 +134,7 @@ export type PipelineResult = {
 
 /** 자료 판정 → 자료 생성기에 넘길 표준 유형. 도형은 본문에서 읽은 템플릿이 우선, 없으면 세부 기술로 고른다. */
 export function pickFigureKind(need: ReturnType<typeof judgeMaterialNeed>, text: string, skillCode: string | null, figurePolicy?: string): FigureKind | null {
-  const kind = need.kind ?? (figurePolicy === "require_plane" ? "plane" : figurePolicy === "require_data" ? "data" : figurePolicy === "require_figure_choice" ? "figure_choice" : figurePolicy === "require_geometry" ? "geometry" : null);
+  const kind = applyFigurePolicy(need, figurePolicy).kind;
   if (!kind) return null;
   if (kind !== "geometry") return kind;
   if (need.geometry.length) return need.geometry[0];
@@ -341,12 +341,17 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
     };
 
     // 1) 자료 필요성 → 자료 생성.
-    let need = judgeMaterialNeed({ examSystem: params.examSystem ?? null, skillCode, text });
+    let need = applyFigurePolicy(judgeMaterialNeed({ examSystem: params.examSystem ?? null, skillCode, text }), params.figurePolicy);
     const missingRequired = need.level === "required" && materialBlocker(need, g.figure ?? null) !== null;
     if (g.needsFigure || missingRequired || (g.figure == null && params.figurePolicy?.startsWith("require"))) await makeFigure(g, text, need);
+    const materialFailure = materialBlocker(need, g.figure ?? null);
+    if (materialFailure) return fail("material", materialFailure);
+    if (params.figurePolicy === "require_figure_choice" && (g.figure as { type?: string } | null)?.type !== "figure_choice") {
+      return fail("material", "관리자가 선택한 그래프/도형 선택지 4개 자료가 생성되지 않았습니다.");
+    }
 
     // 2) 유형별 품질 계약(질문 대상·자료 근거·표시·정답·답안 형식).
-    const contractInputOf = () => ({ skillCode, examSystem: params.examSystem ?? null, format: params.format, stimulus, question, options: g.options ?? null, correctIndex: g.correctIndex ?? null, answers: g.answers ?? null, statements: g.statements ?? null, explanation: g.explanation, figure: g.figure ?? null, structuredTag: (isGrammarStructureSkill(skillCode) ? g.evidenceTarget ?? null : undefined) });
+    const contractInputOf = () => ({ skillCode, examSystem: params.examSystem ?? null, format: params.format, stimulus, question, options: g.options ?? null, correctIndex: g.correctIndex ?? null, answers: g.answers ?? null, statements: g.statements ?? null, explanation: g.explanation, figure: g.figure ?? null, figurePolicy: params.figurePolicy, structuredTag: (isGrammarStructureSkill(skillCode) ? g.evidenceTarget ?? null : undefined) });
     let contract = checkQualityContract(contractInputOf());
     if (!contract.ok) {
       const kinds = new Set(contract.issues.map((i) => classifyContractIssue(i.code)));
@@ -370,7 +375,7 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
             g.stimulus = repaired.passage; g.passage = repaired.passage; g.question = repaired.question || null;
             g.options = repaired.options; g.correctIndex = repaired.correctIndex; g.statements = repaired.statements; g.explanation = repaired.explanation;
             stimulus = repaired.passage; question = repaired.question || null; text = composeProblemText(stimulus, question);
-            need = judgeMaterialNeed({ examSystem: params.examSystem ?? null, skillCode, text });
+            need = applyFigurePolicy(judgeMaterialNeed({ examSystem: params.examSystem ?? null, skillCode, text }), params.figurePolicy);
             const reContract = checkQualityContract(contractInputOf());
             if (!reContract.ok) contract = reContract;
             else { stats.fieldRepairsResolved += 1; contract = reContract; }

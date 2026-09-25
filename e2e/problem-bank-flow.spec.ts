@@ -118,7 +118,7 @@ async function generate(page: Page, c: Case, count: number): Promise<string[]> {
   const startedAt = psql(`select now()::text;`);
   await page.getByRole("button", { name: "AI 생성" }).click();
   const ids = () =>
-    psql(`select coalesce(string_agg(p.id::text, ',' order by p.created_at), '') from problems p where p.skill_code = '${c.skillCode}' and p.exam_system = '${c.system}' and p.archived_at is null and p.created_at > '${startedAt}'::timestamptz;`);
+    psql(`select coalesce(string_agg(p.id::text, ',' order by p.created_at), '') from problems p where p.subject_id = '${SUBJECT_ID}' and p.skill_code = '${c.skillCode}' and p.exam_system = '${c.system}' and p.archived_at is null and p.created_at > '${startedAt}'::timestamptz;`);
   // 생성 완료 표시(성공 또는 사유)를 기다린다.
   // 성공 알림 또는 실패 사유(자료 요구를 못 채운 경우 포함) 중 하나가 보일 때까지.
   // 2026-09-17 제품 오너 지시로 성공 문구가 "자동 통과 X/Y..."로 바뀌었다
@@ -284,6 +284,23 @@ test("AP 탭: 과목을 고르면 '준비 중'만 보이고 SAT 입력을 재사
   // 버튼명이 "직접 쓰기"→"직접 생성"으로 바뀜(2026-09-17 재구성).
   await expect(page.getByRole("button", { name: "직접 생성" })).toBeDisabled();
   await page.getByTestId("new-problem-panel").screenshot({ path: `${OUT}/ap-select.png` });
+});
+
+test("SAT Math 비선형 함수의 그래프 선택지 7문항이 모두 실제 그림 4개로 표시된다", async ({ page }) => {
+  const c: Case = { tab: "SAT Math", system: "sat_math", domain: "advanced_math", skillCode: "nonlinear_functions", label: "Nonlinear functions", need: "recommended", figureType: "figure_choice", prefix: "math-figure-choice" };
+  await openNewPanel(page, c);
+  await page.getByRole("radio", { name: /자료 포함 · 그래프\/도형 선택지 4개/ }).check();
+  await expect(page.getByTestId("new-material-need")).toHaveAttribute("data-kind", "figure_choice");
+  const ids = await generate(page, c, 7);
+  expect(ids).toHaveLength(7);
+  for (const id of ids) {
+    expect(psql(`select coalesce(v.figure->>'type','-') || '|' || jsonb_array_length(v.figure->'choices')::text from problem_versions v where v.problem_id='${id}' order by v.version_no desc limit 1;`)).toBe("figure_choice|4");
+  }
+  await page.goto("/admin?tab=problem-bank");
+  await page.getByLabel("과목", { exact: true }).selectOption(SUBJECT_ID);
+  await page.getByTestId("bank-row-title").first().click();
+  await expect(page.getByTestId("published-figure-choice").locator("svg")).toHaveCount(4);
+  await page.getByTestId("published-figure-choice").screenshot({ path: "/private/tmp/alton-figure-choice-admin.png" });
 });
 
 for (const c of CASES) {

@@ -107,6 +107,7 @@ import {
 } from "./circles";
 import { sprFromAnswerText } from "./spr-answer";
 import { getMathSkillKinds } from "./kind-catalog";
+import { applyFigurePolicy, judgeMaterialNeed, materialBlocker } from "@/lib/problem-material-need";
 
 // 2026-09-17(제품 오너 지시) — "같은 일차식 공통 엔진으로 확장". systems_linear(두
 // 일차방정식의 연립)은 수학적으로 linear_equations_two_var 컴파일러가 이미 계산하는
@@ -281,11 +282,16 @@ function attemptOne(
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
     compiled = renderNonlinearEqProblem(model);
   } else if (skillCode === "nonlinear_functions") {
-    const model = generateNonlinearFnModel({ difficulty, questionKind: kind as Parameters<typeof generateNonlinearFnModel>[0]["questionKind"] });
+    // 그래프 4개 선택은 현재 이차함수의 결정적 그래프 생성기로 만든다.
+    // 지수함수 문맥 해석 패턴은 그림 선택지가 아니므로 섞지 않는다.
+    if (figurePolicy === "require_figure_choice" && kind && !["evaluate", "vertex_x", "vertex_y"].includes(kind)) {
+      return { ok: false, reason: `선택한 세부 패턴 '${kind}'은 그래프/도형 선택지 자료를 지원하지 않습니다.` };
+    }
+    const model = generateNonlinearFnModel({ difficulty, ...(figurePolicy === "require_figure_choice" ? { family: "quadratic" as const } : {}), questionKind: kind as Parameters<typeof generateNonlinearFnModel>[0]["questionKind"] });
     usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
     const check = validateNonlinearFnModel(model);
     if (!check.ok) { timing.compileMs += Date.now() - t0; return { ok: false, reason: check.reason }; }
-    compiled = renderNonlinearFnProblem(model, { figureMode: figurePolicy === "require_plane" ? "plane" : "text" });
+    compiled = renderNonlinearFnProblem(model, { figureMode: figurePolicy === "require_figure_choice" ? "figure_choice" : figurePolicy === "require_plane" ? "plane" : "text" });
   } else if (skillCode === "ratios_rates_units") {
     const model = generateRatiosRatesModel({ difficulty, questionKind: kind as Parameters<typeof generateRatiosRatesModel>[0]["questionKind"] });
     usedKind = (model as { questionKind?: string; kind?: string }).questionKind ?? (model as { kind?: string }).kind ?? null;
@@ -358,6 +364,12 @@ function attemptOne(
   timing.compileMs += Date.now() - t0;
 
   const passageForCheck = compiled.passage + "\n\n" + compiled.question;
+  const need = applyFigurePolicy(judgeMaterialNeed({ examSystem: "sat_math", skillCode, text: passageForCheck }), figurePolicy);
+  const materialFailure = materialBlocker(need, compiled.figure);
+  if (materialFailure) return { ok: false, reason: materialFailure };
+  if (figurePolicy === "require_figure_choice" && ((compiled.figure as { type?: string; choices?: unknown[] } | null)?.type !== "figure_choice" || (compiled.figure as { choices?: unknown[] }).choices?.length !== 4)) {
+    return { ok: false, reason: "관리자가 선택한 그래프/도형 선택지 4개 자료가 생성되지 않았습니다." };
+  }
   const t1 = Date.now();
   const renderCheck = checkFigure(compiled.figure, passageForCheck, compiled.options, compiled.correctIndex);
   timing.renderCheckMs += Date.now() - t1;

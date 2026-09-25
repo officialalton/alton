@@ -75,6 +75,21 @@ describe("renderNonlinearFnProblem — 렌더링·해설", () => {
       expect(rendered.passage).toMatch(/graph.*shown/i);
     }
   });
+
+  it("figureMode:'figure_choice'는 정답 자리의 포물선만 함수식과 일치시키고 네 그래프의 축을 통일한다", () => {
+    for (let i = 0; i < 30; i++) {
+      const model = generateNonlinearFnModel({ difficulty: "medium", family: "quadratic" });
+      if (model.family !== "quadratic") throw new Error("family가 quadratic이어야 합니다.");
+      const rendered = renderNonlinearFnProblem(model, { figureMode: "figure_choice" });
+      if (rendered.figure?.type !== "figure_choice") throw new Error("figure_choice가 필요합니다.");
+      const choices = rendered.figure.choices as { axes: unknown; objects: { params: number[] }[] }[];
+      expect(choices).toHaveLength(4);
+      expect(choices.every((choice) => JSON.stringify(choice.axes) === JSON.stringify(choices[0].axes))).toBe(true);
+      const correctParams = [model.a, -2 * model.a * model.h, model.a * model.h * model.h + model.k];
+      expect(choices.filter((choice) => JSON.stringify(choice.objects[0].params) === JSON.stringify(correctParams))).toHaveLength(1);
+      expect(choices[rendered.correctIndex].objects[0].params).toEqual(correctParams);
+    }
+  });
 });
 
 describe("generateNonlinearFnModel(exponential) — 지수함수 문맥 해석(Step 4 항목 2)", () => {

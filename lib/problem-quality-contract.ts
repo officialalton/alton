@@ -13,7 +13,7 @@ import { checkFigure } from "./problem-figures/check";
 import { checkContent } from "./problem-content-check";
 import { checkRwStructure, parseRwStimulus, quotedTargetWord, rwSkillCode } from "./rw-stimulus";
 import { composeProblemText } from "./problem-question";
-import { judgeMaterialNeed, materialBlocker } from "./problem-material-need";
+import { applyFigurePolicy, judgeMaterialNeed, materialBlocker } from "./problem-material-need";
 import { isMostlyKorean } from "./problem-generation/common-quality-gate";
 import { SKILL_BY_CODE, skillLabel } from "./problem-taxonomy";
 
@@ -87,6 +87,8 @@ export type ContractInput = {
   statements: string[] | null;
   explanation: string;
   figure: unknown | null;
+  /** 생성 시 관리자가 선택한 필수 자료 정책. 자동 판정의 권장/불필요보다 우선한다. */
+  figurePolicy?: string | null;
   /** 2026-09-17 — boundaries/form_structure_sense 등 구조화 필드 스킬의 태그(grammar_rule 등). checkRwStructure의 구조적 구분에 쓰인다. */
   structuredTag?: string | null;
 };
@@ -136,7 +138,7 @@ export function checkQualityContract(input: ContractInput): ContractResult {
   }
 
   // 2·3. 자료 근거와 표시 — 자료 판정·RW 구조·자료 참조 검사.
-  const need = judgeMaterialNeed({ examSystem: input.examSystem ?? null, skillCode: input.skillCode ?? null, text });
+  const need = applyFigurePolicy(judgeMaterialNeed({ examSystem: input.examSystem ?? null, skillCode: input.skillCode ?? null, text }), input.figurePolicy);
   const blocker = materialBlocker(need, input.figure ?? null);
   if (blocker) issues.push({ code: "contract_evidence", message: blocker });
   issues.push(...checkRwStructure({ skillCode: input.skillCode ?? null, passage: text, options: input.options, figure: input.figure ?? null, structuredTag: input.structuredTag }).map((i) => ({ ...i, code: `contract_${i.code}` })));
