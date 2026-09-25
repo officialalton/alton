@@ -361,3 +361,15 @@ export async function adjustStudentCredit(params: {
 
   return { newBalance, transactionId: tx.id };
 }
+
+// R12(Section 2, 2026-09-24) — closed 계정 상세 열람 게이트(§4.13 "별도
+// 권한을 가진 관리자만 사유를 입력한 뒤 접근할 수 있다"). 사유 없이는
+// record_closed_account_access() RPC 자체가 예외를 던진다.
+export async function recordClosedAccountAccess(profileId: string, reason: string): Promise<void> {
+  const { supabase } = await requireAdmin();
+  const { error } = await supabase.rpc("record_closed_account_access", {
+    p_profile_id: profileId,
+    p_reason: reason,
+  });
+  if (error) throw new Error(error.message);
+}

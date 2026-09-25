@@ -14,6 +14,7 @@ import StudentDetailPanel from "./StudentDetailPanel";
 import TeacherDetailPanel from "./TeacherDetailPanel";
 import ConsultantDetailPanel from "./ConsultantDetailPanel";
 import MergeAccountsPanel from "./MergeAccountsPanel";
+import ClosedAccountAccessGate from "./ClosedAccountAccessGate";
 import { listConsultantsAction, type ConsultantWithStudents } from "./consultant-assignment-actions";
 import type { AdminSubject } from "./subject-data";
 import type {
@@ -172,7 +173,7 @@ export default function UsersTab({
   }
 
   if (openStudent) {
-    return (
+    const panel = (
       <StudentDetailPanel
         student={openStudent}
         history={history[openStudent.id] ?? []}
@@ -181,10 +182,17 @@ export default function UsersTab({
         onUpdated={(patch, newTx) => patchStudent(openStudent.id, patch, newTx)}
       />
     );
+    return openStudent.status === "closed" ? (
+      <ClosedAccountAccessGate profileId={openStudent.id} name={openStudent.name} onBack={() => setOpenStudentId(null)}>
+        {panel}
+      </ClosedAccountAccessGate>
+    ) : (
+      panel
+    );
   }
 
   if (openTeacher) {
-    return (
+    const panel = (
       <TeacherDetailPanel
         teacher={openTeacher}
         warnings={qcWarningsByTeacher[openTeacher.id] ?? []}
@@ -192,6 +200,13 @@ export default function UsersTab({
         onBack={() => setOpenTeacherId(null)}
         onUpdated={(patch) => patchTeacher(openTeacher.id, patch)}
       />
+    );
+    return openTeacher.status === "closed" ? (
+      <ClosedAccountAccessGate profileId={openTeacher.id} name={openTeacher.name} onBack={() => setOpenTeacherId(null)}>
+        {panel}
+      </ClosedAccountAccessGate>
+    ) : (
+      panel
     );
   }
 
