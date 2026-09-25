@@ -31,6 +31,7 @@ const parents: ParentListItem[] = [
     id: "p1",
     name: "김민지",
     email: "minji.kim@example.com",
+    status: "active",
     joinedAt: "2026-01-01T00:00:00.000Z",
     childrenNames: ["지훈"],
     householdId: "h1",
