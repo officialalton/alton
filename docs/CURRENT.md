@@ -154,6 +154,39 @@
 
 ## 6. 미결·다음 작업 단위
 
+- **계정 병합·개인정보 삭제 실제 운영 경로 검증 + 관리자 UI 신설(2026-09-24,
+  완료, `20261900000012`)**: Section 2 지시("실제 운영 경로를 점검")에 따라
+  `merge_accounts()`/`anonymize_merged_account()`(R2 Task 5, 2026-08-31)를
+  실제로 처음 end-to-end 실행해보니 — 지금까지 이 두 함수의 단위 테스트가
+  `admin.auth.admin.deleteUser()`를 mock해왔기 때문에 실제 DB로는 한 번도
+  검증된 적이 없었다 — **PII 스크럽은 정상 동작하지만 그다음 실제 Auth
+  계정(로그인 자격증명) 삭제가 구조적으로 항상 실패**하는 버그를 발견했다.
+  원인: `profiles.id`가 `auth.users.id`를 `ON DELETE CASCADE`로 참조해,
+  Auth 계정을 지우면 profiles 행까지 지우려다가 merge_accounts()가 의도적으로
+  재배정하지 않는 감사·정산 기록(INSERT-only `account_status_events`, 7년
+  보관 `account_merges` 등, 원래 UUID로 "누가 했는지" 영구 보존해야 함)의
+  NO ACTION 제약 ~203개 중 하나에 막혔다. **수정**: `profiles_id_fkey`
+  CASCADE 제약 자체를 제거(ON DELETE 동작만 바꾸면 오히려 삭제 자체가
+  막힘, PK라 SET NULL도 불가) — 이미 PII가 스크럽된 profiles 행은 그
+  자체로 "PII 없는 영구 주체"이므로 auth.users 생사와 분리해도 되고,
+  이렇게 하면 203개 참조 테이블 전부 손댈 필요가 없다(전부 그대로 같은
+  UUID를 계속 참조). **검증**: 브라우저로 실제 계정 2쌍 생성→UI로 병합→
+  30일 유예 경과로 backdate→"익명화 실행" 클릭까지 실제 API 경로로 수행,
+  DB 직접 조회로 auth.users 실제 삭제(0행)·profiles/account_merges/
+  account_status_events 전부 원래 UUID 그대로 보존 확인. 전체 비통합
+  테스트 2610개 + 병합 전용 테스트 32개 통과. **잔여 위험(별도 조치
+  필요)**: auth.users를 profiles 거치지 않고 직접 참조하는 컬럼 8개
+  (`contract_company_approvals.approved_by`, `university_*` 검토자 컬럼
+  7개, 전부 NO ACTION) — 병합·삭제 대상이 이 컬럼에 실제로 등장하는
+  관리자 계정이면 여전히 삭제가 막힘(학생·학부모·교사 병합에서는 해당
+  없음 확인). 관리자 계정 삭제가 실제로 필요해지면 이 8개도 같은 방식으로
+  다시 다뤄야 함. **관리자 UI 신설**: Users 탭에 "계정 병합" 서브탭 추가
+  (이메일 검색·확인·사유 입력·실행, 30일 유예 대기 목록+실행 버튼) —
+  master-roadmap-v3.md가 명시했던 "실행 화면 자체가 없다"는 미완료 항목
+  해소. `inactive` 상태 머신·복귀 UI·자료 유형별 보관기간 자동화·GW-14
+  Smart Notes 만료 자동화·정기 스케줄러 연결은 이번 범위 밖(별도 항목,
+  아래 계속).
+
 - **[출시 전 재확인 필요] figure_choice 실제 AI E2E 공개 성공 토스트 미출현
   (2026-09-24, 미완료·원인 미확인)**: `e2e/figure-template-1.spec.ts` "그래프
   선택지: 지문 → AI 그래프 4개 → 편향 검증 → 공개 → 학생 화면(선택지 안 그림)"
