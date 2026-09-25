@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { requireUser } from "@/lib/auth";
+import TeacherPlannerBoard from "./TeacherPlannerBoard";
 
 // Student Success Planner — 교사 진입점(2026-09-22 확정 스펙, My Students·수업
 // 세션뷰의 "오버뷰"/"로드맵"/"일정"/"커리큘럼" 진입 버튼 중 오버뷰·일정).
-// 보드(할 일 관리)·오버뷰(학습 통계·점수·리뷰)는 아직 구현 전이라 자리만 잡아 둔다
-// (빈 화면 대신 "준비 중" 안내) — 데이터 모델·서버 액션이 붙으면 이 파일을 채운다.
+// 보드(2026-09-24 연결, 학부모 홈 보드와 동일하게 읽기 전용)는 실제 데이터를
+// 보여준다. 오버뷰(학습 통계·점수·리뷰)·일정 탭은 아직 구현 전이라 자리만
+// 잡아 둔다(빈 화면 대신 "준비 중" 안내).
 const TABS = [
   { id: "board", label: "보드" },
   { id: "schedule", label: "일정" },
@@ -60,11 +62,13 @@ export default async function TeacherStudentPlannerPage({
           ))}
         </div>
 
-        <div className="py-10 text-center text-[13px] text-grey-500">
-          {activeTab === "board" && "할 일 보드는 준비 중입니다 — 곧 제공됩니다."}
-          {activeTab === "schedule" && "일정 탭은 준비 중입니다 — 곧 제공됩니다."}
-          {activeTab === "overview" && "오버뷰 탭은 준비 중입니다 — 곧 제공됩니다."}
-        </div>
+        {activeTab === "board" && <TeacherPlannerBoard studentId={studentId} />}
+        {activeTab !== "board" && (
+          <div className="py-10 text-center text-[13px] text-grey-500">
+            {activeTab === "schedule" && "일정 탭은 준비 중입니다 — 곧 제공됩니다."}
+            {activeTab === "overview" && "오버뷰 탭은 준비 중입니다 — 곧 제공됩니다."}
+          </div>
+        )}
       </div>
     </div>
   );
