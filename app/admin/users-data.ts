@@ -5,6 +5,7 @@ export type ParentListItem = {
   id: string;
   name: string;
   email: string;
+  status: string;
   joinedAt: string;
   childrenNames: string[];
   // P4-1(B): 아카이브 대상 가구. 가구가 없는 보호자(관계가 아직 안 맺어진 경우)는 null.
@@ -112,7 +113,7 @@ export async function loadParents(supabase: SupabaseClient): Promise<ParentListI
   let t = Date.now();
   const { data: parents, error: parentsError } = await supabase
     .from("parents")
-    .select("id, joined_at, profile:profiles(name)")
+    .select("id, joined_at, status, profile:profiles(name)")
     .order("joined_at", { ascending: false });
   logUsersTabStage("users_tab.parents.query", t, { count: parents?.length ?? 0, errorCode: parentsError?.code ?? null });
   if (parentsError) throw new Error(`parents_query_failed:${parentsError.code ?? "unknown"}`);
@@ -195,6 +196,7 @@ export async function loadParents(supabase: SupabaseClient): Promise<ParentListI
       id: p.id,
       name: extractName(p.profile),
       email: emailById.get(p.id) ?? "",
+      status: p.status as string,
       joinedAt: p.joined_at,
       childrenNames: activeHouseholdIds.flatMap(
         (householdId) => childrenByHousehold.get(householdId) ?? []

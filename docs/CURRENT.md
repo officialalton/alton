@@ -180,6 +180,49 @@
   (Smart Notes 미검토 원본 1년/확정 리뷰 3년 이중 만료 — Google Drive
   API 연동 필요, 별도 슬라이스), 정기 스케줄러 연결(현재는 cron 등록만
   하고 CRON_SECRET 미설정으로 전부 비활성 유지 — 사용자가 활성화 시점 결정).
+- **ParentDetailPanel 신설(2026-09-24, 완료)**: 관리자 Users > 학부모 카드가
+  이제 클릭 가능하며, 상세 화면에서 상태 전환(Student/TeacherDetailPanel과
+  동일 패턴, closed는 ClosedAccountAccessGate로 보호), 연결 자녀와 자녀별
+  담당 컨설턴트(배정 변경은 ConsultantDetailPanel과 같은
+  `setStudentConsultantAction()` 재사용), 가구의 계약·진행 현황
+  (`contracts`, `v3_contract_status` 11개 값 전부 라벨링), 가구 연락 이력
+  (`household_messages` 최근 20건)을 확인·관리할 수 있다. `ParentListItem`에
+  `status` 필드가 그동안 아예 없었던 것도 함께 추가(`loadParents`).
+  non-prod 실제 계정으로 브라우저 검증 완료. `setParentStatus`는 이제 실제
+  UI 호출부가 생겼다(이전까지 액션만 있고 화면이 없던 유일한 갭이었음).
+  **부수 발견**: `ConsultantDetailPanel`의 보호자 이름 조회가 존재하지 않는
+  컬럼(`member_id`)·값(`role='student'`)을 써서 항상 빈 결과만 받아 "보호자:
+  없음"으로 조용히 폴백되는 버그를 발견 — 별도 세션으로 이관(task_83cdc1d7).
+- **R12 자료 유형별 보존기간 자동 삭제·비식별화 배치 1차 슬라이스(2026-09-24,
+  완료, `20261900000016`)**: §4.13 처리 방식 4가지 중 3가지를 대표 테이블로
+  구현(4번째 "접근 차단 후 보존"은 위 closed 게이트 재사용, 신규 코드 없음).
+
+  | 처리 방식 | 대표 테이블 | 기준 | 함수 |
+  |---|---|---|---|
+  | 완전 삭제(즉시/단기) | `notifications` | 생성 90일 후 | `retention_delete_expired_notifications` |
+  | PII 비식별화(통계 유지) | `consult_requests` | completed 후 2년 | `retention_anonymize_expired_consult_requests` |
+  | 별도 보존기간 뒤 삭제(보안 로그) | `session_access_events` | 1년 | `retention_delete_expired_access_logs` |
+  | 접근 차단 후 보존(계정 폐쇄) | `students`/`teachers`/`parents` | closed 전환 즉시 | (기존) `ClosedAccountAccessGate` |
+
+  오케스트레이터 `run_data_retention_batch()` + cron `/api/cron/data-retention-batch`는
+  `CRON_SECRET`과 `RETENTION_BATCH_ENABLED` 둘 다 있어야 실행(정산 크론과
+  동일 fail-closed 패턴) — 둘 다 미설정으로 유지. 배치당 LIMIT 500, WHERE절
+  재평가로 재실행 안전. 실행 기록은 `retention_batch_runs`(append-only)에
+  남긴다. non-prod에서 세 유형 모두 실제 계정/문서로 검증 완료(테스트 데이터
+  정리, 감사 행만 보존).
+
+  **남은 정책 결정 사항**:
+  1. `document_access_events`(계약·정산 자료 접근 이력) — 자체 트리거로
+     UPDATE/DELETE가 bypass 없이 영구 차단돼 있어 이번 배치에서 제외했다.
+     "1년 후 삭제"를 그대로 적용할지, 계약·정산과 같은 7년으로 볼지, 아예
+     영구 보존할지 법무 검토 후 결정 필요.
+  2. 이번 슬라이스는 ~250개 테이블 중 4개 대표 테이블만 다룬다. 나머지
+     테이블(예: `chat_messages`/`household_messages`(2년 채팅), 계약·결제·
+     정산 7년 대상(`contracts`/`purchase_receipts`/`teacher_payouts` 등),
+     `session_smart_notes`(GW-14, Drive 연동 필요))은 각각 별도 슬라이스로
+     남아있다 — 정책표의 나머지 카테고리는 문서화만 됐고 배치는 미구현.
+  3. cron 활성화(스케줄은 등록됐으나 `CRON_SECRET`/`RETENTION_BATCH_ENABLED`
+     둘 다 미설정으로 비활성) 시점은 사용자 결정 대기.
 - **선생님 학습 플래너 "보드" 탭 연결(2026-09-24, 완료)**: `2026-09-21`에
   만든 Student Success Planner Board(학부모 포털엔 연결됨)가 선생님 화면에는
   한 번도 연결되지 않아 항상 "준비 중" placeholder만 보이던 버그를 실사용

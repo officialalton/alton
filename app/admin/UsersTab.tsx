@@ -11,6 +11,7 @@ import { updateUserBasicInfo } from "./user-edit-actions";
 import ArchivedHouseholdsList from "./ArchivedHouseholdsList";
 import HouseholdArchiveControls from "./HouseholdArchiveControls";
 import StudentDetailPanel from "./StudentDetailPanel";
+import ParentDetailPanel from "./ParentDetailPanel";
 import TeacherDetailPanel from "./TeacherDetailPanel";
 import ConsultantDetailPanel from "./ConsultantDetailPanel";
 import MergeAccountsPanel from "./MergeAccountsPanel";
@@ -58,6 +59,14 @@ const TEACHER_STATUS_LABEL: Record<string, string> = {
   pending: "승인 대기",
   suspended: "일시정지",
 };
+const STATUS_LABEL_PARENT: Record<string, string> = {
+  active: "활성",
+  pending: "가입 대기",
+  suspended: "일시정지",
+  inactive: "비활성(장기 휴면)",
+  closure_pending: "폐쇄 처리 중",
+  closed: "폐쇄됨",
+};
 
 export default function UsersTab({
   subjects,
@@ -90,6 +99,7 @@ export default function UsersTab({
   const [openTeacherId, setOpenTeacherId] = useState<string | null>(null);
   const [consultants, setConsultants] = useState<ConsultantWithStudents[] | null>(null);
   const [openConsultantId, setOpenConsultantId] = useState<string | null>(null);
+  const [openParentId, setOpenParentId] = useState<string | null>(null);
 
   function loadParentsNow() {
     setLoadingParents(true);
@@ -132,6 +142,7 @@ export default function UsersTab({
   const openStudent = students?.find((s) => s.id === openStudentId);
   const openTeacher = teachers?.find((t) => t.id === openTeacherId);
   const openConsultant = consultants?.find((c) => c.id === openConsultantId);
+  const openParent = parents?.find((p) => p.id === openParentId);
 
   const normalizedQuery = searchQuery.trim().toLowerCase();
   const filteredParents = !normalizedQuery
@@ -170,6 +181,24 @@ export default function UsersTab({
 
   function patchParent(id: string, patch: Partial<ParentListItem>) {
     setParents((prev) => prev?.map((p) => (p.id === id ? { ...p, ...patch } : p)) ?? prev);
+  }
+
+  if (openParent) {
+    const panel = (
+      <ParentDetailPanel
+        parentId={openParent.id}
+        parentName={openParent.name}
+        parentEmail={openParent.email}
+        onBack={() => setOpenParentId(null)}
+      />
+    );
+    return openParent.status === "closed" ? (
+      <ClosedAccountAccessGate profileId={openParent.id} name={openParent.name} onBack={() => setOpenParentId(null)}>
+        {panel}
+      </ClosedAccountAccessGate>
+    ) : (
+      panel
+    );
   }
 
   if (openStudent) {
@@ -278,13 +307,20 @@ export default function UsersTab({
               className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5"
             >
               <div className="flex items-start justify-between gap-2">
-                <div>
-                  <div className="text-[13.5px] font-bold text-ink">{p.name}</div>
+                <button onClick={() => setOpenParentId(p.id)} className="flex-1 text-left">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[13.5px] font-bold text-ink">{p.name}</span>
+                    {p.status !== "active" && (
+                      <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-grey-100 text-ink">
+                        {STATUS_LABEL_PARENT[p.status] ?? p.status}
+                      </span>
+                    )}
+                  </div>
                   <div className="text-[12px] text-grey-500 mt-0.5">{p.email}</div>
                   <div className="text-[12px] text-grey-500 mt-0.5">
                     자녀: {p.childrenNames.length ? p.childrenNames.join(", ") : "없음"}
                   </div>
-                </div>
+                </button>
                 <div className="flex items-center gap-2 shrink-0">
                   <UserEditToggle
                     profileId={p.id}
