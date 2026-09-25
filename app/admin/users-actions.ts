@@ -241,7 +241,7 @@ async function legacyInviteTeacherByEmail(params: {
 async function transitionAccountStatus(
   supabase: Awaited<ReturnType<typeof requireAdmin>>["supabase"],
   profileId: string,
-  status: "active" | "pending" | "suspended",
+  status: "active" | "pending" | "suspended" | "inactive",
   reason?: string
 ): Promise<void> {
   const { error } = await supabase.rpc("transition_account_status", {
@@ -254,7 +254,7 @@ async function transitionAccountStatus(
 
 export async function setStudentStatus(
   studentId: string,
-  status: "active" | "pending" | "suspended"
+  status: "active" | "pending" | "suspended" | "inactive"
 ): Promise<void> {
   const { supabase } = await requireAdmin();
   await transitionAccountStatus(supabase, studentId, status);
@@ -262,7 +262,7 @@ export async function setStudentStatus(
 
 export async function setParentStatus(
   parentId: string,
-  status: "active" | "pending" | "suspended"
+  status: "active" | "pending" | "suspended" | "inactive"
 ): Promise<void> {
   const { supabase } = await requireAdmin();
   await transitionAccountStatus(supabase, parentId, status);
@@ -282,7 +282,7 @@ export async function verifyStudentDateOfBirth(studentId: string): Promise<void>
 
 export async function setTeacherStatus(
   teacherId: string,
-  status: "active" | "pending" | "suspended"
+  status: "active" | "pending" | "suspended" | "inactive"
 ): Promise<void> {
   const { supabase } = await requireAdmin();
   if (status === "active") {

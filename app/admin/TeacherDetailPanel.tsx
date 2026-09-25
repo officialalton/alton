@@ -18,6 +18,7 @@ const STATUS_LABEL: Record<string, string> = {
   active: "활성",
   pending: "승인 대기",
   suspended: "일시정지",
+  inactive: "비활성(장기 휴면)",
 };
 
 export default function TeacherDetailPanel({
@@ -87,7 +88,7 @@ export default function TeacherDetailPanel({
     setSavedStatus(false);
     setStatusError(null);
     try {
-      await setTeacherStatus(teacher.id, next as "active" | "pending" | "suspended");
+      await setTeacherStatus(teacher.id, next as "active" | "pending" | "suspended" | "inactive");
       onUpdated({ status: next });
       setSavedStatus(true);
     } catch (e) {

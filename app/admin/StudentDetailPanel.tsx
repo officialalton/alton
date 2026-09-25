@@ -11,6 +11,7 @@ const STATUS_LABEL: Record<string, string> = {
   active: "활성",
   pending: "매칭 대기",
   suspended: "일시정지",
+  inactive: "비활성(장기 휴면)",
 };
 
 const TX_TYPE_LABEL: Record<string, string> = {
@@ -43,11 +44,24 @@ export default function StudentDetailPanel({
   const [dobVerifiedAt, setDobVerifiedAt] = useState(student.dateOfBirthVerifiedAt);
   const [verifying, setVerifying] = useState(false);
   const [verifyError, setVerifyError] = useState<string | null>(null);
+  const [statusError, setStatusError] = useState<string | null>(null);
 
   async function handleStatusChange(next: string) {
+    // 2026-09-24(Section 2) — transition_account_status()는 허용된 전이만
+    // 통과시키는데(예: 'inactive'에서는 'active'로만 되돌릴 수 있음) 이
+    // 핸들러가 실패를 전혀 처리하지 않아, 거부돼도 드롭다운은 이미 새
+    // 값으로 낙관적 갱신된 채 남아 있었다(실제로는 안 바뀐 상태를 바뀐
+    // 것처럼 계속 보여주는 버그). TeacherDetailPanel과 같은 패턴으로 맞춘다.
+    const previous = status;
     setStatus(next);
-    await setStudentStatus(student.id, next as "active" | "pending" | "suspended");
-    onUpdated({ status: next });
+    setStatusError(null);
+    try {
+      await setStudentStatus(student.id, next as "active" | "pending" | "suspended" | "inactive");
+      onUpdated({ status: next });
+    } catch (e) {
+      setStatus(previous);
+      setStatusError(e instanceof Error ? e.message : "상태 전환에 실패했습니다.");
+    }
   }
 
   async function handleVerifyDateOfBirth() {
@@ -115,6 +129,7 @@ export default function StudentDetailPanel({
             </option>
           ))}
         </select>
+        {statusError && <p className="text-[12px] text-red mt-1.5">{statusError}</p>}
       </div>
 
       <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">

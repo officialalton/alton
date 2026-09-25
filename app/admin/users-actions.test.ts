@@ -276,6 +276,44 @@ describe("setParentStatus", () => {
   });
 });
 
+describe("setStudentStatus", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    getUserMock.mockResolvedValue({ data: { user: { id: "admin1" } } });
+    profileSingleMock.mockResolvedValue({ data: { role: "admin" } });
+  });
+
+  // 2026-09-24(Section 2) — transition_account_status()는 이미 'inactive'를
+  // 지원했지만(DB 상태 머신, R2) 이 액션의 타입 시그니처가 "active"|"pending"|
+  // "suspended"로만 좁혀져 있어 관리자 화면에서 장기 휴면 전환 자체가 안
+  // 됐다 — 타입을 넓혀 실제로 RPC까지 전달되는지 확인한다.
+  it("'inactive'로도 전환할 수 있다", async () => {
+    const rpcMock = vi.fn().mockResolvedValue({ error: null });
+    vi.doMock("@/utils/supabase/server", () => ({
+      createClient: async () => ({
+        auth: { getUser: getUserMock },
+        from: (table: string) => {
+          if (table === "profiles") {
+            return { select: () => ({ eq: () => ({ single: profileSingleMock }) }) };
+          }
+          throw new Error(`unexpected table ${table}`);
+        },
+        rpc: rpcMock,
+      }),
+    }));
+    vi.resetModules();
+    const { setStudentStatus } = await import("./users-actions");
+
+    await setStudentStatus("student1", "inactive");
+
+    expect(rpcMock).toHaveBeenCalledWith("transition_account_status", {
+      p_profile_id: "student1",
+      p_new_status: "inactive",
+      p_reason: null,
+    });
+  });
+});
+
 describe("setTeacherStatus", () => {
   beforeEach(() => {
     vi.clearAllMocks();
